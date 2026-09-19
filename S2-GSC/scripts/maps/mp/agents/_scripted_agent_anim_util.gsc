@@ -6,7 +6,7 @@
 _id_5159(var_0) {
   var_1 = "actiontables/" + var_0 + ".csv";
   var_2 = [];
-  var_3 = _func_27A(var_1);
+  var_3 = _tablegetrowcount(var_1);
 
   for(var_4 = 0; var_4 < var_3; var_4++)
     var_2[var_2.size] = _id_5DE0(var_0, var_1, var_4);
@@ -32,7 +32,7 @@ _id_5159(var_0) {
     foreach(var_14 in ["move_style", "anims", "actions"]) {
       var_15 = var_6[var_14];
 
-      if(!_func_0C0(var_15))
+      if(!_isarray(var_15))
         var_15 = [var_15];
 
       foreach(var_17 in var_15) {
@@ -57,20 +57,20 @@ _id_5159(var_0) {
 _id_5DE0(var_0, var_1, var_2) {
   var_3 = [];
   var_3["table"] = var_0;
-  var_3["actions"] = strtok(_func_1AE(var_1, var_2, 0), " ");
-  var_3["state"] = _func_1AE(var_1, var_2, 1);
-  var_3["flags"] = strtok(_func_1AE(var_1, var_2, 2), " ");
-  var_3["anims"] = strtok(_func_1AE(var_1, var_2, 3), " ");
-  var_3["dismember_states"] = strtok(_func_1AE(var_1, var_2, 4), " ");
-  var_3["zombie_subtypes"] = strtok(_func_1AE(var_1, var_2, 5), " ");
-  var_3["source_project"] = _func_1AE(var_1, var_2, 6);
-  var_3["script_var"] = _func_1AE(var_1, var_2, 7);
-  var_3["move_style"] = _func_1AE(var_1, var_2, 8);
-  var_3["move_speed"] = _func_1AE(var_1, var_2, 9);
+  var_3["actions"] = strtok(_tablelookupbyrow(var_1, var_2, 0), " ");
+  var_3["state"] = _tablelookupbyrow(var_1, var_2, 1);
+  var_3["flags"] = strtok(_tablelookupbyrow(var_1, var_2, 2), " ");
+  var_3["anims"] = strtok(_tablelookupbyrow(var_1, var_2, 3), " ");
+  var_3["dismember_states"] = strtok(_tablelookupbyrow(var_1, var_2, 4), " ");
+  var_3["zombie_subtypes"] = strtok(_tablelookupbyrow(var_1, var_2, 5), " ");
+  var_3["source_project"] = _tablelookupbyrow(var_1, var_2, 6);
+  var_3["script_var"] = _tablelookupbyrow(var_1, var_2, 7);
+  var_3["move_style"] = _tablelookupbyrow(var_1, var_2, 8);
+  var_3["move_speed"] = _tablelookupbyrow(var_1, var_2, 9);
   return var_3;
 }
 
-_id_82D0(var_0, var_1) {
+issplitscreenplayer(var_0, var_1) {
   var_2 = var_0["script_var"];
 
   if(_id_0547::_id_5816(var_2))
@@ -109,7 +109,7 @@ _id_087C(var_0, var_1, var_2) {
     if(isDefined(var_1["source_project"]) && var_5["source_project"] != var_1["source_project"]) {
       continue;
     }
-    if(!_id_82D0(var_5, var_1)) {
+    if(!issplitscreenplayer(var_5, var_1)) {
       continue;
     }
     if(isDefined(var_1["move_speed"]) && !_id_0547::_id_5816(var_5["move_speed"]) && var_5["move_speed"] != var_1["move_speed"]) {
@@ -196,8 +196,8 @@ _id_71FA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(!isDefined(var_1))
       var_1 = 0;
 
-    var_7 = self _meth_83D8(var_0, var_1);
-    var_8 = _func_065(var_7);
+    var_7 = self getanimentry(var_0, var_1);
+    var_8 = _getanimlength(var_7);
     var_9 = var_8;
 
     if(isDefined(var_6)) {
@@ -220,7 +220,7 @@ _id_71FD(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_71F9(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  _id_8415(var_0, var_1, var_2, var_6);
+  isenemyaware(var_0, var_1, var_2, var_6);
 
   if(!isDefined(var_4))
     var_4 = "end";
@@ -245,7 +245,7 @@ _id_A79E(var_0, var_1, var_2, var_3, var_4) {
   var_7 = undefined;
 
   if(isDefined(var_2) && isDefined(var_3))
-    var_7 = _func_065(self _meth_83D8(var_2, var_3));
+    var_7 = _getanimlength(self getanimentry(var_2, var_3));
 
   for(;;) {
     self waittill(var_0, var_8);
@@ -277,15 +277,15 @@ _id_678A(var_0, var_1, var_2) {
 }
 
 _id_71F8(var_0, var_1, var_2, var_3) {
-  _id_8415(var_0, var_1, var_2);
+  isenemyaware(var_0, var_1, var_2);
   wait(var_3);
 }
 
 _id_5ED7(var_0, var_1, var_2) {
   for(;;) {
     var_3 = _id_7A35(var_0);
-    _id_8415(var_0, var_3, var_1);
-    var_4 = _func_065(self _meth_83D8(var_0, var_3)) * (1.0 / var_1);
+    isenemyaware(var_0, var_3, var_1);
+    var_4 = _getanimlength(self getanimentry(var_0, var_3)) * (1.0 / var_1);
     _id_A79F(var_2, "end", var_4);
   }
 }
@@ -308,29 +308,29 @@ _id_8410(var_0, var_1, var_2) {
     var_1 = 1;
 
   var_3 = _id_434D(var_0);
-  _id_8415(var_3, undefined, var_1, var_2);
+  isenemyaware(var_3, undefined, var_1, var_2);
 }
 
 _id_4156() {
   var_0 = self _meth_85A5();
 
-  if(_func_115(var_0, "_animclass"))
+  if(_isendstr(var_0, "_animclass"))
     var_0 = getsubstr(var_0, 0, var_0.size - 10);
 
   return var_0;
 }
 
-_id_8415(var_0, var_1, var_2, var_3) {
+isenemyaware(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3))
-    self _meth_83D7(var_0, var_1, var_2, var_3);
+    self setanimstate(var_0, var_1, var_2, var_3);
   else if(isDefined(var_2))
-    self _meth_83D7(var_0, var_1, var_2);
+    self setanimstate(var_0, var_1, var_2);
   else if(isDefined(var_1))
-    self _meth_83D7(var_0, var_1);
+    self setanimstate(var_0, var_1);
   else
-    self _meth_83D7(var_0);
+    self setanimstate(var_0);
 
-  var_4 = self _meth_83D9();
+  var_4 = self getanimentryname();
   self._id_28ED = _id_43C9(var_4);
   _id_0378::_id_8D74("zombie_set_anim_state", var_0, var_4);
 
@@ -346,15 +346,15 @@ _id_4416(var_0, var_1) {
   var_4 = var_3 * 0.222222;
 
   if(var_0 < 0)
-    return int(_func_0D5((180 + var_0 - var_4) / var_3));
+    return int(_ceil((180 + var_0 - var_4) / var_3));
   else
-    return int(_func_0D4((180 + var_0 + var_4) / var_3));
+    return int(_floor((180 + var_0 + var_4) / var_3));
 }
 
 _id_441C(var_0, var_1, var_2) {
-  var_3 = _func_0E4(var_0);
+  var_3 = _length2d(var_0);
   var_4 = var_0[2];
-  var_5 = _func_0E4(var_1);
+  var_5 = _length2d(var_1);
   var_6 = var_1[2];
   var_7 = 1;
   var_8 = 1;
@@ -370,7 +370,7 @@ _id_441C(var_0, var_1, var_2) {
   } else if(var_5 > 0)
     var_7 = var_3 / var_5;
 
-  if(_func_0AE(var_6) > 0.001 && var_4 != 0 && var_6 * var_4 > 0)
+  if(_abs(var_6) > 0.001 && var_4 != 0 && var_6 * var_4 > 0)
     var_8 = var_4 / var_6;
 
   var_11 = spawnStruct();
@@ -444,11 +444,11 @@ _id_43C9(var_0) {
 }
 
 _id_7A35(var_0) {
-  var_1 = self _meth_83DB(var_0);
+  var_1 = self getanimentrycount(var_0);
 
   if(isDefined(self._id_28ED)) {
     for(var_3 = 0; var_3 < var_1; var_3++) {
-      var_4 = self _meth_83D9(var_0, var_3);
+      var_4 = self getanimentryname(var_0, var_3);
       var_5 = _id_43C9(var_4);
 
       if(isDefined(var_5) && var_5 == self._id_28ED)
@@ -461,11 +461,11 @@ _id_7A35(var_0) {
 
 getnotetracktimeinsecs(var_0, var_1, var_2) {
   var_3 = _id_45B9(var_0, var_1, var_2);
-  return var_3 * _func_065(var_0);
+  return var_3 * _getanimlength(var_0);
 }
 
 _id_45B9(var_0, var_1, var_2) {
-  var_3 = _func_067(var_0, var_1);
+  var_3 = _getnotetracktimes(var_0, var_1);
 
   if(isDefined(var_2) && var_3.size == 0)
     return var_2;
@@ -474,7 +474,7 @@ _id_45B9(var_0, var_1, var_2) {
 }
 
 _id_446A(var_0) {
-  if(_func_066(var_0, "code_move"))
+  if(_animhasnotetrack(var_0, "code_move"))
     return _id_45B9(var_0, "code_move");
 
   return 1;

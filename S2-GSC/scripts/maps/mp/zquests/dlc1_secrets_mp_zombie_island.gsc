@@ -599,7 +599,7 @@ register_zombie_killed_response(var_0, var_1, var_2, var_3) {
 }
 
 watch_player_sprint(var_0) {
-  while(!self _meth_83DD())
+  while(!self issprinting())
     waitframe();
 
   level notify(var_0);
@@ -611,7 +611,7 @@ watch_for_crouch(var_0, var_1) {
 
   wait 5;
 
-  while(self _meth_8178() == "crouch")
+  while(self getstance() == "crouch")
     waitframe();
 
   level notify(var_1);

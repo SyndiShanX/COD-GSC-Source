@@ -51,7 +51,7 @@ _id_ABC2() {
   self endon("death");
   self endon("stalk_change");
   childthread _id_0547::zombie_monitor_ignored_stalkee(self._id_915D);
-  var_0 = self._id_915D common_scripts\utility::_id_A715("death", "bleedout", "disconnect", "shouldBeIgnored");
+  var_0 = self._id_915D common_scripts\utility::waittill_any_return("death", "bleedout", "disconnect", "shouldBeIgnored");
   self._id_915D = undefined;
   _id_ABBE();
 }
@@ -63,7 +63,7 @@ _id_ABC7(var_0) {
   self notify("stalk_change");
   waitframe();
   self._id_915D = var_0;
-  self _meth_8548(var_0);
+  self agentsetfavoriteenemy(var_0);
 
   if(isDefined(var_0))
     thread _id_ABC2();
@@ -95,7 +95,7 @@ _id_ABDB() {
 }
 
 _id_ABBE() {
-  _id_0547::_id_84CB();
+  _id_0547::disableoffhandsecondaryweapons();
 
   if(isDefined(self._id_3043)) {
     return;
@@ -198,7 +198,7 @@ _id_ABBF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(var_7 != "torso_upper" && var_7 != "torso_lower")
     return 0;
 
-  var_9 = self _meth_8181("j_spineupper");
+  var_9 = self gettagangles("j_spineupper");
   var_10 = anglestoright(var_9);
   return vectordot(var_10, var_6) > 0;
 }
@@ -263,7 +263,7 @@ zombie_heavy_grudge_think() {
 }
 
 zombie_heavy_valid_charge_target(var_0) {
-  if(isPlayer(var_0) && _func_0C3(var_0) && self _meth_8393(var_0) && _id_0547::_id_1F5B(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0))
+  if(isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::_id_1F5B(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0))
     return 1;
 
   return 0;

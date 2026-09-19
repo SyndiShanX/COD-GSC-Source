@@ -28,7 +28,7 @@ main() {
 }
 
 _id_7830() {
-  var_0 = _func_18E("bunker_ent_dialogue", "targetname");
+  var_0 = _getent("bunker_ent_dialogue", "targetname");
   var_0 _id_A77B();
 
   if(!_id_0557::_id_42D6("1 fire well"))
@@ -59,7 +59,7 @@ _id_785E() {
     foreach(var_7 in var_4)
     var_5[var_5.size] = var_7._id_6298;
 
-    var_9 = common_scripts\utility::_id_0F73(var_5, var_0._id_8301);
+    var_9 = common_scripts\utility::_id_0F73(var_5, var_0.setclientdvars);
     var_3 = _id_0557::_id_782F(undefined, var_9);
     _id_0557::_id_781D("explore village", var_3);
   }
@@ -67,12 +67,12 @@ _id_785E() {
   if(!common_scripts\utility::_id_3C77("power_sz2"))
     common_scripts\utility::_id_3C9F("power_sz2");
 
-  foreach(var_11 in var_0._id_8301)
-  var_11 _meth_83FA("light", "green");
+  foreach(var_11 in var_0.setclientdvars)
+  var_11 setscriptablepartstate("light", "green");
 
   if(0) {
     _id_0557::_id_7847("explore village", var_3);
-    var_3 = _id_0557::_id_782F(undefined, var_0._id_8301);
+    var_3 = _id_0557::_id_782F(undefined, var_0.setclientdvars);
     _id_0557::_id_781D("explore village", var_3);
   }
 
@@ -90,22 +90,22 @@ _id_785E() {
 }
 
 _id_1DA7() {
-  var_0 = _func_21F("door_light", "targetname");
+  var_0 = _getscriptablearray("door_light", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.5;
-    var_2 _meth_83FA("puzzlelight", "flicker2");
+    var_2 setscriptablepartstate("puzzlelight", "flicker2");
     wait 1;
-    var_2 _meth_83FA("puzzlelight", "on");
+    var_2 setscriptablepartstate("puzzlelight", "on");
   }
 
-  var_4 = _func_21F("door_light_1", "targetname");
+  var_4 = _getscriptablearray("door_light_1", "targetname");
 
   foreach(var_6 in var_4) {
     wait 1;
-    var_6 _meth_83FA("puzzlelight", "flicker2");
+    var_6 setscriptablepartstate("puzzlelight", "flicker2");
     wait 1;
-    var_6 _meth_83FA("puzzlelight", "on");
+    var_6 setscriptablepartstate("puzzlelight", "on");
   }
 }
 
@@ -135,44 +135,44 @@ _id_44F7() {
 }
 
 _id_AA06() {
-  var_0 = _func_18E("well_clip_bottom", "script_noteworthy");
+  var_0 = _getent("well_clip_bottom", "script_noteworthy");
   var_0.origin = var_0.origin + (0, 0, 128);
   var_0._id_50D0 = 0;
   waitframe();
-  var_0 _meth_82C2();
-  var_1 = _func_18E("well_clip_top_plug", "script_noteworthy");
+  var_0 notsolid();
+  var_1 = _getent("well_clip_top_plug", "script_noteworthy");
   var_1.origin = var_1.origin + (0, 0, -128);
   var_1._id_50D0 = 1;
   waitframe();
-  var_1 _meth_805F();
-  var_2 = _func_18E("well_clip_door", "script_noteworthy");
+  var_1 disconnectpaths();
+  var_2 = _getent("well_clip_door", "script_noteworthy");
   var_2.origin = var_2.origin + (0, 0, -128);
   var_2._id_50D0 = 1;
-  var_3 = _func_18E("well_clip_door_ai", "script_noteworthy");
+  var_3 = _getent("well_clip_door_ai", "script_noteworthy");
   var_3.origin = var_3.origin + (0, 0, -128);
   var_3._id_50D0 = 1;
   waitframe();
-  var_3 _meth_805F();
+  var_3 disconnectpaths();
 }
 
 _id_AA05() {
   var_0 = getEntArray("well_clip_top", "script_noteworthy");
-  var_1 = _func_18E("well_clip_top_plug", "script_noteworthy");
-  var_2 = _func_18E("well_clip_door", "script_noteworthy");
+  var_1 = _getent("well_clip_top_plug", "script_noteworthy");
+  var_2 = _getent("well_clip_door", "script_noteworthy");
 
   foreach(var_4 in var_0) {
-    var_4 _meth_82C2();
-    var_4 _meth_8060();
+    var_4 notsolid();
+    var_4 connectpaths();
     waitframe();
     var_4 delete();
   }
 
-  var_1 _meth_82C2();
-  var_2 _meth_82C2();
+  var_1 notsolid();
+  var_2 notsolid();
 }
 
 _id_AA04() {
-  var_0 = _func_18E("well_clip_bottom", "script_noteworthy");
+  var_0 = _getent("well_clip_bottom", "script_noteworthy");
 
   if(!var_0._id_50D0) {
     var_0.origin = var_0.origin + (0, 0, -128);
@@ -180,17 +180,17 @@ _id_AA04() {
   }
 
   waitframe();
-  var_0 _meth_82C1();
-  var_1 = _func_18E("well_clip_top_plug", "script_noteworthy");
-  var_1 _meth_82C1();
-  var_2 = _func_18E("well_clip_door", "script_noteworthy");
-  var_2 _meth_82C1();
-  var_3 = _func_18E("well_clip_door_ai", "script_noteworthy");
-  var_3 _meth_82C1();
+  var_0 solid();
+  var_1 = _getent("well_clip_top_plug", "script_noteworthy");
+  var_1 solid();
+  var_2 = _getent("well_clip_door", "script_noteworthy");
+  var_2 solid();
+  var_3 = _getent("well_clip_door_ai", "script_noteworthy");
+  var_3 solid();
 }
 
 _id_AA07() {
-  var_0 = _func_18E("well_clip_bottom", "script_noteworthy");
+  var_0 = _getent("well_clip_bottom", "script_noteworthy");
 
   if(!var_0._id_50D0) {
     var_0.origin = var_0.origin + (0, 0, -128);
@@ -198,26 +198,26 @@ _id_AA07() {
   }
 
   waitframe();
-  var_0 _meth_82C1();
-  var_1 = _func_18E("well_clip_door_ai", "script_noteworthy");
-  var_1 _meth_8060();
-  var_1 _meth_82C2();
+  var_0 solid();
+  var_1 = _getent("well_clip_door_ai", "script_noteworthy");
+  var_1 connectpaths();
+  var_1 notsolid();
 }
 
 _id_AA08() {
-  var_0 = _func_18E("well_clip_bottom", "script_noteworthy");
-  var_0 _meth_82C2();
+  var_0 = _getent("well_clip_bottom", "script_noteworthy");
+  var_0 notsolid();
   waitframe();
   var_0 delete();
-  var_1 = _func_18E("well_clip_top_plug", "script_noteworthy");
-  var_1 _meth_82C2();
-  var_1 _meth_805F();
-  var_2 = _func_18E("well_clip_door", "script_noteworthy");
-  var_2 _meth_82C2();
+  var_1 = _getent("well_clip_top_plug", "script_noteworthy");
+  var_1 notsolid();
+  var_1 disconnectpaths();
+  var_2 = _getent("well_clip_door", "script_noteworthy");
+  var_2 notsolid();
   var_2 delete();
-  var_3 = _func_18E("well_clip_door_ai", "script_noteworthy");
-  var_3 _meth_82C2();
-  var_3 _meth_805F();
+  var_3 = _getent("well_clip_door_ai", "script_noteworthy");
+  var_3 notsolid();
+  var_3 disconnectpaths();
 }
 
 _id_0985() {
@@ -229,14 +229,14 @@ _id_0985() {
     _id_0557::_id_781D("1 fire well", var_1);
   }
 
-  common_scripts\utility::_id_3C9F(var_0._id_819A);
+  common_scripts\utility::_id_3C9F(var_0.getnegotiationnextnode);
 
   if(0)
     _id_0557::_id_7847("1 fire well", var_1);
 }
 
 _id_7856() {
-  var_0 = _func_18E("pilot_light_trigger", "targetname");
+  var_0 = _getent("pilot_light_trigger", "targetname");
   var_1 = spawnStruct();
   var_0 childthread common_scripts\utility::_id_A75D("trigger", var_1);
 
@@ -279,17 +279,17 @@ _id_7855() {
   thread _id_3C29(["fuel_valve_3"], "firewell_machinery_light_3", "targetname");
   thread _id_3C29(var_0, "zmb_flamethrower_light", "script_noteworthy");
   common_scripts\utility::_id_3CA1(var_0);
-  var_4 = _func_21F("green", "targetname");
+  var_4 = _getscriptablearray("green", "targetname");
 
   foreach(var_6 in var_4)
-  var_6 _meth_83FA("light", "green");
+  var_6 setscriptablepartstate("light", "green");
 
   _id_0557::_id_7822("1 fire well", &"ZOMBIE_NEST_HINT_STEP_PILOT_LIGHT");
-  var_8 = _func_18E("pilot_light_trigger", "targetname");
+  var_8 = _getent("pilot_light_trigger", "targetname");
 
   if(0) {
     if(isDefined(var_8)) {
-      var_9 = _func_18E("nest_ee_pilot_light_model", "targetname");
+      var_9 = _getent("nest_ee_pilot_light_model", "targetname");
       var_10 = _id_0557::_id_782F(undefined, [var_9]);
       _id_0557::_id_781D("1 fire well", var_10);
     }
@@ -308,17 +308,17 @@ _id_A29E() {
   var_3 = common_scripts\utility::_id_4461(self.origin, var_2);
   var_4 = common_scripts\utility::_id_46B7("indicator_light_vfx_top", "script_noteworthy");
   var_5 = common_scripts\utility::_id_4461(self.origin, var_4);
-  var_6 = _func_14B(common_scripts\utility::_id_44F5("zmb_nest_generator_light_red"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
-  var_7 = _func_14B(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_red"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
-  _func_14C(var_6, 0.5);
-  _func_14C(var_7, 0.5);
-  common_scripts\utility::_id_3C9F(self._id_819A);
+  var_6 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_light_red"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  var_7 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_red"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
+  _triggerfx(var_6, 0.5);
+  _triggerfx(var_7, 0.5);
+  common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
   var_6 delete();
   var_7 delete();
-  var_6 = _func_14B(common_scripts\utility::_id_44F5("zmb_nest_generator_light_green"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
-  var_7 = _func_14B(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_green"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
-  _func_14C(var_6);
-  _func_14C(var_7);
+  var_6 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_light_green"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  var_7 = _spawnfx(common_scripts\utility::_id_44F5("zmb_nest_generator_bulb_green"), var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));
+  _triggerfx(var_6);
+  _triggerfx(var_7);
 }
 
 _id_7854() {
@@ -348,7 +348,7 @@ _id_7854() {
 
   if(!common_scripts\utility::_id_562E(level._id_6659)) {
     foreach(var_3 in var_0) {
-      _func_17F(0.3, 4, var_3.origin, 850);
+      _earthquake(0.3, 4, var_3.origin, 850);
       playFX(common_scripts\utility::_id_44F5("zmb_firepit_blast"), var_3.origin);
       level thread common_scripts\_exploder::_id_088E(201);
       wait 0.4;
@@ -366,11 +366,11 @@ _id_7854() {
     _id_AA05();
     common_scripts\utility::flag_set("fire trap active");
     common_scripts\utility::flag_set("gallows_to_well");
-    var_5 = _func_21F("color", "targetname");
+    var_5 = _getscriptablearray("color", "targetname");
 
     foreach(var_7 in var_5) {
       wait 0.1;
-      var_7 _meth_83FA("lightpart", "color");
+      var_7 setscriptablepartstate("lightpart", "color");
     }
   }
 
@@ -404,7 +404,7 @@ _id_9CAB(var_0) {
 
   if(!common_scripts\utility::_id_562E(level._id_6659)) {
     foreach(var_4 in var_1) {
-      _func_17F(0.3, 4, var_4.origin, 850);
+      _earthquake(0.3, 4, var_4.origin, 850);
       playFX(common_scripts\utility::_id_44F5("zmb_firepit_blast"), var_4.origin);
       level thread common_scripts\_exploder::_id_088E(201);
       wait 0.4;
@@ -420,11 +420,11 @@ _id_9CAB(var_0) {
     _id_AA05();
     common_scripts\utility::flag_set("fire trap active");
     common_scripts\utility::flag_set("gallows_to_well");
-    var_6 = _func_21F("color", "targetname");
+    var_6 = _getscriptablearray("color", "targetname");
 
     foreach(var_8 in var_6) {
       wait 0.1;
-      var_8 _meth_83FA("lightpart", "color");
+      var_8 setscriptablepartstate("lightpart", "color");
     }
   }
 
@@ -465,11 +465,11 @@ _id_3C2A() {
 _id_3C29(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::_id_46B5(var_1, var_2);
   var_4 = _id_0547::_id_8FBA(var_3, "zmb_nest_generator_bulb_red");
-  _func_14C(var_4);
+  _triggerfx(var_4);
   common_scripts\utility::_id_3CA1(var_0);
   var_4 delete();
   var_4 = _id_0547::_id_8FBA(var_3, "zmb_nest_generator_bulb_green");
-  _func_14C(var_4);
+  _triggerfx(var_4);
   common_scripts\utility::_id_3C9F(_id_0557::_id_7838("1 fire well", "gas flowing"));
 
   for(;;) {
@@ -481,7 +481,7 @@ _id_3C29(var_0, var_1, var_2) {
     else
       var_4 = _id_0547::_id_8FBA(var_3, "zmb_nest_generator_bulb_red");
 
-    _func_14C(var_4);
+    _triggerfx(var_4);
   }
 }
 
@@ -550,7 +550,7 @@ _id_2EB3(var_0, var_1) {
 }
 
 _id_AC98() {
-  var_0 = _func_18E("pilot_light_trigger", "targetname");
+  var_0 = _getent("pilot_light_trigger", "targetname");
   var_0 thread _id_AC99();
 
   for(;;) {
@@ -567,7 +567,7 @@ _id_AC98() {
     if(common_scripts\utility::_id_3C77("fuel_valve_1") && common_scripts\utility::_id_3C77("fuel_valve_2") && common_scripts\utility::_id_3C77("fuel_valve_3")) {
       level._id_6FEB = var_1;
       common_scripts\utility::flag_set("Pilot light activated");
-      var_0 _meth_80CE(&"ZOMBIES_EMPTY_STRING");
+      var_0 sethintstring(&"ZOMBIES_EMPTY_STRING");
       break;
     } else
       thread _id_2E85(var_1);
@@ -575,21 +575,21 @@ _id_AC98() {
 }
 
 _id_AC99() {
-  self _meth_80CE(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  self sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   common_scripts\utility::_id_3CA0("fuel_valve_1", "fuel_valve_2", "fuel_valve_3");
-  self _meth_80CE(&"ZOMBIE_NEST_PILOTLIGHT");
+  self sethintstring(&"ZOMBIE_NEST_PILOTLIGHT");
 }
 
-_id_848D(var_0) {
+hideviewmodel(var_0) {
   if(common_scripts\utility::_id_562E(level._id_1CBA) && !common_scripts\utility::_id_562E(var_0)) {
     return;
   }
-  var_1 = _func_18E("pilot_light_trigger", "targetname");
+  var_1 = _getent("pilot_light_trigger", "targetname");
   var_1 common_scripts\utility::_id_9DA3();
 }
 
-_id_848C() {
-  var_0 = _func_18E("pilot_light_trigger", "targetname");
+showviewmodel() {
+  var_0 = _getent("pilot_light_trigger", "targetname");
   var_0 common_scripts\utility::_id_9D9F();
 }
 
@@ -611,68 +611,68 @@ _id_2E85(var_0) {
 }
 
 _id_3BEA() {
-  var_0 = _func_21F("bigfire", "targetname");
+  var_0 = _getscriptablearray("bigfire", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("heat", "enable");
+  var_2 setscriptablepartstate("heat", "enable");
 
   wait 0.1;
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("heat", "die");
+  var_2 setscriptablepartstate("heat", "die");
 
-  var_6 = _func_21F("smlfire", "targetname");
+  var_6 = _getscriptablearray("smlfire", "targetname");
 
   foreach(var_8 in var_6)
-  var_8 _meth_83FA("heat2", "enable");
+  var_8 setscriptablepartstate("heat2", "enable");
 
-  var_10 = _func_21F("onoff", "targetname");
+  var_10 = _getscriptablearray("onoff", "targetname");
 
   foreach(var_12 in var_10) {
     wait 0.1;
-    var_12 _meth_83FA("lightpart", "off");
+    var_12 setscriptablepartstate("lightpart", "off");
   }
 
-  var_10 = _func_21F("flickr", "targetname");
+  var_10 = _getscriptablearray("flickr", "targetname");
 
   foreach(var_12 in var_10) {
     wait 0.1;
-    var_12 _meth_83FA("lightpart", "flicker");
+    var_12 setscriptablepartstate("lightpart", "flicker");
   }
 
-  var_10 = _func_21F("flickr2", "targetname");
+  var_10 = _getscriptablearray("flickr2", "targetname");
 
   foreach(var_12 in var_10) {
     wait 0.1;
-    var_12 _meth_83FA("lightpart", "flickerstutter");
+    var_12 setscriptablepartstate("lightpart", "flickerstutter");
   }
 
-  var_10 = _func_21F("broken", "targetname");
+  var_10 = _getscriptablearray("broken", "targetname");
 
   foreach(var_12 in var_10) {
     wait 0.1;
-    var_12 _meth_83FA("lightpart", "off");
+    var_12 setscriptablepartstate("lightpart", "off");
   }
 
-  var_10 = _func_21F("broken1", "targetname");
+  var_10 = _getscriptablearray("broken1", "targetname");
 
   foreach(var_12 in var_10) {
     wait 0.1;
-    var_12 _meth_83FA("lightpart", "off1");
+    var_12 setscriptablepartstate("lightpart", "off1");
   }
 
-  var_10 = _func_21F("beamoff", "targetname");
+  var_10 = _getscriptablearray("beamoff", "targetname");
 
   foreach(var_12 in var_10) {
     wait 0.1;
-    var_12 _meth_83FA("glow", "lightbeamoff");
+    var_12 setscriptablepartstate("glow", "lightbeamoff");
   }
 
-  var_10 = _func_21F("lampoff", "targetname");
+  var_10 = _getscriptablearray("lampoff", "targetname");
 
   foreach(var_12 in var_10) {
     wait 0.1;
-    var_12 _meth_83FA("part", "flicker_off1");
+    var_12 setscriptablepartstate("part", "flicker_off1");
   }
 }
 
@@ -738,7 +738,7 @@ _id_3C21() {
   for(;;) {
     self waittill("trigger", var_1);
 
-    if(!isPlayer(var_1) && _func_1EF(var_1) && common_scripts\utility::_id_562E(var_1._id_565F) && !var_1 _id_054D::_id_56E1()) {
+    if(!isPlayer(var_1) && _isagent(var_1) && common_scripts\utility::_id_562E(var_1._id_565F) && !var_1 _id_054D::_id_56E1()) {
       if(_id_0547::_id_5565(var_1.team, level._id_746E)) {
         continue;
       }
@@ -759,7 +759,7 @@ _id_3C21() {
               }
             }
           } else if(var_1 _id_0547::_id_580A()) {
-            var_1 _meth_8059(var_1.health * 0.25, var_0.origin, level.fire_well_trap, level.fire_well_trap, "MOD_EXPLOSIVE", "trap_zm_mp");
+            var_1 dodamage(var_1.health * 0.25, var_0.origin, level.fire_well_trap, level.fire_well_trap, "MOD_EXPLOSIVE", "trap_zm_mp");
             var_1 _meth_8682(0, 1.5, 1, "none", 1);
           } else {
             thread _id_0547::_id_1DB3(var_1, 1.5);
@@ -781,7 +781,7 @@ _id_3C21() {
     if(isPlayer(var_1)) {
       if(!isDefined(var_1._id_6B39) || gettime() - var_1._id_6B39 >= 1000) {
         var_1._id_6B39 = gettime();
-        var_1 _meth_8059(5, var_1.origin);
+        var_1 dodamage(5, var_1.origin);
 
         if(!common_scripts\utility::_id_562E(var_1._id_5685) && self.classname != "trigger_radius")
           var_1 notify("fire_touched");

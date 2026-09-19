@@ -34,7 +34,7 @@ _id_622A(var_0, var_1) {
   var_6 = 100;
   var_7 = 0;
   var_8 = 1;
-  var_9 = _func_1FE(var_2);
+  var_9 = _getweaponexplosionradius(var_2);
   var_10 = var_9 * 2;
   self._id_29E1 = _func_190("script_model", var_1);
   self._id_29E1 _meth_8351(var_0, var_3, var_10, var_10, var_8, var_7);
@@ -65,12 +65,12 @@ _id_5FC7() {
   for(;;) {
     var_0 = _id_464F();
 
-    if(_func_203(self.origin, var_0) > 0) {
+    if(_getpathdist(self.origin, var_0) > 0) {
       var_0 = var_0 - (0, 0, 500);
       _id_622A(self, var_0);
-      wait(_func_0A3(level._id_6226) + level._id_6225);
+      wait(_randomfloat(level._id_6226) + level._id_6225);
       _id_6229();
-      wait(_func_0A3(level._id_6228) + level._id_6227);
+      wait(_randomfloat(level._id_6228) + level._id_6227);
       continue;
     }
 
@@ -84,7 +84,7 @@ _id_5FC8() {
   for(;;) {
     var_0 = _id_464F();
 
-    if(_func_203(self.origin, var_0) > 0) {
+    if(_getpathdist(self.origin, var_0) > 0) {
       var_1 = randomint(10);
 
       if(var_1 >= 0 &var_1 < 6)
@@ -97,7 +97,7 @@ _id_5FC8() {
       } else
         var_2 = "killstreak_carepackage_grenade_mp";
 
-      _func_071(var_2, var_0, (0, 0, 0), 0.05, self);
+      _magicgrenademanual(var_2, var_0, (0, 0, 0), 0.05, self);
       wait(level._id_622C);
       continue;
     }
@@ -112,9 +112,9 @@ _id_5FC9() {
   for(;;) {
     var_0 = _id_464F();
 
-    if(_func_203(self.origin, var_0) > 0) {
+    if(_getpathdist(self.origin, var_0) > 0) {
       thread _id_2817(var_0);
-      wait(level._id_6233 + _func_0A3(level._id_6234));
+      wait(level._id_6233 + _randomfloat(level._id_6234));
       continue;
     }
 
@@ -141,24 +141,24 @@ _id_2817(var_0) {
 
   self._id_622D[self._id_622D.size] = var_1;
   var_1._id_3EE2 = _id_04D1::_id_45A9();
-  _func_1CE(var_1._id_3EE2, "invisible", (0, 0, 0));
-  _func_1D2(var_1._id_3EE2, var_0);
-  _func_1D1(var_1._id_3EE2, "cb_compassping_minion_friend_mp");
+  _objective_add(var_1._id_3EE2, "invisible", (0, 0, 0));
+  _objective_position(var_1._id_3EE2, var_0);
+  _objective_icon(var_1._id_3EE2, "cb_compassping_minion_friend_mp");
 
   if(!level.teambased)
-    _func_185(var_1._id_3EE2, self getentitynumber());
+    _objective_playerenemyteam(var_1._id_3EE2, self getentitynumber());
   else
-    _func_183(var_1._id_3EE2, self.team);
+    _objective_team(var_1._id_3EE2, self.team);
 
   var_1._id_3770 = _id_04D1::_id_45A9();
-  _func_1CE(var_1._id_3770, "invisible", (0, 0, 0));
-  _func_1D2(var_1._id_3770, var_0);
-  _func_1D1(var_1._id_3770, "cb_compassping_enemy_objective");
+  _objective_add(var_1._id_3770, "invisible", (0, 0, 0));
+  _objective_position(var_1._id_3770, var_0);
+  _objective_icon(var_1._id_3770, "cb_compassping_enemy_objective");
 
   if(!level.teambased)
-    _func_186(var_1._id_3770, self getentitynumber());
+    _objective_playerteam(var_1._id_3770, self getentitynumber());
   else
-    _func_183(var_1._id_3770, level._id_6C63[self.team]);
+    _objective_team(var_1._id_3770, level._id_6C63[self.team]);
 
   if(self._id_4B78)
     thread _id_63CF(var_1);
@@ -176,9 +176,9 @@ _id_63CF(var_0) {
   if(!isDefined(var_0) || !isDefined(var_0._id_3770) || !isDefined(var_0._id_3EE2)) {
     return;
   }
-  _func_1D0(var_0._id_3770, "active");
-  _func_1D0(var_0._id_3EE2, "active");
-  wait(level._id_6230 + _func_0A3(level._id_6231));
+  _objective_state(var_0._id_3770, "active");
+  _objective_state(var_0._id_3EE2, "active");
+  wait(level._id_6230 + _randomfloat(level._id_6231));
 
   if(!isDefined(var_0) || !isDefined(var_0._id_3770) || !isDefined(var_0._id_3EE2)) {
     return;
@@ -213,8 +213,8 @@ _id_2F9E() {
 _id_464F() {
   var_0 = randomint(2) * 2 - 1;
   var_1 = randomint(2) * 2 - 1;
-  var_2 = (var_0 * _func_0A5(level._id_622F, level._id_622E), var_1 * _func_0A5(level._id_622F, level._id_622E), 0.0);
+  var_2 = (var_0 * _randomfloatrange(level._id_622F, level._id_622E), var_1 * _randomfloatrange(level._id_622F, level._id_622E), 0.0);
   var_2 = self.origin + var_2;
-  var_2 = _func_082(var_2, 3);
+  var_2 = _getgroundposition(var_2, 3);
   return var_2;
 }

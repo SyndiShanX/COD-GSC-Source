@@ -73,7 +73,7 @@ _id_170B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 beginazombiesoulcollectionobjectiveonstruct(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
   var_15 = self;
   var_16 = var_15 common_scripts\utility::_id_8FFC();
-  var_16 _meth_805B();
+  var_16 show();
   var_15.collector = var_16;
 
   if(isDefined(self.onzombiesacrificedfunc))
@@ -116,7 +116,7 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     return;
   }
   if(isDefined(var_9._id_7D24)) {
-    if(_func_0C0(var_9._id_7D24)) {
+    if(_isarray(var_9._id_7D24)) {
       var_11 = 0;
 
       foreach(var_13 in var_9._id_7D24) {
@@ -141,7 +141,7 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(common_scripts\utility::_id_562E(self._id_AC10) || common_scripts\utility::_id_562E(self.not_valid_sacrifice)) {
     return;
   }
-  if(isDefined(var_9._id_2E37) && var_9 _meth_8445(var_9._id_2E37) != -1) {
+  if(isDefined(var_9._id_2E37) && var_9 gettagindex(var_9._id_2E37) != -1) {
     var_15 = var_9 gettagorigin(var_9._id_2E37);
 
     if(isDefined(var_9._id_8C48))
@@ -152,9 +152,9 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(isDefined(var_9.ignoresighttrace) && var_9.ignoresighttrace)
     var_16 = 1;
   else if(isDefined(var_9._id_8C47))
-    var_16 = _func_07E(self getEye(), var_15, 0, var_9, var_9._id_8C47);
+    var_16 = _bullettracepassed(self getEye(), var_15, 0, var_9, var_9._id_8C47);
   else
-    var_16 = _func_07E(self getEye(), var_15, 0, var_9);
+    var_16 = _bullettracepassed(self getEye(), var_15, 0, var_9);
 
   var_17 = _id_21CF(var_9, var_9._id_696B, var_9._id_6943, var_9.checklos);
 
@@ -212,12 +212,12 @@ _id_2024(var_0, var_1, var_2, var_3) {
   else
     var_7 = var_3;
 
-  _func_147(level._effect[var_6], var_0, var_7);
+  _playfxontag(level._effect[var_6], var_0, var_7);
 
   if(isDefined(level._id_3571)) {
-    _func_147(level._effect["zmb_gk_claw_battery_charge_1"], level._id_3571, "flap1_shroud");
-    _func_147(level._effect["zmb_gk_claw_battery_charge_2"], level._id_3571, "flap2_shroud");
-    _func_147(level._effect["zmb_gk_claw_battery_charge_3"], level._id_3571, "flap3_shroud");
+    _playfxontag(level._effect["zmb_gk_claw_battery_charge_1"], level._id_3571, "flap1_shroud");
+    _playfxontag(level._effect["zmb_gk_claw_battery_charge_2"], level._id_3571, "flap2_shroud");
+    _playfxontag(level._effect["zmb_gk_claw_battery_charge_3"], level._id_3571, "flap3_shroud");
   }
 
   _id_0378::_id_8D74("zombie_soul_suck", var_4.origin, var_0.origin);
@@ -243,16 +243,16 @@ _id_56B0(var_0, var_1, var_2, var_3) {
     var_3 = 0;
 
   if(common_scripts\utility::_id_562E(var_3)) {
-    var_5 = _func_07F(self.origin, var_4, 0, self, var_0, 0);
+    var_5 = _sighttracepassed(self.origin, var_4, 0, self, var_0, 0);
 
     if(!var_5)
       return 0;
   }
 
   if(isDefined(var_2))
-    return _func_0E1(var_4, self.origin) < var_1 && _func_0AE(var_4[2] - self.origin[2]) < var_2;
+    return _distance2d(var_4, self.origin) < var_1 && _abs(var_4[2] - self.origin[2]) < var_2;
   else
-    return _func_0E1(var_4, self.origin) < var_1 && self.origin[2] < var_4[2];
+    return _distance2d(var_4, self.origin) < var_1 && self.origin[2] < var_4[2];
 }
 
 _id_865C(var_0, var_1) {

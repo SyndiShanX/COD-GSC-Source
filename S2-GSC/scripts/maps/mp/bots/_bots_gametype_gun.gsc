@@ -9,7 +9,7 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_1A0E;
+  level.bot_funcs["gametype_think"] = ::_id_1A0E;
 }
 
 _id_8795() {}
@@ -56,7 +56,7 @@ _id_1A0E() {
     if(var_2 != "none" && !maps\mp\_utility::iskillstreakweapon(var_2) && var_2 != var_0) {
       var_0 = var_2;
 
-      if(self _meth_837D("advancedPersonality") && self _meth_837D("strategyLevel") > 0) {
+      if(self botgetdifficultysetting("advancedPersonality") && self botgetdifficultysetting("strategyLevel") > 0) {
         var_3 = maps\mp\_utility::_id_452A(var_2);
         _id_1A0D(var_3, var_1);
       }

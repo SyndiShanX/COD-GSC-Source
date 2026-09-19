@@ -175,7 +175,7 @@ addwavestory(var_0, var_1, var_2) {
 }
 
 play_wave_story(var_0) {
-  if(_func_0C0(var_0)) {
+  if(_isarray(var_0)) {
     var_1 = var_0[0];
     var_2 = var_0[1];
     var_3 = var_0[2];

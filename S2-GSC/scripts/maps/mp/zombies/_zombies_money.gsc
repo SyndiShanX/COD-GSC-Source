@@ -18,7 +18,7 @@ init() {
 
 _id_8ADC(var_0) {
   var_1 = _id_4680();
-  _id_0555::_id_83DD("take_share", var_0);
+  _id_0555::issprinting("take_share", var_0);
   _id_0378::_id_8D74("zmb_points_pickup", var_1.origin);
   var_0 _id_47BB(var_1._id_62D3);
   var_1 _id_8ADE(0);
@@ -57,7 +57,7 @@ _id_8ADF(var_0, var_1, var_2) {
     var_9 = 0;
     var_10 = undefined;
     var_11 = 0;
-    var_4 _meth_80CB(var_5, var_6, var_7, var_8, var_9, var_10, var_10, var_11, var_10, var_10);
+    var_4 setwaypoint(var_5, var_6, var_7, var_8, var_9, var_10, var_10, var_11, var_10, var_10);
     var_3._id_4F6B = var_4;
   }
 
@@ -93,14 +93,14 @@ _id_8ADA(var_0, var_1) {
   if(!common_scripts\utility::_id_0F79(var_0._id_8AD2, var_2))
     var_0._id_8AD2 = common_scripts\utility::_id_0F6F(var_0._id_8AD2, var_2);
 
-  level._id_349D[var_0 _meth_8271()] = level._id_349D[var_0 _meth_8271()] + var_1;
+  level._id_349D[var_0 getguid()] = level._id_349D[var_0 getguid()] + var_1;
 }
 
 _id_467F(var_0) {
   if(!isDefined(level._id_349D))
     return 0;
 
-  var_1 = level._id_349D[var_0 _meth_8271()];
+  var_1 = level._id_349D[var_0 getguid()];
 
   if(!isDefined(var_1))
     return 0;
@@ -161,12 +161,12 @@ _id_A90B() {
   var_0 endon("disconnect");
   var_1 = "drop_money_notify";
   var_2 = 0.1;
-  var_0 _meth_82E1(var_1, "+actionslot 3");
+  var_0 notifyonplayercommand(var_1, "+actionslot 3");
   var_0._id_8AD2 = [];
   var_0 thread _id_A90C();
 
-  if(!isDefined(level._id_349D[var_0 _meth_8271()]))
-    level._id_349D[var_0 _meth_8271()] = 0;
+  if(!isDefined(level._id_349D[var_0 getguid()]))
+    level._id_349D[var_0 getguid()] = 0;
 
   for(;;) {
     wait(var_2);
@@ -184,14 +184,14 @@ _id_A90B() {
     var_3 = _id_467D();
 
     if(!var_0 maps\mp\gametypes\zombies::_id_11C2(var_3, 1, 1)) {
-      var_0 _meth_860F("zmb_ui_purchase_fail", var_0);
-      _id_0555::_id_83DD("poor_share", var_0);
+      var_0 playsoundtoplayer("zmb_ui_purchase_fail", var_0);
+      _id_0555::issprinting("poor_share", var_0);
       continue;
     }
 
     var_4 = _id_4681(var_0);
     var_5 = common_scripts\utility::_id_4461(var_4, level._id_8AD2, _id_467A());
-    _id_0555::_id_83DD("share", var_0);
+    _id_0555::issprinting("share", var_0);
     _id_0378::_id_8D74("zmb_points_share", var_0.origin);
 
     if(!isDefined(var_5)) {

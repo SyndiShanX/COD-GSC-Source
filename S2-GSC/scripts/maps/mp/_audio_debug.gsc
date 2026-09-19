@@ -52,7 +52,7 @@ _id_06E9() {
 
       if(isDefined(self._id_8F49) == 1)
         var_0 = var_0 + self._id_8F49;
-    } else if(_func_279(self._id_8F45) == 1 && isDefined(self._id_8F46) == 1) {
+    } else if(_isremovedentity(self._id_8F45) == 1 && isDefined(self._id_8F46) == 1) {
       var_0 = self._id_8F46;
 
       if(isDefined(self._id_8F49) == 1)
@@ -64,7 +64,7 @@ _id_06E9() {
     self._id_6C3F = 1;
   }
 
-  if(_func_279(self) == 1)
+  if(_isremovedentity(self) == 1)
     return undefined;
 
   return var_0;
@@ -85,7 +85,7 @@ _id_06E8(var_0, var_1, var_2, var_3) {
   var_4 = getDvar("snd_debugRavenAudioFilter");
   var_5 = _id_06EA();
   var_6 = undefined;
-  var_7 = _func_342(var_5, "spatialize");
+  var_7 = _getsndaliasvalue(var_5, "spatialize");
 
   if(isDefined(var_7) == 1 && var_7 == "2d")
     return -1;
@@ -131,7 +131,7 @@ _id_06E2(var_0, var_1) {
   var_4 = var_0 getEye();
   var_5 = var_0 _meth_8566();
   var_6 = getdvarfloat("cg_fov", 65);
-  var_7 = _func_0A7(var_6);
+  var_7 = _cos(var_6);
 
   if(isDefined(level._id_05B0) == 1 && var_1 >= 3)
     var_3 = _id_06E3(var_3, level._id_05B0, var_4, var_5, var_7, var_2);
@@ -165,7 +165,7 @@ _id_06E6() {
     var_1 = self.angles;
 
   if(var_2 != "unknown") {
-    var_6 = _func_342(var_2, "dist_min");
+    var_6 = _getsndaliasvalue(var_2, "dist_min");
 
     if(isDefined(var_6) == 1 && var_6 > 0)
       var_4 = var_6;
@@ -203,11 +203,11 @@ _id_06E7(var_0, var_1, var_2) {
 
   foreach(var_9 in var_1) {
     var_10 = var_9 _id_06E9();
-    var_11 = var_0 _meth_8214(var_10, var_4, var_3);
+    var_11 = var_0 worldpointinreticle_circle(var_10, var_4, var_3);
 
     if(var_11 == 1) {
-      var_12 = var_0 _meth_8404(var_10, var_4);
-      var_13 = _func_0E1(var_12, common_scripts\utility::_id_A2BE());
+      var_12 = var_0 worldpointtoscreenpos(var_10, var_4);
+      var_13 = _distance2d(var_12, common_scripts\utility::_id_A2BE());
 
       if(var_13 < var_6) {
         var_6 = var_13;
@@ -220,7 +220,7 @@ _id_06E7(var_0, var_1, var_2) {
 }
 
 _id_06E5(var_0, var_1) {
-  var_2 = _func_03C("snd_debugRavenAudioColor");
+  var_2 = _getdvarvector("snd_debugRavenAudioColor");
   var_3 = getdvarfloat("snd_debugRavenAudioColorScale");
   var_4 = _id_02EF::_id_A2BD(var_2, var_3 * 10.0);
   var_5 = getdvarfloat("cg_fov", 65);
@@ -248,8 +248,8 @@ _id_06E5(var_0, var_1) {
     var_16 = distance(var_6, var_10);
     var_17 = 1.0;
 
-    if(_func_2A2(var_8) == 1 && var_8 > 0 && _func_2A2(var_9) == 1 && var_9 > 0)
-      _id_02EF::_id_8086(var_16, var_8, var_9, 1.0, 0.5);
+    if(_isnumber(var_8) == 1 && var_8 > 0 && _isnumber(var_9) == 1 && var_9 > 0)
+      _id_02EF::startignoringspotlight(var_16, var_8, var_9, 1.0, 0.5);
 
     var_18 = var_16 * 0.002;
     var_19 = var_15 * var_18;
@@ -259,7 +259,7 @@ _id_06E5(var_0, var_1) {
     _id_02EF::_id_8AA6(var_6 + (0, 0, -3.5 * var_19 * 12), var_20, var_4, var_17, var_19, 1, var_12);
   }
 
-  if(isDefined(var_9) == 1 && _func_2A2(var_9) == 1 && var_9 > 0) {
+  if(isDefined(var_9) == 1 && _isnumber(var_9) == 1 && var_9 > 0) {
     var_21 = 0.25;
     var_22 = var_4;
     var_23 = 1.0;
@@ -306,7 +306,7 @@ _id_06E4(var_0) {
     var_7[var_7.size] = var_2 getEye();
 
     var_10 = common_scripts\utility::_id_A2B9(var_7);
-    level._id_05B8 = _func_1AC(level._id_05B8, var_10);
+    level._id_05B8 = _sortbydistance(level._id_05B8, var_10);
 
     foreach(var_12 in level._id_05B8) {
       if(isDefined(var_12._id_6C3F) == 1) {

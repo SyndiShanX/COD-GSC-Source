@@ -9,19 +9,19 @@ _id_528A() {
 }
 
 _id_8601(var_0) {
-  _id_85A9();
+  setdefaultdroppitch();
   self._id_9ACD = "attacking point";
   thread _id_0547::_id_7D1A("zombie_attack_tower_lever", [var_0]);
 }
 
-_id_85A9() {
+setdefaultdroppitch() {
   if(common_scripts\utility::_id_562E(self._id_0C29) || !isDefined(self._id_0C29)) {
     self._id_0C2A = 1;
     self._id_0C29 = 0;
   }
 }
 
-_id_85AA() {
+restoredefaultdroppitch() {
   if(common_scripts\utility::_id_562E(self._id_0C2A)) {
     self._id_0C2A = undefined;
     self._id_0C29 = 1;
@@ -33,7 +33,7 @@ _id_767A(var_0) {
 }
 
 _id_767B(var_0) {
-  _id_85AA();
+  restoredefaultdroppitch();
   self notify("clear_tower_behavior");
 }
 
@@ -51,7 +51,7 @@ _id_767D() {
 }
 
 _id_8603(var_0) {
-  _id_85A9();
+  setdefaultdroppitch();
   self._id_9ACD = "travel to attack";
   self._id_6941 = 1;
   thread _id_84E7(var_0);
@@ -76,7 +76,7 @@ _id_23A0() {
 }
 
 _id_8605(var_0) {
-  _id_85AA();
+  restoredefaultdroppitch();
   self._id_6941 = 0;
   self._id_9B61 = undefined;
   self._id_60D0 = undefined;
@@ -130,37 +130,37 @@ _id_24E4() {
     else
       var_4 = var_3._id_9ACD;
 
-    var_3 _meth_83FF();
+    var_3 hudoutlinedisable();
 
     switch (var_4) {
       case "not interested":
         if(var_1 == 3)
-          var_3 _meth_83FE(0, 0);
+          var_3 hudoutlineenable(0, 0);
 
         break;
       case "travel to idle":
         if(var_1 == 3)
-          var_3 _meth_83FE(0, 0);
+          var_3 hudoutlineenable(0, 0);
 
         break;
       case "travel to attack":
         if(var_1 >= 2)
-          var_3 _meth_83FE(2, 0);
+          var_3 hudoutlineenable(2, 0);
 
         break;
       case "idling at tower":
         if(var_1 == 3)
-          var_3 _meth_83FE(0, 0);
+          var_3 hudoutlineenable(0, 0);
 
         break;
       case "attacking point":
         if(var_1 >= 1)
-          var_3 _meth_83FE(1, 0);
+          var_3 hudoutlineenable(1, 0);
 
         break;
       case "ignore the tower":
         if(var_1 == 3)
-          var_3 _meth_83FE(1, 0);
+          var_3 hudoutlineenable(1, 0);
 
         break;
     }
@@ -322,8 +322,8 @@ _id_49A2(var_0) {
   _id_8605();
   waitframe();
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "tower_objective");
-  self _meth_83A2(0);
-  self _meth_839D("gravity");
+  self scragentsetscripted(0);
+  self scragentsetphysicsmode("gravity");
 }
 
 _id_A645(var_0) {

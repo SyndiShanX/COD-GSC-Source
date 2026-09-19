@@ -5,7 +5,7 @@
 
 _id_534F() {
   var_0 = "mp/spawnConstantsPerMap.csv";
-  var_1 = _func_27B(var_0);
+  var_1 = _tablegetcolumncount(var_0);
 
   for(var_2 = 1; var_2 < var_1; var_2++) {
     var_3 = tablelookup(var_0, 0, "spawn_constants", var_2);
@@ -16,7 +16,7 @@ _id_534F() {
       var_5 = tablelookup(var_0, 0, "save_squared_constant", var_2);
 
       if(isDefined(var_5) && var_5 == "TRUE")
-        level._id_9037[var_3] = _func_0DA(var_4);
+        level._id_9037[var_3] = _squared(var_4);
     }
   }
 
@@ -53,7 +53,7 @@ _id_468F(var_0, var_1) {
   return int(var_2);
 }
 
-_id_80A2(var_0, var_1, var_2, var_3, var_4) {
+delete(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4))
     var_5 = [[var_1]](var_2, var_3, var_4);
   else
@@ -130,7 +130,7 @@ _id_56E4(var_0) {
 }
 
 _id_144D(var_0, var_1) {
-  if(!isDefined(level._id_80B4))
+  if(!isDefined(level.makeglobalusable))
     return 100;
 
   if(!var_1._id_6C97)
@@ -227,9 +227,9 @@ _id_10DE(var_0, var_1) {
 }
 
 _id_1451(var_0, var_1) {
-  if(_func_15D(var_1.origin)) {
+  if(_positionwouldtelefrag(var_1.origin)) {
     foreach(var_3 in var_1._id_0CAD) {
-      if(!_func_15D(var_3)) {
+      if(!_positionwouldtelefrag(var_3)) {
         break;
       }
     }
@@ -351,7 +351,7 @@ _id_143F(var_0, var_1) {
     var_5[var_5.size] = var_7;
 
     if(level.teambased || var_7["player"] != self.guid)
-      var_4 = var_4 + _id_80A2(var_2, ::_id_1450, var_0, var_1, var_7);
+      var_4 = var_4 + delete(var_2, ::_id_1450, var_0, var_1, var_7);
   }
 
   level._id_7AD4[var_3] = var_5;
@@ -479,7 +479,7 @@ _id_1435(var_0, var_1) {
     var_4[var_4.size] = var_6;
 
     if(level.teambased || var_6["player"] == self.guid)
-      var_3 = var_3 + _id_80A2(var_2, ::_id_143B, var_0, var_1, var_6);
+      var_3 = var_3 + delete(var_2, ::_id_143B, var_0, var_1, var_6);
   }
 
   level._id_7AD1[var_0] = var_4;
@@ -514,7 +514,7 @@ _id_765D(var_0, var_1) {
     return 0;
 
   var_3 = var_3 / var_2;
-  var_3 = _func_0AF(var_3, level._id_9036["enemyDistance"]);
+  var_3 = _min(var_3, level._id_9036["enemyDistance"]);
   var_4 = 1 - var_3 / level._id_9036["enemyDistance"];
   return var_4 * 100;
 }
@@ -585,12 +585,12 @@ _id_143C(var_0, var_1) {
         continue;
       else {
         if((level.teambased && var_6.team != var_0 || !level.teambased) && var_2 > 0) {
-          var_4 = var_4 + _id_80A2(var_2, ::_id_1449, var_0, var_1, var_6);
+          var_4 = var_4 + delete(var_2, ::_id_1449, var_0, var_1, var_6);
           continue;
         }
 
         if(level.teambased && var_6.team == var_0 && var_3 > 0)
-          var_4 = var_4 + _id_80A2(var_3, ::_id_7669, var_0, var_1, var_6);
+          var_4 = var_4 + delete(var_3, ::_id_7669, var_0, var_1, var_6);
       }
     }
   }
@@ -676,7 +676,7 @@ _id_7676(var_0, var_1) {
 }
 
 _id_7A5E(var_0, var_1) {
-  return _func_0A4(0, 99);
+  return _randomintrange(0, 99);
 }
 
 _id_7667(var_0, var_1) {
@@ -839,7 +839,7 @@ _id_AB41(var_0, var_1) {
   if(var_2 >= 2500 || var_2 <= 500)
     return 0;
 
-  var_3 = max(0.0, 1.0 - _func_0AE(1500 - var_2) / 1000);
+  var_3 = max(0.0, 1.0 - _abs(1500 - var_2) / 1000);
   return var_3 * 100;
 }
 
@@ -884,7 +884,7 @@ _id_A11B() {
   var_5 = (var_5[0], var_5[1], 0);
   var_0._id_1479 = var_5;
   var_6 = var_5 - var_4;
-  var_7 = _func_109(var_6);
+  var_7 = _vectortoyaw(var_6);
   var_8 = var_4 + var_6 * 0.5;
 
   if(var_7 > 180)
@@ -897,13 +897,13 @@ _id_A11B() {
   var_9 = common_scripts\utility::_id_98E7(var_0._id_9A9D == "allies", "axis", "allies");
   var_10 = common_scripts\utility::_id_98E7(var_0._id_9A9D == "allies", var_4, var_5);
   var_11 = common_scripts\utility::_id_98E7(var_9 == "allies", var_4, var_5);
-  var_12 = _func_211(var_11, (var_1._id_5FEB[0] - var_1._id_3D75, var_1._id_5FEB[1], var_8[2])) < _func_211(var_10, (var_1._id_5FEB[0] - var_1._id_3D75, var_1._id_5FEB[1], var_8[2]));
-  var_13 = _func_211(var_11, (var_1._id_5FEB[0] + var_1._id_3D75, var_1._id_5FEB[1], var_8[2])) > _func_211(var_10, (var_1._id_5FEB[0] + var_1._id_3D75, var_1._id_5FEB[1], var_8[2]));
+  var_12 = _distance2dsquared(var_11, (var_1._id_5FEB[0] - var_1._id_3D75, var_1._id_5FEB[1], var_8[2])) < _distance2dsquared(var_10, (var_1._id_5FEB[0] - var_1._id_3D75, var_1._id_5FEB[1], var_8[2]));
+  var_13 = _distance2dsquared(var_11, (var_1._id_5FEB[0] + var_1._id_3D75, var_1._id_5FEB[1], var_8[2])) > _distance2dsquared(var_10, (var_1._id_5FEB[0] + var_1._id_3D75, var_1._id_5FEB[1], var_8[2]));
   var_14 = 0;
   var_2 = gettime();
 
   if(var_2 > var_0._id_5B9D + var_1._id_3D76) {
-    if(var_7 < var_1._id_3D72 && var_7 > -180 - var_1._id_3D72 || var_7 > var_1._id_3D70 && var_7 < 180 - var_1._id_3D70 || _func_0E1(var_1._id_5FEB, var_8) > var_1._id_3D75 || var_13 || var_12) {
+    if(var_7 < var_1._id_3D72 && var_7 > -180 - var_1._id_3D72 || var_7 > var_1._id_3D70 && var_7 < 180 - var_1._id_3D70 || _distance2d(var_1._id_5FEB, var_8) > var_1._id_3D75 || var_13 || var_12) {
       if(isDefined(var_0._id_530B)) {
         if(var_2 > var_0._id_530B + var_1._id_3D71) {
           if(var_13 || var_12) {
@@ -925,7 +925,7 @@ _id_A11B() {
   var_15 = clamp(var_8[0], var_1._id_5FEB[0] - var_1.radius, var_1._id_5FEB[0] + var_1.radius);
   var_16 = var_1._id_5FEB[1];
   var_8 = (var_15, var_16, var_8[2]);
-  var_17 = 1 - _func_0AE((var_8[0] - var_1._id_5FEB[0]) / var_1.radius);
+  var_17 = 1 - _abs((var_8[0] - var_1._id_5FEB[0]) / var_1.radius);
   var_18 = 0;
 
   if(var_7 < var_1._id_6224 * var_17 && var_7 > -180 - var_1._id_6224 * var_17) {
@@ -956,8 +956,8 @@ _id_A11B() {
     var_0._id_6162 = var_8;
 
   var_19 = var_8 - var_0._id_6162;
-  var_20 = _func_0E4(var_19);
-  var_21 = _func_0AF(var_20, 40.0 * var_3);
+  var_20 = _length2d(var_19);
+  var_21 = _min(var_20, 40.0 * var_3);
 
   if(var_21 > 0) {
     var_19 = var_19 * (var_21 / var_20);

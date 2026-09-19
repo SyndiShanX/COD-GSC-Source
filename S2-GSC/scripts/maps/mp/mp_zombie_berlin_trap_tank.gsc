@@ -15,7 +15,7 @@ trap_tank(var_0) {
   var_5 thread trap_puddle_current();
 
   _id_0378::_id_8D74("start_trap_tank", 1.0, var_1);
-  var_9 = _func_18E("puddle_damage", "script_noteworthy");
+  var_9 = _getent("puddle_damage", "script_noteworthy");
   var_9._id_9C92 = var_0;
   var_9._id_9CBB = "trap_tank";
   wait 0.3;
@@ -41,10 +41,10 @@ do_damage(var_0) {
     var_0 waittill("trigger", var_1);
 
     if(isPlayer(var_1))
-      var_1 _meth_8059(15, self.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_1 dodamage(15, self.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
     else {
       var_1 _id_0546::mark_electrified();
-      var_1 _meth_8059(var_1.health + 666, self.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_1 dodamage(var_1.health + 666, self.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
       var_1 _id_0378::_id_8D74("trap_tank_damage");
     }
 
@@ -58,7 +58,7 @@ trap_puddle_arcs() {
   self endon("stop_fx");
 
   for(;;)
-    wait(_func_0A5(0.4, 0.7));
+    wait(_randomfloatrange(0.4, 0.7));
 }
 
 trap_puddle_current() {
@@ -66,6 +66,6 @@ trap_puddle_current() {
 
   for(;;) {
     playFX(level._effect["cage_trap_current"], self.origin);
-    wait(_func_0A5(0.2, 0.5));
+    wait(_randomfloatrange(0.2, 0.5));
   }
 }

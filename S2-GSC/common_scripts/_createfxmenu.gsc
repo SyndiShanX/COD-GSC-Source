@@ -354,7 +354,7 @@ menu_fx_option_set() {
       var_1 = getdvarfloat("fx");
 
     if(var_0["type"] == "vector")
-      var_1 = _func_03C("fx");
+      var_1 = _getdvarvector("fx");
 
     if(isDefined(var_1)) {
       _id_0F2A(var_0, var_1);

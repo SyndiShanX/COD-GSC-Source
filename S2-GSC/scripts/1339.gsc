@@ -25,7 +25,7 @@ _id_3662() {
 
   if(_id_0547::_id_4BA7("specialty_class_improvised_def_zm")) {
     var_6 = _id_0547::_id_73E9() + 2;
-    _id_0547::_id_7454(int(_func_0AF(var_6, 3)));
+    _id_0547::_id_7454(int(_min(var_6, 3)));
   }
 
   if(_id_0547::_id_4BA7("specialty_class_resilient_zm"))
@@ -94,7 +94,7 @@ handlezombietauntfx(var_0, var_1, var_2, var_3) {
     if(isDefined(self.recenttauntfxtime) && var_4 - var_0.recenttauntfxtime < var_3)
       wait(var_3 - (var_4 - var_0.recenttauntfxtime));
 
-    _func_147(common_scripts\utility::_id_44F5(var_1), var_0, var_2);
+    _playfxontag(common_scripts\utility::_id_44F5(var_1), var_0, var_2);
     var_0.recenttauntfxtime = var_4;
     wait(var_3);
   }
@@ -145,14 +145,14 @@ play_crit_melee_effects() {
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = _func_2A8(level._effect["zmb_death_hand_to_hand_melee_hit"], var_0, "J_Head");
-  _func_14C(var_1);
+  var_1 = _spawnlinkedfx(level._effect["zmb_death_hand_to_hand_melee_hit"], var_0, "J_Head");
+  _triggerfx(var_1);
   wait 1;
   var_1 delete();
 }
 
 _id_6B73(var_0) {
-  if(isDefined(var_0) && _func_0C1(var_0) && common_scripts\utility::_id_562E(self._id_983B) && _id_0547::_id_4BA7("specialty_class_hit_em_hard_zm")) {
+  if(isDefined(var_0) && _isai(var_0) && common_scripts\utility::_id_562E(self._id_983B) && _id_0547::_id_4BA7("specialty_class_hit_em_hard_zm")) {
     playFX(level._effect["zmb_moon_zmb_instakill"], var_0.origin + (0, 0, 40));
     var_1 = var_0.health + 1;
     var_2 = 0;
@@ -185,5 +185,5 @@ _id_AB11(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_0 = 1;
 
   wait(var_0);
-  self _meth_8059(var_1, var_2, var_3, var_4, var_5, var_6);
+  self dodamage(var_1, var_2, var_3, var_4, var_5, var_6);
 }

@@ -35,8 +35,8 @@ run_post_launch_optional_spawner_params_override() {
 
   foreach(var_4 in var_0) {
     var_5 = common_scripts\utility::_id_4461(var_4.origin, var_1);
-    var_5._id_8260 = var_4._id_8260;
-    var_6 = strtok(var_5._id_8260, " ,");
+    var_5.setlookatent = var_4.setlookatent;
+    var_6 = strtok(var_5.setlookatent, " ,");
 
     foreach(var_8 in var_6) {
       if(var_8 == "requireNavmesh_no")
@@ -51,8 +51,8 @@ _id_52B5() {
   if(isDefined(level._id_2986))
     var_0 = level._id_2986;
 
-  var_1 = _func_27A(var_0);
-  var_2 = _func_27B(var_0);
+  var_1 = _tablegetrowcount(var_0);
+  var_2 = _tablegetcolumncount(var_0);
   var_3 = var_2 - 2;
   level._id_3774 = [];
 
@@ -65,15 +65,15 @@ _id_52B5() {
 
   for(var_5 = 1; var_5 <= var_3; var_5++) {
     for(var_6 = 0; var_6 < var_1; var_6++) {
-      var_7 = _func_1AE(var_0, var_6, 1);
+      var_7 = _tablelookupbyrow(var_0, var_6, 1);
 
       if(isDefined(level.wavetabletypestoexclude)) {
-        if(_func_0C0(level.wavetabletypestoexclude) && common_scripts\utility::_id_0F79(level.wavetabletypestoexclude, var_7))
+        if(_isarray(level.wavetabletypestoexclude) && common_scripts\utility::_id_0F79(level.wavetabletypestoexclude, var_7))
           continue;
       }
 
-      var_4 = _id_0547::_id_9470(_func_1AE(var_0, var_6, 0));
-      var_8 = _id_0547::_id_9470(_func_1AE(var_0, var_6, var_5 + 1));
+      var_4 = _id_0547::_id_9470(_tablelookupbyrow(var_0, var_6, 0));
+      var_8 = _id_0547::_id_9470(_tablelookupbyrow(var_0, var_6, var_5 + 1));
 
       if(var_8 > 0) {
         if(isDefined(level._id_3774[var_4][var_5][var_7])) {
@@ -96,7 +96,7 @@ _id_4743(var_0, var_1) {
   if(!isDefined(var_1))
     var_1 = level.players.size;
 
-  return level._id_3774[var_1][int(_func_0AF(var_0, level._id_3775))];
+  return level._id_3774[var_1][int(_min(var_0, level._id_3775))];
 }
 
 _id_468C() {

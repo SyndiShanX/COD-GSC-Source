@@ -38,7 +38,7 @@ _id_0F2B(var_0) {
   else
     var_1 = level._id_1355._id_7E43[var_0];
 
-  self _meth_8631("snd_enveffectsprio_level", var_1["roomtype"], var_1["drylevel"], var_1["wetlevel"], var_1["fadetime"]);
+  self setreverb("snd_enveffectsprio_level", var_1["roomtype"], var_1["drylevel"], var_1["wetlevel"], var_1["fadetime"]);
 }
 
 _id_5286() {
@@ -59,8 +59,8 @@ _id_0F2E() {
   var_0 = level._id_1355._id_AA1C;
   var_1 = var_0["spread"];
   var_2 = var_0["radius"];
-  self _meth_8333(0, var_1[0], var_1[1], var_1[2]);
-  self _meth_8334(0, var_2[0], var_2[1], var_2[2]);
+  self setwhizbyspreads(0, var_1[0], var_1[1], var_1[2]);
+  self setwhizbyradii(0, var_2[0], var_2[1], var_2[2]);
 }
 
 _id_8D29(var_0, var_1) {
@@ -80,7 +80,7 @@ _id_8D29(var_0, var_1) {
       var_4 = 1;
   }
 
-  var_6 = _func_0A4(1, 100);
+  var_6 = _randomintrange(1, 100);
   var_7 = level._id_11CB._id_7A31._id_94D7 + level._id_11CB._id_7A31._id_7A30;
 
   if(var_6 <= var_7) {
@@ -103,15 +103,15 @@ _id_8DAE(var_0, var_1) {
 
   if(level.teambased) {
     foreach(var_3 in level.players) {
-      if(isDefined(var_3) && _func_0C3(var_3) && _func_0C3(self) && var_3.team != self.team) {
-        if(_func_344(var_1))
+      if(isDefined(var_3) && _issentient(var_3) && _issentient(self) && var_3.team != self.team) {
+        if(_soundexists(var_1))
           var_3 playlocalsound(var_1);
 
         continue;
       }
 
-      if(isDefined(var_3) && _func_0C3(var_3) && _func_0C3(self) && var_3.team == self.team) {
-        if(_func_344(var_0))
+      if(isDefined(var_3) && _issentient(var_3) && _issentient(self) && var_3.team == self.team) {
+        if(_soundexists(var_0))
           var_3 playlocalsound(var_0);
       }
     }
@@ -131,7 +131,7 @@ _id_8E8B(var_0, var_1, var_2) {
     self waittill(var_1, var_3);
 
     if(isDefined(var_3) && var_3 != "end") {
-      if(_func_0C0(var_0)) {
+      if(_isarray(var_0)) {
         var_4 = var_0[var_3];
 
         if(isDefined(var_4))
@@ -146,15 +146,15 @@ _id_8E8B(var_0, var_1, var_2) {
   }
 }
 
-_id_831E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+setoffhandsecondaryclass(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_4))
     level endon(var_4);
 
-  var_0 _meth_8278(var_1, var_2);
-  thread _id_831F(var_0, var_2, var_3, var_4, var_5, var_6);
+  var_0 scriptmodelplayanimdeltamotion(var_1, var_2);
+  thread getoffhandsecondaryclass(var_0, var_2, var_3, var_4, var_5, var_6);
 }
 
-_id_831F(var_0, var_1, var_2, var_3, var_4, var_5) {
+getoffhandsecondaryclass(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_3))
     level endon(var_3);
 
@@ -174,15 +174,15 @@ _id_831F(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_8321(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+endlocationselection(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_5))
     level endon(var_5);
 
-  var_0 _meth_8278(var_1, var_2);
-  thread _id_8320(var_0, var_2, var_3, var_4, var_5, var_6, var_7);
+  var_0 scriptmodelplayanimdeltamotion(var_1, var_2);
+  thread beginlocationselection(var_0, var_2, var_3, var_4, var_5, var_6, var_7);
 }
 
-_id_8320(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+beginlocationselection(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_4))
     level endon(var_4);
 
@@ -194,7 +194,7 @@ _id_8320(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_0 endon("death");
 
-  if(_func_0C0(var_2)) {
+  if(_isarray(var_2)) {
     var_7 = var_2.size;
 
     for(;;) {
@@ -222,13 +222,13 @@ _id_8DF9(var_0, var_1, var_2) {
   var_4 = [var_0, var_1, var_2];
   var_5[0] = spawn("script_origin", var_3.origin);
   var_5[0] linktosynchronizedparent(var_3);
-  var_5[0] _meth_861D(var_0);
+  var_5[0] playloopsound(var_0);
   var_5[1] = spawn("script_origin", var_3.origin);
   var_5[1] linktosynchronizedparent(var_3);
-  var_5[1] _meth_861D(var_1);
+  var_5[1] playloopsound(var_1);
   var_5[2] = spawn("script_origin", var_3.origin);
   var_5[2] linktosynchronizedparent(var_3);
-  var_5[2] _meth_861D(var_2);
+  var_5[2] playloopsound(var_2);
   var_3 waittill("death");
 
   foreach(var_7 in var_5) {
@@ -269,7 +269,7 @@ _id_8DA8(var_0, var_1, var_2, var_3) {
     var_4 = var_3;
 
   var_5 = spawn("script_origin", var_1);
-  var_5 _meth_861D(var_0);
+  var_5 playloopsound(var_0);
   thread _id_8E89(var_5, var_2, var_4);
   return var_5;
 }
@@ -278,7 +278,7 @@ _id_8E89(var_0, var_1, var_2) {
   level waittill(var_1);
 
   if(isDefined(var_0)) {
-    var_0 _meth_861B(0, var_2);
+    var_0 scalevolume(0, var_2);
     wait(var_2 + 0.05);
     var_0 delete();
   }
@@ -291,7 +291,7 @@ _id_8DCD(var_0) {
     var_0 = 0.1;
 
   for(;;) {
-    _func_18B(level._id_9A0E);
+    _iprintln(level._id_9A0E);
     wait(var_0);
     level._id_9A0E = level._id_9A0E + var_0;
   }

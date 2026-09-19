@@ -52,7 +52,7 @@ on_player_connect() {
   var_0._id_8B33 = 0;
   var_0._id_4DC4 = 0;
   var_0._id_4DC5 = 0;
-  var_0._id_831B = [];
+  var_0.switchtoweaponimmediate = [];
   var_0._id_3036 = 0;
   var_0._id_3034 = 0;
   var_0._id_4B7A = 0;
@@ -78,7 +78,7 @@ on_player_connect() {
   var_0._id_3035 = 0;
   var_0._id_4DE1 = 0;
   var_0._id_8B39 = 0;
-  var_0._id_801D = 0;
+  var_0.isonladder = 0;
   var_0._id_39E6 = 0;
   var_0._id_39E4 = 0;
   level._id_745F = level.players.size;
@@ -185,7 +185,7 @@ zombies_init() {
   level._id_0A41["zombie"]["tesla_delayed_dmg"] = _id_054D::zombietesladelayeddmg;
   zombies_init_generic();
   level._id_0A41["mp_zombie_generic"]["on_damaged"] = ::_id_6BD1;
-  _func_0F8("zombies");
+  _createthreatbiasgroup("zombies");
   level._id_087D = ["s2", "t7", "s1"];
   maps\mp\agents\_scripted_agent_anim_util::_id_5159("mp_zombie_generic");
   level._id_2775 = 0;
@@ -206,7 +206,7 @@ zombies_init() {
   level._id_071D.zombie_vox_attack_hit_prev_time = 0;
   level._id_071D.zombie_vox_attack_hit_wait_time_min = 3;
   level._id_071D.zombie_vox_attack_hit_wait_time_max = 5;
-  level._id_071D.zombie_vox_attack_hit_wait_time = _func_0A4(2, 4);
+  level._id_071D.zombie_vox_attack_hit_wait_time = _randomintrange(2, 4);
   level._id_071D.zombie_vox_attack_hit_req_names = ["attack_hit", "anim_sprint_attack_1", "anim_sprint_attack_2", "anim_sprint_attack_3", "anim_stand_attack_1", "anim_stand_attack_2", "anim_stand_attack_3"];
   level._effect["torso_arm_loss_left"] = loadfx("vfx/blood/dlc_zombie_torso_loss_arm_le");
   level._effect["torso_arm_loss_right"] = loadfx("vfx/blood/dlc_zombie_torso_loss_arm_ri");
@@ -256,7 +256,7 @@ spawnzombiesforteam(var_0, var_1, var_2) {
       playFX(common_scripts\utility::_id_44F5("zombieSpawn"), var_4.origin);
       var_4 editzombiestats();
       var_4.ispassiveexempt = 1;
-      var_4 _id_0547::_id_84CB();
+      var_4 _id_0547::disableoffhandsecondaryweapons();
       level.zombiearray[level.zombiearray.size] = var_4;
       var_4 thread dozombiethings();
 
@@ -269,7 +269,7 @@ spawnzombiesforteam(var_0, var_1, var_2) {
 }
 
 quicksort_hardpoint_dist_compare(var_0, var_1) {
-  return _func_211(var_0.origin, level._id_AC7C.origin) < _func_211(var_1.origin, level._id_AC7C.origin);
+  return _distance2dsquared(var_0.origin, level._id_AC7C.origin) < _distance2dsquared(var_1.origin, level._id_AC7C.origin);
 }
 
 killallzombies() {
@@ -325,7 +325,7 @@ dozombiethings() {
         break;
     }
 
-    wait(_func_0A5(0.5, 2.0));
+    wait(_randomfloatrange(0.5, 2.0));
   }
 }
 
@@ -349,14 +349,14 @@ changezombieallegiance(var_0) {
     return;
   }
   for(var_1 = 0; var_1 < level.zombiearray.size; var_1++) {
-    level.zombiearray[var_1] _meth_842A(level.players);
+    level.zombiearray[var_1] hudoutlinedisableforclients(level.players);
     level.zombiearray[var_1].team = var_0;
 
     foreach(var_3 in level.players) {
       if(var_3.team == var_0) {
         continue;
       }
-      level.zombiearray[var_1] _meth_8427(var_3, 1, 1);
+      level.zombiearray[var_1] hudoutlineenableforclient(var_3, 1, 1);
     }
   }
 }

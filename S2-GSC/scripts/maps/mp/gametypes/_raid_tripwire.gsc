@@ -25,30 +25,30 @@ watch_allow_fire() {
 }
 
 disable_fire() {
-  self _meth_812B(0);
+  self allowfire(0);
 }
 
 enable_fire() {
-  self _meth_812B(1);
+  self allowfire(1);
 }
 
 tripwire_preget_animation_distance() {
   var_0 = (0, 0, 0);
   var_1 = spawn("script_model", var_0);
   var_1 setModel("prop_hus_tripwire_01_sheen_blue");
-  var_1 _meth_805C();
-  var_1 _meth_82C2();
+  var_1 hide();
+  var_1 notsolid();
   var_2 = spawn("script_model", var_0);
   var_2 setModel("tripwire_standing");
-  var_2 _meth_805C();
-  var_2 _meth_82C2();
+  var_2 hide();
+  var_2 notsolid();
   var_3 = spawn("script_model", var_0);
   var_3 setModel("tripwire_standing");
-  var_3 _meth_805C();
-  var_3 _meth_82C2();
-  var_2 _meth_8276("tripwire_standin_anim", "wire", 0.0, 0.01);
-  var_2 _meth_84CA(1);
-  var_3 _meth_8276("tripwire_standin_anim", "wire", 1.0, 1.0);
+  var_3 hide();
+  var_3 notsolid();
+  var_2 scriptmodelplayanim("tripwire_standin_anim", "wire", 0.0, 0.01);
+  var_2 setshadowrendering(1);
+  var_3 scriptmodelplayanim("tripwire_standin_anim", "wire", 1.0, 1.0);
   var_4 = 3.33333;
   wait(var_4);
   var_5 = var_2 gettagorigin("spike");
@@ -69,7 +69,7 @@ check_wall_under_player_reticle_think(var_0, var_1) {
   self endon("disconnect");
   self endon("weapon_change");
   var_4 = (10.9, 0, 0);
-  var_1 _meth_805C();
+  var_1 hide();
   thread watch_allow_fire();
   thread watch_tripwire_preview_cleanup(var_0, var_1);
   var_5 = (0, 0, 0);
@@ -83,17 +83,17 @@ check_wall_under_player_reticle_think(var_0, var_1) {
   for(;;) {
     [var_13, var_14] = get_average_surface_normal_under_player_reticle(192);
 
-    if(!self _meth_83DD() && !self _meth_83B8()) {
+    if(!self issprinting() && !self isjumping()) {
       if(is_normal_a_wall(var_13, var_14, 20)) {
-        var_0 _meth_8005(self);
+        var_0 showtoplayer(self);
 
         if(var_0.model != "prop_hus_tripwire_01_sheen_blue")
           var_0 setModel("prop_hus_tripwire_01_sheen_blue");
 
-        var_1 _meth_8005(self);
-        var_0.angles = _func_110(vectortoangles(var_13), (0, 0, 0));
+        var_1 showtoplayer(self);
+        var_0.angles = _combineangles(vectortoangles(var_13), (0, 0, 0));
         var_0.origin = var_14;
-        var_15 = _func_112(var_4, var_0.angles);
+        var_15 = _rotatevector(var_4, var_0.angles);
         var_2 = var_0.origin + var_15;
         var_1.angles = (0, var_0.angles[1], var_0.angles[2]);
 
@@ -101,7 +101,7 @@ check_wall_under_player_reticle_think(var_0, var_1) {
           var_1.origin = var_2;
         else if(var_0.angles[0] != 0.0) {
           var_16 = (0, var_0.angles[1], 0);
-          var_17 = _func_112(var_4, var_16);
+          var_17 = _rotatevector(var_4, var_16);
           var_18 = var_2 - var_17;
           var_1.origin = var_18;
         } else
@@ -124,7 +124,7 @@ check_wall_under_player_reticle_think(var_0, var_1) {
           var_24 = (var_24[0], var_24[1], var_2[2]);
           var_19 = bulletTrace(var_2, var_24, 0, self);
           var_20 = var_19["position"] - var_2;
-          var_20 = _func_0D9(_func_0DA(var_20[0]) + _func_0DA(var_20[1]));
+          var_20 = _sqrt(_squared(var_20[0]) + _squared(var_20[1]));
         }
 
         if(!var_21 && isDefined(var_19["surfacetype"]) && var_19["surfacetype"] != "none" && var_20 > 30) {
@@ -133,8 +133,8 @@ check_wall_under_player_reticle_think(var_0, var_1) {
           var_25 = var_20 / var_3;
           var_26 = 3.33333;
           var_27 = var_25 * var_26;
-          var_1 _meth_8276("tripwire_standin_anim", "wire", var_27, 0.01);
-          var_1 _meth_84CA(1);
+          var_1 scriptmodelplayanim("tripwire_standin_anim", "wire", var_27, 0.01);
+          var_1 setshadowrendering(1);
           var_5 = var_0.origin;
           var_6 = var_0.angles;
           var_7 = var_1.origin;
@@ -148,8 +148,8 @@ check_wall_under_player_reticle_think(var_0, var_1) {
           if(var_0.model != "prop_hus_tripwire_01_sheen_red")
             var_0 setModel("prop_hus_tripwire_01_sheen_red");
 
-          var_1 _meth_8276("tripwire_standin_anim", "wire", 0, 0.01);
-          var_1 _meth_84CA(1);
+          var_1 scriptmodelplayanim("tripwire_standin_anim", "wire", 0, 0.01);
+          var_1 setshadowrendering(1);
           var_1 _meth_8006(self);
         }
       } else {
@@ -163,17 +163,17 @@ check_wall_under_player_reticle_think(var_0, var_1) {
       var_1 _meth_8006(self);
     }
 
-    if(self _meth_8127() && !self _meth_8128()) {
+    if(self isfiring() && !self ismeleeing()) {
       thread enable_fire();
       self notify("placed_tripwire");
-      var_0 _meth_8005(self);
+      var_0 showtoplayer(self);
 
       if(var_0.model != "prop_hus_tripwire_01_sheen_blue")
         var_0 setModel("prop_hus_tripwire_01_sheen_blue");
 
-      var_1 _meth_8005(self);
-      var_1 _meth_8276("tripwire_standin_anim", "wire", var_11, 0.01);
-      var_1 _meth_84CA(1);
+      var_1 showtoplayer(self);
+      var_1 scriptmodelplayanim("tripwire_standin_anim", "wire", var_11, 0.01);
+      var_1 setshadowrendering(1);
       var_0.origin = var_5;
       var_0.angles = var_6;
       var_1.origin = var_7;
@@ -204,7 +204,7 @@ is_normal_a_wall(var_0, var_1, var_2) {
     return 0;
 
   var_3 = 0;
-  var_4 = _func_0A9(vectorNormalize(var_0)[2]);
+  var_4 = _asin(vectorNormalize(var_0)[2]);
 
   if(var_4 > var_2 || var_4 < -1 * var_2)
     var_3 = 0;
@@ -266,7 +266,7 @@ get_average_surface_normal_at_point(var_0, var_1, var_2) {
   var_8 = [];
   var_5 = var_2 * -1;
   var_3 = (0, 0, 1);
-  var_4 = _func_0E9(var_3, var_2);
+  var_4 = _vectorcross(var_3, var_2);
   var_9 = var_0 + (var_4 + var_3) * 5.0;
   var_10 = 10.0;
   var_11 = 10.0;
@@ -344,13 +344,13 @@ tripwire_place_anywhere_handler(var_0) {
 
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel("prop_hus_tripwire_01_sheen_blue");
-  var_1 _meth_805C();
-  var_1 _meth_8005(self);
-  var_1 _meth_82C2();
+  var_1 hide();
+  var_1 showtoplayer(self);
+  var_1 notsolid();
   var_2 = spawn("script_model", (0, 0, 0));
   var_2 setModel("tripwire_standing_sheen_blue");
-  var_2 _meth_82C2();
-  var_2 _meth_805C();
+  var_2 notsolid();
+  var_2 hide();
   var_3 = check_wall_under_player_reticle_think(var_1, var_2);
   var_4 = var_3[2];
   var_5 = var_3[1] - var_3[0];
@@ -362,26 +362,26 @@ tripwire_place_anywhere_handler(var_0) {
   wait 0.3;
 
   if(1) {
-    var_2 _meth_8277();
+    var_2 scriptmodelclearanim();
     waitframe();
   }
 
-  var_1 _meth_82C1();
+  var_1 solid();
   var_1 setModel("prop_hus_tripwire_01_no_wire");
   var_2 setModel("tripwire_standing");
-  var_1 _meth_805B();
-  var_2 _meth_805B();
+  var_1 show();
+  var_2 show();
   wait 0.03;
-  _func_147(level._effect["trip_wire_dust_on_bomb_plant"], var_1, "TAG_ORIGIN");
+  _playfxontag(level._effect["trip_wire_dust_on_bomb_plant"], var_1, "TAG_ORIGIN");
   var_7 = _id_0380::_id_6842("mp_war_tripwire_impact", undefined, var_1.origin);
 
   if(1) {
-    var_2 _meth_8276("tripwire_plant_anim", "wire", 0, 1);
+    var_2 scriptmodelplayanim("tripwire_plant_anim", "wire", 0, 1);
     var_8 = 0.7;
     wait(var_8 * 0.5);
     var_9 = 0.05;
     var_10 = var_4 - var_9;
-    var_2 _meth_8276("tripwire_idle_anim", "wire", var_10, 0.01, 0);
+    var_2 scriptmodelplayanim("tripwire_idle_anim", "wire", var_10, 0.01, 0);
     wait(var_9);
   }
 
@@ -390,13 +390,13 @@ tripwire_place_anywhere_handler(var_0) {
   var_12 = 2;
   var_2.spikestart = var_11 - var_12 * var_6;
   var_2.spikeend = var_11 + var_12 * var_6;
-  _func_1B5("war_tripwire_impact_fx_mp", var_2.spikestart, var_2.spikeend, self);
+  _magicbullet("war_tripwire_impact_fx_mp", var_2.spikestart, var_2.spikeend, self);
 
   if(1) {
-    var_2 _meth_8277();
+    var_2 scriptmodelclearanim();
     waitframe();
-    var_2 _meth_8276("tripwire_idle_anim", "wire", var_4, 0.01, 0);
-    var_2 _meth_84CA(1);
+    var_2 scriptmodelplayanim("tripwire_idle_anim", "wire", var_4, 0.01, 0);
+    var_2 setshadowrendering(1);
   }
 
   var_13 = _id_0380::_id_6842("mp_war_tripwire_plant", undefined, var_2.origin);
@@ -419,8 +419,8 @@ tripwire_place_anywhere_placed_handler(var_0, var_1, var_2) {
   var_6 = spawn("trigger_box", var_0[0], 0, (2, 2, var_5));
   var_7 = var_4 * -1;
   var_8 = (0, 0, 1);
-  var_9 = _func_0E9(var_8, var_7);
-  var_10 = _func_0EA(var_8, var_9, var_7);
+  var_9 = _vectorcross(var_8, var_7);
+  var_10 = _axistoangles(var_8, var_9, var_7);
   var_6.angles = var_10;
   var_1._id_9D65 = var_6;
   level.tripwireplantedmodels = common_scripts\utility::_id_0F6F(level.tripwireplantedmodels, var_1);
@@ -458,7 +458,7 @@ tripwire_trigger_wire(var_0, var_1) {
   if(!isDefined(var_3))
     var_3 = "none";
 
-  while(!isDefined(var_2) && !isDefined(var_2.team) || isDefined(var_2) && !_func_031(var_2) && isDefined(var_2.team) && var_2.team == var_3 || _func_031(var_2) && var_2 != "explode")
+  while(!isDefined(var_2) && !isDefined(var_2.team) || isDefined(var_2) && !_isstring(var_2) && isDefined(var_2.team) && var_2.team == var_3 || _isstring(var_2) && var_2 != "explode")
     var_1 waittill("trigger", var_2);
 
   var_0 notify("tripwire_triggered", "player");
@@ -540,7 +540,7 @@ tripwire_disarm(var_0) {
   self endon("joined_spectators");
   var_0 endon("tripwire_triggered");
   var_0 makeusable();
-  var_0 _meth_80CE(&"RAIDS_TRIPWIRE_DISARM");
+  var_0 sethintstring(&"RAIDS_TRIPWIRE_DISARM");
   thread disarm_enable_use_watcher(var_0);
 
   for(;;) {
@@ -556,7 +556,7 @@ tripwire_disarm(var_0) {
 }
 
 tripwire_detonate(var_0) {
-  var_0 _meth_81D5(var_0.origin, 200, 200, 50, self, "MOD_EXPLOSIVE", "war_tripwire_mp");
+  var_0 radiusdamage(var_0.origin, 200, 200, 50, self, "MOD_EXPLOSIVE", "war_tripwire_mp");
   playFX(common_scripts\utility::_id_44F5("trip_wire_exposion"), var_0.origin);
   _id_0380::_id_6842("mp_war_bomb_explo", undefined, var_0.origin);
   var_0 notify("tripwire_delete");
@@ -590,9 +590,9 @@ tripwire_spawn_damage_trigger(var_0) {
   self endon("joined_spectators");
   var_0 endon("tripwire_defused");
   var_0 endon("tripwire_triggered");
-  var_0 _meth_82C3(1);
+  var_0 setcandamage(1);
   var_0.maxhealth = 100000;
-  var_0 _meth_8058(self.maxhealth);
+  var_0 setnormalhealth(self.maxhealth);
   var_0 waittill("damage");
   var_0 notify("tripwire_triggered", "damage");
 }
@@ -605,6 +605,6 @@ setuptripwirekillcament(var_0) {
   var_4 setModel("tag_origin");
   var_5 = var_0.origin - var_3["position"];
   var_4.angles = vectortoangles(var_5);
-  var_4 _meth_834D("explosive");
+  var_4 setscriptmoverkillcam("explosive");
   self._id_5A2C = var_4;
 }

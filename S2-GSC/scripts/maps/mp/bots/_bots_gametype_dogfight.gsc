@@ -8,7 +8,7 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::bot_dogfight_think;
+  level.bot_funcs["gametype_think"] = ::bot_dogfight_think;
 }
 
 bot_dogfight_think() {}

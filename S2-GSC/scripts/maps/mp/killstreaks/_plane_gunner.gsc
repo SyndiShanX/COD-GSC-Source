@@ -44,7 +44,7 @@ _id_9081(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_8 setModel(var_8._id_39C8);
   var_8 thread _id_0527::_id_39C6(var_9, 0.5);
-  var_8 _meth_8276("ks_plane_gunner_usa");
+  var_8 scriptmodelplayanim("ks_plane_gunner_usa");
   var_8._id_5C2F = gettime();
   var_8 thread _id_0527::_id_2818();
   var_8 thread _id_0527::_id_4ACE();
@@ -74,7 +74,7 @@ _id_9081(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(getdvarint("311"))
     var_1 maps\mp\_utility::setthirdpersondof(0);
 
-  var_1 _meth_82FF("ui_plane_gunner_reloading", 0);
+  var_1 setclientomnvar("ui_plane_gunner_reloading", 0);
   var_1 thread _id_0526::_id_8A61(0.05, level._id_5A7C, level._id_5A6B);
   _id_0526::_id_A232(1);
   var_1 _meth_80AA();
@@ -91,8 +91,8 @@ _id_9081(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_8._id_01C8 = var_5;
   _id_0527::_id_09E1(var_8);
-  var_8 _meth_82C3(1);
-  var_8 _meth_82C4(1);
+  var_8 setcandamage(1);
+  var_8 setcanradiusdamage(1);
   var_8 thread maps\mp\gametypes\_damage::_id_8676(_id_0527::_id_4612(var_5), undefined, ::_id_6B6A, ::_id_6B69, 1);
   var_8 thread _id_4AB8(var_1);
   var_8 thread _id_701A(var_1);
@@ -187,7 +187,7 @@ _id_702D(var_0, var_1, var_2) {
 
   var_6 = 2;
   wait(var_5 - var_6);
-  self _meth_82BB(-10, var_6, var_6 / 2, var_6 / 2);
+  self rotateroll(-10, var_6, var_6 / 2, var_6 / 2);
   self._id_5683 = 1;
   wait(var_6);
   self._id_5683 = undefined;
@@ -198,13 +198,13 @@ _id_702D(var_0, var_1, var_2) {
   var_9 = var_8 * 3000;
 
   if(var_3)
-    var_10 = _func_0AE(var_9 / 475);
+    var_10 = _abs(var_9 / 475);
   else
-    var_10 = _func_0AE(var_9 / 750);
+    var_10 = _abs(var_9 / 750);
 
-  self._id_9E9F _meth_83E5((0, 180, 0), var_10);
+  self._id_9E9F rotateby((0, 180, 0), var_10);
   wait(var_10);
-  self _meth_8057();
+  self unlink();
   self._id_9E9F delete();
 
   if(var_3)
@@ -212,7 +212,7 @@ _id_702D(var_0, var_1, var_2) {
   else
     var_5 = _id_703E(var_1[1], -6375.0, 750);
 
-  self _meth_82BB(10, var_6, var_6 / 2, var_6 / 2);
+  self rotateroll(10, var_6, var_6 / 2, var_6 / 2);
   self._id_5683 = 1;
   wait(var_6);
   self._id_5683 = undefined;
@@ -252,10 +252,10 @@ _id_705D() {
   while(isDefined(self._id_5683))
     waitframe();
 
-  if(self _meth_806F()) {
-    self _meth_8057();
+  if(self islinked()) {
+    self unlink();
     var_0 = 2;
-    self _meth_82BB(10, var_0, var_0 / 2, var_0 / 2);
+    self rotateroll(10, var_0, var_0 / 2, var_0 / 2);
   }
 
   if(isDefined(self._id_9E9F))
@@ -267,9 +267,9 @@ _id_705D() {
 _id_703E(var_0, var_1, var_2) {
   self endon("planeBomberOutOfAmmo");
   var_3 = self.origin;
-  var_4 = (var_3[0] + var_1 * _func_0A7(var_0), var_3[1] + var_1 * _func_0A6(var_0), var_3[2]);
-  var_5 = _func_0AE(var_1 / var_2);
-  self _meth_82B1(var_4, var_5);
+  var_4 = (var_3[0] + var_1 * _cos(var_0), var_3[1] + var_1 * _sin(var_0), var_3[2]);
+  var_5 = _abs(var_1 / var_2);
+  self moveto(var_4, var_5);
   return var_5;
 }
 
@@ -283,12 +283,12 @@ _id_4610() {
 _id_44E7(var_0, var_1, var_2) {
   var_3 = 6750.0;
   var_4 = 3000;
-  var_5 = var_0 - _func_112((var_3, var_4, 0), var_1);
+  var_5 = var_0 - _rotatevector((var_3, var_4, 0), var_1);
   var_5 = (var_5[0], var_5[1], var_2);
   return var_5;
 }
 
-_id_83B9(var_0, var_1) {
+ishighjumping(var_0, var_1) {
   self endon("stop_location_selection");
 
   if(!isDefined(level._id_5FF0))
@@ -300,8 +300,8 @@ _id_83B9(var_0, var_1) {
     var_2 = var_2 * 1.5;
 
   var_3 = 1;
-  self _meth_82FF("ui_map_location_num_planes", 1);
-  self _meth_82FF("ui_map_location_height", _id_4610());
+  self setclientomnvar("ui_map_location_num_planes", 1);
+  self setclientomnvar("ui_map_location_height", _id_4610());
   maps\mp\_utility::_id_05D4(var_1, "map_artillery_selector", var_3, var_2, 0.5);
   thread _id_0527::_id_A68F();
   var_4 = undefined;
@@ -314,17 +314,17 @@ _id_83B9(var_0, var_1) {
     if(_id_0527::_id_A272(var_7, var_8, self, var_1)) {
       var_4 = var_7;
       var_5 = var_8;
-      self _meth_82FF("ui_map_location_use_carepackages", 0);
-      self _meth_82FF("ui_map_location_num_planes", 0);
-      self _meth_82FF("ui_map_location_height", 0);
+      self setclientomnvar("ui_map_location_use_carepackages", 0);
+      self setclientomnvar("ui_map_location_num_planes", 0);
+      self setclientomnvar("ui_map_location_height", 0);
       break;
     } else
       thread _id_0527::_id_8BEE();
   }
 
-  self _meth_82DD(0, 0.3);
+  self setblurforplayer(0, 0.3);
   self notify("location_selection_complete");
-  self _meth_82FF("ui_map_location_blocked", 0);
+  self setclientomnvar("ui_map_location_blocked", 0);
   return _id_329A(var_0, var_1, var_4, var_5);
 }
 
@@ -336,7 +336,7 @@ _id_2BD1(var_0, var_1) {
   if(var_3.size)
     var_4 = _id_050D::_id_3B89(var_3[0].origin, var_3[1].origin);
 
-  var_5 = var_4 + _func_112((-1000, 0, 0), (0, var_2, 0));
+  var_5 = var_4 + _rotatevector((-1000, 0, 0), (0, var_2, 0));
 
   if(maps\mp\_utility::_id_4571() == "mp_airship")
     var_5 = (-168, 100, 128);
@@ -529,7 +529,7 @@ _id_63D9(var_0, var_1) {
   var_1 notify("StopWaitForDisconnect");
   var_1 notify("StopWaitForFireBombsCommand");
   var_1 notify("StopWaitForChangeTeams");
-  var_1 _meth_82FF("ui_plane_gunner_phase", 0);
+  var_1 setclientomnvar("ui_plane_gunner_phase", 0);
 
   if(isDefined(var_1))
     var_1 _id_7CF2(var_0);
@@ -544,12 +544,12 @@ _id_7CF3(var_0, var_1) {
   var_1._id_701E = 0;
 
   if(!isbot(var_1)) {
-    var_1 _meth_82E1("ExitButtonDown", "+activate");
-    var_1 _meth_82E1("ExitButtonUp", "-activate");
+    var_1 notifyonplayercommand("ExitButtonDown", "+activate");
+    var_1 notifyonplayercommand("ExitButtonUp", "-activate");
   }
 
-  var_1 _meth_82E1("ExitButtonDown", "+usereload");
-  var_1 _meth_82E1("ExitButtonUp", "-usereload");
+  var_1 notifyonplayercommand("ExitButtonDown", "+usereload");
+  var_1 notifyonplayercommand("ExitButtonUp", "-usereload");
 
   for(;;) {
     var_1 waittill("ExitButtonDown");
@@ -590,27 +590,27 @@ _id_7CF2(var_0) {
   level._id_7019 = undefined;
 
   if(!isbot(self)) {
-    self _meth_84A7("ExitButtonDown", "+activate");
-    self _meth_84A7("ExitButtonUp", "-activate");
+    self notifyonplayercommandremove("ExitButtonDown", "+activate");
+    self notifyonplayercommandremove("ExitButtonUp", "-activate");
   }
 
-  self _meth_84A7("ExitButtonDown", "+usereload");
-  self _meth_84A7("ExitButtonUp", "-usereload");
+  self notifyonplayercommandremove("ExitButtonDown", "+usereload");
+  self notifyonplayercommandremove("ExitButtonUp", "-usereload");
 
   if(isDefined(var_0._id_7039))
-    self _meth_80E0(var_0._id_7039);
+    self remotecontrolturretoff(var_0._id_7039);
 
-  self _meth_8323();
+  self enableweapons();
   var_1 = maps\mp\_utility::_id_454A("plane_gunner");
   self takeweapon(var_1);
   self takeweapon("turretweapon_plane_gunner_turret_mp");
   self takeweapon("turretweapon_plane_gunner_turret_grenadier_mp");
-  self _meth_8057();
+  self unlink();
 
   if(maps\mp\_utility::isusingremote())
     maps\mp\_utility::clearusingremote();
 
-  self _meth_82FF("ui_plane_gunner_phase", 0);
+  self setclientomnvar("ui_plane_gunner_phase", 0);
 
   if(maps\mp\gametypes\_hostmigration::_id_A782() > 0)
     self switchtoweapon(common_scripts\utility::_id_4550());
@@ -625,7 +625,7 @@ _id_7445(var_0) {
     var_0 = 1;
 
   maps\mp\_utility::freezecontrolswrapper(1);
-  self _meth_82FF("fov_scale", 1.0);
+  self setclientomnvar("fov_scale", 1.0);
 
   if(var_0) {
     wait 0.5;
@@ -635,7 +635,7 @@ _id_7445(var_0) {
   self _meth_80AB();
   self notify("clearAerialKillstreakMarkers");
   self _meth_84B6();
-  self _meth_81E3();
+  self cameraunlink();
   maps\mp\_utility::freezecontrolswrapper(0);
 
   if(maps\mp\_utility::isusingremote())
@@ -644,7 +644,7 @@ _id_7445(var_0) {
   if(getdvarint("311"))
     maps\mp\_utility::setthirdpersondof(1);
 
-  self _meth_8518(1);
+  self enablereload(1);
   _id_0526::_id_7D04(0);
   _id_0526::_id_A232(0);
   maps\mp\_utility::_id_7447();
@@ -655,7 +655,7 @@ _id_4D17() {
   if(!maps\mp\_utility::isreallyalive(self)) {
     self waittill("spawned");
     waitframe();
-    self _meth_82FF("ui_plane_gunner_phase", 0);
+    self setclientomnvar("ui_plane_gunner_phase", 0);
   }
 }
 
@@ -679,14 +679,14 @@ _id_A68D(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   wait(var_0);
-  self _meth_8518(0);
+  self enablereload(0);
 }
 
 _id_9083(var_0, var_1, var_2, var_3) {
-  var_4 = _func_016("misc_turret", self gettagorigin(var_2), var_0, 0);
+  var_4 = _spawnturret("misc_turret", self gettagorigin(var_2), var_0, 0);
   var_4 setModel(var_1);
-  var_4 _meth_85A9(0, 0);
-  var_4 _meth_8055(self, var_2, (0, 4, 4), (0, 0, 0));
+  var_4 setdefaultdroppitch(0, 0);
+  var_4 linkto(self, var_2, (0, 4, 4), (0, 0, 0));
   var_4._id_0117 = var_3;
   var_4.team = var_3.team;
   var_4.health = 99999;
@@ -694,16 +694,16 @@ _id_9083(var_0, var_1, var_2, var_3) {
   var_4._id_006A = 0;
   var_4._id_94B9 = 0;
   var_4._id_94BB = 0.0;
-  var_4 _meth_82C3(0);
-  var_4 _meth_82C4(0);
-  var_4 _meth_806C("sentry_manual");
-  var_4 _meth_80F9(var_3);
-  var_4 _meth_80FB(0);
+  var_4 setcandamage(0);
+  var_4 setcanradiusdamage(0);
+  var_4 setmode("sentry_manual");
+  var_4 setsentryowner(var_3);
+  var_4 setturretminimapvisible(0);
   var_4._id_2210 = self;
   var_4._id_7C29 = 0;
   var_4._id_3981 = spawn("script_model", var_4.origin);
   var_4._id_3981 setModel("usa_bomber_b17_ballturret_vista");
-  var_4._id_3981 _meth_8055(var_4, "TAG_ROLL", (-9, 0, 0), (0, 90, 0));
+  var_4._id_3981 linkto(var_4, "TAG_ROLL", (-9, 0, 0), (0, 90, 0));
   var_4._id_3981 _meth_8006(var_3);
   return var_4;
 }
@@ -719,46 +719,46 @@ _id_703A(var_0, var_1) {
 _id_9082() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 _meth_8055(self, "tag_bombardier", (0, 0, 0), (80, 180, 0));
+  var_0 linkto(self, "tag_bombardier", (0, 0, 0), (80, 180, 0));
   var_0._id_7C29 = 0;
   return var_0;
 }
 
 _id_86FA(var_0, var_1, var_2, var_3) {
-  var_1 _meth_8057();
-  var_1 _meth_81E3();
+  var_1 unlink();
+  var_1 cameraunlink();
   var_4 = vectortoangles(level._id_5FEB - var_0.origin);
   var_5 = -60;
   var_6 = -60;
 
   if(var_2 == "machine_gun") {
     if(getdvarint("trailer_plane_gunner_height", -1) != -1)
-      var_1 _meth_8079(var_0._id_7039, "tag_player", 1.0, 85, 85, 0, 80, 0);
+      var_1 playerlinkweaponviewtodelta(var_0._id_7039, "tag_player", 1.0, 85, 85, 0, 80, 0);
     else
-      var_1 _meth_8079(var_0._id_7039, "tag_player", 1.0, 75, 75, -32, 80, 0);
+      var_1 playerlinkweaponviewtodelta(var_0._id_7039, "tag_player", 1.0, 75, 75, -32, 80, 0);
 
-    var_1 _meth_80DF(var_0._id_7039, var_5, var_6);
-    var_1 _meth_8094(0);
-    var_1 _meth_8095(1);
+    var_1 remotecontrolturret(var_0._id_7039, var_5, var_6);
+    var_1 playerlinkedsetviewznear(0);
+    var_1 playerlinkedsetusebaseangleforviewclamp(1);
 
     if(getdvarint("5270", 1))
-      var_1 _meth_82FF("ui_plane_gunner_phase", 1);
+      var_1 setclientomnvar("ui_plane_gunner_phase", 1);
 
-    var_1 _meth_82FF("ui_plane_gunner_phase_end_time", gettime() + 30000);
+    var_1 setclientomnvar("ui_plane_gunner_phase_end_time", gettime() + 30000);
   } else if(var_2 == "bomber") {
     if(var_1 maps\mp\_utility::isusingremote() && isDefined(var_0._id_7039))
-      var_1 _meth_80E0(var_0._id_7039);
+      var_1 remotecontrolturretoff(var_0._id_7039);
 
     var_1 maps\mp\_utility::freezecontrolswrapper(1);
-    var_1 _meth_81E2(var_0._id_7037, "tag_origin");
+    var_1 cameralinkto(var_0._id_7037, "tag_origin");
     var_0._id_7037._id_0D95 = 7;
     var_1 notify("clearAerialKillstreakMarkers");
 
     if(getdvarint("5270", 1))
-      var_1 _meth_82FF("ui_plane_gunner_phase", 2);
+      var_1 setclientomnvar("ui_plane_gunner_phase", 2);
 
-    var_1 _meth_82FF("ui_plane_gunner_phase_end_time", gettime() + 13200);
-    var_1 _meth_82FF("ui_plane_gunner_ammo", var_0._id_7037._id_0D95);
+    var_1 setclientomnvar("ui_plane_gunner_phase_end_time", gettime() + 13200);
+    var_1 setclientomnvar("ui_plane_gunner_ammo", var_0._id_7037._id_0D95);
   }
 
   var_0._id_9FA4 = var_2;
@@ -768,11 +768,11 @@ _id_3C19(var_0, var_1) {
   var_1 endon("disconnect");
   level endon("game_ended");
   var_1 endon("StopWaitForFireBombsCommand");
-  var_1 _meth_82E1("FirePlaneGunnerBombsButtonDown", "+attack");
-  var_1 _meth_82E1("FirePlaneGunnerBombsButtonUp", "-attack");
+  var_1 notifyonplayercommand("FirePlaneGunnerBombsButtonDown", "+attack");
+  var_1 notifyonplayercommand("FirePlaneGunnerBombsButtonUp", "-attack");
   var_0._id_18C8 = spawn("script_model", (0, 0, 0));
   var_0._id_18C8 setModel("tag_origin");
-  var_0._id_18C8 _meth_8055(var_0, "tag_bombardier", (0, 0, 0), (0, 0, 0));
+  var_0._id_18C8 linkto(var_0, "tag_bombardier", (0, 0, 0), (0, 0, 0));
 
   for(;;) {
     var_1 waittill("FirePlaneGunnerBombsButtonDown");
@@ -799,11 +799,11 @@ _id_92CD(var_0, var_1) {
     for(;;) {
       if(!var_0._id_7037._id_7C29 && var_0._id_7037._id_0D95 > 0) {
         var_0._id_7037._id_0D95--;
-        var_1 _meth_82FF("ui_plane_gunner_ammo", var_0._id_7037._id_0D95);
+        var_1 setclientomnvar("ui_plane_gunner_ammo", var_0._id_7037._id_0D95);
         var_2 = var_0._id_7037.origin;
 
         for(var_3 = -3; var_3 < 4; var_3++) {
-          var_4 = (var_2[0] + 256 * var_3 * _func_0A7(var_0.angles[1] + 90), var_2[1] + 256 * var_3 * _func_0A6(var_0.angles[1] + 90), var_2[2]);
+          var_4 = (var_2[0] + 256 * var_3 * _cos(var_0.angles[1] + 90), var_2[1] + 256 * var_3 * _sin(var_0.angles[1] + 90), var_2[2]);
           var_0 thread _id_3C18(var_4, var_1, 256, 1, var_3 == 0, var_3 + 3);
         }
 
@@ -831,9 +831,9 @@ _id_A694(var_0, var_1) {
   level endon("game_ended");
   var_1 endon("StopWaitForFireBombsCommand");
   var_0._id_7037._id_7C29 = 1;
-  var_1 _meth_82FF("ui_plane_gunner_reloading", 1);
+  var_1 setclientomnvar("ui_plane_gunner_reloading", 1);
   wait 0.45;
-  var_1 _meth_82FF("ui_plane_gunner_reloading", 0);
+  var_1 setclientomnvar("ui_plane_gunner_reloading", 0);
   var_0._id_7037._id_7C29 = 0;
 }
 
@@ -866,7 +866,7 @@ _id_3C18(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_6 = (0, randomint(360), 0);
-  var_7 = var_0 + anglesToForward(var_6) * (var_2 / 2 + _func_0A3(var_2 / 2));
+  var_7 = var_0 + anglesToForward(var_6) * (var_2 / 2 + _randomfloat(var_2 / 2));
   var_8 = bulletTrace(var_7, var_7 + (0, 0, -10000), 0, self);
   var_9 = var_8["position"];
   var_10 = distance(var_0, var_9);
@@ -886,23 +886,23 @@ _id_3C18(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_4)
     level thread _id_050A::_id_938E(var_9);
 
-  var_1 _meth_81D5(var_9, 1000, 500, 75, var_1, "MOD_EXPLOSIVE", "plane_gunner_bomber_projectile_mp");
+  var_1 radiusdamage(var_9, 1000, 500, 75, var_1, "MOD_EXPLOSIVE", "plane_gunner_bomber_projectile_mp");
 }
 
 _id_316F(var_0, var_1) {
   var_1 endon("disconnect");
   var_1 endon("player_exit");
   var_0 endon("death");
-  var_1 _meth_84B4();
-  var_1 _meth_84B7(10, 7000, 20, 20);
+  var_1 enablephysicaldepthoffieldscripting();
+  var_1 setphysicaldepthoffield(10, 7000, 20, 20);
 }
 
 _id_6B69(var_0, var_1, var_2, var_3) {
   if(isDefined(level._id_7019) && isDefined(level._id_7019._id_0117)) {
     if(var_2 == "MOD_PROJECTILE")
-      _func_17F(1.25, 0.75, level._id_7019.origin, 400, level._id_7019._id_0117);
+      _earthquake(1.25, 0.75, level._id_7019.origin, 400, level._id_7019._id_0117);
     else
-      _func_17F(0.15, 0.5, level._id_7019.origin, 400, level._id_7019._id_0117);
+      _earthquake(0.15, 0.5, level._id_7019.origin, 400, level._id_7019._id_0117);
   }
 
   return _id_0527::_id_6B9C(var_0, var_1, var_2, var_3);

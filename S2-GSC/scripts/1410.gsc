@@ -66,7 +66,7 @@ _id_7788(var_0, var_1) {
   if(var_2 _id_55EF(var_0, var_1)) {
     var_1._id_4B2A = 1;
     var_2._id_5560 = 1;
-    var_3 = _id_0580::_id_8317(var_0, var_1.player, ::_id_5995, _id_4324());
+    var_3 = _id_0580::getcurrentprimaryweapon(var_0, var_1.player, ::_id_5995, _id_4324());
     var_2 thread _id_0547::_id_7D1A("tesla_shock", [var_3], 4);
     level._id_94DA = var_2.origin;
     level._id_94DB = _id_0580::_id_4385();
@@ -79,7 +79,7 @@ _id_7788(var_0, var_1) {
 _id_94DC(var_0) {
   var_1 = self;
   var_1 endon("death");
-  var_1 _meth_8398(var_0);
+  var_1 scragentsetgoalentity(var_0);
   var_1._id_2A97 = var_0;
   var_0._id_5561 = 1;
   self._id_2A97 waittill("death");
@@ -103,7 +103,7 @@ _id_5995(var_0) {
   var_1 = self;
   var_1 endon("death");
   var_1 thread _id_5994(var_0);
-  _func_147(common_scripts\utility::_id_44F5("death_sticky"), var_1, "j_neck");
+  _playfxontag(common_scripts\utility::_id_44F5("death_sticky"), var_1, "j_neck");
   var_2 = 0;
 
   while(!var_2) {
@@ -154,7 +154,7 @@ _id_5995(var_0) {
         break;
       }
 
-      var_1 _meth_8398(var_1._id_2A97);
+      var_1 scragentsetgoalentity(var_1._id_2A97);
 
       if(distance(var_1.origin, var_1._id_2A97.origin) < _id_418B())
         var_2 = 1;

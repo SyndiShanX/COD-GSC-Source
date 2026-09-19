@@ -65,10 +65,10 @@ _id_A13E(var_0) {
   if(!var_2)
     _id_A13D(var_1);
 
-  self _meth_82FF("ui_killcam_killsOfPlayer", self.pers["killcam"]["killsOfCount"][var_1]);
-  self _meth_82FF("ui_killcam_killsByPlayer", self.pers["killcam"]["killsByCount"][var_1]);
-  self _meth_82FF("ui_killcam_isFriendlyFire", var_2);
-  self _meth_82FF("ui_killcam_isNemesis", self.pers["killcam"]["IsNemesis"]);
+  self setclientomnvar("ui_killcam_killsOfPlayer", self.pers["killcam"]["killsOfCount"][var_1]);
+  self setclientomnvar("ui_killcam_killsByPlayer", self.pers["killcam"]["killsByCount"][var_1]);
+  self setclientomnvar("ui_killcam_isFriendlyFire", var_2);
+  self setclientomnvar("ui_killcam_isNemesis", self.pers["killcam"]["IsNemesis"]);
 }
 
 _id_A128(var_0, var_1) {

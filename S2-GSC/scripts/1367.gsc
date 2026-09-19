@@ -15,13 +15,13 @@ _id_786C() {
   if(1) {
     var_0 = _id_0547::getzombiemapsetting("QuestHintTable");
     level.questhinttablepath = var_0;
-    var_1 = _func_27B(var_0);
-    var_2 = _func_27A(var_0);
+    var_1 = _tablegetcolumncount(var_0);
+    var_2 = _tablegetrowcount(var_0);
     level._id_ABEF = [];
     var_3 = 0;
 
     for(var_4 = 0; var_4 < var_2; var_4++) {
-      var_5 = _func_1B0(var_0, var_4, var_3);
+      var_5 = _tablelookupistringbyrow(var_0, var_4, var_3);
       level._id_ABEF[var_4] = var_5;
     }
 
@@ -89,7 +89,7 @@ _id_782F(var_0, var_1, var_2) {
   var_3._id_2AF8 = var_2;
 
   if(isDefined(var_1)) {
-    if(!_func_0C0(var_1))
+    if(!_isarray(var_1))
       var_1 = [var_1];
 
     foreach(var_5 in var_1) {
@@ -150,7 +150,7 @@ _id_781E(var_0, var_1, var_2, var_3, var_4) {
   var_6._id_A09A = var_2;
   var_6._id_00D4 = var_5._id_939C.size;
   var_6._id_4DAC = var_4;
-  var_6._id_9399 = common_scripts\utility::_id_98E7(_func_0C0(var_3), var_3, [var_3]);
+  var_6._id_9399 = common_scripts\utility::_id_98E7(_isarray(var_3), var_3, [var_3]);
   var_5._id_939C[var_6._id_00D4] = var_6;
   common_scripts\utility::flag_init(_id_7838(var_0, var_1));
 }
@@ -673,14 +673,14 @@ _id_5F3D(var_0) {
   for(var_2 = 0; var_2 < var_1; var_2++) {
     var_3 = level._id_7874[var_2];
     var_4 = _id_5F3B(var_3._id_3007, var_3._id_8BDE);
-    var_0 _meth_82FF("ui_zm_quest_hint_" + var_2, var_4);
+    var_0 setclientomnvar("ui_zm_quest_hint_" + var_2, var_4);
     var_5 = _id_5F3B(var_3._id_3008, var_3._id_8BE1);
-    var_0 _meth_82FF("ui_zm_step_hint_" + var_2, var_5);
+    var_0 setclientomnvar("ui_zm_step_hint_" + var_2, var_5);
   }
 
   while(var_2 < 3) {
-    var_0 _meth_82FF("ui_zm_quest_hint_" + var_2, 0);
-    var_0 _meth_82FF("ui_zm_step_hint_" + var_2, 0);
+    var_0 setclientomnvar("ui_zm_quest_hint_" + var_2, 0);
+    var_0 setclientomnvar("ui_zm_step_hint_" + var_2, 0);
     var_2++;
   }
 
@@ -737,7 +737,7 @@ _id_A8DC(var_0) {
   var_0 endon("disconnect");
   var_0._id_5602 = 0;
   var_1 = "on togglescore";
-  var_0 _meth_82E1(var_1, "togglescores");
+  var_0 notifyonplayercommand(var_1, "togglescores");
   level thread _id_A8D6(var_0);
 
   for(;;) {
@@ -784,7 +784,7 @@ _id_5F3C() {
 }
 
 _id_5642(var_0) {
-  if(_func_279(var_0) || !isDefined(var_0))
+  if(_isremovedentity(var_0) || !isDefined(var_0))
     return 0;
 
   return 1;
@@ -813,7 +813,7 @@ _id_783A(var_0, var_1) {
     if(var_6._id_6F47[var_2] != 1) {
       continue;
     }
-    var_6 _meth_8427(var_0, var_3, !var_4);
+    var_6 hudoutlineenableforclient(var_0, var_3, !var_4);
   }
 
   if(!isDefined(var_1._id_6925[var_2]))
@@ -830,14 +830,14 @@ _id_783A(var_0, var_1) {
     var_9 notify("gain_ownership");
     var_9._id_5578 = 0;
   } else {
-    var_9 = _func_19B(var_0);
+    var_9 = _newclienthudelem(var_0);
     var_9 setshader("objpoint_default", 1, 1);
     var_9.alpha = 0;
     var_9.color = (1, 1, 1);
     var_9.x = var_1._id_6C17[0];
     var_9.y = var_1._id_6C17[1];
     var_9._id_01D9 = var_1._id_6C17[2];
-    var_9 _meth_80CB(0, 1, 0);
+    var_9 setwaypoint(0, 1, 0);
     var_8._id_A98D = var_9;
   }
 
@@ -854,7 +854,7 @@ _id_A98E(var_0, var_1) {
 
   for(;;) {
     wait 0.1;
-    var_5 = _func_0E1(var_1._id_6C17, var_0.origin);
+    var_5 = _distance2d(var_1._id_6C17, var_0.origin);
     var_6 = 0.9;
 
     if(common_scripts\utility::_id_562E(var_2._id_5578) || var_5 < var_3 || var_5 > var_4)
@@ -901,7 +901,7 @@ _id_783C(var_0, var_1, var_2) {
     if(var_5._id_6F47[var_3]) {
       continue;
     }
-    var_5 _meth_8428(var_0);
+    var_5 hudoutlinedisableforclient(var_0);
   }
 
   level thread _id_783B(var_0, var_1, var_2);
@@ -990,7 +990,7 @@ _id_4BCB(var_0) {
 }
 
 _id_4BC8(var_0) {
-  var_1 = common_scripts\utility::_id_98E7(_func_0C0(var_0), var_0, [var_0]);
+  var_1 = common_scripts\utility::_id_98E7(_isarray(var_0), var_0, [var_0]);
 
   foreach(var_3 in var_1) {
     if(common_scripts\utility::_id_3C77(var_3)) {
@@ -1066,7 +1066,7 @@ quest_omnvar_mark_completed(var_0, var_1) {
     var_2.questprogressbitfield[var_3] = var_2.questprogressbitfield[var_3] &~(1 << var_4);
 
   var_5 = "ui_zm_has_quest_item_bits_" + var_3;
-  self _meth_82FF(var_5, var_2.questprogressbitfield[var_3]);
+  self setclientomnvar(var_5, var_2.questprogressbitfield[var_3]);
 }
 
 quest_omnvar_handle_player_respawn() {
@@ -1078,7 +1078,7 @@ quest_omnvar_handle_player_respawn() {
 
     for(var_1 = 0; var_1 < var_0.questprogressbitfield.size; var_1++) {
       var_2 = "ui_zm_has_quest_item_bits_" + var_1;
-      var_0 _meth_82FF(var_2, var_0.questprogressbitfield[var_1]);
+      var_0 setclientomnvar(var_2, var_0.questprogressbitfield[var_1]);
     }
   }
 }
@@ -1088,7 +1088,7 @@ _id_23DB(var_0, var_1) {
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = var_0 + var_3;
-    self _meth_82FF(var_4, 0);
+    self setclientomnvar(var_4, 0);
   }
 }
 
@@ -1096,14 +1096,14 @@ _id_8650(var_0, var_1, var_2) {
   var_3 = int(var_1 / 23);
   var_4 = var_1 - var_3 * 23;
   var_5 = var_0 + var_3;
-  var_6 = self _meth_844A(var_5);
+  var_6 = self getclientomnvar(var_5);
 
   if(var_2)
     var_6 = var_6 | 1 << var_4;
   else
     var_6 = var_6 &~(1 << var_4);
 
-  self _meth_82FF(var_5, var_6);
+  self setclientomnvar(var_5, var_6);
 }
 
 manage_mtx5_event() {

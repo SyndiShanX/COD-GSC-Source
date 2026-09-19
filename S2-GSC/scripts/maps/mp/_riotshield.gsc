@@ -20,7 +20,7 @@ _id_A9C9(var_0) {
   if(!isDefined(level._id_7E95))
     return 0;
 
-  var_1 = _func_05F(var_0);
+  var_1 = _getweaponbasename(var_0);
 
   if(!isDefined(var_1))
     var_1 = var_0;
@@ -56,10 +56,10 @@ _id_A118(var_0, var_1) {
   self._id_14EA = undefined;
 
   if(!isDefined(var_0))
-    var_0 = self _meth_8317();
+    var_0 = self getcurrentprimaryweapon();
 
   if(_id_A9C9(var_0)) {
-    self._id_3EF6 = _func_041(var_0);
+    self._id_3EF6 = _getweaponmodel(var_0);
 
     if(isDefined(self.riotshield_backpack) && self._id_267E[3] == 0) {
       self._id_267E[3] = self.riotshield_backpack;
@@ -71,7 +71,7 @@ _id_A118(var_0, var_1) {
   var_2 = _id_45DD(var_0);
 
   if(isDefined(var_2)) {
-    self._id_14EA = _func_041(var_2);
+    self._id_14EA = _getweaponmodel(var_2);
 
     if(!isDefined(self.riotshield_backpack) && self._id_267E[3] != 0)
       self.riotshield_backpack = self._id_267E[3];
@@ -95,10 +95,10 @@ _id_7E96() {
 }
 
 _id_37C2() {
-  if(!self _meth_806F())
+  if(!self islinked())
     return 0;
 
-  var_0 = self _meth_852C();
+  var_0 = self getlinkedtagname();
 
   if(!isDefined(var_0))
     return 0;
@@ -138,7 +138,7 @@ _id_7E9B() {
   for(;;) {
     self waittill("weapon_switch_started", var_0);
 
-    if(self _meth_801D()) {
+    if(self isonladder()) {
       thread _id_7E9A();
       break;
     }
@@ -161,10 +161,10 @@ _id_7E9A() {
   self endon("faux_spawn");
   self endon("weapon_change");
 
-  while(self _meth_801D())
+  while(self isonladder())
     waitframe();
 
-  self notify("riotshield_change_weapon", self _meth_8317());
+  self notify("riotshield_change_weapon", self getcurrentprimaryweapon());
 }
 
 _id_9BC6() {
@@ -227,7 +227,7 @@ _id_9BC6() {
 }
 
 _id_A15C(var_0, var_1) {
-  if(self _meth_82E4() && var_0 == "none") {
+  if(self ismantling() && var_0 == "none") {
     return;
   }
   _id_A118(var_0, var_1);
@@ -255,5 +255,5 @@ _id_5832(var_0) {
 _id_A93C(var_0, var_1) {
   var_0 endon("death");
   common_scripts\utility::_id_A70A("damageThenDestroyRiotshield", "death", "disconnect", "weapon_change", "deploy_riotshield");
-  var_0 _meth_81D6(var_1);
+  var_0 detonate(var_1);
 }

@@ -18,7 +18,7 @@ _id_3662() {
   var_0 = ["Mad Minute"];
   thread _id_0547::_id_73EC();
   _id_0547::_id_7458(1, "mad_minute");
-  _func_147(level._effect["zmb_death_mm_screen"], self, "Tag_Origin");
+  _playfxontag(level._effect["zmb_death_mm_screen"], self, "Tag_Origin");
   _id_0378::_id_8D74("aud_mad_minute_use");
 
   if(_id_0547::_id_4BA7("specialty_class_explosives_handler_zm")) {
@@ -35,12 +35,12 @@ _id_3662() {
       }
 
       if(var_4) {
-        var_5 = var_3 _meth_834A();
+        var_5 = var_3 getlethalweapon();
 
         if(isDefined(var_5)) {
           var_6 = var_3 getweaponammoclip(var_5);
           var_3 setweaponammoclip(var_5, var_6 + 2);
-          _func_147(level._effect["zmb_blood_grenades_up"], var_3, "J_Hip_RI");
+          _playfxontag(level._effect["zmb_blood_grenades_up"], var_3, "J_Hip_RI");
         }
       }
     }
@@ -54,13 +54,13 @@ _id_3662() {
         continue;
       }
       if(distancesquared(self.origin, var_3.origin) < var_1) {
-        var_9 = var_3 _meth_8317();
+        var_9 = var_3 getcurrentprimaryweapon();
 
         if(!common_scripts\utility::_id_562E(level.nobonusammoreward[var_9])) {
-          var_10 = _func_1A3(var_9);
+          var_10 = _weaponclipsize(var_9);
           var_11 = var_3 getweaponammostock(var_9);
           var_3 setweaponammostock(var_9, var_11 + var_10);
-          _func_147(level._effect["zmb_blood_ammo_up"], var_3, "TAG_WEAPON_RIGHT");
+          _playfxontag(level._effect["zmb_blood_ammo_up"], var_3, "TAG_WEAPON_RIGHT");
           var_3 _meth_866C(&"add_teammate_mod_buffs", 3, "specialty_class_ammo_carrier_zm", 1, self);
         }
       }
@@ -129,7 +129,7 @@ _id_6BD4(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_62AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(_func_1EF(var_0) && isalive(var_0))
+  if(_isagent(var_0) && isalive(var_0))
     return var_0.maxhealth * 0.2;
 }
 

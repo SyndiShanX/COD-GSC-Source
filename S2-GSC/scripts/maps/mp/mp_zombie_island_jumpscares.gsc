@@ -34,7 +34,7 @@ manage_possums() {
     }
 
     if(isDefined(var_8)) {
-      var_14 = level._id_A980 + _func_0A4(2, 5);
+      var_14 = level._id_A980 + _randomintrange(2, 5);
       wait_for_jscare_complete(var_8);
 
       while(level._id_A980 < var_14)
@@ -115,11 +115,11 @@ initialize_feign_death() {
 }
 
 reset_feign_death() {
-  var_0 = _func_0A4(1, 5);
+  var_0 = _randomintrange(1, 5);
   self.anim_sel = var_0;
 
-  if(isDefined(self._id_81E1))
-    self.anim_sel = self._id_81E1;
+  if(isDefined(self.setmovespeedscale))
+    self.anim_sel = self.setmovespeedscale;
 }
 
 do_feign_death(var_0) {
@@ -138,7 +138,7 @@ wait_for_player_close() {
       if(distance(var_1.origin, self._id_0186.origin) > 220) {
         continue;
       }
-      if(!_func_07F(var_1 getEye(), self._id_0186.origin + (0, 0, 8), 0, undefined)) {
+      if(!_sighttracepassed(var_1 getEye(), self._id_0186.origin + (0, 0, 8), 0, undefined)) {
         continue;
       }
       return;
@@ -161,13 +161,13 @@ execute_frozen_state(var_0, var_1, var_2) {
   self endon("death");
   var_3 = var_2;
   var_4 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_3);
-  var_5 = self _meth_83DB(var_4);
+  var_5 = self getanimentrycount(var_4);
   var_6 = randomint(var_5);
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, var_3);
   maps\mp\_utility::_id_2CED(0.5, ::setpossumgoal);
-  self _meth_839B("face angle abs", self.angles);
-  self _meth_839C("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
   self.frozen = 1;
   thread maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_4, var_6, 0.0, "scripted_anim", undefined, undefined, 0.0);
   var_7 = 90;
@@ -179,14 +179,14 @@ execute_frozen_state(var_0, var_1, var_2) {
   childthread setfacingenemy();
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_4, var_6, 1.0, "scripted_anim");
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, var_3);
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 }
 
 setfacingenemy() {
   wait 0.25;
-  self _meth_839B("face enemy");
+  self scragentsetorientmode("face enemy");
 }
 
 setpossumgoal() {
-  self _meth_8395(self.origin);
+  self scragentsetgoalpos(self.origin);
 }

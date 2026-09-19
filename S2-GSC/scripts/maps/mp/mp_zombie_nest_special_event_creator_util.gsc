@@ -8,7 +8,7 @@ _id_2C2C(var_0, var_1) {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(isDefined(var_5._id_819A)) {
+    if(isDefined(var_5.getnegotiationnextnode)) {
       var_5._id_68A2 = 0;
       var_3 = common_scripts\utility::_id_0F6F(var_3, var_5);
     }
@@ -127,7 +127,7 @@ _id_410B(var_0) {
   var_1 = common_scripts\utility::_id_40B0(self.origin, var_0);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2]._id_68A2 <= 4 && _func_0AE(var_1[var_2].origin[2] - self.origin[2]) < 256)
+    if(var_1[var_2]._id_68A2 <= 4 && _abs(var_1[var_2].origin[2] - self.origin[2]) < 256)
       return var_1[var_2];
   }
 
@@ -166,11 +166,11 @@ _id_ABE1() {
 
   if(isDefined(var_1)) {
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-    self _meth_839C("anim deltas");
-    self _meth_839B("face angle abs", self.angles);
-    self _meth_83A2(1);
+    self scragentsetanimmode("anim deltas");
+    self scragentsetorientmode("face angle abs", self.angles);
+    self scragentsetscripted(1);
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1.0, "taunt_anim");
-    self _meth_83A2(0);
+    self scragentsetscripted(0);
   }
 }
 
@@ -196,11 +196,11 @@ _id_11B2(var_0) {
     case 2:
       _id_8A06(var_0[0], "a");
       _id_8A06(var_0[1], "b");
-      _func_032("ui_zm_waypoint_ents_type", 2);
+      _setomnvar("ui_zm_waypoint_ents_type", 2);
       break;
     case 1:
       _id_8A06(var_0[0], "a");
-      _func_032("ui_zm_waypoint_ents_type", 1);
+      _setomnvar("ui_zm_waypoint_ents_type", 1);
       break;
     default:
       break;
@@ -211,32 +211,32 @@ _id_8A06(var_0, var_1) {
   var_0._id_3012 = "ui_zm_waypoint_ent_" + var_1;
   var_0._id_3013 = "ui_zm_waypoint_float_" + var_1;
   var_0 setModel("tag_origin");
-  var_0 _meth_805B();
-  _func_032(var_0._id_3012, var_0 getentitynumber());
-  _func_032(var_0._id_3013, 1.0);
+  var_0 show();
+  _setomnvar(var_0._id_3012, var_0 getentitynumber());
+  _setomnvar(var_0._id_3013, 1.0);
 }
 
 _id_11B4(var_0) {
   foreach(var_2 in var_0) {
     var_3 = clamp(var_2._id_28FF / var_2._id_6057, 0.0, 1.0);
-    _func_032(var_2._id_3013, var_3);
+    _setomnvar(var_2._id_3013, var_3);
   }
 }
 
 _id_11B1(var_0) {
   foreach(var_2 in var_0)
-  _func_032(var_2._id_3013, -1.0);
+  _setomnvar(var_2._id_3013, -1.0);
 }
 
 _id_11B3(var_0) {
   foreach(var_2 in var_0)
-  _func_032(var_2._id_3013, -1.0);
+  _setomnvar(var_2._id_3013, -1.0);
 }
 
 _id_11B0(var_0) {
   level endon("attack_spots_display_start");
   wait 1.5;
-  _func_032("ui_zm_waypoint_ents_type", 0);
+  _setomnvar("ui_zm_waypoint_ents_type", 0);
 }
 
 _id_11BE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -273,7 +273,7 @@ _id_45BC() {
   var_1 = _id_0547::_id_408F();
 
   foreach(var_3 in var_1) {
-    if(isalive(var_3) && isDefined(var_3._id_9ACD) && var_3._id_9ACD == "attacking point" && _func_211(var_3.origin, self.origin) < 4096)
+    if(isalive(var_3) && isDefined(var_3._id_9ACD) && var_3._id_9ACD == "attacking point" && _distance2dsquared(var_3.origin, self.origin) < 4096)
       var_0++;
   }
 

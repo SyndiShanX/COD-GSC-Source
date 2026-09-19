@@ -10,18 +10,18 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_1B12;
-  level._id_19D5["should_start_cautious_approach"] = ::_id_1B11;
+  level.bot_funcs["gametype_think"] = ::_id_1B12;
+  level.bot_funcs["should_start_cautious_approach"] = ::_id_1B11;
 
   if(!level._id_1A1B)
-    level._id_19D5["get_watch_node_chance"] = ::_id_1B0D;
+    level.bot_funcs["get_watch_node_chance"] = ::_id_1B0D;
 }
 
 _id_879A() {
   maps\mp\bots\_bots_util::_id_1B20();
 
   for(var_0 = 0; var_0 < level._id_9FC2.size; var_0++)
-    level._id_9FC2[var_0]._id_81E8 = "_" + var_0;
+    level._id_9FC2[var_0].shootblank = "_" + var_0;
 
   maps\mp\bots\_bots_gametype_common::_id_194F(level._id_9FC2, "zone", level._id_1A1B);
   var_1 = 55;
@@ -34,7 +34,7 @@ _id_879A() {
     var_4 thread _id_6358();
     var_5 = (var_4.origin - (0, 0, var_1) + (var_4.origin + (0, 0, level._id_AC87))) / 2.0;
     var_6 = (level._id_AC87 + var_1) / 2.0;
-    var_4._id_671A = _func_0B8(var_5, level._id_AC8B, 0, var_6);
+    var_4._id_671A = _getnodesinradius(var_5, level._id_AC8B, 0, var_6);
 
     if(var_4._id_671A.size < 6) {
       var_2++;
@@ -65,10 +65,10 @@ _id_6358() {
       var_0 = level._id_9FC0._id_230F;
 
     if(var_0 != "none") {
-      var_1 = _func_1F7(self.origin);
+      var_1 = _getzonenearest(self.origin);
 
       if(isDefined(var_1))
-        _func_1E8(var_1, var_0);
+        _botzonesetteam(var_1, var_0);
     }
   }
 }
@@ -84,9 +84,9 @@ _id_1B12() {
   while(!isDefined(level._id_19E8))
     waitframe();
 
-  self _meth_8353("separation", 0);
-  self _meth_837B("beeline");
-  self _meth_8353("force_sprint", 1);
+  self botsetflag("separation", 0);
+  self botsetpathingstyle("beeline");
+  self botsetflag("force_sprint", 1);
 
   for(;;) {
     if(!_id_1B10(level._id_9FC0._id_AC7C))
@@ -155,7 +155,7 @@ _id_1B0F(var_0) {
 }
 
 _id_1B0E(var_0) {
-  return "zone" + var_0._id_81E8;
+  return "zone" + var_0.shootblank;
 }
 
 _id_1B11(var_0) {

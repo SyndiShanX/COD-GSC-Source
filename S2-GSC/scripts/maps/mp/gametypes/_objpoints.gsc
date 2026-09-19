@@ -4,7 +4,7 @@
 ****************************************************/
 
 init() {
-  _func_13F("objpoint_default");
+  _precacheshader("objpoint_default");
   level._id_6995 = [];
   level._id_6996 = [];
 
@@ -32,9 +32,9 @@ _id_282F(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_2 == "all")
     var_6 = newhudelem();
   else if(var_2 == "broadcaster")
-    var_6 = _func_19C("spectator");
+    var_6 = _newteamhudelem("spectator");
   else
-    var_6 = _func_19C(var_2);
+    var_6 = _newteamhudelem(var_2);
 
   var_6.name = var_0;
   var_6.x = var_1[0];
@@ -44,7 +44,7 @@ _id_282F(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6._id_56F5 = 0;
   var_6._id_57CB = 1;
   var_6 setshader(var_3, level._id_6998, level._id_6998);
-  var_6 _meth_80CB(1, 0);
+  var_6 setwaypoint(1, 0);
 
   if(isDefined(var_4))
     var_6.alpha = var_4;

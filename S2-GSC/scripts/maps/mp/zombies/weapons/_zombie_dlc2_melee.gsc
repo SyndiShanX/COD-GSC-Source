@@ -141,7 +141,7 @@ bayochargecleanup(var_0, var_1) {
 bayochargeendingtracking(var_0) {
   self endon("disconnect");
   self endon("bayoCleanup");
-  var_1 = common_scripts\utility::_id_A715("death", "sprint_melee_charge_end");
+  var_1 = common_scripts\utility::waittill_any_return("death", "sprint_melee_charge_end");
   waittillframeend;
   thread bayochargecleanup(var_0, var_1);
 }
@@ -196,7 +196,7 @@ bat_gained() {
 
   if(!common_scripts\utility::_id_562E(self.has_shown_bat_hint)) {
     self.has_shown_bat_hint = 1;
-    _id_0555::_id_83DD("dlc2_weap_hint_bat", self);
+    _id_0555::issprinting("dlc2_weap_hint_bat", self);
   }
 }
 
@@ -211,7 +211,7 @@ bat_think() {
 
 bat_cone(var_0) {
   var_1 = _id_0586::zombies_hit_by_melee_cone(90, 15);
-  var_1 = _func_1AC(var_1, self.origin);
+  var_1 = _sortbydistance(var_1, self.origin);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++)
     thread delayed_bat_hit(var_1[var_2], var_2);
@@ -231,8 +231,8 @@ delayed_bat_hit(var_0, var_1) {
   var_3._id_01D0 = "baseballbat_aoe_zm";
   var_3.delaysec = undefined;
   var_0 _id_0378::_id_8D74("zmb_bat_melee_hit_wooden", var_3);
-  var_0 _meth_8059(level.batcolumndamage, self getEye(), self, self, "MOD_MELEE", "baseballbat_aoe_zm", "none");
-  _func_147(level._effect["zmb_bat_long_hit_crit_blood"], var_0, "TAG_EYE");
+  var_0 dodamage(level.batcolumndamage, self getEye(), self, self, "MOD_MELEE", "baseballbat_aoe_zm", "none");
+  _playfxontag(level._effect["zmb_bat_long_hit_crit_blood"], var_0, "TAG_EYE");
 
   if(isDefined(var_0._id_0A4B)) {
     var_4 = _id_0547::_id_0A51(var_0._id_0A4B);
@@ -283,7 +283,7 @@ bat_hc_gained() {
 
   if(!common_scripts\utility::_id_562E(self.has_shown_bat_hc_hint)) {
     self.has_shown_bat_hc_hint = 1;
-    _id_0555::_id_83DD("dlc2_weap_hint_bat_hc", self);
+    _id_0555::issprinting("dlc2_weap_hint_bat_hc", self);
   }
 }
 
@@ -300,7 +300,7 @@ bat_hc_think() {
 bat_hc_blast(var_0) {
   var_1 = self;
   var_2 = var_1 _meth_8566();
-  var_3 = _func_22E(var_2);
+  var_3 = _anglestoaxis(var_2);
   var_4 = var_1 getEye() + var_3["forward"] * 12 + var_3["up"] * 0;
   var_5 = bulletTrace(var_4, var_4 + 500 * var_3["forward"], 0, undefined, 0, 0, 0, 0, 0, 0, 0);
   var_6 = spawn("script_model", var_4);
@@ -324,14 +324,14 @@ bat_hc_blast_think(var_0) {
   var_2 = var_1 / var_0._id_018A;
 
   if(var_2 > 0)
-    var_0 _meth_82B1(var_0._id_2DA7, var_2, 0, 0);
+    var_0 moveto(var_0._id_2DA7, var_2, 0, 0);
 
   var_3 = var_0.origin - var_0.hit_height * 0.5 * (0, 0, 1);
   var_0._id_9D65 = spawn("trigger_radius", var_3, 0, var_0.hit_radius, var_0.hit_height);
-  var_0._id_9D65 _meth_8070();
-  var_0._id_9D65 _meth_8055(var_0);
+  var_0._id_9D65 enablelinkto();
+  var_0._id_9D65 linkto(var_0);
   thread bat_hc_blast_watch_collision(var_0);
-  _func_147(common_scripts\utility::_id_44F5("zmb_hc_bat_aoe_fx"), var_0, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_hc_bat_aoe_fx"), var_0, "tag_origin");
   _id_0378::_id_8D74("zmb_hc_bat_aoe_fx", var_0, "tag_origin");
   wait(var_2);
   var_0 notify("bat_hc_blast_end");
@@ -345,7 +345,7 @@ bat_hc_blast_watch_collision(var_0) {
   for(;;) {
     var_0._id_9D65 waittill("trigger", var_1);
 
-    if(isDefined(var_1.team) && !_func_100(var_0.player.team, var_1.team)) {
+    if(isDefined(var_1.team) && !_isenemyteam(var_0.player.team, var_1.team)) {
       continue;
     }
     if(isDefined(var_0.already_hit[var_1 getentitynumber()])) {
@@ -360,7 +360,7 @@ bat_hc_blast_hit(var_0, var_1) {
   var_2 = self;
   var_1.already_hit[var_0 getentitynumber()] = 1;
 
-  if(_func_1EF(var_0)) {
+  if(_isagent(var_0)) {
     var_3 = spawnStruct();
     var_3.player = self;
     var_3._id_ABE6 = var_0.origin;
@@ -369,8 +369,8 @@ bat_hc_blast_hit(var_0, var_1) {
     var_3._id_01D0 = "baseballbat_aoe_zm";
     var_3.delaysec = undefined;
     var_0 _id_0378::_id_8D74("zmb_bat_melee_hit_metal", var_3);
-    var_0 _meth_8059(level.bathcaoedamage, var_2 getEye(), var_2, var_2, "MOD_MELEE", "baseballbat_hc_aoe_zm", "none");
-    _func_147(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
+    var_0 dodamage(level.bathcaoedamage, var_2 getEye(), var_2, var_2, "MOD_MELEE", "baseballbat_hc_aoe_zm", "none");
+    _playfxontag(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
 
     if(isDefined(var_0._id_0A4B)) {
       var_4 = _id_0547::_id_0A51(var_0._id_0A4B);
@@ -440,7 +440,7 @@ axe_gained() {
 
   if(!common_scripts\utility::_id_562E(self.has_shown_axe_hint)) {
     self.has_shown_axe_hint = 1;
-    _id_0555::_id_83DD("dlc2_weap_hint_axe", self);
+    _id_0555::issprinting("dlc2_weap_hint_axe", self);
   }
 }
 
@@ -510,7 +510,7 @@ axe_hc_gained() {
 
   if(!common_scripts\utility::_id_562E(self.has_shown_axe_hc_hint)) {
     self.has_shown_axe_hc_hint = 1;
-    _id_0555::_id_83DD("dlc2_weap_hint_axe_hc", self);
+    _id_0555::issprinting("dlc2_weap_hint_axe_hc", self);
   }
 }
 
@@ -531,28 +531,28 @@ axe_hc_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 axe_bayo_charge_start() {
-  self _meth_8036(1.1, 0.2);
+  self lerpfovscale(1.1, 0.2);
   self.bayonetboost = 1;
   waitframe();
   _id_0547::_id_7ACD();
 }
 
 axe_bayo_charge_result(var_0) {
-  self _meth_8036(1, 0.2);
+  self lerpfovscale(1, 0.2);
   self.bayonetboost = 0;
   waitframe();
   _id_0547::_id_7ACD();
 }
 
 axe_hc_bayo_charge_start() {
-  self _meth_8036(1.25, 0.2);
+  self lerpfovscale(1.25, 0.2);
   self.bayonetboosthc = 1;
   waitframe();
   _id_0547::_id_7ACD();
 }
 
 axe_hc_bayo_charge_result(var_0) {
-  self _meth_8036(1, 0.2);
+  self lerpfovscale(1, 0.2);
   self.bayonetboosthc = 0;
   waitframe();
   _id_0547::_id_7ACD();
@@ -573,12 +573,12 @@ axe_hc_bayo_charge_result(var_0) {
 axe_hc_explosion() {
   self endon("disconnect");
   var_0 = self _meth_8566();
-  var_1 = _func_22E(var_0);
+  var_1 = _anglestoaxis(var_0);
   var_2 = self getEye() + var_1["forward"] * 48;
   var_3 = common_scripts\utility::_id_44F5("zmb_hc_axe_aoe");
   playFX(var_3, var_2, var_1["up"], var_1["forward"]);
   var_4 = _id_0547::get_zombies_touching_sphere(var_2, 250, 1, self);
-  var_4 = _func_1AC(var_4, var_2);
+  var_4 = _sortbydistance(var_4, var_2);
 
   for(var_5 = 0; var_5 < var_4.size; var_5++)
     childthread axe_hc_explosion_delayed_hit(var_4[var_5], var_5, var_2);
@@ -587,8 +587,8 @@ axe_hc_explosion() {
 axe_hc_explosion_delayed_hit(var_0, var_1, var_2) {
   var_0 endon("death");
   wait(var_1 * 0.05);
-  var_0 _meth_8059(level.axehcaoedamage, var_2, self, self, "MOD_MELEE", "axe_aoe_zm", "none");
-  _func_147(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
+  var_0 dodamage(level.axehcaoedamage, var_2, self, self, "MOD_MELEE", "axe_aoe_zm", "none");
+  _playfxontag(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
 
   if(isDefined(var_0._id_0A4B)) {
     var_3 = _id_0547::_id_0A51(var_0._id_0A4B);
@@ -645,7 +645,7 @@ trench_knife_gained() {
 
   if(!common_scripts\utility::_id_562E(self.has_shown_knife_hint)) {
     self.has_shown_knife_hint = 1;
-    _id_0555::_id_83DD("dlc2_weap_hint_knife", self);
+    _id_0555::issprinting("dlc2_weap_hint_knife", self);
   }
 }
 
@@ -660,7 +660,7 @@ trench_knife_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 }
 
 trench_knife_heavy_melee_fatal(var_0) {
-  return common_scripts\utility::_id_562E(self._id_165B) || self _meth_8343();
+  return common_scripts\utility::_id_562E(self._id_165B) || self adsbuttonpressed();
 }
 
 trench_knife_hc_init() {
@@ -711,7 +711,7 @@ trench_knife_hc_gained() {
 
   if(!common_scripts\utility::_id_562E(self.has_shown_knife_hc_hint)) {
     self.has_shown_knife_hc_hint = 1;
-    _id_0555::_id_83DD("dlc2_weap_hint_knife_hc", self);
+    _id_0555::issprinting("dlc2_weap_hint_knife_hc", self);
   }
 }
 
@@ -720,7 +720,7 @@ trench_knife_hc_lost() {
 }
 
 trench_knife_hc_heavy_melee_fatal(var_0) {
-  return common_scripts\utility::_id_562E(self._id_165B) || self _meth_8343();
+  return common_scripts\utility::_id_562E(self._id_165B) || self adsbuttonpressed();
 }
 
 trench_knife_hc_think() {}
@@ -744,7 +744,7 @@ trench_knife_hc_spec_effect() {
 
     var_0 notify("immediateHealthRegen");
   } else if(var_0 _id_0547::_id_73E9() < var_0 _id_0547::playergetmaxarmorcount()) {
-    _func_14D(common_scripts\utility::_id_44F5("zmb_melee_drain_player"), var_0, "J_Spine4", var_0);
+    _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_melee_drain_player"), var_0, "J_Spine4", var_0);
     _id_0378::_id_8D74("zmb_knife_finisher_effects");
     wait 0.2;
     var_0 _id_0547::_id_73AC(1);
@@ -792,7 +792,7 @@ blade_gained() {
 
   if(!common_scripts\utility::_id_562E(self.has_shown_blade_hint)) {
     self.has_shown_blade_hint = 1;
-    _id_0555::_id_83DD("dlc2_weap_hint_blade", self);
+    _id_0555::issprinting("dlc2_weap_hint_blade", self);
   }
 }
 
@@ -814,7 +814,7 @@ blade_think() {
 
 blade_melee_cone(var_0) {
   var_1 = _id_0586::zombies_hit_by_melee_cone(350, 100);
-  var_1 = _func_1AC(var_1, self.origin);
+  var_1 = _sortbydistance(var_1, self.origin);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++)
     thread delayed_blade_hit(var_1[var_2], var_2);
@@ -831,8 +831,8 @@ delayed_blade_hit(var_0, var_1) {
     waitframe();
 
   _id_0378::_id_8D74("zmb_sword_melee_hit_delayed", var_0.origin);
-  var_0 _meth_8059(level.bladecleavedamage, self getEye(), self, self, "MOD_MELEE", "blade_aoe_zm", "none");
-  _func_147(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
+  var_0 dodamage(level.bladecleavedamage, self getEye(), self, self, "MOD_MELEE", "blade_aoe_zm", "none");
+  _playfxontag(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
 
   if(isDefined(var_0._id_0A4B)) {
     var_3 = _id_0547::_id_0A51(var_0._id_0A4B);

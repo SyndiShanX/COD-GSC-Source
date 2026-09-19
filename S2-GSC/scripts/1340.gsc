@@ -46,7 +46,7 @@ _id_4F84() {
   if(isDefined(self.custom_on_melee_func))
     self thread[[self.custom_on_melee_func]]();
 
-  self _meth_83A1(self._id_28D2);
+  self scragentbeginmelee(self._id_28D2);
   return 1;
 }
 
@@ -54,7 +54,7 @@ _id_0631() {
   if(isDefined(self._id_6618))
     return self._id_6618;
 
-  return self _meth_8396();
+  return self scragentgetgoalpos();
 }
 
 _id_06CE(var_0) {
@@ -87,7 +87,7 @@ _id_06CE(var_0) {
     if(isDefined(self._id_A08E))
       self._id_6617 = 1;
 
-    self _meth_8395(self._id_6618);
+    self scragentsetgoalpos(self._id_6618);
   } else {}
 }
 
@@ -99,7 +99,7 @@ _id_0778() {
 
   for(;;) {
     self waittill("traverse_soon");
-    var_0 = self _meth_8198();
+    var_0 = self getnegotiationstartnode();
 
     if(isDefined(var_0))
       thread _id_077B(var_0);
@@ -134,7 +134,7 @@ _id_21B5(var_0) {
 
     if(var_1.size > 0) {
       if((var_0 != var_1[0] || !var_0._id_54F5) && (!isDefined(var_1[0]._id_54F5) || !var_1[0]._id_54F5)) {
-        self _meth_8395(self._id_6618);
+        self scragentsetgoalpos(self._id_6618);
         waitframe();
         self notify("traversal_unblocked");
         break;
@@ -156,15 +156,15 @@ _id_8A62(var_0) {
   self._id_A6D2 = var_0;
 
   if(var_0) {
-    self _meth_83A2(1);
+    self scragentsetscripted(1);
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "Waiting For Traversal");
     var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("idle_noncombat");
     var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-    var_3 = self _meth_83D8(var_1, var_2);
-    maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_1, var_2);
+    var_3 = self getanimentry(var_1, var_2);
+    maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_1, var_2);
   } else {
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "Waiting For Traversal");
-    self _meth_83A2(0);
+    self scragentsetscripted(0);
   }
 }
 
@@ -200,7 +200,7 @@ _id_077B(var_0) {
 }
 
 _id_0647() {
-  var_0 = self _meth_8198();
+  var_0 = self getnegotiationstartnode();
 
   if(!_id_5597()) {
     if(isDefined(var_0) && _id_0547::_id_562C(var_0)) {
@@ -217,12 +217,12 @@ _id_0647() {
     } else if(isDefined(self._id_A08E)) {
       if(!_id_0547::_id_562C(self._id_A08E)) {
         _id_4F85();
-        self _meth_8395(self._id_6618);
+        self scragentsetgoalpos(self._id_6618);
         self._id_A08E = undefined;
         self notify("lost_barricaded_traversal");
       } else if(common_scripts\utility::_id_562E(self._id_6617)) {
         _id_4F85();
-        self _meth_8395(self._id_6618);
+        self scragentsetgoalpos(self._id_6618);
         self._id_A08E = undefined;
         self notify("lost_barricaded_traversal");
       }
@@ -240,7 +240,7 @@ _id_0647() {
 }
 
 _id_4F8A(var_0) {
-  self _meth_8395(var_0);
+  self scragentsetgoalpos(var_0);
 
   while(distance(self.origin, var_0) > 32)
     wait 0.1;
@@ -306,7 +306,7 @@ _id_298D(var_0) {
   self notify("no_alt_paths");
 
   if(distance(self.origin, var_0.origin) < 32)
-    self _meth_8059(self.health + 666, self.origin);
+    self dodamage(self.health + 666, self.origin);
 }
 
 _id_1436() {
@@ -387,7 +387,7 @@ _id_4F9B(var_0) {
     var_9 = distancesquared(var_7, self.origin);
     var_10 = self._id_173E;
 
-    if(var_9 < _func_0DA(self.radius) && distancesquared(var_7, var_6.origin) > _func_0DA(self.radius)) {
+    if(var_9 < _squared(self.radius) && distancesquared(var_7, var_6.origin) > _squared(self.radius)) {
       var_10 = 1;
       self notify("attack_anim", "end");
     }
@@ -399,15 +399,15 @@ _id_4F9B(var_0) {
       var_10 = 1;
 
     if(var_6._id_A266) {
-      if(!var_10 && var_8 > _func_0DA(self._id_2BCA))
+      if(!var_10 && var_8 > _squared(self._id_2BCA))
         var_10 = 1;
 
-      self _meth_8399(self._id_2BCA);
+      self scragentsetgoalradius(self._id_2BCA);
     } else if(!maps\mp\agents\humanoid\_humanoid_util::_id_4BA3(var_1, self._id_60F5)) {
-      self _meth_8399(self._id_2BCA);
+      self scragentsetgoalradius(self._id_2BCA);
       var_10 = 1;
     } else {
-      self _meth_8399(var_2);
+      self scragentsetgoalradius(var_2);
 
       if(var_9 <= var_3) {
         var_6.origin = self.origin;
@@ -447,7 +447,7 @@ _id_0C35() {
   var_0 = 0;
 
   foreach(var_2 in level.players) {
-    if(common_scripts\utility::_id_562E(var_2._id_7414) || var_2._id_5378 || !isalive(var_2))
+    if(common_scripts\utility::_id_562E(var_2._id_7414) || var_2.inlaststand || !isalive(var_2))
       var_0++;
   }
 
@@ -474,10 +474,10 @@ humanoid_is_valid_target(var_0) {
   if(var_0._id_00CE || isDefined(var_0._id_0117) && var_0._id_0117._id_00CE)
     return 0;
 
-  if(var_0 _meth_8541() || isDefined(var_0._id_0117) && var_0._id_0117 _meth_8541())
+  if(var_0 isnotarget() || isDefined(var_0._id_0117) && var_0._id_0117 isnotarget())
     return 0;
 
-  if(_func_26C(self, var_0))
+  if(_isalliedsentient(self, var_0))
     return 0;
 
   if(_id_0547::_id_8B95(var_0))
@@ -493,19 +493,19 @@ _id_4F88() {
   if(isDefined(self._id_3043))
     return [];
 
-  if(isDefined(self.forcedtargets) && _func_0C0(self.forcedtargets) && self.forcedtargets.size > 0) {
+  if(isDefined(self.forcedtargets) && _isarray(self.forcedtargets) && self.forcedtargets.size > 0) {
     var_0 = [];
     self.forcedtargets = common_scripts\utility::_id_0FA0(self.forcedtargets);
 
     foreach(var_2 in self.forcedtargets) {
-      if(_func_279(var_2)) {
+      if(_isremovedentity(var_2)) {
         continue;
       }
       var_0 = common_scripts\utility::_id_0F6F(var_0, var_2);
     }
 
     self.forcedtargets = var_0;
-    return _func_1AC(var_0, self.origin);
+    return _sortbydistance(var_0, self.origin);
   }
 
   var_4 = [];
@@ -518,7 +518,7 @@ _id_4F88() {
   if(0 == var_4.size)
     return [];
 
-  return _func_1AC(var_4, self.origin);
+  return _sortbydistance(var_4, self.origin);
 }
 
 _id_4F9A() {
@@ -534,7 +534,7 @@ _id_4F9A() {
     if(var_2 < var_1 * var_1)
       var_1 = 16;
 
-    if(self._id_173E || distancesquared(self _meth_8396(), var_0[0].origin) > var_1 * var_1) {
+    if(self._id_173E || distancesquared(self scragentgetgoalpos(), var_0[0].origin) > var_1 * var_1) {
       var_3 = _func_2E1(var_0[0].origin);
       _id_06CE(var_3);
       self._id_173E = 0;
@@ -551,7 +551,7 @@ _id_4F87(var_0) {
   if(!isDefined(var_0))
     return 0;
 
-  if(self._id_173E || distancesquared(_id_0631(), var_0.origin) > _func_0DA(128)) {
+  if(self._id_173E || distancesquared(_id_0631(), var_0.origin) > _squared(128)) {
     _id_06CE(var_0.origin);
     self._id_173E = 0;
   }
@@ -597,7 +597,7 @@ _id_4F7F(var_0, var_1) {
       if(var_7 <= 0 || !_id_054D::_id_0F0A(self))
         _id_056D::_id_5A86();
 
-      var_8 = _func_0A5(0.5, 1);
+      var_8 = _randomfloatrange(0.5, 1);
       wait(var_8);
     }
 
@@ -616,7 +616,7 @@ _id_4F80() {
   self endon("death");
   var_0 = 0.25;
   var_1 = 1;
-  wait(_func_0A5(var_0, var_1));
+  wait(_randomfloatrange(var_0, var_1));
   _id_4F7F("wakeup chain", 1);
 }
 
@@ -766,7 +766,7 @@ _id_2208() {
 
 _id_9C74() {
   self._id_6EAF = "idle";
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
 
   if(isDefined(self.custom_passive_action))
     [[self.custom_passive_action]]();
@@ -774,7 +774,7 @@ _id_9C74() {
     maps\mp\agents\_scripted_agent_anim_util::_id_8410("idle_noncombat");
 
   self._id_6EAE = self.origin;
-  self _meth_855C();
+  self scragentclearpath();
 }
 
 _id_4F8C() {
@@ -822,7 +822,7 @@ _id_4F8C() {
 humanoid_reset_passive_data() {
   if(isDefined(self._id_6EAF)) {
     if(self._id_6EAF == "idle" && !maps\mp\agents\_scripted_agent_anim_util::_id_57E2())
-      self _meth_83A2(0);
+      self scragentsetscripted(0);
 
     self._id_6EAF = undefined;
   }
@@ -867,9 +867,9 @@ _id_4F8D() {
 
   if(common_scripts\utility::_id_562E(self._id_6617)) {
     if(isDefined(self._id_2308))
-      self _meth_8395(self._id_2308.origin);
+      self scragentsetgoalpos(self._id_2308.origin);
     else if(isDefined(self._id_A6E6))
-      self _meth_8395(self._id_A6E6);
+      self scragentsetgoalpos(self._id_A6E6);
   }
 
   switch (self._id_9D04) {
@@ -883,7 +883,7 @@ _id_4F8D() {
       var_1 = var_0 _id_0549::_id_15DB(self);
 
       if(isDefined(var_1)) {
-        self _meth_8395(var_1.origin);
+        self scragentsetgoalpos(var_1.origin);
         self._id_9D04 = 1;
         return 1;
       } else {
@@ -891,7 +891,7 @@ _id_4F8D() {
           return 1;
 
         self._id_A6E6 = var_0 _id_0549::_id_15DE();
-        self _meth_8395(self._id_A6E6);
+        self scragentsetgoalpos(self._id_A6E6);
         return 1;
       }
     case 1:
@@ -900,13 +900,13 @@ _id_4F8D() {
         return 0;
       }
 
-      var_2 = self _meth_8396();
+      var_2 = self scragentgetgoalpos();
 
       if(distancesquared(var_2, self._id_2308.origin) > 1024)
-        self _meth_8395(self._id_2308.origin);
+        self scragentsetgoalpos(self._id_2308.origin);
 
       var_3 = self.radius * self.radius;
-      var_4 = _func_211(self.origin, self._id_2308.origin);
+      var_4 = _distance2dsquared(self.origin, self._id_2308.origin);
 
       if(var_4 > var_3)
         return 1;
@@ -984,15 +984,15 @@ _id_4F99(var_0, var_1) {
   self endon("board_pull_interrupted");
   self._id_9D04 = 3;
   self._id_15D2 = "pulling_board";
-  self _meth_83A2(1);
-  self _meth_839D("noclip");
+  self scragentsetscripted(1);
+  self scragentsetphysicsmode("noclip");
   _id_1888("grab");
   _id_1888("hold");
   var_0 thread _id_0549::_id_15D3(var_1._id_1887);
   _id_1888("pull");
   self._id_15D2 = undefined;
-  self _meth_83A2(0);
-  self _meth_839D("gravity");
+  self scragentsetscripted(0);
+  self scragentsetphysicsmode("gravity");
   var_0 _id_0549::_id_15E0(self);
 }
 
@@ -1000,8 +1000,8 @@ _id_1888(var_0) {
   var_1 = "board_" + self._id_2308._id_0EA5 + "_" + var_0;
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
   var_3 = self._id_2309._id_1887;
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self._id_2308.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self._id_2308.angles);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "board_pull");
 }
 
@@ -1017,14 +1017,14 @@ _id_4F83(var_0) {
   self._id_15D2 = "attacking_through_boards";
   var_1 = self._id_A08E._id_15CB;
   var_2 = var_1._id_38EB.angles;
-  self _meth_839B("face angle abs", var_2);
+  self scragentsetorientmode("face angle abs", var_2);
   var_3 = "attack_stand";
   var_4 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_3);
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_4);
   self._id_117A = var_0;
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_4, var_5, 1.0, "attack_anim", undefined, ::_id_1179);
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   self._id_15D2 = undefined;
 }
 
@@ -1049,8 +1049,8 @@ _id_4F92(var_0) {
   var_1 = var_0._id_15CC;
   self._id_9D04 = 3;
   self._id_15D2 = "lifting_gj_gate";
-  self _meth_83A2(1);
-  self _meth_839D("noclip");
+  self scragentsetscripted(1);
+  self scragentsetphysicsmode("noclip");
   _id_4F93(var_0);
 
   while(var_1._id_17E9) {
@@ -1065,8 +1065,8 @@ _id_4F92(var_0) {
     waittillframeend;
   }
 
-  self _meth_83A2(0);
-  self _meth_839D("gravity");
+  self scragentsetscripted(0);
+  self scragentsetphysicsmode("gravity");
   self._id_15D2 = undefined;
 }
 
@@ -1075,14 +1075,14 @@ _id_4F86(var_0) {
   var_1 = var_0._id_15CC;
   self._id_9D04 = 3;
   self._id_15D2 = "crawling_under_gj_gate";
-  self _meth_83A2(1);
-  self _meth_839D("noclip");
+  self scragentsetscripted(1);
+  self scragentsetphysicsmode("noclip");
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("gj_lift_gate_crawl_under");
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-  var_4 = self _meth_83D8(var_2, var_3);
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self._id_2308.angles);
-  self _meth_8395(self._id_6618);
+  var_4 = self getanimentry(var_2, var_3);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self._id_2308.angles);
+  self scragentsetgoalpos(self._id_6618);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "gj_gate_drop");
   thread _id_4F85();
 }
@@ -1102,20 +1102,20 @@ _id_346C(var_0, var_1, var_2, var_3) {
   var_0 = var_4 _id_0549::_id_345B(self, var_0);
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_0);
   var_6 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_5);
-  var_7 = self _meth_83D8(var_5, var_6);
+  var_7 = self getanimentry(var_5, var_6);
   var_8 = undefined;
 
-  if(_func_066(var_7, "end_start")) {
+  if(_animhasnotetrack(var_7, "end_start")) {
     var_9 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_7, "end_start");
-    var_8 = (1 - var_9) * _func_065(var_7);
-    var_8 = _func_0A5(0.0, var_8);
+    var_8 = (1 - var_9) * _getanimlength(var_7);
+    var_8 = _randomfloatrange(0.0, var_8);
   }
 
-  var_10 = _func_06D(var_1._id_8310, var_1._id_830F, var_7);
-  var_11 = _func_06E(var_1._id_8310, var_1._id_830F, var_7);
+  var_10 = _getstartorigin(var_1.getweaponlistall, var_1.getviewkickscale, var_7);
+  var_11 = _getstartangles(var_1.getweaponlistall, var_1.getviewkickscale, var_7);
   self setOrigin(var_10, 0);
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", var_11);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", var_11);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, var_6, 1, "gj_gate_drop", "end_start");
 
   if(isDefined(var_8))
@@ -1129,11 +1129,11 @@ _id_4F9C() {
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
   self._id_9D04 = 5;
   self._id_983D = 1;
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self._id_2308.angles);
-  self _meth_83A2(1);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self._id_2308.angles);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1.0, "taunt_anim");
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   self._id_983D = undefined;
 }
 
@@ -1142,13 +1142,13 @@ _id_4F82() {
   var_0 = "attack_stand";
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_0);
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_1);
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self._id_2308.angles);
-  self _meth_83A2(1);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self._id_2308.angles);
+  self scragentsetscripted(1);
   self._id_567F = 1;
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_2, 1.0, "attack_anim");
   self._id_567F = 0;
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 }
 
 _id_5597() {

@@ -9,13 +9,13 @@ _id_21C7() {
   level._id_836A = getEntArray("fte_section_wall", "targetname");
 
   foreach(var_3 in var_0)
-  var_3 _meth_8007(self, 0);
+  var_3 threatdetectedtoplayer(self, 0);
 
   foreach(var_3 in var_1)
-  var_3 _meth_8007(self, 0);
+  var_3 threatdetectedtoplayer(self, 0);
 
   foreach(var_3 in level._id_836A)
-  var_3 _meth_8007(self, 0);
+  var_3 threatdetectedtoplayer(self, 0);
 
   if(!maps\mp\gametypes\_hud_util::shoulddohubtutorialflow()) {
     return;
@@ -148,7 +148,7 @@ _id_7FAA() {
   thread _id_9075();
   thread _id_77C7();
   thread _id_63B0();
-  self _meth_8483("mp_hub_allies_fte", 0);
+  self setclienttriggervisionset("mp_hub_allies_fte", 0);
   thread _id_7FAE();
   thread _id_6380();
 }
@@ -183,9 +183,9 @@ _id_8BE4() {
     var_4 = common_scripts\utility::_id_8FFC();
     var_4.origin = var_3.origin;
     var_4.angles = var_3.angles;
-    var_4 _meth_805B();
+    var_4 show();
     var_1[var_1.size] = var_4;
-    _func_14D(common_scripts\utility::_id_44F5("tutorial_path"), var_4, "tag_origin", self);
+    _playfxontagforclients(common_scripts\utility::_id_44F5("tutorial_path"), var_4, "tag_origin", self);
   }
 
   return var_1;
@@ -193,7 +193,7 @@ _id_8BE4() {
 
 _id_4CFB(var_0) {
   foreach(var_2 in var_0) {
-    _func_294(common_scripts\utility::_id_44F5("tutorial_path"), var_2, "tag_origin", self);
+    _stopfxontagforclient(common_scripts\utility::_id_44F5("tutorial_path"), var_2, "tag_origin", self);
     var_2 delete();
   }
 }
@@ -257,7 +257,7 @@ _id_8A1C() {
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 _meth_84C7([497, 497, 0, 0, 0]);
-  var_1 _meth_8276("mp_hub_patrol_unarmed_idle");
+  var_1 scriptmodelplayanim("mp_hub_patrol_unarmed_idle");
   return var_1;
 }
 
@@ -371,30 +371,30 @@ _id_6398() {
 _id_92D4() {
   var_0 = common_scripts\utility::_id_46B5("fte_waypoint_05", "targetname");
   var_1 = spawn("script_model", var_0.origin);
-  var_1 _id_04E0::_id_8627();
+  var_1 _id_04E0::clientclearsoundsubmix();
   var_2 = spawn("script_model", var_0.origin);
-  var_2 _id_04E0::_id_8627();
+  var_2 _id_04E0::clientclearsoundsubmix();
   var_3 = spawn("script_model", var_0.origin);
-  var_3 _id_04E0::_id_8627();
+  var_3 _id_04E0::clientclearsoundsubmix();
   var_4 = spawn("script_model", var_0.origin);
-  var_4 _id_04E0::_id_8627();
+  var_4 _id_04E0::clientclearsoundsubmix();
   var_5 = spawn("script_model", var_0.origin);
-  var_5 _id_04E0::_id_8627();
+  var_5 _id_04E0::clientclearsoundsubmix();
   self._id_54C5.origin = var_0.origin;
   self._id_54C5.angles = var_0.angles;
-  var_1 _meth_8495("mp_hub_rco_arrival_pt01_guy_01", var_0.origin, var_0.angles, "animEnded");
-  var_2 _meth_8495("mp_hub_rco_arrival_pt01_guy_02", var_0.origin, var_0.angles, "animEnded");
-  var_3 _meth_8495("mp_hub_rco_arrival_pt01_guy_03", var_0.origin, var_0.angles, "animEnded");
-  var_4 _meth_8495("mp_hub_rco_arrival_pt01_guy_04", var_0.origin, var_0.angles, "animEnded");
-  var_5 _meth_8495("mp_hub_rco_arrival_pt01_guy_05", var_0.origin, var_0.angles, "animEnded");
-  self._id_54C5 _meth_8495("mp_hub_rco_arrival_pt01_camera", var_0.origin, var_0.angles, "animEnded");
+  var_1 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt01_guy_01", var_0.origin, var_0.angles, "animEnded");
+  var_2 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt01_guy_02", var_0.origin, var_0.angles, "animEnded");
+  var_3 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt01_guy_03", var_0.origin, var_0.angles, "animEnded");
+  var_4 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt01_guy_04", var_0.origin, var_0.angles, "animEnded");
+  var_5 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt01_guy_05", var_0.origin, var_0.angles, "animEnded");
+  self._id_54C5 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt01_camera", var_0.origin, var_0.angles, "animEnded");
   var_1 waittill("animEnded");
-  var_1 _meth_8495("mp_hub_rco_arrival_pt03_guy_01", var_0.origin, var_0.angles, "animEnded");
-  var_2 _meth_8495("mp_hub_rco_arrival_pt03_guy_02", var_0.origin, var_0.angles, "animEnded");
-  var_3 _meth_8495("mp_hub_rco_arrival_pt03_guy_04", var_0.origin, var_0.angles, "animEnded");
-  var_4 _meth_8495("mp_hub_rco_arrival_pt03_guy_03", var_0.origin, var_0.angles, "animEnded");
-  var_5 _meth_8495("mp_hub_rco_arrival_pt03_guy_05", var_0.origin, var_0.angles, "animEnded");
-  self._id_54C5 _meth_8495("mp_hub_rco_arrival_pt03_camera", var_0.origin, var_0.angles, "animEnded");
+  var_1 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt03_guy_01", var_0.origin, var_0.angles, "animEnded");
+  var_2 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt03_guy_02", var_0.origin, var_0.angles, "animEnded");
+  var_3 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt03_guy_04", var_0.origin, var_0.angles, "animEnded");
+  var_4 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt03_guy_03", var_0.origin, var_0.angles, "animEnded");
+  var_5 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt03_guy_05", var_0.origin, var_0.angles, "animEnded");
+  self._id_54C5 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt03_camera", var_0.origin, var_0.angles, "animEnded");
   var_1 waittillmatch("animEnded", "end");
   var_1 delete();
   var_2 delete();
@@ -407,14 +407,14 @@ _id_8A3E() {
   var_0 = common_scripts\utility::_id_46B5("fte_waypoint_05", "targetname");
   level._id_7B46 = spawn("script_model", var_0.origin);
   level._id_7B46 _meth_84C7([498, 498, 0, 0, 0]);
-  level._id_7B46 _meth_8495("mp_hub_rco_arrival_pt01_sergeant", var_0.origin, var_0.angles, "animEnded");
+  level._id_7B46 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt01_sergeant", var_0.origin, var_0.angles, "animEnded");
   level._id_7B46 waittill("animEnded");
-  level._id_7B46 _meth_8495("mp_hub_rco_arrival_pt03_sergeant", var_0.origin, var_0.angles, "animEnded");
+  level._id_7B46 scriptmodelplayanimdeltamotionfrompos("mp_hub_rco_arrival_pt03_sergeant", var_0.origin, var_0.angles, "animEnded");
 }
 
 _id_5428() {
   wait 2;
-  level._id_7B46 _meth_8277();
+  level._id_7B46 scriptmodelclearanim();
 }
 
 _id_2D4A() {
@@ -443,7 +443,7 @@ _id_21B0(var_0) {
 }
 
 _id_4AEA(var_0, var_1, var_2) {
-  level._id_7B46 _meth_8495(level._id_7A90[var_1], var_2.origin, var_2.angles, "animEnded");
+  level._id_7B46 scriptmodelplayanimdeltamotionfrompos(level._id_7A90[var_1], var_2.origin, var_2.angles, "animEnded");
   var_3 = 10;
   var_4 = 0;
 
@@ -506,23 +506,23 @@ _id_7214(var_0) {
 
   switch (var_0) {
     case 0:
-      self _meth_860F("hub_dr2_goodchoicesoldierinfantry", self);
+      self playsoundtoplayer("hub_dr2_goodchoicesoldierinfantry", self);
       wait 4;
       break;
     case 1:
-      self _meth_860F("hub_dr2_nicechoicesoldierairborne", self);
+      self playsoundtoplayer("hub_dr2_nicechoicesoldierairborne", self);
       wait 4;
       break;
     case 2:
-      self _meth_860F("hub_dr2_bolddecisionyouwillbringt", self);
+      self playsoundtoplayer("hub_dr2_bolddecisionyouwillbringt", self);
       wait 4;
       break;
     case 3:
-      self _meth_860F("hub_dr2_welldonesoldiermountaindi", self);
+      self playsoundtoplayer("hub_dr2_welldonesoldiermountaindi", self);
       wait 4.5;
       break;
     case 4:
-      self _meth_860F("hub_dr2_goodlucksoldieryourebring", self);
+      self playsoundtoplayer("hub_dr2_goodlucksoldieryourebring", self);
       wait 3.5;
       break;
   }
@@ -539,10 +539,10 @@ _id_9075() {
     if(isDefined(var_2._id_0165))
       var_3 setModel(var_2._id_0165);
     else
-      var_3 _id_04E0::_id_8627();
+      var_3 _id_04E0::clientclearsoundsubmix();
 
     if(isDefined(var_2.animation))
-      var_3 _meth_8278(var_2.animation);
+      var_3 scriptmodelplayanimdeltamotion(var_2.animation);
   }
 
   var_5 = common_scripts\utility::_id_46B7("fte_npc_structs", "targetname");
@@ -557,8 +557,8 @@ _id_9075() {
     if(isDefined(var_7.model))
       var_8._id_18A8 = var_7.model;
 
-    var_8 _id_04E0::_id_8627();
-    var_8 _meth_8278(var_7.animation);
+    var_8 _id_04E0::clientclearsoundsubmix();
+    var_8 scriptmodelplayanimdeltamotion(var_7.animation);
   }
 
   var_10 = common_scripts\utility::_id_46B7("fte_section_prop", "targetname");
@@ -575,7 +575,7 @@ _id_9075() {
 _id_A6B6() {
   wait 2;
   self freezecontrols(0);
-  self _meth_8308(0);
+  self allowsprint(0);
 }
 
 _id_2D39() {
@@ -585,11 +585,11 @@ _id_2D39() {
   level._id_3EF9 = undefined;
 
   foreach(var_4 in level._id_836A)
-  var_4 _meth_8007(self, 0);
+  var_4 threatdetectedtoplayer(self, 0);
 }
 
 _id_7FAE() {
-  self _meth_82FF("ui_hub_enable_pause", 0);
+  self setclientomnvar("ui_hub_enable_pause", 0);
   var_0 = common_scripts\utility::_id_46B5("fte_waypoint_05", "targetname");
   var_1 = self.origin;
   var_2 = spawn("script_model", var_0.origin);
@@ -603,15 +603,15 @@ _id_7FAE() {
   var_5 = spawn("script_model", var_0.origin);
   var_5._id_00B9 = "huba";
   var_5._id_18A8 = "hube";
-  var_5 _id_04E0::_id_8627();
+  var_5 _id_04E0::clientclearsoundsubmix();
   var_6 = spawn("script_model", var_0.origin);
-  var_6 _id_04E0::_id_8627();
+  var_6 _id_04E0::clientclearsoundsubmix();
   var_7 = spawn("script_model", var_0.origin);
-  var_7 _id_04E0::_id_8627();
+  var_7 _id_04E0::clientclearsoundsubmix();
   var_8 = spawn("script_model", var_0.origin);
-  var_8 _id_04E0::_id_8627();
+  var_8 _id_04E0::clientclearsoundsubmix();
   var_9 = spawn("script_model", var_0.origin);
-  var_9 _id_04E0::_id_8627();
+  var_9 _id_04E0::clientclearsoundsubmix();
   var_10 = spawn("script_model", var_0.origin);
   var_10 setModel("usa_barrage_balloon_02_fte");
   var_11 = spawn("script_model", var_0.origin);
@@ -653,11 +653,11 @@ _id_7FAE() {
   var_23 _id_54C4("usa_tank_sherman_gun75mm_01");
 
   for(;;) {
-    self _meth_808C();
+    self dontinterpolate();
     self setOrigin(var_1);
     self freezecontrols(1);
-    self _meth_81E2(var_2, "tag_origin_animated");
-    self _meth_8483("mp_hub_allies_fte", 0);
+    self cameralinkto(var_2, "tag_origin_animated");
+    self setclienttriggervisionset("mp_hub_allies_fte", 0);
     thread _id_74BC(var_2);
     thread _id_54C7();
     var_24 = getdvarint("intro_camera", 0);
@@ -665,63 +665,63 @@ _id_7FAE() {
     var_26 = "mp_hub_intro_jeep";
     var_27 = "mp_hub_intro_guy01";
     var_28 = "mp_hub_intro_guy02";
-    var_2 _meth_808C();
-    var_10 _meth_808C();
-    var_11 _meth_808C();
-    var_12 _meth_808C();
-    var_4 _meth_808C();
-    var_5 _meth_808C();
-    var_4 _meth_805B();
-    var_2 _meth_8495(var_25, var_0.origin, var_0.angles, "camera_anim_finished");
-    var_3 _meth_8495(var_26, var_0.origin, var_0.angles);
-    var_4 _meth_8495(var_27, var_0.origin, var_0.angles);
-    var_5 _meth_8495(var_28, var_0.origin, var_0.angles);
-    var_6 _meth_8495("mp_hub_intro_guy_10", var_0.origin, var_0.angles);
-    var_7 _meth_8495("mp_hub_intro_guy_11", var_0.origin, var_0.angles);
-    var_8 _meth_8495("mp_hub_intro_guy_12", var_0.origin, var_0.angles);
-    var_9 _meth_8495("mp_hub_intro_guy_13", var_0.origin, var_0.angles);
-    var_10 _meth_8495("mp_hub_intro_barrage_balloon_01", var_0.origin, var_0.angles);
-    var_11 _meth_8495("mp_hub_intro_barrage_balloon_02", var_0.origin, var_0.angles);
-    var_12 _meth_8495("mp_hub_intro_barrage_balloon_03", var_0.origin, var_0.angles);
-    var_13 _meth_8495("mp_hub_intro_plane_01", var_0.origin, var_0.angles);
-    var_14 _meth_8495("mp_hub_intro_plane_02", var_0.origin, var_0.angles);
-    var_15 _meth_8495("mp_hub_intro_plane_03", var_0.origin, var_0.angles);
-    var_16 _meth_8495("mp_hub_intro_plane_04", var_0.origin, var_0.angles);
-    var_17 _meth_8495("mp_hub_intro_plane_05", var_0.origin, var_0.angles);
-    var_18 _meth_8495("mp_hub_intro_plane_06", var_0.origin, var_0.angles);
-    var_19 _meth_8495("mp_hub_intro_plane_07", var_0.origin, var_0.angles);
-    var_20 _meth_8495("mp_hub_intro_plane_08", var_0.origin, var_0.angles);
-    var_21 _meth_8495("mp_hub_intro_tank_01", var_0.origin, var_0.angles);
-    var_22 _meth_8495("mp_hub_intro_tank_02", var_0.origin, var_0.angles);
-    var_23 _meth_8495("mp_hub_intro_tank_03", var_0.origin, var_0.angles);
+    var_2 dontinterpolate();
+    var_10 dontinterpolate();
+    var_11 dontinterpolate();
+    var_12 dontinterpolate();
+    var_4 dontinterpolate();
+    var_5 dontinterpolate();
+    var_4 show();
+    var_2 scriptmodelplayanimdeltamotionfrompos(var_25, var_0.origin, var_0.angles, "camera_anim_finished");
+    var_3 scriptmodelplayanimdeltamotionfrompos(var_26, var_0.origin, var_0.angles);
+    var_4 scriptmodelplayanimdeltamotionfrompos(var_27, var_0.origin, var_0.angles);
+    var_5 scriptmodelplayanimdeltamotionfrompos(var_28, var_0.origin, var_0.angles);
+    var_6 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_guy_10", var_0.origin, var_0.angles);
+    var_7 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_guy_11", var_0.origin, var_0.angles);
+    var_8 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_guy_12", var_0.origin, var_0.angles);
+    var_9 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_guy_13", var_0.origin, var_0.angles);
+    var_10 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_barrage_balloon_01", var_0.origin, var_0.angles);
+    var_11 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_barrage_balloon_02", var_0.origin, var_0.angles);
+    var_12 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_barrage_balloon_03", var_0.origin, var_0.angles);
+    var_13 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_plane_01", var_0.origin, var_0.angles);
+    var_14 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_plane_02", var_0.origin, var_0.angles);
+    var_15 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_plane_03", var_0.origin, var_0.angles);
+    var_16 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_plane_04", var_0.origin, var_0.angles);
+    var_17 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_plane_05", var_0.origin, var_0.angles);
+    var_18 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_plane_06", var_0.origin, var_0.angles);
+    var_19 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_plane_07", var_0.origin, var_0.angles);
+    var_20 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_plane_08", var_0.origin, var_0.angles);
+    var_21 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_tank_01", var_0.origin, var_0.angles);
+    var_22 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_tank_02", var_0.origin, var_0.angles);
+    var_23 scriptmodelplayanimdeltamotionfrompos("mp_hub_intro_tank_03", var_0.origin, var_0.angles);
     var_2 waittill("camera_anim_finished");
-    self _meth_8483("mp_hub_allies", 5);
-    self _meth_82FF("ui_show_fte_division_select", 1);
-    self _meth_82FF("ui_hub_enable_pause", 1);
+    self setclienttriggervisionset("mp_hub_allies", 5);
+    self setclientomnvar("ui_show_fte_division_select", 1);
+    self setclientomnvar("ui_hub_enable_pause", 1);
     wait 1;
 
     if(getdvarint("intro_anim_debug", 0) == 0) {
       break;
     }
 
-    self setOrigin(_func_236(var_4.origin));
-    self _meth_833E((0, 90, 0));
-    var_4 _meth_805C();
+    self setOrigin(_droptoground(var_4.origin));
+    self setplayerangles((0, 90, 0));
+    var_4 hide();
     waitframe();
-    self _meth_81E3();
+    self cameraunlink();
     self freezecontrols(0);
-    self _meth_82E1("reset_intro_anim", "+smoke");
-    self _meth_82FF("hub_fte_reset_intro", 0);
+    self notifyonplayercommand("reset_intro_anim", "+smoke");
+    self setclientomnvar("hub_fte_reset_intro", 0);
     self waittill("reset_intro_anim");
-    self _meth_82FF("hub_fte_reset_intro", 1);
+    self setclientomnvar("hub_fte_reset_intro", 1);
   }
 }
 
 _id_74BC(var_0) {
   wait 1;
-  var_0 _meth_860F("hub_gen_thisisheadquartersyourhom", self);
+  var_0 playsoundtoplayer("hub_gen_thisisheadquartersyourhom", self);
   wait 15;
-  var_0 _meth_860F("hub_gen_werewellsuppliedbutyouveg", self);
+  var_0 playsoundtoplayer("hub_gen_werewellsuppliedbutyouveg", self);
   wait 14;
   self notify("intro_vo_finished");
 }
@@ -729,12 +729,12 @@ _id_74BC(var_0) {
 _id_54C4(var_0) {
   var_1 = spawn("script_model", self.origin);
   var_1 setModel(var_0);
-  var_1 _meth_8055(self, "TAG_BARREL", (0, 0, 0), (0, 0, 0));
+  var_1 linkto(self, "TAG_BARREL", (0, 0, 0), (0, 0, 0));
 }
 
 _id_54C6() {
   for(var_0 = 0; !isDefined(self._id_93FC); var_0++) {
-    _func_18B(var_0);
+    _iprintln(var_0);
     wait 1;
   }
 
@@ -742,75 +742,75 @@ _id_54C6() {
 }
 
 _id_54C7() {
-  thread _id_8037();
+  thread getvalidcoverpeekouts();
 }
 
-_id_8037() {
-  var_0 = _id_906C(_func_236((415, 2713, -24)), (0, 175, 0));
+getvalidcoverpeekouts() {
+  var_0 = _id_906C(_droptoground((415, 2713, -24)), (0, 175, 0));
   var_1 = spawn("script_model", (345, 2705, -32));
   var_1.angles = (0, 80, 0);
   var_1 _meth_84C7([510, 507, 0, 0, 0]);
-  var_1 _meth_8276("mp_hub_general_idle");
+  var_1 scriptmodelplayanim("mp_hub_general_idle");
   wait 5;
-  var_0 _meth_8276("mp_hub_doorman_salute", "anim_end");
+  var_0 scriptmodelplayanim("mp_hub_doorman_salute", "anim_end");
   var_0 waittill("anim_end");
   var_0 delete();
   var_1 delete();
 }
 
 _id_21F4() {
-  var_0 = _id_906C(_func_236((822, 3089, -216)), (0, 90, 0));
+  var_0 = _id_906C(_droptoground((822, 3089, -216)), (0, 90, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((631, 3069, -216)), (0, 85, 0));
+  var_0 = _id_906C(_droptoground((631, 3069, -216)), (0, 85, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((552, 3049, -216)), (0, 85, 0));
+  var_0 = _id_906C(_droptoground((552, 3049, -216)), (0, 85, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((520, 3032, -216)), (0, 80, 0));
+  var_0 = _id_906C(_droptoground((520, 3032, -216)), (0, 80, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((477, 3049, -216)), (0, 80, 0));
+  var_0 = _id_906C(_droptoground((477, 3049, -216)), (0, 80, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((168, 3183, -245)), (0, 25, 0));
+  var_0 = _id_906C(_droptoground((168, 3183, -245)), (0, 25, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((178, 3265, -245)), (0, 15, 0));
+  var_0 = _id_906C(_droptoground((178, 3265, -245)), (0, 15, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((168, 3307, -245)), (0, 0, 0));
+  var_0 = _id_906C(_droptoground((168, 3307, -245)), (0, 0, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((140, 3347, -245)), (0, 15, 0));
+  var_0 = _id_906C(_droptoground((140, 3347, -245)), (0, 15, 0));
   var_0 thread _id_7F93();
-  var_0 = _id_906C(_func_236((166, 3374, -245)), (0, 20, 0));
+  var_0 = _id_906C(_droptoground((166, 3374, -245)), (0, 20, 0));
   var_0 thread _id_7F93();
 }
 
 _id_7F93() {
   self endon("death");
   common_scripts\utility::_id_2CBE(15, ::delete);
-  var_0 = _func_0A5(0, 2);
+  var_0 = _randomfloatrange(0, 2);
 
   for(;;) {
-    switch (_func_0A4(0, 10)) {
+    switch (_randomintrange(0, 10)) {
       case 0:
-        self _meth_8276("mp_emote_cheer_onehand_fte", "anim_end", var_0);
+        self scriptmodelplayanim("mp_emote_cheer_onehand_fte", "anim_end", var_0);
         break;
       case 1:
-        self _meth_8276("mp_emote_cheer_slow_clap_fte", "anim_end", var_0);
+        self scriptmodelplayanim("mp_emote_cheer_slow_clap_fte", "anim_end", var_0);
         break;
       case 2:
-        self _meth_8276("mp_emote_cheer_twohand_fte", "anim_end", var_0);
+        self scriptmodelplayanim("mp_emote_cheer_twohand_fte", "anim_end", var_0);
         break;
       case 3:
-        self _meth_8276("mp_emote_cheer_yeah_fte", "anim_end", var_0);
+        self scriptmodelplayanim("mp_emote_cheer_yeah_fte", "anim_end", var_0);
         break;
       case 4:
-        self _meth_8276("mp_emote_cheer_yes_fte", "anim_end", var_0);
+        self scriptmodelplayanim("mp_emote_cheer_yes_fte", "anim_end", var_0);
         break;
       case 5:
-        self _meth_8276("mp_emote_clap_cheer_fte", "anim_end", var_0);
+        self scriptmodelplayanim("mp_emote_clap_cheer_fte", "anim_end", var_0);
         break;
       case 6:
-        self _meth_8276("mp_emote_clap_jump_fte", "anim_end", var_0);
+        self scriptmodelplayanim("mp_emote_clap_jump_fte", "anim_end", var_0);
         break;
       default:
-        self _meth_8276("mp_emote_congratulate_fte", "anim_end", var_0);
+        self scriptmodelplayanim("mp_emote_congratulate_fte", "anim_end", var_0);
         break;
     }
 
@@ -821,7 +821,7 @@ _id_7F93() {
 
 _id_8B22() {
   var_0 = _id_906C((277, 3740, -369), (0, 15, 0));
-  var_0 _meth_8276("mp_smg_stand_idle_ads_fte");
+  var_0 scriptmodelplayanim("mp_smg_stand_idle_ads_fte");
   var_0 common_scripts\utility::_id_2CBE(15, ::delete);
   var_0 endon("death");
   var_1 = (305, 3741, -327);
@@ -829,25 +829,25 @@ _id_8B22() {
 
   for(;;) {
     for(var_3 = 0; var_3 < 6; var_3++) {
-      _func_1B5("intro_anim_gun_mp", var_1, var_2 + common_scripts\utility::_id_7A61(25, 50));
+      _magicbullet("intro_anim_gun_mp", var_1, var_2 + common_scripts\utility::_id_7A61(25, 50));
       wait 0.2;
     }
 
     wait 0.2;
 
     for(var_3 = 0; var_3 < 6; var_3++) {
-      _func_1B5("intro_anim_gun_mp", var_2, var_1 + common_scripts\utility::_id_7A61(25, 50));
+      _magicbullet("intro_anim_gun_mp", var_2, var_1 + common_scripts\utility::_id_7A61(25, 50));
       wait 0.2;
     }
   }
 }
 
 _id_1B76() {
-  var_0 = _id_906C(_func_236((343, 2993, -220)), (0, 175, 0));
-  var_1 = _id_906C(_func_236((273, 2993, -220)), (0, 5, 0));
+  var_0 = _id_906C(_droptoground((343, 2993, -220)), (0, 175, 0));
+  var_1 = _id_906C(_droptoground((273, 2993, -220)), (0, 5, 0));
   wait 3;
-  var_0 _meth_8276("mp_emote_noway_fte");
-  var_1 _meth_8276("mp_emote_boxing_fte");
+  var_0 scriptmodelplayanim("mp_emote_noway_fte");
+  var_1 scriptmodelplayanim("mp_emote_boxing_fte");
   wait 5.35;
   var_0 delete();
   var_1 delete();
@@ -856,8 +856,8 @@ _id_1B76() {
 _id_906C(var_0, var_1) {
   var_2 = spawn("script_model", var_0);
   var_2.angles = var_1;
-  var_2 _id_04E0::_id_8627();
-  var_2 _meth_8276("mp_hub_patrol_unarmed_idle");
+  var_2 _id_04E0::clientclearsoundsubmix();
+  var_2 scriptmodelplayanim("mp_hub_patrol_unarmed_idle");
   return var_2;
 }
 
@@ -879,9 +879,9 @@ _id_7FAC(var_0, var_1, var_2) {
   var_3 setModel(var_1);
 
   if(isDefined(var_2))
-    var_3 _meth_8276(var_2);
+    var_3 scriptmodelplayanim(var_2);
 
-  var_3 _meth_82B1(var_3.origin + (0, -22500, 0), 15);
+  var_3 moveto(var_3.origin + (0, -22500, 0), 15);
   var_3 thread _id_7042();
   wait 15;
   var_3 delete();
@@ -889,12 +889,12 @@ _id_7FAC(var_0, var_1, var_2) {
 
 _id_7042() {
   self endon("death");
-  wait(_func_0A5(0, 3.0));
+  wait(_randomfloatrange(0, 3.0));
 
   for(;;) {
-    self _meth_82BB(-10, 3, 0.5, 0.5);
+    self rotateroll(-10, 3, 0.5, 0.5);
     wait 3;
-    self _meth_82BB(10, 3, 0.5, 0.5);
+    self rotateroll(10, 3, 0.5, 0.5);
     wait 3;
   }
 }
@@ -913,21 +913,21 @@ _id_7FAD(var_0) {
   var_1 = spawn("script_model", var_0);
   var_1.angles = (0, 0, 0);
   var_1 setModel("vehicle_usa_tank_sherman_base_01");
-  var_1 _meth_82B1((-1700, 1093, 32), 5);
+  var_1 moveto((-1700, 1093, 32), 5);
   wait 5;
-  var_1 _meth_82B1((-1424, 1021, 37), 1.6);
-  var_1 _meth_82B8((0, 330, 0), 1.6);
+  var_1 moveto((-1424, 1021, 37), 1.6);
+  var_1 rotateto((0, 330, 0), 1.6);
   wait 1.6;
-  var_1 _meth_82B1((-1176, 765, 35), 2);
-  var_1 _meth_82B8((0, 300, 0), 2);
+  var_1 moveto((-1176, 765, 35), 2);
+  var_1 rotateto((0, 300, 0), 2);
   wait 2;
-  var_1 _meth_82B1((-1064, 253, 46), 3);
-  var_1 _meth_82B8((0, 270, 0), 3);
+  var_1 moveto((-1064, 253, 46), 3);
+  var_1 rotateto((0, 270, 0), 3);
   wait 3;
-  var_1 _meth_82B1((-1168, -187, 36), 2.55);
-  var_1 _meth_82B8((0, 240, 0), 2.55);
+  var_1 moveto((-1168, -187, 36), 2.55);
+  var_1 rotateto((0, 240, 0), 2.55);
   wait 2.55;
-  var_1 _meth_82B1(var_1.origin + _func_112((1000, 0, 0), var_1.angles), 5.7);
+  var_1 moveto(var_1.origin + _rotatevector((1000, 0, 0), var_1.angles), 5.7);
   wait 5.7;
   var_1 delete();
 }
@@ -936,7 +936,7 @@ cleanuphubtutorialents() {
   var_0 = ["intro_path_wire", "intro_path_clip", "intro_beach_wire", "intro_beach_post"];
 
   foreach(var_2 in var_0) {
-    var_3 = _func_18E(var_2, "targetname");
+    var_3 = _getent(var_2, "targetname");
 
     if(isDefined(var_3))
       var_3 delete();

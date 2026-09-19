@@ -67,13 +67,13 @@ _id_87D0(var_0) {
     if(isDefined(level._id_0075[var_1]._id_2DF3)) {
       return;
     }
-    if(isDefined(var_3._id_8260) && issubstr(var_3._id_8260, "destructible_type") && issubstr(var_3._id_8260, self._id_0075)) {
+    if(isDefined(var_3.setlookatent) && issubstr(var_3.setlookatent, "destructible_type") && issubstr(var_3.setlookatent, self._id_0075)) {
       if(distancesquared(self.origin, var_3.origin) < 1) {
         var_4 = getEntArray(var_3.target, "targetname");
         level._id_0075[var_1]._id_2DF3 = [];
 
         foreach(var_6 in var_4) {
-          var_7 = var_6._id_81E1;
+          var_7 = var_6.setmovespeedscale;
 
           if(!isDefined(level._id_0075[var_1]._id_2DF3[var_7]))
             level._id_0075[var_1]._id_2DF3[var_7] = [];
@@ -150,7 +150,7 @@ _id_2E03(var_0) {
     return var_1;
 
   if(issubstr(var_0, "dest_cover")) {
-    _id_2DA4(self._id_0075, self._id_8160, self._id_815B, self._id_815C, self._id_815F, self._id_815D);
+    _id_2DA4(self._id_0075, self.atdangerousnode, self.isingoal, self.setruntopos, self.nearclaimnodeandangle, self.nearnode);
     var_1 = _id_2E02(var_0);
     return var_1;
   }
@@ -239,7 +239,7 @@ _id_87D2() {
     thread _id_2E05();
 
   if(self._id_003B != "script_vehicle")
-    self _meth_82C3(1);
+    self setcandamage(1);
 
   if(common_scripts\utility::issp())
     thread _id_258B();
@@ -650,7 +650,7 @@ _id_2DF0(var_0) {
 }
 
 _id_2DE5(var_0, var_1) {
-  var_1 = _func_117(var_1);
+  var_1 = _tolower(var_1);
   var_2 = level._id_0075.size - 1;
 
   if(!isDefined(level._id_0075[var_2]._id_1145))
@@ -664,7 +664,7 @@ _id_2DE5(var_0, var_1) {
 
 _id_2E08(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   if(isDefined(var_3))
-    var_3 = _func_117(var_3);
+    var_3 = _tolower(var_3);
 
   var_13 = level._id_0075.size - 1;
   level._id_0075[var_13]._id_6E9F[var_0][var_1] = spawnStruct();
@@ -860,8 +860,8 @@ _id_2E1D() {
       else
         var_0 = var_0 * 13.0;
 
-      if(var_7 == self.model && isDefined(self._id_815F))
-        self setModel(self._id_815F);
+      if(var_7 == self.model && isDefined(self.nearclaimnodeandangle))
+        self setModel(self.nearclaimnodeandangle);
 
       _id_2E17(int(var_0), var_3, var_4, var_5, var_8);
       continue;
@@ -904,7 +904,7 @@ _id_45FD(var_0, var_1) {
   var_3 = -1;
   var_4 = -1;
 
-  if(_func_117(var_0) == _func_117(self.model) && !isDefined(var_1)) {
+  if(_tolower(var_0) == _tolower(self.model) && !isDefined(var_1)) {
     var_0 = self.model;
     var_1 = undefined;
     var_3 = 0;
@@ -923,7 +923,7 @@ _id_45FD(var_0, var_1) {
     if(isDefined(level._id_0075[self._id_2E25]._id_6E9F[var_5][var_4].v["tagName"])) {
       var_6 = level._id_0075[self._id_2E25]._id_6E9F[var_5][var_4].v["tagName"];
 
-      if(_func_117(var_6) == _func_117(var_1)) {
+      if(_tolower(var_6) == _tolower(var_1)) {
         var_3 = var_5;
         break;
       }
@@ -1062,7 +1062,7 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
     }
 
-    var_0 = int(_func_0AE(self._id_2E10[var_10].v["health"]));
+    var_0 = int(_abs(self._id_2E10[var_10].v["health"]));
 
     if(var_0 < 0) {
       return;
@@ -1274,9 +1274,9 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           var_78 = undefined;
 
           if(isDefined(var_75))
-            var_78 = self _meth_8181(var_75);
+            var_78 = self gettagangles(var_75);
           else if(isDefined(var_2))
-            var_78 = self _meth_8181(var_2);
+            var_78 = self gettagangles(var_2);
 
           var_74 = undefined;
 
@@ -1285,12 +1285,12 @@ _id_2E1F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           else if(isDefined(var_2))
             var_74 = self gettagorigin(var_2);
 
-          var_79 = var_76[0] - 5 + _func_0A3(10);
-          var_80 = var_76[1] - 5 + _func_0A3(10);
-          var_81 = var_76[2] - 5 + _func_0A3(10);
-          var_82 = anglesToForward(var_78) * var_79 * _func_0A5(80, 110);
-          var_83 = anglestoright(var_78) * var_80 * _func_0A5(80, 110);
-          var_84 = anglestoup(var_78) * var_81 * _func_0A5(80, 110);
+          var_79 = var_76[0] - 5 + _randomfloat(10);
+          var_80 = var_76[1] - 5 + _randomfloat(10);
+          var_81 = var_76[2] - 5 + _randomfloat(10);
+          var_82 = anglesToForward(var_78) * var_79 * _randomfloatrange(80, 110);
+          var_83 = anglestoright(var_78) * var_80 * _randomfloatrange(80, 110);
+          var_84 = anglestoup(var_78) * var_81 * _randomfloatrange(80, 110);
           var_77 = var_82 + var_83 + var_84;
         } else {
           var_77 = var_3;
@@ -1543,7 +1543,7 @@ _id_5825(var_0, var_1, var_2) {
 
   var_3 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["godModeAllowed"];
 
-  if(var_3 && (isDefined(self._id_480F) && self._id_480F || isDefined(self._id_812F) && self._id_812F && var_2 == "bullet"))
+  if(var_3 && (isDefined(self._id_480F) && self._id_480F || isDefined(self.setconvergenceheightpercent) && self.setconvergenceheightpercent && var_2 == "bullet"))
     return 0;
 
   var_4 = level._id_0075[self._id_2E25]._id_6E9F[var_0][var_1].v["validDamageCause"];
@@ -1570,7 +1570,7 @@ _id_4487(var_0) {
   if(!isDefined(var_0))
     return "unknown";
 
-  var_0 = _func_117(var_0);
+  var_0 = _tolower(var_0);
 
   switch (var_0) {
     case "mod_crush":
@@ -1603,7 +1603,7 @@ _id_29A6(var_0, var_1, var_2) {
   self notify("stop_damage_mirror");
   self endon("stop_damage_mirror");
   var_0 endon("stop_taking_damage");
-  self _meth_82C3(1);
+  self setcandamage(1);
 
   for(;;) {
     self waittill("damage", var_3, var_4, var_5, var_6, var_7);
@@ -1629,7 +1629,7 @@ _id_5EEF(var_0, var_1, var_2, var_3) {
 
   while(isDefined(self)) {
     var_4 = _id_4168();
-    _func_147(var_0, var_4, var_1);
+    _playfxontag(var_0, var_4, var_1);
     wait(var_2);
   }
 }
@@ -1656,8 +1656,8 @@ _id_4C08(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7 = "" + gettime();
 
     if(!isDefined(self._id_2F71)) {
-      if(isDefined(self._id_8276))
-        var_5 = self._id_8276;
+      if(isDefined(self.scriptmodelplayanim))
+        var_5 = self.scriptmodelplayanim;
 
       if(common_scripts\utility::issp() && isDefined(var_6)) {
         if(var_6 == "both")
@@ -1688,12 +1688,12 @@ _id_14F8(var_0) {
 
 _id_6FA3(var_0, var_1, var_2, var_3) {
   var_4 = _id_6FA6(var_0, var_1);
-  var_4 _meth_82C5(var_2, var_3);
+  var_4 physicslaunchclient(var_2, var_3);
 }
 
 _id_6FA4(var_0, var_1, var_2, var_3) {
   var_4 = _id_6FA6(var_0, var_1);
-  var_4 _meth_83C9(var_2, var_3);
+  var_4 physicslaunchclientwithimpulse(var_2, var_3);
 }
 
 _id_6FA6(var_0, var_1) {
@@ -1705,7 +1705,7 @@ _id_6FA6(var_0, var_1) {
     _id_6FA7(level._id_2E29[0]);
 
   var_4 = spawn("script_model", self gettagorigin(var_3));
-  var_4.angles = self _meth_8181(var_3);
+  var_4.angles = self gettagangles(var_3);
   var_4 setModel(var_2);
   level._id_2E29[level._id_2E29.size] = var_4;
   return var_4;
@@ -1814,7 +1814,7 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
           var_23 = level._id_0075[self._id_2E25]._id_6E9F[var_18][0].v["physicsOnExplosion"];
           var_24 = self gettagorigin(var_16);
           var_25 = vectorNormalize(var_24 - var_17);
-          var_25 = var_25 * (_func_0A5(var_1, var_2) * var_23);
+          var_25 = var_25 * (_randomfloatrange(var_1, var_2) * var_23);
 
           if(isDefined(var_13) && isDefined(var_14)) {
             var_26 = common_scripts\utility::_id_7A61(var_13, var_14);
@@ -1859,9 +1859,9 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(common_scripts\utility::issp()) {
     if(level._id_3FD4 == 0 && !_id_7381())
-      self _meth_81D5(var_28, var_3, var_5, var_4, self, "MOD_RIFLE_BULLET");
+      self radiusdamage(var_28, var_3, var_5, var_4, self, "MOD_RIFLE_BULLET");
     else
-      self _meth_81D5(var_28, var_3, var_5, var_4, self);
+      self radiusdamage(var_28, var_3, var_5, var_4, self);
 
     if(isDefined(self._id_29D4) && var_29) {
       self._id_29D4 notify("destroyed_car");
@@ -1874,9 +1874,9 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_30 = "destructible_car";
 
     if(!isDefined(self._id_29D4))
-      self _meth_81D5(var_28, var_3, var_5, var_4, self, "MOD_EXPLOSIVE", var_30);
+      self radiusdamage(var_28, var_3, var_5, var_4, self, "MOD_EXPLOSIVE", var_30);
     else {
-      self _meth_81D5(var_28, var_3, var_5, var_4, self._id_29D4, "MOD_EXPLOSIVE", var_30);
+      self radiusdamage(var_28, var_3, var_5, var_4, self._id_29D4, "MOD_EXPLOSIVE", var_30);
 
       if(var_29) {
         self._id_29D4 notify("destroyed_car");
@@ -1886,16 +1886,16 @@ _id_3923(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_8) && isDefined(var_9))
-    _func_17F(var_8, 2.0, var_28, var_9);
+    _earthquake(var_8, 2.0, var_28, var_9);
 
   level thread _id_846F(0, 0.05);
   var_31 = 0.01;
   var_32 = var_3 * var_31;
   var_3 = var_3 * 0.99;
-  _func_175(var_17, var_3, 0, var_32);
+  _physicsexplosionsphere(var_17, var_3, 0, var_32);
 
   if(var_27) {
-    self _meth_82C3(0);
+    self setcandamage(0);
     thread _id_2398();
   }
 
@@ -1928,7 +1928,7 @@ _id_2398() {
   if(!isDefined(level._id_2DEC)) {
     return;
   }
-  self._id_8249 = undefined;
+  self.setjitterparams = undefined;
   self._id_3949 = undefined;
   self._id_5EFB = undefined;
   self._id_1FC7 = undefined;
@@ -1972,10 +1972,10 @@ _id_4391() {
   var_0 = getEntArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
-    if(_func_194(var_2)) {
+    if(_isspawner(var_2)) {
       continue;
     }
-    if(isDefined(var_2._id_8161)) {
+    if(isDefined(var_2.getenemyinfo)) {
       continue;
     }
     if(var_2._id_003B == "light") {
@@ -1989,11 +1989,11 @@ _id_4391() {
 }
 
 _id_4D03(var_0) {
-  self _meth_8050(var_0);
+  self hidepart(var_0);
 }
 
 _id_8BED(var_0) {
-  self _meth_8053(var_0);
+  self showpart(var_0);
 }
 
 _id_2F37() {
@@ -2027,14 +2027,14 @@ _id_7152(var_0, var_1) {
   else
     var_3.origin = var_2.origin;
 
-  var_3 _meth_861D(var_0);
+  var_3 playloopsound(var_0);
   var_2 thread _id_3E01(var_0);
   var_2 waittill("stop sound" + var_0);
 
   if(!isDefined(var_3)) {
     return;
   }
-  var_3 _meth_8612(var_0);
+  var_3 stoploopsound(var_0);
   var_3 delete();
 }
 
@@ -2061,14 +2061,14 @@ _id_6807(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 _id_71A7(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = spawn("script_origin", self gettagorigin(var_1));
-    var_2 _meth_805C();
-    var_2 _meth_8055(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_2 hide();
+    var_2 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
   } else {
     var_2 = spawn("script_origin", (0, 0, 0));
-    var_2 _meth_805C();
+    var_2 hide();
     var_2.origin = self.origin;
     var_2.angles = self.angles;
-    var_2 _meth_8055(self);
+    var_2 linkto(self);
   }
 
   var_2 playSound(var_0);
@@ -2088,14 +2088,14 @@ _id_3097() {
     return;
   }
   self._id_1FC7 = spawn("script_model", self.origin);
-  self._id_1FC7 _meth_805C();
-  self._id_1FC7 _meth_861D("car_alarm");
+  self._id_1FC7 hide();
+  self._id_1FC7 playloopsound("car_alarm");
   level._id_2928++;
   thread _id_1FC8();
   self waittill("stop_car_alarm");
   level._id_5B79 = gettime();
   level._id_2928--;
-  self._id_1FC7 _meth_8612("car_alarm");
+  self._id_1FC7 stoploopsound("car_alarm");
   self._id_1FC7 delete();
 }
 
@@ -2143,15 +2143,15 @@ _id_30DF(var_0, var_1, var_2, var_3) {
       self attach(var_2, var_0, 0);
   } else {
     var_4[0] = spawn("script_model", self gettagorigin(var_0));
-    var_4[0].angles = self _meth_8181(var_0);
+    var_4[0].angles = self gettagangles(var_0);
     var_4[0] setModel(var_1);
-    var_4[0] _meth_8055(self, var_0);
+    var_4[0] linkto(self, var_0);
 
     if(isDefined(var_2) && var_2 != "") {
       var_4[1] = spawn("script_model", self gettagorigin(var_0));
-      var_4[1].angles = self _meth_8181(var_0);
+      var_4[1].angles = self gettagangles(var_0);
       var_4[1] setModel(var_2);
-      var_4[1] _meth_8055(self, var_0);
+      var_4[1] linkto(self, var_0);
     }
   }
 
@@ -2207,7 +2207,7 @@ _id_7381() {
   var_1 = getEntArray(self.target, "targetname");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3._id_8161) && var_3._id_8161 == "post") {
+    if(isDefined(var_3.getenemyinfo) && var_3.getenemyinfo == "post") {
       var_0 = var_3;
       break;
     }
@@ -2247,10 +2247,10 @@ _id_2E05() {
   var_1["post"] = ::_id_24DF;
 
   foreach(var_3 in var_0) {
-    if(!isDefined(var_3._id_8161)) {
+    if(!isDefined(var_3.getenemyinfo)) {
       continue;
     }
-    self thread[[var_1[var_3._id_8161]]](var_3);
+    self thread[[var_1[var_3.getenemyinfo]]](var_3);
   }
 }
 
@@ -2269,7 +2269,7 @@ _id_24E0(var_0) {
 }
 
 _id_24DF(var_0) {
-  var_0 _meth_82C2();
+  var_0 notsolid();
 
   if(common_scripts\utility::issp() && var_0.spawnflags & 1)
     var_0 call[[level._id_2587]]();
@@ -2289,7 +2289,7 @@ _id_24DF(var_0) {
     } else {}
   }
 
-  var_0 _meth_82C1();
+  var_0 solid();
 }
 
 _id_2AFD(var_0) {}
@@ -2327,7 +2327,7 @@ _id_1BA6(var_0) {
   if(!isDefined(self._id_1BAF)) {
     return;
   }
-  self._id_1BAF _meth_81DF(0);
+  self._id_1BAF setlightintensity(0);
 }
 
 _id_2B01(var_0, var_1, var_2, var_3) {
@@ -2337,8 +2337,8 @@ _id_2B01(var_0, var_1, var_2, var_3) {
 
   for(var_7 = 0; var_7 < var_4; var_7++) {
     var_8 = var_5 * var_7;
-    var_9 = _func_0A7(var_8) * var_1;
-    var_10 = _func_0A6(var_8) * var_1;
+    var_9 = _cos(var_8) * var_1;
+    var_10 = _sin(var_8) * var_1;
     var_11 = var_0[0] + var_9;
     var_12 = var_0[1] + var_10;
     var_13 = var_0[2];
@@ -2350,8 +2350,8 @@ _id_2B01(var_0, var_1, var_2, var_3) {
 
   for(var_7 = 0; var_7 < var_4; var_7++) {
     var_8 = var_5 * var_7;
-    var_9 = _func_0A7(var_8) * var_1;
-    var_10 = _func_0A6(var_8) * var_1;
+    var_9 = _cos(var_8) * var_1;
+    var_10 = _sin(var_8) * var_1;
     var_11 = var_0[0];
     var_12 = var_0[1] + var_9;
     var_13 = var_0[2] + var_10;
@@ -2363,8 +2363,8 @@ _id_2B01(var_0, var_1, var_2, var_3) {
 
   for(var_7 = 0; var_7 < var_4; var_7++) {
     var_8 = var_5 * var_7;
-    var_9 = _func_0A7(var_8) * var_1;
-    var_10 = _func_0A6(var_8) * var_1;
+    var_9 = _cos(var_8) * var_1;
+    var_10 = _sin(var_8) * var_1;
     var_11 = var_0[0] + var_10;
     var_12 = var_0[1];
     var_13 = var_0[2] + var_9;
@@ -2406,7 +2406,7 @@ _id_9117(var_0, var_1, var_2, var_3, var_4) {
   level endon("new_destructible_spotlight");
   thread _id_911E(var_4);
   var_5 = var_0["spotlight_brightness"];
-  wait(_func_0A5(2, 5));
+  wait(_randomfloatrange(2, 5));
   _id_2E00(var_0, var_1, var_2, var_3);
   level._id_2E1A delete();
   var_4 delete();
@@ -2419,25 +2419,25 @@ _id_2E1B(var_0, var_1, var_2, var_3) {
   if(!isDefined(self._id_1BAF)) {
     return;
   }
-  var_1 common_scripts\utility::_id_83BE("startignoringspotLight");
+  var_1 common_scripts\utility::getweaponheatlevel("startignoringspotLight");
 
   if(!isDefined(level._id_2E1A)) {
     level._id_2E1A = common_scripts\utility::_id_8FFC();
     var_4 = common_scripts\utility::_id_44F5(var_0["spotlight_fx"]);
-    _func_147(var_4, level._id_2E1A, "tag_origin");
+    _playfxontag(var_4, level._id_2E1A, "tag_origin");
   }
 
   level notify("new_destructible_spotlight");
-  level._id_2E1A _meth_8057();
+  level._id_2E1A unlink();
   var_5 = common_scripts\utility::_id_8FFC();
-  var_5 _meth_8055(self, var_0["spotlight_tag"], (0, 0, 0), (0, 0, 0));
+  var_5 linkto(self, var_0["spotlight_tag"], (0, 0, 0), (0, 0, 0));
   level._id_2E1A.origin = self._id_1BAF.origin;
   level._id_2E1A.angles = self._id_1BAF.angles;
   level._id_2E1A thread _id_9117(var_0, var_1, var_2, var_3, var_5);
   waitframe();
 
   if(isDefined(var_5))
-    level._id_2E1A _meth_8055(var_5);
+    level._id_2E1A linkto(var_5);
 }
 
 _id_5641(var_0, var_1, var_2, var_3) {
@@ -2507,24 +2507,24 @@ _id_2DFE(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_2)) {
     if(var_4) {
-      _func_147(var_1, var_0, var_2);
+      _playfxontag(var_1, var_0, var_2);
       waitframe();
 
       if(var_5 == 1 || var_5 == 2) {
         _id_2DFC(var_3);
 
         if(var_5 == 1)
-          _func_148(var_1, var_0, var_2);
+          _stopfxontag(var_1, var_0, var_2);
         else
-          _func_149(var_1, var_0, var_2);
+          _killfxontag(var_1, var_0, var_2);
       }
     } else {
       var_8 = var_0 gettagorigin(var_2);
       var_9 = (0, 0, 100);
 
       if(var_5 == 1 || var_5 == 2) {
-        var_7 = _func_14B(var_1, var_8, var_9);
-        var_6 = _func_14C(var_7, 0.01);
+        var_7 = _spawnfx(var_1, var_8, var_9);
+        var_6 = _triggerfx(var_7, 0.01);
       } else
         var_6 = playFX(var_1, var_8, var_9);
 
@@ -2547,8 +2547,8 @@ _id_2DFE(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_9 = (0, 0, 100);
 
     if(var_5 == 1 || var_5 == 2) {
-      var_7 = _func_14B(var_1, var_8, var_9);
-      var_6 = _func_14C(var_7, 0.01);
+      var_7 = _spawnfx(var_1, var_8, var_9);
+      var_6 = _triggerfx(var_7, 0.01);
     } else
       var_6 = playFX(var_1, var_8, var_9);
 
@@ -2652,7 +2652,7 @@ _id_2DE4(var_0, var_1, var_2, var_3) {
   if(isDefined(self._id_66E6))
     return undefined;
 
-  if(isDefined(var_0["randomly_flip"]) && !isDefined(self._id_8249)) {
+  if(isDefined(var_0["randomly_flip"]) && !isDefined(self.setjitterparams)) {
     if(common_scripts\utility::_id_24A6())
       self.angles = self.angles + (0, 180, 0);
   }
@@ -2680,14 +2680,14 @@ _id_2DE4(var_0, var_1, var_2, var_3) {
   if(var_10 == var_11)
     var_12 = var_10;
   else
-    var_12 = _func_0A5(var_10, var_11);
+    var_12 = _randomfloatrange(var_10, var_11);
 
   var_13 = var_4["vehicle_exclude_anim"];
 
   if(self._id_003B == "script_vehicle" && var_13)
     return undefined;
 
-  var_1 common_scripts\utility::_id_83BE("useanimtree", var_6);
+  var_1 common_scripts\utility::getweaponheatlevel("useanimtree", var_6);
   var_14 = var_4["animType"];
 
   if(!isDefined(self._id_0ED4))
@@ -2699,22 +2699,22 @@ _id_2DE4(var_0, var_1, var_2, var_3) {
     _id_23A2(var_1);
 
   if(isDefined(var_9) && var_9 > 0)
-    wait(_func_0A3(var_9));
+    wait(_randomfloat(var_9));
 
   if(!common_scripts\utility::issp()) {
     if(isDefined(var_8))
-      common_scripts\utility::_id_83BE("scriptModelPlayAnim", var_8);
+      common_scripts\utility::getweaponheatlevel("scriptModelPlayAnim", var_8);
 
     return var_7;
   }
 
   if(var_14 == "setanim") {
-    var_1 common_scripts\utility::_id_83BE("setanim", var_5, 1.0, 1.0, var_12);
+    var_1 common_scripts\utility::getweaponheatlevel("setanim", var_5, 1.0, 1.0, var_12);
     return var_7;
   }
 
   if(var_14 == "setanimknob") {
-    var_1 common_scripts\utility::_id_83BE("setanimknob", var_5, 1.0, 0, var_12);
+    var_1 common_scripts\utility::getweaponheatlevel("setanimknob", var_5, 1.0, 0, var_12);
     return var_7;
   }
 
@@ -2725,11 +2725,11 @@ _id_23A2(var_0) {
   if(isDefined(self._id_0ED4)) {
     foreach(var_2 in self._id_0ED4) {
       if(common_scripts\utility::issp()) {
-        var_0 common_scripts\utility::_id_83BE("clearanim", var_2, 0);
+        var_0 common_scripts\utility::getweaponheatlevel("clearanim", var_2, 0);
         continue;
       }
 
-      var_0 common_scripts\utility::_id_83BE("scriptModelClearAnim");
+      var_0 common_scripts\utility::getweaponheatlevel("scriptModelClearAnim");
     }
   }
 }
@@ -2853,7 +2853,7 @@ _id_52AF(var_0) {
     common_scripts\utility::flag_set("FLAG_DOT_init");
   }
 
-  var_0 = _func_117(var_0);
+  var_0 = _tolower(var_0);
 
   switch (var_0) {
     case "poison":
@@ -2909,8 +2909,8 @@ _id_866A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_0)) {} else
     var_0 = 0;
 
-  var_6 = _func_117(var_6);
-  var_7 = _func_117(var_7);
+  var_6 = _tolower(var_6);
+  var_7 = _tolower(var_7);
   var_8 = self._id_99C1.size;
   self._id_99C1[var_8] = spawnStruct();
   self._id_99C1[var_8]._id_35FE = 0;
@@ -2951,7 +2951,7 @@ _id_866A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 _id_1D45(var_0, var_1) {
-  var_1 = _func_117(var_1);
+  var_1 = _tolower(var_1);
   var_2 = self._id_99C1.size;
   self._id_99C1[var_2] = spawnStruct();
   self._id_99C1[var_2].duration = var_0;
@@ -3082,7 +3082,7 @@ _id_92C7(var_0) {
     }
 
     if(isDefined(var_3._id_6E74)) {
-      var_4 _meth_8055(var_3._id_6E74);
+      var_4 linkto(var_3._id_6E74);
       var_3._id_6E74._id_32B1 = var_4;
     }
 
@@ -3220,23 +3220,23 @@ _id_6B04(var_0, var_1) {
 
     switch (self._id_6B02[var_0][var_2]) {
       case 1:
-        self _meth_81AA(1, self.origin);
+        self viewkick(1, self.origin);
         break;
       case 3:
-        self _meth_8182("mp_radiation_low", 4);
+        self shellshock("mp_radiation_low", 4);
         _id_3149(var_1, var_4 * 2);
         break;
       case 4:
-        self _meth_8182("mp_radiation_med", 5);
+        self shellshock("mp_radiation_med", 5);
         thread _id_3148(var_0, var_1);
         _id_3149(var_1, var_4 * 2);
         break;
       case 6:
-        self _meth_8182("mp_radiation_high", 5);
+        self shellshock("mp_radiation_high", 5);
         _id_3149(var_1, var_4 * 2);
         break;
       case 8:
-        self _meth_8182("mp_radiation_high", 5);
+        self shellshock("mp_radiation_high", 5);
         _id_3149(var_1, var_4 * 500);
         break;
     }
@@ -3301,7 +3301,7 @@ _id_3148(var_0, var_1) {
     self._id_6B03[var_0] = [];
 
   if(!isDefined(self._id_6B03[var_0][var_2])) {
-    var_4 = _func_19B(self);
+    var_4 = _newclienthudelem(self);
     var_4.x = 0;
     var_4.y = 0;
     var_4.alignx = "left";
@@ -3495,8 +3495,8 @@ _id_2E23() {
   if(!isDefined(level.player)) {
     return;
   }
-  if(!isDefined(self._id_815E))
-    self._id_815E = 20000;
+  if(!isDefined(self.nearclaimnode))
+    self.nearclaimnode = 20000;
 
   while(isDefined(self)) {
     if(isDefined(self._id_2E10)) {
@@ -3514,10 +3514,10 @@ _id_2E23() {
 
     var_2 = distancesquared(level.player.origin, self.origin);
 
-    if(var_2 > self._id_815E * self._id_815E)
-      self _meth_82C3(0);
+    if(var_2 > self.nearclaimnode * self.nearclaimnode)
+      self setcandamage(0);
     else
-      self _meth_82C3(1);
+      self setcandamage(1);
 
     waitframe();
   }

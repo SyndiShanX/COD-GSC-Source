@@ -100,7 +100,7 @@ _id_7283(var_0) {
     _id_7323(var_0);
     return var_0._id_3A08;
   } else {
-    var_1 = self _meth_8451();
+    var_1 = self getunnormalizedcameramovement();
     return var_1[1];
   }
 }
@@ -110,13 +110,13 @@ _id_738B(var_0) {
 
   if(_id_734C()) {
     _id_7323(var_0);
-    var_2 = self _meth_82F9();
+    var_2 = self getnormalizedmovement();
     var_3 = -12;
     var_4 = var_2[1] * var_3;
-    var_0._id_3A08 = _func_0DC(var_0._id_3A08 + var_4);
+    var_0._id_3A08 = _angleclamp(var_0._id_3A08 + var_4);
     var_1 = var_0._id_3A08;
   } else {
-    var_2 = self _meth_8451();
+    var_2 = self getunnormalizedcameramovement();
     var_1 = var_2[1];
 
     if(isDefined(var_0._id_3A08))
@@ -144,7 +144,7 @@ _id_13B5(var_0) {
   return level._id_13B8[var_0]._id_9A1A > 0;
 }
 
-_id_8099(var_0, var_1) {
+springcamdisabled(var_0, var_1) {
   maps\mp\hub_vl_camera::_id_7C75(var_0);
 }
 
@@ -169,7 +169,7 @@ _id_7E37(var_0) {
   foreach(var_4, var_3 in level._id_AAE2) {
     var_1 = level._id_A595[var_3];
     level._id_A595[var_3] = undefined;
-    _func_2BA(var_1, var_4, 1);
+    _setentplayerxuidforemblem(var_1, var_4, 1);
     level._id_AAE2[var_4] = undefined;
   }
 
@@ -178,7 +178,7 @@ _id_7E37(var_0) {
   level._id_13B8[0]._id_01D6 = var_0;
 
   if(isDefined(var_1)) {
-    _func_2BA(var_1, var_0);
+    _setentplayerxuidforemblem(var_1, var_0);
     level._id_A595[0] = var_1;
   }
 }
@@ -235,21 +235,21 @@ _id_8BD4() {
 
 _id_7E92(var_0, var_1) {
   var_2 = _id_738B(var_0);
-  var_3 = _func_0DC(var_2 - var_0._id_942C);
+  var_3 = _angleclamp(var_2 - var_0._id_942C);
   var_4 = getdvarfloat("ui_mouse_char_rot", 0);
 
   if(var_4 != 0) {
-    var_0._id_6469 = _func_0DC(var_0._id_6469 + var_4);
-    _func_035("ui_mouse_char_rot", 0);
+    var_0._id_6469 = _angleclamp(var_0._id_6469 + var_4);
+    _setdynamicdvar("ui_mouse_char_rot", 0);
   }
 
   var_5 = maps\mp\hub_vl_camera::_id_4590(var_0, var_3, var_1);
   var_5 = var_5 * -1;
-  var_6 = _func_0DC(var_0._id_942A + var_5 + var_0._id_6469);
+  var_6 = _angleclamp(var_0._id_942A + var_5 + var_0._id_6469);
   var_7 = (0, var_6, 0);
 
-  if(_func_1EF(var_0))
-    var_0 _meth_833E(var_7);
+  if(_isagent(var_0))
+    var_0 setplayerangles(var_7);
   else {
     var_8 = distance(var_7, var_0.angles);
 
@@ -262,10 +262,10 @@ _id_7E92(var_0, var_1) {
 
 _id_73F8(var_0) {
   var_1 = _id_7283(var_0);
-  var_2 = _func_0DC(var_1 - var_0._id_942C);
+  var_2 = _angleclamp(var_1 - var_0._id_942C);
 
   if(self._id_4B9E == 0) {
-    if(_func_0AE(var_2) >= 1) {
+    if(_abs(var_2) >= 1) {
       var_0._id_942A = var_0.angles[1];
       return 1;
     } else
@@ -276,7 +276,7 @@ _id_73F8(var_0) {
 
 _id_2F52() {
   self notify("kill_enable_weapons");
-  self _meth_812B(0);
+  self allowfire(0);
 }
 
 _id_3639() {
@@ -285,7 +285,7 @@ _id_3639() {
   var_0 = getdvarint("2454", 0);
 
   if(var_0 == 1 && self._id_50CA == 1)
-    self _meth_812B(1);
+    self allowfire(1);
 }
 
 _id_37B6(var_0) {
@@ -294,15 +294,15 @@ _id_37B6(var_0) {
 
   if(!level._id_A1FE) {
     var_0 setOrigin(var_1.origin);
-    var_0 _meth_8077(var_1, "tag_player");
-    var_0 _meth_81E2(var_1, "tag_player");
+    var_0 playerlinkto(var_1, "tag_player");
+    var_0 cameralinkto(var_1, "tag_player");
   }
 
   if(isDefined(var_0._id_A595) && isDefined(var_0._id_6A4F) && isDefined(level._id_A595[var_0._id_6A4F]))
     var_0 _id_7699(level._id_A595[var_0._id_6A4F], level._id_A595[var_0._id_6A4F].angles);
 
   var_0._id_50CA = 0;
-  var_0 _meth_812B(0);
+  var_0 allowfire(0);
   maps\mp\_utility::_id_A165("spectator");
 }
 
@@ -338,7 +338,7 @@ _id_6323(var_0) {
           var_8[var_8.size] = maps\mp\_utility::_id_4737(var_7);
 
         while(var_8.size > 0) {
-          var_10 = var_0 _meth_8512(var_8);
+          var_10 = var_0 loadweapons(var_8);
 
           if(var_10 == 1) {
             break;
@@ -347,13 +347,13 @@ _id_6323(var_0) {
           waitframe();
         }
 
-        var_0 _meth_848C();
+        var_0 showviewmodel();
         maps\mp\hub_vl_firingrange::_id_37B1(var_0);
-        var_0 _meth_8627("mp_no_foley", 1);
+        var_0 clientclearsoundsubmix("mp_no_foley", 1);
         setDvar("1175", 0);
         setDvar("190", 1);
       } else if(var_1 == 0 && var_0._id_50CA) {
-        var_0 _meth_848D();
+        var_0 hideviewmodel();
         var_0 _id_3C3C();
         var_0 _id_2F52();
 
@@ -362,7 +362,7 @@ _id_6323(var_0) {
 
         var_0 notify("enter_lobby");
         _id_37B6(var_0);
-        var_0 _meth_8626("mp_no_foley", 1);
+        var_0 clientaddsoundsubmix("mp_no_foley", 1);
         setDvar("1175", 3);
         setDvar("190", 1.5);
       }
@@ -375,7 +375,7 @@ _id_6323(var_0) {
 _id_3C3C() {
   var_0 = self;
   var_0 maps\mp\hub_vl_firingrange::_id_4864();
-  var_1 = var_0 _meth_82D1();
+  var_1 = var_0 getweaponslistoffhands();
 
   foreach(var_3 in var_1)
   var_0 maps\mp\gametypes\_class::_id_95EE(var_3);
@@ -395,8 +395,8 @@ _id_636A(var_0) {
 
       if(!var_0._id_5721) {
         var_0 _id_04DB::_id_98C7();
-        var_0 _meth_8057();
-        var_0 _meth_81E3();
+        var_0 unlink();
+        var_0 cameraunlink();
         continue;
       }
 

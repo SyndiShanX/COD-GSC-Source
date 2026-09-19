@@ -14,8 +14,8 @@ onplayerspawned() {
 
 setplayerlightset() {
   wait 0.5;
-  self _meth_806B(0.65, 1.7, 1.2, 1.2, 0);
-  self _meth_83C6("mp_zombie_dig_02_bright");
+  self digitaldistortsetparams(0.65, 1.7, 1.2, 1.2, 0);
+  self lightsetforplayer("mp_zombie_dig_02_bright");
 }
 
 _id_84F8() {

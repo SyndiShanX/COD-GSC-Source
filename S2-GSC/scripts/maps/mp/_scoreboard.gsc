@@ -5,7 +5,7 @@
 
 _id_7759() {
   if(maps\mp\_utility::_id_585F())
-    _func_12B("scoreboardPlayerCount", 0);
+    _setclientmatchdata("scoreboardPlayerCount", 0);
 
   foreach(var_1 in level.placement["all"])
   var_1 _id_8701();
@@ -16,19 +16,19 @@ _id_7759() {
     foreach(var_1 in level.players)
     var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "neutral");
 
-    _func_12B("alliesScore", level._id_A980);
-    _func_12B("axisScore", _func_033("ui_game_duration"));
+    _setclientmatchdata("alliesScore", level._id_A980);
+    _setclientmatchdata("axisScore", _getomnvar("ui_game_duration"));
   } else if(level._id_6520) {
     _id_1D5A("multiteam");
 
     foreach(var_1 in level.players)
     var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "multiteam");
 
-    _func_12B("alliesScore", -1);
-    _func_12B("axisScore", -1);
+    _setclientmatchdata("alliesScore", -1);
+    _setclientmatchdata("axisScore", -1);
   } else if(level.teambased) {
-    var_7 = _func_155("allies");
-    var_8 = _func_155("axis");
+    var_7 = _getteamscore("allies");
+    var_8 = _getteamscore("axis");
 
     if(var_7 == var_8)
       var_9 = "tied";
@@ -37,8 +37,8 @@ _id_7759() {
     else
       var_9 = "axis";
 
-    _func_12B("alliesScore", var_7);
-    _func_12B("axisScore", var_8);
+    _setclientmatchdata("alliesScore", var_7);
+    _setclientmatchdata("axisScore", var_8);
 
     if(var_9 == "tied") {
       _id_1D5A("allies");
@@ -69,8 +69,8 @@ _id_7759() {
     foreach(var_1 in level.players)
     var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "neutral");
 
-    _func_12B("alliesScore", -1);
-    _func_12B("axisScore", -1);
+    _setclientmatchdata("alliesScore", -1);
+    _setclientmatchdata("axisScore", -1);
   }
 
   foreach(var_1 in level.players) {
@@ -85,7 +85,7 @@ _id_7759() {
     } else if(!var_1 maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E())
       var_18 = var_1.pers["summary"]["xp"];
     else
-      var_18 = var_1 _meth_8507() - var_1.pers["summary"]["matchStartXp"];
+      var_18 = var_1 gettotalmpxp() - var_1.pers["summary"]["matchStartXp"];
 
     var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "totalXp", var_18);
     var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "totalShotgunXp", var_19);
@@ -100,72 +100,72 @@ _id_7759() {
 }
 
 _id_8701() {
-  var_0 = _func_12C("scoreboardPlayerCount");
+  var_0 = _getclientmatchdata("scoreboardPlayerCount");
 
   if(var_0 <= 48) {
-    _func_12B("players", self._id_241A, "score", self.pers["score"]);
+    _setclientmatchdata("players", self._id_241A, "score", self.pers["score"]);
 
-    if(_func_0C1(self)) {
-      var_1 = self _meth_836D();
+    if(_isai(self)) {
+      var_1 = self botgetdifficulty();
       var_2 = "bot_rank_" + var_1;
       var_3 = self.pers[var_2];
-      _func_12B("players", self._id_241A, "experience", var_3);
+      _setclientmatchdata("players", self._id_241A, "experience", var_3);
     } else {
-      var_4 = self _meth_8507();
-      _func_12B("players", self._id_241A, "experience", var_4);
+      var_4 = self gettotalmpxp();
+      _setclientmatchdata("players", self._id_241A, "experience", var_4);
     }
 
     var_5 = self _meth_8508();
-    _func_12B("players", self._id_241A, "clanTag", var_5);
+    _setclientmatchdata("players", self._id_241A, "clanTag", var_5);
 
-    if(_func_0C1(self)) {
-      var_1 = self _meth_836D();
+    if(_isai(self)) {
+      var_1 = self botgetdifficulty();
       var_6 = "bot_prestige_" + var_1;
       var_7 = self.pers[var_6];
-      _func_12B("players", self._id_241A, "prestige", var_7);
+      _setclientmatchdata("players", self._id_241A, "prestige", var_7);
     } else {
       var_7 = self.pers["prestige"];
-      _func_12B("players", self._id_241A, "prestige", var_7);
+      _setclientmatchdata("players", self._id_241A, "prestige", var_7);
     }
 
     var_8 = self.pers["kills"];
-    _func_12B("players", self._id_241A, "kills", var_8);
+    _setclientmatchdata("players", self._id_241A, "kills", var_8);
 
     if(level.gametype == "ctf" || level.gametype == "sr" || level.gametype == "gun")
       var_9 = self._id_0021;
     else
       var_9 = self.pers["assists"];
 
-    _func_12B("players", self._id_241A, "assists", var_9);
+    _setclientmatchdata("players", self._id_241A, "assists", var_9);
     var_10 = self.pers["deaths"];
-    _func_12B("players", self._id_241A, "deaths", var_10);
+    _setclientmatchdata("players", self._id_241A, "deaths", var_10);
     var_11 = self.pers["headshots"];
-    _func_12B("players", self._id_241A, "headshots", var_11);
+    _setclientmatchdata("players", self._id_241A, "headshots", var_11);
     var_12 = self.pers["team"];
-    _func_12B("players", self._id_241A, "team", var_12);
+    _setclientmatchdata("players", self._id_241A, "team", var_12);
     var_13 = game[self.pers["team"]];
-    _func_12B("players", self._id_241A, "faction", var_13);
+    _setclientmatchdata("players", self._id_241A, "faction", var_13);
     var_14 = self.pers["extrascore0"];
-    _func_12B("players", self._id_241A, "extrascore0", var_14);
+    _setclientmatchdata("players", self._id_241A, "extrascore0", var_14);
     var_15 = self.pers["extrascore1"];
-    _func_12B("players", self._id_241A, "extrascore1", var_15);
+    _setclientmatchdata("players", self._id_241A, "extrascore1", var_15);
     var_16 = 0;
 
     if(isDefined(self.pers["division"]) && isDefined(self.pers["division"]["index"]))
       var_16 = self.pers["division"]["index"];
 
-    _func_12B("players", self._id_241A, "division", var_16);
+    _setclientmatchdata("players", self._id_241A, "division", var_16);
     var_0++;
-    _func_12B("scoreboardPlayerCount", var_0);
+    _setclientmatchdata("scoreboardPlayerCount", var_0);
 
     if(_func_3AF()) {
       var_17 = _func_3B5();
       var_18 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_17, "mmr_current");
-      _func_12B("players", self._id_241A, "mmr_current", var_18);
+      _setclientmatchdata("players", self._id_241A, "mmr_current", var_18);
       var_19 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_17, "ranked_games_total");
-      _func_12B("players", self._id_241A, "ranked_games_total", var_19);
+      _setclientmatchdata("players", self._id_241A, "ranked_games_total", var_19);
       var_20 = !self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_17, "mmr_was_adjusted");
-      _func_12B("players", self._id_241A, "ranked_placement_enabled", var_20);
+      _setclientmatchdata("players", self._id_241A, "ranked_placement_enabled", var_20);
       return;
     }
   } else {}
@@ -177,7 +177,7 @@ _id_1D5A(var_0) {
 
     foreach(var_3 in level._id_985B) {
       foreach(var_5 in level.placement[var_3]) {
-        _func_12B("scoreboards", "multiteam", "scoreboard", var_1, var_5._id_241A);
+        _setclientmatchdata("scoreboards", "multiteam", "scoreboard", var_1, var_5._id_241A);
         var_1++;
       }
     }
@@ -185,7 +185,7 @@ _id_1D5A(var_0) {
     var_1 = 0;
 
     foreach(var_5 in level.placement["all"]) {
-      _func_12B("scoreboards", var_0, "scoreboard", var_1, var_5._id_241A);
+      _setclientmatchdata("scoreboards", var_0, "scoreboard", var_1, var_5._id_241A);
       var_1++;
     }
   } else {
@@ -193,12 +193,12 @@ _id_1D5A(var_0) {
     var_1 = 0;
 
     foreach(var_5 in level.placement[var_0]) {
-      _func_12B("scoreboards", var_0, "scoreboard", var_1, var_5._id_241A);
+      _setclientmatchdata("scoreboards", var_0, "scoreboard", var_1, var_5._id_241A);
       var_1++;
     }
 
     foreach(var_5 in level.placement[var_10]) {
-      _func_12B("scoreboards", var_0, "scoreboard", var_1, var_5._id_241A);
+      _setclientmatchdata("scoreboards", var_0, "scoreboard", var_1, var_5._id_241A);
       var_1++;
     }
   }

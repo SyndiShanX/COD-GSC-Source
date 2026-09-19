@@ -49,12 +49,12 @@ trap_altar_spikes_glasses_listen() {
     }
   }
 
-  var_1 = _func_18E("sunglasses_at_night", "script_noteworthy");
+  var_1 = _getent("sunglasses_at_night", "script_noteworthy");
   var_2 = common_scripts\utility::_id_46B5("glasses_dest", "script_noteworthy");
   var_3 = common_scripts\utility::_id_46B5("glasses_glint_fx_loc", "script_noteworthy");
 
   if(isDefined(var_1) && isDefined(var_2))
-    var_1 _meth_82B1(var_2.origin, 10, 0.25, 3);
+    var_1 moveto(var_2.origin, 10, 0.25, 3);
 
   wait 10;
 
@@ -72,8 +72,8 @@ trap_altar_spikes(var_0) {
 trap_altar_spikes_handle_damage() {
   self._id_565F = 1;
   var_0 = common_scripts\utility::_id_46B5("med_trap_fx_point", "targetname");
-  var_1 = _func_14B(level._effect["dlc_zmb_dig_02_spike_trap_on"], var_0.origin, anglesToForward(var_0.angles));
-  _func_14C(var_1);
+  var_1 = _spawnfx(level._effect["dlc_zmb_dig_02_spike_trap_on"], var_0.origin, anglesToForward(var_0.angles));
+  _triggerfx(var_1);
   thread trap_altar_spikes_damage_zombies(var_0);
   thread trap_altar_spikes_damage_players(var_0);
   _id_0378::_id_8D74("aud_trap_spikes", var_0.origin);
@@ -90,7 +90,7 @@ trap_altar_spikes_damage_zombies(var_0) {
       if(_id_0547::_id_5565(var_3._id_0A4B, "zombie_guardian")) {
         continue;
       }
-      var_4 = _func_0E1(var_3.origin, var_0.origin);
+      var_4 = _distance2d(var_3.origin, var_0.origin);
 
       if(var_4 > 140 && var_4 < 242 && var_3.origin[2] < self.origin[2]) {
         playFX(level._effect["zmb_med_trap_gib"], var_3.origin + (0, 0, 50), anglesToForward(var_3.angles));
@@ -100,9 +100,9 @@ trap_altar_spikes_damage_zombies(var_0) {
         if(isalive(var_3) && var_3._id_0BA4 != "traverse") {
           if(!isDefined(var_3.wasspikedlast) || isDefined(var_3.wasspikedlast) && var_5 > var_3.wasspikedlast + 1000) {
             if(var_3 _id_0547::_id_580A())
-              var_3 _meth_8059(var_3.health * 0.1, self.origin, level.trap_altar_spikes, level.trap_altar_spikes, "MOD_EXPLOSIVE", "trap_zm_mp");
+              var_3 dodamage(var_3.health * 0.1, self.origin, level.trap_altar_spikes, level.trap_altar_spikes, "MOD_EXPLOSIVE", "trap_zm_mp");
             else {
-              var_3 _meth_8059(var_3.health + 666, self.origin, level.trap_altar_spikes, level.trap_altar_spikes, "MOD_EXPLOSIVE", "trap_zm_mp");
+              var_3 dodamage(var_3.health + 666, self.origin, level.trap_altar_spikes, level.trap_altar_spikes, "MOD_EXPLOSIVE", "trap_zm_mp");
               level.dig_trap_kill_count++;
 
               if(!isDefined(var_3.hitbytrap)) {
@@ -137,7 +137,7 @@ trap_altar_spikes_damage_players(var_0) {
       if(_id_0547::_id_577E(var_3)) {
         continue;
       }
-      var_4 = _func_0E1(var_3.origin, var_0.origin);
+      var_4 = _distance2d(var_3.origin, var_0.origin);
 
       if(var_4 > 140 && var_4 < 242 && var_3.origin[2] < self.origin[2]) {
         waitframe();
@@ -147,7 +147,7 @@ trap_altar_spikes_damage_players(var_0) {
           var_3.wasspikedlast = gettime();
 
         if(isalive(var_3) && var_5 > var_3.wasspikedlast + 500 && !_id_0547::_id_577E(var_3)) {
-          var_3 _meth_8059(5, self.origin, undefined, undefined, "MOD_CRUSH");
+          var_3 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
 
           if(var_3.health - 5 <= 0)
             level.dig_trap_kill_count++;

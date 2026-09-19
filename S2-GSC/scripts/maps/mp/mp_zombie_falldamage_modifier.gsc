@@ -13,7 +13,7 @@ _id_7D14() {
       foreach(var_1 in level.players) {
         if(!var_1 maps\mp\_utility::_hasperk("specialty_falldamage")) {
           var_1 maps\mp\_utility::giveperk("specialty_falldamage");
-          var_1._id_3A0F = _func_0AD(0);
+          var_1._id_3A0F = _float(0);
         }
       }
     }

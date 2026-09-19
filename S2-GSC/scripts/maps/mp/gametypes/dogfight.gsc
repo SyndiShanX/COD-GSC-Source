@@ -11,7 +11,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -46,18 +46,18 @@ main() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653();
-  _func_035("scr_dogfight_roundswitch", 0);
+  _setdynamicdvar("scr_dogfight_roundswitch", 0);
   maps\mp\_utility::registerroundswitchdvar("dogfight", 0, 0, 9);
-  _func_035("scr_dogfight_roundlimit", 1);
+  _setdynamicdvar("scr_dogfight_roundlimit", 1);
   maps\mp\_utility::registerroundlimitdvar("dogfight", 1);
-  _func_035("scr_dogfight_winlimit", 1);
+  _setdynamicdvar("scr_dogfight_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("dogfight", 1);
-  _func_035("scr_dogfight_halftime", 0);
+  _setdynamicdvar("scr_dogfight_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("dogfight", 0);
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
 
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;

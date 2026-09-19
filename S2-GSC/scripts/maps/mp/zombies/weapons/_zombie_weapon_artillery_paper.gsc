@@ -10,39 +10,39 @@ flourish_map(var_0) {
 }
 
 use_map() {
-  self _meth_8305(0);
-  self _meth_8113(0);
-  self _meth_8114(0);
-  self _meth_81E1(0);
+  self allowjump(0);
+  self allowcrouch(0);
+  self allowprone(0);
+  self setmovespeedscale(0);
   var_0 = self getcurrentweapon();
   _id_0586::_id_078C("papermap_zm");
   _id_0586::_id_078E("papermap_zm");
-  self _meth_8326();
+  self disableweaponswitch();
   var_1 = wait_for_user_input();
-  self _meth_8327();
+  self enableweaponswitch();
   _id_0586::_id_078E(var_0);
   wait 1;
   _id_0586::_id_0790("papermap_zm");
-  self _meth_81E1(1);
-  self _meth_8305(1);
-  self _meth_8113(1);
-  self _meth_8114(1);
+  self setmovespeedscale(1);
+  self allowjump(1);
+  self allowcrouch(1);
+  self allowprone(1);
   return var_1;
 }
 
 wait_for_user_input() {
   var_0 = 1;
 
-  while(self _meth_8341())
+  while(self usebuttonpressed())
     waitframe();
 
   wait 0.15;
 
   while(var_0) {
-    if(self _meth_8341())
+    if(self usebuttonpressed())
       return "A";
 
-    if(self _meth_83E4())
+    if(self jumpbuttonpressed())
       return "B";
 
     if(self _meth_84F1())
@@ -56,11 +56,11 @@ preview_map(var_0) {
   var_1 = self getcurrentweapon();
   _id_0586::_id_078C(var_0);
   _id_0586::_id_078E(var_0);
-  self _meth_8326();
+  self disableweaponswitch();
   wait 1.5;
-  _func_18C("DIALOG: We'll need to check out the sub pens first.");
+  _iprintlnbold("DIALOG: We'll need to check out the sub pens first.");
   wait 1.5;
-  self _meth_8327();
+  self enableweaponswitch();
   _id_0586::_id_078E(var_1);
   wait 1;
   _id_0586::_id_0790(var_0);

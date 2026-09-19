@@ -11,13 +11,13 @@ _id_0A59(var_0) {
   return level._id_0A41[self._id_0A4B][var_0];
 }
 
-_id_83FE(var_0, var_1) {
+hudoutlineenable(var_0, var_1) {
   self.team = var_0;
   self._id_000A = var_0;
   self.pers["team"] = var_0;
   self._id_0117 = var_1;
-  self _meth_8385(var_1);
-  self _meth_8387(var_1);
+  self setotherent(var_1);
+  self setentityowner(var_1);
 }
 
 _id_5291() {
@@ -28,7 +28,7 @@ _id_5291() {
   self._id_5664 = 1;
   self._id_A87A = 0;
   self._id_57D6 = 0;
-  self._id_37CD = self getentitynumber();
+  self.entity_number = self getentitynumber();
   self._id_0A4A = 0;
   self._id_0A42 = 0;
   self._id_0009 = undefined;
@@ -179,7 +179,7 @@ _id_2A74() {
   if(maps\mp\_utility::_id_56FF(self))
     _id_050D::_id_7CDF();
 
-  _func_2D0(self);
+  _removefromcharactersarray(self);
   waitframe();
   self._id_565F = 0;
   self._id_4B60 = 0;
@@ -199,7 +199,7 @@ _id_2A74() {
   self.headmodel = undefined;
   self detachall();
   self notify("disconnect");
-  self _meth_8494();
+  self agentclearscriptvars();
   level._id_2DA2 = common_scripts\utility::_id_0F93(level._id_2DA2, self);
 }
 
@@ -265,7 +265,7 @@ _id_45AE(var_0) {
 }
 
 _id_470C(var_0, var_1) {
-  var_2 = _func_0B8(self.origin, 350, 64, 128, "Path");
+  var_2 = _getnodesinradius(self.origin, 350, 64, 128, "Path");
 
   if(!isDefined(var_2) || var_2.size == 0)
     return undefined;
@@ -275,7 +275,7 @@ _id_470C(var_0, var_1) {
     var_2 = [];
 
     foreach(var_5 in var_3) {
-      if(var_5.origin[2] > level._id_A966 || !_func_21B(var_5.origin, level._id_9DC7))
+      if(var_5.origin[2] > level._id_A966 || !_ispointinvolume(var_5.origin, level._id_9DC7))
         var_2[var_2.size] = var_5;
     }
   }
@@ -295,7 +295,7 @@ _id_470C(var_0, var_1) {
   var_12 = [];
 
   foreach(var_14 in var_2) {
-    if(!var_14 _meth_8039("stand")) {
+    if(!var_14 doesnodeallowstance("stand")) {
       continue;
     }
     var_15 = vectorNormalize(var_14.origin - self.origin);
@@ -324,14 +324,14 @@ _id_470C(var_0, var_1) {
     if(var_17 > 0)
       waitframe();
 
-    if(!_func_07F(var_20, var_21, 0, self)) {
+    if(!_sighttracepassed(var_20, var_21, 0, self)) {
       continue;
     }
     if(var_1) {
       if(var_17 > 0)
         waitframe();
 
-      var_22 = _func_081(var_14.origin + var_10, var_14.origin);
+      var_22 = _playerphysicstrace(var_14.origin + var_10, var_14.origin);
 
       if(distancesquared(var_22, var_14.origin) > 1)
         continue;
@@ -341,7 +341,7 @@ _id_470C(var_0, var_1) {
       if(var_17 > 0)
         waitframe();
 
-      var_22 = _func_080(var_20, var_21);
+      var_22 = _physicstrace(var_20, var_21);
 
       if(distancesquared(var_22, var_21) > 1)
         continue;
@@ -352,7 +352,7 @@ _id_470C(var_0, var_1) {
 }
 
 _id_5A28(var_0) {
-  var_0 _meth_8059(var_0.health + 500000, var_0.origin);
+  var_0 dodamage(var_0.health + 500000, var_0.origin);
 }
 
 _id_5A39() {
@@ -383,7 +383,7 @@ cleanupentsonagentdeath() {
 }
 
 get_max_agents() {
-  var_0 = _func_1F0();
+  var_0 = _getmaxagents();
 
   if(isDefined(level.overridemaxagents))
     var_0 = level.overridemaxagents;

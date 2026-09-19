@@ -58,9 +58,9 @@ enterfeedingstate(var_0) {
     self._id_5A36 = 0;
 
   level notify("corpse_eater_start_feed", self, var_1);
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "corpse_eater_feed");
-  self _meth_839C("anim deltas");
+  self scragentsetanimmode("anim deltas");
   wait_for_eating_done();
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("corpse_eat_exit");
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, 0, 1, "scripted_anim");
@@ -75,9 +75,9 @@ enterfeedingstate(var_0) {
 
 enterdetonation(var_0) {
   self endon("death");
-  self _meth_83A2(1);
-  self _meth_839C("code_move");
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetscripted(1);
+  self scragentsetanimmode("code_move");
+  self scragentsetorientmode("face angle abs", self.angles);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "corpse_eater_detonate");
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("corpse_death_explode");
   thread maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, 0, 1, "scripted_anim", undefined, ::detonate_on_notetrack);
@@ -103,16 +103,16 @@ do_final_detonation() {
   self.luckycrit = 1;
   self._id_1DEB = 1;
   try_detonation();
-  self _meth_8059(self.health * 2, self.origin, var_0);
+  self dodamage(self.health * 2, self.origin, var_0);
 }
 
 exitfeedingstate(var_0) {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "corpse_eater_feed");
 }
 
 exitdetonation(var_0) {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "corpse_eater_detonate");
 }
 
@@ -163,7 +163,7 @@ wait_for_eating_done() {
   }
 
   var_0 endon("death");
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetorientmode("face angle abs", self.angles);
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("corpse_eat_enter");
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, 0, 1, "scripted_anim");
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("corpse_eat_loop");
@@ -173,8 +173,8 @@ wait_for_eating_done() {
     self.loc_beam delete();
 
   self.loc_beam = _func_382("zmb_geistkraft_reg_beam_med", self, "jnt_mandible", var_0, "j_neck");
-  _func_147(level._effect["zmb_corpse_eater_feed"], self, "j_head");
-  _func_147(level._effect["dark_energy_burst"], var_0, "J_Head");
+  _playfxontag(level._effect["zmb_corpse_eater_feed"], self, "j_head");
+  _playfxontag(level._effect["dark_energy_burst"], var_0, "J_Head");
   _id_0378::_id_8D74("aud_corpse_eater_soul_suck", self.origin, var_0.origin);
   childthread kill_zombie_target();
   var_2 = get_feed_secondary_count();
@@ -207,8 +207,8 @@ wait_for_eating_done() {
 
     foreach(var_12 in var_3) {
       self.secondary_loc_beams[self.secondary_loc_beams.size] = _func_382("zmb_geistkraft_reg_beam_med", self, "jnt_mandible", var_12, "j_neck");
-      _func_147(level._effect["zmb_corpse_eater_feed"], self, "j_head");
-      _func_147(level._effect["dark_energy_burst"], var_0, "J_Head");
+      _playfxontag(level._effect["zmb_corpse_eater_feed"], self, "j_head");
+      _playfxontag(level._effect["dark_energy_burst"], var_0, "J_Head");
       _id_0378::_id_8D74("aud_corpse_eater_soul_suck", self.origin, var_12.origin);
       thread kill_zombie_target(var_12);
     }
@@ -230,7 +230,7 @@ periodically_spawn_corpse_eaters() {
   level.plr_training_time = 0;
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3._id_8260) && issubstr(var_3._id_8260, "corpse_eater_enabled"))
+    if(isDefined(var_3.setlookatent) && issubstr(var_3.setlookatent, "corpse_eater_enabled"))
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
   }
 
@@ -275,8 +275,8 @@ zombie_corpse_eater_vfx(var_0) {
   while(!should_detonate_on_players())
     waitframe();
 
-  self.poweredupfx = _func_2A8(common_scripts\utility::_id_44F5("zmb_corpse_eater_zombie_smoldering"), self, "J_Spine4");
-  _func_14C(self.poweredupfx);
+  self.poweredupfx = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_corpse_eater_zombie_smoldering"), self, "J_Spine4");
+  _triggerfx(self.poweredupfx);
 
   if(!common_scripts\utility::_id_562E(var_0))
     _id_0378::_id_8D74("aud_corpse_eater_fully_charged");
@@ -401,7 +401,7 @@ unlink_corpseeater(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
 
     if(isDefined(var_12) && isDefined(self._id_08E1) && _id_0547::_id_5565(self._id_08E1.name, "tesla_shock")) {
       self.beingeatenbyce = 1;
-      var_13 = _id_0580::_id_8317(self.origin, var_1);
+      var_13 = _id_0580::getcurrentprimaryweapon(self.origin, var_1);
       var_13._id_6AA0 = _id_0557::_id_30D8;
       var_12 thread _id_0547::_id_7D1A("tesla_shock", [var_13], 1.8);
     }
@@ -453,11 +453,11 @@ kill_zombie_target(var_0) {
     var_1 = var_0;
 
   if(common_scripts\utility::_id_562E(var_1._id_2FDA)) {
-    var_1 _meth_8059(var_1.health + 1, self.origin);
+    var_1 dodamage(var_1.health + 1, self.origin);
     return;
   }
 
-  var_2 = _id_0580::_id_8317(var_1.origin, self);
+  var_2 = _id_0580::getcurrentprimaryweapon(var_1.origin, self);
   var_1 thread _id_0547::_id_7D1A("tesla_shock", [var_2], 1.8);
 
   if(!isDefined(var_1)) {
@@ -479,7 +479,7 @@ kill_zombie_target(var_0) {
   self._id_5A36++;
   self.maxhealth = self.maxhealth + int(var_3 * 0.35);
   self.health = self.maxhealth;
-  var_1 _meth_8059(var_1.health + 1, self.origin);
+  var_1 dodamage(var_1.health + 1, self.origin);
 }
 
 zombie_corpse_eater_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
@@ -547,8 +547,8 @@ zombie_corpse_eater_passive() {
   for(;;) {
     var_0 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("idle_noncombat");
     var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_0);
-    self _meth_839C("anim deltas");
-    self _meth_839B("face angle abs", self.angles);
+    self scragentsetanimmode("anim deltas");
+    self scragentsetorientmode("face angle abs", self.angles);
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_0, var_1, 1.0, "idle_anim");
   }
 }

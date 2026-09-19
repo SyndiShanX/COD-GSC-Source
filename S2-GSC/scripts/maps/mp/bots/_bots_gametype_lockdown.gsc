@@ -11,17 +11,17 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["crate_can_use"] = ::_id_2734;
-  level._id_19D5["gametype_think"] = ::_id_19B7;
-  level._id_19D5["should_start_cautious_approach"] = ::_id_8B7B;
-  level._id_19D5["leader_dialog"] = ::_id_19B5;
+  level.bot_funcs["crate_can_use"] = ::_id_2734;
+  level.bot_funcs["gametype_think"] = ::_id_19B7;
+  level.bot_funcs["should_start_cautious_approach"] = ::_id_8B7B;
+  level.bot_funcs["leader_dialog"] = ::_id_19B5;
 
   if(!level._id_1A1B)
-    level._id_19D5["get_watch_node_chance"] = ::_id_19B4;
+    level.bot_funcs["get_watch_node_chance"] = ::_id_19B4;
 }
 
 _id_2734(var_0) {
-  if(_func_1EF(self) && !isDefined(var_0._id_1B7B))
+  if(_isagent(self) && !isDefined(var_0._id_1B7B))
     return 0;
 
   if(!maps\mp\_utility::_id_5800(self))
@@ -41,10 +41,10 @@ _id_631A() {
     var_0 = maps\mp\gametypes\dom::_id_44E3();
 
     if(var_0 != "neutral") {
-      var_1 = _func_1F7(self.origin);
+      var_1 = _getzonenearest(self.origin);
 
       if(isDefined(var_1))
-        _func_1E8(var_1, var_0);
+        _botzonesetteam(var_1, var_0);
     }
   }
 }
@@ -99,9 +99,9 @@ _id_8794() {
     var_3 thread _id_631A();
     var_3 thread _id_630D();
 
-    if(var_3._id_81E8 != "_a" && var_3._id_81E8 != "_b" && var_3._id_81E8 != "_c") {}
+    if(var_3.shootblank != "_a" && var_3.shootblank != "_b" && var_3.shootblank != "_c") {}
 
-    var_3._id_671A = _func_1F3(var_3);
+    var_3._id_671A = _getnodesintrigger(var_3);
     maps\mp\bots\_bots_gametype_common::_id_192E(var_3, var_3);
     var_3._id_5B62["allies"] = 0;
     var_3._id_5B62["axis"] = 0;
@@ -120,7 +120,7 @@ _id_1B1F(var_0) {
   _id_1952(var_0);
 
   foreach(var_2 in var_0) {
-    var_2._id_671A = _func_1F3(var_2);
+    var_2._id_671A = _getnodesintrigger(var_2);
     maps\mp\bots\_bots_gametype_common::_id_192E(var_2, var_2);
   }
 
@@ -194,9 +194,9 @@ _id_19B7() {
   self._id_3DF4 = 0;
   self._id_668C = 0;
   self._id_66B0 = 0;
-  self _meth_8353("separation", 0);
-  self _meth_8353("grenade_objectives", 1);
-  self _meth_8353("use_obj_path_style", 1);
+  self botsetflag("separation", 0);
+  self botsetflag("grenade_objectives", 1);
+  self botsetflag("use_obj_path_style", 1);
 
   for(;;) {
     maps\mp\bots\_bots_util::_id_1B13();
@@ -204,7 +204,7 @@ _id_19B7() {
 
     if(var_0 > self._id_66B0) {
       self._id_66B0 = gettime() + 10000;
-      self._id_943A = self _meth_837D("strategyLevel");
+      self._id_943A = self botgetdifficultysetting("strategyLevel");
     }
 
     if(var_0 > self._id_668C || self._id_3DF4) {
@@ -213,7 +213,7 @@ _id_19B7() {
       else {
         self._id_3DF4 = 0;
         _id_1975();
-        self._id_668C = var_0 + _func_0A4(30000, 45000);
+        self._id_668C = var_0 + _randomintrange(30000, 45000);
       }
     }
 
@@ -505,7 +505,7 @@ _id_1975() {
 
 _id_61AD() {
   var_0 = maps\mp\bots\_bots_util::_id_19F9(self.team);
-  return _func_0D5(var_0 / 3);
+  return _ceil(var_0 / 3);
 }
 
 _id_1934() {
@@ -526,7 +526,7 @@ _id_1934() {
 }
 
 _id_1AE0(var_0) {
-  if(_func_0A3(1) < var_0)
+  if(_randomfloat(1) < var_0)
     return 1;
 
   var_1 = level._id_1A92[self._id_6F7D];
@@ -578,9 +578,9 @@ _id_4193() {
 
 _id_4195() {
   if(!isDefined(level._id_7790)) {
-    var_0 = self _meth_8361();
+    var_0 = self botgetworldsize();
     var_1 = (var_0[0] + var_0[1]) / 2;
-    level._id_7790 = _func_0AF(1000, var_1 / 3.5);
+    level._id_7790 = _min(1000, var_1 / 3.5);
   }
 
   return level._id_7790;
@@ -592,7 +592,7 @@ _id_19B5(var_0, var_1) {
     var_3 = _id_4341(var_2);
 
     if(_id_1933(var_3)) {
-      self _meth_8364("known_enemy", undefined, var_3.origin);
+      self botmemoryevent("known_enemy", undefined, var_3.origin);
 
       if(!isDefined(self._id_5B30) || gettime() - self._id_5B30 > 10000) {
         if(maps\mp\bots\_bots_util::_id_1A33()) {
@@ -663,18 +663,18 @@ _id_630E(var_0) {
       }
 
       if(self istouching(var_0) && var_0._id_A222._id_A22B <= 0) {
-        if(self _meth_8367()) {
-          var_12 = self _meth_835C();
-          var_13 = self _meth_835D();
+        if(self bothasscriptgoal()) {
+          var_12 = self botgetscriptgoal();
+          var_13 = self botgetscriptgoalradius();
 
-          if(distancesquared(self.origin, var_12) < _func_0DA(var_13)) {
-            var_14 = self _meth_838A();
+          if(distancesquared(self.origin, var_12) < _squared(var_13)) {
+            var_14 = self getnearestnode();
 
             if(isDefined(var_14)) {
               var_15 = undefined;
 
               foreach(var_17 in var_0._id_671A) {
-                if(!_func_1F4(var_17, var_14, 1)) {
+                if(!_nodesvisible(var_17, var_14, 1)) {
                   var_15 = var_17.origin;
                   break;
                 }
@@ -707,10 +707,10 @@ _id_630E(var_0) {
       continue;
     }
 
-    var_19 = level common_scripts\utility::_id_A74D("flag_changed_ownership", 1 + _func_0A5(0, 2));
+    var_19 = level common_scripts\utility::_id_A74D("flag_changed_ownership", 1 + _randomfloatrange(0, 2));
 
     if(!(isDefined(var_19) && var_19 == "timeout")) {
-      var_20 = max((3 - self._id_943A) * 1.0 + _func_0A5(-0.5, 0.5), 0);
+      var_20 = max((3 - self._id_943A) * 1.0 + _randomfloatrange(-0.5, 0.5), 0);
       wait(var_20);
     }
   }
@@ -755,7 +755,7 @@ _id_4194(var_0) {
   if(isDefined(var_0._id_98BF))
     var_1 = var_1 + (var_0._id_98BF + "_");
 
-  var_1 = var_1 + ("flag" + var_0._id_81E8);
+  var_1 = var_1 + ("flag" + var_0.shootblank);
   return var_1;
 }
 
@@ -767,13 +767,13 @@ _id_426A(var_0, var_1) {
 }
 
 _id_4342(var_0) {
-  var_1 = "_" + _func_117(var_0);
+  var_1 = "_" + _tolower(var_0);
   _id_4341(var_1);
 }
 
 _id_4341(var_0) {
   for(var_1 = 0; var_1 < level._id_3CC5.size; var_1++) {
-    if(level._id_3CC5[var_1]._id_81E8 == var_0)
+    if(level._id_3CC5[var_1].shootblank == var_0)
       return level._id_3CC5[var_1];
   }
 }
@@ -803,7 +803,7 @@ _id_424E(var_0, var_1) {
       continue;
     }
     if(var_5.team == self.team && var_5 != self && maps\mp\_utility::_id_5800(var_5)) {
-      if(_func_0C1(var_5)) {
+      if(_isai(var_5)) {
         if(var_5 _id_1A29(var_0))
           var_2++;
 
@@ -887,9 +887,9 @@ _id_420D(var_0) {
   var_1 = maps\mp\bots\_bots_util::_id_19F9(self.team);
 
   if(var_0 == 1)
-    return _func_0D5(var_1 / 6);
+    return _ceil(var_1 / 6);
   else
-    return _func_0D5(var_1 / 3);
+    return _ceil(var_1 / 3);
 }
 
 _id_42B5(var_0) {
@@ -901,7 +901,7 @@ _id_42B5(var_0) {
       continue;
     }
     if(var_4.team == self.team && var_4 != self && maps\mp\_utility::_id_5800(var_4)) {
-      if(_func_0C1(var_4)) {
+      if(_isai(var_4)) {
         if(var_4 _id_1A34(var_0))
           var_2 = common_scripts\utility::_id_0F6F(var_2, var_4);
 

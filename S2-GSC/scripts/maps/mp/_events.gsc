@@ -50,17 +50,17 @@ init() {
     if(!isDefined(var_2[var_0]))
       var_0 = "war";
 
-    var_3 = _func_1AE("mp/xp_event_table.csv", var_1, 0);
-    var_4 = _func_1AE("mp/xp_event_table.csv", var_1, 1);
-    var_5 = _func_1AE("mp/xp_event_table.csv", var_1, 2);
-    var_6 = _func_1AE("mp/xp_event_table.csv", var_1, var_2[var_0]);
+    var_3 = _tablelookupbyrow("mp/xp_event_table.csv", var_1, 0);
+    var_4 = _tablelookupbyrow("mp/xp_event_table.csv", var_1, 1);
+    var_5 = _tablelookupbyrow("mp/xp_event_table.csv", var_1, 2);
+    var_6 = _tablelookupbyrow("mp/xp_event_table.csv", var_1, var_2[var_0]);
 
     if(!isDefined(var_3) || var_3 == "") {
       break;
     }
 
     if(var_3 == "win" || var_3 == "loss" || var_3 == "tie")
-      var_6 = _func_0AD(var_6);
+      var_6 = _float(var_6);
     else
       var_6 = int(var_6);
 
@@ -130,8 +130,8 @@ _id_5A40(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(weaponinventorytype(var_2) == "primary") {
-      self._id_838A["killDistanceTotal"] = self._id_838A["killDistanceTotal"] + _func_0E1(self.origin, var_1.origin);
-      self._id_838A["killDistanceCount"]++;
+      self.getnearestnode["killDistanceTotal"] = self.getnearestnode["killDistanceTotal"] + _distance2d(self.origin, var_1.origin);
+      self.getnearestnode["killDistanceCount"]++;
     }
 
     if(isDefined(common_scripts\utility::_id_0F7E(self._id_1193, var_1)))
@@ -279,7 +279,7 @@ _id_5A40(var_0, var_1, var_2, var_3, var_4) {
     if(_id_5757(self))
       _id_6161();
 
-    if(self _meth_82E4() || self _meth_801D())
+    if(self ismantling() || self isonladder())
       _id_241E();
 
     _id_21C5(var_1, var_0, var_2, var_3, var_4);
@@ -398,7 +398,7 @@ _id_753F(var_0, var_1, var_2) {
 }
 
 _id_5A41(var_0, var_1, var_2, var_3) {
-  if(var_0 _meth_8347())
+  if(var_0 isusingturret())
     level thread maps\mp\gametypes\_rank::_id_1457("killed_mg_nest", self, var_1, var_0, var_2, var_3);
 
   if(isDefined(var_0._id_A258) && var_0._id_A258)
@@ -425,7 +425,7 @@ _id_5A41(var_0, var_1, var_2, var_3) {
     if(maps\mp\_utility::_id_579B()) {
       self._id_79A2++;
       maps\mp\_utility::setpersstat("raidKillz", self._id_79A2);
-      self _meth_82FF("ui_onevone_class_1", self._id_79A2);
+      self setclientomnvar("ui_onevone_class_1", self._id_79A2);
       maps\mp\gametypes\_persistence::statsetchild("round", "rescues", self._id_79A2);
       _id_6324();
     } else {
@@ -480,7 +480,7 @@ _id_6324(var_0) {
   var_2 = maps\mp\gametypes\_persistence::statget("kills");
 
   if(isDefined(var_2) && isDefined(var_1) && var_1 + var_2 == 10)
-    self _meth_80F0("MP_KILL_10");
+    self giveachievement("MP_KILL_10");
 }
 
 _id_43D6(var_0, var_1) {
@@ -561,7 +561,7 @@ _id_761D() {
 }
 
 _id_761C() {
-  self._id_66AD = gettime() + _func_0A4(20000, 40000);
+  self._id_66AD = gettime() + _randomintrange(20000, 40000);
 }
 
 _id_761F(var_0, var_1, var_2, var_3) {
@@ -695,12 +695,12 @@ _id_21C5(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4) && isDefined(var_4._id_2093))
     var_5 = var_4._id_2093;
   else
-    var_5 = self _meth_83B9();
+    var_5 = self ishighjumping();
 
   if(isDefined(var_4) && isDefined(var_4._id_2094))
     var_6 = var_4._id_2094;
   else
-    var_6 = var_0 _meth_83B9();
+    var_6 = var_0 ishighjumping();
 
   if(var_5 && var_6)
     _id_0BA1(var_1, var_2, var_3);
@@ -770,7 +770,7 @@ blindfightkillevent(var_0, var_1) {
 _id_8C5D(var_0, var_1) {
   if(isDefined(self._id_1189)) {
     foreach(var_3 in self._id_1189) {
-      if(_func_17B(var_3._id_8CD7) && maps\mp\_utility::_hasperk("specialty_stun_resistance") && maps\mp\_utility::_hasperk("specialty_blastshield2")) {
+      if(_isexplosivedamagemod(var_3._id_8CD7) && maps\mp\_utility::_hasperk("specialty_stun_resistance") && maps\mp\_utility::_hasperk("specialty_blastshield2")) {
         maps\mp\gametypes\_missions::processchallenge("ch_perks1_cantbebothered");
         break;
       }
@@ -781,7 +781,7 @@ _id_8C5D(var_0, var_1) {
 _id_57F1(var_0) {
   if(isDefined(self._id_1189)) {
     foreach(var_2 in self._id_1189) {
-      if(_func_17B(var_2._id_8CD7) && maps\mp\_utility::_hasperk("specialty_blastshield2"))
+      if(_isexplosivedamagemod(var_2._id_8CD7) && maps\mp\_utility::_hasperk("specialty_blastshield2"))
         return 1;
     }
   }
@@ -993,7 +993,7 @@ _id_4BF6(var_0, var_1, var_2) {
 }
 
 _id_5805(var_0, var_1, var_2, var_3) {
-  if(!_func_17B(var_2))
+  if(!_isexplosivedamagemod(var_2))
     return 0;
 
   if(!maps\mp\_utility::_id_57E5(var_1, "frag_"))
@@ -1075,7 +1075,7 @@ _id_2C80(var_0, var_1, var_2, var_3) {
   maps\mp\_utility::incpersstat("defends", 1);
 
   if(maps\mp\_utility::_id_579B())
-    self _meth_82FF("ui_onevone_class_2", self.pers["defends"]);
+    self setclientomnvar("ui_onevone_class_2", self.pers["defends"]);
 
   maps\mp\gametypes\_persistence::statsetchild("round", "defends", self.pers["defends"]);
 
@@ -1121,7 +1121,7 @@ _id_75E2(var_0) {
 }
 
 _id_57CE(var_0, var_1) {
-  if(isDefined(var_1) && maps\mp\_utility::_id_5755(var_1) && isDefined(var_0) && _func_1A9(var_0) == "melee")
+  if(isDefined(var_1) && maps\mp\_utility::_id_5755(var_1) && isDefined(var_0) && _weapontype(var_0) == "melee")
     return 1;
 
   return 0;
@@ -1140,9 +1140,9 @@ _id_5681(var_0, var_1, var_2) {
 
   var_3 = var_0 getplayerangles();
   var_4 = self getplayerangles();
-  var_5 = _func_0DD(var_3[1] - var_4[1]);
+  var_5 = _angleclamp180(var_3[1] - var_4[1]);
 
-  if(_func_0AE(var_5) < 75)
+  if(_abs(var_5) < 75)
     return 1;
 
   return 0;
@@ -1547,7 +1547,7 @@ _id_2B72() {
   level thread maps\mp\gametypes\_rank::_id_1457("dropped_gun_score", self);
 }
 
-_id_8634() {
+stopdynamicambience() {
   maps\mp\_utility::incplayerstat("humiliation", 1);
   level thread maps\mp\gametypes\_rank::_id_1457("dropped_enemy_gun_rank", self);
   maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_regression");
@@ -1558,7 +1558,7 @@ _id_7893() {
   level thread maps\mp\gametypes\_rank::_id_1457("quick_gun_rank", self);
 }
 
-_id_8635() {
+enablefocus() {
   maps\mp\_utility::incplayerstat("regicide", 1);
   level thread maps\mp\gametypes\_rank::_id_1457("dropped_first_player_gun_rank", self);
 }
@@ -1700,7 +1700,7 @@ _id_5A82(var_0, var_1, var_2, var_3) {
   var_0 thread _id_0485::_id_5E96(var_1, "defending");
 }
 
-_id_836D(var_0) {
+botgetdifficulty(var_0) {
   maps\mp\_utility::incplayerstat("hp_secure", 1);
   maps\mp\_utility::incpersstat("captures", 1);
   maps\mp\gametypes\_persistence::statsetchild("round", "captures", self.pers["captures"]);
@@ -1728,10 +1728,10 @@ _id_3C63(var_0, var_1, var_2) {
 }
 
 _id_5757(var_0) {
-  var_1 = var_0 _meth_833D();
+  var_1 = var_0 getvelocity();
   var_2 = var_1[2];
 
-  if(!var_0 _meth_8346() && (var_2 > 50 || var_2 < -50))
+  if(!var_0 isonground() && (var_2 > 50 || var_2 < -50))
     return 1;
 
   return 0;
@@ -1792,7 +1792,7 @@ _id_2535(var_0, var_1, var_2) {
   thread _id_0485::_id_5E96(var_0, "comeback");
 }
 
-_id_83CD(var_0) {
+setdoghandler(var_0) {
   maps\mp\_utility::incplayerstat("semtex_stick", 1);
   level thread maps\mp\gametypes\_rank::_id_1457("semtex_stick", self);
   var_0 maps\mp\_utility::incplayerstat("stuck_with_explosive", 1);
@@ -1836,7 +1836,7 @@ _id_A159(var_0, var_1) {
   self._id_7AD2++;
   var_2 = 0;
 
-  if(self _meth_8345() >= 0.2)
+  if(self playerads() >= 0.2)
     var_2 = 1;
 
   wait 4.0;
@@ -2036,7 +2036,7 @@ _id_774E(var_0, var_1, var_2, var_3) {
   if(var_4 == "assist_low" || var_4 == "assist_mid" || var_4 == "assist_high" || var_4 == "assist_steal" || var_4 == "assist_tactical" || var_4 == "assist_painted" || var_4 == "assist_painted_expeditionary" || var_4 == "assist_riot_shield") {
     _id_0468::ae_sendassistevent(var_4);
 
-    if(isDefined(level._id_80A8) && level._id_80A8 == 1) {
+    if(isDefined(level.thermalvisionon) && level.thermalvisionon == 1) {
       return;
     }
     maps\mp\_utility::incplayerstat("assists", 1);
@@ -2101,7 +2101,7 @@ _id_7751(var_0, var_1, var_2) {
 
   _id_0468::ae_sendassistevent();
 
-  if(isDefined(level._id_80A8) && level._id_80A8 == 1) {
+  if(isDefined(level.thermalvisionon) && level.thermalvisionon == 1) {
     return;
   }
   maps\mp\_utility::incplayerstat("assists", 1);

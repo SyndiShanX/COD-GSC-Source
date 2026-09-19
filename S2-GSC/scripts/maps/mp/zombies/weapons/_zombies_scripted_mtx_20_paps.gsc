@@ -79,14 +79,14 @@ green_splode(var_0) {
   var_0 endon("disconnect");
   var_1.bouttoblow = 1;
   waitframe();
-  _func_147(common_scripts\utility::_id_44F5("zmi_m2hyde_acid_dot"), var_1, "tag_eye");
+  _playfxontag(common_scripts\utility::_id_44F5("zmi_m2hyde_acid_dot"), var_1, "tag_eye");
   var_1 childthread loop_green_fx();
-  wait(_func_0A3(3));
+  wait(_randomfloat(3));
 
   for(;;) {
     wait 2;
-    wait(_func_0A3(3));
-    var_1 _meth_8059(level.green_death_dmg, var_1.origin, var_0, var_0, "MOD_RIFLE_BULLET", "m2hyde_pap_zm", "head");
+    wait(_randomfloat(3));
+    var_1 dodamage(level.green_death_dmg, var_1.origin, var_0, var_0, "MOD_RIFLE_BULLET", "m2hyde_pap_zm", "head");
   }
 }
 
@@ -94,7 +94,7 @@ loop_green_fx() {
   var_0 = self;
 
   for(;;) {
-    _func_147(common_scripts\utility::_id_44F5("zmb_green_zmb_stun"), var_0, "j_spine4");
+    _playfxontag(common_scripts\utility::_id_44F5("zmb_green_zmb_stun"), var_0, "j_spine4");
     wait 0.75;
   }
 }
@@ -111,16 +111,16 @@ kgm21_on_reload_empty() {
 
 randomize_clip_size() {
   var_0 = self;
-  var_1 = _func_1A3(var_0.weapontoadjust, var_0);
+  var_1 = _weaponclipsize(var_0.weapontoadjust, var_0);
 
   if(isDefined(var_0.weapontoadjust)) {
     if(randomint(3) <= 1)
-      var_2 = _func_0A4(15, 20);
+      var_2 = _randomintrange(15, 20);
     else
-      var_2 = _func_0A4(30, var_1);
+      var_2 = _randomintrange(30, var_1);
 
     if(randomint(100) <= 2)
-      var_2 = _func_0A4(4, 9);
+      var_2 = _randomintrange(4, 9);
 
     self setweaponammoclip(var_0.weapontoadjust, var_2);
     self givemaxammo(var_0.weapontoadjust);
@@ -148,7 +148,7 @@ weapon_clip_empty(var_0) {
   if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon())))
     return 1;
 
-  return var_1 _meth_82F6() == 0;
+  return var_1 getcurrentweaponclipammo() == 0;
 }
 
 sqrd_dist_between_segments(var_0, var_1, var_2, var_3) {

@@ -4,7 +4,7 @@
 **************************************/
 
 init() {
-  _func_13E("frag_grenade_mp");
+  _precacheshellshock("frag_grenade_mp");
   _id_78AB();
   _id_78AF();
   _id_A4AB();
@@ -95,7 +95,7 @@ onplayerconnect() {
   var_0 thread _id_7ABE();
   var_0 waittill("spawned_player");
   wait 1;
-  var_0 _meth_8315();
+  var_0 takeallweapons();
   setDvar("2562", 0);
 
   if(!isDefined(var_0))
@@ -137,7 +137,7 @@ _id_4304() {
   self endon("disconnect");
 
   for(;;) {
-    var_0 = self _meth_82F9();
+    var_0 = self getnormalizedmovement();
     var_1 = vectortoangles(var_0);
     level._id_7F3D = int(var_1[1]);
     waitframe();
@@ -147,7 +147,7 @@ _id_4304() {
 _id_669D(var_0, var_1, var_2) {
   if(isDefined(level._id_78AC) && level._id_78AC.size) {}
 
-  var_3 = _func_18E(var_2, "targetname");
+  var_3 = _getent(var_2, "targetname");
   var_4 = vectorNormalize(anglesToForward(var_3.angles)) * 40;
   level._id_78AC[var_0] = [];
   level._id_78AD[var_0]["view_start"] = var_1;
@@ -157,7 +157,7 @@ _id_669D(var_0, var_1, var_2) {
 }
 
 _id_669C(var_0, var_1, var_2, var_3) {
-  var_4 = _func_18E(var_2, "targetname");
+  var_4 = _getent(var_2, "targetname");
   var_5 = _id_463D(var_0, var_4);
   var_6 = spawnStruct();
   var_6._id_7584 = var_4.origin;
@@ -336,8 +336,8 @@ _id_463D(var_0, var_1) {
   var_5 = vectorNormalize(anglestoup(var_2));
   var_6 = var_1.angles;
   var_7 = var_1.origin;
-  var_8 = vectorNormalize(_func_0DE(var_3, var_3 + var_4, var_7));
-  var_9 = _func_0AA(vectordot(var_8, var_5));
+  var_8 = vectorNormalize(_vectorfromlinetopoint(var_3, var_3 + var_4, var_7));
+  var_9 = _acos(vectordot(var_8, var_5));
 
   if(vectordot(anglestoright(var_2), var_8) < 0)
     var_9 = 360 - var_9;
@@ -378,27 +378,27 @@ _id_0874() {
 }
 
 _id_0880() {
-  _func_18C("action_weapons_primary");
+  _iprintlnbold("action_weapons_primary");
   _id_ACC8("weapons_primary");
 }
 
 _id_0881() {
-  _func_18C("action_weapons_secondary");
+  _iprintlnbold("action_weapons_secondary");
   _id_ACC8("weapons_secondary");
 }
 
 _id_0876() {
-  _func_18C("action_gears");
+  _iprintlnbold("action_gears");
   _id_ACC8("gears");
 }
 
 _id_0877() {
-  _func_18C("action_killstreak");
+  _iprintlnbold("action_killstreak");
   _id_ACC8("killstreak");
 }
 
 _id_0878() {
-  _func_18C("action_leaderboards");
+  _iprintlnbold("action_leaderboards");
   _id_ACC8("leaderboards");
 }
 
@@ -413,10 +413,10 @@ _id_A4AB() {
 
 _id_1D19(var_0) {
   level._id_A4AC[var_0] = [];
-  var_1 = _func_18E(var_0, "targetname");
+  var_1 = _getent(var_0, "targetname");
 
   for(level._id_A4AC[var_0][level._id_A4AC[var_0].size] = var_1; isDefined(var_1) && isDefined(var_1.target); var_1 = var_2) {
-    var_2 = _func_18E(var_1.target, "targetname");
+    var_2 = _getent(var_1.target, "targetname");
     level._id_A4AC[var_0][level._id_A4AC[var_0].size] = var_2;
   }
 }
@@ -427,14 +427,14 @@ _id_47F2(var_0) {
     level._id_34D5 = spawn("script_model", var_1.origin);
     level._id_34D5.angles = var_1.angles;
     self setOrigin(level._id_34D5.origin - (0, 0, 65));
-    self _meth_8055(level._id_34D5);
+    self linkto(level._id_34D5);
     waitframe();
-    self _meth_833E(level._id_34D5.angles);
+    self setplayerangles(level._id_34D5.angles);
     thread _id_3DF9();
   }
 
   var_2 = 1;
-  var_3 = _func_0AE(distance(level._id_34D5.origin, level._id_A4AC[var_0][level._id_A4AC[var_0].size - 1].origin));
+  var_3 = _abs(distance(level._id_34D5.origin, level._id_A4AC[var_0][level._id_A4AC[var_0].size - 1].origin));
   var_2 = var_2 * (var_3 / 1200);
   var_2 = max(var_2, 0.1);
   var_4 = var_2;
@@ -450,15 +450,15 @@ _id_47F2(var_0) {
         continue;
     }
 
-    level._id_34D5 _meth_82B1(var_6.origin, var_2, var_2 * 0.5, 0);
-    level._id_34D5 _meth_82B8(var_6.angles, var_2, var_2 * 0.5, 0);
+    level._id_34D5 moveto(var_6.origin, var_2, var_2 * 0.5, 0);
+    level._id_34D5 rotateto(var_6.angles, var_2, var_2 * 0.5, 0);
     wait(var_2);
   }
 }
 
 _id_47F3(var_0, var_1) {
   var_2 = 1;
-  var_3 = _func_0AE(distance(level._id_34D5.origin, level._id_78AD[var_1]["player_view_pos"]));
+  var_3 = _abs(distance(level._id_34D5.origin, level._id_78AD[var_1]["player_view_pos"]));
   var_2 = var_2 * (var_3 / 1200);
   var_2 = max(var_2, 0.1);
   var_4 = var_2;
@@ -471,8 +471,8 @@ _id_47F3(var_0, var_1) {
   if(!1) {
     for(var_5 = level._id_A4AC[var_0].size - 1; var_5 >= 0; var_5--) {
       var_6 = level._id_A4AC[var_0][var_5];
-      level._id_34D5 _meth_82B1(var_6.origin, var_2);
-      level._id_34D5 _meth_82B8(var_6.angles, var_2);
+      level._id_34D5 moveto(var_6.origin, var_2);
+      level._id_34D5 rotateto(var_6.angles, var_2);
       wait(var_2);
     }
   }
@@ -480,15 +480,15 @@ _id_47F3(var_0, var_1) {
   thread _id_1883(3, var_2);
   var_7 = level._id_78AD[var_1]["player_view_pos"];
   var_8 = level._id_78AD[var_1]["view_angles"];
-  level._id_34D5 _meth_82B1(var_7, var_2, var_2 * 0.5, 0);
-  level._id_34D5 _meth_82B8(var_8, var_2, var_2 * 0.5, 0);
+  level._id_34D5 moveto(var_7, var_2, var_2 * 0.5, 0);
+  level._id_34D5 rotateto(var_8, var_2, var_2 * 0.5, 0);
   wait(var_2);
 }
 
 _id_9D01(var_0) {
-  self _meth_82DD(20, (var_0 + 0.2) / 2);
-  self _meth_82DD(0, (var_0 + 0.2) / 2);
-  self _meth_8182("frag_grenade_mp", var_0 + 0.2);
+  self setblurforplayer(20, (var_0 + 0.2) / 2);
+  self setblurforplayer(0, (var_0 + 0.2) / 2);
+  self shellshock("frag_grenade_mp", var_0 + 0.2);
 }
 
 _id_1883(var_0, var_1) {
@@ -496,7 +496,7 @@ _id_1883(var_0, var_1) {
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = var_3 / var_2;
-    var_5 = _func_0A6(180 * var_4);
+    var_5 = _sin(180 * var_4);
     var_6 = var_0 * var_5;
     setDvar("797", var_6);
     waitframe();
@@ -511,7 +511,7 @@ _id_3DF9() {
   level._id_34D5 endon("remove_dummy");
 
   for(;;) {
-    self _meth_833E(level._id_34D5.angles);
+    self setplayerangles(level._id_34D5.angles);
     waitframe();
   }
 }

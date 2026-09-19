@@ -22,7 +22,7 @@ main() {
   var_4 = 0;
   var_5 = self.origin + (0, 0, 30);
   var_6 = self._id_28D2.origin + (0, 0, 30);
-  var_7 = _func_080(var_5, var_6);
+  var_7 = _physicstrace(var_5, var_6);
 
   if(distancesquared(var_7, var_6) > 1) {
     _id_60E7();
@@ -48,7 +48,7 @@ main() {
 }
 
 _id_0085() {
-  self _meth_839A(1, 1);
+  self scragentsetanimscale(1, 1);
   self._id_17E8 = 0;
 }
 
@@ -70,7 +70,7 @@ _id_8B8E(var_0) {
 
   var_2 = self.origin - var_0.origin;
 
-  if(_func_0AE(var_2[2]) > var_1)
+  if(_abs(var_2[2]) > var_1)
     return undefined;
 
   var_3 = vectorNormalize((var_2[0], var_2[1], 0));
@@ -79,19 +79,19 @@ _id_8B8E(var_0) {
 
   if(var_5 > 0.707) {
     var_6 = 0;
-    var_7 = _func_112((1, 0, 0), var_0.angles);
+    var_7 = _rotatevector((1, 0, 0), var_0.angles);
   } else if(var_5 < -0.707) {
     var_6 = 1;
-    var_7 = _func_112((-1, 0, 0), var_0.angles);
+    var_7 = _rotatevector((-1, 0, 0), var_0.angles);
   } else {
     var_8 = maps\mp\agents\dog\_dog_think::_id_285C(var_2, var_4);
 
     if(var_8 > 0) {
       var_6 = 3;
-      var_7 = _func_112((0, -1, 0), var_0.angles);
+      var_7 = _rotatevector((0, -1, 0), var_0.angles);
     } else {
       var_6 = 2;
-      var_7 = _func_112((0, 1, 0), var_0.angles);
+      var_7 = _rotatevector((0, 1, 0), var_0.angles);
     }
   }
 
@@ -106,10 +106,10 @@ _id_8B8E(var_0) {
   if(!isDefined(var_11))
     return undefined;
 
-  if(_func_0AE(var_11[2] - var_10[2]) > var_1)
+  if(_abs(var_11[2] - var_10[2]) > var_1)
     return undefined;
 
-  if(!self _meth_83EC(var_0.origin + (0, 0, 4), var_11 + (0, 0, 4), self.radius, self._id_00BD))
+  if(!self aiphysicstracepassed(var_0.origin + (0, 0, 4), var_11 + (0, 0, 4), self.radius, self._id_00BD))
     return undefined;
 
   return var_6;
@@ -118,13 +118,13 @@ _id_8B8E(var_0) {
 _id_3156(var_0) {
   var_1 = "attack_extended";
   _id_3210(self._id_28D2, self._id_28D2.health, "MOD_MELEE_DOG");
-  var_2 = self _meth_83D8(var_1, var_0);
+  var_2 = self getanimentry(var_1, var_0);
   thread _id_397B(var_2, self._id_28D2.origin, self._id_28D2.angles);
   maps\mp\agents\_scriptedagents::_id_71FC(var_1, var_0, "attack", "end");
   self notify("kill_stick");
   self._id_28D2 = undefined;
-  self _meth_839C("anim deltas");
-  self _meth_8057();
+  self scragentsetanimmode("anim deltas");
+  self unlink();
 }
 
 _id_397B(var_0, var_1, var_2) {
@@ -136,13 +136,13 @@ _id_397B(var_0, var_1, var_2) {
   if(isalive(self._id_28D2)) {
     return;
   }
-  var_3 = self._id_28D2 _meth_8430();
+  var_3 = self._id_28D2 getcorpseentity();
 
   if(!isDefined(var_3)) {
     return;
   }
-  self _meth_8055(var_3);
-  self _meth_8625(var_0, var_1, var_2);
+  self linkto(var_3);
+  self scragentdoanimrelative(var_0, var_1, var_2);
 }
 
 _id_32AF(var_0, var_1) {
@@ -150,7 +150,7 @@ _id_32AF(var_0, var_1) {
   var_3 = 0;
 
   if(!var_1) {
-    if(self _meth_8393(self._id_28D2)) {
+    if(self agentcanseesentient(self._id_28D2)) {
       var_4 = maps\mp\agents\_scriptedagents::_id_34A6(self._id_28D2.origin);
 
       if(isDefined(var_4)) {
@@ -168,16 +168,16 @@ _id_32AF(var_0, var_1) {
 
   self._id_5BBE = undefined;
   self._id_5BBF = undefined;
-  var_5 = self _meth_83D8(var_2, 0);
-  var_6 = _func_065(var_5);
-  var_7 = _func_067(var_5, "dog_melee");
+  var_5 = self getanimentry(var_2, 0);
+  var_6 = _getanimlength(var_5);
+  var_7 = _getnotetracktimes(var_5, "dog_melee");
 
   if(var_7.size > 0)
     var_8 = var_7[0] * var_6;
   else
     var_8 = var_6;
 
-  self _meth_83A4(self.origin, var_0, var_8);
+  self scragentdoanimlerp(self.origin, var_0, var_8);
   thread _id_A12D(self._id_28D2, var_8, var_1);
   maps\mp\agents\_scriptedagents::_id_71FC(var_2, 0, "attack", "dog_melee");
   self notify("cancel_updatelerppos");
@@ -195,12 +195,12 @@ _id_32AF(var_0, var_1) {
   self._id_28D2 = undefined;
 
   if(var_3)
-    self _meth_839A(0, 1);
+    self scragentsetanimscale(0, 1);
   else
-    self _meth_839A(1, 1);
+    self scragentsetanimscale(1, 1);
 
-  self _meth_839D("gravity");
-  self _meth_839C("anim deltas");
+  self scragentsetphysicsmode("gravity");
+  self scragentsetanimmode("anim deltas");
   maps\mp\agents\_scriptedagents::_id_A79E("attack", "end");
 }
 
@@ -227,7 +227,7 @@ _id_A12D(var_0, var_1, var_2) {
       break;
     }
 
-    self _meth_83A4(self.origin, var_5, var_3);
+    self scragentdoanimlerp(self.origin, var_5, var_3);
   }
 }
 
@@ -274,7 +274,7 @@ _id_3210(var_0, var_1, var_2) {
   if(_id_5797(var_0)) {
     return;
   }
-  var_0 _meth_8059(var_1, self.origin, self, self, var_2);
+  var_0 dodamage(var_1, self.origin, self, self, var_2);
 }
 
 _id_60E7() {

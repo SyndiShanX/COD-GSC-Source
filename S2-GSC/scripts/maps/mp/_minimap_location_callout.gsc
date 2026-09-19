@@ -12,7 +12,7 @@ _id_63C2() {
   self endon("death");
   self endon("disconnect");
   self._id_2942 = -1;
-  self _meth_82FF("ui_minimap_location_callout", -1);
+  self setclientomnvar("ui_minimap_location_callout", -1);
   waitframe();
   _id_21D1(1);
 
@@ -37,7 +37,7 @@ _id_21D1(var_0) {
   if(var_1) {
     if(var_0 || var_2 != self._id_2942) {
       self._id_2942 = var_2;
-      self _meth_82FF("ui_minimap_location_callout", self._id_2942);
+      self setclientomnvar("ui_minimap_location_callout", self._id_2942);
     }
 
     self._id_99F2 = gettime();
@@ -45,6 +45,6 @@ _id_21D1(var_0) {
 
   if(!var_1 && self._id_2942 != -1 && (!isDefined(self._id_99F2) || self._id_99F2 + 2000 < gettime())) {
     self._id_2942 = -1;
-    self _meth_82FF("ui_minimap_location_callout", -1);
+    self setclientomnvar("ui_minimap_location_callout", -1);
   }
 }

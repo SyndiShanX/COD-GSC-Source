@@ -79,9 +79,9 @@ spawn_assassin_frontline_fx() {
   if(isDefined(self.bufffx))
     self.bufffx delete();
 
-  var_0 = _func_2A8(common_scripts\utility::_id_44F5("zmi_assassin_buff"), self, "J_Spine4");
+  var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmi_assassin_buff"), self, "J_Spine4");
   maps\mp\agents\_agent_utility::deleteentonagentdeath(var_0);
-  _func_14C(var_0);
+  _triggerfx(var_0);
   self.bufffx = var_0;
 }
 
@@ -97,12 +97,12 @@ set_boss_buff() {
     if(!_id_0547::_id_5565(self._id_0A4B, "zombie_generic")) {
       return;
     }
-    self _meth_83A2(1);
+    self scragentsetscripted(1);
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "assassin intro taunt");
     var_0 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35("board_taunt_base");
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA("board_taunt_base", var_0, 1.0, "taunt_anim");
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "assassin intro taunt");
-    self _meth_83A2(0);
+    self scragentsetscripted(0);
   }
 }
 

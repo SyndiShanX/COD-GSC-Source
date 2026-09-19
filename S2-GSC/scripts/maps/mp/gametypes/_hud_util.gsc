@@ -47,7 +47,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   var_5 = _id_45FC();
 
   if(var_4)
-    self _meth_8080(var_4);
+    self moveovertime(var_4);
 
   if(!isDefined(var_2))
     var_2 = 0;
@@ -202,7 +202,7 @@ _id_A0E5(var_0, var_1) {
 }
 
 createfontstring(var_0, var_1) {
-  var_2 = _func_19B(self);
+  var_2 = _newclienthudelem(self);
   var_2._id_35B2 = "font";
   var_2._id_009A = var_0;
   var_2._id_017A = 1;
@@ -222,7 +222,7 @@ createfontstring(var_0, var_1) {
 
 _id_2829(var_0, var_1, var_2) {
   if(isDefined(var_2))
-    var_3 = _func_19C(var_2);
+    var_3 = _newteamhudelem(var_2);
   else
     var_3 = newhudelem();
 
@@ -245,7 +245,7 @@ _id_2829(var_0, var_1, var_2) {
 
 _id_282B(var_0, var_1, var_2) {
   if(isDefined(var_2))
-    var_3 = _func_19C(var_2);
+    var_3 = _newteamhudelem(var_2);
   else
     var_3 = newhudelem();
 
@@ -267,7 +267,7 @@ _id_282B(var_0, var_1, var_2) {
 }
 
 _id_2833(var_0, var_1) {
-  var_2 = _func_19B(self);
+  var_2 = _newclienthudelem(self);
   var_2._id_35B2 = "timer";
   var_2._id_009A = var_0;
   var_2._id_017A = 1;
@@ -286,7 +286,7 @@ _id_2833(var_0, var_1) {
 }
 
 createicon(var_0, var_1, var_2) {
-  var_3 = _func_19B(self);
+  var_3 = _newclienthudelem(self);
   var_3._id_35B2 = "icon";
   var_3.x = 0;
   var_3.y = 0;
@@ -310,7 +310,7 @@ createicon(var_0, var_1, var_2) {
 
 _id_282A(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3))
-    var_4 = _func_19C(var_3);
+    var_4 = _newteamhudelem(var_3);
   else
     var_4 = newhudelem();
 
@@ -337,7 +337,7 @@ _id_282A(var_0, var_1, var_2, var_3) {
 
 _id_2828(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_4))
-    var_6 = _func_19C(var_4);
+    var_6 = _newteamhudelem(var_4);
   else
     var_6 = newhudelem();
 
@@ -354,7 +354,7 @@ _id_2828(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_6._id_3D49 = var_3;
 
   if(isDefined(var_4))
-    var_7 = _func_19C(var_4);
+    var_7 = _newteamhudelem(var_4);
   else
     var_7 = newhudelem();
 
@@ -377,7 +377,7 @@ _id_2828(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_27CF(var_0, var_1, var_2, var_3) {
-  var_4 = _func_19B(self);
+  var_4 = _newclienthudelem(self);
   var_4.x = 0;
   var_4.y = 0;
   var_4._id_3E6E = 0;
@@ -390,7 +390,7 @@ _id_27CF(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3))
     var_4._id_3D49 = var_3;
 
-  var_5 = _func_19B(self);
+  var_5 = _newclienthudelem(self);
   var_5._id_35B2 = "bar";
   var_5._id_01D2 = var_1;
   var_5._id_00BD = var_2;
@@ -430,7 +430,7 @@ _id_2821(var_0, var_1, var_2) {
   if(!isDefined(var_1))
     var_1 = 0;
 
-  if(self _meth_82D0() && !_func_3BA())
+  if(self issplitscreenplayer() && !_func_3BA())
     var_1 = var_1 + 20;
 
   if(_func_367())
@@ -449,7 +449,7 @@ _id_2822(var_0, var_1) {
   if(!isDefined(var_1))
     var_1 = 0;
 
-  if(self _meth_82D0() && !_func_3BA())
+  if(self issplitscreenplayer() && !_func_3BA())
     var_1 = var_1 + 20;
 
   if(_func_367())
@@ -608,7 +608,7 @@ _id_9C84(var_0) {
     case "timer":
     case "font":
       self.fontscale = 6.3;
-      self _meth_8085(var_0);
+      self changefontscaleovertime(var_0);
       self.fontscale = self._id_15FC;
       break;
     case "icon":
@@ -625,7 +625,7 @@ _id_9C7E(var_0, var_1) {
   switch (self._id_35B2) {
     case "timer":
     case "font":
-      self _meth_8083(var_2 + 250, var_3 + var_2, var_2 + 250);
+      self setpulsefx(var_2 + 250, var_3 + var_2, var_2 + 250);
       break;
     default:
       break;
@@ -651,7 +651,7 @@ _id_9C81(var_0, var_1) {
       break;
   }
 
-  self _meth_8080(var_0);
+  self moveovertime(var_0);
   self.x = self._id_AACD;
   self.y = self._id_AAEB;
 }
@@ -679,7 +679,7 @@ _id_9C82(var_0, var_1) {
   }
 
   self.alpha = 1;
-  self _meth_8080(var_0);
+  self moveovertime(var_0);
   self.x = var_2;
   self.y = var_3;
 }
@@ -688,7 +688,7 @@ _id_9C85(var_0) {
   switch (self._id_35B2) {
     case "timer":
     case "font":
-      self _meth_8085(var_0);
+      self changefontscaleovertime(var_0);
       self.fontscale = 6.3;
     case "icon":
       self scaleovertime(var_0, self._id_01D2 * 6, self._id_00BD * 6);
@@ -820,8 +820,8 @@ _id_9AB0(var_0, var_1) {
   }
 
   if(isDefined(var_2)) {
-    for(var_6 = _func_1B1("mp/statstable.csv", 28, var_2); var_6 >= 0; var_6 = _func_1B1("mp/statstable.csv", 28, var_2, var_6 - 1)) {
-      var_7 = _func_1AE("mp/statstable.csv", var_6, 2);
+    for(var_6 = _tablelookuprownum("mp/statstable.csv", 28, var_2); var_6 >= 0; var_6 = _tablelookuprownum("mp/statstable.csv", 28, var_2, var_6 - 1)) {
+      var_7 = _tablelookupbyrow("mp/statstable.csv", var_6, 2);
       var_3 = var_3 + self getplayerdata(common_scripts\utility::_id_46AE(), "weaponStats", var_7, var_1);
     }
 

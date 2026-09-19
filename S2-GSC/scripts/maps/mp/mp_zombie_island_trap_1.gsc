@@ -46,7 +46,7 @@ trap_1_damage_fx_watch(var_0) {
     var_3 = (var_2.origin[0], var_2.origin[1], var_0.origin[2]);
 
     if(isPlayer(var_2)) {
-      if(isDefined(var_0._id_8260) && var_0._id_8260 == "no_player_damage") {
+      if(isDefined(var_0.setlookatent) && var_0.setlookatent == "no_player_damage") {
         continue;
       }
       if(isDefined(var_2._id_66D3) && var_2._id_66D3 > gettime()) {
@@ -55,12 +55,12 @@ trap_1_damage_fx_watch(var_0) {
       if(var_1 + 3000 > gettime()) {
         continue;
       }
-      var_2 _meth_8059(4, var_2.origin, undefined, undefined, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_2 dodamage(4, var_2.origin, undefined, undefined, "MOD_EXPLOSIVE", "trap_zm_mp");
       continue;
     }
 
     if(isDefined(var_2._id_000A) && var_2._id_000A == level._id_746E) {
-      if(isDefined(var_0._id_8260) && var_0._id_8260 == "no_player_damage") {
+      if(isDefined(var_0.setlookatent) && var_0.setlookatent == "no_player_damage") {
         continue;
       }
       if(isDefined(var_2._id_66D3) && var_2._id_66D3 > gettime()) {
@@ -71,7 +71,7 @@ trap_1_damage_fx_watch(var_0) {
     } else {
       playFX(common_scripts\utility::_id_44F5("zmb_isl_med_trap_gib_rnr"), var_2.origin);
       var_4 = var_2 modify_damage_to_island_zombie_types(5);
-      var_2 _meth_8059(var_4, var_2.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_2 dodamage(var_4, var_2.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
     }
   }
 }

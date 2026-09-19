@@ -16,9 +16,9 @@ _id_8D81() {
 
   if(isDefined(level.players) && level.players.size > 0) {
     foreach(var_1 in level.players) {
-      var_1 _meth_8626("mp_init_mix");
+      var_1 clientaddsoundsubmix("mp_init_mix");
       waitframe();
-      var_1 _meth_8626("mp_pre_event_mix");
+      var_1 clientaddsoundsubmix("mp_pre_event_mix");
       waitframe();
     }
   }
@@ -29,9 +29,9 @@ _id_8D82() {
 
   if(isDefined(level.players) && level.players.size > 0) {
     foreach(var_1 in level.players) {
-      var_1 _meth_8627("mp_pre_event_mix");
+      var_1 clientclearsoundsubmix("mp_pre_event_mix");
       waitframe();
-      var_1 _meth_8626("mp_post_event_mix");
+      var_1 clientaddsoundsubmix("mp_post_event_mix");
       waitframe();
     }
   }
@@ -82,14 +82,14 @@ _id_7BA3() {
 
 _id_7247() {
   self _meth_85A7("ClientScriptInit", "mp");
-  self _meth_8626("mp_init_mix");
+  self clientaddsoundsubmix("mp_init_mix");
   thread _id_8D7F();
 
   if(!isDefined(level._id_071D._id_351F) || !level._id_071D._id_351F)
-    self _meth_8626("mp_pre_event_mix");
+    self clientaddsoundsubmix("mp_pre_event_mix");
   else {
-    self _meth_8627("mp_pre_event_mix");
-    self _meth_8626("mp_post_event_mix");
+    self clientclearsoundsubmix("mp_pre_event_mix");
+    self clientaddsoundsubmix("mp_post_event_mix");
   }
 }
 
@@ -114,7 +114,7 @@ _id_8D7E() {
   var_0 = self;
   var_1 = gettime();
   var_2 = 1500;
-  var_0 _meth_8626("mp_focus_mode_mix");
+  var_0 clientaddsoundsubmix("mp_focus_mode_mix");
 
   if(var_1 > self._id_3D9C + var_2) {
     var_0._id_3D98 = 0;
@@ -128,7 +128,7 @@ _id_8D7D(var_0) {
   var_1 = self;
   var_2 = gettime();
   var_3 = 500;
-  var_1 _meth_8627("mp_focus_mode_mix");
+  var_1 clientclearsoundsubmix("mp_focus_mode_mix");
 
   if(isDefined(self._id_3D9B) && var_2 > self._id_3D9B + var_3) {
     if(!isDefined(var_0) || !var_0)
@@ -351,9 +351,9 @@ v2_explosion() {
 }
 
 player_parachute_submix() {
-  self _meth_8626("mp_tunisia_parachute_mix");
+  self clientaddsoundsubmix("mp_tunisia_parachute_mix");
   common_scripts\utility::_id_A70A("paratrooper_released", "detach");
-  self _meth_8627("mp_tunisia_parachute_mix");
+  self clientclearsoundsubmix("mp_tunisia_parachute_mix");
 }
 
 serum_syringe_foley() {

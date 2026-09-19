@@ -5,8 +5,8 @@
 
 init_sg() {
   level thread maps\mp\zombies\_zombies_progression::init();
-  _func_032("ui_zm_gamemode_mod", 1);
-  _func_032("ui_zm_rs_active", 0);
+  _setomnvar("ui_zm_gamemode_mod", 1);
+  _setomnvar("ui_zm_rs_active", 0);
   level.objectivescompleted = 0;
   maps\mp\zombies\shotgun\_zombies_shotgun_difficulty::init();
   common_scripts\utility::flag_init("zmb_players_gamemode_escaped");
@@ -15,7 +15,7 @@ init_sg() {
   common_scripts\utility::flag_init("zmb_objectives_defense_end");
   common_scripts\utility::flag_init("zmb_objectives_quest_end");
   common_scripts\utility::flag_init("shotgun_classic_add_to_box");
-  _func_13F("s2_morale_focus_overlay_01");
+  _precacheshader("s2_morale_focus_overlay_01");
   level.sg_wallbuyclasses = ["weapon_pistol", "weapon_smg", "weapon_shotgun", "weapon_assault", "weapon_sniper", "weapon_heavy"];
   level.insane_mode_available = 0;
   level.max_prop_zombie_appearances = 2;
@@ -74,12 +74,12 @@ init_sg() {
 
   foreach(var_4, var_1 in level.zombies_shotgun_weapons_splashes) {
     if(issubstr(var_4, "shader") && var_1 != "")
-      _func_13F(var_1);
+      _precacheshader(var_1);
   }
 
   foreach(var_4, var_1 in level.zombies_shotgun_weapon_waypoints) {
     if(var_1 != "")
-      _func_13F(var_1);
+      _precacheshader(var_1);
   }
 
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_fx::init();
@@ -182,7 +182,7 @@ spawn_weapon_pickup_on_zombies(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
   if(!isDefined(level.zmb_wustling_weapon_spawned)) {
     foreach(var_16, var_15 in var_13) {
-      var_15._id_81E1 = var_16;
+      var_15.setmovespeedscale = var_16;
       _id_0547::_id_8A4F(var_15, ::init_dropped_weapon_pickup_for_player, ::unusable_for_other_players);
       var_15.origin = var_9 + (0, 0, 32);
     }
@@ -240,7 +240,7 @@ run_red_skull_mode() {
   var_0 = getEntArray("zmb_shattered_insane_mode_triggers", "targetname");
 
   foreach(var_3, var_2 in var_0) {
-    var_2._id_81E1 = var_3;
+    var_2.setmovespeedscale = var_3;
     _id_0547::_id_8A4F(var_2, ::assignpathtoplayer, ::hidefromothers);
   }
 
@@ -256,7 +256,7 @@ run_red_skull_mode() {
 
   if(common_scripts\utility::_id_562E(var_4)) {
     foreach(var_3, var_2 in var_0)
-    var_2 _meth_80CE(&"ZOMBIE_DLC3_RED_SKULL_MODEL");
+    var_2 sethintstring(&"ZOMBIE_DLC3_RED_SKULL_MODEL");
 
     level thread maps\mp\_utility::_id_6F74(::spawn_client_hc_opt_in, var_0, "zmb_darkened_path_unavailable");
   }
@@ -264,7 +264,7 @@ run_red_skull_mode() {
 
 activate_redskull_mode() {
   level.zmb_red_skull_mode_activated = 1;
-  _func_032("ui_zm_rs_active", 1);
+  _setomnvar("ui_zm_rs_active", 1);
   level.zmb_global_zombie_health_multiplier_wave_start = 0;
   do_rage_vision_for_all();
   level thread ensure_all_zombies_sprinting();
@@ -297,11 +297,11 @@ do_rage_vision_for_all() {
 
 showragevision() {
   var_0 = self;
-  self _meth_8483(maps\mp\_utility::_id_4571() + "_rage", 1);
-  self _meth_83C7(maps\mp\_utility::_id_4571() + "_rage", 1);
+  self setclienttriggervisionset(maps\mp\_utility::_id_4571() + "_rage", 1);
+  self lightsetoverrideenableforplayer(maps\mp\_utility::_id_4571() + "_rage", 1);
   wait 2;
-  self _meth_8483(maps\mp\_utility::_id_4571(), 1);
-  self _meth_83C7(maps\mp\_utility::_id_4571(), 1);
+  self setclienttriggervisionset(maps\mp\_utility::_id_4571(), 1);
+  self lightsetoverrideenableforplayer(maps\mp\_utility::_id_4571(), 1);
 }
 
 no_points_for_bosses_or_objective_zombies(var_0, var_1) {
@@ -348,11 +348,11 @@ spawn_client_hc_opt_in(var_0) {
   var_3 _id_0378::_id_8D74("dlc3_zmb_redskull_pu");
   var_1 thread remove_visuals_on_disconnect(var_3);
   level.shattered_opt_in_ents[level.shattered_opt_in_ents.size] = var_3;
-  _func_14C(var_3);
+  _triggerfx(var_3);
   var_4 = 25;
 
   for(;;) {
-    if(var_4 < 0 || !common_scripts\utility::_id_562E(var_1.optedintohc) && var_1 _meth_8341() && distance(var_1.origin, var_2.origin) < 64) {
+    if(var_4 < 0 || !common_scripts\utility::_id_562E(var_1.optedintohc) && var_1 usebuttonpressed() && distance(var_1.origin, var_2.origin) < 64) {
       if(var_4 >= 0)
         var_1.optedintohc = 1;
       else
@@ -363,7 +363,7 @@ spawn_client_hc_opt_in(var_0) {
 
       var_3 = _id_0547::_id_8FBA(var_2, "zmb_shattered_insane_mode_pending", var_1);
       level.shattered_opt_in_ents[level.shattered_opt_in_ents.size] = var_3;
-      _func_14C(var_3);
+      _triggerfx(var_3);
       var_3 _id_0378::_id_8D74("dlc3_redskull_accept");
       maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::try_activate_redskull_mode();
       return;
@@ -441,22 +441,22 @@ unlockzmshatteredmap() {
 
     if(_id_0547::is_zm_shattered_thule_map()) {
       if(getdvarint("spv_shattered_srv_unlock_easy", 0) == 1) {
-        if(var_6 && _func_2A3())
+        if(var_6 && _isonlinegame())
           var_0 _meth_8697(42, [5, 5]);
       }
 
       if(common_scripts\utility::_id_562E(var_3)) {
         if(common_scripts\utility::_id_562E(var_4)) {
-          if(var_6 && _func_2A3()) {
+          if(var_6 && _isonlinegame()) {
             var_0 _meth_8697(42, [5, 5]);
-            var_0 _id_0565::_id_83DB(16, 3, 1, "wicht_set");
+            var_0 _id_0565::getanimentrycount(16, 3, 1, "wicht_set");
           }
 
           self setplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "hasCompletedEESequence", 1);
         }
 
         if(common_scripts\utility::_id_562E(var_5)) {
-          if(_func_2A3()) {
+          if(_isonlinegame()) {
             var_0 _meth_8697(44, [5, 7]);
             var_0 thread maps\mp\gametypes\_hud_message::_id_9102("zm_charm_unlocked", 0);
           }
@@ -510,13 +510,13 @@ initialize_common_sg_weapons() {
 
 init_sg_shaders() {
   level.zmb_sg_wallbuy_waypoint_icon = "zm_hud_wallbuy_pistol";
-  _func_13F("zm_hud_wallbuy_pistol");
+  _precacheshader("zm_hud_wallbuy_pistol");
   level.zmb_sg_keypoint_interact_repair_icon = "zm_hud_type_keypoint_interact_repair_common_icon";
-  _func_13F("zm_hud_type_keypoint_interact_repair_common_icon");
+  _precacheshader("zm_hud_type_keypoint_interact_repair_common_icon");
   level.zmb_sg_keypoint_interact_defuse_icon = "zm_hud_keypoint_interact_bomb_icon";
-  _func_13F("zm_hud_keypoint_interact_bomb_icon");
-  _func_13F("zm_hud_type_escape_common_icon");
-  _func_13F("zm_hud_type_escape_b_common_icon");
+  _precacheshader("zm_hud_keypoint_interact_bomb_icon");
+  _precacheshader("zm_hud_type_escape_common_icon");
+  _precacheshader("zm_hud_type_escape_b_common_icon");
 }
 
 run_pack_a_punch_log() {
@@ -528,7 +528,7 @@ collect_souls_to_unlock_pack_a_punch() {
   var_0 = common_scripts\utility::_id_46B7("zmb_sg_pap_light_display", "targetname");
   var_1 = common_scripts\utility::_id_46B7("zmb_pack_key", "targetname");
   var_2 = common_scripts\utility::_id_46B7("zmb_sg_availablility_light_display", "targetname");
-  var_3 = _func_21F("zmb_sg_reciver_scriptable", "targetname");
+  var_3 = _getscriptablearray("zmb_sg_reciver_scriptable", "targetname");
 
   foreach(var_5 in var_3)
   var_5 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84DC();
@@ -539,8 +539,8 @@ collect_souls_to_unlock_pack_a_punch() {
   level.pack_a_punc_pre_func = ::wait_for_pap_available;
 
   for(var_7 = 0; var_7 < var_1.size; var_7++) {
-    common_scripts\utility::flag_init("zmb_sg_soul_collect_flag_" + var_1[var_7]._id_81E1);
-    common_scripts\utility::flag_init("zmb_sg_soul_collect_ready_flag_" + var_1[var_7]._id_81E1);
+    common_scripts\utility::flag_init("zmb_sg_soul_collect_flag_" + var_1[var_7].setmovespeedscale);
+    common_scripts\utility::flag_init("zmb_sg_soul_collect_ready_flag_" + var_1[var_7].setmovespeedscale);
   }
 
   common_scripts\utility::_id_0FB2(var_1, ::set_pack_key_unlocked);
@@ -554,8 +554,8 @@ collect_souls_to_unlock_pack_a_punch() {
 }
 
 wait_for_pap_available() {
-  var_0 = _func_18E("pack_a_punch_weapon_display", "targetname");
-  var_0 _meth_8511();
+  var_0 = _getent("pack_a_punch_weapon_display", "targetname");
+  var_0 ghost();
 
   for(var_1 = 0; var_1 < 3; var_1++)
     common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_flag_" + (var_1 + 1));
@@ -574,28 +574,28 @@ unlock_next_reciever() {
 
 handle_unlock_lights(var_0, var_1) {
   _id_0547::_id_A6F6();
-  var_2 = self._id_81E1;
+  var_2 = self.setmovespeedscale;
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_red");
-  _func_14C(var_3);
-  common_scripts\utility::_id_3C9F(var_0 + self._id_81E1);
+  _triggerfx(var_3);
+  common_scripts\utility::_id_3C9F(var_0 + self.setmovespeedscale);
   var_3 delete();
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_green");
-  _func_14C(var_3);
+  _triggerfx(var_3);
 
   if(!isDefined(var_1)) {
     return;
   }
-  common_scripts\utility::_id_3C9F(var_1 + self._id_81E1);
+  common_scripts\utility::_id_3C9F(var_1 + self.setmovespeedscale);
   var_3 delete();
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_off");
-  _func_14C(var_3);
+  _triggerfx(var_3);
 }
 
 set_pack_key_unlocked() {
-  var_0 = self._id_81E1;
+  var_0 = self.setmovespeedscale;
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("tag_origin");
-  common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_ready_flag_" + self._id_81E1);
+  common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_ready_flag_" + self.setmovespeedscale);
   var_2 = 400;
 
   if(common_scripts\utility::_id_562E(level.sg_pack_use_small_radius))
@@ -603,7 +603,7 @@ set_pack_key_unlocked() {
 
   var_1.ignoresighttrace = 1;
   var_1 maps\mp\mp_zombies_soul_collection::_id_170B(10, var_2, 70, "zmb_sg_soul_collect_ping_" + var_0, undefined, "tag_origin", undefined, "tag_origin");
-  common_scripts\utility::flag_set("zmb_sg_soul_collect_flag_" + self._id_81E1);
+  common_scripts\utility::flag_set("zmb_sg_soul_collect_flag_" + self.setmovespeedscale);
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("geistcraft_device_powered");
 }
 
@@ -722,7 +722,7 @@ start_match_in_time(var_0) {
 run_intro_cinematic() {
   var_0 = self;
   var_0 endon("disconnect");
-  var_0._id_6772 = _func_19B(var_0);
+  var_0._id_6772 = _newclienthudelem(var_0);
   var_0._id_6772 setshader("black", 640, 480);
   var_0._id_6772.sort = 999;
   var_0._id_6772._id_00C6 = "fullscreen";
@@ -747,7 +747,7 @@ run_outro_cinematic() {
   if(!isDefined(level.outro_targetname)) {
     return;
   }
-  var_0._id_6772 = _func_19B(var_0);
+  var_0._id_6772 = _newclienthudelem(var_0);
   var_0._id_6772 setshader("black", 640, 480);
   var_0._id_6772.sort = 999;
   var_0._id_6772._id_00C6 = "fullscreen";
@@ -759,7 +759,7 @@ run_outro_cinematic() {
 }
 
 script_index_compare(var_0, var_1) {
-  return var_0._id_81E1 < var_1._id_81E1;
+  return var_0.setmovespeedscale < var_1.setmovespeedscale;
 }
 
 set_game_won() {
@@ -858,7 +858,7 @@ sg_run_round_start() {
   } else {
     foreach(var_3 in level.players) {
       var_4 = tablelookup("mp/zombiesShotgunObjectiveData.csv", 0, var_0, 1);
-      var_3 _meth_82FF("ui_onevone_class_1", int(var_4));
+      var_3 setclientomnvar("ui_onevone_class_1", int(var_4));
     }
   }
 
@@ -897,7 +897,7 @@ sg_mod_intermission_time(var_0) {
 }
 
 sg_display_remaining_rounds(var_0) {
-  _func_032("ui_zm_round_number", var_0);
+  _setomnvar("ui_zm_round_number", var_0);
 }
 
 sg_run_obj_round(var_0) {
@@ -917,7 +917,7 @@ sg_run_obj_round(var_0) {
         var_4 = tablelookup("mp/zombiesShotgunObjectiveData.csv", 0, var_0.type, 1);
       }
 
-      var_3 _meth_82FF("ui_onevone_class_1", int(var_4));
+      var_3 setclientomnvar("ui_onevone_class_1", int(var_4));
     }
 
     level notify("sg_obj_start");
@@ -937,14 +937,14 @@ sg_run_obj_round(var_0) {
     level.objectivewaveactive = 1;
     level.zmbdisablechancetospawnpickup = 1;
     var_7 = wave_end_or_objective_end(var_0);
-    _func_032("ui_zm_waypoint_ents_type", 0);
+    _setomnvar("ui_zm_waypoint_ents_type", 0);
     level.zmbdisablechancetospawnpickup = 0;
     level.objectivewaveactive = 0;
     level.trucks_are_port_locked = 0;
 
     foreach(var_3 in level.players) {
       var_9 = tablelookup("mp/zombiesShotgunObjectiveData.csv", 0, "obj_ending", 1);
-      var_3 _meth_82FF("ui_onevone_class_1", int(var_9));
+      var_3 setclientomnvar("ui_onevone_class_1", int(var_9));
     }
 
     level.objectivescompleted++;
@@ -1054,7 +1054,7 @@ sg_obj_round_fail_wrapper(var_0) {
   wait 3.5;
 
   foreach(var_2 in level.players)
-  var_2 _meth_82FF("ui_hide_hud", 0);
+  var_2 setclientomnvar("ui_hide_hud", 0);
 
   _id_0553::_id_AC1F("zombie_extraction_failed", undefined, 1);
 }
@@ -1063,7 +1063,7 @@ setplayerhasfailed() {
   var_0 = self;
   var_0._id_480F = 1;
   wait 0.7;
-  var_0 _meth_82FF("ui_hide_hud", 1);
+  var_0 setclientomnvar("ui_hide_hud", 1);
   level thread maps\mp\_utility::_id_6F74(::run_outro_cinematic, undefined, level.outro_targetname);
 }
 
@@ -1272,7 +1272,7 @@ sg_obj_splash_title(var_0, var_1, var_2, var_3) {
   wait(var_2);
   var_4.splashtitle sg_obj_splash_fade_in();
   wait(var_1 - var_3);
-  var_4.splashtitle _meth_8080(0.5);
+  var_4.splashtitle moveovertime(0.5);
   var_4.splashtitle._id_00C6 = "left_adjustable";
   var_4.splashtitle._id_01CA = "top_adjustable";
   var_4.splashtitle.aligny = "top";
@@ -1366,7 +1366,7 @@ sg_obj_timer(var_0) {
   level.sg_obj_timer = var_0;
 
   foreach(var_2 in level.players)
-  var_2 _meth_82FF("ui_onevone_class_2", int(var_0));
+  var_2 setclientomnvar("ui_onevone_class_2", int(var_0));
 
   sg_obj_timer_countdown();
   level notify("sg_obj_timeout");
@@ -1405,13 +1405,13 @@ sg_obj_timer_ui(var_0) {
   var_1.objtimerhud = var_1 maps\mp\gametypes\_hud_util::createfontstring("default", 1);
   var_1.objtimerhud maps\mp\gametypes\_hud_util::setpoint("LEFT", undefined, 20, 50);
   var_1.objtimerhud.label = &"Time Remaining: ";
-  var_1.objtimerhud _meth_80C5(level.sg_obj_timer);
+  var_1.objtimerhud settenthstimer(level.sg_obj_timer);
 
   for(;;) {
-    var_2 = level common_scripts\utility::_id_A715("sg_obj_end", "sg_obj_timeout", "sg_obj_remove_timer", "sg_obj_update_timer");
+    var_2 = level common_scripts\utility::waittill_any_return("sg_obj_end", "sg_obj_timeout", "sg_obj_remove_timer", "sg_obj_update_timer");
 
     if(var_2 == "sg_obj_update_timer") {
-      var_1.objtimerhud _meth_80C5(level.sg_obj_timer);
+      var_1.objtimerhud settenthstimer(level.sg_obj_timer);
       continue;
     }
 
@@ -1439,8 +1439,8 @@ outro_run() {
 }
 
 _id_902A(var_0) {
-  if(isDefined(var_0._id_82EC)) {
-    switch (var_0._id_82EC) {
+  if(isDefined(var_0.weaponlocktargettooclose)) {
+    switch (var_0.weaponlocktargettooclose) {
       case "spawn_dirt":
         return::dirtspawnnotetrackhandler;
       case "spawn_concrete":
@@ -1534,7 +1534,7 @@ zombiedripfxcleanup(var_0, var_1) {
     }
   }
 
-  wait(_func_0A5(5.0, 15.0));
+  wait(_randomfloatrange(5.0, 15.0));
 
   if(!isDefined(self) || !isalive(self)) {
     return;
@@ -1549,8 +1549,8 @@ zombiespawnfx(var_0) {
   if(level.zombiespawnfxcount >= 12) {
     return;
   }
-  var_1 = _func_14B(common_scripts\utility::_id_44F5(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-  _func_14C(var_1);
+  var_1 = _spawnfx(common_scripts\utility::_id_44F5(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  _triggerfx(var_1);
   level.zombiespawnfxcount++;
   common_scripts\utility::waittill_notify_or_timeout("death", 2.0);
   level.zombiespawnfxcount--;
@@ -1595,7 +1595,7 @@ zmb_shattered_boss_nerfs(var_0, var_1, var_2) {
 ________the_classic________() {}
 
 shotgun_classic_init() {
-  var_0 = _func_18E("the_classic_jolt_volume", "targetname");
+  var_0 = _getent("the_classic_jolt_volume", "targetname");
 
   for(;;) {
     level waittill("zombie_airdrop_inbound");
@@ -1631,14 +1631,14 @@ shotgun_classic_listen_for_jolts() {
 }
 
 shotgun_classic_jolt_drop_fx(var_0) {
-  var_1 = _func_14B(common_scripts\utility::_id_44F5("moneyCloud"), var_0);
-  _func_14C(var_1);
+  var_1 = _spawnfx(common_scripts\utility::_id_44F5("moneyCloud"), var_0);
+  _triggerfx(var_1);
   wait 3;
   var_1 delete();
 }
 
 shotgun_classic_add_classic_to_box() {
-  _func_18C("Classic added to SMG box!");
+  _iprintlnbold("Classic added to SMG box!");
   var_0 = common_scripts\utility::_id_46B7("the_classic_complete_fx_org", "targetname");
 
   foreach(var_2 in var_0)

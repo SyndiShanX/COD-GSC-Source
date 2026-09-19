@@ -11,7 +11,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -57,32 +57,32 @@ main() {
   game["dialog"]["lead_taken"] = "null";
   game["dialog"]["kill_confirmed"] = "kc_killconfirmed";
   game["dialog"]["revived"] = "sr_rev";
-  _func_032("ui_bomb_a_timer_endtime", 0);
-  _func_032("ui_bomb_b_timer_endtime", 0);
+  _setomnvar("ui_bomb_a_timer_endtime", 0);
+  _setomnvar("ui_bomb_b_timer_endtime", 0);
   level._id_257E["vanish"] = loadfx("vfx/test/test_fx");
 }
 
 _id_5300() {
   maps\mp\_utility::_id_8653();
-  var_0 = _func_132("srData", "roundLength");
-  _func_035("scr_sr_timelimit", var_0);
+  var_0 = _getmatchrulesdata("srData", "roundLength");
+  _setdynamicdvar("scr_sr_timelimit", var_0);
   maps\mp\_utility::registertimelimitdvar("sr", var_0);
-  var_1 = _func_132("srData", "roundSwitch");
-  _func_035("scr_sr_roundswitch", var_1);
+  var_1 = _getmatchrulesdata("srData", "roundSwitch");
+  _setdynamicdvar("scr_sr_roundswitch", var_1);
   maps\mp\_utility::registerroundswitchdvar("sr", var_1, 0, 9);
-  var_2 = _func_132("commonOption", "scoreLimit");
-  _func_035("scr_sr_winlimit", var_2);
+  var_2 = _getmatchrulesdata("commonOption", "scoreLimit");
+  _setdynamicdvar("scr_sr_winlimit", var_2);
   maps\mp\_utility::registerwinlimitdvar("sr", var_2);
-  _func_035("scr_sr_bombtimer", _func_132("srData", "bombTimer"));
-  _func_035("scr_sr_planttime", _func_132("srData", "plantTime"));
-  _func_035("scr_sr_defusetime", _func_132("srData", "defuseTime"));
-  _func_035("scr_sr_multibomb", _func_132("srData", "multiBomb"));
-  _func_035("scr_sr_silentplant", _func_132("srData", "silentPlant"));
-  _func_035("scr_sr_roundlimit", 0);
+  _setdynamicdvar("scr_sr_bombtimer", _getmatchrulesdata("srData", "bombTimer"));
+  _setdynamicdvar("scr_sr_planttime", _getmatchrulesdata("srData", "plantTime"));
+  _setdynamicdvar("scr_sr_defusetime", _getmatchrulesdata("srData", "defuseTime"));
+  _setdynamicdvar("scr_sr_multibomb", _getmatchrulesdata("srData", "multiBomb"));
+  _setdynamicdvar("scr_sr_silentplant", _getmatchrulesdata("srData", "silentPlant"));
+  _setdynamicdvar("scr_sr_roundlimit", 0);
   maps\mp\_utility::registerroundlimitdvar("sr", 0);
-  _func_035("scr_sr_scorelimit", 1);
+  _setdynamicdvar("scr_sr_scorelimit", 1);
   maps\mp\_utility::registerscorelimitdvar("sr", 1);
-  _func_035("scr_sr_halftime", 0);
+  _setdynamicdvar("scr_sr_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("sr", 0);
 }
 
@@ -97,7 +97,7 @@ _id_6BAF() {
     game["defenders"] = var_0;
   }
 
-  _func_157("manual_change");
+  _setclientnamemode("manual_change");
   level._effect["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
   level._effect["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
   maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
@@ -136,10 +136,10 @@ _id_6BA7() {
 
   if(isPlayer(self) && !var_0) {
     if(level._id_6510 && self.pers["team"] == game["attackers"]) {
-      self _meth_82FF("ui_carrying_bomb", 1);
+      self setclientomnvar("ui_carrying_bomb", 1);
       thread maps\mp\gametypes\_hud_message::_id_9102("bomb_pickedup");
     } else
-      self _meth_82FF("ui_carrying_bomb", 0);
+      self setclientomnvar("ui_carrying_bomb", 0);
   }
 
   self._id_57A7 = undefined;
@@ -185,7 +185,7 @@ _id_8BAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
 _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(isPlayer(self))
-    self _meth_82FF("ui_carrying_bomb", 0);
+    self setclientomnvar("ui_carrying_bomb", 0);
 
   if(!maps\mp\_utility::gameflag("prematch_done"))
     maps\mp\gametypes\_playerlogic::mayspawn();
@@ -207,10 +207,10 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 }
 
 _id_903E(var_0, var_1) {
-  if(_func_1EF(var_0)) {
+  if(_isagent(var_0)) {
     return;
   }
-  if(_func_1EF(var_1))
+  if(_isagent(var_1))
     var_1 = var_1._id_0117;
 
   var_2 = var_0.origin + (0, 0, 14);
@@ -220,10 +220,10 @@ _id_903E(var_0, var_1) {
     level._id_31F9[var_0.guid] notify("reset");
   } else {
     var_3[0] = spawn("script_model", (0, 0, 0));
-    var_3[0] _meth_8384(var_0);
+    var_3[0] setclientowner(var_0);
     var_3[0] setModel("prop_dogtags_future_enemy_animated");
     var_3[1] = spawn("script_model", (0, 0, 0));
-    var_3[1] _meth_8384(var_0);
+    var_3[1] setclientowner(var_0);
     var_3[1] setModel("prop_dogtags_future_friend_animated");
     var_4 = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
     level._id_31F9[var_0.guid] = _id_04D1::_id_2837("any", var_4, var_3, (0, 0, 16));
@@ -249,52 +249,52 @@ _id_903E(var_0, var_1) {
   level._id_31F9[var_0.guid]._id_1180 = var_1;
 
   if(var_0.team == "axis") {
-    _func_1D1(level._id_31F9[var_0.guid]._id_698B, "waypoint_dogtags_friendlys");
-    _func_183(level._id_31F9[var_0.guid]._id_698B, "axis");
-    _func_1D1(level._id_31F9[var_0.guid]._id_698A, "waypoint_dogtags");
-    _func_183(level._id_31F9[var_0.guid]._id_698A, "allies");
+    _objective_icon(level._id_31F9[var_0.guid]._id_698B, "waypoint_dogtags_friendlys");
+    _objective_team(level._id_31F9[var_0.guid]._id_698B, "axis");
+    _objective_icon(level._id_31F9[var_0.guid]._id_698A, "waypoint_dogtags");
+    _objective_team(level._id_31F9[var_0.guid]._id_698A, "allies");
   } else {
-    _func_1D1(level._id_31F9[var_0.guid]._id_698A, "waypoint_dogtags_friendlys");
-    _func_183(level._id_31F9[var_0.guid]._id_698A, "allies");
-    _func_1D1(level._id_31F9[var_0.guid]._id_698B, "waypoint_dogtags");
-    _func_183(level._id_31F9[var_0.guid]._id_698B, "axis");
+    _objective_icon(level._id_31F9[var_0.guid]._id_698A, "waypoint_dogtags_friendlys");
+    _objective_team(level._id_31F9[var_0.guid]._id_698A, "allies");
+    _objective_icon(level._id_31F9[var_0.guid]._id_698B, "waypoint_dogtags");
+    _objective_team(level._id_31F9[var_0.guid]._id_698B, "axis");
   }
 
-  _func_1D2(level._id_31F9[var_0.guid]._id_698A, var_2);
-  _func_1D2(level._id_31F9[var_0.guid]._id_698B, var_2);
-  _func_1D0(level._id_31F9[var_0.guid]._id_698A, "active");
-  _func_1D0(level._id_31F9[var_0.guid]._id_698B, "active");
+  _objective_position(level._id_31F9[var_0.guid]._id_698A, var_2);
+  _objective_position(level._id_31F9[var_0.guid]._id_698B, var_2);
+  _objective_state(level._id_31F9[var_0.guid]._id_698A, "active");
+  _objective_state(level._id_31F9[var_0.guid]._id_698B, "active");
   playsoundatpos(var_2, "mp_killconfirm_tags_drop");
   level notify("sr_player_killed", var_0);
   var_0._id_95B4 = 1;
   var_0._id_0112 = 3;
-  level._id_31F9[var_0.guid]._id_A582[0] _meth_8276("mp_dogtag_spin");
-  level._id_31F9[var_0.guid]._id_A582[1] _meth_8276("mp_dogtag_spin");
+  level._id_31F9[var_0.guid]._id_A582[0] scriptmodelplayanim("mp_dogtag_spin");
+  level._id_31F9[var_0.guid]._id_A582[1] scriptmodelplayanim("mp_dogtag_spin");
 }
 
 _id_8C21(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("reset");
-  self _meth_805C();
+  self hide();
 
   foreach(var_3 in level.players) {
     if(var_3.team == var_1)
-      self _meth_8005(var_3);
+      self showtoplayer(var_3);
 
     if(var_3.team == "spectator" && var_1 == "allies")
-      self _meth_8005(var_3);
+      self showtoplayer(var_3);
   }
 
   for(;;) {
     level waittill("joined_team");
-    self _meth_805C();
+    self hide();
 
     foreach(var_3 in level.players) {
       if(var_3.team == var_1)
-        self _meth_8005(var_3);
+        self showtoplayer(var_3);
 
       if(var_3.team == "spectator" && var_1 == "allies")
-        self _meth_8005(var_3);
+        self showtoplayer(var_3);
     }
   }
 }
@@ -373,15 +373,15 @@ _id_6BBF(var_0) {
 _id_7D6F() {
   self._id_1180 = undefined;
   self notify("reset");
-  self._id_A582[0] _meth_805C();
-  self._id_A582[1] _meth_805C();
+  self._id_A582[0] hide();
+  self._id_A582[1] hide();
   self._id_28D4 = (0, 0, 1000);
   self._id_9D65.origin = (0, 0, 1000);
   self._id_A582[0].origin = (0, 0, 1000);
   self._id_A582[1].origin = (0, 0, 1000);
   _id_04D1::_id_0C30("none");
-  _func_1D0(self._id_698A, "invisible");
-  _func_1D0(self._id_698B, "invisible");
+  _objective_state(self._id_698A, "invisible");
+  _objective_state(self._id_698B, "invisible");
 }
 
 _id_95BD(var_0) {

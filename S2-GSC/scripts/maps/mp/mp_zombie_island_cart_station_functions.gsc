@@ -54,40 +54,40 @@ set_cart_station_state(var_0, var_1, var_2, var_3) {
 #using_animtree("animated_props_zombies_DLC1");
 
 set_doors_closed(var_0) {
-  self.zmb_mine_cart_path_blocker[var_0] _meth_805F();
-  self.zmb_mine_cart_path_blocker[var_0] _meth_82C1();
+  self.zmb_mine_cart_path_blocker[var_0] disconnectpaths();
+  self.zmb_mine_cart_path_blocker[var_0] solid();
   var_1 = "s2_zom_mine_cart_gate_close";
 
   if(_id_0547::_id_5565(self.zmb_mine_cart_gates[var_0].prevstate, 0)) {
     return;
   }
   self.zmb_mine_cart_gates[var_0].prevstate = 0;
-  self.zmb_mine_cart_gates[var_0] _meth_8276("s2_zom_mine_cart_gate_close", "gate_anim");
+  self.zmb_mine_cart_gates[var_0] scriptmodelplayanim("s2_zom_mine_cart_gate_close", "gate_anim");
   self.zmb_mine_cart_gates[var_0] _id_0378::_id_8D74("mine_cart_gate_closing");
-  wait(_func_065(%s2_zom_mine_cart_gate_close));
-  self.zmb_mine_cart_gates[var_0] _meth_8276("s2_zom_mine_cart_gate_close_idle", "gate_anim");
+  wait(_getanimlength(%s2_zom_mine_cart_gate_close));
+  self.zmb_mine_cart_gates[var_0] scriptmodelplayanim("s2_zom_mine_cart_gate_close_idle", "gate_anim");
 }
 
 set_doors_opened(var_0) {
-  self.zmb_mine_cart_path_blocker[var_0] _meth_8060();
-  self.zmb_mine_cart_path_blocker[var_0] _meth_82C2();
+  self.zmb_mine_cart_path_blocker[var_0] connectpaths();
+  self.zmb_mine_cart_path_blocker[var_0] notsolid();
   var_1 = "s2_zom_mine_cart_gate_open";
 
   if(_id_0547::_id_5565(self.zmb_mine_cart_gates[var_0].prevstate, 1)) {
     return;
   }
   self.zmb_mine_cart_gates[var_0].prevstate = 1;
-  self.zmb_mine_cart_gates[var_0] _meth_8276("s2_zom_mine_cart_gate_open", "gate_anim");
+  self.zmb_mine_cart_gates[var_0] scriptmodelplayanim("s2_zom_mine_cart_gate_open", "gate_anim");
   self.zmb_mine_cart_gates[var_0] _id_0378::_id_8D74("mine_cart_gate_opening");
-  wait(_func_065(%s2_zom_mine_cart_gate_close));
-  self.zmb_mine_cart_gates[var_0] _meth_8276("s2_zom_mine_cart_gate_open_idle", "gate_anim");
+  wait(_getanimlength(%s2_zom_mine_cart_gate_close));
+  self.zmb_mine_cart_gates[var_0] scriptmodelplayanim("s2_zom_mine_cart_gate_open_idle", "gate_anim");
 }
 
 get_all_carts_with(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.island_cart_structs) {
-    if(_id_0547::_id_5565(var_3._id_819A, var_0))
+    if(_id_0547::_id_5565(var_3.getnegotiationnextnode, var_0))
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
   }
 

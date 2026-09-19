@@ -21,7 +21,7 @@ main() {
   level._id_943B._id_38E6["s2_zom_straub_table_cleaver_exit_4"] = % s2_zom_straub_table_cleaver_exit_4;
   level._id_943B._id_38E6["s2_zom_straub_table_cleaver_exit_6"] = % s2_zom_straub_table_cleaver_exit_6;
   level._id_943B._id_38E6["s2_zom_straub_table_hacksaw_exit_6"] = % s2_zom_straub_table_hacksaw_exit_6;
-  level._id_943B._id_241F = _func_18E("straub_bullet_clip", "targetname");
+  level._id_943B._id_241F = _getent("straub_bullet_clip", "targetname");
   level._effect["temp_straub_radius"] = loadfx("vfx/weaponimpact/zmb_straub_impact");
   level._id_943B._id_9097 = _id_9442();
 
@@ -54,7 +54,7 @@ _id_9445() {
     level._id_943B._id_2913 = undefined;
     var_1 = 3;
     var_2 = 5;
-    wait(_func_0A5(var_1, var_2));
+    wait(_randomfloatrange(var_1, var_2));
   }
 }
 
@@ -80,7 +80,7 @@ _id_943D(var_0) {
         level._id_943B._id_2913._id_9A8E delete();
 
       if(isDefined(level._id_943B._id_2913._id_18A8)) {
-        _func_149(common_scripts\utility::_id_44F5("temp_straub_radius"), level._id_943B._id_2913._id_18A8, "J_MainRoot");
+        _killfxontag(common_scripts\utility::_id_44F5("temp_straub_radius"), level._id_943B._id_2913._id_18A8, "J_MainRoot");
         level._id_943B._id_2913._id_18A8 delete();
       }
     }
@@ -141,7 +141,7 @@ _id_9442() {
     var_2._id_9A8E = undefined;
     var_2._id_5046 = var_2._id_0165;
     var_2._id_38E4 = var_2.animation;
-    var_2._id_38E5 = var_2._id_819A;
+    var_2._id_38E5 = var_2.getnegotiationnextnode;
 
     if(!isDefined(var_2._id_5EB4))
       var_2._id_5EB4 = var_2.origin;
@@ -158,7 +158,7 @@ _id_9448() {
   self._id_18A8 setModel("zom_straub_wholebody_dlc");
   self._id_00B9 = spawn("script_model", self.origin);
   self._id_00B9 setModel("zom_head_kier_dirt_org1_dlc");
-  self._id_00B9 _meth_8055(self._id_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  self._id_00B9 linkto(self._id_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
 
   if(isDefined(level._id_943B._id_241F))
     thread _id_943F();
@@ -177,35 +177,35 @@ _id_9448() {
   if(isDefined(var_0)) {
     self._id_9A8E = spawn("script_model", self.origin);
     self._id_9A8E setModel(var_0);
-    self._id_9A8E _meth_8055(self._id_18A8, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
+    self._id_9A8E linkto(self._id_18A8, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
   }
 
   while(!self._id_65F8._id_565E) {
-    self._id_18A8 _meth_8278(self._id_5046);
-    self._id_00B9 _meth_8278(self._id_5046);
-    wait(_func_065(level._id_943B._id_5049[self._id_5046]));
+    self._id_18A8 scriptmodelplayanimdeltamotion(self._id_5046);
+    self._id_00B9 scriptmodelplayanimdeltamotion(self._id_5046);
+    wait(_getanimlength(level._id_943B._id_5049[self._id_5046]));
   }
 
   level._id_943B._id_5B51 = gettime();
-  self._id_18A8 _meth_8278(self._id_38E4);
-  self._id_00B9 _meth_8278(self._id_38E4);
+  self._id_18A8 scriptmodelplayanimdeltamotion(self._id_38E4);
+  self._id_00B9 scriptmodelplayanimdeltamotion(self._id_38E4);
   var_2 = 0;
 
   if(isDefined(self._id_9A8E)) {
-    var_3 = _func_067(level._id_943B._id_38E6[self._id_38E4], "drop_tool");
-    var_4 = _func_065(level._id_943B._id_38E6[self._id_38E4]);
+    var_3 = _getnotetracktimes(level._id_943B._id_38E6[self._id_38E4], "drop_tool");
+    var_4 = _getanimlength(level._id_943B._id_38E6[self._id_38E4]);
     var_2 = var_3[0] * var_4;
     wait(var_2);
-    self._id_9A8E _meth_8057();
+    self._id_9A8E unlink();
   }
 
   if(isDefined(self._id_38E5)) {
     wait(_id_0547::_id_9470(self._id_38E5) - var_2);
 
     if(isDefined(level._id_943B._id_241F))
-      level._id_943B._id_241F _meth_8057();
+      level._id_943B._id_241F unlink();
 
-    _func_149(common_scripts\utility::_id_44F5("temp_straub_radius"), self._id_18A8, "J_MainRoot");
+    _killfxontag(common_scripts\utility::_id_44F5("temp_straub_radius"), self._id_18A8, "J_MainRoot");
     self._id_00B9 delete();
 
     if(isDefined(self._id_9A8E))
@@ -219,8 +219,8 @@ _id_9448() {
 _id_943F() {
   self endon("straub_destroyed");
   level._id_943B._id_241F.origin = self._id_18A8.origin;
-  level._id_943B._id_241F _meth_8055(self._id_18A8, "tag_origin", (0, 0, 32), (0, 0, 0));
-  level._id_943B._id_241F _meth_82C3(1);
+  level._id_943B._id_241F linkto(self._id_18A8, "tag_origin", (0, 0, 32), (0, 0, 0));
+  level._id_943B._id_241F setcandamage(1);
   level._id_943B._id_241F thread maps\mp\gametypes\_damage::_id_8676(1, undefined, ::_id_9440, ::_id_943E);
 }
 
@@ -273,7 +273,7 @@ _id_9444(var_0) {
   var_2 = _id_9443(var_1);
 
   if(var_2)
-    var_2 = _func_07E(self._id_5EB4, var_0 getEye(), 0, self._id_18A8);
+    var_2 = _bullettracepassed(self._id_5EB4, var_0 getEye(), 0, self._id_18A8);
 
   return var_2;
 }
@@ -285,7 +285,7 @@ _id_9441(var_0) {
   var_4 = vectorNormalize((var_3[0], var_3[1], 0));
   var_5 = vectordot(var_2, var_4);
   var_5 = clamp(var_5, -1, 1);
-  var_6 = _func_0AA(var_5);
+  var_6 = _acos(var_5);
   return var_6;
 }
 
@@ -322,7 +322,7 @@ _id_9447() {
       case "bunker_speaker":
         level._id_6DD5[level._id_6DD5.size] = var_1;
 
-        if(_id_0547::_id_5565(var_1._id_8260, "straub_office_speaker"))
+        if(_id_0547::_id_5565(var_1.setlookatent, "straub_office_speaker"))
           level._id_6DD6[level._id_6DD6.size] = var_1;
 
         break;
@@ -406,11 +406,11 @@ _id_74E2(var_0, var_1) {
       if(_id_943C(level._id_943B._id_2913))
         return;
       else if(isDefined(level._id_943B._id_2913._id_18A8)) {
-        level._id_943B._id_2913._id_18A8 _meth_805C();
-        level._id_943B._id_2913._id_00B9 _meth_805C();
+        level._id_943B._id_2913._id_18A8 hide();
+        level._id_943B._id_2913._id_00B9 hide();
 
         if(isDefined(level._id_943B._id_2913._id_9A8E))
-          level._id_943B._id_2913._id_9A8E _meth_805C();
+          level._id_943B._id_2913._id_9A8E hide();
       }
     }
   }
@@ -481,11 +481,11 @@ _id_74E2(var_0, var_1) {
 
   if(level._id_943B._id_50D6) {
     if(isDefined(level._id_943B._id_2913) && isDefined(level._id_943B._id_2913._id_18A8)) {
-      level._id_943B._id_2913._id_18A8 _meth_805B();
-      level._id_943B._id_2913._id_00B9 _meth_805B();
+      level._id_943B._id_2913._id_18A8 show();
+      level._id_943B._id_2913._id_00B9 show();
 
       if(isDefined(level._id_943B._id_2913._id_9A8E))
-        level._id_943B._id_2913._id_9A8E _meth_805B();
+        level._id_943B._id_2913._id_9A8E show();
     }
   }
 }

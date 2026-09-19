@@ -11,14 +11,14 @@ _id_93B0() {
 
   for(;;) {
     if(!self._id_4B45) {
-      if(self _meth_82AA("specialty_stalker", 1))
+      if(self hasperk("specialty_stalker", 1))
         self unsetperk("specialty_stalker", 1);
 
       waitframe();
       continue;
     }
 
-    if(!self _meth_82AA("specialty_stalker", 1))
+    if(!self hasperk("specialty_stalker", 1))
       self setperk("specialty_stalker", 1, 0);
 
     waitframe();

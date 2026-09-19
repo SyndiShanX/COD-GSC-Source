@@ -131,7 +131,7 @@ _id_4AAB(var_0) {
   var_3 = undefined;
   var_4 = undefined;
 
-  if(isDefined(var_0) && _func_031(var_0)) {
+  if(isDefined(var_0) && _isstring(var_0)) {
     if(var_0 == "left_leg")
       var_4 = var_2[0];
     else if(var_0 == "right_leg")
@@ -142,18 +142,18 @@ _id_4AAB(var_0) {
       var_4 = var_2[3];
     else {}
   } else {
-    var_5 = self._id_18A8 _meth_801E();
+    var_5 = self._id_18A8 getcorpseanim();
 
-    if(_func_066(var_5, "left_leg")) {
+    if(_animhasnotetrack(var_5, "left_leg")) {
       var_4 = var_2[1];
       self._id_5D9F = 1;
-    } else if(_func_066(var_5, "right_leg")) {
+    } else if(_animhasnotetrack(var_5, "right_leg")) {
       var_4 = var_2[0];
       self._id_5D9F = 1;
-    } else if(_func_066(var_5, "left_arm")) {
+    } else if(_animhasnotetrack(var_5, "left_arm")) {
       var_4 = var_2[3];
       self._id_5D9F = 1;
-    } else if(_func_066(var_5, "right_arm")) {
+    } else if(_animhasnotetrack(var_5, "right_arm")) {
       var_4 = var_2[2];
       self._id_5D9F = 1;
     } else {
@@ -161,7 +161,7 @@ _id_4AAB(var_0) {
       var_3 = 0.5;
     }
 
-    var_6 = _func_0A3(1.0);
+    var_6 = _randomfloat(1.0);
 
     if(!isDefined(var_3))
       var_3 = var_4[3];

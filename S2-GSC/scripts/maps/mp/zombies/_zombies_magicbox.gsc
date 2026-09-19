@@ -117,17 +117,17 @@ _id_4D18(var_0, var_1) {
     var_1 = 0;
 
   if(isDefined(var_0._id_6298)) {
-    var_0._id_6298 _meth_8050("TAG_FX");
+    var_0._id_6298 hidepart("TAG_FX");
 
     if(isDefined(level._effect["magic_box_light"]) && isDefined(var_0._id_6298) && isDefined(var_0._id_6298._id_1B78))
-      _func_148(common_scripts\utility::_id_44F5("magic_box_light"), var_0._id_6298._id_1B78, "tag_origin");
-  } else if(isDefined(var_0._id_82EF)) {
-    var_0._id_82EF _meth_83FA("lights", "inactive");
+      _stopfxontag(common_scripts\utility::_id_44F5("magic_box_light"), var_0._id_6298._id_1B78, "tag_origin");
+  } else if(isDefined(var_0.issighted)) {
+    var_0.issighted setscriptablepartstate("lights", "inactive");
 
     if(!var_1)
-      var_0._id_82EF _id_6C0B(1);
+      var_0.issighted _id_6C0B(1);
     else
-      var_0._id_82EF _meth_83FA("box", "opened");
+      var_0.issighted setscriptablepartstate("box", "opened");
   }
 }
 
@@ -155,15 +155,15 @@ _id_08B7(var_0) {
     }
 
     if(isDefined(level._effect["magic_box_light"]) && isDefined(var_0._id_6298._id_1B78))
-      _func_147(level._effect["magic_box_light"], var_0._id_6298._id_1B78, "tag_origin");
+      _playfxontag(level._effect["magic_box_light"], var_0._id_6298._id_1B78, "tag_origin");
   }
 
   if(isDefined(var_0._id_6298)) {
-    var_0._id_6298 _meth_8053("TAG_FX");
-    var_0._id_6298 _meth_8276("zmb_mystery_box_2_close_idle");
-  } else if(isDefined(var_0._id_82EF)) {
-    var_0._id_82EF _meth_83FA("lights", "active");
-    var_0._id_82EF _id_244C();
+    var_0._id_6298 showpart("TAG_FX");
+    var_0._id_6298 scriptmodelplayanim("zmb_mystery_box_2_close_idle");
+  } else if(isDefined(var_0.issighted)) {
+    var_0.issighted setscriptablepartstate("lights", "active");
+    var_0.issighted _id_244C();
   }
 }
 
@@ -184,7 +184,7 @@ magicboxweaponvisibility(var_0) {
     var_3 = 1;
 
     for(;;) {
-      if(var_1 _meth_8530(var_0._id_586E._id_A9E0)) {
+      if(var_1 worldweaponsloaded(var_0._id_586E._id_A9E0)) {
         break;
       }
 
@@ -197,22 +197,22 @@ magicboxweaponvisibility(var_0) {
     }
 
     if(var_3)
-      var_0._id_586E _meth_8005(var_1);
+      var_0._id_586E showtoplayer(var_1);
   }
 }
 
-_id_801A(var_0, var_1) {
+isusingonlinedataoffline(var_0, var_1) {
   if(isDefined(var_0._id_586E))
-    var_0._id_586E _meth_848E(var_1);
+    var_0._id_586E setpickupweapon(var_1);
   else {
     var_0._id_586E = spawn("weapon_" + var_1, var_0._id_A9EA.origin);
     var_2 = (0, 0, 0);
-    var_0._id_586E _meth_8055(var_0._id_A9EA, "tag_origin", var_2, (0, 0, 0));
+    var_0._id_586E linkto(var_0._id_A9EA, "tag_origin", var_2, (0, 0, 0));
   }
 
-  var_0._id_586E _meth_80B3();
+  var_0._id_586E makeunusable();
   var_0._id_586E _meth_86B3(0);
-  var_0._id_586E _meth_8511();
+  var_0._id_586E ghost();
   var_0._id_586E._id_A9E0 = var_1;
   var_0 notify("set magic box weapon");
 }
@@ -221,8 +221,8 @@ _id_456D(var_0) {
   if(isDefined(var_0._id_6298))
     return var_0._id_6298;
 
-  if(isDefined(var_0._id_82EF))
-    return var_0._id_82EF;
+  if(isDefined(var_0.issighted))
+    return var_0.issighted;
 }
 
 worldweaponsloadedbyplayers(var_0, var_1) {
@@ -232,7 +232,7 @@ worldweaponsloadedbyplayers(var_0, var_1) {
     var_5 = 1;
 
     foreach(var_7 in var_0) {
-      if(!var_7 _meth_8530(var_4)) {
+      if(!var_7 worldweaponsloaded(var_4)) {
         var_5 = 0;
         break;
       }
@@ -279,33 +279,33 @@ _id_6C0A(var_0, var_1) {
   var_9 = getdvarint("scr_zombieDebugS2MagicBoxDraw");
   var_10 = [];
   var_11 = _id_456D(var_0);
-  var_10 = _func_22E(var_11.angles);
-  var_12 = var_11 _meth_8549(0.0, 0.0, -1.0);
+  var_10 = _anglestoaxis(var_11.angles);
+  var_12 = var_11 getpointinmodelbounds(0.0, 0.0, -1.0);
   var_13 = var_10["up"] * var_7[2];
   var_13 = var_13 + var_10["right"] * var_7[1];
   var_13 = var_13 + var_10["forward"] * var_7[0];
   var_13 = var_13 + var_12;
 
   if(isDefined(var_0._id_A9EA)) {
-    var_0._id_A9EA _meth_808C();
+    var_0._id_A9EA dontinterpolate();
     var_0._id_A9EA.origin = var_13;
   } else {
     var_0._id_A9EA = spawn("script_origin", var_13);
     var_0._id_A9EA setModel("tag_origin");
-    var_0._id_A9EA _meth_805C();
+    var_0._id_A9EA hide();
   }
 
   if(isDefined(var_0._id_6298))
-    var_0._id_6298 _meth_8276("zmb_mystery_box_2_open");
-  else if(isDefined(var_0._id_82EF))
-    var_0._id_82EF thread _id_6C0B();
+    var_0._id_6298 scriptmodelplayanim("zmb_mystery_box_2_open");
+  else if(isDefined(var_0.issighted))
+    var_0.issighted thread _id_6C0B();
 
   _id_0378::_id_8D74("mystery_box_open", var_11);
   _id_0378::_id_8D74("mystery_box_attract_open", var_11);
   wait 1;
-  var_0._id_A9EA.angles = _func_110(var_11.angles, (0, 0, 0));
-  var_0._id_A9EA _meth_82B4(var_8, var_2, var_4, var_3);
-  _func_147(level._effect["zmb_mystery_box_gun_gk"], var_0._id_A9EA, "tag_origin");
+  var_0._id_A9EA.angles = _combineangles(var_11.angles, (0, 0, 0));
+  var_0._id_A9EA movez(var_8, var_2, var_4, var_3);
+  _playfxontag(level._effect["zmb_mystery_box_gun_gk"], var_0._id_A9EA, "tag_origin");
   _id_0378::_id_8D74("mystery_box_elec", var_11, 1);
   wait 1;
   var_17 = [];
@@ -318,40 +318,40 @@ _id_6C0A(var_0, var_1) {
   }
 
   if(var_17.size > 0)
-    var_11 thread _id_8019(var_17, var_1);
+    var_11 thread releaseclaimedtrigger(var_17, var_1);
 
-  _id_83B2(var_1, var_0);
+  isholdinggrenade(var_1, var_0);
   var_21 = var_0._id_A9C4["selectedWeapon"];
   var_22 = spawn("weapon_" + var_21, var_0._id_A9EA.origin, 1);
-  var_22 _meth_80B3();
+  var_22 makeunusable();
   var_22 _meth_86B3(0);
-  var_22 _meth_8511();
+  var_22 ghost();
 
   for(var_23 = 0; var_23 < var_2; var_23 = var_23 + var_26) {
     var_24 = choosepreviewweapon(var_1);
 
     if(isDefined(var_24))
-      _id_801A(var_0, var_24);
+      isusingonlinedataoffline(var_0, var_24);
 
     var_25 = var_23 / var_2;
     var_26 = _func_2CA(var_5, var_6, var_25);
     wait(var_26);
   }
 
-  _id_801A(var_0, var_21);
+  isusingonlinedataoffline(var_0, var_21);
   var_22 delete();
   wait(var_6);
 }
 
-_id_8019(var_0, var_1) {
+releaseclaimedtrigger(var_0, var_1) {
   var_2 = 0.5;
   var_3 = 5;
 
   for(var_4 = 0; var_4 < var_3; var_4++) {
     wait(var_2);
-    self _meth_8429(var_0, 0, 0);
+    self hudoutlineenableforclients(var_0, 0, 0);
     wait(var_2);
-    self _meth_842A(var_0);
+    self hudoutlinedisableforclients(var_0);
   }
 }
 
@@ -359,25 +359,25 @@ _id_8019(var_0, var_1) {
 
 _id_6C0B(var_0) {
   if(common_scripts\utility::_id_562E(var_0))
-    self _meth_83FA("box", "opening_dud");
+    self setscriptablepartstate("box", "opening_dud");
   else
-    self _meth_83FA("box", "opening");
+    self setscriptablepartstate("box", "opening");
 
-  wait(_func_065(%zmb_mystery_box_2_open));
-  self _meth_83FA("box", "opened");
+  wait(_getanimlength(%zmb_mystery_box_2_open));
+  self setscriptablepartstate("box", "opened");
 }
 
 _id_244C() {
-  self _meth_83FA("box", "closing");
-  wait(_func_065(%zmb_mystery_box_2_close));
-  self _meth_83FA("box", "closed");
+  self setscriptablepartstate("box", "closing");
+  wait(_getanimlength(%zmb_mystery_box_2_close));
+  self setscriptablepartstate("box", "closed");
 }
 
 _id_244B(var_0) {
-  if(isDefined(var_0._id_82EF))
-    var_0._id_82EF _id_244C();
+  if(isDefined(var_0.issighted))
+    var_0.issighted _id_244C();
   else if(isDefined(var_0._id_6298))
-    var_0._id_6298 _meth_8276("zmb_mystery_box_2_close");
+    var_0._id_6298 scriptmodelplayanim("zmb_mystery_box_2_close");
 
   var_0 common_scripts\utility::_id_9DA3();
 }
@@ -434,17 +434,17 @@ _id_A7F0(var_0) {
 
   var_1 endon("disconnect");
 
-  while(!var_1 _meth_8530(var_0._id_586E._id_A9E0))
+  while(!var_1 worldweaponsloaded(var_0._id_586E._id_A9E0))
     waitframe();
 
-  var_0._id_586E _meth_8005(var_1);
+  var_0._id_586E showtoplayer(var_1);
 }
 
 _id_A7EF(var_0, var_1) {
   var_1 endon("disconnect");
   var_2 = spawnStruct();
   var_2._id_586E = var_0;
-  var_2._id_586E _meth_8511();
+  var_2._id_586E ghost();
   var_2._id_7474 = var_1;
   level childthread maps\mp\_utility::_id_6F74(::_id_A7F0, var_2);
 }
@@ -456,7 +456,7 @@ _id_10E6(var_0) {
   while(common_scripts\utility::_id_562E(var_0.playerconnectedbuthasntstreamedweapons))
     waitframe();
 
-  wait(_func_0A3(0.5));
+  wait(_randomfloat(0.5));
 
   if(isDefined(var_1._id_6C1D))
     var_1._id_6C1D delete();
@@ -466,7 +466,7 @@ _id_10E6(var_0) {
   var_4 = spawn(var_3, var_1._id_A9E3, 1);
   var_4.angles = var_1._id_A9BD;
   var_4._id_A9E0 = var_2;
-  var_4 _meth_80B3();
+  var_4 makeunusable();
   var_4 _meth_86B3(0);
   _id_A7EF(var_4, var_0);
   var_1._id_6C1D = var_4;
@@ -478,18 +478,18 @@ _id_10E6(var_0) {
 }
 
 _id_4D1B(var_0) {
-  self._id_82EF _meth_8006(var_0);
+  self.issighted _meth_8006(var_0);
 }
 
 _id_8C2B(var_0) {
-  self._id_82EF _meth_8005(var_0);
+  self.issighted showtoplayer(var_0);
 }
 
 _id_A7EB(var_0) {
   var_0 endon("disconnect");
   self._id_A7D7 = 1;
   childthread _id_A7EC(var_0);
-  wait(_func_0A3(0.8));
+  wait(_randomfloat(0.8));
   var_1 = self;
   var_2 = _id_0552::_id_7BFE(var_0, self, 1, var_1._id_A9E3);
 
@@ -502,15 +502,15 @@ _id_A7EB(var_0) {
     self._id_A7D7 = 0;
 
     if(0)
-      self _meth_80CD("HINT_NOICON");
+      self setcursorhint("HINT_NOICON");
 
-    var_3 = var_0 _meth_8317();
+    var_3 = var_0 getcurrentprimaryweapon();
 
     if(_id_0547::_id_57AF(var_3) || _id_0547::_id_5862(var_3)) {
       if(0) {
-        self _meth_80CE("");
-        self _meth_80CF("");
-        self _meth_855B("");
+        self sethintstring("");
+        self setsecondaryhintstring("");
+        self settertiaryhintstring("");
         self._id_3006 = undefined;
       }
 
@@ -531,9 +531,9 @@ _id_A7EB(var_0) {
       self._id_3006 = self._id_2925;
 
       if(0) {
-        self _meth_80CE(_id_4412(self));
-        self _meth_80CF(_id_4411(self));
-        self _meth_855B("");
+        self sethintstring(_id_4412(self));
+        self setsecondaryhintstring(_id_4411(self));
+        self settertiaryhintstring("");
       }
 
       if(1) {
@@ -548,9 +548,9 @@ _id_A7EB(var_0) {
     self._id_3006 = self._id_2955;
 
     if(0) {
-      self _meth_80CF(_id_4734(self));
-      self _meth_855B(_id_4733(self));
-      self _meth_80CE(&"ZOMBIES_WALL_BUY_GENERIC");
+      self setsecondaryhintstring(_id_4734(self));
+      self settertiaryhintstring(_id_4733(self));
+      self sethintstring(&"ZOMBIES_WALL_BUY_GENERIC");
     }
 
     if(1) {
@@ -593,8 +593,8 @@ _id_A7E6(var_0) {
   var_3 = var_0._id_0165;
   var_4 = [];
 
-  if(isDefined(var_0._id_8260))
-    var_4 = strtok(var_0._id_8260, ",");
+  if(isDefined(var_0.setlookatent))
+    var_4 = strtok(var_0.setlookatent, ",");
 
   var_5 = 1000;
   var_6 = 1000;
@@ -637,13 +637,13 @@ _id_A7E6(var_0) {
     }
   }
 
-  var_23 = _func_21F(var_0.target, "targetname");
+  var_23 = _getscriptablearray(var_0.target, "targetname");
   var_0._id_A7E9 = var_16;
   var_0._id_A7E3 = var_23;
 
   if(isDefined(var_17)) {
     var_0.wallbuyguncard = var_17;
-    var_0.wallbuyguncard _meth_805C();
+    var_0.wallbuyguncard hide();
   }
 
   for(var_24 = 0; var_24 < 4; var_24++) {
@@ -675,7 +675,7 @@ _id_A7EA(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0._id_A9E0 = var_2;
   var_0._id_6C5C = var_2;
   var_0._id_9DA0 = 0;
-  var_0._id_82EF = var_1;
+  var_0.issighted = var_1;
 
   if(!common_scripts\utility::_id_562E(var_5))
     var_0 thread _id_A7E1();
@@ -686,7 +686,7 @@ _id_A7EA(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(_id_0547::_id_581A(var_0) && !var_6) {
     var_8 = level._id_A7F1.size;
     level._id_A7F1[var_8]["baseName"] = var_0._id_6C5C + "_mp";
-    level._id_A7F1[var_8]["displayModel"] = _func_041(var_2);
+    level._id_A7F1[var_8]["displayModel"] = _getweaponmodel(var_2);
   }
 
   if(!common_scripts\utility::_id_562E(var_5))
@@ -697,7 +697,7 @@ _id_A7EA(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(;;) {
     [var_10, var_11] = var_0 _id_0547::_id_A795();
     var_12 = 0;
-    var_13 = var_10 _meth_8317();
+    var_13 = var_10 getcurrentprimaryweapon();
 
     if(_id_0547::_id_57AF(var_13) || _id_0547::_id_5862(var_13)) {
       continue;
@@ -752,10 +752,10 @@ _id_A7EA(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(var_12) {
       _id_0547::_id_4AE4(var_10, "ammo", var_14, var_15, "none");
-      _id_0555::_id_83DD("buy_ammo", var_10, var_15);
+      _id_0555::issprinting("buy_ammo", var_10, var_15);
     } else {
       _id_0547::_id_4AE4(var_10, "weapons", var_14, var_15, "none");
-      _id_0555::_id_83DD("buy_weapon", var_10, var_15);
+      _id_0555::issprinting("buy_weapon", var_10, var_15);
       level._id_400E[level._id_400E.size] = ["survivalist_set 3 -1", var_10];
       level._id_400E[level._id_400E.size] = ["survivalist_set 4 -1", var_10];
     }
@@ -765,41 +765,41 @@ _id_A7EA(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_A7E1() {
-  self._id_82EF._id_243B = [];
-  self._id_82EF _meth_83FA("base", "buy_loop_open");
-  self._id_82EF._id_829E = 0;
-  self._id_82EF._id_82A0 = 0;
+  self.issighted._id_243B = [];
+  self.issighted setscriptablepartstate("base", "buy_loop_open");
+  self.issighted.ishost = 0;
+  self.issighted._id_82A0 = 0;
   thread _id_A7E4(1);
 }
 
 _id_A7E4(var_0) {
-  self._id_82EF endon("immediate_state_change");
+  self.issighted endon("immediate_state_change");
 
-  if(!isDefined(self._id_82EF)) {
+  if(!isDefined(self.issighted)) {
     return;
   }
-  if(self._id_82EF._id_82A0 && !common_scripts\utility::_id_562E(var_0))
-    self._id_82EF._id_09B6 = 1;
+  if(self.issighted._id_82A0 && !common_scripts\utility::_id_562E(var_0))
+    self.issighted._id_09B6 = 1;
   else {
-    var_1 = self._id_82EF._id_243B.size > 0;
+    var_1 = self.issighted._id_243B.size > 0;
 
     if(var_0) {
       var_2 = 0;
 
-      if(var_1 && self._id_82EF._id_829E != 2) {
-        self._id_82EF._id_829E = 2;
-        self._id_82EF _meth_83FA("base", "buy_loop_closed");
+      if(var_1 && self.issighted.ishost != 2) {
+        self.issighted.ishost = 2;
+        self.issighted setscriptablepartstate("base", "buy_loop_closed");
         var_2 = 1;
-      } else if(!var_1 && self._id_82EF._id_829E != 0) {
-        self._id_82EF._id_829E = 0;
-        self._id_82EF _meth_83FA("base", "buy_loop_open");
+      } else if(!var_1 && self.issighted.ishost != 0) {
+        self.issighted.ishost = 0;
+        self.issighted setscriptablepartstate("base", "buy_loop_open");
         var_2 = 1;
       }
 
       if(var_2) {
-        self._id_82EF._id_82A0 = 0;
-        self._id_82EF notify("immediate_state_change");
-        self._id_82EF notify("script_state_change");
+        self.issighted._id_82A0 = 0;
+        self.issighted notify("immediate_state_change");
+        self.issighted notify("script_state_change");
         return;
       }
 
@@ -808,20 +808,20 @@ _id_A7E4(var_0) {
 
     var_3 = 0;
 
-    switch (self._id_82EF._id_829E) {
+    switch (self.issighted.ishost) {
       case 2:
         if(!var_1) {
           var_4 = _id_0380::_id_2889("zmb_wallbuy_open", undefined, self._id_A9E3);
           _id_0378::_id_8D14(var_4);
-          self._id_82EF._id_829E = 3;
-          self._id_82EF _meth_83FA("base", "buy_loop_opening");
-          self._id_82EF._id_82A0 = 1;
-          self._id_82EF notify("script_state_change");
+          self.issighted.ishost = 3;
+          self.issighted setscriptablepartstate("base", "buy_loop_opening");
+          self.issighted._id_82A0 = 1;
+          self.issighted notify("script_state_change");
           wait 1.13333;
-          self._id_82EF._id_829E = 0;
-          self._id_82EF _meth_83FA("base", "buy_loop_open");
-          self._id_82EF._id_82A0 = 0;
-          self._id_82EF notify("script_state_change");
+          self.issighted.ishost = 0;
+          self.issighted setscriptablepartstate("base", "buy_loop_open");
+          self.issighted._id_82A0 = 0;
+          self.issighted notify("script_state_change");
           var_3 = 1;
         }
 
@@ -830,15 +830,15 @@ _id_A7E4(var_0) {
         if(var_1) {
           var_5 = _id_0380::_id_2889("zmb_wallbuy_close", undefined, self._id_A9E3);
           _id_0378::_id_8D14(var_5);
-          self._id_82EF _meth_83FA("base", "buy_loop_closing");
-          self._id_82EF._id_829E = 1;
-          self._id_82EF._id_82A0 = 1;
-          self._id_82EF notify("script_state_change");
+          self.issighted setscriptablepartstate("base", "buy_loop_closing");
+          self.issighted.ishost = 1;
+          self.issighted._id_82A0 = 1;
+          self.issighted notify("script_state_change");
           wait 1.03333;
-          self._id_82EF _meth_83FA("base", "buy_loop_closed");
-          self._id_82EF._id_829E = 2;
-          self._id_82EF._id_82A0 = 0;
-          self._id_82EF notify("script_state_change");
+          self.issighted setscriptablepartstate("base", "buy_loop_closed");
+          self.issighted.ishost = 2;
+          self.issighted._id_82A0 = 0;
+          self.issighted notify("script_state_change");
           var_3 = 0;
         }
 
@@ -847,40 +847,40 @@ _id_A7E4(var_0) {
         return;
     }
 
-    if(var_3 && common_scripts\utility::_id_562E(self._id_82EF._id_09B6)) {
-      self._id_82EF._id_09B6 = undefined;
+    if(var_3 && common_scripts\utility::_id_562E(self.issighted._id_09B6)) {
+      self.issighted._id_09B6 = undefined;
       thread _id_A7E4(0);
     }
   }
 }
 
 _id_A7D2(var_0) {
-  self._id_82EF._id_243B[var_0] = 1;
+  self.issighted._id_243B[var_0] = 1;
 
-  if(self._id_82EF._id_243B.size == 1)
+  if(self.issighted._id_243B.size == 1)
     thread _id_A7E4(0);
 }
 
 _id_A7DD(var_0) {
-  self._id_82EF._id_243B[var_0] = undefined;
+  self.issighted._id_243B[var_0] = undefined;
 
-  if(self._id_82EF._id_243B.size == 0)
+  if(self.issighted._id_243B.size == 0)
     thread _id_A7E4(0);
 }
 
 _id_A7E2(var_0) {
   var_1 = self;
 
-  if(!isDefined(self._id_82EF)) {
+  if(!isDefined(self.issighted)) {
     return;
   }
-  var_2 = self._id_82EF _meth_85CE();
+  var_2 = self.issighted _meth_85CE();
 
   if(!var_0) {
     if(isDefined(var_1._id_6C1D) && isPlayer(self._id_230A))
       var_1._id_6C1D _meth_8006(self._id_230A);
   } else if(var_2 == "animated_zmb_wall_buy_box")
-    self._id_82EF _meth_83FA("ammo", "hide");
+    self.issighted setscriptablepartstate("ammo", "hide");
 
   _id_A7E7(self);
   thread _id_A7D2("purchase");
@@ -889,9 +889,9 @@ _id_A7E2(var_0) {
 
   if(!var_0) {
     if(isDefined(var_1._id_6C1D) && isPlayer(self._id_230A))
-      var_1._id_6C1D _meth_8005(self._id_230A);
+      var_1._id_6C1D showtoplayer(self._id_230A);
   } else if(var_2 == "animated_zmb_wall_buy_box")
-    self._id_82EF _meth_83FA("ammo", "show");
+    self.issighted setscriptablepartstate("ammo", "show");
 
   thread _id_A7DD("purchase");
   wait 1.2;
@@ -900,9 +900,9 @@ _id_A7E2(var_0) {
 
 _id_A7EE(var_0) {
   for(;;) {
-    self._id_82EF waittill("script_state_change");
+    self.issighted waittill("script_state_change");
 
-    if(self._id_82EF._id_829E == var_0)
+    if(self.issighted.ishost == var_0)
       return;
   }
 }
@@ -914,33 +914,33 @@ _id_2079(var_0, var_1, var_2) {
     var_3 = var_2;
 
   var_4 = var_0.origin;
-  var_5 = _func_22E(var_0.angles);
+  var_5 = _anglestoaxis(var_0.angles);
   var_4 = var_4 + var_5["forward"] * var_3[0];
   var_4 = var_4 + var_5["right"] * var_3[1];
   var_4 = var_4 + var_5["up"] * var_3[2];
-  var_6 = var_1 _meth_8549(0.0, 1.0, 0.0);
+  var_6 = var_1 getpointinmodelbounds(0.0, 1.0, 0.0);
   var_7 = var_4 - var_6;
-  var_1 _meth_808C();
+  var_1 dontinterpolate();
   var_1.origin = var_1.origin + var_7;
 }
 
 _id_4B6A(var_0, var_1) {
-  if(var_0 getweaponammostock(var_1) < _func_1D6(var_1, var_0))
+  if(var_0 getweaponammostock(var_1) < _weaponmaxammo(var_1, var_0))
     return 0;
 
-  if(var_0 getweaponammoclip(var_1) < _func_1A3(var_1, var_0))
+  if(var_0 getweaponammoclip(var_1) < _weaponclipsize(var_1, var_0))
     return 0;
 
   return 1;
 }
 
 _id_300A(var_0, var_1) {
-  var_0 _meth_860F("zmb_ui_purchase_fail", var_0);
+  var_0 playsoundtoplayer("zmb_ui_purchase_fail", var_0);
 
   if(var_1)
-    _id_0555::_id_83DD("full_equip", var_0);
+    _id_0555::issprinting("full_equip", var_0);
   else
-    _id_0555::_id_83DD("full_ammo", var_0);
+    _id_0555::issprinting("full_ammo", var_0);
 }
 
 _id_4734(var_0) {
@@ -1001,7 +1001,7 @@ _id_A7D6(var_0, var_1, var_2, var_3) {
 
       if(var_3 && _id_8B57(var_4))
         var_0 _id_348F(var_4);
-      else if(_func_1A9(var_4) != "melee")
+      else if(_weapontype(var_4) != "melee")
         var_0 _id_0586::_id_0790(var_4);
     }
   }
@@ -1033,7 +1033,7 @@ _id_A7D6(var_0, var_1, var_2, var_3) {
 _id_A7DC(var_0) {
   foreach(var_2 in var_0._id_4D4D) {
     foreach(var_4 in var_2._id_A7E3)
-    var_4 _meth_8428(var_0);
+    var_4 hudoutlinedisableforclient(var_0);
   }
 
   var_0._id_4D4D = [];
@@ -1071,7 +1071,7 @@ _id_A7D9() {
     if(var_2 == "none") {
       continue;
     }
-    var_3 = self _meth_8338(var_2);
+    var_3 = self getfractionmaxammo(var_2);
 
     if(var_3 >= 0.1) {
       _id_A7DC(var_0);
@@ -1092,7 +1092,7 @@ _id_A7D9() {
 
       if(common_scripts\utility::_id_562E(var_7)) {
         foreach(var_9 in var_5._id_A7E3)
-        var_9 _meth_8427(var_0, 0, 0);
+        var_9 hudoutlineenableforclient(var_0, 0, 0);
 
         var_0._id_4D4D = common_scripts\utility::_id_0F6F(var_0._id_4D4D, var_5);
       }
@@ -1115,17 +1115,17 @@ _id_348F(var_0) {
   var_1 = self getweaponammoclip(var_0, "right");
   var_2 = self getweaponammoclip(var_0, "left");
   var_3 = self getweaponammostock(var_0);
-  var_4 = _func_1D6(var_0);
+  var_4 = _weaponmaxammo(var_0);
 
   if(var_3 > var_4)
     var_3 = var_4;
 
-  var_5 = self _meth_8247(var_0);
+  var_5 = self dropitem(var_0);
 
   if(!isDefined(var_5)) {
     return;
   }
-  var_5 _meth_817E(var_1, var_3, var_2);
+  var_5 itemweaponsetammo(var_1, var_3, var_2);
   var_5._id_0117 = self;
   var_5.targetname = "dropped_weapon";
   var_5 thread _id_0513::_id_A934();
@@ -1144,7 +1144,7 @@ _id_AABC(var_0) {
     var_2 = [];
 
     foreach(var_4 in var_1)
-    var_2[var_2.size] = _func_05F(var_4);
+    var_2[var_2.size] = _getweaponbasename(var_4);
 
     if(isDefined(var_2[0]) && isDefined(level._id_A9E2[var_2[0]]))
       setmatchdata("players", var_0.clientid, "end_misses", level._id_A9E2[var_2[0]]);
@@ -1156,11 +1156,11 @@ _id_AABC(var_0) {
 
 _id_A7D5(var_0, var_1, var_2) {
   if(_id_0547::_id_5863(var_1)) {
-    var_3 = var_0 _meth_834A();
+    var_3 = var_0 getlethalweapon();
 
     if(var_3 != var_1) {
       var_0 _id_0586::_id_0790(var_3);
-      var_0 _meth_8349(var_1);
+      var_0 setlethalweapon(var_1);
       var_0 _id_0586::_id_078C(var_1);
       _id_3AC1(var_0, var_1);
       var_0 notify("new_equipment");
@@ -1197,7 +1197,7 @@ _id_3AC1(var_0, var_1) {
   if(isDefined(level.zmb_grenadier_immune_weapons) && isDefined(var_1) && is_grenadier_immune_weapon(var_1))
     var_2 = undefined;
 
-  var_3 = _func_1A3(var_1, var_2);
+  var_3 = _weaponclipsize(var_1, var_2);
   var_0 setweaponammoclip(var_1, var_3);
 }
 
@@ -1214,7 +1214,7 @@ _id_AC57(var_0, var_1) {
   if(!isDefined(var_1)) {
     return;
   }
-  var_2 = _func_1A3(var_1, var_0);
+  var_2 = _weaponclipsize(var_1, var_0);
   var_0 setweaponammoclip(var_1, var_2, "right");
 
   if(issubstr(var_1, "akimbo"))
@@ -1247,11 +1247,11 @@ _id_5F77() {
   foreach(var_4 in var_2) {
     switch (var_4._id_0165) {
       case "current":
-        var_4 _meth_805C();
+        var_4 hide();
         self._id_28F5 = var_4;
         break;
       case "all":
-        var_4 _meth_805C();
+        var_4 hide();
         self._id_0BCD = var_4;
         break;
       case "box_loc":
@@ -1278,7 +1278,7 @@ _id_5F77() {
 
 _id_5F76(var_0) {
   for(;;) {
-    common_scripts\utility::_id_3C9F(var_0._id_81A1);
+    common_scripts\utility::_id_3C9F(var_0.setgoalnode);
     var_1 = 0;
 
     while(maps\mp\_utility::gameflag("fire_sale")) {
@@ -1294,40 +1294,40 @@ _id_5F76(var_0) {
     }
 
     if(var_1 || var_2) {
-      common_scripts\utility::flag_waitopen(var_0._id_81A1);
+      common_scripts\utility::flag_waitopen(var_0.setgoalnode);
       continue;
     }
 
-    self._id_28F5 _meth_805B();
+    self._id_28F5 show();
     self._id_28F5.origin = var_0.origin;
-    common_scripts\utility::flag_waitopen(var_0._id_81A1);
+    common_scripts\utility::flag_waitopen(var_0.setgoalnode);
   }
 }
 
 _id_5F75() {
   for(;;) {
-    self._id_0BCD _meth_805C();
+    self._id_0BCD hide();
     maps\mp\_utility::gameflagwait("fire_sale");
-    self._id_0BCD _meth_805B();
-    self._id_28F5 _meth_805C();
+    self._id_0BCD show();
+    self._id_28F5 hide();
 
     while(maps\mp\_utility::gameflag("fire_sale"))
       waitframe();
 
-    self._id_28F5 _meth_805B();
+    self._id_28F5 show();
   }
 }
 
 _id_5F78() {
   for(;;) {
     maps\mp\_utility::gameflagwait("power_off");
-    self._id_0BCD _meth_805C();
-    self._id_28F5 _meth_805C();
+    self._id_0BCD hide();
+    self._id_28F5 hide();
 
     while(maps\mp\_utility::gameflag("power_off"))
       waitframe();
 
-    self._id_28F5 _meth_805B();
+    self._id_28F5 show();
   }
 }
 
@@ -1393,7 +1393,7 @@ _id_09C8(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level._id_5F7F))
     level._id_5F7F = [];
 
-  var_6 = _func_041(var_0);
+  var_6 = _getweaponmodel(var_0);
   var_7 = level._id_5F7F.size;
   level._id_5F7F[var_7]["baseNameNoMP"] = var_0;
   level._id_5F7F[var_7]["baseNameNoZM"] = _func_2FF(var_0, "_zm");
@@ -1457,20 +1457,20 @@ _id_5F7B() {
         var_2._id_6298 = var_5;
     }
 
-    var_7 = _func_21F(var_2.target, "targetname");
+    var_7 = _getscriptablearray(var_2.target, "targetname");
 
     foreach(var_5 in var_7)
-    var_2._id_82EF = var_5;
+    var_2.issighted = var_5;
 
     var_10 = _id_456D(var_2);
 
     if(isDefined(var_2._id_6298)) {
       if(isDefined(var_2._id_6298.target)) {
-        var_11 = _func_18E(var_2._id_6298.target, "targetname");
+        var_11 = _getent(var_2._id_6298.target, "targetname");
 
         if(isDefined(var_11) && var_11._id_003B == "light") {
           var_2._id_5CCE = var_11;
-          var_2._id_5CCE._id_5D70 = var_2._id_5CCE _meth_81DE();
+          var_2._id_5CCE._id_5D70 = var_2._id_5CCE getlightintensity();
           var_2._id_5CCE._id_5D6F = 0.1;
         }
       }
@@ -1480,13 +1480,13 @@ _id_5F7B() {
     var_2._id_56C7 = 0;
     var_2._id_5759 = 0;
 
-    if(isDefined(var_2._id_819A))
-      common_scripts\utility::flag_init(var_2._id_819A);
+    if(isDefined(var_2.getnegotiationnextnode))
+      common_scripts\utility::flag_init(var_2.getnegotiationnextnode);
 
     if(isDefined(level._id_6AD1))
       [[level._id_6AD1]](var_2);
 
-    if(_id_0547::_id_5565(var_2._id_8260, "start_location"))
+    if(_id_0547::_id_5565(var_2.setlookatent, "start_location"))
       var_0 = var_2;
   }
 
@@ -1549,15 +1549,15 @@ _id_08D7(var_0, var_1, var_2) {
   }
 
   if(0) {
-    var_0 _meth_80CE(_id_4401());
-    var_0 _meth_80CF(_id_0547::_id_4474(var_0._id_267B));
+    var_0 sethintstring(_id_4401());
+    var_0 setsecondaryhintstring(_id_0547::_id_4474(var_0._id_267B));
   }
 }
 
 _id_2A7B(var_0, var_1) {
   if(0) {
-    var_0 _meth_80CE(_id_4520());
-    var_0 _meth_80CF(_id_0547::_id_4474(0));
+    var_0 sethintstring(_id_4520());
+    var_0 setsecondaryhintstring(_id_0547::_id_4474(0));
   }
 
   if(1 && isDefined(var_1))
@@ -1572,13 +1572,13 @@ _id_6AB4(var_0) {
   thread _id_135C(var_1);
 
   if(isDefined(var_0._id_5CCE))
-    var_0._id_5CCE _meth_81DF(var_0._id_5CCE._id_5D70);
+    var_0._id_5CCE setlightintensity(var_0._id_5CCE._id_5D70);
 
-  if(isDefined(var_0._id_819A))
-    common_scripts\utility::flag_set(var_0._id_819A);
+  if(isDefined(var_0.getnegotiationnextnode))
+    common_scripts\utility::flag_set(var_0.getnegotiationnextnode);
 
   if(isDefined(var_0._id_24E3))
-    var_0._id_24E3 _meth_82C1();
+    var_0._id_24E3 solid();
 }
 
 _id_6AE1(var_0, var_1) {
@@ -1591,13 +1591,13 @@ _id_6AE1(var_0, var_1) {
   thread _id_135B(var_2);
 
   if(isDefined(var_0._id_5CCE))
-    var_0._id_5CCE _meth_81DF(var_0._id_5CCE._id_5D6F);
+    var_0._id_5CCE setlightintensity(var_0._id_5CCE._id_5D6F);
 
-  if(isDefined(var_0._id_819A))
-    common_scripts\utility::_id_3C7B(var_0._id_819A);
+  if(isDefined(var_0.getnegotiationnextnode))
+    common_scripts\utility::_id_3C7B(var_0.getnegotiationnextnode);
 
   if(isDefined(var_0._id_24E3))
-    var_0._id_24E3 _meth_82C2();
+    var_0._id_24E3 notsolid();
 }
 
 _id_5F73() {
@@ -1612,7 +1612,7 @@ _id_135C(var_0) {
       var_1 = [[level._id_456E]](var_0);
 
     var_0._id_8F40 = spawn("script_origin", var_1);
-    var_0._id_8F40 _meth_861B(0);
+    var_0._id_8F40 scalevolume(0);
     waitframe();
   }
 
@@ -1623,30 +1623,30 @@ _id_135B(var_0) {
   if(!isDefined(var_0._id_8F40)) {
     return;
   }
-  var_0._id_8F40 _meth_861B(0, 1);
+  var_0._id_8F40 scalevolume(0, 1);
   wait 1;
-  var_0._id_8F40 _meth_8612();
+  var_0._id_8F40 stoploopsound();
   waitframe();
   var_0._id_8F40 delete();
   _id_0378::_id_8D74("mystery_box_attract_off", var_0);
 }
 
 _id_135A(var_0) {
-  var_0._id_8F40 _meth_861B(0, 0.5);
+  var_0._id_8F40 scalevolume(0, 0.5);
   wait 0.5;
-  var_0._id_8F40 _meth_8612();
+  var_0._id_8F40 stoploopsound();
 }
 
 _id_1366() {
   var_0 = self;
 
   if(isDefined(var_0._id_6C1D))
-    var_0._id_6C1D _meth_861B(0, 0.5);
+    var_0._id_6C1D scalevolume(0, 0.5);
 
   wait 3.5;
 
   if(isDefined(var_0._id_6C1D))
-    var_0._id_6C1D _meth_861B(1, 0.5);
+    var_0._id_6C1D scalevolume(1, 0.5);
 }
 
 _id_5F7E() {
@@ -1729,7 +1729,7 @@ _id_86D1() {
   }
 }
 
-_id_861C() {
+playsoundasmaster() {
   foreach(var_1 in level._id_5F74) {
     if(var_1._id_08BE)
       var_1 _id_86D1();
@@ -1747,7 +1747,7 @@ _id_86D2(var_0, var_1) {
 _id_A922(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
-  var_4 = _func_0A4(4, 7);
+  var_4 = _randomintrange(4, 7);
   var_5 = _id_456D(var_0);
   var_6 = var_5.origin;
   var_0._id_5C10 = "";
@@ -1780,7 +1780,7 @@ _id_A922(var_0, var_1) {
     var_14 = maps\mp\_utility::gameflag("fire_sale") || var_11 || _id_57C1(var_0) || var_13 || var_12;
     var_15 = var_3 >= var_4 && !var_14 && level._id_5F74.size > 1;
     var_16 = _id_43FF(var_9);
-    var_17 = var_9 _meth_8317();
+    var_17 = var_9 getcurrentprimaryweapon();
 
     if(_id_0547::_id_57AF(var_17) || _id_0547::_id_5862(var_17)) {
       continue;
@@ -1820,8 +1820,8 @@ _id_A922(var_0, var_1) {
         wait 0.5;
 
       if(!isDefined(var_0._id_A9C4)) {
-        _id_83B2(var_9, var_0);
-        _id_801A(var_0, var_0._id_A9C4["selectedWeapon"]);
+        isholdinggrenade(var_9, var_0);
+        isusingonlinedataoffline(var_0, var_0._id_A9C4["selectedWeapon"]);
       }
 
       var_18 = var_0._id_A9C4;
@@ -1847,12 +1847,12 @@ _id_A922(var_0, var_1) {
         var_19 = [[var_0._id_5F7A]]();
 
       if(0) {
-        var_0 _meth_80CE(var_19);
-        var_0 _meth_80CF("");
+        var_0 sethintstring(var_19);
+        var_0 setsecondaryhintstring("");
       }
 
       var_0 _id_86D2(var_9, var_18["baseNameNoMP"]);
-      var_9 _meth_8017(var_0);
+      var_9 clientclaimtrigger(var_0);
       var_0 common_scripts\utility::_id_9DA3();
       var_0 notify("pickupReady");
       var_20 = 8;
@@ -1877,7 +1877,7 @@ _id_A922(var_0, var_1) {
           if(![[var_0._id_5F71]](var_25))
             var_22 = "nothing";
         } else {
-          var_17 = var_25 _meth_8317();
+          var_17 = var_25 getcurrentprimaryweapon();
 
           if(_id_0547::_id_57AF(var_17) || _id_0547::_id_5862(var_17))
             var_22 = "nothing";
@@ -1891,10 +1891,10 @@ _id_A922(var_0, var_1) {
       _id_0378::_id_8D74("mystery_box_close", var_5);
       _id_0378::_id_8D74("mystery_box_attract_closed", var_5);
       var_0 common_scripts\utility::_id_9D9F();
-      var_0 _meth_8019();
+      var_0 releaseclaimedtrigger();
       var_0._id_586E notify("stop_flashing");
       var_0._id_586E.is_flashing = 0;
-      var_0._id_586E _meth_805C();
+      var_0._id_586E hide();
       var_26 = var_18["selectedWeapon"];
       _id_ABE9("magicbox", self.origin, var_16, var_26);
 
@@ -1964,19 +1964,19 @@ _id_3D5B(var_0) {
   var_0.is_flashing = 1;
 
   for(;;) {
-    var_0 _meth_8511();
+    var_0 ghost();
     wait 0.35;
 
     foreach(var_2 in level.players) {
-      if(var_2 _meth_8530(var_0._id_A9E0))
-        var_0 _meth_8005(var_2);
+      if(var_2 worldweaponsloaded(var_0._id_A9E0))
+        var_0 showtoplayer(var_2);
     }
 
     wait 0.35;
   }
 }
 
-_id_83B2(var_0, var_1) {
+isholdinggrenade(var_0, var_1) {
   var_2 = [];
   var_3 = "";
   var_4 = var_0 getweaponlistall();
@@ -2147,11 +2147,11 @@ _id_A9D6() {
   if(!isDefined(self._id_6298) || !isDefined(self._id_6298.target) || isDefined(self._id_6298._id_5CCE)) {
     return;
   }
-  var_0 = _func_18E(self._id_6298.target, "targetname");
+  var_0 = _getent(self._id_6298.target, "targetname");
 
   if(isDefined(var_0) && var_0._id_003B == "light") {
     self._id_6298._id_5CCE = var_0;
-    self._id_6298._id_5CCE._id_5D70 = self._id_6298._id_5CCE _meth_81DE();
+    self._id_6298._id_5CCE._id_5D70 = self._id_6298._id_5CCE getlightintensity();
     self._id_6298._id_5CCE._id_5D6F = 0.1;
     self._id_6298._id_5CCE._id_5764 = 1;
   }
@@ -2159,14 +2159,14 @@ _id_A9D6() {
 
 _id_A9D9() {
   if(isDefined(self._id_6298._id_5CCE) && isDefined(self._id_6298._id_5CCE._id_5D6F) && isDefined(self._id_6298._id_5CCE._id_5764) && !self._id_6298._id_5CCE._id_5764) {
-    self._id_6298._id_5CCE _meth_81DF(self._id_6298._id_5CCE._id_5D70);
+    self._id_6298._id_5CCE setlightintensity(self._id_6298._id_5CCE._id_5D70);
     self._id_6298._id_5CCE._id_5764 = 1;
   }
 }
 
 _id_A9D8() {
   if(isDefined(self._id_6298._id_5CCE) && isDefined(self._id_6298._id_5CCE._id_5D6F) && isDefined(self._id_6298._id_5CCE._id_5764) && self._id_6298._id_5CCE._id_5764) {
-    self._id_6298._id_5CCE _meth_81DF(self._id_6298._id_5CCE._id_5D6F);
+    self._id_6298._id_5CCE setlightintensity(self._id_6298._id_5CCE._id_5D6F);
     self._id_6298._id_5CCE._id_5764 = 0;
   }
 }
@@ -2194,24 +2194,24 @@ _id_A9DA(var_0) {
         var_2 = var_1[1];
         break;
       case "no_upgrades":
-        self _meth_80CE("");
-        self _meth_80CF("");
+        self sethintstring("");
+        self setsecondaryhintstring("");
         var_0 waittill("allow_upgrades");
         var_2 = _id_0547::_id_462A(var_0);
         break;
     }
 
-    var_3 = _func_05F(var_2);
-    self _meth_80CD("HINT_NOICON");
+    var_3 = _getweaponbasename(var_2);
+    self setcursorhint("HINT_NOICON");
 
     if(!_id_0547::_id_4BA8(var_0, var_3) || !_id_A9D5(var_0, var_3)) {
-      self _meth_80CE(&"ZOMBIES_WEAPON_LEVEL_BOX");
-      self _meth_80CF(&"ZOMBIES_COST_2500");
+      self sethintstring(&"ZOMBIES_WEAPON_LEVEL_BOX");
+      self setsecondaryhintstring(&"ZOMBIES_COST_2500");
       continue;
     }
 
-    self _meth_80CE("");
-    self _meth_80CF("");
+    self sethintstring("");
+    self setsecondaryhintstring("");
   }
 }
 
@@ -2226,7 +2226,7 @@ _id_7AAB() {
 
 _id_A9D7() {
   level endon("game_ended");
-  self._id_6298 = _func_18E(self.target, "targetname");
+  self._id_6298 = _getent(self.target, "targetname");
   self._id_0C2F = 1;
 
   if(_id_57DF(self)) {
@@ -2237,14 +2237,14 @@ _id_A9D7() {
     _id_A9D9();
   }
 
-  var_0 = self._id_6298 _meth_8181("tag_origin");
-  self._id_6298 _meth_861D("interact_weapon_upgrade_attract");
+  var_0 = self._id_6298 gettagangles("tag_origin");
+  self._id_6298 playloopsound("interact_weapon_upgrade_attract");
 
   if(_id_0547::_id_581A(self))
     _id_0547::_id_74A5(common_scripts\utility::_id_44F5("station_upgrade_weapon_pwr_on"), self._id_6298, "tag_origin");
 
   _id_0547::_id_8A4F(self, ::_id_A9DA);
-  var_1 = int(self._id_8260);
+  var_1 = int(self.setlookatent);
 
   if(isDefined(level._id_6F41)) {
     for(var_2 = 0; var_2 < level._id_6F41; var_2++) {
@@ -2256,7 +2256,7 @@ _id_A9D7() {
   for(;;) {
     [var_5, var_6] = _id_0547::_id_A795();
     var_7 = _id_0547::_id_462A(var_5);
-    var_8 = _func_05F(var_7);
+    var_8 = _getweaponbasename(var_7);
 
     if(!_id_0547::_id_4BA8(var_5, var_8)) {
       continue;
@@ -2331,7 +2331,7 @@ _id_A9D7() {
 
 _id_8A65(var_0, var_1, var_2) {
   var_0 _id_0586::_id_0790(var_1);
-  var_3 = _func_05F(var_1);
+  var_3 = _getweaponbasename(var_1);
   var_0._id_A9EB[var_3]["level"] = var_2;
   var_4 = _id_454B(var_0, var_3);
   _id_A7D6(var_0, var_4, 0);
@@ -2342,7 +2342,7 @@ _id_8A65(var_0, var_1, var_2) {
   if(isDefined(level._id_8A66))
     var_0[[level._id_8A66]](var_1, var_2);
 
-  var_0 _meth_860F("mp_s1_earn_medal", var_0);
+  var_0 playsoundtoplayer("mp_s1_earn_medal", var_0);
 }
 
 _id_3B8D(var_0) {
@@ -2392,7 +2392,7 @@ _id_454B(var_0, var_1) {
     var_7 = common_scripts\utility::_id_0F73(var_7, var_8._id_114C);
   }
 
-  var_10 = _func_05F(var_1);
+  var_10 = _getweaponbasename(var_1);
 
   for(var_7 = _id_0547::_id_0FB9(var_7); var_7.size < 6; var_7[var_7.size] = 0) {}
 
@@ -2401,7 +2401,7 @@ _id_454B(var_0, var_1) {
 }
 
 _id_4445(var_0, var_1) {
-  var_1 = int(_func_0AF(var_1, level._id_1EC1.size - 1));
+  var_1 = int(_min(var_1, level._id_1EC1.size - 1));
   return level._id_1EC1[var_1];
 }
 
@@ -2573,11 +2573,11 @@ _id_456F(var_0, var_1) {
 }
 
 _id_3014(var_0) {
-  var_0 _meth_860F("zmb_ui_purchase_fail", var_0);
+  var_0 playsoundtoplayer("zmb_ui_purchase_fail", var_0);
 }
 
 _id_2EDF(var_0) {
-  var_0 _meth_860F("zmb_ui_purchase_fail", var_0);
+  var_0 playsoundtoplayer("zmb_ui_purchase_fail", var_0);
 }
 
 _id_529E() {
@@ -2605,13 +2605,13 @@ _id_A7E8(var_0) {
 }
 
 _id_A7D3(var_0) {
-  var_0._id_A9C6 _meth_805C();
+  var_0._id_A9C6 hide();
   _id_0547::_id_5A48(common_scripts\utility::_id_44F5("station_buy_weapon_pwr_on"), var_0._id_6298, "tag_origin");
   _id_A7E7(var_0);
 }
 
 _id_A7D4(var_0) {
-  var_0._id_A9C6 _meth_805B();
+  var_0._id_A9C6 show();
   _id_0547::_id_74A5(common_scripts\utility::_id_44F5("station_buy_weapon_pwr_on"), var_0._id_6298, "tag_origin");
   _id_A7E8(var_0);
 }
@@ -2642,9 +2642,9 @@ _id_0DB7() {
 }
 
 _id_0DB8(var_0, var_1) {
-  var_0 _meth_8177();
-  var_0 _meth_80CE(&"ZOMBIES_AMMO_CRATE_HINT");
-  var_0 _meth_80CF(&"ZOMBIES_COST_500");
+  var_0 usetriggerrequirelookat();
+  var_0 sethintstring(&"ZOMBIES_AMMO_CRATE_HINT");
+  var_0 setsecondaryhintstring(&"ZOMBIES_COST_500");
 
   for(;;) {
     [var_3, var_4] = var_0 _id_0547::_id_A795();

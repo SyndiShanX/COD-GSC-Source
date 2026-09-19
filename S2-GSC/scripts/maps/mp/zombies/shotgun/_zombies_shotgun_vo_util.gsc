@@ -7,13 +7,13 @@ init() {
   init_converations();
   level.charactergroups = [];
   var_0 = 0;
-  var_1 = _func_27A("mp/zmCharacterIdTable.csv");
+  var_1 = _tablegetrowcount("mp/zmCharacterIdTable.csv");
 
   while(var_0 < var_1) {
-    var_2 = _func_1AE("mp/zmCharacterIdTable.csv", var_0, 15);
+    var_2 = _tablelookupbyrow("mp/zmCharacterIdTable.csv", var_0, 15);
 
     if(_id_0547::_id_5565(var_2, "feml") || _id_0547::_id_5565(var_2, "male"))
-      var_2 = _func_1AE("mp/zmCharacterIdTable.csv", var_0, 16);
+      var_2 = _tablelookupbyrow("mp/zmCharacterIdTable.csv", var_0, 16);
 
     if(!isDefined(var_2)) {
       var_0++;
@@ -38,7 +38,7 @@ init_converations() {
 }
 
 is_character_present_in_match(var_0) {
-  if(!_func_0C0(var_0))
+  if(!_isarray(var_0))
     var_0 = [var_0];
 
   foreach(var_2 in var_0) {
@@ -103,8 +103,8 @@ player_vo_to_self(var_0, var_1, var_2) {
 
   if(common_scripts\utility::_id_562E(var_2)) {
     if(var_3 player_is_character_type("ride")) {
-      if(var_3 _meth_82D0()) {
-        if(var_3 _meth_82ED())
+      if(var_3 issplitscreenplayer()) {
+        if(var_3 issplitscreenplayerprimary())
           var_3 thread _id_0378::_id_307E(var_0, level.players);
         else {}
       }
@@ -114,8 +114,8 @@ player_vo_to_self(var_0, var_1, var_2) {
         level.rideau_radio._id_20D8 = 8;
       }
 
-      if(var_3 _meth_82D0()) {
-        if(var_3 _meth_82ED())
+      if(var_3 issplitscreenplayer()) {
+        if(var_3 issplitscreenplayerprimary())
           var_3._id_071D.pa_vo_on_player = _id_0380::_id_6844(var_0, var_3, level.rideau_radio, 0, var_1);
         else {}
       } else

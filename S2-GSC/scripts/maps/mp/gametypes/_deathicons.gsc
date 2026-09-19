@@ -7,14 +7,14 @@ init() {
   if(!level.teambased) {
     return;
   }
-  _func_13F("friendly_death_hud");
+  _precacheshader("friendly_death_hud");
   level thread onplayerconnect();
 }
 
 onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
-    var_0._id_83C1 = [];
+    var_0.sprintbuttonpressed = [];
   }
 }
 
@@ -28,7 +28,7 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(isPlayer(var_4) && var_4 maps\mp\_utility::_hasperk("specialty_silentkill")) {
       return;
     }
-    if(isDefined(var_5) && maps\mp\_utility::_id_5755(var_5) && isDefined(var_6) && _func_1A9(var_6) == "melee")
+    if(isDefined(var_5) && maps\mp\_utility::_id_5755(var_5) && isDefined(var_6) && _weapontype(var_6) == "melee")
       return;
   }
 
@@ -47,7 +47,7 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(self._id_5B8E))
     self._id_5B8E destroy();
 
-  var_8 = _func_19C(var_2);
+  var_8 = _newteamhudelem(var_2);
   var_8.x = var_7[0];
   var_8.y = var_7[1];
   var_8._id_01D9 = var_7[2] + 54;
@@ -60,7 +60,7 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   else
     var_8 setshader("friendly_death_hud", 7, 7);
 
-  var_8 _meth_80CB(0);
+  var_8 setwaypoint(0);
   self._id_5B8E = var_8;
   var_8 thread _id_2DDC(var_3);
 }

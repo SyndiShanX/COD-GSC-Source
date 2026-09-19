@@ -105,12 +105,12 @@ _id_A921() {
 }
 
 _id_4AAF(var_0) {
-  if(maps\mp\_utility::_id_56B3() && self _meth_8436() && !maps\mp\_utility::_id_551F())
-    self _meth_82FF("ui_options_menu", 0);
+  if(maps\mp\_utility::_id_56B3() && self ismlgspectator() && !maps\mp\_utility::_id_551F())
+    self setclientomnvar("ui_options_menu", 0);
   else {
-    if(!istestclient(self) && !_func_0C1(self)) {
+    if(!istestclient(self) && !_isai(self)) {
       if("" + var_0 != "callback")
-        self _meth_82FF("ui_loadout_selected", var_0);
+        self setclientomnvar("ui_loadout_selected", var_0);
     }
 
     if(isDefined(self._id_A6EF) && self._id_A6EF) {
@@ -119,7 +119,7 @@ _id_4AAF(var_0) {
     if(!maps\mp\_utility::_id_0C1E()) {
       return;
     }
-    self _meth_82FF("ui_options_menu", 0);
+    self setclientomnvar("ui_options_menu", 0);
 
     if("" + var_0 != "callback") {
       if(isbot(self) || istestclient(self)) {
@@ -164,24 +164,24 @@ _id_4AFB(var_0) {
     thread _id_8C08();
 
   if(var_0 == 3) {
-    self _meth_82FF("ui_options_menu", 0);
-    self _meth_82FF("ui_spectator_selected", 1);
-    self _meth_82FF("ui_loadout_selected", -1);
+    self setclientomnvar("ui_options_menu", 0);
+    self setclientomnvar("ui_spectator_selected", 1);
+    self setclientomnvar("ui_loadout_selected", -1);
     self._id_90E3 = 1;
 
     if(maps\mp\_utility::_id_56B3()) {
-      self _meth_8506(1);
+      self setmlgspectator(1);
       thread _id_050F::_id_872F();
     }
   } else {
-    self _meth_82FF("ui_spectator_selected", -1);
+    self setclientomnvar("ui_spectator_selected", -1);
     self._id_90E3 = 0;
 
     if(maps\mp\_utility::_id_56B3())
-      self _meth_8506(0);
+      self setmlgspectator(0);
   }
 
-  self _meth_82FF("ui_team_selected", var_0);
+  self setclientomnvar("ui_team_selected", var_0);
 
   if(var_0 == 0)
     var_0 = "axis";
@@ -195,8 +195,8 @@ _id_4AFB(var_0) {
   if(isDefined(self.pers["team"]) && var_0 == self.pers["team"])
     self notify("selected_same_team");
   else {
-    self _meth_82FF("ui_loadout_selected", -1);
-    self _meth_82FF("ui_session_state", "team_select");
+    self setclientomnvar("ui_loadout_selected", -1);
+    self setclientomnvar("ui_session_state", "team_select");
 
     if(var_0 == "axis")
       thread _id_873A("axis");
@@ -230,9 +230,9 @@ _id_1385() {
     thread _id_873A("allies");
     self._id_0179 = "allies";
   } else if(!isDefined(self.team)) {
-    if(self _meth_8436() && !maps\mp\_utility::_id_551F())
+    if(self ismlgspectator() && !maps\mp\_utility::_id_551F())
       thread _id_8730();
-    else if(_func_154() == "hub") {
+    else if(_getteammode() == "hub") {
       var_0 = _func_2EE();
 
       if(var_0 == "axis")
@@ -243,11 +243,11 @@ _id_1385() {
       thread _id_873A("axis");
     else if(level.teamcount["allies"] < level.teamcount["axis"])
       thread _id_873A("allies");
-    else if(_func_155("allies") > _func_155("axis"))
+    else if(_getteamscore("allies") > _getteamscore("axis"))
       thread _id_873A("axis");
     else
       thread _id_873A("allies");
-  } else if(self _meth_8436() && !maps\mp\_utility::_id_551F())
+  } else if(self ismlgspectator() && !maps\mp\_utility::_id_551F())
     thread _id_8730();
   else {
     if(level.teamcount["axis"] < level.teamcount["allies"] && self.team != "axis") {
@@ -261,12 +261,12 @@ _id_1385() {
     }
 
     if(level.teamcount["allies"] == level.teamcount["axis"]) {
-      if(_func_155("allies") > _func_155("axis") && self.team != "axis")
+      if(_getteamscore("allies") > _getteamscore("axis") && self.team != "axis")
         thread _id_873A("axis");
       else if(self.team != "allies")
         thread _id_873A("allies");
       else
-        self _meth_82FF("ui_session_state", self.sessionstate);
+        self setclientomnvar("ui_session_state", self.sessionstate);
     }
   }
 }
@@ -274,12 +274,12 @@ _id_1385() {
 _id_873A(var_0) {
   self endon("disconnect");
 
-  if(!_func_0C1(self) && level.teambased && !_id_0510::_id_452D(var_0)) {
-    self _meth_82FF("ui_session_state", self.sessionstate);
+  if(!_isai(self) && level.teambased && !_id_0510::_id_452D(var_0)) {
+    self setclientomnvar("ui_session_state", self.sessionstate);
     return;
   }
 
-  if(level._id_5139 && !self._id_4B62)
+  if(level.ingraceperiod && !self._id_4B62)
     self.hasspawned = 0;
 
   if(self.sessionstate == "playing") {
@@ -386,7 +386,7 @@ _id_A69A() {
     _id_6111("callback");
     return;
   } else {
-    if(!_func_0C1(self) && maps\mp\_utility::_id_8BFD()) {
+    if(!_isai(self) && maps\mp\_utility::_id_8BFD()) {
       thread maps\mp\gametypes\_playerlogic::_id_8753(3);
 
       for(;;) {
@@ -410,7 +410,7 @@ _id_170E(var_0) {
   if(maps\mp\_utility::_id_0C1E()) {
     thread maps\mp\gametypes\_playerlogic::_id_8753(2);
 
-    if(!self _meth_8436() || maps\mp\_utility::_id_551F())
+    if(!self ismlgspectator() || maps\mp\_utility::_id_551F())
       _id_A69A();
 
     _id_36E3();
@@ -451,7 +451,7 @@ _id_170E(var_0) {
 
 _id_1DE9() {
   maps\mp\gametypes\_class::_id_23DC();
-  self._id_83A7 = 1;
+  self.scragentrelinquishclaimednode = 1;
   self.class = "class0";
 
   if(isDefined(level._id_1DEA))
@@ -464,7 +464,7 @@ _id_171C() {
 
 _id_8C09() {
   var_0 = self.pers["team"];
-  self _meth_832A(game["menu_class_" + var_0]);
+  self openpopupmenu(game["menu_class_" + var_0]);
 }
 
 _id_6116() {
@@ -501,7 +501,7 @@ _id_A919() {
 
 _id_6112() {
   var_0 = maps\mp\_utility::_id_56B1();
-  var_1 = level._id_5139 && !var_0 || var_0 && maps\mp\_utility::gettimepassed() < 5000 || common_scripts\utility::_id_562E(self._id_0C1F);
+  var_1 = level.ingraceperiod && !var_0 || var_0 && maps\mp\_utility::gettimepassed() < 5000 || common_scripts\utility::_id_562E(self._id_0C1F);
 
   if(self._id_4B62)
     var_1 = 0;
@@ -518,7 +518,7 @@ _id_6112() {
       self iprintlnbold(game["strings"]["change_class_wait"]);
       self waittill("streamClassWeaponsComplete");
       self iprintlnbold("");
-      self _meth_8533(0);
+      self onlystreamactiveweapon(0);
     }
 
     maps\mp\gametypes\_class::setclass(self.pers["class"]);
@@ -615,7 +615,7 @@ _id_09FC(var_0, var_1, var_2) {
       self._id_0179 = "none";
   }
 
-  if(_func_25F() && !_func_367() && level.teambased && !(isbot(self) || istestclient(self)) && self._id_0179 == "none") {
+  if(_isdedicatedserver() && !_func_367() && level.teambased && !(isbot(self) || istestclient(self)) && self._id_0179 == "none") {
     var_3 = getmatchdata("match_common", "matchID");
     self _meth_8681("telemetry_error_event", ["error", ["category_id", 14, "message", "no team assigned", "code", 0, "stack_trace", "", "match_id", var_3]]);
   }

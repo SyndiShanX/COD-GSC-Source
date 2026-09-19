@@ -102,7 +102,7 @@ _id_6B76() {
       if(maps\mp\_utility::_id_585F())
         _id_0378::_id_8D74("role_ready");
       else
-        self _meth_860F("ks_earn_dna_bomb", self, 1);
+        self playsoundtoplayer("ks_earn_dna_bomb", self, 1);
 
       return;
     } else
@@ -158,7 +158,7 @@ _id_2F9E(var_0) {
 
   if(maps\mp\_utility::_id_585F()) {
     var_2 = self getentitynumber();
-    _func_327(&"activate_special_teammate", 3, var_2, var_0, 0);
+    _luinotifyeventextra(&"activate_special_teammate", 3, var_2, var_0, 0);
   }
 
   self._id_7ED1[var_0] = 0;

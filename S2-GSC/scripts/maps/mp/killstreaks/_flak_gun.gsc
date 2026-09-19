@@ -68,7 +68,7 @@ _id_A20C(var_0) {
   }
 
   level thread _id_0528::_id_A0E0();
-  maps\mp\gametypes\_hostmigration::_id_A6F5(var_1);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_1);
   level thread _id_4AC0(self.team, var_0);
 }
 
@@ -194,12 +194,12 @@ _id_3BE7(var_0, var_1, var_2, var_3) {
 
     for(var_10 = 0; var_10 < 6 && isDefined(var_1) && var_1.health > 0 && var_1._id_006A < var_1.maxhealth; var_10++) {
       var_11 = var_1.origin + var_8;
-      var_11 = (_func_0A5(-600, 600) + var_11[0], _func_0A5(-600, 600) + var_11[1], _func_0A5(-200, 200) + var_11[2]);
+      var_11 = (_randomfloatrange(-600, 600) + var_11[0], _randomfloatrange(-600, 600) + var_11[1], _randomfloatrange(-200, 200) + var_11[2]);
       thread _id_3CDE(var_11, var_3);
       waitframe();
     }
 
-    var_1 _meth_8059(var_6, var_1.origin, var_0, var_0, var_4, var_5);
+    var_1 dodamage(var_6, var_1.origin, var_0, var_0, var_4, var_5);
     wait 0.4;
   }
 }
@@ -230,7 +230,7 @@ _id_1129(var_0, var_1) {
   for(;;) {
     if(level._id_3CE2 == 0 && level._id_3CE1 < 30) {
       var_2 = _id_0527::_id_4409();
-      var_3 = (_func_0A5(-3000, 3000) + level._id_5FEB[0], _func_0A5(-3000, 3000) + level._id_5FEB[1], var_2);
+      var_3 = (_randomfloatrange(-3000, 3000) + level._id_5FEB[0], _randomfloatrange(-3000, 3000) + level._id_5FEB[1], var_2);
       level._id_3CE1++;
       thread _id_3CDE(var_3, var_1);
       waitframe();
@@ -244,9 +244,9 @@ _id_1129(var_0, var_1) {
 _id_3CDE(var_0, var_1) {
   var_2 = common_scripts\utility::_id_8FFC();
   var_2.origin = var_0;
-  var_2 _meth_805B();
+  var_2 show();
   waitframe();
-  _func_147(common_scripts\utility::_id_44F5("flak_gun_explosion"), var_2, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5("flak_gun_explosion"), var_2, "tag_origin");
   _id_0378::_id_8D74("ks_flak_cannon_explo", var_0);
   wait 4.5;
   var_2 delete();

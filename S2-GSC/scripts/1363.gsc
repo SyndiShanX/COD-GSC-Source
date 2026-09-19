@@ -40,7 +40,7 @@ _id_1E6E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   } else
     self._id_32CE = level._id_6082;
 
-  var_11 = self _meth_8317();
+  var_11 = self getcurrentprimaryweapon();
 
   if(maps\mp\_utility::_id_4431(var_11) == self._id_76D8)
     self._id_A9BA[self._id_76D9]._id_32D0 = self._id_A9BA[self._id_76D9]._id_32D0 + 1;
@@ -85,20 +85,20 @@ _id_1E6E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   self notify("begin_last_stand");
-  self._id_5378 = 1;
+  self.inlaststand = 1;
   self._id_00E8 = 1;
-  _id_0547::_id_8623(1);
+  _id_0547::setclienttriggeraudiozonelerp(1);
   self.health = 1;
-  self _meth_812A(0);
+  self allowmelee(0);
   self._id_6882++;
 
   if(_id_0586::_id_72C3()) {
     _id_0586::_id_0790("blimp_battery_zm");
     _id_0586::_id_078E(self._id_6A54);
-    self _meth_8305(1);
+    self allowjump(1);
   }
 
-  var_13 = self _meth_82D4("combat_role");
+  var_13 = self getweaponslist("combat_role");
   var_14 = self _meth_85BB();
 
   foreach(var_16 in var_13) {
@@ -114,12 +114,12 @@ _id_1E6E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     [[level._id_5F20]]();
 
   self._id_479D = _id_AC5F();
-  _id_806A();
+  clearnightvisionfog();
   _id_47AC(self._id_479D, 1);
   setlaststandweaponammo(self._id_479D);
   thread _id_0547::_id_AC16(0, "laststand");
   common_scripts\utility::_id_0601();
-  self _meth_8326();
+  self disableweaponswitch();
   common_scripts\utility::_disableoffhandweapons();
 
   if(isDefined(var_3) && var_3 == "MOD_SUICIDE")
@@ -128,7 +128,7 @@ _id_1E6E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   thread _id_5BF1(var_0, var_1, var_4, var_7, var_3);
 
   if(!_id_4B87())
-    thread _id_0576::_id_83C6();
+    thread _id_0576::lightsetforplayer();
 
   thread _id_056A::_id_5BFE();
 
@@ -170,21 +170,21 @@ _id_5A4D(var_0) {
   _id_AC1F(undefined, var_0);
 }
 
-_id_806A(var_0) {
+clearnightvisionfog(var_0) {
   if(!isDefined(var_0))
     var_0 = 1;
 
   if(_id_057A::_id_A260())
     _id_057A::_id_259D();
 
-  self._id_5B98 = self _meth_8317();
+  self._id_5B98 = self getcurrentprimaryweapon();
   var_1 = self getweaponlistprimaries();
 
   if(!isDefined(self._id_5B98) || self._id_5B98 == "none" || _id_0547::_id_585B(self._id_5B98) || !_id_0547::_id_5836(self._id_5B98)) {
     self._id_5B98 = "none";
 
     foreach(var_3 in var_1) {
-      var_4 = _func_05F(var_3);
+      var_4 = _getweaponbasename(var_3);
 
       if(_id_0547::_id_5836(var_4)) {
         self._id_5B98 = _id_0586::_id_0632(var_3);
@@ -196,7 +196,7 @@ _id_806A(var_0) {
   self._id_7707 = [];
 
   foreach(var_3 in var_1) {
-    var_7 = _func_05F(var_3);
+    var_7 = _getweaponbasename(var_3);
 
     if(_id_0547::_id_5836(var_7))
       self._id_7707[self._id_7707.size] = _id_0586::_id_0632(var_3);
@@ -336,10 +336,10 @@ _id_0F50(var_0) {
   var_1 = maps\mp\agents\_agent_utility::_id_43FD("all");
 
   foreach(var_3 in var_1) {
-    if(!_func_26C(var_3, var_0)) {
+    if(!_isalliedsentient(var_3, var_0)) {
       continue;
     }
-    if(_func_26C(var_3, var_0) && common_scripts\utility::_id_562E(var_3.shouldnotpreventlaststand)) {
+    if(_isalliedsentient(var_3, var_0) && common_scripts\utility::_id_562E(var_3.shouldnotpreventlaststand)) {
       continue;
     }
     if(_id_0547::_id_577E(var_3)) {
@@ -406,7 +406,7 @@ _id_AC1F(var_0, var_1, var_2) {
 
   level thread maps\mp\gametypes\_gamelogic::_id_36B9(level._id_3B5C, game["end_reason"][var_0]);
   _func_246(0);
-  _func_3A8(0);
+  _setnojipscore(0);
   maps\mp\_utility::_id_2CED(0.05, _id_0554::_id_20CB, "game_over");
 }
 
@@ -429,8 +429,8 @@ _id_7BEA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7._id_8B0A = var_6;
   var_7._id_5BF4 = gettime();
 
-  if(isDefined(var_1) && isPlayer(var_1) && var_1 _meth_8317() != "none")
-    var_7._id_912F = var_1 _meth_8317();
+  if(isDefined(var_1) && isPlayer(var_1) && var_1 getcurrentprimaryweapon() != "none")
+    var_7._id_912F = var_1 getcurrentprimaryweapon();
   else
     var_7._id_912F = undefined;
 
@@ -446,9 +446,9 @@ _id_4B87() {
 }
 
 _id_A233() {
-  _id_0555::_id_83DD("blitz_revive", self);
+  _id_0555::issprinting("blitz_revive", self);
   thread _id_5BF2();
-  level thread _id_83CB(self);
+  level thread killnotification(self);
 }
 
 _id_5BF1(var_0, var_1, var_2, var_3, var_4) {
@@ -459,7 +459,7 @@ _id_5BF1(var_0, var_1, var_2, var_3, var_4) {
   level notify("player_last_stand");
   self notify("force_cancel_placement");
   var_5 = _id_0634(self);
-  _id_0555::_id_83DD("down", self);
+  _id_0555::issprinting("down", self);
   thread _id_054E::_id_741A();
   thread _id_5BFC();
   thread _id_5BED();
@@ -467,8 +467,8 @@ _id_5BF1(var_0, var_1, var_2, var_3, var_4) {
   thread laststandmonitordeath();
   var_6 = spawn("script_model", self.origin);
   var_6 setModel("tag_origin");
-  var_6 _meth_80CD("HINT_NOICON");
-  var_6 _meth_80CE(&"PLATFORM_REVIVE");
+  var_6 setcursorhint("HINT_NOICON");
+  var_6 sethintstring(&"PLATFORM_REVIVE");
   var_6 makeusable();
   var_6._id_54F5 = 0;
   var_6._id_28D5 = 0;
@@ -477,12 +477,12 @@ _id_5BF1(var_0, var_1, var_2, var_3, var_4) {
   var_6._id_502A = "last_stand";
   var_6.targetname = "revive_trigger";
   var_6._id_0117 = self;
-  var_6 _meth_8055(self, "tag_origin", (0, 0, 20), (0, 0, 0));
+  var_6 linkto(self, "tag_origin", (0, 0, 20), (0, 0, 0));
   var_6 thread maps\mp\gametypes\_damage::_id_2D44();
   self._id_7E5D = _id_2826("hint_health_zm", 8, 8, (0.5, 1, 0.99));
   thread _id_5BF7(var_6, var_5);
   thread _id_5BF8(var_6);
-  self _meth_83FE(1, 0);
+  self hudoutlineenable(1, 0);
   var_6 thread _id_7E58();
   var_6 thread _id_7E65();
   var_6 thread _id_5BFD();
@@ -496,7 +496,7 @@ _id_5BF1(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_6 endon("death");
-  maps\mp\gametypes\_hostmigration::_id_A6F5(var_5);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_5);
 
   while(isDefined(var_6._id_54F5) && var_6._id_54F5)
     waitframe();
@@ -509,8 +509,8 @@ _id_5BF1(var_0, var_1, var_2, var_3, var_4) {
     self.linkedbubblefx delete();
   }
 
-  self _meth_83FF();
-  self _meth_8322();
+  self hudoutlinedisable();
+  self disableweapons();
   thread _id_1788();
 }
 
@@ -522,10 +522,10 @@ _id_2826(var_0, var_1, var_2, var_3) {
   if(isDefined(self._id_7E5D))
     self._id_7E5D destroy();
 
-  var_4 = _func_19C(self.team);
+  var_4 = _newteamhudelem(self.team);
   var_4 setshader(var_0, var_1, var_2);
-  var_4 _meth_80CB(1, 1);
-  var_4 _meth_80C0(self);
+  var_4 setwaypoint(1, 1);
+  var_4 settargetent(self);
   var_4.color = var_3;
   return var_4;
 }
@@ -550,9 +550,9 @@ _id_1788() {
     self._id_7E5D destroy();
 
   var_1 = "ui_zm_character_" + self.characterclientindex + "_alive";
-  _func_032(var_1, 0);
+  _setomnvar(var_1, 0);
   var_1 = "ui_zm_character_" + self.characterclientindex + "_bleedout_endtime";
-  _func_032(var_1, 0);
+  _setomnvar(var_1, 0);
 
   if(self._id_32CE < level._id_6082)
     setmatchdata("downs", self._id_32CE, "died", 1);
@@ -564,14 +564,14 @@ _id_1788() {
     _id_AC1F();
   else {
     _id_0554::_id_20CB("player_died", self);
-    _id_0555::_id_83DD("dead", self);
+    _id_0555::issprinting("dead", self);
   }
 }
 
 _id_5BF2() {
   self endon("disconnect");
-  self _meth_82FF("ui_use_bar_text", 3);
-  self _meth_82FF("ui_use_bar_start_time", int(gettime()));
+  self setclientomnvar("ui_use_bar_text", 3);
+  self setclientomnvar("ui_use_bar_start_time", int(gettime()));
   self._id_28D5 = 0;
   self._id_A22B = 1;
   self._id_A23F = 8000;
@@ -579,7 +579,7 @@ _id_5BF2() {
 
   while(maps\mp\_utility::isreallyalive(self) && isDefined(self._id_00E8) && !level.gameended) {
     var_1 = int(gettime());
-    self _meth_82FF("ui_use_bar_current_time", var_1);
+    self setclientomnvar("ui_use_bar_current_time", var_1);
 
     if(var_0 != self._id_A22B) {
       if(self._id_28D5 > self._id_A23F)
@@ -589,7 +589,7 @@ _id_5BF2() {
         var_2 = gettime();
         var_3 = self._id_28D5 / self._id_A23F;
         var_4 = var_2 + (1 - var_3) * (self._id_A23F / self._id_A22B);
-        self _meth_82FF("ui_use_bar_end_time", int(var_4));
+        self setclientomnvar("ui_use_bar_end_time", int(var_4));
       }
 
       var_0 = self._id_A22B;
@@ -598,10 +598,10 @@ _id_5BF2() {
     waitframe();
   }
 
-  self _meth_82FF("ui_use_bar_end_time", 0);
+  self setclientomnvar("ui_use_bar_end_time", 0);
 }
 
-_id_83CB(var_0) {
+killnotification(var_0) {
   while(!level.gameended && maps\mp\_utility::isreallyalive(var_0) && var_0._id_28D5 < var_0._id_A23F) {
     var_0._id_28D5 = var_0._id_28D5 + 50 * var_0._id_A22B;
 
@@ -623,7 +623,7 @@ _id_7E65() {
     if(should_ignore_revive_attempt(self._id_0117, var_0)) {
       continue;
     }
-    self _meth_80B3();
+    self makeunusable();
     var_1 = getdvarint("scr_reviveTime", 3000);
     var_2 = var_0 _id_4B86();
     var_3 = common_scripts\utility::_id_562E(var_0._id_569F) && var_0 _id_0547::_id_4BA7("specialty_class_recon_medic_zm");
@@ -642,7 +642,7 @@ _id_7E65() {
       self._id_0117 _id_0547::_id_7ACD();
       var_0 freezecontrols(1);
       var_0 common_scripts\utility::_id_0603();
-      var_0 _meth_812B(0);
+      var_0 allowfire(0);
       var_0._id_57AB = 1;
       thread _id_7E66(var_0);
       var_4 = maps\mp\gametypes\_damage::_id_7E5A(var_0, var_1, 0);
@@ -714,7 +714,7 @@ _id_145A(var_0) {
 _id_7E66(var_0) {
   common_scripts\utility::_id_A70C(self, "death", self, "reviveTriggerThinkZombies_cleanup");
   var_0 freezecontrols(0);
-  var_0 _meth_812B(1);
+  var_0 allowfire(1);
   var_0 common_scripts\utility::_id_0617();
   var_0._id_57AB = 0;
 }
@@ -748,7 +748,7 @@ _id_5BFD() {
     if(var_1 != var_0) {
       var_0 thread _id_054E::_id_7448(var_1);
       var_0 thread maps\mp\gametypes\_hud_message::playercardsplashnotify("revived", var_1);
-      _id_0555::_id_83DD("revived", var_1, var_0 getentitynumber());
+      _id_0555::issprinting("revived", var_1, var_0 getentitynumber());
       setmatchdata("downs", var_0._id_32CE, "reviver_player_index", maps\mp\_utility::_id_2314(var_1.clientid));
       var_1 maps\mp\gametypes\_persistence::statsetchild("round", "assists", var_1._id_0021);
 
@@ -762,10 +762,10 @@ _id_5BFD() {
   var_3 _id_0547::_id_AC42("self_revive", var_2);
   var_3 _id_0547::_id_AC4D();
   var_4 = "ui_zm_character_" + var_0.characterclientindex + "_bleedout_endtime";
-  _func_032(var_4, 0);
+  _setomnvar(var_4, 0);
 
-  if(var_0 _meth_833A()) {
-    while(var_0 _meth_833A())
+  if(var_0 isreloading()) {
+    while(var_0 isreloading())
       waitframe();
 
     waitframe();
@@ -825,9 +825,9 @@ _id_4777() {
 _id_7DB4(var_0) {
   self notify("revive");
   level notify("player_revived", self);
-  self _meth_812A(1);
+  self allowmelee(1);
   self._id_00E8 = undefined;
-  self._id_5378 = 0;
+  self.inlaststand = 0;
   self._id_00BA = "";
   self.health = self.maxhealth;
   self._id_00CE = 0;
@@ -848,14 +848,14 @@ _id_7DB4(var_0) {
     self._id_32CE = level._id_32CF;
   }
 
-  self _meth_83FF();
-  self _meth_82C9();
+  self hudoutlinedisable();
+  self laststandrevive();
 
   if(isDefined(self._id_7E5D))
     self._id_7E5D destroy();
 
   if(common_scripts\utility::_id_562E(var_0)) {
-    self _meth_8179("stand");
+    self setstance("stand");
     _id_4777();
     common_scripts\utility::_id_0614();
 
@@ -864,17 +864,17 @@ _id_7DB4(var_0) {
   } else
     self notify("spectator_revive");
 
-  self _meth_8327();
+  self enableweaponswitch();
   thread _id_0547::_id_AC16(1, "laststand");
-  self _meth_8323();
+  self enableweapons();
   common_scripts\utility::_id_0615();
   _id_0547::_id_7ACD();
-  maps\mp\_utility::_id_2401("last_stand");
+  maps\mp\_utility::clearlowermessage("last_stand");
   maps\mp\_utility::giveperk("specialty_pistoldeath");
-  self _meth_8308(1);
+  self allowsprint(1);
   checktemporaryperks();
 
-  if(!_func_15E(self.origin))
+  if(!_canspawn(self.origin))
     _id_0488::_id_A047(self, 0);
 }
 
@@ -942,7 +942,7 @@ _id_47AC(var_0, var_1) {
 
 setlaststandweaponammo(var_0) {
   if(!isDefined(self.givenlaststandammoround) || isDefined(self.givenlaststandammoround) && self.givenlaststandammoround < level._id_A980) {
-    var_1 = _func_1A3(var_0, self);
+    var_1 = _weaponclipsize(var_0, self);
     self setweaponammoclip(var_0, var_1, "right");
 
     if(issubstr(var_0, "akimbo"))
@@ -960,7 +960,7 @@ _id_5BFC() {
   level endon("game_ended");
   self waittill("death");
   self._id_00E8 = undefined;
-  self._id_5378 = 0;
+  self.inlaststand = 0;
   self._id_00CE = 0;
   self._id_509C = undefined;
   self._id_AC5B = 0;
@@ -988,9 +988,9 @@ laststandmonitordeath() {
   level endon("game_ended");
   self waittill("death");
   var_0 = "ui_zm_character_" + self.characterclientindex + "_alive";
-  _func_032(var_0, 0);
+  _setomnvar(var_0, 0);
   var_0 = "ui_zm_character_" + self.characterclientindex + "_bleedout_endtime";
-  _func_032(var_0, 0);
+  _setomnvar(var_0, 0);
 }
 
 _id_5BEE() {
@@ -1090,7 +1090,7 @@ laststandwatchfordisconnectzombies(var_0, var_1) {
   var_0 endon("revive");
   level endon("game_ended");
   var_0 waittill("disconnect");
-  _func_032(var_1, 0);
+  _setomnvar(var_1, 0);
 }
 
 _id_5BF6(var_0, var_1) {
@@ -1104,9 +1104,9 @@ _id_5BF6(var_0, var_1) {
   thread laststandwatchfordisconnectzombies(self, var_3);
 
   for(;;) {
-    _func_032(var_3, var_2);
+    _setomnvar(var_3, var_2);
     level waittill("host_migration_begin");
-    _func_032(var_3, 0);
+    _setomnvar(var_3, 0);
     var_4 = maps\mp\gametypes\_hostmigration::_id_A782();
     var_2 = var_2 + var_4;
   }
@@ -1125,7 +1125,7 @@ _id_5BE9() {
     var_2 = self getammocount(var_1);
 
     if(var_2 == 0) {
-      var_3 = _func_1A3(var_1);
+      var_3 = _weaponclipsize(var_1);
       self setweaponammostock(var_1, var_3);
     }
   }

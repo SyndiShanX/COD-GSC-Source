@@ -21,7 +21,7 @@ _id_9E2A(var_0) {
     return 0;
   }
 
-  if(!self _meth_8346() && !self _meth_806F()) {
+  if(!self isonground() && !self islinked()) {
     self iprintlnbold(&"KILLSTREAKS_CANT_ACTIVATE_WHILE_FALLING");
     return 0;
   }
@@ -34,7 +34,7 @@ _id_9E2A(var_0) {
     return 0;
   }
 
-  var_1 = _id_83AE(var_0, "fighter_strike");
+  var_1 = getaimassisttargetangles(var_0, "fighter_strike");
 
   if(!isDefined(var_1) || !var_1)
     return 0;
@@ -42,7 +42,7 @@ _id_9E2A(var_0) {
   return 1;
 }
 
-_id_83AE(var_0, var_1) {
+getaimassisttargetangles(var_0, var_1) {
   self endon("stop_location_selection");
   var_2 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
 
@@ -67,12 +67,12 @@ _id_83AE(var_0, var_1) {
     var_9 = 11000;
   }
 
-  self _meth_82FF("ui_map_location_fighter_strike", 1);
-  self _meth_82FF("ui_map_location_height", var_5);
-  self _meth_82FF("ui_map_location_height_offset", var_6);
-  self _meth_82FF("ui_map_location_pitch", var_8);
-  self _meth_82FF("ui_map_location_introDist", var_7);
-  self _meth_82FF("ui_map_location_diveDist", var_9);
+  self setclientomnvar("ui_map_location_fighter_strike", 1);
+  self setclientomnvar("ui_map_location_height", var_5);
+  self setclientomnvar("ui_map_location_height_offset", var_6);
+  self setclientomnvar("ui_map_location_pitch", var_8);
+  self setclientomnvar("ui_map_location_introDist", var_7);
+  self setclientomnvar("ui_map_location_diveDist", var_9);
   maps\mp\_utility::_id_05D4(var_1, "map_artillery_selector", var_4, var_3, 0.5);
   thread _id_0527::_id_A68F();
   var_10 = undefined;
@@ -85,21 +85,21 @@ _id_83AE(var_0, var_1) {
     if(_func_2B2(var_13, var_14, var_8, var_7, var_9, var_5, var_6, var_15, var_16)) {
       var_10 = var_13;
       var_11 = var_14;
-      self _meth_82FF("ui_map_location_use_carepackages", 0);
-      self _meth_82FF("ui_map_location_fighter_strike", 0);
-      self _meth_82FF("ui_map_location_height", 0);
-      self _meth_82FF("ui_map_location_height_offset", 0);
-      self _meth_82FF("ui_map_location_pitch", 0);
-      self _meth_82FF("ui_map_location_introDist", 0);
-      self _meth_82FF("ui_map_location_diveDist", 0);
+      self setclientomnvar("ui_map_location_use_carepackages", 0);
+      self setclientomnvar("ui_map_location_fighter_strike", 0);
+      self setclientomnvar("ui_map_location_height", 0);
+      self setclientomnvar("ui_map_location_height_offset", 0);
+      self setclientomnvar("ui_map_location_pitch", 0);
+      self setclientomnvar("ui_map_location_introDist", 0);
+      self setclientomnvar("ui_map_location_diveDist", 0);
       break;
     } else
       thread _id_0527::_id_8BEE();
   }
 
-  self _meth_82DD(0, 0.3);
+  self setblurforplayer(0, 0.3);
   self notify("location_selection_complete");
-  self _meth_82FF("ui_map_location_blocked", 0);
+  self setclientomnvar("ui_map_location_blocked", 0);
   thread _id_3AA7();
 
   if(maps\mp\_utility::_id_5668())
@@ -214,9 +214,9 @@ _id_1E83(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_9 = (45, var_3, 0);
 
   if(var_6)
-    var_10 = (_id_44D7(var_6) - var_7) / _func_0A6(50) + 13000;
+    var_10 = (_id_44D7(var_6) - var_7) / _sin(50) + 13000;
   else
-    var_10 = (_id_44D7(var_6) - var_7) / _func_0A6(45) + 11000;
+    var_10 = (_id_44D7(var_6) - var_7) / _sin(45) + 11000;
 
   var_11 = var_8 + -1 * anglesToForward(var_9) * var_10;
   var_12 = (0, var_3, 0);
@@ -243,9 +243,9 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_9 = (var_2[0], var_2[1], var_3[2]);
 
   if(var_8)
-    var_10 = _func_1B5("fighter_strike_plane_grenadier_mp", var_3, var_9, var_1);
+    var_10 = _magicbullet("fighter_strike_plane_grenadier_mp", var_3, var_9, var_1);
   else
-    var_10 = _func_1B5("fighter_strike_plane_mp", var_3, var_9, var_1);
+    var_10 = _magicbullet("fighter_strike_plane_mp", var_3, var_9, var_1);
 
   if(getdvarint("771", 0) == 1) {}
 
@@ -260,24 +260,24 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_11 = spawn("script_model", var_10.origin);
   var_11.angles = var_10.angles;
-  var_11 _meth_8055(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_11 linkto(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   if(!isDefined(var_1))
-    var_10 _meth_8387(var_11);
+    var_10 setentityowner(var_11);
 
   var_12 = undefined;
 
   if(isDefined(var_1)) {
     var_12 = spawn("script_model", var_10.origin);
     var_12.angles = var_10.angles;
-    var_12 _meth_805C();
+    var_12 hide();
   }
 
   var_13 = spawn("script_model", var_10.origin);
   var_13 setModel("tag_origin");
   var_13.angles = var_10.angles;
   var_10._id_5A2C = var_13;
-  var_10._id_5A2C _meth_834D("script_entity");
+  var_10._id_5A2C setscriptmoverkillcam("script_entity");
   var_10._id_5A2C._id_5A32 = gettime();
 
   if(isDefined(var_1))
@@ -292,44 +292,44 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_15 = "vehicle_usa_fighter_thunderbolt_vista_fade";
     var_11 setModel(var_15);
     var_11 thread _id_0527::_id_39C6("vehicle_usa_fighter_thunderbolt_vista", 2.0);
-    var_11 _meth_8276("ks_fighter_strafe_usa");
-    _func_147(level._effect["fighter_trail"], var_11, "TAG_TRAIL_FX");
+    var_11 scriptmodelplayanim("ks_fighter_strafe_usa");
+    _playfxontag(level._effect["fighter_trail"], var_11, "TAG_TRAIL_FX");
 
     if(isDefined(var_12)) {
-      var_12 _meth_8055(var_10, "tag_origin", (46, 0, 6), (0, 0, 0));
+      var_12 linkto(var_10, "tag_origin", (46, 0, 6), (0, 0, 0));
       var_12 setModel("usa_fighter_thunderbolt_cockpit");
-      var_12 _meth_8276("vm_fighter_strafe_usa");
+      var_12 scriptmodelplayanim("vm_fighter_strafe_usa");
     }
 
-    var_13 _meth_8055(var_10, "tag_origin", (30, 0, 134), (0, 0, 0));
-    var_14 _meth_8055(var_10, "tag_origin", (30, 0, 134), (0, 0, 0));
+    var_13 linkto(var_10, "tag_origin", (30, 0, 134), (0, 0, 0));
+    var_14 linkto(var_10, "tag_origin", (30, 0, 134), (0, 0, 0));
   } else {
     var_15 = "ger_bomber_stuka_vista_fade";
     var_11 setModel(var_15);
     var_11 thread _id_0527::_id_39C6("ger_bomber_stuka_vista", 2.0);
-    var_11 _meth_8276("ks_fighter_strafe_ger");
-    _func_147(level._effect["fighter_trail"], var_11, "TAG_TRAIL_FX");
+    var_11 scriptmodelplayanim("ks_fighter_strafe_ger");
+    _playfxontag(level._effect["fighter_trail"], var_11, "TAG_TRAIL_FX");
 
     if(isDefined(var_12)) {
-      var_12 _meth_8055(var_10, "tag_origin", (1, 0, 1), (0, 0, 0));
+      var_12 linkto(var_10, "tag_origin", (1, 0, 1), (0, 0, 0));
       var_12 setModel("ger_bomber_stuka_cockpit");
-      var_12 _meth_8276("vm_fighter_strafe_ger");
+      var_12 scriptmodelplayanim("vm_fighter_strafe_ger");
     }
 
-    var_13 _meth_8055(var_10, "tag_origin", (-8, 0, 130), (0, 0, 0));
-    var_14 _meth_8055(var_10, "tag_origin", (-8, 0, 130), (0, 0, 0));
+    var_13 linkto(var_10, "tag_origin", (-8, 0, 130), (0, 0, 0));
+    var_14 linkto(var_10, "tag_origin", (-8, 0, 130), (0, 0, 0));
   }
 
   if(isDefined(var_1)) {
     var_11 _meth_8006(var_1);
 
     if(isDefined(var_12))
-      var_12 _meth_8005(var_1);
+      var_12 showtoplayer(var_1);
   }
 
   var_16 = 1;
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_6) && isDefined(level._id_79C2._id_80B0) && common_scripts\utility::_id_562E(level._id_79C2._id_80B0._id_4D10))
+  if(maps\mp\_utility::_id_579B() && isDefined(var_6) && isDefined(level._id_79C2.setcontents) && common_scripts\utility::_id_562E(level._id_79C2.setcontents._id_4D10))
     var_16 = 0;
 
   if(var_16) {
@@ -358,8 +358,8 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_11._id_01C8 = "fighter_strike";
   var_11._id_703C = var_10;
   var_11._id_5C2F = gettime();
-  var_11 _meth_82C3(1);
-  var_11 _meth_82C4(1);
+  var_11 setcandamage(1);
+  var_11 setcanradiusdamage(1);
   var_11 thread maps\mp\gametypes\_damage::_id_8676(_id_0527::_id_4612(var_5), undefined, ::_id_6B36, ::_id_6B35, 1);
   var_11 thread _id_0527::_id_2818();
   var_11 thread _id_0527::_id_4ACE();
@@ -376,8 +376,8 @@ _id_9080(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(!isDefined(level._effect["fighter_flying_1P"]))
       level._effect["fighter_flying_1P"] = loadfx("vfx/scorestreaks/ss_fighter_plane_cockpit_flying");
 
-    var_1 _meth_81E2(var_13, "tag_origin");
-    _func_14D(common_scripts\utility::_id_44F5("fighter_flying_1P"), var_14, "tag_origin", var_1);
+    var_1 cameralinkto(var_13, "tag_origin");
+    _playfxontagforclients(common_scripts\utility::_id_44F5("fighter_flying_1P"), var_14, "tag_origin", var_1);
     var_10 thread _id_27EA((900, 450, -50), var_1);
     var_10 thread _id_27EA((1300, -600, -100), var_1);
     var_10 thread _id_27EB(var_1);
@@ -440,12 +440,12 @@ _id_3AAB(var_0, var_1) {
   var_5 = bulletTrace(var_3, var_4, 0, var_0._id_703D);
   var_6 = var_5["position"] + var_2 * 3000;
   var_7 = var_0._id_703D gettagorigin("TAG_MUZZLE_FX_1");
-  _func_1B5("fighter_strike_gun_mp", var_7, var_6, var_1, undefined, undefined, 1);
+  _magicbullet("fighter_strike_gun_mp", var_7, var_6, var_1, undefined, undefined, 1);
   var_7 = var_0._id_703D gettagorigin("TAG_MUZZLE_FX_2");
-  _func_1B5("fighter_strike_gun_mp", var_7, var_6, var_1, undefined, undefined, 1);
+  _magicbullet("fighter_strike_gun_mp", var_7, var_6, var_1, undefined, undefined, 1);
 
   if(isDefined(var_1))
-    var_1 _meth_809F("heavygun_fire");
+    var_1 playrumbleonentity("heavygun_fire");
 
   thread _id_3AA8(var_0, var_1);
 }
@@ -461,12 +461,12 @@ _id_316F(var_0, var_1) {
 }
 
 _id_3162(var_0, var_1) {
-  self._id_0117 _meth_84B4();
+  self._id_0117 enablephysicaldepthoffieldscripting();
   var_2 = (var_1[0], var_1[1], var_1[2] - 10000);
   var_3 = bulletTrace(var_0, var_2, 0);
   var_4 = var_3["position"];
   var_5 = length(var_0 - var_4);
-  self._id_0117 _meth_84B7(6, var_5, 1, 0.5, var_4);
+  self._id_0117 setphysicaldepthoffield(6, var_5, 1, 0.5, var_4);
 }
 
 _id_3AA8(var_0, var_1) {
@@ -491,7 +491,7 @@ _id_3AAC(var_0, var_1) {
   var_0 endon("death");
 
   for(;;) {
-    if(var_1 _meth_8342()) {
+    if(var_1 attackbuttonpressed()) {
       if(!isDefined(var_0._id_1EB5)) {
         return;
       }
@@ -516,11 +516,11 @@ _id_6390(var_0, var_1, var_2) {
     self._id_620D _meth_8352(2000, 1);
 
   var_4 = spawn("script_model", (var_0[0], var_0[1], self.origin[2]));
-  self _meth_81D9(var_4);
+  self missile_settargetent(var_4);
   wait 0.2;
-  var_4 _meth_82B1(var_0, 1.8, 0.8, 0.4);
+  var_4 moveto(var_0, 1.8, 0.8, 0.4);
   wait 1.8;
-  self _meth_81DB();
+  self missile_cleartarget();
   var_4 delete();
 
   if(isDefined(self._id_0117) && isPlayer(self._id_0117)) {
@@ -528,7 +528,7 @@ _id_6390(var_0, var_1, var_2) {
     self._id_0117 thread _id_051E::_id_0A2F();
 
     if(getdvarint("5270", 1))
-      self._id_0117 _meth_82FF("ui_plane_gunner_phase", 3);
+      self._id_0117 setclientomnvar("ui_plane_gunner_phase", 3);
 
     self._id_0117 _meth_8200(self);
     self._id_0117._id_260D = 1;
@@ -538,8 +538,8 @@ _id_6390(var_0, var_1, var_2) {
     self._id_0117 maps\mp\_utility::freezecontrolswrapper(0);
   }
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_2) && isDefined(level._id_79C2._id_80B0) && isDefined(level._id_79C2._id_80B0._id_3AAF))
-    thread[[level._id_79C2._id_80B0._id_3AAF]](self);
+  if(maps\mp\_utility::_id_579B() && isDefined(var_2) && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_3AAF))
+    thread[[level._id_79C2.setcontents._id_3AAF]](self);
 
   var_5 = _id_44D7(var_3);
 
@@ -562,7 +562,7 @@ _id_6390(var_0, var_1, var_2) {
   var_7 = (-15, self.angles[1], 0);
   var_8 = anglesToForward(var_7);
   var_9 = 30000 * var_8;
-  self _meth_81DA(var_6 + var_9);
+  self missile_settargetpos(var_6 + var_9);
   self notify("startPullUp");
 
   if(maps\mp\_utility::_id_579B() && isDefined(var_2))
@@ -773,7 +773,7 @@ _id_63D9(var_0, var_1) {
   var_0 notify("StopWaitForChangeTeams");
 
   if(isDefined(var_1))
-    var_1 _meth_82FF("ui_plane_gunner_phase", 0);
+    var_1 setclientomnvar("ui_plane_gunner_phase", 0);
 
   if(isDefined(var_1))
     var_1 thread _id_7445(0, var_0);
@@ -787,12 +787,12 @@ _id_7CF1(var_0, var_1) {
   var_0 endon("StopWaitForExitCommand");
 
   if(!isbot(var_1)) {
-    var_1 _meth_82E1("ExitButtonDown", "+activate");
-    var_1 _meth_82E1("ExitButtonUp", "-activate");
+    var_1 notifyonplayercommand("ExitButtonDown", "+activate");
+    var_1 notifyonplayercommand("ExitButtonUp", "-activate");
   }
 
-  var_1 _meth_82E1("ExitButtonDown", "+usereload");
-  var_1 _meth_82E1("ExitButtonUp", "-usereload");
+  var_1 notifyonplayercommand("ExitButtonDown", "+usereload");
+  var_1 notifyonplayercommand("ExitButtonUp", "-usereload");
 
   for(;;) {
     var_1 waittill("ExitButtonDown");
@@ -832,15 +832,15 @@ _id_7445(var_0, var_1) {
     var_0 = 1;
 
   maps\mp\_utility::freezecontrolswrapper(1);
-  self _meth_82FF("fov_scale", 1.0);
+  self setclientomnvar("fov_scale", 1.0);
 
   if(!isbot(self)) {
-    self _meth_84A7("ExitButtonDown", "+activate");
-    self _meth_84A7("ExitButtonUp", "-activate");
+    self notifyonplayercommandremove("ExitButtonDown", "+activate");
+    self notifyonplayercommandremove("ExitButtonUp", "-activate");
   }
 
-  self _meth_84A7("ExitButtonDown", "+usereload");
-  self _meth_84A7("ExitButtonUp", "-usereload");
+  self notifyonplayercommandremove("ExitButtonDown", "+usereload");
+  self notifyonplayercommandremove("ExitButtonUp", "-usereload");
 
   if(var_0) {
     wait 0.5;
@@ -851,7 +851,7 @@ _id_7445(var_0, var_1) {
   self notify("clearAerialKillstreakMarkers");
 
   if(maps\mp\_utility::isreallyalive(self))
-    self _meth_82FF("ui_plane_gunner_phase", 0);
+    self setclientomnvar("ui_plane_gunner_phase", 0);
   else
     thread _id_4D08();
 
@@ -860,17 +860,17 @@ _id_7445(var_0, var_1) {
       var_1._id_2489 _meth_8006(self);
 
     if(isDefined(var_1._id_703D))
-      var_1._id_703D _meth_8005(self);
+      var_1._id_703D showtoplayer(self);
 
     if(isDefined(var_1._id_1EB5))
-      var_1._id_1EB5 _meth_8057();
+      var_1._id_1EB5 unlink();
 
     if(isDefined(var_1._id_3F6E))
-      _func_295(common_scripts\utility::_id_44F5("fighter_flying_1P"), var_1._id_3F6E, "tag_origin", self);
+      _killfxontagforclient(common_scripts\utility::_id_44F5("fighter_flying_1P"), var_1._id_3F6E, "tag_origin", self);
   }
 
   self _meth_84B6();
-  self _meth_81E3();
+  self cameraunlink();
 
   if(isDefined(self._id_260D)) {
     self _meth_8201();
@@ -885,7 +885,7 @@ _id_7445(var_0, var_1) {
   if(getdvarint("311"))
     maps\mp\_utility::setthirdpersondof(1);
 
-  self _meth_8518(1);
+  self enablereload(1);
   _id_0526::_id_7D04(0.05);
   _id_0526::_id_A232(0);
   maps\mp\_utility::_id_7447();
@@ -897,7 +897,7 @@ _id_4D08() {
   self endon("disconnect");
   self waittill("spawned");
   waitframe();
-  self _meth_82FF("ui_plane_gunner_phase", 0);
+  self setclientomnvar("ui_plane_gunner_phase", 0);
 }
 
 _id_A68D(var_0) {
@@ -905,7 +905,7 @@ _id_A68D(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   wait(var_0);
-  self _meth_8518(0);
+  self enablereload(0);
 }
 
 _id_6B35(var_0, var_1, var_2, var_3) {
@@ -915,7 +915,7 @@ _id_6B35(var_0, var_1, var_2, var_3) {
 }
 
 _id_27EA(var_0, var_1) {
-  var_2 = self.origin + _func_112(var_0, self.angles);
+  var_2 = self.origin + _rotatevector(var_0, self.angles);
   var_3 = var_2 + anglesToForward(self.angles) * 6000;
   var_4 = 5;
   var_5 = spawn("script_model", var_2);
@@ -923,15 +923,15 @@ _id_27EA(var_0, var_1) {
 
   if(isDefined(self.team) && self.team == "allies") {
     var_5 setModel("vehicle_usa_fighter_thunderbolt_vista");
-    var_5 _meth_8276("ks_fighter_strafe_usa");
+    var_5 scriptmodelplayanim("ks_fighter_strafe_usa");
   } else {
     var_5 setModel("ger_bomber_stuka_vista");
-    var_5 _meth_8276("ks_fighter_strafe_ger");
+    var_5 scriptmodelplayanim("ks_fighter_strafe_ger");
   }
 
-  var_5 _meth_805C();
-  var_5 _meth_8005(var_1);
-  var_5 _meth_82B1(var_3, var_4);
+  var_5 hide();
+  var_5 showtoplayer(var_1);
+  var_5 moveto(var_3, var_4);
   common_scripts\utility::_id_A71A(var_4, "StopWaitForExitCommand");
 
   if(isDefined(var_5))
@@ -941,7 +941,7 @@ _id_27EA(var_0, var_1) {
 _id_27EB(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
-  var_1 = self.origin + _func_112((3500, 750, 500), self.angles);
+  var_1 = self.origin + _rotatevector((3500, 750, 500), self.angles);
   var_2 = spawn("script_model", var_1);
   var_2.angles = self.angles;
   var_2 setModel("tag_origin");
@@ -949,11 +949,11 @@ _id_27EB(var_0) {
   if(!isDefined(level._effect["fighter_clouds_1P"]))
     level._effect["fighter_clouds_1P"] = loadfx("vfx/scorestreaks/ss_fighter_plane_clouds");
 
-  _func_14D(common_scripts\utility::_id_44F5("fighter_clouds_1P"), var_2, "tag_origin", var_0);
+  _playfxontagforclients(common_scripts\utility::_id_44F5("fighter_clouds_1P"), var_2, "tag_origin", var_0);
   common_scripts\utility::_id_A71A(5, "StopWaitForExitCommand");
 
   if(isDefined(var_2)) {
-    _func_294(common_scripts\utility::_id_44F5("fighter_clouds_1P"), var_2, "tag_origin", var_0);
+    _stopfxontagforclient(common_scripts\utility::_id_44F5("fighter_clouds_1P"), var_2, "tag_origin", var_0);
     var_2 delete();
   }
 }

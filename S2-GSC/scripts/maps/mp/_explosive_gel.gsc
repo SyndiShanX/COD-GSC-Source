@@ -54,10 +54,10 @@ _id_A906(var_0) {
   var_1 = 0;
 
   for(;;) {
-    if(self _meth_8341()) {
+    if(self usebuttonpressed()) {
       var_1 = 0;
 
-      while(self _meth_8341()) {
+      while(self usebuttonpressed()) {
         var_1 = var_1 + 0.05;
         waitframe();
       }
@@ -67,7 +67,7 @@ _id_A906(var_0) {
       }
       var_1 = 0;
 
-      while(!self _meth_8341() && var_1 < 0.5) {
+      while(!self usebuttonpressed() && var_1 < 0.5) {
         var_1 = var_1 + 0.05;
         waitframe();
       }
@@ -118,7 +118,7 @@ _id_939D(var_0) {
   var_9.angles = var_11;
   var_9 setModel(level._id_3960._id_9489);
   var_9._id_0117 = self;
-  var_9 _meth_8385(self);
+  var_9 setotherent(self);
   var_9._id_5A30 = (0, 0, 55);
   var_9._id_5A2C = spawn("script_model", var_9.origin + var_9._id_5A30);
   var_9._id_94B9 = 0;
@@ -135,11 +135,11 @@ _id_939D(var_0) {
 
 _id_27D0(var_0, var_1, var_2) {
   var_3 = spawn("script_model", (0, 0, 0));
-  var_3 _meth_805C();
+  var_3 hide();
   waitframe();
   var_3 thread _id_0513::_id_1908(var_2);
   var_3 setModel(var_0);
-  var_3 _meth_8055(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
   var_3 _meth_80B1();
   self waittill("death");
 
@@ -150,8 +150,8 @@ _id_27D0(var_0, var_1, var_2) {
 }
 
 _id_61D0() {
-  var_0["friendly"] = _func_14B(level._id_3960._id_16F1["friendly"], self gettagorigin("tag_fx"));
-  var_0["enemy"] = _func_14B(level._id_3960._id_16F1["enemy"], self gettagorigin("tag_fx"));
+  var_0["friendly"] = _spawnfx(level._id_3960._id_16F1["friendly"], self gettagorigin("tag_fx"));
+  var_0["enemy"] = _spawnfx(level._id_3960._id_16F1["enemy"], self gettagorigin("tag_fx"));
   thread _id_61D1(var_0);
   self waittill("death");
   var_0["friendly"] delete();
@@ -162,29 +162,29 @@ _id_61D1(var_0, var_1) {
   self endon("death");
   var_2 = self._id_0117.team;
   waitframe();
-  _func_14C(var_0["friendly"]);
-  _func_14C(var_0["enemy"]);
+  _triggerfx(var_0["friendly"]);
+  _triggerfx(var_0["enemy"]);
 
   for(;;) {
-    var_0["friendly"] _meth_805C();
-    var_0["enemy"] _meth_805C();
+    var_0["friendly"] hide();
+    var_0["enemy"] hide();
 
     foreach(var_4 in level.players) {
       if(level.teambased) {
         if(var_4.team == var_2)
-          var_0["friendly"] _meth_8005(var_4);
+          var_0["friendly"] showtoplayer(var_4);
         else
-          var_0["enemy"] _meth_8005(var_4);
+          var_0["enemy"] showtoplayer(var_4);
 
         continue;
       }
 
       if(var_4 == self._id_0117) {
-        var_0["friendly"] _meth_8005(var_4);
+        var_0["friendly"] showtoplayer(var_4);
         continue;
       }
 
-      var_0["enemy"] _meth_8005(var_4);
+      var_0["enemy"] showtoplayer(var_4);
     }
 
     level common_scripts\utility::_id_A732("joined_team", "player_spawned");
@@ -212,7 +212,7 @@ _id_61DD() {
   self endon("mine_triggered");
   self endon("mine_selfdestruct");
   self endon("death");
-  self _meth_82C3(1);
+  self setcandamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   var_0 = undefined;
@@ -275,8 +275,8 @@ _id_61E3(var_0) {
   if(!isDefined(self) || !isDefined(self._id_0117)) {
     return;
   }
-  self _meth_805C();
-  self _meth_81D5(self.origin, 192, 100, 100, var_0, "MOD_EXPLOSIVE");
+  self hide();
+  self radiusdamage(self.origin, 192, 100, 100, var_0, "MOD_EXPLOSIVE");
 
   if(isDefined(self._id_0117) && isDefined(level._id_5C44))
     self._id_0117 thread[[level._id_5C44]]("mine_destroyed", undefined, undefined, self.origin);
@@ -292,14 +292,14 @@ _id_61E3(var_0) {
   if(isDefined(self._id_6FD8))
     self._id_6FD8 delete();
 
-  self _meth_805C();
+  self hide();
 }
 
 _id_3537(var_0) {
   self notify("earlyNotify");
   var_1 = var_0 gettagorigin("tag_fx");
   playFX(level._id_3960._id_4011, var_1);
-  var_0 _meth_81D6();
+  var_0 detonate();
 }
 
 _id_0F1B() {

@@ -14,7 +14,7 @@ player_fire_tracking() {
   var_0 endon("disconnect");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel("tag_origin");
-  var_1 _meth_805C();
+  var_1 hide();
   var_0 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_1);
   var_2 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), 35);
 
@@ -32,8 +32,8 @@ player_fire_tracking() {
     var_8 = distance(var_6["position"], var_7["position"]);
 
     if(var_8 < 4) {
-      var_1 _meth_805B();
-      var_1.origin = _func_10A(var_4, var_7["position"], 0.99);
+      var_1 show();
+      var_1.origin = _vectorlerp(var_4, var_7["position"], 0.99);
       var_1 set_fx("trap_ready");
 
       if(_id_0547::_id_5565(var_3, "delisle_pap_zm"))
@@ -71,8 +71,8 @@ player_fire_tracking() {
             break;
           }
 
-          var_12 = _func_1B5("delisle_pap_zm", var_1.origin, var_10[var_11] getEye(), var_0);
-          var_10[var_11] _meth_8059(var_2, var_1.origin, var_0, var_12, "MOD_RIFLE_BULLET", "delisle_pap_zm", "head");
+          var_12 = _magicbullet("delisle_pap_zm", var_1.origin, var_10[var_11] getEye(), var_0);
+          var_10[var_11] dodamage(var_2, var_1.origin, var_0, var_12, "MOD_RIFLE_BULLET", "delisle_pap_zm", "head");
         }
       } else
         var_0 maps\mp\zombies\weapons\_zombie_type_38::spawn_electro_blast(var_1.origin, 1);
@@ -110,7 +110,7 @@ set_fx(var_0) {
   if(isDefined(var_1.fx))
     var_1.fx delete();
 
-  var_2 = _func_2A8(level._effect[var_0], var_1, "tag_origin");
-  _func_14C(var_2);
+  var_2 = _spawnlinkedfx(level._effect[var_0], var_1, "tag_origin");
+  _triggerfx(var_2);
   var_1.fx = var_2;
 }

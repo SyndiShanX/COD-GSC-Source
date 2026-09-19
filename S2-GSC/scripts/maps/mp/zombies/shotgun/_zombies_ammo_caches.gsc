@@ -108,7 +108,7 @@ ammo_cache_think(var_0, var_1) {
     }
 
     if(var_4.ammo_cache_available_uses <= 0) {
-      _id_0555::_id_83DD("blitz_soldout", var_4);
+      _id_0555::issprinting("blitz_soldout", var_4);
       continue;
     }
 
@@ -131,7 +131,7 @@ ammo_cache_low_ammo_remove_highlights(var_0) {
 
   foreach(var_3 in var_1) {
     foreach(var_5 in var_3._id_629F)
-    var_5 _meth_8428(var_0);
+    var_5 hudoutlinedisableforclient(var_0);
   }
 
   var_0.caches_highlighted = 0;
@@ -142,7 +142,7 @@ ammo_cache_low_ammo_apply_highlights(var_0) {
 
   foreach(var_3 in var_1) {
     foreach(var_5 in var_3._id_629F)
-    var_5 _meth_8427(var_0, 0, 0);
+    var_5 hudoutlineenableforclient(var_0, 0, 0);
   }
 
   var_0.caches_highlighted = 1;
@@ -191,7 +191,7 @@ ammo_cache_low_ammo_highlight() {
     if(_id_0547::_id_5865(var_3) || _id_0547::_id_585B(var_3) || _id_0547::iszombieconsumableweapon(var_3) || _id_0547::_id_585C(var_3)) {
       continue;
     }
-    var_4 = var_0 _meth_8338(var_3);
+    var_4 = var_0 getfractionmaxammo(var_3);
 
     if(var_4 >= 0.2) {
       if(common_scripts\utility::_id_562E(var_0.caches_highlighted))

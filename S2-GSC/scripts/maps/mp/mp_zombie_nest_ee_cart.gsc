@@ -55,12 +55,12 @@ _id_7865() {
   }
 
   var_1._id_92A1 common_scripts\utility::_id_9DA3();
-  var_1._id_92A1 _meth_80CE(&"ZOMBIE_NEST_MOVE_SHROUD");
-  var_1._id_1DD3 _meth_8053("TAG_LIGHT_GREEN");
-  var_1._id_1DD3 _meth_8050("TAG_LIGHT_RED");
+  var_1._id_92A1 sethintstring(&"ZOMBIE_NEST_MOVE_SHROUD");
+  var_1._id_1DD3 showpart("TAG_LIGHT_GREEN");
+  var_1._id_1DD3 hidepart("TAG_LIGHT_RED");
 
   foreach(var_4 in var_1._id_5D20)
-  var_4 _meth_83FA("light", "green");
+  var_4 setscriptablepartstate("light", "green");
 
   var_1._id_92A1 waittill("trigger", var_6);
   var_1 thread _id_64A0();
@@ -86,7 +86,7 @@ _id_7859() {
 
 _id_7863() {
   if(1) {
-    var_0 = _func_18E("ww_part_01_model", "targetname");
+    var_0 = _getent("ww_part_01_model", "targetname");
     var_1 = _id_0557::_id_782F(undefined, var_0);
     _id_0557::_id_781D("4 cart", var_1);
   }
@@ -112,7 +112,7 @@ _id_7858() {
 
 _id_7864() {
   if(1) {
-    var_0 = _func_18E("ww_part_02_model", "targetname");
+    var_0 = _getent("ww_part_02_model", "targetname");
     var_1 = _id_0557::_id_782F(undefined, var_0);
     _id_0557::_id_781D("4 cart", var_1);
   }
@@ -172,7 +172,7 @@ _id_52DE() {
   maps\mp\mp_zombie_nest_ee_util::_id_8A53();
   maps\mp\mp_zombie_nest_ee_workbench::_id_536B();
   thread _id_2EAD();
-  level._id_3571 = _func_18E("ee_shard", "targetname");
+  level._id_3571 = _getent("ee_shard", "targetname");
   level._id_3571._id_9B8C = [];
   level._id_3571._id_9B8C["rnd_1"] = % s2_zom_shroud_rd_track_1;
   level._id_3571._id_9B8C["rnd_2"] = % s2_zom_shroud_rd_track_2;
@@ -202,16 +202,16 @@ _id_52DE() {
   }
 
   var_5 = spawnStruct();
-  var_5._id_1DD3 = _func_18E("move_cart_button_model", "targetname");
-  var_5._id_2590 = _func_18E("move_cart_button_console", "targetname");
-  var_5._id_92A1 = _func_18E("move_shroud_trig", "targetname");
-  var_5._id_92A1 _meth_80CE(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
-  var_5._id_1DD3 _meth_8053("TAG_LIGHT_RED");
-  var_5._id_1DD3 _meth_8050("TAG_LIGHT_GREEN");
-  var_5._id_5D20 = _func_21F("move_cart_button_light", "targetname");
+  var_5._id_1DD3 = _getent("move_cart_button_model", "targetname");
+  var_5._id_2590 = _getent("move_cart_button_console", "targetname");
+  var_5._id_92A1 = _getent("move_shroud_trig", "targetname");
+  var_5._id_92A1 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  var_5._id_1DD3 showpart("TAG_LIGHT_RED");
+  var_5._id_1DD3 hidepart("TAG_LIGHT_GREEN");
+  var_5._id_5D20 = _getscriptablearray("move_cart_button_light", "targetname");
 
   foreach(var_7 in var_5._id_5D20)
-  var_7 _meth_83FA("light", "red");
+  var_7 setscriptablepartstate("light", "red");
 
   level._id_64C7 = var_5;
 }
@@ -219,19 +219,19 @@ _id_52DE() {
 _id_64A0() {
   var_0 = % zmb_objective_button_02_push;
   var_1 = % zmb_objective_button_02_reverse;
-  var_2 = _func_065(var_0);
-  var_3 = _func_065(var_1);
-  self._id_1DD3 _meth_8276("zmb_objective_button_02_push");
+  var_2 = _getanimlength(var_0);
+  var_3 = _getanimlength(var_1);
+  self._id_1DD3 scriptmodelplayanim("zmb_objective_button_02_push");
   self._id_1DD3 _id_0378::_id_8D74("aud_start_claw_button_press");
   wait(var_2);
-  self._id_1DD3 _meth_8053("TAG_LIGHT_RED");
-  self._id_1DD3 _meth_8050("TAG_LIGHT_GREEN");
+  self._id_1DD3 showpart("TAG_LIGHT_RED");
+  self._id_1DD3 hidepart("TAG_LIGHT_GREEN");
 
   foreach(var_5 in self._id_5D20)
-  var_5 _meth_83FA("light", "red");
+  var_5 setscriptablepartstate("light", "red");
 
   wait 0.5;
-  self._id_1DD3 _meth_8276("zmb_objective_button_02_reverse");
+  self._id_1DD3 scriptmodelplayanim("zmb_objective_button_02_reverse");
   wait(var_3);
 }
 
@@ -239,8 +239,8 @@ _id_2023(var_0) {
   if(!isDefined(var_0))
     var_0 = "rnd";
 
-  level._id_3571._id_7E93 = _func_2A8(common_scripts\utility::_id_44F5("zmb_geistkraft_radius_256"), level._id_3571, "TAG_FX");
-  _func_14C(level._id_3571._id_7E93);
+  level._id_3571._id_7E93 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_geistkraft_radius_256"), level._id_3571, "TAG_FX");
+  _triggerfx(level._id_3571._id_7E93);
   level._id_3571._id_2DA8 = 1;
   level._id_3571 thread _id_201F(var_0);
 
@@ -267,7 +267,7 @@ _id_2023(var_0) {
 
   if(var_0 == "rnd") {
     level waittill(var_0 + "_show_ww_part");
-    level._id_3E3B._id_6FC2 _meth_805B();
+    level._id_3E3B._id_6FC2 show();
   }
 
   level waittill(var_0 + "_create_ww_part");
@@ -317,10 +317,10 @@ _id_202D(var_0) {
     case "med_2":
     case "rnd_3":
     case "rnd_2":
-      _func_147(level._effect["zmb_gk_claw_full"], self, "TAG_FX");
-      _func_147(level._effect["zmb_gk_claw_battery_full_1"], self, "flap1_shroud");
-      _func_147(level._effect["zmb_gk_claw_battery_full_2"], self, "flap2_shroud");
-      _func_147(level._effect["zmb_gk_claw_battery_full_3"], self, "flap3_shroud");
+      _playfxontag(level._effect["zmb_gk_claw_full"], self, "TAG_FX");
+      _playfxontag(level._effect["zmb_gk_claw_battery_full_1"], self, "flap1_shroud");
+      _playfxontag(level._effect["zmb_gk_claw_battery_full_2"], self, "flap2_shroud");
+      _playfxontag(level._effect["zmb_gk_claw_battery_full_3"], self, "flap3_shroud");
       break;
     case "med_1":
     case "rnd_1":
@@ -328,9 +328,9 @@ _id_202D(var_0) {
   }
 
   var_1 = self._id_9B8C[var_0];
-  var_2 = _func_065(var_1);
-  var_3 = _func_286(var_1);
-  self _meth_8495(var_3, self._id_0BBE.origin, self._id_0BBE.angles);
+  var_2 = _getanimlength(var_1);
+  var_3 = _debuggetanimname(var_1);
+  self scriptmodelplayanimdeltamotionfrompos(var_3, self._id_0BBE.origin, self._id_0BBE.angles);
   wait(var_2);
 }
 
@@ -382,7 +382,7 @@ _id_2EBE(var_0) {
 
 _id_2EAD() {
   level endon("flag_ww_forged");
-  var_0 = _func_18E("ww_creation_station_dialogue", "targetname");
+  var_0 = _getent("ww_creation_station_dialogue", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -406,7 +406,7 @@ _id_2EAD() {
 _id_2E7B() {
   level endon("flag_ww_part_01_picked_up");
   var_0 = _id_0557::_id_7838("4 cart", "head to rnd");
-  var_1 = _func_18E("cart_dialog_trig", "targetname");
+  var_1 = _getent("cart_dialog_trig", "targetname");
   var_1._id_0CA5 = 0;
   var_2 = level._id_3571;
 
@@ -489,7 +489,7 @@ _id_2025(var_0) {
   var_4 = vectorNormalize((var_3[0], var_3[1], 0));
   var_5 = vectordot(var_2, var_4);
   var_5 = clamp(var_5, -1, 1);
-  var_6 = _func_0AA(var_5);
+  var_6 = _acos(var_5);
   var_7 = var_6 < 60;
   return var_7;
 }
@@ -502,19 +502,19 @@ _id_A0EF(var_0, var_1, var_2, var_3) {
     var_3 = 0.1;
 
   foreach(var_5 in var_0) {
-    wait(_func_0A5(var_2, var_3));
+    wait(_randomfloatrange(var_2, var_3));
     _id_A12E(var_5, "facility", var_1);
   }
 }
 
 _id_8A2B(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = _func_21F(var_0, "targetname");
+  var_5 = _getscriptablearray(var_0, "targetname");
 
   foreach(var_7 in var_5) {
     var_7._id_760A = var_3;
     var_7._id_760B = var_2;
     var_7._id_760D = var_4;
-    var_7._id_8300 = var_1;
+    var_7.setclientdvar = var_1;
   }
 
   return var_5;
@@ -526,7 +526,7 @@ _id_5D7B(var_0, var_1) {
   if(var_1)
     var_2 = var_0._id_760B;
 
-  var_0 _meth_83FA(var_0._id_760D, var_2, 0);
+  var_0 setscriptablepartstate(var_0._id_760D, var_2, 0);
 }
 
 _id_A12E(var_0, var_1, var_2, var_3) {

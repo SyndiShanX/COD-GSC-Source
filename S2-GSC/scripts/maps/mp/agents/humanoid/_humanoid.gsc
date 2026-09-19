@@ -21,10 +21,10 @@ _id_8A27() {
   self._id_0012 = 1;
   self._id_60E1 = 40;
   self._id_60F0 = 60;
-  self._id_60F1 = _func_0DA(self._id_60F0);
+  self._id_60F1 = _squared(self._id_60F0);
   _id_0547::_id_86C7(self._id_60F0);
   self._id_2BCA = self.radius + 1;
-  self _meth_8399(self._id_2BCA);
+  self scragentsetgoalradius(self._id_2BCA);
   self._id_60E5 = 0.5;
 
   if(!isDefined(self._id_8303))
@@ -86,33 +86,33 @@ _id_8FC9(var_0, var_1, var_2, var_3) {
   self._id_90AB = gettime();
   self._id_5BE2 = gettime();
   init();
-  self _meth_838F(var_4, var_5, var_0, 15, 60, var_3);
+  self spawnagent(var_4, var_5, var_0, 15, 60, var_3);
   level notify("spawned_agent", self);
   maps\mp\agents\_agent_common::_id_83FD(100);
 
   if(isDefined(var_3))
-    maps\mp\agents\_agent_utility::_id_83FE(var_3.team, var_3);
+    maps\mp\agents\_agent_utility::hudoutlineenable(var_3.team, var_3);
 
-  self _meth_8315();
-  self _meth_8537("human");
-  self _meth_8539(1);
-  self _meth_853C(0);
-  self _meth_853E(0);
-  self _meth_853F(0);
-  self _meth_8540(1);
-  self _meth_853D(1);
+  self takeallweapons();
+  self scragentsetspecies("human");
+  self scragentsetnopenetrate(1);
+  self scragentsetorienttoground(0);
+  self scragentsetobstacleavoid(0);
+  self scragentsetlateralcodemove(0);
+  self scragentsetpathteamspread(1);
+  self scragentsetallowragdoll(1);
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 }
 
 _id_2EE6() {
-  if(isDefined(self._id_5BBF) && isDefined(self._id_5BBE) && _func_211(self._id_28D2.origin, self._id_5BBF) < 4 && distancesquared(self.origin, self._id_5BBE) < 2500)
+  if(isDefined(self._id_5BBF) && isDefined(self._id_5BBE) && _distance2dsquared(self._id_28D2.origin, self._id_5BBF) < 4 && distancesquared(self.origin, self._id_5BBE) < 2500)
     return 1;
 
   return 0;
 }
 
 _id_2EE5() {
-  if(isDefined(self._id_5BBC) && isDefined(self._id_5BBB) && _func_211(self._id_28D2.origin, self._id_5BBC) < 4 && distancesquared(self.origin, self._id_5BBB) < 2500)
+  if(isDefined(self._id_5BBC) && isDefined(self._id_5BBB) && _distance2dsquared(self._id_28D2.origin, self._id_5BBC) < 4 && distancesquared(self.origin, self._id_5BBB) < 2500)
     return 1;
 
   return 0;
@@ -124,7 +124,7 @@ _id_5859(var_0) {
   var_1 = var_2 <= self._id_11B8 && var_2 >= self._id_11B9;
 
   if(!var_1 && isPlayer(self._id_28D2) && common_scripts\utility::_id_562E(self._id_28D2._id_571F)) {
-    if(length(self _meth_833D()) < 5)
+    if(length(self getvelocity()) < 5)
       var_1 = var_2 <= self._id_11B8 * 2 && var_2 >= self._id_11B9;
   }
 
@@ -135,7 +135,7 @@ _id_A7F8() {
   if(maps\mp\agents\humanoid\_humanoid_util::_id_56DD(self._id_28D2))
     return 0;
 
-  return !_id_5859(self._id_28D2.origin) && _func_211(self.origin, self._id_28D2.origin) < maps\mp\agents\humanoid\_humanoid_util::_id_4581() * 0.75 * 0.75;
+  return !_id_5859(self._id_28D2.origin) && _distance2dsquared(self.origin, self._id_28D2.origin) < maps\mp\agents\humanoid\_humanoid_util::_id_4581() * 0.75 * 0.75;
 }
 
 _id_7AC0(var_0, var_1) {
@@ -230,7 +230,7 @@ _id_32B0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
     return;
   }
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoStopHitReaction");
   self._id_5381 = 1;
   var_7 = "pain_stand";
@@ -243,12 +243,12 @@ _id_32B0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_8 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_7);
   var_9 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_8);
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_8, var_9, self._id_672D, "pain_anim");
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "DoStopHitReaction");
   self._id_5381 = undefined;
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 }
 
 _id_45FB(var_0, var_1) {
@@ -317,7 +317,7 @@ _id_3298(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self endon("death");
   var_10 = var_1;
   var_10._id_6DFA = self;
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoMeleeHitReaction");
   self._id_5381 = 1;
   var_11 = 0.2;
@@ -332,8 +332,8 @@ _id_3298(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_14 = var_13["hit_zombie_action"];
   var_15 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_14);
   var_16 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_15);
-  var_17 = self _meth_83D8(var_15, var_16);
-  var_18 = _func_065(var_17);
+  var_17 = self getanimentry(var_15, var_16);
+  var_18 = _getanimlength(var_17);
   var_19 = 1;
   var_20 = max(0, maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_17, "melee_hit", 0.1) * var_18 / var_19 - var_12);
   var_21 = max(0, maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_17, "melee_stop_pairing", 0.2) * var_18 / var_19 - var_12);
@@ -351,7 +351,7 @@ _id_3298(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   }
 
   thread _id_6DFD(var_10, var_13["hit_worldmodel_anim"], var_12, var_20, var_21, var_13);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_15, var_16, var_19, var_12);
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_15, var_16, var_19, var_12);
   var_23 = var_18 / var_19 - var_12;
   var_24 = 0.2;
   var_25 = var_13["hit_zombie_blend_duration"];
@@ -366,7 +366,7 @@ _id_3298(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "DoMeleeHitReaction");
   self._id_5381 = undefined;
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 
   if(isDefined(var_10))
     var_10._id_6DFA = undefined;
@@ -377,9 +377,9 @@ _id_6DFD(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = spawn("script_model", var_0.origin + anglesToForward(var_0.angles) * 1);
   var_6 setModel(var_0.model);
   var_6.angles = var_0.angles;
-  var_6 _meth_805C();
+  var_6 hide();
   var_7 = undefined;
-  var_6 _meth_8276(var_1, "actually play this anim please", max(0, var_2));
+  var_6 scriptmodelplayanim(var_1, "actually play this anim please", max(0, var_2));
   var_8 = 0;
   var_9 = var_5["invalid_pair_distance"];
 
@@ -391,18 +391,18 @@ _id_6DFD(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(!var_8)
-    self _meth_855A(var_3, var_3, var_6, "tag_sync", "tag_origin");
+    self scragentsynchronizeanims(var_3, var_3, var_6, "tag_sync", "tag_origin");
   else
-    self.angles = (0, _func_109(var_0.origin - self.origin), 0);
+    self.angles = (0, _vectortoyaw(var_0.origin - self.origin), 0);
 
   for(var_10 = 0; var_10 < var_4; var_10 = var_10 + 0.05) {
     var_11 = var_2 + var_10;
-    var_6 _meth_8276(var_1, "actually play this anim please", max(0, var_11));
+    var_6 scriptmodelplayanim(var_1, "actually play this anim please", max(0, var_11));
     waitframe();
   }
 
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
   var_6 delete();
 }
 
@@ -411,13 +411,13 @@ _id_60EA(var_0, var_1, var_2) {
   self endon("MeleeHitReactionAlignZombie_stop");
 
   for(var_4 = 0; var_4 < var_2; var_4 = var_4 + 0.05) {
-    var_5 = var_0 _meth_81AB(var_3);
-    var_6 = _func_110(var_0.angles, (0, 180, 0));
+    var_5 = var_0 localtoworldcoords(var_3);
+    var_6 = _combineangles(var_0.angles, (0, 180, 0));
     var_7 = 1;
-    var_8 = _func_10A(self.origin, var_5, var_7);
+    var_8 = _vectorlerp(self.origin, var_5, var_7);
     var_9 = _func_10B(self.angles, var_6, var_7);
     self setOrigin(var_8, 0);
-    self _meth_839B("face angle abs", var_9);
+    self scragentsetorientmode("face angle abs", var_9);
     waitframe();
   }
 }
@@ -470,7 +470,7 @@ _id_8B9F(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1) && weaponclass(var_1) == "sniper")
     return 1;
 
-  if(isDefined(var_2) && _func_17B(var_2) && var_0 >= 10)
+  if(isDefined(var_2) && _isexplosivedamagemod(var_2) && var_0 >= 10)
     return 1;
 
   if(isDefined(var_1) && var_1 == "concussion_grenade_mp")

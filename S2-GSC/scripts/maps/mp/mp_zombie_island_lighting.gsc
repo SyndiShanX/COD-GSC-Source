@@ -19,7 +19,7 @@ onplayerspawned() {
   var_0 = self;
   var_0 endon("disconnect");
   wait 0.5;
-  var_0 _meth_806B(0.25, 1.7, 1.2, 1.2, 0);
+  var_0 digitaldistortsetparams(0.25, 1.7, 1.2, 1.2, 0);
 }
 
 _id_84F8() {

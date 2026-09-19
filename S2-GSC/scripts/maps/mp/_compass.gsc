@@ -13,7 +13,7 @@ _id_8A2F(var_0) {
   var_3 = (var_2[0].origin[0], var_2[0].origin[1], 0);
   var_4 = (var_2[1].origin[0], var_2[1].origin[1], 0);
   var_5 = var_4 - var_3;
-  var_6 = (_func_0A7(_func_085()), _func_0A6(_func_085()), 0);
+  var_6 = (_cos(_getnorthyaw()), _sin(_getnorthyaw()), 0);
   var_7 = (0 - var_6[1], var_6[0], 0);
 
   if(vectordot(var_5, var_7) > 0) {
@@ -52,7 +52,7 @@ _id_8A2F(var_0) {
   }
 
   level._id_5FF0 = vectordot(var_8 - var_9, var_6);
-  _func_1C4(var_0, var_8[0], var_8[1], var_9[0], var_9[1]);
+  _setminimap(var_0, var_8[0], var_8[1], var_9[0], var_9[1]);
 }
 
 _id_A2B5(var_0, var_1) {

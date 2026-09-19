@@ -33,13 +33,13 @@ main() {
 }
 
 _id_6111(var_0) {
-  level._id_5139 = 1;
+  level.ingraceperiod = 1;
   self._id_4B62 = 0;
   [[level._id_2322]](var_0);
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
 
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;

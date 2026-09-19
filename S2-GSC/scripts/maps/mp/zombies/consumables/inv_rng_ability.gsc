@@ -43,13 +43,13 @@ get_random_other_role() {
     if(_id_0547::_id_5565(var_4, "role_ability_melee_frenzy_zm")) {
       continue;
     }
-    if(var_1 _meth_8319(var_4)) {
+    if(var_1 hasweapon(var_4)) {
       continue;
     }
-    if(var_1 _meth_8319("role_ability_taunt_zm") && _id_0547::_id_5565(var_4, "role_ability_camo_zm")) {
+    if(var_1 hasweapon("role_ability_taunt_zm") && _id_0547::_id_5565(var_4, "role_ability_camo_zm")) {
       continue;
     }
-    if(var_1 _meth_8319("role_ability_camo_zm") && _id_0547::_id_5565(var_4, "role_ability_taunt_zm")) {
+    if(var_1 hasweapon("role_ability_camo_zm") && _id_0547::_id_5565(var_4, "role_ability_taunt_zm")) {
       continue;
     }
     var_0[var_0.size] = var_3;

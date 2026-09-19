@@ -9,8 +9,8 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_1A21;
-  level._id_19D5["should_pickup_weapons"] = ::_id_1AE4;
+  level.bot_funcs["gametype_think"] = ::_id_1A21;
+  level.bot_funcs["should_pickup_weapons"] = ::_id_1AE4;
 }
 
 _id_8797() {
@@ -38,7 +38,7 @@ _id_1A21() {
 
   for(;;) {
     if(level._id_5111) {
-      if(self.team == "axis" && self _meth_8368() != "run_and_gun")
+      if(self.team == "axis" && self botgetpersonality() != "run_and_gun")
         maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
     }
 
@@ -49,7 +49,7 @@ _id_1A21() {
       var_0 = maps\mp\bots\_bots_strategy::_id_1A7A();
 
       if(!isDefined(var_0) || var_0)
-        self _meth_8358();
+        self botclearscriptgoal();
     }
 
     self[[self._id_6F7F]]();
@@ -113,7 +113,7 @@ _id_1A1D() {
 
                 foreach(var_13 in var_11) {
                   if(isbot(var_13)) {
-                    var_14 = var_13 _meth_835F();
+                    var_14 = var_13 botgetscriptgoaltype();
 
                     if(var_14 != "tactical" && var_14 != "critical") {
                       var_13 thread _id_4FA2(var_3);
@@ -138,9 +138,9 @@ _id_1A1D() {
 _id_4FA2(var_0) {
   self endon("disconnect");
   self endon("death");
-  self _meth_8356(var_0.origin, 0, "critical");
+  self botsetscriptgoal(var_0.origin, 0, "critical");
   maps\mp\bots\_bots_util::_id_1B21();
-  self _meth_8358();
+  self botclearscriptgoal();
 }
 
 _id_1A20() {
@@ -151,30 +151,30 @@ _id_1A20() {
     self._id_60D6 = 0;
     self._id_60DC = undefined;
     self._id_60DB = 0;
-    var_0 = self _meth_837D("throwKnifeChance");
+    var_0 = self botgetdifficultysetting("throwKnifeChance");
 
     if(var_0 < 0.25)
-      self _meth_837C("throwKnifeChance", 0.25);
+      self botsetdifficultysetting("throwKnifeChance", 0.25);
 
-    self _meth_837C("allowGrenades", 1);
+    self botsetdifficultysetting("allowGrenades", 1);
 
     for(;;) {
-      if(self _meth_8319(level._id_5119)) {
+      if(self hasweapon(level._id_5119)) {
         if(maps\mp\_utility::_id_56FF(self._id_0088)) {
           var_1 = gettime();
 
           if(!isDefined(self._id_60D5) || self._id_60D5 != self._id_0088) {
             self._id_60D5 = self._id_0088;
-            self._id_60D7 = self._id_0088 _meth_838A();
+            self._id_60D7 = self._id_0088 getnearestnode();
             self._id_60D6 = var_1;
           } else {
-            var_2 = _func_0DA(self _meth_837D("meleeDist"));
+            var_2 = _squared(self botgetdifficultysetting("meleeDist"));
 
             if(distancesquared(self._id_0088.origin, self.origin) <= var_2)
               self._id_1F1A = var_1;
 
-            var_3 = self._id_0088 _meth_838A();
-            var_4 = self _meth_838A();
+            var_3 = self._id_0088 getnearestnode();
+            var_4 = self getnearestnode();
 
             if(!isDefined(self._id_60D7) || self._id_60D7 != var_3) {
               self._id_60D6 = var_1;
@@ -197,7 +197,7 @@ _id_1A20() {
                     self setweaponammoclip(level._id_5119, 1);
 
                   maps\mp\_utility::waitfortimeornotify(30, "enemy");
-                  self _meth_8358();
+                  self botclearscriptgoal();
                 }
               }
             }
@@ -211,7 +211,7 @@ _id_1A20() {
 }
 
 _id_1A1E(var_0, var_1) {
-  if(_func_0AE(var_0[2] - var_1[2]) > 56.0 && _func_211(var_0, var_1) < 2304)
+  if(_abs(var_0[2] - var_1[2]) > 56.0 && _distance2dsquared(var_0, var_1) < 2304)
     return 1;
 
   return 0;
@@ -226,7 +226,7 @@ _id_1A1F(var_0, var_1) {
   if(issubstr(var_1.type, "Begin"))
     var_2 = 1;
 
-  var_3 = _func_204(var_1);
+  var_3 = _getlinkednodes(var_1);
 
   if(isDefined(var_3) && var_3.size) {
     var_4 = common_scripts\utility::array_randomize(var_3);
@@ -245,9 +245,9 @@ _id_1A1F(var_0, var_1) {
       if(isPlayer(var_0))
         var_9 = var_0 maps\mp\_utility::_id_469E();
 
-      if(_func_07F(var_8, var_9, 0, self, var_0)) {
-        var_10 = _func_109(var_9 - var_8);
-        self _meth_8357(var_6, "critical", var_10);
+      if(_sighttracepassed(var_8, var_9, 0, self, var_0)) {
+        var_10 = _vectortoyaw(var_9 - var_8);
+        self botsetscriptgoalnode(var_6, "critical", var_10);
         maps\mp\bots\_bots_util::_id_1B21(3.0);
         return;
       }

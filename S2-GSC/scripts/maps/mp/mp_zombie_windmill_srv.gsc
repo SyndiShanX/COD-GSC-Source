@@ -77,7 +77,7 @@ house_door_listener() {
   common_scripts\utility::_id_3C9F("zone_plaza_to_zone_house");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "zone_plaza_to_zone_house" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "zone_plaza_to_zone_house" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
@@ -99,7 +99,7 @@ windmill_srv_ee() {
   level.ducks_per_window = 1;
   var_0 = 5;
   var_1 = getEntArray("hunt_ee", "targetname");
-  var_2 = _func_18E("dog_ee", "targetname");
+  var_2 = _getent("dog_ee", "targetname");
   var_2 setModel("zmw_tinker_toy_set_02");
 
   foreach(var_4 in var_1)
@@ -109,9 +109,9 @@ windmill_srv_ee() {
   var_2._id_926A = var_2.origin;
   var_2.raised_position = var_2.target_struct.origin;
   var_2.is_dog = 1;
-  var_6 = _func_18E("srv_pap_fuse_spawn_loc", "targetname");
-  var_6 _meth_8055(var_2);
-  var_7 = _func_18E("srv_pap_fuse_pickup_trig", "targetname");
+  var_6 = _getent("srv_pap_fuse_spawn_loc", "targetname");
+  var_6 linkto(var_2);
+  var_7 = _getent("srv_pap_fuse_pickup_trig", "targetname");
   var_7 common_scripts\utility::_id_9D9F();
 
   foreach(var_4 in var_1) {
@@ -191,36 +191,36 @@ windmill_srv_ee() {
 }
 
 ee_show_dog_fail() {
-  self _meth_82B1(self.raised_position, 1, 0.1, 0.1);
+  self moveto(self.raised_position, 1, 0.1, 0.1);
   wait 1;
-  self _meth_82BF(anglestoright(self.angles), 0.3, 0.3, 5);
+  self vibrate(anglestoright(self.angles), 0.3, 0.3, 5);
   wait 5;
-  self _meth_82B1(self._id_926A, 3, 0.1, 0.1);
+  self moveto(self._id_926A, 3, 0.1, 0.1);
   wait 3;
-  self _meth_82B1(self._id_926A + (0, 0, 15), 0.25, 0.1, 0.1);
+  self moveto(self._id_926A + (0, 0, 15), 0.25, 0.1, 0.1);
   wait 4;
-  self _meth_82B1(self._id_926A, 3, 0.1, 0.1);
+  self moveto(self._id_926A, 3, 0.1, 0.1);
   wait 3;
 }
 
 ee_show_dog_success(var_0) {
-  self _meth_82B1(self.raised_position, 1, 0.1, 0.1);
+  self moveto(self.raised_position, 1, 0.1, 0.1);
   wait 2;
-  var_0 _meth_8057();
+  var_0 unlink();
   var_0 thread ee_toss_fuse();
   wait 1;
-  self _meth_82B1(self._id_926A, 1);
+  self moveto(self._id_926A, 1);
 }
 
 ee_toss_fuse() {
   var_0 = self;
   var_1 = common_scripts\utility::_id_46B5("srv_pap_fuse_land_path", "targetname");
-  var_0 _meth_82B1(var_1.origin, 0.15);
+  var_0 moveto(var_1.origin, 0.15);
   var_2 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
   wait 0.15;
 
   while(isDefined(var_2)) {
-    var_0 _meth_82B1(var_2.origin, 0.15);
+    var_0 moveto(var_2.origin, 0.15);
 
     if(isDefined(var_2.target))
       var_2 = common_scripts\utility::_id_46B5(var_2.target, "targetname");
@@ -230,9 +230,9 @@ ee_toss_fuse() {
     wait 0.15;
   }
 
-  var_3 = _func_18E("srv_pap_fuse_pickup_trig", "targetname");
+  var_3 = _getent("srv_pap_fuse_pickup_trig", "targetname");
   var_3 common_scripts\utility::_id_9DA3();
-  var_3 _meth_8177(1);
+  var_3 usetriggerrequirelookat(1);
   var_3 waittill("trigger");
   var_0 delete();
   var_3 common_scripts\utility::_id_9D9F();
@@ -243,8 +243,8 @@ ee_raise(var_0) {
   if(!_id_0547::_id_5565(self._id_931A, "lowered")) {
     return;
   }
-  self _meth_82C3(1);
-  self _meth_849F(1);
+  self setcandamage(1);
+  self setdamagecallbackon(1);
   self._id_552B = 1;
   self._id_931A = "raising";
 
@@ -254,7 +254,7 @@ ee_raise(var_0) {
   if(var_0 <= 0)
     self.origin = self.raised_position;
   else {
-    self _meth_82B1(self.raised_position, var_0, 0.1, 0.1);
+    self moveto(self.raised_position, var_0, 0.1, 0.1);
     wait(var_0);
   }
 
@@ -271,20 +271,20 @@ ee_lower(var_0, var_1) {
     var_1 = 0;
 
   if(common_scripts\utility::_id_562E(var_1)) {
-    self _meth_82C3(0);
-    self _meth_849F(0);
+    self setcandamage(0);
+    self setdamagecallbackon(0);
     self._id_552B = 0;
   }
 
   if(!isDefined(var_0))
     var_0 = 0.5;
 
-  self _meth_82B1(self._id_926A, var_0, 0.1, 0.1);
+  self moveto(self._id_926A, var_0, 0.1, 0.1);
   wait(var_0);
 
   if(!common_scripts\utility::_id_562E(var_1)) {
-    self _meth_82C3(0);
-    self _meth_849F(0);
+    self setcandamage(0);
+    self setdamagecallbackon(0);
     self._id_552B = 0;
   }
 

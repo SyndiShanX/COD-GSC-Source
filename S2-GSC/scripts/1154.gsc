@@ -61,7 +61,7 @@ init() {
 
   level._id_4F38 = var_1[0];
   level._id_4F39 = var_1;
-  level._id_19D5 = [];
+  level.bot_funcs = [];
   level thread _id_5357();
   level thread _id_27CA();
   level.hub_1v1_weapon_mode = getdvarint("spv_hub_1v1_weapon_mode", 0);
@@ -77,67 +77,67 @@ _id_5357() {
 }
 
 _id_27CA() {
-  var_0 = _func_18E("1v1_clip_spawn1", "targetname");
+  var_0 = _getent("1v1_clip_spawn1", "targetname");
 
   if(isDefined(var_0))
     var_0 delete();
 
-  var_1 = _func_18E("1v1_clip_spawn2", "targetname");
+  var_1 = _getent("1v1_clip_spawn2", "targetname");
 
   if(isDefined(var_1))
     var_1 delete();
 
-  var_2 = _func_18E("1v1_clip_spawn3", "targetname");
+  var_2 = _getent("1v1_clip_spawn3", "targetname");
 
   if(isDefined(var_2))
     var_2 delete();
 
-  var_3 = _func_18E("1v1_clip_spawn4", "targetname");
+  var_3 = _getent("1v1_clip_spawn4", "targetname");
 
   if(isDefined(var_3))
     var_3 delete();
 
-  var_4 = _func_18E("1v1_clip_cover6", "targetname");
+  var_4 = _getent("1v1_clip_cover6", "targetname");
 
   if(isDefined(var_4))
     var_4 delete();
 
-  var_5 = _func_18E("1v1_clip_cover5", "targetname");
+  var_5 = _getent("1v1_clip_cover5", "targetname");
 
   if(isDefined(var_5))
     var_5 delete();
 
-  var_6 = _func_18E("1v1_clip_cover3", "targetname");
+  var_6 = _getent("1v1_clip_cover3", "targetname");
 
   if(isDefined(var_6))
     var_6 delete();
 
-  var_7 = _func_18E("1v1_clip_cover11", "targetname");
+  var_7 = _getent("1v1_clip_cover11", "targetname");
 
   if(isDefined(var_7))
     var_7 delete();
 
-  var_8 = _func_18E("1v1_clip_cover12", "targetname");
+  var_8 = _getent("1v1_clip_cover12", "targetname");
 
   if(isDefined(var_8))
     var_8 delete();
 
-  var_9 = _func_18E("1v1_clip_cover13", "targetname");
+  var_9 = _getent("1v1_clip_cover13", "targetname");
 
   if(isDefined(var_9))
     var_9 delete();
 
-  var_10 = _func_18E("1v1_clip_cover7", "targetname");
+  var_10 = _getent("1v1_clip_cover7", "targetname");
 
   if(isDefined(var_10))
     var_10 delete();
 
-  var_11 = _func_18E("1v1_clip_cover2", "targetname");
+  var_11 = _getent("1v1_clip_cover2", "targetname");
 
   if(isDefined(var_11))
     var_11 delete();
 
-  var_12 = _func_18E("1v1_clip_generic", "targetname");
+  var_12 = _getent("1v1_clip_generic", "targetname");
 
   if(isDefined(var_12))
     var_12 delete();
@@ -203,7 +203,7 @@ monitorlonelyqueuebroadcast() {
     }
 
     if(level._id_4F38._id_787F.size == 1 && !self._id_08BE)
-      _func_18B(&"HUB_1V1_SOLO_QUEUE");
+      _iprintln(&"HUB_1V1_SOLO_QUEUE");
 
     wait 60;
   }
@@ -258,11 +258,11 @@ _id_7CE0(var_0) {
     }
     if(var_2 == var_4.curchampclientnum) {
       var_4.curchampclientnum = -1;
-      _func_032("ui_one_v_one_champion_clientNum", -1);
+      _setomnvar("ui_one_v_one_champion_clientNum", -1);
     }
   }
 
-  var_0 _meth_82FF("ui_hub_1v1_queueposition", 0);
+  var_0 setclientomnvar("ui_hub_1v1_queueposition", 0);
   _id_1CB0();
   _id_21E0();
 }
@@ -283,8 +283,8 @@ _id_1CB0() {
     if(var_2 < 0)
       var_2 = 0;
 
-    var_1 _meth_82FF("ui_hub_1v1_queueposition", var_2);
-    var_1 _meth_82FF(level._id_6B22._id_9FEB, level._id_4F38._id_787F.size);
+    var_1 setclientomnvar("ui_hub_1v1_queueposition", var_2);
+    var_1 setclientomnvar(level._id_6B22._id_9FEB, level._id_4F38._id_787F.size);
   }
 }
 
@@ -314,9 +314,9 @@ _id_21C9(var_0) {
   _id_04E0::_id_870B(1);
   wait 0.5;
   _id_04DC::_id_8A34(self, "1V1_CHALLENGE");
-  thread _id_04E0::_id_8636(10, "1v1InviteTimeout", ["death", "disconnect", "1v1ChoiceMade"]);
+  thread _id_04E0::disablefocus(10, "1v1InviteTimeout", ["death", "disconnect", "1v1ChoiceMade"]);
   thread _id_5DD1(var_0);
-  var_1 = common_scripts\utility::_id_A715("accepted1v1", "declined1v1", "1v1InviteTimeout");
+  var_1 = common_scripts\utility::waittill_any_return("accepted1v1", "declined1v1", "1v1InviteTimeout");
 
   if(var_1 == "1v1InviteTimeout")
     var_0 notify("1v1InviteTimeout");
@@ -326,7 +326,7 @@ _id_21C9(var_0) {
     _id_04E0::_id_870B(0);
 
     if(isDefined(self._id_572B) && self._id_572B)
-      self _meth_82FF("ui_hub_enable_pause", 0);
+      self setclientomnvar("ui_hub_enable_pause", 0);
 
     if(!isDefined(self._id_258D) || self._id_258D <= 0) {
       var_2 = int((gettime() - self._id_930A) / 1000);
@@ -337,12 +337,12 @@ _id_21C9(var_0) {
   }
 
   if(var_1 == "accepted1v1") {
-    self _meth_8307(0);
+    self allowmantle(0);
     return 1;
   }
 
   if(isDefined(self))
-    self _meth_82FF("ui_hub_1v1_queueposition", -1);
+    self setclientomnvar("ui_hub_1v1_queueposition", -1);
 
   return 0;
 }
@@ -427,7 +427,7 @@ getarenagungameweapons(var_0) {
 
 getcurrentgungameweapon(var_0, var_1) {
   var_2 = getarenagungameweapons(var_0);
-  var_1 = int(_func_0AF(var_1, var_2.size));
+  var_1 = int(_min(var_1, var_2.size));
   return var_2[var_1];
 }
 
@@ -442,7 +442,7 @@ stream1v1weapons(var_0) {
   self endon("disconnect");
   self.hasstreamed1v1weapons = 0;
 
-  while(!self _meth_842C(self, var_0))
+  while(!self hasloadedcustomizationplayerview(self, var_0))
     waitframe();
 
   self.hasstreamed1v1weapons = 1;
@@ -464,7 +464,7 @@ _id_7576() {
     var_0 = common_scripts\utility::_id_0F82(level._id_4F38._id_787F);
 
     if(isDefined(var_0)) {
-      thread _id_04E0::_id_8636(11, "forceCloseReadyChecks", ["1v1InviteTimeout", "1v1ChoiceMade"]);
+      thread _id_04E0::disablefocus(11, "forceCloseReadyChecks", ["1v1InviteTimeout", "1v1ChoiceMade"]);
       var_1 = var_0 _id_21C9(self);
 
       if(isDefined(var_1) && var_1 == 1)
@@ -496,7 +496,7 @@ _id_7576() {
 
     if(var_2) {
       self.curchampclientnum = -1;
-      _func_032("ui_one_v_one_champion_clientNum", -1);
+      _setomnvar("ui_one_v_one_champion_clientNum", -1);
     }
 
     return;
@@ -539,10 +539,10 @@ _id_1713(var_0, var_1) {
   self._id_2923 = 0;
   self._id_2529 = var_1;
   thread _id_9086(_id_6FB8(self, 1), var_0);
-  self _meth_8307(1);
+  self allowmantle(1);
   _id_04E0::_id_6010(self, self._id_0F58);
   _id_04E0::_id_4D02();
-  self _meth_82FF("ui_onevone_opponent_client_num", self._id_0F58 getentitynumber());
+  self setclientomnvar("ui_onevone_opponent_client_num", self._id_0F58 getentitynumber());
   self _meth_8656(self._id_0F58);
   thread _id_4AA2(var_0);
   thread _id_4AA3(var_0);
@@ -588,11 +588,11 @@ _id_237B() {
     return;
   } else if(self._id_5722) {
     foreach(var_2 in level._id_0813) {
-      var_3 = var_2 _meth_80E2();
+      var_3 = var_2 getturretowner();
 
       if(isDefined(var_3) && var_3 == self) {
-        var_3 _meth_82FF("ui_hub_in_flakgun", 0);
-        self _meth_80E0(var_2);
+        var_3 setclientomnvar("ui_hub_in_flakgun", 0);
+        self remotecontrolturretoff(var_2);
         waitframe();
         return;
       }
@@ -613,21 +613,21 @@ _id_8A11(var_0) {
   _id_04E0::_id_870B(1);
   self._id_542B = 0;
   self.post1v1 = undefined;
-  self _meth_82FF("ui_hide_1v1scores", 0);
-  self _meth_82FF("ui_hub_in_1v1", 1);
-  self _meth_82FF("ui_party_manipulation_enabled", 0);
-  self _meth_8114(1);
-  self _meth_812A(1);
-  self _meth_82C3(1);
+  self setclientomnvar("ui_hide_1v1scores", 0);
+  self setclientomnvar("ui_hub_in_1v1", 1);
+  self setclientomnvar("ui_party_manipulation_enabled", 0);
+  self allowprone(1);
+  self allowmelee(1);
+  self setcandamage(1);
   self _meth_85C8();
   _id_04E0::_id_2FA2();
-  self _meth_8326();
-  self _meth_8315();
+  self disableweaponswitch();
+  self takeallweapons();
   self _meth_85BE(1);
   self _meth_85B4();
   self _meth_84B9(1);
   self.health = self.maxhealth;
-  self _meth_82FF("ui_hub_1v1_queueposition", -1);
+  self setclientomnvar("ui_hub_1v1_queueposition", -1);
 
   foreach(var_2 in self._id_4E03) {
     if(isDefined(var_2))
@@ -650,7 +650,7 @@ _id_8A11(var_0) {
       var_5 = 1;
 
       if(maps\mp\gametypes\_class::_id_5826(var_4, 0)) {
-        self _meth_8349(var_4);
+        self setlethalweapon(var_4);
         self giveweapon(var_4);
         var_4 = "shovel_mp";
       }
@@ -668,19 +668,19 @@ _id_8A11(var_0) {
     var_5 = 1;
 
     if(maps\mp\gametypes\_class::_id_5826(var_4, 0)) {
-      self _meth_8349(var_4);
+      self setlethalweapon(var_4);
       self giveweapon(var_4);
       var_4 = "shovel_mp";
     }
   } else
     var_4 = getarenaprimaryweaponname(var_0);
 
-  self _meth_82FF("ui_hub_in_1v1", getarenaweaponmode(var_0) + 1);
+  self setclientomnvar("ui_hub_in_1v1", getarenaweaponmode(var_0) + 1);
 
   if(isDefined(var_0._id_6B15)) {
     if(var_0._id_6B15["loadoutEquipmentStruct"].guid != 0) {
       var_7 = maps\mp\_utility::_id_44CD(var_0._id_6B15["loadoutEquipmentStruct"]);
-      self _meth_8349(var_7);
+      self setlethalweapon(var_7);
       self giveweapon(var_7);
     }
 
@@ -691,7 +691,7 @@ _id_8A11(var_0) {
     }
   }
 
-  self _meth_8327();
+  self enableweaponswitch();
 
   if(isDefined(var_0.onevone_classchoicenum) && var_0.onevone_classchoicenum == 42)
     self _meth_8328();
@@ -705,7 +705,7 @@ _id_8A11(var_0) {
   else
     self.current1v1weaponmode = 0;
 
-  self _meth_812B(1);
+  self allowfire(1);
   thread _id_04DB::_id_47A9(var_5, 1);
 
   if(isDefined(self._id_9A9A))
@@ -722,7 +722,7 @@ makesureweaponswitches(var_0, var_1) {
   waitframe();
 
   for(;;) {
-    self _meth_831B(var_0);
+    self switchtoweaponimmediate(var_0);
     wait 0.3;
 
     if(self getcurrentweapon() == var_0) {
@@ -767,10 +767,10 @@ _id_4AA2(var_0) {
 
           if(var_1._id_2923 < 3) {
             var_4 = getcurrentgungameweapon(var_0, var_1._id_2923);
-            var_1 _meth_8315();
+            var_1 takeallweapons();
 
             if(maps\mp\gametypes\_class::_id_5826(var_4, 0)) {
-              var_1 _meth_8349(var_4);
+              var_1 setlethalweapon(var_4);
               var_1 giveweapon(var_4);
               var_4 = "shovel_mp";
             }
@@ -789,7 +789,7 @@ _id_4AA2(var_0) {
       var_0 thread _id_1C87();
 
       if(var_1._id_2923 >= 3) {
-        self _meth_8307(0);
+        self allowmantle(0);
         self._id_5B8F = self.origin;
         _id_77C0(self.name, var_1.name, "loss");
         thread _id_4AA8("loss", var_0);
@@ -838,7 +838,7 @@ _id_4AA4(var_0) {
 
 _id_4AA6(var_0) {
   var_0 notify("1v1_begin_exit");
-  self _meth_8307(0);
+  self allowmantle(0);
 
   if(var_0._id_252A[0] == self) {
     _id_77C0(var_0._id_252A[0].name, var_0._id_252A[1].name, "loss");
@@ -934,8 +934,8 @@ _id_4AA8(var_0, var_1, var_2, var_3) {
       thread maps\mp\gametypes\_missions::processchallenge("ch_hq_1v1");
       var_9 = self getplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "num1v1Wins") + 1;
       self setplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "num1v1Wins", var_9);
-      _id_04E0::_id_84DE(["hubFeatureStats", "hub1v1", "numHub1v1Wins"], var_9);
-      _id_04E0::_id_83DC("numHub1v1Wins", "hub1v1", 1, undefined, undefined);
+      _id_04E0::isusingoffhand(["hubFeatureStats", "hub1v1", "numHub1v1Wins"], var_9);
+      _id_04E0::pushplayervector("numHub1v1Wins", "hub1v1", 1, undefined, undefined);
       var_4 = level._id_4F38._id_AA45[level._id_66A3];
 
       if(isDefined(var_2) && var_2)
@@ -947,9 +947,9 @@ _id_4AA8(var_0, var_1, var_2, var_3) {
     case "loss":
       var_9 = self getplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "num1v1Losses") + 1;
       self setplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "num1v1Losses", var_9);
-      _id_04E0::_id_84DE(["hubFeatureStats", "hub1v1", "numHub1v1Losses"], var_9);
+      _id_04E0::isusingoffhand(["hubFeatureStats", "hub1v1", "numHub1v1Losses"], var_9);
       _id_0468::_id_0A1C("lose", self._id_0F58._id_01D6);
-      _id_04E0::_id_83DC("numHub1v1Losses", "hub1v1", 1, undefined, undefined);
+      _id_04E0::pushplayervector("numHub1v1Losses", "hub1v1", 1, undefined, undefined);
       var_4 = level._id_4F38._id_5F1A[level._id_66A2];
       break;
     case "tie":
@@ -972,10 +972,10 @@ _id_4AA8(var_0, var_1, var_2, var_3) {
     _id_04E0::_id_5E88("hq_1v1_match", "hq_1v1", var_10, ["match_id", 0, "kills", self._id_2923, "winloss", var_0]);
     var_9 = self getplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "num1v1Matches") + 1;
     self setplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "num1v1Matches", var_9);
-    _id_04E0::_id_84DE(["hubFeatureStats", "hub1v1", "numHub1v1Matches"], var_9);
+    _id_04E0::isusingoffhand(["hubFeatureStats", "hub1v1", "numHub1v1Matches"], var_9);
   }
 
-  _id_04E0::_id_83DC("numHub1v1Matches", "hub1v1", 1, var_10, undefined);
+  _id_04E0::pushplayervector("numHub1v1Matches", "hub1v1", 1, var_10, undefined);
   _id_4AA5(var_0, var_1);
   _id_38EE(var_4);
 
@@ -985,11 +985,11 @@ _id_4AA8(var_0, var_1, var_2, var_3) {
     var_1 notify("1v1match_ended");
   }
 
-  self _meth_82FF("ui_onevone_opponent_client_num", -1);
+  self setclientomnvar("ui_onevone_opponent_client_num", -1);
 
   if(var_0 == "win") {
     var_1.curchampclientnum = self getentitynumber();
-    _func_032("ui_one_v_one_champion_clientNum", var_1.curchampclientnum);
+    _setomnvar("ui_one_v_one_champion_clientNum", var_1.curchampclientnum);
     thread _id_09FB(self, 1);
   } else if(var_0 == "tie")
     thread _id_21E0();
@@ -1002,18 +1002,18 @@ _id_4AA5(var_0, var_1) {
   while(!maps\mp\_utility::isreallyalive(self))
     waitframe();
 
-  self _meth_84C0(1);
+  self setdemigod(1);
   var_2 = [];
   var_2["win"] = 1;
   var_2["loss"] = -1;
   var_2["draw"] = 0;
   self _meth_866C(&"ui_end_hub_1v1", 5, self._id_2923, self._id_0F58._id_2923, self getentitynumber(), self._id_0F58 getentitynumber(), var_2[var_0]);
   self _meth_8546(0);
-  self _meth_8305(0);
-  self _meth_8113(0);
-  self _meth_8114(0);
+  self allowjump(0);
+  self allowcrouch(0);
+  self allowprone(0);
   self _meth_85BF(0);
-  self _meth_8307(0);
+  self allowmantle(0);
   waitframe();
   _id_04E0::_id_7446();
   _id_04E0::_id_3663();
@@ -1025,7 +1025,7 @@ _id_4AA5(var_0, var_1) {
       thread _id_75DE("win", var_1);
       break;
     case "loss":
-      self _meth_808C();
+      self dontinterpolate();
 
       if(isDefined(self._id_5B8F))
         _id_04E0::_id_8698(self._id_5B8F);
@@ -1045,10 +1045,10 @@ _id_4AA5(var_0, var_1) {
     waitframe();
 
   self _meth_8546(1);
-  self _meth_8305(1);
-  self _meth_8113(1);
-  self _meth_8114(1);
-  self _meth_84C0(0);
+  self allowjump(1);
+  self allowcrouch(1);
+  self allowprone(1);
+  self setdemigod(0);
   self notify("cancelEmoteGodMode");
 }
 
@@ -1060,9 +1060,9 @@ _id_237A() {
     return;
   }
   self notify("1v1_ended");
-  self _meth_82FF("ui_hide_1v1scores", 1);
-  self _meth_82FF("ui_hub_in_1v1", 0);
-  self _meth_82FF("ui_party_manipulation_enabled", 1);
+  self setclientomnvar("ui_hide_1v1scores", 1);
+  self setclientomnvar("ui_hub_in_1v1", 0);
+  self setclientomnvar("ui_party_manipulation_enabled", 1);
   self _meth_85EF(&"end_hub_1v1", 0);
   _id_1C86();
   self._id_2923 = 0;
@@ -1080,12 +1080,12 @@ _id_237A() {
   _id_04E0::_id_8BEB();
   self._id_572A = 0;
   _id_04E0::_id_870B(0);
-  self _meth_8114(0);
-  self _meth_812B(0);
+  self allowprone(0);
+  self allowfire(0);
   maps\mp\_utility::freezecontrolswrapper(0);
   self _meth_85BE(0);
-  self _meth_812A(0);
-  self _meth_8307(1);
+  self allowmelee(0);
+  self allowmantle(1);
   self._id_1388 = 0;
 
   if(isDefined(self._id_9A9A))
@@ -1094,7 +1094,7 @@ _id_237A() {
   _id_04E0::_id_7E4E(1);
   _id_04E0::_id_7E4F(0);
   waitframe();
-  self _meth_831B("emote_weapon_mp");
+  self switchtoweaponimmediate("emote_weapon_mp");
 }
 
 _id_9086(var_0, var_1) {
@@ -1103,8 +1103,8 @@ _id_9086(var_0, var_1) {
 
   var_1._id_252A[0] _id_04E0::_id_7D1D(1);
   var_1._id_252A[1] _id_04E0::_id_7D1D(1);
-  self setOrigin(_func_236(var_0.origin), 1);
-  self _meth_833E(var_0.angles);
+  self setOrigin(_droptoground(var_0.origin), 1);
+  self setplayerangles(var_0.angles);
 }
 
 _id_92B7() {
@@ -1113,7 +1113,7 @@ _id_92B7() {
   self._id_252A[0] endon("disconnect");
   self._id_252A[1] endon("disconnect");
   self._id_9A04 = 0;
-  _func_032("ui_hub_1v1_timer", gettime() + 60000);
+  _setomnvar("ui_hub_1v1_timer", gettime() + 60000);
   self._id_252A[0] _meth_85EF(&"begin_hub_1v1", 0);
   self._id_252A[1] _meth_85EF(&"begin_hub_1v1", 0);
 
@@ -1218,7 +1218,7 @@ _id_38EE(var_0) {
     return;
   }
   _id_04E0::_id_8698(var_0.origin);
-  self _meth_833E(var_0.angles);
+  self setplayerangles(var_0.angles);
   self _meth_801C();
   _id_237A();
 }
@@ -1231,12 +1231,12 @@ _id_6FB8(var_0, var_1) {
       if(isDefined(var_1) && var_1)
         return common_scripts\utility::random(var_0._id_2922._id_180D);
 
-      var_2 = _func_1AC(var_0._id_2922._id_0F59, var_0._id_2922._id_252A[1].origin, 3000);
+      var_2 = _sortbydistance(var_0._id_2922._id_0F59, var_0._id_2922._id_252A[1].origin, 3000);
     } else if(var_0 == var_0._id_2922._id_252A[1]) {
       if(isDefined(var_1) && var_1)
         return common_scripts\utility::random(var_0._id_2922._id_7B72);
 
-      var_2 = _func_1AC(var_0._id_2922._id_0F59, var_0._id_2922._id_252A[0].origin, 3000);
+      var_2 = _sortbydistance(var_0._id_2922._id_0F59, var_0._id_2922._id_252A[0].origin, 3000);
     }
 
     if(var_2.size < 1)
@@ -1295,7 +1295,7 @@ _id_75DE(var_0, var_1) {
 
 _id_35AC() {
   level endon("game_ended");
-  level._id_6B2B = _func_18E("trigger_onevone", "targetname");
+  level._id_6B2B = _getent("trigger_onevone", "targetname");
 
   if(!isDefined(level._id_6B2B)) {
     return;
@@ -1313,23 +1313,23 @@ _id_35AC() {
       if(!var_1) {
         var_5 = common_scripts\utility::random(level._id_4F38._id_7A48);
         var_0 _id_04E0::_id_8698(var_5.origin);
-        var_0 _meth_833E(var_5.angles);
+        var_0 setplayerangles(var_5.angles);
       }
     }
   }
 }
 
 _id_7475() {
-  self _meth_82E1("exitSpectateCam", "+stance");
-  self _meth_81E2(level._id_90E0, "tag_player");
+  self notifyonplayercommand("exitSpectateCam", "+stance");
+  self cameralinkto(level._id_90E0, "tag_player");
   self setclientdvar("cg_fov", 85);
   _id_04E0::_id_73E5(1);
   self._id_57E0 = 1;
   _id_04E0::_id_870B(1);
-  common_scripts\utility::_id_A715("exitSpectateCam", "forceLeave1v1Spectate");
+  common_scripts\utility::waittill_any_return("exitSpectateCam", "forceLeave1v1Spectate");
   _id_04E0::_id_73E5(0);
-  self _meth_84A7("exitSpectateCam", "+stance");
-  self _meth_81E3();
+  self notifyonplayercommandremove("exitSpectateCam", "+stance");
+  self cameraunlink();
   self setclientdvar("cg_fov", level._id_4F4A);
   self._id_57E0 = 0;
   _id_04E0::_id_870B(0);

@@ -17,8 +17,8 @@ onplayerspawned() {
 
 setplayerlightset() {
   wait 0.5;
-  self _meth_806B(0.65, 1.7, 1.2, 1.2, 0);
-  self _meth_83C6("mp_zombie_house_bright");
+  self digitaldistortsetparams(0.65, 1.7, 1.2, 1.2, 0);
+  self lightsetforplayer("mp_zombie_house_bright");
 }
 
 _id_84F8() {
@@ -57,7 +57,7 @@ _id_6504(var_0, var_1) {
   }
 }
 
-_id_80E4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+nightvisiongogglesforceon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = newhudelem();
   var_8.x = 0;
   var_8.y = 0;
@@ -80,7 +80,7 @@ _id_80E4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_7))
     var_8.sort = var_7;
 
-  if(_func_0C0(var_1)) {
+  if(_isarray(var_1)) {
     foreach(var_10 in var_1)
     var_8 setshader(var_10, 640, 480);
   } else

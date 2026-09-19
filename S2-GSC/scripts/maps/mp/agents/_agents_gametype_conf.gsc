@@ -26,7 +26,7 @@ _id_0A48() {
   if(gettime() > self._id_66B7) {
     self._id_66B7 = gettime() + 500;
     var_0 = 0.78;
-    var_1 = self._id_0117 _meth_838A();
+    var_1 = self._id_0117 getnearestnode();
 
     if(isDefined(var_1)) {
       var_2 = self._id_0117 maps\mp\bots\_bots_gametype_conf::_id_19D1(1, var_1, var_0);
@@ -41,12 +41,12 @@ _id_0A48() {
     if(!isDefined(self._id_95A8) || distancesquared(var_3._id_28D4, self._id_95A8._id_28D4) > 1) {
       self._id_95A8 = var_3;
       maps\mp\bots\_bots_strategy::_id_19A3();
-      self _meth_8356(self._id_95A8._id_28D4, 0, "objective", undefined, level._id_1AF6);
+      self botsetscriptgoal(self._id_95A8._id_28D4, 0, "objective", undefined, level._id_1AF6);
     }
 
     return 1;
   } else if(isDefined(self._id_95A8)) {
-    self _meth_8358();
+    self botclearscriptgoal();
     self._id_95A8 = undefined;
   }
 

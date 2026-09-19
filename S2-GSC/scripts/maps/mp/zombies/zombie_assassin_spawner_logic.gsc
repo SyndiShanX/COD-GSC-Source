@@ -20,8 +20,8 @@ spawn_an_assassin(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   var_12 thread cool_down();
   var_13 = _id_054D::_id_90BA("zombie_assassin", var_12, "assassin_spawn", 0, 1, 0, var_10);
 
-  if(!isDefined(var_13._id_9024) && isDefined(var_12._id_819A))
-    var_13._id_9024 = var_12._id_819A;
+  if(!isDefined(var_13._id_9024) && isDefined(var_12.getnegotiationnextnode))
+    var_13._id_9024 = var_12.getnegotiationnextnode;
 
   if(isDefined(var_11))
     var_13.forcedzones = var_11;
@@ -53,7 +53,7 @@ spawn_an_assassin(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   } else {}
 
   if(common_scripts\utility::_id_562E(var_3))
-    var_13 _id_0547::_id_84CB();
+    var_13 _id_0547::disableoffhandsecondaryweapons();
 
   var_13.previoushole = var_12;
   var_13.lastassassinspawner = var_12;
@@ -72,7 +72,7 @@ cool_down() {
 wait_for_activation() {
   waitframe();
   self.assassin_spawn_activated = 0;
-  common_scripts\utility::_id_3C9F(self._id_819A);
+  common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
   self.assassin_spawn_activated = 1;
 }
 
@@ -82,7 +82,7 @@ get_valid_assassin_spawner(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = undefined;
 
     foreach(var_9 in level.players) {
-      if(!isalive(var_9) || common_scripts\utility::_id_562E(var_9._id_5378)) {
+      if(!isalive(var_9) || common_scripts\utility::_id_562E(var_9.inlaststand)) {
         continue;
       }
       var_6 = common_scripts\utility::_id_0F6F(var_6, var_9);
@@ -102,25 +102,25 @@ get_valid_assassin_spawner(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isDefined(var_4) && common_scripts\utility::_id_0F79(var_4, var_14)) {
       continue;
     }
-    if(!issubstr(var_14._id_8260, "spawn")) {
+    if(!issubstr(var_14.setlookatent, "spawn")) {
       continue;
     }
-    if(issubstr(var_14._id_8260, "disable")) {
+    if(issubstr(var_14.setlookatent, "disable")) {
       continue;
     }
-    if(issubstr(var_14._id_8260, "respawn_only") && !common_scripts\utility::_id_562E(var_5)) {
+    if(issubstr(var_14.setlookatent, "respawn_only") && !common_scripts\utility::_id_562E(var_5)) {
       continue;
     }
-    if(common_scripts\utility::_id_562E(var_1) && !issubstr(var_14._id_8260, "boss")) {
+    if(common_scripts\utility::_id_562E(var_1) && !issubstr(var_14.setlookatent, "boss")) {
       continue;
     }
-    if(common_scripts\utility::_id_562E(var_1) && issubstr(var_14._id_8260, "boss_late")) {
+    if(common_scripts\utility::_id_562E(var_1) && issubstr(var_14.setlookatent, "boss_late")) {
       continue;
     }
     if(common_scripts\utility::_id_562E(var_3) && common_scripts\utility::_id_562E(var_1) && common_scripts\utility::_id_562E(var_14.isassassincooling)) {
       continue;
     }
-    if(common_scripts\utility::_id_562E(var_14.assassin_spawn_activated) || _id_0547::_id_5565(var_14._id_819A, "start_zone"))
+    if(common_scripts\utility::_id_562E(var_14.assassin_spawn_activated) || _id_0547::_id_5565(var_14.getnegotiationnextnode, "start_zone"))
       var_11 = common_scripts\utility::_id_0F6F(var_11, var_14);
   }
 
@@ -146,15 +146,15 @@ get_valid_assassin_exit_points(var_0) {
 
   while(var_2.size == 0) {
     foreach(var_6 in var_1) {
-      if(!issubstr(var_6._id_8260, "exit")) {
+      if(!issubstr(var_6.setlookatent, "exit")) {
         if(common_scripts\utility::_id_562E(var_0)) {
-          if(!issubstr(var_6._id_8260, "hc_escape"))
+          if(!issubstr(var_6.setlookatent, "hc_escape"))
             continue;
         } else
           continue;
       }
 
-      if(issubstr(var_6._id_8260, "disable")) {
+      if(issubstr(var_6.setlookatent, "disable")) {
         continue;
       }
       if(common_scripts\utility::_id_562E(var_6.isassassincooling)) {
@@ -163,10 +163,10 @@ get_valid_assassin_exit_points(var_0) {
       if(_id_0547::_id_5565(self.previoushole, var_6) && distance(self.origin, self.previoushole.origin) < 512) {
         continue;
       }
-      if(!_id_055A::_id_586A(var_6._id_819A)) {
+      if(!_id_055A::_id_586A(var_6.getnegotiationnextnode)) {
         continue;
       }
-      if(isDefined(var_4) && !common_scripts\utility::_id_0F79(var_4, var_6._id_819A)) {
+      if(isDefined(var_4) && !common_scripts\utility::_id_0F79(var_4, var_6.getnegotiationnextnode)) {
         continue;
       }
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_6);
@@ -195,7 +195,7 @@ seek_exit_that_maintains_momentum(var_0) {
     var_4 = _id_055A::getadjacentzones(var_5);
 
   foreach(var_7 in var_1) {
-    var_8 = var_7._id_819A;
+    var_8 = var_7.getnegotiationnextnode;
 
     if(_id_0547::_id_5565(var_5, var_8)) {
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_7);
@@ -230,7 +230,7 @@ killassassinzombie() {
   if(maps\mp\zombies\zombie_assassin::is_boss_assassin())
     self suicide();
   else
-    self _meth_8059(self.health + 500000, self.origin);
+    self dodamage(self.health + 500000, self.origin);
 }
 
 respawnanassassinzombie() {
@@ -290,13 +290,13 @@ set_new_assassin_origin(var_0) {
 
   var_2 = spawn("script_model", self.origin);
   var_2 setModel("tag_origin");
-  self _meth_8055(var_2);
+  self linkto(var_2);
   var_2 thread _id_0547::_id_2D19(self);
 
   while(!_id_053C::humanoid_has_valid_targets(1))
     waitframe();
 
-  self _meth_8057();
+  self unlink();
   self setOrigin(var_1.origin);
 
   if(isDefined(var_2))
@@ -307,18 +307,18 @@ set_new_assassin_origin(var_0) {
 
   self.previoushole = var_1;
   set_assassin_has_teleported();
-  _func_147(common_scripts\utility::_id_44F5("zmb_isl_assassin_spawn_wisp01"), self, "TAG_ORIGIN");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_isl_assassin_spawn_wisp01"), self, "TAG_ORIGIN");
   self.assassinmustleave = undefined;
   thread restore_assassin_ability(6);
 
-  if(_id_0547::_id_5565(var_1._id_8109, "spawn_riser")) {
-    self _meth_83A2(1);
+  if(_id_0547::_id_5565(var_1.setflaggedanimknoball, "spawn_riser")) {
+    self scragentsetscripted(1);
     var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("spawn_riser");
     var_4 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_3);
-    self _meth_839C("anim deltas");
-    self _meth_839B("face angle abs", self.angles);
+    self scragentsetanimmode("anim deltas");
+    self scragentsetorientmode("face angle abs", self.angles);
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_3, var_4, 1.0, "spawn_riser");
-    self _meth_83A2(0);
+    self scragentsetscripted(0);
   }
 }
 
@@ -369,10 +369,10 @@ get_ideal_spawner_near_origin(var_0, var_1, var_2) {
     var_3 = common_scripts\utility::array_randomize(var_0);
 
   foreach(var_9 in var_3) {
-    var_10 = var_9._id_819A;
+    var_10 = var_9.getnegotiationnextnode;
 
     if(isDefined(var_2)) {
-      if(common_scripts\utility::_id_0F79(var_2, var_9._id_819A) && !common_scripts\utility::_id_562E(var_9.isassassincooling))
+      if(common_scripts\utility::_id_0F79(var_2, var_9.getnegotiationnextnode) && !common_scripts\utility::_id_562E(var_9.isassassincooling))
         var_5 = common_scripts\utility::_id_0F6F(var_5, var_9);
 
       continue;
@@ -409,7 +409,7 @@ get_ideal_spawner_near_player(var_0, var_1, var_2) {
         if(common_scripts\utility::_id_562E(var_5.recentspawn)) {
           continue;
         }
-        if(var_5._id_819A == var_10)
+        if(var_5.getnegotiationnextnode == var_10)
           return var_5;
       }
 
@@ -417,7 +417,7 @@ get_ideal_spawner_near_player(var_0, var_1, var_2) {
     }
 
     for(var_12 = 0; var_12 < 3; var_12++) {
-      var_13 = var_5._id_819A;
+      var_13 = var_5.getnegotiationnextnode;
 
       if(var_12 == 0) {
         if(!_id_055A::_id_7413(var_0, var_13)) {
@@ -434,7 +434,7 @@ get_ideal_spawner_near_player(var_0, var_1, var_2) {
         foreach(var_10 in var_15) {
           var_8 = common_scripts\utility::_id_0F6F(var_8, var_10._id_AC8A);
 
-          if(var_5._id_819A == var_10._id_AC8A)
+          if(var_5.getnegotiationnextnode == var_10._id_AC8A)
             return var_5;
         }
 

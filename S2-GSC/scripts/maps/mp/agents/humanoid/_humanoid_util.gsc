@@ -15,7 +15,7 @@ _id_1F51(var_0, var_1, var_2) {
   if(isDefined(self._id_64AB))
     var_6 = 0;
 
-  return _func_293(var_4, self.radius, self._id_00BD - var_2, self, var_6, 0, 0, var_5);
+  return _capsuletracepassed(var_4, self.radius, self._id_00BD - var_2, self, var_6, 0, 0, var_5);
 }
 
 _id_45C6() {
@@ -65,12 +65,12 @@ _id_45DC(var_0) {
       if(isDefined(var_2))
         var_1 = var_2.origin;
     }
-  } else if(isPlayer(var_0) && (var_0 _meth_83B8() || var_0 _meth_83B9())) {
+  } else if(isPlayer(var_0) && (var_0 isjumping() || var_0 ishighjumping())) {
     if(!isDefined(var_0._id_73F1))
       var_0._id_73F1 = 0;
 
     if(gettime() > var_0._id_73F1) {
-      var_0._id_73F0 = _func_082(var_0.origin, 15);
+      var_0._id_73F0 = _getgroundposition(var_0.origin, 15);
       var_0._id_73F1 = gettime();
     }
 
@@ -94,10 +94,10 @@ _id_4BA3(var_0, var_1) {
 }
 
 _id_1E52() {
-  var_0 = self _meth_838A();
+  var_0 = self getnearestnode();
 
   if(isDefined(var_0)) {
-    var_1 = _func_2B7(var_0);
+    var_1 = _nodegetsplitgroup(var_0);
 
     if(!isDefined(self._id_3043._id_663C))
       self._id_3043._id_663C = [];
@@ -110,15 +110,15 @@ _id_1E52() {
       var_6 = [];
 
       if(isDefined(level._id_663D))
-        var_6 = _func_0B9(self._id_3043._id_4883, var_3, var_2, level._id_663D);
+        var_6 = _getnodesinradiussorted(self._id_3043._id_4883, var_3, var_2, level._id_663D);
       else
-        var_6 = _func_0B9(self._id_3043._id_4883, var_3, var_2);
+        var_6 = _getnodesinradiussorted(self._id_3043._id_4883, var_3, var_2);
 
       var_7 = undefined;
 
       foreach(var_9 in var_6) {
-        if(_func_2B7(var_9) == var_1) {
-          if(!isDefined(var_7) || _func_1F4(var_9, var_7, 1)) {
+        if(_nodegetsplitgroup(var_9) == var_1) {
+          if(!isDefined(var_7) || _nodesvisible(var_9, var_7, 1)) {
             var_4 = var_9;
             break;
           } else if(!isDefined(var_5))
@@ -139,10 +139,10 @@ _id_1E52() {
 }
 
 _id_4B59() {
-  var_0 = self _meth_838A();
+  var_0 = self getnearestnode();
 
   if(isDefined(var_0) && isDefined(self._id_3043._id_663C)) {
-    var_1 = self._id_3043._id_663C[_func_2B7(var_0)];
+    var_1 = self._id_3043._id_663C[_nodegetsplitgroup(var_0)];
 
     if(isDefined(var_1))
       return 1;
@@ -152,10 +152,10 @@ _id_4B59() {
 }
 
 _id_459E() {
-  var_0 = self _meth_838A();
-  var_1 = self._id_3043._id_663C[_func_2B7(var_0)];
+  var_0 = self getnearestnode();
+  var_1 = self._id_3043._id_663C[_nodegetsplitgroup(var_0)];
 
-  if(!_func_2A2(var_1))
+  if(!_isnumber(var_1))
     return var_1;
   else
     return undefined;
@@ -186,7 +186,7 @@ _id_4583(var_0, var_1) {
   var_2 = var_0 _id_4582(self._id_60F5);
   var_4 = var_1;
   var_5 = self.origin - var_4;
-  var_6 = _func_0E5(var_5);
+  var_6 = _lengthsquared(var_5);
 
   if(var_6 < 256) {
     var_7 = -1;
@@ -203,7 +203,7 @@ _id_4583(var_0, var_1) {
 
     var_10 = var_7;
   } else {
-    var_11 = _func_0DD(_func_109(var_5)) + 180.0;
+    var_11 = _angleclamp180(_vectortoyaw(var_5)) + 180.0;
     var_10 = var_11 / _id_457C();
     var_7 = int(var_10 + 0.5);
   }
@@ -250,13 +250,13 @@ _id_4583(var_0, var_1) {
         if(!isalive(var_9._id_230B) || !isDefined(var_9._id_230B._id_28D2) || var_9._id_230B._id_28D2 != var_0 || var_9._id_230B == self || var_6 < var_20) {
           if(isDefined(var_9._id_230B) && var_9._id_230B != self) {
             var_9._id_230B notify("lostSectorClaim");
-            var_9._id_230B._id_836C = undefined;
+            var_9._id_230B.botsetdifficulty = undefined;
           }
 
-          if(isDefined(self._id_836C) && self._id_836C != var_9)
-            self._id_836C._id_230B = undefined;
+          if(isDefined(self.botsetdifficulty) && self.botsetdifficulty != var_9)
+            self.botsetdifficulty._id_230B = undefined;
 
-          self._id_836C = var_9;
+          self.botsetdifficulty = var_9;
           var_9._id_230B = self;
           var_12 = var_9.origin;
           thread _id_63DD(var_9);
@@ -295,12 +295,12 @@ _id_34AB(var_0, var_1, var_2, var_3) {
 
   var_4 = var_0 + (0, 0, var_3);
   var_5 = var_0 + (0, 0, var_3 * -1);
-  var_6 = self _meth_83EB(var_4, var_5, var_1, var_2, 1);
+  var_6 = self aiphysicstrace(var_4, var_5, var_1, var_2, 1);
 
-  if(_func_0AE(var_6[2] - var_4[2]) < 0.1)
+  if(_abs(var_6[2] - var_4[2]) < 0.1)
     return undefined;
 
-  if(_func_0AE(var_6[2] - var_5[2]) < 0.1)
+  if(_abs(var_6[2] - var_5[2]) < 0.1)
     return undefined;
 
   return var_6;
@@ -331,7 +331,7 @@ _id_5F4E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self._id_5F44 = isDefined(var_5) && var_5;
   self._id_5F49 = var_6;
   self._id_5F4F = var_2;
-  self._id_5F50 = _func_0DA(self._id_5F4F);
+  self._id_5F50 = _squared(self._id_5F4F);
   _id_0547::_id_86C7(var_1);
 }
 
@@ -389,9 +389,9 @@ _id_5C5B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self._id_5C4F = var_1 * 1000.0;
   self._id_5C4E = var_2;
   self._id_5C57 = var_3;
-  self._id_5C58 = _func_0DA(self._id_5C57);
+  self._id_5C58 = _squared(self._id_5C57);
   self._id_5C59 = var_4;
-  self._id_5C5A = _func_0DA(self._id_5C59);
+  self._id_5C5A = _squared(self._id_5C59);
   self._id_5C54 = var_6;
   self._id_5C4D = var_5;
   self._id_5C55 = 0;
@@ -419,31 +419,31 @@ _id_5C51() {
 
 _id_20C3(var_0, var_1) {
   self endon("death");
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ChangeAnimClass");
   self._id_5381 = 1;
-  self _meth_839B("face angle abs", (0, self.angles[1], 0));
-  self _meth_839C("anim deltas");
-  self _meth_839A(1, 1);
+  self scragentsetorientmode("face angle abs", (0, self.angles[1], 0));
+  self scragentsetanimmode("anim deltas");
+  self scragentsetanimscale(1, 1);
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FD(var_2, var_3, "change_anim_class");
-  self _meth_83D5(var_0);
+  self setanimclass(var_0);
   _id_A18C();
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ChangeAnimClass");
   self._id_5381 = 0;
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 }
 
 _id_20C4(var_0) {
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ChangeAnimClass");
   self._id_5381 = 0;
-  self _meth_83A2(0);
-  self _meth_83D5(var_0);
+  self scragentsetscripted(0);
+  self setanimclass(var_0);
   _id_A18C();
   var_1 = "idle_noncombat";
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_2);
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2);
 }
 
 _id_A18C() {
@@ -470,7 +470,7 @@ _id_A18C() {
   }
 }
 
-_id_8318(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+getcurrentoffhand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   self endon("death");
   self endon("ScriptedAnimationInterrupt");
 
@@ -490,31 +490,31 @@ _id_8318(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_11 = common_scripts\utility::_id_0F73(var_11, [self, var_9]);
   }
 
-  var_12 = self _meth_83DB(var_2);
+  var_12 = self getanimentrycount(var_2);
   var_4 = isDefined(var_4) && var_4;
 
   if(isDefined(var_12) && var_12 > 0) {
-    self _meth_83A2(1);
+    self scragentsetscripted(1);
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ScriptedAnimation");
 
     if(var_4)
       self._id_53D9 = 1;
 
-    self _meth_839C("anim deltas");
-    self _meth_839B("face angle abs", var_1);
-    self _meth_839A(1, 1);
+    self scragentsetanimmode("anim deltas");
+    self scragentsetorientmode("face angle abs", var_1);
+    self scragentsetanimscale(1, 1);
     var_13 = "noclip";
 
     if(isDefined(var_10) && isDefined(var_10["physMode"]))
       var_13 = var_10["physMode"];
 
-    self _meth_839D(var_13);
+    self scragentsetphysicsmode(var_13);
     var_14 = undefined;
 
     if(!isDefined(var_3))
       var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
     else if(isDefined(var_10) && isDefined(var_10["timeOffset"]))
-      var_14 = _func_0AD(var_10["timeOffset"]);
+      var_14 = _float(var_10["timeOffset"]);
 
     if(!var_6)
       _id_5CA6(var_2, var_3);
@@ -523,8 +523,8 @@ _id_8318(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     self.angles = var_1;
 
     if(var_7) {
-      maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_2, var_3, 1, var_14);
-      common_scripts\utility::_id_8133(common_scripts\utility::_id_A70E, var_11);
+      maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2, var_3, 1, var_14);
+      common_scripts\utility::maketurretinoperable(common_scripts\utility::_id_A70E, var_11);
     } else {
       var_15 = "end";
 
@@ -538,22 +538,22 @@ _id_8318(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
     if(var_4) {
       self._id_53D9 = undefined;
-      _id_0547::_id_84CB();
+      _id_0547::disableoffhandsecondaryweapons();
     }
 
-    self _meth_83A2(0);
+    self scragentsetscripted(0);
   }
 }
 
 _id_5429() {
   self notify("ScriptedAnimationInterrupt");
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ScriptedAnimationInterrupt");
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 }
 
 _id_5CA6(var_0, var_1) {
   var_2 = 2;
-  var_3 = self _meth_83D8(var_0, var_1);
+  var_3 = self getanimentry(var_0, var_1);
   var_4 = _id_4552(var_3);
   var_5 = _id_462E(var_3, var_4);
   var_6 = _id_4718(var_3);
@@ -565,36 +565,36 @@ _id_4718(var_0) {
   var_1 = 50;
   var_2 = 32;
   var_3 = 72;
-  var_4 = _func_083(var_0);
-  var_4 = _func_112(var_4, self.angles);
+  var_4 = _getmovedelta(var_0);
+  var_4 = _rotatevector(var_4, self.angles);
   var_5 = self.origin + var_4;
   var_6 = (0, 0, var_1);
-  var_7 = self _meth_83EB(var_5 + var_6, var_5 - var_6, var_2, var_3);
+  var_7 = self aiphysicstrace(var_5 + var_6, var_5 - var_6, var_2, var_3);
   var_8 = var_7 - var_5;
   return var_8[2];
 }
 
 _id_462E(var_0, var_1) {
-  var_2 = _func_065(var_0);
+  var_2 = _getanimlength(var_0);
   var_3 = var_1 / var_2;
-  var_4 = _func_083(var_0, 0, var_3);
-  var_5 = _func_112(var_4, self.angles);
+  var_4 = _getmovedelta(var_0, 0, var_3);
+  var_5 = _rotatevector(var_4, self.angles);
   return self.origin + var_5;
 }
 
 _id_4552(var_0) {
   var_1 = 0.2;
-  var_2 = _func_065(var_0);
-  return _func_0AF(var_1, var_2);
+  var_2 = _getanimlength(var_0);
+  return _min(var_1, var_2);
 }
 
 _id_6F54(var_0, var_1) {
   self endon("death");
   self endon("killanimscript");
   level endon("game_ended");
-  self _meth_83A4(self.origin, var_0, var_1);
+  self scragentdoanimlerp(self.origin, var_0, var_1);
   wait(var_1);
-  self _meth_839C("anim deltas");
+  self scragentsetanimmode("anim deltas");
 }
 
 _id_45F8(var_0, var_1) {
@@ -625,9 +625,9 @@ _id_56DD(var_0) {
     return 0;
 
   if(isPlayer(var_0)) {
-    var_3 = var_0 _meth_833D()[2];
+    var_3 = var_0 getvelocity()[2];
 
-    if(_func_0AE(var_3) > 12)
+    if(_abs(var_3) > 12)
       return 0;
   }
 
@@ -639,7 +639,7 @@ _id_56DD(var_0) {
   var_5 = self.radius + var_4;
   var_5 = var_5 * var_5;
 
-  if(_func_211(self.origin, var_0.origin) > var_5)
+  if(_distance2dsquared(self.origin, var_0.origin) > var_5)
     return 0;
 
   return 1;
@@ -647,7 +647,7 @@ _id_56DD(var_0) {
 
 _id_867E(var_0) {
   self._id_0094 = var_0;
-  self _meth_8548(var_0);
+  self agentsetfavoriteenemy(var_0);
 }
 
 _id_29CB(var_0, var_1) {
@@ -694,11 +694,11 @@ _id_4B31() {
 }
 
 _id_362D() {
-  self _meth_8538(1);
+  self scragentallowboost(1);
 }
 
 _id_2F45() {
-  self _meth_8538(0);
+  self scragentallowboost(0);
 }
 
 _id_8859() {
@@ -727,7 +727,7 @@ _id_70C9(var_0) {
     return;
   }
   if(self._id_1919 != "no_boost_fx")
-    _func_147(var_0, self, self._id_1919);
+    _playfxontag(var_0, self, self._id_1919);
 }
 
 _id_3B85(var_0) {
@@ -779,15 +779,15 @@ _id_AA52(var_0) {
 
   var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1;
 
-  if(!var_1 && (isPlayer(var_0) || _func_1EF(var_0))) {
-    var_2 = var_0 _meth_8551();
+  if(!var_1 && (isPlayer(var_0) || _isagent(var_0))) {
+    var_2 = var_0 getgroundentity();
 
     if(isDefined(var_2) && isDefined(var_2.targetname) && var_2.targetname == "care_package")
       var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1 * 4;
   }
 
   if(!var_1 && isPlayer(var_0) && common_scripts\utility::_id_562E(var_0._id_571F)) {
-    if(length(self _meth_833D()) < 5)
+    if(length(self getvelocity()) < 5)
       var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1 * 4;
   }
 

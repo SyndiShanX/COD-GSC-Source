@@ -14,7 +14,7 @@ _id_4766() {
   if(common_scripts\utility::_id_562E(self._id_4B72)) {
     return;
   }
-  _id_0555::_id_83DD("jitb", self);
+  _id_0555::issprinting("jitb", self);
   self._id_4B72 = 1;
   thread _id_73F3();
   self setoffhandsecondaryclass("jack_in_box_decoy_zm");
@@ -62,12 +62,12 @@ _id_737D(var_0, var_1, var_2) {
       return;
     }
 
-    var_0 _meth_805C();
+    var_0 hide();
     var_3 = spawn("script_model", var_0.origin);
     var_3 setModel("vm_zom_jack_in_the_box");
-    var_3 _meth_8055(var_0, "tag_weapon", (0, 0, 0), (0, 90, 0));
-    var_3 _meth_8276("va_jackinbox_box_close_idle");
-    var_3 _meth_82C2();
+    var_3 linkto(var_0, "tag_weapon", (0, 0, 0), (0, 90, 0));
+    var_3 scriptmodelplayanim("va_jackinbox_box_close_idle");
+    var_3 notsolid();
     var_3.origin = var_0.origin;
     var_3 thread _id_2E63(var_0, self, var_1, var_2);
   }
@@ -105,17 +105,17 @@ _id_2E63(var_0, var_1, var_2, var_3) {
   else
     wait 7;
 
-  self _meth_8277();
-  _func_147(common_scripts\utility::_id_44F5("jack_fuse"), self, "wick_02");
+  self scriptmodelclearanim();
+  _playfxontag(common_scripts\utility::_id_44F5("jack_fuse"), self, "wick_02");
   _id_0378::_id_8D74("aud_jack_open");
-  self _meth_8276("va_jackinbox_box_open");
+  self scriptmodelplayanim("va_jackinbox_box_open");
   wait 1;
   playFX(common_scripts\utility::_id_44F5("jack_detonate"), self.origin);
   _id_0378::_id_8D74("aud_jack_in_box_explode");
 
   foreach(var_10 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
     if(isDefined(var_10) && distance(var_10.origin, self.origin) < 128) {
-      var_10 _meth_8059(var_4, self.origin, var_1, self, "MOD_GRENADE", "jack_in_box_decoy_zm");
+      var_10 dodamage(var_4, self.origin, var_1, self, "MOD_GRENADE", "jack_in_box_decoy_zm");
 
       if(isPlayer(var_1) && isalive(var_1) && !_id_0547::_id_577E(var_1))
         var_1 maps\mp\gametypes\zombies::_id_4798(50);

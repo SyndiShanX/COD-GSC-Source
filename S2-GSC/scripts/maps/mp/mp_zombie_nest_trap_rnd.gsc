@@ -119,9 +119,9 @@ _id_9048() {
 
 _id_A10B(var_0) {
   if(_id_0547::_id_580A())
-    self _meth_8059(var_0._id_29D5 * 0.25, self.origin, level._id_9CC0, level._id_9CC0, "MOD_ENERGY", "trap_zm_mp");
+    self dodamage(var_0._id_29D5 * 0.25, self.origin, level._id_9CC0, level._id_9CC0, "MOD_ENERGY", "trap_zm_mp");
   else {
-    self _meth_8059(var_0._id_29D5, self.origin, level._id_9CC0, level._id_9CC0, "MOD_ENERGY", "trap_zm_mp");
+    self dodamage(var_0._id_29D5, self.origin, level._id_9CC0, level._id_9CC0, "MOD_ENERGY", "trap_zm_mp");
 
     if(!isDefined(self.hitbytrap)) {
       foreach(var_2 in level.players) {

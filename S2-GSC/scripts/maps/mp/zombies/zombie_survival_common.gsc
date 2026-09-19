@@ -15,8 +15,8 @@ init() {
   level.zombiespawnfxcount = 0;
   level._id_08AF = _id_0547::razergunmaxammo;
   level.zmb_player_safe_teleport_on_perk_buy = 1;
-  _func_032("ui_zm_intermission_swaptime_1", 6);
-  _func_032("ui_zm_intermission_swaptime_2", 2);
+  _setomnvar("ui_zm_intermission_swaptime_1", 6);
+  _setomnvar("ui_zm_intermission_swaptime_2", 2);
   setDvar("2494", "0.12, 0, 0");
   thread _id_0544::init();
   level thread soundscripts\_snd_common_zmb_dlc3::snd_zmb_init_dlc3();
@@ -131,7 +131,7 @@ collect_souls_to_unlock_pack_a_punch() {
   var_0 = common_scripts\utility::_id_46B7("zmb_sg_pap_light_display", "targetname");
   var_1 = common_scripts\utility::_id_46B7("zmb_pack_key", "targetname");
   var_2 = common_scripts\utility::_id_46B7("zmb_sg_availablility_light_display", "targetname");
-  var_3 = _func_21F("zmb_sg_reciver_scriptable", "targetname");
+  var_3 = _getscriptablearray("zmb_sg_reciver_scriptable", "targetname");
 
   foreach(var_5 in var_3)
   var_5 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84DC();
@@ -142,8 +142,8 @@ collect_souls_to_unlock_pack_a_punch() {
   level.pack_a_punc_pre_func = ::wait_for_pap_available;
 
   for(var_7 = 0; var_7 < var_1.size; var_7++) {
-    common_scripts\utility::flag_init("zmb_sg_soul_collect_flag_" + var_1[var_7]._id_81E1);
-    common_scripts\utility::flag_init("zmb_sg_soul_collect_ready_flag_" + var_1[var_7]._id_81E1);
+    common_scripts\utility::flag_init("zmb_sg_soul_collect_flag_" + var_1[var_7].setmovespeedscale);
+    common_scripts\utility::flag_init("zmb_sg_soul_collect_ready_flag_" + var_1[var_7].setmovespeedscale);
   }
 
   common_scripts\utility::_id_0FB2(var_1, ::set_pack_key_unlocked);
@@ -157,8 +157,8 @@ collect_souls_to_unlock_pack_a_punch() {
 }
 
 wait_for_pap_available() {
-  var_0 = _func_18E("pack_a_punch_weapon_display", "targetname");
-  var_0 _meth_8511();
+  var_0 = _getent("pack_a_punch_weapon_display", "targetname");
+  var_0 ghost();
 
   for(var_1 = 0; var_1 < 3; var_1++)
     common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_flag_" + (var_1 + 1));
@@ -177,28 +177,28 @@ unlock_next_reciever() {
 
 handle_unlock_lights(var_0, var_1) {
   _id_0547::_id_A6F6();
-  var_2 = self._id_81E1;
+  var_2 = self.setmovespeedscale;
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_red");
-  _func_14C(var_3);
-  common_scripts\utility::_id_3C9F(var_0 + self._id_81E1);
+  _triggerfx(var_3);
+  common_scripts\utility::_id_3C9F(var_0 + self.setmovespeedscale);
   var_3 delete();
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_green");
-  _func_14C(var_3);
+  _triggerfx(var_3);
 
   if(!isDefined(var_1)) {
     return;
   }
-  common_scripts\utility::_id_3C9F(var_1 + self._id_81E1);
+  common_scripts\utility::_id_3C9F(var_1 + self.setmovespeedscale);
   var_3 delete();
   var_3 = _id_0547::_id_8FBA(self, "zmb_nest_generator_bulb_off");
-  _func_14C(var_3);
+  _triggerfx(var_3);
 }
 
 set_pack_key_unlocked() {
-  var_0 = self._id_81E1;
+  var_0 = self.setmovespeedscale;
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("tag_origin");
-  common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_ready_flag_" + self._id_81E1);
+  common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_ready_flag_" + self.setmovespeedscale);
   var_2 = 400;
 
   if(common_scripts\utility::_id_562E(level.sg_pack_use_small_radius))
@@ -206,13 +206,13 @@ set_pack_key_unlocked() {
 
   var_1.ignoresighttrace = 1;
   var_1 maps\mp\mp_zombies_soul_collection::_id_170B(10, var_2, 70, "zmb_sg_soul_collect_ping_" + var_0, undefined, "tag_origin", undefined, "tag_origin");
-  common_scripts\utility::flag_set("zmb_sg_soul_collect_flag_" + self._id_81E1);
+  common_scripts\utility::flag_set("zmb_sg_soul_collect_flag_" + self.setmovespeedscale);
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("geistcraft_device_powered");
 }
 
 _id_902A(var_0) {
-  if(isDefined(var_0._id_82EC)) {
-    switch (var_0._id_82EC) {
+  if(isDefined(var_0.weaponlocktargettooclose)) {
+    switch (var_0.weaponlocktargettooclose) {
       case "spawn_dirt":
         return::dirtspawnnotetrackhandler;
       case "spawn_concrete":
@@ -306,7 +306,7 @@ zombiedripfxcleanup(var_0, var_1) {
     }
   }
 
-  wait(_func_0A5(5.0, 15.0));
+  wait(_randomfloatrange(5.0, 15.0));
 
   if(!isDefined(self) || !isalive(self)) {
     return;
@@ -321,8 +321,8 @@ zombiespawnfx(var_0) {
   if(level.zombiespawnfxcount >= 12) {
     return;
   }
-  var_1 = _func_14B(common_scripts\utility::_id_44F5(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-  _func_14C(var_1);
+  var_1 = _spawnfx(common_scripts\utility::_id_44F5(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  _triggerfx(var_1);
   level.zombiespawnfxcount++;
   common_scripts\utility::waittill_notify_or_timeout("death", 2.0);
   level.zombiespawnfxcount--;

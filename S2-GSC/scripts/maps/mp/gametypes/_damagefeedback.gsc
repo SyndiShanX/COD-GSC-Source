@@ -89,7 +89,7 @@ _id_A102(var_0, var_1) {
 }
 
 _id_865B(var_0) {
-  self _meth_82FF("damage_feedback", var_0);
+  self setclientomnvar("damage_feedback", var_0);
   thread _id_7D5B();
 }
 
@@ -100,11 +100,11 @@ _id_7D5B() {
   waittillframeend;
 
   if(isDefined(self))
-    self _meth_82FF("damage_feedback", "none");
+    self setclientomnvar("damage_feedback", "none");
 }
 
 setdamagepickupclientomnvar(var_0) {
-  self _meth_82FF("damage_pickup", var_0);
+  self setclientomnvar("damage_pickup", var_0);
   thread resetdamagepickup();
 }
 
@@ -115,5 +115,5 @@ resetdamagepickup() {
   waittillframeend;
 
   if(isDefined(self))
-    self _meth_82FF("damage_pickup", "none");
+    self setclientomnvar("damage_pickup", "none");
 }

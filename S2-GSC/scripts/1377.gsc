@@ -24,10 +24,10 @@ init() {
 initconsumablesfromtable(var_0, var_1, var_2, var_3) {
   var_4 = "mp/zombieConsumablesTable.csv";
 
-  if(_func_1B2(var_4)) {
-    for(var_5 = _func_27A(var_4); var_5 >= 0; var_5 = var_6 - 1) {
-      var_6 = _func_1B1(var_4, 6, var_0, var_5);
-      var_7 = _func_1AE(var_4, var_6, 0);
+  if(_tableexists(var_4)) {
+    for(var_5 = _tablegetrowcount(var_4); var_5 >= 0; var_5 = var_6 - 1) {
+      var_6 = _tablelookuprownum(var_4, 6, var_0, var_5);
+      var_7 = _tablelookupbyrow(var_4, var_6, 0);
       [var_9, var_10] = _id_4471(var_7);
 
       if(var_9 != "none")
@@ -57,8 +57,8 @@ getconsumablerefrowintable(var_0) {
   var_1 = "mp/zombieConsumablesTable.csv";
   var_2 = -1;
 
-  if(_func_1B2(var_1))
-    var_2 = _func_1B1(var_1, 0, var_0);
+  if(_tableexists(var_1))
+    var_2 = _tablelookuprownum(var_1, 0, var_0);
 
   return var_2;
 }
@@ -71,8 +71,8 @@ _id_4472(var_0) {
 }
 
 _id_5332() {
-  self _meth_82E1("useConsumable_upSlot", "+actionslot 1");
-  self _meth_82E1("useConsumable_downSlot", "+actionslot 2");
+  self notifyonplayercommand("useConsumable_upSlot", "+actionslot 1");
+  self notifyonplayercommand("useConsumable_downSlot", "+actionslot 2");
 
   if(!common_scripts\utility::_id_562E(level._id_8C8D)) {
     var_0 = level._id_25A0;
@@ -104,7 +104,7 @@ _id_5332() {
   }
 
   self._id_A97F = 0;
-  self _meth_82FF("ui_zm_can_use_consumable", 0);
+  self setclientomnvar("ui_zm_can_use_consumable", 0);
   thread _id_636D();
   thread _id_A6DA();
 }
@@ -117,11 +117,11 @@ _id_636D() {
     [var_1, var_2] = common_scripts\utility::_id_A70E(level, "zombie_wave_started", self, "begin_last_stand", self, "revive", self, "can_use_consumable");
 
     if(isDefined(var_1) && var_1 == "begin_last_stand") {
-      self _meth_82FF("ui_zm_can_use_consumable", 0);
+      self setclientomnvar("ui_zm_can_use_consumable", 0);
       continue;
     }
 
-    self _meth_82FF("ui_zm_can_use_consumable", self._id_A97F < level._id_A980 && !_id_056A::isusingperkmachine());
+    self setclientomnvar("ui_zm_can_use_consumable", self._id_A97F < level._id_A980 && !_id_056A::isusingperkmachine());
   }
 }
 
@@ -207,12 +207,12 @@ _id_5FB3(var_0) {
   var_3 = getconsumablerefrowintable(var_1);
 
   if(var_0 == "upSlot") {
-    self _meth_82FF("ui_zm_consumable_ref0", var_3);
-    self _meth_82FF("ui_zm_consumable_count0", var_2);
+    self setclientomnvar("ui_zm_consumable_ref0", var_3);
+    self setclientomnvar("ui_zm_consumable_count0", var_2);
     return;
   } else if(var_0 == "downSlot") {
-    self _meth_82FF("ui_zm_consumable_ref1", var_3);
-    self _meth_82FF("ui_zm_consumable_count1", var_2);
+    self setclientomnvar("ui_zm_consumable_ref1", var_3);
+    self setclientomnvar("ui_zm_consumable_count1", var_2);
     return;
   }
 }
@@ -221,9 +221,9 @@ _id_A126(var_0) {
   var_1 = self._id_259F[var_0]._id_20F0;
 
   if(var_0 == "upSlot")
-    self _meth_82FF("ui_zm_consumable_count0", var_1);
+    self setclientomnvar("ui_zm_consumable_count0", var_1);
   else if(var_0 == "downSlot")
-    self _meth_82FF("ui_zm_consumable_count1", var_1);
+    self setclientomnvar("ui_zm_consumable_count1", var_1);
 }
 
 _id_A6DA() {
@@ -231,7 +231,7 @@ _id_A6DA() {
   self endon("disconnect");
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A715("useConsumable_upSlot", "useConsumable_downSlot", "useConsumable_sReviveSlot", "death");
+    var_0 = common_scripts\utility::waittill_any_return("useConsumable_upSlot", "useConsumable_downSlot", "useConsumable_sReviveSlot", "death");
 
     if(var_0 == "death") {
       continue;
@@ -281,7 +281,7 @@ _id_4B5F(var_0) {
 }
 
 _id_1F7B() {
-  if(isDefined(self._id_5378) && self._id_5378)
+  if(isDefined(self.inlaststand) && self.inlaststand)
     return 0;
 
   if(_id_056A::isusingperkmachine())

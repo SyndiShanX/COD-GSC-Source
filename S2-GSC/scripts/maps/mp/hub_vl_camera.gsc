@@ -18,7 +18,7 @@ _id_87B1() {
     var_4 = common_scripts\utility::_id_46B5(var_3.target, "targetname");
   }
 
-  var_6 = _func_18E("cao_spawnpoint", "targetname");
+  var_6 = _getent("cao_spawnpoint", "targetname");
   var_7 = spawnStruct();
   var_7._id_9839 = 40;
   var_7._id_15F7 = 0.25;
@@ -96,7 +96,7 @@ _id_87B1() {
   var_7._id_64C8 = 150;
   var_7._id_0DE1 = 800;
   var_7._id_768F = 0;
-  var_8 = self _meth_8451();
+  var_8 = self getunnormalizedcameramovement();
   var_7._id_6A69 = var_8[0];
   var_7._id_6A6A = var_8[1];
   var_7._id_ACC5 = 0.5;
@@ -197,8 +197,8 @@ _id_A59B() {
   if(isDefined(level._id_A590))
     var_0[[level._id_A590]]();
   else {
-    var_0 _meth_84B4();
-    var_0 _meth_84B7(0.613159, 89.8318, var_0._id_1EFF._id_3184, var_0._id_1EFF._id_3184);
+    var_0 enablephysicaldepthoffieldscripting();
+    var_0 setphysicaldepthoffield(0.613159, 89.8318, var_0._id_1EFF._id_3184, var_0._id_1EFF._id_3184);
   }
 }
 
@@ -218,7 +218,7 @@ _id_841A() {
   else {
     var_2 = level._id_A595[self._id_6A4F];
     var_3 = var_2 gettagorigin("TAG_STOWED_BACK");
-    var_4 = _func_0E1(var_3, var_2._id_13B6.origin);
+    var_4 = _distance2d(var_3, var_2._id_13B6.origin);
     var_5 = var_2._id_13B6.origin + anglesToForward(var_2._id_13B6.angles) * var_4;
     var_1 = (var_5[0], var_5[1], var_3[2]);
   }
@@ -255,7 +255,7 @@ _id_A599(var_0) {
     else if(var_9 > 128)
       var_9 = 128;
 
-    var_1 _meth_84B7(var_9, var_3, var_1._id_1EFF._id_3184, var_1._id_1EFF._id_3184 * 2);
+    var_1 setphysicaldepthoffield(var_9, var_3, var_1._id_1EFF._id_3184, var_1._id_1EFF._id_3184 * 2);
   }
 }
 
@@ -270,9 +270,9 @@ _id_A59A(var_0, var_1, var_2) {
     else if(var_0 == "cao") {}
 
     if(var_1 == "cac")
-      var_3 _meth_82D8("mp_hub_allies", 0);
+      var_3 visionsetnakedforplayer("mp_hub_allies", 0);
     else if(var_1 == "cao")
-      var_3 _meth_84B7(3.99, 119.339, var_3._id_1EFF._id_3184, var_3._id_1EFF._id_3184);
+      var_3 setphysicaldepthoffield(3.99, 119.339, var_3._id_1EFF._id_3184, var_3._id_1EFF._id_3184);
     else if(var_1 == "clanprofile")
       var_3 _id_8661();
     else if(var_1 == "prelobby")
@@ -307,12 +307,12 @@ _id_A59A(var_0, var_1, var_2) {
 
 _id_8662() {
   var_0 = self;
-  var_0 _meth_82D8("mp_hub_allies_vlobby", 0);
+  var_0 visionsetnakedforplayer("mp_hub_allies_vlobby", 0);
 }
 
 _id_8661() {
   var_0 = self;
-  var_0 _meth_84B7(0.613159, 89.8318, var_0._id_1EFF._id_3184, var_0._id_1EFF._id_3184);
+  var_0 setphysicaldepthoffield(0.613159, 89.8318, var_0._id_1EFF._id_3184, var_0._id_1EFF._id_3184);
 }
 
 _id_3C75() {
@@ -341,13 +341,13 @@ _id_6BA9() {
 _id_A59C() {
   self endon("disconnect");
 
-  while(!isDefined(self._id_835A))
+  while(!isDefined(self.botclearscriptenemy))
     waitframe();
 
   var_0 = self;
   var_0._id_00C7 = 0;
-  var_0 _meth_82FF("ui_vlobby_round_state", 0);
-  var_0 _meth_82FF("ui_vlobby_round_timer", 0);
+  var_0 setclientomnvar("ui_vlobby_round_state", 0);
+  var_0 setclientomnvar("ui_vlobby_round_timer", 0);
   var_0 _id_4835();
   var_1 = var_0.origin;
   var_2 = var_0.angles;
@@ -356,8 +356,8 @@ _id_A59C() {
   var_4 = anglesToForward(var_0.angles);
   var_5 = anglestoright(var_0.angles);
   var_6 = var_4;
-  var_7 = _func_082(var_1, 20, 512, 120);
-  var_8 = var_0 _meth_8299();
+  var_7 = _getgroundposition(var_1, 20, 512, 120);
+  var_8 = var_0 getxuid();
   var_9 = var_8 == "";
   var_10 = undefined;
   level._id_6648 = 1;
@@ -398,17 +398,17 @@ _id_A59C() {
     var_29 = maps\mp\_utility::_id_4737(var_28);
   }
 
-  var_30 = _func_18E("cao_spawnpoint", "targetname");
+  var_30 = _getent("cao_spawnpoint", "targetname");
   var_31 = 0;
 
   if(!var_9) {
     maps\mp\hub_vl_base::_id_A59F("adding xuid " + var_8 + "from vlobby_player");
     var_31 = maps\mp\hub_vl_base::_id_0902(var_8);
     _id_4696(0);
-    var_0 _id_8F7D(var_0._id_13B6, var_15, var_11, var_12, var_13, var_0._id_5DF4, var_0._id_5DF7, var_0._id_6F65, var_0._id_83F4, var_0.name, var_31, 0);
+    var_0 _id_8F7D(var_0._id_13B6, var_15, var_11, var_12, var_13, var_0._id_5DF4, var_0._id_5DF7, var_0._id_6F65, var_0.setnameplatematerial, var_0.name, var_31, 0);
 
     if(!level._id_A1FE)
-      _func_2BA(level._id_A595[var_31], var_8);
+      _setentplayerxuidforemblem(level._id_A595[var_31], var_8);
 
     thread _id_8A5F();
   } else
@@ -424,7 +424,7 @@ _id_A59C() {
 
     for(var_33 = 0; var_33 < 3; var_33++) {
       var_34 = _id_4696(var_32[var_33]);
-      var_0._id_2316[var_33] = var_0 _id_8F7D(var_34, var_15, var_11, var_12, var_13, var_0._id_5DF4, var_0._id_5DF7, var_0._id_6F65, var_0._id_83F4, var_0.name, 0, 0, 1);
+      var_0._id_2316[var_33] = var_0 _id_8F7D(var_34, var_15, var_11, var_12, var_13, var_0._id_5DF4, var_0._id_5DF7, var_0._id_6F65, var_0.setnameplatematerial, var_0.name, 0, 0, 1);
       _id_4CCD(var_0._id_2316[var_33]);
     }
   }
@@ -438,7 +438,7 @@ _id_A59C() {
     var_10._id_6101 = gettime();
     var_10._id_294D = var_0._id_294D;
     var_10.player = var_0;
-    var_10._id_83F4 = var_10._id_267E;
+    var_10.setnameplatematerial = var_10._id_267E;
   }
 
   thread _id_62FC(var_0, var_0._id_1EFF);
@@ -453,7 +453,7 @@ _id_A59C() {
   var_39.targetname = "vlcamera";
   var_39._id_92F0 = var_36;
   var_39._id_92B8 = var_37;
-  var_39._id_8066 = (0, 0, 0);
+  var_39.setmovingplatformplayerturnrate = (0, 0, 0);
   var_39._id_1E91 = 0;
   var_39._id_4B88 = 1;
   var_39._id_1E98 = 1;
@@ -469,7 +469,7 @@ _id_A59C() {
   var_41 = (0, 90, 0);
   var_39._id_64ED = "starting";
   var_0._id_50CA = 0;
-  var_0 _meth_812B(0);
+  var_0 allowfire(0);
   var_0 maps\mp\hub_vl_base::_id_7699(var_0._id_9042, var_0._id_9042._id_8F80);
 
   if(isDefined(level._id_A1DB)) {
@@ -494,7 +494,7 @@ _id_A59C() {
   thread _id_635D(var_42);
   var_49 = 0;
   var_50 = 0;
-  self _meth_82FF("char_scene_state", 3);
+  self setclientomnvar("char_scene_state", 3);
   var_0 notify("fade_in");
 
   for(;;) {
@@ -504,7 +504,7 @@ _id_A59C() {
       var_0._id_9042.angles = var_0._id_9042._id_8F80;
       _id_05E0(var_0 getentitynumber(), var_0._id_9042._id_20F1, "angles", var_0._id_9042.angles);
       var_0 maps\mp\hub_vl_base::_id_7699(var_0._id_9042, var_0._id_9042._id_8F80);
-      var_0 _meth_82FF("char_scene_state", 3);
+      var_0 setclientomnvar("char_scene_state", 3);
     }
 
     maps\mp\hub_vl_base::_id_13B4();
@@ -538,7 +538,7 @@ _id_A59C() {
         var_49 = 1;
         setDvar("5718", "0");
         level._id_2AE5 = undefined;
-        var_0 _meth_812B(1);
+        var_0 allowfire(1);
       }
 
       var_0 _id_2AE5(var_39);
@@ -547,7 +547,7 @@ _id_A59C() {
       var_49 = 0;
       var_39.origin = var_39._id_92F0;
       var_39.angles = var_39._id_92B8;
-      var_0 _meth_812B(0);
+      var_0 allowfire(0);
     }
 
     if(!var_0._id_50CA) {
@@ -657,9 +657,9 @@ _id_A59C() {
             if(var_55 == var_0._id_A58C) {
               if(!level._id_A1FE) {
                 if(isDefined(level._id_1FA7) && level._id_1FA7 != var_8)
-                  _func_2BA(var_53, level._id_1FA7, 1);
+                  _setentplayerxuidforemblem(var_53, level._id_1FA7, 1);
 
-                _func_2BA(var_53, var_8);
+                _setentplayerxuidforemblem(var_53, var_8);
               }
 
               level._id_1FA7 = var_8;
@@ -668,7 +668,7 @@ _id_A59C() {
           }
 
           if(!level._id_A1FE)
-            var_0._id_1F8E _meth_8005(var_0);
+            var_0._id_1F8E showtoplayer(var_0);
 
           var_0._id_1F8E.angles = var_0._id_1F8E._id_8F80;
           _id_05E0(var_0 getentitynumber(), var_0._id_1F8E._id_20F1, "angles", var_0._id_1F8E.angles);
@@ -774,14 +774,14 @@ _id_A59C() {
     }
 
     if(var_0._id_50CA)
-      var_0 _meth_82D8("mp_vlobby_room_fr", 0);
+      var_0 visionsetnakedforplayer("mp_vlobby_room_fr", 0);
 
     waitframe();
   }
 }
 
 _id_9593(var_0, var_1, var_2) {
-  var_3 = _func_0AD(tablelookup("mp/vlobby_cac_offsets.csv", var_1, var_0, var_2));
+  var_3 = _float(tablelookup("mp/vlobby_cac_offsets.csv", var_1, var_0, var_2));
 
   if(!isDefined(var_3))
     var_3 = 0;
@@ -820,8 +820,8 @@ _id_9422(var_0) {
 
 _id_1E3F(var_0, var_1, var_2) {
   var_3 = var_1 - var_0;
-  var_4 = _func_0E4(var_3);
-  var_5 = var_4 / _func_0D9(1 + var_2._id_28C4 * var_2._id_28C4);
+  var_4 = _length2d(var_3);
+  var_5 = var_4 / _sqrt(1 + var_2._id_28C4 * var_2._id_28C4);
   var_6 = var_3[0] - var_2._id_28C4 * var_3[1];
   var_7 = var_2._id_28C4 * var_3[0] + var_3[1];
   var_8 = var_5 * vectorNormalize((var_6, var_7, 0));
@@ -859,14 +859,14 @@ _id_1EB8(var_0, var_1, var_2, var_3) {
   if(isDefined(self._id_2988))
     self.origin = var_0;
   else
-    self _meth_82B1(var_0, var_1, var_2, var_3);
+    self moveto(var_0, var_1, var_2, var_3);
 }
 
 _id_1F09(var_0, var_1, var_2, var_3) {
   if(isDefined(self._id_2988))
     self.angles = var_0;
   else
-    self _meth_82B8(var_0, var_1, var_2, var_3);
+    self rotateto(var_0, var_1, var_2, var_3);
 }
 
 _id_7EED(var_0, var_1) {
@@ -878,14 +878,14 @@ _id_7EED(var_0, var_1) {
   }
 
   var_3 = var_0 gettagorigin("TAG_STOWED_BACK");
-  var_4 = var_0 _meth_8181("TAG_STOWED_BACK");
+  var_4 = var_0 gettagangles("TAG_STOWED_BACK");
   var_5 = var_0._id_8F80[1] - var_0.angles[1];
   var_6 = (0, 0, 1);
   var_7 = var_3 - var_0.origin;
-  var_8 = _func_113(var_6, var_7, var_5);
+  var_8 = _rotatepointaroundvector(var_6, var_7, var_5);
   var_9 = var_0.origin + var_8;
   var_0._id_1EAF = var_9;
-  var_0._id_1EAE = (var_4[0], _func_0DC(var_4[1] + var_5), var_4[2]);
+  var_0._id_1EAE = (var_4[0], _angleclamp(var_4[1] + var_5), var_4[2]);
   var_2 = spawnStruct();
   var_2._id_1EAF = var_0._id_1EAF;
   var_2._id_1EAE = var_0._id_1EAE;
@@ -956,15 +956,15 @@ _id_5E39(var_0, var_1, var_2, var_3) {
     }
 
     if(getdvarint("scr_vl_camera_test") != 0) {
-      var_11 = _func_0E1(var_1._id_13B6.origin, var_1._id_13B6._id_1E9D.origin);
+      var_11 = _distance2d(var_1._id_13B6.origin, var_1._id_13B6._id_1E9D.origin);
 
       if(var_11 < var_2._id_3FB9)
         var_11 = var_2._id_3FB9;
 
       var_12 = var_8[2] - var_2._id_3FBB;
-      var_13 = _func_0AB(var_12 / var_2._id_3FB9);
-      var_14 = _func_0A8(var_13) * var_2._id_3FB9;
-      var_15 = _func_0A8(var_13) * var_11;
+      var_13 = _atan(var_12 / var_2._id_3FB9);
+      var_14 = _tan(var_13) * var_2._id_3FB9;
+      var_15 = _tan(var_13) * var_11;
       var_16 = var_8[2] - var_15;
       var_9 = var_1._id_13B6.origin + anglesToForward(var_1._id_13B6.angles) * var_11;
       var_10 = (var_9[0], var_9[1], var_16);
@@ -1078,7 +1078,7 @@ _id_5E39(var_0, var_1, var_2, var_3) {
       var_0.angles = var_4;
     }
 
-    var_0 _meth_808C();
+    var_0 dontinterpolate();
     var_0._id_2988 = undefined;
   }
 
@@ -1110,7 +1110,7 @@ _id_7D77() {
 }
 
 _id_4590(var_0, var_1, var_2) {
-  if(_func_0AE(var_1 - var_0._id_7EF8) > 100) {
+  if(_abs(var_1 - var_0._id_7EF8) > 100) {
     if(var_1 >= 270) {
       var_0._id_09F8 = var_0._id_09F8 + -360 * var_2;
 
@@ -1169,7 +1169,7 @@ _id_1FA6(var_0, var_1, var_2) {
   var_0 _id_1F09(var_15, var_13, var_13 * 0.5, var_13 * 0.5);
 
   if(isDefined(var_0._id_2988)) {
-    var_0 _meth_808C();
+    var_0 dontinterpolate();
     var_0._id_2988 = undefined;
   }
 }
@@ -1250,7 +1250,7 @@ _id_A669(var_0, var_1) {
   _id_4CCD(var_0);
   thread _id_A66B(5.0, var_0);
 
-  for(var_2 = self _meth_84F0(var_0._id_267E, var_0.team); !var_2; var_2 = self _meth_84F0(var_0._id_267E, var_0.team))
+  for(var_2 = self loadcostumemodels(var_0._id_267E, var_0.team); !var_2; var_2 = self loadcostumemodels(var_0._id_267E, var_0.team))
     wait 0.1;
 
   if(var_1)
@@ -1297,13 +1297,13 @@ _id_8F7D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   if(var_11)
     var_21 = var_17._id_13B6.origin;
   else
-    var_21 = _func_082(var_17._id_13B6.origin, 20, 512, 60);
+    var_21 = _getgroundposition(var_17._id_13B6.origin, 20, 512, 60);
 
   var_17._id_8F80 = (var_0.angles[0], var_0.angles[1] + var_17._id_7EF4, var_0.angles[2]);
   var_17.angles = var_17._id_8F80;
 
   if(!var_12 && !level._id_A1FE)
-    var_17 _meth_805B();
+    var_17 show();
 
   var_17._id_6DAC = var_10;
   var_17.origin = var_21;
@@ -1400,9 +1400,9 @@ _id_21F1(var_0, var_1, var_2, var_3) {
           var_12 = _id_5854(self.primaryweapon);
           var_13 = self._id_9428 != self.primaryweapon;
           var_14 = var_13 || var_6 != var_9;
-          var_15 = self._id_9428 != "none" && _func_05F(self._id_9428) != _func_05F(self.primaryweapon);
+          var_15 = self._id_9428 != "none" && _getweaponbasename(self._id_9428) != _getweaponbasename(self.primaryweapon);
 
-          if(_func_1A9(self.primaryweapon) == "melee") {
+          if(_weapontype(self.primaryweapon) == "melee") {
             _id_4CCF(self);
             _id_4CCE(self);
           } else if(var_14) {
@@ -1417,7 +1417,7 @@ _id_21F1(var_0, var_1, var_2, var_3) {
               if(level._id_A1FE)
                 _id_05E0(var_3 getentitynumber(), self._id_20F1, "prim_weapon", self.primaryweapon);
               else
-                self._id_7705 _meth_848E(self.primaryweapon);
+                self._id_7705 setpickupweapon(self.primaryweapon);
 
               if(issubstr(self.primaryweapon, "akimbo")) {
                 if(var_15)
@@ -1443,10 +1443,10 @@ _id_5854(var_0) {
   var_1 = 0;
 
   if(level.players.size > 0) {
-    var_1 = level.players[0] _meth_8530(var_0);
+    var_1 = level.players[0] worldweaponsloaded(var_0);
 
     if(!var_1)
-      level.players[0] _meth_8512(var_0);
+      level.players[0] loadweapons(var_0);
   }
 
   return var_1;
@@ -1499,7 +1499,7 @@ _id_A593(var_0, var_1) {
     if(level._id_A1FE)
       _id_05E0(var_1.player getentitynumber(), var_1._id_20F1, "sec_weapon", "");
     else {
-      _func_2BA(var_1._id_0BA9, var_0, 1);
+      _setentplayerxuidforemblem(var_1._id_0BA9, var_0, 1);
       var_1._id_0BA9 delete();
       var_1._id_0BA9 = undefined;
     }
@@ -1514,7 +1514,7 @@ _id_A58A(var_0, var_1) {
       else {
         var_2 = spawn("weapon_" + var_1.primaryweapon, (0, 0, 0));
         var_3 = _id_43EA(var_1);
-        _func_2BA(var_2, var_3);
+        _setentplayerxuidforemblem(var_2, var_3);
       }
 
       var_1._id_0BA9 = var_2;
@@ -1523,7 +1523,7 @@ _id_A58A(var_0, var_1) {
       var_1._id_0BA9.primaryweapon = var_1.primaryweapon;
 
     if(!level._id_A1FE) {
-      var_1._id_0BA9 _meth_848E(var_1.primaryweapon);
+      var_1._id_0BA9 setpickupweapon(var_1.primaryweapon);
       var_4 = "tag_weapon_left";
 
       if(issubstr(var_1._id_0BA9.primaryweapon, "combatknife"))
@@ -1532,13 +1532,13 @@ _id_A58A(var_0, var_1) {
       if(issubstr(var_1._id_0BA9.primaryweapon, "riotshield"))
         var_4 = "tag_weapon_left";
 
-      var_1._id_0BA9 _meth_8057();
+      var_1._id_0BA9 unlink();
       var_1._id_0BA9.origin = var_1 gettagorigin(var_4);
-      var_1._id_0BA9.angles = var_1 _meth_8181(var_4);
-      var_1._id_0BA9 _meth_805C();
-      var_1._id_0BA9 _meth_8005(var_0);
+      var_1._id_0BA9.angles = var_1 gettagangles(var_4);
+      var_1._id_0BA9 hide();
+      var_1._id_0BA9 showtoplayer(var_0);
       var_1._id_0BA9 linktosynchronizedparent(var_1, var_4);
-      var_1._id_0BA9 _meth_852B(var_0);
+      var_1._id_0BA9 setowneroriginal(var_0);
     } else
       _id_05E0(var_0 getentitynumber(), var_1._id_20F1, "sec_weapon", var_1._id_0BA9.primaryweapon);
 
@@ -1546,8 +1546,8 @@ _id_A58A(var_0, var_1) {
       thread _id_8BE9(var_1, var_0);
     else if(!isDefined(var_1._id_9428)) {
       if(!level._id_A1FE) {
-        var_1._id_0BA9 _meth_805C();
-        var_1._id_0BA9 _meth_8052();
+        var_1._id_0BA9 hide();
+        var_1._id_0BA9 hideallparts();
       }
     }
   }
@@ -1567,7 +1567,7 @@ _id_A58D(var_0, var_1) {
       else {
         var_2 = spawn("weapon_" + var_1.primaryweapon, (0, 0, 0));
         var_3 = _id_43EA(var_1);
-        _func_2BA(var_2, var_3);
+        _setentplayerxuidforemblem(var_2, var_3);
       }
 
       var_2.targetname = "avatar_weapon";
@@ -1575,9 +1575,9 @@ _id_A58D(var_0, var_1) {
       var_2.primaryweapon = var_1.primaryweapon;
 
       if(!level._id_A1FE) {
-        var_1._id_7705 _meth_805C();
-        var_1._id_7705 _meth_8005(var_0);
-        var_1._id_7705 _meth_848E(var_1.primaryweapon);
+        var_1._id_7705 hide();
+        var_1._id_7705 showtoplayer(var_0);
+        var_1._id_7705 setpickupweapon(var_1.primaryweapon);
       }
 
       _id_1158(var_1);
@@ -1603,11 +1603,11 @@ _id_1158(var_0) {
   if(level._id_A1FE)
     _id_05E0(var_1 getentitynumber(), var_0._id_20F1, "prim_weapon", var_0.primaryweapon);
   else {
-    var_0._id_7705 _meth_8057();
+    var_0._id_7705 unlink();
     var_0._id_7705.origin = var_0 gettagorigin(var_2);
-    var_0._id_7705.angles = var_0 _meth_8181(var_2);
+    var_0._id_7705.angles = var_0 gettagangles(var_2);
     var_0._id_7705 linktosynchronizedparent(var_0, var_2);
-    var_0._id_7705 _meth_852B(var_1);
+    var_0._id_7705 setowneroriginal(var_1);
   }
 }
 
@@ -1620,7 +1620,7 @@ _id_8BE9(var_0, var_1) {
   if(var_1._id_1EFF._id_669A != "cao" && var_1._id_1EFF._id_627E != "cao") {
     if(issubstr(var_0._id_7705.primaryweapon, "akimbo")) {
       if(!level._id_A1FE)
-        var_0._id_0BA9 _meth_8005(var_1);
+        var_0._id_0BA9 showtoplayer(var_1);
     }
   }
 }
@@ -1634,7 +1634,7 @@ _id_8C12(var_0, var_1) {
 
   if(var_1._id_1EFF._id_669A != "cao" && var_1._id_1EFF._id_627E != "cao" && !var_2) {
     if(!level._id_A1FE)
-      var_0._id_7705 _meth_8005(var_1);
+      var_0._id_7705 showtoplayer(var_1);
   }
 }
 
@@ -1653,11 +1653,11 @@ _id_A586(var_0, var_1, var_2) {
   }
 
   if(!isDefined(var_0._id_267E) || !_id_0510::_id_A27D(var_0._id_267E, var_3)) {
-    if(isDefined(var_0._id_83F4) && _id_0510::_id_A27D(var_0._id_83F4, var_3))
-      var_0._id_267E = var_0._id_83F4;
+    if(isDefined(var_0.setnameplatematerial) && _id_0510::_id_A27D(var_0.setnameplatematerial, var_3))
+      var_0._id_267E = var_0.setnameplatematerial;
     else {
       var_0._id_267E = _id_0510::_id_448C();
-      var_0._id_83F4 = var_0._id_267E;
+      var_0.setnameplatematerial = var_0._id_267E;
     }
   }
 
@@ -1853,7 +1853,7 @@ _id_62F8(var_0) {
 
           maps\mp\hub_vl_base::_id_A59F("weapon_stream: " + var_8);
           var_9 = [var_8];
-          self _meth_8512(var_9);
+          self loadweapons(var_9);
         }
 
         _id_62EC(var_0, "none");
@@ -1940,10 +1940,10 @@ _id_A558(var_0, var_1, var_2, var_3, var_4) {
   maps\mp\gametypes\_class::_id_4773(self.pers["team"], self.pers["class"]);
 
   if(var_2) {
-    _id_A587(self, var_0, self.primaryweapon, self._id_835A, self._id_60FA, self._id_5DF4, self._id_5DF7, self._id_6F65, self._id_267E);
+    _id_A587(self, var_0, self.primaryweapon, self.botclearscriptenemy, self._id_60FA, self._id_5DF4, self._id_5DF7, self._id_6F65, self._id_267E);
 
     if(isDefined(self._id_1F8E))
-      _id_A587(self, var_0, undefined, self._id_835A, self._id_60FA, self._id_5DF4, self._id_5DF7, self._id_6F65, self._id_267E, self._id_1F8E);
+      _id_A587(self, var_0, undefined, self.botclearscriptenemy, self._id_60FA, self._id_5DF4, self._id_5DF7, self._id_6F65, self._id_267E, self._id_1F8E);
   }
 }
 
@@ -2050,7 +2050,7 @@ _id_5DEF(var_0, var_1) {
   if(var_0._id_0172 != var_1._id_0172)
     return 1;
 
-  if(var_0._id_8350 != var_1._id_8350)
+  if(var_0.disableforcethirdpersonwhenfollowing != var_1.disableforcethirdpersonwhenfollowing)
     return 1;
 
   if(var_0._id_8351 != var_1._id_8351)
@@ -2231,10 +2231,10 @@ _id_631E() {
 
             var_3++;
             maps\mp\hub_vl_base::_id_13B4(var_33);
-            _func_2BA(level._id_A595[var_33], var_7._id_01D6);
+            _setentplayerxuidforemblem(level._id_A595[var_33], var_7._id_01D6);
             level._id_A595[var_33]._id_5DEE = var_7;
             level._id_A595[var_33]._id_6101 = gettime() + 4000;
-            var_35 = _func_18E("cao_spawnpoint", "targetname");
+            var_35 = _getent("cao_spawnpoint", "targetname");
             var_32._id_1FA3 = var_35;
             var_32._id_1F9D = var_27;
 
@@ -2323,7 +2323,7 @@ _id_13B9(var_0, var_1, var_2) {
 
   foreach(var_5 in var_0) {
     var_5 _id_4697(var_3);
-    var_6 = _func_082(var_5._id_13B6.origin, 20, 512, 60);
+    var_6 = _getgroundposition(var_5._id_13B6.origin, 20, 512, 60);
     var_7 = distance(var_6, var_5.origin) >= 0.1;
     var_5.origin = var_6;
     _id_4CCD(var_5);
@@ -2360,17 +2360,17 @@ _id_13B9(var_0, var_1, var_2) {
 
 _id_6CC1(var_0) {
   if(!isDefined(level._id_7613)) {
-    level._id_7614 = _func_27B(level._id_761B) - 1;
+    level._id_7614 = _tablegetcolumncount(level._id_761B) - 1;
     level._id_7613 = randomint(level._id_7614);
   }
 
   if(!isDefined(level._id_7612)) {
-    var_1 = _func_27B(level._id_761A) - 1;
+    var_1 = _tablegetcolumncount(level._id_761A) - 1;
     level._id_7612 = randomint(var_1);
   }
 
   var_4 = var_0;
-  var_5 = _func_2B5(level._id_761B, level._id_7613 + 1);
+  var_5 = _getcostumefromtable(level._id_761B, level._id_7613 + 1);
   var_4._id_017F = var_5[level._id_2682["shirt"]];
   var_4._id_00B9 = var_5[level._id_2682["head"]];
   var_4._id_011A = var_5[level._id_2682["pants"]];
@@ -2400,15 +2400,15 @@ _id_6CC1(var_0) {
   var_17 = tablelookup(level._id_761A, 0, "loadoutSecondaryAttachment4", var_7);
   var_18 = tablelookup(level._id_761A, 0, "loadoutSecondaryAttachment5", var_7);
   var_19 = tablelookup(level._id_761A, 0, "loadoutSecondaryAttachment6", var_7);
-  var_4._id_835D = maps\mp\_utility::_id_473C(maps\mp\gametypes\_class::table_getweapon(level._id_761A, var_7, 1), 0);
+  var_4.botgetscriptgoalradius = maps\mp\_utility::_id_473C(maps\mp\gametypes\_class::table_getweapon(level._id_761A, var_7, 1), 0);
   var_4._id_0170 = int(tablelookup("mp/attachmenttable.csv", 3, var_14, 0));
   var_4._id_0171 = int(tablelookup("mp/attachmenttable.csv", 3, var_15, 0));
   var_4._id_0172 = int(tablelookup("mp/attachmenttable.csv", 3, var_16, 0));
-  var_4._id_8350 = int(tablelookup("mp/attachmenttable.csv", 3, var_17, 0));
+  var_4.disableforcethirdpersonwhenfollowing = int(tablelookup("mp/attachmenttable.csv", 3, var_17, 0));
   var_4._id_8351 = int(tablelookup("mp/attachmenttable.csv", 3, var_18, 0));
   var_4._id_8352 = int(tablelookup("mp/attachmenttable.csv", 3, var_19, 0));
-  var_4._id_8355 = maps\mp\gametypes\_class::table_getweaponcamo(level._id_761A, var_7, 1);
-  var_4._id_8359 = maps\mp\gametypes\_class::table_getweaponreticle(level._id_761A, var_7, 1);
+  var_4.botsetscriptmove = maps\mp\gametypes\_class::table_getweaponcamo(level._id_761A, var_7, 1);
+  var_4.botsetscriptenemy = maps\mp\gametypes\_class::table_getweaponreticle(level._id_761A, var_7, 1);
   return var_4;
 }
 
@@ -2453,8 +2453,8 @@ _id_6EA2(var_0) {
 _id_6320() {
   for(;;) {
     var_0 = getdvarint("splitscreen", 0);
-    var_1 = _func_2A3();
-    var_2 = _func_2A4();
+    var_1 = _isonlinegame();
+    var_2 = _issystemlink();
 
     foreach(var_5, var_4 in level._id_A595) {
       if(maps\mp\hub_vl_base::_id_13B5(var_5)) {
@@ -2469,7 +2469,7 @@ _id_6320() {
           }
 
           maps\mp\hub_vl_base::_id_A59E("Schedule removal of ownerId " + var_5 + " from timeout\n");
-          maps\mp\hub_vl_base::_id_8099(var_5);
+          maps\mp\hub_vl_base::springcamdisabled(var_5);
         }
       }
     }
@@ -2483,7 +2483,7 @@ _id_4169(var_0) {
   var_2 = [];
 
   for(var_3 = 0; var_3 < level._id_2682.size; var_3++)
-    var_2[var_3] = int(_func_1AE(var_1, var_3 + 1, var_0 + 1));
+    var_2[var_3] = int(_tablelookupbyrow(var_1, var_3 + 1, var_0 + 1));
 
   return var_2;
 }
@@ -2518,14 +2518,14 @@ _id_631F() {
       if(var_1 == "0") {
         foreach(var_1, var_3 in level._id_AAE2) {
           maps\mp\hub_vl_base::_id_A59E("Schedule removal of ownerId " + var_3 + "\n");
-          maps\mp\hub_vl_base::_id_8099(var_3, 0.25);
+          maps\mp\hub_vl_base::springcamdisabled(var_3, 0.25);
         }
       } else {
         var_3 = level._id_AAE2[var_1];
 
         if(isDefined(var_3)) {
           maps\mp\hub_vl_base::_id_A59E("Schedule removal of ownerId " + var_3 + "\n");
-          maps\mp\hub_vl_base::_id_8099(var_3, 0.25);
+          maps\mp\hub_vl_base::springcamdisabled(var_3, 0.25);
         }
       }
 
@@ -2746,7 +2746,7 @@ _id_4CCD(var_0) {
   }
 
   if(!level._id_A1FE)
-    var_0 _meth_805C();
+    var_0 hide();
 
   _id_4CD1(var_0);
 }
@@ -2764,13 +2764,13 @@ _id_8BBB(var_0) {
       if(level._id_A1FE)
         _id_05E0(var_2 getentitynumber(), var_0._id_20F1, "show", 1);
       else {
-        var_0 _meth_8005(var_2);
+        var_0 showtoplayer(var_2);
 
         if(isDefined(var_0._id_7705))
-          var_0._id_7705 _meth_8005(var_2);
+          var_0._id_7705 showtoplayer(var_2);
 
-        if(isDefined(var_0._id_835B))
-          var_0._id_835B _meth_8005(var_2);
+        if(isDefined(var_0.botsetattacker))
+          var_0.botsetattacker showtoplayer(var_2);
       }
 
       if(isDefined(var_0.primaryweapon) && issubstr(var_0.primaryweapon, "akimbo"))
@@ -2784,19 +2784,19 @@ _id_4CCF(var_0) {
     var_0 notify("hide_primary_weapon");
 
     if(!level._id_A1FE) {
-      var_0._id_7705 _meth_805C();
-      var_0._id_7705 _meth_8052();
+      var_0._id_7705 hide();
+      var_0._id_7705 hideallparts();
     }
   }
 }
 
 _id_4CD0(var_0) {
-  if(isDefined(var_0._id_835B)) {
+  if(isDefined(var_0.botsetattacker)) {
     var_0 notify("hide_secondary_weapon");
 
     if(!level._id_A1FE) {
-      var_0._id_835B _meth_805C();
-      var_0._id_835B _meth_8052();
+      var_0.botsetattacker hide();
+      var_0.botsetattacker hideallparts();
     }
   }
 }
@@ -2806,8 +2806,8 @@ _id_4CCE(var_0) {
     var_0 notify("hide_akimbo_weapon");
 
     if(!level._id_A1FE) {
-      var_0._id_0BA9 _meth_805C();
-      var_0._id_0BA9 _meth_8052();
+      var_0._id_0BA9 hide();
+      var_0._id_0BA9 hideallparts();
     }
   }
 }
@@ -2847,7 +2847,7 @@ _id_7C75(var_0) {
   }
 
   maps\mp\hub_vl_base::_id_A59E("Removing xuid " + var_3 + " for ownerId " + var_0 + "\n");
-  _func_2BA(level._id_A595[var_0], var_3, 1);
+  _setentplayerxuidforemblem(level._id_A595[var_0], var_3, 1);
   level._id_AAE2[var_3] = undefined;
   level._id_13B8[var_0]._id_9A1A = 0;
   level._id_13B8[var_0]._id_13B3 = undefined;
@@ -2855,27 +2855,27 @@ _id_7C75(var_0) {
   var_4 = level._id_A595[var_0];
   level._id_A595[var_0] = undefined;
   _id_4CCD(var_4);
-  var_4 _meth_8052();
+  var_4 hideallparts();
 
   if(isDefined(var_4._id_13B6._id_9042))
     var_4._id_13B6._id_9042 = undefined;
 
   if(isDefined(var_4._id_7705)) {
     if(!level._id_A1FE) {
-      _func_2BA(var_4._id_7705, var_3, 1);
+      _setentplayerxuidforemblem(var_4._id_7705, var_3, 1);
       var_4._id_7705 delete();
     }
 
     var_4._id_7705 = undefined;
   }
 
-  if(isDefined(var_4._id_835B)) {
+  if(isDefined(var_4.botsetattacker)) {
     if(!level._id_A1FE) {
-      _func_2BA(var_4._id_835B, var_3, 1);
-      var_4._id_835B delete();
+      _setentplayerxuidforemblem(var_4.botsetattacker, var_3, 1);
+      var_4.botsetattacker delete();
     }
 
-    var_4._id_835B = undefined;
+    var_4.botsetattacker = undefined;
   }
 
   if(isDefined(var_4._id_0BA9))
@@ -2923,11 +2923,11 @@ _id_8774() {
   level._id_0EE9["lobby_idle"] = var_0;
 
   for(var_1 = 0; var_1 < 18; var_1++)
-    _func_162(var_0[var_1]);
+    _precachempanim(var_0[var_1]);
 }
 
 _id_A1D5(var_0, var_1, var_2) {
-  var_3 = _func_0A5(0.85, 1.15);
+  var_3 = _randomfloatrange(0.85, 1.15);
   var_4 = 0;
 
   if(!isDefined(self._id_0E93)) {
@@ -2949,7 +2949,7 @@ _id_A1D5(var_0, var_1, var_2) {
     _id_05E0(self.player getentitynumber(), self._id_20F1, "anim", var_5);
 
   if(!level._id_A1FE)
-    self _meth_8276(var_5);
+    self scriptmodelplayanim(var_5);
 
   if(!isDefined(var_1) || !var_1) {
     self._id_0E93 = var_0;
@@ -3023,7 +3023,7 @@ _id_918A(var_0) {
           if(isDefined(self._id_6DAC) && self._id_6DAC == 0)
             var_1 = 8;
           else
-            var_1 = _func_0A4(0, level._id_6871 - 1);
+            var_1 = _randomintrange(0, level._id_6871 - 1);
 
           var_5 = "lobby_idle";
           _id_A1D5(var_1, undefined, var_5);
@@ -3035,7 +3035,7 @@ _id_918A(var_0) {
           if(isDefined(self._id_6DAC) && self._id_6DAC == 0)
             var_1 = 8;
           else
-            var_1 = _func_0A4(0, level._id_6871 - 1);
+            var_1 = _randomintrange(0, level._id_6871 - 1);
 
           var_5 = "lobby_idle";
           _id_A1D5(var_1, undefined, var_5);
@@ -3110,7 +3110,7 @@ _id_3B65(var_0, var_1, var_2) {
           var_17 = _id_9B85(var_11, var_12, var_16);
 
           if(var_17["intersect"]) {
-            if(_func_0E1(var_6[var_6.size - 1], var_17["closestpoint"]) > 0.1 && _func_0E1(var_12, var_17["closestpoint"]) > 0.1) {
+            if(_distance2d(var_6[var_6.size - 1], var_17["closestpoint"]) > 0.1 && _distance2d(var_12, var_17["closestpoint"]) > 0.1) {
               var_10 = 1;
 
               if(!isDefined(var_14) || var_14["radratio"] > var_17["radratio"]) {
@@ -3124,13 +3124,13 @@ _id_3B65(var_0, var_1, var_2) {
         if(var_10) {
           var_5 = 1;
 
-          if(_func_0E4(var_11, var_13["center"]) < var_13["radius"]) {
+          if(_length2d(var_11, var_13["center"]) < var_13["radius"]) {
             var_11 = _id_6485(var_11, var_13);
             var_6[var_6.size - 1] = var_11;
             var_10 = 0;
             var_7 = 1;
             var_8 = var_9 + 1;
-          } else if(_func_0E4(var_12, var_13["center"]) < var_13["radius"]) {
+          } else if(_length2d(var_12, var_13["center"]) < var_13["radius"]) {
             var_12 = _id_6485(var_12, var_13);
             var_6[var_6.size] = var_12;
             var_10 = 0;
@@ -3173,7 +3173,7 @@ _id_9B85(var_0, var_1, var_2) {
   var_6 = var_5 + var_3;
   var_7 = (var_1[0] - var_0[0], var_1[1] - var_0[1], 0);
   var_8 = vectorNormalize(var_7);
-  var_9 = _func_0E4(var_7);
+  var_9 = _length2d(var_7);
   var_10 = (var_4[0] - var_0[0], var_4[1] - var_0[1], 0);
   var_11 = vectordot(var_8, var_10);
 
@@ -3185,7 +3185,7 @@ _id_9B85(var_0, var_1, var_2) {
   var_12 = (var_0[0] + var_11 * var_8[0], var_0[1] + var_11 * var_8[1], 0);
   var_13 = var_11 / var_9;
   var_14 = (var_12[0] - var_4[0], var_12[1] - var_4[1], 0);
-  var_9 = _func_0E4(var_14);
+  var_9 = _length2d(var_14);
   var_15 = 0;
   var_16 = 1.0;
 
@@ -3333,11 +3333,11 @@ _id_1D1A(var_0, var_1, var_2, var_3, var_4) {
   var_0._id_6EE3 = var_6;
   var_0._id_6EE6 = anglesToForward(var_0.angles);
   var_0._id_6EE0 = anglesToForward(var_4);
-  var_0._id_6EE7 = _func_0DD(var_0.angles[0]);
+  var_0._id_6EE7 = _angleclamp180(var_0.angles[0]);
   var_0._id_6EDE = var_0._id_6EE7;
-  var_0._id_6EE1 = _func_0DD(var_4[0]);
-  var_0._id_6EE8 = _func_0DD(var_0.angles[1]);
-  var_0._id_6EE2 = _func_0DD(var_4[1]);
+  var_0._id_6EE1 = _angleclamp180(var_4[0]);
+  var_0._id_6EE8 = _angleclamp180(var_0.angles[1]);
+  var_0._id_6EE2 = _angleclamp180(var_4[1]);
   var_0._id_6EE5 = var_2;
   var_0._id_6EDF = var_3;
   var_0._id_6EEB = (0, 0, 0);
@@ -3365,17 +3365,17 @@ _id_8C4E(var_0, var_1) {
   var_2 = -0.5;
   var_0 = var_0 + var_2;
   var_0 = var_0 * (2 * var_1);
-  var_3 = _func_0D9(1 + var_1 * var_1) / (2 * var_1);
+  var_3 = _sqrt(1 + var_1 * var_1) / (2 * var_1);
   var_4 = 0.5;
-  var_5 = var_3 * (var_0 / _func_0D9(1 + var_0 * var_0)) + var_4;
+  var_5 = var_3 * (var_0 / _sqrt(1 + var_0 * var_0)) + var_4;
   return var_5;
 }
 
 _id_5CA0(var_0, var_1) {
-  var_2 = _func_0DD(var_1[0]);
-  var_3 = _func_0DD(var_0.angles[0]);
-  var_4 = _func_0DD(var_1[1] - var_0.angles[1]);
-  var_5 = _func_0DD(var_2 - var_3);
+  var_2 = _angleclamp180(var_1[0]);
+  var_3 = _angleclamp180(var_0.angles[0]);
+  var_4 = _angleclamp180(var_1[1] - var_0.angles[1]);
+  var_5 = _angleclamp180(var_2 - var_3);
 
   if(var_4 < -1 * var_0._id_6EED)
     var_4 = -1 * var_0._id_6EED;
@@ -3392,7 +3392,7 @@ _id_5CA0(var_0, var_1) {
   var_6 = (var_5, var_4, 0);
   var_0.angles = var_0.angles + var_6;
 
-  if(_func_0AE(var_5) < 0.1 && _func_0AE(var_4) < 0.1)
+  if(_abs(var_5) < 0.1 && _abs(var_4) < 0.1)
     return 1;
   else
     return 0;
@@ -3404,7 +3404,7 @@ _id_A09B(var_0, var_1) {
   var_3 = var_0.angles;
   var_4 = var_2 * (var_0._id_6EE1 - var_0._id_6EE7) + var_0._id_6EE7;
   var_5 = var_0._id_6EE8 + var_2 * (var_0._id_6EE2 - var_0._id_6EE8);
-  var_6 = var_0.angles[1] + _func_0DD(var_5 - var_0.angles[1]);
+  var_6 = var_0.angles[1] + _angleclamp180(var_5 - var_0.angles[1]);
   var_3 = (var_4, var_6, var_3[2]);
   return _id_5CA0(var_0, var_3);
 }
@@ -3495,8 +3495,8 @@ _id_1E39(var_0, var_1, var_2) {
   var_4 = var_0;
   var_5 = var_2;
   var_6 = [];
-  var_7 = vectorNormalize(_func_0E9(var_3 - var_4, (0, 0, 1)));
-  var_8 = vectorNormalize(_func_0E9(var_7, var_3 - var_4));
+  var_7 = vectorNormalize(_vectorcross(var_3 - var_4, (0, 0, 1)));
+  var_8 = vectorNormalize(_vectorcross(var_7, var_3 - var_4));
   var_9 = var_5 - var_4;
   var_10 = var_5 - vectordot(var_8, var_9) * var_8;
   var_11 = var_5 - vectordot(var_7, var_9) * var_7;
@@ -3526,24 +3526,24 @@ _id_1E39(var_0, var_1, var_2) {
 _id_1E3C(var_0, var_1) {
   var_2 = getdvarfloat("cg_fov", 45) * getdvarfloat("3078", 1.0);
   var_3 = 1.0;
-  var_4 = _func_0A8(var_2);
+  var_4 = _tan(var_2);
   var_5 = [];
-  var_6 = var_4 * _func_0AE(var_0);
+  var_6 = var_4 * _abs(var_0);
   var_7 = 1;
 
   if(var_0 < 0)
     var_7 = -1;
 
-  var_8 = var_6 / _func_0D9(1 - var_6 * var_6);
+  var_8 = var_6 / _sqrt(1 - var_6 * var_6);
   var_5["sx"] = var_7;
   var_5["fx"] = var_8;
-  var_9 = var_3 * var_4 * _func_0AE(var_1);
+  var_9 = var_3 * var_4 * _abs(var_1);
   var_10 = 1;
 
   if(var_1 < 0)
     var_10 = -1;
 
-  var_11 = var_9 / _func_0D9(1 - var_9 * var_9);
+  var_11 = var_9 / _sqrt(1 - var_9 * var_9);
   var_5["sz"] = var_10;
   var_5["fz"] = var_11;
   return var_5;
@@ -3553,15 +3553,15 @@ _id_1E37(var_0, var_1, var_2) {
   var_3 = var_1;
   var_4 = var_2;
   var_5 = var_4 - var_3;
-  var_6 = vectorNormalize(_func_0E9(var_5, (0, 0, 1)));
-  var_7 = vectorNormalize(_func_0E9(var_6, var_5));
+  var_6 = vectorNormalize(_vectorcross(var_5, (0, 0, 1)));
+  var_7 = vectorNormalize(_vectorcross(var_6, var_5));
   var_8 = var_5 - vectordot(var_5, var_7) * var_7;
   var_9 = length(var_8);
   var_10 = var_0["fx"];
   var_11 = var_0["sx"];
   var_12 = var_9 * var_10;
   var_9 = var_9 * var_10 * var_10;
-  var_13 = var_9 * var_10 * _func_0D9(1 - var_10 * var_10);
+  var_13 = var_9 * var_10 * _sqrt(1 - var_10 * var_10);
   var_14 = var_9 * var_8 + var_13 * var_6;
   var_15 = var_5 - vectordot(var_5, var_6) * var_6;
   var_16 = length(var_15);
@@ -3569,7 +3569,7 @@ _id_1E37(var_0, var_1, var_2) {
   var_18 = var_0["sz"];
   var_19 = var_16 * var_17;
   var_16 = var_16 * var_17 * var_17;
-  var_20 = var_16 * var_17 * _func_0D9(1 - var_17 * var_17);
+  var_20 = var_16 * var_17 * _sqrt(1 - var_17 * var_17);
   var_21 = var_16 * var_15 + var_20 * var_7;
   var_22 = var_4 + var_11 * var_14 + var_18 * var_21;
   return var_22;
@@ -3629,8 +3629,8 @@ _id_2AD1(var_0) {
       var_2 = var_1;
   }
 
-  var_0.angles = (_func_0DD(var_0.angles[0]), _func_0DD(var_0.angles[1]), _func_0DD(var_0.angles[2]));
-  var_0 _meth_808C();
+  var_0.angles = (_angleclamp180(var_0.angles[0]), _angleclamp180(var_0.angles[1]), _angleclamp180(var_0.angles[2]));
+  var_0 dontinterpolate();
 }
 
 _id_9911(var_0, var_1, var_2, var_3) {
@@ -3693,8 +3693,8 @@ _id_2AFB() {
   var_11 = 16;
 
   for(;;) {
-    if(self _meth_82F4()) {
-      while(self _meth_82F4())
+    if(self fragbuttonpressed()) {
+      while(self fragbuttonpressed())
         waitframe();
 
       var_9++;
@@ -3712,8 +3712,8 @@ _id_2AFB() {
       var_0 = 1;
     }
 
-    if(self _meth_82F5()) {
-      while(self _meth_82F5())
+    if(self secondaryoffhandbuttonpressed()) {
+      while(self secondaryoffhandbuttonpressed())
         waitframe();
 
       var_8++;
@@ -3765,19 +3765,19 @@ _id_2AE5(var_0) {
   var_1 = 30;
   var_2 = 10;
   var_3 = 10;
-  var_4 = self _meth_8451();
-  var_5 = self _meth_82F9();
+  var_4 = self getunnormalizedcameramovement();
+  var_5 = self getnormalizedmovement();
   var_6 = anglesToForward(var_4);
   var_7 = anglestoup(var_4);
   var_8 = anglestoright(var_4);
   var_9 = 0;
 
-  if(self _meth_8343())
+  if(self adsbuttonpressed())
     var_9 = -1;
-  else if(self _meth_8342())
+  else if(self attackbuttonpressed())
     var_9 = 1;
 
-  if(self _meth_82F5()) {
+  if(self secondaryoffhandbuttonpressed()) {
     var_1 = var_1 * 0.1;
     var_2 = var_2 * 0.1;
     var_3 = var_3 * 0.1;
@@ -3789,7 +3789,7 @@ _id_2AE5(var_0) {
 
 _id_A59D(var_0, var_1) {
   if(!isDefined(self._id_A4B5)) {
-    self._id_A4B5 = _func_19B(self);
+    self._id_A4B5 = _newclienthudelem(self);
     self._id_A4B5.x = 0;
     self._id_A4B5.y = 0;
     self._id_A4B5 setshader(var_1, 640, 480);
@@ -3845,11 +3845,11 @@ _id_2785() {
   if(isDefined(var_0._id_1F8E)) {
     return;
   }
-  var_1 = var_0 _meth_8299();
-  var_0._id_1F8E = var_0 _id_8F7D(var_0._id_1FA3, var_0._id_0079, var_0._id_1F9D, var_0._id_835A, "none", var_0._id_5DF4, var_0._id_5DF7, var_0._id_6F65, var_0._id_83F4, var_0.name, 0, 1);
+  var_1 = var_0 getxuid();
+  var_0._id_1F8E = var_0 _id_8F7D(var_0._id_1FA3, var_0._id_0079, var_0._id_1F9D, var_0.botclearscriptenemy, "none", var_0._id_5DF4, var_0._id_5DF7, var_0._id_6F65, var_0.setnameplatematerial, var_0.name, 0, 1);
 
   if(!level._id_A1FE)
-    _func_2BA(var_0._id_1F8E, var_1);
+    _setentplayerxuidforemblem(var_0._id_1F8E, var_1);
 
   var_0 maps\mp\hub_vl_base::_id_7699(var_0._id_1F8E, var_0._id_1F8E._id_8F80);
 }

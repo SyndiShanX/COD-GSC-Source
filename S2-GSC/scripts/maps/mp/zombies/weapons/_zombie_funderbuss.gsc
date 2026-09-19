@@ -53,7 +53,7 @@ fire_funderbuss_grenades(var_0, var_1) {
     }
     var_8 = var_2 getEye() + var_4 * 45 + var_5 * -8;
     var_9 = 10;
-    var_9 = var_9 * var_2 _meth_8345();
+    var_9 = var_9 * var_2 playerads();
     var_9 = 10 - var_9;
 
     if(isDefined(var_1))
@@ -69,7 +69,7 @@ fire_funderbuss_grenades(var_0, var_1) {
 
     var_10 = anglesToForward(var_3 + (0, -1 * var_9 + var_7 * var_9, 0));
     var_11 = 2;
-    var_12 = _func_071("frag_grenade_funderbuss_zm", var_8, 2250 * vectorNormalize(var_10), var_11, var_2);
+    var_12 = _magicgrenademanual("frag_grenade_funderbuss_zm", var_8, 2250 * vectorNormalize(var_10), var_11, var_2);
     var_12._id_0117 = var_2;
     var_2.zmb_blundergrenades = common_scripts\utility::_id_0F6F(var_2.zmb_blundergrenades, var_12);
     level.zmb_blundergrenades = common_scripts\utility::_id_0F6F(level.zmb_blundergrenades, var_12);
@@ -88,7 +88,7 @@ monitor_active_grenades() {
 
       if(var_2.life > 2.4) {
         var_3 = var_2 common_scripts\utility::_id_8FFC();
-        var_3 _meth_805B();
+        var_3 show();
 
         if(isDefined(var_3)) {
           var_3 _meth_8561("frag_grenade_funderbuss_zm", var_2._id_0117, var_3);

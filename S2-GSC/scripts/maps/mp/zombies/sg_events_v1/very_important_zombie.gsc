@@ -4,8 +4,8 @@
 **************************************************************************/
 
 init() {
-  _func_13F("zm_hud_type_escort_icon");
-  _func_13F("zm_hud_type_escort_icon");
+  _precacheshader("zm_hud_type_escort_icon");
+  _precacheshader("zm_hud_type_escort_icon");
   basic_vip_init();
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_assassinate_common", ::basic_assassinate_run, 30, 0, 1);
 }
@@ -94,7 +94,7 @@ basic_vip_run(var_0, var_1) {
   }
 
   foreach(var_7 in var_5) {
-    if(isDefined(var_7._id_8260))
+    if(isDefined(var_7.setlookatent))
       var_7._id_8C95 = 1;
 
     var_7.ignoreforcedzombietype = 1;
@@ -140,7 +140,7 @@ basic_vip_run(var_0, var_1) {
     if(!common_scripts\utility::_id_562E(var_16)) {
       break;
     } else
-      _func_032("ui_zm_waypoint_ents_type", 0);
+      _setomnvar("ui_zm_waypoint_ents_type", 0);
 
     if(var_15 != var_3 - 1)
       wait(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_next_spawn_time"));
@@ -194,7 +194,7 @@ get_player_push_nodes(var_0, var_1) {
 
   for(var_7 = vectortoangles(var_1.origin - var_0.origin); var_6 < var_5 - var_2; var_4 = common_scripts\utility::_id_0F6F(var_4, var_10)) {
     var_6 = var_6 + var_2;
-    var_8 = _func_2E1(_func_10A(var_0.origin, var_1.origin, var_6 / var_5), self);
+    var_8 = _func_2E1(_vectorlerp(var_0.origin, var_1.origin, var_6 / var_5), self);
     var_9 = var_8 + var_2 * vectorNormalize(anglestoright(var_7));
     var_10 = var_8 + var_2 * vectorNormalize(anglestoright(var_7 + (0, 180, 0)));
     var_4 = common_scripts\utility::_id_0F6F(var_4, var_9);
@@ -257,19 +257,19 @@ pushplayervib() {
     var_4 = self.origin + var_1 * vectorNormalize(anglesToForward(self.angles));
 
     foreach(var_6 in level.players) {
-      if(var_6 istouching(self) || _func_0E1(var_6.origin, var_4) < var_2 && _func_0AE(var_6.origin[2] - var_4[2]) < 64) {
+      if(var_6 istouching(self) || _distance2d(var_6.origin, var_4) < var_2 && _abs(var_6.origin[2] - var_4[2]) < 64) {
         if(!isDefined(var_6.lastvibpush))
           var_6.lastvibpush = gettime();
 
-        if(var_6 _meth_8346() && gettime() - var_6.lastvibpush > 300) {
+        if(var_6 isonground() && gettime() - var_6.lastvibpush > 300) {
           var_3 = 1;
           var_6.lastvibpush = gettime();
           var_7 = var_6.origin - self.origin;
           var_7 = (var_7[0], var_7[1], 0);
           var_8 = var_0 * vectorNormalize(var_7);
           var_8 = (var_8[0], var_8[1], 50);
-          var_6 _meth_8059(20, self.origin, self, self);
-          var_6 _meth_82F7(var_8);
+          var_6 dodamage(20, self.origin, self, self);
+          var_6 setvelocity(var_8);
         }
       }
     }
@@ -349,7 +349,7 @@ spawn_new_important_bomber(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(level.zmb_waypoint_ents)) {
     foreach(var_8 in level.zmb_waypoint_ents) {
       if(isDefined(var_8)) {
-        var_8 _meth_8057();
+        var_8 unlink();
         var_8 delete();
       }
     }
@@ -416,7 +416,7 @@ new_important_bomber(var_0, var_1, var_2, var_3, var_4) {
       var_5.noenergyhold = 1;
   } else {
     level thread maps\mp\_utility::_id_6F74(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 1, "sg_VIP_finished");
-    var_5 maps\mp\agents\_agent_utility::_id_83FE(level._id_746E);
+    var_5 maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);
     var_7 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_escort_health");
     var_7 = var_7 * maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_escort_health_redskull");
     var_5 maps\mp\agents\_agent_common::_id_83FD(int(var_7));

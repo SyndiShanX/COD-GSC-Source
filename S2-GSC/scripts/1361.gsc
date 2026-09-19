@@ -11,13 +11,13 @@ _id_3D52(var_0) {
     return;
   }
   if(var_0) {
-    var_1._id_3D4C = _func_2A9(var_2, var_1, "j_spineupper", var_1);
-    _func_14C(var_1._id_3D4C);
-    var_1 _meth_83C7("mp_zombie_descent_sewer_lgton", 0.5);
+    var_1._id_3D4C = _spawnlinkedfxforclient(var_2, var_1, "j_spineupper", var_1);
+    _triggerfx(var_1._id_3D4C);
+    var_1 lightsetoverrideenableforplayer("mp_zombie_descent_sewer_lgton", 0.5);
   } else {
     var_1._id_3D4C delete();
     var_1._id_3D4C = undefined;
-    var_1 _meth_83C7("mp_zombie_descent_secrettrial", 0.5);
+    var_1 lightsetoverrideenableforplayer("mp_zombie_descent_secrettrial", 0.5);
   }
 }
 

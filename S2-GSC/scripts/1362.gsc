@@ -174,25 +174,25 @@ _id_8C05(var_0, var_1, var_2) {
   markrefreshed(var_5, var_1);
 
   if(var_1.type == 1 && isDefined(var_1._id_9FD3._id_A9B4)) {
-    var_6 = _func_1B1("mp/zombieInteractTable.csv", 2, var_1._id_9FD3._id_A9B4);
-    var_7 = int(_func_1AE("mp/zombieInteractTable.csv", var_6, 0));
-    var_8 = int(_func_1AE("mp/zombieInteractTable.csv", var_6, 1));
+    var_6 = _tablelookuprownum("mp/zombieInteractTable.csv", 2, var_1._id_9FD3._id_A9B4);
+    var_7 = int(_tablelookupbyrow("mp/zombieInteractTable.csv", var_6, 0));
+    var_8 = int(_tablelookupbyrow("mp/zombieInteractTable.csv", var_6, 1));
     var_3 = var_7 | var_8 << 4;
     var_4 = _id_267D(var_1._id_9FD3._id_A9A5, var_2);
   } else if(var_1.type == 2 && isDefined(var_1._id_9FD3._id_6F58)) {
-    var_6 = _func_1B1("mp/zombieInteractTable.csv", 2, var_1._id_9FD3._id_6F58);
-    var_7 = int(_func_1AE("mp/zombieInteractTable.csv", var_6, 0));
-    var_8 = int(_func_1AE("mp/zombieInteractTable.csv", var_6, 1));
+    var_6 = _tablelookuprownum("mp/zombieInteractTable.csv", 2, var_1._id_9FD3._id_6F58);
+    var_7 = int(_tablelookupbyrow("mp/zombieInteractTable.csv", var_6, 0));
+    var_8 = int(_tablelookupbyrow("mp/zombieInteractTable.csv", var_6, 1));
     var_3 = var_7 | var_8 << 4;
     var_4 = _id_267D(var_1._id_9FD3._id_6F56, var_2);
   } else if(var_1.type == 3 && var_1._id_9FD3._id_1B73 != 0) {
-    var_6 = _func_1B1("mp/zombieInteractTable.csv", 2, "mysterybox");
-    var_7 = int(_func_1AE("mp/zombieInteractTable.csv", var_6, 0));
+    var_6 = _tablelookuprownum("mp/zombieInteractTable.csv", 2, "mysterybox");
+    var_7 = int(_tablelookupbyrow("mp/zombieInteractTable.csv", var_6, 0));
     var_8 = 0;
 
     if(var_1._id_9FD3._id_1B73 == 2) {
-      var_9 = _func_1B1("mp/zombieInteractTable.csv", 2, var_1._id_9FD3._id_1B74);
-      var_8 = int(_func_1AE("mp/zombieInteractTable.csv", var_9, 1));
+      var_9 = _tablelookuprownum("mp/zombieInteractTable.csv", 2, var_1._id_9FD3._id_1B74);
+      var_8 = int(_tablelookupbyrow("mp/zombieInteractTable.csv", var_9, 1));
     }
 
     var_3 = var_7 | var_8 << 4;
@@ -214,8 +214,8 @@ _id_8C05(var_0, var_1, var_2) {
     var_4 = _id_267D(var_1._id_9FD3._id_401E, var_2);
   }
 
-  var_0 _meth_82FF("ui_zm_interaction_flags", var_3);
-  var_0 _meth_82FF("ui_zm_interaction_data", var_4);
+  var_0 setclientomnvar("ui_zm_interaction_flags", var_3);
+  var_0 setclientomnvar("ui_zm_interaction_data", var_4);
 }
 
 hideinteractprompt(var_0, var_1) {
@@ -223,7 +223,7 @@ hideinteractprompt(var_0, var_1) {
   var_0 _meth_866C(&"remove_progressive_interact", 0);
   var_1._id_4DBA = 0;
   var_1._id_4DB6 = undefined;
-  var_0 _meth_82FF("ui_zm_interaction_flags", 0);
+  var_0 setclientomnvar("ui_zm_interaction_flags", 0);
 }
 
 _id_4205(var_0, var_1, var_2) {
@@ -236,7 +236,7 @@ _id_4205(var_0, var_1, var_2) {
   var_5 = anglesToForward(var_0.angles);
   var_6 = vectorNormalize((var_5[0], var_5[1], 0));
   var_7 = vectordot(var_4, var_6);
-  var_8 = _func_0AA(clamp(var_7, -1, 1));
+  var_8 = _acos(clamp(var_7, -1, 1));
   return var_8;
 }
 
@@ -324,10 +324,10 @@ check_progressive_interact_input(var_0, var_1) {
       continue;
     }
 
-    if(!isDefined(self.interactneedrelease) || !self _meth_8341())
+    if(!isDefined(self.interactneedrelease) || !self usebuttonpressed())
       self.interactneedrelease = 0;
 
-    var_4 = self _meth_8341() && !self.interactneedrelease;
+    var_4 = self usebuttonpressed() && !self.interactneedrelease;
 
     if(!var_3) {
       if(var_4) {
@@ -354,7 +354,7 @@ _id_A151(var_0) {
 
   for(;;) {
     refreshplayerinteractprompts(var_0, var_2);
-    var_3 = var_0 _meth_84D1(1);
+    var_3 = var_0 playergetuseent(1);
 
     if(var_2._id_4DBA) {
       if(!isDefined(var_3) || var_2._id_2903._id_9D65 != var_3)
@@ -419,7 +419,7 @@ refreshplayerinteractprompts(var_0, var_1) {
     if(var_5) {
       if(common_scripts\utility::_id_562E(var_4._id_6641)) {
         var_4._id_9D65 _meth_8660(1, var_4._id_5EB5);
-        var_4._id_9D65 _meth_8177(0);
+        var_4._id_9D65 usetriggerrequirelookat(0);
       }
 
       if(!isDefined(var_1._id_2903) || var_4 != var_1._id_2903)
@@ -427,7 +427,7 @@ refreshplayerinteractprompts(var_0, var_1) {
     }
 
     if(common_scripts\utility::_id_562E(var_4._id_9FD3.require_standing)) {
-      switch (var_0 _meth_8178()) {
+      switch (var_0 getstance()) {
         case "crouch":
         case "prone":
           var_6 = var_6 | 1;

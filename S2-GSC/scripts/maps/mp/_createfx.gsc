@@ -44,19 +44,19 @@ callback_playerconnect() {
   if(!isDefined(level.player)) {
     var_0 = getEntArray("mp_global_intermission", "classname");
     var_1 = (var_0[0].angles[0], var_0[0].angles[1], 0.0);
-    self _meth_826B(var_0[0].origin, var_1);
+    self spawn(var_0[0].origin, var_1);
     maps\mp\_utility::_id_A165("playing");
     self.maxhealth = 10000000;
     self.health = 10000000;
     level.player = self;
     thread common_scripts\_createfx::createfxlogic();
   } else
-    _func_134(self getentitynumber());
+    _kick(self getentitynumber());
 }
 
 func_player_speed() {
   var_0 = level._createfx.player_speed / 190;
-  level.player _meth_81E1(var_0);
+  level.player setmovespeedscale(var_0);
 }
 
 _id_3F0F() {

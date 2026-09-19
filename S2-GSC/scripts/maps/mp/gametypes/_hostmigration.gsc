@@ -31,7 +31,7 @@ callback_hostmigration() {
     var_2 thread _id_4E0A();
 
     if(isPlayer(var_2)) {
-      var_2 _meth_82FF("ui_session_state", var_2.sessionstate);
+      var_2 setclientomnvar("ui_session_state", var_2.sessionstate);
       var_2 _meth_85EF(&"host_migration_show_hud", 0);
     }
   }
@@ -48,13 +48,13 @@ callback_hostmigration() {
 
 _id_4E0C() {
   level endon("game_ended");
-  level._id_5139 = 25;
+  level.ingraceperiod = 25;
   thread maps\mp\gametypes\_gamelogic::_id_6037(20.0);
   _id_4E0D();
-  level._id_5139 = 10;
+  level.ingraceperiod = 10;
   thread maps\mp\gametypes\_gamelogic::_id_6037(5.0);
   wait 5;
-  level._id_5139 = 0;
+  level.ingraceperiod = 0;
 }
 
 _id_4E0D() {
@@ -69,8 +69,8 @@ _id_4E07(var_0) {
   var_1 = -1;
   var_2 = "?";
 
-  if(isDefined(var_0._id_37CD))
-    var_1 = var_0._id_37CD;
+  if(isDefined(var_0.entity_number))
+    var_1 = var_0.entity_number;
 
   if(isPlayer(var_0) && isDefined(var_0.name))
     var_2 = var_0.name;
@@ -78,10 +78,10 @@ _id_4E07(var_0) {
   if(isPlayer(var_0))
     return "player <" + var_2 + "> (entNum " + var_1 + " )";
 
-  if(_func_1EF(var_0) && maps\mp\_utility::_id_56FF(var_0))
+  if(_isagent(var_0) && maps\mp\_utility::_id_56FF(var_0))
     return "participant agent <" + var_1 + ">";
 
-  if(_func_1EF(var_0))
+  if(_isagent(var_0))
     return "non-participant agent <" + var_1 + ">";
 
   return "unknown entity <" + var_1 + ">";
@@ -97,7 +97,7 @@ _id_4E0B() {
     self waittill("spawned");
 
   maps\mp\_utility::freezecontrolswrapper(1);
-  self _meth_800F();
+  self disableammogeneration();
   level waittill("host_migration_end");
 }
 
@@ -105,7 +105,7 @@ _id_4E0A() {
   level endon("host_migration_begin");
   self endon("disconnect");
 
-  if(_func_1EF(self))
+  if(_isagent(self))
     self endon("death");
 
   _id_4E0B();
@@ -113,7 +113,7 @@ _id_4E0A() {
   if(self._id_4E05) {
     if(maps\mp\_utility::gameflag("prematch_done")) {
       maps\mp\_utility::freezecontrolswrapper(0);
-      self _meth_800E();
+      self enableammogeneration();
     }
 
     self._id_4E05 = undefined;
@@ -137,7 +137,7 @@ _id_A783(var_0) {
   wait(var_0);
 }
 
-_id_A6F5(var_0) {
+waitlongdurationwithhostmigrationpause(var_0) {
   if(var_0 == 0) {
     return;
   }
@@ -191,14 +191,14 @@ _id_A6F4(var_0) {
 
     while(isDefined(level.hostmigrationtimer)) {
       var_2 = var_2 + 1000;
-      _func_137(int(var_2));
+      _setgameendtime(int(var_2));
       wait 1;
     }
   }
 
   while(isDefined(level.hostmigrationtimer)) {
     var_2 = var_2 + 1000;
-    _func_137(int(var_2));
+    _setgameendtime(int(var_2));
     wait 1;
   }
 

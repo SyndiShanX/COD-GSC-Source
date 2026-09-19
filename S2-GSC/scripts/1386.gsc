@@ -49,7 +49,7 @@ restore_tactical_usage_on_spawn() {
     if(_id_0547::_id_5866(self.zmb_plr_tactical)) {
       self setoffhandsecondaryclass(self.zmb_plr_tactical);
 
-      if(!self _meth_8319(self.zmb_plr_tactical))
+      if(!self hasweapon(self.zmb_plr_tactical))
         _id_0586::_id_078C(self.zmb_plr_tactical);
 
       var_0 = 0;
@@ -81,7 +81,7 @@ onplayerconnect() {
   self._id_6F67 = [];
   self._id_0F60 = 0;
   var_0 = _id_420E(_id_0547::_id_4BA7("specialty_class_hoarder_zm"));
-  self _meth_82FF("zm_blitz_items_limit", var_0);
+  self setclientomnvar("zm_blitz_items_limit", var_0);
 }
 
 _id_86E9(var_0) {
@@ -89,7 +89,7 @@ _id_86E9(var_0) {
 
   foreach(var_2 in level.players) {
     var_3 = _id_420E(_id_0547::_id_4BA7("specialty_class_hoarder_zm"));
-    var_2 _meth_82FF("zm_blitz_items_limit", var_3);
+    var_2 setclientomnvar("zm_blitz_items_limit", var_3);
   }
 }
 
@@ -169,18 +169,18 @@ _id_532C(var_0, var_1) {
       var_7 = common_scripts\utility::_id_46B5(var_6.target, "targetname");
 
       for(var_8 = 0; var_8 < 4; var_8++) {
-        var_3[var_8]._id_81E1 = var_8;
+        var_3[var_8].setmovespeedscale = var_8;
         var_3[var_8].look_at_loc = var_6;
         var_3[var_8].fake_scriptable = var_7;
       }
     } else {
-      var_9 = _func_21F("perkmachine_scriptable_ent", "targetname");
+      var_9 = _getscriptablearray("perkmachine_scriptable_ent", "targetname");
       var_9 = var_3[0] _id_45A0(var_9, 4);
 
       for(var_8 = 0; var_8 < 4; var_8++) {
-        var_3[var_8]._id_81E1 = var_8;
-        var_3[var_8]._id_82EF = var_9[var_8];
-        var_3[var_8]._id_82EF _meth_83FA("machine_main", "closed");
+        var_3[var_8].setmovespeedscale = var_8;
+        var_3[var_8].issighted = var_9[var_8];
+        var_3[var_8].issighted setscriptablepartstate("machine_main", "closed");
       }
     }
   }
@@ -196,7 +196,7 @@ _id_532C(var_0, var_1) {
     if(var_2.name == "perk_all" && isDefined(var_12.look_at_loc))
       var_12 _meth_8660(1, var_12.look_at_loc.origin);
     else
-      var_12 _meth_8660(1, var_12._id_82EF.origin + (0, 0, 52));
+      var_12 _meth_8660(1, var_12.issighted.origin + (0, 0, 52));
 
     var_12._id_8C82 = var_1;
 
@@ -222,7 +222,7 @@ _id_532C(var_0, var_1) {
 }
 
 _id_45A0(var_0, var_1) {
-  var_2 = _func_1AC(var_0, self.origin);
+  var_2 = _sortbydistance(var_0, self.origin);
   var_3 = [];
 
   for(var_4 = 0; var_4 < var_1; var_4++)
@@ -247,7 +247,7 @@ _id_10E2(var_0) {
   var_0 endon("disconnect");
 
   if(1)
-    self._id_65DC = _id_0552::_id_7BF3(var_0, self, 1, self._id_82EF.origin + (0, 0, 52));
+    self._id_65DC = _id_0552::_id_7BF3(var_0, self, 1, self.issighted.origin + (0, 0, 52));
 
   thread _id_8C11(var_0);
   thread _id_6F62(var_0);
@@ -314,9 +314,9 @@ _id_6F62(var_0) {
 
   if(common_scripts\utility::_id_562E(level.blitz_always_open)) {
     wait 0.25;
-    self._id_82EF _meth_83FA("machine_main", "opening");
-    wait(_func_065(%zmb_perk_machine_open));
-    self._id_82EF _meth_83FA("machine_main", "opened");
+    self.issighted setscriptablepartstate("machine_main", "opening");
+    wait(_getanimlength(%zmb_perk_machine_open));
+    self.issighted setscriptablepartstate("machine_main", "opened");
     return;
   }
 
@@ -331,15 +331,15 @@ _id_6F62(var_0) {
       var_0.wasperkgreeted = 1;
       var_5 = _id_0380::_id_2889("zmb_perk_machine_open", undefined, self.origin + (0, 0, 100));
       _id_0378::_id_8D14(var_5);
-      self._id_82EF _meth_83FA("machine_main", "opening");
-      wait(_func_065(%zmb_perk_machine_open));
-      self._id_82EF _meth_83FA("machine_main", "opened");
+      self.issighted setscriptablepartstate("machine_main", "opening");
+      wait(_getanimlength(%zmb_perk_machine_open));
+      self.issighted setscriptablepartstate("machine_main", "opened");
     } else {
       var_6 = _id_0380::_id_2889("zmb_perk_machine_close", undefined, self.origin + (0, 0, 100));
       _id_0378::_id_8D14(var_6);
-      self._id_82EF _meth_83FA("machine_main", "closing");
-      wait(_func_065(%zmb_perk_machine_reverse));
-      self._id_82EF _meth_83FA("machine_main", "closed");
+      self.issighted setscriptablepartstate("machine_main", "closing");
+      wait(_getanimlength(%zmb_perk_machine_reverse));
+      self.issighted setscriptablepartstate("machine_main", "closed");
     }
 
     var_2 = var_4;
@@ -362,16 +362,16 @@ _id_8719(var_0) {
   for(var_4 = 0; var_4 < var_2; var_4++) {
     var_5 = "gears_0" + (var_4 + 1);
     var_6 = "idle_" + int(var_3[var_4]);
-    var_1._id_82EF _meth_83FA(var_5, var_6);
+    var_1.issighted setscriptablepartstate(var_5, var_6);
   }
 }
 
 _id_4D16(var_0) {
-  self._id_82EF _meth_8006(var_0);
+  self.issighted _meth_8006(var_0);
 }
 
 _id_8C11(var_0) {
-  self._id_82EF _meth_8005(var_0);
+  self.issighted showtoplayer(var_0);
 }
 
 _id_6F61(var_0, var_1) {
@@ -385,21 +385,21 @@ _id_6F61(var_0, var_1) {
   for(;;) {
     [var_5, var_6] = _id_0547::_id_A795();
 
-    if((var_5 _meth_8178() == "crouch" || var_5 _meth_8178() == "prone") && var_0 != "armor") {
+    if((var_5 getstance() == "crouch" || var_5 getstance() == "prone") && var_0 != "armor") {
       continue;
     }
     if(var_3._id_6078 > -1 && var_3._id_6731 >= var_3._id_6078 && level.players.size == 1) {
-      _id_0555::_id_83DD("blitz_soldout", var_5);
+      _id_0555::issprinting("blitz_soldout", var_5);
       continue;
     }
 
     var_7 = _id_4602(var_5, var_2);
 
     if(var_5 _id_4B7E(var_0)) {
-      _id_0555::_id_83DD("blitz_owned", var_5);
+      _id_0555::issprinting("blitz_owned", var_5);
       continue;
     } else if(var_0 == "armor" && var_5 _id_4B53()) {
-      _id_0555::_id_83DD("armor_full", var_5);
+      _id_0555::issprinting("armor_full", var_5);
       continue;
     } else if(var_5 maps\mp\gametypes\zombies::_id_11C2(var_7)) {
       if(var_5 _id_056B::_id_9D19(self._id_6F63))
@@ -461,7 +461,7 @@ allperkmachinethink(var_0) {
   for(;;) {
     [var_4, var_5] = _id_0547::_id_A795();
 
-    if(var_4 _meth_8178() == "crouch" || var_4 _meth_8178() == "prone") {
+    if(var_4 getstance() == "crouch" || var_4 getstance() == "prone") {
       continue;
     }
     var_6 = _id_4602(var_4, var_1);
@@ -496,11 +496,11 @@ _id_7A5A(var_0) {
   for(;;) {
     [var_4, var_5] = _id_0547::_id_A795();
 
-    if(var_4 _meth_8178() == "crouch" || var_4 _meth_8178() == "prone") {
+    if(var_4 getstance() == "crouch" || var_4 getstance() == "prone") {
       continue;
     }
     if(common_scripts\utility::_id_562E(var_4.random_blitz_resetting)) {
-      _id_0555::_id_83DD("machine_reset", var_4);
+      _id_0555::issprinting("machine_reset", var_4);
       continue;
     }
 
@@ -524,7 +524,7 @@ _id_7A5A(var_0) {
       var_6 = common_scripts\utility::_id_0F93(var_6, var_7);
 
       if(var_6.size <= 0) {
-        _id_0555::_id_83DD("blitz_owned", var_4);
+        _id_0555::issprinting("blitz_owned", var_4);
         var_9 = 1;
         break;
       }
@@ -580,9 +580,9 @@ _id_6F5D(var_0, var_1) {
   var_2 setModel("tag_origin");
   var_3 = self._id_741E.angles * (1, 0, 0) + var_0.angles * (0, 1, 0);
   var_2.angles = var_3;
-  var_0 _meth_807B(var_2, "tag_origin", 0.25);
-  var_2 _meth_82B1(self._id_741E.origin, 0.25);
-  var_2 _meth_82B8(self._id_741E.angles, 0.25);
+  var_0 playerlinktoblend(var_2, "tag_origin", 0.25);
+  var_2 moveto(self._id_741E.origin, 0.25);
+  var_2 rotateto(self._id_741E.angles, 0.25);
   var_0 common_scripts\utility::_id_0603();
   var_0 common_scripts\utility::_disableoffhandweapons();
   var_0 maps\mp\_utility::freezecontrolswrapper(1);
@@ -614,28 +614,28 @@ _id_6F5D(var_0, var_1) {
   if(common_scripts\utility::_id_562E(var_1))
     playFX(common_scripts\utility::_id_44F5("zmb_pm_random_use"), self.fake_scriptable.origin, anglesToForward(self.fake_scriptable.angles), anglestoup(self.fake_scriptable.angles));
   else
-    self._id_82EF _meth_83FA("machine_main", "use");
+    self.issighted setscriptablepartstate("machine_main", "use");
 
   var_7 = undefined;
 
   if(isDefined(level.groundrefent)) {
     var_7 = spawn("script_model", (0, 0, 0));
     var_7.angles = level.groundrefent.angles;
-    var_0 _meth_808B(var_7);
-    var_7 _meth_82B8((0, 0, 0), 0.3325);
+    var_0 playersetgroundreferenceent(var_7);
+    var_7 rotateto((0, 0, 0), 0.3325);
   }
 
   wait 1.33;
 
   if(isDefined(level.groundrefent)) {
-    var_0 _meth_808B(level.groundrefent);
+    var_0 playersetgroundreferenceent(level.groundrefent);
 
     if(isDefined(var_7))
       var_7 delete();
   }
 
   var_0 maps\mp\_utility::freezecontrolswrapper(0);
-  var_0 _meth_8057(var_2);
+  var_0 unlink(var_2);
   var_2 delete();
   var_0._id_5799 = 0;
   var_0.has_purchased_any_blitz = 1;
@@ -645,16 +645,16 @@ _id_6F5D(var_0, var_1) {
 }
 
 _id_0F62() {
-  if(!isDefined(self._id_82EF)) {
+  if(!isDefined(self.issighted)) {
     return;
   }
-  if(!common_scripts\utility::_id_562E(self._id_82FE)) {
-    self._id_82FE = 1;
+  if(!common_scripts\utility::_id_562E(self.anyammoforweaponmodes)) {
+    self.anyammoforweaponmodes = 1;
     var_0 = 2.86667;
-    self._id_82EF _meth_83FA("machine_main", "working");
+    self.issighted setscriptablepartstate("machine_main", "working");
     wait(var_0 * 0.3333);
-    self._id_82EF _meth_83FA("machine_main", "idle");
-    self._id_82FE = 0;
+    self.issighted setscriptablepartstate("machine_main", "idle");
+    self.anyammoforweaponmodes = 0;
   }
 }
 
@@ -665,12 +665,12 @@ _id_2CE0(var_0) {
   common_scripts\utility::_id_0614();
   self notify("can_use_consumable");
 
-  if(self _meth_8319("unarmed_perk_machine_zm"))
+  if(self hasweapon("unarmed_perk_machine_zm"))
     _id_0586::_id_0790("unarmed_perk_machine_zm");
 }
 
 isusingperkmachine() {
-  return common_scripts\utility::_id_562E(self._id_5799) || self _meth_8319("unarmed_perk_machine_zm");
+  return common_scripts\utility::_id_562E(self._id_5799) || self hasweapon("unarmed_perk_machine_zm");
 }
 
 _id_4B7E(var_0) {
@@ -757,7 +757,7 @@ _id_4772(var_0) {
     }
   }
 
-  self _meth_82FF("zm_blitz_items_limit", var_1);
+  self setclientomnvar("zm_blitz_items_limit", var_1);
 }
 
 givefreemachineperks(var_0, var_1, var_2) {
@@ -788,7 +788,7 @@ givefreemachineperks(var_0, var_1, var_2) {
     }
   }
 
-  self _meth_82FF("zm_blitz_items_limit", var_3);
+  self setclientomnvar("zm_blitz_items_limit", var_3);
   return var_4;
 }
 
@@ -829,7 +829,7 @@ _id_95D8(var_0) {
   for(var_2 = 0; var_2 < self._id_6F67.size; var_2++) {
     var_3 = self._id_6F67[var_2];
     var_3._id_00D4 = var_2;
-    self _meth_82FF(_id_4603(var_3.name), var_2);
+    self setclientomnvar(_id_4603(var_3.name), var_2);
   }
 
   if(isDefined(self.characterclientindex)) {
@@ -844,11 +844,11 @@ _id_95D8(var_0) {
     }
 
     var_10 = "ui_zm_blitz_" + self.characterclientindex;
-    _func_032(var_10, var_4);
+    _setomnvar(var_10, var_4);
   }
 
   self notify("take_perk", var_0);
-  self _meth_82FF(_id_4603(var_0), -1);
+  self setclientomnvar(_id_4603(var_0), -1);
 }
 
 _id_4793(var_0, var_1) {
@@ -857,7 +857,7 @@ _id_4793(var_0, var_1) {
   var_2._id_00D4 = self._id_6F67.size;
   self._id_6F66[var_0] = var_2;
   self._id_6F67[var_2._id_00D4] = var_2;
-  self _meth_82FF(_id_4603(var_0), var_2._id_00D4);
+  self setclientomnvar(_id_4603(var_0), var_2._id_00D4);
   var_3 = undefined;
   var_4 = _id_420E(_id_0547::_id_4BA7("specialty_class_hoarder_zm"));
 
@@ -878,13 +878,13 @@ _id_4793(var_0, var_1) {
     }
 
     var_11 = "ui_zm_blitz_" + self.characterclientindex;
-    _func_032(var_11, var_5);
+    _setomnvar(var_11, var_5);
   }
 
   if(isDefined(var_3))
-    _id_0555::_id_83DD("biltz_replaced", self, var_0, var_3);
+    _id_0555::issprinting("biltz_replaced", self, var_0, var_3);
   else
-    _id_0555::_id_83DD("buy_blitz", self, var_0);
+    _id_0555::issprinting("buy_blitz", self, var_0);
 }
 
 _id_47B5() {
@@ -994,9 +994,9 @@ _id_35B0() {
   var_1._id_258C = 0;
   var_1._id_AAC1 = spawn("script_model", (0, 0, 0));
   var_1._id_AAC1 setModel("tag_origin");
-  var_1._id_AAC1 _meth_8055(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1._id_AAC1 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 thread maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_1._id_AAC1);
-  var_1._id_AAC0 = _func_2A8(common_scripts\utility::_id_44F5("zmb_elec_cherry_wv"), var_1._id_AAC1, "tag_origin");
+  var_1._id_AAC0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_elec_cherry_wv"), var_1._id_AAC1, "tag_origin");
   var_1._id_AAC0 _meth_8006(var_0);
   var_0 thread maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_1._id_AAC0);
 
@@ -1010,7 +1010,7 @@ _id_35B0() {
     var_1._id_A66D[var_1._id_A66D.size] = var_2;
     var_1._id_258C++;
     var_3 = var_0 getweaponammoclip(var_2);
-    var_4 = _func_1A3(var_2);
+    var_4 = _weaponclipsize(var_2);
     var_5 = 1 - var_3 / var_4;
     var_6 = common_scripts\utility::_id_5D92(var_5, 0, 1, 1, 1045);
     var_7 = common_scripts\utility::_id_5D92(var_5, 0, 1, 32, 128);
@@ -1039,15 +1039,15 @@ _id_35B0() {
     if(isDefined(var_8) && var_8 == 0) {
       continue;
     }
-    _func_14C(var_1._id_AAC0);
+    _triggerfx(var_1._id_AAC0);
     var_0 _id_0378::_id_8D74("electric_cherry_vfx");
-    _func_14D(common_scripts\utility::_id_44F5("zmb_elec_cherry_player"), var_0, "J_Spine4", var_0);
+    _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_elec_cherry_player"), var_0, "J_Spine4", var_0);
     var_9 = maps\mp\agents\_agent_utility::_id_43FD("all");
     var_9 = common_scripts\utility::_id_40B0(var_0.origin, var_9, undefined, var_8, var_7);
 
     foreach(var_11 in var_9) {
       var_11 _id_0546::mark_electrified();
-      var_11 _meth_8059(var_6, var_11.origin, var_0, var_0, "MOD_MELEE", "electric_cherry_zm");
+      var_11 dodamage(var_6, var_11.origin, var_0, var_0, "MOD_MELEE", "electric_cherry_zm");
       playFX(common_scripts\utility::_id_44F5("zmb_elec_cherry_zombie"), var_11.origin + (0, 0, 40));
     }
   }
@@ -1142,11 +1142,11 @@ _id_5F1E() {
       if(isDefined(var_3))
         var_2 _meth_8660(1, var_3.origin);
       else
-        var_2 _meth_8177(1);
+        var_2 usetriggerrequirelookat(1);
     }
 
     if(isDefined(var_3) && isDefined(var_3.target))
-      var_2._id_191E = _func_18E(var_3.target, "targetname");
+      var_2._id_191E = _getent(var_3.target, "targetname");
 
     _id_0547::_id_8A4F(var_2, ::_id_5F22);
   }
@@ -1175,12 +1175,12 @@ _id_5F23(var_0) {
     waittillframeend;
 
     if(var_0._id_6F93) {
-      var_3 = _func_0E1(self.origin, var_0.origin);
+      var_3 = _distance2d(self.origin, var_0.origin);
 
       if(!_id_0547::_id_577E(var_0) && !(_id_0547::_id_57E1(var_0) || var_0.sessionstate == "spectator")) {
         if(!common_scripts\utility::_id_562E(self._id_5594) && var_3 <= var_1) {
           self._id_5594 = 1;
-          self._id_191E _meth_8427(var_0, 0, 0);
+          self._id_191E hudoutlineenableforclient(var_0, 0, 0);
           thread lostandfoundcountdown(var_0);
         }
 
@@ -1194,7 +1194,7 @@ _id_5F23(var_0) {
       }
     } else {
       if(!isDefined(self._id_5594) || common_scripts\utility::_id_562E(self._id_5594)) {
-        self._id_191E _meth_8428(var_0);
+        self._id_191E hudoutlinedisableforclient(var_0);
         self._id_5594 = 0;
       }
 
@@ -1216,7 +1216,7 @@ lostandfoundcountdown(var_0) {
   var_0 endon("disconnect");
   var_0 endon("lost_and_found_restored");
   wait 45;
-  self._id_191E _meth_8427(var_0, 1, 0);
+  self._id_191E hudoutlineenableforclient(var_0, 1, 0);
   wait 15;
 
   if(common_scripts\utility::_id_562E(var_0._id_6F93)) {
@@ -1233,7 +1233,7 @@ _id_5F21(var_0) {
       var_4 = 500;
 
       if(var_2 maps\mp\gametypes\zombies::_id_11C2(var_4)) {
-        _id_0555::_id_83DD("photo", var_2);
+        _id_0555::issprinting("photo", var_2);
         _id_0547::_id_4AE4(var_2, "photo_booth", var_4, "none", "none");
         var_2 _id_5F1F();
         var_2 thread _id_054E::playeruselostandfound();
@@ -1290,12 +1290,12 @@ _id_5F20() {
     var_0 lostandfoundsaveweapon(var_4);
   }
 
-  var_6 = self _meth_82D1();
+  var_6 = self getweaponslistoffhands();
 
   foreach(var_3 in var_6)
   var_0 lostandfoundsaveweapon(var_3);
 
-  var_9 = self _meth_82D2();
+  var_9 = self getweaponslistitems();
 
   foreach(var_11 in var_9) {
     var_12 = _id_0586::_id_0632(var_11);
@@ -1306,7 +1306,7 @@ _id_5F20() {
     var_0 lostandfoundsaveweapon(var_12);
   }
 
-  var_14 = self _meth_8317();
+  var_14 = self getcurrentprimaryweapon();
   var_14 = _id_0586::_id_0632(var_14);
 
   if(_id_0547::iszombieconsumableweapon(var_14) || _id_0547::_id_5865(var_14) || _id_0547::_id_585B(var_14) || _id_0547::_id_5864(var_14) || issubstr(var_14, "tesla")) {
@@ -1346,7 +1346,7 @@ _id_5F1F() {
     _id_0586::_id_0790(var_3);
   }
 
-  var_5 = self _meth_82D2();
+  var_5 = self getweaponslistitems();
 
   foreach(var_7 in var_5) {
     if(!_id_0547::_id_5836(var_7)) {
@@ -1400,7 +1400,7 @@ _id_09DF(var_0, var_1) {
   if(!isDefined(self._id_6F66) || !isDefined(self._id_6F66[var_0])) {
     return;
   }
-  var_2 = _func_19B(self);
+  var_2 = _newclienthudelem(self);
   var_2.x = 8 + (self._id_6F66.size - 1) * 16;
   var_2.y = -32;
   var_2 setshader("objpoint_default", 16, 16);

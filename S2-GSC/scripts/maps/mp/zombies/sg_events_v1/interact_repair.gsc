@@ -54,8 +54,8 @@ basic_keypoint_interact_run(var_0) {
     level.keypointinteractkeypoints = 3;
 
   foreach(var_2 in level.players) {
-    var_2 _meth_82FF("ui_onevone_class_3", level.keypointinteractkeypoints);
-    var_2 _meth_82FF("ui_onevone_class_4", 0);
+    var_2 setclientomnvar("ui_onevone_class_3", level.keypointinteractkeypoints);
+    var_2 setclientomnvar("ui_onevone_class_4", 0);
   }
 
   var_4 = [];
@@ -70,7 +70,7 @@ basic_keypoint_interact_run(var_0) {
 
   if(var_4.size >= level.keypointinteractkeypoints) {
     while(var_9.size < level.keypointinteractkeypoints) {
-      var_10 = _func_0A4(0, var_4.size);
+      var_10 = _randomintrange(0, var_4.size);
 
       if(!common_scripts\utility::_id_0F79(var_9, var_4[var_10]))
         var_9 = common_scripts\utility::_id_0F6F(var_9, var_4[var_10]);
@@ -156,7 +156,7 @@ basic_keypoint_interact_trigger_hints() {
   if(!isDefined(level.keypointinteracthint))
     level.keypointinteracthint = "ZOMBIE_DLC3_KEYPOINT_INTERACT_BUILD";
 
-  self _meth_80CE(level.keypointinteracthint);
+  self sethintstring(level.keypointinteracthint);
 }
 
 basic_keypoint_interact_trigger_use() {
@@ -179,8 +179,8 @@ basic_keypoint_interact_trigger_use() {
       var_2 basic_keypoint_interact_stop_tool(var_3);
 
       if(common_scripts\utility::_id_562E(var_4)) {
-        self _meth_80B3();
-        self _meth_80CE(&"ZOMBIES_EMPTY_STRING");
+        self makeunusable();
+        self sethintstring(&"ZOMBIES_EMPTY_STRING");
 
         if(isDefined(self.scriptableinitfunc))
           self thread[[self.scriptablerepairedfunc]]();
@@ -188,7 +188,7 @@ basic_keypoint_interact_trigger_use() {
         level.keypointsinteracted++;
 
         foreach(var_2 in level.players)
-        var_2 _meth_82FF("ui_onevone_class_4", level.keypointsinteracted);
+        var_2 setclientomnvar("ui_onevone_class_4", level.keypointsinteracted);
 
         self._id_565F = 0;
         self notify("interact_completed");
@@ -244,7 +244,7 @@ basic_keypoint_interact_cleanup(var_0, var_1) {
   var_2 = ["death", "useHoldThinkLoopDone"];
 
   if(isDefined(var_1)) {
-    if(_func_0C0(var_1))
+    if(_isarray(var_1))
       var_2 = maps\mp\_utility::array_combine_no_dupes(var_2, var_1);
     else
       var_2[var_2.size] = var_1;
@@ -259,7 +259,7 @@ basic_keypoint_interact_think_loop(var_0, var_1) {
   var_2 = 0;
   level notify("sg_keypoint_interact_start");
 
-  while(isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 _meth_8341() && var_0 istouching(self)) {
+  while(isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && var_0 istouching(self)) {
     self._id_28D5 = self._id_28D5 + self._id_A22B * 50;
 
     if(!common_scripts\utility::_id_562E(var_0.radial_interact_active))
@@ -298,13 +298,13 @@ basic_keypoint_interact_start_tool(var_0) {
 
   _id_0548::_id_A7D6(var_1, level.keypointinteracttool);
   _id_0378::_id_8D74("dlc3_player_repair_start", level.keypointinteracttool, var_0);
-  var_1 _meth_8326();
+  var_1 disableweaponswitch();
   return var_4;
 }
 
 basic_keypoint_interact_stop_tool(var_0) {
   var_1 = self;
-  var_1 _meth_8327();
+  var_1 enableweaponswitch();
 
   if(isDefined(var_0))
     var_1 _id_0586::_id_078E(var_0);
@@ -327,18 +327,18 @@ basic_keypoint_interact_draw_waypoint(var_0) {
   }
 
   var_2 = self;
-  var_3 = _func_19B(var_2);
+  var_3 = _newclienthudelem(var_2);
   var_3 setshader(var_1, 1, 1);
   var_3.alpha = 0;
   var_3.color = (1, 1, 1);
   var_3.x = var_0.origin[0];
   var_3.y = var_0.origin[1];
   var_3._id_01D9 = var_0.origin[2];
-  var_3 _meth_80CB(0, 1, 0);
+  var_3 setwaypoint(0, 1, 0);
   var_3 fadeovertime(0.1);
   var_3.alpha = 1;
   var_0 common_scripts\utility::_id_A70A("interact_completed", "sg_obj_timeout");
-  var_3 _meth_80CB(0, 0, 0);
+  var_3 setwaypoint(0, 0, 0);
   var_3 fadeovertime(0.5);
   var_3.alpha = 0;
   wait 0.5;

@@ -59,11 +59,11 @@ _id_4759() {
   waitframe();
   waitframe();
   waitframe();
-  _func_147(common_scripts\utility::_id_44F5("zmb_sprinter_head_flies"), self, "j_head");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_sprinter_head_flies"), self, "j_head");
 }
 
 _id_AB52() {
-  var_0 = self _meth_8445("j_head");
+  var_0 = self gettagindex("j_head");
 
   if(var_0 == -1) {}
 

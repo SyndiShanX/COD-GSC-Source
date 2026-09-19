@@ -5,7 +5,7 @@
 
 main() {
   self endon("killanimscript");
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
   self._id_5759 = 1;
   _id_92E9();
   _id_2603();
@@ -14,7 +14,7 @@ main() {
 _id_0085() {
   self._id_5759 = undefined;
   _id_1F39(undefined);
-  self _meth_839A(1, 1);
+  self scragentsetanimscale(1, 1);
 }
 
 _id_8A30() {
@@ -35,14 +35,14 @@ _id_2603() {
   if(isDefined(self._id_9D0C) && self._id_9D0C - gettime() <= 50)
     wait(self._id_9D0B + 0.05);
 
-  self _meth_839C("code_move");
-  self _meth_839B("face motion");
-  self _meth_839A(1, 1);
+  self scragentsetanimmode("code_move");
+  self scragentsetorientmode("face motion");
+  self scragentsetanimscale(1, 1);
 }
 
 _id_0E19(var_0) {
   if(isDefined(self._id_6481)) {
-    var_1 = self _meth_83DB(var_0);
+    var_1 = self getanimentrycount(var_0);
     return int(clamp(self._id_6481 * var_1, 0, var_1 - 1));
   } else
     return maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_0);
@@ -56,7 +56,7 @@ _id_86CF(var_0) {
   self._id_54F4 = 0;
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_0);
   var_2 = _id_0E19(var_1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_1, var_2, self._id_64C2);
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_1, var_2, self._id_64C2);
 }
 
 is_passive_exempt() {
@@ -77,13 +77,13 @@ _id_86D0(var_0, var_1, var_2) {
     var_3 = var_3 + "_lower";
 
   var_4 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_3);
-  var_5 = _func_0DD(var_0 - self.angles[1]);
-  var_6 = self _meth_83DB(var_4);
+  var_5 = _angleclamp180(var_0 - self.angles[1]);
+  var_6 = self getanimentrycount(var_4);
   var_7 = maps\mp\agents\humanoid\_humanoid_util::_id_45F8(var_5, var_6);
   self._id_5382 = 1;
-  self _meth_839C("code_move");
-  self _meth_839B("face motion");
-  self _meth_839A(1, 1);
+  self scragentsetanimmode("code_move");
+  self scragentsetorientmode("face motion");
+  self scragentsetanimscale(1, 1);
   var_8 = self._id_64C2;
 
   if(self._id_0108 == "walk")
@@ -135,14 +135,14 @@ _id_32B8(var_0) {
   self endon("killanimscript");
   _id_1F39("");
   self._id_54F4 = 1;
-  self _meth_839C(var_0._id_0EC3);
+  self scragentsetanimmode(var_0._id_0EC3);
 
   if(isDefined(var_0._id_6C39))
-    self _meth_839B(var_0._id_6C37, var_0._id_6C38, var_0._id_6C39);
+    self scragentsetorientmode(var_0._id_6C37, var_0._id_6C38, var_0._id_6C39);
   else if(isDefined(var_0._id_6C38))
-    self _meth_839B(var_0._id_6C37, var_0._id_6C38);
+    self scragentsetorientmode(var_0._id_6C37, var_0._id_6C38);
   else
-    self _meth_839B(var_0._id_6C37);
+    self scragentsetorientmode(var_0._id_6C37);
 
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_0._id_0EE8, var_0._id_0EC1, self._id_64C2, "turn");
   thread _id_2603();
@@ -155,8 +155,8 @@ _id_220E(var_0, var_1, var_2) {
     return;
   }
   var_4 = vectortoangles(var_2);
-  var_5 = _func_0DD(var_4[1] - self.angles[1]);
-  var_6 = self _meth_83DB(var_3);
+  var_5 = _angleclamp180(var_4[1] - self.angles[1]);
+  var_6 = self getanimentrycount(var_3);
 
   if(var_6 <= 0) {
     return;
@@ -166,9 +166,9 @@ _id_220E(var_0, var_1, var_2) {
   if(var_7 == int(var_6 * 0.5)) {
     return;
   }
-  var_8 = self _meth_83D8(var_3, var_7);
-  var_9 = _func_084(var_8);
-  var_10 = (0, _func_0DD(var_4[1] - var_9), 0);
+  var_8 = self getanimentry(var_3, var_7);
+  var_9 = _getangledelta(var_8);
+  var_10 = (0, _angleclamp180(var_4[1] - var_9), 0);
 
   if(_id_1F4E(var_8, var_10, var_7 == 3 || var_7 == 5, 1)) {
     var_11 = spawnStruct();
@@ -198,25 +198,25 @@ _id_220C(var_0) {
 
 _id_1F4E(var_0, var_1, var_2, var_3) {
   var_4 = 0.5;
-  var_5 = _func_067(var_0, "turn_extent");
+  var_5 = _getnotetracktimes(var_0, "turn_extent");
 
   if(var_5.size == 1)
     var_4 = var_5[0];
 
   var_6 = 1.0;
-  var_7 = _func_067(var_0, "finish");
+  var_7 = _getnotetracktimes(var_0, "finish");
 
   if(var_7.size == 0)
-    var_7 = _func_067(var_0, "end");
+    var_7 = _getnotetracktimes(var_0, "end");
 
   if(var_7.size == 1)
     var_6 = var_7[0];
 
-  var_8 = _func_083(var_0, 0.0, var_4);
-  var_9 = _func_083(var_0, 0.0, var_6);
+  var_8 = _getmovedelta(var_0, 0.0, var_4);
+  var_9 = _getmovedelta(var_0, 0.0, var_6);
   var_10 = self.origin;
-  var_11 = _func_112(var_8, var_1) + var_10;
-  var_12 = _func_112(var_9, var_1) + var_10;
+  var_11 = _rotatevector(var_8, var_1) + var_10;
+  var_12 = _rotatevector(var_9, var_1) + var_10;
 
   if(!_id_0547::_id_1F5B(var_11, var_12, 0))
     return 0;
@@ -284,7 +284,7 @@ _id_A6C7() {
     var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_0);
   }
 
-  var_2 = self _meth_83DB(var_1);
+  var_2 = self getanimentrycount(var_1);
 
   if(var_2 <= 0) {
     thread _id_A6C7();
@@ -297,10 +297,10 @@ _id_A6C7() {
     var_3 = self._id_010D.angles[1] - self.angles[1];
 
   var_4 = maps\mp\agents\_scripted_agent_anim_util::_id_4416(var_3, var_2);
-  var_5 = self _meth_83D8(var_1, var_4);
-  var_6 = _func_083(var_5);
-  var_7 = _func_084(var_5);
-  var_8 = self _meth_83E7();
+  var_5 = self getanimentry(var_1, var_4);
+  var_6 = _getmovedelta(var_5);
+  var_7 = _getangledelta(var_5);
+  var_8 = self getpathgoalpos();
   var_9 = var_8 - self.origin;
 
   if(length(var_9) + 12 < length(var_6)) {
@@ -327,7 +327,7 @@ _id_A6C7() {
   thread _id_A6D7();
 
   if(distancesquared(var_11, self.origin) > 25) {
-    self _meth_8394(var_11);
+    self scragentsetwaypoint(var_11);
     thread _id_A693();
     self waittill("waypoint_reached");
     self notify("humanoidmove_endwait_blockedwhilestopping");
@@ -337,11 +337,11 @@ _id_A6C7() {
   var_14 = vectortoangles(var_13);
   var_15 = (0, var_14[1] - var_7, 0);
   var_16 = maps\mp\agents\_scripted_agent_anim_util::_id_441C(var_8 - self.origin, var_6);
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", var_15, (0, var_14[1], 0));
-  self _meth_839A(var_16._id_AAE3, var_16._id_01D9);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", var_15, (0, var_14[1], 0));
+  self scragentsetanimscale(var_16._id_AAE3, var_16._id_01D9);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, var_4, self._id_64C2, "move_stop");
-  self _meth_8395(self.origin);
+  self scragentsetgoalpos(self.origin);
 }
 
 _id_A69C() {
@@ -372,7 +372,7 @@ _id_A69C() {
     if(vectordot(vectorNormalize(var_2), var_3) < 0.7) {
       continue;
     }
-    var_4 = _func_0E5(var_2);
+    var_4 = _lengthsquared(var_2);
 
     if(var_4 > 1000000 || var_4 < 40000) {
       continue;
@@ -382,8 +382,8 @@ _id_A69C() {
     }
     self._id_313F = gettime();
 
-    if(_func_0A3(1.0) < self._id_313A) {
-      wait(_func_0A5(0.1, 0.3));
+    if(_randomfloat(1.0) < self._id_313A) {
+      wait(_randomfloatrange(0.1, 0.3));
 
       if(!isalive(self)) {
         return;
@@ -398,9 +398,9 @@ _id_A69C() {
       var_7 = self._id_3139;
       var_8 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_7);
       maps\mp\agents\humanoid\_humanoid_util::_id_70C9(self._id_3138[var_8]);
-      self _meth_839C("anim deltas");
-      self _meth_839B("face angle abs", var_6, var_6);
-      self _meth_839A(1, 1);
+      self scragentsetanimmode("anim deltas");
+      self scragentsetorientmode("face angle abs", var_6, var_6);
+      self scragentsetanimscale(1, 1);
       maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_7, var_8, self._id_672D, "dodge");
       self._id_173E = 1;
       thread _id_2603();
@@ -429,7 +429,7 @@ _id_A6A9() {
     if(!isDefined(self._id_28D2)) {
       continue;
     }
-    if(_func_0C3(self._id_28D2) && !self _meth_8393(self._id_28D2) || !maps\mp\_utility::_id_3B8E(self, self._id_28D2, 25)) {
+    if(_issentient(self._id_28D2) && !self agentcanseesentient(self._id_28D2) || !maps\mp\_utility::_id_3B8E(self, self._id_28D2, 25)) {
       continue;
     }
     var_0 = maps\mp\agents\humanoid\_humanoid::_id_457E(self._id_28D2);
@@ -456,22 +456,22 @@ _id_A6A9() {
     self._id_5C55 = var_2;
     var_5 = self._id_5C4E;
 
-    if(_func_0A3(1.0) >= var_5) {
+    if(_randomfloat(1.0) >= var_5) {
       continue;
     }
     var_7 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(self._id_5C4D);
-    var_8 = self _meth_83D8(self._id_5C4D, var_7);
-    var_9 = _func_067(var_8, "h_point")[0];
-    var_10 = _func_083(var_8, 0, var_9);
-    var_11 = self _meth_81AB(var_10);
-    var_12 = _func_081(self.origin, var_11, self);
+    var_8 = self getanimentry(self._id_5C4D, var_7);
+    var_9 = _getnotetracktimes(var_8, "h_point")[0];
+    var_10 = _getmovedelta(var_8, 0, var_9);
+    var_11 = self localtoworldcoords(var_10);
+    var_12 = _playerphysicstrace(self.origin, var_11, self);
 
     if(distancesquared(var_12, var_11) > 1) {
       self._id_5C55 = self._id_5C55 + 1000;
       continue;
     }
 
-    var_12 = _func_081(var_11, var_0.origin, self);
+    var_12 = _playerphysicstrace(var_11, var_0.origin, self);
 
     if(distancesquared(var_12, var_0.origin) > 1) {
       self._id_5C55 = self._id_5C55 + 1000;
@@ -481,23 +481,23 @@ _id_A6A9() {
     _id_1F39("leap");
     self._id_5C56 = gettime();
     maps\mp\agents\humanoid\_humanoid_util::_id_70C9(self._id_5C54);
-    var_13 = _func_065(var_8);
-    var_14 = _func_067(var_8, "land");
+    var_13 = _getanimlength(var_8);
+    var_14 = _getnotetracktimes(var_8, "land");
     var_14[0] = var_14[0] - 0.1;
     var_15 = var_13 / self._id_672D * var_14[0];
-    self _meth_839D("noclip");
-    self _meth_839B("face angle abs", (0, _func_109(var_0.origin - self.origin), 0));
-    self _meth_839C("anim deltas");
-    self _meth_839A(0, 1);
-    self _meth_83A4(self.origin, var_0.origin, var_15);
+    self scragentsetphysicsmode("noclip");
+    self scragentsetorientmode("face angle abs", (0, _vectortoyaw(var_0.origin - self.origin), 0));
+    self scragentsetanimmode("anim deltas");
+    self scragentsetanimscale(0, 1);
+    self scragentdoanimlerp(self.origin, var_0.origin, var_15);
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "WaitForLeap");
     self._id_50D9 = 1;
-    maps\mp\agents\_scripted_agent_anim_util::_id_8415(self._id_5C4D, var_7, self._id_672D);
+    maps\mp\agents\_scripted_agent_anim_util::isenemyaware(self._id_5C4D, var_7, self._id_672D);
     wait(var_15);
     self notify("cancel_updatelerppos");
-    self _meth_839C("anim deltas");
-    self _meth_839A(1, 1);
-    self _meth_839D("gravity");
+    self scragentsetanimmode("anim deltas");
+    self scragentsetanimscale(1, 1);
+    self scragentsetphysicsmode("gravity");
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "WaitForLeap");
     self._id_50D9 = 0;
 
@@ -512,9 +512,9 @@ _id_A6B2() {
   self notify("humanoidmove_endwait_pathsetwhilestopping");
   self endon("humanoidmove_endwait_pathsetwhilestopping");
   self endon("killanimscript");
-  var_0 = self _meth_8396();
+  var_0 = self scragentgetgoalpos();
   self waittill("path_set");
-  var_1 = self _meth_8396();
+  var_1 = self scragentgetgoalpos();
 
   if(distancesquared(var_0, var_1) < 1) {
     thread _id_A6B2();
@@ -552,7 +552,7 @@ _id_A693() {
   self endon("killanimscript");
   self waittill("path_blocked");
   self notify("humanoidmove_endwait_stop");
-  self _meth_8394(undefined);
+  self scragentsetwaypoint(undefined);
 }
 
 _id_1F39(var_0) {
@@ -571,20 +571,20 @@ _id_92E9() {
   if(isDefined(self._id_9D0C) && self._id_9D0C - gettime() <= 50) {
     return;
   }
-  var_0 = self _meth_8198();
+  var_0 = self getnegotiationstartnode();
 
   if(isDefined(var_0))
     var_1 = var_0.origin;
   else
-    var_1 = self _meth_83E7();
+    var_1 = self getpathgoalpos();
 
   if(distancesquared(var_1, self.origin) < 10000) {
     return;
   }
-  var_2 = self _meth_83E6();
+  var_2 = self getlookaheaddir();
   var_3 = vectortoangles(var_2);
-  var_4 = self _meth_833D();
-  var_5 = _func_0E4(var_4);
+  var_4 = self getvelocity();
+  var_5 = _length2d(var_4);
   var_6 = self.maxstartmovespeed;
 
   if(isDefined(var_6) && var_5 > var_6) {
@@ -598,29 +598,29 @@ _id_92E9() {
   }
 
   var_7 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("start_" + self._id_0108);
-  var_8 = _func_0DD(var_3[1] - self.angles[1]);
-  var_9 = self _meth_83DB(var_7);
+  var_8 = _angleclamp180(var_3[1] - self.angles[1]);
+  var_9 = self getanimentrycount(var_7);
 
   if(var_9 == 0) {
     return;
   }
   var_10 = maps\mp\agents\_scripted_agent_anim_util::_id_4416(var_8, var_9);
-  var_11 = self _meth_83D8(var_7, var_10);
-  var_12 = _func_083(var_11);
-  var_13 = _func_112(var_12, self.angles) + self.origin;
+  var_11 = self getanimentry(var_7, var_10);
+  var_12 = _getmovedelta(var_11);
+  var_13 = _rotatevector(var_12, self.angles) + self.origin;
 
   if(!_id_0547::_id_1F5B(self.origin, var_13)) {
     return;
   }
-  var_14 = _func_212(var_11);
-  self _meth_839C("anim deltas");
+  var_14 = _getangledelta3d(var_11);
+  self scragentsetanimmode("anim deltas");
 
-  if(_func_0AE(var_10 - int(var_9 * 0.5)) <= 1)
-    self _meth_839B("face angle abs", (0, _func_0DD(var_3[1] - var_14[1]), 0));
+  if(_abs(var_10 - int(var_9 * 0.5)) <= 1)
+    self scragentsetorientmode("face angle abs", (0, _angleclamp180(var_3[1] - var_14[1]), 0));
   else
-    self _meth_839B("face angle abs", self.angles);
+    self scragentsetorientmode("face angle abs", self.angles);
 
-  self._id_92EA = gettime() * 0.001 + _func_065(var_11);
+  self._id_92EA = gettime() * 0.001 + _getanimlength(var_11);
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_7, var_10, self._id_64C2, "move_start", "code_move");
 }
 
@@ -631,9 +631,9 @@ _id_46B2() {
     var_0._id_7584 = self._id_010D.origin;
     var_0.angles = self._id_010D.angles;
   } else {
-    var_1 = self _meth_83E7();
+    var_1 = self getpathgoalpos();
     var_0._id_7584 = var_1;
-    var_0.angles = vectortoangles(self _meth_83E6());
+    var_0.angles = vectortoangles(self getlookaheaddir());
   }
 
   return var_0;

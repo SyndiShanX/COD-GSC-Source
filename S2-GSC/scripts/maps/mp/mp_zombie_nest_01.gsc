@@ -50,7 +50,7 @@ main() {
 
   thread _id_3FD2();
   thread maps\mp\mp_zombie_nest_pneumos::_id_2037();
-  thread _id_83FA("bunker_light_switch", 0);
+  thread setscriptablepartstate("bunker_light_switch", 0);
   thread _id_7EAC();
   thread _id_2033();
   thread _id_1D8F();
@@ -98,7 +98,7 @@ _id_AA3C() {
     var_0 = getEntArray("zbarrier_window", "script_noteworthy");
 
     foreach(var_2 in var_0)
-    var_2 _meth_80B3();
+    var_2 makeunusable();
   }
 }
 
@@ -399,7 +399,7 @@ _id_3FD2(var_0) {
   thread _id_8A19();
 }
 
-_id_83FA(var_0, var_1) {
+setscriptablepartstate(var_0, var_1) {
   setdvarifuninitialized(var_0, var_1);
   var_2 = var_1;
 
@@ -409,29 +409,29 @@ _id_83FA(var_0, var_1) {
     if(var_3 != var_2) {
       switch (var_3) {
         case 0:
-          var_4 = _func_21F("switch", "targetname");
+          var_4 = _getscriptablearray("switch", "targetname");
 
           foreach(var_6 in var_4) {
             wait 0.1;
-            var_6 _meth_83FA("switchlights", "on");
+            var_6 setscriptablepartstate("switchlights", "on");
           }
 
           break;
         case 1:
-          var_4 = _func_21F("switch", "targetname");
+          var_4 = _getscriptablearray("switch", "targetname");
 
           foreach(var_6 in var_4) {
             wait 0.1;
-            var_6 _meth_83FA("switchlights", "off");
+            var_6 setscriptablepartstate("switchlights", "off");
           }
 
           break;
         case 2:
-          var_4 = _func_21F("switch", "targetname");
+          var_4 = _getscriptablearray("switch", "targetname");
 
           foreach(var_6 in var_4) {
             wait 0.1;
-            var_6 _meth_83FA("switchlights", "red");
+            var_6 setscriptablepartstate("switchlights", "red");
           }
 
           break;
@@ -451,18 +451,18 @@ _id_6B2D() {
 
 _id_6B2E() {
   var_0 = self;
-  var_0._id_24A7 = _func_18E(var_0.target, "targetname");
+  var_0._id_24A7 = _getent(var_0.target, "targetname");
   var_1 = var_0._id_24A7.origin;
   var_2 = (150, 0, 0);
 
   for(;;) {
     var_0 waittill("trigger", var_3);
-    var_0._id_24A7 _meth_82B1(var_0._id_24A7.origin + var_2, 1);
+    var_0._id_24A7 moveto(var_0._id_24A7.origin + var_2, 1);
 
     while(var_3 istouching(var_0))
       waitframe();
 
-    var_0._id_24A7 _meth_82B1(var_1, 0.5);
+    var_0._id_24A7 moveto(var_1, 0.5);
   }
 }
 
@@ -486,7 +486,7 @@ _id_AC9A() {
   thread _id_2E93();
   thread _id_3C0C();
   thread _id_1CC8();
-  maps\mp\gametypes\zombies::_id_8028(0);
+  maps\mp\gametypes\zombies::startragdoll(0);
   wait 5;
 }
 
@@ -540,7 +540,7 @@ _id_52E1() {
   }
 
   var_4 = common_scripts\utility::_id_46B5("zmb_flamethrower_trap_light", "script_noteworthy");
-  var_5 = _func_18E("pilot_light_trigger", "targetname");
+  var_5 = _getent("pilot_light_trigger", "targetname");
   self._id_3F4E = common_scripts\utility::_id_0F6F(self._id_3F4E, var_4);
   self._id_9DC2 = common_scripts\utility::_id_0F6F(self._id_9DC2, var_5);
 }
@@ -617,7 +617,7 @@ _id_2EA1() {
 
 _id_2E8B() {
   level endon("power_sz2");
-  var_0 = _func_18E("generator_sign_dialogue", "targetname");
+  var_0 = _getent("generator_sign_dialogue", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -631,7 +631,7 @@ _id_2E8B() {
 
 _id_2E8A() {
   level endon("power_sz2");
-  var_0 = _func_18E("fuel_tank_dialogue", "targetname");
+  var_0 = _getent("fuel_tank_dialogue", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -648,7 +648,7 @@ _id_2E8A() {
 
 _id_2E77() {
   level endon("power_sz2");
-  var_0 = _func_18E("bunker_ent_dialogue", "targetname");
+  var_0 = _getent("bunker_ent_dialogue", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -717,7 +717,7 @@ _id_2E87() {
 
 _id_2E90() {
   level endon("flag_ww_part_02_picked_up");
-  var_0 = _func_21F("med_untotenpresse_smasher", "targetname");
+  var_0 = _getscriptablearray("med_untotenpresse_smasher", "targetname");
 
   if(isDefined(var_0))
     childthread maps\mp\mp_zombie_nest_ee_util::_id_720B("conv_juicerintro", var_0[0].origin, 250, 50);
@@ -725,7 +725,7 @@ _id_2E90() {
 
 _id_2E89() {
   level endon("flag_ww_part_01_picked_up");
-  var_0 = _func_18E("trig_see_forge", "targetname");
+  var_0 = _getent("trig_see_forge", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -762,7 +762,7 @@ _id_2E89() {
 
 _id_2E95() {
   level endon("flag_ww_forged");
-  var_0 = _func_18E("trig_see_med_office", "targetname");
+  var_0 = _getent("trig_see_med_office", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -799,7 +799,7 @@ _id_2E95() {
 
 _id_2E93() {
   level endon("flag_correct_code_entered");
-  var_0 = _func_18E("trig_enter_klaus_office", "targetname");
+  var_0 = _getent("trig_enter_klaus_office", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -875,8 +875,8 @@ _id_1DA9() {
   var_0 = getEntArray("bunker_window_jumpscare", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_81A1)) {
-      var_2 thread _id_1706(var_2._id_81A1);
+    if(isDefined(var_2.setgoalnode)) {
+      var_2 thread _id_1706(var_2.setgoalnode);
       continue;
     }
 
@@ -903,21 +903,21 @@ _id_8A19() {
 }
 
 _id_AC91() {
-  var_0 = 60 * _func_0A5(1, 2);
+  var_0 = 60 * _randomfloatrange(1, 2);
   level._id_6F18 = 0;
 
   for(;;) {
     wait(var_0);
-    var_0 = 60 * _func_0A5(1, 10);
+    var_0 = 60 * _randomfloatrange(1, 10);
 
     if(level._id_6F18 || common_scripts\utility::_id_3C77("flag_bunker_lights_off")) {
       continue;
     }
     level notify("zone1EarthquakeBegin");
-    var_1 = _func_0A5(3, 5);
-    var_2 = _func_0A5(3, 5);
-    var_3 = _func_0A5(3, 5);
-    var_4 = _func_0A5(4, 8);
+    var_1 = _randomfloatrange(3, 5);
+    var_2 = _randomfloatrange(3, 5);
+    var_3 = _randomfloatrange(3, 5);
+    var_4 = _randomfloatrange(4, 8);
     _id_0378::_id_8D74("zone1Earthquake", "rumble1", var_1);
     wait(var_1);
     _id_0378::_id_8D74("zone1Earthquake", "rumble2", var_2);
@@ -942,7 +942,7 @@ _id_AC91() {
 }
 
 _id_3541(var_0) {
-  var_1 = _func_21F("light_zm_objective", "targetname");
+  var_1 = _getscriptablearray("light_zm_objective", "targetname");
 
   foreach(var_3 in var_1) {
     waitframe();
@@ -951,7 +951,7 @@ _id_3541(var_0) {
 
   foreach(var_3 in var_1) {
     waitframe();
-    var_3 _meth_83FA("puzzlelight", "cycle1a");
+    var_3 setscriptablepartstate("puzzlelight", "cycle1a");
   }
 
   wait 0.1;
@@ -960,7 +960,7 @@ _id_3541(var_0) {
     waitframe();
 
     if(isDefined(var_3._id_6C56))
-      var_3 _meth_83FA("puzzlelight", var_3._id_6C56);
+      var_3 setscriptablepartstate("puzzlelight", var_3._id_6C56);
   }
 }
 
@@ -983,14 +983,14 @@ _id_3540() {
     var_4 = _func_32F();
 
     for(var_5 = 0; var_5 < var_4; var_5++) {
-      if(_func_1CB(var_5)) {
+      if(_isglassdestroyed(var_5)) {
         continue;
       }
-      var_6 = _func_1CA(var_5);
+      var_6 = _getglassorigin(var_5);
       var_7 = common_scripts\utility::_id_5D93(distance(var_6, var_1.origin), 0, 50000, 1, 0);
       var_8 = vectordot(anglesToForward(var_1.angles), var_6 - var_1.origin);
       var_9 = common_scripts\utility::_id_5D93(var_8, 0.5, 1, 0, 1);
-      var_10 = var_7 * var_9 * 3 + _func_0A3(0.2);
+      var_10 = var_7 * var_9 * 3 + _randomfloat(0.2);
 
       if(!isDefined(var_3) || var_10 > var_3) {
         var_2 = var_5;
@@ -999,18 +999,18 @@ _id_3540() {
     }
 
     if(isDefined(var_2)) {
-      var_11 = vectorNormalize(vectorNormalize(var_1.origin - _func_1CA(var_2)) + common_scripts\utility::_id_7A5F(0.3));
-      _func_1CC(var_2, var_11);
+      var_11 = vectorNormalize(vectorNormalize(var_1.origin - _getglassorigin(var_2)) + common_scripts\utility::_id_7A5F(0.3));
+      _destroyglass(var_2, var_11);
     }
   }
 }
 
 _id_3254(var_0, var_1) {
-  _func_17F(0.3, var_0, var_1.origin, 850, var_1);
-  _func_1BC("tank_rumble", var_1.origin);
+  _earthquake(0.3, var_0, var_1.origin, 850, var_1);
+  _playrumblelooponposition("tank_rumble", var_1.origin);
   thread _id_2E99(var_1);
   wait(var_0);
-  _func_1BD();
+  _stopallrumbles();
 }
 
 _id_34B6() {
@@ -1043,7 +1043,7 @@ _id_7EAC() {
   common_scripts\utility::_id_3C9F("gallows_to_riverside");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "gallows_to_riverside" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "gallows_to_riverside" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
@@ -1052,7 +1052,7 @@ _id_2033() {
   common_scripts\utility::_id_3C9F("underground_to_riverside1");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "underground_to_riverside1" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "underground_to_riverside1" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
@@ -1075,7 +1075,7 @@ _id_3C23() {
   common_scripts\utility::_id_3C9F("power_sz2");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "gallows_to_well" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "gallows_to_well" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
@@ -1116,7 +1116,7 @@ _id_3DCE() {
 
   if(!common_scripts\utility::_id_3C77("flag_first_fol_inc_selected")) {
     foreach(var_2 in var_0) {
-      if(isDefined(var_2._id_81E1) && var_2._id_81E1 == 0)
+      if(isDefined(var_2.setmovespeedscale) && var_2.setmovespeedscale == 0)
         var_2 thread _id_055B::_id_3DAE();
     }
   }
@@ -1166,7 +1166,7 @@ _id_18DE() {
 
   foreach(var_2 in var_0) {
     var_3 = _id_054D::_id_90BA("zombie_exploder", var_2, "intro bombers", 0, 1, 0, undefined, 0);
-    var_3 _id_0547::_id_84CB();
+    var_3 _id_0547::disableoffhandsecondaryweapons();
   }
 }
 
@@ -1238,7 +1238,7 @@ _id_3BF6() {
   level thread common_scripts\_exploder::_id_088E(215);
 
   foreach(var_3 in var_0) {
-    _func_17F(0.3, 4, var_3.origin, 850);
+    _earthquake(0.3, 4, var_3.origin, 850);
     wait 0.4;
   }
 
@@ -1246,10 +1246,10 @@ _id_3BF6() {
 }
 
 _id_6E18() {
-  var_0 = _func_18E("move_cart_button_console", "targetname");
-  _func_147(level._effect["zmb_com_room_fire_panel"], var_0, "tag_origin");
+  var_0 = _getent("move_cart_button_console", "targetname");
+  _playfxontag(level._effect["zmb_com_room_fire_panel"], var_0, "tag_origin");
   wait 18;
-  _func_148(level._effect["zmb_com_room_fire_panel"], var_0, "tag_origin");
+  _stopfxontag(level._effect["zmb_com_room_fire_panel"], var_0, "tag_origin");
 }
 
 _id_3BF7(var_0) {
@@ -1282,20 +1282,20 @@ _id_3BF7(var_0) {
   }
 
   if(!var_3) {
-    self _meth_83A2(1);
-    self _meth_839C("anim deltas");
-    self _meth_839B("face angle abs", var_1.angles, var_1.angles);
+    self scragentsetscripted(1);
+    self scragentsetanimmode("anim deltas");
+    self scragentsetorientmode("face angle abs", var_1.angles, var_1.angles);
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "firemanintro");
     thread _id_3BF5();
-    var_5 = common_scripts\utility::_id_A715("fireman_intro_finished", "damage");
+    var_5 = common_scripts\utility::waittill_any_return("fireman_intro_finished", "damage");
 
     if(var_5 == "damage") {
-      _func_148(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+      _stopfxontag(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
       _id_0378::_id_8D74("flamethrower_stop", "tag_flamethrower_fx");
     }
 
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "firemanintro");
-    self _meth_83A2(0);
+    self scragentsetscripted(0);
   }
 
   var_6 = common_scripts\utility::_id_46B5("first_fireman_end_point", "targetname");
@@ -1316,32 +1316,32 @@ _id_3BF7(var_0) {
   self._id_00CA = 0;
   self._id_5748 = 0;
   self._id_57E8 = 0;
-  self _meth_855C();
+  self scragentclearpath();
 }
 
 _id_3BF5() {
   self endon("damage");
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415("s2_fireman_intro_flame", 0, 1);
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware("s2_fireman_intro_flame", 0, 1);
   wait 2.33333;
-  _func_147(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+  _playfxontag(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
   _id_0378::_id_8D74("flamethrower_start", "tag_flamethrower_fx");
   wait 2.66667;
-  _func_148(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+  _stopfxontag(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
   _id_0378::_id_8D74("flamethrower_stop", "tag_flamethrower_fx");
   wait 0.333333;
   self notify("fireman_intro_finished");
 }
 
 _id_3BFC() {
-  var_0 = _func_21F("fireman_intro", "targetname");
+  var_0 = _getscriptablearray("fireman_intro", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("heat", "enable");
+  var_2 setscriptablepartstate("heat", "enable");
 
   wait 2.3;
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("heat", "die");
+  var_2 setscriptablepartstate("heat", "die");
 }
 
 _id_3BFA() {
@@ -1360,7 +1360,7 @@ _id_3BFA() {
 }
 
 _id_347A() {
-  var_0 = _func_18E("disable_clocktower_jumpscare", "targetname");
+  var_0 = _getent("disable_clocktower_jumpscare", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1378,7 +1378,7 @@ _id_666B() {
   if(common_scripts\utility::_id_562E(var_2))
     return 1;
 
-  if(isDefined(level._id_179A) && _func_211(self.origin, level._id_179A.origin) < var_0)
+  if(isDefined(level._id_179A) && _distance2dsquared(self.origin, level._id_179A.origin) < var_0)
     return 1;
   else
     return 0;
@@ -1389,7 +1389,7 @@ _id_4D48(var_0) {
   level notify("disable_initial_door_highlight");
 
   if(isDefined(var_0._id_5E61)) {
-    var_0._id_5E61 _meth_83FF();
+    var_0._id_5E61 hudoutlinedisable();
     var_0._id_5E61 delete();
   }
 }
@@ -1405,14 +1405,14 @@ _id_4D49(var_0) {
       if(var_1._id_62D6 < var_3._id_267B) {
         if(isDefined(var_0._id_5E61) && common_scripts\utility::_id_562E(var_0._id_5E61._id_5594)) {
           var_0._id_5E61._id_5594 = 0;
-          var_0._id_5E61 _meth_8428(var_1);
+          var_0._id_5E61 hudoutlinedisableforclient(var_1);
         }
 
         continue;
       }
 
       if(isDefined(var_0._id_5E61) && !common_scripts\utility::_id_562E(var_0._id_5E61._id_5594)) {
-        var_0._id_5E61 _meth_8427(var_1, 0, 0);
+        var_0._id_5E61 hudoutlineenableforclient(var_1, 0, 0);
         var_0._id_5E61._id_5594 = 1;
       }
     }
@@ -1426,7 +1426,7 @@ _id_415E(var_0) {
     waitframe();
 
   foreach(var_3 in level._id_AC1D) {
-    if(!isDefined(var_3._id_819A) || !common_scripts\utility::_id_0F79(var_0, var_3._id_819A)) {
+    if(!isDefined(var_3.getnegotiationnextnode) || !common_scripts\utility::_id_0F79(var_0, var_3.getnegotiationnextnode)) {
       continue;
     }
     var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
@@ -1437,7 +1437,7 @@ _id_415E(var_0) {
 
 _id_4D47() {
   var_0 = _id_415E(["start_to_gallows"]);
-  var_1 = _func_18E("first_door_lock", "targetname");
+  var_1 = _getent("first_door_lock", "targetname");
   var_2 = _id_415E(["start_to_bridge", "start_to_gallows", "start_to_riverside"]);
   var_3 = spawnStruct();
   var_3._id_3290 = var_0;

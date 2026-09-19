@@ -11,7 +11,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -49,18 +49,18 @@ main() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653();
-  _func_035("scr_conf_roundswitch", 0);
+  _setdynamicdvar("scr_conf_roundswitch", 0);
   maps\mp\_utility::registerroundswitchdvar("conf", 0, 0, 9);
-  _func_035("scr_conf_roundlimit", 1);
+  _setdynamicdvar("scr_conf_roundlimit", 1);
   maps\mp\_utility::registerroundlimitdvar("conf", 1);
-  _func_035("scr_conf_winlimit", 1);
+  _setdynamicdvar("scr_conf_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("conf", 1);
-  _func_035("scr_conf_halftime", 0);
+  _setdynamicdvar("scr_conf_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("conf", 0);
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
 
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;
@@ -133,9 +133,9 @@ _id_903E(var_0, var_1) {
     level._id_31F9[var_0.guid]._id_A490 = var_0;
     level._id_31F9[var_0.guid]._id_A496 = var_2;
     level._id_31F9[var_0.guid]._id_6989 = _id_04D1::_id_45A9();
-    _func_1CE(level._id_31F9[var_0.guid]._id_6989, "invisible", (0, 0, 0));
+    _objective_add(level._id_31F9[var_0.guid]._id_6989, "invisible", (0, 0, 0));
     level._id_31F9[var_0.guid]._id_6988 = _id_04D1::_id_45A9();
-    _func_1CE(level._id_31F9[var_0.guid]._id_6988, "invisible", (0, 0, 0));
+    _objective_add(level._id_31F9[var_0.guid]._id_6988, "invisible", (0, 0, 0));
     level thread _id_2404(var_0);
     var_0 thread _id_95BD(level._id_31F9[var_0.guid]);
   }
@@ -156,45 +156,45 @@ _id_903E(var_0, var_1) {
   level._id_31F9[var_0.guid]._id_A582[0] _id_84DF("friendly", 1);
   level._id_31F9[var_0.guid]._id_A582[1] _id_84DF("enemy", 1);
   level._id_31F9[var_0.guid]._id_1180 = var_1;
-  _func_1D1(level._id_31F9[var_0.guid]._id_6989, "waypoint_dogtags");
-  _func_1D2(level._id_31F9[var_0.guid]._id_6989, var_5);
-  _func_1D0(level._id_31F9[var_0.guid]._id_6989, "active");
-  _func_186(level._id_31F9[var_0.guid]._id_6989, var_0 getentitynumber());
-  _func_1D1(level._id_31F9[var_0.guid]._id_6988, "waypoint_dogtags_friendlys");
-  _func_1D2(level._id_31F9[var_0.guid]._id_6988, var_5);
-  _func_1D0(level._id_31F9[var_0.guid]._id_6988, "active");
-  _func_185(level._id_31F9[var_0.guid]._id_6988, var_0 getentitynumber());
+  _objective_icon(level._id_31F9[var_0.guid]._id_6989, "waypoint_dogtags");
+  _objective_position(level._id_31F9[var_0.guid]._id_6989, var_5);
+  _objective_state(level._id_31F9[var_0.guid]._id_6989, "active");
+  _objective_playerteam(level._id_31F9[var_0.guid]._id_6989, var_0 getentitynumber());
+  _objective_icon(level._id_31F9[var_0.guid]._id_6988, "waypoint_dogtags_friendlys");
+  _objective_position(level._id_31F9[var_0.guid]._id_6988, var_5);
+  _objective_state(level._id_31F9[var_0.guid]._id_6988, "active");
+  _objective_playerenemyteam(level._id_31F9[var_0.guid]._id_6988, var_0 getentitynumber());
   playsoundatpos(var_5, "mp_killconfirm_tags_drop");
-  level._id_31F9[var_0.guid]._id_A582[0] _meth_8276("mp_dogtag_spin");
-  level._id_31F9[var_0.guid]._id_A582[1] _meth_8276("mp_dogtag_spin");
+  level._id_31F9[var_0.guid]._id_A582[0] scriptmodelplayanim("mp_dogtag_spin");
+  level._id_31F9[var_0.guid]._id_A582[1] scriptmodelplayanim("mp_dogtag_spin");
 }
 
 _id_8C21(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("reset");
-  self _meth_805C();
+  self hide();
 
   foreach(var_3 in level.players) {
     if(var_3.team == var_1)
-      self _meth_8005(var_3);
+      self showtoplayer(var_3);
 
     if(var_3.team == "spectator" && var_1 == "allies")
-      self _meth_8005(var_3);
+      self showtoplayer(var_3);
   }
 
   for(;;) {
     level waittill("joined_team");
-    self _meth_805C();
+    self hide();
 
     foreach(var_3 in level.players) {
       if(var_3.team == var_1)
-        self _meth_8005(var_3);
+        self showtoplayer(var_3);
 
       if(var_3.team == "spectator" && var_1 == "allies")
-        self _meth_8005(var_3);
+        self showtoplayer(var_3);
 
       if(var_0._id_A496 == var_3.team && var_3 == var_0._id_1180)
-        _func_1D0(var_0._id_6989, "invisible");
+        _objective_state(var_0._id_6989, "invisible");
     }
   }
 }
@@ -237,15 +237,15 @@ _id_6BBF(var_0) {
 _id_7D6F() {
   self._id_1180 = undefined;
   self notify("reset");
-  self._id_A582[0] _meth_805C();
-  self._id_A582[1] _meth_805C();
+  self._id_A582[0] hide();
+  self._id_A582[1] hide();
   self._id_28D4 = (0, 0, 1000);
   self._id_9D65.origin = (0, 0, 1000);
   self._id_A582[0].origin = (0, 0, 1000);
   self._id_A582[1].origin = (0, 0, 1000);
   _id_04D1::_id_0C30("none");
-  _func_1D0(self._id_6989, "invisible");
-  _func_1D0(self._id_6988, "invisible");
+  _objective_state(self._id_6989, "invisible");
+  _objective_state(self._id_6988, "invisible");
 }
 
 _id_95BD(var_0) {
@@ -286,11 +286,11 @@ _id_2404(var_0) {
 
 _id_84DF(var_0, var_1) {
   var_2 = undefined;
-  var_0 = _func_117(var_0);
+  var_0 = _tolower(var_0);
   var_3["friendly"] = 1;
   var_3["enemy"] = 2;
   var_3["objective"] = 5;
   var_3["neutral"] = 0;
   var_2 = var_3[var_0];
-  self _meth_83FE(var_2, var_1);
+  self hudoutlineenable(var_2, var_1);
 }

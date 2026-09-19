@@ -57,7 +57,7 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_12 = level._id_5FEB + (10000, 10000, 1000);
 
   foreach(var_14 in var_8) {
-    var_15 = _func_0E1(var_14.origin, var_1);
+    var_15 = _distance2d(var_14.origin, var_1);
 
     if(var_15 < var_11) {
       var_12 = var_14.origin;
@@ -67,7 +67,7 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_17 = 1;
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_5) && isDefined(level._id_79C2._id_80B0) && common_scripts\utility::_id_562E(level._id_79C2._id_80B0._id_4D10))
+  if(maps\mp\_utility::_id_579B() && isDefined(var_5) && isDefined(level._id_79C2.setcontents) && common_scripts\utility::_id_562E(level._id_79C2.setcontents._id_4D10))
     var_17 = 0;
 
   var_18 = undefined;
@@ -102,7 +102,7 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   for(var_10 = 0; var_10 < var_21; var_10++) {
-    var_23 = _func_0A3(0.7);
+    var_23 = _randomfloat(0.7);
     var_22[var_10] = var_22[var_10] - var_23;
     var_24 = randomint(var_21);
     var_22[var_24] = var_22[var_24] + var_23;
@@ -188,7 +188,7 @@ _id_8C0B(var_0, var_1, var_2, var_3, var_4) {
     var_13 = var_4;
 
   if(isDefined(var_2)) {
-    var_14 = _func_1FE(var_5);
+    var_14 = _getweaponexplosionradius(var_5);
     var_15 = (var_14 + var_6) * 2;
     var_2 _meth_8351(var_13, _id_458C(var_0, 0, !var_7), var_15, var_15, var_12, var_11, "", _id_458C(var_0, 1, !var_7));
     var_2 _meth_8352(100, var_10);
@@ -272,11 +272,11 @@ _id_458D(var_0, var_1) {
 _id_458A(var_0) {
   switch (var_0) {
     case "missile_strike":
-      return _func_0A5(-250, 250);
+      return _randomfloatrange(-250, 250);
     case "mortar_strike":
       return 0;
     case "v2_rocket":
-      return _func_0A5(-100, 100);
+      return _randomfloatrange(-100, 100);
   }
 }
 
@@ -334,7 +334,7 @@ _id_46E0(var_0) {
     case "missile_strike":
       return 1.0;
     case "mortar_strike":
-      return _func_0A5(0.2, 1.0);
+      return _randomfloatrange(0.2, 1.0);
     case "v2_rocket":
       return 0.0;
   }
@@ -353,8 +353,8 @@ _id_45C0(var_0, var_1, var_2) {
   } else {
     switch (var_0) {
       case "missile_strike":
-        if(var_1 && isDefined(level._id_79C2._id_80B0) && isDefined(level._id_79C2._id_80B0._id_624A))
-          return int(_func_0D6(18 * level._id_79C2._id_80B0._id_624A));
+        if(var_1 && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_624A))
+          return int(_round(18 * level._id_79C2.setcontents._id_624A));
         else
           return 18;
       case "mortar_strike":
@@ -456,7 +456,7 @@ _id_9E39(var_0, var_1) {
     return 0;
   }
 
-  var_2 = _id_83BB(var_0, var_1);
+  var_2 = vehicle_addvelocity(var_0, var_1);
 
   if(!isDefined(var_2) || !var_2)
     return 0;
@@ -465,12 +465,12 @@ _id_9E39(var_0, var_1) {
   return 1;
 }
 
-_id_83BB(var_0, var_1) {
+vehicle_addvelocity(var_0, var_1) {
   self endon("stop_location_selection");
   var_2 = 0;
   var_3 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   var_4 = _id_45C1(var_1, var_3);
-  self _meth_82FF("ui_map_location_num_targets", var_4);
+  self setclientomnvar("ui_map_location_num_targets", var_4);
   maps\mp\_utility::_id_05D4(var_1, "map_artillery_selector", var_2, _id_46C2(var_1), 0.5);
   thread _id_A6AB();
   var_5 = [];
@@ -494,9 +494,9 @@ _id_83BB(var_0, var_1) {
 
   _id_0380::_id_6844("mstrike_entry_npc", maps\mp\_utility::getotherteam(self.team), self);
   _id_0380::_id_6845("mstrike_entry_npc", self.team, self, self);
-  self _meth_82DD(0, 0.3);
+  self setblurforplayer(0, 0.3);
   self notify("location_selection_complete");
-  self _meth_82FF("ui_map_location_num_targets", 0);
+  self setclientomnvar("ui_map_location_num_targets", 0);
   thread _id_9303(var_0, var_5, var_1);
   return 1;
 }
@@ -505,8 +505,8 @@ _id_A6AB() {
   self endon("location_selection_complete");
   self endon("disconnect");
   self waittill("stop_location_selection");
-  self _meth_82DD(0, 0.3);
-  self _meth_82FF("ui_map_location_num_targets", 0);
+  self setblurforplayer(0, 0.3);
+  self setclientomnvar("ui_map_location_num_targets", 0);
 
   if(maps\mp\gametypes\_hostmigration::_id_A782() > 0)
     self switchtoweapon(common_scripts\utility::_id_4550());

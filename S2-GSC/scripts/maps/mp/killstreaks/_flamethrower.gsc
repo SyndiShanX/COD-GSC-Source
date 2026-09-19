@@ -48,13 +48,13 @@ _id_9569() {
     else
       self._id_267E[3] = 479;
 
-    if(!_func_1EF(self))
+    if(!_isagent(self))
       self _meth_84C7(self._id_267E, self.team, 1);
 
     self waittill("weapon_change", var_2);
     self._id_267E[3] = var_0;
 
-    if(!_func_1EF(self))
+    if(!_isagent(self))
       self _meth_84C7(self._id_267E, self.team, 1);
   }
 }

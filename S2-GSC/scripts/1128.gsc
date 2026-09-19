@@ -30,14 +30,14 @@ _id_0A23(var_0, var_1, var_2, var_3) {
     var_4[var_4.size] = 1;
   }
 
-  var_6 = var_0 _meth_8178();
+  var_6 = var_0 getstance();
 
   if(var_6 == "crouch")
     var_3[var_3.size] = "enemyCrouched";
   else if(var_6 == "prone")
     var_3[var_3.size] = "enemyProne";
 
-  var_7 = self _meth_8178();
+  var_7 = self getstance();
 
   if(var_7 == "crouch")
     var_3[var_3.size] = "playerCrouched";
@@ -266,7 +266,7 @@ _id_0A23(var_0, var_1, var_2, var_3) {
   if(isDefined(self.lastweaponswaptime) && gettime() - self.lastweaponswaptime < 5000)
     var_3[var_3.size] = "switchWeaponKill";
 
-  var_11 = _func_117(getDvar("1673"));
+  var_11 = _tolower(getDvar("1673"));
 
   if(var_11 == "mp_canon_farm" || var_11 == "mp_forest_01" || var_11 == "mp_carentan_s2_winter" || var_11 == "mp_raid_bulge")
     var_3[var_3.size] = "winter_map_kill";
@@ -293,7 +293,7 @@ _id_0A23(var_0, var_1, var_2, var_3) {
     if(isDefined(self._id_3BE0))
       var_12 = self._id_3BE0;
     else
-      var_12 = self _meth_8345();
+      var_12 = self playerads();
 
     if(var_12 >= 0.2)
       var_3[var_3.size] = "adsKill";
@@ -1388,7 +1388,7 @@ _id_0A1A(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_1)) {
     return;
   }
-  if(!isDefined(var_1._id_80BD))
+  if(!isDefined(var_1.settext))
     var_1 thread _id_A93F();
 
   if(!isDefined(var_1.pers["deflects"]))
@@ -1468,9 +1468,9 @@ _id_0A1A(var_0, var_1, var_2, var_3, var_4) {
       }
     default:
       if(issubstr(var_0, "_earned")) {
-        var_1._id_80BD++;
+        var_1.settext++;
 
-        if(var_1._id_80BD == 3) {
+        if(var_1.settext == 3) {
           var_1 _id_0A28("scorestreak3");
           var_1 notify("stopWatchingScorestreaks");
         }
@@ -1602,7 +1602,7 @@ _id_A93F() {
   self endon("stopWatchingScorestreaks");
 
   for(;;) {
-    self._id_80BD = 0;
+    self.settext = 0;
     self waittill("death");
   }
 }

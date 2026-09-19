@@ -7,15 +7,15 @@ setupkeybindings() {
   if(isbot(self)) {
     return;
   }
-  self _meth_82E1("lock", "+attack");
-  self _meth_82E1("lock", "+attack_akimbo_accessible");
-  self _meth_82E1("changeProp", "+weapnext");
-  self _meth_82E1("setToSlope", "+usereload");
-  self _meth_82E1("setToSlope", "+activate");
-  self _meth_82E1("propAbility", "+smoke");
-  self _meth_82E1("cloneProp", "+actionslot 2");
-  self _meth_82E1("zoomin", "+actionslot 3");
-  self _meth_82E1("zoomout", "+actionslot 4");
+  self notifyonplayercommand("lock", "+attack");
+  self notifyonplayercommand("lock", "+attack_akimbo_accessible");
+  self notifyonplayercommand("changeProp", "+weapnext");
+  self notifyonplayercommand("setToSlope", "+usereload");
+  self notifyonplayercommand("setToSlope", "+activate");
+  self notifyonplayercommand("propAbility", "+smoke");
+  self notifyonplayercommand("cloneProp", "+actionslot 2");
+  self notifyonplayercommand("zoomin", "+actionslot 3");
+  self notifyonplayercommand("zoomout", "+actionslot 4");
   thread cleanupkeybindingsondeath();
 }
 
@@ -33,15 +33,15 @@ cleanupkeybindings() {
   if(isbot(self)) {
     return;
   }
-  self _meth_84A7("lock", "+attack");
-  self _meth_84A7("lock", "+attack_akimbo_accessible");
-  self _meth_84A7("changeProp", "+weapnext");
-  self _meth_84A7("setToSlope", "+usereload");
-  self _meth_84A7("setToSlope", "+activate");
-  self _meth_84A7("propAbility", "+smoke");
-  self _meth_84A7("cloneProp", "+frag");
-  self _meth_84A7("zoomin", "+actionslot 3");
-  self _meth_84A7("zoomout", "+actionslot 4");
+  self notifyonplayercommandremove("lock", "+attack");
+  self notifyonplayercommandremove("lock", "+attack_akimbo_accessible");
+  self notifyonplayercommandremove("changeProp", "+weapnext");
+  self notifyonplayercommandremove("setToSlope", "+usereload");
+  self notifyonplayercommandremove("setToSlope", "+activate");
+  self notifyonplayercommandremove("propAbility", "+smoke");
+  self notifyonplayercommandremove("cloneProp", "+frag");
+  self notifyonplayercommandremove("zoomin", "+actionslot 3");
+  self notifyonplayercommandremove("zoomout", "+actionslot 4");
 }
 
 propcontrolshud() {
@@ -125,8 +125,8 @@ propinputwatch() {
   }
   self._id_5E61 = 0;
   self.slopelocked = 0;
-  self _meth_82FF("ui_ph_is_locked", 0);
-  self _meth_82FF("ui_ph_matching_slope", 0);
+  self setclientomnvar("ui_ph_is_locked", 0);
+  self setclientomnvar("ui_ph_matching_slope", 0);
   maps\mp\_utility::gameflagwait("prematch_done");
   childthread propmoveunlock();
   childthread propcamerazoom();
@@ -136,7 +136,7 @@ propinputwatch() {
   self.debugnextpropindex = 1;
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A715("lock", "changeProp", "setToSlope", "propAbility", "cloneProp");
+    var_0 = common_scripts\utility::waittill_any_return("lock", "changeProp", "setToSlope", "propAbility", "cloneProp");
 
     if(!isDefined(var_0)) {
       continue;
@@ -173,7 +173,7 @@ propinputwatch() {
 }
 
 proplockunlock() {
-  if(self _meth_82E4()) {
+  if(self ismantling()) {
     return;
   }
   if(self._id_5E61)
@@ -213,7 +213,7 @@ propchange() {
   self._id_777D._id_5135 = maps\mp\gametypes\prop::getnextprop(self);
   propchangeto(self._id_777D._id_5135);
   self.maxhealth = int(maps\mp\gametypes\prop::getprophealth(self._id_777D._id_5135));
-  self _meth_8058(1.0);
+  self setnormalhealth(1.0);
   setnewabilitycount(self.currentability);
   setnewabilitycount("CLONE");
 
@@ -235,7 +235,7 @@ propdeductchange() {
 
 propsetchangesleft(var_0) {
   self.changesleft = var_0;
-  self _meth_82FF("ui_ph_num_changes_left", self.changesleft);
+  self setclientomnvar("ui_ph_num_changes_left", self.changesleft);
 
   if(maps\mp\gametypes\prop::useprophudserver()) {
     self.changepropkey setvalue(self.changesleft);
@@ -249,8 +249,8 @@ propchangeto(var_0) {
   self._id_777D setModel(var_0.modelname);
   self._id_777D.xyzoffset = var_0.xyzoffset;
   self._id_777D.anglesoffset = var_0.anglesoffset;
-  self._id_777D _meth_8057();
-  self.propent _meth_8057();
+  self._id_777D unlink();
+  self.propent unlink();
   self.propent.origin = self.propanchor.origin;
   self._id_777D.origin = self.propent.origin;
   self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
@@ -277,10 +277,10 @@ propchangeto(var_0) {
 propmatchslope() {
   if(!common_scripts\utility::_id_562E(self.slopelocked)) {
     self.slopelocked = 1;
-    self _meth_82FF("ui_ph_matching_slope", 1);
+    self setclientomnvar("ui_ph_matching_slope", 1);
 
     if(common_scripts\utility::_id_562E(self._id_5E61)) {
-      self.propent _meth_8057();
+      self.propent unlink();
       self.propent set_pitch_roll_for_ground_normal(self._id_777D);
       self.propent linktosynchronizedparent(self.propanchor);
     }
@@ -293,10 +293,10 @@ propmatchslope() {
     }
   } else {
     self.slopelocked = 0;
-    self _meth_82FF("ui_ph_matching_slope", 0);
+    self setclientomnvar("ui_ph_matching_slope", 0);
 
     if(common_scripts\utility::_id_562E(self._id_5E61)) {
-      self.propent _meth_8057();
+      self.propent unlink();
       self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
       self.propent.origin = self.propanchor.origin;
       self.propent linktosynchronizedparent(self.propanchor);
@@ -338,7 +338,7 @@ propdeductclonechange() {
 
 propsetclonesleft(var_0) {
   self.clonesleft = var_0;
-  self _meth_82FF("ui_ph_num_clones_left", self.clonesleft);
+  self setclientomnvar("ui_ph_num_clones_left", self.clonesleft);
 
   if(maps\mp\gametypes\prop::useprophudserver()) {
     self.clonekey setvalue(self.clonesleft);
@@ -358,7 +358,7 @@ propdeductflash() {
 
 propsetflashesleft(var_0) {
   self.abilityleft = var_0;
-  self _meth_82FF("ui_ph_num_flashes_left", self.abilityleft);
+  self setclientomnvar("ui_ph_num_flashes_left", self.abilityleft);
 
   if(maps\mp\gametypes\prop::useprophudserver()) {
     self.abilitykey setvalue(self.abilityleft);
@@ -377,7 +377,7 @@ set_pitch_roll_for_ground_normal(var_0) {
   var_2 = anglesToForward(self.angles);
   var_3 = anglestoright(self.angles);
   var_4 = vectortoangles(var_1);
-  var_5 = _func_0DD(var_4[0] + 90);
+  var_5 = _angleclamp180(var_4[0] + 90);
   var_4 = (0, var_4[1], 0);
   var_6 = anglesToForward(var_4);
   var_7 = vectordot(var_6, var_3);
@@ -389,7 +389,7 @@ set_pitch_roll_for_ground_normal(var_0) {
 
   var_8 = vectordot(var_6, var_2);
   var_9 = var_8 * var_5;
-  var_10 = (1 - _func_0AE(var_8)) * var_5 * var_7;
+  var_10 = (1 - _abs(var_8)) * var_5 * var_7;
   self.angles = (var_9, self.angles[1], var_10);
 }
 
@@ -404,7 +404,7 @@ get_ground_normal(var_0, var_1) {
   if(getdvarint("scr_ph_useBoundsForGroundNormal", 1)) {
     for(var_4 = -1.0; var_4 <= 1.0; var_4 = var_4 + 2.0) {
       for(var_5 = -1.0; var_5 <= 1.0; var_5 = var_5 + 2.0) {
-        var_6 = var_2 _meth_8549(var_4, var_5, 0.0);
+        var_6 = var_2 getpointinmodelbounds(var_4, var_5, 0.0);
         var_6 = (var_6[0], var_6[1], self.origin[2]);
         var_3[var_3.size] = var_6;
       }
@@ -438,7 +438,7 @@ propmoveunlock() {
 
   for(;;) {
     waitframe();
-    var_3 = self _meth_82F9();
+    var_3 = self getnormalizedmovement();
 
     if(!isDefined(var_3)) {
       continue;
@@ -461,10 +461,10 @@ propmoveunlock() {
 }
 
 unlockprop() {
-  self _meth_8057();
+  self unlink();
 
   if(self.slopelocked) {
-    self.propent _meth_8057();
+    self.propent unlink();
     self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
     self.propent.origin = self.propanchor.origin;
     self.propent linktosynchronizedparent(self.propanchor);
@@ -472,7 +472,7 @@ unlockprop() {
 
   self.propanchor linktosynchronizedparent(self);
   self._id_5E61 = 0;
-  self _meth_82FF("ui_ph_is_locked", 0);
+  self setclientomnvar("ui_ph_is_locked", 0);
 
   if(maps\mp\gametypes\prop::useprophudserver())
     self.lockpropkey.label = &"MP_PH_LOCK";
@@ -482,31 +482,31 @@ lockprop() {
   if(!canlock()) {
     return;
   }
-  self.propanchor _meth_8057();
+  self.propanchor unlink();
   self.propanchor.origin = self.origin;
-  self _meth_8077(self.propanchor);
+  self playerlinkto(self.propanchor);
 
   if(self.slopelocked) {
-    self.propent _meth_8057();
+    self.propent unlink();
     self.propent set_pitch_roll_for_ground_normal(self._id_777D);
     self.propent linktosynchronizedparent(self.propanchor);
   }
 
   self._id_5E61 = 1;
   self notify("locked");
-  self _meth_82FF("ui_ph_is_locked", 1);
+  self setclientomnvar("ui_ph_is_locked", 1);
 
   if(maps\mp\gametypes\prop::useprophudserver())
     self.lockpropkey.label = &"MP_PH_LOCKED";
 }
 
 canlock() {
-  if(!self _meth_8346()) {
-    var_0 = _func_082(self.origin, 15, 30000, 0);
+  if(!self isonground()) {
+    var_0 = _getgroundposition(self.origin, 15, 30000, 0);
     var_1 = getEntArray("trigger_hurt", "classname");
 
     foreach(var_3 in var_1) {
-      if(_func_21B(var_0, var_3))
+      if(_ispointinvolume(var_0, var_3))
         return 0;
     }
   }
@@ -523,7 +523,7 @@ propspectate() {
     self.spectatenumber = 0;
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A715("spectate");
+    var_0 = common_scripts\utility::waittill_any_return("spectate");
 
     if(self.endingpropspecate) {
       continue;
@@ -558,7 +558,7 @@ propspectatekeys() {
   }
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A715("zoomin", "zoomout");
+    var_0 = common_scripts\utility::waittill_any_return("zoomin", "zoomout");
 
     if(self.endingpropspecate) {
       continue;
@@ -658,27 +658,27 @@ destroypropspecatehud() {
 spectateprop() {
   var_0 = self.spectatableprops[self.spectatenumber];
   self.spectatingthisplayer = var_0;
-  self.propanchor _meth_8057();
+  self.propanchor unlink();
   self.propanchor.origin = self.origin;
   self setOrigin(var_0.origin);
   self.angles = var_0.angles;
-  self _meth_8077(var_0.propanchor);
+  self playerlinkto(var_0.propanchor);
 }
 
 movetonewprop() {
   var_0 = self.spectatableprops[self.spectatenumber];
-  self _meth_8057();
+  self unlink();
   self.origin = var_0.origin;
   self.angles = var_0.angles;
-  self _meth_8077(var_0.propanchor);
+  self playerlinkto(var_0.propanchor);
 }
 
 returntoprop() {
-  self _meth_8057();
+  self unlink();
   self setOrigin(self.propanchor.origin);
 
   if(self._id_5E61)
-    self _meth_8077(self.propanchor);
+    self playerlinkto(self.propanchor);
   else {
     self.propanchor linktosynchronizedparent(self);
     self.propanchor.origin = self.origin;
@@ -695,7 +695,7 @@ propcamerazoom() {
   self.thirdpersonrange = maps\mp\gametypes\prop::getthirdpersonrangeforpropinfo(self._id_777D._id_5135);
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A715("zoomin", "zoomout");
+    var_0 = common_scripts\utility::waittill_any_return("zoomin", "zoomout");
 
     if(common_scripts\utility::_id_562E(self.endingpropspecate)) {
       continue;
@@ -727,11 +727,11 @@ propcamerazoom() {
 
 proprotate() {
   for(;;) {
-    if(self _meth_8343(1) && !common_scripts\utility::_id_562E(self.propent.spinning)) {
-      self.propent _meth_84CA(0);
+    if(self adsbuttonpressed(1) && !common_scripts\utility::_id_562E(self.propent.spinning)) {
+      self.propent setshadowrendering(0);
       self.propent.spinning = 1;
-    } else if(!self _meth_8343(1) && common_scripts\utility::_id_562E(self.propent.spinning)) {
-      self.propent _meth_84CA(1);
+    } else if(!self adsbuttonpressed(1) && common_scripts\utility::_id_562E(self.propent.spinning)) {
+      self.propent setshadowrendering(1);
       self.propent.spinning = 0;
     }
 
@@ -865,8 +865,8 @@ cloneprop() {
   var_0.angles = self._id_777D.angles;
   var_0.health = 50;
   var_0._id_7433 = self;
-  var_0 _meth_82C3(1);
-  var_0 _meth_849F(1);
+  var_0 setcandamage(1);
+  var_0 setdamagecallbackon(1);
   var_0.damagecallback = ::damageclonewatch;
   var_0 thread deleteclone(self);
   var_0 thread maps\mp\gametypes\prop::highlighttoteam(game["defenders"], 0, self);
@@ -927,7 +927,7 @@ fadetoblackforxsec(var_0, var_1, var_2) {
   if(!isDefined(var_2))
     var_2 = 1;
 
-  var_3 = _func_19B(self);
+  var_3 = _newclienthudelem(self);
   var_3.foreground = 0;
   var_3.x = 0;
   var_3.y = 0;
@@ -943,13 +943,13 @@ fadetoblackforxsec(var_0, var_1, var_2) {
     var_3 fadeovertime(var_1);
 
   var_3.alpha = 1;
-  maps\mp\gametypes\_hostmigration::_id_A6F5(var_0 - var_2);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_0 - var_2);
 
   if(var_2 > 0)
     var_3 fadeovertime(var_2);
 
   var_3.alpha = 0;
-  maps\mp\gametypes\_hostmigration::_id_A6F5(var_2);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_2);
   waitframe();
   safedestroy(var_3);
 }
@@ -957,7 +957,7 @@ fadetoblackforxsec(var_0, var_1, var_2) {
 watchspecialgrenadethrow() {
   self endon("death");
   self endon("disconnect");
-  self _meth_82E1("specialGrenade", "+smoke");
+  self notifyonplayercommand("specialGrenade", "+smoke");
 
   for(;;) {
     self waittill("specialGrenade");

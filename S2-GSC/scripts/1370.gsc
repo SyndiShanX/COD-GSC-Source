@@ -370,7 +370,7 @@ getzoneclosesttopoint(var_0, var_1) {
       continue;
     }
     foreach(var_6 in var_4._id_A615) {
-      if(_func_21B(var_0, var_6))
+      if(_ispointinvolume(var_0, var_6))
         return var_4._id_AC8A;
     }
 
@@ -389,10 +389,10 @@ getzoneclosesttopoint(var_0, var_1) {
 _id_5771(var_0) {
   foreach(var_2 in level._id_AC80._id_ACB3) {
     foreach(var_4 in var_2._id_A615) {
-      if(_func_21B(var_0.origin, var_4))
+      if(_ispointinvolume(var_0.origin, var_4))
         return 1;
 
-      if(_func_21B(var_0.origin + (0, 0, 20), var_4))
+      if(_ispointinvolume(var_0.origin + (0, 0, 20), var_4))
         return 1;
     }
   }
@@ -406,10 +406,10 @@ _id_5772(var_0) {
       continue;
     }
     foreach(var_4 in var_2._id_A615) {
-      if(_func_21B(var_0.origin, var_4))
+      if(_ispointinvolume(var_0.origin, var_4))
         return 1;
 
-      if(_func_21B(var_0.origin + (0, 0, 20), var_4))
+      if(_ispointinvolume(var_0.origin + (0, 0, 20), var_4))
         return 1;
     }
   }
@@ -431,7 +431,7 @@ _id_578B(var_0, var_1) {
       continue;
     }
     foreach(var_5 in var_3._id_A615) {
-      if(_func_21B(var_0, var_5))
+      if(_ispointinvolume(var_0, var_5))
         return var_3._id_AC8A;
     }
   }
@@ -443,10 +443,10 @@ _id_4562(var_0) {
   if(isDefined(level._id_AC80)) {
     foreach(var_2 in level._id_AC80._id_ACB3) {
       foreach(var_4 in var_2._id_A615) {
-        if(_func_21B(var_0, var_4))
+        if(_ispointinvolume(var_0, var_4))
           return var_2._id_AC8A;
 
-        if(_func_21B(var_0 + (0, 0, 20), var_4))
+        if(_ispointinvolume(var_0 + (0, 0, 20), var_4))
           return var_2._id_AC8A;
       }
     }
@@ -508,7 +508,7 @@ updatecurrentzones() {
   var_1 = var_0.currentzones;
   var_0.currentzones = [];
   var_2 = isPlayer(var_0) && var_0.sessionstate == "spectator";
-  var_3 = _func_1EF(var_0) && !isalive(var_0);
+  var_3 = _isagent(var_0) && !isalive(var_0);
 
   if(!var_2 && !var_3) {
     foreach(var_9, var_5 in level._id_AC80._id_ACB3) {
@@ -704,8 +704,8 @@ _id_530A(var_0, var_1, var_2) {
   foreach(var_11 in var_3._id_ABFE) {
     _id_5374(var_11);
 
-    if(isDefined(var_11._id_819A))
-      var_3._id_9050[var_11._id_819A] = 1;
+    if(isDefined(var_11.getnegotiationnextnode))
+      var_3._id_9050[var_11.getnegotiationnextnode] = 1;
   }
 
   level._id_AC4F = common_scripts\utility::_id_0F73(level._id_AC4F, var_3._id_ABFE);
@@ -726,8 +726,8 @@ _id_5374(var_0) {
     case "zombie_sky_spawner":
       var_0._id_8C95 = 1;
     case "zombie_spawner":
-      if(isDefined(var_0._id_819A) && !common_scripts\utility::_id_3C83(var_0._id_819A))
-        common_scripts\utility::flag_init(var_0._id_819A);
+      if(isDefined(var_0.getnegotiationnextnode) && !common_scripts\utility::_id_3C83(var_0.getnegotiationnextnode))
+        common_scripts\utility::flag_init(var_0.getnegotiationnextnode);
 
       break;
   }
@@ -746,7 +746,7 @@ _id_4634(var_0) {
 
 _id_57F4(var_0, var_1) {
   foreach(var_3 in var_1) {
-    if(_func_21B(var_0.origin, var_3))
+    if(_ispointinvolume(var_0.origin, var_3))
       return 1;
   }
 
@@ -776,7 +776,7 @@ _id_4694(var_0) {
     }
 
     foreach(var_5 in var_1) {
-      if(_func_21B(var_5.origin, var_10) && !common_scripts\utility::_id_0F79(var_8, var_5)) {
+      if(_ispointinvolume(var_5.origin, var_10) && !common_scripts\utility::_id_0F79(var_8, var_5)) {
         var_5._id_AC8A = var_0;
         var_8[var_8.size] = var_5;
       }
@@ -899,7 +899,7 @@ _id_445A(var_0, var_1) {
       var_2 = common_scripts\utility::_id_0F73(var_2, var_7._id_2300);
 
       foreach(var_9 in var_2) {
-        if(!isDefined(var_9._id_8260))
+        if(!isDefined(var_9.setlookatent))
           var_2 = common_scripts\utility::_id_0F93(var_2, var_9);
       }
     }
@@ -924,7 +924,7 @@ _id_445A(var_0, var_1) {
     var_3++;
   }
 
-  var_2 = _func_1AC(var_2, var_1);
+  var_2 = _sortbydistance(var_2, var_1);
 
   for(var_14 = var_2.size - 1; var_14 >= 0; var_14--) {
     if(!isDefined(var_2[var_14]._id_4B57)) {
@@ -1135,7 +1135,7 @@ _id_1E4E(var_0, var_1, var_2, var_3) {
       if(!var_13 _id_582C()) {
         continue;
       }
-      if(isDefined(var_13._id_8109) && common_scripts\utility::_id_562E(var_13._id_50D5)) {
+      if(isDefined(var_13.setflaggedanimknoball) && common_scripts\utility::_id_562E(var_13._id_50D5)) {
         continue;
       }
       var_9[var_9.size] = var_13;
@@ -1148,7 +1148,7 @@ _id_1E4E(var_0, var_1, var_2, var_3) {
   var_19 = maps\mp\agents\_agent_utility::_id_43FD("all");
 
   foreach(var_21 in level.players) {
-    if(!isalive(var_21) || common_scripts\utility::_id_562E(var_21._id_5378)) {
+    if(!isalive(var_21) || common_scripts\utility::_id_562E(var_21.inlaststand)) {
       continue;
     }
     var_22 = 0;
@@ -1161,7 +1161,7 @@ _id_1E4E(var_0, var_1, var_2, var_3) {
     if(common_scripts\utility::_id_562E(var_21._id_AC5B))
       var_22 = var_19.size;
 
-    var_22 = var_22 + _func_0A3(var_16);
+    var_22 = var_22 + _randomfloat(var_16);
 
     if(!isDefined(var_18) || var_22 < var_18) {
       var_18 = var_22;
@@ -1200,8 +1200,8 @@ _id_1E4E(var_0, var_1, var_2, var_3) {
 
     var_40 = _func_38E(var_39, var_17.origin);
     var_38 = var_38 + var_40 / var_30;
-    var_38 = var_38 / common_scripts\utility::_id_5D93(vectordot(vectorNormalize(var_17 _meth_833D()), vectorNormalize(var_39 - var_17.origin)), 0, 1, 1, 1 + var_29);
-    var_38 = var_38 + _func_0A3(var_38 * var_28 + var_27);
+    var_38 = var_38 / common_scripts\utility::_id_5D93(vectordot(vectorNormalize(var_17 getvelocity()), vectorNormalize(var_39 - var_17.origin)), 0, 1, 1, 1 + var_29);
+    var_38 = var_38 + _randomfloat(var_38 * var_28 + var_27);
 
     if(!isDefined(var_34) || var_38 < var_34) {
       var_34 = var_38;
@@ -1213,8 +1213,8 @@ _id_1E4E(var_0, var_1, var_2, var_3) {
 }
 
 _id_905C(var_0, var_1) {
-  if(isDefined(self._id_8260)) {
-    var_2 = strtok(self._id_8260, " ,");
+  if(isDefined(self.setlookatent)) {
+    var_2 = strtok(self.setlookatent, " ,");
     var_3 = 0;
     var_4 = 0;
 
@@ -1241,9 +1241,9 @@ _id_905D() {
   if(common_scripts\utility::_id_562E(self.is_zombies_spawner_script_disabled))
     return 0;
 
-  if(common_scripts\utility::_id_562E(level._id_7D20) && !isDefined(self._id_819A))
+  if(common_scripts\utility::_id_562E(level._id_7D20) && !isDefined(self.getnegotiationnextnode))
     return 0;
-  else if(common_scripts\utility::_id_562E(level._id_38D1) && !isDefined(self._id_819A)) {
+  else if(common_scripts\utility::_id_562E(level._id_38D1) && !isDefined(self.getnegotiationnextnode)) {
     var_0 = level._id_AC80._id_ACB3[self._id_AC8A];
 
     foreach(var_3, var_2 in var_0._id_9050) {
@@ -1252,8 +1252,8 @@ _id_905D() {
     }
   }
 
-  if(isDefined(self._id_819A)) {
-    if(!common_scripts\utility::_id_3C77(self._id_819A))
+  if(isDefined(self.getnegotiationnextnode)) {
+    if(!common_scripts\utility::_id_3C77(self.getnegotiationnextnode))
       return 0;
   }
 
@@ -1302,10 +1302,10 @@ _id_ACA1() {
   }
 
   foreach(var_6 in self._id_A615) {
-    var_7 = var_6 _meth_8216(0, 0, 0);
+    var_7 = var_6 getpointinbounds(0, 0, 0);
     var_8 = _func_2E1(var_7);
 
-    if(_func_21B(var_8, var_6)) {
+    if(_ispointinvolume(var_8, var_6)) {
       self._id_74DC = var_8;
       return;
     }
@@ -1314,7 +1314,7 @@ _id_ACA1() {
 
 _id_ACB0(var_0) {
   var_1 = "mp/zombieZoneTable.csv";
-  var_2 = _func_27B(var_1);
+  var_2 = _tablegetcolumncount(var_1);
   return tablelookup(var_1, 0, var_0, 1);
 }
 
@@ -1354,7 +1354,7 @@ zonehudupdateplayerthread() {
         var_0 _id_ACA7("ui_zm_previous_zone_name", var_5);
         var_0 _id_ACA7("ui_zm_current_zone_name", var_3);
         var_6 = "ui_zm_player_" + var_0 getentitynumber() + "_zone_name";
-        _func_032(var_6, var_3);
+        _setomnvar(var_6, var_3);
         var_0._id_5BB6 = var_3;
 
         if(!var_0 common_scripts\utility::_id_3794(var_3))
@@ -1410,5 +1410,5 @@ _id_ACA9(var_0) {
   var_1 = self;
   var_2 = var_0._id_6A70;
   var_3 = var_0._id_6A71;
-  var_1 _meth_82FF(var_2, var_3);
+  var_1 setclientomnvar(var_2, var_3);
 }

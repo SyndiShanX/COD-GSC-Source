@@ -11,7 +11,7 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_1AF0;
+  level.bot_funcs["gametype_think"] = ::_id_1AF0;
 }
 
 _id_1AF0() {
@@ -75,30 +75,30 @@ _id_913E(var_0) {
   self._id_9526 = 1;
   childthread _id_6804(var_0, "tag_picked_up");
   var_1 = var_0._id_28D4;
-  self _meth_8356(var_1, 0, "tactical");
+  self botsetscriptgoal(var_1, 0, "tactical");
   childthread _id_A8E2(var_0);
   var_2 = maps\mp\bots\_bots_util::_id_1B21(undefined, "tag_picked_up", "new_role");
   self notify("stop_watch_tag_destination");
 
   if(var_2 == "no_path") {
     var_1 = var_1 + (16 * _id_7A32(), 16 * _id_7A32(), 0);
-    self _meth_8356(var_1, 0, "tactical");
+    self botsetscriptgoal(var_1, 0, "tactical");
     var_2 = maps\mp\bots\_bots_util::_id_1B21(undefined, "tag_picked_up", "new_role");
 
     if(var_2 == "no_path") {
       var_1 = maps\mp\bots\_bots_util::_id_1AA8("BotGetClosestNavigablePoint", maps\mp\bots\_bots_util::_id_3F03, var_0._id_28D4, 32, self);
 
       if(isDefined(var_1)) {
-        self _meth_8356(var_1, 0, "tactical");
+        self botsetscriptgoal(var_1, 0, "tactical");
         var_2 = maps\mp\bots\_bots_util::_id_1B21(undefined, "tag_picked_up", "new_role");
       }
     }
   } else if(var_2 == "bad_path") {
-    var_3 = _func_0B9(var_0._id_28D4, 256, 0, level._id_1AF5 + 55);
+    var_3 = _getnodesinradiussorted(var_0._id_28D4, 256, 0, level._id_1AF5 + 55);
 
     if(var_3.size > 0) {
       var_4 = (var_0._id_28D4[0], var_0._id_28D4[1], (var_3[0].origin[2] + var_0._id_28D4[2]) * 0.5);
-      self _meth_8356(var_4, 0, "tactical");
+      self botsetscriptgoal(var_4, 0, "tactical");
       var_2 = maps\mp\bots\_bots_util::_id_1B21(undefined, "tag_picked_up", "new_role");
     }
   }
@@ -106,11 +106,11 @@ _id_913E(var_0) {
   if(var_2 == "goal" && var_0 _id_04D1::_id_1F53(self.team))
     wait 3.0;
 
-  if(self _meth_8367() && isDefined(var_1)) {
-    var_5 = self _meth_835C();
+  if(self bothasscriptgoal() && isDefined(var_1)) {
+    var_5 = self botgetscriptgoal();
 
     if(maps\mp\bots\_bots_util::_id_1B1C(var_5, var_1))
-      self _meth_8358();
+      self botclearscriptgoal();
   }
 
   self notify("stop_tag_watcher");
@@ -125,7 +125,7 @@ _id_A8E2(var_0) {
     if(!var_0 _id_04D1::_id_1F53(self.team))
       waitframe();
 
-    var_1 = self _meth_835C();
+    var_1 = self botgetscriptgoal();
     waitframe();
   }
 }
@@ -147,7 +147,7 @@ _id_913C(var_0) {
 }
 
 _id_7A32() {
-  return _func_0A4(0, 2) * 2 - 1;
+  return _randomintrange(0, 2) * 2 - 1;
 }
 
 _id_23A9() {
@@ -198,7 +198,7 @@ _id_913D(var_0) {
   }
 
   self notify("stop_camping_tag");
-  self _meth_8358();
+  self botclearscriptgoal();
   var_0._id_1955[self.team] = undefined;
   self._id_9526 = undefined;
 }

@@ -14,7 +14,7 @@ spawn_a_stone_baby_pickup(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_model", var_0);
   var_5 setModel(var_2);
   var_5 _id_0378::_id_8D74("baby_statue_spawn");
-  var_5 _meth_83E5((randomint(10) - 10, randomint(10) - 10, randomint(10) - 10), 0.1);
+  var_5 rotateby((randomint(10) - 10, randomint(10) - 10, randomint(10) - 10), 0.1);
   var_5.targetname = "baby_statue_spawn";
   var_6 = bulletTrace(var_5.origin + (0, 0, 32), var_5.origin + (0, 0, -1000), 0);
   var_5.origin = var_6["position"] + (0, 0, -4);
@@ -67,7 +67,7 @@ wait_for_baby_statue_pickup() {
 
     _id_0547::_id_AC40();
     var_0 thread _id_3481(self._id_6949);
-    self _meth_805C();
+    self hide();
     var_0 set_player_holding_an_baby_statue(self._id_6949);
     self delete();
     level notify("player grabbed baby statue");
@@ -91,7 +91,7 @@ _id_42F2(var_0) {
   self endon("baby_lost");
 
   while(isDefined(self)) {
-    if(self _meth_8346())
+    if(self isonground())
       var_0._id_A269 = self.origin;
 
     wait 0.15;
@@ -104,20 +104,20 @@ set_player_holding_an_baby_statue(var_0) {
   self.isswitchingtostatuepart = 1;
   self.iscarryingstatuepart = 1;
   self.currentstatueobjectiveid = var_0;
-  self._id_5B98 = self _meth_8317();
+  self._id_5B98 = self getcurrentprimaryweapon();
   var_1 = self getweaponlistprimaries();
   _id_0586::_id_078C("stone_baby_zm");
   _id_0586::_id_078E("stone_baby_zm");
   maps\mp\_utility::giveperk("specialty_ballcarrier");
-  self _meth_8326();
+  self disableweaponswitch();
 
   if(!common_scripts\utility::_id_562E(self.oncartride))
-    self _meth_8113(0);
+    self allowcrouch(0);
 
-  self _meth_8114(0);
-  self _meth_8305(0);
+  self allowprone(0);
+  self allowjump(0);
   self waittill("weapon_change");
-  self _meth_8327();
+  self enableweaponswitch();
   thread watch_for_baby_statue_drop();
 }
 
@@ -134,10 +134,10 @@ wait_for_baby_lost() {
   self.isswitchingtostatuepart = 0;
   self notify("baby_gained");
   self waittill("baby_lost", var_0);
-  self _meth_8113(1);
+  self allowcrouch(1);
 
   if(!common_scripts\utility::_id_3794("flag_player_in_water"))
-    self _meth_8114(1);
+    self allowprone(1);
 
   var_1 = 1;
 
@@ -229,7 +229,7 @@ take_baby_statue_from_player() {
     if(isDefined(self._id_5B98) && self._id_5B98 != "none")
       _id_0586::_id_078E(self._id_5B98);
 
-    self _meth_8305(1);
+    self allowjump(1);
   }
 }
 
@@ -237,7 +237,7 @@ wait_for_safe_baby_origin() {
   self endon("disconnect");
   self endon("death");
 
-  while(!self _meth_8346())
+  while(!self isonground())
     waitframe();
 
   return self.origin;

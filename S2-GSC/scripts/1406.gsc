@@ -43,15 +43,15 @@ _id_6312() {
 
   for(;;) {
     wait(var_1);
-    var_4 = var_0 _meth_8345() > 0.3 && var_0 getcurrentweapon() == "sentryhead_zm";
+    var_4 = var_0 playerads() > 0.3 && var_0 getcurrentweapon() == "sentryhead_zm";
 
     if(var_0._id_5605 != var_4) {
       var_0._id_5605 = var_4;
 
       if(var_4) {
         var_5 = common_scripts\utility::_id_44F5("vision_beam");
-        var_6 = _func_2A8(var_5, var_0, "tag_fx", 1);
-        _func_14C(var_6);
+        var_6 = _spawnlinkedfx(var_5, var_0, "tag_fx", 1);
+        _triggerfx(var_6);
         var_0._id_3BF4 = var_6;
       } else {
         var_0._id_3BF4 delete();
@@ -86,7 +86,7 @@ _id_5626(var_0) {
   var_2 = _id_437B(var_0);
   var_3 = var_1 getEye();
 
-  if(distancesquared(var_3, var_2) > _func_0DA(300))
+  if(distancesquared(var_3, var_2) > _squared(300))
     return 0;
 
   var_4 = var_2 - var_3;
@@ -97,12 +97,12 @@ _id_5626(var_0) {
 
   var_6 = var_4 / var_5;
   var_7 = anglesToForward(var_1 getplayerangles());
-  var_8 = _func_0AA(vectordot(var_7, var_6));
+  var_8 = _acos(vectordot(var_7, var_6));
 
   if(var_8 > 30)
     return 0;
 
-  if(!common_scripts\utility::_id_562E(var_0._id_8C80) && !_func_07F(var_3, var_2, 0, var_0))
+  if(!common_scripts\utility::_id_562E(var_0._id_8C80) && !_sighttracepassed(var_3, var_2, 0, var_0))
     return 0;
 
   return 1;
@@ -147,9 +147,9 @@ _id_4758() {
   _id_0586::_id_078C("sentryhead_zm");
   _id_0586::_id_078E("sentryhead_zm");
   maps\mp\_utility::giveperk("specialty_ballcarrier");
-  self _meth_8112(1);
-  self _meth_8113(0);
-  self _meth_8114(0);
+  self allowstand(1);
+  self allowcrouch(0);
+  self allowprone(0);
   thread _id_6360();
 }
 
@@ -173,9 +173,9 @@ _id_95CB() {
 
   _id_0586::_id_0790("sentryhead_zm");
   maps\mp\_utility::_id_0735("specialty_ballcarrier");
-  self _meth_8112(1);
-  self _meth_8113(1);
-  self _meth_8114(1);
+  self allowstand(1);
+  self allowcrouch(1);
+  self allowprone(1);
   level thread _id_8FA7(self.origin + (0, 0, 10), "respawning on drop");
 }
 
@@ -224,12 +224,12 @@ _id_8FA7(var_0, var_1) {
   var_5 = 2000;
   var_6 = 0.1;
   var_7 = (0, 0, 5);
-  var_2 _meth_808C();
+  var_2 dontinterpolate();
   var_2.origin = var_0;
   var_2 makeusable();
-  var_2 _meth_805B();
-  var_2 _meth_80CE(&"ZOMBIE_NEST_PICKUP_HEAD");
-  var_2 _meth_8272(var_2.origin + var_7, var_4, var_5, var_6);
+  var_2 show();
+  var_2 sethintstring(&"ZOMBIE_NEST_PICKUP_HEAD");
+  var_2 physicslaunchserver(var_2.origin + var_7, var_4, var_5, var_6);
   var_2._id_558F = 0;
   var_2 notify("recycle_fireman_head");
   var_2 endon("recycle_fireman_head");
@@ -247,12 +247,12 @@ _id_8FA7(var_0, var_1) {
 
   var_8 _id_4758();
   var_2._id_558F = 1;
-  var_2 _meth_84E0();
-  var_2 _meth_80B3();
-  var_2 _meth_83FF();
-  var_2 _meth_80CE(&"ZOMBIES_EMPTY_STRING");
-  var_2 _meth_805B();
-  var_2 _meth_8511();
+  var_2 physicsstop();
+  var_2 makeunusable();
+  var_2 hudoutlinedisable();
+  var_2 sethintstring(&"ZOMBIES_EMPTY_STRING");
+  var_2 show();
+  var_2 ghost();
 }
 
 _id_633A() {
@@ -264,13 +264,13 @@ _id_633A() {
       if(!common_scripts\utility::_id_562E(var_2._id_558F)) {
         if(var_0.size == 0) {
           if(isDefined(var_2))
-            var_2 _meth_83FF();
+            var_2 hudoutlinedisable();
 
           continue;
         }
 
         if(isDefined(var_2))
-          var_2 _meth_8429(var_0, 0, 1);
+          var_2 hudoutlineenableforclients(var_0, 0, 1);
       }
     }
   }

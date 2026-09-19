@@ -133,8 +133,8 @@ _id_523A() {
 }
 
 _id_1995() {
-  if(_func_133()) {
-    if(!_func_132("commonOption", "allowCustomClasses"))
+  if(_isusingmatchrulesdata()) {
+    if(!_getmatchrulesdata("commonOption", "allowCustomClasses"))
       return 0;
   }
 
@@ -142,13 +142,13 @@ _id_1995() {
 }
 
 _id_1A68(var_0, var_1, var_2) {
-  if(!_func_133())
+  if(!_isusingmatchrulesdata())
     return 1;
 
   if(!_id_1995())
     return 0;
 
-  if(!_func_031(var_1))
+  if(!_isstring(var_1))
     var_1 = maps\mp\_utility::_id_452B(var_1);
 
   if(var_1 == "specialty_null")
@@ -169,7 +169,7 @@ _id_1A68(var_0, var_1, var_2) {
       var_5 = maps\mp\_utility::_id_4429(var_1);
       break;
     case "killstreak":
-      if(_func_132("commonOption", "allStreaksRestricted"))
+      if(_getmatchrulesdata("commonOption", "allStreaksRestricted"))
         return 0;
 
       break;
@@ -180,10 +180,10 @@ _id_1A68(var_0, var_1, var_2) {
       return 0;
   }
 
-  if(_func_132("commonOption", var_3, var_1))
+  if(_getmatchrulesdata("commonOption", var_3, var_1))
     return 0;
 
-  if(var_5 != "" && _func_132("commonOption", var_4, var_5))
+  if(var_5 != "" && _getmatchrulesdata("commonOption", var_4, var_5))
     return 0;
 
   return 1;
@@ -216,18 +216,18 @@ _id_1A5A(var_0) {
     }
   }
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     var_12 = 0.0;
     var_13 = 0;
 
     for(var_14 = 0; var_13 < 6; var_13++) {
-      if(_func_132("defaultClasses", _id_1A6C(), "defaultClass", var_13, "class", "inUse")) {
+      if(_getmatchrulesdata("defaultClasses", _id_1A6C(), "defaultClass", var_13, "class", "inUse")) {
         var_1 = _id_1A5D(var_13, "loadoutPrimaryGUID");
 
         if(var_1 != 0) {
           var_12 = var_12 + 1.0;
 
-          if(_func_0A3(1.0) >= 1.0 / var_12)
+          if(_randomfloat(1.0) >= 1.0 / var_12)
             var_14 = var_1;
         }
       }
@@ -253,9 +253,9 @@ _id_1A6C() {
 _id_199C() {
   var_0 = ["class1", "class2", "class3", "class4", "class5"];
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     for(var_1 = 0; var_1 < var_0.size; var_1++) {
-      if(_func_132("defaultClasses", _id_1A6C(), "defaultClass", var_1, "class", "inUse"))
+      if(_getmatchrulesdata("defaultClasses", _id_1A6C(), "defaultClass", var_1, "class", "inUse"))
         var_0[var_1] = var_1;
     }
   }
@@ -264,7 +264,7 @@ _id_199C() {
   var_3 = [];
 
   foreach(var_5 in level._id_1A64) {
-    if(_func_031(var_2)) {
+    if(_isstring(var_2)) {
       var_3[var_5] = _id_1A5E(var_2, var_5);
       continue;
     }
@@ -297,7 +297,7 @@ _id_1A64() {
     var_1 = 2;
 
     for(;;) {
-      var_2 = _func_1AE(var_0, var_1, 0);
+      var_2 = _tablelookupbyrow(var_0, var_1, 0);
 
       if(var_2 == "") {
         break;
@@ -341,22 +341,22 @@ _id_1B1A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = [];
   var_8 = maps\mp\_utility::_id_452B(var_0);
 
-  if(isDefined(var_1) && !_func_031(var_1))
+  if(isDefined(var_1) && !_isstring(var_1))
     var_1 = maps\mp\_utility::_id_452B(var_1);
 
-  if(isDefined(var_2) && !_func_031(var_2))
+  if(isDefined(var_2) && !_isstring(var_2))
     var_2 = maps\mp\_utility::_id_452B(var_2);
 
-  if(isDefined(var_3) && !_func_031(var_3))
+  if(isDefined(var_3) && !_isstring(var_3))
     var_3 = maps\mp\_utility::_id_452B(var_3);
 
-  if(isDefined(var_4) && !_func_031(var_4))
+  if(isDefined(var_4) && !_isstring(var_4))
     var_4 = maps\mp\_utility::_id_452B(var_4);
 
-  if(isDefined(var_5) && !_func_031(var_5))
+  if(isDefined(var_5) && !_isstring(var_5))
     var_5 = maps\mp\_utility::_id_452B(var_5);
 
-  if(isDefined(var_6) && !_func_031(var_6))
+  if(isDefined(var_6) && !_isstring(var_6))
     var_6 = maps\mp\_utility::_id_452B(var_6);
 
   var_9 = 0;
@@ -449,21 +449,21 @@ _id_5172() {
   var_0 = 1;
 
   for(;;) {
-    var_1 = _func_1AE("mp/statstable.csv", var_0, 0);
+    var_1 = _tablelookupbyrow("mp/statstable.csv", var_0, 0);
 
     if(var_1 == "") {
       break;
     }
 
-    if(_func_1AE("mp/statstable.csv", var_0, 20) != "") {
+    if(_tablelookupbyrow("mp/statstable.csv", var_0, 20) != "") {
       var_0++;
       continue;
     }
 
-    var_2 = _func_1AE("mp/statstable.csv", var_0, 18);
-    var_3 = _func_1AE("mp/statstable.csv", var_0, 2);
-    var_4 = _func_1AE("mp/statstable.csv", var_0, 27);
-    var_5 = _func_1AE("mp/statstable.csv", var_0, 26);
+    var_2 = _tablelookupbyrow("mp/statstable.csv", var_0, 18);
+    var_3 = _tablelookupbyrow("mp/statstable.csv", var_0, 2);
+    var_4 = _tablelookupbyrow("mp/statstable.csv", var_0, 27);
+    var_5 = _tablelookupbyrow("mp/statstable.csv", var_0, 26);
 
     if(var_4 != "" && var_3 != "" && var_5 != "") {
       var_6 = int(var_2);
@@ -505,7 +505,7 @@ _id_5172() {
         }
       }
 
-      var_25 = _func_1AE("mp/statstable.csv", var_0, 9);
+      var_25 = _tablelookupbyrow("mp/statstable.csv", var_0, 9);
 
       if(var_25 != "")
         level._id_1B2B[var_3] = var_25;
@@ -537,7 +537,7 @@ _id_1A61(var_0, var_1, var_2, var_3, var_4) {
 
   var_7 = _id_1A60(level._id_1B2D[var_6][var_3][var_4], var_0, var_1, var_2);
 
-  if(_func_031(var_7))
+  if(_isstring(var_7))
     var_5 = maps\mp\_utility::_id_452A(var_7);
   else
     var_5 = var_7;
@@ -546,7 +546,7 @@ _id_1A61(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_1B18(var_0, var_1, var_2) {
-  if(_func_031(var_0))
+  if(_isstring(var_0))
     var_0 = maps\mp\_utility::_id_452A(var_0);
 
   if(var_0 == 0)
@@ -682,92 +682,92 @@ _id_1A5D(var_0, var_1) {
 
   switch (var_1) {
     case "loadoutDivsion":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "division");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "division");
     case "loadoutPrimaryGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "weapon");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "weapon");
     case "loadoutPrimaryAttachmentGUID1":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 0);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 0);
     case "loadoutPrimaryAttachmentGUID2":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 1);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 1);
     case "loadoutPrimaryAttachmentGUID3":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 2);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 2);
     case "loadoutPrimaryAttachmentGUID4":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 3);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 3);
     case "loadoutPrimaryAttachmentGUID5":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 4);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 4);
     case "loadoutPrimaryAttachmentGUID6":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 5);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "attachment", 5);
     case "loadoutPrimaryCamoGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "camo");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "camo");
     case "loadoutPrimaryCamo2GUID":
       return 0;
     case "loadoutPrimaryReticleGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "reticle");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "reticle");
     case "loadoutPrimaryPaintjobId":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "paintjob");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "paintjob");
     case "loadoutPrimaryCharmGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "charm");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 0, "charm");
     case "loadoutSecondaryGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "weapon");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "weapon");
     case "loadoutSecondaryAttachmentGUID1":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 0);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 0);
     case "loadoutSecondaryAttachmentGUID2":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 1);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 1);
     case "loadoutSecondaryAttachmentGUID3":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 2);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 2);
     case "loadoutSecondaryAttachmentGUID4":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 3);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 3);
     case "loadoutSecondaryAttachmentGUID5":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 4);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 4);
     case "loadoutSecondaryAttachmentGUID6":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 5);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "attachment", 5);
     case "loadoutSecondaryCamoGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "camo");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "camo");
     case "loadoutSecondaryCamo2GUID":
       return 0;
     case "loadoutSecondaryReticleGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "reticle");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "reticle");
     case "loadoutSecondaryPaintjobId":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "paintjob");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "paintjob");
     case "loadoutSecondaryCharmGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "charm");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "weaponSetups", 1, "charm");
     case "loadoutEquipmentGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "equipmentSetups", 0, "equipment");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "equipmentSetups", 0, "equipment");
     case "loadoutEquipmentNumExtra":
-      if(_func_30E(_func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "equipmentSetups", 0, "numExtra")))
-        return int(_func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "equipmentSetups", 0, "numExtra"));
+      if(_func_30E(_getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "equipmentSetups", 0, "numExtra")))
+        return int(_getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "equipmentSetups", 0, "numExtra"));
       else
         return 0;
     case "loadoutOffhandGUID":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "equipmentSetups", 1, "equipment");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "equipmentSetups", 1, "equipment");
     case "loadoutOffhandNumExtra":
       return 0;
     case "loadoutStreakGUID1":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "assaultStreaks", 0, "streak");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "assaultStreaks", 0, "streak");
     case "loadoutStreakGUID2":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "assaultStreaks", 1, "streak");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "assaultStreaks", 1, "streak");
     case "loadoutStreakGUID3":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "assaultStreaks", 2, "streak");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "assaultStreaks", 2, "streak");
     case "loadoutStreakGUID4":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "assaultStreaks", 3, "streak");
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "assaultStreaks", 3, "streak");
     case "loadoutPerkGUID1":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 0);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 0);
     case "loadoutPerkGUID2":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 1);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 1);
     case "loadoutPerkGUID3":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 2);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 2);
     case "loadoutPerkGUID4":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 3);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 3);
     case "loadoutPerkGUID5":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 4);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 4);
     case "loadoutPerkGUID6":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 5);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 5);
     case "loadoutPerkGUID7":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 6);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 6);
     case "loadoutPerkGUID8":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 7);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 7);
     case "loadoutPerkGUID9":
-      return _func_132("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 8);
+      return _getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_0, "class", "perkSlots", 8);
     default:
   }
 
@@ -780,16 +780,16 @@ _id_516F() {
   var_0 = 1;
 
   for(;;) {
-    var_1 = _func_1AE("mp/attachmenttable.csv", var_0, 3);
+    var_1 = _tablelookupbyrow("mp/attachmenttable.csv", var_0, 3);
 
     if(var_1 == "done") {
       break;
     }
 
-    var_2 = _func_1AE("mp/attachmenttable.csv", var_0, 15);
+    var_2 = _tablelookupbyrow("mp/attachmenttable.csv", var_0, 15);
 
     if(var_1 != "" && var_2 != "") {
-      var_3 = _func_1AE("mp/attachmenttable.csv", var_0, 7);
+      var_3 = _tablelookupbyrow("mp/attachmenttable.csv", var_0, 7);
 
       if(var_3 == "TRUE")
         level._id_193B[var_1] = 1;
@@ -816,7 +816,7 @@ _id_516F() {
 
   for(;;) {
     var_9++;
-    var_10 = _func_1AE("mp/attachmentcombos_mtx12.csv", 0, var_9);
+    var_10 = _tablelookupbyrow("mp/attachmentcombos_mtx12.csv", 0, var_9);
 
     if(var_10 == "") {
       break;
@@ -826,20 +826,20 @@ _id_516F() {
 
     for(;;) {
       var_0++;
-      var_11 = _func_1AE("mp/attachmentcombos_mtx12.csv", var_0, 0);
+      var_11 = _tablelookupbyrow("mp/attachmentcombos_mtx12.csv", var_0, 0);
 
       if(var_11 == "") {
         break;
       }
 
       if(var_11 == var_10) {
-        if(_func_1AE("mp/attachmentcombos_mtx12.csv", var_0, var_9) != "no")
+        if(_tablelookupbyrow("mp/attachmentcombos_mtx12.csv", var_0, var_9) != "no")
           level._id_0C1A[var_11] = 1;
 
         continue;
       }
 
-      if(_func_1AE("mp/attachmentcombos_mtx12.csv", var_0, var_9) == "no")
+      if(_tablelookupbyrow("mp/attachmentcombos_mtx12.csv", var_0, var_9) == "no")
         level._id_1A24[var_10][var_11] = 1;
     }
   }
@@ -856,7 +856,7 @@ _id_1A5B(var_0, var_1, var_2, var_3, var_4) {
 
   var_6 = _id_1A60(level._id_193C[var_4], var_0, var_1, var_2);
 
-  if(_func_031(var_6))
+  if(_isstring(var_6))
     var_5 = maps\mp\_utility::_id_452A(var_6);
   else
     var_5 = var_6;
@@ -872,14 +872,14 @@ _id_5171() {
   var_3 = 0;
 
   for(;;) {
-    var_4 = _func_1AE(var_0, var_3, var_1);
+    var_4 = _tablelookupbyrow(var_0, var_3, var_1);
 
     if(!isDefined(var_4) || var_4 == "") {
       break;
     }
 
     var_5 = maps\mp\_utility::_id_452A(var_4);
-    var_6 = _func_1AE(var_0, var_3, var_2);
+    var_6 = _tablelookupbyrow(var_0, var_3, var_2);
 
     if(isDefined(var_6) && int(var_6))
       level._id_1AB8[level._id_1AB8.size] = var_4;
@@ -899,7 +899,7 @@ _id_1A5F(var_0, var_1, var_2, var_3, var_4) {
   if(var_6) {
     var_7 = _id_1A60(level._id_1AB8, var_0, var_1, var_2);
 
-    if(_func_031(var_7))
+    if(_isstring(var_7))
       var_5 = maps\mp\_utility::_id_452A(var_7);
     else
       var_5 = var_7;
@@ -918,18 +918,18 @@ _id_5170() {
   var_5 = 0;
 
   for(;;) {
-    var_6 = _func_1AE(var_0, var_5, var_1);
+    var_6 = _tablelookupbyrow(var_0, var_5, var_1);
 
     if(!isDefined(var_6) || var_6 == "") {
       break;
     }
 
-    var_7 = int(_func_1AE(var_0, var_5, var_4));
-    var_8 = _func_1AE(var_0, var_5, var_2);
+    var_7 = int(_tablelookupbyrow(var_0, var_5, var_4));
+    var_8 = _tablelookupbyrow(var_0, var_5, var_2);
 
     if(isDefined(var_8) && var_8 != "" && !var_7) {
       var_9 = maps\mp\_utility::_id_452A(var_6);
-      var_10 = _func_1AE(var_0, var_5, var_3);
+      var_10 = _tablelookupbyrow(var_0, var_5, var_3);
 
       if(isDefined(var_10) && int(var_10))
         level._id_1953[level._id_1953.size] = var_6;
@@ -950,7 +950,7 @@ _id_1A5C(var_0, var_1, var_2, var_3, var_4) {
   if(var_6) {
     var_7 = _id_1A60(level._id_1953, var_0, var_1, var_2);
 
-    if(_func_031(var_7))
+    if(_isstring(var_7))
       var_5 = maps\mp\_utility::_id_452A(var_7);
     else
       var_5 = var_7;
@@ -960,16 +960,16 @@ _id_1A5C(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_1A69(var_0, var_1, var_2) {
-  if(_func_1EF(self))
+  if(_isagent(self))
     return 1;
 
-  if(!_func_031(var_1))
+  if(!_isstring(var_1))
     var_1 = maps\mp\_utility::_id_452B(var_1);
 
   if(!isDefined(level._id_1A7D[var_1])) {
     var_3 = "mp/unlockTable.csv";
-    var_4 = _func_1B1(var_3, 0, var_1);
-    level._id_1A7D[var_1] = int(_func_1AE(var_3, var_4, 2));
+    var_4 = _tablelookuprownum(var_3, 0, var_1);
+    level._id_1A7D[var_1] = int(_tablelookupbyrow(var_3, var_4, 2));
   }
 
   if(var_0 == "classtable_any" && var_2 == "recruit")
@@ -989,14 +989,14 @@ _id_1A69(var_0, var_1, var_2) {
 }
 
 _id_1A66(var_0, var_1) {
-  if(!_func_031(var_0))
+  if(!_isstring(var_0))
     var_0 = maps\mp\_utility::_id_452B(var_0);
 
   return maps\mp\gametypes\_class::_id_5826(var_0, 0);
 }
 
 _id_1A67(var_0, var_1) {
-  if(!_func_031(var_0))
+  if(!_isstring(var_0))
     var_0 = maps\mp\_utility::_id_452B(var_0);
 
   return maps\mp\gametypes\_class::_id_5833(var_0, 0);
@@ -1030,12 +1030,12 @@ _id_1A6D(var_0, var_1, var_2, var_3) {
 
       var_4 = _id_1A68("weapon", var_5, undefined);
       var_4 = var_4 && maps\mp\gametypes\_class::isvalidprimary(var_5, _id_1A12(var_1, "specialty_class_serrated"));
-      var_4 = var_4 && _id_1A69(var_0, var_3, self _meth_836D());
+      var_4 = var_4 && _id_1A69(var_0, var_3, self botgetdifficulty());
       break;
     case "loadoutEquipmentGUID":
       var_4 = _id_1A68("perk", var_3, "Lethal");
       var_4 = var_4 && _id_1A66(var_3, var_1);
-      var_4 = var_4 && _id_1A69(var_0, var_3, self _meth_836D());
+      var_4 = var_4 && _id_1A69(var_0, var_3, self botgetdifficulty());
       break;
     case "loadoutEquipmentNumExtra":
       var_4 = _func_30D(var_3) && var_3 >= 0;
@@ -1043,7 +1043,7 @@ _id_1A6D(var_0, var_1, var_2, var_3) {
     case "loadoutOffhandGUID":
       var_4 = _id_1A68("perk", var_3, "Tactical");
       var_4 = var_4 && _id_1A67(var_3, var_1);
-      var_4 = var_4 && _id_1A69(var_0, var_3, self _meth_836D());
+      var_4 = var_4 && _id_1A69(var_0, var_3, self botgetdifficulty());
       break;
     case "loadoutOffhandNumExtra":
       var_4 = _func_30D(var_3) && var_3 >= 0;
@@ -1102,7 +1102,7 @@ _id_1A6D(var_0, var_1, var_2, var_3) {
 
       var_4 = var_4 && _id_1A68("weapon", var_5, undefined);
       var_4 = var_4 && maps\mp\gametypes\_class::isvalidsecondary(var_5, _id_1A12(var_1, "specialty_class_rifleman"), _id_1A12(var_1, "specialty_class_launched"));
-      var_4 = var_4 && _id_1A69(var_0, var_3, self _meth_836D());
+      var_4 = var_4 && _id_1A69(var_0, var_3, self botgetdifficulty());
       break;
     case "loadoutSecondaryAttachmentGUID1":
       var_4 = _id_1B1A(var_1["loadoutSecondaryGUID"], var_3, "none");
@@ -1163,7 +1163,7 @@ _id_1A6D(var_0, var_1, var_2, var_3) {
     case "loadoutPerkGUID5":
     case "loadoutPerkGUID4":
       var_4 = _id_1B18(var_3, var_2, var_1);
-      var_4 = var_4 && _id_1A69(var_0, var_3, self _meth_836D());
+      var_4 = var_4 && _id_1A69(var_0, var_3, self botgetdifficulty());
       break;
     case "loadoutWildcardGUID3":
     case "loadoutWildcardGUID2":
@@ -1184,7 +1184,7 @@ _id_1A60(var_0, var_1, var_2, var_3, var_4) {
 
   if(common_scripts\utility::_id_0F79(var_0, "specialty_null"))
     var_5 = "specialty_null";
-  else if(var_3 == "loadoutEquipmentGUID" || var_3 == "loadoutOffhandGUID" || issubstr(_func_117(var_3), "perk"))
+  else if(var_3 == "loadoutEquipmentGUID" || var_3 == "loadoutOffhandGUID" || issubstr(_tolower(var_3), "perk"))
     var_5 = "specialty_null";
 
   if(var_1 == "classtable_any") {
@@ -1207,7 +1207,7 @@ _id_1A60(var_0, var_1, var_2, var_3, var_4) {
         return var_10;
     }
 
-    if(_func_031(var_10) && var_10 == "specialty_class_assigned") {
+    if(_isstring(var_10) && var_10 == "specialty_class_assigned") {
       var_14 = maps\mp\_utility::_id_452B(var_2["loadoutPerkGUID4"]);
 
       if(!isDefined(level._id_1B38[var_14]))
@@ -1217,7 +1217,7 @@ _id_1A60(var_0, var_1, var_2, var_3, var_4) {
       var_10 = _id_1A60(strtok(var_15, "| "), var_1, var_2, var_3, 0);
     }
 
-    if(_func_031(var_10) && _func_2C6(var_10, "division_")) {
+    if(_isstring(var_10) && _func_2C6(var_10, "division_")) {
       if(var_10 == "division_assigned") {
         var_11 = "division_" + _id_04CA::_id_44A0(var_2["loadoutDivision"]);
         var_16 = level._id_1B30[var_11][var_3];
@@ -1226,7 +1226,7 @@ _id_1A60(var_0, var_1, var_2, var_3, var_4) {
         var_10 = pick_division_from_loadout_value(var_10);
     }
 
-    if(_func_031(var_10)) {
+    if(_isstring(var_10)) {
       if(var_10 == "attachmenttable")
         return _id_1A5B(var_1, var_2, var_3, self._id_6F7D, self._id_2F05);
 
@@ -1248,7 +1248,7 @@ _id_1A60(var_0, var_1, var_2, var_3, var_4) {
 
     if(_id_1A6D(var_1, var_2, var_3, var_10)) {
       var_8 = var_8 + 1.0;
-      var_17 = _func_0A3(1.0);
+      var_17 = _randomfloat(1.0);
 
       if(var_17 <= 1.0 / var_8) {
         var_5 = var_10;
@@ -1260,7 +1260,7 @@ _id_1A60(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_6))
     self._id_2217[var_6] = 1;
 
-  if(_func_031(var_5) && (var_5 == "none" || var_5 == "specialty_null"))
+  if(_isstring(var_5) && (var_5 == "none" || var_5 == "specialty_null"))
     return 0;
 
   return var_5;
@@ -1289,7 +1289,7 @@ _id_1A62(var_0) {
       var_3 = _id_1A60(var_5, var_2, var_0, var_6);
     }
 
-    if(_func_031(var_3))
+    if(_isstring(var_3))
       var_3 = maps\mp\_utility::_id_452A(var_3);
 
     var_0[var_6] = var_3;
@@ -1299,11 +1299,11 @@ _id_1A62(var_0) {
 }
 
 _id_1A65() {
-  var_0 = self _meth_836D();
+  var_0 = self botgetdifficulty();
 
   if(var_0 == "default") {
-    maps\mp\bots\_bots_util::_id_1AD3("default");
-    var_0 = self _meth_836D();
+    maps\mp\bots\_bots_util::bot_set_difficulty("default");
+    var_0 = self botgetdifficulty();
   }
 
   return var_0;
@@ -1350,7 +1350,7 @@ _id_1A63(var_0) {
   var_1 = [];
   var_2 = _id_1A65();
   self._id_2F05 = var_2;
-  var_3 = self _meth_8368();
+  var_3 = self botgetpersonality();
 
   if(!isDefined(self._id_1A56))
     self._id_1994 = 0;
@@ -1375,7 +1375,7 @@ _id_1A63(var_0) {
 
   if(var_7) {
     var_8 = 0.1;
-    var_10 = _func_0A3(1.0) > var_8;
+    var_10 = _randomfloat(1.0) > var_8;
 
     if(var_10)
       return self.pers["botLastLoadout"];
@@ -1423,8 +1423,8 @@ _id_1A63(var_0) {
     var_15 = _id_1A6A(var_3, var_2);
     var_1 = _id_1A62(var_15);
 
-    if(isDefined(level._id_19D5["gametype_loadout_modify"]))
-      var_1 = self[[level._id_19D5["gametype_loadout_modify"]]](var_1);
+    if(isDefined(level.bot_funcs["gametype_loadout_modify"]))
+      var_1 = self[[level.bot_funcs["gametype_loadout_modify"]]](var_1);
 
     if(_id_1A78(var_1))
       var_16 = 0;
@@ -1467,7 +1467,7 @@ _id_1A63(var_0) {
       self._id_1B35 = var_1["loadoutSecondaryCamoGUID"];
 
     if(var_20) {
-      var_21 = level._id_1AB6[self _meth_836D()];
+      var_21 = level._id_1AB6[self botgetdifficulty()];
 
       if(_id_1A68("weapon", var_21, undefined)) {
         var_1["loadoutSecondaryGUID"] = var_21;
@@ -1519,7 +1519,7 @@ _id_1A63(var_0) {
 }
 
 _id_1A78(var_0) {
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     if(var_0["loadoutPrimaryGUID"] == 0)
       return 1;
   }
@@ -1528,7 +1528,7 @@ _id_1A78(var_0) {
 }
 
 _id_1ADE() {
-  var_0 = self _meth_8368();
+  var_0 = self botgetpersonality();
   var_1 = _id_1A65();
   var_2 = _id_1A6B(var_0, var_1, 0);
 

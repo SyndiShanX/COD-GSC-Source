@@ -27,7 +27,7 @@ throw_razors_at_players() {
     if(isDefined(self.forcedtarget))
       var_5 = self.forcedtarget.origin + (0, 0, 40);
 
-    var_6 = _func_1B5("razergun_zm", var_4, var_5, level.player);
+    var_6 = _magicbullet("razergun_zm", var_4, var_5, level.player);
     var_6 maps\mp\zombies\weapons\_zombie_razer_gun::transform_razer_projectile(self, "razergun_zm", "zmb_razergun_yellow_trail", 1);
   }
 }

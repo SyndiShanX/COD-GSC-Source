@@ -37,8 +37,8 @@ main() {
   thread maps\mp\mp_zombie_dnk_code::ee_init();
   thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode::shotgun_classic_init();
   thread performance_stuff();
-  _func_032("ui_zm_intermission_swaptime_1", 6);
-  _func_032("ui_zm_intermission_swaptime_2", 2);
+  _setomnvar("ui_zm_intermission_swaptime_1", 6);
+  _setomnvar("ui_zm_intermission_swaptime_2", 2);
   setDvar("1520", "-10 20 -1 100");
   setDvar("2494", "0.12, 0, 0");
   setDvar("4341", "0");
@@ -54,11 +54,11 @@ main() {
 }
 
 island_camo_vision_start() {
-  self _meth_849A("clut_mp_zombie_island_camo", 0.25);
+  self setclutforplayer("clut_mp_zombie_island_camo", 0.25);
 }
 
 island_camo_vision_stop() {
-  self _meth_849A("clut_identity", 0.25);
+  self setclutforplayer("clut_identity", 0.25);
 }
 
 register_dnk_sg_objectives() {
@@ -128,7 +128,7 @@ beast_boss_run(var_0) {
   level._id_1CC0 = undefined;
   var_1 = common_scripts\utility::_id_46B5("sg_boss_beast_spawnpoint", "targetname");
   level.boss = _id_054D::_id_90BA("zombie_bob", var_1, "bob", 0, 1, 0);
-  level.boss _id_0547::_id_84CB();
+  level.boss _id_0547::disableoffhandsecondaryweapons();
   level.boss maps\mp\zombies\sg_events_v1\_boss_util::set_zombie_boss_has_weapon_loot();
   level.boss.sgboss = 1;
   level.boss.is_flamethrower_resistent = 1;
@@ -165,7 +165,7 @@ intro_special_zombies_init() {
     level waittill("zombie_spawned", var_1);
 
     if(var_1._id_0A4B == "zombie_generic") {
-      var_2 = _func_0A4(0, 100);
+      var_2 = _randomintrange(0, 100);
 
       if(var_2 < 1 && !common_scripts\utility::_id_562E(self.hasprop) && var_0 < level.max_prop_zombie_appearances) {
         var_0++;
@@ -185,7 +185,7 @@ intro_special_zombies_attach() {
   else
     self.prop_decorator setModel("bsh_life_preserve_01_snow");
 
-  self.prop_decorator _meth_8055(self, "J_SpineLower", (0, 0, 0), (0, 90, -90));
+  self.prop_decorator linkto(self, "J_SpineLower", (0, 0, 0), (0, 90, -90));
 }
 
 special_decorator_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {

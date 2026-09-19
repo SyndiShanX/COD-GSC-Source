@@ -182,7 +182,7 @@ random(var_0) {
 }
 
 _id_5563(var_0, var_1) {
-  var_2 = _func_060(var_0);
+  var_2 = _getweaponattachmentsbasenames(var_0);
   var_3 = 1;
 
   foreach(var_5 in var_2) {

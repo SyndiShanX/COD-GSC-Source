@@ -183,10 +183,10 @@ dlc3_stop_escape_music(var_0) {
 dlc3_play_escape_complete_stinger(var_0) {
   if(!isDefined(self.playing_escape_complete_stinger)) {
     self.playing_escape_complete_stinger = 1;
-    self _meth_8626("dlc3_escape_complete_stinger", 4.0);
+    self clientaddsoundsubmix("dlc3_escape_complete_stinger", 4.0);
     _id_0380::_id_2888("dlc3_escape_complete_stinger_01", self);
     wait(var_0);
-    self _meth_8627("dlc3_escape_complete_stinger", 4.0);
+    self clientclearsoundsubmix("dlc3_escape_complete_stinger", 4.0);
     self.playing_escape_complete_stinger = undefined;
   }
 }
@@ -214,7 +214,7 @@ dlc3_magic_poof(var_0) {
 }
 
 dlc3_altered_state_init() {
-  self _meth_8626("dlc3_pre_altered_state");
+  self clientaddsoundsubmix("dlc3_pre_altered_state");
 }
 
 dlc3_altered_state_fade() {
@@ -237,9 +237,9 @@ dlc3_altered_state_apply(var_0, var_1) {
 
   if(var_0 == 1 || var_0 == 2 || var_0 == 3) {
     if(var_0 == 1) {
-      self _meth_8627("dlc3_pre_altered_state", 1.0);
+      self clientclearsoundsubmix("dlc3_pre_altered_state", 1.0);
       self notify("kill_dlc3_wave_mus_switcher");
-      self _meth_8627("dlc3_plr_idle_mus_fade", 1.0);
+      self clientclearsoundsubmix("dlc3_plr_idle_mus_fade", 1.0);
       _id_0366::snd_set_auto_wave_music_enabled(0);
       _id_0366::_id_8E47(0);
     } else if(var_0 == 2)
@@ -253,7 +253,7 @@ dlc3_altered_state_apply(var_0, var_1) {
     var_2 = ["zmb_mus_creepy_amb_lp_01", "zmb_mus_creepy_amb_lp_02", "zmb_mus_creepy_amb_lp_03", "zmb_mus_creepy_amb_lp_04", "zmb_mus_creepy_amb_lp_05", "zmb_mus_creepy_amb_lp_06"];
     _id_0366::_id_8E31(var_2[randomint(var_2.size)], 4);
     var_3 = "dlc3_altered_state" + var_0;
-    self _meth_8626(var_3, 3.0);
+    self clientaddsoundsubmix(var_3, 3.0);
     self._id_11CB.dlc3_altered_state_submix = var_3;
     var_1 = _id_0378::_id_8D49("altered_state_end", var_1);
     self waittill(var_1);
@@ -262,8 +262,8 @@ dlc3_altered_state_apply(var_0, var_1) {
 }
 
 dlc3_altered_state_clear() {
-  if(_func_031(self._id_11CB.dlc3_altered_state_submix)) {
-    self _meth_8627(self._id_11CB.dlc3_altered_state_submix, 3.0);
+  if(_isstring(self._id_11CB.dlc3_altered_state_submix)) {
+    self clientclearsoundsubmix(self._id_11CB.dlc3_altered_state_submix, 3.0);
 
     if(self._id_11CB.dlc3_altered_state_submix == "dlc3_altered_state3") {
       _id_0366::snd_set_auto_wave_music_enabled(1);
@@ -363,10 +363,10 @@ dlc_handle_bob_killed_music() {
 }
 
 dlc_play_boss_killed_stinger() {
-  self _meth_8626("bob_death_stinger", 0.2);
+  self clientaddsoundsubmix("bob_death_stinger", 0.2);
   _id_0380::_id_2888("mus_bob_death_stinger", self);
   wait 10;
-  self _meth_8627("bob_death_stinger", 4.0);
+  self clientclearsoundsubmix("bob_death_stinger", 4.0);
 }
 
 dlc3_bob_smoke_attack_strt() {
@@ -454,7 +454,7 @@ redskull_mumble_oneshot() {
   self endon("disconnect");
 
   for(;;) {
-    var_0 = _func_0A5(8, 14);
+    var_0 = _randomfloatrange(8, 14);
     _id_0380::_id_288B("zmb_redskull_pu_mumble_oneshot", undefined, self);
     wait(var_0);
   }
@@ -466,7 +466,7 @@ redskull_scream_oneshot() {
   self endon("disconnect");
 
   for(;;) {
-    var_0 = _func_0A5(10, 15);
+    var_0 = _randomfloatrange(10, 15);
     _id_0380::_id_288B("zmb_redskull_pu_scream_oneshot", undefined, self);
     wait(var_0);
   }
@@ -481,7 +481,7 @@ dlc3_rune_jolt_absorb() {
 }
 
 dlc3_player_spawned() {
-  self _meth_8626("dlc3_default_mix");
+  self clientaddsoundsubmix("dlc3_default_mix");
   _id_0366::snd_zmb_set_plr_vox_scare_count_max(0);
 }
 
@@ -498,7 +498,7 @@ dlc3_wave_begin(var_0) {
 
 dlc3_wave_end() {
   self notify("kill_dlc3_wave_mus_switcher");
-  self _meth_8627("dlc3_plr_idle_mus_fade", 3.0);
+  self clientclearsoundsubmix("dlc3_plr_idle_mus_fade", 3.0);
 }
 
 dlc3_wave_mus_switcher() {
@@ -508,7 +508,7 @@ dlc3_wave_mus_switcher() {
   var_0 = self;
   var_1 = 60000;
   var_2 = 240000;
-  var_3 = _func_0A4(var_1, var_2);
+  var_3 = _randomintrange(var_1, var_2);
   var_4 = 2000;
   var_5 = 0.1;
   var_6 = gettime();
@@ -548,10 +548,10 @@ dlc3_wave_mus_switcher() {
 
     if(!var_19 && var_17 - var_8 > var_20 && var_18 <= var_5 && var_12) {
       var_12 = 0;
-      var_0 _meth_8626("dlc3_plr_idle_mus_fade", var_14);
+      var_0 clientaddsoundsubmix("dlc3_plr_idle_mus_fade", var_14);
     } else if(!var_12 && (var_19 || var_18 > var_5 && var_17 - var_9 > var_20 * 0.5)) {
       var_12 = 1;
-      var_0 _meth_8627("dlc3_plr_idle_mus_fade", var_13);
+      var_0 clientclearsoundsubmix("dlc3_plr_idle_mus_fade", var_13);
     } else if(var_12 && var_17 - var_7 > var_3) {
       var_7 = var_17;
       var_16 = var_0 _id_0366::_id_8D46();
@@ -563,7 +563,7 @@ dlc3_wave_mus_switcher() {
       _id_0366::_id_8E32(var_14);
       wait 0.1;
       _id_0366::_id_8E31(var_16, var_15);
-      var_3 = _func_0A4(var_1, var_2);
+      var_3 = _randomintrange(var_1, var_2);
     }
 
     wait 0.5;

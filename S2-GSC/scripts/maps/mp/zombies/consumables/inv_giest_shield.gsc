@@ -42,7 +42,7 @@ spawn_a_giest_bubble_shield(var_0, var_1) {
   var_3 = spawnStruct();
   var_3.origin = var_0;
   var_4 = _id_0547::_id_8FBA(var_3, "zmb_player_consumable_bubble");
-  _func_14C(var_4);
+  _triggerfx(var_4);
   _id_0378::_id_8D74("zmb_pomel_grenade_detonate", var_3.origin);
   _id_0378::_id_8D74("zmb_pomel_grenade_force_field", var_3.origin);
   var_5 = gettime();
@@ -112,12 +112,12 @@ loop_spark_fx() {
 
   while(common_scripts\utility::_id_562E(self._id_98EF)) {
     play_shield_zombie_shock_vfx();
-    wait(_func_0A3(1.7) + 0.8);
+    wait(_randomfloat(1.7) + 0.8);
   }
 }
 
 play_shield_zombie_shock_vfx() {
-  _func_147(common_scripts\utility::_id_44F5("tesla blood shock"), self, "j_spine4");
+  _playfxontag(common_scripts\utility::_id_44F5("tesla blood shock"), self, "j_spine4");
 }
 
 death_shock_launch(var_0) {
@@ -140,16 +140,16 @@ death_shock_launch(var_0) {
   }
 
   if(isDefined(var_0) && isDefined(var_0.player))
-    self _meth_8059(level.heavy_giest_dmg, self.origin, var_0.player);
+    self dodamage(level.heavy_giest_dmg, self.origin, var_0.player);
   else
-    self _meth_8059(level.heavy_giest_dmg, self.origin);
+    self dodamage(level.heavy_giest_dmg, self.origin);
 
   level thread run_explosion_sphere(var_4);
 }
 
 run_explosion_sphere(var_0) {
   waitframe();
-  _func_175(var_0, 250, 150, 2.7);
+  _physicsexplosionsphere(var_0, 250, 150, 2.7);
 }
 
 getshieldconsumablecharges(var_0) {

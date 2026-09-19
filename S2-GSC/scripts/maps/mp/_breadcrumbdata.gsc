@@ -25,7 +25,7 @@ _id_5E8B() {
     var_0 = getdvarfloat("34");
 
     for(;;) {
-      var_1 = self _meth_8345() > 0.5;
+      var_1 = self playerads() > 0.5;
       _func_29B(self, self._id_5CC6, var_1);
       wait(var_0);
     }

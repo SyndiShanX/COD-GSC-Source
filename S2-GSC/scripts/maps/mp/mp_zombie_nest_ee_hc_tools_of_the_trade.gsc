@@ -17,15 +17,15 @@ main() {
 
 _id_52EC() {
   var_0 = common_scripts\utility::_id_46B5("nest_ee_hc_com_fuse_struct", "targetname");
-  var_1 = _func_18E(var_0.target, "targetname");
-  var_2 = _func_18E("nest_ee_hc_com_door_trig", "targetname");
+  var_1 = _getent(var_0.target, "targetname");
+  var_2 = _getent("nest_ee_hc_com_door_trig", "targetname");
   level._id_6874 = 0;
   var_3 = common_scripts\utility::_id_46B7("nest_ee_hc_safe_struct", "targetname");
 
   foreach(var_5 in var_3) {
     var_6 = common_scripts\utility::_id_44BE(var_5.target, "targetname");
-    var_7 = _func_21F(var_5.target, "targetname");
-    var_5._id_801E = var_7[0];
+    var_7 = _getscriptablearray(var_5.target, "targetname");
+    var_5.getcorpseanim = var_7[0];
     var_5._id_3B9C = [];
 
     for(var_8 = 0; var_8 < 5; var_8++)
@@ -34,7 +34,7 @@ _id_52EC() {
     foreach(var_10 in var_6) {
       switch (var_10._id_0165) {
         case "nest_ee_hc_safe_fingerprint":
-          var_5._id_3B9C[_id_0547::_id_9470(var_10._id_819A) - 1] = var_10;
+          var_5._id_3B9C[_id_0547::_id_9470(var_10.getnegotiationnextnode) - 1] = var_10;
           break;
         case "nest_ee_hc_safe_trigger":
           var_5._id_9D65 = var_10;
@@ -48,11 +48,11 @@ _id_52EC() {
           break;
         case "nest_ee_hc_safe_blood_message":
           var_5._id_17F7 = var_10;
-          var_5._id_17F7 _meth_805C();
+          var_5._id_17F7 hide();
           break;
         case "nest_ee_hc_safe_raven_key":
           var_5._id_7A79 = var_10;
-          var_5._id_7A79 _meth_805C();
+          var_5._id_7A79 hide();
           break;
         default:
           break;
@@ -63,12 +63,12 @@ _id_52EC() {
   var_13 = getEntArray("zmb_bloodraven_key_inserts", "targetname");
 
   foreach(var_15 in var_13)
-  var_15 _meth_805C();
+  var_15 hide();
 
   var_17 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_struct", "targetname");
-  var_18 = _func_18E(var_17.target, "targetname");
+  var_18 = _getent(var_17.target, "targetname");
   var_19 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_door_struct", "targetname");
-  var_20 = _func_18E(var_19.target, "targetname");
+  var_20 = _getent(var_19.target, "targetname");
   var_21["original_objective_trigs"] = level._id_358E;
   var_21["fuse_trigger"] = var_2;
   var_21["secret_door"] = var_1;
@@ -96,14 +96,14 @@ _id_760C() {
   self["power_box_door"] thread maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6C01();
   playFX(common_scripts\utility::_id_44F5("zmb_ee_switch_sparks"), self["power_box"].origin, anglesToForward(self["power_box"].angles), anglestoup(self["power_box"].angles));
   self["power_box"]._id_0A33 = common_scripts\utility::_id_0F73(var_0, var_1);
-  self["power_box"] _meth_82C3(1);
-  self["power_box"]._id_8259 = self;
+  self["power_box"] setcandamage(1);
+  self["power_box"].cleartargetyaw = self;
   self["power_box"] thread maps\mp\gametypes\_damage::_id_8676(1, "head_gibs", maps\mp\mp_zombie_nest_ee_util::_id_9902, ::_id_2575);
 }
 
 _id_2575(var_0, var_1, var_2, var_3) {
   var_4 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_struct", "targetname");
-  var_5 = _func_18E(var_4.target, "targetname");
+  var_5 = _getent(var_4.target, "targetname");
   var_6 = anglesToForward(var_5.angles);
 
   if(common_scripts\utility::_id_562E(level._id_665E))
@@ -184,30 +184,30 @@ _id_6BA1(var_0, var_1) {
   var_0._id_8026 = 1;
   var_0._id_8026 = 1;
   var_0._id_2E71 = [];
-  var_2 = var_0 _id_80D6();
+  var_2 = var_0 stopfiring();
   var_0._id_8026 = 1;
-  var_0._id_17F7 _meth_805B();
+  var_0._id_17F7 show();
   var_0._id_9D65 common_scripts\utility::_id_9DA3();
   _id_057E::_id_7CC2(self);
   var_0 _id_A680(var_2, var_0._id_9D65, var_0._id_2E71);
-  var_0._id_7A79 _meth_805B();
-  var_0._id_801E _meth_83FA("machine_main", "opening");
-  wait(_func_065(%zmb_ob_safe_open));
-  var_0._id_801E _meth_83FA("machine_main", "opened");
+  var_0._id_7A79 show();
+  var_0.getcorpseanim setscriptablepartstate("machine_main", "opening");
+  wait(_getanimlength(%zmb_ob_safe_open));
+  var_0.getcorpseanim setscriptablepartstate("machine_main", "opened");
   var_0._id_9D65 waittill("trigger", var_3);
   var_3 _id_0378::_id_8D74("zmb_ravens_key_pickup");
-  var_0._id_7A79 _meth_805C();
+  var_0._id_7A79 hide();
   _id_7E67();
 }
 
-_id_80D6() {
+stopfiring() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < 5; var_1++)
     var_0[var_1] = randomint(10);
 
   for(var_1 = 0; var_1 < var_0.size; var_1++)
-    self._id_801E _meth_83FA("dial_0" + (var_1 + 1), "idle_" + var_0[var_1]);
+    self.getcorpseanim setscriptablepartstate("dial_0" + (var_1 + 1), "idle_" + var_0[var_1]);
 
   wait 0.15;
 
@@ -221,11 +221,11 @@ _id_80D6() {
   var_2 = [];
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_3 = self._id_801E _meth_8181("dial_0" + (var_1 + 1));
-    var_4 = self._id_801E gettagorigin("dial_0" + (var_1 + 1));
+    var_3 = self.getcorpseanim gettagangles("dial_0" + (var_1 + 1));
+    var_4 = self.getcorpseanim gettagorigin("dial_0" + (var_1 + 1));
     var_5 = self._id_3B9C[var_1]._id_65DB.origin;
     var_6 = distance(var_4, var_5);
-    self._id_3B9C[var_1]._id_65DB _meth_8055(self._id_801E, "dial_0" + (var_1 + 1));
+    self._id_3B9C[var_1]._id_65DB linkto(self.getcorpseanim, "dial_0" + (var_1 + 1));
   }
 
   return var_0;
@@ -236,7 +236,7 @@ _id_A680(var_0, var_1, var_2) {
 
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
     var_3[var_4] = randomint(10);
-    self._id_801E _meth_83FA("dial_0" + (var_4 + 1), "idle_" + var_3[var_4]);
+    self.getcorpseanim setscriptablepartstate("dial_0" + (var_4 + 1), "idle_" + var_3[var_4]);
   }
 
   var_5 = 0;
@@ -245,7 +245,7 @@ _id_A680(var_0, var_1, var_2) {
     var_1 waittill("trigger", var_6);
     var_7 = _id_3B8A(var_6, var_2, 5);
     var_3[var_7] = common_scripts\utility::_id_98E7(var_3[var_7] < 9, var_3[var_7] + 1, 0);
-    self._id_801E _meth_83FA("dial_0" + (var_7 + 1), "idle_" + var_3[var_7]);
+    self.getcorpseanim setscriptablepartstate("dial_0" + (var_7 + 1), "idle_" + var_3[var_7]);
     wait 0.15;
     var_8 = 0;
 
@@ -264,7 +264,7 @@ _id_3B8A(var_0, var_1, var_2) {
   var_4 = 0;
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
-    var_6 = _func_0A7(var_2);
+    var_6 = _cos(var_2);
     var_7 = anglesToForward(var_0.angles);
     var_8 = var_1[var_5] - var_0.origin;
     var_7 = var_7 * (1, 1, 0);
@@ -285,7 +285,7 @@ _id_3B8A(var_0, var_1, var_2) {
 _id_7E67() {
   level._id_6874++;
   var_0 = getEntArray("zmb_bloodraven_key_inserts", "targetname");
-  var_0[level._id_6874 - 1] _meth_805B();
+  var_0[level._id_6874 - 1] show();
 
   switch (level._id_6874) {
     case 1:
@@ -299,8 +299,8 @@ _id_7E67() {
   if(level._id_6874 < 2) {
     return;
   }
-  var_1 = _func_18E("nest_hc_sword_door_trig", "targetname");
-  var_2 = _func_18E(var_1.target, "targetname");
+  var_1 = _getent("nest_hc_sword_door_trig", "targetname");
+  var_2 = _getent(var_1.target, "targetname");
   var_2._id_6C02 = 0;
   level._id_665E = 1;
 
@@ -311,14 +311,14 @@ _id_7E67() {
       var_2 _id_0378::_id_8D74("aud_open_raven_door");
 
       foreach(var_5 in var_0)
-      var_5 _meth_82B9(90, 2);
+      var_5 rotatepitch(90, 2);
 
       wait 2;
 
       foreach(var_5 in var_0)
-      var_5 _meth_82B4(-128, 4);
+      var_5 movez(-128, 4);
 
-      var_2 _meth_82B4(-128, 4);
+      var_2 movez(-128, 4);
       var_2._id_6C02 = 1;
     }
 
@@ -368,29 +368,29 @@ _id_7EFB() {
 }
 
 _id_857D() {
-  self _meth_83FA("part_dial", "dial_to_on");
-  wait(_func_065(%zmb_circuit_puzzle_dial_off_to_on));
-  self _meth_83FA("part_dial", "dial_on");
+  self setscriptablepartstate("part_dial", "dial_to_on");
+  wait(_getanimlength(%zmb_circuit_puzzle_dial_off_to_on));
+  self setscriptablepartstate("part_dial", "dial_on");
 }
 
 _id_857E() {
-  self _meth_83FA("part_dial", "dial_to_off");
-  wait(_func_065(%zmb_circuit_puzzle_dial_on_to_off));
-  self _meth_83FA("part_dial", "dial_off");
+  self setscriptablepartstate("part_dial", "dial_to_off");
+  wait(_getanimlength(%zmb_circuit_puzzle_dial_on_to_off));
+  self setscriptablepartstate("part_dial", "dial_off");
 }
 
 _id_8580() {
-  self _meth_83FA("cbreaker", "opening");
-  wait(_func_065(%zmb_circuit_puzzle_open));
-  self _meth_83FA("cbreaker", "opened_idle");
+  self setscriptablepartstate("cbreaker", "opening");
+  wait(_getanimlength(%zmb_circuit_puzzle_open));
+  self setscriptablepartstate("cbreaker", "opened_idle");
   thread _id_8582();
 }
 
 _id_857F() {
   thread _id_8583();
-  self _meth_83FA("cbreaker", "closing");
-  wait(_func_065(%zmb_circuit_puzzle_open));
-  self _meth_83FA("cbreaker", "closed");
+  self setscriptablepartstate("cbreaker", "closing");
+  wait(_getanimlength(%zmb_circuit_puzzle_open));
+  self setscriptablepartstate("cbreaker", "closed");
 }
 
 _id_857C() {
@@ -399,18 +399,18 @@ _id_857C() {
 }
 
 _id_8583() {
-  self _meth_83FA("green_light", "off");
-  self _meth_83FA("red_light", "off");
+  self setscriptablepartstate("green_light", "off");
+  self setscriptablepartstate("red_light", "off");
 }
 
 _id_8581() {
-  self _meth_83FA("green_light", "on");
-  self _meth_83FA("red_light", "off");
+  self setscriptablepartstate("green_light", "on");
+  self setscriptablepartstate("red_light", "off");
 }
 
 _id_8582() {
-  self _meth_83FA("green_light", "off");
-  self _meth_83FA("red_light", "on");
+  self setscriptablepartstate("green_light", "off");
+  self setscriptablepartstate("red_light", "on");
 }
 
 _id_11C1(var_0) {
@@ -435,7 +435,7 @@ _id_A64A(var_0) {
     var_3 _id_0378::_id_8D74("aud_enigma_switch_activate");
     var_3._id_5F59 thread maps\mp\mp_zombie_nest_ee_enigma::_id_8717();
     var_3._id_08A9 = 1;
-    common_scripts\utility::flag_set(var_3._id_8260);
+    common_scripts\utility::flag_set(var_3.setlookatent);
     var_3 common_scripts\utility::_id_9D9F();
   }
 }

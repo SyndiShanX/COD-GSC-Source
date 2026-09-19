@@ -38,31 +38,31 @@ _id_764D() {
 fighterinitmg(var_0) {
   var_1 = 0;
 
-  if(isDefined(self._id_81FD))
-    var_1 = self._id_81FD;
+  if(isDefined(self.setlookatanimnodes))
+    var_1 = self.setlookatanimnodes;
 
   self._id_615C = [];
 
   foreach(var_3 in var_0) {
-    var_4 = self _meth_8181(var_3._id_95A6);
+    var_4 = self gettagangles(var_3._id_95A6);
     var_5 = self gettagorigin(var_3._id_95A6);
-    var_6 = _func_110(var_4, (0, -1 * var_1, 0));
+    var_6 = _combineangles(var_4, (0, -1 * var_1, 0));
     var_7 = undefined;
 
     if(isDefined(var_3._id_6A1B))
-      var_7 = var_5 + _func_112(var_3._id_6A1B, var_4);
+      var_7 = var_5 + _rotatevector(var_3._id_6A1B, var_4);
     else
       var_7 = var_5;
 
-    var_8 = _func_016(var_3._id_231A, var_7, var_3._id_5135);
+    var_8 = _spawnturret(var_3._id_231A, var_7, var_3._id_5135);
     var_8._id_01D1 = var_3._id_5135;
     var_8.angles = var_6;
-    var_8 _meth_808C();
+    var_8 dontinterpolate();
 
     if(isDefined(var_3._id_6A1B))
-      var_8 _meth_8055(self, var_3._id_95A6, var_3._id_6A1B, (0, -1 * var_1, 0));
+      var_8 linkto(self, var_3._id_95A6, var_3._id_6A1B, (0, -1 * var_1, 0));
     else
-      var_8 _meth_8055(self, var_3._id_95A6, (0, 0, 0), (0, -1 * var_1, 0));
+      var_8 linkto(self, var_3._id_95A6, (0, 0, 0), (0, -1 * var_1, 0));
 
     var_8 setModel(var_3.model);
     var_8._id_5847 = 1;
@@ -106,7 +106,7 @@ _id_8A4D(var_0) {
 
 destroyturrets() {
   foreach(var_1 in self._id_615C) {
-    var_1 _meth_80B3();
+    var_1 makeunusable();
     var_1 delete();
   }
 
@@ -126,10 +126,10 @@ _id_51FB(var_0) {
   self._id_2A89 = "tag_trail_fx";
   self._id_9BDD = "tag_trail_fx";
 
-  if(self _meth_8445("tag_trail_fx") < 0)
+  if(self gettagindex("tag_trail_fx") < 0)
     self._id_2A89 = "tag_origin";
 
-  if(self _meth_8445("tag_trail_fx") < 0)
+  if(self gettagindex("tag_trail_fx") < 0)
     self._id_9BDD = "tag_origin";
 
   if(0)
@@ -160,7 +160,7 @@ spawn_tag_origin_internal() {
 
 _id_6DB8() {
   self endon("death");
-  var_0 = self _meth_8251();
+  var_0 = self getvehicleowner();
 
   if(!isDefined(var_0)) {
     return;
@@ -200,10 +200,10 @@ _id_6DB8() {
       var_11 = spawn_tag_origin_internal();
       var_11.fx = var_2;
       var_11.origin = var_8;
-      var_11.angles = self _meth_8181(self._id_9BDD);
-      var_11 _meth_8055(self, self._id_9BDD);
+      var_11.angles = self gettagangles(self._id_9BDD);
+      var_11 linkto(self, self._id_9BDD);
       self._id_29B1[self._id_29B1.size] = var_11;
-      _func_147(var_11.fx, var_11, "tag_origin");
+      _playfxontag(var_11.fx, var_11, "tag_origin");
 
       if(var_3 > 0)
         thread _id_6DB9(var_3, var_11);
@@ -217,7 +217,7 @@ _id_6DB7() {
   if(isDefined(self._id_29B1)) {
     foreach(var_1 in self._id_29B1) {
       if(isDefined(var_1)) {
-        _func_148(var_1.fx, var_1, "tag_origin");
+        _stopfxontag(var_1.fx, var_1, "tag_origin");
         var_1 delete();
       }
     }
@@ -230,7 +230,7 @@ _id_6DB9(var_0, var_1) {
   wait(var_0);
 
   if(isDefined(var_1) && isDefined(self) && isDefined(self._id_29B1)) {
-    _func_148(var_1.fx, var_1, "tag_origin");
+    _stopfxontag(var_1.fx, var_1, "tag_origin");
     self._id_29B1 = common_scripts\utility::_id_0F93(self._id_29B1, var_1);
   }
 
@@ -253,9 +253,9 @@ _id_721B() {
   if(isDefined(var_0)) {
     for(;;) {
       common_scripts\utility::_id_379C("engineeffects");
-      _func_147(var_0, self, self._id_9BDD);
+      _playfxontag(var_0, self, self._id_9BDD);
       common_scripts\utility::_id_37A1("engineeffects");
-      _func_148(var_0, self, self._id_9BDD);
+      _stopfxontag(var_0, self, self._id_9BDD);
     }
   }
 }
@@ -273,7 +273,7 @@ _id_720A() {
     var_0 = common_scripts\utility::_id_44F5("bf109_contrail_ext_vel");
 
   if(isDefined(var_0))
-    _func_147(var_0, self, self._id_9BDD);
+    _playfxontag(var_0, self, self._id_9BDD);
 }
 
 _id_93FB() {
@@ -285,7 +285,7 @@ _id_93FB() {
     var_0 = common_scripts\utility::_id_44F5("bf109_contrail_ext_vel");
 
   if(isDefined(var_0))
-    _func_148(var_0, self, self._id_9BDD);
+    _stopfxontag(var_0, self, self._id_9BDD);
 }
 
 _id_36B3() {
@@ -303,7 +303,7 @@ _id_74EE() {
     var_0 = common_scripts\utility::_id_44F5("bf109_wing_evap");
 
   if(isDefined(var_0))
-    _func_147(var_0, self, self._id_9BDD);
+    _playfxontag(var_0, self, self._id_9BDD);
 }
 
 _id_941A() {
@@ -315,7 +315,7 @@ _id_941A() {
     var_0 = common_scripts\utility::_id_44F5("bf109_wing_evap");
 
   if(isDefined(var_0))
-    _func_148(var_0, self, self._id_9BDD);
+    _stopfxontag(var_0, self, self._id_9BDD);
 }
 
 _id_36EF() {
@@ -360,26 +360,26 @@ _id_3F3B() {
 fx_speed_handler() {
   level endon("death");
   self endon("death");
-  var_0 = self _meth_8251();
+  var_0 = self getvehicleowner();
 
   if(!isDefined(var_0)) {
     return;
   }
-  if(isbot(var_0) || _func_1EF(var_0)) {
+  if(isbot(var_0) || _isagent(var_0)) {
     return;
   }
   var_1 = 0;
 
   while(isDefined(self)) {
-    var_2 = var_0 _meth_82F9()[0];
+    var_2 = var_0 getnormalizedmovement()[0];
 
     if(var_2 >= 0.5) {
       if(!var_1) {
-        _func_14D(level._effect["mp_raid_bomber_speedup"], self, self._id_9BDD, var_0);
+        _playfxontagforclients(level._effect["mp_raid_bomber_speedup"], self, self._id_9BDD, var_0);
         var_1 = 1;
       }
     } else if(var_1) {
-      _func_294(level._effect["mp_raid_bomber_speedup"], self, self._id_9BDD, var_0);
+      _stopfxontagforclient(level._effect["mp_raid_bomber_speedup"], self, self._id_9BDD, var_0);
       var_1 = 0;
     }
 

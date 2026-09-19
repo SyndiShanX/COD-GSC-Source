@@ -19,14 +19,14 @@ _id_2DE1() {
   var_0 = 40;
   var_1 = 0;
 
-  if(isDefined(self._id_80F8))
-    var_0 = self._id_80F8;
+  if(isDefined(self.setwhizbyoffset))
+    var_0 = self.setwhizbyoffset;
 
-  if(isDefined(self._id_82B7))
-    var_1 = self._id_82B7;
+  if(isDefined(self.stopmoveslide))
+    var_1 = self.stopmoveslide;
 
-  if(isDefined(self._id_8162)) {
-    var_2 = strtok(self._id_8162, " ");
+  if(isDefined(self.clearenemy)) {
+    var_2 = strtok(self.clearenemy, " ");
 
     for(var_3 = 0; var_3 < var_2.size; var_3++)
       _id_17D7(var_2[var_3]);
@@ -36,7 +36,7 @@ _id_2DE1() {
     self.fx = loadfx(self._id_81BB);
 
   var_4 = 0;
-  self _meth_82C3(1);
+  self setcandamage(1);
 
   for(;;) {
     self waittill("damage", var_5, var_6);
@@ -55,8 +55,8 @@ _id_2DE1() {
 _id_2DE0() {
   var_0 = self;
 
-  if(isDefined(self._id_8162)) {
-    var_1 = strtok(self._id_8162, " ");
+  if(isDefined(self.clearenemy)) {
+    var_1 = strtok(self.clearenemy, " ");
 
     for(var_2 = 0; var_2 < var_1.size; var_2++)
       _id_A017(var_1[var_2]);

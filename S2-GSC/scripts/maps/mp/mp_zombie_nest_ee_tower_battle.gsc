@@ -137,11 +137,11 @@ _id_46EE(var_0) {
   var_1 = var_0 * 5;
   var_2 = [];
   var_3 = "mp/zombieSpecialEnemyWaves.csv";
-  var_2["respawnExclusionRadius"] = _id_0547::_id_9470(_func_1AE(var_3, var_1, 4));
-  var_2["objectiveTime"] = _id_0547::_id_9470(_func_1AE(var_3, var_1, 5));
-  var_2["objectiveHealth"] = _id_0547::_id_9470(_func_1AE(var_3, var_1, 6));
-  var_2["zombieObjectiveMax"] = _id_0547::_id_9470(_func_1AE(var_3, var_1, 7));
-  var_2["objectiveHealthSolo"] = _id_0547::_id_9470(_func_1AE(var_3, var_1, 9));
+  var_2["respawnExclusionRadius"] = _id_0547::_id_9470(_tablelookupbyrow(var_3, var_1, 4));
+  var_2["objectiveTime"] = _id_0547::_id_9470(_tablelookupbyrow(var_3, var_1, 5));
+  var_2["objectiveHealth"] = _id_0547::_id_9470(_tablelookupbyrow(var_3, var_1, 6));
+  var_2["zombieObjectiveMax"] = _id_0547::_id_9470(_tablelookupbyrow(var_3, var_1, 7));
+  var_2["objectiveHealthSolo"] = _id_0547::_id_9470(_tablelookupbyrow(var_3, var_1, 9));
   return var_2;
 }
 
@@ -155,8 +155,8 @@ _id_A0E2(var_0, var_1) {
         self._id_299D delete();
 
       var_2 = anglesToForward(self.angles);
-      self._id_299D = _func_14B(level._effect["zmb_ee_fuse_dmg_lt"], self.origin, var_2);
-      _func_14C(self._id_299D);
+      self._id_299D = _spawnfx(level._effect["zmb_ee_fuse_dmg_lt"], self.origin, var_2);
+      _triggerfx(self._id_299D);
       self._id_28FC = 1;
     }
   } else if(var_0 <= var_1 * 0.5 && var_0 > var_1 * 0.25) {
@@ -165,8 +165,8 @@ _id_A0E2(var_0, var_1) {
         self._id_299D delete();
 
       var_2 = anglesToForward(self.angles);
-      self._id_299D = _func_14B(level._effect["zmb_ee_fuse_dmg_med"], self.origin, var_2);
-      _func_14C(self._id_299D);
+      self._id_299D = _spawnfx(level._effect["zmb_ee_fuse_dmg_med"], self.origin, var_2);
+      _triggerfx(self._id_299D);
       self._id_28FC = 2;
     }
   } else if(var_0 <= var_1 * 0.25 && var_0 > 0) {
@@ -175,8 +175,8 @@ _id_A0E2(var_0, var_1) {
         self._id_299D delete();
 
       var_2 = anglesToForward(self.angles);
-      self._id_299D = _func_14B(level._effect["zmb_ee_fuse_dmg_hvy"], self.origin, var_2);
-      _func_14C(self._id_299D);
+      self._id_299D = _spawnfx(level._effect["zmb_ee_fuse_dmg_hvy"], self.origin, var_2);
+      _triggerfx(self._id_299D);
       self._id_28FC = 3;
     }
   } else if(var_0 <= 0) {
@@ -185,8 +185,8 @@ _id_A0E2(var_0, var_1) {
         self._id_299D delete();
 
       var_2 = anglesToForward(self.angles);
-      self._id_299D = _func_14B(common_scripts\utility::_id_44F5("ee_fuse_blowout"), self.origin, var_2);
-      _func_14C(self._id_299D);
+      self._id_299D = _spawnfx(common_scripts\utility::_id_44F5("ee_fuse_blowout"), self.origin, var_2);
+      _triggerfx(self._id_299D);
       self._id_28FC = 4;
     }
   } else {}
@@ -197,7 +197,7 @@ _id_8A37(var_0, var_1) {
     var_2 = [];
 
     for(var_3 = 0; var_3 < var_1.size; var_3++)
-      var_2[var_3] = _func_18E(var_1[var_3], "targetname");
+      var_2[var_3] = _getent(var_1[var_3], "targetname");
 
     var_4 = _id_0557::_id_782F(undefined, var_2);
     _id_0557::_id_781D(var_0, var_4);
@@ -222,7 +222,7 @@ _id_A69B(var_0, var_1, var_2) {
     if(!isDefined(var_6._id_4D91))
       var_6._id_4D91 = _id_0559::_id_7BE3(var_6, "lightning_rod");
 
-    var_6 _meth_80CE(&"ZOMBIE_NEST_LIFT_RODS");
+    var_6 sethintstring(&"ZOMBIE_NEST_LIFT_RODS");
     var_7 = common_scripts\utility::_id_4461(var_6.origin, var_2);
     var_6 thread _id_A6C0(var_4, var_7);
   }
@@ -250,8 +250,8 @@ _id_A6AE(var_0) {
 
   foreach(var_2 in var_0) {
     var_2 common_scripts\utility::_id_9DA3();
-    var_2 _meth_80CE(&"ZOMBIE_NEST_MACHINE_COOLING");
-    var_2 _meth_80CF(&"ZOMBIES_EMPTY_STRING");
+    var_2 sethintstring(&"ZOMBIE_NEST_MACHINE_COOLING");
+    var_2 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
   }
 
   while(var_0[0]._id_08BC == level._id_A980)
@@ -266,13 +266,13 @@ _id_46EF(var_0) {
   var_0 = var_0 - 1;
   var_1 = var_0 * 5;
   var_2 = "mp/zombieSpecialEnemyWaves.csv";
-  var_3 = _id_0547::_id_9470(_func_1AE(var_2, var_1, 8));
+  var_3 = _id_0547::_id_9470(_tablelookupbyrow(var_2, var_1, 8));
   return var_3;
 }
 
 _id_8A05() {
-  self._id_1170 = _func_18E(self.target, "targetname");
-  self._id_1170._id_834D = getEntArray(self._id_1170.target, "targetname");
+  self._id_1170 = _getent(self.target, "targetname");
+  self._id_1170.setscriptmoverkillcam = getEntArray(self._id_1170.target, "targetname");
   self._id_1170._id_65F7 = self;
 }
 
@@ -335,18 +335,18 @@ _id_A181(var_0) {
 _id_64AA(var_0) {
   self notify("lever state change");
   self endon("lever state change");
-  self _meth_8277();
+  self scriptmodelclearanim();
 
   switch (var_0) {
     case 0:
-      self _meth_8276("zmb_tower_elec_lever_reverse");
-      wait(_func_065(%zmb_tower_elec_lever_reverse));
-      self _meth_8276("zmb_tower_elec_lever_idle");
+      self scriptmodelplayanim("zmb_tower_elec_lever_reverse");
+      wait(_getanimlength(%zmb_tower_elec_lever_reverse));
+      self scriptmodelplayanim("zmb_tower_elec_lever_idle");
       break;
     case 1:
-      self _meth_8276("zmb_tower_elec_lever_pull");
-      wait(_func_065(%zmb_tower_elec_lever_pull));
-      self _meth_8276("zmb_tower_elec_lever_pull_idle");
+      self scriptmodelplayanim("zmb_tower_elec_lever_pull");
+      wait(_getanimlength(%zmb_tower_elec_lever_pull));
+      self scriptmodelplayanim("zmb_tower_elec_lever_pull_idle");
       break;
   }
 }
@@ -370,18 +370,18 @@ _id_64AC(var_0) {
       var_1._id_7EC4 = "zmb_tower_rod_mid_up";
       var_1._id_7EC2 = "zmb_tower_rod_mid_down";
       var_1._id_7EC7 = "zmb_tower_rod_mid_idle_top";
-      var_1._id_7EC6 = _func_065(%zmb_tower_rod_mid_up);
-      var_1._id_7EC3 = _func_065(%zmb_tower_rod_mid_down);
+      var_1._id_7EC6 = _getanimlength(%zmb_tower_rod_mid_up);
+      var_1._id_7EC3 = _getanimlength(%zmb_tower_rod_mid_down);
     } else {
       var_1._id_7EC4 = "zmb_tower_rod_up";
       var_1._id_7EC2 = "zmb_tower_rod_down";
       var_1._id_7EC7 = "zmb_tower_rod_idle_top";
-      var_1._id_7EC6 = _func_065(%zmb_tower_rod_up);
-      var_1._id_7EC3 = _func_065(%zmb_tower_rod_down);
+      var_1._id_7EC6 = _getanimlength(%zmb_tower_rod_up);
+      var_1._id_7EC3 = _getanimlength(%zmb_tower_rod_down);
     }
   }
 
-  var_1 _meth_8277();
+  var_1 scriptmodelclearanim();
 
   switch (var_0) {
     case 0:
@@ -391,25 +391,25 @@ _id_64AC(var_0) {
         var_1._id_7EBF = var_1._id_7EC3;
 
       var_1._id_7EBE = var_1._id_7EC3 - var_1._id_7EBF;
-      var_1 _meth_8276(var_1._id_7EC2, "", var_1._id_7EBE, 1, 1);
+      var_1 scriptmodelplayanim(var_1._id_7EC2, "", var_1._id_7EBE, 1, 1);
       wait(var_1._id_7EC3 - var_1._id_7EBE - 0.333333);
       var_1 thread _id_0378::_id_8D74("aud_tower_machine_crash");
       wait 0.333333;
-      var_1 _meth_8276(var_1._id_7EC0);
+      var_1 scriptmodelplayanim(var_1._id_7EC0);
       var_1 notify("lightning rod state change complete");
       _id_9EC7();
       break;
     case 1:
-      var_1 _meth_8276(var_1._id_7EC4);
+      var_1 scriptmodelplayanim(var_1._id_7EC4);
       var_1._id_7EBE = 0;
       var_1 thread _id_7EC8();
       wait(var_1._id_7EC6);
-      var_1 _meth_8276(var_1._id_7EC7);
+      var_1 scriptmodelplayanim(var_1._id_7EC7);
       var_1 notify("lightning rod state change complete");
       _id_9EC8();
       break;
     case 2:
-      var_1 _meth_8276(var_1._id_7EC0);
+      var_1 scriptmodelplayanim(var_1._id_7EC0);
       var_1 notify("lightning rod state change complete");
       break;
   }
@@ -428,30 +428,30 @@ _id_7EC8() {
 }
 
 _id_9EC7() {
-  self _meth_8050("TAG_LIGHT_ON", self.model);
-  self _meth_8053("TAG_LIGHT_OFF", self.model);
+  self hidepart("TAG_LIGHT_ON", self.model);
+  self showpart("TAG_LIGHT_OFF", self.model);
 }
 
 _id_9EC6() {
   self._id_65E6 endon("lightning rod state change complete");
 
   for(;;) {
-    self _meth_8050("TAG_LIGHT_ON", self.model);
-    self _meth_8053("TAG_LIGHT_OFF", self.model);
+    self hidepart("TAG_LIGHT_ON", self.model);
+    self showpart("TAG_LIGHT_OFF", self.model);
     wait 0.75;
-    self _meth_8050("TAG_LIGHT_OFF", self.model);
-    self _meth_8053("TAG_LIGHT_ON", self.model);
+    self hidepart("TAG_LIGHT_OFF", self.model);
+    self showpart("TAG_LIGHT_ON", self.model);
     wait 0.75;
   }
 }
 
 _id_9EC8() {
-  self _meth_8050("TAG_LIGHT_OFF", self.model);
-  self _meth_8053("TAG_LIGHT_ON", self.model);
+  self hidepart("TAG_LIGHT_OFF", self.model);
+  self showpart("TAG_LIGHT_ON", self.model);
 }
 
 _id_8A4B() {
-  var_0 = _func_18E("nest_ee_fuse_piece_lift", "targetname");
+  var_0 = _getent("nest_ee_fuse_piece_lift", "targetname");
   level notify("flag_fuse_entered_correct");
   var_0 _id_8A05();
   return var_0;
@@ -459,11 +459,11 @@ _id_8A4B() {
 
 _id_2E7C() {
   wait 3;
-  var_0 = _func_18E("inner_spire", "targetname");
+  var_0 = _getent("inner_spire", "targetname");
 
   if(isDefined(var_0)) {
     foreach(var_2 in level.players) {
-      if(_func_0E1(var_2.origin, var_0.origin) < 750)
+      if(_distance2d(var_2.origin, var_0.origin) < 750)
         var_2 thread _id_0367::_id_8E3C("lightningrodpart2");
     }
   }
@@ -483,8 +483,8 @@ _id_52FA(var_0) {
   var_2 = [];
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    var_4 = _func_18E(var_0[var_3], "targetname");
-    var_4._id_65E6 = _func_18E(var_4.target, "targetname");
+    var_4 = _getent(var_0[var_3], "targetname");
+    var_4._id_65E6 = _getent(var_4.target, "targetname");
     _id_5DA3(var_4._id_65E6.target, var_4);
     var_1 = common_scripts\utility::_id_0F6F(var_1, var_4);
   }
@@ -494,26 +494,26 @@ _id_52FA(var_0) {
 }
 
 _id_5DA3(var_0, var_1) {
-  var_2 = _func_18E(var_0, "targetname");
+  var_2 = _getent(var_0, "targetname");
   var_2._id_65DA = var_1;
 }
 
 _id_52ED() {
-  var_0 = _func_18E("nest_ee_fuse_piece_lift", "targetname");
+  var_0 = _getent("nest_ee_fuse_piece_lift", "targetname");
   var_0 common_scripts\utility::_id_9D9F();
-  var_0 _meth_80CE(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  var_0 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   var_0 thread _id_2EB2();
-  var_0._id_65E7 = _func_18E("inner_spire_lever", "targetname");
-  var_0._id_65E7._id_65E6 = _func_18E(var_0._id_65E7.target, "targetname");
+  var_0._id_65E7 = _getent("inner_spire_lever", "targetname");
+  var_0._id_65E7._id_65E6 = _getent(var_0._id_65E7.target, "targetname");
   var_0._id_65E7 _id_A180(0);
   var_0._id_65E7 _id_A180(4);
   var_1 = getEntArray("nest_ee_fuse_outter_objectives", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 _meth_80CE(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+    var_3 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
     var_3 thread _id_2EB2();
-    var_3._id_65E7 = _func_18E(var_3.target, "targetname");
-    var_3._id_65E7._id_65E6 = _func_18E(var_3._id_65E7.target, "targetname");
+    var_3._id_65E7 = _getent(var_3.target, "targetname");
+    var_3._id_65E7._id_65E6 = _getent(var_3._id_65E7.target, "targetname");
     var_3._id_65E7 _id_A180(0);
     var_3._id_65E7 _id_A180(4);
   }
@@ -549,7 +549,7 @@ _id_46ED(var_0, var_1, var_2) {
   var_3["attack_positions"] = [];
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
-    var_3["attack_positions"][var_4] = _func_18E(var_2[var_4], "targetname");
+    var_3["attack_positions"][var_4] = _getent(var_2[var_4], "targetname");
     var_3["attack_positions"][var_4]._id_AC6A = common_scripts\utility::_id_46B7(var_3["attack_positions"][var_4].target, "targetname");
   }
 

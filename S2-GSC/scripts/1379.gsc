@@ -81,7 +81,7 @@ _id_ABA0() {
 
   for(;;) {
     if(var_0) {
-      var_1 = _func_0A3(0.2);
+      var_1 = _randomfloat(0.2);
       var_0 = 0;
     } else
       var_1 = 0.2;
@@ -141,7 +141,7 @@ _id_AB9A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(!common_scripts\utility::_id_562E(self.exploder_godmode) && _id_0547::_id_5565(var_10, _func_117("TAG_WEAPON"))) {
+  if(!common_scripts\utility::_id_562E(self.exploder_godmode) && _id_0547::_id_5565(var_10, _tolower("TAG_WEAPON"))) {
     if(common_scripts\utility::_id_562E(self._id_392C)) {
       if(isDefined(var_5) && isDefined(var_8) && isDefined(var_1) && isPlayer(var_1)) {
         var_11 = var_1 _meth_850B(var_5, var_8);
@@ -202,7 +202,7 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 _id_AB95(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_0 = self;
 
-  if(common_scripts\utility::_id_562E(self._id_392C) && _id_0547::_id_5565(var_9, _func_117("TAG_WEAPON")))
+  if(common_scripts\utility::_id_562E(self._id_392C) && _id_0547::_id_5565(var_9, _tolower("TAG_WEAPON")))
     return 1;
 
   if(common_scripts\utility::_id_562E(self.sgvip) && zombie_vib_exploder_is_weak_point(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9))
@@ -255,12 +255,12 @@ _id_AB90() {
   self._id_349C._id_A99D = "TAG_WEAPON";
   _id_0BBF(self._id_349C, self._id_349C._id_A99D, self, self._id_A99D);
   self._id_349C _id_0547::init_damageable_script_model();
-  self._id_349C _meth_82C4(1);
+  self._id_349C setcanradiusdamage(1);
   self._id_349C.health = self._id_3937._id_3935;
   self._id_349C._id_3937 = self._id_3937;
   self._id_3937._id_6280 = self._id_349C;
   _id_AB9D();
-  self._id_349C _meth_8272();
+  self._id_349C physicslaunchserver();
   self._id_349C thread _id_A88A();
   self._id_349C thread _id_6282();
   self setModel("zom_bomber_base_dead_phys");
@@ -356,7 +356,7 @@ zombie_exploder_ensure_die_from_attached_explosion(var_0) {
     var_0 = undefined;
 
   if(isalive(var_1))
-    var_1 _meth_8059(var_1.maxhealth + 666, var_1.origin, var_0, undefined, "MOD_EXPLOSIVE", "drag_explosive_zombie_zm");
+    var_1 dodamage(var_1.maxhealth + 666, var_1.origin, var_0, undefined, "MOD_EXPLOSIVE", "drag_explosive_zombie_zm");
 }
 
 _id_AB9C(var_0, var_1) {
@@ -372,7 +372,7 @@ _id_AB9E(var_0) {
   }
   foreach(var_2 in level.players) {
     if(distance(var_0, var_2.origin) <= 92)
-      var_2 _meth_8182("ear_ring_mp", 1.25, 0, 0);
+      var_2 shellshock("ear_ring_mp", 1.25, 0, 0);
   }
 }
 
@@ -440,13 +440,13 @@ _id_AB96() {
     }
     var_1 = distancesquared(self.origin, var_0.origin);
 
-    if(var_1 > _func_0DA(_id_AB92())) {
+    if(var_1 > _squared(_id_AB92())) {
       continue;
     }
     if(!_id_0547::_id_4B2C()) {
       continue;
     }
-    if(isPlayer(var_0) && !self _meth_8393(var_0)) {
+    if(isPlayer(var_0) && !self agentcanseesentient(var_0)) {
       continue;
     }
     self._id_3937 thread _id_3942();
@@ -547,7 +547,7 @@ _id_6309(var_0, var_1) {
   var_0 endon("dropped_explosive");
   var_1 waittill("short_fuse");
   var_0 childthread _id_630A(var_1);
-  var_2 = var_0 common_scripts\utility::_id_A715("stun_burst", "player_dist_reset", "dropped_explosive", "zombie_stunned");
+  var_2 = var_0 common_scripts\utility::waittill_any_return("stun_burst", "player_dist_reset", "dropped_explosive", "zombie_stunned");
   var_1 notify("exploder_interrupt");
   var_1._id_3F22 = 0;
   var_0 _id_3932();
@@ -556,10 +556,10 @@ _id_6309(var_0, var_1) {
 
 _id_0BBF(var_0, var_1, var_2, var_3) {
   var_4 = var_0 gettagorigin(var_1);
-  var_5 = var_0 _meth_8181(var_1);
+  var_5 = var_0 gettagangles(var_1);
   var_6 = var_2 gettagorigin(var_3);
-  var_7 = var_2 _meth_8181(var_3);
-  var_8 = _func_111(var_6, var_7, var_4, var_5, var_0.origin, var_0.angles);
+  var_7 = var_2 gettagangles(var_3);
+  var_8 = _transformmove(var_6, var_7, var_4, var_5, var_0.origin, var_0.angles);
   var_0.origin = var_8["origin"];
   var_0.angles = var_8["angles"];
 }
@@ -570,7 +570,7 @@ _id_2AD8(var_0, var_1, var_2, var_3, var_4) {
   var_5["forward"] = (1, 0, 0);
   var_5["up"] = (0, 0, 1);
   var_5["right"] = (0, 1, 0);
-  var_6 = _func_22E(var_1);
+  var_6 = _anglestoaxis(var_1);
 
   foreach(var_9, var_8 in var_6)
   var_6[var_9] = var_8 * var_2 * 0.5;

@@ -25,19 +25,19 @@ initialize_markers() {
 
 hide_markers() {
   foreach(var_1 in level.zmf_shattered_hardpoint_markers)
-  var_1 _meth_805C();
+  var_1 hide();
 }
 
 show_markers() {
   foreach(var_1 in level.zmf_shattered_hardpoint_structs) {
     if(isDefined(var_1.fx)) {
-      var_1.fx _meth_805B();
+      var_1.fx show();
       continue;
     }
 
     var_1.fx = _id_0547::_id_8FBA(var_1, "hp_neutral");
     level.zmf_shattered_hardpoint_markers = common_scripts\utility::_id_0F6F(level.zmf_shattered_hardpoint_markers, var_1.fx);
-    _func_14C(var_1.fx);
+    _triggerfx(var_1.fx);
   }
 }
 
@@ -49,7 +49,7 @@ run_escape(var_0) {
   var_3 setModel("ctf_flag_pole_with_supports");
   var_4 = spawn("script_model", var_2.origin);
   var_4 setModel("usa_ctf_flag_anim");
-  var_4 _meth_8276("ctf_flag_flap");
+  var_4 scriptmodelplayanim("ctf_flag_flap");
 
   if(isDefined(var_1.angles))
     var_3.angles = var_1.angles;
@@ -61,7 +61,7 @@ run_escape(var_0) {
   var_3.health = 100;
   var_3.maxhealth = 100;
   var_3.anim_flag = var_4;
-  var_4 _meth_8511();
+  var_4 ghost();
   var_3 setModel("tag_origin");
   var_5 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_escape_common_delay");
   var_6 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_escape_common_capture_time");
@@ -108,7 +108,7 @@ capture_escape_point(var_0, var_1) {
   var_9._id_480F = 1;
 
   foreach(var_9 in level.players) {
-    if(isalive(var_9) && _func_0E1(var_9.origin, var_2) < var_3) {
+    if(isalive(var_9) && _distance2d(var_9.origin, var_2) < var_3) {
       maps\mp\zombies\shotgun\_zombies_shotgun_exp_events::individual_escape_bonus(var_9);
       var_7++;
     }

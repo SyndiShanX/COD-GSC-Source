@@ -107,9 +107,9 @@ bubble_sheild_ready() {
   }
 
   var_1 = _id_0547::_id_8FBA(var_0.bubblestruct, "zmb_bren_pap_screen", var_0);
-  _func_14C(var_1);
+  _triggerfx(var_1);
 
-  while(!var_0 _meth_8344())
+  while(!var_0 meleebuttonpressed())
     waitframe();
 
   var_1 delete();
@@ -185,9 +185,9 @@ geist_bombs_projectile_think(var_0, var_1) {
 }
 
 geist_bombs_static_think(var_0, var_1, var_2) {
-  var_3 = _func_082(var_0, 12);
+  var_3 = _getgroundposition(var_0, 12);
   var_4 = common_scripts\utility::_id_8FFC();
-  var_4 _meth_805B();
+  var_4 show();
   var_4.origin = var_3 + (0, 0, 25);
   var_5 = "zmb_godking_giestbomb";
 
@@ -199,8 +199,8 @@ geist_bombs_static_think(var_0, var_1, var_2) {
   if(var_2)
     var_6 = "zmb_godking_giestbomb2_prime";
 
-  var_7 = _func_2A8(common_scripts\utility::_id_44F5(var_5), var_4, "TAG_ORIGIN");
-  var_8 = _func_2A8(common_scripts\utility::_id_44F5(var_6), var_4, "TAG_ORIGIN");
+  var_7 = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_5), var_4, "TAG_ORIGIN");
+  var_8 = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_6), var_4, "TAG_ORIGIN");
   setfxkillondelete(var_7, 1);
   setfxkillondelete(var_8, 1);
   var_9 = 0.6;
@@ -210,7 +210,7 @@ geist_bombs_static_think(var_0, var_1, var_2) {
   wait(var_9 + var_10);
 
   if(!var_2)
-    _func_147(common_scripts\utility::_id_44F5("zmb_giestbomb_exp_1shot"), var_4, "TAG_ORIGIN");
+    _playfxontag(common_scripts\utility::_id_44F5("zmb_giestbomb_exp_1shot"), var_4, "TAG_ORIGIN");
 
   _id_0378::_id_8D74("aud_pap_wpn_emp44_bomb_reload", "explode", var_4);
   var_11 = _id_0547::_id_408F();
@@ -221,8 +221,8 @@ geist_bombs_static_think(var_0, var_1, var_2) {
     var_1 maps\mp\zombies\weapons\_zombie_type_38::spawn_electro_blast(var_0, randomint(1) == 0);
   else {
     foreach(var_15 in var_13) {
-      if(_func_0E1(var_15.origin, var_0) <= 160)
-        var_15 _meth_8059(level.bubble_bomb_dmg, var_0, var_1, var_1, "MOD_EXPLOSIVE", "emp44_zm");
+      if(_distance2d(var_15.origin, var_0) <= 160)
+        var_15 dodamage(level.bubble_bomb_dmg, var_0, var_1, var_1, "MOD_EXPLOSIVE", "emp44_zm");
     }
   }
 
@@ -238,9 +238,9 @@ geist_bombs_static_think(var_0, var_1, var_2) {
 }
 
 show_bomb_vfx(var_0, var_1, var_2, var_3) {
-  _func_14C(var_0);
+  _triggerfx(var_0);
   wait(var_2);
-  _func_14C(var_1);
+  _triggerfx(var_1);
 }
 
 attempt_reload_action(var_0, var_1) {
@@ -264,7 +264,7 @@ weapon_clip_empty(var_0) {
   if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon())))
     return 1;
 
-  return var_1 _meth_82F6() == 0;
+  return var_1 getcurrentweaponclipammo() == 0;
 }
 
 try_charlton_blackhole(var_0, var_1) {
@@ -278,12 +278,12 @@ try_charlton_blackhole(var_0, var_1) {
     return;
   }
   level.last_charlton_blackhole_time = gettime();
-  var_2 = _func_082(var_0, 12);
+  var_2 = _getgroundposition(var_0, 12);
   level.charlton_blackhole = common_scripts\utility::_id_8FFC();
-  level.charlton_blackhole _meth_805B();
+  level.charlton_blackhole show();
   level.charlton_blackhole.origin = var_2 + (0, 0, 4);
-  level.charlton_blackhole.vfxent_radius = _func_2A8(common_scripts\utility::_id_44F5("zmb_embers_wind_vortex"), level.charlton_blackhole, "tag_origin");
-  _func_14C(level.charlton_blackhole.vfxent_radius);
+  level.charlton_blackhole.vfxent_radius = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_embers_wind_vortex"), level.charlton_blackhole, "tag_origin");
+  _triggerfx(level.charlton_blackhole.vfxent_radius);
   level.charlton_blackhole _id_0378::_id_8D74("aud_pap_wpn_charlton_vortex");
   level.charlton_blackhole thread spawn_blackhole();
   wait 5;
@@ -326,7 +326,7 @@ pulse_drag_in_victim(var_0) {
   var_4 = (var_4[0], var_4[1], 0);
   var_4 = var_3 * vectorNormalize(var_4);
   var_4 = (var_4[0], var_4[1], 125 * var_2);
-  var_0 _meth_82F7(var_4);
+  var_0 setvelocity(var_4);
 }
 
 dp28_zm_fire_think() {
@@ -358,7 +358,7 @@ dp28_modify_projectile(var_0, var_1) {
   self _meth_8519(0, 0);
 
   if(var_1) {
-    _func_147(common_scripts\utility::_id_44F5("zmi_hc_rune_green"), self, "tag_origin");
+    _playfxontag(common_scripts\utility::_id_44F5("zmi_hc_rune_green"), self, "tag_origin");
     _id_0378::_id_8D74("aud_pap_wpn_crossbow_cricket_shot");
   }
 
@@ -369,7 +369,7 @@ dp28_death_bolt(var_0, var_1) {
   var_2 = dp28_modify_projectile(var_0, is_paped(var_1));
   var_3 = is_paped(var_1);
   var_2 childthread do_zombie_damage_better(::missile_do_flight_damage);
-  var_4 = var_2 common_scripts\utility::_id_A715("missile_stuck", "death", "entitydeleted");
+  var_4 = var_2 common_scripts\utility::waittill_any_return("missile_stuck", "death", "entitydeleted");
 
   if(var_4 == "missile_stuck")
     waitframe();
@@ -430,7 +430,7 @@ missile_do_flight_damage(var_0, var_1) {
       _id_0547::_id_7D1B(self, var_0, "close", self._id_0117);
 
     var_0 thread missile_set_temp_immunity();
-    var_0 _meth_8059(level.dp38missiledamage, var_1, self._id_0117, self._id_0117, "MOD_EXPLOSIVE", "dp28_pap_zm");
+    var_0 dodamage(level.dp38missiledamage, var_1, self._id_0117, self._id_0117, "MOD_EXPLOSIVE", "dp28_pap_zm");
   }
 }
 
@@ -446,7 +446,7 @@ dp28_noisy_cricket(var_0) {
   var_2 = var_1.origin;
   var_3 = 0;
   var_4 = _id_0547::_id_408F();
-  var_4 = _func_1AC(var_4, var_2, 256);
+  var_4 = _sortbydistance(var_4, var_2, 256);
   thread play_noisy_cricket_vfx(var_1);
 
   foreach(var_6 in var_4) {
@@ -458,18 +458,18 @@ dp28_noisy_cricket(var_0) {
     if(!isDefined(var_6._id_0A4B) || !common_scripts\utility::_id_0F79(["zombie_generic", "zombie_berserker", "zombie_heavy", "zombie_exploder", "zombie_sizzler"], var_6._id_0A4B))
       var_3 = 1;
 
-    if(_func_0E1(var_6.origin, var_2) <= 128) {
+    if(_distance2d(var_6.origin, var_2) <= 128) {
       if(common_scripts\utility::_id_562E(var_3))
-        var_6 _meth_8059(1800, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+        var_6 dodamage(1800, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
       else
-        var_6 _meth_8059(level.dp38cricetdamage, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+        var_6 dodamage(level.dp38cricetdamage, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
 
       var_7 = 1;
-    } else if(_func_0E1(var_6.origin, var_2) <= 192) {
+    } else if(_distance2d(var_6.origin, var_2) <= 192) {
       if(common_scripts\utility::_id_562E(var_3))
-        var_6 _meth_8059(1200, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+        var_6 dodamage(1200, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
       else
-        var_6 _meth_8059(level.dp38cricetdamage * 0.66, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+        var_6 dodamage(level.dp38cricetdamage * 0.66, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
 
       if(isDefined(var_6._id_0A4B)) {
         var_8 = _id_0547::_id_0A51(var_6._id_0A4B);
@@ -479,11 +479,11 @@ dp28_noisy_cricket(var_0) {
       }
 
       var_7 = 1;
-    } else if(_func_0E1(var_6.origin, var_2) <= 256) {
+    } else if(_distance2d(var_6.origin, var_2) <= 256) {
       if(common_scripts\utility::_id_562E(var_3))
-        var_6 _meth_8059(600, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+        var_6 dodamage(600, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
       else
-        var_6 _meth_8059(level.dp38cricetdamage * 0.33, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+        var_6 dodamage(level.dp38cricetdamage * 0.33, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
 
       if(isDefined(var_6._id_0A4B)) {
         var_8 = _id_0547::_id_0A51(var_6._id_0A4B);
@@ -496,7 +496,7 @@ dp28_noisy_cricket(var_0) {
     }
 
     if(isDefined(var_6.myshield) && var_7)
-      var_6.myshield _meth_8059(level.dp38cricetdamage * 0.33, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+      var_6.myshield dodamage(level.dp38cricetdamage * 0.33, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
   }
 }
 

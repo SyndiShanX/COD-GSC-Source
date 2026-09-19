@@ -61,8 +61,8 @@ _id_A17D() {
     var_2.x = var_1.origin[0];
     var_2.y = var_1.origin[1];
     var_2._id_01D9 = var_1.origin[2] + 90;
-    var_2 _meth_80CB(1, 0, 0);
-    var_2 _meth_80C0(var_1);
+    var_2 setwaypoint(1, 0, 0);
+    var_2 settargetent(var_1);
     var_2._id_6E74 = level._id_A012;
     var_2._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(var_2);
     var_2.name = "topPlayerElem";

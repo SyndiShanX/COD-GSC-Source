@@ -50,7 +50,7 @@ spawn_electro_blast(var_0, var_1) {
     foreach(var_3 in _id_0547::_id_408F())
     var_3 attempt_to_stun(self, var_0);
   } else
-    self _meth_81D5(var_0, 175, level.zmb_type_38_dmg, int(level.zmb_type_38_dmg * 0.8), self, "MOD_ENERGY", "none");
+    self radiusdamage(var_0, 175, level.zmb_type_38_dmg, int(level.zmb_type_38_dmg * 0.8), self, "MOD_ENERGY", "none");
 }
 
 set_type_38_data() {
@@ -59,7 +59,7 @@ set_type_38_data() {
 }
 
 get_type_38_goal() {
-  return _func_0A4(8, 12);
+  return _randomintrange(8, 12);
 }
 
 attempt_to_stun(var_0, var_1) {
@@ -96,12 +96,12 @@ loop_spark_fx() {
 
   while(common_scripts\utility::_id_562E(self._id_98EF)) {
     play_shield_zombie_shock_vfx();
-    wait(_func_0A3(1.7) + 0.8);
+    wait(_randomfloat(1.7) + 0.8);
   }
 }
 
 play_shield_zombie_shock_vfx() {
-  _func_147(common_scripts\utility::_id_44F5("tesla blood shock"), self, "j_spine4");
+  _playfxontag(common_scripts\utility::_id_44F5("tesla blood shock"), self, "j_spine4");
 }
 
 shield_tesla_shock_params_create(var_0, var_1, var_2, var_3) {

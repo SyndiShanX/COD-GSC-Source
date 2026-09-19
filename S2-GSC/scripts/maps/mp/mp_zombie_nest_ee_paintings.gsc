@@ -18,7 +18,7 @@ main() {
   level._id_3587 = undefined;
   level._id_3586 = "tumbler_";
   level._id_9333 = [];
-  level._id_83A0 = 0;
+  level.scragentgetmaxturnspeed = 0;
   common_scripts\utility::flag_init("flag_head_picked_up");
   common_scripts\utility::flag_init("flag_head_hint_seen");
   common_scripts\utility::flag_init("flag_painting_hint_seen");
@@ -58,7 +58,7 @@ _id_7879() {
     else {
       if(!common_scripts\utility::_id_3C77("flag_both_hints_seen") && !common_scripts\utility::_id_3C77("flag_player_has_head")) {
         if(1) {
-          var_0 = _func_18E("paintings_hint_head_jar", "targetname");
+          var_0 = _getent("paintings_hint_head_jar", "targetname");
           var_1 = _id_0557::_id_782F(undefined, var_0);
           _id_0557::_id_781D("7 Voice paintings", var_1, 0);
         }
@@ -132,14 +132,14 @@ mainpathcompletionlistener() {
 
 _id_8A24() {
   level endon("flag_both_hints_seen");
-  var_0 = _func_18E("head_hint_trig", "targetname");
+  var_0 = _getent("head_hint_trig", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_0._id_5877 = _func_18E("paintings_hint_head_jar", "targetname");
+  var_0._id_5877 = _getent("paintings_hint_head_jar", "targetname");
   var_0._id_5877 setModel("zmb_med_jar_04_nodecals");
-  var_0 _meth_8177(1);
+  var_0 usetriggerrequirelookat(1);
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -172,13 +172,13 @@ _id_8A24() {
 
 _id_8A25() {
   level endon("flag_both_hints_seen");
-  var_0 = _func_18E("painting_hint_trig", "targetname");
+  var_0 = _getent("painting_hint_trig", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_0._id_6DEE = _func_18E("paintings_hint_painting", "targetname");
-  var_0 _meth_8177(1);
+  var_0._id_6DEE = _getent("paintings_hint_painting", "targetname");
+  var_0 usetriggerrequirelookat(1);
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -210,9 +210,9 @@ _id_8A25() {
 }
 
 _id_8A46() {
-  level._id_357F = _func_18E("sonic_amp_confirm_code_trig", "targetname");
+  level._id_357F = _getent("sonic_amp_confirm_code_trig", "targetname");
   level._id_357F common_scripts\utility::_id_9D9F();
-  level._id_357F._id_0CAB = _func_18E("sonic_amp_control", "targetname");
+  level._id_357F._id_0CAB = _getent("sonic_amp_control", "targetname");
 
   if(isDefined(level._id_357F._id_0CAB))
     level._id_357F._id_0CAB thread maps\mp\mp_zombie_nest_ee_util::_id_4D77("off");
@@ -221,7 +221,7 @@ _id_8A46() {
   var_1 = level._id_3586;
 
   foreach(var_3 in var_0) {
-    var_4 = var_3._id_8260;
+    var_4 = var_3.setlookatent;
     var_5 = getsubstr(var_4, var_1.size, var_4.size);
     var_5 = int(common_scripts\utility::stringtofloat(var_5)) - 1;
     var_6 = common_scripts\utility::_id_44BE(var_3.target, "targetname");
@@ -287,7 +287,7 @@ _id_5308() {
     level._id_3580[var_0] _id_A185(level._id_3584[var_0]);
 
     if(isDefined(level._id_3580[var_0]._id_9E46)) {
-      level._id_3580[var_0]._id_9E46 _meth_80CE(&"ZOMBIE_NEST_AMP_CHANGE_CODE");
+      level._id_3580[var_0]._id_9E46 sethintstring(&"ZOMBIE_NEST_AMP_CHANGE_CODE");
       level._id_3580[var_0]._id_9E46._id_4D91 = _id_0559::_id_7BE3(level._id_3580[var_0]._id_9E46, "vog");
       level._id_3580[var_0] thread _id_8B29(var_0);
     }
@@ -322,7 +322,7 @@ _id_2580(var_0) {
   level endon("vog_disabled");
 
   for(;;) {
-    self _meth_80CE(&"ZOMBIE_NEST_AMP_CONFIRM_CODE");
+    self sethintstring(&"ZOMBIE_NEST_AMP_CONFIRM_CODE");
     self waittill("trigger", var_1);
     var_2 = common_scripts\utility::_id_46B5("VOG_effects_attach", "targetname");
     var_3 = 1;
@@ -349,7 +349,7 @@ _id_2580(var_0) {
 
         foreach(var_10 in var_8) {
           if(var_10.classname == "script_model")
-            _func_147(level._effect["zmb_vog_code_correct"], var_10, "Flute");
+            _playfxontag(level._effect["zmb_vog_code_correct"], var_10, "Flute");
         }
       }
 
@@ -368,14 +368,14 @@ _id_2580(var_0) {
 
         foreach(var_10 in var_8) {
           if(var_10.classname == "script_model")
-            _func_147(level._effect["zmb_vog_code_incorrect"], var_10, "Flute");
+            _playfxontag(level._effect["zmb_vog_code_incorrect"], var_10, "Flute");
         }
       }
 
       if(!common_scripts\utility::_id_3C77("flag_correct_code_entered"))
         thread _id_2EBA(0, var_1);
 
-      self _meth_80CE(&"ZOMBIE_NEST_AMP_RESETTING");
+      self sethintstring(&"ZOMBIE_NEST_AMP_RESETTING");
       wait(level._id_357E);
     }
   }
@@ -391,7 +391,7 @@ _id_8B29(var_0) {
 
   for(;;) {
     self._id_9E46 waittill("trigger", var_2);
-    self._id_9E46 _meth_80B3();
+    self._id_9E46 makeunusable();
 
     if(self._id_28F1 + 1 < level._id_3583) {
       level._id_3584[var_0] = self._id_28F1 + 1;
@@ -426,23 +426,23 @@ _id_2EBA(var_0, var_1) {
 }
 
 _id_8C28() {
-  self._id_0DBE _meth_8050("TAG_BLOOD");
-  self._id_0DBE _meth_8050("TAG_DEATH");
-  self._id_0DBE _meth_8050("TAG_MOON");
-  self._id_0DBE _meth_8050("TAG_STORM");
+  self._id_0DBE hidepart("TAG_BLOOD");
+  self._id_0DBE hidepart("TAG_DEATH");
+  self._id_0DBE hidepart("TAG_MOON");
+  self._id_0DBE hidepart("TAG_STORM");
 
   switch (self._id_9E45) {
     case 0:
-      self._id_0DBE _meth_8053("TAG_BLOOD");
+      self._id_0DBE showpart("TAG_BLOOD");
       break;
     case 1:
-      self._id_0DBE _meth_8053("TAG_MOON");
+      self._id_0DBE showpart("TAG_MOON");
       break;
     case 2:
-      self._id_0DBE _meth_8053("TAG_DEATH");
+      self._id_0DBE showpart("TAG_DEATH");
       break;
     case 3:
-      self._id_0DBE _meth_8053("TAG_STORM");
+      self._id_0DBE showpart("TAG_STORM");
       break;
   }
 }
@@ -478,8 +478,8 @@ _id_A185(var_0) {
     return;
   }
   self._id_0DBE _id_0378::_id_8D74("voice_of_god_update_tumbler", var_2);
-  var_4 = _func_065(var_3);
-  self._id_0DBE _meth_8276(_func_286(var_3));
+  var_4 = _getanimlength(var_3);
+  self._id_0DBE scriptmodelplayanim(_debuggetanimname(var_3));
   wait(var_4);
 }
 
@@ -639,7 +639,7 @@ _id_2E7D(var_0) {
     foreach(var_7 in var_5._id_9DC2) {
       if(var_1 _id_0547::_id_0696(var_7)) {
         var_7 disableplayeruse(var_1);
-        var_7 _meth_80CE(&"ZOMBIES_EMPTY_STRING");
+        var_7 sethintstring(&"ZOMBIES_EMPTY_STRING");
         var_7 notify("player_checked_a_painting");
       }
     }
@@ -680,8 +680,8 @@ _id_10E0(var_0) {
 _id_6DF2(var_0, var_1) {
   var_2 = _id_0547::_id_8FBA(var_0._id_8CA5, var_0._id_8CA4);
   var_3 = _id_0547::_id_8FBA(var_0._id_248C, var_0._id_248B);
-  _func_14C(var_2);
-  _func_14C(var_3);
+  _triggerfx(var_2);
+  _triggerfx(var_3);
   level._id_3585++;
   var_4 = "ee_painting_reveal_" + level._id_3585;
 
@@ -706,7 +706,7 @@ _id_455A() {
   var_1 = self.target;
 
   for(;;) {
-    var_2 = _func_18E(var_1, "targetname");
+    var_2 = _getent(var_1, "targetname");
 
     if(common_scripts\utility::_id_0F79(var_0, var_2)) {
       break;

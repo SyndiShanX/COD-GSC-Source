@@ -25,7 +25,7 @@ _id_5EB1() {
     var_0 = getdvarfloat("34");
 
     for(;;) {
-      var_1 = self _meth_8345() > 0.5;
+      var_1 = self playerads() > 0.5;
       var_2 = self getcurrentweapon();
       var_3 = _id_0547::_id_AAF9(var_2, 1, 0);
       _func_3A0(self, self._id_5CC6, var_1, var_3);

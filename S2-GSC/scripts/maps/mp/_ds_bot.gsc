@@ -33,7 +33,7 @@ _id_09F4() {
     setDvar("bot_DisableAutoConnect", "1");
 
   if(var_1)
-    level thread[[level._id_19D5["bots_spawn"]]](var_0, "autoassign");
+    level thread[[level.bot_funcs["bots_spawn"]]](var_0, "autoassign");
   else
     level _id_9007(var_0);
 
@@ -106,7 +106,7 @@ _id_9007(var_0) {
 }
 
 _id_535E(var_0, var_1) {
-  while(!self _meth_8421()) {
+  while(!self canspawntestclient()) {
     waitframe();
 
     if(!isDefined(self)) {
@@ -117,7 +117,7 @@ _id_535E(var_0, var_1) {
     }
   }
 
-  self _meth_8422();
+  self spawntestclient();
   maps\mp\gametypes\_playerlogic::_id_90A5();
 
   while(!isDefined(self.pers["team"])) {
@@ -149,7 +149,7 @@ _id_9918() {
   var_0 = getdvarint("scr_testclients_type") == 0;
 
   if(var_0) {
-    if(!isDefined(level._id_19D5) || !isDefined(level._id_19D5["bots_spawn"]))
+    if(!isDefined(level.bot_funcs) || !isDefined(level.bot_funcs["bots_spawn"]))
       var_0 = 0;
   }
 

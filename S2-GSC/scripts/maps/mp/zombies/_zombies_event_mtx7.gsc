@@ -12,7 +12,7 @@ init() {
 
   var_1 = var_0;
 
-  if(!_func_2A3())
+  if(!_isonlinegame())
     var_1 = 0;
 
   if(!maps\mp\_utility::isproductionlevelactive(16)) {
@@ -112,7 +112,7 @@ spawn_pickupable_fish(var_0, var_1) {
     foreach(var_4 in level.mtx7_fish_array) {
       if(!common_scripts\utility::_id_562E(var_4._id_08BE)) {
         var_2 = var_4;
-        var_2 _meth_805B();
+        var_2 show();
         break;
       }
     }
@@ -130,7 +130,7 @@ spawn_pickupable_fish(var_0, var_1) {
     var_6 thread maps\mp\gametypes\zombies::_id_4798(10);
 
     if(!common_scripts\utility::_id_562E(var_6.foundafish) && maps\mp\_utility::_id_4571() == "mp_zombie_island") {
-      _id_0555::_id_83DD("fish_single", var_6);
+      _id_0555::issprinting("fish_single", var_6);
       var_6.foundafish = 1;
     }
 
@@ -145,9 +145,9 @@ fall_onto_ground(var_0, var_1) {
   var_2 = 0.4;
   self.origin = var_0 + (0, 0, 40) + 18 * vectorNormalize(anglesToForward(var_1));
   self.angles = (0, randomint(360), 0);
-  self _meth_82B5((0, 0, 175), 2);
+  self movegravity((0, 0, 175), 2);
   self._id_6C48 = self.angles;
-  self _meth_83E5((180, 180, 0), var_2);
+  self rotateby((180, 180, 0), var_2);
   wait(var_2);
   self.angles = self._id_6C48;
   self.origin = var_0;
@@ -157,7 +157,7 @@ remove_fish(var_0) {
   if(!common_scripts\utility::_id_562E(var_0))
     playFX(common_scripts\utility::_id_44F5("mtx_fish_despawn"), self.origin);
 
-  self _meth_8511();
+  self ghost();
   self._id_08BE = 0;
 }
 
@@ -235,7 +235,7 @@ run_fish_quest() {
   var_0 = spawn("script_model", (432, 1824, -8));
   var_0.angles = (0, 174, 0);
   var_0 setModel("zdu_red_herring_obj_01");
-  var_0 _meth_8276("zmb_follow_the_fish_loop", undefined, 0, 0.4);
+  var_0 scriptmodelplayanim("zmb_follow_the_fish_loop", undefined, 0, 0.4);
   var_1 = spawn("script_model", (432, 1824, -8));
   var_1.angles = (13, 80, -7);
   var_1 setModel("ger_crate_ammo_closed_01_dirty");
@@ -244,15 +244,15 @@ run_fish_quest() {
   wait_for_required_fish();
 
   foreach(var_3 in level.players)
-  _id_0555::_id_83DD("fish_total_ee", var_3);
+  _id_0555::issprinting("fish_total_ee", var_3);
 
   var_0 wait_for_player_close_to_fish(130);
   wait 1;
   var_0 notify("leaving");
-  var_0 _meth_82B4(-12, 2, 1);
-  var_0 _meth_82BA(170, 3);
+  var_0 movez(-12, 2, 1);
+  var_0 rotateyaw(170, 3);
   wait 3;
-  var_1 _meth_82B1(var_1.origin + (0, 0, 32), 6, 0, 1);
+  var_1 moveto(var_1.origin + (0, 0, 32), 6, 0, 1);
   var_1 thread vibrate_box();
   var_1 _id_0547::_id_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 16));
   level thread maps\mp\_utility::_id_6F74(::collect_teslaguns, var_1);
@@ -270,7 +270,7 @@ wait_for_required_fish() {
 
 vibrate_box() {
   for(;;) {
-    self _meth_82BF(anglesToForward(self.angles), 2.1, 3, 3);
+    self vibrate(anglesToForward(self.angles), 2.1, 3, 3);
     wait 3;
   }
 }
@@ -281,10 +281,10 @@ ee_give_teslagun_rental(var_0) {
   var_1 endon("disconnect");
   var_1 _id_0586::_id_078C(var_0);
   var_1 _id_0586::_id_078E(var_0);
-  _id_0555::_id_83DD("teslagun_found", var_1);
+  _id_0555::issprinting("teslagun_found", var_1);
   wait_for_usage_done(var_0);
 
-  if(var_1 _meth_8319(var_0)) {
+  if(var_1 hasweapon(var_0)) {
     var_2 = var_1 getweaponlistprimaries();
     var_1 _id_0586::_id_0790(var_0);
     var_1 _id_0586::_id_078E(var_2[0]);
@@ -309,9 +309,9 @@ move_current() {
   self._id_6C4E = self.origin;
 
   for(;;) {
-    self _meth_82B1(var_0, 2, 1, 1);
+    self moveto(var_0, 2, 1, 1);
     wait 2;
-    self _meth_82B1(self._id_6C4E, 2, 1, 1);
+    self moveto(self._id_6C4E, 2, 1, 1);
     wait 4;
   }
 }

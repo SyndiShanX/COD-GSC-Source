@@ -66,7 +66,7 @@ _id_7A8C(var_0, var_1) {
 
   if(isDefined(self._id_3F80)) {
     var_2 = _id_0547::_id_8FBA(self._id_3F80, "hiltroom_connection");
-    _func_14C(var_2);
+    _triggerfx(var_2);
     level waittill("end hilt grabbed");
     var_2 delete();
   }
@@ -76,7 +76,7 @@ _id_7EB3(var_0) {
   for(;;) {
     level waittill("end hilt grabbed", var_1);
     level thread common_scripts\_exploder::_id_088E(222);
-    _func_17F(0.3, 7, var_1, 1000);
+    _earthquake(0.3, 7, var_1, 1000);
   }
 }
 
@@ -86,15 +86,15 @@ _id_A6CD(var_0) {
 }
 
 _id_A6A0(var_0, var_1) {
-  self _meth_82C2();
+  self notsolid();
   _id_A6CD(var_1);
-  self _meth_82C1();
+  self solid();
   level._id_4D74 = _id_0547::_id_8FBA(var_0, "zmb_hilt_sphere");
-  var_2 = _func_18E("hilt_model", "targetname");
-  _func_14C(level._id_4D74);
+  var_2 = _getent("hilt_model", "targetname");
+  _triggerfx(level._id_4D74);
   var_2 _id_0378::_id_8D74("aud_start_hilt_sphere_sound");
   wait 5;
-  self _meth_82C3(1);
+  self setcandamage(1);
   var_3 = [];
 
   while(var_3.size < level.players.size) {
@@ -116,7 +116,7 @@ _id_A6A0(var_0, var_1) {
 
   playFX(level._effect["zmb_hilt_sphere_explosion"], var_0.origin, anglesToForward(var_0.angles));
   level._id_4D74 delete();
-  var_5 = _func_18E("nest_ee_shard_intro_start_trig", "targetname");
+  var_5 = _getent("nest_ee_shard_intro_start_trig", "targetname");
   var_5 common_scripts\utility::_id_9DA3();
   var_6 = undefined;
 
@@ -133,7 +133,7 @@ _id_A6A0(var_0, var_1) {
   if(_id_0557::_id_783E("8A The Hilt", "Use Hilt") && !_id_0557::_id_783E("8A The Hilt", "Shoot Hilt"))
     _id_0557::_id_7822("8A The Hilt", &"ZOMBIE_NEST_HINT_STEP_TAKE_HILT");
 
-  var_5 _meth_80CE(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
+  var_5 sethintstring(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
   var_5 waittill("trigger", var_4);
   var_5 common_scripts\utility::_id_9D9F();
   _id_0378::_id_8D74("aud_pickup_raven_sword");
@@ -161,7 +161,7 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_10 = 0;
 
   if(isDefined(var_9) && isDefined(var_9._id_7D24)) {
-    if(_func_0C0(var_9._id_7D24)) {
+    if(_isarray(var_9._id_7D24)) {
       var_11 = 0;
 
       foreach(var_13 in var_9._id_7D24) {
@@ -190,9 +190,9 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_15 = var_9.origin;
 
   if(isDefined(var_9._id_8C47))
-    var_16 = _func_07E(self getEye(), var_15, 0, var_9, var_9._id_8C47);
+    var_16 = _bullettracepassed(self getEye(), var_15, 0, var_9, var_9._id_8C47);
   else
-    var_16 = _func_07E(self getEye(), var_15, 0, var_9);
+    var_16 = _bullettracepassed(self getEye(), var_15, 0, var_9);
 
   var_17 = _id_21CF(var_9, var_9._id_696B, var_9._id_6943);
 
@@ -220,7 +220,7 @@ _id_A6CE(var_0, var_1) {
   if(isDefined(var_1))
     var_0 endon(var_1);
 
-  var_0 _meth_82C3(1);
+  var_0 setcandamage(1);
   var_2 = undefined;
   var_3 = "";
 
@@ -238,7 +238,7 @@ _id_A6CF(var_0, var_1) {
   if(isDefined(var_1))
     var_0 endon(var_1);
 
-  var_0 _meth_82C3(1);
+  var_0 setcandamage(1);
   var_2 = undefined;
   var_3 = "";
 
@@ -267,74 +267,74 @@ _id_9902(var_0, var_1, var_2, var_3) {
 }
 
 _id_9EC4() {
-  var_0 = _func_21F("village_off", "targetname");
+  var_0 = _getscriptablearray("village_off", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.1;
-    var_2 _meth_83FA("lightpart", "off");
+    var_2 setscriptablepartstate("lightpart", "off");
   }
 }
 
 _id_9EC5() {
-  var_0 = _func_21F("village_off", "targetname");
+  var_0 = _getscriptablearray("village_off", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.1;
-    var_2 _meth_83FA("lightpart", "on");
+    var_2 setscriptablepartstate("lightpart", "on");
   }
 }
 
 _id_3BEC() {
-  var_0 = _func_21F("fire_on", "targetname");
+  var_0 = _getscriptablearray("fire_on", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.1;
-    var_2 _meth_83FA("fire", "enable");
+    var_2 setscriptablepartstate("fire", "enable");
   }
 }
 
 _id_3BE6() {
-  var_0 = _func_21F("fill_on", "targetname");
+  var_0 = _getscriptablearray("fill_on", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.1;
-    var_2 _meth_83FA("fire_fill", "enable_fill");
+    var_2 setscriptablepartstate("fire_fill", "enable_fill");
   }
 }
 
 _id_1CCC() {
-  var_0 = _func_21F("brute_lighting", "targetname");
+  var_0 = _getscriptablearray("brute_lighting", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.1;
-    var_2 _meth_83FA("lightpart", "on");
+    var_2 setscriptablepartstate("lightpart", "on");
   }
 }
 
 _id_1CCA() {
-  var_0 = _func_21F("brute_fire", "targetname");
+  var_0 = _getscriptablearray("brute_fire", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.1;
-    var_2 _meth_83FA("fire1", "enable");
+    var_2 setscriptablepartstate("fire1", "enable");
   }
 }
 
 _id_1CCB() {
-  var_0 = _func_21F("brute_lighting", "targetname");
+  var_0 = _getscriptablearray("brute_lighting", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.1;
-    var_2 _meth_83FA("lightpart", "off");
+    var_2 setscriptablepartstate("lightpart", "off");
   }
 }
 
 _id_1CC9() {
-  var_0 = _func_21F("brute_fire", "targetname");
+  var_0 = _getscriptablearray("brute_fire", "targetname");
 
   foreach(var_2 in var_0) {
     wait 0.1;
-    var_2 _meth_83FA("fire1", "die");
+    var_2 setscriptablepartstate("fire1", "die");
   }
 }
 
@@ -346,21 +346,21 @@ _id_283B(var_0) {
   var_1.x = var_0.origin[0];
   var_1.y = var_0.origin[1];
   var_1._id_01D9 = var_0.origin[2];
-  var_1 _meth_80CB(1);
-  var_1 _meth_80C0(var_0);
+  var_1 setwaypoint(1);
+  var_1 settargetent(var_0);
   return var_1;
 }
 
 _id_7AC3(var_0) {
-  var_1 = self _meth_83DB(var_0);
+  var_1 = self getanimentrycount(var_0);
   return randomint(var_1);
 }
 
 _id_8579(var_0) {
-  self _meth_83A2(1);
-  self _meth_839D("noclip");
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", var_0);
+  self scragentsetscripted(1);
+  self scragentsetphysicsmode("noclip");
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", var_0);
 }
 
 _id_442B() {
@@ -422,16 +422,16 @@ _id_56B0(var_0, var_1, var_2, var_3) {
     var_4 = var_0 gettagorigin(var_0._id_2E37);
 
   if(common_scripts\utility::_id_562E(var_3)) {
-    var_5 = _func_07F(self.origin, var_4, 0, self, var_0, 0);
+    var_5 = _sighttracepassed(self.origin, var_4, 0, self, var_0, 0);
 
     if(!var_5)
       return 0;
   }
 
   if(isDefined(var_2))
-    return _func_0E1(var_4, self.origin) < var_1 && _func_0AE(var_4[2] - self.origin[2]) < var_2;
+    return _distance2d(var_4, self.origin) < var_1 && _abs(var_4[2] - self.origin[2]) < var_2;
   else
-    return _func_0E1(var_4, self.origin) < var_1 && self.origin[2] < var_4[2];
+    return _distance2d(var_4, self.origin) < var_1 && self.origin[2] < var_4[2];
 }
 
 _id_2024(var_0, var_1, var_2, var_3) {
@@ -461,10 +461,10 @@ _id_2024(var_0, var_1, var_2, var_3) {
   else
     var_7 = var_3;
 
-  _func_147(level._effect[var_6], var_0, var_7);
-  _func_147(level._effect["zmb_gk_claw_battery_charge_1"], level._id_3571, "flap1_shroud");
-  _func_147(level._effect["zmb_gk_claw_battery_charge_2"], level._id_3571, "flap2_shroud");
-  _func_147(level._effect["zmb_gk_claw_battery_charge_3"], level._id_3571, "flap3_shroud");
+  _playfxontag(level._effect[var_6], var_0, var_7);
+  _playfxontag(level._effect["zmb_gk_claw_battery_charge_1"], level._id_3571, "flap1_shroud");
+  _playfxontag(level._effect["zmb_gk_claw_battery_charge_2"], level._id_3571, "flap2_shroud");
+  _playfxontag(level._effect["zmb_gk_claw_battery_charge_3"], level._id_3571, "flap3_shroud");
   _id_0378::_id_8D74("zombie_soul_suck", var_4.origin, var_0.origin);
   wait 0.45;
   var_5 delete();
@@ -478,9 +478,9 @@ _id_9030(var_0, var_1, var_2) {
   for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = spawn("script_model", self.origin);
     var_4 setModel("tag_origin");
-    _func_147(common_scripts\utility::_id_44F5("zmb_elec_trail"), var_4, "tag_origin");
+    _playfxontag(common_scripts\utility::_id_44F5("zmb_elec_trail"), var_4, "tag_origin");
     var_5 = distance(self.origin, var_0.origin) / var_1;
-    var_4 _meth_82B1(var_0.origin, var_5);
+    var_4 moveto(var_0.origin, var_5);
     wait(var_5);
     var_4 delete();
   }
@@ -490,9 +490,9 @@ _id_283C(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = spawn("script_model", var_0);
   var_6.angles = vectortoangles(var_1 + (0, 0, -50) - var_0);
   var_6 setModel(var_4);
-  var_6 _meth_8276(var_5, "", var_2);
-  var_6 _meth_82BB(_func_0A3(var_3), 1, 0.1, 0.1);
-  var_6 _meth_82B9(-20, 1, 0.1, 0);
+  var_6 scriptmodelplayanim(var_5, "", var_2);
+  var_6 rotateroll(_randomfloat(var_3), 1, 0.1, 0.1);
+  var_6 rotatepitch(-20, 1, 0.1, 0);
   return var_6;
 }
 
@@ -502,7 +502,7 @@ _id_9066(var_0, var_1, var_2, var_3, var_4) {
   }
   var_5 = spawn("script_model", var_2);
   var_5 setModel("tag_origin");
-  _func_147(common_scripts\utility::_id_44F5(var_3), var_5, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5(var_3), var_5, "tag_origin");
   var_5 linktosynchronizedparent(var_0, var_1);
   var_5 thread _id_36EC(var_3, var_4);
 }
@@ -560,11 +560,11 @@ _id_649B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(var_5) {
-    var_6 _meth_8057();
+    var_6 unlink();
     var_19 = vectorNormalize(var_0[var_0.size - 1].origin - var_0[var_0.size - 2].origin);
     var_20 = var_1;
     var_21 = (var_20 * var_19[0], var_20 * var_19[1], var_20 * var_19[2]);
-    var_6 _meth_82F7(var_21);
+    var_6 setvelocity(var_21);
   }
 
   _id_9416();
@@ -627,7 +627,7 @@ _id_A6A1(var_0, var_1, var_2, var_3, var_4) {
     var_0 waittill("fire_touched");
 
     if(!common_scripts\utility::_id_562E(var_0._id_5685) && common_scripts\utility::_id_562E(level._id_665A)) {
-      if(_func_0E1(var_0.origin, var_1.origin) < var_1.radius) {
+      if(_distance2d(var_0.origin, var_1.origin) < var_1.radius) {
         var_0._id_5685 = 1;
         var_0 thread _id_2FAD();
         var_0 thread _id_8CD6(var_1, var_2, var_3);
@@ -651,16 +651,16 @@ _id_A6A1(var_0, var_1, var_2, var_3, var_4) {
 
 _id_2FAD() {
   var_0 = self getcurrentweapon();
-  self _meth_8322();
-  self _meth_8182("frag_grenade_mp", 1);
+  self disableweapons();
+  self shellshock("frag_grenade_mp", 1);
   wait 0.25;
-  self _meth_8323();
+  self enableweapons();
 }
 
 _id_47C2(var_0, var_1, var_2) {
   wait(var_2);
   _id_0586::_id_0790(var_0);
-  self _meth_8327();
+  self enableweaponswitch();
   _id_0586::_id_078E(var_1);
 }
 
@@ -722,11 +722,11 @@ _id_86E4(var_0) {
   var_1.origin = var_0[0].origin;
   var_1.angles = var_0[0].angles;
   self.origin = var_1.origin;
-  self _meth_833E(var_1.angles);
-  self _meth_807A(var_1);
+  self setplayerangles(var_1.angles);
+  self playerlinktoabsolute(var_1);
   var_1 thread _id_649B(var_0, 1000, 0, undefined, undefined, 1, self);
   var_1 waittill("path complete");
-  self _meth_8057();
+  self unlink();
   var_1 delete();
 }
 
@@ -738,33 +738,33 @@ _id_8CD6(var_0, var_1, var_2) {
 
   if(var_6 > 0) {
     var_7 = common_scripts\utility::_id_8FFC();
-    self _meth_8077(var_7);
+    self playerlinkto(var_7);
     var_8 = var_6 / var_4;
-    var_7 _meth_82B1((self.origin[0], self.origin[1], var_5[2]), var_8);
+    var_7 moveto((self.origin[0], self.origin[1], var_5[2]), var_8);
     wait(var_8);
-    self _meth_8057();
+    self unlink();
     var_7 delete();
   }
 
   var_9 = -64;
-  var_10 = _func_0AE(var_1.origin[2] - self.origin[2]);
+  var_10 = _abs(var_1.origin[2] - self.origin[2]);
   var_10 = var_10 + var_9;
-  var_11 = _func_0AE(_func_0E1(var_5, var_2.origin) - _func_0E1(var_5, self.origin));
-  var_12 = _func_0D9(2 * var_3 * var_10);
-  var_13 = _func_0AE(_id_8F12(0.5 * var_3, var_12, var_5[2] - self.origin[2]));
+  var_11 = _abs(_distance2d(var_5, var_2.origin) - _distance2d(var_5, self.origin));
+  var_12 = _sqrt(2 * var_3 * var_10);
+  var_13 = _abs(_id_8F12(0.5 * var_3, var_12, var_5[2] - self.origin[2]));
   var_14 = var_12 / var_3;
   var_15 = vectorNormalize(self.origin - (var_5[0], var_5[1], self.origin[2]));
   var_16 = var_11 / var_13;
   var_17 = (var_16 * var_15[0], var_16 * var_15[1], var_12);
   var_18 = common_scripts\utility::_id_46B5("nest_ee_arm_fire_objective_angle", "targetname");
-  self _meth_82F7(var_17);
+  self setvelocity(var_17);
   thread _id_7726(var_14, var_1.origin[2] + var_9);
-  thread _id_7722(var_13, _func_0E1(var_5, var_2.origin), var_5);
+  thread _id_7722(var_13, _distance2d(var_5, var_2.origin), var_5);
 }
 
 _id_A016(var_0, var_1) {
   wait(var_0);
-  self _meth_8057();
+  self unlink();
   var_1 delete();
 }
 
@@ -774,8 +774,8 @@ _id_8F12(var_0, var_1, var_2) {
   var_5 = 0;
 
   if(var_3 > 0) {
-    var_4 = (-1 * var_1 + _func_0D9(var_3)) / (2 * var_0);
-    var_5 = (-1 * var_1 - _func_0D9(var_3)) / (2 * var_0);
+    var_4 = (-1 * var_1 + _sqrt(var_3)) / (2 * var_0);
+    var_5 = (-1 * var_1 - _sqrt(var_3)) / (2 * var_0);
   }
 
   return var_5;
@@ -791,11 +791,11 @@ _id_7722(var_0, var_1, var_2) {
 
 _id_9416() {
   self._id_5787 = 0;
-  self _meth_8612(self._id_9D02);
+  self stoploopsound(self._id_9D02);
 }
 
 _id_930B() {
-  self _meth_861D(self._id_9D02);
+  self playloopsound(self._id_9D02);
   self._id_5787 = 1;
 }
 
@@ -812,8 +812,8 @@ _id_64D3(var_0, var_1, var_2) {
 }
 
 _id_321A(var_0, var_1, var_2) {
-  self _meth_82B1(var_0.origin, var_1, 0, var_2);
-  self _meth_82B8(var_0.angles, var_1 / 2);
+  self moveto(var_0.origin, var_1, 0, var_2);
+  self rotateto(var_0.angles, var_1 / 2);
   wait(var_1);
   self notify("reached node");
 }
@@ -838,7 +838,7 @@ _id_38DF(var_0, var_1, var_2, var_3, var_4) {
     if(!(var_9 > 0))
       var_9 = 0.1;
 
-    self _meth_82B1(var_8, var_9);
+    self moveto(var_8, var_9);
     wait(var_9);
   }
 
@@ -850,18 +850,18 @@ _id_A699(var_0, var_1) {
     var_1 = "TAG_ORIGIN";
 
   if(isDefined(var_0))
-    _func_147(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
 
   self._id_2DA8 = 1;
   self waittill("destination requirement satisfied");
   self._id_2DA8 = 0;
 
   if(isDefined(var_0))
-    _func_148(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _stopfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
 }
 
 _id_56AF(var_0, var_1) {
-  return _func_0E1(var_0, self.origin) < var_1;
+  return _distance2d(var_0, self.origin) < var_1;
 }
 
 _id_5687(var_0) {
@@ -873,7 +873,7 @@ _id_565C(var_0) {
 }
 
 _id_1E4C(var_0, var_1, var_2, var_3) {
-  return var_0 * _func_0DA(1 - var_3) + var_1 * 2 * var_3 * (1 - var_3) + var_2 * _func_0DA(var_3);
+  return var_0 * _squared(1 - var_3) + var_1 * 2 * var_3 * (1 - var_3) + var_2 * _squared(var_3);
 }
 
 _id_8B8A(var_0) {
@@ -933,14 +933,14 @@ _id_A16D(var_0) {
   }
 
   if(isDefined(var_1)) {
-    self._id_3F3F = _func_14B(common_scripts\utility::_id_44F5(var_1), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    self._id_3F3F = _spawnfx(common_scripts\utility::_id_44F5(var_1), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     self._id_2916 = var_0;
   }
 
   if(gettime() < 500)
-    _func_14C(self._id_3F3F, 0.5);
+    _triggerfx(self._id_3F3F, 0.5);
   else
-    _func_14C(self._id_3F3F);
+    _triggerfx(self._id_3F3F);
 }
 
 _id_21CF(var_0, var_1, var_2, var_3) {
@@ -960,7 +960,7 @@ _id_64DC(var_0, var_1, var_2, var_3) {
   var_5 = var_1 / var_3;
 
   for(var_6 = 0; var_6 < var_1; var_6 = var_6 + var_5) {
-    self _meth_82B1(_func_10A(var_4, var_0, var_6 / var_1), var_5);
+    self moveto(_vectorlerp(var_4, var_0, var_6 / var_1), var_5);
     wait(var_5);
   }
 }
@@ -972,20 +972,20 @@ _id_90A9(var_0) {
 }
 
 _id_3E23() {
-  self _meth_8179("prone");
-  self _meth_8113(0);
-  self _meth_8112(0);
+  self setstance("prone");
+  self allowcrouch(0);
+  self allowstand(0);
 }
 
 _id_1F3D() {
-  self _meth_8113(1);
-  self _meth_8112(1);
+  self allowcrouch(1);
+  self allowstand(1);
   thread _id_2CEB(0.5);
 }
 
 _id_2CEB(var_0) {
   wait(var_0);
-  self _meth_8179("stand");
+  self setstance("stand");
 }
 
 _id_8A64(var_0) {
@@ -1003,7 +1003,7 @@ _id_745D(var_0, var_1, var_2) {
     return [0, undefined];
 
   foreach(var_4 in level.players) {
-    if(_func_0E1(var_4.origin, var_0) < var_1 && _func_0AE(var_4.origin[2] - var_0[2]) < var_2 / 2)
+    if(_distance2d(var_4.origin, var_0) < var_1 && _abs(var_4.origin[2] - var_0[2]) < var_2 / 2)
       return [1, var_4];
   }
 
@@ -1019,7 +1019,7 @@ _id_44C8(var_0, var_1) {
   if(var_1)
     var_2[0] = common_scripts\utility::_id_46B5(var_0, "targetname");
   else
-    var_2[0] = _func_18E(var_0, "targetname");
+    var_2[0] = _getent(var_0, "targetname");
 
   while(isDefined(var_2[var_2.size - 1].target)) {
     if(var_1) {
@@ -1027,7 +1027,7 @@ _id_44C8(var_0, var_1) {
       continue;
     }
 
-    var_2 = common_scripts\utility::_id_0F6F(var_2, _func_18E(var_2[var_2.size - 1].target, "targetname"));
+    var_2 = common_scripts\utility::_id_0F6F(var_2, _getent(var_2[var_2.size - 1].target, "targetname"));
   }
 
   return var_2;
@@ -1057,40 +1057,40 @@ _id_73B8() {
 #using_animtree("destructibles");
 
 _id_08B0() {
-  var_0 = _func_065(%zmb_untotenpresse_01_reset);
-  var_1 = _func_067(%zmb_untotenpresse_01_reset, "create_ww_part");
+  var_0 = _getanimlength(%zmb_untotenpresse_01_reset);
+  var_1 = _getnotetracktimes(%zmb_untotenpresse_01_reset, "create_ww_part");
   var_2 = var_1[0] * var_0;
-  var_3 = _func_21F("med_untotenpresse_smasher", "targetname");
+  var_3 = _getscriptablearray("med_untotenpresse_smasher", "targetname");
 
   foreach(var_5 in var_3) {
-    var_5 _meth_83FA("smasher", "working", 0);
+    var_5 setscriptablepartstate("smasher", "working", 0);
     var_5 _id_0378::_id_8D74("aud_start_med_forge");
   }
 
-  wait(_func_065(%zmb_untotenpresse_01_activate));
+  wait(_getanimlength(%zmb_untotenpresse_01_activate));
 
   foreach(var_5 in var_3)
-  var_5 _meth_83FA("smasher", "reset", 0);
+  var_5 setscriptablepartstate("smasher", "reset", 0);
 
   wait(var_2);
   level notify("med_create_ww_part");
   wait(var_0 - var_2);
 
   foreach(var_5 in var_3)
-  var_5 _meth_83FA("smasher", "refill", 0);
+  var_5 setscriptablepartstate("smasher", "refill", 0);
 
-  wait(_func_065(%zmb_untotenpresse_01_refill));
+  wait(_getanimlength(%zmb_untotenpresse_01_refill));
 
   foreach(var_5 in var_3)
-  var_5 _meth_83FA("smasher", "second_idle", 0);
+  var_5 setscriptablepartstate("smasher", "second_idle", 0);
 }
 
 _id_08B6() {
   var_0 = % zmb_forge_machine_01_parts_activate_01;
-  var_1 = _func_065(var_0);
-  var_2 = _func_067(var_0, "piston_hit");
-  var_3 = _func_067(var_0, "create_ww_part");
-  var_4 = _func_067(var_0, "show_ww_part");
+  var_1 = _getanimlength(var_0);
+  var_2 = _getnotetracktimes(var_0, "piston_hit");
+  var_3 = _getnotetracktimes(var_0, "create_ww_part");
+  var_4 = _getnotetracktimes(var_0, "show_ww_part");
   var_5 = [];
 
   for(var_6 = 0; var_6 < var_2.size; var_6++)
@@ -1098,12 +1098,12 @@ _id_08B6() {
 
   var_7 = var_4[0] * var_1;
   var_8 = var_3[0] * var_1;
-  var_9 = _func_21F("rnd_forge_machine_parts", "targetname");
+  var_9 = _getscriptablearray("rnd_forge_machine_parts", "targetname");
   var_9[0] thread _id_7EB0(var_5, var_1);
 
   foreach(var_11 in var_9) {
-    var_11 _meth_83FA("pistons", "working", 0);
-    var_11 _meth_83FA("core", "working", 0);
+    var_11 setscriptablepartstate("pistons", "working", 0);
+    var_11 setscriptablepartstate("core", "working", 0);
     var_11 _id_0378::_id_8D74("aud_start_rnd_forge");
   }
 
@@ -1115,8 +1115,8 @@ _id_08B6() {
   level notify("rnd_stop_pistons");
 
   foreach(var_11 in var_9) {
-    var_11 _meth_83FA("core", "idle", 0);
-    var_11 _meth_83FA("pistons", "idle", 0);
+    var_11 setscriptablepartstate("core", "idle", 0);
+    var_11 setscriptablepartstate("pistons", "idle", 0);
   }
 }
 
@@ -1142,38 +1142,38 @@ _id_7EB0(var_0, var_1) {
 }
 
 _id_74D2() {
-  _func_17F(0.25, 0.25, self.origin, 500);
-  _func_1BB("artillery_rumble", self.origin);
+  _earthquake(0.25, 0.25, self.origin, 500);
+  _playrumbleonposition("artillery_rumble", self.origin);
 }
 
 _id_08A8() {
   var_0 = getEntArray("com_control_elec", "targetname");
 
   foreach(var_2 in var_0) {
-    var_2.schnelleeffects = _func_14B(level._effect["zmb_electroschnelle_reg_chg_wv"], var_2.origin, anglesToForward(var_2.angles));
-    _func_14C(var_2.schnelleeffects);
+    var_2.schnelleeffects = _spawnfx(level._effect["zmb_electroschnelle_reg_chg_wv"], var_2.origin, anglesToForward(var_2.angles));
+    _triggerfx(var_2.schnelleeffects);
   }
 
-  var_4 = _func_21F("workbench_inner", "targetname");
-  var_5 = _func_065(%zmb_workbench_01_inner_up);
-  var_6 = _func_065(%zmb_workbench_01_inner_up_idle);
-  var_7 = _func_065(%zmb_workbench_01_inner_down);
+  var_4 = _getscriptablearray("workbench_inner", "targetname");
+  var_5 = _getanimlength(%zmb_workbench_01_inner_up);
+  var_6 = _getanimlength(%zmb_workbench_01_inner_up_idle);
+  var_7 = _getanimlength(%zmb_workbench_01_inner_down);
 
   foreach(var_9 in var_4)
-  var_9 _meth_83FA("inner", "up", 0);
+  var_9 setscriptablepartstate("inner", "up", 0);
 
-  _func_147(level._effect["zmb_gk_claw_battery_full_1"], level._id_3571, "flap1_shroud");
-  _func_147(level._effect["zmb_gk_claw_battery_full_2"], level._id_3571, "flap2_shroud");
-  _func_147(level._effect["zmb_gk_claw_battery_full_3"], level._id_3571, "flap3_shroud");
+  _playfxontag(level._effect["zmb_gk_claw_battery_full_1"], level._id_3571, "flap1_shroud");
+  _playfxontag(level._effect["zmb_gk_claw_battery_full_2"], level._id_3571, "flap2_shroud");
+  _playfxontag(level._effect["zmb_gk_claw_battery_full_3"], level._id_3571, "flap3_shroud");
   wait(var_5);
 
   foreach(var_9 in var_4)
-  var_9 _meth_83FA("inner", "up_idle", 0);
+  var_9 setscriptablepartstate("inner", "up_idle", 0);
 
   wait(var_6);
 
   foreach(var_9 in var_4)
-  var_9 _meth_83FA("inner", "down", 0);
+  var_9 setscriptablepartstate("inner", "down", 0);
 
   wait(var_7);
 
@@ -1183,37 +1183,37 @@ _id_08A8() {
 
 _id_8A53() {
   var_0 = spawnStruct();
-  var_0._id_6FC5 = _func_18E("ww_part_01_pickup", "targetname");
-  var_0._id_6FC2 = _func_18E(var_0._id_6FC5.target, "targetname");
-  _func_147(level._effect["zmb_tesla_barrel_prop_idle"], var_0._id_6FC2, "TAG_ORIGIN");
+  var_0._id_6FC5 = _getent("ww_part_01_pickup", "targetname");
+  var_0._id_6FC2 = _getent(var_0._id_6FC5.target, "targetname");
+  _playfxontag(level._effect["zmb_tesla_barrel_prop_idle"], var_0._id_6FC2, "TAG_ORIGIN");
   var_1 = spawnStruct();
-  var_1._id_6FC5 = _func_18E("ww_part_02_pickup", "targetname");
-  var_1._id_6FC2 = _func_18E(var_1._id_6FC5.target, "targetname");
-  _func_147(level._effect["zmb_tesla_tube_prop_idle"], var_1._id_6FC2, "TAG_ORIGIN");
+  var_1._id_6FC5 = _getent("ww_part_02_pickup", "targetname");
+  var_1._id_6FC2 = _getent(var_1._id_6FC5.target, "targetname");
+  _playfxontag(level._effect["zmb_tesla_tube_prop_idle"], var_1._id_6FC2, "TAG_ORIGIN");
   var_0._id_6FC5 common_scripts\utility::_id_9D9F();
   var_1._id_6FC5 common_scripts\utility::_id_9D9F();
-  var_0._id_6FC5 _meth_8177();
-  var_1._id_6FC5 _meth_8177();
+  var_0._id_6FC5 usetriggerrequirelookat();
+  var_1._id_6FC5 usetriggerrequirelookat();
 
   if(isDefined(var_0._id_6FC2) && isDefined(var_1._id_6FC2)) {
-    var_0._id_6FC2 _meth_805C();
-    var_1._id_6FC2 _meth_805C();
+    var_0._id_6FC2 hide();
+    var_1._id_6FC2 hide();
   }
 
-  var_2 = _func_21F("rnd_forge_machine_parts", "targetname");
-  var_0._id_6FC2 _meth_8055(var_2[0], "input");
+  var_2 = _getscriptablearray("rnd_forge_machine_parts", "targetname");
+  var_0._id_6FC2 linkto(var_2[0], "input");
   level._id_3E3B = var_0;
   level._id_5981 = var_1;
 }
 
 _id_8BEC(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3))
-    self._id_6FC5 _meth_80CE(var_3);
+    self._id_6FC5 sethintstring(var_3);
 
   if(isDefined(var_0))
     common_scripts\utility::_id_3C9F(var_0);
 
-  self._id_6FC2 _meth_805B();
+  self._id_6FC2 show();
 
   if(isDefined(var_2))
     common_scripts\utility::_id_3C9F(var_2);
@@ -1225,14 +1225,14 @@ _id_8BEC(var_0, var_1, var_2, var_3) {
     common_scripts\utility::flag_set(var_1);
 
   self._id_6FC5 common_scripts\utility::_id_9D9F();
-  self._id_6FC2 _meth_805C();
+  self._id_6FC2 hide();
   return var_4;
 }
 
 _id_4D76() {
   var_0 = % zmb_hilt_altar_control_activate;
-  var_1 = _func_065(var_0);
-  self _meth_8276(_func_286(var_0));
+  var_1 = _getanimlength(var_0);
+  self scriptmodelplayanim(_debuggetanimname(var_0));
   wait(var_1);
 }
 
@@ -1242,16 +1242,16 @@ _id_4D77(var_0) {
   }
   switch (var_0) {
     case "off":
-      self _meth_8050("TAG_LIGHT_OFF");
-      self _meth_8050("TAG_LIGHT_ON");
+      self hidepart("TAG_LIGHT_OFF");
+      self hidepart("TAG_LIGHT_ON");
       break;
     case "red":
-      self _meth_8050("TAG_LIGHT_ON");
-      self _meth_8053("TAG_LIGHT_OFF");
+      self hidepart("TAG_LIGHT_ON");
+      self showpart("TAG_LIGHT_OFF");
       break;
     case "green":
-      self _meth_8050("TAG_LIGHT_OFF");
-      self _meth_8053("TAG_LIGHT_ON");
+      self hidepart("TAG_LIGHT_OFF");
+      self showpart("TAG_LIGHT_ON");
       break;
   }
 }
@@ -1260,11 +1260,11 @@ _id_4D78(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = _func_21F("hilt_symbol_wheel", "targetname");
-  var_2 = _func_065(%s2_zom_prop_symbol_wheel_lh_p1);
-  var_3 = _func_065(%s2_zom_prop_symbol_wheel_lh_p2);
-  var_4 = _func_065(%s2_zom_prop_symbol_wheel_rh_p1);
-  var_5 = _func_065(%s2_zom_prop_symbol_wheel_rh_p2);
+  var_1 = _getscriptablearray("hilt_symbol_wheel", "targetname");
+  var_2 = _getanimlength(%s2_zom_prop_symbol_wheel_lh_p1);
+  var_3 = _getanimlength(%s2_zom_prop_symbol_wheel_lh_p2);
+  var_4 = _getanimlength(%s2_zom_prop_symbol_wheel_rh_p1);
+  var_5 = _getanimlength(%s2_zom_prop_symbol_wheel_rh_p2);
   var_6 = 1;
   var_7 = 1;
   var_8 = "p4_idle";
@@ -1305,15 +1305,15 @@ _id_A197(var_0, var_1, var_2) {
     case "p3":
     case "p2":
     case "p1":
-      self _meth_83FA(var_0, var_1);
+      self setscriptablepartstate(var_0, var_1);
       wait(var_2);
-      self _meth_83FA(var_0, var_1 + "_idle");
+      self setscriptablepartstate(var_0, var_1 + "_idle");
       break;
     case "p3_idle":
     case "p2_idle":
     case "p1_idle":
     case "p4_idle":
-      self _meth_83FA(var_0, var_1);
+      self setscriptablepartstate(var_0, var_1);
       break;
   }
 }
@@ -1334,7 +1334,7 @@ _id_440D() {
   var_0 = [];
 
   foreach(var_2 in level.players) {
-    if(isalive(var_2) && !var_2._id_5378)
+    if(isalive(var_2) && !var_2.inlaststand)
       var_0 = common_scripts\utility::_id_0F6F(var_0, var_2);
   }
 
@@ -1351,7 +1351,7 @@ _id_8A38(var_0, var_1, var_2) {
 
   if(isDefined(var_1) && isDefined(var_3._id_9D65)) {
     var_3 _id_0547::_id_A28D(var_1, var_2);
-    var_3._id_9D65 _meth_80CE(var_1);
+    var_3._id_9D65 sethintstring(var_1);
   }
 
   return var_3;
@@ -1389,11 +1389,11 @@ _id_44BA(var_0) {
   var_2 = [];
   var_0 = var_0 - 1;
   var_3 = var_0 * 5;
-  var_4 = _id_0547::_id_9470(_func_1AE(var_1, var_3 + 0, 2));
-  var_5 = _id_0547::_id_9470(_func_1AE(var_1, var_3 + 1, 2));
-  var_6 = _id_0547::_id_9470(_func_1AE(var_1, var_3 + 2, 2));
-  var_7 = _id_0547::_id_9470(_func_1AE(var_1, var_3 + 3, 2));
-  var_8 = _id_0547::_id_9470(_func_1AE(var_1, var_3 + 4, 2));
+  var_4 = _id_0547::_id_9470(_tablelookupbyrow(var_1, var_3 + 0, 2));
+  var_5 = _id_0547::_id_9470(_tablelookupbyrow(var_1, var_3 + 1, 2));
+  var_6 = _id_0547::_id_9470(_tablelookupbyrow(var_1, var_3 + 2, 2));
+  var_7 = _id_0547::_id_9470(_tablelookupbyrow(var_1, var_3 + 3, 2));
+  var_8 = _id_0547::_id_9470(_tablelookupbyrow(var_1, var_3 + 4, 2));
 
   for(var_9 = 0; var_9 < var_4; var_9++)
     var_2 = common_scripts\utility::_id_0F6F(var_2, "zombie_generic");
@@ -1419,7 +1419,7 @@ _id_44BB(var_0) {
   var_0 = var_0 - 1;
   var_1 = var_0 * 5;
   var_2 = "mp/zombieSpecialEnemyWaves.csv";
-  var_3 = _id_0547::_id_9470(_func_1AE(var_2, var_1, 3));
+  var_3 = _id_0547::_id_9470(_tablelookupbyrow(var_2, var_1, 3));
   return var_3;
 }
 
@@ -1446,7 +1446,7 @@ _id_A7E0() {
 }
 
 _id_A725(var_0) {
-  self _meth_82C3(1);
+  self setcandamage(1);
 
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);

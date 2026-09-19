@@ -8,14 +8,14 @@ _id_52A4() {
 }
 
 _id_1F88(var_0) {
-  if(isDefined(self._id_5378) && self._id_5378)
+  if(isDefined(self.inlaststand) && self.inlaststand)
     return 1;
 
   return 0;
 }
 
 _id_A234(var_0) {
-  _id_0555::_id_83DD("self_revive", self);
+  _id_0555::issprinting("self_revive", self);
   self notify("revive_trigger");
 }
 
@@ -35,7 +35,7 @@ _id_4B92() {
   return 0;
 }
 
-_id_83C6() {
+lightsetforplayer() {
   self endon("revive_trigger");
   self endon("death");
   self endon("disconnect");
@@ -60,11 +60,11 @@ _id_83C6() {
 
   for(;;) {
     if(!var_2) {
-      if(self _meth_8341()) {
+      if(self usebuttonpressed()) {
         var_3 = gettime() + var_1;
         var_2 = 1;
       }
-    } else if(!self _meth_8341())
+    } else if(!self usebuttonpressed())
       var_2 = 0;
     else if(gettime() >= var_3) {
       self notify("useConsumable_sReviveSlot");

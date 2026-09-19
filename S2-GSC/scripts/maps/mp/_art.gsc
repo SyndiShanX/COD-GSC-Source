@@ -31,14 +31,14 @@ _id_2597() {
   var_0 = getEntArray("trigger_multiple_light_visionset", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_82E2))
-      _id_2598(var_2._id_82E2);
+    if(isDefined(var_2.canmantle))
+      _id_2598(var_2.canmantle);
 
-    if(isDefined(var_2._id_82E4))
-      _id_2598(var_2._id_82E4);
+    if(isDefined(var_2.ismantling))
+      _id_2598(var_2.ismantling);
 
-    if(isDefined(var_2._id_82E3))
-      _id_2598(var_2._id_82E3);
+    if(isDefined(var_2.forcemantle))
+      _id_2598(var_2.forcemantle);
   }
 }
 
@@ -48,7 +48,7 @@ _id_2598(var_0) {
   }
   _id_278D(var_0);
   _id_27C7(var_0);
-  _func_18C("new vision: " + var_0);
+  _iprintlnbold("new vision: " + var_0);
 }
 
 _id_27C7(var_0) {
@@ -118,7 +118,7 @@ _id_27C6(var_0) {
   var_1._id_1119 = 0.0;
   var_1._id_111A = 0.0;
   var_1._id_1121 = 0.0;
-  level._id_A565[_func_117(var_0)] = var_1;
+  level._id_A565[_tolower(var_0)] = var_1;
   return var_1;
 }
 
@@ -132,7 +132,7 @@ _id_849E(var_0, var_1) {
     var_1 = 0;
   }
 
-  common_scripts\utility::_id_84A0(var_2, var_1);
+  common_scripts\utility::finishentitydamage(var_2, var_1);
 }
 
 _id_9C8B(var_0) {}
@@ -250,8 +250,8 @@ _id_7D2D() {}
 
 _id_A567(var_0, var_1) {
   foreach(var_3 in level.players) {
-    var_3 _meth_82D8(var_0, var_1);
-    _func_226(&"dev_vision_exec");
+    var_3 visionsetnakedforplayer(var_0, var_1);
+    _luinotifyevent(&"dev_vision_exec");
     waitframe();
   }
 

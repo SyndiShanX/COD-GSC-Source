@@ -79,23 +79,23 @@ _id_5312() {
   var_0 = 0;
 
   for(;;) {
-    var_1 = _func_1AE("mp/killstreakTable.csv", var_0, 1);
+    var_1 = _tablelookupbyrow("mp/killstreakTable.csv", var_0, 1);
 
     if(!isDefined(var_1) || var_1 == "") {
       break;
     }
 
     if(var_1 == "b1" || var_1 == "none") {} else {
-      var_2 = _func_1B0("mp/killstreakTable.csv", var_0, 10);
-      var_3 = _func_1AE("mp/killstreakTable.csv", var_0, 12);
+      var_2 = _tablelookupistringbyrow("mp/killstreakTable.csv", var_0, 10);
+      var_3 = _tablelookupbyrow("mp/killstreakTable.csv", var_0, 12);
       game["dialog"][var_1] = var_3;
-      var_4 = _func_1AE("mp/killstreakTable.csv", var_0, 13);
+      var_4 = _tablelookupbyrow("mp/killstreakTable.csv", var_0, 13);
       game["dialog"]["allies_friendly_" + var_1 + "_inbound"] = "ss_" + var_4 + "_allyuse";
       game["dialog"]["allies_enemy_" + var_1 + "_inbound"] = "ss_" + var_4 + "_enemyuse";
-      var_5 = _func_1AE("mp/killstreakTable.csv", var_0, 14);
+      var_5 = _tablelookupbyrow("mp/killstreakTable.csv", var_0, 14);
       game["dialog"]["axis_friendly_" + var_1 + "_inbound"] = "ss_" + var_5 + "_allyuse";
       game["dialog"]["axis_enemy_" + var_1 + "_inbound"] = "ss_" + var_5 + "_enemyuse";
-      var_6 = int(_func_1AE("mp/killstreakTable.csv", var_0, 17));
+      var_6 = int(_tablelookupbyrow("mp/killstreakTable.csv", var_0, 17));
       maps\mp\gametypes\_rank::_id_7C06(var_1 + "_earned", var_6);
     }
 

@@ -22,7 +22,7 @@ zombie_handle_crate_timeout(var_0) {
 zombie_crate_timeout(var_0) {
   level endon("game_ended");
   var_0 endon("death");
-  maps\mp\gametypes\_hostmigration::_id_A6F5(90);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(90);
 
   while(var_0._id_28D5 != 0)
     wait 1;
@@ -44,7 +44,7 @@ spawn_player_carepackage(var_0) {
     if(common_scripts\utility::_id_562E(var_4.is_objective_package)) {
       continue;
     }
-    if(_func_211(var_5, level.care_package_lz.origin) < 250000) {
+    if(_distance2dsquared(var_5, level.care_package_lz.origin) < 250000) {
       break;
     }
   }
@@ -91,7 +91,7 @@ highlight_next_carepackage() {
       level.mark_next_package_as_objective_package = 0;
     }
 
-    var_0 _meth_83FE(2, 0);
+    var_0 hudoutlineenable(2, 0);
   }
 }
 
@@ -128,7 +128,7 @@ init_supply_drop_triggers() {
     level.usa_carepackage_dz_triggers[var_0] = var_1;
 
     for(var_2 = 0; var_2 < 4; var_2++) {
-      var_1[var_2]._id_81E1 = var_2;
+      var_1[var_2].setmovespeedscale = var_2;
       _id_0547::_id_8A4F(var_1[var_2], ::hideuninitializedweapontriggersfromowner, ::hidetriggerfromotherplayer);
     }
   }

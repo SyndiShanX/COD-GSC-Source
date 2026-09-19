@@ -8,16 +8,16 @@ main() {
   _id_8745();
   self._id_99FF = self._id_99FF + 2000;
   self._id_173F = 0;
-  self _meth_8395(self.origin);
-  self _meth_839B("face angle abs", self.angles);
-  self _meth_839C("anim deltas");
-  self _meth_839D("gravity");
+  self scragentsetgoalpos(self.origin);
+  self scragentsetorientmode("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetphysicsmode("gravity");
   _id_A16C();
 }
 
 _id_0085() {
   if(isDefined(self._id_76EA)) {
-    self _meth_839F(self._id_76EA);
+    self scragentsetmaxturnspeed(self._id_76EA);
     self._id_76EA = undefined;
   }
 }
@@ -67,16 +67,16 @@ _id_37BF(var_0) {
 
 _id_38F6(var_0) {
   if(isDefined(self._id_76EA)) {
-    self _meth_839F(self._id_76EA);
+    self scragentsetmaxturnspeed(self._id_76EA);
     self._id_76EA = undefined;
   }
 }
 
 _id_74A8() {
   if(self._id_0EEA == "idle_combat")
-    self _meth_83D7("attack_idle");
+    self setanimstate("attack_idle");
   else
-    self _meth_83D7("casual_idle");
+    self setanimstate("casual_idle");
 }
 
 _id_A0DE() {
@@ -91,7 +91,7 @@ _id_A0DE() {
     var_1 = var_0.origin - self.origin;
     var_2 = vectortoangles(var_1);
 
-    if(_func_0AE(_func_0DD(var_2[1] - self.angles[1])) > 1)
+    if(_abs(_angleclamp180(var_2[1] - self.angles[1])) > 1)
       _id_9ED9(var_2[1]);
   }
 }
@@ -118,7 +118,7 @@ _id_46F0(var_0) {
 
 _id_9ED9(var_0) {
   var_1 = self.angles[1];
-  var_2 = _func_0DD(var_0 - var_1);
+  var_2 = _angleclamp180(var_0 - var_1);
 
   if(-0.5 < var_2 && var_2 < 0.5) {
     return;
@@ -129,51 +129,51 @@ _id_9ED9(var_0) {
   }
 
   var_3 = _id_46F0(var_2);
-  var_4 = self _meth_83D8(var_3, 0);
-  var_5 = _func_065(var_4);
-  var_6 = _func_212(var_4);
-  self _meth_839C("anim angle delta");
+  var_4 = self getanimentry(var_3, 0);
+  var_5 = _getanimlength(var_4);
+  var_6 = _getangledelta3d(var_4);
+  self scragentsetanimmode("anim angle delta");
 
-  if(_func_066(var_4, "turn_begin") && _func_066(var_4, "turn_end")) {
+  if(_animhasnotetrack(var_4, "turn_begin") && _animhasnotetrack(var_4, "turn_end")) {
     maps\mp\agents\_scriptedagents::_id_71FC(var_3, 0, "turn_in_place");
-    var_7 = _func_067(var_4, "turn_begin");
-    var_8 = _func_067(var_4, "turn_end");
+    var_7 = _getnotetracktimes(var_4, "turn_begin");
+    var_8 = _getnotetracktimes(var_4, "turn_end");
     var_9 = (var_8[0] - var_7[0]) * var_5;
-    var_10 = _func_0DD(var_2 - var_6[1]);
-    var_11 = _func_0AE(var_10) / var_9 / 20;
+    var_10 = _angleclamp180(var_2 - var_6[1]);
+    var_11 = _abs(var_10) / var_9 / 20;
     var_11 = var_11 * 3.14159 / 180;
-    var_12 = (0, _func_0DD(self.angles[1] + var_10), 0);
-    self._id_76EA = self _meth_83A0();
-    self _meth_839F(var_11);
-    self _meth_839B("face angle abs", var_12);
+    var_12 = (0, _angleclamp180(self.angles[1] + var_10), 0);
+    self._id_76EA = self scragentgetmaxturnspeed();
+    self scragentsetmaxturnspeed(var_11);
+    self scragentsetorientmode("face angle abs", var_12);
     maps\mp\agents\_scriptedagents::_id_A79E("turn_in_place", "turn_end");
-    self _meth_839F(self._id_76EA);
+    self scragentsetmaxturnspeed(self._id_76EA);
     self._id_76EA = undefined;
     maps\mp\agents\_scriptedagents::_id_A79E("turn_in_place", "end");
   } else {
-    self._id_76EA = self _meth_83A0();
-    var_11 = _func_0AE(_func_0DD(var_2 - var_6[1])) / var_5 / 20;
+    self._id_76EA = self scragentgetmaxturnspeed();
+    var_11 = _abs(_angleclamp180(var_2 - var_6[1])) / var_5 / 20;
     var_11 = var_11 * 3.14159 / 180;
-    self _meth_839F(var_11);
-    var_12 = (0, _func_0DD(var_0 - var_6[1]), 0);
-    self _meth_839B("face angle abs", var_12);
+    self scragentsetmaxturnspeed(var_11);
+    var_12 = (0, _angleclamp180(var_0 - var_6[1]), 0);
+    self scragentsetorientmode("face angle abs", var_12);
     maps\mp\agents\_scriptedagents::_id_71FC(var_3, 0, "turn_in_place");
-    self _meth_839F(self._id_76EA);
+    self scragentsetmaxturnspeed(self._id_76EA);
     self._id_76EA = undefined;
   }
 
-  self _meth_839C("anim deltas");
+  self scragentsetanimmode("anim deltas");
   _id_74A8();
 }
 
 _id_7EEF(var_0, var_1) {
-  if(_func_0AE(_func_0DD(var_0 - self.angles[1])) <= var_1) {
+  if(_abs(_angleclamp180(var_0 - self.angles[1])) <= var_1) {
     return;
   }
   var_2 = (0, var_0, 0);
-  self _meth_839B("face angle abs", var_2);
+  self scragentsetorientmode("face angle abs", var_2);
 
-  while(_func_0DD(var_0 - self.angles[1]) > var_1)
+  while(_angleclamp180(var_0 - self.angles[1]) > var_1)
     wait 0.1;
 }
 
@@ -185,7 +185,7 @@ _id_31FC(var_0) {
   self._id_17E8 = 1;
   self._id_018F = 1;
   self._id_173F = 1;
-  var_1 = _func_0DD(var_0 - self.angles[1]);
+  var_1 = _angleclamp180(var_0 - self.angles[1]);
 
   if(var_1 > 0)
     var_2 = 1;
@@ -193,13 +193,13 @@ _id_31FC(var_0) {
     var_2 = 0;
 
   self notify("cancelidleloop");
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
   maps\mp\agents\_scriptedagents::_id_71FC("stand_pain", var_2, "stand_pain");
   self._id_17E8 = 0;
   self._id_018F = 0;
   self._id_173F = 0;
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetorientmode("face angle abs", self.angles);
   self._id_0EEA = "none";
   thread _id_A16C();
 }

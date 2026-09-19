@@ -33,7 +33,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_12._id_9C92 = common_scripts\utility::_id_46B5(var_2, "script_noteworthy");
   var_12._id_9CD6 = common_scripts\utility::_id_44BE(var_2 + "_uber_collector", "targetname");
   var_13 = common_scripts\utility::_id_44BE(var_12.target, "targetname");
-  var_14 = _func_21F(var_2 + "_uber_collector", "targetname");
+  var_14 = _getscriptablearray(var_2 + "_uber_collector", "targetname");
   var_15 = var_14[0];
   var_16 = [];
   var_16["raven_uber_trap_deposit_alter"] = var_15;
@@ -55,7 +55,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
         break;
       case "fuse_pickup":
         var_16[var_19._id_0165] = var_19;
-        var_16[var_19._id_0165] _meth_805C();
+        var_16[var_19._id_0165] hide();
         break;
       case "fuse_pickup_offset":
         var_16[var_19._id_0165] = var_19;
@@ -96,11 +96,11 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_21[1] = var_16["success_light_2"];
   var_21[2] = var_16["success_light_3"];
   var_16["hint_light"] thread _id_9870(var_2, var_3, var_12._id_9CD6);
-  var_22 = _func_18E(var_16["raven_uber_trap_deposit"]._id_3E3C.target, "targetname");
-  var_23 = _func_18E(var_16["raven_uber_trap_deposit"]._id_3E3C.target, "targetname");
-  var_24 = _func_18E(var_5, "targetname");
-  var_25 = _func_18E(var_23.target, "targetname");
-  var_25 _meth_805C();
+  var_22 = _getent(var_16["raven_uber_trap_deposit"]._id_3E3C.target, "targetname");
+  var_23 = _getent(var_16["raven_uber_trap_deposit"]._id_3E3C.target, "targetname");
+  var_24 = _getent(var_5, "targetname");
+  var_25 = _getent(var_23.target, "targetname");
+  var_25 hide();
 
   if(!isDefined(level._id_7A86))
     level._id_7A86 = [];
@@ -128,10 +128,10 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_12._id_9C92._id_579D = 1;
   var_12._id_9C92 waittill("raven_trap_complete");
   _id_0557::_id_4BC8(var_8);
-  var_12._id_9C92._id_9FE5 _meth_805C();
+  var_12._id_9C92._id_9FE5 hide();
   var_29 = _id_0585::_id_8F7E(var_12._id_9C92._id_9FE5.origin, _id_4703(var_0), _id_4702(var_0), var_16["raven_trap_pickup_trig_offset"].origin, var_0);
   var_16["raven_uber_trap_deposit_trig"] common_scripts\utility::_id_9D9F();
-  var_23 _meth_80CE(&"ZOMBIE_NEST_PLACE_UBER");
+  var_23 sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
   var_23 _meth_8660(1, var_16["raven_uber_trap_deposit"]._id_3E3C.origin);
   var_12._id_9C92._id_9FE5._id_65E3 delete();
   var_12._id_9C92._id_9FE5.origin = var_16["raven_uber_trap_deposit"]._id_3E3C.origin;
@@ -140,8 +140,8 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   while(!isDefined(var_11) || !var_11 _id_0585::_id_9E12(var_0))
     var_23 waittill("trigger", var_11);
 
-  var_12._id_9C92._id_9FE5 _meth_805B();
-  var_23 _meth_80CE(&"ZOMBIE_NEST_UBER_TRANSFER");
+  var_12._id_9C92._id_9FE5 show();
+  var_23 sethintstring(&"ZOMBIE_NEST_UBER_TRANSFER");
   var_16["main_trigger"] = var_23;
   var_30["battleID"] = 3;
   var_30["event_origin"] = var_16["main_trigger"].origin;
@@ -149,7 +149,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_30["notifications"]._id_94D4 = "hc_raven_" + var_0 + "_success";
   var_30["notifications"]._id_39D1 = "hc_raven_" + var_0 + "_fail";
   var_16["activation_triggers"] = [var_23];
-  var_16["attack_positions"] = _func_18E(var_25.target, "targetname");
+  var_16["attack_positions"] = _getent(var_25.target, "targetname");
   var_31 = spawnStruct();
   var_31._id_7B8C = var_16["main_trigger"];
   var_31._id_38C3 = "zombie_" + var_0 + "_rumble";
@@ -160,7 +160,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_31._id_38C4["zombieObjectiveMax"] = 3;
   var_31._id_38C4["objectiveHealthSolo"] = 125;
   var_16["main_trigger"]._id_1170 = var_16["attack_positions"];
-  var_32 = _func_18E("rnd_forge_machine_parts", "targetname");
+  var_32 = _getent("rnd_forge_machine_parts", "targetname");
   var_16["main_trigger"]._id_65E8 = [var_32];
 
   if(var_0 == "moon_raven_hc_ee" || var_0 == "storm_raven_hc_ee")
@@ -187,7 +187,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     var_34 = level._id_3E3B;
     thread maps\mp\mp_zombie_nest_ee_util::_id_08B6();
     level waittill("rnd_show_ww_part");
-    var_34._id_6FC2 _meth_805B();
+    var_34._id_6FC2 show();
     level waittill("rnd_create_ww_part");
   }
 
@@ -205,7 +205,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
   maps\mp\mp_zombie_nest_ee_workbench::_id_AA7A(level._id_AACA[var_4]);
   common_scripts\utility::_id_9DA3();
-  self _meth_80CE(maps\mp\mp_zombie_nest_ee_workbench::_id_AA71(var_4));
+  self sethintstring(maps\mp\mp_zombie_nest_ee_workbench::_id_AA71(var_4));
   var_36 = "";
   var_11 = undefined;
 
@@ -223,9 +223,9 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(var_37.size > 0)
     var_11 switchtoweapon(var_37[0]);
 
-  self _meth_80CE(&"ZOMBIE_NEST_ASSEMBLING_WW");
+  self sethintstring(&"ZOMBIE_NEST_ASSEMBLING_WW");
   level._id_AACA[var_4] maps\mp\mp_zombie_nest_ee_workbench::_id_AA73();
-  self _meth_80CE(maps\mp\mp_zombie_nest_ee_workbench::_id_AA72(var_4));
+  self sethintstring(maps\mp\mp_zombie_nest_ee_workbench::_id_AA72(var_4));
   level._id_AACA[var_4] thread maps\mp\mp_zombie_nest_ee_workbench::_id_AA76();
   _id_0557::_id_4BC8(var_9);
   _id_0557::_id_4BC8("tesla gun upgraded");
@@ -241,7 +241,7 @@ _id_7A8E() {
 
 _id_3622(var_0, var_1, var_2) {
   var_0 common_scripts\utility::_id_9D9F();
-  self _meth_8276("zmb_forge_electric_coil_shutter_idle");
+  self scriptmodelplayanim("zmb_forge_electric_coil_shutter_idle");
   _id_A64D(var_1, var_2);
   _id_6C01();
   var_0 common_scripts\utility::_id_9DA3();
@@ -249,14 +249,14 @@ _id_3622(var_0, var_1, var_2) {
 
 _id_8F6E(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_0.origin;
-  var_0 _meth_805C();
+  var_0 hide();
   var_6 = _id_0585::_id_8F7E(var_5, var_2, var_3, undefined, var_4);
   var_7 = var_1.origin - var_0.origin;
-  var_8 = _func_0D9(_func_0AE(var_7[2] * 2 / 800));
+  var_8 = _sqrt(_abs(var_7[2] * 2 / 800));
   var_9 = 1 / var_8;
   var_10 = var_7 * (var_9, var_9, 0);
-  var_6 _meth_82B5(var_10, var_8);
-  var_6 _meth_82B8(var_1.angles, var_8);
+  var_6 movegravity(var_10, var_8);
+  var_6 rotateto(var_1.angles, var_8);
   wait(var_8);
   var_6.origin = var_1.origin;
 }
@@ -479,7 +479,7 @@ _id_902C(var_0, var_1) {
     var_2.angles = var_0.angles;
 
   var_2 setModel("zmb_gp_uber_01");
-  _func_147(level._effect[var_1 + "_uber"], var_2, "tag_origin");
+  _playfxontag(level._effect[var_1 + "_uber"], var_2, "tag_origin");
   return var_2;
 }
 
@@ -497,12 +497,12 @@ _id_44EB(var_0) {
       break;
   }
 
-  var_2 = _func_18E(var_1, "targetname");
+  var_2 = _getent(var_1, "targetname");
   return var_2._id_7AC4;
 }
 
 _id_9FE9(var_0, var_1, var_2, var_3, var_4) {
-  var_2 _meth_80CE(&"ZOMBIE_NEST_PLACE_UBER");
+  var_2 sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
   var_5 = undefined;
 
   while(!isDefined(var_5) || !var_5 _id_0585::_id_9E12(var_4))
@@ -523,17 +523,17 @@ _id_A64D(var_0, var_1) {
 #using_animtree("animated_props_zombies");
 
 _id_6C01() {
-  self _meth_8276("zmb_forge_electric_coil_shutter_up");
+  self scriptmodelplayanim("zmb_forge_electric_coil_shutter_up");
   _id_0378::_id_8D74("aud_compartment_door_open");
-  wait(_func_065(%zmb_forge_electric_coil_shutter_up));
-  self _meth_8276("zmb_forge_electric_coil_shutter_up_idle", "shutter_up");
+  wait(_getanimlength(%zmb_forge_electric_coil_shutter_up));
+  self scriptmodelplayanim("zmb_forge_electric_coil_shutter_up_idle", "shutter_up");
 }
 
 _id_2441() {
-  self _meth_8276("zmb_forge_electric_coil_shutter_down");
+  self scriptmodelplayanim("zmb_forge_electric_coil_shutter_down");
   _id_0378::_id_8D74("aud_compartment_door_close");
-  wait(_func_065(%zmb_forge_electric_coil_shutter_down));
-  self _meth_8276("zmb_forge_electric_coil_shutter_idle", "shutter_down");
+  wait(_getanimlength(%zmb_forge_electric_coil_shutter_down));
+  self scriptmodelplayanim("zmb_forge_electric_coil_shutter_idle", "shutter_down");
 }
 
 _id_7A8A(var_0) {
@@ -545,12 +545,12 @@ _id_7A8A(var_0) {
       var_0["zombie_spawner"] thread _id_902D();
     }
 
-    var_0["cover_model"] _meth_82C3(1);
+    var_0["cover_model"] setcandamage(1);
     var_1 = 0;
 
     while(!var_1) {
       level waittill("objective_zombie_exploder_detonation", var_2, var_3);
-      var_4 = _func_18E(var_0["fuse_pickup"].target, "targetname");
+      var_4 = _getent(var_0["fuse_pickup"].target, "targetname");
 
       if(distance(var_4.origin, var_2) <= 150)
         var_1 = 1;
@@ -558,7 +558,7 @@ _id_7A8A(var_0) {
   }
 
   var_0["cover_model"] thread _id_1806();
-  var_5 = _func_18E(var_0["fuse_pickup"].target, "targetname");
+  var_5 = _getent(var_0["fuse_pickup"].target, "targetname");
   var_6 = var_0["fuse_pickup"];
   return [var_5, var_6];
 }
@@ -571,10 +571,10 @@ _id_7A87(var_0) {
     var_0["zombie_spawner"] thread _id_9064();
   }
 
-  var_0["fuse_pickup"] _meth_805C();
+  var_0["fuse_pickup"] hide();
   _id_A6A2(var_0["cover_model"]);
   var_0["cover_model"] thread _id_1806();
-  var_1 = _func_18E(var_0["fuse_pickup"].target, "targetname");
+  var_1 = _getent(var_0["fuse_pickup"].target, "targetname");
   var_2 = var_0["fuse_pickup"];
   return [var_1, var_2];
 }
@@ -584,29 +584,29 @@ _id_1806() {
   level thread common_scripts\_exploder::_id_088E(239);
   self setModel("zmb_objective_panel_door_dmg_01");
   self.origin = self.origin + (0, 0, 64);
-  self _meth_82B5(-200 * vectorNormalize(common_scripts\utility::_id_3D5C(anglesToForward(self.angles))) + (0, 0, 50), 1);
-  self _meth_83E5((360, 360, 360), 1);
+  self movegravity(-200 * vectorNormalize(common_scripts\utility::_id_3D5C(anglesToForward(self.angles))) + (0, 0, 50), 1);
+  self rotateby((360, 360, 360), 1);
 }
 
 _id_7A8B(var_0) {
-  var_0["fuse_pickup"] _meth_805C();
+  var_0["fuse_pickup"] hide();
   _id_A6C3(var_0);
-  var_0["cover_model"] _meth_8276("zmb_breakable_statue_bursting", "statue_burst");
+  var_0["cover_model"] scriptmodelplayanim("zmb_breakable_statue_bursting", "statue_burst");
   playFX(level._effect["zmb_hc_statue"], var_0["cover_model"].origin);
   var_0["cover_model"] _id_0378::_id_8D74("aud_break_statue");
-  var_0["fuse_pickup"] _meth_805B();
+  var_0["fuse_pickup"] show();
   var_0["fuse_pickup"] maps\mp\mp_zombie_nest_ee_util::_id_A725("teslagun_zm");
   var_1 = common_scripts\utility::_id_46B5(var_0["fuse_pickup"].target, "targetname");
   var_2 = var_0["fuse_pickup"];
   var_3 = var_1;
-  var_2 _meth_805C();
+  var_2 hide();
   return [var_2, var_3];
 }
 
 _id_7A88(var_0) {
   level endon("raven up skip");
   _id_A6A3(var_0["cover_model"]);
-  var_0["cover_model"] _meth_805C();
+  var_0["cover_model"] hide();
 
   if(!1)
     maps\mp\mp_zombie_nest_ee_util::_id_A6CE(var_0["tesla_fuse_box"]);
@@ -618,12 +618,12 @@ _id_7A88(var_0) {
 _id_7A89(var_0) {
   level endon("raven up skip");
   var_1 = 0;
-  var_2 = _func_18E("raven_blood_challenge_lights_start", "targetname");
+  var_2 = _getent("raven_blood_challenge_lights_start", "targetname");
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel("tag_origin");
-  var_2 _meth_82C3(1);
+  var_2 setcandamage(1);
   var_2 maps\mp\mp_zombie_nest_ee_util::_id_A725("teslagun_zm");
-  _func_147(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
   var_3 linktosynchronizedparent(var_2);
   var_4 = maps\mp\mp_zombie_nest_ee_util::_id_44C8(var_2.target, 1);
   var_2._id_775E = 0;
@@ -643,10 +643,10 @@ _id_7A89(var_0) {
   }
 
   _id_0378::_id_8D74("tesla_hc_energy_lamp_loop_off", var_2.origin);
-  _func_148(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
-  var_6 = _func_18E(var_0["fuse_pickup"].target, "targetname");
+  _stopfxontag(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
+  var_6 = _getent(var_0["fuse_pickup"].target, "targetname");
   var_2.origin = var_6.origin;
-  var_7 = _func_18E(var_0["fuse_pickup"].target, "targetname");
+  var_7 = _getent(var_0["fuse_pickup"].target, "targetname");
   var_8 = var_0["fuse_pickup"];
   return [var_7, var_8];
 }
@@ -660,7 +660,7 @@ _id_39EA(var_0) {
 
 _id_A6A3(var_0) {
   level endon("raven up skip");
-  var_0 _meth_82C3(1);
+  var_0 setcandamage(1);
 
   for(var_1 = ""; var_1 != "MOD_GRENADE_SPLASH" && var_1 != "MOD_IMPACT" && var_1 != "MOD_EXPLOSIVE"; var_1 = var_6)
     var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6);
@@ -713,9 +713,9 @@ _id_A6C1(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_12 = 0;
   self._id_9CB0 = 0;
   var_13 = undefined;
-  var_3 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84D9(1);
-  var_3 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84D9(2);
-  var_3 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84D9(3);
+  var_3 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::vehphys_getvelocity(1);
+  var_3 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::vehphys_getvelocity(2);
+  var_3 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::vehphys_getvelocity(3);
 
   while(var_12 < var_10) {
     self._id_9CB0 = 0;
@@ -742,7 +742,7 @@ _id_A6C1(var_0, var_1, var_2, var_3, var_4, var_5) {
         self._id_9FE5._id_65E3 delete();
 
       self._id_9FE5._id_65E3 = _id_0547::_id_8FBA(self._id_9FE5._id_65E4, var_5 + "_uber_stg_" + var_12);
-      _func_14C(self._id_9FE5._id_65E3);
+      _triggerfx(self._id_9FE5._id_65E3);
       var_4 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84DD(var_12);
     }
   }
@@ -823,7 +823,7 @@ _id_A6B9(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_1))
     var_1 = (0, 0, 0);
 
-  self _meth_805B();
+  self show();
 
   if(isDefined(var_2))
     _id_0547::_id_AC41(var_0, undefined, var_2);

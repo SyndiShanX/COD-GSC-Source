@@ -13,7 +13,7 @@ main() {
     var_3 = getarraykeys(level._id_0E2F[var_2]);
 
     foreach(var_5 in var_3)
-    _func_162(level._id_0E2F[var_2][var_5]);
+    _precachempanim(level._id_0E2F[var_2][var_5]);
   }
 
   waittillframeend;
@@ -32,6 +32,6 @@ _id_0E9F() {
     var_0 = level._id_0E2F[self.model][var_2];
   }
 
-  self _meth_8276(var_0);
-  self _meth_80D4();
+  self scriptmodelplayanim(var_0);
+  self willneverchange();
 }

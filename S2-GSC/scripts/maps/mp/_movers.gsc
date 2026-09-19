@@ -7,17 +7,17 @@ main() {
   if(getDvar("233") == "1") {
     return;
   }
-  level._id_8216 = [];
-  level._id_8216["move_time"] = 5;
-  level._id_8216["accel_time"] = 0;
-  level._id_8216["decel_time"] = 0;
-  level._id_8216["wait_time"] = 0;
-  level._id_8216["delay_time"] = 0;
-  level._id_8216["usable"] = 0;
-  level._id_8216["hintstring"] = "activate";
+  level.getpointinbounds = [];
+  level.getpointinbounds["move_time"] = 5;
+  level.getpointinbounds["accel_time"] = 0;
+  level.getpointinbounds["decel_time"] = 0;
+  level.getpointinbounds["wait_time"] = 0;
+  level.getpointinbounds["delay_time"] = 0;
+  level.getpointinbounds["usable"] = 0;
+  level.getpointinbounds["hintstring"] = "activate";
   _id_820C("activate", &"MP_ACTIVATE_MOVER");
-  _id_820D("none", "");
-  level._id_8226 = [];
+  getplayersetting("none", "");
+  level.vehicle_isphysveh = [];
   level._id_8211 = [];
   waitframe();
   var_0 = [];
@@ -33,7 +33,7 @@ _id_8213() {
   return ["script_model_mover", "script_brushmodel_mover"];
 }
 
-_id_8222() {
+isturretready() {
   if(isDefined(self._id_820A))
     return self._id_820A;
 
@@ -50,17 +50,17 @@ _id_8222() {
 }
 
 _id_820C(var_0, var_1) {
-  if(!isDefined(level._id_821D))
-    level._id_821D = [];
+  if(!isDefined(level.playersetatmosfog))
+    level.playersetatmosfog = [];
 
-  level._id_821D[var_0] = var_1;
+  level.playersetatmosfog[var_0] = var_1;
 }
 
-_id_820D(var_0, var_1) {
-  if(!isDefined(level._id_8229))
-    level._id_8229 = [];
+getplayersetting(var_0, var_1) {
+  if(!isDefined(level.vehphys_disablecrashing))
+    level.vehphys_disablecrashing = [];
 
-  level._id_8229[var_0] = var_1;
+  level.vehphys_disablecrashing[var_0] = var_1;
 }
 
 _id_820B(var_0, var_1, var_2, var_3) {
@@ -102,14 +102,14 @@ _id_821E() {
         self._id_6C3E = spawn("script_model", var_2.origin);
         self._id_6C3E.angles = var_2.angles;
         self._id_6C3E setModel("tag_origin");
-        self._id_6C3E _meth_8055(self);
+        self._id_6C3E linkto(self);
         break;
       case "scene_node":
       case "scripted_node":
         if(!isDefined(var_2.angles))
           var_2.angles = (0, 0, 0);
 
-        self._id_830E = var_2;
+        self.setviewkickscale = var_2;
         break;
       default:
         break;
@@ -130,15 +130,15 @@ _id_821E() {
     foreach(var_8 in var_6) {
       switch (var_8) {
         case "use_trigger_link":
-          var_2 _meth_8070();
-          var_2 _meth_8055(self);
+          var_2 enablelinkto();
+          var_2 linkto(self);
         case "use_trigger":
           var_2 _id_822D();
           thread _id_823C(var_2);
           self._id_A1F9[self._id_A1F9.size] = var_2;
           break;
         case "link":
-          var_2 _meth_8055(self);
+          var_2 linkto(self);
           self._id_5DAB[self._id_5DAB.size] = var_2;
           break;
         default:
@@ -148,43 +148,43 @@ _id_821E() {
   }
 
   thread _id_822D();
-  thread _id_821F();
-  thread _id_8231();
-  thread _id_8232();
-  thread _id_8212(self);
-  thread _id_8230();
-  _id_8237();
+  thread getplayerdata();
+  thread playerlinkedvehicleanglesdisable();
+  thread playersetstreamorigin();
+  thread setmotiontrackervisible(self);
+  thread playerlinkedvehicleanglesenable();
+  painvisionoff();
 
   foreach(var_12 in self._id_A1F9)
-  _id_8234(var_12, 1);
+  nightvisionviewon(var_12, 1);
 
   self._id_821E = 1;
   self notify("script_mover_init");
 }
 
-_id_8237() {
+painvisionoff() {
   if(_id_8220())
     thread _id_8210();
   else
-    thread _id_8225();
+    thread vehicle_dospawn();
 }
 
-_id_8230() {
+playerlinkedvehicleanglesenable() {
   self._id_64C0 = self.origin;
   self._id_64BF = self.angles;
 }
 
-_id_822F(var_0) {
+playerlinkedturretanglesdisable(var_0) {
   self notify("mover_reset");
 
   if(_id_8220())
-    self _meth_8277();
+    self scriptmodelclearanim();
 
   self.origin = self._id_64C0;
   self.angles = self._id_64BF;
   self notify("new_path");
   waitframe();
-  _id_8237();
+  painvisionoff();
 }
 
 _id_823C(var_0) {
@@ -195,7 +195,7 @@ _id_823C(var_0) {
 
     if(var_0._id_480C.size > 0) {
       self notify("new_path");
-      thread _id_8225(var_0);
+      thread vehicle_dospawn(var_0);
       continue;
     }
 
@@ -203,16 +203,16 @@ _id_823C(var_0) {
   }
 }
 
-_id_8224(var_0) {
-  if(isDefined(level._id_8226[var_0])) {
+vehicledriveto(var_0) {
+  if(isDefined(level.vehicle_isphysveh[var_0])) {
     self notify("new_path");
-    self._id_480C = level._id_8226[var_0];
-    thread _id_8225();
+    self._id_480C = level.vehicle_isphysveh[var_0];
+    thread vehicle_dospawn();
   }
 }
 
 _id_0DDE(var_0) {
-  return (_func_0DD(var_0[0]), _func_0DD(var_0[1]), _func_0DD(var_0[2]));
+  return (_angleclamp180(var_0[0]), _angleclamp180(var_0[1]), _angleclamp180(var_0[2]));
 }
 
 _id_822D() {
@@ -247,16 +247,16 @@ _id_822D() {
 
         break;
       case "goal":
-        var_3 _id_821F();
+        var_3 getplayerdata();
         var_3 _id_822D();
         self._id_480C[self._id_480C.size] = var_3;
 
         if(isDefined(var_3._id_6E5C["name"])) {
-          if(!isDefined(level._id_8226[var_3._id_6E5C["name"]]))
-            level._id_8226[var_3._id_6E5C["name"]] = [];
+          if(!isDefined(level.vehicle_isphysveh[var_3._id_6E5C["name"]]))
+            level.vehicle_isphysveh[var_3._id_6E5C["name"]] = [];
 
-          var_8 = level._id_8226[var_3._id_6E5C["name"]].size;
-          level._id_8226[var_3._id_6E5C["name"]][var_8] = var_3;
+          var_8 = level.vehicle_isphysveh[var_3._id_6E5C["name"]].size;
+          level.vehicle_isphysveh[var_3._id_6E5C["name"]][var_8] = var_3;
         }
 
         break;
@@ -266,18 +266,18 @@ _id_822D() {
   }
 
   foreach(var_10 in var_1) {
-    if(var_10 _id_8222())
+    if(var_10 isturretready())
       self._id_64C5[self._id_64C5.size] = var_10;
 
-    thread _id_822A(var_10);
+    thread vehphys_enablecrashing(var_10);
   }
 }
 
-_id_822A(var_0) {
+vehphys_enablecrashing(var_0) {
   if(!isDefined(var_0._id_0165)) {
     return;
   }
-  if(var_0 _id_8222() && !isDefined(var_0._id_821E))
+  if(var_0 isturretready() && !isDefined(var_0._id_821E))
     var_0 waittill("script_mover_init");
 
   var_1 = strtok(var_0._id_0165, ";");
@@ -288,7 +288,7 @@ _id_822A(var_0) {
     if(var_4.size < 3 || var_4[1] != "on") {
       continue;
     }
-    var_5 = _func_117(var_4[0]);
+    var_5 = _tolower(var_4[0]);
     var_6 = var_4[2];
 
     for(var_7 = 3; var_7 < var_4.size; var_7++)
@@ -296,37 +296,37 @@ _id_822A(var_0) {
 
     switch (var_5) {
       case "connectpaths":
-        thread _id_821A(var_0, var_6, ::_id_8215, ::_id_8219);
+        thread setweaponhudiconoverride(var_0, var_6, ::worldpointinreticle_rect, ::_id_8219);
         break;
       case "disconnectpaths":
-        thread _id_821A(var_0, var_6, ::_id_8219, ::_id_8215);
+        thread setweaponhudiconoverride(var_0, var_6, ::_id_8219, ::worldpointinreticle_rect);
         break;
       case "solid":
-        var_0 _meth_82C2();
-        thread _id_821A(var_0, var_6, ::_id_8236, ::_id_8228);
+        var_0 notsolid();
+        thread setweaponhudiconoverride(var_0, var_6, ::painvisionon, ::vehphys_launch);
         break;
       case "notsolid":
-        thread _id_821A(var_0, var_6, ::_id_8228, ::_id_8236);
+        thread setweaponhudiconoverride(var_0, var_6, ::vehphys_launch, ::painvisionon);
         break;
       case "delete":
-        thread _id_821A(var_0, var_6, ::_id_8218);
+        thread setweaponhudiconoverride(var_0, var_6, ::_id_8218);
         break;
       case "hide":
-        thread _id_821A(var_0, var_6, ::_id_821C, ::_id_8235);
+        thread setweaponhudiconoverride(var_0, var_6, ::_id_821C, ::nightvisionviewoff);
         break;
       case "show":
-        var_0 _meth_805C();
-        thread _id_821A(var_0, var_6, ::_id_8235, ::_id_821C);
+        var_0 hide();
+        thread setweaponhudiconoverride(var_0, var_6, ::nightvisionviewoff, ::_id_821C);
         break;
       case "triggerhide":
-        thread _id_821A(var_0, var_6, ::_id_8239, ::_id_823A);
+        thread setweaponhudiconoverride(var_0, var_6, ::_id_8239, ::_id_823A);
         break;
       case "triggershow":
         var_0 common_scripts\utility::_id_9D9F();
-        thread _id_821A(var_0, var_6, ::_id_823A, ::_id_8239);
+        thread setweaponhudiconoverride(var_0, var_6, ::_id_823A, ::_id_8239);
         break;
       case "trigger":
-        thread _id_821A(var_0, var_6, ::_id_8238, ::_id_822F);
+        thread setweaponhudiconoverride(var_0, var_6, ::getplayerintelisfound, ::playerlinkedturretanglesdisable);
         break;
       default:
         break;
@@ -335,37 +335,37 @@ _id_822A(var_0) {
 }
 
 _id_8239(var_0) {
-  self _meth_808C();
+  self dontinterpolate();
   common_scripts\utility::_id_9D9F();
 }
 
 _id_823A(var_0) {
-  self _meth_808C();
+  self dontinterpolate();
   common_scripts\utility::_id_9DA3();
 }
 
-_id_8227(var_0, var_1) {
+vehphys_crash(var_0, var_1) {
   var_0 notify(var_1);
 }
 
-_id_8223(var_0, var_1) {
+vehicleturretcontroloff(var_0, var_1) {
   level notify(var_1);
 }
 
-_id_8215(var_0) {
-  self _meth_8060();
+worldpointinreticle_rect(var_0) {
+  self connectpaths();
 }
 
 _id_8219(var_0) {
-  self _meth_805F(var_0);
+  self disconnectpaths(var_0);
 }
 
-_id_8236(var_0) {
-  self _meth_82C1();
+painvisionon(var_0) {
+  self solid();
 }
 
-_id_8228(var_0) {
-  self _meth_82C2();
+vehphys_launch(var_0) {
+  self notsolid();
 }
 
 _id_8218(var_0) {
@@ -373,18 +373,18 @@ _id_8218(var_0) {
 }
 
 _id_821C(var_0) {
-  self _meth_805C();
+  self hide();
 }
 
-_id_8235(var_0) {
-  self _meth_805B();
+nightvisionviewoff(var_0) {
+  self show();
 }
 
-_id_8238(var_0) {
+getplayerintelisfound(var_0) {
   self notify("trigger");
 }
 
-_id_821A(var_0, var_1, var_2, var_3) {
+setweaponhudiconoverride(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_0 endon("death");
 
@@ -422,7 +422,7 @@ _id_823B() {
     self waittill("move_start");
 
     foreach(var_5 in var_0)
-    var_5 _id_8215();
+    var_5 worldpointinreticle_rect();
 
     self waittill("move_end");
   }
@@ -433,7 +433,7 @@ _id_8210() {
   var_0 = self._id_6E5C["animation"];
 
   if(isDefined(level._id_8211[var_0]["idle"]))
-    _id_822E(level._id_8211[var_0]["idle"], 0);
+    playerlinkedturretanglesenable(level._id_8211[var_0]["idle"], 0);
 
   _id_8217();
   self notify("move_start");
@@ -441,23 +441,23 @@ _id_8210() {
   var_1 = level._id_8211[var_0]["default"];
 
   if(isDefined(var_1)) {
-    _id_822E(var_1, 1);
+    playerlinkedturretanglesenable(var_1, 1);
     self waittill("end");
   }
 
   self notify("move_end");
 }
 
-_id_822E(var_0, var_1) {
+playerlinkedturretanglesenable(var_0, var_1) {
   self notify("play_animation");
 
   if(var_1)
     thread _id_821B();
 
-  if(isDefined(self._id_830E))
-    self _meth_8495(var_0._id_0EC4, self._id_830E.origin, self._id_830E.angles, "script_mover_anim");
+  if(isDefined(self.setviewkickscale))
+    self scriptmodelplayanimdeltamotionfrompos(var_0._id_0EC4, self.setviewkickscale.origin, self.setviewkickscale.angles, "script_mover_anim");
   else
-    self _meth_8278(var_0._id_0EC4, "script_mover_anim");
+    self scriptmodelplayanimdeltamotion(var_0._id_0EC4, "script_mover_anim");
 }
 
 _id_821B() {
@@ -481,7 +481,7 @@ _id_8217() {
     wait(self._id_6E5C["delay_time"]);
 }
 
-_id_8225(var_0) {
+vehicle_dospawn(var_0) {
   self endon("death");
   self endon("new_path");
   childthread _id_823B();
@@ -492,14 +492,14 @@ _id_8225(var_0) {
   while(var_0._id_480C.size != 0) {
     var_1 = common_scripts\utility::random(var_0._id_480C);
     var_2 = self;
-    var_2 _id_8212(var_1);
+    var_2 setmotiontrackervisible(var_1);
     var_2 _id_8217();
     var_3 = var_2._id_6E5C["move_time"];
     var_4 = var_2._id_6E5C["accel_time"];
     var_5 = var_2._id_6E5C["decel_time"];
     var_6 = 0;
     var_7 = 0;
-    var_8 = _func_111(var_1.origin, var_1.angles, self._id_6C3E.origin, self._id_6C3E.angles, self.origin, self.angles);
+    var_8 = _transformmove(var_1.origin, var_1.angles, self._id_6C3E.origin, self._id_6C3E.angles, self.origin, self.angles);
 
     if(var_2.origin != var_1.origin) {
       if(isDefined(var_2._id_6E5C["move_speed"])) {
@@ -514,27 +514,27 @@ _id_8225(var_0) {
         var_5 = var_2._id_6E5C["decel_frac"] * var_3;
 
       if(var_3 <= 0) {
-        var_2 _meth_808C();
+        var_2 dontinterpolate();
         var_2.origin = var_8["origin"];
       } else
-        var_2 _meth_82B1(var_8["origin"], var_3, var_4, var_5);
+        var_2 moveto(var_8["origin"], var_3, var_4, var_5);
 
       var_6 = 1;
     }
 
     if(_id_0DDE(var_8["angles"]) != _id_0DDE(var_2.angles)) {
       if(var_3 <= 0) {
-        var_2 _meth_808C();
+        var_2 dontinterpolate();
         var_2.angles = var_8["angles"];
       } else
-        var_2 _meth_82B8(var_8["angles"], var_3, var_4, var_5);
+        var_2 rotateto(var_8["angles"], var_3, var_4, var_5);
 
       var_7 = 1;
     }
 
     foreach(var_11 in var_2._id_64C5) {
       var_11 notify("trigger");
-      _id_823D(var_11, ::_id_822F);
+      _id_823D(var_11, ::playerlinkedturretanglesdisable);
     }
 
     var_2 notify("move_start");
@@ -546,7 +546,7 @@ _id_8225(var_0) {
       level notify(var_13, var_2);
     }
 
-    var_2 _id_820F(0);
+    var_2 setlocalplayerprofiledata(0);
 
     if(var_3 <= 0) {} else if(var_6)
       var_2 waittill("movedone");
@@ -566,14 +566,14 @@ _id_8225(var_0) {
 
     if(isDefined(var_2._id_6E5C["solid"])) {
       if(var_2._id_6E5C["solid"])
-        var_2 _meth_82C1();
+        var_2 solid();
       else
-        var_2 _meth_82C2();
+        var_2 notsolid();
     }
 
     foreach(var_11 in var_1._id_64C5) {
       var_11 notify("trigger");
-      _id_823D(var_11, ::_id_822F);
+      _id_823D(var_11, ::playerlinkedturretanglesdisable);
     }
 
     if(isDefined(var_2._id_6E5C["wait_till"]))
@@ -582,26 +582,26 @@ _id_8225(var_0) {
     if(var_2._id_6E5C["wait_time"] > 0)
       wait(var_2._id_6E5C["wait_time"]);
 
-    var_2 _id_820F(1);
+    var_2 setlocalplayerprofiledata(1);
     var_0 = var_1;
   }
 }
 
 _id_823D(var_0, var_1) {
-  thread _id_821A(var_0, "mover_reset", var_1);
+  thread setweaponhudiconoverride(var_0, "mover_reset", var_1);
 }
 
-_id_821F() {
+getplayerdata() {
   self._id_6E5C = [];
 
   if(!isDefined(self.angles))
     self.angles = (0, 0, 0);
 
   self.angles = _id_0DDE(self.angles);
-  _id_822B(self._id_8260);
+  vehphys_setspeed(self.setlookatent);
 }
 
-_id_822B(var_0) {
+vehphys_setspeed(var_0) {
   if(!isDefined(var_0))
     var_0 = "";
 
@@ -627,7 +627,7 @@ _id_822B(var_0) {
       case "decel_time":
       case "accel_time":
       case "move_time":
-        self._id_6E5C[var_4[0]] = _id_822C(var_4[1]);
+        self._id_6E5C[var_4[0]] = vehphys_setconveyorbelt(var_4[1]);
         break;
       case "wait_till":
       case "delay_till":
@@ -643,10 +643,10 @@ _id_822B(var_0) {
         break;
       case "script_params":
         var_5 = var_4[1];
-        var_6 = level._id_8229[var_5];
+        var_6 = level.vehphys_disablecrashing[var_5];
 
         if(isDefined(var_6))
-          _id_822B(var_6);
+          vehphys_setspeed(var_6);
 
         break;
       default:
@@ -655,80 +655,80 @@ _id_822B(var_0) {
   }
 }
 
-_id_822C(var_0) {
+vehphys_setconveyorbelt(var_0) {
   var_1 = 0;
   var_2 = strtok(var_0, ",");
 
   if(var_2.size == 1)
-    var_1 = _func_0AD(var_2[0]);
+    var_1 = _float(var_2[0]);
   else if(var_2.size == 2) {
-    var_3 = _func_0AD(var_2[0]);
-    var_4 = _func_0AD(var_2[1]);
+    var_3 = _float(var_2[0]);
+    var_4 = _float(var_2[1]);
 
     if(var_3 >= var_4)
       var_1 = var_3;
     else
-      var_1 = _func_0A5(var_3, var_4);
+      var_1 = _randomfloatrange(var_3, var_4);
   }
 
   return var_1;
 }
 
-_id_8212(var_0) {
+setmotiontrackervisible(var_0) {
   foreach(var_3, var_2 in var_0._id_6E5C)
-  _id_8233(var_3, var_2);
+  playerclearstreamorigin(var_3, var_2);
 
-  _id_8232();
+  playersetstreamorigin();
 }
 
-_id_8233(var_0, var_1) {
+playerclearstreamorigin(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
   if(var_0 == "usable" && isDefined(var_1))
-    _id_8234(self, var_1);
+    nightvisionviewon(self, var_1);
 
-  if(isDefined(var_1) && _func_031(var_1) && var_1 == "<undefined>")
+  if(isDefined(var_1) && _isstring(var_1) && var_1 == "<undefined>")
     var_1 = undefined;
 
   self._id_6E5C[var_0] = var_1;
 }
 
-_id_820F(var_0) {
+setlocalplayerprofiledata(var_0) {
   if(self._id_6E5C["usable"])
-    _id_8234(self, var_0);
+    nightvisionviewon(self, var_0);
 
   foreach(var_2 in self._id_A1F9)
-  _id_8234(var_2, var_0);
+  nightvisionviewon(var_2, var_0);
 }
 
-_id_8234(var_0, var_1) {
+nightvisionviewon(var_0, var_1) {
   if(var_1) {
     var_0 makeusable();
-    var_0 _meth_80CD("HINT_ACTIVATE");
-    var_0 _meth_80CE(level._id_821D[self._id_6E5C["hintstring"]]);
+    var_0 setcursorhint("HINT_ACTIVATE");
+    var_0 sethintstring(level.playersetatmosfog[self._id_6E5C["hintstring"]]);
   } else
-    var_0 _meth_80B3();
+    var_0 makeunusable();
 }
 
-_id_8231() {
+playerlinkedvehicleanglesdisable() {
   self._id_6E5D = [];
 
   foreach(var_2, var_1 in self._id_6E5C)
   self._id_6E5D[var_2] = var_1;
 }
 
-_id_8232() {
+playersetstreamorigin() {
   if(isDefined(self._id_6E5D)) {
     foreach(var_2, var_1 in self._id_6E5D) {
       if(!isDefined(self._id_6E5C[var_2]))
-        _id_8233(var_2, var_1);
+        playerclearstreamorigin(var_2, var_1);
     }
   }
 
-  foreach(var_2, var_1 in level._id_8216) {
+  foreach(var_2, var_1 in level.getpointinbounds) {
     if(!isDefined(self._id_6E5C[var_2]))
-      _id_8233(var_2, var_1);
+      playerclearstreamorigin(var_2, var_1);
   }
 }
 
@@ -741,18 +741,18 @@ _id_8220() {
 }
 
 init() {
-  level thread _id_8214();
-  level thread _id_820E();
+  level thread worldpointinreticle_circle();
+  level thread getlocalplayerprofiledata();
 }
 
-_id_8214() {
+worldpointinreticle_circle() {
   for(;;) {
     level waittill("connected", var_0);
     var_0 thread _id_7388();
   }
 }
 
-_id_820E() {
+getlocalplayerprofiledata() {
   for(;;) {
     level waittill("spawned_agent", var_0);
     var_0 thread _id_7388();
@@ -762,7 +762,7 @@ _id_820E() {
 _id_7388() {
   self endon("disconnect");
 
-  if(_func_1EF(self))
+  if(_isagent(self))
     self endon("death");
 
   self._id_A043 = 0;
@@ -770,8 +770,8 @@ _id_7388() {
   for(;;) {
     self waittill("unresolved_collision", var_0);
 
-    if(_func_1EF(self) && isDefined(self._id_0EAE)) {
-      if(self _meth_8554() == "noclip")
+    if(_isagent(self) && isDefined(self._id_0EAE)) {
+      if(self scragentgetphysicsmode() == "noclip")
         continue;
     }
 
@@ -832,7 +832,7 @@ _id_A04A(var_0) {
   if(isDefined(var_1._id_A044))
     var_3 = var_1._id_A044;
 
-  var_0 _meth_8059(var_3, var_1.origin, var_1._id_0117, var_1, "MOD_CRUSH");
+  var_0 dodamage(var_3, var_1.origin, var_1._id_0117, var_1, "MOD_CRUSH");
 }
 
 _id_A047(var_0, var_1) {
@@ -851,39 +851,39 @@ _id_A047(var_0, var_1) {
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_3);
     }
 
-    var_2 = common_scripts\utility::_id_0F73(var_2, _func_0B8(var_0.origin, 300, 0, 200, "End 3D"));
+    var_2 = common_scripts\utility::_id_0F73(var_2, _getnodesinradius(var_0.origin, 300, 0, 200, "End 3D"));
 
-    if(isDefined(level.failsafe_collision_nodes) && _func_0C0(level.failsafe_collision_nodes))
+    if(isDefined(level.failsafe_collision_nodes) && _isarray(level.failsafe_collision_nodes))
       var_2 = common_scripts\utility::_id_0F73(var_2, level.failsafe_collision_nodes);
   }
 
   if(isDefined(var_2))
-    var_2 = _func_1AC(var_2, var_0.origin);
+    var_2 = _sortbydistance(var_2, var_0.origin);
   else {
-    var_2 = _func_0B8(var_0.origin, 300, 0, 200);
-    var_2 = _func_1AC(var_2, var_0.origin);
+    var_2 = _getnodesinradius(var_0.origin, 300, 0, 200);
+    var_2 = _sortbydistance(var_2, var_0.origin);
   }
 
   var_5 = (0, 0, -100);
-  var_0 _meth_843C();
-  var_0 _meth_808C();
+  var_0 cancelmantle();
+  var_0 dontinterpolate();
   var_0 setOrigin(var_0.origin + var_5);
 
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
     var_7 = var_2[var_6];
     var_8 = var_7.origin;
 
-    if(!_func_15E(var_8)) {
+    if(!_canspawn(var_8)) {
       continue;
     }
-    if(_func_15D(var_8)) {
+    if(_positionwouldtelefrag(var_8)) {
       continue;
     }
     if(var_0 _meth_803D())
       var_0 _id_028D::forcedismountweapon();
 
-    if(var_0 _meth_8178() == "prone")
-      var_0 _meth_8179("crouch");
+    if(var_0 getstance() == "prone")
+      var_0 setstance("crouch");
 
     var_0 setOrigin(var_8);
     return;
@@ -918,7 +918,7 @@ _id_7305(var_0) {
   for(;;) {
     self waittill("player_pushed", var_1, var_2);
 
-    if(isPlayer(var_1) || _func_1EF(var_1)) {
+    if(isPlayer(var_1) || _isagent(var_1)) {
       var_3 = length(var_2);
 
       if(var_3 >= var_0)
@@ -932,7 +932,7 @@ _id_93E1() {
 }
 
 _id_67F9() {
-  var_0 = self _meth_843A(0);
+  var_0 = self getlinkedchildren(0);
 
   if(!isDefined(var_0)) {
     return;
@@ -941,7 +941,7 @@ _id_67F9() {
     if(isDefined(var_2._id_66F0) && var_2._id_66F0) {
       continue;
     }
-    var_2 _meth_8057();
+    var_2 unlink();
     var_2 notify("invalid_parent", self);
   }
 }
@@ -1001,7 +1001,7 @@ _id_4A27(var_0) {
     self endon(var_0._id_36DE);
 
   if(isDefined(var_0._id_5DB9))
-    self _meth_8055(var_0._id_5DB9);
+    self linkto(var_0._id_5DB9);
 
   childthread _id_4A26(var_0);
   childthread _id_4A25(var_0);

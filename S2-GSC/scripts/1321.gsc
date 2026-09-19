@@ -19,24 +19,24 @@ _id_52F4(var_0) {
   level._id_5A7D["carepackage_crate_mp"] = "carepackage";
   level._id_80B7["carepackage"] = 0;
   level._id_80B8["carepackage"] = 0;
-  level._id_80B6["carepackage"] = 0;
+  level.setwhizbyprobabilities["carepackage"] = 0;
   level._id_80B9["carepackage"] = 1;
-  level._id_80B5["carepackage"] = 0;
+  level.makeglobalunusable["carepackage"] = 0;
   level._id_80B7["raid_carepackage"] = 0;
   level._id_80B8["raid_carepackage"] = 0;
-  level._id_80B6["raid_carepackage"] = 0;
+  level.setwhizbyprobabilities["raid_carepackage"] = 0;
   level._id_80B9["raid_carepackage"] = 1;
-  level._id_80B5["raid_carepackage"] = 0;
+  level.makeglobalunusable["raid_carepackage"] = 0;
   level._id_80B7["emergency_carepackage"] = 0;
   level._id_80B8["emergency_carepackage"] = 0;
-  level._id_80B6["emergency_carepackage"] = 0;
+  level.setwhizbyprobabilities["emergency_carepackage"] = 0;
   level._id_80B9["emergency_carepackage"] = 1;
-  level._id_80B5["emergency_carepackage"] = 0;
+  level.makeglobalunusable["emergency_carepackage"] = 0;
   level._id_80B7["zm_carepackage"] = 0;
   level._id_80B8["zm_carepackage"] = 0;
-  level._id_80B6["zm_carepackage"] = 0;
+  level.setwhizbyprobabilities["zm_carepackage"] = 0;
   level._id_80B9["zm_carepackage"] = 1;
-  level._id_80B5["zm_carepackage"] = 0;
+  level.makeglobalunusable["zm_carepackage"] = 0;
   _id_8A0E();
 
   if(isDefined(var_0))
@@ -123,7 +123,7 @@ _id_8A0E() {
   if(!isDefined(var_0) || var_0.size == 0) {
     return;
   }
-  level._id_1FFC = _func_18E(var_0[0].target, "targetname");
+  level._id_1FFC = _getent(var_0[0].target, "targetname");
 
   foreach(var_2 in var_0)
   var_2 _id_2D30(0, 0, 0);
@@ -189,13 +189,13 @@ _id_7032(var_0, var_1, var_2, var_3, var_4) {
     else if(var_8 == "counter_uav")
       var_6[var_6.size] = "uav";
 
-    wait(_func_0A5(0.075, 0.15));
+    wait(_randomfloatrange(0.075, 0.15));
   }
 }
 
 _id_3493(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   _id_0527::_id_34B0(var_0.origin, var_0);
-  var_7 = var_0.origin + (_func_0A4(-3, 3), _func_0A5(-3, 3), -5);
+  var_7 = var_0.origin + (_randomintrange(-3, 3), _randomfloatrange(-3, 3), -5);
   return _id_4AAE(var_1, var_7, var_3, var_2, var_4, var_5, var_6);
 }
 
@@ -342,22 +342,22 @@ _id_8A0F(var_0, var_1, var_2, var_3, var_4) {
   var_7 = spawn("script_model", var_6.origin);
   var_7.angles = var_6.angles;
   var_7 setModel("ger_carepackage_parachute");
-  var_7 _meth_82C3(1);
-  var_7 _meth_805C();
+  var_7 setcandamage(1);
+  var_7 hide();
   var_7 linktosynchronizedparent(var_6);
-  var_5.angles = var_6 _meth_8181("TAG_CRATE");
+  var_5.angles = var_6 gettagangles("TAG_CRATE");
   var_5.origin = var_6 gettagorigin("TAG_CRATE");
   var_5 linktosynchronizedparent(var_6, "TAG_CRATE");
   var_5._id_6E4A = var_6;
   var_5._id_6E4C = var_7;
 
   if(isDefined(var_5._id_5A2C)) {
-    var_5._id_5A2C _meth_8055(var_6, "tag_origin", (0, 0, 250), (90, 0, 0));
+    var_5._id_5A2C linkto(var_6, "tag_origin", (0, 0, 250), (90, 0, 0));
     var_5._id_5A2C._id_5A32 = gettime();
   }
 
   var_6 thread _id_64B8();
-  var_6 _meth_8276("carepackage_parachute_deploy");
+  var_6 scriptmodelplayanim("carepackage_parachute_deploy");
   wait 1.75;
 
   if(!isDefined(var_6) || !isDefined(var_5)) {
@@ -366,7 +366,7 @@ _id_8A0F(var_0, var_1, var_2, var_3, var_4) {
   var_6._id_2D6A = 1;
 
   if(isDefined(var_5._id_6E4A))
-    var_6 _meth_8276("carepackage_parachute_loop");
+    var_6 scriptmodelplayanim("carepackage_parachute_loop");
 
   if(maps\mp\_utility::_id_585F() && isDefined(level.zombiekillstreaksenabled) && level.zombiekillstreaksenabled)
     level notify("zombies_crate_spawned", var_5);
@@ -397,9 +397,9 @@ _id_64B8() {
 
   for(;;) {
     if(!isDefined(self._id_2D6A) || !self._id_2D6A)
-      self _meth_82B1(self.origin + (0, 0, -45), 0.05);
+      self moveto(self.origin + (0, 0, -45), 0.05);
     else
-      self _meth_82B1(self.origin + (0, 0, -20), 0.05);
+      self moveto(self.origin + (0, 0, -20), 0.05);
 
     waitframe();
   }
@@ -464,23 +464,23 @@ _id_2E45(var_0, var_1) {
     var_0._id_6E4C delete();
 
   var_0._id_34A3 = 1;
-  self _meth_8278("carepackage_parachute_detach");
+  self scriptmodelplayanimdeltamotion("carepackage_parachute_detach");
   wait 0.2;
 
   if(var_0.visualteam == "allies")
-    _func_147(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_0, "TAG_FX");
+    _playfxontag(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_0, "TAG_FX");
   else
-    _func_147(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_0, "TAG_FX");
+    _playfxontag(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_0, "TAG_FX");
 
-  var_0 _meth_8057();
+  var_0 unlink();
 
   if(isDefined(var_0._id_5A2C)) {
-    var_0._id_5A2C _meth_8057();
+    var_0._id_5A2C unlink();
     var_0._id_5A2C thread _id_5A2E(var_0);
   }
 
   if(!_func_367())
-    var_0 _meth_8275(level._id_1FFC);
+    var_0 clonebrushmodeltoscriptmodel(level._id_1FFC);
 
   if(_func_367() && var_1)
     var_0 _id_2D30(1, 1, 1);
@@ -490,7 +490,7 @@ _id_2E45(var_0, var_1) {
     if(maps\mp\_utility::_id_579B())
       var_3 = 100;
 
-    var_0 _meth_8272((0, 0, 0), (0, 0, 1000), 3000, var_3);
+    var_0 physicslaunchserver((0, 0, 0), (0, 0, 1000), 3000, var_3);
   }
 
   var_4 = 1.0;
@@ -584,7 +584,7 @@ _id_6376(var_0) {
             thread _id_0F30(var_4, var_2);
 
             if(isDefined(var_0))
-              var_4 _meth_8059(150, var_2, var_0, self, "MOD_PROJECTILE", "carepackage_crate_mp");
+              var_4 dodamage(150, var_2, var_0, self, "MOD_PROJECTILE", "carepackage_crate_mp");
 
             self notify("hit_player");
           }
@@ -619,7 +619,7 @@ _id_2752(var_0, var_1) {
     }
   }
 
-  if(isDefined(self._id_0117) && _func_0AE(self.origin[2] - self._id_0117.origin[2]) > 4000) {
+  if(isDefined(self._id_0117) && _abs(self.origin[2] - self._id_0117.origin[2]) > 4000) {
     _id_2D30();
     return;
   }
@@ -648,7 +648,7 @@ _id_1FFB(var_0) {
 }
 
 _id_275D() {
-  var_0 = _func_0B9(self.origin, 300, 0, 300);
+  var_0 = _getnodesinradiussorted(self.origin, 300, 0, 300);
 
   foreach(var_2 in _func_2D1()) {
     if(!isalive(var_2)) {
@@ -704,12 +704,12 @@ _id_27D3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_7.visualteam == "any") {
     var_7 setModel("ger_carepackage_crate");
     var_7._id_3009 setModel("ger_carepackage_crate");
-    _func_147(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
+    _playfxontag(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
     var_7.visualteam = "axis";
   } else if(var_7.visualteam == "zm") {
     var_7 setModel("zbw_carepackage_crate");
     var_7._id_3009 setModel("zbw_carepackage_crate");
-    _func_147(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
+    _playfxontag(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
     var_7.visualteam = "zm";
   } else {
     var_8 = _id_0510::_id_46C6(var_7.visualteam);
@@ -717,20 +717,20 @@ _id_27D3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7._id_3009 setModel(var_8);
 
     if(var_7.visualteam == "axis")
-      _func_147(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
+      _playfxontag(common_scripts\utility::_id_44F5("care_package_axis_beacon"), var_7, "TAG_FX");
     else
-      _func_147(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_7, "TAG_FX");
+      _playfxontag(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_7, "TAG_FX");
   }
 
-  var_7._id_3009 _meth_8055(var_7, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_7._id_3009 _meth_82C2();
+  var_7._id_3009 linkto(var_7, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_7._id_3009 notsolid();
   var_7._id_54F5 = 0;
 
   if(var_4)
-    var_7 _meth_8275(level._id_1FFC);
+    var_7 clonebrushmodeltoscriptmodel(level._id_1FFC);
 
   var_7._id_5A2C = spawn("script_model", var_7.origin + (0, 0, 250));
-  var_7._id_5A2C _meth_834D("script_entity");
+  var_7._id_5A2C setscriptmoverkillcam("script_entity");
   var_7._id_5A2C _meth_80B1();
   return var_7;
 }
@@ -753,7 +753,7 @@ _id_5A2E(var_0) {
       var_6 = var_5 * -250;
 
       if(var_3 < 1) {
-        var_7 = _func_10A(var_1, var_6, var_3);
+        var_7 = _vectorlerp(var_1, var_6, var_3);
         var_3 = var_3 + 0.05;
       } else
         var_7 = var_6;
@@ -769,9 +769,9 @@ _id_5A2E(var_0) {
 _id_275A(var_0) {
   if(_func_367()) {
     if(self.origin[2] >= 90) {
-      _func_147(level._effect["care_package_hit"], self, "tag_origin");
+      _playfxontag(level._effect["care_package_hit"], self, "tag_origin");
       common_scripts\utility::_id_0F93(level._id_1FFD, self);
-      _func_032("ui_fge_carepackages_remaining", level._id_1FFD.size);
+      _setomnvar("ui_fge_carepackages_remaining", level._id_1FFD.size);
       _id_2D30(1, 1, 1);
     } else {
       var_1 = spawn("trigger_radius", self.origin + (0, 0, -1), 0, 160, 128);
@@ -784,10 +784,10 @@ _id_275A(var_0) {
       level._id_76FD = 200;
       level._id_76FA = 5;
       self._id_321B = var_2;
-      self _meth_8429(level.players, 2, 0);
+      self hudoutlineenableforclients(level.players, 2, 0);
 
       if(isDefined(level._id_320F))
-        self._id_320E = _func_14B(level._id_320F, self.origin);
+        self._id_320E = _spawnfx(level._id_320F, self.origin);
 
       self notify("crate_start_countdown");
       return;
@@ -798,47 +798,47 @@ _id_275A(var_0) {
 
   if(self.team == "any") {
     var_3 = _id_04D1::_id_45A9();
-    _func_1CE(var_3, "invisible", (0, 0, 0));
-    _func_1D2(var_3, self.origin);
-    _func_1D0(var_3, "active");
-    _func_1D1(var_3, "waypoint_empty_icon");
+    _objective_add(var_3, "invisible", (0, 0, 0));
+    _objective_position(var_3, self.origin);
+    _objective_state(var_3, "active");
+    _objective_icon(var_3, "waypoint_empty_icon");
     _func_36F(var_3, "scorestreak_minimap_care_package_crate");
     _func_370(var_3, _id_04D1::_id_446B("friendly"));
-    _func_183(var_3, "none");
+    _objective_team(var_3, "none");
     self._id_698E = var_3;
   } else {
     if(level.teambased || isDefined(self._id_0117)) {
       var_3 = _id_04D1::_id_45A9();
-      _func_1CE(var_3, "invisible", (0, 0, 0));
-      _func_1D2(var_3, self.origin);
-      _func_1D0(var_3, "active");
-      _func_1D1(var_3, "waypoint_empty_icon");
+      _objective_add(var_3, "invisible", (0, 0, 0));
+      _objective_position(var_3, self.origin);
+      _objective_state(var_3, "active");
+      _objective_icon(var_3, "waypoint_empty_icon");
       _func_36F(var_3, "scorestreak_minimap_care_package_crate");
       _func_370(var_3, _id_04D1::_id_446B("friendly"));
 
       if(!level.teambased && isDefined(self._id_0117))
-        _func_185(var_3, self._id_0117 getentitynumber());
+        _objective_playerenemyteam(var_3, self._id_0117 getentitynumber());
       else if(level.gametype == "infect")
-        _func_183(var_3, "allies");
+        _objective_team(var_3, "allies");
       else
-        _func_183(var_3, self.team);
+        _objective_team(var_3, self.team);
 
       self._id_698E = var_3;
     }
 
     if(isDefined(self._id_0117)) {
       var_3 = _id_04D1::_id_45A9();
-      _func_1CE(var_3, "invisible", (0, 0, 0));
-      _func_1D2(var_3, self.origin);
-      _func_1D0(var_3, "active");
-      _func_1D1(var_3, "waypoint_empty_icon");
+      _objective_add(var_3, "invisible", (0, 0, 0));
+      _objective_position(var_3, self.origin);
+      _objective_state(var_3, "active");
+      _objective_icon(var_3, "waypoint_empty_icon");
       _func_36F(var_3, "scorestreak_minimap_care_package_crate");
       _func_370(var_3, _id_04D1::_id_446B("enemy"));
 
       if(!level.teambased && isDefined(self._id_0117))
-        _func_186(var_3, self._id_0117 getentitynumber());
+        _objective_playerteam(var_3, self._id_0117 getentitynumber());
       else
-        _func_183(var_3, level._id_6C63[self.team]);
+        _objective_team(var_3, level._id_6C63[self.team]);
 
       self._id_698D = var_3;
     }
@@ -851,7 +851,7 @@ _id_275A(var_0) {
 _id_8A21(var_0, var_1) {
   if(self.team == "any") {
     foreach(var_3 in level._id_985B) {
-      if(isDefined(var_0) && _func_0C0(var_0)) {
+      if(isDefined(var_0) && _isarray(var_0)) {
         _id_869F(var_3, var_0);
         continue;
       }
@@ -862,12 +862,12 @@ _id_8A21(var_0, var_1) {
     var_5 = self._id_944E;
 
     if(level.teambased) {
-      if(isDefined(var_0) && _func_0C0(var_0))
+      if(isDefined(var_0) && _isarray(var_0))
         _id_869F(self.team, var_0);
       else
         _id_0479::_id_869E(self.team, var_0, (0, 0, 25), 14, 14, undefined, undefined, undefined, undefined, undefined, 0, "tag_weapon", var_1);
     } else if(isDefined(self._id_0117)) {
-      if(isDefined(var_0) && _func_0C0(var_0))
+      if(isDefined(var_0) && _isarray(var_0))
         _id_869F(self._id_0117, var_0);
       else
         _id_0479::_id_869E(self._id_0117, var_0, (0, 0, 25), 14, 14, undefined, undefined, undefined, undefined, undefined, 0, "tag_weapon", var_1);
@@ -925,10 +925,10 @@ preventactionslotspam() {
 }
 
 _id_11C3(var_0) {
-  if(var_0 _meth_83B8()) {
+  if(var_0 isjumping()) {
     return;
   }
-  if(!var_0 _meth_8346() && !_id_A7A0(var_0)) {
+  if(!var_0 isonground() && !_id_A7A0(var_0)) {
     return;
   }
   if(!_id_A276(var_0)) {
@@ -971,13 +971,13 @@ _id_11C3(var_0) {
 }
 
 _id_A7A0(var_0) {
-  if(var_0 _meth_8346())
+  if(var_0 isonground())
     return 0;
 
   var_1 = var_0.origin;
   var_2 = gettime();
 
-  while(isDefined(var_0) && maps\mp\_utility::isreallyalive(var_0) && !var_0 _meth_8346() && var_1 == var_0.origin && var_0 _meth_8341()) {
+  while(isDefined(var_0) && maps\mp\_utility::isreallyalive(var_0) && !var_0 isonground() && var_1 == var_0.origin && var_0 usebuttonpressed()) {
     var_3 = gettime() - var_2;
 
     if(var_3 >= 200)
@@ -990,7 +990,7 @@ _id_A7A0(var_0) {
 }
 
 _id_A276(var_0) {
-  var_1 = var_0 _meth_8317();
+  var_1 = var_0 getcurrentprimaryweapon();
 
   if(maps\mp\_utility::_id_579B() && (issubstr(var_1, "flamethrower") || common_scripts\utility::_id_73F5(var_0) && !maps\mp\_utility::playerhaskillstreak(var_0, "basic_training_serum"))) {
     var_0 iprintlnbold(&"RAIDS_HAVE_AIRDROP_ITEM");
@@ -1038,18 +1038,18 @@ _id_5A5F(var_0) {
 
     if(var_1) {
       var_4 = &"MP_PACKAGE_REROLL";
-      self _meth_855B(var_4);
-      self _meth_84A5(1);
+      self settertiaryhintstring(var_4);
+      self sethintstringvisibleonlytoowner(1);
       thread _id_2750();
     }
 
-    self _meth_80CD("HINT_NOICON");
-    self _meth_80CE(var_2);
-    self _meth_80CF(&"MP_CARE_PACKAGE_PICKUP");
+    self setcursorhint("HINT_NOICON");
+    self sethintstring(var_2);
+    self setsecondaryhintstring(&"MP_CARE_PACKAGE_PICKUP");
     self _meth_84A6(1);
 
     if(level.gametype == "infect") {
-      self _meth_80CF(&"INFECT_NO_CAPTURE_CRATE");
+      self setsecondaryhintstring(&"INFECT_NO_CAPTURE_CRATE");
       self _meth_84A6(1);
     }
   }
@@ -1060,8 +1060,8 @@ _id_5A5F(var_0) {
     if(_func_367()) {
       level._id_2758++;
       common_scripts\utility::_id_0F93(level._id_1FFD, self);
-      _func_032("ui_fge_carepackages_secured", level._id_2758);
-      _func_032("ui_fge_carepackages_remaining", level._id_1FFD.size);
+      _setomnvar("ui_fge_carepackages_secured", level._id_2758);
+      _setomnvar("ui_fge_carepackages_remaining", level._id_1FFD.size);
 
       foreach(var_5 in level.players) {
         if(var_5._id_572A) {
@@ -1123,9 +1123,9 @@ _id_2750() {
 
   while(!level.gameended && isDefined(self)) {
     if(maps\mp\_utility::isreallyalive(self._id_0117)) {
-      var_0 = self._id_0117 _meth_851D();
+      var_0 = self._id_0117 getusableentity();
 
-      if(isDefined(var_0) && var_0 == self && self._id_0117 _meth_8341())
+      if(isDefined(var_0) && var_0 == self && self._id_0117 usebuttonpressed())
         self._id_6DDE++;
       else if(self._id_6DDE > 0) {
         if(self._id_6DDE < 5) {
@@ -1141,8 +1141,8 @@ _id_2750() {
             if(!isDefined(var_3))
               var_3 = &"PLATFORM_GET_KILLSTREAK";
 
-            self _meth_80CE(var_3);
-            self _meth_855B("");
+            self sethintstring(var_3);
+            self settertiaryhintstring("");
             self._id_5022 = _id_051E::_id_4533(self._id_944E);
             _id_8A21(self._id_5022);
             _id_0380::_id_6840("scavenger_pack_pickup", self._id_0117);
@@ -1171,9 +1171,9 @@ _id_97F9() {
 
 _id_A213(var_0, var_1, var_2) {
   if(isPlayer(var_0))
-    var_0 _meth_8077(self);
+    var_0 playerlinkto(self);
   else
-    var_0 _meth_8055(self);
+    var_0 linkto(self);
 
   var_0 common_scripts\utility::_id_0602();
   thread _id_A215(var_0);
@@ -1202,15 +1202,15 @@ _id_A215(var_0) {
   if(isalive(var_0)) {
     var_0 common_scripts\utility::_id_0616();
 
-    if(var_0 _meth_806F())
-      var_0 _meth_8057();
+    if(var_0 islinked())
+      var_0 unlink();
   }
 }
 
 _id_6F82(var_0, var_1, var_2) {
   self endon("disconnect");
-  self _meth_82FF("ui_use_bar_text", 1);
-  self _meth_82FF("ui_use_bar_start_time", int(gettime()));
+  self setclientomnvar("ui_use_bar_text", 1);
+  self setclientomnvar("ui_use_bar_start_time", int(gettime()));
   var_3 = -1;
 
   while(maps\mp\_utility::isreallyalive(self) && isDefined(var_0) && var_0._id_54F5 && !level.gameended) {
@@ -1226,12 +1226,12 @@ _id_6F82(var_0, var_1, var_2) {
         var_7 = gettime();
         var_8 = var_0._id_28D5 / var_1;
         var_9 = var_7 + (1 - var_8) * (var_1 / var_0._id_A22B);
-        self _meth_82FF("ui_use_bar_end_time", int(var_9));
-        self _meth_82FF("ui_mp_carepackage_scorestreak", maps\mp\_utility::_id_453F(var_2._id_944E));
-        self _meth_82FF("ui_mp_carepackage_team", maps\mp\_utility::_id_46D4(var_2.team));
+        self setclientomnvar("ui_use_bar_end_time", int(var_9));
+        self setclientomnvar("ui_mp_carepackage_scorestreak", maps\mp\_utility::_id_453F(var_2._id_944E));
+        self setclientomnvar("ui_mp_carepackage_team", maps\mp\_utility::_id_46D4(var_2.team));
 
         if(isDefined(var_2._id_0117))
-          self _meth_82FF("ui_mp_carepackage_owner", var_2._id_0117 getentitynumber());
+          self setclientomnvar("ui_mp_carepackage_owner", var_2._id_0117 getentitynumber());
 
         var_2 _id_8A21(var_2._id_5022, self);
       }
@@ -1245,11 +1245,11 @@ _id_6F82(var_0, var_1, var_2) {
   if(isDefined(var_2))
     var_2 _id_8A21(var_2._id_5022);
 
-  self _meth_82FF("ui_use_bar_end_time", 0);
+  self setclientomnvar("ui_use_bar_end_time", 0);
 }
 
 _id_A214(var_0, var_1) {
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 _meth_8341() && self._id_28D5 < var_1) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && self._id_28D5 < var_1) {
     self._id_28D5 = self._id_28D5 + self._id_A22B * 50;
 
     if(!self._id_A22B)
@@ -1343,7 +1343,7 @@ _id_2D30(var_0, var_1, var_2) {
 _id_34B2(var_0) {
   level endon("game_ended");
   var_0 endon("death");
-  maps\mp\gametypes\_hostmigration::_id_A6F5(90);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(90);
 
   while(var_0._id_28D5 != 0)
     wait 1;
@@ -1360,9 +1360,9 @@ _id_27DF(var_0, var_1) {
 
   var_2 setModel(var_3);
   var_2.angles = var_1;
-  var_2 _meth_805B();
+  var_2 show();
   waitframe();
-  _func_175(var_0, 100, 80, 0.6);
+  _physicsexplosionsphere(var_0, 100, 80, 0.6);
   wait 2;
   var_2 delete();
 }

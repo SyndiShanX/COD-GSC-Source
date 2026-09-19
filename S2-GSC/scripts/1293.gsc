@@ -63,10 +63,10 @@ _id_908A(var_0, var_1) {
   var_2._id_0CAD = [];
   var_3 = 1024;
 
-  if(!_func_07E(var_2._id_8C4D, var_2._id_8C4D + (0, 0, var_3), 0, undefined)) {
+  if(!_bullettracepassed(var_2._id_8C4D, var_2._id_8C4D + (0, 0, var_3), 0, undefined)) {
     var_4 = var_2._id_8C4D + var_2._id_3E3E * 100;
 
-    if(!_func_07E(var_4, var_4 + (0, 0, var_3), 0, undefined))
+    if(!_bullettracepassed(var_4, var_4 + (0, 0, var_3), 0, undefined))
       var_2._id_6C97 = 0;
   }
 
@@ -97,17 +97,17 @@ _id_908A(var_0, var_1) {
 }
 
 _id_0996(var_0, var_1) {
-  var_2 = _func_081(var_0.origin, var_0.origin + (0, 0, 18));
+  var_2 = _playerphysicstrace(var_0.origin, var_0.origin + (0, 0, 18));
   var_3 = var_2[2] - var_0.origin[2];
   var_4 = (var_1[0], var_1[1], var_1[2] + var_3);
-  var_5 = _func_081(var_2, var_4);
+  var_5 = _playerphysicstrace(var_2, var_4);
 
   if(var_5 != var_4) {
     return;
   }
-  var_6 = _func_236(var_4);
+  var_6 = _droptoground(var_4);
 
-  if(_func_0AE(var_6[2] - var_1[2]) > 128) {
+  if(_abs(var_6[2] - var_1[2]) > 128) {
     return;
   }
   var_0._id_0CAD[var_0._id_0CAD.size] = var_6;
@@ -134,7 +134,7 @@ _id_10E5(var_0, var_1) {
     level._id_908E = [];
 
   level._id_908F[var_0] = [];
-  var_2 = _func_2E8(var_1, var_0);
+  var_2 = _setstartspawnpoints(var_1, var_0);
 
   if(!var_2.size) {
     return;
@@ -167,7 +167,7 @@ _id_10E5(var_0, var_1) {
 _id_10DF(var_0) {
   level._id_8FDC = var_0;
   level._id_908C = [];
-  var_1 = _func_2E7(level._id_8FDC);
+  var_1 = _setgamespawnpoints(level._id_8FDC);
 
   if(!var_1.size) {}
 
@@ -181,12 +181,12 @@ _id_10DF(var_0) {
 
 _id_10DC(var_0) {
   level._id_908C = [];
-  var_1 = _func_27A("mp/spawnClasses.csv");
+  var_1 = _tablegetrowcount("mp/spawnClasses.csv");
 
   for(var_2 = 0; var_2 < var_1; var_2++) {
-    var_3 = _func_1AE("mp/spawnClasses.csv", var_2, 1);
+    var_3 = _tablelookupbyrow("mp/spawnClasses.csv", var_2, 1);
     var_4 = [];
-    var_4 = _func_2E7(var_3);
+    var_4 = _setgamespawnpoints(var_3);
 
     if(!var_4.size) {}
 
@@ -230,7 +230,7 @@ _id_10E4() {
   else if(maps\mp\_utility::_id_4571() == "mp_sandbox_01")
     level._id_5FEB = (470, 30.5, 920);
 
-  _func_136(level._id_5FEB);
+  _setmapcenter(level._id_5FEB);
   _id_050E::_id_2B5D();
 }
 
@@ -249,7 +249,7 @@ _id_28C0(var_0, var_1) {
     var_0 = "free";
 
   var_2 = [];
-  var_3 = _func_2EA(var_0);
+  var_3 = _getgamespawnpointactivelabel(var_0);
 
   if(level.gametype == "zombies" && isDefined(level.zombies_active_spawn_event))
     var_3 = level.zombies_active_spawn_event;
@@ -369,8 +369,8 @@ _id_908D(var_0, var_1) {
     var_8 = undefined;
 
     if(_id_5770()) {
-      var_7 = _func_203(var_6.origin, var_2, 999999);
-      var_8 = _func_203(var_6.origin, var_3, 999999);
+      var_7 = _getpathdist(var_6.origin, var_2, 999999);
+      var_8 = _getpathdist(var_6.origin, var_3, 999999);
     }
 
     if(!isDefined(var_7) || var_7 == -1)
@@ -380,7 +380,7 @@ _id_908D(var_0, var_1) {
       var_8 = distancesquared(var_3, var_6.origin);
 
     if(!isDefined(var_6._id_9849)) {
-      _func_18C("Side-Based Spawn Point not assigned to a side at ( " + var_6.origin[0] + ", " + var_6.origin[1] + ", " + var_6.origin[2] + " )");
+      _iprintlnbold("Side-Based Spawn Point not assigned to a side at ( " + var_6.origin[0] + ", " + var_6.origin[1] + ", " + var_6.origin[2] + " )");
       continue;
     }
 
@@ -412,7 +412,7 @@ _id_908D(var_0, var_1) {
 
 _id_5770() {
   if(!isDefined(level._id_6ED7)) {
-    var_0 = _func_0B7();
+    var_0 = _getallnodes();
     level._id_6ED7 = isDefined(var_0) && var_0.size > 150;
   }
 
@@ -598,25 +598,25 @@ _id_3B89(var_0, var_1) {
 _id_86C5() {
   level._id_907A = (0, 0, 0);
   level._id_9077 = (0, 0, 0);
-  _id_3916(_func_2E8("mp_tdm_spawn_allies_start", "allies"));
-  _id_3916(_func_2E8("mp_tdm_spawn_axis_start", "axis"));
+  _id_3916(_setstartspawnpoints("mp_tdm_spawn_allies_start", "allies"));
+  _id_3916(_setstartspawnpoints("mp_tdm_spawn_axis_start", "axis"));
   level._id_5FEB = _id_3B89(level._id_907A, level._id_9077);
   _func_300();
-  _func_136(level._id_5FEB);
+  _setmapcenter(level._id_5FEB);
 }
 
 _id_463E(var_0) {
   var_1 = [];
-  var_2 = _func_0BA(var_0);
+  var_2 = _getclosestnodeinsight(var_0);
 
   if(isDefined(var_2))
     var_1[0] = var_2;
 
   if(!isDefined(var_2)) {
-    var_1 = _func_0B8(var_0, _id_445F(), 0, 256, "path");
+    var_1 = _getnodesinradius(var_0, _id_445F(), 0, 256, "path");
 
     if(var_1.size == 0)
-      var_1 = _func_0B8(var_0, 250, 0, 256, "path");
+      var_1 = _getnodesinradius(var_0, 250, 0, 256, "path");
   }
 
   return var_1;

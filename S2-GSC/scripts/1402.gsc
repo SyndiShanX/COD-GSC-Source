@@ -52,7 +52,7 @@ _id_A249(var_0) {
   self endon("weapon_consumable_used");
   childthread _id_A9A6();
   var_2 = 0;
-  var_3 = common_scripts\utility::_id_A715("death", "weapon_consumable_timeout", "weapon_consumable_force_take");
+  var_3 = common_scripts\utility::waittill_any_return("death", "weapon_consumable_timeout", "weapon_consumable_force_take");
 
   if(var_3 == "weapon_consumable_force_take")
     var_2 = 1;
@@ -66,7 +66,7 @@ _id_259E(var_0, var_1) {
   if(!isDefined(var_1))
     var_1 = _id_A9A8();
 
-  self _meth_82FF("ui_zm_" + var_2, gettime() + int(var_1 * 1000));
+  self setclientomnvar("ui_zm_" + var_2, gettime() + int(var_1 * 1000));
   thread maps\mp\gametypes\_hud_message::_id_9102("zm_consumable_" + var_2);
   thread consumable_uisplash_kill(var_0, var_1);
 }
@@ -81,7 +81,7 @@ consumable_uisplash_kill(var_0, var_1) {
   else
     common_scripts\utility::_id_A70A("weapon_consumable_taken", "weapon_consumable_used");
 
-  self _meth_82FF("ui_zm_" + var_2, 0);
+  self setclientomnvar("ui_zm_" + var_2, 0);
 }
 
 consumable_getappendstring(var_0) {
@@ -121,7 +121,7 @@ _id_259C(var_0) {
   self playlocalsound("zmb_pickup_general");
 
   if(_id_A260()) {
-    if(isDefined(self._id_A9C1) && self _meth_8319(self._id_A9C1)) {
+    if(isDefined(self._id_A9C1) && self hasweapon(self._id_A9C1)) {
       _id_0586::_id_0790(self._id_A9C1);
 
       if(self._id_A9C1 == "flamethrower_zm")
@@ -130,7 +130,7 @@ _id_259C(var_0) {
 
     self notify("weapon_consumable_used");
   } else
-    self._id_5B98 = self _meth_8317();
+    self._id_5B98 = self getcurrentprimaryweapon();
 
   self._id_A9C1 = _id_259B(var_0);
   self._id_4BA6 = 1;
@@ -157,11 +157,11 @@ _id_259D(var_0) {
   var_1 = 0;
   var_2 = "";
 
-  if(isDefined(self._id_5378) && self._id_5378 || var_0)
+  if(isDefined(self.inlaststand) && self.inlaststand || var_0)
     var_1 = 1;
 
   if(!var_1) {
-    if(isDefined(self._id_5B98) && self _meth_8319(self._id_5B98))
+    if(isDefined(self._id_5B98) && self hasweapon(self._id_5B98))
       var_2 = self._id_5B98;
     else {
       var_3 = self getweaponlistprimaries();
@@ -178,7 +178,7 @@ _id_259D(var_0) {
     self._id_5B98 = undefined;
   }
 
-  if(self _meth_8319(self._id_A9C1))
+  if(self hasweapon(self._id_A9C1))
     _id_0586::_id_0790(self._id_A9C1);
 
   if(self._id_A9C1 == "flamethrower_zm")

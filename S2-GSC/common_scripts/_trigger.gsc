@@ -18,13 +18,13 @@ _id_4323() {
 _id_9D6F(var_0) {}
 
 _id_9DAC(var_0) {
-  var_1 = common_scripts\utility::_id_2798(var_0._id_81A1);
+  var_1 = common_scripts\utility::_id_2798(var_0.setgoalnode);
   var_0 _id_097B(var_1);
   var_0 common_scripts\utility::_id_A0D3();
 }
 
 _id_9DAB(var_0) {
-  var_1 = common_scripts\utility::_id_2798(var_0._id_819E);
+  var_1 = common_scripts\utility::_id_2798(var_0.pushplayer);
   var_0 _id_097B(var_1);
   var_0 common_scripts\utility::_id_A0D3();
 }
@@ -42,13 +42,13 @@ _id_097B(var_0) {
 
 _id_9D85() {
   thread _id_9D86();
-  level endon("trigger_group_" + self._id_82BE);
+  level endon("trigger_group_" + self.addroll);
   self waittill("trigger");
-  level notify("trigger_group_" + self._id_82BE, self);
+  level notify("trigger_group_" + self.addroll, self);
 }
 
 _id_9D86() {
-  level waittill("trigger_group_" + self._id_82BE, var_0);
+  level waittill("trigger_group_" + self.addroll, var_0);
 
   if(isDefined(self) && self != var_0)
     self delete();
@@ -71,12 +71,12 @@ _id_4397(var_0) {
   if(isDefined(var_3))
     var_1 = common_scripts\utility::_id_0F73(var_1, var_3);
 
-  var_4 = _func_0B6(self.target, "targetname");
+  var_4 = _getnodearray(self.target, "targetname");
 
   if(isDefined(var_4))
     var_1 = common_scripts\utility::_id_0F73(var_1, var_4);
 
-  var_5 = _func_1DC(self.target, "targetname");
+  var_5 = _getvehiclenodearray(self.target, "targetname");
 
   if(isDefined(var_5))
     var_1 = common_scripts\utility::_id_0F73(var_1, var_5);
@@ -146,8 +146,8 @@ _id_9D77(var_0) {
 _id_9D8E(var_0, var_1) {
   var_2 = 0.78;
 
-  if(isDefined(var_0._id_8172))
-    var_2 = var_0._id_8172;
+  if(isDefined(var_0.getclosestenemysqdist))
+    var_2 = var_0.getclosestenemysqdist;
 
   var_3 = var_0 _id_4397();
   var_4 = var_3[0];
@@ -161,8 +161,8 @@ _id_9D8E(var_0, var_1) {
 
   var_7 = 0;
 
-  if(isDefined(var_0._id_8260))
-    var_7 = !issubstr("no_sight", var_0._id_8260);
+  if(isDefined(var_0.setlookatent))
+    var_7 = !issubstr("no_sight", var_0.setlookatent);
 
   for(;;) {
     if(var_1)
@@ -177,7 +177,7 @@ _id_9D8E(var_0, var_1) {
     }
 
     while(var_8 istouching(var_0)) {
-      if(var_7 && !_func_07F(var_8 getEye(), var_5, 0, undefined)) {
+      if(var_7 && !_sighttracepassed(var_8 getEye(), var_5, 0, undefined)) {
         if(var_1)
           common_scripts\utility::_id_3C7B(var_6, var_0);
 

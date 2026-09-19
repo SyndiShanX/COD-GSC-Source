@@ -9,8 +9,8 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_1A1A;
-  level._id_19D5["should_start_cautious_approach"] = ::_id_8B7C;
+  level.bot_funcs["gametype_think"] = ::_id_1A1A;
+  level.bot_funcs["should_start_cautious_approach"] = ::_id_8B7C;
 }
 
 _id_8796() {
@@ -19,7 +19,7 @@ _id_8796() {
 
   for(var_1 = 0; var_1 < level._id_0BCF.size; var_1++) {
     var_2 = level._id_0BCF[var_1];
-    var_2._id_81E8 = "zone_" + var_1;
+    var_2.shootblank = "zone_" + var_1;
     var_2 thread maps\mp\bots\_bots_gametype_common::_id_6361();
     var_3 = 0;
 
@@ -75,8 +75,8 @@ _id_1A1A() {
   while(!isDefined(level._id_19E8))
     waitframe();
 
-  self _meth_8353("separation", 0);
-  self _meth_8353("grenade_objectives", 1);
+  self botsetflag("separation", 0);
+  self botsetflag("grenade_objectives", 1);
   var_0 = undefined;
   var_1 = level._id_AC7C;
 
@@ -118,10 +118,10 @@ _id_1A1A() {
             var_0 = _id_1ADF();
         } else {
           var_6 = maps\mp\bots\_bots_util::_id_19F9(self.team);
-          var_7 = _func_0D5(var_6 / 2);
+          var_7 = _ceil(var_6 / 2);
 
           if(var_2 < 5000)
-            var_7 = _func_0D5(var_6 / 3);
+            var_7 = _ceil(var_6 / 3);
 
           var_8 = _id_19FB(level._id_AC7C);
 
@@ -145,7 +145,7 @@ _id_1ADF() {
   if(level._id_7A62)
     return 0;
   else {
-    var_0 = self _meth_837D("strategyLevel");
+    var_0 = self botgetdifficultysetting("strategyLevel");
     var_1 = 0;
 
     if(var_0 == 1)
@@ -155,7 +155,7 @@ _id_1ADF() {
     else if(var_0 == 3)
       var_1 = 0.8;
 
-    return _func_0A3(1.0) < var_1;
+    return _randomfloat(1.0) < var_1;
   }
 }
 
@@ -167,9 +167,9 @@ _id_1A03(var_0) {
   var_1 = [];
 
   foreach(var_3 in level._id_6E97) {
-    if(var_3 != self && maps\mp\_utility::_id_5800(var_3) && _func_26C(self, var_3)) {
+    if(var_3 != self && maps\mp\_utility::_id_5800(var_3) && _isalliedsentient(self, var_3)) {
       if(var_3 istouching(level._id_AC7C._id_9D5E)) {
-        if(!_func_0C1(var_3) || var_3 _id_1A2B(var_0))
+        if(!_isai(var_3) || var_3 _id_1A2B(var_0))
           var_1[var_1.size] = var_3;
       }
     }

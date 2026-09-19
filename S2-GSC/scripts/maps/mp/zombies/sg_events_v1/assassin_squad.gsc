@@ -76,7 +76,7 @@ spawn_sh_assassin(var_0, var_1, var_2) {
   var_3.no_kill_on_skip = 1;
   var_3.optionaldisableexits = 1;
   var_3.sgboss = 1;
-  var_3 _id_0547::_id_84CB();
+  var_3 _id_0547::disableoffhandsecondaryweapons();
   return var_3;
 }
 

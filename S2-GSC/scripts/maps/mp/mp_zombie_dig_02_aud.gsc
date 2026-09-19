@@ -96,7 +96,7 @@ aud_blood_plate_absorb(var_0) {
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
   _id_0380::_id_288B("zmb_dig_soul_suck_blood", undefined, var_2);
-  var_2 _meth_82B1(var_0.origin, 1.9);
+  var_2 moveto(var_0.origin, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -260,8 +260,8 @@ sword_assemble_elec_oneshots(var_0) {
   wait 3;
 
   for(;;) {
-    var_1 = _func_0A4(5, 8);
-    var_2 = var_0 + (_func_0A4(-200, 200), _func_0A4(-200, 200), 0);
+    var_1 = _randomintrange(5, 8);
+    var_2 = var_0 + (_randomintrange(-200, 200), _randomintrange(-200, 200), 0);
     _id_0380::_id_2889("zmb_dig_forge_sword_elec_oneshot", undefined, var_2);
     wait(var_1);
   }
@@ -272,8 +272,8 @@ sword_assemble_whoosh_oneshots(var_0) {
   wait 3;
 
   for(;;) {
-    var_1 = _func_0A4(4, 9);
-    var_2 = var_0 + (_func_0A4(-200, 200), _func_0A4(-200, 200), 0);
+    var_1 = _randomintrange(4, 9);
+    var_2 = var_0 + (_randomintrange(-200, 200), _randomintrange(-200, 200), 0);
     _id_0380::_id_2889("zmb_dig_forge_sword_whoosh_oneshot", undefined, var_2);
     wait(var_1);
   }
@@ -317,7 +317,7 @@ aud_basalt_move() {
 
 aud_dig_earthquake(var_0, var_1, var_2) {
   foreach(var_4 in level.players)
-  var_4 _meth_8626("dig_earthquake_mix");
+  var_4 clientaddsoundsubmix("dig_earthquake_mix");
 
   var_6 = 1;
 
@@ -377,7 +377,7 @@ aud_dig_earthquake_stop(var_0) {
   _id_0366::_id_8E30(1.0, var_0);
 
   foreach(var_2 in level.players)
-  var_2 _meth_8627("dig_earthquake_mix");
+  var_2 clientclearsoundsubmix("dig_earthquake_mix");
 
   if(isDefined(level._id_11CB.dig_earthquake_phase1_handle))
     _id_0380::_id_6850(level._id_11CB.dig_earthquake_phase1_handle, var_0);
@@ -434,7 +434,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 _meth_82B1(var_1, 1.9);
+  var_2 moveto(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }

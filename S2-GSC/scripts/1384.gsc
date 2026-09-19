@@ -41,9 +41,9 @@ _id_5A9A() {
   self._id_0C29 = 0;
   self.ispassiveexempt = 1;
   self._id_2FA4 = 1;
-  self _meth_8539(0);
-  self _meth_8540(1);
-  self _meth_853E(1);
+  self scragentsetnopenetrate(0);
+  self scragentsetpathteamspread(1);
+  self scragentsetobstacleavoid(1);
   self _meth_85E0(1);
 
   for(;;) {
@@ -79,11 +79,11 @@ _id_5A97(var_0, var_1) {
   self._id_00CF = 1;
   self._id_0C29 = 0;
   self.ispassiveexempt = 1;
-  var_2 maps\mp\agents\_agent_utility::_id_83FE(level._id_746E);
+  var_2 maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);
   var_2._id_6701 = 1;
 
   if(common_scripts\utility::_id_562E(var_1))
-    var_2 _id_0547::_id_84CB();
+    var_2 _id_0547::disableoffhandsecondaryweapons();
   else
     var_2 thread _id_0547::_id_7D1A("klauspossum");
 
@@ -93,21 +93,21 @@ _id_5A97(var_0, var_1) {
 _id_5A93() {
   _id_0366::_id_8E48(0);
   var_0 = "s2_klaus_revive";
-  maps\mp\agents\humanoid\_humanoid_util::_id_8318(self.origin, self.angles, var_0, 0, 0, undefined, 1, 1, "klaus_getup");
-  self _meth_83A2(1);
+  maps\mp\agents\humanoid\_humanoid_util::getcurrentoffhand(self.origin, self.angles, var_0, 0, 0, undefined, 1, 1, "klaus_getup");
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ScriptedAnimation");
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
-  self _meth_839D("noclip");
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
+  self scragentsetphysicsmode("noclip");
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_0, 1, 1, "scripted_anim", "end", undefined);
   _id_5A94();
 }
 
 _id_5A94() {
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "ScriptedAnimation");
-  self _meth_83A2(0);
-  self _meth_839D("gravity");
-  _id_0547::_id_84CB();
+  self scragentsetscripted(0);
+  self scragentsetphysicsmode("gravity");
+  _id_0547::disableoffhandsecondaryweapons();
   self notify("klaus_getup_finished");
 }
 
@@ -134,8 +134,8 @@ _id_5A9B(var_0) {
 
 _id_5A98() {
   self._id_5A8B = 1;
-  self._id_78C5 = _func_2A8(common_scripts\utility::_id_44F5("temp_klaus_radius"), self, "J_MainRoot");
-  _func_14C(self._id_78C5);
+  self._id_78C5 = _spawnlinkedfx(common_scripts\utility::_id_44F5("temp_klaus_radius"), self, "J_MainRoot");
+  _triggerfx(self._id_78C5);
   self._id_78C5 thread _id_0547::_id_2D19(self);
   thread _id_5A8C();
 }
@@ -159,7 +159,7 @@ _id_5A8C() {
   for(;;) {
     if(common_scripts\utility::_id_562E(self._id_5A8B)) {
       foreach(var_1 in level.players) {
-        var_2 = _func_0E1(var_1.origin, self.origin) < 256 && _func_0AE(var_1.origin[2] - self.origin[2]) < 64.0 && !_id_0547::_id_577E(var_1);
+        var_2 = _distance2d(var_1.origin, self.origin) < 256 && _abs(var_1.origin[2] - self.origin[2]) < 64.0 && !_id_0547::_id_577E(var_1);
 
         if(var_2) {
           var_1 _id_0547::_id_7454(3);
@@ -169,7 +169,7 @@ _id_5A8C() {
             if(distance(var_5.origin, var_1.origin) > 128) {
               continue;
             }
-            var_5 _meth_8059(500, var_1.origin, var_1);
+            var_5 dodamage(500, var_1.origin, var_1);
           }
         }
 
@@ -220,17 +220,17 @@ klaus_knockback(var_0, var_1) {
   var_3 = (var_3[0], var_3[1], 150);
 
   if(var_1 > 0)
-    self _meth_82F7(var_3);
+    self setvelocity(var_3);
 }
 
 _id_5A96() {
   thread _id_5A99();
   var_0 = "s2_klaus_death";
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ScriptedAnimation");
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
-  self _meth_839D("noclip");
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
+  self scragentsetphysicsmode("noclip");
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_0, 0, 1, "scripted_anim", "disapear", undefined);
   self._id_1DEB = 1;
   self suicide();

@@ -8,10 +8,10 @@ init() {
 }
 
 _id_1C8B() {
-  if(!self _meth_8436()) {
+  if(!self ismlgspectator()) {
     return;
   }
-  if(!_func_0C1(self)) {
+  if(!_isai(self)) {
     level.broadcasters[self getentitynumber()] = self;
     thread _id_1CAD();
   }
@@ -26,11 +26,11 @@ monitorpuckcolor(var_0) {
     self waittill("luinotifyserver", var_4, var_5);
 
     if(var_4 == "broadcaster_set_color_" + var_0) {
-      var_6 = int(_func_0D4(var_5 / 100));
+      var_6 = int(_floor(var_5 / 100));
 
       if(var_6 == self getentitynumber()) {
         var_7 = var_5 % 100;
-        var_8 = _func_1AE(var_1, var_7 - 1, var_2);
+        var_8 = _tablelookupbyrow(var_1, var_7 - 1, var_2);
         level._effect[var_3 + "_" + var_0] = loadfx("vfx/ui/" + var_8);
         break;
       }
@@ -43,7 +43,7 @@ monitorzoom() {
     self waittill("luinotifyserver", var_0, var_1);
 
     if(var_0 == "broadcaster_set_initial_zoom") {
-      var_2 = int(_func_0D4(var_1 / 100));
+      var_2 = int(_floor(var_1 / 100));
 
       if(var_2 == self getentitynumber()) {
         var_3 = var_1 % 100;
@@ -61,7 +61,7 @@ initializeclientvalues() {
   thread monitorpuckcolor("allies");
   thread monitorpuckcolor("axis");
   thread monitorzoom();
-  _func_226(&"broadcaster_request_client_values", 1, self getentitynumber());
+  _luinotifyevent(&"broadcaster_request_client_values", 1, self getentitynumber());
   _id_1CA2();
 }
 
@@ -76,10 +76,10 @@ _id_1CAD() {
   self._id_0179 = "spectator";
   maps\mp\_utility::_id_A165("spectator");
   _id_050F::_id_872F();
-  self _meth_826F("allies", 1);
-  self _meth_826F("axis", 1);
-  self _meth_826F("freelook", 1);
-  self _meth_826F("none", 1);
+  self allowspectateteam("allies", 1);
+  self allowspectateteam("axis", 1);
+  self allowspectateteam("freelook", 1);
+  self allowspectateteam("none", 1);
   thread _id_1C9D();
   thread initializeclientvalues();
   thread _id_1C9B();
@@ -97,7 +97,7 @@ _id_44DC() {
 
   for(;;) {
     foreach(var_1 in level.players) {
-      if(!var_1 _meth_8436() && var_1.hasspawned) {
+      if(!var_1 ismlgspectator() && var_1.hasspawned) {
         wait 0.15;
         thread _id_1CA7(var_1 getentitynumber());
         return;
@@ -145,16 +145,16 @@ _id_1CA8(var_0) {
     } else
       var_1._id_981E = [];
 
-    if(var_1 _meth_8445("tag_origin") != -1) {
-      _func_14D(common_scripts\utility::_id_44F5("broadcaster_followed_player"), var_1, "tag_origin", self);
+    if(var_1 gettagindex("tag_origin") != -1) {
+      _playfxontagforclients(common_scripts\utility::_id_44F5("broadcaster_followed_player"), var_1, "tag_origin", self);
       var_1._id_981E[self getentitynumber()] = 1;
     }
 
     thread _id_1C9E(var_1);
     self waittill("broadcaster_stop_target_player_puck");
 
-    if(var_1 _meth_8445("tag_origin") != -1) {
-      _func_295(common_scripts\utility::_id_44F5("broadcaster_followed_player"), var_1, "tag_origin", self);
+    if(var_1 gettagindex("tag_origin") != -1) {
+      _killfxontagforclient(common_scripts\utility::_id_44F5("broadcaster_followed_player"), var_1, "tag_origin", self);
       var_1._id_981E[self getentitynumber()] = 0;
     }
   }
@@ -171,7 +171,7 @@ _id_1C9E(var_0) {
 _id_1CAA() {
   if(self._id_1E99._id_77AC) {
     foreach(var_1 in level.players) {
-      if(!var_1 _meth_8436())
+      if(!var_1 ismlgspectator())
         var_1 thread _id_1CA9();
     }
   }
@@ -197,9 +197,9 @@ _id_1CA9() {
       var_5 = var_3 + "_axis";
 
       if(var_0.team == "allies" && common_scripts\utility::_id_3F6F(var_4))
-        _func_14D(common_scripts\utility::_id_44F5(var_4), var_0, "tag_origin", var_2);
+        _playfxontagforclients(common_scripts\utility::_id_44F5(var_4), var_0, "tag_origin", var_2);
       else if(var_0.team == "axis" && common_scripts\utility::_id_3F6F(var_5))
-        _func_14D(common_scripts\utility::_id_44F5(var_5), var_0, "tag_origin", var_2);
+        _playfxontagforclients(common_scripts\utility::_id_44F5(var_5), var_0, "tag_origin", var_2);
 
       thread _id_1C9F(var_2);
     }
@@ -234,9 +234,9 @@ _id_1CAB(var_0) {
   var_3 = var_1 + "_axis";
 
   if(self.team == "allies" && common_scripts\utility::_id_3F6F(var_2))
-    _func_295(common_scripts\utility::_id_44F5(var_2), self, "tag_origin", var_0);
+    _killfxontagforclient(common_scripts\utility::_id_44F5(var_2), self, "tag_origin", var_0);
   else if(self.team == "axis" && common_scripts\utility::_id_3F6F(var_3))
-    _func_295(common_scripts\utility::_id_44F5(var_3), self, "tag_origin", var_0);
+    _killfxontagforclient(common_scripts\utility::_id_44F5(var_3), self, "tag_origin", var_0);
 }
 
 broadcasterkillteampuck() {
@@ -247,9 +247,9 @@ broadcasterkillteampuck() {
       var_4 = var_2 + "_axis";
 
       if(self.team == "allies" && common_scripts\utility::_id_3F6F(var_3))
-        _func_295(common_scripts\utility::_id_44F5(var_3), self, "tag_origin", var_1);
+        _killfxontagforclient(common_scripts\utility::_id_44F5(var_3), self, "tag_origin", var_1);
       else if(self.team == "axis" && common_scripts\utility::_id_3F6F(var_4))
-        _func_295(common_scripts\utility::_id_44F5(var_4), self, "tag_origin", var_1);
+        _killfxontagforclient(common_scripts\utility::_id_44F5(var_4), self, "tag_origin", var_1);
     }
   }
 }
@@ -259,7 +259,7 @@ _id_1C91() {
   self endon("disconnect");
 
   for(;;) {
-    var_0 = self _meth_82F9();
+    var_0 = self getnormalizedmovement();
     self._id_1E99._id_5388 = var_0;
     waitframe();
   }
@@ -271,8 +271,8 @@ _id_1C9D() {
 
   for(;;) {
     self waittill("luinotifyserver", var_1, var_2);
-    var_3 = int(_func_0D4(var_2 / 10000));
-    var_4 = int(_func_0D4(var_2 % 10000 / 100));
+    var_3 = int(_floor(var_2 / 10000));
+    var_4 = int(_floor(var_2 % 10000 / 100));
 
     if(var_1 == "broadcaster_view_notify" || var_1 == "broadcaster_camera_input" || var_1 == "broadcaster_client_change" || var_1 == "broadcaster_toggle_ball_cam" || var_1 == "broadcaster_set_color_allies" || var_1 == "broadcaster_set_color_axis") {
       var_5 = level.broadcasters[var_4];
@@ -343,7 +343,7 @@ _id_1C9C() {
 
   for(;;) {
     level waittill("broadcasterLoadoutChanged", var_0);
-    var_1 = _func_033("ui_broadcaster_client_num");
+    var_1 = _getomnvar("ui_broadcaster_client_num");
 
     if(isDefined(var_0) && var_0 == var_1) {
       var_2 = self _meth_82F1(var_0);
@@ -376,7 +376,7 @@ _id_1CA7(var_0) {
   }
 
   self._id_1E99._id_9815 = var_1;
-  self _meth_82FF("ui_broadcaster_client_num", var_0);
+  self setclientomnvar("ui_broadcaster_client_num", var_0);
   var_2 = self _meth_82F1(var_0);
   _id_A0E8(var_2);
   self notify("broadcaster_stop_target_player_puck");
@@ -397,11 +397,11 @@ _id_A0E9(var_0, var_1) {
     var_5 = "mp/statstable.csv";
     var_6 = 18;
     var_7 = maps\mp\_utility::unsignedint_to_hexstring_fixed(var_0);
-    var_3 = _func_1B1(var_5, var_6, var_7);
+    var_3 = _tablelookuprownum(var_5, var_6, var_7);
   } else
     var_3 = 0;
 
-  self _meth_82FF(var_4 + var_1, var_3);
+  self setclientomnvar(var_4 + var_1, var_3);
 }
 
 _id_A0E8(var_0) {
@@ -410,13 +410,13 @@ _id_A0E8(var_0) {
 
   if(isDefined(var_2)) {
     _id_A0E9(var_2._id_7709.guid, "primary_weapon");
-    _id_A0E9(var_2._id_835D.guid, "secondary_weapon");
+    _id_A0E9(var_2.botgetscriptgoalradius.guid, "secondary_weapon");
 
     for(var_3 = 0; var_3 < 4; var_3++) {
       _id_A0E9(var_2._id_76F3[var_3], "primary_attachment_" + var_3);
 
       if(var_3 < 2)
-        _id_A0E9(var_2._id_8353[var_3], "secondary_attachment_" + var_3);
+        _id_A0E9(var_2.botsetflag[var_3], "secondary_attachment_" + var_3);
     }
 
     var_4 = maps\mp\_utility::_id_4604();
@@ -426,12 +426,12 @@ _id_A0E8(var_0) {
 
     if(isDefined(var_6) && var_6 != var_5) {
       var_8 = maps\mp\_utility::_id_452B(var_6);
-      var_7 = _func_1B1(var_4, 1, var_8);
+      var_7 = _tablelookuprownum(var_4, 1, var_8);
     } else
       var_7 = var_5;
 
-    self _meth_82FF("ui_broadcaster_loadout_training", var_7);
-    self _meth_82FF("ui_broadcaster_loadout_division", var_2._id_0079);
+    self setclientomnvar("ui_broadcaster_loadout_training", var_7);
+    self setclientomnvar("ui_broadcaster_loadout_division", var_2._id_0079);
 
     if(var_2._id_37FE.guid != var_5)
       _id_A0E9(var_2._id_37FE.guid, "equipment_0");
@@ -455,7 +455,7 @@ _id_1C93() {
   var_3 = 1000;
 
   foreach(var_5 in level.players) {
-    if(var_5 != var_0._id_9815 && !var_5 _meth_8436()) {
+    if(var_5 != var_0._id_9815 && !var_5 ismlgspectator()) {
       var_6 = distance(var_5.origin, var_2["position"]);
 
       if(var_6 < var_3 && isalive(var_5)) {
@@ -473,7 +473,7 @@ _id_1C93() {
 
 _id_1CA4() {
   var_0 = self;
-  var_1 = _func_18E("mp_global_intermission", "classname");
+  var_1 = _getent("mp_global_intermission", "classname");
   var_2 = var_1.origin;
   var_3 = var_1.angles;
   var_4 = spawn("script_model", var_2);
@@ -481,7 +481,7 @@ _id_1CA4() {
   var_4 setModel("tag_player");
   var_4._id_92F0 = var_2;
   var_4._id_92B8 = var_3;
-  var_4._id_8066 = (0, 0, 0);
+  var_4.setmovingplatformplayerturnrate = (0, 0, 0);
   var_4._id_9815 = undefined;
   var_4._id_A4A8 = "third_person";
   var_4._id_ACCB = 0;
@@ -489,13 +489,13 @@ _id_1CA4() {
   var_4._id_77AC = 1;
   var_4.broadcasterballcamenabled = 1;
   var_0 setOrigin(var_4.origin);
-  var_0 _meth_833E(var_4.angles);
-  var_0 _meth_8077(var_4, "tag_player");
-  var_0 _meth_81E2(var_4, "tag_player");
-  var_0 _meth_812B(0);
+  var_0 setplayerangles(var_4.angles);
+  var_0 playerlinkto(var_4, "tag_player");
+  var_0 cameralinkto(var_4, "tag_player");
+  var_0 allowfire(0);
   var_0._id_1E99 = var_4;
   var_4.player = var_0;
-  var_0 _meth_82D8("airplane", 5);
+  var_0 visionsetnakedforplayer("airplane", 5);
 }
 
 _id_1CA3() {
@@ -514,24 +514,24 @@ _id_1C9A(var_0) {
   self.forcespectatorclient = self getentitynumber();
   _id_050F::_id_872F();
   self._id_1E99._id_A4A8 = "third_person";
-  _func_327(&"broadcaster_view_skycam_applied", 1, self getentitynumber());
+  _luinotifyeventextra(&"broadcaster_view_skycam_applied", 1, self getentitynumber());
   level notify("broadcaster_ball_end", self._id_9815);
   self notify("changeGoalFx");
   waitframe();
-  self _meth_81E2(self._id_1E99, "tag_player");
+  self cameralinkto(self._id_1E99, "tag_player");
   thread _id_1CAA();
   thread _id_1CA8();
 
   if(isDefined(level._id_AC7C) && isDefined(level._id_AC7C.broadcastermesh))
-    level._id_AC7C.broadcastermesh _meth_8005(self);
+    level._id_AC7C.broadcastermesh showtoplayer(self);
 
   self._id_1E99 _meth_8472();
   self._id_1E99 thread _id_1C8C(var_0);
-  self _meth_82D8("airplane", var_0);
+  self visionsetnakedforplayer("airplane", var_0);
   wait(var_0);
 
-  if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level._id_8330))
-    level._id_8330 _meth_8427(self, maps\mp\_utility::_id_46D4(game["attackers"]), 0);
+  if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level.freezecontrols))
+    level.freezecontrols hudoutlineenableforclient(self, maps\mp\_utility::_id_46D4(game["attackers"]), 0);
 }
 
 _id_1C99(var_0) {
@@ -543,21 +543,21 @@ _id_1C99(var_0) {
   self notify("broadcaster_stop_player_pucks");
   self notify("broadcaster_stop_target_player_puck");
   self notify("broadcaster_stop_zoom");
-  _func_327(&"broadcaster_view_fps_applied", 1, self getentitynumber());
+  _luinotifyeventextra(&"broadcaster_view_fps_applied", 1, self getentitynumber());
   wait(var_0);
 
   if(isDefined(level._id_AC7C) && isDefined(level._id_AC7C.broadcastermesh))
     level._id_AC7C.broadcastermesh _meth_8006(self);
 
-  self _meth_826F("allies", 1);
-  self _meth_826F("axis", 1);
+  self allowspectateteam("allies", 1);
+  self allowspectateteam("axis", 1);
   self.forcespectatorclient = self._id_1E99._id_9815 getentitynumber();
   setDvar("scr_game_lockspectatorpov", 1);
-  self _meth_8270(self _meth_8299(), "first_person");
+  self forcespectatepov(self getxuid(), "first_person");
   self._id_1E99._id_A4A8 = "first_person";
 
-  if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level._id_8330))
-    level._id_8330 _meth_8428(self);
+  if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level.freezecontrols))
+    level.freezecontrols hudoutlinedisableforclient(self);
 }
 
 _id_1C8D(var_0, var_1) {
@@ -580,10 +580,10 @@ _id_1C8D(var_0, var_1) {
 
     if(!var_8) {
       var_11 = 1.25;
-      var_12 = _func_0AF(var_10 * var_11, 1.0);
-      var_12 = 0.5 * (1.0 - _func_0A7(var_12 * 180.0));
+      var_12 = _min(var_10 * var_11, 1.0);
+      var_12 = 0.5 * (1.0 - _cos(var_12 * 180.0));
       var_13 = var_9 - self.origin;
-      var_14 = _func_0EA(var_13, _func_0E9(var_13, (0, 0, 1)), (0, 0, 1));
+      var_14 = _axistoangles(var_13, _vectorcross(var_13, (0, 0, 1)), (0, 0, 1));
       self.angles = _func_10B(var_7, var_14, var_12);
 
       if(var_12 >= 1.0) {
@@ -592,7 +592,7 @@ _id_1C8D(var_0, var_1) {
       }
     }
 
-    var_10 = 0.5 * (1.0 - _func_0A7(var_10 * 180.0));
+    var_10 = 0.5 * (1.0 - _cos(var_10 * 180.0));
     var_5 = anglesToForward(var_4.angles);
     self.origin = var_9 + var_5 * -100 + var_6 * (1.0 - var_10);
     waitframe();
@@ -643,10 +643,10 @@ _id_1C8F(var_0, var_1, var_2, var_3) {
     }
 
     var_10 = 3;
-    var_11 = _func_0AF(var_9 * var_10, 1.0);
-    var_11 = 0.5 * (1.0 - _func_0A7(var_11 * 180.0));
+    var_11 = _min(var_9 * var_10, 1.0);
+    var_11 = 0.5 * (1.0 - _cos(var_11 * 180.0));
     self.angles = _func_10B(var_7, var_3, var_11);
-    var_9 = 0.5 * (1.0 - _func_0A7(var_9 * 180.0));
+    var_9 = 0.5 * (1.0 - _cos(var_9 * 180.0));
     var_12 = (var_8[0], var_8[1] + var_2 * var_9, var_8[2] + var_1 * var_9);
     var_12 = var_12 + var_6 * (1.0 - var_9);
     self.origin = var_12;
@@ -676,8 +676,8 @@ _id_1C8E(var_0, var_1, var_2, var_3) {
     var_9 = (var_8[0], var_8[1] + var_2, var_8[2] + var_1);
     var_10 = var_3.origin;
     var_11 = (var_10[0] + self._id_53C0, var_10[1] + self._id_53C1 + var_2, var_10[2] + var_1);
-    var_7 = _func_0A6(var_7 * 90.0);
-    self.origin = _func_10A(var_11, var_9, var_7);
+    var_7 = _sin(var_7 * 90.0);
+    self.origin = _vectorlerp(var_11, var_9, var_7);
     waitframe();
   }
 }
@@ -774,15 +774,15 @@ broadcastermoveballcam(var_0, var_1) {
 
 broadcasterkillballcam() {
   self notify("broadcaster_kill_ballcam");
-  _func_226(&"broadcaster_stop_ballcam", 1, self getentitynumber());
+  _luinotifyevent(&"broadcaster_stop_ballcam", 1, self getentitynumber());
 
   if(self._id_1E99._id_A4A8 == "first_person") {
     self._id_1E99.watchedball = undefined;
-    self _meth_826F("allies", 1);
-    self _meth_826F("axis", 1);
+    self allowspectateteam("allies", 1);
+    self allowspectateteam("axis", 1);
     self.forcespectatorclient = self._id_1E99._id_9815 getentitynumber();
     setDvar("scr_game_lockspectatorpov", 1);
-    self _meth_8270(self _meth_8299(), "first_person");
+    self forcespectatepov(self getxuid(), "first_person");
     self._id_1E99 _id_1C95(0.5);
   }
 }
@@ -803,10 +803,10 @@ broadcasterstartballcam() {
     self._id_1E99.watchedball = var_1._id_A582[0];
     self.forcespectatorclient = self getentitynumber();
     waitframe();
-    self _meth_81E2(self._id_1E99, "tag_player", 1);
+    self cameralinkto(self._id_1E99, "tag_player", 1);
     self._id_1E99 _meth_8472();
     var_3 = broadcastermoveballcam(self._id_1E99.watchedball.origin, var_2);
-    self._id_1E99 _meth_82B1(var_3, 10.5, 5.25, 5.25);
+    self._id_1E99 moveto(var_3, 10.5, 5.25, 5.25);
     self._id_1E99.angles = vectortoangles(var_2);
     self._id_1E99 thread updateballcam();
     thread broadcasterstopballcam();
@@ -830,13 +830,13 @@ broadcasterstopballcam() {
     self._id_1E99.watchedball = undefined;
 
     if(var_1)
-      _func_226(&"broadcaster_stop_ballcam", 1, self getentitynumber());
+      _luinotifyevent(&"broadcaster_stop_ballcam", 1, self getentitynumber());
 
-    self _meth_826F("allies", 1);
-    self _meth_826F("axis", 1);
+    self allowspectateteam("allies", 1);
+    self allowspectateteam("axis", 1);
     self.forcespectatorclient = self._id_1E99._id_9815 getentitynumber();
     setDvar("scr_game_lockspectatorpov", 1);
-    self _meth_8270(self _meth_8299(), "first_person");
+    self forcespectatepov(self getxuid(), "first_person");
     self._id_1E99 _id_1C95(0.5);
     break;
   }
@@ -857,7 +857,7 @@ updateballcam() {
 
     var_0 = self.watchedball.origin;
     var_1 = self.origin;
-    var_2 = _func_0E1(var_0, var_1);
+    var_2 = _distance2d(var_0, var_1);
     var_3 = var_0 - var_1;
     var_4 = (var_3[0], var_3[1], 0);
     var_4 = vectorNormalize(var_4);
@@ -866,7 +866,7 @@ updateballcam() {
     if(var_2 > 600)
       self.origin = var_5;
     else
-      self _meth_82B1(var_5, 0.5, 0, 0.2);
+      self moveto(var_5, 0.5, 0, 0.2);
 
     self.angles = vectortoangles(var_3);
     waitframe();
@@ -876,7 +876,7 @@ updateballcam() {
 _id_1C9B() {
   var_0 = getEntArray();
   var_1 = 0;
-  _func_032("lighting_state", var_1);
+  _setomnvar("lighting_state", var_1);
 
   if(!getdvarint("233")) {
     foreach(var_3 in var_0) {
@@ -886,7 +886,7 @@ _id_1C9B() {
         }
         if(var_3._id_5D56 == var_1) {
           var_3 common_scripts\utility::_id_8BE0();
-          var_3 _meth_8558();
+          var_3 allowriotshieldplant();
           continue;
         }
 

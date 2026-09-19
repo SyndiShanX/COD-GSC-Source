@@ -31,7 +31,7 @@ _id_A71F() {
       var_0._id_1647 = 1;
 
       if(!isbot(var_0)) {
-        var_0._id_1645 = _func_19B(var_0);
+        var_0._id_1645 = _newclienthudelem(var_0);
         var_0._id_1645.x = 0;
         var_0._id_1645.y = 0;
         var_0._id_1645.alignx = "left";
@@ -42,7 +42,7 @@ _id_A71F() {
         var_0._id_1645.alpha = 0.0;
         var_0._id_1645.color = (1, 1, 1);
         var_0._id_1645.sort = -3;
-        var_0 _meth_82E1("activate_battlecry", "+actionslot 3");
+        var_0 notifyonplayercommand("activate_battlecry", "+actionslot 3");
       }
 
       var_0 thread _id_1646();

@@ -15,12 +15,12 @@ init() {
 }
 
 _id_7603() {
-  if(!isDefined(self._id_819A)) {
+  if(!isDefined(self.getnegotiationnextnode)) {
     _id_75F9("Power switch at " + self.origin + " missing use script_flag.");
     return;
   }
 
-  common_scripts\utility::flag_init(self._id_819A);
+  common_scripts\utility::flag_init(self.getnegotiationnextnode);
   self._id_8BF7 = [];
   self._id_4D07 = [];
   var_0 = getEntArray(self.target, "targetname");
@@ -78,8 +78,8 @@ _id_7601(var_0) {
     case "anim_model":
       self._id_6298 = var_0;
 
-      if(isDefined(self._id_6298._id_8109)) {
-        var_2 = strtok(self._id_6298._id_8109, ",");
+      if(isDefined(self._id_6298.setflaggedanimknoball)) {
+        var_2 = strtok(self._id_6298.setflaggedanimknoball, ",");
         self._id_6298._id_75FB = var_2[0];
         self._id_6298._id_7608 = var_2[1];
         self._id_6298._id_75FC = var_2[2];
@@ -120,13 +120,13 @@ _id_7604() {
     _id_0378::_id_8D74("generator_power_switch_state", "stopped");
 
     foreach(var_4 in self._id_8BF7)
-    var_4 _meth_805C();
+    var_4 hide();
 
     foreach(var_4 in self._id_4D07)
-    var_4 _meth_805B();
+    var_4 show();
 
-    self._id_9D65 _meth_80CD("HINT_NOICON");
-    self._id_9D65 _meth_80CE(&"ZOMBIES_POWER_ON");
+    self._id_9D65 setcursorhint("HINT_NOICON");
+    self._id_9D65 sethintstring(&"ZOMBIES_POWER_ON");
 
     if(isDefined(var_0))
       var_0 delete();
@@ -136,11 +136,11 @@ _id_7604() {
 
     if(isDefined(self._id_5104)) {
       var_1 = _id_0547::_id_8FBA(self._id_5104, self._id_5104._id_81BB);
-      _func_14C(var_1, 0.5);
+      _triggerfx(var_1, 0.5);
     }
 
     if(isDefined(self._id_6298._id_75FB))
-      self._id_6298 _meth_8276(self._id_6298._id_75FB);
+      self._id_6298 scriptmodelplayanim(self._id_6298._id_75FB);
 
     for(;;) {
       self._id_9D65 waittill("trigger", var_8);
@@ -156,9 +156,9 @@ _id_7604() {
     level._id_7F21[level._id_7F21.size] = self._id_7602;
     level notify("power_on");
     level._id_75FD = 1;
-    self._id_9D65 _meth_80CE("");
+    self._id_9D65 sethintstring("");
     self notify("on");
-    common_scripts\utility::flag_set(self._id_819A);
+    common_scripts\utility::flag_set(self.getnegotiationnextnode);
     _id_0378::_id_8D74("generator_power_switch_state", "starting");
 
     if(isDefined(var_1))
@@ -170,43 +170,43 @@ _id_7604() {
       var_2 setModel("tag_origin");
 
       if(isDefined(self._id_5105._id_81C7))
-        var_2 _meth_8055(self._id_6298, self._id_5105._id_81C7);
+        var_2 linkto(self._id_6298, self._id_5105._id_81C7);
 
-      var_0 = _func_2A8(common_scripts\utility::_id_44F5(self._id_5105._id_81BB), var_2, "tag_origin");
-      _func_14C(var_0);
+      var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5(self._id_5105._id_81BB), var_2, "tag_origin");
+      _triggerfx(var_0);
     }
 
     if(isDefined(self._id_6298._id_7608)) {
-      self._id_6298 _meth_8276(self._id_6298._id_7608, "power_on");
+      self._id_6298 scriptmodelplayanim(self._id_6298._id_7608, "power_on");
       self._id_6298 waittillmatch("power_on", "end");
     }
 
     if(isDefined(self._id_6298._id_75FC))
-      self._id_6298 _meth_8276(self._id_6298._id_75FC);
+      self._id_6298 scriptmodelplayanim(self._id_6298._id_75FC);
 
     _id_0378::_id_8D74("generator_power_switch_state", "running");
 
     foreach(var_4 in self._id_8BF7)
-    var_4 _meth_805B();
+    var_4 show();
 
     foreach(var_4 in self._id_4D07)
-    var_4 _meth_805C();
+    var_4 hide();
 
     level waittill("zombie_power_penalty_start");
     self notify("off");
-    common_scripts\utility::_id_3C7B(self._id_819A);
+    common_scripts\utility::_id_3C7B(self.getnegotiationnextnode);
     _id_0378::_id_8D74("generator_power_switch_state", "stopping");
 
     if(isDefined(self._id_6298._id_7607)) {
-      self._id_6298 _meth_8276(self._id_6298._id_7607, "power_on");
+      self._id_6298 scriptmodelplayanim(self._id_6298._id_7607, "power_on");
       self._id_6298 waittillmatch("power_on", "end");
     }
 
     foreach(var_4 in self._id_8BF7)
-    var_4 _meth_805C();
+    var_4 hide();
 
     foreach(var_4 in self._id_4D07)
-    var_4 _meth_805B();
+    var_4 show();
 
     level waittill("zombie_power_penalty_end");
   }
@@ -222,41 +222,41 @@ _id_7600() {
 
   for(;;) {
     self waittill("on");
-    self._id_1DC7 _meth_82B1(var_2, var_0);
+    self._id_1DC7 moveto(var_2, var_0);
     self waittill("off");
-    self._id_1DC7 _meth_82B1(var_1, var_0);
+    self._id_1DC7 moveto(var_1, var_0);
   }
 }
 
 _id_75FE() {
   self endon("death");
 
-  if(!isDefined(self._id_819A)) {
+  if(!isDefined(self.getnegotiationnextnode)) {
     _id_75F9("Power show entity at " + self.origin + " missing script_flag.");
     return;
   }
 
   for(;;) {
-    self _meth_805C();
-    common_scripts\utility::_id_3C9F(self._id_819A);
-    self _meth_805B();
-    common_scripts\utility::flag_waitopen(self._id_819A);
+    self hide();
+    common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
+    self show();
+    common_scripts\utility::flag_waitopen(self.getnegotiationnextnode);
   }
 }
 
 _id_75FA() {
   self endon("death");
 
-  if(!isDefined(self._id_819A)) {
+  if(!isDefined(self.getnegotiationnextnode)) {
     _id_75F9("Power hide entity at " + self.origin + " missing script_flag.");
     return;
   }
 
   for(;;) {
-    self _meth_805B();
-    common_scripts\utility::_id_3C9F(self._id_819A);
-    self _meth_805C();
-    common_scripts\utility::flag_waitopen(self._id_819A);
+    self show();
+    common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
+    self hide();
+    common_scripts\utility::flag_waitopen(self.getnegotiationnextnode);
   }
 }
 
@@ -264,7 +264,7 @@ _id_75F9(var_0) {}
 
 power_switch_find(var_0) {
   foreach(var_2 in level._id_7606) {
-    if(_id_0547::_id_5565(var_0, var_2._id_819A))
+    if(_id_0547::_id_5565(var_0, var_2.getnegotiationnextnode))
       return var_2;
   }
 }

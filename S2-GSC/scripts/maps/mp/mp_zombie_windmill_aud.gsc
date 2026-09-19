@@ -65,17 +65,17 @@ _id_7248() {
 
 _id_7330() {
   soundscripts\_snd_common_zmb_dlc3::dlc3_player_spawned();
-  self _meth_8626("windmill_default_mix");
+  self clientaddsoundsubmix("windmill_default_mix");
 }
 
 _id_A979(var_0) {
   soundscripts\_snd_common_zmb_dlc3::dlc3_wave_begin(var_0);
-  self _meth_8627("wm_intermission_mix");
+  self clientclearsoundsubmix("wm_intermission_mix");
 }
 
 _id_A97A() {
   soundscripts\_snd_common_zmb_dlc3::dlc3_wave_end();
-  self _meth_8626("wm_intermission_mix");
+  self clientaddsoundsubmix("wm_intermission_mix");
 }
 
 lightning_strike_in_play_space(var_0, var_1) {
@@ -92,7 +92,7 @@ lightning_strike_in_play_space(var_0, var_1) {
     var_2 = spawn("script_origin", var_0);
     var_4 = _id_0380::_id_6844("zmb_wm_lightning_strike", undefined, var_2);
     _id_0378::_id_8D14(isDefined(var_4), "lightning_strike", 1);
-    var_2 _meth_82B1(var_1, 0.2);
+    var_2 moveto(var_1, 0.2);
   }
 
   level._id_11CB.lightning_strike_counter = level._id_11CB.lightning_strike_counter + 1;
@@ -136,7 +136,7 @@ windmill_rotate_wood_creaks(var_0, var_1) {
   var_2 = self;
 
   for(;;) {
-    var_3 = _func_0A4(5, 8);
+    var_3 = _randomintrange(5, 8);
     var_4 = _id_0380::_id_2889("zmb_dig_windmill_wood_creaks", undefined, var_0);
     wait(var_3);
   }
@@ -148,7 +148,7 @@ windmill_rotate_metal_creaks(var_0, var_1) {
   var_2 = self;
 
   for(;;) {
-    var_3 = _func_0A4(12, 18);
+    var_3 = _randomintrange(12, 18);
     var_4 = _id_0380::_id_2889("zmb_dig_windmill_metal_creaks", undefined, var_0);
     wait(var_3);
   }
@@ -173,7 +173,7 @@ gear_one_shots(var_0, var_1) {
   var_1 endon("gear_sounds_stopped");
 
   for(;;) {
-    var_2 = _func_0A4(5, 8);
+    var_2 = _randomintrange(5, 8);
     var_3 = _id_0380::_id_2889("zmb_windmill_gear_creaks", undefined, var_0);
     _id_0380::_id_288F(var_3, var_1, "gear_creak_done");
     var_1 waittill("gear_creak_done");
@@ -198,7 +198,7 @@ drop_bombs_fall(var_0, var_1) {
   var_2 = 7;
   var_3 = 4;
   var_4 = 0.666;
-  var_5 = var_2 * _func_0A5(0.25, 0.75);
+  var_5 = var_2 * _randomfloatrange(0.25, 0.75);
   maps\mp\_utility::_id_2CED(var_1 - var_2, _id_0380::_id_6842, "zmb_bomb_drop_incoming_whistle", level.players, var_0.origin, var_5);
   maps\mp\_utility::_id_2CED(var_1 - var_3, _id_0380::_id_6842, "zmb_bomb_drop_incoming", level.players, var_0.origin);
   maps\mp\_utility::_id_2CED(var_1 - var_4, _id_0380::_id_6842, "zmb_bomb_drop_incoming_close", level.players, var_0.origin);
@@ -223,7 +223,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 _meth_82B1(var_1, 1.9);
+  var_2 moveto(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }

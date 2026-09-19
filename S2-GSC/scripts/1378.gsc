@@ -7,7 +7,7 @@ init() {
   common_scripts\utility::_id_092C("moneyCloud", "vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
 
   foreach(var_1 in ["classic_ee_trigger_01", "classic_ee_trigger_02", "classic_ee_trigger_03", "classic_ee_trigger_04"]) {
-    var_2 = _func_18E(var_1, "script_noteworthy");
+    var_2 = _getent(var_1, "script_noteworthy");
     level._id_231F[var_1] = var_2;
     thread _id_3599(var_2);
   }
@@ -44,8 +44,8 @@ _id_3599(var_0) {
 }
 
 _id_62D8(var_0) {
-  var_1 = _func_14B(common_scripts\utility::_id_44F5("moneyCloud"), var_0);
-  _func_14C(var_1);
+  var_1 = _spawnfx(common_scripts\utility::_id_44F5("moneyCloud"), var_0);
+  _triggerfx(var_1);
   wait 3;
   var_1 delete();
 }

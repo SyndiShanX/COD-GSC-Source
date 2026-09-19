@@ -4,9 +4,9 @@
 ******************************************************/
 
 init() {
-  level.splitscreen = _func_135();
+  level.splitscreen = _issplitscreen();
   level._id_258F = getDvar("5554") == "true";
-  level.onlinegame = _func_2A3();
+  level.onlinegame = _isonlinegame();
   level.rankedmatch = _func_3AC();
   level._id_7616 = getdvarint("664");
   level._id_2F98 = getdvarint("78", 1) == 0;
@@ -17,14 +17,14 @@ init() {
   if(getdvarint("5357") == 1)
     level.onlinegame = 1;
 
-  level._id_015D = _func_117(getDvar("1673"));
+  level._id_015D = _tolower(getDvar("1673"));
 
   if(_func_367())
     level.gametype = "hub";
   else if(getdvarint("4017", 0))
     level.gametype = "vlobby";
   else
-    level.gametype = _func_117(getDvar("1924"));
+    level.gametype = _tolower(getDvar("1924"));
 
   level._id_985B = ["axis", "allies"];
   level._id_6C63["allies"] = "axis";
@@ -105,9 +105,9 @@ _id_5211(var_0) {
 }
 
 _id_7BDF() {
-  _func_032("ui_bomb_a_state", 0);
-  _func_032("ui_bomb_b_state", 0);
-  _func_032("ui_nuke_end_milliseconds", 0);
+  _setomnvar("ui_bomb_a_state", 0);
+  _setomnvar("ui_bomb_b_state", 0);
+  _setomnvar("ui_nuke_end_milliseconds", 0);
   setDvar("ui_danger_team", "");
   setDvar("ui_inhostmigration", 0);
   setDvar("311", getdvarint("scr_thirdPerson"));
@@ -221,8 +221,8 @@ _id_991C() {
     var_0 = randomint(6);
 
     for(var_1 = 0; var_1 < var_0; var_1++) {
-      _func_18C(var_0);
-      self _meth_8182("frag_grenade_mp", 0.2);
+      _iprintlnbold(var_0);
+      self shellshock("frag_grenade_mp", 0.2);
       wait 0.1;
     }
   }

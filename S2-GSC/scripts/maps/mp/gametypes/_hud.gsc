@@ -38,9 +38,9 @@ _id_3DDA(var_0) {
   self._id_15FC = self.fontscale;
 
   if(isDefined(var_0))
-    self._id_6085 = _func_0AF(var_0, 6.3);
+    self._id_6085 = _min(var_0, 6.3);
   else
-    self._id_6085 = _func_0AF(self.fontscale * 2, 6.3);
+    self._id_6085 = _min(self.fontscale * 2, 6.3);
 
   self._id_5136 = 2;
   self._id_6C71 = 4;
@@ -53,9 +53,9 @@ _id_3DD9(var_0) {
   var_0 endon("disconnect");
   var_0 endon("joined_team");
   var_0 endon("joined_spectators");
-  self _meth_8085(self._id_5136 * 0.05);
+  self changefontscaleovertime(self._id_5136 * 0.05);
   self.fontscale = self._id_6085;
   wait(self._id_5136 * 0.05);
-  self _meth_8085(self._id_6C71 * 0.05);
+  self changefontscaleovertime(self._id_6C71 * 0.05);
   self.fontscale = self._id_15FC;
 }

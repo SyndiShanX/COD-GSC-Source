@@ -5,10 +5,10 @@
 
 weaponkitsinitshared() {
   level._id_A9CB = [];
-  var_0 = _func_27A("mp/zombieWeaponKitTable.csv");
+  var_0 = _tablegetrowcount("mp/zombieWeaponKitTable.csv");
 
   for(var_1 = 0; var_1 < var_0; var_1++) {
-    var_2 = _func_1AE("mp/zombieWeaponKitTable.csv", var_1, 0);
+    var_2 = _tablelookupbyrow("mp/zombieWeaponKitTable.csv", var_1, 0);
     var_3 = _func_310(var_2);
 
     if(var_3 != 0) {

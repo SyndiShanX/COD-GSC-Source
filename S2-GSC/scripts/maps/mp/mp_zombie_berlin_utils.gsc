@@ -19,7 +19,7 @@ earthquake_alive_players(var_0, var_1, var_2) {
       var_3[var_3.size] = var_5;
   }
 
-  _func_17F(var_0, var_1, (0, 0, 0), 9999999, var_3);
+  _earthquake(var_0, var_1, (0, 0, 0), 9999999, var_3);
 }
 
 earthquake_alive_players_with_origin(var_0, var_1, var_2, var_3) {
@@ -31,7 +31,7 @@ earthquake_alive_players_with_origin(var_0, var_1, var_2, var_3) {
   }
 
   if(var_4.size > 0)
-    _func_17F(var_0, var_1, var_3.origin, var_2, var_4);
+    _earthquake(var_0, var_1, var_3.origin, var_2, var_4);
 }
 
 flag_try_set(var_0) {
@@ -53,7 +53,7 @@ special_melee_weapon_pickup_think(var_0, var_1) {
 
   for(;;) {
     var_0 waittill("trigger", var_2);
-    _func_18C(var_2.name + " picked up the: " + var_1);
+    _iprintlnbold(var_2.name + " picked up the: " + var_1);
 
     if(var_1 == "sword")
       var_2 _id_0378::_id_8D74("aud_pickup_barbarosa_sword");
@@ -185,18 +185,18 @@ lockin_system_monitor_b_button() {
     waitframe();
   }
 
-  self _meth_8179("stand");
+  self setstance("stand");
   self notify("stop_using_station");
 }
 
 lockin_system_monitor_use_button_exit() {
   self endon("stop_using_station");
 
-  while(self _meth_8341())
+  while(self usebuttonpressed())
     waitframe();
 
   for(;;) {
-    if(self _meth_8341()) {
+    if(self usebuttonpressed()) {
       break;
     }
 
@@ -292,7 +292,7 @@ wunderbuss_ammo_tracker() {
   for(;;) {
     common_scripts\utility::_id_A70C(self, "weapon_fired", level, "maxAmmoPickup", self, "heavyMeleeClip_earned");
 
-    if(self _meth_8319("wunderbuss_zm"))
+    if(self hasweapon("wunderbuss_zm"))
       self.wunderbuss_prev_ammo = self getweaponammoclip("wunderbuss_zm");
   }
 }
@@ -301,7 +301,7 @@ wunderbuss_drop_watcher() {
   var_0 = self;
 
   for(;;) {
-    var_1 = common_scripts\utility::_id_A715("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
+    var_1 = common_scripts\utility::waittill_any_return("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
 
     if(var_1 == "weapon_change") {
       if(_id_0547::_id_577E(self))
@@ -436,16 +436,16 @@ radio_system_setup() {
   level.radio_codes["dahme_spreewald"]["Model"]["1"] = 90.0;
   level.radio_codes["dahme_spreewald"]["Model"]["2"] = 94.9;
   level.radio_codes["dahme_spreewald"]["Model"]["3"] = 98.1;
-  var_0 = _func_18E("map_pushpin", "script_noteworthy");
-  var_1 = _func_18E("map_pushpin_origin", "script_noteworthy");
+  var_0 = _getent("map_pushpin", "script_noteworthy");
+  var_1 = _getent("map_pushpin_origin", "script_noteworthy");
   var_0 linktosynchronizedparent(var_1);
   var_2 = common_scripts\utility::_id_46B7("map_pinpoint", "script_noteworthy");
   var_3 = common_scripts\utility::random(var_2);
   var_1.origin = var_3.origin;
-  level.radio_map_location = var_3._id_8260;
+  level.radio_map_location = var_3.setlookatent;
   var_4 = 4;
-  var_5 = _func_0A4(0, var_4);
-  var_6 = _func_0A4(0, var_4);
+  var_5 = _randomintrange(0, var_4);
+  var_6 = _randomintrange(0, var_4);
   var_7 = "X";
   var_8 = "X";
 
@@ -490,11 +490,11 @@ radio_system_setup() {
 }
 
 radio_system_init() {
-  var_0 = _func_18E("radio_tuner_use_trig", "targetname");
+  var_0 = _getent("radio_tuner_use_trig", "targetname");
   var_1 = (0, 0, 0);
   var_2 = (0, 0, 0);
-  var_3 = _func_18E("radio_tuner_link_org", "targetname");
-  var_4 = _func_18E("radio_tuner_player_org", "targetname");
+  var_3 = _getent("radio_tuner_link_org", "targetname");
+  var_4 = _getent("radio_tuner_player_org", "targetname");
   var_5 = undefined;
 
   if(!isDefined(level.tuner_values))
@@ -510,16 +510,16 @@ radio_system_init() {
     var_6 _id_0378::_id_8D74("player_using_radio");
     level notify("player_used_radio", var_6);
 
-    if(var_6 _meth_83B8() || var_6 _meth_82E5()) {
+    if(var_6 isjumping() || var_6 _meth_82E5()) {
       continue;
     }
     var_5 = var_6;
     level.player_using_radio = var_6;
-    var_5 _meth_8322();
-    var_7 = var_5 _meth_8178();
+    var_5 disableweapons();
+    var_7 = var_5 getstance();
 
-    if(var_5 _meth_8178() != "crouch") {
-      var_5 _meth_8179("crouch");
+    if(var_5 getstance() != "crouch") {
+      var_5 setstance("crouch");
 
       if(var_7 == "stand")
         wait 0.4;
@@ -534,19 +534,19 @@ radio_system_init() {
     var_2 = var_6.angles;
     var_4.origin = var_5.origin;
     var_4.angles = var_5.angles;
-    var_5 _meth_8077(var_4, undefined, 0.1, 0, 0, 0, 0);
-    var_4 _meth_82B1(var_3.origin, 0.5, 0, 0);
-    var_4 _meth_82B8(var_3.angles, 0.5, 0, 0);
+    var_5 playerlinkto(var_4, undefined, 0.1, 0, 0, 0, 0);
+    var_4 moveto(var_3.origin, 0.5, 0, 0);
+    var_4 rotateto(var_3.angles, 0.5, 0, 0);
     wait 0.5;
     var_5 thread radio_system_start_tuning();
     var_5 waittill("stop_using_station");
-    var_5 _meth_8323();
-    var_4 _meth_82B1(var_1 + (0, 0, 1), 0.5);
-    var_4 _meth_82B8(var_2, 0.5);
+    var_5 enableweapons();
+    var_4 moveto(var_1 + (0, 0, 1), 0.5);
+    var_4 rotateto(var_2, 0.5);
     wait 0.5;
-    var_5 _meth_8057();
+    var_5 unlink();
     var_5 _meth_812C(1);
-    var_5 _meth_8179("stand");
+    var_5 setstance("stand");
     wait 0.5;
     level.player_using_radio = undefined;
   }
@@ -554,8 +554,8 @@ radio_system_init() {
 
 radio_system_light_swap_handler() {
   level endon("game_over");
-  var_0 = _func_21F("radio_light", "targetname")[0];
-  var_0 _meth_83FA("0", "0");
+  var_0 = _getscriptablearray("radio_light", "targetname")[0];
+  var_0 setscriptablepartstate("0", "0");
 
   while(!isDefined(level.possible_radio_codes) || !isDefined(level.possible_radio_codes[0]["left"]) || !isDefined(level.possible_radio_codes[0]["right"]))
     waitframe();
@@ -566,23 +566,23 @@ radio_system_light_swap_handler() {
     foreach(var_3 in level.possible_radio_codes) {
       var_4 = var_3["left"];
       var_5 = level.tuner_values["radio_tuner"]["left"];
-      var_6 = _func_0AE(var_5 - var_4);
+      var_6 = _abs(var_5 - var_4);
       var_7 = var_3["right"];
       var_8 = level.tuner_values["radio_tuner"]["right"];
-      var_9 = _func_0AE(var_8 - var_7);
+      var_9 = _abs(var_8 - var_7);
 
       if(var_6 <= var_1 && var_9 <= var_1) {
-        var_0 _meth_83FA("0", "1");
+        var_0 setscriptablepartstate("0", "1");
 
         while(var_6 <= var_1 && var_9 <= var_1) {
           waitframe();
           var_5 = level.tuner_values["radio_tuner"]["left"];
-          var_6 = _func_0AE(var_5 - var_4);
+          var_6 = _abs(var_5 - var_4);
           var_8 = level.tuner_values["radio_tuner"]["right"];
-          var_9 = _func_0AE(var_8 - var_7);
+          var_9 = _abs(var_8 - var_7);
         }
 
-        var_0 _meth_83FA("0", "0");
+        var_0 setscriptablepartstate("0", "0");
         waitframe();
         continue;
       }
@@ -610,27 +610,27 @@ radio_system_start_tuning() {
     var_1 = ::radio_right_tuner_input_pc;
   }
 
-  var_2 = _func_18E("radio_tuner_left", "targetname");
-  var_3 = _func_18E("radio_tuner_left_knob", "targetname");
+  var_2 = _getent("radio_tuner_left", "targetname");
+  var_3 = _getent("radio_tuner_left_knob", "targetname");
   var_3 linktosynchronizedparent(var_2);
-  var_4 = _func_18E("radio_tuner_left_needle", "targetname");
+  var_4 = _getent("radio_tuner_left_needle", "targetname");
   thread radio_system_handle_tuner(var_2, "left", 1, level.tuner_values["radio_tuner"]["left"], "radio_tuner", var_0, var_4);
-  var_5 = _func_18E("radio_tuner_right", "targetname");
-  var_6 = _func_18E("radio_tuner_right_knob", "targetname");
+  var_5 = _getent("radio_tuner_right", "targetname");
+  var_6 = _getent("radio_tuner_right_knob", "targetname");
   var_6 linktosynchronizedparent(var_5);
-  var_7 = _func_18E("radio_tuner_right_needle", "targetname");
+  var_7 = _getent("radio_tuner_right_needle", "targetname");
   thread radio_system_handle_tuner(var_5, "right", 1, level.tuner_values["radio_tuner"]["right"], "radio_tuner", var_1, var_7);
 }
 
 radio_system_show_controls_hint() {
   if(common_scripts\utility::_id_55E0()) {
-    self _meth_80D0(&"ZOMBIE_BERLIN_RADIO_USE_HINT");
+    self forceusehinton(&"ZOMBIE_BERLIN_RADIO_USE_HINT");
     radio_system_show_controls_hint_breakout();
-    self _meth_80D1(&"ZOMBIE_BERLIN_RADIO_USE_HINT");
+    self forceusehintoff(&"ZOMBIE_BERLIN_RADIO_USE_HINT");
   } else {
-    self _meth_80D0(&"ZOMBIE_BERLIN_RADIO_USE_HINT_PC");
+    self forceusehinton(&"ZOMBIE_BERLIN_RADIO_USE_HINT_PC");
     radio_system_show_controls_hint_breakout();
-    self _meth_80D1(&"ZOMBIE_BERLIN_RADIO_USE_HINT_PC");
+    self forceusehintoff(&"ZOMBIE_BERLIN_RADIO_USE_HINT_PC");
   }
 }
 
@@ -640,7 +640,7 @@ radio_system_show_controls_hint_breakout() {
 
 radio_system_get_turn_difference(var_0, var_1) {
   var_2 = var_0 - var_1;
-  var_2 = _func_0DD(var_2);
+  var_2 = _angleclamp180(var_2);
   return var_2;
 }
 
@@ -661,14 +661,14 @@ radio_right_tuner_input_gamepad() {
 pc_tuner_speed() {
   var_0 = 12.5;
 
-  if(self _meth_83C1())
+  if(self sprintbuttonpressed())
     var_0 = var_0 * 10.0;
 
   return var_0;
 }
 
 radio_left_tuner_input_pc() {
-  var_0 = self _meth_82F9();
+  var_0 = self getnormalizedmovement();
   var_1 = var_0[1];
 
   if(var_1 == 0)
@@ -681,9 +681,9 @@ radio_left_tuner_input_pc() {
 radio_right_tuner_input_pc() {
   var_0 = 0.0;
 
-  if(self _meth_8343(1))
+  if(self adsbuttonpressed(1))
     var_0 = 1.0;
-  else if(self _meth_8342())
+  else if(self attackbuttonpressed())
     var_0 = -1.0;
 
   if(var_0 == 0.0)
@@ -710,13 +710,13 @@ radio_system_handle_tuner(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_13 = undefined;
 
   if(isDefined(var_6)) {
-    var_13 = _func_18E(var_6.target, "targetname");
+    var_13 = _getent(var_6.target, "targetname");
     var_6 linktosynchronizedparent(var_13);
   }
 
   for(;;) {
     if(!level.should_suspend_tuning) {
-      if(_func_0AE(var_9) > 0.1) {
+      if(_abs(var_9) > 0.1) {
         var_11 = 0;
         var_14 = var_9 < 0;
         var_15 = 0;
@@ -727,10 +727,10 @@ radio_system_handle_tuner(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         }
 
         if(common_scripts\utility::_id_562E(var_14)) {
-          var_15 = _func_0DC(var_0.angles[2] + 5);
+          var_15 = _angleclamp(var_0.angles[2] + 5);
           var_8 = var_8 + 0.9 * (var_9 / 100);
         } else {
-          var_15 = _func_0DC(var_0.angles[2] - 5);
+          var_15 = _angleclamp(var_0.angles[2] - 5);
           var_8 = var_8 + 0.9 * (var_9 / 100);
         }
 
@@ -812,19 +812,19 @@ airship_straub_summon() {
 }
 
 airship_objects_show(var_0) {
-  self _meth_805B();
-  self _meth_82C1();
+  self show();
+  self solid();
 
   if(isDefined(var_0) && var_0)
-    self _meth_805F();
+    self disconnectpaths();
 }
 
 airship_objects_hide(var_0) {
-  self _meth_805C();
-  self _meth_82C2();
+  self hide();
+  self notsolid();
 
   if(isDefined(var_0) && var_0)
-    self _meth_8060();
+    self connectpaths();
 }
 
 airship_interior_state_swap() {
@@ -854,35 +854,35 @@ airship_pods_animation() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_1")
-      var_2 _meth_8276("zep_int_pod_calm");
+      var_2 scriptmodelplayanim("zep_int_pod_calm");
 
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_2")
-      var_2 _meth_8276("zep_int_pod_calm1");
+      var_2 scriptmodelplayanim("zep_int_pod_calm1");
 
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_3")
-      var_2 _meth_8276("zep_int_pod_calm2");
+      var_2 scriptmodelplayanim("zep_int_pod_calm2");
 
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_shake")
-      var_2 _meth_8276("zep_int_pod_calm1_2");
+      var_2 scriptmodelplayanim("zep_int_pod_calm1_2");
 
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_shake1")
-      var_2 _meth_8276("zep_int_pod_calm_2");
+      var_2 scriptmodelplayanim("zep_int_pod_calm_2");
 
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_open")
-      var_2 _meth_8276("zep_int_pod_calm_open");
+      var_2 scriptmodelplayanim("zep_int_pod_calm_open");
   }
 
   level waittill("escape_airship_start");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_1")
-      var_2 _meth_8276("zep_int_pod_crazy");
+      var_2 scriptmodelplayanim("zep_int_pod_crazy");
 
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_2")
-      var_2 _meth_8276("zep_int_pod_crazy1");
+      var_2 scriptmodelplayanim("zep_int_pod_crazy1");
 
     if(isDefined(var_2._id_0165) && var_2._id_0165 == "variant_3")
-      var_2 _meth_8276("zep_int_pod_crazy2");
+      var_2 scriptmodelplayanim("zep_int_pod_crazy2");
   }
 }
 
@@ -915,11 +915,11 @@ airship_camera_sway() {
   level endon("airship_escape");
 
   for(;;) {
-    var_0 = _func_0A5(0.25, 1);
-    var_1 = _func_0A5(3, 4);
-    level._id_953D _meth_82B8((var_0, var_0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
+    var_0 = _randomfloatrange(0.25, 1);
+    var_1 = _randomfloatrange(3, 4);
+    level._id_953D rotateto((var_0, var_0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
     wait(var_1);
-    level._id_953D _meth_82B8((0 - var_0, 0 - var_0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
+    level._id_953D rotateto((0 - var_0, 0 - var_0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
     wait(var_1);
   }
 }
@@ -928,18 +928,18 @@ airship_camera_sway_extreme() {
   level endon("berlin_cinematic_done");
 
   for(;;) {
-    var_0 = _func_0A5(1, 2);
-    var_1 = _func_0A5(4, 6);
-    level._id_953D _meth_82B8((var_0, var_0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
+    var_0 = _randomfloatrange(1, 2);
+    var_1 = _randomfloatrange(4, 6);
+    level._id_953D rotateto((var_0, var_0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
     wait(var_1);
-    level._id_953D _meth_82B8((0 - var_0, 0 - var_0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
+    level._id_953D rotateto((0 - var_0, 0 - var_0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
     wait(var_1);
   }
 }
 
 airship_lowering_handler() {
   level endon("flag_airship_fully_lowered");
-  var_0 = _func_1DB("end_node_airship_straub_lowered", "targetname");
+  var_0 = _getvehiclenode("end_node_airship_straub_lowered", "targetname");
   level.airship_lower_percentage = 0;
 
   while(level.airship_lower_percentage < 100)
@@ -956,18 +956,18 @@ airship_lowering_handler_fully_lower() {
 ___sizzler_cannon___() {}
 
 airship_turret_build(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = _func_016("misc_turret", self.origin, var_0);
+  var_6 = _spawnturret("misc_turret", self.origin, var_0);
   var_6.angles = self.angles;
   var_6 setModel(var_1);
-  var_6 _meth_85A9(0.0);
-  var_6 _meth_806C("auto_nonai");
-  var_6 _meth_80F9(undefined);
-  var_6 _meth_80FB(0);
-  var_6 _meth_8131();
-  var_6 _meth_80B3();
-  var_6 _meth_8130("allies");
-  var_6 _meth_8387(var_6);
-  var_6 _meth_85A6(1);
+  var_6 setdefaultdroppitch(0.0);
+  var_6 setmode("auto_nonai");
+  var_6 setsentryowner(undefined);
+  var_6 setturretminimapvisible(0);
+  var_6 maketurretsolid();
+  var_6 makeunusable();
+  var_6 setturretteam("allies");
+  var_6 setentityowner(var_6);
+  var_6 set_tool_hudelem(1);
 
   if(isDefined(var_2))
     var_6._id_62AD = var_2;
@@ -1030,7 +1030,7 @@ airship_turret_think() {
       }
 
       foreach(var_5 in level.straub_airship.valid_targets) {
-        if(!_func_1EF(var_5) || !isalive(var_5) || var_5 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_5.transformingtosizzler))
+        if(!_isagent(var_5) || !isalive(var_5) || var_5 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_5.transformingtosizzler))
           level.straub_airship.valid_targets = common_scripts\utility::_id_0F93(level.straub_airship.valid_targets, var_5);
       }
 
@@ -1094,7 +1094,7 @@ airship_turret_shoot_target(var_0) {
   var_2 setModel("Tag_Origin");
   var_2 linktosynchronizedparent(level.straub_airship.siz_cannon);
   var_3 = level.straub_airship.siz_cannon gettagorigin("TAG_AIM");
-  var_4 = level.straub_airship.siz_cannon _meth_8181("TAG_AIM");
+  var_4 = level.straub_airship.siz_cannon gettagangles("TAG_AIM");
   var_5 = anglesToForward(var_4);
   var_6 = vectorNormalize(var_0.origin - var_3);
   var_7 = vectordot(var_5, var_6);
@@ -1103,7 +1103,7 @@ airship_turret_shoot_target(var_0) {
   var_8 = common_scripts\utility::_id_8FFC();
   var_8.origin = var_0.origin + (0, 0, -12);
   airship_turret_set_target(var_8);
-  _func_147(common_scripts\utility::_id_44F5("zmb_zeppelin_shot_charge_barrel"), level.straub_airship.siz_cannon, "TAG_AIM");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_zeppelin_shot_charge_barrel"), level.straub_airship.siz_cannon, "TAG_AIM");
   wait 0.65;
   airship_turret_start_firing();
   var_9 = _func_382("zmb_geistkraft_reg_beam_med", level.straub_airship.siz_cannon, "tag_flash", var_0, "tag_origin");
@@ -1125,7 +1125,7 @@ airship_turret_set_target(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  level.straub_airship.siz_cannon _meth_80FD(var_0, (0, 0, 0), 1);
+  level.straub_airship.siz_cannon settargetentity(var_0, (0, 0, 0), 1);
 }
 
 airship_turret_get_target() {
@@ -1133,7 +1133,7 @@ airship_turret_get_target() {
 }
 
 airship_turret_clear_target() {
-  level.straub_airship.siz_cannon _meth_80FE();
+  level.straub_airship.siz_cannon cleartargetentity();
 }
 
 airship_turret_is_zombie_targeted(var_0) {
@@ -1145,16 +1145,16 @@ airship_turret_start_firing() {
   if(randomint(3) == 0)
     thread maps\mp\mp_zombie_berlin_aud::pa_system_dialogue_all_players("straub_sizzler_intro_alt", "exterior", 0, level.straub_airship);
 
-  level.straub_airship.siz_cannon _meth_80D5();
+  level.straub_airship.siz_cannon startfiring();
   level.straub_airship.siz_cannon _id_0378::_id_8D74("blimp_projectile");
 }
 
 airship_turret_stop_firing() {
-  level.straub_airship.siz_cannon _meth_80D6();
+  level.straub_airship.siz_cannon stopfiring();
 }
 
 airship_turret_is_firing() {
-  level.straub_airship.siz_cannon _meth_80D7();
+  level.straub_airship.siz_cannon isfiringturret();
 }
 
 airship_turret_update_valid_targets() {
@@ -1199,16 +1199,16 @@ airship_distant_handler(var_0) {
 
   while(!common_scripts\utility::_id_3C77("flag_drop_pod_reached_airship")) {
     wait 5;
-    self _meth_8495("s2_zom_zep_extra_zep", self.origin, self.angles);
-    wait(_func_065(%s2_zom_zep_extra_zep));
-    wait(_func_0A5(0, 3));
+    self scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_extra_zep", self.origin, self.angles);
+    wait(_getanimlength(%s2_zom_zep_extra_zep));
+    wait(_randomfloatrange(0, 3));
   }
 
   self delete();
 }
 
 airship_animation_master_handler() {
-  var_0 = _func_18E("zeppelin_animation_node", "targetname");
+  var_0 = _getent("zeppelin_animation_node", "targetname");
   thread airship_animation_straub_entrance(var_0);
   common_scripts\utility::_id_3C9F("flag_airship_summoned");
   thread airship_animation_enter_and_shoot_tethers(var_0);
@@ -1222,8 +1222,8 @@ airship_animation_master_handler() {
 
 airship_animation_straub_entrance(var_0) {
   common_scripts\utility::_id_3C9F("flag_exit_underbelly");
-  level.straub_airship _meth_805B();
-  level.straub_airship _meth_8495("s2_zom_zep_intro", var_0.origin, var_0.angles);
+  level.straub_airship show();
+  level.straub_airship scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_intro", var_0.origin, var_0.angles);
   level.straub_airship playzeppelinfx();
 
   foreach(var_2 in level.players)
@@ -1231,7 +1231,7 @@ airship_animation_straub_entrance(var_0) {
 
   level.straub_airship _id_0378::_id_8D74("start_straub_airship_loop");
   level.straub_airship _id_0378::_id_8D74("straub_airship_entrance");
-  wait(_func_065(%s2_zom_zep_intro));
+  wait(_getanimlength(%s2_zom_zep_intro));
   common_scripts\utility::flag_set("flag_airship_reached_middle");
   level.straub_airship _id_0378::_id_8D74("stop_airship_loop", 10.0);
 }
@@ -1251,33 +1251,33 @@ airship_animation_straub_entrance_play_rumble_for_time(var_0, var_1, var_2) {
     var_2 = 0.15;
 
   while(var_1 > 0) {
-    self _meth_809F(var_0);
+    self playrumbleonentity(var_0);
     wait(var_2);
     var_1 = var_1 - var_2;
   }
 }
 
 playzeppelinfx() {
-  _func_147(common_scripts\utility::_id_44F5("zmb_ber_zeppelin_spotlight"), self, "TAG_FX_L_01");
-  _func_147(common_scripts\utility::_id_44F5("zmb_ber_zeppelin_spotlight"), self, "TAG_FX_L_02");
-  _func_147(common_scripts\utility::_id_44F5("zmb_ber_zeppelin_spotlight"), self, "TAG_FX_R_01");
-  _func_147(common_scripts\utility::_id_44F5("zmb_ber_zeppelin_spotlight"), self, "TAG_FX_R_02");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_ber_zeppelin_spotlight"), self, "TAG_FX_L_01");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_ber_zeppelin_spotlight"), self, "TAG_FX_L_02");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_ber_zeppelin_spotlight"), self, "TAG_FX_R_01");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_ber_zeppelin_spotlight"), self, "TAG_FX_R_02");
   waitframe();
-  _func_147(common_scripts\utility::_id_44F5("zmb_ber_zep_prop_spin"), self, "prop_left");
-  _func_147(common_scripts\utility::_id_44F5("zmb_ber_zep_prop_spin"), self, "prop_right");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_ber_zep_prop_spin"), self, "prop_left");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_ber_zep_prop_spin"), self, "prop_right");
 }
 
 airship_animation_enter_and_shoot_tethers(var_0) {
   var_1 = getEntArray("airship_anchor_model", "script_noteworthy");
-  var_2 = _func_18E("drop_pod_cable", "script_noteworthy");
-  var_3 = _func_18E("drop_pod_model", "script_noteworthy");
+  var_2 = _getent("drop_pod_cable", "script_noteworthy");
+  var_3 = _getent("drop_pod_model", "script_noteworthy");
   level.anchor_courtyard = undefined;
   level.anchor_museum = undefined;
   level.anchor_refuge = undefined;
   level.anchor_underbelly = undefined;
 
   if(!isDefined(level.straub_airship_model))
-    level.straub_airship_model = _func_18E("straub_airship_exterior_model", "script_noteworthy");
+    level.straub_airship_model = _getent("straub_airship_exterior_model", "script_noteworthy");
 
   level.straub_airship _id_0378::_id_8D74("start_straub_airship_loop");
   level.straub_airship _id_0378::_id_8D74("straub_airship_entrance");
@@ -1291,7 +1291,7 @@ airship_animation_enter_and_shoot_tethers(var_0) {
   level.cable_underbelly setModel("zbr_zeppelin_tether_cable_01");
 
   foreach(var_5 in var_1) {
-    switch (var_5._id_8260) {
+    switch (var_5.setlookatent) {
       case "airship_tether_courtyard":
         level.anchor_courtyard = var_5;
         break;
@@ -1310,31 +1310,31 @@ airship_animation_enter_and_shoot_tethers(var_0) {
   }
 
   wait 1;
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_into", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_into", var_0.origin, var_0.angles);
-  var_3 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_into", var_0.origin, var_0.angles);
-  var_7 = _func_065(%s2_zom_zep_tether_scene_zep_into);
-  level.straub_airship_model common_scripts\utility::_id_2CBE(var_7, ::_meth_8495, "s2_zom_zep_tether_scene_zep_into_idle", var_0.origin, var_0.angles);
-  var_2 common_scripts\utility::_id_2CBE(var_7, ::_meth_8495, "s2_zom_zep_tether_scene_zep_drop_pod_cable_into_idle", var_0.origin, var_0.angles);
-  level.anchor_courtyard _meth_82C1();
-  level.anchor_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_into", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_into", var_0.origin, var_0.angles);
-  level.cable_courtyard common_scripts\utility::_id_2CBE(_func_065(%s2_zom_zep_tether_scene_tether_bolt_br_cable_into), ::_meth_8495, "s2_zom_zep_tether_scene_tether_bolt_br_cable_into_idle", var_0.origin, var_0.angles);
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_into", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_into", var_0.origin, var_0.angles);
+  var_3 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_into", var_0.origin, var_0.angles);
+  var_7 = _getanimlength(%s2_zom_zep_tether_scene_zep_into);
+  level.straub_airship_model common_scripts\utility::_id_2CBE(var_7, ::scriptmodelplayanimdeltamotionfrompos, "s2_zom_zep_tether_scene_zep_into_idle", var_0.origin, var_0.angles);
+  var_2 common_scripts\utility::_id_2CBE(var_7, ::scriptmodelplayanimdeltamotionfrompos, "s2_zom_zep_tether_scene_zep_drop_pod_cable_into_idle", var_0.origin, var_0.angles);
+  level.anchor_courtyard solid();
+  level.anchor_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_into", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_into", var_0.origin, var_0.angles);
+  level.cable_courtyard common_scripts\utility::_id_2CBE(_getanimlength(%s2_zom_zep_tether_scene_tether_bolt_br_cable_into), ::scriptmodelplayanimdeltamotionfrompos, "s2_zom_zep_tether_scene_tether_bolt_br_cable_into_idle", var_0.origin, var_0.angles);
   level.anchor_courtyard thread play_tether_impact_shake(%s2_zom_zep_tether_scene_tether_bolt_br_into, 0.9799, 0.5);
-  level.anchor_museum _meth_82C1();
-  level.anchor_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_into", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_into", var_0.origin, var_0.angles);
-  level.cable_museum common_scripts\utility::_id_2CBE(_func_065(%s2_zom_zep_tether_scene_tether_bolt_fr_cable_into), ::_meth_8495, "s2_zom_zep_tether_scene_tether_bolt_fr_cable_into_idle", var_0.origin, var_0.angles);
+  level.anchor_museum solid();
+  level.anchor_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_into", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_into", var_0.origin, var_0.angles);
+  level.cable_museum common_scripts\utility::_id_2CBE(_getanimlength(%s2_zom_zep_tether_scene_tether_bolt_fr_cable_into), ::scriptmodelplayanimdeltamotionfrompos, "s2_zom_zep_tether_scene_tether_bolt_fr_cable_into_idle", var_0.origin, var_0.angles);
   level.anchor_museum thread play_tether_impact_shake(%s2_zom_zep_tether_scene_tether_bolt_fr_into, 0.9833, 0.3);
-  level.anchor_refuge _meth_82C1();
-  level.anchor_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_into", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_into", var_0.origin, var_0.angles);
-  level.cable_refuge common_scripts\utility::_id_2CBE(_func_065(%s2_zom_zep_tether_scene_tether_bolt_bl_cable_into), ::_meth_8495, "s2_zom_zep_tether_scene_tether_bolt_bl_cable_into_idle", var_0.origin, var_0.angles);
+  level.anchor_refuge solid();
+  level.anchor_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_into", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_into", var_0.origin, var_0.angles);
+  level.cable_refuge common_scripts\utility::_id_2CBE(_getanimlength(%s2_zom_zep_tether_scene_tether_bolt_bl_cable_into), ::scriptmodelplayanimdeltamotionfrompos, "s2_zom_zep_tether_scene_tether_bolt_bl_cable_into_idle", var_0.origin, var_0.angles);
   level.anchor_refuge thread play_tether_impact_shake(%s2_zom_zep_tether_scene_tether_bolt_bl_into, 0.9813, 0.9);
-  level.anchor_underbelly _meth_82C1();
-  level.anchor_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_into", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_into", var_0.origin, var_0.angles);
-  level.cable_underbelly common_scripts\utility::_id_2CBE(_func_065(%s2_zom_zep_tether_scene_tether_bolt_fl_cable_into), ::_meth_8495, "s2_zom_zep_tether_scene_tether_bolt_fl_cable_into_idle", var_0.origin, var_0.angles);
+  level.anchor_underbelly solid();
+  level.anchor_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_into", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_into", var_0.origin, var_0.angles);
+  level.cable_underbelly common_scripts\utility::_id_2CBE(_getanimlength(%s2_zom_zep_tether_scene_tether_bolt_fl_cable_into), ::scriptmodelplayanimdeltamotionfrompos, "s2_zom_zep_tether_scene_tether_bolt_fl_cable_into_idle", var_0.origin, var_0.angles);
   level.anchor_underbelly thread play_tether_impact_shake(%s2_zom_zep_tether_scene_tether_bolt_fl_into, 0.9826, 0.15);
   wait 3;
   common_scripts\utility::flag_set("airship_tethers_out");
@@ -1342,7 +1342,7 @@ airship_animation_enter_and_shoot_tethers(var_0) {
 
 play_tether_impact_shake(var_0, var_1, var_2) {
   var_3 = 0.75;
-  var_4 = _func_065(var_0) * var_1;
+  var_4 = _getanimlength(var_0) * var_1;
   maps\mp\_utility::_id_2CED(var_4 - var_2, ::earthquake_alive_players_with_origin, 1, 1, 1000, self);
   wait(var_4 - var_3);
   _id_0378::_id_8D74("tether_ground_impact");
@@ -1350,23 +1350,23 @@ play_tether_impact_shake(var_0, var_1, var_2) {
 
   if(self == level.anchor_courtyard) {
     level notify("airship_anchor_courtyard_impact");
-    var_5 = _func_18E("anchor_a_clip", "targetname");
+    var_5 = _getent("anchor_a_clip", "targetname");
     var_5.origin = var_5.origin + (0, 0, 512);
-    var_5 _meth_805F();
+    var_5 disconnectpaths();
     var_6 = _id_0547::_id_408F();
 
     if(isDefined(var_6) && var_6.size > 0) {
       foreach(var_8 in var_6) {
         if(var_8 istouching(var_5))
-          var_8 _meth_8059(999999, var_8.origin);
+          var_8 dodamage(999999, var_8.origin);
       }
     }
   }
 }
 
 airship_animation_pull_down_airship(var_0) {
-  var_1 = _func_18E("drop_pod_cable", "script_noteworthy");
-  var_2 = _func_18E("drop_pod_model", "script_noteworthy");
+  var_1 = _getent("drop_pod_cable", "script_noteworthy");
+  var_2 = _getent("drop_pod_model", "script_noteworthy");
 
   if(!isDefined(level.airship_anchor_flag_array))
     level.airship_anchor_flag_array = ["flag_airship_anchor_a_reeled", "flag_airship_anchor_b_reeled", "flag_airship_anchor_c_reeled", "flag_airship_anchor_d_reeled"];
@@ -1378,131 +1378,131 @@ airship_animation_pull_down_airship(var_0) {
   var_6 thread airship_drop_pod_push_players();
 
   var_3 = common_scripts\utility::_id_0F93(var_3, var_4);
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_drop_down", var_0.origin, var_0.angles);
-  var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_down", var_0.origin, var_0.angles);
-  level.anchor_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_down", var_0.origin, var_0.angles);
-  level.anchor_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_down", var_0.origin, var_0.angles);
-  level.anchor_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_down", var_0.origin, var_0.angles);
-  level.anchor_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_down", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_down", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down", var_0.origin, var_0.angles);
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_down", var_0.origin, var_0.angles);
+  var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_down", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_down", var_0.origin, var_0.angles);
+  level.anchor_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_down", var_0.origin, var_0.angles);
+  level.anchor_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_down", var_0.origin, var_0.angles);
+  level.anchor_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_down", var_0.origin, var_0.angles);
+  level.anchor_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_down", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_down", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down", var_0.origin, var_0.angles);
   var_8 = "25percent";
   thread maps\mp\mp_zombie_berlin_lighting::airship_lowering_light_intensity_control(var_8);
-  var_9 = _func_065(%s2_zom_zep_tether_scene_zep_drop_down);
+  var_9 = _getanimlength(%s2_zom_zep_tether_scene_zep_drop_down);
   wait(var_9);
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_drop_down_idle", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_idle", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_idle", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_idle", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_idle", var_0.origin, var_0.angles);
-  var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_idle", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_idle", var_0.origin, var_0.angles);
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_down_idle", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_idle", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_idle", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_idle", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_idle", var_0.origin, var_0.angles);
+  var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_idle", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_down_idle", var_0.origin, var_0.angles);
   var_10 = common_scripts\utility::_id_3CA3(var_3);
   var_3 = common_scripts\utility::_id_0F93(var_3, var_10);
-  level.straub_airship _meth_8277();
-  var_2 _meth_8277();
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_drop_down_02", var_0.origin, var_0.angles);
-  var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_02", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_02", var_0.origin, var_0.angles);
-  level.anchor_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_down", var_0.origin, var_0.angles);
-  level.anchor_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_down", var_0.origin, var_0.angles);
-  level.anchor_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_down", var_0.origin, var_0.angles);
-  level.anchor_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_down", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_02", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_02", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_02", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_02", var_0.origin, var_0.angles);
+  level.straub_airship scriptmodelclearanim();
+  var_2 scriptmodelclearanim();
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_down_02", var_0.origin, var_0.angles);
+  var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_02", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_down_02", var_0.origin, var_0.angles);
+  level.anchor_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_down", var_0.origin, var_0.angles);
+  level.anchor_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_down", var_0.origin, var_0.angles);
+  level.anchor_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_down", var_0.origin, var_0.angles);
+  level.anchor_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_down", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_02", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_02", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_02", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_02", var_0.origin, var_0.angles);
   var_8 = "50percent";
   thread maps\mp\mp_zombie_berlin_lighting::airship_lowering_light_intensity_control(var_8);
-  var_11 = _func_065(%s2_zom_zep_tether_scene_zep_drop_down_02);
+  var_11 = _getanimlength(%s2_zom_zep_tether_scene_zep_drop_down_02);
   wait(var_11);
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_drop_down_02_idle", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_02_idle", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_02_idle", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_02_idle", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_02_idle", var_0.origin, var_0.angles);
-  var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_02_idle", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_02_idle", var_0.origin, var_0.angles);
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_down_02_idle", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_02_idle", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_02_idle", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_02_idle", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_02_idle", var_0.origin, var_0.angles);
+  var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_02_idle", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_down_02_idle", var_0.origin, var_0.angles);
   var_12 = common_scripts\utility::_id_3CA3(var_3);
   var_3 = common_scripts\utility::_id_0F93(var_3, var_12);
-  level.straub_airship _meth_8277();
-  var_2 _meth_8277();
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_drop_down_03", var_0.origin, var_0.angles);
-  var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_03", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_03", var_0.origin, var_0.angles);
-  level.anchor_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_down", var_0.origin, var_0.angles);
-  level.anchor_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_down", var_0.origin, var_0.angles);
-  level.anchor_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_down", var_0.origin, var_0.angles);
-  level.anchor_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_down", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_03", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_03", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_03", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_03", var_0.origin, var_0.angles);
+  level.straub_airship scriptmodelclearanim();
+  var_2 scriptmodelclearanim();
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_down_03", var_0.origin, var_0.angles);
+  var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_03", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_down_03", var_0.origin, var_0.angles);
+  level.anchor_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_down", var_0.origin, var_0.angles);
+  level.anchor_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_down", var_0.origin, var_0.angles);
+  level.anchor_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_down", var_0.origin, var_0.angles);
+  level.anchor_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_down", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_03", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_03", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_03", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_03", var_0.origin, var_0.angles);
   var_8 = "75percent";
   thread maps\mp\mp_zombie_berlin_lighting::airship_lowering_light_intensity_control(var_8);
-  var_13 = _func_065(%s2_zom_zep_tether_scene_zep_drop_down_03);
+  var_13 = _getanimlength(%s2_zom_zep_tether_scene_zep_drop_down_03);
   wait(var_13);
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_drop_down_03_idle", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_03_idle", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_03_idle", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_03_idle", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_03_idle", var_0.origin, var_0.angles);
-  var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_03_idle", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_03_idle", var_0.origin, var_0.angles);
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_down_03_idle", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_03_idle", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_03_idle", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_03_idle", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_03_idle", var_0.origin, var_0.angles);
+  var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_03_idle", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_down_03_idle", var_0.origin, var_0.angles);
   level.fourth_flag = var_3[0];
   common_scripts\utility::_id_3C9F(level.fourth_flag);
-  level.straub_airship _meth_8277();
-  var_2 _meth_8277();
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_drop_down_04", var_0.origin, var_0.angles);
-  var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_04", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_04", var_0.origin, var_0.angles);
-  level.anchor_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_down_04", var_0.origin, var_0.angles);
-  level.anchor_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_down_04", var_0.origin, var_0.angles);
-  level.anchor_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_down_04", var_0.origin, var_0.angles);
-  level.anchor_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_down_04", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_04", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_04", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_04", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_04", var_0.origin, var_0.angles);
+  level.straub_airship scriptmodelclearanim();
+  var_2 scriptmodelclearanim();
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_down_04", var_0.origin, var_0.angles);
+  var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_04", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_down_04", var_0.origin, var_0.angles);
+  level.anchor_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_down_04", var_0.origin, var_0.angles);
+  level.anchor_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_down_04", var_0.origin, var_0.angles);
+  level.anchor_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_down_04", var_0.origin, var_0.angles);
+  level.anchor_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_down_04", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_04", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_04", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_04", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_04", var_0.origin, var_0.angles);
   var_8 = "100percent";
   thread maps\mp\mp_zombie_berlin_lighting::airship_lowering_light_intensity_control(var_8);
-  var_14 = _func_065(%s2_zom_zep_tether_scene_zep_drop_down_04);
+  var_14 = _getanimlength(%s2_zom_zep_tether_scene_zep_drop_down_04);
   wait(var_14);
-  level.straub_airship_model _meth_8495("s2_zom_zep_tether_scene_zep_drop_down_04_idle", var_0.origin, var_0.angles);
-  level.cable_courtyard _meth_8495("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_04_idle", var_0.origin, var_0.angles);
-  level.cable_museum _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_04_idle", var_0.origin, var_0.angles);
-  level.cable_underbelly _meth_8495("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_04_idle", var_0.origin, var_0.angles);
-  level.cable_refuge _meth_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_04_idle", var_0.origin, var_0.angles);
-  var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_04_idle", var_0.origin, var_0.angles);
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_04_idle", var_0.origin, var_0.angles);
-  var_15 = _func_18E("clip_drop_pod_nav_blocker", "script_noteworthy");
-  var_15 _meth_82C1();
-  var_15 _meth_805F();
-  var_16 = _func_18E("clip_door", "script_noteworthy");
-  var_16 _meth_82C2();
-  var_16 _meth_8060();
-  var_2 _meth_8277();
-  var_2 _meth_8276("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
-  var_2 = _func_18E("drop_pod_model", "script_noteworthy");
-  _func_14C(var_2.lightfx);
-  var_17 = _func_18E("dropcage_push_trigger", "targetname");
+  level.straub_airship_model scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_down_04_idle", var_0.origin, var_0.angles);
+  level.cable_courtyard scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_br_cable_down_04_idle", var_0.origin, var_0.angles);
+  level.cable_museum scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fr_cable_down_04_idle", var_0.origin, var_0.angles);
+  level.cable_underbelly scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_fl_cable_down_04_idle", var_0.origin, var_0.angles);
+  level.cable_refuge scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_04_idle", var_0.origin, var_0.angles);
+  var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_04_idle", var_0.origin, var_0.angles);
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_down_04_idle", var_0.origin, var_0.angles);
+  var_15 = _getent("clip_drop_pod_nav_blocker", "script_noteworthy");
+  var_15 solid();
+  var_15 disconnectpaths();
+  var_16 = _getent("clip_door", "script_noteworthy");
+  var_16 notsolid();
+  var_16 connectpaths();
+  var_2 scriptmodelclearanim();
+  var_2 scriptmodelplayanim("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
+  var_2 = _getent("drop_pod_model", "script_noteworthy");
+  _triggerfx(var_2.lightfx);
+  var_17 = _getent("dropcage_push_trigger", "targetname");
   var_17 delete();
-  var_18 = _func_18E("pod_underneath_clip", "targetname");
-  var_18 _meth_82C1();
-  var_18 _meth_805F();
+  var_18 = _getent("pod_underneath_clip", "targetname");
+  var_18 solid();
+  var_18 disconnectpaths();
 }
 
 airship_animation_drop_pod_movement(var_0) {
   level endon("drop_pod_reached_airship");
-  var_1 = _func_18E("drop_pod_model", "script_noteworthy");
-  var_2 = _func_18E("drop_pod_cable", "script_noteworthy");
-  var_3 = _func_18E("clip_drop_pod_nav_blocker", "script_noteworthy");
-  var_4 = _func_18E("clip_door", "script_noteworthy");
-  var_5 = _func_18E("quest_trig_enter_dropcage", "targetname");
-  var_6 = _func_065(%s2_zom_zep_tether_scene_zep_drop_pod_up);
+  var_1 = _getent("drop_pod_model", "script_noteworthy");
+  var_2 = _getent("drop_pod_cable", "script_noteworthy");
+  var_3 = _getent("clip_drop_pod_nav_blocker", "script_noteworthy");
+  var_4 = _getent("clip_door", "script_noteworthy");
+  var_5 = _getent("quest_trig_enter_dropcage", "targetname");
+  var_6 = _getanimlength(%s2_zom_zep_tether_scene_zep_drop_pod_up);
   level.drop_pod_up_start_time = gettime();
 
   for(;;) {
@@ -1511,15 +1511,15 @@ airship_animation_drop_pod_movement(var_0) {
     foreach(var_8 in level.players)
     var_8 thread pull_players_inside();
 
-    var_1 _meth_8277();
-    var_1 _meth_8276("s2_zmb_drop_pod_close_front", "drop_pod_door_close");
-    var_1 _meth_8277();
-    var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_up", var_0.origin, var_0.angles);
-    var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_up", var_0.origin, var_0.angles);
-    level.straub_airship _meth_8495("s2_zom_zep_tether_scene_zep_up", var_0.origin, var_0.angles);
+    var_1 scriptmodelclearanim();
+    var_1 scriptmodelplayanim("s2_zmb_drop_pod_close_front", "drop_pod_door_close");
+    var_1 scriptmodelclearanim();
+    var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_up", var_0.origin, var_0.angles);
+    var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_up", var_0.origin, var_0.angles);
+    level.straub_airship scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_up", var_0.origin, var_0.angles);
     level.drop_pod_up_start_time = gettime();
-    var_3 _meth_82C2();
-    var_3 _meth_8060();
+    var_3 notsolid();
+    var_3 connectpaths();
     var_10 = level common_scripts\utility::_id_A74D("drop_pod_moving_down", var_6);
 
     if(isDefined(var_10) && var_10 == "timeout")
@@ -1527,30 +1527,30 @@ airship_animation_drop_pod_movement(var_0) {
 
     var_11 = (gettime() - level.drop_pod_up_start_time) * 0.001;
     var_12 = clamp(var_6 - var_11, 0, var_6);
-    var_1 _meth_8277();
-    var_2 _meth_8277();
-    var_1 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_up_reversed", var_0.origin, var_0.angles, "drop_pod_return_to_ground", var_12);
-    var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_up_reversed", var_0.origin, var_0.angles, undefined, var_12);
+    var_1 scriptmodelclearanim();
+    var_2 scriptmodelclearanim();
+    var_1 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_up_reversed", var_0.origin, var_0.angles, "drop_pod_return_to_ground", var_12);
+    var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_cable_up_reversed", var_0.origin, var_0.angles, undefined, var_12);
     wait(var_11);
-    var_1 _meth_8277();
-    var_1 _meth_8276("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
-    var_3 _meth_82C1();
-    var_3 _meth_805F();
-    var_3 _meth_82C2();
-    var_4 _meth_82C2();
-    var_4 _meth_8060();
+    var_1 scriptmodelclearanim();
+    var_1 scriptmodelplayanim("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
+    var_3 solid();
+    var_3 disconnectpaths();
+    var_3 notsolid();
+    var_4 notsolid();
+    var_4 connectpaths();
   }
 }
 
 airship_drop_pod_push_players() {
-  var_0 = _func_18E("dropcage_push_trigger", "targetname");
+  var_0 = _getent("dropcage_push_trigger", "targetname");
   var_1 = common_scripts\utility::_id_46B5("pull_players_here", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_2);
 
     if(var_2 == self) {
-      var_3 = _func_18E("quest_trig_enter_dropcage", "targetname");
+      var_3 = _getent("quest_trig_enter_dropcage", "targetname");
       waitframe();
       player_pulls_towards(var_1.origin, 500);
     }
@@ -1560,16 +1560,16 @@ airship_drop_pod_push_players() {
 }
 
 pull_players_inside() {
-  var_0 = _func_18E("pod_door_trigger", "targetname");
-  var_1 = _func_18E("org_tp_plaza", "script_noteworthy");
-  var_2 = _func_18E("clip_door", "script_noteworthy");
+  var_0 = _getent("pod_door_trigger", "targetname");
+  var_1 = _getent("org_tp_plaza", "script_noteworthy");
+  var_2 = _getent("clip_door", "script_noteworthy");
 
   if(self istouching(var_0))
     self setOrigin(var_1.origin);
 
   wait 1;
-  var_2 _meth_82C1();
-  var_2 _meth_805F();
+  var_2 solid();
+  var_2 disconnectpaths();
 }
 
 player_pulls_towards(var_0, var_1) {
@@ -1578,25 +1578,25 @@ player_pulls_towards(var_0, var_1) {
   var_3 = (var_3[0], var_3[1], 250);
 
   if(var_1 > 0)
-    self _meth_82F7(var_3);
+    self setvelocity(var_3);
 }
 
 airship_animation_airship_drop_pod_open() {
-  var_0 = _func_18E("model_airship_drop_pod", "script_noteworthy");
-  var_0 _meth_8276("s2_zmb_drop_pod_open_front", "airship_drop_pod_door_open");
+  var_0 = _getent("model_airship_drop_pod", "script_noteworthy");
+  var_0 scriptmodelplayanim("s2_zmb_drop_pod_open_front", "airship_drop_pod_door_open");
 }
 
 airship_animation_airship_drop_pod_move_down(var_0) {
   level waittill("airship_drop_pod_moving_down");
-  var_1 = _func_065(%s2_zom_zep_tether_scene_zep_drop_pod_up_reversed);
-  var_2 = _func_18E("drop_pod_model", "script_noteworthy");
-  var_2 _meth_8277();
-  var_2 _meth_8495("s2_zom_zep_tether_scene_zep_drop_pod_up_reversed", var_0.origin, var_0.angles);
+  var_1 = _getanimlength(%s2_zom_zep_tether_scene_zep_drop_pod_up_reversed);
+  var_2 = _getent("drop_pod_model", "script_noteworthy");
+  var_2 scriptmodelclearanim();
+  var_2 scriptmodelplayanimdeltamotionfrompos("s2_zom_zep_tether_scene_zep_drop_pod_up_reversed", var_0.origin, var_0.angles);
   var_2 _id_0378::_id_8D74("droppod_winch_down");
   thread earthquake_alive_players(0.3, var_1, 1000);
   wait(var_1);
-  var_2 _meth_8277();
-  var_2 _meth_8276("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
+  var_2 scriptmodelclearanim();
+  var_2 scriptmodelplayanim("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
   var_2 _id_0378::_id_8D74("droppod_ground_impact");
   level notify("airship_drop_pod_reached_ground");
 }
@@ -1638,7 +1638,7 @@ hack_station_hide_all() {
   var_0 = getEntArray("hack_station_interactable_door", "script_noteworthy");
 
   foreach(var_2 in var_0)
-  var_2 _meth_805C();
+  var_2 hide();
 }
 
 hack_station_hide(var_0) {
@@ -1646,12 +1646,12 @@ hack_station_hide(var_0) {
 
   foreach(var_3 in var_1) {
     if(var_3.classname == "trigger_use") {
-      var_3 _meth_80B3();
+      var_3 makeunusable();
       continue;
     }
 
     if(var_3.classname != "script_origin")
-      var_3 _meth_805C();
+      var_3 hide();
   }
 }
 
@@ -1664,7 +1664,7 @@ hack_station_show_all() {
   var_0 = getEntArray("hack_station_interactable_door", "script_noteworthy");
 
   foreach(var_2 in var_0)
-  var_2 _meth_805B();
+  var_2 show();
 }
 
 hack_station_show(var_0) {
@@ -1677,7 +1677,7 @@ hack_station_show(var_0) {
     }
 
     if(var_3.classname != "script_origin")
-      var_3 _meth_805B();
+      var_3 show();
   }
 }
 
@@ -1711,8 +1711,8 @@ hack_station_think(var_0) {
   var_4 = undefined;
 
   foreach(var_6 in var_1) {
-    if(isDefined(var_6._id_8260)) {
-      switch (var_6._id_8260) {
+    if(isDefined(var_6.setlookatent)) {
+      switch (var_6.setlookatent) {
         case "hack_station_link_org":
           var_4 = var_6;
           break;
@@ -1733,14 +1733,14 @@ hack_station_think(var_0) {
   while(!common_scripts\utility::_id_3C77("hack_stations_disabled")) {
     var_2 waittill("trigger", var_8);
 
-    if(var_8 _meth_83B8() || var_8 _meth_82E5()) {
+    if(var_8 isjumping() || var_8 _meth_82E5()) {
       continue;
     }
     var_9 = var_8;
-    var_9 _meth_8322();
+    var_9 disableweapons();
 
-    if(var_9 _meth_8178() != "stand") {
-      var_9 _meth_8179("stand");
+    if(var_9 getstance() != "stand") {
+      var_9 setstance("stand");
       wait 0.7;
     }
 
@@ -1749,21 +1749,21 @@ hack_station_think(var_0) {
     var_11 = var_8.angles;
     var_3.origin = var_10;
     var_3.angles = var_11;
-    var_9 _meth_8077(var_3, undefined, 0.1, 0, 0, 0, 0);
-    var_3 _meth_82B1(var_4.origin, 0.5, 0, 0);
-    var_3 _meth_82B8(var_4.angles, 0.5, 0, 0);
+    var_9 playerlinkto(var_3, undefined, 0.1, 0, 0, 0, 0);
+    var_3 moveto(var_4.origin, 0.5, 0, 0);
+    var_3 rotateto(var_4.angles, 0.5, 0, 0);
     wait 0.5;
     level notify("player_activated_hack_console");
     var_9 thread hack_station_start_hacking(var_0, var_2);
     var_9 waittill("stop_using_station");
     thread hack_station_cleanup(var_0);
-    var_9 _meth_8323();
-    var_3 _meth_82B1(var_10 + (0, 0, 1), 0.5);
-    var_3 _meth_82B8(var_11, 0.5);
+    var_9 enableweapons();
+    var_3 moveto(var_10 + (0, 0, 1), 0.5);
+    var_3 rotateto(var_11, 0.5);
     wait 0.5;
-    var_9 _meth_8057();
+    var_9 unlink();
     var_9 _meth_812C(1);
-    var_9 _meth_8179("stand");
+    var_9 setstance("stand");
     wait 0.5;
   }
 }
@@ -1805,8 +1805,8 @@ hack_station_handle_inputs(var_0) {
   var_3 = [];
 
   foreach(var_5 in var_1) {
-    if(isDefined(var_5._id_8260)) {
-      switch (var_5._id_8260) {
+    if(isDefined(var_5.setlookatent)) {
+      switch (var_5.setlookatent) {
         case "hack_station_node":
           var_2[var_2.size] = var_5;
           break;
@@ -1824,11 +1824,11 @@ hack_station_handle_inputs(var_0) {
   var_9 = 3.01;
 
   for(;;) {
-    var_7 = self _meth_82F9() / var_9;
+    var_7 = self getnormalizedmovement() / var_9;
 
-    if(_func_0AE(var_7[0]) > _func_0AE(var_7[1]))
+    if(_abs(var_7[0]) > _abs(var_7[1]))
       var_7 = (var_7[0], 0, 0);
-    else if(_func_0AE(var_7[1]) > _func_0AE(var_7[0]))
+    else if(_abs(var_7[1]) > _abs(var_7[0]))
       var_7 = (0, var_7[1], 0);
 
     if(var_7[0] != 0 || var_7[1] != 0)
@@ -1857,7 +1857,7 @@ hack_station_update_light_positions(var_0, var_1, var_2, var_3) {
   var_12 = 0;
 
   foreach(var_14 in var_2) {
-    if(_func_21B(var_5, var_14)) {
+    if(_ispointinvolume(var_5, var_14)) {
       var_10 = 1;
       level.hack_station_current_node = var_14;
       thread hack_station_node_notify_linked_interactable(var_14, self, "node_highlighted");
@@ -1871,7 +1871,7 @@ hack_station_update_light_positions(var_0, var_1, var_2, var_3) {
 
   if(!var_10) {
     foreach(var_14 in var_3) {
-      if(_func_21B(var_5, var_14)) {
+      if(_ispointinvolume(var_5, var_14)) {
         var_10 = 1;
         thread hack_station_node_notify_linked_interactable(var_14, self, "node_abandoned");
 
@@ -1893,7 +1893,7 @@ hack_station_node_notify_linked_interactable(var_0, var_1, var_2) {
   level endon("flag_override_electroschnell_complete");
 
   if(isDefined(level.hack_station_current_node._id_0165)) {
-    var_3 = _func_18E(level.hack_station_current_node._id_0165, "targetname");
+    var_3 = _getent(level.hack_station_current_node._id_0165, "targetname");
     var_3 notify(var_2);
   }
 }
@@ -1908,25 +1908,25 @@ hack_station_blinking_light_update_color() {
   var_4 setModel("zbr_zeppelin_terminal_light");
   var_4.angles = self.tag_org.angles;
   var_4.origin = var_4.origin + anglestoup(var_4.angles) * var_3;
-  var_4 _meth_805C();
+  var_4 hide();
 
   for(;;) {
     self waittill("color_swap", var_5);
 
     if(var_1 == "blue")
-      _func_148(level._effect["hack_spark_" + var_1], self.tag_org, "tag_origin");
+      _stopfxontag(level._effect["hack_spark_" + var_1], self.tag_org, "tag_origin");
 
     waitframe();
 
     if(var_1 != "blue")
-      _func_147(level._effect["hack_spark_" + var_2], self.tag_org, "tag_origin");
+      _playfxontag(level._effect["hack_spark_" + var_2], self.tag_org, "tag_origin");
 
     self.tag_org_color = var_2;
     var_1 = var_2;
 
     if(var_1 == "blue") {
       var_2 = "green";
-      var_4 _meth_805C();
+      var_4 hide();
       var_4 _id_0378::_id_8D74("aud_zep_puzzle_light_switch_off");
       continue;
     }
@@ -1936,7 +1936,7 @@ hack_station_blinking_light_update_color() {
     if(isDefined(var_5)) {
       var_6 = common_scripts\utility::_id_4461(self.tag_org.origin, var_0, 5);
       var_4.origin = var_6.origin + anglestoup(var_6.angles) * var_3;
-      var_4 common_scripts\utility::_id_2CBE(0.05, ::_meth_805B);
+      var_4 common_scripts\utility::_id_2CBE(0.05, ::show);
       var_4 _id_0378::_id_8D74("aud_zep_puzzle_light_switch");
     }
   }
@@ -1958,21 +1958,21 @@ hack_station_update_spark_along_path() {
   level.hackstationdata = [];
   level.hackstationdata["right"] = [];
   level.hackstationdata["forward"] = [];
-  hack_station_reset_data(_func_18E("airship_node_03_01", "targetname").origin);
+  hack_station_reset_data(_getent("airship_node_03_01", "targetname").origin);
 
   for(;;) {
-    var_0 = _func_18E(level.hack_station_current_node._id_0165, "targetname");
+    var_0 = _getent(level.hack_station_current_node._id_0165, "targetname");
     var_1 = hack_station_get_all_nodes_connected_to_node(var_0);
     var_2 = level.hack_station_current_node.targetname;
     var_3 = common_scripts\utility::_id_4461(level.hack_station_current_node.origin, getEntArray("hack_station_light", "script_noteworthy"));
     hack_station_hack_station_data_populate(var_1, var_0, var_3, var_2);
     level.hackstationdata["previous_org"] = var_0.origin + (level.hackstationdata["forward"]["offset_from_in_world_node"], level.hackstationdata["right"]["offset_from_in_world_node"], 0);
-    var_4 = _func_18E("airship_node_03_02", "targetname");
-    var_5 = _func_0E1(var_4.origin, level.hackstationdata["previous_org"]);
+    var_4 = _getent("airship_node_03_02", "targetname");
+    var_5 = _distance2d(var_4.origin, level.hackstationdata["previous_org"]);
 
     if(var_5 < 500) {
-      var_6 = _func_18E("airship_node_03_03", "targetname");
-      var_7 = _func_0E1(var_6.origin, var_4.origin);
+      var_6 = _getent("airship_node_03_03", "targetname");
+      var_7 = _distance2d(var_6.origin, var_4.origin);
 
       if(var_5 < var_7)
         level.hackstationdata["previous_org"] = (level.hackstationdata["previous_org"][0], level.hackstationdata["previous_org"][1], var_4.origin[2]);
@@ -2003,12 +2003,12 @@ hack_station_hack_station_data_populate(var_0, var_1, var_2, var_3) {
     var_6 = var_0[var_5].origin[1] - var_1.origin[1];
     var_7 = var_0[var_5].origin[0] - var_1.origin[0];
 
-    if(_func_0AE(var_6) > _func_0AE(var_7)) {
-      if(_func_0AE(level.hackstationdata["right"]["total_in_world_dist"]) > 0) {
+    if(_abs(var_6) > _abs(var_7)) {
+      if(_abs(level.hackstationdata["right"]["total_in_world_dist"]) > 0) {
         var_8 = var_1.origin[1] - level.hackstationdata["previous_org"][1];
         var_9 = var_6;
 
-        if(var_8 / _func_0AE(var_8) != var_6 / _func_0AE(var_6)) {
+        if(var_8 / _abs(var_8) != var_6 / _abs(var_6)) {
           level.hackstationdata["right"]["total_in_world_dist"] = var_6;
           hack_station_data_populate_scaled_distances("right", var_1, var_0[var_5], var_2, var_3);
           var_4 = var_0[var_5];
@@ -2022,12 +2022,12 @@ hack_station_hack_station_data_populate(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(_func_0AE(level.hackstationdata["forward"]["total_in_world_dist"]) > 0) {
+    if(_abs(level.hackstationdata["forward"]["total_in_world_dist"]) > 0) {
       var_8 = var_1.origin[0] - level.hackstationdata["previous_org"][0];
       var_10 = undefined;
 
       if(var_8 != 0)
-        var_10 = var_8 / _func_0AE(var_8);
+        var_10 = var_8 / _abs(var_8);
       else
         var_10 = 0;
 
@@ -2035,7 +2035,7 @@ hack_station_hack_station_data_populate(var_0, var_1, var_2, var_3) {
       var_11 = undefined;
 
       if(var_9 != 0)
-        var_11 = var_7 / _func_0AE(var_7);
+        var_11 = var_7 / _abs(var_7);
       else
         var_11 = 0;
 
@@ -2062,7 +2062,7 @@ hack_station_hack_station_data_populate(var_0, var_1, var_2, var_3) {
   var_6 = level.hackstationdata["right"]["offset_from_in_world_node"];
   var_7 = level.hackstationdata["forward"]["offset_from_in_world_node"];
 
-  if(_func_0AE(var_6) < _func_0AE(var_7)) {
+  if(_abs(var_6) < _abs(var_7)) {
     level.hackstationdata["right"]["offset_from_in_world_node"] = level.hackstationdata["right"]["offset_from_in_world_node"] / 1000;
     level.in_world_spark.angles = (level.in_world_spark.angles[0], 90, level.in_world_spark.angles[2]);
   } else {
@@ -2105,7 +2105,7 @@ hack_station_data_populate_scaled_distances(var_0, var_1, var_2, var_3, var_4) {
     level.hackstationdata[var_0]["offset_from_current_station_node"] = var_11.origin[1] - var_3.origin[1];
   }
 
-  if(_func_0AE(level.hackstationdata[var_0]["total_in_world_dist"]) > 0 && _func_0AE(level.hackstationdata[var_0]["total_hack_station_dist"]) > 0)
+  if(_abs(level.hackstationdata[var_0]["total_in_world_dist"]) > 0 && _abs(level.hackstationdata[var_0]["total_hack_station_dist"]) > 0)
     var_15 = level.hackstationdata[var_0]["total_in_world_dist"] / level.hackstationdata[var_0]["total_hack_station_dist"];
   else
     var_15 = 0;
@@ -2145,8 +2145,8 @@ hack_station_check_color_against_triggers(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4._id_8260)) {
-      switch (var_4._id_8260) {
+    if(isDefined(var_4.setlookatent)) {
+      switch (var_4.setlookatent) {
         case "hack_station_node":
           var_2[var_2.size] = var_4;
           break;
@@ -2179,7 +2179,7 @@ hack_station_check_color_against_triggers(var_0) {
 }
 
 hack_station_attempt_soul_collection_on_node(var_0) {
-  var_1 = _func_18E(var_0._id_0165, "targetname");
+  var_1 = _getent(var_0._id_0165, "targetname");
   var_1 notify("kill_extra_soulbucket_threads");
   var_1 endon("kill_extra_soulbucket_threads");
 
@@ -2196,7 +2196,7 @@ hack_station_attempt_soul_collection_on_node(var_0) {
     return;
   }
   foreach(var_8 in var_5) {
-    if(_func_0E1(var_1.origin, var_8.origin) < var_2 / var_4 && _func_0AE(var_1.origin[2] - var_8.origin[2]) < var_3 / var_4) {
+    if(_distance2d(var_1.origin, var_8.origin) < var_2 / var_4 && _abs(var_1.origin[2] - var_8.origin[2]) < var_3 / var_4) {
       var_6 = var_8;
       break;
     }
@@ -2213,7 +2213,7 @@ hack_station_attempt_soul_collection_on_node(var_0) {
     var_6 maps\mp\mp_zombies_soul_collection::_id_865C("scripted_soul_eat", 0);
 
   waitframe();
-  var_6 _meth_8059(999999, var_6.origin);
+  var_6 dodamage(999999, var_6.origin);
   var_1.soul_charged = 1;
   level notify("hack_node_soul_collected");
   wait 1;
@@ -2240,14 +2240,14 @@ hack_station_interactable_handler() {
 
 hack_station_interactable_bay_door() {
   level endon("flag_override_electroschnell_complete");
-  var_0 = _func_18E("airship_node_03_03", "targetname");
+  var_0 = _getent("airship_node_03_03", "targetname");
   var_1 = 0;
 
   if(!var_1) {
     var_0 waittill("hack_interact");
 
     foreach(var_3 in level._id_AC1D) {
-      if(isDefined(var_3._id_819A) && var_3._id_819A == "airship_bay_door")
+      if(isDefined(var_3.getnegotiationnextnode) && var_3.getnegotiationnextnode == "airship_bay_door")
         var_3 notify("open");
     }
 
@@ -2258,14 +2258,14 @@ hack_station_interactable_bay_door() {
 
 hack_station_interactable_lab_door_left() {
   level endon("flag_override_electroschnell_complete");
-  var_0 = _func_18E("airship_node_01_02", "targetname");
+  var_0 = _getent("airship_node_01_02", "targetname");
   var_1 = 0;
 
   if(!var_1) {
     var_0 waittill("hack_interact");
 
     foreach(var_3 in level._id_AC1D) {
-      if(isDefined(var_3._id_819A) && var_3._id_819A == "airship_lab_door_left")
+      if(isDefined(var_3.getnegotiationnextnode) && var_3.getnegotiationnextnode == "airship_lab_door_left")
         var_3 notify("open");
     }
 
@@ -2276,14 +2276,14 @@ hack_station_interactable_lab_door_left() {
 
 hack_station_interactable_lab_door_left_back() {
   level endon("flag_override_electroschnell_complete");
-  var_0 = _func_18E("airship_node_02_01", "targetname");
+  var_0 = _getent("airship_node_02_01", "targetname");
   var_1 = 0;
 
   if(!var_1) {
     var_0 waittill("hack_interact");
 
     foreach(var_3 in level._id_AC1D) {
-      if(isDefined(var_3._id_819A) && var_3._id_819A == "airship_lab_door_left_back")
+      if(isDefined(var_3.getnegotiationnextnode) && var_3.getnegotiationnextnode == "airship_lab_door_left_back")
         var_3 notify("open");
     }
 
@@ -2294,14 +2294,14 @@ hack_station_interactable_lab_door_left_back() {
 
 hack_station_interactable_lab_door_right() {
   level endon("flag_override_electroschnell_complete");
-  var_0 = _func_18E("airship_node_05_02", "targetname");
+  var_0 = _getent("airship_node_05_02", "targetname");
   var_1 = 0;
 
   if(!var_1) {
     var_0 waittill("hack_interact");
 
     foreach(var_3 in level._id_AC1D) {
-      if(isDefined(var_3._id_819A) && var_3._id_819A == "airship_lab_door_right")
+      if(isDefined(var_3.getnegotiationnextnode) && var_3.getnegotiationnextnode == "airship_lab_door_right")
         var_3 notify("open");
     }
 
@@ -2312,14 +2312,14 @@ hack_station_interactable_lab_door_right() {
 
 hack_station_interactable_lab_door_right_back() {
   level endon("flag_override_electroschnell_complete");
-  var_0 = _func_18E("airship_node_04_01", "targetname");
+  var_0 = _getent("airship_node_04_01", "targetname");
   var_1 = 0;
 
   if(!var_1) {
     var_0 waittill("hack_interact");
 
     foreach(var_3 in level._id_AC1D) {
-      if(isDefined(var_3._id_819A) && var_3._id_819A == "airship_lab_door_right_back")
+      if(isDefined(var_3.getnegotiationnextnode) && var_3.getnegotiationnextnode == "airship_lab_door_right_back")
         var_3 notify("open");
     }
 
@@ -2329,7 +2329,7 @@ hack_station_interactable_lab_door_right_back() {
 }
 
 hack_station_interactable_straub_node() {
-  var_0 = _func_18E("airship_node_03_05", "targetname");
+  var_0 = _getent("airship_node_03_05", "targetname");
 
   if(!isDefined(var_0._id_A203)) {
     var_0 waittill("hack_interact");
@@ -2340,7 +2340,7 @@ hack_station_interactable_straub_node() {
 
 hack_station_moving_spark_handler() {
   level endon("flag_override_electroschnell_complete");
-  var_0 = _func_18E("airship_node_03_01", "targetname");
+  var_0 = _getent("airship_node_03_01", "targetname");
   level.in_world_spark = spawn("script_model", var_0.origin);
   level.in_world_spark setModel("tag_origin");
   thread hack_station_moving_spark_fx_swap();
@@ -2356,18 +2356,18 @@ hack_station_moving_spark_handler() {
 }
 
 power_source_effects() {
-  var_0 = _func_18E("power_source_bottom_model", "targetname");
-  var_1 = _func_14B(level._effect["zmb_ber_zep_power_source_on"], var_0.origin, anglesToForward(var_0.angles));
-  _func_14C(var_1);
+  var_0 = _getent("power_source_bottom_model", "targetname");
+  var_1 = _spawnfx(level._effect["zmb_ber_zep_power_source_on"], var_0.origin, anglesToForward(var_0.angles));
+  _triggerfx(var_1);
   common_scripts\utility::_id_3C9F("flag_override_electroschnell_complete");
   wait 10;
   _id_0378::_id_8D74("aud_electroschnell_overload_explo");
-  var_2 = _func_14B(level._effect["zmb_ber_zep_power_source_buildup"], var_0.origin, anglesToForward(var_0.angles));
-  _func_14C(var_2);
+  var_2 = _spawnfx(level._effect["zmb_ber_zep_power_source_buildup"], var_0.origin, anglesToForward(var_0.angles));
+  _triggerfx(var_2);
   wait 2;
   var_1 delete();
-  var_3 = _func_14B(level._effect["zmb_ber_zep_power_source_overload"], var_0.origin, anglesToForward(var_0.angles));
-  _func_14C(var_3);
+  var_3 = _spawnfx(level._effect["zmb_ber_zep_power_source_overload"], var_0.origin, anglesToForward(var_0.angles));
+  _triggerfx(var_3);
   wait 0.5;
   thread earthquake_alive_players(0.2, 2, 1000);
   wait 1;
@@ -2378,35 +2378,35 @@ power_source_effects() {
 
 hack_station_moving_spark_fx_swap() {
   level endon("flag_override_electroschnell_complete");
-  var_0 = _func_18E("airship_node_03_01", "targetname");
+  var_0 = _getent("airship_node_03_01", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
   thread hack_station_moving_spark_fx_kill(var_1);
-  _func_147(level._effect["zmb_ber_shp_elec_tube_point"], var_1, "tag_origin");
+  _playfxontag(level._effect["zmb_ber_shp_elec_tube_point"], var_1, "tag_origin");
 
   for(;;) {
     level.in_world_spark waittill("swap_spark_FX", var_2, var_3, var_4);
 
     if(isDefined(var_4)) {
       var_1.origin = var_4.origin;
-      _func_149(level._effect[var_3], level.in_world_spark, "tag_origin");
-      _func_147(level._effect[var_2], var_1, "tag_origin");
+      _killfxontag(level._effect[var_3], level.in_world_spark, "tag_origin");
+      _playfxontag(level._effect[var_2], var_1, "tag_origin");
       var_1 _id_0378::_id_8D74("aud_zep_puzzle_spark_leave");
       continue;
     }
 
-    _func_149(level._effect[var_3], var_1, "tag_origin");
-    _func_147(level._effect[var_2], level.in_world_spark, "tag_origin");
+    _killfxontag(level._effect[var_3], var_1, "tag_origin");
+    _playfxontag(level._effect[var_2], level.in_world_spark, "tag_origin");
     var_1 _id_0378::_id_8D74("aud_zep_puzzle_spark_arrive");
   }
 }
 
 hack_station_moving_spark_fx_kill(var_0) {
   level waittill("airship_drop_pod_reached_ground");
-  _func_149(level._effect["hack_node_light_00"], var_0, "tag_origin");
-  _func_149(level._effect["hack_node_light_01"], var_0, "tag_origin");
-  _func_149(level._effect["hack_node_light_00"], level.in_world_spark, "tag_origin");
-  _func_149(level._effect["hack_node_light_01"], level.in_world_spark, "tag_origin");
+  _killfxontag(level._effect["hack_node_light_00"], var_0, "tag_origin");
+  _killfxontag(level._effect["hack_node_light_01"], var_0, "tag_origin");
+  _killfxontag(level._effect["hack_node_light_00"], level.in_world_spark, "tag_origin");
+  _killfxontag(level._effect["hack_node_light_01"], level.in_world_spark, "tag_origin");
 }
 
 hack_station_moving_spark_position_think() {
@@ -2431,7 +2431,7 @@ hack_station_interactable_generic_node_think() {
 
 hack_station_cleanup(var_0) {
   if(isDefined(level.hack_station_current_node._id_0165)) {
-    var_1 = _func_18E(level.hack_station_current_node._id_0165, "targetname");
+    var_1 = _getent(level.hack_station_current_node._id_0165, "targetname");
     var_1 notify("hack_interact");
   }
 }
@@ -2443,7 +2443,7 @@ berlinroundstart() {
 }
 
 berlinroundstartvo() {
-  wait(_func_0A4(2, 6));
+  wait(_randomintrange(2, 6));
 
   if(!common_scripts\utility::_id_3C77("flag_exit_underbelly"))
     common_scripts\utility::random(level.players) _id_0367::_id_8E3D("wavebreak_underbelly");
@@ -2484,7 +2484,7 @@ berlinroundend() {
 }
 
 berlinroundendvo() {
-  wait(_func_0A4(1, 3));
+  wait(_randomintrange(1, 3));
 
   if(!common_scripts\utility::_id_3C77("flag_straub_death_scene")) {
     switch (level._id_A980) {
@@ -2589,7 +2589,7 @@ vo_straub_death() {
 }
 
 vo_church_reaction() {
-  var_0 = _func_18E("church_vo", "targetname");
+  var_0 = _getent("church_vo", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -2605,7 +2605,7 @@ vo_church_reaction() {
 }
 
 vo_cabaret_reaction() {
-  var_0 = _func_18E("cabaret_vo", "targetname");
+  var_0 = _getent("cabaret_vo", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -2621,7 +2621,7 @@ vo_cabaret_reaction() {
 }
 
 vo_museum_reaction() {
-  var_0 = _func_18E("museum_vo", "targetname");
+  var_0 = _getent("museum_vo", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -2637,7 +2637,7 @@ vo_museum_reaction() {
 }
 
 vo_radio_code() {
-  var_0 = _func_18E("radio_code_vo", "targetname");
+  var_0 = _getent("radio_code_vo", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -2735,7 +2735,7 @@ zombies_look_at(var_0) {
   var_4 = vectorNormalize(anglesToForward(self _meth_8566()));
   var_5 = vectordot(var_3, var_4);
   waitframe();
-  var_6 = _func_0AA(clamp(var_5, -1, 1));
+  var_6 = _acos(clamp(var_5, -1, 1));
 
   if(var_6 < 25 && distance(var_1, var_2) < 420)
     return 1;
@@ -2769,7 +2769,7 @@ spine_zombie_collect_listener(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
       return;
   }
 
-  _func_18B(var_9 + " collected!");
+  _iprintln(var_9 + " collected!");
   var_1.spine_hint_complete = 1;
   common_scripts\utility::flag_set("flag_quest_wunderbuss_geistbolt_collected");
   level notify("spine_collected", var_9, var_1);
@@ -2788,7 +2788,7 @@ spine_collect(var_0) {
 spine_pickup_anim(var_0) {
   var_1 = self;
 
-  while(var_1 _meth_833B())
+  while(var_1 isswitchingweapon())
     waitframe();
 
   var_2 = var_1 getcurrentweapon();
@@ -2796,12 +2796,12 @@ spine_pickup_anim(var_0) {
   var_1 common_scripts\utility::_disableoffhandweapons();
   var_1 _id_0586::_id_078C(var_0);
   var_1 _id_0586::_id_078E(var_0, 1);
-  var_1 _meth_8305(0);
-  var_1 _meth_8308(0);
+  var_1 allowjump(0);
+  var_1 allowsprint(0);
   wait 0.1;
-  var_1 _meth_8179("stand");
-  var_1 _meth_8113(0);
-  var_1 _meth_8114(0);
+  var_1 setstance("stand");
+  var_1 allowcrouch(0);
+  var_1 allowprone(0);
   var_1 waittill("weapon_change");
   wait 3.0;
 
@@ -2812,13 +2812,13 @@ spine_pickup_anim(var_0) {
   var_1 common_scripts\utility::_id_0617();
   var_1 common_scripts\utility::_id_0614();
 
-  if(var_1 _meth_8319(var_0))
+  if(var_1 hasweapon(var_0))
     var_1 _id_0586::_id_0790(var_0);
 
   var_1 _meth_8546(1);
-  var_1 _meth_8115(1);
-  var_1 _meth_8308(1);
-  var_1 _meth_8113(1);
-  var_1 _meth_8114(1);
-  var_1 _meth_8305(1);
+  var_1 allowlean(1);
+  var_1 allowsprint(1);
+  var_1 allowcrouch(1);
+  var_1 allowprone(1);
+  var_1 allowjump(1);
 }

@@ -39,7 +39,7 @@ _id_A150() {
   else if(level._id_9850[maps\mp\_utility::getotherteam(var_1)])
     var_0 = 1;
 
-  self _meth_82FF("ui_minimap_antiair_state", var_0);
+  self setclientomnvar("ui_minimap_antiair_state", var_0);
 }
 
 _id_A14F() {
@@ -57,5 +57,5 @@ _id_A14F() {
       var_0 = var_0 * -1;
   }
 
-  self _meth_82FF("ui_minimap_antiair_state", var_0);
+  self setclientomnvar("ui_minimap_antiair_state", var_0);
 }

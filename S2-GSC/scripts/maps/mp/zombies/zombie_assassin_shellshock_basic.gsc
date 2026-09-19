@@ -28,36 +28,36 @@ spawn_an_aod() {
     if(common_scripts\utility::_id_562E(var_2._id_5728)) {
       continue;
     }
-    if(_func_0E1(var_0, var_2.origin) < 265 && _func_0AE(self.origin[2] - var_2.origin[2]) < 128) {
+    if(_distance2d(var_0, var_2.origin) < 265 && _abs(self.origin[2] - var_2.origin[2]) < 128) {
       if(_id_0564::should_longburn(var_2))
         thread _id_0564::prolonged_damage(var_2, 5);
 
-      var_3 = 3 * (_func_0E1(var_0, var_2.origin) / 265);
-      var_4 = 4 * (_func_0E1(var_0, var_2.origin) / 265);
+      var_3 = 3 * (_distance2d(var_0, var_2.origin) / 265);
+      var_4 = 4 * (_distance2d(var_0, var_2.origin) / 265);
       var_2 thread run_shellshock(var_4, var_3, self.origin);
       level notify("survivalist_blood_2_type_2_failed");
     }
 
-    if(_func_0E1(var_0, var_2.origin) > 185 || _func_0AE(self.origin[2] - var_2.origin[2]) > 128) {
+    if(_distance2d(var_0, var_2.origin) > 185 || _abs(self.origin[2] - var_2.origin[2]) > 128) {
       continue;
     }
     level notify("survivalist_blood_2_type_2_failed");
-    var_2 _meth_8059(75, var_0);
+    var_2 dodamage(75, var_0);
   }
 }
 
 run_shellshock(var_0, var_1, var_2) {
   var_3 = 300;
   self endon("death");
-  self _meth_8182("zm_heavy_hit", var_0 * 1.4, var_1);
-  self _meth_8308(0);
-  self _meth_809F("damage_heavy");
+  self shellshock("zm_heavy_hit", var_0 * 1.4, var_1);
+  self allowsprint(0);
+  self playrumbleonentity("damage_heavy");
   var_4 = self.origin - var_2;
   var_4 = (var_4[0], var_4[1], 0);
   var_4 = var_3 * vectorNormalize(var_4);
   var_4 = (var_4[0], var_4[1], 125);
-  self _meth_82F7(var_4);
-  self _meth_8308(1);
+  self setvelocity(var_4);
+  self allowsprint(1);
   self.current_fog_state = undefined;
 }
 
@@ -116,7 +116,7 @@ throw_debris() {
 
       var_13 = 215 * vectorNormalize(anglesToForward(vectortoangles(var_9.origin - self.origin)));
       var_13 = (var_13[0], var_13[1], var_2);
-      var_14 = _func_071("jack_in_box_decoy_zm", _func_2E1(self.origin, self) + (0, 0, 32), var_13, 10, self, 1);
+      var_14 = _magicgrenademanual("jack_in_box_decoy_zm", _func_2E1(self.origin, self) + (0, 0, 32), var_13, 10, self, 1);
       _id_057D::_id_737D(var_14, 30, ::do_shellshock_jack_buff);
       continue;
     }
@@ -126,8 +126,8 @@ throw_debris() {
     var_15 = (var_15[0], var_15[1], var_2);
     var_14 = spawn("script_model", self.origin + (randomint(64) - 64, randomint(64) - 64, 0));
     var_14 setModel(var_8);
-    var_14 _meth_82B5(var_15, 5);
-    var_14 _meth_83E5((_func_0A4(var_3, var_4), _func_0A4(var_3, var_4), _func_0A4(var_3, var_4)), 5);
+    var_14 movegravity(var_15, 5);
+    var_14 rotateby((_randomintrange(var_3, var_4), _randomintrange(var_3, var_4), _randomintrange(var_3, var_4)), 5);
     var_14 thread delete_after(5);
   }
 }
@@ -172,7 +172,7 @@ do_jack_blood_beam(var_0) {
   wait 0.75;
   var_0 thread _id_0378::_id_8D74("aud_wonder_weapon_electrocute_end");
   playFX(common_scripts\utility::_id_44F5("zmb_isl_med_trap_gib_rnr"), var_0.origin);
-  var_0 _meth_8059(var_0.health + 1, self.origin, undefined, undefined, "MOD_PROJECTILE", "fliegerfaust_zm");
+  var_0 dodamage(var_0.health + 1, self.origin, undefined, undefined, "MOD_PROJECTILE", "fliegerfaust_zm");
   var_2 delete();
   var_1 delete();
 }

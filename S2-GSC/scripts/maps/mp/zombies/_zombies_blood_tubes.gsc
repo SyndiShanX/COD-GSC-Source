@@ -4,7 +4,7 @@
 ************************************************************/
 
 init() {
-  _func_142("damage_heavy");
+  _precacherumble("damage_heavy");
   link_teleporters("bt_limbo_entrance_2", "zone_crash", "bt_archives_entrance_1", "zone_archives_closet");
   link_teleporters("bt_archives_entrance_1", "zone_archives_closet", "bt_alter_entrance_1", "zone_alter");
   link_teleporters("bt_alter_entrance_1", "zone_alter", "bt_limbo_entrance_2", "zone_crash");
@@ -50,13 +50,13 @@ handle_pap_button(var_0) {
 
   for(;;) {
     var_0._id_9D65 waittill("trigger", var_3);
-    var_0.stone _meth_82B1(var_2, 0.5, 0, 0.1);
+    var_0.stone moveto(var_2, 0.5, 0, 0.1);
     _id_0378::_id_8D74("aud_deathraven_button", var_0.stone);
     level.papoverridden = 1;
     wait 0.5;
     var_0.stone setModel("zmf_blood_tube_brick_01_glow");
     var_0._id_9D65 waittill("trigger", var_3);
-    var_0.stone _meth_82B1(var_1, 0.5, 0, 0.1);
+    var_0.stone moveto(var_1, 0.5, 0, 0.1);
     _id_0378::_id_8D74("aud_deathraven_button", var_0.stone);
     level.papoverridden = 0;
     wait 0.5;
@@ -88,17 +88,17 @@ init_pap_button(var_0) {
 run_my_teleporter() {
   tube_setup();
 
-  while(!level._id_AC80._id_ACB3[level.blood_tube_links[self._id_82EC][1]]._id_556E || !level._id_AC80._id_ACB3[level.blood_tube_links[self._id_82EC][3]]._id_556E)
+  while(!level._id_AC80._id_ACB3[level.blood_tube_links[self.weaponlocktargettooclose][1]]._id_556E || !level._id_AC80._id_ACB3[level.blood_tube_links[self.weaponlocktargettooclose][3]]._id_556E)
     waitframe();
 
-  if(isDefined(self._id_8260) && self._id_8260 == "boss_tube_enter")
+  if(isDefined(self.setlookatent) && self.setlookatent == "boss_tube_enter")
     thread boss_tube_wait_for_interact();
-  else if(self._id_82EC == "bt_gallery_entrance_1")
+  else if(self.weaponlocktargettooclose == "bt_gallery_entrance_1")
     thread bonus_tube_wait_for_interact();
   else
     thread tube_wait_for_interact();
 
-  if(self._id_82EC == "bt_gallery_entrance_1")
+  if(self.weaponlocktargettooclose == "bt_gallery_entrance_1")
     thread tube_transport_logic("flag_bonus_plates_filled");
   else
     thread tube_transport_logic();
@@ -136,7 +136,7 @@ tube_setup() {
       case "door_l_pivot":
         self.door_l_pivot = var_2;
         self.door_l_pivot.initialangles = self.door_l_pivot.angles;
-        self.door_l._id_241F = _func_18E(self.door_l_pivot.target, "targetname");
+        self.door_l._id_241F = _getent(self.door_l_pivot.target, "targetname");
         self.door_l._id_241F._id_A045 = ::transport_unresolved_collide;
         self.door_l._id_241F._id_206B = self;
         self.door_l._id_241F linktosynchronizedparent(self.door_l_pivot);
@@ -144,7 +144,7 @@ tube_setup() {
       case "door_r_pivot":
         self.door_r_pivot = var_2;
         self.door_r_pivot.initialangles = self.door_r_pivot.angles;
-        self.door_r._id_241F = _func_18E(self.door_r_pivot.target, "targetname");
+        self.door_r._id_241F = _getent(self.door_r_pivot.target, "targetname");
         self.door_r._id_241F._id_A045 = ::transport_unresolved_collide;
         self.door_r._id_241F._id_206B = self;
         self.door_r._id_241F linktosynchronizedparent(self.door_r_pivot);
@@ -222,7 +222,7 @@ tube_wait_for_interact() {
 
 tube_transport_logic(var_0) {
   var_1 = self;
-  var_2 = level.blood_tube_links[var_1._id_82EC][2];
+  var_2 = level.blood_tube_links[var_1.weaponlocktargettooclose][2];
   var_3 = var_1.blood_fill._id_A796;
 
   if(isDefined(var_0))
@@ -275,7 +275,7 @@ tube_transport_logic(var_0) {
     wait 2;
     wait(var_3);
 
-    if(isDefined(var_1._id_82EC) && var_1._id_82EC != "bt_gallery_entrance_1" && var_1._id_82EC != "bt_gluttony_entrance_1")
+    if(isDefined(var_1.weaponlocktargettooclose) && var_1.weaponlocktargettooclose != "bt_gallery_entrance_1" && var_1.weaponlocktargettooclose != "bt_gluttony_entrance_1")
       maps\mp\mp_zombie_descent_ee_side::dark_passenger_test(var_5);
 
     send_players_to_destination_location(var_5, var_1);
@@ -316,10 +316,10 @@ tube_transport_logic(var_0) {
 }
 
 is_boss_tube_short_circut() {
-  if(isDefined(self._id_8260) && self._id_8260 == "boss_tube_enter" && !common_scripts\utility::_id_3C77("flag_boss_arena_teleport_began"))
+  if(isDefined(self.setlookatent) && self.setlookatent == "boss_tube_enter" && !common_scripts\utility::_id_3C77("flag_boss_arena_teleport_began"))
     return 1;
 
-  if(_id_0547::_id_5565(self._id_82EC, "bt_citadel_entrance_1") && !common_scripts\utility::_id_3C77("flag_boss_arena_teleport_began"))
+  if(_id_0547::_id_5565(self.weaponlocktargettooclose, "bt_citadel_entrance_1") && !common_scripts\utility::_id_3C77("flag_boss_arena_teleport_began"))
     return 1;
 
   return 0;
@@ -361,11 +361,11 @@ do_transport_rumble(var_0, var_1) {
   var_2 notify("new_transport_rumble");
   var_2 endon("new_transport_rumble");
   var_3 = gettime();
-  var_2 _meth_8322();
+  var_2 disableweapons();
 
   while(gettime() - var_3 < var_0 * 1000) {
-    wait(_func_0A3(0.4) + 0.7);
-    var_2 _meth_809F("damage_heavy");
+    wait(_randomfloat(0.4) + 0.7);
+    var_2 playrumbleonentity("damage_heavy");
   }
 
   if(common_scripts\utility::_id_562E(var_2.isdarkpassenger))
@@ -375,7 +375,7 @@ do_transport_rumble(var_0, var_1) {
     var_1 = 1;
 
   if(!var_1)
-    var_2 _meth_8323();
+    var_2 enableweapons();
 }
 
 delete_fxs_delay(var_0) {
@@ -436,7 +436,7 @@ tube_do_transport(var_0, var_1, var_2) {
   _id_0378::_id_8D74("aud_blood_tube_splash", var_1.blood_spawns[var_2].origin);
 
   if(isPlayer(self) && isDefined(var_1.blood_spawns[var_2].angles))
-    self _meth_833E(var_1.blood_spawns[var_2].angles);
+    self setplayerangles(var_1.blood_spawns[var_2].angles);
 
   self.ontransportcooldown = 0;
 }
@@ -448,7 +448,7 @@ is_passenger_pap_valid(var_0) {
   if(maps\mp\mp_zombie_descent_ee_side::playerinsewers())
     return 0;
 
-  if(_id_0547::_id_5565(var_0._id_82EC, "bt_citadel_entrance_1") && !common_scripts\utility::_id_3C77("flag_boss_fight_start"))
+  if(_id_0547::_id_5565(var_0.weaponlocktargettooclose, "bt_citadel_entrance_1") && !common_scripts\utility::_id_3C77("flag_boss_fight_start"))
     return 0;
 
   return 1;
@@ -631,15 +631,15 @@ test_eyes_below_water(var_0) {
 
 enable_blood_vision() {
   if(!common_scripts\utility::_id_562E(level._id_22F0)) {
-    self _meth_8483("mp_zombie_descent_underwater", 0.05);
-    self _meth_83C7("mp_zombie_descent_underwater", 0.05);
+    self setclienttriggervisionset("mp_zombie_descent_underwater", 0.05);
+    self lightsetoverrideenableforplayer("mp_zombie_descent_underwater", 0.05);
     self.vision_blood_active = 1;
   }
 }
 
 disable_blood_vision() {
-  self _meth_8483("", 0.05);
-  self _meth_83C8(0.05);
+  self setclienttriggervisionset("", 0.05);
+  self lightsetoverridedisableforplayer(0.05);
   self.vision_blood_active = undefined;
 }
 
@@ -690,7 +690,7 @@ transport_activate() {
 
     if(common_scripts\utility::_id_3C77("flag_boss_complete"))
       thread update_transport_prompt_think();
-    else if(!_id_0547::_id_5565(self._id_8260, "boss_tube_enter") && !_id_0547::_id_5565(self._id_8260, "boss_tube_exit")) {
+    else if(!_id_0547::_id_5565(self.setlookatent, "boss_tube_enter") && !_id_0547::_id_5565(self.setlookatent, "boss_tube_exit")) {
       if(isDefined(self._id_65DC.first_activation)) {
         self._id_65DC.is_in_blood_tube_cooldown = 1;
         self._id_65DC._id_2F74 = 0;
@@ -741,16 +741,16 @@ transport_close(var_0) {
     var_0 = 0;
 
   var_1 = 3;
-  self.door_r_pivot _meth_82B8(self.door_r_pivot.initialangles, var_1);
-  self.door_l_pivot _meth_82B8(self.door_l_pivot.initialangles, var_1);
+  self.door_r_pivot rotateto(self.door_r_pivot.initialangles, var_1);
+  self.door_l_pivot rotateto(self.door_l_pivot.initialangles, var_1);
   _id_0378::_id_8D74("aud_blood_tube_door_close");
   wait(var_1);
   self.doing_transport = 1;
 
   if(!common_scripts\utility::_id_562E(var_0)) {}
 
-  self.door_l._id_241F _meth_805F();
-  self.door_r._id_241F _meth_805F();
+  self.door_l._id_241F disconnectpaths();
+  self.door_r._id_241F disconnectpaths();
 }
 
 transport_open(var_0) {
@@ -758,16 +758,16 @@ transport_open(var_0) {
     var_0 = 0;
 
   var_1 = 1;
-  self.door_l._id_241F _meth_8060();
-  self.door_r._id_241F _meth_8060();
+  self.door_l._id_241F connectpaths();
+  self.door_r._id_241F connectpaths();
 
   if(!common_scripts\utility::_id_562E(var_0))
     wait(self.blood_fill._id_A796);
 
   playFX(level._effect["zmb_desc_bloodtube_drip_exit"], self.door_l_pivot.origin);
   var_2 = 3;
-  self.door_r_pivot _meth_82B8(self.door_r_pivot.initialangles + (0, -60, 0), var_2);
-  self.door_l_pivot _meth_82B8(self.door_l_pivot.initialangles + (0, 60, 0), var_2);
+  self.door_r_pivot rotateto(self.door_r_pivot.initialangles + (0, -60, 0), var_2);
+  self.door_l_pivot rotateto(self.door_l_pivot.initialangles + (0, 60, 0), var_2);
   _id_0378::_id_8D74("aud_blood_tube_door_open");
   wait(var_2);
   self.doing_transport = 0;
@@ -786,19 +786,19 @@ link_teleporters(var_0, var_1, var_2, var_3) {
     level.blood_tube_links["defaults"] = [];
 
     foreach(var_6 in var_4) {
-      if(_id_0547::_id_5565(var_6._id_82EC, "bt_limbo_entrance_1"))
+      if(_id_0547::_id_5565(var_6.weaponlocktargettooclose, "bt_limbo_entrance_1"))
         level.blood_tube_links["defaults"] = common_scripts\utility::_id_0F6F(level.blood_tube_links["defaults"], var_6);
     }
   }
 
   foreach(var_9 in var_4) {
-    if(_id_0547::_id_5565(var_9._id_82EC, var_0)) {
+    if(_id_0547::_id_5565(var_9.weaponlocktargettooclose, var_0)) {
       level.blood_tube_links[var_0] = common_scripts\utility::_id_0F6F(level.blood_tube_links[var_0], var_9);
       level.blood_tube_links[var_0] = common_scripts\utility::_id_0F6F(level.blood_tube_links[var_0], var_1);
       var_10 = undefined;
 
       foreach(var_10 in var_4) {
-        if(_id_0547::_id_5565(var_10._id_82EC, var_2)) {
+        if(_id_0547::_id_5565(var_10.weaponlocktargettooclose, var_2)) {
           level.blood_tube_links[var_0] = common_scripts\utility::_id_0F6F(level.blood_tube_links[var_0], var_10);
           level.blood_tube_links[var_0] = common_scripts\utility::_id_0F6F(level.blood_tube_links[var_0], var_3);
         }
@@ -912,7 +912,7 @@ toggle_tubes_for_boss_fight() {
   if(isDefined(self.oldinactivestate) && !self.oldinactivestate)
     thread transport_activate();
 
-  if(_id_0547::_id_5565(self._id_8260, "boss_tube_enter"))
+  if(_id_0547::_id_5565(self.setlookatent, "boss_tube_enter"))
     tube_wait_for_interact();
 }
 
@@ -923,7 +923,7 @@ send_players_to_destination_location(var_0, var_1) {
     if(var_3 > var_1.blood_spawns.size)
       var_3 = 0;
 
-    var_0[var_2] thread tube_do_transport(var_1, level.blood_tube_links[self._id_82EC][2], var_3);
+    var_0[var_2] thread tube_do_transport(var_1, level.blood_tube_links[self.weaponlocktargettooclose][2], var_3);
   }
 }
 

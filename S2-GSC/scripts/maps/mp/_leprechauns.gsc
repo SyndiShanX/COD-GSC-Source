@@ -93,7 +93,7 @@ try_spawn_leprechauns() {
     }
 
     if(isDefined(var_4)) {
-      level.leprechaun_spawns = _func_0B9(var_4, 2000, 1000, 500, "Path");
+      level.leprechaun_spawns = _getnodesinradiussorted(var_4, 2000, 1000, 500, "Path");
 
       if(level.leprechaun_spawns.size > 0)
         level spawn_leprechaun_handler();
@@ -116,7 +116,7 @@ spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     waitframe();
 
   if(self._id_4B60)
-    wait(_func_0A4(6, 10));
+    wait(_randomintrange(6, 10));
 
   maps\mp\agents\_agent_utility::_id_5334(1);
 
@@ -139,29 +139,29 @@ spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self._id_5BE2 = gettime();
   var_10 = var_7 + (0, 0, 25);
   var_11 = var_7;
-  var_12 = _func_081(var_10, var_11);
+  var_12 = _playerphysicstrace(var_10, var_11);
 
   if(distancesquared(var_12, var_10) > 1)
     var_7 = var_12;
 
-  self _meth_838F(var_7, var_8);
-  self[[level._id_19D5["bot_set_difficulty"]]]("veteran");
-  self[[level._id_19D5["bot_set_personality"]]]("run_and_gun");
+  self spawnagent(var_7, var_8);
+  self[[level.bot_funcs["bot_set_difficulty"]]]("veteran");
+  self[[level.bot_funcs["bot_set_personality"]]]("run_and_gun");
   maps\mp\agents\_agent_common::_id_83FD(getdvarint("spv_lep_health", 700));
 
   if(isDefined(var_4) && var_4)
     self._id_7DAD = 1;
 
   if(isDefined(var_2))
-    maps\mp\agents\_agent_utility::_id_83FE(var_2.team, var_2);
+    maps\mp\agents\_agent_utility::hudoutlineenable(var_2.team, var_2);
   else
-    maps\mp\agents\_agent_utility::_id_83FE(level.leprechauns_team);
+    maps\mp\agents\_agent_utility::hudoutlineenable(level.leprechauns_team);
 
   if(isDefined(self._id_0117))
     self thread[[level._id_0A55]](self._id_0117);
 
   thread maps\mp\_flashgrenades::_id_6394();
-  self _meth_83D6(0);
+  self enableanimstate(0);
   maps\mp\_utility::giveperk("specialty_silentmovement");
   maps\mp\_utility::giveperk("specialty_plainsight");
   maps\mp\_utility::giveperk("specialty_coldblooded");
@@ -169,8 +169,8 @@ spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   maps\mp\_utility::giveperk("specialty_heartbreaker");
   maps\mp\_utility::giveperk("specialty_uavhidden");
   maps\mp\_utility::giveperk("specialty_delaymine");
-  self thread[[level._id_19D5["bot_think_watch_enemy"]]](1);
-  self thread[[level._id_19D5["bot_think_tactical_goals"]]]();
+  self thread[[level.bot_funcs["bot_think_watch_enemy"]]](1);
+  self thread[[level.bot_funcs["bot_think_tactical_goals"]]]();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 
   if(!self._id_4B60)
@@ -183,19 +183,19 @@ spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self setModel(level.leprechaun_model);
   waittillframeend;
   playFX(common_scripts\utility::_id_44F5("leprechaun_spawn_fx"), self.origin);
-  self _meth_8353("disable_attack", 1);
-  self _meth_8353("force_sprint", 1);
-  self _meth_8353("melee_critical_path", 1);
-  self _meth_8353("no_enemy_search", 1);
-  self _meth_8353("dont_path_to_enemy", 1);
+  self botsetflag("disable_attack", 1);
+  self botsetflag("force_sprint", 1);
+  self botsetflag("melee_critical_path", 1);
+  self botsetflag("no_enemy_search", 1);
+  self botsetflag("dont_path_to_enemy", 1);
   self _meth_85BE(0);
   self _meth_85BD(0);
-  self _meth_8113(0);
-  self _meth_8114(0);
+  self allowcrouch(0);
+  self allowprone(0);
   thread leprechaun_behavior_loop();
   thread start_leprechaun_audio();
   thread setup_leprechaun_aim_assist();
-  self _meth_8315();
+  self takeallweapons();
   self giveweapon("emote_weapon_mp");
   level notify("spawned_agent_player", self);
   level notify("spawned_agent", self);
@@ -233,8 +233,8 @@ leprechaun_behavior_loop() {
 
   for(;;) {
     var_0 = !var_0;
-    self _meth_8353("no_enemy_search", var_0);
-    self _meth_8353("dont_path_to_enemy", var_0);
+    self botsetflag("no_enemy_search", var_0);
+    self botsetflag("dont_path_to_enemy", var_0);
 
     if(var_0 == 1) {
       wait 7;
@@ -354,8 +354,8 @@ is_valid_leprechaun_attacker(var_0) {
     if(var_0 == self._id_0117) {
       return;
     }
-    if(_func_0C3(self._id_0117) && _func_0C3(var_0)) {
-      if(!_func_26C(self._id_0117, var_0))
+    if(_issentient(self._id_0117) && _issentient(var_0)) {
+      if(!_isalliedsentient(self._id_0117, var_0))
         var_1 = var_0;
     } else if(level.teambased) {
       if(self._id_0117.team != var_0.team)
@@ -410,7 +410,7 @@ start_leprechaun_audio() {
   }
 
   for(;;) {
-    var_2 = _func_0A5(var_0, var_1);
+    var_2 = _randomfloatrange(var_0, var_1);
     wait(var_2);
 
     if(!isDefined(self.leprechaun_hit_vo)) {

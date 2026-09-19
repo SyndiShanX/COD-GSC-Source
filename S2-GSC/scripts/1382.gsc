@@ -112,7 +112,7 @@ zombie_generic_think_wait(var_0) {
   if(!isDefined(var_0))
     var_0 = 0.2;
 
-  wait(common_scripts\utility::_id_98E7(isDefined(self.has_think_waited), var_0, _func_0A3(var_0)));
+  wait(common_scripts\utility::_id_98E7(isDefined(self.has_think_waited), var_0, _randomfloat(var_0)));
   self.has_think_waited = 1;
 }
 
@@ -199,10 +199,10 @@ _id_ABB2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
         var_12 = spawn("script_model", var_11.origin);
         var_12 setModel("helmet_collision");
         var_12.angles = var_11.angles;
-        var_11 _meth_8055(var_12);
+        var_11 linkto(var_12);
         var_12._id_6292 = var_11;
         var_12 thread decoratorlaunch(var_7);
-        var_12 _meth_8052();
+        var_12 hideallparts();
       }
     }
   }
@@ -223,7 +223,7 @@ decoratorlaunch(var_0) {
   var_5 = var_3[1] * var_1;
   var_6 = var_3[2] * var_2;
   var_7 = self.origin + var_0 * -5;
-  self _meth_82C5(var_7, (var_4, var_5, var_6));
+  self physicslaunchclient(var_7, (var_4, var_5, var_6));
   wait 15;
   self._id_6292 delete();
   self delete();

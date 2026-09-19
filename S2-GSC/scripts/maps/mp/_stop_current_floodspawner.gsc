@@ -39,7 +39,7 @@ _id_3D85() {
 
     var_1 waittill("death", var_2);
 
-    if(!common_scripts\utility::_id_8155())
-      wait(_func_0A5(5, 9));
+    if(!common_scripts\utility::setautorotationdelay())
+      wait(_randomfloatrange(5, 9));
   }
 }

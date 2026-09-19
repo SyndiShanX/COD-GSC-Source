@@ -19,7 +19,7 @@ _id_09C9(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_2F92(var_0, var_1) {
-  if(!_func_0C0(var_1))
+  if(!_isarray(var_1))
     var_1 = [var_1];
 
   foreach(var_3 in var_1)
@@ -75,16 +75,16 @@ _id_52AA() {
   var_3 = 3;
   var_4 = 4;
   var_5 = 5;
-  var_6 = _func_27A(var_0);
+  var_6 = _tablegetrowcount(var_0);
 
   for(var_7 = 0; var_7 < var_6; var_7++) {
-    var_8 = _func_1AE(var_0, var_7, var_1);
-    var_9 = _func_1AE(var_0, var_7, var_2);
-    var_10 = _func_1AE(var_0, var_7, var_3);
-    var_11 = _func_1AE(var_0, var_7, var_4);
-    var_12 = _func_1AE(var_0, var_7, var_5);
-    level._id_2FEA[var_8] = _func_0AD(var_9);
-    level._id_2FEB[var_8] = _func_0AD(var_10);
+    var_8 = _tablelookupbyrow(var_0, var_7, var_1);
+    var_9 = _tablelookupbyrow(var_0, var_7, var_2);
+    var_10 = _tablelookupbyrow(var_0, var_7, var_3);
+    var_11 = _tablelookupbyrow(var_0, var_7, var_4);
+    var_12 = _tablelookupbyrow(var_0, var_7, var_5);
+    level._id_2FEA[var_8] = _float(var_9);
+    level._id_2FEB[var_8] = _float(var_10);
     level._id_4D3D[var_8] = var_11 == "true";
     level._id_2FE9[var_8] = var_12 == "true";
   }
@@ -175,9 +175,9 @@ _id_92C5() {
     maps\mp\agents\humanoid\_humanoid_util::_id_5F4E(10.0, 240, 120, "attack_lunge_boost", level._effect["boost_lunge"], 1, 255);
 
   maps\mp\agents\humanoid\_humanoid_util::_id_5C51();
-  self _meth_8538(0);
-  self _meth_853C(1);
-  self _meth_83A5(15);
+  self scragentallowboost(0);
+  self scragentsetorienttoground(1);
+  self scragentsetviewheight(15);
   level._id_2775++;
   thread _id_0547::_id_AB18(60);
   self waittill("death");
@@ -191,7 +191,7 @@ _id_4494(var_0, var_1, var_2) {
   var_3 = undefined;
 
   if(isDefined(var_1)) {
-    var_1 = _func_05F(var_1);
+    var_1 = _getweaponbasename(var_1);
     var_3 = var_1;
   } else if(isDefined(var_2))
     var_3 = var_2;
@@ -249,7 +249,7 @@ _id_4596(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isDefined(var_2) || var_2 != "MOD_GRENADE" && var_2 != "MOD_GRENADE_SPLASH" && var_2 != "MOD_EXPLOSIVE")
     var_7 = var_7 &~12;
-  else if(_func_0A3(1) > 0.5)
+  else if(_randomfloat(1) > 0.5)
     var_7 = 8;
   else
     var_7 = 4;
@@ -280,7 +280,7 @@ _id_4597(var_0, var_1, var_2, var_3) {
         var_11 = 1 << (var_10 & 3);
 
         if((var_0 &var_11) != 0 && isDefined(_id_18B1(var_1 | var_4 | var_11))) {
-          if(_func_0A3(1.0) > _id_20AF(var_11) * var_3)
+          if(_randomfloat(1.0) > _id_20AF(var_11) * var_3)
             var_4 = var_4 | var_11;
         }
       }
@@ -288,14 +288,14 @@ _id_4597(var_0, var_1, var_2, var_3) {
       while(var_0 > 0) {
         var_11 = var_0 & 0 - var_0;
 
-        if(_func_0A3(1.0) > _id_20AF(var_11) * var_3)
+        if(_randomfloat(1.0) > _id_20AF(var_11) * var_3)
           var_4 = var_4 | var_11;
 
         var_0 = var_0 - var_11;
       }
     }
   } else if(var_2 >= 1 || isDefined(_id_18B1(var_1 | var_0))) {
-    if(_func_0A3(1.0) > _id_20AF(var_0) * var_3)
+    if(_randomfloat(1.0) > _id_20AF(var_0) * var_3)
       var_4 = var_0;
   }
 
@@ -315,7 +315,7 @@ _id_9E1D(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(level._id_2775 < 9999 || self._id_2FDA || (var_7 & 12) == 0 || (var_7 & 16) != 0 || (self._id_6250 & 3) != 0) {
         if(_id_65D0(self._id_6250 | var_7, common_scripts\utility::_id_562E(level._id_4D3D[var_1]), var_3, var_5, undefined, 1)) {
           if(_id_0547::_id_5731())
-            _func_17F(_func_0A5(0.15, 0.35), 1, self.origin, 200);
+            _earthquake(_randomfloatrange(0.15, 0.35), 1, self.origin, 200);
 
           var_6 = 1;
         }
@@ -372,13 +372,13 @@ _id_A0DF(var_0, var_1) {
         return;
       }
     } else {
-      self _meth_83D5(var_2);
+      self setanimclass(var_2);
       maps\mp\agents\humanoid\_humanoid_util::_id_A18C();
 
       if(self._id_0BA4 == "idle") {
         var_5 = "idle_noncombat";
         var_6 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_5);
-        maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_6);
+        maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_6);
       }
     }
   }
@@ -560,11 +560,11 @@ detachlimbsupdatemodelqueue(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(level.mutilate_detach_limb_queue))
     level.mutilate_detach_limb_queue = 0;
 
-  var_6 = _func_0D4(level.mutilate_detach_limb_queue / 2) * 0.05;
+  var_6 = _floor(level.mutilate_detach_limb_queue / 2) * 0.05;
   level.mutilate_detach_limb_queue++;
   var_7 = "entitydeleted";
 
-  if(_func_1EF(self))
+  if(_isagent(self))
     var_7 = "death";
 
   self endon(var_7);
@@ -596,7 +596,7 @@ _id_2E44(var_0, var_1, var_2, var_3, var_4, var_5) {
   self._id_6250 = self._id_6250 | var_0;
   self._id_7AD3 = var_6;
 
-  if(_func_1EF(self))
+  if(_isagent(self))
     self[[maps\mp\agents\_agent_utility::_id_0A59("on_mutilate")]](var_6);
 
   if(common_scripts\utility::_id_562E(var_5))
@@ -643,7 +643,7 @@ _id_903D(var_0, var_1, var_2) {
   var_3 = _id_0547::_id_4744(var_0);
   var_4 = _id_4559(var_0, var_3, "tagName");
   var_5 = _id_4558(var_0, var_4);
-  var_6 = self _meth_8181(var_4);
+  var_6 = self gettagangles(var_4);
   var_7 = undefined;
 
   if(!isDefined(var_1))
@@ -655,9 +655,9 @@ _id_903D(var_0, var_1, var_2) {
     var_7 = spawn("script_model", var_5);
     var_7 setModel(var_8);
     var_7.angles = var_6;
-    var_9 = (0, 0, _func_0A5(1000, 2000));
-    var_10 = var_1 * _func_0A5(500, 1000);
-    var_11 = (_func_0A5(-2000, 2000), _func_0A5(-2000, 2000), _func_0A5(-2000, 2000));
+    var_9 = (0, 0, _randomfloatrange(1000, 2000));
+    var_10 = var_1 * _randomfloatrange(500, 1000);
+    var_11 = (_randomfloatrange(-2000, 2000), _randomfloatrange(-2000, 2000), _randomfloatrange(-2000, 2000));
     var_12 = anglestoright(self.angles);
 
     switch (var_0) {
@@ -678,9 +678,9 @@ _id_903D(var_0, var_1, var_2) {
     var_13 = var_9 + var_10;
     var_14 = length(var_13);
     var_15 = var_13 / var_14;
-    var_14 = _func_0AF(var_14, 1750);
-    var_7 _meth_83C9(var_15 * var_14, var_11);
-    var_7 _meth_8553();
+    var_14 = _min(var_14, 1750);
+    var_7 physicslaunchclientwithimpulse(var_15 * var_14, var_11);
+    var_7 deleteonhostmigration();
 
     if(level._id_66BF < level._id_2FDD.size)
       level._id_2FDD[level._id_66BF] delete();
@@ -697,16 +697,16 @@ _id_903D(var_0, var_1, var_2) {
     var_18 = undefined;
 
   if(isDefined(var_18)) {
-    var_19 = self _meth_8181(var_16);
+    var_19 = self gettagangles(var_16);
     var_20 = anglesToForward(var_19);
     var_21 = anglestoup(var_19);
     var_22 = vectorNormalize(var_20 + 4 * var_1);
-    var_23 = vectorNormalize(_func_0E9(var_22, var_21));
+    var_23 = vectorNormalize(_vectorcross(var_22, var_21));
 
-    if(_func_0E5(var_23) < 0.5)
+    if(_lengthsquared(var_23) < 0.5)
       var_23 = anglestoright(var_19);
 
-    var_24 = _func_0E9(var_23, var_22);
+    var_24 = _vectorcross(var_23, var_22);
     playFX(common_scripts\utility::_id_44F5(var_18), self gettagorigin(var_16), var_22, var_24);
   }
 
@@ -722,7 +722,7 @@ _id_70F1(var_0) {
   waitframe();
 
   if(self.health > 0)
-    self _meth_861F(var_0);
+    self playsoundonmovingent(var_0);
   else
     _func_351(var_0, undefined, self.origin);
 }
@@ -735,9 +735,9 @@ _id_65CD(var_0) {
     return;
   }
   if(isDefined(level._id_65CB[var_0][2])) {
-    wait(_func_0A5(0.2, 0.8));
+    wait(_randomfloatrange(0.2, 0.8));
     var_1 = level._id_65CB[var_0][2];
-    self _meth_861F(var_1);
+    self playsoundonmovingent(var_1);
   }
 }
 
@@ -764,7 +764,7 @@ _id_9E19(var_0, var_1, var_2) {
   }
   var_3 = 0.25;
 
-  if(_func_0A3(1) > var_3) {
+  if(_randomfloat(1) > var_3) {
     return;
   }
   _id_AC26(var_0);
@@ -783,7 +783,7 @@ _id_AC26(var_0, var_1) {
   if(self._id_4B6E || self._id_4B5A) {
     var_2 = self._id_4CAA;
     var_3 = self gettagorigin("j_head") + (0, 0, 20);
-    var_4 = self _meth_8181("j_head");
+    var_4 = self gettagangles("j_head");
     self._id_4B6E = 0;
     self._id_4B5A = 0;
 
@@ -797,22 +797,22 @@ _id_AC26(var_0, var_1) {
     var_6 = spawn("script_model", var_5.origin);
     var_6 setModel("helmet_collision");
     var_6.angles = var_5.angles;
-    var_5 _meth_8055(var_6);
+    var_5 linkto(var_6);
     var_6._id_6292 = var_5;
 
     if(!isDefined(var_0))
       var_0 = anglesToForward(var_6.angles);
 
     var_7 = var_0;
-    var_8 = var_7[0] * 10000 * _func_0A3(1);
-    var_9 = var_7[1] * 10000 * _func_0A3(1);
-    var_10 = var_7[2] * 6000 * _func_0A3(1);
+    var_8 = var_7[0] * 10000 * _randomfloat(1);
+    var_9 = var_7[1] * 10000 * _randomfloat(1);
+    var_10 = var_7[2] * 6000 * _randomfloat(1);
     var_11 = var_6.origin + var_0 * -5;
-    var_6 _meth_82C5(var_11, (var_8, var_9, var_10));
-    var_6 _meth_8553();
-    var_5 _meth_8553();
+    var_6 physicslaunchclient(var_11, (var_8, var_9, var_10));
+    var_6 deleteonhostmigration();
+    var_5 deleteonhostmigration();
     var_6 thread _id_2395();
-    var_6 _meth_8052();
+    var_6 hideallparts();
   }
 }
 

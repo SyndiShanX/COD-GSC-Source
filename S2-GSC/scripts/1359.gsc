@@ -10,7 +10,7 @@ init() {
   foreach(var_14 in var_12) {
     var_15 = spawnStruct();
     var_15._id_378F = var_14;
-    var_15._id_24D1 = var_14._id_8260;
+    var_15._id_24D1 = var_14.setlookatent;
     var_15._id_9D64 = "use";
     _id_7BA2(var_15);
   }
@@ -32,20 +32,20 @@ _id_7BA2(var_0) {
     }
 
     foreach(var_3 in var_1) {
-      var_3 _meth_8177(1);
+      var_3 usetriggerrequirelookat(1);
       var_0 thread _id_5F10(var_3);
     }
 
     level._id_24DC[var_0._id_24D1] = var_0;
   } else {
     var_1 = getEntArray(var_0._id_378F.target, "targetname");
-    var_1[0] _meth_80B3();
-    var_0._id_378F _meth_805C();
+    var_1[0] makeunusable();
+    var_0._id_378F hide();
   }
 }
 
 _id_86B3(var_0, var_1, var_2) {
-  var_0 call[[common_scripts\utility::_id_98E7(var_2, ::_meth_8005, ::_meth_8006)]](var_1);
+  var_0 call[[common_scripts\utility::_id_98E7(var_2, ::showtoplayer, ::_meth_8006)]](var_1);
 }
 
 _id_86B2(var_0, var_1, var_2) {
@@ -101,7 +101,7 @@ _id_5F10(var_0) {
     if(_id_0550::_id_415C(var_1, self._id_24D2)) {
       continue;
     }
-    _id_0550::_id_8470(var_1, self._id_24D2, 1);
+    _id_0550::visionsetpostapplyforplayer(var_1, self._id_24D2, 1);
     var_1 _id_0378::_id_8D74("found_collectible");
   }
 }

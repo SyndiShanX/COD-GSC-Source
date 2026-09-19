@@ -37,11 +37,11 @@ play_assassin_blur(var_0) {
   self endon("disconnect");
   _id_0378::_id_8D74("aud_strt_asn_camo_blur");
   var_1 = 6.5 * var_0;
-  self _meth_8483("mp_zombie_island_distort", 1);
-  self _meth_83C7("mp_zombie_island_distort", 1);
+  self setclienttriggervisionset("mp_zombie_island_distort", 1);
+  self lightsetoverrideenableforplayer("mp_zombie_island_distort", 1);
   wait(var_1);
-  self _meth_8483(maps\mp\_utility::_id_4571(), 1);
-  self _meth_83C7(maps\mp\_utility::_id_4571(), 1);
+  self setclienttriggervisionset(maps\mp\_utility::_id_4571(), 1);
+  self lightsetoverrideenableforplayer(maps\mp\_utility::_id_4571(), 1);
   self.current_fog_state = undefined;
   _id_0378::_id_8D74("aud_stp_asn_camo_blur");
 }

@@ -4,7 +4,7 @@
 **********************************************/
 
 main() {
-  _func_13E("flashbang_mp");
+  _precacheshellshock("flashbang_mp");
 }
 
 _id_92E8() {
@@ -22,7 +22,7 @@ _id_3D58(var_0) {
   var_1 = gettime() + var_0 * 1000;
 
   while(gettime() < var_1) {
-    self _meth_809F("damage_heavy");
+    self playrumbleonentity("damage_heavy");
     waitframe();
   }
 }
@@ -122,7 +122,7 @@ _id_0F33(var_0, var_1, var_2) {
   waitframe();
 
   if(isDefined(self._id_3D46)) {
-    self _meth_8182("flashbang_mp", self._id_3D46);
+    self shellshock("flashbang_mp", self._id_3D46);
     self._id_3D48 = gettime() + self._id_3D46 * 1000;
 
     if(var_2) {

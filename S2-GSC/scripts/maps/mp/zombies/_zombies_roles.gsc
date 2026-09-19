@@ -42,8 +42,8 @@ _id_6AB2(var_0) {
   self._id_90CC++;
   level notify("special_ability_used");
   var_1 = self getentitynumber();
-  _func_327(&"activate_special_teammate", 3, var_1, var_0, 1);
-  _id_0555::_id_83DD("ability", self, var_0);
+  _luinotifyeventextra(&"activate_special_teammate", 3, var_1, var_0, 1);
+  _id_0555::issprinting("ability", self, var_0);
   thread _id_054E::_id_7486(var_0);
   level._id_400E[level._id_400E.size] = ["assassin_set 4 -1", self];
   level._id_400E[level._id_400E.size] = ["bat_elite_set 4 -1", self];
@@ -86,7 +86,7 @@ _id_6AB2(var_0) {
     self._id_7ECB = get_additional_scaling_value();
   } else {
     self._id_7ECC = undefined;
-    self _meth_82FF("ui_zm_free_ability", 0);
+    self setclientomnvar("ui_zm_free_ability", 0);
   }
 
   thread disableabilityondowned(var_0);

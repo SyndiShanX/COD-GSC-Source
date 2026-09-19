@@ -50,7 +50,7 @@ _id_3662() {
       var_1[var_1.size] = var_6;
   }
 
-  var_1 = _func_1AC(var_1, var_2);
+  var_1 = _sortbydistance(var_1, var_2);
   var_8 = 0;
 
   if(isDefined(level.zmb_events_player_zombie_shellshock_stun))
@@ -69,7 +69,7 @@ _id_3662() {
   }
 
   foreach(var_16 in var_11) {
-    if(distancesquared(self.origin, var_16.origin) < var_4 && _func_0AE(self.origin[2] - var_16.origin[2]) < 90)
+    if(distancesquared(self.origin, var_16.origin) < var_4 && _abs(self.origin[2] - var_16.origin[2]) < 90)
       thread _id_0A31(var_16);
   }
 
@@ -122,7 +122,7 @@ _id_94C0(var_0, var_1, var_2) {
   }
   var_0._id_94B4 = common_scripts\utility::_id_0F93(var_0._id_94B4, self);
   var_4 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
-  var_0 _meth_8059(var_4 * 0.125, var_1, self, self, "MOD_ENERGY", "dot_generic_zm");
+  var_0 dodamage(var_4 * 0.125, var_1, self, self, "MOD_ENERGY", "dot_generic_zm");
 
   if(!isalive(var_0)) {
     return;
@@ -156,7 +156,7 @@ play_shock_fx(var_0, var_1, var_2, var_3) {
     if(isDefined(self.recentshockfxtime) && var_4 - self.recentshockfxtime < var_3)
       wait(var_3 - (var_4 - self.recentshockfxtime));
 
-    _func_147(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
     self.recentshockfxtime = var_4;
     wait(var_3);
   }
@@ -209,11 +209,11 @@ zombiestunknockbackanim(var_0, var_1) {
   var_2 = undefined;
   self._id_561D = 1;
   var_3 = maps\mp\agents\humanoid\_humanoid_util::_id_29CB(var_0);
-  var_4 = _func_0DD(var_3 - self.angles[1]);
+  var_4 = _angleclamp180(var_3 - self.angles[1]);
 
-  if(_func_0AE(var_4) < 45)
+  if(_abs(var_4) < 45)
     var_2 = "pain_knockback_front";
-  else if(_func_0AE(var_4) > 135)
+  else if(_abs(var_4) > 135)
     var_2 = "pain_knockback_back";
   else if(var_4 > 0)
     var_2 = "pain_knockback_right";
@@ -221,26 +221,26 @@ zombiestunknockbackanim(var_0, var_1) {
     var_2 = "pain_knockback_left";
 
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_2);
-  var_6 = self _meth_83DB(var_5);
+  var_6 = self getanimentrycount(var_5);
   var_7 = randomint(var_6);
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
 
   if(isPlayer(var_1) && var_1 _id_0547::_id_4BA7("specialty_class_breathing_room_zm"))
-    self _meth_839A(2, 1);
+    self scragentsetanimscale(2, 1);
 
   if(self._id_0A4B == "zombie_fireman") {
     var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("scripted_fire_stun_burst");
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, randomint(2), 1, "stun_anim");
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, 2, 1, "stun_anim");
-    self _meth_839A(1, 1);
+    self scragentsetanimscale(1, 1);
   } else if(self._id_0A4B == "zombie_assassin") {
     var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("scripted_asn_stun_burst");
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, 0, 1, "stun_anim");
     self.assassinmuststopattackingandleave = 1;
   } else {
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_5, var_7, 1, "stun_anim");
-    self _meth_839A(1, 1);
+    self scragentsetanimscale(1, 1);
   }
 }
 
@@ -255,7 +255,7 @@ _id_AC63(var_0, var_1, var_2) {
   if(common_scripts\utility::_id_562E(self._id_57E8)) {
     return;
   }
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "stunning_burst");
 
   if(!common_scripts\utility::_id_562E(var_2) && zombiecanbestunknockedback())
@@ -274,7 +274,7 @@ _id_AC62(var_0) {
   var_0 endon("stunning_burst_active");
   var_1 = undefined;
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("stun_hold");
-  var_3 = self _meth_83DB(var_2);
+  var_3 = self getanimentrycount(var_2);
 
   for(;;) {
     if(self._id_0A4B == "zombie_exploder") {
@@ -289,8 +289,8 @@ _id_AC62(var_0) {
     else
       var_4 = randomint(var_3);
 
-    self _meth_839C("anim deltas");
-    self _meth_839B("face angle abs", self.angles);
+    self scragentsetanimmode("anim deltas");
+    self scragentsetorientmode("face angle abs", self.angles);
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_4, 1, "stun_anim");
   }
 }
@@ -298,7 +298,7 @@ _id_AC62(var_0) {
 _id_AC64() {
   self._id_561D = 0;
   self notify("stunning_burst_end");
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "stunning_burst");
 }
 
@@ -336,15 +336,15 @@ _id_62A6(var_0) {
 
 _id_9529(var_0) {
   var_1 = self getEye();
-  var_2 = self _meth_808F();
+  var_2 = self getorigin();
 
   if(_id_0547::_id_4BA7("specialty_class_breathing_room_zm"))
     var_3 = "stunning_burst_sustain_br";
   else
     var_3 = "stunning_burst_sustain";
 
-  var_4 = _func_14B(common_scripts\utility::_id_44F5(var_3), var_2);
-  _func_14C(var_4);
+  var_4 = _spawnfx(common_scripts\utility::_id_44F5(var_3), var_2);
+  _triggerfx(var_4);
   thread _id_952A(var_1, var_0);
   common_scripts\utility::_id_A70C(self, "disconnect", self, "stunning_burst_active");
   var_4 delete();
@@ -386,7 +386,7 @@ mini_stunning_burst_execute(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     var_4 = 4;
 
   var_8 = _id_0547::_id_408F();
-  var_9 = _func_1AC(_id_0547::_id_408F(), var_0, var_2);
+  var_9 = _sortbydistance(_id_0547::_id_408F(), var_0, var_2);
   var_10 = 0;
 
   foreach(var_12 in var_9) {
@@ -415,7 +415,7 @@ mini_stunning_burst_stun_zombie(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0.125 * maps\mp\gametypes\zombies::_id_1E59();
   var_6 = var_1.origin;
   var_7 = var_1._id_1180;
-  var_0 _meth_8059(var_5, var_6, var_7, var_7, "MOD_ENERGY", "dot_generic_zm");
+  var_0 dodamage(var_5, var_6, var_7, var_7, "MOD_ENERGY", "dot_generic_zm");
 
   if(common_scripts\utility::_id_562E(var_0._id_57E8)) {
     return;
@@ -430,7 +430,7 @@ mini_stunning_burst_state_run_manage_fx() {
   var_1 = common_scripts\utility::_id_44F5("stunning_burst");
 
   for(;;) {
-    _func_147(var_1, var_0, "J_Spine4");
+    _playfxontag(var_1, var_0, "J_Spine4");
     wait 0.35;
   }
 }
@@ -449,7 +449,7 @@ mini_stunning_burst_state_run_hold(var_0) {
   if(!isDefined(var_2)) {
     return;
   }
-  var_3 = var_1 _meth_83DB(var_2);
+  var_3 = var_1 getanimentrycount(var_2);
   var_4 = gettime();
 
   for(;;) {
@@ -464,15 +464,15 @@ mini_stunning_burst_state_run_hold(var_0) {
     if(var_1._id_0A4B == "zombie_exploder")
       var_6 = common_scripts\utility::_id_98E7(common_scripts\utility::_id_562E(var_1._id_392C), 0, 1);
 
-    var_1 _meth_839C("anim deltas");
-    var_1 _meth_839B("face angle abs", var_1.angles);
+    var_1 scragentsetanimmode("anim deltas");
+    var_1 scragentsetorientmode("face angle abs", var_1.angles);
     var_1 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_6, 1, "stun_anim");
   }
 }
 
 mini_stunning_burst_state_run(var_0) {
   var_1 = self;
-  var_1 _meth_83A2(1);
+  var_1 scragentsetscripted(1);
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "mini_stunning_burst");
   var_2 = var_0.origin;
   var_3 = var_0._id_1180;
@@ -498,7 +498,7 @@ mini_stunning_burst_state_finish(var_0) {
   var_1 = self;
   var_1._id_561D = 0;
   var_1 common_scripts\utility::_id_3796("flag_mini_burst");
-  var_1 _meth_83A2(0);
+  var_1 scragentsetscripted(0);
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "mini_stunning_burst");
 }
 

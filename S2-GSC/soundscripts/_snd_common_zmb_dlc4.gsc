@@ -69,7 +69,7 @@ snd_zmb_register_messages_dlc4() {
 }
 
 dlc4_player_spawned() {
-  self _meth_8626("dlc4_default_mix");
+  self clientaddsoundsubmix("dlc4_default_mix");
   _id_0366::snd_zmb_set_plr_vox_scare_count_max(0);
 }
 
@@ -86,7 +86,7 @@ dlc4_wave_begin(var_0) {
 
 dlc4_wave_end() {
   self notify("kill_dlc3_wave_mus_switcher");
-  self _meth_8627("dlc3_plr_idle_mus_fade", 3.0);
+  self clientclearsoundsubmix("dlc3_plr_idle_mus_fade", 3.0);
 }
 
 dlc4_wave_mus_switcher() {
@@ -96,7 +96,7 @@ dlc4_wave_mus_switcher() {
   var_0 = self;
   var_1 = 60000;
   var_2 = 240000;
-  var_3 = _func_0A4(var_1, var_2);
+  var_3 = _randomintrange(var_1, var_2);
   var_4 = 2000;
   var_5 = 0.1;
   var_6 = gettime();
@@ -136,10 +136,10 @@ dlc4_wave_mus_switcher() {
 
     if(!var_19 && var_17 - var_8 > var_20 && var_18 <= var_5 && var_12) {
       var_12 = 0;
-      var_0 _meth_8626("dlc3_plr_idle_mus_fade", var_14);
+      var_0 clientaddsoundsubmix("dlc3_plr_idle_mus_fade", var_14);
     } else if(!var_12 && (var_19 || var_18 > var_5 && var_17 - var_9 > var_20 * 0.5)) {
       var_12 = 1;
-      var_0 _meth_8627("dlc3_plr_idle_mus_fade", var_13);
+      var_0 clientclearsoundsubmix("dlc3_plr_idle_mus_fade", var_13);
     } else if(var_12 && var_17 - var_7 > var_3) {
       var_7 = var_17;
       var_16 = var_0 _id_0366::_id_8D46();
@@ -151,7 +151,7 @@ dlc4_wave_mus_switcher() {
       _id_0366::_id_8E32(var_14);
       wait 0.1;
       _id_0366::_id_8E31(var_16, var_15);
-      var_3 = _func_0A4(var_1, var_2);
+      var_3 = _randomintrange(var_1, var_2);
     }
 
     wait 0.5;
@@ -377,7 +377,7 @@ corpse_eater_soul_suck(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 _meth_82B1(var_1, 1.9);
+  var_2 moveto(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -510,7 +510,7 @@ god_king_giestdrain(var_0, var_1) {
   var_0 thread drain_king(var_0, var_1);
 
   foreach(var_3 in level.blood_plates) {
-    if(_id_0547::_id_5565(var_3._id_8260, "plate_boss_room"))
+    if(_id_0547::_id_5565(var_3.setlookatent, "plate_boss_room"))
       thread drain_plate(var_3, var_1);
   }
 
@@ -523,12 +523,12 @@ zombie_giestdrain_submix(var_0, var_1) {
 
   foreach(var_3 in level.players) {
     for(;;) {
-      var_4 = _func_0E1(var_3.origin, var_0.origin);
+      var_4 = _distance2d(var_3.origin, var_0.origin);
 
       if(var_4 < 800)
-        var_3 _meth_8626("godking_giestdrain_mute_zvox");
+        var_3 clientaddsoundsubmix("godking_giestdrain_mute_zvox");
       else
-        var_3 _meth_8627("godking_giestdrain_mute_zvox");
+        var_3 clientclearsoundsubmix("godking_giestdrain_mute_zvox");
 
       wait 0.2;
     }
@@ -572,7 +572,7 @@ clear_mute_zvox_for_drain() {
   level notify("end_geistdrain_submix");
 
   foreach(var_1 in level.players)
-  var_1 _meth_8627("godking_giestdrain_mute_zvox");
+  var_1 clientclearsoundsubmix("godking_giestdrain_mute_zvox");
 }
 
 god_king_sun_cast() {
@@ -607,7 +607,7 @@ god_king_detonate_throw(var_0) {
   var_1 = self;
   var_1.drain_ent = spawn("script_origin", var_1.origin);
   var_1.beam_snd = _id_0380::_id_288B("zmb_gdkng_drain", undefined, var_1.drain_ent);
-  var_1.drain_ent _meth_82B1(var_0.origin, 1.5);
+  var_1.drain_ent moveto(var_0.origin, 1.5);
   wait 1.6;
   var_1.drain_ent delete();
 }
@@ -643,8 +643,8 @@ finale_elec_oneshots() {
   wait 3;
 
   for(;;) {
-    var_0 = _func_0A4(5, 8);
-    var_1 = self.origin + (_func_0A4(-200, 200), _func_0A4(-200, 200), 0);
+    var_0 = _randomintrange(5, 8);
+    var_1 = self.origin + (_randomintrange(-200, 200), _randomintrange(-200, 200), 0);
     _id_0380::_id_2889("zmb_gdkng_giest_finale_elec_oneshot", undefined, var_1);
     wait(var_0);
   }
@@ -656,8 +656,8 @@ finale_whoosh_oneshots() {
   wait 3;
 
   for(;;) {
-    var_0 = _func_0A4(4, 9);
-    var_1 = self.origin + (_func_0A4(-200, 200), _func_0A4(-200, 200), 0);
+    var_0 = _randomintrange(4, 9);
+    var_1 = self.origin + (_randomintrange(-200, 200), _randomintrange(-200, 200), 0);
     _id_0380::_id_2889("zmb_gdkng_giest_finale_whoosh_oneshot", undefined, var_1);
     wait(var_0);
   }

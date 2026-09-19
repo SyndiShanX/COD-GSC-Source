@@ -114,22 +114,22 @@ air_attack_wave_handler() {
     switch (var_1) {
       case 1:
         air_attack_adjust_rules();
-        level.wave_a = _func_1DC("plane_start_node_a", "targetname");
+        level.wave_a = _getvehiclenodearray("plane_start_node_a", "targetname");
         var_2 = level.wave_a air_attack_spawn_plane_wave();
         break;
       case 2:
         air_attack_adjust_rules();
-        level.wave_b = _func_1DC("plane_start_node_b", "targetname");
+        level.wave_b = _getvehiclenodearray("plane_start_node_b", "targetname");
         var_2 = level.wave_b air_attack_spawn_plane_wave();
         break;
       case 3:
         air_attack_adjust_rules();
-        level.wave_c = _func_1DC("plane_start_node_c", "targetname");
+        level.wave_c = _getvehiclenodearray("plane_start_node_c", "targetname");
         var_2 = level.wave_c air_attack_spawn_plane_wave();
         break;
       case 4:
         air_attack_adjust_rules();
-        level.wave_d = _func_1DC("plane_start_node_d", "targetname");
+        level.wave_d = _getvehiclenodearray("plane_start_node_d", "targetname");
         var_2 = level.wave_d air_attack_spawn_plane_wave();
         break;
       default:
@@ -205,7 +205,7 @@ aa_gun_trap_prep() {
         self._id_9D65.hint_string_available = &"ZOMBIE_ISLAND_BUY_FLAK";
         self._id_9D65.hint_string_unavailable = &"ZOMBIE_ISLAND_FLAK_DISABLED";
         self._id_9D65.hint_string_no_power = &"ZOMBIES_REQUIRES_POWER";
-        var_2 _meth_80CE(self._id_9D65.hint_string_unavailable);
+        var_2 sethintstring(self._id_9D65.hint_string_unavailable);
         var_2 common_scripts\utility::_id_9D9F();
         break;
       case "tur_flak_gun":
@@ -229,10 +229,10 @@ aa_gun_use_think() {
   self._id_9D65._id_267B = 750;
   level waittill("air_attack_start");
   self._id_9D65 common_scripts\utility::_id_9DA3();
-  self._id_9D65 _meth_80CE(self._id_9D65.hint_string_no_power);
+  self._id_9D65 sethintstring(self._id_9D65.hint_string_no_power);
   common_scripts\utility::_id_3C9F("flag_flak_cannons_powered_on");
   self.wall_model thread aa_gun_open_gate();
-  self._id_9D65 _meth_80CE(self._id_9D65.hint_string_available);
+  self._id_9D65 sethintstring(self._id_9D65.hint_string_available);
   thread aa_gun_wait_for_use();
   var_0 = undefined;
 
@@ -246,7 +246,7 @@ aa_gun_use_think() {
       if(common_scripts\utility::_id_562E(var_1))
         aa_gun_set_locked();
 
-      self._id_9D65 _meth_80CE(self._id_9D65.hint_string_available);
+      self._id_9D65 sethintstring(self._id_9D65.hint_string_available);
       continue;
     } else
       var_0 = var_1;
@@ -268,10 +268,10 @@ aa_gun_use_think() {
       self.wall_model thread aa_gun_open_gate();
       wait 1;
       self._id_9D65 common_scripts\utility::_id_9DA3();
-      self._id_9D65 _meth_80CE(self._id_9D65.hint_string_unavailable);
+      self._id_9D65 sethintstring(self._id_9D65.hint_string_unavailable);
       wait 12.5;
       aa_gun_set_locked();
-      self._id_9D65 _meth_80CE(self._id_9D65.hint_string_available);
+      self._id_9D65 sethintstring(self._id_9D65.hint_string_available);
     }
   }
 }
@@ -288,19 +288,19 @@ aa_gun_power_init() {
 
 aa_gun_power_switch_init() {
   var_0 = common_scripts\utility::_id_44BE(self.target, "targetname");
-  var_1 = _func_21F("power_switch_aagun", "targetname");
+  var_1 = _getscriptablearray("power_switch_aagun", "targetname");
   self.computer_panels = common_scripts\utility::_id_4461(self.origin, var_1);
-  self.computer_panels _meth_83FA("cbreaker", "standby_idle");
-  self.computer_panels _meth_83FA("light_red", "on");
-  self.computer_panels _meth_83FA("light_green", "off");
-  self.computer_panels _meth_83FA("light_power", "off");
-  self.computer_panels _meth_83FA("light_graph", "off");
+  self.computer_panels setscriptablepartstate("cbreaker", "standby_idle");
+  self.computer_panels setscriptablepartstate("light_red", "on");
+  self.computer_panels setscriptablepartstate("light_green", "off");
+  self.computer_panels setscriptablepartstate("light_power", "off");
+  self.computer_panels setscriptablepartstate("light_graph", "off");
 
   foreach(var_3 in var_0) {
     switch (var_3._id_0165) {
       case "use_trigger":
         self._id_9D65 = var_3;
-        self._id_9D65 _meth_80CE(&"ZOMBIES_POWER_ON");
+        self._id_9D65 sethintstring(&"ZOMBIES_POWER_ON");
         self._id_9D65 common_scripts\utility::_id_9D9F();
         break;
     }
@@ -315,19 +315,19 @@ aa_gun_power_switch_think() {
     self._id_9D65 waittill("trigger", var_0);
     level.aagun_switches_on++;
     self._id_9D65 common_scripts\utility::_id_9D9F();
-    self._id_9D65 _meth_80CE(&"ZOMBIES_EMPTY_STRING");
-    self.computer_panels _meth_83FA("cbreaker", "ready");
-    self.computer_panels _meth_83FA("light_red", "off");
-    self.computer_panels _meth_83FA("light_green", "on");
-    self.computer_panels _meth_83FA("light_power", "on");
-    self.computer_panels _meth_83FA("light_graph", "on");
+    self._id_9D65 sethintstring(&"ZOMBIES_EMPTY_STRING");
+    self.computer_panels setscriptablepartstate("cbreaker", "ready");
+    self.computer_panels setscriptablepartstate("light_red", "off");
+    self.computer_panels setscriptablepartstate("light_green", "on");
+    self.computer_panels setscriptablepartstate("light_power", "on");
+    self.computer_panels setscriptablepartstate("light_graph", "on");
     common_scripts\utility::flag_set("flag_flak_cannons_powered_on");
   }
 }
 
 aa_gun_set_locked() {
   while(common_scripts\utility::_id_562E(level.aa_guns_locked)) {
-    self._id_9D65 _meth_80CE(self._id_9D65.hint_string_unavailable);
+    self._id_9D65 sethintstring(self._id_9D65.hint_string_unavailable);
     wait 0.125;
   }
 }
@@ -347,17 +347,17 @@ aa_gun_lock_turrets(var_0) {
 #using_animtree("animated_props_zombies_DLC1");
 
 aa_gun_close_gate() {
-  self _meth_8276("s2_zom_flak_gun_gate_close");
+  self scriptmodelplayanim("s2_zom_flak_gun_gate_close");
   _id_0378::_id_8D74("flak_gun_gate_up");
-  wait(_func_065(%s2_zom_flak_gun_gate_open));
-  self _meth_8276("s2_zom_flak_gun_gate_close_idle");
+  wait(_getanimlength(%s2_zom_flak_gun_gate_open));
+  self scriptmodelplayanim("s2_zom_flak_gun_gate_close_idle");
 }
 
 aa_gun_open_gate() {
-  self _meth_8276("s2_zom_flak_gun_gate_open");
+  self scriptmodelplayanim("s2_zom_flak_gun_gate_open");
   _id_0378::_id_8D74("flak_gun_gate_down");
-  wait(_func_065(%s2_zom_flak_gun_gate_open));
-  self _meth_8276("s2_zom_flak_gun_gate_open_idle");
+  wait(_getanimlength(%s2_zom_flak_gun_gate_open));
+  self scriptmodelplayanim("s2_zom_flak_gun_gate_open_idle");
 }
 
 aa_gun_terminate_nuke() {
@@ -375,12 +375,12 @@ aa_gun_set_player_using(var_0, var_1) {
   self._id_9EDD = var_1;
   var_0._id_00CE = 1;
   var_0.on_aa_gun = 1;
-  var_1 _meth_8093(var_0);
+  var_1 useby(var_0);
   var_0._id_480F = 1;
-  var_0 _meth_82FF("ui_zm_turret_health", 1);
-  var_0 _meth_80EB();
+  var_0 setclientomnvar("ui_zm_turret_health", 1);
+  var_0 disableturretdismount();
   wait 1.5;
-  var_0 _meth_80EC();
+  var_0 enableturretdismount();
 }
 
 aa_gun_unset_player_using(var_0, var_1) {
@@ -388,7 +388,7 @@ aa_gun_unset_player_using(var_0, var_1) {
   var_0.on_aa_gun = 0;
   var_0 _meth_85E9();
   var_0._id_480F = 0;
-  var_0 _meth_82FF("ui_zm_turret_health", 0);
+  var_0 setclientomnvar("ui_zm_turret_health", 0);
   var_0 notify("left_aa_gun");
 }
 
@@ -436,7 +436,7 @@ aa_gun_manage_swaps() {
 
   for(;;) {
     self waittill("turretownerchange");
-    var_0 = self _meth_80E2();
+    var_0 = self getturretowner();
 
     if(isDefined(var_0) && isPlayer(var_0))
       thread aa_gun_capture_turret_fire(var_0);
@@ -465,7 +465,7 @@ plane_spawn_plane() {
   var_2._id_931A = "forward";
   var_2 _id_0378::_id_8D74("aud_plane_spawn");
   var_2 thread plane_gun_think();
-  var_2 _meth_827C(self);
+  var_2 startpath(self);
   var_2 thread plane_vehicle_paths_non_heli(self);
   var_2 thread maps\mp\gametypes\_damage::_id_8676(100);
   var_2.health = 60;
@@ -492,11 +492,11 @@ plane_cleanup() {
 
 plane_damage_player() {
   self endon("death");
-  var_0 = _func_18E("vol_plane_damage_area", "targetname");
+  var_0 = _getent("vol_plane_damage_area", "targetname");
 
   while(common_scripts\utility::_id_3794("turret_on")) {
     var_1 = self.origin;
-    var_2 = anglesToForward(self _meth_8181("TAG_MUZZLE_FX_1"));
+    var_2 = anglesToForward(self gettagangles("TAG_MUZZLE_FX_1"));
     var_3 = 10000;
     var_4 = 180;
     var_5 = bulletTrace(self gettagorigin("TAG_MUZZLE_FX_1"), var_1 + var_2 * var_3, 0, undefined, 1, 1, 0, 0, 0, 0, 0);
@@ -504,18 +504,18 @@ plane_damage_player() {
     if(isDefined(var_5["position"])) {
       var_6 = var_5["position"];
       var_7 = _id_0547::_id_408F();
-      var_7 = _func_1AC(var_7, var_6, var_4, 1);
+      var_7 = _sortbydistance(var_7, var_6, var_4, 1);
 
       foreach(var_9 in var_7) {
-        if(_func_07E(var_6 + (0, 0, 25), var_9 getEye(), 0))
-          var_9 _meth_8059(80, self.origin);
+        if(_bullettracepassed(var_6 + (0, 0, 25), var_9 getEye(), 0))
+          var_9 dodamage(80, self.origin);
       }
 
-      var_11 = _func_1AC(level.players, var_6, var_4, 1);
+      var_11 = _sortbydistance(level.players, var_6, var_4, 1);
 
       foreach(var_13 in var_11) {
-        if(_func_07E(var_6 + (0, 0, 25), var_13.origin, 0) || _func_07E(var_6 + (0, 0, 25), var_13 gettagorigin("j_spine4"), 0) || _func_07E(var_6 + (0, 0, 25), var_13 getEye(), 0)) {
-          var_13 _meth_8059(23, self.origin);
+        if(_bullettracepassed(var_6 + (0, 0, 25), var_13.origin, 0) || _bullettracepassed(var_6 + (0, 0, 25), var_13 gettagorigin("j_spine4"), 0) || _bullettracepassed(var_6 + (0, 0, 25), var_13 getEye(), 0)) {
+          var_13 dodamage(23, self.origin);
           var_13 notify("aagun_damage");
         }
       }
@@ -537,8 +537,8 @@ plane_gun_think() {
   thread plane_damage_player();
 
   while(common_scripts\utility::_id_3794("turret_on")) {
-    _func_147(common_scripts\utility::_id_44F5("zmb_isl_enemy_plane_tracer"), self, "TAG_MUZZLE_FX_1");
-    _func_147(common_scripts\utility::_id_44F5("zmb_isl_enemy_plane_tracer"), self, "TAG_MUZZLE_FX_2");
+    _playfxontag(common_scripts\utility::_id_44F5("zmb_isl_enemy_plane_tracer"), self, "TAG_MUZZLE_FX_1");
+    _playfxontag(common_scripts\utility::_id_44F5("zmb_isl_enemy_plane_tracer"), self, "TAG_MUZZLE_FX_2");
     wait 0.2;
   }
 }
@@ -550,7 +550,7 @@ plane_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     return;
   }
   if(isDefined(var_1._id_01D1) && !isPlayer(var_1))
-    var_1 = var_1 _meth_80E2();
+    var_1 = var_1 getturretowner();
 
   if(isDefined(self._id_6E74))
     var_12 = self._id_6E74;
@@ -608,14 +608,14 @@ plane_crashy() {
       common_scripts\utility::_id_379A("plane_crashed");
       return;
     } else {
-      var_1 = _func_0A5(-90, 90);
-      var_2 = (0, _func_0A7(var_1), _func_0A6(var_1));
-      var_3 = (_func_0A5(-1000, 1000), _func_0A5(-1000, 1000), _func_0A5(-1000, 1000));
+      var_1 = _randomfloatrange(-90, 90);
+      var_2 = (0, _cos(var_1), _sin(var_1));
+      var_3 = (_randomfloatrange(-1000, 1000), _randomfloatrange(-1000, 1000), _randomfloatrange(-1000, 1000));
       var_4 = 1.2;
-      self _meth_8224(level.player.origin + var_3, self _meth_8283() * var_4, var_2);
+      self vehicledriveto(level.player.origin + var_3, self vehicle_getspeed() * var_4, var_2);
     }
 
-    common_scripts\utility::waittill_notify_or_timeout("veh_collision", _func_0A5(0.5, 3.0));
+    common_scripts\utility::waittill_notify_or_timeout("veh_collision", _randomfloatrange(0.5, 3.0));
   }
 
   if(!isDefined(self.crashingspecial) || self.crashingspecial == 0)
@@ -627,7 +627,7 @@ plane_wait_for_valid_crash_path() {
 
   for(;;) {
     if(isDefined(self._id_2944) && isDefined(self._id_2944.script_exploder)) {
-      var_0 = _func_1DC(self._id_2944.script_exploder, "script_linkname");
+      var_0 = _getvehiclenodearray(self._id_2944.script_exploder, "script_linkname");
 
       if(var_0.size > 0) {
         break;
@@ -682,7 +682,7 @@ plane_flak_projectile_zombie_proximity_detonate(var_0, var_1) {
   var_3 = common_scripts\utility::_id_4461(var_0.origin, _id_0547::_id_408F());
 
   for(;;) {
-    if(isDefined(var_3) && _func_0E1(var_3 getEye(), var_0.origin) < var_2 && _func_0AE(var_0.origin[2] - var_3.origin[2]) < 120) {
+    if(isDefined(var_3) && _distance2d(var_3 getEye(), var_0.origin) < var_2 && _abs(var_0.origin[2] - var_3.origin[2]) < 120) {
       var_1 _id_04C7::_id_A102("standard");
       var_0 _meth_8561("turretweapon_ger_btry_flak38_mp_zombie", var_1, var_0);
       break;
@@ -706,8 +706,8 @@ plane_flak_projectile_proximity_detonate(var_0, var_1) {
 
     if(var_4 < var_2) {
       var_0 notify("plane_death");
-      self _meth_8059(500, var_3, var_1, var_0, "MOD_PROJECTILE", var_0._id_A9E0);
-      var_0 _meth_81D6();
+      self dodamage(500, var_3, var_1, var_0, "MOD_PROJECTILE", var_0._id_A9E0);
+      var_0 detonate();
     }
 
     waitframe();
@@ -715,11 +715,11 @@ plane_flak_projectile_proximity_detonate(var_0, var_1) {
 }
 
 plane_get_from_vehicle_node(var_0) {
-  return _func_1DB(var_0, "targetname");
+  return _getvehiclenode(var_0, "targetname");
 }
 
 plane_get_from_vehicle_node_reverse(var_0) {
-  var_1 = _func_1DB(var_0, "targetname");
+  var_1 = _getvehiclenode(var_0, "targetname");
   var_2 = var_1 _meth_8650();
   return var_2 _meth_8650();
 }
@@ -748,11 +748,11 @@ plane_goto_linkto_path(var_0) {
   waittillframeend;
 
   if(isDefined(var_0) && isDefined(var_0.script_exploder)) {
-    var_1 = _func_1DC(var_0.script_exploder, "script_linkname");
+    var_1 = _getvehiclenodearray(var_0.script_exploder, "script_linkname");
 
     if(isDefined(var_1) && isDefined(var_1[0])) {
       thread plane_vehicle_paths_non_heli(var_1[0]);
-      self _meth_827C(var_1[0]);
+      self startpath(var_1[0]);
     }
   }
 }
@@ -843,31 +843,31 @@ plane_vehicle_paths_non_heli(var_0) {
     if(!isDefined(self)) {
       return;
     }
-    if(isDefined(var_4._id_8272)) {
-      var_4._id_8186 = var_4._id_8272;
-      var_4._id_8272 = undefined;
+    if(isDefined(var_4.physicslaunchserver)) {
+      var_4.setdepthoffield = var_4.physicslaunchserver;
+      var_4.physicslaunchserver = undefined;
     }
 
-    if(isDefined(var_4._id_8186)) {
-      var_8 = var_4._id_8187;
+    if(isDefined(var_4.setdepthoffield)) {
+      var_8 = var_4.setviewmodeldepthoffield;
 
       if(isDefined(var_8))
-        level maps\mp\_utility::_id_2CED(var_8, common_scripts\_exploder::exploder, var_4._id_8186);
+        level maps\mp\_utility::_id_2CED(var_8, common_scripts\_exploder::exploder, var_4.setdepthoffield);
       else
-        level common_scripts\_exploder::exploder(var_4._id_8186);
+        level common_scripts\_exploder::exploder(var_4.setdepthoffield);
     }
 
     if(isDefined(var_4._id_81A0))
       common_scripts\utility::flag_set(var_4._id_81A0);
 
-    if(isDefined(var_4._id_8183))
-      common_scripts\utility::_id_379A(var_4._id_8183);
+    if(isDefined(var_4.stunplayer))
+      common_scripts\utility::_id_379A(var_4.stunplayer);
 
-    if(isDefined(var_4._id_8182))
-      common_scripts\utility::_id_3796(var_4._id_8182);
+    if(isDefined(var_4.shellshock))
+      common_scripts\utility::_id_3796(var_4.shellshock);
 
-    if(isDefined(var_4._id_819B))
-      common_scripts\utility::_id_3C7B(var_4._id_819B);
+    if(isDefined(var_4.getdoorpathnode))
+      common_scripts\utility::_id_3C7B(var_4.getdoorpathnode);
 
     if(isDefined(var_4._id_0165)) {
       if(var_4._id_0165 == "godon")
@@ -877,50 +877,50 @@ plane_vehicle_paths_non_heli(var_0) {
         self._id_480F = 0;
 
       if(var_4._id_0165 == "engineoff")
-        self _meth_828D();
+        self vehicle_turnengineoff();
     }
 
-    if(isDefined(var_4._id_8145))
-      self._id_8145 = var_4._id_8145;
+    if(isDefined(var_4.setanimknoballlimitedrestart))
+      self.setanimknoballlimitedrestart = var_4.setanimknoballlimitedrestart;
 
-    if(isDefined(var_4._id_8121))
-      self._id_8121 = var_4._id_8121;
+    if(isDefined(var_4.seteq))
+      self.seteq = var_4.seteq;
 
-    if(isDefined(var_4._id_82B2))
-      self._id_82B2 = var_4._id_82B2;
+    if(isDefined(var_4.movex))
+      self.movex = var_4.movex;
 
-    if(isDefined(var_4._id_82C1))
-      self notify("turning", var_4._id_82C1);
+    if(isDefined(var_4.solid))
+      self notify("turning", var_4.solid);
 
-    if(isDefined(var_4._id_8150)) {
-      if(var_4._id_8150 == 0)
+    if(isDefined(var_4.setrightarc)) {
+      if(var_4.setrightarc == 0)
         thread plane_death_roll_off();
       else
         thread plane_death_roll_on();
     }
 
-    if(isDefined(var_4._id_82D4)) {
-      if(isDefined(var_4._id_8260) && var_4._id_8260 == "queue")
+    if(isDefined(var_4.getweaponslist)) {
+      if(isDefined(var_4.setlookatent) && var_4.setlookatent == "queue")
         self._id_7889 = 1;
     }
 
-    if(isDefined(var_4._id_812B))
-      self._id_01C0 = var_4._id_812B;
+    if(isDefined(var_4.allowfire))
+      self._id_01C0 = var_4.allowfire;
 
-    if(isDefined(var_4._id_8265))
-      self._id_01C3 = var_4._id_8265;
+    if(isDefined(var_4.finishplayerdamage))
+      self._id_01C3 = var_4.finishplayerdamage;
 
-    if(isDefined(var_4._id_8262))
-      self._id_01C1 = var_4._id_8262;
+    if(isDefined(var_4.setvehweapon))
+      self._id_01C1 = var_4.setvehweapon;
 
-    if(isDefined(var_4._id_8184)) {
+    if(isDefined(var_4.stopshellshock)) {
       var_9 = 35;
 
-      if(isDefined(var_4._id_8151))
-        var_9 = var_4._id_8151;
+      if(isDefined(var_4.setleftarc))
+        var_9 = var_4.setleftarc;
 
-      self _meth_8280(0, var_9);
-      common_scripts\utility::_id_379C(var_4._id_8184);
+      self vehicle_setspeed(0, var_9);
+      common_scripts\utility::_id_379C(var_4.stopshellshock);
 
       if(!isDefined(self)) {
         return;
@@ -930,7 +930,7 @@ plane_vehicle_paths_non_heli(var_0) {
       if(isDefined(var_4.script_accel))
         var_10 = var_4.script_accel;
 
-      self _meth_8293(var_10);
+      self resumespeed(var_10);
     }
 
     var_3 = var_4;
@@ -949,8 +949,8 @@ plane_vehicle_paths_non_heli(var_0) {
     if(!isDefined(var_4)) {
       var_4 = var_3;
       break;
-    } else if(!isDefined(var_4.target) || isDefined(var_4._id_82CA)) {
-      var_11 = max(0.01, length(self _meth_8289()));
+    } else if(!isDefined(var_4.target) || isDefined(var_4.laststanddie)) {
+      var_11 = max(0.01, length(self vehicle_getvelocity()));
       var_12 = distance(self.origin, var_4.origin);
       var_13 = max(0.01, var_12 / var_11);
       self notify("about_to_stop", var_13);
@@ -959,7 +959,7 @@ plane_vehicle_paths_non_heli(var_0) {
 
   self notify("reached_dynamic_path_end");
 
-  if(isDefined(self._id_82D3)) {
+  if(isDefined(self.getweaponslistexclusives)) {
     self notify("delete");
     waittillframeend;
     self delete();
@@ -972,7 +972,7 @@ plane_track_damage(var_0, var_1) {
 }
 
 plane_waittill_damage_from(var_0) {
-  self _meth_82C3(1);
+  self setcandamage(1);
 
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
@@ -1011,11 +1011,11 @@ aud_plane_mission_start() {
   for(;;) {
     foreach(var_1 in level.players) {
       if(var_1.current_volume_is_interior) {
-        var_1 _meth_8626("isl_plane_interior_mix");
+        var_1 clientaddsoundsubmix("isl_plane_interior_mix");
         continue;
       }
 
-      var_1 _meth_8627("isl_plane_interior_mix");
+      var_1 clientclearsoundsubmix("isl_plane_interior_mix");
     }
 
     wait 0.2;
@@ -1062,7 +1062,7 @@ aud_plane_damage_player() {
 
   if(_id_0378::_id_8D1B(0.3)) {
     wait 0.1;
-    var_1 = var_0.origin + (_func_0A4(25, 50), _func_0A4(25, 50), var_0.origin[2]);
+    var_1 = var_0.origin + (_randomintrange(25, 50), _randomintrange(25, 50), var_0.origin[2]);
     _id_0380::_id_2889("whizby_near", undefined, var_0.origin);
   }
 }

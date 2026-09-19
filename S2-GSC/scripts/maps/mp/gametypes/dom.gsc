@@ -11,7 +11,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -56,15 +56,15 @@ main() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653();
-  _func_035("scr_dom_roundlimit", 2);
+  _setdynamicdvar("scr_dom_roundlimit", 2);
   maps\mp\_utility::registerroundlimitdvar("dom", 1);
-  _func_035("scr_dom_winlimit", 1);
+  _setdynamicdvar("scr_dom_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("dom", 1);
-  _func_035("scr_dom_halftime", 1);
+  _setdynamicdvar("scr_dom_halftime", 1);
   maps\mp\_utility::registerhalftimedvar("dom", 1);
-  _func_035("scr_dom_capture_time", _func_132("domData", "captureTime"));
-  _func_035("scr_dom_allowNeutral", _func_132("domData", "allowNeutral"));
-  _func_035("scr_dom_halftimeswitchsides", _func_132("domData", "halfTimeSwitchSides"));
+  _setdynamicdvar("scr_dom_capture_time", _getmatchrulesdata("domData", "captureTime"));
+  _setdynamicdvar("scr_dom_allowNeutral", _getmatchrulesdata("domData", "allowNeutral"));
+  _setdynamicdvar("scr_dom_halftimeswitchsides", _getmatchrulesdata("domData", "halfTimeSwitchSides"));
 }
 
 _id_6BAF() {
@@ -79,11 +79,11 @@ _id_6BAF() {
   }
 
   if(game["status"] == "halftime")
-    _func_032("ui_current_round", 2);
+    _setomnvar("ui_current_round", 2);
   else if(game["status"] == "overtime")
-    _func_032("ui_current_round", 3);
+    _setomnvar("ui_current_round", 3);
   else if(game["status"] == "overtime_halftime")
-    _func_032("ui_current_round", 4);
+    _setomnvar("ui_current_round", 4);
 
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DOM");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DOM");
@@ -98,7 +98,7 @@ _id_6BAF() {
 
   maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
   maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
   level.iconalliestaking = "waypoint_caster_friendly_taking";
   level.iconaxistaking = "waypoint_caster_enemy_taking";
   level.iconallies = "waypoint_defend";
@@ -108,9 +108,9 @@ _id_6BAF() {
   var_2[0] = "dom";
   var_2[1] = "blocker_dom";
   _id_04D1::main(var_2);
-  _func_032("ui_broadcaster_game_mode_status_1", 0);
-  _func_032("ui_broadcaster_game_mode_status_2", 0);
-  _func_032("ui_broadcaster_game_mode_status_3", 0);
+  _setomnvar("ui_broadcaster_game_mode_status_1", 0);
+  _setomnvar("ui_broadcaster_game_mode_status_2", 0);
+  _setomnvar("ui_broadcaster_game_mode_status_3", 0);
   level thread _id_3211();
   level thread _id_A109();
   level thread _id_A160();
@@ -185,12 +185,12 @@ _id_A0EA() {
 
 _id_7651() {
   game["neutral"] = "neutral";
-  var_0 = _func_0EE("allieschar");
+  var_0 = _getmapcustom("allieschar");
 
   if(!isDefined(var_0) || var_0 == "")
     var_0 = "allies";
 
-  var_1 = _func_0EE("axischar");
+  var_1 = _getmapcustom("axischar");
 
   if(!isDefined(var_1) || var_1 == "")
     var_1 = "axis";
@@ -277,22 +277,22 @@ _id_8BF4() {
     level waittill("joined_team");
 
     foreach(var_1 in level._id_3211) {
-      var_1._id_A582[1] _meth_805C();
-      var_1._id_A582[2] _meth_805C();
+      var_1._id_A582[1] hide();
+      var_1._id_A582[2] hide();
 
       foreach(var_3 in level.players) {
         if(var_3.team == "allies") {
-          var_1._id_A582[1] _meth_8005(var_3);
+          var_1._id_A582[1] showtoplayer(var_3);
           continue;
         }
 
         if(var_3.team == "axis") {
-          var_1._id_A582[2] _meth_8005(var_3);
+          var_1._id_A582[2] showtoplayer(var_3);
           continue;
         }
 
         if(var_3.team == "spectator")
-          var_1._id_A582[1] _meth_8005(var_3);
+          var_1._id_A582[1] showtoplayer(var_3);
       }
     }
   }
@@ -321,7 +321,7 @@ _id_3211() {
       var_3 = level._id_3CC5[var_2];
       var_4 = spawn("trigger_radius", var_3.origin + (0, 0, -1), 0, 160, 128);
       var_4.angles = var_3.angles;
-      var_4._id_81E8 = var_3._id_81E8;
+      var_4.shootblank = var_3.shootblank;
       var_4._id_0165 = var_3._id_0165;
       var_4.target = var_3.target;
       var_4.targetname = var_3.targetname;
@@ -353,21 +353,21 @@ _id_3211() {
     var_7[1] = spawn("script_model", var_6.origin);
     var_7[1].angles = var_6.angles;
     var_7[1] setModel("neutral_ctf_flag_anim");
-    var_7[1] _meth_8276("ctf_flag_flap");
+    var_7[1] scriptmodelplayanim("ctf_flag_flap");
     var_7[2] = spawn("script_model", var_6.origin);
     var_7[2].angles = var_6.angles;
     var_7[2] setModel("neutral_ctf_flag_anim");
-    var_7[2] _meth_8276("ctf_flag_flap");
+    var_7[2] scriptmodelplayanim("ctf_flag_flap");
     var_8 = _id_04D1::_id_2837("neutral", var_3, var_7, (0, 0, 100));
     var_8 _id_04D1::_id_0C30("enemy");
     var_8 _id_04D1::_id_8A5A(level._id_320D);
     var_8 _id_04D1::_id_8A59(&"MP_SECURING_POSITION");
     var_9 = var_8 _id_04D1::_id_454C();
     var_8.label = var_9;
-    var_8 _id_04D1::_id_860A("friendly", "waypoint_defend" + var_9);
-    var_8 _id_04D1::_id_860E("friendly", "waypoint_defend" + var_9, undefined, 1);
-    var_8 _id_04D1::_id_860A("enemy", "waypoint_captureneutral" + var_9);
-    var_8 _id_04D1::_id_860E("enemy", "waypoint_captureneutral" + var_9, undefined, 1);
+    var_8 _id_04D1::set2dicon("friendly", "waypoint_defend" + var_9);
+    var_8 _id_04D1::playsoundtoteam("friendly", "waypoint_defend" + var_9, undefined, 1);
+    var_8 _id_04D1::set2dicon("enemy", "waypoint_captureneutral" + var_9);
+    var_8 _id_04D1::playsoundtoteam("enemy", "waypoint_captureneutral" + var_9, undefined, 1);
     maps\mp\_utility::_id_863F(var_8, level.iconallies + var_9, 0, 1);
     var_8 _id_04D1::_id_8A60("any");
     var_8._id_6BBF = ::_id_6BBF;
@@ -406,8 +406,8 @@ _id_3211() {
   var_16 = gettime();
 
   for(var_2 = 0; var_2 < level._id_3211.size; var_2++) {
-    _func_0F6(level._id_3211[var_2]._id_A582[0].origin, "script_mp_captures: team %s, gameTime %d", "neutral", var_16);
-    _func_0F6(level._id_3211[var_2]._id_A582[0].origin, "script_mp_dom: gameTime %d, label %s, owner %s", var_16, level._id_3211[var_2].label, level._id_3211[var_2]._id_6DB2);
+    _reconspatialevent(level._id_3211[var_2]._id_A582[0].origin, "script_mp_captures: team %s, gameTime %d", "neutral", var_16);
+    _reconspatialevent(level._id_3211[var_2]._id_A582[0].origin, "script_mp_dom: gameTime %d, label %s, owner %s", var_16, level._id_3211[var_2].label, level._id_3211[var_2]._id_6DB2);
   }
 }
 
@@ -457,29 +457,29 @@ _id_6ABC(var_0) {
 
 _id_1FB9() {
   if(isDefined(self._id_915C) && self._id_915C) {
-    _id_04D1::_id_860A("enemy", "waypoint_contested" + self.label);
-    _id_04D1::_id_860E("enemy", "waypoint_contested" + self.label, undefined, 1);
-    _id_04D1::_id_860A("friendly", "waypoint_contested" + self.label);
-    _id_04D1::_id_860E("friendly", "waypoint_contested" + self.label, undefined, 1);
+    _id_04D1::set2dicon("enemy", "waypoint_contested" + self.label);
+    _id_04D1::playsoundtoteam("enemy", "waypoint_contested" + self.label, undefined, 1);
+    _id_04D1::set2dicon("friendly", "waypoint_contested" + self.label);
+    _id_04D1::playsoundtoteam("friendly", "waypoint_contested" + self.label, undefined, 1);
   } else {
-    _id_04D1::_id_860A("enemy", "waypoint_taking_neutral" + self.label);
-    _id_04D1::_id_860E("enemy", "waypoint_taking_neutral" + self.label, undefined, 1);
-    _id_04D1::_id_860A("friendly", "waypoint_losing_neutral" + self.label);
-    _id_04D1::_id_860E("friendly", "waypoint_losing_neutral" + self.label, undefined, 1);
+    _id_04D1::set2dicon("enemy", "waypoint_taking_neutral" + self.label);
+    _id_04D1::playsoundtoteam("enemy", "waypoint_taking_neutral" + self.label, undefined, 1);
+    _id_04D1::set2dicon("friendly", "waypoint_losing_neutral" + self.label);
+    _id_04D1::playsoundtoteam("friendly", "waypoint_losing_neutral" + self.label, undefined, 1);
   }
 }
 
 _id_1FC0() {
   if(isDefined(self._id_915C) && self._id_915C) {
-    _id_04D1::_id_860A("enemy", "waypoint_contested" + self.label);
-    _id_04D1::_id_860E("enemy", "waypoint_contested" + self.label, undefined, 1);
-    _id_04D1::_id_860A("friendly", "waypoint_contested" + self.label);
-    _id_04D1::_id_860E("friendly", "waypoint_contested" + self.label, undefined, 1);
+    _id_04D1::set2dicon("enemy", "waypoint_contested" + self.label);
+    _id_04D1::playsoundtoteam("enemy", "waypoint_contested" + self.label, undefined, 1);
+    _id_04D1::set2dicon("friendly", "waypoint_contested" + self.label);
+    _id_04D1::playsoundtoteam("friendly", "waypoint_contested" + self.label, undefined, 1);
   } else {
-    _id_04D1::_id_860A("enemy", "waypoint_taking" + self.label);
-    _id_04D1::_id_860E("enemy", "waypoint_taking" + self.label, undefined, 1);
-    _id_04D1::_id_860A("friendly", "waypoint_losing" + self.label);
-    _id_04D1::_id_860E("friendly", "waypoint_losing" + self.label, undefined, 1);
+    _id_04D1::set2dicon("enemy", "waypoint_taking" + self.label);
+    _id_04D1::playsoundtoteam("enemy", "waypoint_taking" + self.label, undefined, 1);
+    _id_04D1::set2dicon("friendly", "waypoint_losing" + self.label);
+    _id_04D1::playsoundtoteam("friendly", "waypoint_losing" + self.label, undefined, 1);
   }
 }
 
@@ -523,7 +523,7 @@ _id_6BCB(var_0, var_1, var_2) {
   } else if(level._id_0C27 && var_1 > 0.49 && var_2 && self._id_2EE9 && var_3 != "neutral") {
     var_4 = _id_04D1::_id_44AF();
     var_5 = gettime();
-    _func_0F6(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_4.name, var_4._id_5CC6, "neutral", var_5);
+    _reconspatialevent(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_4.name, var_4._id_5CC6, "neutral", var_5);
     _id_04D1::_id_86EC("neutral");
     _id_A192();
     _id_933E("lost" + self.label, var_3, 1);
@@ -546,27 +546,27 @@ _id_933E(var_0, var_1, var_2) {
 
 _id_6AFA(var_0, var_1, var_2) {
   if(isPlayer(var_1)) {
-    var_1 _meth_82FF("ui_capture_icon", 0);
-    var_1 _meth_82FF("ui_capture_status_index", 0);
+    var_1 setclientomnvar("ui_capture_icon", 0);
+    var_1 setclientomnvar("ui_capture_status_index", 0);
   }
 
   var_3 = _id_04D1::_id_45F7();
 
   if(var_3 != "neutral") {
-    _id_04D1::_id_860A("enemy", "waypoint_capture" + self.label);
-    _id_04D1::_id_860E("enemy", "waypoint_capture" + self.label, undefined, 1);
-    _id_04D1::_id_860A("friendly", "waypoint_defend" + self.label);
-    _id_04D1::_id_860E("friendly", "waypoint_defend" + self.label, undefined, 1);
+    _id_04D1::set2dicon("enemy", "waypoint_capture" + self.label);
+    _id_04D1::playsoundtoteam("enemy", "waypoint_capture" + self.label, undefined, 1);
+    _id_04D1::set2dicon("friendly", "waypoint_defend" + self.label);
+    _id_04D1::playsoundtoteam("friendly", "waypoint_defend" + self.label, undefined, 1);
 
     if(var_3 == "allies")
       maps\mp\_utility::_id_863F(self, level.iconallies + self.label, 2, 1);
     else
       maps\mp\_utility::_id_863F(self, level.iconaxis + self.label, 1, 1);
   } else {
-    _id_04D1::_id_860A("enemy", "waypoint_captureneutral" + self.label);
-    _id_04D1::_id_860E("enemy", "waypoint_captureneutral" + self.label, undefined, 1);
-    _id_04D1::_id_860A("friendly", "waypoint_captureneutral" + self.label);
-    _id_04D1::_id_860E("friendly", "waypoint_captureneutral" + self.label, undefined, 1);
+    _id_04D1::set2dicon("enemy", "waypoint_captureneutral" + self.label);
+    _id_04D1::playsoundtoteam("enemy", "waypoint_captureneutral" + self.label, undefined, 1);
+    _id_04D1::set2dicon("friendly", "waypoint_captureneutral" + self.label);
+    _id_04D1::playsoundtoteam("friendly", "waypoint_captureneutral" + self.label, undefined, 1);
     maps\mp\_utility::_id_863F(self, level.iconallies + self.label, 0, 1);
   }
 
@@ -582,7 +582,7 @@ _id_A192(var_0) {
   if(isDefined(var_0) && var_0)
     waittillframeend;
 
-  if(!_func_279(self._id_A582[0])) {
+  if(!_isremovedentity(self._id_A582[0])) {
     var_1 = self._id_A582[0];
     _id_3EC2(var_1.origin, anglestoup(var_1.angles));
   }
@@ -603,7 +603,7 @@ _id_3EC2(var_0, var_1) {
   }
 
   var_3 = gettime();
-  _func_0F6(self._id_A582[0].origin, "script_mp_dom: gameTime %d, label %s, owner %s", var_3, self.label, self._id_6DB2);
+  _reconspatialevent(self._id_A582[0].origin, "script_mp_dom: gameTime %d, label %s, owner %s", var_3, self.label, self._id_6DB2);
 }
 
 _id_3EC3() {
@@ -636,11 +636,11 @@ _id_A189(var_0, var_1) {
     var_2 = "ui_broadcaster_game_mode_status_3";
 
   if(var_1 == "allies")
-    _func_032(var_2, -1);
+    _setomnvar(var_2, -1);
   else if(var_1 == "axis")
-    _func_032(var_2, 1);
+    _setomnvar(var_2, 1);
   else
-    _func_032(var_2, 0);
+    _setomnvar(var_2, 0);
 }
 
 _id_6BBF(var_0) {
@@ -684,12 +684,12 @@ _id_6BBF(var_0) {
   if(self.label != "_b" && isDefined(level._id_321C) && isDefined(level._id_321C[var_2]) && isDefined(level._id_321C[var_2]["flag"]) && level._id_321C[var_2]["flag"] == "_b")
     level._id_321C[var_2] = undefined;
 
-  _func_0F6(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_0.name, var_0._id_5CC6, var_2, var_1);
+  _reconspatialevent(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_0.name, var_0._id_5CC6, var_2, var_1);
   _id_04D1::_id_86EC(var_2);
-  _id_04D1::_id_860A("enemy", "waypoint_capture" + self.label);
-  _id_04D1::_id_860E("enemy", "waypoint_capture" + self.label, undefined, 1);
-  _id_04D1::_id_860A("friendly", "waypoint_defend" + self.label);
-  _id_04D1::_id_860E("friendly", "waypoint_defend" + self.label, undefined, 1);
+  _id_04D1::set2dicon("enemy", "waypoint_capture" + self.label);
+  _id_04D1::playsoundtoteam("enemy", "waypoint_capture" + self.label, undefined, 1);
+  _id_04D1::set2dicon("friendly", "waypoint_defend" + self.label);
+  _id_04D1::playsoundtoteam("friendly", "waypoint_defend" + self.label, undefined, 1);
 
   if(var_2 == "allies")
     maps\mp\_utility::_id_863F(self, level.iconallies + self.label, 2, 1);
@@ -998,7 +998,7 @@ _id_459D(var_0) {
     var_6 = undefined;
 
     if(var_1)
-      var_6 = _func_203(var_0.origin, var_5.levelflag.origin, 999999);
+      var_6 = _getpathdist(var_0.origin, var_5.levelflag.origin, 999999);
 
     if(!isDefined(var_6) || var_6 == -1)
       var_6 = distancesquared(var_5.levelflag.origin, var_0.origin);

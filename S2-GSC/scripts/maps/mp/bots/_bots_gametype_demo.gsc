@@ -9,8 +9,8 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_199B;
-  level._id_19D5["notify_enemy_bots_bomb_used"] = ::_id_67F5;
+  level.bot_funcs["gametype_think"] = ::_id_199B;
+  level.bot_funcs["notify_enemy_bots_bomb_used"] = ::_id_67F5;
 }
 
 _id_199A() {
@@ -42,8 +42,8 @@ _id_199B() {
   while(!isDefined(level._id_19E8))
     waitframe();
 
-  self _meth_8353("separation", 0);
-  self _meth_8353("grenade_objectives", 1);
+  self botsetflag("separation", 0);
+  self botsetflag("grenade_objectives", 1);
   self._id_28EE = undefined;
   self._id_2CA5 = 0;
 
@@ -77,7 +77,7 @@ _id_199B() {
           maps\mp\bots\_bots_strategy::_id_1AA6(self._id_28EE._id_28D4, level._id_7790, var_1);
         }
       } else if(self._id_7ECA == "defend_zone") {
-        if(!_func_279(level._id_2D65[self._id_28EE.label]) && !maps\mp\bots\_bots_util::_id_1A2E(level._id_2D65[self._id_28EE.label].origin)) {
+        if(!_isremovedentity(level._id_2D65[self._id_28EE.label]) && !maps\mp\bots\_bots_util::_id_1A2E(level._id_2D65[self._id_28EE.label].origin)) {
           var_1["score_flags"] = "strongly_avoid_center";
           maps\mp\bots\_bots_strategy::_id_1AA6(level._id_2D65[self._id_28EE.label].origin, level._id_7790, var_1);
         }
@@ -129,7 +129,7 @@ _id_67F5(var_0) {
 _id_7060() {
   self endon("change_role");
   var_0 = maps\mp\bots\_bots_gametype_common::_id_40DF(self._id_28EE, 0);
-  self _meth_8356(var_0.origin, 0, "critical");
+  self botsetscriptgoal(var_0.origin, 0, "critical");
   var_1 = maps\mp\bots\_bots_util::_id_1B21(undefined, "change_role");
 
   if(var_1 == "goal") {
@@ -142,7 +142,7 @@ _id_7060() {
 
     var_5 = var_4 > 0 && gettime() >= var_4;
     var_6 = maps\mp\bots\_bots_gametype_common::_id_1911(level._id_7078 + 2, "bomb_planted", var_5);
-    self _meth_8358();
+    self botclearscriptgoal();
 
     if(var_6)
       _id_1998();
@@ -151,9 +151,9 @@ _id_7060() {
 
 _id_2C92() {
   self endon("change_role");
-  self _meth_837B("scripted");
+  self botsetpathingstyle("scripted");
   var_0 = maps\mp\bots\_bots_gametype_common::_id_40DE(self._id_28EE).origin;
-  self _meth_8356(var_0, 20, "critical");
+  self botsetscriptgoal(var_0, 20, "critical");
   var_1 = maps\mp\bots\_bots_util::_id_1B21(undefined, "change_role");
 
   if(var_1 == "bad_path") {
@@ -161,18 +161,18 @@ _id_2C92() {
 
     if(self._id_2CA5 >= 4) {
       for(;;) {
-        var_2 = _func_0B9(var_0, 50, 0);
+        var_2 = _getnodesinradiussorted(var_0, 50, 0);
         var_3 = self._id_2CA5 - 4;
 
         if(var_2.size <= var_3) {
-          var_4 = _func_1F2(var_0, 50, self);
+          var_4 = _botgetclosestnavigablepoint(var_0, 50, self);
 
           if(isDefined(var_4))
-            self _meth_8356(var_4, 20, "critical");
+            self botsetscriptgoal(var_4, 20, "critical");
           else
             break;
         } else
-          self _meth_8356(var_2[var_3].origin, 20, "critical");
+          self botsetscriptgoal(var_2[var_3].origin, 20, "critical");
 
         var_1 = maps\mp\bots\_bots_util::_id_1B21(undefined, "change_role");
 
@@ -200,7 +200,7 @@ _id_2C92() {
     if(!var_9 && self._id_2CA5 >= 4)
       self._id_2CA5++;
 
-    self _meth_8358();
+    self botclearscriptgoal();
 
     if(var_9)
       _id_1998();
@@ -213,7 +213,7 @@ _id_5519() {
   if(maps\mp\bots\_bots_util::_id_1A2D())
     maps\mp\bots\_bots_strategy::_id_19A3();
 
-  self _meth_8357(common_scripts\utility::random(self._id_28EE._id_1B49), "critical");
+  self botsetscriptgoalnode(common_scripts\utility::random(self._id_28EE._id_1B49), "critical");
   var_0 = maps\mp\bots\_bots_util::_id_1B21();
 
   if(var_0 == "goal") {
@@ -226,14 +226,14 @@ _id_4297(var_0) {
   var_1 = _id_42B2(var_0, self.team);
 
   foreach(var_3 in var_1) {
-    if(!_func_0C1(var_3)) {
+    if(!_isai(var_3)) {
       if(var_3._id_56C2)
         return var_3;
     }
   }
 
   foreach(var_3 in var_1) {
-    if(_func_0C1(var_3)) {
+    if(_isai(var_3)) {
       if(isDefined(var_3._id_7ECA) && var_3._id_7ECA == "defuser")
         return var_3;
     }
@@ -246,14 +246,14 @@ _id_42A6(var_0) {
   var_1 = _id_42B2(var_0, self.team);
 
   foreach(var_3 in var_1) {
-    if(!_func_0C1(var_3)) {
+    if(!_isai(var_3)) {
       if(var_3._id_5777)
         return var_3;
     }
   }
 
   foreach(var_3 in var_1) {
-    if(_func_0C1(var_3)) {
+    if(_isai(var_3)) {
       if(isDefined(var_3._id_7ECA) && var_3._id_7ECA == "atk_bomber")
         return var_3;
     }
@@ -285,7 +285,7 @@ _id_42B2(var_0, var_1) {
   var_3 = maps\mp\bots\_bots_gametype_common::_id_41FB(var_1);
 
   foreach(var_5 in var_3) {
-    if(_func_0C1(var_5)) {
+    if(_isai(var_5)) {
       if(isDefined(var_5._id_28EE) && var_5._id_28EE == var_0)
         var_2 = common_scripts\utility::_id_0F6F(var_2, var_5);
 
@@ -379,7 +379,7 @@ _id_1971() {
     return;
   }
   if(!isDefined(level._id_2921) || !_id_190F(level._id_2921) || gettime() > level._id_66B4) {
-    level._id_66B4 = gettime() + 1000 * _func_0A4(30, 45);
+    level._id_66B4 = gettime() + 1000 * _randomintrange(30, 45);
     level._id_2921 = common_scripts\utility::random(_id_405F());
   }
 
@@ -391,7 +391,7 @@ _id_1971() {
   self._id_28EE = undefined;
 
   if(isDefined(var_1)) {
-    if(_func_0A3(1.0) < 0.25)
+    if(_randomfloat(1.0) < 0.25)
       return var_1;
   }
 
@@ -425,7 +425,7 @@ _id_1970() {
 
     if(!isDefined(var_1) || var_1 == self)
       var_0 = "atk_bomber";
-    else if(_func_0C1(var_1)) {
+    else if(_isai(var_1)) {
       var_2 = distance(self.origin, self._id_28EE._id_28D4);
       var_3 = distance(var_1.origin, self._id_28EE._id_28D4);
 
@@ -455,7 +455,7 @@ _id_1972() {
 
     if(!isDefined(var_1) || var_1 == self)
       var_0 = "defuser";
-    else if(_func_0C1(var_1)) {
+    else if(_isai(var_1)) {
       var_2 = distance(self.origin, self._id_28EE._id_28D4);
       var_3 = distance(var_1.origin, self._id_28EE._id_28D4);
 
@@ -481,8 +481,8 @@ _id_1999(var_0) {
 
 _id_1998() {
   self._id_7ECA = undefined;
-  self _meth_8358();
-  self _meth_837B(undefined);
+  self botclearscriptgoal();
+  self botsetpathingstyle(undefined);
   maps\mp\bots\_bots_strategy::_id_19A3();
   self notify("change_role");
   self._id_2CA5 = 0;

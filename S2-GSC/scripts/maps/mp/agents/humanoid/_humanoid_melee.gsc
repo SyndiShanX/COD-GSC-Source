@@ -46,15 +46,15 @@ _id_5753(var_0) {
   var_3 = undefined;
 
   if(isDefined(var_0.classname) && var_0.classname == "misc_turret" && isDefined(var_0._id_0B40))
-    var_3 = _func_080(var_1, var_2, var_0._id_0B40);
+    var_3 = _physicstrace(var_1, var_2, var_0._id_0B40);
   else
-    var_3 = _func_080(var_1, var_2);
+    var_3 = _physicstrace(var_1, var_2);
 
   return distancesquared(var_3, var_2) > 1;
 }
 
 _id_0085() {
-  self _meth_839A(1, 1);
+  self scragentsetanimscale(1, 1);
 }
 
 _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -65,29 +65,29 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_6 = 0;
 
   var_8 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-  var_9 = self _meth_83D8(var_2, var_8);
-  var_10 = _func_065(var_9);
+  var_9 = self getanimentry(var_2, var_8);
+  var_10 = _getanimlength(var_9);
   var_11 = [];
 
   foreach(var_13 in ["hit", "attack", "zombie_melee"])
-  var_11 = common_scripts\utility::_id_0F73(var_11, _func_067(var_9, var_13));
+  var_11 = common_scripts\utility::_id_0F73(var_11, _getnotetracktimes(var_9, var_13));
 
   if(var_11.size == 0)
     var_11 = [0.33];
   else if(var_11.size >= 2)
     var_11 = common_scripts\utility::_id_7897(var_11);
 
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
 
   if(common_scripts\utility::_id_562E(var_7))
-    self _meth_839B("face angle abs", self.angles);
+    self scragentsetorientmode("face angle abs", self.angles);
   else if(var_4)
-    self _meth_839B("face enemy");
+    self scragentsetorientmode("face enemy");
   else
-    self _meth_839B("face angle abs", (0, _func_109(var_0.origin - self.origin), 0));
+    self scragentsetorientmode("face angle abs", (0, _vectortoyaw(var_0.origin - self.origin), 0));
 
-  self _meth_839C("anim deltas");
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_2, var_8, var_5);
+  self scragentsetanimmode("anim deltas");
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2, var_8, var_5);
   var_15 = 0;
 
   for(var_16 = 0; var_16 < var_11.size; var_16++) {
@@ -96,7 +96,7 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_19 = var_5;
 
     if(var_16 == 0 && var_6) {
-      var_20 = _func_067(var_9, "lunge_start");
+      var_20 = _getnotetracktimes(var_9, "lunge_start");
 
       if(var_20.size > 0 && var_20[0] < var_17)
         var_18 = var_20[0];
@@ -107,10 +107,10 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
       if(self._id_5F44) {
         var_22 = var_1 - self.origin;
-        var_23 = _func_083(var_9, var_18, var_17);
+        var_23 = _getmovedelta(var_9, var_18, var_17);
         var_24 = maps\mp\agents\_scripted_agent_anim_util::_id_441C(var_22, var_23);
         var_19 = var_5 * clamp(1 / var_24._id_AAE3, 0.5, 1);
-        maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_2 + "_norestart", var_8, var_19);
+        maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2 + "_norestart", var_8, var_19);
       }
     }
 
@@ -125,13 +125,13 @@ _id_3107(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       childthread _id_A12D(var_0, var_25, 1, self._id_5F49);
       maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoAttack");
     } else
-      self _meth_839A(1, 1);
+      self scragentsetanimscale(1, 1);
 
     wait(var_25);
     self _meth_85D4(var_5);
     self notify("cancel_updatelerppos");
-    self _meth_839C("anim deltas");
-    self _meth_839A(1, 1);
+    self scragentsetanimmode("anim deltas");
+    self scragentsetanimscale(1, 1);
 
     if(var_3)
       maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "DoAttack");
@@ -229,7 +229,7 @@ _id_A12D(var_0, var_1, var_2, var_3) {
   var_4 = self.origin;
   var_5 = var_1;
   var_6 = 0.05;
-  self _meth_839A(0, 1);
+  self scragentsetanimscale(0, 1);
 
   for(;;) {
     if(var_5 <= 0) {
@@ -249,7 +249,7 @@ _id_A12D(var_0, var_1, var_2, var_3) {
 
     var_9 = var_7 - var_4;
 
-    if(_func_0E5(var_9) > var_8 * var_8)
+    if(_lengthsquared(var_9) > var_8 * var_8)
       var_7 = var_4 + vectorNormalize(var_9) * var_8;
 
     if(self _meth_85DF()) {
@@ -259,7 +259,7 @@ _id_A12D(var_0, var_1, var_2, var_3) {
       if(var_11 > 1) {
         var_12 = vectorNormalize(common_scripts\utility::_id_3D5D(anglesToForward(self.angles)));
         var_13 = var_10 / var_11;
-        var_14 = _func_0AA(clamp(vectordot(var_13, var_12), -1, 1));
+        var_14 = _acos(clamp(vectordot(var_13, var_12), -1, 1));
         var_15 = self _meth_85DD();
         var_16 = _id_0547::_id_9A6C(var_15);
 
@@ -274,8 +274,8 @@ _id_A12D(var_0, var_1, var_2, var_3) {
       }
     }
 
-    self _meth_839B("face enemy");
-    self _meth_83A4(self.origin, var_7, var_5);
+    self scragentsetorientmode("face enemy");
+    self scragentdoanimlerp(self.origin, var_7, var_5);
     wait(var_6);
     var_5 = var_5 - var_6;
   }
@@ -324,7 +324,7 @@ _id_3210(var_0, var_1, var_2) {
   if(_id_5797(var_0)) {
     return;
   }
-  var_0 _meth_8059(var_1, self.origin, self, self, var_2);
+  var_0 dodamage(var_1, self.origin, self, self, var_2);
 }
 
 _id_60E7(var_0) {

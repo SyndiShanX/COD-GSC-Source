@@ -42,19 +42,19 @@ _id_6F70(var_0) {
   var_4._id_9CBB = self._id_0165;
   var_4 setModel("zmb_catacomb_trap_saw_02");
   var_4.angles = var_0.angles;
-  var_4 _meth_83E5((0, 0, -36000), 100);
-  var_4 _meth_82B4(128, 1, 0, 0.5);
+  var_4 rotateby((0, 0, -36000), 100);
+  var_4 movez(128, 1, 0, 0.5);
   var_4 thread _id_6F72(self);
   var_4 thread _id_6F73(self);
   common_scripts\utility::_id_A70A("cooldown", "no_power", "deactivate", "ready");
-  var_4 _meth_82B4(-128, 1, 0, 0.5);
+  var_4 movez(-128, 1, 0, 0.5);
   wait 0.5;
   var_4 delete();
 }
 
 get_riverside_door() {
   foreach(var_1 in level._id_AC1D) {
-    if(_id_0547::_id_5565(var_1._id_819A, "underground_to_riverside1"))
+    if(_id_0547::_id_5565(var_1.getnegotiationnextnode, "underground_to_riverside1"))
       return var_1;
   }
 
@@ -69,19 +69,19 @@ _id_902B(var_0) {
   var_3._id_9CBB = var_0._id_0165;
   var_3 setModel("zmb_catacomb_trap_saw_02");
   var_3.angles = var_1.angles + (180, 0, 0);
-  var_3 _meth_82C0((0, 0, -1000), 10);
+  var_3 rotatevelocity((0, 0, -1000), 10);
   var_4 = spawn("script_model", var_1.origin);
   var_4 setModel("tag_origin");
   var_4.angles = var_1.angles;
-  var_3 _meth_82B4(128, 0.5);
-  _func_147(level._effect["zmb_catacombs_saw_on"], var_4, "tag_origin");
+  var_3 movez(128, 0.5);
+  _playfxontag(level._effect["zmb_catacombs_saw_on"], var_4, "tag_origin");
   var_3 _id_0378::_id_8D74("aud_saw_blade_sound");
   wait 0.5;
-  var_3 _meth_82B1(var_2.origin, 2.5, 0.25, 0.25);
-  var_4 _meth_82B1(var_2.origin, 2.5, 0.25, 0.25);
-  var_3 _id_8075(2.5, var_0);
-  _func_148(level._effect["zmb_catacombs_saw_on"], var_4, "tag_origin");
-  var_3 _meth_82B4(-128, 1);
+  var_3 moveto(var_2.origin, 2.5, 0.25, 0.25);
+  var_4 moveto(var_2.origin, 2.5, 0.25, 0.25);
+  var_3 playfoley(2.5, var_0);
+  _stopfxontag(level._effect["zmb_catacombs_saw_on"], var_4, "tag_origin");
+  var_3 movez(-128, 1);
   var_3 _id_0378::_id_8D74("aud_saw_blade_end");
   wait 1;
   var_3 delete();
@@ -111,7 +111,7 @@ _id_6F72(var_0) {
         continue;
       }
       if(var_3 _id_0547::_id_580A())
-        var_3 _meth_8059(var_3.health * 0.25, self.origin, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
+        var_3 dodamage(var_3.health * 0.25, self.origin, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
       else {
         var_0 maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6FEE(var_3);
         var_4 = 500 * vectorNormalize(var_3.origin - self.origin);
@@ -148,7 +148,7 @@ _id_6F73(var_0) {
         var_2._id_A86A = gettime();
 
       if(isalive(var_2) && var_3 > var_2._id_A86A + 500 && !_id_0547::_id_577E(var_2)) {
-        var_2 _meth_8059(5, self.origin, undefined, undefined, "MOD_CRUSH");
+        var_2 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
         var_2._id_A86A = gettime();
         waitframe();
       }
@@ -158,7 +158,7 @@ _id_6F73(var_0) {
   }
 }
 
-_id_8075(var_0, var_1) {
+playfoley(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0; var_2 = var_2 + 0.1) {
     var_3 = _id_0547::_id_408F();
     var_4 = common_scripts\utility::_id_0F73(var_3, level.players);
@@ -177,9 +177,9 @@ _id_8075(var_0, var_1) {
         continue;
       }
       if(isPlayer(var_6))
-        var_6 _meth_8059(5, self.origin, undefined, undefined, "MOD_CRUSH");
+        var_6 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
       else if(var_6 _id_0547::_id_580A())
-        var_6 _meth_8059(var_6.health * 0.25, self.origin, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
+        var_6 dodamage(var_6.health * 0.25, self.origin, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
       else {
         var_1 maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6FEE(var_6);
         var_7 = 500 * vectorNormalize(var_6.origin - self.origin);
@@ -200,6 +200,6 @@ _id_8075(var_0, var_1) {
   }
 }
 
-_id_8076(var_0, var_1) {
+getnormalhealth(var_0, var_1) {
   waitframe();
 }

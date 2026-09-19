@@ -15,7 +15,7 @@ tabun_get_weapon_name() {
 }
 
 tabun_player_give_tabun() {
-  _id_0555::_id_83DD("dlc3_tac_hint_2", self);
+  _id_0555::issprinting("dlc3_tac_hint_2", self);
   var_0 = tabun_get_weapon_name();
   self._id_60A0 = 2;
   self setoffhandsecondaryclass(var_0);
@@ -75,12 +75,12 @@ tabunzm_managedamage(var_0, var_1, var_2) {
 }
 
 tabunzm_convertzombie(var_0, var_1) {
-  var_0 maps\mp\agents\_agent_utility::_id_83FE("allies", var_1);
+  var_0 maps\mp\agents\_agent_utility::hudoutlineenable("allies", var_1);
   var_0 thread tabunzm_handletimeout();
   level thread tabunzm_onzombiedeath(var_0);
   var_0._id_6816 = 1;
   var_0.isconverted = 1;
-  _func_14D(common_scripts\utility::_id_44F5("zmb_tabun_stun"), var_0, "J_Head", var_1);
+  _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_tabun_stun"), var_0, "J_Head", var_1);
 }
 
 tabunzm_onzombiedeath(var_0) {
@@ -95,7 +95,7 @@ tabunzm_handletimeout() {
   wait 60;
   self notify("kill_tabun_listener");
   level.currentconverts--;
-  self _meth_8059(self._id_0008 + 666, self.origin, undefined, undefined, "MOD_EXPLOSIVE", tabun_get_weapon_name());
+  self dodamage(self._id_0008 + 666, self.origin, undefined, undefined, "MOD_EXPLOSIVE", tabun_get_weapon_name());
 }
 
 tabunzm_collisionpassed(var_0, var_1, var_2) {
@@ -104,7 +104,7 @@ tabunzm_collisionpassed(var_0, var_1, var_2) {
 
 tabunzm_zombieishittable(var_0, var_1) {
   if(var_0.origin[2] <= var_1[2])
-    return _func_07E(var_0.origin + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0) && _func_07E(var_1 + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0);
+    return _bullettracepassed(var_0.origin + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0) && _bullettracepassed(var_1 + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0);
   else
-    return _func_07E(var_1 + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0) && _func_07E(var_0.origin + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0);
+    return _bullettracepassed(var_1 + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0) && _bullettracepassed(var_0.origin + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0);
 }

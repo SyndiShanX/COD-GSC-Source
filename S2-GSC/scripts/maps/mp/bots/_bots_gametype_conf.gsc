@@ -9,7 +9,7 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_197D;
+  level.bot_funcs["gametype_think"] = ::_id_197D;
 }
 
 _id_8790() {
@@ -38,11 +38,11 @@ _id_197D() {
     var_0 = isDefined(self._id_95A8);
     var_1 = 0;
 
-    if(var_0 && self _meth_8367()) {
-      var_2 = self _meth_835C();
+    if(var_0 && self bothasscriptgoal()) {
+      var_2 = self botgetscriptgoal();
 
       if(maps\mp\bots\_bots_util::_id_1B1C(self._id_95A8._id_487B, var_2)) {
-        if(self _meth_8377())
+        if(self botpursuingscriptgoal())
           var_1 = 1;
       } else if(maps\mp\bots\_bots_strategy::_id_1A14("kill_tag") && self._id_95A8 _id_04D1::_id_1F53(self.team)) {
         self._id_95A8 = undefined;
@@ -50,14 +50,14 @@ _id_197D() {
       }
     }
 
-    self _meth_8353("force_sprint", var_1);
+    self botsetflag("force_sprint", var_1);
     self._id_95BB = _id_1AB5(self._id_95BB);
     var_3 = _id_19C9(self._id_95BB, 1);
     var_4 = isDefined(var_3);
 
     if(var_0 && !var_4 || !var_0 && var_4 || var_0 && var_4 && self._id_95A8 != var_3) {
       self._id_95A8 = var_3;
-      self _meth_8358();
+      self botclearscriptgoal();
       self notify("stop_camping_tag");
       maps\mp\bots\_bots_personality::_id_23AB();
       maps\mp\bots\_bots_strategy::_id_192C("kill_tag");
@@ -80,7 +80,7 @@ _id_197D() {
       if(!self._id_257D) {
         if(!maps\mp\bots\_bots_strategy::_id_1A14("kill_tag")) {
           var_5 = spawnStruct();
-          var_5._id_81C9 = "objective";
+          var_5.isstanceallowed = "objective";
           var_5._id_691E = level._id_1AF6;
           maps\mp\bots\_bots_strategy::_id_1A85("kill_tag", self._id_95A8._id_487B, 25, var_5);
         }
@@ -111,7 +111,7 @@ _id_196E(var_0) {
   if(isDefined(var_0._id_6AA9) && var_0._id_6AA9) {
     var_1 = self.origin + (0, 0, 55);
 
-    if(_func_211(var_0._id_28D4, var_1) < 144) {
+    if(_distance2dsquared(var_0._id_28D4, var_1) < 144) {
       var_2 = var_0._id_28D4[2] - var_1[2];
 
       if(var_2 > 0) {
@@ -137,11 +137,11 @@ _id_196E(var_0) {
 _id_1A3B() {
   self endon("death");
   self endon("disconnect");
-  self _meth_8354("stand");
+  self botsetstance("stand");
   wait 1.0;
-  self _meth_8380("jump");
+  self botpressbutton("jump");
   wait 1.0;
-  self _meth_8354("none");
+  self botsetstance("none");
 }
 
 _id_1B29() {
@@ -190,7 +190,7 @@ _id_197C(var_0, var_1) {
 
 _id_1A37(var_0, var_1, var_2) {
   if(!var_0._id_1E4D) {
-    var_0._id_6638 = _func_0BA(var_0._id_28D4);
+    var_0._id_6638 = _getclosestnodeinsight(var_0._id_28D4);
     var_0._id_1E4D = 1;
   }
 
@@ -201,7 +201,7 @@ _id_1A37(var_0, var_1, var_2) {
   var_4 = !isDefined(var_0._id_6AA9);
 
   if(isDefined(var_3) && (var_4 || var_0._id_6AA9)) {
-    var_5 = var_3 == var_1 || _func_1F4(var_3, var_1, 1);
+    var_5 = var_3 == var_1 || _nodesvisible(var_3, var_1, 1);
 
     if(var_5) {
       var_6 = common_scripts\utility::within_fov(self.origin, self getplayerangles(), var_0._id_28D4, var_2);
@@ -229,14 +229,14 @@ _id_19D1(var_0, var_1, var_2) {
   if(isDefined(var_1))
     var_3 = var_1;
   else
-    var_3 = self _meth_838A();
+    var_3 = self getnearestnode();
 
   var_4 = undefined;
 
   if(isDefined(var_2))
     var_4 = var_2;
   else
-    var_4 = self _meth_8375();
+    var_4 = self botgetfovdot();
 
   var_5 = [];
 
@@ -276,7 +276,7 @@ _id_1E48(var_0) {
   var_0._id_6AA9 = maps\mp\bots\_bots_util::_id_1A9D(var_0._id_28D4, undefined, level._id_1AF5 + 55);
 
   if(var_0._id_6AA9) {
-    var_0._id_487B = _func_082(var_0._id_28D4, 0, 256, 32);
+    var_0._id_487B = _getgroundposition(var_0._id_28D4, 0, 256, 32);
 
     if(!isDefined(var_0._id_487B))
       var_0._id_6AA9 = 0;
@@ -334,7 +334,7 @@ _id_424F(var_0) {
       continue;
     }
     if(var_3.team == self.team && var_3 != self) {
-      if(_func_0C1(var_3)) {
+      if(_isai(var_3)) {
         if(isDefined(var_3._id_95A8) && var_3._id_95A8 == var_0)
           var_1++;
 
@@ -357,14 +357,14 @@ _id_1954(var_0, var_1, var_2) {
   if(isDefined(var_2))
     self endon(var_2);
 
-  self _meth_8357(self._id_6708, var_1, self._id_0D94);
+  self botsetscriptgoalnode(self._id_6708, var_1, self._id_0D94);
   var_3 = maps\mp\bots\_bots_util::_id_1B21();
 
   if(var_3 == "goal") {
     var_4 = var_0._id_6638;
 
     if(isDefined(var_4)) {
-      var_5 = _func_201(self.origin);
+      var_5 = _findentrances(self.origin);
       var_5 = common_scripts\utility::_id_0F6F(var_5, var_4);
       childthread maps\mp\bots\_bots_util::_id_1B2A(var_5);
     }

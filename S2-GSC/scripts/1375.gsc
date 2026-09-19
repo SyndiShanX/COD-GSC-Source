@@ -32,11 +32,11 @@ init() {
   _id_0547::_id_0A52(var_0, "zombie_boss_village");
   level.animtree_lookup["zombie_boss"] = #animtree;
   level._id_5A8A = [];
-  var_1 = _func_27A("mp/zombieKlausActionTable.csv");
+  var_1 = _tablegetrowcount("mp/zombieKlausActionTable.csv");
 
   for(var_2 = 0; var_2 < var_1; var_2++) {
-    var_3 = _func_1AE("mp/zombieKlausActionTable.csv", var_2, 1);
-    var_4 = strtok(_func_1AE("mp/zombieKlausActionTable.csv", var_2, 2), " ");
+    var_3 = _tablelookupbyrow("mp/zombieKlausActionTable.csv", var_2, 1);
+    var_4 = strtok(_tablelookupbyrow("mp/zombieKlausActionTable.csv", var_2, 2), " ");
 
     if(isDefined(var_3) && var_3 != "")
       level._id_5A8A[var_3] = var_4;
@@ -94,8 +94,8 @@ _id_1CC3(var_0) {
       var_5 = 1;
 
     if(var_5 <= 192) {
-      var_4 _meth_8182("frag_grenade_mp", 1.25);
-      var_4 _meth_8059(150 / var_5 + 30, self.origin, self, self, "MOD_GRENADE");
+      var_4 shellshock("frag_grenade_mp", 1.25);
+      var_4 dodamage(150 / var_5 + 30, self.origin, self, self, "MOD_GRENADE");
     }
   }
 }
@@ -169,7 +169,7 @@ _id_AB7B() {
 _id_AB6A(var_0, var_1) {
   thread _id_A6B5(var_1);
   _id_7678(var_0, 0, undefined, 1, "brute_stunned", var_1);
-  self._id_3ACE _meth_80CE(&"ZOMBIES_EMPTY_STRING");
+  self._id_3ACE sethintstring(&"ZOMBIES_EMPTY_STRING");
 }
 
 _id_AB79() {
@@ -326,17 +326,17 @@ _id_7678(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
   var_8 = var_0;
   var_9 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_8);
-  var_10 = self _meth_83DB(var_9);
+  var_10 = self getanimentrycount(var_9);
   var_11 = randomint(var_10);
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
-  self _meth_83A2(1);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
+  self scragentsetscripted(1);
   self._id_01BB = 1;
 
   if(common_scripts\utility::_id_562E(var_1))
-    self _meth_839D("noclip");
+    self scragentsetphysicsmode("noclip");
   else
-    self _meth_839D("gravity");
+    self scragentsetphysicsmode("gravity");
 
   if(isDefined(var_2)) {
     foreach(var_13 in var_2._id_596D)
@@ -352,12 +352,12 @@ _id_7678(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     _id_309A(var_0, var_4, var_5);
 
   if(common_scripts\utility::_id_562E(var_1))
-    self _meth_839D("gravity");
+    self scragentsetphysicsmode("gravity");
 
   if(isDefined(var_2))
     self notify(var_2._id_67E9);
 
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   self notify("brute finished scripted state");
 }
 
@@ -496,7 +496,7 @@ _id_6873() {
   var_0 = 0;
 
   foreach(var_2 in level.players) {
-    if(isalive(var_2) && !var_2._id_5378)
+    if(isalive(var_2) && !var_2.inlaststand)
       var_0++;
   }
 
@@ -510,9 +510,9 @@ _id_115A() {
     waitframe();
 
   foreach(var_2 in var_0) {
-    var_2 _meth_805B();
+    var_2 show();
     var_2.origin = self gettagorigin(var_2._id_0165) + _id_425D(var_2._id_0165);
-    var_2 _meth_8056(self, var_2._id_0165);
+    var_2 linktoblendtotag(self, var_2._id_0165);
   }
 
   var_0 thread _id_1CCD(self);
@@ -540,16 +540,16 @@ _id_1CCD(var_0) {
   var_1 = [undefined, undefined, undefined];
 
   foreach(var_3 in self) {
-    var_1[var_3._id_8140 - 1] = var_3;
-    var_3 _meth_8511();
+    var_1[var_3.setanimknobrestart - 1] = var_3;
+    var_3 ghost();
   }
 
   var_0._id_1CCF = var_1;
 
   foreach(var_3 in var_1) {
     var_0 waittill("show an uber battery");
-    var_3 _meth_805B();
-    _func_147(level._effect["gk_raven_hc_ee_uber_attached"], var_3, "tag_origin");
+    var_3 show();
+    _playfxontag(level._effect["gk_raven_hc_ee_uber_attached"], var_3, "tag_origin");
     var_3 _id_0378::_id_8D74("uber_battery_spawn");
   }
 }
@@ -591,7 +591,7 @@ _id_A6B5(var_0) {
   var_1 = undefined;
 
   for(var_2 = 0; !var_2; var_2 = var_1 _id_0585::_id_9E12("Blimp Battery Hunt")) {
-    self._id_3ACE _meth_80CE(&"ZOMBIE_NEST_PLACE_UBER");
+    self._id_3ACE sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
     self._id_3ACE waittill("trigger", var_1);
   }
 
@@ -607,27 +607,27 @@ _id_A0EB(var_0) {
     return;
   }
   var_0 endon("death");
-  _id_863C(var_0._id_3ACE, self, 0);
+  iswaitingonsound(var_0._id_3ACE, self, 0);
 
   for(;;) {
-    var_1 = common_scripts\utility::_id_A715("uber_gained", "uber_lost");
+    var_1 = common_scripts\utility::waittill_any_return("uber_gained", "uber_lost");
 
     if(!isalive(self)) {
       continue;
     }
     if(var_1 == "uber_gained") {
       if(_id_0586::_id_72C3())
-        _id_863C(var_0._id_3ACE, self, 1);
+        iswaitingonsound(var_0._id_3ACE, self, 1);
 
       continue;
     }
 
     if(var_1 == "uber_lost")
-      _id_863C(var_0._id_3ACE, self, 0);
+      iswaitingonsound(var_0._id_3ACE, self, 0);
   }
 }
 
-_id_863C(var_0, var_1, var_2) {
+iswaitingonsound(var_0, var_1, var_2) {
   if(isDefined(var_0))
     var_0 call[[common_scripts\utility::_id_98E7(var_2, ::enableplayeruse, ::disableplayeruse)]](var_1);
 }
@@ -638,14 +638,14 @@ _id_94BF(var_0, var_1) {
   if(level.players.size == 1)
     var_0 = var_0 + 3;
 
-  _id_0555::_id_83DD("brute_stun");
+  _id_0555::issprinting("brute_stun");
 
   while(var_0 > 0) {
     var_0--;
     wait 1;
   }
 
-  _id_0555::_id_83DD("brute_awake");
+  _id_0555::issprinting("brute_awake");
   self notify(var_1, 0);
 }
 
@@ -682,7 +682,7 @@ _id_3203(var_0, var_1) {
       var_11 = self gettagorigin(var_3);
 
       if(!common_scripts\utility::_id_0F79(var_2, var_9) && distance(var_11, var_9.origin) < 64) {
-        var_9 _meth_8059(var_10, var_11, self, self, "MOD_IMPACT");
+        var_9 dodamage(var_10, var_11, self, self, "MOD_IMPACT");
         var_2 = common_scripts\utility::_id_0F6F(var_2, var_9);
       }
     }
@@ -694,7 +694,7 @@ _id_3203(var_0, var_1) {
 _id_AB6B(var_0) {
   var_1 = self;
   var_1 endon("death");
-  var_2 = var_1 _meth_8445(var_0);
+  var_2 = var_1 gettagindex(var_0);
 
   if(var_2 == -1) {
     return;
@@ -752,14 +752,14 @@ _id_AB7C() {
   self._id_57E8 = 1;
   self._id_8BA4 = 0;
   self._id_1DEB = 1;
-  self _meth_839F(_id_4399());
+  self scragentsetmaxturnspeed(_id_4399());
   thread _id_AB5B();
   thread _id_1CBE();
 }
 
 _id_1CBE() {
   waitframe();
-  _func_147(level._effect["zmb_brute_drool"], self, "J_Head");
+  _playfxontag(level._effect["zmb_brute_drool"], self, "J_Head");
 }
 
 _id_AB5B() {
@@ -767,8 +767,8 @@ _id_AB5B() {
   var_1 = _id_0547::_id_0A51("zombie_boss_village");
   var_2 = spawn("script_model", self.origin);
   var_2 setModel(var_1._id_1144["whole_body"]);
-  var_2.angles = self _meth_8181(var_0);
-  var_2 _meth_8055(self, var_0);
+  var_2.angles = self gettagangles(var_0);
+  var_2 linkto(self, var_0);
   self._id_5A9C = var_2;
   self._id_1142 = ::_id_84F1;
 }
@@ -782,11 +782,11 @@ _id_84F1(var_0, var_1, var_2, var_3) {
   var_4 = var_0;
 
   if(!isDefined(var_1)) {
-    var_5 = self _meth_83D9();
-    var_6 = self _meth_83DB(var_0);
+    var_5 = self getanimentryname();
+    var_6 = self getanimentrycount(var_0);
 
     for(var_7 = 0; var_7 < var_6; var_7++) {
-      var_8 = self _meth_83D9(var_0, var_7);
+      var_8 = self getanimentryname(var_0, var_7);
 
       if(var_8 == var_5) {
         var_1 = var_7;
@@ -801,8 +801,8 @@ _id_84F1(var_0, var_1, var_2, var_3) {
   var_9 = undefined;
   var_10 = level._id_5A8A[var_4][var_1];
   waitframe();
-  self._id_5A9C _meth_8277();
-  self._id_5A9C _meth_8276(var_10);
+  self._id_5A9C scriptmodelclearanim();
+  self._id_5A9C scriptmodelplayanim(var_10);
   self._id_5A9C._id_0EE8 = var_4;
   self._id_5A9C._id_0EC4 = var_10;
   self._id_5A9C._id_0EC1 = var_1;
@@ -871,12 +871,12 @@ _id_5725(var_0) {
   if(0 > var_9)
     return 0;
 
-  var_10 = _func_0DF(var_4, var_5, var_6);
+  var_10 = _pointonsegmentnearesttopoint(var_4, var_5, var_6);
 
   if(distancesquared(var_6, var_10) > var_2)
     return 0;
 
-  if(0 == var_0 _meth_81D7(var_4, self))
+  if(0 == var_0 damageconetrace(var_4, self))
     return 0;
 
   if(var_7 < var_1)

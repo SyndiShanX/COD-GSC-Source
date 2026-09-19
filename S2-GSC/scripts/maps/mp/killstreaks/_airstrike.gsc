@@ -6,9 +6,9 @@
 init() {
   level._id_80B7["airstrike"] = 400;
   level._id_80B8["airstrike"] = 75;
-  level._id_80B6["airstrike"] = -1;
+  level.setwhizbyprobabilities["airstrike"] = -1;
   level._id_80B9["airstrike"] = 6.0;
-  level._id_80B5["airstrike"] = 8.0;
+  level.makeglobalunusable["airstrike"] = 8.0;
   level._id_5A61["airstrike"] = ::_id_9E23;
   level._id_5A7D["airstrike_bomb_mp"] = "airstrike";
   level._id_5A7D["airstrike_bomb_axis_mp"] = "airstrike";
@@ -34,8 +34,8 @@ _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_2))
     var_2 thread _id_6B75();
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_3) && isDefined(level._id_79C2._id_80B0) && isDefined(level._id_79C2._id_80B0._id_0B9C))
-    thread[[level._id_79C2._id_80B0._id_0B9C]](4.0);
+  if(maps\mp\_utility::_id_579B() && isDefined(var_3) && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_0B9C))
+    thread[[level._id_79C2.setcontents._id_0B9C]](4.0);
   else
     thread _id_11DA();
 
@@ -49,8 +49,8 @@ _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_6)
     var_7 = 4;
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_3) && isDefined(level._id_79C2._id_80B0) && isDefined(level._id_79C2._id_80B0._id_0B98))
-    var_7 = _func_0D6(3 * level._id_79C2._id_80B0._id_0B98);
+  if(maps\mp\_utility::_id_579B() && isDefined(var_3) && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_0B98))
+    var_7 = _round(3 * level._id_79C2.setcontents._id_0B98);
 
   if(isDefined(level._id_0811) && level._id_0811)
     var_7 = 1;
@@ -70,8 +70,8 @@ _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     for(var_11 = -5; var_11 < 6; var_11++) {
       var_12 = spawnStruct();
-      var_12.origin = (level._id_5FEB[0] + _func_0A7(var_9 + 90) * var_11 * 700, level._id_5FEB[1] + _func_0A6(var_9 + 90) * var_11 * 700, level._id_5FEB[2]);
-      var_12._id_7F31 = _func_0AE((_func_0AE(var_11) - 5) / 50);
+      var_12.origin = (level._id_5FEB[0] + _cos(var_9 + 90) * var_11 * 700, level._id_5FEB[1] + _sin(var_9 + 90) * var_11 * 700, level._id_5FEB[2]);
+      var_12._id_7F31 = _abs((_abs(var_11) - 5) / 50);
       var_10[var_10.size] = var_12;
     }
 
@@ -130,7 +130,7 @@ _id_4435(var_0, var_1, var_2) {
     var_8 = undefined;
 
     foreach(var_10 in var_0) {
-      var_11 = _func_0E1((var_10.origin[0] * _func_0A7(var_1 + 90), var_10.origin[1] * _func_0A6(var_1 + 90), 0), (var_4.origin[0] * _func_0A7(var_1 + 90), var_4.origin[1] * _func_0A6(var_1 + 90), 0));
+      var_11 = _distance2d((var_10.origin[0] * _cos(var_1 + 90), var_10.origin[1] * _sin(var_1 + 90), 0), (var_4.origin[0] * _cos(var_1 + 90), var_4.origin[1] * _sin(var_1 + 90), 0));
 
       if(var_11 <= var_5) {
         var_7 = var_5;
@@ -144,7 +144,7 @@ _id_4435(var_0, var_1, var_2) {
 
       if(isDefined(self) && var_4 == self && var_11 <= 1000) {
         if(maps\mp\_utility::_id_4571() != "mp_shipment_s2" && maps\mp\_utility::_id_4571() != "mp_sandbox_01") {
-          if(!_func_07E(var_4.origin + (0, 0, 32), var_4.origin + (0, 0, 10000), 0, var_4)) {
+          if(!_bullettracepassed(var_4.origin + (0, 0, 32), var_4.origin + (0, 0, 10000), 0, var_4)) {
             var_10._id_7F31 = var_10._id_7F31 - 3.25;
             continue;
           }
@@ -157,7 +157,7 @@ _id_4435(var_0, var_1, var_2) {
     if(isDefined(self) && var_4 == self)
       continue;
     else {
-      if(!_func_07E(var_4.origin + (0, 0, 32), var_4.origin + (0, 0, 10000), 0, var_4)) {
+      if(!_bullettracepassed(var_4.origin + (0, 0, 32), var_4.origin + (0, 0, 10000), 0, var_4)) {
         var_6._id_7F31 = var_6._id_7F31 + 0.75;
         var_8._id_7F31 = var_8._id_7F31 + 0.5;
         continue;
@@ -188,7 +188,7 @@ _id_4435(var_0, var_1, var_2) {
     var_8 = undefined;
 
     foreach(var_10 in var_0) {
-      var_11 = _func_0E1((var_10.origin[0] * _func_0A7(var_1 + 90), var_10.origin[1] * _func_0A6(var_1 + 90), 0), (var_17["position"][0] * _func_0A7(var_1 + 90), var_17["position"][1] * _func_0A6(var_1 + 90), 0));
+      var_11 = _distance2d((var_10.origin[0] * _cos(var_1 + 90), var_10.origin[1] * _sin(var_1 + 90), 0), (var_17["position"][0] * _cos(var_1 + 90), var_17["position"][1] * _sin(var_1 + 90), 0));
 
       if(var_11 <= var_5) {
         var_7 = var_5;
@@ -204,7 +204,7 @@ _id_4435(var_0, var_1, var_2) {
       }
     }
 
-    if(!_func_07E(var_17["position"] + (0, 0, 32), var_17["position"] + (0, 0, 10000), 0, undefined)) {
+    if(!_bullettracepassed(var_17["position"] + (0, 0, 32), var_17["position"] + (0, 0, 10000), 0, undefined)) {
       var_6._id_7F31 = var_6._id_7F31 + 0.075;
       var_8._id_7F31 = var_8._id_7F31 + 0.05;
       continue;

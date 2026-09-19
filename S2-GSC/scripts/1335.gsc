@@ -17,11 +17,11 @@ _id_3662() {
   _id_0547::_id_8A6D(1);
 
   if(!isDefined(level.custom_camo_func_on))
-    self _meth_82D8("zm_camo", 0.25);
+    self visionsetnakedforplayer("zm_camo", 0.25);
   else
     self[[level.custom_camo_func_on]]();
 
-  _func_14D(level._effect["zmb_moon_player_camo_cam"], self, "Tag_Origin", self);
+  _playfxontagforclients(level._effect["zmb_moon_player_camo_cam"], self, "Tag_Origin", self);
   _id_0378::_id_8D74("aud_camo_use");
   thread _id_17BB();
   thread camoplayerfx();
@@ -29,7 +29,7 @@ _id_3662() {
 
   if(_id_0547::_id_4BA7("specialty_class_survivalist_zm")) {
     var_0 = _id_0547::_id_73E9() + 1;
-    _id_0547::_id_7454(int(_func_0AF(var_0, 3)));
+    _id_0547::_id_7454(int(_min(var_0, 3)));
   }
 
   thread powerlosswhenfiring();
@@ -37,10 +37,10 @@ _id_3662() {
 
 camoplayerfx() {
   if(_id_0547::_id_4BA7("specialty_class_mobilization_zm")) {
-    var_0 = _func_2A8(level._effect["zmb_moon_speed_up"], self, "J_Knee_LE");
-    var_1 = _func_2A8(level._effect["zmb_moon_speed_up"], self, "J_Knee_RI");
-    _func_14C(var_0);
-    _func_14C(var_1);
+    var_0 = _spawnlinkedfx(level._effect["zmb_moon_speed_up"], self, "J_Knee_LE");
+    var_1 = _spawnlinkedfx(level._effect["zmb_moon_speed_up"], self, "J_Knee_RI");
+    _triggerfx(var_0);
+    _triggerfx(var_1);
     common_scripts\utility::_id_A70A("camo_ended", "disconnect");
     var_0 delete();
     var_1 delete();
@@ -53,7 +53,7 @@ _id_17BB() {
   while(self._id_569F) {
     foreach(var_1 in _id_0547::_id_408F()) {
       if(!isDefined(var_1._id_5689) || var_1._id_5689 == 0) {
-        _func_14D(level._effect["zmb_moon_zmb_blind"], var_1, "J_Head", self);
+        _playfxontagforclients(level._effect["zmb_moon_zmb_blind"], var_1, "J_Head", self);
         var_1._id_5689 = 1;
       }
     }
@@ -71,12 +71,12 @@ _id_2F9E() {
     var_1._id_5689 = 0;
 
     foreach(var_1 in _id_0547::_id_408F())
-    _func_148(level._effect["zmb_moon_zmb_blind"], var_1, "J_Head");
+    _stopfxontag(level._effect["zmb_moon_zmb_blind"], var_1, "J_Head");
 
     _id_0547::_id_8A6D(0);
 
     if(!isDefined(level.custom_camo_func_off))
-      self _meth_82D8("", 0.25);
+      self visionsetnakedforplayer("", 0.25);
     else
       self[[level.custom_camo_func_off]]();
 
@@ -114,7 +114,7 @@ _id_6ADC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
     if(var_10) {
       if(maps\mp\_utility::_id_5755(var_4) && isPlayer(var_1) && var_1 _id_0547::_id_4BA7("specialty_class_serrated_edge_zm")) {
-        var_1 thread _id_83F1(self);
+        var_1 thread linkwaypointtotargetwithoffset(self);
         var_1 _meth_866C(&"trigger_mod_proc", 1, "specialty_class_serrated_edge_zm");
       }
 
@@ -148,23 +148,23 @@ _id_3F91(var_0) {
   _id_0547::_id_8A6D(0);
 }
 
-_id_83F1(var_0) {
+linkwaypointtotargetwithoffset(var_0) {
   var_1 = "serratedEdgeApplied" + self getentitynumber();
   var_2 = "serratedEdgeExpired" + self getentitynumber();
   var_0 notify(var_1);
   var_0 endon(var_2);
   var_0 endon(var_1);
-  var_3 = var_0._id_83F1;
+  var_3 = var_0.linkwaypointtotargetwithoffset;
 
   if(!isDefined(var_3)) {
-    var_3 = _func_2A8(common_scripts\utility::_id_44F5("serrated_edge_bleed"), var_0, "J_Spine4");
-    _func_14C(var_3);
-    var_0._id_83F1 = var_3;
-    var_0._id_83F2 = [];
+    var_3 = _spawnlinkedfx(common_scripts\utility::_id_44F5("serrated_edge_bleed"), var_0, "J_Spine4");
+    _triggerfx(var_3);
+    var_0.linkwaypointtotargetwithoffset = var_3;
+    var_0.getlinkedparent = [];
   }
 
-  if(!common_scripts\utility::_id_0F79(var_0._id_83F2, self))
-    var_0._id_83F2[var_0._id_83F2.size] = self;
+  if(!common_scripts\utility::_id_0F79(var_0.getlinkedparent, self))
+    var_0.getlinkedparent[var_0.getlinkedparent.size] = self;
 
   var_4 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
   var_5 = var_4 * 0.03;
@@ -172,10 +172,10 @@ _id_83F1(var_0) {
   var_0 common_scripts\utility::waittill_notify_or_timeout("death", 30);
   var_6 = 0;
 
-  if(isDefined(var_0._id_83F2)) {
-    var_0._id_83F2 = common_scripts\utility::_id_0F93(var_0._id_83F2, self);
-    var_6 = var_0._id_83F2.size == 0;
-  } else if(isDefined(var_3) && !_func_279(var_3))
+  if(isDefined(var_0.getlinkedparent)) {
+    var_0.getlinkedparent = common_scripts\utility::_id_0F93(var_0.getlinkedparent, self);
+    var_6 = var_0.getlinkedparent.size == 0;
+  } else if(isDefined(var_3) && !_isremovedentity(var_3))
     var_6 = 1;
 
   if(var_6)

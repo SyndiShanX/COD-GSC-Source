@@ -815,7 +815,7 @@ handle_selected_ents(var_0) {
     set_tool_hudelem("Camera Speed( </>):", level._createfx.player_speed);
 
     if(!level.mp_createfx)
-      set_tool_hudelem("Dist To Cam", level._createfx._id_83B0);
+      set_tool_hudelem("Dist To Cam", level._createfx.overridereflectionprobe);
 
     if(level._createfx.axismode && level._createfx.selected_fx_ents.size > 0) {
       level._createfx.rate1 = "of Rotation( -/+ ): " + level._createfx.rate;
@@ -973,7 +973,7 @@ toggle_localrot() {
 
 _id_A163() {
   if(level._createfx.selected_fx_ents.size < 1) {
-    level._createfx._id_83B0 = 0;
+    level._createfx.overridereflectionprobe = 0;
     return;
   }
 
@@ -982,7 +982,7 @@ _id_A163() {
   else
     var_0 = get_center_of_array(level._createfx.selected_fx_ents);
 
-  level._createfx._id_83B0 = distance(var_0, level.player getEye());
+  level._createfx.overridereflectionprobe = distance(var_0, level.player getEye());
 }
 
 _id_7E32() {
@@ -1072,7 +1072,7 @@ _id_7A4E() {
 
   for(var_0 = 0; var_0 < level._createfx.selected_fx_ents.size; var_0++) {
     var_1 = level._createfx.selected_fx_ents[var_0];
-    var_1.v["delay"] = _func_0A5(-30, -1);
+    var_1.v["delay"] = _randomfloatrange(-30, -1);
   }
 
   update_selected_ents();
@@ -2568,7 +2568,7 @@ write_log(var_0, var_1, var_2, var_3, var_4) {
 
     save_redo_buffer() {
       if(isDefined(level.createfxent))
-        level._id_2805 = copystructarrayvalues(level.createfxent);
+        level.createfxent_redo = copystructarrayvalues(level.createfxent);
     }
 
     undo() {
@@ -2584,10 +2584,10 @@ write_log(var_0, var_1, var_2, var_3, var_4) {
     }
 
     redo() {
-      if(isDefined(level._id_2805)) {
+      if(isDefined(level.createfxent_redo)) {
         clear_all_loopers();
         level.createfxent = [];
-        level.createfxent = copystructarrayvalues(level._id_2805);
+        level.createfxent = copystructarrayvalues(level.createfxent_redo);
         clear_fx_hudelements();
         reselect_entities();
         restart_oneshots();

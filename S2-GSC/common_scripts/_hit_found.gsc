@@ -57,7 +57,7 @@ _id_9F90(var_0, var_1, var_2, var_3, var_4) {
     var_28 = var_27 - (0, 0, var_24);
 
     if(isDefined(var_15) && isDefined(var_4)) {
-      var_29 = _func_0E1(var_27, var_8);
+      var_29 = _distance2d(var_27, var_8);
 
       if(var_29 > var_4) {
         var_6[var_26] = undefined;
@@ -141,7 +141,7 @@ _id_9F90(var_0, var_1, var_2, var_3, var_4) {
   }
 
   foreach(var_39 in var_6) {
-    var_42 = _func_211(var_39["brush_model_solid_spot"], var_13);
+    var_42 = _distance2dsquared(var_39["brush_model_solid_spot"], var_13);
 
     if(var_42 < var_11) {
       var_11 = var_42;
@@ -228,7 +228,7 @@ _id_6FAC(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = var_2;
 
   if(!isDefined(var_5))
-    var_9 = _func_080(var_7, var_8, var_3);
+    var_9 = _physicstrace(var_7, var_8, var_3);
   else {
     var_10 = _func_335(var_7, var_8, var_5, undefined, var_3);
 
@@ -243,7 +243,7 @@ _id_6FAC(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_4 = vectorNormalize(var_4);
     var_12 = vectordot(var_11, var_4);
     var_12 = clamp(var_12, -1, 1);
-    var_0["current_angle"] = _func_0AA(var_12);
+    var_0["current_angle"] = _acos(var_12);
   }
 
   if(!common_scripts\utility::_id_5646(var_9, var_8)) {
@@ -284,15 +284,15 @@ _id_42BA(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_11 = undefined;
 
     if(0)
-      var_11 = _func_110(var_1, (0, var_9, 0));
+      var_11 = _combineangles(var_1, (0, var_9, 0));
     else
-      var_11 = (var_1[0], _func_0DD(var_1[1] + var_9), var_1[2]);
+      var_11 = (var_1[0], _angleclamp180(var_1[1] + var_9), var_1[2]);
 
     var_12 = anglesToForward(var_11) * var_2;
     var_6[var_10] = var_12 + var_0;
 
     if(var_5) {
-      var_13 = _func_110(var_11, (0, var_5, 0));
+      var_13 = _combineangles(var_11, (0, var_5, 0));
       var_14 = anglesToForward(var_13) * var_2;
       var_7[var_10] = var_14 + var_0;
     }
@@ -347,7 +347,7 @@ _id_4B43(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     var_3 = [];
     var_3["is_hit"] = 0;
-    var_4 = anglesToForward(_func_110(self.angles, (0, var_2, 0)));
+    var_4 = anglesToForward(_combineangles(self.angles, (0, var_2, 0)));
     var_5 = var_0 - var_4 * var_1;
     var_6 = (var_5[0], var_5[1], self.origin[2] - _id_028D::_id_41B5());
     var_3 = _id_6FAC(var_3, var_5, var_6, self, anglesToForward(self.angles), undefined);
@@ -358,7 +358,7 @@ _id_4B43(var_0, var_1, var_2) {
 }
 
 _id_43D8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  var_12 = _func_110(var_3, (0, 180, 0));
+  var_12 = _combineangles(var_3, (0, 180, 0));
   var_13 = (var_1[0], var_1[1], 0) - (var_2[0], var_2[1], 0);
   var_14 = length(var_13);
   var_15 = vectorNormalize(var_13);
@@ -446,18 +446,18 @@ _id_10D0(var_0, var_1, var_2, var_3, var_4) {
 
   var_0._id_5C66 = var_0 _meth_85A3();
   var_0._id_7E86 = var_0 _meth_85A4();
-  var_0._id_9A95 = var_0 _meth_84BB();
-  var_0._id_1B4B = var_0 _meth_84BC();
+  var_0._id_9A95 = var_0 gettoparc();
+  var_0._id_1B4B = var_0 getbottomarc();
   var_5 = var_1 gettagorigin("TAG_PLAYER");
-  var_6 = var_1 _meth_8181("TAG_PLAYER");
+  var_6 = var_1 gettagangles("TAG_PLAYER");
   var_7 = var_1 gettagorigin("TAG_TURRET");
-  var_8 = var_1 _meth_8181("TAG_TURRET");
+  var_8 = var_1 gettagangles("TAG_TURRET");
   var_9 = var_7 - var_5;
   var_10 = length(var_9);
-  var_11 = _func_110(var_8, (0, 180, 0));
+  var_11 = _combineangles(var_8, (0, 180, 0));
   var_12 = vectortoangles(vectorNormalize(var_5 - var_7));
-  var_12 = _func_110(var_12, (0, 0, 90));
-  var_13 = _func_110(var_8, (0, 180, 90));
+  var_12 = _combineangles(var_12, (0, 0, 90));
+  var_13 = _combineangles(var_8, (0, 180, 90));
   var_14 = [];
   var_15 = (var_7[0], var_7[1], var_5[2]);
 
@@ -479,16 +479,16 @@ _id_10D0(var_0, var_1, var_2, var_3, var_4) {
   [var_20, var_21, var_22, var_23] = _id_43D8(var_2[2], var_7, var_5, var_8, var_18[2], 0, var_17, var_0._id_5C66, var_0._id_7E86, var_0._id_9A95, var_0._id_1B4B);
 
   if(isDefined(var_20) && var_20 < var_0 _meth_85A3())
-    var_0 _meth_8151(var_20);
+    var_0 setleftarc(var_20);
 
   if(isDefined(var_21) && var_21 < var_0 _meth_85A4())
-    var_0 _meth_8150(var_21);
+    var_0 setrightarc(var_21);
 
-  if(isDefined(var_22) && var_22 < var_0 _meth_84BB())
-    var_0 _meth_8152(var_22);
+  if(isDefined(var_22) && var_22 < var_0 gettoparc())
+    var_0 settoparc(var_22);
 
-  if(isDefined(var_23) && var_23 < var_0 _meth_84BC())
-    var_0 _meth_8153(var_23);
+  if(isDefined(var_23) && var_23 < var_0 getbottomarc())
+    var_0 setbottomarc(var_23);
 }
 
 _id_41EB(var_0, var_1, var_2, var_3) {
@@ -528,7 +528,7 @@ _id_41EB(var_0, var_1, var_2, var_3) {
 
     if(var_7["is_hit"]) {
       var_12 = var_7["hit_angle"];
-      var_12 = _func_0AE(_func_0DD(var_12));
+      var_12 = _abs(_angleclamp180(var_12));
 
       if(var_12 > 10)
         var_12 = var_12 - var_10;
@@ -549,7 +549,7 @@ add_padding_and_get_signed_arc_angle_override_if_needed(var_0, var_1, var_2, var
   else if(_func_2C6(var_1, "ri") && isDefined(var_2["right"]))
     var_4 = var_2["right"];
   else
-    var_4 = _func_0AE(var_0);
+    var_4 = _abs(var_0);
 
   if(var_0 < 0)
     var_5 = -1 * (var_4 + var_3);
@@ -567,7 +567,7 @@ _id_6FAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   for(var_15 = 0; var_15 < var_11.size; var_15++) {
     var_16 = vectortoangles(vectorNormalize(var_11[var_15] - var_0));
-    var_16 = _func_110(var_16, (0, 0, 90));
+    var_16 = _combineangles(var_16, (0, 0, 90));
 
     if(var_5 > 0)
       var_5 = var_5 * -1;
@@ -580,7 +580,7 @@ _id_6FAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   for(var_15 = 0; var_15 < var_9.size; var_15++) {
     if(isDefined(var_9[var_15]["is_hit"]) && var_9[var_15]["is_hit"]) {
-      if(!isDefined(var_17) || _func_0AE(var_17) > _func_0AE(var_9[var_15]["hit_angle"])) {
+      if(!isDefined(var_17) || _abs(var_17) > _abs(var_9[var_15]["hit_angle"])) {
         var_17 = var_9[var_15]["hit_angle"];
         var_18 = var_15;
       }
@@ -592,16 +592,16 @@ _id_6FAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
 _id_7E4B(var_0) {
   if(isDefined(var_0._id_5C66))
-    var_0 _meth_8151(var_0._id_5C66);
+    var_0 setleftarc(var_0._id_5C66);
 
   if(isDefined(var_0._id_7E86))
-    var_0 _meth_8150(var_0._id_7E86);
+    var_0 setrightarc(var_0._id_7E86);
 
   if(isDefined(var_0._id_9A95))
-    var_0 _meth_8152(var_0._id_9A95);
+    var_0 settoparc(var_0._id_9A95);
 
   if(isDefined(var_0._id_1B4B))
-    var_0 _meth_8153(var_0._id_1B4B);
+    var_0 setbottomarc(var_0._id_1B4B);
 
   var_0._id_5C66 = undefined;
   var_0._id_7E86 = undefined;

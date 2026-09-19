@@ -47,7 +47,7 @@ _id_AB60() {
   _id_AB61();
 
   for(;;) {
-    self _meth_8395(self.origin);
+    self scragentsetgoalpos(self.origin);
     wait 0.5;
   }
 }

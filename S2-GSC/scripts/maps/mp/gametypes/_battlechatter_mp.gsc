@@ -132,7 +132,7 @@ onplayerspawned() {
     var_2 = 3;
     var_3 = "";
 
-    if(!_func_1EF(self) && self _meth_843D())
+    if(!_isagent(self) && self hasfemalecustomizationmodel())
       var_3 = "w";
 
     self.pers["voiceNum"] = level._id_A601[self.team][var_3];
@@ -217,7 +217,7 @@ _id_486A() {
       }
 
       if(!isDefined(var_6._id_0117) && !var_7)
-        var_6._id_0117 = _func_1B3(var_6);
+        var_6._id_0117 = _getmissileowner(var_6);
 
       if(isDefined(var_6._id_0117) && isDefined(var_6._id_0117.team) && level.teambased && var_6._id_0117.team == self.team) {
         continue;
@@ -225,7 +225,7 @@ _id_486A() {
       var_8 = distancesquared(var_6.origin, self.origin);
 
       if(var_8 < var_1) {
-        if(_func_07E(var_6.origin, self.origin, 0, self)) {
+        if(_bullettracepassed(var_6.origin, self.origin, 0, self)) {
           var_9 = "";
 
           if(var_7)
@@ -258,7 +258,7 @@ _id_486A() {
           if(var_9 == "")
             var_9 = "grenade_incoming";
 
-          level thread _id_8079(self, var_9);
+          level thread playerlinkweaponviewtodelta(self, var_9);
           wait 5;
         }
       }
@@ -306,7 +306,7 @@ _id_94FD() {
   wait 1;
 
   if(_id_1F69("suppressing_fire"))
-    level thread _id_8079(self, "suppressing_fire");
+    level thread playerlinkweaponviewtodelta(self, "suppressing_fire");
 }
 
 _id_7C2A() {
@@ -319,7 +319,7 @@ _id_7C2A() {
   }
   for(;;) {
     self waittill("reload_start");
-    level thread _id_8079(self, "reload");
+    level thread playerlinkweaponviewtodelta(self, "reload");
   }
 }
 
@@ -332,32 +332,32 @@ _id_4872() {
     self waittill("grenade_fire", var_0, var_1);
 
     if(var_1 == "frag_grenade_mp" || var_1 == "frag_grenade_german_mp") {
-      level thread _id_8079(self, "frag_out");
+      level thread playerlinkweaponviewtodelta(self, "frag_out");
       continue;
     }
 
     if(var_1 == "semtex_mp") {
-      level thread _id_8079(self, "semtex_out");
+      level thread playerlinkweaponviewtodelta(self, "semtex_out");
       continue;
     }
 
     if(var_1 == "concussion_grenade_mp" || var_1 == "stun_grenade_mp") {
-      level thread _id_8079(self, "conc_out");
+      level thread playerlinkweaponviewtodelta(self, "conc_out");
       continue;
     }
 
     if(var_1 == "smoke_grenade_mp" || var_1 == "smoke_grenade_axis_mp" || var_1 == "smoke_grenade_expeditionary_mp" || var_1 == "smoke_grenade_axis_expeditionary_mp") {
-      level thread _id_8079(self, "smoke_out");
+      level thread playerlinkweaponviewtodelta(self, "smoke_out");
       continue;
     }
 
     if(var_1 == "bouncingbetty_mp") {
-      level thread _id_8079(self, "betty_out");
+      level thread playerlinkweaponviewtodelta(self, "betty_out");
       continue;
     }
 
     if(var_1 == "tabun_grenade_mp")
-      level thread _id_8079(self, "tabun_out");
+      level thread playerlinkweaponviewtodelta(self, "tabun_out");
   }
 }
 
@@ -370,7 +370,7 @@ _id_9132() {
     self waittill("sprint_begin");
 
     if(_id_1F69("moving"))
-      level thread _id_8079(self, "moving", 0, 0);
+      level thread playerlinkweaponviewtodelta(self, "moving", 0, 0);
   }
 }
 
@@ -385,7 +385,7 @@ _id_60E6() {
     if(self._id_165B) {
       continue;
     }
-    level thread _id_8079(self, "melee_exertion", 1);
+    level thread playerlinkweaponviewtodelta(self, "melee_exertion", 1);
   }
 }
 
@@ -406,7 +406,7 @@ _id_1659() {
     self waittill("sprint_melee_charge_begin");
 
     if(!maps\mp\_utility::_id_585F())
-      self _meth_8626("bayo_submix");
+      self clientaddsoundsubmix("bayo_submix");
     else if(isDefined(self.nobayocharge) && self.nobayocharge) {
       continue;
     }
@@ -436,7 +436,7 @@ _id_1659() {
       }
     }
 
-    if(_func_344(var_2))
+    if(_soundexists(var_2))
       self._id_1657 = _id_0380::_id_6844(var_2, undefined, self);
 
     _id_0380::_id_684C(self._id_1657, self, "charge_intro_done");
@@ -470,7 +470,7 @@ _id_1659() {
         var_0 = var_0 + ("_" + var_7);
       }
 
-      if(_func_344(var_0))
+      if(_soundexists(var_0))
         self._id_1658 = _id_0380::_id_6844(var_0, undefined, self);
     }
   }
@@ -478,7 +478,7 @@ _id_1659() {
 
 _id_1653() {
   self endon("disconnect");
-  var_0 = common_scripts\utility::_id_A715("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
+  var_0 = common_scripts\utility::waittill_any_return("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
 
   if(var_0 == "death" && isDefined(self)) {
     if(self._id_1656)
@@ -486,7 +486,7 @@ _id_1653() {
     else
       _id_0380::_id_6850(self._id_1658, 0.1);
 
-    self _meth_8627("bayo_submix");
+    self clientclearsoundsubmix("bayo_submix");
   }
 }
 
@@ -500,7 +500,7 @@ _id_1654() {
     self waittill("sprint_melee_charge_end", var_1);
 
     if(!maps\mp\_utility::_id_585F())
-      self _meth_8627("bayo_submix");
+      self clientclearsoundsubmix("bayo_submix");
 
     if(!self._id_1656) {
       if(self.team != "spectator") {
@@ -527,7 +527,7 @@ _id_1654() {
         var_0 = var_0 + ("_" + var_3);
       }
 
-      if(_func_344(var_0))
+      if(_soundexists(var_0))
         _id_0380::_id_6844(var_0, undefined, self, 0.1);
     }
   }
@@ -544,7 +544,7 @@ _id_1652() {
     self waittill("sprint_melee_charge_attack", var_2);
 
     if(!maps\mp\_utility::_id_585F())
-      self _meth_8627("bayo_submix");
+      self clientclearsoundsubmix("bayo_submix");
 
     if(self.team != "spectator") {
       var_3 = self.pers["voicePrefix"];
@@ -567,7 +567,7 @@ _id_1652() {
         var_0 = var_0 + ("_" + var_4);
       }
 
-      if(_func_344(var_0))
+      if(_soundexists(var_0))
         _id_0380::_id_6844(var_0, undefined, self, 0.1);
     }
   }
@@ -592,7 +592,7 @@ _id_29DF() {
     }
     if(var_1 != self && var_1.classname != "worldspawn") {
       wait 1.5;
-      level thread _id_8079(self, "damage");
+      level thread playerlinkweaponviewtodelta(self, "damage");
       wait 3;
     }
   }
@@ -622,7 +622,7 @@ _id_2030() {
       continue;
     }
     if(isDefined(self) && distancesquared(self.origin, var_2.origin) <= 262144) {
-      level thread _id_807A(var_2, "casualty", 0.75);
+      level thread playerlinktoabsolute(var_2, "casualty", 0.75);
       break;
     }
   }
@@ -647,7 +647,7 @@ _id_998F() {
     if(!_id_1F69("callout_location") && !_id_1F69("callout_generic")) {
       continue;
     }
-    var_0 = self _meth_82F0();
+    var_0 = self getsightedplayers();
 
     if(!isDefined(var_0)) {
       continue;
@@ -655,7 +655,7 @@ _id_998F() {
     var_1 = undefined;
     var_2 = 4000000;
 
-    if(self _meth_8345() > 0.7)
+    if(self playerads() > 0.7)
       var_2 = 6250000;
 
     foreach(var_4 in var_0) {
@@ -665,9 +665,9 @@ _id_998F() {
 
         if(isDefined(var_5) && _id_1F69("callout_location") && _id_3EB6(4840000)) {
           if(maps\mp\_utility::_hasperk("specialty_silentmovement") || maps\mp\_utility::_hasperk("specialty_quieter") || !_id_3EB6(262144))
-            level thread _id_8079(self, var_5._id_5E5C[0], 0);
+            level thread playerlinkweaponviewtodelta(self, var_5._id_5E5C[0], 0);
           else
-            level thread _id_8079(self, var_5._id_5E5C[0], 1);
+            level thread playerlinkweaponviewtodelta(self, var_5._id_5E5C[0], 1);
 
           break;
         }
@@ -675,28 +675,28 @@ _id_998F() {
     }
 
     if(isDefined(var_1) && _id_1F69("callout_generic")) {
-      var_7 = var_1 _meth_8317();
+      var_7 = var_1 getcurrentprimaryweapon();
       var_8 = isDefined(self._id_3EF6);
       var_9 = weaponclass(var_7) == "sniper";
 
       if(var_8)
-        level thread _id_8079(self, "callout_shield");
+        level thread playerlinkweaponviewtodelta(self, "callout_shield");
       else if(var_9)
-        level thread _id_8079(self, "callout_sniper");
+        level thread playerlinkweaponviewtodelta(self, "callout_sniper");
       else
-        level thread _id_8079(self, "callout_generic");
+        level thread playerlinkweaponviewtodelta(self, "callout_generic");
     }
   }
 }
 
-_id_807A(var_0, var_1, var_2, var_3, var_4) {
+playerlinktoabsolute(var_0, var_1, var_2, var_3, var_4) {
   var_0 endon("death");
   var_0 endon("disconnect");
   wait(var_2);
-  _id_8079(var_0, var_1, var_3, var_4);
+  playerlinkweaponviewtodelta(var_0, var_1, var_3, var_4);
 }
 
-_id_8079(var_0, var_1, var_2, var_3) {
+playerlinkweaponviewtodelta(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
   var_0 endon("disconnect");
 
@@ -746,7 +746,7 @@ _id_32AB(var_0, var_1, var_2, var_3) {
   var_4 = self.pers["team"];
   level _id_09ED(self, var_4);
 
-  if(!_func_344(var_0)) {
+  if(!_soundexists(var_0)) {
     level _id_7CFB(self, var_4);
     return;
   }
@@ -802,7 +802,7 @@ _id_32AB(var_0, var_1, var_2, var_3) {
   var_9 = self _meth_861E(var_0, var_4, var_8);
 
   if(isDefined(var_9)) {
-    var_10 = _func_35D(var_0);
+    var_10 = _lookupsoundlength(var_0);
 
     if(isDefined(var_10))
       wait(var_10);
@@ -813,13 +813,13 @@ _id_32AB(var_0, var_1, var_2, var_3) {
 }
 
 _id_32B5(var_0, var_1) {
-  var_2 = common_scripts\utility::_id_A715(var_0, "death", "disconnect");
+  var_2 = common_scripts\utility::waittill_any_return(var_0, "death", "disconnect");
 
   if(var_2 == var_0) {
     var_3 = self.team;
 
-    if(!_func_1EF(self))
-      var_4 = self _meth_843D();
+    if(!_isagent(self))
+      var_4 = self hasfemalecustomizationmodel();
     else
       var_4 = 0;
 
@@ -840,8 +840,8 @@ _id_32B5(var_0, var_1) {
       if(var_8.team != var_3) {
         continue;
       }
-      if(!_func_1EF(var_8))
-        var_9 = var_8 _meth_843D();
+      if(!_isagent(var_8))
+        var_9 = var_8 hasfemalecustomizationmodel();
       else
         var_9 = 0;
 
@@ -849,7 +849,7 @@ _id_32B5(var_0, var_1) {
         var_10 = var_8.pers["voicePrefix"];
         var_11 = var_10 + "co_loc_" + var_1 + "_echo";
 
-        if(common_scripts\utility::_id_24A6() && _func_344(var_11))
+        if(common_scripts\utility::_id_24A6() && _soundexists(var_11))
           var_12 = var_11;
         else
           var_12 = var_10 + level._id_1676["callout_response_generic"];
@@ -988,7 +988,7 @@ _id_4709(var_0) {
 
 _id_4087() {
   var_0 = anim.bcs_locations;
-  var_1 = self _meth_809E(var_0);
+  var_1 = self getistouchingentities(var_0);
   var_2 = [];
 
   foreach(var_4 in var_1) {
@@ -1054,7 +1054,7 @@ _id_1F33(var_0) {
     var_3 = _id_4563("co_loc_" + var_2);
     var_4 = _id_463B(var_2, 0);
     var_5 = _id_4563("concat_loc_" + var_2);
-    var_6 = _func_344(var_3) || _func_344(var_4) || _func_344(var_5);
+    var_6 = _soundexists(var_3) || _soundexists(var_4) || _soundexists(var_5);
 
     if(var_6)
       return var_6;
@@ -1098,19 +1098,19 @@ _id_569E(var_0) {
 _id_569C(var_0, var_1) {
   var_2 = var_1 _id_4563("concat_loc_" + var_0);
 
-  if(_func_344(var_2))
+  if(_soundexists(var_2))
     return 1;
 
   return 0;
 }
 
 _id_569D(var_0, var_1) {
-  if(issubstr(var_0, "_qa") && _func_344(var_0))
+  if(issubstr(var_0, "_qa") && _soundexists(var_0))
     return 1;
 
   var_2 = var_1 _id_463B(var_0, 0);
 
-  if(_func_344(var_2))
+  if(_soundexists(var_2))
     return 1;
 
   return 0;

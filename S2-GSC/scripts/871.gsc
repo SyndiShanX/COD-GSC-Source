@@ -49,10 +49,10 @@ _id_8EA3(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_10 = var_8 + var_0 + var_9;
 
-  if(_func_344(var_10)) {
+  if(_soundexists(var_10)) {
     var_7 _id_0378::_id_307E(var_10, var_1, var_2, var_3, var_4);
     return 1;
-  } else if(_func_344(var_8 + var_0)) {
+  } else if(_soundexists(var_8 + var_0)) {
     var_7 _id_0378::_id_307E(var_8 + var_0, var_1, var_2, var_3, var_4);
     return 1;
   }
@@ -133,7 +133,7 @@ _id_8E3B(var_0, var_1) {
         wait(var_13);
     }
 
-    if(_func_031(var_1))
+    if(_isstring(var_1))
       self notify(var_1);
   }
 }
@@ -155,13 +155,13 @@ _id_8E42(var_0, var_1) {}
 _id_8EA4(var_0) {
   var_1 = undefined;
 
-  if(_func_344(var_0 + "hi"))
+  if(_soundexists(var_0 + "hi"))
     var_1 = var_0 + "hi";
-  else if(_func_344(var_0 + "md"))
+  else if(_soundexists(var_0 + "md"))
     var_1 = var_0 + "md";
-  else if(_func_344(var_0 + "lo"))
+  else if(_soundexists(var_0 + "lo"))
     var_1 = var_0 + "lo";
-  else if(_func_344(var_0))
+  else if(_soundexists(var_0))
     var_1 = var_0;
 
   return var_1;

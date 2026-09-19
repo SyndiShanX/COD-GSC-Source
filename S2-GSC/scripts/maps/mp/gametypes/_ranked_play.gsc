@@ -75,12 +75,12 @@ _id_21BA() {
 getrankformmr(var_0) {
   if(!isDefined(level.ranktablecache)) {
     level.ranktablecache = [];
-    var_1 = _func_27A("mp/rankedplaytable.csv");
+    var_1 = _tablegetrowcount("mp/rankedplaytable.csv");
 
     for(var_2 = 0; var_2 < var_1; var_2++) {
-      var_3 = _func_1AE("mp/rankedplaytable.csv", var_2, 1);
-      var_4 = _func_1AE("mp/rankedplaytable.csv", var_2, 2);
-      level.ranktablecache[var_2] = [_func_0AD(var_3), _func_0AD(var_4)];
+      var_3 = _tablelookupbyrow("mp/rankedplaytable.csv", var_2, 1);
+      var_4 = _tablelookupbyrow("mp/rankedplaytable.csv", var_2, 2);
+      level.ranktablecache[var_2] = [_float(var_3), _float(var_4)];
     }
   }
 

@@ -54,7 +54,7 @@ lewis_run_bullet_rewind() {
 
       for(var_6 = 0; var_6 < 7; var_6++) {
         foreach(var_8 in common_scripts\utility::array_randomize(var_0.rewindorigins)) {
-          _func_1B5(var_2, var_8, var_0 getEye() + (0, 0, -16), var_0);
+          _magicbullet(var_2, var_8, var_0 getEye() + (0, 0, -16), var_0);
           playFX(common_scripts\utility::_id_44F5("zmb_lewis_upgraded_rewind"), var_8);
           waitframe();
         }
@@ -128,16 +128,16 @@ mg42_laser_rounds() {
     var_8 = anglestoright(var_5);
     var_9 = var_0 getEye() + var_6 * 45 + var_7 * -6.5 + var_8 * 4;
     var_10 = anglesToForward(var_5);
-    _func_1B5(var_1, var_9, var_9 + 1000 * vectorNormalize(anglesToForward(var_0 _meth_8566())), var_0);
+    _magicbullet(var_1, var_9, var_9 + 1000 * vectorNormalize(anglesToForward(var_0 _meth_8566())), var_0);
   }
 }
 
 run_bren_reload_shield(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
-  var_2 = _func_2A8(common_scripts\utility::_id_44F5("force_zombie_bubble"), var_1, "J_SpineLower");
+  var_2 = _spawnlinkedfx(common_scripts\utility::_id_44F5("force_zombie_bubble"), var_1, "J_SpineLower");
   var_1.linkedbubblefx = var_2;
-  _func_14C(var_2);
+  _triggerfx(var_2);
   var_1 maps\mp\agents\_agent_utility::deleteentonagentdeath(var_2);
   var_3 = gettime();
   var_4 = 5;
@@ -172,7 +172,7 @@ run_bren_reload_shield(var_0) {
     waitframe();
 
     if(var_5)
-      _func_175(var_1.origin, 250, 150, 2.7);
+      _physicsexplosionsphere(var_1.origin, 250, 150, 2.7);
   }
 
   playFX(common_scripts\utility::_id_44F5("force_zombie_bubble_pop"), var_1.origin);
@@ -192,7 +192,7 @@ do_strong_giest_damage(var_0, var_1, var_2) {
   var_3.tookheavygiestdamage = 1;
   var_3 maps\mp\zombies\consumables\inv_giest_shield::play_shield_zombie_shock_vfx();
   waitframe();
-  var_3 _meth_8059(var_0, var_1.origin, var_1, undefined, "MOD_ENERGY", var_2);
+  var_3 dodamage(var_0, var_1.origin, var_1, undefined, "MOD_ENERGY", var_2);
   var_3 thread dmg_cooldown();
 }
 
@@ -279,7 +279,7 @@ exectute_mg81_feedback(var_0, var_1, var_2, var_3) {
     return 0;
 
   if(_id_0547::_id_5565(var_1, "mg81_zm")) {
-    if(var_4 _meth_82F6() == 0 && !common_scripts\utility::_id_562E(var_4.activatedmg81lastshot)) {
+    if(var_4 getcurrentweaponclipammo() == 0 && !common_scripts\utility::_id_562E(var_4.activatedmg81lastshot)) {
       var_4.activatedmg81lastshot = 1;
       var_4 thread restoremg81lastshot();
       var_4 do_pommel_explosion_radius(var_1, var_4, var_0.origin, 192);
@@ -306,7 +306,7 @@ do_pommel_explosion_radius(var_0, var_1, var_2, var_3) {
     var_5 thread do_strong_giest_damage(level.heavy_giest_dmg, var_1, var_1 _id_0586::_id_078B(var_0));
   }
 
-  _func_175(var_2, 250, 150, 2.7);
+  _physicsexplosionsphere(var_2, 250, 150, 2.7);
 }
 
 restoremg81lastshot() {
@@ -323,7 +323,7 @@ try_catch_on_fire(var_0) {
 
   if(!isDefined(level.zmb_fire_explode_origin)) {
     level.zmb_fire_explode_origin = var_1 common_scripts\utility::_id_8FFC();
-    level.zmb_fire_explode_origin _meth_805B();
+    level.zmb_fire_explode_origin show();
   }
 
   if(!isDefined(var_1.fireshotcount))
@@ -411,5 +411,5 @@ weapon_clip_empty(var_0) {
   if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon())))
     return 1;
 
-  return var_1 _meth_82F6() == 0;
+  return var_1 getcurrentweaponclipammo() == 0;
 }

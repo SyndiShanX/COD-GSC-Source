@@ -41,7 +41,7 @@ _id_778B(var_0) {
     _id_04DC::_id_8A34(var_0, "DUEL_CHALLENGE", self);
     _id_04DC::_id_8A34(self, "BOXING_INVITE_SENT", var_0);
     var_0 freezecontrols(0);
-    var_0 thread _id_04E0::_id_8636(10, "reject_duel_challenge", ["accept_duel_challenge", "reject_duel_challenge", "forceSurrenderDuel", "death", "disconnect", "duel_choice_made"]);
+    var_0 thread _id_04E0::disablefocus(10, "reject_duel_challenge", ["accept_duel_challenge", "reject_duel_challenge", "forceSurrenderDuel", "death", "disconnect", "duel_choice_made"]);
 
     for(;;) {
       var_0 waittill("luinotifyserver", var_4, var_5);
@@ -111,26 +111,26 @@ _id_170F(var_0, var_1) {
       var_1._id_155F _id_04E0::_id_1543((0, 0, 80), var_1);
   }
 
-  var_0 _meth_8315();
-  var_1 _meth_8315();
+  var_0 takeallweapons();
+  var_1 takeallweapons();
   var_0 giveweapon("boxing_gloves_hub_mp");
   var_1 giveweapon("boxing_gloves_hub_mp");
-  var_0 _meth_831B("boxing_gloves_hub_mp");
-  var_1 _meth_831B("boxing_gloves_hub_mp");
+  var_0 switchtoweaponimmediate("boxing_gloves_hub_mp");
+  var_1 switchtoweaponimmediate("boxing_gloves_hub_mp");
   var_0 _meth_85C8();
   var_1 _meth_85C8();
-  var_0 _meth_812B(0);
-  var_1 _meth_812B(0);
-  var_0 _meth_8304(0);
-  var_1 _meth_8304(0);
-  var_0 _meth_812A(0);
-  var_1 _meth_812A(0);
+  var_0 allowfire(0);
+  var_1 allowfire(0);
+  var_0 allowads(0);
+  var_1 allowads(0);
+  var_0 allowmelee(0);
+  var_1 allowmelee(0);
   _id_04E0::_id_6010(var_0, var_1);
   _id_04E0::_id_6010(var_1, var_0);
   var_0 _meth_8656(var_1);
   var_1 _meth_8656(var_0);
-  var_0 _meth_8427(var_1, 0, 0);
-  var_1 _meth_8427(var_0, 0, 0);
+  var_0 hudoutlineenableforclient(var_1, 0, 0);
+  var_1 hudoutlineenableforclient(var_0, 0, 0);
   var_0 thread _id_04E0::_id_4D09();
   var_1 thread _id_04E0::_id_4D09();
   var_0._id_34D2 = var_1;
@@ -144,12 +144,12 @@ _id_170F(var_0, var_1) {
   while(!var_0._id_268C || !var_1._id_268C)
     waitframe();
 
-  var_0 _meth_812B(1);
-  var_1 _meth_812B(1);
-  var_0 _meth_8304(1);
-  var_1 _meth_8304(1);
-  var_0 _meth_812A(1);
-  var_1 _meth_812A(1);
+  var_0 allowfire(1);
+  var_1 allowfire(1);
+  var_0 allowads(1);
+  var_1 allowads(1);
+  var_0 allowmelee(1);
+  var_1 allowmelee(1);
   var_0._id_1B77 = gettime();
   var_1._id_1B77 = gettime();
 }
@@ -172,7 +172,7 @@ _id_6388(var_0) {
   self.health = self.maxhealth;
   var_1 = 160;
   var_2 = 160;
-  self._id_34CF = _func_19B(self);
+  self._id_34CF = _newclienthudelem(self);
   self._id_34CF setshader("mtl_hub_1v1_health_bar_100", var_1, var_2);
   self._id_34CF.alpha = 1;
   self._id_34CF.color = (1, 1, 1);
@@ -184,22 +184,22 @@ _id_6388(var_0) {
   self._id_34CF._id_6E74 = level._id_A012;
   self._id_34CF._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(self._id_34CF);
   self._id_34CF.name = "duelHealth1P";
-  self._id_34D0 = _func_19B(var_0);
+  self._id_34D0 = _newclienthudelem(var_0);
   self._id_34D0 setshader("mtl_hub_1v1_health_bar_100", var_1, var_2);
   self._id_34D0.alpha = 1;
   self._id_34D0.color = (1, 1, 1);
   self._id_34D0.x = self.origin[0];
   self._id_34D0.y = self.origin[1];
   self._id_34D0._id_01D9 = self.origin[2];
-  self._id_34D0 _meth_80CB(1, 0, 0);
-  self._id_34D0 _meth_80C0(self);
+  self._id_34D0 setwaypoint(1, 0, 0);
+  self._id_34D0 settargetent(self);
   self._id_34D0._id_35B2 = "icon";
   self._id_34D0._id_6E74 = level._id_A012;
   self._id_34D0._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(self._id_34D0);
   self._id_34D0.name = "duelHealth3P";
 
   for(;;) {
-    var_3 = common_scripts\utility::_id_A715("updateDuelHealthDisplay", "lostDuel", "forceSurrenderDuel");
+    var_3 = common_scripts\utility::waittill_any_return("updateDuelHealthDisplay", "lostDuel", "forceSurrenderDuel");
 
     if(var_3 == "updateDuelHealthDisplay") {
       if(self.health % 20 == 0) {} else if(self.health % 20 < 10)
@@ -211,27 +211,27 @@ _id_6388(var_0) {
         case 100:
           self._id_34CF setshader("mtl_hub_1v1_health_bar_100", var_1, var_2);
           self._id_34D0 setshader("mtl_hub_1v1_health_bar_100", var_1, var_2);
-          self._id_34D0 _meth_80CB(1, 0, 0);
+          self._id_34D0 setwaypoint(1, 0, 0);
           break;
         case 80:
           self._id_34CF setshader("mtl_hub_1v1_health_bar_80", var_1, var_2);
           self._id_34D0 setshader("mtl_hub_1v1_health_bar_80", var_1, var_2);
-          self._id_34D0 _meth_80CB(1, 0, 0);
+          self._id_34D0 setwaypoint(1, 0, 0);
           break;
         case 60:
           self._id_34CF setshader("mtl_hub_1v1_health_bar_60", var_1, var_2);
           self._id_34D0 setshader("mtl_hub_1v1_health_bar_60", var_1, var_2);
-          self._id_34D0 _meth_80CB(1, 0, 0);
+          self._id_34D0 setwaypoint(1, 0, 0);
           break;
         case 40:
           self._id_34CF setshader("mtl_hub_1v1_health_bar_40", var_1, var_2);
           self._id_34D0 setshader("mtl_hub_1v1_health_bar_40", var_1, var_2);
-          self._id_34D0 _meth_80CB(1, 0, 0);
+          self._id_34D0 setwaypoint(1, 0, 0);
           break;
         case 20:
           self._id_34CF setshader("mtl_hub_1v1_health_bar_20", var_1, var_2);
           self._id_34D0 setshader("mtl_hub_1v1_health_bar_20", var_1, var_2);
-          self._id_34D0 _meth_80CB(1, 0, 0);
+          self._id_34D0 setwaypoint(1, 0, 0);
           break;
       }
 
@@ -259,8 +259,8 @@ _id_638A() {
 
 _id_638B() {
   self endon("duel_ended");
-  self _meth_82E1("ForfeitButtonDown", "+usereload");
-  self _meth_82E1("ForfeitButtonUp", "-usereload");
+  self notifyonplayercommand("ForfeitButtonDown", "+usereload");
+  self notifyonplayercommand("ForfeitButtonUp", "-usereload");
 
   for(;;) {
     self waittill("ForfeitButtonDown");
@@ -299,14 +299,14 @@ _id_237E(var_0, var_1, var_2) {
 
   if(isDefined(var_0)) {
     if(isDefined(var_1))
-      var_0 _meth_8428(var_1);
+      var_0 hudoutlinedisableforclient(var_1);
 
     var_0 maps\mp\gametypes\_missions::_id_7752("ch_daily_4");
     var_0._id_34D2 = undefined;
     var_0._id_34CF destroy();
     var_0._id_34D0 destroy();
-    var_0 _meth_82E1("ForfeitButtonDown", "+usereload");
-    var_0 _meth_82E1("ForfeitButtonUp", "-usereload");
+    var_0 notifyonplayercommand("ForfeitButtonDown", "+usereload");
+    var_0 notifyonplayercommand("ForfeitButtonUp", "-usereload");
     var_0 thread _id_04E0::_id_8BFB();
     var_0 thread _id_04E0::_id_3010("youWon", &"HUB_YOU_WON", undefined, -100, 1, 2.5);
     var_0 _id_04DC::_id_2D6D(10);
@@ -318,13 +318,13 @@ _id_237E(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     if(isDefined(var_0))
-      var_1 _meth_8428(var_0);
+      var_1 hudoutlinedisableforclient(var_0);
 
     var_1._id_34D2 = undefined;
     var_1._id_34CF destroy();
     var_1._id_34D0 destroy();
-    var_1 _meth_82E1("ForfeitButtonDown", "+usereload");
-    var_1 _meth_82E1("ForfeitButtonUp", "-usereload");
+    var_1 notifyonplayercommand("ForfeitButtonDown", "+usereload");
+    var_1 notifyonplayercommand("ForfeitButtonUp", "-usereload");
     var_1 thread _id_04E0::_id_8BFB();
     var_1 thread _id_04E0::_id_3010("youLost", &"HUB_YOU_LOST", undefined, -100, 1, 2.5);
     var_1 _id_04DC::_id_2D6D(1);
@@ -348,9 +348,9 @@ _id_7E2D(var_0) {
     self waittill("postDuelEmoteComplete");
     self._id_5692 = 0;
     _id_04E0::_id_870B(0);
-    self _meth_8114(0);
+    self allowprone(0);
     self freezecontrols(0);
-    self _meth_812A(0);
+    self allowmelee(0);
     self._id_579F = 1;
     self._id_8B93 = 0;
 

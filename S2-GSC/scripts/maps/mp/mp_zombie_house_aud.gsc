@@ -32,8 +32,8 @@ _id_7248() {}
 
 _id_7330() {
   _id_0366::_id_AB0D();
-  self _meth_8622("int_house_downstairs");
-  self _meth_8626("house_global", 0.25);
+  self setclienttriggeraudiozone("int_house_downstairs");
+  self clientaddsoundsubmix("house_global", 0.25);
   _id_0366::snd_zmb_set_plr_vox_scare_count_max(1);
 }
 

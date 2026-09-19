@@ -14,7 +14,7 @@ override_wall_buys_by_class() {
   if(!isDefined(level.rand_wallbuys))
     level.rand_wallbuys = [];
 
-  var_0 = _func_21F("wallbuy_lgt", "targetname");
+  var_0 = _getscriptablearray("wallbuy_lgt", "targetname");
 
   foreach(var_2 in level._id_A7DE) {
     if(isDefined(var_2._id_81C7) && var_2._id_81C7 == "rand_wallbuy") {
@@ -67,12 +67,12 @@ show_wallbuy_waypoints(var_0) {
     if(!weapon_class_available(var_5.weapon_class)) {
       continue;
     }
-    var_5 _meth_8427(var_0, 0, 0);
+    var_5 hudoutlineenableforclient(var_0, 0, 0);
 
     if(!isDefined(var_5.no_waypoint)) {
       continue;
     }
-    var_2 = _func_19B(var_0);
+    var_2 = _newclienthudelem(var_0);
     var_2 setshader(level.zombies_shotgun_weapon_waypoints[var_5.weapon_class], 1, 1);
     var_2.alpha = 1;
     var_2.alpha = 1;
@@ -80,7 +80,7 @@ show_wallbuy_waypoints(var_0) {
     var_2.x = var_5.origin[0];
     var_2.y = var_5.origin[1];
     var_2._id_01D9 = var_5.origin[2] + 35;
-    var_2 _meth_80CB(0, 0, 0);
+    var_2 setwaypoint(0, 0, 0);
 
     if(!isDefined(var_0.shwaypoints))
       var_0.shwaypoints = [];
@@ -92,15 +92,15 @@ show_wallbuy_waypoints(var_0) {
 
 hide_wallbuy_waypoints(var_0) {
   foreach(var_2 in level.active_zombie_models_to_outline) {
-    if(isDefined(var_2._id_A98D) && !_func_279(var_2._id_A98D))
+    if(isDefined(var_2._id_A98D) && !_isremovedentity(var_2._id_A98D))
       var_2._id_A98D destroy();
 
-    var_2 _meth_8428(var_0);
+    var_2 hudoutlinedisableforclient(var_0);
   }
 
   if(isDefined(var_0.shwaypoints)) {
     foreach(var_5 in var_0.shwaypoints) {
-      if(isDefined(var_5) && !_func_279(var_5))
+      if(isDefined(var_5) && !_isremovedentity(var_5))
         var_5 destroy();
     }
   }
@@ -146,11 +146,11 @@ setwallbuyitements(var_0, var_1, var_2) {
     var_1._id_586E = var_3;
     var_1.itementlink = var_0;
   } else
-    var_1._id_586E _meth_848E(var_2);
+    var_1._id_586E setpickupweapon(var_2);
 
   var_1._id_586E._id_A9E0 = var_2;
-  var_1._id_586E _meth_80B3();
-  var_1._id_586E _meth_8511();
+  var_1._id_586E makeunusable();
+  var_1._id_586E ghost();
 }
 
 slide_left() {
@@ -214,7 +214,7 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
   for(;;) {
     if(var_1 == "weapon_smg" && common_scripts\utility::_id_3C77("shotgun_classic_add_to_box")) {
       if(!common_scripts\utility::_id_0F79(var_7, var_9)) {
-        var_10 = _func_0A4(1, 4);
+        var_10 = _randomintrange(1, 4);
         var_7 = common_scripts\utility::_id_0F86(var_7, var_9, var_8 + var_10);
       }
 
@@ -248,7 +248,7 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
     var_12 = var_3;
     playFX(level._effect["zmb_mystery_box_gun_gk"], var_2._id_A9E3);
     level._id_11CB._id_65F4 = _id_0380::_id_2889("zmb_mystery_box_elec", undefined, var_2._id_A9E3);
-    var_2._id_586E _meth_8005(var_13);
+    var_2._id_586E showtoplayer(var_13);
 
     if(!isDefined(var_2._id_586E._id_6C4E))
       var_2._id_586E._id_6C4E = var_2._id_586E.origin;
@@ -258,11 +258,11 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
 
     var_2._id_586E.origin = var_2._id_586E._id_6C4E;
     var_2.itementlink.origin = var_2.itementlink._id_6C4E;
-    var_2._id_586E _meth_8057();
+    var_2._id_586E unlink();
     var_2._id_586E slide_left();
     var_2._id_586E linktosynchronizedparent(var_2.itementlink);
     var_14 = var_2._id_A9E3 + 6 * vectorNormalize(anglestoright(var_2._id_A9BD));
-    var_2.itementlink _meth_82B1(var_14, 0.15);
+    var_2.itementlink moveto(var_14, 0.15);
     wait 0.25;
 
     if(var_13 _id_0579::_id_4BA5())
@@ -283,7 +283,7 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
         level.zmb_shotgun_jack_in_box_odds = level.zmb_shotgun_jack_in_box_odds + int(level.zmb_shotgun_jack_in_box_odds_add_per_spin * get_wallbuy_jack_multiplier(var_1));
     }
 
-    var_2._id_586E _meth_8511();
+    var_2._id_586E ghost();
 
     if(!common_scripts\utility::_id_562E(var_2.onceonly))
       var_2 wallbuymysterygatebuycycle();
@@ -357,7 +357,7 @@ replace_wallbuy_weapon(var_0, var_1) {
 
 showwaywallbuypointping(var_0) {
   var_1 = self;
-  var_2 = _func_19B(var_1);
+  var_2 = _newclienthudelem(var_1);
 
   if(!isDefined(var_1.pingingwaypoints))
     var_1.pingingwaypoints = [];
@@ -377,7 +377,7 @@ showwaywallbuypointping(var_0) {
   var_2.x = var_3[0];
   var_2.y = var_3[1];
   var_2._id_01D9 = var_3[2] + 15;
-  var_2 _meth_80CB(0, 1, 0);
+  var_2 setwaypoint(0, 1, 0);
   var_2 fadeovertime(0.1);
   var_2.alpha = 1;
   wait 2;
@@ -385,7 +385,7 @@ showwaywallbuypointping(var_0) {
   if(!waypoint_exists(var_2)) {
     return;
   }
-  var_2 _meth_80CB(0, 0, 0);
+  var_2 setwaypoint(0, 0, 0);
   wait 6;
 
   if(!waypoint_exists(var_2)) {
@@ -400,7 +400,7 @@ showwaywallbuypointping(var_0) {
 }
 
 waypoint_exists(var_0) {
-  return isDefined(var_0) && !_func_279(var_0);
+  return isDefined(var_0) && !_isremovedentity(var_0);
 }
 
 spend_wallbuy_materials() {
@@ -460,7 +460,7 @@ unlock_new_wallbuys() {
 }
 
 _id_4D1B(var_0) {
-  self._id_82EF _meth_8006(var_0);
+  self.issighted _meth_8006(var_0);
 }
 
 getwallbuytriggercost(var_0) {
@@ -494,7 +494,7 @@ watch_for_player_purchase() {
     var_1 = getwallbuytriggercost(var_0);
 
     if(common_scripts\utility::_id_562E(self.progressblocked)) {
-      _id_0555::_id_83DD("dlc3_progress_hint", var_0);
+      _id_0555::issprinting("dlc3_progress_hint", var_0);
       continue;
     }
 
@@ -595,7 +595,7 @@ get_use_player() {
 
 re_enabble_hammer() {
   waitframe();
-  self _meth_8323();
+  self enableweapons();
 }
 
 start_hammer() {
@@ -611,14 +611,14 @@ start_hammer() {
   }
 
   _id_0548::_id_A7D6(var_0, "war_hammer_assemble_mp");
-  var_0 _meth_8326();
+  var_0 disableweaponswitch();
   return var_3;
 }
 
 take_hammer(var_0) {
   var_1 = self;
   var_1 _id_0586::_id_0790("war_hammer_assemble_mp");
-  var_1 _meth_8327();
+  var_1 enableweaponswitch();
 
   if(isDefined(var_0))
     var_1 _id_0586::_id_078E(var_0);
@@ -648,12 +648,12 @@ wallbuymysterytogglegate(var_0, var_1) {
     if(common_scripts\utility::_id_562E(var_0))
       var_2 = "on";
 
-    self.wallbuy.scriptable_light _meth_83FA("lightpart", var_2);
+    self.wallbuy.scriptable_light setscriptablepartstate("lightpart", var_2);
   }
 
   if(isDefined(self.wallbuy.wallbuyguncard) && isDefined(var_1) && isPlayer(var_1)) {
     if(common_scripts\utility::_id_562E(var_0))
-      self.wallbuy.wallbuyguncard _meth_8005(var_1);
+      self.wallbuy.wallbuyguncard showtoplayer(var_1);
     else
       self.wallbuy.wallbuyguncard _meth_8006(var_1);
   }
@@ -676,10 +676,10 @@ wallbuymysterytogglegatescriptable_single(var_0) {
     var_2 = "buy_loop_open";
   }
 
-  self._id_82EF _meth_83FA("base", var_1);
-  self._id_82EF notify("script_state_change");
+  self.issighted setscriptablepartstate("base", var_1);
+  self.issighted notify("script_state_change");
   wait 1.13333;
-  self._id_82EF _meth_83FA("base", var_2);
+  self.issighted setscriptablepartstate("base", var_2);
 }
 
 canopenwallbuy(var_0) {
@@ -689,8 +689,8 @@ canopenwallbuy(var_0) {
 assignwallbuymysterypurchasetoplayer(var_0) {
   var_0 endon("disconnect");
   var_1 = self;
-  var_1 _meth_8019();
-  var_0 _meth_8017(var_1);
+  var_1 releaseclaimedtrigger();
+  var_0 clientclaimtrigger(var_1);
   var_1.lastclaimedplayer = var_0;
 
   if(!isDefined(var_0.claimedwbtriggers))
@@ -701,7 +701,7 @@ assignwallbuymysterypurchasetoplayer(var_0) {
   while(common_scripts\utility::_id_562E(var_0.playerconnectedbuthasntstreamedweapons))
     waitframe();
 
-  wait(_func_0A3(0.5));
+  wait(_randomfloat(0.5));
   var_1 notify("modify_wallbuy_data", var_0);
 
   if(isDefined(var_1._id_6C1D))

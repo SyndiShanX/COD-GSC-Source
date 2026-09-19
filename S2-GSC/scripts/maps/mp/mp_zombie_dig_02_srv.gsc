@@ -88,13 +88,13 @@ dig_srv_round_end() {
 
 dig_srv_blood_founts() {
   _id_0547::_id_A78B();
-  var_0 = _func_18E("blood_fount_NE", "targetname");
+  var_0 = _getent("blood_fount_NE", "targetname");
   var_0.is_activated = 0;
-  var_1 = _func_18E("blood_fount_SE", "targetname");
+  var_1 = _getent("blood_fount_SE", "targetname");
   var_1.is_activated = 0;
-  var_2 = _func_18E("blood_fount_SW", "targetname");
+  var_2 = _getent("blood_fount_SW", "targetname");
   var_2.is_activated = 0;
-  var_3 = _func_18E("blood_fount_NW", "targetname");
+  var_3 = _getent("blood_fount_NW", "targetname");
   var_3.is_activated = 0;
   thread blood_fount_single_listen(var_0, 213);
   thread blood_fount_single_listen(var_1, 214);
@@ -103,7 +103,7 @@ dig_srv_blood_founts() {
 }
 
 blood_fount_single_listen(var_0, var_1) {
-  _func_147(level._effect["dlc_zmb_dig02_blood_statue_grit"], var_0, "TAG_ORIGIN");
+  _playfxontag(level._effect["dlc_zmb_dig02_blood_statue_grit"], var_0, "TAG_ORIGIN");
   _id_0378::_id_8D74("aud_turn_on_bloodfalls", var_0);
   level thread common_scripts\_exploder::_id_088E(var_1);
 }
@@ -112,13 +112,13 @@ dig_door_listener_arena() {
   common_scripts\utility::_id_3C9F("outer_to_arena");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "outer_to_arena" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "outer_to_arena" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
 
 dig_kill_z_listener() {
-  var_0 = _func_18E("dig_kill_z", "targetname");
+  var_0 = _getent("dig_kill_z", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -149,8 +149,8 @@ srv_rune_wall_init() {
         var_5 = _func_36D(var_3.model, "zmd_runes_objects_");
         var_6 = int(var_5) - 1;
         var_0.rune_models[var_6] = var_3;
-        var_0.rune_models[var_6] _meth_82C3(1);
-        var_0.rune_models[var_6] _meth_849F(1);
+        var_0.rune_models[var_6] setcandamage(1);
+        var_0.rune_models[var_6] setdamagecallbackon(1);
         var_0.rune_models[var_6].my_index = var_6;
         var_0.rune_models[var_6].my_base_model = var_3.model;
         var_0.rune_models[var_6].my_highlight_model = var_3.model + "a";
@@ -207,8 +207,8 @@ srv_rune_wall_reset() {
   foreach(var_2 in var_0.rune_models) {
     var_2._id_5594 = 0;
     var_2 setModel(var_2.my_base_model);
-    var_2 _meth_82C3(1);
-    var_2 _meth_849F(1);
+    var_2 setcandamage(1);
+    var_2 setdamagecallbackon(1);
     var_2.damagecallback = ::rune_damaged;
   }
 }
@@ -221,8 +221,8 @@ rune_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
       if(common_scripts\utility::_id_0F79(var_12.special_message, self.my_index) && !common_scripts\utility::_id_562E(self._id_5594)) {
         self setModel(self.my_highlight_model);
         self._id_5594 = 1;
-        self _meth_82C3(0);
-        self _meth_849F(0);
+        self setcandamage(0);
+        self setdamagecallbackon(0);
         self.damagecallback = undefined;
         level notify("correct_rune_hit", self.my_index);
       } else
@@ -260,12 +260,12 @@ srv_basalt_init() {
         break;
       case "basalt_reveal_elec":
         var_0.elec_model = var_3;
-        var_0.elec_model _meth_8511();
+        var_0.elec_model ghost();
         break;
     }
   }
 
-  var_6 = _func_18E("srv_pap_fuse_spawn_loc", "targetname");
+  var_6 = _getent("srv_pap_fuse_spawn_loc", "targetname");
 
   if(isDefined(var_6))
     var_0.elec_model = var_6;
@@ -294,7 +294,7 @@ srv_basalt_event() {
 srv_basalt_move_to_dest() {
   level thread common_scripts\_exploder::_id_088E(212);
   var_0 = self;
-  var_0 _meth_82B1(var_0.dest_pos.origin, 5, 1, 1);
+  var_0 moveto(var_0.dest_pos.origin, 5, 1, 1);
   wait 5;
 }
 
@@ -313,8 +313,8 @@ srv_kf_ee_init() {
     var_2.sign_model setModel("zmd_sign_objective_01");
     var_2.sign_model.angles = var_2.angles;
 
-    if(isDefined(var_2._id_8276))
-      var_2.sign_model.test_radius = var_2._id_8276;
+    if(isDefined(var_2.scriptmodelplayanim))
+      var_2.sign_model.test_radius = var_2.scriptmodelplayanim;
     else
       var_2.sign_model.test_radius = 16;
 
@@ -358,7 +358,7 @@ srv_flare_crate_init() {
       case "pickaxe_pickup_trig":
         var_0._id_6FC5 = var_3;
         var_0._id_6FC5 common_scripts\utility::_id_9D9F();
-        var_0._id_6FC5 _meth_80CE(&"ZOMBIE_DLC3_PICKUP_TABUN");
+        var_0._id_6FC5 sethintstring(&"ZOMBIE_DLC3_PICKUP_TABUN");
         break;
       case "flare_crate_model":
         var_0.flare_crate_model = var_3;
@@ -367,7 +367,7 @@ srv_flare_crate_init() {
           var_5 = common_scripts\utility::_id_44BE(var_3.target, "targetname");
 
           foreach(var_7 in var_5) {
-            var_7 _meth_8055(var_3);
+            var_7 linkto(var_3);
 
             if(isDefined(var_7._id_0165) && var_7._id_0165 == "tabun_model")
               var_0.flare_model = var_7;
@@ -414,7 +414,7 @@ srv_flare_crate_drop() {
     var_0.flare_crate_model _id_0378::_id_8D74("aud_flare_crate_drop");
 
   if(isDefined(var_0.flare_crate_model))
-    var_0.flare_crate_model _meth_8495("zom_berlin_flare_box_open", var_0.flare_crate_model.origin, var_0.flare_crate_model.angles);
+    var_0.flare_crate_model scriptmodelplayanimdeltamotionfrompos("zom_berlin_flare_box_open", var_0.flare_crate_model.origin, var_0.flare_crate_model.angles);
 
   var_0 thread srv_flare_crate_pickup_think();
 }
@@ -428,10 +428,10 @@ srv_flare_crate_pickup_think() {
     var_0._id_6FC5 waittill("trigger", var_1);
     var_1 maps\mp\zombies\weapons\_zombie_tabun_grenade::tabun_player_give_tabun();
     var_0._id_6FC5 _id_0378::_id_8D74("aud_pickup_flare");
-    var_0.flare_model _meth_805C();
+    var_0.flare_model hide();
     level waittill("zombie_wave_started");
     level waittill("zombie_wave_started");
-    var_0.flare_model _meth_805B();
+    var_0.flare_model show();
   }
 }
 
@@ -443,8 +443,8 @@ srv_dig_earthquake_trigger(var_0) {
     return;
   }
   level notify("dig_earthquake_begin");
-  var_1 = _func_0A5(3, 5);
-  var_2 = _func_0A5(4, 8);
+  var_1 = _randomfloatrange(3, 5);
+  var_2 = _randomfloatrange(4, 8);
   _id_0378::_id_8D74("aud_dig_earthquake", "rumble3", var_1, var_0);
   wait(var_1);
   _id_0378::_id_8D74("aud_dig_earthquake", "earthquake", var_2, var_0);
@@ -486,8 +486,8 @@ srv_dig_earthquake_do_on_player(var_0, var_1, var_2) {
     var_3 = var_3 * var_4;
   }
 
-  _func_17F(var_3, var_0, var_1.origin, 850, var_1);
-  _func_1BC("tank_rumble", var_1.origin);
+  _earthquake(var_3, var_0, var_1.origin, 850, var_1);
+  _playrumblelooponposition("tank_rumble", var_1.origin);
   wait(var_0);
-  _func_1BD();
+  _stopallrumbles();
 }

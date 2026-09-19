@@ -11,7 +11,7 @@ serumhadperk(var_0) {
 }
 
 serumcreateoverlay(var_0) {
-  var_1 = _func_19B(self);
+  var_1 = _newclienthudelem(self);
   var_1.x = 0;
   var_1.y = 0;
   var_1.sort = -5;
@@ -28,19 +28,19 @@ serumtimerupdate(var_0) {
   self endon("force_stop_serum");
   self endon("disconnect");
   self endon("death");
-  self _meth_82FF("serum_active_percent", 1);
-  self _meth_82FF("serum_active_streakIndex", self.lastusedkillstreakslotindex);
+  self setclientomnvar("serum_active_percent", 1);
+  self setclientomnvar("serum_active_streakIndex", self.lastusedkillstreakslotindex);
   self.currenttimervalue = var_0;
   self waittill("altered_state_start");
 
   while(self.currenttimervalue > 0) {
     self.currenttimervalue = self.currenttimervalue - 0.15;
-    self _meth_82FF("serum_active_percent", max(0, (self.currenttimervalue - 0.15) / var_0));
-    maps\mp\gametypes\_hostmigration::_id_A6F5(0.15);
+    self setclientomnvar("serum_active_percent", max(0, (self.currenttimervalue - 0.15) / var_0));
+    maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(0.15);
   }
 
-  self _meth_82FF("serum_active_percent", 0);
-  self _meth_82FF("serum_active_streakIndex", -1);
+  self setclientomnvar("serum_active_percent", 0);
+  self setclientomnvar("serum_active_streakIndex", -1);
   _id_051E::_id_A170();
   self notify("serum_finished");
 }
@@ -183,7 +183,7 @@ altered_state_create_client_overlay(var_0, var_1, var_2, var_3) {
     var_4 = var_3;
 
   if(isDefined(var_2))
-    var_5 = _func_19B(var_2);
+    var_5 = _newclienthudelem(var_2);
   else
     var_5 = newhudelem();
 
@@ -230,14 +230,14 @@ altered_state_start_fx(var_0) {
   }
 
   if(isDefined(var_1) && maps\mp\_utility::isreallyalive(var_1)) {
-    var_1.altered_state_fx = _func_2A9(common_scripts\utility::_id_44F5(var_2), var_1, "tag_origin", var_1);
+    var_1.altered_state_fx = _spawnlinkedfxforclient(common_scripts\utility::_id_44F5(var_2), var_1, "tag_origin", var_1);
     setfxkillondelete(var_1.altered_state_fx, 1);
-    _func_14C(var_1.altered_state_fx);
+    _triggerfx(var_1.altered_state_fx);
     var_1 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_1.altered_state_fx);
 
     if(0) {
-      var_1.altered_state_fx_3rd = _func_2A8(common_scripts\utility::_id_44F5(var_3), var_1, "tag_origin");
-      _func_14C(var_1.altered_state_fx_3rd);
+      var_1.altered_state_fx_3rd = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_3), var_1, "tag_origin");
+      _triggerfx(var_1.altered_state_fx_3rd);
       var_1 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_1.altered_state_fx_3rd);
     }
   }

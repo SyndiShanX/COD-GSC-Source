@@ -95,7 +95,7 @@ onplayerspawned() {
 }
 
 _id_63ED() {
-  var_0 = _func_19B(self);
+  var_0 = _newclienthudelem(self);
   var_0.x = 0;
   var_0.y = 0;
   var_0.alignx = "left";
@@ -175,7 +175,7 @@ _id_7CFE() {
 }
 
 _id_2E59(var_0, var_1, var_2) {
-  var_3 = _func_19B(var_0);
+  var_3 = _newclienthudelem(var_0);
 
   if(isDefined(var_2) && var_2)
     var_3.color = (0.1, 0.0015, 0.0015);
@@ -183,7 +183,7 @@ _id_2E59(var_0, var_1, var_2) {
     var_3.color = (1, 0.015, 0.015);
 
   var_3.alpha = 1.0;
-  var_3 _meth_83A9(var_1);
+  var_3 setradarhighlight(var_1);
   return var_3;
 }
 
@@ -211,7 +211,7 @@ _id_2E56(var_0, var_1, var_2, var_3) {
   var_4.color = (getdvarfloat("scr_paintexplosionred"), getdvarfloat("scr_paintexplosiongreen"), getdvarfloat("scr_paintexplosionblue"));
   var_4.alpha = getdvarfloat("scr_paintexplosionalpha");
   var_5 = getdvarint("paintexplosionwidth");
-  var_4 _meth_83A8(int(var_3 + var_5 / 2), int(var_5), var_2 + 0.05);
+  var_4 setradarping(int(var_3 + var_5 / 2), int(var_5), var_2 + 0.05);
   wait(var_2);
 
   if(isDefined(var_4))
@@ -222,7 +222,7 @@ _id_3902(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
 
   if(isDefined(var_3))
-    var_5 = _func_19B(var_3);
+    var_5 = _newclienthudelem(var_3);
   else
     var_5 = newhudelem();
 
@@ -237,7 +237,7 @@ _id_3902(var_0, var_1, var_2, var_3, var_4) {
 
   var_5.alpha = 0.05;
   var_6 = getdvarint("scr_exopingwidth", 100);
-  var_5 _meth_83A8(int(var_2), int(var_6), var_1 + 0.05);
+  var_5 setradarping(int(var_2), int(var_6), var_1 + 0.05);
   wait(var_1);
 
   if(isDefined(var_5))
@@ -334,30 +334,30 @@ _id_A573(var_0, var_1, var_2) {
 }
 
 _id_A576(var_0, var_1, var_2) {
-  var_0 _meth_8057();
+  var_0 unlink();
   var_0.origin = self gettagorigin(var_2);
-  var_0.angles = self _meth_8181(var_2);
-  var_0 _meth_8055(self, var_2);
+  var_0.angles = self gettagangles(var_2);
+  var_0 linkto(self, var_2);
   waitframe();
-  _func_147(var_0.fx, var_0, "tag_origin");
+  _playfxontag(var_0.fx, var_0, "tag_origin");
 }
 
 _id_A575(var_0, var_1, var_2) {
   var_3 = _id_46DD();
 
   if(var_3 == "attached_glow")
-    _func_148(var_0.fx, var_0, "tag_origin");
+    _stopfxontag(var_0.fx, var_0, "tag_origin");
 }
 
 _id_A57A(var_0, var_1, var_2) {
   var_3 = _id_46DD();
   var_0.origin = self gettagorigin(var_2);
-  var_0.angles = self _meth_8181(var_2);
+  var_0.angles = self gettagangles(var_2);
 
   if(var_3 == "glow")
-    _func_14C(var_0);
+    _triggerfx(var_0);
   else if(var_3 == "model") {
-    var_4 = "mp_hud_" + self _meth_8178() + "_char";
+    var_4 = "mp_hud_" + self getstance() + "_char";
     var_5 = var_0 != self._id_072E._id_6009;
 
     if(var_5)
@@ -370,7 +370,7 @@ _id_A57A(var_0, var_1, var_2) {
       return;
     }
   } else if(var_3 == "vfx_model") {
-    switch (self _meth_8178()) {
+    switch (self getstance()) {
       case "prone":
         var_4 = "threat_detect_model_prone";
         break;
@@ -397,23 +397,23 @@ _id_A57A(var_0, var_1, var_2) {
 
       if(var_5) {
         self._id_072E._id_6008 delete();
-        self._id_072E._id_6008 = _func_14B(common_scripts\utility::_id_44F5(var_4), self.origin, var_7, var_8);
-        self._id_072E._id_6008 _meth_805C();
+        self._id_072E._id_6008 = _spawnfx(common_scripts\utility::_id_44F5(var_4), self.origin, var_7, var_8);
+        self._id_072E._id_6008 hide();
         self._id_072E._id_4E01 = var_4;
       } else {
         self._id_072E._id_6009 delete();
-        self._id_072E._id_6009 = _func_14B(common_scripts\utility::_id_44F5(var_4), self.origin, var_7, var_8);
-        self._id_072E._id_6009 _meth_805C();
+        self._id_072E._id_6009 = _spawnfx(common_scripts\utility::_id_44F5(var_4), self.origin, var_7, var_8);
+        self._id_072E._id_6009 hide();
         self._id_072E._id_3EB9 = var_4;
       }
     }
 
     if(var_5) {
-      _func_14C(self._id_072E._id_6008);
+      _triggerfx(self._id_072E._id_6008);
       return;
     }
 
-    _func_14C(self._id_072E._id_6009);
+    _triggerfx(self._id_072E._id_6009);
     return;
   } else {
     if(var_3 == "attached_glow") {
@@ -485,7 +485,7 @@ _id_4512(var_0) {
 
 _id_A574(var_0, var_1, var_2) {
   foreach(var_4 in var_0)
-  var_4 _meth_805C();
+  var_4 hide();
 }
 
 _id_0850(var_0) {
@@ -544,21 +544,21 @@ _id_63EC() {
 
       if(var_10 == "glow") {
         foreach(var_13, var_12 in self._id_600A._id_3F3F) {
-          var_12._id_376D _meth_805C();
-          var_12._id_3EE0 _meth_805C();
-          var_12._id_376C _meth_805C();
-          var_12._id_3EDF _meth_805C();
+          var_12._id_376D hide();
+          var_12._id_3EE0 hide();
+          var_12._id_376C hide();
+          var_12._id_3EDF hide();
         }
       } else if(var_10 == "model") {
-        self._id_072E._id_6009 _meth_805C();
-        self._id_072E._id_6008 _meth_805C();
+        self._id_072E._id_6009 hide();
+        self._id_072E._id_6008 hide();
       } else if(var_10 == "vfx_model") {
-        self._id_072E._id_6009 _meth_805C();
-        self._id_072E._id_6008 _meth_805C();
+        self._id_072E._id_6009 hide();
+        self._id_072E._id_6008 hide();
       } else if(var_10 == "attached_glow") {
         foreach(var_13, var_5 in self._id_600A._id_3F3F) {
-          _func_148(var_5.fx, var_5, "tag_origin");
-          var_5 _meth_805C();
+          _stopfxontag(var_5.fx, var_5, "tag_origin");
+          var_5 hide();
         }
       } else {}
     }
@@ -593,11 +593,11 @@ _id_76A0(var_0, var_1, var_2) {
 }
 
 _id_A577(var_0, var_1, var_2) {
-  _func_147(var_0.fx, var_0, "tag_origin");
+  _playfxontag(var_0.fx, var_0, "tag_origin");
 }
 
 _id_217C(var_0) {
-  if(_func_07E(var_0.player getEye(), self getEye(), 0, var_0.player))
+  if(_bullettracepassed(var_0.player getEye(), self getEye(), 0, var_0.player))
     return 1;
 
   return 0;
@@ -611,19 +611,19 @@ _id_9976(var_0) {
     foreach(var_5, var_3 in level._id_072E._id_3F3D) {
       var_4 = spawnStruct();
       var_4.origin = self gettagorigin(var_3[0]);
-      var_4.angles = self _meth_8181(var_3[0]);
-      var_4._id_376D = _func_14B(var_3[1], var_4.origin);
-      _func_14C(var_4._id_376D);
-      var_4._id_376D _meth_805C();
-      var_4._id_376C = _func_14B(var_3[3], var_4.origin);
-      _func_14C(var_4._id_376C);
-      var_4._id_376C _meth_805C();
-      var_4._id_3EE0 = _func_14B(var_3[2], var_4.origin);
-      _func_14C(var_4._id_3EE0);
-      var_4._id_3EE0 _meth_805C();
-      var_4._id_3EDF = _func_14B(var_3[4], var_4.origin);
-      _func_14C(var_4._id_3EDF);
-      var_4._id_3EDF _meth_805C();
+      var_4.angles = self gettagangles(var_3[0]);
+      var_4._id_376D = _spawnfx(var_3[1], var_4.origin);
+      _triggerfx(var_4._id_376D);
+      var_4._id_376D hide();
+      var_4._id_376C = _spawnfx(var_3[3], var_4.origin);
+      _triggerfx(var_4._id_376C);
+      var_4._id_376C hide();
+      var_4._id_3EE0 = _spawnfx(var_3[2], var_4.origin);
+      _triggerfx(var_4._id_3EE0);
+      var_4._id_3EE0 hide();
+      var_4._id_3EDF = _spawnfx(var_3[4], var_4.origin);
+      _triggerfx(var_4._id_3EDF);
+      var_4._id_3EDF hide();
       var_1._id_3F3F[var_5] = var_4;
     }
 
@@ -643,18 +643,18 @@ _id_9976(var_0) {
     self._id_072E._id_6008 = var_6;
   } else if(var_0 == "vfx_model") {
     self._id_072E._id_6009 = spawnStruct();
-    self._id_072E._id_6009 = _func_14B(common_scripts\utility::_id_44F5("threat_detect_model_stand"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    self._id_072E._id_6009 = _spawnfx(common_scripts\utility::_id_44F5("threat_detect_model_stand"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     self._id_072E._id_3EB9 = "threat_detect_model_stand";
     self._id_072E._id_6008 = spawnStruct();
-    self._id_072E._id_6008 = _func_14B(common_scripts\utility::_id_44F5("threat_detect_model_stand_hostile"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    self._id_072E._id_6008 = _spawnfx(common_scripts\utility::_id_44F5("threat_detect_model_stand_hostile"), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     self._id_072E._id_4E01 = "threat_detect_model_stand_hostile";
   } else if(var_0 == "attached_glow") {
     foreach(var_5, var_3 in level._id_072E._id_3F3D) {
       var_8 = common_scripts\utility::_id_8FFC();
-      var_8 _meth_805B();
+      var_8 show();
       var_8.origin = self gettagorigin(var_3[0]);
-      var_8.angles = self _meth_8181(var_3[0]);
-      var_8 _meth_8055(self, var_3[0]);
+      var_8.angles = self gettagangles(var_3[0]);
+      var_8 linkto(self, var_3[0]);
       var_8.fx = var_3[1];
       var_1._id_3F3F[var_5] = var_8;
     }
@@ -674,7 +674,7 @@ _id_A579(var_0, var_1, var_2) {
 }
 
 _id_A578(var_0, var_1, var_2) {
-  var_0 _meth_8005(var_1);
+  var_0 showtoplayer(var_1);
 }
 
 _id_8C1D(var_0, var_1, var_2, var_3) {

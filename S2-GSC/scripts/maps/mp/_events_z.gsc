@@ -112,7 +112,7 @@ _id_0F4C() {
     if(common_scripts\utility::_id_562E(var_2.is_quest_door)) {
       continue;
     }
-    if(isDefined(var_2._id_819A) && issubstr(var_2._id_819A, "airship_")) {
+    if(isDefined(var_2.getnegotiationnextnode) && issubstr(var_2.getnegotiationnextnode, "airship_")) {
       continue;
     }
     var_0 = common_scripts\utility::_id_0F6F(var_0, var_2);
@@ -294,7 +294,7 @@ zombie_was_sacrificed(var_0, var_1, var_2, var_3) {
 }
 
 is_player_airborne(var_0, var_1, var_2, var_3) {
-  return !var_0 _meth_8346();
+  return !var_0 isonground();
 }
 
 get_number_unique_kills(var_0, var_1, var_2, var_3) {
@@ -899,16 +899,16 @@ contract_fail_on_player_leave_area(var_0, var_1) {
 contract_validate_weapon_used(var_0, var_1, var_2) {
   var_3 = self;
 
-  if(!_func_0C0(var_1))
+  if(!_isarray(var_1))
     var_1 = [var_1];
 
-  if(_func_0C0(var_0)) {
+  if(_isarray(var_0)) {
     var_4 = "normal_weapon_check";
     var_5 = var_0;
   } else {
     var_4 = var_0.condition;
 
-    if(_func_0C0(var_0._id_6E55))
+    if(_isarray(var_0._id_6E55))
       var_5 = var_0._id_6E55;
     else
       var_5 = [var_0._id_6E55];
@@ -1008,7 +1008,7 @@ contract_fail_on_player_move(var_0, var_1) {
 }
 
 contract_fail_on_not_crouched(var_0, var_1) {
-  var_2 = self _meth_8178();
+  var_2 = self getstance();
   return !_id_0547::_id_5565(var_2, "crouch");
 }
 

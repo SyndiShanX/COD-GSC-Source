@@ -251,7 +251,7 @@ zmb_metal_creak_1() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(12, 18);
+    var_0 = _randomintrange(12, 18);
     _id_0380::_id_2889("emt_zmb_descent_metal_stress", undefined, (994, 3014, 2244));
     wait(var_0);
   }
@@ -261,7 +261,7 @@ zmb_metal_creak_4() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(8, 19);
+    var_0 = _randomintrange(8, 19);
     _id_0380::_id_2889("emt_zmb_descent_metal_rattle_low", undefined, (958, 2654, 2244));
     wait(var_0);
   }
@@ -271,7 +271,7 @@ zmb_metal_creak_7() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(9, 20);
+    var_0 = _randomintrange(9, 20);
     _id_0380::_id_2889("emt_zmb_descent_metal_stress", undefined, (286, 3355, 2338));
     wait(var_0);
   }
@@ -281,7 +281,7 @@ zmb_metal_creak_12() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(12, 21);
+    var_0 = _randomintrange(12, 21);
     _id_0380::_id_2889("emt_zmb_descent_metal_rattle_low", undefined, (-486, 2730, 2249));
     wait(var_0);
   }
@@ -291,7 +291,7 @@ zmb_metal_creak_15() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(11, 20);
+    var_0 = _randomintrange(11, 20);
     _id_0380::_id_2889("emt_zmb_descent_metal_stress", undefined, (-317, 2155, 2290));
     wait(var_0);
   }
@@ -301,7 +301,7 @@ zmb_metal_stress_01() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(6, 18);
+    var_0 = _randomintrange(6, 18);
     _id_0380::_id_2889("emt_zmb_descent_metal_stress", undefined, (1260, -222, 1436));
     wait(var_0);
   }
@@ -311,7 +311,7 @@ zmb_chains_01() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(7, 15);
+    var_0 = _randomintrange(7, 15);
     _id_0380::_id_2889("emt_zmb_dsc_chains", undefined, (1082, -402, 1428));
     wait(var_0);
   }
@@ -321,7 +321,7 @@ zmb_chains_04() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(8, 18);
+    var_0 = _randomintrange(8, 18);
     _id_0380::_id_2889("emt_zmb_dsc_chains", undefined, (-1979, 779, 1478));
     wait(var_0);
   }
@@ -331,7 +331,7 @@ zmb_chains_08() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(12, 22);
+    var_0 = _randomintrange(12, 22);
     _id_0380::_id_2889("emt_zmb_dsc_chains", undefined, (791, 498, 1838));
     wait(var_0);
   }
@@ -341,7 +341,7 @@ zmb_chains_12() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(8, 93);
+    var_0 = _randomintrange(8, 93);
     _id_0380::_id_2889("emt_zmb_dsc_chains", undefined, (1093, 82, 1808));
     wait(var_0);
   }
@@ -351,7 +351,7 @@ zmb_chains_13() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(7, 13);
+    var_0 = _randomintrange(7, 13);
     _id_0380::_id_2889("emt_zmb_dsc_chains", undefined, (945, -303, 1757));
     wait(var_0);
   }
@@ -361,7 +361,7 @@ zmb_chains_16() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(12, 24);
+    var_0 = _randomintrange(12, 24);
     _id_0380::_id_2889("emt_zmb_dsc_chains", undefined, (-2853, 76, 1506));
     wait(var_0);
   }
@@ -371,7 +371,7 @@ zmb_chains_18() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(6, 24);
+    var_0 = _randomintrange(6, 24);
     _id_0380::_id_2889("emt_zmb_dsc_chains", undefined, (-3044, -630, 1506));
     wait(var_0);
   }
@@ -381,7 +381,7 @@ zmb_sparks_01() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(2, 5);
+    var_0 = _randomintrange(2, 5);
     _id_0380::_id_2889("emt_zmb_dsc_elec_sparks", undefined, (165, -5512, -1579));
     wait(var_0);
   }
@@ -391,7 +391,7 @@ zmb_sparks_04() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(2, 5);
+    var_0 = _randomintrange(2, 5);
     _id_0380::_id_2889("emt_zmb_dsc_elec_sparks", undefined, (-1175, -5642, -1652));
     wait(var_0);
   }
@@ -401,7 +401,7 @@ zmb_cave_drips_02() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(9, 21);
+    var_0 = _randomintrange(9, 21);
     _id_0380::_id_2889("zmb_dsc_cave_drips", undefined, (-857, 1007, 1824));
     wait(var_0);
   }
@@ -411,7 +411,7 @@ zmb_cave_drips_05() {
   level endon("death");
 
   for(;;) {
-    var_0 = _func_0A4(10, 19);
+    var_0 = _randomintrange(10, 19);
     _id_0380::_id_2889("zmb_dsc_cave_drips", undefined, (419, 841, 1722));
     wait(var_0);
   }
@@ -534,7 +534,7 @@ stormraven_warhammer_mvmt_one_shot_handler(var_0) {
   level endon("stormraven_hammer_tethered");
 
   for(;;) {
-    var_1 = _func_0A5(8.0, 15.0);
+    var_1 = _randomfloatrange(8.0, 15.0);
     wait(var_1);
     _id_0380::_id_288B("zmb_stormraven_warhammer_mvmt", undefined, var_0);
     waitframe();
@@ -661,7 +661,7 @@ aud_blood_plate_absorb(var_0) {
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
   _id_0380::_id_288B("zmb_dig_soul_suck_blood", undefined, var_2);
-  var_2 _meth_82B1(var_0.origin, 1.9);
+  var_2 moveto(var_0.origin, 1.9);
   wait 2.0;
   var_2 delete();
   _id_0380::_id_2889("zombie_soul_suck_threshold", undefined, var_1.origin);
@@ -691,7 +691,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 _meth_82B1(var_1, 1.9);
+  var_2 moveto(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -724,7 +724,7 @@ deathraven_firewall(var_0) {
 
 firewall_whoosh_oneshots(var_0) {
   while(var_0) {
-    var_1 = _func_0A4(4, 8);
+    var_1 = _randomintrange(4, 8);
     _id_0380::_id_288B("zmb_dsnt_fire_whoosh", undefined, self);
     wait(var_1);
   }
@@ -1070,17 +1070,17 @@ bloodraven_bloodcode_final(var_0, var_1) {
 }
 
 enter_trial() {
-  self _meth_8626("trials_teleport");
+  self clientaddsoundsubmix("trials_teleport");
   _id_0380::_id_288B("zmb_dsnt_trials_enter", self, self);
   wait 1.5;
-  self _meth_8627("trials_teleport");
+  self clientclearsoundsubmix("trials_teleport");
 }
 
 exit_trial() {
-  self _meth_8626("trials_teleport");
+  self clientaddsoundsubmix("trials_teleport");
   _id_0380::_id_288B("zmb_dsnt_trials_exit", self, self);
   wait 1.5;
-  self _meth_8627("trials_teleport");
+  self clientclearsoundsubmix("trials_teleport");
 }
 
 pap_rise_blood_lp_handler(var_0) {
@@ -1183,7 +1183,7 @@ citadel_entrance(var_0) {
 
 aud_gdk_intro() {
   foreach(var_1 in level.players)
-  var_1 _meth_8626("god_king_intro", 2.0);
+  var_1 clientaddsoundsubmix("god_king_intro", 2.0);
 
   _id_0366::_id_8E33(3);
   var_3 = _id_0380::_id_6840("zmb_mus_god_king_intro");
@@ -1206,7 +1206,7 @@ aud_gdk_intro() {
   }
 
   foreach(var_1 in level.players)
-  var_1 _meth_8627("god_king_intro");
+  var_1 clientclearsoundsubmix("god_king_intro");
 }
 
 gdk_intro_viv_vox() {
@@ -1223,7 +1223,7 @@ boss_music_start() {
   wait 1;
 
   foreach(var_1 in level.players)
-  var_1 _meth_8626("god_king_fight", 2.0);
+  var_1 clientaddsoundsubmix("god_king_fight", 2.0);
 
   if(!isDefined(level._id_11CB.boss_music_playing) && !isDefined(level._id_11CB.boss_is_dead)) {
     level._id_11CB.boss_music_playing = 1;
@@ -1248,11 +1248,11 @@ dlc_handle_boss_killed_music() {
 }
 
 dlc_play_boss_killed_stinger() {
-  self _meth_8626("bob_death_stinger", 0.2);
+  self clientaddsoundsubmix("bob_death_stinger", 0.2);
   _id_0380::_id_2888("mus_bob_death_stinger", self);
   wait 10;
-  self _meth_8627("bob_death_stinger", 4.0);
-  self _meth_8627("god_king_fight", 4.0);
+  self clientclearsoundsubmix("bob_death_stinger", 4.0);
+  self clientclearsoundsubmix("god_king_fight", 4.0);
 }
 
 archives_spike_trap(var_0) {
@@ -1271,7 +1271,7 @@ break_ice() {
 
 spawn_raven() {
   while(isDefined(self)) {
-    var_0 = _func_0A4(5, 10);
+    var_0 = _randomintrange(5, 10);
     level._id_11CB.crow_amb_caw = _id_0380::_id_288B("zmb_dsnt_raven_ee_caw", undefined, self);
     wait(var_0);
   }
@@ -1284,10 +1284,10 @@ raven_fly_away() {
 
 outro_vo_submix_start() {
   foreach(var_1 in level.players)
-  var_1 _meth_8626("outro_vo");
+  var_1 clientaddsoundsubmix("outro_vo");
 }
 
 outro_vo_submix_end() {
   foreach(var_1 in level.players)
-  var_1 _meth_8627("outro_vo");
+  var_1 clientclearsoundsubmix("outro_vo");
 }

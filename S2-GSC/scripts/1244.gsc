@@ -41,15 +41,15 @@ _id_2541(var_0) {
   maps\mp\gametypes\_missions::_id_7752("ch_daily_5");
   var_1 = self getplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "commends") + 1;
   self setplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "commends", var_1);
-  _id_04E0::_id_84DE(["hubFeatureStats", "hubSocialScore", "hubCommends"], var_1);
-  _id_04E0::_id_83DC("hubCommends", "hubSocialScore", 1, undefined, undefined);
+  _id_04E0::isusingoffhand(["hubFeatureStats", "hubSocialScore", "hubCommends"], var_1);
+  _id_04E0::pushplayervector("hubCommends", "hubSocialScore", 1, undefined, undefined);
   var_1 = var_0 getplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "commendations") + 1;
   var_0 setplayerdata(common_scripts\utility::_id_46AB(), "hubStats", "commendations", var_1);
-  var_0 _id_04E0::_id_84DE(["hubFeatureStats", "hubSocialScore", "hubCommendations"], var_1);
-  var_0 _id_04E0::_id_83DC("hubCommendations", "hubSocialScore", 1, undefined, undefined);
+  var_0 _id_04E0::isusingoffhand(["hubFeatureStats", "hubSocialScore", "hubCommendations"], var_1);
+  var_0 _id_04E0::pushplayervector("hubCommendations", "hubSocialScore", 1, undefined, undefined);
   self iprintln(&"HUB_YOU_COMMENDED_PLAYER", var_0.name);
   var_0 iprintln(&"HUB_WERE_COMMENDED_BY", self.name);
-  var_0 _meth_80F0("recognition");
+  var_0 giveachievement("recognition");
 }
 
 _id_4AE0(var_0) {
@@ -119,7 +119,7 @@ challengetotimertag(var_0) {
 
     if(!isDefined(var_1)) {
       var_1 = 0;
-      var_0 _meth_82FF("ui_hub_in_timer_tag", 0);
+      var_0 setclientomnvar("ui_hub_in_timer_tag", 0);
       self.tagchallenger = undefined;
       var_0.tagchallenger = undefined;
       self.isintimertag = 0;
@@ -150,7 +150,7 @@ challengetotimertag(var_0) {
       var_0.isintimertag = 1;
       self _meth_85B4();
       var_0 _meth_85B4();
-      var_4 = 50 + _func_0A4(5, 15);
+      var_4 = 50 + _randomintrange(5, 15);
       thread monitortimertagtimer(var_4, self, var_0);
       thread starttimertag(1);
       var_0 thread starttimertag(0);
@@ -177,7 +177,7 @@ proposetimertagchallenge(var_0) {
   _id_8A34(var_0, "TIMER_TAG_CHALLENGE", self);
   _id_8A34(self, "TAG_CHALLENGE_SENT", var_0);
   var_0 freezecontrols(0);
-  var_0 thread _id_04E0::_id_8636(10, "tagChallengeTimeLimit", ["death", "disconnect", "tagChoiceMade"]);
+  var_0 thread _id_04E0::disablefocus(10, "tagChallengeTimeLimit", ["death", "disconnect", "tagChoiceMade"]);
 
   for(;;) {
     var_0 waittill("luinotifyserver", var_1, var_2);
@@ -218,9 +218,9 @@ starttimertag(var_0) {
   self.canpassbomb = 0;
   _id_04E0::_id_870B(1);
   self.hastagbomb = common_scripts\utility::_id_98E7(var_0, 1, 0);
-  self _meth_82FF("ui_hub_in_timer_tag", self.hastagbomb + 1);
+  self setclientomnvar("ui_hub_in_timer_tag", self.hastagbomb + 1);
   self _meth_8656(self.tagchallenger);
-  self.tagchallenger _meth_8427(self, 0, 0);
+  self.tagchallenger hudoutlineenableforclient(self, 0, 0);
   _id_04E0::_id_7DF8(0, 0, 0, 0, 1);
 
   if(self.hastagbomb == 1)
@@ -239,31 +239,31 @@ starttimertag(var_0) {
     _id_04E0::_id_A04C();
     self.tagchallenger = undefined;
     self.isintimertag = 0;
-    self _meth_81E1(1);
-    self _meth_82FF("ui_hub_in_timer_tag", 0);
+    self setmovespeedscale(1);
+    self setclientomnvar("ui_hub_in_timer_tag", 0);
     self _meth_8656(undefined);
     _id_04E0::_id_870B(0);
     return;
   }
 
   _id_04E0::_id_A04C();
-  self _meth_82FF("ui_hub_enable_pause", 0);
+  self setclientomnvar("ui_hub_enable_pause", 0);
   self.canpassbomb = 1;
 
   if(self.hastagbomb == 1)
-    self _meth_81E1(1.1);
+    self setmovespeedscale(1.1);
 }
 
 attemptpasstagbomb(var_0) {
   if(self.hastagbomb == 1 && self.canpassbomb) {
     self.hastagbomb = 0;
-    self _meth_82FF("ui_hub_in_timer_tag", 1);
-    self _meth_81E1(1);
+    self setclientomnvar("ui_hub_in_timer_tag", 1);
+    self setmovespeedscale(1);
     _id_0378::_id_8D74("aud_timer_tag_take_bomb");
     deletetimertagbombmodel();
     var_0.hastagbomb = 1;
-    var_0 _meth_82FF("ui_hub_in_timer_tag", 2);
-    var_0 _meth_81E1(1.1);
+    var_0 setclientomnvar("ui_hub_in_timer_tag", 2);
+    var_0 setmovespeedscale(1.1);
     _id_0378::_id_8D74("aud_timer_tag_give_bomb");
     var_0 givetimertagbombmodel();
   }
@@ -296,7 +296,7 @@ completetimertag() {
     self iprintln(&"HUB_YOU_WON");
     _id_0468::_id_0A27("timerTagWin");
   } else {
-    _func_147(level._effect["hub_granadier_tag_effect"], self, "tag_origin");
+    _playfxontag(level._effect["hub_granadier_tag_effect"], self, "tag_origin");
     _id_0378::_id_8D74("aud_timer_tag_fireworks");
     _id_04E0::_id_721A("mp_emote_defeated_c");
     self iprintln(&"HUB_YOU_LOST");
@@ -312,12 +312,12 @@ completetimertag() {
     deletetimertagbombmodel();
 
   if(isDefined(self.tagchallenger))
-    self.tagchallenger _meth_8428(self);
+    self.tagchallenger hudoutlinedisableforclient(self);
 
   self.tagchallenger = undefined;
   self.isintimertag = 0;
-  self _meth_81E1(1);
-  self _meth_82FF("ui_hub_in_timer_tag", 0);
+  self setmovespeedscale(1);
+  self setclientomnvar("ui_hub_in_timer_tag", 0);
   self _meth_8656(undefined);
   _id_04E0::_id_870B(0);
 }
@@ -340,21 +340,21 @@ cleanupfailedtimertag(var_0) {
   self.isintimertag = 0;
 
   if(isDefined(self.tagchallenger)) {
-    self.tagchallenger _meth_8428(self);
+    self.tagchallenger hudoutlinedisableforclient(self);
 
     if(common_scripts\utility::_id_562E(self.tagchallenger.isintimertag))
       self.tagchallenger cleanupfailedtimertag();
   }
 
   self.tagchallenger = undefined;
-  self _meth_82FF("ui_hub_in_timer_tag", 0);
+  self setclientomnvar("ui_hub_in_timer_tag", 0);
   self _meth_85EF(&"timer_tag_result", 1, -1);
 
   if(self.hastagbomb || maps\mp\_utility::_hasperk("specialty_ballcarrier"))
     deletetimertagbombmodel();
 
   self.hastagbomb = -1;
-  self _meth_81E1(1);
+  self setmovespeedscale(1);
 
   if(var_0 == 0) {
     self _meth_8656(undefined);
@@ -395,16 +395,16 @@ _id_8A35(var_0, var_1, var_2) {
 
 givetimertagbombmodel() {
   maps\mp\_utility::giveperk("specialty_ballcarrier");
-  self _meth_8315();
+  self takeallweapons();
   maps\mp\_utility::_giveweapon("timer_tag_bomb_mp");
-  self _meth_831B("timer_tag_bomb_mp");
-  self _meth_8326();
-  self _meth_812B(0);
+  self switchtoweaponimmediate("timer_tag_bomb_mp");
+  self disableweaponswitch();
+  self allowfire(0);
 }
 
 deletetimertagbombmodel() {
   maps\mp\_utility::_id_0735("specialty_ballcarrier");
-  self _meth_8315();
+  self takeallweapons();
   maps\mp\_utility::_giveweapon("emote_weapon_mp");
-  self _meth_831B("emote_weapon_mp");
+  self switchtoweaponimmediate("emote_weapon_mp");
 }

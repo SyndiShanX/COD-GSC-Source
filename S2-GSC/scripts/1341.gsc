@@ -12,7 +12,7 @@ _id_51B0() {
   var_0 = getEntArray(self.target, "targetname");
   self._id_17E7 = [];
   self._id_9DC2 = [];
-  self._id_267B = self._id_8140;
+  self._id_267B = self.setanimknobrestart;
 
   foreach(var_2 in var_0) {
     waitframe();
@@ -35,14 +35,14 @@ _id_51B0() {
 
   self waittill("debris_purchased", var_7);
 
-  if(isDefined(self._id_819A))
-    common_scripts\utility::flag_set(self._id_819A, var_7);
+  if(isDefined(self.getnegotiationnextnode))
+    common_scripts\utility::flag_set(self.getnegotiationnextnode, var_7);
 
   foreach(var_9 in self._id_17E7) {
     if(var_9.classname != "script_model")
-      var_9 _meth_8060();
+      var_9 connectpaths();
 
-    var_9 _meth_82C2();
+    var_9 notsolid();
     var_9 delete();
   }
 
@@ -56,15 +56,15 @@ _id_11BA(var_0) {
   var_1 = 0;
   var_2 = undefined;
 
-  if(_id_0547::_id_5565(self._id_81A1, "requires_power")) {
+  if(_id_0547::_id_5565(self.setgoalnode, "requires_power")) {
     self._id_3276 = spawnStruct();
-    self._id_3276._id_81A1 = "power_sz2";
+    self._id_3276.setgoalnode = "power_sz2";
   }
 
   while(!var_1) {
     self waittill("trigger", var_2);
 
-    if(_id_0547::_id_5565(self._id_81A1, "requires_power") && !common_scripts\utility::_id_3C77("power_sz2")) {
+    if(_id_0547::_id_5565(self.setgoalnode, "requires_power") && !common_scripts\utility::_id_3C77("power_sz2")) {
       var_2 iprintlnbold("requires power!");
       continue;
     }

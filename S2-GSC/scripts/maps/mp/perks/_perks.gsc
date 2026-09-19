@@ -26,209 +26,209 @@ init() {
   }
 
   level._effect["ricochet"] = loadfx("vfx/test/test_fx");
-  level._id_8324 = [];
+  level.disableoffhandweapons = [];
   level._id_6F68 = [];
   level._id_6F6C = [];
-  level._id_8324["specialty_blastshield"] = 1;
-  level._id_8324["specialty_blastshield2"] = 1;
-  level._id_8324["specialty_akimbo"] = 1;
-  level._id_8324["specialty_falldamage"] = 1;
-  level._id_8324["specialty_shield"] = 1;
-  level._id_8324["specialty_feigndeath"] = 1;
-  level._id_8324["specialty_shellshock"] = 1;
-  level._id_8324["specialty_delaymine"] = 1;
-  level._id_8324["specialty_localjammer"] = 1;
-  level._id_8324["specialty_thermal"] = 1;
-  level._id_8324["specialty_blackbox"] = 1;
-  level._id_8324["specialty_steelnerves"] = 1;
-  level._id_8324["specialty_flashgrenade"] = 1;
-  level._id_8324["specialty_smokegrenade"] = 1;
-  level._id_8324["specialty_concussiongrenade"] = 1;
-  level._id_8324["specialty_saboteur"] = 1;
-  level._id_8324["specialty_endgame"] = 1;
-  level._id_8324["specialty_rearview"] = 1;
-  level._id_8324["specialty_onemanarmy"] = 1;
-  level._id_8324["specialty_primarydeath"] = 1;
-  level._id_8324["specialty_secondarybling"] = 1;
-  level._id_8324["specialty_explosivedamage"] = 1;
-  level._id_8324["specialty_laststandoffhand"] = 1;
-  level._id_8324["specialty_dangerclose"] = 1;
-  level._id_8324["specialty_hardjack"] = 1;
-  level._id_8324["specialty_extraspecialduration"] = 1;
-  level._id_8324["specialty_rollover"] = 1;
-  level._id_8324["specialty_armorpiercing"] = 1;
-  level._id_8324["specialty_omaquickchange"] = 1;
-  level._id_8324["_specialty_rearview"] = 1;
-  level._id_8324["_specialty_onemanarmy"] = 1;
-  level._id_8324["specialty_steadyaimpro"] = 1;
-  level._id_8324["specialty_stun_resistance"] = 1;
-  level._id_8324["specialty_double_load"] = 1;
-  level._id_8324["specialty_regenspeed"] = 1;
-  level._id_8324["specialty_twoprimaries"] = 1;
-  level._id_8324["specialty_overkill"] = 1;
-  level._id_8324["specialty_anytwo"] = 1;
-  level._id_8324["specialty_fasterlockon"] = 1;
-  level._id_8324["specialty_paint"] = 1;
-  level._id_8324["specialty_paint_pro"] = 1;
-  level._id_8324["specialty_silentkill"] = 1;
-  level._id_8324["specialty_crouchmovement"] = 1;
-  level._id_8324["specialty_personaluav"] = 1;
-  level._id_8324["specialty_unwrapper"] = 1;
-  level._id_8324["specialty_extraammo"] = 1;
-  level._id_8324["specialty_fireshield"] = 1;
-  level._id_8324["specialty_minimapwhileads"] = 1;
-  level._id_8324["specialty_radarpingonspawn"] = 1;
-  level._id_8324["specialty_perception"] = 1;
-  level._id_8324["specialty_shortfuse"] = 1;
-  level._id_8324["specialty_throwequipmentfarther"] = 1;
-  level._id_8324["specialty_cookinggrenadedeath"] = 1;
-  level._id_8324["specialty_increasedmeleedamage"] = 1;
-  level._id_8324["specialty_fightorflight"] = 1;
-  level._id_8324["specialty_reducedexplosivefallprotection"] = 1;
-  level._id_8324["specialty_gpsjammer"] = 1;
-  level._id_8324["specialty_deadeye"] = 1;
-  level._id_8324["specialty_boostafterkill"] = 1;
-  level._id_8324["specialty_sprintfasterovertime"] = 1;
-  level._id_8324["specialty_regenbullets"] = 1;
-  level._id_8324["specialty_regenequipment"] = 1;
-  level._id_8324["specialty_improvedtacticals"] = 1;
-  level._id_8324["specialty_explosivewareffectiveness"] = 1;
-  level._id_8324["specialty_intelkillsandassists"] = 1;
-  level._id_8324["specialty_trainingUnlocker1"] = 1;
-  level._id_8324["specialty_trainingUnlocker2"] = 1;
-  level._id_8324["specialty_trainingUnlocker3"] = 1;
-  level._id_8324["specialty_sessionProgressionA"] = 1;
-  level._id_8324["specialty_sessionProgressionB"] = 1;
-  level._id_8324["specialty_sessionProgressionC"] = 1;
-  level._id_8324["specialty_medic"] = 1;
-  level._id_8324["specialty_medkit"] = 1;
-  level._id_8324["specialty_teammatehealthregen"] = 1;
-  level._id_8324["specialty_extrascorewhilehealing"] = 1;
-  level._id_8324["specialty_extraobjectivescore"] = 1;
-  level._id_8324["specialty_tacticalinsertion"] = 1;
-  level._id_8324["specialty_multikillboost"] = 1;
-  level._id_8324["specialty_class_airborne_enlisted"] = 1;
-  level._id_8324["specialty_class_airborne_expert"] = 1;
-  level._id_8324["specialty_class_airborne_master"] = 1;
-  level._id_8324["specialty_class_airborne_grandmaster"] = 1;
-  level._id_8324["specialty_class_infantry_enlisted"] = 1;
-  level._id_8324["specialty_class_infantry_expert"] = 1;
-  level._id_8324["specialty_class_infantry_master"] = 1;
-  level._id_8324["specialty_class_infantry_grandmaster"] = 1;
-  level._id_8324["specialty_class_armored_enlisted"] = 1;
-  level._id_8324["specialty_class_armored_expert"] = 1;
-  level._id_8324["specialty_class_armored_master"] = 1;
-  level._id_8324["specialty_class_armored_grandmaster"] = 1;
-  level._id_8324["specialty_class_mountain_enlisted"] = 1;
-  level._id_8324["specialty_class_mountain_expert"] = 1;
-  level._id_8324["specialty_class_mountain_master"] = 1;
-  level._id_8324["specialty_class_mountain_grandmaster"] = 1;
-  level._id_8324["specialty_class_expeditionary_enlisted"] = 1;
-  level._id_8324["specialty_class_expeditionary_expert"] = 1;
-  level._id_8324["specialty_class_expeditionary_master"] = 1;
-  level._id_8324["specialty_class_expeditionary_grandmaster"] = 1;
-  level._id_8324["specialty_class_resistance_enlisted"] = 1;
-  level._id_8324["specialty_class_resistance_expert"] = 1;
-  level._id_8324["specialty_class_resistance_master"] = 1;
-  level._id_8324["specialty_class_resistance_grandmaster"] = 1;
-  level._id_8324["specialty_class_grenadier_enlisted"] = 1;
-  level._id_8324["specialty_class_grenadier_expert"] = 1;
-  level._id_8324["specialty_class_grenadier_master"] = 1;
-  level._id_8324["specialty_class_grenadier_grandmaster"] = 1;
-  level._id_8324["specialty_class_commando_enlisted"] = 1;
-  level._id_8324["specialty_class_commando_expert"] = 1;
-  level._id_8324["specialty_class_commando_master"] = 1;
-  level._id_8324["specialty_class_commando_grandmaster"] = 1;
-  level._id_8324["specialty_class_scout_enlisted"] = 1;
-  level._id_8324["specialty_class_scout_expert"] = 1;
-  level._id_8324["specialty_class_scout_master"] = 1;
-  level._id_8324["specialty_class_scout_grandmaster"] = 1;
-  level._id_8324["specialty_class_artillery_enlisted"] = 1;
-  level._id_8324["specialty_class_artillery_expert"] = 1;
-  level._id_8324["specialty_class_artillery_master"] = 1;
-  level._id_8324["specialty_class_artillery_grandmaster"] = 1;
-  level._id_8324["specialty_class_hustle"] = 1;
-  level._id_8324["specialty_class_gunslinger"] = 1;
-  level._id_8324["specialty_class_energetic"] = 1;
-  level._id_8324["specialty_class_inconspicuous"] = 1;
-  level._id_8324["specialty_class_scoped"] = 1;
-  level._id_8324["specialty_class_duelist"] = 1;
-  level._id_8324["specialty_class_rifleman"] = 1;
-  level._id_8324["specialty_class_primed"] = 1;
-  level._id_8324["specialty_class_forage"] = 1;
-  level._id_8324["specialty_class_ordnance"] = 1;
-  level._id_8324["specialty_class_requisitions"] = 1;
-  level._id_8324["specialty_class_serrated"] = 1;
-  level._id_8324["specialty_class_concussed"] = 1;
-  level._id_8324["specialty_class_hunker"] = 1;
-  level._id_8324["specialty_class_launched"] = 1;
-  level._id_8324["specialty_class_bang"] = 1;
-  level._id_8324["specialty_class_undercover"] = 1;
-  level._id_8324["specialty_class_lookout"] = 1;
-  level._id_8324["specialty_class_instincts"] = 1;
-  level._id_8324["specialty_class_flanker"] = 1;
-  level._id_8324["specialty_class_espionage"] = 1;
-  level._id_8324["specialty_class_frigid"] = 1;
-  level._id_8324["specialty_class_blizzard"] = 1;
-  level._id_8324["specialty_class_snowblind"] = 1;
-  level._id_8324["specialty_class_whiteout"] = 1;
-  level._id_8324["specialty_class_humbug"] = 1;
-  level._id_8324["specialty_class_thaw"] = 1;
-  level._id_8324["specialty_class_shifty"] = 1;
-  level._id_8324["specialty_class_saboteur"] = 1;
-  level._id_8324["specialty_class_blitzkrieg"] = 1;
-  level._id_8324["specialty_class_clandestine"] = 1;
-  level._id_8324["specialty_class_wanderlust"] = 1;
-  level._id_8324["specialty_class_escalation"] = 1;
-  level._id_8324["specialty_class_specialist"] = 1;
-  level._id_8324["specialty_class_remedy"] = 1;
-  level._id_8324["specialty_class_frenzy"] = 1;
-  level._id_8324["specialty_class_stopping_power"] = 1;
-  level._id_8324["specialty_class_juggernaut"] = 1;
-  level._id_8324["specialty_class_danger_close"] = 1;
-  level._id_8324["specialty_class_one_man_army"] = 1;
-  level._id_8324["specialty_class_commando_pro"] = 1;
-  level._id_8324["specialty_class_last_stand"] = 1;
-  level._id_8324["specialty_class_martyrdom"] = 1;
-  level._id_8324["specialty_streakshield"] = 1;
-  level._id_8324["specialty_streakdamager"] = 1;
-  level._id_8324["specialty_marksman"] = 1;
-  level._id_8324["specialty_sharp_focus"] = 1;
-  level._id_8324["specialty_moredamage"] = 1;
-  level._id_8324["specialty_copycat"] = 1;
-  level._id_8324["specialty_finalstand"] = 1;
-  level._id_8324["specialty_juiced"] = 1;
-  level._id_8324["specialty_light_armor"] = 1;
-  level._id_8324["specialty_carepackage"] = 1;
-  level._id_8324["specialty_stopping_power"] = 1;
-  level._id_8324["specialty_uav"] = 1;
-  level._id_8324["bouncingbetty_mp"] = 1;
-  level._id_8324["c4_mp"] = 1;
-  level._id_8324["claymore_mp"] = 1;
-  level._id_8324["frag_grenade_mp"] = 1;
-  level._id_8324["frag_grenade_german_mp"] = 1;
-  level._id_8324["semtex_mp"] = 1;
-  level._id_8324["throwingknife_mp"] = 1;
-  level._id_8324["explosive_gel_mp"] = 1;
-  level._id_8324["contact_grenade_mp"] = 1;
-  level._id_8324["concussion_grenade_mp"] = 1;
-  level._id_8324["flash_grenade_mp"] = 1;
-  level._id_8324["stun_grenade_mp"] = 1;
-  level._id_8324["smoke_grenade_mp"] = 1;
-  level._id_8324["smoke_grenade_axis_mp"] = 1;
-  level._id_8324["smoke_grenade_expeditionary_mp"] = 1;
-  level._id_8324["smoke_grenade_axis_expeditionary_mp"] = 1;
-  level._id_8324["portable_radar_mp"] = 1;
-  level._id_8324["trophy_mp"] = 1;
-  level._id_8324["s2_tactical_insertion_device_mp"] = 1;
-  level._id_8324["s2_tactical_insertion_cavalry_mp"] = 1;
-  level._id_8324["tabun_grenade_mp"] = 1;
-  level._id_8324["decoy_device_mp"] = 1;
-  level._id_8324["signal_flare_mp"] = 1;
-  level._id_8324["signal_flare_expeditionary_mp"] = 1;
-  level._id_8324["extra_health_mp"] = 1;
-  level._id_8324["specialty_null"] = 1;
-  level._id_6F68["specialty_blastshield"] = _id_052C::_id_8639;
+  level.disableoffhandweapons["specialty_blastshield"] = 1;
+  level.disableoffhandweapons["specialty_blastshield2"] = 1;
+  level.disableoffhandweapons["specialty_akimbo"] = 1;
+  level.disableoffhandweapons["specialty_falldamage"] = 1;
+  level.disableoffhandweapons["specialty_shield"] = 1;
+  level.disableoffhandweapons["specialty_feigndeath"] = 1;
+  level.disableoffhandweapons["specialty_shellshock"] = 1;
+  level.disableoffhandweapons["specialty_delaymine"] = 1;
+  level.disableoffhandweapons["specialty_localjammer"] = 1;
+  level.disableoffhandweapons["specialty_thermal"] = 1;
+  level.disableoffhandweapons["specialty_blackbox"] = 1;
+  level.disableoffhandweapons["specialty_steelnerves"] = 1;
+  level.disableoffhandweapons["specialty_flashgrenade"] = 1;
+  level.disableoffhandweapons["specialty_smokegrenade"] = 1;
+  level.disableoffhandweapons["specialty_concussiongrenade"] = 1;
+  level.disableoffhandweapons["specialty_saboteur"] = 1;
+  level.disableoffhandweapons["specialty_endgame"] = 1;
+  level.disableoffhandweapons["specialty_rearview"] = 1;
+  level.disableoffhandweapons["specialty_onemanarmy"] = 1;
+  level.disableoffhandweapons["specialty_primarydeath"] = 1;
+  level.disableoffhandweapons["specialty_secondarybling"] = 1;
+  level.disableoffhandweapons["specialty_explosivedamage"] = 1;
+  level.disableoffhandweapons["specialty_laststandoffhand"] = 1;
+  level.disableoffhandweapons["specialty_dangerclose"] = 1;
+  level.disableoffhandweapons["specialty_hardjack"] = 1;
+  level.disableoffhandweapons["specialty_extraspecialduration"] = 1;
+  level.disableoffhandweapons["specialty_rollover"] = 1;
+  level.disableoffhandweapons["specialty_armorpiercing"] = 1;
+  level.disableoffhandweapons["specialty_omaquickchange"] = 1;
+  level.disableoffhandweapons["_specialty_rearview"] = 1;
+  level.disableoffhandweapons["_specialty_onemanarmy"] = 1;
+  level.disableoffhandweapons["specialty_steadyaimpro"] = 1;
+  level.disableoffhandweapons["specialty_stun_resistance"] = 1;
+  level.disableoffhandweapons["specialty_double_load"] = 1;
+  level.disableoffhandweapons["specialty_regenspeed"] = 1;
+  level.disableoffhandweapons["specialty_twoprimaries"] = 1;
+  level.disableoffhandweapons["specialty_overkill"] = 1;
+  level.disableoffhandweapons["specialty_anytwo"] = 1;
+  level.disableoffhandweapons["specialty_fasterlockon"] = 1;
+  level.disableoffhandweapons["specialty_paint"] = 1;
+  level.disableoffhandweapons["specialty_paint_pro"] = 1;
+  level.disableoffhandweapons["specialty_silentkill"] = 1;
+  level.disableoffhandweapons["specialty_crouchmovement"] = 1;
+  level.disableoffhandweapons["specialty_personaluav"] = 1;
+  level.disableoffhandweapons["specialty_unwrapper"] = 1;
+  level.disableoffhandweapons["specialty_extraammo"] = 1;
+  level.disableoffhandweapons["specialty_fireshield"] = 1;
+  level.disableoffhandweapons["specialty_minimapwhileads"] = 1;
+  level.disableoffhandweapons["specialty_radarpingonspawn"] = 1;
+  level.disableoffhandweapons["specialty_perception"] = 1;
+  level.disableoffhandweapons["specialty_shortfuse"] = 1;
+  level.disableoffhandweapons["specialty_throwequipmentfarther"] = 1;
+  level.disableoffhandweapons["specialty_cookinggrenadedeath"] = 1;
+  level.disableoffhandweapons["specialty_increasedmeleedamage"] = 1;
+  level.disableoffhandweapons["specialty_fightorflight"] = 1;
+  level.disableoffhandweapons["specialty_reducedexplosivefallprotection"] = 1;
+  level.disableoffhandweapons["specialty_gpsjammer"] = 1;
+  level.disableoffhandweapons["specialty_deadeye"] = 1;
+  level.disableoffhandweapons["specialty_boostafterkill"] = 1;
+  level.disableoffhandweapons["specialty_sprintfasterovertime"] = 1;
+  level.disableoffhandweapons["specialty_regenbullets"] = 1;
+  level.disableoffhandweapons["specialty_regenequipment"] = 1;
+  level.disableoffhandweapons["specialty_improvedtacticals"] = 1;
+  level.disableoffhandweapons["specialty_explosivewareffectiveness"] = 1;
+  level.disableoffhandweapons["specialty_intelkillsandassists"] = 1;
+  level.disableoffhandweapons["specialty_trainingUnlocker1"] = 1;
+  level.disableoffhandweapons["specialty_trainingUnlocker2"] = 1;
+  level.disableoffhandweapons["specialty_trainingUnlocker3"] = 1;
+  level.disableoffhandweapons["specialty_sessionProgressionA"] = 1;
+  level.disableoffhandweapons["specialty_sessionProgressionB"] = 1;
+  level.disableoffhandweapons["specialty_sessionProgressionC"] = 1;
+  level.disableoffhandweapons["specialty_medic"] = 1;
+  level.disableoffhandweapons["specialty_medkit"] = 1;
+  level.disableoffhandweapons["specialty_teammatehealthregen"] = 1;
+  level.disableoffhandweapons["specialty_extrascorewhilehealing"] = 1;
+  level.disableoffhandweapons["specialty_extraobjectivescore"] = 1;
+  level.disableoffhandweapons["specialty_tacticalinsertion"] = 1;
+  level.disableoffhandweapons["specialty_multikillboost"] = 1;
+  level.disableoffhandweapons["specialty_class_airborne_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_airborne_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_airborne_master"] = 1;
+  level.disableoffhandweapons["specialty_class_airborne_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_infantry_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_infantry_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_infantry_master"] = 1;
+  level.disableoffhandweapons["specialty_class_infantry_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_armored_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_armored_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_armored_master"] = 1;
+  level.disableoffhandweapons["specialty_class_armored_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_mountain_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_mountain_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_mountain_master"] = 1;
+  level.disableoffhandweapons["specialty_class_mountain_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_expeditionary_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_expeditionary_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_expeditionary_master"] = 1;
+  level.disableoffhandweapons["specialty_class_expeditionary_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_resistance_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_resistance_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_resistance_master"] = 1;
+  level.disableoffhandweapons["specialty_class_resistance_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_grenadier_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_grenadier_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_grenadier_master"] = 1;
+  level.disableoffhandweapons["specialty_class_grenadier_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_commando_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_commando_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_commando_master"] = 1;
+  level.disableoffhandweapons["specialty_class_commando_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_scout_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_scout_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_scout_master"] = 1;
+  level.disableoffhandweapons["specialty_class_scout_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_artillery_enlisted"] = 1;
+  level.disableoffhandweapons["specialty_class_artillery_expert"] = 1;
+  level.disableoffhandweapons["specialty_class_artillery_master"] = 1;
+  level.disableoffhandweapons["specialty_class_artillery_grandmaster"] = 1;
+  level.disableoffhandweapons["specialty_class_hustle"] = 1;
+  level.disableoffhandweapons["specialty_class_gunslinger"] = 1;
+  level.disableoffhandweapons["specialty_class_energetic"] = 1;
+  level.disableoffhandweapons["specialty_class_inconspicuous"] = 1;
+  level.disableoffhandweapons["specialty_class_scoped"] = 1;
+  level.disableoffhandweapons["specialty_class_duelist"] = 1;
+  level.disableoffhandweapons["specialty_class_rifleman"] = 1;
+  level.disableoffhandweapons["specialty_class_primed"] = 1;
+  level.disableoffhandweapons["specialty_class_forage"] = 1;
+  level.disableoffhandweapons["specialty_class_ordnance"] = 1;
+  level.disableoffhandweapons["specialty_class_requisitions"] = 1;
+  level.disableoffhandweapons["specialty_class_serrated"] = 1;
+  level.disableoffhandweapons["specialty_class_concussed"] = 1;
+  level.disableoffhandweapons["specialty_class_hunker"] = 1;
+  level.disableoffhandweapons["specialty_class_launched"] = 1;
+  level.disableoffhandweapons["specialty_class_bang"] = 1;
+  level.disableoffhandweapons["specialty_class_undercover"] = 1;
+  level.disableoffhandweapons["specialty_class_lookout"] = 1;
+  level.disableoffhandweapons["specialty_class_instincts"] = 1;
+  level.disableoffhandweapons["specialty_class_flanker"] = 1;
+  level.disableoffhandweapons["specialty_class_espionage"] = 1;
+  level.disableoffhandweapons["specialty_class_frigid"] = 1;
+  level.disableoffhandweapons["specialty_class_blizzard"] = 1;
+  level.disableoffhandweapons["specialty_class_snowblind"] = 1;
+  level.disableoffhandweapons["specialty_class_whiteout"] = 1;
+  level.disableoffhandweapons["specialty_class_humbug"] = 1;
+  level.disableoffhandweapons["specialty_class_thaw"] = 1;
+  level.disableoffhandweapons["specialty_class_shifty"] = 1;
+  level.disableoffhandweapons["specialty_class_saboteur"] = 1;
+  level.disableoffhandweapons["specialty_class_blitzkrieg"] = 1;
+  level.disableoffhandweapons["specialty_class_clandestine"] = 1;
+  level.disableoffhandweapons["specialty_class_wanderlust"] = 1;
+  level.disableoffhandweapons["specialty_class_escalation"] = 1;
+  level.disableoffhandweapons["specialty_class_specialist"] = 1;
+  level.disableoffhandweapons["specialty_class_remedy"] = 1;
+  level.disableoffhandweapons["specialty_class_frenzy"] = 1;
+  level.disableoffhandweapons["specialty_class_stopping_power"] = 1;
+  level.disableoffhandweapons["specialty_class_juggernaut"] = 1;
+  level.disableoffhandweapons["specialty_class_danger_close"] = 1;
+  level.disableoffhandweapons["specialty_class_one_man_army"] = 1;
+  level.disableoffhandweapons["specialty_class_commando_pro"] = 1;
+  level.disableoffhandweapons["specialty_class_last_stand"] = 1;
+  level.disableoffhandweapons["specialty_class_martyrdom"] = 1;
+  level.disableoffhandweapons["specialty_streakshield"] = 1;
+  level.disableoffhandweapons["specialty_streakdamager"] = 1;
+  level.disableoffhandweapons["specialty_marksman"] = 1;
+  level.disableoffhandweapons["specialty_sharp_focus"] = 1;
+  level.disableoffhandweapons["specialty_moredamage"] = 1;
+  level.disableoffhandweapons["specialty_copycat"] = 1;
+  level.disableoffhandweapons["specialty_finalstand"] = 1;
+  level.disableoffhandweapons["specialty_juiced"] = 1;
+  level.disableoffhandweapons["specialty_light_armor"] = 1;
+  level.disableoffhandweapons["specialty_carepackage"] = 1;
+  level.disableoffhandweapons["specialty_stopping_power"] = 1;
+  level.disableoffhandweapons["specialty_uav"] = 1;
+  level.disableoffhandweapons["bouncingbetty_mp"] = 1;
+  level.disableoffhandweapons["c4_mp"] = 1;
+  level.disableoffhandweapons["claymore_mp"] = 1;
+  level.disableoffhandweapons["frag_grenade_mp"] = 1;
+  level.disableoffhandweapons["frag_grenade_german_mp"] = 1;
+  level.disableoffhandweapons["semtex_mp"] = 1;
+  level.disableoffhandweapons["throwingknife_mp"] = 1;
+  level.disableoffhandweapons["explosive_gel_mp"] = 1;
+  level.disableoffhandweapons["contact_grenade_mp"] = 1;
+  level.disableoffhandweapons["concussion_grenade_mp"] = 1;
+  level.disableoffhandweapons["flash_grenade_mp"] = 1;
+  level.disableoffhandweapons["stun_grenade_mp"] = 1;
+  level.disableoffhandweapons["smoke_grenade_mp"] = 1;
+  level.disableoffhandweapons["smoke_grenade_axis_mp"] = 1;
+  level.disableoffhandweapons["smoke_grenade_expeditionary_mp"] = 1;
+  level.disableoffhandweapons["smoke_grenade_axis_expeditionary_mp"] = 1;
+  level.disableoffhandweapons["portable_radar_mp"] = 1;
+  level.disableoffhandweapons["trophy_mp"] = 1;
+  level.disableoffhandweapons["s2_tactical_insertion_device_mp"] = 1;
+  level.disableoffhandweapons["s2_tactical_insertion_cavalry_mp"] = 1;
+  level.disableoffhandweapons["tabun_grenade_mp"] = 1;
+  level.disableoffhandweapons["decoy_device_mp"] = 1;
+  level.disableoffhandweapons["signal_flare_mp"] = 1;
+  level.disableoffhandweapons["signal_flare_expeditionary_mp"] = 1;
+  level.disableoffhandweapons["extra_health_mp"] = 1;
+  level.disableoffhandweapons["specialty_null"] = 1;
+  level._id_6F68["specialty_blastshield"] = _id_052C::eqon;
   level._id_6F6C["specialty_blastshield"] = _id_052C::_id_A053;
   level._id_6F68["specialty_falldamage"] = _id_052C::_id_8689;
   level._id_6F6C["specialty_falldamage"] = _id_052C::_id_A065;
@@ -236,7 +236,7 @@ init() {
   level._id_6F6C["specialty_localjammer"] = _id_052C::_id_A06F;
   level._id_6F68["specialty_thermal"] = _id_052C::_id_8741;
   level._id_6F6C["specialty_thermal"] = _id_052C::_id_A083;
-  level._id_6F68["specialty_blackbox"] = _id_052C::_id_8638;
+  level._id_6F68["specialty_blackbox"] = _id_052C::disableaudiozoom;
   level._id_6F6C["specialty_blackbox"] = _id_052C::_id_A052;
   level._id_6F68["specialty_steelnerves"] = _id_052C::_id_8734;
   level._id_6F6C["specialty_steelnerves"] = _id_052C::_id_A080;
@@ -506,7 +506,7 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_deadeye"))
       var_1 _id_052C::setdeadeyeinternal();
 
-    if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_paint_pro") && !maps\mp\_utility::iskillstreakweapon(var_4) && (isPlayer(var_0) || _func_1EF(var_0))) {
+    if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_paint_pro") && !maps\mp\_utility::iskillstreakweapon(var_4) && (isPlayer(var_0) || _isagent(var_0))) {
       if(!var_0 _id_052C::_id_576D())
         var_1 maps\mp\gametypes\_missions::processchallenge("ch_bulletpaint");
 
@@ -531,14 +531,14 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_9 = var_9 + var_2 * level._id_1D7C;
     else if(var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
       var_9 = var_9 - var_2 * level._id_0F6A;
-  } else if(_func_17B(var_3) || var_3 == "MOD_GAS") {
+  } else if(_isexplosivedamagemod(var_3) || var_3 == "MOD_GAS") {
     if(!isDefined(var_1))
       return var_2;
 
     if(isPlayer(var_1) && var_1 != var_0 && var_1 maps\mp\_utility::_hasperk("specialty_paint") && (!maps\mp\_utility::iskillstreakweapon(var_4) || issubstr(var_4, "killstreak_molotov_cocktail")))
       var_0 thread _id_052C::_id_86ED(var_1, 0);
 
-    if(maps\mp\_utility::getweaponclass(var_4) == "weapon_projectile" && weaponclass(var_4) == "rocketlauncher" && isPlayer(var_1) && _func_1A7(var_4) && var_1 maps\mp\_utility::_hasperk("specialty_class_launched"))
+    if(maps\mp\_utility::getweaponclass(var_4) == "weapon_projectile" && weaponclass(var_4) == "rocketlauncher" && isPlayer(var_1) && _weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasperk("specialty_class_launched"))
       var_2 = var_2 * level.launchedrocketlauncherdamagemod;
 
     if(_id_0513::_id_57F6(var_4) && var_0 maps\mp\_utility::_hasperk("specialty_stun_resistance")) {
@@ -547,13 +547,13 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     } else if(isPlayer(var_0) && isDefined(var_0._id_4B64) && var_0._id_4B64) {
       var_9 = var_9 - (var_2 - 1);
       thread _id_0530::_id_0F31(var_2);
-    } else if(isPlayer(var_1) && _func_1A7(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("specialty_blastshield2") && var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")))
+    } else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("specialty_blastshield2") && var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")))
       var_9 = var_9 + var_2 * level.clumsydamagemod;
-    else if(isPlayer(var_1) && _func_1A7(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("specialty_blastshield2")))
+    else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("specialty_blastshield2")))
       var_9 = var_9 + 0;
-    else if(isPlayer(var_1) && _func_1A7(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")))
+    else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")))
       var_9 = var_9 + (var_2 * level._id_395D + var_2 * level.clumsydamagemod);
-    else if(isPlayer(var_1) && _func_1A7(var_4) && var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage"))
+    else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage"))
       var_9 = var_9 + var_2 * level._id_395D;
     else if(var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection"))
       var_9 = var_9 + var_2 * level.clumsydamagemod;
@@ -591,7 +591,7 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_2 = var_2 * var_0._id_90D8;
   }
 
-  var_11 = _func_05F(var_4);
+  var_11 = _getweaponbasename(var_4);
 
   if(isDefined(var_0._id_5D2E) && isDefined(var_11)) {
     switch (var_11) {
@@ -615,7 +615,7 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
           var_9 = 0;
 
           if(var_0._id_5D2E <= 0) {
-            var_2 = _func_0AE(var_0._id_5D2E);
+            var_2 = _abs(var_0._id_5D2E);
             var_9 = 0;
             _id_052C::_id_A06E();
           }
@@ -892,7 +892,7 @@ _id_0F36() {
     if(maps\mp\_utility::_hasperk("specialty_class_snowblind")) {
       maps\mp\_utility::giveperk("specialty_bulletaccuracy");
       maps\mp\_utility::giveperk("specialty_steadyaimpro");
-      self _meth_8304(0);
+      self allowads(0);
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_whiteout")) {

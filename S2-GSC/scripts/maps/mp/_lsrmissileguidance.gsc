@@ -30,13 +30,13 @@ _id_5F38(var_0) {
   var_0 endon("faux_spawn");
 
   for(;;) {
-    if(var_0 _meth_8345() > 0.3) {
+    if(var_0 playerads() > 0.3) {
       var_1 = anglesToForward(var_0 getplayerangles());
       var_2 = var_0 getEye();
       var_3 = var_2 + var_1 * 15000;
       var_4 = bulletTrace(var_2, var_3, 1, var_0, 1, 0, 0, 0, 0);
       var_0._id_5F39.origin = var_4["position"];
-      self _meth_81D9(var_0._id_5F39);
+      self missile_settargetent(var_0._id_5F39);
     }
 
     waitframe();

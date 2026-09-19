@@ -58,7 +58,7 @@ treasurer_tesla_delayed_dmg(var_0, var_1, var_2) {
 }
 
 _id_1138() {
-  var_0 = self _meth_8445("TAG_FX");
+  var_0 = self gettagindex("TAG_FX");
 
   if(var_0 == -1) {}
 
@@ -71,7 +71,7 @@ _id_1139() {
   waitframe();
   waitframe();
   waitframe();
-  _func_147(level._effect["zmb_treasure_icon"], self, "TAG_FX");
+  _playfxontag(level._effect["zmb_treasure_icon"], self, "TAG_FX");
 }
 
 _id_9D38() {
@@ -331,7 +331,7 @@ _id_9D20() {
     }
 
     var_7 = common_scripts\utility::_id_6880(var_2);
-    var_1 = var_0 - var_7 + _func_0A5(20, 90.0);
+    var_1 = var_0 - var_7 + _randomfloatrange(20, 90.0);
   }
 
   for(;;) {
@@ -411,7 +411,7 @@ _id_3479(var_0, var_1) {
   foreach(var_4 in var_0)
   var_2 = var_2 + var_4._id_3489;
 
-  var_2 = _func_0A3(var_2);
+  var_2 = _randomfloat(var_2);
   var_6 = undefined;
 
   foreach(var_4 in var_0) {
@@ -589,7 +589,7 @@ _id_3450() {
 
 _id_3452() {
   _id_3453("mysterybox_coupon");
-  _id_0548::_id_861C();
+  _id_0548::playsoundasmaster();
 }
 
 _id_431A(var_0) {

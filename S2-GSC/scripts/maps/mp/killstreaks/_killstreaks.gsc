@@ -66,7 +66,7 @@ onplayerspawned() {
           }
           var_3 = maps\mp\_utility::_id_453F(self.pers["killstreaks"][var_0]._id_944C);
           var_4 = "ks_icon" + common_scripts\utility::_id_9AAD(var_0);
-          self _meth_82FF(var_4, var_3);
+          self setclientomnvar(var_4, var_3);
         }
       }
 
@@ -85,10 +85,10 @@ _id_A16F(var_0) {
       continue;
     }
     var_2 = "ks_icon" + common_scripts\utility::_id_9AAD(var_1);
-    self _meth_82FF(var_2, 0);
-    var_3 = self _meth_844A("ks_hasStreak");
+    self setclientomnvar(var_2, 0);
+    var_3 = self getclientomnvar("ks_hasStreak");
     var_4 = var_3 &~(1 << var_1) &~(1 << var_1 + 5);
-    self _meth_82FF("ks_hasStreak", var_4);
+    self setclientomnvar("ks_hasStreak", var_4);
   }
 
   var_5 = 1;
@@ -99,8 +99,8 @@ _id_A16F(var_0) {
       var_8._id_944C = var_7;
       var_9 = var_8._id_944C;
       var_2 = "ks_icon" + common_scripts\utility::_id_9AAD(var_5);
-      self _meth_82FF(var_2, maps\mp\_utility::_id_453F(var_9));
-      var_3 = self _meth_844A("ks_hasStreak");
+      self setclientomnvar(var_2, maps\mp\_utility::_id_453F(var_9));
+      var_3 = self getclientomnvar("ks_hasStreak");
       var_4 = var_3 &~(1 << var_5);
 
       if(_id_57F0(self, var_7))
@@ -108,7 +108,7 @@ _id_A16F(var_0) {
       else
         var_4 = var_4 &~(1 << var_5 + 5);
 
-      self _meth_82FF("ks_hasStreak", var_4);
+      self setclientomnvar("ks_hasStreak", var_4);
       var_5++;
     }
   }
@@ -141,10 +141,10 @@ _id_5333() {
   }
 
   _id_A16F(1);
-  self _meth_82FF("ks_selectedIndex", -1);
-  var_3 = self _meth_844A("ks_hasStreak");
+  self setclientomnvar("ks_selectedIndex", -1);
+  var_3 = self getclientomnvar("ks_hasStreak");
   var_4 = var_3 &~32;
-  self _meth_82FF("ks_hasStreak", var_4);
+  self setclientomnvar("ks_hasStreak", var_4);
 }
 
 _id_57F0(var_0, var_1) {
@@ -154,9 +154,9 @@ _id_57F0(var_0, var_1) {
 _id_A16E() {
   if(!isDefined(self.pers["killstreaks"])) {
     for(var_0 = 1; var_0 < 5; var_0++)
-      self _meth_82FF("ks_count" + common_scripts\utility::_id_9AAD(var_0), 0);
+      self setclientomnvar("ks_count" + common_scripts\utility::_id_9AAD(var_0), 0);
 
-    self _meth_82FF("ks_count_updated", 1);
+    self setclientomnvar("ks_count_updated", 1);
     return;
   }
 
@@ -169,13 +169,13 @@ _id_A16E() {
     var_3 = "ks_points" + common_scripts\utility::_id_9AAD(var_0);
 
     if(!isDefined(var_1)) {
-      self _meth_82FF(var_2, 0);
+      self setclientomnvar(var_2, 0);
       continue;
     }
 
     if(isDefined(self.pers["supportStreaksEarned"]) && isDefined(self.pers["supportStreaksEarned"][var_1]) && self.pers["supportStreaksEarned"][var_1]) {
-      self _meth_82FF(var_3, 0);
-      self _meth_82FF(var_2, -1);
+      self setclientomnvar(var_3, 0);
+      self setclientomnvar(var_2, -1);
       continue;
     }
 
@@ -206,11 +206,11 @@ _id_A16E() {
       var_6 = var_4;
     }
 
-    self _meth_82FF(var_3, var_6);
-    self _meth_82FF(var_2, var_5);
+    self setclientomnvar(var_3, var_6);
+    self setclientomnvar(var_2, var_5);
   }
 
-  self _meth_82FF("ks_count_updated", 1);
+  self setclientomnvar("ks_count_updated", 1);
 }
 
 _id_457A(var_0) {
@@ -243,14 +243,14 @@ _id_A170() {
 
   for(var_2 = 0; var_2 < 5; var_2++) {
     if(isDefined(var_0[var_2]) && isDefined(var_0[var_2]._id_944C)) {
-      var_3 = self _meth_844A("ks_hasStreak");
+      var_3 = self getclientomnvar("ks_hasStreak");
 
       if(var_0[var_2]._id_13AF == 1)
         var_4 = var_3 | 1 << var_2;
       else
         var_4 = var_3 &~(1 << var_2);
 
-      self _meth_82FF("ks_hasStreak", var_4);
+      self setclientomnvar("ks_hasStreak", var_4);
 
       if(var_0[var_2]._id_13AF == 1)
         var_1++;
@@ -258,18 +258,18 @@ _id_A170() {
       continue;
     }
 
-    var_3 = self _meth_844A("ks_hasStreak");
+    var_3 = self getclientomnvar("ks_hasStreak");
     var_4 = var_3 &~(1 << var_2);
-    self _meth_82FF("ks_hasStreak", var_4);
+    self setclientomnvar("ks_hasStreak", var_4);
   }
 
   if(var_1 == 0)
-    self _meth_82FF("ks_hasStreak", 0);
+    self setclientomnvar("ks_hasStreak", 0);
 
   if(isDefined(self._id_5A69))
-    self _meth_82FF("ks_selectedIndex", self._id_5A69);
+    self setclientomnvar("ks_selectedIndex", self._id_5A69);
   else
-    self _meth_82FF("ks_selectedIndex", -1);
+    self setclientomnvar("ks_selectedIndex", -1);
 }
 
 _id_A698() {
@@ -305,7 +305,7 @@ _id_5A7A() {
 
   if(!maps\mp\_utility::_id_A27A(var_1)) {
     if(maps\mp\_utility::_id_3153(var_1)) {
-      self _meth_82FF("ui_map_location_selector", -1);
+      self setclientomnvar("ui_map_location_selector", -1);
       self._id_8C04 = 1;
     }
 
@@ -454,7 +454,7 @@ _id_A129(var_0, var_1) {
 
         if(isDefined(var_6) && isDefined(var_6._id_944C) && var_6._id_13AF) {
           var_7 = maps\mp\_utility::_id_454A(var_6._id_944C, var_2, var_3);
-          var_8 = self _meth_82D2();
+          var_8 = self getweaponslistitems();
           var_9 = 0;
 
           for(var_10 = 0; var_10 < var_8.size; var_10++) {
@@ -485,7 +485,7 @@ _id_A129(var_0, var_1) {
   }
 
   if(isDefined(self))
-    self _meth_82FF("ks_used", 1);
+    self setclientomnvar("ks_used", 1);
 }
 
 _id_23DD() {
@@ -506,7 +506,7 @@ _id_23DD() {
     var_1[0]._id_944C = var_0;
     var_3 = maps\mp\_utility::_id_453F(var_0);
     var_4 = "ks_icon" + common_scripts\utility::_id_9AAD(0);
-    self _meth_82FF(var_4, var_3);
+    self setclientomnvar(var_4, var_3);
 
     if(!level._id_258F && !common_scripts\utility::_id_55E0()) {
       var_5 = maps\mp\_utility::_id_454A(var_0, self.team, maps\mp\_utility::_hasperk("specialty_improvedstreaks"));
@@ -515,7 +515,7 @@ _id_23DD() {
     }
   } else {
     var_4 = "ks_icon" + common_scripts\utility::_id_9AAD(0);
-    self _meth_82FF(var_4, 0);
+    self setclientomnvar(var_4, 0);
   }
 }
 
@@ -675,26 +675,26 @@ _id_2832(var_0, var_1) {
   if(isDefined(var_0._id_A98D[var_2])) {
     return;
   }
-  var_0._id_A98D[var_2] = _func_19B(self);
+  var_0._id_A98D[var_2] = _newclienthudelem(self);
   var_0._id_A98D[var_2] setshader("scorestreak_hud_target_hostile", 1, 1, 5);
   var_0._id_A98D[var_2].alpha = 0.9;
   var_0._id_A98D[var_2].x = var_0.origin[0];
   var_0._id_A98D[var_2].y = var_0.origin[1];
   var_0._id_A98D[var_2]._id_01D9 = var_0.origin[2] - 400;
-  var_0._id_A98D[var_2] _meth_80CB(1, 1, 1);
-  var_0._id_A98D[var_2] _meth_80C0(var_0);
-  var_0._id_A98D[var_2] _meth_8514(0);
+  var_0._id_A98D[var_2] setwaypoint(1, 1, 1);
+  var_0._id_A98D[var_2] settargetent(var_0);
+  var_0._id_A98D[var_2] setwaypointiconfadeatcenter(0);
   var_0._id_A98D[var_2]._id_0180 = 0;
   var_0._id_A98D[var_2].archived = 0;
-  var_0._id_A991[var_2] = _func_19B(self);
+  var_0._id_A991[var_2] = _newclienthudelem(self);
   var_0._id_A991[var_2] setshader("hud_exo_temp_warning", 1, 1);
   var_0._id_A991[var_2].alpha = 0.9;
   var_0._id_A991[var_2].color = (1, 1, 1);
   var_0._id_A991[var_2].x = var_0.origin[0];
   var_0._id_A991[var_2].y = var_0.origin[1];
   var_0._id_A991[var_2]._id_01D9 = var_0.origin[2];
-  var_0._id_A991[var_2] _meth_80CB(0, 1, 0);
-  var_0._id_A991[var_2] _meth_80C0(var_0);
+  var_0._id_A991[var_2] setwaypoint(0, 1, 0);
+  var_0._id_A991[var_2] settargetent(var_0);
   var_0._id_A991[var_2]._id_0180 = 0;
   var_0._id_A991[var_2].archived = 0;
   level thread _id_7CFF(self, var_0, var_0._id_A98D[var_2], var_0._id_A991[var_2]);
@@ -731,7 +731,7 @@ _id_5A7B() {
     }
 
     if(isDefined(self._id_8C04)) {
-      self _meth_82FF("ui_map_location_selector", 0);
+      self setclientomnvar("ui_map_location_selector", 0);
       self._id_8C04 = undefined;
     }
 
@@ -792,7 +792,7 @@ _id_5A7B() {
     if(var_9 && var_4 == "fritzx" && issubstr(var_6, "alt+"))
       self notify("cancelSwitchWeaponAfterRaiseAnimation");
 
-    if(!var_9 && !isalive(self) && !self _meth_8319(common_scripts\utility::_id_4550())) {
+    if(!var_9 && !isalive(self) && !self hasweapon(common_scripts\utility::_id_4550())) {
       var_6 = _id_73EB(var_9);
       maps\mp\_utility::_giveweapon(var_6);
     }
@@ -864,9 +864,9 @@ _id_956E(var_0, var_1) {
 }
 
 _id_73EB(var_0) {
-  if((!isDefined(var_0) || isDefined(var_0) && !var_0) && !isalive(self) && !self _meth_8319(common_scripts\utility::_id_4550()))
+  if((!isDefined(var_0) || isDefined(var_0) && !var_0) && !isalive(self) && !self hasweapon(common_scripts\utility::_id_4550()))
     return common_scripts\utility::_id_4550();
-  else if(!self _meth_8319(common_scripts\utility::_id_4550())) {
+  else if(!self hasweapon(common_scripts\utility::_id_4550())) {
     var_1 = maps\mp\_utility::_id_44DD();
     return var_1;
   } else
@@ -1142,7 +1142,7 @@ _id_478D(var_0, var_1, var_2, var_3, var_4) {
     self.pers["killstreaks"][var_5]._id_944C = var_0;
     var_8 = maps\mp\_utility::_id_453F(var_0);
     var_9 = "ks_icon" + common_scripts\utility::_id_9AAD(var_5);
-    self _meth_82FF(var_9, var_8);
+    self setclientomnvar(var_9, var_8);
   } else {
     var_5 = _id_45A5(var_0, var_1, var_4);
 
@@ -1210,7 +1210,7 @@ _id_478D(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(level._id_5A75[var_0]))
     self[[level._id_5A75[var_0]]]();
 
-  self _meth_82FF("ks_acquired", 1);
+  self setclientomnvar("ks_acquired", 1);
 }
 
 _id_3150(var_0) {
@@ -1264,7 +1264,7 @@ _id_7B75(var_0, var_1) {
       var_2 = self.pers["killstreak_stowed_ammo"][var_0 + var_1];
 
       if(isDefined(var_2)) {
-        var_3 = int(0.2 * _func_1A3(var_0));
+        var_3 = int(0.2 * _weaponclipsize(var_0));
 
         if(var_2._id_0DB3 > var_3)
           var_2._id_0DB3 = int(max(var_3, var_2._id_0DB3 - var_3));
@@ -1290,7 +1290,7 @@ reduceteslastowedammoondeath(var_0, var_1) {
       var_2 = self.pers["killstreak_stowed_ammo"][var_0 + var_1];
 
       if(isDefined(var_2)) {
-        var_3 = _func_1A3(var_0);
+        var_3 = _weaponclipsize(var_0);
         var_4 = var_2._id_0DBB - var_3;
 
         if(var_4 < 0)
@@ -1398,14 +1398,14 @@ _id_478E(var_0, var_1) {
   var_4 = self getcurrentweapon();
 
   while(maps\mp\_utility::_id_56A8()) {
-    if(doeskillstreakweaponstowammo(var_0) && (self _meth_801D() || isDefined(self.hasuseweapon) && self.hasuseweapon || isDefined(self._id_56A1) && self._id_56A1)) {
+    if(doeskillstreakweaponstowammo(var_0) && (self isonladder() || isDefined(self.hasuseweapon) && self.hasuseweapon || isDefined(self._id_56A1) && self._id_56A1)) {
       break;
     }
 
     waitframe();
   }
 
-  var_5 = self _meth_82D2();
+  var_5 = self getweaponslistitems();
 
   foreach(var_7 in var_5) {
     if(!maps\mp\_utility::_id_57E5(var_7, "killstreak_") && !maps\mp\_utility::_id_57E5(var_7, "airdrop_") && !maps\mp\_utility::_id_57E5(var_7, "deployable_")) {
@@ -1426,14 +1426,14 @@ _id_478E(var_0, var_1) {
     var_11 = maps\mp\_utility::_id_454A(var_10, var_2, var_3);
 
     if(self getcurrentweapon() != var_11 || _id_1F6E()) {
-      if(self _meth_8319(var_0) && self getcurrentweapon() != var_0)
+      if(self hasweapon(var_0) && self getcurrentweapon() != var_0)
         self takeweapon(var_0);
 
       if(_id_3150(var_10) && self getcurrentweapon() == var_11 && isDefined(self.lastusedkillstreakindexweapon) && var_1 != self.lastusedkillstreakindexweapon) {
         _id_A170();
-        var_12 = common_scripts\utility::_id_A715("toggled_up", "toggled_down", "weapon_change");
+        var_12 = common_scripts\utility::waittill_any_return("toggled_up", "toggled_down", "weapon_change");
 
-        if(var_12 != "weapon_change" || self _meth_844A("ks_selectedIndex") != var_1)
+        if(var_12 != "weapon_change" || self getclientomnvar("ks_selectedIndex") != var_1)
           return;
       }
 
@@ -1481,7 +1481,7 @@ _id_46B4(var_0) {
 }
 
 _id_453D(var_0) {
-  return _func_1AF("mp/killstreakTable.csv", 1, var_0, 10);
+  return _tablelookupistring("mp/killstreakTable.csv", 1, var_0, 10);
 }
 
 _id_4540(var_0) {
@@ -1530,7 +1530,7 @@ _id_47A1(var_0) {
     for(var_6 = 0; var_6 < 5; var_6++) {
       if(isDefined(var_1[var_6]) && isDefined(var_1[var_6]._id_944C) && var_1[var_6]._id_13AF) {
         var_9 = maps\mp\_utility::_id_454A(var_1[var_6]._id_944C, var_2, var_3);
-        var_10 = self _meth_82D2();
+        var_10 = self getweaponslistitems();
         var_11 = 0;
 
         for(var_12 = 0; var_12 < var_10.size; var_12++) {
@@ -1654,8 +1654,8 @@ _id_5346(var_0, var_1, var_2, var_3) {
     if(!isDefined(var_2))
       var_2 = 0.8;
 
-    self _meth_82FF("ui_killstreak_blackout", 1);
-    self _meth_82FF("ui_killstreak_blackout_fade_end", gettime() + int(var_2 * 1000));
+    self setclientomnvar("ui_killstreak_blackout", 1);
+    self setclientomnvar("ui_killstreak_blackout_fade_end", gettime() + int(var_2 * 1000));
     thread _id_240D();
     thread _id_240C();
   }
@@ -1687,7 +1687,7 @@ _id_5347(var_0) {
   if(!isDefined(self) || !isalive(self))
     return 1;
 
-  if(!self _meth_8346() && !self _meth_806F()) {
+  if(!self isonground() && !self islinked()) {
     self iprintlnbold(&"KILLSTREAKS_CANT_ACTIVATE_WHILE_FALLING");
     return 1;
   }
@@ -1712,11 +1712,11 @@ _id_240B(var_0) {
   self endon("joined_team");
 
   if(isDefined(var_0))
-    maps\mp\gametypes\_hostmigration::_id_A6F5(var_0);
+    maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_0);
 
   var_1 = 0.5;
-  self _meth_82FF("ui_killstreak_blackout", 0);
-  self _meth_82FF("ui_killstreak_blackout_fade_end", gettime() + int(var_1 * 1000));
+  self setclientomnvar("ui_killstreak_blackout", 0);
+  self setclientomnvar("ui_killstreak_blackout_fade_end", gettime() + int(var_1 * 1000));
   wait(var_1);
 
   if(!isDefined(self)) {
@@ -1743,8 +1743,8 @@ _id_240D() {
   self endon("rideKillstreakComplete");
   self endon("rideKillstreakFailed");
   self waittill("joined_team");
-  self _meth_82FF("ui_killstreak_blackout", 0);
-  self _meth_82FF("ui_killstreak_blackout_fade_end", 0);
+  self setclientomnvar("ui_killstreak_blackout", 0);
+  self setclientomnvar("ui_killstreak_blackout_fade_end", 0);
   maps\mp\_utility::_id_7441();
   self notify("rideKillstreakComplete");
 }
@@ -1753,18 +1753,18 @@ _id_240C() {
   self endon("rideKillstreakComplete");
   self endon("rideKillstreakFailed");
   level waittill("game_ended");
-  self _meth_82FF("ui_killstreak_blackout", 0);
-  self _meth_82FF("ui_killstreak_blackout_fade_end", 0);
+  self setclientomnvar("ui_killstreak_blackout", 0);
+  self setclientomnvar("ui_killstreak_blackout_fade_end", 0);
   maps\mp\_utility::_id_7441();
   self notify("rideKillstreakComplete");
 }
 
 _id_73D0() {
-  if(self _meth_8346()) {
+  if(self isonground()) {
     var_0 = bulletTrace(self.origin + (0, 0, 5), self.origin + (0, 0, -5), 0);
 
     if(isDefined(var_0["glass"]))
-      _func_1CC(var_0["glass"]);
+      _destroyglass(var_0["glass"]);
   }
 }
 
@@ -1865,7 +1865,7 @@ _id_944F() {
 }
 
 _id_1F6D() {
-  return !self _meth_82E4() && !self _meth_8128() && !isDefined(self._id_20CC) && _id_1F6E() && (!isDefined(self._id_56A3) || isDefined(self._id_56A3) && self._id_56A3 == 0);
+  return !self ismantling() && !self ismeleeing() && !isDefined(self._id_20CC) && _id_1F6E() && (!isDefined(self._id_56A3) || isDefined(self._id_56A3) && self._id_56A3 == 0);
 }
 
 _id_1F6E() {
@@ -1887,15 +1887,15 @@ _id_944D() {
     return;
   }
   maps\mp\_utility::gameflagwait("prematch_done");
-  self _meth_82E1("toggled_up", "+actionslot 1");
-  self _meth_82E1("toggled_down", "+actionslot 2");
+  self notifyonplayercommand("toggled_up", "+actionslot 1");
+  self notifyonplayercommand("toggled_down", "+actionslot 2");
 
   if(!level._id_258F) {
-    self _meth_82E1("streakUsed1", "+actionslot 4");
-    self _meth_82E1("streakUsed2", "+actionslot 5");
-    self _meth_82E1("streakUsed3", "+actionslot 6");
-    self _meth_82E1("streakUsed4", "+actionslot 7");
-    self _meth_82E1("streakUsed5", "+actionslot 8");
+    self notifyonplayercommand("streakUsed1", "+actionslot 4");
+    self notifyonplayercommand("streakUsed2", "+actionslot 5");
+    self notifyonplayercommand("streakUsed3", "+actionslot 6");
+    self notifyonplayercommand("streakUsed4", "+actionslot 7");
+    self notifyonplayercommand("streakUsed5", "+actionslot 8");
   }
 }
 
@@ -1909,7 +1909,7 @@ _id_4771(var_0) {
   if(var_1 >= var_2)
     var_1 = var_1 - var_2;
 
-  _id_861D(var_1);
+  playloopsound(var_1);
   var_1 = self._id_0A0D + var_0;
   var_2 = _id_457A(1);
 
@@ -1994,7 +1994,7 @@ _id_300F(var_0, var_1) {
 _id_7D50(var_0) {
   if(maps\mp\_utility::_id_0F5C()) {
     self._id_353B = 0;
-    _id_861D(0);
+    playloopsound(0);
 
     if(var_0) {
       _id_861E(0);
@@ -2007,7 +2007,7 @@ _id_7D50(var_0) {
   }
 }
 
-_id_861D(var_0) {
+playloopsound(var_0) {
   if(maps\mp\_utility::_id_0F5C()) {
     if(var_0 < 0)
       var_0 = 0;
@@ -2129,7 +2129,7 @@ pc_watchstreakuseslot(var_0, var_1) {
             break;
           }
 
-          if(var_5 == "none" && self _meth_8347()) {
+          if(var_5 == "none" && self isusingturret()) {
             self switchtoweapon(self._id_5B94);
             break;
           }
@@ -2206,7 +2206,7 @@ _id_5A67(var_0, var_1, var_2) {
       if(var_4 <= var_3) {
         var_0 maps\mp\gametypes\_persistence::statsetbuffered("hits", var_4);
         var_0 maps\mp\gametypes\_persistence::statsetbuffered("misses", int(var_3 - var_4));
-        var_5 = clamp(_func_0AD(var_4) / _func_0AD(var_3), 0.0, 1.0) * 10000.0;
+        var_5 = clamp(_float(var_4) / _float(var_3), 0.0, 1.0) * 10000.0;
         var_0 maps\mp\gametypes\_persistence::statsetbuffered("accuracy", int(var_5));
       }
     }

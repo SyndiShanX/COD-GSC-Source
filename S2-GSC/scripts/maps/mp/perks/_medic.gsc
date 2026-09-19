@@ -90,9 +90,9 @@ setupmedicpatienttrigger() {
   var_0._id_9D65 = spawn("script_origin", var_0.origin);
   var_0._id_9D65._id_68FB = var_0;
   var_0._id_9D65 makeusable();
-  var_0._id_9D65 _meth_80CE(&"DIVISIONS_DLC3_MEDIC_PATIENT_TRIGGER");
+  var_0._id_9D65 sethintstring(&"DIVISIONS_DLC3_MEDIC_PATIENT_TRIGGER");
   var_0.model = spawn("script_model", var_0.origin);
-  var_0.model _meth_8055(self, "tag_origin");
+  var_0.model linkto(self, "tag_origin");
   var_0.model setModel("tag_origin");
   level.medictriggers = common_scripts\utility::_id_0F6F(level.medictriggers, var_0);
   thread medic_trigger_enable_use_watcher(var_0);
@@ -100,7 +100,7 @@ setupmedicpatienttrigger() {
   var_0 thread handlemedictrigger(var_1);
   var_0 thread handlemedictriggerdeleteaftertime(var_1);
   var_1 setpatientactive(0);
-  var_1 maps\mp\agents\_agent_utility::_id_83FE(self.team);
+  var_1 maps\mp\agents\_agent_utility::hudoutlineenable(self.team);
   var_1 _meth_86D0();
 }
 
@@ -137,7 +137,7 @@ handlemedictrigger(var_0) {
   self endon("death");
   level endon("game_ended");
   self._id_9D65 waittill("trigger", var_1);
-  var_0 maps\mp\agents\_agent_utility::_id_83FE(var_1.team, var_1);
+  var_0 maps\mp\agents\_agent_utility::hudoutlineenable(var_1.team, var_1);
   var_0 _meth_86D1();
   var_1 thread end_medic_patient(var_0);
   var_1.medic_patient_array = common_scripts\utility::_id_0F6F(var_1.medic_patient_array, var_0);
@@ -153,9 +153,9 @@ handlemedictrigger(var_0) {
 }
 
 setpatientactive(var_0) {
-  self _meth_8353("disable_attack", !var_0);
-  self _meth_8353("disable_movement", !var_0);
-  self _meth_8353("disable_rotation", !var_0);
+  self botsetflag("disable_attack", !var_0);
+  self botsetflag("disable_movement", !var_0);
+  self botsetflag("disable_rotation", !var_0);
 
   if(var_0) {
     self.patientdown = undefined;
@@ -195,17 +195,17 @@ spawnmedicpatient(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self._id_5BE2 = gettime();
   var_7 = var_0 + (0, 0, 25);
   var_8 = var_0;
-  var_9 = _func_081(var_7, var_8);
+  var_9 = _playerphysicstrace(var_7, var_8);
 
   if(distancesquared(var_9, var_7) > 1)
     var_0 = var_9;
 
-  self _meth_838F(var_0, var_1);
+  self spawnagent(var_0, var_1);
 
   if(isDefined(var_5))
-    self[[level._id_19D5["bot_set_difficulty"]]](var_5);
+    self[[level.bot_funcs["bot_set_difficulty"]]](var_5);
 
-  self[[level._id_19D5["bot_set_personality"]]]("default");
+  self[[level.bot_funcs["bot_set_personality"]]]("default");
   maps\mp\agents\_agent_common::_id_83FD(getdvarint("scr_player_maxhealth", 100));
   self[[level._id_0A5B]]();
   maps\mp\gametypes\_class::_id_4773(self.team, self.class, 1);
@@ -214,8 +214,8 @@ spawnmedicpatient(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self thread[[level._id_0A55]](self._id_0117);
 
   thread maps\mp\_flashgrenades::_id_6394();
-  self thread[[level._id_19D5["bot_think_watch_enemy"]]](1);
-  self thread[[level._id_19D5["bot_think_tactical_goals"]]]();
+  self thread[[level.bot_funcs["bot_think_watch_enemy"]]](1);
+  self thread[[level.bot_funcs["bot_think_tactical_goals"]]]();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 
   if(!self._id_4B60)

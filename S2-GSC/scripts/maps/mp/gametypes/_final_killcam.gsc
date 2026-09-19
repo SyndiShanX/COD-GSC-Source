@@ -7,11 +7,11 @@ _id_9454(var_0) {
   level endon("stream_end");
 
   foreach(var_2 in level.players) {
-    if(_func_0C1(var_2)) {
+    if(_isai(var_2)) {
       continue;
     }
     if(isDefined(var_2._id_9459) && var_2._id_9459.size > 0) {
-      while(isPlayer(var_2) && isPlayer(var_0) && !var_2 _meth_842C(var_0, var_2._id_9459[0]))
+      while(isPlayer(var_2) && isPlayer(var_0) && !var_2 hasloadedcustomizationplayerview(var_0, var_2._id_9459[0]))
         waitframe();
     }
   }
@@ -21,8 +21,8 @@ _id_9454(var_0) {
 
 _id_7D67() {
   foreach(var_1 in level.players) {
-    if(!_func_0C1(var_1))
-      var_1 _meth_8533(0);
+    if(!_isai(var_1))
+      var_1 onlystreamactiveweapon(0);
   }
 
   _func_3B7(0);
@@ -271,7 +271,7 @@ _id_7B32(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 _id_9456() {
-  if(_func_0C1(self)) {
+  if(_isai(self)) {
     return;
   }
   if(_id_8B8C()) {
@@ -297,16 +297,16 @@ _id_9456() {
     var_11 = var_10 + var_9;
     var_12 = _id_04E6::_id_5A33(var_5, var_6, var_11, 0, _id_44D9(), var_7, 1);
     var_13 = var_12 + var_11 + var_8 / 1000;
-    self _meth_8533(1);
+    self onlystreamactiveweapon(1);
     _func_3B7(1);
     thread _id_04E6::_id_7681(level._id_3B4C[var_0], level._id_3B4C[var_0], var_13, "none");
   } else if(isDefined(level._id_74CA) && level._id_74CA >= 0) {
-    self _meth_8533(1);
+    self onlystreamactiveweapon(1);
     _func_3B7(1);
     var_14 = maps\mp\gametypes\_playerlogic::_id_4006();
     var_15 = level.playofthegameentity;
     var_15._id_0189 = 1;
-    self._id_9459 = self _meth_8423(var_15, 0, var_14);
+    self._id_9459 = self loadcustomizationplayerview(var_15, 0, var_14);
     var_15._id_0189 = 0;
   }
 }
@@ -346,12 +346,12 @@ _id_329B() {
 
     foreach(var_1 in level.players) {
       var_1 maps\mp\_utility::_id_7E50(0);
-      var_1 _meth_82DD(0, 0);
+      var_1 setblurforplayer(0, 0);
       var_1.forcespectatorclient = -1;
       var_1._id_0189 = 1;
       var_1._id_00E2 = level._id_74CA;
 
-      if(var_1 _meth_8436())
+      if(var_1 ismlgspectator())
         var_1 _id_04C3::resetforplayofthegamecam();
 
       var_1 thread _id_04E6::_id_74C9();
@@ -475,10 +475,10 @@ _id_318C() {
     foreach(var_19 in level.players) {
       var_19 maps\mp\_utility::_id_7E50(0);
 
-      if(var_19 _meth_8436())
+      if(var_19 ismlgspectator())
         var_19 _id_04C3::resetforplayofthegamecam();
 
-      var_19 _meth_82DD(0, 0);
+      var_19 setblurforplayer(0, 0);
 
       if(isDefined(var_3) && isDefined(var_3._id_5BE2))
         var_20 = (gettime() - var_3._id_5BE2) / 1000.0;

@@ -25,8 +25,8 @@ _id_A6B8() {
 _id_63A0() {
   self endon("disconnect");
   self._id_293A = -1;
-  self _meth_82FF("ui_zm_selected_quest_item", self._id_293A);
-  self _meth_82FF("ui_zm_owns_quest_items", 0);
+  self setclientomnvar("ui_zm_selected_quest_item", self._id_293A);
+  self setclientomnvar("ui_zm_owns_quest_items", 0);
 }
 
 _id_63FA() {
@@ -49,7 +49,7 @@ _id_63FA() {
     if(!var_1)
       self._id_293A = -1;
 
-    self _meth_82FF("ui_zm_selected_quest_item", var_2);
+    self setclientomnvar("ui_zm_selected_quest_item", var_2);
   }
 }
 
@@ -87,7 +87,7 @@ _id_24DD(var_0, var_1, var_2) {
   self._id_7871 = common_scripts\utility::_id_0F6F(self._id_7871, var_3);
   var_4 = int(tablelookup("mp/zombieUsableQuestItems.csv", 1, var_0, 0));
   var_3._id_502A = var_4;
-  self _meth_82FF("ui_zm_owns_quest_items", var_4);
+  self setclientomnvar("ui_zm_owns_quest_items", var_4);
 }
 
 _id_5F16(var_0) {
@@ -98,9 +98,9 @@ _id_5F16(var_0) {
       if(var_2._id_7B79 == var_0 || isDefined(var_2._id_0CAF) && var_0 == var_2._id_0CAF) {
         self._id_7871 = common_scripts\utility::_id_0F9A(self._id_7871, var_4);
         var_3 = int(tablelookup("mp/zombieUsableQuestItems.csv", 1, var_0, 0));
-        self _meth_82FF("ui_zm_owns_quest_items", var_3);
+        self setclientomnvar("ui_zm_owns_quest_items", var_3);
         self._id_293A = -1;
-        self _meth_82FF("ui_zm_selected_quest_item", self._id_293A);
+        self setclientomnvar("ui_zm_selected_quest_item", self._id_293A);
         break;
       }
     }

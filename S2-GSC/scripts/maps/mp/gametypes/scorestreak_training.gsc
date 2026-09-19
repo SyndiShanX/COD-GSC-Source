@@ -5,13 +5,13 @@
 
 main() {
   setdvarifuninitialized("previousScorestreakSelected", 0);
-  level._id_80C0 = 8;
-  level._id_80BF = 4;
+  level.settargetent = 8;
+  level.setshader = 4;
   _id_04D4::init();
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -23,7 +23,7 @@ main() {
     maps\mp\_utility::registerwinlimitdvar(level.gametype, 0);
     maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
-    _func_035("scr_game_allowkillcam", 0);
+    _setdynamicdvar("scr_game_allowkillcam", 0);
     level._id_6031 = 0;
     level._id_6035 = 0;
   }
@@ -51,16 +51,16 @@ main() {
   level._id_4867 = 0;
   _id_872E();
   maps\mp\_utility::_id_873B(1);
-  _func_247(1);
+  _setnojiptime(1);
   _func_246(1);
-  level._id_2F85 = 1;
+  level.disableforfeit = 1;
   level._id_1B3E = 1;
   level._id_4696 = ::_id_4696;
   level._id_6BA7 = ::_id_6B81;
   level._id_6BAF = ::_id_6BAF;
   level._id_6B5C = ::_id_6B5C;
   level._id_6B7F = ::_id_6B7F;
-  level._id_1DEA = ::_id_80BE;
+  level._id_1DEA = ::clearalltextafterhudelem;
   game["switchedsides"] = 0;
 
   if(level._id_6031 || level._id_6035)
@@ -84,26 +84,26 @@ apply_score_training_mix() {
 
   for(;;) {
     self waittill("spawned_player");
-    var_0 _meth_8626("score_training_mix", 1.0);
+    var_0 clientaddsoundsubmix("score_training_mix", 1.0);
   }
 }
 
 _id_5300() {
   maps\mp\_utility::_id_8653(1);
-  _func_035("scr_scorestreak_training_roundswitch", 0);
+  _setdynamicdvar("scr_scorestreak_training_roundswitch", 0);
   maps\mp\_utility::registerroundswitchdvar("scorestreak_training", 0, 0, 9);
-  _func_035("scr_scorestreak_training_roundlimit", 0);
+  _setdynamicdvar("scr_scorestreak_training_roundlimit", 0);
   maps\mp\_utility::registerroundlimitdvar("scorestreak_training", 0);
-  _func_035("scr_scorestreak_training_winlimit", 0);
+  _setdynamicdvar("scr_scorestreak_training_winlimit", 0);
   maps\mp\_utility::registerwinlimitdvar("scorestreak_training", 0);
-  _func_035("scr_scorestreak_training_halftime", 0);
+  _setdynamicdvar("scr_scorestreak_training_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("scorestreak_training", 0);
-  _func_035("scr_scorestreak_training_timelimit", 0);
+  _setdynamicdvar("scr_scorestreak_training_timelimit", 0);
   maps\mp\_utility::registertimelimitdvar("scorestreak_training", 0);
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_SCORESTREAK_TRAINING");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_SCORESTREAK_TRAINING");
 
@@ -138,7 +138,7 @@ onplayerconnect() {
 }
 
 _id_6B5C(var_0, var_1, var_2) {
-  self _meth_82FF("ui_show_scorestreak_training_hud", 0);
+  self setclientomnvar("ui_show_scorestreak_training_hud", 0);
   var_3 = 0;
 
   foreach(var_5 in level.players) {
@@ -209,54 +209,54 @@ _id_57BA(var_0, var_1) {
 }
 
 _id_872E() {
-  level._id_80B3 = maps\mp\gametypes\_class::_id_44B4();
-  level._id_80B3["loadoutDivision"] = 1;
-  level._id_80B3["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16859136, 0);
-  level._id_80B3["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(17002496, 0);
+  level.makeunusable = maps\mp\gametypes\_class::_id_44B4();
+  level.makeunusable["loadoutDivision"] = 1;
+  level.makeunusable["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16859136, 0);
+  level.makeunusable["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(17002496, 0);
 
   for(var_0 = 0; var_0 < 9; var_0++)
-    level._id_80B3["loadoutPerksGUID"][var_0] = 0;
+    level.makeunusable["loadoutPerksGUID"][var_0] = 0;
 
   level._id_80B1 = maps\mp\gametypes\_class::_id_44B4();
   level._id_80B1["loadoutDivision"] = 1;
   level._id_80B1["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16875520, 0);
   level._id_80B1["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(16859136, 0);
-  level._id_80B2 = maps\mp\gametypes\_class::_id_44B4();
-  level._id_80B2["loadoutDivision"] = 0;
-  level._id_80B2["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16879616, 0);
-  level._id_80B2["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(16957440, 0);
+  level.makeusable = maps\mp\gametypes\_class::_id_44B4();
+  level.makeusable["loadoutDivision"] = 0;
+  level.makeusable["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16879616, 0);
+  level.makeusable["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(16957440, 0);
 }
 
 _id_6B81() {
   thread _id_47A9();
 
-  if(isbot(self) && self.team == "axis" && (!isDefined(level._id_80C2) || !level._id_80C2)) {
+  if(isbot(self) && self.team == "axis" && (!isDefined(level.settimer) || !level.settimer)) {
     level thread _id_638D(self);
-    level._id_80C2 = 1;
+    level.settimer = 1;
   }
 
-  if(isPlayer(self) && !isbot(self) && !_func_1EF(self)) {
+  if(isPlayer(self) && !isbot(self) && !_isagent(self)) {
     if(self _meth_85C0())
       self _meth_85BF(0);
 
-    self _meth_84C0(1);
+    self setdemigod(1);
     waitframe();
     thread _id_A93E();
   } else
-    _id_80BE();
+    clearalltextafterhudelem();
 }
 
-_id_80BE() {
-  var_0 = isPlayer(self) && !isbot(self) && !_func_1EF(self);
+clearalltextafterhudelem() {
+  var_0 = isPlayer(self) && !isbot(self) && !_isagent(self);
   self.pers["class"] = "gamemode";
   self.pers["lastClass"] = "";
 
   if(var_0)
-    self.pers["gamemodeLoadout"] = level._id_80B3;
+    self.pers["gamemodeLoadout"] = level.makeunusable;
   else if(self.team == "allies")
     self.pers["gamemodeLoadout"] = level._id_80B1;
   else
-    self.pers["gamemodeLoadout"] = level._id_80B2;
+    self.pers["gamemodeLoadout"] = level.makeusable;
 
   self.class = self.pers["class"];
   self.lastclass = self.pers["lastClass"];
@@ -294,7 +294,7 @@ _id_47A9() {
     var_0 = self getcurrentweapon();
 
     if(var_0 != "none" && !maps\mp\_utility::iskillstreakweapon(var_0)) {
-      var_1 = self _meth_8338(var_0);
+      var_1 = self getfractionmaxammo(var_0);
 
       if(var_1 < 0.2)
         self givemaxammo(var_0);
@@ -303,16 +303,16 @@ _id_47A9() {
     var_2 = self getoffhandsecondaryclass();
 
     if(var_2 != "none" && !maps\mp\_utility::iskillstreakweapon(var_2)) {
-      var_1 = self _meth_8338(var_2);
+      var_1 = self getfractionmaxammo(var_2);
 
       if(var_1 < 0.4)
         self givemaxammo(var_2);
     }
 
-    var_3 = self _meth_834A();
+    var_3 = self getlethalweapon();
 
     if(var_3 != "none" && !maps\mp\_utility::iskillstreakweapon(var_3)) {
-      var_1 = self _meth_8338(var_3);
+      var_1 = self getfractionmaxammo(var_3);
 
       if(var_1 < 0.4)
         self givemaxammo(var_3);
@@ -326,7 +326,7 @@ _id_A93E() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("death");
-  self _meth_82FF("ui_show_scorestreak_training_hud", 1);
+  self setclientomnvar("ui_show_scorestreak_training_hud", 1);
 
   for(;;) {
     self waittill("luinotifyserver", var_0, var_1);
@@ -337,7 +337,7 @@ _id_A93E() {
     self notify("cancel_stowed_ammo");
     maps\mp\_utility::_id_940B(0);
     thread _id_051E::_id_2400();
-    self _meth_82FF("ks_icon0", 0);
+    self setclientomnvar("ks_icon0", 0);
     var_2 = maps\mp\_utility::_id_4544(var_1);
     thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(var_2, _id_051E::_id_46B4(var_2), undefined, 0);
     thread _id_051E::_id_478D(var_2, 0, 0, self);
@@ -346,7 +346,7 @@ _id_A93E() {
 }
 
 _id_244D() {
-  self _meth_82FF("ui_show_scorestreak_training_hud", 0);
+  self setclientomnvar("ui_show_scorestreak_training_hud", 0);
 }
 
 _id_4696(var_0) {
@@ -361,17 +361,17 @@ _id_4696(var_0) {
     }
   }
 
-  if(isPlayer(var_1) && !isbot(var_1) && !_func_1EF(var_1) && level._id_53C6)
+  if(isPlayer(var_1) && !isbot(var_1) && !_isagent(var_1) && level._id_53C6)
     return _id_6FBD(var_1);
 
   return level._id_908F[var_1.team][randomint(level._id_908F[var_1.team].size)];
 }
 
 _id_6FBD(var_0) {
-  if(!isDefined(level._id_80C1))
-    level._id_80C1 = common_scripts\utility::_id_44BE("scorestreak_training_player_spawn", "targetname");
+  if(!isDefined(level.cleartargetent))
+    level.cleartargetent = common_scripts\utility::_id_44BE("scorestreak_training_player_spawn", "targetname");
 
-  var_1 = level._id_80C1[randomint(level._id_80C1.size)];
+  var_1 = level.cleartargetent[randomint(level.cleartargetent.size)];
   return var_1;
 }
 

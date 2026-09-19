@@ -9,7 +9,7 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_1B2E;
+  level.bot_funcs["gametype_think"] = ::_id_1B2E;
 }
 
 _id_879C() {
@@ -25,7 +25,7 @@ _id_1B2E() {
   level endon("game_ended");
 
   for(;;) {
-    if(self _meth_8368() != "run_and_gun")
+    if(self botgetpersonality() != "run_and_gun")
       maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
 
     if(!isDefined(self._id_19A1)) {

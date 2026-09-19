@@ -43,8 +43,8 @@ _id_7BBA() {
   _id_0378::_id_8DC7("well_explosion_ignite", ::_id_AA02);
   _id_0378::_id_8DC7("well_explosion", ::_id_AA01);
   _id_0378::_id_8DC7("well_zombies_group_scream", ::_id_AA03);
-  _id_0378::_id_8DC7("aud_saw_blade_sound", ::_id_806F);
-  _id_0378::_id_8DC7("aud_saw_blade_end", ::_id_8071);
+  _id_0378::_id_8DC7("aud_saw_blade_sound", ::islinked);
+  _id_0378::_id_8DC7("aud_saw_blade_end", ::enableportalgroup);
   _id_0378::_id_8DC7("aud_start_electricity", ::_id_9CA9);
   _id_0378::_id_8DC7("aud_stop_electricity", ::_id_9CA8);
   _id_0378::_id_8DC7("aud_enigma_switch_activate", ::_id_3787);
@@ -52,7 +52,7 @@ _id_7BBA() {
   _id_0378::_id_8DC7("aud_fuse_timer_start", ::_id_3F24);
   _id_0378::_id_8DC7("aud_fuse_timer_stop", ::_id_3F25);
   _id_0378::_id_8DC7("aud_hc_enigma_use", ::_id_4BCF);
-  _id_0378::_id_8DC7("aud_saltmine_door_powered", ::_id_8034);
+  _id_0378::_id_8DC7("aud_saltmine_door_powered", ::setturretfov);
   _id_0378::_id_8DC7("aud_cart_lights_off", ::_id_201E);
   _id_0378::_id_8DC7("aud_start_pneumo_tube", ::_id_1304);
   _id_0378::_id_8DC7("aud_compartment_door_open", ::_id_255F);
@@ -142,9 +142,9 @@ _id_526E() {
   _id_5196();
   _id_0367::_id_8E3E("nst01");
   _id_A604();
-  thread _id_80DF();
-  thread _id_80E0();
-  thread _id_80E1();
+  thread remotecontrolturret();
+  thread remotecontrolturretoff();
+  thread shootturret();
 }
 
 _id_5196() {
@@ -285,7 +285,7 @@ _id_8DEC() {
 }
 
 _id_991B(var_0, var_1) {
-  if(_func_344(var_0)) {
+  if(_soundexists(var_0)) {
     for(;;) {
       _id_046C::_id_8DA0(var_0, var_1);
       wait 2;
@@ -296,7 +296,7 @@ _id_991B(var_0, var_1) {
 _id_7248() {}
 
 _id_7330() {
-  self _meth_8626("fireman_intro_fire_off");
+  self clientaddsoundsubmix("fireman_intro_fire_off");
   thread _id_8E8F();
   _id_0366::snd_zmb_set_plr_vox_scare_count_max(1);
 }
@@ -326,7 +326,7 @@ _id_70C5(var_0, var_1) {
 }
 
 _id_716C(var_0, var_1, var_2) {
-  if(isDefined(var_2) && _func_0C0(var_2)) {
+  if(isDefined(var_2) && _isarray(var_2)) {
     foreach(var_4 in level.players)
     var_4 thread _id_8E8C(var_0, var_2, "exterior");
   }
@@ -363,15 +363,15 @@ _id_8E8C(var_0, var_1, var_2) {
   if(!isDefined(var_3._id_071D._id_6DD8))
     var_3._id_071D._id_6DDB = [];
 
-  wait(_func_0A4(1, 2));
+  wait(_randomintrange(1, 2));
 
   if(var_2 == "exterior") {
     var_5 = var_0 + "2";
 
-    if(!_func_344(var_5)) {
+    if(!_soundexists(var_5)) {
       var_5 = var_0 + "_2";
 
-      if(!_func_344(var_5))
+      if(!_soundexists(var_5))
         var_5 = undefined;
     }
   }
@@ -407,7 +407,7 @@ _id_8E8C(var_0, var_1, var_2) {
   _id_0380::_id_6850(var_13, 0.25);
 
   var_3._id_071D._id_6DDB = [];
-  var_15 = _func_0AF(var_7, var_1.size);
+  var_15 = _min(var_7, var_1.size);
 
   for(var_8 = 0; var_8 < var_15; var_8++) {
     wait(var_4);
@@ -432,9 +432,9 @@ _id_8E8F() {
 
     if(var_3 != var_1) {
       if(var_3)
-        self _meth_8627("pa_inside", 1.0);
+        self clientclearsoundsubmix("pa_inside", 1.0);
       else
-        self _meth_8626("pa_inside", 1.0);
+        self clientaddsoundsubmix("pa_inside", 1.0);
 
       var_1 = var_3;
     }
@@ -526,7 +526,7 @@ _id_3FE4(var_0, var_1) {
 
 _id_AC91(var_0, var_1) {
   foreach(var_3 in level.players)
-  var_3 _meth_8626("earthquakezone1");
+  var_3 clientaddsoundsubmix("earthquakezone1");
 
   switch (var_0) {
     case "rumble1":
@@ -574,7 +574,7 @@ _id_AC96(var_0) {
   _id_0366::_id_8E30(1.0, var_0);
 
   foreach(var_2 in level.players)
-  var_2 _meth_8627("earthquakezone1");
+  var_2 clientclearsoundsubmix("earthquakezone1");
 
   if(isDefined(level._id_11CB._id_AC92))
     _func_352(level._id_11CB._id_AC92, var_0);
@@ -759,7 +759,7 @@ _id_3DB5() {
 
   foreach(var_2 in level.players) {
     if(distance(var_2.origin, self.origin) <= 1500)
-      var_2 _meth_8626("follower_intro");
+      var_2 clientaddsoundsubmix("follower_intro");
   }
 
   var_4 = _id_0380::_id_2889("zmb_follower_intro_main", undefined, var_0.origin);
@@ -788,12 +788,12 @@ _id_3DB4() {
 }
 
 _id_AA02(var_0) {
-  _id_0378::_id_8D14(_func_344("zmb_well_explosion_ignite"));
+  _id_0378::_id_8D14(_soundexists("zmb_well_explosion_ignite"));
   thread _id_0380::_id_6842("zmb_well_explosion_ignite", undefined, var_0);
 }
 
 _id_AA01(var_0) {
-  _id_0378::_id_8D14(_func_344("zmb_well_explosion"));
+  _id_0378::_id_8D14(_soundexists("zmb_well_explosion"));
   _id_0380::_id_6842("zmb_well_explosion", undefined, var_0);
   var_1 = 4.0;
   var_2 = 8.0;
@@ -806,14 +806,14 @@ _id_AA03(var_0) {
   _id_046C::_id_8DA0("zmb_well_group_scream", var_0);
 }
 
-_id_806F() {
+islinked() {
   _id_0380::_id_288B("zmb_blade_trap_up", undefined, self);
   _id_0380::_id_6846("zmb_blade_trap_lp", undefined, self, 0.2, undefined, 0.2);
   _id_0380::_id_6846("zmb_blade_trap_water_lp", undefined, self, 0.2, undefined, 0.2);
 }
 
-_id_8071() {
-  level._id_11CB._id_8070 = _id_0380::_id_2889("zmb_blade_trap_dwn", undefined, self.origin);
+enableportalgroup() {
+  level._id_11CB.enablelinkto = _id_0380::_id_2889("zmb_blade_trap_dwn", undefined, self.origin);
 }
 
 _id_9CA9() {
@@ -828,7 +828,7 @@ _id_9CA8() {
 }
 
 _id_3787() {
-  var_0 = self _meth_808F();
+  var_0 = self getorigin();
   playsoundatpos(var_0, "zmb_switch_on");
 }
 
@@ -838,11 +838,11 @@ _id_3788(var_0, var_1) {
 }
 
 _id_4BCF(var_0) {
-  var_1 = var_0 _meth_808F();
+  var_1 = var_0 getorigin();
   playsoundatpos(var_1, "zmb_hc_enigma_use");
 }
 
-_id_8034() {
+setturretfov() {
   _id_0380::_id_2888("zmb_saltmine_door_powered", self);
 }
 
@@ -866,16 +866,16 @@ _id_201E() {
 }
 
 _id_1304() {
-  self _meth_8626("pneumo_tube_slide");
+  self clientaddsoundsubmix("pneumo_tube_slide");
   _id_0380::_id_288B("zmb_pneumo_tube_main", self, self);
   wait 7.63;
-  self _meth_8627("pneumo_tube_slide");
+  self clientclearsoundsubmix("pneumo_tube_slide");
 }
 
 _id_12E4() {
   foreach(var_1 in level.players) {
     if(distance(var_1.origin, self.origin) <= 800)
-      var_1 _meth_8626("claw_button_press");
+      var_1 clientaddsoundsubmix("claw_button_press");
   }
 
   _id_0380::_id_288B("zmb_claw_button_press", undefined, self);
@@ -885,7 +885,7 @@ _id_12E4() {
 
 _id_232A(var_0, var_1) {
   foreach(var_3 in level.players)
-  var_3 _meth_8626("shard_claw_movement");
+  var_3 clientaddsoundsubmix("shard_claw_movement");
 
   _id_0380::_id_288B("zmb_claw_move_start", undefined, var_0);
 
@@ -929,7 +929,7 @@ _id_255E() {
 _id_1D98(var_0) {
   if(var_0 == "off") {
     foreach(var_2 in level.players) {
-      var_2 _meth_8626("light_flicker_off_submix");
+      var_2 clientaddsoundsubmix("light_flicker_off_submix");
 
       if(var_2 maps\mp\mp_zombie_nest_ee_util::_id_7402())
         _id_0380::_id_2888("zmb_bunker_lights_off", var_2);
@@ -1000,10 +1000,10 @@ _id_08A5(var_0) {
 _id_08A6(var_0) {
   var_1 = self;
   var_2 = 15;
-  var_1 _meth_8626("build_ww_submix");
+  var_1 clientaddsoundsubmix("build_ww_submix");
   _id_0380::_id_2889("zmb_build_ww_transients", undefined, var_0);
   common_scripts\utility::waittill_notify_or_timeout("death", var_2);
-  var_1 _meth_8627("build_ww_submix");
+  var_1 clientclearsoundsubmix("build_ww_submix");
 }
 
 _id_ABF7() {}
@@ -1011,7 +1011,7 @@ _id_ABF7() {}
 _id_ABF8(var_0, var_1) {
   var_2 = spawn("script_origin", var_0);
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2);
-  var_2 _meth_82B1(var_1, 1.9);
+  var_2 moveto(var_1, 1.9);
   wait 2;
   var_2 delete();
 }
@@ -1112,7 +1112,7 @@ _id_A604() {
   var_2 = 12;
 
   for(var_3 = 0; var_3 < 5; var_3++) {
-    var_0[var_3] = 0.5 * _func_1E2(var_1, var_2);
+    var_0[var_3] = 0.5 * _pow(var_1, var_2);
     var_2 = var_2 - 1;
   }
 
@@ -1276,7 +1276,7 @@ voice_of_god_mix_begin() {
     if(distance(var_1.origin, level._id_11CB._id_A5FB.origin) <= 2000) {
       var_1 _id_0366::_id_8E32(1);
       var_1.voice_of_god_music_stopped = 1;
-      var_1 _meth_8626("voice_of_god");
+      var_1 clientaddsoundsubmix("voice_of_god");
       var_1 thread vog_do_earthshake();
     }
   }
@@ -1284,15 +1284,15 @@ voice_of_god_mix_begin() {
 
 vog_do_earthshake() {
   wait 3;
-  self _meth_809F("grenade_rumble");
-  _func_17F(0.2, 30, self.origin, 900, self);
+  self playrumbleonentity("grenade_rumble");
+  _earthquake(0.2, 30, self.origin, 900, self);
 }
 
 voice_of_god_mix_end(var_0, var_1) {
   wait(var_0);
 
   foreach(var_3 in level.players) {
-    var_3 _meth_8627("voice_of_god", var_1);
+    var_3 clientclearsoundsubmix("voice_of_god", var_1);
 
     if(isDefined(var_3.voice_of_god_music_stopped)) {
       if(_id_0366::snd_is_level_wave_active()) {
@@ -1489,7 +1489,7 @@ _id_9B4D(var_0) {
 
   foreach(var_2 in level.players) {
     if(distance(var_2.origin, self.origin) <= 2000)
-      var_2 _meth_8626("tower_lightning_strike_submix");
+      var_2 clientaddsoundsubmix("tower_lightning_strike_submix");
   }
 }
 
@@ -1501,7 +1501,7 @@ _id_9B4F() {
 _id_9B50() {
   var_0 = 10;
   common_scripts\utility::waittill_notify_or_timeout("death", var_0);
-  self _meth_8627("tower_lightning_strike_submix");
+  self clientclearsoundsubmix("tower_lightning_strike_submix");
 }
 
 _id_12D7() {
@@ -1567,7 +1567,7 @@ _id_17A2() {
   var_4 = 5.0;
   wait 1;
   var_5 = spawn("script_origin", var_0.origin);
-  var_5 _meth_8055(var_0, "tag_origin", (0, 0, -720), (0, 0, 0));
+  var_5 linkto(var_0, "tag_origin", (0, 0, -720), (0, 0, 0));
   var_6 = _id_0380::_id_6846("zmb_blimp_engine_lp", var_1, var_5, var_4, var_3, var_4);
   var_6 = _id_0380::_id_6846("zmb_blimp_engine_lfe_lp", var_1, var_5, var_4, var_3, var_4);
   var_0 thread _id_179E(var_5);
@@ -1629,7 +1629,7 @@ _id_1633() {
 
 _id_71C5(var_0, var_1) {
   if(isPlayer(var_1) && !isDefined(var_1._id_9AA9)) {
-    var_2 = _func_0A4(1, 100);
+    var_2 = _randomintrange(1, 100);
 
     if(var_2 == 1) {
       _id_0378::_id_7208("mp_nest_tortured_scream", var_1, var_0);
@@ -1638,8 +1638,8 @@ _id_71C5(var_0, var_1) {
   }
 }
 
-_id_80DF() {
-  var_0 = _func_18E("scream_trigger_01", "targetname");
+remotecontrolturret() {
+  var_0 = _getent("scream_trigger_01", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1648,8 +1648,8 @@ _id_80DF() {
   }
 }
 
-_id_80E0() {
-  var_0 = _func_18E("scream_trigger_02", "targetname");
+remotecontrolturretoff() {
+  var_0 = _getent("scream_trigger_02", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1658,8 +1658,8 @@ _id_80E0() {
   }
 }
 
-_id_80E1() {
-  var_0 = _func_18E("scream_trigger_03", "targetname");
+shootturret() {
+  var_0 = _getent("scream_trigger_03", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1816,7 +1816,7 @@ _id_9CA7(var_0) {
   var_10 = undefined;
 
   while(var_9 < 20) {
-    var_11 = _func_0A4(1, 2);
+    var_11 = _randomintrange(1, 2);
 
     if(var_11 == 1)
       var_10 = _id_0380::_id_2889("trap_elec_arc", undefined, var_2);
@@ -1945,10 +1945,10 @@ _id_8B10() {
 _id_6343(var_0) {
   var_1 = self;
   var_2 = 9;
-  var_1 _meth_8626("shoot_chandelier");
+  var_1 clientaddsoundsubmix("shoot_chandelier");
   _id_0380::_id_2889("zmb_shoot_chandelier_main", undefined, var_0);
   var_1 common_scripts\utility::waittill_notify_or_timeout("death", var_2);
-  self _meth_8627("shoot_chandelier");
+  self clientclearsoundsubmix("shoot_chandelier");
 }
 
 _id_4D73() {
@@ -1989,7 +1989,7 @@ _id_9CC8(var_0) {
 
 _id_1CC1() {
   foreach(var_1 in level.players)
-  var_1 _meth_8626("brute_intro", 2.0);
+  var_1 clientaddsoundsubmix("brute_intro", 2.0);
 
   _id_0366::_id_8E33(3);
   _id_0380::_id_6840("zmb_mus_brute_intro");
@@ -1997,5 +1997,5 @@ _id_1CC1() {
 
 _id_1CC2() {
   foreach(var_1 in level.players)
-  var_1 _meth_8627("brute_intro", 0.1);
+  var_1 clientclearsoundsubmix("brute_intro", 0.1);
 }

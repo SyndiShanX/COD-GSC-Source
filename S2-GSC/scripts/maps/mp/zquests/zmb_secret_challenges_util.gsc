@@ -98,7 +98,7 @@ get_next_player_weapon() {
     }
     foreach(var_4 in level.zmb_challenges_on_zombie_dmg_funcs) {
       if([[var_4._id_3F02]](var_4.param, var_1, var_2)) {
-        if(_func_031(var_4._id_67E9)) {
+        if(_isstring(var_4._id_67E9)) {
           level notify(var_4._id_67E9);
           continue;
         }
@@ -112,7 +112,7 @@ get_next_player_weapon() {
 is_lethal_or_tactical(var_0, var_1, var_2) {
   var_3 = self;
 
-  if(!_func_0C0(var_1))
+  if(!_isarray(var_1))
     var_1 = [var_1];
 
   foreach(var_9, var_5 in var_2) {
@@ -134,7 +134,7 @@ is_lethal_or_tactical(var_0, var_1, var_2) {
 is_headshot_class_exclusive(var_0, var_1, var_2) {
   var_3 = self;
 
-  if(!_func_0C0(var_1))
+  if(!_isarray(var_1))
     var_1 = [var_1];
 
   foreach(var_10, var_5 in var_2) {
@@ -221,7 +221,7 @@ wait_for_required_zombie_kills(var_0, var_1, var_2, var_3, var_4, var_5, var_6) 
 
 wait_for_gekocht_stage_challenge(var_0) {
   var_1 = common_scripts\utility::_id_46B5("stage_check_struct", "targetname");
-  var_2 = _func_18E(var_1.target, "targetname");
+  var_2 = _getent(var_1.target, "targetname");
   var_3 = 0;
   var_4 = 0.5;
 
@@ -310,7 +310,7 @@ register_zombie_killed_response(var_0, var_1, var_2, var_3, var_4, var_5, var_6)
 
   var_13 = spawnStruct();
 
-  if(_func_0C0(var_0))
+  if(_isarray(var_0))
     var_13.conditions_check_func = var_0;
   else
     var_13.conditions_check_func = [var_0];
@@ -392,7 +392,7 @@ get_players_to_reset(var_0, var_1) {
 reset_progress_when_off_stage(var_0) {
   var_1 = self;
   var_2 = common_scripts\utility::_id_46B5("stage_check_struct", "targetname");
-  var_3 = _func_18E(var_2.target, "targetname");
+  var_3 = _getent(var_2.target, "targetname");
 
   for(;;) {
     _id_0547::_id_A6F6();
@@ -540,7 +540,7 @@ try_add_progress_with_conditions(var_0, var_1, var_2, var_3, var_4, var_5, var_6
     var_17 = 1;
 
     foreach(var_19 in var_12) {
-      if(_func_031(var_19)) {
+      if(_isstring(var_19)) {
         if(!isDefined(var_19))
           var_17 = 0;
 

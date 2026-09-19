@@ -75,7 +75,7 @@ _id_478A(var_0) {
     var_1 = level.players;
 
   foreach(var_0 in var_1) {
-    var_3 = var_0 _meth_834A();
+    var_3 = var_0 getlethalweapon();
     var_4 = var_0 getoffhandsecondaryclass();
 
     if(0)
@@ -97,7 +97,7 @@ _id_A92B() {
 
   for(;;) {
     self waittill("missile_fire", var_0, var_1);
-    var_0._id_3C1D = self _meth_8178();
+    var_0._id_3C1D = self getstance();
   }
 }
 
@@ -136,7 +136,7 @@ _id_0667(var_0) {
   if(var_0 == self _meth_82D5())
     return 1;
 
-  var_2 = _func_05F(var_0);
+  var_2 = _getweaponbasename(var_0);
 
   if(_id_0547::_id_5865(var_2))
     return 1;
@@ -183,7 +183,7 @@ _id_05DF(var_0) {
 
 _id_0637() {
   var_0 = _id_063A();
-  var_1 = self _meth_8317();
+  var_1 = self getcurrentprimaryweapon();
 
   if(common_scripts\utility::_id_0F79(var_0, var_1))
     return var_1;
@@ -254,7 +254,7 @@ _id_A88C() {
     var_0 = _id_063A();
 
     foreach(var_2 in var_0) {
-      var_3 = _func_1A9(var_2);
+      var_3 = _weapontype(var_2);
 
       if(var_3 == "melee") {
         continue;
@@ -272,7 +272,7 @@ _id_A88C() {
       if(!isDefined(var_6))
         var_6 = "(removed) " + var_5.currentweapon;
 
-      if(_func_119(var_2, var_6) != 0) {
+      if(_stricmp(var_2, var_6) != 0) {
         if(isDefined(var_5._id_5B9F))
           self takeweapon(var_5._id_5B9F);
 
@@ -283,7 +283,7 @@ _id_A88C() {
     var_8 = [];
 
     foreach(var_10, var_5 in self._id_AB4A.weapons) {
-      if(isDefined(var_5._id_5B9F) && !self _meth_8319(var_5._id_5B9F))
+      if(isDefined(var_5._id_5B9F) && !self hasweapon(var_5._id_5B9F))
         var_8[var_8.size] = var_10;
     }
 
@@ -327,7 +327,7 @@ _id_4129(var_0) {
   if(issubstr(var_2, "akimbo"))
     var_1._id_0DB4 = self getweaponammoclip(var_2, "left");
 
-  if(!_func_1D8(var_0))
+  if(!_isweaponcliponly(var_0))
     var_1._id_0DBB = self getweaponammostock(var_2);
 
   return var_1;
@@ -345,7 +345,7 @@ _id_0F21(var_0, var_1) {
 
   var_5 = 0;
   var_6 = 0;
-  var_7 = _func_1A3(var_4, self);
+  var_7 = _weaponclipsize(var_4, self);
   var_5 = int(max(0, var_1._id_0DB3 - var_7));
   var_6 = var_6 + var_5;
   self setweaponammoclip(var_4, var_1._id_0DB3 - var_5, "right");
@@ -364,7 +364,7 @@ _id_0F21(var_0, var_1) {
 
   if(isDefined(var_1._id_0DBB)) {
     var_8 = var_1._id_0DBB + var_6;
-    var_9 = _func_1D6(var_4, self);
+    var_9 = _weaponmaxammo(var_4, self);
 
     if(var_8 > var_9) {
       _id_AC13("^3apply_ammo_info: Weapon max ammo isn't large enough to hold stored ammo bullets! Losing some ammo.");
@@ -408,7 +408,7 @@ _id_078C(var_0, var_1, var_2, var_3, var_4) {
     var_2 = 0;
 
   var_5 = weaponinventorytype(var_0);
-  var_6 = _func_1A9(var_0);
+  var_6 = _weapontype(var_0);
   var_7 = _id_0547::_id_AAF9(var_0);
   self notify("zm_stream_cancel_" + var_7);
 
@@ -467,7 +467,7 @@ _id_078F() {
   foreach(var_2 in var_0)
   _id_0790(var_2);
 
-  self _meth_8315();
+  self takeallweapons();
 }
 
 _id_0641(var_0, var_1, var_2, var_3, var_4) {
@@ -479,14 +479,14 @@ _id_0641(var_0, var_1, var_2, var_3, var_4) {
     var_2 = 0;
 
   var_5 = 0;
-  var_5 = self _meth_8512([var_0]);
+  var_5 = self loadweapons([var_0]);
 
   if(var_2) {
     wait 0;
 
     while(!var_5) {
       waitframe();
-      var_5 = self _meth_8512([var_0]);
+      var_5 = self loadweapons([var_0]);
     }
   }
 
@@ -506,7 +506,7 @@ _id_0641(var_0, var_1, var_2, var_3, var_4) {
 
 _id_A8C2(var_0, var_1) {
   for(;;) {
-    var_2 = self _meth_8512([var_0]);
+    var_2 = self loadweapons([var_0]);
 
     if(var_2) {
       break;
@@ -523,7 +523,7 @@ _id_0790(var_0) {
     return;
   }
   var_1 = weaponinventorytype(var_0);
-  var_2 = _func_1A9(var_0);
+  var_2 = _weapontype(var_0);
   var_3 = _id_0547::_id_AAF9(var_0);
 
   if(var_1 != "primary" && var_1 != "altmode" || var_2 == "melee") {
@@ -564,7 +564,7 @@ _id_098F(var_0) {
     self._id_AB4A._id_08DF[var_3] = 1;
   }
 
-  var_6 = self _meth_8317();
+  var_6 = self getcurrentprimaryweapon();
 
   foreach(var_11, var_8 in self._id_AB4A.weapons) {
     foreach(var_4 in var_1) {
@@ -595,7 +595,7 @@ _id_7CC9(var_0) {
     self._id_AB4A._id_08DF[var_3] = undefined;
   }
 
-  var_6 = self _meth_8317();
+  var_6 = self getcurrentprimaryweapon();
 
   foreach(var_11, var_8 in self._id_AB4A.weapons) {
     foreach(var_4 in var_1) {
@@ -610,7 +610,7 @@ _id_7CC9(var_0) {
 }
 
 _id_11BB(var_0) {
-  var_1 = self _meth_8317();
+  var_1 = self getcurrentprimaryweapon();
 
   if((!isDefined(var_1) || var_1 == "none") && (isDefined(var_0) && var_0 != "none"))
     _id_078E(var_0, 1);
@@ -630,13 +630,13 @@ _id_078E(var_0, var_1, var_2) {
   if(common_scripts\utility::_id_562E(var_2))
     self _meth_86A5(var_0);
   else if(common_scripts\utility::_id_562E(var_1))
-    self _meth_831B(var_0);
+    self switchtoweaponimmediate(var_0);
   else
     self switchtoweapon(var_0);
 }
 
 _id_2BA2(var_0) {
-  if(!self _meth_8343())
+  if(!self adsbuttonpressed())
     return 0;
 
   return 1;
@@ -656,9 +656,9 @@ _id_0791(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_5 = 1;
 
   if(!var_2 && !var_3 && !var_4 && !var_5)
-    return _func_119(var_0, var_1) == 0;
+    return _stricmp(var_0, var_1) == 0;
 
-  if((var_0 == "none" || var_1 == "none") && _func_119(var_0, var_1) != 0)
+  if((var_0 == "none" || var_1 == "none") && _stricmp(var_0, var_1) != 0)
     return 0;
 
   var_6 = _func_3A5(var_0);
@@ -680,16 +680,16 @@ _id_0791(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(var_2)
-    return _func_119(var_6["weapon"], var_7["weapon"]) == 0;
+    return _stricmp(var_6["weapon"], var_7["weapon"]) == 0;
   else {
     var_0 = _id_0547::_id_062F(var_6);
     var_1 = _id_0547::_id_062F(var_7);
-    return _func_119(var_0, var_1) == 0;
+    return _stricmp(var_0, var_1) == 0;
   }
 }
 
 _id_078A(var_0) {
-  if(self _meth_8319(var_0))
+  if(self hasweapon(var_0))
     return var_0;
 
   var_1 = _id_0547::_id_AAF9(var_0);
@@ -906,10 +906,10 @@ _id_ABD7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = var_1 _meth_82D5();
 
   if(var_4 == "frag_skull_zm")
-    var_4 = var_1 _meth_8317();
+    var_4 = var_1 getcurrentprimaryweapon();
 
   if(var_4 == var_9)
-    var_4 = var_1 _meth_8317();
+    var_4 = var_1 getcurrentprimaryweapon();
 
   var_10 = _id_43EE(var_1, var_4);
 
@@ -1054,7 +1054,7 @@ _id_50FA(var_0, var_1) {
   if(var_3 >= 150) {
     var_3 = var_3 - 150;
     var_4 = anglesToForward(self.angles) * 60;
-    var_5 = _func_082(self.origin + var_4, 16);
+    var_5 = _getgroundposition(self.origin + var_4, 16);
     var_5 = _func_2E1(var_5, self);
     var_6 = _func_2DC(self.origin, var_5, self, 1);
 
@@ -1069,17 +1069,17 @@ _id_50FA(var_0, var_1) {
 }
 
 _id_72C3() {
-  return isPlayer(self) && (common_scripts\utility::_id_562E(self._id_56A5) || common_scripts\utility::_id_562E(self.isswitchingtoblimppart)) && self _meth_8319("blimp_battery_zm");
+  return isPlayer(self) && (common_scripts\utility::_id_562E(self._id_56A5) || common_scripts\utility::_id_562E(self.isswitchingtoblimppart)) && self hasweapon("blimp_battery_zm");
 }
 
 player_is_holding_baby_statue() {
-  return isPlayer(self) && self _meth_8319("stone_baby_zm");
+  return isPlayer(self) && self hasweapon("stone_baby_zm");
 }
 
 zombies_hit_by_melee_cone(var_0, var_1, var_2) {
   var_3 = self getEye();
   var_4 = self _meth_8566();
-  var_5 = _func_0AF(90 - var_1 / 2, var_4[0]);
+  var_5 = _min(90 - var_1 / 2, var_4[0]);
   var_6 = anglesToForward((var_5, var_4[1], var_4[2]));
   var_7 = _id_43F1(var_3, var_6, var_0, var_1, var_2);
   return var_7;
@@ -1090,7 +1090,7 @@ _id_43F1(var_0, var_1, var_2, var_3, var_4) {
     var_4 = _id_0547::_id_408F();
 
   var_5 = [];
-  var_6 = _func_0A7(var_3 / 2);
+  var_6 = _cos(var_3 / 2);
 
   foreach(var_8 in var_4) {
     var_9 = var_8._id_8302;
@@ -1098,10 +1098,10 @@ _id_43F1(var_0, var_1, var_2, var_3, var_4) {
     var_11 = var_8.origin + (0, 0, var_9 * 0.5);
     var_12 = _func_3A2(var_0, -1.0 * var_1, var_6, var_2, var_11);
 
-    if(_func_211(var_12, var_11) > var_10 * var_10 || _func_0AE(var_11[2] - var_12[2]) > var_9 * 0.5) {
+    if(_distance2dsquared(var_12, var_11) > var_10 * var_10 || _abs(var_11[2] - var_12[2]) > var_9 * 0.5) {
       continue;
     }
-    if(var_8 _meth_81D7(var_0, self) == 0) {
+    if(var_8 damageconetrace(var_0, self) == 0) {
       continue;
     }
     var_5[var_5.size] = var_8;
@@ -1113,7 +1113,7 @@ _id_43F1(var_0, var_1, var_2, var_3, var_4) {
 create_streamed_world_weapon_model(var_0, var_1) {
   var_2 = spawn("weapon_" + var_0, var_1, 1);
   var_2._id_A9E0 = var_0;
-  var_2 _meth_80B3();
+  var_2 makeunusable();
   var_2 _meth_86B3(0);
   var_2 endon("entitydeleted");
   var_2 endon("death");
@@ -1124,8 +1124,8 @@ create_streamed_world_weapon_model(var_0, var_1) {
 
 change_streamed_world_weapon_model(var_0) {
   var_1 = self;
-  var_1 _meth_848E(var_0);
-  var_1 _meth_80B3();
+  var_1 setpickupweapon(var_0);
+  var_1 makeunusable();
   var_1._id_A9E0 = var_0;
   var_1 notify("streamed_world_weapon_changed");
   var_1 endon("entitydeleted");
@@ -1141,23 +1141,23 @@ show_streamed_world_weapon_to_player(var_0) {
   var_0 endon("streamed_world_weapon_changed");
   var_1 endon("disconnect");
 
-  if(var_1 _meth_8530(var_0._id_A9E0)) {
+  if(var_1 worldweaponsloaded(var_0._id_A9E0)) {
     return;
   }
   var_0 _meth_8006(var_1);
   var_2 = spawn("weapon_" + var_0._id_A9E0, var_0.origin, 1);
   var_2._id_A9E0 = var_0._id_A9E0;
-  var_2 _meth_80B3();
+  var_2 makeunusable();
   var_2 _meth_86B3(0);
-  var_2 _meth_8511();
+  var_2 ghost();
   var_1 thread cleanup_streamed_world_weapon(var_2, var_0);
 
-  while(!var_1 _meth_8530(var_2._id_A9E0)) {
+  while(!var_1 worldweaponsloaded(var_2._id_A9E0)) {
     waitframe();
     var_2.origin = var_0.origin;
   }
 
-  var_0 _meth_8005(var_1);
+  var_0 showtoplayer(var_1);
   var_2 notify("streamed_world_weapon");
   var_2 delete();
 }

@@ -20,7 +20,7 @@ _id_73BA(var_0) {
   var_1 = int(gettime() + var_0 * 1000);
 
   if(isDefined(self._id_2747) && self._id_2747) {
-    var_2 = self _meth_844A("ui_zm_camo");
+    var_2 = self getclientomnvar("ui_zm_camo");
 
     if(var_2 >= var_1)
       return;
@@ -34,7 +34,7 @@ _id_73BA(var_0) {
   self playlocalsound("zmb_ss_camo_use");
   self._id_2747++;
   _id_0547::_id_8A6D(1);
-  self _meth_82FF("ui_zm_camo", var_1);
+  self setclientomnvar("ui_zm_camo", var_1);
   _id_73BB(var_0);
 
   if(isDefined(self)) {

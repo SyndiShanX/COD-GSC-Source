@@ -46,23 +46,23 @@ _id_955B() {
 
   common_scripts\utility::_id_3799("needs_update");
 
-  if(!common_scripts\utility::_id_3C83(self._id_819A))
-    common_scripts\utility::flag_init(self._id_819A);
+  if(!common_scripts\utility::_id_3C83(self.getnegotiationnextnode))
+    common_scripts\utility::flag_init(self.getnegotiationnextnode);
 
   waittillframeend;
-  thread _id_9560(self._id_819A);
+  thread _id_9560(self.getnegotiationnextnode);
 
-  if(isDefined(self._id_81A1)) {
-    self._id_81A2 = strtok(self._id_81A1, " ");
+  if(isDefined(self.setgoalnode)) {
+    self.setgoalpos = strtok(self.setgoalnode, " ");
 
-    foreach(var_9 in self._id_81A2)
+    foreach(var_9 in self.setgoalpos)
     thread _id_9560(var_9);
   }
 
-  if(isDefined(self._id_819E)) {
-    self._id_819F = strtok(self._id_819E, " ");
+  if(isDefined(self.pushplayer)) {
+    self.checkgrenadethrowpos = strtok(self.pushplayer, " ");
 
-    foreach(var_9 in self._id_819F)
+    foreach(var_9 in self.checkgrenadethrowpos)
     thread _id_9560(var_9);
   }
 
@@ -101,8 +101,8 @@ _id_954A(var_0) {
     case "anim_model":
       self._id_6298 = var_0;
 
-      if(isDefined(self._id_6298._id_8109)) {
-        var_2 = strtok(self._id_6298._id_8109, ",");
+      if(isDefined(self._id_6298.setflaggedanimknoball)) {
+        var_2 = strtok(self._id_6298.setflaggedanimknoball, ",");
         self._id_6298._id_504F = var_2[0];
         self._id_6298._id_9E90 = var_2[1];
         self._id_6298._id_5051 = var_2[2];
@@ -145,14 +145,14 @@ _id_9561() {
     if(_id_9551()) {
       if(_id_9552()) {
         if(_id_9547()) {
-          common_scripts\utility::_id_3C7B(self._id_819A);
+          common_scripts\utility::_id_3C7B(self.getnegotiationnextnode);
           common_scripts\utility::_id_379A("needs_update");
         }
 
         continue;
       }
 
-      common_scripts\utility::flag_set(self._id_819A);
+      common_scripts\utility::flag_set(self.getnegotiationnextnode);
       common_scripts\utility::_id_379A("needs_update");
     }
   }
@@ -172,15 +172,15 @@ _id_9551() {
 }
 
 _id_7AC7() {
-  if(isDefined(self._id_81A2)) {
-    foreach(var_1 in self._id_81A2) {
+  if(isDefined(self.setgoalpos)) {
+    foreach(var_1 in self.setgoalpos) {
       if(!common_scripts\utility::_id_3C77(var_1))
         return var_1;
     }
   }
 
-  if(isDefined(self._id_819F)) {
-    foreach(var_1 in self._id_819F) {
+  if(isDefined(self.checkgrenadethrowpos)) {
+    foreach(var_1 in self.checkgrenadethrowpos) {
       if(common_scripts\utility::_id_3C77(var_1))
         return var_1;
     }
@@ -190,30 +190,30 @@ _id_7AC7() {
 }
 
 _id_9552() {
-  return common_scripts\utility::_id_3C77(self._id_819A);
+  return common_scripts\utility::_id_3C77(self.getnegotiationnextnode);
 }
 
 _id_9547() {
-  return _id_9551() && _id_9552() && isDefined(level._id_954E[self._id_819A]);
+  return _id_9551() && _id_9552() && isDefined(level._id_954E[self.getnegotiationnextnode]);
 }
 
 _id_955F() {
   if(isDefined(self._id_9D65)) {
     if(_id_9551()) {
       if(_id_9552())
-        var_0 = level._id_954E[self._id_819A];
+        var_0 = level._id_954E[self.getnegotiationnextnode];
       else
-        var_0 = level._id_954F[self._id_819A];
+        var_0 = level._id_954F[self.getnegotiationnextnode];
     } else if(!_id_9552() || _id_9547())
       var_0 = level._id_9550[_id_7AC7()];
     else
       var_0 = undefined;
 
     if(isDefined(var_0)) {
-      self._id_9D65 _meth_80CE(var_0);
+      self._id_9D65 sethintstring(var_0);
       self._id_9D65 makeusable();
     } else
-      self._id_9D65 _meth_80B3();
+      self._id_9D65 makeunusable();
   }
 
   if(_id_9552()) {
@@ -221,25 +221,25 @@ _id_955F() {
     _id_954D(var_2);
 
     foreach(var_5 in self._id_8BC8)
-    var_5 _meth_805B();
+    var_5 show();
 
     foreach(var_2 in self._id_4CE5)
     thread _id_954B(var_2);
 
     foreach(var_5 in self._id_4CE1)
-    var_5 _meth_805C();
+    var_5 hide();
   } else {
     foreach(var_2 in self._id_4CE5)
     _id_954D(var_2);
 
     foreach(var_5 in self._id_4CE1)
-    var_5 _meth_805B();
+    var_5 show();
 
     foreach(var_2 in self._id_8BCC)
     thread _id_954B(var_2);
 
     foreach(var_5 in self._id_8BC8)
-    var_5 _meth_805C();
+    var_5 hide();
   }
 
   if(isDefined(self._id_6298)) {
@@ -250,7 +250,7 @@ _id_955F() {
         var_19 = self._id_6298._id_9E87;
 
       if(isDefined(var_19)) {
-        self._id_6298 _meth_8276(var_19, "switch_transition_anim");
+        self._id_6298 scriptmodelplayanim(var_19, "switch_transition_anim");
         self._id_6298 waittillmatch("switch_transition_anim", "end");
       }
 
@@ -263,7 +263,7 @@ _id_955F() {
       else
         var_19 = self._id_6298._id_504F;
 
-      self._id_6298 _meth_8276(var_19);
+      self._id_6298 scriptmodelplayanim(var_19);
       self._id_9546 = _id_9552();
     }
   }
@@ -284,15 +284,15 @@ _id_954D(var_0) {
     var_0._id_5DA5 = spawn("script_model", var_0.origin);
     var_0._id_5DA5.angles = var_0.angles;
     var_0._id_5DA5 setModel("tag_origin");
-    var_0._id_5DA5 _meth_8055(self._id_6298, var_0._id_81C7);
-    var_0._id_3F3F = _func_2A8(common_scripts\utility::_id_44F5(var_0._id_81BB), var_0._id_5DA5, "tag_origin");
+    var_0._id_5DA5 linkto(self._id_6298, var_0._id_81C7);
+    var_0._id_3F3F = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0._id_81BB), var_0._id_5DA5, "tag_origin");
   } else
-    var_0._id_3F3F = _func_14B(common_scripts\utility::_id_44F5(var_0._id_81BB), var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
+    var_0._id_3F3F = _spawnfx(common_scripts\utility::_id_44F5(var_0._id_81BB), var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
 
   if(gettime() < 500)
-    _func_14C(var_0._id_3F3F, 0.5);
+    _triggerfx(var_0._id_3F3F, 0.5);
   else
-    _func_14C(var_0._id_3F3F);
+    _triggerfx(var_0._id_3F3F);
 }
 
 _id_954B(var_0) {

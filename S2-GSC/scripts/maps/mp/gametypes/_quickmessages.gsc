@@ -7,7 +7,7 @@ init() {
   game["menu_quickcommands"] = "quickcommands";
   game["menu_quickstatements"] = "quickstatements";
   game["menu_quickresponses"] = "quickresponses";
-  _func_160("talkingicon");
+  _precacheheadicon("talkingicon");
   precachestring(&"QUICKMESSAGE_FOLLOW_ME");
   precachestring(&"QUICKMESSAGE_MOVE_IN");
   precachestring(&"QUICKMESSAGE_FALL_BACK");
@@ -78,7 +78,7 @@ _id_7892(var_0) {
       break;
   }
 
-  _id_8069();
+  clearthermalfog();
   _id_329E(var_1, var_2);
   wait 2;
   self._id_8F67 = undefined;
@@ -122,7 +122,7 @@ _id_789C(var_0) {
       break;
   }
 
-  _id_8069();
+  clearthermalfog();
   _id_329E(var_1, var_2);
   wait 2;
   self._id_8F67 = undefined;
@@ -162,7 +162,7 @@ _id_7896(var_0) {
       break;
   }
 
-  _id_8069();
+  clearthermalfog();
   _id_329E(var_1, var_2);
   wait 2;
   self._id_8F67 = undefined;
@@ -179,7 +179,7 @@ _id_329E(var_0, var_1) {
     self._id_00BB = "none";
     self._id_00BA = "talkingicon";
     self playSound(var_2 + var_0);
-    self _meth_8244(var_1);
+    self sayteam(var_1);
   } else {
     if(self._id_0179 == "allies")
       self._id_00BB = "allies";
@@ -188,12 +188,12 @@ _id_329E(var_0, var_1) {
 
     self._id_00BA = "talkingicon";
     self playSound(var_2 + var_0);
-    self _meth_8245(var_1);
-    self _meth_8242();
+    self sayall(var_1);
+    self pingplayer();
   }
 }
 
-_id_8069() {
+clearthermalfog() {
   if(isDefined(self._id_00BA))
     self._id_6A5A = self._id_00BA;
 

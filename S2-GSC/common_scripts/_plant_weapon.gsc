@@ -13,8 +13,8 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isDefined(self._id_201C)) {
-    var_8 = var_0 == self._id_201C;
+  if(isDefined(self.carryweapon)) {
+    var_8 = var_0 == self.carryweapon;
 
     if(var_8)
       return;
@@ -27,7 +27,7 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self._id_7076 = undefined;
   self._id_76E7 = undefined;
   self._id_76EC = undefined;
-  self._id_201C = var_0;
+  self.carryweapon = var_0;
   self._id_7073 = undefined;
   self._id_A6B4 = 0;
   self._id_A1FC = 0;
@@ -59,20 +59,20 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 _id_680D() {
-  self _meth_82E1("plant_button_down", "+actionslot 3");
-  self _meth_82E1("plant_button_up", "-actionslot 3");
-  self _meth_82E1("use_button_down", "+usereload");
-  self _meth_82E1("use_button_up", "-usereload");
+  self notifyonplayercommand("plant_button_down", "+actionslot 3");
+  self notifyonplayercommand("plant_button_up", "-actionslot 3");
+  self notifyonplayercommand("use_button_down", "+usereload");
+  self notifyonplayercommand("use_button_up", "-usereload");
 }
 
 _id_680C() {
-  self _meth_84A7("plant_button_down", "+actionslot 3");
-  self _meth_84A7("plant_button_up", "-actionslot 3");
-  self _meth_84A7("use_button_down", "+usereload");
-  self _meth_84A7("use_button_up", "-usereload");
+  self notifyonplayercommandremove("plant_button_down", "+actionslot 3");
+  self notifyonplayercommandremove("plant_button_up", "-actionslot 3");
+  self notifyonplayercommandremove("use_button_down", "+usereload");
+  self notifyonplayercommandremove("use_button_up", "-usereload");
 }
 
-_id_8551(var_0) {
+getgroundentity(var_0) {
   self._id_7075 = var_0;
 }
 
@@ -100,7 +100,7 @@ _id_2399(var_0) {
   self._id_7076 = undefined;
   self._id_76E7 = undefined;
   self._id_76EC = undefined;
-  self._id_201C = undefined;
+  self.carryweapon = undefined;
   self._id_7077 = undefined;
   self._id_7073 = undefined;
   self._id_7075 = undefined;
@@ -111,15 +111,15 @@ _id_2399(var_0) {
   if(isPlayer(self))
     _id_680C();
 
-  self _meth_82FF("ui_lmg_mount_state", 0);
-  self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
+  self setclientomnvar("ui_lmg_mount_state", 0);
+  self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
 }
 
 _id_9EA3() {
   var_0 = undefined;
 
   if(isDefined(self._id_76EC))
-    var_0 = _func_0E5(self.angles - self._id_76EC);
+    var_0 = _lengthsquared(self.angles - self._id_76EC);
 
   self._id_76EC = self.angles;
   var_1 = getdvarfloat("weapon_plant_max_turn_angle_vect_distance_sq", 70.0);
@@ -134,13 +134,13 @@ _id_1F65() {
   if(isDefined(self._id_2FAF) && self._id_2FAF)
     return 0;
 
-  if(isDefined(self._id_2016) && isDefined(self._id_2016._id_201C) && (self._id_2016._id_201C == "iw5_carrydrone_mp" || self._id_2016._id_201C == "relic_mp"))
+  if(isDefined(self._id_2016) && isDefined(self._id_2016.carryweapon) && (self._id_2016.carryweapon == "iw5_carrydrone_mp" || self._id_2016.carryweapon == "relic_mp"))
     return 0;
 
   if(isDefined(self._id_5525) && self._id_5525)
     return 0;
 
-  if(!self._id_A1FC && self _meth_8346() && !self _meth_82E5() && !self _meth_82E4() && !self _meth_84DE() && !self _meth_833B() && !self _meth_8347() && !self _meth_817A() && !_id_9EA3() && !isDefined(self _meth_83F3()))
+  if(!self._id_A1FC && self isonground() && !self _meth_82E5() && !self ismantling() && !self isusingoffhand() && !self isswitchingweapon() && !self isusingturret() && !self _meth_817A() && !_id_9EA3() && !isDefined(self getmovingplatformparent()))
     return 1;
 
   return 0;
@@ -175,20 +175,20 @@ _id_584E() {
 }
 
 _id_2F97() {
-  self _meth_8112(1);
-  self _meth_8113(1);
-  self _meth_8114(1);
-  self _meth_8115(1);
-  self _meth_8307(1);
-  self _meth_8305(1);
-  self _meth_812A(1);
+  self allowstand(1);
+  self allowcrouch(1);
+  self allowprone(1);
+  self allowlean(1);
+  self allowmantle(1);
+  self allowjump(1);
+  self allowmelee(1);
   _id_6518(1);
 
   if(_id_8B6B())
     common_scripts\utility::_id_0617();
 
-  self _meth_8325();
-  self _meth_8332();
+  self enableoffhandweapons();
+  self enableusability();
 }
 
 _id_707A() {
@@ -205,16 +205,16 @@ _id_707A() {
   var_4 = self _meth_86B0();
   var_5 = max(10, var_4[0] - 15);
   var_4 = (-1 * var_5, var_4[1], var_4[2]);
-  var_4 = _func_112(var_4, var_3);
+  var_4 = _rotatevector(var_4, var_3);
   var_6 = self._id_7073 + var_4;
-  self._id_76E7 = self _meth_8178();
+  self._id_76E7 = self getstance();
 
   if(isDefined(self._id_7076)) {
     var_7 = self._id_7076;
-    var_8 = self _meth_8179(var_7);
+    var_8 = self setstance(var_7);
 
     if(isDefined(self._id_7075) && !var_8)
-      var_8 = self _meth_8179(var_7, 0);
+      var_8 = self setstance(var_7, 0);
   } else
     var_7 = self._id_76E7;
 
@@ -240,30 +240,30 @@ _id_707A() {
   _id_941B(var_15, var_16, var_17, var_18);
 
   if(var_7 != "stand")
-    self _meth_8112(0);
+    self allowstand(0);
 
   if(var_7 != "crouch")
-    self _meth_8113(0);
+    self allowcrouch(0);
 
   if(var_7 != "prone")
-    self _meth_8114(0);
+    self allowprone(0);
 
-  self _meth_8305(0);
-  self _meth_8307(0);
-  self _meth_812A(0);
+  self allowjump(0);
+  self allowmantle(0);
+  self allowmelee(0);
   _id_6518(0);
 
   if(_id_8B6B())
     common_scripts\utility::_id_0603();
 
-  self _meth_8324();
-  self _meth_8331();
+  self disableoffhandweapons();
+  self disableusability();
   self _meth_803B(self._id_7073, var_15, var_16, var_17, var_18);
   _id_707B(var_7, self._id_7073, self.angles);
 
   if(_id_43DD() == "SCRIPTED_SWAP") {
-    var_20 = self getweaponammoclip(self._id_201C);
-    var_21 = self getweaponammostock(self._id_201C);
+    var_20 = self getweaponammoclip(self.carryweapon);
+    var_21 = self getweaponammostock(self.carryweapon);
     var_22 = get_weapon_paintjobid();
     var_23 = get_weapon_charmguid();
     self giveweapon(self._id_706A, undefined, 1, self, var_22, var_23);
@@ -306,12 +306,12 @@ forcedismountweapon() {
 }
 
 _id_2FED(var_0) {
-  self _meth_8112(1);
-  self _meth_8113(1);
-  self _meth_8114(1);
+  self allowstand(1);
+  self allowcrouch(1);
+  self allowprone(1);
 
   if(isDefined(self._id_76E7)) {
-    self _meth_8179(self._id_76E7);
+    self setstance(self._id_76E7);
     self._id_76E7 = undefined;
   }
 
@@ -320,19 +320,19 @@ _id_2FED(var_0) {
   _id_2FEE();
 
   if(_id_43DD() == "SCRIPTED_SWAP") {
-    if(self _meth_8319(self._id_706A)) {
+    if(self hasweapon(self._id_706A)) {
       var_1 = self getweaponammoclip(self._id_706A);
       var_2 = self getweaponammostock(self._id_706A);
 
       if(self getcurrentweapon() == self._id_706A)
-        self switchtoweapon(self._id_201C);
+        self switchtoweapon(self.carryweapon);
 
-      self setweaponammoclip(self._id_201C, var_1);
-      self setweaponammostock(self._id_201C, var_2);
+      self setweaponammoclip(self.carryweapon, var_1);
+      self setweaponammostock(self.carryweapon, var_2);
       common_scripts\utility::_id_A71A(1.0, "weapon_change");
 
       if(self getcurrentweapon() == self._id_706A)
-        self switchtoweapon(self._id_201C);
+        self switchtoweapon(self.carryweapon);
 
       self takeweapon(self._id_706A);
     }
@@ -340,10 +340,10 @@ _id_2FED(var_0) {
     self _meth_8329();
 
     if(var_0) {
-      self switchtoweapon(self._id_201C);
+      self switchtoweapon(self.carryweapon);
       wait 1;
     } else
-      self _meth_831B(self._id_201C);
+      self switchtoweaponimmediate(self.carryweapon);
 
     self _meth_8328();
   } else if(_id_43DD() == "NATIVE_DPAD_LEFT") {
@@ -358,7 +358,7 @@ _id_2FED(var_0) {
 
       if(self getcurrentweapon() == self._id_706A) {}
     } else
-      self _meth_831B(self._id_201C);
+      self switchtoweaponimmediate(self.carryweapon);
   }
 
   _id_2F97();
@@ -399,12 +399,12 @@ _id_A6A5(var_0) {
 
   if(isDefined(var_0)) {
     childthread _id_21D0(var_0);
-    var_1 = common_scripts\utility::_id_A715("plant_button_down", "plantOnEntityRemoved", "native_dpad_force_plant");
+    var_1 = common_scripts\utility::waittill_any_return("plant_button_down", "plantOnEntityRemoved", "native_dpad_force_plant");
 
     if(isDefined(var_1) && var_1 == "plantOnEntityRemoved")
       return 1;
   } else
-    var_1 = common_scripts\utility::_id_A715("plant_button_down", "native_dpad_force_plant");
+    var_1 = common_scripts\utility::waittill_any_return("plant_button_down", "native_dpad_force_plant");
 
   if(_id_43DD() != "NATIVE_DPAD_LEFT") {
     _id_98E0();
@@ -434,7 +434,7 @@ _id_A772(var_0) {
     childthread _id_21D0(var_0);
 
   for(;;) {
-    if(self getcurrentweapon() == self._id_201C || self getcurrentweapon() == self._id_706A && self _meth_8677()) {
+    if(self getcurrentweapon() == self.carryweapon || self getcurrentweapon() == self._id_706A && self _meth_8677()) {
       _id_98E0();
       return 1;
     } else
@@ -444,7 +444,7 @@ _id_A772(var_0) {
 
 _id_A771() {
   for(;;) {
-    if(self getcurrentweapon() == self._id_706A && self _meth_8678() || self getcurrentweapon() == self._id_201C && self _meth_8677()) {
+    if(self getcurrentweapon() == self._id_706A && self _meth_8678() || self getcurrentweapon() == self.carryweapon && self _meth_8677()) {
       waitframe();
       continue;
     }
@@ -500,14 +500,14 @@ _id_9963() {
         if(isDefined(_id_A6A5())) {
           if(isDefined(self._id_7073))
             _id_38F6();
-          else if(self _meth_8178() == "prone" && _id_1F65())
+          else if(self getstance() == "prone" && _id_1F65())
             _id_3A66();
         }
 
         break;
       case "STATE_CARRY_TO_PLANT":
         _id_707A();
-        self _meth_8115(1);
+        self allowlean(1);
         _id_38F6();
         break;
       case "STATE_PLANTED_NO_CARRY":
@@ -572,25 +572,25 @@ _id_A123() {
     switch (self._id_7077) {
       case "STATE_CARRY":
       case "STATE_FIRST_CARRY":
-        if(self _meth_8347()) {
+        if(self isusingturret()) {
           waitframe();
           continue;
         }
 
         if(isDefined(self._id_7073)) {
-          self _meth_82FF("ui_lmg_mount_state", 0);
-          self _meth_82FF("ui_show_division_lmg_ability_prompt", 1);
+          self setclientomnvar("ui_lmg_mount_state", 0);
+          self setclientomnvar("ui_show_division_lmg_ability_prompt", 1);
         } else
-          self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
+          self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
 
         break;
       case "STATE_PLANTED":
-        self _meth_82FF("ui_lmg_mount_state", 1);
+        self setclientomnvar("ui_lmg_mount_state", 1);
 
         if(!isDefined(self._id_706E) || !self._id_706E)
-          self _meth_82FF("ui_show_division_lmg_ability_prompt", 1);
+          self setclientomnvar("ui_show_division_lmg_ability_prompt", 1);
         else
-          self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
+          self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
 
         if(_id_43DD() == "SCRIPTED_SWAP") {
           if(isDefined(self._id_706A) && self getcurrentweapon() == self._id_706A) {
@@ -598,8 +598,8 @@ _id_A123() {
             var_1 = self getweaponammostock(self._id_706A);
 
             if(var_1 == 0 && var_0 < 2) {
-              self setweaponammoclip(self._id_201C, var_0);
-              self setweaponammostock(self._id_201C, var_1);
+              self setweaponammoclip(self.carryweapon, var_0);
+              self setweaponammostock(self.carryweapon, var_1);
             }
           }
         }
@@ -609,7 +609,7 @@ _id_A123() {
       case "STATE_PLANTED_TO_CARRY":
       case "STATE_PLANTED_NO_CARRY":
       case "STATE_CARRY_TO_PLANT":
-        self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
+        self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
         break;
     }
 
@@ -644,7 +644,7 @@ _id_62DA() {
         }
 
         var_3 = getdvarint("weapon_plant_prone_plant", 1);
-        var_4 = var_3 && self _meth_8178() == "prone";
+        var_4 = var_3 && self getstance() == "prone";
         var_5 = getdvarint("turret_clip_plant", 1);
         var_6 = getdvarint("turret_mantle_plant", 0);
         var_7 = undefined;
@@ -796,10 +796,10 @@ _id_6370() {
     if(_id_43DD() == "SCRIPTED_SWAP") {
       var_1 = 0;
       var_2 = isDefined(self._id_706A) && var_4 == self._id_706A;
-      var_3 = isDefined(self._id_706A) && var_4 == self._id_201C;
+      var_3 = isDefined(self._id_706A) && var_4 == self.carryweapon;
 
       if(var_3) {
-        if(isDefined(self._id_706A) && self _meth_8319(self._id_706A)) {
+        if(isDefined(self._id_706A) && self hasweapon(self._id_706A)) {
           var_5 = self getweaponammoclip(self._id_706A);
           var_6 = self getweaponammostock(self._id_706A);
           var_7 = var_5 == 0 && var_6 == 0;
@@ -813,7 +813,7 @@ _id_6370() {
         }
       }
     } else
-      var_1 = var_4 == self._id_201C || var_4 == self._id_706A;
+      var_1 = var_4 == self.carryweapon || var_4 == self._id_706A;
 
     if(var_4 != "none" && (var_1 || var_2 || var_3)) {
       thread _id_6370();
@@ -829,10 +829,10 @@ _id_6370() {
 
 _id_98DF() {
   if(_id_43DD() != "NATIVE_DPAD_LEFT")
-    self _meth_8115(1);
+    self allowlean(1);
 
-  self _meth_8305(1);
-  self _meth_8307(1);
+  self allowjump(1);
+  self allowmantle(1);
   self.tmpplayerfreeze = undefined;
 }
 
@@ -840,10 +840,10 @@ _id_98E0() {
   self.tmpplayerfreeze = 1;
 
   if(_id_43DD() != "NATIVE_DPAD_LEFT")
-    self _meth_8115(0);
+    self allowlean(0);
 
-  self _meth_8305(0);
-  self _meth_8307(0);
+  self allowjump(0);
+  self allowmantle(0);
 }
 
 _id_21D0(var_0) {
@@ -868,8 +868,8 @@ _id_21D0(var_0) {
     var_2 = var_0.origin;
     var_3 = var_0.angles;
 
-    if(var_0 _meth_8221() && var_0 _meth_8181("TAG_YAW") != -1)
-      var_4 = var_0 _meth_8181("TAG_YAW");
+    if(var_0 _meth_8221() && var_0 gettagangles("TAG_YAW") != -1)
+      var_4 = var_0 gettagangles("TAG_YAW");
   }
 
   for(;;) {
@@ -883,18 +883,18 @@ _id_21D0(var_0) {
       var_1 = 1;
     else if(isDefined(var_0.model) && var_0.model != "" && (var_0 _meth_8687() && var_0 _meth_8672() > 0.0))
       var_1 = 1;
-    else if(isDefined(var_2) && _func_211(var_2, var_0.origin) > 1.0)
+    else if(isDefined(var_2) && _distance2dsquared(var_2, var_0.origin) > 1.0)
       var_1 = 1;
     else if(isDefined(var_3) && distancesquared(var_3, var_0.angles) > 1.0)
       var_1 = 1;
-    else if(isDefined(var_4) && _func_211(var_4, var_0 _meth_8181("TAG_YAW")) > 1.0)
+    else if(isDefined(var_4) && _distance2dsquared(var_4, var_0 gettagangles("TAG_YAW")) > 1.0)
       var_1 = 1;
 
     if(var_1) {
       self notify("plantOnEntityRemoved");
 
       if(_id_43DD() == "NATIVE_DPAD_LEFT")
-        self switchtoweapon(self._id_201C);
+        self switchtoweapon(self.carryweapon);
 
       return;
     }
@@ -965,7 +965,7 @@ get_weapon_charmguid() {
 }
 
 _id_43DD() {
-  return _id_43DC(self._id_201C);
+  return _id_43DC(self.carryweapon);
 }
 
 _id_43DC(var_0) {

@@ -11,7 +11,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -50,31 +50,31 @@ main() {
 
   game["dialog"]["offense_obj"] = "gbl_destroyobj";
   game["dialog"]["defense_obj"] = "gbl_defendobj";
-  _func_032("ui_bomb_a_timer_endtime", 0);
-  _func_032("ui_bomb_b_timer_endtime", 0);
+  _setomnvar("ui_bomb_a_timer_endtime", 0);
+  _setomnvar("ui_bomb_b_timer_endtime", 0);
 }
 
 _id_5300() {
   maps\mp\_utility::_id_8653();
-  var_0 = _func_132("sdData", "roundLength");
-  _func_035("scr_sd_timelimit", var_0);
+  var_0 = _getmatchrulesdata("sdData", "roundLength");
+  _setdynamicdvar("scr_sd_timelimit", var_0);
   maps\mp\_utility::registertimelimitdvar("sd", var_0);
-  var_1 = _func_132("sdData", "roundSwitch");
-  _func_035("scr_sd_roundswitch", var_1);
+  var_1 = _getmatchrulesdata("sdData", "roundSwitch");
+  _setdynamicdvar("scr_sd_roundswitch", var_1);
   maps\mp\_utility::registerroundswitchdvar("sd", var_1, 0, 9);
-  var_2 = _func_132("commonOption", "scoreLimit");
-  _func_035("scr_sd_winlimit", var_2);
+  var_2 = _getmatchrulesdata("commonOption", "scoreLimit");
+  _setdynamicdvar("scr_sd_winlimit", var_2);
   maps\mp\_utility::registerwinlimitdvar("sd", var_2);
-  _func_035("scr_sd_bombtimer", _func_132("sdData", "bombTimer"));
-  _func_035("scr_sd_planttime", _func_132("sdData", "plantTime"));
-  _func_035("scr_sd_defusetime", _func_132("sdData", "defuseTime"));
-  _func_035("scr_sd_multibomb", _func_132("sdData", "multiBomb"));
-  _func_035("scr_sd_silentplant", _func_132("sdData", "silentPlant"));
-  _func_035("scr_sd_roundlimit", 0);
+  _setdynamicdvar("scr_sd_bombtimer", _getmatchrulesdata("sdData", "bombTimer"));
+  _setdynamicdvar("scr_sd_planttime", _getmatchrulesdata("sdData", "plantTime"));
+  _setdynamicdvar("scr_sd_defusetime", _getmatchrulesdata("sdData", "defuseTime"));
+  _setdynamicdvar("scr_sd_multibomb", _getmatchrulesdata("sdData", "multiBomb"));
+  _setdynamicdvar("scr_sd_silentplant", _getmatchrulesdata("sdData", "silentPlant"));
+  _setdynamicdvar("scr_sd_roundlimit", 0);
   maps\mp\_utility::registerroundlimitdvar("sd", 0);
-  _func_035("scr_sd_scorelimit", 1);
+  _setdynamicdvar("scr_sd_scorelimit", 1);
   maps\mp\_utility::registerscorelimitdvar("sd", 1);
-  _func_035("scr_sd_halftime", 0);
+  _setdynamicdvar("scr_sd_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("sd", 0);
 }
 
@@ -89,8 +89,8 @@ _id_6BAF() {
     game["defenders"] = var_0;
   }
 
-  _func_032("ui_war_attacker_team", maps\mp\_utility::_id_46D4(game["attackers"]));
-  _func_157("manual_change");
+  _setomnvar("ui_war_attacker_team", maps\mp\_utility::_id_46D4(game["attackers"]));
+  _setclientnamemode("manual_change");
   level._effect["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
   level._effect["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
   maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
@@ -114,7 +114,7 @@ _id_6BAF() {
   thread maps\mp\gametypes\common_sd_sr::_id_A121();
   maps\mp\gametypes\common_sd_sr::_id_872D();
   thread maps\mp\gametypes\common_sd_sr::_id_18FD();
-  thread _id_832D();
+  thread openmenu();
 }
 
 _id_6BA7() {
@@ -132,10 +132,10 @@ _id_6BA7() {
 
   if(isPlayer(self) && !var_0) {
     if(level._id_6510 && self.pers["team"] == game["attackers"]) {
-      self _meth_82FF("ui_carrying_bomb", 1);
+      self setclientomnvar("ui_carrying_bomb", 1);
       thread maps\mp\gametypes\_hud_message::_id_9102("bomb_pickedup");
     } else
-      self _meth_82FF("ui_carrying_bomb", 0);
+      self setclientomnvar("ui_carrying_bomb", 0);
   }
 
   maps\mp\_utility::_id_867B(0);
@@ -157,24 +157,24 @@ _id_6BA7() {
 
 _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(isPlayer(self))
-    self _meth_82FF("ui_carrying_bomb", 0);
+    self setclientomnvar("ui_carrying_bomb", 0);
 
   thread maps\mp\gametypes\common_sd_sr::_id_21AB();
   maps\mp\gametypes\common_sd_sr::_id_254C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
-_id_832D() {
+openmenu() {
   var_0 = undefined;
   var_1 = undefined;
 
   foreach(var_3 in level._id_1913) {
-    if(isDefined(var_3._id_9D65) && isDefined(var_3._id_9D65._id_81E8)) {
-      if(var_3._id_9D65._id_81E8 == "_a") {
+    if(isDefined(var_3._id_9D65) && isDefined(var_3._id_9D65.shootblank)) {
+      if(var_3._id_9D65.shootblank == "_a") {
         var_0 = var_3;
         continue;
       }
 
-      if(var_3._id_9D65._id_81E8 == "_b")
+      if(var_3._id_9D65.shootblank == "_b")
         var_1 = var_3;
     }
   }
@@ -202,11 +202,11 @@ _id_832D() {
     }
 
     if(isDefined(level._id_18F9) && level._id_18F9 && isDefined(level._id_7069)) {
-      var_8 = level._id_7069._id_9D65._id_81E8;
+      var_8 = level._id_7069._id_9D65.shootblank;
       var_6 = level._id_7069._id_9D65.origin;
     }
 
-    _func_0F5("script_mp_sd: gameTime %d, bomb_a_loc %v, bomb_b_loc %v, bomb_loc %v, bomb_carrier %s, planted_location %s", var_9, var_0._id_9D65.origin, var_1._id_9D65.origin, var_6, var_7, var_8);
+    _reconevent("script_mp_sd: gameTime %d, bomb_a_loc %v, bomb_b_loc %v, bomb_loc %v, bomb_carrier %s, planted_location %s", var_9, var_0._id_9D65.origin, var_1._id_9D65.origin, var_6, var_7, var_8);
     wait 0.2;
   }
 }

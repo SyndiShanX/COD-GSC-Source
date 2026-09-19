@@ -8,10 +8,10 @@ _id_A9CE() {
 }
 
 getattachmentforzombieweapon(var_0, var_1) {
-  if(!isDefined(var_1) || !_func_031(var_1) || var_1 == "")
+  if(!isDefined(var_1) || !_isstring(var_1) || var_1 == "")
     return undefined;
 
-  var_2 = _func_060(var_0);
+  var_2 = _getweaponattachmentsbasenames(var_0);
 
   foreach(var_4 in var_2) {
     if(issubstr(var_4, var_1))

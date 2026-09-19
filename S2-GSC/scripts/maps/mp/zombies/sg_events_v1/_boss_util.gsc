@@ -22,14 +22,14 @@ spawn_zombie_boss_weapon_loot(var_0) {
   var_2 = spawnStruct();
   var_2.origin = _func_2E1(var_0) + (0, 0, 24);
   var_3 = var_2 common_scripts\utility::_id_8FFC();
-  var_3 _meth_805B();
+  var_3 show();
   var_3 thread floaty();
   var_3.angles = var_3.angles + (30, 70, 0);
   var_3 setModel("zmb_balacc_01");
   var_4 = spawnStruct();
   var_4.origin = var_3.origin;
   var_5 = _id_0547::_id_8FBA(var_4, "zmb_ber_gun_cone_glow");
-  _func_14C(var_5);
+  _triggerfx(var_5);
   var_5.origin = var_4.origin;
 
   foreach(var_7 in level.players) {
@@ -37,9 +37,9 @@ spawn_zombie_boss_weapon_loot(var_0) {
     var_5 _meth_8006(var_7);
   }
 
-  var_3 _meth_8005(var_1);
+  var_3 showtoplayer(var_1);
   var_3 _id_0378::_id_8D74("zmb_ballistic_aura");
-  var_5 _meth_8005(var_1);
+  var_5 showtoplayer(var_1);
   wait_for_player_pickup_or_timeout(var_3, var_1);
   var_3 delete();
   level notify("aud_stop_ballistic_aura_snd");
@@ -76,7 +76,7 @@ spawn_zombie_boss_weapon_loot(var_0) {
       var_17 = "dlc3_exp_ref_3";
     }
 
-    _id_0555::_id_83DD("dlc3_ba_hint", var_1, var_16);
+    _id_0555::issprinting("dlc3_ba_hint", var_1, var_16);
     _id_054D::giveplayersexp(var_17, var_1);
   }
 }
@@ -88,18 +88,18 @@ floaty() {
   waitframe();
 
   for(;;) {
-    self _meth_82B1(self._id_6C53 + (0, 0, 3), 3, 1, 1);
-    self _meth_82BA(180, 3);
+    self moveto(self._id_6C53 + (0, 0, 3), 3, 1, 1);
+    self rotateyaw(180, 3);
     wait 3;
-    self _meth_82B1(self._id_6C53 + (0, 0, -3), 3, 1, 1);
-    self _meth_82BA(180, 3);
+    self moveto(self._id_6C53 + (0, 0, -3), 3, 1, 1);
+    self rotateyaw(180, 3);
     wait 3;
   }
 }
 
 show_reward_splash(var_0, var_1) {
   var_0 endon("disconnect");
-  _id_0555::_id_83DD("dlc3_ba_hint", var_0, var_1);
+  _id_0555::issprinting("dlc3_ba_hint", var_0, var_1);
   wait 1;
   var_0 maps\mp\gametypes\_hud_message::_id_9102("zm_collectible_splash_11");
 }

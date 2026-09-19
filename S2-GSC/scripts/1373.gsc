@@ -47,7 +47,7 @@ _id_1769() {
     var_7 = 1;
 
     if(var_7)
-      wait(_func_0A5(10.0, 30.0));
+      wait(_randomfloatrange(10.0, 30.0));
 
     while(level._id_AB58 >= level._id_AB5A || _id_0F0B(390) || _id_0F0D(0))
       wait 5;
@@ -109,17 +109,17 @@ _id_8FAA(var_0) {
   }
 
   wait 0.1;
-  _func_175(self._id_AA2A, 48, 16, 1, 0);
-  _func_17E(self._id_AA2A, 48, 100, 50);
-  _func_17F(0.5, 1.5, self._id_78CB.origin, self._id_78CB.radius * 2);
-  _func_1BB("zombie_birds_rumble", self._id_78CB.origin);
+  _physicsexplosionsphere(self._id_AA2A, 48, 16, 1, 0);
+  _glassradiusdamage(self._id_AA2A, 48, 100, 50);
+  _earthquake(0.5, 1.5, self._id_78CB.origin, self._id_78CB.radius * 2);
+  _playrumbleonposition("zombie_birds_rumble", self._id_78CB.origin);
 }
 
 _id_1763(var_0, var_1) {
   var_2 = 2;
   var_3 = 40;
   var_4 = 10;
-  wait(_func_0A5(0, var_2));
+  wait(_randomfloatrange(0, var_2));
   var_5 = undefined;
 
   if(isPlayer(var_1)) {
@@ -133,9 +133,9 @@ _id_1763(var_0, var_1) {
     var_6 = var_1.origin - self.origin;
     var_7 = vectortoangles(var_6)[1];
     var_8 = var_7 - self.angles[1];
-    var_8 = var_8 + _func_0A5(0 - var_4, var_4);
+    var_8 = var_8 + _randomfloatrange(0 - var_4, var_4);
 
-    if(_func_115(var_0._id_8260, "_v1") || _func_115(var_0._id_8260, "_v3")) {
+    if(_isendstr(var_0.setlookatent, "_v1") || _isendstr(var_0.setlookatent, "_v3")) {
       var_9 = 0 - var_3;
       var_10 = 0;
     } else {
@@ -144,7 +144,7 @@ _id_1763(var_0, var_1) {
     }
 
     var_8 = clamp(var_8, var_9, var_10);
-    var_11 = _func_111(self.origin, self.angles + (0, var_8, 0), self.origin, self.angles, var_0.origin, var_0.angles);
+    var_11 = _transformmove(self.origin, self.angles + (0, var_8, 0), self.origin, self.angles, var_0.origin, var_0.angles);
     var_12 = var_11["origin"];
     var_13 = var_11["angles"];
   } else {
@@ -155,7 +155,7 @@ _id_1763(var_0, var_1) {
   var_14 = spawn("script_model", var_12);
   var_14.angles = var_13;
   var_14 setModel("ani_raven_rig");
-  var_14 _meth_8278(var_0._id_8260, "bird_anim");
+  var_14 scriptmodelplayanimdeltamotion(var_0.setlookatent, "bird_anim");
   var_14 thread _id_1760();
   var_14 waittillmatch("bird_anim", "end");
   var_14 delete();
@@ -227,7 +227,7 @@ _id_1765(var_0) {
     if(!isPlayer(var_1)) {
       continue;
     }
-    if(_func_0A3(1) < 0.9) {
+    if(_randomfloat(1) < 0.9) {
       var_0 notify("birds_command", "fly_away", var_1);
       continue;
     }
@@ -237,8 +237,8 @@ _id_1765(var_0) {
 }
 
 _id_1768(var_0) {
-  var_1 = _func_0A7(32.5);
-  var_0 _id_055B::_id_84F0("birds");
+  var_1 = _cos(32.5);
+  var_0 _id_055B::loadcostumemodels("birds");
 
   for(;;) {
     self waittill("trigger", var_2);
@@ -278,7 +278,7 @@ _id_1764() {
 
 _id_1766() {
   self endon("birds_command");
-  wait(_func_0A5(15.0, 45.0));
+  wait(_randomfloatrange(15.0, 45.0));
   self notify("birds_command", "never_mind");
 }
 

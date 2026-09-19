@@ -8,7 +8,7 @@ main() {
 }
 
 _id_87A7() {
-  level._id_19D5["gametype_think"] = ::_id_1ABC;
+  level.bot_funcs["gametype_think"] = ::_id_1ABC;
 }
 
 _id_1ABC() {

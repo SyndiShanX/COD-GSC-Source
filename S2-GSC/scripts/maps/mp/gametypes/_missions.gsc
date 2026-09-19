@@ -63,7 +63,7 @@ onplayerconnect() {
       var_0 thread _id_63B2();
       var_0 thread _id_63FA();
       var_0 thread _id_63C3();
-      var_0 _meth_82E1("jumped", "+goStand");
+      var_0 notifyonplayercommand("jumped", "+goStand");
       var_0 thread _id_63AE();
       var_0.streaksdestroyedthislife = [];
     } else
@@ -375,7 +375,7 @@ ch_vehicle_killed(var_0) {
   }
 
   if(var_1 maps\mp\_utility::_hasperk("specialty_coldblooded") && var_1 maps\mp\_utility::_hasperk("specialty_spygame") && var_1 maps\mp\_utility::_hasperk("specialty_heartbreaker")) {
-    if(!isDefined(var_0._id_A2C8) || !isDefined(var_0._id_A2C8._id_83EA) || var_0._id_A2C8._id_83EA != "prison_turret")
+    if(!isDefined(var_0._id_A2C8) || !isDefined(var_0._id_A2C8.setsurfacetype) || var_0._id_A2C8.setsurfacetype != "prison_turret")
       var_1 processchallenge("ch_precision_airhunt");
   }
 
@@ -415,7 +415,7 @@ _id_36D8() {
   self endon("disconnect");
 
   for(;;) {
-    if(!isalive(self) || self _meth_8341()) {
+    if(!isalive(self) || self usebuttonpressed()) {
       self.pers["MGStreak"] = undefined;
       break;
     }
@@ -523,7 +523,7 @@ ch_kills(var_0) {
   var_8 = [];
   var_9 = var_0._id_8CD7;
   var_10 = var_0.time;
-  var_11 = _func_061(var_0._id_953E);
+  var_11 = _getweaponattachments(var_0._id_953E);
   var_12 = 0;
 
   if(isDefined(var_1._id_6FBA[var_0._id_953E]) && !maps\mp\_utility::_id_5755(var_9))
@@ -837,7 +837,7 @@ ch_kills(var_0) {
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_inconspicuous") && var_21 == "crouch")
       var_1 processchallenge("ch_physical_inconspicuous");
 
-    if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_scoped") && var_1 _meth_8343())
+    if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_scoped") && var_1 adsbuttonpressed())
       var_1 processchallenge("ch_marksman_scoped");
 
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_energetic") && isDefined(var_1._id_5BE3) && gettime() - var_1._id_5BE3 < 5000)
@@ -852,7 +852,7 @@ ch_kills(var_0) {
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_lookout") && var_16)
       var_1 processchallenge("ch_operations_lookout");
 
-    if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_gunslinger") && var_1 _meth_83DD())
+    if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_class_gunslinger") && var_1 issprinting())
       var_1 processchallenge("ch_physical_gunslinger");
 
     if(var_43 && var_1 maps\mp\_utility::_hasperk("specialty_exo_blastsuppressor"))
@@ -998,7 +998,7 @@ ch_kills(var_0) {
     var_1 _id_34C3();
 
   foreach(var_65 in var_11)
-  _id_80A0(var_1, var_65, var_11, var_0._id_953E, var_18, var_15, var_16, var_19, var_22);
+  playrumblelooponentity(var_1, var_65, var_11, var_0._id_953E, var_18, var_15, var_16, var_19, var_22);
 
   if(!maps\mp\_utility::_id_5755(var_9) && !var_14 && !var_13) {
     switch (var_33) {
@@ -1258,7 +1258,7 @@ ch_kills(var_0) {
         var_1 processchallenge("ch_camo_" + var_31);
     }
 
-    if(var_33 == "weapon_other" && _func_1A9(var_0._id_953E) == "melee")
+    if(var_33 == "weapon_other" && _weapontype(var_0._id_953E) == "melee")
       var_1 processchallenge("ch_camo_" + var_31);
   }
 
@@ -1439,7 +1439,7 @@ ch_kills(var_0) {
 }
 
 isgunmeleeattack(var_0, var_1) {
-  return maps\mp\_utility::_id_5755(var_0) && _func_1A9(var_1) != "melee";
+  return maps\mp\_utility::_id_5755(var_0) && _weapontype(var_1) != "melee";
 }
 
 _id_6359() {
@@ -1477,7 +1477,7 @@ tier3camochallenge(var_0, var_1) {
   var_3 = var_1 + var_2;
   var_4 = _id_4450(var_3);
 
-  if(_func_1B1(maps\mp\gametypes\_gamelogic::getweaponlevelingtablename(), 0, var_2) == -1) {
+  if(_tablelookuprownum(maps\mp\gametypes\_gamelogic::getweaponlevelingtablename(), 0, var_2) == -1) {
     return;
   }
   if(!isDefined(self.pers["weaponPrestige"][var_2]))
@@ -1500,7 +1500,7 @@ tier4camochallenge(var_0, var_1) {
   var_3 = var_1 + var_2;
   var_4 = _id_4450(var_3);
 
-  if(_func_1B1(maps\mp\gametypes\_gamelogic::getweaponlevelingtablename(), 0, var_2) == -1) {
+  if(_tablelookuprownum(maps\mp\gametypes\_gamelogic::getweaponlevelingtablename(), 0, var_2) == -1) {
     return;
   }
   if(!isDefined(self.pers["weaponPrestige"][var_2]))
@@ -1774,12 +1774,12 @@ _id_73CC(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6._id_8CD7 = var_3;
   var_6._id_953E = var_4;
   var_6._id_8B0A = var_5;
-  var_6._id_A494 = var_6._id_A490 _meth_8346();
+  var_6._id_A494 = var_6._id_A490 isonground();
 
   if(isPlayer(var_1)) {
     var_6._id_118B = isDefined(var_6._id_1180._id_00E8);
-    var_6._id_1190 = var_6._id_1180 _meth_8346();
-    var_6._id_1199 = var_6._id_1180 _meth_8178();
+    var_6._id_1190 = var_6._id_1180 isonground();
+    var_6._id_1199 = var_6._id_1180 getstance();
   } else {
     var_6._id_118B = 0;
     var_6._id_1190 = 0;
@@ -1787,7 +1787,7 @@ _id_73CC(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(isDefined(self) && isDefined(var_1) && isDefined(self.team) && isDefined(var_1.team)) {
-    if(self.team != var_1.team && maps\mp\_utility::_hasperk("specialty_class_hunker") && _func_17B(var_6._id_8CD7) && maps\mp\_utility::isreallyalive(self) && !_id_052D::_id_3154(var_4))
+    if(self.team != var_1.team && maps\mp\_utility::_hasperk("specialty_class_hunker") && _isexplosivedamagemod(var_6._id_8CD7) && maps\mp\_utility::isreallyalive(self) && !_id_052D::_id_3154(var_4))
       processchallenge("ch_explosives_hunker");
 
     if(self.team != var_1.team && maps\mp\_utility::_hasperk("specialty_class_primed"))
@@ -1815,12 +1815,12 @@ _id_7417(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8._id_8B0A = var_6;
   var_8.time = gettime();
   var_8._id_62A1 = var_7;
-  var_8._id_A494 = var_8._id_A490 _meth_8346();
+  var_8._id_A494 = var_8._id_A490 isonground();
 
   if(isPlayer(var_1)) {
     var_8._id_118B = isDefined(var_8._id_1180._id_00E8);
-    var_8._id_1190 = var_8._id_1180 _meth_8346();
-    var_8._id_1199 = var_8._id_1180 _meth_8178();
+    var_8._id_1190 = var_8._id_1180 isonground();
+    var_8._id_1199 = var_8._id_1180 getstance();
   } else {
     var_8._id_118B = 0;
     var_8._id_1190 = 0;
@@ -1832,7 +1832,7 @@ _id_7417(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_8._id_35A9) && isDefined(var_8._id_35A9._id_3BE0))
     var_9 = var_8._id_35A9._id_3BE0;
   else if(isDefined(var_1) && isPlayer(var_1))
-    var_9 = var_1 _meth_8345();
+    var_9 = var_1 playerads();
 
   var_8._id_A85F = 0;
 
@@ -1977,10 +1977,10 @@ _id_638F() {
       continue;
     }
 
-    if(!self _meth_8346()) {
+    if(!self isonground()) {
       var_0 = self.origin[2];
 
-      while(!self _meth_8346() && isalive(self)) {
+      while(!self isonground() && isalive(self)) {
         if(self.origin[2] > var_0)
           var_0 = self.origin[2];
 
@@ -2096,7 +2096,7 @@ monitorbombuse() {
   self endon("disconnect");
 
   for(;;) {
-    var_0 = common_scripts\utility::_id_A715("bomb_planted", "bomb_defused");
+    var_0 = common_scripts\utility::waittill_any_return("bomb_planted", "bomb_defused");
 
     if(!isDefined(var_0)) {
       continue;
@@ -2299,7 +2299,7 @@ processchallenge(var_0, var_1, var_2) {
   if(var_8 > 0) {
     for(var_10 = var_5; var_8; var_8--) {
       thread _id_47B3(var_0, var_5);
-      var_11 = _func_2AD(var_0, var_5);
+      var_11 = _getchallengeid(var_0, var_5);
       var_12 = common_scripts\utility::_id_9AAD(var_11);
       var_13 = int(getsubstr(var_12, 0, var_12.size - 2));
 
@@ -2355,7 +2355,7 @@ _id_6022(var_0) {
 }
 
 _id_56A7(var_0, var_1) {
-  var_2 = _func_1AE("mp/allChallengesTable.csv", var_1, 8);
+  var_2 = _tablelookupbyrow("mp/allChallengesTable.csv", var_1, 8);
 
   if(var_2 != "") {
     var_3 = _id_4451(var_2);
@@ -2364,7 +2364,7 @@ _id_56A7(var_0, var_1) {
       return 1;
   }
 
-  var_4 = _func_1AE("mp/allChallengesTable.csv", var_1, 6);
+  var_4 = _tablelookupbyrow("mp/allChallengesTable.csv", var_1, 6);
 
   if(var_4 != "") {
     var_5 = maps\mp\gametypes\_rank::_id_4652();
@@ -2373,7 +2373,7 @@ _id_56A7(var_0, var_1) {
       return 0;
   }
 
-  var_6 = _func_1AE("mp/allChallengesTable.csv", var_1, 7);
+  var_6 = _tablelookupbyrow("mp/allChallengesTable.csv", var_1, 7);
 
   if(var_6 != "") {
     var_7 = _id_4451(var_6);
@@ -2571,7 +2571,7 @@ _id_1D42(var_0, var_1) {
 
   for(;;) {
     var_3++;
-    var_4 = _func_1AE(var_0, var_3, 0);
+    var_4 = _tablelookupbyrow(var_0, var_3, 0);
 
     if(var_4 == "") {
       break;
@@ -2580,7 +2580,7 @@ _id_1D42(var_0, var_1) {
     if(issubstr(var_4, "ch_daily")) {
       continue;
     }
-    var_5 = _func_1AE(var_0, var_3, 43);
+    var_5 = _tablelookupbyrow(var_0, var_3, 43);
 
     if(var_5 == "1") {
       continue;
@@ -2591,7 +2591,7 @@ _id_1D42(var_0, var_1) {
     level._id_20AA[var_4]["targetval"] = [];
     level._id_20AA[var_4]["reward"] = [];
     level._id_20AA[var_4]["parent_challenge"] = "";
-    level._id_20AA[var_4]["requiresPrestige"] = _func_1AE("mp/allChallengesTable.csv", var_3, 45);
+    level._id_20AA[var_4]["requiresPrestige"] = _tablelookupbyrow("mp/allChallengesTable.csv", var_3, 45);
 
     if(_id_584F(var_4)) {
       var_6 = _id_4732(var_4);
@@ -2643,7 +2643,7 @@ _id_1D43() {
   var_0 = 0;
 
   for(;;) {
-    var_1 = _func_1AE("mp/dailychallengesTable.csv", var_0, 0);
+    var_1 = _tablelookupbyrow("mp/dailychallengesTable.csv", var_0, 0);
 
     if(var_1 == "") {
       break;
@@ -2766,7 +2766,7 @@ _id_6365() {
   self._id_0A12 = 0.0;
 
   for(;;) {
-    if(self _meth_8345() == 1)
+    if(self playerads() == 1)
       self._id_0A12 = self._id_0A12 + 0.05;
     else
       self._id_0A12 = 0.0;
@@ -2782,7 +2782,7 @@ _id_63CB() {
   var_0 = 0;
 
   for(;;) {
-    var_1 = self _meth_8178();
+    var_1 = self getstance();
 
     if(var_1 == "prone" && var_0 == 0) {
       self._id_777B = gettime();
@@ -2961,7 +2961,7 @@ _id_34C3() {
   }
 }
 
-_id_80A0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+playrumblelooponentity(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!var_4) {
     return;
   }

@@ -45,8 +45,8 @@ _id_63C9() {
       var_3.health = 100;
       var_3.team = self.team;
       var_3._id_0117 = self;
-      var_3 _meth_82C3(1);
-      var_3 _meth_8011(self);
+      var_3 setcandamage(1);
+      var_3 makeportableradar(self);
       var_3 _id_757E(self);
       var_3 thread _id_0513::_id_27D0("weapon_radar_bombsquad", "tag_origin", self);
       var_3 thread _id_757D();
@@ -133,7 +133,7 @@ _id_757C(var_0) {
 
       self playSound("sentry_explode");
       self._id_2AA1 = playFX(common_scripts\utility::_id_44F5("equipment_explode"), self.origin);
-      self _meth_8135();
+      self freeentitysentient();
       var_2 thread _id_2D49(self);
     }
   }
@@ -143,15 +143,15 @@ _id_757F(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self _meth_80CD("HINT_NOICON");
-  self _meth_80CE(&"MP_PATCH_PICKUP_PORTABLE_RADAR");
+  self setcursorhint("HINT_NOICON");
+  self sethintstring(&"MP_PATCH_PICKUP_PORTABLE_RADAR");
   maps\mp\_utility::setselfusable(var_0);
 
   for(;;) {
     self waittill("trigger", var_0);
     var_1 = var_0 getweaponammostock("portable_radar_mp");
 
-    if(var_1 < _func_1D6("portable_radar_mp")) {
+    if(var_1 < _weaponmaxammo("portable_radar_mp")) {
       var_0 playlocalsound("scavenger_pack_pickup");
       var_0 setweaponammostock("portable_radar_mp", var_1 + 1);
       var_0 thread _id_2D49(self);

@@ -40,7 +40,7 @@ _id_7788(var_0, var_1) {
     var_3 = _id_0547::_id_0A51(var_2._id_0A4B);
 
     if(isDefined(var_3) && common_scripts\utility::_id_562E(var_3.shockbyteslablood)) {
-      var_4 = _id_0580::_id_8317(var_0, var_1.player, ::_id_3B9D);
+      var_4 = _id_0580::getcurrentprimaryweapon(var_0, var_1.player, ::_id_3B9D);
       var_2 thread _id_0547::_id_7D1A("tesla_shock", [var_4], 4);
       return;
     }

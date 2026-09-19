@@ -346,7 +346,7 @@ ocean_waves_oneshots() {
 
   for(;;) {
     _id_0380::_id_2889("isl_waves_ocean", undefined, (358, 1751, 45));
-    wait(_func_0A4(5, 8));
+    wait(_randomintrange(5, 8));
   }
 }
 
@@ -355,13 +355,13 @@ waves_splash_on_rocks() {
 
   for(;;) {
     _id_0380::_id_2889("zmb_splash_on_rock", undefined, (983, 2284, 107));
-    wait(_func_0A4(8, 12));
+    wait(_randomintrange(8, 12));
   }
 }
 
 _id_1CC1() {
   foreach(var_1 in level.players)
-  var_1 _meth_8626("brute_intro", 2.0);
+  var_1 clientaddsoundsubmix("brute_intro", 2.0);
 
   _id_0366::_id_8E33(3);
   _id_0380::_id_6840("zmb_mus_brute_intro");
@@ -373,7 +373,7 @@ _id_1CC2() {
     var_3 = 1.0;
     var_4 = "zmb_mus_wave_04";
     var_1 _id_0366::_id_8E31(var_4, var_2, var_3);
-    var_1 _meth_8627("brute_intro", 0.1);
+    var_1 clientclearsoundsubmix("brute_intro", 0.1);
   }
 }
 
@@ -388,7 +388,7 @@ ambient_assassin_vox_watcher() {
   level endon("aud_fog_lifted");
   var_0 = self;
   level._id_11CB.amb_assassin_clicks = undefined;
-  var_1 = _func_0A4(10, 18);
+  var_1 = _randomintrange(10, 18);
   var_2 = 1000;
 
   for(;;) {
@@ -407,7 +407,7 @@ ambient_assassin_vox_watcher() {
       }
 
       if(var_3) {
-        var_10 = var_0.origin + (_func_0A4(150, 250), _func_0A4(150, 250), var_0.origin[2]);
+        var_10 = var_0.origin + (_randomintrange(150, 250), _randomintrange(150, 250), var_0.origin[2]);
         level._id_11CB.amb_assassin_clicks = _id_0380::_id_2889("zvox_ass_dist_clicks", undefined, var_10);
         wait(var_1);
         level._id_11CB.amb_assassin_clicks = undefined;
@@ -451,9 +451,9 @@ fog_music_mix_monitor() {
   var_2 = _id_0366::snd_zmb_plr_is_in_thick_fog();
 
   if(var_2)
-    var_0 _meth_8626("fog_music_mix");
+    var_0 clientaddsoundsubmix("fog_music_mix");
   else
-    var_0 _meth_8626("no_fog_music_mix");
+    var_0 clientaddsoundsubmix("no_fog_music_mix");
 
   var_3 = var_2;
 
@@ -461,11 +461,11 @@ fog_music_mix_monitor() {
     var_2 = _id_0366::snd_zmb_plr_is_in_thick_fog();
 
     if(var_2 && !var_3) {
-      var_0 _meth_8626("fog_music_mix", var_1);
-      var_0 _meth_8627("no_fog_music_mix", var_1);
+      var_0 clientaddsoundsubmix("fog_music_mix", var_1);
+      var_0 clientclearsoundsubmix("no_fog_music_mix", var_1);
     } else if(!var_2 && var_3) {
-      var_0 _meth_8627("fog_music_mix", var_1);
-      var_0 _meth_8626("no_fog_music_mix", var_1);
+      var_0 clientclearsoundsubmix("fog_music_mix", var_1);
+      var_0 clientaddsoundsubmix("no_fog_music_mix", var_1);
     }
 
     var_3 = var_2;
@@ -488,9 +488,9 @@ _id_8E8F() {
 
     if(var_3 != var_1) {
       if(var_3)
-        self _meth_8627("pa_inside", 1.0);
+        self clientclearsoundsubmix("pa_inside", 1.0);
       else
-        self _meth_8626("pa_inside", 1.0);
+        self clientaddsoundsubmix("pa_inside", 1.0);
 
       var_1 = var_3;
     }
@@ -669,7 +669,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 _meth_82B1(var_1, 1.9);
+  var_2 moveto(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -726,11 +726,11 @@ plane_mission_start() {
   for(;;) {
     foreach(var_1 in level.players) {
       if(var_1.current_volume_is_interior) {
-        var_1 _meth_8626("isl_plane_interior_mix");
+        var_1 clientaddsoundsubmix("isl_plane_interior_mix");
         continue;
       }
 
-      var_1 _meth_8627("isl_plane_interior_mix");
+      var_1 clientclearsoundsubmix("isl_plane_interior_mix");
     }
 
     wait 0.2;
@@ -778,7 +778,7 @@ plane_damage_player() {
 
   if(_id_0378::_id_8D1B(0.3)) {
     wait 0.1;
-    var_1 = var_0.origin + (_func_0A4(25, 50), _func_0A4(25, 50), var_0.origin[2]);
+    var_1 = var_0.origin + (_randomintrange(25, 50), _randomintrange(25, 50), var_0.origin[2]);
     _id_0380::_id_2889("whizby_near", undefined, var_0.origin);
   }
 }
@@ -829,7 +829,7 @@ last_plane_crash(var_0) {
   level notify("stop_plane_int_submix");
 
   foreach(var_2 in level.players)
-  var_2 _meth_8627("isl_plane_interior_mix");
+  var_2 clientclearsoundsubmix("isl_plane_interior_mix");
 }
 
 dist_artillery_shot() {
@@ -1131,7 +1131,7 @@ pagan_head_place(var_0, var_1) {
 pagan_room_earthquake(var_0, var_1, var_2) {
   foreach(var_4 in level.players) {
     if(distance(var_4.origin, var_2) < 500)
-      var_4 _meth_8626("paganearthquake");
+      var_4 clientaddsoundsubmix("paganearthquake");
   }
 
   switch (var_0) {
@@ -1163,7 +1163,7 @@ pagan_room_earthquake_stop(var_0) {
   _id_0366::_id_8E30(1.0, var_0);
 
   foreach(var_2 in level.players)
-  var_2 _meth_8627("paganearthquake");
+  var_2 clientclearsoundsubmix("paganearthquake");
 
   if(isDefined(level._id_11CB.paganearthquake_rumble_handle))
     _id_0380::_id_6850(level._id_11CB.paganearthquake_rumble_handle, var_0);

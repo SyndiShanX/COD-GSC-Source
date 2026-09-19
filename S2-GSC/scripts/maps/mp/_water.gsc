@@ -24,7 +24,7 @@ init() {
   else
     level._effect["water_splash_enter"] = loadfx("vfx/water/body_splash");
 
-  _func_13E("underwater");
+  _precacheshellshock("underwater");
 
   if(!isDefined(level._id_A968))
     level._id_A968 = [];
@@ -100,7 +100,7 @@ _id_278A() {
   var_0 = common_scripts\utility::_id_46B5(self.target, "targetname");
   var_0.origin = var_0.origin + (0, 0, level._id_A969);
   var_1 = var_0 common_scripts\utility::_id_8FFC();
-  var_1 _meth_805B();
+  var_1 show();
 
   if(isDefined(self._id_0165)) {
     var_1._id_0165 = self._id_0165;
@@ -143,7 +143,7 @@ _id_A935() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isPlayer(var_0) && !_func_0C1(var_0)) {
+    if(!isPlayer(var_0) && !_isai(var_0)) {
       continue;
     }
     if(!isalive(var_0)) {
@@ -172,13 +172,13 @@ _id_740D(var_0) {
     if(maps\mp\_utility::isusingremote()) {
       if(isDefined(self._id_A019) && isDefined(self._id_57C9)) {
         self notify("stop_water_shellshock");
-        self _meth_8184();
-        self _meth_812A(1);
+        self stopshellshock();
+        self allowmelee(1);
         self._id_57C9 = undefined;
       }
     } else if(isDefined(self._id_A019) && !isDefined(self._id_57C9)) {
       thread playerapplyshellshock();
-      self _meth_812A(0);
+      self allowmelee(0);
     }
 
     if(!self istouching(var_0)) {
@@ -193,14 +193,14 @@ _id_740D(var_0) {
       self._id_5849 = undefined;
 
       if(!maps\mp\_utility::isusingremote()) {
-        self _meth_8184();
-        self _meth_812A(1);
+        self stopshellshock();
+        self allowmelee(1);
         self._id_57C9 = undefined;
       }
 
       _id_73D6();
       maps\mp\_utility::_id_73AF(1);
-      var_1 = distance(self _meth_833D(), (0, 0, 0));
+      var_1 = distance(self getvelocity(), (0, 0, 0));
       var_2 = (self.origin[0], self.origin[1], _id_471B(var_0));
       playFX(level._effect["water_splash_emerge"], var_2, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
       break;
@@ -247,7 +247,7 @@ _id_740D(var_0) {
 
       if(!maps\mp\_utility::isusingremote()) {
         thread playerapplyshellshock();
-        self _meth_812A(0);
+        self allowmelee(0);
       }
 
       var_3 = self getcurrentweapon();
@@ -259,7 +259,7 @@ _id_740D(var_0) {
           self._id_A95F = var_3;
         else if(maps\mp\_utility::iskillstreakweapon(var_3))
           self._id_A95F = _id_051E::_id_73EB();
-        else if(isDefined(self._id_5BC5) && self _meth_8319(self._id_5BC5))
+        else if(isDefined(self._id_5BC5) && self hasweapon(self._id_5BC5))
           self._id_A95F = self._id_5BC5;
       }
 
@@ -267,7 +267,7 @@ _id_740D(var_0) {
         self[[level._id_3FC9]](var_0);
     }
 
-    if(isDefined(self._id_A019) && (isDefined(self._id_57F2) || !isDefined(self._id_5849)) && (_id_53CA(var_0, level._id_9545) || self _meth_8178() == "prone" || !level._id_0C19)) {
+    if(isDefined(self._id_A019) && (isDefined(self._id_57F2) || !isDefined(self._id_5849)) && (_id_53CA(var_0, level._id_9545) || self getstance() == "prone" || !level._id_0C19)) {
       self._id_5849 = 1;
       self _meth_86C6();
       self._id_57F2 = undefined;
@@ -275,13 +275,13 @@ _id_740D(var_0) {
 
       if(isDefined(self._id_5738) && self._id_5738 == 1) {
         _id_73DE("none");
-        self _meth_812B(0);
-        self _meth_84CB();
-      } else if(!isDefined(level._id_585D) || !_func_2BF(self))
+        self allowfire(0);
+        self disableoffhandsecondaryweapons();
+      } else if(!isDefined(level._id_585D) || !_isscriptedagent(self))
         _id_73DE("shallow");
     }
 
-    if(isDefined(self._id_A019) && (isDefined(self._id_5849) || !isDefined(self._id_57F2)) && (!_id_53CA(var_0, level._id_9545) && self _meth_8178() != "prone" && level._id_0C19)) {
+    if(isDefined(self._id_A019) && (isDefined(self._id_5849) || !isDefined(self._id_57F2)) && (!_id_53CA(var_0, level._id_9545) && self getstance() != "prone" && level._id_0C19)) {
       self _meth_86C6();
       self._id_57F2 = 1;
       self._id_5849 = undefined;
@@ -289,9 +289,9 @@ _id_740D(var_0) {
 
       if(isDefined(self._id_5738) && self._id_5738 == 1) {
         _id_73DE("none");
-        self _meth_812B(0);
-        self _meth_84CB();
-      } else if(!isDefined(level._id_585D) || !_func_2BF(self))
+        self allowfire(0);
+        self disableoffhandsecondaryweapons();
+      } else if(!isDefined(level._id_585D) || !_isscriptedagent(self))
         _id_73DE("deep");
     }
 
@@ -304,13 +304,13 @@ _id_740D(var_0) {
       self._id_57F2 = undefined;
       self._id_5849 = undefined;
       self notify("above_water");
-      var_1 = distance(self _meth_833D(), (0, 0, 0));
+      var_1 = distance(self getvelocity(), (0, 0, 0));
       var_2 = (self.origin[0], self.origin[1], _id_471B(var_0));
       playFX(level._effect["water_splash_emerge"], var_2, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
 
       if(!maps\mp\_utility::isusingremote()) {
-        self _meth_8184();
-        self _meth_812A(1);
+        self stopshellshock();
+        self allowmelee(1);
         self._id_57C9 = undefined;
       }
 
@@ -339,7 +339,7 @@ playerapplyshellshock() {
   self._id_57C9 = 1;
 
   for(;;) {
-    self _meth_8182("underwater", 19, undefined, 0);
+    self shellshock("underwater", 19, undefined, 0);
     wait 19;
   }
 }
@@ -358,7 +358,7 @@ _id_5660(var_0) {
 }
 
 _id_748F() {
-  var_0 = common_scripts\utility::_id_A715("death", "out_of_water");
+  var_0 = common_scripts\utility::waittill_any_return("death", "out_of_water");
 
   if(isDefined(self)) {
     self._id_A01A = undefined;
@@ -375,7 +375,7 @@ _id_748F() {
 inwaterwakevfxcleanup() {
   self endon("inWaterWakeVFXCleanup");
 
-  if(_func_1EF(self)) {
+  if(_isagent(self)) {
     maps\mp\agents\_agent_utility::deleteentonagentdeath(self.fxentwake);
     maps\mp\agents\_agent_utility::deleteentonagentdeath(self.fxentstationary);
   }
@@ -409,25 +409,25 @@ _id_5526(var_0) {
   self endon("death");
   self endon("disconnect");
   self endon("out_of_water");
-  var_1 = distance(self _meth_833D(), (0, 0, 0));
+  var_1 = distance(self getvelocity(), (0, 0, 0));
 
   if(var_1 > 90) {
     var_2 = (self.origin[0], self.origin[1], _id_471B(var_0));
     playFX(level._effect["water_splash_enter"], var_2, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
   }
 
-  var_3 = _func_2A8(common_scripts\utility::_id_44F5("water_wake"), self, "tag_origin");
-  var_4 = _func_2A8(common_scripts\utility::_id_44F5("water_wake_stationary"), self, "tag_origin");
+  var_3 = _spawnlinkedfx(common_scripts\utility::_id_44F5("water_wake"), self, "tag_origin");
+  var_4 = _spawnlinkedfx(common_scripts\utility::_id_44F5("water_wake_stationary"), self, "tag_origin");
   self.fxentwake = var_3;
   self.fxentstationary = var_4;
   thread inwaterwakevfxcleanup();
-  _func_14C(var_3);
-  _func_14C(var_4);
+  _triggerfx(var_3);
+  _triggerfx(var_4);
   var_5 = 0;
   var_6 = 4000;
 
   for(;;) {
-    var_7 = self _meth_833D();
+    var_7 = self getvelocity();
     var_1 = distance(var_7, (0, 0, 0));
 
     if(var_1 > 0)
@@ -437,13 +437,13 @@ _id_5526(var_0) {
 
     var_8 = _id_471B(var_0) - self.origin[2];
 
-    if((self _meth_8178() == "prone" && var_8 > 24) == 0) {
+    if((self getstance() == "prone" && var_8 > 24) == 0) {
       if(var_1 > 5) {
-        _func_14C(var_3);
+        _triggerfx(var_3);
         continue;
       }
 
-      _func_14C(var_4);
+      _triggerfx(var_4);
     }
   }
 }
@@ -460,7 +460,7 @@ _id_73F2() {
 
   for(;;) {
     if(!isDefined(self._id_5738) || self._id_5738 == 0)
-      self _meth_8059(20, self.origin + anglesToForward(self.angles) * 5, undefined, undefined, "MOD_TRIGGER_HURT");
+      self dodamage(20, self.origin + anglesToForward(self.angles) * 5, undefined, undefined, "MOD_TRIGGER_HURT");
 
     wait 1;
   }
@@ -515,7 +515,7 @@ _id_471B(var_0) {
 }
 
 _id_5728() {
-  return isDefined(self._id_5378) && self._id_5378;
+  return isDefined(self.inlaststand) && self.inlaststand;
 }
 
 _id_73DE(var_0) {
@@ -527,7 +527,7 @@ _id_73DE(var_0) {
   if(!isDefined(var_0))
     var_0 = "shallow";
 
-  if(var_0 == "shallow" && self _meth_8319(level._id_8ACF) || var_0 == "deep" && self _meth_8319(level._id_2B7C) || isDefined(level._id_2F6B))
+  if(var_0 == "shallow" && self hasweapon(level._id_8ACF) || var_0 == "deep" && self hasweapon(level._id_2B7C) || isDefined(level._id_2F6B))
     self._id_3236 = 1;
 
   switch (var_0) {
@@ -535,7 +535,7 @@ _id_73DE(var_0) {
       _id_476D(level._id_2B7C);
 
       if(!_id_5728())
-        self _meth_831B(level._id_2B7C);
+        self switchtoweaponimmediate(level._id_2B7C);
 
       self._id_A01A = "deep";
       break;
@@ -543,7 +543,7 @@ _id_73DE(var_0) {
       _id_476D(level._id_8ACF);
 
       if(!_id_5728())
-        self _meth_831B(level._id_8ACF);
+        self switchtoweaponimmediate(level._id_8ACF);
 
       self._id_A01A = "shallow";
       break;
@@ -554,13 +554,13 @@ _id_73DE(var_0) {
       _id_476D(level._id_8ACF);
 
       if(!_id_5728())
-        self _meth_831B(level._id_8ACF);
+        self switchtoweaponimmediate(level._id_8ACF);
 
       self._id_A01A = "shallow";
       break;
   }
 
-  self _meth_82CD();
+  self disableweaponpickup();
   common_scripts\utility::_id_0603();
   common_scripts\utility::_disableoffhandweapons();
 }
@@ -573,20 +573,20 @@ _id_73D6() {
   if(isDefined(self._id_A01A)) {
     var_0 = self._id_A01A;
     self notify("end_swimming");
-    self _meth_82CE();
+    self enableweaponpickup();
     common_scripts\utility::_id_0617();
     common_scripts\utility::_id_0614();
 
     if(isDefined(self._id_5738) && self._id_5738 == 1 && isDefined(self._id_4C26)) {
-      self _meth_812B(1);
+      self allowfire(1);
 
       if(!isDefined(self._id_4C26._id_4B77) || self._id_4C26._id_4B77 == 0)
-        self _meth_8324();
+        self disableoffhandweapons();
 
       if(!isDefined(self._id_4C26._id_4B8E) || self._id_4C26._id_4B8E == 0)
-        self _meth_84CB();
+        self disableoffhandsecondaryweapons();
       else
-        self _meth_84CC();
+        self enableoffhandsecondaryweapons();
     } else if(isDefined(self._id_A95F)) {
       if(!_id_5728())
         maps\mp\_utility::_id_955C(self._id_A95F);

@@ -528,12 +528,12 @@ _id_461B(var_0) {
 
 _id_449F(var_0) {
   var_1 = _id_44A0(var_0);
-  var_2 = _func_1B1(getdivisionlevelingtablename(), 0, var_1);
+  var_2 = _tablelookuprownum(getdivisionlevelingtablename(), 0, var_1);
 
   if(var_2 == -1) {
     return;
   }
-  var_3 = int(_func_1AE(getdivisionlevelingtablename(), var_2, 1));
+  var_3 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_2, 1));
   return var_3;
 }
 
@@ -670,20 +670,20 @@ _id_4783(var_0, var_1) {
 
 _id_4782(var_0, var_1) {
   var_2 = _id_44A0(var_0);
-  var_3 = _func_1B1(getdivisionlevelingtablename(), 0, var_2);
+  var_3 = _tablelookuprownum(getdivisionlevelingtablename(), 0, var_2);
   var_4 = _id_449F(var_0);
 
   if(getdvarint("1258", 0) == 1 || getdvarint("2803", 0) == 1)
-    var_5 = int(_func_1AE(getdivisionlevelingtablename(), var_3 + (var_4 - 1), 1));
+    var_5 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_3 + (var_4 - 1), 1));
   else
-    var_5 = int(_func_1AE(getdivisionlevelingtablename(), var_3 + var_4, 1));
+    var_5 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_3 + var_4, 1));
 
   var_6 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "level");
   var_6 = var_6 + 1;
   var_7 = var_6;
   var_8 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "experience");
   var_9 = var_8 + var_1;
-  var_9 = int(_func_0AF(var_5, var_9));
+  var_9 = int(_min(var_5, var_9));
   var_1 = var_9 - var_8;
   var_10 = self getplayerdata(common_scripts\utility::_id_46A7(), "round", "divisionMatchExperience", var_2);
   var_11 = var_10 + var_1;
@@ -695,10 +695,10 @@ _id_4782(var_0, var_1) {
 
     if(var_6 < var_4) {
       var_13 = var_3 + var_6;
-      var_14 = int(_func_1AE(getdivisionlevelingtablename(), var_13, 1));
+      var_14 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_13, 1));
 
       if(var_9 >= var_14) {
-        var_15 = int(_func_1AE(getdivisionlevelingtablename(), var_13, 3));
+        var_15 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_13, 3));
         thread maps\mp\gametypes\_rank::giverankxp("divisionLevel", var_15);
         var_6 = var_6 + 1;
         self setplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "level", var_6 - 1);
@@ -708,7 +708,7 @@ _id_4782(var_0, var_1) {
         if(!isDefined(var_16))
           var_16 = -1;
 
-        _func_0F5("script_mp_rankup_division: playerName %s, divisionName %s, oldLevel %d, newLevel %d, xpGain %d, timeInUse %d", self.name, var_2, var_7, var_6, var_1, var_16);
+        _reconevent("script_mp_rankup_division: playerName %s, divisionName %s, oldLevel %d, newLevel %d, xpGain %d, timeInUse %d", self.name, var_2, var_7, var_6, var_1, var_16);
         thread _id_3056(var_2, var_6);
 
         if(!isDefined(self.pers["divisionLevel"]))

@@ -19,8 +19,8 @@ basic_extermination_run(var_0) {
 
   if(isDefined(var_1._id_2A35)) {
     if(isDefined(var_1._id_2A35.ext_type)) {
-      if(_func_0C0(var_1._id_2A35.ext_type)) {
-        if(_func_0C0(var_1._id_2A35.ext_type[0]))
+      if(_isarray(var_1._id_2A35.ext_type)) {
+        if(_isarray(var_1._id_2A35.ext_type[0]))
           var_2 = common_scripts\utility::random(var_1._id_2A35.ext_type);
         else
           var_2 = var_1._id_2A35.ext_type;
@@ -90,8 +90,8 @@ notify_on_extermination_kill_requirement(var_0) {
   level.currentexterminationgoal = var_0;
 
   foreach(var_2 in level.players) {
-    var_2 _meth_82FF("ui_onevone_class_3", level.currentexterminationgoal);
-    var_2 _meth_82FF("ui_onevone_class_4", level.plr_extermination_kills);
+    var_2 setclientomnvar("ui_onevone_class_3", level.currentexterminationgoal);
+    var_2 setclientomnvar("ui_onevone_class_4", level.plr_extermination_kills);
   }
 
   while(level.plr_extermination_kills < var_0)
@@ -120,8 +120,8 @@ exterminationkillcounter(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
 
     if(isDefined(level.currentexterminationgoal)) {
       foreach(var_11 in level.players) {
-        var_11 _meth_82FF("ui_onevone_class_3", level.currentexterminationgoal);
-        var_11 _meth_82FF("ui_onevone_class_4", level.plr_extermination_kills);
+        var_11 setclientomnvar("ui_onevone_class_3", level.currentexterminationgoal);
+        var_11 setclientomnvar("ui_onevone_class_4", level.plr_extermination_kills);
       }
     }
   }
@@ -152,7 +152,7 @@ objective_extermination_sizzler_handler() {
   level.max_sizzlers = level.max_sizzlers + maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_sizzler_add");
   var_0 = 0.05;
   var_1 = 0.15;
-  wait(_func_0A5(var_0, var_1));
+  wait(_randomfloatrange(var_0, var_1));
 
   for(;;) {
     level.current_sizz = _id_0547::_id_4090("zombie_sizzler").size;
@@ -161,7 +161,7 @@ objective_extermination_sizzler_handler() {
       var_2 = _id_0547::_id_4090("zombie_generic");
 
       foreach(var_4 in var_2) {
-        if(!_func_1EF(var_4) || !isalive(var_4) || var_4 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_4.transformingtosizzler))
+        if(!_isagent(var_4) || !isalive(var_4) || var_4 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_4.transformingtosizzler))
           var_5 = common_scripts\utility::_id_0F93(var_2, var_4);
       }
 
@@ -186,7 +186,7 @@ objective_extermination_sizzler_handler() {
           continue;
         } else {}
 
-        wait(_func_0A5(var_0, var_1));
+        wait(_randomfloatrange(var_0, var_1));
       } else
         wait 0.15;
     } else
@@ -199,7 +199,7 @@ objective_extermination_sizzler_handler() {
 try_to_become_a_sizzler(var_0) {
   var_1 = self;
 
-  if(!_id_0547::_id_5565(var_1._id_0A4B, "zombie_generic") || !_func_1EF(var_1) || !isalive(var_1) || var_1 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_1.transformingtosizzler))
+  if(!_id_0547::_id_5565(var_1._id_0A4B, "zombie_generic") || !_isagent(var_1) || !isalive(var_1) || var_1 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_1.transformingtosizzler))
     return 0;
 
   var_1 objective_extermination_sizzler_think(var_0);
@@ -231,9 +231,9 @@ _id_5D67(var_0) {
   var_3 setModel("tag_origin");
   var_3.angles = var_3.angles + (-90, 0, 0);
   var_4 = _func_382("zmb_wm_lightning_beam", var_2, "tag_origin", var_3, "tag_origin");
-  _func_147(level._effect["zmb_wm_lightning_impact_base_rnr"], var_3, "tag_origin");
+  _playfxontag(level._effect["zmb_wm_lightning_impact_base_rnr"], var_3, "tag_origin");
   _id_0378::_id_8D74("lightning_strike", var_2.origin, var_0);
-  wait(_func_0A5(0.25, 0.35));
+  wait(_randomfloatrange(0.25, 0.35));
   var_4 delete();
   var_2 delete();
   var_3 delete();

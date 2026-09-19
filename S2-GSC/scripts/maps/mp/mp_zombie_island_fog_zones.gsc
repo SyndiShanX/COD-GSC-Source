@@ -103,7 +103,7 @@ on_player_zone_change(var_0, var_1, var_2) {
 }
 
 clear_player_vision() {
-  self _meth_82D8("", 0.25);
+  self visionsetnakedforplayer("", 0.25);
 }
 
 should_force_fog_change(var_0) {
@@ -258,7 +258,7 @@ set_light_and_fog(var_0, var_1, var_2, var_3) {
   if(common_scripts\utility::_id_562E(var_3))
     self.fog_set_is_locked = 1;
 
-  self _meth_8483(var_0, var_2);
-  self _meth_83C7(var_1, var_2);
+  self setclienttriggervisionset(var_0, var_2);
+  self lightsetoverrideenableforplayer(var_1, var_2);
   wait(var_2);
 }

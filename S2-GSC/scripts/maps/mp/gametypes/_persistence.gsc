@@ -106,7 +106,7 @@ statgetchild(var_0, var_1) {
 }
 
 statsetchild(var_0, var_1, var_2) {
-  if(_func_1EF(self)) {
+  if(_isagent(self)) {
     return;
   }
   if(maps\mp\_utility::_id_551F()) {
@@ -517,7 +517,7 @@ _id_A195() {
     _id_0485::_id_5EAF(var_2, "multikills", self.trackingweaponmultikills, var_0);
   }
 
-  var_6 = _func_061(var_0);
+  var_6 = _getweaponattachments(var_0);
 
   foreach(var_8 in var_6) {
     var_9 = maps\mp\_utility::_id_1150(var_8);
@@ -597,7 +597,7 @@ _id_A1C2() {
   foreach(var_7 in level.players)
   var_5 = var_5 + var_7._id_9A06["total"];
 
-  _func_0F0("global_minutes", int(var_5 / 60));
+  _incrementcounter("global_minutes", int(var_5 / 60));
 
   if(!maps\mp\_utility::waslastround()) {
     return;
@@ -612,10 +612,10 @@ _id_A1C2() {
     var_4 = var_4 + var_7._id_94DD;
   }
 
-  _func_0F0("global_kills", var_0);
-  _func_0F0("global_deaths", var_1);
-  _func_0F0("global_assists", var_2);
-  _func_0F0("global_headshots", var_3);
-  _func_0F0("global_suicides", var_4);
-  _func_0F0("global_games", 1);
+  _incrementcounter("global_kills", var_0);
+  _incrementcounter("global_deaths", var_1);
+  _incrementcounter("global_assists", var_2);
+  _incrementcounter("global_headshots", var_3);
+  _incrementcounter("global_suicides", var_4);
+  _incrementcounter("global_games", 1);
 }

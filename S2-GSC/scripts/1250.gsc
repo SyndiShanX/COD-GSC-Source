@@ -5,7 +5,7 @@
 
 _id_8662() {
   var_0 = self;
-  var_0 _meth_82D8("mp_hub_allies_vlobby", 0);
+  var_0 visionsetnakedforplayer("mp_hub_allies_vlobby", 0);
 }
 
 _id_A594(var_0, var_1) {
@@ -26,7 +26,7 @@ _id_636A(var_0) {
     var_0 waittill("luinotifyserver", var_1, var_2);
 
     if(var_1 == "class_select") {
-      var_0._id_839F = var_2;
+      var_0.scragentsetmaxturnspeed = var_2;
       continue;
     }
 
@@ -42,8 +42,8 @@ _id_636A(var_0) {
       if(!var_0._id_5721) {
         var_0._id_3C3D = 1;
         var_0 _id_04DB::_id_98C7();
-        var_0 _meth_8057();
-        var_0 _meth_81E3();
+        var_0 unlink();
+        var_0 cameraunlink();
         continue;
       }
 
@@ -52,16 +52,16 @@ _id_636A(var_0) {
   }
 }
 
-_id_8482(var_0, var_1) {
-  var_2 = _func_18E(var_0, "targetname");
+getturretpitchrate(var_0, var_1) {
+  var_2 = _getent(var_0, "targetname");
 
   if(isDefined(var_2))
-    var_2 _meth_81DF(var_1);
+    var_2 setlightintensity(var_1);
 }
 
 _id_8418(var_0, var_1) {
   foreach(var_3 in var_0)
-  _id_8482(var_3, var_1);
+  getturretpitchrate(var_3, var_1);
 }
 
 _id_8877() {}
@@ -83,7 +83,7 @@ _id_62F5() {
       var_8 = maps\mp\gametypes\_class::_id_1D66(maps\mp\_utility::_id_452B(var_7), undefined, undefined, undefined, undefined, undefined, undefined, maps\mp\_utility::_id_472C(var_7));
       var_9 = [];
       var_9[var_9.size] = var_8;
-      self _meth_8512(var_9);
+      self loadweapons(var_9);
       continue;
     }
 
@@ -113,7 +113,7 @@ _id_62F5() {
       }
 
       self _meth_84C7(var_12);
-      self _meth_8423(self);
+      self loadcustomizationplayerview(self);
     }
   }
 }
@@ -197,19 +197,19 @@ _id_631E() {
         var_9._id_7700 = maps\mp\_utility::_id_452A(tablelookup("mp/reticleTable.csv", 0, var_7._id_0145, 1));
         var_9.primarypaintjobid = var_7._id_76EF;
         var_9.primarycharmguid = var_7._id_76F0;
-        var_9._id_8357 = var_7._id_016E;
-        var_9._id_8353[0] = maps\mp\_utility::_id_452A(tablelookup("mp/attachmenttable.csv", 0, var_7._id_0170, 3));
-        var_9._id_8353[1] = maps\mp\_utility::_id_452A(tablelookup("mp/attachmenttable.csv", 0, var_7._id_0171, 3));
-        var_9._id_8353[2] = maps\mp\_utility::_id_452A(tablelookup("mp/attachmenttable.csv", 0, var_7._id_0172, 3));
-        var_9._id_8353[3] = 0;
-        var_9._id_8353[4] = 0;
-        var_9._id_8353[5] = 0;
+        var_9.botsetscriptgoalnode = var_7._id_016E;
+        var_9.botsetflag[0] = maps\mp\_utility::_id_452A(tablelookup("mp/attachmenttable.csv", 0, var_7._id_0170, 3));
+        var_9.botsetflag[1] = maps\mp\_utility::_id_452A(tablelookup("mp/attachmenttable.csv", 0, var_7._id_0171, 3));
+        var_9.botsetflag[2] = maps\mp\_utility::_id_452A(tablelookup("mp/attachmenttable.csv", 0, var_7._id_0172, 3));
+        var_9.botsetflag[3] = 0;
+        var_9.botsetflag[4] = 0;
+        var_9.botsetflag[5] = 0;
         var_9._id_0176 = var_7._id_0176;
-        var_9._id_8355 = maps\mp\_utility::_id_452A(tablelookup("mp/camoTable.csv", 0, var_7._id_0173, 1));
-        var_9._id_8354 = maps\mp\_utility::_id_452A(tablelookup("mp/camoTable.csv", 0, var_7._id_0174, 1));
-        var_9._id_8359 = maps\mp\_utility::_id_452A(tablelookup("mp/reticleTable.csv", 0, var_7._id_0177, 1));
-        var_9.secondarypaintjobid = var_7._id_834E;
-        var_9.secondarycharmguid = var_7._id_834F;
+        var_9.botsetscriptmove = maps\mp\_utility::_id_452A(tablelookup("mp/camoTable.csv", 0, var_7._id_0173, 1));
+        var_9.botsetstance = maps\mp\_utility::_id_452A(tablelookup("mp/camoTable.csv", 0, var_7._id_0174, 1));
+        var_9.botsetscriptenemy = maps\mp\_utility::_id_452A(tablelookup("mp/reticleTable.csv", 0, var_7._id_0177, 1));
+        var_9.secondarypaintjobid = var_7.usinggamepad;
+        var_9.secondarycharmguid = var_7.forcethirdpersonwhenfollowing;
         var_9._id_60E9 = var_7._id_0101;
         var_9._id_5CA8 = maps\mp\_utility::_id_452A(tablelookup(var_0, 0, var_7._id_00ED, 1));
         var_9._id_959F = maps\mp\_utility::_id_452A(tablelookup(var_0, 0, var_7._id_01A0, 1));
@@ -236,25 +236,25 @@ _id_631E() {
         var_11 = 1;
         var_12 = 1;
 
-        if(!maps\mp\gametypes\_class::isvalidprimary(var_9._id_76F7, var_10) && !maps\mp\gametypes\_class::isvalidsecondary(var_9._id_8357, var_11, var_12)) {
+        if(!maps\mp\gametypes\_class::isvalidprimary(var_9._id_76F7, var_10) && !maps\mp\gametypes\_class::isvalidsecondary(var_9.botsetscriptgoalnode, var_11, var_12)) {
           var_9._id_76F7 = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 0);
 
           for(var_13 = 0; var_13 < 6; var_13++)
             var_9._id_76F3[var_13] = 0;
         }
 
-        if(!maps\mp\gametypes\_class::isvalidsecondary(var_9._id_8357, var_11, var_12)) {
-          var_9._id_8357 = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 1);
+        if(!maps\mp\gametypes\_class::isvalidsecondary(var_9.botsetscriptgoalnode, var_11, var_12)) {
+          var_9.botsetscriptgoalnode = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 1);
 
           for(var_13 = 0; var_13 < 6; var_13++)
-            var_9._id_8353[var_13] = 0;
+            var_9.botsetflag[var_13] = 0;
         }
 
         var_9._id_7709 = maps\mp\_utility::_id_473C(var_9._id_76F7, 0);
-        var_9._id_835D = maps\mp\_utility::_id_473C(var_9._id_8357, 0);
+        var_9.botgetscriptgoalradius = maps\mp\_utility::_id_473C(var_9.botsetscriptgoalnode, 0);
         var_9._id_60FC = maps\mp\_utility::_id_473C(var_9._id_60E9, 0);
         var_9._id_76F8 = maps\mp\gametypes\_class::_id_1D66(maps\mp\_utility::_id_452B(var_9._id_76F7), var_9._id_76F3[0], var_9._id_76F3[1], var_9._id_76F3[2], var_9._id_76F3[3], var_9._id_76F3[4], var_9._id_76F3[5], maps\mp\_utility::_id_472C(var_9._id_76F7), var_9._id_76F5, var_9._id_76F4, var_9._id_7700, var_9._id_0144);
-        var_9._id_8358 = maps\mp\gametypes\_class::_id_1D66(maps\mp\_utility::_id_452B(var_9._id_8357), var_9._id_8353[0], var_9._id_8353[1], var_9._id_8353[2], var_9._id_8353[3], var_9._id_8353[4], var_9._id_8353[5], maps\mp\_utility::_id_472C(var_9._id_8357), var_9._id_8355, var_9._id_8354, var_9._id_8359, var_9._id_0176);
+        var_9.botclearscriptgoal = maps\mp\gametypes\_class::_id_1D66(maps\mp\_utility::_id_452B(var_9.botsetscriptgoalnode), var_9.botsetflag[0], var_9.botsetflag[1], var_9.botsetflag[2], var_9.botsetflag[3], var_9.botsetflag[4], var_9.botsetflag[5], maps\mp\_utility::_id_472C(var_9.botsetscriptgoalnode), var_9.botsetscriptmove, var_9.botsetstance, var_9.botsetscriptenemy, var_9._id_0176);
         var_9._id_5A62 = 0;
         var_9._id_5A63 = 0;
         var_9._id_5A64 = 0;

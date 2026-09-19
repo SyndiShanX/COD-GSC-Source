@@ -20,7 +20,7 @@ _id_5326() {
 
 _id_6E40(var_0) {
   wait_for_pack_a_punch_conditions();
-  var_1 = strtok(var_0._id_8260, ",");
+  var_1 = strtok(var_0.setlookatent, ",");
   var_2 = int(var_1[0]);
 
   if(var_1.size > 1)
@@ -38,17 +38,17 @@ _id_6E40(var_0) {
   var_4 = getEntArray(var_0.target, "targetname");
 
   if(var_4.size == 4) {
-    var_5 = _func_21F("zmb_upgrade_machine", "targetname");
+    var_5 = _getscriptablearray("zmb_upgrade_machine", "targetname");
 
     for(var_6 = 0; var_6 < 4; var_6++) {
-      var_4[var_6]._id_81E1 = var_6;
-      var_4[var_6]._id_82EF = var_5[var_6];
+      var_4[var_6].setmovespeedscale = var_6;
+      var_4[var_6].issighted = var_5[var_6];
     }
   }
 
   foreach(var_8 in var_4) {
     if(isDefined(var_8)) {
-      var_8 _meth_8177();
+      var_8 usetriggerrequirelookat();
 
       if(0) {
         var_8._id_1DE6 = &"ZOMBIES_WEAPON_LEVEL_BOX";
@@ -64,8 +64,8 @@ _id_6E40(var_0) {
       if(_id_0547::_id_5819(var_8))
         _id_0547::_id_8A4F(var_8, ::_id_10E1, ::_id_4D14);
       else if(0) {
-        var_8 _meth_80CE(var_8._id_1DE6);
-        var_8 _meth_80CF(var_8._id_1DE5);
+        var_8 sethintstring(var_8._id_1DE6);
+        var_8 setsecondaryhintstring(var_8._id_1DE5);
       }
 
       var_8 thread _id_6E41();
@@ -74,7 +74,7 @@ _id_6E40(var_0) {
 }
 
 _id_45A0(var_0, var_1) {
-  var_2 = _func_1AC(var_0, self.origin);
+  var_2 = _sortbydistance(var_0, self.origin);
   var_3 = [];
 
   for(var_4 = 0; var_4 < var_1; var_4++)
@@ -87,8 +87,8 @@ _id_6E41() {
   var_0 = self;
   level endon("game_over");
   self._id_738D = undefined;
-  var_1 = _func_18E("pack_a_punch_weapon_display", "targetname");
-  var_1 _meth_8511();
+  var_1 = _getent("pack_a_punch_weapon_display", "targetname");
+  var_1 ghost();
 
   for(;;) {
     [var_3, var_4] = _id_0547::_id_A795();
@@ -96,7 +96,7 @@ _id_6E41() {
     if(common_scripts\utility::_id_3C77("pap_in_use")) {
       continue;
     }
-    var_5 = var_3 _meth_8317();
+    var_5 = var_3 getcurrentprimaryweapon();
 
     if(_id_0547::_id_57AF(var_5) || _id_0547::_id_5862(var_5) || _id_0547::iszombieconsumableweapon(var_5)) {
       continue;
@@ -121,7 +121,7 @@ _id_6E41() {
       _id_0547::_id_4AE4(var_3, "pack_a_punch_ammo", var_7, var_5, "none");
 
       if(!common_scripts\utility::_id_3C77("pap_in_use"))
-        _func_147(level._effect["zmb_pack_a_punch_lathe_ammo"], self._id_82EF, "lathe_01");
+        _playfxontag(level._effect["zmb_pack_a_punch_lathe_ammo"], self.issighted, "lathe_01");
 
       continue;
     }
@@ -132,7 +132,7 @@ _id_6E41() {
     var_8 = var_3 _id_0586::_id_078B(var_5);
 
     if(!isDefined(var_8)) {
-      _id_0555::_id_83DD("no_upgrade", var_3);
+      _id_0555::issprinting("no_upgrade", var_3);
       continue;
     }
 
@@ -181,7 +181,7 @@ _id_6E41() {
     }
 
     var_13 = _id_0547::_id_AAF9(var_8);
-    _id_0555::_id_83DD("upgrade", var_3, var_13);
+    _id_0555::issprinting("upgrade", var_3, var_13);
 
     if(isDefined(level.zmb_events_upgraded_a_weapon))
       level thread[[level.zmb_events_upgraded_a_weapon]](var_3);
@@ -189,11 +189,11 @@ _id_6E41() {
     common_scripts\utility::flag_set("pap_in_use");
     self._id_738D = var_3;
     level notify("pap_state_change");
-    self._id_82EF _id_854A(var_5, var_8);
+    self.issighted setexomeleechargevalid(var_5, var_8);
     common_scripts\utility::flag_set("pap_weapon_ready");
 
     if(0)
-      self _meth_80CF(&"ZOMBIES_EMPTY_STRING");
+      self setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
 
     level notify("pap_state_change");
     var_0 thread _id_7485(var_3);
@@ -201,9 +201,9 @@ _id_6E41() {
     common_scripts\utility::_id_A70C(var_0, "pap - player took gun", var_0, "pap - player timed out", var_3, "disconnect");
 
     if(0)
-      self _meth_80CF(self._id_1DE5);
+      self setsecondaryhintstring(self._id_1DE5);
 
-    _id_4D1D(self._id_82EF._id_586E);
+    _id_4D1D(self.issighted._id_586E);
     common_scripts\utility::_id_3C7B("pap_weapon_ready");
     self._id_738D = undefined;
     common_scripts\utility::_id_3C7B("pap_in_use");
@@ -212,7 +212,7 @@ _id_6E41() {
 }
 
 _id_4D1D(var_0) {
-  var_0 _meth_8511();
+  var_0 ghost();
 }
 
 _id_9E21(var_0, var_1, var_2) {
@@ -271,7 +271,7 @@ watch_for_pap_double_tap(var_0) {
 
 interacting_with_this_trigger(var_0) {
   var_1 = self;
-  return var_1 _meth_8341() && _id_0547::_id_5565(var_1 _meth_84D1(), var_0);
+  return var_1 usebuttonpressed() && _id_0547::_id_5565(var_1 playergetuseent(), var_0);
 }
 
 _id_7485(var_0) {
@@ -298,13 +298,13 @@ _id_10E1(var_0) {
 
 #using_animtree("destructibles");
 
-_id_854A(var_0, var_1) {
+setexomeleechargevalid(var_0, var_1) {
   var_2 = self.origin + (0, 0, 60);
   var_3 = _id_0380::_id_2889("zmb_pack_a_punch_use", undefined, var_2);
   _id_0378::_id_8D14(var_3);
   var_4 = self gettagorigin("lathe_01");
   level notify("PAP_display_reset");
-  var_5 = _func_18E("pack_a_punch_weapon_display", "targetname");
+  var_5 = _getent("pack_a_punch_weapon_display", "targetname");
   var_5.origin = (var_5.origin[0], var_5.origin[1], var_4[2]);
 
   if(!isDefined(level._id_6DDD))
@@ -318,12 +318,12 @@ _id_854A(var_0, var_1) {
   if(issubstr(var_0, "fliegerfaust"))
     thread _id_3C72(level._id_6DDD);
 
-  var_8 = _func_14B(level._effect["zmb_pack_a_punch_lathe"], var_4, anglesToForward(self _meth_8181("lathe_01")), anglestoup(self _meth_8181("lathe_01")));
-  _func_14C(var_8);
-  self _meth_83FA("lathes", "turn_on");
+  var_8 = _spawnfx(level._effect["zmb_pack_a_punch_lathe"], var_4, anglesToForward(self gettagangles("lathe_01")), anglestoup(self gettagangles("lathe_01")));
+  _triggerfx(var_8);
+  self setscriptablepartstate("lathes", "turn_on");
   thread _id_9EDC();
-  wait(_func_065(%zmb_pack_a_punch_lathes_turn_on) - 1.4);
-  self _meth_83FA("lathes", "idle");
+  wait(_getanimlength(%zmb_pack_a_punch_lathes_turn_on) - 1.4);
+  self setscriptablepartstate("lathes", "idle");
   var_8 delete();
   _id_801B(self, var_1);
   thread _id_7D78(var_6, var_7);
@@ -335,7 +335,7 @@ _id_7D78(var_0, var_1) {
   level._id_6DDD.angles = var_1;
 }
 
-_id_8549(var_0, var_1) {
+getpointinmodelbounds(var_0, var_1) {
   thread _id_9EDB();
 }
 
@@ -368,47 +368,47 @@ _id_801B(var_0, var_1) {
     var_2 = (0, 0, 10);
 
   if(isDefined(var_0._id_A6EA)) {
-    var_0._id_586E _meth_848E(var_1);
-    var_0._id_586E _meth_805B();
+    var_0._id_586E setpickupweapon(var_1);
+    var_0._id_586E show();
     var_0._id_A6EA = undefined;
   } else {
     if(isDefined(var_0._id_586E))
       var_0._id_586E delete();
 
     var_0._id_586E = spawn("weapon_" + var_1, var_0._id_6DDD.origin);
-    var_0._id_586E _meth_8055(var_0._id_6DDD, "tag_origin", var_2, var_3);
+    var_0._id_586E linkto(var_0._id_6DDD, "tag_origin", var_2, var_3);
     var_0._id_A6EA = 1;
   }
 
-  var_0._id_586E _meth_80B3();
+  var_0._id_586E makeunusable();
   var_0._id_586E _meth_86B3(0);
 }
 
 _id_3C72(var_0) {
   wait 0.7;
-  var_0 _meth_82B4(-5, 0.1, 0, 0);
+  var_0 movez(-5, 0.1, 0, 0);
   wait 0.5;
-  var_0 _meth_82B4(5, 0.5, 0.1, 0.1);
+  var_0 movez(5, 0.5, 0.1, 0.1);
   wait 0.5;
-  var_0 _meth_82B4(-5, 0.1, 0, 0);
+  var_0 movez(-5, 0.1, 0, 0);
   wait 0.5;
-  var_0 _meth_82B4(5, 0.5, 0.1, 0.1);
+  var_0 movez(5, 0.5, 0.1, 0.1);
   wait 1;
-  var_0 _meth_82BA(20, 0.5, 0.1, 0.1);
+  var_0 rotateyaw(20, 0.5, 0.1, 0.1);
   wait 1;
-  var_0 _meth_82B4(-10, 0.5, 0.1, 0.1);
+  var_0 movez(-10, 0.5, 0.1, 0.1);
 }
 
 _id_9EDC() {
-  self _meth_83FA("wheel", "turn");
-  wait(_func_065(%zmb_pack_a_punch_wheel_turn));
-  self _meth_83FA("wheel", "turn_idle");
+  self setscriptablepartstate("wheel", "turn");
+  wait(_getanimlength(%zmb_pack_a_punch_wheel_turn));
+  self setscriptablepartstate("wheel", "turn_idle");
 }
 
 _id_9EDB() {
-  self _meth_83FA("wheel", "reverse");
-  wait(_func_065(%zmb_pack_a_punch_wheel_reverse));
-  self _meth_83FA("wheel", "idle");
+  self setscriptablepartstate("wheel", "reverse");
+  wait(_getanimlength(%zmb_pack_a_punch_wheel_reverse));
+  self setscriptablepartstate("wheel", "idle");
 }
 
 _id_21BD(var_0, var_1) {
@@ -436,13 +436,13 @@ _id_6E44(var_0, var_1) {
   var_4 = _id_0547::_id_462A(var_0);
 
   if(var_4 != "none")
-    var_3 = _func_05F(var_4);
+    var_3 = _getweaponbasename(var_4);
 
   if(_id_0547::_id_5868(var_3))
     var_2 = 1;
 
   if(0)
-    self _meth_80CD("HINT_NOICON");
+    self setcursorhint("HINT_NOICON");
 
   if(1)
     var_1.interact_disabled = undefined;
@@ -456,8 +456,8 @@ _id_6E44(var_0, var_1) {
     self._id_3006 = undefined;
 
     if(0) {
-      self _meth_80CE("Unavailable");
-      self _meth_80CF("");
+      self sethintstring("Unavailable");
+      self setsecondaryhintstring("");
     }
 
     if(1) {
@@ -469,8 +469,8 @@ _id_6E44(var_0, var_1) {
     self._id_3006 = undefined;
 
     if(0) {
-      self _meth_80CE("");
-      self _meth_80CF("");
+      self sethintstring("");
+      self setsecondaryhintstring("");
     }
 
     if(1) {
@@ -482,8 +482,8 @@ _id_6E44(var_0, var_1) {
     self._id_3006 = self._id_6DE0;
 
     if(0) {
-      self _meth_80CE(self._id_1DE4);
-      self _meth_80CF(self._id_1DE3);
+      self sethintstring(self._id_1DE4);
+      self setsecondaryhintstring(self._id_1DE3);
     }
 
     if(1) {
@@ -494,8 +494,8 @@ _id_6E44(var_0, var_1) {
     self._id_3006 = self._id_6DE1;
 
     if(0) {
-      self _meth_80CE(self._id_1DE6);
-      self _meth_80CF(self._id_1DE5);
+      self sethintstring(self._id_1DE6);
+      self setsecondaryhintstring(self._id_1DE5);
     }
 
     if(1) {
@@ -533,14 +533,14 @@ wait_for_pack_a_punch_conditions() {
 }
 
 _id_4D14(var_0) {
-  self._id_82EF _meth_8006(var_0);
+  self.issighted _meth_8006(var_0);
 }
 
 _id_8C10(var_0) {
   if(isDefined(level.upgrade_machine_reveal_func))
-    [[level.upgrade_machine_reveal_func]](var_0, self._id_82EF);
+    [[level.upgrade_machine_reveal_func]](var_0, self.issighted);
 
-  self._id_82EF _meth_8005(var_0);
+  self.issighted showtoplayer(var_0);
 }
 
 _id_6E45(var_0) {
@@ -556,14 +556,14 @@ _id_86EE(var_0) {
   for(var_5 = 0; var_5 < var_1; var_5++) {
     var_6 = 0;
 
-    for(var_7 = _func_1E2(10, var_1 - var_5); var_3 >= var_7 / 10; var_6++)
+    for(var_7 = _pow(10, var_1 - var_5); var_3 >= var_7 / 10; var_6++)
       var_3 = var_3 - var_7 / 10;
 
     var_2[var_5] = var_6;
   }
 
   for(var_5 = 0; var_5 < var_1; var_5++)
-    self._id_82EF _meth_83FA("gears_0" + (var_5 + 1), "idle_" + var_2[var_5]);
+    self.issighted setscriptablepartstate("gears_0" + (var_5 + 1), "idle_" + var_2[var_5]);
 }
 
 _id_6E46(var_0) {

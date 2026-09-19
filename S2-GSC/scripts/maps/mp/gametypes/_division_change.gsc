@@ -3,13 +3,13 @@
  * Script: scripts\maps\mp\gametypes\_division_change.gsc
 **********************************************************/
 
-_id_8622(var_0, var_1) {
+setclienttriggeraudiozone(var_0, var_1) {
   self notify("division_change");
   self endon("division_change");
   self endon("death");
   self endon("disconnect");
 
-  if(_func_1EF(self) || isbot(self)) {
+  if(_isagent(self) || isbot(self)) {
     return;
   }
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
@@ -47,7 +47,7 @@ _id_8622(var_0, var_1) {
 }
 
 _id_A050() {
-  if(_func_1EF(self) || isbot(self)) {
+  if(_isagent(self) || isbot(self)) {
     return;
   }
   _id_A07E(0);
@@ -119,7 +119,7 @@ _id_A07E(var_0) {
 }
 
 _id_8725(var_0, var_1) {
-  if(_func_1EF(self) || isbot(self)) {
+  if(_isagent(self) || isbot(self)) {
     return;
   }
   if(maps\mp\_utility::_id_585F())
@@ -200,7 +200,7 @@ _id_63AC(var_0) {
       if(maps\mp\_utility::isdivisionsglobaloverhaulenabled() && self._id_0079 == 6 && isDefined(self.pers["resistanceScramblerIndicatorActive"])) {} else
         _id_028D::_id_5369(var_1);
     } else if(_func_367() && !(common_scripts\utility::_id_562E(self._id_5721) || common_scripts\utility::_id_562E(self._id_572A)))
-      self _meth_8114(0);
+      self allowprone(0);
 
     var_0 = var_1;
   }
@@ -299,7 +299,7 @@ _id_440E(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
-  var_7 = maps\mp\_utility::_id_45B5(_func_05F(var_2));
+  var_7 = maps\mp\_utility::_id_45B5(_getweaponbasename(var_2));
 
   if(!_id_0F5B(var_1))
     return [];
@@ -613,12 +613,12 @@ _id_0995(var_0, var_1, var_2, var_3, var_4) {
   var_6 = maps\mp\_utility::_id_4728(var_2);
   var_7 = maps\mp\_utility::_id_473A(var_2);
   var_8 = maps\mp\_utility::_id_472F(var_2);
-  var_9 = _func_061(var_2);
+  var_9 = _getweaponattachments(var_2);
   var_9 = common_scripts\utility::_id_0F93(var_9, "special_grip");
   var_10 = _id_440E(var_0, var_1, var_2, var_3, var_4, var_9);
   var_9 = common_scripts\utility::_id_0F73(var_9, var_10);
   var_9 = common_scripts\utility::alphabetize(var_9);
-  var_11 = _func_05F(var_2);
+  var_11 = _getweaponbasename(var_2);
   var_12 = var_11;
 
   foreach(var_14 in var_9)
@@ -705,7 +705,7 @@ _id_0F5B(var_0) {
 }
 
 _id_3657(var_0, var_1) {
-  if(_func_1EF(self) || isbot(self)) {
+  if(_isagent(self) || isbot(self)) {
     return;
   }
   if(!_id_0F5B(var_0)) {
@@ -764,20 +764,20 @@ _id_3657(var_0, var_1) {
       var_2["scaleY"] = 1;
       var_2["squareAspectRatio"] = 1;
       var_2["lerpDuration"] = 0.4;
-      self _meth_82FF("ui_hide_hud", 1);
+      self setclientomnvar("ui_hide_hud", 1);
       _id_048E::_id_8D7E();
       break;
     case "bayonet_level3":
     case "bayonet_level2":
       var_3 = common_scripts\utility::_id_44F5("divisions_bayonet_charge");
-      _func_14D(var_3, self, "j_head", self);
+      _playfxontagforclients(var_3, self, "j_head", self);
       var_2["intensity"] = 0.2;
       var_2["falloff"] = 1.2;
       var_2["scaleX"] = 1;
       var_2["scaleY"] = 1;
       var_2["squareAspectRatio"] = 0;
       var_2["lerpDuration"] = 0.4;
-      self _meth_8036(1.046, 1);
+      self lerpfovscale(1.046, 1);
       self _meth_866F(2, 0, 1);
       break;
     default:
@@ -785,14 +785,14 @@ _id_3657(var_0, var_1) {
   }
 
   if(isDefined(var_2))
-    self _meth_806B(var_2["intensity"], var_2["falloff"], var_2["scaleX"], var_2["scaleY"], var_2["squareAspectRatio"], var_2["lerpDuration"]);
+    self digitaldistortsetparams(var_2["intensity"], var_2["falloff"], var_2["scaleX"], var_2["scaleY"], var_2["squareAspectRatio"], var_2["lerpDuration"]);
 }
 
 _id_2F7B(var_0, var_1, var_2, var_3) {
   if(!isDefined(self)) {
     return;
   }
-  if(_func_1EF(self) || isbot(self)) {
+  if(_isagent(self) || isbot(self)) {
     return;
   }
   if(!_id_0F5B(var_0)) {
@@ -826,12 +826,12 @@ _id_2F7B(var_0, var_1, var_2, var_3) {
     case "bayonet_level3":
     case "bayonet_level2":
       var_5 = common_scripts\utility::_id_44F5("divisions_bayonet_charge");
-      _func_295(var_5, var_4, "j_head", self);
+      _killfxontagforclient(var_5, var_4, "j_head", self);
       break;
     case "sharpshooter_level3":
     case "sharpshooter_level2":
     case "sharpshooter_level1":
-      self _meth_82FF("ui_hide_hud", 0);
+      self setclientomnvar("ui_hide_hud", 0);
 
       if(!isDefined(var_3))
         _id_048E::_id_8D7D(1);
@@ -852,13 +852,13 @@ _id_2F7B(var_0, var_1, var_2, var_3) {
     var_6["lerpDuration"] = 0.1;
 
   if(isDefined(var_6))
-    self _meth_806B(var_6["intensity"], var_6["falloff"], var_6["scaleX"], var_6["scaleY"], var_6["squareAspectRatio"], var_6["lerpDuration"]);
+    self digitaldistortsetparams(var_6["intensity"], var_6["falloff"], var_6["scaleX"], var_6["scaleY"], var_6["squareAspectRatio"], var_6["lerpDuration"]);
 
   if(maps\mp\_utility::_id_579B() == 0) {
-    if(self _meth_8345() > 0)
-      self _meth_8036(1.0, 0.1);
+    if(self playerads() > 0)
+      self lerpfovscale(1.0, 0.1);
     else
-      self _meth_8036(1.0, 0.2);
+      self lerpfovscale(1.0, 0.2);
   }
 
   var_7 = undefined;

@@ -4,12 +4,12 @@
 **********************************************/
 
 main() {
-  if(isDefined(level._id_27F6) && level._id_27F6) {
+  if(isDefined(level.createfx_enabled) && level.createfx_enabled) {
     return;
   }
   _id_87A7();
-  level._id_14F6 = ::_func_01E;
-  level._id_14F7 = ::_func_01D;
+  level._id_14F6 = ::_badplace_cylinder;
+  level._id_14F7 = ::_badplace_delete;
   level thread maps\mp\agents\_agent_common::init();
 
   if(!maps\mp\_utility::_id_551F() && !(isDefined(level._id_585D) && level._id_585D))
@@ -71,7 +71,7 @@ _id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     waitframe();
 
   if(self._id_4B60)
-    wait(_func_0A4(6, 10));
+    wait(_randomintrange(6, 10));
 
   maps\mp\agents\_agent_utility::_id_5334(1);
 
@@ -101,30 +101,30 @@ _id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_11 = var_7 + (0, 0, 25);
   var_12 = var_7;
-  var_13 = _func_081(var_11, var_12);
+  var_13 = _playerphysicstrace(var_11, var_12);
 
   if(distancesquared(var_13, var_11) > 1)
     var_7 = var_13;
 
-  self _meth_838F(var_7, var_8);
+  self spawnagent(var_7, var_8);
 
   if(isDefined(var_5))
     self._id_0A43 = var_5;
 
   if(isDefined(self._id_0A43)) {
     if(self._id_0A43 == "follow_code_and_dev_dvar")
-      self[[level._id_19D5["bot_set_difficulty"]]](self _meth_836D(), 1);
+      self[[level.bot_funcs["bot_set_difficulty"]]](self botgetdifficulty(), 1);
     else
-      self[[level._id_19D5["bot_set_difficulty"]]](var_5);
+      self[[level.bot_funcs["bot_set_difficulty"]]](var_5);
   } else
-    self[[level._id_19D5["bot_set_difficulty"]]](self _meth_836D());
+    self[[level.bot_funcs["bot_set_difficulty"]]](self botgetdifficulty());
 
   if(isDefined(var_3) && var_3)
     self._id_A1F0 = 1;
 
   if(isDefined(self._id_A1F0) && self._id_A1F0) {
     if(!self._id_4B60) {
-      var_14 = self _meth_837D("advancedPersonality");
+      var_14 = self botgetdifficultysetting("advancedPersonality");
 
       if(isDefined(var_14) && var_14 != 0)
         maps\mp\bots\_bots_personality::_id_193F();
@@ -132,7 +132,7 @@ _id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     maps\mp\bots\_bots_personality::_id_1939();
   } else
-    self[[level._id_19D5["bot_set_personality"]]]("default");
+    self[[level.bot_funcs["bot_set_personality"]]]("default");
 
   maps\mp\agents\_agent_common::_id_83FD(100);
 
@@ -140,13 +140,13 @@ _id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self._id_7DAD = 1;
 
   if(isDefined(var_2))
-    maps\mp\agents\_agent_utility::_id_83FE(var_2.team, var_2);
+    maps\mp\agents\_agent_utility::hudoutlineenable(var_2.team, var_2);
 
   if(isDefined(self._id_0117))
     self thread[[level._id_0A55]](self._id_0117);
 
   thread maps\mp\_flashgrenades::_id_6394();
-  self _meth_83D6(0);
+  self enableanimstate(0);
   self[[level._id_6BA7]]();
 
   if(isDefined(var_6)) {
@@ -159,9 +159,9 @@ _id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     maps\mp\gametypes\_class::_id_4773(self.team, self.class, 1);
   }
 
-  self thread[[level._id_19D5["bot_think_watch_enemy"]]](1);
+  self thread[[level.bot_funcs["bot_think_watch_enemy"]]](1);
   thread maps\mp\bots\_bots::_id_1AFE();
-  self thread[[level._id_19D5["bot_think_tactical_goals"]]]();
+  self thread[[level.bot_funcs["bot_think_tactical_goals"]]]();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 
   if(!self._id_4B60)
@@ -178,7 +178,7 @@ _id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   thread _id_04D6::_id_73FC();
 
   if(isDefined(self._id_A1F0) && self._id_A1F0 && isDefined(self._id_7DAD) && self._id_7DAD)
-    self _meth_8528(1, self.team);
+    self setagentcostumeindex(1, self.team);
 
   level notify("spawned_agent_player", self);
   level notify("spawned_agent", self);
@@ -213,13 +213,13 @@ _id_0A40(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     if(isDefined(var_1) && var_4 != "MOD_FALLING" && var_4 != "MOD_SUICIDE") {
       if(level.teambased) {
         if(isDefined(var_1.team) && var_1.team != self.team)
-          self _meth_8391(var_1);
+          self setagentattacker(var_1);
       } else
-        self _meth_8391(var_1);
+        self setagentattacker(var_1);
     }
   }
 
-  var_11 = self _meth_8390(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0);
+  var_11 = self finishagentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0);
 
   if(isDefined(var_11))
     thread _id_3BA5(var_11[0], var_11[1], var_11[2], var_11[3], var_11[4], var_11[5], var_11[6]);
@@ -236,7 +236,7 @@ _id_3BA5(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(self) || !isDefined(var_0)) {
     return;
   }
-  self _meth_853B(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+  self finishagentdamage_impactfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
 _id_6A73(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
@@ -342,13 +342,13 @@ _id_6AA3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     maps\mp\gametypes\_damage::_id_5C2D(var_2, var_3);
 
     if(!var_9) {
-      var_10 = self _meth_8247(self getcurrentweapon());
+      var_10 = self dropitem(self getcurrentweapon());
 
       if(isDefined(var_10)) {
         var_10 thread _id_0513::_id_2D45();
         var_10._id_0117 = self;
         var_10._id_6DAF = var_1;
-        var_10 _meth_80B3();
+        var_10 makeunusable();
       }
     }
   }
@@ -356,10 +356,10 @@ _id_6AA3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(var_9)
     self thread[[level._id_A9C5]](var_1, var_3, var_4);
 
-  self._id_18A8 = self _meth_8392(var_8);
+  self._id_18A8 = self cloneagent(var_8);
 
   if(!maps\mp\gametypes\_damage::_id_8B8B(self))
-    self._id_18A8 _meth_8028();
+    self._id_18A8 startragdoll();
   else
     thread maps\mp\gametypes\_damage::_id_2CEC(self._id_18A8, var_6, var_5, var_4, var_0, var_3);
 

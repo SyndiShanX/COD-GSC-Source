@@ -251,7 +251,7 @@ survival_get_zone_bitval(var_0) {
 }
 
 add_current_map(var_0, var_1) {
-  var_2 = _func_117(getDvar("1673"));
+  var_2 = _tolower(getDvar("1673"));
   var_3 = 0;
 
   switch (var_2) {

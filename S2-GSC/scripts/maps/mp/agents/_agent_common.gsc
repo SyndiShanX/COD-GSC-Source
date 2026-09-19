@@ -11,7 +11,7 @@ _id_003D() {
     var_0 = "allies";
 
   level._id_687D++;
-  maps\mp\agents\_agent_utility::_id_83FE(var_0);
+  maps\mp\agents\_agent_utility::hudoutlineenable(var_0);
   level._id_0A4E[level._id_0A4E.size] = self;
 }
 
@@ -36,9 +36,9 @@ _id_2581(var_0, var_1, var_2, var_3) {
     var_0._id_2589 = gettime();
 
     if(isDefined(var_2))
-      var_0 maps\mp\agents\_agent_utility::_id_83FE(var_2);
+      var_0 maps\mp\agents\_agent_utility::hudoutlineenable(var_2);
     else
-      var_0 maps\mp\agents\_agent_utility::_id_83FE(var_0.team);
+      var_0 maps\mp\agents\_agent_utility::hudoutlineenable(var_0.team);
 
     if(isDefined(var_3))
       var_0._id_231C = var_3;
@@ -49,7 +49,7 @@ _id_2581(var_0, var_1, var_2, var_3) {
     if(isDefined(level._id_0A41[var_1]) && isDefined(level._id_0A41[var_1]["onAIConnect"]))
       var_0[[var_0 maps\mp\agents\_agent_utility::_id_0A59("onAIConnect")]]();
 
-    _func_2CF(var_0);
+    _addtocharactersarray(var_0);
   }
 
   return var_0;
@@ -76,7 +76,7 @@ _id_08F8() {
   var_1 = maps\mp\agents\_agent_utility::get_max_agents();
 
   while(level._id_0A4E.size < var_1) {
-    var_2 = _func_167();
+    var_2 = _addagent();
 
     if(!isDefined(var_2)) {
       waitframe();

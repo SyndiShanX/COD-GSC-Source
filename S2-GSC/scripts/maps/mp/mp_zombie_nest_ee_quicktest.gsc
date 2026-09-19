@@ -22,7 +22,7 @@ _id_772E() {
         var_0++;
     }
 
-    _func_18B("zombies left to kill: " + var_0);
+    _iprintln("zombies left to kill: " + var_0);
     wait 1;
   }
 }
@@ -43,7 +43,7 @@ _id_0CAE(var_0, var_1, var_2, var_3) {
 
           if(isDefined(var_7)) {
             level.players[var_8] setOrigin(var_7[var_8].origin);
-            level.players[var_8] _meth_833E(var_7[var_8].angles);
+            level.players[var_8] setplayerangles(var_7[var_8].angles);
           }
 
           level.players[var_8] _id_8706(var_0, var_1);

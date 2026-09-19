@@ -16,9 +16,9 @@ watchaudiologsubmixes() {
 
     if(var_1 != var_0) {
       if(var_1)
-        level.player _meth_8626("zm_audio_log_mix");
+        level.player clientaddsoundsubmix("zm_audio_log_mix");
       else
-        level.player _meth_8627("zm_audio_log_mix");
+        level.player clientclearsoundsubmix("zm_audio_log_mix");
 
       var_0 = var_1;
     }

@@ -9,17 +9,17 @@ main() {
   if(!isDefined(level._id_31FA))
     _id_52AE();
 
-  var_0 = self _meth_8198();
-  var_1 = self _meth_8199();
+  var_0 = self getnegotiationstartnode();
+  var_1 = self getnegotiationendnode();
 
   if(var_0._id_001E == "bot_walk_forward") {
     var_2 = var_1.origin - var_0.origin;
     var_3 = length(var_2) / 256;
     var_4 = (var_2[0], var_2[1], 0);
     var_5 = vectortoangles(var_4);
-    self _meth_839B("face angle abs", var_5);
-    self _meth_83A4(var_0.origin, var_1.origin, var_3);
-    self _meth_839D("noclip");
+    self scragentsetorientmode("face angle abs", var_5);
+    self scragentdoanimlerp(var_0.origin, var_1.origin, var_3);
+    self scragentsetphysicsmode("noclip");
     maps\mp\agents\_scriptedagents::_id_71F7("run", var_3);
   } else {
     var_6 = undefined;
@@ -32,44 +32,44 @@ main() {
     var_2 = var_1.origin - var_0.origin;
     var_4 = (var_2[0], var_2[1], 0);
     var_5 = vectortoangles(var_4);
-    self _meth_839B("face angle abs", var_5);
-    self _meth_839C("anim deltas");
-    var_7 = self _meth_83D8(var_6, 0);
-    var_8 = _func_067(var_7, "code_move");
+    self scragentsetorientmode("face angle abs", var_5);
+    self scragentsetanimmode("anim deltas");
+    var_7 = self getanimentry(var_6, 0);
+    var_8 = _getnotetracktimes(var_7, "code_move");
 
     if(var_8.size > 0)
-      var_9 = _func_083(var_7, 0, var_8[0]);
+      var_9 = _getmovedelta(var_7, 0, var_8[0]);
     else
-      var_9 = _func_083(var_7, 0, 1);
+      var_9 = _getmovedelta(var_7, 0, 1);
 
     var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_2, var_9);
-    self _meth_839D("noclip");
+    self scragentsetphysicsmode("noclip");
 
     if(var_2[2] > 0) {
       if(var_9[2] > 0) {
-        var_11 = _func_067(var_7, "traverse_jump_start");
+        var_11 = _getnotetracktimes(var_7, "traverse_jump_start");
 
         if(var_11.size > 0) {
           var_12 = 1;
           var_13 = 1;
 
-          if(_func_0E6(var_4) < 0.64 * _func_0E6(var_9))
+          if(_length2dsquared(var_4) < 0.64 * _length2dsquared(var_9))
             var_12 = 0.4;
 
           if(var_2[2] < 0.75 * var_9[2])
             var_13 = 0.5;
 
-          self _meth_839A(var_12, var_13);
+          self scragentsetanimscale(var_12, var_13);
           maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse", "traverse_jump_start");
-          var_14 = _func_067(var_7, "traverse_jump_end");
-          var_15 = _func_083(var_7, 0, var_11[0]);
-          var_16 = _func_083(var_7, 0, var_14[0]);
+          var_14 = _getnotetracktimes(var_7, "traverse_jump_end");
+          var_15 = _getmovedelta(var_7, 0, var_11[0]);
+          var_16 = _getmovedelta(var_7, 0, var_14[0]);
           var_12 = 1;
           var_13 = 1;
           var_17 = var_1.origin - self.origin;
           var_18 = var_9 - var_15;
 
-          if(_func_0E6(var_17) < 0.5625 * _func_0E6(var_18))
+          if(_length2dsquared(var_17) < 0.5625 * _length2dsquared(var_18))
             var_12 = 0.75;
 
           if(var_17[2] < 0.75 * var_18[2])
@@ -77,26 +77,26 @@ main() {
 
           var_19 = var_9 - var_16;
           var_20 = (var_19[0] * var_12, var_19[1] * var_12, var_19[2] * var_13);
-          var_21 = _func_112(var_20, var_5);
+          var_21 = _rotatevector(var_20, var_5);
           var_22 = var_1.origin - var_21;
           var_23 = var_16 - var_15;
-          var_24 = _func_112(var_23, var_5);
+          var_24 = _rotatevector(var_23, var_5);
           var_25 = var_22 - self.origin;
           var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_25, var_24, 1);
-          self _meth_839A(var_10._id_AAE3, var_10._id_01D9);
+          self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
           maps\mp\agents\_scriptedagents::_id_A79E("traverse", "traverse_jump_end");
-          self _meth_839A(var_12, var_13);
+          self scragentsetanimscale(var_12, var_13);
           maps\mp\agents\_scriptedagents::_id_A79E("traverse", "code_move");
           return;
         }
 
-        self _meth_839A(var_10._id_AAE3, var_10._id_01D9);
+        self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
         maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse");
         return;
         return;
       }
 
-      var_26 = _func_067(var_7, "gravity on");
+      var_26 = _getnotetracktimes(var_7, "gravity on");
 
       if(var_26.size > 0) {
         var_27 = var_0 _id_46BF();
@@ -104,63 +104,63 @@ main() {
         if(isDefined(var_27)) {
           var_28 = var_27 - self.origin;
           var_29 = var_1.origin - var_27;
-          var_30 = _func_083(var_7, 0, var_26[0]);
+          var_30 = _getmovedelta(var_7, 0, var_26[0]);
           var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_28, var_30);
-          self _meth_839A(var_10._id_AAE3, var_10._id_01D9);
+          self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
           maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse", "gravity on");
-          var_31 = _func_083(var_7, var_26[0], 1);
+          var_31 = _getmovedelta(var_7, var_26[0], 1);
           var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_29, var_31);
-          self _meth_839A(var_10._id_AAE3, var_10._id_01D9);
+          self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
           maps\mp\agents\_scriptedagents::_id_A79E("traverse", "code_move");
           return;
         }
       }
 
-      var_32 = _func_065(var_7);
-      self _meth_83A4(var_0.origin, var_1.origin, var_32);
+      var_32 = _getanimlength(var_7);
+      self scragentdoanimlerp(var_0.origin, var_1.origin, var_32);
       maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse");
       return;
       return;
     }
 
-    var_26 = _func_067(var_7, "gravity on");
+    var_26 = _getnotetracktimes(var_7, "gravity on");
 
     if(var_26.size > 0) {
-      self _meth_839A(var_10._id_AAE3, 1);
+      self scragentsetanimscale(var_10._id_AAE3, 1);
       maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse", "gravity on");
-      var_33 = _func_083(var_7, 0, var_26[0]);
+      var_33 = _getmovedelta(var_7, 0, var_26[0]);
       var_34 = var_33[2] - var_9[2];
 
-      if(_func_0AE(var_34) > 0) {
+      if(_abs(var_34) > 0) {
         var_35 = self.origin[2] - var_1.origin[2];
         var_13 = var_35 / var_34;
-        self _meth_839A(var_10._id_AAE3, var_13);
+        self scragentsetanimscale(var_10._id_AAE3, var_13);
         var_36 = clamp(2 / var_13, 0.5, 1);
         var_37 = var_6 + "_norestart";
-        self _meth_83D7(var_37, 0, var_36);
+        self setanimstate(var_37, 0, var_36);
       }
 
       maps\mp\agents\_scriptedagents::_id_A79E("traverse", "code_move");
     } else {
-      self _meth_839A(var_10._id_AAE3, var_10._id_01D9);
+      self scragentsetanimscale(var_10._id_AAE3, var_10._id_01D9);
       var_36 = clamp(2 / var_10._id_01D9, 0.5, 1);
-      var_14 = _func_067(var_7, "traverse_jump_end");
+      var_14 = _getnotetracktimes(var_7, "traverse_jump_end");
 
       if(var_14.size > 0) {
         maps\mp\agents\_scriptedagents::_id_71F9(var_6, 0, var_36, "traverse", "traverse_jump_end");
         var_37 = var_6 + "_norestart";
-        self _meth_83D7(var_37, 0, 1);
+        self setanimstate(var_37, 0, 1);
         maps\mp\agents\_scriptedagents::_id_A79E("traverse", "code_move");
       } else
         maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse");
     }
 
-    self _meth_839A(1, 1);
+    self scragentsetanimscale(1, 1);
   }
 }
 
 _id_0085() {
-  self _meth_839A(1, 1);
+  self scragentsetanimscale(1, 1);
   self._id_17E8 = 0;
 }
 
@@ -168,7 +168,7 @@ _id_46BF() {
   if(isDefined(self._id_9829))
     return self._id_9829;
 
-  var_0 = _func_18E(self.target, "targetname");
+  var_0 = _getent(self.target, "targetname");
 
   if(!isDefined(var_0))
     return undefined;

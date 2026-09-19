@@ -72,7 +72,7 @@ initialize_pommel_grenade_pickups() {
         case "pommel_spawn":
           var_2.model_spawn = spawn("script_model", var_5.origin);
           var_2.model_spawn setModel("npc_zom_barb_pommel");
-          var_2.model_spawn _meth_805C();
+          var_2.model_spawn hide();
           var_2.fx = _id_0547::_id_8FBA(var_5, "zmb_isl_geis_pommel_float");
           break;
         case "pommel_trigger":
@@ -100,13 +100,13 @@ spawn_pommel_special_pickup(var_0, var_1, var_2) {
     var_4.origin = var_2;
     var_4.model_spawn = spawn("script_model", var_2);
     var_4.model_spawn setModel("npc_zom_barb_pommel");
-    var_4.fx = _func_2A8(common_scripts\utility::_id_44F5("zmb_isl_geis_pommel_float"), var_4, "tag_origin");
+    var_4.fx = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_isl_geis_pommel_float"), var_4, "tag_origin");
     var_4 _id_0547::_id_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 8));
     level.zmb_spawned_pommel_pickup = var_4;
   }
 
-  _func_14C(var_4.fx);
-  var_4.model_spawn _meth_805B();
+  _triggerfx(var_4.fx);
+  var_4.model_spawn show();
   var_4.model_spawn _id_0378::_id_8D74("pommel_pickup");
   var_4 thread rotate_pommel();
   var_8 = 1;
@@ -134,7 +134,7 @@ rotate_pommel() {
   self._id_9D65 endon("trigger");
 
   for(;;) {
-    self.model_spawn _meth_83E5((25, 25, 25), 1);
+    self.model_spawn rotateby((25, 25, 25), 1);
     wait 1;
   }
 }
@@ -219,7 +219,7 @@ track_player_aoe_grenade() {
           }
 
           var_4 _id_0378::_id_8D74("zmb_pomel_grenade_float", self);
-          var_4 _meth_82B1(var_7, var_8);
+          var_4 moveto(var_7, var_8);
           wait 0.15;
         }
 
@@ -234,9 +234,9 @@ track_player_aoe_grenade() {
 }
 
 handle_pommel_energy_field(var_0) {
-  var_1 = _func_2A8(common_scripts\utility::_id_44F5("zmb_pommel_energy_field"), var_0._id_95AB, "TAG_ORIGIN");
+  var_1 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_pommel_energy_field"), var_0._id_95AB, "TAG_ORIGIN");
   _id_0378::_id_8D74("zmb_pomel_grenade_force_field", var_0.origin);
-  _func_14C(var_1);
+  _triggerfx(var_1);
   return var_1;
 }
 
@@ -277,7 +277,7 @@ initial_burst(var_0) {
   var_7 = 0;
 
   foreach(var_4 in var_1) {
-    if(_func_1EF(var_4)) {
+    if(_isagent(var_4)) {
       var_4 thread zap_zombies_vfx();
       var_4 thread apply_pommel_damage(var_0, var_7);
       var_7++;
@@ -296,9 +296,9 @@ apply_pommel_damage(var_0, var_1) {
   if(var_1 > 8)
     var_2 = var_2 / 2;
 
-  self _meth_8059(var_2 / 2, self.origin, var_0, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
+  self dodamage(var_2 / 2, self.origin, var_0, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
   waitframe();
-  self _meth_8059(var_2 / 2, self.origin, var_0, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
+  self dodamage(var_2 / 2, self.origin, var_0, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
 }
 
 register_as_pommel_grenade_target(var_0) {
@@ -310,8 +310,8 @@ register_as_pommel_grenade_target(var_0) {
 
 zap_zombies_vfx() {
   self endon("death");
-  self.pommel_damage = _func_2A8(level._effect["zmb_pommel_zmb_dmg"], self, "J_Spine4");
-  _func_14C(self.pommel_damage);
+  self.pommel_damage = _spawnlinkedfx(level._effect["zmb_pommel_zmb_dmg"], self, "J_Spine4");
+  _triggerfx(self.pommel_damage);
   maps\mp\agents\_agent_utility::deleteentonagentdeath(self.pommel_damage);
   wait 0.5;
 
@@ -330,7 +330,7 @@ is_close_to(var_0) {
   if(distance(var_0.origin, self.origin) > 128)
     return 0;
 
-  if(_func_0AE(var_0.origin[2] - self.origin[2]) > 64)
+  if(_abs(var_0.origin[2] - self.origin[2]) > 64)
     return 0;
 
   return 1;

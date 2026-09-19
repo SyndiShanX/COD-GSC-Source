@@ -35,7 +35,7 @@ _id_8C2C(var_0) {
     var_1 = [];
     var_2 = [];
     var_3 = common_scripts\utility::random(var_0);
-    var_0 = _func_1AC(var_0, var_3.origin);
+    var_0 = _sortbydistance(var_0, var_3.origin);
 
     for(var_4 = 0; var_4 < 4; var_4++)
       var_2[var_4] = var_0[int(var_0.size / (var_4 + 1)) - 1];
@@ -77,8 +77,8 @@ _id_2832(var_0) {
   var_1.x = var_0.origin[0];
   var_1.y = var_0.origin[1];
   var_1._id_01D9 = var_0.origin[2];
-  var_1 _meth_80CB(0);
-  var_1 _meth_80C0(var_0);
+  var_1 setwaypoint(0);
+  var_1 settargetent(var_0);
   return var_1;
 }
 
@@ -101,7 +101,7 @@ _id_9CC4(var_0, var_1) {
     var_5[var_6] = var_1[var_6].origin;
 
   while(var_2 < var_4) {
-    var_3 = _func_0A3(0.75) + 0.5;
+    var_3 = _randomfloat(0.75) + 0.5;
     wait(var_3);
     var_2 = var_2 + var_3;
     thread _id_2E66(common_scripts\utility::random(var_5));
@@ -128,10 +128,10 @@ _id_2E66(var_0) {
 
     if(var_6 < 256) {
       if(var_5 _id_0547::_id_580A())
-        var_5 _meth_8059(var_5.health * 0.25, var_2, level._id_9C97, level._id_9C97, "MOD_EXPLOSIVE", "trap_zm_mp");
+        var_5 dodamage(var_5.health * 0.25, var_2, level._id_9C97, level._id_9C97, "MOD_EXPLOSIVE", "trap_zm_mp");
       else {
         maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6FEE(var_5);
-        var_5 _meth_8059(var_5.health + 666, var_2, level._id_9C97, level._id_9C97, "MOD_EXPLOSIVE", "trap_zm_mp");
+        var_5 dodamage(var_5.health + 666, var_2, level._id_9C97, level._id_9C97, "MOD_EXPLOSIVE", "trap_zm_mp");
 
         if(!isDefined(self.hitbytrap)) {
           foreach(var_8 in level.players) {
@@ -149,10 +149,10 @@ _id_2E66(var_0) {
     var_6 = distance(var_8.origin, var_2);
 
     if(var_6 < 256)
-      var_8 _meth_8059(30 * (1 - var_6 / 256), var_2, undefined, undefined, "MOD_EXPLOSIVE");
+      var_8 dodamage(30 * (1 - var_6 / 256), var_2, undefined, undefined, "MOD_EXPLOSIVE");
   }
 
-  _func_17F(0.8, 0.6, var_2, 200);
+  _earthquake(0.8, 0.6, var_2, 200);
   wait 0.4;
   self._id_1732 = 0;
 }

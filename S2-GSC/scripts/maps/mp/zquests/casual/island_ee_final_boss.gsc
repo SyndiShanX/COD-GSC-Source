@@ -52,7 +52,7 @@ wait_for_boss_intro_done() {
   while(!isDefined(level.zmb_final_boss_intro_goal))
     waitframe();
 
-  while(_func_0E1(self.origin, level.zmb_final_boss_intro_goal.origin) > 64) {
+  while(_distance2d(self.origin, level.zmb_final_boss_intro_goal.origin) > 64) {
     self._id_1928 = level.zmb_final_boss_intro_goal;
     waitframe();
   }
@@ -72,13 +72,13 @@ spawn_a_fireman() {
   wait 2.15;
   var_0 = common_scripts\utility::_id_46B5("zmb_fireman_spawnpoint_phase_2", "targetname");
   var_1 = _id_0564::_id_3C11(0, var_0, 0);
-  var_1 _id_0547::_id_84CB();
+  var_1 _id_0547::disableoffhandsecondaryweapons();
   var_1 maps\mp\agents\_agent_common::_id_83FD(int(maps\mp\zquests\casual\island_ee_main::get_difficulty_setting("zmb_assassin_boss_fireman_health")));
   var_2 = common_scripts\utility::_id_44BE("stove_panel", "targetname");
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(_id_0547::_id_5565(var_5._id_819A, "zmb_boss_fight_brenner_intro"))
+    if(_id_0547::_id_5565(var_5.getnegotiationnextnode, "zmb_boss_fight_brenner_intro"))
       var_3 = common_scripts\utility::_id_0F6F(var_3, var_5);
   }
 
@@ -95,7 +95,7 @@ spawn_a_fireman() {
   var_11 = [];
 
   for(var_12 = 1; var_12 < 35; var_12++) {
-    var_5 = _func_18E("fire_panel_" + var_12, "targetname");
+    var_5 = _getent("fire_panel_" + var_12, "targetname");
     var_9 = common_scripts\utility::_id_0F6F(var_9, var_5);
   }
 
@@ -266,7 +266,7 @@ get_rush_spawners() {
   foreach(var_3 in var_1) {
     switch (var_3._id_0165) {
       case "zombie_spawner":
-        switch (var_3._id_81A1) {
+        switch (var_3.setgoalnode) {
           case "zombie_beach_rush_spawner":
             var_0.rush_spawners = common_scripts\utility::_id_0F6F(var_0.rush_spawners, var_3);
             break;
@@ -365,7 +365,7 @@ run_assassin_boss_phase(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       var_20 = maps\mp\zombies\zombie_assassin_spawner_logic::spawn_an_assassin(var_9[var_10], var_3, var_15, var_18, var_19, 1, 0, undefined, var_17, 1, "boss look", var_11);
 
       if(var_18) {
-        var_20 _id_0547::_id_84CB();
+        var_20 _id_0547::disableoffhandsecondaryweapons();
 
         if(var_1 <= 1)
           var_20.noflurry = 1;
@@ -425,16 +425,16 @@ move_players_to_boss_start() {
     level.players[var_1] setOrigin(level.zmb_island_final_boss_phases_spawns[var_1].origin);
 
     if(isDefined(level.zmb_island_final_boss_phases_spawns[var_1].angles))
-      level.players[var_1] _meth_833E(level.zmb_island_final_boss_phases_spawns[var_1].angles);
+      level.players[var_1] setplayerangles(level.zmb_island_final_boss_phases_spawns[var_1].angles);
 
-    level.players[var_1] _meth_82FF("ui_hide_hud", 1);
-    level.players[var_1] _meth_812B(0);
-    level.players[var_1] _meth_848D();
+    level.players[var_1] setclientomnvar("ui_hide_hud", 1);
+    level.players[var_1] allowfire(0);
+    level.players[var_1] hideviewmodel();
     level.players[var_1] _id_0547::_id_8A6D(1);
-    level.players[var_1] _meth_8077(var_0);
+    level.players[var_1] playerlinkto(var_0);
     level.players[var_1]._id_480F = 1;
-    level.players[var_1] _meth_8324();
-    level.players[var_1] _meth_84CB();
+    level.players[var_1] disableoffhandweapons();
+    level.players[var_1] disableoffhandsecondaryweapons();
   }
 
   while(!maps\mp\mp_zombie_island_ee_fog_manager::is_fog_rolling_in())
@@ -455,13 +455,13 @@ move_players_to_boss_start() {
   setDvar("1874", 1);
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
-    level.players[var_1] _meth_82FF("ui_hide_hud", 0);
-    level.players[var_1] _meth_812B(1);
-    level.players[var_1] _meth_848C();
+    level.players[var_1] setclientomnvar("ui_hide_hud", 0);
+    level.players[var_1] allowfire(1);
+    level.players[var_1] showviewmodel();
     level.players[var_1] _id_0547::_id_8A6D(0);
-    level.players[var_1] _meth_8057();
+    level.players[var_1] unlink();
     level.players[var_1]._id_480F = 0;
-    level.players[var_1] _meth_8325();
-    level.players[var_1] _meth_84CC();
+    level.players[var_1] enableoffhandweapons();
+    level.players[var_1] enableoffhandsecondaryweapons();
   }
 }

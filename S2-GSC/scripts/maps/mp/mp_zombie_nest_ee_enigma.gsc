@@ -34,16 +34,16 @@ main() {
 _id_1389() {
   wait 1;
   var_0 = _id_44F7();
-  common_scripts\utility::flag_set(var_0._id_81A1);
+  common_scripts\utility::flag_set(var_0.setgoalnode);
 }
 
 _id_784F() {
   var_0 = _id_44F7();
-  var_1 = var_0._id_81A1;
+  var_1 = var_0.setgoalnode;
   var_2 = undefined;
 
   foreach(var_4 in level._id_7606) {
-    if(_id_0547::_id_5565(var_4._id_819A, var_1))
+    if(_id_0547::_id_5565(var_4.getnegotiationnextnode, var_1))
       var_2 = var_4;
   }
 
@@ -106,7 +106,7 @@ quest_step_reroute_power_helper() {
 
       foreach(var_3 in level._id_358F) {
         foreach(var_5 in level.players)
-        var_3 _meth_8427(var_5, 0, 0);
+        var_3 hudoutlineenableforclient(var_5, 0, 0);
       }
     } else {
       level._id_3590 = _id_0557::_id_782F(undefined, level._id_358F);
@@ -138,7 +138,7 @@ _id_785F() {
   var_0 = _id_4470();
 
   if(0) {
-    var_1 = _id_0557::_id_782F(undefined, var_0._id_8301);
+    var_1 = _id_0557::_id_782F(undefined, var_0.setclientdvars);
     _id_0557::_id_781D("2 open salt mine", var_1);
   }
 
@@ -147,7 +147,7 @@ _id_785F() {
       if(common_scripts\utility::_id_562E(level.rotor_objective_helper_tripped)) {
         foreach(var_3 in level._id_358F) {
           foreach(var_5 in level.players)
-          var_3 _meth_8428(var_5);
+          var_3 hudoutlinedisableforclient(var_5);
         }
       }
     }
@@ -176,7 +176,7 @@ _id_52B6() {
 }
 
 _id_3B98() {
-  var_0 = _func_18E("enter_com_trig", "targetname");
+  var_0 = _getent("enter_com_trig", "targetname");
 
   if(isDefined(var_0)) {
     for(;;) {
@@ -194,7 +194,7 @@ _id_3B98() {
   }
 }
 
-_id_8035() {
+lerpfov() {
   level._id_3593 = 1;
 
   if(!maps\mp\mp_zombie_nest_ee_hc_tools_of_the_trade::_id_8B98()) {
@@ -206,7 +206,7 @@ _id_8035() {
 
   if(level._id_36B0) {
     var_4 = _id_4470();
-    var_5 = var_4._id_8301[0].origin;
+    var_5 = var_4.setclientdvars[0].origin;
     common_scripts\utility::_id_3C9F("com_to_mine");
     common_scripts\utility::flag_set("flag_salt_mine_main_ent_opened");
     thread maps\mp\mp_zombie_nest_ee_util::_id_7213("entermine", var_5, 200, 512);
@@ -266,8 +266,8 @@ _id_7AAC() {
 }
 
 _id_8A3F() {
-  self _meth_8177();
-  self._id_5F59 = _func_18E(self.target, "targetname");
+  self usetriggerrequirelookat();
+  self._id_5F59 = _getent(self.target, "targetname");
 
   if(isDefined(self._id_5F59.target))
     self._id_6643 = common_scripts\utility::_id_44BD(self._id_5F59.target, "targetname");
@@ -287,11 +287,11 @@ _id_7EFC() {
     self waittill("trigger", var_0);
     _id_0378::_id_8D74("aud_enigma_switch_activate");
 
-    if(isDefined(self._id_8260)) {
-      if(self._id_8260 == "rotor_machine_rnd") {
+    if(isDefined(self.setlookatent)) {
+      if(self.setlookatent == "rotor_machine_rnd") {
         common_scripts\utility::flag_set("flag_rnd_enigma_set");
         thread _id_A10A("rnd", "green");
-      } else if(self._id_8260 == "rotor_machine_med") {
+      } else if(self.setlookatent == "rotor_machine_med") {
         common_scripts\utility::flag_set("flag_med_enigma_set");
         thread _id_A10A("med", "green");
       }
@@ -332,7 +332,7 @@ _id_7EFC() {
           var_2 thread _id_8714();
         }
 
-        _id_8035();
+        lerpfov();
       }
     }
   }
@@ -342,8 +342,8 @@ _id_7EFC() {
 
 _id_8718() {
   if(common_scripts\utility::_id_562E(self._id_56B6)) {
-    self _meth_8276("zmb_circuit_breaker_02_dial_standby");
-    wait(_func_065(%zmb_circuit_breaker_02_dial_standby));
+    self scriptmodelplayanim("zmb_circuit_breaker_02_dial_standby");
+    wait(_getanimlength(%zmb_circuit_breaker_02_dial_standby));
   }
 
   var_0 = ["TAG_RED_ON", "TAG_GREEN_OFF", "TAG_GRAPH_ON"];
@@ -351,18 +351,18 @@ _id_8718() {
   _id_A10E(var_1, var_0);
   thread _id_86BD();
   self._id_56B6 = 0;
-  self _meth_8276("zmb_circuit_breaker_02_dial_standby_idle");
+  self scriptmodelplayanim("zmb_circuit_breaker_02_dial_standby_idle");
 }
 
 _id_8717() {
-  self _meth_8276("zmb_circuit_breaker_02_dial_ready");
-  wait(_func_065(%zmb_circuit_breaker_02_dial_ready));
+  self scriptmodelplayanim("zmb_circuit_breaker_02_dial_ready");
+  wait(_getanimlength(%zmb_circuit_breaker_02_dial_ready));
   var_0 = ["TAG_RED_OFF", "TAG_GREEN_ON", "TAG_GRAPH_ON"];
   var_1 = ["TAG_RED_ON", "TAG_GREEN_OFF", "TAG_GRAPH_OFF"];
   _id_A10E(var_1, var_0);
   self._id_56B6 = 1;
   thread _id_86C1();
-  self _meth_8276("zmb_circuit_breaker_02_dial_ready_idle");
+  self scriptmodelplayanim("zmb_circuit_breaker_02_dial_ready_idle");
 }
 
 _id_8715() {
@@ -373,8 +373,8 @@ _id_86C0() {
   if(common_scripts\utility::_id_562E(self._id_568A))
     _id_940A("off");
   else {
-    self _meth_8050("TAG_POWER_ON", self.model);
-    self _meth_8053("TAG_POWER_OFF", self.model);
+    self hidepart("TAG_POWER_ON", self.model);
+    self showpart("TAG_POWER_OFF", self.model);
   }
 }
 
@@ -382,8 +382,8 @@ _id_86C1() {
   if(common_scripts\utility::_id_562E(self._id_568A))
     _id_940A("on");
   else {
-    self _meth_8050("TAG_POWER_OFF", self.model);
-    self _meth_8053("TAG_POWER_ON", self.model);
+    self hidepart("TAG_POWER_OFF", self.model);
+    self showpart("TAG_POWER_ON", self.model);
   }
 }
 
@@ -391,11 +391,11 @@ _id_86BD() {
   self._id_568A = 1;
 
   while(common_scripts\utility::_id_562E(self._id_568A)) {
-    self _meth_8050("TAG_POWER_ON", self.model);
-    self _meth_8053("TAG_POWER_OFF", self.model);
+    self hidepart("TAG_POWER_ON", self.model);
+    self showpart("TAG_POWER_OFF", self.model);
     wait 0.5;
-    self _meth_8050("TAG_POWER_OFF", self.model);
-    self _meth_8053("TAG_POWER_ON", self.model);
+    self hidepart("TAG_POWER_OFF", self.model);
+    self showpart("TAG_POWER_ON", self.model);
 
     if(common_scripts\utility::_id_562E(self._id_56B6)) {
       self._id_568A = 0;
@@ -417,15 +417,15 @@ _id_940A(var_0) {
 }
 
 _id_8716(var_0) {
-  self _meth_8276("zmb_circuit_breaker_02_dial_idle");
+  self scriptmodelplayanim("zmb_circuit_breaker_02_dial_idle");
 }
 
 _id_A10E(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0.size; var_2++)
-    self _meth_8050(var_0[var_2], self.model);
+    self hidepart(var_0[var_2], self.model);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++)
-    self _meth_8053(var_1[var_2], self.model);
+    self showpart(var_1[var_2], self.model);
 }
 
 _id_A0FF(var_0) {
@@ -463,13 +463,13 @@ _id_A0FF(var_0) {
 
   var_1._id_5671 = 1;
 
-  foreach(var_6 in var_1._id_8301)
-  var_6 _meth_83FA("gate", var_2);
+  foreach(var_6 in var_1.setclientdvars)
+  var_6 setscriptablepartstate("gate", var_2);
 
   wait(var_4);
 
-  foreach(var_6 in var_1._id_8301)
-  var_6 _meth_83FA("gate", var_3);
+  foreach(var_6 in var_1.setclientdvars)
+  var_6 setscriptablepartstate("gate", var_3);
 
   var_1._id_5671 = 0;
 }
@@ -489,8 +489,8 @@ _id_A10A(var_0, var_1) {
   else if(var_1 == "red")
     var_4 = "off";
 
-  foreach(var_6 in var_2._id_8301)
-  var_6 _meth_83FA(var_3, var_4);
+  foreach(var_6 in var_2.setclientdvars)
+  var_6 setscriptablepartstate(var_3, var_4);
 }
 
 _id_92C4() {
@@ -537,28 +537,28 @@ _id_9300(var_0) {
   if(!isDefined(self._id_6643) || !isDefined(self._id_6646) || !isDefined(self._id_6647)) {
     return;
   }
-  self._id_6643 _meth_82B1(self._id_6647.origin, 0.1, 0, 0);
+  self._id_6643 moveto(self._id_6647.origin, 0.1, 0, 0);
   wait 0.1;
-  self._id_6643 _meth_82B1(self._id_6646.origin, var_0 - 0.1, 0, 0);
+  self._id_6643 moveto(self._id_6646.origin, var_0 - 0.1, 0, 0);
 }
 
 _id_8714() {
   if(!isDefined(self._id_6643) || !isDefined(self._id_6647)) {
     return;
   }
-  self._id_6643 _meth_82B1(self._id_6647.origin, 0.5, 0, 0);
+  self._id_6643 moveto(self._id_6647.origin, 0.5, 0, 0);
 }
 
 _id_8713() {
   if(!isDefined(self._id_6643) || !isDefined(self._id_6646)) {
     return;
   }
-  self._id_6643 _meth_82B1(self._id_6646.origin, 0.5, 0, 0);
+  self._id_6643 moveto(self._id_6646.origin, 0.5, 0, 0);
 }
 
 _id_2EA6() {
   level endon("flag_both_enigmas_set");
-  var_0 = _func_18E("saltmine_ent_dialogue", "targetname");
+  var_0 = _getent("saltmine_ent_dialogue", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);

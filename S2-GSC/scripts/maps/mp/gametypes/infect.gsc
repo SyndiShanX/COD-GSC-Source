@@ -8,7 +8,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -27,7 +27,7 @@ main() {
   setdvarifuninitialized("spv_tesla_mp_active", 0);
   maps\mp\_utility::_id_873B(1);
   level._id_329D = 1;
-  level._id_2F85 = 1;
+  level.disableforfeit = 1;
   level._id_6702 = 1;
   level._id_6BAF = ::_id_6BAF;
   level._id_6BA7 = ::_id_6BA7;
@@ -65,28 +65,28 @@ main() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653();
-  level._id_6032 = _func_132("infectData", "numInitialInfected");
-  _func_035("scr_" + level.gametype + "_numLives", 0);
+  level._id_6032 = _getmatchrulesdata("infectData", "numInitialInfected");
+  _setdynamicdvar("scr_" + level.gametype + "_numLives", 0);
   maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
   maps\mp\_utility::_id_86EA("scorelimit", 0);
-  _func_035("scr_infect_roundswitch", 0);
+  _setdynamicdvar("scr_infect_roundswitch", 0);
   maps\mp\_utility::registerroundswitchdvar("infect", 0, 0, 9);
-  _func_035("scr_infect_roundlimit", 1);
+  _setdynamicdvar("scr_infect_roundlimit", 1);
   maps\mp\_utility::registerroundlimitdvar("infect", 1);
-  _func_035("scr_infect_winlimit", 1);
+  _setdynamicdvar("scr_infect_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("infect", 1);
-  _func_035("scr_infect_halftime", 0);
+  _setdynamicdvar("scr_infect_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("infect", 0);
-  _func_035("scr_infect_playerrespawndelay", 0);
-  _func_035("scr_infect_waverespawndelay", 0);
-  _func_035("scr_player_forcerespawn", 1);
-  _func_035("scr_team_fftype", 0);
-  _func_035("scr_game_hardpoints", 0);
+  _setdynamicdvar("scr_infect_playerrespawndelay", 0);
+  _setdynamicdvar("scr_infect_waverespawndelay", 0);
+  _setdynamicdvar("scr_player_forcerespawn", 1);
+  _setdynamicdvar("scr_team_fftype", 0);
+  _setdynamicdvar("scr_game_hardpoints", 0);
   setDvar("3193", 1);
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_INFECT");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_INFECT");
 
@@ -120,7 +120,7 @@ _id_6BAF() {
 
 _id_3FD8() {
   level endon("game_ended");
-  _func_035("scr_infect_timelimit", 0);
+  _setdynamicdvar("scr_infect_timelimit", 0);
   var_0 = 0;
   var_1 = undefined;
   var_2 = 2;
@@ -139,7 +139,7 @@ _id_3FD8() {
       var_1 = var_3 * 0.166667 + var_2;
     }
 
-    _func_035("scr_infect_timelimit", var_1);
+    _setdynamicdvar("scr_infect_timelimit", var_1);
     level thread _id_A91E(var_1);
 
     if(var_0)
@@ -154,9 +154,9 @@ _id_A91E(var_0) {
   level endon("watchHostMigration");
   level endon("game_ended");
   level waittill("host_migration_begin");
-  _func_035("scr_infect_timelimit", 0);
+  _setdynamicdvar("scr_infect_timelimit", 0);
   waittillframeend;
-  _func_035("scr_infect_timelimit", 0);
+  _setdynamicdvar("scr_infect_timelimit", 0);
   level waittill("host_migration_end");
   level notify("update_game_time", var_0);
 }
@@ -167,7 +167,7 @@ onplayerconnect() {
     var_0._id_511C = 0;
     var_0._id_5A51 = 0;
 
-    if(!_func_0C1(var_0) && !istestclient(var_0))
+    if(!_isai(var_0) && !istestclient(var_0))
       var_0 thread monitorinfectedafk();
 
     if(maps\mp\_utility::gameflag("prematch_done")) {
@@ -186,32 +186,32 @@ onplayerconnect() {
 monitorinfectedafk() {
   level endon("game_ended");
   self endon("disconnect");
-  self _meth_82E1("buttonPressed", "+usereload");
-  self _meth_82E1("buttonPressed", "+stance");
-  self _meth_82E1("buttonPressed", "+weapnext");
-  self _meth_82E1("buttonPressed", "+sprint");
-  self _meth_82E1("buttonPressed", "+attack");
-  self _meth_82E1("buttonPressed", "+activate");
-  self _meth_82E1("buttonPressed", "+gostand");
-  self _meth_82E1("buttonPressed", "+melee_zoom");
-  self _meth_82E1("buttonPressed", "+breath_sprint");
-  self _meth_82E1("buttonPressed", "+speed_throw");
-  self _meth_82E1("buttonPressed", "+frag");
-  self _meth_82E1("buttonPressed", "+smoke");
+  self notifyonplayercommand("buttonPressed", "+usereload");
+  self notifyonplayercommand("buttonPressed", "+stance");
+  self notifyonplayercommand("buttonPressed", "+weapnext");
+  self notifyonplayercommand("buttonPressed", "+sprint");
+  self notifyonplayercommand("buttonPressed", "+attack");
+  self notifyonplayercommand("buttonPressed", "+activate");
+  self notifyonplayercommand("buttonPressed", "+gostand");
+  self notifyonplayercommand("buttonPressed", "+melee_zoom");
+  self notifyonplayercommand("buttonPressed", "+breath_sprint");
+  self notifyonplayercommand("buttonPressed", "+speed_throw");
+  self notifyonplayercommand("buttonPressed", "+frag");
+  self notifyonplayercommand("buttonPressed", "+smoke");
   thread disconnectifnobuttonPressed();
   self waittill("buttonPressed");
-  self _meth_84A7("buttonPressed", "+usereload");
-  self _meth_84A7("buttonPressed", "+stance");
-  self _meth_84A7("buttonPressed", "+weapnext");
-  self _meth_84A7("buttonPressed", "+sprint");
-  self _meth_84A7("buttonPressed", "+attack");
-  self _meth_84A7("buttonPressed", "+activate");
-  self _meth_84A7("buttonPressed", "+gostand");
-  self _meth_84A7("buttonPressed", "+melee_zoom");
-  self _meth_84A7("buttonPressed", "+breath_sprint");
-  self _meth_84A7("buttonPressed", "+speed_throw");
-  self _meth_84A7("buttonPressed", "+frag");
-  self _meth_84A7("buttonPressed", "+smoke");
+  self notifyonplayercommandremove("buttonPressed", "+usereload");
+  self notifyonplayercommandremove("buttonPressed", "+stance");
+  self notifyonplayercommandremove("buttonPressed", "+weapnext");
+  self notifyonplayercommandremove("buttonPressed", "+sprint");
+  self notifyonplayercommandremove("buttonPressed", "+attack");
+  self notifyonplayercommandremove("buttonPressed", "+activate");
+  self notifyonplayercommandremove("buttonPressed", "+gostand");
+  self notifyonplayercommandremove("buttonPressed", "+melee_zoom");
+  self notifyonplayercommandremove("buttonPressed", "+breath_sprint");
+  self notifyonplayercommandremove("buttonPressed", "+speed_throw");
+  self notifyonplayercommandremove("buttonPressed", "+frag");
+  self notifyonplayercommandremove("buttonPressed", "+smoke");
 }
 
 disconnectifnobuttonPressed() {
@@ -219,21 +219,21 @@ disconnectifnobuttonPressed() {
   self endon("disconnect");
   level endon("game_ended");
   wait 75;
-  self _meth_84A7("buttonPressed", "+usereload");
-  self _meth_84A7("buttonPressed", "+stance");
-  self _meth_84A7("buttonPressed", "+weapnext");
-  self _meth_84A7("buttonPressed", "+sprint");
-  self _meth_84A7("buttonPressed", "+attack");
-  self _meth_84A7("buttonPressed", "+activate");
-  self _meth_84A7("buttonPressed", "+gostand");
-  self _meth_84A7("buttonPressed", "+melee_zoom");
-  self _meth_84A7("buttonPressed", "+breath_sprint");
-  self _meth_84A7("buttonPressed", "+speed_throw");
-  self _meth_84A7("buttonPressed", "+frag");
-  self _meth_84A7("buttonPressed", "+smoke");
+  self notifyonplayercommandremove("buttonPressed", "+usereload");
+  self notifyonplayercommandremove("buttonPressed", "+stance");
+  self notifyonplayercommandremove("buttonPressed", "+weapnext");
+  self notifyonplayercommandremove("buttonPressed", "+sprint");
+  self notifyonplayercommandremove("buttonPressed", "+attack");
+  self notifyonplayercommandremove("buttonPressed", "+activate");
+  self notifyonplayercommandremove("buttonPressed", "+gostand");
+  self notifyonplayercommandremove("buttonPressed", "+melee_zoom");
+  self notifyonplayercommandremove("buttonPressed", "+breath_sprint");
+  self notifyonplayercommandremove("buttonPressed", "+speed_throw");
+  self notifyonplayercommandremove("buttonPressed", "+frag");
+  self notifyonplayercommandremove("buttonPressed", "+smoke");
 
-  if(!self _meth_829E()) {
-    _func_134(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
+  if(!self ishost()) {
+    _kick(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
     level thread maps\mp\gametypes\_gamelogic::_id_A11E();
   }
 }
@@ -278,7 +278,7 @@ _id_7685() {
   }
 
   if(var_0.size > 0)
-    self _meth_8512(var_0);
+    self loadweapons(var_0);
 }
 
 _id_6BA7() {
@@ -338,7 +338,7 @@ _id_6BA4() {
 
 _id_A12F() {
   if(self.pers["team"] == "allies")
-    self _meth_8626("mute_non_infected_vo");
+    self clientaddsoundsubmix("mute_non_infected_vo");
 
   if(self.pers["team"] == "axis") {
     _id_051E::_id_2400();
@@ -350,15 +350,15 @@ _id_A12F() {
     maps\mp\_utility::giveperk("specialty_falldamage");
     _id_0513::_id_A13B();
 
-    if(!_func_0C1(self) && !istestclient(self)) {
+    if(!_isai(self) && !istestclient(self)) {
       var_0 = undefined;
 
-      if(self _meth_82D0())
+      if(self issplitscreenplayer())
         var_0 = common_scripts\utility::_id_44F5("mp_infected_zombie_vision_spltscrn_01");
       else
         var_0 = common_scripts\utility::_id_44F5("mp_infected_zombie_vision_01");
 
-      _func_14D(var_0, self, "j_head", self);
+      _playfxontagforclients(var_0, self, "j_head", self);
     }
 
     if(isDefined(self.infectedboost) && self.infectedboost) {
@@ -366,7 +366,7 @@ _id_A12F() {
       self.health = 200;
     }
 
-    self _meth_82CD();
+    self disableweaponpickup();
     thread playzombienoises();
   }
 }
@@ -374,7 +374,7 @@ _id_A12F() {
 playzombienoises() {
   self endon("death");
   level endon("game_ended");
-  self _meth_8626("mute_non_infected_vo");
+  self clientaddsoundsubmix("mute_non_infected_vo");
   self playSound("zvox_gen_spawn");
 
   for(;;) {
@@ -399,7 +399,7 @@ playzombienoises() {
         break;
     }
 
-    wait(_func_0A5(1.5, 6));
+    wait(_randomfloatrange(1.5, 6));
   }
 }
 
@@ -410,7 +410,7 @@ _id_86AE() {
 _id_86AF() {
   if(!isDefined(self._id_8C0E) || !self._id_8C0E) {
     thread _id_047A::_id_4817();
-    self _meth_860F("mp_inf_got_infected", self);
+    self playsoundtoplayer("mp_inf_got_infected", self);
     thread maps\mp\_utility::leaderdialogonplayer("inf_infected", "status");
     self._id_8C0E = 1;
   }
@@ -422,26 +422,26 @@ _id_220B() {
   level._id_510F = 0;
   maps\mp\_utility::gameflagwait("prematch_done");
   level._id_5112 = 1;
-  maps\mp\gametypes\_hostmigration::_id_A6F5(1.0);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(1.0);
   var_0 = 15;
-  _func_032("ui_match_countdown_title", 7);
-  _func_032("ui_match_countdown_toggle", 1);
+  _setomnvar("ui_match_countdown_title", 7);
+  _setomnvar("ui_match_countdown_toggle", 1);
 
   while(var_0 > 0 && !level.gameended) {
     var_0--;
-    _func_032("ui_match_countdown", var_0 + 1);
-    maps\mp\gametypes\_hostmigration::_id_A6F5(1.0);
+    _setomnvar("ui_match_countdown", var_0 + 1);
+    maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(1.0);
   }
 
-  _func_032("ui_match_countdown", 0);
-  _func_032("ui_match_countdown_title", 0);
-  _func_032("ui_match_countdown_toggle", 0);
+  _setomnvar("ui_match_countdown", 0);
+  _setomnvar("ui_match_countdown_title", 0);
+  _setomnvar("ui_match_countdown_toggle", 0);
   level._id_5112 = 0;
   var_1 = [];
   var_2 = undefined;
 
   foreach(var_4 in level.players) {
-    if(maps\mp\_utility::matchmakinggame() && level.players.size > 1 && var_4 _meth_829E()) {
+    if(maps\mp\_utility::matchmakinggame() && level.players.size > 1 && var_4 ishost()) {
       var_2 = var_4;
       continue;
     }
@@ -478,7 +478,7 @@ randomcarepackagespawner() {
   for(;;) {
     wait 30;
 
-    if(_func_159("allies") > 0) {
+    if(_getteamplayersalive("allies") > 0) {
       var_0 = getrandomnodenearsurvivor();
 
       if(isDefined(var_0))
@@ -491,21 +491,21 @@ getrandomnodenearsurvivor() {
   var_0 = undefined;
 
   foreach(var_2 in common_scripts\utility::array_randomize(level._id_9859["allies"])) {
-    var_0 = _func_0B8(var_2.origin, 800, 0, 1000, "Path");
+    var_0 = _getnodesinradius(var_2.origin, 800, 0, 1000, "Path");
 
     if(isDefined(var_0) && var_0.size > 0) {
       foreach(var_4 in common_scripts\utility::array_randomize(var_0)) {
-        if(isDefined(var_4) && _func_200(var_4))
+        if(isDefined(var_4) && _nodeexposedtosky(var_4))
           return var_4;
       }
     }
   }
 
-  var_0 = _func_0B8((0, 0, 0), 10000, 0, 10000, "Path");
+  var_0 = _getnodesinradius((0, 0, 0), 10000, 0, 10000, "Path");
   var_7 = undefined;
 
   foreach(var_4 in common_scripts\utility::array_randomize(var_0)) {
-    if(isDefined(var_4) && _func_200(var_4))
+    if(isDefined(var_4) && _nodeexposedtosky(var_4))
       return var_4;
   }
 
@@ -541,13 +541,13 @@ _id_76A2() {
     waitframe();
   }
 
-  while(self _meth_8128())
+  while(self ismeleeing())
     waitframe();
 
-  while(self _meth_82E4())
+  while(self ismantling())
     waitframe();
 
-  while(!self _meth_8346() && !self _meth_801D())
+  while(!self isonground() && !self isonladder())
     waitframe();
 
   waitframe();
@@ -573,19 +573,19 @@ _id_8682(var_0) {
     level._id_510F = 1;
     level._id_5115[self.name] = 1;
 
-    if(!_func_0C1(self) && !istestclient(self)) {
+    if(!_isai(self) && !istestclient(self)) {
       var_1 = undefined;
 
-      if(self _meth_82D0())
+      if(self issplitscreenplayer())
         var_1 = common_scripts\utility::_id_44F5("mp_infected_zombie_vision_spltscrn_01");
       else
         var_1 = common_scripts\utility::_id_44F5("mp_infected_zombie_vision_01");
 
-      _func_14D(var_1, self, "j_head", self);
+      _playfxontagforclients(var_1, self, "j_head", self);
     }
 
     var_2 = common_scripts\utility::_id_44F5("infected_turn_lightning_01");
-    _func_147(var_2, self, "tag_origin");
+    _playfxontag(var_2, self, "tag_origin");
   }
 
   self._id_5726 = 1;
@@ -595,7 +595,7 @@ _id_8682(var_0) {
   maps\mp\gametypes\_class::_id_4773(self.team, "gamemode");
   _id_A12F();
   thread _id_047A::_id_3C69();
-  self _meth_860F("mp_inf_got_infected", self);
+  self playsoundtoplayer("mp_inf_got_infected", self);
   thread maps\mp\_utility::leaderdialogonplayer("inf_infected", "status");
   _id_240F();
 }
@@ -684,7 +684,7 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
   if(!var_10) {
     var_1 maps\mp\_utility::_id_2CED(0.05, _id_047A::_id_511D);
-    var_1 _meth_860F("mp_inf_infection_kill", var_1);
+    var_1 playsoundtoplayer("mp_inf_infection_kill", var_1);
     var_1._id_5A51++;
     var_1 maps\mp\_utility::_id_867C(var_1._id_5A51);
 
@@ -744,21 +744,21 @@ _id_3B60(var_0) {
       var_3._id_014C = "normal_radar";
   }
 
-  _func_172("axis", 1);
+  _setteamradarstrength("axis", 1);
 
   for(;;) {
     var_5 = var_0.origin;
     wait 4;
 
     if(var_1) {
-      _func_170("axis", 0);
+      _setteamradar("axis", 0);
       var_1 = 0;
     }
 
     wait 6;
 
     if(distance(var_5, var_0.origin) < 200) {
-      _func_170("axis", 1);
+      _setteamradar("axis", 1);
       var_1 = 1;
 
       foreach(var_3 in level.players)
@@ -776,7 +776,7 @@ _id_36EE(var_0) {
     if(level._id_5116["allies"] > 1) {
       level notify("infect_lateJoiner");
       waitframe();
-      _func_170("axis", 0);
+      _setteamradar("axis", 0);
       break;
     }
 
@@ -821,7 +821,7 @@ _id_637D() {
   } else if(level._id_5112 && level._id_5116["allies"] == 0 && level._id_5116["axis"] == 0) {
     level notify("infect_stopCountdown");
     level._id_5110 = 0;
-    _func_032("ui_match_start_countdown", 0);
+    _setomnvar("ui_match_start_countdown", 0);
   }
 
   self._id_5726 = undefined;
@@ -836,15 +836,15 @@ _id_6BB6() {
 
   foreach(var_1 in level.players) {
     if(isDefined(var_1.team) && var_1.team == "axis") {
-      if(!_func_0C1(var_1) && !istestclient(var_1)) {
+      if(!_isai(var_1) && !istestclient(var_1)) {
         var_2 = undefined;
 
-        if(var_1 _meth_82D0())
+        if(var_1 issplitscreenplayer())
           var_2 = common_scripts\utility::_id_44F5("mp_infected_zombie_vision_spltscrn_01");
         else
           var_2 = common_scripts\utility::_id_44F5("mp_infected_zombie_vision_01");
 
-        _func_295(var_2, var_1, "j_head", var_1);
+        _killfxontagforclient(var_2, var_1, "j_head", var_1);
       }
     }
   }
@@ -857,15 +857,15 @@ _id_6BB3() {
 
   foreach(var_1 in level.players) {
     if(isDefined(var_1.team) && var_1.team == "axis") {
-      if(!_func_0C1(var_1) && !istestclient(var_1)) {
+      if(!_isai(var_1) && !istestclient(var_1)) {
         var_2 = undefined;
 
-        if(var_1 _meth_82D0())
+        if(var_1 issplitscreenplayer())
           var_2 = common_scripts\utility::_id_44F5("mp_infected_zombie_vision_spltscrn_01");
         else
           var_2 = common_scripts\utility::_id_44F5("mp_infected_zombie_vision_01");
 
-        _func_295(var_2, var_1, "j_head", var_1);
+        _killfxontagforclient(var_2, var_1, "j_head", var_1);
       }
     }
   }
@@ -890,14 +890,14 @@ _id_46D7(var_0) {
 _id_A175() {
   level._id_5116["allies"] = _id_46D7("allies");
   game["teamScores"]["allies"] = level._id_5116["allies"];
-  _func_156("allies", level._id_5116["allies"]);
+  _setteamscore("allies", level._id_5116["allies"]);
   level._id_5116["axis"] = _id_46D7("axis");
   game["teamScores"]["axis"] = level._id_5116["axis"];
-  _func_156("axis", level._id_5116["axis"]);
+  _setteamscore("axis", level._id_5116["axis"]);
 }
 
 _id_872E() {
-  if(_func_133() && _func_132("defaultClasses", "allies", "defaultClass", 0, "class", "inUse"))
+  if(_isusingmatchrulesdata() && _getmatchrulesdata("defaultClasses", "allies", "defaultClass", 0, "class", "inUse"))
     level._id_5114["allies"] = maps\mp\_utility::_id_4573("allies", 0);
   else if(level.rankedmatch) {
     level._id_5114["allies"] = maps\mp\gametypes\_class::_id_44B4();
@@ -923,7 +923,7 @@ _id_872E() {
     level._id_5114["allies"]["ignoreMeleeSlotWeapon"] = 1;
   }
 
-  if(_func_133() && _func_132("defaultClasses", "axis", "defaultClass", 1, "class", "inUse"))
+  if(_isusingmatchrulesdata() && _getmatchrulesdata("defaultClasses", "axis", "defaultClass", 1, "class", "inUse"))
     level._id_5114["axis_initial"] = maps\mp\_utility::_id_4573("axis", 1);
   else {
     level._id_5114["axis_initial"] = maps\mp\gametypes\_class::_id_44B4();
@@ -933,7 +933,7 @@ _id_872E() {
     level._id_5114["axis_initial"]["loadoutOffhandStruct"] = maps\mp\_utility::_id_473C(var_0, 0);
   }
 
-  if(_func_133() && _func_132("defaultClasses", "axis", "defaultClass", 0, "class", "inUse"))
+  if(_isusingmatchrulesdata() && _getmatchrulesdata("defaultClasses", "axis", "defaultClass", 0, "class", "inUse"))
     level._id_5114["axis"] = maps\mp\_utility::_id_4573("axis", 0);
   else {
     level._id_5114["axis"] = maps\mp\gametypes\_class::_id_44B4();
@@ -958,7 +958,7 @@ _id_63E8() {
 
     _id_8738(0);
     var_0++;
-    maps\mp\gametypes\_hostmigration::_id_A6F5(1.0);
+    maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(1.0);
 
     if(var_0 == 30) {
       thread _id_047A::_id_9522();

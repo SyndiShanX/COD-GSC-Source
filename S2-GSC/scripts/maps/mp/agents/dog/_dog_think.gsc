@@ -45,7 +45,7 @@ _id_8A16() {
   self._id_173C = 0;
   self._id_99FC = 0;
   self._id_0012 = 1;
-  self _meth_8399(24);
+  self scragentsetgoalradius(24);
 }
 
 init() {
@@ -99,7 +99,7 @@ _id_9963() {
 
   for(;;) {
     if(self._id_0BA4 != "melee" && !self._id_018F && self[[level._id_31F5]]() && !self[[level._id_31B2]]())
-      self _meth_83A1(self._id_28D2);
+      self scragentbeginmelee(self._id_28D2);
 
     switch (self._id_0BA4) {
       case "idle":
@@ -124,7 +124,7 @@ _id_2EE7(var_0) {
   if(!isDefined(self._id_5BD2) || !isDefined(self._id_5BD1))
     return 0;
 
-  if(_func_211(var_0.origin, self._id_5BD2) > 4)
+  if(_distance2dsquared(var_0.origin, self._id_5BD2) > 4)
     return 0;
 
   if(self._id_1787)
@@ -137,7 +137,7 @@ _id_2EE7(var_0) {
 }
 
 _id_2EE6() {
-  if(isDefined(self._id_5BBF) && isDefined(self._id_5BBE) && _func_211(self._id_28D2.origin, self._id_5BBF) < 4 && distancesquared(self.origin, self._id_5BBE) < 2500)
+  if(isDefined(self._id_5BBF) && isDefined(self._id_5BBE) && _distance2dsquared(self._id_28D2.origin, self._id_5BBF) < 4 && distancesquared(self.origin, self._id_5BBE) < 2500)
     return 1;
 
   if(_id_A7F8(0))
@@ -184,7 +184,7 @@ _id_A13A() {
 }
 
 _id_A134() {
-  self _meth_8395(self.origin);
+  self scragentsetgoalpos(self.origin);
 }
 
 _id_A13C() {
@@ -203,7 +203,7 @@ _id_A13C() {
       var_1 = 1;
     } else {
       self._id_64CE = "idle";
-      self _meth_8395(self.origin);
+      self scragentsetgoalpos(self.origin);
     }
   } else
     self._id_64CE = _id_4595();
@@ -213,9 +213,9 @@ _id_A13C() {
     var_4 = 0;
 
     if(isDefined(self._id_5B75) && gettime() - self._id_5B75 < 3000) {
-      if(_func_211(var_0, self._id_5B73) < 16)
+      if(_distance2dsquared(var_0, self._id_5B73) < 16)
         var_4 = 1;
-      else if(isDefined(self._id_5B74) && self._id_5B74 == "pursuit" && _func_211(self._id_5B76, self._id_0088.origin) < 16)
+      else if(isDefined(self._id_5B74) && self._id_5B74 == "pursuit" && _distance2dsquared(self._id_5B76, self._id_0088.origin) < 16)
         var_4 = 1;
     }
 
@@ -224,7 +224,7 @@ _id_A13C() {
         self._id_64CE = "follow";
       else {
         self._id_64CE = "idle";
-        self _meth_8395(self.origin);
+        self scragentsetgoalpos(self.origin);
       }
 
       var_2 = 1;
@@ -237,7 +237,7 @@ _id_A13C() {
     self._id_28D2 = undefined;
     self._id_0108 = _id_44EA(self._id_0108);
     self._id_15E1 = 1;
-    var_5 = self _meth_83E7();
+    var_5 = self getpathgoalpos();
 
     if(!isDefined(var_5))
       var_5 = self.origin;
@@ -248,20 +248,20 @@ _id_A13C() {
     if(gettime() - self._id_99FC < 5000)
       var_1 = 1;
 
-    var_6 = self._id_0117 _meth_8178();
+    var_6 = self._id_0117 getstance();
 
     if(!isDefined(self._id_0117._id_76E7) && isDefined(self._id_0117))
       self._id_0117._id_76E7 = var_6;
 
-    var_7 = !isDefined(self._id_6DAD) || _func_211(self._id_6DAD, self._id_0117.origin) > 100;
+    var_7 = !isDefined(self._id_6DAD) || _distance2dsquared(self._id_6DAD, self._id_0117.origin) > 100;
 
     if(var_7)
       self._id_6DAD = self._id_0117.origin;
 
-    var_8 = _func_211(var_5, self._id_0117.origin);
+    var_8 = _distance2dsquared(var_5, self._id_0117.origin);
 
     if(var_1 || var_8 > self._id_6DAE && var_7 || self._id_0117._id_76E7 != var_6 || self._id_76E1 != "idle" && self._id_76E1 != self._id_64CE) {
-      self _meth_8395(_id_3B95());
+      self scragentsetgoalpos(_id_3B95());
       self._id_0117._id_76E7 = var_6;
       return;
     }
@@ -269,7 +269,7 @@ _id_A13C() {
     self._id_28D2 = self._id_0088;
     self._id_0108 = "sprint";
     self._id_15E1 = 0;
-    self _meth_8395(var_0);
+    self scragentsetgoalpos(var_0);
   }
 }
 
@@ -278,11 +278,11 @@ _id_4595(var_0) {
     if(isDefined(self._id_0094) && self._id_0088 == self._id_0094)
       return "pursuit";
 
-    if(_func_0AE(self.origin[2] - self._id_0088.origin[2]) < self._id_A85C && _func_211(self._id_0088.origin, self.origin) < self._id_11AD)
+    if(_abs(self.origin[2] - self._id_0088.origin[2]) < self._id_A85C && _distance2dsquared(self._id_0088.origin, self.origin) < self._id_11AD)
       return "pursuit";
 
     if(isDefined(self._id_28D2) && self._id_28D2 == self._id_0088) {
-      if(_func_211(self._id_28D2.origin, self.origin) < self._id_59DE)
+      if(_distance2dsquared(self._id_28D2.origin, self.origin) < self._id_59DE)
         return "pursuit";
     }
   } else if(isDefined(self._id_0117))
@@ -342,7 +342,7 @@ _id_A6B1() {
 _id_44EA(var_0) {
   var_1 = 40000;
   var_2 = 65536;
-  var_3 = self _meth_83E7();
+  var_3 = self getpathgoalpos();
 
   if(isDefined(var_3)) {
     var_4 = distancesquared(var_3, self.origin);
@@ -370,7 +370,7 @@ _id_A7F8(var_0) {
   if(!isDefined(self._id_28D2))
     return 0;
 
-  return !_id_5859(self._id_28D2.origin) && _func_211(self.origin, self._id_28D2.origin) < self._id_60F2 * 0.75 * 0.75 && (!var_0 || self _meth_8393(self._id_28D2));
+  return !_id_5859(self._id_28D2.origin) && _distance2dsquared(self.origin, self._id_28D2.origin) < self._id_60F2 * 0.75 * 0.75 && (!var_0 || self agentcanseesentient(self._id_28D2));
 }
 
 _id_7AC0() {
@@ -383,7 +383,7 @@ _id_7AC0() {
   if(self._id_0BA4 == "traverse")
     return 0;
 
-  if(_func_211(self.origin, self._id_28D2.origin) > self._id_60F2)
+  if(_distance2dsquared(self.origin, self._id_28D2.origin) > self._id_60F2)
     return 0;
 
   if(!_id_5859(self._id_28D2.origin))
@@ -396,8 +396,8 @@ _id_A7F7() {
   if(!isDefined(self._id_0088))
     return 0;
 
-  if(_func_0AE(self.origin[2] - self._id_0088.origin[2]) <= self._id_A85C || self _meth_8393(self._id_0088)) {
-    var_0 = _func_211(self.origin, self._id_0088.origin);
+  if(_abs(self.origin[2] - self._id_0088.origin[2]) <= self._id_A85C || self agentcanseesentient(self._id_0088)) {
+    var_0 = _distance2dsquared(self.origin, self._id_0088.origin);
 
     if(var_0 < self._id_A85B)
       return 1;
@@ -409,10 +409,10 @@ _id_A7F7() {
 _id_442A(var_0) {
   var_1 = var_0.origin - self.origin;
   var_1 = vectorNormalize(var_1);
-  var_2 = self _meth_83E7();
+  var_2 = self getpathgoalpos();
   var_3 = self._id_11AB + 4;
 
-  if(isDefined(var_2) && _func_211(var_2, var_0.origin) < var_3 * var_3 && maps\mp\agents\_scriptedagents::_id_1F5B(var_0.origin, var_2))
+  if(isDefined(var_2) && _distance2dsquared(var_2, var_0.origin) < var_3 * var_3 && maps\mp\agents\_scriptedagents::_id_1F5B(var_0.origin, var_2))
     return var_2;
 
   var_4 = var_0.origin - var_1 * self._id_11AB;
@@ -442,12 +442,12 @@ _id_3B95() {
   var_1 = (var_1[0], var_1[1], 0);
   var_1 = vectorNormalize(var_1);
   var_2 = _id_285C(var_0, var_1);
-  var_3 = _func_0BA(self._id_0117.origin);
+  var_3 = _getclosestnodeinsight(self._id_0117.origin);
 
   if(!isDefined(var_3))
     return self.origin;
 
-  var_4 = _func_204(var_3);
+  var_4 = _getlinkednodes(var_3);
   var_5 = 5;
   var_6 = 10;
   var_7 = 15;
@@ -475,21 +475,21 @@ _id_3B95() {
 
     var_15 = var_15 / var_16;
     var_18 = vectordot(var_1, var_15);
-    var_19 = self._id_0117 _meth_8178();
+    var_19 = self._id_0117 getstance();
 
     switch (var_19) {
       case "stand":
-        if(var_18 < _func_0A7(35) && var_18 > _func_0A7(45))
+        if(var_18 < _cos(35) && var_18 > _cos(45))
           var_14 = var_14 + var_6;
 
         break;
       case "crouch":
-        if(var_18 < _func_0A7(75) && var_18 > _func_0A7(90))
+        if(var_18 < _cos(75) && var_18 > _cos(90))
           var_14 = var_14 + var_6;
 
         break;
       case "prone":
-        if(var_18 < _func_0A7(125) && var_18 > _func_0A7(135))
+        if(var_18 < _cos(125) && var_18 > _cos(135))
           var_14 = var_14 + var_6;
 
         break;
@@ -534,7 +534,7 @@ _id_3B95() {
   if(!isDefined(var_26))
     return self.origin;
 
-  if(self._id_173C && _func_211(var_26, self._id_5B73) < 4)
+  if(self._id_173C && _distance2dsquared(var_26, self._id_5B73) < 4)
     return self.origin;
 
   return var_26;
@@ -624,7 +624,7 @@ _id_A8EF() {
   self endon("death");
   level endon("game_ended");
   self endon("end_dog_sound");
-  wait(_func_0A4(5, 10));
+  wait(_randomintrange(5, 10));
   self._id_159D = undefined;
 }
 
@@ -638,7 +638,7 @@ _id_74A6(var_0) {
 
   for(;;) {
     self._id_5BA5 = gettime();
-    wait(_func_0A4(3, 6));
+    wait(_randomintrange(3, 6));
   }
 }
 
@@ -659,7 +659,7 @@ _id_74CD(var_0) {
     }
 
     self._id_5BC9 = gettime();
-    wait(_func_0A4(6, 8));
+    wait(_randomintrange(6, 8));
   }
 }
 
@@ -705,7 +705,7 @@ _id_A92E() {
         maps\mp\agents\_agent_utility::_id_5A39();
         break;
       case "sr":
-        var_0 = level common_scripts\utility::_id_A715("sr_player_eliminated", "sr_player_respawned");
+        var_0 = level common_scripts\utility::waittill_any_return("sr_player_eliminated", "sr_player_respawned");
 
         if(isDefined(var_0) && var_0 == "sr_player_eliminated")
           maps\mp\agents\_agent_utility::_id_5A39();
@@ -761,7 +761,7 @@ _id_8B9B(var_0, var_1, var_2) {
   if(isDefined(var_1) && weaponclass(var_1) == "sniper")
     return 1;
 
-  if(isDefined(var_2) && _func_17B(var_2) && var_0 >= 10)
+  if(isDefined(var_2) && _isexplosivedamagemod(var_2) && var_0 >= 10)
     return 1;
 
   if(isDefined(var_2) && var_2 == "MOD_MELEE")

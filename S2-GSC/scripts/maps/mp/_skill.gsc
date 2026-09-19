@@ -5,10 +5,10 @@
 
 init() {
   level._id_8C73 = getdvarint("skill_rdur_min", 60);
-  level._id_8C74 = _func_0AD(getdvarint("skill_recent_sosc", 1000)) / 1000.0;
+  level._id_8C74 = _float(getdvarint("skill_recent_sosc", 1000)) / 1000.0;
   level._id_8C76 = getdvarint("skill_sos_max_weight", 5);
-  level._id_8C77 = _func_0AD(getdvarint("skill_sos_tanh_scale", 1000)) / 1000.0;
-  level._id_8C75 = _func_0AD(getdvarint("skill_sos_default_rating", 500)) / 1000.0;
+  level._id_8C77 = _float(getdvarint("skill_sos_tanh_scale", 1000)) / 1000.0;
+  level._id_8C75 = _float(getdvarint("skill_sos_default_rating", 500)) / 1000.0;
   level thread onplayerspawned();
 }
 
@@ -81,7 +81,7 @@ _id_0663(var_0, var_1) {
 
 _id_05F3(var_0) {
   var_1 = common_scripts\utility::_id_8C4F(var_0);
-  var_2 = _func_0D7(_func_0D8(_func_0AE(var_0)) / 3);
+  var_2 = _exp(_log(_abs(var_0)) / 3);
   var_2 = var_2 * var_1;
   return var_2;
 }
@@ -147,7 +147,7 @@ _id_05EB(var_0) {
 }
 
 _id_05EC(var_0) {
-  var_1 = _func_0AD(var_0) / 2000.0;
+  var_1 = _float(var_0) / 2000.0;
   var_1 = clamp(var_1, 0.0, 1.0);
   return var_1;
 }
@@ -175,7 +175,7 @@ _id_0685(var_0) {
   var_2 = 0;
 
   foreach(var_4 in var_0)
-  var_1 = var_1 + _func_0AE(var_4);
+  var_1 = var_1 + _abs(var_4);
 
   if(var_1 != 0)
     var_2 = 1.0 / var_1;
@@ -209,13 +209,13 @@ _id_073D(var_0, var_1) {
 }
 
 _id_0684(var_0) {
-  return 0.398942 * _func_0D7(var_0 * var_0 * 0.5 * -1.0);
+  return 0.398942 * _exp(var_0 * var_0 * 0.5 * -1.0);
 }
 
 _id_0683(var_0) {
-  var_1 = _func_0AE(0.707107 * var_0);
+  var_1 = _abs(0.707107 * var_0);
   var_2 = 1.0 / (1.0 + 0.5 * var_1);
-  var_3 = var_2 * _func_0D7(var_1 * var_1 * -1 - 1.26551 + var_2 * (1.00002 + var_2 * (0.374092 + var_2 * (0.0967842 + var_2 * (-0.186288 + var_2 * (0.278868 + var_2 * (-1.1352 + var_2 * (1.48852 + var_2 * (-0.822152 + var_2 * 0.170873)))))))));
+  var_3 = var_2 * _exp(var_1 * var_1 * -1 - 1.26551 + var_2 * (1.00002 + var_2 * (0.374092 + var_2 * (0.0967842 + var_2 * (-0.186288 + var_2 * (0.278868 + var_2 * (-1.1352 + var_2 * (1.48852 + var_2 * (-0.822152 + var_2 * 0.170873)))))))));
 
   if(var_0 >= 0)
     var_3 = 2.0 - var_3;
@@ -271,7 +271,7 @@ _id_0738() {
   var_13 = 0;
 
   if(var_10 == 0.0)
-    var_10 = _func_0AF(1.0, max(0.8596 + _func_0AE(var_3._id_1704) * -0.18397, 0.05));
+    var_10 = _min(1.0, max(0.8596 + _abs(var_3._id_1704) * -0.18397, 0.05));
 
   foreach(var_22, var_15 in level._id_8F29) {
     if(var_22 == self._id_8F28) {
@@ -290,9 +290,9 @@ _id_0738() {
     if(var_15._id_1705)
       var_17 = var_17 + var_15._id_1705;
     else
-      var_17 = var_17 + _func_0AF(max(_func_0AE(var_15._id_1704) * -0.18397 + 0.8596, 0.05), 1.0);
+      var_17 = var_17 + _min(max(_abs(var_15._id_1704) * -0.18397 + 0.8596, 0.05), 1.0);
 
-    var_18 = _func_0D9(var_17);
+    var_18 = _sqrt(var_17);
     var_19 = (var_11 - var_15._id_1704) / var_18;
     var_20 = 0;
 
@@ -307,9 +307,9 @@ _id_0738() {
       var_20 = 0.5;
     }
 
-    var_21 = 1.0 / (1.0 + _func_0D7(var_19 * -1.0));
+    var_21 = 1.0 / (1.0 + _exp(var_19 * -1.0));
     var_12 = var_12 + (var_20 - var_21) / var_18;
-    var_13 = var_13 + _func_0D9(var_10) / var_18 * var_21 * (1.0 - var_21) / var_17;
+    var_13 = var_13 + _sqrt(var_10) / var_18 * var_21 * (1.0 - var_21) / var_17;
     var_8 = var_8 + var_15._id_1708 * var_16;
     var_9 = var_9 + var_16;
   }
@@ -324,7 +324,7 @@ _id_0738() {
   var_25 = _id_05D7(var_5, var_6, var_7, level._id_8C74);
   var_26 = _id_05D8(var_25, var_23);
   var_27 = var_26;
-  var_28 = _func_0AF(var_3._id_1709, level._id_8C76);
+  var_28 = _min(var_3._id_1709, level._id_8C76);
   var_29 = var_28 + var_24;
 
   if(var_29 > 0) {

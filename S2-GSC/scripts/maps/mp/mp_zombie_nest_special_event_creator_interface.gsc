@@ -234,7 +234,7 @@ _id_55C0() {
 _id_9959() {
   foreach(var_1 in level.players) {
     for(var_2 = 0; var_2 < level._id_08CB.size; var_2++) {
-      if(isalive(var_1) && !common_scripts\utility::_id_562E(var_1._id_5378) && var_1 _id_55C1(level._id_08CB[var_2]))
+      if(isalive(var_1) && !common_scripts\utility::_id_562E(var_1.inlaststand) && var_1 _id_55C1(level._id_08CB[var_2]))
         return 1;
     }
   }

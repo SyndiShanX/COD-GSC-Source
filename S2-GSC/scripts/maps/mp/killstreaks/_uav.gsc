@@ -24,19 +24,19 @@ _id_9FDD(var_0, var_1) {
   var_2 = randomint(360);
   var_3 = _id_46FC(var_0._id_01C8);
   var_4 = _id_46FD(var_0._id_01C8);
-  var_5 = _func_0A7(var_2) * var_4;
-  var_6 = _func_0A6(var_2) * var_4;
+  var_5 = _cos(var_2) * var_4;
+  var_6 = _sin(var_2) * var_4;
   var_7 = level._id_9FDF;
 
   if(var_0._id_01C8 == "counter_uav")
     var_7 = level._id_28BA;
 
-  var_0 _meth_8055(var_7, "tag_origin", (var_5, var_6, var_3), (0, var_2 - 90, 0));
-  var_0 _meth_805C();
-  var_0 _meth_808C();
+  var_0 linkto(var_7, "tag_origin", (var_5, var_6, var_3), (0, var_2 - 90, 0));
+  var_0 hide();
+  var_0 dontinterpolate();
   waitframe();
   var_8 = var_0.origin;
-  var_0 _meth_8057();
+  var_0 unlink();
 
   if(0 && isDefined(var_0._id_620D))
     var_0._id_620D _meth_8352(3000, 1);
@@ -52,18 +52,18 @@ _id_9FDD(var_0, var_1) {
     thread _id_9FD6(var_0, var_1);
 
   var_0.origin = var_0.origin + -1 * anglesToForward(var_0.angles) * var_9;
-  var_0 _meth_82B1(var_8, 3);
-  var_0 _meth_82BB(20, 0.05);
-  var_0 _meth_808C();
+  var_0 moveto(var_8, 3);
+  var_0 rotateroll(20, 0.05);
+  var_0 dontinterpolate();
   level notify("uav_update");
   var_0 maps\mp\gametypes\_hostmigration::_id_A74C("death", 3);
 
   if(isDefined(var_0))
-    var_0 _meth_8055(var_7, "tag_origin");
+    var_0 linkto(var_7, "tag_origin");
 }
 
 _id_9FDE(var_0, var_1) {
-  var_0 _meth_8057();
+  var_0 unlink();
   var_2 = 2625.0;
 
   if(var_0._id_01C8 == "counter_uav")
@@ -73,15 +73,15 @@ _id_9FDE(var_0, var_1) {
     thread _id_9FD7(var_0, var_1);
 
   var_3 = var_0.origin + anglesToForward(var_0.angles) * var_2;
-  _func_147(common_scripts\utility::_id_44F5("uav_exit"), var_0, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5("uav_exit"), var_0, "tag_origin");
   var_0 notify("leaving");
   var_0._id_5745 = 1;
 
   if(0 && isDefined(var_0._id_620D))
     var_0._id_620D _meth_8352(3000, 0);
 
-  var_0 _meth_82B1(var_3, 3);
-  var_0 _meth_82BB(-20, 1.0);
+  var_0 moveto(var_3, 3);
+  var_0 rotateroll(-20, 1.0);
   var_0 maps\mp\gametypes\_hostmigration::_id_A74C("death", 2.0);
   var_4 = _id_46FB(var_0._id_01C8, var_0.team);
 
@@ -105,32 +105,32 @@ _id_46FC(var_0) {
 
   switch (maps\mp\_utility::_id_4571()) {
     case "mp_aachen_v2":
-      var_1 = _func_0A4(2250, 2500);
+      var_1 = _randomintrange(2250, 2500);
       break;
     case "mp_battleship_2":
-      var_1 = _func_0A4(1500, 2000);
+      var_1 = _randomintrange(1500, 2000);
       break;
     case "mp_carentan_s2":
-      var_1 = _func_0A4(1750, 2250);
+      var_1 = _randomintrange(1750, 2250);
       break;
     case "mp_canon_farm":
-      var_1 = _func_0A4(1750, 2000);
+      var_1 = _randomintrange(1750, 2000);
       break;
     case "mp_flak_tower":
-      var_1 = _func_0A4(2500, 3000);
+      var_1 = _randomintrange(2500, 3000);
       break;
     case "mp_france_cannon":
-      var_1 = _func_0A4(1750, 2000);
+      var_1 = _randomintrange(1750, 2000);
       break;
     case "mp_gibraltar_01":
     case "mp_gibraltar_02":
-      var_1 = _func_0A4(2250, 2500);
+      var_1 = _randomintrange(2250, 2500);
       break;
     case "mp_london":
-      var_1 = _func_0A4(1750, 2000);
+      var_1 = _randomintrange(1750, 2000);
       break;
     case "mp_sandbox_01":
-      var_1 = _func_0A4(1400, 1850);
+      var_1 = _randomintrange(1400, 1850);
       break;
     case "mp_hub_scorestreak_training":
     case "mp_scorstreak_training":
@@ -138,10 +138,10 @@ _id_46FC(var_0) {
     case "mp_airship":
     case "mp_d_day":
     case "mp_forest_01":
-      var_1 = _func_0A4(3000, 3250);
+      var_1 = _randomintrange(3000, 3250);
       break;
     default:
-      var_1 = _func_0A4(2000, 2250);
+      var_1 = _randomintrange(2000, 2250);
       break;
   }
 
@@ -252,7 +252,7 @@ _id_9FDB(var_0, var_1, var_2, var_3) {
     self._id_620D delete();
 
   _id_7D02();
-  self _meth_805C();
+  self hide();
   thread _id_2D56();
   _id_74E7();
 
@@ -382,27 +382,27 @@ _id_463C(var_0, var_1, var_2, var_3) {
   if(getdvarint("scr_game_radarMode") == 1)
     var_10++;
 
-  return int(clamp(var_10, _func_174(), _func_11B()));
+  return int(clamp(var_10, _getuavstrengthmin(), _getuavstrengthmax()));
 }
 
 _id_A188(var_0) {
   var_1 = _id_463C(var_0);
-  _func_172(var_0, var_1);
+  _setteamradarstrength(var_0, var_1);
   var_2 = level._id_08D3[maps\mp\_utility::getotherteam(var_0)];
   var_3 = 0;
-  var_4 = var_1 > _func_11C();
-  var_5 = var_1 >= _func_11D();
-  var_6 = var_1 >= _func_11E();
+  var_4 = var_1 > _getuavstrengthlevelneutral();
+  var_5 = var_1 >= _getuavstrengthlevelshowenemyfastsweep();
+  var_6 = var_1 >= _getuavstrengthlevelshowenemydirectional();
 
   if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1))
     var_0 = maps\mp\_utility::getotherteam(var_0);
 
   if(var_3)
-    _func_11F(var_0);
+    _blockteamradar(var_0);
   else
-    _func_120(var_0);
+    _unblockteamradar(var_0);
 
-  _func_170(var_0, var_4);
+  _setteamradar(var_0, var_4);
 
   if(var_5)
     level._id_014C[var_0] = "fast_radar";
@@ -433,9 +433,9 @@ _id_A187() {
     }
 
     var_7 = 0;
-    var_8 = var_2 > _func_11C();
-    var_9 = var_2 >= _func_11D();
-    var_10 = var_2 >= _func_11E();
+    var_8 = var_2 > _getuavstrengthlevelneutral();
+    var_9 = var_2 >= _getuavstrengthlevelshowenemyfastsweep();
+    var_10 = var_2 >= _getuavstrengthlevelshowenemydirectional();
     var_1._id_014E = var_2;
     var_1._id_00DD = var_7;
     var_1._id_00B7 = var_8;
@@ -463,7 +463,7 @@ onplayerconnect() {
     }
 
     if(getdvarint("2043", 0))
-      var_0 _meth_82FF("ui_hide_minimap", 1);
+      var_0 setclientomnvar("ui_hide_minimap", 1);
 
     var_0 thread onplayerspawned();
   }
@@ -493,7 +493,7 @@ onplayerspawned() {
 updatesweepinguavstatus() {
   level endon("game_ended");
 
-  while(!isDefined(level._id_5139) || level._id_5139 > 5)
+  while(!isDefined(level.ingraceperiod) || level.ingraceperiod > 5)
     waitframe();
 
   level thread sweepinguavhandlehostmigration();
@@ -514,7 +514,7 @@ sweepinguavhandlehostmigration() {
     var_0 = maps\mp\gametypes\_hostmigration::_id_A782();
 
     if(level.gametype == "gun" || level.gametype == "blades" || level.gametype == "aon" || level.gametype == "oitc") {
-      _func_035("scr_game_compassRadarUpdateTime", 9);
+      _setdynamicdvar("scr_game_compassRadarUpdateTime", 9);
       setDvar("4648", 9);
     }
 
@@ -564,7 +564,7 @@ _id_9E3C(var_0) {
 
     if(isDefined(var_4)) {
       var_4._id_57FB = 1;
-      var_4 _meth_82C3(0);
+      var_4 setcandamage(0);
       level thread _id_5C24(self, var_1, var_4);
       return 1;
     }
@@ -580,16 +580,16 @@ _id_09A8(var_0, var_1) {
     self._id_620D setModel("tag_origin");
     self._id_620D _meth_8351(var_0, var_1, 15, 15);
     self._id_620D linktosynchronizedparent(self, "", (0, 0, 0), (0, 0, 0));
-    self._id_620D _meth_805C();
+    self._id_620D hide();
   }
 }
 
 _id_5C30(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_model", level._id_9FDF gettagorigin("tag_origin"));
-  var_4 _meth_8384(var_0);
+  var_4 setclientowner(var_0);
   var_4 _meth_8012(1);
-  var_4 _meth_805C();
-  var_4 _meth_808C();
+  var_4 hide();
+  var_4 dontinterpolate();
   var_5 = _id_46FF(var_2, var_1);
   var_6 = _id_46FB(var_2, var_1);
 
@@ -601,13 +601,13 @@ _id_5C30(var_0, var_1, var_2, var_3) {
   var_7 = _id_46F8(var_2, var_1);
 
   if(isDefined(var_7) && var_7 != "")
-    var_4 _meth_8276(var_7);
+    var_4 scriptmodelplayanim(var_7);
 
   var_4 thread _id_74E6();
   var_4 thread maps\mp\gametypes\_damage::_id_8676(_id_0527::_id_4612(var_2), undefined, ::_id_9FDB, _id_0527::_id_6B9C, 1);
 
   if(level.gametype == "onevone")
-    var_4 _meth_82C3(0);
+    var_4 setcandamage(0);
 
   if(isDefined(var_3))
     var_4._id_6DA6 = 1;
@@ -680,15 +680,15 @@ _id_A186() {
 
   for(;;) {
     level common_scripts\utility::_id_A732("joined_team", "uav_update");
-    self _meth_805C();
+    self hide();
 
     foreach(var_1 in level.players) {
       if(level.teambased) {
         if(var_1.team != self.team || 1) {
-          self _meth_8005(var_1);
+          self showtoplayer(var_1);
 
           if(0 && isDefined(self._id_620D))
-            self._id_620D _meth_8005(var_1);
+            self._id_620D showtoplayer(var_1);
         }
 
         continue;
@@ -697,10 +697,10 @@ _id_A186() {
       if(isDefined(self._id_0117) && var_1 == self._id_0117) {
         continue;
       }
-      self _meth_8005(var_1);
+      self showtoplayer(var_1);
 
       if(0 && isDefined(self._id_620D))
-        self._id_620D _meth_8005(var_1);
+        self._id_620D showtoplayer(var_1);
     }
   }
 }
@@ -716,14 +716,14 @@ _id_2834() {
   level._id_9FDF = spawn("script_model", var_1);
   level._id_9FDF setModel("c130_zoomrig");
   level._id_9FDF.angles = (0, 115, 0);
-  level._id_9FDF _meth_805C();
+  level._id_9FDF hide();
   level._id_9FDF.targetname = "uavrig_script_model";
   var_2 = 20053.5 / _id_46FD();
   level._id_9FDF thread _id_7EF0(var_2);
   level._id_28BA = spawn("script_model", var_1);
   level._id_28BA setModel("c130_zoomrig");
   level._id_28BA.angles = (0, 115, 0);
-  level._id_28BA _meth_805C();
+  level._id_28BA hide();
   var_2 = 40107.0 / _id_46FD("counter_uav");
   level._id_28BA thread _id_7EF0(var_2);
 }
@@ -733,7 +733,7 @@ _id_7EF0(var_0) {
   var_2 = -1 * var_0 * var_1;
 
   for(;;) {
-    self _meth_82BA(var_2, var_1);
+    self rotateyaw(var_2, var_1);
     wait(var_1);
   }
 }
@@ -741,7 +741,7 @@ _id_7EF0(var_0) {
 _id_74E6() {
   self endon("death");
   level endon("game_ended");
-  _func_147(level._effect["uav_trail"], self, "tag_origin");
+  _playfxontag(level._effect["uav_trail"], self, "tag_origin");
 }
 
 _id_39C7(var_0, var_1) {
@@ -936,7 +936,7 @@ _id_0A05(var_0, var_1) {
 
 _id_27DD() {
   if(!isDefined(self._id_9846)) {
-    self._id_9846 = _func_19B(self);
+    self._id_9846 = _newclienthudelem(self);
     self._id_9846.x = -350;
     self._id_9846.y = -70;
     self._id_9846.alignx = "center";
@@ -945,7 +945,7 @@ _id_27DD() {
     self._id_9846._id_01CA = "middle";
     self._id_9846.fontscale = 1.0;
     self._id_9846.alpha = 1.0;
-    self._id_6C0C = _func_19B(self);
+    self._id_6C0C = _newclienthudelem(self);
     self._id_6C0C.x = -320;
     self._id_6C0C.y = -70;
     self._id_6C0C.alignx = "center";
@@ -963,7 +963,7 @@ _id_A0F6() {
   self endon("disconnect");
 
   for(;;) {
-    if(level.gametype == "onevone" || self _meth_844A("ui_hide_minimap")) {
+    if(level.gametype == "onevone" || self getclientomnvar("ui_hide_minimap")) {
       self._id_9846.alpha = 0.0;
       self._id_6C0C.alpha = 0.0;
     } else {
@@ -982,9 +982,9 @@ _id_A0F6() {
 _id_A09F(var_0) {
   if(getdvarint("2043", 0)) {
     if(var_0)
-      self _meth_82FF("ui_hide_minimap", 0);
+      self setclientomnvar("ui_hide_minimap", 0);
     else
-      self _meth_82FF("ui_hide_minimap", 1);
+      self setclientomnvar("ui_hide_minimap", 1);
   }
 }
 
@@ -1003,7 +1003,7 @@ _id_83BC(var_0) {
   maps\mp\_utility::_id_05D4(var_0, "map_artillery_selector", var_2, var_1);
   thread _id_A6D8();
   self waittill("confirm_location", var_3, var_4);
-  self _meth_82DD(0, 0.3);
+  self setblurforplayer(0, 0.3);
   self notify("location_selection_complete");
   thread _id_A22E(var_3);
   return 1;
@@ -1043,7 +1043,7 @@ _id_47A6(var_0, var_1, var_2) {
   var_3.team = var_1.team;
   var_3._id_283E = var_1;
   var_3._id_502A = var_0;
-  var_3 _meth_8011(self);
+  var_3 makeportableradar(self);
 
   if(isDefined(self._id_7B4E)) {
     self._id_7B4E = common_scripts\utility::_id_0FA0(self._id_7B4E);
@@ -1087,7 +1087,7 @@ _id_A6D8() {
   self endon("location_selection_complete");
   self endon("disconnect");
   self waittill("stop_location_selection");
-  self _meth_82DD(0, 0.3);
+  self setblurforplayer(0, 0.3);
 
   if(maps\mp\gametypes\_hostmigration::_id_A782() > 0)
     self switchtoweapon(common_scripts\utility::_id_4550());
@@ -1134,7 +1134,7 @@ _id_4475() {
 }
 
 _id_5C24(var_0, var_1, var_2, var_3) {
-  while(isDefined(var_2) && !var_2 _meth_806F())
+  while(isDefined(var_2) && !var_2 islinked())
     waitframe();
 
   if(!isDefined(var_2)) {
@@ -1168,7 +1168,7 @@ _id_5C24(var_0, var_1, var_2, var_3) {
   if(var_1 == "allies")
     var_9 = "ks_counter_intelligence_usa_attack";
 
-  var_6 _meth_8278(var_9, "finished_chase_anim");
+  var_6 scriptmodelplayanimdeltamotion(var_9, "finished_chase_anim");
 
   if(isDefined(var_3))
     var_6._id_6DA6 = 1;
@@ -1228,12 +1228,12 @@ _id_2695(var_0, var_1) {
     var_7 = anglesToForward(self.angles);
     var_8 = vectorNormalize(var_0.origin - self.origin);
     var_9 = vectordot(var_7, var_8);
-    var_10 = self.origin + _func_112(var_2, self.angles);
+    var_10 = self.origin + _rotatevector(var_2, self.angles);
     var_11 = var_10 + var_7 * 8000;
-    _func_1B5("counter_recon_gun_mp", var_10, var_11);
-    var_10 = self.origin + _func_112(var_3, self.angles);
+    _magicbullet("counter_recon_gun_mp", var_10, var_11);
+    var_10 = self.origin + _rotatevector(var_3, self.angles);
     var_11 = var_10 + var_7 * 8000;
-    _func_1B5("counter_recon_gun_mp", var_10, var_11);
+    _magicbullet("counter_recon_gun_mp", var_10, var_11);
     _id_0380::_id_2889("ks_fighter_strike_npc", undefined, self.origin);
 
     if(var_9 > 0.995) {
@@ -1244,8 +1244,8 @@ _id_2695(var_0, var_1) {
     wait 0.1;
   }
 
-  var_0 _meth_82C3(1);
-  var_0 _meth_8059(var_0.maxhealth * 10, var_0.origin, self._id_0117, self, "MOD_RIFLE_BULLET", "counter_recon_gun_mp");
+  var_0 setcandamage(1);
+  var_0 dodamage(var_0.maxhealth * 10, var_0.origin, self._id_0117, self, "MOD_RIFLE_BULLET", "counter_recon_gun_mp");
 
   if(var_0._id_01C8 == "counter_uav") {
     var_13 = var_0.origin;
@@ -1261,9 +1261,9 @@ _id_9FDC(var_0) {
   var_0 notify("leaving");
   var_0 notify("death");
   var_0 _id_7D02();
-  var_0 _meth_8057();
+  var_0 unlink();
   var_1 = _id_46F9(var_0._id_01C8, var_0.team);
-  var_0 _meth_8278(var_1, "finished_chase_anim");
+  var_0 scriptmodelplayanimdeltamotion(var_1, "finished_chase_anim");
 
   if(0 && isDefined(var_0._id_620D))
     var_0._id_620D _meth_8352(3000, 0);

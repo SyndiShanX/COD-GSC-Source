@@ -34,7 +34,7 @@ _id_56DB(var_0) {
   var_1 = undefined;
   var_2 = 0;
 
-  if(isDefined(var_0) == 1 && _func_279(var_0) == 0 && isDefined(var_0.classname) == 1 && isDefined(var_0._id_003B) == 1)
+  if(isDefined(var_0) == 1 && _isremovedentity(var_0) == 0 && isDefined(var_0.classname) == 1 && isDefined(var_0._id_003B) == 1)
     var_1 = var_0 getentitynumber();
 
   if(isDefined(var_1) == 1 && var_1 >= 0)
@@ -52,7 +52,7 @@ _id_4625() {
 
   if(common_scripts\utility::issp() == 1)
     var_0 = [level.player];
-  else if(_func_0C0(level.players) == 1)
+  else if(_isarray(level.players) == 1)
     var_0 = level.players;
 
   return var_0;
@@ -66,7 +66,7 @@ _id_46BD(var_0) {
   if(isDefined(var_0) == 1)
     var_2 = var_0;
 
-  var_3 = var_1 _meth_8445(var_2);
+  var_3 = var_1 gettagindex(var_2);
 
   if(isDefined(var_3) == 0 || var_3 == -1)
     var_2 = "";
@@ -75,7 +75,7 @@ _id_46BD(var_0) {
 }
 
 _id_A77A() {
-  while(_func_279(self) == 0)
+  while(_isremovedentity(self) == 0)
     common_scripts\utility::_id_A70A("death", "disconnect");
 }
 
@@ -84,7 +84,7 @@ _id_7A5C(var_0, var_1, var_2) {
     if(var_0 == var_1)
       return var_0;
     else {
-      var_3 = _func_0A5(var_0, var_1);
+      var_3 = _randomfloatrange(var_0, var_1);
       return var_3;
     }
   } else if(isDefined(var_0) == 1 && isDefined(var_1) == 0)
@@ -95,7 +95,7 @@ _id_7A5C(var_0, var_1, var_2) {
   return undefined;
 }
 
-_id_8086(var_0, var_1, var_2, var_3, var_4) {
+startignoringspotlight(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_2 - var_1;
   var_6 = clamp(var_0, var_1, var_2);
   var_7 = (var_6 - var_1) / var_5;
@@ -137,7 +137,7 @@ _id_A2BC(var_0, var_1) {
 
 _id_A2BD(var_0, var_1) {
   var_2 = _id_A2BB(var_0, var_1);
-  var_3 = _func_26B(var_2, 1.0, 0.0);
+  var_3 = _vectorclamp(var_2, 1.0, 0.0);
   return var_3;
 }
 
@@ -154,14 +154,14 @@ _id_6C21(var_0, var_1, var_2) {
   var_3 = var_0[0];
   var_4 = var_0[1];
   var_5 = var_0[2];
-  var_3 = var_3 + var_1 * _func_0A7(var_2);
-  var_4 = var_4 + var_1 * _func_0A6(var_2);
+  var_3 = var_3 + var_1 * _cos(var_2);
+  var_4 = var_4 + var_1 * _sin(var_2);
   var_6 = (var_3, var_4, var_5);
   return var_6;
 }
 
 randomarrayelement(var_0) {
-  var_1 = _func_0A4(1, var_0.size);
+  var_1 = _randomintrange(1, var_0.size);
   var_1 = var_1 - 1;
   var_2 = var_0[var_1];
   return var_2;
@@ -171,11 +171,11 @@ _id_7A5B(var_0, var_1, var_2) {
   var_3 = var_0 - var_2;
   var_4 = var_0 + var_2;
   var_5 = var_4 - var_3;
-  var_6 = (_func_0A3(var_5[0]), _func_0A3(var_5[1]), _func_0A3(var_5[2]));
+  var_6 = (_randomfloat(var_5[0]), _randomfloat(var_5[1]), _randomfloat(var_5[2]));
 
   if(var_1 != (0, 0, 0)) {
-    var_3 = var_0 - _func_112(var_0 - var_3, var_1);
-    var_6 = _func_112(var_6, var_1);
+    var_3 = var_0 - _rotatevector(var_0 - var_3, var_1);
+    var_6 = _rotatevector(var_6, var_1);
   }
 
   var_7 = var_3 + var_6;
@@ -195,14 +195,14 @@ _id_2B5C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_10[3] = (var_7[0], var_7[1], var_8[2]);
 
   if(var_1 != (0, 0, 0)) {
-    var_9[0] = var_0 + _func_112(var_0 - var_9[0], var_1);
-    var_9[1] = var_0 + _func_112(var_0 - var_9[1], var_1);
-    var_9[2] = var_0 + _func_112(var_0 - var_9[2], var_1);
-    var_9[3] = var_0 + _func_112(var_0 - var_9[3], var_1);
-    var_10[0] = var_0 + _func_112(var_0 - var_10[0], var_1);
-    var_10[1] = var_0 + _func_112(var_0 - var_10[1], var_1);
-    var_10[2] = var_0 + _func_112(var_0 - var_10[2], var_1);
-    var_10[3] = var_0 + _func_112(var_0 - var_10[3], var_1);
+    var_9[0] = var_0 + _rotatevector(var_0 - var_9[0], var_1);
+    var_9[1] = var_0 + _rotatevector(var_0 - var_9[1], var_1);
+    var_9[2] = var_0 + _rotatevector(var_0 - var_9[2], var_1);
+    var_9[3] = var_0 + _rotatevector(var_0 - var_9[3], var_1);
+    var_10[0] = var_0 + _rotatevector(var_0 - var_10[0], var_1);
+    var_10[1] = var_0 + _rotatevector(var_0 - var_10[1], var_1);
+    var_10[2] = var_0 + _rotatevector(var_0 - var_10[2], var_1);
+    var_10[3] = var_0 + _rotatevector(var_0 - var_10[3], var_1);
   }
 
   for(var_11 = 0; var_11 < 4; var_11++) {
@@ -296,19 +296,19 @@ _id_7FF6(var_0, var_1, var_2, var_3) {
 }
 
 _id_063B(var_0, var_1, var_2) {
-  if(_func_344(var_0) == 0)
+  if(_soundexists(var_0) == 0)
     return undefined;
 
-  var_3 = _func_342(var_0, var_1);
+  var_3 = _getsndaliasvalue(var_0, var_1);
 
   if(isDefined(var_3) == 0 || "" + var_3 == "")
     return undefined;
 
-  var_4 = _func_0AD(var_3);
+  var_4 = _float(var_3);
 
-  for(var_5 = _func_342(var_0, "secondaryaliasname"); isDefined(var_5) == 1 && var_5 != ""; var_5 = _func_342(var_5, "secondaryaliasname")) {
-    var_3 = _func_342(var_0, var_1);
-    var_3 = _func_0AD(var_3);
+  for(var_5 = _getsndaliasvalue(var_0, "secondaryaliasname"); isDefined(var_5) == 1 && var_5 != ""; var_5 = _getsndaliasvalue(var_5, "secondaryaliasname")) {
+    var_3 = _getsndaliasvalue(var_0, var_1);
+    var_3 = _float(var_3);
     var_4 = call[[var_2]](var_4, var_3);
   }
 
@@ -316,7 +316,7 @@ _id_063B(var_0, var_1, var_2) {
 }
 
 _id_468E(var_0, var_1) {
-  var_2 = _id_063B(var_0, var_1, ::_func_0AF);
+  var_2 = _id_063B(var_0, var_1, ::_min);
   return var_2;
 }
 
@@ -446,21 +446,21 @@ _id_525E(var_0, var_1) {
         var_2[1] = 1.0;
         return var_2;
       case "sine":
-        var_6 = 0.5 + _func_0A7(var_5 * 180) * -0.5;
+        var_6 = 0.5 + _cos(var_5 * 180) * -0.5;
       case "easein":
-        var_6 = 1.0 - _func_0A7(var_5 * 90);
+        var_6 = 1.0 - _cos(var_5 * 90);
         break;
       case "easeout":
-        var_6 = _func_0A6(var_5 * 90);
+        var_6 = _sin(var_5 * 90);
         break;
       case "easeinout":
-        var_6 = 3 * _func_1E2(var_5, 2) - 2 * _func_1E2(var_5, 3);
+        var_6 = 3 * _pow(var_5, 2) - 2 * _pow(var_5, 3);
         break;
       case "circularin":
-        var_6 = 1.0 - _func_0D9(1.0 - var_5 * var_5);
+        var_6 = 1.0 - _sqrt(1.0 - var_5 * var_5);
         break;
       case "circularout":
-        var_6 = _func_0D9(1.0 - (1.0 - var_5) * (1.0 - var_5));
+        var_6 = _sqrt(1.0 - (1.0 - var_5) * (1.0 - var_5));
         break;
       case "exponential_40db":
         var_2[0] = 0.0;
@@ -588,7 +588,7 @@ _id_8A7A(var_0, var_1) {
 }
 
 _id_0708() {
-  if(isDefined(self) == 1 && _func_279(self) == 0 && isDefined(self._id_05C8) == 0) {
+  if(isDefined(self) == 1 && _isremovedentity(self) == 0 && isDefined(self._id_05C8) == 0) {
     self._id_05C8 = spawnStruct();
     self._id_05C8._id_A60D = 1.0;
     self._id_05C8._id_6FF7 = 1.0;
@@ -602,7 +602,7 @@ _id_070B(var_0, var_1, var_2) {
   else if(isDefined(var_0._id_8F4E) == 1 && var_0._id_8F4E == "sndentity")
     var_0 _meth_8641(var_1, var_2);
   else
-    var_0 _meth_861B(var_1, var_2);
+    var_0 scalevolume(var_1, var_2);
 }
 
 _id_070A(var_0, var_1, var_2) {
@@ -611,11 +611,11 @@ _id_070A(var_0, var_1, var_2) {
   else if(isDefined(var_0._id_8F4E) == 1 && var_0._id_8F4E == "sndentity")
     var_0 _meth_8642(var_1, var_2);
   else
-    var_0 _meth_861A(var_1, var_2);
+    var_0 scalepitch(var_1, var_2);
 }
 
 _id_070C(var_0, var_1) {
-  if(_func_279(self) == 1 || isDefined(self) == 0) {
+  if(_isremovedentity(self) == 1 || isDefined(self) == 0) {
     return;
   }
   _id_0708();
@@ -668,9 +668,9 @@ _id_0709(var_0, var_1, var_2, var_3, var_4) {
   self endon("deleted");
   self endon("death");
   var_5 = _id_8A79(var_0);
-  var_6 = _func_0AD(var_2) % 0.05;
-  var_2 = _func_0AD(var_2) + 0.05 - var_6;
-  var_7 = _func_0AD(var_2) / _func_0AD(var_5);
+  var_6 = _float(var_2) % 0.05;
+  var_2 = _float(var_2) + 0.05 - var_6;
+  var_7 = _float(var_2) / _float(var_5);
   var_8 = var_7 % 0.05;
   var_7 = var_7 + 0.05 - var_8;
   var_7 = max(var_7, 0.05);
@@ -724,9 +724,9 @@ _id_0709(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(self._id_05C8._id_A6F2) == 1)
       var_7 = max(self._id_05C8._id_A6F2, 0.05);
 
-    var_17 = _func_0AF(var_7, var_16);
+    var_17 = _min(var_7, var_16);
     var_11 = var_11 + int(var_17 * 1000.0 + 0.5);
-    var_18 = _func_0AD(var_11) / _func_0AD(var_10);
+    var_18 = _float(var_11) / _float(var_10);
     var_19 = 1.0;
 
     if(var_14 > 0.0) {
@@ -741,7 +741,7 @@ _id_0709(var_0, var_1, var_2, var_3, var_4) {
     [[var_3]](self, var_19, var_17);
     wait(var_17);
 
-    if(isDefined(self) == 1 && _func_279(self) == 0)
+    if(isDefined(self) == 1 && _isremovedentity(self) == 0)
       _id_070C(var_19, var_3);
   }
 
@@ -769,7 +769,7 @@ _id_8AA9(var_0, var_1, var_2, var_3, var_4) {
   if(_id_7FE5(isDefined(self) == 0, "sfx_scale: called on undefined entity")) {
     return;
   }
-  if(_id_7FE5(_func_279(self) == 1, "sfx_scale: called on removed entity")) {
+  if(_id_7FE5(_isremovedentity(self) == 1, "sfx_scale: called on removed entity")) {
     return;
   }
   _id_0708();
@@ -875,7 +875,7 @@ _id_06FB() {
   self endon("disconnect");
   self endon("param_stop");
 
-  while(_func_279(self) == 0 && isDefined(self._id_05C6) == 1 && self._id_05C6.size > 0) {
+  while(_isremovedentity(self) == 0 && isDefined(self._id_05C6) == 1 && self._id_05C6.size > 0) {
     var_0 = gettime();
 
     foreach(var_2 in self._id_05C6) {
@@ -905,7 +905,7 @@ _id_06FB() {
     waitframe();
   }
 
-  if(_func_279(self) == 1)
+  if(_isremovedentity(self) == 1)
     _id_06F8();
 }
 
@@ -983,14 +983,14 @@ _id_8A93(var_0) {
 }
 
 _id_8A92(var_0) {
-  if(isDefined(self._id_05C6) == 1 && _func_0C0(self._id_05C6) == 1 && isDefined(self._id_05C6[var_0]) == 1)
+  if(isDefined(self._id_05C6) == 1 && _isarray(self._id_05C6) == 1 && isDefined(self._id_05C6[var_0]) == 1)
     return 1;
 
   return 0;
 }
 
 _id_8A94(var_0) {
-  if(isDefined(self._id_05C6) == 1 && _func_0C0(self._id_05C6) == 1) {
+  if(isDefined(self._id_05C6) == 1 && _isarray(self._id_05C6) == 1) {
     foreach(var_2 in self._id_05C6) {
       if(var_2._id_53BF == var_0)
         return 1;
@@ -1029,17 +1029,17 @@ _id_8A97(var_0) {
 
   var_2 = self.angles;
 
-  if(isPlayer(self) == 1 || _func_0C1(self) == 1)
+  if(isPlayer(self) == 1 || _isai(self) == 1)
     var_2 = self getplayerangles();
   else if(isDefined(self.model) == 1) {
     var_3 = 0;
 
-    if(isDefined(var_0) == 1 && _func_0C0(var_0) == 1 && _func_031(var_0[0]) == 1) {
+    if(isDefined(var_0) == 1 && _isarray(var_0) == 1 && _isstring(var_0[0]) == 1) {
       var_4 = var_0[0];
-      var_5 = self _meth_8445(var_4);
+      var_5 = self gettagindex(var_4);
 
       if(var_5 >= 0) {
-        var_2 = self _meth_8181(var_4);
+        var_2 = self gettagangles(var_4);
 
         if(isDefined(var_2) == 1)
           var_3 = 1;
@@ -1047,7 +1047,7 @@ _id_8A97(var_0) {
     }
 
     if(var_3 == 0)
-      var_2 = self _meth_8181("tag_origin");
+      var_2 = self gettagangles("tag_origin");
   }
 
   if(var_2[0] > 180.0)
@@ -1078,18 +1078,18 @@ _id_8A96(var_0) {
 
 _id_070D(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", self.origin);
-  var_3 _meth_8055(self, var_0._id_95A6, var_0._id_6A15, (0, 0, 0));
-  var_3 _meth_808C();
+  var_3 linkto(self, var_0._id_95A6, var_0._id_6A15, (0, 0, 0));
+  var_3 dontinterpolate();
   return var_3;
 }
 
 _id_070F(var_0, var_1, var_2) {
-  var_0._id_378F _meth_808C();
+  var_0._id_378F dontinterpolate();
   var_0._id_378F._id_8F47 = _id_02F0::_id_800B(var_0._id_0BB4, var_0._id_378F);
-  _id_02F0::_id_800D(var_0._id_378F._id_8F47, 0.0, 0.0);
-  _id_02F0::_id_800C(var_0._id_378F._id_8F47, var_2, 0.0);
-  common_scripts\utility::_id_2CB4(0.05, _id_02F0::_id_800D, var_0._id_378F._id_8F47, var_1, 0.05);
-  common_scripts\utility::_id_2CB4(0.05, _id_02F0::_id_800C, var_0._id_378F._id_8F47, var_2, 0.05);
+  _id_02F0::disableplayeruse(var_0._id_378F._id_8F47, 0.0, 0.0);
+  _id_02F0::enableplayeruse(var_0._id_378F._id_8F47, var_2, 0.0);
+  common_scripts\utility::_id_2CB4(0.05, _id_02F0::disableplayeruse, var_0._id_378F._id_8F47, var_1, 0.05);
+  common_scripts\utility::_id_2CB4(0.05, _id_02F0::enableplayeruse, var_0._id_378F._id_8F47, var_2, 0.05);
 }
 
 _id_0710(var_0, var_1, var_2) {
@@ -1104,11 +1104,11 @@ _id_0710(var_0, var_1, var_2) {
       if(isDefined(var_2) == 0)
         var_2 = "easeinout";
 
-      _id_02F0::_id_800D(var_4, 0.0, var_1, var_2);
+      _id_02F0::disableplayeruse(var_4, 0.0, var_1, var_2);
       wait(var_1);
     }
 
-    _id_02F0::_id_800E(var_0._id_378F._id_8F47);
+    _id_02F0::enableammogeneration(var_0._id_378F._id_8F47);
     waitframe();
   }
 
@@ -1135,8 +1135,8 @@ _id_06FE(var_0, var_1) {
   var_13 = var_5._id_6FFC["scale"][0];
   var_14 = var_5._id_6FFC["scale"][1];
   var_15 = var_5._id_6FFC["curve"][0];
-  var_16 = _id_8086(var_4, var_6, var_7, var_8, var_9);
-  var_17 = _id_8086(var_4, var_11, var_12, var_13, var_14);
+  var_16 = startignoringspotlight(var_4, var_6, var_7, var_8, var_9);
+  var_17 = startignoringspotlight(var_4, var_11, var_12, var_13, var_14);
 
   if(isDefined(var_5._id_378F) == 1 && isDefined(var_5._id_378F._id_8F47) == 1 && var_16 <= var_3) {
     thread _id_0710(var_5);
@@ -1152,11 +1152,11 @@ _id_06FE(var_0, var_1) {
       thread _id_070F(var_5, var_16, var_17);
       var_5._id_378F._id_90EE = var_4;
     } else {
-      var_18 = _func_0AE(var_4 - var_5._id_378F._id_90EE);
+      var_18 = _abs(var_4 - var_5._id_378F._id_90EE);
 
       if(var_18 > var_2) {
-        _id_02F0::_id_800D(var_5._id_378F._id_8F47, var_16, 0.05, var_10);
-        _id_02F0::_id_800C(var_5._id_378F._id_8F47, var_17, 0.05, var_15);
+        _id_02F0::disableplayeruse(var_5._id_378F._id_8F47, var_16, 0.05, var_10);
+        _id_02F0::enableplayeruse(var_5._id_378F._id_8F47, var_17, 0.05, var_15);
         var_5._id_378F._id_90EE = var_4;
       }
     }
@@ -1179,7 +1179,7 @@ _id_0702(var_0) {
 }
 
 _id_070E(var_0, var_1, var_2, var_3, var_4) {
-  if(_func_344(var_0) == 0) {
+  if(_soundexists(var_0) == 0) {
     return;
   }
   if(isDefined(self._id_05CA) == 0)
@@ -1278,7 +1278,7 @@ _id_0719(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         self._id_05D1._id_8F4D = 1;
       }
 
-      var_12 = _id_8086(var_8, 0, var_0, var_4, var_3);
+      var_12 = startignoringspotlight(var_8, 0, var_0, var_4, var_3);
       self._id_05D1._id_8F40 _id_8AAC(var_12, 0.05, var_5);
     }
 
@@ -1308,7 +1308,7 @@ _id_8AC3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     self._id_05D1._id_36ED = var_8 + var_0;
     self._id_05D1._id_8F4D = 0;
     self._id_05D1._id_8F40 = spawn("script_origin", self.origin);
-    self._id_05D1._id_8F40 _meth_8055(self);
+    self._id_05D1._id_8F40 linkto(self);
   }
 
   thread _id_0719(var_0, var_1, var_2, var_4, var_5, var_6, var_7);
@@ -1545,7 +1545,7 @@ _id_0706(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   while(var_8 < var_7) {
     if(var_8 < var_9) {
-      var_16 = int(_func_0AD(var_8) / _func_0AD(var_10));
+      var_16 = int(_float(var_8) / _float(var_10));
       var_16 = var_16 % 2;
 
       if(var_16) {
@@ -1555,7 +1555,7 @@ _id_0706(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     }
 
-    var_17 = _func_0AD(var_8) / _func_0AD(var_7);
+    var_17 = _float(var_8) / _float(var_7);
     var_17 = clamp(var_17, 0.0, 1.0);
     var_18 = _id_8A7A(1.0 - var_17, "easeout");
     var_19 = _id_A2BD(var_3, var_18);
@@ -1646,7 +1646,7 @@ _id_0714(var_0, var_1, var_2) {
   var_3 = var_2 / 20;
   var_4 = var_0;
   var_4 = var_4 + var_1 * var_3;
-  var_4 = _func_0D4(var_4);
+  var_4 = _floor(var_4);
   var_4 = int(var_4);
   return var_4;
 }
@@ -1665,7 +1665,7 @@ _id_0717(var_0) {
     var_2 = level._id_05D0._id_75F6;
     var_3 = level._id_05D0._id_75F7;
     var_4 = 1.0;
-    var_5 = level._id_05D0._id_807E;
+    var_5 = level._id_05D0.fadeovertime;
     var_6 = _id_0714(var_0, level._id_05D0._id_3E71, level._id_05D0._id_3E6B);
     var_7 = _id_0715(var_6, level._id_05D0._id_3E6B);
     _id_8AA0(var_2, var_3, var_7, (1, 1, 1), var_4, var_5, 1);
@@ -1749,7 +1749,7 @@ _id_8ABE(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   level._id_05D0._id_75F6 = var_2;
   level._id_05D0._id_75F7 = var_3;
-  level._id_05D0._id_807E = var_1;
+  level._id_05D0.fadeovertime = var_1;
   level._id_05D0._id_3E6B = var_0;
   level._id_05D0._id_5848 = var_6;
   level._id_05D0._id_A231 = var_4;
@@ -1768,8 +1768,8 @@ _id_06F2(var_0, var_1, var_2, var_3) {
     var_8 = var_2[var_4];
     var_9 = var_2[var_4 - 1];
 
-    if(_func_296(var_8) == 1 && _func_296(var_9) == 1 && var_8 != var_9) {
-      if(_func_296(var_3) == 1) {
+    if(_isvector(var_8) == 1 && _isvector(var_9) == 1 && var_8 != var_9) {
+      if(_isvector(var_3) == 1) {
         var_8 = var_8 + var_3;
         var_9 = var_9 + var_3;
       }
@@ -1795,7 +1795,7 @@ _id_06F3(var_0, var_1, var_2, var_3) {
     } else
       var_6 = var_5;
 
-    if(isDefined(self) == 1 && isDefined(self.origin) == 1 && _func_279(self) == 0)
+    if(isDefined(self) == 1 && isDefined(self.origin) == 1 && _isremovedentity(self) == 0)
       var_6[var_6.size] = self.origin;
 
     var_5 = var_6;
@@ -1825,14 +1825,14 @@ _id_0607(var_0, var_1) {
   var_4 = "zone_names;reverb_names;filter_names;occlusion_names;timescale_names;dynamic_ambience_names;components;loop_defs;whizby_preset_names;mix_names;healthfx_params;adsr_name;adsr_zone_npc;adsr_zone_player";
 
   foreach(var_6 in var_2) {
-    var_7 = _func_274(var_6, var_3, var_4);
+    var_7 = _packedtablesectionlookup(var_6, var_3, var_4);
 
-    if(_func_0C0(var_7) == 1) {
+    if(_isarray(var_7) == 1) {
       var_8 = var_7[0];
       var_9 = var_7[1];
 
       for(var_10 = var_8 + 1; var_10 < var_9; var_10++) {
-        var_11 = _func_1AE(var_6, var_10, 0);
+        var_11 = _tablelookupbyrow(var_6, var_10, 0);
 
         if(var_11 == var_1)
           return 1;
@@ -1846,29 +1846,29 @@ _id_0607(var_0, var_1) {
 _id_0636(var_0, var_1, var_2) {
   var_3 = var_1[0];
   var_4 = "zone_names;reverb_names;filter_names;occlusion_names;timescale_names;dynamic_ambience_names;components;loop_defs;whizby_preset_names;mix_names;healthfx_params;adsr_name;adsr_zone_npc;adsr_zone_player";
-  var_5 = _func_274(var_0, var_3, var_4);
+  var_5 = _packedtablesectionlookup(var_0, var_3, var_4);
 
-  if(_func_0C0(var_5) == 1) {
+  if(_isarray(var_5) == 1) {
     var_6 = var_5[0];
     var_7 = var_5[1];
     var_8 = [];
 
     for(var_9 = 0; var_9 < var_1.size; var_9++) {
-      var_10 = _func_275(var_0, 0, var_3, var_9, var_6, var_7);
+      var_10 = _packedtablelookupwithrange(var_0, 0, var_3, var_9, var_6, var_7);
       var_8[var_8.size] = var_10;
     }
 
     var_11 = [];
 
     for(var_9 = var_6 + 1; var_9 < var_7; var_9++) {
-      var_12 = _func_1AE(var_0, var_9, 0);
+      var_12 = _tablelookupbyrow(var_0, var_9, 0);
 
       if(isDefined(var_2) == 1 && var_12 == var_2 || isDefined(var_2) == 0) {
         var_13 = [];
 
         for(var_14 = 0; var_14 < var_8.size; var_14++) {
           var_15 = var_8[var_14];
-          var_16 = _func_1AE(var_0, var_9, var_14);
+          var_16 = _tablelookupbyrow(var_0, var_9, var_14);
           var_13[var_15] = var_16;
         }
 
@@ -1940,16 +1940,16 @@ _id_0711(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4) == 0)
     var_4 = 1.0;
 
-  var_5 _meth_8626(var_0, 0.0);
-  var_5 _meth_8629(var_0, 0.0, 0.0);
+  var_5 clientaddsoundsubmix(var_0, 0.0);
+  var_5 clientblendsoundsubmix(var_0, 0.0, 0.0);
   waitframe();
-  var_5 _meth_8629(var_0, var_4, var_1);
+  var_5 clientblendsoundsubmix(var_0, var_4, var_1);
   wait(var_1);
   wait(var_2);
-  var_5 _meth_8629(var_0, 0.0, var_3);
+  var_5 clientblendsoundsubmix(var_0, 0.0, var_3);
   wait(var_3);
   waittillframeend;
-  var_5 _meth_8627(var_0);
+  var_5 clientclearsoundsubmix(var_0);
 }
 
 _id_8AB8(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -2011,7 +2011,7 @@ _id_7FF8(var_0, var_1) {
       var_8 = 0;
     }
 
-    if(self _meth_8445(var_7) >= 0)
+    if(self gettagindex(var_7) >= 0)
       var_2 = self gettagorigin(var_7);
   }
 
@@ -2025,7 +2025,7 @@ _id_7FF8(var_0, var_1) {
     if(isPlayer(self) == 1)
       var_10 = var_10 + ("_" + var_4);
 
-    if(_func_344(var_10) == 0)
+    if(_soundexists(var_10) == 0)
       var_5 = "default";
   }
 
@@ -2034,7 +2034,7 @@ _id_7FF8(var_0, var_1) {
   if(isPlayer(self) == 1)
     var_6 = var_6 + ("_" + var_4);
 
-  if(_func_344(var_6) == 0) {
+  if(_soundexists(var_6) == 0) {
     return;
   }
   _id_02F0::_id_800A(var_6, var_2);
@@ -2042,7 +2042,7 @@ _id_7FF8(var_0, var_1) {
 }
 
 _id_8D6A(var_0, var_1) {
-  if(var_1 != "" && _func_031(var_1) == 1) {
+  if(var_1 != "" && _isstring(var_1) == 1) {
     _id_7FE5(1, "level notify( \"" + var_1 + "\" )");
     level notify(var_1);
   }
@@ -2070,18 +2070,18 @@ _id_8DE6(var_0, var_1) {
   }
 
   if(isDefined(var_3[1]) == 1)
-    var_5 = _func_0AD(var_3[1]);
+    var_5 = _float(var_3[1]);
 
   if(isDefined(var_3[2]) == 1)
-    var_4 = _func_0AD(var_3[2]);
+    var_4 = _float(var_3[2]);
 
   if(var_1 == "" || int(var_1) < 0) {
-    level.player _meth_8632(var_2, var_6);
-    _func_18C("xxxx REVERB DEACTIVATED xxxx");
+    level.player deactivatereverb(var_2, var_6);
+    _iprintlnbold("xxxx REVERB DEACTIVATED xxxx");
     var_1 = "";
   } else {
-    level.player _meth_8631(var_2, var_7, var_4, var_5, var_6);
-    _func_18C("Reverb: " + var_7 + " Wet: " + var_5 + " Dry: " + var_4);
+    level.player setreverb(var_2, var_7, var_4, var_5, var_6);
+    _iprintlnbold("Reverb: " + var_7 + " Wet: " + var_5 + " Dry: " + var_4);
   }
 
   return var_1;
@@ -2112,7 +2112,7 @@ _id_071E() {
 
       if(isDefined(var_8) == 1) {
         var_14 = "" + var_8 + "";
-        var_15 = 1.0 + _func_0AE(var_3[2]);
+        var_15 = 1.0 + _abs(var_3[2]);
         var_13 = -3.0 * var_15 * var_12 * 12;
         _id_8AA6(var_7 + (0, 0, var_13), var_14, _id_A2BB((1, 1, 1), 0.666), 0.666, var_12, 1, var_4);
       }
@@ -2154,7 +2154,7 @@ _id_8DCA(var_0, var_1) {
     if(isDefined(var_3.v["origin"]) == 1 && common_scripts\utility::_id_9467(var_3.v["type"], "soundfx") == 1) {
       var_4 = var_3.v["origin"];
       var_5 = (270, 0, 0);
-      var_4 = (_func_0D4(var_4[0]), _func_0D4(var_4[1]), _func_0D4(var_4[2]));
+      var_4 = (_floor(var_4[0]), _floor(var_4[1]), _floor(var_4[2]));
       var_3.v["angles"] = var_5;
       var_3.v["origin"] = var_4;
       level._createfx.selected_fx_ents[level._createfx.selected_fx_ents.size] = var_3;

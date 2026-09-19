@@ -109,14 +109,14 @@ _id_A1EA(var_0, var_1) {
 
 _id_3B7C() {
   if(level._id_53C6)
-    var_0 = _func_0B9(self.origin, 1000, 0, 2000, "Path");
+    var_0 = _getnodesinradiussorted(self.origin, 1000, 0, 2000, "Path");
   else
-    var_0 = _func_0B9(self.origin, 700, 0, 128, "Path");
+    var_0 = _getnodesinradiussorted(self.origin, 700, 0, 128, "Path");
 
   self._id_6E68 = [];
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && _func_200(var_2, 1)) {
+    if(isDefined(var_2) && _nodeexposedtosky(var_2, 1)) {
       if(!_id_5536(var_2.origin))
         self._id_6E68[self._id_6E68.size] = var_2;
     }
@@ -136,7 +136,7 @@ _id_3B7C() {
     var_9 = 1;
 
     for(var_10 = 0; var_9 == 1 && var_10 < var_8.size; var_10++) {
-      if(_func_0E1(self._id_6E68[var_7].origin, var_8[var_10].origin) < 200)
+      if(_distance2d(self._id_6E68[var_7].origin, var_8[var_10].origin) < 200)
         var_9 = 0;
     }
 
@@ -152,14 +152,14 @@ _id_3B7C() {
 _id_5536(var_0) {
   if(isDefined(level._id_6E5E) && level._id_6E5E.size > 0) {
     foreach(var_2 in level._id_6E5E) {
-      if(_func_21B(var_0, var_2))
+      if(_ispointinvolume(var_0, var_2))
         return 1;
     }
   }
 
   if(isDefined(level._id_14F4)) {
     foreach(var_5 in level._id_14F4) {
-      if(_func_211(var_0, var_5) <= 90000.0)
+      if(_distance2dsquared(var_0, var_5) <= 90000.0)
         return 1;
     }
   }
@@ -217,13 +217,13 @@ changeweaponusagestatewrapper(var_0) {
       if(!self _meth_85EB() && self getcurrentweapon() == "emote_weapon_mp") {
         self takeweapon("emote_weapon_mp");
         self switchtoweapon(self.primaryweapon);
-        self _meth_8327();
+        self enableweaponswitch();
       }
     } else {
       self giveweapon("emote_weapon_mp");
-      self _meth_831B("emote_weapon_mp");
+      self switchtoweaponimmediate("emote_weapon_mp");
       self setspawnweapon("emote_weapon_mp");
-      self _meth_8326();
+      self disableweaponswitch();
     }
   }
 }
@@ -239,9 +239,9 @@ _id_A8D2(var_0) {
     while(self.origin[2] > var_0)
       waitframe();
 
-    self _meth_8276("mp_smg_stand_jump_land_heavy", "finished_paratrooper_deploy");
+    self scriptmodelplayanim("mp_smg_stand_jump_land_heavy", "finished_paratrooper_deploy");
   } else {
-    while(!self _meth_8346()) {
+    while(!self isonground()) {
       if(isDefined(self.playerparachuteweaponsactiveatcertaindropheight) && self.origin[2] <= var_0 + self.playerparachuteweaponsactiveatcertaindropheight)
         changeweaponusagestatewrapper(1);
 
@@ -249,7 +249,7 @@ _id_A8D2(var_0) {
     }
 
     if(isDefined(self.paratrooperinsertaccelerateddescent))
-      self _meth_82FF("ui_show_paratrooper_insert_descent_prompt", 0);
+      self setclientomnvar("ui_show_paratrooper_insert_descent_prompt", 0);
   }
 
   if(isDefined(self) && !common_scripts\utility::_id_562E(self.no_fx))
@@ -267,12 +267,12 @@ _id_A8D2(var_0) {
     if(!isDefined(self.playerparachuteweaponsactiveatcertaindropheight))
       changeweaponusagestatewrapper(1);
 
-    self _meth_8113(1);
-    self _meth_8114(1);
-  } else if(_func_1EF(self)) {
-    self _meth_8353("disable_attack", 0);
-    self _meth_8353("disable_movement", 0);
-    self _meth_8353("never_allow_aerial_targeting", 1);
+    self allowcrouch(1);
+    self allowprone(1);
+  } else if(_isagent(self)) {
+    self botsetflag("disable_attack", 0);
+    self botsetflag("disable_movement", 0);
+    self botsetflag("never_allow_aerial_targeting", 1);
   }
 }
 
@@ -288,9 +288,9 @@ _id_1132(var_0, var_1) {
   if(isscriptmodel(self)) {
     self.angles = self.angles - level.paratrooper_bindattach_to_animattach_delta_ang[var_0];
     dontinterpolatesafe();
-  } else if(_func_1EF(self)) {} else {
+  } else if(_isagent(self)) {} else {
     self.angles_original = self.angles;
-    self _meth_833E(self.angles - level.paratrooper_bindattach_to_animattach_delta_ang[var_0]);
+    self setplayerangles(self.angles - level.paratrooper_bindattach_to_animattach_delta_ang[var_0]);
     dontinterpolatesafe();
   }
 
@@ -306,8 +306,8 @@ _id_1132(var_0, var_1) {
   if(isscriptmodel(self)) {
     _id_988F(self._id_6E4F, "tag_attach", self.origin, self.angles);
     self._id_6E4F dontinterpolatesafe();
-  } else if(_func_1EF(self)) {
-    self.angles = self._id_6E4F _meth_8181("tag_attach");
+  } else if(_isagent(self)) {
+    self.angles = self._id_6E4F gettagangles("tag_attach");
     self.origin = self._id_6E4F gettagorigin("tag_attach");
     dontinterpolatesafe();
   } else {
@@ -317,61 +317,61 @@ _id_1132(var_0, var_1) {
 
   if(isscriptmodel(self)) {
     vm_model_linkto_if_needed();
-    self _meth_8055(self._id_6E4F, "tag_attach");
-  } else if(_func_1EF(self))
+    self linkto(self._id_6E4F, "tag_attach");
+  } else if(_isagent(self))
     self _meth_8388(self._id_6E4F, "tag_attach", 1);
   else {
     vm_model_linkto_if_needed();
-    self _meth_8077(self._id_6E4F, "tag_attach", 0, 180, 180, 180, 180, 1);
+    self playerlinkto(self._id_6E4F, "tag_attach", 0, 180, 180, 180, 180, 1);
   }
 
   if(!common_scripts\utility::_id_562E(var_1)) {
     if((1 || 0) && isDefined(self._id_6E4F.parachute_model_vm)) {
-      self._id_6E4F.parachute_model_vm _meth_8276(var_2, "finished_paratrooper_deploy");
-      self._id_6E4F.parachute_model_vm _meth_84CA(1);
+      self._id_6E4F.parachute_model_vm scriptmodelplayanim(var_2, "finished_paratrooper_deploy");
+      self._id_6E4F.parachute_model_vm setshadowrendering(1);
     }
 
     if(1 && isDefined(self._id_6E4F.parachute_model_pitchingvm)) {
-      self._id_6E4F.parachute_model_pitchingvm _meth_8276(var_5, "finished_paratrooper_deploy");
-      self._id_6E4F.parachute_model_pitchingvm _meth_84CA(1);
+      self._id_6E4F.parachute_model_pitchingvm scriptmodelplayanim(var_5, "finished_paratrooper_deploy");
+      self._id_6E4F.parachute_model_pitchingvm setshadowrendering(1);
     }
 
-    self._id_6E4F _meth_8276(var_2, "finished_paratrooper_deploy");
-    self._id_6E4F _meth_84CA(1);
+    self._id_6E4F scriptmodelplayanim(var_2, "finished_paratrooper_deploy");
+    self._id_6E4F setshadowrendering(1);
 
     if(isscriptmodel(self)) {
-      self _meth_8276("raids_paratrooper_drop_npc", "finished_paratrooper_deploy");
-      self _meth_84CA(1);
+      self scriptmodelplayanim("raids_paratrooper_drop_npc", "finished_paratrooper_deploy");
+      self setshadowrendering(1);
     }
   }
 
   if(isPlayer(self) && isDefined(self.angles_original)) {
-    self _meth_833E(self.angles_original);
+    self setplayerangles(self.angles_original);
     dontinterpolatesafe();
     self.angles_original = undefined;
   }
 
   if(!common_scripts\utility::_id_562E(var_1)) {
-    self._id_6E4F _meth_84CA(0);
+    self._id_6E4F setshadowrendering(0);
 
     if((1 || 0) && isDefined(self._id_6E4F.parachute_model_vm))
-      self._id_6E4F.parachute_model_vm _meth_84CA(0);
+      self._id_6E4F.parachute_model_vm setshadowrendering(0);
 
     if(1 && isDefined(self._id_6E4F.parachute_model_pitchingvm))
-      self._id_6E4F.parachute_model_pitchingvm _meth_84CA(0);
+      self._id_6E4F.parachute_model_pitchingvm setshadowrendering(0);
 
     if(isscriptmodel(self))
-      self _meth_84CA(0);
+      self setshadowrendering(0);
     else
       self _meth_800B();
   }
 
-  if(_func_1EF(self) || isPlayer(self) && (!isDefined(self.playerparachutedamageenabled) && 0 || isDefined(self.playerparachutedamageenabled) && self.playerparachutedamageenabled)) {
+  if(_isagent(self) || isPlayer(self) && (!isDefined(self.playerparachutedamageenabled) && 0 || isDefined(self.playerparachutedamageenabled) && self.playerparachutedamageenabled)) {
     var_6 = spawn("script_model", self._id_6E4F.origin);
     var_6.angles = self._id_6E4F.angles;
     var_6 setModel("ger_carepackage_parachute");
-    var_6 _meth_82C3(1);
-    var_6 _meth_805C();
+    var_6 setcandamage(1);
+    var_6 hide();
     var_6 linktosynchronizedparent(self._id_6E4F);
     self._id_6E4F.parachute_collision = var_6;
   }
@@ -400,18 +400,18 @@ play_idle_loop_when_ready(var_0, var_1, var_2) {
   self._id_6E4F._id_2D6A = 1;
 
   if(isscriptmodel(self))
-    self _meth_8276("raids_paratrooper_loop_npc", "finished_paratrooper_deploy", var_1, var_2);
+    self scriptmodelplayanim("raids_paratrooper_loop_npc", "finished_paratrooper_deploy", var_1, var_2);
   else
     var_1 = var_1 + level.parachute_loop_anim_start_time_sec;
 
   if(isDefined(self._id_6E4F)) {
-    self._id_6E4F _meth_8276(var_3, "finished_paratrooper_loop", var_1, var_2);
+    self._id_6E4F scriptmodelplayanim(var_3, "finished_paratrooper_loop", var_1, var_2);
 
     if((1 || 0) && isDefined(self._id_6E4F.parachute_model_vm))
-      self._id_6E4F.parachute_model_vm _meth_8276(var_3, "finished_paratrooper_loop", var_1, var_2);
+      self._id_6E4F.parachute_model_vm scriptmodelplayanim(var_3, "finished_paratrooper_loop", var_1, var_2);
 
     if(1 && isDefined(self._id_6E4F.parachute_model_pitchingvm))
-      self._id_6E4F.parachute_model_pitchingvm _meth_8276(var_4, "finished_paratrooper_loop", var_1, var_2);
+      self._id_6E4F.parachute_model_pitchingvm scriptmodelplayanim(var_4, "finished_paratrooper_loop", var_1, var_2);
   }
 }
 
@@ -419,19 +419,19 @@ _id_6E5F(var_0, var_1, var_2) {
   level endon("game_ended");
   var_3 = self._id_6E4F;
   var_4 = self.team;
-  var_5 = common_scripts\utility::_id_A715("death", "paratrooper_released", "disconnect");
+  var_5 = common_scripts\utility::waittill_any_return("death", "paratrooper_released", "disconnect");
 
   if(isDefined(level.hostmigrationtimer))
     maps\mp\gametypes\_hostmigration::_id_A782();
 
   if(isDefined(self))
-    self _meth_8057();
+    self unlink();
 
   var_3 notify("detach");
 
   if(isDefined(self) && isalive(self)) {
     self _meth_8009(0);
-    self _meth_82F7((0, 0, -150));
+    self setvelocity((0, 0, -150));
   }
 
   if(isDefined(var_0))
@@ -449,9 +449,9 @@ _id_6E5F(var_0, var_1, var_2) {
 
 parachute_cleanup_anim_then_delete(var_0, var_1, var_2, var_3, var_4) {
   if(common_scripts\utility::_id_562E(var_4))
-    var_0 _meth_8276(var_2, "finished_parachute_detach");
+    var_0 scriptmodelplayanim(var_2, "finished_parachute_detach");
   else
-    var_0 _meth_8278(var_2, "finished_parachute_detach");
+    var_0 scriptmodelplayanimdeltamotion(var_2, "finished_parachute_detach");
 
   var_0 _meth_8450(1, 1, 0);
 
@@ -490,7 +490,7 @@ _id_A8D1(var_0) {
         if(var_0._id_22DF <= 0) {
           if(isDefined(self._id_6E6B) && self._id_6E6B) {
             changeweaponusagestatewrapper(1);
-            self _meth_8059(1, var_2.origin, var_2);
+            self dodamage(1, var_2.origin, var_2);
             self._id_5723 = 1;
 
             if(maps\mp\_utility::_hasperk("specialty_falldamage"))
@@ -513,24 +513,24 @@ watchparatrooperinsertaccelerateddescent() {
   self endon("disconnect");
   self endon("death");
   self.paratrooperinsertaccelerateddescent = 0;
-  self _meth_82FF("ui_show_paratrooper_insert_descent_prompt", 1);
+  self setclientomnvar("ui_show_paratrooper_insert_descent_prompt", 1);
 
-  while(!self _meth_8346() && !self._id_5723) {
-    if(self _meth_83C1()) {
+  while(!self isonground() && !self._id_5723) {
+    if(self sprintbuttonpressed()) {
       if(!self.paratrooperinsertaccelerateddescent) {
         self.paratrooperinsertaccelerateddescent = 1;
-        self _meth_82FF("ui_show_paratrooper_insert_descent_prompt", 0);
+        self setclientomnvar("ui_show_paratrooper_insert_descent_prompt", 0);
       }
     } else if(self.paratrooperinsertaccelerateddescent) {
       self.paratrooperinsertaccelerateddescent = 0;
-      self _meth_82FF("ui_show_paratrooper_insert_descent_prompt", 1);
+      self setclientomnvar("ui_show_paratrooper_insert_descent_prompt", 1);
     }
 
     waitframe();
   }
 
   self.paratrooperinsertaccelerateddescent = 0;
-  self _meth_82FF("ui_show_paratrooper_insert_descent_prompt", 0);
+  self setclientomnvar("ui_show_paratrooper_insert_descent_prompt", 0);
 }
 
 watchforhostmigrationparachutemove(var_0) {
@@ -546,17 +546,17 @@ watchforhostmigrationparachutemove(var_0) {
 
   level waittill("host_migration_begin");
   var_1 = gettime() * 0.001;
-  self _meth_82B1(self.origin, 0.05);
+  self moveto(self.origin, 0.05);
 
   if(1 && isDefined(self.parachute_model_vm))
-    self.parachute_model_vm _meth_82B1(self.origin, 0.05);
+    self.parachute_model_vm moveto(self.origin, 0.05);
 
   level waittill("host_migration_end");
   var_2 = var_0 - var_1;
-  self _meth_82B1(self._id_4805, var_2);
+  self moveto(self._id_4805, var_2);
 
   if(1 && isDefined(self.parachute_model_vm))
-    self.parachute_model_vm _meth_82B1(self._id_4805, var_2);
+    self.parachute_model_vm moveto(self._id_4805, var_2);
 }
 
 watchforparachutemovegoalchange(var_0) {
@@ -574,10 +574,10 @@ watchforparachutemovegoalchange(var_0) {
   self._id_4805 = (var_1 - self.origin) * 2 + self.origin;
   var_2 = gettime() * 0.001;
   var_3 = var_0 - var_2;
-  self _meth_82B1(self._id_4805, var_3);
+  self moveto(self._id_4805, var_3);
 
   if(1 && isDefined(self.parachute_model_vm))
-    self.parachute_model_vm _meth_82B1(self._id_4805, var_3);
+    self.parachute_model_vm moveto(self._id_4805, var_3);
 }
 
 _id_64B8(var_0) {
@@ -606,7 +606,7 @@ _id_64B8(var_0) {
       var_4 = (0, 0, var_0);
     else if(!isPlayer(var_5) && (!isDefined(self._id_2D6A) || !self._id_2D6A))
       var_4 = (0, 0, -25);
-    else if(isDefined(var_5) && var_5 _meth_8345() > 0.5 && isDefined(var_5.playerparachutedropadsunitsperframeoverride))
+    else if(isDefined(var_5) && var_5 playerads() > 0.5 && isDefined(var_5.playerparachutedropadsunitsperframeoverride))
       var_4 = (0, 0, var_5.playerparachutedropadsunitsperframeoverride);
     else if(isDefined(var_5) && isDefined(var_5.paratrooperinsertaccelerateddescent) && var_5.paratrooperinsertaccelerateddescent && isDefined(var_5.playerparachutedropsprintingunitsperframeoverride))
       var_4 = (0, 0, var_5.playerparachutedropsprintingunitsperframeoverride);
@@ -616,14 +616,14 @@ _id_64B8(var_0) {
       var_4 = (0, 0, -15);
 
     if(isalive(var_5) && isDefined(var_5) && isPlayer(var_5) && (!isDefined(var_5.playerparachutemovementenabled) && 1 || isDefined(var_5.playerparachutemovementenabled) && var_5.playerparachutemovementenabled)) {
-      var_9 = var_5 _meth_82F9();
+      var_9 = var_5 getnormalizedmovement();
 
-      if(_func_0AE(var_9[0]) > 0.5 || _func_0AE(var_9[1]) > 0.5) {
+      if(_abs(var_9[0]) > 0.5 || _abs(var_9[1]) > 0.5) {
         var_10 = (var_9[0], -1 * var_9[1], 0);
         var_10 = var_10 * 6.6675;
-        var_1 = _func_112(var_10, var_5.angles);
+        var_1 = _rotatevector(var_10, var_5.angles);
 
-        if(var_5 _meth_83DD())
+        if(var_5 issprinting())
           var_1 = var_1 * 2.0;
 
         var_4 = var_4 + var_1;
@@ -648,10 +648,10 @@ _id_64B8(var_0) {
       }
 
       self._id_4805 = self.origin + var_2;
-      self _meth_82B1(self._id_4805, var_3);
+      self moveto(self._id_4805, var_3);
 
       if(1 && isDefined(self.parachute_model_vm))
-        self.parachute_model_vm _meth_82B1(self._id_4805, var_3);
+        self.parachute_model_vm moveto(self._id_4805, var_3);
 
       thread watchforhostmigrationparachutemove(gettime() * 0.001 + var_3);
       thread watchforparachutemovegoalchange(gettime() * 0.001 + var_3);
@@ -692,11 +692,11 @@ _id_2605(var_0) {
   self endon("death");
   self endon("paratrooper_released");
   self endon("disconnect");
-  var_1 = _func_081(self.origin, (self.origin[0], self.origin[1], self.origin[2] - 2700));
+  var_1 = _playerphysicstrace(self.origin, (self.origin[0], self.origin[1], self.origin[2] - 2700));
 
   for(;;) {
     if(isPlayer(self) && (!isDefined(self.playerparachutemovementenabled) && 1 || isDefined(self.playerparachutemovementenabled) && self.playerparachutemovementenabled)) {
-      var_2 = _func_082(self.origin, 8, 100, 0.0, 1);
+      var_2 = _getgroundposition(self.origin, 8, 100, 0.0, 1);
 
       if(self.origin[2] < var_2[2] + 100) {
         break;
@@ -718,7 +718,7 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     waitframe();
 
   if(self._id_4B60)
-    wait(_func_0A4(6, 10));
+    wait(_randomintrange(6, 10));
 
   maps\mp\agents\_agent_utility::_id_5334(1);
 
@@ -748,38 +748,38 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_11 = var_7 + (0, 0, 25);
   var_12 = var_7;
-  var_13 = _func_081(var_11, var_12);
+  var_13 = _playerphysicstrace(var_11, var_12);
 
   if(distancesquared(var_13, var_11) > 1)
     var_7 = var_13;
 
-  self _meth_838F(var_7, var_8);
+  self spawnagent(var_7, var_8);
 
   if(isDefined(var_5))
     self._id_0A43 = var_5;
 
   if(isDefined(self._id_0A43)) {
     if(self._id_0A43 == "follow_code_and_dev_dvar")
-      self[[level._id_19D5["bot_set_difficulty"]]](self _meth_836D(), 1);
+      self[[level.bot_funcs["bot_set_difficulty"]]](self botgetdifficulty(), 1);
     else
-      self[[level._id_19D5["bot_set_difficulty"]]](var_5);
+      self[[level.bot_funcs["bot_set_difficulty"]]](var_5);
   } else
-    self[[level._id_19D5["bot_set_difficulty"]]](self _meth_836D());
+    self[[level.bot_funcs["bot_set_difficulty"]]](self botgetdifficulty());
 
-  self[[level._id_19D5["bot_set_personality"]]](level._id_6E6A[level._id_6E72]);
+  self[[level.bot_funcs["bot_set_personality"]]](level._id_6E6A[level._id_6E72]);
   maps\mp\agents\_agent_common::_id_83FD(getdvarint("scr_player_maxhealth", 100));
 
   if(isDefined(var_4) && var_4)
     self._id_7DAD = 1;
 
   if(isDefined(var_2))
-    maps\mp\agents\_agent_utility::_id_83FE(var_2.team, var_2);
+    maps\mp\agents\_agent_utility::hudoutlineenable(var_2.team, var_2);
 
   if(isDefined(self._id_0117))
     self thread[[level._id_0A55]](self._id_0117);
 
   thread maps\mp\_flashgrenades::_id_6394();
-  self _meth_83D6(0);
+  self enableanimstate(0);
 
   if(isDefined(var_6)) {
     self._id_0BA6 = var_6;
@@ -827,8 +827,8 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       self._id_90D8 = maps\mp\_utility::getintproperty("perk_fireShieldScale_HC", 9) / 100;
   }
 
-  self thread[[level._id_19D5["bot_think_watch_enemy"]]](1);
-  self thread[[level._id_19D5["bot_think_tactical_goals"]]]();
+  self thread[[level.bot_funcs["bot_think_watch_enemy"]]](1);
+  self thread[[level.bot_funcs["bot_think_tactical_goals"]]]();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 
   if(!self._id_4B60)
@@ -848,10 +848,10 @@ _id_8FE1(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       self attach(level.paratrooper_head);
     }
   } else
-    self _meth_8528(13, self.team);
+    self setagentcostumeindex(13, self.team);
 
-  self _meth_8353("disable_attack", 1);
-  self _meth_8353("disable_movement", 1);
+  self botsetflag("disable_attack", 1);
+  self botsetflag("disable_movement", 1);
   level notify("spawned_agent_player", self);
   level notify("spawned_agent", self);
   self notify("spawned_player");
@@ -872,7 +872,7 @@ _id_6E69() {
 }
 
 _id_6AA6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(isDefined(self._id_6E4B) && !isPlayer(var_1) && !_func_1EF(var_1) && var_3 == "MOD_FALLING")
+  if(isDefined(self._id_6E4B) && !isPlayer(var_1) && !_isagent(var_1) && var_3 == "MOD_FALLING")
     var_1 = self._id_6E4B;
 
   self[[level._id_0A5D]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 1);
@@ -925,8 +925,8 @@ _id_5643(var_0) {
     if(var_0 == self._id_0117) {
       return;
     }
-    if(_func_0C3(self._id_0117) && _func_0C3(var_0)) {
-      if(!_func_26C(self._id_0117, var_0))
+    if(_issentient(self._id_0117) && _issentient(var_0)) {
+      if(!_isalliedsentient(self._id_0117, var_0))
         var_1 = var_0;
     } else if(level.teambased) {
       if(self._id_0117.team != var_0.team)
@@ -963,7 +963,7 @@ isscriptmodel(var_0) {
 script_model_fake_gravity_fall_if_parachute_gone(var_0) {
   self endon("death");
 
-  while(isDefined(self _meth_83F2()))
+  while(isDefined(self getlinkedparent()))
     waitframe();
 
   var_1 = var_0 - 3.0 - self.origin[2];
@@ -973,9 +973,9 @@ script_model_fake_gravity_fall_if_parachute_gone(var_0) {
   else
     var_2 = -15;
 
-  var_3 = _func_0AE(var_1 / var_2) * 0.05;
+  var_3 = _abs(var_1 / var_2) * 0.05;
   var_4 = (self.origin[0], self.origin[1], var_0);
-  self _meth_82B1(var_4, var_3);
+  self moveto(var_4, var_3);
 }
 
 paratroopers_beacon() {
@@ -983,7 +983,7 @@ paratroopers_beacon() {
   waittillframeend;
   var_1 = spawn("script_model", var_0 - (0, 0, 32));
   var_1 setModel("npc_soccer_ball_zombie_01");
-  var_1 _meth_8511();
+  var_1 ghost();
   var_1._id_0117 = self;
   var_1.isplayersteerable = 1;
   var_1 thread _id_0513::_id_95A0();
@@ -999,7 +999,7 @@ paratroopers_beacon() {
 }
 
 applyplayercliptest(var_0, var_1, var_2) {
-  var_3 = _func_0E4(var_2);
+  var_3 = _length2d(var_2);
 
   if(var_3 == 0)
     return var_0;
@@ -1012,9 +1012,9 @@ applyplayercliptest(var_0, var_1, var_2) {
   var_8 = undefined;
 
   if(isDefined(self.parachute_collision))
-    var_8 = _func_223(var_4, var_7, self.parachute_collision);
+    var_8 = _playerphysicstraceinfo(var_4, var_7, self.parachute_collision);
   else
-    var_8 = _func_223(var_4, var_7);
+    var_8 = _playerphysicstraceinfo(var_4, var_7);
 
   if(var_8["fraction"] < 1.0)
     var_0 = (0, 0, var_0[2]);
@@ -1032,7 +1032,7 @@ verify_player_paratrooper_position(var_0) {
     level.paratrooper_pos = [];
 
   for(var_1 = 0; var_1 < level.paratrooper_pos.size; var_1++) {
-    if(_func_0E1(level.paratrooper_pos[var_1], var_0) < 80) {
+    if(_distance2d(level.paratrooper_pos[var_1], var_0) < 80) {
       var_0 = level.paratrooper_pos[var_1] + (0, 0, 130);
       level.paratrooper_pos[var_1] = var_0;
       level.paratrooper_pos_expire_time = gettime() + 2000.0;
@@ -1077,8 +1077,8 @@ player_paratrooper(var_0, var_1, var_2) {
   if(isPlayer(self) && (!isDefined(self.playerparachutemovementenabled) && 0 || isDefined(self.playerparachutemovementenabled) && self.playerparachutemovementenabled == 0))
     self _meth_8546(0);
 
-  self _meth_8113(0);
-  self _meth_8114(0);
+  self allowcrouch(0);
+  self allowprone(0);
   _id_0378::_id_8D74("aud_player_parachute_open");
   _id_0378::_id_8D74("aud_player_parachute_submix");
   do_paratrooper_drop(var_7, var_3[2], var_1, var_2);
@@ -1133,13 +1133,13 @@ player_paratroopers_spawn_after_raidvignette(var_0) {
 }
 
 showtoallexceptplayer(var_0) {
-  self _meth_805B();
+  self show();
   self _meth_8006(var_0);
 }
 
 hidefromallexceptplayer(var_0) {
-  self _meth_805C();
-  self _meth_8005(var_0);
+  self hide();
+  self showtoplayer(var_0);
 }
 
 attach_parachute_model_vm() {
@@ -1194,17 +1194,17 @@ get_offset_for_single(var_0) {
   var_4 = level._id_6E64[var_0];
   var_5 = level.paratrooper_chute_loop_anims_vm[var_0];
   var_6 = var_2 gettagorigin("TAG_ATTACH");
-  var_7 = var_2 _meth_8181("TAG_ATTACH");
-  var_2 _meth_8276(var_4, "finished_paratrooper_deploy", 0.0001);
-  var_2 _meth_84CA(1);
-  var_3 _meth_8276(var_5, "finished_paratrooper_deploy", 0.0001);
-  var_3 _meth_84CA(1);
+  var_7 = var_2 gettagangles("TAG_ATTACH");
+  var_2 scriptmodelplayanim(var_4, "finished_paratrooper_deploy", 0.0001);
+  var_2 setshadowrendering(1);
+  var_3 scriptmodelplayanim(var_5, "finished_paratrooper_deploy", 0.0001);
+  var_3 setshadowrendering(1);
   waitframe();
   var_8 = var_2 gettagorigin("TAG_ATTACH");
-  var_9 = var_2 _meth_8181("TAG_ATTACH");
+  var_9 = var_2 gettagangles("TAG_ATTACH");
   level.paratrooper_bindattach_to_animattach_delta_ang[var_0] = var_9 - var_7;
   var_10 = var_3 gettagorigin("TAG_ATTACH");
-  var_11 = var_3 _meth_8181("TAG_ATTACH");
+  var_11 = var_3 gettagangles("TAG_ATTACH");
   var_2 delete();
   var_3 delete();
 }
@@ -1213,25 +1213,25 @@ _id_988F(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_5 = var_0.origin;
   var_6 = var_0.angles;
-  var_7 = _func_233(var_6);
+  var_7 = _invertangles(var_6);
 
   if(isDefined(var_1))
-    var_4 = var_0 _meth_8181(var_1);
+    var_4 = var_0 gettagangles(var_1);
   else
     var_4 = var_0.angles;
 
-  var_8 = _func_233(var_4);
-  var_9 = _func_110(var_3, var_8);
-  var_10 = _func_110(var_0.angles, var_9);
+  var_8 = _invertangles(var_4);
+  var_9 = _combineangles(var_3, var_8);
+  var_10 = _combineangles(var_0.angles, var_9);
   var_11 = undefined;
 
   if(isDefined(var_1)) {
     var_12 = var_0 gettagorigin(var_1) - var_5;
-    var_11 = _func_112(var_12, var_7);
+    var_11 = _rotatevector(var_12, var_7);
   } else
     var_11 = (0, 0, 0);
 
-  var_13 = _func_112(var_11, var_10);
+  var_13 = _rotatevector(var_11, var_10);
   var_0 dontinterpolatesafe();
   var_0.origin = var_2 - var_13;
   var_0.angles = var_10;
@@ -1242,15 +1242,15 @@ rotate_ent_relative_to(var_0, var_1, var_2, var_3, var_4) {
   level.original_ent_angles = var_1;
   level.ref_orientation = var_3;
   level.rotation_from_ref = var_4;
-  level.inverted_ref_orientations = _func_233(level.ref_orientation);
-  level.ent_angles_in_refspace = _func_110(level.original_ent_angles, level.inverted_ref_orientations);
-  level.desired_ent_angles_in_refspace = _func_110(level.rotation_from_ref, level.ent_angles_in_refspace);
-  level.desired_ent_angles_in_worldspace = _func_110(level.ref_orientation, level.desired_ent_angles_in_refspace);
+  level.inverted_ref_orientations = _invertangles(level.ref_orientation);
+  level.ent_angles_in_refspace = _combineangles(level.original_ent_angles, level.inverted_ref_orientations);
+  level.desired_ent_angles_in_refspace = _combineangles(level.rotation_from_ref, level.ent_angles_in_refspace);
+  level.desired_ent_angles_in_worldspace = _combineangles(level.ref_orientation, level.desired_ent_angles_in_refspace);
   level.original_ent_origin = var_0;
   level.ent_to_ref_origin_diff_in_worldspace = level.original_ent_origin - var_2;
-  level.ent_to_ref_origin_diff_in_refspace = _func_112(level.ent_to_ref_origin_diff_in_worldspace, level.inverted_ref_orientations);
-  level.desired_ent_to_ref_origin_diff_in_refspace = _func_112(level.ent_to_ref_origin_diff_in_refspace, level.rotation_from_ref);
-  level.desired_ent_to_ref_origin_diff_in_worldspace = _func_112(level.desired_ent_to_ref_origin_diff_in_refspace, level.ref_orientation);
+  level.ent_to_ref_origin_diff_in_refspace = _rotatevector(level.ent_to_ref_origin_diff_in_worldspace, level.inverted_ref_orientations);
+  level.desired_ent_to_ref_origin_diff_in_refspace = _rotatevector(level.ent_to_ref_origin_diff_in_refspace, level.rotation_from_ref);
+  level.desired_ent_to_ref_origin_diff_in_worldspace = _rotatevector(level.desired_ent_to_ref_origin_diff_in_refspace, level.ref_orientation);
   return [var_2 + level.desired_ent_to_ref_origin_diff_in_worldspace, level.desired_ent_angles_in_worldspace];
 }
 
@@ -1267,13 +1267,13 @@ vm_model_linkto_if_needed() {
 }
 
 _id_0DDE(var_0) {
-  var_1 = (_func_0DD(var_0[0]), _func_0DD(var_0[1]), _func_0DD(var_0[2]));
+  var_1 = (_angleclamp180(var_0[0]), _angleclamp180(var_0[1]), _angleclamp180(var_0[2]));
   return var_1;
 }
 
 dontinterpolatesafe() {
   if(!isDefined(self.dontinterpolate_timestamp) || gettime() > self.dontinterpolate_timestamp) {
     self.dontinterpolate_timestamp = gettime();
-    self _meth_808C();
+    self dontinterpolate();
   }
 }

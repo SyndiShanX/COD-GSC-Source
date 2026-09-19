@@ -163,7 +163,7 @@ _id_15D3(var_0) {
 _id_15D8(var_0) {
   var_1 = self._id_188D[var_0];
   var_1._id_188A = 3;
-  self._id_82EF _meth_83FA(_id_1889(var_1), "opening");
+  self.issighted setscriptablepartstate(_id_1889(var_1), "opening");
 }
 
 _id_15D7(var_0, var_1) {
@@ -174,7 +174,7 @@ _id_15D7(var_0, var_1) {
     self._id_188E = common_scripts\utility::_id_0F93(self._id_188E, var_2);
 
   var_2._id_188A = 0;
-  self._id_82EF _meth_83FA(_id_1889(var_2), "open");
+  self.issighted setscriptablepartstate(_id_1889(var_2), "open");
 }
 
 _id_15D4(var_0) {
@@ -191,7 +191,7 @@ _id_15D6(var_0) {
   var_1 = self._id_188D[var_0];
   self._id_1890 = common_scripts\utility::_id_0F93(self._id_1890, var_1);
   var_1._id_188A = 1;
-  self._id_82EF _meth_83FA(_id_1889(var_1), "closing");
+  self.issighted setscriptablepartstate(_id_1889(var_1), "closing");
 }
 
 _id_1889(var_0) {
@@ -202,7 +202,7 @@ _id_15D5(var_0, var_1) {
   var_2 = self._id_188D[var_0];
   self._id_188E[self._id_188E.size] = var_2;
   var_2._id_188A = 2;
-  self._id_82EF _meth_83FA(_id_1889(var_2), "closed");
+  self.issighted setscriptablepartstate(_id_1889(var_2), "closed");
 }
 
 _id_4F8F(var_0) {
@@ -232,8 +232,8 @@ _id_4F8E(var_0) {
       self._id_15D2 = undefined;
 
       if(isalive(self)) {
-        self _meth_83A2(0);
-        self _meth_839D("gravity");
+        self scragentsetscripted(0);
+        self scragentsetphysicsmode("gravity");
       }
     } else if(self._id_15D2 == "attacking_through_boards")
       self._id_15D2 = undefined;
@@ -263,8 +263,8 @@ _id_51C5() {
   self._id_15D9 = "drop_gate";
   self._id_3FFE = undefined;
   self._id_17EB = undefined;
-  self._id_8310 = undefined;
-  self._id_830F = undefined;
+  self.getweaponlistall = undefined;
+  self.getviewkickscale = undefined;
   self._id_9553 = [];
   var_0 = common_scripts\utility::_id_41EE();
   var_1 = common_scripts\utility::_id_46B7(self.target, "targetname");
@@ -290,8 +290,8 @@ _id_51C5() {
         if(isDefined(var_5._id_0165)) {
           switch (var_5._id_0165) {
             case "scripted_node":
-              self._id_8310 = var_5.origin;
-              self._id_830F = var_5.angles;
+              self.getweaponlistall = var_5.origin;
+              self.getviewkickscale = var_5.angles;
               break;
             default:
               break;
@@ -316,15 +316,15 @@ _id_51C5() {
     var_10._id_15CC = self;
     var_10._id_15D9 = "drop_gate";
     var_10._id_17D8 = 0;
-    var_10._id_7E4A = isDefined(var_10._id_81E1) && var_10._id_81E1 == 1;
-    var_10._id_8310 = self._id_8310;
-    var_10._id_830F = self._id_830F;
+    var_10._id_7E4A = isDefined(var_10.setmovespeedscale) && var_10.setmovespeedscale == 1;
+    var_10.getweaponlistall = self.getweaponlistall;
+    var_10.getviewkickscale = self.getviewkickscale;
 
     if(var_10._id_7E4A)
-      var_10._id_830F = _func_110(var_10._id_830F, (0, 180, 0));
+      var_10.getviewkickscale = _combineangles(var_10.getviewkickscale, (0, 180, 0));
 
     var_11 = common_scripts\utility::_id_44BE(var_10.target, "targetname");
-    var_12 = _func_0B6(var_10.target, "targetname");
+    var_12 = _getnodearray(var_10.target, "targetname");
     var_10 _id_5289(var_11);
 
     foreach(var_14 in var_10._id_1176) {
@@ -365,7 +365,7 @@ _id_3466() {
         thread _id_3461(0);
         thread _id_3460(1);
         _id_3456();
-        _id_0378::_id_8D74("drop_gate", "drop", self._id_8310);
+        _id_0378::_id_8D74("drop_gate", "drop", self.getweaponlistall);
         _id_7127("s2_zom_gate_lift_drop_gate", 1);
         _id_84AE(0);
         break;
@@ -376,7 +376,7 @@ _id_3466() {
         thread _id_3467();
         self waittill("pull_state_change");
         self._id_5CCB = 1;
-        _id_0378::_id_8D74("drop_gate", "pos1", self._id_8310);
+        _id_0378::_id_8D74("drop_gate", "pos1", self.getweaponlistall);
         thread _id_3458();
         _id_7127("s2_zom_gate_lift_position_1_gate", 1);
         _id_84AE(1);
@@ -389,7 +389,7 @@ _id_3466() {
         thread _id_3467();
         self waittill("pull_state_change");
         self._id_5CCB = 1;
-        _id_0378::_id_8D74("drop_gate", "pos2", self._id_8310);
+        _id_0378::_id_8D74("drop_gate", "pos2", self.getweaponlistall);
         thread _id_3458();
         _id_7127("s2_zom_gate_lift_position_2_gate", 1);
         _id_84AE(2);
@@ -401,7 +401,7 @@ _id_3466() {
         thread _id_3467();
         self waittill("pull_state_change");
         self._id_5CCB = 1;
-        _id_0378::_id_8D74("drop_gate", "pos3", self._id_8310);
+        _id_0378::_id_8D74("drop_gate", "pos3", self.getweaponlistall);
         thread _id_3458();
         _id_7127("s2_zom_gate_lift_position_3_gate", 1, ::_id_3FFF);
         _id_84AE(3);
@@ -421,7 +421,7 @@ _id_3460(var_0) {
     self._id_9554 = 1;
   } else if(!var_0) {
     foreach(var_2 in self._id_9553)
-    var_2 _meth_8276("s2_gj_zom_drop_gate_lever_up_idle");
+    var_2 scriptmodelplayanim("s2_gj_zom_drop_gate_lever_up_idle");
 
     self._id_9554 = 0;
   }
@@ -439,9 +439,9 @@ _id_3461(var_0) {
 }
 
 _id_3465() {
-  self _meth_8276("s2_gj_zom_drop_gate_lever_move_down");
+  self scriptmodelplayanim("s2_gj_zom_drop_gate_lever_move_down");
   wait 1;
-  self _meth_8276("s2_gj_zom_drop_gate_lever_down_idle");
+  self scriptmodelplayanim("s2_gj_zom_drop_gate_lever_down_idle");
 }
 
 _id_3458() {
@@ -482,9 +482,9 @@ _id_7127(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     return;
   }
-  var_4 = _func_065(var_3);
-  var_5 = _func_066(var_3, "unblock");
-  self._id_3FFE _meth_8495(var_0, self._id_8310, self._id_830F, "drop_gate");
+  var_4 = _getanimlength(var_3);
+  var_5 = _animhasnotetrack(var_3, "unblock");
+  self._id_3FFE scriptmodelplayanimdeltamotionfrompos(var_0, self.getweaponlistall, self.getviewkickscale, "drop_gate");
 
   if(isDefined(var_2))
     thread _id_4A2C(var_2, var_4);
@@ -510,9 +510,9 @@ _id_A1E0(var_0) {
 }
 
 _id_3456() {
-  self._id_17EB _meth_82C1();
-  self._id_17EB _meth_805B();
-  self._id_17EB _meth_805F();
+  self._id_17EB solid();
+  self._id_17EB show();
+  self._id_17EB disconnectpaths();
   self._id_17E9 = 1;
 
   foreach(var_1 in self._id_2F0F) {
@@ -524,9 +524,9 @@ _id_3456() {
 }
 
 _id_3469() {
-  self._id_17EB _meth_82C2();
-  self._id_17EB _meth_805C();
-  self._id_17EB _meth_8060();
+  self._id_17EB notsolid();
+  self._id_17EB hide();
+  self._id_17EB connectpaths();
   self._id_17E9 = 0;
 
   foreach(var_1 in self._id_2F0F) {
@@ -559,8 +559,8 @@ _id_4F90(var_0) {
       _id_346D();
 
     self._id_15D2 = undefined;
-    self _meth_83A2(0);
-    self _meth_839D("gravity");
+    self scragentsetscripted(0);
+    self scragentsetphysicsmode("gravity");
   }
 }
 
@@ -602,7 +602,7 @@ _id_346B() {
     }
   }
 
-  _id_0378::_id_8D74("drop_gate_pull_level", self._id_8310, var_2);
+  _id_0378::_id_8D74("drop_gate_pull_level", self.getweaponlistall, var_2);
   self._id_5B26 = gettime();
 }
 
@@ -668,9 +668,9 @@ _id_345C(var_0, var_1) {
   var_2 = self._id_15CC;
   var_3 = var_2 _id_345B(var_0, "mount");
   var_4 = var_0 maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_3);
-  var_5 = var_0 _meth_83D8(var_4, 0);
-  var_1.origin = _func_06D(self._id_8310, self._id_830F, var_5);
-  var_1.angles = _func_06E(self._id_8310, self._id_830F, var_5);
+  var_5 = var_0 getanimentry(var_4, 0);
+  var_1.origin = _getstartorigin(self.getweaponlistall, self.getviewkickscale, var_5);
+  var_1.angles = _getstartangles(self.getweaponlistall, self.getviewkickscale, var_5);
 
   if(getdvarint("drop_gate_debug", 0) != 0)
     return;
@@ -696,8 +696,8 @@ _id_5288() {
   var_1 = common_scripts\utility::_id_41EE();
   var_2 = common_scripts\utility::_id_41F0();
   _id_5289(var_0);
-  var_3 = _func_21F(self.target, "targetname");
-  self._id_82EF = var_3[0];
+  var_3 = _getscriptablearray(self.target, "targetname");
+  self.issighted = var_3[0];
 
   for(var_4 = 0; var_4 < 6; var_4++) {
     var_5 = spawnStruct();
@@ -727,12 +727,12 @@ _id_5288() {
   } else if(isDefined(self._id_38EB)) {
     var_13 = 60;
     var_14 = 20;
-    var_15 = _func_0B8(self.origin, var_13, 0, 180);
+    var_15 = _getnodesinradius(self.origin, var_13, 0, 180);
 
     if(isDefined(var_15)) {
       foreach(var_11 in var_15) {
         if(_id_553A(var_11)) {
-          var_17 = _func_10F(var_11.angles, self._id_38EB.angles);
+          var_17 = _anglesdelta(var_11.angles, self._id_38EB.angles);
 
           if(var_17 < var_14)
             var_9[var_9.size] = var_11;
@@ -764,7 +764,7 @@ _id_5289(var_0) {
         case "attack_spot":
           var_3 = _func_2E1(var_2.origin);
 
-          if(_func_0E1(var_2.origin, var_3) > 1) {
+          if(_distance2d(var_2.origin, var_3) > 1) {
             break;
           }
 
@@ -772,8 +772,8 @@ _id_5289(var_0) {
           self._id_1176[self._id_1176.size] = var_2;
           var_2._id_1175 = 0;
 
-          if(isDefined(var_2._id_81E1)) {
-            switch (var_2._id_81E1) {
+          if(isDefined(var_2.setmovespeedscale)) {
+            switch (var_2.setmovespeedscale) {
               case 0:
                 var_2._id_0EA5 = "l";
                 break;
@@ -796,7 +796,7 @@ _id_5289(var_0) {
     var_7 = var_6.origin - anglesToForward(var_6.angles) * 36;
     var_8 = _func_2E1(var_7);
 
-    if(_func_0E1(var_8, var_7) > 1 || !_func_2DE(var_8, var_6.origin)) {
+    if(_distance2d(var_8, var_7) > 1 || !_func_2DE(var_8, var_6.origin)) {
       var_6._id_A6E6 = var_6.origin;
       continue;
     }
@@ -808,7 +808,7 @@ _id_5289(var_0) {
 }
 
 _id_885D() {
-  var_0 = self._id_8140;
+  var_0 = self.setanimknobrestart;
 
   if(!isDefined(var_0))
     var_0 = 6;
@@ -835,19 +835,19 @@ _id_563C(var_0) {
   if(!maps\mp\_utility::isreallyalive(var_0))
     return 0;
 
-  var_1 = var_0 _meth_84D1();
+  var_1 = var_0 playergetuseent();
 
   if(!isDefined(var_1) || var_1 != self)
     return 0;
 
-  if(!var_0 _meth_8341())
+  if(!var_0 usebuttonpressed())
     return 0;
 
   return 1;
 }
 
 _id_3468() {
-  self _meth_80CE(&"ZOMBIES_WALL_BUY_GENERIC");
+  self sethintstring(&"ZOMBIES_WALL_BUY_GENERIC");
 
   for(;;) {
     self waittill("trigger", var_0);
@@ -868,9 +868,9 @@ _id_AA28() {
   var_0 = undefined;
 
   if(!common_scripts\utility::_id_562E(level._id_0C11))
-    self _meth_80B3();
+    self makeunusable();
 
-  self _meth_80CE(&"ZOMBIES_REPAIR_BOARDS_HINT");
+  self sethintstring(&"ZOMBIES_REPAIR_BOARDS_HINT");
 
   for(;;) {
     var_1 = 0;
@@ -896,7 +896,7 @@ _id_AA28() {
       var_0._id_7F11 = var_0._id_7F11 + 1;
 
     if(var_0._id_7D10 < level._id_609C) {
-      var_7 = _func_0AF(level._id_609C - var_0._id_7D10, 10);
+      var_7 = _min(level._id_609C - var_0._id_7D10, 10);
       var_0 maps\mp\gametypes\zombies::_id_47AE("repair");
       var_0 thread _id_054E::_id_62D9();
       var_0._id_7D10 = var_0._id_7D10 + var_7;

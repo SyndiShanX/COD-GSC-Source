@@ -28,7 +28,7 @@ _id_A21F(var_0) {
     self._id_65EC.flatdiscount = 1250;
 
   _id_0561::notifywallbuytriggers();
-  _id_0548::_id_861C();
+  _id_0548::playsoundasmaster();
 }
 
 _id_4598(var_0) {

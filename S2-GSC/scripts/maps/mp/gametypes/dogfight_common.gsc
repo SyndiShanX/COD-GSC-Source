@@ -46,7 +46,7 @@ ondogfightstart() {
     level.dogfighthardboundarystruct = common_scripts\utility::_id_46B5(level.dogfighthardboundary, "targetname");
     level.dogfightsoftboundarystruct = common_scripts\utility::_id_46B5(level.dogfightsoftboundary, "targetname");
   } else if(isDefined(level.dogfightcenter)) {
-    if(_func_296(level.dogfightcenter))
+    if(_isvector(level.dogfightcenter))
       setup_boundaries_with_origin(level.dogfightcenter);
     else {
       var_0 = common_scripts\utility::_id_46B5(level.dogfightcenter, "targetname");
@@ -73,8 +73,8 @@ ondogfightstart() {
     level.dogfightformationspawnrandomyaw = 90;
 
   var_1 = getdvarint("2043", 0);
-  level.dogfighthealthscale = _func_0AD(getdvarint("scr_player_maxhealth", 100)) / _func_0AD(100);
-  level.dogfighthealthregenscale = _func_0AD(getdvarint("scr_player_healthregentime", 4)) / _func_0AD(4);
+  level.dogfighthealthscale = _float(getdvarint("scr_player_maxhealth", 100)) / _float(100);
+  level.dogfighthealthregenscale = _float(getdvarint("scr_player_healthregentime", 4)) / _float(4);
   level.dogfightshowui = var_1 == 0;
   level.dogfightfriendlyfireenabled = getdvarint("scr_team_fftype", 0);
 
@@ -89,7 +89,7 @@ ondogfightstart() {
 
 update_map_center(var_0) {
   level._id_5FEB = var_0;
-  _func_136(level._id_5FEB);
+  _setmapcenter(level._id_5FEB);
 }
 
 setup_minimap(var_0, var_1) {
@@ -117,7 +117,7 @@ load_formation_nodes() {
     return;
   }
   foreach(var_2 in var_0) {
-    var_3 = int(var_2._id_8260);
+    var_3 = int(var_2.setlookatent);
     level.formation_nodes[var_3] = var_2;
   }
 }
@@ -126,7 +126,7 @@ get_formation_spawn_info_with_angle(var_0) {
   var_1 = level.dogfightformationspawnstruct.origin + (0, 0, level.dogfightformationspawnstruct._id_00BD * 0.5);
   var_2 = (0, var_0, 0);
   var_3 = (1, 0, 0);
-  var_4 = _func_112(var_3, var_2);
+  var_4 = _rotatevector(var_3, var_2);
   var_5 = level.dogfightformationspawnstruct.radius;
   var_6 = (var_4[0] * var_5, var_4[1] * var_5, var_4[2] * var_5);
   var_7 = var_1 + var_6;
@@ -147,7 +147,7 @@ configure_formation_spawn() {
 
   for(var_7 = 0; var_7 < 5; var_7++) {
     if(level.dogfightformationspawnrandomyaw > 0)
-      var_6 = level.dogfightformationspawnbaseyaw + _func_0A5(-1 * level.dogfightformationspawnrandomyaw, level.dogfightformationspawnrandomyaw);
+      var_6 = level.dogfightformationspawnbaseyaw + _randomfloatrange(-1 * level.dogfightformationspawnrandomyaw, level.dogfightformationspawnrandomyaw);
 
     [var_0, var_1, var_2, var_3] = get_formation_spawn_info_with_angle(var_6);
     var_4 = is_spawn_valid(var_0, var_1, 0);
@@ -167,7 +167,7 @@ configure_formation_spawn() {
 
   for(var_7 = 1; var_7 < 9; var_7++) {
     var_10 = level.formation_nodes[var_7].origin - level.formation_nodes[0].origin;
-    level.formation_nodes_offset[var_7] = _func_112(var_10, var_9);
+    level.formation_nodes_offset[var_7] = _rotatevector(var_10, var_9);
   }
 }
 
@@ -202,10 +202,10 @@ monitordogfightafk() {
       var_1 = self _meth_86D5();
       var_2 = var_0[0] != 0 || var_0[1] != 0 || var_1[0] != 0 || var_1[1] != 0;
 
-      if(self _meth_8342() || self _meth_8343() || var_2)
+      if(self attackbuttonpressed() || self adsbuttonpressed() || var_2)
         self.lastinputtime = gettime();
       else if(gettime() - self.lastinputtime >= 75000) {
-        _func_134(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
+        _kick(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
         level thread maps\mp\gametypes\_gamelogic::_id_A11E();
       }
     }
@@ -304,7 +304,7 @@ onhostmigration(var_0) {
 
           var_2.occupied_plane thread watch_fighter_collision();
 
-          if(isbot(var_2) || _func_1EF(var_2))
+          if(isbot(var_2) || _isagent(var_2))
             var_2 thread bot_planeflythink(var_2.occupied_plane);
 
           if(1) {
@@ -343,8 +343,8 @@ fighter_set_perks(var_0) {
 
 dogfight_kill_player(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_0 setclientdvar("ui_raid_hide_fighter", 1);
-  var_0 _meth_84C0(0);
-  var_0 _meth_8059(99999, var_1, var_2, var_3, var_4, var_5, var_6);
+  var_0 setdemigod(0);
+  var_0 dodamage(99999, var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
 dogfight_prematch_wait(var_0, var_1) {
@@ -472,12 +472,12 @@ watch_fighter_collision() {
 
     if(isDefined(var_2)) {
       if(var_2 _meth_8564() == "plane")
-        var_2 _meth_8059(getdvarint("p47_maxhealth") + 1, var_3, self);
+        var_2 dodamage(getdvarint("p47_maxhealth") + 1, var_3, self);
 
-      self _meth_8059(getdvarint("p47_maxhealth") + 1, var_3, var_2);
+      self dodamage(getdvarint("p47_maxhealth") + 1, var_3, var_2);
     } else {
       self.forcenodeathanim = 1;
-      self _meth_8059(getdvarint("p47_maxhealth") + 1, var_3, var_2);
+      self dodamage(getdvarint("p47_maxhealth") + 1, var_3, var_2);
     }
 
     waitframe();
@@ -493,11 +493,11 @@ _id_1E8D() {
 }
 
 precache_anims() {
-  _func_162("mp_raids_husky_usa_thunderbolt_crash_left");
-  _func_162("mp_raids_husky_usa_thunderbolt_crash_right");
-  _func_162("mp_raids_husky_usa_thunderbolt_crash_up");
-  _func_162("mp_raids_husky_usa_thunderbolt_crash_nose_dive");
-  _func_162("mp_raids_husky_usa_thunderbolt_graveyard_spiral_down");
+  _precachempanim("mp_raids_husky_usa_thunderbolt_crash_left");
+  _precachempanim("mp_raids_husky_usa_thunderbolt_crash_right");
+  _precachempanim("mp_raids_husky_usa_thunderbolt_crash_up");
+  _precachempanim("mp_raids_husky_usa_thunderbolt_crash_nose_dive");
+  _precachempanim("mp_raids_husky_usa_thunderbolt_graveyard_spiral_down");
 }
 
 load_vfx() {
@@ -588,7 +588,7 @@ onhostmigrationbegin() {
   }
   if(isDefined(self.occupied_plane.vfx_obj_list)) {
     foreach(var_1 in self.occupied_plane.vfx_obj_list) {
-      if(!_func_279(var_1))
+      if(!_isremovedentity(var_1))
         var_1 delete();
     }
 
@@ -603,14 +603,14 @@ spawn_client_fighter_fx(var_0) {
   var_1 = self;
 
   if(isPlayer(var_1) && !isbot(var_1))
-    _func_14D(level._effect["mp_raid_bomber_throttle_fighter"], var_0, "TAG_BODY", var_1);
+    _playfxontagforclients(level._effect["mp_raid_bomber_throttle_fighter"], var_0, "TAG_BODY", var_1);
 }
 
 remove_client_fighter_fx(var_0) {
   var_1 = self;
 
   if(isPlayer(var_1) && !isbot(var_1))
-    _func_294(level._effect["mp_raid_bomber_throttle_fighter"], var_0, "TAG_BODY", var_1);
+    _stopfxontagforclient(level._effect["mp_raid_bomber_throttle_fighter"], var_0, "TAG_BODY", var_1);
 }
 
 common_damage_state_fx_update_watcher(var_0, var_1) {
@@ -619,15 +619,15 @@ common_damage_state_fx_update_watcher(var_0, var_1) {
   self endon("disconnect");
   var_2 = self;
 
-  if(!_func_0C0(var_0.vfx_tag))
+  if(!_isarray(var_0.vfx_tag))
     var_0.vfx_tag = [var_0.vfx_tag];
 
   self.vfx_obj_list = [];
 
   for(;;) {
-    if(_func_279(var_2) || var_2.health <= var_1 || common_scripts\utility::_id_562E(level.match_ended)) {
+    if(_isremovedentity(var_2) || var_2.health <= var_1 || common_scripts\utility::_id_562E(level.match_ended)) {
       foreach(var_4 in self.vfx_obj_list) {
-        if(!_func_279(var_4))
+        if(!_isremovedentity(var_4))
           var_4 delete();
       }
 
@@ -640,15 +640,15 @@ common_damage_state_fx_update_watcher(var_0, var_1) {
 
         if(isDefined(var_0.vfx_in)) {
           foreach(var_7 in var_0.vfx_tag)
-          _func_147(var_0.vfx_in, var_2, var_7);
+          _playfxontag(var_0.vfx_in, var_2, var_7);
 
           wait(var_0.vfx_in_length);
         }
 
         foreach(var_7 in var_0.vfx_tag) {
-          var_4 = _func_2A8(var_0.vfx_loop, var_2, var_7);
+          var_4 = _spawnlinkedfx(var_0.vfx_loop, var_2, var_7);
           setfxkillondelete(var_4, 1);
-          _func_14C(var_4);
+          _triggerfx(var_4);
           self.vfx_obj_list[var_7] = var_4;
         }
 
@@ -662,7 +662,7 @@ common_damage_state_fx_update_watcher(var_0, var_1) {
 
       if(isDefined(var_0.vfx_out)) {
         foreach(var_7 in var_0.vfx_tag)
-        _func_147(var_0.vfx_out, var_2, var_7);
+        _playfxontag(var_0.vfx_out, var_2, var_7);
       }
 
       continue;
@@ -741,21 +741,21 @@ fighter_get_crash_animation(var_0, var_1) {
   var_8 = [];
 
   foreach(var_10 in var_7) {
-    var_11 = _func_083(fighter_get_crash_anim_ref(var_10), 0, 1);
-    var_12 = _func_112(var_11, var_0.angles);
+    var_11 = _getmovedelta(fighter_get_crash_anim_ref(var_10), 0, 1);
+    var_12 = _rotatevector(var_11, var_0.angles);
     var_13 = var_1 + var_12;
     var_14 = var_13[2] >= var_5;
     var_15 = var_13[2] <= var_6;
     var_16 = get_dogfight_boundary_radius(0);
     var_17 = var_16 * var_16;
-    var_18 = _func_211(var_13, var_3) <= var_17;
+    var_18 = _distance2dsquared(var_13, var_3) <= var_17;
     var_19 = 1;
     var_20 = 0.25;
     var_21 = var_1;
 
     for(var_22 = 1; var_22 <= 4; var_22++) {
-      var_11 = _func_083(fighter_get_crash_anim_ref(var_10), 0, var_22 * var_20);
-      var_12 = _func_112(var_11, var_0.angles);
+      var_11 = _getmovedelta(fighter_get_crash_anim_ref(var_10), 0, var_22 * var_20);
+      var_12 = _rotatevector(var_11, var_0.angles);
       var_23 = var_1 + var_12;
       var_24 = bulletTrace(var_21, var_23, 0, var_0, 0, 0, 1, 1, 0, 0, 0);
       var_19 = var_19 && var_24["fraction"] == 1;
@@ -814,7 +814,7 @@ fighter_crash_anim_notetrack_watch() {
     }
 
     if(var_1 == "hide_plane")
-      var_0 _meth_8511();
+      var_0 ghost();
   }
 }
 
@@ -836,14 +836,14 @@ add_target_icon(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = var_0._id_002B;
 
   if(common_scripts\utility::_id_562E(var_0.firstfighterspawn))
-    maps\mp\gametypes\_hostmigration::_id_A6F5(3);
+    maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(3);
 
   if(isDefined(var_5)) {
     if(common_scripts\utility::_id_562E(var_0.firstfighterspawn))
       var_5 = var_5 - 3;
 
     if(var_5 > 0)
-      maps\mp\gametypes\_hostmigration::_id_A6F5(var_5);
+      maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_5);
   }
 
   if(!isDefined(self) || !isalive(var_0) || var_6 != self || var_7 != var_0._id_002B || isDefined(self._id_01C8) && !fighter_is_alive()) {
@@ -894,9 +894,9 @@ clearagenticonsforplayer() {
 }
 
 fighter_ui_hide() {
-  self _meth_8322();
+  self disableweapons();
 
-  if(!_func_1EF(self)) {
+  if(!_isagent(self)) {
     maps\mp\_utility::freezecontrolswrapper(1);
     self setclientdvars("ui_raid_hide_fighter", "1", "ui_force_dont_draw_fighter_names", "1", "cg_drawVehicleCrosshair", "0");
   }
@@ -905,10 +905,10 @@ fighter_ui_hide() {
 }
 
 fighter_ui_fade_up() {
-  self _meth_8323();
+  self enableweapons();
 
-  if(!_func_1EF(self)) {
-    self _meth_82FF("ui_hide_hud", 0);
+  if(!_isagent(self)) {
+    self setclientomnvar("ui_hide_hud", 0);
 
     if(level.dogfightshowui)
       self setclientdvars("ui_raid_hide_fighter", "0", "ui_force_dont_draw_fighter_names", "0", "cg_drawVehicleCrosshair", "1");
@@ -925,7 +925,7 @@ dogfightshowboundaryoverlay() {
   if(isDefined(self._id_1B68))
     self notify("cancelBoundaryOverlayHide");
   else {
-    self._id_1B68 = _func_19B(self);
+    self._id_1B68 = _newclienthudelem(self);
     self._id_1B68.x = 0;
     self._id_1B68.y = 0;
     self._id_1B68.sort = -5;
@@ -946,9 +946,9 @@ dogfightshowboundaryoverlay() {
 dogfightshowboundarywarning() {
   self endon("death");
   self endon("disconnect");
-  self _meth_82FF("ui_raid_boundary_type", 0);
+  self setclientomnvar("ui_raid_boundary_type", 0);
   wait 0.15;
-  self _meth_82FF("ui_raid_boundary_type", 3);
+  self setclientomnvar("ui_raid_boundary_type", 3);
 }
 
 dogfighthideboundaryoverlay() {
@@ -970,7 +970,7 @@ dogfighthideboundaryoverlay() {
 }
 
 dogfighthideboundarywarning() {
-  self _meth_82FF("ui_raid_boundary_type", -1);
+  self setclientomnvar("ui_raid_boundary_type", -1);
 }
 
 dogfightwatchboundaryoverlay(var_0) {
@@ -1007,15 +1007,15 @@ _id_A333() {
 
   for(;;) {
     self waittill("vehicle_dismount", var_0);
-    self _meth_8135();
+    self freeentitysentient();
   }
 }
 
 mountvehiclesafe(var_0) {
   if(isDefined(self._id_0117))
-    self _meth_8387(undefined);
+    self setentityowner(undefined);
 
-  self _meth_80F3(var_0);
+  self mountvehicle(var_0);
 }
 
 createvehicleinternal(var_0, var_1, var_2) {
@@ -1027,23 +1027,23 @@ createvehicleinternal(var_0, var_1, var_2) {
   var_4 = undefined;
 
   if(common_scripts\utility::_id_562E(var_0.use_original_classname))
-    var_4 = var_0 _meth_8225();
+    var_4 = var_0 vehicle_dospawn();
   else if(isDefined(var_2) && isPlayer(var_2))
-    var_4 = _func_1E0(var_0.model, var_3, var_0._id_01C8, var_0.origin, var_0.angles, var_2);
+    var_4 = _spawnvehicle(var_0.model, var_3, var_0._id_01C8, var_0.origin, var_0.angles, var_2);
   else
-    var_4 = _func_1E0(var_0.model, var_3, var_0._id_01C8, var_0.origin, var_0.angles);
+    var_4 = _spawnvehicle(var_0.model, var_3, var_0._id_01C8, var_0.origin, var_0.angles);
 
   var_4._id_01C8 = var_0._id_01C8;
   var_4.maxhealth = 9000;
   var_4.health = 9000;
   var_4._id_006A = 0;
-  var_4 _meth_82C3(0);
+  var_4 setcandamage(0);
 
   if(isDefined(var_1)) {
-    var_4 _meth_8253(var_1);
+    var_4 setvehicleteam(var_1);
     var_4.team = var_1;
   } else {
-    var_4 _meth_8253("axis");
+    var_4 setvehicleteam("axis");
     var_4.team = "axis";
   }
 
@@ -1081,8 +1081,8 @@ _id_4A31(var_0, var_1) {
   var_1 endon("death");
   _id_0378::_id_8D74("p47_turret_plr");
   var_2 = 0;
-  var_3 = _func_0A4(20, 40);
-  var_4 = var_3 + _func_0A4(10, 20);
+  var_3 = _randomintrange(20, 40);
+  var_4 = var_3 + _randomintrange(10, 20);
   var_5 = [];
   var_6 = 0;
   var_7 = 8;
@@ -1101,10 +1101,10 @@ _id_4A31(var_0, var_1) {
 
   while(isDefined(self)) {
     var_19 = 0;
-    var_19 = isDefined(self._id_830A) && self._id_830A;
+    var_19 = isDefined(self.setspreadoverride) && self.setspreadoverride;
 
     if(!var_19 && isDefined(var_0) && var_0) {
-      var_19 = var_1 _meth_8342();
+      var_19 = var_1 attackbuttonpressed();
 
       if(self._id_2651)
         var_19 = 0;
@@ -1115,7 +1115,7 @@ _id_4A31(var_0, var_1) {
           if(var_10 >= var_7) {
             var_10 = var_7;
             self._id_2651 = 1;
-            var_1 _meth_8322();
+            var_1 disableweapons();
           }
         }
       }
@@ -1129,7 +1129,7 @@ _id_4A31(var_0, var_1) {
           if(var_10 <= 0) {
             var_10 = 0;
             self._id_2651 = 0;
-            var_1 _meth_8323();
+            var_1 enableweapons();
           }
         } else
           var_10 = max(var_10 - var_18 * var_9, 0);
@@ -1139,11 +1139,11 @@ _id_4A31(var_0, var_1) {
     var_20 = 0.0;
 
     if(var_19)
-      var_20 = _func_0A5(0.0025, 0.005) * common_scripts\utility::_id_98E7(common_scripts\utility::_id_24A6(), 1.0, -1.0);
+      var_20 = _randomfloatrange(0.0025, 0.005) * common_scripts\utility::_id_98E7(common_scripts\utility::_id_24A6(), 1.0, -1.0);
 
     if(1) {
       var_21 = clamp(var_10 / var_7 + var_20, 0.0, 1.0);
-      var_1 _meth_82FF("ui_raid_vehicle_overheat_percent", var_21);
+      var_1 setclientomnvar("ui_raid_vehicle_overheat_percent", var_21);
     }
 
     wait(var_18);
@@ -1156,35 +1156,35 @@ _id_4A35() {
   self endon("death");
   self endon("fighter_fov");
 
-  if(_func_1EF(self)) {
+  if(_isagent(self)) {
     return;
   }
   var_0 = getdvarfloat("cg_fov");
   var_1 = level._id_1E8C[self._id_28D8]._id_0A10 / var_0;
   var_2 = level._id_1E8C[self._id_28D8]._id_9164 / var_0;
-  self _meth_8036(var_2, 0.1);
+  self lerpfovscale(var_2, 0.1);
   self._id_28FB = var_2;
   var_3 = 0.4;
   var_4 = 1;
-  self _meth_8036(var_2, var_4);
+  self lerpfovscale(var_2, var_4);
 
   for(;;) {
-    if(!isDefined(self) || _func_279(self)) {
+    if(!isDefined(self) || _isremovedentity(self)) {
       break;
     }
 
-    var_5 = self _meth_8343();
+    var_5 = self adsbuttonpressed();
 
     if(var_5) {
       var_1 = level._id_1E8C[self._id_28D8]._id_0A10 / var_0;
       var_2 = level._id_1E8C[self._id_28D8]._id_9164 / var_0;
-      self _meth_8036(var_1, var_3);
+      self lerpfovscale(var_1, var_3);
       self._id_28FB = var_1;
 
-      for(self._id_6F1F = 1; var_5; var_5 = self _meth_8343())
+      for(self._id_6F1F = 1; var_5; var_5 = self adsbuttonpressed())
         waitframe();
 
-      self _meth_8036(var_2, var_4);
+      self lerpfovscale(var_2, var_4);
       self._id_28FB = var_2;
       self._id_6F1F = 0;
     }
@@ -1257,10 +1257,10 @@ setup_formation_spawn_struct() {
 }
 
 random_point_on_cylinder(var_0, var_1) {
-  var_2 = vectorNormalize((_func_0A5(-1.0, 1.0), _func_0A5(-1.0, 1.0), 0));
+  var_2 = vectorNormalize((_randomfloatrange(-1.0, 1.0), _randomfloatrange(-1.0, 1.0), 0));
   var_3 = var_0 + var_1 * var_2;
   var_4 = get_spawn_height(0) * 0.5;
-  var_3 = var_3 + (0, 0, _func_0A5(var_4 * -1, var_4));
+  var_3 = var_3 + (0, 0, _randomfloatrange(var_4 * -1, var_4));
   return var_3;
 }
 
@@ -1271,7 +1271,7 @@ get_formation_spawn_origin_angles(var_0) {
 
   if(level.dogfightformationspawnstruct._id_00BD > 0) {
     var_4 = level.dogfightformationspawnstruct._id_00BD * 0.5;
-    var_3 = (0, 0, _func_0A5(-1 * var_4, var_4));
+    var_3 = (0, 0, _randomfloatrange(-1 * var_4, var_4));
   }
 
   if(var_0 == game["defenders"]) {
@@ -1320,7 +1320,7 @@ is_spawn_targeted(var_0) {
     if(var_5 < 0.996195) {
       continue;
     }
-    if(_func_07E(var_0, var_2.origin, 0, self))
+    if(_bullettracepassed(var_0, var_2.origin, 0, self))
       return 1;
   }
 
@@ -1346,7 +1346,7 @@ get_random_spawn_origin_angles() {
   var_1 = undefined;
   var_2 = undefined;
   var_3 = get_spawn_center();
-  var_4 = _func_0A5(get_spawn_radius(1), get_spawn_radius(0));
+  var_4 = _randomfloatrange(get_spawn_radius(1), get_spawn_radius(0));
 
   for(var_5 = 0; var_5 < 5; var_5++) {
     var_1 = random_point_on_cylinder(var_3, var_4);
@@ -1357,7 +1357,7 @@ get_random_spawn_origin_angles() {
     if(var_2[1] == 180.0)
       var_2 = (var_2[0], var_2[1] + 0.1, var_2[2]);
 
-    var_2 = (_func_0DD(var_2[0]), _func_0DD(var_2[1]), _func_0DD(var_2[2]));
+    var_2 = (_angleclamp180(var_2[0]), _angleclamp180(var_2[1]), _angleclamp180(var_2[2]));
     var_0 = is_spawn_valid(var_1, var_2, 1);
 
     if(var_0) {
@@ -1370,14 +1370,14 @@ get_random_spawn_origin_angles() {
 
 player_spawn_helper(var_0) {
   var_1 = 1.0;
-  var_0 _meth_84C0(1);
-  var_0 _meth_805C();
+  var_0 setdemigod(1);
+  var_0 hide();
   var_0 setclientdvar("cg_altimeterRange", get_dogfight_boundary_height(0));
   var_2 = get_dogfight_boundary_center(0);
   var_0 setclientdvar("cg_altimeterCenter", var_2[2]);
   var_0._id_4D13 = 1;
 
-  if(isbot(var_0) || _func_1EF(var_0))
+  if(isbot(var_0) || _isagent(var_0))
     var_0._id_0100 = 576000000;
 
   thread spawn_fighter(var_0);
@@ -1390,7 +1390,7 @@ player_spawn_helper(var_0) {
       thread maps\mp\gametypes\dogfight_scorestreaks::fighter_scorestreak_watcher(var_0);
   }
 
-  var_0 _meth_82FF("ui_raid_vehicle_health_percent", var_1);
+  var_0 setclientomnvar("ui_raid_vehicle_health_percent", var_1);
 }
 
 allow_controls_after_trans(var_0, var_1, var_2) {
@@ -1408,12 +1408,12 @@ allow_controls_after_trans(var_0, var_1, var_2) {
 }
 
 spawner_fog_enable() {
-  var_0 = _func_18E(level.dogfightalliesspawner, "targetname");
-  var_0 _meth_8400();
+  var_0 = _getent(level.dogfightalliesspawner, "targetname");
+  var_0 motionblurhqenable();
 
   if(level.teambased) {
-    var_1 = _func_18E(level.dogfightaxisspawner, "targetname");
-    var_1 _meth_8400();
+    var_1 = _getent(level.dogfightaxisspawner, "targetname");
+    var_1 motionblurhqenable();
   }
 }
 
@@ -1421,10 +1421,10 @@ get_spawner(var_0) {
   var_1 = undefined;
 
   if(!isDefined(level.attacker_pp_spawner))
-    level.attacker_pp_spawner = _func_18E(level.dogfightalliesspawner, "targetname");
+    level.attacker_pp_spawner = _getent(level.dogfightalliesspawner, "targetname");
 
   if(!isDefined(level.defender_pp_spawner))
-    level.defender_pp_spawner = _func_18E(level.dogfightaxisspawner, "targetname");
+    level.defender_pp_spawner = _getent(level.dogfightaxisspawner, "targetname");
 
   var_1 = undefined;
 
@@ -1452,7 +1452,7 @@ spawn_player_p47(var_0) {
   var_1 = get_spawner(var_0.team);
   var_2 = createvehicleinternal(var_1, var_0.team, var_0);
   var_2.team = var_0.team;
-  var_2 _meth_8134(var_2.team);
+  var_2 makeentitysentient(var_2.team);
 
   if(level.teambased) {
     var_3 = undefined;
@@ -1462,8 +1462,8 @@ spawn_player_p47(var_0) {
     else
       var_3 = "group_axis";
 
-    var_2 _meth_8173(var_3);
-    var_0 _meth_8173(var_3);
+    var_2 setthreatbiasgroup(var_3);
+    var_0 setthreatbiasgroup(var_3);
   }
 
   level.pp_array = common_scripts\utility::_id_0F6F(level.pp_array, var_2);
@@ -1491,9 +1491,9 @@ spawn_fighter(var_0) {
   var_3 = spawn_player_p47(var_0);
   var_3.maxhealth = getdvarint("p47_maxhealth");
   var_3.health = var_3.maxhealth;
-  var_3 _meth_82C3(1);
+  var_3 setcandamage(1);
   var_3.damagecallback = ::fighter_damage_callback;
-  var_3 _meth_8511();
+  var_3 ghost();
 
   if(!level.flak_in_progress || (!isDefined(var_0.flak_scorestreak_id) || var_0.flak_scorestreak_id != level.flak_scorestreak_id))
     var_0.hasdiedtoflak = undefined;
@@ -1509,7 +1509,7 @@ spawn_fighter(var_0) {
   var_0.occupied_plane = var_3;
   var_4 = undefined;
 
-  if(_func_1EF(var_0)) {
+  if(_isagent(var_0)) {
     var_0._id_00CE = 1;
     var_3._id_00CE = 1;
   }
@@ -1530,11 +1530,11 @@ spawn_fighter(var_0) {
   if(var_7[1] == 180.0)
     var_7 = (var_7[0], var_7[1] + 0.1, var_7[2]);
 
-  var_7 = (_func_0DD(var_7[0]), _func_0DD(var_7[1]), _func_0DD(var_7[2]));
-  var_0 _meth_833E(var_7);
-  var_3 _meth_8279(var_4, var_7);
+  var_7 = (_angleclamp180(var_7[0]), _angleclamp180(var_7[1]), _angleclamp180(var_7[2]));
+  var_0 setplayerangles(var_7);
+  var_3 vehicle_teleport(var_4, var_7);
 
-  if(_func_1EF(var_0)) {
+  if(_isagent(var_0)) {
     var_0._id_0009 = &"RAIDS_DOGFIGHT_AGENTNAME";
 
     foreach(var_10 in level.players) {
@@ -1543,9 +1543,9 @@ spawn_fighter(var_0) {
     }
   }
 
-  var_3 _meth_8384(var_0);
+  var_3 setclientowner(var_0);
   var_0 mountvehiclesafe(var_3);
-  var_0 _meth_8331();
+  var_0 disableusability();
   var_12 = get_turret_weapon_info(var_0.team);
   var_3 vehicle_scripts\_fighter_mp::_id_51FB(var_12);
   var_3 thread _id_4A31(1, var_0);
@@ -1553,7 +1553,7 @@ spawn_fighter(var_0) {
   var_0 thread _id_4A35();
   var_0 thread watch_boundary(var_3);
 
-  if(isbot(var_0) || _func_1EF(var_0)) {
+  if(isbot(var_0) || _isagent(var_0)) {
     if(var_1)
       var_0.informationtransition = 1;
 
@@ -1605,7 +1605,7 @@ show_plane() {
   self endon("death");
   self endon("disconnect");
   wait 0.1;
-  self _meth_805B();
+  self show();
 }
 
 watch_for_player_spawn() {
@@ -1695,7 +1695,7 @@ get_dogfight_boundary_center(var_0) {
 
 is_plane_outside_soft_boundary_radius() {
   var_0 = 0;
-  var_1 = _func_211(self.origin, get_dogfight_boundary_center(1));
+  var_1 = _distance2dsquared(self.origin, get_dogfight_boundary_center(1));
   var_2 = get_dogfight_boundary_radius(1);
   var_3 = var_2 * var_2;
 
@@ -1732,7 +1732,7 @@ get_plane_vertical_soft_boundary_percent() {
 
   if(is_plane_outside_soft_boundary_top() || is_plane_outside_soft_boundary_bottom()) {
     var_1 = get_dogfight_boundary_center(1);
-    var_2 = _func_0AE(self.origin[2] - var_1[2]);
+    var_2 = _abs(self.origin[2] - var_1[2]);
     var_3 = get_dogfight_boundary_height(1) * 0.5;
     var_4 = get_dogfight_boundary_height(0) * 0.5;
     var_0 = (var_2 - var_3) / (var_4 - var_3);
@@ -1746,7 +1746,7 @@ get_plane_horizontal_soft_boundary_percent() {
 
   if(is_plane_outside_soft_boundary_radius()) {
     var_1 = 0;
-    var_2 = _func_211(self.origin, get_dogfight_boundary_center(1));
+    var_2 = _distance2dsquared(self.origin, get_dogfight_boundary_center(1));
     var_3 = get_dogfight_boundary_radius(1);
     var_4 = var_3 * var_3;
     var_5 = get_dogfight_boundary_radius(0);
@@ -1763,8 +1763,8 @@ is_plane_outside_soft_boundary() {
 
 is_plane_outside_hard_boundary() {
   var_0 = get_dogfight_boundary_center(1);
-  var_1 = _func_211(self.origin, var_0);
-  var_2 = _func_0AE(self.origin[2] - var_0[2]);
+  var_1 = _distance2dsquared(self.origin, var_0);
+  var_2 = _abs(self.origin[2] - var_0[2]);
   var_3 = get_dogfight_boundary_radius(0);
   var_4 = var_3 * var_3;
 
@@ -1805,7 +1805,7 @@ watch_boundary(var_0) {
   self endon("boundaryWatch");
   level endon("game_ended");
 
-  if(_func_1EF(self)) {
+  if(_isagent(self)) {
     return;
   }
   var_1 = gettime();
@@ -1816,7 +1816,7 @@ watch_boundary(var_0) {
 
   if(var_0 is_plane_outside_hard_boundary() && !isDefined(level.hostmigrationtimer)) {}
 
-  if(!common_scripts\utility::within_fov(var_0.origin, var_0.angles, var_5, _func_0A7(30)) && !isDefined(level.hostmigrationtimer)) {}
+  if(!common_scripts\utility::within_fov(var_0.origin, var_0.angles, var_5, _cos(30)) && !isDefined(level.hostmigrationtimer)) {}
 
   for(;;) {
     if(common_scripts\utility::_id_562E(self.ignoreboundary) || isDefined(level.hostmigrationtimer)) {
@@ -1844,8 +1844,8 @@ watch_boundary(var_0) {
       if(common_scripts\utility::_id_562E(var_7) && var_3 <= gettime()) {
         var_8 = vectorNormalize(var_0.origin - var_5);
         var_9 = vectorNormalize(var_0.angles);
-        var_10 = vectorNormalize(_func_234(var_8, var_0.angles));
-        var_11 = _func_1E3(var_10[1], var_10[0]);
+        var_10 = vectorNormalize(_rotatevectorinverted(var_8, var_0.angles));
+        var_11 = _atan2(var_10[1], var_10[0]);
         var_8 = undefined;
 
         if(var_11 < -45 && var_11 > -135)
@@ -1858,11 +1858,11 @@ watch_boundary(var_0) {
           var_8 = "back";
 
         if(isDefined(var_4))
-          _func_148(get_flak_fx_for_direction(var_4), var_0, "tag_origin");
+          _stopfxontag(get_flak_fx_for_direction(var_4), var_0, "tag_origin");
 
-        _func_147(get_flak_fx_for_direction(var_8), var_0, "tag_origin");
+        _playfxontag(get_flak_fx_for_direction(var_8), var_0, "tag_origin");
         var_4 = var_8;
-        var_3 = gettime() + _func_0A4(600, 800);
+        var_3 = gettime() + _randomintrange(600, 800);
       }
 
       var_12 = 0;
@@ -1882,7 +1882,7 @@ watch_boundary(var_0) {
         }
 
         if(isDefined(var_4))
-          _func_148(get_flak_fx_for_direction(var_4), var_0, "tag_origin");
+          _stopfxontag(get_flak_fx_for_direction(var_4), var_0, "tag_origin");
       }
 
       var_1 = gettime();
@@ -1895,12 +1895,12 @@ watch_boundary(var_0) {
 plane_boundary_blowup(var_0) {
   var_1 = self;
   var_1._id_2AB1 = 1;
-  var_0 _meth_8059(var_0.maxhealth * 10, var_0.origin, undefined, undefined, "MOD_EXPLOSIVE");
+  var_0 dodamage(var_0.maxhealth * 10, var_0.origin, undefined, undefined, "MOD_EXPLOSIVE");
 }
 
 _id_89D5() {
-  _func_0F8("group_allies");
-  _func_0F8("group_axis");
+  _createthreatbiasgroup("group_allies");
+  _createthreatbiasgroup("group_axis");
 }
 
 common_health_regen(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -1961,7 +1961,7 @@ fighter_on_health_update_func() {
 
   if(isDefined(var_1)) {
     var_2 = var_0.health / var_0.maxhealth;
-    var_1 _meth_82FF("ui_raid_vehicle_health_percent", var_2);
+    var_1 setclientomnvar("ui_raid_vehicle_health_percent", var_2);
   }
 }
 
@@ -1985,13 +1985,13 @@ fighter_play_crash_anim(var_0, var_1, var_2, var_3) {
   waitframe();
 
   if(var_3) {
-    var_1 _meth_8278(var_2, "fighter_anim_notetrack");
+    var_1 scriptmodelplayanimdeltamotion(var_2, "fighter_anim_notetrack");
     var_1 childthread fighter_crash_anim_notetrack_watch();
   } else {
-    var_1 _meth_8276(var_2, undefined, 0, 0.01);
-    var_1 _meth_84CA(1);
-    var_1 _meth_8511();
-    var_0 _meth_81E2(var_1, "tag_player", 0);
+    var_1 scriptmodelplayanim(var_2, undefined, 0, 0.01);
+    var_1 setshadowrendering(1);
+    var_1 ghost();
+    var_0 cameralinkto(var_1, "tag_player", 0);
   }
 }
 
@@ -2026,7 +2026,7 @@ fighter_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_13 = fighter_get_crash_animation(var_7, var_1);
   var_7 vehicle_scripts\_fighter_mp::deathcleanup();
-  var_7 _meth_8511();
+  var_7 ghost();
   var_14 = undefined;
   var_15 = 1.5;
   var_16 = 0;
@@ -2039,7 +2039,7 @@ fighter_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(var_16) {
       var_17 = fighter_get_crash_anim_ref(var_13);
-      var_18 = _func_065(var_17) + var_15;
+      var_18 = _getanimlength(var_17) + var_15;
       var_19 = int(var_18 * 1000);
       var_0 _meth_8601(var_19);
       var_0.onplayerkilledwaitfordeathduration = 1;
@@ -2052,20 +2052,20 @@ fighter_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_7.forcenodeathanim = 0;
   dogfight_kill_player(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
-  var_7 _meth_82C3(0);
+  var_7 setcandamage(0);
   var_7 _meth_80B1();
 
-  if(_func_1EF(var_0))
-    var_0 _meth_8322();
+  if(_isagent(var_0))
+    var_0 disableweapons();
   else
     var_0 maps\mp\_utility::freezecontrolswrapper(1);
 
   if(var_16) {
-    if(_func_1EF(var_0))
+    if(_isagent(var_0))
       var_7 fighter_death_anim_wait(var_14);
     else {
       if(isDefined(var_14))
-        var_0 _meth_81E2(var_14, "tag_player", 0);
+        var_0 cameralinkto(var_14, "tag_player", 0);
 
       var_7 fighter_death_anim_wait(var_14);
     }
@@ -2080,7 +2080,7 @@ fighter_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(!var_16)
       playFX(level._effect["mp_raid_fighter_bounds_death"], var_14 gettagorigin("prop"));
 
-    var_14 _meth_8511();
+    var_14 ghost();
     wait(var_15);
 
     if(isDefined(var_14))
@@ -2135,7 +2135,7 @@ fighter_damage_callback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   if(isDefined(var_13)) {
     var_16 = var_12.health / var_12.maxhealth;
     var_17 = int(var_13.maxhealth * var_16);
-    var_13 _meth_8059(var_13.health - var_17, var_1.origin, var_1, var_0, var_4, var_5, var_8);
+    var_13 dodamage(var_13.health - var_17, var_1.origin, var_1, var_0, var_4, var_5, var_8);
   }
 
   var_12 notify("damage", var_2, var_1, var_7, var_6, var_4);
@@ -2264,10 +2264,10 @@ bot_planeshootthink(var_0) {
     }
     foreach(var_8 in level.players) {
       if(!level.teambased || var_8.team != var_1.team) {
-        var_1 _meth_8379(var_8, var_8.origin);
+        var_1 botgetimperfectenemyinfo(var_8, var_8.origin);
 
         if(isDefined(var_8.occupied_plane))
-          var_1 _meth_8379(var_8.occupied_plane, var_8.occupied_plane.origin);
+          var_1 botgetimperfectenemyinfo(var_8.occupied_plane, var_8.occupied_plane.origin);
       }
     }
 
@@ -2282,11 +2282,11 @@ bot_planeshootthink(var_0) {
     var_11 = vectorNormalize(var_10.origin - var_0.origin);
     var_12 = vectortoangles(var_11);
     var_13 = var_0.angles;
-    var_14 = _func_0DD(var_12[1] - var_13[1]);
-    var_15 = _func_0DD(var_12[0] - var_13[0]);
+    var_14 = _angleclamp180(var_12[1] - var_13[1]);
+    var_15 = _angleclamp180(var_12[0] - var_13[0]);
 
-    if(_func_0AE(var_14) < 30 && _func_0AE(var_15) < 30)
-      var_1 _meth_8380("attack", 1);
+    if(_abs(var_14) < 30 && _abs(var_15) < 30)
+      var_1 botpressbutton("attack", 1);
 
     var_6 = var_6 + var_2;
 
@@ -2333,7 +2333,7 @@ bot_planeflythink(var_0) {
     var_8 = vectorNormalize(var_3 - var_0.origin);
     var_9 = 9437184;
 
-    if(_func_1EF(var_1) && isDefined(var_4))
+    if(_isagent(var_1) && isDefined(var_4))
       var_9 = 0;
 
     if(var_9 > 0 && distancesquared(var_0.origin, var_3) < var_9)
@@ -2353,7 +2353,7 @@ bot_planeflythink(var_0) {
       }
     }
 
-    var_1 _meth_8355(var_11, var_2, 1, 1, 1, var_12);
+    var_1 botsetscriptmove(var_11, var_2, 1, 1, 1, var_12);
   }
 }
 
@@ -2367,12 +2367,12 @@ agent_spawn(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_1 = (0, 0, 0);
 
   if(!common_scripts\utility::_id_562E(var_7._id_565F)) {
-    var_7 _meth_838F(var_0, var_1);
-    var_7 _meth_83D6(0);
+    var_7 spawnagent(var_0, var_1);
+    var_7 enableanimstate(0);
   }
 
   if(isDefined(var_2))
-    maps\mp\agents\_agent_utility::_id_83FE(var_2.team, var_2);
+    maps\mp\agents\_agent_utility::hudoutlineenable(var_2.team, var_2);
 
   var_7.maxhealth = 100;
   var_7.health = var_7.maxhealth;
@@ -2409,7 +2409,7 @@ agent_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_9 = self _meth_85E2();
 
     if(isDefined(var_9))
-      self _meth_80F4();
+      self dismountvehicle();
   }
 }
 

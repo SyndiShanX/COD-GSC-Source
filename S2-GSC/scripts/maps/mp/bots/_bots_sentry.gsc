@@ -8,12 +8,12 @@ _id_1A4D(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  wait(_func_0A4(3, 5));
+  wait(_randomintrange(3, 5));
 
-  while(isDefined(self._id_83E6) && gettime() < self._id_83E6)
+  while(isDefined(self.getlookaheaddir) && gettime() < self.getlookaheaddir)
     wait 1;
 
-  if(isDefined(self._id_0088) && self._id_0088.health > 0 && self _meth_8371(self._id_0088))
+  if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088))
     return 1;
 
   var_4 = self.origin;
@@ -44,7 +44,7 @@ _id_1AC5(var_0, var_1, var_2, var_3) {
     maps\mp\bots\_bots_strategy::_id_192C("sentry_placement");
     var_5 = spawnStruct();
     var_5._id_68FB = var_4;
-    var_5._id_81CA = var_4._id_AAE8;
+    var_5.issuppressionwaiting = var_4._id_AAE8;
     var_5._id_81C8 = 10;
     var_5._id_9296 = ::_id_1ACD;
     var_5._id_36AC = ::_id_1AC6;
@@ -60,10 +60,10 @@ _id_1ACF(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(isDefined(self._id_0088) && self._id_0088.health > 0 && self _meth_8371(self._id_0088))
+  if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088))
     return 1;
 
-  self._id_83E6 = gettime() + 1000;
+  self.getlookaheaddir = gettime() + 1000;
   return 0;
 }
 
@@ -75,7 +75,7 @@ _id_1AC7() {
   level endon("game_ended");
 
   for(;;) {
-    if(isDefined(self._id_0088) && self._id_0088.health > 0 && self _meth_8371(self._id_0088))
+    if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088))
       thread _id_1AC6();
 
     waitframe();
@@ -96,7 +96,7 @@ _id_1ACE(var_0) {
   level endon("game_ended");
 
   while(isDefined(var_0._id_68FB) && isDefined(var_0._id_68FB._id_01D0)) {
-    if(_func_0E1(self.origin, var_0._id_68FB._id_010D.origin) < 400) {
+    if(_distance2d(self.origin, var_0._id_68FB._id_010D.origin) < 400) {
       thread maps\mp\bots\_bots_util::_id_19D4("stand", 5.0);
       thread _id_1AC7();
       maps\mp\bots\_bots_ks::_id_1AF4(var_0._id_68FB._id_5A5C, var_0._id_68FB._id_5A72, var_0._id_68FB._id_01D0);
@@ -116,20 +116,20 @@ _id_1ACA(var_0) {
   if(isDefined(self._id_6708))
     return self._id_6708.origin;
 
-  var_2 = _func_0B8(self.origin, 1000, 0, 512);
+  var_2 = _getnodesinradius(self.origin, 1000, 0, 512);
   var_3 = 5;
 
   if(var_0 != "turret") {
-    if(self _meth_837D("strategyLevel") == 1)
+    if(self botgetdifficultysetting("strategyLevel") == 1)
       var_3 = 10;
-    else if(self _meth_837D("strategyLevel") == 0)
+    else if(self botgetdifficultysetting("strategyLevel") == 0)
       var_3 = 15;
   }
 
   if(var_0 == "turret_air")
-    var_4 = self _meth_8366(var_2, var_3, "node_traffic", "ignore_no_sky");
+    var_4 = self botnodepick(var_2, var_3, "node_traffic", "ignore_no_sky");
   else
-    var_4 = self _meth_8366(var_2, var_3, "node_traffic");
+    var_4 = self botnodepick(var_2, var_3, "node_traffic");
 
   if(isDefined(var_4))
     return var_4.origin;
@@ -137,31 +137,31 @@ _id_1ACA(var_0) {
 
 _id_1AC9(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
-  var_5 = _func_0B8(var_1, 1000, 0, 512);
+  var_5 = _getnodesinradius(var_1, 1000, 0, 512);
   var_6 = 5;
 
   if(var_2 != "turret") {
-    if(self _meth_837D("strategyLevel") == 1)
+    if(self botgetdifficultysetting("strategyLevel") == 1)
       var_6 = 10;
-    else if(self _meth_837D("strategyLevel") == 0)
+    else if(self botgetdifficultysetting("strategyLevel") == 0)
       var_6 = 15;
   }
 
   if(var_2 == "turret_air")
-    var_7 = self _meth_8366(var_5, var_6, "node_sentry", var_1, "ignore_no_sky");
+    var_7 = self botnodepick(var_5, var_6, "node_sentry", var_1, "ignore_no_sky");
   else if(var_2 == "trap")
-    var_7 = self _meth_8366(var_5, var_6, "node_traffic");
+    var_7 = self botnodepick(var_5, var_6, "node_traffic");
   else if(var_2 == "hide_nonlethal")
-    var_7 = self _meth_8366(var_5, var_6, "node_hide");
+    var_7 = self botnodepick(var_5, var_6, "node_hide");
   else
-    var_7 = self _meth_8366(var_5, var_6, "node_sentry", var_1);
+    var_7 = self botnodepick(var_5, var_6, "node_sentry", var_1);
 
   if(isDefined(var_7)) {
     var_4 = spawnStruct();
     var_4._id_010D = var_7;
 
     if(var_1 != var_7.origin && var_2 != "hide_nonlethal")
-      var_4._id_AAE8 = _func_109(var_1 - var_7.origin);
+      var_4._id_AAE8 = _vectortoyaw(var_1 - var_7.origin);
     else
       var_4._id_AAE8 = undefined;
 
@@ -206,22 +206,22 @@ _id_1AC4(var_0) {
       var_8 = 1000;
 
       foreach(var_10 in var_7) {
-        var_11 = _func_081(var_0._id_68FB._id_010D.origin, var_0._id_68FB._id_010D.origin + anglesToForward((0, var_10 + 180, 0)) * 100);
-        var_12 = _func_0E1(var_11, var_0._id_68FB._id_010D.origin);
+        var_11 = _playerphysicstrace(var_0._id_68FB._id_010D.origin, var_0._id_68FB._id_010D.origin + anglesToForward((0, var_10 + 180, 0)) * 100);
+        var_12 = _distance2d(var_11, var_0._id_68FB._id_010D.origin);
 
         if(var_12 < var_8) {
           var_8 = var_12;
-          self _meth_8355(var_10, var_4);
-          self _meth_836F(var_0._id_68FB._id_010D.origin, var_4, "script_forced");
+          self botsetscriptmove(var_10, var_4);
+          self botlookatpoint(var_0._id_68FB._id_010D.origin, var_4, "script_forced");
         }
       }
 
       while(!var_3 && isDefined(var_2) && !var_2._id_1F2F) {
-        var_14 = _func_0AD(gettime() - var_5) / 1000.0;
+        var_14 = _float(gettime() - var_5) / 1000.0;
 
         if(!var_2._id_1F2F && var_14 > var_4) {
           var_3 = 1;
-          self._id_83E6 = gettime() + 30000;
+          self.getlookaheaddir = gettime() + 30000;
         }
 
         waitframe();
@@ -247,8 +247,8 @@ _id_1AC3() {
 
 _id_1AC2() {
   self switchtoweapon("none");
-  self _meth_8323();
-  self _meth_8327();
+  self enableweapons();
+  self enableweaponswitch();
   self notify("cancel_sentry");
   self notify("cancel_turret");
   self notify("cancelPlaceable");
@@ -268,10 +268,10 @@ _id_1ACB() {
   self endon("disconnect");
   level endon("game_ended");
   self switchtoweapon("none");
-  self _meth_8358();
-  self _meth_8354("none");
-  self _meth_8323();
-  self _meth_8327();
+  self botclearscriptgoal();
+  self botsetstance("none");
+  self enableweapons();
+  self enableweaponswitch();
   wait 0.25;
   var_0 = 0;
 
@@ -292,6 +292,6 @@ _id_1ACC() {
   self._id_2005 = undefined;
   self._id_2003 = undefined;
   self switchtoweapon("none");
-  self _meth_8323();
-  self _meth_8327();
+  self enableweapons();
+  self enableweaponswitch();
 }

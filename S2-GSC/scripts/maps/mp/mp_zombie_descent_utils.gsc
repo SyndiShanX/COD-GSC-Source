@@ -19,7 +19,7 @@ earthquake_alive_players(var_0, var_1, var_2) {
       var_3[var_3.size] = var_5;
   }
 
-  _func_17F(var_0, var_1, (0, 0, 0), 9999999, var_3);
+  _earthquake(var_0, var_1, (0, 0, 0), 9999999, var_3);
 }
 
 earthquake_alive_players_with_origin(var_0, var_1, var_2, var_3) {
@@ -31,7 +31,7 @@ earthquake_alive_players_with_origin(var_0, var_1, var_2, var_3) {
   }
 
   if(var_4.size > 0)
-    _func_17F(var_0, var_1, var_3.origin, var_2, var_4);
+    _earthquake(var_0, var_1, var_3.origin, var_2, var_4);
 }
 
 flag_try_set(var_0) {
@@ -85,18 +85,18 @@ lockin_system_monitor_b_button() {
     waitframe();
   }
 
-  self _meth_8179("stand");
+  self setstance("stand");
   self notify("stop_using_station");
 }
 
 lockin_system_monitor_use_button_exit() {
   self endon("stop_using_station");
 
-  while(self _meth_8341())
+  while(self usebuttonpressed())
     waitframe();
 
   for(;;) {
-    if(self _meth_8341()) {
+    if(self usebuttonpressed()) {
       break;
     }
 
@@ -527,14 +527,14 @@ vo_play_radio_line_on_player(var_0) {
   if(!isDefined(level.radio_speaker))
     level.radio_speaker = spawn("script_origin", (0, 0, -10000));
 
-  if(var_1 _meth_82D0()) {
-    if(var_1 _meth_82ED())
+  if(var_1 issplitscreenplayer()) {
+    if(var_1 issplitscreenplayerprimary())
       var_1._id_071D.pa_vo_on_player = _id_0380::_id_288B(var_0, var_1, level.radio_speaker, 0, 1);
     else {}
   } else
     var_1._id_071D.pa_vo_on_player = _id_0380::_id_288B(var_0, var_1, level.radio_speaker, 0, 1);
 
-  var_2 = _func_35D(var_0);
+  var_2 = _lookupsoundlength(var_0);
 
   if(isDefined(var_1._id_071D.pa_vo_on_player)) {
     wait(var_2);
@@ -546,7 +546,7 @@ vo_play_klaus_line_on_player(var_0) {
   var_1 = self;
   var_1.ishearingwhisper = 1;
   var_1._id_071D.pa_vo_on_player = _id_0380::_id_288B(var_0, var_1, var_1, 0, 1);
-  var_2 = _func_35D(var_0);
+  var_2 = _lookupsoundlength(var_0);
 
   if(isDefined(var_1._id_071D.pa_vo_on_player)) {
     wait(var_2);
@@ -573,7 +573,7 @@ vo_can_hear_whisper(var_0) {
   if(common_scripts\utility::_id_562E(self.ishearingwhisper))
     return 0;
 
-  var_1 = self _meth_8317();
+  var_1 = self getcurrentprimaryweapon();
 
   if(!issubstr(var_1, level.ravenweaponmanager[var_0]._id_01D0))
     return 0;
@@ -582,7 +582,7 @@ vo_can_hear_whisper(var_0) {
 }
 
 vo_waittill_next_whisper_time() {
-  wait(_func_0A4(120, 160));
+  wait(_randomintrange(120, 160));
 }
 
 vo_play_klaus_weapon_intro(var_0, var_1) {
@@ -669,8 +669,8 @@ hammer_post_give() {
 }
 
 _id_902A(var_0) {
-  if(isDefined(var_0._id_82EC)) {
-    switch (var_0._id_82EC) {
+  if(isDefined(var_0.weaponlocktargettooclose)) {
+    switch (var_0.weaponlocktargettooclose) {
       case "spawn_dirt":
         return::dirtspawnnotetrackhandler;
       case "spawn_concrete":
@@ -761,7 +761,7 @@ zombiedripfxcleanup(var_0, var_1) {
     }
   }
 
-  wait(_func_0A5(5.0, 15.0));
+  wait(_randomfloatrange(5.0, 15.0));
 
   if(!isDefined(self) || !isalive(self)) {
     return;
@@ -776,8 +776,8 @@ zombiespawnfx(var_0) {
   if(level.zombiespawnfxcount >= 12) {
     return;
   }
-  var_1 = _func_14B(common_scripts\utility::_id_44F5(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-  _func_14C(var_1);
+  var_1 = _spawnfx(common_scripts\utility::_id_44F5(var_0), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  _triggerfx(var_1);
   level.zombiespawnfxcount++;
   common_scripts\utility::waittill_notify_or_timeout("death", 2.0);
   level.zombiespawnfxcount--;
@@ -804,17 +804,17 @@ start_screenshake(var_0) {
   var_1 = self;
 
   while(var_0 > 0) {
-    var_2 = 0.55 + _func_0A3(0.55);
+    var_2 = 0.55 + _randomfloat(0.55);
     var_0 = var_0 - var_2;
-    var_1 _meth_809F("damage_heavy");
-    _func_17F(0.4, var_2, self.origin, 96);
+    var_1 playrumbleonentity("damage_heavy");
+    _earthquake(0.4, var_2, self.origin, 96);
     wait(var_2);
   }
 }
 
 reveal_first_room_door() {
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "flag_limbo_to_cave_intro" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "flag_limbo_to_cave_intro" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
@@ -822,7 +822,7 @@ reveal_first_room_door() {
 spine_pickup_anim(var_0) {
   var_1 = self;
 
-  while(var_1 _meth_833B())
+  while(var_1 isswitchingweapon())
     waitframe();
 
   var_2 = var_1 getcurrentweapon();
@@ -830,12 +830,12 @@ spine_pickup_anim(var_0) {
   var_1 common_scripts\utility::_disableoffhandweapons();
   var_1 _id_0586::_id_078C(var_0);
   var_1 _id_0586::_id_078E(var_0, 1);
-  var_1 _meth_8305(0);
-  var_1 _meth_8308(0);
+  var_1 allowjump(0);
+  var_1 allowsprint(0);
   wait 0.1;
-  var_1 _meth_8179("stand");
-  var_1 _meth_8113(0);
-  var_1 _meth_8114(0);
+  var_1 setstance("stand");
+  var_1 allowcrouch(0);
+  var_1 allowprone(0);
   var_1 thread _id_0378::_id_8D74("ripsaw_spine_cut");
   var_1 wait_for_weapon_change(var_0);
   wait 3;
@@ -847,15 +847,15 @@ spine_pickup_anim(var_0) {
   var_1 common_scripts\utility::_id_0617();
   var_1 common_scripts\utility::_id_0614();
 
-  if(var_1 _meth_8319(var_0))
+  if(var_1 hasweapon(var_0))
     var_1 _id_0586::_id_0790(var_0);
 
   var_1 _meth_8546(1);
-  var_1 _meth_8115(1);
-  var_1 _meth_8308(1);
-  var_1 _meth_8113(1);
-  var_1 _meth_8114(1);
-  var_1 _meth_8305(1);
+  var_1 allowlean(1);
+  var_1 allowsprint(1);
+  var_1 allowcrouch(1);
+  var_1 allowprone(1);
+  var_1 allowjump(1);
 }
 
 wait_for_weapon_change(var_0) {
@@ -880,10 +880,10 @@ set_fx(var_0, var_1) {
     var_1 = "tag_fx";
 
   self._id_3F74 = var_0;
-  self.fx = _func_2A8(common_scripts\utility::_id_44F5(var_0), self, var_1);
-  _func_14C(self.fx);
+  self.fx = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0), self, var_1);
+  _triggerfx(self.fx);
 
-  if(_func_1EF(self))
+  if(_isagent(self))
     maps\mp\agents\_agent_utility::deleteentonagentdeath(self.fx);
   else
     self.fx thread _id_0547::_id_2D19(self);

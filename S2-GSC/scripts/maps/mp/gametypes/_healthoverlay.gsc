@@ -111,7 +111,7 @@ _id_1BC0(var_0, var_1, var_2) {
     wait(1.4 * (var_4 / 1000));
 
   if(!level.gameended && isDefined(self._id_10F4) && self._id_10F4 == 1) {
-    self _meth_8627("mute_breath");
+    self clientclearsoundsubmix("mute_breath");
     self.breathmute_submix_active = 0;
     self._id_10F4 = 0;
   }
@@ -127,16 +127,16 @@ _id_720E(var_0) {
     return;
   }
   self._id_29AB = var_0;
-  var_1 = _func_0A4(1, 8);
-  self _meth_8626("mute_breath");
+  var_1 = _randomintrange(1, 8);
+  self clientaddsoundsubmix("mute_breath");
   self.breathmute_submix_active = 1;
 
   if(self.team == "axis") {
-    if(self _meth_843D())
+    if(self hasfemalecustomizationmodel())
       self playSound("generic_pain_enemy_fm_" + var_1, "pain_sound_done");
     else
       self playSound("generic_pain_enemy_" + var_1, "pain_sound_done");
-  } else if(self _meth_843D())
+  } else if(self hasfemalecustomizationmodel())
     self playSound("generic_pain_friendly_fm_" + var_1, "pain_sound_done");
   else
     self playSound("generic_pain_friendly_" + var_1, "pain_sound_done");
@@ -144,7 +144,7 @@ _id_720E(var_0) {
   self waittill("pain_sound_done");
 
   if(!common_scripts\utility::_id_562E(self._id_10F4)) {
-    self _meth_8627("mute_breath");
+    self clientclearsoundsubmix("mute_breath");
     self.breathmute_submix_active = 0;
   }
 }
@@ -188,7 +188,7 @@ _id_4C20() {
 
     self.health = self.maxhealth;
   } else {
-    var_3 = _func_0AD(self.health);
+    var_3 = _float(self.health);
 
     for(;;) {
       waitframe();
@@ -268,17 +268,17 @@ _id_7434() {
       continue;
     }
     if(!common_scripts\utility::_id_562E(self.breathmute_submix_active)) {
-      self _meth_8626("mute_breath");
+      self clientaddsoundsubmix("mute_breath");
       self.breathmute_submix_active = 1;
     }
 
-    if(self _meth_843D())
+    if(self hasfemalecustomizationmodel())
       self playlocalsound("deaths_door_mp_female");
     else
       self playlocalsound("deaths_door_mp_male");
 
     wait 1.284;
-    wait(0.1 + _func_0A3(0.8));
+    wait(0.1 + _randomfloat(0.8));
   }
 }
 
@@ -290,7 +290,7 @@ playerdeathmixmonitor() {
   self waittill("death");
 
   if(common_scripts\utility::_id_562E(self.breathmute_submix_active)) {
-    self _meth_8627("mute_breath");
+    self clientclearsoundsubmix("mute_breath");
     self.breathmute_submix_active = 0;
   }
 }

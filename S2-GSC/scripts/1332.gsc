@@ -5,10 +5,10 @@
 
 init() {
   self._id_4B91 = 0;
-  level._id_83C8 = 6.0;
-  level._id_83C9 = 0.05;
-  level._id_83C7 = 1.25;
-  level._id_83CA = 4;
+  level.lightsetoverridedisableforplayer = 6.0;
+  level.physicslaunchclientwithimpulse = 0.05;
+  level.lightsetoverrideenableforplayer = 1.25;
+  level.iswheelslipping = 4;
 }
 
 _id_3662() {

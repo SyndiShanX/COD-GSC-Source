@@ -8,7 +8,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -21,7 +21,7 @@ main() {
     maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level._id_6031 = 0;
     level._id_6035 = 0;
-    _func_035("scr_game_radarMode", 1);
+    _setdynamicdvar("scr_game_radarMode", 1);
   }
 
   setdvarifuninitialized("blades_score_riflebullet", 10);
@@ -30,14 +30,14 @@ main() {
   setdvarifuninitialized("blades_score_throwingknife", 0);
   _id_872E();
   maps\mp\_utility::_id_873B(0);
-  level._id_2F85 = 1;
+  level.disableforfeit = 1;
   level._id_6BA7 = ::_id_6BA7;
   level._id_6B7B = ::_id_6B7B;
   level._id_6BAF = ::_id_6BAF;
   level._id_6B5C = ::_id_6B5C;
   level._id_6B7F = ::_id_6B7F;
   level._id_1DEA = ::_id_1785;
-  level._id_80A8 = 1;
+  level.thermalvisionon = 1;
   level._id_2FAB = 1;
   level.disabledivisionstats = 1;
   level._id_2F8B = 1;
@@ -52,8 +52,8 @@ main() {
   if(level._id_6031 || level._id_6035)
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
 
-  _func_153("ffa");
-  _func_035("scr_game_compassRadarUpdateTime", 9);
+  _setteammode("ffa");
+  _setdynamicdvar("scr_game_compassRadarUpdateTime", 9);
   game["dialog"]["gametype"] = "ffa_intro";
   game["dialog"]["defense_obj"] = "gbl_start";
   game["dialog"]["offense_obj"] = "gbl_start";
@@ -64,16 +64,16 @@ main() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653(1);
-  _func_035("scr_blades_winlimit", 1);
+  _setdynamicdvar("scr_blades_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("blades", 1);
-  _func_035("scr_blades_roundlimit", 1);
+  _setdynamicdvar("scr_blades_roundlimit", 1);
   maps\mp\_utility::registerroundlimitdvar("blades", 1);
-  _func_035("scr_blades_halftime", 0);
+  _setdynamicdvar("scr_blades_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("blades", 0);
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_BLADES");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_BLADES");
 
@@ -271,7 +271,7 @@ _id_7B85() {
   self endon("disconnect");
 
   for(;;) {
-    if(maps\mp\_utility::isreallyalive(self) && self.team != "spectator" && (isDefined(self.primaryweapon) && _func_1A9(self.primaryweapon) != "melee" && self getammocount(self.primaryweapon) == 0 || isDefined(self.lethalweapon) && self getammocount(self.lethalweapon) == 0)) {
+    if(maps\mp\_utility::isreallyalive(self) && self.team != "spectator" && (isDefined(self.primaryweapon) && _weapontype(self.primaryweapon) != "melee" && self getammocount(self.primaryweapon) == 0 || isDefined(self.lethalweapon) && self getammocount(self.lethalweapon) == 0)) {
       wait 2;
       self notify("reload");
       wait 1;
@@ -328,9 +328,9 @@ givesticksnstonesloadout() {
   maps\mp\_utility::giveperk("specialty_sprintreload");
   maps\mp\_utility::giveperk("specialty_fastreload");
   maps\mp\_utility::giveperk("specialty_increasedmeleedamage");
-  self _meth_8315();
+  self takeallweapons();
   self.lethalweapon = "throwingknife_mp";
-  self _meth_8349(self.lethalweapon);
+  self setlethalweapon(self.lethalweapon);
   self giveweapon(self.lethalweapon);
   self setweaponammoclip(self.lethalweapon, 1);
   var_0 = "alt+m30_blades_mp+m30_rifle_blades";
@@ -338,7 +338,7 @@ givesticksnstonesloadout() {
   self givestartammo(var_0);
   var_1 = maps\mp\_utility::_id_4431(var_0);
   self.pers["secondaryWeapon"] = var_1;
-  self._id_835A = var_0;
+  self.botclearscriptenemy = var_0;
   var_2 = "alt+m1garand_blades_mp+grenade_launcher_blades";
   maps\mp\_utility::_giveweapon(var_2);
   self givestartammo(var_2);

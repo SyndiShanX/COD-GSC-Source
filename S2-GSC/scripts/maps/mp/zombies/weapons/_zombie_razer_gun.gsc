@@ -106,7 +106,7 @@ notify_razergun_picked_up() {
     while(self getcurrentweapon() != "razergun_zm")
       waitframe();
 
-    if(self _meth_82F6() == 0) {
+    if(self getcurrentweaponclipammo() == 0) {
       continue;
     }
     thread handle_sawgun_state_change("switching to loaded sawgun", var_0, 1);
@@ -143,7 +143,7 @@ handle_sawgun_state_change(var_0, var_1, var_2) {
 
 razergun_heavy_melee_fatal(var_0) {
   _id_0378::_id_8D74("ripsaw_fatal_melee");
-  return common_scripts\utility::_id_562E(self._id_165B) || self _meth_8343();
+  return common_scripts\utility::_id_562E(self._id_165B) || self adsbuttonpressed();
 }
 
 razergun_monitor() {
@@ -194,7 +194,7 @@ razer_bayochargewatcher() {
 
 razer_bayochargedeathtracking() {
   self endon("disconnect");
-  var_0 = common_scripts\utility::_id_A715("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
+  var_0 = common_scripts\utility::waittill_any_return("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
   self.israzerguncharging = 0;
   togglemarathonability(1);
 
@@ -231,7 +231,7 @@ do_electric_charge(var_0, var_1) {
   }
   playFX(common_scripts\utility::_id_44F5("zmb_elec_cherry_wv"), var_2);
   _id_0378::_id_8D74("electric_cherry_vfx");
-  _func_14D(common_scripts\utility::_id_44F5("zmb_elec_cherry_player"), self, "J_Spine4", self);
+  _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_elec_cherry_player"), self, "J_Spine4", self);
   _id_053A::mini_stunning_burst_execute(var_2, self, var_1, 0.7, undefined, undefined, "zombie_fireman", ::zombie_on_electric_charge);
 }
 
@@ -296,7 +296,7 @@ handle_razer_blade_touch() {
     }
     if(isDefined(level.razer_touch_trigs)) {
       foreach(var_1 in level.razer_touch_trigs) {
-        if(!isDefined(var_1) || _func_279(var_1)) {
+        if(!isDefined(var_1) || _isremovedentity(var_1)) {
           level.razer_touch_trigs = common_scripts\utility::_id_0F93(level.razer_touch_trigs, var_1);
           continue;
         }
@@ -359,21 +359,21 @@ do_zombie_trace_damage(var_0, var_1, var_2, var_3, var_4) {
   foreach(var_10 in var_8) {
     if(sqrd_dist_between_segments(var_0, var_1, var_10.origin, var_10.origin + (0, 0, 60)) <= var_7) {
       if(common_scripts\utility::_id_562E(var_10.ripsaw_hardened)) {
-        var_10 _meth_8059(400.0, self.origin, var_2, var_3, undefined, var_4);
+        var_10 dodamage(400.0, self.origin, var_2, var_3, undefined, var_4);
         continue;
       }
 
       if(!isDefined(var_10.zombie_shielding_func) && !common_scripts\utility::_id_562E(self.damage_players) && common_scripts\utility::_id_562E(var_10._id_0A4B == "zombie_generic" || var_10._id_0A4B == "zombie_berserker" || var_10._id_0A4B == "zombie_exploder")) {
-        var_10 _meth_8059(var_10.health + 1, self.origin, var_2, var_3, undefined, var_4);
+        var_10 dodamage(var_10.health + 1, self.origin, var_2, var_3, undefined, var_4);
         continue;
       }
 
       if(_id_0547::_id_5565(var_10._id_0A4B, "zombie_assassin") && isDefined(var_10.assassinabilityactivateaction)) {
-        var_10 _meth_8059(1800.0, self.origin, var_2, var_3, undefined, var_4);
+        var_10 dodamage(1800.0, self.origin, var_2, var_3, undefined, var_4);
         continue;
       }
 
-      var_10 _meth_8059(4000, self.origin, var_2, var_3, undefined, var_4);
+      var_10 dodamage(4000, self.origin, var_2, var_3, undefined, var_4);
     }
   }
 }
@@ -408,11 +408,11 @@ do_zombie_damage_inefficient(var_0, var_1, var_2) {
     foreach(var_5 in var_3) {
       if(distance(var_5.origin + (0, 0, 48), self.origin) < 32) {
         if(common_scripts\utility::_id_562E(var_5._id_0A4B == "zombie_generic" || var_5._id_0A4B == "zombie_berserker" || var_5._id_0A4B == "zombie_exploder")) {
-          var_5 _meth_8059(var_5.health + 1, self.origin, var_0, var_1, undefined, var_2);
+          var_5 dodamage(var_5.health + 1, self.origin, var_0, var_1, undefined, var_2);
           continue;
         }
 
-        var_5 _meth_8059(4000, self.origin, var_0, var_1, undefined, var_2);
+        var_5 dodamage(4000, self.origin, var_0, var_1, undefined, var_2);
       }
     }
 
@@ -473,11 +473,11 @@ should_razgun_expire(var_0, var_1) {
 }
 
 delete_the_projectile() {
-  _func_149(common_scripts\utility::_id_44F5("razergun_projectile"), self, "tag_origin");
-  _func_149(common_scripts\utility::_id_44F5(self.current_trail_fx), self, "tag_origin");
+  _killfxontag(common_scripts\utility::_id_44F5("razergun_projectile"), self, "tag_origin");
+  _killfxontag(common_scripts\utility::_id_44F5(self.current_trail_fx), self, "tag_origin");
   self delete();
 }
 
 play_fx_on_razergun_projectile(var_0) {
-  _func_147(common_scripts\utility::_id_44F5(var_0), self, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5(var_0), self, "tag_origin");
 }

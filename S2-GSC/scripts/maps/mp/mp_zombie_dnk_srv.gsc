@@ -84,11 +84,11 @@ dnk_srv_ee_wheel_listen() {
   if(!isDefined(self.target)) {
     return;
   }
-  var_0 = _func_18E(self.target, "targetname");
-  var_0 _meth_8177(1);
+  var_0 = _getent(self.target, "targetname");
+  var_0 usetriggerrequirelookat(1);
   var_0 waittill("trigger", var_1);
   var_0 delete();
-  self _meth_82B8((self.angles[0], self.angles[1], self.angles[2] + 180), 1, 0.25, 0.25);
+  self rotateto((self.angles[0], self.angles[1], self.angles[2] + 180), 1, 0.25, 0.25);
   level.dnk_srv_wheel_turn_count++;
 
   if(level.dnk_srv_wheel_turn_count >= level.dnk_srv_wheel_turn_max)
@@ -96,14 +96,14 @@ dnk_srv_ee_wheel_listen() {
 }
 
 dnk_srv_drop_fuse() {
-  var_0 = _func_18E("srv_pap_fuse_spawn_loc", "targetname");
+  var_0 = _getent("srv_pap_fuse_spawn_loc", "targetname");
   var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
-  var_2 = _func_18E(var_1.target, "targetname");
+  var_2 = _getent(var_1.target, "targetname");
 
   if(isDefined(var_1))
     var_0 _id_0547::obj_fall_to_ent_location(var_1);
 
-  var_2 _meth_8177(1);
+  var_2 usetriggerrequirelookat(1);
   var_2 waittill("trigger", var_3);
   var_0 delete();
   var_2 delete();

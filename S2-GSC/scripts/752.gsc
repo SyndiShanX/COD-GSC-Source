@@ -32,36 +32,36 @@ _id_800A(var_0, var_1, var_2, var_3) {
   return var_8;
 }
 
-_id_800E(var_0, var_1, var_2) {
+enableammogeneration(var_0, var_1, var_2) {
   if(isDefined(var_0) == 0) {
     return;
   }
-  if(_func_0C0(var_0) == 1) {
+  if(_isarray(var_0) == 1) {
     foreach(var_4 in var_0) {
-      if(_func_279(var_4) == 0)
+      if(_isremovedentity(var_4) == 0)
         var_4 thread _id_06C9(var_4, var_1);
     }
   } else
     var_0 thread _id_06C9(var_0, var_1);
 }
 
-_id_800F(var_0, var_1, var_2, var_3) {
+disableammogeneration(var_0, var_1, var_2, var_3) {
   var_1 thread _id_06CA(var_0, var_1, var_2, var_3);
 }
 
-_id_8007(var_0) {
+threatdetectedtoplayer(var_0) {
   return _id_02EF::_id_8AAB(var_0);
 }
 
-_id_800D(var_0, var_1, var_2, var_3, var_4) {
+disableplayeruse(var_0, var_1, var_2, var_3, var_4) {
   var_0 _id_02EF::_id_8AAF(var_1, var_2, var_3, var_4);
 }
 
-_id_8005(var_0) {
+showtoplayer(var_0) {
   return _id_02EF::_id_8AAA(var_0);
 }
 
-_id_800C(var_0, var_1, var_2, var_3, var_4) {
+enableplayeruse(var_0, var_1, var_2, var_3, var_4) {
   var_0 _id_02EF::_id_8AAC(var_1, var_2, var_3, var_4);
 }
 
@@ -84,7 +84,7 @@ _id_8010() {
   return "entity";
 }
 
-_id_8011() {
+makeportableradar() {
   return level._id_06B2._id_05F8;
 }
 
@@ -188,7 +188,7 @@ _id_06BC(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_06BD(var_0) {
-  if(isDefined(var_0) == 1 && _func_279(var_0) == 0)
+  if(isDefined(var_0) == 1 && _isremovedentity(var_0) == 0)
     var_0 delete();
   else {}
 }
@@ -200,21 +200,21 @@ _id_06BF(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0._id_8F45) == 1) {
     waittillframeend;
 
-    if(_func_279(var_0) == 1)
+    if(_isremovedentity(var_0) == 1)
       return;
   }
 
-  var_5 = _id_8007(var_4);
+  var_5 = threatdetectedtoplayer(var_4);
 
   if(isDefined(var_2) == 0 && isDefined(var_5) == 1)
     var_2 = var_5;
 
   if(_func_35C(var_1) == 1)
-    var_4 _meth_861D(var_1, var_2);
+    var_4 playloopsound(var_1, var_2);
   else {
     var_6 = "sounddone";
     var_4 playSound(var_1, var_6, undefined, undefined, undefined, var_2);
-    var_7 = _func_342(var_1, "secondaryaliasname");
+    var_7 = _getsndaliasvalue(var_1, "secondaryaliasname");
 
     if(isDefined(var_7) == 1 && var_7 != "")
       var_4 thread _id_06C1(var_1);
@@ -229,8 +229,8 @@ _id_06C0(var_0) {
   var_0 endon("death");
   var_1 = var_0;
 
-  if(isDefined(var_1) == 1 && _func_279(var_1) == 0) {
-    var_1 _meth_8614();
+  if(isDefined(var_1) == 1 && _isremovedentity(var_1) == 0) {
+    var_1 stopsounds();
     waitframe();
     _id_06BD(var_1);
   } else {}
@@ -239,7 +239,7 @@ _id_06C0(var_0) {
 _id_06C1(var_0) {
   var_1 = self;
   var_1 endon("death");
-  var_2 = _func_35D(var_0);
+  var_2 = _lookupsoundlength(var_0);
   var_3 = _id_02EF::_id_468E(var_0, "pitch_min");
 
   if(isDefined(var_3) == 1)
@@ -368,7 +368,7 @@ _id_06C7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = var_4;
   var_9 = undefined;
 
-  if(_func_344(var_1) == 0)
+  if(_soundexists(var_1) == 0)
     return undefined;
 
   if(isDefined(level._id_06B2._id_05F8) == 0)
@@ -421,10 +421,10 @@ _id_06C9(var_0, var_1) {
     var_1 = level._id_06B2._id_05F7;
 
   if(isDefined(var_1) == 1) {
-    _id_800D(var_0, 0.0, var_1);
+    disableplayeruse(var_0, 0.0, var_1);
     wait(var_1 + 0.05);
 
-    if(_func_279(var_0) == 1)
+    if(_isremovedentity(var_0) == 1)
       return;
   } else
     var_1 = 0;
@@ -450,7 +450,7 @@ _id_06CA(var_0, var_1, var_2, var_3) {
 }
 
 _id_06C8(var_0, var_1, var_2) {
-  _id_800D(var_0, 0.0, 0.0);
+  disableplayeruse(var_0, 0.0, 0.0);
 
   if(isDefined(var_2) == 1 && var_2 > 0.0) {
     var_0 endon("rvSndAbortInitialFadeIn");
@@ -458,8 +458,8 @@ _id_06C8(var_0, var_1, var_2) {
     waittillframeend;
   }
 
-  if(isDefined(var_0) && !_func_279(var_0))
-    _id_800D(var_0, 1.0, var_1);
+  if(isDefined(var_0) && !_isremovedentity(var_0))
+    disableplayeruse(var_0, 1.0, var_1);
 }
 
 _id_8009(var_0, var_1, var_2, var_3) {
@@ -472,20 +472,20 @@ _id_8009(var_0, var_1, var_2, var_3) {
     var_3 = 0.0;
 
   if(isDefined(var_4._id_8F4E) == 0 && _id_02EF::_id_56DB(var_4) == 1) {
-    var_4 _meth_82B1(var_0, var_1, var_2, var_3);
+    var_4 moveto(var_0, var_1, var_2, var_3);
     return;
   }
 
   switch (var_4._id_8F4E) {
     case "entity":
     default:
-      var_4 _meth_82B1(var_0, var_1, var_2, var_3);
+      var_4 moveto(var_0, var_1, var_2, var_3);
       break;
     case "sndentity":
       if(isDefined(var_4._id_8F45) == 1)
-        var_4._id_8F45 _meth_82B1(var_0, var_1, var_2, var_3);
+        var_4._id_8F45 moveto(var_0, var_1, var_2, var_3);
       else
-        var_4 _meth_82B1(var_0, var_1, var_2, var_3);
+        var_4 moveto(var_0, var_1, var_2, var_3);
 
       break;
     case "clientsnd":
@@ -493,7 +493,7 @@ _id_8009(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_8008(var_0) {
+clearthreatdetected(var_0) {
   if(isDefined(var_0) == 1 && isDefined(var_0._id_8F4E) == 1) {
     switch (var_0._id_8F4E) {
       default:

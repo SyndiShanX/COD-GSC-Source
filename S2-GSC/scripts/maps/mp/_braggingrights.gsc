@@ -12,7 +12,7 @@ _id_7DA2() {
 
   foreach(var_4 in level.players) {
     if(isalive(var_4)) {
-      var_5 = var_4 _meth_83BD();
+      var_5 = var_4 getmodelfromentity();
 
       if(var_5 < var_0) {
         var_6 = var_1[var_5].size;
@@ -23,7 +23,7 @@ _id_7DA2() {
 
   foreach(var_2, var_5 in var_1) {
     if(var_5.size > 1) {
-      var_9 = _func_1AE("mp/braggingrights.csv", var_2, 2);
+      var_9 = _tablelookupbyrow("mp/braggingrights.csv", var_2, 2);
       var_10 = undefined;
       var_11 = undefined;
 
@@ -66,7 +66,7 @@ _id_7DA2() {
 _id_45C5() {
   var_0 = -1;
 
-  for(var_1 = "temp"; var_1 != ""; var_1 = _func_1AE("mp/braggingrights.csv", var_0, 0))
+  for(var_1 = "temp"; var_1 != ""; var_1 = _tablelookupbyrow("mp/braggingrights.csv", var_0, 0))
     var_0++;
 
   return var_0;

@@ -8,10 +8,10 @@ init() {
   var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
   var_0.radius = distance(var_0.origin, var_1.origin);
   var_2 = var_0 common_scripts\utility::_id_8FFC();
-  var_2 _meth_805B();
+  var_2 show();
   var_2 thread rotate_me();
   var_3 = var_0 common_scripts\utility::_id_8FFC();
-  var_3 _meth_805B();
+  var_3 show();
   var_3 thread rotate_me(1);
   level.oribital_rotator_1 = var_2;
   level.oribital_rotator_2 = var_3;
@@ -47,7 +47,7 @@ watch_for_grab() {
   for(;;) {
     waitframe();
 
-    if(!var_0 _meth_8341()) {
+    if(!var_0 usebuttonpressed()) {
       continue;
     }
     level.grenades_in_orbit = common_scripts\utility::_id_0FA0(level.grenades_in_orbit);
@@ -60,7 +60,7 @@ watch_for_grab() {
     if(!isDefined(var_1[0])) {
       continue;
     }
-    if(_func_0E1(var_0.origin, var_1[0].origin) > 70) {
+    if(_distance2d(var_0.origin, var_1[0].origin) > 70) {
       continue;
     }
     _id_0586::_id_478A(var_0);
@@ -82,7 +82,7 @@ watch_for_entanglements() {
         if(!isDefined(var_4)) {
           continue;
         }
-        if(var_4 != var_2 && _func_0E1(var_4.origin, var_2.origin) < 60) {
+        if(var_4 != var_2 && _distance2d(var_4.origin, var_2.origin) < 60) {
           level.grenades_in_orbit = common_scripts\utility::_id_0F93(level.grenades_in_orbit, var_4);
           var_5 = get_hyper_color(var_2._id_3F74, var_4._id_3F74);
 
@@ -120,10 +120,10 @@ rotate_me(var_0) {
     if(common_scripts\utility::_id_562E(var_0))
       var_1 = -1;
 
-    if(_func_279(self)) {
+    if(_isremovedentity(self)) {
       return;
     }
-    self _meth_82BA(var_1 * 180, 1);
+    self rotateyaw(var_1 * 180, 1);
     wait 1;
   }
 }
@@ -156,11 +156,11 @@ watch_for_grenades_and_projectiles(var_0) {
     if(!common_scripts\utility::_id_0F79(var_5, var_7)) {
       continue;
     }
-    if(_func_0AE(self.origin[2] - var_4[2]) > 60 || _func_0E1(var_6.origin, var_4) > var_3) {
+    if(_abs(self.origin[2] - var_4[2]) > 60 || _distance2d(var_6.origin, var_4) > var_3) {
       if(var_1.grenadecolorsheld.size > 0) {
         var_8 = var_6 spawn_a_fake_grenade(var_1, var_7);
 
-        if(_func_279(var_8)) {
+        if(_isremovedentity(var_8)) {
           continue;
         }
         var_8 set_fx(var_1 remove_grenade_color());
@@ -203,7 +203,7 @@ move_no_gravity(var_0, var_1) {
     var_6 = var_3;
 
   var_7 = distance(var_0 getEye(), var_6) / var_1;
-  var_2 _meth_82B1(var_6, var_7);
+  var_2 moveto(var_6, var_7);
   wait(var_7);
   var_2.forcedetonate = 1;
 }
@@ -214,7 +214,7 @@ spawn_a_fake_grenade(var_0, var_1) {
 
   var_2 = self;
   var_3 = var_2 common_scripts\utility::_id_8FFC();
-  var_3 _meth_805B();
+  var_3 show();
   var_3.angles = (30, 0, 15);
   var_4 = getzombielethalmodel(var_1);
   var_3 setModel(var_4);
@@ -233,7 +233,7 @@ get_all_magical_grenades() {
   var_0 = [];
 
   foreach(var_2 in level.zmb_gravity_grenades) {
-    if(!_func_279(var_2))
+    if(!_isremovedentity(var_2))
       var_0[var_0.size] = var_2;
   }
 
@@ -258,7 +258,7 @@ get_player_angle_flat() {
 get_circle_angle_compare(var_0, var_1) {
   var_2 = var_1[0] - var_0[0];
   var_3 = var_1[1] - var_0[1];
-  var_4 = _func_1E3(var_3, var_2);
+  var_4 = _atan2(var_3, var_2);
   return int(var_4);
 }
 
@@ -275,21 +275,21 @@ handle_detonation(var_0, var_1) {
 
   wait_frames(50);
 
-  if(_func_279(self)) {
+  if(_isremovedentity(self)) {
     return;
   }
   self.lethallevel++;
   set_fx("proj_trail_yellow");
   wait_frames(100);
 
-  if(_func_279(self)) {
+  if(_isremovedentity(self)) {
     return;
   }
   self.lethallevel++;
   set_fx("proj_trail_red");
   wait_frames(150);
 
-  if(_func_279(self)) {
+  if(_isremovedentity(self)) {
     return;
   }
   self.lethallevel++;
@@ -328,9 +328,9 @@ set_fx(var_0) {
     self.fx delete();
 
   self._id_3F74 = var_0;
-  self.fx = _func_2A8(common_scripts\utility::_id_44F5(var_0), self, "tag_fx");
+  self.fx = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0), self, "tag_fx");
   self.ee_color = get_color_for_grenade(var_0);
-  _func_14C(self.fx);
+  _triggerfx(self.fx);
 }
 
 seek_enemy_targets(var_0, var_1) {
@@ -339,7 +339,7 @@ seek_enemy_targets(var_0, var_1) {
   var_3 = 800;
 
   while(!common_scripts\utility::_id_562E(self.forcedetonate) && var_3 > 0 && !var_2) {
-    if(_func_279(self)) {
+    if(_isremovedentity(self)) {
       return;
     }
     var_4 = _id_0547::_id_408F();
@@ -357,7 +357,7 @@ seek_enemy_targets(var_0, var_1) {
       waitframe();
   }
 
-  if(_func_279(self)) {
+  if(_isremovedentity(self)) {
     return;
   }
   if(_id_0547::_id_5565(var_1, "throwingknife_zm")) {
@@ -368,7 +368,7 @@ seek_enemy_targets(var_0, var_1) {
       var_6 = common_scripts\utility::_id_4461(self.origin, _id_0547::_id_408F());
 
       if(isDefined(var_6) && distance(self.origin, var_6.origin) < 96) {
-        var_6 _meth_8059(var_6.health + 1, self.origin, var_0, self, "MOD_MELEE", var_1);
+        var_6 dodamage(var_6.health + 1, self.origin, var_0, self, "MOD_MELEE", var_1);
         remove_fake_projectile();
         return;
       }
@@ -389,7 +389,7 @@ remove_fake_projectile() {
 
 delay_delete() {
   self endon("entitydeleted");
-  self _meth_8511();
+  self ghost();
   waitframe();
   self delete();
 }

@@ -352,95 +352,95 @@ _id_1E07() {
 
 cac_getweaponcharm(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "weaponSetups", var_1, "charm");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "weaponSetups", var_1, "charm");
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "charm");
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "charm");
   else
-    return self _meth_823F(var_0, "weaponSetups", var_1, "charm");
+    return self getcacplayerdata(var_0, "weaponSetups", var_1, "charm");
 }
 
 cac_getdivision(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "division");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "division");
   else if(_func_367()) {
     if(isDefined(var_1) && var_1 == common_scripts\utility::_id_46AF())
-      return self _meth_844D("customClasses", var_0, "division");
+      return self getcacplayerdataforgroup("customClasses", var_0, "division");
     else
-      return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "division");
+      return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "division");
   } else
-    return self _meth_823F(var_0, "division");
+    return self getcacplayerdata(var_0, "division");
 }
 
 cac_getweapon(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "weaponSetups", var_1, "weapon");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "weaponSetups", var_1, "weapon");
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "weapon");
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "weapon");
   else
-    return self _meth_823F(var_0, "weaponSetups", var_1, "weapon");
+    return self getcacplayerdata(var_0, "weaponSetups", var_1, "weapon");
 }
 
 cac_getweaponattachment(var_0, var_1, var_2) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "weaponSetups", var_1, "attachment", var_2);
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "weaponSetups", var_1, "attachment", var_2);
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "attachment", var_2);
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "attachment", var_2);
   else
-    return self _meth_823F(var_0, "weaponSetups", var_1, "attachment", var_2);
+    return self getcacplayerdata(var_0, "weaponSetups", var_1, "attachment", var_2);
 }
 
 cac_getweaponcamo(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "weaponSetups", var_1, "camo");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "weaponSetups", var_1, "camo");
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "camo");
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "camo");
   else
-    return self _meth_823F(var_0, "weaponSetups", var_1, "camo");
+    return self getcacplayerdata(var_0, "weaponSetups", var_1, "camo");
 }
 
 cac_getweaponcamo2(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "weaponSetups", var_1, "camo2");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "weaponSetups", var_1, "camo2");
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "camo2");
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "camo2");
   else
-    return self _meth_823F(var_0, "weaponSetups", var_1, "camo2");
+    return self getcacplayerdata(var_0, "weaponSetups", var_1, "camo2");
 }
 
 cac_getweaponcustomization(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "weaponSetups", var_1, "reticle");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "weaponSetups", var_1, "reticle");
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "reticle");
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "reticle");
   else
-    return self _meth_823F(var_0, "weaponSetups", var_1, "reticle");
+    return self getcacplayerdata(var_0, "weaponSetups", var_1, "reticle");
 }
 
-_id_1E0E(var_0, var_1) {
+cac_getweaponcustomization(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "weaponSetups", var_1, "customization");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "weaponSetups", var_1, "customization");
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "customization");
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "customization");
   else
-    return self _meth_823F(var_0, "weaponSetups", var_1, "customization");
+    return self getcacplayerdata(var_0, "weaponSetups", var_1, "customization");
 }
 
 cac_getweaponpaintjob(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "weaponSetups", var_1, "paintjob");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "weaponSetups", var_1, "paintjob");
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "paintjob");
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "weaponSetups", var_1, "paintjob");
   else
-    return self _meth_823F(var_0, "weaponSetups", var_1, "paintjob");
+    return self getcacplayerdata(var_0, "weaponSetups", var_1, "paintjob");
 }
 
 cac_getperk(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "perkSlots", var_1);
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "perkSlots", var_1);
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "perkSlots", var_1);
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "perkSlots", var_1);
   else
-    return self _meth_823F(var_0, "perkSlots", var_1);
+    return self getcacplayerdata(var_0, "perkSlots", var_1);
 }
 
 cac_getkillstreak(var_0, var_1) {
@@ -471,20 +471,20 @@ cac_getkillstreak(var_0, var_1) {
 
 cac_getequipment(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return self _meth_844D(level._id_3E0E, var_0, "equipmentSetups", var_1, "equipment");
+    return self getcacplayerdataforgroup(level._id_3E0E, var_0, "equipmentSetups", var_1, "equipment");
   else if(_func_367())
-    return self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "equipmentSetups", var_1, "equipment");
+    return self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "equipmentSetups", var_1, "equipment");
   else
-    return self _meth_823F(var_0, "equipmentSetups", var_1, "equipment");
+    return self getcacplayerdata(var_0, "equipmentSetups", var_1, "equipment");
 }
 
 cac_getequipmentextra(var_0, var_1) {
   if(isDefined(level._id_3E0E))
-    return int(self _meth_844D(level._id_3E0E, var_0, "equipmentSetups", var_1, "numExtra"));
+    return int(self getcacplayerdataforgroup(level._id_3E0E, var_0, "equipmentSetups", var_1, "numExtra"));
   else if(_func_367())
-    return int(self _meth_844D(maps\mp\_utility::_id_1E01(), var_0, "equipmentSetups", var_1, "numExtra"));
+    return int(self getcacplayerdataforgroup(maps\mp\_utility::_id_1E01(), var_0, "equipmentSetups", var_1, "numExtra"));
   else
-    return int(self _meth_823F(var_0, "equipmentSetups", var_1, "numExtra"));
+    return int(self getcacplayerdata(var_0, "equipmentSetups", var_1, "numExtra"));
 }
 
 _id_1E08(var_0) {
@@ -590,7 +590,7 @@ _id_1FA0() {
   if(isDefined(level._id_585D) && level._id_585D) {
     return;
   }
-  if(_func_1EF(self)) {
+  if(_isagent(self)) {
     return;
   }
   for(var_0 = 0; var_0 < level._id_2683.size; var_0++) {
@@ -648,20 +648,20 @@ _id_1FA1(var_0, var_1) {
 
   switch (var_10) {
     case "specialty_falldamage":
-      self._id_3A0F = _func_0AD(var_11);
+      self._id_3A0F = _float(var_11);
       break;
     case "specialty_streakshield":
-      self._id_944B = _func_0AD(var_11);
+      self._id_944B = _float(var_11);
       break;
     case "specialty_streakdamager":
-      self._id_2998 = _func_0AD(var_11);
+      self._id_2998 = _float(var_11);
       break;
     case "specialty_extraammo":
-      self._id_9AAE = _func_0AD(var_11);
+      self._id_9AAE = _float(var_11);
       break;
     case "specialty_paint":
       maps\mp\_utility::giveperk("specialty_paint_pro");
-      self._id_90DA = _func_0AD(var_11);
+      self._id_90DA = _float(var_11);
       break;
     default:
       break;
@@ -681,18 +681,18 @@ _id_21B9() {
       var_6 = level._id_2681[var_2];
 
       if(isDefined(var_6)) {
-        var_7 = _func_1B1("mp/characterGearSetTable.csv", var_6, var_5);
+        var_7 = _tablelookuprownum("mp/characterGearSetTable.csv", var_6, var_5);
 
         while(isDefined(var_7) && var_7 >= 0) {
-          var_8 = _func_1AE("mp/characterGearSetTable.csv", var_7, 0);
+          var_8 = _tablelookupbyrow("mp/characterGearSetTable.csv", var_7, 0);
 
           if(!isDefined(var_0[var_8])) {
-            var_9 = _func_1AE("mp/characterGearSetTable.csv", var_7, 4);
-            var_10 = _func_1AE("mp/characterGearSetTable.csv", var_7, 5);
-            var_11 = _func_1AE("mp/characterGearSetTable.csv", var_7, 7);
+            var_9 = _tablelookupbyrow("mp/characterGearSetTable.csv", var_7, 4);
+            var_10 = _tablelookupbyrow("mp/characterGearSetTable.csv", var_7, 5);
+            var_11 = _tablelookupbyrow("mp/characterGearSetTable.csv", var_7, 7);
             var_12 = [];
             var_12["bonusType"] = var_9;
-            var_12["bonus"] = _func_0AD(var_10);
+            var_12["bonus"] = _float(var_10);
             var_12["amtInSet"] = var_11;
             var_12["foundAmt"] = 1;
             var_0[var_8] = var_12;
@@ -702,7 +702,7 @@ _id_21B9() {
           var_7 = var_7 - 1;
 
           if(var_7 >= 0)
-            var_7 = _func_1B1("mp/characterGearSetTable.csv", var_6, var_5, var_7);
+            var_7 = _tablelookuprownum("mp/characterGearSetTable.csv", var_6, var_5, var_7);
         }
       }
     }
@@ -925,39 +925,39 @@ cloneloadout() {
 
   if(var_0 != "none") {
     var_9 = maps\mp\_utility::getclassindex(var_1);
-    var_4 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "division");
-    var_10 = maps\mp\_utility::_id_473C(_func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "weapon"), 0);
+    var_4 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "division");
+    var_10 = maps\mp\_utility::_id_473C(_getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "weapon"), 0);
 
     for(var_11 = 0; var_11 < 6; var_11++)
-      var_7[var_11] = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "attachment", var_11);
+      var_7[var_11] = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "attachment", var_11);
 
-    var_12 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "camo");
-    var_13 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "camo2");
-    var_14 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "reticle");
-    var_15 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "customization");
-    var_16 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "paintjob");
-    var_17 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "charm");
-    var_18 = maps\mp\_utility::_id_473C(_func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "weapon"), 0);
+    var_12 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "camo");
+    var_13 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "camo2");
+    var_14 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "reticle");
+    var_15 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "customization");
+    var_16 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "paintjob");
+    var_17 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 0, "charm");
+    var_18 = maps\mp\_utility::_id_473C(_getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "weapon"), 0);
 
     for(var_11 = 0; var_11 < 6; var_11++)
-      var_8[var_11] = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "attachment", var_11);
+      var_8[var_11] = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "attachment", var_11);
 
-    var_19 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "camo");
-    var_20 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "camo2");
-    var_21 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "reticle");
-    var_22 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "customization");
-    var_23 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "paintjob");
-    var_24 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "charm");
-    var_25 = maps\mp\_utility::_id_44CE(_func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "equipmentSetups", 0, "equipment"), 0);
-    var_26 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "equipmentSetups", 0, "numExtra");
-    var_27 = maps\mp\_utility::_id_44CE(_func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "equipmentSetups", 1, "equipment"), 0);
-    var_28 = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "equipmentSetups", 1, "numExtra");
+    var_19 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "camo");
+    var_20 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "camo2");
+    var_21 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "reticle");
+    var_22 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "customization");
+    var_23 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "paintjob");
+    var_24 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "weaponSetups", 1, "charm");
+    var_25 = maps\mp\_utility::_id_44CE(_getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "equipmentSetups", 0, "equipment"), 0);
+    var_26 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "equipmentSetups", 0, "numExtra");
+    var_27 = maps\mp\_utility::_id_44CE(_getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "equipmentSetups", 1, "equipment"), 0);
+    var_28 = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "equipmentSetups", 1, "numExtra");
 
     for(var_11 = 0; var_11 < 9; var_11++)
-      var_5[var_11] = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "perkSlots", var_11);
+      var_5[var_11] = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "perkSlots", var_11);
 
     for(var_11 = 0; var_11 < 4; var_11++)
-      var_6[var_11] = _func_132("defaultClasses", var_0, "defaultClass", var_9, "class", "assaultStreaks", var_11, "streak");
+      var_6[var_11] = _getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_9, "class", "assaultStreaks", var_11, "streak");
   } else if(issubstr(var_1, "custom")) {
     var_29 = maps\mp\_utility::getclassindex(var_1);
     var_4 = cac_getdivision(var_29);
@@ -969,7 +969,7 @@ cloneloadout() {
     var_12 = cac_getweaponcamo(var_29, 0);
     var_13 = cac_getweaponcamo2(var_29, 0);
     var_14 = cac_getweaponcustomization(var_29, 0);
-    var_15 = _id_1E0E(var_29, 0);
+    var_15 = cac_getweaponcustomization(var_29, 0);
     var_16 = cac_getweaponpaintjob(var_29, 0);
     var_17 = cac_getweaponcharm(var_29, 0);
     var_18 = maps\mp\_utility::_id_473C(cac_getweapon(var_29, 1), 0);
@@ -980,7 +980,7 @@ cloneloadout() {
     var_19 = cac_getweaponcamo(var_29, 1);
     var_20 = cac_getweaponcamo2(var_29, 1);
     var_21 = cac_getweaponcustomization(var_29, 1);
-    var_22 = _id_1E0E(var_29, 1);
+    var_22 = cac_getweaponcustomization(var_29, 1);
     var_23 = cac_getweaponpaintjob(var_29, 1);
     var_24 = cac_getweaponcharm(var_29, 1);
     var_25 = maps\mp\_utility::_id_44CE(cac_getequipment(var_29, 0), 0);
@@ -1366,8 +1366,8 @@ giveloadout(var_0, var_1, var_2, var_3, var_4) {
     self._id_231B = var_50;
     self._id_985A = var_26;
     var_22 = 20;
-    var_18 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "division");
-    var_44 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "weapon");
+    var_18 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "division");
+    var_44 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "weapon");
 
     if(var_44 == 0) {
       var_44 = 17113088;
@@ -1376,36 +1376,36 @@ giveloadout(var_0, var_1, var_2, var_3, var_4) {
         var_20[var_13] = 0;
     } else {
       for(var_13 = 0; var_13 < 6; var_13++)
-        var_20[var_13] = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "attachment", var_13);
+        var_20[var_13] = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "attachment", var_13);
     }
 
-    var_29 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "camo");
-    var_30 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "camo2");
-    var_31 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "reticle");
-    var_10 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "customization");
-    var_32 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "paintjob");
-    var_33 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "charm");
-    var_51 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "weapon");
+    var_29 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "camo");
+    var_30 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "camo2");
+    var_31 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "reticle");
+    var_10 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "customization");
+    var_32 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "paintjob");
+    var_33 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 0, "charm");
+    var_51 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "weapon");
 
     for(var_13 = 0; var_13 < 6; var_13++)
-      var_21[var_13] = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "attachment", var_13);
+      var_21[var_13] = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "attachment", var_13);
 
-    var_35 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "camo");
-    var_36 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "camo2");
-    var_37 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "reticle");
-    var_11 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "customization");
-    var_38 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "paintjob");
-    var_39 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "charm");
-    var_40 = maps\mp\_utility::_id_44CE(_func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "equipmentSetups", 0, "equipment"), 0);
-    var_41 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "equipmentSetups", 0, "numExtra");
-    var_42 = maps\mp\_utility::_id_44CE(_func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "equipmentSetups", 1, "equipment"), 0);
-    var_43 = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "equipmentSetups", 1, "numExtra");
+    var_35 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "camo");
+    var_36 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "camo2");
+    var_37 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "reticle");
+    var_11 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "customization");
+    var_38 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "paintjob");
+    var_39 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "weaponSetups", 1, "charm");
+    var_40 = maps\mp\_utility::_id_44CE(_getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "equipmentSetups", 0, "equipment"), 0);
+    var_41 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "equipmentSetups", 0, "numExtra");
+    var_42 = maps\mp\_utility::_id_44CE(_getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "equipmentSetups", 1, "equipment"), 0);
+    var_43 = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "equipmentSetups", 1, "numExtra");
 
     for(var_13 = 0; var_13 < 9; var_13++)
-      var_19[var_13] = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "perkSlots", var_13);
+      var_19[var_13] = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "perkSlots", var_13);
 
     for(var_13 = 0; var_13 < 4; var_13++)
-      var_12[var_13] = _func_132("defaultClasses", var_26, "defaultClass", var_50, "class", "assaultStreaks", var_13, "streak");
+      var_12[var_13] = _getmatchrulesdata("defaultClasses", var_26, "defaultClass", var_50, "class", "assaultStreaks", var_13, "streak");
 
     if((var_44 == 16818176 || var_44 == 0) && var_51 != 0) {
       var_44 = var_51;
@@ -1448,7 +1448,7 @@ giveloadout(var_0, var_1, var_2, var_3, var_4) {
     var_29 = cac_getweaponcamo(var_9, 0);
     var_30 = cac_getweaponcamo2(var_9, 0);
     var_31 = cac_getweaponcustomization(var_9, 0);
-    var_10 = _id_1E0E(var_9, 0);
+    var_10 = cac_getweaponcustomization(var_9, 0);
     var_32 = cac_getweaponpaintjob(var_9, 0);
     var_33 = cac_getweaponcharm(var_9, 0);
     var_34 = maps\mp\_utility::_id_473C(cac_getweapon(var_9, 1), 0);
@@ -1459,7 +1459,7 @@ giveloadout(var_0, var_1, var_2, var_3, var_4) {
     var_35 = cac_getweaponcamo(var_9, 1);
     var_36 = cac_getweaponcamo2(var_9, 1);
     var_37 = cac_getweaponcustomization(var_9, 1);
-    var_11 = _id_1E0E(var_9, 1);
+    var_11 = cac_getweaponcustomization(var_9, 1);
     var_38 = cac_getweaponpaintjob(var_9, 1);
     var_39 = cac_getweaponcharm(var_9, 1);
     var_23 = maps\mp\_utility::_id_473C(_id_1E07(), 0);
@@ -1822,7 +1822,7 @@ giveloadout(var_0, var_1, var_2, var_3, var_4) {
       var_41 = 0;
     } else {
       if(!_id_04CA::_id_569B("Lethal3", var_18))
-        var_41 = _func_0AF(var_41, 1);
+        var_41 = _min(var_41, 1);
 
       if(!_id_04CA::_id_569B("Lethal2", var_18))
         var_41 = 0;
@@ -1833,7 +1833,7 @@ giveloadout(var_0, var_1, var_2, var_3, var_4) {
       var_43 = 0;
     } else {
       if(!_id_04CA::_id_569B("Tactical3", var_18))
-        var_43 = _func_0AF(var_43, 1);
+        var_43 = _min(var_43, 1);
 
       if(!_id_04CA::_id_569B("Tactical2", var_18))
         var_43 = 0;
@@ -2271,21 +2271,21 @@ giveloadout(var_0, var_1, var_2, var_3, var_4) {
   var_7.primarycharmguid = var_33;
   var_83 = maps\mp\_utility::_id_4737(var_7._id_7709);
   var_7._id_76F8 = _id_1D66(var_83, var_7._id_76F3[0], var_7._id_76F3[1], var_7._id_76F3[2], var_7._id_76F3[3], var_7._id_76F3[4], var_7._id_76F3[5], maps\mp\_utility::_id_472D(var_7._id_7709), var_7._id_76F5, var_7._id_76F4, var_7._id_7700, var_7._id_0144, var_5, var_7._id_0079);
-  var_7._id_835D = var_34;
-  var_7._id_8353[0] = var_21[0];
-  var_7._id_8353[1] = var_21[1];
-  var_7._id_8353[2] = var_21[2];
-  var_7._id_8353[3] = var_21[3];
-  var_7._id_8353[4] = 0;
-  var_7._id_8353[5] = var_80;
-  var_7._id_8355 = var_35;
-  var_7._id_8354 = var_36;
-  var_7._id_8359 = var_37;
+  var_7.botgetscriptgoalradius = var_34;
+  var_7.botsetflag[0] = var_21[0];
+  var_7.botsetflag[1] = var_21[1];
+  var_7.botsetflag[2] = var_21[2];
+  var_7.botsetflag[3] = var_21[3];
+  var_7.botsetflag[4] = 0;
+  var_7.botsetflag[5] = var_80;
+  var_7.botsetscriptmove = var_35;
+  var_7.botsetstance = var_36;
+  var_7.botsetscriptenemy = var_37;
   var_7._id_0176 = var_11;
   var_7.secondarypaintjobid = var_38;
   var_7.secondarycharmguid = var_39;
-  var_83 = maps\mp\_utility::_id_4737(var_7._id_835D);
-  var_7._id_8358 = _id_1D66(var_83, var_7._id_8353[0], var_7._id_8353[1], var_7._id_8353[2], var_7._id_8353[3], var_7._id_8353[4], var_7._id_8353[5], maps\mp\_utility::_id_472D(var_7._id_835D), var_7._id_8355, var_7._id_8354, var_7._id_8359, var_7._id_0176, var_5, var_7._id_0079);
+  var_83 = maps\mp\_utility::_id_4737(var_7.botgetscriptgoalradius);
+  var_7.botclearscriptgoal = _id_1D66(var_83, var_7.botsetflag[0], var_7.botsetflag[1], var_7.botsetflag[2], var_7.botsetflag[3], var_7.botsetflag[4], var_7.botsetflag[5], maps\mp\_utility::_id_472D(var_7.botgetscriptgoalradius), var_7.botsetscriptmove, var_7.botsetstance, var_7.botsetscriptenemy, var_7._id_0176, var_5, var_7._id_0079);
   var_7._id_60FC = var_23;
   var_7._id_509D = var_24;
   var_7._id_37FE = var_40;
@@ -2361,7 +2361,7 @@ _id_4790(var_0, var_1, var_2, var_3) {
   self._id_5DEE = giveloadout(var_0, var_1, var_2, var_3);
   _id_09A7(self._id_5DEE);
 
-  if(!(_func_367() || maps\mp\gametypes\_hud_util::_id_5527() || level._id_53C7) && !(_func_1EF(self) || isbot(self))) {
+  if(!(_func_367() || maps\mp\gametypes\_hud_util::_id_5527() || level._id_53C7) && !(_isagent(self) || isbot(self))) {
     if(isDefined(level._id_585D) && level._id_585D) {
       for(var_4 = 0; var_4 < self._id_5DEE._id_6F69.size; var_4++) {
         if(var_4 < 9)
@@ -2388,7 +2388,7 @@ _id_5E9B() {
       if(self._id_5DEE.class == var_4) {
         self._id_2943 = var_2;
         self._id_294A = self._id_5DEE._id_7709.guid;
-        self._id_294C = self._id_5DEE._id_835D.guid;
+        self._id_294C = self._id_5DEE.botgetscriptgoalradius.guid;
         return;
       }
     } else {
@@ -2420,16 +2420,16 @@ _id_5E9B() {
   if(isDefined(self._id_5DEE.primarycharmguid))
     setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 0, "charm", self._id_5DEE.primarycharmguid);
 
-  setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "weapon", self._id_5DEE._id_835D.guid);
+  setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "weapon", self._id_5DEE.botgetscriptgoalradius.guid);
 
-  for(var_5 = 0; var_5 < self._id_5DEE._id_8353.size; var_5++) {
+  for(var_5 = 0; var_5 < self._id_5DEE.botsetflag.size; var_5++) {
     if(var_5 < 6)
-      setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "attachment", var_5, self._id_5DEE._id_8353[var_5]);
+      setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "attachment", var_5, self._id_5DEE.botsetflag[var_5]);
   }
 
-  setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "camo", self._id_5DEE._id_8355);
-  setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "camo2", self._id_5DEE._id_8354);
-  setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "reticle", self._id_5DEE._id_8359);
+  setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "camo", self._id_5DEE.botsetscriptmove);
+  setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "camo2", self._id_5DEE.botsetstance);
+  setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "reticle", self._id_5DEE.botsetscriptenemy);
 
   if(isDefined(self._id_5DEE._id_0176))
     setmatchdata("players", self.clientid, "loadouts", var_0, "weaponSetups", 1, "customization", self._id_5DEE._id_0176);
@@ -2461,7 +2461,7 @@ _id_5E9B() {
     setmatchdata("players", self.clientid, "killstreak_guids", 3, self._id_5DEE._id_5A65);
 
   self._id_294A = self._id_5DEE._id_7709.guid;
-  self._id_294C = self._id_5DEE._id_835D.guid;
+  self._id_294C = self._id_5DEE.botgetscriptgoalradius.guid;
 }
 
 _id_4560() {
@@ -2485,16 +2485,16 @@ _id_4560() {
   var_0._id_7700 = 0;
   var_0._id_0144 = 0;
   var_0._id_76F8 = _id_1D66(self._id_01D0, var_0._id_76F3[0], var_0._id_76F3[1], var_0._id_76F3[2], var_0._id_76F3[3], var_0._id_76F3[4], var_0._id_76F3[5], 0, var_0._id_76F5, var_0._id_76F4, var_0._id_7700, var_0._id_0144, self, self._id_0079);
-  var_0._id_835D = maps\mp\_utility::_id_473D(self._id_8C3C);
+  var_0.botgetscriptgoalradius = maps\mp\_utility::_id_473D(self._id_8C3C);
 
   for(var_1 = 0; var_1 < 6; var_1++)
     var_0._id_5E02[var_1] = 0;
 
-  var_0._id_8355 = 0;
-  var_0._id_8354 = 0;
-  var_0._id_8359 = 0;
+  var_0.botsetscriptmove = 0;
+  var_0.botsetstance = 0;
+  var_0.botsetscriptenemy = 0;
   var_0._id_0176 = 0;
-  var_0._id_8358 = _id_1D66(self._id_8C3C, var_0._id_5E02[0], var_0._id_5E02[1], var_0._id_5E02[2], var_0._id_5E02[3], var_0._id_5E02[4], var_0._id_5E02[5], 0, var_0._id_8355, var_0._id_8354, var_0._id_8359, var_0._id_0176, self, self._id_0079);
+  var_0.botclearscriptgoal = _id_1D66(self._id_8C3C, var_0._id_5E02[0], var_0._id_5E02[1], var_0._id_5E02[2], var_0._id_5E02[3], var_0._id_5E02[4], var_0._id_5E02[5], 0, var_0.botsetscriptmove, var_0.botsetstance, var_0.botsetscriptenemy, var_0._id_0176, self, self._id_0079);
   var_0._id_37FE = maps\mp\_utility::_id_44CF(self._id_00B4);
   var_0._id_37FA = 0;
   var_0._id_69AD = maps\mp\_utility::_id_44CE(0, 0);
@@ -2571,7 +2571,7 @@ _id_0F35() {
   if(!maps\mp\gametypes\_hud_util::_id_5527())
     _id_04CB::_id_A050();
 
-  self _meth_8315();
+  self takeallweapons();
   maps\mp\_utility::_id_05E4();
 
   if(!isDefined(self._id_5097) || !self._id_5097)
@@ -2591,39 +2591,39 @@ _id_0F35() {
   self.loadoutprimarypaintjobid = var_0.primarypaintjobid;
   self._id_5DFF = var_0._id_7700;
   self.loadoutprimarycharmguid = var_0.primarycharmguid;
-  self._id_5E08 = var_0._id_835D;
-  self._id_5E06 = var_0._id_8358;
-  self._id_5E04 = var_0._id_8355;
-  self._id_5E03 = var_0._id_8354;
+  self._id_5E08 = var_0.botgetscriptgoalradius;
+  self._id_5E06 = var_0.botclearscriptgoal;
+  self._id_5E04 = var_0.botsetscriptmove;
+  self._id_5E03 = var_0.botsetstance;
   self._id_5E05 = var_0._id_0176;
   self.loadoutsecondarypaintjobid = var_0.secondarypaintjobid;
   self.loadoutsecondarycharmguid = var_0.secondarycharmguid;
-  self._id_5E07 = var_0._id_8359;
+  self._id_5E07 = var_0.botsetscriptenemy;
   maps\mp\_utility::_id_06D4(var_12, var_0._id_0079);
-  self _meth_82FF("ui_show_division_sniper_ability_prompt", 0);
+  self setclientomnvar("ui_show_division_sniper_ability_prompt", 0);
   var_13 = 0;
 
   if(!isDefined(level._id_585D) || !level._id_585D) {
-    self _meth_82FF("ui_show_division_shotgun_ability_prompt", 0);
-    self _meth_82FF("ui_show_division_smg_ability_prompt", 0);
-    self _meth_82FF("ui_show_division_rifle_ability_prompt", 0);
-    self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
-    self _meth_82FF("ui_show_rifle_grenade_ability_prompt", 0);
-    self _meth_82FF("ui_show_division_resistance_ability_prompt", 0);
-    self _meth_82FF("ui_show_shield_charge_ability_prompt", 0);
-    self _meth_82FF("ui_show_zk383_smg_altmode_prompt", 0);
-    self _meth_82FF("ui_show_paratrooper_insert_descent_prompt", 0);
+    self setclientomnvar("ui_show_division_shotgun_ability_prompt", 0);
+    self setclientomnvar("ui_show_division_smg_ability_prompt", 0);
+    self setclientomnvar("ui_show_division_rifle_ability_prompt", 0);
+    self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
+    self setclientomnvar("ui_show_rifle_grenade_ability_prompt", 0);
+    self setclientomnvar("ui_show_division_resistance_ability_prompt", 0);
+    self setclientomnvar("ui_show_shield_charge_ability_prompt", 0);
+    self setclientomnvar("ui_show_zk383_smg_altmode_prompt", 0);
+    self setclientomnvar("ui_show_paratrooper_insert_descent_prompt", 0);
 
     if(self _meth_85EC() && (maps\mp\_utility::getweaponclass(self._id_5DFE) == "weapon_shotgun" && issubstr(self._id_5DFE, "dragon_breath") || maps\mp\_utility::getweaponclass(self._id_5E06) == "weapon_shotgun" && issubstr(self._id_5E06, "dragon_breath"))) {
-      self _meth_82FF("ui_show_division_shotgun_ability_prompt", 1);
+      self setclientomnvar("ui_show_division_shotgun_ability_prompt", 1);
       var_13 = 1;
     } else if(self _meth_85EC() && (maps\mp\_utility::getweaponclass(self._id_5DFE) == "weapon_smg" && issubstr(self._id_5DFE, "suppressor") || maps\mp\_utility::getweaponclass(self._id_5E06) == "weapon_smg" && issubstr(self._id_5E06, "suppressor"))) {
-      self _meth_82FF("ui_show_division_smg_ability_prompt", 1);
+      self setclientomnvar("ui_show_division_smg_ability_prompt", 1);
       var_13 = 1;
     }
 
     if(self _meth_85EC() && (maps\mp\_utility::getweaponclass(self._id_5DFE) == "weapon_assault" && issubstr(self._id_5DFE, "grenade_launcher") || maps\mp\_utility::getweaponclass(self._id_5E06) == "weapon_assault" && issubstr(self._id_5E06, "grenade_launcher"))) {
-      self _meth_82FF("ui_show_rifle_grenade_ability_prompt", 1);
+      self setclientomnvar("ui_show_rifle_grenade_ability_prompt", 1);
       var_13 = 1;
     }
 
@@ -2649,12 +2649,12 @@ _id_0F35() {
     self[[var_6]](var_15);
 
   var_0._id_60EE = var_15;
-  var_16 = var_0._id_8358;
+  var_16 = var_0.botclearscriptgoal;
 
   if(var_16 != "none")
     self[[var_6]](var_16, undefined, var_0.secondarypaintjobid, var_0.secondarycharmguid);
 
-  if(level._id_2EF3)
+  if(level.diehardmode)
     maps\mp\_utility::giveperk("specialty_pistoldeath");
 
   _id_5DF1(var_0._id_37FE, var_0._id_6F69);
@@ -2685,10 +2685,10 @@ _id_0F35() {
   }
 
   var_18 = maps\mp\_utility::_id_44CD(var_0._id_37FE);
-  self _meth_8349(var_18);
+  self setlethalweapon(var_18);
   self._id_6088 = 1;
 
-  if(var_0._id_37FE.guid != 0 && self _meth_8319(var_18)) {
+  if(var_0._id_37FE.guid != 0 && self hasweapon(var_18)) {
     var_19 = self getweaponammoclip(var_18);
     self setweaponammoclip(var_18, var_19 + 1);
   } else
@@ -2716,10 +2716,10 @@ _id_0F35() {
   var_20 = maps\mp\_utility::_id_922B(var_20);
   self[[var_6]](var_20, undefined, var_0.primarypaintjobid, var_0.primarycharmguid);
 
-  if(!_func_0C1(self))
+  if(!_isai(self))
     self switchtoweapon(var_20);
 
-  if(var_20 == "riotshield_mp" && level._id_5139)
+  if(var_20 == "riotshield_mp" && level.ingraceperiod)
     self notify("weapon_change", "riotshield_mp");
 
   if(var_0._id_870C) {
@@ -2796,7 +2796,7 @@ _id_0F35() {
     var_0._id_69AD.guid = 17133568;
 
   self.primaryweapon = var_20;
-  self._id_835A = var_16;
+  self.botclearscriptenemy = var_16;
   self._id_60FA = var_15;
 
   if(var_0._id_23D9) {
@@ -2805,7 +2805,7 @@ _id_0F35() {
   }
 
   self._id_57D6 = weaponclass(self.primaryweapon) == "sniper";
-  maps\mp\_utility::_id_861B();
+  maps\mp\_utility::scalevolume();
   var_25 = var_0._id_5A62;
   var_26 = var_0._id_5A63;
   var_27 = var_0._id_5A64;
@@ -2879,7 +2879,7 @@ _id_0F35() {
       var_34 = 0;
     else if(!maps\mp\_utility::_id_0F5C())
       var_34 = 0;
-    else if(_func_1EF(self))
+    else if(_isagent(self))
       var_34 = 0;
     else if(!isDefined(self.lastclass))
       var_34 = 0;
@@ -2928,7 +2928,7 @@ _id_0F35() {
       }
     }
 
-    self _meth_82FF("ui_killstreak_scorestreak_switch", var_10 != var_32 || var_8 != var_30);
+    self setclientomnvar("ui_killstreak_scorestreak_switch", var_10 != var_32 || var_8 != var_30);
     self._id_5DF6 = var_0._id_59DA;
   }
 
@@ -3004,9 +3004,9 @@ _id_0F35() {
           self._id_267E = _id_1F95();
 
         _id_21B9();
-      } else if(_func_1EF(self) && self._id_0A4B == "player")
+      } else if(_isagent(self) && self._id_0A4B == "player")
         self._id_267E = _id_0510::_id_448C();
-    } else if(isPlayer(self) && !_func_0C1(self)) {
+    } else if(isPlayer(self) && !_isai(self)) {
       if(isDefined(self._id_0079) && self._id_0079 != 5) {
         if(!_func_3AF() && !maps\mp\_utility::_id_56B1()) {
           var_42 = _id_1F93(self._id_0079, var_40);
@@ -3030,16 +3030,16 @@ _id_0F35() {
       _id_21B9();
     }
 
-    if(!_func_1EF(self) && !_id_0510::_id_A27D(self._id_267E, var_40)) {
-      if(isDefined(self._id_83F4) && _id_0510::_id_A27D(self._id_83F4, var_40))
-        self._id_267E = self._id_83F4;
+    if(!_isagent(self) && !_id_0510::_id_A27D(self._id_267E, var_40)) {
+      if(isDefined(self.setnameplatematerial) && _id_0510::_id_A27D(self.setnameplatematerial, var_40))
+        self._id_267E = self.setnameplatematerial;
       else {
         if(var_40 == "axis")
           self._id_267E = _id_0510::_id_4430();
         else
           self._id_267E = _id_0510::_id_448C();
 
-        self._id_83F4 = self._id_267E;
+        self.setnameplatematerial = self._id_267E;
       }
     }
 
@@ -3063,7 +3063,7 @@ _id_0F35() {
   _id_477C(var_0);
 
   if(!maps\mp\gametypes\_hud_util::_id_5527())
-    thread _id_04CB::_id_8622(self._id_0079, var_20);
+    thread _id_04CB::setclienttriggeraudiozone(self._id_0079, var_20);
 
   self notify("changed_kit");
   self notify("applyLoadout");
@@ -3096,7 +3096,7 @@ _id_4585(var_0) {
 }
 
 _id_5EA3() {
-  if(_func_367() || _func_1EF(self)) {
+  if(_func_367() || _isagent(self)) {
     return;
   }
   if(!isDefined(self._id_2684)) {
@@ -3268,7 +3268,7 @@ _id_774F(var_0, var_1, var_2) {
   if(var_3 > 1)
     var_1 = common_scripts\utility::alphabetize(var_1);
 
-  var_4 = _func_060(var_0);
+  var_4 = _getweaponattachmentsbasenames(var_0);
   var_5 = [];
 
   foreach(var_7 in var_1) {
@@ -3291,7 +3291,7 @@ _id_774F(var_0, var_1, var_2) {
 }
 
 _id_0F72(var_0, var_1) {
-  if(isDefined(var_1) && _func_031(var_1) && var_1 != "none" && !common_scripts\utility::_id_0F79(var_0, var_1))
+  if(isDefined(var_1) && _isstring(var_1) && var_1 != "none" && !common_scripts\utility::_id_0F79(var_0, var_1))
     var_0[var_0.size] = var_1;
 
   return var_0;
@@ -3634,7 +3634,7 @@ onplayerconnecting() {
     var_0.lastclass = var_0.pers["lastClass"];
     var_0.detectexplosives = 0;
     var_0.bombsquadicons = [];
-    var_0._id_1906 = [];
+    var_0.bombsquadids = [];
   }
 }
 
@@ -3652,10 +3652,10 @@ _id_10E3() {
   if(!isDefined(level._id_7618)) {
     level._id_7618 = [];
     level._id_7619 = [];
-    var_0 = _func_27B(level._id_761A);
+    var_0 = _tablegetcolumncount(level._id_761A);
 
     for(var_1 = 1; var_1 < var_0; var_1++) {
-      var_2 = _func_1AE(level._id_761A, 0, var_1);
+      var_2 = _tablelookupbyrow(level._id_761A, 0, var_1);
 
       if(isDefined(level._id_7618[var_2])) {
         level._id_7618[var_2][level._id_7618[var_2].size] = var_1 - 1;
@@ -3681,7 +3681,7 @@ _id_10E3() {
       var_6 = level._id_7619[var_2];
 
     var_7 = 0;
-    var_8 = _func_0A4(0, var_5.size);
+    var_8 = _randomintrange(0, var_5.size);
 
     if(isDefined(var_5[var_8]))
       var_7 = var_5[var_8];
@@ -4427,7 +4427,7 @@ _id_09A7(var_0) {
   if(!getdvarint("1936") || maps\mp\_utility::_id_551F()) {
     return;
   }
-  if(!_func_1EF(self)) {
+  if(!_isagent(self)) {
     if(isDefined(level._id_446F))
       var_0._id_7ED2 = self[[level._id_446F]]();
     else {

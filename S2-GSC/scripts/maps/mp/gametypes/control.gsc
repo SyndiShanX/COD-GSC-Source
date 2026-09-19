@@ -11,7 +11,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -67,14 +67,14 @@ main() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653();
-  _func_035("scr_control_roundlimit", 0);
+  _setdynamicdvar("scr_control_roundlimit", 0);
   maps\mp\_utility::registerroundlimitdvar("control", 0);
-  _func_035("scr_control_winlimit", 2);
+  _setdynamicdvar("scr_control_winlimit", 2);
   maps\mp\_utility::registerwinlimitdvar("control", 1);
-  _func_035("scr_control_halftime", 0);
+  _setdynamicdvar("scr_control_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("control", 0);
-  _func_035("scr_dom_allowNeutral", 0);
-  _func_035("scr_dom_halftimeswitchsides", 0);
+  _setdynamicdvar("scr_dom_allowNeutral", 0);
+  _setdynamicdvar("scr_dom_halftimeswitchsides", 0);
 }
 
 _id_6BAF() {
@@ -89,11 +89,11 @@ _id_6BAF() {
   }
 
   if(game["status"] == "halftime")
-    _func_032("ui_current_round", 2);
+    _setomnvar("ui_current_round", 2);
   else if(game["status"] == "overtime")
-    _func_032("ui_current_round", 3);
+    _setomnvar("ui_current_round", 3);
   else if(game["status"] == "overtime_halftime")
-    _func_032("ui_current_round", 4);
+    _setomnvar("ui_current_round", 4);
 
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DOM");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DOM");
@@ -108,14 +108,14 @@ _id_6BAF() {
 
   maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
   maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
   _id_5353();
   _id_7651();
   var_2[0] = "control";
   _id_04D1::main(var_2);
-  _func_032("ui_broadcaster_game_mode_status_1", 0);
-  _func_032("ui_broadcaster_game_mode_status_2", 0);
-  _func_032("ui_broadcaster_game_mode_status_3", 0);
+  _setomnvar("ui_broadcaster_game_mode_status_1", 0);
+  _setomnvar("ui_broadcaster_game_mode_status_2", 0);
+  _setomnvar("ui_broadcaster_game_mode_status_3", 0);
   level thread _id_3211();
   level thread _id_A109();
   level thread _id_A160();
@@ -190,10 +190,10 @@ _id_A0EA() {
 
 _id_7651() {
   game["neutral"] = "neutral";
-  level._id_188C[_func_0EE("allieschar")]["friendly"] = loadfx("vfx/unique/vfx_marker_dom");
-  level._id_188C[_func_0EE("allieschar")]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_red");
-  level._id_188C[_func_0EE("axischar")]["friendly"] = loadfx("vfx/unique/vfx_marker_dom");
-  level._id_188C[_func_0EE("axischar")]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_red");
+  level._id_188C[_getmapcustom("allieschar")]["friendly"] = loadfx("vfx/unique/vfx_marker_dom");
+  level._id_188C[_getmapcustom("allieschar")]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_red");
+  level._id_188C[_getmapcustom("axischar")]["friendly"] = loadfx("vfx/unique/vfx_marker_dom");
+  level._id_188C[_getmapcustom("axischar")]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_red");
   level._id_188C["neutral"]["friendly"] = loadfx("vfx/unique/vfx_marker_dom_white");
   level._id_188C["neutral"]["enemy"] = loadfx("vfx/unique/vfx_marker_dom_white");
 }
@@ -228,8 +228,8 @@ _id_3211() {
   var_1 = getEntArray("control_zone", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3._id_ACB1 = _func_18E(var_3.target, "targetname");
-    var_3._id_ACB1 _meth_805C();
+    var_3._id_ACB1 = _getent(var_3.target, "targetname");
+    var_3._id_ACB1 hide();
   }
 
   if(!isDefined(game["controlPointOrder"])) {
@@ -239,7 +239,7 @@ _id_3211() {
   }
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
-    if(var_1[var_5]._id_81E8 == game["controlPointOrder"][game["controlRoundNum"]]) {
+    if(var_1[var_5].shootblank == game["controlPointOrder"][game["controlRoundNum"]]) {
       level._id_2609 = var_1[var_5];
       level._id_AC7C = level._id_2609;
       break;
@@ -248,23 +248,23 @@ _id_3211() {
 
   game["controlRoundNum"]++;
   level._id_3211 = [];
-  var_6[0] = _func_18E(level._id_2609._id_ACB1.target, "targetname");
-  var_6[1] = _func_18E(var_6[0].target, "targetname");
-  var_6[1] _meth_8276("ctf_flag_flap");
+  var_6[0] = _getent(level._id_2609._id_ACB1.target, "targetname");
+  var_6[1] = _getent(var_6[0].target, "targetname");
+  var_6[1] scriptmodelplayanim("ctf_flag_flap");
   var_6[0].origin = var_6[0].origin + (0, 0, -10000);
   var_6[1].origin = var_6[1].origin + (0, 0, -10000);
-  level._id_2609._id_ACB1 _meth_805B();
+  level._id_2609._id_ACB1 show();
   var_7 = _id_04D1::_id_2837("neutral", level._id_2609, var_6, (0, 0, 0));
   var_7 _id_04D1::_id_8A5A(level._id_2606);
   var_7 _id_04D1::_id_8A59(&"MP_SECURING_POSITION");
   var_8 = var_7 _id_04D1::_id_454C();
   var_7.label = var_8;
-  var_7 _id_04D1::_id_860A("friendly", level._id_500A);
-  var_7 _id_04D1::_id_860E("friendly", level._id_500B);
-  var_7 _id_04D1::_id_860A("enemy", level._id_501A);
-  var_7 _id_04D1::_id_860E("enemy", level._id_501B);
-  var_7 _id_04D1::_id_860A("broadcaster", "waypoint_esports_dom_white" + var_8);
-  var_7 _id_04D1::_id_860E("broadcaster", "waypoint_esports_dom_white" + var_8, 3);
+  var_7 _id_04D1::set2dicon("friendly", level._id_500A);
+  var_7 _id_04D1::playsoundtoteam("friendly", level._id_500B);
+  var_7 _id_04D1::set2dicon("enemy", level._id_501A);
+  var_7 _id_04D1::playsoundtoteam("enemy", level._id_501B);
+  var_7 _id_04D1::set2dicon("broadcaster", "waypoint_esports_dom_white" + var_8);
+  var_7 _id_04D1::playsoundtoteam("broadcaster", "waypoint_esports_dom_white" + var_8, 3);
   var_7 _id_04D1::_id_8A60("any");
   var_7._id_6BBF = ::_id_6BBF;
   var_7._id_6ABC = ::_id_6ABC;
@@ -295,8 +295,8 @@ _id_3211() {
   var_15 = gettime();
 
   for(var_16 = 0; var_16 < level._id_3211.size; var_16++) {
-    _func_0F6(level._id_3211[var_16]._id_A582[0].origin, "script_mp_captures: team %s, gameTime %d", "neutral", var_15);
-    _func_0F6(level._id_3211[var_16]._id_A582[0].origin, "script_mp_dom: gameTime %d, label %s, owner %s", var_15, level._id_3211[var_16].label, level._id_3211[var_16]._id_6DB2);
+    _reconspatialevent(level._id_3211[var_16]._id_A582[0].origin, "script_mp_captures: team %s, gameTime %d", "neutral", var_15);
+    _reconspatialevent(level._id_3211[var_16]._id_A582[0].origin, "script_mp_dom: gameTime %d, label %s, owner %s", var_15, level._id_3211[var_16].label, level._id_3211[var_16]._id_6DB2);
   }
 
   thread _id_260A(var_7);
@@ -304,12 +304,12 @@ _id_3211() {
 
 _id_260A(var_0) {
   maps\mp\_utility::gameflagwait("prematch_done");
-  _func_032("ui_control_countdown_time", gettime() + 30000);
-  maps\mp\gametypes\_hostmigration::_id_A6F5(30);
+  _setomnvar("ui_control_countdown_time", gettime() + 30000);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(30);
   var_0 _id_04D1::_id_0C30("enemy");
-  _func_032("ui_control_countdown_time", 1);
+  _setomnvar("ui_control_countdown_time", 1);
   wait 2;
-  _func_032("ui_control_countdown_time", 0);
+  _setomnvar("ui_control_countdown_time", 0);
 }
 
 _id_6ABC(var_0) {
@@ -342,34 +342,34 @@ _id_6BCB(var_0, var_1, var_2) {
       _id_933E("securing" + self.label, var_0);
 
       if(var_0 == "allies") {
-        _id_04D1::_id_860A("broadcaster", "waypoint_esports_dom_blue_taking" + self.label);
-        _id_04D1::_id_860E("broadcaster", "waypoint_esports_dom_blue_taking" + self.label, 3);
+        _id_04D1::set2dicon("broadcaster", "waypoint_esports_dom_blue_taking" + self.label);
+        _id_04D1::playsoundtoteam("broadcaster", "waypoint_esports_dom_blue_taking" + self.label, 3);
       } else {
-        _id_04D1::_id_860A("broadcaster", "waypoint_esports_dom_red_taking" + self.label);
-        _id_04D1::_id_860E("broadcaster", "waypoint_esports_dom_red_taking" + self.label, 3);
+        _id_04D1::set2dicon("broadcaster", "waypoint_esports_dom_red_taking" + self.label);
+        _id_04D1::playsoundtoteam("broadcaster", "waypoint_esports_dom_red_taking" + self.label, 3);
       }
     } else {
       _id_933E("losing" + self.label, var_3, 1);
       _id_933E("securing" + self.label, var_0);
 
       if(var_3 == "allies") {
-        _id_04D1::_id_860A("broadcaster", "waypoint_esports_dom_blue_losing" + self.label);
-        _id_04D1::_id_860E("broadcaster", "waypoint_esports_dom_blue_losing" + self.label, 3);
+        _id_04D1::set2dicon("broadcaster", "waypoint_esports_dom_blue_losing" + self.label);
+        _id_04D1::playsoundtoteam("broadcaster", "waypoint_esports_dom_blue_losing" + self.label, 3);
       } else {
-        _id_04D1::_id_860A("broadcaster", "waypoint_esports_dom_red_losing" + self.label);
-        _id_04D1::_id_860E("broadcaster", "waypoint_esports_dom_red_losing" + self.label, 3);
+        _id_04D1::set2dicon("broadcaster", "waypoint_esports_dom_red_losing" + self.label);
+        _id_04D1::playsoundtoteam("broadcaster", "waypoint_esports_dom_red_losing" + self.label, 3);
       }
     }
 
-    _id_04D1::_id_860A("enemy", level._id_5025);
-    _id_04D1::_id_860E("enemy", level._id_5026);
-    _id_04D1::_id_860A("friendly", level._id_5016);
-    _id_04D1::_id_860E("friendly", level._id_5017);
+    _id_04D1::set2dicon("enemy", level._id_5025);
+    _id_04D1::playsoundtoteam("enemy", level._id_5026);
+    _id_04D1::set2dicon("friendly", level._id_5016);
+    _id_04D1::playsoundtoteam("friendly", level._id_5017);
     self._id_2EE9 = 1;
   } else if(level._id_0C27 && var_1 > 0.49 && var_2 && self._id_2EE9 && var_3 != "neutral") {
     var_4 = _id_04D1::_id_44AF();
     var_5 = gettime();
-    _func_0F6(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_4.name, var_4._id_5CC6, "neutral", var_5);
+    _reconspatialevent(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_4.name, var_4._id_5CC6, "neutral", var_5);
     _id_04D1::_id_86EC("neutral");
     _id_A192();
     _id_933E("lost" + self.label, var_3, 1);
@@ -392,20 +392,20 @@ _id_933E(var_0, var_1, var_2) {
 
 _id_6AFA(var_0, var_1, var_2) {
   if(isPlayer(var_1))
-    var_1 _meth_82FF("ui_capture_icon", 0);
+    var_1 setclientomnvar("ui_capture_icon", 0);
 
   var_3 = _id_04D1::_id_45F7();
 
   if(var_3 != "neutral") {
-    _id_04D1::_id_860A("enemy", level._id_5003);
-    _id_04D1::_id_860E("enemy", level._id_5004);
-    _id_04D1::_id_860A("friendly", level._id_500A);
-    _id_04D1::_id_860E("friendly", level._id_500B);
+    _id_04D1::set2dicon("enemy", level._id_5003);
+    _id_04D1::playsoundtoteam("enemy", level._id_5004);
+    _id_04D1::set2dicon("friendly", level._id_500A);
+    _id_04D1::playsoundtoteam("friendly", level._id_500B);
   } else {
-    _id_04D1::_id_860A("enemy", level._id_501A);
-    _id_04D1::_id_860E("enemy", level._id_501B);
-    _id_04D1::_id_860A("friendly", level._id_501A);
-    _id_04D1::_id_860E("friendly", level._id_501B);
+    _id_04D1::set2dicon("enemy", level._id_501A);
+    _id_04D1::playsoundtoteam("enemy", level._id_501B);
+    _id_04D1::set2dicon("friendly", level._id_501A);
+    _id_04D1::playsoundtoteam("friendly", level._id_501B);
   }
 
   if(var_0 == "allies")
@@ -418,7 +418,7 @@ _id_A192(var_0) {
   if(isDefined(var_0) && var_0)
     waittillframeend;
 
-  if(!_func_279(self._id_A582[0])) {
+  if(!_isremovedentity(self._id_A582[0])) {
     var_1 = self._id_A582[0];
     _id_3EC2(var_1.origin, anglestoup(var_1.angles));
   }
@@ -433,7 +433,7 @@ _id_3EC2(var_0, var_1) {
     self._id_A582[1] setModel("ger_ctf_flag_anim");
 
   var_3 = gettime();
-  _func_0F6(self._id_A582[0].origin, "script_mp_dom: gameTime %d, label %s, owner %s", var_3, self.label, self._id_6DB2);
+  _reconspatialevent(self._id_A582[0].origin, "script_mp_dom: gameTime %d, label %s, owner %s", var_3, self.label, self._id_6DB2);
 }
 
 _id_3EC3() {
@@ -466,11 +466,11 @@ _id_A189(var_0, var_1) {
     var_2 = "ui_broadcaster_game_mode_status_3";
 
   if(var_1 == "allies")
-    _func_032(var_2, -1);
+    _setomnvar(var_2, -1);
   else if(var_1 == "axis")
-    _func_032(var_2, 1);
+    _setomnvar(var_2, 1);
   else
-    _func_032(var_2, 0);
+    _setomnvar(var_2, 0);
 }
 
 _id_6BBF(var_0) {
@@ -494,12 +494,12 @@ _id_6BBF(var_0) {
   else
     self._id_6DA9 = 1;
 
-  _func_0F6(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_0.name, var_0._id_5CC6, var_2, var_1);
+  _reconspatialevent(self._id_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_0.name, var_0._id_5CC6, var_2, var_1);
   _id_04D1::_id_86EC(var_2);
-  _id_04D1::_id_860A("enemy", level._id_5003);
-  _id_04D1::_id_860E("enemy", level._id_5004);
-  _id_04D1::_id_860A("friendly", level._id_500A);
-  _id_04D1::_id_860E("friendly", level._id_500B);
+  _id_04D1::set2dicon("enemy", level._id_5003);
+  _id_04D1::playsoundtoteam("enemy", level._id_5004);
+  _id_04D1::set2dicon("friendly", level._id_500A);
+  _id_04D1::playsoundtoteam("friendly", level._id_500B);
   _id_A192();
   level._id_A239 = 0;
 
@@ -763,7 +763,7 @@ _id_459D(var_0) {
     var_6 = undefined;
 
     if(var_1)
-      var_6 = _func_203(var_0.origin, var_5.levelflag.origin, 999999);
+      var_6 = _getpathdist(var_0.origin, var_5.levelflag.origin, 999999);
 
     if(!isDefined(var_6) || var_6 == -1)
       var_6 = distancesquared(var_5.levelflag.origin, var_0.origin);

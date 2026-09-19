@@ -35,7 +35,7 @@ _id_1A4E() {
 
 _id_0B81() {}
 
-_id_809C() {
+geteye() {
   var_0 = undefined;
 
   if(isDefined(level._id_AB45) && level._id_AB45.size > 0)
@@ -48,12 +48,12 @@ _id_809C() {
   if(isDefined(level._id_AB30))
     var_1 = [[level._id_AB30]]();
   else {
-    var_1[var_1.size] = "sentry_" + _func_0A4(1, 4);
-    var_1[var_1.size] = "drone_" + _func_0A4(1, 3);
+    var_1[var_1.size] = "sentry_" + _randomintrange(1, 4);
+    var_1[var_1.size] = "drone_" + _randomintrange(1, 3);
     var_1[var_1.size] = "money";
     var_1[var_1.size] = "camo";
-    var_1[var_1.size] = "sentry_" + _func_0A4(1, 4);
-    var_1[var_1.size] = "drone_" + _func_0A4(1, 3);
+    var_1[var_1.size] = "sentry_" + _randomintrange(1, 4);
+    var_1[var_1.size] = "drone_" + _randomintrange(1, 3);
     var_1[var_1.size] = "money";
     var_1[var_1.size] = "camo";
   }
@@ -106,7 +106,7 @@ _id_8A17() {
   level._id_AB20 = common_scripts\utility::_id_46B7("carepackageDropPosition", "targetname");
 
   foreach(var_1 in level._id_AB20) {
-    var_1._id_510A = isDefined(var_1._id_8260) && var_1._id_8260 == "indoors";
+    var_1._id_510A = isDefined(var_1.setlookatent) && var_1.setlookatent == "indoors";
     var_1._id_4882 = var_1.origin;
 
     if(var_1._id_510A) {
@@ -120,7 +120,7 @@ _id_8A17() {
   }
 }
 
-_id_809B() {
+unlinkfromplayerview() {
   var_0 = [];
   var_0[var_0.size] = 100;
   var_0[var_0.size] = 100;
@@ -136,7 +136,7 @@ _id_809B() {
 
 _id_45A8() {
   if(level._id_AB38.size == level._id_AB39)
-    _id_809B();
+    unlinkfromplayerview();
 
   var_0 = level._id_AB38[level._id_AB39];
   level._id_AB39++;
@@ -155,15 +155,15 @@ _id_7F1C() {
   level._id_AB35 = 0;
   level._id_AB33 = 0;
   thread _id_8A17();
-  thread _id_809C();
-  thread _id_809B();
-  var_0 = _func_0A4(3, 5);
+  thread geteye();
+  thread unlinkfromplayerview();
+  var_0 = _randomintrange(3, 5);
 
   for(;;) {
     level waittill("zombie_wave_started");
 
     while(level._id_A980 >= var_0) {
-      var_1 = _func_0A5(20, 30);
+      var_1 = _randomfloatrange(20, 30);
       var_2 = level common_scripts\utility::_id_A74D("zombie_wave_ended", var_1);
 
       if(!isDefined(var_2) || var_2 != "timeout") {
@@ -185,7 +185,7 @@ _id_7F1C() {
             level._id_7F25[level._id_7F25.size] = var_2;
         }
 
-        var_0 = var_0 + _func_0A4(2, 4);
+        var_0 = var_0 + _randomintrange(2, 4);
       }
     }
 
@@ -194,13 +194,13 @@ _id_7F1C() {
 }
 
 _id_4460(var_0) {
-  var_1 = _func_1AC(level.players, var_0);
+  var_1 = _sortbydistance(level.players, var_0);
   return var_1[0];
 }
 
 _id_4476(var_0) {
   if(level._id_AB45.size == level._id_AB44)
-    _id_809C();
+    geteye();
 
   var_4 = level._id_AB45[level._id_AB44];
   level._id_AB44++;
@@ -236,7 +236,7 @@ _id_3495(var_0, var_1) {
   var_2 = "airdrop_assault";
   var_3 = _id_4476(var_2);
   var_4 = var_0 _id_0514::_id_27CB(var_0, var_2, var_3, var_1.origin, undefined, 0, 1);
-  var_4 _meth_8272((0, 0, 0));
+  var_4 physicslaunchserver((0, 0, 0));
   var_4 thread _id_0529::_id_2745();
   var_4 _id_0514::_id_6FAD(var_2, var_3);
   return var_3;
@@ -338,7 +338,7 @@ _id_2454(var_0) {
   foreach(var_3 in level._id_6C20) {
     var_4 = var_1 * 2;
     var_5 = var_4 * var_4;
-    var_6 = _func_211(var_3.origin, var_0);
+    var_6 = _distance2dsquared(var_3.origin, var_0);
 
     if(var_6 < var_5)
       return 1;
@@ -350,7 +350,7 @@ _id_2454(var_0) {
 _id_1FFF(var_0, var_1) {
   var_2 = 100;
   var_3 = 26;
-  return _func_293(var_0 + (0, 0, 6), var_3, var_2, var_1, 0);
+  return _capsuletracepassed(var_0 + (0, 0, 6), var_3, var_2, var_1, 0);
 }
 
 _id_5A5F(var_0) {
@@ -423,10 +423,10 @@ _id_274F(var_0, var_1) {
     if(!var_1 && _id_4AD0(var_3)) {
       continue;
     }
-    if(var_3 _meth_83B8() || isDefined(var_3._id_3900) && var_3._id_3900) {
+    if(var_3 isjumping() || isDefined(var_3._id_3900) && var_3._id_3900) {
       continue;
     }
-    if(!var_3 _meth_8346() && !_id_0514::_id_A6F8(var_3)) {
+    if(!var_3 isonground() && !_id_0514::_id_A6F8(var_3)) {
       continue;
     }
     if(!_id_0514::_id_A276(var_3)) {
@@ -486,7 +486,7 @@ _id_62D5(var_0) {
 _id_62A8(var_0, var_1, var_2, var_3) {
   var_4 = var_2;
 
-  if(isPlayer(var_1) && _func_1EF(var_0))
+  if(isPlayer(var_1) && _isagent(var_0))
     return var_4 * level._id_A980;
 
   switch (var_3) {
@@ -505,7 +505,7 @@ _id_62A8(var_0, var_1, var_2, var_3) {
       var_4 = 200 + level._id_A980 * 10;
       break;
     case "turretheadrocket_mp":
-      var_4 = 800 + level._id_A980 * _func_0A4(50, 75);
+      var_4 = 800 + level._id_A980 * _randomintrange(50, 75);
       break;
     case "turretheadenergy_mp":
       var_4 = var_4 * 3 + int(level._id_A980 / 2);

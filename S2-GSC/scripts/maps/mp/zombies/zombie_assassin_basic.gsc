@@ -71,7 +71,7 @@ _id_A26F(var_0, var_1, var_2) {
   if(!isDefined(var_7))
     var_7 = 15;
 
-  var_8 = _func_082(var_0.origin, var_7, 64, 64);
+  var_8 = _getgroundposition(var_0.origin, var_7, 64, 64);
   var_0._id_487C = var_8;
 
   if(!_func_2E6(var_8)) {
@@ -82,19 +82,19 @@ _id_A26F(var_0, var_1, var_2) {
 
   if(!var_5) {
     foreach(var_11 in maps\mp\agents\_scripted_agent_anim_util::_id_4081(var_1, "zombie_assassin", #animtree)) {
-      var_12 = _func_286(var_11);
+      var_12 = _debuggetanimname(var_11);
       var_13 = maps\mp\agents\_scripted_agent_anim_util::_id_446A(var_11);
 
-      if(!_func_066(var_11, "jump_start") || !_func_066(var_11, "jump_end")) {
+      if(!_animhasnotetrack(var_11, "jump_start") || !_animhasnotetrack(var_11, "jump_end")) {
         continue;
       }
       var_14 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_11, "jump_end");
 
       if(var_13 <= var_14) {}
 
-      var_15 = _func_083(var_11, var_14, var_13);
-      var_16 = _func_084(var_11, var_14, 0);
-      var_15 = _func_112(var_15, (0, var_16, 0));
+      var_15 = _getmovedelta(var_11, var_14, var_13);
+      var_16 = _getangledelta(var_11, var_14, 0);
+      var_15 = _rotatevector(var_15, (0, var_16, 0));
       var_17 = var_15 + var_8;
 
       if(_func_2E6(var_17) && _func_2DE(var_8, var_17)) {
@@ -169,18 +169,18 @@ spawn_an_aod() {
     if(common_scripts\utility::_id_562E(var_2._id_5728)) {
       continue;
     }
-    if(_func_0E1(var_0, var_2.origin) < 265 && _func_0AE(self.origin[2] - var_2.origin[2]) < 128) {
-      var_3 = 3 * (_func_0E1(var_0, var_2.origin) / 265);
-      var_4 = 4 * (_func_0E1(var_0, var_2.origin) / 265);
+    if(_distance2d(var_0, var_2.origin) < 265 && _abs(self.origin[2] - var_2.origin[2]) < 128) {
+      var_3 = 3 * (_distance2d(var_0, var_2.origin) / 265);
+      var_4 = 4 * (_distance2d(var_0, var_2.origin) / 265);
       var_2 thread run_shellshock(var_4, var_3, self.origin);
       level notify("survivalist_blood_2_type_2_failed");
     }
 
-    if(_func_0E1(var_0, var_2.origin) > 185 || _func_0AE(self.origin[2] - var_2.origin[2]) > 128) {
+    if(_distance2d(var_0, var_2.origin) > 185 || _abs(self.origin[2] - var_2.origin[2]) > 128) {
       continue;
     }
     level notify("survivalist_blood_2_type_2_failed");
-    var_2 _meth_8059(75, var_0);
+    var_2 dodamage(75, var_0);
   }
 }
 
@@ -189,15 +189,15 @@ run_shellshock(var_0, var_1, var_2, var_3) {
     var_3 = 300;
 
   self endon("death");
-  self _meth_8182("zm_heavy_hit", var_0 * 1.4, var_1);
-  self _meth_8308(0);
-  self _meth_809F("damage_heavy");
+  self shellshock("zm_heavy_hit", var_0 * 1.4, var_1);
+  self allowsprint(0);
+  self playrumbleonentity("damage_heavy");
   var_4 = self.origin - var_2;
   var_4 = (var_4[0], var_4[1], 0);
   var_4 = var_3 * vectorNormalize(var_4);
   var_4 = (var_4[0], var_4[1], 125);
-  self _meth_82F7(var_4);
-  self _meth_8308(1);
+  self setvelocity(var_4);
+  self allowsprint(1);
   self.current_fog_state = undefined;
 }
 
@@ -219,7 +219,7 @@ assassin_set_alarmed() {
 
 move_main() {
   self endon("killanimscript");
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
   self._id_5759 = 1;
 
   if(isDefined(self.assassin_should_execute_voulnerability) && !common_scripts\utility::_id_562E(self.isassassindemo))
@@ -243,8 +243,8 @@ setassassinvoulnerable() {
   self.assassin_should_execute_voulnerability = undefined;
   maps\mp\agents\humanoid\_humanoid_move::_id_1F39("");
   self._id_01BB = 1;
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
   thread transition_to_motion(var_1);
 
   if(var_0)
@@ -255,10 +255,10 @@ setassassinvoulnerable() {
 }
 
 transition_to_motion(var_0) {
-  var_1 = self _meth_83D8(var_0, 0);
-  var_2 = _func_065(var_1);
+  var_1 = self getanimentry(var_0, 0);
+  var_2 = _getanimlength(var_1);
   wait(var_2 * 0.55);
-  self _meth_839B("face enemy");
+  self scragentsetorientmode("face enemy");
 }
 
 register_assassin_phase(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -734,12 +734,12 @@ should_move_main() {
   if(common_scripts\utility::_id_562E(self.noflurry))
     return 0;
 
-  var_0 = self _meth_8198();
+  var_0 = self getnegotiationstartnode();
 
   if(isDefined(var_0))
     var_1 = var_0.origin;
   else
-    var_1 = self _meth_83E7();
+    var_1 = self getpathgoalpos();
 
   return isDefined(var_1);
 }
@@ -848,7 +848,7 @@ set_assassin_removed_from_game() {
 killassassinzombie() {
   self._id_6701 = 1;
   self._id_2A9D = "idle_noncombat";
-  self _meth_8059(self.health + 500000, self.origin);
+  self dodamage(self.health + 500000, self.origin);
 }
 
 set_new_assassin_origin(var_0) {
@@ -861,13 +861,13 @@ set_new_assassin_origin(var_0) {
 
   var_2 = spawn("script_model", self.origin);
   var_2 setModel("tag_origin");
-  self _meth_8055(var_2);
+  self linkto(var_2);
   var_2 thread _id_0547::_id_2D19(self);
 
   while(!_id_053C::humanoid_has_valid_targets(1))
     waitframe();
 
-  self _meth_8057();
+  self unlink();
   self setOrigin(var_1.origin);
 
   if(isDefined(var_2))
@@ -878,17 +878,17 @@ set_new_assassin_origin(var_0) {
 
   self.previoushole = var_1;
   set_assassin_has_teleported();
-  _func_147(common_scripts\utility::_id_44F5("zmb_isl_assassin_spawn_wisp01"), self, "TAG_ORIGIN");
+  _playfxontag(common_scripts\utility::_id_44F5("zmb_isl_assassin_spawn_wisp01"), self, "TAG_ORIGIN");
   self.assassinmustleave = undefined;
 
-  if(_id_0547::_id_5565(var_1._id_8109, "spawn_riser")) {
-    self _meth_83A2(1);
+  if(_id_0547::_id_5565(var_1.setflaggedanimknoball, "spawn_riser")) {
+    self scragentsetscripted(1);
     var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("spawn_riser");
     var_4 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_3);
-    self _meth_839C("anim deltas");
-    self _meth_839B("face angle abs", self.angles);
+    self scragentsetanimmode("anim deltas");
+    self scragentsetorientmode("face angle abs", self.angles);
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_3, var_4, 1.0, "spawn_riser");
-    self _meth_83A2(0);
+    self scragentsetscripted(0);
   }
 }
 
@@ -1002,7 +1002,7 @@ seek_exit_that_maintains_momentum(var_0) {
     var_4 = _id_055A::getadjacentzones(var_5);
 
   foreach(var_7 in var_1) {
-    var_8 = var_7._id_819A;
+    var_8 = var_7.getnegotiationnextnode;
 
     if(_id_0547::_id_5565(var_5, var_8)) {
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_7);
@@ -1034,15 +1034,15 @@ get_valid_assassin_exit_points(var_0) {
 
   while(var_2.size == 0) {
     foreach(var_6 in var_1) {
-      if(!issubstr(var_6._id_8260, "exit")) {
+      if(!issubstr(var_6.setlookatent, "exit")) {
         if(common_scripts\utility::_id_562E(var_0)) {
-          if(!issubstr(var_6._id_8260, "hc_escape"))
+          if(!issubstr(var_6.setlookatent, "hc_escape"))
             continue;
         } else
           continue;
       }
 
-      if(issubstr(var_6._id_8260, "disable")) {
+      if(issubstr(var_6.setlookatent, "disable")) {
         continue;
       }
       if(common_scripts\utility::_id_562E(var_6.isassassincooling)) {
@@ -1051,10 +1051,10 @@ get_valid_assassin_exit_points(var_0) {
       if(_id_0547::_id_5565(self.previoushole, var_6) && distance(self.origin, self.previoushole.origin) < 512) {
         continue;
       }
-      if(!_id_055A::_id_586A(var_6._id_819A)) {
+      if(!_id_055A::_id_586A(var_6.getnegotiationnextnode)) {
         continue;
       }
-      if(isDefined(var_4) && !common_scripts\utility::_id_0F79(var_4, var_6._id_819A)) {
+      if(isDefined(var_4) && !common_scripts\utility::_id_0F79(var_4, var_6.getnegotiationnextnode)) {
         continue;
       }
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_6);
@@ -1187,7 +1187,7 @@ initalize_assassin_despawners() {
     var_3 = common_scripts\utility::_id_46B7(var_2.target, "targetname");
 
     foreach(var_5 in var_3)
-    var_5._id_819A = var_2._id_819A;
+    var_5.getnegotiationnextnode = var_2.getnegotiationnextnode;
   }
 }
 
@@ -1398,7 +1398,7 @@ phase_handler(var_0) {
         return;
     }
 
-    var_1 = common_scripts\utility::_id_8134(var_0.func_and_data);
+    var_1 = common_scripts\utility::makeentitysentient(var_0.func_and_data);
   }
 
   if(var_1)
@@ -1606,19 +1606,19 @@ set_zombie_assassin_boss_ko() {
 play_assassin_anim(var_0) {
   var_1 = var_0;
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
-  var_3 = self _meth_83DB(var_2);
+  var_3 = self getanimentrycount(var_2);
   var_4 = randomint(var_3);
-  self _meth_839B("face angle abs", self.angles);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_2, var_4);
+  self scragentsetorientmode("face angle abs", self.angles);
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2, var_4);
 }
 
 set_assassin_state_scripted(var_0) {
-  self _meth_839C("anim deltas");
-  self _meth_83A2(1);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetscripted(1);
 }
 
 unset_assassin_state_scripted() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 }
 
 preform_assassin_walk_voulnerability() {
@@ -1627,7 +1627,7 @@ preform_assassin_walk_voulnerability() {
 }
 
 preform_assassin_walk_voulnerability_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "walk_2_sprint");
 }
 
@@ -1637,7 +1637,7 @@ preform_assassin_crouch_attack() {
 }
 
 preform_assassin_crouch_attack_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "assassin_spawn_attack");
 }
 
@@ -1674,7 +1674,7 @@ preform_assassin_crouch_voulnerability() {
 }
 
 preform_assassin_crouch_voulnerability_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "idle_stalk_player");
 }
 
@@ -1707,7 +1707,7 @@ preform_assassin_crouch() {
 }
 
 preform_assassin_crouch_interrupt(var_0) {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 
   if(isDefined(var_0))
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, var_0);
@@ -1727,12 +1727,12 @@ preform_assassin_idle() {
 }
 
 preform_assassin_idle_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "idle_noncombat");
 }
 
 preform_assassin_ko_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "side_stumble_1_forward_left");
   self.assassin_stunned = 0;
 }
@@ -1744,7 +1744,7 @@ preform_assassin_ability() {
 
 preform_assassin_ability_interrupt() {
   self.hasassassinspecialed = 1;
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, self.assassinabilityactivateaction);
 }
 
@@ -1754,7 +1754,7 @@ preform_assassin_strike() {
 }
 
 preform_assassin_strike_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "attack_sprint");
 }
 
@@ -1767,19 +1767,19 @@ prepare_assassin_action(var_0, var_1, var_2) {
     self.overrridehitreact = undefined;
   }
 
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   self._id_01BB = 1;
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, var_0);
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_0);
-  var_4 = self _meth_83DB(var_3);
+  var_4 = self getanimentrycount(var_3);
   var_5 = randomint(var_4);
 
   if(!isDefined(self.forcedtarget) && isDefined(self.player_facing_times) && isDefined(self.player_facing_times[var_0]))
     thread handle_facing_player(self.player_facing_times[var_0]);
   else
-    self _meth_839B("face angle abs", self.angles);
+    self scragentsetorientmode("face angle abs", self.angles);
 
-  self _meth_839C("anim deltas");
+  self scragentsetanimmode("anim deltas");
 
   if(isDefined(self.additional_anim) && self.additional_anim[1] == var_0) {
     [[self.additional_anim[0]]]();
@@ -1790,15 +1790,15 @@ prepare_assassin_action(var_0, var_1, var_2) {
 }
 
 handle_facing_player(var_0) {
-  self _meth_839B("face enemy");
+  self scragentsetorientmode("face enemy");
   wait(var_0);
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetorientmode("face angle abs", self.angles);
 }
 
 play_fx_on_zmb_assassin(var_0, var_1) {
-  var_2 = _func_2A8(common_scripts\utility::_id_44F5(var_0), self, var_1);
+  var_2 = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0), self, var_1);
   maps\mp\agents\_agent_utility::deleteentonagentdeath(var_2);
-  _func_14C(var_2);
+  _triggerfx(var_2);
   return var_2;
 }
 
@@ -1824,7 +1824,7 @@ zombie_assassin_charge_run() {
   self endon("death");
   var_0 = self._id_28D2;
   var_1 = self.origin;
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   self._id_01BB = 1;
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "attack_sprint");
   common_scripts\utility::_id_3796("ready_to_attack");
@@ -1861,15 +1861,15 @@ dodamageonjoints(var_0, var_1, var_2) {
       var_6 = get_final_joint_origin(var_5);
 
       foreach(var_8 in level.players) {
-        var_9 = _func_0E1(var_8.origin, var_6);
-        var_10 = _func_0AE(var_8.origin[2] - var_6[2]);
+        var_9 = _distance2d(var_8.origin, var_6);
+        var_10 = _abs(var_8.origin[2] - var_6[2]);
 
         if(!common_scripts\utility::_id_0F79(var_3, var_8) && var_9 < var_1 && var_10 < 230 && var_8.origin[2] < var_6[2]) {
           if(common_scripts\utility::_id_562E(var_2) && randomint(100) > 30)
             thread assassin_attack_cooldown();
 
           var_3 = common_scripts\utility::_id_0F6F(var_3, var_8);
-          var_8 _meth_8059(90, var_6, self, self, "MOD_IMPACT");
+          var_8 dodamage(90, var_6, self, self, "MOD_IMPACT");
           assassin_ignore_player(var_8);
         }
       }
@@ -1878,22 +1878,22 @@ dodamageonjoints(var_0, var_1, var_2) {
 }
 
 get_final_joint_origin(var_0) {
-  return self gettagorigin(var_0) + 42 * vectorNormalize(anglesToForward(self _meth_8181(var_0)));
+  return self gettagorigin(var_0) + 42 * vectorNormalize(anglesToForward(self gettagangles(var_0)));
 }
 
 zombie_assassin_charge_cleanup() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   self _meth_85E0(0);
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "attack_sprint");
   thread assassin_ready_attack(2.5);
   self notify("stop assassin strike");
 }
 
 zombie_assassin_spawn_voulnerability_cleanup() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   self _meth_85E0(0);
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
 }
 
 init_assassin_spawns_and_exits() {
@@ -1909,8 +1909,8 @@ wait_for_activation() {
   waitframe();
   self.assassin_spawn_activated = 0;
 
-  if(isDefined(self._id_819A) && common_scripts\utility::_id_3C83(self._id_819A))
-    common_scripts\utility::_id_3C9F(self._id_819A);
+  if(isDefined(self.getnegotiationnextnode) && common_scripts\utility::_id_3C83(self.getnegotiationnextnode))
+    common_scripts\utility::_id_3C9F(self.getnegotiationnextnode);
 
   self.assassin_spawn_activated = 1;
 }
@@ -1937,8 +1937,8 @@ spawn_an_assassin(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   else
     var_13.assassin_modifier = var_0;
 
-  if(!isDefined(var_13._id_9024) && isDefined(var_12._id_819A))
-    var_13._id_9024 = var_12._id_819A;
+  if(!isDefined(var_13._id_9024) && isDefined(var_12.getnegotiationnextnode))
+    var_13._id_9024 = var_12.getnegotiationnextnode;
 
   if(isDefined(var_11))
     var_13.forcedzones = var_11;
@@ -1970,7 +1970,7 @@ spawn_an_assassin(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   } else {}
 
   if(common_scripts\utility::_id_562E(var_3))
-    var_13 _id_0547::_id_84CB();
+    var_13 _id_0547::disableoffhandsecondaryweapons();
 
   var_13.previoushole = var_12;
   var_13.lastassassinspawner = var_12;
@@ -2030,7 +2030,7 @@ get_valid_assassin_spawner(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = undefined;
 
     foreach(var_9 in level.players) {
-      if(!isalive(var_9) || common_scripts\utility::_id_562E(var_9._id_5378)) {
+      if(!isalive(var_9) || common_scripts\utility::_id_562E(var_9.inlaststand)) {
         continue;
       }
       var_6 = common_scripts\utility::_id_0F6F(var_6, var_9);
@@ -2050,19 +2050,19 @@ get_valid_assassin_spawner(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isDefined(var_4) && common_scripts\utility::_id_0F79(var_4, var_14)) {
       continue;
     }
-    if(!issubstr(var_14._id_8260, "spawn")) {
+    if(!issubstr(var_14.setlookatent, "spawn")) {
       continue;
     }
-    if(issubstr(var_14._id_8260, "disable")) {
+    if(issubstr(var_14.setlookatent, "disable")) {
       continue;
     }
-    if(issubstr(var_14._id_8260, "respawn_only") && !common_scripts\utility::_id_562E(var_5)) {
+    if(issubstr(var_14.setlookatent, "respawn_only") && !common_scripts\utility::_id_562E(var_5)) {
       continue;
     }
     if(common_scripts\utility::_id_562E(var_3) && common_scripts\utility::_id_562E(var_14.isassassincooling)) {
       continue;
     }
-    if(common_scripts\utility::_id_562E(var_14.assassin_spawn_activated) || _id_0547::_id_5565(var_14._id_819A, "start_zone"))
+    if(common_scripts\utility::_id_562E(var_14.assassin_spawn_activated) || _id_0547::_id_5565(var_14.getnegotiationnextnode, "start_zone"))
       var_11 = common_scripts\utility::_id_0F6F(var_11, var_14);
   }
 
@@ -2088,10 +2088,10 @@ get_ideal_spawner_near_origin(var_0, var_1, var_2) {
     var_3 = common_scripts\utility::array_randomize(var_0);
 
   foreach(var_9 in var_3) {
-    var_10 = var_9._id_819A;
+    var_10 = var_9.getnegotiationnextnode;
 
     if(isDefined(var_2)) {
-      if(common_scripts\utility::_id_0F79(var_2, var_9._id_819A) && !common_scripts\utility::_id_562E(var_9.isassassincooling))
+      if(common_scripts\utility::_id_0F79(var_2, var_9.getnegotiationnextnode) && !common_scripts\utility::_id_562E(var_9.isassassincooling))
         var_5 = common_scripts\utility::_id_0F6F(var_5, var_9);
 
       continue;

@@ -37,9 +37,9 @@ _id_9079(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     [[maps\mp\agents\_agent_utility::_id_0A59("onAIConnect")]]();
 
   maps\mp\agents\_agents::_id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
-  maps\mp\agents\_agent_utility::_id_83FE(self.team);
+  maps\mp\agents\_agent_utility::hudoutlineenable(self.team);
   self._id_0009 = &"RAIDS_SQUADMATE";
-  self _meth_8528(1, self.team);
+  self setagentcostumeindex(1, self.team);
   self._id_2F05 = "veteran";
   _id_8727();
   _id_04C2::_id_2F72(self);
@@ -55,9 +55,9 @@ _id_90A6(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     [[maps\mp\agents\_agent_utility::_id_0A59("onAIConnect")]]();
 
   maps\mp\agents\_agents::_id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
-  maps\mp\agents\_agent_utility::_id_83FE(self.team);
+  maps\mp\agents\_agent_utility::hudoutlineenable(self.team);
   self._id_0009 = &"RAIDS_SQUADMATE";
-  self _meth_8528(1, self.team);
+  self setagentcostumeindex(1, self.team);
   self._id_2F05 = "veteran";
   _id_8727();
   _id_04C2::_id_2F72(self);
@@ -72,11 +72,11 @@ _id_8727() {
   maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
 
   if(isDefined(self._id_2F05))
-    maps\mp\bots\_bots_util::_id_1AD3(self._id_2F05);
+    maps\mp\bots\_bots_util::bot_set_difficulty(self._id_2F05);
   else
-    maps\mp\bots\_bots_util::_id_1AD3("regular");
+    maps\mp\bots\_bots_util::bot_set_difficulty("regular");
 
-  self._id_2F05 = self _meth_836D();
+  self._id_2F05 = self botgetdifficulty();
 }
 
 _id_6BA4(var_0) {
@@ -84,15 +84,15 @@ _id_6BA4(var_0) {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("applyLoadout");
-  self _meth_8543(1);
-  self _meth_8353("no_enemy_search", 1);
+  self set_origin_and_angles(1);
+  self botsetflag("no_enemy_search", 1);
 }
 
 _id_0C6D() {
   self endon("death");
   level endon("game_ended");
   self endon("owner_disconnect");
-  self _meth_8353("force_sprint", 1);
+  self botsetflag("force_sprint", 1);
   var_0 = 0;
   var_1 = 0;
 
@@ -102,15 +102,15 @@ _id_0C6D() {
       return;
     }
 
-    if(_func_0AD(self._id_0117.health) / self._id_0117.maxhealth < 0.5 && gettime() > var_1) {
-      var_2 = _func_0B9(self._id_0117.origin, 256, 0);
+    if(_float(self._id_0117.health) / self._id_0117.maxhealth < 0.5 && gettime() > var_1) {
+      var_2 = _getnodesinradiussorted(self._id_0117.origin, 256, 0);
 
       if(var_2.size >= 2) {
         self._id_2C85 = var_2[1];
         self notify("defend_force_node_recalculation");
         var_1 = gettime() + 1000;
       }
-    } else if(_func_0AD(self.health) / self.maxhealth >= 0.6)
+    } else if(_float(self.health) / self.maxhealth >= 0.6)
       var_0 = 0;
     else if(!var_0) {
       var_3 = maps\mp\bots\_bots_util::_id_19CE(self._id_0117.origin, 350, 1);
@@ -138,11 +138,11 @@ _id_17C8(var_0, var_1, var_2, var_3, var_4) {
     level._id_791B = [];
 
   if(level._id_791B.size > 6)
-    level._id_791B[0] _meth_8059(level._id_791B[0].health + 100, level._id_791B[0].origin);
+    level._id_791B[0] dodamage(level._id_791B[0].health + 100, level._id_791B[0].origin);
 
   var_5 = [[level._id_0A4D]]("minion", var_3, undefined, var_0, var_1, undefined, 0, 0, "recruit");
   level._id_791B[level._id_791B.size] = var_5;
-  var_5 _meth_8354(var_2);
+  var_5 botsetstance(var_2);
   var_5 thread _id_0A5F();
 }
 
@@ -153,12 +153,12 @@ _id_0A5F() {
   thread _id_0A60();
   maps\mp\bots\_bots_strategy::_id_1A8D(self.origin, 512, []);
   wait 15;
-  self _meth_8059(self.health + 100, self.origin);
+  self dodamage(self.health + 100, self.origin);
 }
 
 _id_0A5E() {
   var_0 = self getweaponlistprimaries();
-  var_1 = self _meth_834A();
+  var_1 = self getlethalweapon();
   var_2 = self getoffhandsecondaryclass();
   var_0[var_0.size] = var_1;
   var_0[var_0.size] = var_2;
@@ -178,12 +178,12 @@ _id_0A5E() {
     else if(var_4 == "bazooka_mp")
       var_5 = 0;
     else
-      var_5 = _func_1A3(var_4, self);
+      var_5 = _weaponclipsize(var_4, self);
 
     self setweaponammoclip(var_4, var_5);
   }
 
-  self _meth_82AB();
+  self clearperks();
 }
 
 _id_0A60() {

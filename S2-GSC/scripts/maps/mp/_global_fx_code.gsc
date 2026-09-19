@@ -10,7 +10,7 @@ _id_47DC(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
   if(!isDefined(var_2))
-    var_2 = _func_0A5(-20, -15);
+    var_2 = _randomfloatrange(-20, -15);
 
   if(!isDefined(var_3))
     var_3 = var_1;

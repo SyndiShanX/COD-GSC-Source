@@ -52,7 +52,7 @@ assassin_set_alarmed() {
 
 move_main() {
   self endon("killanimscript");
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
   self._id_5759 = 1;
 
   if(isDefined(self.assassin_should_execute_voulnerability) && !common_scripts\utility::_id_562E(self.isassassindemo))
@@ -76,8 +76,8 @@ setassassinvoulnerable() {
   self.assassin_should_execute_voulnerability = undefined;
   maps\mp\agents\humanoid\_humanoid_move::_id_1F39("");
   self._id_01BB = 1;
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", self.angles);
   thread transition_to_motion(var_1);
 
   if(var_0)
@@ -88,10 +88,10 @@ setassassinvoulnerable() {
 }
 
 transition_to_motion(var_0) {
-  var_1 = self _meth_83D8(var_0, 0);
-  var_2 = _func_065(var_1);
+  var_1 = self getanimentry(var_0, 0);
+  var_2 = _getanimlength(var_1);
   wait(var_2 * 0.55);
-  self _meth_839B("face enemy");
+  self scragentsetorientmode("face enemy");
 }
 
 register_assassin_phase(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -550,12 +550,12 @@ should_move_main() {
   if(common_scripts\utility::_id_562E(self.noflurry))
     return 0;
 
-  var_0 = self _meth_8198();
+  var_0 = self getnegotiationstartnode();
 
   if(isDefined(var_0))
     var_1 = var_0.origin;
   else
-    var_1 = self _meth_83E7();
+    var_1 = self getpathgoalpos();
 
   return isDefined(var_1);
 }
@@ -874,7 +874,7 @@ initalize_assassin_despawners() {
     var_3 = common_scripts\utility::_id_46B7(var_2.target, "targetname");
 
     foreach(var_5 in var_3)
-    var_5._id_819A = var_2._id_819A;
+    var_5.getnegotiationnextnode = var_2.getnegotiationnextnode;
   }
 }
 
@@ -1098,7 +1098,7 @@ phase_handler(var_0) {
         return;
     }
 
-    var_1 = common_scripts\utility::_id_8134(var_0.func_and_data);
+    var_1 = common_scripts\utility::makeentitysentient(var_0.func_and_data);
   }
 
   if(var_1)
@@ -1306,19 +1306,19 @@ set_zombie_assassin_boss_ko() {
 play_assassin_anim(var_0) {
   var_1 = var_0;
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
-  var_3 = self _meth_83DB(var_2);
+  var_3 = self getanimentrycount(var_2);
   var_4 = randomint(var_3);
-  self _meth_839B("face angle abs", self.angles);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_2, var_4);
+  self scragentsetorientmode("face angle abs", self.angles);
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2, var_4);
 }
 
 set_assassin_state_scripted(var_0) {
-  self _meth_839C("anim deltas");
-  self _meth_83A2(1);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetscripted(1);
 }
 
 unset_assassin_state_scripted() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 }
 
 preform_assassin_walk_voulnerability() {
@@ -1327,7 +1327,7 @@ preform_assassin_walk_voulnerability() {
 }
 
 preform_assassin_walk_voulnerability_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "walk_2_sprint");
 }
 
@@ -1337,7 +1337,7 @@ preform_assassin_crouch_attack() {
 }
 
 preform_assassin_crouch_attack_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "assassin_spawn_attack");
 }
 
@@ -1374,7 +1374,7 @@ preform_assassin_crouch_voulnerability() {
 }
 
 preform_assassin_crouch_voulnerability_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "idle_stalk_player");
 }
 
@@ -1407,7 +1407,7 @@ preform_assassin_crouch() {
 }
 
 preform_assassin_crouch_interrupt(var_0) {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 
   if(isDefined(var_0))
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, var_0);
@@ -1427,12 +1427,12 @@ preform_assassin_idle() {
 }
 
 preform_assassin_idle_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "idle_noncombat");
 }
 
 preform_assassin_ko_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "side_stumble_1_forward_left");
   self.assassin_stunned = 0;
 }
@@ -1444,7 +1444,7 @@ preform_assassin_ability() {
 
 preform_assassin_ability_interrupt() {
   self.hasassassinspecialed = 1;
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, self.assassinabilityactivateaction);
 }
 
@@ -1454,7 +1454,7 @@ preform_assassin_strike() {
 }
 
 preform_assassin_strike_interrupt() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "attack_sprint");
 }
 
@@ -1467,19 +1467,19 @@ prepare_assassin_action(var_0, var_1, var_2) {
     self.overrridehitreact = undefined;
   }
 
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   self._id_01BB = 1;
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, var_0);
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_0);
-  var_4 = self _meth_83DB(var_3);
+  var_4 = self getanimentrycount(var_3);
   var_5 = randomint(var_4);
 
   if(!isDefined(self.forcedtarget) && isDefined(self.player_facing_times) && isDefined(self.player_facing_times[var_0]))
     thread handle_facing_player(self.player_facing_times[var_0]);
   else
-    self _meth_839B("face angle abs", self.angles);
+    self scragentsetorientmode("face angle abs", self.angles);
 
-  self _meth_839C("anim deltas");
+  self scragentsetanimmode("anim deltas");
 
   if(isDefined(self.additional_anim) && self.additional_anim[1] == var_0) {
     [[self.additional_anim[0]]]();
@@ -1490,15 +1490,15 @@ prepare_assassin_action(var_0, var_1, var_2) {
 }
 
 handle_facing_player(var_0) {
-  self _meth_839B("face enemy");
+  self scragentsetorientmode("face enemy");
   wait(var_0);
-  self _meth_839B("face angle abs", self.angles);
+  self scragentsetorientmode("face angle abs", self.angles);
 }
 
 play_fx_on_zmb_assassin(var_0, var_1) {
-  var_2 = _func_2A8(common_scripts\utility::_id_44F5(var_0), self, var_1);
+  var_2 = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0), self, var_1);
   maps\mp\agents\_agent_utility::deleteentonagentdeath(var_2);
-  _func_14C(var_2);
+  _triggerfx(var_2);
   return var_2;
 }
 
@@ -1535,7 +1535,7 @@ zombie_assassin_charge_run() {
   self endon("death");
   var_0 = self._id_28D2;
   var_1 = self.origin;
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   self._id_01BB = 1;
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "attack_sprint");
   common_scripts\utility::_id_3796("ready_to_attack");
@@ -1572,15 +1572,15 @@ dodamageonjoints(var_0, var_1, var_2) {
       var_6 = get_final_joint_origin(var_5);
 
       foreach(var_8 in level.players) {
-        var_9 = _func_0E1(var_8.origin, var_6);
-        var_10 = _func_0AE(var_8.origin[2] - var_6[2]);
+        var_9 = _distance2d(var_8.origin, var_6);
+        var_10 = _abs(var_8.origin[2] - var_6[2]);
 
         if(!common_scripts\utility::_id_0F79(var_3, var_8) && var_9 < var_1 && var_10 < 230) {
           if(common_scripts\utility::_id_562E(var_2) && randomint(100) > 30)
             thread assassin_attack_cooldown();
 
           var_3 = common_scripts\utility::_id_0F6F(var_3, var_8);
-          var_8 _meth_8059(90, var_6, self, self, "MOD_IMPACT");
+          var_8 dodamage(90, var_6, self, self, "MOD_IMPACT");
           assassin_ignore_player(var_8);
         }
       }
@@ -1589,22 +1589,22 @@ dodamageonjoints(var_0, var_1, var_2) {
 }
 
 get_final_joint_origin(var_0) {
-  return self gettagorigin(var_0) + 42 * vectorNormalize(anglesToForward(self _meth_8181(var_0)));
+  return self gettagorigin(var_0) + 42 * vectorNormalize(anglesToForward(self gettagangles(var_0)));
 }
 
 zombie_assassin_charge_cleanup() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   self _meth_85E0(0);
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "attack_sprint");
   thread assassin_ready_attack(2.5);
   self notify("stop assassin strike");
 }
 
 zombie_assassin_spawn_voulnerability_cleanup() {
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   self _meth_85E0(0);
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
 }
 
 init_assassin_spawns_and_exits() {

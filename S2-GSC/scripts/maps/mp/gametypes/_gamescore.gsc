@@ -159,7 +159,7 @@ _id_47BD(var_0, var_1, var_2) {
   var_1 = var_1 * level._id_696A;
   _id_06DB(var_0, _id_063E(var_0) + var_1, var_2);
   level notify("update_team_score", var_0, _id_063E(var_0));
-  _func_0F5("script_mp_scoring: gameTime %d, team %s, score %d", gettime(), var_0, var_1);
+  _reconevent("script_mp_scoring: gameTime %d, team %s, score %d", gettime(), var_0, var_1);
   thread _id_47BE();
 }
 
@@ -246,7 +246,7 @@ _id_A174(var_0) {
   else
     var_1 = game["roundsWon"][var_0];
 
-  _func_156(var_0, var_1);
+  _setteamscore(var_0, var_1);
 }
 
 _id_063E(var_0) {
@@ -260,7 +260,7 @@ _id_83E3() {
   maps\mp\_utility::waittillslowprocessallowed();
 
   foreach(var_1 in level.players)
-  var_1 _meth_82A3();
+  var_1 updatescores();
 }
 
 _id_83E2() {
@@ -270,7 +270,7 @@ _id_83E2() {
   maps\mp\_utility::waittillslowprocessallowed();
 
   for(var_0 = 0; var_0 < level.players.size; var_0++) {
-    level.players[var_0] _meth_82A4();
+    level.players[var_0] updatedmscores();
     level.players[var_0]._id_A105 = 1;
   }
 }
@@ -416,7 +416,7 @@ _id_52DA() {
         continue;
       }
       var_4._id_A105 = 1;
-      var_4 _meth_82A4();
+      var_4 updatedmscores();
       var_1 = 1;
       wait 0.5;
     }

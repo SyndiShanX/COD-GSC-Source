@@ -51,10 +51,10 @@ _id_7031(var_0, var_1, var_2, var_3, var_4) {
   var_7 = var_1._id_34AC + -1 * anglesToForward(var_1.angles) * 2000;
   var_1._id_18C9 = spawn("script_model", (0, 0, 0));
   var_1._id_18C9 setModel("tag_origin");
-  var_1._id_18C9 _meth_8055(var_1, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
+  var_1._id_18C9 linkto(var_1, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
   var_1._id_18CA = spawn("script_model", (0, 0, 0));
   var_1._id_18CA setModel("tag_origin");
-  var_1._id_18CA _meth_8055(var_1, "TAG_BOMB_R", (0, 0, 0), (0, 0, 0));
+  var_1._id_18CA linkto(var_1, "TAG_BOMB_R", (0, 0, 0), (0, 0, 0));
   var_8 = 1;
 
   if(maps\mp\_utility::_id_579B() && isDefined(var_4) && !level._id_79A1)
@@ -202,7 +202,7 @@ _id_1719(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level._id_0B97 = 1;
   var_8 = _id_34B0(var_1, var_3);
 
-  if(isDefined(level._id_80B5) && isDefined(level._id_80B5[var_5])) {
+  if(isDefined(level.makeglobalunusable) && isDefined(level.makeglobalunusable[var_5])) {
     if(isDefined(var_6))
       _id_0526::_id_280E(var_8, var_2, var_5, var_6);
     else
@@ -218,7 +218,7 @@ _id_1719(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   level notify("begin_airstrike");
 
-  if(isDefined(level._id_80B5) && isDefined(level._id_80B5[var_5]))
+  if(isDefined(level.makeglobalunusable) && isDefined(level.makeglobalunusable[var_5]))
     thread _id_0526::_id_5FCB(var_8, var_5);
 }
 
@@ -297,7 +297,7 @@ _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(maps\mp\_utility::_id_585F())
     var_18 = 0;
 
-  if(maps\mp\_utility::_id_579B() && isDefined(level._id_79C2._id_80B0) && common_scripts\utility::_id_562E(level._id_79C2._id_80B0._id_4D10))
+  if(maps\mp\_utility::_id_579B() && isDefined(level._id_79C2.setcontents) && common_scripts\utility::_id_562E(level._id_79C2.setcontents._id_4D10))
     var_18 = 0;
 
   if(isDefined(level._id_0811) && level._id_0811)
@@ -320,8 +320,8 @@ _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_14._id_01C8 = var_5;
   _id_09E1(var_14);
   level thread _id_051E::_id_A0DC();
-  var_14 _meth_82C3(1);
-  var_14 _meth_82C4(1);
+  var_14 setcandamage(1);
+  var_14 setcanradiusdamage(1);
   var_14 thread maps\mp\gametypes\_damage::_id_8676(_id_4612(var_5), undefined, ::_id_6B9D, ::_id_6B9C, 1);
   var_14 thread _id_4AB8();
   var_14._id_6F2A = 0;
@@ -363,7 +363,7 @@ _id_74CE(var_0, var_1) {
   switch (var_0) {
     case "firebomb":
     case "airstrike":
-      self _meth_8276(var_1);
+      self scriptmodelplayanim(var_1);
       break;
     case "zm_carepackage":
     case "raid_carepackage":
@@ -371,7 +371,7 @@ _id_74CE(var_0, var_1) {
     case "emergency_carepackage":
     case "carepackage":
     case "paratroopers":
-      self _meth_8278(var_1);
+      self scriptmodelplayanimdeltamotion(var_1);
       break;
   }
 }
@@ -669,8 +669,8 @@ _id_9147(var_0, var_1) {
   var_3 = 15;
   var_4 = anglesToForward(var_1 getplayerangles());
 
-  if(vectordot(var_2, var_4) >= _func_0A7(var_3))
-    self _meth_808A(1);
+  if(vectordot(var_2, var_4) >= _cos(var_3))
+    self setstablemissile(1);
 }
 
 _id_5C27(var_0, var_1) {
@@ -694,19 +694,19 @@ _id_5C27(var_0, var_1) {
 }
 
 _id_5C26(var_0, var_1) {
-  self _meth_8059(2200, self.origin, var_1, var_0, "MOD_PROJECTILE", var_0._id_A9E0);
-  var_0 _meth_81D6();
+  self dodamage(2200, self.origin, var_1, var_0, "MOD_PROJECTILE", var_0._id_A9E0);
+  var_0 detonate();
 }
 
 _id_2818() {
   self._id_11C7 = 1000;
   self._id_11C5 = 1000;
-  self._id_11C9 = _func_195(self, self._id_11C7, self._id_11C5);
+  self._id_11C9 = _missile_createattractorent(self, self._id_11C7, self._id_11C5);
 }
 
 _id_2DD3() {
   if(isDefined(self._id_11C9))
-    _func_199(self._id_11C9);
+    _missile_deleteattractor(self._id_11C9);
 }
 
 _id_4611(var_0) {
@@ -917,7 +917,7 @@ _id_0EA1(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3) && var_3) {
     var_10 = var_1 + anglesToForward(var_2) * var_8;
-    self _meth_82B1(var_10, var_9);
+    self moveto(var_10, var_9);
   }
 
   var_11 = 4;
@@ -964,29 +964,29 @@ _id_703B() {
 
   for(;;) {
     level waittill("host_migration_begin");
-    self _meth_84CA(1);
+    self setshadowrendering(1);
     level waittill("host_migration_end");
-    self _meth_84CA(0);
+    self setshadowrendering(0);
   }
 }
 
 _id_7041() {
   self endon("airstrike_complete");
   waitframe();
-  _func_147(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_right");
-  _func_147(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_left");
-  _func_147(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_right_wingtip");
-  _func_147(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_left_wingtip");
+  _playfxontag(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_right");
+  _playfxontag(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_left");
+  _playfxontag(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_right_wingtip");
+  _playfxontag(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_left_wingtip");
 }
 
 _id_281E(var_0, var_1) {
   var_2 = spawn("script_model", (0, 0, 0));
-  var_2 _meth_834D("script_entity");
+  var_2 setscriptmoverkillcam("script_entity");
   var_2 _meth_80B1();
   var_3 = 4 + _id_44E6(var_1) + 8;
   var_2 thread _id_2D3B(var_3);
-  var_4 = _func_22E((35, -45, 0))["forward"];
-  var_2 _meth_8055(var_0, "tag_origin", var_4 * -1 * 1000, (35, -45, 0));
+  var_4 = _anglestoaxis((35, -45, 0))["forward"];
+  var_2 linkto(var_0, "tag_origin", var_4 * -1 * 1000, (35, -45, 0));
   var_0._id_5A2C = var_2;
 }
 
@@ -1118,7 +1118,7 @@ _id_34AD(var_0, var_1) {
 
   var_4 = common_scripts\utility::_id_3D5D(var_0.origin);
   var_5 = var_4 + anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles)) * (var_3 * 100000);
-  var_6 = _func_0DF(var_4, var_5, var_1);
+  var_6 = _pointonsegmentnearesttopoint(var_4, var_5, var_1);
   var_7 = distance(var_4, var_6);
   return var_7;
 }
@@ -1136,7 +1136,7 @@ _id_34AE(var_0, var_1, var_2) {
 
   var_5 = common_scripts\utility::_id_3D5D(var_0.origin);
   var_6 = var_5 + anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles)) * (var_4 * 100000);
-  var_7 = _func_0DF(var_5, var_6, var_1);
+  var_7 = _pointonsegmentnearesttopoint(var_5, var_6, var_1);
   var_8 = distance(var_5, var_7);
 
   if(var_8 <= var_2)
@@ -1198,7 +1198,7 @@ _id_9E3A(var_0, var_1) {
     return 0;
   }
 
-  var_2 = _id_83BA(var_0, var_1);
+  var_2 = vehicle_setvelocity(var_0, var_1);
 
   if(!isDefined(var_2) || !var_2)
     return 0;
@@ -1206,7 +1206,7 @@ _id_9E3A(var_0, var_1) {
   return 1;
 }
 
-_id_83BA(var_0, var_1) {
+vehicle_setvelocity(var_0, var_1) {
   self endon("stop_location_selection");
 
   if(!isDefined(level._id_5FF0))
@@ -1218,8 +1218,8 @@ _id_83BA(var_0, var_1) {
     var_2 = var_2 * 1.5;
 
   var_3 = 1;
-  self _meth_82FF("ui_map_location_num_planes", 1);
-  self _meth_82FF("ui_map_location_height", _id_460F(var_1));
+  self setclientomnvar("ui_map_location_num_planes", 1);
+  self setclientomnvar("ui_map_location_height", _id_460F(var_1));
   maps\mp\_utility::_id_05D4(var_1, "map_artillery_selector", var_3, var_2, 0.5);
   thread _id_A68F();
   var_4 = undefined;
@@ -1235,18 +1235,18 @@ _id_83BA(var_0, var_1) {
     if(_id_A272(var_7, var_8, self, var_1)) {
       var_4 = var_7;
       var_5 = var_8;
-      self _meth_82FF("ui_map_location_use_carepackages", 0);
-      self _meth_82FF("ui_map_location_num_planes", 0);
-      self _meth_82FF("ui_map_location_height", 0);
+      self setclientomnvar("ui_map_location_use_carepackages", 0);
+      self setclientomnvar("ui_map_location_num_planes", 0);
+      self setclientomnvar("ui_map_location_height", 0);
       break;
     } else
       thread _id_8BEE();
   }
 
-  self _meth_82DD(0, 0.3);
+  self setblurforplayer(0, 0.3);
   self notify("location_selection_complete");
   _id_0378::_id_8D74("ks_bombing_run_location_selected");
-  self _meth_82FF("ui_map_location_blocked", 0);
+  self setclientomnvar("ui_map_location_blocked", 0);
 
   if(maps\mp\_utility::_id_5668())
     return 0;
@@ -1268,17 +1268,17 @@ _id_8BEE() {
   self endon("stop_location_selection");
   self notify("airstrikeShowBlockedHUD");
   self endon("airstrikeShowBlockedHUD");
-  self _meth_82FF("ui_map_location_blocked", 1);
+  self setclientomnvar("ui_map_location_blocked", 1);
   wait 1.5;
-  self _meth_82FF("ui_map_location_blocked", 0);
+  self setclientomnvar("ui_map_location_blocked", 0);
 }
 
 _id_A68F() {
   self endon("location_selection_complete");
   self endon("disconnect");
   self waittill("stop_location_selection");
-  self _meth_82DD(0, 0.3);
-  self _meth_82FF("ui_map_location_blocked", 0);
+  self setblurforplayer(0, 0.3);
+  self setclientomnvar("ui_map_location_blocked", 0);
 
   if(maps\mp\gametypes\_hostmigration::_id_A782() > 0)
     self switchtoweapon(common_scripts\utility::_id_4550());
@@ -1289,7 +1289,7 @@ _id_A68F() {
 _id_A272(var_0, var_1, var_2, var_3) {
   var_4 = _id_460F(var_3);
   var_5 = 1;
-  return _func_2B1(var_0, var_4, var_1, var_5);
+  return _bombingruntracepassed(var_0, var_4, var_1, var_5);
 }
 
 _id_4570() {

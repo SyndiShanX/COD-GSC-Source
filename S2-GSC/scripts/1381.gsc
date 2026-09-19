@@ -8,7 +8,7 @@ _id_5373() {
 }
 
 unlocksurvivalmaps() {
-  if(!_func_2A3()) {
+  if(!_isonlinegame()) {
     return;
   }
   if(getdvarint("spv_shattered_srv_unlock_auto", 0) == 0) {
@@ -125,18 +125,18 @@ _id_400A() {
           continue;
         }
         if(common_scripts\utility::_id_562E(level.onlinegame)) {
-          if(_func_031(var_6) && var_6 == "all") {
+          if(_isstring(var_6) && var_6 == "all") {
             if(!isDefined(level.players)) {
               continue;
             }
             foreach(var_10 in level.players)
-            var_10 _id_83DB(var_8, var_4, var_5, var_3);
+            var_10 getanimentrycount(var_8, var_4, var_5, var_3);
 
             continue;
           }
 
-          if(!_func_279(var_6) && isPlayer(var_6))
-            var_6 _id_83DB(var_8, var_4, var_5, var_3);
+          if(!_isremovedentity(var_6) && isPlayer(var_6))
+            var_6 getanimentrycount(var_8, var_4, var_5, var_3);
         }
       }
 
@@ -147,7 +147,7 @@ _id_400A() {
   }
 }
 
-_id_83DB(var_0, var_1, var_2, var_3) {
+getanimentrycount(var_0, var_1, var_2, var_3) {
   if(!common_scripts\utility::_id_562E(self._id_596A)) {
     return;
   }

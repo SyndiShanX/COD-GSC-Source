@@ -6,10 +6,10 @@
 main() {
   _id_84F8();
   level thread maps\mp\_utility::_id_6F74(::onplayerspawned);
-  var_0 = _func_21F("auto62", "targetname");
+  var_0 = _getscriptablearray("auto62", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("lightpart", "off");
+  var_2 setscriptablepartstate("lightpart", "off");
 
   if(level._id_01D4 && getDvar("2695") != "true")
     xbox_optimizations();
@@ -26,7 +26,7 @@ onplayerspawned() {
   var_0 = self;
   var_0 endon("disconnect");
   wait 1.5;
-  var_0 _meth_806B(0.85, 0.25, 1, 1, 0);
+  var_0 digitaldistortsetparams(0.85, 0.25, 1, 1, 0);
 }
 
 xbox_optimizations() {

@@ -128,7 +128,7 @@ _id_1B01() {
       }
     }
 
-    wait(_func_0A5(2.0, 4.0));
+    wait(_randomfloatrange(2.0, 4.0));
   }
 }
 
@@ -166,7 +166,7 @@ _id_1961(var_0) {
 }
 
 _id_1A50(var_0, var_1, var_2, var_3) {
-  wait(_func_0A4(3, 5));
+  wait(_randomintrange(3, 5));
 
   if(!maps\mp\bots\_bots_util::_id_1937())
     return 1;
@@ -179,7 +179,7 @@ _id_1A50(var_0, var_1, var_2, var_3) {
 }
 
 bot_killstreak_weapon(var_0, var_1, var_2, var_3) {
-  wait(_func_0A4(3, 5));
+  wait(_randomintrange(3, 5));
 
   if(!maps\mp\bots\_bots_util::_id_1937())
     return 1;
@@ -214,7 +214,7 @@ _id_1A41(var_0, var_1, var_2, var_3) {
 }
 
 _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
-  wait(_func_0A4(2, 4));
+  wait(_randomintrange(2, 4));
 
   if(!isDefined(var_4))
     var_4 = "anywhere";
@@ -244,7 +244,7 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
     var_11 = maps\mp\bots\_bots_util::_id_19FA(0, 750, 0.6, 1);
 
     foreach(var_13 in var_11) {
-      if(_func_200(var_13))
+      if(_nodeexposedtosky(var_13))
         var_10 = common_scripts\utility::_id_0F6F(var_10, var_13);
     }
 
@@ -257,33 +257,33 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
         var_9 = common_scripts\utility::random(var_10);
     }
   } else if(var_4 == "hidden") {
-    var_16 = _func_0B8(self.origin, 256, 0, 40);
-    var_17 = self _meth_838A();
+    var_16 = _getnodesinradius(self.origin, 256, 0, 40);
+    var_17 = self getnearestnode();
 
     if(isDefined(var_17)) {
       var_18 = [];
 
       foreach(var_13 in var_16) {
-        if(_func_1F4(var_17, var_13, 1))
+        if(_nodesvisible(var_17, var_13, 1))
           var_18 = common_scripts\utility::_id_0F6F(var_18, var_13);
       }
 
-      var_9 = self _meth_8366(var_18, 1, "node_hide");
+      var_9 = self botnodepick(var_18, 1, "node_hide");
     }
   }
 
   if(isDefined(var_9) || var_4 == "anywhere") {
-    self _meth_8353("disable_movement", 1);
+    self botsetflag("disable_movement", 1);
 
     if(isDefined(var_9))
-      self _meth_836F(var_9.origin, 2.45, "script_forced");
+      self botlookatpoint(var_9.origin, 2.45, "script_forced");
 
     _id_1AF4(var_0, var_1, var_0._id_01D0);
     wait 2.0;
-    self _meth_8380("attack");
+    self botpressbutton("attack");
     wait 1.5;
     self switchtoweapon("none");
-    self _meth_8353("disable_movement", 0);
+    self botsetflag("disable_movement", 0);
   }
 
   return 1;
@@ -312,17 +312,17 @@ _id_1A87(var_0, var_1) {
 }
 
 _id_1A3D(var_0, var_1, var_2, var_3) {
-  wait(_func_0A4(3, 5));
+  wait(_randomintrange(3, 5));
 
   if(!maps\mp\bots\_bots_util::_id_1937()) {
     return;
   }
-  var_4 = _func_1F7(self.origin);
+  var_4 = _getzonenearest(self.origin);
 
   if(!isDefined(var_4)) {
     return;
   }
-  self _meth_8353("disable_movement", 1);
+  self botsetflag("disable_movement", 1);
   _id_1AF4(var_0, var_1, var_0._id_01D0);
   wait 2;
 
@@ -333,7 +333,7 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
   var_6 = -1;
   var_7 = 0;
   var_8 = [];
-  var_9 = _func_0A3(100) > 50;
+  var_9 = _randomfloat(100) > 50;
 
   for(var_10 = 0; var_10 < var_5; var_10++) {
     if(var_9)
@@ -341,8 +341,8 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
     else
       var_11 = var_10;
 
-    if(var_11 != var_4 && _func_1EC(var_11) < 0.25) {
-      var_12 = _func_1E7(var_11, self.team, "enemy_predict");
+    if(var_11 != var_4 && _botzonegetindoorpercent(var_11) < 0.25) {
+      var_12 = _botzonegetcount(var_11, self.team, "enemy_predict");
 
       if(var_12 > var_7) {
         var_6 = var_11;
@@ -354,18 +354,18 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
   }
 
   if(var_6 >= 0)
-    var_13 = _func_1FA(var_6);
+    var_13 = _getzoneorigin(var_6);
   else if(var_8.size > 0)
-    var_13 = _func_1FA(common_scripts\utility::random(var_8));
+    var_13 = _getzoneorigin(common_scripts\utility::random(var_8));
   else
-    var_13 = _func_1FA(randomint(level._id_AC9C));
+    var_13 = _getzoneorigin(randomint(level._id_AC9C));
 
   var_14 = 1;
 
   while(var_14) {
-    var_15 = (_func_0A5(-500, 500), _func_0A5(-500, 500), 0);
-    self notify("confirm_location", var_13 + var_15, _func_0A4(0, 360), (0.5, 0.5, 0), 0);
-    var_16 = common_scripts\utility::_id_A715("location_selection_complete", "airstrikeShowBlockedHUD", "single_location_selection_complete");
+    var_15 = (_randomfloatrange(-500, 500), _randomfloatrange(-500, 500), 0);
+    self notify("confirm_location", var_13 + var_15, _randomintrange(0, 360), (0.5, 0.5, 0), 0);
+    var_16 = common_scripts\utility::waittill_any_return("location_selection_complete", "airstrikeShowBlockedHUD", "single_location_selection_complete");
 
     if(var_16 == "location_selection_complete") {
       var_14 = 0;
@@ -376,7 +376,7 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
   }
 
   wait 1.0;
-  self _meth_8353("disable_movement", 0);
+  self botsetflag("disable_movement", 0);
 }
 
 _id_1B05() {
@@ -400,16 +400,16 @@ _id_1B05() {
   }
 
   var_0 = 0;
-  var_1 = _func_0A5(0.05, 4.0);
+  var_1 = _randomfloatrange(0.05, 4.0);
 
   for(;;) {
     wait(var_1);
-    var_1 = _func_0A5(0.05, 4.0);
+    var_1 = _randomfloatrange(0.05, 4.0);
 
     if(maps\mp\bots\_bots_util::_id_1A36()) {
       continue;
     }
-    if(self _meth_837D("strategyLevel") == 0) {
+    if(self botgetdifficultysetting("strategyLevel") == 0) {
       continue;
     }
     var_2 = 0;
@@ -426,12 +426,12 @@ _id_1B05() {
 
     if(!var_0 && var_2) {
       var_0 = 1;
-      self _meth_8353("hide_indoors", 1);
+      self botsetflag("hide_indoors", 1);
     }
 
     if(var_0 && !var_2) {
       var_0 = 0;
-      self _meth_8353("hide_indoors", 0);
+      self botsetflag("hide_indoors", 0);
     }
 
     level._id_0A2C[self.team] = var_2;
@@ -482,7 +482,7 @@ _id_6308(var_0, var_1, var_2) {
 
   while([[var_2]](var_0)) {
     if(gettime() > level._id_5B27 + 4000) {
-      _func_202("", 5.0, var_0, "only_sky");
+      _badplace_global("", 5.0, var_0, "only_sky");
       level._id_5B27 = gettime();
     }
 
@@ -510,8 +510,8 @@ _id_36FB(var_0) {
   if(maps\mp\_utility::_id_579B())
     return 0;
 
-  if(isDefined(level._id_80B4)) {
-    foreach(var_2 in level._id_80B4) {
+  if(isDefined(level.makeglobalusable)) {
+    foreach(var_2 in level.makeglobalusable) {
       if(maps\mp\_utility::_id_57E5(var_2._id_944C, "airstrike") && var_2.team != var_0)
         return 1;
     }

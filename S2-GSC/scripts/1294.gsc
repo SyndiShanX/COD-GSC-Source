@@ -167,7 +167,7 @@ _id_4698(var_0) {
     return var_1;
 
   var_3 = level._id_909C[var_2];
-  var_4 = _func_27B(var_3);
+  var_4 = _tablegetcolumncount(var_3);
 
   for(var_5 = 1; var_5 < var_4; var_5++) {
     var_6 = tablelookup(var_3, 0, "score_factors", var_5);
@@ -191,7 +191,7 @@ _id_4670(var_0, var_1) {
   if(!isDefined(var_2) || var_2 == "")
     var_2 = tablelookup(var_0, 0, "mp_default", var_1);
 
-  return _func_0AD(var_2);
+  return _float(var_2);
 }
 
 _id_4690(var_0) {
@@ -206,23 +206,23 @@ _id_4690(var_0) {
   if(getdvarint("spawning_revised_frontline") != 0)
     var_3 = "mp/spawnCriticalFactors_EXPERIMENTAL.csv";
 
-  var_4 = _func_27B(var_3);
+  var_4 = _tablegetcolumncount(var_3);
   var_5 = -1;
 
   for(var_6 = 1; var_6 < var_4; var_6++) {
-    if(var_2 == _func_1AE(var_3, 0, var_6)) {
+    if(var_2 == _tablelookupbyrow(var_3, 0, var_6)) {
       var_5 = var_6;
       break;
     }
   }
 
-  var_7 = _func_27A(var_3);
+  var_7 = _tablegetrowcount(var_3);
 
   for(var_8 = 1; var_8 < var_7; var_8++) {
-    var_9 = _func_1AE(var_3, var_8, 0);
+    var_9 = _tablelookupbyrow(var_3, var_8, 0);
 
     if(isDefined(var_9) && _id_56BE(var_9)) {
-      var_10 = _func_1AE(var_3, var_8, var_5);
+      var_10 = _tablelookupbyrow(var_3, var_8, var_5);
 
       if(isDefined(var_10) && (var_10 == "primary" || var_10 == "secondary" || var_10 == "bad")) {
         var_1[var_10][var_9]["criticalFactorName"] = var_9;
@@ -288,7 +288,7 @@ _id_3894(var_0, var_1, var_2) {
         continue;
       }
 
-      var_1._id_9AB8 = var_1._id_9AB8 + _id_050C::_id_80A2(var_6, var_7, var_0, var_1);
+      var_1._id_9AB8 = var_1._id_9AB8 + _id_050C::delete(var_6, var_7, var_0, var_1);
     }
   }
 }
@@ -329,7 +329,7 @@ _id_4007(var_0, var_1, var_2, var_3) {
     }
 
     if(getdvarint("3950", 0) == 1 && level.gametype != "zombies" && !maps\mp\_utility::_id_579B())
-      _func_18C("Spawning a player without any LOS data!");
+      _iprintlnbold("Spawning a player without any LOS data!");
   }
 
   _id_050D::_id_A167();
@@ -398,7 +398,7 @@ _id_909E(var_0, var_1) {
   return var_0._id_9AB8 > var_1._id_9AB8;
 }
 
-_id_8399(var_0, var_1, var_2, var_3) {
+scragentsetgoalradius(var_0, var_1, var_2, var_3) {
   var_4 = _id_4007(var_0, var_1, var_2, 0);
 
   foreach(var_6 in var_1) {
@@ -482,7 +482,7 @@ _id_8399(var_0, var_1, var_2, var_3) {
         var_21 = [];
 
         foreach(var_6 in var_10) {
-          if(_func_0E1(var_6.origin, var_20.origin) <= 1300)
+          if(_distance2d(var_6.origin, var_20.origin) <= 1300)
             var_21[var_21.size] = var_6;
         }
 
@@ -511,7 +511,7 @@ _id_4706(var_0) {
     return "secondary";
 }
 
-_id_839A(var_0) {
+scragentsetanimscale(var_0) {
   if(!isDefined(var_0))
     return undefined;
 
@@ -522,7 +522,7 @@ _id_839A(var_0) {
     if(_id_4706(var_3) != "primary") {
       continue;
     }
-    if(!_func_15E(var_3.origin) || _func_15D(var_3.origin)) {
+    if(!_canspawn(var_3.origin) || _positionwouldtelefrag(var_3.origin)) {
       continue;
     }
     if(isDefined(level.checkunscoredspawnpoint) && ![[level.checkunscoredspawnpoint]](var_3)) {
@@ -536,7 +536,7 @@ _id_839A(var_0) {
       if(_id_4706(var_3) != "secondary") {
         continue;
       }
-      if(!_func_15E(var_3.origin) || _func_15D(var_3.origin)) {
+      if(!_canspawn(var_3.origin) || _positionwouldtelefrag(var_3.origin)) {
         continue;
       }
       if(isDefined(level.checkunscoredspawnpoint) && ![[level.checkunscoredspawnpoint]](var_3)) {
@@ -551,7 +551,7 @@ _id_839A(var_0) {
       if(_id_4706(var_3) != "tertiary") {
         continue;
       }
-      if(!_func_15E(var_3.origin) || _func_15D(var_3.origin)) {
+      if(!_canspawn(var_3.origin) || _positionwouldtelefrag(var_3.origin)) {
         continue;
       }
       if(isDefined(level.checkunscoredspawnpoint) && ![[level.checkunscoredspawnpoint]](var_3)) {
@@ -563,7 +563,7 @@ _id_839A(var_0) {
 
   if(!isDefined(var_1)) {
     foreach(var_3 in var_0) {
-      if(!_func_15E(var_3.origin) || _func_15D(var_3.origin)) {
+      if(!_canspawn(var_3.origin) || _positionwouldtelefrag(var_3.origin)) {
         continue;
       }
       if(isDefined(level.checkunscoredspawnpoint) && ![[level.checkunscoredspawnpoint]](var_3)) {
@@ -579,15 +579,15 @@ _id_839A(var_0) {
   return var_1;
 }
 
-_id_8398(var_0, var_1, var_2, var_3) {
+scragentsetgoalentity(var_0, var_1, var_2, var_3) {
   level._id_9068._id_9090 = var_1;
 
   if(isDefined(level._id_746E) && var_0 != level._id_746E)
-    return _id_8399(var_0, var_1, var_2, var_3);
-  else if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level._id_5139 || !level.teambased && maps\mp\_utility::gettimepassed() == 0))
-    return _id_839A(var_1);
+    return scragentsetgoalradius(var_0, var_1, var_2, var_3);
+  else if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0))
+    return scragentsetanimscale(var_1);
   else
-    return _id_8399(var_0, var_1, var_2, var_3);
+    return scragentsetgoalradius(var_0, var_1, var_2, var_3);
 }
 
 _id_8BA2() {
@@ -657,7 +657,7 @@ _id_8BA2() {
 _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
   level._id_A6EC = 1;
 
-  if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level._id_5139 || !level.teambased && maps\mp\_utility::gettimepassed() == 0)) {
+  if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0)) {
     if(level.teambased)
       var_6 = _id_050D::_id_46A0(var_0);
     else
@@ -672,7 +672,7 @@ _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_6 = _id_050D::filterspawnpointszombiesactiveevent(var_6);
   }
 
-  var_7 = _id_8398(var_0, var_6, var_1, var_3);
+  var_7 = scragentsetgoalentity(var_0, var_6, var_1, var_3);
 
   if(isDefined(level._id_90A2) && level._id_90A2) {
     level._id_90A2 = 0;
@@ -685,9 +685,9 @@ _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(!isDefined(var_10))
         var_10 = -1;
 
-      _func_0F6(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", self.name, self._id_5CC6, var_10, var_0, var_8, var_9);
+      _reconspatialevent(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", self.name, self._id_5CC6, var_10, var_0, var_8, var_9);
     } else
-      _func_0F6(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", "unknown", -1, -1, var_0, var_8, var_9);
+      _reconspatialevent(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", "unknown", -1, -1, var_0, var_8, var_9);
 
     if(isDefined(game["spawnClaimFlipCount"]))
       game["spawnClaimFlipCount"]++;
@@ -714,9 +714,9 @@ _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
         if(!isDefined(var_10))
           var_10 = -1;
 
-        _func_0F6(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", self.name, self._id_5CC6, var_10, var_0, var_8, var_9);
+        _reconspatialevent(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", self.name, self._id_5CC6, var_10, var_0, var_8, var_9);
       } else
-        _func_0F6(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", "unknown", -1, -1, var_0, var_8, var_9);
+        _reconspatialevent(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", "unknown", -1, -1, var_0, var_8, var_9);
 
       if(isDefined(game["spawnClaimFlipCount"]))
         game["spawnClaimFlipCount"]++;

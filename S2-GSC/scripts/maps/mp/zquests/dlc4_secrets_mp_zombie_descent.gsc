@@ -19,7 +19,7 @@ african_set_0() {
   level thread maps\mp\zquests\zmb_secret_challenges_util::register_on_player_dmg_func(maps\mp\zquests\zmb_secret_challenges_util::kill_hidden_challenge, var_1, maps\mp\zquests\zmb_secret_challenges_util::agent_is_zombie);
   common_scripts\utility::_id_3C9F(_id_0557::_id_7838("quest_deathraven", "quest_deathraven_pickup_weap"));
 
-  if(self istouching(_func_18E("zone_gallery_deathravent_event", "targetname")))
+  if(self istouching(_getent("zone_gallery_deathravent_event", "targetname")))
     return 1;
   else
     return 0;
@@ -205,7 +205,7 @@ run_secret_challenges_kill_tracking(var_0, var_1, var_2, var_3, var_4, var_5, va
   if(common_scripts\utility::_id_562E(self.throwingzombie)) {
     var_9 = common_scripts\utility::_id_46B5("zmb_bloodraven_code_display", "targetname");
 
-    if(_func_0E1(self.origin, var_9.origin) < 260)
+    if(_distance2d(self.origin, var_9.origin) < 260)
       level.zombie_slam_dunks++;
   }
 }

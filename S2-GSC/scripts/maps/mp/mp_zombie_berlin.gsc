@@ -4,9 +4,9 @@
 ************************************************/
 
 main() {
-  _func_142("viewmodel_small");
-  _func_142("damage_light");
-  _func_142("damage_heavy");
+  _precacherumble("viewmodel_small");
+  _precacherumble("damage_light");
+  _precacherumble("damage_heavy");
   level._id_783F = 0;
   level.door_data_out_of_date = 0;
   level.zmb_uses_hint_notebook = 0;
@@ -134,9 +134,9 @@ init_drop_pod_doors() {
   var_0 = common_scripts\utility::_id_46B7("door", "targetname");
 
   foreach(var_2 in var_0) {
-    foreach(var_4 in var_2._id_8301) {
+    foreach(var_4 in var_2.setclientdvars) {
       if(var_4 _meth_85CE() == "animated_zbr_drop_pod")
-        var_4 _meth_83FA("light", "red", 0);
+        var_4 setscriptablepartstate("light", "red", 0);
     }
   }
 }
@@ -229,7 +229,7 @@ make_fodders_sizzler_airship() {
 sizzler_max_count_manager() {
   level endon("entered_airship_sizzler_pause");
   common_scripts\utility::_id_3C9F("flag_airship_summoned");
-  level.next_sizzler_inc_round = level._id_A980 + _func_0A4(3, 5);
+  level.next_sizzler_inc_round = level._id_A980 + _randomintrange(3, 5);
 
   for(;;) {
     while(level._id_A980 < level.next_sizzler_inc_round)
@@ -237,7 +237,7 @@ sizzler_max_count_manager() {
 
     if(level.maxactivesizzlers < 6) {
       level.maxactivesizzlers++;
-      level.next_sizzler_inc_round = level._id_A980 + _func_0A4(3, 5);
+      level.next_sizzler_inc_round = level._id_A980 + _randomintrange(3, 5);
     } else
       return;
 
@@ -246,32 +246,32 @@ sizzler_max_count_manager() {
 }
 
 mute_audio_on_intro() {
-  self _meth_8626("berl_intro_movie");
+  self clientaddsoundsubmix("berl_intro_movie");
 
   while(!level.gamehasstarted) {
     self freezecontrols(1);
-    self _meth_812B(0);
-    self _meth_8324();
-    self _meth_84CB();
+    self allowfire(0);
+    self disableoffhandweapons();
+    self disableoffhandsecondaryweapons();
     waitframe();
   }
 
   self freezecontrols(0);
-  self _meth_812B(1);
-  self _meth_8325();
-  self _meth_84CC();
-  self _meth_8627("berl_intro_movie");
+  self allowfire(1);
+  self enableoffhandweapons();
+  self enableoffhandsecondaryweapons();
+  self clientclearsoundsubmix("berl_intro_movie");
 }
 
 init_casual_melee_pickups() {
-  var_0 = _func_18E("casual_knife_pickup_trig", "targetname");
-  var_1 = _func_18E("casual_bat_pickup_trig", "targetname");
-  var_2 = _func_18E("casual_axe_pickup_trig", "targetname");
-  var_3 = _func_18E("shovel_pickup_trig", "targetname");
-  var_0 _meth_80CE(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_KNIFE");
-  var_1 _meth_80CE(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_BAT");
-  var_2 _meth_80CE(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_AXE");
-  var_3 _meth_80CE(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_SHOVEL");
+  var_0 = _getent("casual_knife_pickup_trig", "targetname");
+  var_1 = _getent("casual_bat_pickup_trig", "targetname");
+  var_2 = _getent("casual_axe_pickup_trig", "targetname");
+  var_3 = _getent("shovel_pickup_trig", "targetname");
+  var_0 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_KNIFE");
+  var_1 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_BAT");
+  var_2 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_AXE");
+  var_3 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_SHOVEL");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_1, "bat_casual");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_0, "dagger_casual");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_2, "pickaxe_casual");
@@ -288,7 +288,7 @@ church_door_listener() {
   common_scripts\utility::_id_3C9F("garden_to_church");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "garden_to_church" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "garden_to_church" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
@@ -298,7 +298,7 @@ cabaret_door_listener() {
   common_scripts\utility::_id_3C9F("club_to_garden");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "club_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "club_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
@@ -308,14 +308,14 @@ museum_door_listener() {
   common_scripts\utility::_id_3C9F("museum_to_garden");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1._id_819A) && var_1._id_819A == "museum_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "museum_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
       var_1 notify("open", undefined);
   }
 }
 
 tether_fakery() {
   level waittill("airship_anchor_courtyard_impact");
-  level.tether_fakery_vol = _func_18E("tether_fakery_vol", "targetname");
+  level.tether_fakery_vol = _getent("tether_fakery_vol", "targetname");
   var_0 = 225;
 
   for(;;) {
@@ -344,8 +344,8 @@ tether_fakery_update(var_0) {
 }
 
 airship_wunderbuss_picker() {
-  var_0 = _func_18E("airship_wunderbuss_pickup_trig", "targetname");
-  var_0 _meth_80CE(&"ZOMBIE_BERLIN_WEAPON_PICKUP");
+  var_0 = _getent("airship_wunderbuss_pickup_trig", "targetname");
+  var_0 sethintstring(&"ZOMBIE_BERLIN_WEAPON_PICKUP");
 
   for(;;) {
     var_0 waittill("trigger", var_1);

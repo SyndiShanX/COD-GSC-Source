@@ -43,23 +43,23 @@ init() {
 }
 
 rankinghubenabled() {
-  return _func_367() && !_func_135() && !_func_2A4();
+  return _func_367() && !_issplitscreen() && !_issystemlink();
 }
 
 onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(!_func_0C1(var_0) && (var_0 maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_585F() || rankinghubenabled())) {
+    if(!_isai(var_0) && (var_0 maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_585F() || rankinghubenabled())) {
       var_1 = var_0 getprestigelevel();
       var_2 = var_0 maps\mp\gametypes\_persistence::statget("experience");
 
       if(var_2 < 0)
         var_2 = 0;
 
-      var_3 = var_0 _meth_8507() - var_2;
-      var_4 = var_0 _meth_8507();
-    } else if(_func_0C1(var_0)) {
+      var_3 = var_0 gettotalmpxp() - var_2;
+      var_4 = var_0 gettotalmpxp();
+    } else if(_isai(var_0)) {
       var_0 maps\mp\_utility::_id_8568();
       var_2 = var_0.pers["rankxp"];
       var_1 = var_0.pers["prestige"];
@@ -82,7 +82,7 @@ onplayerconnect() {
     var_5 = var_0 getrankforxp(var_0 getrankxp());
     var_0.pers["rank"] = var_5;
 
-    if(_func_0C1(var_0))
+    if(_isai(var_0))
       var_0 maps\mp\_utility::_id_8567();
 
     var_0._id_AAD5 = 0;
@@ -235,7 +235,7 @@ getrankinfomaxxp(var_0) {
 }
 
 getrankinfofull(var_0) {
-  return _func_1AF(getranktable(), 0, var_0, 16);
+  return _tablelookupistring(getranktable(), 0, var_0, 16);
 }
 
 getrankinfolevel(var_0) {
@@ -279,7 +279,7 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(_func_0C1(self)) {
+  if(_isai(self)) {
     return;
   }
   if(!isPlayer(self)) {
@@ -325,7 +325,7 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
   if(var_1 > 0 && !isDefined(self._id_5F0B) && !_func_367()) {
     self._id_5F0B = 1;
-    _func_29A(self._id_01D6);
+    _lootservicevalidateplaytime(self._id_01D6);
   }
 
   var_6 = var_1;
@@ -384,7 +384,7 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
 
         var_14 = maps\mp\_utility::unsignedint_to_hexstring_fixed(var_10);
-        var_15 = _func_0AD(tablelookup("mp/statstable.csv", 18, var_14, 49));
+        var_15 = _float(tablelookup("mp/statstable.csv", 18, var_14, 49));
 
         if(var_15 != 0)
           var_6 = int(var_6 * var_15);
@@ -395,7 +395,7 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
         var_6 = var_16;
       }
 
-      var_7 = self _meth_8536();
+      var_7 = self getclanwarsbonus();
       self.pers["summary"]["xpToScaleWithActiveBoosts"] = self.pers["summary"]["xpToScaleWithActiveBoosts"] + var_6;
       break;
   }
@@ -535,7 +535,7 @@ _id_47B4(var_0) {
     thread updaterankannouncehud();
 
     if(_func_367()) {
-      _func_147(level._effect["level_up"], self, "tag_origin");
+      _playfxontag(level._effect["level_up"], self, "tag_origin");
       _id_0378::_id_8D74("hqs_level_up_flag_start");
     }
   }
@@ -560,7 +560,7 @@ _id_A157(var_0) {
   if(isDefined(self.bufferedstats) && isDefined(self.bufferedstats["timePlayedTotal"]) && isDefined(self.bufferedstats["timePlayedTotal"].value))
     var_4 = self.bufferedstats["timePlayedTotal"].value;
 
-  _func_0F5("script_mp_rankup_player: playerName %s, oldRank %d, newRank %d, xpGain %d, timePlayed %d", self.name, var_2 + 1, var_1 + 1, var_3, var_4);
+  _reconevent("script_mp_rankup_player: playerName %s, oldRank %d, newRank %d, xpGain %d, timePlayed %d", self.name, var_2 + 1, var_1 + 1, var_3, var_4);
 
   for(var_5 = var_2 + 1; var_5 <= var_1; var_5++) {
     if(var_5 == 1)
@@ -635,13 +635,13 @@ _id_AAD2(var_0, var_1) {
 
   if(level.gametype != "blades") {
     self._id_AAD5 = self._id_AAD5 + var_1;
-    self _meth_82FF("ui_points_popup", self._id_AAD5);
+    self setclientomnvar("ui_points_popup", self._id_AAD5);
   }
 
-  var_2 = _func_1B1("mp/xp_event_table.csv", 0, var_0);
+  var_2 = _tablelookuprownum("mp/xp_event_table.csv", 0, var_0);
 
   if(!isDefined(var_2) || isDefined(var_2) && var_2 == -1) {} else
-    self _meth_82FF("ui_points_popup_event", var_2);
+    self setclientomnvar("ui_points_popup_event", var_2);
 
   wait 1;
   self._id_AAD5 = 0;
@@ -694,7 +694,7 @@ getrankforxp(var_0) {
 }
 
 getprestigelevel() {
-  if(_func_0C1(self) && isDefined(self.pers["prestige_fake"]))
+  if(_isai(self) && isDefined(self.pers["prestige_fake"]))
     return self.pers["prestige_fake"];
   else
     return maps\mp\gametypes\_persistence::statget("prestige");
@@ -732,7 +732,7 @@ _id_50EB(var_0) {
   else
     var_3 = getrankinfomaxxp(level.maxrank) - _id_465F();
 
-  var_4 = int(_func_0AF(var_1, var_3)) + var_0;
+  var_4 = int(_min(var_1, var_3)) + var_0;
 
   if(var_4 > var_3)
     var_4 = var_3;
@@ -759,13 +759,13 @@ monitorinventoryxpupdates() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!_func_2A3() || !_func_367() || common_scripts\utility::_id_562E(level._id_A259)) {
+  if(!_isonlinegame() || !_func_367() || common_scripts\utility::_id_562E(level._id_A259)) {
     return;
   }
   for(;;) {
     self waittill("client_stats_update");
     var_0 = self.pers["redeemedxp"];
-    var_1 = self _meth_8507() - self.pers["rankxp"];
+    var_1 = self gettotalmpxp() - self.pers["rankxp"];
 
     if(var_1 > var_0) {
       var_2 = var_0 + self.pers["rankxp"];
@@ -773,7 +773,7 @@ monitorinventoryxpupdates() {
 
       if(maps\mp\_utility::rankingenabled() && _id_A157(var_2)) {
         thread updaterankannouncehud();
-        _func_147(level._effect["level_up"], self, "tag_origin");
+        _playfxontag(level._effect["level_up"], self, "tag_origin");
         _id_0378::_id_8D74("hqs_level_up_flag_start");
 
         if(getdvarint("5956", 0) == 1)

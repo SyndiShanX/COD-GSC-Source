@@ -7,9 +7,9 @@ init() {
   setdvarifuninitialized("firebomb_debug", 0);
   level._id_80B7["firebomb"] = 230;
   level._id_80B8["firebomb"] = 65;
-  level._id_80B6["firebomb"] = -1;
+  level.setwhizbyprobabilities["firebomb"] = -1;
   level._id_80B9["firebomb"] = 6.0;
-  level._id_80B5["firebomb"] = 24.0;
+  level.makeglobalunusable["firebomb"] = 24.0;
   level._id_5A61["firebomb"] = ::_id_9E2B;
   level._id_5A7D["firebomb_bomb_mp"] = "firebomb";
   level._id_5A7D["firebomb_bomb_axis_mp"] = "firebomb";
@@ -56,8 +56,8 @@ _id_27EC(var_0) {
 
 _id_749B(var_0, var_1) {
   var_2 = undefined;
-  var_2 = _func_14B(level._effect["fire_bomb_fire"], var_0);
-  _func_14C(var_2);
+  var_2 = _spawnfx(level._effect["fire_bomb_fire"], var_0);
+  _triggerfx(var_2);
   wait 12;
 
   if(isDefined(var_2))
@@ -94,7 +94,7 @@ _id_6393(var_0, var_1, var_2, var_3, var_4) {
 
   while(var_6 < var_8) {
     foreach(var_10 in level.players) {
-      if(_func_279(var_10)) {
+      if(_isremovedentity(var_10)) {
         continue;
       }
       if(var_10.team != var_3 || isDefined(var_2) && var_10 == var_2 || isDefined(level.hardcoremode) && level.hardcoremode) {
@@ -103,7 +103,7 @@ _id_6393(var_0, var_1, var_2, var_3, var_4) {
             if(_id_73E1(var_10, var_0, var_7)) {
               if(_id_740F(var_10, var_0)) {
                 var_10._id_5B9A = gettime();
-                var_10 _meth_8059(40, var_10.origin, var_2, undefined, "MOD_BURNED", "firebomb_flames_mp");
+                var_10 dodamage(40, var_10.origin, var_2, undefined, "MOD_BURNED", "firebomb_flames_mp");
               }
             }
           }
@@ -122,7 +122,7 @@ _id_73E1(var_0, var_1, var_2) {
   if(!isDefined(var_1))
     return 0;
 
-  var_3 = var_0 _meth_808F();
+  var_3 = var_0 getorigin();
 
   if(var_3[2] - var_1[2] > 256)
     return 0;
@@ -135,7 +135,7 @@ _id_73E1(var_0, var_1, var_2) {
 _id_2825(var_0, var_1, var_2) {
   var_3 = spawnStruct();
   var_4 = var_1 * var_2;
-  var_5 = _func_0E9(var_1, (0, 0, 1)) * var_2;
+  var_5 = _vectorcross(var_1, (0, 0, 1)) * var_2;
   var_3._id_0794 = var_0 + var_4 - var_5;
   var_3._id_14C2 = var_0 + var_4 + var_5;
   var_3._id_1DEC = var_0 - var_4 + var_5;
@@ -145,17 +145,17 @@ _id_2825(var_0, var_1, var_2) {
 
 _id_740F(var_0, var_1) {
   if(var_0.origin[2] <= var_1[2])
-    return _func_07E(var_0.origin + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0) && _func_07E(var_1 + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0);
+    return _bullettracepassed(var_0.origin + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0) && _bullettracepassed(var_1 + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0);
   else
-    return _func_07E(var_1 + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0) && _func_07E(var_0.origin + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0);
+    return _bullettracepassed(var_1 + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0) && _bullettracepassed(var_0.origin + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0);
 }
 
 _id_7542(var_0, var_1) {
-  return _id_803F(var_0, var_1._id_0794, var_1._id_14C2, var_1._id_298F) && _id_803F(var_0, var_1._id_14C2, var_1._id_1DEC, var_1._id_0794) && _id_803F(var_0, var_1._id_1DEC, var_1._id_298F, var_1._id_14C2) && _id_803F(var_0, var_1._id_298F, var_1._id_0794, var_1._id_1DEC);
+  return getgunangles(var_0, var_1._id_0794, var_1._id_14C2, var_1._id_298F) && getgunangles(var_0, var_1._id_14C2, var_1._id_1DEC, var_1._id_0794) && getgunangles(var_0, var_1._id_1DEC, var_1._id_298F, var_1._id_14C2) && getgunangles(var_0, var_1._id_298F, var_1._id_0794, var_1._id_1DEC);
 }
 
-_id_803F(var_0, var_1, var_2, var_3) {
-  var_4 = _func_0E9(var_2 - var_1, var_3 - var_1);
-  var_5 = _func_0E9(var_2 - var_1, var_0 - var_1);
+getgunangles(var_0, var_1, var_2, var_3) {
+  var_4 = _vectorcross(var_2 - var_1, var_3 - var_1);
+  var_5 = _vectorcross(var_2 - var_1, var_0 - var_1);
   return vectordot(var_4, var_5) >= 0;
 }

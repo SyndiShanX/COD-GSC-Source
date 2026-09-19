@@ -13,7 +13,7 @@ main() {
   _id_04D4::setupcallbacks();
   level.rankedmatch = 0;
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -29,14 +29,14 @@ main() {
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-  _func_153("hub");
+  _setteammode("hub");
   maps\mp\_utility::_id_873B(1);
   level.callbackplayerconnect = ::onhubplayerconnect;
   level._id_746E = _func_2EE();
   level._id_6BAF = ::_id_6BAF;
   level._id_6B5C = ::_id_6B5C;
   level._id_4696 = ::_id_4696;
-  level._id_2F85 = 1;
+  level.disableforfeit = 1;
   level._id_1B3E = 1;
   level._id_1385 = ::_id_4F48;
   level._id_6BA7 = ::_id_6BA7;
@@ -49,7 +49,7 @@ main() {
 }
 
 onhubplayerconnect() {
-  self _meth_8506(0);
+  self setmlgspectator(0);
   [[maps\mp\gametypes\_playerlogic::callback_playerconnect]]();
 }
 
@@ -77,13 +77,13 @@ hubclass() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653();
-  _func_035("scr_hub_roundswitch", 0);
+  _setdynamicdvar("scr_hub_roundswitch", 0);
   maps\mp\_utility::registerroundswitchdvar("hub", 0, 0, 9);
-  _func_035("scr_hub_roundlimit", 1);
+  _setdynamicdvar("scr_hub_roundlimit", 1);
   maps\mp\_utility::registerroundlimitdvar("war", 1);
-  _func_035("scr_hub_winlimit", 1);
+  _setdynamicdvar("scr_hub_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("hub", 1);
-  _func_035("scr_hub_halftime", 0);
+  _setdynamicdvar("scr_hub_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("hub", 0);
 }
 
@@ -116,7 +116,7 @@ _id_6BB6() {
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
 
   if(!isDefined(game["switchedsides"]))
     game["switchedsides"] = 0;

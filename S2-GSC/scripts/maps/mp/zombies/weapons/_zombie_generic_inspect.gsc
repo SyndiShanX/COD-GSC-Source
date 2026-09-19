@@ -6,7 +6,7 @@
 zmb_do_weapon_inspect(var_0) {
   var_1 = self;
 
-  while(var_1 _meth_833B())
+  while(var_1 isswitchingweapon())
     waitframe();
 
   var_1 _id_0586::_id_078C(var_0);
@@ -22,6 +22,6 @@ zmb_do_weapon_inspect(var_0) {
   var_1 common_scripts\utility::_id_0617();
   var_1 common_scripts\utility::_id_0614();
 
-  if(var_1 _meth_8319(var_0))
+  if(var_1 hasweapon(var_0))
     var_1 _id_0586::_id_0790(var_0);
 }

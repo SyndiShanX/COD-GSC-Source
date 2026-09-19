@@ -18,7 +18,7 @@ _id_A956(var_0) {
       }
 
       if(!isDefined(var_0) || var_0 == 0)
-        var_1 _meth_805C();
+        var_1 hide();
 
       var_1 waittill("missile_stuck");
 
@@ -37,7 +37,7 @@ _id_A956(var_0) {
           var_1.origin = var_4["position"];
         }
 
-        var_1 _meth_805B();
+        var_1 show();
       }
 
       self._id_9DCF = common_scripts\utility::_id_0FA0(self._id_9DCF);
@@ -87,12 +87,12 @@ _id_9DD8() {
     return;
   }
   self._id_94B9 = 1;
-  _func_147(common_scripts\utility::_id_44F5("mine_stunned"), self, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5("mine_stunned"), self, "tag_origin");
 }
 
 _id_9DD9() {
   self._id_94B9 = 0;
-  _func_148(common_scripts\utility::_id_44F5("mine_stunned"), self, "tag_origin");
+  _stopfxontag(common_scripts\utility::_id_44F5("mine_stunned"), self, "tag_origin");
 }
 
 _id_9DD1(var_0) {
@@ -120,8 +120,8 @@ _id_9DDB(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 endon("death");
-  self._id_9D65 _meth_80CD("HINT_NOICON");
-  self._id_9D65 _meth_80CE(&"MP_PICKUP_TROPHY");
+  self._id_9D65 setcursorhint("HINT_NOICON");
+  self._id_9D65 sethintstring(&"MP_PICKUP_TROPHY");
   self._id_9D65 maps\mp\_utility::setselfusable(var_0);
   self._id_9D65 thread maps\mp\_utility::_id_6819(var_0);
 
@@ -209,7 +209,7 @@ _id_9DCC(var_0, var_1, var_2, var_3) {
       }
 
       if(!isDefined(var_7._id_0117))
-        var_7._id_0117 = _func_1B3(var_7);
+        var_7._id_0117 = _getmissileowner(var_7);
 
       if(isDefined(var_7._id_0117) && level.teambased && var_7._id_0117.team == var_0.team) {
         continue;
@@ -223,7 +223,7 @@ _id_9DCC(var_0, var_1, var_2, var_3) {
       var_8 = distancesquared(var_7.origin, self.origin);
 
       if(var_8 < var_4) {
-        if(_func_07E(var_7.origin, self.origin, 0, self)) {
+        if(_bullettracepassed(var_7.origin, self.origin, 0, self)) {
           var_9 = self.origin + (0, 0, 32);
 
           if(isDefined(self._id_5B09))
@@ -291,9 +291,9 @@ _id_9DD4(var_0, var_1) {
   self notify("trophyDelayClearLaser");
   self endon("trophyDelayClearLaser");
   self._id_5B09.angles = vectortoangles(var_1.origin - self._id_5B09.origin);
-  self._id_5B09 _meth_80A4("tracking_drone_laser");
+  self._id_5B09 laseron("tracking_drone_laser");
   wait 0.7;
-  self._id_5B09 _meth_80A5();
+  self._id_5B09 laseroff();
 }
 
 _id_9DCD(var_0, var_1) {
@@ -341,7 +341,7 @@ _id_9DD2(var_0) {
   self endon("death");
   var_0 endon("death");
   self endon("change_owner");
-  self _meth_82C3(1);
+  self setcandamage(1);
   self.health = 999999;
   self.maxhealth = 100;
   self._id_006A = 0;
@@ -399,12 +399,12 @@ _id_9DD2(var_0) {
 }
 
 _id_9DD0() {
-  _func_147(common_scripts\utility::_id_44F5("sentry_explode_mp"), self, "tag_origin");
-  _func_147(common_scripts\utility::_id_44F5("sentry_smoke_mp"), self, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5("sentry_explode_mp"), self, "tag_origin");
+  _playfxontag(common_scripts\utility::_id_44F5("sentry_smoke_mp"), self, "tag_origin");
   self playSound("sentry_explode");
   self notify("death");
   var_0 = self.origin;
-  self._id_9D65 _meth_80B3();
+  self._id_9D65 makeunusable();
 
   if(isDefined(self._id_5B09))
     self._id_5B09 delete();

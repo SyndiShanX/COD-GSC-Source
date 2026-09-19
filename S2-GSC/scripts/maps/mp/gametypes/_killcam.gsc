@@ -9,23 +9,23 @@ init() {
 }
 
 _id_8649(var_0, var_1, var_2, var_3, var_4) {
-  self _meth_82FF("cam_scene_name", var_0);
-  self _meth_82FF("cam_scene_lead", var_1);
-  self _meth_82FF("cam_scene_support", var_2);
+  self setclientomnvar("cam_scene_name", var_0);
+  self setclientomnvar("cam_scene_lead", var_1);
+  self setclientomnvar("cam_scene_support", var_2);
 
   if(isDefined(var_3))
-    self _meth_82FF("cam_scene_lead_alt", var_3);
+    self setclientomnvar("cam_scene_lead_alt", var_3);
   else
-    self _meth_82FF("cam_scene_lead_alt", var_1);
+    self setclientomnvar("cam_scene_lead_alt", var_1);
 
   if(isDefined(var_4))
-    self _meth_82FF("cam_scene_support_alt", var_4);
+    self setclientomnvar("cam_scene_support_alt", var_4);
   else
-    self _meth_82FF("cam_scene_support_alt", var_2);
+    self setclientomnvar("cam_scene_support_alt", var_2);
 }
 
 _id_86B7(var_0, var_1, var_2, var_3, var_4) {
-  self _meth_82FF("ui_killcam_drawTargetBox", 0);
+  self setclientomnvar("ui_killcam_drawTargetBox", 0);
 
   if(isDefined(var_3._id_1187) && var_1 >= 0) {
     if(var_3._id_1187 == "dog")
@@ -38,7 +38,7 @@ _id_86B7(var_0, var_1, var_2, var_3, var_4) {
     _id_8649("killcam_agent", var_3._id_1186, self getentitynumber());
   else if(isDefined(var_3) && isDefined(var_2) && (var_2 == "turretweapon_plane_gunner_turret_mp" || var_2 == "turretweapon_plane_gunner_turret_grenadier_mp")) {
     _id_8649("unknown", -1, -1);
-    self _meth_82FF("ui_killcam_drawTargetBox", 1);
+    self setclientomnvar("ui_killcam_drawTargetBox", 1);
     return 1;
   } else if(var_1 >= 0) {
     _id_8649("unknown", -1, -1);
@@ -52,7 +52,7 @@ _id_86B7(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_585A(var_0, var_1, var_2) {
-  if(isDefined(var_0) && var_0 getentitynumber() == _func_15B() && isDefined(var_1) && isDefined(var_1._id_5A2C))
+  if(isDefined(var_0) && var_0 getentitynumber() == _worldentnumber() && isDefined(var_1) && isDefined(var_1._id_5A2C))
     return 1;
 
   if(isDefined(var_2) && (var_2 == "turretweapon_tank_panzer_cannon_mp_left" || var_2 == "turretweapon_tank_panzer_cannon_mp_right" || var_2 == "magnifying_glass_mp"))
@@ -69,8 +69,8 @@ _id_7681(var_0, var_1, var_2, var_3) {
 
     if(isPlayer(self) && isDefined(var_1) && isPlayer(var_1)) {
       var_5 = (gettime() - var_5) / 1000;
-      self._id_9459 = self _meth_8423(var_1, var_2 + var_5, var_3, var_4);
-      self _meth_8534(var_3);
+      self._id_9459 = self loadcustomizationplayerview(var_1, var_2 + var_5, var_3, var_4);
+      self precachekillcamiconforweapon(var_3);
     }
   }
 }
@@ -133,7 +133,7 @@ _id_5A2A(var_0, var_1, var_2, var_3) {
 
 _id_5A34(var_0, var_1) {
   var_2 = 0;
-  return var_1 && level._id_5A29 && !(isDefined(var_0._id_1F3F) && var_0._id_1F3F) && game["state"] == "playing" && !var_0 maps\mp\_utility::isusingremote() && !level._id_8C03 && (!_func_1EF(var_0) || var_2);
+  return var_1 && level._id_5A29 && !(isDefined(var_0._id_1F3F) && var_0._id_1F3F) && game["state"] == "playing" && !var_0 maps\mp\_utility::isusingremote() && !level._id_8C03 && (!_isagent(var_0) || var_2);
 }
 
 _id_74C9() {
@@ -152,18 +152,18 @@ _id_74C9() {
   var_1 = 0.05;
   var_2 = _id_04F0::_id_4632();
   var_3 = "playofthegame";
-  self _meth_82FF("ui_killcam_end_milliseconds", 0);
-  self _meth_82FF("ui_killcam_killedby_weapon", -1);
-  self _meth_82FF("ui_killcam_killedby_killstreak", -1);
-  self _meth_82FF("ui_killcam_copycat", 0);
-  self _meth_82FF("ui_killcam_paratrooperInsert", 0);
-  self _meth_82FF("ui_killcam_killedby_weaponReputation", 0);
-  self _meth_82FF("ui_killcam_action", 0);
-  self _meth_82FF("ui_killcam_type", 3);
-  self _meth_82FF("ui_killcam_killedby_id", level._id_74CA);
+  self setclientomnvar("ui_killcam_end_milliseconds", 0);
+  self setclientomnvar("ui_killcam_killedby_weapon", -1);
+  self setclientomnvar("ui_killcam_killedby_killstreak", -1);
+  self setclientomnvar("ui_killcam_copycat", 0);
+  self setclientomnvar("ui_killcam_paratrooperInsert", 0);
+  self setclientomnvar("ui_killcam_killedby_weaponReputation", 0);
+  self setclientomnvar("ui_killcam_action", 0);
+  self setclientomnvar("ui_killcam_type", 3);
+  self setclientomnvar("ui_killcam_killedby_id", level._id_74CA);
   maps\mp\_utility::_id_A165("spectator");
   self._id_0188 = 1;
-  self _meth_8533(0);
+  self onlystreamactiveweapon(0);
   _func_3B7(0);
   self.killcamentity = -1;
   self._id_0020 = var_2 + var_0;
@@ -171,18 +171,18 @@ _id_74C9() {
   self._id_5A2F = var_2;
   self._id_014A = 0;
   thread _id_04F0::_id_772D();
-  self _meth_826F("allies", 1);
-  self _meth_826F("axis", 1);
-  self _meth_826F("freelook", 1);
-  self _meth_826F("none", 1);
+  self allowspectateteam("allies", 1);
+  self allowspectateteam("axis", 1);
+  self allowspectateteam("freelook", 1);
+  self allowspectateteam("none", 1);
 
   if(level._id_6520) {
     foreach(var_5 in level._id_985B)
-    self _meth_826F(var_5, 1);
+    self allowspectateteam(var_5, 1);
   }
 
   foreach(var_5 in level._id_985B)
-  self _meth_826F(var_5, 1);
+  self allowspectateteam(var_5, 1);
 
   thread _id_36B5(var_3);
   thread _id_6164(var_3);
@@ -192,7 +192,7 @@ _id_74C9() {
     return;
   }
   self._id_5A2F = var_2 - 0.05;
-  self _meth_82FF("ui_killcam_end_milliseconds", int(var_2 * 1000) + gettime());
+  self setclientomnvar("ui_killcam_end_milliseconds", int(var_2 * 1000) + gettime());
   thread _id_9046(var_3);
   self._id_8C8A = 0;
   self._id_5A31 = maps\mp\_utility::_id_44FA();
@@ -356,40 +356,40 @@ _id_5A29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     }
   }
 
-  self _meth_82FF("ui_killcam_end_milliseconds", 0);
-  self _meth_82FF("ui_show_overview_map_icons", 0);
+  self setclientomnvar("ui_killcam_end_milliseconds", 0);
+  self setclientomnvar("ui_show_overview_map_icons", 0);
 
-  if(_func_1EF(var_9) && !isDefined(var_9._id_565F)) {
+  if(_isagent(var_9) && !isDefined(var_9._id_565F)) {
     return;
   }
   if(isPlayer(var_9))
-    self _meth_82FF("ui_killcam_killedby_id", var_9 getentitynumber());
-  else if(_func_1EF(var_9) || var_15)
-    self _meth_82FF("ui_killcam_killedby_id", -1);
+    self setclientomnvar("ui_killcam_killedby_id", var_9 getentitynumber());
+  else if(_isagent(var_9) || var_15)
+    self setclientomnvar("ui_killcam_killedby_id", -1);
 
   if(isDefined(var_4)) {
     if(maps\mp\_utility::iskillstreakweapon(var_4)) {
       var_20 = maps\mp\_utility::_id_4545(level._id_5A7D[var_4]);
-      self _meth_82FF("ui_killcam_killedby_killstreak", var_20);
-      self _meth_82FF("ui_killcam_killedby_weapon", -1);
-      self _meth_82FF("ui_killcam_killedby_attachment1", -1);
-      self _meth_82FF("ui_killcam_killedby_attachment2", -1);
-      self _meth_82FF("ui_killcam_killedby_attachment3", -1);
-      self _meth_82FF("ui_killcam_killedby_attachment4", -1);
-      self _meth_82FF("ui_killcam_copycat", 0);
-      self _meth_82FF("ui_killcam_killedby_weaponReputation", 0);
+      self setclientomnvar("ui_killcam_killedby_killstreak", var_20);
+      self setclientomnvar("ui_killcam_killedby_weapon", -1);
+      self setclientomnvar("ui_killcam_killedby_attachment1", -1);
+      self setclientomnvar("ui_killcam_killedby_attachment2", -1);
+      self setclientomnvar("ui_killcam_killedby_attachment3", -1);
+      self setclientomnvar("ui_killcam_killedby_attachment4", -1);
+      self setclientomnvar("ui_killcam_copycat", 0);
+      self setclientomnvar("ui_killcam_killedby_weaponReputation", 0);
     } else if(var_15) {
-      self _meth_82FF("ui_killcam_killedby_killstreak", -1);
-      self _meth_82FF("ui_killcam_killedby_weapon", -1);
-      self _meth_82FF("ui_killcam_killedby_attachment1", -1);
-      self _meth_82FF("ui_killcam_killedby_attachment2", -1);
-      self _meth_82FF("ui_killcam_killedby_attachment3", -1);
-      self _meth_82FF("ui_killcam_killedby_attachment4", -1);
-      self _meth_82FF("ui_killcam_copycat", 0);
-      self _meth_82FF("ui_killcam_killedby_weaponReputation", 0);
+      self setclientomnvar("ui_killcam_killedby_killstreak", -1);
+      self setclientomnvar("ui_killcam_killedby_weapon", -1);
+      self setclientomnvar("ui_killcam_killedby_attachment1", -1);
+      self setclientomnvar("ui_killcam_killedby_attachment2", -1);
+      self setclientomnvar("ui_killcam_killedby_attachment3", -1);
+      self setclientomnvar("ui_killcam_killedby_attachment4", -1);
+      self setclientomnvar("ui_killcam_copycat", 0);
+      self setclientomnvar("ui_killcam_killedby_weaponReputation", 0);
     } else {
       var_21 = [];
-      var_22 = _func_05F(var_4);
+      var_22 = _getweaponbasename(var_4);
       var_4 = _id_04CB::_id_7CCD(var_4);
 
       if(isDefined(var_22)) {
@@ -418,45 +418,45 @@ _id_5A29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
           }
 
           var_29 = maps\mp\_utility::unsignedint_to_hexstring_fixed(var_24);
-          var_25 = _func_1B1("mp/statstable.csv", 18, var_29);
+          var_25 = _tablelookuprownum("mp/statstable.csv", 18, var_29);
         } else
-          var_25 = _func_1B1("mp/statstable.csv", 2, var_22);
+          var_25 = _tablelookuprownum("mp/statstable.csv", 2, var_22);
 
-        self _meth_82FF("ui_killcam_killedby_weapon", var_25);
-        self _meth_82FF("ui_killcam_killedby_killstreak", -1);
-        self _meth_82FF("ui_killcam_killedby_weaponReputation", 0);
+        self setclientomnvar("ui_killcam_killedby_weapon", var_25);
+        self setclientomnvar("ui_killcam_killedby_killstreak", -1);
+        self setclientomnvar("ui_killcam_killedby_weaponReputation", 0);
 
         if(canincludeattachmentsforweapon(var_22))
-          var_21 = _func_061(var_4);
+          var_21 = _getweaponattachments(var_4);
 
         var_21 = common_scripts\utility::_id_0F93(var_21, "special_grip");
 
-        if(!level._id_8C03 && maps\mp\_utility::_id_761E() && isPlayer(var_9) && !isbot(self) && !_func_1EF(self) && maps\mp\gametypes\_class::_id_5E0A(var_9)) {
-          self _meth_82FF("ui_killcam_copycat", 1);
+        if(!level._id_8C03 && maps\mp\_utility::_id_761E() && isPlayer(var_9) && !isbot(self) && !_isagent(self) && maps\mp\gametypes\_class::_id_5E0A(var_9)) {
+          self setclientomnvar("ui_killcam_copycat", 1);
           thread _id_A68A(var_9);
         } else
-          self _meth_82FF("ui_killcam_copycat", 0);
+          self setclientomnvar("ui_killcam_copycat", 0);
       } else {
-        self _meth_82FF("ui_killcam_killedby_weapon", -1);
-        self _meth_82FF("ui_killcam_killedby_killstreak", -1);
-        self _meth_82FF("ui_killcam_copycat", 0);
+        self setclientomnvar("ui_killcam_killedby_weapon", -1);
+        self setclientomnvar("ui_killcam_killedby_killstreak", -1);
+        self setclientomnvar("ui_killcam_copycat", 0);
       }
 
       for(var_30 = 0; var_30 < 4; var_30++) {
         if(isDefined(var_21[var_30])) {
-          var_31 = _func_1B1("mp/attachmenttable.csv", 3, maps\mp\_utility::_id_1150(var_21[var_30]));
-          self _meth_82FF("ui_killcam_killedby_attachment" + (var_30 + 1), var_31);
+          var_31 = _tablelookuprownum("mp/attachmenttable.csv", 3, maps\mp\_utility::_id_1150(var_21[var_30]));
+          self setclientomnvar("ui_killcam_killedby_attachment" + (var_30 + 1), var_31);
           continue;
         }
 
-        self _meth_82FF("ui_killcam_killedby_attachment" + (var_30 + 1), -1);
+        self setclientomnvar("ui_killcam_killedby_attachment" + (var_30 + 1), -1);
       }
     }
   } else {
-    self _meth_82FF("ui_killcam_killedby_weapon", -1);
-    self _meth_82FF("ui_killcam_killedby_killstreak", -1);
-    self _meth_82FF("ui_killcam_copycat", 0);
-    self _meth_82FF("ui_killcam_killedby_weaponReputation", 0);
+    self setclientomnvar("ui_killcam_killedby_weapon", -1);
+    self setclientomnvar("ui_killcam_killedby_killstreak", -1);
+    self setclientomnvar("ui_killcam_copycat", 0);
+    self setclientomnvar("ui_killcam_killedby_weaponReputation", 0);
   }
 
   if(!var_15 && isDefined(var_9._id_5DFA) && var_9._id_5DFA.size > 4) {
@@ -466,51 +466,51 @@ _id_5A29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     if(var_32 != 0) {
       var_34 = maps\mp\_utility::_id_452B(var_32);
       var_35 = int(tablelookup(maps\mp\_utility::_id_4604(), 1, var_34, 0));
-      self _meth_82FF("ui_killcam_killedby_perk_1", var_35);
+      self setclientomnvar("ui_killcam_killedby_perk_1", var_35);
     } else
-      self _meth_82FF("ui_killcam_killedby_perk_1", -1);
+      self setclientomnvar("ui_killcam_killedby_perk_1", -1);
 
     var_36 = maps\mp\_utility::_id_452B(var_33);
     var_37 = int(tablelookup(maps\mp\_utility::_id_4604(), 1, var_36, 0));
-    self _meth_82FF("ui_killcam_killedby_perk_2", var_37);
+    self setclientomnvar("ui_killcam_killedby_perk_2", var_37);
 
     for(var_30 = 3; var_30 <= 9; var_30++)
-      self _meth_82FF("ui_killcam_killedby_perk_" + var_30, -1);
+      self setclientomnvar("ui_killcam_killedby_perk_" + var_30, -1);
 
-    self _meth_82FF("ui_killcam_killedby_division", var_9._id_0079);
+    self setclientomnvar("ui_killcam_killedby_division", var_9._id_0079);
   } else if(!var_15) {
     for(var_30 = 1; var_30 <= 9; var_30++)
-      self _meth_82FF("ui_killcam_killedby_perk_" + var_30, -1);
+      self setclientomnvar("ui_killcam_killedby_perk_" + var_30, -1);
 
-    self _meth_82FF("ui_killcam_killedby_division", var_9._id_0079);
+    self setclientomnvar("ui_killcam_killedby_division", var_9._id_0079);
   } else if(var_15) {
     for(var_30 = 1; var_30 <= 9; var_30++)
-      self _meth_82FF("ui_killcam_killedby_perk_" + var_30, -1);
+      self setclientomnvar("ui_killcam_killedby_perk_" + var_30, -1);
 
-    self _meth_82FF("ui_killcam_killedby_division", -1);
+    self setclientomnvar("ui_killcam_killedby_division", -1);
   }
 
   if(!level.gameended && var_12 != "replay" && var_12 != "playofthegame") {
     if(var_7)
-      self _meth_82FF("ui_killcam_action", 2);
+      self setclientomnvar("ui_killcam_action", 2);
     else
-      self _meth_82FF("ui_killcam_action", 1);
+      self setclientomnvar("ui_killcam_action", 1);
   } else
-    self _meth_82FF("ui_killcam_action", 0);
+    self setclientomnvar("ui_killcam_action", 0);
 
   switch (var_12) {
     case "replay":
-      self _meth_82FF("ui_killcam_type", 2);
+      self setclientomnvar("ui_killcam_type", 2);
       break;
     case "playofthegame":
-      self _meth_82FF("ui_killcam_type", 3);
+      self setclientomnvar("ui_killcam_type", 3);
       break;
     case "score":
-      self _meth_82FF("ui_killcam_type", 1);
+      self setclientomnvar("ui_killcam_type", 1);
       break;
     case "normal":
     default:
-      self _meth_82FF("ui_killcam_type", 0);
+      self setclientomnvar("ui_killcam_type", 0);
       break;
   }
 
@@ -518,16 +518,16 @@ _id_5A29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   var_39 = gettime();
   self notify("begin_killcam", var_39);
 
-  if(!var_15 && !_func_1EF(var_9) && isDefined(var_9) && isPlayer(var_10))
-    var_9 _meth_82A8(var_10);
+  if(!var_15 && !_isagent(var_9) && isDefined(var_9) && isPlayer(var_10))
+    var_9 visionsyncwithplayer(var_10);
 
   maps\mp\_utility::_id_A165("spectator");
   self._id_0188 = 1;
 
-  if(_func_1EF(var_9) && var_12 != "replay" && var_12 != "playofthegame")
+  if(_isagent(var_9) && var_12 != "replay" && var_12 != "playofthegame")
     var_1 = var_10 getentitynumber();
 
-  self _meth_8533(0);
+  self onlystreamactiveweapon(0);
 
   if(var_15)
     self.forcespectatorclient = var_10 getentitynumber();
@@ -550,18 +550,18 @@ _id_5A29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   self._id_0020 = var_38;
   self._id_5A2F = var_19;
   self._id_014A = var_6;
-  self _meth_826F("allies", 1);
-  self _meth_826F("axis", 1);
-  self _meth_826F("freelook", 1);
-  self _meth_826F("none", 1);
+  self allowspectateteam("allies", 1);
+  self allowspectateteam("axis", 1);
+  self allowspectateteam("freelook", 1);
+  self allowspectateteam("none", 1);
 
   if(level._id_6520) {
     foreach(var_42 in level._id_985B)
-    self _meth_826F(var_42, 1);
+    self allowspectateteam(var_42, 1);
   }
 
   foreach(var_42 in level._id_985B)
-  self _meth_826F(var_42, 1);
+  self allowspectateteam(var_42, 1);
 
   thread _id_36B5(var_12, var_9);
   thread _id_6164(var_12, var_9);
@@ -585,7 +585,7 @@ _id_5A29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     return;
   }
 
-  self _meth_82FF("ui_killcam_end_milliseconds", int(var_19 * 1000) + gettime());
+  self setclientomnvar("ui_killcam_end_milliseconds", int(var_19 * 1000) + gettime());
 
   if(level._id_8C03)
     thread _id_318D(var_17);
@@ -631,9 +631,9 @@ _id_318D(var_0) {
     wait(var_0 - 1.0);
   }
 
-  _func_0A1(1.0, 0.25, var_1);
+  _setslowmotion(1.0, 0.25, var_1);
   wait(var_1 + 1.0);
-  _func_0A1(0.25, 1, 0.5);
+  _setslowmotion(0.25, 1, 0.5);
   level._id_3200 = undefined;
 }
 
@@ -642,7 +642,7 @@ _id_A784() {
   var_0 = maps\mp\gametypes\_playerlogic::_id_9A1C(0);
 
   if(var_0 > 0)
-    self _meth_82FF("ui_killcam_time_until_spawn", gettime() + var_0 * 1000);
+    self setclientomnvar("ui_killcam_time_until_spawn", gettime() + var_0 * 1000);
 
   wait(self._id_5A2F - 0.05);
 }
@@ -668,10 +668,10 @@ _id_A6FB(var_0) {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  while(self _meth_8341())
+  while(self usebuttonpressed())
     waitframe();
 
-  while(!self _meth_8341())
+  while(!self usebuttonpressed())
     waitframe();
 
   self._id_8C8A = 1;
@@ -680,7 +680,7 @@ _id_A6FB(var_0) {
     self.pers["totalKillcamsSkipped"]++;
 
   if(var_0 <= 0)
-    maps\mp\_utility::_id_2401("kc_info");
+    maps\mp\_utility::clearlowermessage("kc_info");
 
   self notify("abort_killcam");
 }
@@ -688,18 +688,18 @@ _id_A6FB(var_0) {
 _id_A6F7(var_0) {
   self endon("disconnect");
   self endon("killcam_ended");
-  self _meth_82E1("KillCamParatrooperInsert", "+weapnext");
+  self notifyonplayercommand("KillCamParatrooperInsert", "+weapnext");
   self waittill("KillCamParatrooperInsert");
-  self _meth_82FF("ui_killcam_paratrooperInsert", 0);
+  self setclientomnvar("ui_killcam_paratrooperInsert", 0);
   thread _id_0513::_id_A931();
 }
 
 _id_A68A(var_0) {
   self endon("disconnect");
   self endon("killcam_ended");
-  self _meth_82E1("KillCamCopyCat", "+weapnext");
+  self notifyonplayercommand("KillCamCopyCat", "+weapnext");
   self waittill("KillCamCopyCat");
-  self _meth_82FF("ui_killcam_copycat", 0);
+  self setclientomnvar("ui_killcam_copycat", 0);
   self playSound("copycat_steal_class");
   maps\mp\gametypes\_class::_id_8657(var_0);
 }
@@ -741,7 +741,7 @@ _id_6164(var_0, var_1) {
 }
 
 _id_5A2B(var_0, var_1, var_2) {
-  self _meth_82FF("ui_killcam_end_milliseconds", 0);
+  self setclientomnvar("ui_killcam_end_milliseconds", 0);
   _id_8649("unknown", -1, -1);
   self._id_5A29 = undefined;
 
@@ -751,7 +751,7 @@ _id_5A2B(var_0, var_1, var_2) {
   }
 
   if(!level.gameended)
-    maps\mp\_utility::_id_2401("kc_info");
+    maps\mp\_utility::clearlowermessage("kc_info");
 
   thread _id_050F::_id_872F();
   self notify("killcam_ended");
@@ -776,7 +776,7 @@ _id_238F(var_0) {
   var_1 = common_scripts\utility::_id_44F5("perception_glow");
 
   if(isDefined(var_1))
-    _func_295(var_1, var_0, "j_head", self);
+    _killfxontagforclient(var_1, var_0, "j_head", self);
 }
 
 _id_237D(var_0) {
@@ -790,15 +790,15 @@ _id_1F41() {
 }
 
 _id_1F45() {
-  return self _meth_8341();
+  return self usebuttonpressed();
 }
 
 _id_1F43() {
-  return self _meth_82F4();
+  return self fragbuttonpressed();
 }
 
 _id_1F40() {
-  self _meth_82FF("ui_show_skip_killcam", 0);
+  self setclientomnvar("ui_show_skip_killcam", 0);
   self._id_1F3F = 1;
 
   if(isDefined(self.pers["totalKillcamsInterrupted"]))

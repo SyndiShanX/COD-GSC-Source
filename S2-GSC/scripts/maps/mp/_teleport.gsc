@@ -52,15 +52,15 @@ _id_988B() {
     level._id_98C1[var_2._id_0165] = var_2;
   }
 
-  var_4 = _func_0B7();
+  var_4 = _getallnodes();
 
   foreach(var_6 in var_4) {
     var_2 = _id_9879(var_6.origin);
     level._id_9892[var_2.name][level._id_9892[var_2.name].size] = var_6;
   }
 
-  for(var_8 = 0; var_8 < _func_1F6(); var_8++) {
-    var_2 = _id_9879(_func_1FA(var_8));
+  for(var_8 = 0; var_8 < _getzonecount(); var_8++) {
+    var_2 = _id_9879(_getzoneorigin(var_8));
     level._id_98A1[var_2.name][level._id_98A1[var_2.name].size] = var_8;
   }
 
@@ -117,7 +117,7 @@ _id_98A9() {
 
 _id_98AA() {
   foreach(var_1 in level._id_98C1) {
-    var_1._id_832E = [];
+    var_1.closemenu = [];
     var_1._id_8328 = [];
     var_1._id_8329 = [];
   }
@@ -128,7 +128,7 @@ _id_98AA() {
     var_6 = _id_9879(var_5.origin);
 
     if(isDefined(var_6)) {
-      var_6._id_832E[var_6._id_832E.size] = var_5;
+      var_6.closemenu[var_6.closemenu.size] = var_5;
       _id_9878(var_5, var_6.name);
     }
   }
@@ -158,19 +158,19 @@ _id_98AA() {
   var_16 = [];
 
   foreach(var_1 in level._id_98C1) {
-    if(var_1._id_832E.size && var_1._id_832E.size && var_1._id_832E.size)
+    if(var_1.closemenu.size && var_1.closemenu.size && var_1.closemenu.size)
       var_16[var_16.size] = var_1.name;
   }
 
   _id_987F(var_16);
   var_19 = level._id_98C1[level._id_98C0];
-  _id_98AC(var_19._id_832E);
+  _id_98AC(var_19.closemenu);
   _id_98AC(var_19._id_8328);
   _id_98AC(var_19._id_8329);
 }
 
 _id_9878(var_0, var_1) {
-  if(!_func_0C0(var_0))
+  if(!_isarray(var_0))
     var_0 = [var_0];
 
   if(!isDefined(var_1))
@@ -198,7 +198,7 @@ _id_987F(var_0) {
 }
 
 _id_98AC(var_0) {
-  if(!_func_0C0(var_0))
+  if(!_isarray(var_0))
     var_0 = [var_0];
 
   foreach(var_2 in var_0) {
@@ -220,7 +220,7 @@ _id_9897() {
   level._id_0BCF = level._id_ACB3;
 
   foreach(var_1 in level._id_ACB3) {
-    if(var_1._id_81E1 > level._id_687F) {
+    if(var_1.setmovespeedscale > level._id_687F) {
       level._id_75BF[level._id_75BF.size] = var_1;
       continue;
     }
@@ -328,12 +328,12 @@ _id_989B(var_0) {
   }
   foreach(var_4 in level._id_3211) {
     var_4 _id_04D1::_id_86EC("neutral");
-    var_4 _id_04D1::_id_860A("enemy", "waypoint_captureneutral" + var_4.label);
-    var_4 _id_04D1::_id_860E("enemy", "waypoint_captureneutral" + var_4.label);
-    var_4 _id_04D1::_id_860A("friendly", "waypoint_captureneutral" + var_4.label);
-    var_4 _id_04D1::_id_860E("friendly", "waypoint_captureneutral" + var_4.label);
-    var_4 _id_04D1::_id_860A("broadcaster", "waypoint_captureneutral" + var_4.label);
-    var_4 _id_04D1::_id_860E("broadcaster", "waypoint_captureneutral" + var_4.label, 3);
+    var_4 _id_04D1::set2dicon("enemy", "waypoint_captureneutral" + var_4.label);
+    var_4 _id_04D1::playsoundtoteam("enemy", "waypoint_captureneutral" + var_4.label);
+    var_4 _id_04D1::set2dicon("friendly", "waypoint_captureneutral" + var_4.label);
+    var_4 _id_04D1::playsoundtoteam("friendly", "waypoint_captureneutral" + var_4.label);
+    var_4 _id_04D1::set2dicon("broadcaster", "waypoint_captureneutral" + var_4.label);
+    var_4 _id_04D1::playsoundtoteam("broadcaster", "waypoint_captureneutral" + var_4.label, 3);
     var_4._id_3C66 = 1;
   }
 
@@ -348,13 +348,13 @@ _id_989B(var_0) {
     var_4._id_671A = var_7._id_671A;
 
     if(isDefined(var_4._id_A222._id_698A))
-      _func_1D2(var_4._id_A222._id_698A, var_7._id_68E0);
+      _objective_position(var_4._id_A222._id_698A, var_7._id_68E0);
 
     if(isDefined(var_4._id_A222._id_698B))
-      _func_1D2(var_4._id_A222._id_698B, var_7._id_68E0);
+      _objective_position(var_4._id_A222._id_698B, var_7._id_68E0);
 
     if(isDefined(var_4._id_A222._id_698C))
-      _func_1D2(var_4._id_A222._id_698C, var_7._id_68E0);
+      _objective_position(var_4._id_A222._id_698C, var_7._id_68E0);
 
     foreach(var_9 in level._id_985B) {
       var_10 = "objpoint_" + var_9 + "_" + var_4._id_A222._id_37D8;
@@ -403,11 +403,11 @@ _id_9885(var_0, var_1) {
 
 _id_989A(var_0) {
   if(game["switchedsides"]) {
-    level._id_289D["axis"] = _func_18E("post_event_capzone_allies", "targetname");
-    level._id_289D["allies"] = _func_18E("post_event_capzone_axis", "targetname");
+    level._id_289D["axis"] = _getent("post_event_capzone_allies", "targetname");
+    level._id_289D["allies"] = _getent("post_event_capzone_axis", "targetname");
   } else {
-    level._id_289D["allies"] = _func_18E("post_event_capzone_allies", "targetname");
-    level._id_289D["axis"] = _func_18E("post_event_capzone_axis", "targetname");
+    level._id_289D["allies"] = _getent("post_event_capzone_allies", "targetname");
+    level._id_289D["axis"] = _getent("post_event_capzone_axis", "targetname");
   }
 
   var_1 = [];
@@ -426,25 +426,25 @@ _id_989A(var_0) {
   foreach(var_8 in level._id_9853) {
     var_8 _id_04D1::_id_6497(var_3[var_8._id_6DB2], (0, 0, 85));
 
-    if(isDefined(var_8._id_2006)) {
+    if(isDefined(var_8.carrier)) {
       var_8 _id_04D1::_id_8A60("any");
-      var_8 _id_04D1::_id_860A("friendly", level._id_5014);
-      var_8 _id_04D1::_id_860E("friendly", level._id_5015);
-      var_8 _id_04D1::_id_860A("enemy", level._id_5011);
-      var_8 _id_04D1::_id_860E("enemy", level._id_5012);
+      var_8 _id_04D1::set2dicon("friendly", level._id_5014);
+      var_8 _id_04D1::playsoundtoteam("friendly", level._id_5015);
+      var_8 _id_04D1::set2dicon("enemy", level._id_5011);
+      var_8 _id_04D1::playsoundtoteam("enemy", level._id_5012);
       level._id_1FC6[var_8._id_6DB2] _id_04D1::_id_0C30("none");
       level._id_1FC6[var_8._id_6DB2] _id_04D1::_id_8A60("friendly");
-      level._id_1FC6[var_8._id_6DB2] _id_04D1::_id_860A("friendly", level._id_5028);
-      level._id_1FC6[var_8._id_6DB2] _id_04D1::_id_860E("friendly", level._id_5029);
+      level._id_1FC6[var_8._id_6DB2] _id_04D1::set2dicon("friendly", level._id_5028);
+      level._id_1FC6[var_8._id_6DB2] _id_04D1::playsoundtoteam("friendly", level._id_5029);
 
       if(var_8._id_6DB2 == "allies") {
-        level._id_1FC6[var_8._id_6DB2] _id_04D1::_id_860A("broadcaster", level._id_5018);
-        level._id_1FC6[var_8._id_6DB2] _id_04D1::_id_860E("broadcaster", level._id_5018, 1);
+        level._id_1FC6[var_8._id_6DB2] _id_04D1::set2dicon("broadcaster", level._id_5018);
+        level._id_1FC6[var_8._id_6DB2] _id_04D1::playsoundtoteam("broadcaster", level._id_5018, 1);
         continue;
       }
 
-      level._id_1FC6[var_8._id_6DB2] _id_04D1::_id_860A("broadcaster", level._id_5018);
-      level._id_1FC6[var_8._id_6DB2] _id_04D1::_id_860E("broadcaster", level._id_5018, 2);
+      level._id_1FC6[var_8._id_6DB2] _id_04D1::set2dicon("broadcaster", level._id_5018);
+      level._id_1FC6[var_8._id_6DB2] _id_04D1::playsoundtoteam("broadcaster", level._id_5018, 2);
     }
   }
 
@@ -464,7 +464,7 @@ _id_989C(var_0) {
     maps\mp\gametypes\hp::_id_8C31();
   }
 
-  _func_032("ui_hardpoint_timer", 0);
+  _setomnvar("ui_hardpoint_timer", 0);
   level notify("zone_moved");
 }
 
@@ -491,7 +491,7 @@ _id_9899(var_0) {
 
 _id_9886(var_0) {
   var_1 = gettime();
-  var_2 = _func_0B9(var_0, 300, 0, 200, "Path");
+  var_2 = _getnodesinradiussorted(var_0, 300, 0, 200, "Path");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = var_2[var_3];
@@ -576,10 +576,10 @@ _id_98A0(var_0) {
 
         var_4.origin = var_7["position"];
       case "telport_origin_nodrop":
-        if(!isDefined(var_4._id_8260))
-          var_4._id_8260 = "none,axis,allies";
+        if(!isDefined(var_4.setlookatent))
+          var_4.setlookatent = "none,axis,allies";
 
-        var_8 = strtok(var_4._id_8260, ", ");
+        var_8 = strtok(var_4.setlookatent, ", ");
 
         foreach(var_10 in var_8) {
           if(!isDefined(var_0._id_989F[var_10])) {
@@ -696,8 +696,8 @@ _id_98B8(var_0, var_1) {
   if(isDefined(var_5) && var_1)
     [[var_5]]();
 
-  if(isDefined(level._id_19D5) && isDefined(level._id_19D5["post_teleport"]))
-    [[level._id_19D5["post_teleport"]]]();
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["post_teleport"]))
+    [[level.bot_funcs["post_teleport"]]]();
 }
 
 _id_98B9(var_0) {
@@ -721,9 +721,9 @@ _id_98BA(var_0, var_1) {
     var_5 = getEntArray("mp_global_intermission", "classname");
     var_5 = _id_987E(var_5, var_0);
     var_6 = var_5[0];
-    var_1 _meth_808C();
+    var_1 dontinterpolate();
     var_1 setOrigin(var_6.origin);
-    var_1 _meth_833E(var_6.angles);
+    var_1 setplayerangles(var_6.angles);
   } else {
     var_7 = undefined;
     var_8 = var_1.angles;
@@ -759,12 +759,12 @@ _id_98BA(var_0, var_1) {
     var_19 = var_1.origin + var_18;
 
     if(!isDefined(var_7) && level._id_98B7) {
-      if(_func_15E(var_19) && !_func_15D(var_19))
+      if(_canspawn(var_19) && !_positionwouldtelefrag(var_19))
         var_7 = var_19;
     }
 
     if(!isDefined(var_7) && level._id_98B6) {
-      var_20 = _func_0B9(var_19, 300, 0, 200, "Path");
+      var_20 = _getnodesinradiussorted(var_19, 300, 0, 200, "Path");
 
       for(var_21 = 0; var_21 < var_20.size; var_21++) {
         var_22 = var_20[var_21];
@@ -774,7 +774,7 @@ _id_98BA(var_0, var_1) {
         }
         var_12 = var_22.origin;
 
-        if(_func_15E(var_12) && !_func_15D(var_12)) {
+        if(_canspawn(var_12) && !_positionwouldtelefrag(var_12)) {
           var_22._id_5B59 = var_4;
           var_7 = var_12;
           break;
@@ -787,10 +787,10 @@ _id_98BA(var_0, var_1) {
       return;
     }
 
-    var_1 _meth_843C();
-    var_1 _meth_808C();
+    var_1 cancelmantle();
+    var_1 dontinterpolate();
     var_1 setOrigin(var_7);
-    var_1 _meth_833E(var_8);
+    var_1 setplayerangles(var_8);
     thread _id_98BD(var_1);
   }
 }

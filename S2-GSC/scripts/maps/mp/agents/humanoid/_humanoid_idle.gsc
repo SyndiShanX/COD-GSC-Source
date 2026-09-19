@@ -5,16 +5,16 @@
 
 main() {
   self._id_0EEA = "none";
-  self _meth_8395(self.origin);
-  self _meth_839B("face angle abs", self.angles);
-  self _meth_839C("anim deltas");
-  self _meth_839D("gravity");
+  self scragentsetgoalpos(self.origin);
+  self scragentsetorientmode("face angle abs", self.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetphysicsmode("gravity");
   _id_A16C();
 }
 
 _id_0085() {
   if(isDefined(self._id_76EA)) {
-    self _meth_839F(self._id_76EA);
+    self scragentsetmaxturnspeed(self._id_76EA);
     self._id_76EA = undefined;
   }
 }
@@ -64,7 +64,7 @@ _id_37BF(var_0) {
 
 _id_38F6(var_0) {
   if(isDefined(self._id_76EA)) {
-    self _meth_839F(self._id_76EA);
+    self scragentsetmaxturnspeed(self._id_76EA);
     self._id_76EA = undefined;
   }
 }
@@ -89,7 +89,7 @@ _id_A0DE() {
     var_1 = var_0.origin - self.origin;
     var_2 = vectortoangles(var_1);
 
-    if(_func_0AE(_func_0DD(var_2[1] - self.angles[1])) > 1)
+    if(_abs(_angleclamp180(var_2[1] - self.angles[1])) > 1)
       _id_9ED9(var_2[1]);
   }
 }
@@ -114,7 +114,7 @@ _id_46F0(var_0) {
     var_1 = "idle_combat_turn";
 
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
-  var_3 = self _meth_83DB(var_2);
+  var_3 = self getanimentrycount(var_2);
   var_4 = 0;
 
   if(var_3 == 3) {
@@ -131,7 +131,7 @@ _id_46F0(var_0) {
 
 _id_9ED9(var_0) {
   var_1 = self.angles[1];
-  var_2 = _func_0DD(var_0 - var_1);
+  var_2 = _angleclamp180(var_0 - var_1);
 
   if(-0.5 < var_2 && var_2 < 0.5) {
     return;
@@ -144,51 +144,51 @@ _id_9ED9(var_0) {
   var_3 = _id_46F0(var_2);
   var_4 = var_3[0];
   var_5 = var_3[1];
-  var_6 = self _meth_83D8(var_4, var_5);
-  var_7 = _func_065(var_6);
-  var_8 = _func_212(var_6);
-  self _meth_839C("anim angle delta");
+  var_6 = self getanimentry(var_4, var_5);
+  var_7 = _getanimlength(var_6);
+  var_8 = _getangledelta3d(var_6);
+  self scragentsetanimmode("anim angle delta");
 
-  if(_func_066(var_6, "turn_begin") && _func_066(var_6, "turn_end")) {
+  if(_animhasnotetrack(var_6, "turn_begin") && _animhasnotetrack(var_6, "turn_end")) {
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_4, var_5, self._id_4013, "turn_in_place");
-    var_9 = _func_067(var_6, "turn_begin");
-    var_10 = _func_067(var_6, "turn_end");
+    var_9 = _getnotetracktimes(var_6, "turn_begin");
+    var_10 = _getnotetracktimes(var_6, "turn_end");
     var_11 = (var_10[0] - var_9[0]) * var_7;
-    var_12 = _func_0DD(var_2 - var_8[1]);
-    var_13 = _func_0AE(var_12) / var_11 / 20;
+    var_12 = _angleclamp180(var_2 - var_8[1]);
+    var_13 = _abs(var_12) / var_11 / 20;
     var_13 = var_13 * 3.14159 / 180;
-    var_14 = (0, _func_0DD(self.angles[1] + var_12), 0);
-    self._id_76EA = self _meth_83A0();
-    self _meth_839F(var_13);
-    self _meth_839B("face angle abs", var_14);
-    var_7 = _func_065(self _meth_83D8(var_4, var_5));
+    var_14 = (0, _angleclamp180(self.angles[1] + var_12), 0);
+    self._id_76EA = self scragentgetmaxturnspeed();
+    self scragentsetmaxturnspeed(var_13);
+    self scragentsetorientmode("face angle abs", var_14);
+    var_7 = _getanimlength(self getanimentry(var_4, var_5));
     maps\mp\agents\_scripted_agent_anim_util::_id_A79F("turn_in_place", "turn_end", var_7);
-    self _meth_839F(self._id_76EA);
+    self scragentsetmaxturnspeed(self._id_76EA);
     self._id_76EA = undefined;
     maps\mp\agents\_scripted_agent_anim_util::_id_A79F("turn_in_place", "end", var_7);
   } else {
-    self._id_76EA = self _meth_83A0();
-    var_13 = _func_0AE(_func_0DD(var_2 - var_8[1])) / var_7 / 20;
+    self._id_76EA = self scragentgetmaxturnspeed();
+    var_13 = _abs(_angleclamp180(var_2 - var_8[1])) / var_7 / 20;
     var_13 = var_13 * 3.14159 / 180;
-    self _meth_839F(var_13);
-    var_14 = (0, _func_0DD(var_0 - var_8[1]), 0);
-    self _meth_839B("face angle abs", var_14);
+    self scragentsetmaxturnspeed(var_13);
+    var_14 = (0, _angleclamp180(var_0 - var_8[1]), 0);
+    self scragentsetorientmode("face angle abs", var_14);
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_4, var_5, self._id_4013, "turn_in_place");
-    self _meth_839F(self._id_76EA);
+    self scragentsetmaxturnspeed(self._id_76EA);
     self._id_76EA = undefined;
   }
 
-  self _meth_839C("anim deltas");
+  self scragentsetanimmode("anim deltas");
   _id_74A8();
 }
 
 _id_7EEF(var_0, var_1) {
-  if(_func_0AE(_func_0DD(var_0 - self.angles[1])) <= var_1) {
+  if(_abs(_angleclamp180(var_0 - self.angles[1])) <= var_1) {
     return;
   }
   var_2 = (0, var_0, 0);
-  self _meth_839B("face angle abs", var_2);
+  self scragentsetorientmode("face angle abs", var_2);
 
-  while(_func_0DD(var_0 - self.angles[1]) > var_1)
+  while(_angleclamp180(var_0 - self.angles[1]) > var_1)
     wait 0.1;
 }

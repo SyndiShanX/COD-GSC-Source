@@ -49,9 +49,9 @@ _id_A207() {
   _id_0485::_id_5E9A("attack_dogs", self.origin);
 
   if(level._id_53C6)
-    var_0 = _func_0B9(self.origin, 10000, 50, 2000, "Path");
+    var_0 = _getnodesinradiussorted(self.origin, 10000, 50, 2000, "Path");
   else
-    var_0 = _func_0B9(self.origin, 500, 50, 128, "Path");
+    var_0 = _getnodesinradiussorted(self.origin, 500, 50, 128, "Path");
 
   if(!isDefined(var_0))
     return 0;
@@ -67,7 +67,7 @@ _id_A207() {
     if(!isDefined(self._id_1162[var_2]))
       return 0;
 
-    self._id_1162[var_2] maps\mp\agents\_agent_utility::_id_83FE(self.team, self);
+    self._id_1162[var_2] maps\mp\agents\_agent_utility::hudoutlineenable(self.team, self);
     var_3 = var_0[var_1].origin;
     var_4 = var_0[var_1].angles;
     self._id_1162[var_2] thread[[self._id_1162[var_2] maps\mp\agents\_agent_utility::_id_0A59("spawn")]](var_3, var_4, self);
@@ -152,16 +152,16 @@ _id_6A72(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     if(isPlayer(var_1)) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_notsobestfriend");
 
-      if(!self _meth_8346())
+      if(!self isonground())
         var_1 maps\mp\gametypes\_missions::processchallenge("ch_hoopla");
     }
   }
 
-  self _meth_83D7("death");
-  var_9 = self _meth_83D8();
-  var_10 = _func_065(var_9);
+  self setanimstate("death");
+  var_9 = self getanimentry();
+  var_10 = _getanimlength(var_9);
   var_8 = int(var_10 * 1000);
-  self._id_18A8 = self _meth_8392(var_8);
+  self._id_18A8 = self cloneagent(var_8);
   _id_0380::_id_6844("anml_doberman_death", undefined, self);
   maps\mp\agents\_agent_utility::_id_2A73();
   self notify("killanimscript");
@@ -224,26 +224,26 @@ _id_8F96(var_0, var_1, var_2, var_3) {
 
   maps\mp\agents\_agent_utility::_id_08A7();
   self[[level._id_31F2]]();
-  self _meth_838F(var_0, var_1, "dog_animclass", 15, 40, self);
+  self spawnagent(var_0, var_1, "dog_animclass", 15, 40, self);
   level notify("spawned_agent", self);
   maps\mp\agents\_agent_common::_id_83FD(100);
 
   if(isDefined(var_3)) {
     self._id_0BA6 = var_3;
     self _meth_858A(var_3);
-    maps\mp\agents\_agent_utility::_id_83FE(self.team, var_2);
+    maps\mp\agents\_agent_utility::hudoutlineenable(self.team, var_2);
   }
 
   if(isDefined(var_2) && isDefined(var_2.team))
-    maps\mp\agents\_agent_utility::_id_83FE(var_2.team, var_2);
+    maps\mp\agents\_agent_utility::hudoutlineenable(var_2.team, var_2);
 
-  self _meth_8173("Dogs");
-  self _meth_8315();
+  self setthreatbiasgroup("Dogs");
+  self takeallweapons();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
   wait 0.1;
 
-  if(_func_269())
-    _func_147(level._id_3F1E, self, "tag_origin");
+  if(_ishairrunning())
+    _playfxontag(level._id_3F1E, self, "tag_origin");
 }
 
 _id_716F(var_0) {
@@ -271,7 +271,7 @@ _id_8F27(var_0) {
     foreach(var_5 in level.players) {
       var_6 = var_2._id_9087.origin;
       var_7 = var_5.origin;
-      var_8 = _func_07F(var_6, var_7, 0, var_5);
+      var_8 = _sighttracepassed(var_6, var_7, 0, var_5);
 
       if(var_8)
         var_2._id_A9FE--;
@@ -308,7 +308,7 @@ _id_0A57() {
 
   for(;;) {
     if(self._id_0BA4 != "melee" && !self._id_018F && self[[level._id_31F5]]() && !self[[level._id_31B2]]())
-      self _meth_83A1(self._id_28D2);
+      self scragentbeginmelee(self._id_28D2);
 
     if(self._id_7A58 > gettime()) {
       waitframe();
@@ -316,11 +316,11 @@ _id_0A57() {
     }
 
     if(!isDefined(self._id_0088) || self._id_173E) {
-      var_0 = _func_0B9(self.origin, 1024, 256, 128, "Path");
+      var_0 = _getnodesinradiussorted(self.origin, 1024, 256, 128, "Path");
 
       if(var_0.size > 0) {
-        var_1 = _func_0A4(int(var_0.size * 0.9), var_0.size);
-        self _meth_8395(var_0[var_1].origin);
+        var_1 = _randomintrange(int(var_0.size * 0.9), var_0.size);
+        self scragentsetgoalpos(var_0[var_1].origin);
         self._id_173E = 0;
         self._id_7A58 = gettime() + 2500;
       }
@@ -331,7 +331,7 @@ _id_0A57() {
       self._id_15E1 = 0;
 
       if(distancesquared(var_2, self._id_5B10) > 4096) {
-        self _meth_8395(var_2);
+        self scragentsetgoalpos(var_2);
         self._id_5B10 = var_2;
       }
     }
@@ -349,7 +349,7 @@ _id_0A56() {
       wait 0.25;
 
     while(isDefined(self._id_28D2) && distance(self.origin, self._id_28D2.origin) > 200) {
-      wait(_func_0A5(0, 2));
+      wait(_randomfloatrange(0, 2));
       _id_0380::_id_6844("anml_doberman_bark", undefined, self);
     }
 
@@ -398,7 +398,7 @@ _id_5E54() {
 
   for(;;) {
     foreach(var_1 in level._id_6E97)
-    self _meth_8161(var_1);
+    self getenemyinfo(var_1);
 
     wait 0.5;
   }

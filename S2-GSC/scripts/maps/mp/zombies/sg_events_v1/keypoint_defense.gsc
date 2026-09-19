@@ -75,7 +75,7 @@ basic_defense_run(var_0) {
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("mp_zombie_nest_01_tower_battle", int(100 * (var_7.capture_health / var_7.maxhealth)));
   common_scripts\utility::flag_set("zmb_objectives_defense_end");
   level thread maps\mp\_utility::_id_6F74(::canceloutlinehelp);
-  var_9 _meth_805C();
+  var_9 hide();
 
   if((_id_0547::_id_5565(var_13, "sg_obj_timeout") || _id_0547::_id_5565(var_13, "zombie_wave_ended")) && isDefined(var_7))
     var_7.shouldterminate = 1;
@@ -195,7 +195,7 @@ basic_defense_wait_for_destruction() {
 spawn_defense_fx(var_0) {
   if(isDefined(var_0)) {
     self.dmgfx = _id_0547::_id_8FBA(self, var_0);
-    _func_14C(self.dmgfx);
+    _triggerfx(self.dmgfx);
   }
 }
 
@@ -220,13 +220,13 @@ showoutlinehelp(var_0) {
   for(;;) {
     foreach(var_4 in var_0) {
       if(distance(var_4.origin, var_1.origin) > var_2) {
-        var_4 _meth_8005(var_1);
-        var_4 _meth_8427(var_1, 2, 0);
+        var_4 showtoplayer(var_1);
+        var_4 hudoutlineenableforclient(var_1, 2, 0);
         continue;
       }
 
       var_4 _meth_8006(var_1);
-      var_4 _meth_8428(var_1);
+      var_4 hudoutlinedisableforclient(var_1);
     }
 
     wait 0.5;

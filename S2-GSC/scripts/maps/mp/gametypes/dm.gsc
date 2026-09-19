@@ -8,7 +8,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -31,7 +31,7 @@ main() {
   if(level._id_6031 || level._id_6035)
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
 
-  _func_153("ffa");
+  _setteammode("ffa");
   maps\mp\_utility::_id_873B(0);
   game["dialog"]["gametype"] = "ffa_intro";
   game["dialog"]["defense_obj"] = "gbl_start";
@@ -43,16 +43,16 @@ main() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653(1);
-  _func_035("scr_dm_winlimit", 1);
+  _setdynamicdvar("scr_dm_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("dm", 1);
-  _func_035("scr_dm_roundlimit", 1);
+  _setdynamicdvar("scr_dm_roundlimit", 1);
   maps\mp\_utility::registerroundlimitdvar("dm", 1);
-  _func_035("scr_dm_halftime", 0);
+  _setdynamicdvar("scr_dm_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("dm", 0);
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DM");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DM");
 

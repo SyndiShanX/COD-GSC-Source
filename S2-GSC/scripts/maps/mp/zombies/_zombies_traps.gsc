@@ -124,8 +124,8 @@ _id_9CAF(var_0, var_1, var_2, var_3) {
 
   if(var_5 > 0)
     self._id_267B = var_5;
-  else if(isDefined(self._id_8140))
-    self._id_267B = self._id_8140;
+  else if(isDefined(self.setanimknobrestart))
+    self._id_267B = self.setanimknobrestart;
   else
     self._id_267B = 500;
 
@@ -133,8 +133,8 @@ _id_9CAF(var_0, var_1, var_2, var_3) {
 
   if(var_6 > 0)
     self._id_264F = var_6;
-  else if(isDefined(self._id_8260))
-    self._id_264F = int(self._id_8260);
+  else if(isDefined(self.setlookatent))
+    self._id_264F = int(self.setlookatent);
   else
     self._id_264F = 40;
 
@@ -237,12 +237,12 @@ _id_438F() {
 }
 
 _id_9CBF() {
-  return isDefined(self._id_81A1);
+  return isDefined(self.setgoalnode);
 }
 
 _id_9CAE() {
   if(_id_9CBF())
-    return common_scripts\utility::_id_3C77(self._id_81A1);
+    return common_scripts\utility::_id_3C77(self.setgoalnode);
 
   return 1;
 }
@@ -265,7 +265,7 @@ _id_9CD3() {
   self endon("trap_state_change");
 
   if(!_id_9CAE())
-    common_scripts\utility::_id_3C9F(self._id_81A1);
+    common_scripts\utility::_id_3C9F(self.setgoalnode);
 
   _id_9CC5("ready");
 }
@@ -275,7 +275,7 @@ _id_9CCE() {
   self waittill("trap_reactivated");
 
   if(!_id_9CAE())
-    common_scripts\utility::_id_3C9F(self._id_81A1);
+    common_scripts\utility::_id_3C9F(self.setgoalnode);
 
   _id_9CC5("ready");
 }
@@ -313,7 +313,7 @@ _id_9CD4() {
 
 _id_9C93(var_0, var_1) {
   if(!var_1) {
-    _id_0555::_id_83DD("use_trap", var_0);
+    _id_0555::issprinting("use_trap", var_0);
 
     if(isDefined(level._id_AAFE))
       level thread[[level._id_AAFE]](self, var_0);
@@ -393,17 +393,17 @@ _id_9C94(var_0) {
 
 _id_9CB7() {
   if(isDefined(level._id_9CD1["ready_to_active"])) {
-    self _meth_8276(level._id_9CD1["ready_to_active"]);
+    self scriptmodelplayanim(level._id_9CD1["ready_to_active"]);
     wait 0.766667;
   }
 
   if(isDefined(level._id_9CD1["active_to_cooldown"])) {
-    self _meth_8276(level._id_9CD1["active_to_cooldown"]);
+    self scriptmodelplayanim(level._id_9CD1["active_to_cooldown"]);
     wait 1;
   }
 
   if(isDefined(level._id_9CD1["cooldown_to_active"]))
-    self _meth_8276(level._id_9CD1["cooldown_to_active"]);
+    self scriptmodelplayanim(level._id_9CD1["cooldown_to_active"]);
 }
 
 _id_9C95(var_0) {
@@ -434,8 +434,8 @@ _id_9CD5(var_0) {
     switch (var_4) {
       case "no_power":
         if(0) {
-          var_0 _meth_80CE(&"ZOMBIES_REQUIRES_POWER");
-          var_0 _meth_80CF(&"ZOMBIES_EMPTY_STRING");
+          var_0 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+          var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
           var_0 _id_0547::_id_9A85(0);
         }
 
@@ -447,8 +447,8 @@ _id_9CD5(var_0) {
         break;
       case "active":
         if(0) {
-          var_0 _meth_80CE(&"ZOMBIES_EMPTY_STRING");
-          var_0 _meth_80CF(&"ZOMBIES_EMPTY_STRING");
+          var_0 sethintstring(&"ZOMBIES_EMPTY_STRING");
+          var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
           var_0 _id_0547::_id_9A85(0);
         }
 
@@ -461,11 +461,11 @@ _id_9CD5(var_0) {
       case "cooldown":
         if(0) {
           if(isDefined(self._id_4DAF))
-            var_0 _meth_80CE(self._id_4DAF["hint_cooldown"]);
+            var_0 sethintstring(self._id_4DAF["hint_cooldown"]);
           else
-            var_0 _meth_80CE(&"ZOMBIES_TRAP_COOLDOWN");
+            var_0 sethintstring(&"ZOMBIES_TRAP_COOLDOWN");
 
-          var_0 _meth_80CF(&"ZOMBIES_EMPTY_STRING");
+          var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
           var_0 _id_0547::_id_9A85(0);
         }
 
@@ -490,11 +490,11 @@ _id_9CD5(var_0) {
 
         if(0) {
           if(isDefined(self._id_4DAF))
-            var_0 _meth_80CE(self._id_4DAF["hint_ready"]);
+            var_0 sethintstring(self._id_4DAF["hint_ready"]);
           else
-            var_0 _meth_80CE(&"ZOMBIES_TRAP_BUY_GENERIC");
+            var_0 sethintstring(&"ZOMBIES_TRAP_BUY_GENERIC");
 
-          var_0 _meth_80CF(_id_0547::_id_4474(var_5));
+          var_0 setsecondaryhintstring(_id_0547::_id_4474(var_5));
           var_0 _id_0547::_id_9A85(1);
         }
 
@@ -512,8 +512,8 @@ _id_9CD5(var_0) {
         break;
       case "deactivate":
         if(0) {
-          var_0 _meth_80CE(&"ZOMBIES_REQUIRES_POWER");
-          var_0 _meth_80CF(&"ZOMBIES_EMPTY_STRING");
+          var_0 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+          var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
         }
 
         if(1)
@@ -548,8 +548,8 @@ _id_9CAC(var_0) {
     switch (var_6._id_0165) {
       case "damage_over_time":
       case "damage":
-        var_6 _meth_8070();
-        var_6 _meth_8055(var_1);
+        var_6 enablelinkto();
+        var_6 linkto(var_1);
         thread _id_9CA0(var_6, var_6._id_0165 == "damage_over_time", "fx_trap_move");
         break;
       case "moveto":
@@ -581,7 +581,7 @@ _id_9CBC(var_0, var_1, var_2) {
     wait 0.5;
   }
 
-  var_3 = var_2._id_8260 + "_" + var_1;
+  var_3 = var_2.setlookatent + "_" + var_1;
 
   if(common_scripts\utility::_id_3F6F(var_3))
     var_0._id_2935 = common_scripts\utility::_id_44F5(var_3);
@@ -625,8 +625,8 @@ _id_9CB1(var_0) {
     switch (var_6._id_0165) {
       case "damage_over_time":
       case "damage":
-        var_6 _meth_8070();
-        var_6 _meth_8055(var_1);
+        var_6 enablelinkto();
+        var_6 linkto(var_1);
         thread _id_9CA0(var_6, var_6._id_0165 == "damage_over_time", "laser");
         break;
       case "moveto":
@@ -644,9 +644,9 @@ _id_9CB1(var_0) {
       case "deactivate":
       case "cooldown":
       case "no_power":
-        var_1 _meth_8612("trap_laser_loop");
+        var_1 stoploopsound("trap_laser_loop");
         var_1 playSound("trap_laser_stop");
-        var_1 _meth_80A5();
+        var_1 laseroff();
         break;
       case "active":
         thread _id_9CB5(var_1);
@@ -673,14 +673,14 @@ _id_9CB4(var_0) {
   if(isDefined(level._id_AB14))
     var_2 = level._id_AB14;
 
-  var_0 _meth_80A4(var_1);
+  var_0 laseron(var_1);
   var_3 = spawn("script_origin", var_0.origin);
   thread _id_9CB2(var_3);
   wait 3;
   thread _id_9CB3(var_3);
-  var_0 _meth_80A4(var_2);
+  var_0 laseron(var_2);
   var_0 playSound("trap_laser_start");
-  var_0 _meth_861D("trap_laser_loop");
+  var_0 playloopsound("trap_laser_loop");
 }
 
 _id_9CB2(var_0) {
@@ -688,7 +688,7 @@ _id_9CB2(var_0) {
     level._id_5AFF = 1;
 
     if(isDefined(var_0))
-      var_0 _meth_861D("trap_laser_alarm");
+      var_0 playloopsound("trap_laser_alarm");
   } else {}
 }
 
@@ -696,7 +696,7 @@ _id_9CB3(var_0) {
   level._id_5AFF = 0;
 
   if(isDefined(var_0)) {
-    var_0 _meth_8612("trap_laser_alarm");
+    var_0 stoploopsound("trap_laser_alarm");
     var_0 delete();
   }
 }
@@ -725,10 +725,10 @@ _id_9CB5(var_0) {
 
     if(isDefined(var_4.angles)) {
       for(var_8 = 0; var_8 < 3; var_8++) {
-        var_9 = _func_0AE(_func_0DC(var_0.angles[var_8]) - _func_0DC(var_4.angles[var_8])) > 0.01;
+        var_9 = _abs(_angleclamp(var_0.angles[var_8]) - _angleclamp(var_4.angles[var_8])) > 0.01;
 
         if(var_9) {
-          var_7 = 0.5 * _func_10F(var_0.angles, var_4.angles);
+          var_7 = 0.5 * _anglesdelta(var_0.angles, var_4.angles);
           break;
         }
       }
@@ -738,10 +738,10 @@ _id_9CB5(var_0) {
       var_5 = var_7 / var_2;
 
     if(var_6 > 0)
-      var_0 _meth_82B1(var_4.origin, var_5);
+      var_0 moveto(var_4.origin, var_5);
 
     if(var_7 > 0)
-      var_0 _meth_82B8(var_4.angles, var_5);
+      var_0 rotateto(var_4.angles, var_5);
 
     if(var_5 > 0)
       wait(var_5);
@@ -772,15 +772,15 @@ _id_9CAD(var_0) {
         if(isDefined(var_1))
           var_1 delete();
 
-        var_1 = _func_14B(common_scripts\utility::_id_44F5("trap_ready"), var_0.origin);
-        _func_14C(var_1);
+        var_1 = _spawnfx(common_scripts\utility::_id_44F5("trap_ready"), var_0.origin);
+        _triggerfx(var_1);
         break;
       case "active":
         if(isDefined(var_1))
           var_1 delete();
 
-        var_1 = _func_14B(common_scripts\utility::_id_44F5("trap_not_ready"), var_0.origin);
-        _func_14C(var_1);
+        var_1 = _spawnfx(common_scripts\utility::_id_44F5("trap_not_ready"), var_0.origin);
+        _triggerfx(var_1);
         break;
       default:
         break;
@@ -811,13 +811,13 @@ _id_9CA2(var_0, var_1, var_2) {
 
   var_5 = var_4 / var_3;
 
-  if(isDefined(var_0._id_8140))
-    var_5 = var_5 * var_0._id_8140;
+  if(isDefined(var_0.setanimknobrestart))
+    var_5 = var_5 * var_0.setanimknobrestart;
 
   var_6 = 50;
 
-  if(isDefined(var_0._id_8140))
-    var_6 = var_6 / var_0._id_8140;
+  if(isDefined(var_0.setanimknobrestart))
+    var_6 = var_6 / var_0.setanimknobrestart;
 
   var_7 = gettime();
   var_8 = "trap_zm_mp";
@@ -830,7 +830,7 @@ _id_9CA2(var_0, var_1, var_2) {
     var_10 = (var_9.origin[0], var_9.origin[1], var_0.origin[2]);
 
     if(isPlayer(var_9)) {
-      if(isDefined(var_0._id_8260) && var_0._id_8260 == "no_player_damage") {
+      if(isDefined(var_0.setlookatent) && var_0.setlookatent == "no_player_damage") {
         continue;
       }
       if(isDefined(var_9._id_66D3) && var_9._id_66D3 > gettime()) {
@@ -841,15 +841,15 @@ _id_9CA2(var_0, var_1, var_2) {
       }
       var_9._id_66D3 = gettime() + 200;
 
-      if(isDefined(level._id_62B5) && isDefined(var_0._id_8140))
-        var_9._id_66D3 = gettime() + 200 * var_0._id_8140;
+      if(isDefined(level._id_62B5) && isDefined(var_0.setanimknobrestart))
+        var_9._id_66D3 = gettime() + 200 * var_0.setanimknobrestart;
 
-      var_9 _meth_8059(var_6, var_9.origin);
+      var_9 dodamage(var_6, var_9.origin);
       continue;
     }
 
     if(isDefined(var_9._id_000A) && var_9._id_000A == level._id_746E) {
-      if(isDefined(var_0._id_8260) && var_0._id_8260 == "no_player_damage") {
+      if(isDefined(var_0.setlookatent) && var_0.setlookatent == "no_player_damage") {
         continue;
       }
       if(isDefined(var_9._id_66D3) && var_9._id_66D3 > gettime()) {
@@ -859,7 +859,7 @@ _id_9CA2(var_0, var_1, var_2) {
         continue;
       }
       var_9._id_66D3 = gettime() + 200;
-      var_9 _meth_8059(var_6 * 0.5, var_9.origin);
+      var_9 dodamage(var_6 * 0.5, var_9.origin);
       continue;
     }
 
@@ -875,7 +875,7 @@ _id_9CA2(var_0, var_1, var_2) {
       var_9._id_66D4 = gettime() + int(1000 / var_4);
       var_12 = "MOD_TRIGGER_HURT";
 
-      if(isDefined(var_0._id_8140))
+      if(isDefined(var_0.setanimknobrestart))
         var_12 = "MOD_IMPACT";
 
       var_13 = int(var_9.maxhealth / var_5);
@@ -885,9 +885,9 @@ _id_9CA2(var_0, var_1, var_2) {
 
       if(_id_0547::_id_5565(self._id_0165, "trap_rnd")) {
         var_9 mark_electrified();
-        var_9 _meth_8059(var_13, var_10, level._id_9CC0, level._id_9CC0, var_12, var_8, var_11);
+        var_9 dodamage(var_13, var_10, level._id_9CC0, level._id_9CC0, var_12, var_8, var_11);
       } else
-        var_9 _meth_8059(var_13, var_10, self._id_0117, self._id_0117, var_12, var_8, var_11);
+        var_9 dodamage(var_13, var_10, self._id_0117, self._id_0117, var_12, var_8, var_11);
     } else {
       var_13 = var_9.health;
 
@@ -897,9 +897,9 @@ _id_9CA2(var_0, var_1, var_2) {
       var_9 thread mark_electrified();
 
       if(_id_0547::_id_5565(self._id_0165, "trap_rnd"))
-        var_9 _meth_8059(var_13, var_10, level._id_9CC0, level._id_9CC0, "MOD_TRIGGER_HURT", var_8, var_11);
+        var_9 dodamage(var_13, var_10, level._id_9CC0, level._id_9CC0, "MOD_TRIGGER_HURT", var_8, var_11);
       else
-        var_9 _meth_8059(var_13, var_10, self._id_0117, self._id_0117, "MOD_TRIGGER_HURT", var_8, var_11);
+        var_9 dodamage(var_13, var_10, self._id_0117, self._id_0117, "MOD_TRIGGER_HURT", var_8, var_11);
     }
   }
 }
@@ -941,14 +941,14 @@ _id_9CD0(var_0) {
     if(isDefined(var_1))
       var_1 delete();
 
-    var_3 = var_0._id_8260 + "_" + var_2;
+    var_3 = var_0.setlookatent + "_" + var_2;
 
     if(common_scripts\utility::_id_3F6F(var_3))
       var_1 = common_scripts\utility::_id_44F5(var_3);
 
     if(isDefined(var_1)) {
-      var_1 = _func_14B(var_1, var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
-      _func_14C(var_1);
+      var_1 = _spawnfx(var_1, var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
+      _triggerfx(var_1);
     }
 
     thread _id_1365(var_3, var_1, var_0.origin);
@@ -972,16 +972,16 @@ _id_9CC7(var_0, var_1, var_2, var_3, var_4) {
       var_9 = isDefined(var_4);
       var_7._id_4DAF["hint_ready_ref"] = 0;
       var_7._id_4DAF["hint_cooldown_ref"] = 0;
-      var_10 = _func_27A("mp/zombieCustomTrapInteract.csv");
+      var_10 = _tablegetrowcount("mp/zombieCustomTrapInteract.csv");
 
       for(var_11 = 0; var_11 < var_10; var_11++) {
-        var_12 = _func_1AE("mp/zombieCustomTrapInteract.csv", var_11, 1);
+        var_12 = _tablelookupbyrow("mp/zombieCustomTrapInteract.csv", var_11, 1);
 
         if(var_8 && var_12 == var_3) {
-          var_7._id_4DAF["hint_ready_ref"] = int(_func_1AE("mp/zombieCustomTrapInteract.csv", var_11, 0));
+          var_7._id_4DAF["hint_ready_ref"] = int(_tablelookupbyrow("mp/zombieCustomTrapInteract.csv", var_11, 0));
           var_8 = 0;
         } else if(var_9 && var_12 == var_4) {
-          var_7._id_4DAF["hint_cooldown_ref"] = int(_func_1AE("mp/zombieCustomTrapInteract.csv", var_11, 0));
+          var_7._id_4DAF["hint_cooldown_ref"] = int(_tablelookupbyrow("mp/zombieCustomTrapInteract.csv", var_11, 0));
           var_9 = 0;
         }
 
@@ -1018,13 +1018,13 @@ _id_9CA4(var_0) {
     var_1._id_4883 = var_1.origin;
     var_1.team = level._id_746E;
 
-    if(isDefined(var_0._id_8260)) {
-      if(_func_30D(var_0._id_8260))
-        var_1._id_6081 = _func_0DA(int(var_0._id_8260));
+    if(isDefined(var_0.setlookatent)) {
+      if(_func_30D(var_0.setlookatent))
+        var_1._id_6081 = _squared(int(var_0.setlookatent));
     }
 
-    if(isDefined(var_0._id_8140))
-      var_1._id_607A = var_0._id_8140;
+    if(isDefined(var_0.setanimknobrestart))
+      var_1._id_607A = var_0.setanimknobrestart;
 
     var_1._id_5809 = 1;
     var_1._id_0A54 = 0;
@@ -1062,7 +1062,7 @@ _id_AC6B() {
         if(!_id_21CB(var_2)) {
           continue;
         }
-        var_3 = _func_211(var_2.origin, self.origin);
+        var_3 = _distance2dsquared(var_2.origin, self.origin);
 
         if(isDefined(var_2._id_6081))
           var_4 = var_2._id_6081;
@@ -1126,7 +1126,7 @@ _id_21CB(var_0) {
 _id_1365(var_0, var_1, var_2) {
   var_3 = var_0;
 
-  if(isDefined(var_3) && _func_344(var_3)) {
+  if(isDefined(var_3) && _soundexists(var_3)) {
     if(isDefined(var_1))
       _id_046C::_id_8DA2(var_3, var_1);
     else
@@ -1135,7 +1135,7 @@ _id_1365(var_0, var_1, var_2) {
 
   var_4 = var_0 + "_lp";
 
-  if(isDefined(var_4) && _func_344(var_4)) {
+  if(isDefined(var_4) && _soundexists(var_4)) {
     if(isDefined(var_1))
       _id_046C::_id_8DA4(var_4, var_1, 0.25);
   }
@@ -1173,9 +1173,9 @@ _id_7383() {
 
 _id_9CD7(var_0) {
   if(!isDefined(level._id_AC79)) {
-    _func_162("zombie_ark_zomboni_trap");
+    _precachempanim("zombie_ark_zomboni_trap");
     level._id_AC79 = 1;
-    _func_0F8("zomboni");
+    _createthreatbiasgroup("zomboni");
     level._effect["chompy_churn"] = loadfx("vfx/gameplay/mp/zombie/dlc_chompy_churn");
     level._effect["chompy_lights"] = loadfx("vfx/gameplay/mp/zombie/dlc_chompy_lights");
     level thread _id_9CEC();
@@ -1186,8 +1186,8 @@ _id_9CD7(var_0) {
   var_1 setModel("vehicle_ind_zomboni_ai");
   var_1.angles = var_0.angles;
   var_1._id_5D96 = 1;
-  var_1 _meth_8134(level._id_746E);
-  var_1 _meth_8173("zomboni");
+  var_1 makeentitysentient(level._id_746E);
+  var_1 setthreatbiasgroup("zomboni");
   var_1._id_116C = [];
   var_2 = 40;
   var_3 = 150;
@@ -1199,9 +1199,9 @@ _id_9CD7(var_0) {
     var_9 = var_7[1];
     var_10 = var_1 gettagorigin(var_8);
     var_11 = spawn("script_model", var_10);
-    var_11.angles = var_1 _meth_8181(var_8);
+    var_11.angles = var_1 gettagangles(var_8);
     var_11 setModel("tag_origin");
-    var_11 _meth_8055(var_1, var_8);
+    var_11 linkto(var_1, var_8);
     var_11._id_4836 = var_2;
     var_11._id_5983 = var_3;
     var_11._id_1173 = var_4;
@@ -1226,11 +1226,11 @@ _id_9CD7(var_0) {
         var_17._id_A045 = ::_id_9CEE;
         var_17._id_AC77 = var_1;
         var_1._id_241F = var_17;
-        var_17 _meth_8055(var_1);
+        var_17 linkto(var_1);
         break;
       case "kill_trigger":
-        var_17 _meth_8070();
-        var_17 _meth_8055(var_1);
+        var_17 enablelinkto();
+        var_17 linkto(var_1);
         var_1.killtrigger = var_17;
         break;
       case "door":
@@ -1243,23 +1243,23 @@ _id_9CD7(var_0) {
     }
   }
 
-  while(!_func_0FA("zombies"))
+  while(!_threatbiasgroupexists("zombies"))
     waitframe();
 
   for(;;) {
-    _func_0FF("zomboni", "zombies");
+    _setignoremegroup("zomboni", "zombies");
     self waittill("active");
     var_1._id_57E4 = 0;
-    _func_147(common_scripts\utility::_id_44F5("chompy_lights"), var_1, "tag_body");
-    var_1 _meth_8495("zombie_ark_zomboni_trap", var_0.origin, var_0.angles, "zomboni_anim");
+    _playfxontag(common_scripts\utility::_id_44F5("chompy_lights"), var_1, "tag_body");
+    var_1 scriptmodelplayanimdeltamotionfrompos("zombie_ark_zomboni_trap", var_0.origin, var_0.angles, "zomboni_anim");
     thread _id_9CE4(var_1);
     thread _id_9CF4(var_1);
-    _func_0FD("zomboni", "zombies", 2000);
+    _setthreatbias("zomboni", "zombies", 2000);
     thread _id_9CE3(var_1);
     var_1 waittill("end");
     self notify("zomboni_done");
-    _func_149(common_scripts\utility::_id_44F5("chompy_lights"), var_1, "tag_body");
-    var_1 _meth_8277();
+    _killfxontag(common_scripts\utility::_id_44F5("chompy_lights"), var_1, "tag_body");
+    var_1 scriptmodelclearanim();
     var_1.origin = var_0.origin;
     var_1.angles = var_0.angles;
   }
@@ -1280,19 +1280,19 @@ _id_9CEA(var_0) {
 _id_9CE0(var_0, var_1) {
   var_2 = [];
   var_3 = [(-16, 16, 56), (0, 16, 56), (18, 16, 56), (-16, -22, 56), (0, -22, 56), (18, -22, 56), (-16, -60, 56), (0, -60, 56), (18, -60, 56)];
-  var_4 = _func_18E("zomboni_room_volume", "targetname");
+  var_4 = _getent("zomboni_room_volume", "targetname");
   var_5 = var_0 gettagorigin("body_animate_jnt");
   var_5 = (var_5[0], var_5[1], var_0.origin[2]);
 
   foreach(var_7 in var_3) {
     var_8 = spawnStruct();
-    var_8.origin = var_5 + _func_112(var_7, var_0.angles + (0, -90, 0));
+    var_8.origin = var_5 + _rotatevector(var_7, var_0.angles + (0, -90, 0));
 
-    if(!isDefined(var_4) || !_func_21B(var_8.origin, var_4))
+    if(!isDefined(var_4) || !_ispointinvolume(var_8.origin, var_4))
       var_2[var_2.size] = var_8;
   }
 
-  var_10 = _func_0B8(var_5, 200, 0, 100);
+  var_10 = _getnodesinradius(var_5, 200, 0, 100);
   var_11 = anglesToForward(var_0.angles);
 
   foreach(var_13 in var_10) {
@@ -1349,7 +1349,7 @@ _id_9CEB(var_0) {
     var_1 = 0;
 
     foreach(var_3 in level.players) {
-      var_4 = var_3 _meth_8551();
+      var_4 = var_3 getgroundentity();
 
       if(isDefined(var_4) && var_4 == var_0._id_241F) {
         var_1 = 1;
@@ -1358,10 +1358,10 @@ _id_9CEB(var_0) {
     }
 
     if(var_1 && !var_0._id_57E4) {
-      var_0 _meth_84CA(1);
+      var_0 setshadowrendering(1);
       var_0._id_57E4 = 1;
     } else if(!var_1 && var_0._id_57E4) {
-      var_0 _meth_84CA(0);
+      var_0 setshadowrendering(0);
       var_0._id_57E4 = 0;
     }
 
@@ -1379,7 +1379,7 @@ _id_9CE1(var_0) {
 }
 
 _id_9CE2(var_0, var_1) {
-  var_2 = var_0 _meth_8551();
+  var_2 = var_0 getgroundentity();
 
   if(!isDefined(var_2))
     return 0;
@@ -1406,7 +1406,7 @@ _id_9CF4(var_0) {
       if(isDefined(var_5._id_66D8) && var_5._id_66D8 > gettime()) {
         continue;
       }
-      var_5._id_66D8 = gettime() + _func_0A4(1, 5) * 50;
+      var_5._id_66D8 = gettime() + _randomintrange(1, 5) * 50;
 
       if(!isalive(var_5)) {
         continue;
@@ -1417,7 +1417,7 @@ _id_9CF4(var_0) {
       if(!var_5 _id_0547::_id_4B2C()) {
         continue;
       }
-      if(!_func_2BF(var_5) || var_5._id_0A4B == "zombie_dog") {
+      if(!_isscriptedagent(var_5) || var_5._id_0A4B == "zombie_dog") {
         continue;
       }
       if(var_5 _id_0547::_id_580A()) {
@@ -1478,18 +1478,18 @@ _id_9CF4(var_0) {
 _id_9CDA(var_0, var_1, var_2) {
   var_1._id_1180 = var_2;
   common_scripts\utility::_id_A70C(self, "zomboni_done", var_2, "death");
-  var_1._id_66D2 = gettime() + _func_0A4(1000, 3000);
+  var_1._id_66D2 = gettime() + _randomintrange(1000, 3000);
   var_1._id_1180 = undefined;
 }
 
 _id_9CEF(var_0, var_1, var_2) {
   var_1 endon("death");
   thread _id_9CDA(var_0, var_2, var_1);
-  var_1 _meth_83A2(1);
+  var_1 scragentsetscripted(1);
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "AttackZomboni");
-  var_1 _meth_839D("noclip");
+  var_1 scragentsetphysicsmode("noclip");
   _id_9CF0(var_0, var_1, var_2);
-  var_1 _meth_83A2(0);
+  var_1 scragentsetscripted(0);
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "AttackZomboni");
 }
 
@@ -1505,10 +1505,10 @@ _id_9CF0(var_0, var_1, var_2) {
     var_3 = "zomboni_attack_leap_on";
 
   var_6 = var_2._id_0E18;
-  var_1 _meth_839A(0, 1);
-  var_1 _meth_855A(var_4, var_4, var_2, "tag_origin");
+  var_1 scragentsetanimscale(0, 1);
+  var_1 scragentsynchronizeanims(var_4, var_4, var_2, "tag_origin");
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_3, var_6, 1.0, "scripted_anim");
-  var_1 _meth_839A(1, 1);
+  var_1 scragentsetanimscale(1, 1);
 
   for(;;) {
     var_3 = "zomboni_attack_zomboni";
@@ -1520,8 +1520,8 @@ _id_9CF0(var_0, var_1, var_2) {
     var_1 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_3, var_6, 1.0, "scripted_anim", undefined, ::_id_9CF1);
     var_3 = "zomboni_attack_idle";
     var_6 = var_2._id_0E18;
-    var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_3, var_6, 1.0);
-    wait(_func_0A5(1.0, 2.5));
+    var_1 maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_3, var_6, 1.0);
+    wait(_randomfloatrange(1.0, 2.5));
   }
 }
 
@@ -1531,10 +1531,10 @@ _id_9CF1(var_0, var_1, var_2, var_3) {
       var_4 = [];
 
       foreach(var_6 in level.players) {
-        var_7 = var_6 _meth_8551();
+        var_7 = var_6 getgroundentity();
 
         if(isDefined(var_7) && var_7 == self._id_AC77._id_241F) {
-          var_8 = _func_0E1(self._id_1167.origin, var_6.origin);
+          var_8 = _distance2d(self._id_1167.origin, var_6.origin);
 
           if(var_8 < self._id_1167._id_1173)
             var_4[var_4.size] = var_6;
@@ -1585,7 +1585,7 @@ _id_9CE4(var_0) {
         var_0._id_5985 = 1;
 
         foreach(var_8 in var_0._id_116C)
-        var_8._id_66D2 = gettime() + _func_0A4(0, 2000);
+        var_8._id_66D2 = gettime() + _randomintrange(0, 2000);
 
         break;
       case "disable_jumpon":
@@ -1615,7 +1615,7 @@ _id_9CDC(var_0, var_1) {
     foreach(var_7 in var_0._id_116C) {
       if(isDefined(var_7._id_1180) && var_7._id_116E == var_5) {
         var_8 = var_7._id_1180;
-        var_8 _meth_8059(var_8.health, var_8.origin, self._id_0117, var_0, "MOD_TRIGGER_HURT", "trap_zm_mp");
+        var_8 dodamage(var_8.health, var_8.origin, self._id_0117, var_0, "MOD_TRIGGER_HURT", "trap_zm_mp");
       }
     }
   }
@@ -1652,11 +1652,11 @@ _id_9CD8(var_0, var_1) {
 }
 
 _id_9CDF(var_0, var_1) {
-  var_0 _meth_82B1(var_0._id_6BED, var_1);
+  var_0 moveto(var_0._id_6BED, var_1);
 }
 
 _id_9CDE(var_0, var_1) {
-  var_0 _meth_82B1(var_0._id_2438, var_1);
+  var_0 moveto(var_0._id_2438, var_1);
 }
 
 _id_9CE3(var_0) {
@@ -1680,14 +1680,14 @@ _id_9CE3(var_0) {
     var_1._id_66D3 = gettime() + 200;
 
     if(isPlayer(var_1)) {
-      var_1 _meth_8059(10, var_1.origin, undefined, var_0);
+      var_1 dodamage(10, var_1.origin, undefined, var_0);
       continue;
     }
 
     thread _id_9CE8(var_0);
 
-    if(!_func_2BF(var_1) || var_1._id_0A4B == "zombie_dog") {
-      var_1 _meth_8059(var_1.health, var_1.origin, self._id_0117, var_0, "MOD_TRIGGER_HURT", "trap_zm_mp");
+    if(!_isscriptedagent(var_1) || var_1._id_0A4B == "zombie_dog") {
+      var_1 dodamage(var_1.health, var_1.origin, self._id_0117, var_0, "MOD_TRIGGER_HURT", "trap_zm_mp");
       continue;
     }
 
@@ -1700,12 +1700,12 @@ _id_9CE8(var_0) {
   var_0 endon("play_churn_fx");
 
   if(!common_scripts\utility::_id_562E(var_0._id_22DE))
-    _func_147(common_scripts\utility::_id_44F5("chompy_churn"), var_0, "tag_body");
+    _playfxontag(common_scripts\utility::_id_44F5("chompy_churn"), var_0, "tag_body");
 
   var_0._id_22DE = 1;
   wait 5;
   var_0._id_22DE = 0;
-  _func_148(common_scripts\utility::_id_44F5("chompy_churn"), var_0, "tag_body");
+  _stopfxontag(common_scripts\utility::_id_44F5("chompy_churn"), var_0, "tag_body");
 }
 
 _id_9CED(var_0, var_1) {
@@ -1722,15 +1722,15 @@ _id_9CED(var_0, var_1) {
 _id_9CF2(var_0, var_1) {
   var_1 notify("killanimscript");
   var_1._id_AC78 = 1;
-  var_1 _meth_839C("anim deltas");
-  var_1 _meth_839A(1, 1);
-  var_1 _meth_839D("noclip");
-  var_2 = _func_0DD(var_0.angles[1] - var_1.angles[1]);
+  var_1 scragentsetanimmode("anim deltas");
+  var_1 scragentsetanimscale(1, 1);
+  var_1 scragentsetphysicsmode("noclip");
+  var_2 = _angleclamp180(var_0.angles[1] - var_1.angles[1]);
   var_3 = "zomboni_trap_victim";
-  var_4 = var_1 _meth_83DB(var_3);
+  var_4 = var_1 getanimentrycount(var_3);
   var_5 = 0;
 
-  if(_func_0AE(var_2) < 45) {
+  if(_abs(var_2) < 45) {
     var_5 = 3;
 
     if(var_4 > 3 && common_scripts\utility::_id_24A6())
@@ -1746,7 +1746,7 @@ _id_9CF2(var_0, var_1) {
 
   foreach(var_10 in var_8) {
     var_11 = var_0 gettagorigin(var_10);
-    var_12 = _func_0E1(var_11, var_1.origin);
+    var_12 = _distance2d(var_11, var_1.origin);
 
     if(!isDefined(var_6) || var_12 < var_7) {
       var_6 = var_10;
@@ -1755,14 +1755,14 @@ _id_9CF2(var_0, var_1) {
   }
 
   var_1._id_480F = 1;
-  var_1 _meth_83A2(1);
+  var_1 scragentsetscripted(1);
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "SynchronizedAnim");
-  var_1 _meth_839D("noclip");
-  var_1 _meth_855A(0.5, 0.5, var_0, var_6);
+  var_1 scragentsetphysicsmode("noclip");
+  var_1 scragentsynchronizeanims(0.5, 0.5, var_0, var_6);
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_3, var_5, 1.0, "scripted_anim", undefined, ::_id_9CF3);
   var_1._id_480F = 0;
   var_1._id_1DEB = 1;
-  var_1 _meth_8059(var_1.health, var_1.origin, self._id_0117, var_0, "MOD_TRIGGER_HURT", "trap_zm_mp");
+  var_1 dodamage(var_1.health, var_1.origin, self._id_0117, var_0, "MOD_TRIGGER_HURT", "trap_zm_mp");
 }
 
 _id_9CF3(var_0, var_1, var_2, var_3) {
@@ -1817,7 +1817,7 @@ _id_9CE9(var_0, var_1) {
       }
     }
 
-    var_11 = var_0 _meth_827B(var_1)[0];
+    var_11 = var_0 getattachpos(var_1)[0];
 
     if((!isDefined(var_4) || distance(var_4.origin, var_11) > 400) && distance(var_2, var_11) > 300) {
       var_1._id_3042 = spawnStruct();
@@ -1848,7 +1848,7 @@ _id_9CE9(var_0, var_1) {
 
     if(isDefined(var_1.target)) {
       var_6 = var_1;
-      var_1 = _func_1DB(var_1.target, "targetname");
+      var_1 = _getvehiclenode(var_1.target, "targetname");
       continue;
     }
 
@@ -1938,7 +1938,7 @@ _id_9CE5(var_0, var_1) {
     var_3 = strtok(var_0.script_exploder, " ");
 
     for(var_4 = 0; var_4 < var_3.size; var_4++) {
-      var_5 = _func_18E(var_3[var_4], "script_linkname");
+      var_5 = _getent(var_3[var_4], "script_linkname");
 
       if(isDefined(var_5)) {
         if(!isDefined(var_1) || isDefined(var_5._id_0165) && var_5._id_0165 == var_1)
@@ -1951,11 +1951,11 @@ _id_9CE5(var_0, var_1) {
 }
 
 _id_AC7B() {
-  self _meth_8280(0, 100, 100);
+  self vehicle_setspeed(0, 100, 100);
 }
 
 _id_AC7A() {
-  self _meth_8293(100);
+  self resumespeed(100);
 }
 
 _id_0904(var_0) {

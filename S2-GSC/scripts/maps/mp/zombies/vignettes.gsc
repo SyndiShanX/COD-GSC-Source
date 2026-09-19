@@ -148,12 +148,12 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
         if(isDefined(self._id_0165))
           var_14 = common_scripts\utility::stringtofloat(self._id_0165);
 
-        var_15 = common_scripts\utility::within_fov(var_13 getEye(), var_13.angles, var_7, _func_0A7(32.5));
+        var_15 = common_scripts\utility::within_fov(var_13 getEye(), var_13.angles, var_7, _cos(32.5));
         var_16 = distance(var_7, var_13.origin) < var_2;
         var_17 = distance(var_7, var_13.origin) < level.vignette_min_dist;
         var_18 = 0;
 
-        if(_func_0AE(var_13.origin[2] - self.origin[2]) < 150)
+        if(_abs(var_13.origin[2] - self.origin[2]) < 150)
           var_18 = 1;
 
         if(var_15) {
@@ -163,7 +163,7 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
         if(!var_16)
           var_10[var_10.size] = var_13;
 
-        var_19 = common_scripts\utility::within_fov(self.origin, self.angles + (0, var_14, 0), var_13.origin, _func_0A7(60));
+        var_19 = common_scripts\utility::within_fov(self.origin, self.angles + (0, var_14, 0), var_13.origin, _cos(60));
         var_20 = 1;
 
         if(var_4 && !var_19)
@@ -176,11 +176,11 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
       if(var_11.size > 0 && var_11.size + var_10.size == level.players.size)
         var_0 notify("vignette_start");
 
-      wait(_func_0A5(1.5, 3));
+      wait(_randomfloatrange(1.5, 3));
       continue;
     }
 
-    wait(_func_0A5(2, 5));
+    wait(_randomfloatrange(2, 5));
   }
 }
 
@@ -195,7 +195,7 @@ vignette_run(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_10.health = 1;
     var_10.is_fellow_human = 1;
     var_10.not_valid_sacrifice = 1;
-    var_10 _id_0547::_id_84CB();
+    var_10 _id_0547::disableoffhandsecondaryweapons();
   }
 
   level.vignettes_active[level.vignettes_active.size] = self;
@@ -204,7 +204,7 @@ vignette_run(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_11)) {
     var_11.vignette_interrupted = 0;
     var_11._id_6941 = 1;
-    var_11 _id_0547::_id_84CB();
+    var_11 _id_0547::disableoffhandsecondaryweapons();
   }
 
   level.vignettes_occurred_in_current_wave = level.vignettes_occurred_in_current_wave + 1;
@@ -214,9 +214,9 @@ vignette_run(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_7) && isalive(var_10)) {
     var_12 = var_10 maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_7);
-    var_13 = var_10 _meth_83D8(var_12, 0);
-    var_14 = _func_06D(self.origin, self.angles, var_13);
-    var_15 = _func_06E(self.origin, self.angles, var_13);
+    var_13 = var_10 getanimentry(var_12, 0);
+    var_14 = _getstartorigin(self.origin, self.angles, var_13);
+    var_15 = _getstartangles(self.origin, self.angles, var_13);
     var_10 vignette_actor_enter_safe_state();
     var_10 vignette_actor_run_anim_entry(var_14, var_15, var_12, 30);
   } else {
@@ -241,7 +241,7 @@ vignette_run(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   var_10._id_78D2 = 1;
-  var_10 _meth_8059(1000, var_10.origin);
+  var_10 dodamage(1000, var_10.origin);
   var_0 notify("vignette_end");
   level.vignettes_active = common_scripts\utility::_id_0F93(level.vignettes_active, self);
   level.vignettes_all = common_scripts\utility::_id_0F93(level.vignettes_all, var_0);
@@ -249,18 +249,18 @@ vignette_run(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
 vignette_execute_paired_scene(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_0 maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_2);
-  var_6 = var_0 _meth_83D8(var_5, 0);
-  var_7 = _func_06D(self.origin, self.angles, var_6);
-  var_8 = _func_06E(self.origin, self.angles, var_6);
-  var_9 = _func_065(var_6);
+  var_6 = var_0 getanimentry(var_5, 0);
+  var_7 = _getstartorigin(self.origin, self.angles, var_6);
+  var_8 = _getstartangles(self.origin, self.angles, var_6);
+  var_9 = _getanimlength(var_6);
   var_10 = var_0 maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_3);
-  var_11 = var_0 _meth_83D8(var_10, 0);
-  var_12 = _func_06D(self.origin, self.angles, var_11);
-  var_13 = _func_06E(self.origin, self.angles, var_11);
+  var_11 = var_0 getanimentry(var_10, 0);
+  var_12 = _getstartorigin(self.origin, self.angles, var_11);
+  var_13 = _getstartangles(self.origin, self.angles, var_11);
   var_14 = undefined;
 
   if(var_4)
-    var_14 = _func_0A5(level.vignette_loop_min_timeout, level.vignette_loop_max_timeout);
+    var_14 = _randomfloatrange(level.vignette_loop_min_timeout, level.vignette_loop_max_timeout);
 
   var_1 thread vignette_actor_run_anim_entry(var_12, var_13, var_10, var_14);
   var_0 thread vignette_actor_run_anim_entry(var_7, var_8, var_5, var_14);
@@ -272,10 +272,10 @@ vignette_actor_run_anim_entry(var_0, var_1, var_2, var_3) {
   self endon("death");
   self setOrigin(var_0, 0);
   self.angles = var_1;
-  self _meth_839C("anim deltas");
-  self _meth_839B("face angle abs", var_1);
-  self _meth_839A(1, 1);
-  self _meth_839D("noclip");
+  self scragentsetanimmode("anim deltas");
+  self scragentsetorientmode("face angle abs", var_1);
+  self scragentsetanimscale(1, 1);
+  self scragentsetphysicsmode("noclip");
 
   if(isDefined(var_3))
     vignette_zombie_run_loop(var_2, var_3);
@@ -296,7 +296,7 @@ vignette_actor_enter_safe_state() {
   if(!isalive(self)) {
     return;
   }
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "vignette spawn");
   self._id_509A = 1;
   thread vignette_damage_listener();
@@ -309,7 +309,7 @@ vignette_actor_leave_safe_state() {
   if(isDefined(self.vignettepartner))
     self.vignettepartner = undefined;
 
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "vignette spawn");
 }
 
@@ -374,7 +374,7 @@ vignette_monitor_last_seen() {
   var_0 thread vignette_monitor_last_seen_ticker();
 
   for(;;) {
-    wait(_func_0A5(0.25, 0.5));
+    wait(_randomfloatrange(0.25, 0.5));
 
     if(level.vignette_cooldown_current > level.vignette_spawn_cant_be_seen_for_time) {
       self.time_since_loc_seen = 0;
@@ -384,8 +384,8 @@ vignette_monitor_last_seen() {
     var_1 = _id_055A::_id_4626(var_0.ent_zone_name, 1, 0);
 
     foreach(var_3 in var_1) {
-      var_4 = common_scripts\utility::within_fov(var_3 getEye(), var_3.angles, var_0.origin, _func_0A7(32.5));
-      var_5 = var_4 && _func_07F(var_3 getEye(), var_0.origin + (0, 0, 36), 0, 0);
+      var_4 = common_scripts\utility::within_fov(var_3 getEye(), var_3.angles, var_0.origin, _cos(32.5));
+      var_5 = var_4 && _sighttracepassed(var_3 getEye(), var_0.origin + (0, 0, 36), 0, 0);
 
       if(var_5) {
         self.time_since_loc_seen = 0;
@@ -423,19 +423,19 @@ vignette_monitor_last_seen_ticker() {
 vignette_gunshots(var_0, var_1) {
   var_0 endon("death");
   var_1 endon("death");
-  var_2 = _func_0A5(0, 1);
+  var_2 = _randomfloatrange(0, 1);
   var_3 = ["mp40_zm", "type100_zm", "stg44_zm", "ppsh41_zm", "kar98_zm", "luger_zm", "m712_zm"];
   var_4 = var_3[randomint(var_3.size - 1)];
 
   if(var_2 <= level.vignette_gunshot_chance) {
-    var_5 = _func_0A4(1, 3);
+    var_5 = _randomintrange(1, 3);
 
     if(var_4 == "kar98_zm")
       var_5 = 1;
 
     for(var_6 = 0; var_6 < var_5; var_6++) {
-      _func_1B5(var_4, var_1.origin, var_1.origin - (0, 0, 10));
-      wait(_func_0A5(0.15, 0.4));
+      _magicbullet(var_4, var_1.origin, var_1.origin - (0, 0, 10));
+      wait(_randomfloatrange(0.15, 0.4));
     }
   }
 }

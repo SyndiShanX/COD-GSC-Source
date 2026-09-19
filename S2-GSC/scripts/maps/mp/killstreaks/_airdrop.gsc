@@ -51,7 +51,7 @@ _id_8620(var_0) {
   if(!isDefined(var_1) || var_1.size == 0) {
     return;
   }
-  level._id_0B80 = _func_18E(var_1[0].target, "targetname");
+  level._id_0B80 = _getent(var_1[0].target, "targetname");
 
   foreach(var_3 in var_1)
   var_3 _id_2D30();
@@ -112,54 +112,54 @@ _id_90C6(var_0, var_1) {
 }
 
 _id_2D43(var_0) {
-  self _meth_8055(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 waittill("death");
   self delete();
 }
 
 _id_275C() {
   self endon("death");
-  self _meth_805C();
+  self hide();
 
   foreach(var_1 in level.players) {
     if(var_1.team != "spectator")
-      self _meth_8005(var_1);
+      self showtoplayer(var_1);
   }
 
   for(;;) {
     level waittill("joined_team");
-    self _meth_805C();
+    self hide();
 
     foreach(var_1 in level.players) {
       if(var_1.team != "spectator")
-        self _meth_8005(var_1);
+        self showtoplayer(var_1);
     }
   }
 }
 
 _id_274D(var_0, var_1) {
   self endon("death");
-  self _meth_805C();
+  self hide();
 
   foreach(var_3 in level.players) {
     if(var_3.team == var_0 || var_1 && var_3.team == "spectator")
-      self _meth_8005(var_3);
+      self showtoplayer(var_3);
   }
 
   for(;;) {
     level common_scripts\utility::_id_A70A("joined_team", "joined_spectators");
-    self _meth_805C();
+    self hide();
 
     foreach(var_3 in level.players) {
       if(var_3.team == var_0 || var_1 && var_3.team == "spectator")
-        self _meth_8005(var_3);
+        self showtoplayer(var_3);
     }
   }
 }
 
 _id_274C(var_0, var_1) {
   self endon("death");
-  self _meth_805C();
+  self hide();
 
   foreach(var_3 in level.players) {
     if(var_1 && isDefined(var_0) && var_3 != var_0) {
@@ -168,12 +168,12 @@ _id_274C(var_0, var_1) {
     if(!var_1 && isDefined(var_0) && var_3 == var_0) {
       continue;
     }
-    self _meth_8005(var_3);
+    self showtoplayer(var_3);
   }
 
   for(;;) {
     level waittill("joined_team");
-    self _meth_805C();
+    self hide();
 
     foreach(var_3 in level.players) {
       if(var_1 && isDefined(var_0) && var_3 != var_0) {
@@ -182,7 +182,7 @@ _id_274C(var_0, var_1) {
       if(!var_1 && isDefined(var_0) && var_3 == var_0) {
         continue;
       }
-      self _meth_8005(var_3);
+      self showtoplayer(var_3);
     }
   }
 }
@@ -231,11 +231,11 @@ _id_27CB(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7._id_3EE1 = spawn("script_model", var_3);
     var_7._id_3EE1 setModel(var_8);
     var_7._id_3EE1._id_6E77 = var_7;
-    var_7._id_3EE1 _meth_82C2();
+    var_7._id_3EE1 notsolid();
     var_7._id_376E = spawn("script_model", var_3);
     var_7._id_376E setModel(var_9);
     var_7._id_376E._id_6E77 = var_7;
-    var_7._id_376E _meth_82C2();
+    var_7._id_376E notsolid();
     var_7._id_3EE1 thread _id_2D43(var_7);
 
     if(level.teambased)
@@ -254,18 +254,18 @@ _id_27CB(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7._id_54F5 = 0;
 
   if(var_6)
-    var_7 _meth_8275(level._id_0B80);
+    var_7 clonebrushmodeltoscriptmodel(level._id_0B80);
 
   var_7._id_5A2C = spawn("script_model", var_7.origin + (0, 0, -200));
-  var_7._id_5A2C _meth_834D("missile");
+  var_7._id_5A2C setscriptmoverkillcam("missile");
   var_7._id_5A2C _meth_80B1();
-  var_7._id_5A2C _meth_8055(var_7);
+  var_7._id_5A2C linkto(var_7);
   return var_7;
 }
 
 _id_275B(var_0) {
-  self _meth_80CD("HINT_NOICON");
-  self _meth_80CE(var_0);
+  self setcursorhint("HINT_NOICON");
+  self sethintstring(var_0);
 }
 
 _id_275A(var_0) {
@@ -273,41 +273,41 @@ _id_275A(var_0) {
 
   if(self.team == "any") {
     var_1 = _id_04D1::_id_45A9();
-    _func_1CE(var_1, "invisible", (0, 0, 0));
-    _func_1D2(var_1, self.origin);
-    _func_1D0(var_1, "active");
+    _objective_add(var_1, "invisible", (0, 0, 0));
+    _objective_position(var_1, self.origin);
+    _objective_state(var_1, "active");
     var_2 = "compass_objpoint_ammo_friendly";
-    _func_1D1(var_1, var_2);
-    _func_183(var_1, "none");
+    _objective_icon(var_1, var_2);
+    _objective_team(var_1, "none");
     self._id_698E = var_1;
   } else {
     if(level.teambased || isDefined(self._id_0117)) {
       var_1 = _id_04D1::_id_45A9();
-      _func_1CE(var_1, "invisible", (0, 0, 0));
-      _func_1D2(var_1, self.origin);
-      _func_1D0(var_1, "active");
+      _objective_add(var_1, "invisible", (0, 0, 0));
+      _objective_position(var_1, self.origin);
+      _objective_state(var_1, "active");
       var_2 = "compass_objpoint_ammo_friendly";
-      _func_1D1(var_1, var_2);
+      _objective_icon(var_1, var_2);
 
       if(!level.teambased && isDefined(self._id_0117))
-        _func_185(var_1, self._id_0117 getentitynumber());
+        _objective_playerenemyteam(var_1, self._id_0117 getentitynumber());
       else
-        _func_183(var_1, self.team);
+        _objective_team(var_1, self.team);
 
       self._id_698E = var_1;
     }
 
     if(isDefined(self._id_0117)) {
       var_1 = _id_04D1::_id_45A9();
-      _func_1CE(var_1, "invisible", (0, 0, 0));
-      _func_1D2(var_1, self.origin);
-      _func_1D0(var_1, "active");
-      _func_1D1(var_1, "compass_objpoint_ammo_enemy");
+      _objective_add(var_1, "invisible", (0, 0, 0));
+      _objective_position(var_1, self.origin);
+      _objective_state(var_1, "active");
+      _objective_icon(var_1, "compass_objpoint_ammo_enemy");
 
       if(!level.teambased && isDefined(self._id_0117))
-        _func_186(var_1, self._id_0117 getentitynumber());
+        _objective_playerteam(var_1, self._id_0117 getentitynumber());
       else
-        _func_183(var_1, level._id_6C63[self.team]);
+        _objective_team(var_1, level._id_6C63[self.team]);
 
       self._id_698D = var_1;
     }
@@ -315,7 +315,7 @@ _id_275A(var_0) {
 
   if(self.team == "any") {
     foreach(var_4 in level._id_985B) {
-      if(isDefined(var_0) && _func_0C0(var_0)) {
+      if(isDefined(var_0) && _isarray(var_0)) {
         _id_869F(var_4, var_0);
         continue;
       }
@@ -327,12 +327,12 @@ _id_275A(var_0) {
     var_6 = self._id_944E;
 
     if(level.teambased) {
-      if(isDefined(var_0) && _func_0C0(var_0))
+      if(isDefined(var_0) && _isarray(var_0))
         _id_869F(self.team, var_0);
       else
         _id_0479::_id_869E(self.team, var_0, (0, 0, 60), 14, 14, undefined, undefined, undefined, undefined, undefined, 0);
     } else if(isDefined(self._id_0117)) {
-      if(isDefined(var_0) && _func_0C0(var_0))
+      if(isDefined(var_0) && _isarray(var_0))
         _id_869F(self._id_0117, var_0);
       else
         _id_0479::_id_869E(self._id_0117, var_0, (0, 0, 60), 14, 14, undefined, undefined, undefined, undefined, undefined, 0);
@@ -379,7 +379,7 @@ _id_6FAD(var_0, var_1) {
     }
   }
 
-  if(isDefined(self._id_0117) && _func_0AE(self.origin[2] - self._id_0117.origin[2]) > 4000) {
+  if(isDefined(self._id_0117) && _abs(self.origin[2] - self._id_0117.origin[2]) > 4000) {
     _id_2D30();
     return;
   }
@@ -409,7 +409,7 @@ _id_1FFB(var_0) {
 _id_34B2(var_0) {
   level endon("game_ended");
   var_0 endon("death");
-  maps\mp\gametypes\_hostmigration::_id_A6F5(90);
+  maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(90);
 
   while(var_0._id_28D5 != 0)
     wait 1;
@@ -427,10 +427,10 @@ _id_2744() {
 }
 
 _id_11C3(var_0) {
-  if(var_0 _meth_83B8()) {
+  if(var_0 isjumping()) {
     return;
   }
-  if(!var_0 _meth_8346() && !_id_A6F8(var_0)) {
+  if(!var_0 isonground() && !_id_A6F8(var_0)) {
     return;
   }
   if(!_id_A276(var_0)) {
@@ -458,14 +458,14 @@ _id_11C3(var_0) {
 }
 
 _id_A6F8(var_0) {
-  if(var_0 _meth_8346())
+  if(var_0 isonground())
     return 0;
 
   var_1 = 200;
   var_2 = var_0.origin;
   var_3 = gettime();
 
-  while(isDefined(var_0) && maps\mp\_utility::isreallyalive(var_0) && !var_0 _meth_8346() && var_2 == var_0.origin && var_0 _meth_8341()) {
+  while(isDefined(var_0) && maps\mp\_utility::isreallyalive(var_0) && !var_0 isonground() && var_2 == var_0.origin && var_0 usebuttonpressed()) {
     var_4 = gettime() - var_3;
 
     if(var_4 >= var_1)
@@ -478,7 +478,7 @@ _id_A6F8(var_0) {
 }
 
 _id_A276(var_0) {
-  var_1 = var_0 _meth_8317();
+  var_1 = var_0 getcurrentprimaryweapon();
 
   if(issubstr(var_1, "turrethead") || issubstr(var_1, "flamethrower") || issubstr(var_1, "carepackage"))
     return 1;
@@ -571,18 +571,18 @@ _id_27DF(var_0, var_1) {
   var_2 = spawn("script_model", var_0);
   var_2 setModel("hub_lootcrate_a_pieces_chunks");
   var_2.angles = var_1;
-  var_2 _meth_805B();
+  var_2 show();
   waitframe();
-  _func_175(var_0, 100, 80, 0.6);
+  _physicsexplosionsphere(var_0, 100, 80, 0.6);
   wait 2;
   var_2 delete();
 }
 
 _id_A213(var_0, var_1) {
   if(isPlayer(var_0))
-    var_0 _meth_8077(self);
+    var_0 playerlinkto(self);
   else
-    var_0 _meth_8055(self);
+    var_0 linkto(self);
 
   var_0 common_scripts\utility::_id_0602();
   thread _id_A215(var_0);
@@ -611,15 +611,15 @@ _id_A215(var_0) {
   if(isalive(var_0)) {
     var_0 common_scripts\utility::_id_0616();
 
-    if(var_0 _meth_806F())
-      var_0 _meth_8057();
+    if(var_0 islinked())
+      var_0 unlink();
   }
 }
 
 _id_6F82(var_0, var_1) {
   self endon("disconnect");
-  self _meth_82FF("ui_use_bar_text", 1);
-  self _meth_82FF("ui_use_bar_start_time", int(gettime()));
+  self setclientomnvar("ui_use_bar_text", 1);
+  self setclientomnvar("ui_use_bar_start_time", int(gettime()));
   var_2 = -1;
 
   while(maps\mp\_utility::isreallyalive(self) && isDefined(var_0) && var_0._id_54F5 && !level.gameended) {
@@ -631,7 +631,7 @@ _id_6F82(var_0, var_1) {
         var_3 = gettime();
         var_4 = var_0._id_28D5 / var_1;
         var_5 = var_3 + (1 - var_4) * (var_1 / var_0._id_A22B);
-        self _meth_82FF("ui_use_bar_end_time", int(var_5));
+        self setclientomnvar("ui_use_bar_end_time", int(var_5));
       }
 
       var_2 = var_0._id_A22B;
@@ -640,11 +640,11 @@ _id_6F82(var_0, var_1) {
     waitframe();
   }
 
-  self _meth_82FF("ui_use_bar_end_time", 0);
+  self setclientomnvar("ui_use_bar_end_time", 0);
 }
 
 _id_A214(var_0, var_1) {
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 _meth_8341() && self._id_28D5 < var_1) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && self._id_28D5 < var_1) {
     self._id_28D5 = self._id_28D5 + self._id_A22B * 50;
 
     if(!self._id_A22B)

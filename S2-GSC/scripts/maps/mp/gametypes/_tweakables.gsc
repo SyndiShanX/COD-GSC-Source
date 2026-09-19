@@ -208,7 +208,7 @@ _id_8750(var_0, var_1, var_2) {
 _id_7BFD(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4) && var_4)
     var_3 = getdvarfloat(var_2, var_3);
-  else if(_func_031(var_3))
+  else if(_isstring(var_3))
     var_3 = getDvar(var_2, var_3);
   else
     var_3 = getdvarint(var_2, var_3);

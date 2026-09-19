@@ -10,26 +10,26 @@ _id_5329() {
   var_0 = getEntArray("paired_melee_clip", "targetname");
 
   foreach(var_2 in var_0) {
-    level._id_6DF8[var_2._id_81E1] = var_2;
+    level._id_6DF8[var_2.setmovespeedscale] = var_2;
     var_3 = getEntArray(var_2.target, "targetname");
 
     foreach(var_5 in var_3) {
       if(isDefined(var_5._id_0165)) {
         switch (var_5._id_0165) {
           case "clip_old":
-            var_5 _meth_82C2();
-            var_5 _meth_8055(var_2);
-            var_5 _meth_805C();
+            var_5 notsolid();
+            var_5 linkto(var_2);
+            var_5 hide();
             break;
           case "clip_vis":
-            var_5 _meth_82C2();
+            var_5 notsolid();
             var_2._id_A55B = var_5;
-            var_5 _meth_805C();
-            var_5 _meth_8055(var_2);
+            var_5 hide();
+            var_5 linkto(var_2);
             break;
           case "clip":
             var_2._id_4033 = var_5;
-            var_5 _meth_8055(var_2);
+            var_5 linkto(var_2);
             break;
         }
       }
@@ -59,8 +59,8 @@ initpairedmeleealignmenthelper() {
 
 solvepairedmeleefatalpositioning(var_0) {
   if(isDefined(var_0["fatal_worldmodel_anim"])) {
-    level.paired_melee_model _meth_8276(var_0["fatal_worldmodel_anim"], "meleeAlign", 0.5);
-    level.paired_melee_model _meth_84CA(1);
+    level.paired_melee_model scriptmodelplayanim(var_0["fatal_worldmodel_anim"], "meleeAlign", 0.5);
+    level.paired_melee_model setshadowrendering(1);
     var_1 = level.paired_melee_model gettagorigin("TAG_SYNC", 0);
     var_0["fatal_zombie_pos"] = (var_1[0], var_1[1], 0);
     var_0["fatal_zombie_dist"] = length(var_0["fatal_zombie_pos"]);
@@ -123,10 +123,10 @@ attemptheavymeleekill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   var_10 = (34, 8, 0);
   var_11 = 24;
   var_12 = 21;
-  var_13 = _func_112(var_10, var_2.angles);
-  var_14 = _func_082(var_2.origin + var_13, var_11, 64, 64, 0);
+  var_13 = _rotatevector(var_10, var_2.angles);
+  var_14 = _getgroundposition(var_2.origin + var_13, var_11, 64, 64, 0);
 
-  if(!isDefined(var_14) || _func_0AE(var_14[2] - var_2.origin[2]) > var_12)
+  if(!isDefined(var_14) || _abs(var_14[2] - var_2.origin[2]) > var_12)
     return 0;
 
   return 1;
@@ -141,7 +141,7 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
   var_0 thread _id_4AB2(var_0, var_1, var_2, var_11, var_3, var_5, var_8);
   var_11 = 1;
-  var_12 = _func_065(var_2);
+  var_12 = _getanimlength(var_2);
   var_13 = common_scripts\utility::_id_A2BE();
   var_14 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_2, "melee_stop_pairing", 1.0) * var_12 - var_3;
   var_14 = max(0, var_14);
@@ -151,8 +151,8 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_16 = spawn("script_model", var_5.origin + anglesToForward(var_5.angles) * 1);
     var_16 setModel(var_5.model);
     var_16.angles = var_5.angles;
-    var_16 _meth_8276(var_1["fatal_worldmodel_anim"], "actually play this anim please", max(0, var_3));
-    var_16 _meth_8276(var_1["fatal_worldmodel_anim"], "actually play this anim please", 0);
+    var_16 scriptmodelplayanim(var_1["fatal_worldmodel_anim"], "actually play this anim please", max(0, var_3));
+    var_16 scriptmodelplayanim(var_1["fatal_worldmodel_anim"], "actually play this anim please", 0);
     var_17 = var_16 gettagorigin("tag_sync");
     thread _id_4AB1(var_0, var_5, var_14, var_17);
 
@@ -162,10 +162,10 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       }
 
       var_19 = var_3 + var_18;
-      var_16 _meth_8277();
-      var_16 _meth_8276(var_1["fatal_worldmodel_anim"], "actually play this anim please", max(0, var_19));
+      var_16 scriptmodelclearanim();
+      var_16 scriptmodelplayanim(var_1["fatal_worldmodel_anim"], "actually play this anim please", max(0, var_19));
       var_0.origin = var_16 gettagorigin("tag_sync");
-      var_0.angles = var_16 _meth_8181("tag_sync");
+      var_0.angles = var_16 gettagangles("tag_sync");
       waitframe();
     }
 
@@ -175,7 +175,7 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_21 = var_1["fatal_zombie_dist"];
     var_24 = anglesToForward(var_5.angles) * var_20[0] + anglestoright(var_5.angles) * var_20[1];
     var_25 = var_5.angles + (0, 180, 0);
-    var_26 = _func_082(var_5.origin + var_24, 16);
+    var_26 = _getgroundposition(var_5.origin + var_24, 16);
     var_27 = vectorNormalize(var_26 - var_5.origin);
     var_28 = var_5.origin + var_27 * var_21;
     var_29 = gettime() * 0.001 + var_3;
@@ -212,7 +212,7 @@ _id_2678(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
   self endon("entityDeleted");
   level notify("paired_death_lerp_start");
-  var_7 = _func_065(var_0);
+  var_7 = _getanimlength(var_0);
   var_8 = self.origin;
   var_9 = self.angles;
   var_10 = gettime();
@@ -237,13 +237,13 @@ _id_2678(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_16 = common_scripts\utility::_id_A2BE();
 
     if(!getdvarint("cancel_anim_delta", 0))
-      var_16 = _func_083(var_0, 0, var_15);
+      var_16 = _getmovedelta(var_0, 0, var_15);
 
-    var_17 = _func_084(var_0, 0, var_15);
-    var_18 = _func_111(var_4, var_5, common_scripts\utility::_id_A2BE(), common_scripts\utility::_id_A2BE(), var_16, (0, var_17, 0));
+    var_17 = _getangledelta(var_0, 0, var_15);
+    var_18 = _transformmove(var_4, var_5, common_scripts\utility::_id_A2BE(), common_scripts\utility::_id_A2BE(), var_16, (0, var_17, 0));
     var_13 = (var_12 - var_10) * 0.001 / var_6;
-    var_19 = _func_0AF(var_13, 1.0);
-    self.origin = _func_10A(var_8, var_18["origin"], var_19);
+    var_19 = _min(var_13, 1.0);
+    self.origin = _vectorlerp(var_8, var_18["origin"], var_19);
     self.angles = _func_10B(var_9, var_18["angles"], var_19);
 
     if(getdvarint("paired_death_debug", 0))
@@ -276,7 +276,7 @@ _id_4AB1(var_0, var_1, var_2, var_3) {
   }
   var_10.origin = var_3;
   var_10.angles = (0, var_9[1], 0);
-  var_10 _meth_808C();
+  var_10 dontinterpolate();
   var_11 = getdvarint("paired_death_obstacle", 0);
 
   if(var_11) {
@@ -308,13 +308,13 @@ _id_4AB1(var_0, var_1, var_2, var_3) {
 
   var_10.origin = var_10._id_6C4E;
   var_10.angles = var_10._id_6C48;
-  var_10 _meth_808C();
+  var_10 dontinterpolate();
 }
 
 _id_4AB2(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_0 endon("entitydeleted");
 
-  if(!_func_066(var_2, "dismember_head")) {
+  if(!_animhasnotetrack(var_2, "dismember_head")) {
     return;
   }
   [var_8, var_9] = _id_0547::_id_4584(var_6, var_5);
@@ -340,7 +340,7 @@ _id_4AB2(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
   }
 
-  var_13 = _func_065(var_2);
+  var_13 = _getanimlength(var_2);
   var_14 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_2, "helmet_pop", -1.0);
 
   if(var_14 >= 0.0) {
@@ -389,11 +389,11 @@ hackhandleflinching(var_0) {
     return;
   }
   if(!isDefined(self.premeleeflinchscale))
-    self.premeleeflinchscale = self _meth_830F();
+    self.premeleeflinchscale = self getviewkickscale();
 
-  self _meth_830E(0);
+  self setviewkickscale(0);
   wait(var_2);
-  self _meth_830E(self.premeleeflinchscale);
+  self setviewkickscale(self.premeleeflinchscale);
   self.premeleeflinchscale = undefined;
 }
 
@@ -409,7 +409,7 @@ set_invalid_melee_pairing_reason(var_0, var_1) {
     var_2.invalidmeleepairingreasons[var_0] = undefined;
 
   var_3 = var_2.invalidmeleepairingreasons.size == 0;
-  var_2 _meth_854A(var_3);
+  var_2 setexomeleechargevalid(var_3);
 }
 
 set_zombie_too_far_for_pairing(var_0) {

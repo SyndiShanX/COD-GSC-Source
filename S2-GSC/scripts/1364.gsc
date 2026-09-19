@@ -9,7 +9,7 @@ init() {
 
   for(var_1 = 0; var_1 < var_0; var_1++) {
     level._id_AB3A[var_1] = spawn("script_model", (0, 0, 0));
-    level._id_AB3A[var_1] _meth_861B(0);
+    level._id_AB3A[var_1] scalevolume(0);
     level._id_AB3A[var_1]._id_00D4 = var_1;
   }
 
@@ -34,7 +34,7 @@ _id_8A31(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(level._id_AB01[var_1]))
     level._id_AB01[var_1] = spawnStruct();
 
-  if(_func_0C0(var_2)) {
+  if(_isarray(var_2)) {
     level._id_AB01[var_1]._id_0BB4 = var_2[0];
     level._id_AB01[var_1]._id_0BB5 = var_2;
   } else
@@ -73,12 +73,12 @@ _id_06A0(var_0, var_1) {
 
   if(var_0 == level._id_AB01["round_intermission"]) {
     var_2 = level._id_AB3A[var_0._id_37AB];
-    var_2 _meth_861D(var_0._id_0BB4);
-    var_2 _meth_861B(1, 0.5);
+    var_2 playloopsound(var_0._id_0BB4);
+    var_2 scalevolume(1, 0.5);
     wait 10;
-    var_2 _meth_861B(0, 5);
+    var_2 scalevolume(0, 5);
     wait 5;
-    var_2 _meth_8612();
+    var_2 stoploopsound();
   } else if(var_0._id_55B3) {
     var_2 = level._id_AB3A[var_0._id_37AB];
     var_3 = var_0._id_0BB4;
@@ -93,8 +93,8 @@ _id_06A0(var_0, var_1) {
       var_0._id_0BB4 = var_3;
     }
 
-    var_2 _meth_861D(var_3);
-    var_2 _meth_861B(1);
+    var_2 playloopsound(var_3);
+    var_2 scalevolume(1);
     thread _id_0726(var_2, var_0);
 
     if(level._id_7F2A == "normal") {
@@ -102,11 +102,11 @@ _id_06A0(var_0, var_1) {
       return;
     }
   } else if(var_0._id_6AAA)
-    var_1 _meth_860F(var_0._id_0BB4, var_1);
+    var_1 playsoundtoplayer(var_0._id_0BB4, var_1);
   else {
     var_2 = level._id_AB3A[var_0._id_37AB];
-    var_2 _meth_861F(var_0._id_0BB4);
-    var_2 _meth_861B(1);
+    var_2 playsoundonmovingent(var_0._id_0BB4);
+    var_2 scalevolume(1);
   }
 }
 
@@ -117,18 +117,18 @@ _id_0726(var_0, var_1) {
   if(isDefined(var_1._id_93F3) && var_1._id_93F3 > 0)
     wait(var_1._id_93F3);
 
-  var_0 _meth_861B(0, 2);
+  var_0 scalevolume(0, 2);
   wait 2;
-  var_0 _meth_8612();
-  var_0 _meth_861B(1);
+  var_0 stoploopsound();
+  var_0 scalevolume(1);
 }
 
 _id_0727(var_0, var_1) {
   level endon("zombie_wave_ended");
   wait 20;
-  var_0 _meth_861B(0, 20);
+  var_0 scalevolume(0, 20);
   wait 20;
-  var_0 _meth_8612();
-  var_0 _meth_861B(1);
+  var_0 stoploopsound();
+  var_0 scalevolume(1);
   level notify("zombie_stopOnTimeElapsed");
 }

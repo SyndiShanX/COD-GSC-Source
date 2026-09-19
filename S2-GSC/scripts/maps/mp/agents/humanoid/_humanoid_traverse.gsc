@@ -11,14 +11,14 @@ main() {
 }
 
 _id_4232(var_0) {
-  return _func_083(var_0, 0, maps\mp\agents\_scripted_agent_anim_util::_id_446A(var_0));
+  return _getmovedelta(var_0, 0, maps\mp\agents\_scripted_agent_anim_util::_id_446A(var_0));
 }
 
 _id_4392(var_0, var_1) {
   if(var_0.type == "Begin 3D")
     var_2 = var_0.origin + (0, 0, -16);
   else {
-    var_2 = _func_082(var_0.origin, var_1, 32, 32, 0);
+    var_2 = _getgroundposition(var_0.origin, var_1, 32, 32, 0);
 
     if(!isDefined(var_2))
       var_2 = var_0.origin;
@@ -33,7 +33,7 @@ _id_2CE5(var_0) {
 }
 
 _id_32B7() {
-  var_0 = self _meth_8198();
+  var_0 = self getnegotiationstartnode();
   var_1 = _id_4392(var_0, self.radius);
   var_2 = self _meth_857F();
   self setOrigin(var_1, 0);
@@ -48,52 +48,52 @@ _id_32B7() {
   }
 
   var_7 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_5);
-  var_8 = self _meth_83D8(var_5, var_7);
+  var_8 = self getanimentry(var_5, var_7);
   _id_62AC(var_0, var_8);
   self endon("killanimscript");
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoTraverse");
-  self _meth_839B("face angle abs", var_0.angles);
-  self _meth_839C("anim deltas");
-  self _meth_839D("noclip");
-  self _meth_839A(1, 1);
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_5, var_7, self._id_9D0D);
-  var_9 = _func_065(var_8);
+  self scragentsetorientmode("face angle abs", var_0.angles);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetphysicsmode("noclip");
+  self scragentsetanimscale(1, 1);
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_5, var_7, self._id_9D0D);
+  var_9 = _getanimlength(var_8);
   var_10 = maps\mp\agents\_scripted_agent_anim_util::_id_446A(var_8);
-  var_11 = _func_111(var_1, var_0.angles, (0, 0, 0), (0, 0, 0), _func_083(var_8, 0, var_10), (0, 0, 0));
+  var_11 = _transformmove(var_1, var_0.angles, (0, 0, 0), (0, 0, 0), _getmovedelta(var_8, 0, var_10), (0, 0, 0));
   var_12 = (var_11["origin"][0], var_11["origin"][1], var_2[2]);
-  var_13 = _func_082(var_12, self.radius, 32, 32, 0);
+  var_13 = _getgroundposition(var_12, self.radius, 32, 32, 0);
 
   if(!isDefined(var_13))
     var_13 = var_11["origin"];
 
   self._id_9D07 = vectorNormalize(var_13 - var_1);
 
-  if(_func_066(var_8, "traverse_jump_start")) {
+  if(_animhasnotetrack(var_8, "traverse_jump_start")) {
     var_14 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_8, "traverse_jump_start");
     var_15 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_8, "traverse_jump_end");
     wait(var_14 * var_9 / self._id_9D0D);
-    var_16 = _func_083(var_8, var_14, var_15)[2];
-    var_17 = _func_083(var_8, var_14, var_10)[2];
+    var_16 = _getmovedelta(var_8, var_14, var_15)[2];
+    var_17 = _getmovedelta(var_8, var_14, var_10)[2];
     var_18 = self.origin[2] + var_17;
     var_19 = var_18 - var_13[2];
 
-    if(_func_0AE(var_16) < 5) {
-      self _meth_839A(1, 0);
+    if(_abs(var_16) < 5) {
+      self scragentsetanimscale(1, 0);
       var_20 = (var_15 - var_14) * var_9 / self._id_9D0D;
       childthread _id_9D0A(self.origin[2], self.origin[2] + var_16 - var_19, var_20);
       wait(var_20);
-      self _meth_839A(1, 1);
+      self scragentsetanimscale(1, 1);
     } else {
       var_21 = var_16 - var_19;
       var_22 = var_21 / var_16;
       var_23 = clamp(var_22, 0.4, 4);
-      var_24 = _func_0D9(1 / var_23);
+      var_24 = _sqrt(1 / var_23);
       var_25 = self._id_9D0D * var_24;
-      self _meth_839A(1, var_23);
+      self scragentsetanimscale(1, var_23);
       self _meth_85D4(var_25);
       var_20 = (var_15 - var_14) * var_9 / var_25;
       wait(var_20);
-      self _meth_839A(1, 1);
+      self scragentsetanimscale(1, 1);
       self _meth_85D4(self._id_9D0D);
     }
 
@@ -107,11 +107,11 @@ _id_32B7() {
   var_26 = _func_2E1(self.origin, self);
   var_27 = self _meth_857F();
 
-  if(_func_0E1(var_26, self.origin) > 4 || _func_0AE(var_26[2] - self.origin[2]) > 16) {
-    var_28 = _func_082(var_27, self.radius, 32, 32, 1);
+  if(_distance2d(var_26, self.origin) > 4 || _abs(var_26[2] - self.origin[2]) > 16) {
+    var_28 = _getgroundposition(var_27, self.radius, 32, 32, 1);
     self setOrigin(var_28, 0);
-  } else if(_func_0E1(self.origin, var_27) > 96 || _func_0AE(self.origin[2] - var_27[2]) > 16) {
-    var_28 = _func_082(_func_2E1(var_27, self), self.radius, 32, 32, 1);
+  } else if(_distance2d(self.origin, var_27) > 96 || _abs(self.origin[2] - var_27[2]) > 16) {
+    var_28 = _getgroundposition(_func_2E1(var_27, self), self.radius, 32, 32, 1);
     self setOrigin(var_28, 0);
   }
 
@@ -124,11 +124,11 @@ _id_62AC(var_0, var_1) {
   var_2 = 5000;
   var_3 = 4;
   var_4 = "freetraversal";
-  var_5 = _func_065(var_1);
+  var_5 = _getanimlength(var_1);
   var_6 = var_5 * 1000;
   var_2 = int(var_6);
 
-  if(_func_066(var_1, var_4)) {
+  if(_animhasnotetrack(var_1, var_4)) {
     var_7 = maps\mp\agents\_scripted_agent_anim_util::_id_45B9(var_1, var_4);
     var_2 = int(var_7 * var_6);
   }
@@ -139,10 +139,10 @@ _id_62AC(var_0, var_1) {
   var_0._id_A228 = self;
   _func_329(var_0, 1);
   self _meth_85ED(var_3, var_2);
-  thread _id_8322(var_0, var_8);
+  thread disableweapons(var_0, var_8);
 }
 
-_id_8322(var_0, var_1) {
+disableweapons(var_0, var_1) {
   wait(var_1);
   var_0._id_54F5 = 0;
   var_0._id_98C3 = undefined;
@@ -170,9 +170,9 @@ _id_9D0A(var_0, var_1, var_2) {
 }
 
 _id_0085() {
-  self _meth_839A(1, 1);
+  self scragentsetanimscale(1, 1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "Traverse end_script");
-  _id_0547::_id_84CB();
+  _id_0547::disableoffhandsecondaryweapons();
   self._id_9D07 = undefined;
 }
 

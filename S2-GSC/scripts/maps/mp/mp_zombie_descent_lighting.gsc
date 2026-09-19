@@ -16,38 +16,38 @@ xbox_optimizations() {
 }
 
 lightningrodlights() {
-  var_0 = _func_21F("lightningrodlights", "targetname");
+  var_0 = _getscriptablearray("lightningrodlights", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("lightpart", "on");
+  var_2 setscriptablepartstate("lightpart", "on");
 }
 
 bossintrolightson() {
-  var_0 = _func_21F("boss_intro_lgt", "targetname");
+  var_0 = _getscriptablearray("boss_intro_lgt", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("lightpart", "on");
+  var_2 setscriptablepartstate("lightpart", "on");
 }
 
 bossintrolightsoff() {
-  var_0 = _func_21F("boss_intro_lgt", "targetname");
+  var_0 = _getscriptablearray("boss_intro_lgt", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("lightpart", "off");
+  var_2 setscriptablepartstate("lightpart", "off");
 }
 
 bossarenalightsoff() {
-  var_0 = _func_21F("boss_arena_lgt", "targetname");
+  var_0 = _getscriptablearray("boss_arena_lgt", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("lightpart", "off");
+  var_2 setscriptablepartstate("lightpart", "off");
 }
 
 bossarenalightson() {
-  var_0 = _func_21F("boss_arena_lgt", "targetname");
+  var_0 = _getscriptablearray("boss_arena_lgt", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("lightpart", "on");
+  var_2 setscriptablepartstate("lightpart", "on");
 }
 
 _id_84F8() {
@@ -59,7 +59,7 @@ onplayerspawned() {
   var_0 = self;
   var_0 endon("disconnect");
   wait 15;
-  var_0 _meth_8483("mp_zombie_descent_moonravengreen");
+  var_0 setclienttriggervisionset("mp_zombie_descent_moonravengreen");
   wait 5;
-  var_0 _meth_8483("");
+  var_0 setclienttriggervisionset("");
 }

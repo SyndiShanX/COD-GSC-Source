@@ -24,9 +24,9 @@ ambient_lightning_strikes() {
   var_3 = 4900;
 
   for(;;) {
-    wait(_func_0A5(0.5, 1.25));
+    wait(_randomfloatrange(0.5, 1.25));
     var_4 = common_scripts\utility::random(var_2);
-    var_5 = var_4 _meth_8216(_func_0A5(-0.99, 0.99), _func_0A5(-0.99, 0.99), _func_0A5(-0.99, 0.99));
+    var_5 = var_4 getpointinbounds(_randomfloatrange(-0.99, 0.99), _randomfloatrange(-0.99, 0.99), _randomfloatrange(-0.99, 0.99));
     var_5 = var_5 + (0, 0, 1500);
     var_5 = common_scripts\utility::_id_348B(var_5);
 
@@ -34,10 +34,10 @@ ambient_lightning_strikes() {
       continue;
     }
     var_0.origin = var_5 + (0, 0, var_3);
-    var_0.angles = (var_0.angles[0], var_0.angles[1] + _func_0A4(45, 315), var_0.angles[2]);
+    var_0.angles = (var_0.angles[0], var_0.angles[1] + _randomintrange(45, 315), var_0.angles[2]);
     waitframe();
     var_6 = _func_382("zmb_wm_lightning_beam", var_0, "tag_origin", var_1, "tag_origin");
-    var_6 common_scripts\utility::_id_2CBE(_func_0A5(0.15, 0.25), ::delete);
+    var_6 common_scripts\utility::_id_2CBE(_randomfloatrange(0.15, 0.25), ::delete);
   }
 }
 
@@ -55,16 +55,16 @@ ambient_lightning_strikes_forvfx() {
   waitframe();
   waitframe();
   var_1 linktosynchronizedparent(var_0);
-  var_2 = _func_18E("lightning_strike_vol_test", "targetname");
+  var_2 = _getent("lightning_strike_vol_test", "targetname");
   var_3 = 4900;
 
   for(;;) {
     if(getdvarint("snd_zmb_debug_lighting_strike"))
-      wait(_func_0A5(10, 20));
+      wait(_randomfloatrange(10, 20));
     else
-      wait(_func_0A5(0.5, 1.25));
+      wait(_randomfloatrange(0.5, 1.25));
 
-    var_4 = var_2 _meth_8216(_func_0A5(-0.99, 0.99), _func_0A5(-0.99, 0.99), _func_0A5(-0.99, 0.99));
+    var_4 = var_2 getpointinbounds(_randomfloatrange(-0.99, 0.99), _randomfloatrange(-0.99, 0.99), _randomfloatrange(-0.99, 0.99));
     var_4 = var_4 + (0, 0, 1500);
     var_4 = common_scripts\utility::_id_348B(var_4);
 
@@ -72,15 +72,15 @@ ambient_lightning_strikes_forvfx() {
       continue;
     }
     var_0.origin = var_4 + (0, 0, var_3);
-    var_0.angles = (var_0.angles[0], var_0.angles[1] + _func_0A4(45, 315), var_0.angles[2]);
+    var_0.angles = (var_0.angles[0], var_0.angles[1] + _randomintrange(45, 315), var_0.angles[2]);
     waitframe();
     var_5 = _func_382("zmb_wm_lightning_beam", var_0, "tag_origin", var_1, "tag_origin");
-    _func_147(level._effect["zmb_wm_lightning_impact_base_rnr"], var_1, "tag_origin");
+    _playfxontag(level._effect["zmb_wm_lightning_impact_base_rnr"], var_1, "tag_origin");
 
     if(getdvarint("snd_zmb_debug_lighting_strike"))
       _id_0378::_id_8D74("lightning_strike", var_0.origin, var_4);
 
-    var_5 common_scripts\utility::_id_2CBE(_func_0A5(0.15, 0.25), ::delete);
+    var_5 common_scripts\utility::_id_2CBE(_randomfloatrange(0.15, 0.25), ::delete);
   }
 }
 
@@ -110,7 +110,7 @@ spawn_frank() {
     level.frank_dudebroman._id_509A = 1;
     level.frank_dudebroman._id_5748 = 1;
     level.frank_dudebroman.nomutilate = 1;
-    level.frank_dudebroman maps\mp\agents\_agent_utility::_id_83FE(level._id_746E);
+    level.frank_dudebroman maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);
     level.frank_dudebroman maps\mp\agents\_agent_common::_id_83FD(level.frank_escort_health);
   }
 }
@@ -169,7 +169,7 @@ windmill_play_anim_on_gear() {
   var_0.total_anim_time = 10.3667;
   var_0.initial_seconds = 0;
   var_2 = common_scripts\utility::_id_46B5("windmill_anim_org", "targetname");
-  var_0 _meth_8276(var_1, undefined, var_0.initial_seconds, var_0.anim_rate);
+  var_0 scriptmodelplayanim(var_1, undefined, var_0.initial_seconds, var_0.anim_rate);
   wait 0.15;
   var_0.initial_seconds = 0.15;
 
@@ -178,9 +178,9 @@ windmill_play_anim_on_gear() {
       var_0.previous_anim_rate = var_0.anim_rate;
 
       if(var_0.anim_rate > 0)
-        var_0 _meth_8276(var_1, undefined, var_0.initial_seconds, var_0.anim_rate);
+        var_0 scriptmodelplayanim(var_1, undefined, var_0.initial_seconds, var_0.anim_rate);
       else
-        var_0 _meth_84CA(1);
+        var_0 setshadowrendering(1);
     }
 
     var_3 = gettime();
@@ -198,7 +198,7 @@ windmill_play_anim_on_gear() {
 windmill_rotateby_speed(var_0) {
   level notify("windmill_starting_rotation");
   level endon("windmill_starting_rotation");
-  var_1 = _func_18E("windmill_fan", "targetname");
+  var_1 = _getent("windmill_fan", "targetname");
 
   if(!isDefined(var_1.current_speed))
     var_1.current_speed = 0;
@@ -210,7 +210,7 @@ windmill_rotateby_speed(var_0) {
 
   if(var_1.current_speed > 0) {
     for(;;) {
-      var_1 _meth_82B9(-1 * var_1.current_speed * var_3, var_2, 0, 0);
+      var_1 rotatepitch(-1 * var_1.current_speed * var_3, var_2, 0, 0);
       wait(var_2);
     }
   }
@@ -222,29 +222,29 @@ windmill_rotateby_accelerate_to_speed(var_0, var_1, var_2) {
 
   if(var_4 > 0) {
     for(var_5 = var_3.current_speed; var_5 != var_0; var_5 = var_5 + var_4) {
-      self _meth_82B9(-1 * var_5 * var_2, var_1, 0, 0);
+      self rotatepitch(-1 * var_5 * var_2, var_1, 0, 0);
       wait(var_1);
     }
   }
 
   if(var_4 < 0) {
     var_6 = 10;
-    var_7 = var_6 / _func_0AE(var_2) * var_1;
+    var_7 = var_6 / _abs(var_2) * var_1;
     var_8 = var_7 / 2;
-    self _meth_82B9(var_6, var_7, 0, var_8);
+    self rotatepitch(var_6, var_7, 0, var_8);
     _id_0378::_id_8D74("stop_windmill", var_7);
     wait(var_7);
     var_9 = var_6 / 2;
     var_10 = self.angles[0];
-    var_11 = _func_0AE(var_3.angles[0] % var_9);
+    var_11 = _abs(var_3.angles[0] % var_9);
 
     if(var_11 < var_9 / 2)
       var_11 = var_11 + var_9;
 
     var_12 = var_11 * 0.3;
-    self _meth_82B9(-1 * (var_11 + var_9 / 4), var_12, var_12 / 2, var_12 / 8);
+    self rotatepitch(-1 * (var_11 + var_9 / 4), var_12, var_12 / 2, var_12 / 8);
     wait(var_12);
-    self _meth_82B9(var_9 / 4, var_12 / 2, var_12 / 4, var_12 / 16);
+    self rotatepitch(var_9 / 4, var_12 / 2, var_12 / 4, var_12 / 16);
     wait(var_12 / 2);
     var_13 = var_10 - var_11;
     var_13 = var_13 % 360;

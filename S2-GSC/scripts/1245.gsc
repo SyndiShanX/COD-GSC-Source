@@ -4,35 +4,35 @@
 **************************************/
 
 init() {
-  if(!isDefined(level._id_83E9))
-    level._id_83E9 = [];
+  if(!isDefined(level.setcorpsefalling))
+    level.setcorpsefalling = [];
 
-  level._id_83EA["sentry_minigun"] = "sentry";
-  level._id_83E9["sentry_minigun"] = spawnStruct();
-  level._id_83E9["sentry_minigun"].health = 999999;
-  level._id_83E9["sentry_minigun"].maxhealth = 1000;
-  level._id_83E9["sentry_minigun"]._id_1DC4 = 20;
-  level._id_83E9["sentry_minigun"]._id_1DC3 = 120;
-  level._id_83E9["sentry_minigun"]._id_6F26 = 0.15;
-  level._id_83E9["sentry_minigun"]._id_6F25 = 0.35;
-  level._id_83E9["sentry_minigun"]._id_83E8 = "sentry";
-  level._id_83E9["sentry_minigun"]._id_83E7 = "sentry_offline";
-  level._id_83E9["sentry_minigun"]._id_9A01 = 90.0;
-  level._id_83E9["sentry_minigun"]._id_90FA = 0.05;
-  level._id_83E9["sentry_minigun"]._id_6CA3 = 8.0;
-  level._id_83E9["sentry_minigun"]._id_2650 = 0.1;
-  level._id_83E9["sentry_minigun"]._id_3F84 = 0.3;
-  level._id_83E9["sentry_minigun"]._id_944C = "sentry";
-  level._id_83E9["sentry_minigun"]._id_01D1 = "sentry_supplydrop_mp";
-  level._id_83E9["sentry_minigun"]._id_6294 = "hub_lootcrate_normal";
-  level._id_83E9["sentry_minigun"]._id_629D = "tag_origin";
-  level._id_83E9["sentry_minigun"]._id_629E = "tag_origin";
-  level._id_83E9["sentry_minigun"]._id_6295 = "hub_lootcrate_normal";
-  level._id_83E9["sentry_minigun"]._id_00C5 = &"SENTRY_PICKUP";
-  level._id_83E9["sentry_minigun"]._id_00BA = 1;
-  level._id_83E9["sentry_minigun"]._id_9869 = "used_sentry";
-  level._id_83E9["sentry_minigun"]._id_8BAB = 0;
-  level._id_83E9["sentry_minigun"]._id_A5F7 = "sentry_destroyed";
+  level.setsurfacetype["sentry_minigun"] = "sentry";
+  level.setcorpsefalling["sentry_minigun"] = spawnStruct();
+  level.setcorpsefalling["sentry_minigun"].health = 999999;
+  level.setcorpsefalling["sentry_minigun"].maxhealth = 1000;
+  level.setcorpsefalling["sentry_minigun"]._id_1DC4 = 20;
+  level.setcorpsefalling["sentry_minigun"]._id_1DC3 = 120;
+  level.setcorpsefalling["sentry_minigun"]._id_6F26 = 0.15;
+  level.setcorpsefalling["sentry_minigun"]._id_6F25 = 0.35;
+  level.setcorpsefalling["sentry_minigun"]._id_83E8 = "sentry";
+  level.setcorpsefalling["sentry_minigun"].getpathgoalpos = "sentry_offline";
+  level.setcorpsefalling["sentry_minigun"]._id_9A01 = 90.0;
+  level.setcorpsefalling["sentry_minigun"]._id_90FA = 0.05;
+  level.setcorpsefalling["sentry_minigun"]._id_6CA3 = 8.0;
+  level.setcorpsefalling["sentry_minigun"]._id_2650 = 0.1;
+  level.setcorpsefalling["sentry_minigun"]._id_3F84 = 0.3;
+  level.setcorpsefalling["sentry_minigun"]._id_944C = "sentry";
+  level.setcorpsefalling["sentry_minigun"]._id_01D1 = "sentry_supplydrop_mp";
+  level.setcorpsefalling["sentry_minigun"]._id_6294 = "hub_lootcrate_normal";
+  level.setcorpsefalling["sentry_minigun"]._id_629D = "tag_origin";
+  level.setcorpsefalling["sentry_minigun"]._id_629E = "tag_origin";
+  level.setcorpsefalling["sentry_minigun"]._id_6295 = "hub_lootcrate_normal";
+  level.setcorpsefalling["sentry_minigun"]._id_00C5 = &"SENTRY_PICKUP";
+  level.setcorpsefalling["sentry_minigun"]._id_00BA = 1;
+  level.setcorpsefalling["sentry_minigun"]._id_9869 = "used_sentry";
+  level.setcorpsefalling["sentry_minigun"]._id_8BAB = 0;
+  level.setcorpsefalling["sentry_minigun"]._id_A5F7 = "sentry_destroyed";
   level._effect["supply_drop_landing_impact_ground"] = loadfx("vfx/smoke/supply_drop_landing_impact_ground");
   level._effect["supply_drop_opening_ground"] = loadfx("vfx/smoke/supply_drop_opening_ground");
   var_0 = loadfx("vfx/unique/supply_drop_impactpulse");
@@ -72,7 +72,7 @@ _id_11BF(var_0) {
   }
 
   self _meth_85EF(&"supply_drop_player_warp_complete");
-  self _meth_82FF("ui_hub_prep_supplydrop", 1);
+  self setclientomnvar("ui_hub_prep_supplydrop", 1);
 
   for(;;) {
     self waittill("luinotifyserver", var_2, var_3);
@@ -88,7 +88,7 @@ _id_11BF(var_0) {
   if(_id_2865() && !_id_04E0::_id_5790() && self _meth_85AC(var_0) > 0 && getdvarint("spv_hub_psd_kswitch", 1) == 0)
     _id_1718(var_0, !var_1);
   else {
-    self _meth_82FF("ui_hub_prep_supplydrop", 0);
+    self setclientomnvar("ui_hub_prep_supplydrop", 0);
 
     if(self _meth_85AC(var_0) <= 0 && !_id_04E0::_id_5790())
       thread _id_04E0::_id_3010("outOfSDs", &"HUB_OUT_OF_SD", undefined, -100, 1.65, 1);
@@ -113,9 +113,9 @@ _id_1718(var_0, var_1) {
 }
 
 _id_280A() {
-  self._id_4DEF = _func_016("misc_turret", self.origin, level._id_83E9["sentry_minigun"]._id_01D1);
-  self._id_4DEF _meth_80B3();
-  self._id_4DEF._id_83EA = "sentry_minigun";
+  self._id_4DEF = _spawnturret("misc_turret", self.origin, level.setcorpsefalling["sentry_minigun"]._id_01D1);
+  self._id_4DEF makeunusable();
+  self._id_4DEF.setsurfacetype = "sentry_minigun";
   self._id_4DEF.angles = self.angles + (0, 0, 90);
   self._id_4DEF.targetname = "holoPSD";
 }
@@ -123,12 +123,12 @@ _id_280A() {
 _id_8646() {
   self endon("death");
   self endon("disconnect");
-  self._id_4DEF _meth_806C("supplydrop");
-  self._id_4DEF setModel(level._id_83E9[self._id_4DEF._id_83EA]._id_629D);
-  self._id_4DEF _meth_80F9(self);
-  self._id_4DEF _meth_80FA(self);
+  self._id_4DEF setmode("supplydrop");
+  self._id_4DEF setModel(level.setcorpsefalling[self._id_4DEF.setsurfacetype]._id_629D);
+  self._id_4DEF setsentryowner(self);
+  self._id_4DEF setsentrycarrier(self);
   self._id_4DEF._id_2002 = self;
-  self _meth_82FF("ui_hub_enable_pause", 0);
+  self setclientomnvar("ui_hub_enable_pause", 0);
   _id_7424();
   self _meth_85B4();
   self _meth_85B2(1, "mp_unarmed_stand_flare_pull");
@@ -159,7 +159,7 @@ _id_9BC5() {
       var_3 = self _meth_82D6(1, 35);
       self._id_4DEF.origin = var_3["origin"];
       self._id_4DEF.angles = var_3["angles"];
-      self._id_4DEF._id_1F2F = _id_2865() && self _meth_8346() && var_3["result"] && _id_21EE(self._id_4DEF) && _func_0AE(self._id_4DEF.origin[2] - self.origin[2]) < 8;
+      self._id_4DEF._id_1F2F = _id_2865() && self isonground() && var_3["result"] && _id_21EE(self._id_4DEF) && _abs(self._id_4DEF.origin[2] - self.origin[2]) < 8;
 
       if(self._id_4DEF._id_1F2F) {
         var_4 = self._id_4DEF.origin - self.origin;
@@ -173,15 +173,15 @@ _id_9BC5() {
 
       if(self._id_4DEF._id_1F2F != var_0) {
         if(self._id_4DEF._id_1F2F) {
-          _func_295(level._id_94F2, self._id_4DEF, "TAG_ORIGIN", self);
+          _killfxontagforclient(level._id_94F2, self._id_4DEF, "TAG_ORIGIN", self);
           waitframe();
-          _func_14D(level._id_94F1, self._id_4DEF, "TAG_ORIGIN", self);
-          self _meth_80D0(&"HUB_VALID_PSD");
+          _playfxontagforclients(level._id_94F1, self._id_4DEF, "TAG_ORIGIN", self);
+          self forceusehinton(&"HUB_VALID_PSD");
         } else {
-          _func_295(level._id_94F1, self._id_4DEF, "TAG_ORIGIN", self);
+          _killfxontagforclient(level._id_94F1, self._id_4DEF, "TAG_ORIGIN", self);
           waitframe();
-          _func_14D(level._id_94F2, self._id_4DEF, "TAG_ORIGIN", self);
-          self _meth_80D0(&"HUB_INVALID_PSD");
+          _playfxontagforclients(level._id_94F2, self._id_4DEF, "TAG_ORIGIN", self);
+          self forceusehinton(&"HUB_INVALID_PSD");
         }
       }
 
@@ -205,16 +205,16 @@ _id_63CC(var_0, var_1) {
   self endon("disconnect");
 
   if(var_1) {
-    if(!_func_0C1(self)) {
-      self _meth_8305(0);
-      self _meth_82E1("place_PSD", "+gostand");
-      self _meth_82E1("place_PSD", "+attack");
-      self _meth_82E1("cancel_PSD", "+stance");
-      self _meth_82E1("pauseButton", "togglemenu");
+    if(!_isai(self)) {
+      self allowjump(0);
+      self notifyonplayercommand("place_PSD", "+gostand");
+      self notifyonplayercommand("place_PSD", "+attack");
+      self notifyonplayercommand("cancel_PSD", "+stance");
+      self notifyonplayercommand("pauseButton", "togglemenu");
     }
 
     for(;;) {
-      var_2 = common_scripts\utility::_id_A715("place_PSD", "cancel_PSD", "force_cancel_placement", "pauseButton");
+      var_2 = common_scripts\utility::waittill_any_return("place_PSD", "cancel_PSD", "force_cancel_placement", "pauseButton");
 
       if(var_2 == "cancel_PSD" || var_2 == "force_cancel_placement" || var_2 == "pauseButton") {
         thread _id_3F01();
@@ -222,7 +222,7 @@ _id_63CC(var_0, var_1) {
       }
 
       if(self._id_4DEF._id_1F2F) {
-        while(!self _meth_8346())
+        while(!self isonground())
           waitframe();
 
         break;
@@ -232,15 +232,15 @@ _id_63CC(var_0, var_1) {
       wait 0.3;
     }
 
-    self _meth_84A7("place_PSD", "+gostand");
-    self _meth_84A7("place_PSD", "+attack");
-    self _meth_84A7("cancel_PSD", "+stance");
-    self _meth_84A7("pauseButton", "togglemenu");
-    self _meth_8305(1);
+    self notifyonplayercommandremove("place_PSD", "+gostand");
+    self notifyonplayercommandremove("place_PSD", "+attack");
+    self notifyonplayercommandremove("cancel_PSD", "+stance");
+    self notifyonplayercommandremove("pauseButton", "togglemenu");
+    self allowjump(1);
   } else
     self.warpingtosupplydrop = undefined;
 
-  self _meth_80D1();
+  self forceusehintoff();
 
   if(getdvarint("hub_noPSDPlayerLock") == 0) {
     self freezecontrols(1);
@@ -269,29 +269,29 @@ _id_2D6C(var_0) {
 _id_3F01() {
   _id_36E1();
   thread _id_7422();
-  self _meth_84A7("place_PSD", "+gostand");
-  self _meth_84A7("place_PSD", "+attack");
-  self _meth_84A7("cancel_PSD", "+stance");
-  self _meth_84A7("pauseButton", "togglemenu");
-  self _meth_80D1();
-  self _meth_8305(1);
-  self _meth_82FF("ui_hub_enable_pause", 1);
-  self _meth_82FF("ui_hub_prep_supplydrop", 0);
-  self _meth_82FF("hub_hide_killfeed", 0);
+  self notifyonplayercommandremove("place_PSD", "+gostand");
+  self notifyonplayercommandremove("place_PSD", "+attack");
+  self notifyonplayercommandremove("cancel_PSD", "+stance");
+  self notifyonplayercommandremove("pauseButton", "togglemenu");
+  self forceusehintoff();
+  self allowjump(1);
+  self setclientomnvar("ui_hub_enable_pause", 1);
+  self setclientomnvar("ui_hub_prep_supplydrop", 0);
+  self setclientomnvar("hub_hide_killfeed", 0);
 }
 
 _id_34A7(var_0, var_1, var_2) {
   self._id_08DD = spawn("script_model", var_0);
   self._id_08DD setModel(_id_441F(var_2));
   self._id_08DD._id_2742 = var_2;
-  self._id_08DD _meth_8385(self);
+  self._id_08DD setotherent(self);
   thread _id_2343(self._id_08DD);
   self._id_08DD._id_5F0A = 0;
   self._id_08DD._id_579E = 0;
   self._id_08DD.origin = var_0;
   self._id_08DD.angles = (0, var_1[1] + 180, 0);
-  self._id_08DD _meth_8278("mp_hub_crate_drop", "psd_drop_notetrack");
-  self._id_08DD _meth_805B();
+  self._id_08DD scriptmodelplayanimdeltamotion("mp_hub_crate_drop", "psd_drop_notetrack");
+  self._id_08DD show();
   thread _id_77A5(self._id_08DD, 1);
   _id_7FAF(var_2);
 }
@@ -307,7 +307,7 @@ _id_86E7() {
     foreach(var_2 in level.players) {
       if(isDefined(var_2) && var_2 != self) {
         if(distance(var_2.origin, self.origin) > var_0) {
-          var_2 _meth_8005(self);
+          var_2 showtoplayer(self);
           continue;
         }
 
@@ -320,7 +320,7 @@ _id_86E7() {
 
   foreach(var_2 in level.players) {
     if(isDefined(var_2) && var_2 != self)
-      var_2 _meth_8005(self);
+      var_2 showtoplayer(self);
   }
 }
 
@@ -358,8 +358,8 @@ _id_77A5(var_0, var_1) {
   for(;;) {
     if(self._id_08DD._id_5F0A) {
       if(!isDefined(self._id_7D07) || !self._id_7D07) {
-        var_0 _meth_8277();
-        var_0 _meth_8278("mp_hub_crate_open", "psd_open_notetrack");
+        var_0 scriptmodelclearanim();
+        var_0 scriptmodelplayanimdeltamotion("mp_hub_crate_open", "psd_open_notetrack");
         var_0 waittillmatch("psd_open_notetrack", "cam_shake");
         self _meth_85A7("hub_crate_open", var_0.origin);
         var_0 waittillmatch("psd_open_notetrack", "end");
@@ -404,7 +404,7 @@ _id_7FAF(var_0, var_1, var_2) {
   }
 
   thread maps\mp\_utility::printonteam(&"HUB_NOTIFY_OPEN_SUPPLY_DROP", self.team, self.name);
-  self _meth_82FF("hub_hide_killfeed", 1);
+  self setclientomnvar("hub_hide_killfeed", 1);
   self._id_2759 = 0;
   thread _id_86E7();
   var_3 = 0;
@@ -413,7 +413,7 @@ _id_7FAF(var_0, var_1, var_2) {
   self._id_5F08 = [];
   self notify("beginLootReveal");
   self _meth_85EF(&"supply_drop_allow_card_reveal", 1, var_0);
-  self _meth_82FF("ui_hub_prep_supplydrop", 0);
+  self setclientomnvar("ui_hub_prep_supplydrop", 0);
 
   for(;;) {
     if(self._id_08DD._id_579E) {
@@ -527,18 +527,18 @@ _id_7FAF(var_0, var_1, var_2) {
       _id_8737(0);
 
       if(var_13) {
-        playFX(level.zombieimpactfx, self._id_08DD gettagorigin("tag_fx1"), anglesToForward(self._id_08DD _meth_8181("tag_fx1")));
-        playFX(level.zombieimpactfx, self._id_08DD gettagorigin("tag_fx2"), anglesToForward(self._id_08DD _meth_8181("tag_fx2")));
+        playFX(level.zombieimpactfx, self._id_08DD gettagorigin("tag_fx1"), anglesToForward(self._id_08DD gettagangles("tag_fx1")));
+        playFX(level.zombieimpactfx, self._id_08DD gettagorigin("tag_fx2"), anglesToForward(self._id_08DD gettagangles("tag_fx2")));
       }
 
       self notify("firstItemComingOut");
-      self._id_08DD _meth_8277();
+      self._id_08DD scriptmodelclearanim();
 
       if(var_13) {
-        self._id_08DD _meth_8276("mp_hub_crate_cards_in_zombies", "mp_hub_crate_cards_in_zombies", 0, 1.0);
+        self._id_08DD scriptmodelplayanim("mp_hub_crate_cards_in_zombies", "mp_hub_crate_cards_in_zombies", 0, 1.0);
         self._id_08DD waittillmatch("mp_hub_crate_cards_in_zombies", "cam_shake1");
       } else
-        self._id_08DD _meth_8276("mp_hub_crate_cards_in", "", 0, 0.00001);
+        self._id_08DD scriptmodelplayanim("mp_hub_crate_cards_in", "", 0, 0.00001);
     }
 
     if(var_14 == 0) {
@@ -546,7 +546,7 @@ _id_7FAF(var_0, var_1, var_2) {
 
       foreach(var_16 in level.players) {
         if(isDefined(var_16) && var_16 != self)
-          var_16 _meth_8005(self);
+          var_16 showtoplayer(self);
       }
 
       thread _id_7423();
@@ -574,7 +574,7 @@ _id_7FAF(var_0, var_1, var_2) {
 
     foreach(var_16 in level.players) {
       if(isDefined(var_16) && var_16 != self)
-        var_16 _meth_8005(self);
+        var_16 showtoplayer(self);
     }
   }
 }
@@ -679,10 +679,10 @@ _id_5106(var_0, var_1, var_2) {
       self notify("firstItemComingOut");
 
     self _meth_85DC(var_0, 0);
-    self._id_08DD _meth_8276("mp_hub_crate_card_" + var_7 + "_out", "card_" + var_7 + "_out_notetrack");
+    self._id_08DD scriptmodelplayanim("mp_hub_crate_card_" + var_7 + "_out", "card_" + var_7 + "_out_notetrack");
 
     if(var_5 == 3 || var_5 == 4)
-      _func_147(var_2[var_5], self._id_08DD, var_8);
+      _playfxontag(var_2[var_5], self._id_08DD, var_8);
 
     self._id_08DD waittillmatch("card_" + var_7 + "_out_notetrack", "show_loot");
     var_9 = "mp_loot_stinger_rarity_0" + (var_5 + 1);
@@ -694,7 +694,7 @@ _id_5106(var_0, var_1, var_2) {
       var_9 = "hub_ann_heroic";
 
     self _meth_85A7("hub_reveal_loot_card", self._id_08DD.origin, self._id_08DD.origin, var_9);
-    _func_147(var_2[var_5], self._id_08DD, var_8);
+    _playfxontag(var_2[var_5], self._id_08DD, var_8);
 
     switch (var_5) {
       case 3:
@@ -723,15 +723,15 @@ _id_5F0D(var_0, var_1) {
   self endon("autoFinishSupplyDrop");
 
   while(!self._id_1387) {
-    var_0 _meth_860F("mp_loot_spin_tick_single", self);
+    var_0 playsoundtoplayer("mp_loot_spin_tick_single", self);
     wait 0.1;
   }
 }
 
 _id_0E9B(var_0) {
   if(!isDefined(var_0) || !var_0) {
-    self._id_08DD _meth_8277();
-    self._id_08DD _meth_8276("mp_hub_crate_cards_in", "mp_hub_crate_cards_in", 0, 1.0);
+    self._id_08DD scriptmodelclearanim();
+    self._id_08DD scriptmodelplayanim("mp_hub_crate_cards_in", "mp_hub_crate_cards_in", 0, 1.0);
     self._id_08DD waittillmatch("mp_hub_crate_cards_in", "cam_shake3");
   }
 
@@ -767,7 +767,7 @@ _id_A6BD() {
   self endon("disconnect");
   self endon("death");
   thread _id_A6BE();
-  var_0 = common_scripts\utility::_id_A715("reopen_PSD", "exit_PSD_sequence", "noPostPSDInput", "autoFinishSupplyDrop");
+  var_0 = common_scripts\utility::waittill_any_return("reopen_PSD", "exit_PSD_sequence", "noPostPSDInput", "autoFinishSupplyDrop");
 
   if(var_0 == "exit_PSD_sequence" || var_0 == "noPostPSDInput" || var_0 == "autoFinishSupplyDrop")
     return 0;
@@ -798,7 +798,7 @@ _id_2393(var_0) {
   self endon("disconnect");
   self endon("death");
   var_0 notify("psdSequenceDone");
-  self._id_08DD _meth_8278("mp_hub_crate_close", "psd_close_notetrack");
+  self._id_08DD scriptmodelplayanimdeltamotion("mp_hub_crate_close", "psd_close_notetrack");
   self._id_08DD waittillmatch("psd_close_notetrack", "end");
   _id_7C6A(self._id_08DD);
   var_1 = 0.5;
@@ -812,7 +812,7 @@ _id_2393(var_0) {
   self._id_4B84 = 0;
   self._id_2759 = 1;
   self notify("supplyDropSequenceFullyComplete");
-  self _meth_82FF("ui_hub_enable_pause", 1);
+  self setclientomnvar("ui_hub_enable_pause", 1);
 }
 
 _id_7C6A(var_0) {
@@ -833,28 +833,28 @@ _id_8737(var_0) {
 _id_238A() {
   self _meth_85D7([0, 0, 0]);
   _id_8737(0);
-  self _meth_82FF("hub_hide_killfeed", 0);
+  self setclientomnvar("hub_hide_killfeed", 0);
 }
 
 _id_93FA(var_0, var_1) {
   self endon("disconnect");
   self endon("death");
-  common_scripts\utility::_id_A715("reopen_PSD", "exit_PSD_sequence", "noPostPSDInput", "autoFinishSupplyDrop", "open_extra_loot");
-  _func_149(var_0, self._id_08DD, var_1);
+  common_scripts\utility::waittill_any_return("reopen_PSD", "exit_PSD_sequence", "noPostPSDInput", "autoFinishSupplyDrop", "open_extra_loot");
+  _killfxontag(var_0, self._id_08DD, var_1);
 }
 
 _id_7421(var_0) {
   self endon("death");
   self endon("disconnect");
-  self _meth_84A7("upDpad", "+actionslot 1");
-  self _meth_84A7("downDpad", "+actionslot 2");
-  self _meth_84A7("leftDpad", "+actionslot 3");
-  self _meth_84A7("rightDpad", "+actionslot 4");
+  self notifyonplayercommandremove("upDpad", "+actionslot 1");
+  self notifyonplayercommandremove("downDpad", "+actionslot 2");
+  self notifyonplayercommandremove("leftDpad", "+actionslot 3");
+  self notifyonplayercommandremove("rightDpad", "+actionslot 4");
   _id_04E0::_id_721A("mp_unarmed_stand_flare_throw", 1);
   maps\mp\_utility::_id_2CED(1.0, ::_id_49E9);
   self._id_76A5 = _id_04E0::_id_43F8();
   self._id_76A4 = self getplayerangles();
-  self _meth_82FF("ui_hub_opening_supplydrop", 1);
+  self setclientomnvar("ui_hub_opening_supplydrop", 1);
 
   if(getdvarint("hub_noPSDPlayerLock") == 0) {
     thread _id_743E();
@@ -902,17 +902,17 @@ _id_7423() {
   if(getdvarint("hub_noPSDPlayerLock") == 0) {
     _id_7D55();
     _id_743D(0);
-    self _meth_8113(1);
-    self _meth_8308(1);
+    self allowcrouch(1);
+    self allowsprint(1);
   }
 
-  self _meth_82E1("upDpad", "+actionslot 1");
-  self _meth_82E1("downDpad", "+actionslot 2");
-  self _meth_82E1("leftDpad", "+actionslot 3");
-  self _meth_82E1("rightDpad", "+actionslot 4");
+  self notifyonplayercommand("upDpad", "+actionslot 1");
+  self notifyonplayercommand("downDpad", "+actionslot 2");
+  self notifyonplayercommand("leftDpad", "+actionslot 3");
+  self notifyonplayercommand("rightDpad", "+actionslot 4");
   self._id_572B = 0;
   _id_04E0::_id_870B(0);
-  self _meth_82FF("ui_hub_opening_supplydrop", 0);
+  self setclientomnvar("ui_hub_opening_supplydrop", 0);
   self _meth_85EF(&"exit_supply_drop", 0);
   self._id_1387 = 0;
   self._id_579F = 1;
@@ -920,9 +920,9 @@ _id_7423() {
 
 _id_7424() {
   if(getdvarint("hub_noPSDPlayerLock") == 0) {
-    self _meth_8179("stand");
-    self _meth_8113(0);
-    self _meth_8308(0);
+    self setstance("stand");
+    self allowcrouch(0);
+    self allowsprint(0);
     self _meth_85CA();
   }
 }
@@ -935,8 +935,8 @@ _id_7422() {
 
   self._id_572B = 0;
   _id_04E0::_id_870B(0);
-  self _meth_8113(1);
-  self _meth_8308(1);
+  self allowcrouch(1);
+  self allowsprint(1);
   self _meth_85CB();
   self _meth_85B2(1, "mp_unarmed_stand_flare2_stand_idle");
   self _meth_85B3(1);
@@ -961,7 +961,7 @@ _id_743E() {
 }
 
 _id_24E2(var_0) {
-  var_1 = _func_18E("psd_collision", "targetname");
+  var_1 = _getent("psd_collision", "targetname");
 
   if(!isDefined(var_1))
     return undefined;
@@ -969,8 +969,8 @@ _id_24E2(var_0) {
   var_2 = ((self.origin[0] + var_0[0]) / 2, (self.origin[1] + var_0[1]) / 2, (self.origin[2] + var_0[2]) / 2 - 25);
   var_3 = spawn("script_model", var_2);
   var_3.targetname = "psdCollision";
-  var_3 _meth_8275(var_1);
-  common_scripts\utility::_id_A715("psdSequenceDone", "death", "disconnect", "exit_PSD_sequence");
+  var_3 clonebrushmodeltoscriptmodel(var_1);
+  common_scripts\utility::waittill_any_return("psdSequenceDone", "death", "disconnect", "exit_PSD_sequence");
   var_3 delete();
 }
 
@@ -992,37 +992,37 @@ _id_7005(var_0, var_1) {
   self._id_0E9D setModel("s2_genericprop");
   self._id_0E9D.angles = self getplayerangles();
   thread _id_2350(self._id_0E9D);
-  self _meth_833E(var_6);
+  self setplayerangles(var_6);
   self _meth_85C9(1);
   _id_743D(1);
-  self _meth_81E2(self._id_0E9D, "tag_player", 500);
-  self._id_0E9D _meth_82B1(var_3, 0.5);
-  self._id_0E9D _meth_82B8(var_6, 0.5);
+  self cameralinkto(self._id_0E9D, "tag_player", 500);
+  self._id_0E9D moveto(var_3, 0.5);
+  self._id_0E9D rotateto(var_6, 0.5);
   self waittill("beginReactionAnims");
   self._id_0E9D.origin = self.origin;
   self._id_0E9D.angles = var_2;
   self._id_0E9D._id_A2B4 = var_2;
   self._id_0E9D.targetname = "animatedPSDCamera";
-  self _meth_81E2(self._id_0E9D, "tag_origin_animated");
-  self._id_0E9D _meth_8278("mp_hub_crate_drop_cam");
+  self cameralinkto(self._id_0E9D, "tag_origin_animated");
+  self._id_0E9D scriptmodelplayanimdeltamotion("mp_hub_crate_drop_cam");
   self waittill("firstItemComingOut");
-  self._id_0E9D _meth_8277();
-  self._id_0E9D _meth_8278("mp_hub_crate_card_cam_in", "card_cam_in_notetrack");
+  self._id_0E9D scriptmodelclearanim();
+  self._id_0E9D scriptmodelplayanimdeltamotion("mp_hub_crate_card_cam_in", "card_cam_in_notetrack");
   self _meth_85A7("hub_loot_cam_earthquake", self._id_08DD.origin);
   self._id_0E9D waittillmatch("card_cam_in_notetrack", "end");
-  self._id_0E9D _meth_8277();
-  self._id_0E9D _meth_8278("mp_hub_crate_card_cam_loop");
+  self._id_0E9D scriptmodelclearanim();
+  self._id_0E9D scriptmodelplayanimdeltamotion("mp_hub_crate_card_cam_loop");
 }
 
 _id_7D55() {
   self endon("disconnect");
   self endon("death");
   self _meth_85C9(0);
-  self._id_0E9D _meth_8277();
-  self._id_0E9D _meth_8278("mp_hub_crate_card_out_cam", "psd_exit_cam");
+  self._id_0E9D scriptmodelclearanim();
+  self._id_0E9D scriptmodelplayanimdeltamotion("mp_hub_crate_card_out_cam", "psd_exit_cam");
   self._id_0E9D waittillmatch("psd_exit_cam", "end");
-  self._id_0E9D _meth_84CA(1);
-  self _meth_81E3(500);
+  self._id_0E9D setshadowrendering(1);
+  self cameraunlink(500);
   wait 0.6;
   self._id_0E9D delete();
   self._id_0E9D = undefined;
@@ -1037,7 +1037,7 @@ _id_36E1(var_0) {
     self._id_4DEF = undefined;
   }
 
-  self _meth_80D1();
+  self forceusehintoff();
 }
 
 _id_2FA9() {
@@ -1045,7 +1045,7 @@ _id_2FA9() {
     self._id_2F81 = 0;
 
   self._id_2F81++;
-  self _meth_8322();
+  self disableweapons();
 }
 
 _id_366B() {
@@ -1055,7 +1055,7 @@ _id_366B() {
   self._id_2F81--;
 
   if(!self._id_2F81)
-    self _meth_8323();
+    self enableweapons();
 }
 
 oncarrierdeathordisconnect() {
@@ -1104,8 +1104,8 @@ _id_A85E() {
   var_0 = common_scripts\utility::random(level._id_77A6);
   self.warpingtosupplydrop = 1;
   self _meth_85C9(1);
-  self setOrigin(_func_236(var_0.origin), 1);
-  self _meth_833E(var_0.angles);
+  self setOrigin(_droptoground(var_0.origin), 1);
+  self setplayerangles(var_0.angles);
 }
 
 checksafewarpposition() {
@@ -1144,7 +1144,7 @@ _id_2350(var_0) {
 }
 
 _id_2865() {
-  if(self _meth_8178() == "crouch") {
+  if(self getstance() == "crouch") {
     var_0 = bulletTrace(self.origin, self.origin + (0, 0, 72), 0, self);
 
     if(var_0["fraction"] != 1) {

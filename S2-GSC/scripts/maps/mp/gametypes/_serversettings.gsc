@@ -45,49 +45,49 @@ _id_2596(var_0) {
     var_3 = var_1[var_2];
 
     if(var_0 == "dm") {
-      if(isDefined(var_3._id_81C1) && var_3._id_81C1 != "1")
+      if(isDefined(var_3.teleport) && var_3.teleport != "1")
         var_3 delete();
 
       continue;
     }
 
     if(var_0 == "tdm") {
-      if(isDefined(var_3._id_81C5) && var_3._id_81C5 != "1")
+      if(isDefined(var_3.ispathdirect) && var_3.ispathdirect != "1")
         var_3 delete();
 
       continue;
     }
 
     if(var_0 == "ctf") {
-      if(isDefined(var_3._id_81C0) && var_3._id_81C0 != "1")
+      if(isDefined(var_3.maymovefrompointtopoint) && var_3.maymovefrompointtopoint != "1")
         var_3 delete();
 
       continue;
     }
 
     if(var_0 == "hq") {
-      if(isDefined(var_3._id_81C2) && var_3._id_81C2 != "1")
+      if(isDefined(var_3.forceteleport) && var_3.forceteleport != "1")
         var_3 delete();
 
       continue;
     }
 
     if(var_0 == "sd") {
-      if(isDefined(var_3._id_81C4) && var_3._id_81C4 != "1")
+      if(isDefined(var_3.withinapproxpathdist) && var_3.withinapproxpathdist != "1")
         var_3 delete();
 
       continue;
     }
 
     if(var_0 == "koth") {
-      if(isDefined(var_3._id_81C3) && var_3._id_81C3 != "1")
+      if(isDefined(var_3.safeteleport) && var_3.safeteleport != "1")
         var_3 delete();
 
       continue;
     }
 
     if(var_0 == "atdm") {
-      if(isDefined(var_3._id_81BF) && var_3._id_81BF != "1")
+      if(isDefined(var_3.maymovetopoint) && var_3.maymovetopoint != "1")
         var_3 delete();
     }
   }

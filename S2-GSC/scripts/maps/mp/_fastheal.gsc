@@ -87,7 +87,7 @@ _id_7723() {
   self endon("death");
 
   for(;;) {
-    _func_18C(self.health);
+    _iprintlnbold(self.health);
     wait 1;
   }
 }

@@ -25,16 +25,16 @@ init() {
   level.zmmaxrankxpfinalprestige = _id_AB2D(level.zmmaxrankfinalprestige);
   level._id_AB2A = [];
 
-  if(_func_1B2("mp/zombie_xp_event_table.csv")) {
-    var_1 = _func_27A("mp/zombie_xp_event_table.csv");
+  if(_tableexists("mp/zombie_xp_event_table.csv")) {
+    var_1 = _tablegetrowcount("mp/zombie_xp_event_table.csv");
 
     for(var_2 = 0; var_2 < var_1; var_2++) {
-      var_3 = _id_0547::_id_9470(_func_1AE("mp/zombie_xp_event_table.csv", var_2, 2));
+      var_3 = _id_0547::_id_9470(_tablelookupbyrow("mp/zombie_xp_event_table.csv", var_2, 2));
 
       if(isDefined(var_3)) {
-        var_4 = _func_1AE("mp/zombie_xp_event_table.csv", var_2, 0);
-        var_5 = _func_1AE("mp/zombie_xp_event_table.csv", var_2, 1);
-        var_6 = _func_1AE("mp/zombie_xp_event_table.csv", var_2, 2);
+        var_4 = _tablelookupbyrow("mp/zombie_xp_event_table.csv", var_2, 0);
+        var_5 = _tablelookupbyrow("mp/zombie_xp_event_table.csv", var_2, 1);
+        var_6 = _tablelookupbyrow("mp/zombie_xp_event_table.csv", var_2, 2);
         level._id_AB2A[var_4]["xp"] = var_3;
         level._id_AB2A[var_4]["splash"] = var_5;
         level._id_AB2A[var_4]["type"] = var_6;
@@ -47,7 +47,7 @@ init() {
   level.zmshotgunmaxlevel = 0;
   level.zmshotgunmaxlevelxp = 0;
 
-  if(_func_1B2("mp/zm_shotgun_rankTable.csv")) {
+  if(_tableexists("mp/zm_shotgun_rankTable.csv")) {
     var_7 = tablelookup("mp/zm_shotgun_rankTable.csv", 0, "maxrank", 1);
     level.zmshotgunmaxlevel = int(var_7);
     var_8 = 0;
@@ -177,7 +177,7 @@ zombieplayerxpupdatethink() {
   for(;;) {
     if(!common_scripts\utility::_id_562E(self.notifiedlootservice) && self._id_AB46["pendingXP"] > 0) {
       self.notifiedlootservice = 1;
-      _func_29A(self._id_01D6);
+      _lootservicevalidateplaytime(self._id_01D6);
     }
 
     zombieupdateplayerxp(self._id_AB46["pendingXP"]);

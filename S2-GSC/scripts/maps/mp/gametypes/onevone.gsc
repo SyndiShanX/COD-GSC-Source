@@ -8,7 +8,7 @@ main() {
   maps\mp\gametypes\_callbacksetup::setupcallbacks();
   _id_04D4::setupcallbacks();
 
-  if(_func_133()) {
+  if(_isusingmatchrulesdata()) {
     level._id_5300 = ::_id_5300;
     [[level._id_5300]]();
     level thread maps\mp\_utility::_id_7C13();
@@ -40,7 +40,7 @@ main() {
   if(level._id_6031 || level._id_6035)
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
 
-  _func_153("ffa");
+  _setteammode("ffa");
   game["dialog"]["gametype"] = "ffa_intro";
   game["dialog"]["defense_obj"] = "gbl_start";
   game["dialog"]["offense_obj"] = "gbl_start";
@@ -51,16 +51,16 @@ main() {
 
 _id_5300() {
   maps\mp\_utility::_id_8653(1);
-  _func_035("scr_onevone_winlimit", 1);
+  _setdynamicdvar("scr_onevone_winlimit", 1);
   maps\mp\_utility::registerwinlimitdvar("onevone", 1);
-  _func_035("scr_onevone_roundlimit", 1);
+  _setdynamicdvar("scr_onevone_roundlimit", 1);
   maps\mp\_utility::registerroundlimitdvar("onevone", 1);
-  _func_035("scr_onevone_halftime", 0);
+  _setdynamicdvar("scr_onevone_halftime", 0);
   maps\mp\_utility::registerhalftimedvar("onevone", 0);
 }
 
 _id_6BAF() {
-  _func_157("auto_change");
+  _setclientnamemode("auto_change");
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_ONEVONE");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_ONEVONE");
 
@@ -136,7 +136,7 @@ _id_92EE() {
   level.timerpausetime = gettime();
   level._id_6B20 = 1;
 
-  while(level.players.size < 2 || level._id_5139)
+  while(level.players.size < 2 || level.ingraceperiod)
     waitframe();
 
   _id_92EF(level.players, undefined);
@@ -150,7 +150,7 @@ ishqarenaingungame(var_0) {
   return var_0 == 41 || var_0 == 42 || var_0 == 43 || var_0 == 44 || var_0 == 45;
 }
 
-_id_83B8(var_0, var_1) {
+isjumping(var_0, var_1) {
   if(level.gametype == "onevone" && var_1 == 1)
     return [26 + randomint(3), 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
   else if(level.gametype == "onevone" && var_1 == 2)
@@ -196,10 +196,10 @@ _id_83B8(var_0, var_1) {
               var_8 = randomint(2);
               break;
             case 1:
-              var_8 = _func_0A4(2, 5);
+              var_8 = _randomintrange(2, 5);
               break;
             case 2:
-              var_8 = _func_0A4(5, 7);
+              var_8 = _randomintrange(5, 7);
               var_10 = 0;
               break;
           }
@@ -304,14 +304,14 @@ _id_92EF(var_0, var_1) {
     var_6 = _id_44DB(var_7);
 
     foreach(var_9 in var_0)
-    var_9 _meth_82FF("ui_onevone_show_class_menu", -1);
+    var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
 
     waitframe();
     var_3 = var_2;
     var_4 = 2;
   }
 
-  var_7 = _id_83B8(var_3, var_6);
+  var_7 = isjumping(var_3, var_6);
 
   if(var_6 != 2) {
     foreach(var_9 in var_0)
@@ -321,7 +321,7 @@ _id_92EF(var_0, var_1) {
   }
 
   foreach(var_9 in var_0)
-  var_9 _meth_82FF("ui_onevone_show_class_menu", -1);
+  var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
 
   if(var_7.size == 0) {
     level._id_6B18 = 0;
@@ -397,7 +397,7 @@ _id_6B24(var_0, var_1, var_2, var_3, var_4) {
   for(var_5 = 0; var_5 < var_0; var_5++) {
     foreach(var_7 in var_3) {
       foreach(var_9 in var_3)
-      var_9 _meth_82FF("ui_onevone_show_class_menu", var_7 getentitynumber());
+      var_9 setclientomnvar("ui_onevone_show_class_menu", var_7 getentitynumber());
 
       for(var_11 = 0; var_11 < var_1; var_11++) {
         var_7 thread _id_A703();
@@ -412,7 +412,7 @@ _id_6B24(var_0, var_1, var_2, var_3, var_4) {
 
         if(var_12 < 0 && !_func_367()) {
           foreach(var_9 in var_3)
-          var_9 _meth_82FF("ui_onevone_show_class_menu", -1);
+          var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
 
           level._id_6B18 = 0;
           level._id_6B19 = 0;
@@ -431,7 +431,7 @@ _id_6B24(var_0, var_1, var_2, var_3, var_4) {
         var_2[var_12] = -1;
 
         foreach(var_9 in var_3)
-        var_9 _meth_82FF("ui_onevone_class_" + (var_12 + 1), var_2[var_12]);
+        var_9 setclientomnvar("ui_onevone_class_" + (var_12 + 1), var_2[var_12]);
       }
     }
   }
@@ -481,11 +481,11 @@ _id_44DB(var_0) {
 _id_86E2(var_0, var_1) {
   for(var_2 = 0; var_2 < var_1; var_2++) {
     if(var_2 >= var_0.size) {
-      self _meth_82FF("ui_onevone_class_" + (var_2 + 1), -1);
+      self setclientomnvar("ui_onevone_class_" + (var_2 + 1), -1);
       continue;
     }
 
-    self _meth_82FF("ui_onevone_class_" + (var_2 + 1), var_0[var_2]);
+    self setclientomnvar("ui_onevone_class_" + (var_2 + 1), var_0[var_2]);
   }
 }
 
@@ -506,12 +506,12 @@ _id_86E1(var_0) {
   }
 
   if(level.players.size == 2) {
-    level.players[0] _meth_82FF("ui_onevone_opponent_client_num", level.players[1] getentitynumber());
-    level.players[1] _meth_82FF("ui_onevone_opponent_client_num", level.players[0] getentitynumber());
+    level.players[0] setclientomnvar("ui_onevone_opponent_client_num", level.players[1] getentitynumber());
+    level.players[1] setclientomnvar("ui_onevone_opponent_client_num", level.players[0] getentitynumber());
   }
 
   if(!level._id_6B1F) {
-    if(_func_1A9(maps\mp\_utility::_id_4737(level._id_6B15["loadoutPrimaryWeaponStruct"])) == "melee")
+    if(_weapontype(maps\mp\_utility::_id_4737(level._id_6B15["loadoutPrimaryWeaponStruct"])) == "melee")
       level._id_6B15["ignoreMeleeSlotWeapon"] = 1;
 
     self.pers["class"] = "gamemode";
@@ -546,7 +546,7 @@ _id_7B76() {
   self endon("death");
   self endon("disconnect");
 
-  while(self _meth_8317() == "none")
+  while(self getcurrentprimaryweapon() == "none")
     waitframe();
 
   var_0 = maps\mp\_utility::_id_4737(self._id_5E00);
@@ -562,7 +562,7 @@ _id_7B76() {
 
 _id_469F(var_0) {
   var_1 = maps\mp\_utility::getweaponclass(var_0);
-  var_2 = _func_1A3(var_0);
+  var_2 = _weaponclipsize(var_0);
 
   switch (var_1) {
     case "weapon_heavy":
@@ -587,8 +587,8 @@ _id_469F(var_0) {
 
 _id_4413(var_0, var_1, var_2) {
   var_3 = _id_469F(var_0);
-  var_4 = _func_1A3(var_0);
-  return int(_func_0AF(var_3 + var_4 - var_2, var_1));
+  var_4 = _weaponclipsize(var_0);
+  return int(_min(var_3 + var_4 - var_2, var_1));
 }
 
 _id_6BB6() {
@@ -651,7 +651,7 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     return;
   }
   if(isDefined(level._id_6B1E) && var_1 != level._id_6B1E)
-    level._id_09B7 = _func_0AF(level._id_606F, level._id_09B7 + level._id_3992);
+    level._id_09B7 = _min(level._id_606F, level._id_09B7 + level._id_3992);
 
   level._id_6B1E = _id_46E9();
 
@@ -669,7 +669,7 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   else if(level._id_6B17) {
     var_14 = maps\mp\_utility::_id_4737(var_1._id_5E00);
     var_1 setweaponammoclip(var_14, 1);
-    var_1 _meth_831B(var_14);
+    var_1 switchtoweaponimmediate(var_14);
   }
 }
 
@@ -776,11 +776,11 @@ _id_6FBC(var_0, var_1) {
       var_6 = 0;
 
       if(var_0 == level.players[0]) {
-        var_5 = _func_0E1(level._id_6B29.origin, level.players[1].origin);
-        var_6 = _func_0E1(level._id_6B2A.origin, level.players[1].origin);
+        var_5 = _distance2d(level._id_6B29.origin, level.players[1].origin);
+        var_6 = _distance2d(level._id_6B2A.origin, level.players[1].origin);
       } else {
-        var_5 = _func_0E1(level._id_6B29.origin, level.players[0].origin);
-        var_6 = _func_0E1(level._id_6B2A.origin, level.players[0].origin);
+        var_5 = _distance2d(level._id_6B29.origin, level.players[0].origin);
+        var_6 = _distance2d(level._id_6B2A.origin, level.players[0].origin);
       }
 
       var_7 = level._id_6B27;

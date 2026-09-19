@@ -200,7 +200,7 @@ _id_74CF() {
   if(!isDefined(level._id_7622)) {
     return;
   }
-  level._id_7622 _meth_805C();
+  level._id_7622 hide();
 
   foreach(var_1 in level.players) {
     if(var_1 == self) {
@@ -212,7 +212,7 @@ _id_74CF() {
     if(maps\mp\_utility::_id_5666(var_1)) {
       continue;
     }
-    level._id_7622 _meth_8005(var_1);
+    level._id_7622 showtoplayer(var_1);
   }
 }
 
@@ -235,9 +235,9 @@ play_end_game_music(var_0) {
 
 stop_end_game_music() {
   if(isDefined(level.end_game_music_ent)) {
-    level.end_game_music_ent _meth_861B(0, 1);
+    level.end_game_music_ent scalevolume(0, 1);
     wait 5.5;
-    level.end_game_music_ent _meth_8614();
+    level.end_game_music_ent stopsounds();
     level.end_game_music_ent delete();
   }
 }
@@ -257,29 +257,29 @@ _id_7620() {
     self._id_7624 = 1;
 
   if(!isDefined(level._id_7622)) {
-    if(!_func_344("mus_practice_round_backing_track")) {
+    if(!_soundexists("mus_practice_round_backing_track")) {
       return;
     }
     level._id_7622 = spawn("script_origin", (0, 0, 0));
     level._id_7622 endon("death");
     level endon("practiceRoundMusicEnding");
     level thread _id_36E0();
-    level._id_7622 _meth_805C();
+    level._id_7622 hide();
     wait 12;
     self._id_7623 = 1;
-    level._id_7622 _meth_861D("mus_practice_round_backing_track");
+    level._id_7622 playloopsound("mus_practice_round_backing_track");
     _id_74CF();
-    level._id_7622 _meth_8005(self);
-    level._id_7622 _meth_861B(0, 0.05);
+    level._id_7622 showtoplayer(self);
+    level._id_7622 scalevolume(0, 0.05);
     wait 0.8;
-    level._id_7622 _meth_861B(0.8, 2.5);
+    level._id_7622 scalevolume(0.8, 2.5);
   } else {
     _id_74CF();
     level._id_7622 endon("death");
     level endon("practiceRoundMusicEnding");
     wait 12;
     self._id_7623 = 1;
-    level._id_7622 _meth_8005(self);
+    level._id_7622 showtoplayer(self);
   }
 }
 
@@ -295,8 +295,8 @@ _id_36E0() {
         break;
       }
 
-      if(var_0 - _func_0D4(var_0) >= 0.05)
-        wait(var_0 - _func_0D4(var_0));
+      if(var_0 - _floor(var_0) >= 0.05)
+        wait(var_0 - _floor(var_0));
     }
 
     wait 1.0;
@@ -304,9 +304,9 @@ _id_36E0() {
 
   level notify("practiceRoundMusicEnding");
   level._id_7621 = 1;
-  level._id_7622 _meth_861B(0, 5);
+  level._id_7622 scalevolume(0, 5);
   wait 5.5;
-  level._id_7622 _meth_8614();
+  level._id_7622 stopsounds();
   level._id_7622 delete();
 }
 
@@ -316,7 +316,7 @@ onplayerspawned() {
 
   if(getDvar("4017") == "0" && !_func_367()) {
     if(!level.splitscreen || level.splitscreen && !isDefined(level._id_7217)) {
-      if(!self _meth_82D0() || self _meth_82ED())
+      if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
         self playlocalsound(game["music"]["spawn_" + self.team]);
 
       if(level.splitscreen)
@@ -331,7 +331,7 @@ onplayerspawned() {
         maps\mp\_utility::leaderdialogonplayer("allies_gametype");
       else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
         maps\mp\_utility::leaderdialogonplayer("axis_gametype");
-      else if(!self _meth_82D0() || self _meth_82ED())
+      else if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
         maps\mp\_utility::leaderdialogonplayer("gametype");
     }
 
@@ -342,9 +342,9 @@ onplayerspawned() {
       maps\mp\_utility::gameflagwait("prematch_done");
 
       if(self.team == game["attackers"]) {
-        if(!self _meth_82D0() || self _meth_82ED())
+        if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
           maps\mp\_utility::leaderdialogonplayer("offense_obj", "introboost");
-      } else if(!self _meth_82D0() || self _meth_82ED())
+      } else if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
         maps\mp\_utility::leaderdialogonplayer("defense_obj", "introboost");
     }
   }
@@ -366,7 +366,7 @@ _id_6B99() {
   switch (var_0) {
     case "halftime":
       foreach(var_2 in level.players) {
-        if(var_2 _meth_82D0() && !var_2 _meth_82ED()) {
+        if(var_2 issplitscreenplayer() && !var_2 issplitscreenplayerprimary()) {
           continue;
         }
         var_2 maps\mp\_utility::leaderdialogonplayer("halftime");
@@ -375,7 +375,7 @@ _id_6B99() {
       break;
     case "overtime":
       foreach(var_2 in level.players) {
-        if(var_2 _meth_82D0() && !var_2 _meth_82ED()) {
+        if(var_2 issplitscreenplayer() && !var_2 issplitscreenplayerprimary()) {
           continue;
         }
         var_2 maps\mp\_utility::leaderdialogonplayer("overtime");
@@ -384,7 +384,7 @@ _id_6B99() {
       break;
     default:
       foreach(var_2 in level.players) {
-        if(var_2 _meth_82D0() && !var_2 _meth_82ED()) {
+        if(var_2 issplitscreenplayer() && !var_2 issplitscreenplayerprimary()) {
           continue;
         }
         var_2 maps\mp\_utility::leaderdialogonplayer("side_switch");
@@ -422,7 +422,7 @@ _id_6B3E() {
     }
   } else {
     foreach(var_2 in level.players) {
-      if(var_2 _meth_82D0() && !var_2 _meth_82ED()) {
+      if(var_2 issplitscreenplayer() && !var_2 issplitscreenplayerprimary()) {
         continue;
       }
       if(var_2.pers["team"] != "allies" && var_2.pers["team"] != "axis") {
@@ -559,7 +559,7 @@ _id_9528() {
   wait 120;
 
   for(;;) {
-    wait(_func_0A5(60, 120));
+    wait(_randomfloatrange(60, 120));
     maps\mp\_utility::playsoundonplayers(game["music"]["suspense"][randomint(var_0)]);
   }
 }

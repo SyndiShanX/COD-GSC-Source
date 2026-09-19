@@ -51,7 +51,7 @@ init() {
   level._id_AB22["specialty_class_fiery_burst_zm"] = 1;
   level._id_AB22["specialty_class_breathing_room_zm"] = 1;
   level._id_AB22["specialty_class_sustain_zone_zm"] = 1;
-  level._id_AB23["specialty_class_armor_zm"] = ::_id_8632;
+  level._id_AB23["specialty_class_armor_zm"] = ::deactivatereverb;
   level._id_AB25["specialty_class_armor_zm"] = ::_id_A051;
   level._id_AB23["specialty_class_fully_loaded_zm"] = ::_id_868A;
   level._id_AB25["specialty_class_fully_loaded_zm"] = ::_id_A066;
@@ -76,7 +76,7 @@ _id_0F35(var_0) {}
 
 _id_536E() {
   foreach(var_2, var_1 in level._id_AB22)
-  level._id_8324[var_2] = var_1;
+  level.disableoffhandweapons[var_2] = var_1;
 
   foreach(var_2, var_4 in level._id_AB23)
   level._id_6F68[var_2] = var_4;
@@ -159,7 +159,7 @@ _id_6B81() {
   _id_0547::_id_7454(var_0);
 }
 
-_id_8632() {}
+deactivatereverb() {}
 
 _id_A051() {}
 
@@ -241,12 +241,12 @@ _id_A05F() {
 
 _id_86A8() {
   var_0 = _id_056A::_id_420E(1);
-  self _meth_82FF("zm_blitz_items_limit", var_0);
+  self setclientomnvar("zm_blitz_items_limit", var_0);
 }
 
 _id_A06A() {
   var_0 = _id_056A::_id_420E(0);
-  self _meth_82FF("zm_blitz_items_limit", var_0);
+  self setclientomnvar("zm_blitz_items_limit", var_0);
 }
 
 _id_466B(var_0) {
@@ -262,8 +262,8 @@ _id_0F38(var_0) {
   _id_054D::_id_099B("suppressive_fire", _id_46BB(var_0));
 
   if(isalive(self)) {
-    _func_147(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
-    _func_147(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
+    _playfxontag(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
+    _playfxontag(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
   }
 }
 
@@ -295,6 +295,6 @@ _id_90A8() {
 
 _id_7CFD(var_0) {
   self notify("speed_debuffs_changed");
-  _func_148(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
-  _func_148(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
+  _stopfxontag(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
+  _stopfxontag(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
 }

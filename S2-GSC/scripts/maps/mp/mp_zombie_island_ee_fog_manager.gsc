@@ -181,7 +181,7 @@ is_fog_rolling_in() {
 
 wait_for_wave_requirement() {
   level endon("fasttrack_to_next_fog_state");
-  var_0 = level._id_A980 + _func_0A4(2, 5);
+  var_0 = level._id_A980 + _randomintrange(2, 5);
 
   while(level._id_A980 <= var_0)
     wait 1;
@@ -210,18 +210,18 @@ spawn_assassin_zombies(var_0) {
 
 turn_on_fog_lights() {
   wait 4;
-  var_0 = _func_21F("fog_light", "targetname");
+  var_0 = _getscriptablearray("fog_light", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("lightpart", "on");
+  var_2 setscriptablepartstate("lightpart", "on");
 }
 
 turn_off_fog_lights() {
   wait 4;
-  var_0 = _func_21F("fog_light", "targetname");
+  var_0 = _getscriptablearray("fog_light", "targetname");
 
   foreach(var_2 in var_0)
-  var_2 _meth_83FA("lightpart", "off");
+  var_2 setscriptablepartstate("lightpart", "off");
 }
 
 spawn_first_assassins() {
@@ -242,7 +242,7 @@ spawn_first_assassins() {
 
 ramp_zombies() {
   var_0 = _id_0547::_id_408F();
-  var_1 = int(_func_0AF(15, _id_056D::_id_4577()));
+  var_1 = int(_min(15, _id_056D::_id_4577()));
   var_2 = var_0.size;
   var_3 = var_1 - var_2;
 
@@ -338,7 +338,7 @@ spawn_assassin_cover() {
 
     foreach(var_4 in var_2._id_905E) {
       var_4.spawner_fog_fx = _id_0547::_id_8FBA(var_4, "zmb_isl_fog_zmb_assn_01");
-      _func_14C(var_4.spawner_fog_fx);
+      _triggerfx(var_4.spawner_fog_fx);
     }
   }
 }
@@ -360,7 +360,7 @@ zombie_fog_effects_start() {
   wait 2;
 
   foreach(var_1 in _id_0547::_id_408F())
-  _func_147(level._effect["zmb_isl_fog_zmb_emerge_01"], var_1, "J_SpineUpper");
+  _playfxontag(level._effect["zmb_isl_fog_zmb_emerge_01"], var_1, "J_SpineUpper");
 }
 
 add_fog_function(var_0, var_1, var_2) {

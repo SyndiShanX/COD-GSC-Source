@@ -26,7 +26,7 @@ _id_A056() {
 _id_86F4() {
   var_0 = spawn("script_model", self.origin);
   var_0.team = self.team;
-  var_0 _meth_8011(self);
+  var_0 makeportableradar(self);
   self._id_6F81 = var_0;
   thread _id_78A8(var_0);
 }
@@ -38,7 +38,7 @@ _id_78A8(var_0) {
   self endon("personal_uav_removed");
 
   for(;;) {
-    var_0 _meth_82B1(self.origin, 0.05);
+    var_0 moveto(self.origin, 0.05);
     waitframe();
   }
 }
@@ -65,7 +65,7 @@ _id_A079() {}
 
 _id_8721() {
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled())
-    self _meth_830E(0.0);
+    self setviewkickscale(0.0);
   else
     thread monitorsharpfocus();
 }
@@ -86,14 +86,14 @@ monitorsharpfocus() {
 
 scaleflinchbasedonweapon(var_0) {
   if(maps\mp\_utility::getweaponclass(var_0) == "weapon_sniper")
-    self _meth_830E(0.35);
+    self setviewkickscale(0.35);
   else
-    self _meth_830E(0.9);
+    self setviewkickscale(0.9);
 }
 
 _id_A07B() {
   self notify("stopSharpFocusMonitor");
-  self _meth_830E(1);
+  self setviewkickscale(1);
 }
 
 _id_866D() {
@@ -104,11 +104,11 @@ _id_866D() {
 
   for(;;) {
     self waittill("reload");
-    var_0 = self _meth_82D4("primary");
+    var_0 = self getweaponslist("primary");
 
     foreach(var_2 in var_0) {
       var_3 = self getweaponammoclip(var_2);
-      var_4 = _func_1A3(var_2);
+      var_4 = _weaponclipsize(var_2);
       var_5 = var_4 - var_3;
       var_6 = self getweaponammostock(var_2);
 
@@ -174,12 +174,12 @@ _id_8733() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  self _meth_830C(0.5);
+  self setaimspreadmovementscale(0.5);
 }
 
 _id_A07F() {
   self notify("end_SteadyAimPro");
-  self _meth_830C(1.0);
+  self setaimspreadmovementscale(1.0);
 }
 
 _id_6F6D() {
@@ -202,7 +202,7 @@ _id_8675() {
   self.health = self.maxhealth;
   self._id_36B9 = 1;
   self._id_119A[0] = "";
-  self _meth_82D8("end_game", 5);
+  self visionsetnakedforplayer("end_game", 5);
   thread _id_36BB(7);
   self._id_4B62 = 1;
 }
@@ -232,7 +232,7 @@ _id_36BB(var_0) {
 _id_9162() {
   self endon("death");
   self endon("disconnect");
-  self _meth_82E1("adjustedStance", "+stance");
+  self notifyonplayercommand("adjustedStance", "+stance");
 
   for(;;) {
     self waittill("adjustedStance");
@@ -247,7 +247,7 @@ _id_9162() {
 _id_598F() {
   self endon("death");
   self endon("disconnect");
-  self _meth_82E1("jumped", "+goStand");
+  self notifyonplayercommand("jumped", "+goStand");
 
   for(;;) {
     self waittill("jumped");
@@ -261,10 +261,10 @@ _id_598F() {
 
 _id_A07D() {
   self._id_64CD = level._id_162E;
-  self _meth_830B();
+  self resetspreadoverride();
   _id_0513::_id_A13B();
-  self _meth_82E8();
-  self _meth_8305(1);
+  self playerrecoilscaleoff();
+  self allowjump(1);
 }
 
 setimprovedobjectives() {
@@ -275,7 +275,7 @@ unsetimprovedobjectives() {
   self._id_696D = 1;
 }
 
-_id_8638() {
+disableaudiozoom() {
   self._id_5A73 = 1.5;
 }
 
@@ -299,19 +299,19 @@ _id_A057() {}
 
 _id_86C2() {
   if(!maps\mp\_utility::_id_56D7())
-    self _meth_8212(0);
+    self setmotiontrackervisible(0);
 }
 
 _id_A06F() {
-  self _meth_8212(1);
+  self setmotiontrackervisible(1);
 }
 
 _id_8741() {
-  self _meth_80A8();
+  self thermalvisionon();
 }
 
 _id_A083() {
-  self _meth_80A9();
+  self thermalvisionoff();
 }
 
 _id_86E0() {
@@ -358,7 +358,7 @@ _id_83B7() {
   common_scripts\utility::_id_0603();
   common_scripts\utility::_disableoffhandweapons();
   common_scripts\utility::_id_0601();
-  self _meth_832A(game["menu_onemanarmy"]);
+  self openpopupmenu(game["menu_onemanarmy"]);
   thread _id_2449();
   self waittill("menuresponse", var_0, var_1);
   common_scripts\utility::_id_0617();
@@ -391,7 +391,7 @@ _id_2449() {
   common_scripts\utility::_id_0617();
   common_scripts\utility::_id_0614();
   common_scripts\utility::_id_0615();
-  self _meth_832C();
+  self closepopupmenu();
 }
 
 _id_47A0(var_0) {
@@ -402,13 +402,13 @@ _id_47A0(var_0) {
   if(maps\mp\_utility::_hasperk("specialty_omaquickchange")) {
     var_1 = 3.0;
     self playlocalsound("foly_onemanarmy_bag3_plr");
-    self _meth_860E("foly_onemanarmy_bag3_npc", "allies", self);
-    self _meth_860E("foly_onemanarmy_bag3_npc", "axis", self);
+    self playsoundtoteam("foly_onemanarmy_bag3_npc", "allies", self);
+    self playsoundtoteam("foly_onemanarmy_bag3_npc", "axis", self);
   } else {
     var_1 = 6.0;
     self playlocalsound("foly_onemanarmy_bag6_plr");
-    self _meth_860E("foly_onemanarmy_bag6_npc", "allies", self);
-    self _meth_860E("foly_onemanarmy_bag6_npc", "axis", self);
+    self playsoundtoteam("foly_onemanarmy_bag6_npc", "allies", self);
+    self playsoundtoteam("foly_onemanarmy_bag6_npc", "axis", self);
   }
 
   thread _id_6A6D(var_1);
@@ -442,12 +442,12 @@ _id_6A6D(var_0) {
   var_2 maps\mp\gametypes\_hud_util::destroyelem();
 }
 
-_id_8639() {
-  self _meth_821A("primaryoffhand", "specialty_s1_temp");
+eqon() {
+  self setweaponhudiconoverride("primaryoffhand", "specialty_s1_temp");
 }
 
 _id_A053() {
-  self _meth_821A("primaryoffhand", "none");
+  self setweaponhudiconoverride("primaryoffhand", "none");
 }
 
 _id_8689() {
@@ -480,15 +480,15 @@ _id_A17C() {
   level endon("game_ended");
 
   while(maps\mp\_utility::isreallyalive(self)) {
-    var_0 = _func_0B9(self.origin, 128, 0, 64);
+    var_0 = _getnodesinradiussorted(self.origin, 128, 0, 64);
     self._id_9A28 = undefined;
 
     foreach(var_2 in var_0) {
-      if(isDefined(var_2) && _func_200(var_2, 1)) {
+      if(isDefined(var_2) && _nodeexposedtosky(var_2, 1)) {
         var_3 = var_2.origin + (0, 0, 10);
         var_4 = bulletTrace(self getEye(), var_3, 0, self);
 
-        if(_func_07E(self getEye(), var_3, 0, self)) {
+        if(_bullettracepassed(self getEye(), var_3, 0, self)) {
           if(_id_583F(var_3)) {
             self._id_9A28 = var_3;
             break;
@@ -502,7 +502,7 @@ _id_A17C() {
 }
 
 _id_583F(var_0) {
-  if(_func_15E(var_0) && self _meth_8346())
+  if(_canspawn(var_0) && self isonground())
     return 1;
   else
     return 0;
@@ -534,7 +534,7 @@ _id_63EF() {
     if(maps\mp\_utility::touchingbadtrigger()) {
       continue;
     }
-    var_2 = _func_081(self._id_9A28 + (0, 0, 16), self._id_9A28 - (0, 0, 2048)) + (0, 0, 1);
+    var_2 = _playerphysicstrace(self._id_9A28 + (0, 0, 16), self._id_9A28 - (0, 0, 2048)) + (0, 0, 1);
     var_3 = spawn("script_model", var_2);
     var_3.angles = self.angles;
     var_3.team = self.team;
@@ -542,9 +542,9 @@ _id_63EF() {
     var_3._id_3773 = spawn("script_origin", var_2);
     var_3 thread _id_47EB(self);
     var_3._id_7464 = self._id_9A28;
-    var_3 _meth_8385(self);
+    var_3 setotherent(self);
     var_3 common_scripts\utility::_id_5FA9(self.team, 1);
-    var_3 _meth_861D("tac_insert_spark_lp");
+    var_3 playloopsound("tac_insert_spark_lp");
     thread _id_A950();
     self._id_872A = var_3;
     return;
@@ -581,46 +581,46 @@ _id_47EB(var_0) {
   var_1 setModel(level._id_906A["friendly"]);
   var_1 _meth_80B1();
   var_1 thread _id_47EC(self.team, level._id_9069["friendly"], var_0);
-  var_1 _meth_861D("tac_insert_spark_lp");
+  var_1 playloopsound("tac_insert_spark_lp");
   self waittill("death");
-  var_1 _meth_8612();
+  var_1 stoploopsound();
   var_1 delete();
 }
 
 _id_47EC(var_0, var_1, var_2) {
   self endon("death");
   waitframe();
-  var_3 = self _meth_8181("tag_fx");
-  var_4 = _func_14B(var_1, self gettagorigin("tag_fx"), anglesToForward(var_3), anglestoup(var_3));
-  _func_14C(var_4);
+  var_3 = self gettagangles("tag_fx");
+  var_4 = _spawnfx(var_1, self gettagorigin("tag_fx"), anglesToForward(var_3), anglestoup(var_3));
+  _triggerfx(var_4);
   thread _id_6F57(var_4);
 
   for(;;) {
-    self _meth_805C();
-    var_4 _meth_805C();
+    self hide();
+    var_4 hide();
 
     foreach(var_6 in level.players) {
       if(var_6.team == var_0 && level.teambased && var_1 == level._id_9069["friendly"]) {
-        self _meth_8005(var_6);
-        var_4 _meth_8005(var_6);
+        self showtoplayer(var_6);
+        var_4 showtoplayer(var_6);
         continue;
       }
 
       if(var_6.team != var_0 && level.teambased && var_1 == level._id_9069["enemy"]) {
-        self _meth_8005(var_6);
-        var_4 _meth_8005(var_6);
+        self showtoplayer(var_6);
+        var_4 showtoplayer(var_6);
         continue;
       }
 
       if(!level.teambased && var_6 == var_2 && var_1 == level._id_9069["friendly"]) {
-        self _meth_8005(var_6);
-        var_4 _meth_8005(var_6);
+        self showtoplayer(var_6);
+        var_4 showtoplayer(var_6);
         continue;
       }
 
       if(!level.teambased && var_6 != var_2 && var_1 == level._id_9069["enemy"]) {
-        self _meth_8005(var_6);
-        var_4 _meth_8005(var_6);
+        self showtoplayer(var_6);
+        var_4 showtoplayer(var_6);
       }
     }
 
@@ -650,8 +650,8 @@ _id_47ED(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self _meth_80CD("HINT_NOICON");
-  self _meth_80CE(&"MP_PICKUP_TI");
+  self setcursorhint("HINT_NOICON");
+  self sethintstring(&"MP_PICKUP_TI");
   thread _id_A10D(var_0);
 
   for(;;) {
@@ -695,7 +695,7 @@ _id_2D54(var_0) {
   if(isDefined(var_0._id_0117))
     var_0._id_0117._id_872A = undefined;
 
-  var_0 _meth_8612();
+  var_0 stoploopsound();
   var_0 delete();
 }
 
@@ -703,8 +703,8 @@ _id_47EA(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self._id_3773 _meth_80CD("HINT_NOICON");
-  self._id_3773 _meth_80CE(&"MP_DESTROY_TI");
+  self._id_3773 setcursorhint("HINT_NOICON");
+  self._id_3773 sethintstring(&"MP_DESTROY_TI");
   self._id_3773 maps\mp\_utility::makeenemyusable(var_0);
 
   for(;;) {
@@ -731,16 +731,16 @@ _id_A950() {
     return;
   }
   var_0 = self.origin;
-  self _meth_808C();
+  self dontinterpolate();
   self setOrigin(var_0 + (0, 0, 2000));
-  self _meth_8304(0);
-  var_1 = _func_1B5("tactical_insertion_parachute_mp", self.origin, var_0);
-  self _meth_8077(var_1, undefined, 0, 180, 180, 180, 180, 1);
+  self allowads(0);
+  var_1 = _magicbullet("tactical_insertion_parachute_mp", self.origin, var_0);
+  self playerlinkto(var_1, undefined, 0, 180, 180, 180, 180, 1);
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
   var_2 linktosynchronizedparent(var_1);
   var_3 = spawn("script_model", var_2.origin);
-  var_3 _meth_805C();
+  var_3 hide();
 
   if(self.team == "allies")
     var_3 setModel("usa_carepackage_parachute_anim");
@@ -748,14 +748,14 @@ _id_A950() {
     var_3 setModel("ger_carepackage_parachute_anim");
 
   var_3._id_62A0 = 0.5;
-  var_3 _meth_8276("carepackage_parachute_loop");
+  var_3 scriptmodelplayanim("carepackage_parachute_loop");
   var_3 linktosynchronizedparent(var_2, "tag_origin", (20, -20, 40), (0, 90, 0));
-  var_3 _meth_805B();
+  var_3 show();
   var_4 = spawn("script_model", var_3.origin);
   var_4.angles = var_3.angles;
   var_4 setModel("ger_carepackage_parachute");
-  var_4 _meth_82C3(1);
-  var_4 _meth_805C();
+  var_4 setcandamage(1);
+  var_4 hide();
   var_4 linktosynchronizedparent(var_3);
   var_4 thread _id_A94F(var_1);
   var_1 thread _id_9A1E(self, var_2, var_3, var_4);
@@ -771,16 +771,16 @@ _id_A94F(var_0) {
 _id_9A1E(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   self waittill("death");
-  var_0 _meth_8057();
-  var_0 _meth_8304(1);
-  var_2 _meth_8278("carepackage_parachute_detach");
+  var_0 unlink();
+  var_0 allowads(1);
+  var_2 scriptmodelplayanimdeltamotion("carepackage_parachute_detach");
   var_2 common_scripts\utility::_id_2CBE(2.7, ::delete);
   var_1 common_scripts\utility::_id_2CBE(3, ::delete);
   var_3 delete();
 }
 
 _id_86ED(var_0, var_1) {
-  if(isPlayer(self) || _func_1EF(self)) {
+  if(isPlayer(self) || _isagent(self)) {
     if(isDefined(var_0._id_90DA)) {
       if(var_1) {
         if(!isDefined(self.paintedattackers))
@@ -832,8 +832,8 @@ _id_8710() {
   if(isDefined(self._id_76F6))
     self givemaxammo(self._id_76F6);
 
-  if(isDefined(self._id_8356))
-    self givemaxammo(self._id_8356);
+  if(isDefined(self.botsetscriptgoal))
+    self givemaxammo(self.botsetscriptgoal);
 }
 
 _id_8680() {
@@ -979,12 +979,12 @@ _id_86BC(var_0) {
 
     if(isPlayer(self) && isDefined(self._id_6089) && self._id_6089 > 0) {
       var_1 = clamp(self._id_5D2E / self._id_6089, 0, 1);
-      self _meth_82FF("ui_light_armor_percent", var_1);
+      self setclientomnvar("ui_light_armor_percent", var_1);
     }
   } else {
     self._id_5D2E = undefined;
     self._id_6089 = undefined;
-    self _meth_82FF("ui_light_armor_percent", 0);
+    self setclientomnvar("ui_light_armor_percent", 0);
   }
 }
 
@@ -1005,7 +1005,7 @@ _id_86BB(var_0) {
   _id_86BC(self._id_6089);
 
   if(isDefined(level._id_5677) && level._id_5677) {
-    self._id_0F67 = _func_19B(self);
+    self._id_0F67 = _newclienthudelem(self);
     self._id_0F67.x = 0;
     self._id_0F67.y = 0;
     self._id_0F67.sort = -5;
@@ -1191,7 +1191,7 @@ _id_6F4E() {
       var_11 = var_5 getEye();
       var_12 = self getEye();
 
-      if(_func_07E(var_11, var_12, 0, self)) {
+      if(_bullettracepassed(var_11, var_12, 0, self)) {
         thread _id_A932();
         thread _id_A933();
         var_2 = var_2 | _id_4601(var_5);
@@ -1251,7 +1251,7 @@ watchdeathorgameendperception() {
 }
 
 _id_A147(var_0, var_1) {
-  if(_func_0C1(self) || istestclient(self)) {
+  if(_isai(self) || istestclient(self)) {
     return;
   }
   var_2 = common_scripts\utility::_id_44F5("perception_glow");
@@ -1262,12 +1262,12 @@ _id_A147(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     if(isDefined(self.model) || self.model)
-      _func_295(var_2, self, "j_head", self);
+      _killfxontagforclient(var_2, self, "j_head", self);
   } else if(var_3 != var_0) {
     if(var_0)
-      _func_14D(var_2, self, "j_head", self);
+      _playfxontagforclients(var_2, self, "j_head", self);
     else
-      _func_295(var_2, self, "j_head", self);
+      _killfxontagforclient(var_2, self, "j_head", self);
   }
 
   self._id_6F4C = var_0;
@@ -1318,18 +1318,18 @@ _id_8743() {
   level endon("game_ended");
 
   for(;;) {
-    self _meth_8424(1.25);
+    self setgrenadethrowscale(1.25);
     self waittill("grenade_pullback", var_0);
 
     if(var_0 == "killstreak_carepackage_grenade_mp" || var_0 == "killstreak_carepackage_grenade_axis_mp" || var_0 == "killstreak_emergency_carepackage_grenade_mp" || var_0 == "killstreak_emergency_carepackage_grenade_axis_mp" || var_0 == "gamemode_ball")
-      self _meth_8424(1.0);
+      self setgrenadethrowscale(1.0);
 
     self waittill("grenade_fire", var_1, var_2);
   }
 }
 
 _id_A084() {
-  self _meth_8424(1.0);
+  self setgrenadethrowscale(1.0);
   self notify("unsetThrowEquipmentFarther");
 }
 
@@ -1351,7 +1351,7 @@ _id_8656() {
     var_1 = common_scripts\utility::_id_A70E(self, "death", self, "grenade_fire", self, "offhand_end");
 
     if(var_1[0] == "death" && var_0 != "c4_mp") {
-      var_2 = _func_071(var_0, self.origin, (0, 0, 0), 1.25, self, 1);
+      var_2 = _magicgrenademanual(var_0, self.origin, (0, 0, 0), 1.25, self, 1);
       var_2._id_5751 = 1;
       _id_0513::_id_3BE8(var_2, var_0);
       return;
@@ -1364,20 +1364,20 @@ _id_A055() {
 }
 
 _id_8678() {
-  if(_func_0C1(self) || istestclient(self)) {
+  if(_isai(self) || istestclient(self)) {
     return;
   }
-  if((level.splitscreen || self _meth_82D0()) && !_func_3BA())
+  if((level.splitscreen || self issplitscreenplayer()) && !_func_3BA())
     self setclientdvars("1806", "90", "1310", "90", "2385", "0.50");
   else
     self setclientdvars("1806", "225", "1310", "225", "2385", "0.60");
 }
 
 _id_A05D() {
-  if(_func_0C1(self) || istestclient(self)) {
+  if(_isai(self) || istestclient(self)) {
     return;
   }
-  if((level.splitscreen || self _meth_82D0()) && !_func_3BA())
+  if((level.splitscreen || self issplitscreenplayer()) && !_func_3BA())
     self setclientdvars("1806", "75", "1310", "75", "2385", "0.45");
   else
     self setclientdvars("1806", "175", "1310", "175", "2385", "0.45");
@@ -1386,13 +1386,13 @@ _id_A05D() {
 setsnowblind() {
   self endon("death");
   self endon("disconnect");
-  self _meth_8304(0);
+  self allowads(0);
 }
 
 unsetsnowblind() {
   self endon("death");
   self endon("disconnect");
-  self _meth_8304(1);
+  self allowads(1);
 }
 
 monitorthaw() {
@@ -1416,12 +1416,12 @@ monitorthaw() {
 setthaw() {
   if(isDefined(self.isinthaw)) {
     if(self.isinthaw)
-      self _meth_8308(0);
+      self allowsprint(0);
   }
 }
 
 unsetthaw() {
-  self _meth_8308(1);
+  self allowsprint(1);
 }
 
 sethumbug() {
@@ -1471,7 +1471,7 @@ refillpistolmagazineonswitch() {
   var_0 = self getcurrentweapon();
 
   if(maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol")
-    self setweaponammoclip(var_0, _func_1A3(var_0));
+    self setweaponammoclip(var_0, _weaponclipsize(var_0));
 }
 
 setshiftyunlimitedpistolammunition() {
@@ -1486,7 +1486,7 @@ setshiftyunlimitedpistolammunition() {
     var_0 = self getcurrentweapon();
 
     if(var_0 != "none" && !maps\mp\_utility::iskillstreakweapon(var_0) && maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol") {
-      var_1 = self _meth_8338(var_0);
+      var_1 = self getfractionmaxammo(var_0);
 
       if(var_1 < 1)
         self givemaxammo(var_0);
@@ -1524,7 +1524,7 @@ unsetdeadeye() {
 setescalationboostafterkill() {}
 
 unsetescalationboostafterkill() {
-  self _meth_82FF("ui_escalation_active", 0);
+  self setclientomnvar("ui_escalation_active", 0);
 }
 
 handleescalationboostafterkill() {
@@ -1533,23 +1533,23 @@ handleescalationboostafterkill() {
   self endon("disconnect");
   self notify("escalationBoostAfterKill");
   self endon("escalationBoostAfterKill");
-  self _meth_82FF("ui_escalation_active", 1);
+  self setclientomnvar("ui_escalation_active", 1);
 
   if(self._id_7AD2 >= 2) {
     var_0 = self getcurrentweapon();
-    var_1 = _func_1A3(var_0);
+    var_1 = _weaponclipsize(var_0);
     var_2 = self getweaponammostock(var_0);
     var_3 = self getweaponammoclip(var_0);
-    var_4 = _func_0AF(var_1 - var_3, var_2);
-    var_5 = _func_0AF(var_3 + var_4, var_1);
+    var_4 = _min(var_1 - var_3, var_2);
+    var_5 = _min(var_3 + var_4, var_1);
     self setweaponammoclip(var_0, int(var_5));
     self setweaponammostock(var_0, int(var_2 - var_4));
 
-    if(self _meth_8339()) {
+    if(self isdualwielding()) {
       var_2 = self getweaponammostock(var_0);
       var_3 = self getweaponammoclip(var_0, "left");
-      var_4 = _func_0AF(var_1 - var_3, var_2);
-      var_5 = _func_0AF(var_3 + var_4, var_1);
+      var_4 = _min(var_1 - var_3, var_2);
+      var_5 = _min(var_3 + var_4, var_1);
       self setweaponammoclip(var_0, int(var_5), "left");
       self setweaponammostock(var_0, int(var_2 - var_4));
     }
@@ -1564,7 +1564,7 @@ handleescalationboostafterkill() {
   if(maps\mp\_utility::_hasperk("specialty_quickdraw_new"))
     maps\mp\_utility::_id_0735("specialty_quickdraw_new");
 
-  self _meth_82FF("ui_escalation_active", 0);
+  self setclientomnvar("ui_escalation_active", 0);
 }
 
 setresistancedivisionscramblerindicator() {
@@ -1575,7 +1575,7 @@ setresistancedivisionscramblerindicator() {
     return;
   }
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled() && (!isDefined(self.pers["loadoutContainsAltSwitchWeapon"]) || self.pers["loadoutContainsAltSwitchWeapon"])) {
-    self _meth_82FF("ui_show_division_resistance_ability_prompt", 0);
+    self setclientomnvar("ui_show_division_resistance_ability_prompt", 0);
     maps\mp\_utility::giveperk("specialty_gpsjammer");
     maps\mp\_utility::giveperk("specialty_sixthsense");
     self.pers["resistanceScramblerIndicatorActive"] = undefined;
@@ -1585,29 +1585,29 @@ setresistancedivisionscramblerindicator() {
     if(!isDefined(self.pers["resistanceScramblerIndicatorActive"]))
       self.pers["resistanceScramblerIndicatorActive"] = 1;
 
-    self _meth_82FF("ui_show_division_resistance_ability_prompt", 1);
+    self setclientomnvar("ui_show_division_resistance_ability_prompt", 1);
 
     if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
       if(self.pers["resistanceScramblerIndicatorActive"])
-        self _meth_82FF("ui_resistance_state", 3);
+        self setclientomnvar("ui_resistance_state", 3);
       else
-        self _meth_82FF("ui_resistance_state", 2);
+        self setclientomnvar("ui_resistance_state", 2);
     } else {
       switch (var_0) {
         case "specialty_class_resistance_grandmaster":
         case "specialty_class_resistance_master":
           if(self.pers["resistanceScramblerIndicatorActive"])
-            self _meth_82FF("ui_resistance_state", 3);
+            self setclientomnvar("ui_resistance_state", 3);
           else
-            self _meth_82FF("ui_resistance_state", 2);
+            self setclientomnvar("ui_resistance_state", 2);
 
           break;
         case "specialty_class_resistance_expert":
         case "specialty_class_resistance_enlisted":
           if(self.pers["resistanceScramblerIndicatorActive"])
-            self _meth_82FF("ui_resistance_state", 1);
+            self setclientomnvar("ui_resistance_state", 1);
           else
-            self _meth_82FF("ui_resistance_state", 0);
+            self setclientomnvar("ui_resistance_state", 0);
 
           break;
       }
@@ -1625,17 +1625,17 @@ monitortoggleresistancedivisionscramblerindicator() {
   self notify("stopMonitorToggleResistanceDivisionScramblerIndicator");
   self endon("stopMonitorToggleResistanceDivisionScramblerIndicator");
   var_0 = _id_04CA::_id_461D(self._id_0079);
-  self _meth_82E1("leftDpad", "+actionslot 3");
+  self notifyonplayercommand("leftDpad", "+actionslot 3");
 
   for(;;) {
     self waittill("leftDpad");
 
     if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
       if(self.pers["resistanceScramblerIndicatorActive"]) {
-        self _meth_82FF("ui_resistance_state", 2);
+        self setclientomnvar("ui_resistance_state", 2);
         self.pers["resistanceScramblerIndicatorActive"] = 0;
       } else {
-        self _meth_82FF("ui_resistance_state", 3);
+        self setclientomnvar("ui_resistance_state", 3);
         self.pers["resistanceScramblerIndicatorActive"] = 1;
       }
     } else {
@@ -1643,10 +1643,10 @@ monitortoggleresistancedivisionscramblerindicator() {
         case "specialty_class_resistance_grandmaster":
         case "specialty_class_resistance_master":
           if(self.pers["resistanceScramblerIndicatorActive"]) {
-            self _meth_82FF("ui_resistance_state", 2);
+            self setclientomnvar("ui_resistance_state", 2);
             self.pers["resistanceScramblerIndicatorActive"] = 0;
           } else {
-            self _meth_82FF("ui_resistance_state", 3);
+            self setclientomnvar("ui_resistance_state", 3);
             self.pers["resistanceScramblerIndicatorActive"] = 1;
           }
 
@@ -1654,10 +1654,10 @@ monitortoggleresistancedivisionscramblerindicator() {
         case "specialty_class_resistance_expert":
         case "specialty_class_resistance_enlisted":
           if(self.pers["resistanceScramblerIndicatorActive"]) {
-            self _meth_82FF("ui_resistance_state", 0);
+            self setclientomnvar("ui_resistance_state", 0);
             self.pers["resistanceScramblerIndicatorActive"] = 0;
           } else {
-            self _meth_82FF("ui_resistance_state", 1);
+            self setclientomnvar("ui_resistance_state", 1);
             self.pers["resistanceScramblerIndicatorActive"] = 1;
           }
 
@@ -1728,9 +1728,9 @@ toggleresistancedivisionscramblerindicator(var_0, var_1) {
 unsetresistancedivisionscramblerindicator() {
   self notify("stopMonitorToggleResistanceDivisionScramblerIndicator");
   self notify("toggleResistanceDivisionScramblerIndicator");
-  self _meth_82FF("ui_resistance_state", -1);
-  self _meth_82FF("ui_show_division_resistance_ability_prompt", 0);
-  self _meth_84A7("leftDpad", "+actionslot 3");
+  self setclientomnvar("ui_resistance_state", -1);
+  self setclientomnvar("ui_show_division_resistance_ability_prompt", 0);
+  self notifyonplayercommandremove("leftDpad", "+actionslot 3");
 }
 
 handlegrenadiertrainingunlocks() {
@@ -1811,12 +1811,12 @@ monitorgrenadierprogress() {
   if(!isDefined(self.grenadierprogressfromtime))
     self.grenadierprogressfromtime = 0;
 
-  var_0 = _func_1B1("mp/grenadierUpgradeTable.csv", 0, level.gametype);
+  var_0 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, level.gametype);
 
   if(!isDefined(var_0) || var_0 == -1)
-    var_0 = _func_1B1("mp/grenadierUpgradeTable.csv", 0, "default");
+    var_0 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, "default");
 
-  var_1 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 5)) / 100;
+  var_1 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 5)) / 100;
 
   if(!isDefined(self.previousgrenadiertier))
     self.previousgrenadiertier = 0;
@@ -1835,7 +1835,7 @@ monitorgrenadierprogress() {
         grantgrenadiertierreward(var_3);
 
         if(var_3 == 3 && self._id_0079 == 7) {
-          var_4 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 3));
+          var_4 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 3));
           self.enteredfrenzyloop = 1;
           thread monitorfrenzypoints(var_2 - var_3, var_4);
         }
@@ -1845,11 +1845,11 @@ monitorgrenadierprogress() {
     }
 
     if(self._id_0079 != 7) {
-      self _meth_82FF("ui_grenadier_progress_meter", -1);
+      self setclientomnvar("ui_grenadier_progress_meter", -1);
       return;
     }
 
-    self _meth_82FF("ui_grenadier_progress_meter", var_2);
+    self setclientomnvar("ui_grenadier_progress_meter", var_2);
   }
 }
 
@@ -2028,7 +2028,7 @@ togglegrenadierfrenzy(var_0) {
         maps\mp\_utility::giveperk("specialty_delaymine");
         maps\mp\_utility::giveperk("specialty_shortfuse");
         var_1 = common_scripts\utility::_id_44F5("perception_glow");
-        _func_14D(var_1, self, "j_head", self);
+        _playfxontagforclients(var_1, self, "j_head", self);
         _id_0513::_id_A13B();
         maps\mp\_utility::_id_870F();
         return;
@@ -2044,10 +2044,10 @@ togglegrenadierfrenzy(var_0) {
 }
 
 getgrenadierprogress() {
-  var_0 = _func_1B1("mp/grenadierUpgradeTable.csv", 0, level.gametype);
+  var_0 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, level.gametype);
 
   if(!isDefined(var_0) || var_0 == -1)
-    var_0 = _func_1B1("mp/grenadierUpgradeTable.csv", 0, "default");
+    var_0 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, "default");
 
   var_1 = 0;
   var_2 = 0;
@@ -2055,25 +2055,25 @@ getgrenadierprogress() {
   var_4 = 0;
   var_5 = 0;
 
-  if(self.score < int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 1))) {
+  if(self.score < int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 1))) {
     var_1 = 0;
     var_2 = 0;
-    var_3 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 1));
+    var_3 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 1));
     var_4 = (self.score - var_2) / (var_3 - var_2);
-  } else if(self.score < int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 2))) {
+  } else if(self.score < int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 2))) {
     var_1 = 1;
-    var_2 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 1));
-    var_3 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 2));
+    var_2 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 1));
+    var_3 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 2));
     var_4 = (self.score - var_2) / (var_3 - var_2);
-  } else if(self.score < int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 3))) {
+  } else if(self.score < int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 3))) {
     var_1 = 2;
-    var_2 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 2));
-    var_3 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 3));
+    var_2 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 2));
+    var_3 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 3));
     var_4 = (self.score - var_2) / (var_3 - var_2);
-  } else if(self.score >= int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 3))) {
+  } else if(self.score >= int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 3))) {
     var_1 = 3;
-    var_2 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 3));
-    var_3 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_0, 4));
+    var_2 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 3));
+    var_3 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 4));
     var_6 = (self.score - var_2) / var_3;
     return var_1 + var_6;
   }
@@ -2102,13 +2102,13 @@ monitorfrenzypoints(var_0, var_1) {
 
   self.frenzyscorefromtime = 0;
   self.grenadierworkingtowardfrenzy = 1;
-  var_2 = _func_1B1("mp/grenadierUpgradeTable.csv", 0, level.gametype);
+  var_2 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, level.gametype);
 
   if(!isDefined(var_2) || var_2 == -1)
-    var_2 = _func_1B1("mp/grenadierUpgradeTable.csv", 0, "default");
+    var_2 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, "default");
 
-  var_3 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_2, 4));
-  var_4 = int(_func_1AE("mp/grenadierUpgradeTable.csv", var_2, 5)) / 100;
+  var_3 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_2, 4));
+  var_4 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_2, 5)) / 100;
   self.previousgrenadierfrenzyscore = self.score;
 
   while(self._id_0079 == 7 && self.grenadierfrenzycurrentscore + self.frenzyscorefromtime * var_3 < var_3) {
@@ -2117,7 +2117,7 @@ monitorfrenzypoints(var_0, var_1) {
     var_5 = self.score - self.previousgrenadierfrenzyscore;
     self.grenadierfrenzycurrentscore = self.grenadierfrenzycurrentscore + var_5;
     self.previousgrenadierfrenzyscore = self.score;
-    self _meth_82FF("ui_grenadier_progress_meter", 3 + self.grenadierfrenzycurrentscore / var_3 + self.frenzyscorefromtime);
+    self setclientomnvar("ui_grenadier_progress_meter", 3 + self.grenadierfrenzycurrentscore / var_3 + self.frenzyscorefromtime);
   }
 
   if(self._id_0079 != 7) {
@@ -2125,7 +2125,7 @@ monitorfrenzypoints(var_0, var_1) {
   }
   self.grenadierworkingtowardfrenzy = 0;
   self.previousgrenadierfrenzyscore = 0;
-  self _meth_82FF("ui_grenadier_progress_meter", 4);
+  self setclientomnvar("ui_grenadier_progress_meter", 4);
   togglegrenadierfrenzy(1);
 }
 
@@ -2156,7 +2156,7 @@ runsprintfasterovertime() {
   self endon("sprintFasterOverTime_unset");
 
   for(;;) {
-    if(self _meth_83DD()) {
+    if(self issprinting()) {
       graduallyincreasespeed();
       self.sprintfasterovertimemovespeedscale = undefined;
       _id_0513::_id_A13B();
@@ -2192,10 +2192,10 @@ sprintfasterovertime_monitormovement() {
   self endon("sprintFasterOverTime_unset");
 
   for(;;) {
-    if(!self _meth_83DD() || self _meth_82E5() || !self _meth_8346()) {
+    if(!self issprinting() || self _meth_82E5() || !self isonground()) {
       wait 0.4;
 
-      if(!self _meth_83DD() || self _meth_82E5() || !self _meth_8346()) {
+      if(!self issprinting() || self _meth_82E5() || !self isonground()) {
         self notify("sprintFasterOverTime_reset");
         break;
       }
@@ -2239,8 +2239,8 @@ setregeneratebulletsovertime() {
         if(_id_0513::_id_5696(var_3)) {
           var_5 = self getweaponammostock(var_3);
 
-          if(!maps\mp\_utility::_id_5670(var_3) && self _meth_8338(var_3) < 1) {
-            self setweaponammostock(var_3, var_5 + _func_1A3(var_3));
+          if(!maps\mp\_utility::_id_5670(var_3) && self getfractionmaxammo(var_3) < 1) {
+            self setweaponammostock(var_3, var_5 + _weaponclipsize(var_3));
             var_0 = 1;
           }
         }
@@ -2276,7 +2276,7 @@ setregenerateequipmentovertime() {
     }
 
     wait 10;
-    var_2 = self _meth_834A();
+    var_2 = self getlethalweapon();
 
     if(var_2 != "none") {
       var_1 = self getweaponammoclip(var_2);
@@ -2337,8 +2337,8 @@ setrandomgun() {
   waitframe();
   givenextrandomgun(self getcurrentweapon(), var_0);
   thread watchforweaponpickup();
-  self _meth_82E1("nextRandomWeaponButtonDown", "+weapnext");
-  self _meth_82E1("nextRandomWeaponButtonUp", "-weapnext");
+  self notifyonplayercommand("nextRandomWeaponButtonDown", "+weapnext");
+  self notifyonplayercommand("nextRandomWeaponButtonUp", "-weapnext");
 
   for(;;) {
     self waittill("nextRandomWeaponButtonDown");
@@ -2349,7 +2349,7 @@ setrandomgun() {
     if(var_2 - var_1 > 250) {
       continue;
     }
-    if(isDefined(self._id_2016) && isDefined(self._id_2016._id_201C) && (self._id_2016._id_201C == "iw5_carrydrone_mp" || self._id_2016._id_201C == "relic_mp")) {
+    if(isDefined(self._id_2016) && isDefined(self._id_2016.carryweapon) && (self._id_2016.carryweapon == "iw5_carrydrone_mp" || self._id_2016.carryweapon == "relic_mp")) {
       continue;
     }
     if(_id_028D::_id_5855()) {
@@ -2464,7 +2464,7 @@ getnextrandomgun() {
   if(self.wanderlustgunindex + 3 < var_13.size)
     var_14[var_14.size] = var_13[self.wanderlustgunindex + 3];
 
-  self _meth_8512(var_14);
+  self loadweapons(var_14);
   self.wanderlustprevgunindex = self.wanderlustgunindex;
   self.wanderlustgunindex++;
   return var_15;
@@ -2488,7 +2488,7 @@ givenextrandomgun(var_0, var_1) {
 
   var_3 = gettime();
 
-  while(!self _meth_8512(var_2)) {
+  while(!self loadweapons(var_2)) {
     if(var_3 + 7500 <= gettime()) {
       givenextrandomgun(self getcurrentweapon());
       return;
@@ -2505,12 +2505,12 @@ givenextrandomgun(var_0, var_1) {
     }
   }
 
-  if(self _meth_844A("ui_show_division_sniper_ability_prompt") == 1)
-    self _meth_82FF("ui_show_division_sniper_ability_prompt", 0);
+  if(self getclientomnvar("ui_show_division_sniper_ability_prompt") == 1)
+    self setclientomnvar("ui_show_division_sniper_ability_prompt", 0);
 
   maps\mp\_utility::_giveweapon(var_2);
   thread watchwanderlustweaponchange(var_2);
-  var_8 = _func_1A3(var_2);
+  var_8 = _weaponclipsize(var_2);
   self setweaponammoclip(var_2, var_8);
 
   if(maps\mp\_utility::getweaponclass(var_2) == "weapon_shotgun" && var_8 < 5)
@@ -2543,15 +2543,15 @@ watchwanderlustweaponchange(var_0) {
 unsetrandomgun() {
   self notify("stopRandomGun");
   self notify("giveNextRandomGun");
-  self _meth_84A7("nextRandomWeaponButtonDown", "+weapnext");
-  self _meth_84A7("nextRandomWeaponButtonUp", "-weapnext");
+  self notifyonplayercommandremove("nextRandomWeaponButtonDown", "+weapnext");
+  self notifyonplayercommandremove("nextRandomWeaponButtonUp", "-weapnext");
 }
 
 getattachmentsforweapon(var_0, var_1) {
   if(var_1 <= 0)
     return [];
 
-  var_2 = _func_060(var_0);
+  var_2 = _getweaponattachmentsbasenames(var_0);
   var_2 = common_scripts\utility::array_randomize(var_2);
   var_3 = [];
   var_4 = [];
@@ -2606,10 +2606,10 @@ getattachmentsforweapon(var_0, var_1) {
 
 buildwunderlustweaponlist() {
   var_0 = [];
-  var_1 = _func_27A("mp/statstable.csv");
+  var_1 = _tablegetrowcount("mp/statstable.csv");
 
   for(var_2 = 0; var_2 <= var_1; var_2++) {
-    var_3 = _func_1AE("mp/statstable.csv", var_2, 0);
+    var_3 = _tablelookupbyrow("mp/statstable.csv", var_2, 0);
 
     if(!issubstr(var_3, "weapon_")) {
       continue;
@@ -2617,12 +2617,12 @@ buildwunderlustweaponlist() {
     if(var_3 == "weapon_grenade" || var_3 == "weapon_explosive" || var_3 == "weapon_reticle" || var_3 == "weapon_camo" || var_3 == "weapon_attachment" || var_3 == "weapon_charm" || var_3 == "weapon_class_camo") {
       continue;
     }
-    var_4 = _func_1AE("mp/statstable.csv", var_2, 1);
+    var_4 = _tablelookupbyrow("mp/statstable.csv", var_2, 1);
 
-    if(var_3 == "weapon_other" && _func_117(getsubstr(var_4, 0, 7)) != "weapon_") {
+    if(var_3 == "weapon_other" && _tolower(getsubstr(var_4, 0, 7)) != "weapon_") {
       continue;
     }
-    var_5 = _func_1AE("mp/statstable.csv", var_2, 2);
+    var_5 = _tablelookupbyrow("mp/statstable.csv", var_2, 2);
 
     if(var_5 == "") {
       continue;
@@ -2633,17 +2633,17 @@ buildwunderlustweaponlist() {
     if(issubstr(var_5, "flamethrower") || issubstr(var_5, "tesla") || issubstr(var_5, "riotshield")) {
       continue;
     }
-    var_6 = _func_1AE("mp/statstable.csv", var_2, 18);
+    var_6 = _tablelookupbyrow("mp/statstable.csv", var_2, 18);
 
     if(var_6 == "") {
       continue;
     }
     var_7 = 0;
 
-    if(_func_1AE("mp/statstable.csv", var_2, 53) == "1")
+    if(_tablelookupbyrow("mp/statstable.csv", var_2, 53) == "1")
       var_7 = 1;
 
-    var_8 = _func_1AE("mp/statstable.csv", var_2, 56);
+    var_8 = _tablelookupbyrow("mp/statstable.csv", var_2, 56);
 
     if(!maps\mp\_utility::productionlevelstringtouidvarbool(var_8)) {
       continue;
@@ -2681,10 +2681,10 @@ buildwunderlustweaponlist() {
 
   level.wanderlustweaponlist = var_14;
   var_18 = [];
-  var_19 = _func_27B("mp/attachmentcombos_mtx12.csv");
+  var_19 = _tablegetcolumncount("mp/attachmentcombos_mtx12.csv");
 
   for(var_20 = 0; var_20 < var_19; var_20++) {
-    var_21 = _func_1AE("mp/attachmentcombos_mtx12.csv", 0, var_20);
+    var_21 = _tablelookupbyrow("mp/attachmentcombos_mtx12.csv", 0, var_20);
     var_18[var_21] = var_20;
   }
 
@@ -2695,7 +2695,7 @@ setperkstreaks() {
   if(!isDefined(self.pers["specialist_perkstreak_score"]))
     self.pers["specialist_perkstreak_score"] = 0;
 
-  self _meth_82FF("specialistPoints", self.pers["specialist_perkstreak_score"]);
+  self setclientomnvar("specialistPoints", self.pers["specialist_perkstreak_score"]);
 }
 
 unsetperkstreaks() {}
@@ -2786,7 +2786,7 @@ processspecialistevent(var_0) {
   var_2 = self.pers["specialist_perkstreak_score"];
   var_3 = var_2 + var_1;
   self.pers["specialist_perkstreak_score"] = var_3;
-  self _meth_82FF("specialistPoints", var_3);
+  self setclientomnvar("specialistPoints", var_3);
 
   for(var_4 = 0; var_4 < 4; var_4++) {
     var_5 = getdvarint("specialistBasicTraining" + (var_4 + 1) + "_score");
@@ -2846,7 +2846,7 @@ resetspecialistperkstreak() {
     return;
   }
   self.pers["specialist_perkstreak_score"] = 0;
-  self _meth_82FF("specialistPoints", 0);
+  self setclientomnvar("specialistPoints", 0);
 }
 
 fasterhealthregenkilltrigger() {
@@ -2904,8 +2904,8 @@ handleclassifiedboostaftermultikillorheadshot(var_0) {
         if(_id_0513::_id_5696(var_6)) {
           var_8 = self getweaponammostock(var_6);
 
-          if(!maps\mp\_utility::_id_5670(var_6) && self _meth_8338(var_6) < 1) {
-            self setweaponammostock(var_6, var_8 + _func_1A3(var_6));
+          if(!maps\mp\_utility::_id_5670(var_6) && self getfractionmaxammo(var_6) < 1) {
+            self setweaponammostock(var_6, var_8 + _weaponclipsize(var_6));
             var_3 = 1;
           }
         }
@@ -2920,7 +2920,7 @@ handleclassifiedboostaftermultikillorheadshot(var_0) {
 setclassifiedboostafterreload() {}
 
 unsetclassifiedboostafterreload() {
-  self _meth_82FF("ui_classifiedboost_active", 0);
+  self setclientomnvar("ui_classifiedboost_active", 0);
   self.classifiedboostafterreloadactive = 0;
 }
 
@@ -2930,7 +2930,7 @@ handleclassifiedboostafterreload() {
   self endon("disconnect");
   self notify("classifiedBoostAfterReload");
   self endon("classifiedBoostAfterReload");
-  self _meth_82FF("ui_classifiedboost_active", 1);
+  self setclientomnvar("ui_classifiedboost_active", 1);
   self.classifiedboostafterreloadactive = 1;
   var_0 = maps\mp\_utility::_hasperk("specialty_rof");
 
@@ -2950,7 +2950,7 @@ handleclassifiedboostafterreload() {
   if(maps\mp\_utility::_hasperk("specialty_bulletaccuracy") && !var_1)
     maps\mp\_utility::_id_0735("specialty_bulletaccuracy");
 
-  self _meth_82FF("ui_classifiedboost_active", 0);
+  self setclientomnvar("ui_classifiedboost_active", 0);
   self.classifiedboostafterreloadactive = 0;
 }
 
@@ -3044,7 +3044,7 @@ handleserumbasictraining() {
       var_3 = gettime();
       self.pers["basicTrainingSerumEarnTimeRemaining"] = self.pers["basicTrainingSerumEarnTimeRemaining"] - max(0, var_3 - var_2);
       self.pers["basicTrainingSerumEarnProgress"] = max(0, 1 - self.pers["basicTrainingSerumEarnTimeRemaining"] / level.serumbasictrainingcooldowninterval);
-      self _meth_82FF("ks_count1", self.pers["basicTrainingSerumEarnProgress"]);
+      self setclientomnvar("ks_count1", self.pers["basicTrainingSerumEarnProgress"]);
       var_2 = var_3;
       wait 0.15;
     }

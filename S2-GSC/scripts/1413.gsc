@@ -28,8 +28,8 @@ _id_8F7E(var_0, var_1, var_2, var_3, var_4) {
     var_5 _id_0547::_id_AC41(var_1, (0, 0, 8));
 
   var_5._id_9D65 _meth_86C1(1);
-  var_5._id_65F9 = _func_2A8(level._effect[var_6], var_5, "tag_origin");
-  _func_14C(var_5._id_65F9);
+  var_5._id_65F9 = _spawnlinkedfx(level._effect[var_6], var_5, "tag_origin");
+  _triggerfx(var_5._id_65F9);
   var_5._id_6949 = var_4;
   var_5 thread _id_A663();
   return var_5;
@@ -79,7 +79,7 @@ _id_A663() {
 
     _id_0547::_id_AC40();
     var_0 thread _id_3481(self._id_6949);
-    self _meth_805C();
+    self hide();
     var_0 _id_8555(self._id_6949);
     self delete();
     level notify("player grabbed uber battery");
@@ -107,11 +107,11 @@ _id_42F2(var_0) {
 
   while(isDefined(self)) {
     if(common_scripts\utility::_id_562E(level.usenavmeshforuber)) {
-      if(self _meth_8346() && _func_2E6(self.origin)) {
+      if(self isonground() && _func_2E6(self.origin)) {
         var_0._id_A269 = self.origin;
         thread maps\mp\_utility::_id_33DF(var_0._id_A269, 8, 3, (1, 0, 0));
       }
-    } else if(self _meth_8346())
+    } else if(self isonground())
       var_0._id_A269 = self.origin;
 
     wait 0.15;
@@ -128,7 +128,7 @@ _id_8555(var_0) {
   self.isswitchingtoblimppart = 1;
   self._id_56A5 = 1;
   self._id_2927 = var_0;
-  self._id_6A54 = self _meth_8317();
+  self._id_6A54 = self getcurrentprimaryweapon();
   var_1 = [];
   var_2 = _id_057E::_id_314D(self);
 
@@ -139,11 +139,11 @@ _id_8555(var_0) {
   _id_0586::_id_078C("blimp_battery_zm");
   _id_0586::_id_078E("blimp_battery_zm");
   _id_0378::_id_8D74("aud_zmb_uberschnell_pickup");
-  self _meth_8326();
-  self _meth_8113(0);
-  self _meth_8305(0);
+  self disableweaponswitch();
+  self allowcrouch(0);
+  self allowjump(0);
   self waittill("weapon_change");
-  self _meth_8327();
+  self enableweaponswitch();
   thread _id_A8B0(var_1);
 }
 
@@ -154,7 +154,7 @@ _id_A8B0(var_0) {
     self endon("death");
 
   var_1 = _id_A664();
-  _id_8553(var_1, var_0);
+  deleteonhostmigration(var_1, var_0);
 }
 
 _id_A664() {
@@ -168,7 +168,7 @@ _id_A664() {
   self.isswitchingtoblimppart = 0;
   self notify("uber_gained");
   self waittill("uber_lost", var_0);
-  self _meth_8113(1);
+  self allowcrouch(1);
   var_1 = 1;
 
   switch (var_0) {
@@ -192,7 +192,7 @@ _id_A6DD() {
   common_scripts\utility::_id_A70A("weapon_change", "weapon_switch_started", "enter_last_stand");
 
   if(maps\mp\_utility::_id_4571() == "mp_zombie_descent") {
-    while(!self _meth_8346())
+    while(!self isonground())
       waitframe();
   }
 
@@ -220,7 +220,7 @@ _id_9E12(var_0) {
     return 0;
 }
 
-_id_8553(var_0, var_1) {
+deleteonhostmigration(var_0, var_1) {
   _id_95CE(var_1);
 
   if(var_0) {
@@ -290,7 +290,7 @@ _id_95CE(var_0) {
   self.isswitchingtoblimppart = 0;
   _id_0586::_id_0790("blimp_battery_zm");
   _id_0586::_id_078E(self._id_6A54);
-  self _meth_8305(1);
+  self allowjump(1);
 
   for(var_1 = 0; var_1 < var_0.size; var_1++)
     _id_0586::_id_078C(var_0[var_1]);
@@ -300,7 +300,7 @@ _id_A65A() {
   self endon("disconnect");
   self endon("death");
 
-  while(!self _meth_8346())
+  while(!self isonground())
     waitframe();
 
   return self.origin;

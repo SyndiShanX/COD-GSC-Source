@@ -4,7 +4,7 @@
 **************************************/
 
 init() {
-  _id_0547::_id_7BD0("tesla_shock", ::_id_8316, undefined, 5, ::_id_8315);
+  _id_0547::_id_7BD0("tesla_shock", ::getcurrentweapon, undefined, 5, ::takeallweapons);
   common_scripts\utility::_id_092C("shock", "vfx/sparks/tesla_stun_sparks");
   common_scripts\utility::_id_092C("head_sparks", "vfx/sparks/microwave_grenade_sparks_char_1");
   _id_054D::_id_7BC6(::_id_98EC);
@@ -66,7 +66,7 @@ _id_98EC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   if(!isDefined(var_5)) {
     return;
   }
-  var_12 = _func_05F(var_5);
+  var_12 = _getweaponbasename(var_5);
 
   if(!isDefined(var_12)) {
     return;
@@ -95,7 +95,7 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(isDefined(var_6) && issubstr(var_6, "teslagun_pap_zm"))
       var_8 = 6000;
 
-    var_7 _meth_8059(var_8, var_0, var_4, var_7, var_5, var_6);
+    var_7 dodamage(var_8, var_0, var_4, var_7, var_5, var_6);
     return;
   }
 
@@ -104,7 +104,7 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7._id_98FE = _id_4385();
 
   if(var_7 maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
-    var_7 _meth_8059(var_7.health + 10, var_0, var_4, var_7, var_5, "dot_generic_zm");
+    var_7 dodamage(var_7.health + 10, var_0, var_4, var_7, var_5, "dot_generic_zm");
     return;
   }
 
@@ -126,7 +126,7 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_10 = level._id_98F5;
   wait(var_10._id_0F43);
   var_11 = var_10._id_78CA - var_10._id_78C4 * var_3;
-  var_12 = _func_0DA(var_11);
+  var_12 = _squared(var_11);
 
   if(var_11 <= 0 || var_3 >= var_10._id_6042) {
     return;
@@ -153,12 +153,12 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     var_17 = "j_head";
 
-    if(-1 == var_16 _meth_8445(var_17))
+    if(-1 == var_16 gettagindex(var_17))
       var_17 = "j_spine4";
 
     var_18 = var_16 gettagorigin(var_17);
 
-    if(!_func_07E(var_13, var_18, 0, var_7)) {
+    if(!_bullettracepassed(var_13, var_18, 0, var_7)) {
       continue;
     }
     var_2._id_4DCD++;
@@ -171,7 +171,7 @@ play_shock_fx(var_0, var_1, var_2) {
   self endon("death");
 
   for(var_3 = 0; var_3 < var_2; var_3 = var_3 + 0.35) {
-    _func_147(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
     wait 0.35;
   }
 }
@@ -191,7 +191,7 @@ _id_9901(var_0) {
     var_1 = var_0;
 
   var_2 = self;
-  var_2._id_98F0 = _id_4385() + var_1 + _func_0A5(0.1, 0.6);
+  var_2._id_98F0 = _id_4385() + var_1 + _randomfloatrange(0.1, 0.6);
 }
 
 _id_98FF(var_0, var_1) {
@@ -200,7 +200,7 @@ _id_98FF(var_0, var_1) {
   if(_id_0547::_id_5565(var_2._id_0A4B, "zombie_fireman") || var_2 maps\mp\agents\humanoid\_humanoid_util::_id_56BC() || common_scripts\utility::_id_562E(var_2.isteslastunimmune))
     var_2 thread _id_98EE(var_0, var_1.player, var_1._id_8CD7, var_1._id_953E, 0);
   else {
-    var_3 = _id_8317(var_0, var_1.player);
+    var_3 = getcurrentprimaryweapon(var_0, var_1.player);
     var_2 thread _id_0547::_id_7D1A("tesla_shock", [var_3], 4);
   }
 }
@@ -224,10 +224,10 @@ _id_98EE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_8 = var_5;
 
   foreach(var_10 in ["j_head", "j_spine4"]) {
-    if(-1 == var_7 _meth_8445(var_10)) {
+    if(-1 == var_7 gettagindex(var_10)) {
       continue;
     }
-    _func_147(common_scripts\utility::_id_44F5(var_8), var_7, var_10);
+    _playfxontag(common_scripts\utility::_id_44F5(var_8), var_7, var_10);
     break;
   }
 
@@ -245,7 +245,7 @@ _id_98EE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_3))
     var_3 = "teslagun_zm";
 
-  var_7 _meth_8059(var_12, var_0, var_1, var_7, var_2, var_3);
+  var_7 dodamage(var_12, var_0, var_1, var_7, var_2, var_3);
 }
 
 _id_4382() {
@@ -254,7 +254,7 @@ _id_4382() {
 
 _id_98E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = _id_0547::_id_408F();
-  var_8 = _func_0DA(var_1);
+  var_8 = _squared(var_1);
 
   if(isDefined(var_3))
     var_7 = common_scripts\utility::_id_0F93(var_7, var_3);
@@ -267,7 +267,7 @@ _id_98E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   radiusdamage(var_0, var_1, _id_4382(), _id_4382(), var_2, "MOD_ENERGY", var_4);
-  _func_176(var_0, var_1, 0, 1.7);
+  _physicsexplosioncylinder(var_0, var_1, 0, 1.7);
 }
 
 _id_98FA(var_0, var_1, var_2, var_3, var_4) {
@@ -289,7 +289,7 @@ _id_98F7(var_0) {
   var_2 = undefined;
 
   foreach(var_4 in ["j_head", "j_spine4"]) {
-    if(-1 == var_0 _meth_8445(var_4)) {
+    if(-1 == var_0 gettagindex(var_4)) {
       continue;
     }
     var_2 = var_4;
@@ -326,7 +326,7 @@ _id_98FC() {
       if(isDefined(var_5._id_8303))
         var_6 = var_5._id_8303;
 
-      if(_func_0E1(var_5.origin, var_0.origin) > var_6 + var_1) {
+      if(_distance2d(var_5.origin, var_0.origin) > var_6 + var_1) {
         continue;
       }
       var_7 = 70;
@@ -406,7 +406,7 @@ tesla_ammo_tracker(var_0) {
   for(;;) {
     common_scripts\utility::_id_A70C(self, "missile_fire", level, "maxAmmoPickup", self, "heavyMeleeClip_earned");
 
-    if(self _meth_8319(var_0)) {
+    if(self hasweapon(var_0)) {
       self._id_A2AF[var_0] = self getweaponammostock(var_0);
       self._id_A2B0[var_0] = self getweaponammoclip(var_0);
     }
@@ -418,7 +418,7 @@ tesla_drop_watcher(var_0, var_1, var_2) {
     var_2 = 1;
 
   for(;;) {
-    var_3 = var_0 common_scripts\utility::_id_A715("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
+    var_3 = var_0 common_scripts\utility::waittill_any_return("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
 
     if(var_3 == "weapon_change") {
       if(_id_0547::_id_577E(var_0))
@@ -477,7 +477,7 @@ tesla_variant_set_taken(var_0, var_1) {
 }
 
 _id_5533(var_0) {
-  if(!_func_031(var_0))
+  if(!_isstring(var_0))
     return 0;
 
   return issubstr(var_0, "teslagun");
@@ -494,7 +494,7 @@ _id_43B4() {
 }
 
 _id_563A(var_0) {
-  if(!_func_031(var_0))
+  if(!_isstring(var_0))
     return 0;
 
   return common_scripts\utility::_id_0F79(_id_43B4(), var_0);
@@ -531,7 +531,7 @@ _id_98EA(var_0, var_1, var_2, var_3, var_4) {
   level thread _id_98EB(var_0, var_1, var_2, var_3, var_4);
 }
 
-_id_8317(var_0, var_1, var_2, var_3) {
+getcurrentprimaryweapon(var_0, var_1, var_2, var_3) {
   var_4 = spawnStruct();
   var_4._id_29A8 = var_0;
   var_4.player = var_1;
@@ -540,7 +540,7 @@ _id_8317(var_0, var_1, var_2, var_3) {
   return var_4;
 }
 
-_id_8316(var_0) {
+getcurrentweapon(var_0) {
   var_1 = self;
   var_1 endon("death");
   var_1._id_98EF = 1;
@@ -553,7 +553,7 @@ _id_8316(var_0) {
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_2);
 
   if(isDefined(var_3)) {
-    thread maps\mp\agents\humanoid\_humanoid_util::_id_8318(self.origin, self.angles, var_3, undefined, 0, undefined, 1, 1, undefined, "stop_shock");
+    thread maps\mp\agents\humanoid\_humanoid_util::getcurrentoffhand(self.origin, self.angles, var_3, undefined, 0, undefined, 1, 1, undefined, "stop_shock");
     var_1 _id_9901(var_0._id_8365);
 
     for(;;) {
@@ -568,7 +568,7 @@ _id_8316(var_0) {
   }
 }
 
-_id_8315(var_0) {
+takeallweapons(var_0) {
   var_1 = self;
   var_1._id_98EF = 0;
   var_1 notify("stop_shock");

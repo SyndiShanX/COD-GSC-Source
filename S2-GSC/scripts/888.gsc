@@ -29,25 +29,25 @@ _id_A8E4() {
 
       if(getdvarint("e3_trailer_submix", 0) == 0) {
         foreach(var_1 in level.players) {
-          var_1 _meth_8628(0.5);
+          var_1 clientclearallsubmixes(0.5);
           waitframe();
-          var_1 _meth_8626("mp_init_mix");
+          var_1 clientaddsoundsubmix("mp_init_mix");
         }
       } else if(getdvarint("e3_trailer_submix", 0) == 1) {
         foreach(var_1 in level.players) {
-          var_1 _meth_8628(0.5);
+          var_1 clientclearallsubmixes(0.5);
           waitframe();
-          var_1 _meth_8626("mp_init_mix");
+          var_1 clientaddsoundsubmix("mp_init_mix");
           waitframe();
-          var_1 _meth_8626("mp_e3_trailer_mix_no_vox");
+          var_1 clientaddsoundsubmix("mp_e3_trailer_mix_no_vox");
         }
       } else if(getdvarint("e3_trailer_submix", 0) == 2) {
         foreach(var_1 in level.players) {
-          var_1 _meth_8628(0.5);
+          var_1 clientclearallsubmixes(0.5);
           waitframe();
-          var_1 _meth_8626("mp_init_mix");
+          var_1 clientaddsoundsubmix("mp_init_mix");
           waitframe();
-          var_1 _meth_8626("mp_e3_trailer_mix_vox");
+          var_1 clientaddsoundsubmix("mp_e3_trailer_mix_vox");
         }
       }
     }
@@ -84,7 +84,7 @@ _id_8D75() {
 
 _id_8DC7(var_0, var_1) {
   _id_8D14(isDefined(level._id_071D), "Need to call snd_message_init( ) before calling this function.");
-  _id_8D14(_func_0C0(level._id_071D._id_611B));
+  _id_8D14(_isarray(level._id_071D._id_611B));
   level._id_071D._id_611B[var_0] = var_1;
 }
 
@@ -102,7 +102,7 @@ _id_8D84(var_0, var_1, var_2) {
 
 _id_8D74(var_0, var_1, var_2, var_3) {
   _id_8D14(isDefined(level._id_071D), "Need to call snd_message_init( ) before calling this function.");
-  _id_8D14(_func_0C0(level._id_071D._id_611B));
+  _id_8D14(_isarray(level._id_071D._id_611B));
 
   if(isDefined(level._id_071D._id_611B[var_0])) {
     if(isDefined(var_3))
@@ -160,7 +160,7 @@ set_max_breath_lev_num(var_0) {
   self _meth_85A7("set_max_breath_lev_num", var_0);
 }
 
-_id_851F(var_0) {
+sethidetrigger(var_0) {
   self _meth_85A7("set_max_plr_speed", var_0);
 }
 
@@ -191,7 +191,7 @@ _id_1BBD() {
   var_0 = 0;
   var_1 = self._id_20D8;
 
-  if(self _meth_843D())
+  if(self hasfemalecustomizationmodel())
     var_0 = 1;
 
   if(isDefined(var_1)) {
@@ -226,7 +226,7 @@ _id_8DF7(var_0) {
 _id_8DF8(var_0) {
   var_1 = 1;
 
-  if(!_func_0C0(var_0))
+  if(!_isarray(var_0))
     var_1 = 0;
   else {
     foreach(var_3 in var_0) {
@@ -267,7 +267,7 @@ _id_8D86() {
 }
 
 _id_8D72(var_0, var_1) {
-  return _func_22D(var_0, var_1);
+  return _piecewiselinearlookup(var_0, var_1);
 }
 
 _id_8D73(var_0, var_1, var_2, var_3) {
@@ -276,7 +276,7 @@ _id_8D73(var_0, var_1, var_2, var_3) {
   _id_8D14(var_2 != var_1);
   var_4 = (var_0 - var_1) / (var_2 - var_1);
   var_4 = clamp(var_4, 0.0, 1.0);
-  return _func_22D(var_4, var_3);
+  return _piecewiselinearlookup(var_4, var_3);
 }
 
 _id_8DCB(var_0, var_1, var_2) {
@@ -301,13 +301,13 @@ _id_8D49(var_0, var_1) {
 }
 
 _id_8D1B(var_0) {
-  return _func_0A3(1.0) < _id_8D49(0.5, var_0);
+  return _randomfloat(1.0) < _id_8D49(0.5, var_0);
 }
 
 _id_8DEB(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = self;
   var_7 = var_0 + "_line_emitter_" + _id_8D86();
-  _id_8D14(_func_344(var_0));
+  _id_8D14(_soundexists(var_0));
   _id_8D14(isDefined(var_1));
   _id_8D14(isDefined(var_2));
   var_3 = max(_id_8D49(0.1, var_3), 0);
@@ -324,8 +324,8 @@ _id_8DEB(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_8DEE(var_0) {
-  _id_8D14(_func_031(var_0));
-  _id_8D14(_func_0C0(level._id_071D._id_5D87));
+  _id_8D14(_isstring(var_0));
+  _id_8D14(_isarray(level._id_071D._id_5D87));
 
   if(isDefined(level._id_071D._id_5D87[var_0])) {
     _func_307(level.players, "snd_stop_line_emitter", var_0);
@@ -341,9 +341,9 @@ _id_8DA7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(getdvarint("snd_debug"))
     _id_8D14(0, "snd_play_loop_at() IS OBSOLETE - DO NOT USE");
 
-  _id_8D14(_func_031(var_0));
+  _id_8D14(_isstring(var_0));
   _id_8D14(isDefined(var_1));
-  _id_8D14(_func_031(var_2));
+  _id_8D14(_isstring(var_2));
   var_1 = _id_8D49((0, 0, 0), var_1);
   var_7 = _id_8D49(0.0, var_3);
   var_8 = _id_8D49(0.1, var_4);
@@ -366,9 +366,9 @@ _id_8DAA(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(getdvarint("snd_debug"))
     _id_8D14(0, "snd_play_loop_on() IS OBSOLETE - DO NOT USE");
 
-  _id_8D14(_func_031(var_0));
+  _id_8D14(_isstring(var_0));
   _id_8D14(isDefined(var_1));
-  _id_8D14(_func_031(var_2));
+  _id_8D14(_isstring(var_2));
   var_6 = _id_8D49(0.0, var_3);
   var_7 = _id_8D49(0.1, var_4);
   var_8 = _id_8D49(1.0, var_5);
@@ -466,32 +466,32 @@ _id_7209(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
 _id_8D0B(var_0) {
   foreach(var_2 in level.players)
-  var_2 _meth_8626(var_0);
+  var_2 clientaddsoundsubmix(var_0);
 }
 
 _id_8D18(var_0) {
   foreach(var_2 in level.players)
-  var_2 _meth_8627(var_0);
+  var_2 clientclearsoundsubmix(var_0);
 }
 
 _id_8D0C(var_0, var_1) {
   if(!isDefined(var_1))
     var_1 = level.players;
-  else if(!_func_0C0(var_1))
+  else if(!_isarray(var_1))
     var_1 = [var_1];
 
   foreach(var_3 in var_1)
-  var_3 _meth_8626(var_0);
+  var_3 clientaddsoundsubmix(var_0);
 }
 
 _id_8D19(var_0, var_1) {
   if(!isDefined(var_1))
     var_1 = level.players;
-  else if(!_func_0C0(var_1))
+  else if(!_isarray(var_1))
     var_1 = [var_1];
 
   foreach(var_3 in var_1)
-  var_3 _meth_8627(var_0);
+  var_3 clientclearsoundsubmix(var_0);
 }
 
 _id_307C(var_0, var_1, var_2) {
@@ -528,7 +528,7 @@ _id_307E(var_0, var_1, var_2, var_3, var_4) {
   var_7 = undefined;
 
   if(isDefined(var_1)) {
-    if(_func_0C0(var_1))
+    if(_isarray(var_1))
       var_7 = var_1;
     else
       var_7 = [var_1];
@@ -536,7 +536,7 @@ _id_307E(var_0, var_1, var_2, var_3, var_4) {
 
   var_11 = var_5 _id_3080(var_0, var_6, var_7, var_2, var_3);
 
-  if(_func_031(var_4))
+  if(_isstring(var_4))
     var_5 thread _id_308A(var_6, var_11, var_4);
   else
     var_6 waittill(var_11);

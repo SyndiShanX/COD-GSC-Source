@@ -43,7 +43,7 @@ init_dogfight_submix() {
 }
 
 fighter_spawn() {
-  var_0 = self _meth_8251();
+  var_0 = self getvehicleowner();
   var_0 _id_02F2::_id_8A9D("mp_dogfight");
   self._id_11CB = spawnStruct();
   self._id_11CB._id_0CAC = 0;
@@ -68,7 +68,7 @@ p47_watch_game_end(var_0, var_1) {
 
 _id_6DBE() {
   wait 0.4;
-  var_0 = self _meth_8251();
+  var_0 = self getvehicleowner();
 
   if(!isDefined(var_0)) {
     return;
@@ -89,7 +89,7 @@ _id_6DBE() {
 }
 
 main_engine_loop(var_0) {
-  var_1 = self _meth_8251();
+  var_1 = self getvehicleowner();
 
   if(!isDefined(var_1)) {
     return;
@@ -182,7 +182,7 @@ main_engine_loop(var_0) {
 }
 
 _id_1585(var_0, var_1) {
-  var_2 = self _meth_8251();
+  var_2 = self getvehicleowner();
 
   if(!isDefined(var_2)) {
     return;
@@ -215,19 +215,19 @@ _id_1585(var_0, var_1) {
 
   while(isDefined(self) == 1) {
     var_26 = self.angles[2];
-    var_27 = _func_0AE(var_26);
-    var_28 = _func_0AE(self.angles[0]);
+    var_27 = _abs(var_26);
+    var_28 = _abs(self.angles[0]);
     var_29 = var_2 getnormalizedmovementx();
-    var_30 = _id_02EF::_id_8086(var_27, var_6, var_19, 0.0, 1);
+    var_30 = _id_02EF::startignoringspotlight(var_27, var_6, var_19, 0.0, 1);
     var_31 = var_30;
 
     if(isDefined(var_16))
-      var_17 = _func_0AE(var_26 - var_16);
+      var_17 = _abs(var_26 - var_16);
 
     if(isDefined(var_11))
-      var_14 = _func_0AE(var_28 - var_11);
+      var_14 = _abs(var_28 - var_11);
 
-    var_32 = _id_02EF::_id_8086(var_14, 0, 1.5, 0, 1);
+    var_32 = _id_02EF::startignoringspotlight(var_14, 0, 1.5, 0, 1);
 
     if(var_27 >= var_6) {
       if(var_17 > 8 && var_18 > 20) {
@@ -318,9 +318,9 @@ _id_1585(var_0, var_1) {
       self._id_11CB.hard_bank = 0;
 
     if(isDefined(self._id_11CB._id_05C4)) {
-      var_33 = _id_02EF::_id_8086(var_30, 0, 1, 0.05, 1);
+      var_33 = _id_02EF::startignoringspotlight(var_30, 0, 1, 0.05, 1);
       _id_0380::_id_684E(self._id_11CB._id_05C4, var_33, 0.05);
-      var_34 = _id_02EF::_id_8086(self._id_11CB.engine_pitch_multiplier, 0.8, 1.6, 0.9, 1.3);
+      var_34 = _id_02EF::startignoringspotlight(self._id_11CB.engine_pitch_multiplier, 0.8, 1.6, 0.9, 1.3);
       _id_0380::_id_684D(self._id_11CB._id_05C4, var_34, 0.05);
     }
 
@@ -362,9 +362,9 @@ _id_AA25(var_0) {
 }
 
 _id_6DD0() {
-  var_0 = self _meth_8251();
+  var_0 = self getvehicleowner();
 
-  if(_func_1EF(var_0)) {
+  if(_isagent(var_0)) {
     return;
   }
   self notify("handle_p47_firing_loop");
@@ -436,7 +436,7 @@ raid_flyby_watcher(var_0) {
         if(self.plane_data[var_21].approachspeed > var_8 && self.plane_data[var_21].closeoneshotstarted == 0 && self.plane_data[var_21].closetimer >= var_10) {
           self.plane_data[var_21].closeoneshotstarted = 1;
           self.plane_data[var_21].closetimer = 0;
-          var_14 = common_scripts\utility::within_fov(self.origin, self.angles, var_22.origin, _func_0A7(45));
+          var_14 = common_scripts\utility::within_fov(self.origin, self.angles, var_22.origin, _cos(45));
 
           if(isDefined(var_14) && var_14 == 0)
             var_11 = var_11 * var_13;
@@ -518,8 +518,8 @@ close_loop_death_watcher(var_0) {
 
 fighter_start_death(var_0) {
   self notify("stop_damage_engine_loop");
-  var_0 _id_02F2::_id_8001("husky_player_death_pop");
-  var_0 _id_02F2::_id_8001("husky_player_death_spin", "final_explosion");
+  var_0 _id_02F2::setturretdismountorg("husky_player_death_pop");
+  var_0 _id_02F2::setturretdismountorg("husky_player_death_spin", "final_explosion");
 }
 
 fighter_final_explosion(var_0) {
@@ -529,7 +529,7 @@ fighter_final_explosion(var_0) {
 }
 
 fighter_damage_state_change(var_0) {
-  var_1 = self _meth_8251();
+  var_1 = self getvehicleowner();
 
   if(var_0 == 0) {
     common_scripts\utility::_id_3C7B("damage_state_1");
@@ -539,8 +539,8 @@ fighter_damage_state_change(var_0) {
   if(var_0 == 1) {
     if(!common_scripts\utility::_id_3C77("damage_state_1")) {
       common_scripts\utility::flag_set("damage_state_1");
-      _id_02F2::_id_8001("husky_player_damage_oneshot");
-      self._id_11CB.engine_damage_loop = _id_02F2::_id_8004("blg_p47_engine_damage_plr_lp", "stop_damage_engine_loop", 0, 0);
+      _id_02F2::setturretdismountorg("husky_player_damage_oneshot");
+      self._id_11CB.engine_damage_loop = _id_02F2::playershow("blg_p47_engine_damage_plr_lp", "stop_damage_engine_loop", 0, 0);
     }
 
     if(common_scripts\utility::_id_3C77("damage_state_2")) {
@@ -551,18 +551,18 @@ fighter_damage_state_change(var_0) {
 
   if(var_0 == 2 && !common_scripts\utility::_id_3C77("damage_state_2")) {
     common_scripts\utility::flag_set("damage_state_2");
-    _id_02F2::_id_8001("husky_player_damage_oneshot");
+    _id_02F2::setturretdismountorg("husky_player_damage_oneshot");
   }
 }
 
 getnormalizedmovementx() {
-  if(_func_1EF(self)) {
+  if(_isagent(self)) {
     var_0 = self _meth_85E2();
 
     if(!isDefined(var_0))
       return 0;
 
-    var_1 = var_0 _meth_8283();
+    var_1 = var_0 vehicle_getspeed();
 
     if(!isDefined(self.mph_upper) || var_1 > self.mph_upper)
       self.mph_upper = var_1;
@@ -582,5 +582,5 @@ getnormalizedmovementx() {
     return var_4;
     return;
   } else
-    return self _meth_82F9()[0];
+    return self getnormalizedmovement()[0];
 }

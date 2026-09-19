@@ -109,7 +109,7 @@ _id_35BE(var_0) {
         else
           var_3 = "elevator_called";
 
-        if(_func_031(var_3) && var_3 == "elevator_called" && self._id_64D2 != _id_4128()) {
+        if(_isstring(var_3) && var_3 == "elevator_called" && self._id_64D2 != _id_4128()) {
           self._id_3876 = "[B]";
           break;
         }
@@ -235,7 +235,7 @@ _id_4199(var_0) {
     return;
   }
 
-  var_0 _meth_832A("elevator_floor_selector");
+  var_0 openpopupmenu("elevator_floor_selector");
   var_0 setclientdvar("player_current_floor", _id_4128());
 
   for(;;) {
@@ -283,7 +283,7 @@ _id_35CB() {
   var_0 = _id_41CD();
 
   if(level._id_35C8 && isDefined(var_0))
-    var_0 _meth_861D("elev_musak_loop");
+    var_0 playloopsound("elev_musak_loop");
 
   thread _id_5DCD("closing_inner_doors");
   thread _id_5DCD("opening_inner_doors");
@@ -315,14 +315,14 @@ _id_5DCD(var_0) {
 
     if(var_0 == "elevator_moving") {
       var_1 playSound("elev_run_start");
-      var_1 _meth_861D("elev_run_loop");
+      var_1 playloopsound("elev_run_loop");
     }
 
     if(var_0 == "interrupted")
       var_1 playSound("elev_door_interupt");
 
     if(var_0 == "elevator_moved") {
-      var_1 _meth_8612("elev_run_loop");
+      var_1 stoploopsound("elev_run_loop");
       var_1 playSound("elev_run_end");
       var_1 playSound("elev_bell_ding");
     }
@@ -346,15 +346,15 @@ _id_35C7(var_0) {
   var_1 = _id_41CB();
   var_2 = self._id_3532["floor" + var_0 + "_pos"] - var_1.origin;
   var_3 = level._id_35CC;
-  var_4 = _func_0AE(distance(self._id_3532["floor" + var_0 + "_pos"], var_1.origin));
+  var_4 = _abs(distance(self._id_3532["floor" + var_0 + "_pos"], var_1.origin));
   var_5 = var_4 / var_3;
-  var_1 _meth_82B1(var_1.origin + var_2, var_5, var_5 * level._id_35B4, var_5 * level._id_35BB);
+  var_1 moveto(var_1.origin + var_2, var_5, var_5 * level._id_35B4, var_5 * level._id_35BB);
 
   foreach(var_7 in _id_41C5()) {
     var_8 = var_7.origin + var_2;
 
     if(!issubstr(var_7.classname, "trigger_")) {
-      var_7 _meth_82B1(var_8, var_5, var_5 * level._id_35B4, var_5 * level._id_35BB);
+      var_7 moveto(var_8, var_5, var_5 * level._id_35B4, var_5 * level._id_35BB);
       continue;
     }
 
@@ -375,10 +375,10 @@ _id_2437() {
   var_3 = _id_41C6();
   var_4 = (var_3[0], var_3[1], var_2.origin[2]);
   var_5 = level._id_35C1;
-  var_6 = _func_0AE(distance(var_0.origin, var_4));
+  var_6 = _abs(distance(var_0.origin, var_4));
   var_7 = var_6 / var_5;
-  var_0 _meth_82B1(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
-  var_1 _meth_82B1(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_0 moveto(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_1 moveto(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
   _id_A73D(var_0, var_4, var_1, var_4);
   self notify("closed_inner_doors");
 }
@@ -394,10 +394,10 @@ _id_6BEC() {
   var_5 = (var_3[0], var_3[1], var_2.origin[2]);
   var_6 = (var_4[0], var_4[1], var_2.origin[2]);
   var_7 = level._id_35C1;
-  var_8 = _func_0AE(distance(var_5, var_6) * 0.5);
+  var_8 = _abs(distance(var_5, var_6) * 0.5);
   var_9 = var_8 / var_7 * 0.5;
-  var_0 _meth_82B1(var_5, var_9, var_9 * 0.1, var_9 * 0.25);
-  var_1 _meth_82B1(var_6, var_9, var_9 * 0.1, var_9 * 0.25);
+  var_0 moveto(var_5, var_9, var_9 * 0.1, var_9 * 0.25);
+  var_1 moveto(var_6, var_9, var_9 * 0.1, var_9 * 0.25);
   _id_A73D(var_0, var_5, var_1, var_6);
   self notify("opened_inner_doors");
 }
@@ -411,10 +411,10 @@ _id_2439(var_0) {
   var_3 = _id_4273(var_0);
   var_4 = _id_426F(var_0);
   var_5 = level._id_35C9;
-  var_6 = _func_0AE(distance(var_3, var_4));
+  var_6 = _abs(distance(var_3, var_4));
   var_7 = var_6 / var_5;
-  var_1 _meth_82B1(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
-  var_2 _meth_82B1(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_1 moveto(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_2 moveto(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
   _id_A73D(var_1, var_4, var_2, var_4);
   self notify("closed_floor_" + var_0 + "_outer_doors");
 }
@@ -429,10 +429,10 @@ _id_6BEE(var_0) {
   var_4 = _id_4275(var_0);
   var_5 = _id_426F(var_0);
   var_6 = level._id_35C9;
-  var_7 = _func_0AE(distance(var_3, var_5));
+  var_7 = _abs(distance(var_3, var_5));
   var_8 = var_7 / var_6 * 0.5;
-  var_1 _meth_82B1(var_3, var_8, var_8 * 0.1, var_8 * 0.25);
-  var_2 _meth_82B1(var_4, var_8, var_8 * 0.1, var_8 * 0.25);
+  var_1 moveto(var_3, var_8, var_8 * 0.1, var_8 * 0.25);
+  var_2 moveto(var_4, var_8, var_8 * 0.1, var_8 * 0.25);
   _id_A73D(var_1, var_3, var_2, var_4);
   self notify("opened_floor_" + var_0 + "_outer_doors");
 }
@@ -443,11 +443,11 @@ _id_1D07() {
   var_2 = getEntArray("elevator_doorset", "targetname");
 
   foreach(var_4 in var_0) {
-    var_5 = _func_18E(var_4.target, "targetname");
+    var_5 = _getent(var_4.target, "targetname");
     var_6 = [];
-    var_6[0] = _func_0AF(var_4.origin[0], var_5.origin[0]);
+    var_6[0] = _min(var_4.origin[0], var_5.origin[0]);
     var_6[1] = max(var_4.origin[0], var_5.origin[0]);
-    var_6[2] = _func_0AF(var_4.origin[1], var_5.origin[1]);
+    var_6[2] = _min(var_4.origin[1], var_5.origin[1]);
     var_6[3] = max(var_4.origin[1], var_5.origin[1]);
     var_7 = spawnStruct();
     var_7._id_3532["id"] = level._id_35D1.size;
@@ -464,17 +464,17 @@ _id_1D07() {
         if(var_9._id_003B == "light") {
           continue;
         }
-        var_10 = _func_18E(var_9.target, "targetname");
+        var_10 = _getent(var_9.target, "targetname");
         var_7._id_3532["housing"]["left_door"] = var_10;
         var_7._id_3532["housing"]["left_door_opened_pos"] = var_10.origin;
-        var_11 = _func_18E(var_10.target, "targetname");
+        var_11 = _getent(var_10.target, "targetname");
         var_7._id_3532["housing"]["right_door"] = var_11;
         var_7._id_3532["housing"]["right_door_opened_pos"] = var_11.origin;
         var_12 = (var_10.origin - var_11.origin) * (0.5, 0.5, 0.5) + var_11.origin;
         var_7._id_3532["housing"]["door_closed_pos"] = var_12;
-        var_13 = _func_18E(var_11.target, "targetname");
+        var_13 = _getent(var_11.target, "targetname");
         var_7._id_3532["housing"]["door_trigger"] = var_13;
-        var_14 = _func_18E(var_13.target, "targetname");
+        var_14 = _getent(var_13.target, "targetname");
         var_7._id_3532["housing"]["inside_trigger"] = var_14;
         var_14 _id_5FA7();
         var_14._id_6464 = spawn("trigger_radius", var_9.origin, 0, 64, 128);
@@ -489,10 +489,10 @@ _id_1D07() {
         var_19 = var_7._id_3532["outer_doorset"].size;
         var_7._id_3532["outer_doorset"][var_19] = [];
         var_7._id_3532["outer_doorset"][var_19]["door_closed_pos"] = var_17.origin;
-        var_20 = _func_18E(var_17.target, "targetname");
+        var_20 = _getent(var_17.target, "targetname");
         var_7._id_3532["outer_doorset"][var_19]["left_door"] = var_20;
         var_7._id_3532["outer_doorset"][var_19]["left_door_opened_pos"] = var_20.origin;
-        var_21 = _func_18E(var_20.target, "targetname");
+        var_21 = _getent(var_20.target, "targetname");
         var_7._id_3532["outer_doorset"][var_19]["right_door"] = var_21;
         var_7._id_3532["outer_doorset"][var_19]["right_door_opened_pos"] = var_21.origin;
 
@@ -561,7 +561,7 @@ _id_1D07() {
 
     if(isDefined(var_40) && var_40.size) {
       foreach(var_42 in var_40)
-      var_42 _meth_81DF(0.75);
+      var_42 setlightintensity(0.75);
     }
   }
 }
@@ -580,8 +580,8 @@ _id_1CF9() {
         var_9 = (0, 0, var_6._id_3532["floor" + var_11 + "_pos"][2]);
         var_10 = (var_6._id_3532["floor" + var_11 + "_pos"][0], var_6._id_3532["floor" + var_11 + "_pos"][1], 0);
 
-        if(_func_0AE(distance(var_2, var_9)) <= level._id_35B8) {
-          if(_func_0AE(distance(var_3, var_10)) <= level._id_35B7) {
+        if(_abs(distance(var_2, var_9)) <= level._id_35B8) {
+          if(_abs(distance(var_3, var_10)) <= level._id_35B7) {
             var_4[var_4.size] = var_6;
             var_1._id_3532[var_11] = var_4;
           }
@@ -599,19 +599,19 @@ _id_8853() {
     var_2 = var_1 _id_41C8();
     var_3 = var_1 _id_4271();
     var_4 = var_3.size;
-    var_2 _meth_80CD("HINT_NOICON");
+    var_2 setcursorhint("HINT_NOICON");
 
     if(var_4 > 2) {
-      var_2 _meth_80CE(&"ELEVATOR_FLOOR_SELECT_HINT");
+      var_2 sethintstring(&"ELEVATOR_FLOOR_SELECT_HINT");
       continue;
     }
 
-    var_2 _meth_80CE(&"ELEVATOR_USE_HINT");
+    var_2 sethintstring(&"ELEVATOR_USE_HINT");
   }
 
   foreach(var_7 in level._id_35B9) {
-    var_7 _meth_80CD("HINT_NOICON");
-    var_7 _meth_80CE(&"ELEVATOR_CALL_HINT");
+    var_7 setcursorhint("HINT_NOICON");
+    var_7 sethintstring(&"ELEVATOR_CALL_HINT");
   }
 }
 
@@ -837,8 +837,8 @@ _id_571B(var_0) {
   var_6 = var_0[3];
   var_7 = (var_3 + var_4) / 2;
   var_8 = (var_5 + var_6) / 2;
-  var_9 = _func_0AE(distance((var_3, var_5, 0), (var_7, var_8, 0)));
-  return _func_0AE(distance((var_1, var_2, 0), (var_7, var_8, 0))) < var_9;
+  var_9 = _abs(distance((var_3, var_5, 0), (var_7, var_8, 0)));
+  return _abs(distance((var_1, var_2, 0), (var_7, var_8, 0))) < var_9;
 }
 
 _id_A752(var_0, var_1) {

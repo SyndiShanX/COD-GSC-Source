@@ -27,7 +27,7 @@ create_inanimate_zombie_enemy(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 
   while(var_15 > 0 && !self.shouldterminate) {
     if(isDefined(var_10))
-      var_10 _meth_82FF("ui_zm_turret_health", self.health * 0.0025);
+      var_10 setclientomnvar("ui_zm_turret_health", self.health * 0.0025);
 
     var_16 = _id_0547::_id_43F0(self.origin, var_4, var_3, 1);
     var_16 = common_scripts\utility::_id_40B0(self.origin, var_16);
@@ -138,12 +138,12 @@ preform_zombie_object_melee(var_0) {
   if(!isDefined(var_2)) {
     return;
   }
-  self _meth_83A2(1);
-  self _meth_839B("face angle abs", self._id_9B61.angles);
+  self scragentsetscripted(1);
+  self scragentsetorientmode("face angle abs", self._id_9B61.angles);
   self setOrigin(var_0.origin, 0);
 
   for(;;) {
-    var_6 = self _meth_83DB(var_2);
+    var_6 = self getanimentrycount(var_2);
     var_7 = randomint(var_6);
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_7, 1.0, "scripted_anim");
 
@@ -167,7 +167,7 @@ preform_zombie_object_melee_interrupt(var_0) {
   self notify("cancel_attack_travel");
   self.enemy_object = undefined;
   self._id_9B61 = undefined;
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
 }
 
 set_zombie_attacking_this_object(var_0) {

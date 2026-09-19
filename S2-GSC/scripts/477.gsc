@@ -104,7 +104,7 @@ _id_2491(var_0, var_1) {
   }
   if(isDefined(level._id_5A61[var_1]) && tablelookup("mp/killstreakTable.csv", 1, var_1, 0) != "" || issubstr(var_1, "turrethead")) {
     if(getdvarint("scorestreak_enabled_" + var_1) == 0) {
-      _func_18C("Scorestreak " + var_1 + " was disabled.Re-enabling...");
+      _iprintlnbold("Scorestreak " + var_1 + " was disabled.Re-enabling...");
       setDvar("scorestreak_enabled_" + var_1, 1);
     }
 

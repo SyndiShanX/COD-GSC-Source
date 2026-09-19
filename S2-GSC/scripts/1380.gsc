@@ -47,7 +47,7 @@ _id_3BFB(var_0) {
 
   level._id_3BFF = 0;
   level._id_3BFE = 0;
-  level._id_66A6 = _func_0A4(14, 15);
+  level._id_66A6 = _randomintrange(14, 15);
   level._id_3BED = 0;
 
   if(!isDefined(level._id_3BF2)) {
@@ -89,7 +89,7 @@ _id_ABA7() {
 
 _id_8A1B() {
   self _meth_85A1("zombie_fireman");
-  self _meth_839E("agent");
+  self scragentsetclipmode("agent");
   self._id_11AB = 70 + self.radius;
   self._id_60F5 = "large";
   self._id_60F6 = 200;
@@ -99,7 +99,7 @@ _id_8A1B() {
   self._id_4013 = 1.0;
   _id_0547::_id_86C8(100);
   _id_0547::_id_86C7(self._id_60F0);
-  self _meth_8399(self._id_2BCA);
+  self scragentsetgoalradius(self._id_2BCA);
   self._id_60E4 = 0.25;
   self._id_3CFA = 3;
   self._id_0EAD._id_6AFE["melee"] = ::_id_3BFD;
@@ -160,7 +160,7 @@ _id_ABAB() {
         if(!isDefined(self._id_5BC1) || distancesquared(self._id_5BC1, self.origin) > 256)
           self._id_60ED = self._id_0108;
 
-        self _meth_83A1(self._id_28D2);
+        self scragentbeginmelee(self._id_28D2);
         continue;
       }
     }
@@ -253,17 +253,17 @@ _id_3C0F(var_0) {
 }
 
 _id_AA4F() {
-  return distancesquared(self.origin, self._id_28D2.origin) <= _func_0DA(250);
+  return distancesquared(self.origin, self._id_28D2.origin) <= _squared(250);
 }
 
 _id_AA53() {
-  return distancesquared(self.origin, self._id_28D2.origin) <= _func_0DA(self._id_60F0);
+  return distancesquared(self.origin, self._id_28D2.origin) <= _squared(self._id_60F0);
 }
 
 _id_56EE() {
   var_0 = self.origin + (0, 0, self._id_60E1);
   var_1 = self._id_28D2.origin + (0, 0, self._id_60E1);
-  var_2 = _func_080(var_0, var_1);
+  var_2 = _physicstrace(var_0, var_1);
   return distancesquared(var_2, var_1) > 1;
 }
 
@@ -290,7 +290,7 @@ _id_3BF1() {
       var_1 = 1;
       var_2 = var_0.origin;
     } else {
-      var_4 = _func_07E(self.origin + (0, 0, 32), self._id_28D2.origin + (0, 0, 32), 0, undefined);
+      var_4 = _bullettracepassed(self.origin + (0, 0, 32), self._id_28D2.origin + (0, 0, 32), 0, undefined);
 
       if(var_4) {
         var_1 = 1;
@@ -339,31 +339,31 @@ _id_3C02(var_0, var_1) {
   var_6 = 1.0;
   self._id_5BBE = undefined;
   self._id_5BBF = undefined;
-  var_7 = randomint(self _meth_83DB(var_4));
-  var_8 = self _meth_83D8(var_4, var_7);
-  var_9 = _func_065(var_8);
-  var_10 = _func_067(var_8, "attack");
-  var_11 = _func_067(var_8, "end");
+  var_7 = randomint(self getanimentrycount(var_4));
+  var_8 = self getanimentry(var_4, var_7);
+  var_9 = _getanimlength(var_8);
+  var_10 = _getnotetracktimes(var_8, "attack");
+  var_11 = _getnotetracktimes(var_8, "end");
   var_10 = common_scripts\utility::_id_0F73(var_10, var_11);
   var_12 = _id_4511(var_9, var_6, var_10, undefined);
-  self _meth_839D("gravity");
+  self scragentsetphysicsmode("gravity");
 
   if(var_3)
-    self _meth_839B("face enemy");
+    self scragentsetorientmode("face enemy");
   else
-    self _meth_839B("face angle abs", (0, _func_109(var_0.origin - self.origin), 0));
+    self scragentsetorientmode("face angle abs", (0, _vectortoyaw(var_0.origin - self.origin), 0));
 
-  self _meth_839C("anim deltas");
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_4, var_7, var_6);
+  self scragentsetanimmode("anim deltas");
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_4, var_7, var_6);
   thread _id_3C0E(var_4, var_9);
   var_13 = undefined;
-  self _meth_839A(1, 1);
+  self scragentsetanimscale(1, 1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoAttack");
   childthread _id_A137(var_0, var_8, var_9, var_6, var_10);
   wait(var_12);
   self notify("cancel_updatelerppos");
-  self _meth_839C("anim deltas");
-  self _meth_839A(1, 1);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetanimscale(1, 1);
   self._id_5BC1 = self.origin;
   var_14 = var_9 / var_6 - var_12;
 
@@ -371,13 +371,13 @@ _id_3C02(var_0, var_1) {
     maps\mp\agents\_scripted_agent_anim_util::_id_A79F("attack_anim", "end", var_14);
 
   self notify("cancel_updatelerppos");
-  self _meth_839C("anim deltas");
-  self _meth_839A(1, 1);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetanimscale(1, 1);
 }
 
 _id_3C01(var_0, var_1) {
   self._id_5580 = 1;
-  self _meth_83A2(1);
+  self scragentsetscripted(1);
   self endon("killanimscript");
   self endon("death");
   var_2 = common_scripts\utility::random(["s2_fireman_attack_flamethrower_stand", "s2_fireman_attack_flamethrower_walk"]);
@@ -385,18 +385,18 @@ _id_3C01(var_0, var_1) {
   var_4 = 1.0;
   self._id_5BBE = undefined;
   self._id_5BBF = undefined;
-  var_5 = randomint(self _meth_83DB(var_2));
-  var_6 = self _meth_83D8(var_2, var_5);
-  var_7 = _func_065(var_6);
-  self _meth_839D("gravity");
+  var_5 = randomint(self getanimentrycount(var_2));
+  var_6 = self getanimentry(var_2, var_5);
+  var_7 = _getanimlength(var_6);
+  self scragentsetphysicsmode("gravity");
 
   if(var_3)
-    self _meth_839B("face enemy");
+    self scragentsetorientmode("face enemy");
   else
-    self _meth_839B("face angle abs", (0, _func_109(var_0.origin - self.origin), 0));
+    self scragentsetorientmode("face angle abs", (0, _vectortoyaw(var_0.origin - self.origin), 0));
 
-  self _meth_839C("anim deltas");
-  maps\mp\agents\_scripted_agent_anim_util::_id_8415(var_2, var_5, var_4);
+  self scragentsetanimmode("anim deltas");
+  maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2, var_5, var_4);
   _id_3D2A();
 }
 
@@ -446,18 +446,18 @@ _id_A136(var_0, var_1, var_2, var_3) {
       var_8 = var_3;
       var_9 = var_7 - var_4;
 
-      if(_func_0E5(var_9) > var_8 * var_8)
+      if(_lengthsquared(var_9) > var_8 * var_8)
         var_7 = var_4 + vectorNormalize(var_9) * var_8;
     }
 
-    self _meth_839B("face enemy");
-    self _meth_83A4(self.origin, var_7, var_5);
+    self scragentsetorientmode("face enemy");
+    self scragentdoanimlerp(self.origin, var_7, var_5);
   }
 }
 
 _id_3D2A() {
   self endon("death");
-  self _meth_839A(1, 1);
+  self scragentsetanimscale(1, 1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "DoFiremanFlameAttack");
   _id_0378::_id_8D74("flamethrower_start", "tag_flamethrower_fx");
   thread _id_3D29();
@@ -477,7 +477,7 @@ _id_3D2A() {
         if(var_9.team == self.team) {
           if(var_9._id_0A4B != "zombie_fireman") {
             var_9 _meth_8682(0, 10, 1, "none", 1);
-            var_9 _meth_8059(5, var_9 getEye(), undefined, undefined, "MOD_ENERGY");
+            var_9 dodamage(5, var_9 getEye(), undefined, undefined, "MOD_ENERGY");
             var_10 = 10;
             var_9 _id_0378::_id_8D74("zombie_ignite", var_10);
           }
@@ -508,7 +508,7 @@ should_longburn(var_0) {
 }
 
 do_fireman_player_unit_damage(var_0) {
-  var_0 _meth_8059(15, var_0 getEye(), self, undefined, "MOD_ENERGY");
+  var_0 dodamage(15, var_0 getEye(), self, undefined, "MOD_ENERGY");
 
   if(!isDefined(self._id_7ACF))
     self._id_7ACF = 0;
@@ -532,7 +532,7 @@ prolonged_damage(var_0, var_1) {
 _id_3D29() {
   var_0 = spawn("script_model", self gettagorigin("tag_flamethrower_fx") + (600, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 _meth_8055(self, "tag_flamethrower_fx");
+  var_0 linkto(self, "tag_flamethrower_fx");
   var_1 = _func_382("zmb_brenner_flamethrower_beam", self, "tag_flamethrower_fx", var_0, "tag_origin");
   self waittill("cancel_updatelerppos");
   var_1 delete();
@@ -543,10 +543,10 @@ _id_3D31() {
   self endon("death");
   self._id_5580 = 0;
   self._id_3CFB = gettime();
-  self _meth_83A2(0);
+  self scragentsetscripted(0);
   self notify("cancel_updatelerppos");
-  self _meth_839C("anim deltas");
-  self _meth_839A(1, 1);
+  self scragentsetanimmode("anim deltas");
+  self scragentsetanimscale(1, 1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "DoFiremanFlameAttack");
   self._id_5BC1 = self.origin;
   self._id_5B9B = self.origin;
@@ -560,15 +560,15 @@ _id_3D2B() {
 
 _id_5625(var_0) {
   var_1 = 250;
-  var_2 = _func_0DA(var_1 + 100);
-  var_3 = _func_0DA(50);
+  var_2 = _squared(var_1 + 100);
+  var_3 = _squared(50);
   var_4 = self getEye();
   var_5 = self getplayerangles();
   var_6 = anglesToForward(var_5);
   var_7 = var_4 + var_6 * 50;
   var_8 = var_7 + var_6 * var_1;
 
-  if(_func_211(self.origin, var_0.origin) > var_2)
+  if(_distance2dsquared(self.origin, var_0.origin) > var_2)
     return 0;
 
   var_9 = (var_0.origin - var_4) * (1, 1, 0);
@@ -578,7 +578,7 @@ _id_5625(var_0) {
 
   var_10 = _id_7540(var_0 getEye(), var_7, var_8);
   var_11 = _id_7540(var_0 gettagorigin("J_Spine4"), var_7, var_8);
-  var_12 = _func_0AF(var_10, var_11);
+  var_12 = _min(var_10, var_11);
 
   if(var_12 > var_3)
     return 0;
@@ -587,20 +587,20 @@ _id_5625(var_0) {
 }
 
 _id_7540(var_0, var_1, var_2) {
-  var_3 = _func_0E5(var_2 - var_1);
+  var_3 = _lengthsquared(var_2 - var_1);
 
   if(var_3 == 0)
-    return _func_0E5(var_1 - var_0);
+    return _lengthsquared(var_1 - var_0);
 
   var_4 = vectordot(var_0 - var_1, var_2 - var_1) / var_3;
 
   if(var_4 < 0)
-    return _func_0E5(var_0 - var_1);
+    return _lengthsquared(var_0 - var_1);
   else if(var_4 > 1)
-    return _func_0E5(var_0 - var_2);
+    return _lengthsquared(var_0 - var_2);
 
   var_5 = var_1 + var_4 * (var_2 - var_1);
-  var_6 = _func_0E5(var_0 - var_5);
+  var_6 = _lengthsquared(var_0 - var_5);
   return var_6;
 }
 
@@ -640,7 +640,7 @@ _id_21CD(var_0) {
     if(_id_0547::_id_577E(var_5)) {
       continue;
     }
-    if(_func_26C(var_5, self)) {
+    if(_isalliedsentient(var_5, self)) {
       continue;
     }
     _id_21CE(var_5, var_1, var_2, var_3, self._id_60E2);
@@ -763,10 +763,10 @@ _id_388D(var_0) {
   if(isDefined(var_0._id_00CE) && var_0._id_00CE == 1)
     return -1;
 
-  if(var_0 _meth_8541())
+  if(var_0 isnotarget())
     return -1;
 
-  if(_func_26C(var_0, self))
+  if(_isalliedsentient(var_0, self))
     return -1;
 
   if(_id_0547::_id_8B95(var_0))
@@ -779,7 +779,7 @@ _id_388D(var_0) {
 }
 
 _id_3889(var_0) {
-  if(!var_0 _meth_83B8() && _func_211(self.origin, var_0.origin) < 250000)
+  if(!var_0 isjumping() && _distance2dsquared(self.origin, var_0.origin) < 250000)
     return -1;
 
   return 1;
@@ -807,7 +807,7 @@ _id_388B(var_0) {
   if(!isDefined(self._id_28D2))
     return 1;
 
-  if(self._id_28D2 == var_0 && _func_0E5(var_0.origin - self.origin) < _func_0DA(250))
+  if(self._id_28D2 == var_0 && _lengthsquared(var_0.origin - self.origin) < _squared(250))
     return -1;
 
   return 1;
@@ -823,7 +823,7 @@ _id_9E17(var_0, var_1, var_2, var_3) {
       var_4 = self._id_60E1;
       var_5 = var_0.origin + (0, 0, var_4);
       var_6 = var_1 + (0, 0, var_4);
-      var_7 = _func_080(var_5, var_6);
+      var_7 = _physicstrace(var_5, var_6);
 
       if(distancesquared(var_7, var_6) > 1)
         var_0.origin = undefined;
@@ -877,7 +877,7 @@ _id_3C13() {
       var_0--;
 
     if(var_0 > 0)
-      wait(_func_0A5(5, 10));
+      wait(_randomfloatrange(5, 10));
   }
 
   var_3 = 5;
@@ -892,7 +892,7 @@ _id_3C13() {
   if(var_3 == var_4)
     level._id_66A6 = level._id_A980 + var_3;
   else
-    level._id_66A6 = level._id_A980 + _func_0A4(var_3, var_4);
+    level._id_66A6 = level._id_A980 + _randomintrange(var_3, var_4);
 
   level._id_3BFE++;
 }
@@ -923,7 +923,7 @@ _id_3C11(var_0, var_1, var_2) {
 
   var_3 = 0;
 
-  if(_id_0547::_id_5565(var_1._id_0165, "zombie_sky_spawner") || _id_0547::_id_5565(var_1._id_8109, "scripted_fire_spawn_drop"))
+  if(_id_0547::_id_5565(var_1._id_0165, "zombie_sky_spawner") || _id_0547::_id_5565(var_1.setflaggedanimknoball, "scripted_fire_spawn_drop"))
     var_3 = 1;
 
   if(!isDefined(var_2))
@@ -951,7 +951,7 @@ _id_3C11(var_0, var_1, var_2) {
   }
 
   if(!common_scripts\utility::_id_562E(var_0))
-    level._id_66A6 = level._id_A980 + _func_0A4(5, 7);
+    level._id_66A6 = level._id_A980 + _randomintrange(5, 7);
 
   return var_5;
 }
@@ -982,7 +982,7 @@ _id_3C0D(var_0) {
     var_8 = distancesquared(var_11.origin, var_0);
 
     if(var_8 <= var_1)
-      var_11 _meth_8059(100, var_0, self, self);
+      var_11 dodamage(100, var_0, self, self);
 
     var_12 = (var_4 - var_8) / var_4;
 
@@ -990,8 +990,8 @@ _id_3C0D(var_0) {
       return;
     }
     var_13 = var_12 * 0.15;
-    _func_17F(var_13, 0.1, var_0, 1500);
-    var_11 _meth_809F("damage_heavy");
+    _earthquake(var_13, 0.1, var_0, 1500);
+    var_11 playrumbleonentity("damage_heavy");
   }
 }
 
@@ -1049,8 +1049,8 @@ _id_3C08() {
   foreach(var_2 in level._id_AC4F) {
     var_3 = 0;
 
-    if(isDefined(var_2._id_8260)) {
-      var_4 = strtok(var_2._id_8260, " ,");
+    if(isDefined(var_2.setlookatent)) {
+      var_4 = strtok(var_2.setlookatent, " ,");
 
       foreach(var_6 in var_4) {
         if(var_6 == "zombie_fireman")
@@ -1108,7 +1108,7 @@ _id_3FEF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     self._id_3FEE = 1;
     thread _id_3FF0(var_6);
     self _meth_8682(0.01 * self.maxhealth, 1.5, 20.0, "none", 1, self, var_5);
-    self _meth_8059(self._id_3FF2, self.origin, var_1, var_0, "MOD_EXPLOSIVE", var_5);
+    self dodamage(self._id_3FF2, self.origin, var_1, var_0, "MOD_EXPLOSIVE", var_5);
 
     if(isDefined(level.zmb_events_player_destoyed_brenner_gas_tank))
       var_1 thread[[level.zmb_events_player_destoyed_brenner_gas_tank]]();
@@ -1117,11 +1117,11 @@ _id_3FEF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
 _id_3FF3(var_0) {
   if(randomint(100) >= 80)
-    _func_147(common_scripts\utility::_id_44F5("fireman_leak"), self, "TAG_STOWED_BACK");
+    _playfxontag(common_scripts\utility::_id_44F5("fireman_leak"), self, "TAG_STOWED_BACK");
 }
 
 _id_3FF0(var_0) {
-  _func_147(common_scripts\utility::_id_44F5("fireman_explosion"), self, "TAG_STOWED_BACK");
+  _playfxontag(common_scripts\utility::_id_44F5("fireman_explosion"), self, "TAG_STOWED_BACK");
 }
 
 _id_ABA6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {

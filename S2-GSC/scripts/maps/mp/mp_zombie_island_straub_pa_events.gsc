@@ -126,7 +126,7 @@ pa_system_dialogue_cleanup() {
 }
 
 pa_system_dialogue_all_players(var_0, var_1) {
-  if(!_func_344(var_0)) {
+  if(!_soundexists(var_0)) {
     return;
   }
   pa_system_dialogue_setup();
@@ -183,7 +183,7 @@ pa_system_player_track(var_0) {
   var_1.pa_player_speaker_1 endon("pa_system_line_done");
 
   for(;;) {
-    var_2 = _func_1AC(var_0, var_1.origin);
+    var_2 = _sortbydistance(var_0, var_1.origin);
 
     if(isDefined(var_1.pa_player_speaker_1))
       var_1.pa_player_speaker_1.origin = var_2[0].origin;

@@ -29,7 +29,7 @@ _id_44D1(var_0) {
 }
 
 _id_885C(var_0) {
-  var_1 = var_0._id_8186;
+  var_1 = var_0.setdepthoffield;
 
   if(!isDefined(level._id_3948[var_1]))
     level._id_3948[var_1] = [];
@@ -42,28 +42,28 @@ _id_885C(var_0) {
   level._id_3948[var_1][level._id_3948[var_1].size] = var_0;
 
   if(_id_393B(var_0)) {
-    var_0 _meth_805C();
+    var_0 hide();
     return;
   }
 
   if(_id_393A(var_0)) {
-    var_0 _meth_805C();
-    var_0 _meth_82C2();
+    var_0 hide();
+    var_0 notsolid();
 
     if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1) {
-      if(isDefined(var_0._id_8166))
-        var_0 _meth_8060();
+      if(isDefined(var_0.clearpotentialthreat))
+        var_0 connectpaths();
     }
 
     return;
   }
 
   if(_id_3939(var_0)) {
-    var_0 _meth_805C();
-    var_0 _meth_82C2();
+    var_0 hide();
+    var_0 notsolid();
 
     if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1)
-      var_0 _meth_8060();
+      var_0 connectpaths();
 
     return;
   }
@@ -78,13 +78,13 @@ _id_8A1A() {
     var_0[var_0.size] = var_1[var_2];
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4._id_8272))
-      var_4._id_8186 = var_4._id_8272;
+    if(isDefined(var_4.physicslaunchserver))
+      var_4.setdepthoffield = var_4.physicslaunchserver;
 
     if(isDefined(var_4._id_6019)) {
       continue;
     }
-    if(isDefined(var_4._id_8186))
+    if(isDefined(var_4.setdepthoffield))
       _id_885C(var_4);
   }
 
@@ -92,40 +92,40 @@ _id_8A1A() {
   var_7 = getEntArray("script_brushmodel", "classname");
 
   for(var_2 = 0; var_2 < var_7.size; var_2++) {
-    if(isDefined(var_7[var_2]._id_8272))
-      var_7[var_2]._id_8186 = var_7[var_2]._id_8272;
+    if(isDefined(var_7[var_2].physicslaunchserver))
+      var_7[var_2].setdepthoffield = var_7[var_2].physicslaunchserver;
 
-    if(isDefined(var_7[var_2]._id_8186))
+    if(isDefined(var_7[var_2].setdepthoffield))
       var_6[var_6.size] = var_7[var_2];
   }
 
   var_7 = getEntArray("script_model", "classname");
 
   for(var_2 = 0; var_2 < var_7.size; var_2++) {
-    if(isDefined(var_7[var_2]._id_8272))
-      var_7[var_2]._id_8186 = var_7[var_2]._id_8272;
+    if(isDefined(var_7[var_2].physicslaunchserver))
+      var_7[var_2].setdepthoffield = var_7[var_2].physicslaunchserver;
 
-    if(isDefined(var_7[var_2]._id_8186))
+    if(isDefined(var_7[var_2].setdepthoffield))
       var_6[var_6.size] = var_7[var_2];
   }
 
   var_7 = getEntArray("script_origin", "classname");
 
   for(var_2 = 0; var_2 < var_7.size; var_2++) {
-    if(isDefined(var_7[var_2]._id_8272))
-      var_7[var_2]._id_8186 = var_7[var_2]._id_8272;
+    if(isDefined(var_7[var_2].physicslaunchserver))
+      var_7[var_2].setdepthoffield = var_7[var_2].physicslaunchserver;
 
-    if(isDefined(var_7[var_2]._id_8186))
+    if(isDefined(var_7[var_2].setdepthoffield))
       var_6[var_6.size] = var_7[var_2];
   }
 
   var_7 = getEntArray("item_health", "classname");
 
   for(var_2 = 0; var_2 < var_7.size; var_2++) {
-    if(isDefined(var_7[var_2]._id_8272))
-      var_7[var_2]._id_8186 = var_7[var_2]._id_8272;
+    if(isDefined(var_7[var_2].physicslaunchserver))
+      var_7[var_2].setdepthoffield = var_7[var_2].physicslaunchserver;
 
-    if(isDefined(var_7[var_2]._id_8186))
+    if(isDefined(var_7[var_2].setdepthoffield))
       var_6[var_6.size] = var_7[var_2];
   }
 
@@ -135,10 +135,10 @@ _id_8A1A() {
     if(!isDefined(var_7[var_2])) {
       continue;
     }
-    if(isDefined(var_7[var_2]._id_8272))
-      var_7[var_2]._id_8186 = var_7[var_2]._id_8272;
+    if(isDefined(var_7[var_2].physicslaunchserver))
+      var_7[var_2].setdepthoffield = var_7[var_2].physicslaunchserver;
 
-    if(isDefined(var_7[var_2]._id_8186)) {
+    if(isDefined(var_7[var_2].setdepthoffield)) {
       if(!isDefined(var_7[var_2].angles))
         var_7[var_2].angles = (0, 0, 0);
 
@@ -162,22 +162,22 @@ _id_8A1A() {
     var_4.v["origin"] = var_9.origin;
     var_4.v["angles"] = var_9.angles;
     var_4.v["delay"] = var_9.script_delay;
-    var_4.v["delay_post"] = var_9._id_8155;
-    var_4.v["firefx"] = var_9._id_8193;
-    var_4.v["firefxdelay"] = var_9._id_8194;
-    var_4.v["firefxsound"] = var_9._id_8195;
-    var_4.v["firefxtimeout"] = var_9._id_8196;
+    var_4.v["delay_post"] = var_9.setautorotationdelay;
+    var_4.v["firefx"] = var_9.getturret;
+    var_4.v["firefxdelay"] = var_9.getgroundenttype;
+    var_4.v["firefxsound"] = var_9.animcustom;
+    var_4.v["firefxtimeout"] = var_9.isinscriptedstate;
     var_4.v["earthquake"] = var_9._id_817B;
-    var_4.v["rumble"] = var_9._id_827D;
-    var_4.v["damage"] = var_9._id_8146;
-    var_4.v["damage_radius"] = var_9._id_8276;
-    var_4.v["soundalias"] = var_9._id_828B;
-    var_4.v["repeat"] = var_9._id_8278;
+    var_4.v["rumble"] = var_9.setswitchnode;
+    var_4.v["damage"] = var_9.setanim;
+    var_4.v["damage_radius"] = var_9.scriptmodelplayanim;
+    var_4.v["soundalias"] = var_9.vehicle_getsteering;
+    var_4.v["repeat"] = var_9.scriptmodelplayanimdeltamotion;
     var_4.v["delay_min"] = var_9._id_8154;
-    var_4.v["delay_max"] = var_9._id_8153;
+    var_4.v["delay_max"] = var_9.setbottomarc;
     var_4.v["target"] = var_9.target;
-    var_4.v["ender"] = var_9._id_817E;
-    var_4.v["physics"] = var_9._id_8269;
+    var_4.v["ender"] = var_9.itemweaponsetammo;
+    var_4.v["physics"] = var_9.iprintlnbold;
     var_4.v["type"] = "exploder";
 
     if(!isDefined(var_9._id_81BB))
@@ -185,7 +185,7 @@ _id_8A1A() {
     else
       var_4.v["fxid"] = var_9._id_81BB;
 
-    var_4.v["exploder"] = var_9._id_8186;
+    var_4.v["exploder"] = var_9.setdepthoffield;
 
     if(isDefined(level._id_2807)) {
       var_10 = level._id_2807[var_4.v["exploder"]];
@@ -223,7 +223,7 @@ _id_8A1A() {
         precachemodel(var_4.model._id_8205);
     } else if(var_9._id_003B == "script_brushmodel" || isDefined(var_9.model)) {
       var_4.model = var_9;
-      var_4.model._id_2FBF = var_9._id_8166;
+      var_4.model._id_2FBF = var_9.clearpotentialthreat;
     }
 
     if(isDefined(var_9.targetname) && isDefined(var_8[var_9.targetname]))
@@ -234,7 +234,7 @@ _id_8A1A() {
     if(isDefined(var_9._id_6019)) {
       var_4.v["masked_exploder"] = var_9.model;
       var_4.v["masked_exploder_spawnflags"] = var_9.spawnflags;
-      var_4.v["masked_exploder_script_disconnectpaths"] = var_9._id_8166;
+      var_4.v["masked_exploder_script_disconnectpaths"] = var_9.clearpotentialthreat;
       var_9 delete();
     }
 
@@ -310,10 +310,10 @@ _id_8BCA(var_0) {
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
         if(!_id_393B(var_3.model) && !_id_393A(var_3.model) && !_id_3939(var_3.model))
-          var_3.model _meth_805B();
+          var_3.model show();
 
         if(isDefined(var_3._id_1CB4))
-          var_3.model _meth_805B();
+          var_3.model show();
       }
 
       return;
@@ -336,10 +336,10 @@ _id_8BCA(var_0) {
       }
       if(isDefined(var_3.model)) {
         if(!_id_393B(var_3.model) && !_id_393A(var_3.model) && !_id_3939(var_3.model))
-          var_3.model _meth_805B();
+          var_3.model show();
 
         if(isDefined(var_3._id_1CB4))
-          var_3.model _meth_805B();
+          var_3.model show();
       }
     }
   }
@@ -421,7 +421,7 @@ _id_4CE3(var_0) {
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
         if(isDefined(var_3.model))
-          var_3.model _meth_805C();
+          var_3.model hide();
       }
 
       return;
@@ -443,7 +443,7 @@ _id_4CE3(var_0) {
         continue;
       }
       if(isDefined(var_3.model))
-        var_3.model _meth_805C();
+        var_3.model hide();
     }
   }
 }
@@ -551,17 +551,17 @@ _id_1CB2() {
       self.model call[[level._id_2587]]();
   }
 
-  if(level._id_27F6) {
+  if(level.createfx_enabled) {
     if(isDefined(self._id_3928)) {
       return;
     }
     self._id_3928 = 1;
-    self.model _meth_805C();
-    self.model _meth_82C2();
+    self.model hide();
+    self.model notsolid();
     wait 3;
     self._id_3928 = undefined;
-    self.model _meth_805B();
-    self.model _meth_82C1();
+    self.model show();
+    self.model solid();
     return;
   }
 
@@ -588,7 +588,7 @@ _id_1CB5() {
     return;
   }
 
-  self.model _meth_805B();
+  self.model show();
 
   if(isDefined(self.v["delay_post"]))
     wait(self.v["delay_post"]);
@@ -616,14 +616,14 @@ _id_1CB5() {
       var_11 = (var_9.origin - var_0.origin) * self.v["physics"];
     }
 
-    self.model _meth_82C5(var_10, var_11);
+    self.model physicslaunchclient(var_10, var_11);
     return;
   } else {
-    self.model _meth_82C0((var_5, var_6, var_7), 12);
-    self.model _meth_82B5((var_5, var_6, var_7), 12);
+    self.model rotatevelocity((var_5, var_6, var_7), 12);
+    self.model movegravity((var_5, var_6, var_7), 12);
   }
 
-  if(level._id_27F6) {
+  if(level.createfx_enabled) {
     if(isDefined(self._id_3928)) {
       return;
     }
@@ -632,7 +632,7 @@ _id_1CB5() {
     self._id_3928 = undefined;
     self.v["origin"] = var_1;
     self.v["angles"] = var_2;
-    self.model _meth_805C();
+    self.model hide();
     return;
   }
 
@@ -646,8 +646,8 @@ _id_1CB3() {
     wait(self.v["delay"]);
 
   if(!isDefined(self.model._id_8205)) {
-    self.model _meth_805B();
-    self.model _meth_82C1();
+    self.model show();
+    self.model solid();
   } else {
     var_0 = self.model common_scripts\utility::_id_8FFC();
 
@@ -655,7 +655,7 @@ _id_1CB3() {
       var_0._id_0164 = self.model._id_0164;
 
     var_0 setModel(self.model._id_8205);
-    var_0 _meth_805B();
+    var_0 show();
   }
 
   self._id_1CB4 = 1;
@@ -667,7 +667,7 @@ _id_1CB3() {
       self.model call[[level._id_2FC3]]();
   }
 
-  if(level._id_27F6) {
+  if(level.createfx_enabled) {
     if(isDefined(self._id_3928)) {
       return;
     }
@@ -676,8 +676,8 @@ _id_1CB3() {
     self._id_3928 = undefined;
 
     if(!isDefined(self.model._id_8205)) {
-      self.model _meth_805C();
-      self.model _meth_82C2();
+      self.model hide();
+      self.model notsolid();
     }
   }
 }
@@ -687,7 +687,7 @@ _id_393F() {
     return;
   }
   _id_3930();
-  level.player _meth_809F(self.v["rumble"]);
+  level.player playrumbleonentity(self.v["rumble"]);
 }
 
 _id_3930() {
@@ -704,7 +704,7 @@ _id_3930() {
     var_1 = self.v["delay_max"];
 
   if(var_0 > 0) {
-    var_2 = _func_0A5(var_0, var_1);
+    var_2 = _randomfloatrange(var_0, var_1);
     self._id_08F0 = var_2;
     wait(var_2);
   }
@@ -790,15 +790,15 @@ _id_1F5E() {
   if(isDefined(self.looper))
     self.looper delete();
 
-  self.looper = _func_14B(common_scripts\utility::_id_44F5(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
+  self.looper = _spawnfx(common_scripts\utility::_id_44F5(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
 
-  if(level._id_27F6)
+  if(level.createfx_enabled)
     setfxkillondelete(self.looper, 1);
 
   if(self.v["delay"] >= 0)
-    _func_14C(self.looper);
+    _triggerfx(self.looper);
   else
-    _func_14C(self.looper, var_1);
+    _triggerfx(self.looper, var_1);
 
   _id_393D();
 }
@@ -808,7 +808,7 @@ _id_0891(var_0, var_1, var_2) {
   level notify("exploding_" + var_0);
   var_3 = 0;
 
-  if(isDefined(level._id_2807) && !level._id_27F6) {
+  if(isDefined(level._id_2807) && !level.createfx_enabled) {
     var_4 = level._id_2807[var_0];
 
     if(isDefined(var_4)) {
@@ -878,7 +878,7 @@ _id_088E(var_0, var_1, var_2) {
     return;
   }
   var_3 = int(var_0);
-  _func_213(var_3, var_1, var_2);
+  _activateclientexploder(var_3, var_1, var_2);
 }
 
 _id_2A6D(var_0, var_1, var_2) {
@@ -886,7 +886,7 @@ _id_2A6D(var_0, var_1, var_2) {
     return;
   }
   var_3 = int(var_0);
-  _func_277(var_3, var_1, var_2);
+  _stopclientexploder(var_3, var_1, var_2);
 }
 
 _id_5640(var_0) {
@@ -895,7 +895,7 @@ _id_5640(var_0) {
 
   var_1 = var_0;
 
-  if(_func_031(var_0)) {
+  if(_isstring(var_0)) {
     var_1 = int(var_0);
 
     if(var_1 == 0 && var_0 != "0")
@@ -909,10 +909,10 @@ _id_8BA5() {
   if(common_scripts\utility::issp())
     return 1;
 
-  if(!isDefined(level._id_27F6))
-    level._id_27F6 = getDvar("1459") != "";
+  if(!isDefined(level.createfx_enabled))
+    level.createfx_enabled = getDvar("1459") != "";
 
-  if(level._id_27F6)
+  if(level.createfx_enabled)
     return 1;
   else
     return getDvar("3508") != "1";

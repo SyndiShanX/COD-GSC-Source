@@ -36,13 +36,13 @@ main() {
   setDvar("1520", "-0.3 1 0.3 13");
   setDvar("5800", 3);
   setDvar("4230", 400);
-  _id_854F();
+  addzmexploderbloodfx();
   level thread maps\mp\_utility::_id_5246();
   thread _id_918C();
   level thread _id_5461();
 }
 
-_id_854F() {
+addzmexploderbloodfx() {
   setDvar("330", 1);
   setDvar("1271", 30);
 }
@@ -54,20 +54,20 @@ _id_918C() {
   var_2 = 10;
 
   for(;;) {
-    var_3 = _func_0A5(0.8, 2);
+    var_3 = _randomfloatrange(0.8, 2);
     wait(var_3);
 
     while(var_2 == var_1)
-      var_2 = _func_0A4(10, 25);
+      var_2 = _randomintrange(10, 25);
 
-    _func_213(var_2);
+    _activateclientexploder(var_2);
 
     if(var_2 < 15)
-      _func_213(1);
+      _activateclientexploder(1);
     else if(var_2 > 14 && var_2 < 20)
-      _func_213(2);
+      _activateclientexploder(2);
     else
-      _func_213(3);
+      _activateclientexploder(3);
 
     thread _id_0FF4(var_0[var_2 - 10]);
     var_1 = var_2;
@@ -77,7 +77,7 @@ _id_918C() {
 _id_0FF4(var_0) {
   var_1 = 0.4;
   wait 2;
-  _func_17F(var_1, 1.0, var_0, 600);
+  _earthquake(var_1, 1.0, var_0, 600);
 }
 
 _id_5461() {
@@ -103,11 +103,11 @@ _id_3AAD() {
   var_0 = 8;
 
   for(var_1 = 0; var_1 < var_0; var_1++) {
-    var_2 = _func_0A5(0.05, 0.25);
-    var_3 = _func_0A5(9.0, 12.0);
+    var_2 = _randomfloatrange(0.05, 0.25);
+    var_3 = _randomfloatrange(9.0, 12.0);
     var_4 = 1;
     var_5 = 1800;
-    var_6 = _func_0A4(-2000, 2000);
+    var_6 = _randomintrange(-2000, 2000);
     var_7 = 1;
     thread _id_7043(var_1, var_2, var_3, var_4, var_5, var_6, var_7);
     wait 0.75;
@@ -161,7 +161,7 @@ _id_7043(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_18 thread _id_7016(var_10);
 
     if(isDefined(var_9))
-      var_18 _meth_8276(var_9);
+      var_18 scriptmodelplayanim(var_9);
 
     var_14[var_14.size] = var_18;
     var_18.angles = vectortoangles(vectorNormalize(var_17 - var_16));
@@ -169,9 +169,9 @@ _id_7043(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_20 = anglestoright(var_18.angles);
 
     if(isDefined(var_6) && var_6)
-      _func_147(common_scripts\utility::_id_44F5("fighter_plane_flyover"), var_18, "tag_origin");
+      _playfxontag(common_scripts\utility::_id_44F5("fighter_plane_flyover"), var_18, "tag_origin");
     else
-      _func_147(common_scripts\utility::_id_44F5("bomber_plane_flyover"), var_18, "tag_origin");
+      _playfxontag(common_scripts\utility::_id_44F5("bomber_plane_flyover"), var_18, "tag_origin");
 
     if(isDefined(var_5) && var_15) {
       var_16 = var_16 + var_20 * var_5;
@@ -214,7 +214,7 @@ _id_7043(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     var_18 thread _id_7025();
     var_18 _id_0378::_id_8D74("mp_intro_dday_plane_flyover", var_10, var_18._id_7021);
-    var_18 _meth_82B1(var_18._id_4800, var_2);
+    var_18 moveto(var_18._id_4800, var_2);
     var_13++;
     waitframe();
   }
@@ -231,16 +231,16 @@ _id_7025() {
   var_0 = 0;
   var_1 = 5;
   var_2 = -8;
-  var_3 = _func_0A5(1.0, 2.0);
+  var_3 = _randomfloatrange(1.0, 2.0);
   var_4 = 1;
 
   for(;;) {
     if(var_4 % 2 == 0)
-      self _meth_82B8(self.angles + (0, 0, var_1), var_3);
+      self rotateto(self.angles + (0, 0, var_1), var_3);
     else if(var_4 % 3 == 0)
-      self _meth_82B8(self.angles + (0, 0, var_0), var_3);
+      self rotateto(self.angles + (0, 0, var_0), var_3);
     else
-      self _meth_82B8(self.angles + (0, 0, var_2), var_3);
+      self rotateto(self.angles + (0, 0, var_2), var_3);
 
     wait(var_3);
     var_4++;

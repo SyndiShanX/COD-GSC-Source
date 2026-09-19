@@ -77,7 +77,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 _meth_82B1(var_1, 1.9);
+  var_2 moveto(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -144,7 +144,7 @@ cable_oneshots() {
     var_2 = var_5;
     var_7 = var_4[randomint(var_4.size)];
     _id_0380::_id_2889(var_7, undefined, var_6);
-    wait(_func_0A5(var_0, var_1));
+    wait(_randomfloatrange(var_0, var_1));
   }
 }
 
@@ -163,7 +163,7 @@ boat_oneshots() {
     var_2 = var_5;
     var_7 = var_4[randomint(var_4.size)];
     _id_0380::_id_2889(var_7, undefined, var_6);
-    wait(_func_0A5(var_0, var_1));
+    wait(_randomfloatrange(var_0, var_1));
   }
 }
 
@@ -177,11 +177,11 @@ wave_oneshots() {
 
   for(;;) {
     var_5 = var_2[randomint(var_2.size)];
-    var_6 = _func_0A4(-1500, -900);
+    var_6 = _randomintrange(-1500, -900);
     var_7 = var_4[randomint(var_4.size)];
     var_8 = (var_5, var_6, var_3);
     _id_0380::_id_2889(var_7, undefined, var_8);
-    wait(_func_0A5(var_0, var_1));
+    wait(_randomfloatrange(var_0, var_1));
   }
 }
 
@@ -200,7 +200,7 @@ pool_oneshots() {
     var_2 = var_5;
     var_7 = var_4[randomint(var_4.size)];
     _id_0380::_id_2889(var_7, undefined, var_6);
-    wait(_func_0A5(var_0, var_1));
+    wait(_randomfloatrange(var_0, var_1));
   }
 }
 
@@ -274,7 +274,7 @@ metal_wronk_oneshot(var_0) {
   var_1 = self;
 
   for(;;) {
-    var_2 = _func_0A5(0.1, 0.3);
+    var_2 = _randomfloatrange(0.1, 0.3);
     var_3 = _id_0380::_id_288B("zmb_dnk_metal_wronks", undefined, var_1);
     _id_0380::_id_288F(var_3, var_1, "metal_wronk_done");
     var_1 waittill("metal_wronk_done");
@@ -287,7 +287,7 @@ tire_squeak_oneshot(var_0) {
   var_1 = self;
 
   for(;;) {
-    var_2 = _func_0A5(1.5, 2);
+    var_2 = _randomfloatrange(1.5, 2);
     var_3 = _id_0380::_id_288B("zmb_dnk_tire_squeaks", undefined, var_1);
     _id_0380::_id_288F(var_3, var_1, "tire_squeak_done");
     var_1 waittill("tire_squeak_done");
@@ -340,7 +340,7 @@ ee_follow_fish_earthquake(var_0) {
 ctf_void_enter() {
   foreach(var_1 in level.players) {
     var_1 soundscripts\_snd_common_zmb_dlc3::dlc3_altered_state_clear();
-    var_1 _meth_8626("enter_the_void", 3.0);
+    var_1 clientaddsoundsubmix("enter_the_void", 3.0);
     var_1 notify("kill_dlc3_wave_mus_switcher");
     var_1 thread play_void_music();
     var_1._id_11CB.in_the_void = 1;
@@ -352,7 +352,7 @@ ctf_void_enter() {
 
 ctf_void_exit() {
   foreach(var_1 in level.players) {
-    var_1 _meth_8627("enter_the_void", 3.0);
+    var_1 clientclearsoundsubmix("enter_the_void", 3.0);
     var_1 _id_0366::_id_8E09();
     var_1 notify("kill_void_music_thread");
     var_1._id_11CB.in_the_void = undefined;
@@ -370,7 +370,7 @@ play_void_music() {
 
   for(;;) {
     _id_0366::_id_8E31(var_1[randomint(var_1.size)], var_0);
-    wait(_func_0A4(120, 180));
+    wait(_randomintrange(120, 180));
     _id_0366::_id_8E32(var_0);
   }
 }

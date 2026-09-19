@@ -5,8 +5,8 @@
 
 _id_536B() {
   var_0 = spawnStruct();
-  var_0._id_10BD = _func_18E("assemble_ww_trig", "targetname");
-  var_0._id_AA68 = _func_21F(var_0._id_10BD.target, "targetname");
+  var_0._id_10BD = _getent("assemble_ww_trig", "targetname");
+  var_0._id_AA68 = _getscriptablearray(var_0._id_10BD.target, "targetname");
 
   foreach(var_2 in var_0._id_AA68) {
     var_3 = var_2 _meth_85CE();
@@ -31,28 +31,28 @@ _id_536B() {
     switch (var_8) {
       case "workbench_gunrack":
         var_0._id_48F2 = var_7;
-        var_0._id_48F2 _meth_805C();
+        var_0._id_48F2 hide();
         break;
       case "ww_model_frame":
       case "ww_model":
         var_0._id_10C0 = var_7;
-        var_0._id_10C0 _meth_805C();
+        var_0._id_10C0 hide();
         break;
       case "ww_model_barrel":
         var_0._id_10BE = var_7;
-        var_0._id_10BE _meth_805C();
+        var_0._id_10BE hide();
         break;
       case "ww_model_core":
         var_0._id_10BF = var_7;
-        var_0._id_10BF _meth_805C();
+        var_0._id_10BF hide();
         break;
       default:
         break;
     }
   }
 
-  var_0._id_10BE _meth_8055(var_0._id_10C0);
-  var_0._id_10BF _meth_8055(var_0._id_10C0);
+  var_0._id_10BE linkto(var_0._id_10C0);
+  var_0._id_10BF linkto(var_0._id_10C0);
   var_0._id_6FDB = getEntArray(var_0._id_10C0.target, "targetname");
 
   foreach(var_11 in var_0._id_6FDB)
@@ -118,8 +118,8 @@ _id_AA6B() {
   _id_0559::_id_2D8E(level._id_AA67._id_4D91);
   self._id_10BD delete();
   var_1 = % zmb_workbench_01_gunrack_spin;
-  var_2 = _func_065(var_1);
-  self._id_48F2 _meth_8278(_func_286(var_1));
+  var_2 = _getanimlength(var_1);
+  self._id_48F2 scriptmodelplayanimdeltamotion(_debuggetanimname(var_1));
   thread _id_74C8(var_1, "zmb_tesla_gunrack_beam", self._id_48F2, self._id_48F2, "beam_start", "beam_end", "charger_l", "charger_r");
   wait(var_2);
 
@@ -130,7 +130,7 @@ _id_AA6B() {
 }
 
 _id_AA70() {
-  self._id_10BD _meth_8177();
+  self._id_10BD usetriggerrequirelookat();
   self._id_10BD thread _id_AA6A();
   var_0 = undefined;
   var_1 = "flag_ww_part_01_placed";
@@ -144,8 +144,8 @@ _id_AA70() {
 
     if(common_scripts\utility::_id_3C77(var_4) && common_scripts\utility::_id_3C77(var_5) && common_scripts\utility::_id_3C77(var_3)) {
       if(!common_scripts\utility::_id_3C77(var_1) || !common_scripts\utility::_id_3C77(var_2)) {
-        self._id_10BF _meth_805B();
-        self._id_10BE _meth_805B();
+        self._id_10BF show();
+        self._id_10BE show();
         common_scripts\utility::flag_set(var_1);
         common_scripts\utility::flag_set(var_2);
       }
@@ -153,9 +153,9 @@ _id_AA70() {
       break;
     } else if(common_scripts\utility::_id_3C77(var_4) && common_scripts\utility::_id_3C77(var_5)) {
       if(!common_scripts\utility::_id_3C77(var_1) || !common_scripts\utility::_id_3C77(var_2)) {
-        self._id_10C0 _meth_8055(self._id_48F2, "clamp");
-        self._id_10BF _meth_805B();
-        self._id_10BE _meth_805B();
+        self._id_10C0 linkto(self._id_48F2, "clamp");
+        self._id_10BF show();
+        self._id_10BE show();
         common_scripts\utility::flag_set(var_1);
         common_scripts\utility::flag_set(var_2);
       }
@@ -163,7 +163,7 @@ _id_AA70() {
       continue;
     } else if(common_scripts\utility::_id_3C77(var_4)) {
       if(!common_scripts\utility::_id_3C77(var_1)) {
-        self._id_10BE _meth_805B();
+        self._id_10BE show();
         common_scripts\utility::flag_set(var_1);
       }
 
@@ -191,7 +191,7 @@ _id_AA70() {
 }
 
 _id_AA6A() {
-  self _meth_80CE(&"ZOMBIES_BUILDABLE_NO_PARTS");
+  self sethintstring(&"ZOMBIES_BUILDABLE_NO_PARTS");
   var_0 = "flag_ww_part_01_picked_up";
   var_1 = "flag_ww_part_02_picked_up";
   var_2 = "flag_ww_part_01_placed";
@@ -199,23 +199,23 @@ _id_AA6A() {
   var_4 = _id_0557::_id_7838("4 cart", "head to com");
   common_scripts\utility::_id_3C9F(var_0);
   _id_7C05();
-  self _meth_80CE(&"ZOMBIE_NEST_PLACE_WW_PART");
+  self sethintstring(&"ZOMBIE_NEST_PLACE_WW_PART");
   var_5 = common_scripts\utility::_id_3CA4(var_2, var_1);
 
   if(var_5 == var_2) {
-    self _meth_80CE(&"ZOMBIES_BUILDABLE_NO_PARTS");
+    self sethintstring(&"ZOMBIES_BUILDABLE_NO_PARTS");
     common_scripts\utility::_id_3C9F(var_1);
-    self _meth_80CE(&"ZOMBIE_NEST_PLACE_WW_PART");
+    self sethintstring(&"ZOMBIE_NEST_PLACE_WW_PART");
   }
 
   var_5 = common_scripts\utility::_id_3CA4(var_3, var_4);
 
   if(var_5 == var_3) {
-    self _meth_80CE(&"ZOMBIE_NEST_WAITING_FOR_CART");
+    self sethintstring(&"ZOMBIE_NEST_WAITING_FOR_CART");
     common_scripts\utility::_id_3C9F(var_4);
   }
 
-  self _meth_80CE(&"ZOMBIE_NEST_ASSEMBLE_WW");
+  self sethintstring(&"ZOMBIE_NEST_ASSEMBLE_WW");
 }
 
 _id_7C05() {
@@ -245,7 +245,7 @@ _id_AA6E(var_0, var_1) {
 
   for(;;) {
     [var_3, var_4] = var_0 _id_0547::_id_A795();
-    var_5 = var_3 _meth_8317();
+    var_5 = var_3 getcurrentprimaryweapon();
 
     if(_id_0547::_id_57AF(var_5) || _id_0547::_id_5862(var_5) || _id_0547::iszombieconsumableweapon(var_5)) {
       continue;
@@ -282,7 +282,7 @@ _id_AA6E(var_0, var_1) {
     } else if(!var_3 _id_0586::_id_05DF(var_1)) {
       var_14 = var_3 _id_0586::_id_0637();
 
-      if(_func_1A9(var_14) != "melee")
+      if(_weapontype(var_14) != "melee")
         var_3 _id_0586::_id_0790(var_14);
     }
 
@@ -296,7 +296,7 @@ _id_AA6E(var_0, var_1) {
     if(isDefined(var_3._id_A2B0) && isDefined(var_3._id_A2B0[var_1]))
       var_3 setweaponammoclip(var_1, var_3._id_A2B0[var_1]);
     else
-      var_3 setweaponammoclip(var_1, _func_1A3(var_1));
+      var_3 setweaponammoclip(var_1, _weaponclipsize(var_1));
 
     var_3 _id_0586::_id_078E(var_1);
     var_3 thread _id_AA69(var_1);
@@ -305,17 +305,17 @@ _id_AA6E(var_0, var_1) {
 }
 
 _id_AA6C() {
-  level._id_AA67._id_3291 _meth_83FA("doors", "open", 0);
+  level._id_AA67._id_3291 setscriptablepartstate("doors", "open", 0);
   var_0 = % zmb_workbench_01_gunrack_up_01;
-  level._id_AA67._id_48F2 _meth_805B();
+  level._id_AA67._id_48F2 show();
 
   if(isDefined(level._id_AA67._id_10C0)) {
-    level._id_AA67._id_10C0 _meth_805B();
-    level._id_AA67._id_10C0 _meth_8055(level._id_AA67._id_48F2, "clamp");
+    level._id_AA67._id_10C0 show();
+    level._id_AA67._id_10C0 linkto(level._id_AA67._id_48F2, "clamp");
   }
 
-  level._id_AA67._id_48F2 _meth_8278(_func_286(var_0));
-  var_1 = _func_065(var_0) * 0.5;
+  level._id_AA67._id_48F2 scriptmodelplayanimdeltamotion(_debuggetanimname(var_0));
+  var_1 = _getanimlength(var_0) * 0.5;
   wait(var_1);
 }
 
@@ -341,7 +341,7 @@ _id_AA6F(var_0) {
     var_6 = var_0 getweaponlistall();
 
     foreach(var_8 in var_6) {
-      var_4 = _func_05F(var_8);
+      var_4 = _getweaponbasename(var_8);
 
       if(var_4 == self._id_A9E0) {
         var_3 = 1;
@@ -352,15 +352,15 @@ _id_AA6F(var_0) {
         var_5 = 1;
     }
 
-    var_10 = var_0 _meth_8317();
+    var_10 = var_0 getcurrentprimaryweapon();
 
     if(0)
-      self _meth_80CD("HINT_NOICON");
+      self setcursorhint("HINT_NOICON");
 
     if(_id_0547::_id_57AF(var_10) || _id_0547::_id_5862(var_10) || _id_0547::iszombieconsumableweapon(var_10)) {
       if(0) {
-        self _meth_80CE("");
-        self _meth_80CF("");
+        self sethintstring("");
+        self setsecondaryhintstring("");
         self._id_3006 = undefined;
       }
 
@@ -377,15 +377,15 @@ _id_AA6F(var_0) {
         self._id_3006 = self._id_2925;
 
         if(0) {
-          self _meth_80CE(_id_0548::_id_4412(self));
-          self _meth_80CF(_id_0548::_id_4411(self, 0));
+          self sethintstring(_id_0548::_id_4412(self));
+          self setsecondaryhintstring(_id_0548::_id_4411(self, 0));
         }
 
         if(1) {}
       } else {
         if(0) {
-          self _meth_80CE("");
-          self _meth_80CF("");
+          self sethintstring("");
+          self setsecondaryhintstring("");
           self._id_3006 = undefined;
         }
 
@@ -411,7 +411,7 @@ _id_AA6F(var_0) {
     self._id_3006 = 0;
 
     if(0)
-      self _meth_80CE(&"ZOMBIE_NEST_PICKUP_WW");
+      self sethintstring(&"ZOMBIE_NEST_PICKUP_WW");
 
     if(1) {
       var_2._id_4028 = _id_0552::_id_44FF("ww_pickup");
@@ -422,10 +422,10 @@ _id_AA6F(var_0) {
 }
 
 _id_74C8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  var_8 = _func_067(var_0, var_4);
-  var_9 = var_8[0] * _func_065(var_0);
-  var_10 = _func_067(var_0, var_5);
-  var_11 = var_10[0] * _func_065(var_0);
+  var_8 = _getnotetracktimes(var_0, var_4);
+  var_9 = var_8[0] * _getanimlength(var_0);
+  var_10 = _getnotetracktimes(var_0, var_5);
+  var_11 = var_10[0] * _getanimlength(var_0);
   wait(var_9);
   var_12 = _func_382(var_1, var_2, var_6, var_3, var_7);
   wait(var_11 - var_9);
@@ -436,7 +436,7 @@ _id_AA75() {
   var_0 = common_scripts\utility::_id_46B5("ww_upgrade_pickup_central", "targetname");
   self _meth_8660(1, var_0.origin);
   common_scripts\utility::_id_9D9F();
-  var_1 = _func_21F(self.target, "targetname");
+  var_1 = _getscriptablearray(self.target, "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = var_3 _meth_85CE();
@@ -459,33 +459,33 @@ _id_AA75() {
     switch (var_8._id_0165) {
       case "workbench_gunrack":
         self._id_48F2 = var_8;
-        self._id_48F2 _meth_805C();
+        self._id_48F2 hide();
         self._id_48F2._id_9189 = self._id_48F2.angles;
         self._id_48F2._id_9255 = self._id_48F2.origin;
         break;
       case "workbench_ww_model":
         self._id_AAC8 = var_8;
-        self._id_AAC8 _meth_805C();
+        self._id_AAC8 hide();
         break;
       case "workbench_ww_model_core":
         self._id_AAC7 = var_8;
-        self._id_AAC7 _meth_805C();
+        self._id_AAC7 hide();
         break;
       case "workbench_ww_model_barrel":
         self._id_AAC6 = var_8;
-        self._id_AAC6 _meth_805C();
+        self._id_AAC6 hide();
         break;
     }
   }
 
   if(isDefined(self._id_48F2) && isDefined(self._id_AAC8))
-    self._id_AAC8 _meth_8055(self._id_48F2, "clamp");
+    self._id_AAC8 linkto(self._id_48F2, "clamp");
 
   if(isDefined(self._id_48F2) && isDefined(self._id_AAC7))
-    self._id_AAC7 _meth_8055(self._id_48F2, "clamp");
+    self._id_AAC7 linkto(self._id_48F2, "clamp");
 
   if(isDefined(self._id_48F2) && isDefined(self._id_AAC6))
-    self._id_AAC6 _meth_8055(self._id_48F2, "clamp");
+    self._id_AAC6 linkto(self._id_48F2, "clamp");
 }
 
 _id_AA73(var_0) {
@@ -501,9 +501,9 @@ _id_AA73(var_0) {
     thread _id_AA74();
 
   if(var_0) {
-    self._id_AAC8 _meth_805B();
-    self._id_AAC6 _meth_805B();
-    self._id_AAC7 _meth_805B();
+    self._id_AAC8 show();
+    self._id_AAC6 show();
+    self._id_AAC7 show();
   }
 
   var_1 = self._id_3291 _meth_866B("doors");
@@ -515,28 +515,28 @@ _id_AA73(var_0) {
   var_3 = % zmb_workbench_01_gunrack_up_idle_01;
   var_4 = % zmb_workbench_01_gunrack_down_01;
   var_5 = % zmb_workbench_01_gunrack_spin;
-  var_6 = _func_065(var_4);
-  var_7 = _func_065(var_2);
+  var_6 = _getanimlength(var_4);
+  var_7 = _getanimlength(var_2);
   var_8 = _func_382("zmb_tesla_gunrack_beam", self._id_48F2, "charger_l", self._id_48F2, "charger_r");
-  self._id_48F2 _meth_8277();
-  self._id_48F2 _meth_8278(_func_286(var_4));
+  self._id_48F2 scriptmodelclearanim();
+  self._id_48F2 scriptmodelplayanimdeltamotion(_debuggetanimname(var_4));
   wait(var_6);
   self._id_3291 _id_AA7E("close");
-  self._id_AAC6 _meth_805B();
-  self._id_AAC7 _meth_805B();
-  self._id_AAC8 _meth_805B();
+  self._id_AAC6 show();
+  self._id_AAC7 show();
+  self._id_AAC8 show();
   _id_AA77();
   wait 3;
-  self._id_48F2 _meth_8277();
-  self._id_48F2 _meth_8495(_func_286(var_2), self._id_48F2._id_9255, self._id_48F2._id_9189);
+  self._id_48F2 scriptmodelclearanim();
+  self._id_48F2 scriptmodelplayanimdeltamotionfrompos(_debuggetanimname(var_2), self._id_48F2._id_9255, self._id_48F2._id_9189);
   wait 0.1;
-  self._id_48F2 _meth_84CA(1);
+  self._id_48F2 setshadowrendering(1);
   self._id_3291 _id_AA7E("open");
-  self._id_48F2 _meth_84CA(0);
+  self._id_48F2 setshadowrendering(0);
   wait(var_7 - 0.1);
   var_8 delete();
-  self._id_48F2 _meth_8277();
-  self._id_48F2 _meth_8276(_func_286(var_5), "", 9.2);
+  self._id_48F2 scriptmodelclearanim();
+  self._id_48F2 scriptmodelplayanim(_debuggetanimname(var_5), "", 9.2);
   wait 0.866667;
   self._id_78A1 = "finished";
   self._id_2916 = "available";
@@ -579,7 +579,7 @@ _id_AA7E(var_0) {
   }
 
   if(var_1) {
-    self _meth_83FA("doors", var_0);
+    self setscriptablepartstate("doors", var_0);
     wait(var_2);
   }
 }
@@ -592,23 +592,23 @@ _id_AA7A(var_0) {
   var_4 = % zmb_workbench_01_gunrack_down_01;
   var_5 = % zmb_workbench_01_gunrack_idle_01;
   var_6 = % zmb_workbench_01_gunrack_spin;
-  var_7 = _func_065(var_4);
-  var_8 = _func_065(var_1);
+  var_7 = _getanimlength(var_4);
+  var_8 = _getanimlength(var_1);
   var_0._id_78A1 = "opening";
-  var_0._id_48F2 _meth_805B();
+  var_0._id_48F2 show();
 
   if(var_0._id_2916 == "available")
-    var_0._id_AAC5 _meth_805B();
+    var_0._id_AAC5 show();
 
-  var_0._id_48F2 _meth_8277();
-  var_0._id_48F2 _meth_8495(_func_286(var_1), var_0._id_48F2._id_9255, var_0._id_48F2._id_9189);
+  var_0._id_48F2 scriptmodelclearanim();
+  var_0._id_48F2 scriptmodelplayanimdeltamotionfrompos(_debuggetanimname(var_1), var_0._id_48F2._id_9255, var_0._id_48F2._id_9189);
   wait 0.1;
-  var_0._id_48F2 _meth_84CA(1);
+  var_0._id_48F2 setshadowrendering(1);
   var_0._id_3291 _id_AA7E("open");
-  var_0._id_48F2 _meth_84CA(0);
+  var_0._id_48F2 setshadowrendering(0);
   wait(var_8 - 0.1);
-  var_0._id_48F2 _meth_8277();
-  var_0._id_48F2 _meth_8276(_func_286(var_6), "", 9.2);
+  var_0._id_48F2 scriptmodelclearanim();
+  var_0._id_48F2 scriptmodelplayanim(_debuggetanimname(var_6), "", 9.2);
   wait 0.866667;
   var_0._id_78A1 = "opened";
 }
@@ -662,39 +662,39 @@ _id_AA79(var_0) {
   var_6 = % zmb_workbench_01_gunrack_down_01;
   var_7 = % zmb_workbench_01_gunrack_idle_01;
   var_8 = % zmb_workbench_01_gunrack_spin;
-  var_9 = _func_065(var_6);
-  var_10 = _func_065(var_3);
+  var_9 = _getanimlength(var_6);
+  var_10 = _getanimlength(var_3);
 
   for(;;) {
     if(distancesquared(self.origin, var_0._id_48F2._id_9255) > var_2 && var_0._id_78A1 == "opened") {
       var_0._id_78A1 = "closing";
-      var_0._id_9D65 _meth_80B3();
-      var_0._id_48F2 _meth_8277();
-      var_0._id_48F2 _meth_8278(_func_286(var_6), "");
+      var_0._id_9D65 makeunusable();
+      var_0._id_48F2 scriptmodelclearanim();
+      var_0._id_48F2 scriptmodelplayanimdeltamotion(_debuggetanimname(var_6), "");
       wait(var_9);
       var_0._id_3291 _id_AA7E("close");
-      var_0._id_48F2 _meth_805C();
+      var_0._id_48F2 hide();
 
       if(var_0._id_2916 == "available")
-        var_0._id_AAC5 _meth_805C();
+        var_0._id_AAC5 hide();
 
       var_0._id_78A1 = "closed";
     } else if(distancesquared(self.origin, var_0._id_48F2._id_9255) < var_2 && var_0._id_78A1 == "closed") {
       var_0._id_78A1 = "opening";
-      var_0._id_48F2 _meth_805B();
+      var_0._id_48F2 show();
 
       if(var_0._id_2916 == "available")
-        var_0._id_AAC5 _meth_805B();
+        var_0._id_AAC5 show();
 
-      var_0._id_48F2 _meth_8277();
-      var_0._id_48F2 _meth_8495(_func_286(var_3), var_0._id_48F2._id_9255, var_0._id_48F2._id_9189);
+      var_0._id_48F2 scriptmodelclearanim();
+      var_0._id_48F2 scriptmodelplayanimdeltamotionfrompos(_debuggetanimname(var_3), var_0._id_48F2._id_9255, var_0._id_48F2._id_9189);
       wait 0.1;
-      var_0._id_48F2 _meth_84CA(1);
+      var_0._id_48F2 setshadowrendering(1);
       var_0._id_3291 _id_AA7E("open");
-      var_0._id_48F2 _meth_84CA(0);
+      var_0._id_48F2 setshadowrendering(0);
       wait(var_10 - 0.1);
-      var_0._id_48F2 _meth_8277();
-      var_0._id_48F2 _meth_8276(_func_286(var_8), "", 9.2);
+      var_0._id_48F2 scriptmodelclearanim();
+      var_0._id_48F2 scriptmodelplayanim(_debuggetanimname(var_8), "", 9.2);
       wait 0.866667;
       var_0._id_9D65 makeusable();
       var_0._id_78A1 = "opened";
@@ -735,7 +735,7 @@ _id_AA76() {
 
   for(;;) {
     [var_2, var_3] = self._id_9D65 _id_0547::_id_A795();
-    var_4 = var_2 _meth_8317();
+    var_4 = var_2 getcurrentprimaryweapon();
 
     if(_id_0547::_id_57AF(var_4) || _id_0547::_id_5862(var_4) || _id_0547::iszombieconsumableweapon(var_4)) {
       continue;
@@ -764,7 +764,7 @@ _id_AA76() {
     } else if(!var_2 _id_0586::_id_05DF(self._id_A9E0)) {
       var_13 = var_2 _id_0586::_id_0637();
 
-      if(_func_1A9(var_13) != "melee")
+      if(_weapontype(var_13) != "melee")
         var_2 _id_0586::_id_0790(var_13);
     }
 
@@ -778,7 +778,7 @@ _id_AA76() {
     if(isDefined(var_2._id_A2B0) && isDefined(var_2._id_A2B0[self._id_A9E0]))
       var_2 setweaponammoclip(self._id_A9E0, var_2._id_A2B0[self._id_A9E0]);
     else
-      var_2 setweaponammoclip(self._id_A9E0, _func_1A3(self._id_A9E0));
+      var_2 setweaponammoclip(self._id_A9E0, _weaponclipsize(self._id_A9E0));
 
     var_2 _id_0586::_id_078E(self._id_A9E0);
     _id_AA7C(self._id_A9E0, var_2);
@@ -793,7 +793,7 @@ _id_AA78(var_0, var_1, var_2) {
     var_2 = 1;
 
   for(;;) {
-    var_3 = var_0 common_scripts\utility::_id_A715("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
+    var_3 = var_0 common_scripts\utility::waittill_any_return("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
 
     if(var_3 == "weapon_change") {
       if(_id_0547::_id_577E(var_0))
@@ -821,18 +821,18 @@ _id_AA78(var_0, var_1, var_2) {
 _id_AA7B(var_0) {
   level._id_AACA[var_0] _id_AA73(0);
   level._id_AACA[var_0]._id_9D65 common_scripts\utility::_id_9DA3();
-  level._id_AACA[var_0]._id_9D65._id_AAC8 _meth_805B();
-  level._id_AACA[var_0]._id_9D65._id_AAC7 _meth_805B();
-  level._id_AACA[var_0]._id_9D65._id_AAC6 _meth_805B();
+  level._id_AACA[var_0]._id_9D65._id_AAC8 show();
+  level._id_AACA[var_0]._id_9D65._id_AAC7 show();
+  level._id_AACA[var_0]._id_9D65._id_AAC6 show();
   level._id_AACA[var_0]._id_2916 = "available";
   level._id_AACA[var_0]._id_2909 = undefined;
 }
 
 _id_AA7C(var_0, var_1) {
   level._id_AACA[var_0]._id_9D65 common_scripts\utility::_id_9D9F();
-  level._id_AACA[var_0]._id_9D65._id_AAC8 _meth_805C();
-  level._id_AACA[var_0]._id_9D65._id_AAC7 _meth_805C();
-  level._id_AACA[var_0]._id_9D65._id_AAC6 _meth_805C();
+  level._id_AACA[var_0]._id_9D65._id_AAC8 hide();
+  level._id_AACA[var_0]._id_9D65._id_AAC7 hide();
+  level._id_AACA[var_0]._id_9D65._id_AAC6 hide();
   level._id_AACA[var_0]._id_2916 = "taken";
   level._id_AACA[var_0]._id_2909 = var_1;
 }
@@ -886,7 +886,7 @@ _id_AA69(var_0) {
   for(;;) {
     common_scripts\utility::_id_A70C(self, "missile_fire", level, "maxAmmoPickup", self, "heavyMeleeClip_earned");
 
-    if(self _meth_8319(var_0)) {
+    if(self hasweapon(var_0)) {
       self._id_A2AF[var_0] = self getweaponammostock(var_0);
       self._id_A2B0[var_0] = self getweaponammoclip(var_0);
     }

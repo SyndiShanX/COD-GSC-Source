@@ -84,7 +84,7 @@ _id_9BC3() {
         wait 30;
     }
 
-    _func_298(self._id_01D6);
+    _lootservicestarttrackingplaytime(self._id_01D6);
     self.loot_service_started_tracking_playtime = 1;
   }
 
@@ -126,7 +126,7 @@ _id_A153() {
 }
 
 _id_A14E() {
-  if(_func_0C1(self)) {
+  if(_isai(self)) {
     return;
   }
   if(!maps\mp\_utility::rankingenabled()) {
@@ -177,7 +177,7 @@ _id_A172() {
 }
 
 _id_A171() {
-  if(_func_154() == "hub")
+  if(_getteammode() == "hub")
     level._id_9858 = level._id_6079;
   else {
     level._id_9858 = level._id_6079 / 2;
@@ -186,7 +186,7 @@ _id_A171() {
 
     if(level._id_984C && maps\mp\_utility::isroundbased()) {
       if(isDefined(game["BalanceTeamsNextRound"]))
-        _func_18C(&"MP_AUTOBALANCE_NEXT_ROUND");
+        _iprintlnbold(&"MP_AUTOBALANCE_NEXT_ROUND");
 
       level waittill("restarting");
 
@@ -210,7 +210,7 @@ _id_A171() {
     for(;;) {
       if(level._id_984C) {
         if(!_id_46C4()) {
-          _func_18C(&"MP_AUTOBALANCE_SECONDS", 15);
+          _iprintlnbold(&"MP_AUTOBALANCE_SECONDS", 15);
           wait 15.0;
 
           if(!_id_46C4())
@@ -247,7 +247,7 @@ _id_46C4() {
 }
 
 _id_1502() {
-  _func_18C(game["strings"]["autobalance"]);
+  _iprintlnbold(game["strings"]["autobalance"]);
   var_0 = [];
   var_1 = [];
   var_2 = level.players;
@@ -330,20 +330,20 @@ _id_86FF() {
     _id_873E("axis", game["axis"]);
   }
 
-  _id_8692(_func_0EE("environment"));
+  _id_8692(_getmapcustom("environment"));
 }
 
 _id_73CA() {
-  if(_func_1EF(self) && !getdvarint("4017", 0))
+  if(_isagent(self) && !getdvarint("4017", 0))
     return 1;
 
   if(!isDefined(self._id_5097) || !self._id_5097) {
     self _meth_84C7(self._id_267E, undefined, 1, 1);
-    self _meth_8423(self);
+    self loadcustomizationplayerview(self);
   }
 
   self._id_A600 = "american";
-  self _meth_83E1("vestlight");
+  self setclothtype("vestlight");
   return 1;
 }
 
@@ -362,7 +362,7 @@ _id_A27D(var_0, var_1) {
 }
 
 _id_448C() {
-  var_0 = _func_283();
+  var_0 = _common_scripts/_bcs_location_trigs();
   return var_0;
 }
 
@@ -377,7 +377,7 @@ _id_4430() {
 
 _id_4636() {
   if(!isDefined(level._id_7613)) {
-    level._id_7614 = _func_27B(level._id_761B) - 1;
+    level._id_7614 = _tablegetcolumncount(level._id_761B) - 1;
     level._id_7613 = randomint(level._id_7614);
   }
 
@@ -391,7 +391,7 @@ _id_4636() {
   }
 
   var_2 = (level._id_7613 + var_0) % level._id_7614;
-  var_3 = _func_2B5(level._id_761B, var_2 + 1);
+  var_3 = _getcostumefromtable(level._id_761B, var_2 + 1);
   return var_3;
 }
 
@@ -401,7 +401,7 @@ _id_4503() {
   if(self.pers["team"] == "axis")
     var_0 = 1;
 
-  var_1 = _func_2B5(level._id_4B16, var_0);
+  var_1 = _getcostumefromtable(level._id_4B16, var_0);
   return var_1;
 }
 
@@ -440,7 +440,7 @@ _id_9BA7() {
         wait 30;
     }
 
-    _func_298(self._id_01D6);
+    _lootservicestarttrackingplaytime(self._id_01D6);
     self.loot_service_started_tracking_playtime = 1;
   }
 
@@ -487,7 +487,7 @@ _id_A114() {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
-  if(_func_0C1(self)) {
+  if(_isai(self)) {
     return;
   }
   if(self._id_9A06["allies"]) {
@@ -523,7 +523,7 @@ _id_452D(var_0) {
   if(level.gametype == "infect")
     return 1;
 
-  if(_func_154() == "hub")
+  if(_getteammode() == "hub")
     return 1;
 
   var_1 = 0;
@@ -547,7 +547,7 @@ _id_452D(var_0) {
 }
 
 _id_650C(var_0) {
-  return _func_1AF("mp/MTTable.csv", 0, var_0, 1);
+  return _tablelookupistring("mp/MTTable.csv", 0, var_0, 1);
 }
 
 _id_650B(var_0) {
@@ -559,19 +559,19 @@ _id_650A(var_0) {
 }
 
 _id_46D5(var_0) {
-  return _func_1AF("mp/factionTable.csv", 0, game[var_0], 1);
+  return _tablelookupistring("mp/factionTable.csv", 0, game[var_0], 1);
 }
 
 _id_46D6(var_0) {
-  return _func_1AF("mp/factionTable.csv", 0, game[var_0], 2);
+  return _tablelookupistring("mp/factionTable.csv", 0, game[var_0], 2);
 }
 
 _id_46D0(var_0) {
-  return _func_1AF("mp/factionTable.csv", 0, game[var_0], 4);
+  return _tablelookupistring("mp/factionTable.csv", 0, game[var_0], 4);
 }
 
 _id_46C9(var_0) {
-  return _func_1AF("mp/factionTable.csv", 0, game[var_0], 3);
+  return _tablelookupistring("mp/factionTable.csv", 0, game[var_0], 3);
 }
 
 _id_46D3(var_0) {
