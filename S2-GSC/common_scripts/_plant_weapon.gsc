@@ -1,472 +1,451 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/********************************************
+ * Decompiled and Edited by SyndiShanX
  * Script: common_scripts\_plant_weapon.gsc
-*********************************************/
+********************************************/
 
-func_5369(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  func_941B(param_01, param_02, param_03, param_04);
-  var_07 = getdvarint("weapon_plant_enabled", 1);
-  if(!var_07) {
+_id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  _id_941B(var_1, var_2, var_3, var_4);
+  var_7 = getdvarint("weapon_plant_enabled", 1);
+
+  if(!var_7) {
     return;
   }
-
-  if(!isDefined(param_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
+  if(isDefined(self._id_201C)) {
+    var_8 = var_0 == self._id_201C;
 
-  if(isDefined(self.var_201C)) {
-    var_08 = param_00 == self.var_201C;
-    if(var_08) {
+    if(var_8)
       return;
-    } else if(func_43DD() == "SCRIPTED_SWAP") {
+    else if(_id_43DD() == "SCRIPTED_SWAP") {
       self waittill("weapon_plant_dismount");
-      func_2399(1);
+      _id_2399(1);
     }
   }
 
-  self.var_7076 = undefined;
-  self.var_76E7 = undefined;
-  self.var_76EC = undefined;
-  self.var_201C = param_00;
-  self.var_7073 = undefined;
-  self.var_A6B4 = 0;
-  self.var_A1FC = 0;
-  self.var_706A = func_4295(param_00);
-  if(isDefined(param_05) && param_05) {
-    self.var_7077 = "STATE_CARRY_TO_PLANT";
-    self.var_7073 = param_06;
-    self.var_7075 = param_06;
+  self._id_7076 = undefined;
+  self._id_76E7 = undefined;
+  self._id_76EC = undefined;
+  self._id_201C = var_0;
+  self._id_7073 = undefined;
+  self._id_A6B4 = 0;
+  self._id_A1FC = 0;
+  self._id_706A = _id_4295(var_0);
+
+  if(isDefined(var_5) && var_5) {
+    self._id_7077 = "STATE_CARRY_TO_PLANT";
+    self._id_7073 = var_6;
+    self._id_7075 = var_6;
   } else {
-    self.var_7077 = "STATE_FIRST_CARRY";
-    if(func_43DD() == "SCRIPTED_ALTSWITCH" || func_43DD() == "NATIVE_DPAD_LEFT") {
-      self method_8328();
-    }
+    self._id_7077 = "STATE_FIRST_CARRY";
+
+    if(_id_43DD() == "SCRIPTED_ALTSWITCH" || _id_43DD() == "NATIVE_DPAD_LEFT")
+      self _meth_8328();
   }
 
-  if(func_43DD() != "NATIVE_DPAD_LEFT") {
-    if(isPlayer(self)) {
-      func_680D();
-    }
+  if(_id_43DD() != "NATIVE_DPAD_LEFT") {
+    if(isPlayer(self))
+      _id_680D();
   }
 
-  thread func_9963();
-  thread func_62DA();
-  thread func_A123();
-  thread func_6370();
-  if(func_43DD() == "SCRIPTED_SWAP" || func_43DD() == "SCRIPTED_ALTSWITCH") {
-    thread func_63F7();
-  }
+  thread _id_9963();
+  thread _id_62DA();
+  thread _id_A123();
+  thread _id_6370();
+
+  if(_id_43DD() == "SCRIPTED_SWAP" || _id_43DD() == "SCRIPTED_ALTSWITCH")
+    thread _id_63F7();
 }
 
-func_680D() {
-  self notifyonplayercommand("plant_button_down", "+actionslot 3");
-  self notifyonplayercommand("plant_button_up", "-actionslot 3");
-  self notifyonplayercommand("use_button_down", "+usereload");
-  self notifyonplayercommand("use_button_up", "-usereload");
+_id_680D() {
+  self _meth_82E1("plant_button_down", "+actionslot 3");
+  self _meth_82E1("plant_button_up", "-actionslot 3");
+  self _meth_82E1("use_button_down", "+usereload");
+  self _meth_82E1("use_button_up", "-usereload");
 }
 
-func_680C() {
-  self notifyonplayercommandremove("plant_button_down", "+actionslot 3");
-  self notifyonplayercommandremove("plant_button_up", "-actionslot 3");
-  self notifyonplayercommandremove("use_button_down", "+usereload");
-  self notifyonplayercommandremove("use_button_up", "-usereload");
+_id_680C() {
+  self _meth_84A7("plant_button_down", "+actionslot 3");
+  self _meth_84A7("plant_button_up", "-actionslot 3");
+  self _meth_84A7("use_button_down", "+usereload");
+  self _meth_84A7("use_button_up", "-usereload");
 }
 
-func_8551(param_00) {
-  self.var_7075 = param_00;
+_id_8551(var_0) {
+  self._id_7075 = var_0;
 }
 
-func_239A() {
+_id_239A() {
   self notify("cleanupWeaponPlantImmediate");
-  return func_2399(0);
+  return _id_2399(0);
 }
 
-func_2399(param_00) {
-  if(!isDefined(param_00)) {
-    param_00 = 1;
-  }
+_id_2399(var_0) {
+  if(!isDefined(var_0))
+    var_0 = 1;
 
   self notify("weapon_plant_cleanup");
-  if(self playerisweaponplantenabled()) {
-    func_2FED(param_00);
-  } else if(!param_00) {
-    func_2F97();
-  }
 
-  self.var_706A = undefined;
-  if(func_43DD() == "SCRIPTED_ALTSWITCH" || func_43DD() == "NATIVE_DPAD_LEFT") {
-    self enableweaponswitch();
-  }
+  if(self _meth_803D())
+    _id_2FED(var_0);
+  else if(!var_0)
+    _id_2F97();
 
-  self.var_7076 = undefined;
-  self.var_76E7 = undefined;
-  self.var_76EC = undefined;
-  self.var_201C = undefined;
-  self.var_7077 = undefined;
-  self.var_7073 = undefined;
-  self.var_7075 = undefined;
-  self.var_A6B4 = undefined;
-  self.var_A1FC = undefined;
-  func_2373();
-  if(isPlayer(self)) {
-    func_680C();
-  }
+  self._id_706A = undefined;
 
-  self setclientomnvar("ui_lmg_mount_state", 0);
-  self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
+  if(_id_43DD() == "SCRIPTED_ALTSWITCH" || _id_43DD() == "NATIVE_DPAD_LEFT")
+    self _meth_8329();
+
+  self._id_7076 = undefined;
+  self._id_76E7 = undefined;
+  self._id_76EC = undefined;
+  self._id_201C = undefined;
+  self._id_7077 = undefined;
+  self._id_7073 = undefined;
+  self._id_7075 = undefined;
+  self._id_A6B4 = undefined;
+  self._id_A1FC = undefined;
+  _id_2373();
+
+  if(isPlayer(self))
+    _id_680C();
+
+  self _meth_82FF("ui_lmg_mount_state", 0);
+  self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
 }
 
-func_9EA3() {
-  var_00 = undefined;
-  if(isDefined(self.var_76EC)) {
-    var_00 = lengthsquared(self.angles - self.var_76EC);
-  }
+_id_9EA3() {
+  var_0 = undefined;
 
-  self.var_76EC = self.angles;
-  var_01 = getdvarfloat("weapon_plant_max_turn_angle_vect_distance_sq", 70);
-  if(isDefined(var_00) && var_00 > var_01) {
+  if(isDefined(self._id_76EC))
+    var_0 = _func_0E5(self.angles - self._id_76EC);
+
+  self._id_76EC = self.angles;
+  var_1 = getdvarfloat("weapon_plant_max_turn_angle_vect_distance_sq", 70.0);
+
+  if(isDefined(var_0) && var_0 > var_1)
     return 1;
-  }
 
   return 0;
 }
 
-func_1F65() {
-  if(isDefined(self.var_2FAF) && self.var_2FAF) {
+_id_1F65() {
+  if(isDefined(self._id_2FAF) && self._id_2FAF)
     return 0;
-  }
 
-  if(isDefined(self.var_2016) && isDefined(self.var_2016.var_201C) && self.var_2016.var_201C == "iw5_carrydrone_mp" || self.var_2016.var_201C == "relic_mp") {
+  if(isDefined(self._id_2016) && isDefined(self._id_2016._id_201C) && (self._id_2016._id_201C == "iw5_carrydrone_mp" || self._id_2016._id_201C == "relic_mp"))
     return 0;
-  }
 
-  if(isDefined(self.var_5525) && self.var_5525) {
+  if(isDefined(self._id_5525) && self._id_5525)
     return 0;
-  }
 
-  if(!self.var_A1FC && self isonground() && !self method_82E5() && !self method_82E4() && !self method_84DE() && !self method_833B() && !self isusingturret() && !self method_817A() && !func_9EA3() && !isDefined(self getmovingplatformparent())) {
+  if(!self._id_A1FC && self _meth_8346() && !self _meth_82E5() && !self _meth_82E4() && !self _meth_84DE() && !self _meth_833B() && !self _meth_8347() && !self _meth_817A() && !_id_9EA3() && !isDefined(self _meth_83F3()))
     return 1;
-  }
 
   return 0;
 }
 
-func_5855() {
-  if(self playerisweaponplantenabled()) {
+_id_5855() {
+  if(self _meth_803D())
     return 1;
-  }
 
-  if(!isDefined(self.var_7077)) {
+  if(!isDefined(self._id_7077))
     return 0;
-  }
 
-  switch (self.var_7077) {
+  switch (self._id_7077) {
     case "STATE_PLANTED_TO_CARRY":
     case "STATE_PLANTED":
     case "STATE_PLANTED_NO_CARRY":
     case "STATE_CARRY_TO_PLANT":
       return 1;
-
     default:
       return 0;
   }
 }
 
-func_584E() {
-  if(!isDefined(self.var_7077)) {
+_id_584E() {
+  if(!isDefined(self._id_7077))
     return 0;
-  }
 
-  if(self.var_7077 == "STATE_PLANTED_TO_CARRY") {
+  if(self._id_7077 == "STATE_PLANTED_TO_CARRY")
     return 1;
-  }
-
-  return 0;
+  else
+    return 0;
 }
 
-func_2F97() {
-  self method_8112(1);
-  self method_8113(1);
-  self method_8114(1);
-  self allowlook(1);
-  self method_8307(1);
-  self allowjump(1);
-  self method_812A(1);
-  func_6518(1);
-  if(func_8B6B()) {
-    common_scripts\utility::func_617();
-  }
+_id_2F97() {
+  self _meth_8112(1);
+  self _meth_8113(1);
+  self _meth_8114(1);
+  self _meth_8115(1);
+  self _meth_8307(1);
+  self _meth_8305(1);
+  self _meth_812A(1);
+  _id_6518(1);
 
-  self enableoffhandweapons();
-  self enableusability();
+  if(_id_8B6B())
+    common_scripts\utility::_id_0617();
+
+  self _meth_8325();
+  self _meth_8332();
 }
 
-func_707A() {
-  var_00 = func_43D9();
-  var_01 = getdvarfloat("weapon_plant_limits_forward_offset", 0);
-  var_02 = getdvarfloat("weapon_plant_limits_upward_offset", 5);
-  var_03 = self.angles;
-  if(isDefined(self.var_7075)) {
-    self.var_7073 = self.var_7075;
-    self.var_7076 = "stand";
+_id_707A() {
+  var_0 = _id_43D9();
+  var_1 = getdvarfloat("weapon_plant_limits_forward_offset", 0.0);
+  var_2 = getdvarfloat("weapon_plant_limits_upward_offset", 5.0);
+  var_3 = self.angles;
+
+  if(isDefined(self._id_7075)) {
+    self._id_7073 = self._id_7075;
+    self._id_7076 = "stand";
   }
 
-  var_04 = self method_86B0();
-  var_05 = max(10, var_04[0] - 15);
-  var_04 = (-1 * var_05, var_04[1], var_04[2]);
-  var_04 = rotatevector(var_04, var_03);
-  var_06 = self.var_7073 + var_04;
-  self.var_76E7 = self getstance();
-  if(isDefined(self.var_7076)) {
-    var_07 = self.var_7076;
-    var_08 = self setstance(var_07);
-    if(isDefined(self.var_7075) && !var_08) {
-      var_08 = self setstance(var_07, 0);
-    }
-  } else {
-    var_07 = self.var_76E7;
-  }
+  var_4 = self _meth_86B0();
+  var_5 = max(10, var_4[0] - 15);
+  var_4 = (-1 * var_5, var_4[1], var_4[2]);
+  var_4 = _func_112(var_4, var_3);
+  var_6 = self._id_7073 + var_4;
+  self._id_76E7 = self _meth_8178();
 
-  if(isDefined(self.var_7075)) {
-    self.var_7075 = undefined;
-  }
+  if(isDefined(self._id_7076)) {
+    var_7 = self._id_7076;
+    var_8 = self _meth_8179(var_7);
 
-  var_09 = undefined;
-  if(var_07 == "prone") {
-    var_09 = vectortoangles(self.var_7073 - self.origin);
-  } else {
-    var_09 = self.angles;
-  }
+    if(isDefined(self._id_7075) && !var_8)
+      var_8 = self _meth_8179(var_7, 0);
+  } else
+    var_7 = self._id_76E7;
 
-  var_0A = func_4355(var_07);
-  var_0B = var_0A[0];
-  var_0C = var_0A[1];
-  var_0D = var_0A[2];
-  var_0E = var_0A[3];
-  var_0F = var_0B;
-  var_10 = var_0C;
-  var_11 = var_0D;
-  var_12 = var_0E;
-  if(func_8B53()) {
-    var_13 = common_scripts\_hit_found::func_43D8(self.origin[2], self.var_7073, var_06, var_09, var_02, var_01, var_00, var_0B, var_0C, var_0D, var_0E, func_4074());
-    var_0F = var_13[0];
-    var_10 = var_13[1];
-    var_11 = var_13[2];
-    var_12 = var_13[3];
-  }
+  if(isDefined(self._id_7075))
+    self._id_7075 = undefined;
 
-  func_941B(var_0F, var_10, var_11, var_12);
-  if(var_07 != "stand") {
-    self method_8112(0);
-  }
+  var_9 = undefined;
 
-  if(var_07 != "crouch") {
-    self method_8113(0);
-  }
+  if(var_7 == "prone")
+    var_9 = vectortoangles(self._id_7073 - self.origin);
+  else
+    var_9 = self.angles;
 
-  if(var_07 != "prone") {
-    self method_8114(0);
-  }
+  [var_11, var_12, var_13, var_14] = _id_4355(var_7);
+  var_15 = var_11;
+  var_16 = var_12;
+  var_17 = var_13;
+  var_18 = var_14;
 
-  self allowjump(0);
-  self method_8307(0);
-  self method_812A(0);
-  func_6518(0);
-  if(func_8B6B()) {
-    common_scripts\utility::func_603();
-  }
+  if(_id_8B53())
+    [var_15, var_16, var_17, var_18] = _id_028B::_id_43D8(self.origin[2], self._id_7073, var_6, var_9, var_2, var_1, var_0, var_11, var_12, var_13, var_14, _id_4074());
 
-  self disableoffhandweapons();
-  self disableusability();
-  self playerweaponplantenable(self.var_7073, var_0F, var_10, var_11, var_12);
-  func_707B(var_07, self.var_7073, self.angles);
-  if(func_43DD() == "SCRIPTED_SWAP") {
-    var_14 = self getweaponammoclip(self.var_201C);
-    var_15 = self getweaponammostock(self.var_201C);
-    var_16 = get_weapon_paintjobid();
-    var_17 = get_weapon_charmguid();
-    self giveweapon(self.var_706A, undefined, 1, self, var_16, var_17);
-    self setweaponammoclip(self.var_706A, var_14);
-    self setweaponammostock(self.var_706A, var_15);
-    self switchtoweapon(self.var_706A);
+  _id_941B(var_15, var_16, var_17, var_18);
+
+  if(var_7 != "stand")
+    self _meth_8112(0);
+
+  if(var_7 != "crouch")
+    self _meth_8113(0);
+
+  if(var_7 != "prone")
+    self _meth_8114(0);
+
+  self _meth_8305(0);
+  self _meth_8307(0);
+  self _meth_812A(0);
+  _id_6518(0);
+
+  if(_id_8B6B())
+    common_scripts\utility::_id_0603();
+
+  self _meth_8324();
+  self _meth_8331();
+  self _meth_803B(self._id_7073, var_15, var_16, var_17, var_18);
+  _id_707B(var_7, self._id_7073, self.angles);
+
+  if(_id_43DD() == "SCRIPTED_SWAP") {
+    var_20 = self getweaponammoclip(self._id_201C);
+    var_21 = self getweaponammostock(self._id_201C);
+    var_22 = get_weapon_paintjobid();
+    var_23 = get_weapon_charmguid();
+    self giveweapon(self._id_706A, undefined, 1, self, var_22, var_23);
+    self setweaponammoclip(self._id_706A, var_20);
+    self setweaponammostock(self._id_706A, var_21);
+    self switchtoweapon(self._id_706A);
     self waittill("weapon_change");
-  } else if(func_43DD() == "SCRIPTED_ALTSWITCH") {
-    self enableweaponswitch();
-    self switchtoweapon(self.var_706A);
-    wait(1);
-    self method_8328();
-  } else if(func_43DD() == "NATIVE_DPAD_LEFT") {
-    thread func_14F3(0.75);
-    while(self getcurrentweapon() != self.var_706A) {
-      wait 0.05;
-    }
+  } else if(_id_43DD() == "SCRIPTED_ALTSWITCH") {
+    self _meth_8329();
+    self switchtoweapon(self._id_706A);
+    wait 1;
+    self _meth_8328();
+  } else if(_id_43DD() == "NATIVE_DPAD_LEFT") {
+    thread _id_14F3(0.75);
 
-    self method_8328();
-    while(self isoffhandweaponreadytothrow() || self isswitchingweapon()) {
-      wait 0.05;
-    }
+    while(self getcurrentweapon() != self._id_706A)
+      waitframe();
 
-    if(self getcurrentweapon() != self.var_706A) {}
+    self _meth_8328();
+
+    while(self _meth_8678() || self _meth_8677())
+      waitframe();
+
+    if(self getcurrentweapon() != self._id_706A) {}
   }
 
-  self notify("WEAPON_PLANT_MOUNTED", var_07, self.var_7073, self.angles, self.var_706D);
+  self notify("WEAPON_PLANT_MOUNTED", var_7, self._id_7073, self.angles, self._id_706D);
 }
 
-func_14F3(param_00) {
+_id_14F3(var_0) {
   self endon("weapon_change");
-  wait(param_00);
-  if(self getcurrentweapon() != self.var_706A) {
-    self switchtoweapon(self.var_706A);
-  }
+  wait(var_0);
+
+  if(self getcurrentweapon() != self._id_706A)
+    self switchtoweapon(self._id_706A);
 }
 
 forcedismountweapon() {
   self notify("weapon_plant_cleanup");
 }
 
-func_2FED(param_00) {
-  self method_8112(1);
-  self method_8113(1);
-  self method_8114(1);
-  if(isDefined(self.var_76E7)) {
-    self setstance(self.var_76E7);
-    self.var_76E7 = undefined;
+_id_2FED(var_0) {
+  self _meth_8112(1);
+  self _meth_8113(1);
+  self _meth_8114(1);
+
+  if(isDefined(self._id_76E7)) {
+    self _meth_8179(self._id_76E7);
+    self._id_76E7 = undefined;
   }
 
-  self.var_7076 = undefined;
-  self playerweaponplantdisable(1);
-  func_2FEE();
-  if(func_43DD() == "SCRIPTED_SWAP") {
-    if(self hasweapon(self.var_706A)) {
-      var_01 = self getweaponammoclip(self.var_706A);
-      var_02 = self getweaponammostock(self.var_706A);
-      if(self getcurrentweapon() == self.var_706A) {
-        self switchtoweapon(self.var_201C);
-      }
+  self._id_7076 = undefined;
+  self _meth_803C(1);
+  _id_2FEE();
 
-      self setweaponammoclip(self.var_201C, var_01);
-      self setweaponammostock(self.var_201C, var_02);
-      common_scripts\utility::func_A71A(1, "weapon_change");
-      if(self getcurrentweapon() == self.var_706A) {
-        self switchtoweapon(self.var_201C);
-      }
+  if(_id_43DD() == "SCRIPTED_SWAP") {
+    if(self _meth_8319(self._id_706A)) {
+      var_1 = self getweaponammoclip(self._id_706A);
+      var_2 = self getweaponammostock(self._id_706A);
 
-      self takeweapon(self.var_706A);
+      if(self getcurrentweapon() == self._id_706A)
+        self switchtoweapon(self._id_201C);
+
+      self setweaponammoclip(self._id_201C, var_1);
+      self setweaponammostock(self._id_201C, var_2);
+      common_scripts\utility::_id_A71A(1.0, "weapon_change");
+
+      if(self getcurrentweapon() == self._id_706A)
+        self switchtoweapon(self._id_201C);
+
+      self takeweapon(self._id_706A);
     }
-  } else if(func_43DD() == "SCRIPTED_ALTSWITCH") {
-    self enableweaponswitch();
-    if(param_00) {
-      self switchtoweapon(self.var_201C);
-      wait(1);
-    } else {
-      self switchtoweaponimmediate(self.var_201C);
-    }
+  } else if(_id_43DD() == "SCRIPTED_ALTSWITCH") {
+    self _meth_8329();
 
-    self method_8328();
-  } else if(func_43DD() == "NATIVE_DPAD_LEFT") {
-    if(param_00) {
-      while(self getcurrentweapon() == self.var_706A) {
-        wait 0.05;
-      }
+    if(var_0) {
+      self switchtoweapon(self._id_201C);
+      wait 1;
+    } else
+      self _meth_831B(self._id_201C);
 
-      self method_8328();
-      while(self isoffhandweaponreadytothrow() || self isswitchingweapon()) {
-        wait 0.05;
-      }
+    self _meth_8328();
+  } else if(_id_43DD() == "NATIVE_DPAD_LEFT") {
+    if(var_0) {
+      while(self getcurrentweapon() == self._id_706A)
+        waitframe();
 
-      if(self getcurrentweapon() == self.var_706A) {}
-    } else {
-      self switchtoweaponimmediate(self.var_201C);
-    }
+      self _meth_8328();
+
+      while(self _meth_8678() || self _meth_8677())
+        waitframe();
+
+      if(self getcurrentweapon() == self._id_706A) {}
+    } else
+      self _meth_831B(self._id_201C);
   }
 
-  func_2F97();
+  _id_2F97();
   self notify("weapon_plant_dismount");
 }
 
-func_63F7() {
+_id_63F7() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("weapon_plant_cleanup");
+
   for(;;) {
     self waittill("use_button_down");
-    self.var_A1FC = 1;
+    self._id_A1FC = 1;
     self waittill("use_button_up");
-    self.var_A1FC = 0;
-    wait 0.05;
+    self._id_A1FC = 0;
+    waitframe();
   }
 }
 
-func_63BE() {
+_id_63BE() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("weapon_plant_cleanup");
-  self.var_A6B4 = 1;
+  self._id_A6B4 = 1;
   self waittill("plant_button_up");
-  self.var_A6B4 = 0;
+  self._id_A6B4 = 0;
 }
 
-func_21B6() {
-  if(self.var_A6B4) {
+_id_21B6() {
+  if(self._id_A6B4)
     self waittill("plant_button_up");
-  }
 }
 
-func_A6A5(param_00) {
+_id_A6A5(var_0) {
   level endon("game_ended");
-  func_98DF();
-  if(isDefined(param_00)) {
-    childthread func_21D0(param_00);
-    var_01 = common_scripts\utility::waittill_any_return("plant_button_down", "plantOnEntityRemoved", "native_dpad_force_plant");
-    if(isDefined(var_01) && var_01 == "plantOnEntityRemoved") {
-      return 1;
-    }
-  } else {
-    var_01 = common_scripts\utility::waittill_any_return("plant_button_down", "native_dpad_force_plant");
-  }
+  _id_98DF();
 
-  if(func_43DD() != "NATIVE_DPAD_LEFT") {
-    func_98E0();
-    thread func_63BE();
-    var_02 = getdvarfloat("weapon_plant_input_hold_duration", 0.2);
-    if(var_02 > 0) {
-      common_scripts\utility::func_A63E(var_02, "plant_button_up");
-    }
+  if(isDefined(var_0)) {
+    childthread _id_21D0(var_0);
+    var_1 = common_scripts\utility::_id_A715("plant_button_down", "plantOnEntityRemoved", "native_dpad_force_plant");
+
+    if(isDefined(var_1) && var_1 == "plantOnEntityRemoved")
+      return 1;
+  } else
+    var_1 = common_scripts\utility::_id_A715("plant_button_down", "native_dpad_force_plant");
+
+  if(_id_43DD() != "NATIVE_DPAD_LEFT") {
+    _id_98E0();
+    thread _id_63BE();
+    var_2 = getdvarfloat("weapon_plant_input_hold_duration", 0.2);
+
+    if(var_2 > 0)
+      common_scripts\utility::_id_A63E(var_2, "plant_button_up");
   }
 
   return 1;
 }
 
-func_A774() {
+_id_A774() {
   for(;;) {
-    if(self getcurrentweapon() == self.var_706A && !self isswitchingweapon()) {
+    if(self getcurrentweapon() == self._id_706A && !self _meth_8677())
       return 1;
-    } else {
-      wait 0.05;
-    }
+    else
+      waitframe();
   }
 }
 
-func_A772(param_00) {
-  func_98DF();
-  if(isDefined(param_00)) {
-    childthread func_21D0(param_00);
-  }
+_id_A772(var_0) {
+  _id_98DF();
+
+  if(isDefined(var_0))
+    childthread _id_21D0(var_0);
 
   for(;;) {
-    if(self getcurrentweapon() == self.var_201C || self getcurrentweapon() == self.var_706A && self isswitchingweapon()) {
-      func_98E0();
+    if(self getcurrentweapon() == self._id_201C || self getcurrentweapon() == self._id_706A && self _meth_8677()) {
+      _id_98E0();
       return 1;
-    } else {
-      wait 0.05;
-    }
+    } else
+      waitframe();
   }
 }
 
-func_A771() {
+_id_A771() {
   for(;;) {
-    if((self getcurrentweapon() == self.var_706A && self isoffhandweaponreadytothrow()) || self getcurrentweapon() == self.var_201C && self isswitchingweapon()) {
-      wait 0.05;
+    if(self getcurrentweapon() == self._id_706A && self _meth_8678() || self getcurrentweapon() == self._id_201C && self _meth_8677()) {
+      waitframe();
       continue;
     }
 
@@ -474,257 +453,249 @@ func_A771() {
   }
 }
 
-func_37BF(param_00) {
-  self.var_7077 = param_00;
+_id_37BF(var_0) {
+  self._id_7077 = var_0;
 }
 
-func_38F6() {
-  switch (self.var_7077) {
+_id_38F6() {
+  switch (self._id_7077) {
     case "STATE_CARRY":
     case "STATE_FIRST_CARRY":
-      func_37BF("STATE_CARRY_TO_PLANT");
+      _id_37BF("STATE_CARRY_TO_PLANT");
       break;
-
     case "STATE_CARRY_TO_PLANT":
-      func_37BF("STATE_PLANTED_NO_CARRY");
+      _id_37BF("STATE_PLANTED_NO_CARRY");
       break;
-
     case "STATE_PLANTED_NO_CARRY":
-      func_37BF("STATE_PLANTED");
+      _id_37BF("STATE_PLANTED");
       break;
-
     case "STATE_PLANTED":
-      func_37BF("STATE_PLANTED_TO_CARRY");
+      _id_37BF("STATE_PLANTED_TO_CARRY");
       break;
-
     case "STATE_PLANTED_TO_CARRY":
-      func_37BF("STATE_CARRY_NO_PLANT");
+      _id_37BF("STATE_CARRY_NO_PLANT");
       break;
-
     case "STATE_CARRY_NO_PLANT":
-      func_37BF("STATE_CARRY");
+      _id_37BF("STATE_CARRY");
       break;
   }
 }
 
-func_9963() {
+_id_9963() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("weapon_plant_cleanup");
-  var_00 = -1;
-  var_01 = 0;
+  var_0 = -1;
+  var_1 = 0;
+
   for(;;) {
-    var_02 = gettime();
-    if(!isDefined(self.var_7077)) {
+    var_2 = gettime();
+
+    if(!isDefined(self._id_7077)) {
       return;
     }
-
-    switch (self.var_7077) {
+    switch (self._id_7077) {
       case "STATE_CARRY":
       case "STATE_FIRST_CARRY":
-        if(isDefined(func_A6A5())) {
-          if(isDefined(self.var_7073)) {
-            func_38F6();
-          } else if(self getstance() == "prone" && func_1F65()) {
-            func_3A66();
-          }
+        if(isDefined(_id_A6A5())) {
+          if(isDefined(self._id_7073))
+            _id_38F6();
+          else if(self _meth_8178() == "prone" && _id_1F65())
+            _id_3A66();
         }
-        break;
 
+        break;
       case "STATE_CARRY_TO_PLANT":
-        func_707A();
-        self allowlook(1);
-        func_38F6();
+        _id_707A();
+        self _meth_8115(1);
+        _id_38F6();
         break;
-
       case "STATE_PLANTED_NO_CARRY":
-        if(func_43DD() == "NATIVE_DPAD_LEFT") {
-          func_A774();
-        } else {
-          func_21B6();
-        }
+        if(_id_43DD() == "NATIVE_DPAD_LEFT")
+          _id_A774();
+        else
+          _id_21B6();
 
-        func_38F6();
+        _id_38F6();
         break;
-
       case "STATE_PLANTED":
-        var_03 = undefined;
-        if(func_43DD() == "NATIVE_DPAD_LEFT") {
-          var_03 = func_A772(self.var_706D);
-        } else {
-          var_03 = func_A6A5(self.var_706D);
-        }
+        var_3 = undefined;
 
-        if(isDefined(var_03)) {
-          func_38F6();
-        }
+        if(_id_43DD() == "NATIVE_DPAD_LEFT")
+          var_3 = _id_A772(self._id_706D);
+        else
+          var_3 = _id_A6A5(self._id_706D);
+
+        if(isDefined(var_3))
+          _id_38F6();
+
         break;
-
       case "STATE_PLANTED_TO_CARRY":
-        func_2FED(1);
-        func_38F6();
+        _id_2FED(1);
+        _id_38F6();
         break;
-
       case "STATE_CARRY_NO_PLANT":
-        if(func_43DD() == "NATIVE_DPAD_LEFT") {
-          func_A771();
-        } else {
-          func_21B6();
-        }
+        if(_id_43DD() == "NATIVE_DPAD_LEFT")
+          _id_A771();
+        else
+          _id_21B6();
 
-        func_38F6();
+        _id_38F6();
         break;
-
       default:
-        break;
+        continue;
     }
 
-    if(var_00 == var_02) {
-      var_01++;
-      if(var_01 > 5) {
-        wait 0.05;
-      }
+    if(var_0 == var_2) {
+      var_1++;
+
+      if(var_1 > 5)
+        waitframe();
 
       continue;
     }
 
-    var_01 = 0;
-    var_00 = var_02;
+    var_1 = 0;
+    var_0 = var_2;
   }
 }
 
-func_A123() {
+_id_A123() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("weapon_plant_cleanup");
+
   for(;;) {
-    if(!isDefined(self.var_7077)) {
+    if(!isDefined(self._id_7077)) {
       return;
     }
-
-    switch (self.var_7077) {
+    switch (self._id_7077) {
       case "STATE_CARRY":
       case "STATE_FIRST_CARRY":
-        if(self isusingturret()) {
-          wait 0.05;
-          break;
+        if(self _meth_8347()) {
+          waitframe();
+          continue;
         }
 
-        if(isDefined(self.var_7073)) {
-          self setclientomnvar("ui_lmg_mount_state", 0);
-          self setclientomnvar("ui_show_division_lmg_ability_prompt", 1);
-        } else {
-          self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
-        }
+        if(isDefined(self._id_7073)) {
+          self _meth_82FF("ui_lmg_mount_state", 0);
+          self _meth_82FF("ui_show_division_lmg_ability_prompt", 1);
+        } else
+          self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
+
         break;
-
       case "STATE_PLANTED":
-        self setclientomnvar("ui_lmg_mount_state", 1);
-        if(!isDefined(self.var_706E) || !self.var_706E) {
-          self setclientomnvar("ui_show_division_lmg_ability_prompt", 1);
-        } else {
-          self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
-        }
+        self _meth_82FF("ui_lmg_mount_state", 1);
 
-        if(func_43DD() == "SCRIPTED_SWAP") {
-          if(isDefined(self.var_706A) && self getcurrentweapon() == self.var_706A) {
-            var_00 = self getweaponammoclip(self.var_706A);
-            var_01 = self getweaponammostock(self.var_706A);
-            if(var_01 == 0 && var_00 < 2) {
-              self setweaponammoclip(self.var_201C, var_00);
-              self setweaponammostock(self.var_201C, var_01);
+        if(!isDefined(self._id_706E) || !self._id_706E)
+          self _meth_82FF("ui_show_division_lmg_ability_prompt", 1);
+        else
+          self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
+
+        if(_id_43DD() == "SCRIPTED_SWAP") {
+          if(isDefined(self._id_706A) && self getcurrentweapon() == self._id_706A) {
+            var_0 = self getweaponammoclip(self._id_706A);
+            var_1 = self getweaponammostock(self._id_706A);
+
+            if(var_1 == 0 && var_0 < 2) {
+              self setweaponammoclip(self._id_201C, var_0);
+              self setweaponammostock(self._id_201C, var_1);
             }
           }
         }
-        break;
 
+        break;
       case "STATE_CARRY_NO_PLANT":
       case "STATE_PLANTED_TO_CARRY":
       case "STATE_PLANTED_NO_CARRY":
       case "STATE_CARRY_TO_PLANT":
-        self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
+        self _meth_82FF("ui_show_division_lmg_ability_prompt", 0);
         break;
     }
 
-    wait 0.05;
+    waitframe();
   }
 }
 
-func_62DA() {
+_id_62DA() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("weapon_plant_cleanup");
-  var_00 = undefined;
-  var_01 = 0;
+  var_0 = undefined;
+  var_1 = 0;
+
   for(;;) {
-    var_02 = getdvarint("weapon_plant_enabled", 1);
-    if(!var_02 && isDefined(self.var_7077)) {
+    var_2 = getdvarint("weapon_plant_enabled", 1);
+
+    if(!(var_2 && isDefined(self._id_7077))) {
       self notify("weapon_plant_cleanup");
       return;
     }
 
-    switch (self.var_7077) {
+    switch (self._id_7077) {
       case "STATE_CARRY":
       case "STATE_FIRST_CARRY":
-        self.var_7073 = undefined;
-        self.var_7070 = undefined;
-        self.var_706D = undefined;
-        if(!func_1F65()) {
+        self._id_7073 = undefined;
+        self._id_7070 = undefined;
+        self._id_706D = undefined;
+
+        if(!_id_1F65()) {
           break;
         }
 
-        var_03 = getdvarint("weapon_plant_prone_plant", 1);
-        var_04 = var_03 && self getstance() == "prone";
-        var_05 = getdvarint("turret_clip_plant", 1);
-        var_06 = getdvarint("turret_mantle_plant", 0);
-        var_07 = undefined;
-        var_08 = undefined;
-        var_07 = getdvarfloat("4485");
-        if(var_04) {
-          var_08 = var_07;
-        }
+        var_3 = getdvarint("weapon_plant_prone_plant", 1);
+        var_4 = var_3 && self _meth_8178() == "prone";
+        var_5 = getdvarint("turret_clip_plant", 1);
+        var_6 = getdvarint("turret_mantle_plant", 0);
+        var_7 = undefined;
+        var_8 = undefined;
+        var_7 = getdvarfloat("4485");
 
-        var_09 = undefined;
-        if(isDefined(self.var_7075)) {
-          self.var_7073 = self.var_7075;
-        } else {
-          var_0A = common_scripts\_hit_found::func_9F90(var_05, var_06, var_04, var_07, var_08);
-          var_0B = var_0A[0];
-          var_0C = var_0A[1];
-          var_09 = var_0A[2];
-          if(var_04 && isDefined(var_0B)) {
-            self.var_7073 = var_0B;
-            self.var_7076 = "prone";
-            if(!self playerweaponplantcheckprone(self.var_7073)) {
-              self.var_7073 = undefined;
-            }
-          } else if(isDefined(var_0B) && common_scripts\_hit_found::func_4B43(var_0B, var_07, func_4074())) {
-            self.var_7073 = var_0B;
-            self.var_7076 = undefined;
-            var_0D = getdvarfloat("3235", 48);
-            var_0E = getdvarfloat("1492", 34);
-            var_0F = var_0B[2] - self.origin[2];
-            if(var_0F >= var_0D) {
-              var_10 = func_43DE();
-              var_11 = var_0D + var_10;
-              if(var_0F <= var_11 + 0.001) {
-                self.var_7076 = "stand";
-              } else {
-                self.var_7073 = undefined;
+        if(var_4)
+          var_8 = var_7;
+
+        var_9 = undefined;
+
+        if(isDefined(self._id_7075))
+          self._id_7073 = self._id_7075;
+        else {
+          [var_11, var_12, var_9] = _id_028B::_id_9F90(var_5, var_6, var_4, var_7, var_8);
+
+          if(var_4 && isDefined(var_11)) {
+            self._id_7073 = var_11;
+            self._id_7076 = "prone";
+
+            if(!self _meth_803A(self._id_7073))
+              self._id_7073 = undefined;
+          } else if(isDefined(var_11) && _id_028B::_id_4B43(var_11, var_7, _id_4074())) {
+            self._id_7073 = var_11;
+            self._id_7076 = undefined;
+            var_13 = getdvarfloat("3235", 48.0);
+            var_14 = getdvarfloat("1492", 34.0);
+            var_15 = var_11[2] - self.origin[2];
+
+            if(var_15 >= var_13) {
+              var_16 = _id_43DE();
+              var_17 = var_13 + var_16;
+
+              if(var_15 <= var_17 + 0.001)
+                self._id_7076 = "stand";
+              else {
+                self._id_7073 = undefined;
                 break;
               }
-            } else if(var_0F > var_0E) {
-              self.var_7076 = "stand";
-            }
+            } else if(var_15 > var_14)
+              self._id_7076 = "stand";
 
-            if(!isDefined(self.var_7076)) {
-              if(var_0F <= var_0E) {
-                var_12 = func_43DA();
-                var_13 = var_0E - var_12;
-                if(var_0F >= var_13 - 0.001) {
-                  self.var_7076 = "crouch";
-                } else {
-                  self.var_7073 = undefined;
+            if(!isDefined(self._id_7076)) {
+              if(var_15 <= var_14) {
+                var_18 = _id_43DA();
+                var_19 = var_14 - var_18;
+
+                if(var_15 >= var_19 - 0.001)
+                  self._id_7076 = "crouch";
+                else {
+                  self._id_7073 = undefined;
                   break;
                 }
               }
@@ -732,310 +703,302 @@ func_62DA() {
           }
         }
 
-        if(isDefined(self.var_7075)) {
-          var_00 = self.var_7075;
-        } else if(isDefined(self.var_7073)) {
-          if(isDefined(self.var_706F) && self.var_706F) {
-            self.var_7070 = self.var_7073;
-            self.var_7073 = undefined;
+        if(isDefined(self._id_7075))
+          var_0 = self._id_7075;
+        else if(isDefined(self._id_7073)) {
+          if(isDefined(self._id_706F) && self._id_706F) {
+            self._id_7070 = self._id_7073;
+            self._id_7073 = undefined;
           } else {
-            self.var_706D = var_09;
-            var_00 = self.var_7073;
+            self._id_706D = var_9;
+            var_0 = self._id_7073;
           }
         }
-        break;
 
+        break;
       case "STATE_CARRY_TO_PLANT":
         break;
-
       case "STATE_PLANTED":
       case "STATE_PLANTED_NO_CARRY":
-        self.var_7073 = undefined;
+        self._id_7073 = undefined;
         break;
-
       case "STATE_CARRY_NO_PLANT":
-        self.var_7073 = undefined;
+        self._id_7073 = undefined;
         break;
     }
 
-    if(func_43DD() == "NATIVE_DPAD_LEFT") {
-      var_14 = undefined;
-      if(isDefined(self.var_706E) && self.var_706E) {
-        var_14 = 0;
-      } else {
-        switch (self.var_7077) {
+    if(_id_43DD() == "NATIVE_DPAD_LEFT") {
+      var_20 = undefined;
+
+      if(isDefined(self._id_706E) && self._id_706E)
+        var_20 = 0;
+      else {
+        switch (self._id_7077) {
           case "STATE_CARRY":
           case "STATE_FIRST_CARRY":
-            var_14 = isDefined(self.var_7073) || isDefined(self.var_7075);
+            var_20 = isDefined(self._id_7073) || isDefined(self._id_7075);
             break;
-
           case "STATE_CARRY_TO_PLANT":
-            var_14 = -1;
+            var_20 = -1;
             break;
-
           case "STATE_PLANTED_NO_CARRY":
-            var_14 = -1;
+            var_20 = -1;
             break;
-
           case "STATE_PLANTED":
-            var_14 = 1;
+            var_20 = 1;
             break;
-
           case "STATE_PLANTED_TO_CARRY":
-            var_14 = -1;
+            var_20 = -1;
             break;
-
           case "STATE_CARRY_NO_PLANT":
-            var_14 = -1;
+            var_20 = -1;
             break;
         }
       }
 
-      if(var_14 == 1) {
-        if(!self method_85EC()) {
-          self enableweaponswitch();
-          func_680D();
+      if(var_20 == 1) {
+        if(!self _meth_85EC()) {
+          self _meth_8329();
+          _id_680D();
         }
-      } else if(var_14 == 0) {
-        if(self method_85EC()) {
-          self.var_A1FC = 0;
-          self.var_A6B4 = 0;
-          self method_8328();
-          func_680C();
+      } else if(var_20 == 0) {
+        if(self _meth_85EC()) {
+          self._id_A1FC = 0;
+          self._id_A6B4 = 0;
+          self _meth_8328();
+          _id_680C();
         }
       }
 
-      if(self.var_7077 == "STATE_CARRY" && !self method_85EC() && self method_86B1("to_alt")) {
-        self.var_7073 = var_00;
+      if(self._id_7077 == "STATE_CARRY" && !self _meth_85EC() && self _meth_86B1("to_alt")) {
+        self._id_7073 = var_0;
         self notify("native_dpad_force_plant");
       }
     }
 
-    wait 0.05;
+    waitframe();
   }
 }
 
-func_6370() {
+_id_6370() {
   self endon("disconnect");
   self endon("cleanupWeaponPlantImmediate");
   self notify("monitor_planted_weapon_cleanup");
   self endon("monitor_planted_weapon_cleanup");
-  var_00 = common_scripts\utility::waittill_any_return_no_endon_death("weapon_plant_cleanup", "weapon_change", "death", "joined_team", "joined_spectators", "weaponPlantFiringRange");
-  if(var_00 == "weapon_change") {
-    var_01 = 0;
-    var_02 = 0;
-    var_03 = 0;
-    var_04 = self getcurrentweapon();
-    if(func_43DD() == "SCRIPTED_SWAP") {
-      var_01 = 0;
-      var_02 = isDefined(self.var_706A) && var_04 == self.var_706A;
-      var_03 = isDefined(self.var_706A) && var_04 == self.var_201C;
-      if(var_03) {
-        if(isDefined(self.var_706A) && self hasweapon(self.var_706A)) {
-          var_05 = self getweaponammoclip(self.var_706A);
-          var_06 = self getweaponammostock(self.var_706A);
-          var_07 = var_05 == 0 && var_06 == 0;
-          if(var_07) {
-            var_08 = getdvarfloat("weapon_plant_input_hold_duration", 0.2);
+  var_0 = common_scripts\utility::_id_A716("weapon_plant_cleanup", "weapon_change", "death", "joined_team", "joined_spectators", "weaponPlantFiringRange");
+
+  if(var_0 == "weapon_change") {
+    var_1 = 0;
+    var_2 = 0;
+    var_3 = 0;
+    var_4 = self getcurrentweapon();
+
+    if(_id_43DD() == "SCRIPTED_SWAP") {
+      var_1 = 0;
+      var_2 = isDefined(self._id_706A) && var_4 == self._id_706A;
+      var_3 = isDefined(self._id_706A) && var_4 == self._id_201C;
+
+      if(var_3) {
+        if(isDefined(self._id_706A) && self _meth_8319(self._id_706A)) {
+          var_5 = self getweaponammoclip(self._id_706A);
+          var_6 = self getweaponammostock(self._id_706A);
+          var_7 = var_5 == 0 && var_6 == 0;
+
+          if(var_7) {
+            var_8 = getdvarfloat("weapon_plant_input_hold_duration", 0.2);
             self notify("plant_button_down");
-            wait(var_08);
+            wait(var_8);
             self notify("plant_button_up");
           }
         }
       }
-    } else {
-      var_01 = var_04 == self.var_201C || var_04 == self.var_706A;
-    }
+    } else
+      var_1 = var_4 == self._id_201C || var_4 == self._id_706A;
 
-    if(var_04 != "none" && var_01 || var_02 || var_03) {
-      thread func_6370();
+    if(var_4 != "none" && (var_1 || var_2 || var_3)) {
+      thread _id_6370();
       return;
     }
   }
 
-  if(common_scripts\utility::func_562E(self.tmpplayerfreeze)) {
-    func_98DF();
-  }
+  if(common_scripts\utility::_id_562E(self.tmpplayerfreeze))
+    _id_98DF();
 
-  func_2399(1);
+  _id_2399(1);
 }
 
-func_98DF() {
-  if(func_43DD() != "NATIVE_DPAD_LEFT") {
-    self allowlook(1);
-  }
+_id_98DF() {
+  if(_id_43DD() != "NATIVE_DPAD_LEFT")
+    self _meth_8115(1);
 
-  self allowjump(1);
-  self method_8307(1);
+  self _meth_8305(1);
+  self _meth_8307(1);
   self.tmpplayerfreeze = undefined;
 }
 
-func_98E0() {
+_id_98E0() {
   self.tmpplayerfreeze = 1;
-  if(func_43DD() != "NATIVE_DPAD_LEFT") {
-    self allowlook(0);
-  }
 
-  self allowjump(0);
-  self method_8307(0);
+  if(_id_43DD() != "NATIVE_DPAD_LEFT")
+    self _meth_8115(0);
+
+  self _meth_8305(0);
+  self _meth_8307(0);
 }
 
-func_21D0(param_00) {
+_id_21D0(var_0) {
   self endon("disconnect");
   self endon("cleanupWeaponPlantImmediate");
-  var_01 = 0;
-  var_02 = undefined;
-  var_03 = undefined;
-  var_04 = undefined;
-  if(!isDefined(param_00)) {
+  var_1 = 0;
+  var_2 = undefined;
+  var_3 = undefined;
+  var_4 = undefined;
+
+  if(!isDefined(var_0)) {
     return;
   }
+  var_5 = var_0 _id_8C6C();
+  var_6 = var_0.model;
+  var_7 = "";
 
-  var_05 = param_00 func_8C6C();
-  var_06 = param_00.model;
-  var_07 = "";
-  if(param_00.classname == "scriptable") {
-    var_07 = param_00 getscriptablepartstate(0);
-  }
+  if(var_0.classname == "scriptable")
+    var_7 = var_0 _meth_866B(0);
 
-  if(func_5778(param_00)) {
-    var_02 = param_00.origin;
-    var_03 = param_00.angles;
-    if(param_00 method_8221() && param_00 gettagangles("TAG_YAW") != -1) {
-      var_04 = param_00 gettagangles("TAG_YAW");
-    }
+  if(_id_5778(var_0)) {
+    var_2 = var_0.origin;
+    var_3 = var_0.angles;
+
+    if(var_0 _meth_8221() && var_0 _meth_8181("TAG_YAW") != -1)
+      var_4 = var_0 _meth_8181("TAG_YAW");
   }
 
   for(;;) {
-    if(!isDefined(param_00)) {
-      var_01 = 1;
-    } else if(isDefined(var_05) && !var_05 && (param_00.classname == "script_brushmodel" || param_00.classname == "script_model") && param_00 func_8C6C()) {
-      var_01 = 1;
-    } else if((param_00.classname == "script_brushmodel" || param_00.classname == "script_model") && !param_00 method_86A9()) {
-      var_01 = 1;
-    } else if(param_00.classname == "scriptable" && param_00 getscriptablepartstate(0) != var_07) {
-      var_01 = 1;
-    } else if(isDefined(param_00.model) && param_00.model != "" && param_00 isentdestructible() && param_00 getdestructibledestroyedpercent() > 0) {
-      var_01 = 1;
-    } else if(isDefined(var_02) && distance2dsquared(var_02, param_00.origin) > 1) {
-      var_01 = 1;
-    } else if(isDefined(var_03) && distancesquared(var_03, param_00.angles) > 1) {
-      var_01 = 1;
-    } else if(isDefined(var_04) && distance2dsquared(var_04, param_00 gettagangles("TAG_YAW")) > 1) {
-      var_01 = 1;
-    }
+    if(!isDefined(var_0))
+      var_1 = 1;
+    else if(isDefined(var_5) && !var_5 && (var_0.classname == "script_brushmodel" || var_0.classname == "script_model") && var_0 _id_8C6C())
+      var_1 = 1;
+    else if((var_0.classname == "script_brushmodel" || var_0.classname == "script_model") && !var_0 _meth_86A9())
+      var_1 = 1;
+    else if(var_0.classname == "scriptable" && var_0 _meth_866B(0) != var_7)
+      var_1 = 1;
+    else if(isDefined(var_0.model) && var_0.model != "" && (var_0 _meth_8687() && var_0 _meth_8672() > 0.0))
+      var_1 = 1;
+    else if(isDefined(var_2) && _func_211(var_2, var_0.origin) > 1.0)
+      var_1 = 1;
+    else if(isDefined(var_3) && distancesquared(var_3, var_0.angles) > 1.0)
+      var_1 = 1;
+    else if(isDefined(var_4) && _func_211(var_4, var_0 _meth_8181("TAG_YAW")) > 1.0)
+      var_1 = 1;
 
-    if(var_01) {
+    if(var_1) {
       self notify("plantOnEntityRemoved");
-      if(func_43DD() == "NATIVE_DPAD_LEFT") {
-        self switchtoweapon(self.var_201C);
-      }
+
+      if(_id_43DD() == "NATIVE_DPAD_LEFT")
+        self switchtoweapon(self._id_201C);
 
       return;
     }
 
-    wait 0.05;
+    waitframe();
   }
 }
 
-func_6518(param_00) {
-  if(isDefined(level.var_A9B1.var_6518)) {
-    return self[[level.var_A9B1.var_6518]](param_00);
-  }
+_id_6518(var_0) {
+  if(isDefined(level._id_A9B1._id_6518))
+    return self[[level._id_A9B1._id_6518]](var_0);
 }
 
-func_4295(param_00) {
-  return self[[level.var_A9B1.var_4295]](param_00);
+_id_4295(var_0) {
+  return self[[level._id_A9B1._id_4295]](var_0);
 }
 
-func_707B(param_00, param_01, param_02) {
-  return self[[level.var_A9B1.var_707B]](param_00, param_01, param_02);
+_id_707B(var_0, var_1, var_2) {
+  return self[[level._id_A9B1._id_707B]](var_0, var_1, var_2);
 }
 
-func_2FEE() {
-  return self[[level.var_A9B1.var_2FEE]]();
+_id_2FEE() {
+  return self[[level._id_A9B1._id_2FEE]]();
 }
 
-func_3A66() {
-  return self[[level.var_A9B1.var_3A66]]();
+_id_3A66() {
+  return self[[level._id_A9B1._id_3A66]]();
 }
 
-func_8B6B() {
-  return self[[level.var_A9B1.var_8B6B]]();
+_id_8B6B() {
+  return self[[level._id_A9B1._id_8B6B]]();
 }
 
-func_43DE() {
-  return self[[level.var_A9B1.var_43DE]]();
+_id_43DE() {
+  return self[[level._id_A9B1._id_43DE]]();
 }
 
-func_43DA() {
-  return self[[level.var_A9B1.var_43DA]]();
+_id_43DA() {
+  return self[[level._id_A9B1._id_43DA]]();
 }
 
-func_941B(param_00, param_01, param_02, param_03) {
-  return self[[level.var_A9B1.var_941B]](param_00, param_01, param_02, param_03);
+_id_941B(var_0, var_1, var_2, var_3) {
+  return self[[level._id_A9B1._id_941B]](var_0, var_1, var_2, var_3);
 }
 
-func_2373() {
-  return self[[level.var_A9B1.var_2373]]();
+_id_2373() {
+  return self[[level._id_A9B1._id_2373]]();
 }
 
-func_4355(param_00) {
-  return self[[level.var_A9B1.var_4355]](param_00);
+_id_4355(var_0) {
+  return self[[level._id_A9B1._id_4355]](var_0);
 }
 
-func_8B53() {
-  return self[[level.var_A9B1.var_8B53]]();
+_id_8B53() {
+  return self[[level._id_A9B1._id_8B53]]();
 }
 
-func_4074() {
-  return self[[level.var_A9B1.var_4074]]();
+_id_4074() {
+  return self[[level._id_A9B1._id_4074]]();
 }
 
 get_weapon_paintjobid() {
-  return self[[level.var_A9B1.get_weapon_paintjobid]]();
+  return self[[level._id_A9B1.get_weapon_paintjobid]]();
 }
 
 get_weapon_charmguid() {
-  return self[[level.var_A9B1.get_weapon_charmguid]]();
+  return self[[level._id_A9B1.get_weapon_charmguid]]();
 }
 
-func_43DD() {
-  return func_43DC(self.var_201C);
+_id_43DD() {
+  return _id_43DC(self._id_201C);
 }
 
-func_43DC(param_00) {
-  return self[[level.var_A9B1.var_43DC]](param_00);
+_id_43DC(var_0) {
+  return self[[level._id_A9B1._id_43DC]](var_0);
 }
 
-func_439E(param_00) {
-  return self[[level.var_A9B1.var_439E]](param_00);
+_id_439E(var_0) {
+  return self[[level._id_A9B1._id_439E]](var_0);
 }
 
-func_41C4() {
-  return self[[level.var_A9B1.var_41C4]]();
+_id_41C4() {
+  return self[[level._id_A9B1._id_41C4]]();
 }
 
-func_41B5() {
-  return self[[level.var_A9B1.var_41B5]]();
+_id_41B5() {
+  return self[[level._id_A9B1._id_41B5]]();
 }
 
-func_43D9() {
-  return self[[level.var_A9B1.var_43D9]]();
+_id_43D9() {
+  return self[[level._id_A9B1._id_43D9]]();
 }
 
-func_8C6C() {
-  if(isDefined(level.var_A9B1.var_8C6C)) {
-    return self[[level.var_A9B1.var_8C6C]]();
-  }
-
-  return undefined;
+_id_8C6C() {
+  if(isDefined(level._id_A9B1._id_8C6C))
+    return self[[level._id_A9B1._id_8C6C]]();
+  else
+    return undefined;
 }
 
-func_5778(param_00) {
-  return [[level.var_A9B1.var_5778]](param_00);
+_id_5778(var_0) {
+  return [[level._id_A9B1._id_5778]](var_0);
 }
 
-func_8BAF() {
-  return [[level.var_A9B1.var_8BAF]]();
+_id_8BAF() {
+  return [[level._id_A9B1._id_8BAF]]();
 }

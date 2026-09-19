@@ -1,1781 +1,2197 @@
 /*****************************************************
- * Decompiled by Bog and Edited by SyndiShanX
+ * Decompiled and Edited by SyndiShanX
  * Script: maps\createfx\mp_zombie_dig_02_srv_fx.gsc
 *****************************************************/
 
+#include common_scripts\utility;
+#include common_scripts\_createfx;
+
 main() {
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_fall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1495.11, 1282.75, 461.21), (293.089, 188.105, -83.6989));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_fall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((982.455, 2010.18, 321.477), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((36.0218, 1469.41, 221.815), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((269.525, 1222.76, 392), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((342.254, 1579.83, 646.41), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_blood_drip_hc_head");
-  var_00 common_scripts\_createfx::set_origin_and_angles((130.099, 1576.24, 437.43), (0, 228, 0));
-  var_00.v["fxid"] = "zmb_isl_blood_drip_hc_head";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_blood_drip_hc_head");
-  var_00 common_scripts\_createfx::set_origin_and_angles((150.79, 1557.3, 443.065), (0, 228, 0));
-  var_00.v["fxid"] = "zmb_isl_blood_drip_hc_head";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_blood_drip_hc_head");
-  var_00 common_scripts\_createfx::set_origin_and_angles((138.693, 1368.63, 440.159), (0, 228, 0));
-  var_00.v["fxid"] = "zmb_isl_blood_drip_hc_head";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_blood_drip_hc_head");
-  var_00 common_scripts\_createfx::set_origin_and_angles((124.319, 1343.83, 437.811), (0, 228, 0));
-  var_00.v["fxid"] = "zmb_isl_blood_drip_hc_head";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_blood_drip_hc_head");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-99.6203, 1346.26, 442.706), (0, 228, 0));
-  var_00.v["fxid"] = "zmb_isl_blood_drip_hc_head";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_blood_drip_hc_head");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-117.159, 1370.21, 443.898), (0, 228, 0));
-  var_00.v["fxid"] = "zmb_isl_blood_drip_hc_head";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_blood_drip_hc_head");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-134.961, 1560.01, 446.496), (0, 228, 0));
-  var_00.v["fxid"] = "zmb_isl_blood_drip_hc_head";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_blood_drip_hc_head");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-107.007, 1577.54, 445.521), (0, 228, 0));
-  var_00.v["fxid"] = "zmb_isl_blood_drip_hc_head";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((6.95633, 978.99, 300.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-93.7708, 931.513, 850.931), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((281.954, 1133.63, 444.793), (270, 0, 0));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((65.143, 1942.19, 731.84), (270, 0, 0));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-317.251, 1760.62, 390.018), (270, 0, 0));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_godray_01");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-178.53, 1068.15, 1138.24), (297.729, 184.479, -115.165));
-  var_00.v["fxid"] = "dlc_zmb_dig02_godray_01";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("tra_roach_run_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((176.152, 1217.45, 128), (270, 0, 0));
-  var_00.v["fxid"] = "tra_roach_run_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("tra_roach_run_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((170.863, 1214.19, 129.445), (270, 0, 0));
-  var_00.v["fxid"] = "tra_roach_run_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-652.209, 1688.3, 258.475), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-649.524, 1295.68, 259.613), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-192.046, 893.864, 249.076), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((214.482, 885.786, 245.409), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_high");
-  var_00 common_scripts\_createfx::set_origin_and_angles((79.8907, 1903.26, 714.296), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_high";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-971.564, 291.474, 267.378), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1085.01, 293.552, 410.242), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1108.12, 470.963, 254.646), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_swirl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-888.467, 193.375, 468.7), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_swirl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1043.26, 163.1, 455.13), (270, 0, 18));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_fall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1046.88, 186.408, 506.193), (308.988, 89.2835, -83.4451));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_fall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-158.05, 472.921, 53.4137), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((182.316, 472.336, 54.8855), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_swirl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1414.43, 1517.82, 596.695), (270, 0, 165));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_swirl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1644.29, 1542.31, 538.125), (270, 0, 165));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((861.561, 630.05, 342.672), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((750.843, 564.539, 328.423), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-828.703, 577.562, 356), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-934.374, 755.161, 394.466), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterdrips");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1029.64, 1558.83, 329.023), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1579.62, 1883.73, 728.375), (270, 0, 170));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient_sm";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-951.364, 78.6862, 480.483), (291.204, 298.764, 81.6798));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient_sm";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1113.55, 2066.7, 335.676), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((876.941, 2219.12, 343), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((835.276, 2213.9, 402.69), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((914.135, 2318.4, 342.179), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((760.424, 2226.72, 440.219), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((687.388, 469.9, 356.981), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((734.444, 443.046, 299.048), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-998.821, 1219.2, 551.496), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-831.475, 707.5, 386.641), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((631.114, 2313.17, 437), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1185.05, 1539.55, 151.864), (270, 0, 175));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1095.72, 1269.11, 127.842), (270, 0, 175));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((934.225, 1656.7, 128.125), (270, 0, -164));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1164.84, 618.857, 18.2986), (270, 0, 132));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((373.094, 524.662, 15.4065), (270, 0, 117));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-810.714, 411.237, 46.6739), (270, 0, 35));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-614.692, 596.83, 17.226), (270, 0, 35));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1110.57, 2022.85, 140.192), (270, 0, -164));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((295.289, 2285.73, 316), (270, 0, -164));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((12.6929, 2246.68, 323.476), (270, 0, 117));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((842.353, 404.496, 15.2464), (270, 0, 113));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((53.2495, 510.141, 2), (278, 269.999, -89));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((77.0255, 553.186, 24), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((86.5102, 582.643, 38), (282, 269, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((83.1838, 647.663, 72), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((78.7217, 709.629, 105), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((14.2609, 727.28, 112), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((87.2733, 744.894, 120), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((149.344, 651.801, 115), (270, 0, 113));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((68.2377, 671.583, 609), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((165.527, 655.973, 637.794), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((43.7382, 773.848, 298.92), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((96.4818, 772.096, 129.981), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("tra_roach_run_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-86.5663, 1026.61, 131), (270, 0, 76));
-  var_00.v["fxid"] = "tra_roach_run_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("tra_roach_run_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-88.7429, 1007.23, 130), (270, 0, 63));
-  var_00.v["fxid"] = "tra_roach_run_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("tra_roach_run_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-82.0954, 1017.14, 130), (270, 180, -95));
-  var_00.v["fxid"] = "tra_roach_run_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((65.6072, 1728.04, 116), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((83.9907, 1745.77, 124.156), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((97.7289, 1817.75, 131), (311, 270, -90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1325.1, 1070.8, 276.322), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1341.58, 1187.6, 276.554), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1348.58, 1126.79, 277.074), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1427.15, 1547.85, 512.106), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1193.11, 1210.89, 433.724), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1190.91, 1265.6, 422.678), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1262.39, 1024.58, 412.253), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-877.674, 290.847, 397.517), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-941.552, 472.006, 433.601), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1050.14, 491.899, 421.703), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((156.461, -290.7, 120.089), (270, 0, 113));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_swirl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1765.78, 1544.31, 606.538), (270, 0, 165));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_fall_sacrifice");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-100.63, 1102.75, 1013.23), (319.06, 44.7547, -95.0611));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_fall_sacrifice";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_fall_sacrifice");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-390.506, 1169.13, 1034.28), (319.06, 44.7547, -95.0611));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_fall_sacrifice";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_godray_01");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-400.999, 1230.78, 1155.52), (284.772, 211.846, -140.894));
-  var_00.v["fxid"] = "dlc_zmb_dig02_godray_01";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((668.269, 1687.99, 256.839), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((667.197, 1296.03, 257.107), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_fall_smallhole");
-  var_00 common_scripts\_createfx::set_origin_and_angles((122.687, 2758.05, 653.39), (341.981, 193.102, -87.4059));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_fall_smallhole";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((140.288, 2666.14, 728.768), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((23.7296, 2729.24, 719.868), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((24.5624, 2750.47, 718.497), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((48.1627, 2812.41, 723.669), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((168.228, 2804.83, 705.284), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-402.89, 2200.29, 352.478), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-425.297, 1965.59, 349.156), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1161.02, 2019.52, 256.837), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-901.049, 1603.32, 464.57), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-957.041, 1539.88, 301.521), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-883.404, 1893.28, 331.908), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((115.342, 2234.29, 508.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((937.735, 1313.59, 376), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-892.699, 2046.77, 323), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((259.953, 2721.64, 362.291), (270, 0, 117));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((99.4946, -906.715, 348.674), (270, 0, 113));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-158.701, -1111.54, 525.409), (270, 0, 113));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_vapor");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1622.75, 1352.96, 521.128), (270, 180, -86));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_vapor");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1605.97, 1239.15, 534.386), (270, 0, 57));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_vapor");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-946.228, 278.163, 336.178), (270, 180, 172));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_vapor");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-992.527, 218.908, 462.973), (270, 0, 1));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_vapor");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-878.286, 298.977, 454.609), (270, 0, 40));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_vapor");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1105.65, 310.849, 464.89), (270, 0, -54));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-596.797, 2126.43, 275.381), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((261.182, 226.886, 52.7095), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-270.339, 225.933, 51.3658), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-457.905, 387.167, 52.7165), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((438.036, 380.909, 53.7629), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((872.648, 385.414, 52.8903), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1158.84, 912.363, 216.714), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_fall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-244.84, -1050.23, 712.158), (315.534, 26.0996, -93.127));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_fall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-3.03769, 1845.89, 801.413), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = -19.9596;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl_sm_nolight");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-43.954, 1844.05, 183.414), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm_nolight";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fire_bowl_sm_nolight");
-  var_00 common_scripts\_createfx::set_origin_and_angles((78.1082, 1843.44, 186.433), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm_nolight";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((14.0684, 804.417, 131), (270, 0, 35));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((191.004, 1291.76, 123.8), (270, 180, -132));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-183.547, 1302.76, 128.902), (270, 0, -45));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-153.221, 1621.68, 113.799), (270, 180, 44));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((193.271, 1608.15, 123.692), (270, 0, 138));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-302.539, 1759.72, 130.46), (270, 0, -133));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-304.623, 1167, 130.755), (270, 180, 139));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((319.08, 1164.09, 130.525), (270, 0, 47));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((333.996, 1759.49, 128.477), (270, 0, 135));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((5.44614, 1538.22, 106), (0, 360, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((73.6347, 1502.41, 106), (0, 302, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((74.8625, 1425.46, 109.927), (0, 239, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((9.59237, 1379.12, 108.902), (0, 180, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-64.5868, 1424.28, 115), (0, 120, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-61.046, 1504.53, 108.188), (0, 62, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((15.3678, 1951.23, 217.283), (270, 0, -88));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-155.956, 1889.03, 278.506), (270, 0, -88));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((178.101, 1901.38, 291.312), (270, 0, -88));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-246.592, 1133.4, 136.388), (359.376, 131.984, 2.93472));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-337.844, 1224.48, 134.315), (359.342, 132.983, 1.9234));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-341.562, 1697.11, 131.787), (358.879, 46.9684, 0.580811));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-233.612, 1808.74, 132.799), (358.879, 46.9684, 0.580811));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-39.5176, 1939.86, 196.14), (359.681, 358.969, 1.22184));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((56.7099, 1937.49, 198), (359.681, 358.969, 1.22184));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((276.538, 1786.49, 135.932), (0.52079, 319.978, 1.14978));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((357.836, 1707.67, 136.172), (0.52079, 319.978, 1.14978));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((352.055, 1226.25, 137.894), (1.12053, 226.966, -0.580788));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_amb_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((271.447, 1153.15, 134.986), (1.12053, 226.966, -0.580788));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1048.34, 758.355, 4.14343), (270, 0, 35));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1120.29, 1125.42, 132.611), (270, 0, 35));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((14.0881, 2547.4, 366), (270, 0, 117));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1325.35, 1527.29, 316.137), (270, 0, 175));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1189.36, 1089.21, 411.878), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1190.42, 1505.97, 409.622), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((972.373, 607.169, 17.8131), (278.863, 244.379, -92.887));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((936.391, 606.051, 8.35901), (278.863, 244.379, -92.887));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((994.308, 662.703, 49.0382), (278.863, 244.379, -92.887));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1014.14, 690.004, 64), (278.863, 244.379, -92.887));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1117.21, 939.506, 89), (278.161, 271.245, -93.4693));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1079.58, 926.147, 80), (278.161, 271.245, -93.4693));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1094.35, 911.68, 72), (278.161, 271.245, -93.4693));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_ground_skitter");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1094.69, 1007.32, 120), (278.161, 271.245, -93.4693));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1590.03, 1460.2, 489.799), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1636.72, 1368.95, 467.827), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1595.02, 1194.37, 485.768), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1050.91, 233.63, 404.93), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_falling_edge");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-925.118, 303.829, 265.761), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-932.368, 521.092, 389), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((623.11, 376.34, 343.896), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1216.18, 1454.49, 490.6), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((243.418, 2244.59, 547.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((299.059, 2272.4, 547.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-15.7343, 2090.38, 524.25), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_waterdrops_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((93.7531, 2106.48, 519), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-233.027, 1231.68, 422.268), (276, 223, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-243.264, 1694.08, 414.009), (280, 131, -180));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((268.15, 1695.62, 424.29), (277, 42, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((267.921, 1224.64, 416.728), (282.364, 297.167, 14.1477));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((595.027, 490.768, 9), (270, 0, 175));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1.85358, 49.7157, 21), (270, 0, 175));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-169.757, -864.605, 391.86), (270, 0, 175));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-291.372, 363.508, 21), (270, 0, 35));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_swirl");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-533.236, 679.766, 127), (270, 0, 110));
-  var_00.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-274.909, 386.832, 408.603), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-663.59, 384.754, 370.58), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-824.357, 728.9, 381.682), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-959.989, 699.296, 405.133), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-951.599, 1336.78, 540.1), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1097.29, 1357.79, 501.413), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_water_drip_fast");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-970.611, 1452.61, 528.689), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_fog_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-296.067, 2222.4, 291.912), (270, 0, 117));
-  var_00.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1125.54, 681.222, 281.171), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("zmb_isl_rocks_falling_water_rnr");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1064.42, 619.189, 299.101), (270, 0, -90));
-  var_00.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_dust_falling_line");
-  var_00 common_scripts\_createfx::set_origin_and_angles((8.80677, 1024.9, 305.502), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_dust_falling_line";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_dust_falling_line");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1011.99, 1759.07, 317.946), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_dust_falling_line";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_dust_falling_line");
-  var_00 common_scripts\_createfx::set_origin_and_angles((124.819, 2325.47, 544.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_dust_falling_line";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_roof_lensflare1");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-144.688, 917.803, 1281.79), (63.0044, 44.9482, -88.604));
-  var_00.v["fxid"] = "dlc_zmb_dig02_roof_lensflare1";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_roof_lensflare1");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-458.484, 970.325, 1291.7), (63.0044, 44.9482, -88.604));
-  var_00.v["fxid"] = "dlc_zmb_dig02_roof_lensflare1";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((365.161, 2757.85, 507.394), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((365.536, 2523.65, 502.627), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-100.18, 2523.03, 503.739), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_room_torch");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-96.4135, 2760.28, 502.664), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_room_torch";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterfall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-110.639, 1562.72, 466.448), (0, 315, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterfall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterfall_splsh");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-106.03, 1557.87, 98.125), (270, 0, 133));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterfall_splsh";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterfall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-103.056, 1364.62, 467.959), (0, 49, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterfall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterfall_splsh");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-98.8708, 1368.64, 98.125), (270, 0, -131));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterfall_splsh";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterfall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((125.11, 1366.24, 464.203), (0, 135, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterfall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterfall_splsh");
-  var_00 common_scripts\_createfx::set_origin_and_angles((122.375, 1369.32, 98.125), (270, 180, 139));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterfall_splsh";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterfall_splsh");
-  var_00 common_scripts\_createfx::set_origin_and_angles((129.955, 1557.07, 98.125), (270, 180, -139));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterfall_splsh";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_blood_waterfall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((132.789, 1559.93, 464.587), (0, 226, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_waterfall";
-  var_00.v["delay"] = -15;
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-129.447, 1588.94, 98.7397), (0.106429, 318.596, -1.79479));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "216";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-81.2213, 1620.29, 99.9174), (0.219212, 316.213, -0.402432));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "216";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-146.584, 1330.3, 100.225), (1.7976, 45.1985, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "215";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-177.627, 1361.73, 101.832), (357.599, 47.7873, -0.156366));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "215";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-119.675, 1303.49, 101.398), (1, 45.1974, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "215";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal");
-  var_00 common_scripts\_createfx::set_origin_and_angles((161.701, 1321.75, 100.294), (359.979, 136.8, -1));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "214";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((135.477, 1296.23, 99.6496), (0, 139.796, -3.99548));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "214";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((183.989, 1347.43, 95.146), (2.03871, 136.437, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "214";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((191.487, 1534, 100.878), (6.94823, 220.948, -0.857847));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "213";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal");
-  var_00 common_scripts\_createfx::set_origin_and_angles((153.114, 1587.88, 99.8673), (1, 222.6, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "213";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_blood_decal_sm");
-  var_00 common_scripts\_createfx::set_origin_and_angles((116.449, 1612.42, 99.281), (6.76065, 234.847, 1.81367));
-  var_00.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "213";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-787.075, 1258.79, 129.548), (270, 0, 89));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall_curve");
-  var_00 common_scripts\_createfx::set_origin_and_angles((189.073, 1605.91, 143.928), (270, 0, 138));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall_curve";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "211";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall_curve");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-154.676, 1613.61, 144.09), (270, 0, -130));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall_curve";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "211";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall_curve");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-167.974, 1306.38, 146.791), (270, 0, -44));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall_curve";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "209";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall_curve");
-  var_00 common_scripts\_createfx::set_origin_and_angles((185.649, 1297.83, 146.796), (270, 0, 47));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall_curve";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "210";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_sword_combine");
-  var_00 common_scripts\_createfx::set_origin_and_angles((7.84042, 1461.98, 130.579), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_sword_combine";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "207";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1178.1, 1363.37, 544.953), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-60.488, 942.46, 326), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((415.705, 1361.36, 819.565), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-604.061, 1713.99, 363.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-615.279, 1340.05, 354), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0.34;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1072.13, 1369.61, 427.913), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1039.98, 1071.44, 415), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0.24;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((883.238, 1597.11, 410), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0.27;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-895.357, 2006.37, 386), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0.14;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1090.96, 1832.65, 375), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0.2;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-500.655, 2049.65, 441.108), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-49.1898, 2260.58, 568.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0.13;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((326.724, 2335.25, 563.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-27.6242, 2516.89, 644), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((245.779, 2564.63, 638.584), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0.31;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((144.139, 2326.1, 559.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0.36;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1044.18, 2094.92, 388), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((615.605, 1396.73, 328), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((286.563, 1483.86, 908.33), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.1;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-374.062, 1583.56, 928.141), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.16;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((2.94727, 1400.98, 983.338), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.27;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-965.084, 1360.6, 614.874), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.4;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-843.031, 739.697, 476.463), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-708.491, 414.207, 446.343), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.22;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-171.091, 327.415, 476.743), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((116.319, -306.59, 628.236), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.3;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-18.9255, -587.017, 694.597), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((121.377, 274.182, 659.518), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.1;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((525.131, 453.432, 489.549), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.25;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((847.205, 519.484, 370.02), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((999.87, 804.482, 415.663), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.07;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((35.313, -746.662, 779.577), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
-  var_00.v["delay"] = 0.15;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1298.27, 1204.61, 531.57), (270, 180, 120));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1367.16, 1454.81, 517.41), (270, 180, 32));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1226.38, 1336.52, 514.368), (270, 0, -88));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0.27;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-261.457, -1174.12, 894.009), (270, 0, -52));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-903.717, 420.098, 457.566), (270, 0, -67));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1002.28, 508.435, 461.221), (270, 180, -10));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-39.8588, 910.021, 1031.71), (270, 180, -10));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-479.52, 1101.2, 1099.12), (270, 0, -59));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((324.433, 2339.37, 558.239), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((141.847, 2330.21, 558.239), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0.36;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-51.4822, 2264.69, 558.239), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0.13;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-29.9162, 2521.01, 642.364), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((243.488, 2568.74, 642.948), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0.31;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-502.524, 2052.39, 436.276), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1077.38, 1842.76, 377.168), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0.2;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-912.217, 2008.57, 385.168), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0.14;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-966.954, 1363.34, 615.042), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.4;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1004.24, 512.226, 466.389), (270, 180, -10));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-905.587, 422.841, 462.734), (270, 0, -67));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-844.901, 742.441, 480.631), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-709.915, 413.984, 444.511), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.22;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-171.601, 329.269, 474.911), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((119.508, 276.921, 661.686), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.1;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((114.45, -303.849, 636.404), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.3;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((33.4436, -743.921, 779.745), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.15;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-20.7952, -584.276, 692.765), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((526.147, 454.366, 482.717), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.25;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((849.828, 516.291, 368.188), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1003.56, 803.194, 411.831), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.07;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1038.12, 1074.18, 409.168), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0.24;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1070.27, 1372.35, 433.081), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((881.368, 1599.85, 409.168), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0.27;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1365.3, 1457.55, 522.578), (270, 180, 32));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1224.52, 1339.26, 519.536), (270, 0, -88));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0.27;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1296.41, 1207.35, 536.738), (270, 180, 120));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1042.32, 2097.66, 393.168), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((615.157, 1396.25, 326.168), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-62.3582, 945.201, 321.168), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-614.535, 1340.67, 353.168), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0.34;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-604.042, 1718.67, 363.043), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-376.475, 1579.69, 921.309), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.16;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1.07776, 1403.72, 976.506), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.27;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-41.7282, 912.762, 1036.88), (270, 180, -10));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-481.389, 1103.94, 1104.29), (270, 0, -59));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((284.694, 1486.6, 908.498), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0.1;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_brick_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((413.836, 1364.1, 818.733), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1176.72, 1364.91, 544.731), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1195.39, -638.509, 458.475), (270, 180, -10));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_snow_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1095.83, -729.684, 454.82), (270, 0, -67));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_basalt_med");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-900.601, -735.575, 409.597), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((597.947, 587.992, 513.48), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.77;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-465.95, 495.231, 380.259), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.72;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1024.69, 1106.26, 533.301), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.3;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-893.727, 1389.81, 547.031), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.5;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((247.334, 1296.46, 809), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.65;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-206.161, 1611.29, 813.097), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.33;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((277.588, 2766.16, 632.246), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.25;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-37.5071, 2823.83, 632.279), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.33;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((148.409, 2176.41, 547.875), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.25;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((147.27, -353.096, 579.522), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.4;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-106.022, -652.164, 630.239), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.6;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1282.29, 1558.23, 521.729), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.77;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((884.936, 926.52, 536.507), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.33;
-  var_00.v["exploder"] = "205";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((144.499, -353.99, 577.371), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.4;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-108.792, -653.058, 628.088), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.6;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((595.176, 587.098, 511.329), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.77;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((882.166, 925.626, 534.356), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.33;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-468.72, 494.337, 378.109), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.72;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1027.46, 1105.37, 531.15), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.3;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-896.498, 1388.92, 544.88), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.5;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((145.639, 2175.51, 545.724), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.25;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((274.817, 2765.27, 630.095), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.25;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-40.2775, 2822.94, 630.128), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.33;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((244.563, 1295.56, 806.849), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.65;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_eq_dust_lrg");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-208.931, 1610.39, 810.946), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
-  var_00.v["delay"] = 0.33;
-  var_00.v["exploder"] = "204";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-750.353, 779.07, 13.5731), (270, 180, -62));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-563.936, 637.677, 9.39163), (270, 180, 177));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-381.621, 634.956, 13.6339), (270, 180, 177));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-111.374, 763.512, 135.364), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((139.848, 771.076, 129.999), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((788.622, 753.458, 30.2034), (270, 0, 57));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((447.886, 633.066, 39.784), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((802.145, 1080.89, 133), (270, 0, 90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((802.795, 1280.21, 138.646), (270, 0, 90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((954.164, 2048.49, 142), (270, 0, 90));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((222.987, 2068.13, 308.415), (270, 0, -179));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((66.4709, 2070.14, 310.61), (270, 0, -179));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-601.703, 1923.07, 160), (270, 0, -179));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-726.372, 2110.95, 135.736), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-301.634, 2273.63, 308.381), (270, 0, 36));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((758.014, 2379.67, 241.975), (270, 180, 173));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_wall");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1068.14, 2226.74, 172), (270, 0, -54));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((887.848, 1849.8, 142.112), (270, 0, -45));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((1212.95, 1834.7, 132.665), (270, 0, -45));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-786.312, 1778.59, 147.697), (270, 0, -45));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_geiskraft_ambient");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1104.93, 1544.13, 140.4), (270, 0, -45));
-  var_00.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "208";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_rune_reveal");
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1089.85, 559.326, 209.25), (270, 0, -45));
-  var_00.v["fxid"] = "dlc_zmb_dig02_rune_reveal";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "212";
-  var_00 = common_scripts\utility::createexploder("No FX");
-  var_00 common_scripts\_createfx::set_origin_and_angles((0, 0, 0), (270, 0, 0));
-  var_00.v["fxid"] = "No FX";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "1";
-  var_00 = common_scripts\utility::createexploder("dlc_zmb_dig02_sword_looping");
-  var_00 common_scripts\_createfx::set_origin_and_angles((7.84042, 1461.98, 130.579), (270, 0, 0));
-  var_00.v["fxid"] = "dlc_zmb_dig02_sword_looping";
-  var_00.v["delay"] = 0;
-  var_00.v["exploder"] = "218";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1073.38, 248.705, 387.474), (270, 0, 0));
-  var_00.v["soundalias"] = "dig_amb_snowy_opening";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((130.231, 2845.09, 744.994), (270, 0, 0));
-  var_00.v["soundalias"] = "dig_amb_snowy_opening_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((1463.88, 1279.81, 298.506), (270, 0, 0));
-  var_00.v["soundalias"] = "dig_amb_snowy_opening";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((78.4659, 1850.4, 181.89), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-46.5182, 1849.46, 181.279), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((190.634, 478.814, 45.0719), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((264.403, 221.497, 50.3379), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-166.424, 482.661, 49.1168), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-276.574, 223.429, 50.1646), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-462.199, 381.932, 49.9716), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((1165.09, 901.694, 209.385), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((869.619, 382.548, 49.0253), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-81.4062, -794.159, 356.837), (270, 0, 0));
-  var_00.v["soundalias"] = "dig_amb_snowy_opening";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-416.908, 2206.37, 354.49), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-418.332, 1957.04, 350.208), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-594.084, 2136, 272.311), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1174.51, 2020.18, 251.533), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((98.3819, 774.326, 189.52), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-62.2346, 773.363, 189.483), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((136.786, 1033.45, 278.089), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-106.569, 1050.36, 279.76), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-421.76, 1374.88, 279.084), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-427.722, 1570.02, 278.961), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((445.873, 1567.9, 278.88), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((449.423, 1375.22, 280.479), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((659.358, 1667.68, 244.817), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((680, 1306.49, 241.269), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_torch_sml";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((75.1393, 696.404, 96), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((722.883, 452.027, 0), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((899.082, 643.872, 16), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((1027.67, 1552.92, 128), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((1035.28, 2053.4, 139.785), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((607.742, 2337.82, 288.61), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-887.339, 1931.52, 128), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-912.186, 1526.79, 128), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createloopsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-964.005, 1170.32, 128), (270, 0, 0));
-  var_00.v["soundalias"] = "zmb_dig_emt_drips_lp";
-  var_00 = common_scripts\_createfx::createintervalsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-915.548, 286.734, 265.252), (270, 0, 0));
-  var_00.v["delay_min"] = 10;
-  var_00.v["delay_max"] = 15;
-  var_00.v["soundalias"] = "dig_damb_snow_fall";
-  var_00 = common_scripts\_createfx::createintervalsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((-1092.97, 413.707, 280.74), (270, 0, 0));
-  var_00.v["delay_min"] = 8;
-  var_00.v["delay_max"] = 12;
-  var_00.v["soundalias"] = "dig_damb_snow_fall";
-  var_00 = common_scripts\_createfx::createintervalsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((157.22, 2839.21, 723.143), (270, 0, 0));
-  var_00.v["delay_min"] = 8;
-  var_00.v["delay_max"] = 12;
-  var_00.v["soundalias"] = "dig_damb_snow_fall";
-  var_00 = common_scripts\_createfx::createintervalsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((1433.23, 1379.38, 270.753), (270, 0, 0));
-  var_00.v["delay_min"] = 5;
-  var_00.v["delay_max"] = 10;
-  var_00.v["soundalias"] = "dig_damb_snow_fall";
-  var_00 = common_scripts\_createfx::createintervalsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((1151.94, 1259.22, 402.358), (270, 0, 0));
-  var_00.v["delay_min"] = 10;
-  var_00.v["delay_max"] = 15;
-  var_00.v["soundalias"] = "falling_snow";
-  var_00 = common_scripts\_createfx::createintervalsound();
-  var_00 common_scripts\_createfx::set_origin_and_angles((24.6248, 773.793, 302.149), (270, 0, 0));
-  var_00.v["delay_min"] = 8;
-  var_00.v["delay_max"] = 12;
-  var_00.v["soundalias"] = "zmb_dig_damb_rock_debris";
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_fall");
+  ent set_origin_and_angles((1495.11, 1282.75, 461.21), (293.089, 188.105, -83.6989));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((982.455, 2010.18, 321.477), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((36.0218, 1469.41, 221.815), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((269.525, 1222.76, 392), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((342.254, 1579.83, 646.41), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_blood_drip_hc_head");
+  ent set_origin_and_angles((130.099, 1576.24, 437.43), (0, 228, 0));
+  ent.v["fxid"] = "zmb_isl_blood_drip_hc_head";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_blood_drip_hc_head");
+  ent set_origin_and_angles((150.79, 1557.3, 443.065), (0, 228, 0));
+  ent.v["fxid"] = "zmb_isl_blood_drip_hc_head";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_blood_drip_hc_head");
+  ent set_origin_and_angles((138.693, 1368.63, 440.159), (0, 228, 0));
+  ent.v["fxid"] = "zmb_isl_blood_drip_hc_head";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_blood_drip_hc_head");
+  ent set_origin_and_angles((124.319, 1343.83, 437.811), (0, 228, 0));
+  ent.v["fxid"] = "zmb_isl_blood_drip_hc_head";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_blood_drip_hc_head");
+  ent set_origin_and_angles((-99.6203, 1346.26, 442.706), (0, 228, 0));
+  ent.v["fxid"] = "zmb_isl_blood_drip_hc_head";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_blood_drip_hc_head");
+  ent set_origin_and_angles((-117.159, 1370.21, 443.898), (0, 228, 0));
+  ent.v["fxid"] = "zmb_isl_blood_drip_hc_head";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_blood_drip_hc_head");
+  ent set_origin_and_angles((-134.961, 1560.01, 446.496), (0, 228, 0));
+  ent.v["fxid"] = "zmb_isl_blood_drip_hc_head";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_blood_drip_hc_head");
+  ent set_origin_and_angles((-107.007, 1577.54, 445.521), (0, 228, 0));
+  ent.v["fxid"] = "zmb_isl_blood_drip_hc_head";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((6.95633, 978.99, 300.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((-93.7708, 931.513, 850.931), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((281.954, 1133.63, 444.793), (270, 0, 0));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((65.143, 1942.19, 731.84), (270, 0, 0));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((-317.251, 1760.62, 390.018), (270, 0, 0));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_godray_01");
+  ent set_origin_and_angles((-178.53, 1068.15, 1138.24), (297.729, 184.479, -115.165));
+  ent.v["fxid"] = "dlc_zmb_dig02_godray_01";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("tra_roach_run_lrg");
+  ent set_origin_and_angles((176.152, 1217.45, 128), (270, 0, 0));
+  ent.v["fxid"] = "tra_roach_run_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("tra_roach_run_lrg");
+  ent set_origin_and_angles((170.863, 1214.19, 129.445), (270, 0, 0));
+  ent.v["fxid"] = "tra_roach_run_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-652.209, 1688.3, 258.475), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-649.524, 1295.68, 259.613), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-192.046, 893.864, 249.076), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((214.482, 885.786, 245.409), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_high");
+  ent set_origin_and_angles((79.8907, 1903.26, 714.296), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_high";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((-971.564, 291.474, 267.378), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((-1085.01, 293.552, 410.242), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((-1108.12, 470.963, 254.646), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_swirl");
+  ent set_origin_and_angles((-888.467, 193.375, 468.7), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_swirl");
+  ent set_origin_and_angles((-1043.26, 163.1, 455.13), (270, 0, 18));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_fall");
+  ent set_origin_and_angles((-1046.88, 186.408, 506.193), (308.988, 89.2835, -83.4451));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl");
+  ent set_origin_and_angles((-158.05, 472.921, 53.4137), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl");
+  ent set_origin_and_angles((182.316, 472.336, 54.8855), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_swirl");
+  ent set_origin_and_angles((1414.43, 1517.82, 596.695), (270, 0, 165));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_swirl");
+  ent set_origin_and_angles((1644.29, 1542.31, 538.125), (270, 0, 165));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((861.561, 630.05, 342.672), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((750.843, 564.539, 328.423), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((-828.703, 577.562, 356), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((-934.374, 755.161, 394.466), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterdrips");
+  ent set_origin_and_angles((1029.64, 1558.83, 329.023), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterdrips";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient_sm");
+  ent set_origin_and_angles((1579.62, 1883.73, 728.375), (270, 0, 170));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient_sm";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient_sm");
+  ent set_origin_and_angles((-951.364, 78.6862, 480.483), (291.204, 298.764, 81.6798));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient_sm";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((1113.55, 2066.7, 335.676), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((876.941, 2219.12, 343), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((835.276, 2213.9, 402.69), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((914.135, 2318.4, 342.179), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((760.424, 2226.72, 440.219), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((687.388, 469.9, 356.981), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((734.444, 443.046, 299.048), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((-998.821, 1219.2, 551.496), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((-831.475, 707.5, 386.641), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((631.114, 2313.17, 437), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((1185.05, 1539.55, 151.864), (270, 0, 175));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((1095.72, 1269.11, 127.842), (270, 0, 175));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((934.225, 1656.7, 128.125), (270, 0, -164));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((1164.84, 618.857, 18.2986), (270, 0, 132));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((373.094, 524.662, 15.4065), (270, 0, 117));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-810.714, 411.237, 46.6739), (270, 0, 35));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-614.692, 596.83, 17.226), (270, 0, 35));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((1110.57, 2022.85, 140.192), (270, 0, -164));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((295.289, 2285.73, 316), (270, 0, -164));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((12.6929, 2246.68, 323.476), (270, 0, 117));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((842.353, 404.496, 15.2464), (270, 0, 113));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((53.2495, 510.141, 2), (278, 269.999, -89));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((77.0255, 553.186, 24), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((86.5102, 582.643, 38), (282, 269, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((83.1838, 647.663, 72), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((78.7217, 709.629, 105), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((14.2609, 727.28, 112), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((87.2733, 744.894, 120), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((149.344, 651.801, 115), (270, 0, 113));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((68.2377, 671.583, 609), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((165.527, 655.973, 637.794), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((43.7382, 773.848, 298.92), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((96.4818, 772.096, 129.981), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("tra_roach_run_lrg");
+  ent set_origin_and_angles((-86.5663, 1026.61, 131), (270, 0, 76));
+  ent.v["fxid"] = "tra_roach_run_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("tra_roach_run_lrg");
+  ent set_origin_and_angles((-88.7429, 1007.23, 130), (270, 0, 63));
+  ent.v["fxid"] = "tra_roach_run_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("tra_roach_run_lrg");
+  ent set_origin_and_angles((-82.0954, 1017.14, 130), (270, 180, -95));
+  ent.v["fxid"] = "tra_roach_run_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((65.6072, 1728.04, 116), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((83.9907, 1745.77, 124.156), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((97.7289, 1817.75, 131), (311, 270, -90));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1325.1, 1070.8, 276.322), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1341.58, 1187.6, 276.554), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1348.58, 1126.79, 277.074), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1427.15, 1547.85, 512.106), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1193.11, 1210.89, 433.724), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1190.91, 1265.6, 422.678), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1262.39, 1024.58, 412.253), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((-877.674, 290.847, 397.517), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((-941.552, 472.006, 433.601), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((-1050.14, 491.899, 421.703), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((156.461, -290.7, 120.089), (270, 0, 113));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_swirl");
+  ent set_origin_and_angles((1765.78, 1544.31, 606.538), (270, 0, 165));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_fall_sacrifice");
+  ent set_origin_and_angles((-100.63, 1102.75, 1013.23), (319.06, 44.7547, -95.0611));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_fall_sacrifice";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_fall_sacrifice");
+  ent set_origin_and_angles((-390.506, 1169.13, 1034.28), (319.06, 44.7547, -95.0611));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_fall_sacrifice";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_godray_01");
+  ent set_origin_and_angles((-400.999, 1230.78, 1155.52), (284.772, 211.846, -140.894));
+  ent.v["fxid"] = "dlc_zmb_dig02_godray_01";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((668.269, 1687.99, 256.839), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((667.197, 1296.03, 257.107), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_fall_smallhole");
+  ent set_origin_and_angles((122.687, 2758.05, 653.39), (341.981, 193.102, -87.4059));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_fall_smallhole";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((140.288, 2666.14, 728.768), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((23.7296, 2729.24, 719.868), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((24.5624, 2750.47, 718.497), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((48.1627, 2812.41, 723.669), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((168.228, 2804.83, 705.284), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-402.89, 2200.29, 352.478), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-425.297, 1965.59, 349.156), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-1161.02, 2019.52, 256.837), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((-901.049, 1603.32, 464.57), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((-957.041, 1539.88, 301.521), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((-883.404, 1893.28, 331.908), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((115.342, 2234.29, 508.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((937.735, 1313.59, 376), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((-892.699, 2046.77, 323), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((259.953, 2721.64, 362.291), (270, 0, 117));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((99.4946, -906.715, 348.674), (270, 0, 113));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-158.701, -1111.54, 525.409), (270, 0, 113));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_vapor");
+  ent set_origin_and_angles((1622.75, 1352.96, 521.128), (270, 180, -86));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_vapor");
+  ent set_origin_and_angles((1605.97, 1239.15, 534.386), (270, 0, 57));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_vapor");
+  ent set_origin_and_angles((-946.228, 278.163, 336.178), (270, 180, 172));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_vapor");
+  ent set_origin_and_angles((-992.527, 218.908, 462.973), (270, 0, 1));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_vapor");
+  ent set_origin_and_angles((-878.286, 298.977, 454.609), (270, 0, 40));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_vapor");
+  ent set_origin_and_angles((-1105.65, 310.849, 464.89), (270, 0, -54));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_vapor";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-596.797, 2126.43, 275.381), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl_sm");
+  ent set_origin_and_angles((261.182, 226.886, 52.7095), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl_sm");
+  ent set_origin_and_angles((-270.339, 225.933, 51.3658), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl_sm");
+  ent set_origin_and_angles((-457.905, 387.167, 52.7165), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl_sm");
+  ent set_origin_and_angles((438.036, 380.909, 53.7629), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl_sm");
+  ent set_origin_and_angles((872.648, 385.414, 52.8903), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl");
+  ent set_origin_and_angles((1158.84, 912.363, 216.714), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_fall");
+  ent set_origin_and_angles((-244.84, -1050.23, 712.158), (315.534, 26.0996, -93.127));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((-3.03769, 1845.89, 801.413), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = -19.9596;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl_sm_nolight");
+  ent set_origin_and_angles((-43.954, 1844.05, 183.414), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm_nolight";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fire_bowl_sm_nolight");
+  ent set_origin_and_angles((78.1082, 1843.44, 186.433), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_fire_bowl_sm_nolight";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((14.0684, 804.417, 131), (270, 0, 35));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((191.004, 1291.76, 123.8), (270, 180, -132));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((-183.547, 1302.76, 128.902), (270, 0, -45));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((-153.221, 1621.68, 113.799), (270, 180, 44));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((193.271, 1608.15, 123.692), (270, 0, 138));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-302.539, 1759.72, 130.46), (270, 0, -133));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-304.623, 1167, 130.755), (270, 180, 139));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((319.08, 1164.09, 130.525), (270, 0, 47));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((333.996, 1759.49, 128.477), (270, 0, 135));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((5.44614, 1538.22, 106), (0, 360, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((73.6347, 1502.41, 106), (0, 302, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((74.8625, 1425.46, 109.927), (0, 239, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((9.59237, 1379.12, 108.902), (0, 180, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((-64.5868, 1424.28, 115), (0, 120, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((-61.046, 1504.53, 108.188), (0, 62, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((15.3678, 1951.23, 217.283), (270, 0, -88));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-155.956, 1889.03, 278.506), (270, 0, -88));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((178.101, 1901.38, 291.312), (270, 0, -88));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((-246.592, 1133.4, 136.388), (359.376, 131.984, 2.93472));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((-337.844, 1224.48, 134.315), (359.342, 132.983, 1.9234));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((-341.562, 1697.11, 131.787), (358.879, 46.9684, 0.580811));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((-233.612, 1808.74, 132.799), (358.879, 46.9684, 0.580811));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((-39.5176, 1939.86, 196.14), (359.681, 358.969, 1.22184));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((56.7099, 1937.49, 198), (359.681, 358.969, 1.22184));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((276.538, 1786.49, 135.932), (0.52079, 319.978, 1.14978));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((357.836, 1707.67, 136.172), (0.52079, 319.978, 1.14978));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((352.055, 1226.25, 137.894), (1.12053, 226.966, -0.580788));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_amb_edge");
+  ent set_origin_and_angles((271.447, 1153.15, 134.986), (1.12053, 226.966, -0.580788));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_amb_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-1048.34, 758.355, 4.14343), (270, 0, 35));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-1120.29, 1125.42, 132.611), (270, 0, 35));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((14.0881, 2547.4, 366), (270, 0, 117));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((1325.35, 1527.29, 316.137), (270, 0, 175));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1189.36, 1089.21, 411.878), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1190.42, 1505.97, 409.622), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((972.373, 607.169, 17.8131), (278.863, 244.379, -92.887));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((936.391, 606.051, 8.35901), (278.863, 244.379, -92.887));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((994.308, 662.703, 49.0382), (278.863, 244.379, -92.887));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((1014.14, 690.004, 64), (278.863, 244.379, -92.887));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((1117.21, 939.506, 89), (278.161, 271.245, -93.4693));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((1079.58, 926.147, 80), (278.161, 271.245, -93.4693));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((1094.35, 911.68, 72), (278.161, 271.245, -93.4693));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_ground_skitter");
+  ent set_origin_and_angles((1094.69, 1007.32, 120), (278.161, 271.245, -93.4693));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_ground_skitter";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1590.03, 1460.2, 489.799), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1636.72, 1368.95, 467.827), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((1595.02, 1194.37, 485.768), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((-1050.91, 233.63, 404.93), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_falling_edge");
+  ent set_origin_and_angles((-925.118, 303.829, 265.761), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_falling_edge";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((-932.368, 521.092, 389), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((623.11, 376.34, 343.896), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((1216.18, 1454.49, 490.6), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((243.418, 2244.59, 547.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((299.059, 2272.4, 547.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((-15.7343, 2090.38, 524.25), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_waterdrops_lrg");
+  ent set_origin_and_angles((93.7531, 2106.48, 519), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_waterdrops_lrg";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((-233.027, 1231.68, 422.268), (276, 223, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((-243.264, 1694.08, 414.009), (280, 131, -180));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((268.15, 1695.62, 424.29), (277, 42, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((267.921, 1224.64, 416.728), (282.364, 297.167, 14.1477));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((595.027, 490.768, 9), (270, 0, 175));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-1.85358, 49.7157, 21), (270, 0, 175));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-169.757, -864.605, 391.86), (270, 0, 175));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-291.372, 363.508, 21), (270, 0, 35));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_snow_swirl");
+  ent set_origin_and_angles((-533.236, 679.766, 127), (270, 0, 110));
+  ent.v["fxid"] = "dlc_zmb_dig02_snow_swirl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((-274.909, 386.832, 408.603), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((-663.59, 384.754, 370.58), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((-824.357, 728.9, 381.682), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((-959.989, 699.296, 405.133), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((-951.599, 1336.78, 540.1), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((-1097.29, 1357.79, 501.413), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_water_drip_fast");
+  ent set_origin_and_angles((-970.611, 1452.61, 528.689), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_water_drip_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_fog_ambient");
+  ent set_origin_and_angles((-296.067, 2222.4, 291.912), (270, 0, 117));
+  ent.v["fxid"] = "dlc_zmb_dig02_fog_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((1125.54, 681.222, 281.171), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_isl_rocks_falling_water_rnr");
+  ent set_origin_and_angles((1064.42, 619.189, 299.101), (270, 0, -90));
+  ent.v["fxid"] = "zmb_isl_rocks_falling_water_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_dust_falling_line");
+  ent set_origin_and_angles((8.80677, 1024.9, 305.502), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_dust_falling_line";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_dust_falling_line");
+  ent set_origin_and_angles((1011.99, 1759.07, 317.946), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_dust_falling_line";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_dust_falling_line");
+  ent set_origin_and_angles((124.819, 2325.47, 544.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_dust_falling_line";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_roof_lensflare1");
+  ent set_origin_and_angles((-144.688, 917.803, 1281.79), (63.0044, 44.9482, -88.604));
+  ent.v["fxid"] = "dlc_zmb_dig02_roof_lensflare1";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_roof_lensflare1");
+  ent set_origin_and_angles((-458.484, 970.325, 1291.7), (63.0044, 44.9482, -88.604));
+  ent.v["fxid"] = "dlc_zmb_dig02_roof_lensflare1";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((365.161, 2757.85, 507.394), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((365.536, 2523.65, 502.627), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-100.18, 2523.03, 503.739), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_room_torch");
+  ent set_origin_and_angles((-96.4135, 2760.28, 502.664), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterfall");
+  ent set_origin_and_angles((-110.639, 1562.72, 466.448), (0, 315, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterfall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterfall_splsh");
+  ent set_origin_and_angles((-106.03, 1557.87, 98.125), (270, 0, 133));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterfall_splsh";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterfall");
+  ent set_origin_and_angles((-103.056, 1364.62, 467.959), (0, 49, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterfall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterfall_splsh");
+  ent set_origin_and_angles((-98.8708, 1368.64, 98.125), (270, 0, -131));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterfall_splsh";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterfall");
+  ent set_origin_and_angles((125.11, 1366.24, 464.203), (0, 135, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterfall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterfall_splsh");
+  ent set_origin_and_angles((122.375, 1369.32, 98.125), (270, 180, 139));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterfall_splsh";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterfall_splsh");
+  ent set_origin_and_angles((129.955, 1557.07, 98.125), (270, 180, -139));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterfall_splsh";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dlc_zmb_dig02_blood_waterfall");
+  ent set_origin_and_angles((132.789, 1559.93, 464.587), (0, 226, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_waterfall";
+  ent.v["delay"] = -15;
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal");
+  ent set_origin_and_angles((-129.447, 1588.94, 98.7397), (0.106429, 318.596, -1.79479));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "216";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal_sm");
+  ent set_origin_and_angles((-81.2213, 1620.29, 99.9174), (0.219212, 316.213, -0.402432));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "216";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal");
+  ent set_origin_and_angles((-146.584, 1330.3, 100.225), (1.7976, 45.1985, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "215";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal_sm");
+  ent set_origin_and_angles((-177.627, 1361.73, 101.832), (357.599, 47.7873, -0.156366));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "215";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal_sm");
+  ent set_origin_and_angles((-119.675, 1303.49, 101.398), (1, 45.1974, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "215";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal");
+  ent set_origin_and_angles((161.701, 1321.75, 100.294), (359.979, 136.8, -1));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "214";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal_sm");
+  ent set_origin_and_angles((135.477, 1296.23, 99.6496), (0, 139.796, -3.99548));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "214";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal_sm");
+  ent set_origin_and_angles((183.989, 1347.43, 95.146), (2.03871, 136.437, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "214";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal_sm");
+  ent set_origin_and_angles((191.487, 1534, 100.878), (6.94823, 220.948, -0.857847));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "213";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal");
+  ent set_origin_and_angles((153.114, 1587.88, 99.8673), (1, 222.6, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "213";
+
+  ent = createExploder("dlc_zmb_dig02_blood_decal_sm");
+  ent set_origin_and_angles((116.449, 1612.42, 99.281), (6.76065, 234.847, 1.81367));
+  ent.v["fxid"] = "dlc_zmb_dig02_blood_decal_sm";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "213";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-787.075, 1258.79, 129.548), (270, 0, 89));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall_curve");
+  ent set_origin_and_angles((189.073, 1605.91, 143.928), (270, 0, 138));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall_curve";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "211";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall_curve");
+  ent set_origin_and_angles((-154.676, 1613.61, 144.09), (270, 0, -130));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall_curve";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "211";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall_curve");
+  ent set_origin_and_angles((-167.974, 1306.38, 146.791), (270, 0, -44));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall_curve";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "209";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall_curve");
+  ent set_origin_and_angles((185.649, 1297.83, 146.796), (270, 0, 47));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall_curve";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "210";
+
+  ent = createExploder("dlc_zmb_dig02_sword_combine");
+  ent set_origin_and_angles((7.84042, 1461.98, 130.579), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_sword_combine";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((1178.1, 1363.37, 544.953), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((-60.488, 942.46, 326), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((415.705, 1361.36, 819.565), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((-604.061, 1713.99, 363.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((-615.279, 1340.05, 354), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0.34;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((1072.13, 1369.61, 427.913), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((1039.98, 1071.44, 415), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0.24;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((883.238, 1597.11, 410), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0.27;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((-895.357, 2006.37, 386), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0.14;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((-1090.96, 1832.65, 375), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0.2;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((-500.655, 2049.65, 441.108), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((-49.1898, 2260.58, 568.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0.13;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((326.724, 2335.25, 563.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((-27.6242, 2516.89, 644), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((245.779, 2564.63, 638.584), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0.31;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((144.139, 2326.1, 559.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0.36;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((1044.18, 2094.92, 388), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((615.605, 1396.73, 328), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((286.563, 1483.86, 908.33), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.1;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((-374.062, 1583.56, 928.141), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.16;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((2.94727, 1400.98, 983.338), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.27;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((-965.084, 1360.6, 614.874), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.4;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((-843.031, 739.697, 476.463), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((-708.491, 414.207, 446.343), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.22;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((-171.091, 327.415, 476.743), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((116.319, -306.59, 628.236), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.3;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((-18.9255, -587.017, 694.597), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((121.377, 274.182, 659.518), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.1;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((525.131, 453.432, 489.549), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.25;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((847.205, 519.484, 370.02), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((999.87, 804.482, 415.663), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.07;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_lrg");
+  ent set_origin_and_angles((35.313, -746.662, 779.577), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_lrg";
+  ent.v["delay"] = 0.15;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((1298.27, 1204.61, 531.57), (270, 180, 120));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((1367.16, 1454.81, 517.41), (270, 180, 32));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((1226.38, 1336.52, 514.368), (270, 0, -88));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0.27;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-261.457, -1174.12, 894.009), (270, 0, -52));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-903.717, 420.098, 457.566), (270, 0, -67));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-1002.28, 508.435, 461.221), (270, 180, -10));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-39.8588, 910.021, 1031.71), (270, 180, -10));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-479.52, 1101.2, 1099.12), (270, 0, -59));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((324.433, 2339.37, 558.239), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((141.847, 2330.21, 558.239), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0.36;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((-51.4822, 2264.69, 558.239), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0.13;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((-29.9162, 2521.01, 642.364), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((243.488, 2568.74, 642.948), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0.31;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((-502.524, 2052.39, 436.276), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((-1077.38, 1842.76, 377.168), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0.2;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((-912.217, 2008.57, 385.168), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0.14;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((-966.954, 1363.34, 615.042), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.4;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-1004.24, 512.226, 466.389), (270, 180, -10));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-905.587, 422.841, 462.734), (270, 0, -67));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((-844.901, 742.441, 480.631), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((-709.915, 413.984, 444.511), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.22;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((-171.601, 329.269, 474.911), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((119.508, 276.921, 661.686), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.1;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((114.45, -303.849, 636.404), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.3;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((33.4436, -743.921, 779.745), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.15;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((-20.7952, -584.276, 692.765), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((526.147, 454.366, 482.717), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.25;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((849.828, 516.291, 368.188), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((1003.56, 803.194, 411.831), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.07;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((1038.12, 1074.18, 409.168), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0.24;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((1070.27, 1372.35, 433.081), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((881.368, 1599.85, 409.168), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0.27;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((1365.3, 1457.55, 522.578), (270, 180, 32));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((1224.52, 1339.26, 519.536), (270, 0, -88));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0.27;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((1296.41, 1207.35, 536.738), (270, 180, 120));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((1042.32, 2097.66, 393.168), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((615.157, 1396.25, 326.168), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((-62.3582, 945.201, 321.168), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((-614.535, 1340.67, 353.168), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0.34;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_med");
+  ent set_origin_and_angles((-604.042, 1718.67, 363.043), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((-376.475, 1579.69, 921.309), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.16;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((1.07776, 1403.72, 976.506), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.27;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-41.7282, 912.762, 1036.88), (270, 180, -10));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-481.389, 1103.94, 1104.29), (270, 0, -59));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((284.694, 1486.6, 908.498), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0.1;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_brick_lrg");
+  ent set_origin_and_angles((413.836, 1364.1, 818.733), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_brick_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((1176.72, 1364.91, 544.731), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-1195.39, -638.509, 458.475), (270, 180, -10));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_snow_lrg");
+  ent set_origin_and_angles((-1095.83, -729.684, 454.82), (270, 0, -67));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_snow_lrg";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_basalt_med");
+  ent set_origin_and_angles((-900.601, -735.575, 409.597), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_basalt_med";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((597.947, 587.992, 513.48), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.77;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-465.95, 495.231, 380.259), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.72;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-1024.69, 1106.26, 533.301), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.3;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-893.727, 1389.81, 547.031), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.5;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((247.334, 1296.46, 809), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.65;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-206.161, 1611.29, 813.097), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.33;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((277.588, 2766.16, 632.246), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.25;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-37.5071, 2823.83, 632.279), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.33;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((148.409, 2176.41, 547.875), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.25;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((147.27, -353.096, 579.522), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.4;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-106.022, -652.164, 630.239), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.6;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((1282.29, 1558.23, 521.729), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.77;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((884.936, 926.52, 536.507), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.33;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((144.499, -353.99, 577.371), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.4;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-108.792, -653.058, 628.088), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.6;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((595.176, 587.098, 511.329), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.77;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((882.166, 925.626, 534.356), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.33;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-468.72, 494.337, 378.109), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.72;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-1027.46, 1105.37, 531.15), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.3;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-896.498, 1388.92, 544.88), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.5;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((145.639, 2175.51, 545.724), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.25;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((274.817, 2765.27, 630.095), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.25;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-40.2775, 2822.94, 630.128), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.33;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((244.563, 1295.56, 806.849), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.65;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_eq_dust_lrg");
+  ent set_origin_and_angles((-208.931, 1610.39, 810.946), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_eq_dust_lrg";
+  ent.v["delay"] = 0.33;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-750.353, 779.07, 13.5731), (270, 180, -62));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-563.936, 637.677, 9.39163), (270, 180, 177));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-381.621, 634.956, 13.6339), (270, 180, 177));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-111.374, 763.512, 135.364), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((139.848, 771.076, 129.999), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((788.622, 753.458, 30.2034), (270, 0, 57));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((447.886, 633.066, 39.784), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((802.145, 1080.89, 133), (270, 0, 90));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((802.795, 1280.21, 138.646), (270, 0, 90));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((954.164, 2048.49, 142), (270, 0, 90));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((222.987, 2068.13, 308.415), (270, 0, -179));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((66.4709, 2070.14, 310.61), (270, 0, -179));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-601.703, 1923.07, 160), (270, 0, -179));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-726.372, 2110.95, 135.736), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((-301.634, 2273.63, 308.381), (270, 0, 36));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((758.014, 2379.67, 241.975), (270, 180, 173));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_wall");
+  ent set_origin_and_angles((1068.14, 2226.74, 172), (270, 0, -54));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_wall";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((887.848, 1849.8, 142.112), (270, 0, -45));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((1212.95, 1834.7, 132.665), (270, 0, -45));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((-786.312, 1778.59, 147.697), (270, 0, -45));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_geiskraft_ambient");
+  ent set_origin_and_angles((-1104.93, 1544.13, 140.4), (270, 0, -45));
+  ent.v["fxid"] = "dlc_zmb_dig02_geiskraft_ambient";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "208";
+
+  ent = createExploder("dlc_zmb_dig02_rune_reveal");
+  ent set_origin_and_angles((-1089.85, 559.326, 209.25), (270, 0, -45));
+  ent.v["fxid"] = "dlc_zmb_dig02_rune_reveal";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "212";
+
+  ent = createExploder("No FX");
+  ent set_origin_and_angles((0, 0, 0), (270, 0, 0));
+  ent.v["fxid"] = "No FX";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "1";
+
+  ent = createExploder("dlc_zmb_dig02_sword_looping");
+  ent set_origin_and_angles((7.84042, 1461.98, 130.579), (270, 0, 0));
+  ent.v["fxid"] = "dlc_zmb_dig02_sword_looping";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "218";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1073.38, 248.705, 387.474), (270, 0, 0));
+  ent.v["soundalias"] = "dig_amb_snowy_opening";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((130.231, 2845.09, 744.994), (270, 0, 0));
+  ent.v["soundalias"] = "dig_amb_snowy_opening_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1463.88, 1279.81, 298.506), (270, 0, 0));
+  ent.v["soundalias"] = "dig_amb_snowy_opening";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((78.4659, 1850.4, 181.89), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-46.5182, 1849.46, 181.279), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((190.634, 478.814, 45.0719), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((264.403, 221.497, 50.3379), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-166.424, 482.661, 49.1168), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-276.574, 223.429, 50.1646), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-462.199, 381.932, 49.9716), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1165.09, 901.694, 209.385), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((869.619, 382.548, 49.0253), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-81.4062, -794.159, 356.837), (270, 0, 0));
+  ent.v["soundalias"] = "dig_amb_snowy_opening";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-416.908, 2206.37, 354.49), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-418.332, 1957.04, 350.208), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-594.084, 2136, 272.311), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1174.51, 2020.18, 251.533), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((98.3819, 774.326, 189.52), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-62.2346, 773.363, 189.483), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((136.786, 1033.45, 278.089), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-106.569, 1050.36, 279.76), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-421.76, 1374.88, 279.084), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-427.722, 1570.02, 278.961), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((445.873, 1567.9, 278.88), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((449.423, 1375.22, 280.479), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((659.358, 1667.68, 244.817), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((680, 1306.49, 241.269), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_torch_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((75.1393, 696.404, 96), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((722.883, 452.027, 0), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((899.082, 643.872, 16), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1027.67, 1552.92, 128), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1035.28, 2053.4, 139.785), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((607.742, 2337.82, 288.61), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-887.339, 1931.52, 128), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-912.186, 1526.79, 128), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-964.005, 1170.32, 128), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_dig_emt_drips_lp";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-915.548, 286.734, 265.252), (270, 0, 0));
+  ent.v["delay_min"] = 10;
+  ent.v["delay_max"] = 15;
+  ent.v["soundalias"] = "dig_damb_snow_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1092.97, 413.707, 280.74), (270, 0, 0));
+  ent.v["delay_min"] = 8;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "dig_damb_snow_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((157.22, 2839.21, 723.143), (270, 0, 0));
+  ent.v["delay_min"] = 8;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "dig_damb_snow_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1433.23, 1379.38, 270.753), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "dig_damb_snow_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1151.94, 1259.22, 402.358), (270, 0, 0));
+  ent.v["delay_min"] = 10;
+  ent.v["delay_max"] = 15;
+  ent.v["soundalias"] = "falling_snow";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((24.6248, 773.793, 302.149), (270, 0, 0));
+  ent.v["delay_min"] = 8;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "zmb_dig_damb_rock_debris";
 }

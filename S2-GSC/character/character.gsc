@@ -1,218 +1,209 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
- * Script: character\character\\-\641.gsc
-*********************************************/
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: character\character.gsc
+**************************************/
 
-setmodelfromarray(param_00) {
-  self setModel(param_00[randomint(param_00.size)]);
+setmodelfromarray(var_0) {
+  self setModel(var_0[randomint(var_0.size)]);
 }
 
-precachemodelarray(param_00) {
-  for(var_01 = 0; var_01 < param_00.size; var_01++) {
-    precachemodel(param_00[var_01]);
-  }
+precachemodelarray(var_0) {
+  for(var_1 = 0; var_1 < var_0.size; var_1++)
+    precachemodel(var_0[var_1]);
 }
 
-attachhead(param_00, param_01) {
-  if(!isDefined(level.character_head_index)) {
+attachhead(var_0, var_1) {
+  if(!isDefined(level.character_head_index))
     level.character_head_index = [];
-  }
 
-  if(!isDefined(level.character_head_index[param_00])) {
-    level.character_head_index[param_00] = randomint(param_01.size);
-  }
+  if(!isDefined(level.character_head_index[var_0]))
+    level.character_head_index[var_0] = randomint(var_1.size);
 
-  var_02 = level.character_head_index[param_00] + 1 % param_01.size;
-  level.character_head_index[param_00] = var_02;
-  setplayerheadmodel(param_01[var_02]);
+  var_2 = (level.character_head_index[var_0] + 1) % var_1.size;
+  level.character_head_index[var_0] = var_2;
+  setplayerheadmodel(var_1[var_2]);
 }
 
-setplayerheadmodel(param_00) {
-  if(isDefined(self.headmodel)) {
+setplayerheadmodel(var_0) {
+  if(isDefined(self.headmodel))
     self detach(self.headmodel);
-  }
 
-  self attach(param_00, "", 1);
-  self.headmodel = param_00;
+  self attach(var_0, "", 1);
+  self.headmodel = var_0;
 }
 
-attachhat(param_00, param_01) {
-  if(!isDefined(level.character_hat_index)) {
+attachhat(var_0, var_1) {
+  if(!isDefined(level.character_hat_index))
     level.character_hat_index = [];
-  }
 
-  if(!isDefined(level.character_hat_index[param_00])) {
-    level.character_hat_index[param_00] = randomint(param_01.size);
-  }
+  if(!isDefined(level.character_hat_index[var_0]))
+    level.character_hat_index[var_0] = randomint(var_1.size);
 
-  var_02 = level.character_hat_index[param_00] + 1 % param_01.size;
-  level.character_hat_index[param_00] = var_02;
-  self attach(param_01[var_02]);
-  self.hatmodel = param_01[var_02];
+  var_2 = (level.character_hat_index[var_0] + 1) % var_1.size;
+  level.character_hat_index[var_0] = var_2;
+  self attach(var_1[var_2]);
+  self.hatmodel = var_1[var_2];
 }
 
 new() {
   self detachall();
-  var_00 = self.var_0E14;
-  if(!isDefined(var_00)) {
+  var_0 = self.anim_gunhand;
+
+  if(!isDefined(var_0)) {
     return;
   }
-
-  self.var_0E14 = "none";
-  self[[level.put_guninhand]](var_00);
+  self.anim_gunhand = "none";
+  self[[anim.put_guninhand]](var_0);
 }
 
 save() {
-  var_00["gunHand"] = self.var_0E14;
-  var_00["gunInHand"] = self.var_0E15;
-  var_00["model"] = self.var_0106;
-  var_00["hatModel"] = self.hatmodel;
-  if(isDefined(self.var_0109)) {
-    var_00["name"] = self.var_0109;
-  } else {}
+  var_0["gunHand"] = self.anim_gunhand;
+  var_0["gunInHand"] = self.anim_guninhand;
+  var_0["model"] = self.model;
+  var_0["hatModel"] = self.hatmodel;
 
-  var_01 = self getattachsize();
-  for(var_02 = 0; var_02 < var_01; var_02++) {
-    var_00["attach"][var_02]["model"] = self getattachmodelname(var_02);
-    var_00["attach"][var_02]["tag"] = self getattachtagname(var_02);
+  if(isDefined(self.name))
+    var_0["name"] = self.name;
+  else {}
+
+  var_1 = self getattachsize();
+
+  for(var_2 = 0; var_2 < var_1; var_2++) {
+    var_0["attach"][var_2]["model"] = self getattachmodelname(var_2);
+    var_0["attach"][var_2]["tag"] = self getattachtagname(var_2);
   }
 
-  return var_00;
+  return var_0;
 }
 
-load(param_00) {
+load(var_0) {
   self detachall();
-  self.var_0E14 = param_00["gunHand"];
-  self.var_0E15 = param_00["gunInHand"];
-  self setModel(param_00["model"]);
-  self.hatmodel = param_00["hatModel"];
-  if(isDefined(param_00["name"])) {
-    self.var_0109 = param_00["name"];
-  } else {}
+  self.anim_gunhand = var_0["gunHand"];
+  self.anim_guninhand = var_0["gunInHand"];
+  self setModel(var_0["model"]);
+  self.hatmodel = var_0["hatModel"];
 
-  var_01 = param_00["attach"];
-  var_02 = var_01.size;
-  for(var_03 = 0; var_03 < var_02; var_03++) {
-    self attach(var_01[var_03]["model"], var_01[var_03]["tag"]);
-  }
+  if(isDefined(var_0["name"]))
+    self.name = var_0["name"];
+  else {}
+
+  var_1 = var_0["attach"];
+  var_2 = var_1.size;
+
+  for(var_3 = 0; var_3 < var_2; var_3++)
+    self attach(var_1[var_3]["model"], var_1[var_3]["tag"]);
 }
 
-func_0136(param_00) {
-  if(isDefined(param_00["name"])) {} else {}
+precache(var_0) {
+  if(isDefined(var_0["name"])) {} else {}
 
-  precachemodel(param_00["model"]);
-  var_01 = param_00["attach"];
-  var_02 = var_01.size;
-  for(var_03 = 0; var_03 < var_02; var_03++) {
-    precachemodel(var_01[var_03]["model"]);
-  }
+  precachemodel(var_0["model"]);
+  var_1 = var_0["attach"];
+  var_2 = var_1.size;
+
+  for(var_3 = 0; var_3 < var_2; var_3++)
+    precachemodel(var_1[var_3]["model"]);
 }
 
-get_random_character(param_00) {
-  if(isDefined(self.var_003A)) {
-    var_01 = strtok(self.var_003A, "_");
-  } else {
-    var_01 = [];
-  }
+get_random_character(var_0) {
+  if(isDefined(self.classname))
+    var_1 = strtok(self.classname, "_");
+  else
+    var_1 = [];
 
   if(!common_scripts\utility::issp()) {
-    if(isDefined(self.var_012C["modelIndex"]) && self.var_012C["modelIndex"] < param_00) {
-      return self.var_012C["modelIndex"];
-    }
+    if(isDefined(self.pers["modelIndex"]) && self.pers["modelIndex"] < var_0)
+      return self.pers["modelIndex"];
 
-    var_02 = randomint(param_00);
-    self.var_012C["modelIndex"] = var_02;
-    return var_02;
-  } else if(var_02.size <= 2) {
-    return randomint(var_01);
-  }
+    var_2 = randomint(var_0);
+    self.pers["modelIndex"] = var_2;
+    return var_2;
+  } else if(var_1.size <= 2)
+    return randomint(var_0);
 
-  var_03 = "auto";
-  var_02 = undefined;
-  var_04 = var_01[2];
-  if(!isDefined(level.character_index_cache)) {
+  var_3 = "auto";
+  var_2 = undefined;
+  var_4 = var_1[2];
+
+  if(!isDefined(level.character_index_cache))
     level.character_index_cache = [];
+
+  if(!isDefined(level.character_index_cache[var_4]))
+    level.character_index_cache[var_4] = [];
+
+  if(!isDefined(level.character_index_cache[var_4][var_3]))
+    initialize_character_group(var_4, var_3, var_0);
+
+  if(!isDefined(var_2)) {
+    var_2 = get_least_used_index(var_4, var_3);
+
+    if(!isDefined(var_2))
+      var_2 = randomint(5000);
   }
 
-  if(!isDefined(level.character_index_cache[var_04])) {
-    level.character_index_cache[var_04] = [];
-  }
+  while(var_2 >= var_0)
+    var_2 = var_2 - var_0;
 
-  if(!isDefined(level.character_index_cache[var_04][var_02])) {
-    initialize_character_group(var_04, var_02, param_00);
-  }
-
-  if(!isDefined(var_03)) {
-    var_03 = get_least_used_index(var_04, var_02);
-    if(!isDefined(var_03)) {
-      var_03 = randomint(5000);
-    }
-  }
-
-  while(var_03 >= param_00) {
-    var_03 = var_03 - param_00;
-  }
-
-  level.character_index_cache[var_04][var_02][var_03]++;
-  return var_03;
+  level.character_index_cache[var_4][var_3][var_2]++;
+  return var_2;
 }
 
-get_least_used_index(param_00, param_01) {
-  var_02 = [];
-  var_03 = level.character_index_cache[param_00][param_01][0];
-  var_02[0] = 0;
-  for(var_04 = 1; var_04 < level.character_index_cache[param_00][param_01].size; var_04++) {
-    if(level.character_index_cache[param_00][param_01][var_04] > var_03) {
+get_least_used_index(var_0, var_1) {
+  var_2 = [];
+  var_3 = level.character_index_cache[var_0][var_1][0];
+  var_2[0] = 0;
+
+  for(var_4 = 1; var_4 < level.character_index_cache[var_0][var_1].size; var_4++) {
+    if(level.character_index_cache[var_0][var_1][var_4] > var_3) {
       continue;
     }
-
-    if(level.character_index_cache[param_00][param_01][var_04] < var_03) {
-      var_02 = [];
-      var_03 = level.character_index_cache[param_00][param_01][var_04];
+    if(level.character_index_cache[var_0][var_1][var_4] < var_3) {
+      var_2 = [];
+      var_3 = level.character_index_cache[var_0][var_1][var_4];
     }
 
-    var_02[var_02.size] = var_04;
+    var_2[var_2.size] = var_4;
   }
 
-  return random(var_02);
+  return random(var_2);
 }
 
-initialize_character_group(param_00, param_01, param_02) {
-  for(var_03 = 0; var_03 < param_02; var_03++) {
-    level.character_index_cache[param_00][param_01][var_03] = 0;
-  }
+initialize_character_group(var_0, var_1, var_2) {
+  for(var_3 = 0; var_3 < var_2; var_3++)
+    level.character_index_cache[var_0][var_1][var_3] = 0;
 }
 
-get_random_weapon(param_00) {
-  return randomint(param_00);
+get_random_weapon(var_0) {
+  return randomint(var_0);
 }
 
-random(param_00) {
-  return param_00[randomint(param_00.size)];
+random(var_0) {
+  return var_0[randomint(var_0.size)];
 }
 
-func_5563(param_00, param_01) {
-  var_02 = function_0060(param_00);
-  var_03 = 1;
-  foreach(var_05 in var_02) {
-    if(var_05 == param_01) {
-      var_03 = 0;
+_id_5563(var_0, var_1) {
+  var_2 = _func_060(var_0);
+  var_3 = 1;
+
+  foreach(var_5 in var_2) {
+    if(var_5 == var_1) {
+      var_3 = 0;
       break;
     }
   }
 
-  return var_03;
+  return var_3;
 }
 
-func_1D32(param_00, param_01) {
-  var_02 = param_00;
-  if(isDefined(param_01)) {
-    foreach(var_04 in param_01) {
-      if(!func_5563(param_00, var_04)) {
-        var_02 = var_02 + "+" + var_04;
-      }
+_id_1D32(var_0, var_1) {
+  var_2 = var_0;
+
+  if(isDefined(var_1)) {
+    foreach(var_4 in var_1) {
+      if(!_id_5563(var_0, var_4))
+        var_2 = var_2 + "+" + var_4;
     }
   }
 
-  return var_02;
+  return var_2;
 }

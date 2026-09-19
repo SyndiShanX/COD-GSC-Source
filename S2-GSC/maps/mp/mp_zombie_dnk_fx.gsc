@@ -1,13 +1,14 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/****************************************
+ * Decompiled and Edited by SyndiShanX
  * Script: maps\mp\mp_zombie_dnk_fx.gsc
-*********************************************/
+****************************************/
 
 main() {
   level._effect["zmb_dnk_altered_bunkerdoor"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_bunkerdoor");
   level._effect["zmb_dnk_electrical_sparks_runner"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_electrical_sparks_runner");
   level._effect["zmb_dnk_electric_wires"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_electric_wires");
   level._effect["zmb_dnk_bucket_sparks"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_bucket_sparks");
+
   level._effect["snow_chunk_impact"] = loadfx("vfx/weaponimpact/snow_chunk_impact");
   level._effect["water_splash_small"] = loadfx("vfx/water/water_splash_small");
   level._effect["snow_chunk_impact_small"] = loadfx("vfx/weaponimpact/snow_chunk_impact_small");
@@ -46,17 +47,20 @@ main() {
   level._effect["zmb_dnk_uber_explode"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_uber_explode");
   level._effect["test_effect"] = loadfx("vfx/test/test_fx");
   level._effect["zmb_jolts_out"] = loadfx("vfx/zombie/zmb_jolts_out");
-  level._effect["ground_impact"] = loadfx("vfx/zombie/zmb_ground_impact");
+  level._effect["ground_impact"] = LoadFX("vfx/zombie/zmb_ground_impact");
   level._effect["zmb_isl_geis_pommel_float"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_geis_pommel_float");
+
   level._effect["zmb_dnk_wind_snow_swirl"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_wind_snow_swirl");
   level._effect["zmb_dnk_spotlight_heavy_snow"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_spotlight_heavy_snow");
   level._effect["zmb_dnk_snow_attach_player_hvy"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_snow_attach_player_hvy");
   level._effect["zmb_dnk_ground_snow_skitter_rnr"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_ground_snow_skitter_rnr");
   level._effect["zmb_dnk_snow_chunks_falling_rnr"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_snow_chunks_falling_rnr");
   level._effect["mp_prague_falling_ledge_snow_runner"] = loadfx("vfx/map/mp_prauge/mp_prague_falling_ledge_snow_runner");
+
   level._effect["zmb_vent_steam"] = loadfx("vfx/map/mp_zombie_nest/zmb_vent_steam");
   level._effect["zmb_steam_pipe_leak_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_steam_pipe_leak_rnr");
   level._effect["zmb_dnk_steam_lrg"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_steam_lrg");
+
   level._effect["zmb_dnk_water_busted_pipe_metal"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_water_busted_pipe_metal");
   level._effect["zmb_dnk_water_busted_pipe"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_water_busted_pipe");
   level._effect["zmb_dnk_side_splashes_rnr"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_side_splashes_rnr");
@@ -71,6 +75,7 @@ main() {
   level._effect["zmb_dnk_water_leak_lrg"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_water_leak_lrg");
   level._effect["zmb_dnk_water_leak_sm"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_water_leak_sm");
   level._effect["zmb_dnk_water_foam_lrg"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_water_foam_lrg");
+
   level._effect["zmb_dnk_ice_drifting"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_ice_drifting");
   level._effect["zmb_dnk_projector_lightbeam"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_projector_lightbeam");
   level._effect["zmb_dnk_floating_debri"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_floating_debri");
@@ -83,14 +88,18 @@ main() {
   level._effect["fish_flop"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_floppy_fish");
   level._effect["geistkraft_poof"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_szlr_geistkraftexplode_1");
   level._effect["fish_energy"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_fish_energy");
-  level._effect["trap_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_small");
-  level._effect["trap_not_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_blink_small");
-  level._effect["zmb_med_trap_gib"] = loadfx("vfx/zombie/zmb_med_trap_gib");
+
+  level._effect["trap_ready"] = LoadFX("vfx/zombie/zmb_trap_light_orange_small");
+  level._effect["trap_not_ready"] = LoadFX("vfx/zombie/zmb_trap_light_orange_blink_small");
+  level._effect["zmb_med_trap_gib"] = LoadFX("vfx/zombie/zmb_med_trap_gib");
+
   level._effect["water_jet"] = loadfx("vfx/water/water_jet");
   level._effect["boss_bomb_explode"] = loadfx("vfx/destructible/veh_sedan_police_explo_1_no_door");
   level._effect["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_3");
+
   level._effect["spider_web_mesh"] = loadfx("vfx/unique/spider_web_mesh");
   level._effect["insects_flies_landing_sm"] = loadfx("vfx/animal/insects_flies_landing_sm");
+
   level._effect["zmb_dnk_altered_fake_tether"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_fake_tether");
   level._effect["zmb_dnk_altered_fire_med"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_fire_med");
   level._effect["zmb_dnk_altered_flare"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_flare");
@@ -100,5 +109,9 @@ main() {
   level._effect["zmb_dnk_altered_fire_vertical"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_fire_vertical");
   level._effect["zmb_dnk_altered_ash_cloud"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_ash_cloud");
   level._effect["zmb_dnk_altered_zepellin"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_zepellin");
-  level._effect["moneyCloud"] = loadfx("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
+
+  level._effect["moneyCloud"] = LoadFX("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
+
+  if(getDvar("3508") != "1")
+    maps\createfx\mp_zombie_dnk_fx::main();
 }

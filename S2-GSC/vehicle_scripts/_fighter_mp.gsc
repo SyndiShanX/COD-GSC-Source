@@ -1,13 +1,13 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
  * Script: vehicle_scripts\_fighter_mp.gsc
-*********************************************/
+*******************************************/
 
-main(param_00, param_01, param_02) {
-  func_764D();
+main(var_0, var_1, var_2) {
+  _id_764D();
 }
 
-func_764D() {
+_id_764D() {
   level._effect["p47_dmg_impact"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_impacts_lrg");
   level._effect["p47_dmg_impact_notrail"] = loadfx("vfx/vehicle/fighter_dmg_impact_notrail");
   level._effect["p47_dmg_light"] = loadfx("vfx/vehicle/p47_dmg_light");
@@ -18,6 +18,7 @@ func_764D() {
   level._effect["bf109_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_wing_evap");
   level._effect["bf109_exhaust"] = loadfx("vfx/vehicle/p47_exhaust");
   level._effect["bf109_contrail_ext_vel"] = loadfx("vfx/vehicle/p47_contrail_ext_vel");
+
   if(getdvarint("fighter_firing_mode") == 1) {
     level._effect["p47_muzzle01"] = loadfx("vfx/vehicle/p47_muzzle01");
     level._effect["p47_muzzle02"] = loadfx("vfx/vehicle/p47_muzzle02");
@@ -27,418 +28,406 @@ func_764D() {
   level._effect["20mm_metal_impact_1"] = loadfx("vfx/weaponimpact/20mm_metal_impact_1");
   level._effect["p47_dmg_impact_ext_vel"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_spark_impact_rnr");
   level._effect["p47_contrail_ext_vel"] = loadfx("vfx/vehicle/p47_contrail_ext_vel");
+
   if(getdvarint("fighter_firing_mode") == 1) {
     level._effect["p47_muzzle01_ext_vel"] = loadfx("vfx/vehicle/p47_muzzle01_ext_vel");
     level._effect["p47_muzzle02_ext_vel"] = loadfx("vfx/vehicle/p47_muzzle02_ext_vel");
   }
 }
 
-fighterinitmg(param_00) {
-  var_01 = 0;
-  if(isDefined(self.var_81FD)) {
-    var_01 = self.var_81FD;
-  }
+fighterinitmg(var_0) {
+  var_1 = 0;
 
-  self.var_615C = [];
-  foreach(var_03 in param_00) {
-    var_04 = self gettagangles(var_03.var_95A6);
-    var_05 = self gettagorigin(var_03.var_95A6);
-    var_06 = combineangles(var_04, (0, -1 * var_01, 0));
-    var_07 = undefined;
-    if(isDefined(var_03.var_6A1B)) {
-      var_07 = var_05 + rotatevector(var_03.var_6A1B, var_04);
-    } else {
-      var_07 = var_05;
-    }
+  if(isDefined(self._id_81FD))
+    var_1 = self._id_81FD;
 
-    var_08 = spawnturret(var_03.var_231A, var_07, var_03.var_5135);
-    var_08.var_1D1 = var_03.var_5135;
-    var_08.angles = var_06;
-    var_08 method_808C();
-    if(isDefined(var_03.var_6A1B)) {
-      var_08 linkTo(self, var_03.var_95A6, var_03.var_6A1B, (0, -1 * var_01, 0));
-    } else {
-      var_08 linkTo(self, var_03.var_95A6, (0, 0, 0), (0, -1 * var_01, 0));
-    }
+  self._id_615C = [];
 
-    var_08 setModel(var_03.model);
-    var_08.var_5847 = 1;
-    var_08.var_6DB3 = self;
-    var_08 makeusable();
-    if(isDefined(var_03.var_FC)) {
-      var_08.var_FC = var_03.var_FC;
-    }
+  foreach(var_3 in var_0) {
+    var_4 = self _meth_8181(var_3._id_95A6);
+    var_5 = self gettagorigin(var_3._id_95A6);
+    var_6 = _func_110(var_4, (0, -1 * var_1, 0));
+    var_7 = undefined;
 
-    self.var_615C[self.var_615C.size] = var_08;
+    if(isDefined(var_3._id_6A1B))
+      var_7 = var_5 + _func_112(var_3._id_6A1B, var_4);
+    else
+      var_7 = var_5;
+
+    var_8 = _func_016(var_3._id_231A, var_7, var_3._id_5135);
+    var_8._id_01D1 = var_3._id_5135;
+    var_8.angles = var_6;
+    var_8 _meth_808C();
+
+    if(isDefined(var_3._id_6A1B))
+      var_8 _meth_8055(self, var_3._id_95A6, var_3._id_6A1B, (0, -1 * var_1, 0));
+    else
+      var_8 _meth_8055(self, var_3._id_95A6, (0, 0, 0), (0, -1 * var_1, 0));
+
+    var_8 setModel(var_3.model);
+    var_8._id_5847 = 1;
+    var_8._id_6DB3 = self;
+    var_8 makeusable();
+
+    if(isDefined(var_3._id_00FC))
+      var_8._id_00FC = var_3._id_00FC;
+
+    self._id_615C[self._id_615C.size] = var_8;
   }
 }
 
-buildfighterturret(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(level.var_A372)) {
-    level.var_A372 = [];
-  }
+buildfighterturret(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(level._id_A372))
+    level._id_A372 = [];
 
-  var_05 = level.var_A635;
-  var_06 = spawnStruct();
-  var_06.var_231A = param_00;
-  var_06.var_5135 = param_01;
-  var_06.var_95A6 = param_02;
-  var_06.model = param_03;
-  if(isDefined(param_04) && param_04 == 1) {
-    var_06.var_9B81 = 1;
-  } else {
-    var_06.var_9B81 = 0;
-  }
+  var_5 = level._id_A635;
+  var_6 = spawnStruct();
+  var_6._id_231A = var_0;
+  var_6._id_5135 = var_1;
+  var_6._id_95A6 = var_2;
+  var_6.model = var_3;
 
-  return var_06;
+  if(isDefined(var_4) && var_4 == 1)
+    var_6._id_9B81 = 1;
+  else
+    var_6._id_9B81 = 0;
+
+  return var_6;
 }
 
-func_8A4D(param_00) {
-  var_01 = [];
-  var_02 = buildfighterturret("misc_turret", param_00, "TAG_TURRET_ATTACH_LEFT", "usa_fighter_thunderbolt_turret", 1);
-  var_01[var_01.size] = var_02;
-  var_02 = buildfighterturret("misc_turret", param_00, "TAG_TURRET_ATTACH_RIGHT", "usa_fighter_thunderbolt_turret", 1);
-  var_01[var_01.size] = var_02;
-  fighterinitmg(var_01);
+_id_8A4D(var_0) {
+  var_1 = [];
+  var_2 = buildfighterturret("misc_turret", var_0, "TAG_TURRET_ATTACH_LEFT", "usa_fighter_thunderbolt_turret", 1);
+  var_1[var_1.size] = var_2;
+  var_2 = buildfighterturret("misc_turret", var_0, "TAG_TURRET_ATTACH_RIGHT", "usa_fighter_thunderbolt_turret", 1);
+  var_1[var_1.size] = var_2;
+  fighterinitmg(var_1);
 }
 
 destroyturrets() {
-  foreach(var_01 in self.var_615C) {
-    var_01 makeunusable();
-    var_01 delete();
+  foreach(var_1 in self._id_615C) {
+    var_1 _meth_80B3();
+    var_1 delete();
   }
 
-  self.var_615C = undefined;
+  self._id_615C = undefined;
 }
 
 deathcleanup() {
-  func_36B3();
-  func_941A();
-  if(0) {
-    func_93FF();
-  }
+  _id_36B3();
+  _id_941A();
+
+  if(0)
+    _id_93FF();
 }
 
-func_51FB(param_00) {
-  func_8A4D(param_00);
-  self.var_2A89 = "tag_trail_fx";
-  self.var_9BDD = "tag_trail_fx";
-  if(self method_8445("tag_trail_fx") < 0) {
-    self.var_2A89 = "tag_origin";
-  }
+_id_51FB(var_0) {
+  _id_8A4D(var_0);
+  self._id_2A89 = "tag_trail_fx";
+  self._id_9BDD = "tag_trail_fx";
 
-  if(self method_8445("tag_trail_fx") < 0) {
-    self.var_9BDD = "tag_origin";
-  }
+  if(self _meth_8445("tag_trail_fx") < 0)
+    self._id_2A89 = "tag_origin";
 
-  if(0) {
-    thread func_721B();
-  }
+  if(self _meth_8445("tag_trail_fx") < 0)
+    self._id_9BDD = "tag_origin";
 
-  thread func_3F3B();
-  thread func_3F5D();
+  if(0)
+    thread _id_721B();
+
+  thread _id_3F3B();
+  thread _id_3F5D();
   thread fx_speed_handler();
-  thread func_6DB8();
+  thread _id_6DB8();
 }
 
 spawn_tag_origin_internal() {
-  if(isDefined(level.var_5FEB)) {
-    var_00 = spawn("script_model", level.var_5FEB);
-  } else {
-    var_00 = spawn("script_model", (0, 0, 0));
-  }
+  if(isDefined(level._id_5FEB))
+    var_0 = spawn("script_model", level._id_5FEB);
+  else
+    var_0 = spawn("script_model", (0, 0, 0));
 
-  var_00 setModel("tag_origin");
-  if(isDefined(self.origin)) {
-    var_00.origin = self.origin;
-  }
+  var_0 setModel("tag_origin");
 
-  if(isDefined(self.angles)) {
-    var_00.angles = self.angles;
-  }
+  if(isDefined(self.origin))
+    var_0.origin = self.origin;
 
-  return var_00;
+  if(isDefined(self.angles))
+    var_0.angles = self.angles;
+
+  return var_0;
 }
 
-func_6DB8() {
+_id_6DB8() {
   self endon("death");
-  var_00 = self method_8251();
-  if(!isDefined(var_00)) {
+  var_0 = self _meth_8251();
+
+  if(!isDefined(var_0)) {
     return;
   }
-
-  if(!isDefined(self.var_29B1)) {
-    self.var_29B1 = [];
-    thread func_6DB7();
+  if(!isDefined(self._id_29B1)) {
+    self._id_29B1 = [];
+    thread _id_6DB7();
   }
 
-  var_01 = 0;
-  var_02 = common_scripts\utility::func_44F5("20mm_metal_impact_1");
-  var_03 = -1;
-  var_04 = 3;
+  var_1 = 0;
+  var_2 = common_scripts\utility::_id_44F5("20mm_metal_impact_1");
+  var_3 = -1;
+  var_4 = 3;
+
   for(;;) {
-    self waittill("damage", var_05, var_06, var_07, var_08, var_09);
-    if(!isDefined(var_08)) {
+    self waittill("damage", var_5, var_6, var_7, var_8, var_9);
+
+    if(!isDefined(var_8)) {
       continue;
     }
-
-    if(isDefined(var_06) && var_06 == self) {
+    if(isDefined(var_6) && var_6 == self) {
       continue;
     }
+    _id_02F2::_id_7FFA("raid_hit_air_dmg_plr", var_8, undefined, undefined, undefined, undefined, [var_0]);
+    var_10 = level.players;
+    var_10 = common_scripts\utility::_id_0F93(var_10, var_0);
 
-    maps\mp\_audio_submixes::func_7FFA("raid_hit_air_dmg_plr", var_08, undefined, undefined, undefined, undefined, [var_00]);
-    var_0A = level.players;
-    var_0A = common_scripts\utility::func_F93(var_0A, var_00);
-    if(var_0A.size > 0) {
-      maps\mp\_audio_submixes::func_7FFA("raid_hit_air_dmg_npc", var_08, undefined, undefined, undefined, undefined, var_0A);
-    }
+    if(var_10.size > 0)
+      _id_02F2::_id_7FFA("raid_hit_air_dmg_npc", var_8, undefined, undefined, undefined, undefined, var_10);
 
-    var_01 = 1;
-    var_02 = common_scripts\utility::func_44F5("20mm_metal_impact_1");
-    var_03 = 1.5;
-    var_04 = 9;
-    if(self.var_29B1.size < var_04) {
-      var_0B = spawn_tag_origin_internal();
-      var_0B.fx = var_02;
-      var_0B.origin = var_08;
-      var_0B.angles = self gettagangles(self.var_9BDD);
-      var_0B linkTo(self, self.var_9BDD);
-      self.var_29B1[self.var_29B1.size] = var_0B;
-      playFXOnTag(var_0B.fx, var_0B, "tag_origin");
-      if(var_03 > 0) {
-        thread func_6DB9(var_03, var_0B);
-      }
+    var_1 = 1;
+    var_2 = common_scripts\utility::_id_44F5("20mm_metal_impact_1");
+    var_3 = 1.5;
+    var_4 = 9;
+
+    if(self._id_29B1.size < var_4) {
+      var_11 = spawn_tag_origin_internal();
+      var_11.fx = var_2;
+      var_11.origin = var_8;
+      var_11.angles = self _meth_8181(self._id_9BDD);
+      var_11 _meth_8055(self, self._id_9BDD);
+      self._id_29B1[self._id_29B1.size] = var_11;
+      _func_147(var_11.fx, var_11, "tag_origin");
+
+      if(var_3 > 0)
+        thread _id_6DB9(var_3, var_11);
     }
   }
 }
 
-func_6DB7() {
+_id_6DB7() {
   self waittill("death");
-  if(isDefined(self.var_29B1)) {
-    foreach(var_01 in self.var_29B1) {
-      if(isDefined(var_01)) {
-        stopFXOnTag(var_01.fx, var_01, "tag_origin");
-        var_01 delete();
+
+  if(isDefined(self._id_29B1)) {
+    foreach(var_1 in self._id_29B1) {
+      if(isDefined(var_1)) {
+        _func_148(var_1.fx, var_1, "tag_origin");
+        var_1 delete();
       }
     }
 
-    self.var_29B1 = undefined;
+    self._id_29B1 = undefined;
   }
 }
 
-func_6DB9(param_00, param_01) {
-  wait(param_00);
-  if(isDefined(param_01) && isDefined(self) && isDefined(self.var_29B1)) {
-    stopFXOnTag(param_01.fx, param_01, "tag_origin");
-    self.var_29B1 = common_scripts\utility::func_F93(self.var_29B1, param_01);
+_id_6DB9(var_0, var_1) {
+  wait(var_0);
+
+  if(isDefined(var_1) && isDefined(self) && isDefined(self._id_29B1)) {
+    _func_148(var_1.fx, var_1, "tag_origin");
+    self._id_29B1 = common_scripts\utility::_id_0F93(self._id_29B1, var_1);
   }
 
-  if(isDefined(param_01)) {
-    param_01 delete();
-  }
+  if(isDefined(var_1))
+    var_1 delete();
 }
 
-func_721B() {
+_id_721B() {
   self endon("death");
   self endon("stop_engineeffects");
-  common_scripts\utility::func_3799("engineeffects");
-  common_scripts\utility::func_379A("engineeffects");
-  var_00 = undefined;
-  if(self.var_1C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("p47_exhaust");
-  } else if(self.var_1C8 == "ger_fighter_bf109_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("bf109_exhaust");
-  }
+  common_scripts\utility::_id_3799("engineeffects");
+  common_scripts\utility::_id_379A("engineeffects");
+  var_0 = undefined;
 
-  if(isDefined(var_00)) {
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("p47_exhaust");
+  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("bf109_exhaust");
+
+  if(isDefined(var_0)) {
     for(;;) {
-      common_scripts\utility::func_379C("engineeffects");
-      playFXOnTag(var_00, self, self.var_9BDD);
-      common_scripts\utility::func_37A1("engineeffects");
-      stopFXOnTag(var_00, self, self.var_9BDD);
+      common_scripts\utility::_id_379C("engineeffects");
+      _func_147(var_0, self, self._id_9BDD);
+      common_scripts\utility::_id_37A1("engineeffects");
+      _func_148(var_0, self, self._id_9BDD);
     }
   }
 }
 
-func_93FF() {
-  common_scripts\utility::func_3796("engineeffects");
+_id_93FF() {
+  common_scripts\utility::_id_3796("engineeffects");
 }
 
-func_720A() {
-  var_00 = undefined;
-  if(self.var_1C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("p47_contrail_ext_vel");
-  } else if(self.var_1C8 == "ger_fighter_bf109_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("bf109_contrail_ext_vel");
-  }
+_id_720A() {
+  var_0 = undefined;
 
-  if(isDefined(var_00)) {
-    playFXOnTag(var_00, self, self.var_9BDD);
-  }
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("p47_contrail_ext_vel");
+  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("bf109_contrail_ext_vel");
+
+  if(isDefined(var_0))
+    _func_147(var_0, self, self._id_9BDD);
 }
 
-func_93FB() {
-  var_00 = undefined;
-  if(self.var_1C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("p47_contrail_ext_vel");
-  } else if(self.var_1C8 == "ger_fighter_bf109_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("bf109_contrail_ext_vel");
-  }
+_id_93FB() {
+  var_0 = undefined;
 
-  if(isDefined(var_00)) {
-    stopFXOnTag(var_00, self, self.var_9BDD);
-  }
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("p47_contrail_ext_vel");
+  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("bf109_contrail_ext_vel");
+
+  if(isDefined(var_0))
+    _func_148(var_0, self, self._id_9BDD);
 }
 
-func_36B3() {
+_id_36B3() {
   self notify("end_contrails");
   self endon("death");
-  func_93FB();
+  _id_93FB();
 }
 
-func_74EE() {
-  var_00 = undefined;
-  if(self.var_1C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("p47_wing_evap");
-  } else if(self.var_1C8 == "ger_fighter_bf109_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("bf109_wing_evap");
-  }
+_id_74EE() {
+  var_0 = undefined;
 
-  if(isDefined(var_00)) {
-    playFXOnTag(var_00, self, self.var_9BDD);
-  }
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("p47_wing_evap");
+  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("bf109_wing_evap");
+
+  if(isDefined(var_0))
+    _func_147(var_0, self, self._id_9BDD);
 }
 
-func_941A() {
-  var_00 = undefined;
-  if(self.var_1C8 == "usa_fighter_thunderbolt_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("p47_wing_evap");
-  } else if(self.var_1C8 == "ger_fighter_bf109_player_mp") {
-    var_00 = common_scripts\utility::func_44F5("bf109_wing_evap");
-  }
+_id_941A() {
+  var_0 = undefined;
 
-  if(isDefined(var_00)) {
-    stopFXOnTag(var_00, self, self.var_9BDD);
-  }
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("p47_wing_evap");
+  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+    var_0 = common_scripts\utility::_id_44F5("bf109_wing_evap");
+
+  if(isDefined(var_0))
+    _func_148(var_0, self, self._id_9BDD);
 }
 
-func_36EF() {
+_id_36EF() {
   self notify("end_wing_evap");
   self endon("death");
-  wait 0.05;
-  func_941A();
+  waitframe();
+  _id_941A();
 }
 
-func_3F3B() {
+_id_3F3B() {
   level endon("death");
   self endon("end_contrails");
   self endon("death");
-  var_00 = 0;
-  var_01 = 15;
-  var_02 = 25;
+  var_0 = 0;
+  var_1 = 15;
+  var_2 = 25;
+
   while(isDefined(self)) {
-    var_03 = self.angles;
-    var_04 = var_03[0];
-    var_05 = var_03[2];
-    var_06 = 0;
-    if((var_05 > var_01 && var_05 < 360 - var_01) || var_05 < -1 * var_01 && var_05 > -1 * 360 - var_01) {
-      var_06 = 1;
+    var_3 = self.angles;
+    var_4 = var_3[0];
+    var_5 = var_3[2];
+    var_6 = 0;
+
+    if(var_5 > var_1 && var_5 < 360 - var_1 || var_5 < -1 * var_1 && var_5 > -1 * (360 - var_1))
+      var_6 = 1;
+
+    if(var_4 > var_2 && var_4 < 360 - var_2 || var_4 < -1 * var_2 && var_4 > -1 * (360 - var_2))
+      var_6 = 1;
+
+    if(var_6 && !var_0) {
+      _id_720A();
+      var_0 = 1;
+    } else if(!var_6 && var_0) {
+      _id_93FB();
+      var_0 = 0;
     }
 
-    if((var_04 > var_02 && var_04 < 360 - var_02) || var_04 < -1 * var_02 && var_04 > -1 * 360 - var_02) {
-      var_06 = 1;
-    }
-
-    if(var_06 && !var_00) {
-      func_720A();
-      var_00 = 1;
-      continue;
-    }
-
-    if(!var_06 && var_00) {
-      func_93FB();
-      var_00 = 0;
-    }
-
-    wait 0.05;
+    waitframe();
   }
 }
 
 fx_speed_handler() {
   level endon("death");
   self endon("death");
-  var_00 = self method_8251();
-  if(!isDefined(var_00)) {
+  var_0 = self _meth_8251();
+
+  if(!isDefined(var_0)) {
     return;
   }
-
-  if(isbot(var_00) || function_01EF(var_00)) {
+  if(isbot(var_0) || _func_1EF(var_0)) {
     return;
   }
+  var_1 = 0;
 
-  var_01 = 0;
   while(isDefined(self)) {
-    var_02 = var_00 getnormalizedmovement()[0];
-    if(var_02 >= 0.5) {
-      if(!var_01) {
-        playfxontagforclients(level._effect["mp_raid_bomber_speedup"], self, self.var_9BDD, var_00);
-        var_01 = 1;
+    var_2 = var_0 _meth_82F9()[0];
+
+    if(var_2 >= 0.5) {
+      if(!var_1) {
+        _func_14D(level._effect["mp_raid_bomber_speedup"], self, self._id_9BDD, var_0);
+        var_1 = 1;
       }
-
-      continue;
+    } else if(var_1) {
+      _func_294(level._effect["mp_raid_bomber_speedup"], self, self._id_9BDD, var_0);
+      var_1 = 0;
     }
 
-    if(var_01) {
-      function_0294(level._effect["mp_raid_bomber_speedup"], self, self.var_9BDD, var_00);
-      var_01 = 0;
-    }
-
-    wait 0.05;
+    waitframe();
   }
 }
 
-func_3F5D() {
+_id_3F5D() {
   level endon("death");
   self endon("end_wing_evap");
   self endon("death");
-  var_00 = 0;
-  var_01 = 30;
-  var_02 = 40;
+  var_0 = 0;
+  var_1 = 30;
+  var_2 = 40;
+
   while(isDefined(self)) {
-    var_03 = self.angles;
-    var_04 = var_03[2];
-    var_05 = 0;
-    if((var_04 > var_01 && var_04 < 360 - var_01) || var_04 < -1 * var_01 && var_04 > -1 * 360 - var_01) {
-      var_05 = 1;
+    var_3 = self.angles;
+    var_4 = var_3[2];
+    var_5 = 0;
+
+    if(var_4 > var_1 && var_4 < 360 - var_1 || var_4 < -1 * var_1 && var_4 > -1 * (360 - var_1))
+      var_5 = 1;
+
+    if(var_5 && !var_0) {
+      _id_74EE();
+      var_0 = 1;
+    } else if(!var_5 && var_0) {
+      _id_941A();
+      var_0 = 0;
     }
 
-    if(var_05 && !var_00) {
-      func_74EE();
-      var_00 = 1;
-      continue;
-    }
-
-    if(!var_05 && var_00) {
-      func_941A();
-      var_00 = 0;
-    }
-
-    wait 0.05;
+    waitframe();
   }
 }
 
-func_996C() {
+_id_996C() {
   self endon("death");
+
   for(;;) {
-    self waittill("veh_collision", var_00, var_01, var_02);
-    if(!isDefined(var_02) || !isPlayer(var_02)) {
-      if(isDefined(self.var_6703) && !self.var_6703) {
+    self waittill("veh_collision", var_0, var_1, var_2);
+
+    if(!isDefined(var_2) || !isPlayer(var_2)) {
+      if(isDefined(self._id_6703) && !self._id_6703)
         self notify("veh_collision_except_player");
-      }
 
       continue;
     }
 
-    var_03 = 0;
+    var_3 = 0;
   }
 }

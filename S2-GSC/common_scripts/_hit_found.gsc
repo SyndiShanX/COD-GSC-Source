@@ -1,121 +1,123 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/*****************************************
+ * Decompiled and Edited by SyndiShanX
  * Script: common_scripts\_hit_found.gsc
-*********************************************/
+*****************************************/
 
-func_4161(param_00, param_01, param_02) {
-  var_03 = [];
-  for(var_04 = 0; var_04 <= param_02; var_04 = var_04 + 3) {
-    var_05 = param_01 * var_04;
-    var_03[var_03.size] = param_00 + var_05;
+_id_4161(var_0, var_1, var_2) {
+  var_3 = [];
+
+  for(var_4 = 0; var_4 <= var_2; var_4 = var_4 + 3.0) {
+    var_5 = var_1 * var_4;
+    var_3[var_3.size] = var_0 + var_5;
   }
 
-  var_03[var_03.size] = param_00 + param_01 * param_02;
-  return var_03;
+  var_3[var_3.size] = var_0 + var_1 * var_2;
+  return var_3;
 }
 
-func_9F90(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_02)) {
-    param_02 = 0;
-  }
+_id_9F90(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_2))
+    var_2 = 0;
 
-  var_05 = [];
-  var_06 = [];
-  var_07 = undefined;
-  var_08 = undefined;
-  var_09 = undefined;
-  var_0A = "none";
-  var_0B = 99999999;
-  var_0C = undefined;
-  var_0D = undefined;
-  var_0E = undefined;
-  var_0F = undefined;
-  var_10 = undefined;
-  var_11 = undefined;
+  var_5 = [];
+  var_6 = [];
+  var_7 = undefined;
+  var_8 = undefined;
+  var_9 = undefined;
+  var_10 = "none";
+  var_11 = 99999999;
   var_12 = undefined;
   var_13 = undefined;
-  var_14 = 0;
+  var_14 = undefined;
   var_15 = undefined;
-  var_10 = anglesToForward(self.angles);
-  var_10 = vectorNormalize((var_10[0], var_10[1], 0));
-  var_16 = self.origin + var_10 * 15;
-  if(param_02) {
-    var_17 = 10;
-    var_18 = 13;
+  var_16 = undefined;
+  var_17 = undefined;
+  var_18 = undefined;
+  var_19 = undefined;
+  var_20 = 0;
+  var_21 = undefined;
+  var_16 = anglesToForward(self.angles);
+  var_16 = vectorNormalize((var_16[0], var_16[1], 0));
+  var_22 = self.origin + var_16 * 15;
+
+  if(var_2) {
+    var_23 = 10.0;
+    var_24 = 13.0;
   } else {
-    var_17 = 60;
-    var_18 = 45;
+    var_23 = 60.0;
+    var_24 = 45.0;
   }
 
-  var_07 = var_16 + (0, 0, var_17);
-  var_05 = func_4161(var_07, var_10, 15);
-  var_19 = var_05.size;
-  for(var_1A = 0; var_1A < var_19; var_1A++) {
-    var_1B = var_05[var_1A];
-    var_1C = var_1B - (0, 0, var_18);
-    if(isDefined(var_0F) && isDefined(param_04)) {
-      var_1D = distance2d(var_1B, var_08);
-      if(var_1D > param_04) {
-        var_06[var_1A] = undefined;
+  var_7 = var_22 + (0, 0, var_23);
+  var_5 = _id_4161(var_7, var_16, 15.0);
+  var_25 = var_5.size;
+
+  for(var_26 = 0; var_26 < var_25; var_26++) {
+    var_27 = var_5[var_26];
+    var_28 = var_27 - (0, 0, var_24);
+
+    if(isDefined(var_15) && isDefined(var_4)) {
+      var_29 = _func_0E1(var_27, var_8);
+
+      if(var_29 > var_4) {
+        var_6[var_26] = undefined;
         continue;
       }
     }
 
-    if(!param_02) {
-      var_06[var_1A] = func_9F91(var_1B, var_1C, param_00, param_01, 5, var_14);
-      if(var_06[var_1A]["is_matching_hit_found"] == 0) {
-        if(1 && var_14) {
-          var_06[var_1A]["is_matching_hit_found"] = 1;
-          var_06[var_1A]["position"] = var_05[var_1A];
+    if(!var_2) {
+      var_6[var_26] = _id_9F91(var_27, var_28, var_0, var_1, 5, var_20);
+
+      if(var_6[var_26]["is_matching_hit_found"] == 0) {
+        if(1 && var_20) {
+          var_6[var_26]["is_matching_hit_found"] = 1;
+          var_6[var_26]["position"] = var_5[var_26];
         } else {
-          var_06[var_1A] = undefined;
+          var_6[var_26] = undefined;
           continue;
         }
       }
 
-      if(!isDefined(var_15) && isDefined(var_06[var_1A]["entity"])) {
-        var_15 = var_06[var_1A]["entity"];
-        var_1E = common_scripts\_plant_weapon::func_439E(var_15);
-        if(isDefined(var_1E)) {
-          if(var_1E < 15) {} else {
-            var_1F = func_4161(var_05[var_19 - 1], var_10, var_1E - 15);
-            var_05 = common_scripts\utility::func_F73(var_05, var_1F);
-            var_19 = var_05.size;
+      if(!isDefined(var_21) && isDefined(var_6[var_26]["entity"])) {
+        var_21 = var_6[var_26]["entity"];
+        var_30 = _id_028D::_id_439E(var_21);
+
+        if(isDefined(var_30)) {
+          if(var_30 < 15.0) {} else {
+            var_31 = _id_4161(var_5[var_25 - 1], var_16, var_30 - 15.0);
+            var_5 = common_scripts\utility::_id_0F73(var_5, var_31);
+            var_25 = var_5.size;
           }
         }
       }
 
-      if(1 && !var_14 && var_06[var_1A]["surface_flags"] & 134217728 || var_06[var_1A]["surface_flags"] & 67108864) {
-        var_14 = 1;
-      }
+      if(1 && !var_20 && (var_6[var_26]["surface_flags"] & 134217728 || var_6[var_26]["surface_flags"] & 67108864))
+        var_20 = 1;
 
-      var_20 = var_06[var_1A]["position"];
-    } else {
-      var_20 = var_1B;
-    }
+      var_32 = var_6[var_26]["position"];
+    } else
+      var_32 = var_27;
 
-    var_1C = var_05[var_1A] - (0, 0, var_18);
-    var_21 = func_1D85(var_20, var_1C, 0);
-    var_22 = var_21[0];
-    var_23 = var_21[1];
-    var_24 = var_21[2];
-    if(!isDefined(var_22)) {
-      var_06[var_1A] = undefined;
+    var_28 = var_5[var_26] - (0, 0, var_24);
+    [var_34, var_35, var_36] = _id_1D85(var_32, var_28, 0);
+
+    if(!isDefined(var_34)) {
+      var_6[var_26] = undefined;
       continue;
     }
 
-    var_0E = param_03 - 15;
-    var_06[var_1A]["brush_model_solid_spot"] = var_22;
-    var_06[var_1A]["brush_model_solid_surfacetype"] = var_23;
-    var_06[var_1A]["entity"] = var_24;
-    if(!isDefined(var_11) || var_22[2] > var_11) {
-      var_11 = var_22[2];
-    }
+    var_14 = var_3 - 15;
+    var_6[var_26]["brush_model_solid_spot"] = var_34;
+    var_6[var_26]["brush_model_solid_surfacetype"] = var_35;
+    var_6[var_26]["entity"] = var_36;
 
-    if(!isDefined(var_0F)) {
-      var_0F = var_1A;
-      var_08 = var_22;
-      var_0D = var_08 + var_10 * var_0E;
+    if(!isDefined(var_17) || var_34[2] > var_17)
+      var_17 = var_34[2];
+
+    if(!isDefined(var_15)) {
+      var_15 = var_26;
+      var_8 = var_34;
+      var_13 = var_8 + var_16 * var_14;
     }
 
     if(0) {
@@ -124,497 +126,485 @@ func_9F90(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(1) {
-    var_25 = [];
-    foreach(var_27 in var_06) {
-      if(var_11 - var_27["brush_model_solid_spot"][2] <= common_scripts\_plant_weapon::func_41C4()) {
-        var_25[var_25.size] = var_27;
-      } else if(getdvarint("turret_plant_debug")) {}
+    var_37 = [];
+
+    foreach(var_39 in var_6) {
+      if(var_17 - var_39["brush_model_solid_spot"][2] <= _id_028D::_id_41C4()) {
+        var_37[var_37.size] = var_39;
+        continue;
+      }
+
+      if(getdvarint("turret_plant_debug")) {}
     }
 
-    var_06 = var_25;
+    var_6 = var_37;
   }
 
-  foreach(var_27 in var_06) {
-    var_2A = distance2dsquared(var_27["brush_model_solid_spot"], var_0D);
-    if(var_2A < var_0B) {
-      var_0B = var_2A;
-      var_09 = var_27["brush_model_solid_spot"];
-      var_0A = var_27["brush_model_solid_surfacetype"];
-      var_0C = var_27["entity"];
+  foreach(var_39 in var_6) {
+    var_42 = _func_211(var_39["brush_model_solid_spot"], var_13);
+
+    if(var_42 < var_11) {
+      var_11 = var_42;
+      var_9 = var_39["brush_model_solid_spot"];
+      var_10 = var_39["brush_model_solid_surfacetype"];
+      var_12 = var_39["entity"];
     }
   }
 
-  if(isDefined(var_09)) {
-    var_2C = 1;
-    if(param_02) {
-      var_2D = 7;
-      var_2E[0] = (self.origin[0], self.origin[1], var_09[2] + var_2D) - anglesToForward(self.angles) * 15;
-      var_2E[1] = var_2E[0] - anglestoright(self.angles) * 15;
-      var_2E[2] = var_2E[0] + anglestoright(self.angles) * 15;
-      var_2F = (var_09[0], var_09[1], var_09[2] + var_2D) + anglesToForward(self.angles) * 3;
-      for(var_1A = 0; var_1A < var_2E.size; var_1A++) {
-        var_30 = func_1D85(var_2E[var_1A], var_2F, 1, var_1A, var_2E.size);
-        var_22 = var_30[0];
-        var_23 = var_30[1];
-        if(isDefined(var_22)) {
-          var_2C = 0;
+  if(isDefined(var_9)) {
+    var_44 = 1;
+
+    if(var_2) {
+      var_45 = 7.0;
+      var_46[0] = (self.origin[0], self.origin[1], var_9[2] + var_45) - anglesToForward(self.angles) * 15;
+      var_46[1] = var_46[0] - anglestoright(self.angles) * 15;
+      var_46[2] = var_46[0] + anglestoright(self.angles) * 15;
+      var_47 = (var_9[0], var_9[1], var_9[2] + var_45) + anglesToForward(self.angles) * 3.0;
+
+      for(var_26 = 0; var_26 < var_46.size; var_26++) {
+        [var_34, var_35] = _id_1D85(var_46[var_26], var_47, 1, var_26, var_46.size);
+
+        if(isDefined(var_34)) {
+          var_44 = 0;
           break;
         }
       }
     }
 
-    if(var_2C) {
-      return [var_09, var_0A, var_0C];
-    }
+    if(var_44)
+      return [var_9, var_10, var_12];
   }
 
   return [undefined, undefined, undefined];
 }
 
-func_9F91(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = 0;
-  var_07 = 0;
-  if(param_02) {
-    var_06 = var_06 | 536870912;
-    var_07 = var_07 | 64;
+_id_9F91(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = 0;
+  var_7 = 0;
+
+  if(var_2) {
+    var_6 = var_6 | 536870912;
+    var_7 = var_7 | 64;
   }
 
-  if(param_03) {
-    var_06 = var_06 | 16777216;
-    var_07 = var_07 | 67108864;
-    var_07 = var_07 | 134217728;
+  if(var_3) {
+    var_6 = var_6 | 16777216;
+    var_7 = var_7 | 67108864;
+    var_7 = var_7 | 134217728;
   }
 
-  var_08 = function_0335(param_00, param_01, var_06, var_07, self, param_04);
-  return var_08;
+  var_8 = _func_335(var_0, var_1, var_6, var_7, self, var_4);
+  return var_8;
 }
 
-func_1D85(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = undefined;
-  var_06 = undefined;
-  var_07 = ~0;
-  var_08 = 0;
-  if(param_02) {
-    var_09 = 377552881;
-  } else {
-    var_09 = 377749489;
-  }
+_id_1D85(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = undefined;
+  var_6 = undefined;
+  var_7 = ~0;
+  var_8 = 0;
 
-  var_06 = function_0335(param_00, param_01, var_09, var_07, self, undefined, var_08);
-  if(var_06["is_matching_hit_found"]) {
-    return [var_06["position"], var_06["surfacetype"], var_06["entity"]];
-  }
+  if(var_2)
+    var_9 = 377552881;
+  else
+    var_9 = 377749489;
 
-  return [undefined, undefined];
+  var_6 = _func_335(var_0, var_1, var_9, var_7, self, undefined, var_8);
+
+  if(var_6["is_matching_hit_found"])
+    return [var_6["position"], var_6["surfacetype"], var_6["entity"]];
+  else
+    return [undefined, undefined];
 }
 
-func_6FAC(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = getdvarint("turret_plant_debug") == 2;
-  if(param_00["is_hit"]) {
-    if(!var_06) {
+_id_6FAC(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = getdvarint("turret_plant_debug") == 2;
+
+  if(var_0["is_hit"]) {
+    if(!var_6)
       return;
+  }
+
+  var_7 = var_1;
+  var_8 = var_2;
+
+  if(!isDefined(var_5))
+    var_9 = _func_080(var_7, var_8, var_3);
+  else {
+    var_10 = _func_335(var_7, var_8, var_5, undefined, var_3);
+
+    if(var_10["is_matching_hit_found"])
+      var_9 = var_10["position"];
+    else
+      var_9 = var_8;
+  }
+
+  if(!isDefined(var_0["current_angle"])) {
+    var_11 = vectorNormalize(var_9 - var_7);
+    var_4 = vectorNormalize(var_4);
+    var_12 = vectordot(var_11, var_4);
+    var_12 = clamp(var_12, -1, 1);
+    var_0["current_angle"] = _func_0AA(var_12);
+  }
+
+  if(!common_scripts\utility::_id_5646(var_9, var_8)) {
+    if(var_0["is_hit"] == 0) {
+      var_0["hit_angle"] = var_0["current_angle"];
+      var_0["hit_point"] = var_9;
+      var_0["is_hit"] = 1;
     }
   }
 
-  var_07 = param_01;
-  var_08 = param_02;
-  if(!isDefined(param_05)) {
-    var_09 = physicstrace(var_07, var_08, param_03);
-  } else {
-    var_0A = function_0335(var_08, var_09, var_06, undefined, param_04);
-    if(var_0A["is_matching_hit_found"]) {
-      var_09 = var_0A["position"];
-    } else {
-      var_09 = var_08;
-    }
-  }
-
-  if(!isDefined(param_00["current_angle"])) {
-    var_0B = vectorNormalize(var_09 - var_07);
-    param_04 = vectorNormalize(param_04);
-    var_0C = vectordot(var_0B, param_04);
-    var_0C = clamp(var_0C, -1, 1);
-    param_00["current_angle"] = acos(var_0C);
-  }
-
-  if(!common_scripts\utility::func_5646(var_09, var_08)) {
-    if(param_00["is_hit"] == 0) {
-      param_00["hit_angle"] = param_00["current_angle"];
-      param_00["hit_point"] = var_09;
-      param_00["is_hit"] = 1;
-    }
-  }
-
-  return param_00;
+  return var_0;
 }
 
-func_42BA(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = [];
-  var_07 = [];
-  if(!isDefined(param_04)) {
-    param_04 = 20;
+_id_42BA(var_0, var_1, var_2, var_3, var_4, var_5) {
+  var_6 = [];
+  var_7 = [];
+
+  if(!isDefined(var_4))
+    var_4 = 20;
+
+  var_8 = undefined;
+
+  if(var_3 > 0)
+    var_8 = int(var_3 / var_4) + 2;
+  else {
+    var_4 = -1 * var_4;
+    var_8 = int(var_3 / var_4) + 2;
   }
 
-  var_08 = undefined;
-  if(param_03 > 0) {
-    var_08 = int(param_03 / param_04) + 2;
-  } else {
-    param_04 = -1 * param_04;
-    var_08 = int(param_03 / param_04) + 2;
-  }
+  var_9 = 0;
 
-  var_09 = 0;
-  for(var_0A = 0; var_0A < var_08; var_0A++) {
-    if(var_0A == var_08 - 1) {
-      var_09 = param_03;
-    } else {
-      var_09 = var_0A * param_04;
-    }
+  for(var_10 = 0; var_10 < var_8; var_10++) {
+    if(var_10 == var_8 - 1)
+      var_9 = var_3;
+    else
+      var_9 = var_10 * var_4;
 
-    var_0B = undefined;
-    if(0) {
-      var_0B = combineangles(param_01, (0, var_09, 0));
-    } else {
-      var_0B = (param_01[0], angleclamp180(param_01[1] + var_09), param_01[2]);
-    }
+    var_11 = undefined;
 
-    var_0C = anglesToForward(var_0B) * param_02;
-    var_06[var_0A] = var_0C + param_00;
-    if(param_05) {
-      var_0D = combineangles(var_0B, (0, param_05, 0));
-      var_0E = anglesToForward(var_0D) * param_02;
-      var_07[var_0A] = var_0E + param_00;
+    if(0)
+      var_11 = _func_110(var_1, (0, var_9, 0));
+    else
+      var_11 = (var_1[0], _func_0DD(var_1[1] + var_9), var_1[2]);
+
+    var_12 = anglesToForward(var_11) * var_2;
+    var_6[var_10] = var_12 + var_0;
+
+    if(var_5) {
+      var_13 = _func_110(var_11, (0, var_5, 0));
+      var_14 = anglesToForward(var_13) * var_2;
+      var_7[var_10] = var_14 + var_0;
     }
   }
 
-  return [var_06, var_07, var_0A];
+  return [var_6, var_7, var_10];
 }
 
-func_6FAB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  var_09 = getdvarint("turret_plant_debug") == 2;
-  var_0A = [];
-  var_0B = func_42BA(param_01, param_02, param_03, param_04, param_05, param_06);
-  var_0C = var_0B[0];
-  var_0D = var_0B[1];
-  var_0E = var_0B[2];
-  var_0F = anglesToForward(param_02);
-  var_0A["is_hit"] = 0;
-  var_0A["arc_end"] = var_0C[var_0E];
-  for(var_10 = 0; var_10 < var_0C.size; var_10++) {
-    var_0A["current_angle"] = undefined;
-    var_0A = func_6FAC(var_0A, param_01, var_0C[var_10], param_07, var_0F, param_08);
-    if(var_0A["is_hit"]) {
+_id_6FAB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  var_9 = getdvarint("turret_plant_debug") == 2;
+  var_10 = [];
+  [var_12, var_13, var_14] = _id_42BA(var_1, var_2, var_3, var_4, var_5, var_6);
+  var_15 = anglesToForward(var_2);
+  var_10["is_hit"] = 0;
+  var_10["arc_end"] = var_12[var_14];
+
+  for(var_16 = 0; var_16 < var_12.size; var_16++) {
+    var_10["current_angle"] = undefined;
+    var_10 = _id_6FAC(var_10, var_1, var_12[var_16], var_7, var_15, var_8);
+
+    if(var_10["is_hit"]) {
       break;
     }
 
-    if(param_06) {
-      var_11 = var_0D[var_10];
-    } else {
-      var_11 = var_0C[var_10];
-    }
+    if(var_6)
+      var_17 = var_13[var_16];
+    else
+      var_17 = var_12[var_16];
 
-    var_12 = (var_11[0], var_11[1], param_00 + common_scripts\_plant_weapon::func_41B5());
-    var_0A = func_6FAC(var_0A, var_11, var_12, param_07, var_0F, param_08);
-    if(var_0A["is_hit"]) {
+    var_18 = (var_17[0], var_17[1], var_0 + _id_028D::_id_41B5());
+    var_10 = _id_6FAC(var_10, var_17, var_18, var_7, var_15, var_8);
+
+    if(var_10["is_hit"]) {
       break;
     }
 
-    var_13 = var_12;
-    var_14 = (var_13[0], var_13[1], param_00 - common_scripts\_plant_weapon::func_41B5());
-    var_0A = func_6FAC(var_0A, var_13, var_14, param_07, var_0F, param_08);
-    var_0A["is_hit"] = !var_0A["is_hit"];
-    if(var_0A["is_hit"]) {
-      var_0A["hit_angle"] = var_0A["current_angle"];
+    var_19 = var_18;
+    var_20 = (var_19[0], var_19[1], var_0 - _id_028D::_id_41B5());
+    var_10 = _id_6FAC(var_10, var_19, var_20, var_7, var_15, var_8);
+    var_10["is_hit"] = !var_10["is_hit"];
+
+    if(var_10["is_hit"]) {
+      var_10["hit_angle"] = var_10["current_angle"];
       break;
     }
   }
 
-  return var_0A;
+  return var_10;
 }
 
-func_4B43(param_00, param_01, param_02) {
-  if(isDefined(param_00)) {
-    var_03 = [];
-    var_03["is_hit"] = 0;
-    var_04 = anglesToForward(combineangles(self.angles, (0, param_02, 0)));
-    var_05 = param_00 - var_04 * param_01;
-    var_06 = (var_05[0], var_05[1], self.origin[2] - common_scripts\_plant_weapon::func_41B5());
-    var_03 = func_6FAC(var_03, var_05, var_06, self, anglesToForward(self.angles), undefined);
-    return var_03["is_hit"];
+_id_4B43(var_0, var_1, var_2) {
+  if(isDefined(var_0)) {
+    var_3 = [];
+    var_3["is_hit"] = 0;
+    var_4 = anglesToForward(_func_110(self.angles, (0, var_2, 0)));
+    var_5 = var_0 - var_4 * var_1;
+    var_6 = (var_5[0], var_5[1], self.origin[2] - _id_028D::_id_41B5());
+    var_3 = _id_6FAC(var_3, var_5, var_6, self, anglesToForward(self.angles), undefined);
+    return var_3["is_hit"];
   }
 
   return 0;
 }
 
-func_43D8(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
-  var_0C = combineangles(param_03, (0, 180, 0));
-  var_0D = (param_01[0], param_01[1], 0) - (param_02[0], param_02[1], 0);
-  var_0E = length(var_0D);
-  var_0F = vectorNormalize(var_0D);
-  var_10 = param_01 + var_0F * param_05 + (0, 0, param_04);
-  var_11["right_outer"] = spawnStruct();
-  var_11["right_outer"].var_F40 = var_10;
-  var_11["right_outer"].var_F42 = param_06;
-  var_11["right_outer"].var_F3E = -1 * param_08;
-  var_11["right_outer"].var_7EDF = var_0C;
-  var_11["right_outer"].var_7064 = param_00;
-  var_11["right_outer"].var_32D3 = param_0B;
-  var_11["right_outer"].trace_type = "arc_radial";
-  var_11["right_outer"].custom_mask = undefined;
-  var_11["left_outer"] = spawnStruct();
-  var_11["left_outer"].var_F40 = var_10;
-  var_11["left_outer"].var_F42 = param_06;
-  var_11["left_outer"].var_F3E = param_07;
-  var_11["left_outer"].var_7EDF = var_0C;
-  var_11["left_outer"].var_7064 = param_00;
-  var_11["left_outer"].var_32D3 = param_0B;
-  var_11["left_outer"].trace_type = "arc_radial";
-  var_11["left_outer"].custom_mask = undefined;
-  var_12 = var_0E + 7;
-  var_11["right_inner"] = spawnStruct();
-  var_11["right_inner"].var_F40 = var_10;
-  var_11["right_inner"].var_F42 = var_12;
-  var_11["right_inner"].var_F3E = -1 * param_08;
-  var_11["right_inner"].var_7EDF = var_0C;
-  var_11["right_inner"].var_7064 = param_00;
-  var_11["right_inner"].var_32D3 = param_0B;
-  var_11["right_inner"].trace_type = "arc_single";
-  var_11["right_inner"].custom_mask = 377552881;
-  var_11["left_inner"] = spawnStruct();
-  var_11["left_inner"].var_F40 = var_10;
-  var_11["left_inner"].var_F42 = var_12;
-  var_11["left_inner"].var_F3E = param_07;
-  var_11["left_inner"].var_7EDF = var_0C;
-  var_11["left_inner"].var_7064 = param_00;
-  var_11["left_inner"].var_32D3 = param_0B;
-  var_11["left_inner"].trace_type = "arc_single";
-  var_11["left_inner"].custom_mask = 377552881;
-  var_13 = vectortoangles(vectorNormalize(param_02 - param_01));
-  if(common_scripts\_plant_weapon::func_8BAF()) {
-    var_11["le_top_tag_player"] = spawnStruct();
-    var_11["le_top_tag_player"].var_F40 = param_01;
-    var_11["le_top_tag_player"].var_F42 = distance(param_02, param_01);
-    var_11["le_top_tag_player"].var_F3E = param_07;
-    var_11["le_top_tag_player"].var_F3F = param_09;
-    var_11["le_top_tag_player"].var_7EDF = var_13;
-    var_11["le_top_tag_player"].trace_type = "arc_multi";
-    var_11["le_top_tag_player"].custom_mask = 377749489;
-    var_11["ri_top_tag_player"] = spawnStruct();
-    var_11["ri_top_tag_player"].var_F40 = param_01;
-    var_11["ri_top_tag_player"].var_F42 = distance(param_02, param_01);
-    var_11["ri_top_tag_player"].var_F3E = -1 * param_08;
-    var_11["ri_top_tag_player"].var_F3F = param_09;
-    var_11["ri_top_tag_player"].var_7EDF = var_13;
-    var_11["ri_top_tag_player"].trace_type = "arc_multi";
-    var_11["ri_top_tag_player"].custom_mask = 377749489;
+_id_43D8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+  var_12 = _func_110(var_3, (0, 180, 0));
+  var_13 = (var_1[0], var_1[1], 0) - (var_2[0], var_2[1], 0);
+  var_14 = length(var_13);
+  var_15 = vectorNormalize(var_13);
+  var_16 = var_1 + var_15 * var_5 + (0, 0, var_4);
+  var_17["right_outer"] = spawnStruct();
+  var_17["right_outer"]._id_0F40 = var_16;
+  var_17["right_outer"]._id_0F42 = var_6;
+  var_17["right_outer"]._id_0F3E = -1 * var_8;
+  var_17["right_outer"]._id_7EDF = var_12;
+  var_17["right_outer"]._id_7064 = var_0;
+  var_17["right_outer"]._id_32D3 = var_11;
+  var_17["right_outer"].trace_type = "arc_radial";
+  var_17["right_outer"].custom_mask = undefined;
+  var_17["left_outer"] = spawnStruct();
+  var_17["left_outer"]._id_0F40 = var_16;
+  var_17["left_outer"]._id_0F42 = var_6;
+  var_17["left_outer"]._id_0F3E = var_7;
+  var_17["left_outer"]._id_7EDF = var_12;
+  var_17["left_outer"]._id_7064 = var_0;
+  var_17["left_outer"]._id_32D3 = var_11;
+  var_17["left_outer"].trace_type = "arc_radial";
+  var_17["left_outer"].custom_mask = undefined;
+  var_18 = var_14 + 7.0;
+  var_17["right_inner"] = spawnStruct();
+  var_17["right_inner"]._id_0F40 = var_16;
+  var_17["right_inner"]._id_0F42 = var_18;
+  var_17["right_inner"]._id_0F3E = -1 * var_8;
+  var_17["right_inner"]._id_7EDF = var_12;
+  var_17["right_inner"]._id_7064 = var_0;
+  var_17["right_inner"]._id_32D3 = var_11;
+  var_17["right_inner"].trace_type = "arc_single";
+  var_17["right_inner"].custom_mask = 377552881;
+  var_17["left_inner"] = spawnStruct();
+  var_17["left_inner"]._id_0F40 = var_16;
+  var_17["left_inner"]._id_0F42 = var_18;
+  var_17["left_inner"]._id_0F3E = var_7;
+  var_17["left_inner"]._id_7EDF = var_12;
+  var_17["left_inner"]._id_7064 = var_0;
+  var_17["left_inner"]._id_32D3 = var_11;
+  var_17["left_inner"].trace_type = "arc_single";
+  var_17["left_inner"].custom_mask = 377552881;
+  var_19 = vectortoangles(vectorNormalize(var_2 - var_1));
+
+  if(_id_028D::_id_8BAF()) {
+    var_17["le_top_tag_player"] = spawnStruct();
+    var_17["le_top_tag_player"]._id_0F40 = var_1;
+    var_17["le_top_tag_player"]._id_0F42 = distance(var_2, var_1);
+    var_17["le_top_tag_player"]._id_0F3E = var_7;
+    var_17["le_top_tag_player"]._id_0F3F = var_9;
+    var_17["le_top_tag_player"]._id_7EDF = var_19;
+    var_17["le_top_tag_player"].trace_type = "arc_multi";
+    var_17["le_top_tag_player"].custom_mask = 377749489;
+    var_17["ri_top_tag_player"] = spawnStruct();
+    var_17["ri_top_tag_player"]._id_0F40 = var_1;
+    var_17["ri_top_tag_player"]._id_0F42 = distance(var_2, var_1);
+    var_17["ri_top_tag_player"]._id_0F3E = -1 * var_8;
+    var_17["ri_top_tag_player"]._id_0F3F = var_9;
+    var_17["ri_top_tag_player"]._id_7EDF = var_19;
+    var_17["ri_top_tag_player"].trace_type = "arc_multi";
+    var_17["ri_top_tag_player"].custom_mask = 377749489;
   }
 
-  var_14 = 12;
-  var_15 = 7;
-  var_16 = func_41EB(self, var_11, var_14, var_15);
-  var_17 = var_16[0];
-  var_18 = var_16[1];
-  var_19 = var_16[2];
-  var_1A = var_16[3];
-  if(!isDefined(var_17) || var_17 > param_07) {
-    var_17 = param_07;
-  }
+  var_20 = 12;
+  var_21 = 7;
+  [var_23, var_24, var_25, var_26] = _id_41EB(self, var_17, var_20, var_21);
 
-  if(!isDefined(var_18) || var_18 > param_08) {
-    var_18 = param_08;
-  }
+  if(!isDefined(var_23) || var_23 > var_7)
+    var_23 = var_7;
 
-  if(!isDefined(var_19) || var_19 > param_09) {
-    var_19 = param_09;
-  }
+  if(!isDefined(var_24) || var_24 > var_8)
+    var_24 = var_8;
 
-  if(!isDefined(var_1A) || var_1A > param_0A) {
-    var_1A = param_0A;
-  }
+  if(!isDefined(var_25) || var_25 > var_9)
+    var_25 = var_9;
 
-  return [var_17, var_18, var_19, var_1A];
+  if(!isDefined(var_26) || var_26 > var_10)
+    var_26 = var_10;
+
+  return [var_23, var_24, var_25, var_26];
 }
 
-func_10D0(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_01)) {
-    param_01 = param_00;
-  }
+_id_10D0(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_1))
+    var_1 = var_0;
 
-  param_00.var_5C66 = param_00 method_85A3();
-  param_00.var_7E86 = param_00 method_85A4();
-  param_00.var_9A95 = param_00 method_84BB();
-  param_00.var_1B4B = param_00 method_84BC();
-  var_05 = param_01 gettagorigin("TAG_PLAYER");
-  var_06 = param_01 gettagangles("TAG_PLAYER");
-  var_07 = param_01 gettagorigin("TAG_TURRET");
-  var_08 = param_01 gettagangles("TAG_TURRET");
-  var_09 = var_07 - var_05;
-  var_0A = length(var_09);
-  var_0B = combineangles(var_08, (0, 180, 0));
-  var_0C = vectortoangles(vectorNormalize(var_05 - var_07));
-  var_0C = combineangles(var_0C, (0, 0, 90));
-  var_0D = combineangles(var_08, (0, 180, 90));
-  var_0E = [];
-  var_0F = (var_07[0], var_07[1], var_05[2]);
-  if(isDefined(param_03)) {
-    if(var_0A > 0) {
-      var_10 = var_09 * 1 / var_0A;
-      var_0F = var_0F + var_10 * param_03;
+  var_0._id_5C66 = var_0 _meth_85A3();
+  var_0._id_7E86 = var_0 _meth_85A4();
+  var_0._id_9A95 = var_0 _meth_84BB();
+  var_0._id_1B4B = var_0 _meth_84BC();
+  var_5 = var_1 gettagorigin("TAG_PLAYER");
+  var_6 = var_1 _meth_8181("TAG_PLAYER");
+  var_7 = var_1 gettagorigin("TAG_TURRET");
+  var_8 = var_1 _meth_8181("TAG_TURRET");
+  var_9 = var_7 - var_5;
+  var_10 = length(var_9);
+  var_11 = _func_110(var_8, (0, 180, 0));
+  var_12 = vectortoangles(vectorNormalize(var_5 - var_7));
+  var_12 = _func_110(var_12, (0, 0, 90));
+  var_13 = _func_110(var_8, (0, 180, 90));
+  var_14 = [];
+  var_15 = (var_7[0], var_7[1], var_5[2]);
+
+  if(isDefined(var_3)) {
+    if(var_10 > 0) {
+      var_16 = var_9 * (1 / var_10);
+      var_15 = var_15 + var_16 * var_3;
     }
   }
 
-  if(!isDefined(param_04)) {
-    param_04 = 15;
-  }
+  if(!isDefined(var_4))
+    var_4 = 15;
 
-  if(isDefined(param_03)) {
-    param_04 = param_04 - param_03;
-  }
+  if(isDefined(var_3))
+    var_4 = var_4 - var_3;
 
-  var_11 = var_0A + param_04;
-  var_12 = var_05 - var_07;
-  var_13 = func_43D8(param_02[2], var_07, var_05, var_08, var_12[2], 0, var_11, param_00.var_5C66, param_00.var_7E86, param_00.var_9A95, param_00.var_1B4B);
-  var_14 = var_13[0];
-  var_15 = var_13[1];
-  var_16 = var_13[2];
-  var_17 = var_13[3];
-  if(isDefined(var_14) && var_14 < param_00 method_85A3()) {
-    param_00 method_8151(var_14);
-  }
+  var_17 = var_10 + var_4;
+  var_18 = var_5 - var_7;
+  [var_20, var_21, var_22, var_23] = _id_43D8(var_2[2], var_7, var_5, var_8, var_18[2], 0, var_17, var_0._id_5C66, var_0._id_7E86, var_0._id_9A95, var_0._id_1B4B);
 
-  if(isDefined(var_15) && var_15 < param_00 method_85A4()) {
-    param_00 method_8150(var_15);
-  }
+  if(isDefined(var_20) && var_20 < var_0 _meth_85A3())
+    var_0 _meth_8151(var_20);
 
-  if(isDefined(var_16) && var_16 < param_00 method_84BB()) {
-    param_00 method_8152(var_16);
-  }
+  if(isDefined(var_21) && var_21 < var_0 _meth_85A4())
+    var_0 _meth_8150(var_21);
 
-  if(isDefined(var_17) && var_17 < param_00 method_84BC()) {
-    param_00 method_8153(var_17);
-  }
+  if(isDefined(var_22) && var_22 < var_0 _meth_84BB())
+    var_0 _meth_8152(var_22);
+
+  if(isDefined(var_23) && var_23 < var_0 _meth_84BC())
+    var_0 _meth_8153(var_23);
 }
 
-func_41EB(param_00, param_01, param_02, param_03) {
-  var_04 = [];
-  var_05 = "";
-  var_06 = 0;
-  var_07 = undefined;
-  foreach(var_0D, var_09 in param_01) {
-    var_0A = undefined;
-    if(issubstr(var_0D, "left")) {
-      var_05 = "left";
-      var_0A = param_02;
-    } else if(issubstr(var_0D, "right")) {
-      var_05 = "right";
-      var_0A = param_02;
+_id_41EB(var_0, var_1, var_2, var_3) {
+  var_4 = [];
+  var_5 = "";
+  var_6 = 0;
+  var_7 = undefined;
+
+  foreach(var_13, var_9 in var_1) {
+    var_10 = undefined;
+
+    if(issubstr(var_13, "left")) {
+      var_5 = "left";
+      var_10 = var_2;
+    } else if(issubstr(var_13, "right")) {
+      var_5 = "right";
+      var_10 = var_2;
     }
 
-    if(issubstr(var_0D, "top")) {
-      var_05 = "top";
-      var_0A = param_03;
-    } else if(issubstr(var_0D, "bottom")) {
-      var_05 = "bottom";
-      var_0A = param_03;
+    if(issubstr(var_13, "top")) {
+      var_5 = "top";
+      var_10 = var_3;
+    } else if(issubstr(var_13, "bottom")) {
+      var_5 = "bottom";
+      var_10 = var_3;
     }
 
-    if(var_09.trace_type == "arc_radial") {
-      var_07 = func_6FAB(var_09.var_7064, var_09.var_F40, var_09.var_7EDF, var_09.var_F42, var_09.var_F3E, 5, var_09.var_32D3, param_00, var_09.custom_mask);
-    } else if(var_09.trace_type == "arc_multi") {
-      var_0B = add_padding_and_get_signed_arc_angle_override_if_needed(var_09.var_F3E, var_0D, var_04, var_0A);
-      var_07 = func_6FAA(var_09.var_F40, var_09.var_7EDF, var_09.var_F42, var_0B, 10, var_09.var_F3F + param_03, param_00, var_09.custom_mask);
-    } else if(var_09.trace_type == "arc_single") {
-      var_0B = add_padding_and_get_signed_arc_angle_override_if_needed(var_09.var_F3E, var_0D, var_04, var_0A);
-      var_07 = common_scripts\utility::func_6FA9(var_09.var_F40, var_09.var_7EDF, var_09.var_F42, var_0B, param_00, var_09.custom_mask);
+    if(var_9.trace_type == "arc_radial")
+      var_7 = _id_6FAB(var_9._id_7064, var_9._id_0F40, var_9._id_7EDF, var_9._id_0F42, var_9._id_0F3E, 5.0, var_9._id_32D3, var_0, var_9.custom_mask);
+    else if(var_9.trace_type == "arc_multi") {
+      var_11 = add_padding_and_get_signed_arc_angle_override_if_needed(var_9._id_0F3E, var_13, var_4, var_10);
+      var_7 = _id_6FAA(var_9._id_0F40, var_9._id_7EDF, var_9._id_0F42, var_11, 10.0, var_9._id_0F3F + var_3, var_0, var_9.custom_mask);
+    } else if(var_9.trace_type == "arc_single") {
+      var_11 = add_padding_and_get_signed_arc_angle_override_if_needed(var_9._id_0F3E, var_13, var_4, var_10);
+      var_7 = common_scripts\utility::_id_6FA9(var_9._id_0F40, var_9._id_7EDF, var_9._id_0F42, var_11, var_0, var_9.custom_mask);
     }
 
-    if(var_07["is_hit"]) {
-      var_0C = var_07["hit_angle"];
-      var_0C = abs(angleclamp180(var_0C));
-      if(var_0C > 10) {
-        var_0C = var_0C - var_0A;
-      }
+    if(var_7["is_hit"]) {
+      var_12 = var_7["hit_angle"];
+      var_12 = _func_0AE(_func_0DD(var_12));
 
-      if(!isDefined(var_04[var_05]) || var_0C < var_04[var_05]) {
-        var_04[var_05] = var_0C;
-      }
+      if(var_12 > 10)
+        var_12 = var_12 - var_10;
+
+      if(!isDefined(var_4[var_5]) || var_12 < var_4[var_5])
+        var_4[var_5] = var_12;
     }
 
-    var_06++;
+    var_6++;
   }
 
-  return [var_04["left"], var_04["right"], var_04["top"], var_04["bottom"]];
+  return [var_4["left"], var_4["right"], var_4["top"], var_4["bottom"]];
 }
 
-add_padding_and_get_signed_arc_angle_override_if_needed(param_00, param_01, param_02, param_03) {
-  if(function_02C6(param_01, "le") && isDefined(param_02["left"])) {
-    var_04 = param_02["left"];
-  } else if(function_02C6(param_02, "ri") && isDefined(param_03["right"])) {
-    var_04 = param_03["right"];
-  } else {
-    var_04 = abs(param_01);
-  }
+add_padding_and_get_signed_arc_angle_override_if_needed(var_0, var_1, var_2, var_3) {
+  if(_func_2C6(var_1, "le") && isDefined(var_2["left"]))
+    var_4 = var_2["left"];
+  else if(_func_2C6(var_1, "ri") && isDefined(var_2["right"]))
+    var_4 = var_2["right"];
+  else
+    var_4 = _func_0AE(var_0);
 
-  if(param_00 < 0) {
-    var_05 = -1 * var_04 + param_03;
-  } else {
-    var_05 = var_05 + var_04;
-  }
+  if(var_0 < 0)
+    var_5 = -1 * (var_4 + var_3);
+  else
+    var_5 = var_4 + var_3;
 
-  return var_05;
+  return var_5;
 }
 
-func_6FAA(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  var_08 = getdvarint("turret_plant_debug") == 2;
-  var_09 = [];
-  var_0A = func_42BA(param_00, param_01, param_02, param_03, param_04, 0);
-  var_0B = var_0A[0];
-  var_0C = var_0A[1];
-  var_0D = var_0A[2];
-  var_0E = anglesToForward(param_01);
-  for(var_0F = 0; var_0F < var_0B.size; var_0F++) {
-    var_10 = vectortoangles(vectorNormalize(var_0B[var_0F] - param_00));
-    var_10 = combineangles(var_10, (0, 0, 90));
-    if(param_05 > 0) {
-      param_05 = param_05 * -1;
-    }
+_id_6FAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+  var_8 = getdvarint("turret_plant_debug") == 2;
+  var_9 = [];
+  [var_11, var_12, var_13] = _id_42BA(var_0, var_1, var_2, var_3, var_4, 0);
+  var_14 = anglesToForward(var_1);
 
-    var_09[var_0F] = common_scripts\utility::func_6FA9(param_00, var_10, param_02, param_05, param_06, param_07);
+  for(var_15 = 0; var_15 < var_11.size; var_15++) {
+    var_16 = vectortoangles(vectorNormalize(var_11[var_15] - var_0));
+    var_16 = _func_110(var_16, (0, 0, 90));
+
+    if(var_5 > 0)
+      var_5 = var_5 * -1;
+
+    var_9[var_15] = common_scripts\utility::_id_6FA9(var_0, var_16, var_2, var_5, var_6, var_7);
   }
 
-  var_11 = undefined;
-  var_12 = 0;
-  for(var_0F = 0; var_0F < var_09.size; var_0F++) {
-    if(isDefined(var_09[var_0F]["is_hit"]) && var_09[var_0F]["is_hit"]) {
-      if(!isDefined(var_11) || abs(var_11) > abs(var_09[var_0F]["hit_angle"])) {
-        var_11 = var_09[var_0F]["hit_angle"];
-        var_12 = var_0F;
+  var_17 = undefined;
+  var_18 = 0;
+
+  for(var_15 = 0; var_15 < var_9.size; var_15++) {
+    if(isDefined(var_9[var_15]["is_hit"]) && var_9[var_15]["is_hit"]) {
+      if(!isDefined(var_17) || _func_0AE(var_17) > _func_0AE(var_9[var_15]["hit_angle"])) {
+        var_17 = var_9[var_15]["hit_angle"];
+        var_18 = var_15;
       }
     }
   }
 
-  return var_09[var_12];
+  return var_9[var_18];
 }
 
-func_7E4B(param_00) {
-  if(isDefined(param_00.var_5C66)) {
-    param_00 method_8151(param_00.var_5C66);
-  }
+_id_7E4B(var_0) {
+  if(isDefined(var_0._id_5C66))
+    var_0 _meth_8151(var_0._id_5C66);
 
-  if(isDefined(param_00.var_7E86)) {
-    param_00 method_8150(param_00.var_7E86);
-  }
+  if(isDefined(var_0._id_7E86))
+    var_0 _meth_8150(var_0._id_7E86);
 
-  if(isDefined(param_00.var_9A95)) {
-    param_00 method_8152(param_00.var_9A95);
-  }
+  if(isDefined(var_0._id_9A95))
+    var_0 _meth_8152(var_0._id_9A95);
 
-  if(isDefined(param_00.var_1B4B)) {
-    param_00 method_8153(param_00.var_1B4B);
-  }
+  if(isDefined(var_0._id_1B4B))
+    var_0 _meth_8153(var_0._id_1B4B);
 
-  param_00.var_5C66 = undefined;
-  param_00.var_7E86 = undefined;
-  param_00.var_9A95 = undefined;
-  param_00.var_1B4B = undefined;
+  var_0._id_5C66 = undefined;
+  var_0._id_7E86 = undefined;
+  var_0._id_9A95 = undefined;
+  var_0._id_1B4B = undefined;
 }

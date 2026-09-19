@@ -1,0 +1,4371 @@
+/**************************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\createfx\mp_zombie_nest_01_fx.gsc
+**************************************************/
+
+#include common_scripts\utility;
+#include common_scripts\_createfx;
+
+main() {
+  ent = createOneshotEffect("test_effect");
+  ent set_origin_and_angles((0, 0, 64), (270, 0, 0));
+  ent.v["fxid"] = "test_effect";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((-978.452, -1163.58, 1666.87), (270, 0, 9));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zom_grate_steam");
+  ent set_origin_and_angles((852.919, -1488.81, 1504.09), (270, 0, -78));
+  ent.v["fxid"] = "zom_grate_steam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((283.703, -205.145, 1194), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((554.786, -507.729, 1193), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((849.712, -226.256, 1185), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((568.623, 451.611, 1191), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((581.007, -21.5109, 1199), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((8.29898, 293.354, 1202), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((-260.301, -376.985, 1199), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((-429.733, -909.559, 1209), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_blood_water_drip_runner");
+  ent set_origin_and_angles((288.348, -218.435, 1333.88), (270, 0, 0));
+  ent.v["fxid"] = "zmb_falling_blood_water_drip_runner";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("falling_water_drip_runner_slow");
+  ent set_origin_and_angles((20.2359, -486.339, 1318.56), (270, 0, 0));
+  ent.v["fxid"] = "falling_water_drip_runner_slow";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("falling_water_drip_runner_slow");
+  ent set_origin_and_angles((289.312, -456.362, 1343.88), (270, 0, 0));
+  ent.v["fxid"] = "falling_water_drip_runner_slow";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_vent_steam");
+  ent set_origin_and_angles((707.255, -464.538, 1254.84), (270, 0, -91));
+  ent.v["fxid"] = "zmb_vent_steam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_vent_steam");
+  ent set_origin_and_angles((253.133, 476.882, 1280.91), (270, 180, 180));
+  ent.v["fxid"] = "zmb_vent_steam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall_fast");
+  ent set_origin_and_angles((1746.28, 2341.1, 1427.98), (270, 0, -115));
+  ent.v["fxid"] = "zmb_snow_fall_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_waterfront_fog");
+  ent set_origin_and_angles((-329.676, 1626.35, 1168), (271.943, 83.085, -147.022));
+  ent.v["fxid"] = "zmb_waterfront_fog";
+  ent.v["delay"] = -13.3707;
+
+  ent = createOneshotEffect("zmb_waterfront_fog");
+  ent set_origin_and_angles((766.522, 1687, 1155.53), (271.943, 83.0874, -170.025));
+  ent.v["fxid"] = "zmb_waterfront_fog";
+  ent.v["delay"] = -13.3707;
+
+  ent = createOneshotEffect("zmb_blood_water_splashes_1");
+  ent set_origin_and_angles((565.795, 204.17, 1182), (270, 0, 92));
+  ent.v["fxid"] = "zmb_blood_water_splashes_1";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_blood_water_line_rnr");
+  ent set_origin_and_angles((-134.786, -493.083, 1337.83), (270, 0, 0));
+  ent.v["fxid"] = "zmb_falling_blood_water_line_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_blood_water_line_rnr");
+  ent set_origin_and_angles((287.621, -352.657, 1340.33), (270, 180, -89));
+  ent.v["fxid"] = "zmb_falling_blood_water_line_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_blood_water_line_rnr");
+  ent set_origin_and_angles((572.352, 518.866, 1311.88), (270, 180, -89));
+  ent.v["fxid"] = "zmb_falling_blood_water_line_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_blood_water_line_rnr");
+  ent set_origin_and_angles((289.72, -80.0368, 1340.87), (270, 180, -89));
+  ent.v["fxid"] = "zmb_falling_blood_water_line_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_blood_water_line_rnr");
+  ent set_origin_and_angles((149.491, -221.927, 1340.89), (270, 0, 0));
+  ent.v["fxid"] = "zmb_falling_blood_water_line_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_blood_water_line_rnr");
+  ent set_origin_and_angles((424.221, -220.496, 1340.96), (270, 0, 0));
+  ent.v["fxid"] = "zmb_falling_blood_water_line_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_blood_water_line_rnr");
+  ent set_origin_and_angles((709.265, -219.814, 1340.97), (270, 0, 0));
+  ent.v["fxid"] = "zmb_falling_blood_water_line_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_blood_water_splashes_1");
+  ent set_origin_and_angles((568.555, 522.201, 1182), (270, 0, 92));
+  ent.v["fxid"] = "zmb_blood_water_splashes_1";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_bubbles");
+  ent set_origin_and_angles((919.892, -282.79, 1181), (270, 0, 92));
+  ent.v["fxid"] = "zmb_water_bubbles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_water_bloody_narrow");
+  ent set_origin_and_angles((16.1463, -304.278, 1313.42), (270, 0, 0));
+  ent.v["fxid"] = "zmb_falling_water_bloody_narrow";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((603.913, -512.23, 1205), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((810.347, -242.778, 1205), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((237.86, -316.565, 1205.84), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((417.429, -138.788, 1205), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((382.873, 258.377, 1207.2), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((206.626, 244.263, 1208.81), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-297.755, -135.846, 1205.52), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-480.136, -800.399, 1207.22), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((665.83, 54.8851, 1208.46), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((564.802, 985.102, 1256.07), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((66.7158, -49.0838, 1206.84), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("vf_zombie_nest_wind");
+  ent set_origin_and_angles((156.364, -492.123, 5554.81), (0.562349, 44.9915, 0));
+  ent.v["fxid"] = "vf_zombie_nest_wind";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_waterfront_fog");
+  ent set_origin_and_angles((308.155, 2017.32, 1145), (271.943, 83.0896, -179.027));
+  ent.v["fxid"] = "zmb_waterfront_fog";
+  ent.v["delay"] = -13.3707;
+
+  ent = createOneshotEffect("zmb_roof_snow_hvy_wind_lp");
+  ent set_origin_and_angles((572.754, -2028.93, 2089.79), (304.508, 218.12, -6.29181));
+  ent.v["fxid"] = "zmb_roof_snow_hvy_wind_lp";
+  ent.v["delay"] = -15.4911;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((2352.2, -102.595, 2006.53), (279.539, 55.7845, 51.4871));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((382.088, 947.457, 1501.85), (272.046, 354.175, -178.185));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((1265.74, 982.015, 1355.46), (285.439, 149.617, 7.05066));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((-260.75, 1148.61, 1567.77), (271.58, 36.156, 145.086));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_godray_orange");
+  ent set_origin_and_angles((-717.859, -971.351, 1228.15), (270, 0, 0));
+  ent.v["fxid"] = "zmb_godray_orange";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-547.424, -573.079, 2274.15), (295.247, 136.81, 77.6119));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_snow_fall_fast");
+  ent set_origin_and_angles((-1010.46, 1364.25, 1794.4), (274, 183, 66));
+  ent.v["fxid"] = "zmb_snow_fall_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall_fast");
+  ent set_origin_and_angles((-2103.77, 2087.51, 1745.6), (288.24, 180.85, 99.6255));
+  ent.v["fxid"] = "zmb_snow_fall_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_waterfront_fog_big");
+  ent set_origin_and_angles((-3063.64, 3010.12, 1898.52), (270, 0, -80));
+  ent.v["fxid"] = "zmb_waterfront_fog_big";
+  ent.v["delay"] = -1.06726;
+
+  ent = createOneshotEffect("zmb_waterfront_fog_big");
+  ent set_origin_and_angles((862.741, 7512.38, 1963.07), (270, 0, -102));
+  ent.v["fxid"] = "zmb_waterfront_fog_big";
+  ent.v["delay"] = -8.37479;
+
+  ent = createOneshotEffect("zmb_waterfront_fog_big");
+  ent set_origin_and_angles((3169.19, 4349.73, 1518.37), (270, 0, -120));
+  ent.v["fxid"] = "zmb_waterfront_fog_big";
+  ent.v["delay"] = -22.8562;
+
+  ent = createOneshotEffect("zmb_snow_fall_fast");
+  ent set_origin_and_angles((463.688, 1530, 1773.96), (270, 180, 63));
+  ent.v["fxid"] = "zmb_snow_fall_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall_fast");
+  ent set_origin_and_angles((-1.98912, 798.641, 1812.44), (270, 0, -96));
+  ent.v["fxid"] = "zmb_snow_fall_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zom_grate_steam");
+  ent set_origin_and_angles((936.278, -1262.52, 1505.27), (273.162, 232.585, 72.4409));
+  ent.v["fxid"] = "zom_grate_steam";
+  ent.v["delay"] = -1.55313;
+
+  ent = createOneshotEffect("zom_grate_steam");
+  ent set_origin_and_angles((200.313, -1320.34, 1517.45), (270, 180, 59));
+  ent.v["fxid"] = "zom_grate_steam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zom_grate_steam");
+  ent set_origin_and_angles((-272.591, -1018, 1507.61), (270, 180, 56));
+  ent.v["fxid"] = "zom_grate_steam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zom_grate_steam");
+  ent set_origin_and_angles((-547.589, -919.701, 1507.58), (271, 71.1786, 165.505));
+  ent.v["fxid"] = "zom_grate_steam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((1030.24, -1399.13, 1764.52), (273.149, 157.139, -53.1894));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_door_gust");
+  ent set_origin_and_angles((566.352, 985.883, 1270.06), (3.00229, 268.994, 0));
+  ent.v["fxid"] = "zmb_door_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall_fast");
+  ent set_origin_and_angles((-1788.87, 874.12, 1764.32), (270, 0, -104));
+  ent.v["fxid"] = "zmb_snow_fall_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((1934.58, 521.928, 1781.32), (270, 0, -131));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-729.141, -974.17, 1245.94), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-1029.02, -1430.23, 1202.13), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-821.574, -1435.7, 1168), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-774.044, -1896.65, 1277.13), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-1084.01, -2096.01, 1274.13), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-352.879, -2730.39, 1298.5), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-642.524, -2685.1, 1291.13), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((733, -2681.9, 756.125), (270, 0, -3));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("blood_drip_sml_runner_edge_slw");
+  ent set_origin_and_angles((-958.798, -2607.58, 1369.95), (270, 0, 0));
+  ent.v["fxid"] = "blood_drip_sml_runner_edge_slw";
+  ent.v["delay"] = -4.32675;
+
+  ent = createOneshotEffect("falling_water_drip_runner_slow");
+  ent set_origin_and_angles((-908.474, -2561.29, 1349), (273.605, 303.719, 156.332));
+  ent.v["fxid"] = "falling_water_drip_runner_slow";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_mist");
+  ent set_origin_and_angles((263.014, -3385.34, 1423.96), (270, 0, 0));
+  ent.v["fxid"] = "zmb_water_mist";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("blood_drip_sml_runner_edge_slw");
+  ent set_origin_and_angles((-221.13, -2572.21, 1408.7), (270, 0, 0));
+  ent.v["fxid"] = "blood_drip_sml_runner_edge_slw";
+  ent.v["delay"] = -29.9133;
+
+  ent = createOneshotEffect("blood_drip_sml_runner_edge_slw");
+  ent set_origin_and_angles((-233.252, -2555.27, 1442.34), (270, 0, 0));
+  ent.v["fxid"] = "blood_drip_sml_runner_edge_slw";
+  ent.v["delay"] = -3.97717;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((889.685, -3002.92, 764.125), (270, 180, 54));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_licks_m_vf");
+  ent set_origin_and_angles((1231.35, -983.892, 1526.45), (272.404, 180.461, -26.9866));
+  ent.v["fxid"] = "zmb_fire_licks_m_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1494.21, -2763.13, 708.125), (270, 0, -148));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1251.82, -2445.33, 710.125), (270, 0, 22));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((650.691, -2909.38, 835.125), (270, 0, 116));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((615.573, -2844.53, 1393.13), (270, 0, 105));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((569.714, -3338.3, 1424.62), (270, 0, -42));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1718.75, -2398.72, 1308.13), (270, 0, 75));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_ring");
+  ent set_origin_and_angles((1090.59, -3329.65, 1795.03), (270, 0, 0));
+  ent.v["fxid"] = "steam_ring";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-310.287, -3003.65, 1279.13), (271, 298, 0));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-1051.8, -23.663, 1504.45), (272.236, 350.577, 66.4713));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-414.461, -850.659, 1508.89), (271.793, 199.877, 55.2083));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((898.179, 690.96, 1515), (270.714, 93.6143, -56.5464));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-1250.72, 796.917, 1509.76), (272.484, 294.186, 79.9037));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-291.653, -789.018, 1505.91), (273.595, 184.889, -3.20599));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((983.554, -1364.92, 1503.09), (271.18, 168.239, 148.808));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((972.729, -953.105, 1507.89), (271.071, 115.286, 136.783));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((574.877, -1229.76, 1513.29), (271.228, 31.1251, -136.124));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((-1680.85, 184.65, 1570.03), (274.073, 328.397, -148.402));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((-1636.21, -56.0413, 1568.25), (279.707, 347.355, -167.248));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -16.5178;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((-666.219, 37.8674, 1834.56), (270, 0, -70));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((85.9752, -989.789, 1523), (274.578, 204.341, 42.8916));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-977.023, -1078.03, 1513.49), (271.608, 174.723, 23.3384));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-684.15, -78.3529, 1501.56), (279.065, 17.0591, 80.2205));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_rat_flock_runaway_runner");
+  ent set_origin_and_angles((-1477.26, -1483.08, 1131), (270, 0, -59));
+  ent.v["fxid"] = "zmb_rat_flock_runaway_runner";
+  ent.v["delay"] = -14.0026;
+
+  ent = createOneshotEffect("zmb_rat_flock_runaway_runner");
+  ent set_origin_and_angles((-848.693, -1804.15, 1128.84), (270, 0, -29));
+  ent.v["fxid"] = "zmb_rat_flock_runaway_runner";
+  ent.v["delay"] = -8.47302;
+
+  ent = createOneshotEffect("zmb_rat_flock_runaway_runner");
+  ent set_origin_and_angles((-286.575, -2709.12, 1265.13), (270, 0, 111));
+  ent.v["fxid"] = "zmb_rat_flock_runaway_runner";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((1063.35, 485.392, 1676.39), (272, 287.991, -35.9925));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((209.174, -1715.97, 1702.52), (271.419, 150.734, -27.8249));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((1839.35, -1235.32, 1858), (270, 0, 149));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall_fast");
+  ent set_origin_and_angles((1153.34, 870.974, 1717.42), (270, 180, 74));
+  ent.v["fxid"] = "zmb_snow_fall_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((1363.06, -1444.33, 1393.35), (280, 180, -180));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = -5.54364;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((345.519, -1145.84, 1754.65), (271.323, 258.027, 170.012));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((-1269.93, -413.741, 1613.6), (270, 0, -22));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((130.525, 304.678, 1684.97), (272, 287.984, -1.9866));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((1257.03, -472.804, 1776.84), (270, 0, 149));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((1235.65, -2096.26, 1859.7), (270, 0, 118));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((-201.199, -1123.96, 1674.51), (270, 0, 40));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-928.813, -2601.03, 1304.05), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((152.978, -2795.6, 1329), (270, 180, 163));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_ring");
+  ent set_origin_and_angles((-940.147, -1388.81, 1435), (270, 0, 0));
+  ent.v["fxid"] = "steam_ring";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-181.842, -2260.33, 1294), (270, 0, 3));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-358.592, -2665.3, 1283.48), (270, 0, 24));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-609.16, -2804.32, 1281.25), (270, 180, 26));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-1023.72, -1384.02, 1141.44), (270, 0, 166));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_floor_grates_rise");
+  ent set_origin_and_angles((2386.89, -1035.78, 1235.13), (271, 139.01, -112.01));
+  ent.v["fxid"] = "steam_floor_grates_rise";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((2069.48, -826.138, 1247.13), (270, 0, 49));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-1276.12, -1662.9, 1143), (270, 0, -153));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-800.994, -1749.02, 1135), (270, 0, -65));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1673.04, -3545.25, 1516), (270, 0, -62));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((-1193.74, -416.033, 1899.12), (270, 0, -57));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall");
+  ent set_origin_and_angles((-1991.74, -139.852, 2074.75), (270, 0, -77));
+  ent.v["fxid"] = "zmb_snow_fall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((1232.27, 727.127, 1561.49), (272.046, 354.175, 156.815));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((883.623, 1511.05, 1329.04), (271.171, 230.335, -67.8012));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((1634.46, 740.044, 1490.84), (285.439, 149.617, -43.9493));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam");
+  ent set_origin_and_angles((288.412, -959.109, 1237.37), (270, 0, 0));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam");
+  ent set_origin_and_angles((2283.47, -2396.84, 497.127), (270, 0, -3));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_dust_falling_debris");
+  ent set_origin_and_angles((1412.38, -1599.61, 1133.5), (270, 0, 0));
+  ent.v["fxid"] = "zmb_dust_falling_debris";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_dust_falling_debris");
+  ent set_origin_and_angles((1528.95, -1964, 970.401), (270, 0, 0));
+  ent.v["fxid"] = "zmb_dust_falling_debris";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_dust_falling_debris");
+  ent set_origin_and_angles((631.515, -2236.71, 1246.88), (270, 0, 0));
+  ent.v["fxid"] = "zmb_dust_falling_debris";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_dry_ice_fog");
+  ent set_origin_and_angles((1255.97, -1322.53, 1128.97), (272.828, 71.041, 132.029));
+  ent.v["fxid"] = "zmb_dry_ice_fog";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_dry_ice_fog");
+  ent set_origin_and_angles((373.355, -2114.65, 1249), (272.828, 71.0419, 126.028));
+  ent.v["fxid"] = "zmb_dry_ice_fog";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((1119.21, -1849.61, 1245.53), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -9.33237;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((1799.78, -2236.58, 984.724), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -12.6184;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((1381.3, -1616.45, 1246.68), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -22.0623;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((1272.26, -1403.01, 1249.06), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -20.1976;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((716.694, -2265.62, 1377.8), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -13.9981;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((1435.55, -1767.98, 1205.45), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -16.7249;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((1666.45, -1938.69, 1107.43), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -22.581;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((864.871, -2674.05, 1199.75), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -16.7249;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((1176.85, -1609.23, 1243.8), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -25.8688;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((824.955, -1953.6, 1278.21), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -15.3531;
+
+  ent = createOneshotEffect("zmb_steam_wall");
+  ent set_origin_and_angles((2194.53, -744.727, 1293.03), (271.647, 275.674, -163.703));
+  ent.v["fxid"] = "zmb_steam_wall";
+  ent.v["delay"] = -8.758;
+
+  ent = createOneshotEffect("zmb_steam_wall");
+  ent set_origin_and_angles((1769.62, -1318.8, 1373.14), (271.647, 275.674, -163.703));
+  ent.v["fxid"] = "zmb_steam_wall";
+  ent.v["delay"] = -8.758;
+
+  ent = createOneshotEffect("zmb_dry_ice_fog");
+  ent set_origin_and_angles((1665.36, -561.266, 1237.13), (272.828, 71.0299, -163.96));
+  ent.v["fxid"] = "zmb_dry_ice_fog";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_drip_line_runner");
+  ent set_origin_and_angles((1939.95, -1080.53, 1500.29), (270, 180, -155));
+  ent.v["fxid"] = "zmb_water_drip_line_runner";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_dry_ice_fog");
+  ent set_origin_and_angles((1986.68, -214.323, 1397.13), (272.828, 71.0273, -154.957));
+  ent.v["fxid"] = "zmb_dry_ice_fog";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_amb_dust_thick_pocket");
+  ent set_origin_and_angles((1523.91, -675.407, 1373.13), (270, 0, 0));
+  ent.v["fxid"] = "zmb_amb_dust_thick_pocket";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_amb_dust_thick_pocket");
+  ent set_origin_and_angles((2035.77, -511.744, 1397.13), (270, 0, 0));
+  ent.v["fxid"] = "zmb_amb_dust_thick_pocket";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_amb_dust_thick_pocket");
+  ent set_origin_and_angles((1774.59, -479.259, 1373.13), (270, 0, 0));
+  ent.v["fxid"] = "zmb_amb_dust_thick_pocket";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_floor_grates_rise");
+  ent set_origin_and_angles((2534.8, -1473.96, 1233.13), (271, 139.01, -112.01));
+  ent.v["fxid"] = "steam_floor_grates_rise";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_floor_grates_rise");
+  ent set_origin_and_angles((2244.58, -1713.86, 1240.13), (271, 139.016, -102.016));
+  ent.v["fxid"] = "steam_floor_grates_rise";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_floor_grates_rise");
+  ent set_origin_and_angles((1871.3, -1147.87, 1237.13), (271.148, 276.086, 109.92));
+  ent.v["fxid"] = "steam_floor_grates_rise";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_floor_grates_rise");
+  ent set_origin_and_angles((1843.93, -2469.13, 1301), (271, 139.023, -73.023));
+  ent.v["fxid"] = "steam_floor_grates_rise";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_floor_grates_rise");
+  ent set_origin_and_angles((2340.86, -1157.23, 1234.13), (271, 139.01, -112.01));
+  ent.v["fxid"] = "steam_floor_grates_rise";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_floor_grates_rise");
+  ent set_origin_and_angles((2069.67, -1454.42, 1247.13), (271, 139.016, -103.016));
+  ent.v["fxid"] = "steam_floor_grates_rise";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((-1568.5, 802.205, 1599.21), (279.707, 347.355, -167.248));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -16.5178;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((-873.174, -1311.13, 1852.63), (301.839, 71.8402, -172.713));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((2571.49, 572.055, 1790.56), (272.046, 354.175, 117.815));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((2419.66, 647.243, 1956.76), (272.046, 354.175, 117.815));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_gust");
+  ent set_origin_and_angles((2181.01, 575.055, 1762.72), (272.046, 354.175, 117.815));
+  ent.v["fxid"] = "zmb_snow_gust";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_waterfront_fog");
+  ent set_origin_and_angles((2830.78, 557.831, 1704.95), (271.943, 83.0804, 114.982));
+  ent.v["fxid"] = "zmb_waterfront_fog";
+  ent.v["delay"] = -13.3707;
+
+  ent = createOneshotEffect("zmb_waterfront_fog_big");
+  ent set_origin_and_angles((4077.32, 405.703, 1952.98), (270, 0, -179));
+  ent.v["fxid"] = "zmb_waterfront_fog_big";
+  ent.v["delay"] = -22.8562;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-742.343, -1232.97, 1919.6), (315.796, 153.797, 48.8818));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-613.856, -489.468, 2125.55), (331.508, 161.74, 60.9762));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-405.794, -1466.34, 2219.55), (336.253, 141.853, 73.7847));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-1392.2, -113.511, 1754.04), (357.44, 89.6429, 22.0511));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-1819.94, -43.5612, 1918.12), (359.323, 85.0088, 22.1818));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_fog_sml");
+  ent set_origin_and_angles((-932.165, -1122.89, 1924.57), (2.98247, 16.0309, 156.508));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-668.322, -1246.09, 2018.94), (277.385, 163.666, 55.5907));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-210.205, -676.355, 2011.52), (316.313, 248.007, 2.92615));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-86.4417, -1290.29, 2074.05), (357.629, 49.6778, 157.427));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((429.719, -1609.49, 1980.94), (344.416, 63.5312, 151.014));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((432.829, -1063.77, 1923.49), (336.539, 256.391, 3.06274));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((701.94, -945.226, 2028.95), (294.31, 285.952, 80.9304));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-2441.54, 110.924, 1882.87), (341.705, 60.263, 32.1975));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-2336.64, 111.429, 2165.36), (355.741, 66.1854, 33.4765));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-316.001, -1407.15, 2288.41), (277.385, 163.665, 52.591));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-410.749, -1574.92, 2278.95), (351.546, 215.152, 5.92405));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -6.91541;
+
+  ent = createOneshotEffect("zmb_water_drip_line_runner");
+  ent set_origin_and_angles((516.358, -3425.6, 1425.78), (326.053, 122.021, -93.6171));
+  ent.v["fxid"] = "zmb_water_drip_line_runner";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1013.35, -1362.91, 2063.63), (345.175, 101.597, 146.169));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1273.47, -940.097, 2000.3), (289.657, 189.839, 94.2708));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1516.77, -787.088, 2228.15), (283.114, 226.893, 55.2009));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1318.06, -396.313, 1993.49), (2.64602, 162.138, 167.672));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1299.96, -393.807, 2275.07), (2.64602, 162.138, 167.672));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -25.421;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((761.771, -149.475, 2887.69), (2.64602, 162.138, 167.672));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -25.421;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1200.62, -36.5721, 2261.87), (0.315634, 198.073, 171.475));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -25.421;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1147.04, 666.549, 1720.05), (0, 251.015, 179.575));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -25.421;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((16.5961, 718.624, 1910.99), (14.4495, 282.374, 174.855));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -25.421;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1238.82, 464.687, 1813.42), (41.0513, 207.911, 147.461));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -25.421;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((1740.13, 616.822, 1835.53), (357.071, 245.487, -174.529));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -25.421;
+
+  ent = createOneshotEffect("falling_water_drip_runner_slow");
+  ent set_origin_and_angles((2289.78, -915.819, 1392.68), (270, 0, 0));
+  ent.v["fxid"] = "falling_water_drip_runner_slow";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("falling_water_drip_runner_slow");
+  ent set_origin_and_angles((2342.32, -1027.92, 1369.32), (270, 0, 0));
+  ent.v["fxid"] = "falling_water_drip_runner_slow";
+  ent.v["delay"] = -29.4531;
+
+  ent = createOneshotEffect("falling_water_drip_runner_slow");
+  ent set_origin_and_angles((2336.57, -878.602, 1423.64), (270, 0, 0));
+  ent.v["fxid"] = "falling_water_drip_runner_slow";
+  ent.v["delay"] = -16.1089;
+
+  ent = createOneshotEffect("steam_floor_grates_rise");
+  ent set_origin_and_angles((1770.92, -925.216, 1235), (271, 139.03, -113.031));
+  ent.v["fxid"] = "steam_floor_grates_rise";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-1488.38, 2253.88, 2251.45), (0.900579, 259.697, 169.565));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-1991.73, 2781.88, 1724.52), (3.90067, 259.674, 179.564));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -10.7953;
+
+  ent = createOneshotEffect("zmb_fire_licks_m_vf_fast");
+  ent set_origin_and_angles((-1461.07, 1616.85, 1544.63), (313.248, 56.4551, 101.579));
+  ent.v["fxid"] = "zmb_fire_licks_m_vf_fast";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((-1400.8, 1652.66, 1590.65), (289.229, 98.68, -99.0215));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = -23.9262;
+
+  ent = createOneshotEffect("snow_blowing_swirl");
+  ent set_origin_and_angles((-1478.06, 2363.76, 1625.56), (270, 180, 32));
+  ent.v["fxid"] = "snow_blowing_swirl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("snow_blowing_swirl");
+  ent set_origin_and_angles((-1337.08, 2204.06, 1680.03), (270, 0, -96));
+  ent.v["fxid"] = "snow_blowing_swirl";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_snow_fall_staircase");
+  ent set_origin_and_angles((2566.13, -12.2512, 1639.26), (270, 0, 92));
+  ent.v["fxid"] = "zmb_snow_fall_staircase";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-1479.21, 2254.88, 1921.27), (0.900578, 259.697, 171.565));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -8.52347;
+
+  ent = createOneshotEffect("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((1274.07, -915.083, 1832.38), (314.009, 268.964, 91.4392));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((1203.76, -1065.09, 1704.38), (272.88, 120.828, 116.944));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_bridge_smoke");
+  ent set_origin_and_angles((-1314.24, 1717.59, 1510.66), (270, 0, -37));
+  ent.v["fxid"] = "zmb_bridge_smoke";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_small_ground");
+  ent set_origin_and_angles((-1412.37, 1632.69, 1571.21), (270.975, 270.333, 89.9794));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_small_ground");
+  ent set_origin_and_angles((-1319.81, 1750.23, 1556.55), (334.004, 359.836, 1.08498));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((-1317.52, 1727.42, 1540.42), (270, 0, 0));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((-1433.68, 1600.31, 1543.7), (276.823, 63.6485, -179.668));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((-1316.95, 1725.06, 1550.48), (358.823, 63.9769, 0));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_truck_engine_smoke");
+  ent set_origin_and_angles((-1408.32, 1609.05, 1551.13), (270, 0, -7));
+  ent.v["fxid"] = "zmb_truck_engine_smoke";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1017.78, -2329.87, 776.398), (270, 0, -3));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1451.18, -2883.56, 765.794), (270, 0, -3));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1393.67, -2273.61, 787.093), (270, 0, -3));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1870.55, -2385.87, 764.861), (270, 0, -148));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_hilt_room_torch");
+  ent set_origin_and_angles((1191.56, -3069.82, 856.999), (270, 0, 0));
+  ent.v["fxid"] = "zmb_hilt_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_hilt_room_torch");
+  ent set_origin_and_angles((932.744, -3111.05, 858.519), (270, 0, 0));
+  ent.v["fxid"] = "zmb_hilt_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_hilt_room_torch");
+  ent set_origin_and_angles((799.417, -3030.45, 857.884), (270, 0, 0));
+  ent.v["fxid"] = "zmb_hilt_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_hilt_room_torch");
+  ent set_origin_and_angles((651.655, -2711.14, 859.38), (270, 0, 0));
+  ent.v["fxid"] = "zmb_hilt_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_hilt_room_torch");
+  ent set_origin_and_angles((665.964, -2580.88, 857.397), (270, 0, 0));
+  ent.v["fxid"] = "zmb_hilt_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_hilt_room_torch");
+  ent set_origin_and_angles((881.188, -2402.08, 857.531), (270, 0, 0));
+  ent.v["fxid"] = "zmb_hilt_room_torch";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_barbosa_chandelier_candles");
+  ent set_origin_and_angles((854.283, -2819.5, 1198.99), (270, 0, -65));
+  ent.v["fxid"] = "zmb_barbosa_chandelier_candles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((1397.64, -2671.92, 1250.58), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -16.6178;
+
+  ent = createOneshotEffect("zmb_water_bubbles");
+  ent set_origin_and_angles((509.605, 22.5417, 1181), (270, 0, 92));
+  ent.v["fxid"] = "zmb_water_bubbles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_bubbles");
+  ent set_origin_and_angles((39.4447, -458.354, 1181), (270, 0, 92));
+  ent.v["fxid"] = "zmb_water_bubbles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_bubbles");
+  ent set_origin_and_angles((-313.894, -849.607, 1181), (270, 0, 92));
+  ent.v["fxid"] = "zmb_water_bubbles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_bubbles");
+  ent set_origin_and_angles((-228.311, -472.753, 1181), (270, 0, 92));
+  ent.v["fxid"] = "zmb_water_bubbles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_bubbles");
+  ent set_origin_and_angles((-531.239, -223.069, 1181), (270, 0, 92));
+  ent.v["fxid"] = "zmb_water_bubbles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_bubbles");
+  ent set_origin_and_angles((506.169, -463.256, 1181), (270, 0, 92));
+  ent.v["fxid"] = "zmb_water_bubbles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_water_bubbles");
+  ent set_origin_and_angles((574.549, 433.349, 1181), (270, 0, 92));
+  ent.v["fxid"] = "zmb_water_bubbles";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_falling_water_bloody_narrow");
+  ent set_origin_and_angles((358.485, 357.319, 1315.56), (270, 0, 0));
+  ent.v["fxid"] = "zmb_falling_water_bloody_narrow";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_vent_steam");
+  ent set_origin_and_angles((349.265, -806.692, 1256.9), (271.647, 275.696, -99.7287));
+  ent.v["fxid"] = "zmb_vent_steam";
+  ent.v["delay"] = -26.1803;
+
+  ent = createOneshotEffect("zmb_vent_steam");
+  ent set_origin_and_angles((285.546, 478.781, 1295.02), (271.647, 275.691, -69.7236));
+  ent.v["fxid"] = "zmb_vent_steam";
+  ent.v["delay"] = -26.1803;
+
+  ent = createOneshotEffect("zmb_vent_steam");
+  ent set_origin_and_angles((224.609, -809.878, 1255.39), (271.647, 275.696, -99.7287));
+  ent.v["fxid"] = "zmb_vent_steam";
+  ent.v["delay"] = -26.1803;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1032.41, -2405.04, 914.715), (270, 0, -3));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_waterfront_fog");
+  ent set_origin_and_angles((1838.42, 1964.48, 1156), (271.943, 83.0848, -160.022));
+  ent.v["fxid"] = "zmb_waterfront_fog";
+  ent.v["delay"] = -13.3707;
+
+  ent = createOneshotEffect("zmb_projector_lightbeam");
+  ent set_origin_and_angles((-216.85, -2459.9, 1378.3), (352.997, 1.00479, 0));
+  ent.v["fxid"] = "zmb_projector_lightbeam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_claw_hider");
+  ent set_origin_and_angles((846.254, -2820.49, 1331), (270, 0, 0));
+  ent.v["fxid"] = "zmb_claw_hider";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_small_ground");
+  ent set_origin_and_angles((-1220.52, 1507.77, 1531.46), (299.311, 106.541, -108.632));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((-1194.08, 1393.99, 1625.82), (335.089, 12.9597, -153.482));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((-1195, 1634.92, 1505), (270, 0, 0));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((-1190.46, 1438.45, 1585.97), (277.794, 52.0753, -49.1392));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((-1133.73, 1455.78, 1578.59), (273.78, 48.4086, 113.504));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_small_ground");
+  ent set_origin_and_angles((-1377.32, 1806.57, 1538.1), (288.728, 16.6938, -174.061));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((-1146.92, 1896.2, 1560.52), (322.418, 256.489, -84.6024));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_light_post_02");
+  ent set_origin_and_angles((2368.4, 568.78, 1724.41), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_02";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_light_post_02");
+  ent set_origin_and_angles((2617.86, -20.8812, 1698.2), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_02";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_light_post_02");
+  ent set_origin_and_angles((2640.65, 192.294, 1724.32), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_02";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_light_post_01");
+  ent set_origin_and_angles((2444.21, 140.917, 1769.06), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_nest_roof_edge_snow");
+  ent set_origin_and_angles((-3.51526, 732.878, 1677.73), (0, 251.015, 179.575));
+  ent.v["fxid"] = "zmb_nest_roof_edge_snow";
+  ent.v["delay"] = -25.421;
+
+  ent = createOneshotEffect("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((980.441, -961.196, 1863.2), (342.156, 5.62932, -92.9245));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("insects_flies_wall");
+  ent set_origin_and_angles((-537.337, -2849.42, 1308.5), (270, 0, 0));
+  ent.v["fxid"] = "insects_flies_wall";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_dry_ice_fog_narrow");
+  ent set_origin_and_angles((-476.455, -3040.51, 1265.27), (270, 0, -16));
+  ent.v["fxid"] = "zmb_dry_ice_fog_narrow";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1");
+  ent set_origin_and_angles((-487.808, -140.729, 962.549), (270.228, 284.229, 76.6686));
+  ent.v["fxid"] = "zmb_pneumo_tube_1";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam");
+  ent set_origin_and_angles((-480.14, -137.112, 959.797), (272, 87, -90));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam");
+  ent set_origin_and_angles((-730.225, -2853.95, 4956.95), (270, 0, -3));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam");
+  ent set_origin_and_angles((-2272.03, -4103.61, 6922.25), (271, 87.0052, -93.0055));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_rnd_forge_ambient");
+  ent set_origin_and_angles((2241.82, -845.441, 1233.92), (270, 180, 25));
+  ent.v["fxid"] = "zmb_rnd_forge_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_waterfront_fog_big");
+  ent set_origin_and_angles((1512.25, 2437.98, 1654.47), (270, 0, -104));
+  ent.v["fxid"] = "zmb_waterfront_fog_big";
+  ent.v["delay"] = -22.8562;
+
+  ent = createOneshotEffect("zmb_waterfront_fog_big");
+  ent set_origin_and_angles((-2074.57, 1950.47, 1521.12), (270, 180, 154));
+  ent.v["fxid"] = "zmb_waterfront_fog_big";
+  ent.v["delay"] = -22.8562;
+
+  ent = createOneshotEffect("zmb_waterfront_fog_big");
+  ent set_origin_and_angles((-3636.23, 1692.88, 1781.3), (270, 0, -21));
+  ent.v["fxid"] = "zmb_waterfront_fog_big";
+  ent.v["delay"] = -22.8562;
+
+  ent = createOneshotEffect("zmb_waterfront_fog_big");
+  ent set_origin_and_angles((-349.847, 1980.4, 1213.52), (270, 0, -52));
+  ent.v["fxid"] = "zmb_waterfront_fog_big";
+  ent.v["delay"] = -22.8562;
+
+  ent = createOneshotEffect("zmb_fire_board_1");
+  ent set_origin_and_angles((637.141, -1838.59, 1714.33), (273, 166, 179));
+  ent.v["fxid"] = "zmb_fire_board_1";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((582.84, -1913.16, 1700.94), (286.856, 114.098, -91.379));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_ceiling");
+  ent set_origin_and_angles((1258.08, -1047.5, 1609.96), (270.588, 321.389, -158.747));
+  ent.v["fxid"] = "zmb_fire_ceiling";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((1224.58, -1090.07, 1549.77), (271.912, 190.742, 35.8793));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_wall_scattered_rnr");
+  ent set_origin_and_angles((1268.27, -1044.48, 1592.53), (270, 0, 156));
+  ent.v["fxid"] = "zmb_fire_wall_scattered_rnr";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_small_ground");
+  ent set_origin_and_angles((1237.1, -1103.34, 1529.13), (270.975, 270.276, -126.966));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam");
+  ent set_origin_and_angles((402.615, 400.049, 884.46), (270, 0, -3));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam");
+  ent set_origin_and_angles((-228.129, -135.984, 920.324), (272, 87, -90));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam_2");
+  ent set_origin_and_angles((415.717, 323.886, 883.371), (272, 87, -90));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam_2";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam_2");
+  ent set_origin_and_angles((-454.899, -142.288, 963), (272, 87, -90));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam_2";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam_2");
+  ent set_origin_and_angles((329.367, -94.603, 872.23), (272, 87, -90));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam_2";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam_2");
+  ent set_origin_and_angles((379.449, 68.724, 877.301), (272, 87, -90));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam_2";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_pneumo_tube_1_cam");
+  ent set_origin_and_angles((269.164, -113.36, 878.084), (272, 87, -90));
+  ent.v["fxid"] = "zmb_pneumo_tube_1_cam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("blood_drip_sml_runner_edge_slw");
+  ent set_origin_and_angles((-624.635, -2773.58, 1342.55), (270, 0, 0));
+  ent.v["fxid"] = "blood_drip_sml_runner_edge_slw";
+  ent.v["delay"] = -23.8616;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1148.46, -2624.69, 1394.13), (270, 0, 119));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_vent_steam");
+  ent set_origin_and_angles((747.19, -3966.07, 1577.51), (271.647, 275.697, -68.7289));
+  ent.v["fxid"] = "zmb_vent_steam";
+  ent.v["delay"] = -7.71103;
+
+  ent = createOneshotEffect("zmb_vent_steam");
+  ent set_origin_and_angles((1535.82, -3583.37, 1763.01), (349.436, 115.833, 90.7003));
+  ent.v["fxid"] = "zmb_vent_steam";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((1126.35, -3015, 1393.13), (270, 180, 75));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-353.029, -2240.78, 1273), (270, 0, 114));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-907.027, -2561.65, 1277), (270, 0, -121));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_dry_ice_fog");
+  ent set_origin_and_angles((-830.117, -2154.54, 1321.13), (303.357, 131.431, -94.595));
+  ent.v["fxid"] = "zmb_dry_ice_fog";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_small_ground");
+  ent set_origin_and_angles((1219.24, -960.267, 1652.05), (270.975, 270.288, 66.0214));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((1200.62, -968.575, 1596.67), (295.097, 12.9295, 110.338));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = -28.1716;
+
+  ent = createOneshotEffect("blood_drip_sml_runner_edge_slw");
+  ent set_origin_and_angles((-578.344, -2875.83, 1340.38), (270, 0, 0));
+  ent.v["fxid"] = "blood_drip_sml_runner_edge_slw";
+  ent.v["delay"] = -12.7998;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-1221.71, -2528.09, 1281.13), (270, 0, -121));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -23.1589;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-1359.63, -2713.35, 1271.13), (270, 0, -121));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -6.73398;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-763.146, -1917.66, 1271.13), (270, 0, -121));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("steam_fill_ground_cheap");
+  ent set_origin_and_angles((-1254.19, -1332.84, 1137), (270, 0, -121));
+  ent.v["fxid"] = "steam_fill_ground_cheap";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((734.786, -2953.3, 1213.75), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = -22.7128;
+
+  ent = createOneshotEffect("zmb_waterfall_splash_bottom_mill_sm");
+  ent set_origin_and_angles((24.541, 1221.74, 1179.13), (271.426, 332.507, 49.5013));
+  ent.v["fxid"] = "zmb_waterfall_splash_bottom_mill_sm";
+  ent.v["delay"] = -15;
+
+  ent = createOneshotEffect("zmb_trap_elec_tunnel_ambient");
+  ent set_origin_and_angles((2064.38, -1452.26, 1237.13), (270.167, 54.9704, 159.995));
+  ent.v["fxid"] = "zmb_trap_elec_tunnel_ambient";
+  ent.v["delay"] = -15;
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((76.6051, -908.805, 1690.14), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((645.547, -1084.03, 1679.88), (280.196, 168.629, -168.804));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((1039.19, -882.792, 1508.75), (324.006, 269.273, 91.236));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((1015.28, -927.545, 1511.29), (324.006, 269.273, 91.236));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((965.149, -928.599, 1552.15), (298.277, 90.8213, -160.74));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((-39.3755, 965.464, 1688.65), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((625.328, 824.099, 1704.02), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((1086.91, 854.781, 1684.61), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((-212.46, 9.86045, 1597.76), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((-422.401, -1082.21, 1688.46), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((-113.075, -1520.78, 1738), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_grn_01");
+  ent set_origin_and_angles((1419.74, 653.553, 1713.03), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_grn_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_02");
+  ent set_origin_and_angles((1736.42, 377.747, 1697.39), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_02";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_light_post_02");
+  ent set_origin_and_angles((1806.81, 181.425, 1697.09), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_02";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_fire_small_ground");
+  ent set_origin_and_angles((957.686, -976.573, 1524.75), (270.975, 270.29, -175.98));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((982.047, -912.419, 1541.22), (315.806, 20.0827, 50.3904));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_fire_lp_sm_a");
+  ent set_origin_and_angles((806.35, -1636.93, 1296.02), (302.015, 268.227, 91.8448));
+  ent.v["fxid"] = "zmb_fire_lp_sm_a";
+  ent.v["delay"] = 204;
+  ent.v["exploder"] = "1";
+
+  ent = createExploder("zmb_fire_distortion");
+  ent set_origin_and_angles((459.284, -1529.59, 1306.64), (359.524, 156.196, -79.1171));
+  ent.v["fxid"] = "zmb_fire_distortion";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_distortion");
+  ent set_origin_and_angles((208.675, -1408.78, 1291.88), (359.505, 158.985, -68.0852));
+  ent.v["fxid"] = "zmb_fire_distortion";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_distortion");
+  ent set_origin_and_angles((32.701, -1276.77, 1288.5), (4.21049, 117.752, -28.9781));
+  ent.v["fxid"] = "zmb_fire_distortion";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_distortion");
+  ent set_origin_and_angles((611.298, -1383.53, 1305.12), (5.98396, 346.765, -90.0364));
+  ent.v["fxid"] = "zmb_fire_distortion";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_distortion");
+  ent set_origin_and_angles((106.76, -1102.06, 1294.09), (352.03, 313.363, -67.946));
+  ent.v["fxid"] = "zmb_fire_distortion";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_distortion");
+  ent set_origin_and_angles((425.194, -1327.52, 1306.44), (354.47, 339.15, -79.2388));
+  ent.v["fxid"] = "zmb_fire_distortion";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_distortion");
+  ent set_origin_and_angles((818.911, -1271.75, 1298), (358.267, 56.5412, -84.399));
+  ent.v["fxid"] = "zmb_fire_distortion";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("fire_ground_tiny_flames");
+  ent set_origin_and_angles((602.959, -1374.34, 1303.39), (272.236, 333.446, 17.5705));
+  ent.v["fxid"] = "fire_ground_tiny_flames";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("fire_ground_tiny_flames");
+  ent set_origin_and_angles((196.477, -1412.64, 1295.79), (277.024, 53.3086, -152.149));
+  ent.v["fxid"] = "fire_ground_tiny_flames";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("fire_ground_tiny_flames");
+  ent set_origin_and_angles((136.277, -1129.71, 1299.56), (288.695, 201.729, -154.47));
+  ent.v["fxid"] = "fire_ground_tiny_flames";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_board_1");
+  ent set_origin_and_angles((552.352, -1340.04, 1356.72), (273, 166, -90));
+  ent.v["fxid"] = "zmb_fire_board_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_board_1");
+  ent set_origin_and_angles((921.355, -1501.66, 1385.15), (273.716, 238.239, 135.854));
+  ent.v["fxid"] = "zmb_fire_board_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_board_1");
+  ent set_origin_and_angles((345.091, -1477.51, 1343.12), (279.429, 181.698, 69.1384));
+  ent.v["fxid"] = "zmb_fire_board_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_small_ground");
+  ent set_origin_and_angles((428.207, -1299.58, 1314.68), (270.975, 270.29, -175.98));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((457.242, -1304.51, 1337.23), (274.935, 309.19, -154.443));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((525.949, -1532.26, 1444.82), (271.912, 190.742, -14.1207));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((581.117, -1529.62, 1428.29), (271.912, 190.743, -36.121));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((676.077, -1388.58, 1324.51), (272.88, 120.812, -134.04));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_scattered_rnr");
+  ent set_origin_and_angles((767.351, -1300.51, 1349.68), (270, 180, -113));
+  ent.v["fxid"] = "zmb_fire_wall_scattered_rnr";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_scattered_2_rnr");
+  ent set_origin_and_angles((409.363, -1294.27, 1314.44), (270, 0, -22));
+  ent.v["fxid"] = "zmb_fire_wall_scattered_2_rnr";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_scattered_rnr");
+  ent set_origin_and_angles((495.911, -1322.15, 1363.69), (272.236, 44.4285, -61.4461));
+  ent.v["fxid"] = "zmb_fire_wall_scattered_rnr";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_scattered_2_rnr");
+  ent set_origin_and_angles((-1.54743, -1230.39, 1381.65), (275, 270, 180));
+  ent.v["fxid"] = "zmb_fire_wall_scattered_2_rnr";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_scattered_2_rnr");
+  ent set_origin_and_angles((822.896, -1176.67, 1365.43), (270, 0, 54));
+  ent.v["fxid"] = "zmb_fire_wall_scattered_2_rnr";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((97.1821, -1028.89, 1395.98), (272.88, 120.81, -95.0383));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_wall_scattered_rnr");
+  ent set_origin_and_angles((-385.884, -750.944, 1276.48), (277, 230, 180));
+  ent.v["fxid"] = "zmb_fire_wall_scattered_rnr";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("fire_wall_edge_lp_sml_vf");
+  ent set_origin_and_angles((-196.338, -673.648, 1240.04), (272.88, 120.805, -98.0344));
+  ent.v["fxid"] = "fire_wall_edge_lp_sml_vf";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_ceiling");
+  ent set_origin_and_angles((-10.7674, -1248.07, 1406.61), (287.024, 172.738, 103.322));
+  ent.v["fxid"] = "zmb_fire_ceiling";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_fire_ceiling");
+  ent set_origin_and_angles((610.697, -1625.14, 1404.36), (275.242, 258.63, 78.9882));
+  ent.v["fxid"] = "zmb_fire_ceiling";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_snow_drawbridge_impact");
+  ent set_origin_and_angles((-1137.55, 992.795, 1513), (278, 246, 0));
+  ent.v["fxid"] = "zmb_snow_drawbridge_impact";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "205";
+
+  ent = createExploder("falling_water_drip_runner_fast");
+  ent set_origin_and_angles((534.8, -1567.19, 1403.32), (270, 0, 0));
+  ent.v["fxid"] = "falling_water_drip_runner_fast";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("falling_water_drip_runner_fast");
+  ent set_origin_and_angles((656.029, -1611, 1396.97), (270, 0, 0));
+  ent.v["fxid"] = "falling_water_drip_runner_fast";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_explosion_lower");
+  ent set_origin_and_angles((632.036, -1425.78, 1302.31), (3.45577, 339.293, 2.50787));
+  ent.v["fxid"] = "zmb_explosion_lower";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "201";
+  ent.v["loopsound"] = "emt_ctcms_fire_sml";
+
+  ent = createExploder("zmb_ambient_steam");
+  ent set_origin_and_angles((501.261, -1581.1, 1294.9), (270, 0, 75));
+  ent.v["fxid"] = "zmb_ambient_steam";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_grate_fire");
+  ent set_origin_and_angles((-545.196, -920.572, 1500.87), (270, 230.717, 18.2831));
+  ent.v["fxid"] = "zmb_grate_fire";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "203";
+
+  ent = createExploder("zmb_grate_fire");
+  ent set_origin_and_angles((-271.523, -1018.84, 1502.09), (270, 230.717, 18.2831));
+  ent.v["fxid"] = "zmb_grate_fire";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "202";
+
+  ent = createExploder("zmb_grate_fire");
+  ent set_origin_and_angles((200.97, -1321.25, 1512.14), (270, 230.717, 18.2831));
+  ent.v["fxid"] = "zmb_grate_fire";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "201";
+
+  ent = createExploder("zmb_grate_fire");
+  ent set_origin_and_angles((853.933, -1492.09, 1499.14), (270, 230.717, 18.2831));
+  ent.v["fxid"] = "zmb_grate_fire";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "201";
+
+  ent = createExploder("zmb_grate_fire");
+  ent set_origin_and_angles((936.037, -1264.23, 1500.18), (270, 230.717, 18.2831));
+  ent.v["fxid"] = "zmb_grate_fire";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "202";
+
+  ent = createExploder("zmb_tunnel_blast");
+  ent set_origin_and_angles((1330.39, -1715.39, 1468.36), (270, 0, -17));
+  ent.v["fxid"] = "zmb_tunnel_blast";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "203";
+
+  ent = createExploder("fire_licks_small");
+  ent set_origin_and_angles((-196.792, -686.886, 1318.4), (270, 0, 0));
+  ent.v["fxid"] = "fire_licks_small";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+  ent.v["loopsound"] = "emt_ctcms_fire_sml";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((361.661, -215.954, 1334.3), (270, 0, 0));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((230.81, -168.657, 1355.22), (270, 0, 141));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((228.85, -264.751, 1358.24), (270, 0, -147));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((224.795, 224.995, 1236.04), (270, 0, -107));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "1";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((571.062, -486.494, 1325.14), (338, 135, -180));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((290.164, 339.12, 1333.15), (332, 288, 180));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((14.1111, 68.449, 1347.58), (30, 180, 180));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((19.5454, -486.333, 1325.28), (288, 107, 180));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((-274.551, -492.406, 1325.15), (270, 0, 107));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((870.081, -227.966, 1335.72), (290.096, 185.477, 156.17));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((621.174, 72.0161, 1341.81), (19.0176, 184.831, 179.54));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((631.82, 343.406, 1330.32), (270, 0, 0));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((568.293, 954.296, 1445.35), (38, 180, -177));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_blackout_sparks");
+  ent set_origin_and_angles((-270.389, -215.923, 1338.05), (270, 0, 0));
+  ent.v["fxid"] = "zmb_blackout_sparks";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((551.314, -1148.15, 1814.16), (270, 0, -166));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((272.686, -1086.35, 1808.56), (270, 0, 128));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-156.358, -839.164, 1908.15), (270, 180, -12));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-199.552, -1236.9, 1944.99), (270, 0, -40));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-199.968, -1234.51, 1755.17), (273, 50, -90));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-115.348, -1420.96, 1956.79), (270, 0, -127));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((297.95, -1634.29, 1921.94), (270, 0, 24));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-112.286, -1862.83, 2118.27), (270, 0, 39));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((641.019, -1779.65, 2107.23), (270, 180, 109));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((671.455, -2106.65, 1940.78), (270, 180, 114));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((1003.8, -1472.11, 1940.26), (270, 0, 74));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((1195.29, -1055.17, 1932.26), (270, 0, 65));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((1143.84, -474.48, 1826.7), (270, 191.501, 6.49915));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((1149.03, -497.341, 2696.46), (270, 191.501, 6.49915));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-369.912, -612.859, 1931.46), (270, 0, -110));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((568.241, 215.063, 1741.13), (270, 0, -37));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((134.158, 619.112, 2115.7), (270, 0, -46));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-701.208, 639.839, 1796), (270, 180, 130));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-442.136, 262.214, 1785.57), (270, 0, -90));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-185.547, 378.135, 1723.85), (270, 0, 129));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-1130.87, 480.092, 1797.42), (270, 0, 40));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-868.838, 700.264, 1795.76), (270, 0, 40));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((1230.2, -189.834, 2245.7), (270, 0, -69));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((1562.4, -672.293, 2057.93), (270, 0, -27));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((1224.31, 588.471, 1765.28), (270, 0, -42));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((-639.523, 106.934, 1780.04), (270, 180, 2));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_snow_earthquake");
+  ent set_origin_and_angles((89.0584, 359.364, 1720.47), (270, 0, -139));
+  ent.v["fxid"] = "zmb_snow_earthquake";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "207";
+
+  ent = createExploder("zmb_ambient_steam");
+  ent set_origin_and_angles((448.818, -1299.84, 1300.1), (270, 0, -96));
+  ent.v["fxid"] = "zmb_ambient_steam";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_ambient_steam");
+  ent set_origin_and_angles((876.292, -1656.17, 1295.88), (270, 0, 129));
+  ent.v["fxid"] = "zmb_ambient_steam";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_ambient_steam");
+  ent set_origin_and_angles((1065.84, -1308.46, 1319.69), (270, 180, 86));
+  ent.v["fxid"] = "zmb_ambient_steam";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_ambient_steam");
+  ent set_origin_and_angles((-19.1857, -1197.11, 1258.8), (270, 0, 26));
+  ent.v["fxid"] = "zmb_ambient_steam";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_ambient_steam");
+  ent set_origin_and_angles((1478.16, -1599.14, 1396.87), (270, 0, -152));
+  ent.v["fxid"] = "zmb_ambient_steam";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_nest_fog_sml");
+  ent set_origin_and_angles((747.084, -1872.92, 1517.13), (273.703, 83.0979, 147.84));
+  ent.v["fxid"] = "zmb_nest_fog_sml";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "209";
+
+  ent = createExploder("zmb_door_gust");
+  ent set_origin_and_angles((812.938, -1950.98, 1532), (17.29, 309.556, 2.02016));
+  ent.v["fxid"] = "zmb_door_gust";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "209";
+
+  ent = createExploder("dust_falling_debris_radial_sml_runner");
+  ent set_origin_and_angles((721.801, -2833.24, 1289.26), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_sml_runner";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "210";
+
+  ent = createExploder("zmb_ceiling_smoke");
+  ent set_origin_and_angles((528.224, -1611.17, 1404.59), (271.912, 190.742, -117.12));
+  ent.v["fxid"] = "zmb_ceiling_smoke";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_ceiling_smoke");
+  ent set_origin_and_angles((568.818, -1315.87, 1400.2), (271.912, 190.741, 70.8804));
+  ent.v["fxid"] = "zmb_ceiling_smoke";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_ceiling_smoke");
+  ent set_origin_and_angles((402.083, -1318.16, 1411.11), (271.911, 190.74, 78.8811));
+  ent.v["fxid"] = "zmb_ceiling_smoke";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_ceiling_smoke");
+  ent set_origin_and_angles((30.0032, -1216.88, 1425.08), (271.911, 190.741, 179.88));
+  ent.v["fxid"] = "zmb_ceiling_smoke";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_ceiling_smoke");
+  ent set_origin_and_angles((8.89281, -1267.18, 1423.13), (271.912, 190.74, -161.119));
+  ent.v["fxid"] = "zmb_ceiling_smoke";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("zmb_barbosa_chandelier_hc_trig");
+  ent set_origin_and_angles((854.351, -2819.09, 1198.63), (270, 0, 25));
+  ent.v["fxid"] = "zmb_barbosa_chandelier_hc_trig";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "216";
+
+  ent = createExploder("zmb_barbosa_chandelier_hc_moon");
+  ent set_origin_and_angles((854.351, -2819.09, 1198.63), (270, 0, 25));
+  ent.v["fxid"] = "zmb_barbosa_chandelier_hc_moon";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "223";
+
+  ent = createExploder("zmb_barbosa_chandelier_hc_blood");
+  ent set_origin_and_angles((854.351, -2819.09, 1198.63), (270, 0, 25));
+  ent.v["fxid"] = "zmb_barbosa_chandelier_hc_blood";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "224";
+
+  ent = createExploder("zmb_barbosa_chandelier_hc_death");
+  ent set_origin_and_angles((854.351, -2819.09, 1198.63), (270, 0, 25));
+  ent.v["fxid"] = "zmb_barbosa_chandelier_hc_death";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "225";
+
+  ent = createExploder("zmb_barbosa_chandelier_hc_storm");
+  ent set_origin_and_angles((854.351, -2819.09, 1198.63), (270, 0, 25));
+  ent.v["fxid"] = "zmb_barbosa_chandelier_hc_storm";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "226";
+
+  ent = createExploder("zmb_barbosa_chandelier_hc_trig_final");
+  ent set_origin_and_angles((854.351, -2819.09, 1198.63), (270, 0, 25));
+  ent.v["fxid"] = "zmb_barbosa_chandelier_hc_trig_final";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "227";
+
+  ent = createExploder("No FX");
+  ent set_origin_and_angles((0, 0, 0), (270, 0, 0));
+  ent.v["fxid"] = "No FX";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "1";
+
+  ent = createExploder("zmb_com_room_huge_fire");
+  ent set_origin_and_angles((1091.23, -3338.63, 1717.97), (273, 166, -141));
+  ent.v["fxid"] = "zmb_com_room_huge_fire";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "215";
+
+  ent = createExploder("No FX");
+  ent set_origin_and_angles((0, 0, 0), (270, 0, 0));
+  ent.v["fxid"] = "No FX";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "1";
+
+  ent = createExploder("dust_falling_debris_radial_lrg_runner");
+  ent set_origin_and_angles((1227.75, -2817.94, 1210.29), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_lrg_runner";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "222";
+
+  ent = createExploder("dust_falling_debris_radial_lrg_runner");
+  ent set_origin_and_angles((960.426, -2458.69, 1148.52), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_lrg_runner";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "222";
+
+  ent = createExploder("dust_falling_debris_radial_lrg_runner");
+  ent set_origin_and_angles((772.529, -2678.1, 1198.5), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_lrg_runner";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "222";
+
+  ent = createExploder("dust_falling_debris_radial_lrg_runner");
+  ent set_origin_and_angles((834.374, -2999.23, 1187.22), (270, 0, 0));
+  ent.v["fxid"] = "dust_falling_debris_radial_lrg_runner";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "222";
+
+  ent = createExploder("No FX");
+  ent set_origin_and_angles((0, 0, 0), (270, 0, 0));
+  ent.v["fxid"] = "No FX";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "1";
+
+  ent = createExploder("zmb_fire_licks_m_vf");
+  ent set_origin_and_angles((-413.148, 727.661, 1379.14), (270, 0, 0));
+  ent.v["fxid"] = "zmb_fire_licks_m_vf";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_brute_debris_fire_03b");
+  ent set_origin_and_angles((-403.208, 639.917, 1377.85), (270, 0, -179));
+  ent.v["fxid"] = "zmb_brute_debris_fire_03b";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_fire_small_ground");
+  ent set_origin_and_angles((-1045.72, 77.7897, 1536.92), (270, 0, 0));
+  ent.v["fxid"] = "zmb_fire_small_ground";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((-1045.85, 82.2289, 1557.76), (270, 0, 0));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_brute_debris_fire_03");
+  ent set_origin_and_angles((-1107.08, -3.55079, 1502.66), (271, 157, 0));
+  ent.v["fxid"] = "zmb_brute_debris_fire_03";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_bridge_smoke");
+  ent set_origin_and_angles((1436.55, -1341.12, 1513.18), (275.187, 174.894, -100.302));
+  ent.v["fxid"] = "zmb_bridge_smoke";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_bridge_smoke");
+  ent set_origin_and_angles((1356.33, -1451.85, 1512.6), (275.187, 174.894, -100.302));
+  ent.v["fxid"] = "zmb_bridge_smoke";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_bridge_smoke");
+  ent set_origin_and_angles((-1292.22, -103.983, 1540.79), (332.178, 138.525, -90.0862));
+  ent.v["fxid"] = "zmb_bridge_smoke";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_hc_door_catacombs");
+  ent set_origin_and_angles((10.2902, -637.417, 1197.15), (270, 0, 0));
+  ent.v["fxid"] = "zmb_hc_door_catacombs";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "239";
+
+  ent = createExploder("zmb_light_post_01");
+  ent set_origin_and_angles((-824.618, -172.673, 1678.15), (270, 0, 0));
+  ent.v["fxid"] = "zmb_light_post_01";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "238";
+
+  ent = createExploder("zmb_bridge_spotlight");
+  ent set_origin_and_angles((-1068.09, 1980.05, 1616.39), (320, 284, -90));
+  ent.v["fxid"] = "zmb_bridge_spotlight";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "254";
+
+  ent = createExploder("zmb_bridge_spotlight");
+  ent set_origin_and_angles((-1661.89, 2166.08, 1564.23), (320.289, 203.612, -87.7845));
+  ent.v["fxid"] = "zmb_bridge_spotlight";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "254";
+
+  ent = createExploder("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((-1153.19, -116.514, 1543.22), (270, 0, 0));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_fire_wall_med_1");
+  ent set_origin_and_angles((-408.678, 538.985, 1459.31), (270, 0, 0));
+  ent.v["fxid"] = "zmb_fire_wall_med_1";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "240";
+
+  ent = createExploder("zmb_fire_ceiling");
+  ent set_origin_and_angles((650.973, -1336.9, 1402.73), (273.616, 28.8237, 112.99));
+  ent.v["fxid"] = "zmb_fire_ceiling";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "204";
+
+  ent = createExploder("No FX");
+  ent set_origin_and_angles((0, 0, 0), (270, 0, 0));
+  ent.v["fxid"] = "No FX";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "1";
+
+  ent = createExploder("zmb_brute_cinematic_steamrise");
+  ent set_origin_and_angles((-47.4967, 1147.49, 1460.66), (280.988, 18.6992, 5.93134));
+  ent.v["fxid"] = "zmb_brute_cinematic_steamrise";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "221";
+
+  ent = createExploder("zmb_brute_intro_embers");
+  ent set_origin_and_angles((278.672, 892.259, 1453.05), (272.237, 354.233, 27.3118));
+  ent.v["fxid"] = "zmb_brute_intro_embers";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "221";
+
+  ent = createExploder("zmb_brute_intro_embers");
+  ent set_origin_and_angles((328.948, 906.484, 1466.26), (294.309, 315.804, 47.3516));
+  ent.v["fxid"] = "zmb_brute_intro_embers";
+  ent.v["delay"] = -2.71249;
+  ent.v["exploder"] = "221";
+
+  ent = createExploder("zmb_brute_intro_embers");
+  ent set_origin_and_angles((187.382, 849.367, 1454.08), (272.237, 354.233, 37.3114));
+  ent.v["fxid"] = "zmb_brute_intro_embers";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "221";
+
+  ent = createExploder("No FX");
+  ent set_origin_and_angles((0, 0, 0), (270, 0, 0));
+  ent.v["fxid"] = "No FX";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "1";
+
+  ent = createExploder("zmb_brute_intro_embers");
+  ent set_origin_and_angles((150.829, 936.934, 1447.76), (272.237, 354.233, 27.3118));
+  ent.v["fxid"] = "zmb_brute_intro_embers";
+  ent.v["delay"] = 0;
+  ent.v["exploder"] = "221";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((206.399, -567.953, 1890.65), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1406.37, -1028.54, 1517.21), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((705.436, -590.824, 2074.79), (270, 0, 0));
+  ent.v["soundalias"] = "wind_wood_rattle_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((579.32, -1112.52, 1526.01), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((633.016, -1527.35, 1919.6), (270, 0, 0));
+  ent.v["soundalias"] = "wind_wood_rattle_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((400.42, -748.691, 1551.25), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-440.915, -378.587, 1512.13), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1610.83, 5417.66, 1905.56), (270, 0, 0));
+  ent.v["soundalias"] = "mus_amb_due_30s_pop1";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-4161.43, 4960.83, 2152.83), (270, 0, 0));
+  ent.v["soundalias"] = "mus_amb_due_30s_pop1";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((464.94, -617.589, 1801.97), (270, 0, 0));
+  ent.v["soundalias"] = "canvas_flap_large_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((822.5, -653.612, 1799.07), (270, 0, 0));
+  ent.v["soundalias"] = "canvas_flap_large_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-663.647, -927.875, 1679.65), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((68.9305, -426.656, 1567.59), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((63.8786, 299.529, 1577.32), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-180.875, 571.058, 1483.19), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-180.875, 571.058, 1483.19), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((149.228, 291.369, 1543.85), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flourescent_buzz_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-929.796, 507.808, 1502.72), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flourescent_buzz_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-229.704, 348.427, 1545.54), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flourescent_buzz_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((32.7816, -558.273, 1863.25), (270, 0, 0));
+  ent.v["soundalias"] = "canvas_flap_large_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1411.18, 2764.07, 1807.16), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1499.88, 3296.26, 1774.42), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-994.125, 3432.55, 1798.81), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-3359.19, 2890.23, 1815.11), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-3359.19, 3159.49, 1838.33), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-2980.57, 3794.33, 2094.58), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-676.352, 424.125, 1490.26), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1442.88, 458.46, 1345.25), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1288.81, 872.342, 1216.13), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1641.29, 741.506, 1216.13), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((639.875, 884.77, 1563.73), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-2034.23, 3784.8, 1811.88), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1391.65, 370.998, 1346.98), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flourescent_buzz_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1135.09, 220.249, 1399.88), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1018.13, 2900.76, 1724.22), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1022.38, 3453.63, 1774.05), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flourescent_buzz_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-891.665, 3872.14, 1831.18), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flourescent_buzz_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-790.324, 3870.04, 1832), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flourescent_buzz_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1129.3, 879.095, 1152), (270, 0, 0));
+  ent.v["soundalias"] = "emt_river_flow_easy_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-790.638, 2065.13, 1697.2), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_crackle_sml_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-524.149, 1937.85, 1712.18), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_crackle_sml_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((852.889, -1493.98, 1512.88), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((935.943, -1267.22, 1507.02), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((203.366, -1316.25, 1517.65), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-272.029, -1020.63, 1507.38), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((196.767, -1317.69, 1555.03), (270, 0, 0));
+  ent.v["soundalias"] = "emt_heat_rumble_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((848.159, -1496.48, 1553.75), (270, 0, 0));
+  ent.v["soundalias"] = "emt_heat_rumble_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((937.018, -1272.96, 1558.78), (270, 0, 0));
+  ent.v["soundalias"] = "emt_heat_rumble_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-278.677, -1018.13, 1541.28), (270, 0, 0));
+  ent.v["soundalias"] = "emt_heat_rumble_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-547.629, -923.539, 1558.65), (270, 0, 0));
+  ent.v["soundalias"] = "emt_heat_rumble_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((559.708, 577.1, 1180.14), (270, 0, 0));
+  ent.v["soundalias"] = "emt_ctcms_drips_trickle_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((927.661, -262.853, 1180.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_ctcms_drips_trickle_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-486.911, -847.704, 1185.69), (270, 0, 0));
+  ent.v["soundalias"] = "emt_ctcms_drips_trickle_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((559.226, 202.001, 1180.12), (270, 0, 0));
+  ent.v["soundalias"] = "emt_ctcms_drips_trickle_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((288.609, -814.065, 1247.05), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((690.925, -469.015, 1255.88), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((852.905, -1488.45, 1543.69), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((251.414, 475.114, 1282.11), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((936.773, -1265.88, 1541.76), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((204.418, -1315.33, 1556.62), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-272.731, -1016.18, 1540.4), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-542.882, -922.186, 1507.35), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-546.33, -918.299, 1528.65), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((205.779, -1320.62, 1515.62), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_drip_splatty_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((935.897, -1267.56, 1518.14), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_drip_splatty_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-269.931, -1019.66, 1497.61), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_drip_splatty_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-545.678, -919.125, 1510.18), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_drip_splatty_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((139.092, -204.727, 1223.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_water_flow_into_pool_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((286.035, -210.789, 1214.78), (270, 0, 0));
+  ent.v["soundalias"] = "emt_vent_drip_splatty_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((11.5338, -301.022, 1196.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_ctcms_drips_trickle_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((144.444, -198.956, 1180.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_water_flow_into_pool_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((404.405, -218.066, 1180.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_water_flow_into_pool_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-984.454, -470.278, 1615.12), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1008.22, -1168.99, 1589.93), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((900.204, -666.04, 1635.03), (10.3961, 329.6, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((978.211, 194.214, 1615.82), (10.3961, 225, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((836.434, 336.086, 1615.95), (10.3961, 225, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-422.826, 410.588, 1475.9), (33.8163, 359.203, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((664.351, -2043.25, 1567.17), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1224.28, -998.627, 1515.77), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((821.601, -803.074, 1634.29), (10.3961, 329.6, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-275.66, -527.482, 1324.94), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-266.576, -220.193, 1327.51), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((16.0948, -489.604, 1314.28), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((6.28556, 69.3417, 1316.67), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((7.15486, 347.922, 1327.79), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((283.461, 364.455, 1333.72), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((585.385, 334.225, 1327.81), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((568.639, 69.5612, 1318.67), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((587.326, -488.97, 1314.27), (0, 72.7, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1202.06, -975.213, 1559.14), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((649.352, 527.946, 1540.72), (270, 0, 0));
+  ent.v["soundalias"] = "metal_creaks_pops_lp_01";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-673.42, -790.613, 1720.46), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-468.743, -871.425, 1728.59), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-235.414, -868.16, 1761.04), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-937.448, -679.041, 1778.68), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((475.716, -1661.16, 1779.85), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-157.215, -1055.53, 1755.02), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((110.142, -997.045, 1873.02), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-337.85, -1980.09, 1729.32), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((944.382, -1417.75, 1732.02), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1261.6, -508.55, 1926.21), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1050.01, -558.548, 1922.08), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1083.69, -20.2707, 1926.31), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((894.229, -124.388, 1922.98), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((190.539, 411.968, 1634.25), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((40.2404, 277.874, 1657.65), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-458.527, 447.903, 1644.85), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((103.341, -1788.26, 1809.69), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((315.564, -1671.47, 1889.31), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1001.95, -346.931, 1690.68), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp_small_radius";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-286.258, -583.808, 1752.64), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-226.774, -401.195, 1701.56), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-951.964, -826.723, 1776.62), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-813.625, -480.854, 1763.88), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1240.06, -1338.02, 1758.83), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1388.14, -1393.78, 1755.93), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1223.9, -1006.01, 1518.41), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_gas_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1193.65, -967.291, 1521.86), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_wood_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1083.72, -3315.91, 1712.82), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_machinery_metal_vibrations_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1154.8, -2631.37, 1603.54), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_electric_hum_low_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1038.6, -2686.42, 1597.54), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_electric_hum_low_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((747.917, -2821.39, 1591.54), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_electric_hum_low_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((632.183, -2876.63, 1576.54), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_electric_hum_low_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1091.7, -3333.22, 1715.88), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_electric_hum_low_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1288.96, -2138.44, 1507.41), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((992.223, -2372.59, 1501.25), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_light_hum_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1300.46, -3403.2, 1557.07), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_zmb_machine_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1123.28, -2609.32, 1426.48), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_zmb_machine_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1092.13, -3330.37, 1746.72), (10.3961, 90, 0));
+  ent.v["soundalias"] = "emt_electric_drone_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((809.075, -3890.59, 1495.33), (270, 0, 0));
+  ent.v["soundalias"] = "emt_sine_machine_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((630.927, -3844.69, 1497.38), (270, 0, 0));
+  ent.v["soundalias"] = "emt_sine_machine_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((742.05, -3952.52, 1694.58), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-474.257, -3035.76, 1288.96), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-226.53, -2461.92, 1390.09), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_movie_projector";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((2230.87, -827.18, 1298.62), (270, 0, 0));
+  ent.v["soundalias"] = "emt_steam_light_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1422.33, 1618.8, 1592.04), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1419.84, 1609.22, 1582.24), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1378.97, 1621.86, 1574.02), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_gas_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1199.97, 1497.78, 1534.68), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_wood_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1205.46, 1523.9, 1528.99), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1272.94, 1398.24, 1573.75), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1148.42, 1887.04, 1566.65), (270, 0, 0));
+  ent.v["soundalias"] = "emt_ctcms_fire_sml";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1388.3, 1809.64, 1553.22), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1113.62, 184.782, 1760.18), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1215.49, 304.961, 1746.65), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1211.31, 500.922, 1771.19), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-981.567, 686.768, 1782.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-654.155, 81.2122, 1742.65), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-864.329, 78.887, 1750.03), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1715.16, -590.377, 1273.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1744.8, -868.474, 1159.48), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1906.17, -1211.75, 1145.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1813.94, -1018.33, 1156.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((2028.01, -1416.95, 1141.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((2125.46, -1554.44, 1169.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((2224.49, -1691.91, 1154.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1311.85, 1729.04, 1531.83), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((613.31, -3942.65, 1650.78), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1720.29, -3440.95, 1657.39), (270, 0, 0));
+  ent.v["soundalias"] = "emt_bunker_light_buzz_pulse_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-260.676, -3023.58, 1352.49), (270, 0, 0));
+  ent.v["soundalias"] = "emt_bunker_light_flicker_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1075.2, -3352.88, 1710.03), (270, 0, 0));
+  ent.v["soundalias"] = "emt_freezer_steam_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1236.66, -37.032, 1569.72), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1491.67, -2815.05, 807.986), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1056.45, -2340.41, 812.809), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((930.373, -3110.92, 860.139), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((801.523, -3026.92, 866.962), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((649.353, -2713.77, 862.54), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((664.08, -2581.57, 861.263), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((881.033, -2400.1, 860.281), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1192.02, -3071.77, 861.426), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-962.957, -1640.9, 1277.1), (270, 0, 0));
+  ent.v["soundalias"] = "emt_bunker_light_flicker_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1433.25, -2308.61, 1501.84), (270, 0, 0));
+  ent.v["soundalias"] = "emt_bunker_light_buzz_pulse_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-202.024, -2003.18, 1429.88), (270, 0, 0));
+  ent.v["soundalias"] = "emt_bunker_light_buzz_pulse_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-46.0771, -2799.05, 1554.47), (270, 0, 0));
+  ent.v["soundalias"] = "emt_bunker_light_flicker_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((828.386, -873.572, 1781), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_large_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((786.862, -990.271, 1671.97), (270, 0, 0));
+  ent.v["soundalias"] = "emt_flag_flap_small_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((539.407, -2256.65, 1868.54), (270, 0, 0));
+  ent.v["soundalias"] = "emt_bunker_light_flicker_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-1642.06, 2174.98, 1578.76), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-399.09, -677.196, 1613.11), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((638.161, -1110.42, 1624.82), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((-413.637, -657.582, 1700.42), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_flicker_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((949.206, -3467.65, 1553.39), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((879.491, -3367.37, 1574.3), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((925.234, -3442.03, 1644.81), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1116.13, -3325.46, 1531.13), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1274.2, -3287.76, 1589.95), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1296.23, -3415.85, 1521.74), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1289.78, -3240.39, 1630.89), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((927.361, -3461.13, 1578.1), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1106.38, -3392.02, 1719.32), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((874.837, -3299.97, 1510.41), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1298.11, -3430.44, 1556.53), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fireman_fire_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((546.144, -2260.7, 1890.88), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1419.63, 650.508, 1665.91), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1290.32, -1583.99, 1217.45), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_buzz_harsh_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((643.469, -1081.9, 1705.73), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_flicker_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1420.03, 653.685, 1703.61), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_flicker_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((1287.84, -1588.49, 1246.41), (270, 0, 0));
+  ent.v["soundalias"] = "emt_light_flicker_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((362.203, 351.255, 1181.13), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_emt_cave_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((24.3376, -301.676, 1181.13), (270, 0, 0));
+  ent.v["soundalias"] = "zmb_emt_cave_drips_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((978.737, -914.287, 1551.3), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_wood_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((953.067, -964.336, 1544.41), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_wood_med_lp";
+
+  ent = createLoopSound();
+  ent set_origin_and_angles((966.604, -892.318, 1560.38), (270, 0, 0));
+  ent.v["soundalias"] = "emt_fire_large_lp";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((586.162, -971.626, 2047.76), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 300;
+  ent.v["soundalias"] = "emt_coyote_distant";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((911.817, -1878.25, 1845.25), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((76.2541, -729.949, 1507.85), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1328.6, -633.818, 1751.17), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-128.177, -546.125, 1734.31), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-42.4198, -998.278, 1522.38), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-278.54, -68, 1475.43), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-383.875, -304.803, 2083.52), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1053.62, -454, 1693.46), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "metal_stress";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1489.62, -516.125, 1775.53), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1685.21, -601.985, 1507.05), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1369.11, -1161.49, 1718.17), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1294.73, -1182.9, 1678.86), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((294.767, -742.582, 1593.13), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1156.25, -661.181, 1659.81), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((880.216, -1567.88, 1701.96), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1363.12, -1085.21, 1517.34), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1483.53, -623.224, 1504.6), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1487.43, -731.875, 1634.14), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((388.542, -952.498, 1510.89), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock_metal";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((783.875, -957.749, 1492.23), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock_metal";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((799.357, -1003.26, 1495.1), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock_metal";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((978.932, -795.065, 1503.67), (270, 0, 15));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock_metal";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-435.815, -826.687, 1502.63), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock_metal";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-114.88, -863.875, 1497.11), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock_metal";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((913.092, -1147.68, 1523.13), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((428.671, -1118.19, 1515.37), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((783.411, -1303.61, 1539.89), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1294.89, 205.779, 1644.06), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1190.69, 3863.87, 1889.34), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1188.94, 3863.88, 1730.23), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1195.88, 3876.97, 1623.2), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-770.433, 5027.87, 2106.85), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 300;
+  ent.v["soundalias"] = "emt_coyote_distant";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((295.484, 953.816, 1470.45), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-192.751, 967, 1414.54), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1155.88, 809.975, 1152.1), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1071.88, 1726.55, 1728.69), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1311.88, 2029.53, 1683.65), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1307.88, 2502.96, 1757.65), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1053.44, 2645.39, 1701.82), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1411.88, 852.389, 1570.49), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1365.01, 2712.91, 1588.96), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "wind_gust_whistle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-131.875, 357.475, 1277.69), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((707.875, -469.533, 1208.25), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "wind_gust_howl";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((569.169, 619.601, 1354.46), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "wind_gust_howl";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-49.3431, -1278.26, 1592.88), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "wind_gust_howl";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((620.601, -2025.48, 1574.86), (270, 0, 0));
+  ent.v["delay_min"] = 60;
+  ent.v["delay_max"] = 300;
+  ent.v["soundalias"] = "mp_nest_jackinthebox";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-234.641, -775.297, 1563.83), (270, 0, 0));
+  ent.v["delay_min"] = 9;
+  ent.v["delay_max"] = 40;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((959.135, -1780.93, 1582.43), (270, 0, 0));
+  ent.v["delay_min"] = 1;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_foliage_rustle_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1382.99, 839.002, 1561.29), (270, 0, 0));
+  ent.v["delay_min"] = 1;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_foliage_rustle_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1248.46, 1269.16, 1321.69), (270, 0, 0));
+  ent.v["delay_min"] = 7;
+  ent.v["delay_max"] = 20;
+  ent.v["soundalias"] = "mp_nest_dock_creak_low";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((758.536, 1311.83, 1274.68), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "mp_nest_dock_creak_low";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1001.18, 1195.56, 1273.87), (270, 0, 0));
+  ent.v["delay_min"] = 32;
+  ent.v["delay_max"] = 60;
+  ent.v["soundalias"] = "mp_nest_dock_creak_low";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-341.547, -1534, 1576.97), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 15;
+  ent.v["soundalias"] = "emt_valve_pipe_rattle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1102.93, -1430.57, 1561.4), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 20;
+  ent.v["soundalias"] = "emt_valve_pipe_rattle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-589.356, 415.999, 1421.97), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 17;
+  ent.v["soundalias"] = "emt_valve_pipe_rattle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((207.211, -1326.51, 1481.17), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((291.356, -1346.5, 1379.09), (270, 0, 0));
+  ent.v["delay_min"] = 60;
+  ent.v["delay_max"] = 132;
+  ent.v["soundalias"] = "mp_nest_pipe_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-285.891, -1017.03, 1465.65), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 24;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((853.742, -1488.06, 1469.6), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 40;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((936.749, -1261.5, 1443.37), (270, 0, 0));
+  ent.v["delay_min"] = 7;
+  ent.v["delay_max"] = 55;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-272.871, -1018.09, 1513.52), (270, 0, 0));
+  ent.v["delay_min"] = 1;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_vent_drip";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((201.103, -1317.93, 1554.65), (270, 0, 0));
+  ent.v["delay_min"] = 1;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_vent_drip";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((934.695, -1268.48, 1542.52), (270, 0, 0));
+  ent.v["delay_min"] = 1;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_vent_drip";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((850.743, -1490.45, 1514.63), (270, 0, 0));
+  ent.v["delay_min"] = 20;
+  ent.v["delay_max"] = 60;
+  ent.v["soundalias"] = "mp_nest_zombie_vocal_distant";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((935.652, -1269.02, 1522.5), (270, 0, 0));
+  ent.v["delay_min"] = 30;
+  ent.v["delay_max"] = 70;
+  ent.v["soundalias"] = "mp_nest_zombie_vocal_distant";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((209.331, -1325.28, 1547.64), (270, 0, 0));
+  ent.v["delay_min"] = 30;
+  ent.v["delay_max"] = 70;
+  ent.v["soundalias"] = "mp_nest_zombie_vocal_distant";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-272.586, -1018.94, 1528.51), (270, 0, 0));
+  ent.v["delay_min"] = 30;
+  ent.v["delay_max"] = 70;
+  ent.v["soundalias"] = "mp_nest_zombie_vocal_distant";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-544.81, -926.883, 1528.65), (270, 0, 0));
+  ent.v["delay_min"] = 25;
+  ent.v["delay_max"] = 60;
+  ent.v["soundalias"] = "mp_nest_zombie_vocal_distant";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1052.36, -1414.1, 1603.19), (270, 0, 0));
+  ent.v["delay_min"] = 1;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_foliage_rustle_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1027.92, -1621.83, 1593.98), (270, 0, 0));
+  ent.v["delay_min"] = 1;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_foliage_rustle_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1236.74, 397.732, 1560.51), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_foliage_rustle_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1015.03, 195.845, 1562.68), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_foliage_rustle_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-558.277, -981.579, 1175.5), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-503.788, -751.938, 1182.28), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-128.199, -704.694, 1195.14), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-411.875, -530.612, 1199.38), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-252.745, -456.341, 1198.4), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-302.845, -82.125, 1176.97), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((987.875, -183.342, 1196.01), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((822.363, -93.125, 1191.76), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((804.838, -348.875, 1128.38), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((376.318, -639.875, 1191.99), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-613.598, -219.838, 1157.89), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((275.224, -347.585, 1188), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-123.949, -905.337, 1190.02), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-299.601, -1054.85, 1194.97), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((297.518, 479.875, 1157.3), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1189.3, 413.374, 1032.22), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((631.269, 524.496, 1192.18), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((475.433, 251.755, 1285.3), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((551.955, -502.218, 1187.8), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((200.649, -1321.73, 1511.88), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "wind_gust_howl";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((560.829, 1004.91, 1280.92), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "wind_gust_howl";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((7.60767, -636.5, 1209.09), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "wind_gust_howl";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-135, 65.5419, 1206.37), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "wind_gust_howl";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1333.36, -2620.93, 1303.13), (270, 0, 0));
+  ent.v["delay_min"] = 20;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "mp_nest_zombie_eat";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-407.833, -1141.7, 1593.91), (270, 0, 0));
+  ent.v["delay_min"] = 9;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((370.096, -1125.08, 1589.66), (270, 0, 0));
+  ent.v["delay_min"] = 9;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-483.939, 123.875, 1542.65), (270, 0, 0));
+  ent.v["delay_min"] = 9;
+  ent.v["delay_max"] = 50;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1310.99, 492.931, 1582.72), (270, 0, 0));
+  ent.v["delay_min"] = 10;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1130.88, 665.442, 1577.86), (270, 0, 0));
+  ent.v["delay_min"] = 10;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1087.34, 610.152, 1561.12), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_foliage_rustle_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1704.94, 617.518, 1906.22), (270, 0, 0));
+  ent.v["delay_min"] = 10;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-183.816, -1447.88, 1547.7), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_foliage_rustle_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-831.65, 127.375, 1555.23), (270, 0, 0));
+  ent.v["delay_min"] = 9;
+  ent.v["delay_max"] = 40;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((179.211, 462.244, 1500.8), (270, 0, 0));
+  ent.v["delay_min"] = 10;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-252.953, 491.564, 1494.11), (270, 0, 0));
+  ent.v["delay_min"] = 9;
+  ent.v["delay_max"] = 50;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1218.67, -987.552, 1585.32), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 20;
+  ent.v["soundalias"] = "emt_wood_fire_stress";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((513.396, -1437.74, 1353.05), (270, 0, 0));
+  ent.v["delay_min"] = 7;
+  ent.v["delay_max"] = 18;
+  ent.v["soundalias"] = "emt_wind_howl_small_radius";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1307.07, -3063.65, 1423.37), (270, 0, 0));
+  ent.v["delay_min"] = 500;
+  ent.v["delay_max"] = 1200;
+  ent.v["soundalias"] = "mp_nest_radio";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((519.33, -1759.07, 1603.43), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 16;
+  ent.v["soundalias"] = "emt_puppet_wooden_rattle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((481.216, -1673.42, 1602.04), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 15;
+  ent.v["soundalias"] = "emt_puppet_wooden_rattle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((585.209, -1882.11, 1611.58), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 14;
+  ent.v["soundalias"] = "emt_puppet_wooden_rattle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((572.592, -1859.12, 1657.78), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 22;
+  ent.v["soundalias"] = "emt_puppet_wooden_rattle";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1144.94, 668.649, 1666.16), (270, 0, 0));
+  ent.v["delay_min"] = 7;
+  ent.v["delay_max"] = 18;
+  ent.v["soundalias"] = "emt_wind_howl_small_radius";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1144.94, 668.649, 1666.16), (270, 0, 0));
+  ent.v["delay_min"] = 7;
+  ent.v["delay_max"] = 18;
+  ent.v["soundalias"] = "emt_wind_howl_small_radius";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1574.94, -1398.59, 1273.94), (270, 0, 0));
+  ent.v["delay_min"] = 120;
+  ent.v["delay_max"] = 300;
+  ent.v["soundalias"] = "emt_vent_crawler";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((638.973, -3156.45, 1599), (270, 0, 0));
+  ent.v["delay_min"] = 200;
+  ent.v["delay_max"] = 500;
+  ent.v["soundalias"] = "emt_vent_crawler";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-493.454, -2352.11, 1437), (270, 0, 0));
+  ent.v["delay_min"] = 120;
+  ent.v["delay_max"] = 300;
+  ent.v["soundalias"] = "zmb_vent_crawler";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-563.929, -2871.99, 1318.8), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_insect_fly";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-915, -2615.91, 1313.92), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_insect_fly";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-998.536, -2579.39, 1317.91), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 7;
+  ent.v["soundalias"] = "emt_insect_fly";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1141.3, -1396.46, 1203.74), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_insect_fly";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1356.78, -2348.98, 1536.1), (270, 0, 0));
+  ent.v["delay_min"] = 250;
+  ent.v["delay_max"] = 450;
+  ent.v["soundalias"] = "emt_vent_crawler";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((2351.58, -1903.27, 1319.35), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 20;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-355.152, -2727.77, 1320.88), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_insect_fly";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1342.92, -1298.21, 1159), (270, 0, 0));
+  ent.v["delay_min"] = 30;
+  ent.v["delay_max"] = 70;
+  ent.v["soundalias"] = "mp_nest_zombie_vocal_distant";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((456.109, -1319.25, 1370.41), (270, 0, 0));
+  ent.v["delay_min"] = 20;
+  ent.v["delay_max"] = 60;
+  ent.v["soundalias"] = "mp_nest_dock_creak_low";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((827.799, -1181.93, 1399.84), (270, 0, 0));
+  ent.v["delay_min"] = 20;
+  ent.v["delay_max"] = 90;
+  ent.v["soundalias"] = "mp_nest_dock_creak_low";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((294.593, -1464.67, 1385.36), (270, 0, 0));
+  ent.v["delay_min"] = 35;
+  ent.v["delay_max"] = 80;
+  ent.v["soundalias"] = "mp_nest_dock_creak_low";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-531.679, -202.569, 1299.51), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 15;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((819.452, 308.804, 1260.35), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 15;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((769.201, -219.559, 1293.07), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 15;
+  ent.v["soundalias"] = "emt_chain_rattles";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((504.754, 541.097, 1187), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((518.675, 20.2666, 1187), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((289.845, -86.293, 1187.43), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((420.763, -219.636, 1196.47), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((344.852, 359.425, 1181), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "emt_drips_cave_flooded";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((564.624, 656.975, 1250.52), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 2;
+  ent.v["soundalias"] = "wind_gust_howl";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-200.811, 1153.89, 1399.08), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "mp_nest_dock_creak_low";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1714.83, 632.536, 1679.73), (270, 0, 0));
+  ent.v["delay_min"] = 9;
+  ent.v["delay_max"] = 14;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1744.23, 76.6933, 1593.11), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1590.67, -54.4585, 1584.65), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 5;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1239.33, -133.685, 1535.56), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((542.936, 929.588, 1546.6), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-714.514, 804.384, 1417.66), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1188.54, 1511.63, 1538.6), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 20;
+  ent.v["soundalias"] = "emt_wood_fire_stress";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1148.48, 1883.03, 1564.61), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 25;
+  ent.v["soundalias"] = "emt_wood_fire_stress";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1248.89, 524.793, 1568.5), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_door_knock";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((330.859, 312.972, 1491), (270, 0, 0));
+  ent.v["delay_min"] = 10;
+  ent.v["delay_max"] = 30;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1808.83, 717.21, 1498.26), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1566.22, 1056.74, 1466.92), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1498.77, 1013.8, 1383.18), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-527.008, 502.817, 1384.83), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-196.952, 569.385, 1517.5), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 9;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((2648.56, 588.07, 1676.58), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((2059.86, 92.9539, 1778.38), (270, 0, 0));
+  ent.v["delay_min"] = 6;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_wind_debris_sand_rock";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-920.336, -1279.43, 1574.96), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1004.79, -1223.28, 1560.41), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((621.568, 891.141, 1532.42), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1639.7, 891.782, 1475.71), (270, 0, 0));
+  ent.v["delay_min"] = 3;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_scratchy_branch";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-936.881, -640.72, 1642.12), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_metal_squeak_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-952.986, -1057.57, 1646.49), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_metal_squeak_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-229.309, -834.888, 1635.45), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_metal_squeak_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-385.973, -711.97, 1643.86), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_metal_squeak_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-123.815, -1275.6, 1634.95), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_metal_squeak_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-238.988, -16.8932, 1548.45), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_metal_squeak_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((210.832, 434.891, 1584.58), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_metal_squeak_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((58.4965, 333.138, 1538.49), (270, 0, 0));
+  ent.v["delay_min"] = 0.75;
+  ent.v["delay_max"] = 4;
+  ent.v["soundalias"] = "emt_metal_squeak_sml";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((2122.25, 130.956, 1691.36), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1597.7, 287.418, 1587.54), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1644.24, 447.799, 1624.88), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1472.72, 72.2045, 1600.38), (270, 0, 0));
+  ent.v["delay_min"] = 7;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((-1435.74, -60.3758, 1581.88), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_cable_creak";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1463.15, -3154.16, 815.329), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((548.621, -2638.58, 809.976), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((862.347, -2256.32, 844.968), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1646.28, -2766.64, 900.18), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1216.45, -2290.82, 965.677), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 12;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((436.11, -2184.98, 1297.25), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1800.29, -1955.22, 1068.9), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 8;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1157.42, -1983.02, 1184), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 20;
+  ent.v["soundalias"] = "emt_gravel_fall";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1295.61, -3427.3, 1543.85), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 17;
+  ent.v["soundalias"] = "emt_fireman_fire_metal_stress";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((926.975, -3460.34, 1564.47), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 20;
+  ent.v["soundalias"] = "emt_fireman_fire_metal_stress";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((866.066, -3360.77, 1562.71), (270, 0, 0));
+  ent.v["delay_min"] = 4;
+  ent.v["delay_max"] = 22;
+  ent.v["soundalias"] = "emt_fireman_fire_metal_stress";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((4.91492, -1612.67, 1607.75), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 5;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((175.658, -1622.29, 1650.03), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 9;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((1245.56, -1486.76, 1560.2), (270, 0, 0));
+  ent.v["delay_min"] = 2;
+  ent.v["delay_max"] = 5;
+  ent.v["soundalias"] = "emt_wind_foliage";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((53.1027, -46.8998, 1181.13), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_insect_fly";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((687.159, 50.4888, 1191.82), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_insect_fly";
+
+  ent = createIntervalSound();
+  ent set_origin_and_angles((843.387, -238.413, 1181.13), (270, 0, 0));
+  ent.v["delay_min"] = 5;
+  ent.v["delay_max"] = 10;
+  ent.v["soundalias"] = "emt_insect_fly";
+}

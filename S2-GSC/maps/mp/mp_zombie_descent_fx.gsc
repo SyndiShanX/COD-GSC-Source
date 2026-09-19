@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/********************************************
+ * Decompiled and Edited by SyndiShanX
  * Script: maps\mp\mp_zombie_descent_fx.gsc
-*********************************************/
+********************************************/
 
 main() {
   level._effect["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_3");
@@ -15,7 +15,7 @@ main() {
   level._effect["dark_energy_burst"] = loadfx("vfx/zombie/dark_energy_burst");
   level._effect["zmb_desc_ice_falling"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_ice_falling");
   level._effect["zmb_desc_raven_feathers_pop"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_raven_feathers_pop");
-  level._effect["raven_fly"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_raven_flight");
+  level._effect["raven_fly"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_raven_flight");
   level._effect["zmb_desc_planetglow_blood_cmplt"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_planetglow_blood_cmplt");
   level._effect["zmb_desc_planetglow_death_cmplt"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_planetglow_death_cmplt");
   level._effect["zmb_desc_planetglow_moon_cmplt"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_planetglow_moon_cmplt");
@@ -107,6 +107,7 @@ main() {
   level._effect["zmb_death_scythe_forge_endstage"] = loadfx("vfx/zombie/rvn_weapons/zmb_death_scythe_forge_endstage");
   level._effect["zmb_impact_brick_sml"] = loadfx("vfx/rock/zmb_impact_brick_sml");
   level._effect["force_zombie_bubble"] = loadfx("vfx/zombie/prototype_fx/dlc4/force_zombie_bubble");
+
   level._effect["light_beacon_hardpoint_white"] = loadfx("vfx/lights/light_beacon_hardpoint_white");
   level._effect["tesla_gun_explosion"] = loadfx("vfx/explosion/tesla_gun_explosion");
   level._effect["zmb_tesla_blood_trail_geo"] = loadfx("vfx/trail/zmb_tesla_blood_trail_geo");
@@ -258,15 +259,20 @@ main() {
   level._effect["zmb_desc_fireflies_sml"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_fireflies_sml");
   level._effect["zmb_desc_chadni_pattern_02"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chadni_pattern_02");
   level._effect["zmb_desc_chadni_pattern_01"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chadni_pattern_01");
-  level._effect["test_effect"] = loadfx("vfx/test/test_fx");
-  level._effect["zmb_cart_charge_pnt"] = loadfx("vfx/map/mp_zombie_nest/zmb_cart_charge_pnt");
-  level._effect["zmb_jolts_out"] = loadfx("vfx/zombie/zmb_jolts_out");
+  level._effect["test_effect"] = LoadFX("vfx/test/test_fx");
+  level._effect["zmb_cart_charge_pnt"] = LoadFX("vfx/map/mp_zombie_nest/zmb_cart_charge_pnt");
+  level._effect["zmb_jolts_out"] = LoadFX("vfx/zombie/zmb_jolts_out");
   level._effect["zmb_dnk_geistkraftexplode"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_geistkraftexplode");
-  level._effect["zmf_descent_firewall"] = loadfx("vfx/zombie/prototype_fx/zmf_descent_firewall");
-  level._effect["zmf_descent_vision_blood_ready"] = loadfx("vfx/zombie/prototype_fx/zmf_descent_vision_blood_ready");
-  level._effect["zmb_desc_flame_wave"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_flame_wave_01");
-  level._effect["ground_impact"] = loadfx("vfx/zombie/zmb_ground_impact");
-  level._effect["zmb_scythe_zmb_blind"] = loadfx("vfx/zombie/prototype_fx/zmb_scythe_zmb_blind");
+
+  level._effect["zmf_descent_firewall"] = LoadFX("vfx/zombie/prototype_fx/zmf_descent_firewall");
+  level._effect["zmf_descent_vision_blood_ready"] = LoadFX("vfx/zombie/prototype_fx/zmf_descent_vision_blood_ready");
+
+  level._effect["zmb_desc_flame_wave"] = LoadFx("vfx/map/mp_zombie_descent/zmb_desc_flame_wave_01");
+
+  level._effect["ground_impact"] = LoadFX("vfx/zombie/zmb_ground_impact");
+
+  level._effect["zmb_scythe_zmb_blind"] = LoadFX("vfx/zombie/prototype_fx/zmb_scythe_zmb_blind");
+
   level._effect["zmb_spawn_concrete"] = loadfx("vfx/zombie/zmb_spawn_concrete");
   level._effect["zmb_spawn_water"] = loadfx("vfx/zombie/zmb_spawn_water");
   level._effect["zmb_spawn_sand"] = loadfx("vfx/zombie/zmb_spawn_sand");
@@ -275,47 +281,59 @@ main() {
   level._effect["zmb_spawn_blood"] = loadfx("vfx/zombie/zmb_spawn_blood");
   level._effect["zmb_spawn_blood_drip"] = loadfx("vfx/zombie/zmb_spawn_blood_drip");
   level._effect["zmb_spawn_snow"] = loadfx("vfx/zombie/zmb_spawn_snow");
+
   level._effect["zmb_corpse_eater_detonate"] = loadfx("vfx/zombie/zmb_corpse_eater_detonate");
-  level._effect["zmb_desc_radio_fixed"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_radio_fixed");
-  level._effect["tesla_gun_explosion"] = loadfx("vfx/explosion/tesla_gun_explosion");
-  level._effect["tesla_coil_active"] = loadfx("vfx/map/mp_lair/tesla_coil_active");
+
+  level._effect["zmb_desc_radio_fixed"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_radio_fixed");
+
+  level._effect["tesla_gun_explosion"] = LoadFX("vfx/explosion/tesla_gun_explosion");
+  level._effect["tesla_coil_active"] = LoadFX("vfx/map/mp_lair/tesla_coil_active");
+
   level._effect["fx_sunflare_zombie_descent_dlc4"] = loadfx("vfx/lensflare/dlc/fx_sunflare_zombie_descent_dlc4");
-  level._effect["dlc_zmb_dig02_hallucination_02"] = loadfx("vfx/map/mp_zombie_dig02/dlc_zmb_dig02_hallucination_02");
-  level._effect["zmb_desc_chladni_0_to_1"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_0_to_1");
-  level._effect["zmb_desc_chladni_1_lp"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_1_lp");
-  level._effect["zmb_desc_chladni_1_to_0"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_1_to_0");
-  level._effect["zmb_desc_chladni_1_to_3"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_1_to_3");
-  level._effect["zmb_desc_chladni_1_to_11"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_1_to_11");
-  level._effect["zmb_desc_chladni_3_lp"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_3_lp");
-  level._effect["zmb_desc_chladni_3_to_0"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_3_to_0");
-  level._effect["zmb_desc_chladni_3_to_5"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_3_to_5");
-  level._effect["zmb_desc_chladni_3_to_1"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_3_to_1");
-  level._effect["zmb_desc_chladni_5_lp"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_5_lp");
-  level._effect["zmb_desc_chladni_5_to_0"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_5_to_0");
-  level._effect["zmb_desc_chladni_5_to_7"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_5_to_7");
-  level._effect["zmb_desc_chladni_5_to_3"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_5_to_3");
-  level._effect["zmb_desc_chladni_7_lp"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_7_lp");
-  level._effect["zmb_desc_chladni_7_to_0"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_7_to_0");
-  level._effect["zmb_desc_chladni_7_to_8"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_7_to_8");
-  level._effect["zmb_desc_chladni_7_to_5"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_7_to_5");
-  level._effect["zmb_desc_chladni_8_lp"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_8_lp");
-  level._effect["zmb_desc_chladni_8_to_0"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_8_to_0");
-  level._effect["zmb_desc_chladni_8_to_9"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_8_to_9");
-  level._effect["zmb_desc_chladni_8_to_7"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_8_to_7");
-  level._effect["zmb_desc_chladni_9_lp"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_9_lp");
-  level._effect["zmb_desc_chladni_9_to_0"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_9_to_0");
-  level._effect["zmb_desc_chladni_9_to_11"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_9_to_11");
-  level._effect["zmb_desc_chladni_9_to_7"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_9_to_7");
-  level._effect["zmb_desc_chladni_11_lp"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_lp");
-  level._effect["zmb_desc_chladni_11_to_0"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_to_0");
-  level._effect["zmb_desc_chladni_11_to_1"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_to_1");
-  level._effect["zmb_desc_chladni_11_to_9"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_to_9");
-  level._effect["zmb_desc_chladni_success"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_success");
-  level._effect["moneyCloud"] = loadfx("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
-  level._effect["redGlow"] = loadfx("vfx/lights/red_dot_light_intense");
-  level._effect["greenGlow"] = loadfx("vfx/lights/green_dot_light");
-  level._effect["blueGlow"] = loadfx("vfx/lights/blue_dot_light");
-  level._effect["onFireLoop"] = loadfx("vfx/fire/zmb_on_fire_01");
-  level._effect["ee_lamp_fx"] = loadfx("vfx/map/mp_zombie_training/zmb_ee_lamp_glow");
-  level._effect["spikeTrap"] = loadfx("vfx/zombie/prototype_fx/zmb_med_spike_trap_on_descent");
+  level._effect["dlc_zmb_dig02_hallucination_02"] = LoadFX("vfx/map/mp_zombie_dig02/dlc_zmb_dig02_hallucination_02");
+
+  level._effect["zmb_desc_chladni_0_to_1"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_0_to_1");
+  level._effect["zmb_desc_chladni_1_lp"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_1_lp");
+  level._effect["zmb_desc_chladni_1_to_0"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_1_to_0");
+  level._effect["zmb_desc_chladni_1_to_3"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_1_to_3");
+  level._effect["zmb_desc_chladni_1_to_11"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_1_to_11");
+  level._effect["zmb_desc_chladni_3_lp"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_3_lp");
+  level._effect["zmb_desc_chladni_3_to_0"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_3_to_0");
+  level._effect["zmb_desc_chladni_3_to_5"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_3_to_5");
+  level._effect["zmb_desc_chladni_3_to_1"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_3_to_1");
+  level._effect["zmb_desc_chladni_5_lp"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_5_lp");
+  level._effect["zmb_desc_chladni_5_to_0"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_5_to_0");
+  level._effect["zmb_desc_chladni_5_to_7"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_5_to_7");
+  level._effect["zmb_desc_chladni_5_to_3"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_5_to_3");
+  level._effect["zmb_desc_chladni_7_lp"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_7_lp");
+  level._effect["zmb_desc_chladni_7_to_0"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_7_to_0");
+  level._effect["zmb_desc_chladni_7_to_8"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_7_to_8");
+  level._effect["zmb_desc_chladni_7_to_5"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_7_to_5");
+  level._effect["zmb_desc_chladni_8_lp"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_8_lp");
+  level._effect["zmb_desc_chladni_8_to_0"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_8_to_0");
+  level._effect["zmb_desc_chladni_8_to_9"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_8_to_9");
+  level._effect["zmb_desc_chladni_8_to_7"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_8_to_7");
+  level._effect["zmb_desc_chladni_9_lp"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_9_lp");
+  level._effect["zmb_desc_chladni_9_to_0"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_9_to_0");
+  level._effect["zmb_desc_chladni_9_to_11"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_9_to_11");
+  level._effect["zmb_desc_chladni_9_to_7"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_9_to_7");
+  level._effect["zmb_desc_chladni_11_lp"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_lp");
+  level._effect["zmb_desc_chladni_11_to_0"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_to_0");
+  level._effect["zmb_desc_chladni_11_to_1"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_to_1");
+  level._effect["zmb_desc_chladni_11_to_9"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_to_9");
+  level._effect["zmb_desc_chladni_success"] = LoadFX("vfx/map/mp_zombie_descent/zmb_desc_chladni_success");
+
+  level._effect["moneyCloud"] = LoadFX("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
+
+  level._effect["redGlow"] = Loadfx("vfx/lights/red_dot_light_intense");
+  level._effect["greenGlow"] = Loadfx("vfx/lights/green_dot_light");
+  level._effect["blueGlow"] = Loadfx("vfx/lights/blue_dot_light");
+  level._effect["onFireLoop"] = Loadfx("vfx/fire/zmb_on_fire_01");
+
+  level._effect["ee_lamp_fx"] = LoadFX("vfx/map/mp_zombie_training/zmb_ee_lamp_glow");
+
+  level._effect["spikeTrap"] = LoadFX("vfx/zombie/prototype_fx/zmb_med_spike_trap_on_descent");
+
+  if(getDvar("3508") != "1")
+    maps\createfx\mp_zombie_descent_fx::main();
 }

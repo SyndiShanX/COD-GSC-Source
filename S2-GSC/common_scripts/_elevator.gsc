@@ -1,872 +1,890 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/****************************************
+ * Decompiled and Edited by SyndiShanX
  * Script: common_scripts\_elevator.gsc
-*********************************************/
+****************************************/
 
 init() {
   if(getDvar("scr_elevator_disabled") == "1") {
     return;
   }
+  var_0 = getEntArray("elevator_group", "targetname");
 
-  var_00 = getEntArray("elevator_group", "targetname");
-  if(!isDefined(var_00)) {
+  if(!isDefined(var_0)) {
     return;
   }
-
-  if(!var_00.size) {
+  if(!var_0.size) {
     return;
   }
-
   precachestring(&"ELEVATOR_CALL_HINT");
   precachestring(&"ELEVATOR_USE_HINT");
   precachestring(&"ELEVATOR_FLOOR_SELECT_HINT");
   precachemenu("elevator_floor_selector");
-  thread func_35CF();
-  level.var_35D1 = [];
-  level.var_35B8 = func_35C0("scr_elevator_callbutton_link_v", "96");
-  level.var_35B7 = func_35C0("scr_elevator_callbutton_link_h", "256");
-  func_1D07();
-  func_758A();
-  func_35B6();
-  if(!level.var_35D1.size) {
+  thread _id_35CF();
+  level._id_35D1 = [];
+  level._id_35B8 = _id_35C0("scr_elevator_callbutton_link_v", "96");
+  level._id_35B7 = _id_35C0("scr_elevator_callbutton_link_h", "256");
+  _id_1D07();
+  _id_758A();
+  _id_35B6();
+
+  if(!level._id_35D1.size) {
     return;
   }
-
-  foreach(var_02 in level.var_35D1) {
-    var_02 thread func_35CE();
-    var_02 thread func_35CB();
+  foreach(var_2 in level._id_35D1) {
+    var_2 thread _id_35CE();
+    var_2 thread _id_35CB();
   }
 
-  thread func_35BA();
+  thread _id_35BA();
 }
 
-func_35CF() {
+_id_35CF() {
   for(;;) {
-    level.var_35B4 = func_35BF("scr_elevator_accel", "0.2");
-    level.var_35BB = func_35BF("scr_elevator_decel", "0.2");
-    level.var_35C8 = func_35C0("scr_elevator_music", "1");
-    level.var_35CC = func_35C0("scr_elevator_speed", "96");
-    level.var_35C1 = func_35C0("scr_elevator_innerdoorspeed", "14");
-    level.var_35C9 = func_35C0("scr_elevator_outterdoorspeed", "16");
-    level.var_35CA = func_35C0("scr_elevator_return", "0");
-    level.var_35D0 = func_35C0("scr_elevator_waittime", "6");
-    level.var_35B5 = func_35C0("scr_elevator_aggressive_call", "0");
-    level.var_35BA = func_35C0("debug_elevator", "0");
-    if(common_scripts\utility::issp()) {
-      level.var_35C6 = func_35C0("scr_elevator_motion_detection", "0");
-    } else {
-      level.var_35C6 = func_35C0("scr_elevator_motion_detection", "1");
-    }
+    level._id_35B4 = _id_35BF("scr_elevator_accel", "0.2");
+    level._id_35BB = _id_35BF("scr_elevator_decel", "0.2");
+    level._id_35C8 = _id_35C0("scr_elevator_music", "1");
+    level._id_35CC = _id_35C0("scr_elevator_speed", "96");
+    level._id_35C1 = _id_35C0("scr_elevator_innerdoorspeed", "14");
+    level._id_35C9 = _id_35C0("scr_elevator_outterdoorspeed", "16");
+    level._id_35CA = _id_35C0("scr_elevator_return", "0");
+    level._id_35D0 = _id_35C0("scr_elevator_waittime", "6");
+    level._id_35B5 = _id_35C0("scr_elevator_aggressive_call", "0");
+    level._id_35BA = _id_35C0("debug_elevator", "0");
 
-    wait(1);
+    if(common_scripts\utility::issp())
+      level._id_35C6 = _id_35C0("scr_elevator_motion_detection", "0");
+    else
+      level._id_35C6 = _id_35C0("scr_elevator_motion_detection", "1");
+
+    wait 1;
   }
 }
 
-func_35CE() {
-  func_35BE("[A]");
+_id_35CE() {
+  _id_35BE("[A]");
 }
 
-func_35B6() {
-  foreach(var_01 in level.var_35B9) {
-    var_01 thread func_62ED();
-  }
+_id_35B6() {
+  foreach(var_1 in level._id_35B9)
+  var_1 thread _id_62ED();
 }
 
-func_3D88(param_00) {
+_id_3D88(var_0) {
   self endon("elevator_moving");
-  self.var_3D88 = 0;
-  self.var_6CC6 = undefined;
+  self._id_3D88 = 0;
+  self._id_6CC6 = undefined;
+
   for(;;) {
-    param_00 waittill("trigger", var_01);
-    self.var_3D88 = 1;
-    self.var_6CC6 = var_01;
+    var_0 waittill("trigger", var_1);
+    self._id_3D88 = 1;
+    self._id_6CC6 = var_1;
     break;
   }
 
   self notify("floor_override");
 }
 
-func_35BE(param_00) {
-  self.var_3876 = param_00;
-  var_01 = func_41C7();
-  var_02 = func_41C8();
-  for(;;) {
-    if(self.var_3876 == "[A]") {
-      if(level.var_35CA && func_4128() != func_41DB()) {
-        self.var_64D2 = func_41DB();
-        thread func_3D88(var_02);
-        func_A752("floor_override", level.var_35D0);
-        if(self.var_3D88 && isDefined(self.var_6CC6) && isPlayer(self.var_6CC6)) {
-          func_4199(self.var_6CC6);
-        }
+_id_35BE(var_0) {
+  self._id_3876 = var_0;
+  var_1 = _id_41C7();
+  var_2 = _id_41C8();
 
-        self.var_3876 = "[B]";
+  for(;;) {
+    if(self._id_3876 == "[A]") {
+      if(level._id_35CA && _id_4128() != _id_41DB()) {
+        self._id_64D2 = _id_41DB();
+        thread _id_3D88(var_2);
+        _id_A752("floor_override", level._id_35D0);
+
+        if(self._id_3D88 && isDefined(self._id_6CC6) && isPlayer(self._id_6CC6))
+          _id_4199(self._id_6CC6);
+
+        self._id_3876 = "[B]";
         continue;
       }
 
       for(;;) {
-        if(self.var_64D2 == func_4128()) {
-          var_03 = var_02 func_2FC7("trigger");
-        } else {
-          var_03 = "elevator_called";
-        }
+        if(self._id_64D2 == _id_4128())
+          var_3 = var_2 _id_2FC7("trigger");
+        else
+          var_3 = "elevator_called";
 
-        if(isstring(var_03) && var_03 == "elevator_called" && self.var_64D2 != func_4128()) {
-          self.var_3876 = "[B]";
+        if(_func_031(var_3) && var_3 == "elevator_called" && self._id_64D2 != _id_4128()) {
+          self._id_3876 = "[B]";
           break;
         }
 
-        if(isDefined(var_03) && isPlayer(var_03) && isalive(var_03)) {
-          var_04 = var_03 istouching(var_02);
-          var_05 = isDefined(var_02.var_6464) && var_03 istouching(var_02.var_6464);
-          var_06 = var_04 || var_05;
-          if(var_06) {
-            var_07 = var_03;
-            func_4199(var_07);
-            if(self.var_64D2 == func_4128()) {
+        if(isDefined(var_3) && isPlayer(var_3) && isalive(var_3)) {
+          var_4 = var_3 istouching(var_2);
+          var_5 = isDefined(var_2._id_6464) && var_3 istouching(var_2._id_6464);
+          var_6 = var_4 || var_5;
+
+          if(var_6) {
+            var_7 = var_3;
+            _id_4199(var_7);
+
+            if(self._id_64D2 == _id_4128()) {
               continue;
             }
-
-            self.var_3876 = "[B]";
+            self._id_3876 = "[B]";
             break;
           }
         }
       }
     }
 
-    if(self.var_3876 == "[B]") {
-      thread func_35C2(var_01);
-      var_08 = func_4128();
-      thread func_2437();
-      thread func_2439(var_08);
-      common_scripts\utility::waittill_any("closed_inner_doors", "interrupted");
-      if(self.var_35C3) {
-        self.var_3876 = "[C]";
+    if(self._id_3876 == "[B]") {
+      thread _id_35C2(var_1);
+      var_8 = _id_4128();
+      thread _id_2437();
+      thread _id_2439(var_8);
+      common_scripts\utility::_id_A70A("closed_inner_doors", "interrupted");
+
+      if(self._id_35C3) {
+        self._id_3876 = "[C]";
         continue;
       }
 
-      self.var_3876 = "[D]";
+      self._id_3876 = "[D]";
       continue;
     }
 
-    if(self.var_3876 == "[C]") {
-      var_08 = func_4128();
-      thread func_6BEC();
-      thread func_6BEE(var_08);
-      self waittill("opened_floor_" + var_08 + "_outer_doors");
-      if(self.var_35C3) {
-        self.var_3876 = "[B]";
+    if(self._id_3876 == "[C]") {
+      var_8 = _id_4128();
+      thread _id_6BEC();
+      thread _id_6BEE(var_8);
+      self waittill("opened_floor_" + var_8 + "_outer_doors");
+
+      if(self._id_35C3) {
+        self._id_3876 = "[B]";
         continue;
       }
 
-      self.var_3876 = "[A]";
+      self._id_3876 = "[A]";
       continue;
     }
 
-    if(self.var_3876 == "[D]") {
-      if(self.var_64D2 != func_4128()) {
-        thread func_35C7(self.var_64D2);
+    if(self._id_3876 == "[D]") {
+      if(self._id_64D2 != _id_4128()) {
+        thread _id_35C7(self._id_64D2);
         self waittill("elevator_moved");
       }
 
-      self.var_3876 = "[C]";
+      self._id_3876 = "[C]";
       continue;
     }
   }
 }
 
-func_62ED() {
+_id_62ED() {
   for(;;) {
-    var_00 = func_2FC7("trigger");
-    var_01 = undefined;
-    var_02 = [];
-    foreach(var_05, var_04 in self.var_3532) {
-      var_01 = var_05;
-      var_02 = var_04;
+    var_0 = _id_2FC7("trigger");
+    var_1 = undefined;
+    var_2 = [];
+
+    foreach(var_5, var_4 in self._id_3532) {
+      var_1 = var_5;
+      var_2 = var_4;
     }
 
-    var_06 = 0;
-    foreach(var_08 in var_02) {
-      var_09 = var_08 func_35BD();
-      if(!level.var_35B5 && !var_09) {
-        if(var_08 func_4128() == var_01) {
-          var_06 = 1;
-          var_02 = [];
+    var_6 = 0;
+
+    foreach(var_8 in var_2) {
+      var_9 = var_8 _id_35BD();
+
+      if(!level._id_35B5 && !var_9) {
+        if(var_8 _id_4128() == var_1) {
+          var_6 = 1;
+          var_2 = [];
           break;
         }
       }
     }
 
-    foreach(var_08 in var_02) {
-      if(var_08.var_3876 == "[A]") {
-        var_08 func_1E5B(var_01);
-        var_06 = 1;
-        if(!level.var_35B5) {
+    foreach(var_8 in var_2) {
+      if(var_8._id_3876 == "[A]") {
+        var_8 _id_1E5B(var_1);
+        var_6 = 1;
+
+        if(!level._id_35B5) {
           break;
         }
       }
     }
 
-    if(var_06) {
+    if(var_6)
       self playSound("elev_bell_ding");
-    }
   }
 }
 
-func_1E5B(param_00) {
-  self.var_64D2 = param_00;
-  var_01 = func_41C8();
-  var_01 notify("trigger", "elevator_called");
-  if(level.var_35C6) {
-    var_01.var_6464 notify("trigger", "elevator_called");
-  }
+_id_1E5B(var_0) {
+  self._id_64D2 = var_0;
+  var_1 = _id_41C8();
+  var_1 notify("trigger", "elevator_called");
+
+  if(level._id_35C6)
+    var_1._id_6464 notify("trigger", "elevator_called");
 }
 
-func_4199(param_00) {
-  var_01 = func_4271();
-  if(var_01.size == 2) {
-    var_02 = func_4128();
-    self.var_64D2 = !var_02;
+_id_4199(var_0) {
+  var_1 = _id_4271();
+
+  if(var_1.size == 2) {
+    var_2 = _id_4128();
+    self._id_64D2 = !var_2;
     return;
   }
 
-  var_01 openpopupmenu("elevator_floor_selector");
-  var_01 setclientdvar("player_current_floor", func_4128());
+  var_0 _meth_832A("elevator_floor_selector");
+  var_0 setclientdvar("player_current_floor", _id_4128());
+
   for(;;) {
-    var_01 waittill("menuresponse", var_03, var_04);
-    if(var_03 == "elevator_floor_selector") {
-      if(var_04 != "none") {
-        self.var_64D2 = int(var_04);
-      }
+    var_0 waittill("menuresponse", var_3, var_4);
+
+    if(var_3 == "elevator_floor_selector") {
+      if(var_4 != "none")
+        self._id_64D2 = int(var_4);
 
       break;
     }
   }
 }
 
-func_35C2(param_00) {
+_id_35C2(var_0) {
   self notify("interrupt_watch");
   level notify("elevator_interior_button_pressed");
   self endon("interrupt_watch");
   self endon("elevator_moving");
-  self.var_35C3 = 0;
-  wait(0.5);
-  param_00 waittill("trigger", var_01);
+  self._id_35C3 = 0;
+  wait 0.5;
+  var_0 waittill("trigger", var_1);
   self notify("interrupted");
-  self.var_35C3 = 1;
+  self._id_35C3 = 1;
 }
 
-func_35BD() {
-  var_00 = func_41CB();
-  var_01 = var_00.origin;
-  var_02 = 1;
-  foreach(var_06, var_04 in func_4271()) {
-    var_05 = self.var_3532["floor" + var_06 + "_pos"];
-    if(var_01 == var_05) {
-      self.var_3532["current_floor"] = var_06;
-      var_02 = 0;
+_id_35BD() {
+  var_0 = _id_41CB();
+  var_1 = var_0.origin;
+  var_2 = 1;
+
+  foreach(var_6, var_4 in _id_4271()) {
+    var_5 = self._id_3532["floor" + var_6 + "_pos"];
+
+    if(var_1 == var_5) {
+      self._id_3532["current_floor"] = var_6;
+      var_2 = 0;
     }
   }
 
-  return var_02;
+  return var_2;
 }
 
-func_35CB() {
-  var_00 = func_41CD();
-  if(level.var_35C8 && isDefined(var_00)) {
-    var_00 method_861D("elev_musak_loop");
+_id_35CB() {
+  var_0 = _id_41CD();
+
+  if(level._id_35C8 && isDefined(var_0))
+    var_0 _meth_861D("elev_musak_loop");
+
+  thread _id_5DCD("closing_inner_doors");
+  thread _id_5DCD("opening_inner_doors");
+  thread _id_5DCD("closed_inner_doors");
+  thread _id_5DCD("opened_inner_doors");
+
+  foreach(var_3, var_2 in _id_4271()) {
+    thread _id_5DCD("closing_floor_" + var_3 + "_outer_doors");
+    thread _id_5DCD("opening_floor_" + var_3 + "_outer_doors");
+    thread _id_5DCD("closed_floor_" + var_3 + "_outer_doors");
+    thread _id_5DCD("opened_floor_" + var_3 + "_outer_doors");
   }
 
-  thread func_5DCD("closing_inner_doors");
-  thread func_5DCD("opening_inner_doors");
-  thread func_5DCD("closed_inner_doors");
-  thread func_5DCD("opened_inner_doors");
-  foreach(var_03, var_02 in func_4271()) {
-    thread func_5DCD("closing_floor_" + var_03 + "_outer_doors");
-    thread func_5DCD("opening_floor_" + var_03 + "_outer_doors");
-    thread func_5DCD("closed_floor_" + var_03 + "_outer_doors");
-    thread func_5DCD("opened_floor_" + var_03 + "_outer_doors");
-  }
-
-  thread func_5DCD("interrupted");
-  thread func_5DCD("elevator_moving");
-  thread func_5DCD("elevator_moved");
+  thread _id_5DCD("interrupted");
+  thread _id_5DCD("elevator_moving");
+  thread _id_5DCD("elevator_moved");
 }
 
-func_5DCD(param_00) {
+_id_5DCD(var_0) {
   for(;;) {
-    self waittill(param_00);
-    var_01 = func_41CB();
-    if(issubstr(param_00, "closing_")) {
-      var_01 playSound("elev_door_close");
+    self waittill(var_0);
+    var_1 = _id_41CB();
+
+    if(issubstr(var_0, "closing_"))
+      var_1 playSound("elev_door_close");
+
+    if(issubstr(var_0, "opening_"))
+      var_1 playSound("elev_door_open");
+
+    if(var_0 == "elevator_moving") {
+      var_1 playSound("elev_run_start");
+      var_1 _meth_861D("elev_run_loop");
     }
 
-    if(issubstr(param_00, "opening_")) {
-      var_01 playSound("elev_door_open");
-    }
+    if(var_0 == "interrupted")
+      var_1 playSound("elev_door_interupt");
 
-    if(param_00 == "elevator_moving") {
-      var_01 playSound("elev_run_start");
-      var_01 method_861D("elev_run_loop");
-    }
-
-    if(param_00 == "interrupted") {
-      var_01 playSound("elev_door_interupt");
-    }
-
-    if(param_00 == "elevator_moved") {
-      var_01 stoploopsound("elev_run_loop");
-      var_01 playSound("elev_run_end");
-      var_01 playSound("elev_bell_ding");
+    if(var_0 == "elevator_moved") {
+      var_1 _meth_8612("elev_run_loop");
+      var_1 playSound("elev_run_end");
+      var_1 playSound("elev_bell_ding");
     }
   }
 }
 
-func_758A() {
-  foreach(var_01 in level.var_35D1) {
-    var_01.var_64D2 = var_01 func_4128();
-    foreach(var_04, var_03 in var_01 func_4271()) {
-      if(var_01 func_4128() != var_04) {
-        var_01 thread func_2439(var_04);
-      }
+_id_758A() {
+  foreach(var_5, var_1 in level._id_35D1) {
+    var_1._id_64D2 = var_1 _id_4128();
+
+    foreach(var_4, var_3 in var_1 _id_4271()) {
+      if(var_1 _id_4128() != var_4)
+        var_1 thread _id_2439(var_4);
     }
   }
 }
 
-func_35C7(param_00) {
+_id_35C7(var_0) {
   self notify("elevator_moving");
   self endon("elevator_moving");
-  var_01 = func_41CB();
-  var_02 = self.var_3532["floor" + param_00 + "_pos"] - var_01.origin;
-  var_03 = level.var_35CC;
-  var_04 = abs(distance(self.var_3532["floor" + param_00 + "_pos"], var_01.origin));
-  var_05 = var_04 / var_03;
-  var_01 moveTo(var_01.origin + var_02, var_05, var_05 * level.var_35B4, var_05 * level.var_35BB);
-  foreach(var_07 in func_41C5()) {
-    var_08 = var_07.origin + var_02;
-    if(!issubstr(var_07.classname, "trigger_")) {
-      var_07 moveTo(var_08, var_05, var_05 * level.var_35B4, var_05 * level.var_35BB);
+  var_1 = _id_41CB();
+  var_2 = self._id_3532["floor" + var_0 + "_pos"] - var_1.origin;
+  var_3 = level._id_35CC;
+  var_4 = _func_0AE(distance(self._id_3532["floor" + var_0 + "_pos"], var_1.origin));
+  var_5 = var_4 / var_3;
+  var_1 _meth_82B1(var_1.origin + var_2, var_5, var_5 * level._id_35B4, var_5 * level._id_35BB);
+
+  foreach(var_7 in _id_41C5()) {
+    var_8 = var_7.origin + var_2;
+
+    if(!issubstr(var_7.classname, "trigger_")) {
+      var_7 _meth_82B1(var_8, var_5, var_5 * level._id_35B4, var_5 * level._id_35BB);
       continue;
     }
 
-    var_07.origin = var_08;
+    var_7.origin = var_8;
   }
 
-  func_A73D(var_01, self.var_3532["floor" + param_00 + "_pos"]);
+  _id_A73D(var_1, self._id_3532["floor" + var_0 + "_pos"]);
   self notify("elevator_moved");
 }
 
-func_2437() {
+_id_2437() {
   self notify("closing_inner_doors");
   self endon("closing_inner_doors");
   self endon("opening_inner_doors");
-  var_00 = func_41C9();
-  var_01 = func_41CF();
-  var_02 = func_41CB();
-  var_03 = func_41C6();
-  var_04 = (var_03[0], var_03[1], var_02.origin[2]);
-  var_05 = level.var_35C1;
-  var_06 = abs(distance(var_00.origin, var_04));
-  var_07 = var_06 / var_05;
-  var_00 moveTo(var_04, var_07, var_07 * 0.1, var_07 * 0.25);
-  var_01 moveTo(var_04, var_07, var_07 * 0.1, var_07 * 0.25);
-  func_A73D(var_00, var_04, var_01, var_04);
+  var_0 = _id_41C9();
+  var_1 = _id_41CF();
+  var_2 = _id_41CB();
+  var_3 = _id_41C6();
+  var_4 = (var_3[0], var_3[1], var_2.origin[2]);
+  var_5 = level._id_35C1;
+  var_6 = _func_0AE(distance(var_0.origin, var_4));
+  var_7 = var_6 / var_5;
+  var_0 _meth_82B1(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_1 _meth_82B1(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  _id_A73D(var_0, var_4, var_1, var_4);
   self notify("closed_inner_doors");
 }
 
-func_6BEC() {
+_id_6BEC() {
   self notify("opening_inner_doors");
   self endon("opening_inner_doors");
-  var_00 = func_41C9();
-  var_01 = func_41CF();
-  var_02 = func_41CB();
-  var_03 = func_41CA();
-  var_04 = func_41D0();
-  var_05 = (var_03[0], var_03[1], var_02.origin[2]);
-  var_06 = (var_04[0], var_04[1], var_02.origin[2]);
-  var_07 = level.var_35C1;
-  var_08 = abs(distance(var_05, var_06) * 0.5);
-  var_09 = var_08 / var_07 * 0.5;
-  var_00 moveTo(var_05, var_09, var_09 * 0.1, var_09 * 0.25);
-  var_01 moveTo(var_06, var_09, var_09 * 0.1, var_09 * 0.25);
-  func_A73D(var_00, var_05, var_01, var_06);
+  var_0 = _id_41C9();
+  var_1 = _id_41CF();
+  var_2 = _id_41CB();
+  var_3 = _id_41CA();
+  var_4 = _id_41D0();
+  var_5 = (var_3[0], var_3[1], var_2.origin[2]);
+  var_6 = (var_4[0], var_4[1], var_2.origin[2]);
+  var_7 = level._id_35C1;
+  var_8 = _func_0AE(distance(var_5, var_6) * 0.5);
+  var_9 = var_8 / var_7 * 0.5;
+  var_0 _meth_82B1(var_5, var_9, var_9 * 0.1, var_9 * 0.25);
+  var_1 _meth_82B1(var_6, var_9, var_9 * 0.1, var_9 * 0.25);
+  _id_A73D(var_0, var_5, var_1, var_6);
   self notify("opened_inner_doors");
 }
 
-func_2439(param_00) {
-  self notify("closing_floor_" + param_00 + "_outer_doors");
-  self endon("closing_floor_" + param_00 + "_outer_doors");
-  self endon("opening_floor_" + param_00 + "_outer_doors");
-  var_01 = func_4272(param_00);
-  var_02 = func_4274(param_00);
-  var_03 = func_4273(param_00);
-  var_04 = func_426F(param_00);
-  var_05 = level.var_35C9;
-  var_06 = abs(distance(var_03, var_04));
-  var_07 = var_06 / var_05;
-  var_01 moveTo(var_04, var_07, var_07 * 0.1, var_07 * 0.25);
-  var_02 moveTo(var_04, var_07, var_07 * 0.1, var_07 * 0.25);
-  func_A73D(var_01, var_04, var_02, var_04);
-  self notify("closed_floor_" + param_00 + "_outer_doors");
+_id_2439(var_0) {
+  self notify("closing_floor_" + var_0 + "_outer_doors");
+  self endon("closing_floor_" + var_0 + "_outer_doors");
+  self endon("opening_floor_" + var_0 + "_outer_doors");
+  var_1 = _id_4272(var_0);
+  var_2 = _id_4274(var_0);
+  var_3 = _id_4273(var_0);
+  var_4 = _id_426F(var_0);
+  var_5 = level._id_35C9;
+  var_6 = _func_0AE(distance(var_3, var_4));
+  var_7 = var_6 / var_5;
+  var_1 _meth_82B1(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_2 _meth_82B1(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  _id_A73D(var_1, var_4, var_2, var_4);
+  self notify("closed_floor_" + var_0 + "_outer_doors");
 }
 
-func_6BEE(param_00) {
+_id_6BEE(var_0) {
   level notify("elevator_doors_opening");
-  self notify("opening_floor_" + param_00 + "_outer_doors");
-  self endon("opening_floor_" + param_00 + "_outer_doors");
-  var_01 = func_4272(param_00);
-  var_02 = func_4274(param_00);
-  var_03 = func_4273(param_00);
-  var_04 = func_4275(param_00);
-  var_05 = func_426F(param_00);
-  var_06 = level.var_35C9;
-  var_07 = abs(distance(var_03, var_05));
-  var_08 = var_07 / var_06 * 0.5;
-  var_01 moveTo(var_03, var_08, var_08 * 0.1, var_08 * 0.25);
-  var_02 moveTo(var_04, var_08, var_08 * 0.1, var_08 * 0.25);
-  func_A73D(var_01, var_03, var_02, var_04);
-  self notify("opened_floor_" + param_00 + "_outer_doors");
+  self notify("opening_floor_" + var_0 + "_outer_doors");
+  self endon("opening_floor_" + var_0 + "_outer_doors");
+  var_1 = _id_4272(var_0);
+  var_2 = _id_4274(var_0);
+  var_3 = _id_4273(var_0);
+  var_4 = _id_4275(var_0);
+  var_5 = _id_426F(var_0);
+  var_6 = level._id_35C9;
+  var_7 = _func_0AE(distance(var_3, var_5));
+  var_8 = var_7 / var_6 * 0.5;
+  var_1 _meth_82B1(var_3, var_8, var_8 * 0.1, var_8 * 0.25);
+  var_2 _meth_82B1(var_4, var_8, var_8 * 0.1, var_8 * 0.25);
+  _id_A73D(var_1, var_3, var_2, var_4);
+  self notify("opened_floor_" + var_0 + "_outer_doors");
 }
 
-func_1D07() {
-  var_00 = getEntArray("elevator_group", "targetname");
-  var_01 = getEntArray("elevator_housing", "targetname");
-  var_02 = getEntArray("elevator_doorset", "targetname");
-  foreach(var_04 in var_00) {
-    var_05 = getEnt(var_04.target, "targetname");
-    var_06 = [];
-    var_06[0] = min(var_04.origin[0], var_05.origin[0]);
-    var_06[1] = max(var_04.origin[0], var_05.origin[0]);
-    var_06[2] = min(var_04.origin[1], var_05.origin[1]);
-    var_06[3] = max(var_04.origin[1], var_05.origin[1]);
-    var_07 = spawnStruct();
-    var_07.var_3532["id"] = level.var_35D1.size;
-    var_07.var_3532["housing"] = [];
-    var_07.var_3532["housing"]["mainframe"] = [];
-    foreach(var_09 in var_01) {
-      if(var_09 func_5719(var_06)) {
-        var_07.var_3532["housing"]["mainframe"][var_07.var_3532["housing"]["mainframe"].size] = var_09;
-        if(var_09.classname == "script_model") {
+_id_1D07() {
+  var_0 = getEntArray("elevator_group", "targetname");
+  var_1 = getEntArray("elevator_housing", "targetname");
+  var_2 = getEntArray("elevator_doorset", "targetname");
+
+  foreach(var_4 in var_0) {
+    var_5 = _func_18E(var_4.target, "targetname");
+    var_6 = [];
+    var_6[0] = _func_0AF(var_4.origin[0], var_5.origin[0]);
+    var_6[1] = max(var_4.origin[0], var_5.origin[0]);
+    var_6[2] = _func_0AF(var_4.origin[1], var_5.origin[1]);
+    var_6[3] = max(var_4.origin[1], var_5.origin[1]);
+    var_7 = spawnStruct();
+    var_7._id_3532["id"] = level._id_35D1.size;
+    var_7._id_3532["housing"] = [];
+    var_7._id_3532["housing"]["mainframe"] = [];
+
+    foreach(var_9 in var_1) {
+      if(var_9 _id_5719(var_6)) {
+        var_7._id_3532["housing"]["mainframe"][var_7._id_3532["housing"]["mainframe"].size] = var_9;
+
+        if(var_9.classname == "script_model") {
           continue;
         }
-
-        if(var_09.code_classname == "light") {
+        if(var_9._id_003B == "light") {
           continue;
         }
-
-        var_0A = getEnt(var_09.target, "targetname");
-        var_07.var_3532["housing"]["left_door"] = var_0A;
-        var_07.var_3532["housing"]["left_door_opened_pos"] = var_0A.origin;
-        var_0B = getEnt(var_0A.target, "targetname");
-        var_07.var_3532["housing"]["right_door"] = var_0B;
-        var_07.var_3532["housing"]["right_door_opened_pos"] = var_0B.origin;
-        var_0C = var_0A.origin - var_0B.origin * (0.5, 0.5, 0.5) + var_0B.origin;
-        var_07.var_3532["housing"]["door_closed_pos"] = var_0C;
-        var_0D = getEnt(var_0B.target, "targetname");
-        var_07.var_3532["housing"]["door_trigger"] = var_0D;
-        var_0E = getEnt(var_0D.target, "targetname");
-        var_07.var_3532["housing"]["inside_trigger"] = var_0E;
-        var_0E func_5FA7();
-        var_0E.var_6464 = spawn("trigger_radius", var_09.origin, 0, 64, 128);
+        var_10 = _func_18E(var_9.target, "targetname");
+        var_7._id_3532["housing"]["left_door"] = var_10;
+        var_7._id_3532["housing"]["left_door_opened_pos"] = var_10.origin;
+        var_11 = _func_18E(var_10.target, "targetname");
+        var_7._id_3532["housing"]["right_door"] = var_11;
+        var_7._id_3532["housing"]["right_door_opened_pos"] = var_11.origin;
+        var_12 = (var_10.origin - var_11.origin) * (0.5, 0.5, 0.5) + var_11.origin;
+        var_7._id_3532["housing"]["door_closed_pos"] = var_12;
+        var_13 = _func_18E(var_11.target, "targetname");
+        var_7._id_3532["housing"]["door_trigger"] = var_13;
+        var_14 = _func_18E(var_13.target, "targetname");
+        var_7._id_3532["housing"]["inside_trigger"] = var_14;
+        var_14 _id_5FA7();
+        var_14._id_6464 = spawn("trigger_radius", var_9.origin, 0, 64, 128);
       }
     }
 
-    var_07.var_3532["outer_doorset"] = [];
-    foreach(var_11 in var_02) {
-      if(var_11 func_5719(var_06)) {
-        var_12 = isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "closed_for_lighting";
-        var_13 = var_07.var_3532["outer_doorset"].size;
-        var_07.var_3532["outer_doorset"][var_13] = [];
-        var_07.var_3532["outer_doorset"][var_13]["door_closed_pos"] = var_11.origin;
-        var_14 = getEnt(var_11.target, "targetname");
-        var_07.var_3532["outer_doorset"][var_13]["left_door"] = var_14;
-        var_07.var_3532["outer_doorset"][var_13]["left_door_opened_pos"] = var_14.origin;
-        var_15 = getEnt(var_14.target, "targetname");
-        var_07.var_3532["outer_doorset"][var_13]["right_door"] = var_15;
-        var_07.var_3532["outer_doorset"][var_13]["right_door_opened_pos"] = var_15.origin;
-        if(var_12) {
-          var_16 = var_11.origin - var_14.origin;
-          var_11.origin = var_14.origin;
-          var_14.origin = var_14.origin + var_16;
-          var_15.origin = var_15.origin - var_16;
-          var_07.var_3532["outer_doorset"][var_13]["door_closed_pos"] = var_11.origin;
-          var_07.var_3532["outer_doorset"][var_13]["left_door_opened_pos"] = var_14.origin;
-          var_07.var_3532["outer_doorset"][var_13]["right_door_opened_pos"] = var_15.origin;
+    var_7._id_3532["outer_doorset"] = [];
+
+    foreach(var_17 in var_2) {
+      if(var_17 _id_5719(var_6)) {
+        var_18 = isDefined(var_17._id_0165) && var_17._id_0165 == "closed_for_lighting";
+        var_19 = var_7._id_3532["outer_doorset"].size;
+        var_7._id_3532["outer_doorset"][var_19] = [];
+        var_7._id_3532["outer_doorset"][var_19]["door_closed_pos"] = var_17.origin;
+        var_20 = _func_18E(var_17.target, "targetname");
+        var_7._id_3532["outer_doorset"][var_19]["left_door"] = var_20;
+        var_7._id_3532["outer_doorset"][var_19]["left_door_opened_pos"] = var_20.origin;
+        var_21 = _func_18E(var_20.target, "targetname");
+        var_7._id_3532["outer_doorset"][var_19]["right_door"] = var_21;
+        var_7._id_3532["outer_doorset"][var_19]["right_door_opened_pos"] = var_21.origin;
+
+        if(var_18) {
+          var_22 = var_17.origin - var_20.origin;
+          var_17.origin = var_20.origin;
+          var_20.origin = var_20.origin + var_22;
+          var_21.origin = var_21.origin - var_22;
+          var_7._id_3532["outer_doorset"][var_19]["door_closed_pos"] = var_17.origin;
+          var_7._id_3532["outer_doorset"][var_19]["left_door_opened_pos"] = var_20.origin;
+          var_7._id_3532["outer_doorset"][var_19]["right_door_opened_pos"] = var_21.origin;
         }
       }
     }
 
-    for(var_18 = 0; var_18 < var_07.var_3532["outer_doorset"].size - 1; var_18++) {
-      for(var_19 = 0; var_19 < var_07.var_3532["outer_doorset"].size - 1 - var_18; var_19++) {
-        if(var_07.var_3532["outer_doorset"][var_19 + 1]["door_closed_pos"][2] < var_07.var_3532["outer_doorset"][var_19]["door_closed_pos"][2]) {
-          var_1A = var_07.var_3532["outer_doorset"][var_19]["left_door"];
-          var_1B = var_07.var_3532["outer_doorset"][var_19]["left_door_opened_pos"];
-          var_1C = var_07.var_3532["outer_doorset"][var_19]["right_door"];
-          var_1D = var_07.var_3532["outer_doorset"][var_19]["right_door_opened_pos"];
-          var_1E = var_07.var_3532["outer_doorset"][var_19]["door_closed_pos"];
-          var_07.var_3532["outer_doorset"][var_19]["left_door"] = var_07.var_3532["outer_doorset"][var_19 + 1]["left_door"];
-          var_07.var_3532["outer_doorset"][var_19]["left_door_opened_pos"] = var_07.var_3532["outer_doorset"][var_19 + 1]["left_door_opened_pos"];
-          var_07.var_3532["outer_doorset"][var_19]["right_door"] = var_07.var_3532["outer_doorset"][var_19 + 1]["right_door"];
-          var_07.var_3532["outer_doorset"][var_19]["right_door_opened_pos"] = var_07.var_3532["outer_doorset"][var_19 + 1]["right_door_opened_pos"];
-          var_07.var_3532["outer_doorset"][var_19]["door_closed_pos"] = var_07.var_3532["outer_doorset"][var_19 + 1]["door_closed_pos"];
-          var_07.var_3532["outer_doorset"][var_19 + 1]["left_door"] = var_1A;
-          var_07.var_3532["outer_doorset"][var_19 + 1]["left_door_opened_pos"] = var_1B;
-          var_07.var_3532["outer_doorset"][var_19 + 1]["right_door"] = var_1C;
-          var_07.var_3532["outer_doorset"][var_19 + 1]["right_door_opened_pos"] = var_1D;
-          var_07.var_3532["outer_doorset"][var_19 + 1]["door_closed_pos"] = var_1E;
+    for(var_24 = 0; var_24 < var_7._id_3532["outer_doorset"].size - 1; var_24++) {
+      for(var_25 = 0; var_25 < var_7._id_3532["outer_doorset"].size - 1 - var_24; var_25++) {
+        if(var_7._id_3532["outer_doorset"][var_25 + 1]["door_closed_pos"][2] < var_7._id_3532["outer_doorset"][var_25]["door_closed_pos"][2]) {
+          var_26 = var_7._id_3532["outer_doorset"][var_25]["left_door"];
+          var_27 = var_7._id_3532["outer_doorset"][var_25]["left_door_opened_pos"];
+          var_28 = var_7._id_3532["outer_doorset"][var_25]["right_door"];
+          var_29 = var_7._id_3532["outer_doorset"][var_25]["right_door_opened_pos"];
+          var_30 = var_7._id_3532["outer_doorset"][var_25]["door_closed_pos"];
+          var_7._id_3532["outer_doorset"][var_25]["left_door"] = var_7._id_3532["outer_doorset"][var_25 + 1]["left_door"];
+          var_7._id_3532["outer_doorset"][var_25]["left_door_opened_pos"] = var_7._id_3532["outer_doorset"][var_25 + 1]["left_door_opened_pos"];
+          var_7._id_3532["outer_doorset"][var_25]["right_door"] = var_7._id_3532["outer_doorset"][var_25 + 1]["right_door"];
+          var_7._id_3532["outer_doorset"][var_25]["right_door_opened_pos"] = var_7._id_3532["outer_doorset"][var_25 + 1]["right_door_opened_pos"];
+          var_7._id_3532["outer_doorset"][var_25]["door_closed_pos"] = var_7._id_3532["outer_doorset"][var_25 + 1]["door_closed_pos"];
+          var_7._id_3532["outer_doorset"][var_25 + 1]["left_door"] = var_26;
+          var_7._id_3532["outer_doorset"][var_25 + 1]["left_door_opened_pos"] = var_27;
+          var_7._id_3532["outer_doorset"][var_25 + 1]["right_door"] = var_28;
+          var_7._id_3532["outer_doorset"][var_25 + 1]["right_door_opened_pos"] = var_29;
+          var_7._id_3532["outer_doorset"][var_25 + 1]["door_closed_pos"] = var_30;
         }
       }
     }
 
-    var_1F = [];
-    foreach(var_18, var_21 in var_07.var_3532["outer_doorset"]) {
-      var_22 = var_07 func_41CB();
-      var_1F = (var_22.origin[0], var_22.origin[1], var_21["door_closed_pos"][2]);
-      var_07.var_3532["floor" + var_18 + "_pos"] = var_1F;
-      if(var_22.origin == var_1F) {
-        var_07.var_3532["initial_floor"] = var_18;
-        var_07.var_3532["current_floor"] = var_18;
+    var_31 = [];
+
+    foreach(var_24, var_33 in var_7._id_3532["outer_doorset"]) {
+      var_34 = var_7 _id_41CB();
+      var_31 = (var_34.origin[0], var_34.origin[1], var_33["door_closed_pos"][2]);
+      var_7._id_3532["floor" + var_24 + "_pos"] = var_31;
+
+      if(var_34.origin == var_31) {
+        var_7._id_3532["initial_floor"] = var_24;
+        var_7._id_3532["current_floor"] = var_24;
       }
     }
 
-    level.var_35D1[level.var_35D1.size] = var_07;
-    var_04 delete();
-    var_05 delete();
+    level._id_35D1[level._id_35D1.size] = var_7;
+    var_4 delete();
+    var_5 delete();
   }
 
-  foreach(var_11 in var_02) {
-    var_11 delete();
-  }
+  foreach(var_17 in var_2)
+  var_17 delete();
 
-  func_1CF9();
-  if(!level.var_35C6) {
-    func_8853();
-  }
+  _id_1CF9();
 
-  foreach(var_27 in level.var_35D1) {
-    var_28 = var_27 func_41CE();
-    if(isDefined(var_28) && var_28.size) {
-      foreach(var_2A in var_28) {
-        var_2A method_81DF(0.75);
-      }
+  if(!level._id_35C6)
+    _id_8853();
+
+  foreach(var_39 in level._id_35D1) {
+    var_40 = var_39 _id_41CE();
+
+    if(isDefined(var_40) && var_40.size) {
+      foreach(var_42 in var_40)
+      var_42 _meth_81DF(0.75);
     }
   }
 }
 
-func_1CF9() {
-  level.var_35B9 = getEntArray("elevator_call", "targetname");
-  foreach(var_01 in level.var_35B9) {
-    var_01.var_3532 = [];
-    var_02 = (0, 0, var_01.origin[2]);
-    var_03 = (var_01.origin[0], var_01.origin[1], 0);
-    var_04 = [];
-    foreach(var_06 in level.var_35D1) {
-      foreach(var_0B, var_08 in var_06 func_4271()) {
-        var_09 = (0, 0, var_06.var_3532["floor" + var_0B + "_pos"][2]);
-        var_0A = (var_06.var_3532["floor" + var_0B + "_pos"][0], var_06.var_3532["floor" + var_0B + "_pos"][1], 0);
-        if(abs(distance(var_02, var_09)) <= level.var_35B8) {
-          if(abs(distance(var_03, var_0A)) <= level.var_35B7) {
-            var_04[var_04.size] = var_06;
-            var_01.var_3532[var_0B] = var_04;
+_id_1CF9() {
+  level._id_35B9 = getEntArray("elevator_call", "targetname");
+
+  foreach(var_1 in level._id_35B9) {
+    var_1._id_3532 = [];
+    var_2 = (0, 0, var_1.origin[2]);
+    var_3 = (var_1.origin[0], var_1.origin[1], 0);
+    var_4 = [];
+
+    foreach(var_12, var_6 in level._id_35D1) {
+      foreach(var_11, var_8 in var_6 _id_4271()) {
+        var_9 = (0, 0, var_6._id_3532["floor" + var_11 + "_pos"][2]);
+        var_10 = (var_6._id_3532["floor" + var_11 + "_pos"][0], var_6._id_3532["floor" + var_11 + "_pos"][1], 0);
+
+        if(_func_0AE(distance(var_2, var_9)) <= level._id_35B8) {
+          if(_func_0AE(distance(var_3, var_10)) <= level._id_35B7) {
+            var_4[var_4.size] = var_6;
+            var_1._id_3532[var_11] = var_4;
           }
         }
       }
     }
 
-    var_01 func_5FA7();
-    var_01.var_6464 = spawn("trigger_radius", var_01.origin + (0, 0, -32), 0, 32, 64);
+    var_1 _id_5FA7();
+    var_1._id_6464 = spawn("trigger_radius", var_1.origin + (0, 0, -32), 0, 32, 64);
   }
 }
 
-func_8853() {
-  foreach(var_01 in level.var_35D1) {
-    var_02 = var_01 func_41C8();
-    var_03 = var_01 func_4271();
-    var_04 = var_03.size;
-    var_02 setCursorHint("HINT_NOICON");
-    if(var_04 > 2) {
-      var_02 setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
+_id_8853() {
+  foreach(var_1 in level._id_35D1) {
+    var_2 = var_1 _id_41C8();
+    var_3 = var_1 _id_4271();
+    var_4 = var_3.size;
+    var_2 _meth_80CD("HINT_NOICON");
+
+    if(var_4 > 2) {
+      var_2 _meth_80CE(&"ELEVATOR_FLOOR_SELECT_HINT");
       continue;
     }
 
-    var_02 setHintString(&"ELEVATOR_USE_HINT");
+    var_2 _meth_80CE(&"ELEVATOR_USE_HINT");
   }
 
-  foreach(var_07 in level.var_35B9) {
-    var_07 setCursorHint("HINT_NOICON");
-    var_07 setHintString(&"ELEVATOR_CALL_HINT");
+  foreach(var_7 in level._id_35B9) {
+    var_7 _meth_80CD("HINT_NOICON");
+    var_7 _meth_80CE(&"ELEVATOR_CALL_HINT");
   }
 }
 
-func_5FA7() {
-  self.var_3655 = 1;
-  func_2F65();
+_id_5FA7() {
+  self._id_3655 = 1;
+  _id_2F65();
 }
 
-func_2FC7(param_00) {
-  func_364D();
-  if(level.var_35C6) {
-    self.var_6464 waittill(param_00, var_01);
-  } else {
-    self waittill(var_01, var_01);
-  }
+_id_2FC7(var_0) {
+  _id_364D();
 
-  func_2F65();
-  return var_01;
+  if(level._id_35C6)
+    self._id_6464 waittill(var_0, var_1);
+  else
+    self waittill(var_0, var_1);
+
+  _id_2F65();
+  return var_1;
 }
 
-func_364D() {
-  if(!self.var_3655) {
-    self.var_3655 = 1;
+_id_364D() {
+  if(!self._id_3655) {
+    self._id_3655 = 1;
     self.origin = self.origin + (0, 0, 10000);
-    if(isDefined(self.var_6464)) {
-      self.var_6464.origin = self.var_6464.origin + (0, 0, 10000);
-    }
+
+    if(isDefined(self._id_6464))
+      self._id_6464.origin = self._id_6464.origin + (0, 0, 10000);
   }
 }
 
-func_2F65() {
+_id_2F65() {
   self notify("disable_trigger");
-  if(self.var_3655) {
-    thread func_2F66();
-  }
+
+  if(self._id_3655)
+    thread _id_2F66();
 }
 
-func_2F66() {
+_id_2F66() {
   self endon("disable_trigger");
-  self.var_3655 = 0;
-  wait(1.5);
+  self._id_3655 = 0;
+  wait 1.5;
   self.origin = self.origin + (0, 0, -10000);
-  if(isDefined(self.var_6464)) {
-    self.var_6464.origin = self.var_6464.origin + (0, 0, -10000);
-  }
+
+  if(isDefined(self._id_6464))
+    self._id_6464.origin = self._id_6464.origin + (0, 0, -10000);
 }
 
-func_4270(param_00) {
-  return self.var_3532["outer_doorset"][param_00];
+_id_4270(var_0) {
+  return self._id_3532["outer_doorset"][var_0];
 }
 
-func_4271() {
-  return self.var_3532["outer_doorset"];
+_id_4271() {
+  return self._id_3532["outer_doorset"];
 }
 
-func_426F(param_00) {
-  return self.var_3532["outer_doorset"][param_00]["door_closed_pos"];
+_id_426F(var_0) {
+  return self._id_3532["outer_doorset"][var_0]["door_closed_pos"];
 }
 
-func_4272(param_00) {
-  return self.var_3532["outer_doorset"][param_00]["left_door"];
+_id_4272(var_0) {
+  return self._id_3532["outer_doorset"][var_0]["left_door"];
 }
 
-func_4274(param_00) {
-  return self.var_3532["outer_doorset"][param_00]["right_door"];
+_id_4274(var_0) {
+  return self._id_3532["outer_doorset"][var_0]["right_door"];
 }
 
-func_4273(param_00) {
-  return self.var_3532["outer_doorset"][param_00]["left_door_opened_pos"];
+_id_4273(var_0) {
+  return self._id_3532["outer_doorset"][var_0]["left_door_opened_pos"];
 }
 
-func_4275(param_00) {
-  return self.var_3532["outer_doorset"][param_00]["right_door_opened_pos"];
+_id_4275(var_0) {
+  return self._id_3532["outer_doorset"][var_0]["right_door_opened_pos"];
 }
 
-func_41C5() {
-  var_00 = [];
-  var_01 = func_41C7();
-  var_02 = func_41C8();
-  var_03 = var_02.var_6464;
-  var_04 = func_41C9();
-  var_05 = func_41CF();
-  var_00[var_00.size] = var_01;
-  var_00[var_00.size] = var_02;
-  var_00[var_00.size] = var_04;
-  var_00[var_00.size] = var_05;
-  if(isDefined(var_03)) {
-    var_00[var_00.size] = var_03;
-  }
+_id_41C5() {
+  var_0 = [];
+  var_1 = _id_41C7();
+  var_2 = _id_41C8();
+  var_3 = var_2._id_6464;
+  var_4 = _id_41C9();
+  var_5 = _id_41CF();
+  var_0[var_0.size] = var_1;
+  var_0[var_0.size] = var_2;
+  var_0[var_0.size] = var_4;
+  var_0[var_0.size] = var_5;
 
-  var_06 = func_41CC();
-  foreach(var_08 in var_06) {
-    var_00[var_00.size] = var_08;
-  }
+  if(isDefined(var_3))
+    var_0[var_0.size] = var_3;
 
-  var_0A = func_41CE();
-  foreach(var_0C in var_0A) {
-    var_00[var_00.size] = var_0C;
-  }
+  var_6 = _id_41CC();
 
-  return var_00;
+  foreach(var_8 in var_6)
+  var_0[var_0.size] = var_8;
+
+  var_10 = _id_41CE();
+
+  foreach(var_12 in var_10)
+  var_0[var_0.size] = var_12;
+
+  return var_0;
 }
 
-func_41CB() {
-  var_00 = self.var_3532["housing"]["mainframe"];
-  var_01 = undefined;
-  foreach(var_03 in var_00) {
-    if(var_03.classname != "script_model" && var_03.code_classname != "light") {
-      var_01 = var_03;
-    }
-  }
+_id_41CB() {
+  var_0 = self._id_3532["housing"]["mainframe"];
+  var_1 = undefined;
 
-  return var_01;
-}
-
-func_41CC() {
-  var_00 = self.var_3532["housing"]["mainframe"];
-  var_01 = [];
-  foreach(var_03 in var_00) {
-    if(var_03.classname == "script_model") {
-      var_01[var_01.size] = var_03;
-    }
+  foreach(var_3 in var_0) {
+    if(var_3.classname != "script_model" && var_3._id_003B != "light")
+      var_1 = var_3;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_41CE() {
-  var_00 = self.var_3532["housing"]["mainframe"];
-  var_01 = [];
-  foreach(var_03 in var_00) {
-    if(var_03.code_classname == "light") {
-      var_01[var_01.size] = var_03;
-    }
+_id_41CC() {
+  var_0 = self._id_3532["housing"]["mainframe"];
+  var_1 = [];
+
+  foreach(var_3 in var_0) {
+    if(var_3.classname == "script_model")
+      var_1[var_1.size] = var_3;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_41CD() {
-  var_00 = func_41CC();
-  var_01 = undefined;
-  foreach(var_03 in var_00) {
-    if(isDefined(var_03.script_noteworthy) && var_03.script_noteworthy == "play_musak") {
-      var_01 = var_03;
-    }
+_id_41CE() {
+  var_0 = self._id_3532["housing"]["mainframe"];
+  var_1 = [];
+
+  foreach(var_3 in var_0) {
+    if(var_3._id_003B == "light")
+      var_1[var_1.size] = var_3;
   }
 
-  return var_01;
+  return var_1;
 }
 
-func_41C7() {
-  return self.var_3532["housing"]["door_trigger"];
+_id_41CD() {
+  var_0 = _id_41CC();
+  var_1 = undefined;
+
+  foreach(var_3 in var_0) {
+    if(isDefined(var_3._id_0165) && var_3._id_0165 == "play_musak")
+      var_1 = var_3;
+  }
+
+  return var_1;
 }
 
-func_41C8() {
-  return self.var_3532["housing"]["inside_trigger"];
+_id_41C7() {
+  return self._id_3532["housing"]["door_trigger"];
 }
 
-func_41C6() {
-  return self.var_3532["housing"]["door_closed_pos"];
+_id_41C8() {
+  return self._id_3532["housing"]["inside_trigger"];
 }
 
-func_41C9() {
-  return self.var_3532["housing"]["left_door"];
+_id_41C6() {
+  return self._id_3532["housing"]["door_closed_pos"];
 }
 
-func_41CF() {
-  return self.var_3532["housing"]["right_door"];
+_id_41C9() {
+  return self._id_3532["housing"]["left_door"];
 }
 
-func_41CA() {
-  return self.var_3532["housing"]["left_door_opened_pos"];
+_id_41CF() {
+  return self._id_3532["housing"]["right_door"];
 }
 
-func_41D0() {
-  return self.var_3532["housing"]["right_door_opened_pos"];
+_id_41CA() {
+  return self._id_3532["housing"]["left_door_opened_pos"];
 }
 
-func_4128() {
-  var_00 = func_35BD();
-  return self.var_3532["current_floor"];
+_id_41D0() {
+  return self._id_3532["housing"]["right_door_opened_pos"];
 }
 
-func_41DB() {
-  return self.var_3532["initial_floor"];
+_id_4128() {
+  var_0 = _id_35BD();
+  return self._id_3532["current_floor"];
 }
 
-func_A73D(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_02) && !isDefined(param_03)) {
-    param_02 = param_00;
-    param_03 = param_01;
+_id_41DB() {
+  return self._id_3532["initial_floor"];
+}
+
+_id_A73D(var_0, var_1, var_2, var_3) {
+  if(!isDefined(var_2) && !isDefined(var_3)) {
+    var_2 = var_0;
+    var_3 = var_1;
   }
 
   for(;;) {
-    var_04 = param_00.origin;
-    var_05 = param_02.origin;
-    if(var_04 == param_01 && var_05 == param_03) {
+    var_4 = var_0.origin;
+    var_5 = var_2.origin;
+
+    if(var_4 == var_1 && var_5 == var_3) {
       break;
     }
 
-    wait 0.05;
+    waitframe();
   }
 }
 
-func_5719(param_00) {
-  var_01 = self.origin[0];
-  var_02 = self.origin[1];
-  var_03 = param_00[0];
-  var_04 = param_00[1];
-  var_05 = param_00[2];
-  var_06 = param_00[3];
-  return var_01 >= var_03 && var_01 <= var_04 && var_02 >= var_05 && var_02 <= var_06;
+_id_5719(var_0) {
+  var_1 = self.origin[0];
+  var_2 = self.origin[1];
+  var_3 = var_0[0];
+  var_4 = var_0[1];
+  var_5 = var_0[2];
+  var_6 = var_0[3];
+  return var_1 >= var_3 && var_1 <= var_4 && var_2 >= var_5 && var_2 <= var_6;
 }
 
-func_571B(param_00) {
-  var_01 = self.origin[0];
-  var_02 = self.origin[1];
-  var_03 = param_00[0];
-  var_04 = param_00[1];
-  var_05 = param_00[2];
-  var_06 = param_00[3];
-  var_07 = var_03 + var_04 / 2;
-  var_08 = var_05 + var_06 / 2;
-  var_09 = abs(distance((var_03, var_05, 0), (var_07, var_08, 0)));
-  return abs(distance((var_01, var_02, 0), (var_07, var_08, 0))) < var_09;
+_id_571B(var_0) {
+  var_1 = self.origin[0];
+  var_2 = self.origin[1];
+  var_3 = var_0[0];
+  var_4 = var_0[1];
+  var_5 = var_0[2];
+  var_6 = var_0[3];
+  var_7 = (var_3 + var_4) / 2;
+  var_8 = (var_5 + var_6) / 2;
+  var_9 = _func_0AE(distance((var_3, var_5, 0), (var_7, var_8, 0)));
+  return _func_0AE(distance((var_1, var_2, 0), (var_7, var_8, 0))) < var_9;
 }
 
-func_A752(param_00, param_01) {
-  self endon(param_00);
-  wait(param_01);
+_id_A752(var_0, var_1) {
+  self endon(var_0);
+  wait(var_1);
 }
 
-func_35C0(param_00, param_01) {
-  return int(func_35BF(param_00, param_01));
+_id_35C0(var_0, var_1) {
+  return int(_id_35BF(var_0, var_1));
 }
 
-func_35BF(param_00, param_01) {
-  if(getDvar(param_00) != "") {
-    return getdvarfloat(param_00);
+_id_35BF(var_0, var_1) {
+  if(getDvar(var_0) != "")
+    return getdvarfloat(var_0);
+  else {
+    setDvar(var_0, var_1);
+    return var_1;
   }
-
-  setDvar(param_00, param_01);
-  return param_01;
 }
 
-func_35BA() {
-  if(!level.var_35BA) {
+_id_35BA() {
+  if(!level._id_35BA) {
     return;
   }
-
   for(;;) {
-    if(level.var_35BA != 2) {
+    if(level._id_35BA != 2) {
       continue;
     }
+    foreach(var_7, var_1 in level._id_35D1) {
+      var_2 = var_1 _id_41CB();
+      var_3 = var_1 _id_41CD();
 
-    foreach(var_01 in level.var_35D1) {
-      var_02 = var_01 func_41CB();
-      var_03 = var_01 func_41CD();
-      foreach(var_05 in var_01.var_3532["outer_doorset"]) {}
+      foreach(var_6, var_5 in var_1._id_3532["outer_doorset"]) {}
     }
 
-    foreach(var_09 in level.var_35B9) {
-      foreach(var_05 in var_09.var_3532) {
-        var_0B = 0;
-        foreach(var_0D in var_05) {
-          var_0B++;
-          var_0E = var_09.origin + (0, 0, var_0B * -4);
+    foreach(var_9 in level._id_35B9) {
+      foreach(var_16, var_5 in var_9._id_3532) {
+        var_11 = 0;
+
+        foreach(var_15, var_13 in var_5) {
+          var_11++;
+          var_14 = var_9.origin + (0, 0, var_11 * -4);
         }
       }
     }
 
-    wait 0.05;
+    waitframe();
   }
 }

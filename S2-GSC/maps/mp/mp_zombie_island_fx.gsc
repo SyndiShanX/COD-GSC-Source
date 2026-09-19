@@ -1,7 +1,7 @@
-/*********************************************
- * Decompiled by Bog and Edited by SyndiShanX
+/*******************************************
+ * Decompiled and Edited by SyndiShanX
  * Script: maps\mp\mp_zombie_island_fx.gsc
-*********************************************/
+*******************************************/
 
 main() {
   level._effect["zmb_isl_steam_gate_intro"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_steam_gate_intro");
@@ -57,6 +57,7 @@ main() {
   level._effect["zmb_dlc1_wustling_ee_m_speed_off"] = loadfx("vfx/zombie/zmb_dlc1_wustling_ee_m_speed_off");
   level._effect["zmb_dlc1_wustling_ee_m_dmg_off"] = loadfx("vfx/zombie/zmb_dlc1_wustling_ee_m_dmg_off");
   level._effect["zmb_dlc1_wustling_ee_m_dmg_on"] = loadfx("vfx/zombie/zmb_dlc1_wustling_ee_m_dmg_on");
+
   level._effect["zmb_isl_sawrack_charge_pnt"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_sawrack_charge_pnt");
   level._effect["zmb_isl_water_screen_pagan_exit"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_water_screen_pagan_exit");
   level._effect["zmb_pagan_door_dust"] = loadfx("vfx/map/mp_zombie_island/zmb_pagan_door_dust");
@@ -64,120 +65,157 @@ main() {
   level._effect["zmb_clouds_puff_static"] = loadfx("vfx/map/mp_zombie_island/zmb_clouds_puff_static");
   level._effect["zmb_fog_wispy_cliff_large_box"] = loadfx("vfx/map/mp_zombie_island/zmb_fog_wispy_cliff_large_box");
   level._effect["zmb_pommel_shatter_dust"] = loadfx("vfx/map/mp_zombie_island/zmb_pommel_shatter_dust");
+
   level._effect["zmb_isl_stonekey_dirt_impact"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_stonekey_dirt_impact");
   level._effect["zmb_root_dirt_impact_a"] = loadfx("vfx/map/mp_zombie_island/zmb_root_dirt_impact_a");
+
   level._effect["zmb_receiver_full"] = loadfx("vfx/map/mp_zombie_nest/zmb_receiver_full");
   level._effect["zmb_receiver_charge_pnt"] = loadfx("vfx/map/mp_zombie_nest/zmb_receiver_charge_pnt");
+
   level._effect["zmb_isl_rocks_falling_water_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_rocks_falling_water_rnr");
   level._effect["zmb_flak_rock_explosion"] = loadfx("vfx/map/mp_zombie_island/zmb_flak_rock_explosion");
   level._effect["zmb_death_hand_to_hand_melee_hit"] = loadfx("vfx/zombie/abilities_perks/zmb_death_hand_to_hand_melee_hit");
   level._effect["zmb_dlc1_corpse_gate_gk_collar_1"] = loadfx("vfx/blood/zmb_dlc1_corpse_gate_gk_collar_1");
   level._effect["zmb_fog_spawn_hole"] = loadfx("vfx/map/mp_zombie_island/zmb_fog_spawn_hole");
   level._effect["zmb_isl_rocks_falling_burst_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_rocks_falling_burst_rnr");
+
   level._effect["zmb_isl_blood_drip_excessive"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_blood_drip_excessive");
   level._effect["50mm_dirt_impact_1"] = loadfx("vfx/weaponimpact/50mm_dirt_impact_1");
   level._effect["zmb_isl_beach_water_lapping_small"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_beach_water_lapping_small");
+
   level._effect["zmb_pipe_water_trickle_loop"] = loadfx("vfx/map/mp_zombie_island/zmb_pipe_water_trickle_loop");
   level._effect["spider_web_mesh"] = loadfx("vfx/unique/spider_web_mesh");
   level._effect["zmb_isl_sewage_pipe_small"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_sewage_pipe_small");
   level._effect["zmb_isl_med_trap_gib_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_trap_gib_rnr");
   level._effect["zmb_isl_med_spike_trap_island_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_spike_trap_island_rnr");
   level._effect["zmb_artillery_falling_dust_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_artillery_falling_dust_rnr");
+
   level._effect["zmb_isl_steam_subpen_entry_lrg"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_steam_subpen_entry_lrg");
   level._effect["zmb_isl_steam_subpen_entry"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_steam_subpen_entry");
   level._effect["zmb_isl_med_spike_trap_on_island"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_spike_trap_on_island");
-  level._effect["ground_impact"] = loadfx("vfx/zombie/zmb_ground_impact");
-  level._effect["zmb_eye_glow"] = loadfx("vfx/zombie/prototype_fx/zombie_eye_glow");
-  level._effect["zmb_pommel_energy_field"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field");
-  level._effect["zmb_pommel_energy_field_burst"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field_burst");
-  level._effect["zmb_pommel_pickup_energy"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_pickup_energy");
-  level._effect["zmb_assassin_light_frontline_ext"] = loadfx("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_frontline_ext");
-  level._effect["zmb_assassin_light_freefire_ext"] = loadfx("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_freefire_ext");
-  level._effect["zmb_assassin_light_shellshock_ext"] = loadfx("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_shellshok_ext");
-  level._effect["zmb_assassin_light_camoflauge_ext"] = loadfx("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_camo_ext");
-  level._effect["zmb_assassin_light_frontline_int"] = loadfx("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_frontline_int");
-  level._effect["zmb_assassin_light_freefire_int"] = loadfx("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_freefire_int");
-  level._effect["zmb_assassin_light_shellshock_int"] = loadfx("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_shellshok_int");
-  level._effect["zmb_assassin_light_camoflauge_int"] = loadfx("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_camo_int");
-  level._effect["zmi_assassin_armor_1"] = loadfx("vfx/zombie/prototype_fx/zmi_assassin_armor_1");
-  level._effect["zmi_assassin_teleport"] = loadfx("vfx/zombie/prototype_fx/assassin/teleport");
-  level._effect["zmi_assassin_bulletfire"] = loadfx("vfx/zombie/prototype_fx/assassin/bullet_fire");
-  level._effect["zmi_assassin_buff"] = loadfx("vfx/zombie/prototype_fx/assassin/zmb_buff");
-  level._effect["zmi_assassin_critical_hit"] = loadfx("vfx/zombie/prototype_fx/assassin/critical_hit");
-  level._effect["zmi_torpedo_lockdown"] = loadfx("vfx/zombie/prototype_fx/zmi_torpedo_lockdown");
-  level._effect["bomber_artillery_shell_carry"] = loadfx("vfx/zombie/prototype_fx/bomber_artillery_shell_carry");
-  level._effect["test_effect"] = loadfx("vfx/test/test_fx");
-  level._effect["zmb_med_spike_trap_on_island_active"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_spike_trap_on_island");
-  level._effect["bomber_uber_battery_place"] = loadfx("vfx/zombie/prototype_fx/bomber_uber_battery_place");
-  level._effect["zmi_hc_rune_black"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_black");
-  level._effect["zmi_hc_rune_yellow"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_yellow");
-  level._effect["zmi_hc_rune_magenta"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_magenta");
-  level._effect["zmi_hc_rune_cyan"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_cyan");
-  level._effect["zmi_hc_rune_green"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_green");
-  level._effect["zmi_hc_rune_red"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_red");
-  level._effect["zmi_hc_rune_blue"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_blue");
-  level._effect["zmi_hc_rune_yellow_filament"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_yellow_filament");
-  level._effect["zmi_hc_rune_magenta_filament"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_magenta_filament");
-  level._effect["zmi_hc_rune_cyan_filament"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_cyan_filament");
-  level._effect["zmi_hc_rune_red_filament"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_rune_red_filament");
-  level._effect["zmi_hc_pest_impact_black"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_black");
-  level._effect["zmi_hc_pest_impact_yellow"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_yellow");
-  level._effect["zmi_hc_pest_impact_cyan"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_cyan");
-  level._effect["zmi_hc_pest_impact_magenta"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_magenta");
-  level._effect["zmi_hc_pest_impact_red"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_red");
-  level._effect["zmi_hc_pest_impact_green"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_green");
-  level._effect["zmi_hc_pest_impact_blue"] = loadfx("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_blue");
-  level._effect["zmi_hc_pest_anointed"] = loadfx("vfx/map/mp_zombie_island/zmi_hc_pest_anointed");
-  level._effect["zmi_hc_pest_anointed_cyan"] = loadfx("vfx/map/mp_zombie_island/zmi_hc_pest_anointed_cyan");
-  level._effect["zmi_hc_pest_anointed_green"] = loadfx("vfx/map/mp_zombie_island/zmi_hc_pest_anointed_green");
-  level._effect["zmi_hc_pest_anointed_black"] = loadfx("vfx/map/mp_zombie_island/zmi_hc_pest_anointed_black");
-  level._effect["zmb_dlc1_assn_hc_int"] = loadfx("vfx/zombie/prototype_fx/zmb_dlc1_assn_hc_int");
-  level._effect["plane_death"] = loadfx("vfx/vehicle/p47_death");
+
+  level._effect["ground_impact"] = LoadFX("vfx/zombie/zmb_ground_impact");
+
+  level._effect["zmb_eye_glow"] = LoadFX("vfx/zombie/prototype_fx/zombie_eye_glow");
+
+  level._effect["zmb_pommel_energy_field"] = LoadFX("vfx/zombie/prototype_fx/zmb_pommel_energy_field");
+  level._effect["zmb_pommel_energy_field_burst"] = LoadFX("vfx/zombie/prototype_fx/zmb_pommel_energy_field_burst");
+  level._effect["zmb_pommel_pickup_energy"] = LoadFX("vfx/zombie/prototype_fx/zmb_pommel_pickup_energy");
+
+  level._effect["zmb_assassin_light_frontline_ext"] = LoadFX("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_frontline_ext");
+  level._effect["zmb_assassin_light_freefire_ext"] = LoadFX("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_freefire_ext");
+  level._effect["zmb_assassin_light_shellshock_ext"] = LoadFX("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_shellshok_ext");
+  level._effect["zmb_assassin_light_camoflauge_ext"] = LoadFX("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_camo_ext");
+  level._effect["zmb_assassin_light_frontline_int"] = LoadFX("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_frontline_int");
+  level._effect["zmb_assassin_light_freefire_int"] = LoadFX("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_freefire_int");
+  level._effect["zmb_assassin_light_shellshock_int"] = LoadFX("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_shellshok_int");
+  level._effect["zmb_assassin_light_camoflauge_int"] = LoadFX("vfx/zombie/abilities_perks/assn/zmb_dlc1_assn_camo_int");
+
+  level._effect["zmi_assassin_armor_1"] = LoadFX("vfx/zombie/prototype_fx/zmi_assassin_armor_1");
+  level._effect["zmi_assassin_teleport"] = LoadFX("vfx/zombie/prototype_fx/assassin/teleport");
+  level._effect["zmi_assassin_bulletfire"] = LoadFX("vfx/zombie/prototype_fx/assassin/bullet_fire");
+  level._effect["zmi_assassin_buff"] = LoadFX("vfx/zombie/prototype_fx/assassin/zmb_buff");
+  level._effect["zmi_assassin_critical_hit"] = LoadFX("vfx/zombie/prototype_fx/assassin/critical_hit");
+
+  level._effect["zmi_torpedo_lockdown"] = LoadFX("vfx/zombie/prototype_fx/zmi_torpedo_lockdown");
+  level._effect["bomber_artillery_shell_carry"] = LoadFX("vfx/zombie/prototype_fx/bomber_artillery_shell_carry");
+  level._effect["test_effect"] = LoadFX("vfx/test/test_fx");
+  level._effect["zmb_med_spike_trap_on_island_active"] = LoadFX("vfx/map/mp_zombie_island/zmb_isl_med_spike_trap_on_island");
+  level._effect["bomber_uber_battery_place"] = LoadFX("vfx/zombie/prototype_fx/bomber_uber_battery_place");
+
+  level._effect["zmi_hc_rune_black"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_black");
+  level._effect["zmi_hc_rune_yellow"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_yellow");
+  level._effect["zmi_hc_rune_magenta"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_magenta");
+  level._effect["zmi_hc_rune_cyan"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_cyan");
+  level._effect["zmi_hc_rune_green"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_green");
+  level._effect["zmi_hc_rune_red"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_red");
+  level._effect["zmi_hc_rune_blue"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_blue");
+
+  level._effect["zmi_hc_rune_yellow_filament"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_yellow_filament");
+  level._effect["zmi_hc_rune_magenta_filament"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_magenta_filament");
+  level._effect["zmi_hc_rune_cyan_filament"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_cyan_filament");
+  level._effect["zmi_hc_rune_red_filament"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_rune_red_filament");
+
+  level._effect["zmi_hc_pest_impact_black"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_black");
+  level._effect["zmi_hc_pest_impact_yellow"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_yellow");
+  level._effect["zmi_hc_pest_impact_cyan"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_cyan");
+  level._effect["zmi_hc_pest_impact_magenta"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_magenta");
+  level._effect["zmi_hc_pest_impact_red"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_red");
+  level._effect["zmi_hc_pest_impact_green"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_green");
+  level._effect["zmi_hc_pest_impact_blue"] = LoadFX("vfx/zombie/prototype_fx/island/zmi_hc_pest_impact_blue");
+
+  level._effect["zmi_hc_pest_anointed"] = LoadFX("vfx/map/mp_zombie_island/zmi_hc_pest_anointed");
+  level._effect["zmi_hc_pest_anointed_cyan"] = LoadFX("vfx/map/mp_zombie_island/zmi_hc_pest_anointed_cyan");
+  level._effect["zmi_hc_pest_anointed_green"] = LoadFX("vfx/map/mp_zombie_island/zmi_hc_pest_anointed_green");
+  level._effect["zmi_hc_pest_anointed_black"] = LoadFx("vfx/map/mp_zombie_island/zmi_hc_pest_anointed_black");
+
+  level._effect["zmb_dlc1_assn_hc_int"] = LoadFx("vfx/zombie/prototype_fx/zmb_dlc1_assn_hc_int");
+
+  level._effect["plane_death"] = loadFX("vfx/vehicle/p47_death");
   level._effect["hub_plane_tracer"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_enemy_plane_tracer");
-  level._effect["propeller_sparks"] = loadfx("vfx/sparks/car_door_ripoff_sparks");
+  level._effect["propeller_sparks"] = loadFX("vfx/sparks/car_door_ripoff_sparks");
   level._effect["zmi_torpedo_lockdown"] = loadfx("vfx/zombie/prototype_fx/zmi_torpedo_lockdown");
   level._effect["bomber_artillery_shell_carry"] = loadfx("vfx/zombie/prototype_fx/bomber_artillery_shell_carry");
+
   level._effect["zmb_isl_artillery_ship_explosion"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_artillery_ship_explosion");
   level._effect["zmb_isl_artillery_water_explosion"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_artillery_water_explosion");
   level._effect["zmb_isl_artillery_cannon_muz_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_artillery_cannon_muz_rnr");
+
   level._effect["zmb_battleship_cannon_muzzle_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_battleship_cannon_muzzle_rnr");
+
   level._effect["zmb_isl_ship_explosion_set"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_ship_explosion_set");
+
   level._effect["zmb_battleship_cannon_muz_fog_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_battleship_cannon_muz_fog_rnr");
   level._effect["zmb_isl_cannon_smk_trail"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_cannon_smk_trail");
   level._effect["zmb_battleship_cannon_smk_trail"] = loadfx("vfx/map/mp_zombie_island/zmb_battleship_cannon_smk_trail");
+
   level._effect["zmb_radio_tower_explosion_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_radio_tower_explosion_rnr");
+
   level._effect["zmb_isl_beach_fish_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_beach_fish_rnr");
+
   level._effect["roach_flock_slow_crawl_runner"] = loadfx("vfx/map/mp_clowntown/roach_flock_slow_crawl_runner");
+
   level._effect["insects_moths_area_sml"] = loadfx("vfx/animal/insects_moths_area_sml");
+
   level._effect["insects_gnats_flying"] = loadfx("vfx/map/mp_dam/insects_gnats_flying");
   level._effect["insects_flies_landing_sm"] = loadfx("vfx/animal/insects_flies_landing_sm");
   level._effect["insects_flies_landing"] = loadfx("vfx/animal/insects_flies_landing");
+
   level._effect["insects_gnats_flying_heavy"] = loadfx("vfx/map/mp_dam/insects_gnats_flying_heavy");
   level._effect["zmb_rat_flock_runaway_runner"] = loadfx("vfx/map/mp_zombie_nest/zmb_rat_flock_runaway_runner");
   level._effect["zmb_isl_beach_fish_flop_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_beach_fish_flop_rnr");
   level._effect["zmb_bird_seagulls_flying"] = loadfx("vfx/map/mp_zombie_island/zmb_bird_seagulls_flying");
   level._effect["zmb_isl_insect_lrg_flies_flying"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_insect_lrg_flies_flying");
+
   level._effect["zmb_fire_vista_lrg_fog"] = loadfx("vfx/map/mp_zombie_island/zmb_fire_vista_lrg_fog");
+
   level._effect["zmb_fire_m_lt_whitesmk_column_fog"] = loadfx("vfx/map/mp_zombie_island/zmb_fire_m_lt_whitesmk_column_fog");
   level._effect["zmb_fire_m_drksmk_amb_grnd_fog"] = loadfx("vfx/map/mp_zombie_island/zmb_fire_m_drksmk_amb_grnd_fog");
+
   level._effect["fire_licks_xsmall_no_light_b"] = loadfx("vfx/fire/fire_licks_xsmall_no_light_b");
   level._effect["zmb_fire_m_light_fog_outro"] = loadfx("vfx/map/mp_zombie_island/zmb_fire_m_light_fog_outro");
+
   level._effect["zmb_isl_ground_fire_a"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_ground_fire_a");
   level._effect["zmb_isl_fire_licks_xs_no_light_b"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_licks_xs_no_light_b");
   level._effect["zmb_isl_fire_m_ambient_ground"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_m_ambient_ground");
   level._effect["aac_ground_fire_a"] = loadfx("vfx/map/aachen/aac_ground_fire_a");
+
   level._effect["zmb_isl_fire_licks_m"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_licks_m");
   level._effect["zmb_isl_fire_pyro"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_pyro");
   level._effect["zmb_isl_fire_pyro_repeating"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_pyro_repeating");
+
   level._effect["zmb_isl_ground_fire_patch"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_ground_fire_patch");
   level._effect["zmb_isl_fire_m_ambient_ground_near"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_m_ambient_ground_near");
+
   level._effect["zmb_isl_tree_stump_fire"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_tree_stump_fire");
   level._effect["zmb_isl_fire_pyro_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_pyro_rnr");
   level._effect["zmb_isl_fire_pyro_repeating_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_pyro_repeating_rnr");
   level._effect["zmb_isl_fire_licks_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_licks_rnr");
   level._effect["zmb_isl_burning_tower_set"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_burning_tower_set");
+
   level._effect["falling_water_drip_runner_slow"] = loadfx("vfx/water/falling_water_drip_runner_slow");
   level._effect["falling_water_drip_runner_fast"] = loadfx("vfx/water/falling_water_drip_runner_fast");
+
   level._effect["blood_drip_sml_runner"] = loadfx("vfx/blood/blood_drip_sml_runner");
   level._effect["zmb_isl_beach_waterfall"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_beach_waterfall");
   level._effect["zmb_isl_waterfall_small_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_waterfall_small_01");
@@ -194,19 +232,26 @@ main() {
   level._effect["zmb_isl_uboat_blood_ground_r"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_uboat_blood_ground_r");
   level._effect["zmb_isl_uboat_blood_ground_l"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_uboat_blood_ground_l");
   level._effect["zmb_isl_blood_drip_sml_runner"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_blood_drip_sml_runner");
+
   level._effect["zmb_isl_pomel_body_splashes"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_pomel_body_splashes");
   level._effect["zmb_isl_water_drip_central_fast"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_water_drip_central_fast");
   level._effect["zmb_isl_water_drip_line_200"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_water_drip_line_200");
   level._effect["zmb_isl_ledge_water_drip_fast"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_ledge_water_drip_fast");
   level._effect["zmb_isl_med_trap_gib"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_trap_gib");
+
   level._effect["zmb_dry_ice_fog_narrow"] = loadfx("vfx/map/mp_zombie_nest/zmb_dry_ice_fog_narrow");
   level._effect["zmb_vent_steam"] = loadfx("vfx/map/mp_zombie_nest/zmb_vent_steam");
+
   level._effect["mar_church_dust_motes_01"] = loadfx("vfx/map/marigny/mar_church_dust_motes_01");
   level._effect["mar_dust_falling_debris_runner"] = loadfx("vfx/map/marigny/mar_dust_falling_debris_runner");
+
   level._effect["dlc1_zmb_window_smk_lrg_1"] = loadfx("vfx/map/mp_zombie_island/smoke/dlc1_zmb_window_smk_lrg_1");
+
   level._effect["vf_zmb_island_beach_wind_01"] = loadfx("vfx/vectorfield/vf_zmb_island_beach_wind_01");
   level._effect["ambient_indoor_dust"] = loadfx("vfx/dust/ambient_indoor_dust");
+
   level._effect["zmb_isl_rocks_rolling_runner"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_rocks_rolling_runner");
+
   level._effect["zmb_steam_pipe_leak_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_steam_pipe_leak_rnr");
   level._effect["ndy_steam_sm"] = loadfx("vfx/map/normandy/ndy_steam_sm");
   level._effect["zmb_isl_steam_vent"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_steam_vent");
@@ -217,7 +262,9 @@ main() {
   level._effect["zmb_isl_condensation_pocket_1"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_condensation_pocket_1");
   level._effect["zmb_fog_wispy_cliff_small_box"] = loadfx("vfx/map/mp_zombie_island/zmb_fog_wispy_cliff_small_box");
   level._effect["zmb_isl_steam_sm"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_steam_sm");
+
   level._effect["zmb_isl_fire_medium_1_smk_heavy"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fire_medium_1_smk_heavy");
+
   level._effect["zmb_jolts_out"] = loadfx("vfx/zombie/zmb_jolts_out");
   level._effect["zmb_nest_generator_light_red"] = loadfx("vfx/map/mp_zombie_nest/zmb_nest_generator_light_red");
   level._effect["zmb_nest_generator_light_off"] = loadfx("vfx/map/mp_zombie_nest/zmb_nest_generator_light_off");
@@ -232,17 +279,21 @@ main() {
   level._effect["electrical_sparks_burst_runner"] = loadfx("vfx/map/mp_gibraltar/electrical_sparks_burst_runner");
   level._effect["zmb_elec_coil_sparks"] = loadfx("vfx/map/mp_zombie_nest/zmb_elec_coil_sparks");
   level._effect["zmb_elec_coil_sparks_rnr"] = loadfx("vfx/map/mp_zombie_nest/zmb_elec_coil_sparks_rnr");
+
   level._effect["zmb_isl_fog_pocket_med_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_pocket_med_01");
   level._effect["zmb_isl_fog_ring_closing"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_ring_closing");
   level._effect["zmb_isl_fog_ring"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_ring");
   level._effect["zmb_isl_horizon_fog"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_horizon_fog");
   level._effect["zmb_isl_fog_cloud_oriented_lrg_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_cloud_oriented_lrg_01");
+
   level._effect["zmb_isl_fog_lm_sml_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_lm_sml_01");
   level._effect["zmb_isl_fog_zmb_emerge_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_zmb_emerge_01");
   level._effect["zmb_isl_fog_lm_large_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_lm_large_01");
   level._effect["zmb_isl_fog_lm_med_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_lm_med_01");
+
   level._effect["vf_zmb_island_wind_fog_01"] = loadfx("vfx/vectorfield/vf_zmb_island_wind_fog_01");
   level._effect["zmb_fog_wispy_low"] = loadfx("vfx/map/mp_zombie_island/zmb_fog_wispy_low");
+
   level._effect["zmb_isl_fog_burnoff_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_burnoff_01");
   level._effect["zmb_isl_fog_beach_curved_mesh_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_beach_curved_mesh_01");
   level._effect["zmb_isl_fog_zmb_assn_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_zmb_assn_01");
@@ -254,37 +305,51 @@ main() {
   level._effect["zmb_isl_fog_freezer_gas_base"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_freezer_gas_base");
   level._effect["zmb_isl_fog_pocket_med_01_bright"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_pocket_med_01_bright");
   level._effect["zmb_isl_fog_ambient_ground"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_ambient_ground");
+
   level._effect["zmb_fog_wispy_low_gust_ramp"] = loadfx("vfx/map/mp_zombie_island/zmb_fog_wispy_low_gust_ramp");
   level._effect["zmb_fog_wispy_low_gust"] = loadfx("vfx/map/mp_zombie_island/zmb_fog_wispy_low_gust");
   level._effect["zmb_fog_wispy_low_ground_box"] = loadfx("vfx/map/mp_zombie_island/zmb_fog_wispy_low_ground_box");
   level._effect["zmb_isl_assassin_spawn_wisp01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_assassin_spawn_wisp01");
   level._effect["zmb_isl_assassin_smoke_filler01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_assassin_smoke_filler01");
   level._effect["zmb_isl_fog_ground_thick_100x100"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_ground_thick_100x100");
+
   level._effect["zmb_isl_fog_subpen_01"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_subpen_01");
   level._effect["zmb_isl_fog_vista_vol_cliffs_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_vista_vol_cliffs_rnr");
   level._effect["zmb_fire_amb_grnd_light_fog_outro"] = loadfx("vfx/map/mp_zombie_island/zmb_fire_amb_grnd_light_fog_outro");
   level._effect["zmb_fire_amb_grnd_light_fog_intro"] = loadfx("vfx/map/mp_zombie_island/zmb_fire_amb_grnd_light_fog_intro");
   level._effect["zmb_fire_amb_grnd_light_fog"] = loadfx("vfx/map/mp_zombie_island/zmb_fire_amb_grnd_light_fog");
   level._effect["zmb_fire_m_light_fog_intro"] = loadfx("vfx/map/mp_zombie_island/zmb_fire_m_light_fog_intro");
+
   level._effect["smk_column_09"] = loadfx("vfx/smoke/smk_column_09");
   level._effect["smk_column_08"] = loadfx("vfx/smoke/smk_column_08");
   level._effect["smk_column_07_4x"] = loadfx("vfx/smoke/smk_column_07_4x");
+
   level._effect["zmb_isl_fog_vista_volumetric"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_fog_vista_volumetric");
+
   level._effect["plane_death"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_plane_death");
-  level._effect["hub_plane_tracer"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_enemy_plane_tracer");
+  level._effect["hub_plane_tracer"] = LoadFX("vfx/map/mp_zombie_island/zmb_isl_enemy_plane_tracer");
   level._effect["zmb_isl_enemy_plane_tracer"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_enemy_plane_tracer");
   level._effect["zmb_ship_cannon_impact_runner"] = loadfx("vfx/map/mp_zombie_island/zmb_ship_cannon_impact_runner");
   level._effect["zmb_ship_cannon_round_impact_b"] = loadfx("vfx/map/mp_zombie_island/zmb_ship_cannon_round_impact_b");
   level._effect["zmb_ship_cannon_round_impact_a"] = loadfx("vfx/map/mp_zombie_island/zmb_ship_cannon_round_impact_a");
   level._effect["zmb_isl_stuka_explosion"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_stuka_explosion");
+
   level._effect["zmb_isl_pomel_vf"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_pomel_vf");
+
   level._effect["death_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_death_uber_charge_stg_3");
+
   level._effect["zmb_geistkraft_radius_400"] = loadfx("vfx/map/mp_zombie_nest/zmb_geistkraft_radius_400");
+
   level._effect["zmb_godray_ambient_beam_sm"] = loadfx("vfx/map/mp_zombie_island/zmb_godray_ambient_beam_sm");
   level._effect["zmb_isl_pomel_dusty_godray"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_pomel_dusty_godray");
   level._effect["zmb_isl_debri_falling_rnr"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_debri_falling_rnr");
   level._effect["plastic_shreds_hanging_e_slow"] = loadfx("vfx/wind/plastic_shreds_hanging_e_slow");
+
   level._effect["body_wake_water_bloody_grit"] = loadfx("vfx/treadfx/body_wake_water_bloody_grit");
+
   level.water_wake = "vfx/treadfx/body_wake_water_bloody";
   level.water_wake_stationary = "vfx/treadfx/body_wake_water_stationary_bloody";
+
+  if(getDvar("3508") != "1")
+    maps\createfx\mp_zombie_island_fx::main();
 }
