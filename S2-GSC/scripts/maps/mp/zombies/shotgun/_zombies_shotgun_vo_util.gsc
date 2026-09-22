@@ -12,8 +12,9 @@ init() {
   while(var_0 < var_1) {
     var_2 = _tablelookupbyrow("mp/zmCharacterIdTable.csv", var_0, 15);
 
-    if(_id_0547::_id_5565(var_2, "feml") || _id_0547::_id_5565(var_2, "male"))
+    if(_id_0547::_id_5565(var_2, "feml") || _id_0547::_id_5565(var_2, "male")) {
       var_2 = _tablelookupbyrow("mp/zmCharacterIdTable.csv", var_0, 16);
+    }
 
     if(!isDefined(var_2)) {
       var_0++;
@@ -21,8 +22,9 @@ init() {
     } else
       var_0++;
 
-    if(!isDefined(level.charactergroups[var_2]))
+    if(!isDefined(level.charactergroups[var_2])) {
       level.charactergroups[var_2] = [];
+    }
 
     level.charactergroups[var_2] = common_scripts\utility::_id_0F6F(level.charactergroups[var_2], var_0 - 1);
   }
@@ -38,13 +40,15 @@ init_converations() {
 }
 
 is_character_present_in_match(var_0) {
-  if(!_isarray(var_0))
+  if(!_isarray(var_0)) {
     var_0 = [var_0];
+  }
 
   foreach(var_2 in var_0) {
     foreach(var_4 in level.players) {
-      if(common_scripts\utility::_id_0F79(level.charactergroups[var_2], var_4._id_20D8))
+      if(common_scripts\utility::_id_0F79(level.charactergroups[var_2], var_4._id_20D8)) {
         return 1;
+      }
     }
   }
 
@@ -60,8 +64,9 @@ random_valid_character_player(var_0, var_1) {
   var_2 = [];
 
   foreach(var_8, var_4 in level.players) {
-    foreach(var_7, var_6 in var_1)
-    var_2 = common_scripts\utility::_id_0F6F(var_2, [var_4, var_1[var_7], var_0[var_7]]);
+    foreach(var_7, var_6 in var_1) {
+      var_2 = common_scripts\utility::_id_0F6F(var_2, [var_4, var_1[var_7], var_0[var_7]]);
+    }
   }
 
   var_2 = common_scripts\utility::array_randomize(var_2);
@@ -85,8 +90,9 @@ all_players_present(var_0) {
     var_4 = 0;
 
     foreach(var_6 in var_0) {
-      if(var_3 player_is_character_type(var_6))
+      if(var_3 player_is_character_type(var_6)) {
         var_1++;
+      }
     }
   }
 
@@ -94,8 +100,9 @@ all_players_present(var_0) {
 }
 
 play_global_vo(var_0, var_1, var_2) {
-  foreach(var_4 in level.players)
-  var_4 thread player_vo_to_self(var_0, var_1, var_2);
+  foreach(var_4 in level.players) {
+    var_4 thread player_vo_to_self(var_0, var_1, var_2);
+  }
 }
 
 player_vo_to_self(var_0, var_1, var_2) {
@@ -104,9 +111,9 @@ player_vo_to_self(var_0, var_1, var_2) {
   if(common_scripts\utility::_id_562E(var_2)) {
     if(var_3 player_is_character_type("ride")) {
       if(var_3 issplitscreenplayer()) {
-        if(var_3 issplitscreenplayerprimary())
+        if(var_3 issplitscreenplayerprimary()) {
           var_3 thread _id_0378::_id_307E(var_0, level.players);
-        else {}
+        } else {}
       }
     } else {
       if(!isDefined(level.rideau_radio)) {
@@ -115,9 +122,9 @@ player_vo_to_self(var_0, var_1, var_2) {
       }
 
       if(var_3 issplitscreenplayer()) {
-        if(var_3 issplitscreenplayerprimary())
+        if(var_3 issplitscreenplayerprimary()) {
           var_3._id_071D.pa_vo_on_player = _id_0380::_id_6844(var_0, var_3, level.rideau_radio, 0, var_1);
-        else {}
+        } else {}
       } else
         var_3._id_071D.pa_vo_on_player = _id_0380::_id_6844(var_0, var_3, level.rideau_radio, 0, var_1);
     }
@@ -126,19 +133,22 @@ player_vo_to_self(var_0, var_1, var_2) {
 }
 
 try_run_conversation(var_0, var_1, var_2, var_3, var_4) {
-  if(!maps\mp\zombies\_zombies_audio_dlc2::validate_players_in_story(var_0))
+  if(!maps\mp\zombies\_zombies_audio_dlc2::validate_players_in_story(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(level.currentwavestoryindex))
+  if(!isDefined(level.currentwavestoryindex)) {
     level.currentwavestoryindex = 0;
+  }
 
   level.wavestories.story_playing = 1;
   level.currentwavestoryindex++;
   var_5 = 0;
   level endon("story_timed_out");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level thread timeout_conversation(var_2);
+  }
 
   foreach(var_7 in var_0._id_5D99) {
     var_8 = var_7._id_90BE;
@@ -182,11 +192,13 @@ timeout_conversation(var_0) {
 }
 
 get_speaker_alive(var_0) {
-  if(_id_0547::_id_57E1(var_0))
+  if(_id_0547::_id_57E1(var_0)) {
     return 0;
+  }
 
-  if(var_0.sessionstate == "spectator")
+  if(var_0.sessionstate == "spectator") {
     return 0;
+  }
 
   return 1;
 }

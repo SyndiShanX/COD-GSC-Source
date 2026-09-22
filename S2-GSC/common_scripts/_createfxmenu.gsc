@@ -100,8 +100,9 @@ create_fx_menu() {
     return;
   }
 
-  if(isDefined(level._createfx._id_6115[level.create_fx_menu]))
+  if(isDefined(level._createfx._id_6115[level.create_fx_menu])) {
     [[level._createfx._id_6115[level.create_fx_menu]]]();
+  }
 }
 
 _id_610C() {
@@ -154,8 +155,9 @@ _id_610B() {
 }
 
 _id_610F() {
-  if(common_scripts\_createfx::button_is_clicked("m"))
+  if(common_scripts\_createfx::button_is_clicked("m")) {
     _id_50F2();
+  }
 
   _id_610A();
 
@@ -186,8 +188,9 @@ _id_6109() {
 
   _id_2FF5(get_last_selected_ent());
 
-  if(_id_66A4())
+  if(_id_66A4()) {
     _id_50F2();
+  }
 }
 
 _id_6110() {
@@ -226,8 +229,9 @@ _id_610D() {
     var_0 = var_0 + 1;
     var_4 = var_0;
 
-    if(var_4 == 10)
+    if(var_4 == 10) {
       var_4 = 0;
+    }
 
     if(common_scripts\_createfx::button_is_clicked(var_4 + "")) {
       var_1 = var_2[var_3];
@@ -254,11 +258,13 @@ _id_610D() {
 
   var_5 = undefined;
 
-  if(_id_6108("create_loopfx"))
+  if(_id_6108("create_loopfx")) {
     var_5 = common_scripts\utility::_id_2814(var_1);
+  }
 
-  if(_id_6108("create_oneshot"))
+  if(_id_6108("create_oneshot")) {
     var_5 = common_scripts\utility::_id_281B(var_1);
+  }
 
   _id_3B9F(var_5);
 }
@@ -300,8 +306,9 @@ _id_610A() {
     var_1++;
     var_5 = var_1;
 
-    if(var_5 == 10)
+    if(var_5 == 10) {
       var_5 = 0;
+    }
 
     if(common_scripts\_createfx::button_is_clicked(var_5 + "")) {
       _id_769E(var_4, var_1);
@@ -325,10 +332,11 @@ _id_769E(var_0, var_1) {
   level.createfx_inputlocked = 1;
   level._createfx.hudelems[var_1 + 1].color = (1, 1, 0);
 
-  if(isDefined(var_0["input_func"]))
+  if(isDefined(var_0["input_func"])) {
     thread[[var_0["input_func"]]](var_1 + 1);
-  else
+  } else {
     common_scripts\_createfx::createfx_centerprint("To set " + var_0["description"] + ", type /fx newvalue. To remove " + var_0["description"] + ", type /fx del");
+  }
 
   _id_8542(var_0["name"]);
   setDvar("fx", "nil");
@@ -338,23 +346,27 @@ menu_fx_option_set() {
   if(getDvar("fx") == "nil") {
     return;
   }
-  if(getDvar("fx") == "del")
+  if(getDvar("fx") == "del") {
     common_scripts\_createfx::remove_selected_option();
-  else {
+  } else {
     var_0 = _id_431E();
     var_1 = undefined;
 
-    if(var_0["type"] == "string")
+    if(var_0["type"] == "string") {
       var_1 = getDvar("fx");
+    }
 
-    if(var_0["type"] == "int")
+    if(var_0["type"] == "int") {
       var_1 = getdvarint("fx");
+    }
 
-    if(var_0["type"] == "float")
+    if(var_0["type"] == "float") {
       var_1 = getdvarfloat("fx");
+    }
 
-    if(var_0["type"] == "vector")
+    if(var_0["type"] == "vector") {
       var_1 = _getdvarvector("fx");
+    }
 
     if(isDefined(var_1)) {
       _id_0F2A(var_0, var_1);
@@ -371,8 +383,9 @@ _id_0F2A(var_0, var_1) {
   for(var_2 = 0; var_2 < level._createfx.selected_fx_ents.size; var_2++) {
     var_3 = level._createfx.selected_fx_ents[var_2];
 
-    if(mask(var_0["mask"], var_3.v["type"]))
+    if(mask(var_0["mask"], var_3.v["type"])) {
       var_3.v[var_0["name"]] = var_1;
+    }
   }
 
   level.last_displayed_ent = undefined;
@@ -384,8 +397,9 @@ _id_0F2A(var_0, var_1) {
     common_scripts\_createfx::frame_selected();
   }
 
-  if(var_0["name"] == "angles")
+  if(var_0["name"] == "angles") {
     level.createfx_last_movement_timer = 0;
+  }
 
   common_scripts\_createfx::save_redo_buffer();
 }
@@ -416,21 +430,24 @@ _id_09DD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7["default"] = var_3;
   var_7["mask"] = var_4;
 
-  if(isDefined(var_5) && var_5)
+  if(isDefined(var_5) && var_5) {
     var_7["nowrite"] = 1;
-  else
+  } else {
     var_7["nowrite"] = 0;
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_7["input_func"] = var_6;
+  }
 
   level._createfx.options[level._createfx.options.size] = var_7;
 }
 
 _id_4265(var_0) {
   for(var_1 = 0; var_1 < level._createfx.options.size; var_1++) {
-    if(level._createfx.options[var_1]["name"] == var_0)
+    if(level._createfx.options[var_1]["name"] == var_0) {
       return level._createfx.options[var_1];
+    }
   }
 }
 
@@ -444,10 +461,11 @@ _id_53BD(var_0) {
 
     var_1 = 0;
 
-    if(level.player buttonPressed("-"))
+    if(level.player buttonPressed("-")) {
       var_1 = -10;
-    else if(level.player buttonPressed("="))
+    } else if(level.player buttonPressed("=")) {
       var_1 = 10;
+    }
 
     if(var_1 != 0) {
       foreach(var_3 in level._createfx.selected_fx_ents) {
@@ -475,8 +493,9 @@ _id_2FF5(var_0) {
   var_2 = 0;
   var_3 = 0;
 
-  if(level.effect_list_offset >= level._createfx.options.size)
+  if(level.effect_list_offset >= level._createfx.options.size) {
     level.effect_list_offset = 0;
+  }
 
   for(var_4 = 0; var_4 < level._createfx.options.size; var_4++) {
     var_5 = level._createfx.options[var_4];
@@ -498,8 +517,9 @@ _id_2FF5(var_0) {
     var_2++;
     var_6 = var_2;
 
-    if(var_6 == 10)
+    if(var_6 == 10) {
       var_6 = 0;
+    }
 
     if(common_scripts\_createfx::button_is_clicked(var_6 + "")) {
       _id_0952(var_5);
@@ -525,8 +545,9 @@ _id_0952(var_0) {
   for(var_2 = 0; var_2 < level._createfx.selected_fx_ents.size; var_2++) {
     var_3 = level._createfx.selected_fx_ents[var_2];
 
-    if(mask(var_0["mask"], var_3.v["type"]))
+    if(mask(var_0["mask"], var_3.v["type"])) {
       var_3.v[var_0["name"]] = var_0["default"];
+    }
   }
 }
 
@@ -602,8 +623,9 @@ display_fx_info(var_0) {
 display_current_translations() {
   var_0 = get_last_selected_ent();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     display_fx_info(var_0);
+  }
 }
 
 draw_effects_list(var_0) {
@@ -613,8 +635,9 @@ draw_effects_list(var_0) {
   var_3 = common_scripts\_createfx::func_get_level_fx();
   level._id_359C = var_3.size;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "Pick an effect";
+  }
 
   common_scripts\_createfx::set_fx_hudelement(var_0 + " [" + level.effect_list_offset + " - " + var_3.size + "]:");
 
@@ -628,25 +651,28 @@ draw_effects_list(var_0) {
     }
   }
 
-  if(var_3.size > level._id_359E)
+  if(var_3.size > level._id_359E) {
     common_scripts\_createfx::set_fx_hudelement("(<-) Previous ... More(->)");
+  }
 }
 
 _id_50F2() {
-  if(level.effect_list_offset >= level._id_359C - level._id_359E)
+  if(level.effect_list_offset >= level._id_359C - level._id_359E) {
     level.effect_list_offset = 0;
-  else
+  } else {
     level.effect_list_offset = level.effect_list_offset + level._id_359E;
+  }
 }
 
 _id_2B75() {
-  if(level._id_359C < level._id_359E)
+  if(level._id_359C < level._id_359E) {
     level.effect_list_offset = 0;
-  else {
+  } else {
     level.effect_list_offset = level.effect_list_offset - level._id_359E;
 
-    if(level.effect_list_offset < 0)
+    if(level.effect_list_offset < 0) {
       level.effect_list_offset = level._id_359C - level._id_359E;
+    }
   }
 }
 
@@ -655,8 +681,9 @@ draw_help_list(var_0) {
   var_1 = 0;
   var_2 = level._id_27FA;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "Help";
+  }
 
   common_scripts\_createfx::set_fx_hudelement("[" + var_0 + "]");
 
@@ -679,10 +706,11 @@ draw_help_list(var_0) {
 _id_50EE() {
   var_0 = level._id_27FA;
 
-  if(level._id_4CAD >= var_0.size - level._id_4CAE)
+  if(level._id_4CAD >= var_0.size - level._id_4CAE) {
     level._id_4CAD = 0;
-  else
+  } else {
     level._id_4CAD = level._id_4CAD + level._id_4CAE;
+  }
 }
 
 _id_2B74() {
@@ -723,8 +751,9 @@ select_by_name() {
     var_0 = var_0 + 1;
     var_4 = var_0;
 
-    if(var_4 == 10)
+    if(var_4 == 10) {
       var_4 = 0;
+    }
 
     if(common_scripts\_createfx::button_is_clicked(var_4 + "")) {
       var_1 = var_2[var_3];
@@ -742,8 +771,9 @@ select_by_name() {
   var_5 = [];
 
   foreach(var_3, var_7 in level.createfxent) {
-    if(issubstr(var_7.v["fxid"], var_1))
+    if(issubstr(var_7.v["fxid"], var_1)) {
       var_5[var_5.size] = var_3;
+    }
   }
 
   common_scripts\_createfx::deselect_all_ents();

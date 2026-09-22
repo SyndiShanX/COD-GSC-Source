@@ -6,11 +6,13 @@
 init() {
   common_scripts\utility::flag_init("door_opened");
 
-  if(!isDefined(level._id_328C))
+  if(!isDefined(level._id_328C)) {
     level._id_328C = [];
+  }
 
-  if(!isDefined(level._id_5E6E))
+  if(!isDefined(level._id_5E6E)) {
     level._id_5E6E = [];
+  }
 
   level._id_AC1D = common_scripts\utility::_id_46B7("door", "targetname");
   common_scripts\utility::_id_0FB2(level._id_AC1D, ::_id_51BE);
@@ -19,19 +21,22 @@ init() {
 _id_51BE() {
   self._id_3280 = self._id_0165;
 
-  if(!isDefined(self._id_3280))
+  if(!isDefined(self._id_3280)) {
     self._id_3280 = "normal";
+  }
 
   if(isDefined(self._id_0164) && issubstr(self._id_0164, "final_brute_closable")) {
     self._id_3280 = "closeable";
     self._id_0165 = "closeable";
   }
 
-  if(isDefined(self.getnegotiationnextnode) && !common_scripts\utility::_id_3C83(self.getnegotiationnextnode))
+  if(isDefined(self.getnegotiationnextnode) && !common_scripts\utility::_id_3C83(self.getnegotiationnextnode)) {
     common_scripts\utility::flag_init(self.getnegotiationnextnode);
+  }
 
-  if(isDefined(self.setgoalnode) && !common_scripts\utility::_id_3C83(self.setgoalnode))
+  if(isDefined(self.setgoalnode) && !common_scripts\utility::_id_3C83(self.setgoalnode)) {
     common_scripts\utility::flag_init(self.setgoalnode);
+  }
 
   waittillframeend;
 
@@ -50,8 +55,9 @@ _id_51BE() {
 }
 
 _id_327B(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 500;
+  }
 
   self._id_267B = var_0;
 }
@@ -72,9 +78,9 @@ _id_51C1() {
   self._id_64C5 = [];
   self._id_17F0 = 0;
 
-  if(!isDefined(self.target))
+  if(!isDefined(self.target)) {
     _id_325C("Door struct without any targets at " + self.origin + ".");
-  else {
+  } else {
     self.setclientdvars = _getscriptablearray(self.target, "targetname");
     var_0 = getEntArray(self.target, "targetname");
 
@@ -99,13 +105,15 @@ _id_51C1() {
       }
       switch (var_3) {
         case "trigger":
-          if(_id_51C3(var_2))
+          if(_id_51C3(var_2)) {
             self._id_9DC2[self._id_9DC2.size] = var_2;
+          }
 
           break;
         case "mover":
-          if(_id_51C0(var_2))
+          if(_id_51C0(var_2)) {
             self._id_64C5[self._id_64C5.size] = var_2;
+          }
 
           break;
         case "trap":
@@ -123,18 +131,20 @@ _id_51C1() {
       if(_id_0547::_id_5565(var_5, "animated_zmb_door_bunker_entrance_2")) {
         foreach(var_7 in self._id_64C5) {
           if(var_7.setlookatent == "door_r") {
-            var_7 linkto(self.setclientdvars[0], "door_R");
+            var_7 linkTo(self.setclientdvars[0], "door_R");
             continue;
           }
 
-          if(var_7.setlookatent == "door_l")
-            var_7 linkto(self.setclientdvars[0], "door_L");
+          if(var_7.setlookatent == "door_l") {
+            var_7 linkTo(self.setclientdvars[0], "door_L");
+          }
         }
       }
     }
 
-    if((self._id_9DC2.size || common_scripts\utility::_id_562E(self._id_57B4)) && (self._id_64C5.size || self.setclientdvars.size))
+    if((self._id_9DC2.size || common_scripts\utility::_id_562E(self._id_57B4)) && (self._id_64C5.size || self.setclientdvars.size)) {
       _id_7F5C();
+    }
   }
 }
 
@@ -144,8 +154,9 @@ _id_51C3(var_0) {
 }
 
 _id_51C0(var_0) {
-  if(!isDefined(var_0.target))
+  if(!isDefined(var_0.target)) {
     return 1;
+  }
 
   var_0._id_2444 = var_0.origin;
   var_0._id_17F0 = [];
@@ -156,8 +167,9 @@ _id_51C0(var_0) {
   foreach(var_3 in var_1) {
     var_4 = var_3._id_0165;
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = "goal";
+    }
 
     switch (var_4) {
       case "goal":
@@ -174,17 +186,18 @@ _id_51C0(var_0) {
   foreach(var_3 in var_6) {
     var_4 = var_3._id_0165;
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = "link";
+    }
 
     switch (var_4) {
       case "link_blood":
         var_0._id_17F0[var_0._id_17F0.size] = var_3;
         var_3 ghost();
-        var_3 linkto(var_0);
+        var_3 linkTo(var_0);
         break;
       case "link":
-        var_3 linkto(var_0);
+        var_3 linkTo(var_0);
         var_0._id_5DBD[var_0._id_5DBD.size] = var_3;
         break;
       default:
@@ -193,9 +206,9 @@ _id_51C0(var_0) {
     }
   }
 
-  if(var_0._id_64A9.size > 0)
+  if(var_0._id_64A9.size > 0) {
     return 1;
-  else {
+  } else {
     _id_325C("Door mover at " + var_0.origin + "doesn't have a goal stuct.");
     return 0;
   }
@@ -203,8 +216,9 @@ _id_51C0(var_0) {
 
 _id_0BCB() {
   foreach(var_1 in level._id_AC1D) {
-    if(!(isDefined(var_1._id_6BE1) && var_1._id_6BE1))
+    if(!(isDefined(var_1._id_6BE1) && var_1._id_6BE1)) {
       return 0;
+    }
   }
 
   return 1;
@@ -213,34 +227,39 @@ _id_0BCB() {
 _id_7F5C() {
   if(1) {
     foreach(var_1 in self._id_9DC2) {
-      if(!isDefined(var_1._id_7778))
+      if(!isDefined(var_1._id_7778)) {
         var_1._id_7778 = _id_0552::_id_7BDD(var_1);
+      }
 
       var_1._id_7778._id_2F74 = 0;
     }
   }
 
   if(!common_scripts\utility::_id_562E(self._id_57B4)) {
-    foreach(var_1 in self._id_9DC2)
-    thread _id_7F61(var_1);
+    foreach(var_1 in self._id_9DC2) {
+      thread _id_7F61(var_1);
+    }
   }
 
   var_5 = _id_3278() && _id_4B39();
 
   if(var_5) {
-    foreach(var_7 in self.setclientdvars)
-    var_7 setscriptablepartstate("power_light", "power_off", 0);
+    foreach(var_7 in self.setclientdvars) {
+      var_7 setscriptablepartstate("power_light", "power_off", 0);
+    }
 
     thread _id_9E96();
   }
 
   self waittill("open", var_9);
 
-  foreach(var_1 in self._id_9DC2)
-  thread _id_3677(var_1);
+  foreach(var_1 in self._id_9DC2) {
+    thread _id_3677(var_1);
+  }
 
-  foreach(var_13 in self._id_64C5)
-  thread _id_7F5E(var_13);
+  foreach(var_13 in self._id_64C5) {
+    thread _id_7F5E(var_13);
+  }
 
   getplayerssightingme();
   self._id_6BE1 = 1;
@@ -254,8 +273,9 @@ _id_7F5C() {
   if(isDefined(self.getnegotiationnextnode)) {
     common_scripts\utility::flag_set(self.getnegotiationnextnode, var_9);
 
-    if(isDefined(level._id_3283[self.getnegotiationnextnode]))
+    if(isDefined(level._id_3283[self.getnegotiationnextnode])) {
       level._id_3294 = level._id_3294 | level._id_3283[self.getnegotiationnextnode];
+    }
   }
 
   var_15 = _id_0547::_id_AC4B(self.origin, "door");
@@ -269,21 +289,23 @@ _id_7F5C() {
     var_9._id_3295++;
     var_16 = "none";
 
-    if(isDefined(self.getnegotiationnextnode))
+    if(isDefined(self.getnegotiationnextnode)) {
       var_16 = self.getnegotiationnextnode;
+    }
 
     _id_0547::_id_4AE4(var_9, "doors", self._id_267B, "none", var_16);
   }
 
-  if(!common_scripts\utility::_id_562E(self._id_56AE))
+  if(!common_scripts\utility::_id_562E(self._id_56AE)) {
     thread _id_7F5F();
-  else {
+  } else {
     self waittill("close");
     thread _id_82F1();
     self._id_6BE1 = 0;
 
-    if(isDefined(self.getnegotiationnextnode))
+    if(isDefined(self.getnegotiationnextnode)) {
       common_scripts\utility::_id_3C7B(self.getnegotiationnextnode, var_9);
+    }
 
     _id_7F5C();
   }
@@ -292,8 +314,9 @@ _id_7F5C() {
 _id_9E96() {
   common_scripts\utility::_id_3C9F(self.setgoalnode);
 
-  foreach(var_1 in self.setclientdvars)
-  var_1 setscriptablepartstate("power_light", "power_on", 0);
+  foreach(var_1 in self.setclientdvars) {
+    var_1 setscriptablepartstate("power_light", "power_on", 0);
+  }
 }
 
 _id_4B39() {
@@ -306,8 +329,9 @@ getplayerssightingme() {
   self endon("scriptable_door_close");
   self notify("scriptable_door_open");
 
-  foreach(var_1 in self.setclientdvars)
-  var_1 setscriptablepartstate("gate", "opening", 0);
+  foreach(var_1 in self.setclientdvars) {
+    var_1 setscriptablepartstate("gate", "opening", 0);
+  }
 
   var_3 = 0;
   var_4 = 0;
@@ -393,8 +417,9 @@ getplayerssightingme() {
 
   wait(var_4);
 
-  if(var_7)
+  if(var_7) {
     self.setclientdvars[0] hide();
+  }
 
   foreach(var_9 in self._id_64C5) {
     if(isDefined(var_9.target)) {
@@ -402,8 +427,9 @@ getplayerssightingme() {
     }
     var_9 notsolid();
 
-    if(var_5 == 0)
+    if(var_5 == 0) {
       var_9 connectpaths();
+    }
 
     var_9 hide();
     self._id_1F73 = 0;
@@ -413,24 +439,28 @@ getplayerssightingme() {
 }
 
 getviewmodel(var_0) {
-  if(isDefined(var_0) && var_0 > 0)
+  if(isDefined(var_0) && var_0 > 0) {
     wait(var_0);
+  }
 
-  foreach(var_2 in self.setclientdvars)
-  var_2 setscriptablepartstate("gate", "opened", 0);
+  foreach(var_2 in self.setclientdvars) {
+    var_2 setscriptablepartstate("gate", "opened", 0);
+  }
 }
 
 _id_82F1() {
   self endon("scriptable_door_open");
   self notify("scriptable_door_close");
 
-  foreach(var_1 in self.setclientdvars)
-  var_1 setscriptablepartstate("gate", "closing", 0);
+  foreach(var_1 in self.setclientdvars) {
+    var_1 setscriptablepartstate("gate", "closing", 0);
+  }
 
   wait 2;
 
-  foreach(var_1 in self.setclientdvars)
-  var_1 setscriptablepartstate("gate", "closed", 0);
+  foreach(var_1 in self.setclientdvars) {
+    var_1 setscriptablepartstate("gate", "closed", 0);
+  }
 
   foreach(var_6 in self._id_64C5) {
     if(isDefined(var_6.target)) {
@@ -438,7 +468,7 @@ _id_82F1() {
     }
     var_6 show();
     var_6 solid();
-    var_6 disconnectpaths();
+    var_6 disconnectPaths();
   }
 }
 
@@ -481,8 +511,9 @@ _id_7F5F() {
   if(isDefined(self._id_9CFE.target)) {
     var_0 = common_scripts\utility::_id_46B5(self._id_9CFE.target, "targetname");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       self._id_9CF7 = anglesToForward(var_0.angles);
+    }
   }
 
   foreach(var_2 in self._id_64C5) {
@@ -536,12 +567,13 @@ _id_7F60() {
       var_5 = vectordot(self._id_9CF7, var_3);
       var_6 = vectordot(self._id_9CF7, var_4);
 
-      if(var_5 * var_6 > 0)
+      if(var_5 * var_6 > 0) {
         continue;
+      }
     }
 
     foreach(var_8 in self._id_64C5) {
-      var_8 moveto(var_8._id_2444, var_0, var_0);
+      var_8 moveTo(var_8._id_2444, var_0, var_0);
       var_8 playSound("trap_security_door_slam");
     }
 
@@ -551,7 +583,7 @@ _id_7F60() {
     var_10 = 1.0;
 
     foreach(var_8 in self._id_64C5) {
-      var_8 moveto(var_8._id_6BF0, var_10);
+      var_8 moveTo(var_8._id_6BF0, var_10);
       var_8 playSound("trap_security_door_reset");
     }
 
@@ -578,15 +610,17 @@ _id_3256() {
   self._id_17F0 = 1;
 
   foreach(var_1 in self._id_64C5) {
-    foreach(var_3 in var_1._id_17F0)
-    var_3 show();
+    foreach(var_3 in var_1._id_17F0) {
+      var_3 show();
+    }
   }
 }
 
 _id_5532(var_0) {
   foreach(var_2 in level.players) {
-    if(var_2 istouching(var_0))
+    if(var_2 istouching(var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -605,7 +639,7 @@ _id_7F5D(var_0) {
       for(;;) {
         if(!_id_3262()) {
           if(0) {
-            var_0 sethintstring(_id_4565(var_0));
+            var_0 setHintString(_id_4565(var_0));
             var_0 setsecondaryhintstring("");
             var_0 _id_0547::_id_9A85(0);
           }
@@ -621,7 +655,7 @@ _id_7F5D(var_0) {
         }
 
         if(0) {
-          var_0 sethintstring(_id_450D(var_0));
+          var_0 setHintString(_id_450D(var_0));
           var_0 setsecondaryhintstring(_id_415D(self._id_267B));
           var_0 _id_0547::_id_9A85(1);
         }
@@ -637,7 +671,7 @@ _id_7F5D(var_0) {
       }
     } else {
       if(0) {
-        var_0 sethintstring(_id_450D(var_0));
+        var_0 setHintString(_id_450D(var_0));
         var_0 setsecondaryhintstring(_id_415D(self._id_267B));
         var_0 _id_0547::_id_9A85(1);
       }
@@ -664,15 +698,16 @@ _id_3278() {
 }
 
 _id_3262() {
-  if(_id_3278())
+  if(_id_3278()) {
     return common_scripts\utility::_id_3C77(self.setgoalnode);
+  }
 
   return 1;
 }
 
 _id_3677(var_0) {
   if(0) {
-    var_0 sethintstring("");
+    var_0 setHintString("");
     var_0 setsecondaryhintstring("");
     var_0 _id_0547::_id_9A85(0);
   }
@@ -691,54 +726,64 @@ _id_7F5E(var_0) {
   var_0._id_5B37 = var_0.origin;
   var_0._id_5B12 = var_0.angles;
   var_1 = common_scripts\utility::random(var_0._id_64A9);
-  var_0 moveto(var_1.origin, 1.0);
+  var_0 moveTo(var_1.origin, 1.0);
 
-  if(var_0.classname == "script_model")
-    var_0 rotateto(var_1.angles, 1.0);
+  if(var_0.classname == "script_model") {
+    var_0 rotateTo(var_1.angles, 1.0);
+  }
 
   var_0._id_6BF0 = var_1.origin;
   var_2 = "interact_door";
 
   if(isDefined(var_0.setlookatent)) {
-    if(_soundexists(var_0.setlookatent))
+    if(_soundexists(var_0.setlookatent)) {
       var_2 = var_0.setlookatent;
+    }
   }
 
-  if(_soundexists(var_2))
+  if(_soundexists(var_2)) {
     var_0 playSound(var_2);
+  }
 
-  if(var_0 _id_0488::_id_8221())
+  if(var_0 _id_0488::_id_8221()) {
     var_0 connectpaths();
+  }
 
   foreach(var_4 in var_0._id_5DBD) {
-    if(var_4 _id_0488::_id_8221())
+    if(var_4 _id_0488::_id_8221()) {
       var_4 connectpaths();
+    }
   }
 }
 
 _id_2435(var_0) {
-  var_0 moveto(var_0._id_5B37, 1.0);
+  var_0 moveTo(var_0._id_5B37, 1.0);
 
-  if(var_0.classname == "script_model")
-    var_0 rotateto(var_0._id_5B12, 1.0);
+  if(var_0.classname == "script_model") {
+    var_0 rotateTo(var_0._id_5B12, 1.0);
+  }
 
   var_1 = "interact_door";
 
   if(isDefined(var_0.setlookatent)) {
-    if(_soundexists(var_0.setlookatent))
+    if(_soundexists(var_0.setlookatent)) {
       var_1 = var_0.setlookatent;
+    }
   }
 
-  if(_soundexists(var_1))
+  if(_soundexists(var_1)) {
     var_0 playSound(var_1);
+  }
 
-  if(var_0 _id_0488::_id_8221())
-    var_0 disconnectpaths();
+  if(var_0 _id_0488::_id_8221()) {
+    var_0 disconnectPaths();
+  }
 
   if(isDefined(var_0._id_5DBD)) {
     foreach(var_3 in var_0._id_5DBD) {
-      if(var_3 _id_0488::_id_8221())
-        var_3 disconnectpaths();
+      if(var_3 _id_0488::_id_8221()) {
+        var_3 disconnectPaths();
+      }
     }
   }
 }
@@ -748,9 +793,9 @@ _id_325C(var_0) {}
 _id_4485(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = tablelookup("mp/zombieCustomDoorInteract.csv", 1, var_1, 0);
-  else {
+  } else {
     var_3 = _debuglocalizestring(var_0);
     var_2 = tablelookup("mp/zombieCustomDoorInteract.csv", 2, var_3, 0);
   }
@@ -760,11 +805,13 @@ _id_4485(var_0, var_1) {
 
 _id_7BE6(var_0, var_1, var_2, var_3) {
   if(0) {
-    if(!isDefined(level._id_328C))
+    if(!isDefined(level._id_328C)) {
       level._id_328C = [];
+    }
 
-    if(!isDefined(level._id_328C[var_1]))
+    if(!isDefined(level._id_328C[var_1])) {
       level._id_328C[var_1] = [];
+    }
 
     level._id_328C[var_1][var_2] = var_0;
   }
@@ -772,25 +819,29 @@ _id_7BE6(var_0, var_1, var_2, var_3) {
   if(1) {
     var_4 = _id_4485(var_0, var_3);
 
-    if(!isDefined(level._id_328B))
+    if(!isDefined(level._id_328B)) {
       level._id_328B = [];
+    }
 
-    if(!isDefined(level._id_328B[var_1]))
+    if(!isDefined(level._id_328B[var_1])) {
       level._id_328B[var_1] = [];
+    }
 
     level._id_328B[var_1][var_2] = var_4;
   }
 }
 
 _id_7BEB(var_0, var_1, var_2) {
-  if(0)
+  if(0) {
     level._id_5E6E[var_1] = var_0;
+  }
 
   if(1) {
     var_3 = _id_4485(var_0, var_2);
 
-    if(!isDefined(level._id_5E6D))
+    if(!isDefined(level._id_5E6D)) {
       level._id_5E6D = [];
+    }
 
     level._id_5E6D[var_1] = var_3;
   }
@@ -801,8 +852,9 @@ _id_450C(var_0) {
     if(isDefined(var_0.getnegotiationnextnode) && isDefined(var_0.setmovespeedscale)) {
       var_1 = level._id_328B[var_0.getnegotiationnextnode];
 
-      if(isDefined(var_1) && isDefined(var_1[var_0.setmovespeedscale]))
+      if(isDefined(var_1) && isDefined(var_1[var_0.setmovespeedscale])) {
         return var_1[var_0.setmovespeedscale];
+      }
     }
   }
 
@@ -814,8 +866,9 @@ _id_4564(var_0) {
     if(isDefined(level._id_5E6D)) {
       var_1 = level._id_5E6D[var_0.setgoalnode];
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         return var_1;
+      }
     }
   }
 
@@ -826,8 +879,9 @@ _id_450D(var_0) {
   if(isDefined(var_0.getnegotiationnextnode) && isDefined(var_0.setmovespeedscale)) {
     var_1 = level._id_328C[var_0.getnegotiationnextnode];
 
-    if(isDefined(var_1) && isDefined(var_1[var_0.setmovespeedscale]))
+    if(isDefined(var_1) && isDefined(var_1[var_0.setmovespeedscale])) {
       return var_1[var_0.setmovespeedscale];
+    }
   }
 
   return &"ZOMBIES_DOOR_BUY";
@@ -837,8 +891,9 @@ _id_4565(var_0) {
   if(isDefined(var_0.setgoalnode)) {
     var_1 = level._id_5E6E[var_0.setgoalnode];
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       return var_1;
+    }
   }
 
   return &"ZOMBIES_REQUIRES_POWER";
@@ -853,8 +908,9 @@ _id_44A6(var_0) {
 
   if(isDefined(level._id_AC1D) && isDefined(var_0)) {
     foreach(var_3 in level._id_AC1D) {
-      if(_id_0547::_id_5565(var_3.getnegotiationnextnode, var_0))
+      if(_id_0547::_id_5565(var_3.getnegotiationnextnode, var_0)) {
         var_1 = var_3;
+      }
     }
   }
 

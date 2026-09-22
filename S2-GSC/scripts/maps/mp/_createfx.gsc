@@ -26,8 +26,9 @@ createfx() {
   level.callbackplayermigrated = common_scripts\utility::_id_A60A;
   _id_04D1::main([]);
 
-  if(isDefined(level._id_27F3))
+  if(isDefined(level._id_27F3)) {
     [[level._id_27F3]]();
+  }
 
   thread common_scripts\_createfx::func_get_level_fx();
   common_scripts\_createfx::createfx_common();

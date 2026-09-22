@@ -39,29 +39,33 @@ _id_7031(var_0, var_1, var_2, var_3, var_4) {
   var_1 endon("death");
   var_1 endon("crashing");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 endon("disconnect");
+  }
 
   var_5 = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 = var_2 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
+  }
 
   var_6 = _id_44E5(var_0) / 2;
   var_7 = var_1._id_34AC + -1 * anglesToForward(var_1.angles) * 2000;
   var_1._id_18C9 = spawn("script_model", (0, 0, 0));
   var_1._id_18C9 setModel("tag_origin");
-  var_1._id_18C9 linkto(var_1, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
+  var_1._id_18C9 linkTo(var_1, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
   var_1._id_18CA = spawn("script_model", (0, 0, 0));
   var_1._id_18CA setModel("tag_origin");
-  var_1._id_18CA linkto(var_1, "TAG_BOMB_R", (0, 0, 0), (0, 0, 0));
+  var_1._id_18CA linkTo(var_1, "TAG_BOMB_R", (0, 0, 0), (0, 0, 0));
   var_8 = 1;
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_4) && !level._id_79A1)
+  if(maps\mp\_utility::_id_579B() && isDefined(var_4) && !level._id_79A1) {
     var_8 = 0;
+  }
 
-  if(var_8)
+  if(var_8) {
     level thread _id_281E(var_1, var_0);
+  }
 
   wait 4;
   var_1 notify("start_bombing");
@@ -80,10 +84,11 @@ _id_7031(var_0, var_1, var_2, var_3, var_4) {
     var_17 = (var_17[0], var_17[1], var_7[2]);
     var_17 = var_17 + var_16;
 
-    if(var_9)
+    if(var_9) {
       var_18 = var_1._id_18C9.origin;
-    else
+    } else {
       var_18 = var_1._id_18CA.origin;
+    }
 
     var_9 = !var_9;
     var_19 = _func_1B6(_id_443C(var_0, var_2), var_18, var_17, 3.0, var_18[2], var_2);
@@ -116,8 +121,9 @@ _id_7031(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(isDefined(var_1._id_5A2C))
+    if(isDefined(var_1._id_5A2C)) {
       var_19 _meth_8505(var_1._id_5A2C);
+    }
 
     var_11 = var_11 + 0.1;
     wait 0.1;
@@ -132,18 +138,21 @@ _id_443C(var_0, var_1) {
     case "firebomb":
       var_2 = 0;
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_2 = var_1 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
+      }
 
       if(var_2) {
-        if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == "axis")
+        if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == "axis") {
           return "firebomb_bomb_axis_grenadier_mp";
-        else
+        } else {
           return "firebomb_bomb_grenadier_mp";
+        }
       } else if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == "axis")
         return "firebomb_bomb_axis_mp";
-      else
+      else {
         return "firebomb_bomb_mp";
+      }
     case "airstrike":
       if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == "axis") {
         return "airstrike_bomb_axis_mp";
@@ -170,10 +179,11 @@ _id_9302(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self notify("used");
 
   if(!isDefined(var_5)) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_5 = var_4;
-    else
+    } else {
       var_5 = self.pers["team"];
+    }
   }
 
   for(var_7 = 0; var_7 < var_1.size; var_7++) {
@@ -193,8 +203,9 @@ _id_9302(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
 _id_1719(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(level._id_0B97)) {
-    while(isDefined(level._id_0B97))
+    while(isDefined(level._id_0B97)) {
       level waittill("begin_airstrike");
+    }
 
     level._id_0B97 = 1;
   }
@@ -203,30 +214,34 @@ _id_1719(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = _id_34B0(var_1, var_3);
 
   if(isDefined(level.makeglobalunusable) && isDefined(level.makeglobalunusable[var_5])) {
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       _id_0526::_id_280E(var_8, var_2, var_5, var_6);
-    else
+    } else {
       _id_0526::_id_280E(var_8, var_2, var_5, var_3.team);
+    }
   }
 
   _id_1E89(var_0, var_3, var_8, var_2, var_5, var_6, var_4, var_7);
   wait 1.0;
   level._id_0B97 = undefined;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 notify("begin_airstrike");
+  }
 
   level notify("begin_airstrike");
 
-  if(isDefined(level.makeglobalunusable) && isDefined(level.makeglobalunusable[var_5]))
+  if(isDefined(level.makeglobalunusable) && isDefined(level.makeglobalunusable[var_5])) {
     thread _id_0526::_id_5FCB(var_8, var_5);
+  }
 }
 
 _id_1E89(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = _id_460F(var_4);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 endon("disconnect");
+  }
 
   var_9 = (0, var_3, 0);
   var_10 = _id_4616(var_2, var_9, var_8, var_4);
@@ -252,10 +267,11 @@ _id_32A7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_10 = var_8;
-  else
+  } else {
     var_10 = var_7;
+  }
 
   var_11 = _id_4615(var_5, var_1, var_10);
   var_12 = _id_460E(var_5, var_1, var_10);
@@ -269,8 +285,9 @@ _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   } else
     var_14 setModel(var_11);
 
-  if(isDefined(var_13))
+  if(isDefined(var_13)) {
     var_14 _id_74CE(var_5, var_13);
+  }
 
   if(maps\mp\_utility::_id_579B() && isDefined(var_7)) {
     var_14._id_384B = [];
@@ -294,14 +311,17 @@ _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
   var_18 = 1;
 
-  if(maps\mp\_utility::_id_585F())
+  if(maps\mp\_utility::_id_585F()) {
     var_18 = 0;
+  }
 
-  if(maps\mp\_utility::_id_579B() && isDefined(level._id_79C2.setcontents) && common_scripts\utility::_id_562E(level._id_79C2.setcontents._id_4D10))
+  if(maps\mp\_utility::_id_579B() && isDefined(level._id_79C2.setcontents) && common_scripts\utility::_id_562E(level._id_79C2.setcontents._id_4D10)) {
     var_18 = 0;
+  }
 
-  if(isDefined(level._id_0811) && level._id_0811)
+  if(isDefined(level._id_0811) && level._id_0811) {
     var_18 = 0;
+  }
 
   if(var_18) {
     var_19 = 1;
@@ -310,8 +330,9 @@ _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     var_14._id_620D setModel("tag_origin");
     var_21 = var_1;
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_21 = var_7;
+    }
 
     var_14._id_620D _meth_8351(var_21, _id_4613(var_5), 20, 20, var_20, var_19, _id_4614(var_5));
     var_14._id_620D linktosynchronizedparent(var_14, "tag_origin", (0, 0, 0), (0, 0, 0));
@@ -320,17 +341,17 @@ _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_14._id_01C8 = var_5;
   _id_09E1(var_14);
   level thread _id_051E::_id_A0DC();
-  var_14 setcandamage(1);
-  var_14 setcanradiusdamage(1);
+  var_14 setCanDamage(1);
+  var_14 setCanRadiusDamage(1);
   var_14 thread maps\mp\gametypes\_damage::_id_8676(_id_4612(var_5), undefined, ::_id_6B9D, ::_id_6B9C, 1);
   var_14 thread _id_4AB8();
   var_14._id_6F2A = 0;
   var_14 _id_74D3(var_5);
   var_14._id_5CC6 = var_0;
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_14.team = var_7;
-  else if(isDefined(var_1)) {
+  } else if(isDefined(var_1)) {
     var_14._id_0117 = var_1;
     var_14.team = var_1.team;
   } else
@@ -341,8 +362,9 @@ _id_909F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_14 thread _id_702D(var_5, var_3, var_4);
 
   if(isDefined(var_14._id_384B)) {
-    foreach(var_17 in var_14._id_384B)
-    var_17 thread _id_702D(var_5, var_17.origin, var_4);
+    foreach(var_17 in var_14._id_384B) {
+      var_17 thread _id_702D(var_5, var_17.origin, var_4);
+    }
   }
 
   thread _id_7033(var_5, var_14, var_1, var_4, var_7, var_8, var_9);
@@ -428,32 +450,36 @@ _id_4612(var_0) {
 }
 
 _id_4615(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = var_2;
-  else if(isDefined(var_1))
+  } else if(isDefined(var_1)) {
     var_3 = var_1.team;
-  else
+  } else {
     var_3 = "allies";
+  }
 
   switch (var_0) {
     case "firebomb":
-      if(var_3 == "allies")
+      if(var_3 == "allies") {
         return "ger_bomber_lancaster_vista";
-      else
+      } else {
         return "ger_bomber_he_177_vista";
+      }
     case "airstrike":
-      if(isDefined(var_3) && var_3 == "allies")
+      if(isDefined(var_3) && var_3 == "allies") {
         return "usa_bomber_a20_vista";
-      else
+      } else {
         return "ger_bomber_he_111_vista_ai";
+      }
     case "raid_carepackage":
     case "paratrooper_insert":
     case "carepackage":
     case "paratroopers":
-      if(isDefined(var_3) && var_3 == "allies")
+      if(isDefined(var_3) && var_3 == "allies") {
         return "usa_bomber_skytrain_vista";
-      else
+      } else {
         return "ger_bomber_junkers52_vista";
+      }
     case "zm_carepackage":
       return "usa_bomber_skytrain_vista";
     case "emergency_carepackage":
@@ -468,27 +494,30 @@ _id_4615(var_0, var_1, var_2) {
 }
 
 _id_460E(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = var_2;
-  else if(isDefined(var_1))
+  } else if(isDefined(var_1)) {
     var_3 = var_1.team;
-  else
+  } else {
     var_3 = "allies";
+  }
 
   switch (var_0) {
     case "airstrike":
-      if(isDefined(var_3) && var_3 == "allies")
+      if(isDefined(var_3) && var_3 == "allies") {
         return "usa_bomber_a20_vista_fade";
-      else
+      } else {
         return "ger_bomber_he_111_vista_ai_fade";
+      }
     case "raid_carepackage":
     case "paratrooper_insert":
     case "carepackage":
     case "paratroopers":
-      if(isDefined(var_3) && var_3 == "allies")
+      if(isDefined(var_3) && var_3 == "allies") {
         return "usa_bomber_skytrain_vista_fade";
-      else
+      } else {
         return "ger_bomber_junkers52_vista_fade";
+      }
     case "zm_carepackage":
       return "usa_bomber_skytrain_vista_fade";
     case "emergency_carepackage":
@@ -503,42 +532,48 @@ _id_460E(var_0, var_1, var_2) {
 }
 
 _id_460A(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = var_2;
-  else if(isDefined(var_1))
+  } else if(isDefined(var_1)) {
     var_3 = var_1.team;
-  else
+  } else {
     var_3 = "allies";
+  }
 
   switch (var_0) {
     case "firebomb":
-      if(var_3 == "allies")
+      if(var_3 == "allies") {
         return "ks_firebomb_usa";
-      else
+      } else {
         return "ks_firebomb_ger";
+      }
     case "airstrike":
-      if(isDefined(var_3) && var_3 == "allies")
+      if(isDefined(var_3) && var_3 == "allies") {
         return "ks_carpetbomb_usa";
-      else
+      } else {
         return "ks_carpetbomb_ger";
+      }
     case "carepackage":
-      if(isDefined(var_3) && var_3 == "allies")
+      if(isDefined(var_3) && var_3 == "allies") {
         return "ks_carepackage_usa_animated";
-      else
+      } else {
         return "ks_carepackage_ger_animated";
+      }
     case "raid_carepackage":
-      if(game["defenders"] == "allies")
+      if(game["defenders"] == "allies") {
         return "ks_carepackage_usa_animated";
-      else
+      } else {
         return "ks_carepackage_ger_animated";
+      }
     case "zm_carepackage":
       return "ks_carepackage_ger_animated";
     case "paratrooper_insert":
     case "paratroopers":
-      if(isDefined(var_3) && var_3 == "allies")
+      if(isDefined(var_3) && var_3 == "allies") {
         return "ks_paratrooper_usa_animated";
-      else
+      } else {
         return "ks_paratrooper_ger_animated";
+      }
     case "emergency_carepackage":
       if(isDefined(var_3) && var_3 == "allies") {
         return "ks_emergency_airdrop_usa_animated";
@@ -591,8 +626,9 @@ _id_8C0A(var_0, var_1, var_2, var_3, var_4) {
   var_7 = 1;
   var_8 = var_0;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_8 = var_4;
+  }
 
   if(isDefined(var_1)) {
     var_9 = var_2 * 2;
@@ -606,8 +642,9 @@ _id_4516() {
 }
 
 _id_6B9C(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0) && isDefined(self._id_0117) && var_0 == self._id_0117)
+  if(isDefined(var_0) && isDefined(self._id_0117) && var_0 == self._id_0117) {
     return -1;
+  }
 
   var_4 = var_3;
 
@@ -627,14 +664,17 @@ _id_6B9C(var_0, var_1, var_2, var_3) {
       case "MOD_PISTOL_BULLET":
       case "MOD_RIFLE_BULLET":
       default:
-        if(issubstr(var_1, "fmj"))
+        if(issubstr(var_1, "fmj")) {
           var_4 = var_4 * 2.0;
+        }
 
-        if(isDefined(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_superbulletpenetration"))
+        if(isDefined(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_superbulletpenetration")) {
           var_4 = var_4 * 2.0;
+        }
 
-        if(_id_576A(var_1))
+        if(_id_576A(var_1)) {
           var_4 = var_4 * 0.12;
+        }
 
         var_4 = var_4 * 0.15;
         break;
@@ -646,8 +686,9 @@ _id_6B9C(var_0, var_1, var_2, var_3) {
 
 _id_576A(var_0) {
   foreach(var_2 in level._id_80BC) {
-    if(issubstr(var_0, var_2))
+    if(issubstr(var_0, var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -669,8 +710,9 @@ _id_9147(var_0, var_1) {
   var_3 = 15;
   var_4 = anglesToForward(var_1 getplayerangles());
 
-  if(vectordot(var_2, var_4) >= _cos(var_3))
+  if(vectordot(var_2, var_4) >= _cos(var_3)) {
     self setstablemissile(1);
+  }
 }
 
 _id_5C27(var_0, var_1) {
@@ -681,13 +723,15 @@ _id_5C27(var_0, var_1) {
   for(;;) {
     var_3 = self.origin;
 
-    if(self._id_01C8 == "fighter_strike")
+    if(self._id_01C8 == "fighter_strike") {
       var_3 = self gettagorigin("TAG_BLOOD");
+    }
 
     var_4 = distancesquared(var_0.origin, var_3);
 
-    if(var_4 < var_2)
+    if(var_4 < var_2) {
       thread _id_5C26(var_0, var_1);
+    }
 
     waitframe();
   }
@@ -705,8 +749,9 @@ _id_2818() {
 }
 
 _id_2DD3() {
-  if(isDefined(self._id_11C9))
+  if(isDefined(self._id_11C9)) {
     _missile_deleteattractor(self._id_11C9);
+  }
 }
 
 _id_4611(var_0) {
@@ -736,22 +781,27 @@ _id_2D47(var_0) {
   self notify("airstrike_complete");
   _id_7CEE(self);
 
-  if(isDefined(self._id_620D))
+  if(isDefined(self._id_620D)) {
     self._id_620D delete();
+  }
 
-  if(isDefined(self._id_620E))
+  if(isDefined(self._id_620E)) {
     self._id_620E delete();
+  }
 
   if(isDefined(self)) {
-    if(isDefined(self._id_18C9))
+    if(isDefined(self._id_18C9)) {
       self._id_18C9 delete();
+    }
 
-    if(isDefined(self._id_18CA))
+    if(isDefined(self._id_18CA)) {
       self._id_18CA delete();
+    }
 
     if(isDefined(self._id_384B)) {
-      foreach(var_2 in self._id_384B)
-      var_2 delete();
+      foreach(var_2 in self._id_384B) {
+        var_2 delete();
+      }
     }
 
     self delete();
@@ -762,8 +812,9 @@ _id_6B9D(var_0, var_1, var_2, var_3) {
   thread _id_272D();
   var_4 = undefined;
 
-  if(self._id_01C8 == "carepackage" || self._id_01C8 == "emergency_carepackage" || self._id_01C8 == "raid_carepackage" || self._id_01C8 == "zm_carepackage")
+  if(self._id_01C8 == "carepackage" || self._id_01C8 == "emergency_carepackage" || self._id_01C8 == "raid_carepackage" || self._id_01C8 == "zm_carepackage") {
     var_4 = "cpkg_destroyed";
+  }
 
   maps\mp\gametypes\_damage::_id_6B4B(var_0, var_1, var_2, var_3, _id_460B(self._id_01C8), var_4, _id_460D(self._id_01C8), 1);
 }
@@ -797,8 +848,9 @@ _id_4AB8(var_0) {
     playFX(_id_460C(self._id_01C8, self.team), self.origin, var_1);
     _id_0380::_id_2889("ks_plane_destruct_explode", undefined, self.origin);
 
-    if(self._id_01C8 == "airstrike")
+    if(self._id_01C8 == "airstrike") {
       level notify("aud_carpet_bomb_killed");
+    }
   }
 
   _id_2D47(1);
@@ -843,29 +895,33 @@ _id_460D(var_0) {
 _id_460C(var_0, var_1) {
   switch (var_0) {
     case "firebomb":
-      if(var_1 == "allies")
+      if(var_1 == "allies") {
         return common_scripts\utility::_id_44F5("plane_death");
-      else
+      } else {
         return common_scripts\utility::_id_44F5("plane_death");
+      }
     case "airstrike":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return common_scripts\utility::_id_44F5("airstrike_death_allies");
-      else
+      } else {
         return common_scripts\utility::_id_44F5("airstrike_death_axis");
+      }
     case "zm_carepackage":
     case "raid_carepackage":
     case "paratrooper_insert":
     case "carepackage":
     case "paratroopers":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return common_scripts\utility::_id_44F5("plane_death");
-      else
+      } else {
         return common_scripts\utility::_id_44F5("plane_death");
+      }
     case "emergency_carepackage":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return common_scripts\utility::_id_44F5("plane_death");
-      else
+      } else {
         return common_scripts\utility::_id_44F5("plane_death");
+      }
     default:
       return common_scripts\utility::_id_44F5("plane_death");
   }
@@ -903,49 +959,57 @@ _id_0EA1(var_0, var_1, var_2, var_3) {
   var_8 = var_6 + var_4 + var_7;
   var_9 = 4 + var_5 + 8;
 
-  if(var_0 == "zm_carepackage")
+  if(var_0 == "zm_carepackage") {
     var_9 = 2 + var_5 + 4;
+  }
 
   thread _id_703B();
   self._id_933D = "flying_in";
 
-  if(1 && isDefined(self._id_620D))
+  if(1 && isDefined(self._id_620D)) {
     self._id_620D _meth_8352(4000, 1);
+  }
 
-  if(1 && isDefined(self._id_620E))
+  if(1 && isDefined(self._id_620E)) {
     self._id_620E _meth_8352(4000, 1);
+  }
 
   if(isDefined(var_3) && var_3) {
     var_10 = var_1 + anglesToForward(var_2) * var_8;
-    self moveto(var_10, var_9);
+    self moveTo(var_10, var_9);
   }
 
   var_11 = 4;
 
-  if(var_0 == "zm_carepackage")
+  if(var_0 == "zm_carepackage") {
     var_11 = 2;
+  }
 
   wait(var_11);
   self._id_933D = "strike";
   wait(var_5);
   self._id_933D = "flying_out";
 
-  if(1 && isDefined(self._id_620D))
+  if(1 && isDefined(self._id_620D)) {
     self._id_620D _meth_8352(4000, 0);
+  }
 
-  if(1 && isDefined(self._id_620E))
+  if(1 && isDefined(self._id_620E)) {
     self._id_620E _meth_8352(4000, 0);
+  }
 
   var_12 = 7;
 
-  if(var_0 == "zm_carepackage")
+  if(var_0 == "zm_carepackage") {
     var_12 = 3;
+  }
 
   wait(var_12);
   var_13 = undefined;
 
-  if(!isDefined(self._id_0117))
+  if(!isDefined(self._id_0117)) {
     var_13 = self.team;
+  }
 
   var_14 = _id_460E(var_0, self._id_0117, var_13);
 
@@ -973,10 +1037,10 @@ _id_703B() {
 _id_7041() {
   self endon("airstrike_complete");
   waitframe();
-  _playfxontag(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_right");
-  _playfxontag(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_left");
-  _playfxontag(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_right_wingtip");
-  _playfxontag(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_left_wingtip");
+  _playFXOnTag(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_right");
+  _playFXOnTag(common_scripts\utility::_id_44F5("airstrike_engine"), self, "tag_engine_left");
+  _playFXOnTag(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_right_wingtip");
+  _playFXOnTag(common_scripts\utility::_id_44F5("airstrike_wingtip"), self, "tag_left_wingtip");
 }
 
 _id_281E(var_0, var_1) {
@@ -986,7 +1050,7 @@ _id_281E(var_0, var_1) {
   var_3 = 4 + _id_44E6(var_1) + 8;
   var_2 thread _id_2D3B(var_3);
   var_4 = _anglestoaxis((35, -45, 0))["forward"];
-  var_2 linkto(var_0, "tag_origin", var_4 * -1 * 1000, (35, -45, 0));
+  var_2 linkTo(var_0, "tag_origin", var_4 * -1 * 1000, (35, -45, 0));
   var_0._id_5A2C = var_2;
 }
 
@@ -997,8 +1061,9 @@ _id_2D3B(var_0) {
 }
 
 _id_4409() {
-  if(isDefined(level._id_0B92))
+  if(isDefined(level._id_0B92)) {
     return level._id_0B92;
+  }
 
   var_0 = common_scripts\utility::_id_44BD("warbird_anchor", "targetname");
 
@@ -1008,8 +1073,9 @@ _id_4409() {
     var_0.targetname = "warbird_anchor";
   }
 
-  if(!isDefined(var_0._id_0165))
+  if(!isDefined(var_0._id_0165)) {
     var_0._id_0165 = 3500;
+  }
 
   level._id_0B92 = var_0.origin[2] + 3000;
   return level._id_0B92;
@@ -1018,22 +1084,27 @@ _id_4409() {
 _id_460F(var_0) {
   var_1 = 0;
 
-  if(isDefined(level._id_0B99) && isDefined(level._id_0B99._id_906E))
+  if(isDefined(level._id_0B99) && isDefined(level._id_0B99._id_906E)) {
     var_1 = level._id_0B99._id_906E;
+  }
 
   var_2 = 0;
 
-  if(maps\mp\_utility::_id_4571() == "mp_gibraltar_02")
+  if(maps\mp\_utility::_id_4571() == "mp_gibraltar_02") {
     var_2 = 1000;
+  }
 
-  if(maps\mp\_utility::_id_4571() == "mp_wolfslair" || maps\mp\_utility::_id_4571() == "mp_wolfslair_free" || maps\mp\_utility::_id_4571() == "mp_wolfslair2")
+  if(maps\mp\_utility::_id_4571() == "mp_wolfslair" || maps\mp\_utility::_id_4571() == "mp_wolfslair_free" || maps\mp\_utility::_id_4571() == "mp_wolfslair2") {
     var_2 = 1000;
+  }
 
-  if(maps\mp\_utility::_id_4571() == "mp_sandbox_01")
+  if(maps\mp\_utility::_id_4571() == "mp_sandbox_01") {
     var_2 = -1500;
+  }
 
-  if(maps\mp\_utility::_id_4571() == "mp_airship" && (var_0 == "carepackage" || var_0 == "emergency_carepackage"))
+  if(maps\mp\_utility::_id_4571() == "mp_airship" && (var_0 == "carepackage" || var_0 == "emergency_carepackage")) {
     var_2 = 1000;
+  }
 
   var_3 = _id_4409();
   return var_3 + var_1 + var_2;
@@ -1051,8 +1122,9 @@ _id_4404(var_0, var_1, var_2) {
 _id_4616(var_0, var_1, var_2, var_3) {
   var_4 = 6400;
 
-  if(var_3 == "zm_carepackage")
+  if(var_3 == "zm_carepackage") {
     var_4 = 4000;
+  }
 
   var_5 = _id_44E5(var_3);
   var_6 = var_5 / 2 + var_4;
@@ -1111,10 +1183,11 @@ _id_34B0(var_0, var_1) {
 _id_34AD(var_0, var_1) {
   var_2 = _id_34AF(var_0, var_1);
 
-  if(var_2)
+  if(var_2) {
     var_3 = 1;
-  else
+  } else {
     var_3 = -1;
+  }
 
   var_4 = common_scripts\utility::_id_3D5D(var_0.origin);
   var_5 = var_4 + anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles)) * (var_3 * 100000);
@@ -1124,25 +1197,28 @@ _id_34AD(var_0, var_1) {
 }
 
 _id_34AE(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 3000;
+  }
 
   var_3 = _id_34AF(var_0, var_1);
 
-  if(var_3)
+  if(var_3) {
     var_4 = 1;
-  else
+  } else {
     var_4 = -1;
+  }
 
   var_5 = common_scripts\utility::_id_3D5D(var_0.origin);
   var_6 = var_5 + anglesToForward(common_scripts\utility::_id_3D5C(var_0.angles)) * (var_4 * 100000);
   var_7 = _pointonsegmentnearesttopoint(var_5, var_6, var_1);
   var_8 = distance(var_5, var_7);
 
-  if(var_8 <= var_2)
+  if(var_8 <= var_2) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_34AF(var_0, var_1) {
@@ -1150,10 +1226,11 @@ _id_34AF(var_0, var_1) {
   var_3 = vectorNormalize(common_scripts\utility::_id_3D5D(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 > 0)
+  if(var_4 > 0) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_A6E4(var_0, var_1, var_2) {
@@ -1164,13 +1241,15 @@ _id_A6E4(var_0, var_1, var_2) {
     var_2 endon("joined_team");
   }
 
-  while(!_id_34AE(var_0, var_0._id_34AC, var_1))
+  while(!_id_34AE(var_0, var_0._id_34AC, var_1)) {
     waitframe();
+  }
 }
 
 _id_9E35(var_0, var_1) {
-  if(maps\mp\_utility::_id_5668())
+  if(maps\mp\_utility::_id_5668()) {
     return 0;
+  }
 
   if(isDefined(level._id_0B93) || isDefined(level._id_2000)) {
     self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
@@ -1190,8 +1269,9 @@ _id_9E35(var_0, var_1) {
 }
 
 _id_9E3A(var_0, var_1) {
-  if(maps\mp\_utility::_id_5668())
+  if(maps\mp\_utility::_id_5668()) {
     return 0;
+  }
 
   if(isDefined(level._id_0B93) || isDefined(level._id_2000)) {
     self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
@@ -1200,8 +1280,9 @@ _id_9E3A(var_0, var_1) {
 
   var_2 = vehicle_setvelocity(var_0, var_1);
 
-  if(!isDefined(var_2) || !var_2)
+  if(!isDefined(var_2) || !var_2) {
     return 0;
+  }
 
   return 1;
 }
@@ -1209,13 +1290,15 @@ _id_9E3A(var_0, var_1) {
 vehicle_setvelocity(var_0, var_1) {
   self endon("stop_location_selection");
 
-  if(!isDefined(level._id_5FF0))
+  if(!isDefined(level._id_5FF0)) {
     level._id_5FF0 = 1024;
+  }
 
   var_2 = level._id_5FF0 / 6.46875;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_2 = var_2 * 1.5;
+  }
 
   var_3 = 1;
   self setclientomnvar("ui_map_location_num_planes", 1);
@@ -1229,8 +1312,9 @@ vehicle_setvelocity(var_0, var_1) {
   while(!var_6 && !maps\mp\_utility::_id_5668(0)) {
     self waittill("confirm_location", var_7, var_8);
 
-    if(!var_3)
+    if(!var_3) {
       var_8 = 0;
+    }
 
     if(_id_A272(var_7, var_8, self, var_1)) {
       var_4 = var_7;
@@ -1248,8 +1332,9 @@ vehicle_setvelocity(var_0, var_1) {
   _id_0378::_id_8D74("ks_bombing_run_location_selected");
   self setclientomnvar("ui_map_location_blocked", 0);
 
-  if(maps\mp\_utility::_id_5668())
+  if(maps\mp\_utility::_id_5668()) {
     return 0;
+  }
 
   if(isDefined(level._id_0B93) || isDefined(level._id_2000)) {
     self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
@@ -1280,8 +1365,9 @@ _id_A68F() {
   self setblurforplayer(0, 0.3);
   self setclientomnvar("ui_map_location_blocked", 0);
 
-  if(maps\mp\gametypes\_hostmigration::_id_A782() > 0)
+  if(maps\mp\gametypes\_hostmigration::_id_A782() > 0) {
     self switchtoweapon(common_scripts\utility::_id_4550());
+  }
 
   level._id_0B93 = undefined;
 }

@@ -39,8 +39,9 @@ _id_78AF() {
 
       var_3 = _id_4586(var_1[var_2]._id_7585, var_1[0]._id_7585) + 180;
 
-      if(var_3 > 360)
+      if(var_3 > 360) {
         var_3 = var_3 - 360;
+      }
 
       var_1[var_2]._id_366E = var_3;
       var_1[0]._id_9188 = var_3;
@@ -65,8 +66,9 @@ _id_2B49() {
 
     var_0 = 1;
 
-    while(!level._id_6999 buttonPressed("BUTTON_Y"))
+    while(!level._id_6999 buttonPressed("BUTTON_Y")) {
       waitframe();
+    }
 
     level._id_6999 playSound("mouse_click");
 
@@ -75,8 +77,9 @@ _id_2B49() {
       var_0 = 0;
     }
 
-    while(level._id_6999 buttonPressed("BUTTON_Y"))
+    while(level._id_6999 buttonPressed("BUTTON_Y")) {
       waitframe();
+    }
   }
 }
 
@@ -98,10 +101,11 @@ onplayerconnect() {
   var_0 takeallweapons();
   setDvar("2562", 0);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return;
-  else
+  } else {
     level._id_6999 = var_0;
+  }
 
   var_0 thread _id_4304();
   _id_ACC8("main");
@@ -111,8 +115,9 @@ _id_7ABE() {
   self endon("disconnect");
   var_0 = "autoassign";
 
-  while(!isDefined(self.pers["team"]))
+  while(!isDefined(self.pers["team"])) {
     waitframe();
+  }
 
   self notify("menuresponse", game["menu_team"], var_0);
   wait 0.5;
@@ -120,8 +125,9 @@ _id_7ABE() {
   var_2 = [];
 
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
-    if(!issubstr(var_1[var_3], "custom"))
+    if(!issubstr(var_1[var_3], "custom")) {
       var_2[var_2.size] = var_1[var_3];
+    }
   }
 
   for(;;) {
@@ -147,7 +153,7 @@ _id_4304() {
 _id_669D(var_0, var_1, var_2) {
   if(isDefined(level._id_78AC) && level._id_78AC.size) {}
 
-  var_3 = _getent(var_2, "targetname");
+  var_3 = _getEnt(var_2, "targetname");
   var_4 = vectorNormalize(anglesToForward(var_3.angles)) * 40;
   level._id_78AC[var_0] = [];
   level._id_78AD[var_0]["view_start"] = var_1;
@@ -157,7 +163,7 @@ _id_669D(var_0, var_1, var_2) {
 }
 
 _id_669C(var_0, var_1, var_2, var_3) {
-  var_4 = _getent(var_2, "targetname");
+  var_4 = _getEnt(var_2, "targetname");
   var_5 = _id_463D(var_0, var_4);
   var_6 = spawnStruct();
   var_6._id_7584 = var_4.origin;
@@ -194,8 +200,9 @@ _id_A162() {
     if(isDefined(level._id_08BF)) {
       level._id_08BF._id_3DD6 = (1, 1, 0.5);
 
-      if(isDefined(var_0) && var_0 != level._id_08BF)
+      if(isDefined(var_0) && var_0 != level._id_08BF) {
         level._id_6999 playSound("mouse_over");
+      }
     }
 
     waitframe();
@@ -213,8 +220,9 @@ _id_A940() {
 
     var_0 = 1;
 
-    while(!level._id_6999 buttonPressed("BUTTON_A"))
+    while(!level._id_6999 buttonPressed("BUTTON_A")) {
       waitframe();
+    }
 
     level._id_6999 playSound("mouse_click");
 
@@ -224,8 +232,9 @@ _id_A940() {
       var_0 = 0;
     }
 
-    while(level._id_6999 buttonPressed("BUTTON_A"))
+    while(level._id_6999 buttonPressed("BUTTON_A")) {
       waitframe();
+    }
   }
 }
 
@@ -240,8 +249,9 @@ _id_A8EE() {
 
     var_0 = 1;
 
-    while(!level._id_6999 buttonPressed("BUTTON_X"))
+    while(!level._id_6999 buttonPressed("BUTTON_X")) {
       waitframe();
+    }
 
     level._id_6999 playSound("mouse_click");
 
@@ -250,16 +260,18 @@ _id_A8EE() {
       var_0 = 0;
     }
 
-    while(level._id_6999 buttonPressed("BUTTON_X"))
+    while(level._id_6999 buttonPressed("BUTTON_X")) {
       waitframe();
+    }
   }
 }
 
 _id_8F1B(var_0) {
   for(var_1 = 0; var_1 < var_0.size - 1; var_1++) {
     for(var_2 = 0; var_2 < var_0.size - 1 - var_1; var_2++) {
-      if(var_0[var_2 + 1]._id_7585 < var_0[var_2]._id_7585)
+      if(var_0[var_2 + 1]._id_7585 < var_0[var_2]._id_7585) {
         _id_1DD7(var_0[var_2], var_0[var_2 + 1]);
+      }
     }
   }
 }
@@ -283,8 +295,9 @@ _id_1DD7(var_0, var_1) {
 }
 
 _id_33C7(var_0) {
-  foreach(var_2 in level._id_78AC[var_0])
-  var_2 thread _id_33C6(var_0);
+  foreach(var_2 in level._id_78AC[var_0]) {
+    var_2 thread _id_33C6(var_0);
+  }
 }
 
 _id_33C6(var_0) {
@@ -296,11 +309,13 @@ _id_33C6(var_0) {
   for(;;) {
     var_3 = (1, 0, 0);
 
-    if(_id_572C(self._id_9188, self._id_366E))
+    if(_id_572C(self._id_9188, self._id_366E)) {
       var_3 = (1, 1, 0);
+    }
 
-    if(isDefined(level._id_2856) && level._id_2856 > 0)
+    if(isDefined(level._id_2856) && level._id_2856 > 0) {
       var_4 = var_1 + _id_78A9(level._id_7F3D, 2);
+    }
 
     waitframe();
   }
@@ -309,20 +324,22 @@ _id_33C6(var_0) {
 _id_ACC8(var_0, var_1) {
   level._id_08BF = undefined;
 
-  if(isDefined(level._id_78AA) && level._id_78AA != "")
+  if(isDefined(level._id_78AA) && level._id_78AA != "") {
     level._id_78AE = level._id_78AA;
-  else {
+  } else {
     level._id_78AE = "main";
     level._id_78AA = "main";
   }
 
-  foreach(var_3 in level._id_78AC[level._id_78AE])
-  var_3 notify("remove_button");
+  foreach(var_3 in level._id_78AC[level._id_78AE]) {
+    var_3 notify("remove_button");
+  }
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     level._id_6999 _id_47F3(level._id_78AD[level._id_78AE]["view_start"], var_0);
-  else
+  } else {
     level._id_6999 _id_47F2(level._id_78AD[var_0]["view_start"]);
+  }
 
   level thread _id_33C7(var_0);
   level._id_78AA = var_0;
@@ -339,8 +356,9 @@ _id_463D(var_0, var_1) {
   var_8 = vectorNormalize(_vectorfromlinetopoint(var_3, var_3 + var_4, var_7));
   var_9 = _acos(vectordot(var_8, var_5));
 
-  if(vectordot(anglestoright(var_2), var_8) < 0)
+  if(vectordot(anglestoright(var_2), var_8) < 0) {
     var_9 = 360 - var_9;
+  }
 
   return var_9;
 }
@@ -362,19 +380,21 @@ _id_572C(var_0, var_1) {
   var_2 = level._id_7F3D > var_0 && level._id_7F3D < 360;
   var_3 = level._id_7F3D > 0 && level._id_7F3D < var_1;
 
-  if(var_0 > var_1)
+  if(var_0 > var_1) {
     var_4 = var_2 || var_3;
-  else
+  } else {
     var_4 = level._id_7F3D > var_0 && level._id_7F3D < var_1;
+  }
 
   return var_4;
 }
 
 _id_0874() {
-  if(isDefined(level._id_78AA) && level._id_78AA != "main")
+  if(isDefined(level._id_78AA) && level._id_78AA != "main") {
     _id_ACC8("main", 1);
-  else
+  } else {
     return;
+  }
 }
 
 _id_0880() {
@@ -413,10 +433,10 @@ _id_A4AB() {
 
 _id_1D19(var_0) {
   level._id_A4AC[var_0] = [];
-  var_1 = _getent(var_0, "targetname");
+  var_1 = _getEnt(var_0, "targetname");
 
   for(level._id_A4AC[var_0][level._id_A4AC[var_0].size] = var_1; isDefined(var_1) && isDefined(var_1.target); var_1 = var_2) {
-    var_2 = _getent(var_1.target, "targetname");
+    var_2 = _getEnt(var_1.target, "targetname");
     level._id_A4AC[var_0][level._id_A4AC[var_0].size] = var_2;
   }
 }
@@ -427,7 +447,7 @@ _id_47F2(var_0) {
     level._id_34D5 = spawn("script_model", var_1.origin);
     level._id_34D5.angles = var_1.angles;
     self setOrigin(level._id_34D5.origin - (0, 0, 65));
-    self linkto(level._id_34D5);
+    self linkTo(level._id_34D5);
     waitframe();
     self setplayerangles(level._id_34D5.angles);
     thread _id_3DF9();
@@ -439,19 +459,21 @@ _id_47F2(var_0) {
   var_2 = max(var_2, 0.1);
   var_4 = var_2;
 
-  if(!1)
+  if(!1) {
     var_4 = var_4 * (var_2 * (level._id_A4AC[var_0].size + 1));
+  }
 
   thread _id_1883(3, var_4);
 
   foreach(var_7, var_6 in level._id_A4AC[var_0]) {
     if(1) {
-      if(var_7 != level._id_A4AC[var_0].size - 1)
+      if(var_7 != level._id_A4AC[var_0].size - 1) {
         continue;
+      }
     }
 
-    level._id_34D5 moveto(var_6.origin, var_2, var_2 * 0.5, 0);
-    level._id_34D5 rotateto(var_6.angles, var_2, var_2 * 0.5, 0);
+    level._id_34D5 moveTo(var_6.origin, var_2, var_2 * 0.5, 0);
+    level._id_34D5 rotateTo(var_6.angles, var_2, var_2 * 0.5, 0);
     wait(var_2);
   }
 }
@@ -463,16 +485,17 @@ _id_47F3(var_0, var_1) {
   var_2 = max(var_2, 0.1);
   var_4 = var_2;
 
-  if(!1)
+  if(!1) {
     var_4 = var_4 * (var_2 * (level._id_A4AC[var_0].size + 1));
+  }
 
   thread _id_1883(3, var_4);
 
   if(!1) {
     for(var_5 = level._id_A4AC[var_0].size - 1; var_5 >= 0; var_5--) {
       var_6 = level._id_A4AC[var_0][var_5];
-      level._id_34D5 moveto(var_6.origin, var_2);
-      level._id_34D5 rotateto(var_6.angles, var_2);
+      level._id_34D5 moveTo(var_6.origin, var_2);
+      level._id_34D5 rotateTo(var_6.angles, var_2);
       wait(var_2);
     }
   }
@@ -480,8 +503,8 @@ _id_47F3(var_0, var_1) {
   thread _id_1883(3, var_2);
   var_7 = level._id_78AD[var_1]["player_view_pos"];
   var_8 = level._id_78AD[var_1]["view_angles"];
-  level._id_34D5 moveto(var_7, var_2, var_2 * 0.5, 0);
-  level._id_34D5 rotateto(var_8, var_2, var_2 * 0.5, 0);
+  level._id_34D5 moveTo(var_7, var_2, var_2 * 0.5, 0);
+  level._id_34D5 rotateTo(var_8, var_2, var_2 * 0.5, 0);
   wait(var_2);
 }
 

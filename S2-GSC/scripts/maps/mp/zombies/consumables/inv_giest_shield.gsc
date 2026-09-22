@@ -9,15 +9,17 @@ _id_52A4() {
   common_scripts\utility::_id_092C("tesla blood shock", "vfx/zombie/abilities_perks/zmb_blood_zmb_stun");
   level.giest_bubble_voulnerable_zombies = ["zombie_generic", "zombie_berserker", "zombie_heavy", "zombie_exploder", "zombie_sizzler", "zombie_assassin"];
 
-  if(!(maps\mp\_utility::_id_4571() == "mp_zombie_island"))
+  if(!(maps\mp\_utility::_id_4571() == "mp_zombie_island")) {
     level thread maps\mp\zombies\weapons\_zombie_aoe_grenade::init_pommel_aud();
+  }
 
   common_scripts\utility::_id_092C("zmb_player_consumable_bubble", "vfx/zombie/zmb_csm_player_bubble");
 }
 
 canuseshieldconsumable(var_0) {
-  if(!_id_0561::_id_1F7B())
+  if(!_id_0561::_id_1F7B()) {
     return 0;
+  }
 
   return 1;
 }
@@ -48,11 +50,13 @@ spawn_a_giest_bubble_shield(var_0, var_1) {
   var_5 = gettime();
   var_6 = 15;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_6 = var_1;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2 thread _id_057A::_id_259E("consumable_zm_weapon_shield", var_6);
+  }
 
   while(int(gettime() - var_5) / 1000 < var_6) {
     foreach(var_8 in _id_0547::_id_408F()) {
@@ -93,8 +97,9 @@ spawn_a_giest_bubble_shield(var_0, var_1) {
     if(!isDefined(var_15._id_0A4B) || !common_scripts\utility::_id_0F79(level.giest_bubble_voulnerable_zombies, var_15._id_0A4B)) {
       continue;
     }
-    if(_id_0547::_id_5565(var_15.geistshieldattacker, var_3))
+    if(_id_0547::_id_5565(var_15.geistshieldattacker, var_3)) {
       var_15 thread death_shock_launch();
+    }
   }
 
   var_4 delete();
@@ -107,8 +112,9 @@ loop_spark_fx() {
   self notify("new_loop_spark_fx");
   self endon("new_loop_spark_fx");
 
-  while(!common_scripts\utility::_id_562E(self._id_98EF))
+  while(!common_scripts\utility::_id_562E(self._id_98EF)) {
     waitframe();
+  }
 
   while(common_scripts\utility::_id_562E(self._id_98EF)) {
     play_shield_zombie_shock_vfx();
@@ -117,7 +123,7 @@ loop_spark_fx() {
 }
 
 play_shield_zombie_shock_vfx() {
-  _playfxontag(common_scripts\utility::_id_44F5("tesla blood shock"), self, "j_spine4");
+  _playFXOnTag(common_scripts\utility::_id_44F5("tesla blood shock"), self, "j_spine4");
 }
 
 death_shock_launch(var_0) {
@@ -129,8 +135,9 @@ death_shock_launch(var_0) {
   var_4 = var_2.giest_shield_origin;
 
   if(isDefined(var_2.geistshieldattacker)) {
-    if(!isDefined(var_2.geistshieldattacker.lastexplodetime))
+    if(!isDefined(var_2.geistshieldattacker.lastexplodetime)) {
       var_2.geistshieldattacker.lastexplodetime = gettime();
+    }
 
     if(gettime() - var_2.geistshieldattacker.lastexplodetime > 100) {
       var_2.geistshieldattacker.lastexplodetime = gettime();
@@ -139,10 +146,11 @@ death_shock_launch(var_0) {
     }
   }
 
-  if(isDefined(var_0) && isDefined(var_0.player))
+  if(isDefined(var_0) && isDefined(var_0.player)) {
     self dodamage(level.heavy_giest_dmg, self.origin, var_0.player);
-  else
+  } else {
     self dodamage(level.heavy_giest_dmg, self.origin);
+  }
 
   level thread run_explosion_sphere(var_4);
 }
@@ -153,8 +161,9 @@ run_explosion_sphere(var_0) {
 }
 
 getshieldconsumablecharges(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":

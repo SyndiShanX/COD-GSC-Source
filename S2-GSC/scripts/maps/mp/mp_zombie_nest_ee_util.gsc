@@ -90,11 +90,11 @@ _id_A6A0(var_0, var_1) {
   _id_A6CD(var_1);
   self solid();
   level._id_4D74 = _id_0547::_id_8FBA(var_0, "zmb_hilt_sphere");
-  var_2 = _getent("hilt_model", "targetname");
+  var_2 = _getEnt("hilt_model", "targetname");
   _triggerfx(level._id_4D74);
   var_2 _id_0378::_id_8D74("aud_start_hilt_sphere_sound");
   wait 5;
-  self setcandamage(1);
+  self setCanDamage(1);
   var_3 = [];
 
   while(var_3.size < level.players.size) {
@@ -102,11 +102,13 @@ _id_A6A0(var_0, var_1) {
     _id_0378::_id_8D74("aud_hilt_destroy");
 
     if(isDefined(var_4)) {
-      if(!common_scripts\utility::_id_0F79(var_3, var_4))
+      if(!common_scripts\utility::_id_0F79(var_3, var_4)) {
         var_3 = common_scripts\utility::_id_0F6F(var_3, var_4);
+      }
 
-      if(var_3.size == 1)
+      if(var_3.size == 1) {
         thread _id_08BD(5, "brute tesla activated", "brute tesla activation fail");
+      }
 
       continue;
     }
@@ -116,31 +118,35 @@ _id_A6A0(var_0, var_1) {
 
   playFX(level._effect["zmb_hilt_sphere_explosion"], var_0.origin, anglesToForward(var_0.angles));
   level._id_4D74 delete();
-  var_5 = _getent("nest_ee_shard_intro_start_trig", "targetname");
+  var_5 = _getEnt("nest_ee_shard_intro_start_trig", "targetname");
   var_5 common_scripts\utility::_id_9DA3();
   var_6 = undefined;
 
   foreach(var_8 in level.players) {
-    if(var_8 _id_7403())
+    if(var_8 _id_7403()) {
       var_6 = var_8;
+    }
   }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = common_scripts\utility::random(level.players);
+  }
 
   var_6 thread _id_0367::_id_8E3B("conv_hiltrecovered");
 
-  if(_id_0557::_id_783E("8A The Hilt", "Use Hilt") && !_id_0557::_id_783E("8A The Hilt", "Shoot Hilt"))
+  if(_id_0557::_id_783E("8A The Hilt", "Use Hilt") && !_id_0557::_id_783E("8A The Hilt", "Shoot Hilt")) {
     _id_0557::_id_7822("8A The Hilt", &"ZOMBIE_NEST_HINT_STEP_TAKE_HILT");
+  }
 
-  var_5 sethintstring(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
+  var_5 setHintString(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
   var_5 waittill("trigger", var_4);
   var_5 common_scripts\utility::_id_9D9F();
   _id_0378::_id_8D74("aud_pickup_raven_sword");
   common_scripts\utility::flag_set("flag_hilt_collected");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
   wait 2;
   level notify("end hilt grabbed", var_4.origin);
@@ -154,8 +160,9 @@ _id_A6A0(var_0, var_1) {
 }
 
 _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(level._id_6666))
+  if(!isDefined(level._id_6666)) {
     level._id_6666 = 0;
+  }
 
   var_9 = common_scripts\utility::_id_4461(self.origin, level._id_08E3);
   var_10 = 0;
@@ -165,12 +172,14 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_11 = 0;
 
       foreach(var_13 in var_9._id_7D24) {
-        if(var_4 == var_13)
+        if(var_4 == var_13) {
           var_11 = 1;
+        }
       }
 
-      if(!var_11)
+      if(!var_11) {
         var_10 = 1;
+      }
     } else if(var_4 != var_9._id_7D24)
       var_10 = 1;
   }
@@ -184,26 +193,30 @@ _id_4030(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(isDefined(var_9._id_2E37)) {
     var_15 = var_9 gettagorigin(var_9._id_2E37);
 
-    if(isDefined(var_9._id_8C48))
+    if(isDefined(var_9._id_8C48)) {
       var_15 = var_15 + var_9._id_8C48;
+    }
   } else
     var_15 = var_9.origin;
 
-  if(isDefined(var_9._id_8C47))
+  if(isDefined(var_9._id_8C47)) {
     var_16 = _bullettracepassed(self getEye(), var_15, 0, var_9, var_9._id_8C47);
-  else
+  } else {
     var_16 = _bullettracepassed(self getEye(), var_15, 0, var_9);
+  }
 
   var_17 = _id_21CF(var_9, var_9._id_696B, var_9._id_6943);
 
   if(isDefined(var_9) && var_17 && var_16) {
     self._id_8F2B = 1;
 
-    if(level._id_6666 < 5)
+    if(level._id_6666 < 5) {
       thread _id_2024(var_9, var_9._id_2E37, var_9._id_2DA5, var_9._id_2DA6);
+    }
 
-    if(!common_scripts\utility::_id_562E(self._id_2FDA) && !_id_0547::_id_5565(self._id_0A4B, "zombie_fireman"))
+    if(!common_scripts\utility::_id_562E(self._id_2FDA) && !_id_0547::_id_5565(self._id_0A4B, "zombie_fireman")) {
       _id_865C("scripted_soul_eat", 0);
+    }
 
     var_9._id_AC2C++;
     level notify(var_9._id_695B, var_9);
@@ -217,28 +230,31 @@ _id_08BD(var_0, var_1, var_2) {
 }
 
 _id_A6CE(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 endon(var_1);
+  }
 
-  var_0 setcandamage(1);
+  var_0 setCanDamage(1);
   var_2 = undefined;
   var_3 = "";
 
   while(!issubstr(var_3, "teslagun_zm")) {
     var_0 waittill("damage", var_4, var_2);
 
-    if(isDefined(var_2) && isPlayer(var_2))
+    if(isDefined(var_2) && isPlayer(var_2)) {
       var_3 = var_2 getcurrentweapon();
+    }
   }
 
   return var_2;
 }
 
 _id_A6CF(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 endon(var_1);
+  }
 
-  var_0 setcandamage(1);
+  var_0 setCanDamage(1);
   var_2 = undefined;
   var_3 = "";
 
@@ -256,10 +272,11 @@ _id_A6CF(var_0, var_1) {
 }
 
 _id_9903(var_0, var_1, var_2, var_3) {
-  if(issubstr(var_1, "teslagun_zm"))
+  if(issubstr(var_1, "teslagun_zm")) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_9902(var_0, var_1, var_2, var_3) {
@@ -347,7 +364,7 @@ _id_283B(var_0) {
   var_1.y = var_0.origin[1];
   var_1._id_01D9 = var_0.origin[2];
   var_1 setwaypoint(1);
-  var_1 settargetent(var_0);
+  var_1 settargetEnt(var_0);
   return var_1;
 }
 
@@ -365,8 +382,9 @@ _id_8579(var_0) {
 
 _id_442B() {
   for(var_0 = 0; var_0 < self._id_AB4E.size; var_0++) {
-    if(self._id_AB4E[var_0] _id_996A())
+    if(self._id_AB4E[var_0] _id_996A()) {
       return self._id_AB4E[var_0];
+    }
   }
 
   return undefined;
@@ -378,39 +396,46 @@ _id_996A() {
 
 _id_442D(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(!isDefined(var_0[var_1]._id_65FB) || !isalive(var_0[var_1]._id_65FB))
+    if(!isDefined(var_0[var_1]._id_65FB) || !isalive(var_0[var_1]._id_65FB)) {
       return var_0[var_1];
+    }
   }
 
   return undefined;
 }
 
 _id_7402() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return 0;
+  }
 
   return _id_055A::_id_7413(self, "zone3_1_com") || _id_055A::_id_7413(self, "zone3_2_med") || _id_055A::_id_7413(self, "zone3_3_rnd") || _id_055A::_id_7413(self, "zone4_1_mine");
 }
 
 _id_740A() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return 0;
+  }
 
   return _id_055A::_id_7413(self, "zone1_1_start") || _id_055A::_id_7413(self, "zone1_2_gallows") || _id_055A::_id_7413(self, "zone1_3_riverside") || _id_055A::_id_7413(self, "zone1_4_bridge") || _id_055A::_id_7413(self, "zone1_4_bridge_tower") || _id_055A::_id_7413(self, "zone1_5_rooftops");
 }
 
 _id_7403() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return 0;
+  }
 
   return _id_055A::_id_7413(self, "zone4_2_hilt");
 }
@@ -418,27 +443,31 @@ _id_7403() {
 _id_56B0(var_0, var_1, var_2, var_3) {
   var_4 = var_0.origin;
 
-  if(isDefined(var_0._id_2E37))
+  if(isDefined(var_0._id_2E37)) {
     var_4 = var_0 gettagorigin(var_0._id_2E37);
+  }
 
   if(common_scripts\utility::_id_562E(var_3)) {
     var_5 = _sighttracepassed(self.origin, var_4, 0, self, var_0, 0);
 
-    if(!var_5)
+    if(!var_5) {
       return 0;
+    }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return _distance2d(var_4, self.origin) < var_1 && _abs(var_4[2] - self.origin[2]) < var_2;
-  else
+  } else {
     return _distance2d(var_4, self.origin) < var_1 && self.origin[2] < var_4[2];
+  }
 }
 
 _id_2024(var_0, var_1, var_2, var_3) {
   _id_0378::_id_8D74("aud_zombie_soul_absorb");
 
-  if(!isDefined(level._id_6666))
+  if(!isDefined(level._id_6666)) {
     level._id_6666 = 0;
+  }
 
   self waittill("body_spawned", var_4);
 
@@ -451,20 +480,22 @@ _id_2024(var_0, var_1, var_2, var_3) {
   level._id_6666++;
   var_5 = _func_382("zmb_geistkraft_reg_beam_med", var_4, "j_neck", var_0, var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_6 = "zmb_cart_charge_pnt";
-  else
+  } else {
     var_6 = var_2;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_7 = var_1;
-  else
+  } else {
     var_7 = var_3;
+  }
 
-  _playfxontag(level._effect[var_6], var_0, var_7);
-  _playfxontag(level._effect["zmb_gk_claw_battery_charge_1"], level._id_3571, "flap1_shroud");
-  _playfxontag(level._effect["zmb_gk_claw_battery_charge_2"], level._id_3571, "flap2_shroud");
-  _playfxontag(level._effect["zmb_gk_claw_battery_charge_3"], level._id_3571, "flap3_shroud");
+  _playFXOnTag(level._effect[var_6], var_0, var_7);
+  _playFXOnTag(level._effect["zmb_gk_claw_battery_charge_1"], level._id_3571, "flap1_shroud");
+  _playFXOnTag(level._effect["zmb_gk_claw_battery_charge_2"], level._id_3571, "flap2_shroud");
+  _playFXOnTag(level._effect["zmb_gk_claw_battery_charge_3"], level._id_3571, "flap3_shroud");
   _id_0378::_id_8D74("zombie_soul_suck", var_4.origin, var_0.origin);
   wait 0.45;
   var_5 delete();
@@ -472,15 +503,16 @@ _id_2024(var_0, var_1, var_2, var_3) {
 }
 
 _id_9030(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = spawn("script_model", self.origin);
     var_4 setModel("tag_origin");
-    _playfxontag(common_scripts\utility::_id_44F5("zmb_elec_trail"), var_4, "tag_origin");
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_elec_trail"), var_4, "tag_origin");
     var_5 = distance(self.origin, var_0.origin) / var_1;
-    var_4 moveto(var_0.origin, var_5);
+    var_4 moveTo(var_0.origin, var_5);
     wait(var_5);
     var_4 delete();
   }
@@ -502,7 +534,7 @@ _id_9066(var_0, var_1, var_2, var_3, var_4) {
   }
   var_5 = spawn("script_model", var_2);
   var_5 setModel("tag_origin");
-  _playfxontag(common_scripts\utility::_id_44F5(var_3), var_5, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5(var_3), var_5, "tag_origin");
   var_5 linktosynchronizedparent(var_0, var_1);
   var_5 thread _id_36EC(var_3, var_4);
 }
@@ -518,11 +550,13 @@ _id_649B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = 8;
   self._id_5787 = 0;
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self._id_9D02 = var_4;
+  }
 
   for(var_9 = 1; var_9 < var_0.size; var_9++) {
     var_10 = var_0[var_9 - 1];
@@ -530,16 +564,18 @@ _id_649B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_12 = var_0[var_9 + 1];
     var_13 = _id_0F3B(var_2, var_11);
 
-    if(isDefined(var_4) && !self._id_5787)
+    if(isDefined(var_4) && !self._id_5787) {
       _id_930B();
+    }
 
     if(!_id_8B8D(var_11) || var_9 + 1 == var_0.size) {
       var_14 = distance(var_11.origin, var_10.origin) / var_1;
 
-      if(var_13)
+      if(var_13) {
         var_15 = var_14 / 3;
-      else
+      } else {
         var_15 = 0;
+      }
 
       _id_64D3(var_11, var_14, var_15);
     } else {
@@ -574,8 +610,9 @@ _id_649B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 _id_A6AC(var_0) {
   var_1 = common_scripts\utility::_id_8FFC();
 
-  foreach(var_3 in var_0)
-  var_3 thread _id_6815(var_1);
+  foreach(var_3 in var_0) {
+    var_3 thread _id_6815(var_1);
+  }
 
   var_1 waittill("trigger", var_5);
   var_1 delete();
@@ -588,13 +625,15 @@ _id_6815(var_0) {
 }
 
 _id_0FB7() {
-  foreach(var_1 in self)
-  var_1 common_scripts\utility::_id_9D9F();
+  foreach(var_1 in self) {
+    var_1 common_scripts\utility::_id_9D9F();
+  }
 }
 
 _id_0FB8() {
-  foreach(var_1 in self)
-  var_1 common_scripts\utility::_id_9DA3();
+  foreach(var_1 in self) {
+    var_1 common_scripts\utility::_id_9DA3();
+  }
 }
 
 _id_3C28() {
@@ -610,8 +649,9 @@ _id_3C28() {
     var_4[var_5] = _id_45FF("fire_path_launch_side_" + (var_5 + 1));
   }
 
-  foreach(var_7 in level.players)
-  thread _id_A6A1(var_7, var_0, var_1, var_2, var_4);
+  foreach(var_7 in level.players) {
+    thread _id_A6A1(var_7, var_0, var_1, var_2, var_4);
+  }
 }
 
 _id_A6A1(var_0, var_1, var_2, var_3, var_4) {
@@ -619,8 +659,9 @@ _id_A6A1(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [];
 
   for(var_6 = 0; var_6 < var_4.size; var_6++) {
-    if(!(var_4[var_6][0].targetname == "fire_path_launch_side_1"))
+    if(!(var_4[var_6][0].targetname == "fire_path_launch_side_1")) {
       var_5 = common_scripts\utility::_id_0F6F(var_5, var_4[var_6]);
+    }
   }
 
   for(;;) {
@@ -686,10 +727,11 @@ _id_3C25(var_0) {
   var_7 = var_3;
   var_3 = _id_9DC8(var_3, self);
 
-  if(isDefined(var_3) && var_3.size >= 2)
+  if(isDefined(var_3) && var_3.size >= 2) {
     _id_86E4(var_3);
-  else
+  } else {
     _id_86E4(var_7);
+  }
 }
 
 _id_9DC8(var_0, var_1) {
@@ -708,11 +750,13 @@ _id_9DC8(var_0, var_1) {
 
   var_7 = [];
 
-  for(var_4 = var_2; var_4 < var_0.size; var_4++)
+  for(var_4 = var_2; var_4 < var_0.size; var_4++) {
     var_7[var_7.size] = var_0[var_4];
+  }
 
-  if(var_7.size >= 3)
+  if(var_7.size >= 3) {
     var_7 = common_scripts\utility::_id_0F93(var_7, var_7[0]);
+  }
 
   return var_7;
 }
@@ -738,9 +782,9 @@ _id_8CD6(var_0, var_1, var_2) {
 
   if(var_6 > 0) {
     var_7 = common_scripts\utility::_id_8FFC();
-    self playerlinkto(var_7);
+    self playerlinkTo(var_7);
     var_8 = var_6 / var_4;
-    var_7 moveto((self.origin[0], self.origin[1], var_5[2]), var_8);
+    var_7 moveTo((self.origin[0], self.origin[1], var_5[2]), var_8);
     wait(var_8);
     self unlink();
     var_7 delete();
@@ -795,7 +839,7 @@ _id_9416() {
 }
 
 _id_930B() {
-  self playloopsound(self._id_9D02);
+  self playLoopSound(self._id_9D02);
   self._id_5787 = 1;
 }
 
@@ -812,8 +856,8 @@ _id_64D3(var_0, var_1, var_2) {
 }
 
 _id_321A(var_0, var_1, var_2) {
-  self moveto(var_0.origin, var_1, 0, var_2);
-  self rotateto(var_0.angles, var_1 / 2);
+  self moveTo(var_0.origin, var_1, 0, var_2);
+  self rotateTo(var_0.angles, var_1 / 2);
   wait(var_1);
   self notify("reached node");
 }
@@ -835,10 +879,11 @@ _id_38DF(var_0, var_1, var_2, var_3, var_4) {
     var_9 = distance(var_8, var_5) / var_4;
     var_5 = var_8;
 
-    if(!(var_9 > 0))
+    if(!(var_9 > 0)) {
       var_9 = 0.1;
+    }
 
-    self moveto(var_8, var_9);
+    self moveTo(var_8, var_9);
     wait(var_9);
   }
 
@@ -846,18 +891,21 @@ _id_38DF(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_A699(var_0, var_1) {
-  if(isDefined(var_0) && !isDefined(var_1))
+  if(isDefined(var_0) && !isDefined(var_1)) {
     var_1 = "TAG_ORIGIN";
+  }
 
-  if(isDefined(var_0))
-    _playfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+  if(isDefined(var_0)) {
+    _playFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+  }
 
   self._id_2DA8 = 1;
   self waittill("destination requirement satisfied");
   self._id_2DA8 = 0;
 
-  if(isDefined(var_0))
-    _stopfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+  if(isDefined(var_0)) {
+    _stopFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+  }
 }
 
 _id_56AF(var_0, var_1) {
@@ -881,15 +929,17 @@ _id_8B8A(var_0) {
 }
 
 _id_A6BB() {
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 }
 
 _id_9484(var_0) {
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = var_0[var_2].origin;
+  }
 
   return var_1;
 }
@@ -897,8 +947,9 @@ _id_9484(var_0) {
 _id_45FF(var_0) {
   var_1 = common_scripts\utility::_id_46B5(var_0, "targetname");
 
-  for(var_2 = [var_1]; !var_1 _id_5773(); var_2 = common_scripts\utility::_id_0F6F(var_2, var_1))
+  for(var_2 = [var_1]; !var_1 _id_5773(); var_2 = common_scripts\utility::_id_0F6F(var_2, var_1)) {
     var_1 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
+  }
 
   return var_2;
 }
@@ -916,8 +967,9 @@ _id_56AC() {
 }
 
 _id_A16D(var_0) {
-  if(isDefined(self._id_3F3F))
+  if(isDefined(self._id_3F3F)) {
     self._id_3F3F delete();
+  }
 
   var_1 = undefined;
 
@@ -937,10 +989,11 @@ _id_A16D(var_0) {
     self._id_2916 = var_0;
   }
 
-  if(gettime() < 500)
+  if(gettime() < 500) {
     _triggerfx(self._id_3F3F, 0.5);
-  else
+  } else {
     _triggerfx(self._id_3F3F);
+  }
 }
 
 _id_21CF(var_0, var_1, var_2, var_3) {
@@ -948,10 +1001,11 @@ _id_21CF(var_0, var_1, var_2, var_3) {
 }
 
 _id_865C(var_0, var_1) {
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     self._id_2A9D = var_0;
-  else if(self._id_0BA4 != "traverse")
+  } else if(self._id_0BA4 != "traverse") {
     self._id_2A9D = var_0;
+  }
 }
 
 _id_64DC(var_0, var_1, var_2, var_3) {
@@ -960,7 +1014,7 @@ _id_64DC(var_0, var_1, var_2, var_3) {
   var_5 = var_1 / var_3;
 
   for(var_6 = 0; var_6 < var_1; var_6 = var_6 + var_5) {
-    self moveto(_vectorlerp(var_4, var_0, var_6 / var_1), var_5);
+    self moveTo(_vectorlerp(var_4, var_0, var_6 / var_1), var_5);
     wait(var_5);
   }
 }
@@ -999,27 +1053,31 @@ _id_2CDD(var_0) {
 }
 
 _id_745D(var_0, var_1, var_2) {
-  if(!isDefined(level.players))
+  if(!isDefined(level.players)) {
     return [0, undefined];
+  }
 
   foreach(var_4 in level.players) {
-    if(_distance2d(var_4.origin, var_0) < var_1 && _abs(var_4.origin[2] - var_0[2]) < var_2 / 2)
+    if(_distance2d(var_4.origin, var_0) < var_1 && _abs(var_4.origin[2] - var_0[2]) < var_2 / 2) {
       return [1, var_4];
+    }
   }
 
   return [0, undefined];
 }
 
 _id_44C8(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = [];
 
-  if(var_1)
+  if(var_1) {
     var_2[0] = common_scripts\utility::_id_46B5(var_0, "targetname");
-  else
-    var_2[0] = _getent(var_0, "targetname");
+  } else {
+    var_2[0] = _getEnt(var_0, "targetname");
+  }
 
   while(isDefined(var_2[var_2.size - 1].target)) {
     if(var_1) {
@@ -1027,7 +1085,7 @@ _id_44C8(var_0, var_1) {
       continue;
     }
 
-    var_2 = common_scripts\utility::_id_0F6F(var_2, _getent(var_2[var_2.size - 1].target, "targetname"));
+    var_2 = common_scripts\utility::_id_0F6F(var_2, _getEnt(var_2[var_2.size - 1].target, "targetname"));
   }
 
   return var_2;
@@ -1039,13 +1097,15 @@ _id_73B8() {
   for(;;) {
     if(common_scripts\utility::_id_3C77("flag_bunker_lights_off")) {
       if(_id_7402()) {
-        if(!isDefined(self._id_3D4C))
+        if(!isDefined(self._id_3D4C)) {
           _id_0551::_id_3D52(1);
+        }
       } else if(isDefined(self._id_3D4C))
         _id_0551::_id_3D52(0);
     } else {
-      if(isDefined(self._id_3D4C))
+      if(isDefined(self._id_3D4C)) {
         _id_0551::_id_3D52(0);
+      }
 
       common_scripts\utility::_id_3C9F("flag_bunker_lights_off");
     }
@@ -1069,20 +1129,23 @@ _id_08B0() {
 
   wait(_getanimlength(%zmb_untotenpresse_01_activate));
 
-  foreach(var_5 in var_3)
-  var_5 setscriptablepartstate("smasher", "reset", 0);
+  foreach(var_5 in var_3) {
+    var_5 setscriptablepartstate("smasher", "reset", 0);
+  }
 
   wait(var_2);
   level notify("med_create_ww_part");
   wait(var_0 - var_2);
 
-  foreach(var_5 in var_3)
-  var_5 setscriptablepartstate("smasher", "refill", 0);
+  foreach(var_5 in var_3) {
+    var_5 setscriptablepartstate("smasher", "refill", 0);
+  }
 
   wait(_getanimlength(%zmb_untotenpresse_01_refill));
 
-  foreach(var_5 in var_3)
-  var_5 setscriptablepartstate("smasher", "second_idle", 0);
+  foreach(var_5 in var_3) {
+    var_5 setscriptablepartstate("smasher", "second_idle", 0);
+  }
 }
 
 _id_08B6() {
@@ -1093,8 +1156,9 @@ _id_08B6() {
   var_4 = _getnotetracktimes(var_0, "show_ww_part");
   var_5 = [];
 
-  for(var_6 = 0; var_6 < var_2.size; var_6++)
+  for(var_6 = 0; var_6 < var_2.size; var_6++) {
     var_5[var_6] = var_2[var_6] * var_1;
+  }
 
   var_7 = var_4[0] * var_1;
   var_8 = var_3[0] * var_1;
@@ -1159,41 +1223,45 @@ _id_08A8() {
   var_6 = _getanimlength(%zmb_workbench_01_inner_up_idle);
   var_7 = _getanimlength(%zmb_workbench_01_inner_down);
 
-  foreach(var_9 in var_4)
-  var_9 setscriptablepartstate("inner", "up", 0);
+  foreach(var_9 in var_4) {
+    var_9 setscriptablepartstate("inner", "up", 0);
+  }
 
-  _playfxontag(level._effect["zmb_gk_claw_battery_full_1"], level._id_3571, "flap1_shroud");
-  _playfxontag(level._effect["zmb_gk_claw_battery_full_2"], level._id_3571, "flap2_shroud");
-  _playfxontag(level._effect["zmb_gk_claw_battery_full_3"], level._id_3571, "flap3_shroud");
+  _playFXOnTag(level._effect["zmb_gk_claw_battery_full_1"], level._id_3571, "flap1_shroud");
+  _playFXOnTag(level._effect["zmb_gk_claw_battery_full_2"], level._id_3571, "flap2_shroud");
+  _playFXOnTag(level._effect["zmb_gk_claw_battery_full_3"], level._id_3571, "flap3_shroud");
   wait(var_5);
 
-  foreach(var_9 in var_4)
-  var_9 setscriptablepartstate("inner", "up_idle", 0);
+  foreach(var_9 in var_4) {
+    var_9 setscriptablepartstate("inner", "up_idle", 0);
+  }
 
   wait(var_6);
 
-  foreach(var_9 in var_4)
-  var_9 setscriptablepartstate("inner", "down", 0);
+  foreach(var_9 in var_4) {
+    var_9 setscriptablepartstate("inner", "down", 0);
+  }
 
   wait(var_7);
 
-  foreach(var_2 in var_0)
-  var_2.schnelleeffects delete();
+  foreach(var_2 in var_0) {
+    var_2.schnelleeffects delete();
+  }
 }
 
 _id_8A53() {
   var_0 = spawnStruct();
-  var_0._id_6FC5 = _getent("ww_part_01_pickup", "targetname");
-  var_0._id_6FC2 = _getent(var_0._id_6FC5.target, "targetname");
-  _playfxontag(level._effect["zmb_tesla_barrel_prop_idle"], var_0._id_6FC2, "TAG_ORIGIN");
+  var_0._id_6FC5 = _getEnt("ww_part_01_pickup", "targetname");
+  var_0._id_6FC2 = _getEnt(var_0._id_6FC5.target, "targetname");
+  _playFXOnTag(level._effect["zmb_tesla_barrel_prop_idle"], var_0._id_6FC2, "TAG_ORIGIN");
   var_1 = spawnStruct();
-  var_1._id_6FC5 = _getent("ww_part_02_pickup", "targetname");
-  var_1._id_6FC2 = _getent(var_1._id_6FC5.target, "targetname");
-  _playfxontag(level._effect["zmb_tesla_tube_prop_idle"], var_1._id_6FC2, "TAG_ORIGIN");
+  var_1._id_6FC5 = _getEnt("ww_part_02_pickup", "targetname");
+  var_1._id_6FC2 = _getEnt(var_1._id_6FC5.target, "targetname");
+  _playFXOnTag(level._effect["zmb_tesla_tube_prop_idle"], var_1._id_6FC2, "TAG_ORIGIN");
   var_0._id_6FC5 common_scripts\utility::_id_9D9F();
   var_1._id_6FC5 common_scripts\utility::_id_9D9F();
-  var_0._id_6FC5 usetriggerrequirelookat();
-  var_1._id_6FC5 usetriggerrequirelookat();
+  var_0._id_6FC5 useTriggerRequireLookAt();
+  var_1._id_6FC5 useTriggerRequireLookAt();
 
   if(isDefined(var_0._id_6FC2) && isDefined(var_1._id_6FC2)) {
     var_0._id_6FC2 hide();
@@ -1201,28 +1269,32 @@ _id_8A53() {
   }
 
   var_2 = _getscriptablearray("rnd_forge_machine_parts", "targetname");
-  var_0._id_6FC2 linkto(var_2[0], "input");
+  var_0._id_6FC2 linkTo(var_2[0], "input");
   level._id_3E3B = var_0;
   level._id_5981 = var_1;
 }
 
 _id_8BEC(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
-    self._id_6FC5 sethintstring(var_3);
+  if(isDefined(var_3)) {
+    self._id_6FC5 setHintString(var_3);
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::_id_3C9F(var_0);
+  }
 
   self._id_6FC2 show();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     common_scripts\utility::_id_3C9F(var_2);
+  }
 
   self._id_6FC5 common_scripts\utility::_id_9DA3();
   self._id_6FC5 waittill("trigger", var_4);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::flag_set(var_1);
+  }
 
   self._id_6FC5 common_scripts\utility::_id_9D9F();
   self._id_6FC2 hide();
@@ -1321,8 +1393,9 @@ _id_A197(var_0, var_1, var_2) {
 _id_7212(var_0) {
   var_1 = _id_4649();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 thread _id_0367::_id_8E3C(var_0);
+  }
 }
 
 _id_4649() {
@@ -1334,8 +1407,9 @@ _id_440D() {
   var_0 = [];
 
   foreach(var_2 in level.players) {
-    if(isalive(var_2) && !var_2.inlaststand)
+    if(isalive(var_2) && !var_2.inlaststand) {
       var_0 = common_scripts\utility::_id_0F6F(var_0, var_2);
+    }
   }
 
   return var_0;
@@ -1345,13 +1419,14 @@ _id_8A38(var_0, var_1, var_2) {
   var_3 = undefined;
 
   foreach(var_5 in level._id_A2A0) {
-    if(_id_0547::_id_5565(var_5.targetname, var_0))
+    if(_id_0547::_id_5565(var_5.targetname, var_0)) {
       var_3 = var_5;
+    }
   }
 
   if(isDefined(var_1) && isDefined(var_3._id_9D65)) {
     var_3 _id_0547::_id_A28D(var_1, var_2);
-    var_3._id_9D65 sethintstring(var_1);
+    var_3._id_9D65 setHintString(var_1);
   }
 
   return var_3;
@@ -1395,22 +1470,27 @@ _id_44BA(var_0) {
   var_7 = _id_0547::_id_9470(_tablelookupbyrow(var_1, var_3 + 3, 2));
   var_8 = _id_0547::_id_9470(_tablelookupbyrow(var_1, var_3 + 4, 2));
 
-  for(var_9 = 0; var_9 < var_4; var_9++)
+  for(var_9 = 0; var_9 < var_4; var_9++) {
     var_2 = common_scripts\utility::_id_0F6F(var_2, "zombie_generic");
+  }
 
-  for(var_9 = 0; var_9 < var_5; var_9++)
+  for(var_9 = 0; var_9 < var_5; var_9++) {
     var_2 = common_scripts\utility::_id_0F6F(var_2, "zombie_berserker");
+  }
 
-  for(var_9 = 0; var_9 < var_6; var_9++)
+  for(var_9 = 0; var_9 < var_6; var_9++) {
     var_2 = common_scripts\utility::_id_0F6F(var_2, "zombie_exploder");
+  }
 
-  for(var_9 = 0; var_9 < var_7; var_9++)
+  for(var_9 = 0; var_9 < var_7; var_9++) {
     var_2 = common_scripts\utility::_id_0F6F(var_2, "zombie_heavy");
+  }
 
   level._id_2932 = 0;
 
-  for(var_9 = 0; var_9 < var_8; var_9++)
+  for(var_9 = 0; var_9 < var_8; var_9++) {
     level._id_2932++;
+  }
 
   return common_scripts\utility::array_randomize(var_2);
 }
@@ -1428,16 +1508,18 @@ _id_A7DF() {
   waitframe();
   _id_0548::_id_A7E5(0);
 
-  foreach(var_1 in level.players)
-  var_1 notify("special_event_update");
+  foreach(var_1 in level.players) {
+    var_1 notify("special_event_update");
+  }
 }
 
 _id_A7E0() {
   level endon("exited_special_event");
   _id_0548::_id_A7E5(1);
 
-  foreach(var_1 in level.players)
-  var_1 notify("special_event_update");
+  foreach(var_1 in level.players) {
+    var_1 notify("special_event_update");
+  }
 
   for(;;) {
     level waittill("connected", var_1);
@@ -1446,7 +1528,7 @@ _id_A7E0() {
 }
 
 _id_A725(var_0) {
-  self setcandamage(1);
+  self setCanDamage(1);
 
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);

@@ -42,6 +42,7 @@ main() {
 
   level._effect["zmb_window_shatter_01"] = loadfx("vfx/map/mp_zombie_training/zmb_temp_wood_window_explosion");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_zombie_house_fx::main();
+  }
 }

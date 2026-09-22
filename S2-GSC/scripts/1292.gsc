@@ -15,13 +15,15 @@ _id_534F() {
       level._id_9036[var_3] = var_4;
       var_5 = tablelookup(var_0, 0, "save_squared_constant", var_2);
 
-      if(isDefined(var_5) && var_5 == "TRUE")
+      if(isDefined(var_5) && var_5 == "TRUE") {
         level._id_9037[var_3] = _squared(var_4);
+      }
     }
   }
 
-  if(level.gametype == "ctf")
+  if(level.gametype == "ctf") {
     level._id_9036["allyDeathTime"] = 4000;
+  }
 }
 
 _id_57DA(var_0) {
@@ -47,17 +49,19 @@ _id_57DA(var_0) {
 _id_468F(var_0, var_1) {
   var_2 = tablelookup(var_0, 0, maps\mp\_utility::_id_4571(), var_1);
 
-  if(!isDefined(var_2) || var_2 == "")
+  if(!isDefined(var_2) || var_2 == "") {
     var_2 = tablelookup(var_0, 0, "mp_default", var_1);
+  }
 
   return int(var_2);
 }
 
 delete(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 = [[var_1]](var_2, var_3, var_4);
-  else
+  } else {
     var_5 = [[var_1]](var_2, var_3);
+  }
 
   var_5 = clamp(var_5, 0, 100);
   var_5 = var_5 * var_0;
@@ -67,10 +71,11 @@ delete(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_2857(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = [[var_0]](var_1, var_2, var_3);
-  else
+  } else {
     var_4 = [[var_0]](var_1, var_2);
+  }
 
   var_4 = clamp(var_4, 0, 100);
   var_2._id_2B4F[var_2._id_2B4F.size] = var_4;
@@ -82,8 +87,9 @@ _id_1437(var_0, var_1) {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(distancesquared(var_1.origin, var_3.origin) < 2500)
+    if(distancesquared(var_1.origin, var_3.origin) < 2500) {
       return 0;
+    }
   }
 
   return 100;
@@ -94,8 +100,9 @@ _id_1443(var_0, var_1) {
     if(!isDefined(var_3) || !var_3 _id_56E4(self)) {
       continue;
     }
-    if(distancesquared(var_1.origin, var_3.origin) < 65536)
+    if(distancesquared(var_1.origin, var_3.origin) < 65536) {
       return 0;
+    }
   }
 
   return 100;
@@ -108,38 +115,45 @@ _id_1447(var_0, var_1) {
     if(!isDefined(var_4) || !var_4 _id_56E4(self)) {
       continue;
     }
-    if(distancesquared(var_1.origin, var_4.origin) < 65536)
+    if(distancesquared(var_1.origin, var_4.origin) < 65536) {
       return 0;
+    }
   }
 
   return 100;
 }
 
 _id_56E4(var_0) {
-  if(!level.teambased || level._id_3EC4 || isDefined(var_0) && !isDefined(var_0.team))
+  if(!level.teambased || level._id_3EC4 || isDefined(var_0) && !isDefined(var_0.team)) {
     return 1;
+  }
 
-  if(!isDefined(self._id_0117) || !isDefined(self._id_0117.team))
+  if(!isDefined(self._id_0117) || !isDefined(self._id_0117.team)) {
     return 1;
+  }
 
-  if(isDefined(var_0) && var_0 == self._id_0117)
+  if(isDefined(var_0) && var_0 == self._id_0117) {
     return 1;
+  }
 
   var_1 = self._id_0117.team;
   return var_1 != var_0.team;
 }
 
 _id_144D(var_0, var_1) {
-  if(!isDefined(level.makeglobalusable))
+  if(!isDefined(level.makeglobalusable)) {
     return 100;
+  }
 
-  if(!var_1._id_6C97)
+  if(!var_1._id_6C97) {
     return 100;
+  }
 
   var_2 = _id_0526::_id_4675(var_1.origin);
 
-  if(var_2 > 0.25)
+  if(var_2 > 0.25) {
     return 0;
+  }
 
   return 100;
 }
@@ -147,8 +161,9 @@ _id_144D(var_0, var_1) {
 _id_143A(var_0, var_1) {
   var_2 = _id_04D1::_id_44B9(var_0);
 
-  if(var_1._id_266E[var_2] > 0)
+  if(var_1._id_266E[var_2] > 0) {
     return 0;
+  }
 
   return 100;
 }
@@ -156,8 +171,9 @@ _id_143A(var_0, var_1) {
 _id_1442(var_0, var_1) {
   var_2 = _id_04D1::_id_44B9(var_0);
 
-  if(var_1._id_3EFF[var_2] > 0)
+  if(var_1._id_3EFF[var_2] > 0) {
     return 0;
+  }
 
   return 100;
 }
@@ -165,8 +181,9 @@ _id_1442(var_0, var_1) {
 _id_765F(var_0, var_1) {
   var_2 = maps\mp\_utility::getotherteam(var_0);
 
-  if(getdvarint("disableSpawnClaim") || level._id_909B["preferClaimedSpawn"]["scoreFactorWeight"] == 0)
+  if(getdvarint("disableSpawnClaim") || level._id_909B["preferClaimedSpawn"]["scoreFactorWeight"] == 0) {
     return 0;
+  }
 
   if(!isDefined(level._id_9034)) {
     level._id_9034 = 0;
@@ -180,8 +197,9 @@ _id_765F(var_0, var_1) {
       foreach(var_10 in var_4) {
         var_11 = distance(var_7.origin, var_10.origin);
 
-        if(var_11 < var_8)
+        if(var_11 < var_8) {
           var_8 = var_11;
+        }
       }
 
       if(isDefined(var_7._id_0165) && var_7._id_0165 == "axis_override") {
@@ -208,20 +226,23 @@ _id_765F(var_0, var_1) {
     }
   }
 
-  if(level._id_9034)
+  if(level._id_9034) {
     var_18 = maps\mp\_utility::getotherteam(var_0);
-  else
+  } else {
     var_18 = var_0;
+  }
 
-  if(var_1._id_2BD3 == var_18)
+  if(var_1._id_2BD3 == var_18) {
     return 100;
+  }
 
   return 0;
 }
 
 _id_10DE(var_0, var_1) {
-  if(_id_2936() && isDefined(var_1._id_3EF5) && level._id_3EF3._id_565F[self.team] && var_1._id_3EF5 != self.team)
+  if(_id_2936() && isDefined(var_1._id_3EF5) && level._id_3EF3._id_565F[self.team] && var_1._id_3EF5 != self.team) {
     return 0;
+  }
 
   return 100;
 }
@@ -241,8 +262,9 @@ _id_1451(var_0, var_1) {
 }
 
 _id_144C(var_0, var_1) {
-  if(isDefined(self._id_5BE0) && self._id_5BE0 == var_1)
+  if(isDefined(self._id_5BE0) && self._id_5BE0 == var_1) {
     return 0;
+  }
 
   return 100;
 }
@@ -251,8 +273,9 @@ _id_144A(var_0, var_1) {
   if(isDefined(var_1._id_5BE2)) {
     var_2 = gettime() - var_1._id_5BE2;
 
-    if(var_2 > 4000)
+    if(var_2 > 4000) {
       return 100;
+    }
 
     return var_2 / 4000 * 100;
   }
@@ -264,8 +287,9 @@ _id_143E(var_0, var_1) {
   if(isDefined(var_1._id_5BE1) && (!level.teambased || var_1._id_5BE1 != var_0)) {
     var_2 = var_1._id_5BE2 + 500;
 
-    if(gettime() < var_2)
+    if(gettime() < var_2) {
       return 0;
+    }
   }
 
   return 100;
@@ -290,8 +314,9 @@ _id_3B92(var_0, var_1, var_2) {
     var_3 = "all";
   }
 
-  if(!isDefined(level._id_7AD4[var_3]))
+  if(!isDefined(level._id_7AD4[var_3])) {
     return undefined;
+  }
 
   var_4 = [];
   var_5 = 99999999;
@@ -315,15 +340,17 @@ _id_3B92(var_0, var_1, var_2) {
     }
   }
 
-  if(var_6)
+  if(var_6) {
     return var_5;
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_1450(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   var_3 = distancesquared(var_1.origin, var_2["position"]);
   var_4 = var_3 / level._id_9037["enemySpawnAreaDistance"];
@@ -350,8 +377,9 @@ _id_143F(var_0, var_1) {
     }
     var_5[var_5.size] = var_7;
 
-    if(level.teambased || var_7["player"] != self.guid)
+    if(level.teambased || var_7["player"] != self.guid) {
       var_4 = var_4 + delete(var_2, ::_id_1450, var_0, var_1, var_7);
+    }
   }
 
   level._id_7AD4[var_3] = var_5;
@@ -361,8 +389,9 @@ _id_143F(var_0, var_1) {
 _id_144F(var_0, var_1, var_2) {
   var_3 = distancesquared(var_2.origin, var_1.origin);
 
-  if(var_3 < 692224)
+  if(var_3 < 692224) {
     return 0;
+  }
 
   return 100;
 }
@@ -372,33 +401,38 @@ _id_144E(var_0, var_1, var_2) {
 }
 
 _id_68A3(var_0, var_1) {
-  if(!isDefined(var_1._id_9849) || var_1._id_9849 == "none" || var_0 == var_1._id_9849)
+  if(!isDefined(var_1._id_9849) || var_1._id_9849 == "none" || var_0 == var_1._id_9849) {
     return 100;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_1446(var_0, var_1) {
-  if(!isDefined(self._id_5B90))
+  if(!isDefined(self._id_5B90)) {
     return 100;
+  }
 
   var_2 = distancesquared(var_1.origin, self._id_5B90);
 
-  if(var_2 > 4000000)
+  if(var_2 > 4000000) {
     return 100;
+  }
 
   var_3 = var_2 / 4000000;
   return var_3 * 100;
 }
 
 _id_7664(var_0, var_1) {
-  if(!isDefined(self._id_5B90))
+  if(!isDefined(self._id_5B90)) {
     return 0;
+  }
 
   var_2 = distancesquared(var_1.origin, self._id_5B90);
 
-  if(var_2 > 400000000)
+  if(var_2 > 400000000) {
     return 0;
+  }
 
   var_3 = 1 - var_2 / 400000000;
   return var_3 * 100;
@@ -416,11 +450,13 @@ _id_1439(var_0, var_1) {
 }
 
 _id_3B91(var_0, var_1, var_2) {
-  if(!level.teambased)
+  if(!level.teambased) {
     var_0 = "all";
+  }
 
-  if(!isDefined(level._id_7AD1[var_0]))
+  if(!isDefined(level._id_7AD1[var_0])) {
     return undefined;
+  }
 
   var_3 = [];
   var_4 = 99999999;
@@ -446,15 +482,17 @@ _id_3B91(var_0, var_1, var_2) {
 
   level._id_7AD1[var_0] = var_3;
 
-  if(var_5)
+  if(var_5) {
     return var_4;
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_143B(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   var_3 = distancesquared(var_1.origin, var_2["position"]);
   var_4 = var_3 / level._id_9037["allyDeathDistance"];
@@ -464,8 +502,9 @@ _id_143B(var_0, var_1, var_2) {
 _id_1435(var_0, var_1) {
   var_2 = level._id_909B["avoidAllyDeathLocations"]["scoreFactorWeight"];
 
-  if(!level.teambased)
+  if(!level.teambased) {
     var_0 = "all";
+  }
 
   var_3 = 0;
   var_4 = [];
@@ -478,8 +517,9 @@ _id_1435(var_0, var_1) {
     }
     var_4[var_4.size] = var_6;
 
-    if(level.teambased || var_6["player"] == self.guid)
+    if(level.teambased || var_6["player"] == self.guid) {
       var_3 = var_3 + delete(var_2, ::_id_143B, var_0, var_1, var_6);
+    }
   }
 
   level._id_7AD1[var_0] = var_4;
@@ -487,16 +527,19 @@ _id_1435(var_0, var_1) {
 }
 
 _id_1445(var_0, var_1) {
-  if(!isDefined(self._id_00E6) || !isDefined(self._id_00E6.origin))
+  if(!isDefined(self._id_00E6) || !isDefined(self._id_00E6.origin)) {
     return 100;
+  }
 
-  if(!maps\mp\_utility::isreallyalive(self._id_00E6))
+  if(!maps\mp\_utility::isreallyalive(self._id_00E6)) {
     return 100;
+  }
 
   var_2 = distancesquared(var_1.origin, self._id_00E6.origin);
 
-  if(var_2 > 4000000)
+  if(var_2 > 4000000) {
     return 100;
+  }
 
   var_3 = var_2 / 4000000;
   return var_3 * 100;
@@ -505,13 +548,15 @@ _id_1445(var_0, var_1) {
 _id_765D(var_0, var_1) {
   var_2 = _func_393(var_1._id_00D4, var_0);
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     return 0;
+  }
 
   var_3 = _func_392(var_1._id_00D4, var_0);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 0;
+  }
 
   var_3 = var_3 / var_2;
   var_3 = _min(var_3, level._id_9036["enemyDistance"]);
@@ -520,13 +565,15 @@ _id_765D(var_0, var_1) {
 }
 
 _id_7660(var_0, var_1) {
-  if(_func_393(var_1._id_00D4, var_0) == 0)
+  if(_func_393(var_1._id_00D4, var_0) == 0) {
     return 0;
+  }
 
   var_2 = _func_391(var_1._id_00D4, var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   var_3 = 1 - var_2 / level._id_9036["allyDistance"];
   return var_3 * 100;
@@ -535,13 +582,15 @@ _id_7660(var_0, var_1) {
 _id_AAFF(var_0, var_1) {
   var_2 = _id_04D1::_id_44B9(var_0);
 
-  if(_func_393(var_1._id_00D4, var_2) == 0)
+  if(_func_393(var_1._id_00D4, var_2) == 0) {
     return 100;
+  }
 
   var_3 = _func_391(var_1._id_00D4, var_2);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 0;
+  }
 
   var_4 = var_3 / level._id_9036["enemyDistance"];
   return var_4 * 100;
@@ -550,8 +599,9 @@ _id_AAFF(var_0, var_1) {
 _id_7669(var_0, var_1, var_2) {
   var_3 = _func_396(var_1._id_00D4, var_2 getentitynumber());
 
-  if(!isDefined(var_3) || !maps\mp\_utility::isreallyalive(var_2))
+  if(!isDefined(var_3) || !maps\mp\_utility::isreallyalive(var_2)) {
     return 100;
+  }
 
   var_4 = 1 - var_3 / level._id_9036["allyDistance"];
   return var_4 * 100;
@@ -560,8 +610,9 @@ _id_7669(var_0, var_1, var_2) {
 _id_1449(var_0, var_1, var_2) {
   var_3 = _func_396(var_1._id_00D4, var_2 getentitynumber());
 
-  if(!isDefined(var_3) || !maps\mp\_utility::isreallyalive(var_2))
+  if(!isDefined(var_3) || !maps\mp\_utility::isreallyalive(var_2)) {
     return 100;
+  }
 
   var_4 = var_3 / level._id_9036["enemyDistance"];
   return var_4 * 100;
@@ -571,26 +622,29 @@ _id_143C(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
 
-  if(isDefined(level._id_909B["avoidEnemies"]))
+  if(isDefined(level._id_909B["avoidEnemies"])) {
     var_2 = level._id_909B["avoidEnemies"]["scoreFactorWeight"];
+  }
 
-  if(isDefined(level._id_909B["preferAllies"]))
+  if(isDefined(level._id_909B["preferAllies"])) {
     var_3 = level._id_909B["preferAllies"]["scoreFactorWeight"];
+  }
 
   var_4 = 0;
 
   if(isDefined(var_0)) {
     foreach(var_6 in level.players) {
-      if(!isDefined(var_6) || !isDefined(var_6.team) || var_6 == self || _func_2D5(var_6) == "spectator")
+      if(!isDefined(var_6) || !isDefined(var_6.team) || var_6 == self || _func_2D5(var_6) == "spectator") {
         continue;
-      else {
+      } else {
         if((level.teambased && var_6.team != var_0 || !level.teambased) && var_2 > 0) {
           var_4 = var_4 + delete(var_2, ::_id_1449, var_0, var_1, var_6);
           continue;
         }
 
-        if(level.teambased && var_6.team == var_0 && var_3 > 0)
+        if(level.teambased && var_6.team == var_0 && var_3 > 0) {
           var_4 = var_4 + delete(var_3, ::_id_7669, var_0, var_1, var_6);
+        }
       }
     }
   }
@@ -599,50 +653,56 @@ _id_143C(var_0, var_1) {
 }
 
 _id_7663(var_0, var_1) {
-  if(var_1._id_3767 > 0)
+  if(var_1._id_3767 > 0) {
     var_2 = var_1._id_3ED2 / var_1._id_3767 / var_1._id_3ED1._id_4D3F * 1.33;
-  else
+  } else {
     var_2 = 0;
+  }
 
   return var_2 * 100;
 }
 
 _id_7662(var_0, var_1) {
-  if(var_1._id_3767 > 0 && var_1._id_3ED1._id_645F > 0)
+  if(var_1._id_3767 > 0 && var_1._id_3ED1._id_645F > 0) {
     var_2 = var_1._id_3767 / var_1._id_3ED1._id_645F;
-  else
+  } else {
     var_2 = 0;
+  }
 
   return var_2 * 100;
 }
 
 _id_7661(var_0, var_1) {
-  if(var_0 == "allies" && level._id_0BF7 == 0 || var_0 == "axis" && level._id_147E == 0)
+  if(var_0 == "allies" && level._id_0BF7 == 0 || var_0 == "axis" && level._id_147E == 0) {
     return 0;
-  else
+  } else {
     return _id_7662(var_0, var_1);
+  }
 }
 
 _id_1441(var_0, var_1) {
-  if(var_1._id_3ED2 > level._id_9037["CTFBaseDistance"])
+  if(var_1._id_3ED2 > level._id_9037["CTFBaseDistance"]) {
     return 100;
+  }
 
   var_2 = var_1._id_3ED2 / level._id_9037["CTFBaseDistance"];
   return var_2 * 100;
 }
 
 _id_1440(var_0, var_1) {
-  if(var_0 == "allies" && level._id_0BF7 == 0 || var_0 == "axis" && level._id_147E == 0)
+  if(var_0 == "allies" && level._id_0BF7 == 0 || var_0 == "axis" && level._id_147E == 0) {
     return _id_1441(var_0, var_1);
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_765E(var_0, var_1) {
   var_2 = maps\mp\gametypes\dom::_id_4638(var_0);
 
-  if(isDefined(var_1._id_766F) && var_2[var_1._id_766F])
+  if(isDefined(var_1._id_766F) && var_2[var_1._id_766F]) {
     return 100;
+  }
 
   return 0;
 }
@@ -650,8 +710,9 @@ _id_765E(var_0, var_1) {
 _id_143D(var_0, var_1) {
   var_2 = maps\mp\gametypes\dom::_id_4638(maps\mp\_utility::getotherteam(var_0));
 
-  if(!isDefined(var_1._id_766F) || !var_2[var_1._id_766F])
+  if(!isDefined(var_1._id_766F) || !var_2[var_1._id_766F]) {
     return 100;
+  }
 
   var_3 = distancesquared(var_1.origin, maps\mp\gametypes\dom::_id_44E1(var_1._id_766F));
   var_4 = var_3 / level._id_9037["DOMPointTooCloseDistance"];
@@ -659,8 +720,9 @@ _id_143D(var_0, var_1) {
 }
 
 _id_7676(var_0, var_1) {
-  if(!isDefined(level._id_321C) || !isDefined(level._id_321C[var_0]))
+  if(!isDefined(level._id_321C) || !isDefined(level._id_321C[var_0])) {
     return 0;
+  }
 
   var_2 = gettime() - level._id_321C[var_0]["time"];
 
@@ -669,8 +731,9 @@ _id_7676(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(var_1._id_766F) && var_1._id_766F == level._id_321C[var_0]["flag"])
+  if(isDefined(var_1._id_766F) && var_1._id_766F == level._id_321C[var_0]["flag"]) {
     return 100;
+  }
 
   return 0;
 }
@@ -686,30 +749,33 @@ _id_7667(var_0, var_1) {
   var_5 = 6067776;
   var_6 = 1867776;
 
-  if(var_4 >= var_6)
+  if(var_4 >= var_6) {
     return 100 * (1.0 - 0.25 * (var_4 - var_6) / (var_5 - var_6));
-  else if(var_4 > 0)
+  } else if(var_4 > 0) {
     return 100.0 * (var_4 / var_6);
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_1452(var_0, var_1) {
   var_2 = maps\mp\gametypes\hp::_id_4484();
   var_3 = distancesquared(var_2.origin, var_1.origin);
 
-  if(var_3 <= level._id_9037["HPZoneTooCloseDistance"])
+  if(var_3 <= level._id_9037["HPZoneTooCloseDistance"]) {
     return 0;
-  else
+  } else {
     return 100;
+  }
 }
 
 _id_7666(var_0, var_1) {
   var_2 = maps\mp\gametypes\hp::_id_4484();
   var_3 = distancesquared(var_2.origin, var_1.origin);
 
-  if(var_3 >= level._id_9037["HPZoneNearDistance"])
+  if(var_3 >= level._id_9037["HPZoneNearDistance"]) {
     return 0;
+  }
 
   var_4 = 1 - var_3 / level._id_9037["HPZoneNearDistance"];
   return var_4 * 100;
@@ -719,18 +785,20 @@ avoidveryclosetorelic(var_0, var_1) {
   var_2 = level._id_1562[0]._id_28D4;
   var_3 = distancesquared(var_2, var_1.origin);
 
-  if(var_3 <= level._id_9037["HPZoneTooCloseDistance"])
+  if(var_3 <= level._id_9037["HPZoneTooCloseDistance"]) {
     return 0;
-  else
+  } else {
     return 100;
+  }
 }
 
 prefernearrelic(var_0, var_1) {
   var_2 = level._id_1562[0]._id_28D4;
   var_3 = distancesquared(var_2, var_1.origin);
 
-  if(var_3 >= level._id_9037["HPZoneNearDistance"])
+  if(var_3 >= level._id_9037["HPZoneNearDistance"]) {
     return 0;
+  }
 
   var_4 = 1 - var_3 / level._id_9037["HPZoneNearDistance"];
   return var_4 * 100;
@@ -741,103 +809,125 @@ _id_7668(var_0, var_1) {
   var_3 = _func_394(var_1._id_00D4, var_0);
   var_4 = _func_395(var_1._id_00D4, var_2);
 
-  if(var_3 == 0)
+  if(var_3 == 0) {
     return 0;
+  }
 
-  if(var_4 == 0)
+  if(var_4 == 0) {
     return 100;
+  }
 
   var_5 = var_3 - var_4;
 
-  if(var_5 <= 0)
+  if(var_5 <= 0) {
     return 0;
+  }
 
-  if(var_5 == 1)
+  if(var_5 == 1) {
     return 35.0;
+  }
 
-  if(var_5 >= 2)
+  if(var_5 >= 2) {
     return 50.0;
+  }
 
   return 0;
 }
 
 _id_AB32(var_0, var_1) {
-  if(!isDefined(var_1._id_0165))
+  if(!isDefined(var_1._id_0165)) {
     return 100;
+  }
 
   if(isDefined(level.zombies_active_spawn_event)) {
     var_2 = "zombie_event_spawn_" + level.zombies_active_spawn_event;
 
-    if(isDefined(var_1.targetname) && var_1.targetname == var_2)
+    if(isDefined(var_1.targetname) && var_1.targetname == var_2) {
       return 100;
+    }
   }
 
-  if(isDefined(level._id_1F1D) && ![[level._id_1F1D]](var_1._id_0165))
+  if(isDefined(level._id_1F1D) && ![[level._id_1F1D]](var_1._id_0165)) {
     return 0;
+  }
 
-  if(isDefined(level._id_AC88) && [[level._id_AC88]](var_1._id_0165))
+  if(isDefined(level._id_AC88) && [[level._id_AC88]](var_1._id_0165)) {
     return 0;
+  }
 
   return 100;
 }
 
 _id_AB3F(var_0, var_1) {
-  if(!isDefined(level._id_A24A) || !level._id_A24A)
+  if(!isDefined(level._id_A24A) || !level._id_A24A) {
     return 0;
+  }
 
-  if(!isDefined(self._id_5B90) || !isDefined(level._id_4200) || !isDefined(level._id_43F2))
+  if(!isDefined(self._id_5B90) || !isDefined(level._id_4200) || !isDefined(level._id_43F2)) {
     return 100;
+  }
 
   var_2 = [[level._id_4200]](self._id_5B90);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 100;
+  }
 
   var_3 = [[level._id_43F2]](var_2, var_1._id_0165);
 
-  if(var_3 < 0)
+  if(var_3 < 0) {
     return 0;
+  }
 
-  if(var_3 == 0)
+  if(var_3 == 0) {
     return 100;
+  }
 
   return 100 / var_3;
 }
 
 _id_AB40(var_0, var_1) {
-  if(isDefined(level._id_A24A) && level._id_A24A)
+  if(isDefined(level._id_A24A) && level._id_A24A) {
     return 0;
+  }
 
-  if(!isDefined(level._id_AC88))
+  if(!isDefined(level._id_AC88)) {
     return 0;
+  }
 
-  if(!isDefined(self._id_5B90) || !isDefined(level._id_4200) || !isDefined(level._id_43F4))
+  if(!isDefined(self._id_5B90) || !isDefined(level._id_4200) || !isDefined(level._id_43F4)) {
     return 100;
+  }
 
   var_2 = [[level._id_4200]](self._id_5B90);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 100;
+  }
 
   var_3 = [[level._id_43F4]](var_2, var_1._id_0165);
 
-  if(var_3 < 0)
+  if(var_3 < 0) {
     return 0;
+  }
 
-  if(var_3 == 0)
+  if(var_3 == 0) {
     return 100;
+  }
 
   return 100 / var_3;
 }
 
 _id_AB41(var_0, var_1) {
-  if(!isDefined(self._id_5B90))
+  if(!isDefined(self._id_5B90)) {
     return 0;
+  }
 
   var_2 = distance(var_1.origin, self._id_5B90);
 
-  if(var_2 >= 2500 || var_2 <= 500)
+  if(var_2 >= 2500 || var_2 <= 500) {
     return 0;
+  }
 
   var_3 = max(0.0, 1.0 - _abs(1500 - var_2) / 1000);
   return var_3 * 100;
@@ -852,34 +942,38 @@ _id_A119(var_0) {
 }
 
 _id_A11B() {
-  if(!_id_2936())
+  if(!_id_2936()) {
     return 0;
+  }
 
   var_0 = _id_4500();
   var_1 = _id_4572();
   var_2 = gettime();
 
-  if(!isDefined(var_0._id_5C09))
+  if(!isDefined(var_0._id_5C09)) {
     var_0._id_5C09 = var_2;
-  else if(var_0._id_565F["allies"] && var_0._id_565F["axis"])
+  } else if(var_0._id_565F["allies"] && var_0._id_565F["axis"]) {
     var_0._id_A1C7 = var_0._id_A1C7 + var_0._id_5C0A;
-  else
+  } else {
     var_0._id_32D2 = var_0._id_32D2 + var_0._id_5C0A;
+  }
 
   var_3 = (var_2 - var_0._id_5C09) / 1000.0;
   var_0._id_5C09 = var_2;
   var_0._id_5C0A = var_3;
   var_4 = _id_44F2("allies");
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_4 = (var_4[0], var_4[1], 0);
   var_0._id_0BF3 = var_4;
   var_5 = _id_44F2("axis");
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     return 0;
+  }
 
   var_5 = (var_5[0], var_5[1], 0);
   var_0._id_1479 = var_5;
@@ -887,10 +981,11 @@ _id_A11B() {
   var_7 = _vectortoyaw(var_6);
   var_8 = var_4 + var_6 * 0.5;
 
-  if(var_7 > 180)
+  if(var_7 > 180) {
     var_7 = var_7 - 360;
-  else if(var_7 < -180)
+  } else if(var_7 < -180) {
     var_7 = 360 + var_7;
+  }
 
   var_0._id_5030 = var_8;
   var_0._id_5031 = var_7;
@@ -929,31 +1024,33 @@ _id_A11B() {
   var_18 = 0;
 
   if(var_7 < var_1._id_6224 * var_17 && var_7 > -180 - var_1._id_6224 * var_17) {
-    if(var_7 >= -90)
+    if(var_7 >= -90) {
       var_7 = clamp(var_7, var_1._id_6224 * var_17, 0);
-    else {
+    } else {
       var_7 = clamp(-1 * var_7, 0, var_1._id_60A8 * var_17) + 180;
       var_18 = 1;
     }
   } else if(var_7 < var_1._id_6224 * var_17)
     var_18 = 1;
   else if(var_7 > var_1._id_60A8 * var_17 && var_7 < 180 - var_1._id_60A8 * var_17) {
-    if(var_7 <= 90)
+    if(var_7 <= 90) {
       var_7 = clamp(var_7, 0, var_1._id_60A8 * var_17);
-    else {
+    } else {
       var_7 = clamp(-1 * var_7, var_1._id_6224 * var_17, 0) - 180;
       var_18 = 1;
     }
   } else if(var_7 > var_1._id_60A8 * var_17)
     var_18 = 1;
 
-  if(!isDefined(var_0._id_9851) || !var_0._id_565F["allies"] || !var_0._id_565F["axis"])
+  if(!isDefined(var_0._id_9851) || !var_0._id_565F["allies"] || !var_0._id_565F["axis"]) {
     var_0._id_9851 = var_7;
+  }
 
   var_0._id_9851 = var_7;
 
-  if(!isDefined(var_0._id_6162) || !var_0._id_565F["allies"] || !var_0._id_565F["axis"])
+  if(!isDefined(var_0._id_6162) || !var_0._id_565F["allies"] || !var_0._id_565F["axis"]) {
     var_0._id_6162 = var_8;
+  }
 
   var_19 = var_8 - var_0._id_6162;
   var_20 = _length2d(var_19);
@@ -983,19 +1080,21 @@ _id_A11B() {
     var_24 = vectordot(vectorNormalize(var_29), vectorNormalize(var_22));
 
     if(var_0._id_9A9D == "allies" && var_24 > 0 || var_0._id_9A9D != "allies" && var_24 <= 0) {
-      if(!var_18)
+      if(!var_18) {
         var_28 = "allies";
-      else
+      } else {
         var_28 = "axis";
+      }
 
       var_27._id_3EF5 = var_28;
       continue;
     }
 
-    if(!var_18)
+    if(!var_18) {
       var_28 = "axis";
-    else
+    } else {
       var_28 = "allies";
+    }
 
     var_27._id_3EF5 = var_28;
   }
@@ -1030,10 +1129,11 @@ _id_A11A() {
   if(isDefined(level._id_602E)) {
     var_7 = undefined;
 
-    if(var_2._id_565F["allies"] && var_2._id_565F["axis"])
+    if(var_2._id_565F["allies"] && var_2._id_565F["axis"]) {
       var_7 = "FRONT_LINE";
-    else
+    } else {
       var_7 = common_scripts\utility::_id_98E7(var_2._id_565F["allies"], "FRONT_LINE_ALLIES", "FRONT_LINE_AXIS");
+    }
 
     [[level._id_602E]](var_2._id_5E94["line"], "allies", var_7, var_5[0], var_5[1], gettime(), undefined, var_6[0], var_6[1]);
   }
@@ -1056,12 +1156,14 @@ _id_44F2(var_0) {
     if(!maps\mp\_utility::isreallyalive(var_3)) {
       continue;
     }
-    if(var_3.team == var_0)
+    if(var_3.team == var_0) {
       var_1[var_1.size] = var_3;
+    }
   }
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return undefined;
+  }
 
   var_5 = maps\mp\_utility::getaverageorigin(var_1);
   return var_5;
@@ -1079,8 +1181,9 @@ _id_7FA2(var_0) {
   }
   var_2 = getdvarint("scr_frontline_min_spawns", 0);
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     var_2 = 4;
+  }
 
   var_3 = maps\mp\_utility::getotherteam(var_0);
   var_4 = 0;
@@ -1091,31 +1194,36 @@ _id_7FA2(var_0) {
     if(!isDefined(var_7._id_3EF5) || var_7._id_3EF5 != var_0) {
       continue;
     }
-    if(!isDefined(var_7._id_3EFF) || !isDefined(var_7._id_3EFF[var_3]) || var_7._id_3EFF[var_3] <= 0)
+    if(!isDefined(var_7._id_3EFF) || !isDefined(var_7._id_3EFF[var_3]) || var_7._id_3EFF[var_3] <= 0) {
       var_4++;
+    }
   }
 
   var_9 = var_4 / var_5.size;
 
   if(var_4 < var_2 || var_9 < 0.0) {
-    if(var_4 < var_2)
+    if(var_4 < var_2) {
       var_1._id_2F7F[var_0] = 0;
-    else
+    } else {
       var_1._id_2F7F[var_0] = 1;
+    }
 
     var_1._id_565F[var_0] = 0;
   }
 }
 
 _id_2936() {
-  if(getdvarint("spawning_revised_frontline") == 0)
+  if(getdvarint("spawning_revised_frontline") == 0) {
     return 0;
+  }
 
-  if(level.gametype != "war" && level.gametype != "conf" && level.gametype != "cranked")
+  if(level.gametype != "war" && level.gametype != "conf" && level.gametype != "cranked") {
     return 0;
+  }
 
-  if(maps\mp\_utility::_id_4571() != "mp_d_day")
+  if(maps\mp\_utility::_id_4571() != "mp_d_day") {
     return 0;
+  }
 
   return 1;
 }

@@ -8,10 +8,11 @@ _id_4632() {
 }
 
 _id_578D() {
-  if(getdvarint("2653", 0) == 0)
+  if(getdvarint("2653", 0) == 0) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 _id_2392() {
@@ -39,8 +40,9 @@ _id_772C() {
     return;
   }
   for(var_1 = 0; var_1 < 40; var_1++) {
-    if(self._id_75F8[var_1]._id_8CA6 == 1 && self._id_75F8[var_1]._id_AA00 > 0)
+    if(self._id_75F8[var_1]._id_8CA6 == 1 && self._id_75F8[var_1]._id_AA00 > 0) {
       var_0 = var_0 + self._id_75F8[var_1]._id_AA00;
+    }
   }
 }
 
@@ -111,8 +113,9 @@ _id_4633() {
   var_1 = _func_36B() * 1000;
 
   for(var_2 = 0; var_2 < 40; var_2++) {
-    if(self._id_75F8[var_2]._id_8CA6 != 0 && maps\mp\_utility::_id_44FA() - self._id_75F8[var_2]._id_3FD7 <= var_1)
+    if(self._id_75F8[var_2]._id_8CA6 != 0 && maps\mp\_utility::_id_44FA() - self._id_75F8[var_2]._id_3FD7 <= var_1) {
       var_0 = var_0 + self._id_75F8[var_2]._id_AA00;
+    }
   }
 
   return var_0;
@@ -131,8 +134,9 @@ _id_09EE(var_0, var_1, var_2, var_3, var_4) {
         self._id_75F8[var_5]._id_1EB5 = var_3;
         self._id_75F8[var_5].victimnum = var_4;
 
-        if(!isDefined(var_2))
+        if(!isDefined(var_2)) {
           var_2 = "none";
+        }
 
         self._id_75F8[var_5]._id_01D0 = var_2;
         break;
@@ -146,13 +150,15 @@ _id_09EE(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_4631(var_0) {
-  if(!isDefined(var_0) || var_0 == "")
+  if(!isDefined(var_0) || var_0 == "") {
     return 0;
+  }
 
   var_1 = tablelookup("mp/xp_event_table.csv", 0, var_0, 21);
 
-  if(!isDefined(var_1) || var_1 == "")
+  if(!isDefined(var_1) || var_1 == "") {
     var_1 = 0;
+  }
 
   return int(var_1);
 }
@@ -166,8 +172,9 @@ _id_4AE2(var_0, var_1, var_2, var_3) {
   }
   var_4 = _id_4631(var_0);
 
-  if(var_4 <= 0)
+  if(var_4 <= 0) {
     var_4 = 0;
+  }
 
   if(!isDefined(self._id_75F8)) {
     self._id_75F8 = [];
@@ -193,8 +200,9 @@ _id_4AE2(var_0, var_1, var_2, var_3) {
         self._id_75F8[var_5]._id_1458 = var_0;
         self._id_75F8[var_5]._id_8CA6 = 1;
 
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           self._id_75F8[var_5]._id_A490 = var_2;
+        }
 
         if(!isDefined(self._id_75F8[var_5]._id_1EB5) && isDefined(var_2) && isDefined(var_1)) {
           var_6 = var_2 maps\mp\gametypes\_damage::_id_452F(self, var_3, var_1);
@@ -207,13 +215,15 @@ _id_4AE2(var_0, var_1, var_2, var_3) {
         } else
           self._id_75F8[var_5]._id_1EB5 = self getentitynumber();
 
-        if(!isDefined(var_1))
+        if(!isDefined(var_1)) {
           var_1 = "none";
+        }
 
         self._id_75F8[var_5]._id_01D0 = var_1;
 
-        if(_id_047A::iskillevent(self._id_75F8[var_5]._id_1458) && self._id_75F8[getlastkillplay(var_5)]._id_01D0 != var_1)
+        if(_id_047A::iskillevent(self._id_75F8[var_5]._id_1458) && self._id_75F8[getlastkillplay(var_5)]._id_01D0 != var_1) {
           _id_09EE("POTG_weapon_Swap", _id_4631("POTG_weapon_Swap"), "none", undefined, undefined);
+        }
 
         break;
       }
@@ -223,8 +233,9 @@ _id_4AE2(var_0, var_1, var_2, var_3) {
   var_7 = _id_4633();
   _id_A155(var_7);
 
-  if(var_7 > 0)
+  if(var_7 > 0) {
     _id_772C();
+  }
 }
 
 getlastkillplay(var_0) {
@@ -233,8 +244,9 @@ getlastkillplay(var_0) {
 
   for(var_3 = 0; var_3 < 40; var_3++) {
     if(self._id_75F8[var_3]._id_8CA6 == 1 && _id_047A::iskillevent(self._id_75F8[var_3]._id_1458) && var_3 != var_0) {
-      if(self._id_75F8[var_3]._id_3FD7 > var_1 && self._id_75F8[var_3]._id_3FD7 < self._id_75F8[var_0]._id_3FD7)
+      if(self._id_75F8[var_3]._id_3FD7 > var_1 && self._id_75F8[var_3]._id_3FD7 < self._id_75F8[var_0]._id_3FD7) {
         var_2 = var_3;
+      }
     }
   }
 

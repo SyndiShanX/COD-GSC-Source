@@ -25,8 +25,9 @@ _id_1B2E() {
   level endon("game_ended");
 
   for(;;) {
-    if(self botgetpersonality() != "run_and_gun")
+    if(self botgetpersonality() != "run_and_gun") {
       maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
+    }
 
     if(!isDefined(self._id_19A1)) {
       var_0 = 9999;
@@ -36,8 +37,9 @@ _id_1B2E() {
         if(isbot(var_3)) {
           continue;
         }
-        if(!isDefined(var_3._id_489E))
+        if(!isDefined(var_3._id_489E)) {
           var_3._id_489E = 0;
+        }
 
         if(var_3._id_489E < var_0) {
           var_0 = var_3._id_489E;

@@ -63,8 +63,9 @@ main() {
   level._id_1DEA = ::clearalltextafterhudelem;
   game["switchedsides"] = 0;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   game["dialog"]["gametype"] = "streak_intro";
   thread deleteunusedentities();
@@ -132,8 +133,9 @@ onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(level.rankedmatch)
+    if(level.rankedmatch) {
       var_0 _id_7D57();
+    }
   }
 }
 
@@ -142,17 +144,20 @@ _id_6B5C(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
-    if(isDefined(var_5.score) && var_5.score > var_3)
+    if(isDefined(var_5.score) && var_5.score > var_3) {
       var_3 = var_5.score;
+    }
   }
 
-  if(game["state"] == "postgame" && var_1.score >= var_3)
+  if(game["state"] == "postgame" && var_1.score >= var_3) {
     var_1._id_3B4B = 1;
+  }
 }
 
 _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
-  if(_id_57BB(var_0, 1))
+  if(_id_57BB(var_0, 1)) {
     return 1;
+  }
 
   return 0;
 }
@@ -173,8 +178,9 @@ _id_57BC(var_0, var_1) {
     case "firebomb_kill":
     case "fritzx_kill":
     case "fighter_strike_kill":
-      if(isDefined(var_1) && var_1)
+      if(isDefined(var_1) && var_1) {
         maps\mp\gametypes\_missions::processchallenge("ch_scorestreaktraining_kills");
+      }
 
       return 1;
     default:
@@ -214,8 +220,9 @@ _id_872E() {
   level.makeunusable["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16859136, 0);
   level.makeunusable["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(17002496, 0);
 
-  for(var_0 = 0; var_0 < 9; var_0++)
+  for(var_0 = 0; var_0 < 9; var_0++) {
     level.makeunusable["loadoutPerksGUID"][var_0] = 0;
+  }
 
   level._id_80B1 = maps\mp\gametypes\_class::_id_44B4();
   level._id_80B1["loadoutDivision"] = 1;
@@ -236,8 +243,9 @@ _id_6B81() {
   }
 
   if(isPlayer(self) && !isbot(self) && !_isagent(self)) {
-    if(self _meth_85C0())
+    if(self _meth_85C0()) {
       self _meth_85BF(0);
+    }
 
     self setdemigod(1);
     waitframe();
@@ -251,12 +259,13 @@ clearalltextafterhudelem() {
   self.pers["class"] = "gamemode";
   self.pers["lastClass"] = "";
 
-  if(var_0)
+  if(var_0) {
     self.pers["gamemodeLoadout"] = level.makeunusable;
-  else if(self.team == "allies")
+  } else if(self.team == "allies") {
     self.pers["gamemodeLoadout"] = level._id_80B1;
-  else
+  } else {
     self.pers["gamemodeLoadout"] = level.makeusable;
+  }
 
   self.class = self.pers["class"];
   self.lastclass = self.pers["lastClass"];
@@ -296,8 +305,9 @@ _id_47A9() {
     if(var_0 != "none" && !maps\mp\_utility::iskillstreakweapon(var_0)) {
       var_1 = self getfractionmaxammo(var_0);
 
-      if(var_1 < 0.2)
+      if(var_1 < 0.2) {
         self givemaxammo(var_0);
+      }
     }
 
     var_2 = self getoffhandsecondaryclass();
@@ -305,8 +315,9 @@ _id_47A9() {
     if(var_2 != "none" && !maps\mp\_utility::iskillstreakweapon(var_2)) {
       var_1 = self getfractionmaxammo(var_2);
 
-      if(var_1 < 0.4)
+      if(var_1 < 0.4) {
         self givemaxammo(var_2);
+      }
     }
 
     var_3 = self getlethalweapon();
@@ -314,8 +325,9 @@ _id_47A9() {
     if(var_3 != "none" && !maps\mp\_utility::iskillstreakweapon(var_3)) {
       var_1 = self getfractionmaxammo(var_3);
 
-      if(var_1 < 0.4)
+      if(var_1 < 0.4) {
         self givemaxammo(var_3);
+      }
     }
 
     wait 1;
@@ -361,15 +373,17 @@ _id_4696(var_0) {
     }
   }
 
-  if(isPlayer(var_1) && !isbot(var_1) && !_isagent(var_1) && level._id_53C6)
+  if(isPlayer(var_1) && !isbot(var_1) && !_isagent(var_1) && level._id_53C6) {
     return _id_6FBD(var_1);
+  }
 
   return level._id_908F[var_1.team][randomint(level._id_908F[var_1.team].size)];
 }
 
 _id_6FBD(var_0) {
-  if(!isDefined(level.cleartargetent))
+  if(!isDefined(level.cleartargetent)) {
     level.cleartargetent = common_scripts\utility::_id_44BE("scorestreak_training_player_spawn", "targetname");
+  }
 
   var_1 = level.cleartargetent[randomint(level.cleartargetent.size)];
   return var_1;

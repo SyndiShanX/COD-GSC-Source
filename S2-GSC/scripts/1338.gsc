@@ -16,8 +16,9 @@ init() {
 }
 
 _id_3662() {
-  if(!common_scripts\utility::_id_3798("stunning_burst_active"))
+  if(!common_scripts\utility::_id_3798("stunning_burst_active")) {
     common_scripts\utility::_id_3799("stunning_burst_active");
+  }
 
   common_scripts\utility::_id_379A("stunning_burst_active");
   _id_054B::_id_6AB2("role_ability_stunning_burst_zm");
@@ -46,15 +47,17 @@ _id_3662() {
   }
 
   foreach(var_6 in var_0) {
-    if(distancesquared(self.origin, var_6.origin) < var_4)
+    if(distancesquared(self.origin, var_6.origin) < var_4) {
       var_1[var_1.size] = var_6;
+    }
   }
 
   var_1 = _sortbydistance(var_1, var_2);
   var_8 = 0;
 
-  if(isDefined(level.zmb_events_player_zombie_shellshock_stun))
+  if(isDefined(level.zmb_events_player_zombie_shellshock_stun)) {
     self thread[[level.zmb_events_player_zombie_shellshock_stun]](var_1.size);
+  }
 
   foreach(var_6 in var_1) {
     thread _id_94C0(var_6, var_2, var_8);
@@ -64,17 +67,20 @@ _id_3662() {
   var_11 = [];
 
   foreach(var_13 in level.players) {
-    if(var_13 != self && maps\mp\_utility::isreallyalive(var_13))
+    if(var_13 != self && maps\mp\_utility::isreallyalive(var_13)) {
       var_11[var_11.size] = var_13;
+    }
   }
 
   foreach(var_16 in var_11) {
-    if(distancesquared(self.origin, var_16.origin) < var_4 && _abs(self.origin[2] - var_16.origin[2]) < 90)
+    if(distancesquared(self.origin, var_16.origin) < var_4 && _abs(self.origin[2] - var_16.origin[2]) < 90) {
       thread _id_0A31(var_16);
+    }
   }
 
-  if(_id_0547::_id_4BA7("specialty_class_sustain_zone_zm"))
+  if(_id_0547::_id_4BA7("specialty_class_sustain_zone_zm")) {
     thread _id_9529(var_4);
+  }
 }
 
 sustain_zone_fx(var_0, var_1) {
@@ -89,8 +95,9 @@ sustain_zone_fx(var_0, var_1) {
 }
 
 _id_2F9E() {
-  if(common_scripts\utility::_id_3798("stunning_burst_active"))
+  if(common_scripts\utility::_id_3798("stunning_burst_active")) {
     common_scripts\utility::_id_3796("stunning_burst_active");
+  }
 }
 
 _id_0A31(var_0) {
@@ -111,8 +118,9 @@ _id_0A31(var_0) {
 }
 
 _id_94C0(var_0, var_1, var_2) {
-  if(!isDefined(var_0._id_94B4))
+  if(!isDefined(var_0._id_94B4)) {
     var_0._id_94B4 = [];
+  }
 
   var_0._id_94B4[var_0._id_94B4.size] = self;
   var_3 = var_0 common_scripts\utility::_id_A74D("death", var_2);
@@ -134,8 +142,9 @@ _id_94C0(var_0, var_1, var_2) {
   var_0 _id_0378::_id_8D74("aud_stun_zombies_strt");
   var_0 notify("is_tower_battle_distracted");
 
-  if(_id_0547::_id_4BA7("specialty_class_fiery_burst_zm"))
+  if(_id_0547::_id_4BA7("specialty_class_fiery_burst_zm")) {
     var_0 _meth_8682(0.03 * var_4, 1.5, 20.0, "none", 1, self, "dot_generic_zm");
+  }
 
   var_0 thread _id_0547::_id_7D1A("stunning_burst", [var_1, self], undefined, [self, "stunning_burst_active", self, "disconnect", self, "death"]);
   common_scripts\utility::_id_A70C(self, "stunning_burst_active", var_0, "death");
@@ -153,40 +162,46 @@ play_shock_fx(var_0, var_1, var_2, var_3) {
   for(;;) {
     var_4 = gettime() / 1000;
 
-    if(isDefined(self.recentshockfxtime) && var_4 - self.recentshockfxtime < var_3)
+    if(isDefined(self.recentshockfxtime) && var_4 - self.recentshockfxtime < var_3) {
       wait(var_3 - (var_4 - self.recentshockfxtime));
+    }
 
-    _playfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
     self.recentshockfxtime = var_4;
     wait(var_3);
   }
 }
 
 _id_AC56(var_0, var_1, var_2) {
-  if(!isDefined(self._id_94BD))
+  if(!isDefined(self._id_94BD)) {
     self._id_94BD = [];
+  }
 
   if(common_scripts\utility::_id_562E(var_1)) {
     self._id_94BD = common_scripts\utility::_id_0F6F(self._id_94BD, var_0);
 
-    if(self._id_94BD.size == 1)
+    if(self._id_94BD.size == 1) {
       self notify("stun_burst");
+    }
   } else {
     self._id_94BD = common_scripts\utility::_id_0F93(self._id_94BD, var_0);
 
-    if(self._id_94BD.size == 0)
+    if(self._id_94BD.size == 0) {
       self notify("stun_burst_expired");
+    }
   }
 }
 
 _id_AC2A() {
   var_0 = self;
 
-  if(isDefined(var_0._id_94BD) && var_0._id_94BD.size > 0)
+  if(isDefined(var_0._id_94BD) && var_0._id_94BD.size > 0) {
     return 1;
+  }
 
-  if(var_0 mini_stunning_burst_affected())
+  if(var_0 mini_stunning_burst_affected()) {
     return 1;
+  }
 
   return 0;
 }
@@ -196,11 +211,13 @@ _id_AC2B(var_0) {
 }
 
 zombiecanbestunknockedback() {
-  if(maps\mp\agents\humanoid\_humanoid_util::_id_56BC())
+  if(maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
     return 0;
+  }
 
-  if(isDefined(self.stunnedbybursttime) && gettime() > self.stunnedbybursttime + 1000)
+  if(isDefined(self.stunnedbybursttime) && gettime() > self.stunnedbybursttime + 1000) {
     return 0;
+  }
 
   return 1;
 }
@@ -211,14 +228,15 @@ zombiestunknockbackanim(var_0, var_1) {
   var_3 = maps\mp\agents\humanoid\_humanoid_util::_id_29CB(var_0);
   var_4 = _angleclamp180(var_3 - self.angles[1]);
 
-  if(_abs(var_4) < 45)
+  if(_abs(var_4) < 45) {
     var_2 = "pain_knockback_front";
-  else if(_abs(var_4) > 135)
+  } else if(_abs(var_4) > 135) {
     var_2 = "pain_knockback_back";
-  else if(var_4 > 0)
+  } else if(var_4 > 0) {
     var_2 = "pain_knockback_right";
-  else
+  } else {
     var_2 = "pain_knockback_left";
+  }
 
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_2);
   var_6 = self getanimentrycount(var_5);
@@ -226,8 +244,9 @@ zombiestunknockbackanim(var_0, var_1) {
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);
 
-  if(isPlayer(var_1) && var_1 _id_0547::_id_4BA7("specialty_class_breathing_room_zm"))
+  if(isPlayer(var_1) && var_1 _id_0547::_id_4BA7("specialty_class_breathing_room_zm")) {
     self scragentsetanimscale(2, 1);
+  }
 
   if(self._id_0A4B == "zombie_fireman") {
     var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("scripted_fire_stun_burst");
@@ -245,8 +264,9 @@ zombiestunknockbackanim(var_0, var_1) {
 }
 
 zombiecanbestunheld() {
-  if(common_scripts\utility::_id_0F79(["zombie_fireman", "zombie_assassin"], self._id_0A4B))
+  if(common_scripts\utility::_id_0F79(["zombie_fireman", "zombie_assassin"], self._id_0A4B)) {
     return 0;
+  }
 
   return 1;
 }
@@ -258,11 +278,13 @@ _id_AC63(var_0, var_1, var_2) {
   self scragentsetscripted(1);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "stunning_burst");
 
-  if(!common_scripts\utility::_id_562E(var_2) && zombiecanbestunknockedback())
+  if(!common_scripts\utility::_id_562E(var_2) && zombiecanbestunknockedback()) {
     zombiestunknockbackanim(var_0, var_1);
+  }
 
-  if(zombiecanbestunheld())
+  if(zombiecanbestunheld()) {
     _id_AC62(var_1);
+  }
 
   _id_AC64();
 }
@@ -278,16 +300,18 @@ _id_AC62(var_0) {
 
   for(;;) {
     if(self._id_0A4B == "zombie_exploder") {
-      if(common_scripts\utility::_id_562E(self._id_392C))
+      if(common_scripts\utility::_id_562E(self._id_392C)) {
         var_1 = 0;
-      else
+      } else {
         var_1 = 1;
+      }
     }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_4 = var_1;
-    else
+    } else {
       var_4 = randomint(var_3);
+    }
 
     self scragentsetanimmode("anim deltas");
     self scragentsetorientmode("face angle abs", self.angles);
@@ -322,11 +346,13 @@ _id_62A6(var_0) {
     foreach(var_3 in self._id_94BD) {
       var_4 = 1.0;
 
-      if(isPlayer(var_3) && var_3 _id_0547::_id_4BA7("specialty_class_exploit_weakness_zm") && !common_scripts\utility::_id_562E(self.shortstun))
+      if(isPlayer(var_3) && var_3 _id_0547::_id_4BA7("specialty_class_exploit_weakness_zm") && !common_scripts\utility::_id_562E(self.shortstun)) {
         var_4 = 3.0;
+      }
 
-      if(var_4 > var_1)
+      if(var_4 > var_1) {
         var_1 = var_4;
+      }
     }
   }
 
@@ -338,10 +364,11 @@ _id_9529(var_0) {
   var_1 = self getEye();
   var_2 = self getorigin();
 
-  if(_id_0547::_id_4BA7("specialty_class_breathing_room_zm"))
+  if(_id_0547::_id_4BA7("specialty_class_breathing_room_zm")) {
     var_3 = "stunning_burst_sustain_br";
-  else
+  } else {
     var_3 = "stunning_burst_sustain";
+  }
 
   var_4 = _spawnfx(common_scripts\utility::_id_44F5(var_3), var_2);
   _triggerfx(var_4);
@@ -376,14 +403,17 @@ _id_952A(var_0, var_1) {
 }
 
 mini_stunning_burst_execute(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 480;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 5;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 4;
+  }
 
   var_8 = _id_0547::_id_408F();
   var_9 = _sortbydistance(_id_0547::_id_408F(), var_0, var_2);
@@ -409,8 +439,9 @@ mini_stunning_burst_stun_zombie(var_0, var_1, var_2, var_3, var_4) {
   var_0 endon("death");
   wait(var_4);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_0 thread[[var_3]]();
+  }
 
   var_5 = 0.125 * maps\mp\gametypes\zombies::_id_1E59();
   var_6 = var_1.origin;
@@ -430,7 +461,7 @@ mini_stunning_burst_state_run_manage_fx() {
   var_1 = common_scripts\utility::_id_44F5("stunning_burst");
 
   for(;;) {
-    _playfxontag(var_1, var_0, "J_Spine4");
+    _playFXOnTag(var_1, var_0, "J_Spine4");
     wait 0.35;
   }
 }
@@ -461,8 +492,9 @@ mini_stunning_burst_state_run_hold(var_0) {
 
     var_6 = randomint(var_3);
 
-    if(var_1._id_0A4B == "zombie_exploder")
+    if(var_1._id_0A4B == "zombie_exploder") {
       var_6 = common_scripts\utility::_id_98E7(common_scripts\utility::_id_562E(var_1._id_392C), 0, 1);
+    }
 
     var_1 scragentsetanimmode("anim deltas");
     var_1 scragentsetorientmode("face angle abs", var_1.angles);
@@ -478,18 +510,21 @@ mini_stunning_burst_state_run(var_0) {
   var_3 = var_0._id_1180;
   var_4 = var_0.durationsecs;
 
-  if(!var_1 common_scripts\utility::_id_3798("flag_mini_burst"))
+  if(!var_1 common_scripts\utility::_id_3798("flag_mini_burst")) {
     var_1 common_scripts\utility::_id_3799("flag_mini_burst");
+  }
 
   var_1 common_scripts\utility::_id_379A("flag_mini_burst");
   var_1 thread mini_stunning_burst_state_run_manage_fx();
   var_1 thread mini_stunning_burst_state_run_manage_aud();
 
-  if(var_1 zombiecanbestunknockedback())
+  if(var_1 zombiecanbestunknockedback()) {
     var_1 zombiestunknockbackanim(var_2, var_3);
+  }
 
-  if(var_1 zombiecanbestunheld())
+  if(var_1 zombiecanbestunheld()) {
     var_1 mini_stunning_burst_state_run_hold(var_4);
+  }
 }
 
 mini_stunning_burst_state_interrupt(var_0) {}

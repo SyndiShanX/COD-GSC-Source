@@ -24,8 +24,9 @@ throw_razors_at_players() {
     var_4 = self gettagorigin(var_3);
     var_5 = var_4 + (0, 0, -32) + var_1;
 
-    if(isDefined(self.forcedtarget))
+    if(isDefined(self.forcedtarget)) {
       var_5 = self.forcedtarget.origin + (0, 0, 40);
+    }
 
     var_6 = _magicbullet("razergun_zm", var_4, var_5, level.player);
     var_6 maps\mp\zombies\weapons\_zombie_razer_gun::transform_razer_projectile(self, "razergun_zm", "zmb_razergun_yellow_trail", 1);
@@ -36,8 +37,9 @@ player_in_view() {
   self endon("death");
 
   foreach(var_1 in level.players) {
-    if(distance(var_1.origin, self.origin) < 712 && maps\mp\_utility::_id_3B8E(self, var_1, 35))
+    if(distance(var_1.origin, self.origin) < 712 && maps\mp\_utility::_id_3B8E(self, var_1, 35)) {
       return 1;
+    }
   }
 
   return 0;
@@ -58,8 +60,9 @@ assassin_throw_notetrack_handler(var_0, var_1, var_2, var_3) {
       break;
     case "footstep_walk_right_asn":
       if(isDefined(self.myprojectilefx)) {
-        foreach(var_7 in self.myprojectilefx)
-        var_7 delete();
+        foreach(var_7 in self.myprojectilefx) {
+          var_7 delete();
+        }
 
         self.myprojectilefx = [];
       }

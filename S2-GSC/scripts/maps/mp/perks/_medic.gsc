@@ -33,50 +33,60 @@ ondeath_handlemedic() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(canspawnmedicpatienttrigger())
+  if(canspawnmedicpatienttrigger()) {
     thread setupmedicpatienttrigger();
+  }
 }
 
 canspawnmedicpatienttrigger() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(level.medics.size <= 0)
+  if(level.medics.size <= 0) {
     return 0;
+  }
 
   var_0 = maps\mp\agents\_agent_utility::get_max_agents();
 
-  if(maps\mp\agents\_agent_utility::_id_45BB() >= var_0)
+  if(maps\mp\agents\_agent_utility::_id_45BB() >= var_0) {
     return 0;
+  }
 
   foreach(var_2 in level.medics) {
-    if(var_2 canmediccreatepatient(self))
+    if(var_2 canmediccreatepatient(self)) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 canmediccreatepatient(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(self) || !maps\mp\_utility::isreallyalive(self))
+  if(!isDefined(self) || !maps\mp\_utility::isreallyalive(self)) {
     return 0;
+  }
 
-  if(self == var_0 || self.team != var_0.team)
+  if(self == var_0 || self.team != var_0.team) {
     return 0;
+  }
 
-  if(!maps\mp\_utility::_hasperk("specialty_medic"))
+  if(!maps\mp\_utility::_hasperk("specialty_medic")) {
     return 0;
+  }
 
-  if(isDefined(self.medic_patient_array) && self.medic_patient_array.size > 0)
+  if(isDefined(self.medic_patient_array) && self.medic_patient_array.size > 0) {
     return 0;
+  }
 
   var_1 = maps\mp\agents\_agent_utility::get_max_agents();
 
-  if(maps\mp\agents\_agent_utility::_id_45BB() >= var_1)
+  if(maps\mp\agents\_agent_utility::_id_45BB() >= var_1) {
     return 0;
+  }
 
   return 1;
 }
@@ -90,9 +100,9 @@ setupmedicpatienttrigger() {
   var_0._id_9D65 = spawn("script_origin", var_0.origin);
   var_0._id_9D65._id_68FB = var_0;
   var_0._id_9D65 makeusable();
-  var_0._id_9D65 sethintstring(&"DIVISIONS_DLC3_MEDIC_PATIENT_TRIGGER");
+  var_0._id_9D65 setHintString(&"DIVISIONS_DLC3_MEDIC_PATIENT_TRIGGER");
   var_0.model = spawn("script_model", var_0.origin);
-  var_0.model linkto(self, "tag_origin");
+  var_0.model linkTo(self, "tag_origin");
   var_0.model setModel("tag_origin");
   level.medictriggers = common_scripts\utility::_id_0F6F(level.medictriggers, var_0);
   thread medic_trigger_enable_use_watcher(var_0);
@@ -145,8 +155,9 @@ handlemedictrigger(var_0) {
   var_0 setpatientactive(1);
   var_0 thread[[level._id_0A55]](var_1);
 
-  foreach(var_3 in level.medictriggers)
-  var_3._id_9D65 disableplayeruse(var_1);
+  foreach(var_3 in level.medictriggers) {
+    var_3._id_9D65 disableplayeruse(var_1);
+  }
 
   var_0 notify("patient_revived");
   handlemedictriggerdelete();
@@ -197,29 +208,33 @@ spawnmedicpatient(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = var_0;
   var_9 = _playerphysicstrace(var_7, var_8);
 
-  if(distancesquared(var_9, var_7) > 1)
+  if(distancesquared(var_9, var_7) > 1) {
     var_0 = var_9;
+  }
 
   self spawnagent(var_0, var_1);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self[[level.bot_funcs["bot_set_difficulty"]]](var_5);
+  }
 
   self[[level.bot_funcs["bot_set_personality"]]]("default");
   maps\mp\agents\_agent_common::_id_83FD(getdvarint("scr_player_maxhealth", 100));
   self[[level._id_0A5B]]();
   maps\mp\gametypes\_class::_id_4773(self.team, self.class, 1);
 
-  if(isDefined(self._id_0117))
+  if(isDefined(self._id_0117)) {
     self thread[[level._id_0A55]](self._id_0117);
+  }
 
   thread maps\mp\_flashgrenades::_id_6394();
   self thread[[level.bot_funcs["bot_think_watch_enemy"]]](1);
   self thread[[level.bot_funcs["bot_think_tactical_goals"]]]();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 
-  if(!self._id_4B60)
+  if(!self._id_4B60) {
     _id_050D::_id_09FA();
+  }
 
   thread _id_0513::_id_9B90();
   self._id_4B60 = 0;
@@ -254,8 +269,9 @@ onmedicpatientdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   level endon("game_ended");
   self endon("death");
 
-  if(common_scripts\utility::_id_562E(self.patientdown))
+  if(common_scripts\utility::_id_562E(self.patientdown)) {
     return 0;
+  }
 
   self[[level._id_0A41["player"]["on_damaged"]]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
@@ -263,8 +279,9 @@ onmedicpatientdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 onmedicpatientkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self[[level._id_0A5D]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 1);
 
-  if(isDefined(level._id_6A75))
+  if(isDefined(level._id_6A75)) {
     [[level._id_6A75]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  }
 
   thread _id_0513::_id_34A9(var_1, var_3, var_4);
 

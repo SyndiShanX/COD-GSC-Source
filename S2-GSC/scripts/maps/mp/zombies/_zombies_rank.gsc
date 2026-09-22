@@ -189,13 +189,15 @@ zombieplayerxpupdatethink() {
 zombieupdateplayerxp(var_0, var_1) {
   var_2 = level.zmxpscale;
 
-  if(self _meth_86B4(0) > 1)
+  if(self _meth_86B4(0) > 1) {
     var_2 = max(var_2, getdvarint("party_zmXPScale"));
+  }
 
   var_3 = int(var_0 * var_2);
 
-  if(!isDefined(level.zm_shotgun_xp_mod))
+  if(!isDefined(level.zm_shotgun_xp_mod)) {
     level.zm_shotgun_xp_mod = getdvarfloat("spv_zm_shotgun_xp_mod", 1.0);
+  }
 
   if(maps\mp\_utility::iszombiegameshattermode()) {
     var_4 = level.zm_shotgun_xp_mod;
@@ -204,8 +206,9 @@ zombieupdateplayerxp(var_0, var_1) {
 
   var_5 = self._id_AB46["xp"] + var_3;
 
-  if(self._id_AB46["maxRankXP"] < var_5)
+  if(self._id_AB46["maxRankXP"] < var_5) {
     var_5 = self._id_AB46["maxRankXP"];
+  }
 
   var_6 = var_5 - self._id_AB46["xp"];
 
@@ -213,15 +216,17 @@ zombieupdateplayerxp(var_0, var_1) {
     self._id_AB46["xp"] = self._id_AB46["xp"] + var_6;
     _id_0547::_id_8A6C(self, "totalXP", self._id_AB46["xp"], 0);
 
-    if(self._id_AB46["xp"] >= self._id_AB46["nextXPGoal"])
+    if(self._id_AB46["xp"] >= self._id_AB46["nextXPGoal"]) {
       _id_AC39(var_1);
+    }
   }
 
   if(maps\mp\_utility::iszombiegameshattermode()) {
     var_7 = self._id_AB46["shotgunXP"] + var_3;
 
-    if(self._id_AB46["maxShotgunXP"] < var_7)
+    if(self._id_AB46["maxShotgunXP"] < var_7) {
       var_7 = self._id_AB46["maxShotgunXP"];
+    }
 
     var_8 = var_7 - self._id_AB46["shotgunXP"];
 
@@ -230,8 +235,9 @@ zombieupdateplayerxp(var_0, var_1) {
       _id_0547::_id_8A6C(self, "totalShotgunXP", self._id_AB46["shotgunXP"], 0);
 
       if(self._id_AB46["shotgunLevel"] < level.zmshotgunmaxlevel) {
-        if(self._id_AB46["shotgunXP"] >= zmgetshotgunlevelxprequirement(self._id_AB46["shotgunLevel"] + 1))
+        if(self._id_AB46["shotgunXP"] >= zmgetshotgunlevelxprequirement(self._id_AB46["shotgunLevel"] + 1)) {
           zombieplayershotgunlvlup(var_1);
+        }
       }
     }
   }
@@ -279,13 +285,15 @@ _id_AC23(var_0) {
   if(!level.onlinegame && !getdvarint("zm_enable_lan_xp", 0)) {
     return;
   }
-  if(isDefined(level.eventxpoverride))
+  if(isDefined(level.eventxpoverride)) {
     var_1 = level.eventxpoverride;
-  else
+  } else {
     var_1 = level._id_AB2A[var_0]["xp"];
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_AB46["pendingXP"] = self._id_AB46["pendingXP"] + var_1;
+  }
 }
 
 _id_AC39(var_0) {
@@ -298,24 +306,28 @@ _id_AC39(var_0) {
   self._id_AB46["rank"] = var_2;
   self setrank(var_2);
 
-  if(var_1 == 1)
+  if(var_1 == 1) {
     var_4 = var_1;
-  else
+  } else {
     var_4 = var_1 + 1;
+  }
 
-  for(var_5 = var_4; var_5 <= var_3; var_5++)
+  for(var_5 = var_4; var_5 <= var_3; var_5++) {
     _id_0468::_id_0A25(var_5, "zm");
+  }
 
-  if(self._id_AB46["prestigeLevel"] == level.zmmaxprestige && var_3 == level._id_AB36 + 1 + 1)
+  if(self._id_AB46["prestigeLevel"] == level.zmmaxprestige && var_3 == level._id_AB36 + 1 + 1) {
     _id_0468::_id_0A2A("zombie", 11);
+  }
 
   if(self._id_AB46["prestigeLevel"] == level.zmmaxprestige) {
-    if(var_2 == 199)
+    if(var_2 == 199) {
       _id_0468::_id_0A2B("master_prestige_200");
-    else if(var_2 == 499)
+    } else if(var_2 == 499) {
       _id_0468::_id_0A2B("master_prestige_500");
-    else if(var_2 == 999)
+    } else if(var_2 == 999) {
       _id_0468::_id_0A2B("master_prestige_1000");
+    }
   }
 
   if(!common_scripts\utility::_id_562E(var_0)) {
@@ -323,10 +335,11 @@ _id_AC39(var_0) {
 
     if(level.onlinegame) {
       if(level._id_AB42[var_2][19] != 0) {
-        if(level._id_AB42[var_2][19] == 1)
+        if(level._id_AB42[var_2][19] == 1) {
           thread maps\mp\gametypes\_hud_message::_id_9102("zm_reward_supply");
-        else if(level._id_AB42[var_2][19] == 2)
+        } else if(level._id_AB42[var_2][19] == 2) {
           thread maps\mp\gametypes\_hud_message::_id_9102("zm_reward_supply_rare");
+        }
       }
     }
   }
@@ -344,12 +357,14 @@ zombieplayershotgunlvlup(var_0) {
 }
 
 _id_AB2C(var_0) {
-  if(var_0 >= self._id_AB46["maxRankXP"])
+  if(var_0 >= self._id_AB46["maxRankXP"]) {
     return self._id_AB46["maxRank"];
+  }
 
   for(var_1 = 0; var_1 <= self._id_AB46["maxRank"]; var_1++) {
-    if(var_0 < _id_AB2D(var_1))
+    if(var_0 < _id_AB2D(var_1)) {
       return var_1;
+    }
   }
 
   var_1--;
@@ -357,17 +372,19 @@ _id_AB2C(var_0) {
 }
 
 zmgetshotgunlevelbyxp(var_0) {
-  if(var_0 >= self._id_AB46["maxShotgunXP"])
+  if(var_0 >= self._id_AB46["maxShotgunXP"]) {
     return level.zmshotgunmaxlevel;
+  }
 
   for(var_1 = 0; var_1 <= level.zmshotgunmaxlevel; var_1++) {
     if(var_0 < zmgetshotgunlevelxprequirement(var_1)) {
       var_2 = var_1 - 1;
 
-      if(var_2 <= 0)
+      if(var_2 <= 0) {
         return 0;
-      else
+      } else {
         return var_2;
+      }
     }
   }
 
@@ -410,11 +427,13 @@ getzmxpscale() {
   var_3 = max(var_0, var_1);
   var_3 = max(var_3, var_2);
 
-  if(var_3 > 2)
+  if(var_3 > 2) {
     var_3 = 2;
+  }
 
-  if(var_3 > 4 || var_3 < 0)
+  if(var_3 > 4 || var_3 < 0) {
     exitlevel(0);
+  }
 
   return var_3;
 }

@@ -103,8 +103,9 @@ initialize_contract_tracking() {
 }
 
 _id_0F4C() {
-  if(!isDefined(level._id_AC1D))
+  if(!isDefined(level._id_AC1D)) {
     return 0;
+  }
 
   var_0 = [];
 
@@ -119,8 +120,9 @@ _id_0F4C() {
   }
 
   foreach(var_2 in var_0) {
-    if(!common_scripts\utility::_id_562E(var_2._id_6BE1))
+    if(!common_scripts\utility::_id_562E(var_2._id_6BE1)) {
       return 0;
+    }
   }
 
   return 1;
@@ -136,11 +138,13 @@ report_player_zombie_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
   if(!isPlayer(var_1)) {
     return;
   }
-  if(!isDefined(var_1.recent_weapon_damage))
+  if(!isDefined(var_1.recent_weapon_damage)) {
     var_1.recent_weapon_damage = [];
+  }
 
-  if(!isDefined(var_1.recent_weapon_locs))
+  if(!isDefined(var_1.recent_weapon_locs)) {
     var_1.recent_weapon_locs = [];
+  }
 
   var_1.recent_weapon_damage = common_scripts\utility::_id_0F6F(var_1.recent_weapon_damage, var_5);
   var_1.recent_weapon_locs = common_scripts\utility::_id_0F6F(var_1.recent_weapon_locs, [var_5, var_8]);
@@ -162,15 +166,17 @@ assigncontractsfirstboxweapon(var_0) {
   var_1 = self;
   var_1 endon("disconnect");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_2 = "magicBoxUse1";
-  else
+  } else {
     var_2 = "magicBoxUse" + var_0;
+  }
 
   var_1 waittill(var_2, var_3);
 
-  if(!isDefined(var_1.contractsboxattempts))
+  if(!isDefined(var_1.contractsboxattempts)) {
     var_1.contractsboxattempts = 1;
+  }
 
   var_1.contractsboxattempts++;
 
@@ -203,11 +209,13 @@ contracts_report_player_upgraded_weapon(var_0) {
 }
 
 contracts_report_players_opened_map() {
-  while(!_id_0F4C())
+  while(!_id_0F4C()) {
     waitframe();
+  }
 
-  foreach(var_1 in level.players)
-  maps\mp\_achievement_engine_z_utils::ae_sendzombiesspecial_zm(var_1, "player_zombie_all_doors_opened");
+  foreach(var_1 in level.players) {
+    maps\mp\_achievement_engine_z_utils::ae_sendzombiesspecial_zm(var_1, "player_zombie_all_doors_opened");
+  }
 }
 
 player_purchase_report_collection(var_0, var_1) {
@@ -255,8 +263,9 @@ player_purchase_report_collection(var_0, var_1) {
     }
   }
 
-  foreach(var_8 in var_3)
-  var_0 maps\mp\_achievement_engine_z_utils::ae_zm_purchasejoltsevent(var_0, var_1, var_8.condition, var_8._id_005C, var_8.condition);
+  foreach(var_8 in var_3) {
+    var_0 maps\mp\_achievement_engine_z_utils::ae_zm_purchasejoltsevent(var_0, var_1, var_8.condition, var_8._id_005C, var_8.condition);
+  }
 
   return var_3.size > 0;
 }
@@ -318,13 +327,15 @@ is_sacrifice(var_0, var_1, var_2, var_3) {
 }
 
 razer_gun_melee_kill(var_0, var_1, var_2, var_3, var_4) {
-  if(var_3 != "MOD_MELEE")
+  if(var_3 != "MOD_MELEE") {
     return 0;
+  }
 
-  if(common_scripts\utility::_id_562E(var_4))
+  if(common_scripts\utility::_id_562E(var_4)) {
     return common_scripts\utility::_id_0F79(["razergun_zm", "razergun_melee_zm", "razergun_pap_zm"], var_2);
-  else
+  } else {
     return common_scripts\utility::_id_0F79(["razergun_zm", "razergun_pap_zm"], var_2);
+  }
 }
 
 zmb_contracts_map_is_foggy() {
@@ -359,8 +370,9 @@ has_no_primary_ammo(var_0, var_1, var_2, var_3) {
   var_4 = var_0 getweaponlistprimaries();
 
   foreach(var_2 in var_4) {
-    if(var_0 getammocount(var_2) > 0)
+    if(var_0 getammocount(var_2) > 0) {
       return 0;
+    }
   }
 
   return 1;
@@ -397,8 +409,9 @@ get_trap_value_for_name(var_0) {
 }
 
 register_unique_kill_func(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.register_unique_kill_funcs))
+  if(!isDefined(level.register_unique_kill_funcs)) {
     level.register_unique_kill_funcs = [];
+  }
 
   var_4 = spawnStruct();
   var_4._id_502A = var_0;
@@ -412,24 +425,29 @@ contracts_zombies_death_tracking(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   var_9 = self;
   var_10 = [];
 
-  if(common_scripts\utility::_id_562E(var_9._id_5A3D))
+  if(common_scripts\utility::_id_562E(var_9._id_5A3D)) {
     var_1 = common_scripts\utility::_id_4461(var_9.origin, level.players);
-
-  if(var_4 == "turretweapon_zeppelin_gun_zm")
-    var_1 = common_scripts\utility::_id_4461(var_9.origin, level.players);
-
-  if(var_4 == "drag_explosive_zombie_zm")
-    var_1 = var_0._id_0117;
-
-  if(var_4 == "trap_zm_mp") {
-    if(isDefined(var_0._id_0117))
-      var_1 = var_0._id_0117;
-    else
-      var_1 = var_0._id_9C92._id_0117;
   }
 
-  if(isDefined(var_0._id_9CBB))
+  if(var_4 == "turretweapon_zeppelin_gun_zm") {
+    var_1 = common_scripts\utility::_id_4461(var_9.origin, level.players);
+  }
+
+  if(var_4 == "drag_explosive_zombie_zm") {
+    var_1 = var_0._id_0117;
+  }
+
+  if(var_4 == "trap_zm_mp") {
+    if(isDefined(var_0._id_0117)) {
+      var_1 = var_0._id_0117;
+    } else {
+      var_1 = var_0._id_9C92._id_0117;
+    }
+  }
+
+  if(isDefined(var_0._id_9CBB)) {
     var_10 = common_scripts\utility::_id_0F6F(var_10, get_trap_value_for_name(var_0._id_9CBB));
+  }
 
   if(!isDefined(var_1)) {
     return;
@@ -449,8 +467,9 @@ contracts_tracking_init(var_0) {
   var_1 = self;
 
   foreach(var_3 in var_0) {
-    foreach(var_5 in level.zmb_unique_zombie_contracts[var_3])
-    var_1 initialize_player_zombies_contract(var_5);
+    foreach(var_5 in level.zmb_unique_zombie_contracts[var_3]) {
+      var_1 initialize_player_zombies_contract(var_5);
+    }
   }
 }
 
@@ -458,14 +477,16 @@ contracts_consecutive_waves_tracking() {
   var_0 = self;
   var_0 endon("disconnect");
 
-  foreach(var_2 in level.zmb_unique_zombie_contracts_reset_funcs["wave_survival"])
-  var_0 childthread watch_progress_clear(var_2.reset_func_array, "wave_survival", var_2.condition);
+  foreach(var_2 in level.zmb_unique_zombie_contracts_reset_funcs["wave_survival"]) {
+    var_0 childthread watch_progress_clear(var_2.reset_func_array, "wave_survival", var_2.condition);
+  }
 
   for(;;) {
     level waittill("round complete");
 
-    foreach(var_5 in var_0.active_contract_tracker["wave_survival"])
-    var_5._id_005C++;
+    foreach(var_5 in var_0.active_contract_tracker["wave_survival"]) {
+      var_5._id_005C++;
+    }
 
     foreach(var_5 in var_0.active_contract_tracker["zombie_purchases"]) {
       switch (var_5.condition) {
@@ -479,8 +500,9 @@ contracts_consecutive_waves_tracking() {
     _id_0547::_id_A6F6();
     maps\mp\_achievement_engine_z_utils::ae_sendwavesurvivalevent_zm(var_0, "survival_wave_single");
 
-    foreach(var_5 in var_0.active_contract_tracker["wave_survival"])
-    maps\mp\_achievement_engine_z_utils::ae_sendwavesurvivalevent_zm(var_0, var_5.condition, var_5._id_005C, var_5._id_6E55);
+    foreach(var_5 in var_0.active_contract_tracker["wave_survival"]) {
+      maps\mp\_achievement_engine_z_utils::ae_sendwavesurvivalevent_zm(var_0, var_5.condition, var_5._id_005C, var_5._id_6E55);
+    }
   }
 }
 
@@ -557,8 +579,9 @@ contracts_report_player_preformed_revive(var_0, var_1) {
         var_3.player_revives_this_session = var_5._id_005C;
         break;
       case "player_teammate_revives_unique":
-        if(!common_scripts\utility::_id_0F79(var_2.session_unique_player_revives_zm, var_0))
+        if(!common_scripts\utility::_id_0F79(var_2.session_unique_player_revives_zm, var_0)) {
           var_2.session_unique_player_revives_zm = common_scripts\utility::_id_0F6F(var_2.session_unique_player_revives_zm, var_0);
+        }
 
         if(var_5._id_005C != var_2.session_unique_player_revives_zm.size) {
           var_5._id_005C = var_2.session_unique_player_revives_zm.size;
@@ -602,8 +625,9 @@ contracts_report_player_stunned_zombie(var_0) {
       case "player_zombie_shellshock_stun":
         var_3._id_005C = var_3._id_005C + var_0;
 
-        for(var_4 = 0; var_4 < var_0; var_4++)
+        for(var_4 = 0; var_4 < var_0; var_4++) {
           var_1 maps\mp\_achievement_engine_z_utils::ae_sendzombiesspecial_zm(var_1, "player_zombie_shellshock_stun", var_0);
+        }
 
         break;
     }
@@ -695,19 +719,23 @@ mp_zombie_nest_01_tower_battle_report_efficiency(var_0) {
   var_1 = 85;
   var_2 = 1;
 
-  if(maps\mp\_utility::_id_4571() == "mp_zombie_nest_01")
+  if(maps\mp\_utility::_id_4571() == "mp_zombie_nest_01") {
     var_2 = 2;
+  }
 
-  if(var_0 < var_1)
+  if(var_0 < var_1) {
     self._id_39D8 = 1;
+  }
 
-  if(!isDefined(self._id_005C))
+  if(!isDefined(self._id_005C)) {
     self._id_005C = 0;
+  }
 
   self._id_005C++;
 
-  if(self._id_005C == var_2 && !common_scripts\utility::_id_562E(self._id_39D8))
+  if(self._id_005C == var_2 && !common_scripts\utility::_id_562E(self._id_39D8)) {
     level thread quest_contracts_completed(self.name);
+  }
 }
 
 mp_zombie_nest_01_final_boss_report_completion(var_0) {
@@ -743,8 +771,9 @@ mp_zombie_boss_completed_small() {
 }
 
 quest_contracts_completed(var_0, var_1) {
-  foreach(var_3 in level.players)
-  var_3 maps\mp\_achievement_engine_z_utils::ae_sendzombiesspecial_zm(var_3, var_0, var_1);
+  foreach(var_3 in level.players) {
+    var_3 maps\mp\_achievement_engine_z_utils::ae_sendzombiesspecial_zm(var_3, var_0, var_1);
+  }
 }
 
 orders_and_contracts_challenge_init(var_0, var_1) {
@@ -765,8 +794,9 @@ get_testing_contracts_offline() {
 initialize_player_zombies_contract(var_0) {
   var_1 = self;
 
-  if(!isDefined(var_1.active_contract_tracker))
+  if(!isDefined(var_1.active_contract_tracker)) {
     var_1.active_contract_tracker = [];
+  }
 
   var_2 = spawnStruct();
   var_2._id_6E55 = var_0._id_6E55;
@@ -777,10 +807,11 @@ initialize_player_zombies_contract(var_0) {
   var_2._id_3F02 = var_0._id_3F02;
   var_2.type = var_0.type;
 
-  if(!isDefined(var_1.active_contract_tracker[var_2.type]))
+  if(!isDefined(var_1.active_contract_tracker[var_2.type])) {
     var_1.active_contract_tracker[var_2.type] = [var_2];
-  else
+  } else {
     var_1.active_contract_tracker[var_2.type] = common_scripts\utility::_id_0F6F(var_1.active_contract_tracker[var_2.type], var_2);
+  }
 }
 
 watch_progress_clear(var_0, var_1, var_2) {
@@ -789,21 +820,24 @@ watch_progress_clear(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     return;
   }
-  foreach(var_5 in var_0)
-  var_3 childthread run_reset_func_array(var_5, var_1, var_2);
+  foreach(var_5 in var_0) {
+    var_3 childthread run_reset_func_array(var_5, var_1, var_2);
+  }
 }
 
 run_reset_func_array(var_0, var_1, var_2) {
-  for(;;)
+  for(;;) {
     try_stat_reset(var_1, var_2, var_0);
+  }
 }
 
 try_stat_reset(var_0, var_1, var_2) {
   var_3 = [[var_2]]();
 
   foreach(var_5 in self.active_contract_tracker[var_0]) {
-    if(_id_0547::_id_5565(var_5.condition, var_1) && !validate_contract_rule(var_5, var_3))
+    if(_id_0547::_id_5565(var_5.condition, var_1) && !validate_contract_rule(var_5, var_3)) {
       var_5._id_005C = 0;
+    }
   }
 }
 
@@ -818,8 +852,9 @@ add_generic_contract(var_0, var_1, var_2) {
 add_area_contract(var_0) {
   var_1 = "Survive in ";
 
-  foreach(var_3 in var_0)
-  var_1 = var_1 + (var_3 + " ");
+  foreach(var_3 in var_0) {
+    var_1 = var_1 + (var_3 + " ");
+  }
 
   create_new_contract_type("wave_survival", "survival_area", ::contract_fail_on_player_leave_area, [_id_0547::_id_A6F6], var_0, var_1);
 }
@@ -842,51 +877,61 @@ create_new_contract_type(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8._id_6E55 = var_4;
   var_8._id_3F02 = var_2;
 
-  if(!isDefined(level.zmb_unique_zombie_contracts))
+  if(!isDefined(level.zmb_unique_zombie_contracts)) {
     level.zmb_unique_zombie_contracts = [];
+  }
 
-  if(!isDefined(level.zmb_unique_zombie_contracts_reset_funcs))
+  if(!isDefined(level.zmb_unique_zombie_contracts_reset_funcs)) {
     level.zmb_unique_zombie_contracts_reset_funcs = [];
+  }
 
-  if(!isDefined(level.zmb_unique_zombie_contracts_reset_funcs[var_0]))
+  if(!isDefined(level.zmb_unique_zombie_contracts_reset_funcs[var_0])) {
     level.zmb_unique_zombie_contracts_reset_funcs[var_0] = [];
+  }
 
   level.zmb_unique_zombie_contracts_reset_funcs[var_0][var_1] = spawnStruct();
   level.zmb_unique_zombie_contracts_reset_funcs[var_0][var_1].reset_func_array = var_3;
   level.zmb_unique_zombie_contracts_reset_funcs[var_0][var_1].condition = var_1;
 
-  if(!isDefined(level.zmb_unique_zombie_contracts[var_0]))
+  if(!isDefined(level.zmb_unique_zombie_contracts[var_0])) {
     level.zmb_unique_zombie_contracts[var_0] = [var_8];
-  else
+  } else {
     level.zmb_unique_zombie_contracts[var_0] = common_scripts\utility::_id_0F6F(level.zmb_unique_zombie_contracts[var_0], var_8);
+  }
 }
 
 get_player_starter_weapons() {
-  while(!isDefined(level.zombiemeleeweapon))
+  while(!isDefined(level.zombiemeleeweapon)) {
     waitframe();
+  }
 
   return _id_0547::get_zombies_mode_starter_weapons(1);
 }
 
 get_player_first_box_weapon() {
-  if(isDefined(self.zmbcontractsfirstboxweapon))
+  if(isDefined(self.zmbcontractsfirstboxweapon)) {
     return self.zmbcontractsfirstboxweapon;
-  else
+  } else {
     return "no_box_weapon";
+  }
 }
 
 get_current_active_ability() {
-  if(common_scripts\utility::_id_562E(self._id_983B))
+  if(common_scripts\utility::_id_562E(self._id_983B)) {
     return "role_ability_taunt_zm";
+  }
 
-  if(common_scripts\utility::_id_562E(self._id_569F))
+  if(common_scripts\utility::_id_562E(self._id_569F)) {
     return "role_ability_camo_zm";
+  }
 
-  if(common_scripts\utility::_id_562E(self._id_5F5C))
+  if(common_scripts\utility::_id_562E(self._id_5F5C)) {
     return "role_ability_mad_minute_zm";
+  }
 
-  if(common_scripts\utility::_id_3798("stunning_burst_active") && common_scripts\utility::_id_3794("stunning_burst_active"))
+  if(common_scripts\utility::_id_3798("stunning_burst_active") && common_scripts\utility::_id_3794("stunning_burst_active")) {
     return "role_ability_stunning_burst_zm";
+  }
 
   return "none";
 }
@@ -899,8 +944,9 @@ contract_fail_on_player_leave_area(var_0, var_1) {
 contract_validate_weapon_used(var_0, var_1, var_2) {
   var_3 = self;
 
-  if(!_isarray(var_1))
+  if(!_isarray(var_1)) {
     var_1 = [var_1];
+  }
 
   if(_isarray(var_0)) {
     var_4 = "normal_weapon_check";
@@ -908,14 +954,16 @@ contract_validate_weapon_used(var_0, var_1, var_2) {
   } else {
     var_4 = var_0.condition;
 
-    if(_isarray(var_0._id_6E55))
+    if(_isarray(var_0._id_6E55)) {
       var_5 = var_0._id_6E55;
-    else
+    } else {
       var_5 = [var_0._id_6E55];
+    }
   }
 
-  if(common_scripts\utility::_id_0F79(var_5, "no_box_weapon"))
+  if(common_scripts\utility::_id_0F79(var_5, "no_box_weapon")) {
     return 1;
+  }
 
   foreach(var_7 in var_1) {
     var_7 = var_3 set_last_checked_weapon(var_7);
@@ -925,18 +973,21 @@ contract_validate_weapon_used(var_0, var_1, var_2) {
       if(var_4 == "survival_shotgun") {
         var_11 = maps\mp\_utility::getweaponclass(_id_0547::zombies_to_mp(var_7), 1);
 
-        if(_id_0547::_id_5565(var_11, var_0._id_6E55) || weapon_is_a_match(var_7, "p38_pap_zm"))
+        if(_id_0547::_id_5565(var_11, var_0._id_6E55) || weapon_is_a_match(var_7, "p38_pap_zm")) {
           var_8 = 1;
+        }
 
         continue;
       }
 
-      if(var_3 weapon_is_a_match(var_7, var_10))
+      if(var_3 weapon_is_a_match(var_7, var_10)) {
         var_8 = 1;
+      }
     }
 
-    if(proceed_to_contract_progress_reset(var_8, var_7, 1))
+    if(proceed_to_contract_progress_reset(var_8, var_7, 1)) {
       return 1;
+    }
   }
 
   return 0;
@@ -945,11 +996,13 @@ contract_validate_weapon_used(var_0, var_1, var_2) {
 weapon_is_a_match(var_0, var_1) {
   var_2 = self;
 
-  if(var_0 == var_1)
+  if(var_0 == var_1) {
     return 1;
+  }
 
-  if(issubstr(var_0, "shovel") && issubstr(var_1, "shovel"))
+  if(issubstr(var_0, "shovel") && issubstr(var_1, "shovel")) {
     return 1;
+  }
 
   return 0;
 }
@@ -958,16 +1011,18 @@ set_last_checked_weapon(var_0) {
   var_1 = self;
   var_2 = "";
 
-  if(!isDefined(var_1.lastweaponcheck))
+  if(!isDefined(var_1.lastweaponcheck)) {
     var_1 save_this_weapon(var_0);
+  }
 
   var_3 = var_1.lastweaponcheckraw;
   var_4 = var_1.lastweaponcheck;
 
-  if(_id_0547::_id_5565(var_0, var_3))
+  if(_id_0547::_id_5565(var_0, var_3)) {
     return var_4;
-  else
+  } else {
     var_1 save_this_weapon(var_0);
+  }
 
   return var_1.lastweaponcheck;
 }
@@ -980,25 +1035,30 @@ save_this_weapon(var_0) {
 
 proceed_to_contract_progress_reset(var_0, var_1, var_2) {
   if(common_scripts\utility::_id_562E(var_2)) {
-    if(issubstr(var_1, "drag_explosive"))
+    if(issubstr(var_1, "drag_explosive")) {
       return 0;
+    }
 
-    if(var_1 == "none")
+    if(var_1 == "none") {
       return 0;
+    }
 
-    if(_id_0547::iszombieindirectweapon(var_1))
+    if(_id_0547::iszombieindirectweapon(var_1)) {
       return 0;
+    }
 
-    if(_id_0547::_id_5866(var_1) || _id_0547::_id_5863(var_1) && !_id_0547::_id_5565(var_1, "alt+wunderbuss_zm"))
+    if(_id_0547::_id_5866(var_1) || _id_0547::_id_5863(var_1) && !_id_0547::_id_5565(var_1, "alt+wunderbuss_zm")) {
       return 0;
+    }
   }
 
   return !var_0;
 }
 
 contract_fail_on_player_move(var_0, var_1) {
-  if(!isDefined(self.previouszmbcontractorigin))
+  if(!isDefined(self.previouszmbcontractorigin)) {
     self.previouszmbcontractorigin = self.origin;
+  }
 
   var_2 = self.previouszmbcontractorigin;
   var_3 = self.origin;
@@ -1013,22 +1073,26 @@ contract_fail_on_not_crouched(var_0, var_1) {
 }
 
 contract_fail_on_zone_change(var_0, var_1, var_2) {
-  if(!isDefined(self.previouszmbzone))
+  if(!isDefined(self.previouszmbzone)) {
     self.previouszmbzone = _id_055A::_id_462D();
+  }
 
-  if(!isDefined(self.previouszmbzone))
+  if(!isDefined(self.previouszmbzone)) {
     return 0;
+  }
 
   var_3 = self.previouszmbzone;
   var_4 = _id_055A::_id_462D();
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 0;
+  }
 
   var_5 = !_id_0547::_id_5565(var_3, var_4);
 
-  if(!common_scripts\utility::_id_562E(var_2))
+  if(!common_scripts\utility::_id_562E(var_2)) {
     self.previouszmbzone = var_4;
+  }
 
   return var_5;
 }
@@ -1077,8 +1141,9 @@ contract_reset_on_wave_break() {
 wait_for_player_dmg() {
   var_0 = undefined;
 
-  while(!isDefined(var_0) || !agent_is_zombie(undefined, var_0))
+  while(!isDefined(var_0) || !agent_is_zombie(undefined, var_0)) {
     self waittill("damage", var_1, var_0);
+  }
 
   return 1;
 }
@@ -1094,8 +1159,9 @@ wait_for_player_purchase_perk() {
 
 get_unique_perks_total(var_0, var_1) {
   foreach(var_3 in var_0) {
-    if(!common_scripts\utility::_id_0F79(var_1, var_3.name))
+    if(!common_scripts\utility::_id_0F79(var_1, var_3.name)) {
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_3.name);
+    }
   }
 
   return var_1;
@@ -1109,8 +1175,9 @@ initialize_per_player_tracking() {
 zombies_multikill(var_0, var_1, var_2) {
   var_3 = self;
 
-  if(!isDefined(var_3.playerzombiemultikills))
+  if(!isDefined(var_3.playerzombiemultikills)) {
     var_3.playerzombiemultikills = [];
+  }
 
   var_4 = [];
   var_4["zombie_type"] = var_0._id_0A4B;
@@ -1129,15 +1196,17 @@ zombies_multikill(var_0, var_1, var_2) {
 contracts_report_player_multikills() {
   self endon("disconnect");
 
-  for(var_0 = 0; var_0 < 3; var_0++)
+  for(var_0 = 0; var_0 < 3; var_0++) {
     waitframe();
+  }
 
   var_1 = self.playerzombiemultikills.size >= 5;
 
-  if(var_1)
+  if(var_1) {
     self.playerzombiemultikilldata = self.playerzombiemultikills;
-  else
+  } else {
     self.playerzombiemultikilldata = undefined;
+  }
 
   self.starttrackingmultikill = 0;
   self.playerzombiemultikills = undefined;
@@ -1147,14 +1216,16 @@ contracts_report_player_multikills() {
 is_being_chased_by_zombie() {
   var_0 = _id_0547::_id_408F();
 
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     return 0;
+  }
 
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(_id_0547::_id_5565(var_3._id_28D2, self))
+    if(_id_0547::_id_5565(var_3._id_28D2, self)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1163,15 +1234,17 @@ is_being_chased_by_zombie() {
 get_num_unique_zombie_kills(var_0) {
   var_1 = self;
 
-  if(!common_scripts\utility::_id_0F79(var_1.zombie_types_killed_list, var_0))
+  if(!common_scripts\utility::_id_0F79(var_1.zombie_types_killed_list, var_0)) {
     var_1.zombie_types_killed_list = common_scripts\utility::_id_0F6F(var_1.zombie_types_killed_list, var_0);
+  }
 }
 
 increment_contract_array(var_0) {
   var_1 = self;
 
-  if(!isDefined(var_1.count_arr))
+  if(!isDefined(var_1.count_arr)) {
     var_1.count_arr = [];
+  }
 
   if(!isDefined(var_1.count_arr[var_0])) {
     var_1.count_arr[var_0] = spawnStruct();
@@ -1200,8 +1273,9 @@ contracts_start_track_boss_battle_laststand() {
   common_scripts\utility::_id_3C9F("zmb_contracts_boss_battle_active");
   var_0 endon("enter_last_stand");
 
-  while(common_scripts\utility::_id_3C77("zmb_contracts_boss_battle_active"))
+  while(common_scripts\utility::_id_3C77("zmb_contracts_boss_battle_active")) {
     waitframe();
+  }
 
   var_0 maps\mp\_achievement_engine_z_utils::ae_sendzombiesspecial_zm(var_0, "player_zombie_boss_no_laststand");
 }

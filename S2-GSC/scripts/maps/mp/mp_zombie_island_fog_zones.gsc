@@ -41,8 +41,9 @@ run_fog_callbacks(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 run_fog_callbacks_internal() {
   self endon(self.fog_callback_data.endon_notification);
 
-  if(isDefined(self.fog_callback_data.initialfunc))
+  if(isDefined(self.fog_callback_data.initialfunc)) {
     self[[self.fog_callback_data.initialfunc]]();
+  }
 
   for(;;) {
     var_0 = level.zmb_island_fog_volumes get_fog_volumn_touched(self);
@@ -54,15 +55,17 @@ run_fog_callbacks_internal() {
       self.current_volume = var_0;
       self.current_fog_state = level.island_fog_is_thick;
 
-      if(isDefined(self.fog_callback_data.newzonefunc))
+      if(isDefined(self.fog_callback_data.newzonefunc)) {
         self[[self.fog_callback_data.newzonefunc]](var_3, var_0, var_2);
+      }
 
       var_4 = fog_is_thick_for_agent(var_3.fog);
       self.isinfogzone = var_4;
 
       if(var_4) {
-        if(isDefined(self.fog_callback_data.enterfunc))
+        if(isDefined(self.fog_callback_data.enterfunc)) {
           self[[self.fog_callback_data.enterfunc]]();
+        }
       } else if(isDefined(self.fog_callback_data.exitfunc))
         self[[self.fog_callback_data.exitfunc]]();
     }
@@ -89,13 +92,15 @@ on_player_zone_change(var_0, var_1, var_2) {
   self notify("new_fog_change");
   self endon("new_fog_change");
 
-  if(_id_0547::_id_5565(var_1.name, "introduction"))
+  if(_id_0547::_id_5565(var_1.name, "introduction")) {
     var_3 = 0;
-  else
+  } else {
     var_3 = var_0.time;
+  }
 
-  if(common_scripts\utility::_id_562E(var_2))
+  if(common_scripts\utility::_id_562E(var_2)) {
     var_3 = 0;
+  }
 
   var_4 = get_fog_and_light_set(var_1, 1);
   self.current_volume_is_interior = !fog_is_thick_for_agent(var_4.fog);
@@ -107,15 +112,17 @@ clear_player_vision() {
 }
 
 should_force_fog_change(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = 0;
 
   foreach(var_3 in var_0) {
     if(self[[var_3.check]]()) {
-      if(isDefined(var_3._id_3F02))
+      if(isDefined(var_3._id_3F02)) {
         self[[var_3._id_3F02]]();
+      }
 
       var_1 = 1;
     }
@@ -134,8 +141,9 @@ fog_state_has_change_for_agent(var_0) {
 }
 
 should_restore_fog_vision_from_camo() {
-  if(common_scripts\utility::_id_562E(self.camovisionrestored) && !common_scripts\utility::_id_562E(self._id_569F))
+  if(common_scripts\utility::_id_562E(self.camovisionrestored) && !common_scripts\utility::_id_562E(self._id_569F)) {
     self.camovisionrestored = 0;
+  }
 
   if(common_scripts\utility::_id_562E(self._id_569F) && common_scripts\utility::_id_562E(level.island_fog_is_thick) && !common_scripts\utility::_id_562E(self.camovisionrestored)) {
     self.camovisionrestored = 1;
@@ -157,8 +165,9 @@ clear_restore_fog_vision_isolated_room() {
 }
 
 apply_clientside_volume_exploder() {
-  foreach(var_1 in level.clientside_exploder_runners)
-  childthread toggle_on_player_touch(var_1);
+  foreach(var_1 in level.clientside_exploder_runners) {
+    childthread toggle_on_player_touch(var_1);
+  }
 }
 
 toggle_on_player_touch(var_0) {
@@ -173,8 +182,9 @@ toggle_on_player_touch(var_0) {
 wait_for_touching_any_volume(var_0) {
   for(;;) {
     foreach(var_2 in var_0._id_A615) {
-      if(self istouching(var_2))
+      if(self istouching(var_2)) {
         return;
+      }
     }
 
     waitframe();
@@ -188,8 +198,9 @@ wait_for_touching_no_volume(var_0) {
     var_1 = 0;
 
     foreach(var_3 in var_0._id_A615) {
-      if(self istouching(var_3))
+      if(self istouching(var_3)) {
         var_1 = 1;
+      }
     }
 
     waitframe();
@@ -222,8 +233,9 @@ get_fog_and_light_set(var_0, var_1) {
   var_2 = spawnStruct();
   var_3 = common_scripts\utility::_id_562E(level.island_fog_is_thick);
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_3 = 1;
+  }
 
   if(var_3) {
     var_2.fog = var_0.fog_set_active;
@@ -238,13 +250,15 @@ get_fog_and_light_set(var_0, var_1) {
 }
 
 get_fog_volumn_touched(var_0) {
-  if(!common_scripts\utility::_id_562E(level.island_fog_introduction_done))
+  if(!common_scripts\utility::_id_562E(level.island_fog_introduction_done)) {
     return self[1];
+  }
 
   foreach(var_2 in self) {
     foreach(var_4 in var_2._id_A615) {
-      if(var_0 istouching(var_4))
+      if(var_0 istouching(var_4)) {
         return var_2;
+      }
     }
   }
 
@@ -255,8 +269,9 @@ set_light_and_fog(var_0, var_1, var_2, var_3) {
   if(common_scripts\utility::_id_562E(self.fog_set_is_locked)) {
     return;
   }
-  if(common_scripts\utility::_id_562E(var_3))
+  if(common_scripts\utility::_id_562E(var_3)) {
     self.fog_set_is_locked = 1;
+  }
 
   self setclienttriggervisionset(var_0, var_2);
   self lightsetoverrideenableforplayer(var_1, var_2);

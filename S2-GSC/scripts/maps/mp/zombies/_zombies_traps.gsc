@@ -122,33 +122,37 @@ _id_9CAF(var_0, var_1, var_2, var_3) {
   var_4 = self._id_0165;
   var_5 = _id_9C9E(var_4);
 
-  if(var_5 > 0)
+  if(var_5 > 0) {
     self._id_267B = var_5;
-  else if(isDefined(self.setanimknobrestart))
+  } else if(isDefined(self.setanimknobrestart)) {
     self._id_267B = self.setanimknobrestart;
-  else
+  } else {
     self._id_267B = 500;
+  }
 
   var_6 = _id_9C9C(var_4);
 
-  if(var_6 > 0)
+  if(var_6 > 0) {
     self._id_264F = var_6;
-  else if(isDefined(self.setlookatent))
+  } else if(isDefined(self.setlookatent)) {
     self._id_264F = int(self.setlookatent);
-  else
+  } else {
     self._id_264F = 40;
+  }
 
-  if(!common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(var_0)) {
     _id_10BB();
-  else
+  } else {
     _id_10BC(var_1, var_2, var_3);
+  }
 
   self._id_931A = "none";
 
-  if(_id_9CBF())
+  if(_id_9CBF()) {
     _id_9CC5("no_power");
-  else
+  } else {
     _id_9CC5("ready");
+  }
 }
 
 _id_7BFB(var_0) {
@@ -161,8 +165,9 @@ _id_10BC(var_0, var_1, var_2) {
     thread _id_9CD5(var_4);
   }
 
-  foreach(var_7 in var_1)
-  thread _id_9CAD(var_7);
+  foreach(var_7 in var_1) {
+    thread _id_9CAD(var_7);
+  }
 
   foreach(var_10 in var_2) {
     thread _id_9C94(var_10);
@@ -219,11 +224,13 @@ _id_10BB() {
 }
 
 _id_7BD7(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "default";
+  }
 
-  if(!isDefined(level._id_9CD2[var_4]))
+  if(!isDefined(level._id_9CD2[var_4])) {
     level._id_9CD2[var_4] = [];
+  }
 
   level._id_9CD2[var_4]["no_power"] = var_0;
   level._id_9CD2[var_4]["ready"] = var_1;
@@ -241,8 +248,9 @@ _id_9CBF() {
 }
 
 _id_9CAE() {
-  if(_id_9CBF())
+  if(_id_9CBF()) {
     return common_scripts\utility::_id_3C77(self.setgoalnode);
+  }
 
   return 1;
 }
@@ -254,8 +262,9 @@ _id_9CC5(var_0) {
 _id_0732(var_0) {
   self notify(var_0);
 
-  if(var_0 != self._id_931A)
+  if(var_0 != self._id_931A) {
     self notify("trap_state_change", var_0);
+  }
 
   self._id_931A = var_0;
   self thread[[level._id_9CCF[var_0]]]();
@@ -264,8 +273,9 @@ _id_0732(var_0) {
 _id_9CD3() {
   self endon("trap_state_change");
 
-  if(!_id_9CAE())
+  if(!_id_9CAE()) {
     common_scripts\utility::_id_3C9F(self.setgoalnode);
+  }
 
   _id_9CC5("ready");
 }
@@ -274,8 +284,9 @@ _id_9CCE() {
   self endon("trap_state_change");
   self waittill("trap_reactivated");
 
-  if(!_id_9CAE())
+  if(!_id_9CAE()) {
     common_scripts\utility::_id_3C9F(self.setgoalnode);
+  }
 
   _id_9CC5("ready");
 }
@@ -286,14 +297,15 @@ _id_9CD4() {
   for(;;) {
     self waittill("trap_trigger", var_0, var_1);
 
-    if(var_1 == "token")
+    if(var_1 == "token") {
       var_0 maps\mp\gametypes\zombies::_id_90F6(self._id_9A84);
-    else {
+    } else {
       var_2 = self._id_267B;
 
       if(isDefined(level._id_6F41)) {
-        for(var_3 = 0; var_3 < level._id_6F41; var_3++)
+        for(var_3 = 0; var_3 < level._id_6F41; var_3++) {
           var_2 = _id_0547::_id_4522(var_2);
+        }
       }
 
       if(!var_0 maps\mp\gametypes\zombies::_id_11C2(var_2)) {
@@ -315,8 +327,9 @@ _id_9C93(var_0, var_1) {
   if(!var_1) {
     _id_0555::issprinting("use_trap", var_0);
 
-    if(isDefined(level._id_AAFE))
+    if(isDefined(level._id_AAFE)) {
       level thread[[level._id_AAFE]](self, var_0);
+    }
   }
 
   self._id_0117 = var_0;
@@ -338,24 +351,26 @@ _id_9CCB() {
   self endon("active");
   _id_9CCC();
 
-  if(_id_9CAE())
+  if(_id_9CAE()) {
     _id_9CC5("cooldown");
-  else
+  } else {
     _id_9CC5("no_power");
+  }
 }
 
 _id_9CCC() {
-  if(isDefined(self._id_9C96))
+  if(isDefined(self._id_9C96)) {
     self waittill(self._id_9C96);
-  else {
+  } else {
     var_0 = _id_9CA6(self._id_0165);
 
-    if(var_0 > 0)
+    if(var_0 > 0) {
       var_1 = var_0;
-    else if(isDefined(self._id_817A))
+    } else if(isDefined(self._id_817A)) {
       var_1 = self._id_817A;
-    else
+    } else {
       var_1 = _id_438F();
+    }
 
     wait(var_1);
   }
@@ -365,15 +380,17 @@ _id_9CCD() {
   self endon("trap_state_change");
   var_0 = self._id_264F;
 
-  if(isDefined(level._id_9CF6))
+  if(isDefined(level._id_9CF6)) {
     var_0 = level._id_9CF6;
+  }
 
   wait(var_0);
 
-  if(_id_9CAE())
+  if(_id_9CAE()) {
     _id_9CC5("ready");
-  else
+  } else {
     _id_9CC5("no_power");
+  }
 }
 
 _id_9C94(var_0) {
@@ -383,11 +400,13 @@ _id_9C94(var_0) {
     self waittill("trap_state_change", var_2);
     var_3 = level._id_9CD2[var_1][var_2];
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_0 setModel(var_3);
+    }
 
-    if(var_2 == "active")
+    if(var_2 == "active") {
       var_0 thread _id_9CB7();
+    }
   }
 }
 
@@ -402,8 +421,9 @@ _id_9CB7() {
     wait 1;
   }
 
-  if(isDefined(level._id_9CD1["cooldown_to_active"]))
+  if(isDefined(level._id_9CD1["cooldown_to_active"])) {
     self scriptmodelplayanim(level._id_9CD1["cooldown_to_active"]);
+  }
 }
 
 _id_9C95(var_0) {
@@ -417,8 +437,9 @@ _id_9CD5(var_0) {
   var_1 = self._id_0165;
   var_2 = undefined;
 
-  if(1)
+  if(1) {
     var_2 = _id_0552::_id_7BFC(var_0);
+  }
 
   var_3 = spawnStruct();
   var_3._id_9CBB = var_1;
@@ -428,13 +449,14 @@ _id_9CD5(var_0) {
   for(;;) {
     self waittill("trap_state_change", var_4);
 
-    if(1)
+    if(1) {
       var_2._id_6642 = 1;
+    }
 
     switch (var_4) {
       case "no_power":
         if(0) {
-          var_0 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+          var_0 setHintString(&"ZOMBIES_REQUIRES_POWER");
           var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
           var_0 _id_0547::_id_9A85(0);
         }
@@ -447,7 +469,7 @@ _id_9CD5(var_0) {
         break;
       case "active":
         if(0) {
-          var_0 sethintstring(&"ZOMBIES_EMPTY_STRING");
+          var_0 setHintString(&"ZOMBIES_EMPTY_STRING");
           var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
           var_0 _id_0547::_id_9A85(0);
         }
@@ -460,10 +482,11 @@ _id_9CD5(var_0) {
         break;
       case "cooldown":
         if(0) {
-          if(isDefined(self._id_4DAF))
-            var_0 sethintstring(self._id_4DAF["hint_cooldown"]);
-          else
-            var_0 sethintstring(&"ZOMBIES_TRAP_COOLDOWN");
+          if(isDefined(self._id_4DAF)) {
+            var_0 setHintString(self._id_4DAF["hint_cooldown"]);
+          } else {
+            var_0 setHintString(&"ZOMBIES_TRAP_COOLDOWN");
+          }
 
           var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
           var_0 _id_0547::_id_9A85(0);
@@ -472,8 +495,9 @@ _id_9CD5(var_0) {
         if(1) {
           var_2._id_9C9B = 0;
 
-          if(isDefined(self._id_4DAF))
+          if(isDefined(self._id_4DAF)) {
             var_2._id_9C9B = self._id_4DAF["hint_cooldown_ref"];
+          }
 
           var_2._id_9CCA = 2;
           var_2.interact_disabled = 1;
@@ -484,15 +508,17 @@ _id_9CD5(var_0) {
         var_5 = self._id_267B;
 
         if(isDefined(level._id_6F41)) {
-          for(var_6 = 0; var_6 < level._id_6F41; var_6++)
+          for(var_6 = 0; var_6 < level._id_6F41; var_6++) {
             var_5 = _id_0547::_id_4522(var_5);
+          }
         }
 
         if(0) {
-          if(isDefined(self._id_4DAF))
-            var_0 sethintstring(self._id_4DAF["hint_ready"]);
-          else
-            var_0 sethintstring(&"ZOMBIES_TRAP_BUY_GENERIC");
+          if(isDefined(self._id_4DAF)) {
+            var_0 setHintString(self._id_4DAF["hint_ready"]);
+          } else {
+            var_0 setHintString(&"ZOMBIES_TRAP_BUY_GENERIC");
+          }
 
           var_0 setsecondaryhintstring(_id_0547::_id_4474(var_5));
           var_0 _id_0547::_id_9A85(1);
@@ -501,8 +527,9 @@ _id_9CD5(var_0) {
         if(1) {
           var_2._id_9CBE = 0;
 
-          if(isDefined(self._id_4DAF))
+          if(isDefined(self._id_4DAF)) {
             var_2._id_9CBE = self._id_4DAF["hint_ready_ref"];
+          }
 
           var_2._id_9CCA = 3;
           var_2._id_9C9D = var_5;
@@ -512,12 +539,13 @@ _id_9CD5(var_0) {
         break;
       case "deactivate":
         if(0) {
-          var_0 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+          var_0 setHintString(&"ZOMBIES_REQUIRES_POWER");
           var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
         }
 
-        if(1)
+        if(1) {
           var_2._id_9CCA = 4;
+        }
 
         break;
       default:
@@ -548,8 +576,8 @@ _id_9CAC(var_0) {
     switch (var_6._id_0165) {
       case "damage_over_time":
       case "damage":
-        var_6 enablelinkto();
-        var_6 linkto(var_1);
+        var_6 enablelinkTo();
+        var_6 linkTo(var_1);
         thread _id_9CA0(var_6, var_6._id_0165 == "damage_over_time", "fx_trap_move");
         break;
       case "moveto":
@@ -583,11 +611,13 @@ _id_9CBC(var_0, var_1, var_2) {
 
   var_3 = var_2.setlookatent + "_" + var_1;
 
-  if(common_scripts\utility::_id_3F6F(var_3))
+  if(common_scripts\utility::_id_3F6F(var_3)) {
     var_0._id_2935 = common_scripts\utility::_id_44F5(var_3);
+  }
 
-  if(isDefined(var_0._id_2935))
+  if(isDefined(var_0._id_2935)) {
     _id_0547::_id_74A5(var_0._id_2935, var_0, "tag_origin");
+  }
 }
 
 _id_9CB6(var_0) {
@@ -625,8 +655,8 @@ _id_9CB1(var_0) {
     switch (var_6._id_0165) {
       case "damage_over_time":
       case "damage":
-        var_6 enablelinkto();
-        var_6 linkto(var_1);
+        var_6 enablelinkTo();
+        var_6 linkTo(var_1);
         thread _id_9CA0(var_6, var_6._id_0165 == "damage_over_time", "laser");
         break;
       case "moveto":
@@ -665,13 +695,15 @@ _id_9CB4(var_0) {
   self endon("ready");
   var_1 = "trap_warning_zm";
 
-  if(isDefined(level._id_AB15))
+  if(isDefined(level._id_AB15)) {
     var_1 = level._id_AB15;
+  }
 
   var_2 = "trap_zm";
 
-  if(isDefined(level._id_AB14))
+  if(isDefined(level._id_AB14)) {
     var_2 = level._id_AB14;
+  }
 
   var_0 laseron(var_1);
   var_3 = spawn("script_origin", var_0.origin);
@@ -680,15 +712,16 @@ _id_9CB4(var_0) {
   thread _id_9CB3(var_3);
   var_0 laseron(var_2);
   var_0 playSound("trap_laser_start");
-  var_0 playloopsound("trap_laser_loop");
+  var_0 playLoopSound("trap_laser_loop");
 }
 
 _id_9CB2(var_0) {
   if(level._id_5AFF == 0) {
     level._id_5AFF = 1;
 
-    if(isDefined(var_0))
-      var_0 playloopsound("trap_laser_alarm");
+    if(isDefined(var_0)) {
+      var_0 playLoopSound("trap_laser_alarm");
+    }
   } else {}
 }
 
@@ -718,8 +751,9 @@ _id_9CB5(var_0) {
     var_5 = 0;
     var_6 = distance(var_0.origin, var_4.origin);
 
-    if(var_6 > 0)
+    if(var_6 > 0) {
       var_5 = var_6 / var_1;
+    }
 
     var_7 = 0;
 
@@ -734,17 +768,21 @@ _id_9CB5(var_0) {
       }
     }
 
-    if(!var_5 && var_7)
+    if(!var_5 && var_7) {
       var_5 = var_7 / var_2;
+    }
 
-    if(var_6 > 0)
-      var_0 moveto(var_4.origin, var_5);
+    if(var_6 > 0) {
+      var_0 moveTo(var_4.origin, var_5);
+    }
 
-    if(var_7 > 0)
-      var_0 rotateto(var_4.angles, var_5);
+    if(var_7 > 0) {
+      var_0 rotateTo(var_4.angles, var_5);
+    }
 
-    if(var_5 > 0)
+    if(var_5 > 0) {
       wait(var_5);
+    }
 
     var_3++;
     var_3 = var_3 % var_0._id_64AD.size;
@@ -759,25 +797,29 @@ _id_9CAD(var_0) {
 
     switch (var_2) {
       case "no_power":
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           var_1 delete();
+        }
 
         break;
       case "deactivate":
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           var_1 delete();
+        }
 
         break;
       case "ready":
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           var_1 delete();
+        }
 
         var_1 = _spawnfx(common_scripts\utility::_id_44F5("trap_ready"), var_0.origin);
         _triggerfx(var_1);
         break;
       case "active":
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           var_1 delete();
+        }
 
         var_1 = _spawnfx(common_scripts\utility::_id_44F5("trap_not_ready"), var_0.origin);
         _triggerfx(var_1);
@@ -789,8 +831,9 @@ _id_9CAD(var_0) {
 }
 
 _id_9CA0(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "default";
+  }
 
   for(;;) {
     self waittill("active");
@@ -806,24 +849,28 @@ _id_9CA2(var_0, var_1, var_2) {
   var_3 = 1;
   var_4 = 5;
 
-  if(var_2 == "fx_trap_move")
+  if(var_2 == "fx_trap_move") {
     var_4 = 3;
+  }
 
   var_5 = var_4 / var_3;
 
-  if(isDefined(var_0.setanimknobrestart))
+  if(isDefined(var_0.setanimknobrestart)) {
     var_5 = var_5 * var_0.setanimknobrestart;
+  }
 
   var_6 = 50;
 
-  if(isDefined(var_0.setanimknobrestart))
+  if(isDefined(var_0.setanimknobrestart)) {
     var_6 = var_6 / var_0.setanimknobrestart;
+  }
 
   var_7 = gettime();
   var_8 = "trap_zm_mp";
 
-  if(isDefined(level._id_AB26))
+  if(isDefined(level._id_AB26)) {
     var_8 = self[[level._id_AB26]](var_0, var_1, var_2);
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_9);
@@ -841,8 +888,9 @@ _id_9CA2(var_0, var_1, var_2) {
       }
       var_9._id_66D3 = gettime() + 200;
 
-      if(isDefined(level._id_62B5) && isDefined(var_0.setanimknobrestart))
+      if(isDefined(level._id_62B5) && isDefined(var_0.setanimknobrestart)) {
         var_9._id_66D3 = gettime() + 200 * var_0.setanimknobrestart;
+      }
 
       var_9 dodamage(var_6, var_9.origin);
       continue;
@@ -875,13 +923,15 @@ _id_9CA2(var_0, var_1, var_2) {
       var_9._id_66D4 = gettime() + int(1000 / var_4);
       var_12 = "MOD_TRIGGER_HURT";
 
-      if(isDefined(var_0.setanimknobrestart))
+      if(isDefined(var_0.setanimknobrestart)) {
         var_12 = "MOD_IMPACT";
+      }
 
       var_13 = int(var_9.maxhealth / var_5);
 
-      if(var_9 _id_0547::_id_580A())
+      if(var_9 _id_0547::_id_580A()) {
         var_13 = var_13 * 0.1;
+      }
 
       if(_id_0547::_id_5565(self._id_0165, "trap_rnd")) {
         var_9 mark_electrified();
@@ -891,15 +941,17 @@ _id_9CA2(var_0, var_1, var_2) {
     } else {
       var_13 = var_9.health;
 
-      if(var_9 _id_0547::_id_580A())
+      if(var_9 _id_0547::_id_580A()) {
         var_13 = var_13 * 0.2;
+      }
 
       var_9 thread mark_electrified();
 
-      if(_id_0547::_id_5565(self._id_0165, "trap_rnd"))
+      if(_id_0547::_id_5565(self._id_0165, "trap_rnd")) {
         var_9 dodamage(var_13, var_10, level._id_9CC0, level._id_9CC0, "MOD_TRIGGER_HURT", var_8, var_11);
-      else
+      } else {
         var_9 dodamage(var_13, var_10, self._id_0117, self._id_0117, "MOD_TRIGGER_HURT", var_8, var_11);
+      }
     }
   }
 }
@@ -920,12 +972,13 @@ unset_zombie_electrified() {
 _id_9CA1(var_0, var_1) {
   var_2 = var_1[2] - var_0.origin[2];
 
-  if(var_2 < 32)
+  if(var_2 < 32) {
     return common_scripts\utility::random(["right_leg_upper", "left_leg_upper"]);
-  else if(var_2 < 60)
+  } else if(var_2 < 60) {
     return common_scripts\utility::random(["left_arm_upper", "right_arm_upper"]);
-  else
+  } else {
     return common_scripts\utility::random(["head", "neck"]);
+  }
 }
 
 _id_56E6(var_0) {
@@ -938,13 +991,15 @@ _id_9CD0(var_0) {
   for(;;) {
     self waittill("trap_state_change", var_2);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
 
     var_3 = var_0.setlookatent + "_" + var_2;
 
-    if(common_scripts\utility::_id_3F6F(var_3))
+    if(common_scripts\utility::_id_3F6F(var_3)) {
       var_1 = common_scripts\utility::_id_44F5(var_3);
+    }
 
     if(isDefined(var_1)) {
       var_1 = _spawnfx(var_1, var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
@@ -959,8 +1014,9 @@ _id_9CC7(var_0, var_1, var_2, var_3, var_4) {
   var_5 = common_scripts\utility::_id_46B7(var_0, "script_noteworthy");
 
   foreach(var_7 in var_5) {
-    if(!isDefined(var_7._id_4DAF))
+    if(!isDefined(var_7._id_4DAF)) {
       var_7._id_4DAF = [];
+    }
 
     if(0) {
       var_7._id_4DAF["hint_ready"] = var_1;
@@ -996,8 +1052,9 @@ _id_9CC7(var_0, var_1, var_2, var_3, var_4) {
 _id_9CC6(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::_id_46B7(var_0, "script_noteworthy");
 
-  foreach(var_7, var_5 in var_3)
-  var_5 thread _id_9C9F(var_1, var_2);
+  foreach(var_7, var_5 in var_3) {
+    var_5 thread _id_9C9F(var_1, var_2);
+  }
 }
 
 _id_9C9F(var_0, var_1) {
@@ -1006,8 +1063,9 @@ _id_9C9F(var_0, var_1) {
   for(;;) {
     var_2 waittill("trap_state_change", var_3);
 
-    if(var_3 == var_0)
+    if(var_3 == var_0) {
       thread[[var_1]](var_2);
+    }
   }
 }
 
@@ -1019,12 +1077,14 @@ _id_9CA4(var_0) {
     var_1.team = level._id_746E;
 
     if(isDefined(var_0.setlookatent)) {
-      if(_func_30D(var_0.setlookatent))
+      if(_func_30D(var_0.setlookatent)) {
         var_1._id_6081 = _squared(int(var_0.setlookatent));
+      }
     }
 
-    if(isDefined(var_0.setanimknobrestart))
+    if(isDefined(var_0.setanimknobrestart)) {
       var_1._id_607A = var_0.setanimknobrestart;
+    }
 
     var_1._id_5809 = 1;
     var_1._id_0A54 = 0;
@@ -1064,10 +1124,11 @@ _id_AC6B() {
         }
         var_3 = _distance2dsquared(var_2.origin, self.origin);
 
-        if(isDefined(var_2._id_6081))
+        if(isDefined(var_2._id_6081)) {
           var_4 = var_2._id_6081;
-        else
+        } else {
           var_4 = 2250000;
+        }
 
         if(var_3 < var_4) {
           var_0 = var_2;
@@ -1101,24 +1162,29 @@ _id_AC6B() {
 _id_5F51(var_0) {
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0._id_0A54--;
+  }
 }
 
 _id_21CB(var_0) {
-  if(!isDefined(var_0._id_5809) || !var_0._id_5809)
+  if(!isDefined(var_0._id_5809) || !var_0._id_5809) {
     return 1;
+  }
 
   var_1 = 4;
 
-  if(isDefined(var_0._id_607A))
+  if(isDefined(var_0._id_607A)) {
     var_1 = var_0._id_607A;
+  }
 
-  if(var_0._id_0A54 > var_1)
+  if(var_0._id_0A54 > var_1) {
     return 0;
+  }
 
-  if(_id_0547::_id_580A())
+  if(_id_0547::_id_580A()) {
     return 0;
+  }
 
   return 1;
 }
@@ -1127,17 +1193,19 @@ _id_1365(var_0, var_1, var_2) {
   var_3 = var_0;
 
   if(isDefined(var_3) && _soundexists(var_3)) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       _id_046C::_id_8DA2(var_3, var_1);
-    else
+    } else {
       _id_046C::_id_8DA0(var_3, var_2);
+    }
   }
 
   var_4 = var_0 + "_lp";
 
   if(isDefined(var_4) && _soundexists(var_4)) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       _id_046C::_id_8DA4(var_4, var_1, 0.25);
+    }
   }
 }
 
@@ -1155,8 +1223,9 @@ _id_7382() {
   thread _id_7383();
 
   for(;;) {
-    if(self._id_5B66 < gettime())
+    if(self._id_5B66 < gettime()) {
       self._id_5B45 = self.origin;
+    }
 
     waitframe();
   }
@@ -1201,7 +1270,7 @@ _id_9CD7(var_0) {
     var_11 = spawn("script_model", var_10);
     var_11.angles = var_1 gettagangles(var_8);
     var_11 setModel("tag_origin");
-    var_11 linkto(var_1, var_8);
+    var_11 linkTo(var_1, var_8);
     var_11._id_4836 = var_2;
     var_11._id_5983 = var_3;
     var_11._id_1173 = var_4;
@@ -1226,11 +1295,11 @@ _id_9CD7(var_0) {
         var_17._id_A045 = ::_id_9CEE;
         var_17._id_AC77 = var_1;
         var_1._id_241F = var_17;
-        var_17 linkto(var_1);
+        var_17 linkTo(var_1);
         break;
       case "kill_trigger":
-        var_17 enablelinkto();
-        var_17 linkto(var_1);
+        var_17 enablelinkTo();
+        var_17 linkTo(var_1);
         var_1.killtrigger = var_17;
         break;
       case "door":
@@ -1243,14 +1312,15 @@ _id_9CD7(var_0) {
     }
   }
 
-  while(!_threatbiasgroupexists("zombies"))
+  while(!_threatbiasgroupexists("zombies")) {
     waitframe();
+  }
 
   for(;;) {
     _setignoremegroup("zomboni", "zombies");
     self waittill("active");
     var_1._id_57E4 = 0;
-    _playfxontag(common_scripts\utility::_id_44F5("chompy_lights"), var_1, "tag_body");
+    _playFXOnTag(common_scripts\utility::_id_44F5("chompy_lights"), var_1, "tag_body");
     var_1 scriptmodelplayanimdeltamotionfrompos("zombie_ark_zomboni_trap", var_0.origin, var_0.angles, "zomboni_anim");
     thread _id_9CE4(var_1);
     thread _id_9CF4(var_1);
@@ -1280,7 +1350,7 @@ _id_9CEA(var_0) {
 _id_9CE0(var_0, var_1) {
   var_2 = [];
   var_3 = [(-16, 16, 56), (0, 16, 56), (18, 16, 56), (-16, -22, 56), (0, -22, 56), (18, -22, 56), (-16, -60, 56), (0, -60, 56), (18, -60, 56)];
-  var_4 = _getent("zomboni_room_volume", "targetname");
+  var_4 = _getEnt("zomboni_room_volume", "targetname");
   var_5 = var_0 gettagorigin("body_animate_jnt");
   var_5 = (var_5[0], var_5[1], var_0.origin[2]);
 
@@ -1288,8 +1358,9 @@ _id_9CE0(var_0, var_1) {
     var_8 = spawnStruct();
     var_8.origin = var_5 + _rotatevector(var_7, var_0.angles + (0, -90, 0));
 
-    if(!isDefined(var_4) || !_ispointinvolume(var_8.origin, var_4))
+    if(!isDefined(var_4) || !_ispointinvolume(var_8.origin, var_4)) {
       var_2[var_2.size] = var_8;
+    }
   }
 
   var_10 = _getnodesinradius(var_5, 200, 0, 100);
@@ -1298,8 +1369,9 @@ _id_9CE0(var_0, var_1) {
   foreach(var_13 in var_10) {
     var_14 = vectorNormalize(var_13.origin - var_5);
 
-    if(vectordot(var_11, var_14) < 0)
+    if(vectordot(var_11, var_14) < 0) {
       var_2[var_2.size] = var_13;
+    }
   }
 
   if(isDefined(var_1)) {
@@ -1371,8 +1443,9 @@ _id_9CEB(var_0) {
 
 _id_9CE1(var_0) {
   foreach(var_2 in level.players) {
-    if(_id_9CE2(var_2, var_0))
+    if(_id_9CE2(var_2, var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1381,8 +1454,9 @@ _id_9CE1(var_0) {
 _id_9CE2(var_0, var_1) {
   var_2 = var_0 getgroundentity();
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   return var_2 == var_1._id_241F;
 }
@@ -1433,8 +1507,9 @@ _id_9CF4(var_0) {
         if(!isPlayer(var_5._id_0088)) {
           continue;
         }
-        if(!_id_9CE2(var_5._id_0088, var_0))
+        if(!_id_9CE2(var_5._id_0088, var_0)) {
           continue;
+        }
       }
 
       var_6 = undefined;
@@ -1469,8 +1544,9 @@ _id_9CF4(var_0) {
         }
       }
 
-      if(isDefined(var_6))
+      if(isDefined(var_6)) {
         thread _id_9CEF(var_0, var_5, var_6);
+      }
     }
   }
 }
@@ -1501,8 +1577,9 @@ _id_9CF0(var_0, var_1, var_2) {
   var_4 = 0.67;
   var_5 = distance(var_1.origin, var_2.origin);
 
-  if(var_5 > var_2._id_4836)
+  if(var_5 > var_2._id_4836) {
     var_3 = "zomboni_attack_leap_on";
+  }
 
   var_6 = var_2._id_0E18;
   var_1 scragentsetanimscale(0, 1);
@@ -1513,8 +1590,9 @@ _id_9CF0(var_0, var_1, var_2) {
   for(;;) {
     var_3 = "zomboni_attack_zomboni";
 
-    if(_id_9CE1(var_0))
+    if(_id_9CE1(var_0)) {
       var_3 = "zomboni_attack_player";
+    }
 
     var_6 = var_2._id_0E18;
     var_1 maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_3, var_6, 1.0, "scripted_anim", undefined, ::_id_9CF1);
@@ -1536,8 +1614,9 @@ _id_9CF1(var_0, var_1, var_2, var_3) {
         if(isDefined(var_7) && var_7 == self._id_AC77._id_241F) {
           var_8 = _distance2d(self._id_1167.origin, var_6.origin);
 
-          if(var_8 < self._id_1167._id_1173)
+          if(var_8 < self._id_1167._id_1173) {
             var_4[var_4.size] = var_6;
+          }
         }
       }
 
@@ -1545,11 +1624,13 @@ _id_9CF1(var_0, var_1, var_2, var_3) {
         self notify("attack_hit", var_6, var_6.origin);
         var_11 = 0;
 
-        if(isDefined(self._id_60E2))
+        if(isDefined(self._id_60E2)) {
           var_11 = self._id_60E2;
+        }
 
-        if(isalive(var_6))
+        if(isalive(var_6)) {
           maps\mp\agents\humanoid\_humanoid_melee::_id_3210(var_6, var_11, "MOD_IMPACT");
+        }
       }
 
       break;
@@ -1566,13 +1647,15 @@ _id_9CE4(var_0) {
 
     switch (var_1) {
       case "door_open":
-        foreach(var_3 in var_0._id_3290)
-        _id_9CDF(var_3, 1.0);
+        foreach(var_3 in var_0._id_3290) {
+          _id_9CDF(var_3, 1.0);
+        }
 
         break;
       case "door_close":
-        foreach(var_3 in var_0._id_3290)
-        _id_9CDE(var_3, 1.0);
+        foreach(var_3 in var_0._id_3290) {
+          _id_9CDE(var_3, 1.0);
+        }
 
         break;
       case "tag_hood_left":
@@ -1584,8 +1667,9 @@ _id_9CE4(var_0) {
       case "enable_jumpon":
         var_0._id_5985 = 1;
 
-        foreach(var_8 in var_0._id_116C)
-        var_8._id_66D2 = gettime() + _randomintrange(0, 2000);
+        foreach(var_8 in var_0._id_116C) {
+          var_8._id_66D2 = gettime() + _randomintrange(0, 2000);
+        }
 
         break;
       case "disable_jumpon":
@@ -1652,11 +1736,11 @@ _id_9CD8(var_0, var_1) {
 }
 
 _id_9CDF(var_0, var_1) {
-  var_0 moveto(var_0._id_6BED, var_1);
+  var_0 moveTo(var_0._id_6BED, var_1);
 }
 
 _id_9CDE(var_0, var_1) {
-  var_0 moveto(var_0._id_2438, var_1);
+  var_0 moveTo(var_0._id_2438, var_1);
 }
 
 _id_9CE3(var_0) {
@@ -1699,21 +1783,24 @@ _id_9CE8(var_0) {
   var_0 notify("play_churn_fx");
   var_0 endon("play_churn_fx");
 
-  if(!common_scripts\utility::_id_562E(var_0._id_22DE))
-    _playfxontag(common_scripts\utility::_id_44F5("chompy_churn"), var_0, "tag_body");
+  if(!common_scripts\utility::_id_562E(var_0._id_22DE)) {
+    _playFXOnTag(common_scripts\utility::_id_44F5("chompy_churn"), var_0, "tag_body");
+  }
 
   var_0._id_22DE = 1;
   wait 5;
   var_0._id_22DE = 0;
-  _stopfxontag(common_scripts\utility::_id_44F5("chompy_churn"), var_0, "tag_body");
+  _stopFXOnTag(common_scripts\utility::_id_44F5("chompy_churn"), var_0, "tag_body");
 }
 
 _id_9CED(var_0, var_1) {
-  if(common_scripts\utility::_id_562E(var_1._id_AC78))
+  if(common_scripts\utility::_id_562E(var_1._id_AC78)) {
     return 1;
+  }
 
-  if(var_1 maps\mp\agents\_scripted_agent_anim_util::_id_57E2())
+  if(var_1 maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
     return 0;
+  }
 
   thread _id_9CF2(var_0, var_1);
   return 1;
@@ -1733,12 +1820,14 @@ _id_9CF2(var_0, var_1) {
   if(_abs(var_2) < 45) {
     var_5 = 3;
 
-    if(var_4 > 3 && common_scripts\utility::_id_24A6())
+    if(var_4 > 3 && common_scripts\utility::_id_24A6()) {
       var_5 = 4;
+    }
   } else if(var_2 < 135)
     var_5 = 2;
-  else if(var_2 > -135)
+  else if(var_2 > -135) {
     var_5 = 1;
+  }
 
   var_6 = undefined;
   var_7 = undefined;
@@ -1825,8 +1914,9 @@ _id_9CE9(var_0, var_1) {
       var_4 = var_1._id_3042;
     }
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_5 = var_5 + distance(var_1.origin, var_6.origin);
+    }
 
     var_1._id_6ED9 = var_5;
     var_0._id_6ECB[var_0._id_6ECB.size] = var_1;
@@ -1879,8 +1969,9 @@ _id_9CE7(var_0, var_1) {
           var_0 _id_AC7B();
           var_5 = _id_9CE5(var_1, "door");
 
-          foreach(var_7 in var_5)
-          thread _id_9CDF(var_7, var_4);
+          foreach(var_7 in var_5) {
+            thread _id_9CDF(var_7, var_4);
+          }
 
           wait(var_4);
           var_0 _id_AC7A();
@@ -1889,8 +1980,9 @@ _id_9CE7(var_0, var_1) {
           var_9 = 1;
           var_5 = _id_9CE5(var_1, "door");
 
-          foreach(var_7 in var_5)
-          thread _id_9CDE(var_7, var_9);
+          foreach(var_7 in var_5) {
+            thread _id_9CDE(var_7, var_9);
+          }
 
           break;
         case "end":
@@ -1938,11 +2030,12 @@ _id_9CE5(var_0, var_1) {
     var_3 = strtok(var_0.script_exploder, " ");
 
     for(var_4 = 0; var_4 < var_3.size; var_4++) {
-      var_5 = _getent(var_3[var_4], "script_linkname");
+      var_5 = _getEnt(var_3[var_4], "script_linkname");
 
       if(isDefined(var_5)) {
-        if(!isDefined(var_1) || isDefined(var_5._id_0165) && var_5._id_0165 == var_1)
+        if(!isDefined(var_1) || isDefined(var_5._id_0165) && var_5._id_0165 == var_1) {
           var_2[var_2.size] = var_5;
+        }
       }
     }
   }
@@ -1959,8 +2052,9 @@ _id_AC7A() {
 }
 
 _id_0904(var_0) {
-  if(!isDefined(level._id_6667))
+  if(!isDefined(level._id_6667)) {
     level._id_6667 = [];
+  }
 
   level._id_6667 common_scripts\utility::_id_0972(level._id_6667, var_0);
 }

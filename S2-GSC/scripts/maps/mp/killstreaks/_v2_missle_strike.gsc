@@ -17,18 +17,20 @@ _id_9303(var_0, var_1, var_2, var_3, var_4) {
     var_6 = var_1[var_5];
     var_6 = (var_6[0], var_6[1], 0);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       thread _id_3216(var_0, var_6, undefined, var_4, var_2, var_4);
-    else
+    } else {
       thread _id_3216(var_0, var_6, self, self.pers["team"], var_2);
+    }
 
     wait(_id_46E0(var_2));
   }
 }
 
 _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 endon("disconnect");
+  }
 
   if(!isDefined(var_1)) {
     return;
@@ -39,10 +41,11 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_7) {
     var_9 = "";
 
-    if(var_5 == game["attackers"])
+    if(var_5 == game["attackers"]) {
       var_9 = "allies";
-    else if(var_5 == game["defenders"])
+    } else if(var_5 == game["defenders"]) {
       var_9 = "axis";
+    }
 
     for(var_10 = 0; var_10 < var_8.size; var_10++) {
       if(var_8[var_10]._id_0165 != var_9) {
@@ -67,8 +70,9 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_17 = 1;
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_5) && isDefined(level._id_79C2.setcontents) && common_scripts\utility::_id_562E(level._id_79C2.setcontents._id_4D10))
+  if(maps\mp\_utility::_id_579B() && isDefined(var_5) && isDefined(level._id_79C2.setcontents) && common_scripts\utility::_id_562E(level._id_79C2.setcontents._id_4D10)) {
     var_17 = 0;
+  }
 
   var_18 = undefined;
   var_19 = undefined;
@@ -78,16 +82,18 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_19 = _func_190("script_model", var_1);
     thread _id_8C0B(var_4, var_2, var_18, var_19, var_5);
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 thread _id_624C(var_18, var_19);
+    }
   }
 
   _id_0526::_id_280E(var_1, 0, var_4, var_3);
   thread _id_0526::_id_5FCB(var_1, var_4);
   var_20 = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_20 = var_2 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
+  }
 
   var_21 = _id_45C0(var_4, var_7, var_20);
   var_22 = [];
@@ -114,37 +120,44 @@ _id_3216(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_27 = _id_3B99(var_1[0] + var_25, var_1[1] + var_26);
     var_28 = var_12;
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_29 = var_6;
-    else
+    } else {
       var_29 = _id_458D(var_4, var_3);
+    }
 
     var_30 = 2.5;
 
-    if(var_20 && var_4 == "mortar_strike")
+    if(var_20 && var_4 == "mortar_strike") {
       var_30 = 1.5;
+    }
 
     var_31 = _func_1B6(var_29, var_28, var_27, var_30, _id_4578(), var_2, getdiveheightformap());
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_31.team = var_3;
+    }
 
-    if(isDefined(var_6) && var_6 == "mortar_strike_projectile_d_day_mp")
+    if(isDefined(var_6) && var_6 == "mortar_strike_projectile_d_day_mp") {
       var_31 _id_0378::_id_8D74("aud_beach_mortar");
-    else
+    } else {
       var_31 thread _id_4A1F(var_4);
+    }
 
-    if(var_10 + 1 >= var_21)
+    if(var_10 + 1 >= var_21) {
       var_31 thread _id_7EBD(var_4, var_18, var_19);
+    }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_31 thread _id_624F(var_2);
+    }
 
     wait(var_22[var_10]);
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 notify("missileStrikeComplete");
+  }
 }
 
 _id_4A1F(var_0) {
@@ -153,8 +166,9 @@ _id_4A1F(var_0) {
   _id_0378::_id_8D74("ks_projectile_fired", var_0);
   var_1 = 2.2;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     wait(var_1);
+  }
 
   _id_0378::_id_8D74("ks_incoming_projectile", var_0);
 }
@@ -184,8 +198,9 @@ _id_8C0B(var_0, var_1, var_2, var_3, var_4) {
   var_12 = 1;
   var_13 = var_1;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_13 = var_4;
+  }
 
   if(isDefined(var_2)) {
     var_14 = _getweaponexplosionradius(var_5);
@@ -217,11 +232,13 @@ _id_624F(var_0) {
 }
 
 _id_238B(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 _id_7EBD(var_0, var_1, var_2) {
@@ -234,11 +251,13 @@ _id_7EBD(var_0, var_1, var_2) {
       break;
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 _meth_8352(80, 0);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 _meth_8352(80, 0);
+  }
 
   wait 0.08;
   _id_238B(var_1, var_2);
@@ -255,15 +274,17 @@ _id_6B57(var_0) {
 _id_458D(var_0, var_1) {
   switch (var_0) {
     case "missile_strike":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return "missile_strike_projectile_mp";
-      else
+      } else {
         return "missile_strike_projectile_axis_mp";
+      }
     case "mortar_strike":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return "mortar_strike_projectile_mp";
-      else
+      } else {
         return "mortar_strike_projectile_axis_mp";
+      }
     case "v2_rocket":
       return "v2_rocket_mp";
   }
@@ -295,24 +316,28 @@ _id_458C(var_0, var_1, var_2) {
   switch (var_0) {
     case "missile_strike":
       if(var_1) {
-        if(var_2)
+        if(var_2) {
           return "scorestreak_minimap_artillery_barrage_kill_fullscreen";
-        else
+        } else {
           return "scorestreak_minimap_artillery_barrage_damage_fullscreen";
+        }
       } else if(var_2)
         return "scorestreak_minimap_artillery_barrage_kill";
-      else
+      else {
         return "scorestreak_minimap_artillery_barrage_damage";
+      }
     case "mortar_strike":
       if(var_1) {
-        if(var_2)
+        if(var_2) {
           return "scorestreak_minimap_mortar_strike_kill_fullscreen";
-        else
+        } else {
           return "scorestreak_minimap_mortar_strike_damage_fullscreen";
+        }
       } else if(var_2)
         return "scorestreak_minimap_mortar_strike_kill";
-      else
+      else {
         return "scorestreak_minimap_mortar_strike_damage";
+      }
     case "v2_rocket":
       return "";
   }
@@ -353,10 +378,11 @@ _id_45C0(var_0, var_1, var_2) {
   } else {
     switch (var_0) {
       case "missile_strike":
-        if(var_1 && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_624A))
+        if(var_1 && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_624A)) {
           return int(_round(18 * level._id_79C2.setcontents._id_624A));
-        else
+        } else {
           return 18;
+        }
       case "mortar_strike":
         return 1;
       case "v2_rocket":
@@ -458,8 +484,9 @@ _id_9E39(var_0, var_1) {
 
   var_2 = vehicle_addvelocity(var_0, var_1);
 
-  if(!isDefined(var_2) || !var_2)
+  if(!isDefined(var_2) || !var_2) {
     return 0;
+  }
 
   _id_0485::_id_5E9A(var_1, self.origin);
   return 1;
@@ -508,13 +535,15 @@ _id_A6AB() {
   self setblurforplayer(0, 0.3);
   self setclientomnvar("ui_map_location_num_targets", 0);
 
-  if(maps\mp\gametypes\_hostmigration::_id_A782() > 0)
+  if(maps\mp\gametypes\_hostmigration::_id_A782() > 0) {
     self switchtoweapon(common_scripts\utility::_id_4550());
+  }
 }
 
 _id_46C2(var_0) {
-  if(!isDefined(level._id_5FF0))
+  if(!isDefined(level._id_5FF0)) {
     level._id_5FF0 = 1024;
+  }
 
   var_1 = 0;
 
@@ -530,8 +559,9 @@ _id_46C2(var_0) {
       break;
   }
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_1 = var_1 * 1.5;
+  }
 
   return var_1;
 }

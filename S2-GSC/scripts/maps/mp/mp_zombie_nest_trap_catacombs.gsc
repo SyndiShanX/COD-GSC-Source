@@ -8,8 +8,9 @@ _id_9C9A(var_0) {
   var_0._id_8074 = common_scripts\utility::_id_46B7("catacombs_saw_spawner_fixed", "script_noteworthy");
   var_0 thread _id_9098(var_0._id_8073);
 
-  foreach(var_2 in var_0._id_8074)
-  var_0 thread _id_6F70(var_2);
+  foreach(var_2 in var_0._id_8074) {
+    var_0 thread _id_6F70(var_2);
+  }
 }
 
 _id_9098(var_0) {
@@ -29,9 +30,9 @@ _id_6F70(var_0) {
   var_2 = distance(var_0.origin, var_1.origin) < 512;
   var_3 = (0, 0, 0);
 
-  if(var_2 && !common_scripts\utility::_id_3C77("underground_to_riverside1"))
+  if(var_2 && !common_scripts\utility::_id_3C77("underground_to_riverside1")) {
     return;
-  else if(var_2) {
+  } else if(var_2) {
     var_3 = -4 * vectorNormalize(anglesToForward(var_0.angles));
     var_3 = var_3 + 96 * vectorNormalize(anglestoright(var_0.angles));
     var_3 = var_3 + (0, 0, -2);
@@ -54,8 +55,9 @@ _id_6F70(var_0) {
 
 get_riverside_door() {
   foreach(var_1 in level._id_AC1D) {
-    if(_id_0547::_id_5565(var_1.getnegotiationnextnode, "underground_to_riverside1"))
+    if(_id_0547::_id_5565(var_1.getnegotiationnextnode, "underground_to_riverside1")) {
       return var_1;
+    }
   }
 
   return undefined;
@@ -74,13 +76,13 @@ _id_902B(var_0) {
   var_4 setModel("tag_origin");
   var_4.angles = var_1.angles;
   var_3 movez(128, 0.5);
-  _playfxontag(level._effect["zmb_catacombs_saw_on"], var_4, "tag_origin");
+  _playFXOnTag(level._effect["zmb_catacombs_saw_on"], var_4, "tag_origin");
   var_3 _id_0378::_id_8D74("aud_saw_blade_sound");
   wait 0.5;
-  var_3 moveto(var_2.origin, 2.5, 0.25, 0.25);
-  var_4 moveto(var_2.origin, 2.5, 0.25, 0.25);
+  var_3 moveTo(var_2.origin, 2.5, 0.25, 0.25);
+  var_4 moveTo(var_2.origin, 2.5, 0.25, 0.25);
   var_3 playfoley(2.5, var_0);
-  _stopfxontag(level._effect["zmb_catacombs_saw_on"], var_4, "tag_origin");
+  _stopFXOnTag(level._effect["zmb_catacombs_saw_on"], var_4, "tag_origin");
   var_3 movez(-128, 1);
   var_3 _id_0378::_id_8D74("aud_saw_blade_end");
   wait 1;
@@ -110,9 +112,9 @@ _id_6F72(var_0) {
       if(distance(self.origin, var_3.origin) > 64) {
         continue;
       }
-      if(var_3 _id_0547::_id_580A())
+      if(var_3 _id_0547::_id_580A()) {
         var_3 dodamage(var_3.health * 0.25, self.origin, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
-      else {
+      } else {
         var_0 maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6FEE(var_3);
         var_4 = 500 * vectorNormalize(var_3.origin - self.origin);
         var_3 _id_0547::_id_5A85("torso_lower", (var_4[0], var_4[1], 1500), self, "trap_zm_mp");
@@ -144,8 +146,9 @@ _id_6F73(var_0) {
       }
       var_3 = gettime();
 
-      if(!isDefined(var_2._id_A86A))
+      if(!isDefined(var_2._id_A86A)) {
         var_2._id_A86A = gettime();
+      }
 
       if(isalive(var_2) && var_3 > var_2._id_A86A + 500 && !_id_0547::_id_577E(var_2)) {
         var_2 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
@@ -168,19 +171,20 @@ playfoley(var_0, var_1) {
         continue;
       }
       if(isPlayer(var_6)) {
-        if(_id_0547::_id_577E(var_6))
+        if(_id_0547::_id_577E(var_6)) {
           continue;
+        }
       } else if(isDefined(var_6._id_53D9) && var_6._id_53D9 == 1) {
         continue;
       }
       if(distance(self.origin, var_6.origin) > 64) {
         continue;
       }
-      if(isPlayer(var_6))
+      if(isPlayer(var_6)) {
         var_6 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
-      else if(var_6 _id_0547::_id_580A())
+      } else if(var_6 _id_0547::_id_580A()) {
         var_6 dodamage(var_6.health * 0.25, self.origin, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
-      else {
+      } else {
         var_1 maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6FEE(var_6);
         var_7 = 500 * vectorNormalize(var_6.origin - self.origin);
         var_6 _id_0547::_id_5A85("torso_lower", (var_7[0], var_7[1], 1500), self, "trap_zm_mp");

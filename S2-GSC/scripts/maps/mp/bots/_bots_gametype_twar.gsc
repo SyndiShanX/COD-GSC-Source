@@ -13,15 +13,17 @@ _id_87A7() {
   level.bot_funcs["gametype_think"] = ::_id_1B12;
   level.bot_funcs["should_start_cautious_approach"] = ::_id_1B11;
 
-  if(!level._id_1A1B)
+  if(!level._id_1A1B) {
     level.bot_funcs["get_watch_node_chance"] = ::_id_1B0D;
+  }
 }
 
 _id_879A() {
   maps\mp\bots\_bots_util::_id_1B20();
 
-  for(var_0 = 0; var_0 < level._id_9FC2.size; var_0++)
+  for(var_0 = 0; var_0 < level._id_9FC2.size; var_0++) {
     level._id_9FC2[var_0].shootblank = "_" + var_0;
+  }
 
   maps\mp\bots\_bots_gametype_common::_id_194F(level._id_9FC2, "zone", level._id_1A1B);
   var_1 = 55;
@@ -61,14 +63,16 @@ _id_6358() {
     wait 1.0;
     var_0 = self._id_0117;
 
-    if(var_0 == "none" && level._id_9FC0._id_A22B > 0)
+    if(var_0 == "none" && level._id_9FC0._id_A22B > 0) {
       var_0 = level._id_9FC0._id_230F;
+    }
 
     if(var_0 != "none") {
       var_1 = _getzonenearest(self.origin);
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         _botzonesetteam(var_1, var_0);
+      }
     }
   }
 }
@@ -81,16 +85,18 @@ _id_1B12() {
   level endon("game_ended");
   self endon("owner_disconnect");
 
-  while(!isDefined(level._id_19E8))
+  while(!isDefined(level._id_19E8)) {
     waitframe();
+  }
 
   self botsetflag("separation", 0);
   self botsetpathingstyle("beeline");
   self botsetflag("force_sprint", 1);
 
   for(;;) {
-    if(!_id_1B10(level._id_9FC0._id_AC7C))
+    if(!_id_1B10(level._id_9FC0._id_AC7C)) {
       _id_1B0C(level._id_9FC0._id_AC7C);
+    }
 
     waitframe();
   }
@@ -106,8 +112,9 @@ _id_1B0C(var_0) {
 
 _id_1B10(var_0) {
   if(maps\mp\bots\_bots_util::_id_1A28()) {
-    if(self._id_291F == var_0)
+    if(self._id_291F == var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -137,8 +144,9 @@ _id_1B0D(var_0) {
     }
   }
 
-  if(var_1)
+  if(var_1) {
     return 0.2;
+  }
 
   return 1.0;
 }
@@ -147,8 +155,9 @@ _id_1B0F(var_0) {
   var_1 = [];
 
   foreach(var_3 in level._id_9FC2) {
-    if(var_3._id_0117 == var_0)
+    if(var_3._id_0117 == var_0) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;

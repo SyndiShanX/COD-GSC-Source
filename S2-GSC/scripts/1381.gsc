@@ -80,8 +80,9 @@ getzombiegeareventvalue(var_0) {
 }
 
 _id_7C07(var_0) {
-  if(!isDefined(level._id_400C))
+  if(!isDefined(level._id_400C)) {
     level._id_400C = [];
+  }
 
   level._id_400C[var_0] = 16;
 }
@@ -90,14 +91,17 @@ _id_400A() {
   level endon("game_over");
   self endon("disconnect");
 
-  if(!isDefined(level._id_400E))
+  if(!isDefined(level._id_400E)) {
     level._id_400E = [];
+  }
 
-  if(!isDefined(level._id_400C))
+  if(!isDefined(level._id_400C)) {
     level._id_400C = [];
+  }
 
-  if(!isDefined(level._id_400D))
+  if(!isDefined(level._id_400D)) {
     level._id_400D = [];
+  }
 
   for(;;) {
     if(level._id_400E.size > 0) {
@@ -129,14 +133,16 @@ _id_400A() {
             if(!isDefined(level.players)) {
               continue;
             }
-            foreach(var_10 in level.players)
-            var_10 getanimentrycount(var_8, var_4, var_5, var_3);
+            foreach(var_10 in level.players) {
+              var_10 getanimentrycount(var_8, var_4, var_5, var_3);
+            }
 
             continue;
           }
 
-          if(!_isremovedentity(var_6) && isPlayer(var_6))
+          if(!_isremovedentity(var_6) && isPlayer(var_6)) {
             var_6 getanimentrycount(var_8, var_4, var_5, var_3);
+          }
         }
       }
 
@@ -151,8 +157,9 @@ getanimentrycount(var_0, var_1, var_2, var_3) {
   if(!common_scripts\utility::_id_562E(self._id_596A)) {
     return;
   }
-  if(!isDefined(self._id_400B))
+  if(!isDefined(self._id_400B)) {
     self._id_400B = [];
+  }
 
   var_4 = var_3 + var_1;
 
@@ -171,8 +178,9 @@ getchallengesplashref(var_0, var_1) {
 zombiegearchallengecompleteall(var_0, var_1) {
   var_2 = get_is_testing_offline();
 
-  foreach(var_4 in level.players)
-  var_4 zombiegearchallengecomplete(var_0, var_1, var_2);
+  foreach(var_4 in level.players) {
+    var_4 zombiegearchallengecomplete(var_0, var_1, var_2);
+  }
 }
 
 zombiegearchallengecomplete(var_0, var_1, var_2) {
@@ -181,8 +189,9 @@ zombiegearchallengecomplete(var_0, var_1, var_2) {
   var_5 = getzombiegeareventvalue(var_0);
   var_6 = [3, var_5, 4, var_1];
 
-  if(!common_scripts\utility::_id_562E(var_2))
+  if(!common_scripts\utility::_id_562E(var_2)) {
     var_3 _meth_8697(16, var_6);
+  }
 
   var_3 thread maps\mp\gametypes\_hud_message::_id_9102(var_4);
 }
@@ -222,10 +231,11 @@ zombiegearchallengeregister(var_0, var_1, var_2) {
     var_5.challengebitindex = var_7;
     var_5.challengefunc = var_4;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_6 = var_2 + var_7;
-    else
+    } else {
       var_6 = undefined;
+    }
 
     level thread maps\mp\_utility::_id_6F74(::zombiegearchallengethread, var_5, var_6);
   }

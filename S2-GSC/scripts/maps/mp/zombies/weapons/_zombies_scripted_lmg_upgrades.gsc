@@ -74,8 +74,9 @@ required_weapon(var_0) {
   if(_id_0569::_id_55D4(var_2)) {
     var_2 = var_1 maps\mp\_events_z::set_last_checked_weapon(var_2);
 
-    if(!_id_0547::_id_5565(var_2, var_0))
+    if(!_id_0547::_id_5565(var_2, var_0)) {
       return 0;
+    }
   } else
     return 0;
 
@@ -142,8 +143,9 @@ run_bren_reload_shield(var_0) {
   var_3 = gettime();
   var_4 = 5;
 
-  if(common_scripts\utility::_id_562E(var_0))
+  if(common_scripts\utility::_id_562E(var_0)) {
     var_4 = 10000;
+  }
 
   _id_0547::playfxclient("zmb_bren_pap_screen", var_1.origin, var_1, var_4);
 
@@ -171,15 +173,17 @@ run_bren_reload_shield(var_0) {
 
     waitframe();
 
-    if(var_5)
+    if(var_5) {
       _physicsexplosionsphere(var_1.origin, 250, 150, 2.7);
+    }
   }
 
   playFX(common_scripts\utility::_id_44F5("force_zombie_bubble_pop"), var_1.origin);
   _id_0378::_id_8D74("zmb_pomel_grenade_final_explosion", var_1.origin);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 do_strong_giest_damage(var_0, var_1, var_2) {
@@ -223,8 +227,9 @@ scripted_lmg_dmg(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
     if(var_1 exectute_mg81_feedback(self, var_11, var_6, var_7)) {
       return;
     }
-    if(var_1 exectute_vmg_1927_feedback(self, var_11, var_6, var_7))
+    if(var_1 exectute_vmg_1927_feedback(self, var_11, var_6, var_7)) {
       return;
+    }
   }
 }
 
@@ -240,25 +245,31 @@ exectute_stinger_feedback(var_0, var_1, var_2, var_3) {
   var_4 = self;
 
   if(_id_0547::_id_5565(var_1, "blyskawica_zm")) {
-    if(randomint(3) == 0)
+    if(randomint(3) == 0) {
       playFX(common_scripts\utility::_id_44F5("impact_sparks"), var_2, anglesToForward(var_3), anglestoup(var_3));
+    }
   }
 
   if(_id_0547::_id_5565(var_1, "m1919_zm")) {
-    if(!isDefined(var_0.timesstung))
+    if(!isDefined(var_0.timesstung)) {
       var_0.timesstung = 0;
+    }
 
-    if(var_0.timesstung >= 0)
+    if(var_0.timesstung >= 0) {
       var_0.timesstung++;
+    }
 
-    if(randomint(200) == 0)
+    if(randomint(200) == 0) {
       var_0.timesstung = 12;
+    }
 
-    if(!isDefined(var_4.laststingbursttime))
+    if(!isDefined(var_4.laststingbursttime)) {
       var_4.laststingbursttime = gettime();
+    }
 
-    if(var_0.timesstung > 5)
+    if(var_0.timesstung > 5) {
       playFX(common_scripts\utility::_id_44F5("impact_sparks"), var_2, anglesToForward(var_3), anglestoup(var_3));
+    }
 
     if(var_0.timesstung >= 12 && (gettime() - var_4.laststingbursttime) / 1000 > 4) {
       var_0.timesstung = -1;
@@ -275,8 +286,9 @@ exectute_stinger_feedback(var_0, var_1, var_2, var_3) {
 exectute_mg81_feedback(var_0, var_1, var_2, var_3) {
   var_4 = self;
 
-  if(common_scripts\utility::_id_562E(var_4.activatedmg81lastshot))
+  if(common_scripts\utility::_id_562E(var_4.activatedmg81lastshot)) {
     return 0;
+  }
 
   if(_id_0547::_id_5565(var_1, "mg81_zm")) {
     if(var_4 getcurrentweaponclipammo() == 0 && !common_scripts\utility::_id_562E(var_4.activatedmg81lastshot)) {
@@ -326,8 +338,9 @@ try_catch_on_fire(var_0) {
     level.zmb_fire_explode_origin show();
   }
 
-  if(!isDefined(var_1.fireshotcount))
+  if(!isDefined(var_1.fireshotcount)) {
     var_1.fireshotcount = 0;
+  }
 
   if(common_scripts\utility::_id_562E(var_1.isonfire)) {
     return;
@@ -341,18 +354,20 @@ try_catch_on_fire(var_0) {
     if(_id_0547::_id_5565("zombie_sizzler", var_4._id_0A4B)) {
       continue;
     }
-    if(common_scripts\utility::_id_562E(var_4.isonfire))
+    if(common_scripts\utility::_id_562E(var_4.isonfire)) {
       var_2++;
+    }
   }
 
-  if(_id_0547::_id_5565("zombie_heavy", var_1._id_0A4B))
+  if(_id_0547::_id_5565("zombie_heavy", var_1._id_0A4B)) {
     var_6 = 15;
-  else
+  } else {
     var_6 = 5;
+  }
 
-  if(var_1.fireshotcount < var_6)
+  if(var_1.fireshotcount < var_6) {
     return;
-  else if(randomint(100) < 50) {
+  } else if(randomint(100) < 50) {
     var_1.fireshotcount = 0;
     return;
   }
@@ -365,8 +380,9 @@ try_catch_on_fire(var_0) {
 }
 
 scripted_lmgs_on_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(common_scripts\utility::_id_562E(self._id_2E68) && isDefined(var_1) && isPlayer(var_1))
+  if(common_scripts\utility::_id_562E(self._id_2E68) && isDefined(var_1) && isPlayer(var_1)) {
     level thread do_vmg_explosion(self.origin, var_1);
+  }
 }
 
 do_vmg_explosion(var_0, var_1) {
@@ -390,8 +406,9 @@ attempt_reload_action(var_0, var_1) {
   if(weapon_clip_empty(var_1)) {
     var_2 childthread[[var_0]]();
 
-    while(weapon_clip_empty(var_1))
+    while(weapon_clip_empty(var_1)) {
       waitframe();
+    }
   }
 }
 
@@ -408,8 +425,9 @@ spawn_bubble_shield_on_player_small() {
 weapon_clip_empty(var_0) {
   var_1 = self;
 
-  if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon())))
+  if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon()))) {
     return 1;
+  }
 
   return var_1 getcurrentweaponclipammo() == 0;
 }

@@ -64,8 +64,9 @@ tabunzm_managedamage(var_0, var_1, var_2) {
       }
       if(tabunzm_collisionpassed(var_6.origin, var_0._id_6C2C, var_0.radius)) {
         if(tabunzm_zombieishittable(var_6, var_0._id_6C2C)) {
-          if(isDefined(var_1) && (isDefined(level.currentconverts) && level.currentconverts < 8))
+          if(isDefined(var_1) && (isDefined(level.currentconverts) && level.currentconverts < 8)) {
             level tabunzm_convertzombie(var_6, var_1);
+          }
         }
       }
     }
@@ -103,8 +104,9 @@ tabunzm_collisionpassed(var_0, var_1, var_2) {
 }
 
 tabunzm_zombieishittable(var_0, var_1) {
-  if(var_0.origin[2] <= var_1[2])
+  if(var_0.origin[2] <= var_1[2]) {
     return _bullettracepassed(var_0.origin + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0) && _bullettracepassed(var_1 + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0);
-  else
+  } else {
     return _bullettracepassed(var_1 + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0) && _bullettracepassed(var_0.origin + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0);
+  }
 }

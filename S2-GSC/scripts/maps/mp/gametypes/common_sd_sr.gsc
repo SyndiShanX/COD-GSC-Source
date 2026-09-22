@@ -6,16 +6,18 @@
 _id_4CB0(var_0, var_1) {
   var_2 = 0;
 
-  if(var_0 == "_a")
+  if(var_0 == "_a") {
     var_2 = var_2 | 1;
-  else
+  } else {
     var_2 = var_2 | 2;
+  }
 
   if(isDefined(var_1)) {
-    if(var_1 == "ninja_defuse")
+    if(var_1 == "ninja_defuse") {
       var_2 = var_2 | 4;
-    else if(var_1 == "last_man_defuse")
+    } else if(var_1 == "last_man_defuse") {
       var_2 = var_2 | 8;
+    }
   }
 
   return var_2;
@@ -41,29 +43,33 @@ _id_A121() {
 }
 
 _id_872D() {
-  if(_isusingmatchrulesdata() && _getmatchrulesdata("defaultClasses", game["attackers"], "defaultClass", 5, "class", "inUse"))
+  if(_isusingmatchrulesdata() && _getmatchrulesdata("defaultClasses", game["attackers"], "defaultClass", 5, "class", "inUse")) {
     level.openpopupmenunomouse[game["attackers"]] = maps\mp\_utility::_id_4573(game["attackers"], 5);
+  }
 }
 
 _id_5782(var_0) {
   if(isDefined(level._id_1913)) {
     foreach(var_2 in level._id_1913) {
-      if(distancesquared(self.origin, var_2._id_9D65.origin) < 16384)
+      if(distancesquared(self.origin, var_2._id_9D65.origin) < 16384) {
         return 0;
+      }
     }
   }
 
   if(isDefined(level._id_832F)) {
-    if(distancesquared(self.origin, level._id_832F._id_9D65.origin) < 16384)
+    if(distancesquared(self.origin, level._id_832F._id_9D65.origin) < 16384) {
       return 0;
+    }
   }
 
   return 1;
 }
 
 _id_6B5C(var_0, var_1, var_2) {
-  if(game["state"] == "postgame" && (var_0.team == game["defenders"] || !level._id_18F9))
+  if(game["state"] == "postgame" && (var_0.team == game["defenders"] || !level._id_18F9)) {
     var_1._id_3B4B = 1;
+  }
 
   if(_id_A870(var_0, var_1)) {
     var_3 = _id_5742(var_1);
@@ -82,12 +88,14 @@ _id_254C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
       var_10 = 0;
 
       foreach(var_12 in level.players) {
-        if(var_12 != self && var_12.team == self.team && isalive(var_12))
+        if(var_12 != self && var_12.team == self.team && isalive(var_12)) {
           var_10++;
+        }
       }
 
-      if(var_10 > 0)
+      if(var_10 > 0) {
         maps\mp\_utility::leaderdialog("bomb_lost", self.team);
+      }
     }
   }
 
@@ -103,8 +111,9 @@ _id_254C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     var_1 thread _id_047A::_id_2C80(var_14, var_9, var_4);
     var_1 thread maps\mp\gametypes\_missions::_id_80BB(var_4, var_3);
 
-    if(var_14._id_5777)
+    if(var_14._id_5777) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_interrupt");
+    }
 
     if(var_14._id_56C2) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_protector");
@@ -114,11 +123,13 @@ _id_254C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 }
 
 _id_A870(var_0, var_1) {
-  if(maps\mp\gametypes\_damage::_id_56FA(var_0, var_1))
+  if(maps\mp\gametypes\_damage::_id_56FA(var_0, var_1)) {
     return 0;
+  }
 
-  if(var_0 maps\mp\gametypes\_playerlogic::mayspawn())
+  if(var_0 maps\mp\gametypes\_playerlogic::mayspawn()) {
     return 0;
+  }
 
   return 1;
 }
@@ -126,10 +137,11 @@ _id_A870(var_0, var_1) {
 _id_6B62(var_0) {
   var_0._id_568D = 1;
 
-  if(var_0.team == "allies")
+  if(var_0.team == "allies") {
     var_0._id_0112 = 1;
-  else
+  } else {
     var_0._id_0112 = 2;
+  }
 
   if(isPlayer(var_0)) {
     var_0 thread _id_0485::_id_5E93("pickup", var_0.origin);
@@ -164,14 +176,14 @@ _id_18FD() {
   level.iconbomb = "waypoint_caster_bomb";
   level.icontarget = "waypoint_caster_target";
   level.icondefuse = "waypoint_caster_defuse";
-  var_0 = _getent("sd_bomb_pickup_trig", "targetname");
+  var_0 = _getEnt("sd_bomb_pickup_trig", "targetname");
 
   if(!isDefined(var_0)) {
     common_scripts\utility::_id_3809("No sd_bomb_pickup_trig trigger found in map.");
     return;
   }
 
-  var_1[0] = _getent("sd_bomb", "targetname");
+  var_1[0] = _getEnt("sd_bomb", "targetname");
 
   if(!isDefined(var_1[0])) {
     common_scripts\utility::_id_3809("No sd_bomb script_model found in map.");
@@ -187,10 +199,11 @@ _id_18FD() {
     level._id_832F _id_04D1::playsoundtoteam("friendly", "waypoint_bomb", undefined, 1);
     level._id_832F _id_04D1::_id_8A60("friendly");
 
-    if(game["attackers"] == "axis")
+    if(game["attackers"] == "axis") {
       maps\mp\_utility::_id_863F(level._id_832F, level.iconbomb, 1, 1);
-    else
+    } else {
       maps\mp\_utility::_id_863F(level._id_832F, level.iconbomb, 2, 1);
+    }
 
     level._id_832F._id_0C33 = 1;
     level._id_832F._id_6B62 = ::_id_6B62;
@@ -212,8 +225,9 @@ _id_18FD() {
     var_4 _id_04D1::_id_8A5A(level._id_7078);
     var_4 _id_04D1::_id_8A57(&"PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
 
-    if(!level._id_6510)
+    if(!level._id_6510) {
       var_4 _id_04D1::_id_86B5(level._id_832F);
+    }
 
     var_5 = var_4 _id_04D1::_id_454C();
     var_4.label = var_5;
@@ -223,10 +237,11 @@ _id_18FD() {
     var_4 _id_04D1::playsoundtoteam("enemy", "waypoint_target" + var_5, undefined, 1);
     var_4 _id_04D1::_id_8A60("any");
 
-    if(game["attackers"] == "axis")
+    if(game["attackers"] == "axis") {
       maps\mp\_utility::_id_863F(var_4, level.icontarget + var_5, 2, 1);
-    else
+    } else {
       maps\mp\_utility::_id_863F(var_4, level.icontarget + var_5, 1, 1);
+    }
 
     var_4._id_6ABC = ::_id_6ABC;
     var_4._id_6AFA = ::_id_6AFA;
@@ -246,7 +261,7 @@ _id_18FD() {
     }
 
     level._id_1913[level._id_1913.size] = var_4;
-    var_4._id_18D5 = _getent(var_1[0].target, "targetname");
+    var_4._id_18D5 = _getEnt(var_1[0].target, "targetname");
     var_4._id_18D5.origin = var_4._id_18D5.origin + (0, 0, -10000);
     var_4._id_18D5.label = var_5;
     var_4._id_18D5 usetriggertouchcheckstance(1);
@@ -256,8 +271,9 @@ _id_18FD() {
     var_7 = [];
 
     for(var_8 = 0; var_8 < level._id_1913.size; var_8++) {
-      if(var_8 != var_3)
+      if(var_8 != var_3) {
         var_7[var_7.size] = level._id_1913[var_8];
+      }
     }
 
     level._id_1913[var_3]._id_6C61 = var_7;
@@ -270,17 +286,19 @@ _id_6BC8(var_0) {
   if(!_id_04D1::_id_56FB(var_0.pers["team"])) {
     level thread _id_18F9(self, var_0);
 
-    if(isDefined(var_0._id_568D) && var_0._id_568D)
+    if(isDefined(var_0._id_568D) && var_0._id_568D) {
       var_0._id_568D = 0;
+    }
 
     for(var_1 = 0; var_1 < level._id_1913.size; var_1++) {
       if(level._id_1913[var_1] == self) {
         var_2 = level._id_1913[var_1] _id_04D1::_id_454C();
 
-        if(game["attackers"] == "axis")
+        if(game["attackers"] == "axis") {
           maps\mp\_utility::_id_863F(level._id_1913[var_1], level.icondefuse, 1, 1);
-        else
+        } else {
           maps\mp\_utility::_id_863F(level._id_1913[var_1], level.icondefuse, 2, 1);
+        }
 
         continue;
       }
@@ -293,8 +311,9 @@ _id_6BC8(var_0) {
     var_0 notify("bomb_planted");
     var_3 = 2;
 
-    if(self.label == "_a")
+    if(self.label == "_a") {
       var_3 = 1;
+    }
 
     maps\mp\_utility::_id_863E(3, var_0.team, var_0 getentitynumber(), var_3);
     var_4 = _id_4CB0(self.label);
@@ -303,8 +322,9 @@ _id_6BC8(var_0) {
     maps\mp\_utility::playsoundonplayers(game["bomb_planted_sound"], game["attackers"]);
     maps\mp\_utility::playsoundonplayers(game["bomb_planted_enemy_sound"], game["defenders"]);
 
-    if(isDefined(level.openpopupmenunomouse) && isDefined(level.openpopupmenunomouse[var_0.team]))
+    if(isDefined(level.openpopupmenunomouse) && isDefined(level.openpopupmenunomouse[var_0.team])) {
       var_0 thread _id_7CD2();
+    }
 
     level._id_18F8 = var_0;
     var_0._id_18FB = gettime();
@@ -315,8 +335,9 @@ _id_6BC8(var_0) {
 _id_7156(var_0) {
   var_1 = common_scripts\utility::_id_0F93(level.players, var_0);
 
-  if(var_1.size)
+  if(var_1.size) {
     var_0 maps\mp\_utility::_id_74C3("snd_bomb_wheels_lp", undefined, var_1);
+  }
 }
 
 _id_93D6(var_0) {
@@ -326,7 +347,7 @@ _id_93D6(var_0) {
 _id_8A29(var_0) {
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  var_1 rotateyaw(-45, 0.05);
+  var_1 rotateYaw(-45, 0.05);
   waitframe();
   var_2 = self.origin + (0, 0, 5);
   var_3 = self.origin + anglesToForward(var_1.angles) * 100 + (0, 0, 160);
@@ -354,13 +375,14 @@ _id_6ABC(var_0) {
 
     if(isDefined(level.freezecontrols)) {
       level.freezecontrols hide();
-      _stopfxontag(common_scripts\utility::_id_44F5("search_dstry_bomb_arming_light"), level.freezecontrols, "tag_fx");
+      _stopFXOnTag(common_scripts\utility::_id_44F5("search_dstry_bomb_arming_light"), level.freezecontrols, "tag_fx");
     }
   } else {
     var_2 = 2;
 
-    if(self.label == "_a")
+    if(self.label == "_a") {
       var_2 = 1;
+    }
 
     maps\mp\_utility::_id_863E(14, var_0.team, var_0 getentitynumber(), var_2);
 
@@ -399,8 +421,9 @@ _id_6AFA(var_0, var_1, var_2) {
   level thread _id_93D6(var_1);
 
   if(_id_04D1::_id_56FB(var_1.pers["team"])) {
-    if(isDefined(level.freezecontrols) && !var_2)
+    if(isDefined(level.freezecontrols) && !var_2) {
       level.freezecontrols thread common_scripts\utility::_id_2CB7();
+    }
   } else if(level._id_6510 && !var_2) {
     for(var_3 = 0; var_3 < self._id_6C61.size; var_3++) {
       self._id_6C61[var_3] _id_04D1::_id_0C30("enemy");
@@ -414,10 +437,11 @@ _id_6AFA(var_0, var_1, var_2) {
 _id_18FA(var_0) {
   var_0 endon("death");
   var_0 endon("disconnect");
-  var_0 playerlinkto(level.freezecontrols);
+  var_0 playerlinkTo(level.freezecontrols);
 
-  while(var_0 getcurrentweapon() == self._id_A248)
+  while(var_0 getcurrentweapon() == self._id_A248) {
     waitframe();
+  }
 
   var_0 unlink();
 }
@@ -429,8 +453,9 @@ _id_18F9(var_0, var_1) {
   level._id_7069 = var_0;
   var_1._id_0112 = 0;
 
-  if(isPlayer(var_1))
+  if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_carrying_bomb", 0);
+  }
 
   var_0._id_A582[0] thread maps\mp\gametypes\_gamelogic::_id_74E5();
   level._id_99C0 = var_0._id_A582[0];
@@ -464,7 +489,7 @@ _id_18F9(var_0, var_1) {
     level.freezecontrols hudoutlinedisableforclient(var_4);
   }
 
-  _playfxontag(common_scripts\utility::_id_44F5("search_dstry_bomb_arming_light"), level.freezecontrols, "tag_fx");
+  _playFXOnTag(common_scripts\utility::_id_44F5("search_dstry_bomb_arming_light"), level.freezecontrols, "tag_fx");
   var_0 _id_04D1::_id_0C30("none");
   var_0 _id_04D1::_id_8A60("none");
   var_6 = var_0 _id_04D1::_id_454C();
@@ -489,10 +514,11 @@ _id_18F9(var_0, var_1) {
   var_9._id_502A = "defuseObject";
   var_9._id_A248 = "search_dstry_bomb_defuse_mp";
 
-  if(var_6 == "_a" || var_6 == "_A")
+  if(var_6 == "_a" || var_6 == "_A") {
     _setomnvar("ui_broadcaster_game_mode_status_1", 1);
-  else if(var_6 == "_b" || var_6 == "_B")
+  } else if(var_6 == "_b" || var_6 == "_B") {
     _setomnvar("ui_broadcaster_game_mode_status_1", 2);
+  }
 
   maps\mp\_utility::playsoundinspace("mp_snd_bomb_drop", level.freezecontrols.origin + (0, 0, 1));
   _id_190B(var_6);
@@ -507,14 +533,14 @@ _id_18F9(var_0, var_1) {
   _setomnvar("ui_broadcaster_game_mode_status_1", 0);
   _setomnvar("ui_bomb" + var_6 + "_state", 2);
 
-  if(isDefined(level.closepopupmenu))
+  if(isDefined(level.closepopupmenu)) {
     level thread[[level.closepopupmenu]]();
-  else {
+  } else {
     var_10 = level.freezecontrols.origin;
     var_11 = var_10;
     var_10 = var_10 + (0, 0, 10);
     level.freezecontrols hide();
-    _stopfxontag(common_scripts\utility::_id_44F5("search_dstry_bomb_arming_light"), level.freezecontrols, "tag_fx");
+    _stopFXOnTag(common_scripts\utility::_id_44F5("search_dstry_bomb_arming_light"), level.freezecontrols, "tag_fx");
 
     if(isDefined(var_1)) {
       var_0._id_A582[0] radiusdamage(var_10, 512, 300, 20, var_1, "MOD_EXPLOSIVE", "bomb_site_mp");
@@ -528,8 +554,9 @@ _id_18F9(var_0, var_1) {
 
     var_13 = "bomb_explosion";
 
-    if(isDefined(var_0._id_9D65._id_359B))
+    if(isDefined(var_0._id_9D65._id_359B)) {
       var_13 = var_0._id_9D65._id_359B;
+    }
 
     var_14 = _randomfloat(360);
     var_15 = _spawnfx(level._effect[var_13], var_11, (0, 0, 1), (_cos(var_14), _sin(var_14), 0));
@@ -539,21 +566,24 @@ _id_18F9(var_0, var_1) {
     _earthquake(0.75, 2.0, var_10, 2000);
     thread maps\mp\_utility::playsoundinspace("mp_snd_bomb_detonated", var_10);
 
-    if(isDefined(var_0._id_3947))
+    if(isDefined(var_0._id_3947)) {
       common_scripts\_exploder::exploder(var_0._id_3947);
+    }
   }
 
-  for(var_16 = 0; var_16 < level._id_1913.size; var_16++)
+  for(var_16 = 0; var_16 < level._id_1913.size; var_16++) {
     level._id_1913[var_16] _id_04D1::_id_2F93();
+  }
 
   var_9 _id_04D1::_id_2F93();
   _setgameendtime(0);
   wait 3;
 
-  if(common_scripts\utility::_id_562E(level._id_5677))
+  if(common_scripts\utility::_id_562E(level._id_5677)) {
     level._id_832F._id_9D65 notify("obj_complete");
-  else
+  } else {
     openpopupmenu(game["attackers"], game["end_reason"]["target_destroyed"]);
+  }
 }
 
 _id_190B(var_0) {
@@ -574,26 +604,30 @@ _id_4ACC(var_0, var_1) {
   _setomnvar("ui_bomb" + var_0 + "_timer_endtime", 0);
   var_2 = maps\mp\gametypes\_hostmigration::_id_A782();
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     _setomnvar("ui_bomb" + var_0 + "_timer_endtime", var_1 + var_2);
+  }
 }
 
 _id_6AEF(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 _meth_8608(0);
+  }
 
   _id_04D1::set2dicon("friendly", "waypoint_bomb");
   _id_04D1::playsoundtoteam("friendly", "waypoint_bomb", undefined, 1);
   maps\mp\_utility::playsoundonplayers(game["bomb_dropped_sound"], game["attackers"]);
   maps\mp\_utility::playsoundonplayers(game["bomb_dropped_enemy_sound"], game["defenders"]);
 
-  if(isDefined(var_0) && isDefined(var_0._id_568D) && var_0._id_568D)
+  if(isDefined(var_0) && isDefined(var_0._id_568D) && var_0._id_568D) {
     var_0._id_568D = 0;
+  }
 }
 
 _id_1F79(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -609,11 +643,13 @@ _id_6BC3(var_0) {
   maps\mp\_utility::playsoundonplayers(game["bomb_disarm_sound"], game["defenders"]);
   var_1 = "defuse";
 
-  if(isDefined(level._id_18F8) && maps\mp\_utility::isreallyalive(level._id_18F8))
+  if(isDefined(level._id_18F8) && maps\mp\_utility::isreallyalive(level._id_18F8)) {
     var_1 = "ninja_defuse";
+  }
 
-  if(_id_5742(var_0) && isDefined(self) && isDefined(self._id_6DB2) && _getteamplayersalive(maps\mp\_utility::getotherteam(self._id_6DB2)) > 0)
+  if(_id_5742(var_0) && isDefined(self) && isDefined(self._id_6DB2) && _getteamplayersalive(maps\mp\_utility::getotherteam(self._id_6DB2)) > 0) {
     var_1 = "last_man_defuse";
+  }
 
   var_2 = _id_4CB0(self.label, var_1);
   var_0 thread _id_047A::_id_18D4(var_1, var_2);
@@ -627,11 +663,13 @@ _id_5742(var_0) {
     if(var_2.team != var_0.team) {
       continue;
     }
-    if(var_2 maps\mp\gametypes\_playerlogic::mayspawn())
+    if(var_2 maps\mp\gametypes\_playerlogic::mayspawn()) {
       return 0;
+    }
 
-    if(maps\mp\_utility::isreallyalive(var_2))
+    if(maps\mp\_utility::isreallyalive(var_2)) {
       return 0;
+    }
   }
 
   return 1;
@@ -668,8 +706,9 @@ openpopupmenu(var_0, var_1) {
       }
     }
 
-    if(var_2)
+    if(var_2) {
       _id_04CE::_id_3801();
+    }
   }
 
   _id_04D2::_id_47BD(var_0, 1, 1);
@@ -690,8 +729,9 @@ _id_21AB() {
     var_0 = 1;
   }
 
-  if(var_0)
+  if(var_0) {
     _id_050F::_id_A16A();
+  }
 }
 
 _id_6AE2(var_0) {
@@ -699,10 +739,11 @@ _id_6AE2(var_0) {
     return;
   }
   if(var_0 == "all") {
-    if(level._id_18F9)
+    if(level._id_18F9) {
       openpopupmenu(game["attackers"], game["end_reason"][game["defenders"] + "_eliminated"]);
-    else
+    } else {
       openpopupmenu(game["defenders"], game["end_reason"][game["attackers"] + "_eliminated"]);
+    }
   } else if(var_0 == game["attackers"]) {
     if(level._id_18F9) {
       return;
@@ -745,11 +786,13 @@ _id_0F2F() {
     waitframe();
   }
 
-  while(self ismantling())
+  while(self ismantling()) {
     waitframe();
+  }
 
-  while(!self isonground())
+  while(!self isonground()) {
     waitframe();
+  }
 
   self.pers["gamemodeLoadout"] = level.openpopupmenunomouse[self.team];
   self._id_3FC5 = self.class;
@@ -761,8 +804,9 @@ _id_0F2F() {
   self notify("faux_spawn");
   maps\mp\gametypes\_class::_id_4773(self.team, "gamemode");
 
-  if(self._id_5DF6)
+  if(self._id_5DF6) {
     _id_051E::_id_A129(1);
+  }
 
   _id_7B84();
 }
@@ -770,8 +814,9 @@ _id_0F2F() {
 _id_7B84() {
   var_0 = self getweaponslistoffhands();
 
-  foreach(var_2 in var_0)
-  self batteryfullrecharge(var_2);
+  foreach(var_2 in var_0) {
+    self batteryfullrecharge(var_2);
+  }
 }
 
 _id_7CD2() {
@@ -784,18 +829,21 @@ _id_7CD2() {
     waitframe();
   }
 
-  while(self ismantling())
+  while(self ismantling()) {
     waitframe();
+  }
 
-  while(!self isonground())
+  while(!self isonground()) {
     waitframe();
+  }
 
   self.pers["gamemodeLoadout"] = undefined;
   self notify("faux_spawn");
   maps\mp\gametypes\_class::_id_4773(self.team, self.class);
 
-  if(self._id_5DF6)
+  if(self._id_5DF6) {
     _id_051E::_id_A129(1);
+  }
 
   _id_7B84();
 }

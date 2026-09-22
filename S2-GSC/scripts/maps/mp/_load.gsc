@@ -32,8 +32,9 @@ main() {
   level._id_5C44 = maps\mp\_utility::leaderdialogonplayer;
   thread _id_0511::init();
 
-  if(!isDefined(level._id_3F02))
+  if(!isDefined(level._id_3F02)) {
     level._id_3F02 = [];
+  }
 
   level._id_3F02["precacheMpAnim"] = ::_precachempanim;
   level._id_3F02["scriptModelPlayAnim"] = ::scriptmodelplayanim;
@@ -53,17 +54,18 @@ main() {
   _visionsetnight("default_night_mp");
   _visionsetthermal(game["thermal_vision"]);
 
-  if(isDefined(level._id_585D) && level._id_585D)
+  if(isDefined(level._id_585D) && level._id_585D) {
     _visionsetpain("near_death_hdr_zm", 0);
-  else {
+  } else {
     _visionsetmissilecam("orbital_strike");
     _visionsetpain("near_death_hdr", 0);
   }
 
   var_0 = getEntArray("lantern_glowFX_origin", "targetname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] thread _id_5AFD();
+  }
 
   _id_0378::_id_8D89();
   _id_046C::_id_5163();
@@ -110,18 +112,21 @@ main() {
     var_4 = getEntArray(var_3, "classname");
 
     for(var_1 = 0; var_1 < var_4.size; var_1++) {
-      if(isDefined(var_4[var_1].physicslaunchserver))
+      if(isDefined(var_4[var_1].physicslaunchserver)) {
         var_4[var_1].setdepthoffield = var_4[var_1].physicslaunchserver;
+      }
 
-      if(isDefined(var_4[var_1].setdepthoffield))
+      if(isDefined(var_4[var_1].setdepthoffield)) {
         level thread _id_3938(var_4[var_1]);
+      }
     }
   }
 
   var_5 = getEntArray("trigger_hurt", "classname");
 
-  foreach(var_7 in var_5)
-  var_7 thread _id_4FF4();
+  foreach(var_7 in var_5) {
+    var_7 thread _id_4FF4();
+  }
 
   level._id_6246 = getEntArray("trigger_multiple_missile_dud", "classname");
   thread _id_0469::main();
@@ -146,11 +151,13 @@ set_turret_hand_ik(var_0, var_1, var_2) {
   wait 0.5;
 
   if(isDefined(var_0) && _func_389(var_0)) {
-    if(var_1)
+    if(var_1) {
       var_0 _meth_8572(self, "TAG_IK_LOC_LE");
+    }
 
-    if(var_2)
+    if(var_2) {
       var_0 _meth_8574(self, "TAG_IK_LOC_RI");
+    }
 
     self.prevowner = var_0;
   }
@@ -177,16 +184,18 @@ _id_A8E7() {
 
     self.prevowner = undefined;
 
-    if(isDefined(var_2) && _func_389(var_2))
+    if(isDefined(var_2) && _func_389(var_2)) {
       thread set_turret_hand_ik(var_2, var_0, var_1);
+    }
   }
 }
 
 _id_527B() {
   var_0 = getEntArray("misc_turret", "classname");
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_A8E7();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_A8E7();
+  }
 }
 
 disablephysicaldepthoffieldscripting() {
@@ -207,10 +216,11 @@ _id_3938(var_0) {
   var_0 waittill("trigger");
 
   if(isDefined(var_0.isindoor) && _randomfloat(1) > var_0.isindoor) {
-    if(isDefined(var_0.script_delay))
+    if(isDefined(var_0.script_delay)) {
       wait(var_0.script_delay);
-    else
+    } else {
       wait 4;
+    }
 
     level thread _id_3938(var_0);
     return;
@@ -224,12 +234,14 @@ _id_8A1A() {
   var_0 = getEntArray("script_brushmodel", "classname");
   var_1 = getEntArray("script_model", "classname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_0[var_0.size] = var_1[var_2];
+  }
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(isDefined(var_0[var_2].physicslaunchserver))
+    if(isDefined(var_0[var_2].physicslaunchserver)) {
       var_0[var_2].setdepthoffield = var_0[var_2].physicslaunchserver;
+    }
 
     if(isDefined(var_0[var_2].setdepthoffield)) {
       if(var_0[var_2].model == "fx" && (!isDefined(var_0[var_2].targetname) || var_0[var_2].targetname != "exploderchunk")) {
@@ -254,35 +266,42 @@ _id_8A1A() {
   var_4 = getEntArray("script_brushmodel", "classname");
 
   for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].physicslaunchserver))
+    if(isDefined(var_4[var_2].physicslaunchserver)) {
       var_4[var_2].setdepthoffield = var_4[var_2].physicslaunchserver;
+    }
 
-    if(isDefined(var_4[var_2].setdepthoffield))
+    if(isDefined(var_4[var_2].setdepthoffield)) {
       var_3[var_3.size] = var_4[var_2];
+    }
   }
 
   var_4 = getEntArray("script_model", "classname");
 
   for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].physicslaunchserver))
+    if(isDefined(var_4[var_2].physicslaunchserver)) {
       var_4[var_2].setdepthoffield = var_4[var_2].physicslaunchserver;
+    }
 
-    if(isDefined(var_4[var_2].setdepthoffield))
+    if(isDefined(var_4[var_2].setdepthoffield)) {
       var_3[var_3.size] = var_4[var_2];
+    }
   }
 
   var_4 = getEntArray("item_health", "classname");
 
   for(var_2 = 0; var_2 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_2].physicslaunchserver))
+    if(isDefined(var_4[var_2].physicslaunchserver)) {
       var_4[var_2].setdepthoffield = var_4[var_2].physicslaunchserver;
+    }
 
-    if(isDefined(var_4[var_2].setdepthoffield))
+    if(isDefined(var_4[var_2].setdepthoffield)) {
       var_3[var_3.size] = var_4[var_2];
+    }
   }
 
-  if(!isDefined(level.createfxent))
+  if(!isDefined(level.createfxent)) {
     level.createfxent = [];
+  }
 
   var_5 = [];
   var_5["exploderchunk visible"] = 1;
@@ -311,18 +330,21 @@ _id_8A1A() {
     var_7.v["ender"] = var_6.itemweaponsetammo;
     var_7.v["type"] = "exploder";
 
-    if(isDefined(var_6.model))
+    if(isDefined(var_6.model)) {
       var_7.v["radiant"] = 1;
+    }
 
-    if(!isDefined(var_6._id_81BB))
+    if(!isDefined(var_6._id_81BB)) {
       var_7.v["fxid"] = "No FX";
-    else
+    } else {
       var_7.v["fxid"] = var_6._id_81BB;
+    }
 
     var_7.v["exploder"] = var_6.setdepthoffield;
 
-    if(!isDefined(var_7.v["delay"]))
+    if(!isDefined(var_7.v["delay"])) {
       var_7.v["delay"] = 0;
+    }
 
     if(isDefined(var_6.target)) {
       var_8 = getEntArray(var_7.v["target"], "targetname")[0];
@@ -345,10 +367,11 @@ _id_8A1A() {
       var_7.model._id_2FBF = var_6.clearpotentialthreat;
     }
 
-    if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname]))
+    if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname])) {
       var_7.v["exploder_type"] = var_6.targetname;
-    else
+    } else {
       var_7.v["exploder_type"] = "normal";
+    }
 
     var_7 common_scripts\_createfx::post_entity_creation_function();
   }
@@ -364,8 +387,9 @@ _id_4FF4() {
 
   for(;;) {
     foreach(var_1 in level.players) {
-      if(var_1 istouching(self) && maps\mp\_utility::isreallyalive(var_1))
+      if(var_1 istouching(self) && maps\mp\_utility::isreallyalive(var_1)) {
         var_1 maps\mp\_utility::_suicide();
+      }
     }
 
     wait 0.5;
@@ -425,8 +449,9 @@ _id_2D34() {
   self waittill("death");
   wait 10;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_2D35() {
@@ -436,15 +461,17 @@ _id_2D35() {
     if(isDefined(var_2.target)) {
       var_3 = getEntArray(var_2.target, "targetname");
 
-      foreach(var_5 in var_3)
-      var_5 delete();
+      foreach(var_5 in var_3) {
+        var_5 delete();
+      }
     }
   }
 
   var_8 = getEntArray("orbital_bad_spawn_overlay", "targetname");
 
-  foreach(var_10 in var_8)
-  var_10 delete();
+  foreach(var_10 in var_8) {
+    var_10 delete();
+  }
 }
 
 _id_5DE3() {

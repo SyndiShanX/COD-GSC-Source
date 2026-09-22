@@ -17,7 +17,7 @@ init() {
     var_3._id_6ABC = ::_id_6ABC;
     var_3._id_6BBF = ::_id_6BBF;
     var_4 = [];
-    var_5 = _getent(var_1[var_2].target, "targetname");
+    var_5 = _getEnt(var_1[var_2].target, "targetname");
 
     if(!isDefined(var_5)) {}
 
@@ -25,7 +25,7 @@ init() {
       var_4[var_4.size] = var_5;
 
       if(isDefined(var_5.target)) {
-        var_5 = _getent(var_5.target, "targetname");
+        var_5 = _getEnt(var_5.target, "targetname");
         continue;
       }
 
@@ -65,13 +65,15 @@ _id_AAF8(var_0) {
     var_4 = distance(var_1.origin, var_2[var_3].origin) / 600;
     var_5 = 0.0;
 
-    if(var_3 == 0)
+    if(var_3 == 0) {
       var_5 = var_4 * 0.2;
+    }
 
-    var_1 moveto(var_2[var_3].origin, var_4, var_5);
+    var_1 moveTo(var_2[var_3].origin, var_4, var_5);
 
-    if(var_1.angles != var_2[var_3].angles)
-      var_1 rotateto(var_2[var_3].angles, var_4 * 0.8);
+    if(var_1.angles != var_2[var_3].angles) {
+      var_1 rotateTo(var_2[var_3].angles, var_4 * 0.8);
+    }
 
     wait(var_4);
   }
@@ -126,8 +128,9 @@ _id_51C7() {
     if(isDefined(var_1[var_2].target)) {
       var_4 = common_scripts\utility::_id_46B5(var_1[var_2].target, "targetname");
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         level._id_35B3._id_2DAC[var_1[var_2].shootblank] = var_4;
+      }
     }
   }
 }
@@ -201,37 +204,38 @@ _id_6BC0(var_0) {
 
 _id_6BE1(var_0) {
   level._id_35B3._id_932D[var_0] = "opening";
-  var_1 = _getent("e_door_" + var_0 + "_left", "targetname");
-  var_2 = _getent("e_door_" + var_0 + "_right", "targetname");
+  var_1 = _getEnt("e_door_" + var_0 + "_left", "targetname");
+  var_2 = _getEnt("e_door_" + var_0 + "_right", "targetname");
 
   if(isDefined(var_1._id_0165) && var_1._id_0165 == "fahrenheit") {
-    var_1 moveto(var_1.origin - anglesToForward(var_1.angles) * 35, 2);
-    var_2 moveto(var_2.origin + anglesToForward(var_2.angles) * 35, 2);
+    var_1 moveTo(var_1.origin - anglesToForward(var_1.angles) * 35, 2);
+    var_2 moveTo(var_2.origin + anglesToForward(var_2.angles) * 35, 2);
     var_1 playSound("elev_door_open");
   } else {
-    var_1 moveto(var_1.origin - anglestoright(var_1.angles) * 35, 2);
-    var_2 moveto(var_2.origin + anglestoright(var_2.angles) * 35, 2);
+    var_1 moveTo(var_1.origin - anglestoright(var_1.angles) * 35, 2);
+    var_2 moveTo(var_2.origin + anglestoright(var_2.angles) * 35, 2);
   }
 
   wait 2;
   level._id_35B3._id_932D[var_0] = "opened";
 
-  if(var_0 == "elevator")
+  if(var_0 == "elevator") {
     level thread _id_1386();
+  }
 }
 
 _id_242F(var_0) {
   level._id_35B3._id_932D[var_0] = "closing";
-  var_1 = _getent("e_door_" + var_0 + "_left", "targetname");
-  var_2 = _getent("e_door_" + var_0 + "_right", "targetname");
+  var_1 = _getEnt("e_door_" + var_0 + "_left", "targetname");
+  var_2 = _getEnt("e_door_" + var_0 + "_right", "targetname");
 
   if(isDefined(var_1._id_0165) && var_1._id_0165 == "fahrenheit") {
-    var_1 moveto(var_1.origin + anglesToForward(var_1.angles) * 35, 2);
-    var_2 moveto(var_2.origin - anglesToForward(var_2.angles) * 35, 2);
+    var_1 moveTo(var_1.origin + anglesToForward(var_1.angles) * 35, 2);
+    var_2 moveTo(var_2.origin - anglesToForward(var_2.angles) * 35, 2);
     var_1 playSound("elev_door_close");
   } else {
-    var_1 moveto(var_1.origin + anglestoright(var_1.angles) * 35, 2);
-    var_2 moveto(var_2.origin - anglestoright(var_2.angles) * 35, 2);
+    var_1 moveTo(var_1.origin + anglestoright(var_1.angles) * 35, 2);
+    var_2 moveTo(var_2.origin - anglestoright(var_2.angles) * 35, 2);
   }
 
   wait 2;
@@ -247,24 +251,24 @@ _id_1386() {
 
 _id_646F() {
   level._id_35B3._id_932D["elevator"] = "moving";
-  var_0 = _getent("e_door_elevator_left", "targetname");
-  var_1 = _getent("e_door_elevator_right", "targetname");
-  var_2 = _getent("elevator", "targetname");
+  var_0 = _getEnt("e_door_elevator_left", "targetname");
+  var_1 = _getEnt("e_door_elevator_right", "targetname");
+  var_2 = _getEnt("elevator", "targetname");
 
   if(level._id_35B3.location == "floor1") {
     level._id_35B3.location = "floor2";
     var_3 = var_0.origin[2] - level._id_35B3._id_2DAC["floor1"].origin[2];
-    var_0 moveto((var_0.origin[0], var_0.origin[1], level._id_35B3._id_2DAC["floor2"].origin[2] + var_3), 5);
+    var_0 moveTo((var_0.origin[0], var_0.origin[1], level._id_35B3._id_2DAC["floor2"].origin[2] + var_3), 5);
     var_3 = var_1.origin[2] - level._id_35B3._id_2DAC["floor1"].origin[2];
-    var_1 moveto((var_1.origin[0], var_1.origin[1], level._id_35B3._id_2DAC["floor2"].origin[2] + var_3), 5);
-    var_2 moveto(level._id_35B3._id_2DAC["floor2"].origin, 5);
+    var_1 moveTo((var_1.origin[0], var_1.origin[1], level._id_35B3._id_2DAC["floor2"].origin[2] + var_3), 5);
+    var_2 moveTo(level._id_35B3._id_2DAC["floor2"].origin, 5);
   } else {
     level._id_35B3.location = "floor1";
     var_3 = var_0.origin[2] - level._id_35B3._id_2DAC["floor2"].origin[2];
-    var_0 moveto((var_0.origin[0], var_0.origin[1], level._id_35B3._id_2DAC["floor1"].origin[2] + var_3), 5);
+    var_0 moveTo((var_0.origin[0], var_0.origin[1], level._id_35B3._id_2DAC["floor1"].origin[2] + var_3), 5);
     var_3 = var_1.origin[2] - level._id_35B3._id_2DAC["floor2"].origin[2];
-    var_1 moveto((var_1.origin[0], var_1.origin[1], level._id_35B3._id_2DAC["floor1"].origin[2] + var_3), 5);
-    var_2 moveto(level._id_35B3._id_2DAC["floor1"].origin, 5);
+    var_1 moveTo((var_1.origin[0], var_1.origin[1], level._id_35B3._id_2DAC["floor1"].origin[2] + var_3), 5);
+    var_2 moveTo(level._id_35B3._id_2DAC["floor1"].origin, 5);
   }
 
   wait 5;

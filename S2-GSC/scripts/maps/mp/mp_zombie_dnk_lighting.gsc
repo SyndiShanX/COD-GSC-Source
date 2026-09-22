@@ -6,8 +6,9 @@
 main() {
   _id_84F8();
 
-  if(level._id_01D4 && getDvar("2695") != "true")
+  if(level._id_01D4 && getDvar("2695") != "true") {
     xbox_optimizations();
+  }
 }
 
 _id_84F8() {

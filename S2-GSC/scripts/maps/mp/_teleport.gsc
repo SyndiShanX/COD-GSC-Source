@@ -42,8 +42,9 @@ _id_988B() {
   level._id_98C1 = [];
 
   foreach(var_2 in var_0) {
-    if(!isDefined(var_2._id_0165))
+    if(!isDefined(var_2._id_0165)) {
       var_2._id_0165 = "zone_" + level._id_98C1.size;
+    }
 
     var_2.name = var_2._id_0165;
     _id_98A0(var_2);
@@ -65,9 +66,9 @@ _id_988B() {
   }
 
   if(!isDefined(level._id_98C0)) {
-    if(isDefined(level._id_98C1["start"]))
+    if(isDefined(level._id_98C1["start"])) {
       _id_98AF("start");
-    else {
+    } else {
       foreach(var_11, var_10 in level._id_98C1) {
         _id_98AF(var_11);
         break;
@@ -96,13 +97,15 @@ _id_9898() {
       break;
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level[[var_0]]();
+  }
 
   level[[level._id_9898]]();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level[[var_1]]();
+  }
 
   common_scripts\utility::flag_set("teleport_setup_complete");
 }
@@ -158,8 +161,9 @@ _id_98AA() {
   var_16 = [];
 
   foreach(var_1 in level._id_98C1) {
-    if(var_1.closemenu.size && var_1.closemenu.size && var_1.closemenu.size)
+    if(var_1.closemenu.size && var_1.closemenu.size && var_1.closemenu.size) {
       var_16[var_16.size] = var_1.name;
+    }
   }
 
   _id_987F(var_16);
@@ -170,11 +174,13 @@ _id_98AA() {
 }
 
 _id_9878(var_0, var_1) {
-  if(!_isarray(var_0))
+  if(!_isarray(var_0)) {
     var_0 = [var_0];
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "hide_from_getEnt";
+  }
 
   foreach(var_3 in var_0) {
     var_3._id_8063 = var_3.targetname;
@@ -183,8 +189,9 @@ _id_9878(var_0, var_1) {
 }
 
 _id_987F(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = getarraykeys(level._id_98C1);
+  }
 
   var_1 = game["teleport_zone_dom"];
 
@@ -198,12 +205,14 @@ _id_987F(var_0) {
 }
 
 _id_98AC(var_0) {
-  if(!_isarray(var_0))
+  if(!_isarray(var_0)) {
     var_0 = [var_0];
+  }
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2._id_8063))
+    if(isDefined(var_2._id_8063)) {
       var_2.targetname = var_2._id_8063;
+    }
   }
 }
 
@@ -212,8 +221,9 @@ _id_9895() {
 }
 
 _id_9897() {
-  if(!isDefined(level._id_687F))
+  if(!isDefined(level._id_687F)) {
     level._id_687F = 5;
+  }
 
   level._id_762C = [];
   level._id_75BF = [];
@@ -267,15 +277,17 @@ _id_9896() {
         var_13 = "objpoint_" + var_12 + "_" + var_9._id_A222._id_37D8;
         var_14 = _id_04EC::_id_45D6(var_13);
 
-        if(isDefined(var_14))
+        if(isDefined(var_14)) {
           var_10._id_68FA[var_12] = (var_14.x, var_14.y, var_14._id_01D9);
+        }
       }
 
       var_13 = "objpoint_broadcaster_" + var_9._id_A222._id_37D8;
       var_14 = _id_04EC::_id_45D6(var_13);
 
-      if(isDefined(var_14))
+      if(isDefined(var_14)) {
         var_10._id_68FA["broadcaster"] = (var_14.x, var_14.y, var_14._id_01D9);
+      }
 
       level._id_320A[var_1.name][var_9._id_A222.label] = var_10;
     }
@@ -301,16 +313,18 @@ _id_9896() {
 }
 
 _id_987C() {
-  while(!isDefined(level._id_19E8))
+  while(!isDefined(level._id_19E8)) {
     waitframe();
+  }
 
   foreach(var_1 in level._id_98C1) {
     foreach(var_3 in var_1._id_3CC5) {
       var_4 = level._id_320A[var_1.name][var_3._id_A222.label];
       var_4._id_671A = var_3._id_671A;
 
-      if(var_1.name != level._id_98C0)
+      if(var_1.name != level._id_98C0) {
         var_3 delete();
+      }
     }
   }
 }
@@ -347,14 +361,17 @@ _id_989B(var_0) {
     var_4._id_98BF = var_0;
     var_4._id_671A = var_7._id_671A;
 
-    if(isDefined(var_4._id_A222._id_698A))
+    if(isDefined(var_4._id_A222._id_698A)) {
       _objective_position(var_4._id_A222._id_698A, var_7._id_68E0);
+    }
 
-    if(isDefined(var_4._id_A222._id_698B))
+    if(isDefined(var_4._id_A222._id_698B)) {
       _objective_position(var_4._id_A222._id_698B, var_7._id_68E0);
+    }
 
-    if(isDefined(var_4._id_A222._id_698C))
+    if(isDefined(var_4._id_A222._id_698C)) {
       _objective_position(var_4._id_A222._id_698C, var_7._id_68E0);
+    }
 
     foreach(var_9 in level._id_985B) {
       var_10 = "objpoint_" + var_9 + "_" + var_4._id_A222._id_37D8;
@@ -377,8 +394,9 @@ _id_989B(var_0) {
     var_16 = var_15.label;
 
     foreach(var_18 in level._id_98C1["start"]._id_3211) {
-      if(var_18.label == var_16)
+      if(var_18.label == var_16) {
         var_15.levelflag = var_18.levelflag;
+      }
     }
   }
 
@@ -386,16 +404,18 @@ _id_989B(var_0) {
     var_16 = var_15.label;
 
     foreach(var_23 in level._id_98C1["start"]._id_3CC5) {
-      if(var_23.label == var_16)
+      if(var_23.label == var_16) {
         var_15.levelflag = var_23.levelflag;
+      }
     }
   }
 }
 
 _id_9885(var_0, var_1) {
   foreach(var_3 in level._id_98C1[var_1]._id_3CC5) {
-    if(var_0._id_A222.label == var_3._id_A222.label)
+    if(var_0._id_A222.label == var_3._id_A222.label) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -403,11 +423,11 @@ _id_9885(var_0, var_1) {
 
 _id_989A(var_0) {
   if(game["switchedsides"]) {
-    level._id_289D["axis"] = _getent("post_event_capzone_allies", "targetname");
-    level._id_289D["allies"] = _getent("post_event_capzone_axis", "targetname");
+    level._id_289D["axis"] = _getEnt("post_event_capzone_allies", "targetname");
+    level._id_289D["allies"] = _getEnt("post_event_capzone_axis", "targetname");
   } else {
-    level._id_289D["allies"] = _getent("post_event_capzone_allies", "targetname");
-    level._id_289D["axis"] = _getent("post_event_capzone_axis", "targetname");
+    level._id_289D["allies"] = _getEnt("post_event_capzone_allies", "targetname");
+    level._id_289D["axis"] = _getEnt("post_event_capzone_axis", "targetname");
   }
 
   var_1 = [];
@@ -450,16 +470,17 @@ _id_989A(var_0) {
 
   maps\mp\gametypes\ctf::_id_1FC3();
 
-  foreach(var_5 in var_1)
-  var_5._id_9D65 common_scripts\utility::_id_9DA3();
+  foreach(var_5 in var_1) {
+    var_5._id_9D65 common_scripts\utility::_id_9DA3();
+  }
 }
 
 _id_989C(var_0) {
   level._id_ACB3 = level._id_75BF;
 
-  if(level._id_7A62 == 0)
+  if(level._id_7A62 == 0) {
     level._id_76EE = level._id_ACB3.size - 1;
-  else {
+  } else {
     level._id_ACB9 = [];
     maps\mp\gametypes\hp::_id_8C31();
   }
@@ -561,8 +582,9 @@ _id_98A0(var_0) {
   }
 
   foreach(var_4 in var_1) {
-    if(!isDefined(var_4._id_0165))
+    if(!isDefined(var_4._id_0165)) {
       var_4._id_0165 = "teleport_origin";
+    }
 
     switch (var_4._id_0165) {
       case "teleport_origin":
@@ -576,8 +598,9 @@ _id_98A0(var_0) {
 
         var_4.origin = var_7["position"];
       case "telport_origin_nodrop":
-        if(!isDefined(var_4.setlookatent))
+        if(!isDefined(var_4.setlookatent)) {
           var_4.setlookatent = "none,axis,allies";
+        }
 
         var_8 = strtok(var_4.setlookatent, ", ");
 
@@ -585,8 +608,9 @@ _id_98A0(var_0) {
           if(!isDefined(var_0._id_989F[var_10])) {
             continue;
           }
-          if(!isDefined(var_4.angles))
+          if(!isDefined(var_4.angles)) {
             var_4.angles = (0, 0, 0);
+          }
 
           var_11 = var_0._id_989F[var_10].size;
           var_0._id_989F[var_10][var_11] = var_4;
@@ -604,33 +628,39 @@ _id_98A0(var_0) {
 _id_98AF(var_0) {
   level._id_98C0 = var_0;
 
-  if(isDefined(level._id_9891[var_0]))
+  if(isDefined(level._id_9891[var_0])) {
     _id_0472::_id_8A2F(level._id_9891[var_0]);
+  }
 }
 
 _id_987E(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level._id_98C0;
+  }
 
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(!isDefined(var_4._id_988E))
+    if(!isDefined(var_4._id_988E)) {
       var_4._id_988E = "ent_" + var_4 getentitynumber();
+    }
 
-    if(!isDefined(level._id_98B3[var_4._id_988E]))
+    if(!isDefined(level._id_98B3[var_4._id_988E])) {
       _id_988C(var_4);
+    }
 
-    if(level._id_98B3[var_4._id_988E]._id_AC7C == var_1)
+    if(level._id_98B3[var_4._id_988E]._id_AC7C == var_1) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;
 }
 
 _id_988C(var_0) {
-  if(!isDefined(var_0._id_988E))
+  if(!isDefined(var_0._id_988E)) {
     var_0._id_988E = "ent_" + var_0 getentitynumber();
+  }
 
   if(isDefined(level._id_98B3[var_0._id_988E])) {
     return;
@@ -653,8 +683,9 @@ _id_988C(var_0) {
 
 _id_988D(var_0) {
   foreach(var_3, var_2 in level._id_98C1) {
-    if(var_3 == var_0)
+    if(var_3 == var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -664,13 +695,15 @@ _id_98B8(var_0, var_1) {
   if(!level._id_9876) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_2 = level._id_98A8[var_0];
 
-  if(isDefined(var_2) && var_1)
+  if(isDefined(var_2) && var_1) {
     [[var_2]]();
+  }
 
   var_3 = level._id_98C1[level._id_98C0];
   var_4 = level._id_98C1[var_0];
@@ -683,33 +716,39 @@ _id_98B8(var_0, var_1) {
     _id_98B9(var_0);
   }
 
-  if(level._id_9888)
+  if(level._id_9888) {
     _id_98BB(var_0);
+  }
 
-  if(isDefined(level._id_9880))
+  if(isDefined(level._id_9880)) {
     [[level._id_9880]](var_0);
+  }
 
   _id_98AF(var_0);
   level notify("teleport_to_zone", var_0);
   var_5 = level._id_98A7[var_0];
 
-  if(isDefined(var_5) && var_1)
+  if(isDefined(var_5) && var_1) {
     [[var_5]]();
+  }
 
-  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["post_teleport"]))
+  if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["post_teleport"])) {
     [[level.bot_funcs["post_teleport"]]]();
+  }
 }
 
 _id_98B9(var_0) {
   var_1 = maps\mp\agents\_agent_utility::_id_43FD("all");
 
-  foreach(var_3 in var_1)
-  _id_98BA(var_0, var_3);
+  foreach(var_3 in var_1) {
+    _id_98BA(var_0, var_3);
+  }
 }
 
 _id_98BC(var_0) {
-  foreach(var_2 in level.players)
-  _id_98BA(var_0, var_2);
+  foreach(var_2 in level.players) {
+    _id_98BA(var_0, var_2);
+  }
 }
 
 _id_98BA(var_0, var_1) {
@@ -728,21 +767,24 @@ _id_98BA(var_0, var_1) {
     var_7 = undefined;
     var_8 = var_1.angles;
 
-    if(isPlayer(var_1))
+    if(isPlayer(var_1)) {
       var_8 = var_1 getplayerangles();
+    }
 
     foreach(var_14, var_10 in var_3._id_989F) {
       var_3._id_989F[var_14] = common_scripts\utility::array_randomize(var_10);
 
-      foreach(var_12 in var_10)
-      var_12._id_2307 = 0;
+      foreach(var_12 in var_10) {
+        var_12._id_2307 = 0;
+      }
     }
 
     var_15 = [];
 
     if(level.teambased) {
-      if(isDefined(var_1.team) && isDefined(var_3._id_989F[var_1.team]))
+      if(isDefined(var_1.team) && isDefined(var_3._id_989F[var_1.team])) {
         var_15 = var_3._id_989F[var_1.team];
+      }
     } else
       var_15 = var_3._id_989F["none"];
 
@@ -759,8 +801,9 @@ _id_98BA(var_0, var_1) {
     var_19 = var_1.origin + var_18;
 
     if(!isDefined(var_7) && level._id_98B7) {
-      if(_canspawn(var_19) && !_positionwouldtelefrag(var_19))
+      if(_canspawn(var_19) && !_positionwouldtelefrag(var_19)) {
         var_7 = var_19;
+      }
     }
 
     if(!isDefined(var_7) && level._id_98B6) {
@@ -801,8 +844,9 @@ _id_98BD(var_0) {
   if(isDefined(var_0)) {
     var_1 = _id_9879(var_0.origin);
 
-    if(var_1.name != level._id_98C0)
+    if(var_1.name != level._id_98C0) {
       var_0 maps\mp\_utility::_suicide();
+    }
   }
 }
 
@@ -816,8 +860,9 @@ _id_4380(var_0) {
 _id_98BB(var_0) {}
 
 _id_9893() {
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("death");
+  }
 }
 
 _id_0FB4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
@@ -843,8 +888,9 @@ _id_9884() {
   var_1 = getEntArray("script_model", "classname");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3._id_1B7B))
+    if(isDefined(var_3._id_1B7B)) {
       var_0[var_0.size] = var_3;
+    }
   }
 
   return var_0;
@@ -854,8 +900,9 @@ _id_98A2(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 300;
+  }
 
   var_2 = var_0.origin;
   var_3 = var_0.origin - (0, 0, var_1);

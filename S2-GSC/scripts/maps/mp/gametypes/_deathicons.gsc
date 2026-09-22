@@ -28,8 +28,9 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(isPlayer(var_4) && var_4 maps\mp\_utility::_hasperk("specialty_silentkill")) {
       return;
     }
-    if(isDefined(var_5) && maps\mp\_utility::_id_5755(var_5) && isDefined(var_6) && _weapontype(var_6) == "melee")
+    if(isDefined(var_5) && maps\mp\_utility::_id_5755(var_5) && isDefined(var_6) && _weapontype(var_6) == "melee") {
       return;
+    }
   }
 
   var_7 = var_0.origin;
@@ -44,8 +45,9 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(level.hardcoremode) {
     return;
   }
-  if(isDefined(self._id_5B8E))
+  if(isDefined(self._id_5B8E)) {
     self._id_5B8E destroy();
+  }
 
   var_8 = _newteamhudelem(var_2);
   var_8.x = var_7[0];
@@ -55,10 +57,11 @@ _id_09AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8.color = (0.905882, 0.878431, 0.768627);
   var_8.archived = 1;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_8 setshader("friendly_death_hud", 14, 14);
-  else
+  } else {
     var_8 setshader("friendly_death_hud", 7, 7);
+  }
 
   var_8 setwaypoint(0);
   self._id_5B8E = var_8;

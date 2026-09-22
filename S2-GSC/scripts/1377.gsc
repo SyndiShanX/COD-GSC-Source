@@ -30,25 +30,28 @@ initconsumablesfromtable(var_0, var_1, var_2, var_3) {
       var_7 = _tablelookupbyrow(var_4, var_6, 0);
       [var_9, var_10] = _id_4471(var_7);
 
-      if(var_9 != "none")
+      if(var_9 != "none") {
         _id_52A5(var_9, var_9, var_1, var_2, var_3);
+      }
     }
   }
 }
 
 _id_52A5(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level._id_25A0))
+  if(!isDefined(level._id_25A0)) {
     level._id_25A0 = [];
+  }
 
   var_5 = spawnStruct();
   var_5.name = var_0;
   var_5._id_A20E = var_2;
   var_5._id_4459 = var_4;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5._id_1F7F = var_3;
-  else
+  } else {
     var_5._id_1F7F = ::_id_1F7B;
+  }
 
   level._id_25A0[var_0] = var_5;
 }
@@ -57,17 +60,19 @@ getconsumablerefrowintable(var_0) {
   var_1 = "mp/zombieConsumablesTable.csv";
   var_2 = -1;
 
-  if(_tableexists(var_1))
+  if(_tableexists(var_1)) {
     var_2 = _tablelookuprownum(var_1, 0, var_0);
+  }
 
   return var_2;
 }
 
 _id_4472(var_0) {
-  if(var_0 == 0)
+  if(var_0 == 0) {
     return "none";
-  else
+  } else {
     return maps\mp\_utility::_id_452B(var_0);
+  }
 }
 
 _id_5332() {
@@ -99,8 +104,9 @@ _id_5332() {
     var_13 = self getplayerdata(common_scripts\utility::_id_46A8(), "equippedConsumables", 2, "ID");
     var_14 = self getplayerdata(common_scripts\utility::_id_46A8(), "equippedConsumables", 2, "quantity");
 
-    if(var_14 > 0)
+    if(var_14 > 0) {
       _id_477D("consumable_zm_self_revive", "consumable_zm_self_revive", "common", "sReviveSlot", var_13);
+    }
   }
 
   self._id_A97F = 0;
@@ -159,13 +165,15 @@ _id_4471(var_0) {
 }
 
 _id_477D(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(self._id_259F))
+  if(!isDefined(self._id_259F)) {
     self._id_259F = [];
+  }
 
   var_5 = level._id_25A0[var_1];
 
-  if(!isDefined(self._id_259F[var_3]))
+  if(!isDefined(self._id_259F[var_3])) {
     self._id_259F[var_3] = spawnStruct();
+  }
 
   self._id_259F[var_3]._id_7B79 = var_0;
   self._id_259F[var_3].name = var_5.name;
@@ -183,16 +191,18 @@ _id_477D(var_0, var_1, var_2, var_3, var_4) {
 _id_477E(var_0, var_1) {
   var_2 = 0;
 
-  if(isDefined(self._id_259F[var_0]))
+  if(isDefined(self._id_259F[var_0])) {
     var_2 = 1;
+  }
 
   if(var_2) {
     var_3 = self._id_259F[var_0].name;
     var_4 = level._id_25A0[var_3];
     var_5 = [[var_4._id_4459]](self._id_259F[var_0].type);
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = var_5;
+    }
 
     var_6 = var_1 + self._id_259F[var_0]._id_20F0;
     var_6 = int(clamp(var_6, 0, var_5));
@@ -220,10 +230,11 @@ _id_5FB3(var_0) {
 _id_A126(var_0) {
   var_1 = self._id_259F[var_0]._id_20F0;
 
-  if(var_0 == "upSlot")
+  if(var_0 == "upSlot") {
     self setclientomnvar("ui_zm_consumable_count0", var_1);
-  else if(var_0 == "downSlot")
+  } else if(var_0 == "downSlot") {
     self setclientomnvar("ui_zm_consumable_count1", var_1);
+  }
 }
 
 _id_A6DA() {
@@ -246,49 +257,60 @@ _id_A6DA() {
       continue;
     }
 
-    if(issubstr(var_0, "sReviveSlot"))
+    if(issubstr(var_0, "sReviveSlot")) {
       childthread _id_A201("sReviveSlot");
+    }
   }
 }
 
 _id_4B5E(var_0) {
-  if(!isDefined(self._id_259F))
+  if(!isDefined(self._id_259F)) {
     return [0, undefined];
+  }
 
-  if(!isDefined(var_0) || var_0 == "")
+  if(!isDefined(var_0) || var_0 == "") {
     return [0, undefined];
+  }
 
-  if(isDefined(self._id_259F["upSlot"]) && self._id_259F["upSlot"].name == var_0)
+  if(isDefined(self._id_259F["upSlot"]) && self._id_259F["upSlot"].name == var_0) {
     return [1, "upSlot"];
+  }
 
-  if(isDefined(self._id_259F["downSlot"]) && self._id_259F["downSlot"].name == var_0)
+  if(isDefined(self._id_259F["downSlot"]) && self._id_259F["downSlot"].name == var_0) {
     return [1, "downSlot"];
+  }
 
-  if(isDefined(self._id_259F["sReviveSlot"]) && self._id_259F["sReviveSlot"].name == var_0)
+  if(isDefined(self._id_259F["sReviveSlot"]) && self._id_259F["sReviveSlot"].name == var_0) {
     return [1, "sReviveSlot"];
+  }
 
   return [0, undefined];
 }
 
 _id_4B5F(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(self._id_259F) && isDefined(self._id_259F[var_0]) && self._id_259F[var_0]._id_20F0 > 0)
+  if(isDefined(self._id_259F) && isDefined(self._id_259F[var_0]) && self._id_259F[var_0]._id_20F0 > 0) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_1F7B() {
-  if(isDefined(self.inlaststand) && self.inlaststand)
+  if(isDefined(self.inlaststand) && self.inlaststand) {
     return 0;
+  }
 
-  if(_id_056A::isusingperkmachine())
+  if(_id_056A::isusingperkmachine()) {
     return 0;
+  }
 
-  if(self._id_A97F >= level._id_A980)
+  if(self._id_A97F >= level._id_A980) {
     return 0;
+  }
 
   return 1;
 }
@@ -305,8 +327,9 @@ _id_A201(var_0) {
     _id_A126(var_0);
     self thread[[level._id_25A0[var_1]._id_A20E]](var_0);
 
-    if(isDefined(level.zmb_events_consumables_notify))
+    if(isDefined(level.zmb_events_consumables_notify)) {
       level notify(level.zmb_events_consumables_notify);
+    }
 
     level._id_400E[level._id_400E.size] = ["assassin_set 4 -1", self];
     level._id_400E[level._id_400E.size] = ["bat_elite_set 4 -1", self];
@@ -327,26 +350,29 @@ _id_25A2(var_0) {
   }
   var_1 = self._id_259F[var_0]._id_7B7D;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self _meth_868C(var_1);
+  }
 
   self._id_259F[var_0]._id_5501--;
   var_2 = -1;
 
-  if(var_0 == "upSlot")
+  if(var_0 == "upSlot") {
     var_2 = 0;
-  else if(var_0 == "downSlot")
+  } else if(var_0 == "downSlot") {
     var_2 = 1;
-  else if(var_0 == "sReviveSlot")
+  } else if(var_0 == "sReviveSlot") {
     var_2 = 2;
+  }
 
   if(var_2 >= 0) {
     var_3 = self getplayerdata(common_scripts\utility::_id_46A8(), "equippedConsumables", var_2, "quantity");
     var_4 = var_3 - 1;
     self setplayerdata(common_scripts\utility::_id_46A8(), "equippedConsumables", var_2, "quantity", var_4);
 
-    if(!var_4 && var_2 < 2)
+    if(!var_4 && var_2 < 2) {
       self setplayerdata(common_scripts\utility::_id_46A8(), "equippedConsumables", var_2, "ID", 0);
+    }
   }
 
   _id_0547::writeusedconsumable(self._id_259F[var_0]._id_7B7D, self.clientid, self.origin);
@@ -375,8 +401,9 @@ _id_AABA() {
 notifywallbuytriggers() {
   if(common_scripts\utility::_id_562E(level.reworkedconsumabledenabled)) {
     if(isDefined(self.claimedwbtriggers)) {
-      foreach(var_1 in self.claimedwbtriggers)
-      var_1 notify("modify_wallbuy_data", self);
+      foreach(var_1 in self.claimedwbtriggers) {
+        var_1 notify("modify_wallbuy_data", self);
+      }
     }
   }
 }

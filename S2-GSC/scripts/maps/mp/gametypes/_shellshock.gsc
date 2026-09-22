@@ -14,8 +14,9 @@ _id_8AF0(var_0, var_1) {
   }
   if(var_0 == "MOD_EXPLOSIVE" || var_0 == "MOD_GRENADE" || var_0 == "MOD_GRENADE_SPLASH" || var_0 == "MOD_PROJECTILE" || var_0 == "MOD_PROJECTILE_SPLASH") {
     if(var_1 > 10) {
-      if(!maps\mp\_utility::_hasperk("specialty_stun_resistance") && (!isDefined(self._id_4B64) || !self._id_4B64))
+      if(!maps\mp\_utility::_hasperk("specialty_stun_resistance") && (!isDefined(self._id_4B64) || !self._id_4B64)) {
         self shellshock("frag_grenade_mp", 0.5);
+      }
     }
   }
 }
@@ -33,8 +34,9 @@ _id_485C() {
   var_0 = self._id_0117;
   var_1 = undefined;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0.team;
+  }
 
   self waittill("explode", var_2);
 
@@ -54,8 +56,9 @@ _id_485C() {
       continue;
     }
     if(var_4 damageconetrace(var_2)) {
-      if(!var_4 maps\mp\_utility::_hasperk("specialty_stun_resistance"))
+      if(!var_4 maps\mp\_utility::_hasperk("specialty_stun_resistance")) {
         var_4 shellshock("ear_ring_mp", 1.0, 0.0, 0);
+      }
     }
 
     var_4 setclientomnvar("ui_hud_shake", 1);
@@ -106,13 +109,14 @@ _id_17FE(var_0) {
   var_5 = vectordot(var_3, var_2);
   var_6 = ["death", "damage"];
 
-  if(var_4 > 0 && var_4 > 0.5)
+  if(var_4 > 0 && var_4 > 0.5) {
     common_scripts\utility::_id_A710(var_6, 7.0);
-  else if(_abs(var_4) < 0.866) {
-    if(var_5 > 0)
+  } else if(_abs(var_4) < 0.866) {
+    if(var_5 > 0) {
       common_scripts\utility::_id_A710(var_6, 7.0);
-    else
+    } else {
       common_scripts\utility::_id_A710(var_6, 7.0);
+    }
   }
 }
 
@@ -120,8 +124,9 @@ _id_17FF() {
   self endon("disconnect");
   wait 0.5;
 
-  if(isalive(self))
+  if(isalive(self)) {
     common_scripts\utility::waittill_notify_or_timeout("death", 1.5);
+  }
 }
 
 _id_1DEE() {
@@ -144,8 +149,9 @@ _id_1DEE() {
     if(isDefined(level.teambased) && level.teambased && isDefined(var_0) && isDefined(var_1) && isDefined(var_4.team) && var_4 != var_0 && var_4.team == var_1) {
       continue;
     }
-    if(var_4 damageconetrace(var_2))
+    if(var_4 damageconetrace(var_2)) {
       var_4 shellshock("ear_ring_mp", 1.0, 0.0, 0);
+    }
 
     var_4 setclientomnvar("ui_hud_shake", 1);
   }
@@ -163,8 +169,9 @@ _id_15C5() {
     if(distance(var_0, var_2.origin) > 512) {
       continue;
     }
-    if(var_2 damageconetrace(var_0))
+    if(var_2 damageconetrace(var_0)) {
       var_2 setclientomnvar("ui_hud_shake", 1);
+    }
   }
 }
 
@@ -180,8 +187,9 @@ _id_0FD9() {
     if(distance(var_0, var_2.origin) > 600) {
       continue;
     }
-    if(var_2 damageconetrace(var_0))
+    if(var_2 damageconetrace(var_0)) {
       var_2 setclientomnvar("ui_hud_shake", 1);
+    }
   }
 }
 
@@ -196,8 +204,9 @@ _id_938E(var_0) {
     if(distance(var_0, var_2.origin) > 1000) {
       continue;
     }
-    if(var_2 damageconetrace(var_0))
+    if(var_2 damageconetrace(var_0)) {
       var_2 setclientomnvar("ui_hud_shake", 1);
+    }
   }
 }
 
@@ -212,7 +221,8 @@ _id_0B94(var_0) {
     if(distance(var_0, var_2.origin) > 900) {
       continue;
     }
-    if(var_2 damageconetrace(var_0))
+    if(var_2 damageconetrace(var_0)) {
       var_2 setclientomnvar("ui_hud_shake", 1);
+    }
   }
 }

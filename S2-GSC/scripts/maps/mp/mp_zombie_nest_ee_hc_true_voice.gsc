@@ -29,12 +29,13 @@ _id_6A7B() {
   level notify("end hilt grabbed", self["god_gem"]._id_5AFC.origin);
 
   foreach(var_1 in level.players) {
-    if(var_1 maps\mp\mp_zombie_nest_ee_util::_id_7403())
+    if(var_1 maps\mp\mp_zombie_nest_ee_util::_id_7403()) {
       var_1 thread _id_2EAA();
+    }
   }
 
-  self["god_gem"] moveto(self["god_gem"]._id_5AFC.origin, 5, 1, 1);
-  _playfxontag(level._effect["nest_ee_hc_gem_fx"], self["god_gem"], "tag_origin");
+  self["god_gem"] moveTo(self["god_gem"]._id_5AFC.origin, 5, 1, 1);
+  _playFXOnTag(level._effect["nest_ee_hc_gem_fx"], self["god_gem"], "tag_origin");
   _id_0557::_id_4BC8("barbarossa gem reveal");
   common_scripts\utility::flag_set("flag_nest_hc_ee_true_voice_entered");
   wait 5;
@@ -67,7 +68,7 @@ _id_A6DB() {
   common_scripts\utility::_id_3C7B(var_0);
   wait 3;
   maps\mp\mp_zombie_nest_ee_paintings::_id_3664(1);
-  level._id_357F sethintstring(&"ZOMBIE_NEST_AMP_CONFIRM_CODE");
+  level._id_357F setHintString(&"ZOMBIE_NEST_AMP_CONFIRM_CODE");
   common_scripts\utility::_id_3C9F(var_0);
 }
 
@@ -120,8 +121,9 @@ _id_40EF(var_0) {
 _id_9E14(var_0, var_1, var_2) {
   self endon("chandelier_timed_out");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     thread _id_20B1(var_2);
+  }
 
   var_3 = [var_1];
 
@@ -141,8 +143,9 @@ _id_9E14(var_0, var_1, var_2) {
 }
 
 voicereward() {
-  foreach(var_1 in level.players)
-  var_1 _id_054C::_id_AC23("truevoice");
+  foreach(var_1 in level.players) {
+    var_1 _id_054C::_id_AC23("truevoice");
+  }
 }
 
 _id_20B1(var_0) {
@@ -154,7 +157,7 @@ _id_52EF() {
   var_0 = [];
   var_1 = common_scripts\utility::_id_46B5("nest_hc_mural_challenge", "targetname");
   var_2 = getEntArray(var_1.target, "targetname");
-  var_0["chandelier_trig"] = _getent("nest_hc_mural_chandelier", "script_noteworthy");
+  var_0["chandelier_trig"] = _getEnt("nest_hc_mural_chandelier", "script_noteworthy");
   var_0["god_gem"] = undefined;
   var_3 = common_scripts\utility::_id_46B5("klauses_stone", "script_noteworthy");
   var_0["god_gem"] = spawn("script_model", var_3.origin);

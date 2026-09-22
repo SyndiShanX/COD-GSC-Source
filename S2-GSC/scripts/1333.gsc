@@ -39,7 +39,8 @@ _id_0F31(var_0) {
     var_1 = var_0 / level._id_9394;
     self _meth_85B9(-1 * var_1 * level._id_9392);
 
-    if(self._id_9393 <= 0)
+    if(self._id_9393 <= 0) {
       self notify("SteelBibDestroyed");
+    }
   }
 }

@@ -70,8 +70,9 @@ _id_3598() {
 }
 
 _id_358B(var_0, var_1) {
-  if(var_1 == 1)
+  if(var_1 == 1) {
     _id_0380::_id_2889("zmb_piano_success", undefined, var_0);
-  else
+  } else {
     _id_0380::_id_2889("zmb_piano_fail", undefined, var_0);
+  }
 }

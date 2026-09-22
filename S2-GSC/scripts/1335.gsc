@@ -16,10 +16,11 @@ _id_3662() {
   self._id_569F = 1;
   _id_0547::_id_8A6D(1);
 
-  if(!isDefined(level.custom_camo_func_on))
+  if(!isDefined(level.custom_camo_func_on)) {
     self visionsetnakedforplayer("zm_camo", 0.25);
-  else
+  } else {
     self[[level.custom_camo_func_on]]();
+  }
 
   _playfxontagforclients(level._effect["zmb_moon_player_camo_cam"], self, "Tag_Origin", self);
   _id_0378::_id_8D74("aud_camo_use");
@@ -67,18 +68,21 @@ _id_2F9E() {
     self._id_569F = 0;
     self notify("camo_ended");
 
-    foreach(var_1 in _id_0547::_id_408F())
-    var_1._id_5689 = 0;
+    foreach(var_1 in _id_0547::_id_408F()) {
+      var_1._id_5689 = 0;
+    }
 
-    foreach(var_1 in _id_0547::_id_408F())
-    _stopfxontag(level._effect["zmb_moon_zmb_blind"], var_1, "J_Head");
+    foreach(var_1 in _id_0547::_id_408F()) {
+      _stopFXOnTag(level._effect["zmb_moon_zmb_blind"], var_1, "J_Head");
+    }
 
     _id_0547::_id_8A6D(0);
 
-    if(!isDefined(level.custom_camo_func_off))
+    if(!isDefined(level.custom_camo_func_off)) {
       self visionsetnakedforplayer("", 0.25);
-    else
+    } else {
       self[[level.custom_camo_func_off]]();
+    }
 
     _id_0547::_id_7ACD();
   }
@@ -87,10 +91,11 @@ _id_2F9E() {
 _id_62A6(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_5 = common_scripts\utility::_id_562E(var_1._id_3BE1);
-  else
+  } else {
     var_5 = common_scripts\utility::_id_562E(var_2._id_569F);
+  }
 
   if(var_5) {
     if(_id_0547::_id_5863(var_4) && var_2 _id_0547::_id_4BA7("specialty_class_saboteur_zm")) {
@@ -107,10 +112,11 @@ _id_6ADC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(isDefined(var_1)) {
     var_10 = 0;
 
-    if(isDefined(var_0) && var_0 != var_1)
+    if(isDefined(var_0) && var_0 != var_1) {
       var_10 = common_scripts\utility::_id_562E(var_0._id_3BE1);
-    else
+    } else {
       var_10 = common_scripts\utility::_id_562E(var_1._id_569F);
+    }
 
     if(var_10) {
       if(maps\mp\_utility::_id_5755(var_4) && isPlayer(var_1) && var_1 _id_0547::_id_4BA7("specialty_class_serrated_edge_zm")) {
@@ -134,8 +140,9 @@ _id_6B7E(var_0) {
   if(!isPlayer(self)) {
     return;
   }
-  if(isPlayer(var_0) && common_scripts\utility::_id_562E(var_0._id_569F) && var_0 _id_0547::_id_4BA7("specialty_class_covert_exfiltration_zm"))
+  if(isPlayer(var_0) && common_scripts\utility::_id_562E(var_0._id_569F) && var_0 _id_0547::_id_4BA7("specialty_class_covert_exfiltration_zm")) {
     thread _id_3F91(var_0);
+  }
 }
 
 _id_3F91(var_0) {
@@ -163,8 +170,9 @@ linkwaypointtotargetwithoffset(var_0) {
     var_0.getlinkedparent = [];
   }
 
-  if(!common_scripts\utility::_id_0F79(var_0.getlinkedparent, self))
+  if(!common_scripts\utility::_id_0F79(var_0.getlinkedparent, self)) {
     var_0.getlinkedparent[var_0.getlinkedparent.size] = self;
+  }
 
   var_4 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
   var_5 = var_4 * 0.03;
@@ -178,8 +186,9 @@ linkwaypointtotargetwithoffset(var_0) {
   } else if(isDefined(var_3) && !_isremovedentity(var_3))
     var_6 = 1;
 
-  if(var_6)
+  if(var_6) {
     var_3 delete();
+  }
 
   var_0 notify(var_2);
 }
@@ -194,18 +203,20 @@ powerlosswhenfiring() {
       self waittill("weapon_fired", var_0);
       var_1 = _id_0547::_id_9475(var_0);
 
-      if(!issubstr(var_1, "pap"))
+      if(!issubstr(var_1, "pap")) {
         var_1 = var_1 + "_mp";
+      }
 
       var_2 = getzombieweaponclass(var_1);
       var_3 = -0.1;
 
       switch (var_2) {
         case "weapon_assault":
-          if(issubstr(var_0, "m1a1_zm") || issubstr(var_0, "svt40_zm") || issubstr(var_0, "garand") || issubstr(var_0, "g43") || issubstr(var_0, "type5"))
+          if(issubstr(var_0, "m1a1_zm") || issubstr(var_0, "svt40_zm") || issubstr(var_0, "garand") || issubstr(var_0, "g43") || issubstr(var_0, "type5")) {
             var_3 = -0.1;
-          else
+          } else {
             var_3 = -0.06;
+          }
 
           break;
         case "weapon_lmg":
@@ -215,17 +226,19 @@ powerlosswhenfiring() {
           var_3 = -0.04;
           break;
         case "weapon_shotgun":
-          if(issubstr(var_0, "walther"))
+          if(issubstr(var_0, "walther")) {
             var_3 = -0.1;
-          else
+          } else {
             var_3 = -0.2;
+          }
 
           break;
         case "weapon_sniper":
-          if(issubstr(var_0, "karabin"))
+          if(issubstr(var_0, "karabin")) {
             var_3 = -0.1;
-          else
+          } else {
             var_3 = -0.2;
+          }
 
           break;
         case "weapon_heavy":
@@ -239,8 +252,9 @@ powerlosswhenfiring() {
           break;
       }
 
-      if(!_id_0547::_id_5565(self.rentingability, "role_ability_camo_zm"))
+      if(!_id_0547::_id_5565(self.rentingability, "role_ability_camo_zm")) {
         _id_0533::_id_0F37(var_3, 0, 1);
+      }
     }
   }
 }
@@ -249,20 +263,23 @@ getzombieweaponclass(var_0) {
   var_1 = maps\mp\_utility::_id_4431(var_0);
   var_2 = level.zombieweaponclass[var_1];
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return var_2;
+  }
 
   var_2 = tablelookup("mp/statstable.csv", 2, var_1, 0);
 
-  if(var_2 == "")
+  if(var_2 == "") {
     var_2 = tablelookup("mp/statstable.csv", 2, var_0, 0);
-  else if(var_0 == "none")
+  } else if(var_0 == "none") {
     var_2 = "other";
-  else if(var_2 == "")
+  } else if(var_2 == "") {
     var_2 = "other";
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.zombieweaponclass[var_1] = var_2;
+  }
 
   return var_2;
 }

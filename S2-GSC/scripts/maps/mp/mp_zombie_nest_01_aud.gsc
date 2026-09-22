@@ -327,8 +327,9 @@ _id_70C5(var_0, var_1) {
 
 _id_716C(var_0, var_1, var_2) {
   if(isDefined(var_2) && _isarray(var_2)) {
-    foreach(var_4 in level.players)
-    var_4 thread _id_8E8C(var_0, var_2, "exterior");
+    foreach(var_4 in level.players) {
+      var_4 thread _id_8E8C(var_0, var_2, "exterior");
+    }
   }
 }
 
@@ -345,8 +346,9 @@ _id_93DE() {
     }
 
     if(isDefined(var_1._id_071D._id_6DDB)) {
-      foreach(var_3 in var_1._id_071D._id_6DDB)
-      _id_0380::_id_6850(var_3, 0.25);
+      foreach(var_3 in var_1._id_071D._id_6DDB) {
+        _id_0380::_id_6850(var_3, 0.25);
+      }
 
       var_1._id_071D._id_6DDB = [];
     }
@@ -360,8 +362,9 @@ _id_8E8C(var_0, var_1, var_2) {
   var_6 = 1.0;
   var_7 = 1;
 
-  if(!isDefined(var_3._id_071D._id_6DD8))
+  if(!isDefined(var_3._id_071D._id_6DD8)) {
     var_3._id_071D._id_6DDB = [];
+  }
 
   wait(_randomintrange(1, 2));
 
@@ -371,8 +374,9 @@ _id_8E8C(var_0, var_1, var_2) {
     if(!_soundexists(var_5)) {
       var_5 = var_0 + "_2";
 
-      if(!_soundexists(var_5))
+      if(!_soundexists(var_5)) {
         var_5 = undefined;
+      }
     }
   }
 
@@ -400,11 +404,13 @@ _id_8E8C(var_0, var_1, var_2) {
     var_3._id_071D._id_6DD9 = undefined;
   }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_3._id_071D._id_6DD9 = _id_0380::_id_6840(var_5, var_3, 0, 0.5);
+  }
 
-  foreach(var_13 in var_3._id_071D._id_6DDB)
-  _id_0380::_id_6850(var_13, 0.25);
+  foreach(var_13 in var_3._id_071D._id_6DDB) {
+    _id_0380::_id_6850(var_13, 0.25);
+  }
 
   var_3._id_071D._id_6DDB = [];
   var_15 = _min(var_7, var_1.size);
@@ -431,10 +437,11 @@ _id_8E8F() {
     }
 
     if(var_3 != var_1) {
-      if(var_3)
+      if(var_3) {
         self clientclearsoundsubmix("pa_inside", 1.0);
-      else
+      } else {
         self clientaddsoundsubmix("pa_inside", 1.0);
+      }
 
       var_1 = var_3;
     }
@@ -449,8 +456,9 @@ _id_716E(var_0) {
   if(!isDefined(var_0) || var_0.size <= 0) {
     return;
   }
-  foreach(var_3 in level.players)
-  _id_0380::_id_2889(var_1, var_3, var_0[0].origin, 0, 1);
+  foreach(var_3 in level.players) {
+    _id_0380::_id_2889(var_1, var_3, var_0[0].origin, 0, 1);
+  }
 }
 
 _id_716D(var_0, var_1) {
@@ -461,8 +469,9 @@ _id_3FE4(var_0, var_1) {
   var_2 = self;
   var_3 = var_2 getentitynumber();
 
-  if(!isDefined(level._id_11CB._id_A28E))
+  if(!isDefined(level._id_11CB._id_A28E)) {
     level._id_11CB._id_A28E = [];
+  }
 
   var_4 = level._id_11CB._id_A28E[var_3];
 
@@ -482,38 +491,44 @@ _id_3FE4(var_0, var_1) {
       _id_046C::_id_8DA0("zmb_valve_start_unlock", var_2.origin);
       break;
     case "opening":
-      if(isDefined(var_4._id_9E98))
+      if(isDefined(var_4._id_9E98)) {
         _func_352(var_4._id_9E98, 0.1);
+      }
 
       var_4._id_9E98 = _func_351("zmb_valve_opening_lp", var_2, undefined, undefined, undefined, "hard");
 
-      if(var_1)
+      if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 1, self._id_A29D);
+      }
 
       break;
     case "closing":
-      if(isDefined(var_4._id_9E98))
+      if(isDefined(var_4._id_9E98)) {
         _func_352(var_4._id_9E98, 0.1);
+      }
 
       var_4._id_9E98 = _func_351("zmb_valve_closing_lp", var_2, undefined, undefined, undefined, "hard");
 
-      if(var_1)
+      if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 0, self._id_A29D);
+      }
 
       break;
     case "open":
       _id_046C::_id_8DA0("zmb_valve_open", var_2.origin);
 
-      if(var_1)
+      if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 0.666, 2.0);
+      }
 
       _func_352(var_4._id_9E98, 0.1);
       break;
     case "closed":
       _id_046C::_id_8DA0("zmb_valve_stop_lock", var_2.origin);
 
-      if(isDefined(var_4._id_9E98))
+      if(isDefined(var_4._id_9E98)) {
         _func_352(var_4._id_9E98, 0.1);
+      }
 
       if(isDefined(var_4._id_3FE3)) {
         _id_0380::_id_6850(var_4._id_3FE3, 0.1);
@@ -525,8 +540,9 @@ _id_3FE4(var_0, var_1) {
 }
 
 _id_AC91(var_0, var_1) {
-  foreach(var_3 in level.players)
-  var_3 clientaddsoundsubmix("earthquakezone1");
+  foreach(var_3 in level.players) {
+    var_3 clientaddsoundsubmix("earthquakezone1");
+  }
 
   switch (var_0) {
     case "rumble1":
@@ -573,20 +589,25 @@ _id_AC91(var_0, var_1) {
 _id_AC96(var_0) {
   _id_0366::_id_8E30(1.0, var_0);
 
-  foreach(var_2 in level.players)
-  var_2 clientclearsoundsubmix("earthquakezone1");
+  foreach(var_2 in level.players) {
+    var_2 clientclearsoundsubmix("earthquakezone1");
+  }
 
-  if(isDefined(level._id_11CB._id_AC92))
+  if(isDefined(level._id_11CB._id_AC92)) {
     _func_352(level._id_11CB._id_AC92, var_0);
+  }
 
-  if(isDefined(level._id_11CB._id_AC93))
+  if(isDefined(level._id_11CB._id_AC93)) {
     _func_352(level._id_11CB._id_AC93, var_0);
+  }
 
-  if(isDefined(level._id_11CB._id_AC94))
+  if(isDefined(level._id_11CB._id_AC94)) {
     _func_352(level._id_11CB._id_AC94, var_0);
+  }
 
-  if(isDefined(level._id_11CB._id_AC95))
+  if(isDefined(level._id_11CB._id_AC95)) {
     _func_352(level._id_11CB._id_AC95, var_0);
+  }
 
   level._id_11CB._id_AC92 = undefined;
   level._id_11CB._id_AC93 = undefined;
@@ -719,8 +740,9 @@ _id_AA38(var_0, var_1, var_2) {
   var_0 endon("death");
   var_3 = self;
 
-  if(isDefined(var_2) && !var_2)
+  if(isDefined(var_2) && !var_2) {
     _id_0380::_id_2889("zmb_jupmscare_window_blowout", undefined, var_1);
+  }
 
   _id_0380::_id_2888("stinger_round_start_hit", var_3);
   _id_0366::_id_8E34("mus_stinger_lrg", var_3, 1.0, var_0);
@@ -758,8 +780,9 @@ _id_3DB5() {
   var_0 = self;
 
   foreach(var_2 in level.players) {
-    if(distance(var_2.origin, self.origin) <= 1500)
+    if(distance(var_2.origin, self.origin) <= 1500) {
       var_2 clientaddsoundsubmix("follower_intro");
+    }
   }
 
   var_4 = _id_0380::_id_2889("zmb_follower_intro_main", undefined, var_0.origin);
@@ -849,14 +872,16 @@ setturretfov() {
 _id_3F24(var_0) {
   level._id_11CB._id_8E58 = [];
 
-  foreach(var_2 in var_0)
-  level._id_11CB._id_8E58[level._id_11CB._id_8E58.size] = _id_0378::_id_7208("zmb_timer_tick", undefined, var_2._id_5F59.origin);
+  foreach(var_2 in var_0) {
+    level._id_11CB._id_8E58[level._id_11CB._id_8E58.size] = _id_0378::_id_7208("zmb_timer_tick", undefined, var_2._id_5F59.origin);
+  }
 }
 
 _id_3F25(var_0) {
   if(isDefined(level._id_11CB._id_8E58)) {
-    foreach(var_2 in level._id_11CB._id_8E58)
-    _func_352(var_2);
+    foreach(var_2 in level._id_11CB._id_8E58) {
+      _func_352(var_2);
+    }
   }
 }
 
@@ -874,8 +899,9 @@ _id_1304() {
 
 _id_12E4() {
   foreach(var_1 in level.players) {
-    if(distance(var_1.origin, self.origin) <= 800)
+    if(distance(var_1.origin, self.origin) <= 800) {
       var_1 clientaddsoundsubmix("claw_button_press");
+    }
   }
 
   _id_0380::_id_288B("zmb_claw_button_press", undefined, self);
@@ -884,25 +910,29 @@ _id_12E4() {
 }
 
 _id_232A(var_0, var_1) {
-  foreach(var_3 in level.players)
-  var_3 clientaddsoundsubmix("shard_claw_movement");
+  foreach(var_3 in level.players) {
+    var_3 clientaddsoundsubmix("shard_claw_movement");
+  }
 
   _id_0380::_id_288B("zmb_claw_move_start", undefined, var_0);
 
-  if(isDefined(level._id_11CB._id_2328))
+  if(isDefined(level._id_11CB._id_2328)) {
     _id_0380::_id_6850(level._id_11CB._id_2328);
+  }
 
   level._id_11CB._id_2328 = _id_0380::_id_6844("zmb_claw_move_lp", undefined, var_0, 0.25);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     level._id_11CB._id_2329 = _id_0380::_id_6844("zmb_claw_move_rattle_lp", undefined, var_0, 0.25);
+  }
 }
 
 _id_232B(var_0) {
   _id_0380::_id_6850(level._id_11CB._id_2328);
 
-  if(isDefined(level._id_11CB._id_2329))
+  if(isDefined(level._id_11CB._id_2329)) {
     _id_0380::_id_6850(level._id_11CB._id_2329);
+  }
 
   _id_0380::_id_288B("zmb_claw_move_stop", undefined, var_0);
   wait 3;
@@ -910,8 +940,9 @@ _id_232B(var_0) {
 }
 
 _id_8AD0() {
-  if(!isDefined(level._id_11CB._id_8E57))
+  if(!isDefined(level._id_11CB._id_8E57)) {
     level._id_11CB._id_8E57 = _id_0380::_id_6844("zmb_claw_stuck_lp", undefined, self, 0.1);
+  }
 
   _id_0380::_id_288B("zmb_claw_stuck_imp", undefined, self);
 }
@@ -931,13 +962,15 @@ _id_1D98(var_0) {
     foreach(var_2 in level.players) {
       var_2 clientaddsoundsubmix("light_flicker_off_submix");
 
-      if(var_2 maps\mp\mp_zombie_nest_ee_util::_id_7402())
+      if(var_2 maps\mp\mp_zombie_nest_ee_util::_id_7402()) {
         _id_0380::_id_2888("zmb_bunker_lights_off", var_2);
+      }
     }
   } else {
     foreach(var_2 in level.players) {
-      if(var_2 maps\mp\mp_zombie_nest_ee_util::_id_7402())
+      if(var_2 maps\mp\mp_zombie_nest_ee_util::_id_7402()) {
         _id_0380::_id_2888("zmb_bunker_lights_on", var_2);
+      }
     }
   }
 }
@@ -945,8 +978,9 @@ _id_1D98(var_0) {
 _id_253B(var_0) {
   _id_0380::_id_6842("claw_trapdoor_start_open", undefined, var_0);
 
-  if(isDefined(level._id_11CB._id_232C))
+  if(isDefined(level._id_11CB._id_232C)) {
     _id_0380::_id_6850(level._id_11CB._id_232C, 0.1);
+  }
 
   level._id_11CB._id_232C = _id_0380::_id_6842("claw_trapdoor_opening_lp", undefined, var_0);
 }
@@ -992,8 +1026,9 @@ _id_3BF3(var_0) {
 
 _id_08A5(var_0) {
   foreach(var_2 in level.players) {
-    if(distance(var_2.origin, var_0) <= 1000)
+    if(distance(var_2.origin, var_0) <= 1000) {
       var_2 thread _id_08A6(var_0);
+    }
   }
 }
 
@@ -1011,7 +1046,7 @@ _id_ABF7() {}
 _id_ABF8(var_0, var_1) {
   var_2 = spawn("script_origin", var_0);
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2);
-  var_2 moveto(var_1, 1.9);
+  var_2 moveTo(var_1, 1.9);
   wait 2;
   var_2 delete();
 }
@@ -1030,8 +1065,9 @@ _id_47CA(var_0) {
 }
 
 _id_22F6(var_0) {
-  if(!isDefined(level._id_11CB._id_22F7))
+  if(!isDefined(level._id_11CB._id_22F7)) {
     level._id_11CB._id_22F7 = [];
+  }
 
   for(var_1 = 0; var_1 < level._id_11CB._id_22F7.size; var_1++) {
     _id_0380::_id_6850(level._id_11CB._id_22F7[var_1], 3.0);
@@ -1059,8 +1095,9 @@ _id_22F6(var_0) {
 _id_22F8(var_0, var_1) {
   var_2 = self;
 
-  if(!isDefined(level._id_11CB._id_3F21))
+  if(!isDefined(level._id_11CB._id_3F21)) {
     level._id_11CB._id_3F21 = [];
+  }
 
   _id_22F4(var_0);
   var_3 = _id_0380::_id_288B("fuse_color_switch", undefined, var_2);
@@ -1075,8 +1112,9 @@ _id_22F8(var_0, var_1) {
 _id_22F4(var_0) {
   var_1 = self;
 
-  if(!isDefined(level._id_11CB._id_3F21))
+  if(!isDefined(level._id_11CB._id_3F21)) {
     level._id_11CB._id_3F21 = [];
+  }
 
   if(isDefined(level._id_11CB._id_3F21[var_0])) {
     _id_0380::_id_6850(level._id_11CB._id_3F21[var_0], 0.5);
@@ -1122,15 +1160,16 @@ _id_A604() {
 _id_A609(var_0) {
   var_1 = self;
 
-  if(!isDefined(var_1._id_1345))
+  if(!isDefined(var_1._id_1345)) {
     var_1._id_1345 = 1;
-  else {
+  } else {
     var_2 = "voice_of_god_tumbler";
 
-    if(var_0 == 0)
+    if(var_0 == 0) {
       var_2 = var_2 + "_reset";
-    else if(var_0 == 1)
+    } else if(var_0 == 1) {
       var_2 = var_2 + "_first";
+    }
 
     _id_0380::_id_6844(var_2, undefined, var_1, 0);
   }
@@ -1190,8 +1229,9 @@ _id_A605(var_0, var_1, var_2, var_3, var_4) {
     var_9 = "voice_of_god_tone_lp_" + var_8 + var_1;
     var_10 = var_2;
 
-    if(var_10 <= 0)
+    if(var_10 <= 0) {
       var_10 = 0.01;
+    }
 
     var_11 = _id_0380::_id_6844(var_9, undefined, var_5, 0, var_10);
     var_12 = var_0[var_7];
@@ -1249,8 +1289,9 @@ _id_A608(var_0, var_1, var_2) {
   var_4 = 1.2;
   var_5 = 0.5;
 
-  for(var_6 = 0; var_6 < 4; var_6++)
+  for(var_6 = 0; var_6 < 4; var_6++) {
     _id_0380::_id_684D(var_0[var_6], var_4, var_5);
+  }
 
   _id_0380::_id_6850(level._id_11CB.vog_drone_lp, 0.1);
   _id_0380::_id_6844("voice_of_god_outro", undefined, level._id_11CB._id_A5FB, 0);
@@ -1267,8 +1308,9 @@ _id_A608(var_0, var_1, var_2) {
 
   wait(var_5);
 
-  for(var_6 = 0; var_6 < 4; var_6++)
+  for(var_6 = 0; var_6 < 4; var_6++) {
     _id_0380::_id_6850(var_0[var_6], var_2);
+  }
 }
 
 voice_of_god_mix_begin() {
@@ -1284,7 +1326,7 @@ voice_of_god_mix_begin() {
 
 vog_do_earthshake() {
   wait 3;
-  self playrumbleonentity("grenade_rumble");
+  self playRumbleOnEntity("grenade_rumble");
   _earthquake(0.2, 30, self.origin, 900, self);
 }
 
@@ -1327,8 +1369,9 @@ _id_A5FA(var_0) {
     wait 1.0;
   }
 
-  foreach(var_3 in level.players)
-  var_3 _id_0366::_id_8E09();
+  foreach(var_3 in level.players) {
+    var_3 _id_0366::_id_8E09();
+  }
 }
 
 _id_A603() {
@@ -1488,14 +1531,16 @@ _id_9B4D(var_0) {
   _id_0380::_id_2889("zmb_twr_lightning_strike_lightning", undefined, self.origin);
 
   foreach(var_2 in level.players) {
-    if(distance(var_2.origin, self.origin) <= 2000)
+    if(distance(var_2.origin, self.origin) <= 2000) {
       var_2 clientaddsoundsubmix("tower_lightning_strike_submix");
+    }
   }
 }
 
 _id_9B4F() {
-  foreach(var_1 in level.players)
-  var_1 thread _id_9B50();
+  foreach(var_1 in level.players) {
+    var_1 thread _id_9B50();
+  }
 }
 
 _id_9B50() {
@@ -1567,7 +1612,7 @@ _id_17A2() {
   var_4 = 5.0;
   wait 1;
   var_5 = spawn("script_origin", var_0.origin);
-  var_5 linkto(var_0, "tag_origin", (0, 0, -720), (0, 0, 0));
+  var_5 linkTo(var_0, "tag_origin", (0, 0, -720), (0, 0, 0));
   var_6 = _id_0380::_id_6846("zmb_blimp_engine_lp", var_1, var_5, var_4, var_3, var_4);
   var_6 = _id_0380::_id_6846("zmb_blimp_engine_lfe_lp", var_1, var_5, var_4, var_3, var_4);
   var_0 thread _id_179E(var_5);
@@ -1576,8 +1621,9 @@ _id_17A2() {
 _id_179E(var_0) {
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_990B(var_0) {
@@ -1597,8 +1643,9 @@ _id_17A0() {
   _id_046C::_id_8DA0("zmb_blimp_elec_turret_shoot", self.origin);
   wait 0.3;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_046C::_id_8DA2("zmb_blimp_elec_turret_projectile", self);
+  }
 }
 
 _id_179F() {
@@ -1609,8 +1656,9 @@ _id_17A3() {
   _id_046C::_id_8DA0("zmb_blimp_elec_turret_explo", self.origin);
   wait 1.2;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_046C::_id_8DA2("zmb_blimp_elec_turret_fall", self);
+  }
 }
 
 _id_179B(var_0) {
@@ -1639,7 +1687,7 @@ _id_71C5(var_0, var_1) {
 }
 
 remotecontrolturret() {
-  var_0 = _getent("scream_trigger_01", "targetname");
+  var_0 = _getEnt("scream_trigger_01", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1649,7 +1697,7 @@ remotecontrolturret() {
 }
 
 remotecontrolturretoff() {
-  var_0 = _getent("scream_trigger_02", "targetname");
+  var_0 = _getEnt("scream_trigger_02", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1659,7 +1707,7 @@ remotecontrolturretoff() {
 }
 
 shootturret() {
-  var_0 = _getent("scream_trigger_03", "targetname");
+  var_0 = _getEnt("scream_trigger_03", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1818,8 +1866,9 @@ _id_9CA7(var_0) {
   while(var_9 < 20) {
     var_11 = _randomintrange(1, 2);
 
-    if(var_11 == 1)
+    if(var_11 == 1) {
       var_10 = _id_0380::_id_2889("trap_elec_arc", undefined, var_2);
+    }
 
     var_9++;
     wait 1;
@@ -1847,12 +1896,13 @@ _id_A9FB(var_0) {
   var_1 = common_scripts\utility::_id_46B5("weathervane_sfx", "targetname");
   var_2 = var_1.origin;
 
-  if(var_0 == "long")
+  if(var_0 == "long") {
     _id_0380::_id_2889("zmb_weathervane_squeak_long", undefined, var_2);
-  else if(var_0 == "short")
+  } else if(var_0 == "short") {
     _id_0380::_id_2889("zmb_weathervane_squeak_short", undefined, var_2);
-  else
+  } else {
     _id_0380::_id_2889("zmb_weathervane_squeak_struggle", undefined, var_2);
+  }
 }
 
 _id_9FE7() {
@@ -1899,8 +1949,9 @@ _id_2A32(var_0) {
   level._id_11CB._id_2A31._id_37EB = [[0, 1], [1, 0.001]];
   level._id_11CB._id_2A31._id_37E9 = [[0, 0.001], [1, 1]];
 
-  foreach(var_2 in level.players)
-  var_2 _id_0366::_id_8E30(0, 2.0);
+  foreach(var_2 in level.players) {
+    var_2 _id_0366::_id_8E30(0, 2.0);
+  }
 
   var_4 = 0;
   var_5 = 0;
@@ -1922,23 +1973,26 @@ _id_2A33() {
   _id_0380::_stoplocalsound(level._id_11CB._id_2A31._id_8E54, var_0);
   _id_0380::_stoplocalsound(level._id_11CB._id_2A31._id_8E53, var_0);
 
-  foreach(var_2 in level.players)
-  var_2 _id_0366::_id_8E30(1.0, 2.0);
+  foreach(var_2 in level.players) {
+    var_2 _id_0366::_id_8E30(1.0, 2.0);
+  }
 }
 
 _id_9226() {
   var_0 = self;
 
-  if(!isDefined(level._id_11CB._id_4D75))
+  if(!isDefined(level._id_11CB._id_4D75)) {
     level._id_11CB._id_4D75 = _id_0380::_id_6842("zmb_hilt_sphere_lp", undefined, var_0.origin);
+  }
 }
 
 _id_8B10() {
   var_0 = self.origin;
 
   foreach(var_2 in level.players) {
-    if(distance(var_2.origin, var_0) <= 1200)
+    if(distance(var_2.origin, var_0) <= 1200) {
       var_2 thread _id_6343(var_0);
+    }
   }
 }
 
@@ -1978,24 +2032,27 @@ _id_9CC8(var_0) {
   while(var_1) {
     _id_0380::_id_2889("trap_spikes", undefined, var_0);
 
-    if(var_2 < 19)
+    if(var_2 < 19) {
       var_2++;
-    else
+    } else {
       var_1 = 0;
+    }
 
     wait 1;
   }
 }
 
 _id_1CC1() {
-  foreach(var_1 in level.players)
-  var_1 clientaddsoundsubmix("brute_intro", 2.0);
+  foreach(var_1 in level.players) {
+    var_1 clientaddsoundsubmix("brute_intro", 2.0);
+  }
 
   _id_0366::_id_8E33(3);
   _id_0380::_id_6840("zmb_mus_brute_intro");
 }
 
 _id_1CC2() {
-  foreach(var_1 in level.players)
-  var_1 clientclearsoundsubmix("brute_intro", 0.1);
+  foreach(var_1 in level.players) {
+    var_1 clientclearsoundsubmix("brute_intro", 0.1);
+  }
 }

@@ -27,8 +27,9 @@ _id_63B6(var_0, var_1) {
     thread _id_3C16(var_0, var_2, var_1);
     self setweaponammoclip("killstreak_mortar_mp", 0);
 
-    while(self getweaponammoclip("killstreak_mortar_mp") == 0)
+    while(self getweaponammoclip("killstreak_mortar_mp") == 0) {
       waitframe();
+    }
 
     var_3 = self getweaponammostock("killstreak_mortar_mp");
 

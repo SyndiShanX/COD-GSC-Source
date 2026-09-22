@@ -14,8 +14,9 @@ individual_escape_bonus(var_0) {
 group_escape_bonus() {
   _id_054D::giveplayersexp("dlc3_exp_ref_2");
 
-  if(!_func_371())
+  if(!_func_371()) {
     _id_054D::giveplayersexp("dlc3_exp_ref_2");
+  }
 }
 
 boss_defeated_bonus() {

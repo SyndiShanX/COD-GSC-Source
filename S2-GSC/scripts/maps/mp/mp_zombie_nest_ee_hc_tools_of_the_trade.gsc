@@ -17,8 +17,8 @@ main() {
 
 _id_52EC() {
   var_0 = common_scripts\utility::_id_46B5("nest_ee_hc_com_fuse_struct", "targetname");
-  var_1 = _getent(var_0.target, "targetname");
-  var_2 = _getent("nest_ee_hc_com_door_trig", "targetname");
+  var_1 = _getEnt(var_0.target, "targetname");
+  var_2 = _getEnt("nest_ee_hc_com_door_trig", "targetname");
   level._id_6874 = 0;
   var_3 = common_scripts\utility::_id_46B7("nest_ee_hc_safe_struct", "targetname");
 
@@ -28,8 +28,9 @@ _id_52EC() {
     var_5.getcorpseanim = var_7[0];
     var_5._id_3B9C = [];
 
-    for(var_8 = 0; var_8 < 5; var_8++)
+    for(var_8 = 0; var_8 < 5; var_8++) {
       var_5._id_3B9C[var_8] = undefined;
+    }
 
     foreach(var_10 in var_6) {
       switch (var_10._id_0165) {
@@ -62,13 +63,14 @@ _id_52EC() {
 
   var_13 = getEntArray("zmb_bloodraven_key_inserts", "targetname");
 
-  foreach(var_15 in var_13)
-  var_15 hide();
+  foreach(var_15 in var_13) {
+    var_15 hide();
+  }
 
   var_17 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_struct", "targetname");
-  var_18 = _getent(var_17.target, "targetname");
+  var_18 = _getEnt(var_17.target, "targetname");
   var_19 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_door_struct", "targetname");
-  var_20 = _getent(var_19.target, "targetname");
+  var_20 = _getEnt(var_19.target, "targetname");
   var_21["original_objective_trigs"] = level._id_358E;
   var_21["fuse_trigger"] = var_2;
   var_21["secret_door"] = var_1;
@@ -96,25 +98,27 @@ _id_760C() {
   self["power_box_door"] thread maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6C01();
   playFX(common_scripts\utility::_id_44F5("zmb_ee_switch_sparks"), self["power_box"].origin, anglesToForward(self["power_box"].angles), anglestoup(self["power_box"].angles));
   self["power_box"]._id_0A33 = common_scripts\utility::_id_0F73(var_0, var_1);
-  self["power_box"] setcandamage(1);
+  self["power_box"] setCanDamage(1);
   self["power_box"].cleartargetyaw = self;
   self["power_box"] thread maps\mp\gametypes\_damage::_id_8676(1, "head_gibs", maps\mp\mp_zombie_nest_ee_util::_id_9902, ::_id_2575);
 }
 
 _id_2575(var_0, var_1, var_2, var_3) {
   var_4 = common_scripts\utility::_id_46B5("nest_ee_hc_com_power_struct", "targetname");
-  var_5 = _getent(var_4.target, "targetname");
+  var_5 = _getEnt(var_4.target, "targetname");
   var_6 = anglesToForward(var_5.angles);
 
-  if(common_scripts\utility::_id_562E(level._id_665E))
+  if(common_scripts\utility::_id_562E(level._id_665E)) {
     return 1;
+  }
 
   if(issubstr(var_1, "teslagun")) {
     _id_0557::_id_4BC8("circuit shot by tesla");
 
     if(!isDefined(self._id_177E) || level._id_A980 > self._id_177E) {
-      if(!isDefined(self._id_177E))
+      if(!isDefined(self._id_177E)) {
         self._id_177E = level._id_A980;
+      }
 
       playFX(level._effect["zmb_elec_coil_charge"], var_5.origin, var_6);
       var_5 _id_0378::_id_8D74("aud_wonder_weapon_elec_coil_charge");
@@ -126,8 +130,9 @@ _id_2575(var_0, var_1, var_2, var_3) {
 }
 
 _id_4BD0() {
-  if(isDefined(self._id_0A33))
+  if(isDefined(self._id_0A33)) {
     level thread maps\mp\mp_zombie_nest_ee_cart::_id_A0EF(self._id_0A33, 0);
+  }
 
   level thread _id_7E3E();
   common_scripts\utility::flag_set("flag_bunker_lights_off");
@@ -140,8 +145,9 @@ _id_4BD0() {
   level._id_9A93 = 0;
   level thread _id_4D0A();
 
-  if(isDefined(self._id_0A33))
+  if(isDefined(self._id_0A33)) {
     level thread maps\mp\mp_zombie_nest_ee_cart::_id_A0EF(self._id_0A33, 1);
+  }
 
   self._id_177E = level._id_A980;
 }
@@ -152,8 +158,9 @@ _id_4D0A() {
   var_0 = common_scripts\utility::_id_46B7("nest_ee_hc_safe_struct", "targetname");
 
   foreach(var_2 in var_0) {
-    if(!common_scripts\utility::_id_562E(var_2._id_8026))
+    if(!common_scripts\utility::_id_562E(var_2._id_8026)) {
       var_2._id_8021 thread maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_2441();
+    }
   }
 }
 
@@ -203,11 +210,13 @@ _id_6BA1(var_0, var_1) {
 stopfiring() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 5; var_1++)
+  for(var_1 = 0; var_1 < 5; var_1++) {
     var_0[var_1] = randomint(10);
+  }
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     self.getcorpseanim setscriptablepartstate("dial_0" + (var_1 + 1), "idle_" + var_0[var_1]);
+  }
 
   wait 0.15;
 
@@ -225,7 +234,7 @@ stopfiring() {
     var_4 = self.getcorpseanim gettagorigin("dial_0" + (var_1 + 1));
     var_5 = self._id_3B9C[var_1]._id_65DB.origin;
     var_6 = distance(var_4, var_5);
-    self._id_3B9C[var_1]._id_65DB linkto(self.getcorpseanim, "dial_0" + (var_1 + 1));
+    self._id_3B9C[var_1]._id_65DB linkTo(self.getcorpseanim, "dial_0" + (var_1 + 1));
   }
 
   return var_0;
@@ -250,12 +259,14 @@ _id_A680(var_0, var_1, var_2) {
     var_8 = 0;
 
     for(var_4 = 0; var_4 < var_0.size; var_4++) {
-      if(var_0[var_4] == var_3[var_4])
+      if(var_0[var_4] == var_3[var_4]) {
         var_8++;
+      }
     }
 
-    if(var_8 == var_0.size)
+    if(var_8 == var_0.size) {
       return;
+    }
   }
 }
 
@@ -299,8 +310,8 @@ _id_7E67() {
   if(level._id_6874 < 2) {
     return;
   }
-  var_1 = _getent("nest_hc_sword_door_trig", "targetname");
-  var_2 = _getent(var_1.target, "targetname");
+  var_1 = _getEnt("nest_hc_sword_door_trig", "targetname");
+  var_2 = _getEnt(var_1.target, "targetname");
   var_2._id_6C02 = 0;
   level._id_665E = 1;
 
@@ -310,13 +321,15 @@ _id_7E67() {
     if(!var_2._id_6C02) {
       var_2 _id_0378::_id_8D74("aud_open_raven_door");
 
-      foreach(var_5 in var_0)
-      var_5 rotatepitch(90, 2);
+      foreach(var_5 in var_0) {
+        var_5 rotatepitch(90, 2);
+      }
 
       wait 2;
 
-      foreach(var_5 in var_0)
-      var_5 movez(-128, 4);
+      foreach(var_5 in var_0) {
+        var_5 movez(-128, 4);
+      }
 
       var_2 movez(-128, 4);
       var_2._id_6C02 = 1;
@@ -330,8 +343,9 @@ _id_7E67() {
 _id_6FDA() {
   var_0 = 0;
 
-  if(_id_057E::_id_314D(self))
+  if(_id_057E::_id_314D(self)) {
     var_0 = 1;
+  }
 
   _id_0586::_id_078C("raven_sword_zm");
   _id_0586::_id_078E("raven_sword_zm");
@@ -444,19 +458,22 @@ _id_3789(var_0) {
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(common_scripts\utility::_id_562E(var_3._id_08A9))
+    if(common_scripts\utility::_id_562E(var_3._id_08A9)) {
       var_1++;
+    }
   }
 
   return var_1 == var_0.size;
 }
 
 getswordreward() {
-  if(!isDefined(level.players_have_aquired_hc_sword))
+  if(!isDefined(level.players_have_aquired_hc_sword)) {
     level.players_have_aquired_hc_sword = 1;
-  else
+  } else {
     return;
+  }
 
-  foreach(var_1 in level.players)
-  var_1 _id_054C::_id_AC23("ravensword");
+  foreach(var_1 in level.players) {
+    var_1 _id_054C::_id_AC23("ravensword");
+  }
 }

@@ -13,16 +13,18 @@ init() {
     self.pers["killcam"]["killsByCount"] = [];
     self.pers["killcam"]["killsByTopCount"] = 1;
 
-    if(getdvarint("nemesis_limitToFirst") == 1)
+    if(getdvarint("nemesis_limitToFirst") == 1) {
       self.pers["killcam"]["current"] = "";
+    }
   }
 }
 
 _id_575A(var_0) {
   if(isDefined(self.pers["killcam"]["killsByCount"][var_0])) {
     if(self.pers["killcam"]["killsByCount"][var_0] >= self.pers["killcam"]["killsByTopCount"]) {
-      if(getdvarint("nemesis_limitToFirst") == 1)
+      if(getdvarint("nemesis_limitToFirst") == 1) {
         return self.pers["killcam"]["current"] == var_0;
+      }
 
       return 1;
     }
@@ -44,8 +46,9 @@ _id_A13D(var_0) {
     var_2 = self.pers["killcam"]["killsByTopCount"];
 
     if(var_1 > var_2) {
-      if(getdvarint("nemesis_limitToFirst") == 1)
+      if(getdvarint("nemesis_limitToFirst") == 1) {
         self.pers["killcam"]["current"] = var_0;
+      }
 
       self.pers["killcam"]["killsByTopCount"] = var_1;
       self.pers["killcam"]["IsNemesis"] = 1;
@@ -62,8 +65,9 @@ _id_A13E(var_0) {
   var_1 = var_0.name;
   var_2 = maps\mp\gametypes\_damage::_id_56FA(self, var_0);
 
-  if(!var_2)
+  if(!var_2) {
     _id_A13D(var_1);
+  }
 
   self setclientomnvar("ui_killcam_killsOfPlayer", self.pers["killcam"]["killsOfCount"][var_1]);
   self setclientomnvar("ui_killcam_killsByPlayer", self.pers["killcam"]["killsByCount"][var_1]);
@@ -79,8 +83,9 @@ _id_A128(var_0, var_1) {
     var_2 = var_1.name;
 
     if(var_2 != "") {
-      if(!isDefined(self.pers["killcam"]["killsOfCount"][var_2]))
+      if(!isDefined(self.pers["killcam"]["killsOfCount"][var_2])) {
         self.pers["killcam"]["killsOfCount"][var_2] = 0;
+      }
 
       self.pers["killcam"]["killsOfCount"][var_2] = self.pers["killcam"]["killsOfCount"][var_2] + 1;
     }
@@ -93,13 +98,15 @@ _id_A128(var_0, var_1) {
     var_3 = var_0.name;
 
     if(var_3 != "") {
-      if(!isDefined(self.pers["killcam"]["killsByCount"][var_3]))
+      if(!isDefined(self.pers["killcam"]["killsByCount"][var_3])) {
         self.pers["killcam"]["killsByCount"][var_3] = 0;
+      }
 
       self.pers["killcam"]["killsByCount"][var_3] = self.pers["killcam"]["killsByCount"][var_3] + 1;
 
-      if(!isDefined(self.pers["killcam"]["killsOfCount"][var_3]))
+      if(!isDefined(self.pers["killcam"]["killsOfCount"][var_3])) {
         self.pers["killcam"]["killsOfCount"][var_3] = 0;
+      }
     }
 
     _id_A13E(var_0);
@@ -110,8 +117,9 @@ _id_45A3(var_0) {
   if(!isDefined(self.pers["killcam"])) {
     return;
   }
-  foreach(var_3, var_2 in self.pers["killcam"]["killsByCount"])
-  _id_A13D(var_3);
+  foreach(var_3, var_2 in self.pers["killcam"]["killsByCount"]) {
+    _id_A13D(var_3);
+  }
 }
 
 _id_2405(var_0) {

@@ -37,8 +37,9 @@ _id_8C2C(var_0) {
     var_3 = common_scripts\utility::random(var_0);
     var_0 = _sortbydistance(var_0, var_3.origin);
 
-    for(var_4 = 0; var_4 < 4; var_4++)
+    for(var_4 = 0; var_4 < 4; var_4++) {
       var_2[var_4] = var_0[int(var_0.size / (var_4 + 1)) - 1];
+    }
 
     for(var_4 = 0; var_4 < 4; var_4++) {
       var_1[var_4] = spawn("script_model", var_2[var_4].origin);
@@ -78,7 +79,7 @@ _id_2832(var_0) {
   var_1.y = var_0.origin[1];
   var_1._id_01D9 = var_0.origin[2];
   var_1 setwaypoint(0);
-  var_1 settargetent(var_0);
+  var_1 settargetEnt(var_0);
   return var_1;
 }
 
@@ -90,15 +91,17 @@ _id_9CC4(var_0, var_1) {
   var_2 = 0;
   var_3 = 0.15;
 
-  if(isDefined(self._id_817A))
+  if(isDefined(self._id_817A)) {
     var_4 = self._id_817A;
-  else
+  } else {
     var_4 = 20;
+  }
 
   var_5 = [];
 
-  for(var_6 = 0; var_6 < var_1.size; var_6++)
+  for(var_6 = 0; var_6 < var_1.size; var_6++) {
     var_5[var_6] = var_1[var_6].origin;
+  }
 
   while(var_2 < var_4) {
     var_3 = _randomfloat(0.75) + 0.5;
@@ -111,8 +114,9 @@ _id_9CC4(var_0, var_1) {
 _id_2E66(var_0) {
   var_1 = var_0;
 
-  if(!isDefined(self._id_5BBA))
+  if(!isDefined(self._id_5BBA)) {
     self._id_5BBA = (0, 0, 0);
+  }
 
   self._id_5BBA = var_1;
   playFX(level._effect["bouncing_betty_explode"], var_1);
@@ -127,9 +131,9 @@ _id_2E66(var_0) {
     var_6 = distance(var_5.origin, var_2);
 
     if(var_6 < 256) {
-      if(var_5 _id_0547::_id_580A())
+      if(var_5 _id_0547::_id_580A()) {
         var_5 dodamage(var_5.health * 0.25, var_2, level._id_9C97, level._id_9C97, "MOD_EXPLOSIVE", "trap_zm_mp");
-      else {
+      } else {
         maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6FEE(var_5);
         var_5 dodamage(var_5.health + 666, var_2, level._id_9C97, level._id_9C97, "MOD_EXPLOSIVE", "trap_zm_mp");
 
@@ -148,8 +152,9 @@ _id_2E66(var_0) {
   foreach(var_8 in level.players) {
     var_6 = distance(var_8.origin, var_2);
 
-    if(var_6 < 256)
+    if(var_6 < 256) {
       var_8 dodamage(30 * (1 - var_6 / 256), var_2, undefined, undefined, "MOD_EXPLOSIVE");
+    }
   }
 
   _earthquake(0.8, 0.6, var_2, 200);

@@ -30,17 +30,19 @@ rungenerator_jump() {
       if(distance(var_0.origin, var_3.origin) < 65) {
         var_4 = level.oribital_rotator_2;
 
-        if(issubstr(var_3._id_0165, "b"))
+        if(issubstr(var_3._id_0165, "b")) {
           var_4 = level.oribital_rotator_1;
+        }
 
         var_5 = level.oribital_rotator_1 common_scripts\utility::_id_8FFC();
         var_0 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_5);
         var_5 show();
 
-        if(var_4 == level.oribital_rotator_2)
-          var_5 rotateyaw(-310, 1.7, 0, 0.8);
-        else
-          var_5 rotateyaw(310, 1.7, 0, 0.8);
+        if(var_4 == level.oribital_rotator_2) {
+          var_5 rotateYaw(-310, 1.7, 0, 0.8);
+        } else {
+          var_5 rotateYaw(310, 1.7, 0, 0.8);
+        }
 
         var_0 setstance("crouch");
         var_0 setplayerangles(var_3.angles);
@@ -105,8 +107,9 @@ run_troubled_double_points(var_0) {
       common_scripts\utility::_id_3C9F("troubled_double_points_" + var_13);
     }
 
-    if(isDefined(var_9.fx))
+    if(isDefined(var_9.fx)) {
       var_9.fx delete();
+    }
 
     var_9.origin = (0, 0, 0);
   }
@@ -123,11 +126,13 @@ run_troubled_double_points(var_0) {
     }
   }
 
-  if(isDefined(var_9.fx))
+  if(isDefined(var_9.fx)) {
     var_9.fx delete();
+  }
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_9 delete();
+  }
 }
 
 run_mini_game(var_0) {
@@ -141,8 +146,9 @@ run_mini_game(var_0) {
   var_4 = common_scripts\utility::_id_46B5("dlc4_ee_weap_reward", "targetname");
   var_5 = common_scripts\utility::_id_46B5(var_4.target, "targetname");
 
-  foreach(var_7 in var_2._id_21F6)
-  var_7 show();
+  foreach(var_7 in var_2._id_21F6) {
+    var_7 show();
+  }
 
   var_2 set_orbiters(10);
   var_2.origin = var_5.origin + (0, 0, -10);
@@ -150,7 +156,7 @@ run_mini_game(var_0) {
   var_9 = spawn_a_floating_weapon_award(_id_0548::_id_454B(var_3, "blunderbuss_pap_zm"), var_4.origin, var_3);
   var_9.linkent.origin = var_4.origin;
   var_10 = undefined;
-  var_9.linkent moveto(var_5.origin, 4, 0, 1);
+  var_9.linkent moveTo(var_5.origin, 4, 0, 1);
   wait 3.5;
 
   while(!isDefined(var_10) || var_10 != var_3) {
@@ -164,8 +170,9 @@ run_mini_game(var_0) {
   var_2 movez(-512, 8, 3);
   wait 2;
 
-  foreach(var_12 in var_2._id_21F6)
-  var_12 delete();
+  foreach(var_12 in var_2._id_21F6) {
+    var_12 delete();
+  }
 
   var_2 delete();
   return 1;
@@ -177,16 +184,18 @@ spawn_a_floating_weapon_award(var_0, var_1, var_2) {
   var_5 = gettime() + var_4;
 
   while(gettime() < var_5) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_6 = [var_2];
-    else
+    } else {
       var_6 = level.players;
+    }
 
     var_7 = 1;
 
     foreach(var_9 in var_6) {
-      if(!var_9 worldweaponsloaded(var_0))
+      if(!var_9 worldweaponsloaded(var_0)) {
         var_7 = 0;
+      }
     }
 
     if(var_7) {
@@ -220,7 +229,7 @@ prespawn_a_floating_award(var_0, var_1, var_2) {
   var_3.origin = var_4.origin;
   var_3 linktosynchronizedparent(var_4, "tag_origin");
   var_3.linkent = var_4;
-  var_4 rotateyaw(36000, 850);
+  var_4 rotateYaw(36000, 850);
   var_5 = spawnStruct();
   var_5.origin = var_3.origin;
   return var_3;
@@ -248,8 +257,9 @@ run_game_sequence(var_0, var_1) {
     var_1.fx = _id_0547::_id_8FBA(var_1, "zmf_descent_vision_blood_ready");
     _triggerfx(var_1.fx);
 
-    foreach(var_6 in var_2._id_21F6)
-    var_6 hide();
+    foreach(var_6 in var_2._id_21F6) {
+      var_6 hide();
+    }
 
     var_4 = get_new_player(var_1);
     var_4.is_in_side_ee_mini_game = 1;
@@ -259,27 +269,31 @@ run_game_sequence(var_0, var_1) {
     var_3 = 0;
 
     foreach(var_10 in var_0) {
-      foreach(var_6 in var_2._id_21F6)
-      var_6 hide();
+      foreach(var_6 in var_2._id_21F6) {
+        var_6 hide();
+      }
 
       var_2.origin = var_10.origin;
       var_2.angles = vectortoangles(var_2.origin - var_1.origin);
       wait 1;
 
-      foreach(var_6 in var_2._id_21F6)
-      var_6 show();
+      foreach(var_6 in var_2._id_21F6) {
+        var_6 show();
+      }
 
       var_3 = var_2 wait_for_success_or_timeout();
 
       if(var_3) {
-        foreach(var_6 in var_2._id_21F6)
-        playFX(common_scripts\utility::_id_44F5("proj_trail_green_os"), var_6.origin);
+        foreach(var_6 in var_2._id_21F6) {
+          playFX(common_scripts\utility::_id_44F5("proj_trail_green_os"), var_6.origin);
+        }
 
         continue;
       }
 
-      foreach(var_6 in var_2._id_21F6)
-      var_6 hide();
+      foreach(var_6 in var_2._id_21F6) {
+        var_6 hide();
+      }
 
       break;
     }
@@ -287,8 +301,9 @@ run_game_sequence(var_0, var_1) {
     var_4.is_in_side_ee_mini_game = 0;
 
     if(!var_3) {
-      while(level._id_A980 < var_8 + 5)
+      while(level._id_A980 < var_8 + 5) {
         waitframe();
+      }
     } else
       break;
 
@@ -306,11 +321,13 @@ set_orbiters(var_0) {
   var_2[2] = (0, 0, var_0);
   var_2[3] = (0, 0, -1 * var_0);
 
-  if(!isDefined(var_1._id_21F6))
+  if(!isDefined(var_1._id_21F6)) {
     var_1._id_21F6 = [];
+  }
 
-  foreach(var_4 in var_1._id_21F6)
-  _stopfxontag(common_scripts\utility::_id_44F5("proj_trail_white"), var_4, "tag_origin");
+  foreach(var_4 in var_1._id_21F6) {
+    _stopFXOnTag(common_scripts\utility::_id_44F5("proj_trail_white"), var_4, "tag_origin");
+  }
 
   if(!isDefined(var_1._id_21F6) || var_1._id_21F6.size == 0) {
     for(var_6 = 0; var_6 < 4; var_6++) {
@@ -334,8 +351,9 @@ reset_fx() {
   var_0 = self;
   waitframe();
 
-  foreach(var_2 in var_0._id_21F6)
-  _playfxontag(common_scripts\utility::_id_44F5("proj_trail_white"), var_2, "tag_origin");
+  foreach(var_2 in var_0._id_21F6) {
+    _playFXOnTag(common_scripts\utility::_id_44F5("proj_trail_white"), var_2, "tag_origin");
+  }
 }
 
 wait_for_success_or_timeout() {
@@ -343,8 +361,9 @@ wait_for_success_or_timeout() {
 
   while(gettime() - var_0 < 5000) {
     foreach(var_2 in maps\mp\zombies\_zombies_orbital_gravity_entangler::get_all_magical_grenades()) {
-      if(distance(var_2.origin, self.origin) < 40)
+      if(distance(var_2.origin, self.origin) < 40) {
         return 1;
+      }
     }
 
     waitframe();
@@ -375,23 +394,25 @@ maintain_grenades() {
 get_new_player(var_0) {
   for(;;) {
     foreach(var_2 in level.players) {
-      if(!isDefined(var_2.zmb_dlc4_size_ee_final_hold_time))
+      if(!isDefined(var_2.zmb_dlc4_size_ee_final_hold_time)) {
         var_2.zmb_dlc4_size_ee_final_hold_time = 0;
+      }
 
       if(distance(var_0.origin, var_2.origin) > 60) {
         var_2.zmb_dlc4_size_ee_final_hold_time = 0;
         continue;
       }
 
-      if(!var_2 usebuttonpressed()) {
+      if(!var_2 useButtonPressed()) {
         var_2.zmb_dlc4_size_ee_final_hold_time = 0;
         continue;
       }
 
       var_2.zmb_dlc4_size_ee_final_hold_time = var_2.zmb_dlc4_size_ee_final_hold_time + 0.1;
 
-      if(var_2.zmb_dlc4_size_ee_final_hold_time >= 0.5)
+      if(var_2.zmb_dlc4_size_ee_final_hold_time >= 0.5) {
         return var_2;
+      }
     }
 
     wait 0.1;
@@ -399,7 +420,7 @@ get_new_player(var_0) {
 }
 
 set_flag_on_damage() {
-  self setcandamage(1);
+  self setCanDamage(1);
 
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
@@ -412,15 +433,17 @@ set_flag_on_damage() {
 
   self._id_08A9 = 1;
 
-  if(self.classname == "script_model")
+  if(self.classname == "script_model") {
     var_10 = (0, 0, 13);
-  else
+  } else {
     var_10 = (0, 0, 5);
+  }
 
   var_11 = self.angles;
 
-  if(!isDefined(var_11))
+  if(!isDefined(var_11)) {
     var_11 = (0, 0, 0);
+  }
 
   playFX(common_scripts\utility::_id_44F5("ee_lamp_fx"), self.origin + var_10, anglesToForward(var_11), anglestoup(var_11));
   _id_0378::_id_8D74("aud_raven_fly_away");
@@ -431,8 +454,9 @@ move_around(var_0) {
   self endon("entitydeleted");
   self.fx = undefined;
 
-  if(isDefined(self.fx))
+  if(isDefined(self.fx)) {
     self.fx delete();
+  }
 
   var_1 = common_scripts\utility::random(var_0);
   self.origin = var_1.origin;
@@ -452,8 +476,9 @@ move_around(var_0) {
     playFX(level._effect["zmb_dnk_geistkraftexplode"], self.origin);
     _id_0378::_id_8D74("aud_dlc4_magic_poof", self.origin);
 
-    if(isDefined(self.fx))
+    if(isDefined(self.fx)) {
       self.fx delete();
+    }
 
     wait 0.7;
 
@@ -469,8 +494,9 @@ move_around(var_0) {
 wait_for_grab(var_0) {
   self endon("double_points_grabbed");
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     waitframe();
+  }
 
   var_1 = 0;
   var_2 = undefined;
@@ -479,9 +505,9 @@ wait_for_grab(var_0) {
     var_3 = maps\mp\zombies\_zombies_orbital_gravity_entangler::get_all_magical_grenades();
 
     foreach(var_5 in var_3) {
-      if(distance(var_5.origin, self.origin) > 90 || !_id_0547::_id_5565(var_5.ee_color, self.ee_color))
+      if(distance(var_5.origin, self.origin) > 90 || !_id_0547::_id_5565(var_5.ee_color, self.ee_color)) {
         continue;
-      else {
+      } else {
         var_1 = 1;
         break;
       }
@@ -513,21 +539,25 @@ launchplayers(var_0) {
   var_2 = -800;
   var_3 = 10;
 
-  if(!isDefined(var_1.launchpadfx))
+  if(!isDefined(var_1.launchpadfx)) {
     var_1.launchpadfx = [];
+  }
 
   for(;;) {
-    if(isDefined(var_1.launchpadfx[var_0.weaponlocktargettooclose]))
+    if(isDefined(var_1.launchpadfx[var_0.weaponlocktargettooclose])) {
       var_1.launchpadfx[var_0.weaponlocktargettooclose] delete();
+    }
 
     var_1.launchpadfx[var_0.weaponlocktargettooclose] = _id_0547::_id_8FBA(var_0.plate_model, "dlc_zmb_dig02_sword_looping", var_1);
     _triggerfx(var_1.launchpadfx[var_0.weaponlocktargettooclose]);
 
-    while(!var_1 jumpbuttonpressed() || distance(var_1.origin, var_0.origin) > 132)
+    while(!var_1 jumpbuttonPressed() || distance(var_1.origin, var_0.origin) > 132) {
       waitframe();
+    }
 
-    if(isDefined(var_1.launchpadfx[var_0.weaponlocktargettooclose]))
+    if(isDefined(var_1.launchpadfx[var_0.weaponlocktargettooclose])) {
       var_1.launchpadfx[var_0.weaponlocktargettooclose] delete();
+    }
 
     var_4 = distance(var_1.origin, var_0.dest_path.landing.origin) < 512;
     _id_0378::_id_8D74("tesla_hc_energy_lamp_destruct", var_1.origin);
@@ -537,7 +567,7 @@ launchplayers(var_0) {
       var_5 show();
       var_6 = var_1 common_scripts\utility::_id_8FFC();
       var_6 show();
-      var_1 playerlinkto(var_5, "tag_player");
+      var_1 playerlinkTo(var_5, "tag_player");
       var_7 = get_required_velocity(var_0.dest_path.origin, var_1.origin);
       var_8 = var_0.dest_path.landing.origin[2] - var_1.origin[2];
       var_3 = _id_8F12(var_2 / 2, var_7[2], -1 * var_8);
@@ -546,8 +576,8 @@ launchplayers(var_0) {
       var_10 = var_5 track_velocity();
       var_1 unlink();
       var_6.origin = var_5.origin;
-      var_1 playerlinkto(var_6, "tag_player");
-      var_6 moveto(var_10, 0.3);
+      var_1 playerlinkTo(var_6, "tag_player");
+      var_6 moveTo(var_10, 0.3);
       wait 0.3;
       var_1 unlink();
       var_5 delete();
@@ -597,8 +627,9 @@ track_velocity() {
       var_11 = var_10 + 1000 * var_9;
       var_8 = bulletTrace(var_10, var_11, 0);
 
-      if(distance(self.origin, var_8["position"]) < 150)
+      if(distance(self.origin, var_8["position"]) < 150) {
         return var_8["position"] + (0, 0, 1);
+      }
     }
 
     waitframe();

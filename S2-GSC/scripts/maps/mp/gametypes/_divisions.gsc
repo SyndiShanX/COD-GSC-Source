@@ -4,10 +4,11 @@
 ****************************************************/
 
 getdivisionlevelingtablename() {
-  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled())
+  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     return "mp/divisionLevelingOverhaul.csv";
-  else
+  } else {
     return "mp/divisionLeveling.csv";
+  }
 }
 
 init() {
@@ -285,10 +286,11 @@ getdivisionskillunlocklevel(var_0, var_1) {
       case 2:
         return 1;
       case 3:
-        if(var_1 == 7)
+        if(var_1 == 7) {
           return 2;
-        else
+        } else {
           return 1;
+        }
     }
   } else {
     switch (var_0) {
@@ -414,8 +416,9 @@ removedivisionprogressionskillunlock(var_0, var_1) {
 }
 
 _id_44A1(var_0, var_1) {
-  if(!isDefined(level._id_3057) || !isDefined(level._id_3057[var_0]) || !isDefined(level._id_3057[var_0][var_1]))
+  if(!isDefined(level._id_3057) || !isDefined(level._id_3057[var_0]) || !isDefined(level._id_3057[var_0][var_1])) {
     return "skill_level0";
+  }
 
   return level._id_3057[var_0][var_1];
 }
@@ -424,12 +427,13 @@ _id_461C(var_0) {
   var_1 = _id_461A(var_0);
   var_2 = -1;
 
-  if(var_1 >= getdivisionskillunlocklevel(3, var_0))
+  if(var_1 >= getdivisionskillunlocklevel(3, var_0)) {
     var_2 = getdivisionskillunlocklevel(3, var_0);
-  else if(var_1 >= getdivisionskillunlocklevel(2, var_0))
+  } else if(var_1 >= getdivisionskillunlocklevel(2, var_0)) {
     var_2 = getdivisionskillunlocklevel(2, var_0);
-  else if(var_1 >= getdivisionskillunlocklevel(1, var_0))
+  } else if(var_1 >= getdivisionskillunlocklevel(1, var_0)) {
     var_2 = getdivisionskillunlocklevel(1, var_0);
+  }
 
   var_3 = _id_44A0(var_0);
   return _id_44A1(var_2, var_3);
@@ -440,8 +444,9 @@ _id_09AC(var_0, var_1, var_2) {
 }
 
 _id_44A2(var_0, var_1) {
-  if(!isDefined(level._id_3058[var_0]) || !isDefined(level._id_3058[var_0][var_1]))
+  if(!isDefined(level._id_3058[var_0]) || !isDefined(level._id_3058[var_0][var_1])) {
     return "";
+  }
 
   return level._id_3058[var_0][var_1];
 }
@@ -450,27 +455,30 @@ _id_461D(var_0, var_1) {
   var_2 = _id_44A0(var_0);
 
   if((getdvarint("scr_oneShot", 0) == 1 || getdvarint("scr_wanderlustOnly", 0) == 1 || maps\mp\_utility::areexperimentalbasictrainingsenabled()) && maps\mp\_utility::_hasperk("specialty_class_" + var_2 + "_grandmaster")) {
-    if(maps\mp\_utility::isdivisionsglobaloverhaulenabled())
+    if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
       var_3 = 4;
-    else
+    } else {
       var_3 = 4;
+    }
   } else if((level.gametype == "undead" || level.gametype == "infect") && maps\mp\_utility::_hasperk("specialty_class_" + var_2 + "_grandmaster"))
     var_3 = 4;
-  else if(isDefined(var_1))
+  else if(isDefined(var_1)) {
     var_3 = var_1;
-  else
+  } else {
     var_3 = _id_461A(var_0);
+  }
 
   var_4 = -1;
 
-  if(var_3 >= getdivisiontrainingunlocklevel(4))
+  if(var_3 >= getdivisiontrainingunlocklevel(4)) {
     var_4 = getdivisiontrainingunlocklevel(4);
-  else if(var_3 >= getdivisiontrainingunlocklevel(3))
+  } else if(var_3 >= getdivisiontrainingunlocklevel(3)) {
     var_4 = getdivisiontrainingunlocklevel(3);
-  else if(var_3 >= getdivisiontrainingunlocklevel(2))
+  } else if(var_3 >= getdivisiontrainingunlocklevel(2)) {
     var_4 = getdivisiontrainingunlocklevel(2);
-  else if(var_3 >= getdivisiontrainingunlocklevel(1))
+  } else if(var_3 >= getdivisiontrainingunlocklevel(1)) {
     var_4 = getdivisiontrainingunlocklevel(1);
+  }
 
   return _id_44A2(var_4, var_2);
 }
@@ -478,11 +486,13 @@ _id_461D(var_0, var_1) {
 _id_461A(var_0) {
   var_1 = _id_44A0(var_0);
 
-  if(!isDefined(self._id_3053))
+  if(!isDefined(self._id_3053)) {
     self._id_3053 = [];
+  }
 
-  if(!isDefined(self._id_3053[var_1]))
+  if(!isDefined(self._id_3053[var_1])) {
     self._id_3053[var_1] = _id_461B(var_0);
+  }
 
   return self._id_3053[var_1];
 }
@@ -492,35 +502,42 @@ _id_2406() {
 }
 
 _id_461B(var_0) {
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return -1;
+  }
 
-  if(isDefined(level._id_585D) && level._id_585D)
+  if(isDefined(level._id_585D) && level._id_585D) {
     return -1;
+  }
 
-  if(!isDefined(var_0) || !_id_56CC(var_0) || var_0 == 5)
+  if(!isDefined(var_0) || !_id_56CC(var_0) || var_0 == 5) {
     return -1;
+  }
 
-  if(getdvarint("709") || getdvarint("742"))
+  if(getdvarint("709") || getdvarint("742")) {
     return _id_449F(var_0);
+  }
 
-  if(_func_3AF())
+  if(_func_3AF()) {
     return _id_449F(var_0);
+  }
 
   var_1 = _id_44A0(var_0);
 
-  if(isDefined(self.pers) && isDefined(self.pers["divisionLevel"]) && isDefined(self.pers["divisionLevel"][var_1]))
+  if(isDefined(self.pers) && isDefined(self.pers["divisionLevel"]) && isDefined(self.pers["divisionLevel"][var_1])) {
     return self.pers["divisionLevel"][var_1];
+  }
 
-  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E())
+  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E()) {
     var_2 = _id_449F(var_0);
-  else {
+  } else {
     var_2 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_1, "level");
     var_2 = var_2 + 1;
   }
 
-  if(!isDefined(self.pers["divisionLevel"]))
+  if(!isDefined(self.pers["divisionLevel"])) {
     self.pers["divisionLevel"] = [];
+  }
 
   self.pers["divisionLevel"][var_1] = var_2;
   return var_2;
@@ -538,17 +555,21 @@ _id_449F(var_0) {
 }
 
 hasaccesstov2rocket() {
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     return 0;
+  }
 
-  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E())
+  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E()) {
     return 0;
+  }
 
-  if(getdvarint("709") || getdvarint("742"))
+  if(getdvarint("709") || getdvarint("742")) {
     return 1;
+  }
 
-  if(isDefined(self.pers["hasAccessToV2Rocket"]))
+  if(isDefined(self.pers["hasAccessToV2Rocket"])) {
     return self.pers["hasAccessToV2Rocket"];
+  }
 
   var_0 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "infantry", "prestigeLevel");
   var_1 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "airborne", "prestigeLevel");
@@ -562,35 +583,45 @@ hasaccesstov2rocket() {
   var_9 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", "artillery", "prestigeLevel");
   var_10 = 0;
 
-  if(var_0 >= 1)
+  if(var_0 >= 1) {
     var_10++;
+  }
 
-  if(var_1 >= 1)
+  if(var_1 >= 1) {
     var_10++;
+  }
 
-  if(var_2 >= 1)
+  if(var_2 >= 1) {
     var_10++;
+  }
 
-  if(var_3 >= 1)
+  if(var_3 >= 1) {
     var_10++;
+  }
 
-  if(var_4 >= 1)
+  if(var_4 >= 1) {
     var_10++;
+  }
 
-  if(var_5 >= 1)
+  if(var_5 >= 1) {
     var_10++;
+  }
 
-  if(var_6 >= 1)
+  if(var_6 >= 1) {
     var_10++;
+  }
 
-  if(var_7 >= 1)
+  if(var_7 >= 1) {
     var_10++;
+  }
 
-  if(var_8 >= 1)
+  if(var_8 >= 1) {
     var_10++;
+  }
 
-  if(var_9 >= 1)
+  if(var_9 >= 1) {
     var_10++;
+  }
 
   self.pers["hasAccessToV2Rocket"] = var_10 >= 5;
   return self.pers["hasAccessToV2Rocket"];
@@ -642,16 +673,18 @@ _id_4783(var_0, var_1) {
     case "tie":
       break;
     default:
-      if(maps\mp\_utility::_hasperk("specialty_killstreaks") && (var_1 == "airdrop_kill" || var_1 == "fritzx_kill" || var_1 == "mortar_strike_kill" || var_1 == "missile_strike_kill" || var_1 == "airstrike_kill" || var_1 == "firebomb_kill" || var_1 == "fighter_strike_kill" || var_1 == "plane_gunner_kill" || var_1 == "flamethrower_kill" || var_1 == "attack_dogs_kill" || var_1 == "paratroopers_kill" || var_1 == "molotovs_kill" || var_1 == "v2_rocket_kill"))
+      if(maps\mp\_utility::_hasperk("specialty_killstreaks") && (var_1 == "airdrop_kill" || var_1 == "fritzx_kill" || var_1 == "mortar_strike_kill" || var_1 == "missile_strike_kill" || var_1 == "airstrike_kill" || var_1 == "firebomb_kill" || var_1 == "fighter_strike_kill" || var_1 == "plane_gunner_kill" || var_1 == "flamethrower_kill" || var_1 == "attack_dogs_kill" || var_1 == "paratroopers_kill" || var_1 == "molotovs_kill" || var_1 == "v2_rocket_kill")) {
         var_2 = maps\mp\gametypes\_rank::getscoreinfovalue("kill");
-      else
+      } else {
         var_2 = maps\mp\gametypes\_rank::getscoreinfovalue(var_1);
+      }
 
       if(maps\mp\_utility::getgametypenumlives() > 0) {
         var_3 = max(1, int(5 / maps\mp\_utility::getgametypenumlives()));
 
-        if(level.gametype == "sr")
+        if(level.gametype == "sr") {
           var_3 = max(1, int(2.5 / maps\mp\_utility::getgametypenumlives()));
+        }
 
         var_2 = int(var_2 * var_3);
       }
@@ -664,8 +697,9 @@ _id_4783(var_0, var_1) {
       self.pers["summary"]["divisionXpToScaleWithActiveBoosts"][var_0]["xp"] = self.pers["summary"]["divisionXpToScaleWithActiveBoosts"][var_0]["xp"] + var_2;
   }
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     thread _id_4782(var_0, var_2);
+  }
 }
 
 _id_4782(var_0, var_1) {
@@ -673,10 +707,11 @@ _id_4782(var_0, var_1) {
   var_3 = _tablelookuprownum(getdivisionlevelingtablename(), 0, var_2);
   var_4 = _id_449F(var_0);
 
-  if(getdvarint("1258", 0) == 1 || getdvarint("2803", 0) == 1)
+  if(getdvarint("1258", 0) == 1 || getdvarint("2803", 0) == 1) {
     var_5 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_3 + (var_4 - 1), 1));
-  else
+  } else {
     var_5 = int(_tablelookupbyrow(getdivisionlevelingtablename(), var_3 + var_4, 1));
+  }
 
   var_6 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "level");
   var_6 = var_6 + 1;
@@ -705,14 +740,16 @@ _id_4782(var_0, var_1) {
         _id_0468::_id_0A1D(var_2, var_6);
         var_16 = self getplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "timeInUse");
 
-        if(!isDefined(var_16))
+        if(!isDefined(var_16)) {
           var_16 = -1;
+        }
 
         _reconevent("script_mp_rankup_division: playerName %s, divisionName %s, oldLevel %d, newLevel %d, xpGain %d, timeInUse %d", self.name, var_2, var_7, var_6, var_1, var_16);
         thread _id_3056(var_2, var_6);
 
-        if(!isDefined(self.pers["divisionLevel"]))
+        if(!isDefined(self.pers["divisionLevel"])) {
           self.pers["divisionLevel"] = [];
+        }
 
         self.pers["divisionLevel"][var_2] = var_6;
         self._id_5DF2 = undefined;
@@ -734,55 +771,60 @@ _id_4782(var_0, var_1) {
               if(var_17 == "specialty_class_commando_grandmaster") {
                 var_20 = self getplayerdata(common_scripts\utility::_id_46AF(), "customClasses", var_19, "perkSlots", 3);
 
-                if(var_20 == 73400484)
+                if(var_20 == 73400484) {
                   self setplayerdata(common_scripts\utility::_id_46AF(), "customClasses", var_19, "perkSlots", 4, 73400433);
-                else
+                } else {
                   self setplayerdata(common_scripts\utility::_id_46AF(), "customClasses", var_19, "perkSlots", 4, 73400484);
+                }
               }
 
               if(!maps\mp\_utility::isdivisionsglobaloverhaulenabled() && var_0 == 4) {
                 var_21 = maps\mp\gametypes\_class::cac_getequipment(var_19, 0);
                 var_22 = maps\mp\gametypes\_class::cac_getequipment(var_19, 1);
 
-                if(var_21 == 0)
+                if(var_21 == 0) {
                   self setplayerdata(common_scripts\utility::_id_46AF(), "customClasses", var_19, "equipmentSetups", 0, "equipment", 16805888);
-                else if(var_22 == 0)
+                } else if(var_22 == 0) {
                   self setplayerdata(common_scripts\utility::_id_46AF(), "customClasses", var_19, "equipmentSetups", 1, "equipment", 16785408);
+                }
               }
             }
           }
         }
 
-        if(var_6 < var_4)
+        if(var_6 < var_4) {
           var_12 = 1;
+        }
       }
     }
 
     if(getdvarint("1258", 0) == 0 && getdvarint("2803", 0) == 0 && var_6 >= var_4 && var_9 >= var_5) {
-      if(var_2 == "infantry")
+      if(var_2 == "infantry") {
         maps\mp\gametypes\_missions::processchallenge("ch_infantry_max");
-      else if(var_2 == "airborne")
+      } else if(var_2 == "airborne") {
         maps\mp\gametypes\_missions::processchallenge("ch_airborne_max");
-      else if(var_2 == "armored")
+      } else if(var_2 == "armored") {
         maps\mp\gametypes\_missions::processchallenge("ch_armored_max");
-      else if(var_2 == "mountain")
+      } else if(var_2 == "mountain") {
         maps\mp\gametypes\_missions::processchallenge("ch_mountain_max");
-      else if(var_2 == "expeditionary")
+      } else if(var_2 == "expeditionary") {
         maps\mp\gametypes\_missions::processchallenge("ch_expeditionary_max");
-      else if(var_2 == "resistance")
+      } else if(var_2 == "resistance") {
         maps\mp\gametypes\_missions::processchallenge("ch_resistance_max");
-      else if(var_2 == "grenadier")
+      } else if(var_2 == "grenadier") {
         maps\mp\gametypes\_missions::processchallenge("ch_grenadier_max");
-      else if(var_2 == "commando")
+      } else if(var_2 == "commando") {
         maps\mp\gametypes\_missions::processchallenge("ch_commando_max");
-      else if(var_2 == "scout")
+      } else if(var_2 == "scout") {
         maps\mp\gametypes\_missions::processchallenge("ch_scout_max");
-      else if(var_2 == "artillery")
+      } else if(var_2 == "artillery") {
         maps\mp\gametypes\_missions::processchallenge("ch_artillery_max");
+      }
     }
 
-    if(getdvarint("1258", 0) == 0 && getdvarint("2803", 0) == 0 || var_6 < var_4)
+    if(getdvarint("1258", 0) == 0 && getdvarint("2803", 0) == 0 || var_6 < var_4) {
       self setplayerdata(common_scripts\utility::_id_46AE(), "divisionStats", var_2, "experience", var_9);
+    }
   }
 }
 
@@ -840,8 +882,9 @@ _id_4444(var_0, var_1, var_2) {
   var_3 = tablelookup(var_0, 0, var_2, var_1);
 
   if(!isDefined(var_3) || !_func_30E(var_3) || !_id_57D4(int(var_3))) {
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "NULL";
+    }
   }
 
   return int(var_3);

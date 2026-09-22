@@ -21,15 +21,17 @@ onplayerconnect(var_0) {
   if(common_scripts\utility::_id_562E(0)) {
     var_1 = getarraykeys(level._id_7ED0);
 
-    if(isDefined(var_1) && var_1.size > 0)
+    if(isDefined(var_1) && var_1.size > 0) {
       var_0._id_7A3F = common_scripts\utility::random(var_1);
+    }
   }
 }
 
 _id_6B81() {
   if(common_scripts\utility::_id_562E(0)) {
-    if(isDefined(self._id_7A3F))
+    if(isDefined(self._id_7A3F)) {
       _id_0586::_id_078C(self._id_7A3F);
+    }
   }
 }
 
@@ -79,8 +81,9 @@ _id_6AB2(var_0) {
   if(!isDefined(self._id_7ECC)) {
     var_4 = 1;
 
-    if(_id_0547::_id_4BA7("specialty_class_specialist_zm"))
+    if(_id_0547::_id_4BA7("specialty_class_specialist_zm")) {
       var_4 = 0.75;
+    }
 
     self._id_7ECB = self._id_7ECB + 400 * var_4;
     self._id_7ECB = get_additional_scaling_value();
@@ -93,10 +96,11 @@ _id_6AB2(var_0) {
 }
 
 get_additional_scaling_value() {
-  if(isDefined(level.zmb_zm_roles_exponential_cost))
+  if(isDefined(level.zmb_zm_roles_exponential_cost)) {
     return self._id_7ECB * level.zmb_zm_roles_exponential_cost;
-  else
+  } else {
     return self._id_7ECB;
+  }
 }
 
 disableabilityondowned(var_0) {
@@ -130,13 +134,15 @@ _id_6AB3() {
 }
 
 _id_6B84(var_0, var_1, var_2) {
-  if(0 && isDefined(var_2))
+  if(0 && isDefined(var_2)) {
     var_0 = var_2;
+  }
 
   var_3 = 0;
 
-  if(var_3 && maps\mp\_utility::gameflag("double_points"))
+  if(var_3 && maps\mp\_utility::gameflag("double_points")) {
     var_0 = int(var_0 * 2);
+  }
 
   var_5 = var_0 / self._id_7ECB;
   _id_0533::_id_0F37(var_5);
@@ -144,7 +150,8 @@ _id_6B84(var_0, var_1, var_2) {
 
 _id_4789() {
   foreach(var_1 in level.players) {
-    if(maps\mp\_utility::isreallyalive(var_1))
+    if(maps\mp\_utility::isreallyalive(var_1)) {
       var_1 _id_0533::_id_0F37(1.0, 1, 1);
+    }
   }
 }

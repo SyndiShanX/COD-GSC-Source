@@ -31,10 +31,10 @@ _id_5356() {
   level.all_empty_crates = [];
 
   foreach(var_2 in var_0) {
-    var_2._id_272F = _getent(var_2.target, "targetname");
-    var_2.crate_empty = _getent(var_2._id_272F.target, "targetname");
+    var_2._id_272F = _getEnt(var_2.target, "targetname");
+    var_2.crate_empty = _getEnt(var_2._id_272F.target, "targetname");
     var_2.crate_empty hide();
-    var_2._id_9D65 = _getent(var_2.crate_empty.target, "targetname");
+    var_2._id_9D65 = _getEnt(var_2.crate_empty.target, "targetname");
     var_2._id_5A6E = var_2._id_9D65.setlookatent;
     var_2._id_00C5 = tablelookup("mp/killstreaktable.csv", 1, var_2._id_5A6E, 2);
     var_2._id_5A68 = tablelookup("mp/killstreaktable.csv", 1, var_2._id_5A6E, 19);
@@ -49,7 +49,7 @@ _id_5356() {
       var_2._id_5A68 = "scorestreak_raid_superweapon_neutral_hud";
     }
 
-    var_2._id_9D65 sethintstring(level._id_A85D[var_2._id_5A6E]);
+    var_2._id_9D65 setHintString(level._id_A85D[var_2._id_5A6E]);
     var_2._id_A582 = getEntArray(var_2._id_9D65.target, "targetname");
     var_2.oncooldown = 0;
     var_2._id_6210 = undefined;
@@ -82,8 +82,9 @@ weaponsetupfinishonconnect() {
   level waittill("connected", var_0);
   self._id_4F6B = _id_283A(self, self._id_5A68, 0, 1);
 
-  if(isDefined(self.setlookatent) && self.setlookatent == "start_disabled")
+  if(isDefined(self.setlookatent) && self.setlookatent == "start_disabled") {
     thread disablespecialweaponpickup();
+  }
 
   if(isDefined(self._id_9D65._id_0165) && (self._id_9D65._id_0165 == "attackers" || self._id_9D65._id_0165 == "defenders")) {
     var_1 = game[self._id_9D65._id_0165];
@@ -118,8 +119,9 @@ onplayerspawned(var_0) {
 
       if(isDefined(var_1) && !common_scripts\utility::_id_0F79(var_1, self) || _id_0502::_id_573E(var_3, self) == 0 || isDefined(self._id_A9F6) && (self._id_A9F6 == "war_tripwire_mp" || self._id_A9F6 == "killstreak_molotov_cocktail_mp" || self._id_A9F6 == "killstreak_molotov_cocktail_grenadier_mp")) {
         if(var_0.oncooldown == 0) {
-          if(isDefined(var_0.refillcount) && var_0.refillcount > 0)
+          if(isDefined(var_0.refillcount) && var_0.refillcount > 0) {
             weapsethighlight(var_0, var_2);
+          }
 
           if(var_2 && var_0._id_6989 != -1) {
             weapsethighlight(var_0, var_2);
@@ -154,8 +156,9 @@ _id_A943() {
   var_1 = maps\mp\killstreaks\_raid_ss_serum_util::pickupisserum(self._id_5A6E);
 
   if(var_1) {
-    while(!maps\mp\killstreaks\_raid_ss_serum_util::handleserumpickup(var_0))
+    while(!maps\mp\killstreaks\_raid_ss_serum_util::handleserumpickup(var_0)) {
       self._id_9D65 waittill("trigger", var_0);
+    }
   }
 
   var_2 = 0;
@@ -171,13 +174,15 @@ _id_A943() {
   var_0 _id_051E::_id_478D(self._id_5A6E, 0, 0, var_0, var_2);
   var_0 thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(self._id_5A6E, 500, undefined, undefined);
 
-  if(var_1)
+  if(var_1) {
     thread maps\mp\killstreaks\_raid_ss_serum_util::handledisableserumonpickup(self._id_5A6E, var_0);
+  }
 
   self._id_4F6B.alpha = 0;
 
-  foreach(var_5 in self._id_A582)
-  var_5 hide();
+  foreach(var_5 in self._id_A582) {
+    var_5 hide();
+  }
 
   self._id_272F hudoutlinedisable();
   thread _id_7DB5();
@@ -188,8 +193,9 @@ disablespecialweaponpickup() {
   self._id_9D65 makeunusable();
   self._id_4F6B.alpha = 0;
 
-  foreach(var_1 in self._id_A582)
-  var_1 hide();
+  foreach(var_1 in self._id_A582) {
+    var_1 hide();
+  }
 
   self._id_272F hudoutlinedisable();
 }
@@ -198,8 +204,9 @@ enablespecialweaponpickup() {
   self._id_9D65 makeusable();
   self._id_4F6B.alpha = 1;
 
-  foreach(var_1 in self._id_A582)
-  var_1 show();
+  foreach(var_1 in self._id_A582) {
+    var_1 show();
+  }
 
   self._id_272F hudoutlineenable(2, 1);
 }
@@ -215,10 +222,11 @@ trackvisualmodelsshow() {
       if(isDefined(var_3.setmovespeedscale)) {
         var_4 = var_3.setmovespeedscale;
 
-        if(var_4 > self.refillcount / var_1 * var_0.size)
+        if(var_4 > self.refillcount / var_1 * var_0.size) {
           var_3 hide();
-        else
+        } else {
           var_3 show();
+        }
       }
     }
 
@@ -247,22 +255,25 @@ _id_7DB5() {
   self.oncooldown = 1;
   _id_0502::_id_1D3B(!self.oncooldown);
 
-  if(issubstr(self._id_5A6E, "serum"))
+  if(issubstr(self._id_5A6E, "serum")) {
     self._id_5A6E = common_scripts\utility::random(level.raidserumstreaks);
-  else if(issubstr(self._id_5A68, "superweapon"))
+  } else if(issubstr(self._id_5A68, "superweapon")) {
     self._id_5A6E = common_scripts\utility::random(level.raidsuperweaponstreaks);
+  }
 
-  if(getdvarint("mp_raid_dlc4_test_serums", 0) == 1)
+  if(getdvarint("mp_raid_dlc4_test_serums", 0) == 1) {
     wait 5;
-  else
+  } else {
     wait(self._id_7DB6);
+  }
 
   self.oncooldown = 0;
   _id_0502::_id_1D3B(!self.oncooldown);
   self._id_9D65 makeusable();
 
-  foreach(var_1 in self._id_A582)
-  var_1 show();
+  foreach(var_1 in self._id_A582) {
+    var_1 show();
+  }
 
   self._id_272F hudoutlineenable(2, 1);
   self._id_4F6B.alpha = 0.4;
@@ -293,11 +304,13 @@ _id_283A(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_0) || !isDefined(var_0.origin)) {
     return;
   }
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_4 = undefined;
 
@@ -324,16 +337,18 @@ remove_all_special_weaps() {
   var_0 = common_scripts\utility::_id_46B7("special_weapon", "targetname");
 
   foreach(var_2 in var_0) {
-    foreach(var_4 in var_2._id_A582)
-    var_4 delete();
+    foreach(var_4 in var_2._id_A582) {
+      var_4 delete();
+    }
 
     var_2.crate_empty delete();
     var_2._id_272F delete();
   }
 
   if(isDefined(level._id_90DB)) {
-    foreach(var_8 in level._id_90DB)
-    var_8 destroy();
+    foreach(var_8 in level._id_90DB) {
+      var_8 destroy();
+    }
   }
 }
 

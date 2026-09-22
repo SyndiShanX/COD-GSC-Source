@@ -6,8 +6,9 @@
 _id_52B1() {}
 
 _id_11BC(var_0) {
-  if(!_id_04E0::_id_5790() && !var_0 _id_04E0::_id_5790() && getdvarint("spv_hub_dueling_kswitch", 1) == 0)
+  if(!_id_04E0::_id_5790() && !var_0 _id_04E0::_id_5790() && getdvarint("spv_hub_dueling_kswitch", 1) == 0) {
     _id_778B(var_0);
+  }
 }
 
 _id_778B(var_0) {
@@ -16,9 +17,9 @@ _id_778B(var_0) {
   self endon("death");
   self endon("disconnect");
 
-  if(isDefined(self._id_34CD))
+  if(isDefined(self._id_34CD)) {
     self iprintln("You have already challenged someone to Box.");
-  else {
+  } else {
     if(isDefined(var_0._id_34CD)) {
       self iprintln(var_0.name + " has already challenged someone to Box.");
       return;
@@ -47,10 +48,11 @@ _id_778B(var_0) {
       var_0 waittill("luinotifyserver", var_4, var_5);
 
       if(var_4 == "enter_duel") {
-        if(var_5 == 1)
+        if(var_5 == 1) {
           var_6 = "accept_duel_challenge";
-        else
+        } else {
           var_6 = "reject_duel_challenge";
+        }
 
         break;
       }
@@ -102,13 +104,15 @@ _id_170F(var_0, var_1) {
   var_0 _meth_866C(&"player_interact_notification_center_end", 0);
 
   if(var_0._id_56A4) {
-    if(isDefined(var_0._id_155F))
+    if(isDefined(var_0._id_155F)) {
       var_0._id_155F _id_04E0::_id_1543((0, 0, 80), var_0);
+    }
   }
 
   if(var_1._id_56A4) {
-    if(isDefined(var_1._id_155F))
+    if(isDefined(var_1._id_155F)) {
       var_1._id_155F _id_04E0::_id_1543((0, 0, 80), var_1);
+    }
   }
 
   var_0 takeallweapons();
@@ -141,8 +145,9 @@ _id_170F(var_0, var_1) {
   var_0 thread _id_34CE();
   var_1 thread _id_34CE();
 
-  while(!var_0._id_268C || !var_1._id_268C)
+  while(!var_0._id_268C || !var_1._id_268C) {
     waitframe();
+  }
 
   var_0 allowfire(1);
   var_1 allowfire(1);
@@ -192,7 +197,7 @@ _id_6388(var_0) {
   self._id_34D0.y = self.origin[1];
   self._id_34D0._id_01D9 = self.origin[2];
   self._id_34D0 setwaypoint(1, 0, 0);
-  self._id_34D0 settargetent(self);
+  self._id_34D0 settargetEnt(self);
   self._id_34D0._id_35B2 = "icon";
   self._id_34D0._id_6E74 = level._id_A012;
   self._id_34D0._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(self._id_34D0);
@@ -202,10 +207,11 @@ _id_6388(var_0) {
     var_3 = common_scripts\utility::waittill_any_return("updateDuelHealthDisplay", "lostDuel", "forceSurrenderDuel");
 
     if(var_3 == "updateDuelHealthDisplay") {
-      if(self.health % 20 == 0) {} else if(self.health % 20 < 10)
+      if(self.health % 20 == 0) {} else if(self.health % 20 < 10) {
         self.health = self.health - self.health % 20;
-      else
+      } else {
         self.health = self.health + (10 - self.health % 10);
+      }
 
       switch (self.health) {
         case 100:
@@ -275,8 +281,9 @@ _id_92D2(var_0, var_1) {
   thread _id_04E0::_id_3010("youForfeit", &"HUB_DUEL_FORFEIT", undefined, -100, 1.75, 1.5);
   wait 1.5;
 
-  if(self._id_34D1 == 1)
+  if(self._id_34D1 == 1) {
     thread _id_237E(self._id_34D2, self, "forfeit");
+  }
 }
 
 _id_1F3E() {
@@ -298,8 +305,9 @@ _id_237E(var_0, var_1, var_2) {
   var_1 _meth_8656(undefined);
 
   if(isDefined(var_0)) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_0 hudoutlinedisableforclient(var_1);
+    }
 
     var_0 maps\mp\gametypes\_missions::_id_7752("ch_daily_4");
     var_0._id_34D2 = undefined;
@@ -317,8 +325,9 @@ _id_237E(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_1)) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_1 hudoutlinedisableforclient(var_0);
+    }
 
     var_1._id_34D2 = undefined;
     var_1._id_34CF destroy();
@@ -354,8 +363,9 @@ _id_7E2D(var_0) {
     self._id_579F = 1;
     self._id_8B93 = 0;
 
-    foreach(var_2 in level._id_0813)
-    var_2 enableplayeruse(self);
+    foreach(var_2 in level._id_0813) {
+      var_2 enableplayeruse(self);
+    }
   }
 }
 

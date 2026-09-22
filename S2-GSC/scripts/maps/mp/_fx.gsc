@@ -9,17 +9,19 @@ _id_8274() {
     return;
   }
 
-  if(isDefined(self.target))
-    var_0 = _getent(self.target).origin;
-  else
+  if(isDefined(self.target)) {
+    var_0 = _getEnt(self.target).origin;
+  } else {
     var_0 = "undefined";
+  }
 
   if(self.seerecently == "OneShotfx") {}
 
   if(self.seerecently == "loopfx") {}
 
-  if(self.seerecently == "loopsound")
+  if(self.seerecently == "loopsound") {
     return;
+  }
 }
 
 _id_4866(var_0) {
@@ -30,10 +32,11 @@ _id_4866(var_0) {
 _id_8F42(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", (0, 0, 0));
   var_3.origin = var_1;
-  var_3 playloopsound(var_0);
+  var_3 playLoopSound(var_0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 thread _id_8F43(var_2);
+  }
 }
 
 _id_8F43(var_0) {

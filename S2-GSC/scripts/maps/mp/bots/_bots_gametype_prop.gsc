@@ -27,16 +27,18 @@ bot_prop_think() {
     if(self.health <= 0) {
       continue;
     }
-    if(self botgetpersonality() != "run_and_gun")
+    if(self botgetpersonality() != "run_and_gun") {
       maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
+    }
 
     if(bot_is_on_prop_team()) {
       if(self botgetscriptgoaltype() != "tactical") {
         var_1 = array_randomly_reduce_to_size(_getallnodes(), 512);
         var_2 = self botnodepick(var_1, var_1.size * 0.15, "node_hide_anywhere");
 
-        if(!isDefined(var_2))
+        if(!isDefined(var_2)) {
           var_2 = self getnearestnode();
+        }
 
         var_3 = self botsetscriptgoalnode(var_2, "tactical");
 
@@ -60,8 +62,9 @@ bot_prop_think() {
 
         if(!isDefined(var_5)) {
           foreach(var_7 in level.players) {
-            if(!_isalliedsentient(self, var_7))
+            if(!_isalliedsentient(self, var_7)) {
               var_5 = var_7;
+            }
           }
         }
 

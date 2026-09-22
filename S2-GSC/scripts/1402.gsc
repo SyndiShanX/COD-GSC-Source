@@ -8,24 +8,29 @@ _id_52A4() {
 }
 
 _id_1F8A(var_0) {
-  if(!_id_0561::_id_1F7B())
+  if(!_id_0561::_id_1F7B()) {
     return 0;
+  }
 
-  if(!common_scripts\utility::_id_0668())
+  if(!common_scripts\utility::_id_0668()) {
     return 0;
+  }
 
-  if(!isDefined(self._id_4BA6) || !self._id_4BA6)
+  if(!isDefined(self._id_4BA6) || !self._id_4BA6) {
     return 1;
+  }
 
-  if(isDefined(self._id_A9C1) && _id_259B(var_0) == self._id_A9C1)
+  if(isDefined(self._id_A9C1) && _id_259B(var_0) == self._id_A9C1) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_472E(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":
@@ -54,8 +59,9 @@ _id_A249(var_0) {
   var_2 = 0;
   var_3 = common_scripts\utility::waittill_any_return("death", "weapon_consumable_timeout", "weapon_consumable_force_take");
 
-  if(var_3 == "weapon_consumable_force_take")
+  if(var_3 == "weapon_consumable_force_take") {
     var_2 = 1;
+  }
 
   _id_259D(var_2);
 }
@@ -63,8 +69,9 @@ _id_A249(var_0) {
 _id_259E(var_0, var_1) {
   var_2 = consumable_getappendstring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_A9A8();
+  }
 
   self setclientomnvar("ui_zm_" + var_2, gettime() + int(var_1 * 1000));
   thread maps\mp\gametypes\_hud_message::_id_9102("zm_consumable_" + var_2);
@@ -76,10 +83,11 @@ consumable_uisplash_kill(var_0, var_1) {
   self endon("death");
   var_2 = consumable_getappendstring(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::_id_A70D(var_1, self, "weapon_consumable_taken", self, "weapon_consumable_used");
-  else
+  } else {
     common_scripts\utility::_id_A70A("weapon_consumable_taken", "weapon_consumable_used");
+  }
 
   self setclientomnvar("ui_zm_" + var_2, 0);
 }
@@ -102,8 +110,9 @@ consumable_getappendstring(var_0) {
 }
 
 _id_259B(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return "";
+  }
 
   switch (var_0) {
     case "consumable_zm_weapon_bazooka":
@@ -124,8 +133,9 @@ _id_259C(var_0) {
     if(isDefined(self._id_A9C1) && self hasweapon(self._id_A9C1)) {
       _id_0586::_id_0790(self._id_A9C1);
 
-      if(self._id_A9C1 == "flamethrower_zm")
+      if(self._id_A9C1 == "flamethrower_zm") {
         self detach("npc_usa_flamethrower_backpack");
+      }
     }
 
     self notify("weapon_consumable_used");
@@ -138,8 +148,9 @@ _id_259C(var_0) {
   _id_0586::_id_078E(self._id_A9C1);
   thread _id_054E::playeruseconsumableweapon();
 
-  if(self._id_A9C1 == "flamethrower_zm")
+  if(self._id_A9C1 == "flamethrower_zm") {
     self attach("npc_usa_flamethrower_backpack");
+  }
 
   childthread _id_A9B6();
   childthread weapon_switch_listener(self._id_A9C1);
@@ -151,19 +162,21 @@ _id_259D(var_0) {
   }
   self._id_4BA6 = 0;
 
-  if(common_scripts\utility::_id_562E(var_0))
+  if(common_scripts\utility::_id_562E(var_0)) {
     self notify("weapon_consumable_taken");
+  }
 
   var_1 = 0;
   var_2 = "";
 
-  if(isDefined(self.inlaststand) && self.inlaststand || var_0)
+  if(isDefined(self.inlaststand) && self.inlaststand || var_0) {
     var_1 = 1;
+  }
 
   if(!var_1) {
-    if(isDefined(self._id_5B98) && self hasweapon(self._id_5B98))
+    if(isDefined(self._id_5B98) && self hasweapon(self._id_5B98)) {
       var_2 = self._id_5B98;
-    else {
+    } else {
       var_3 = self getweaponlistprimaries();
 
       foreach(var_5 in var_3) {
@@ -178,11 +191,13 @@ _id_259D(var_0) {
     self._id_5B98 = undefined;
   }
 
-  if(self hasweapon(self._id_A9C1))
+  if(self hasweapon(self._id_A9C1)) {
     _id_0586::_id_0790(self._id_A9C1);
+  }
 
-  if(self._id_A9C1 == "flamethrower_zm")
+  if(self._id_A9C1 == "flamethrower_zm") {
     self detach("npc_usa_flamethrower_backpack");
+  }
 
   self._id_A9C1 = undefined;
 }
@@ -235,8 +250,9 @@ _id_A9B6() {
     self waittill("reload");
     var_1 = self getweaponammostock(var_0);
 
-    if(var_1 == 0)
+    if(var_1 == 0) {
       self setweaponammostock(var_0, 1);
+    }
   }
 }
 

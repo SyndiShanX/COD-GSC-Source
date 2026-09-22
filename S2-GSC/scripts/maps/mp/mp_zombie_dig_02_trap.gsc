@@ -24,15 +24,17 @@ trap_altar_spikes_toggle(var_0) {
     var_1 _id_0546::_id_9CA3();
 
     foreach(var_4 in var_2) {
-      if(_id_0547::_id_5565(var_4._id_0165, "activate"))
+      if(_id_0547::_id_5565(var_4._id_0165, "activate")) {
         var_4 common_scripts\utility::_id_9D9F();
+      }
     }
   } else {
     var_1 _id_0546::_id_9CBD();
 
     foreach(var_4 in var_2) {
-      if(_id_0547::_id_5565(var_4._id_0165, "activate"))
+      if(_id_0547::_id_5565(var_4._id_0165, "activate")) {
         var_4 common_scripts\utility::_id_9DA3();
+      }
     }
   }
 }
@@ -49,17 +51,19 @@ trap_altar_spikes_glasses_listen() {
     }
   }
 
-  var_1 = _getent("sunglasses_at_night", "script_noteworthy");
+  var_1 = _getEnt("sunglasses_at_night", "script_noteworthy");
   var_2 = common_scripts\utility::_id_46B5("glasses_dest", "script_noteworthy");
   var_3 = common_scripts\utility::_id_46B5("glasses_glint_fx_loc", "script_noteworthy");
 
-  if(isDefined(var_1) && isDefined(var_2))
-    var_1 moveto(var_2.origin, 10, 0.25, 3);
+  if(isDefined(var_1) && isDefined(var_2)) {
+    var_1 moveTo(var_2.origin, 10, 0.25, 3);
+  }
 
   wait 10;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     playFX(common_scripts\utility::_id_44F5("trap_glint"), var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
+  }
 }
 
 trap_altar_spikes(var_0) {
@@ -99,9 +103,9 @@ trap_altar_spikes_damage_zombies(var_0) {
 
         if(isalive(var_3) && var_3._id_0BA4 != "traverse") {
           if(!isDefined(var_3.wasspikedlast) || isDefined(var_3.wasspikedlast) && var_5 > var_3.wasspikedlast + 1000) {
-            if(var_3 _id_0547::_id_580A())
+            if(var_3 _id_0547::_id_580A()) {
               var_3 dodamage(var_3.health * 0.1, self.origin, level.trap_altar_spikes, level.trap_altar_spikes, "MOD_EXPLOSIVE", "trap_zm_mp");
-            else {
+            } else {
               var_3 dodamage(var_3.health + 666, self.origin, level.trap_altar_spikes, level.trap_altar_spikes, "MOD_EXPLOSIVE", "trap_zm_mp");
               level.dig_trap_kill_count++;
 
@@ -113,8 +117,9 @@ trap_altar_spikes_damage_zombies(var_0) {
               }
             }
 
-            if(isalive(var_3))
+            if(isalive(var_3)) {
               var_3.wasspikedlast = gettime();
+            }
           }
 
           waitframe();
@@ -143,14 +148,16 @@ trap_altar_spikes_damage_players(var_0) {
         waitframe();
         var_5 = gettime();
 
-        if(!isDefined(var_3.wasspikedlast))
+        if(!isDefined(var_3.wasspikedlast)) {
           var_3.wasspikedlast = gettime();
+        }
 
         if(isalive(var_3) && var_5 > var_3.wasspikedlast + 500 && !_id_0547::_id_577E(var_3)) {
           var_3 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
 
-          if(var_3.health - 5 <= 0)
+          if(var_3.health - 5 <= 0) {
             level.dig_trap_kill_count++;
+          }
 
           var_3.wasspikedlast = gettime();
           waitframe();

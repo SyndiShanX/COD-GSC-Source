@@ -5,7 +5,7 @@
 
 _id_536B() {
   var_0 = spawnStruct();
-  var_0._id_10BD = _getent("assemble_ww_trig", "targetname");
+  var_0._id_10BD = _getEnt("assemble_ww_trig", "targetname");
   var_0._id_AA68 = _getscriptablearray(var_0._id_10BD.target, "targetname");
 
   foreach(var_2 in var_0._id_AA68) {
@@ -51,12 +51,13 @@ _id_536B() {
     }
   }
 
-  var_0._id_10BE linkto(var_0._id_10C0);
-  var_0._id_10BF linkto(var_0._id_10C0);
+  var_0._id_10BE linkTo(var_0._id_10C0);
+  var_0._id_10BF linkTo(var_0._id_10C0);
   var_0._id_6FDB = getEntArray(var_0._id_10C0.target, "targetname");
 
-  foreach(var_11 in var_0._id_6FDB)
-  var_11 common_scripts\utility::_id_9D9F();
+  foreach(var_11 in var_0._id_6FDB) {
+    var_11 common_scripts\utility::_id_9D9F();
+  }
 
   level._id_AA67 = var_0;
   thread _id_AA6C();
@@ -66,8 +67,9 @@ _id_536B() {
 _id_536D() {
   level._id_3578 = 0;
 
-  if(!isDefined(level._id_AACA))
+  if(!isDefined(level._id_AACA)) {
     level._id_AACA = [];
+  }
 
   var_0 = common_scripts\utility::_id_46B5("ww_upgrade_pickup_central", "targetname");
 
@@ -123,14 +125,15 @@ _id_AA6B() {
   thread _id_74C8(var_1, "zmb_tesla_gunrack_beam", self._id_48F2, self._id_48F2, "beam_start", "beam_end", "charger_l", "charger_r");
   wait(var_2);
 
-  foreach(var_4 in self._id_6FDB)
-  var_4 common_scripts\utility::_id_9DA3();
+  foreach(var_4 in self._id_6FDB) {
+    var_4 common_scripts\utility::_id_9DA3();
+  }
 
   thread _id_AA6D(self._id_10C0, var_0);
 }
 
 _id_AA70() {
-  self._id_10BD usetriggerrequirelookat();
+  self._id_10BD useTriggerRequireLookAt();
   self._id_10BD thread _id_AA6A();
   var_0 = undefined;
   var_1 = "flag_ww_part_01_placed";
@@ -153,7 +156,7 @@ _id_AA70() {
       break;
     } else if(common_scripts\utility::_id_3C77(var_4) && common_scripts\utility::_id_3C77(var_5)) {
       if(!common_scripts\utility::_id_3C77(var_1) || !common_scripts\utility::_id_3C77(var_2)) {
-        self._id_10C0 linkto(self._id_48F2, "clamp");
+        self._id_10C0 linkTo(self._id_48F2, "clamp");
         self._id_10BF show();
         self._id_10BE show();
         common_scripts\utility::flag_set(var_1);
@@ -170,8 +173,9 @@ _id_AA70() {
       if(!isDefined(var_0._id_3079) && isPlayer(var_0)) {
         var_6 = var_0 _id_0367::_id_8E3D("workbenchpart2", undefined, 1);
 
-        if(isDefined(var_6))
+        if(isDefined(var_6)) {
           var_0._id_3079 = 1;
+        }
       }
 
       continue;
@@ -179,8 +183,9 @@ _id_AA70() {
       if(!isDefined(var_0._id_3078) && isPlayer(var_0)) {
         var_6 = var_0 _id_0367::_id_8E3D("workbenchpart", undefined, 1);
 
-        if(isDefined(var_6))
+        if(isDefined(var_6)) {
           var_0._id_3078 = 1;
+        }
       }
 
       continue;
@@ -191,7 +196,7 @@ _id_AA70() {
 }
 
 _id_AA6A() {
-  self sethintstring(&"ZOMBIES_BUILDABLE_NO_PARTS");
+  self setHintString(&"ZOMBIES_BUILDABLE_NO_PARTS");
   var_0 = "flag_ww_part_01_picked_up";
   var_1 = "flag_ww_part_02_picked_up";
   var_2 = "flag_ww_part_01_placed";
@@ -199,23 +204,23 @@ _id_AA6A() {
   var_4 = _id_0557::_id_7838("4 cart", "head to com");
   common_scripts\utility::_id_3C9F(var_0);
   _id_7C05();
-  self sethintstring(&"ZOMBIE_NEST_PLACE_WW_PART");
+  self setHintString(&"ZOMBIE_NEST_PLACE_WW_PART");
   var_5 = common_scripts\utility::_id_3CA4(var_2, var_1);
 
   if(var_5 == var_2) {
-    self sethintstring(&"ZOMBIES_BUILDABLE_NO_PARTS");
+    self setHintString(&"ZOMBIES_BUILDABLE_NO_PARTS");
     common_scripts\utility::_id_3C9F(var_1);
-    self sethintstring(&"ZOMBIE_NEST_PLACE_WW_PART");
+    self setHintString(&"ZOMBIE_NEST_PLACE_WW_PART");
   }
 
   var_5 = common_scripts\utility::_id_3CA4(var_3, var_4);
 
   if(var_5 == var_3) {
-    self sethintstring(&"ZOMBIE_NEST_WAITING_FOR_CART");
+    self setHintString(&"ZOMBIE_NEST_WAITING_FOR_CART");
     common_scripts\utility::_id_3C9F(var_4);
   }
 
-  self sethintstring(&"ZOMBIE_NEST_ASSEMBLE_WW");
+  self setHintString(&"ZOMBIE_NEST_ASSEMBLE_WW");
 }
 
 _id_7C05() {
@@ -230,8 +235,9 @@ _id_AA6D(var_0, var_1) {
     var_3[var_4]._id_AAC5 = var_0;
     level thread _id_AA6E(var_3[var_4], var_2);
 
-    if(level._id_A980 <= 6)
+    if(level._id_A980 <= 6) {
       level._id_400E[level._id_400E.size] = ["raven_set 4 1", "all"];
+    }
   }
 }
 
@@ -256,8 +262,9 @@ _id_AA6E(var_0, var_1) {
 
     if(var_6.size > 0) {
       foreach(var_10 in var_6) {
-        if(issubstr(var_10, "teslagun_zm"))
+        if(issubstr(var_10, "teslagun_zm")) {
           var_8 = 1;
+        }
       }
     }
 
@@ -276,27 +283,31 @@ _id_AA6E(var_0, var_1) {
       }
     } else if(var_8) {
       foreach(var_10 in var_6) {
-        if(issubstr(var_10, "teslagun_zm"))
+        if(issubstr(var_10, "teslagun_zm")) {
           var_3 _id_0586::_id_0790(var_10);
+        }
       }
     } else if(!var_3 _id_0586::_id_05DF(var_1)) {
       var_14 = var_3 _id_0586::_id_0637();
 
-      if(_weapontype(var_14) != "melee")
+      if(_weapontype(var_14) != "melee") {
         var_3 _id_0586::_id_0790(var_14);
+      }
     }
 
     level._id_400E[level._id_400E.size] = ["survivalist_set 3 -1", var_3];
     level._id_400E[level._id_400E.size] = ["survivalist_set 4 -1", var_3];
     var_3 _id_0586::_id_078C(var_1);
 
-    if(isDefined(var_3._id_A2AF) && isDefined(var_3._id_A2AF[var_1]))
+    if(isDefined(var_3._id_A2AF) && isDefined(var_3._id_A2AF[var_1])) {
       var_3 setweaponammostock(var_1, var_3._id_A2AF[var_1]);
+    }
 
-    if(isDefined(var_3._id_A2B0) && isDefined(var_3._id_A2B0[var_1]))
+    if(isDefined(var_3._id_A2B0) && isDefined(var_3._id_A2B0[var_1])) {
       var_3 setweaponammoclip(var_1, var_3._id_A2B0[var_1]);
-    else
+    } else {
       var_3 setweaponammoclip(var_1, _weaponclipsize(var_1));
+    }
 
     var_3 _id_0586::_id_078E(var_1);
     var_3 thread _id_AA69(var_1);
@@ -311,7 +322,7 @@ _id_AA6C() {
 
   if(isDefined(level._id_AA67._id_10C0)) {
     level._id_AA67._id_10C0 show();
-    level._id_AA67._id_10C0 linkto(level._id_AA67._id_48F2, "clamp");
+    level._id_AA67._id_10C0 linkTo(level._id_AA67._id_48F2, "clamp");
   }
 
   level._id_AA67._id_48F2 scriptmodelplayanimdeltamotion(_debuggetanimname(var_0));
@@ -330,10 +341,11 @@ _id_AA6F(var_0) {
   var_2 = _id_0552::_id_7BE1(var_0, self);
 
   for(;;) {
-    if(var_1)
+    if(var_1) {
       var_1 = 0;
-    else
+    } else {
       var_0 common_scripts\utility::_id_A70A("weapon_change", "new_equipment");
+    }
 
     var_3 = 0;
     var_4 = "";
@@ -348,18 +360,20 @@ _id_AA6F(var_0) {
         break;
       }
 
-      if(issubstr(var_8, "teslagun_zm"))
+      if(issubstr(var_8, "teslagun_zm")) {
         var_5 = 1;
+      }
     }
 
     var_10 = var_0 getcurrentprimaryweapon();
 
-    if(0)
-      self setcursorhint("HINT_NOICON");
+    if(0) {
+      self setCursorHint("HINT_NOICON");
+    }
 
     if(_id_0547::_id_57AF(var_10) || _id_0547::_id_5862(var_10) || _id_0547::iszombieconsumableweapon(var_10)) {
       if(0) {
-        self sethintstring("");
+        self setHintString("");
         self setsecondaryhintstring("");
         self._id_3006 = undefined;
       }
@@ -377,14 +391,14 @@ _id_AA6F(var_0) {
         self._id_3006 = self._id_2925;
 
         if(0) {
-          self sethintstring(_id_0548::_id_4412(self));
+          self setHintString(_id_0548::_id_4412(self));
           self setsecondaryhintstring(_id_0548::_id_4411(self, 0));
         }
 
         if(1) {}
       } else {
         if(0) {
-          self sethintstring("");
+          self setHintString("");
           self setsecondaryhintstring("");
           self._id_3006 = undefined;
         }
@@ -410,8 +424,9 @@ _id_AA6F(var_0) {
 
     self._id_3006 = 0;
 
-    if(0)
-      self sethintstring(&"ZOMBIE_NEST_PICKUP_WW");
+    if(0) {
+      self setHintString(&"ZOMBIE_NEST_PICKUP_WW");
+    }
 
     if(1) {
       var_2._id_4028 = _id_0552::_id_44FF("ww_pickup");
@@ -478,27 +493,32 @@ _id_AA75() {
     }
   }
 
-  if(isDefined(self._id_48F2) && isDefined(self._id_AAC8))
-    self._id_AAC8 linkto(self._id_48F2, "clamp");
+  if(isDefined(self._id_48F2) && isDefined(self._id_AAC8)) {
+    self._id_AAC8 linkTo(self._id_48F2, "clamp");
+  }
 
-  if(isDefined(self._id_48F2) && isDefined(self._id_AAC7))
-    self._id_AAC7 linkto(self._id_48F2, "clamp");
+  if(isDefined(self._id_48F2) && isDefined(self._id_AAC7)) {
+    self._id_AAC7 linkTo(self._id_48F2, "clamp");
+  }
 
-  if(isDefined(self._id_48F2) && isDefined(self._id_AAC6))
-    self._id_AAC6 linkto(self._id_48F2, "clamp");
+  if(isDefined(self._id_48F2) && isDefined(self._id_AAC6)) {
+    self._id_AAC6 linkTo(self._id_48F2, "clamp");
+  }
 }
 
 _id_AA73(var_0) {
   level notify(self._id_A9E0 + "_assembled");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self._id_2916 = "building";
   self._id_78A1 = "working";
 
-  if(!level._id_3578)
+  if(!level._id_3578) {
     thread _id_AA74();
+  }
 
   if(var_0) {
     self._id_AAC8 show();
@@ -508,8 +528,9 @@ _id_AA73(var_0) {
 
   var_1 = self._id_3291 _meth_866B("doors");
 
-  if(var_1 != "opened_idle")
+  if(var_1 != "opened_idle") {
     self._id_3291 _id_AA7E("opened_idle");
+  }
 
   var_2 = % zmb_workbench_01_gunrack_up_01;
   var_3 = % zmb_workbench_01_gunrack_up_idle_01;
@@ -551,8 +572,9 @@ _id_AA74() {
 }
 
 _id_AA7E(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "closed_idle";
+  }
 
   var_1 = 0;
   var_2 = 0.1;
@@ -597,8 +619,9 @@ _id_AA7A(var_0) {
   var_0._id_78A1 = "opening";
   var_0._id_48F2 show();
 
-  if(var_0._id_2916 == "available")
+  if(var_0._id_2916 == "available") {
     var_0._id_AAC5 show();
+  }
 
   var_0._id_48F2 scriptmodelclearanim();
   var_0._id_48F2 scriptmodelplayanimdeltamotionfrompos(_debuggetanimname(var_1), var_0._id_48F2._id_9255, var_0._id_48F2._id_9189);
@@ -641,14 +664,17 @@ _id_AA77() {
       break;
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self._id_AAC7 setModel(var_0);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_AAC6 setModel(var_1);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self._id_AAC8 setModel(var_2);
+  }
 }
 
 _id_AA79(var_0) {
@@ -675,16 +701,18 @@ _id_AA79(var_0) {
       var_0._id_3291 _id_AA7E("close");
       var_0._id_48F2 hide();
 
-      if(var_0._id_2916 == "available")
+      if(var_0._id_2916 == "available") {
         var_0._id_AAC5 hide();
+      }
 
       var_0._id_78A1 = "closed";
     } else if(distancesquared(self.origin, var_0._id_48F2._id_9255) < var_2 && var_0._id_78A1 == "closed") {
       var_0._id_78A1 = "opening";
       var_0._id_48F2 show();
 
-      if(var_0._id_2916 == "available")
+      if(var_0._id_2916 == "available") {
         var_0._id_AAC5 show();
+      }
 
       var_0._id_48F2 scriptmodelclearanim();
       var_0._id_48F2 scriptmodelplayanimdeltamotionfrompos(_debuggetanimname(var_3), var_0._id_48F2._id_9255, var_0._id_48F2._id_9189);
@@ -722,14 +750,15 @@ _id_AA7D(var_0, var_1) {
 _id_AA76() {
   var_0 = "teslagun";
 
-  if(self._id_A9E0 == "teslagun_zm_blood")
+  if(self._id_A9E0 == "teslagun_zm_blood") {
     var_0 = "teslagun_blood";
-  else if(self._id_A9E0 == "teslagun_zm_storm")
+  } else if(self._id_A9E0 == "teslagun_zm_storm") {
     var_0 = "teslagun_storm";
-  else if(self._id_A9E0 == "teslagun_zm_moon")
+  } else if(self._id_A9E0 == "teslagun_zm_moon") {
     var_0 = "teslagun_moon";
-  else if(self._id_A9E0 == "teslagun_zm_death")
+  } else if(self._id_A9E0 == "teslagun_zm_death") {
     var_0 = "teslagun_death";
+  }
 
   _id_0559::_id_7BE3(self._id_9D65, var_0);
 
@@ -746,39 +775,45 @@ _id_AA76() {
 
     if(var_5.size > 0) {
       foreach(var_9 in var_5) {
-        if(self._id_A9E0 == var_9)
+        if(self._id_A9E0 == var_9) {
           var_6 = 1;
+        }
 
-        if(issubstr(var_9, "teslagun_zm"))
+        if(issubstr(var_9, "teslagun_zm")) {
           var_7 = 1;
+        }
       }
     }
 
-    if(var_6)
+    if(var_6) {
       continue;
-    else if(var_7) {
+    } else if(var_7) {
       foreach(var_9 in var_5) {
-        if(issubstr(var_9, "teslagun_zm"))
+        if(issubstr(var_9, "teslagun_zm")) {
           var_2 _id_0586::_id_0790(var_9);
+        }
       }
     } else if(!var_2 _id_0586::_id_05DF(self._id_A9E0)) {
       var_13 = var_2 _id_0586::_id_0637();
 
-      if(_weapontype(var_13) != "melee")
+      if(_weapontype(var_13) != "melee") {
         var_2 _id_0586::_id_0790(var_13);
+      }
     }
 
     level._id_400E[level._id_400E.size] = ["survivalist_set 3 -1", var_2];
     level._id_400E[level._id_400E.size] = ["survivalist_set 4 -1", var_2];
     var_2 _id_0586::_id_078C(self._id_A9E0);
 
-    if(isDefined(var_2._id_A2AF) && isDefined(var_2._id_A2AF[self._id_A9E0]))
+    if(isDefined(var_2._id_A2AF) && isDefined(var_2._id_A2AF[self._id_A9E0])) {
       var_2 setweaponammostock(self._id_A9E0, var_2._id_A2AF[self._id_A9E0]);
+    }
 
-    if(isDefined(var_2._id_A2B0) && isDefined(var_2._id_A2B0[self._id_A9E0]))
+    if(isDefined(var_2._id_A2B0) && isDefined(var_2._id_A2B0[self._id_A9E0])) {
       var_2 setweaponammoclip(self._id_A9E0, var_2._id_A2B0[self._id_A9E0]);
-    else
+    } else {
       var_2 setweaponammoclip(self._id_A9E0, _weaponclipsize(self._id_A9E0));
+    }
 
     var_2 _id_0586::_id_078E(self._id_A9E0);
     _id_AA7C(self._id_A9E0, var_2);
@@ -789,16 +824,17 @@ _id_AA76() {
 }
 
 _id_AA78(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   for(;;) {
     var_3 = var_0 common_scripts\utility::waittill_any_return("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
 
     if(var_3 == "weapon_change") {
-      if(_id_0547::_id_577E(var_0))
+      if(_id_0547::_id_577E(var_0)) {
         continue;
-      else if(!_id_0547::_id_73F9(var_0, var_1)) {
+      } else if(!_id_0547::_id_73F9(var_0, var_1)) {
         if(var_2) {
           _id_AA7B(var_1);
           level._id_AACA[var_1] thread _id_AA76();

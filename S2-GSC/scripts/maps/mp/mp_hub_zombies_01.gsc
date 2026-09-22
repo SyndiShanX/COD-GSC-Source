@@ -45,8 +45,9 @@ initzmeventassets() {
     var_0 = getEntArray("stp_event_assets", "targetname");
 
     if(isDefined(var_0) && var_0.size > 0) {
-      foreach(var_2 in var_0)
-      var_2 delete();
+      foreach(var_2 in var_0) {
+        var_2 delete();
+      }
     }
   }
 
@@ -54,14 +55,15 @@ initzmeventassets() {
     var_4 = getEntArray("wmc_event_assets", "targetname");
 
     if(isDefined(var_4) && var_4.size > 0) {
-      foreach(var_2 in var_4)
-      var_2 delete();
+      foreach(var_2 in var_4) {
+        var_2 delete();
+      }
     }
   }
 
   if(getdvarint("spv_hub_war_machine_event_enabled", 0) == 1) {
-    var_7 = _getent("zmb_hub_cannon", "script_noteworthy");
-    _playfxontag(level._effect["zmb_hub_canon_env_fx"], var_7, "tag_origin");
+    var_7 = _getEnt("zmb_hub_cannon", "script_noteworthy");
+    _playFXOnTag(level._effect["zmb_hub_canon_env_fx"], var_7, "tag_origin");
   }
 }
 

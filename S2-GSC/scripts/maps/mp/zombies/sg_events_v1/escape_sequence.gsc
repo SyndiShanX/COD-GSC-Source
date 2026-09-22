@@ -24,8 +24,9 @@ initialize_markers() {
 }
 
 hide_markers() {
-  foreach(var_1 in level.zmf_shattered_hardpoint_markers)
-  var_1 hide();
+  foreach(var_1 in level.zmf_shattered_hardpoint_markers) {
+    var_1 hide();
+  }
 }
 
 show_markers() {
@@ -51,11 +52,13 @@ run_escape(var_0) {
   var_4 setModel("usa_ctf_flag_anim");
   var_4 scriptmodelplayanim("ctf_flag_flap");
 
-  if(isDefined(var_1.angles))
+  if(isDefined(var_1.angles)) {
     var_3.angles = var_1.angles;
+  }
 
-  if(isDefined(var_2.angles))
+  if(isDefined(var_2.angles)) {
     var_4.angles = var_4.angles;
+  }
 
   var_3.capture_health = 100;
   var_3.health = 100;
@@ -104,8 +107,9 @@ capture_escape_point(var_0, var_1) {
   _id_0378::_id_8D74("dlc3_stop_escape_music", 0);
   var_7 = 0;
 
-  foreach(var_9 in level.players)
-  var_9._id_480F = 1;
+  foreach(var_9 in level.players) {
+    var_9._id_480F = 1;
+  }
 
   foreach(var_9 in level.players) {
     if(isalive(var_9) && _distance2d(var_9.origin, var_2) < var_3) {
@@ -114,11 +118,13 @@ capture_escape_point(var_0, var_1) {
     }
   }
 
-  if(var_7 > 0)
+  if(var_7 > 0) {
     maps\mp\zombies\shotgun\_zombies_shotgun_gamemode::set_game_won();
+  }
 
-  if(var_7 >= level.players.size)
+  if(var_7 >= level.players.size) {
     maps\mp\zombies\shotgun\_zombies_shotgun_exp_events::group_escape_bonus();
+  }
 
   wait 3.5;
   return 1;

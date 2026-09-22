@@ -30,8 +30,9 @@ init_dlc1_secrets_mp_zombie_island() {
 assassin_blood_0_type_2() {
   level endon("assassin_blood_0_type_2_failed");
 
-  while(!isDefined(level.artillery_power_source_model))
+  while(!isDefined(level.artillery_power_source_model)) {
     waitframe();
+  }
 
   return 1;
 }
@@ -39,11 +40,13 @@ assassin_blood_0_type_2() {
 assassin_blood_1_type_2() {
   level endon("artillery_miss");
 
-  while(!isDefined(level.artillery_ee_ships))
+  while(!isDefined(level.artillery_ee_ships)) {
     wait 10;
+  }
 
-  while(level.artillery_ee_ships.size)
+  while(level.artillery_ee_ships.size) {
     level waittill("ship_sank");
+  }
 
   return 1;
 }
@@ -51,11 +54,13 @@ assassin_blood_1_type_2() {
 assassin_blood_2_type_2() {
   var_0 = 10;
 
-  if(!isDefined(level.assassin_blood_2_type_2))
+  if(!isDefined(level.assassin_blood_2_type_2)) {
     level.assassin_blood_2_type_2 = 0;
+  }
 
-  while(level.assassin_blood_2_type_2 < var_0)
+  while(level.assassin_blood_2_type_2 < var_0) {
     waitframe();
+  }
 
   return 1;
 }
@@ -146,11 +151,13 @@ mountain_bat_0_type_2() {
 mountain_bat_1_type_2() {
   level endon("fireman_defeated");
 
-  if(!isDefined(level.mountain_bat_1_type_2))
+  if(!isDefined(level.mountain_bat_1_type_2)) {
     level.mountain_bat_1_type_2 = 0;
+  }
 
-  while(level.mountain_bat_1_type_2 < 100)
+  while(level.mountain_bat_1_type_2 < 100) {
     wait 0.5;
+  }
 
   return 1;
 }
@@ -158,11 +165,13 @@ mountain_bat_1_type_2() {
 mountain_bat_2_type_2() {
   level endon("fireman_defeated");
 
-  if(!isDefined(level.mountain_bat_2_type_2))
+  if(!isDefined(level.mountain_bat_2_type_2)) {
     level.mountain_bat_2_type_2 = 0;
+  }
 
-  while(level.mountain_bat_2_type_2 < 10)
+  while(level.mountain_bat_2_type_2 < 10) {
     wait 0.5;
+  }
 
   return 1;
 }
@@ -238,8 +247,9 @@ hunter_origin_2_type_2() {
   common_scripts\utility::_id_3C9F("final boss wrapped up");
 
   foreach(var_1 in level.players) {
-    if(isDefined(var_1._id_62D6) && var_1._id_62D6 >= 15000)
+    if(isDefined(var_1._id_62D6) && var_1._id_62D6 >= 15000) {
       return 1;
+    }
   }
 
   return 0;
@@ -271,11 +281,13 @@ survivalist_origin_0_type_2() {
 }
 
 survivalist_origin_1_type_2() {
-  if(!isDefined(level.survivalist_origin_1_type_2))
+  if(!isDefined(level.survivalist_origin_1_type_2)) {
     level.survivalist_origin_1_type_2 = 0;
+  }
 
-  while(level.survivalist_origin_1_type_2 < 3)
+  while(level.survivalist_origin_1_type_2 < 3) {
     wait 0.5;
+  }
 
   return 1;
 }
@@ -290,31 +302,37 @@ survivalist_origin_2_type_2() {
 fail_on_player_joined(var_0, var_1, var_2) {
   var_3 = undefined;
 
-  while(!isDefined(var_3) || _id_0547::_id_5565(var_3, var_0))
+  while(!isDefined(var_3) || _id_0547::_id_5565(var_3, var_0)) {
     level waittill("connected", var_3);
+  }
 
   level notify(var_1 + var_2);
 }
 
 secret_challenges_get_zombie_killed_feedback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(common_scripts\utility::_id_562E(self.isminecartbomber) && var_3 != "MOD_SUICIDE") {
-    if(valid_mine_cart_bomber_kill(var_6))
+    if(valid_mine_cart_bomber_kill(var_6)) {
       level.assassin_blood_2_type_2++;
-    else
+    } else {
       level.assassin_blood_2_type_2 = 0;
+    }
   }
 
-  if(common_scripts\utility::_id_562E(level.zmb_lockdown_event_active) && common_scripts\utility::_id_562E(level.maxed_zombies_sprint) && _id_0547::_id_5565(var_4, "trap_zm_mp") && isDefined(var_0) && _id_0547::_id_5565(var_0._id_0165, "propeller_damage"))
+  if(common_scripts\utility::_id_562E(level.zmb_lockdown_event_active) && common_scripts\utility::_id_562E(level.maxed_zombies_sprint) && _id_0547::_id_5565(var_4, "trap_zm_mp") && isDefined(var_0) && _id_0547::_id_5565(var_0._id_0165, "propeller_damage")) {
     level.mountain_bat_1_type_2++;
+  }
 
-  if(_id_0547::_id_5565(var_4, "trap_zm_mp") && _id_0547::_id_5565(self._id_0A4B, "zombie_assassin"))
+  if(_id_0547::_id_5565(var_4, "trap_zm_mp") && _id_0547::_id_5565(self._id_0A4B, "zombie_assassin")) {
     level.survivalist_origin_1_type_2++;
+  }
 
-  if(valid_fire_pit_headshot(var_1, var_6, var_3))
+  if(valid_fire_pit_headshot(var_1, var_6, var_3)) {
     level.mountain_bat_2_type_2++;
+  }
 
-  if(level._id_A980 == 0 && !_id_0586::_id_AB31(var_6))
+  if(level._id_A980 == 0 && !_id_0586::_id_AB31(var_6)) {
     level notify("survivalist_bat_0_type_2_failed");
+  }
 
   challenge_validate_weapon_used(var_4, var_1);
 }
@@ -340,13 +358,15 @@ watch_for_player_downs(var_0, var_1, var_2, var_3) {
   for(;;) {
     var_4 = self;
 
-    if(var_1)
+    if(var_1) {
       var_4 common_scripts\utility::_id_A70A("enter_last_stand", "give_armor");
-    else
+    } else {
       var_4 common_scripts\utility::_id_A70A("enter_last_stand");
+    }
 
-    if(!isDefined(var_2) || [[var_2]]())
+    if(!isDefined(var_2) || [[var_2]]()) {
       level notify(var_0);
+    }
   }
 }
 
@@ -359,30 +379,37 @@ singleplayer() {
 }
 
 valid_fire_pit_headshot(var_0, var_1, var_2) {
-  if(!common_scripts\utility::_id_562E(level.zmb_lockdown_event_active))
+  if(!common_scripts\utility::_id_562E(level.zmb_lockdown_event_active)) {
     return 0;
+  }
 
-  if(!common_scripts\utility::_id_562E(level.maxed_zombies_sprint))
+  if(!common_scripts\utility::_id_562E(level.maxed_zombies_sprint)) {
     return 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!common_scripts\utility::_id_562E(var_0.participatinginevent))
+  if(!common_scripts\utility::_id_562E(var_0.participatinginevent)) {
     return 0;
+  }
 
-  if(!_id_0586::_id_AB31(var_1))
+  if(!_id_0586::_id_AB31(var_1)) {
     return 0;
+  }
 
-  if(!_id_0547::_id_5565(var_2, "MOD_RIFLE_BULLET"))
+  if(!_id_0547::_id_5565(var_2, "MOD_RIFLE_BULLET")) {
     return 0;
+  }
 
   return 1;
 }
 
 secret_challenges_get_player_damage_response(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(var_1) && common_scripts\utility::_id_562E(var_1.is_anointed))
+  if(isDefined(var_1) && common_scripts\utility::_id_562E(var_1.is_anointed)) {
     level notify("mountain_origin_0_type_2_failed");
+  }
 }
 
 secret_challenges_get_zombie_damage_response(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
@@ -396,10 +423,11 @@ secret_challenges_get_zombie_damage_response(var_0, var_1, var_2, var_3, var_4, 
 
   level notify("zombie_took_damage_from_" + var_5);
 
-  if(_id_0547::_id_5565(var_4, "MOD_MELEE"))
+  if(_id_0547::_id_5565(var_4, "MOD_MELEE")) {
     level notify("zombie_took_melee_damage_from_" + var_5);
-  else if(isDefined(var_1) && !_id_0547::_id_5565(level.hc_pest, var_0))
+  } else if(isDefined(var_1) && !_id_0547::_id_5565(level.hc_pest, var_0)) {
     level notify("zombie_took_projectile_damage_from_" + var_5);
+  }
 }
 
 challenge_validate_weapon_used(var_0, var_1, var_2) {
@@ -413,8 +441,9 @@ challenge_validate_weapon_used(var_0, var_1, var_2) {
 
 skip_equipment_check_on_wave_break(var_0) {
   foreach(var_2 in var_0.valid_weapons) {
-    if(_id_0547::_id_585C(maps\mp\_utility::_id_4431(var_2)) || _id_0547::_id_5565(var_2, "trap_zm_mp"))
+    if(_id_0547::_id_585C(maps\mp\_utility::_id_4431(var_2)) || _id_0547::_id_5565(var_2, "trap_zm_mp")) {
       return 1;
+    }
   }
 
   return 0;
@@ -423,23 +452,26 @@ skip_equipment_check_on_wave_break(var_0) {
 watch_player_spending(var_0, var_1, var_2) {
   self.gamemoneyspent = 0;
 
-  if(!isDefined(self.challengebudgets))
+  if(!isDefined(self.challengebudgets)) {
     self.challengebudgets = [];
+  }
 
   self.challengebudgets[var_0] = spawnStruct();
   self.challengebudgets[var_0].budget = var_1;
   self.challengebudgets[var_0].challengeid = var_0;
   self.challengebudgets[var_0].name = var_2;
 
-  while(!isDefined(self.gamemoneyspent) || self.gamemoneyspent <= self.challengebudgets[var_0].budget)
+  while(!isDefined(self.gamemoneyspent) || self.gamemoneyspent <= self.challengebudgets[var_0].budget) {
     self waittill("money_update");
+  }
 
   level notify(var_0);
 }
 
 wait_for_points_required(var_0, var_1, var_2) {
-  while(!isDefined(self._id_62D6) || self._id_62D6 < var_0)
+  while(!isDefined(self._id_62D6) || self._id_62D6 < var_0) {
     self waittill("money_update");
+  }
 
   level notify(var_1);
 }
@@ -463,8 +495,9 @@ challenges_notify_weapon_usage() {
 }
 
 solo_challenge_safety() {
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     waitframe();
+  }
 
   for(;;) {
     wait 1;
@@ -472,8 +505,9 @@ solo_challenge_safety() {
     if(level.players.size == 0) {
       continue;
     }
-    if(level.players.size > 1)
+    if(level.players.size > 1) {
       level notify("zmb_solo_hc_challenges_invalid");
+    }
   }
 }
 
@@ -484,8 +518,9 @@ boss_fight_active() {
 wait_for_consecutive_waves_with_weapons(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = self;
 
-  if(!isDefined(var_7.consecutive_wave_tracking_array))
+  if(!isDefined(var_7.consecutive_wave_tracking_array)) {
     var_7.consecutive_wave_tracking_array = [];
+  }
 
   level endon(var_1);
   var_8 = register_zombie_killed_response(var_2, ::clear_player_progress, var_1, var_3);
@@ -512,8 +547,9 @@ wait_for_consecutive_waves_with_weapons(var_0, var_1, var_2, var_3, var_4, var_5
 wait_for_consecutive_waves_in_event(var_0, var_1, var_2, var_3) {
   var_4 = self;
 
-  if(!isDefined(var_4.event_attendance_array))
+  if(!isDefined(var_4.event_attendance_array)) {
     var_4.event_attendance_array = [];
+  }
 
   var_5 = spawnStruct();
   var_5._id_005C = 0;
@@ -529,8 +565,9 @@ wait_for_consecutive_waves_in_event(var_0, var_1, var_2, var_3) {
 
     if(!var_4[[var_4.event_attendance_array[var_1].player_validation_func]]()) {
       foreach(var_4 in level.players) {
-        if(isDefined(var_4.event_attendance_array) && isDefined(var_4.event_attendance_array[var_1]))
+        if(isDefined(var_4.event_attendance_array) && isDefined(var_4.event_attendance_array[var_1])) {
           var_4.event_attendance_array[var_1]._id_005C = 0;
+        }
       }
 
       continue;
@@ -545,30 +582,35 @@ wait_for_consecutive_waves_in_event(var_0, var_1, var_2, var_3) {
 
 clear_player_progress(var_0) {
   foreach(var_2 in level.players) {
-    if(isDefined(var_2.consecutive_wave_tracking_array[var_0]))
+    if(isDefined(var_2.consecutive_wave_tracking_array[var_0])) {
       var_2.consecutive_wave_tracking_array[var_0]._id_005C = 0;
+    }
   }
 }
 
 player_using_valid_weapons(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_4) && isPlayer(var_4) && (!isDefined(var_3) || !common_scripts\utility::_id_0F79(var_2, _id_0547::_id_AAF9(var_3))))
+  if(isDefined(var_4) && isPlayer(var_4) && (!isDefined(var_3) || !common_scripts\utility::_id_0F79(var_2, _id_0547::_id_AAF9(var_3)))) {
     level thread[[var_0]](var_1);
+  }
 }
 
 player_using_valid_weapons_no_mercy(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 = _id_0547::_id_9469(var_3);
+  }
 
-  if(isDefined(var_4) && isPlayer(var_4) && (!isDefined(var_3) || !common_scripts\utility::_id_0F79(var_2, var_3)))
+  if(isDefined(var_4) && isPlayer(var_4) && (!isDefined(var_3) || !common_scripts\utility::_id_0F79(var_2, var_3))) {
     level notify(var_1);
+  }
 }
 
 hidden_challenges_on_trap_activated() {
   level.survivalist_origin_0_type_2_failed = 1;
   level notify("survivalist_origin_0_type_2_failed");
 
-  foreach(var_1 in level.players)
-  var_1.consecutive_wave_tracking_array["slayer_bat_2_type_2"]._id_005C = 0;
+  foreach(var_1 in level.players) {
+    var_1.consecutive_wave_tracking_array["slayer_bat_2_type_2"]._id_005C = 0;
+  }
 }
 
 init_zombie_killed_responses() {
@@ -576,8 +618,9 @@ init_zombie_killed_responses() {
 }
 
 register_zombie_killed_response(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.zmb_zombie_killed_responses))
+  if(!isDefined(level.zmb_zombie_killed_responses)) {
     level.zmb_zombie_killed_responses = [];
+  }
 
   if(isDefined(level.zmb_zombie_killed_responses[var_2])) {
     return;
@@ -585,8 +628,9 @@ register_zombie_killed_response(var_0, var_1, var_2, var_3) {
   foreach(var_5 in var_3) {
     var_6 = _id_0586::_id_078B(var_5);
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_3 = common_scripts\utility::_id_0F6F(var_3, maps\mp\_utility::_id_4431(var_6));
+    }
   }
 
   var_8 = spawnStruct();
@@ -599,20 +643,23 @@ register_zombie_killed_response(var_0, var_1, var_2, var_3) {
 }
 
 watch_player_sprint(var_0) {
-  while(!self issprinting())
+  while(!self issprinting()) {
     waitframe();
+  }
 
   level notify(var_0);
 }
 
 watch_for_crouch(var_0, var_1) {
-  while(!level.gamehasstarted)
+  while(!level.gamehasstarted) {
     waitframe();
+  }
 
   wait 5;
 
-  while(self getstance() == "crouch")
+  while(self getstance() == "crouch") {
     waitframe();
+  }
 
   level notify(var_1);
 }

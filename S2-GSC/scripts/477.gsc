@@ -4,8 +4,9 @@
 **************************************/
 
 codecallback_startgametype() {
-  if(getDvar("233") == "1")
+  if(getDvar("233") == "1") {
     level waittill("eternity");
+  }
 
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
     [[level.callbackstartgametype]]();
@@ -14,8 +15,9 @@ codecallback_startgametype() {
 }
 
 codecallback_playerconnect() {
-  if(getDvar("233") == "1")
+  if(getDvar("233") == "1") {
     level waittill("eternity");
+  }
 
   self endon("disconnect");
   [[level.callbackplayerconnect]]();
@@ -54,22 +56,25 @@ codecallback_entityoutofworld() {
 codecallback_bullethitentity(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("disconnect");
 
-  if(isDefined(self.bullethitcallback))
+  if(isDefined(self.bullethitcallback)) {
     [[self.bullethitcallback]](var_0, var_1, var_2, var_3, var_4, var_5);
+  }
 }
 
 codecallback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(self.damagecallback))
+  if(isDefined(self.damagecallback)) {
     self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
-  else
+  } else {
     self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  }
 }
 
 codecallback_entitydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(self.damagecallback))
+  if(isDefined(self.damagecallback)) {
     self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
-  else
+  } else {
     self finishentitydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  }
 }
 
 codecallback_codeendgame() {
@@ -174,8 +179,9 @@ _id_2497(var_0) {}
 _id_249F(var_0, var_1) {}
 
 codecallback_partymembers(var_0) {
-  if(isDefined(level.partymembers_cb))
+  if(isDefined(level.partymembers_cb)) {
     [[level.partymembers_cb]](var_0);
+  }
 }
 
 setupdamageflags() {

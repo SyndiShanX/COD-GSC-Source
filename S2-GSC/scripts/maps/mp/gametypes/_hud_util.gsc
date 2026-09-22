@@ -7,16 +7,18 @@ setparent(var_0) {
   if(isDefined(self._id_6E74) && self._id_6E74 == var_0) {
     return;
   }
-  if(isDefined(self._id_6E74))
+  if(isDefined(self._id_6E74)) {
     self._id_6E74 _id_7CD5(self);
+  }
 
   self._id_6E74 = var_0;
   self._id_6E74 _id_09A6(self);
 
-  if(isDefined(self._id_7538))
+  if(isDefined(self._id_7538)) {
     setpoint(self._id_7538, self._id_7C16, self._id_AACD, self._id_AAEB);
-  else
+  } else {
     setpoint("TOPLEFT");
+  }
 }
 
 _id_45FC() {
@@ -41,57 +43,70 @@ _id_7CD5(var_0) {
 }
 
 setpoint(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   var_5 = _id_45FC();
 
-  if(var_4)
+  if(var_4) {
     self moveovertime(var_4);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   self._id_AACD = var_2;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   self._id_AAEB = var_3;
   self._id_7538 = var_0;
   self.alignx = "center";
   self.aligny = "middle";
 
-  if(issubstr(var_0, "TOP"))
+  if(issubstr(var_0, "TOP")) {
     self.aligny = "top";
+  }
 
-  if(issubstr(var_0, "BOTTOM"))
+  if(issubstr(var_0, "BOTTOM")) {
     self.aligny = "bottom";
+  }
 
-  if(issubstr(var_0, "LEFT"))
+  if(issubstr(var_0, "LEFT")) {
     self.alignx = "left";
+  }
 
-  if(issubstr(var_0, "RIGHT"))
+  if(issubstr(var_0, "RIGHT")) {
     self.alignx = "right";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0;
+  }
 
   self._id_7C16 = var_1;
   var_6 = "center_adjustable";
   var_7 = "middle";
 
-  if(issubstr(var_1, "TOP"))
+  if(issubstr(var_1, "TOP")) {
     var_7 = "top_adjustable";
+  }
 
-  if(issubstr(var_1, "BOTTOM"))
+  if(issubstr(var_1, "BOTTOM")) {
     var_7 = "bottom_adjustable";
+  }
 
-  if(issubstr(var_1, "LEFT"))
+  if(issubstr(var_1, "LEFT")) {
     var_6 = "left_adjustable";
+  }
 
-  if(issubstr(var_1, "RIGHT"))
+  if(issubstr(var_1, "RIGHT")) {
     var_6 = "right_adjustable";
+  }
 
   if(var_5 == level._id_A012) {
     self._id_00C6 = var_6;
@@ -107,17 +122,19 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   } else if(var_6 == "center" || var_5.alignx == "center") {
     var_8 = int(var_5._id_01D2 / 2);
 
-    if(var_6 == "left_adjustable" || var_5.alignx == "right")
+    if(var_6 == "left_adjustable" || var_5.alignx == "right") {
       var_9 = -1;
-    else
+    } else {
       var_9 = 1;
+    }
   } else {
     var_8 = var_5._id_01D2;
 
-    if(var_6 == "left_adjustable")
+    if(var_6 == "left_adjustable") {
       var_9 = -1;
-    else
+    } else {
       var_9 = 1;
+    }
   }
 
   self.x = var_5.x + var_8 * var_9;
@@ -128,17 +145,19 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
   } else if(var_7 == "middle" || var_5.aligny == "middle") {
     var_10 = int(var_5._id_00BD / 2);
 
-    if(var_7 == "top_adjustable" || var_5.aligny == "bottom")
+    if(var_7 == "top_adjustable" || var_5.aligny == "bottom") {
       var_11 = -1;
-    else
+    } else {
       var_11 = 1;
+    }
   } else {
     var_10 = var_5._id_00BD;
 
-    if(var_7 == "top_adjustable")
+    if(var_7 == "top_adjustable") {
       var_11 = -1;
-    else
+    } else {
       var_11 = 1;
+    }
   }
 
   self.y = var_5.y + var_10 * var_11;
@@ -161,40 +180,45 @@ _id_8708(var_0, var_1, var_2, var_3) {
   self._id_1586.aligny = self.aligny;
   self._id_1586.y = self.y;
 
-  if(self.alignx == "left")
+  if(self.alignx == "left") {
     self._id_1586.x = self.x;
-  else if(self.alignx == "right")
+  } else if(self.alignx == "right") {
     self._id_1586.x = self.x - self._id_01D2;
-  else
+  } else {
     self._id_1586.x = self.x - int(self._id_01D2 / 2);
+  }
 
-  if(self.aligny == "top")
+  if(self.aligny == "top") {
     self._id_1586.y = self.y;
-  else if(self.aligny == "bottom")
+  } else if(self.aligny == "bottom") {
     self._id_1586.y = self.y;
+  }
 
   _id_A0E3(self._id_1586._id_3E6E);
 }
 
 _id_A0E3(var_0, var_1) {
-  if(self._id_35B2 == "bar")
+  if(self._id_35B2 == "bar") {
     _id_A0E5(var_0, var_1);
+  }
 }
 
 _id_A0E5(var_0, var_1) {
   var_2 = int(self._id_01D2 * var_0 + 0.5);
 
-  if(!var_2)
+  if(!var_2) {
     var_2 = 1;
+  }
 
   self._id_1586._id_3E6E = var_0;
   self._id_1586 setshader(self._id_1586._id_8AC7, var_2, self._id_00BD);
 
   if(isDefined(var_1) && var_2 < self._id_01D2) {
-    if(var_1 > 0)
+    if(var_1 > 0) {
       self._id_1586 scaleovertime((1 - var_0) / var_1, self._id_01D2, self._id_00BD);
-    else if(var_1 < 0)
+    } else if(var_1 < 0) {
       self._id_1586 scaleovertime(var_0 / (-1 * var_1), 1, self._id_00BD);
+    }
   }
 
   self._id_1586._id_7A78 = var_1;
@@ -221,10 +245,11 @@ createfontstring(var_0, var_1) {
 }
 
 _id_2829(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = _newteamhudelem(var_2);
-  else
+  } else {
     var_3 = newhudelem();
+  }
 
   var_3._id_35B2 = "font";
   var_3._id_009A = var_0;
@@ -244,10 +269,11 @@ _id_2829(var_0, var_1, var_2) {
 }
 
 _id_282B(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = _newteamhudelem(var_2);
-  else
+  } else {
     var_3 = newhudelem();
+  }
 
   var_3._id_35B2 = "timer";
   var_3._id_009A = var_0;
@@ -309,10 +335,11 @@ createicon(var_0, var_1, var_2) {
 }
 
 _id_282A(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = _newteamhudelem(var_3);
-  else
+  } else {
     var_4 = newhudelem();
+  }
 
   var_4._id_35B2 = "icon";
   var_4.x = 0;
@@ -336,10 +363,11 @@ _id_282A(var_0, var_1, var_2, var_3) {
 }
 
 _id_2828(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_6 = _newteamhudelem(var_4);
-  else
+  } else {
     var_6 = newhudelem();
+  }
 
   var_6.x = 0;
   var_6.y = 0;
@@ -350,13 +378,15 @@ _id_2828(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 setshader("progress_bar_fill", var_1, var_2);
   var_6._id_4CC7 = 0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_6._id_3D49 = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_7 = _newteamhudelem(var_4);
-  else
+  } else {
     var_7 = newhudelem();
+  }
 
   var_7._id_35B2 = "bar";
   var_7.x = 0;
@@ -387,8 +417,9 @@ _id_27CF(var_0, var_1, var_2, var_3) {
   var_4 setshader("progress_bar_fill", var_1, var_2);
   var_4._id_4CC7 = 0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4._id_3D49 = var_3;
+  }
 
   var_5 = _newclienthudelem(self);
   var_5._id_35B2 = "bar";
@@ -413,49 +444,59 @@ _id_447D() {
   if(isDefined(self._id_1586._id_7A78)) {
     var_0 = var_0 + (gettime() - self._id_1586._id_5C09) * self._id_1586._id_7A78 / 1000;
 
-    if(var_0 > 1)
+    if(var_0 > 1) {
       var_0 = 1;
+    }
 
-    if(var_0 < 0)
+    if(var_0 < 0) {
       var_0 = 0;
+    }
   }
 
   return var_0;
 }
 
 _id_2821(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(self issplitscreenplayer() && !_func_3BA())
+  if(self issplitscreenplayer() && !_func_3BA()) {
     var_1 = var_1 + 20;
+  }
 
-  if(_func_367())
+  if(_func_367()) {
     var_3 = _id_27CF((0.25, 0.58, 0.53), level._id_76FD, level._id_76FA);
-  else
+  } else {
     var_3 = _id_27CF((1, 1, 1), level._id_76FD, level._id_76FA);
+  }
 
   var_3 setpoint("CENTER", undefined, level._id_76FE + var_0, level._id_76FF + var_1);
   return var_3;
 }
 
 _id_2822(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(self issplitscreenplayer() && !_func_3BA())
+  if(self issplitscreenplayer() && !_func_3BA()) {
     var_1 = var_1 + 20;
+  }
 
-  if(_func_367())
+  if(_func_367()) {
     var_2 = createfontstring("mphubfont", 1.4);
-  else
+  } else {
     var_2 = createfontstring("hudbig", level._id_76F9);
+  }
 
   var_2 setpoint("CENTER", undefined, level._id_76FB + var_0, level._id_76FC + var_1);
   var_2.sort = -1;
@@ -484,14 +525,16 @@ _id_4D06() {
   }
   self._id_4CC7 = 1;
 
-  if(self.alpha != 0)
+  if(self.alpha != 0) {
     self.alpha = 0;
+  }
 
   if(self._id_35B2 == "bar" || self._id_35B2 == "bar_shader") {
     self._id_1586._id_4CC7 = 1;
 
-    if(self._id_1586.alpha != 0)
+    if(self._id_1586.alpha != 0) {
       self._id_1586.alpha = 0;
+    }
   }
 }
 
@@ -502,13 +545,15 @@ _id_8BF6() {
   self._id_4CC7 = 0;
 
   if(self._id_35B2 == "bar" || self._id_35B2 == "bar_shader") {
-    if(self.alpha != 0.5)
+    if(self.alpha != 0.5) {
       self.alpha = 0.5;
+    }
 
     self._id_1586._id_4CC7 = 0;
 
-    if(self._id_1586.alpha != 1)
+    if(self._id_1586.alpha != 1) {
       self._id_1586.alpha = 1;
+    }
   } else if(self.alpha != 1)
     self.alpha = 1;
 }
@@ -516,8 +561,9 @@ _id_8BF6() {
 _id_3D59() {
   self endon("death");
 
-  if(!self._id_4CC7)
+  if(!self._id_4CC7) {
     self.alpha = 1;
+  }
 
   for(;;) {
     if(self._id_3E6E >= self._id_3D49) {
@@ -533,8 +579,9 @@ _id_3D59() {
       continue;
     }
 
-    if(!self._id_4CC7 && self.alpha != 1)
+    if(!self._id_4CC7 && self.alpha != 1) {
       self.alpha = 1;
+    }
 
     waitframe();
   }
@@ -544,15 +591,18 @@ destroyelem() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < self._id_21F6.size; var_1++) {
-    if(isDefined(self._id_21F6[var_1]))
+    if(isDefined(self._id_21F6[var_1])) {
       var_0[var_0.size] = self._id_21F6[var_1];
+    }
   }
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] setparent(_id_45FC());
+  }
 
-  if(self._id_35B2 == "bar" || self._id_35B2 == "bar_shader")
+  if(self._id_35B2 == "bar" || self._id_35B2 == "bar_shader") {
     self._id_1586 destroy();
+  }
 
   self destroy();
 }
@@ -633,8 +683,9 @@ _id_9C7E(var_0, var_1) {
 }
 
 _id_9C81(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "left";
+  }
 
   switch (var_1) {
     case "left":
@@ -657,8 +708,9 @@ _id_9C81(var_0, var_1) {
 }
 
 _id_9C82(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "left";
+  }
 
   var_2 = self._id_AACD;
   var_3 = self._id_AAEB;
@@ -699,10 +751,11 @@ _id_9C85(var_0) {
 _id_9C78(var_0) {
   self fadeovertime(var_0);
 
-  if(isDefined(self._id_6073))
+  if(isDefined(self._id_6073)) {
     self.alpha = self._id_6073;
-  else
+  } else {
     self.alpha = 1;
+  }
 }
 
 _id_9C79(var_0) {
@@ -711,37 +764,43 @@ _id_9C79(var_0) {
 }
 
 _id_5807(var_0) {
-  if(issubstr(var_0, "ch_limited"))
+  if(issubstr(var_0, "ch_limited")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_5850(var_0) {
-  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_kills"))
+  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_kills")) {
     return 1;
+  }
 
-  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_hipfirekills"))
+  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_hipfirekills")) {
     return 1;
+  }
 
-  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_headShots"))
+  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_headShots")) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_2097(var_0) {
-  if(_id_5850(var_0))
+  if(_id_5850(var_0)) {
     return _id_775C(var_0);
+  }
 
   return self getplayerdata(common_scripts\utility::_id_46AE(), "challengeProgress", var_0);
 }
 
 _id_2098(var_0) {
-  if(_id_5850(var_0))
+  if(_id_5850(var_0)) {
     return _id_775D(var_0);
-  else
+  } else {
     return self getplayerdata(common_scripts\utility::_id_46AE(), "challengeState", var_0);
+  }
 }
 
 _id_209E(var_0, var_1) {
@@ -751,25 +810,29 @@ _id_209E(var_0, var_1) {
   var_2 = maps\mp\_utility::_id_2315(var_1);
   self setplayerdata(common_scripts\utility::_id_46AE(), "challengeProgress", var_0, var_2);
 
-  if(issubstr(var_0, "ch_daily_") && var_2 > 0)
+  if(issubstr(var_0, "ch_daily_") && var_2 > 0) {
     thread maps\mp\gametypes\_hud_message::_id_9102(var_0, var_2);
+  }
 }
 
 _id_209F(var_0, var_1) {
-  if(_id_5850(var_0))
+  if(_id_5850(var_0)) {
     return;
-  else
+  } else {
     self setplayerdata(common_scripts\utility::_id_46AE(), "challengeState", var_0, var_1);
+  }
 }
 
 _id_2099(var_0, var_1) {
-  if(issubstr(var_0, "ch_daily"))
+  if(issubstr(var_0, "ch_daily")) {
     var_2 = tablelookup("mp/dailyChallengesTable.csv", 0, var_0, 9);
-  else
+  } else {
     var_2 = tablelookup("mp/allChallengesTable.csv", 0, var_0, 9 + (var_1 - 1) * 2);
+  }
 
-  if(isDefined(var_2) && var_2 != "")
+  if(isDefined(var_2) && var_2 != "") {
     return int(var_2);
+  }
 
   return 0;
 }
@@ -784,25 +847,28 @@ _id_3005(var_0, var_1, var_2, var_3) {
   var_4 settext(var_0);
   common_scripts\utility::_id_A70A(var_3, "joined_team", "death");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 destroyelem();
+  }
 }
 
 _id_775C(var_0) {
-  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_hipfirekills"))
+  if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_hipfirekills")) {
     return _id_9AB0(var_0, "hipfirekills");
-  else if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_kills"))
+  } else if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_kills")) {
     return _id_9AB0(var_0, "kills");
-  else if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_headShots"))
+  } else if(common_scripts\utility::_id_9467(var_0, "ch_attach_unlock_headShots")) {
     return _id_9AB0(var_0, "headShots");
+  }
 }
 
 _id_775D(var_0) {
   var_1 = _id_775C(var_0);
   var_2 = 1;
 
-  for(var_3 = _id_2099(var_0, var_2); var_3 > 0 && var_1 >= var_3; var_3 = _id_2099(var_0, var_2))
+  for(var_3 = _id_2099(var_0, var_2); var_3 > 0 && var_1 >= var_3; var_3 = _id_2099(var_0, var_2)) {
     var_2++;
+  }
 
   return var_2;
 }
@@ -825,19 +891,23 @@ _id_9AB0(var_0, var_1) {
       var_3 = var_3 + self getplayerdata(common_scripts\utility::_id_46AE(), "weaponStats", var_7, var_1);
     }
 
-    if(var_1 == "kills" && isDefined(self._id_9BBA))
+    if(var_1 == "kills" && isDefined(self._id_9BBA)) {
       var_3 = var_3 + self._id_9BBA;
+    }
 
-    if(var_1 == "hipfirekills" && isDefined(self._id_9BB8))
+    if(var_1 == "hipfirekills" && isDefined(self._id_9BB8)) {
       var_3 = var_3 + self._id_9BB8;
+    }
 
-    if(var_1 == "headShots" && isDefined(self._id_9BB7))
+    if(var_1 == "headShots" && isDefined(self._id_9BB7)) {
       var_3 = var_3 + self._id_9BB7;
+    }
 
     var_8 = self getplayerdata(common_scripts\utility::_id_46AE(), "attachUnlock_" + var_1, var_2);
 
-    if(var_8 > var_3)
+    if(var_8 > var_3) {
       var_8 = 0;
+    }
 
     return var_3 - var_8;
   }

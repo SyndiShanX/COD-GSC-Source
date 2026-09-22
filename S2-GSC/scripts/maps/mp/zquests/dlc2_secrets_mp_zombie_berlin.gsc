@@ -55,8 +55,9 @@ surgeon_set_4() {
     level.trap_kill_trackers["surgeon_set_4"].trap_progress_tracker[var_3]._id_005C = 0;
   }
 
-  while(!maps\mp\zquests\zmb_secret_challenges_util::all_traps_full(level.trap_kill_trackers["surgeon_set_4"], var_0))
+  while(!maps\mp\zquests\zmb_secret_challenges_util::all_traps_full(level.trap_kill_trackers["surgeon_set_4"], var_0)) {
     wait 0.5;
+  }
 
   return 1;
 }

@@ -55,10 +55,11 @@ move_main() {
   self scragentsetphysicsmode("gravity");
   self._id_5759 = 1;
 
-  if(isDefined(self.assassin_should_execute_voulnerability) && !common_scripts\utility::_id_562E(self.isassassindemo))
+  if(isDefined(self.assassin_should_execute_voulnerability) && !common_scripts\utility::_id_562E(self.isassassindemo)) {
     setassassinvoulnerable();
-  else
+  } else {
     maps\mp\agents\humanoid\_humanoid_move::_id_92E9();
+  }
 
   maps\mp\agents\humanoid\_humanoid_move::_id_2603();
 }
@@ -69,8 +70,9 @@ setassassinvoulnerable() {
   self endon("killanimscript");
   var_0 = 0;
 
-  if(_id_0547::_id_5565(self.assassin_should_execute_voulnerability, "idle_to_atk_asn"))
+  if(_id_0547::_id_5565(self.assassin_should_execute_voulnerability, "idle_to_atk_asn")) {
     var_0 = 1;
+  }
 
   var_1 = self.assassin_should_execute_voulnerability;
   self.assassin_should_execute_voulnerability = undefined;
@@ -80,8 +82,9 @@ setassassinvoulnerable() {
   self scragentsetorientmode("face angle abs", self.angles);
   thread transition_to_motion(var_1);
 
-  if(var_0)
+  if(var_0) {
     childthread dodamageonjoints(["J_poker2_RI", "J_poker2_LE"], 30);
+  }
 
   maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_1, 0, 1.0, "move_start");
   self notify("stop_joint_strike");
@@ -95,8 +98,9 @@ transition_to_motion(var_0) {
 }
 
 register_assassin_phase(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.zmb_asn_agent_phases))
+  if(!isDefined(level.zmb_asn_agent_phases)) {
     level.zmb_asn_agent_phases = [];
+  }
 
   var_6 = spawnStruct();
   var_6.name = var_0;
@@ -113,10 +117,11 @@ assassin_get_action_params() {
   var_0["zombie_subtype"] = "zombie_assassin";
   var_0["move_speed"] = self._id_0108;
 
-  if(self.prowl_timer < 2 && common_scripts\utility::_id_3794("Phase 1: Entrance"))
+  if(self.prowl_timer < 2 && common_scripts\utility::_id_3794("Phase 1: Entrance")) {
     var_0["script_var"] = "looking_to_crouch";
-  else
+  } else {
     var_0["script_var"] = "walk_to_sprint";
+  }
 
   return var_0;
 }
@@ -168,20 +173,22 @@ assassin_think() {
   var_1.check = maps\mp\zombies\zombie_assassin_spawner_logic::assassin_needs_vfx_refresh;
   var_1._id_3F02 = maps\mp\zombies\zombie_assassin_spawner_logic::assassin_vfx_refreshed;
 
-  if(is_an_elite_assassin())
+  if(is_an_elite_assassin()) {
     thread maps\mp\mp_zombie_island_fog_zones::run_fog_callbacks(undefined, 1, undefined, undefined, ::on_boss_assassin_enter_fog, ::on_boss_assassin_exit_fog, [var_0, var_1]);
-  else
+  } else {
     thread maps\mp\mp_zombie_island_fog_zones::run_fog_callbacks(undefined, 1, undefined, undefined, ::on_assassin_enter_fog, ::on_assassin_exit_fog, [var_0]);
+  }
 
   self._id_0EAD._id_6AFE["move"] = ::move_main;
   self.assassin_melee_side = randomint(2);
 
   for(;;) {
-    if(isDefined(self.custom_think_mode))
+    if(isDefined(self.custom_think_mode)) {
       self[[self.custom_think_mode]]();
-    else {
-      if(isDefined(self._id_3043) && !isDefined(self.has_lost_distractiondrone_interest))
+    } else {
+      if(isDefined(self._id_3043) && !isDefined(self.has_lost_distractiondrone_interest)) {
         childthread lose_interest_in_time(4.5, self._id_3043);
+      }
 
       run_assassin_phase_logic();
 
@@ -210,8 +217,9 @@ lose_interest_in_time(var_0, var_1) {
   wait(var_0);
   self.has_lost_distractiondrone_interest = 1;
 
-  while(isDefined(var_1))
+  while(isDefined(var_1)) {
     waitframe();
+  }
 
   self.has_lost_distractiondrone_interest = undefined;
 }
@@ -227,11 +235,13 @@ play_emerge_fx() {
   self notify("new_emerge_fx");
   self endon("new_emerge_fx");
 
-  if(isDefined(self.my_emerge_fx))
+  if(isDefined(self.my_emerge_fx)) {
     self.my_emerge_fx delete();
+  }
 
-  while(!_id_0547::_id_4B2C())
+  while(!_id_0547::_id_4B2C()) {
     waitframe();
+  }
 
   self.my_emerge_fx = play_fx_on_zmb_assassin("zmb_isl_fog_zmb_emerge_01", "tag_origin");
 }
@@ -244,8 +254,9 @@ stop_emerge_fx() {
 }
 
 assassin_execute_attack() {
-  if(common_scripts\utility::_id_3794("Phase 4: EXITING"))
+  if(common_scripts\utility::_id_3794("Phase 4: EXITING")) {
     return 0;
+  }
 
   if(assassin_activate_special_ability()) {
     thread assassin_attack_cooldown(1);
@@ -253,12 +264,14 @@ assassin_execute_attack() {
     return 1;
   }
 
-  if(assassin_begin_melee())
+  if(assassin_begin_melee()) {
     return 1;
+  }
 
   if(_id_053C::_id_4F84()) {
-    if(!isDefined(self._id_28D2.numstandinghits))
+    if(!isDefined(self._id_28D2.numstandinghits)) {
       self._id_28D2.numstandinghits = 0;
+    }
 
     self._id_28D2.numstandinghits++;
 
@@ -278,19 +291,22 @@ assassin_execute_attack() {
 try_to_make_assassin_leave() {
   self.remaining_special_activations--;
 
-  if(self.remaining_special_activations <= 0)
+  if(self.remaining_special_activations <= 0) {
     thread make_assassin_leave_arena(4.5);
+  }
 }
 
 make_assassin_leave_arena(var_0) {
   self endon("death");
   self endon("assassin_was_koed");
 
-  if(common_scripts\utility::_id_562E(self.assassinabilitysustained))
+  if(common_scripts\utility::_id_562E(self.assassinabilitysustained)) {
     var_0 = var_0 / 2;
+  }
 
-  while(common_scripts\utility::_id_562E(self.assassinabilitysustained))
+  while(common_scripts\utility::_id_562E(self.assassinabilitysustained)) {
     waitframe();
+  }
 
   self.is_being_asked_to_leave_soon = 1;
   disable_assassin_chest_fx();
@@ -335,8 +351,9 @@ display_boss_assassin_chest_fx(var_0) {
 }
 
 remove_assassin_boss_vfx() {
-  if(isDefined(self.mod_fx))
+  if(isDefined(self.mod_fx)) {
     self.mod_fx delete();
+  }
 }
 
 restart_assassin_boss_vfx() {
@@ -354,10 +371,11 @@ on_assassin_exit_fog() {
 assign_initial_phase() {
   waitframe();
 
-  if(isDefined(self.optionalinitialstate))
+  if(isDefined(self.optionalinitialstate)) {
     set_assassin_phase(self.optionalinitialstate);
-  else
+  } else {
     set_assassin_phase("Phase 1: Entrance");
+  }
 }
 
 run_assassin_phase_logic() {
@@ -369,24 +387,28 @@ run_assassin_phase_logic() {
   }
 
   foreach(var_1 in level.zmb_asn_agent_phases) {
-    if(common_scripts\utility::_id_3794(var_1.name))
+    if(common_scripts\utility::_id_3794(var_1.name)) {
       phase_handler(var_1);
+    }
   }
 }
 
 wait_with_endon(var_0, var_1) {
-  foreach(var_3 in var_1)
-  self endon(var_3);
+  foreach(var_3 in var_1) {
+    self endon(var_3);
+  }
 
   wait(var_0);
 }
 
 assassin_activate_special_ability() {
-  if(isDefined(self.remaining_special_activations) && self.remaining_special_activations <= 0)
+  if(isDefined(self.remaining_special_activations) && self.remaining_special_activations <= 0) {
     return 0;
+  }
 
-  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2())
+  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
     return 0;
+  }
 
   if(!isDefined(self.assassin_special_wait)) {
     self.assassin_special_wait = 1;
@@ -394,15 +416,17 @@ assassin_activate_special_ability() {
   }
 
   if(common_scripts\utility::_id_562E(self.dontwaitonfirstattack) || !common_scripts\utility::_id_562E(self.assassin_special_wait) && !common_scripts\utility::_id_562E(self.assassinmustleave) && isDefined(self.assassin_seek_func) && [[self.assassin_seek_func]]() && common_scripts\utility::_id_3794("zmb_assassin_is_alarmed") && !common_scripts\utility::_id_3794("Phase 1: Entrance")) {
-    if(common_scripts\utility::_id_562E(self.dontwaitonfirstattack))
+    if(common_scripts\utility::_id_562E(self.dontwaitonfirstattack)) {
       self.dontwaitonfirstattack = 0;
+    }
 
     self thread[[self.assassin_attack_func]]();
 
-    if(!common_scripts\utility::_id_562E(self.reverse_assassin_specials_visuals))
+    if(!common_scripts\utility::_id_562E(self.reverse_assassin_specials_visuals)) {
       disable_assassin_chest_fx();
-    else
+    } else {
       enable_assassin_chest_fx();
+    }
 
     _id_0547::_id_7D1A("activate_assassin_ability");
 
@@ -441,16 +465,18 @@ run_alarm_funcs() {
 }
 
 assassin_begin_melee() {
-  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2() || common_scripts\utility::_id_562E(self.assassinragecooldown))
+  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2() || common_scripts\utility::_id_562E(self.assassinragecooldown)) {
     return 0;
+  }
 
   self endon("death");
 
   if(common_scripts\utility::_id_3794("ready_to_attack") && isDefined(self._id_28D2) && isPlayer(self._id_28D2) && is_in_strike_range()) {
     self.start_sprint_override = undefined;
 
-    if(!_id_0547::has_scripted_state_queued("attack_sprint"))
+    if(!_id_0547::has_scripted_state_queued("attack_sprint")) {
       thread _id_0547::_id_7D1A("attack_sprint");
+    }
 
     return 1;
   } else
@@ -467,8 +493,9 @@ timeout_attack() {
 }
 
 all_players_ignored() {
-  if(isDefined(self._id_000A) && self._id_000A == level._id_746E)
+  if(isDefined(self._id_000A) && self._id_000A == level._id_746E) {
     return 1;
+  }
 
   if(!_id_053C::humanoid_has_valid_targets()) {
     self.assassinmuststopattackingandleave = 1;
@@ -478,13 +505,15 @@ all_players_ignored() {
 }
 
 prowl_timeout_func(var_0) {
-  if(!_id_0547::_id_5565(self._id_0BA4, "traverse"))
+  if(!_id_0547::_id_5565(self._id_0BA4, "traverse")) {
     self.prowl_timer = self.prowl_timer - var_0;
+  }
 
   self.readytosprint = 0;
 
-  if(common_scripts\utility::_id_562E(self.isassassindemo))
+  if(common_scripts\utility::_id_562E(self.isassassindemo)) {
     return 1;
+  }
 
   return self.prowl_timer <= 0;
 }
@@ -492,8 +521,9 @@ prowl_timeout_func(var_0) {
 assassin_begin_ambush() {
   self endon("death");
 
-  if(common_scripts\utility::_id_562E(self.optionaldisablecrouchedambush))
+  if(common_scripts\utility::_id_562E(self.optionaldisablecrouchedambush)) {
     return 1;
+  }
 
   self.ambush_scripted_state = "walk_2_crouch";
   _id_0547::_id_7D1A(self.ambush_scripted_state);
@@ -501,8 +531,9 @@ assassin_begin_ambush() {
 }
 
 assassin_continue_ambush() {
-  if(common_scripts\utility::_id_562E(self.optionaldisablecrouchedambush))
+  if(common_scripts\utility::_id_562E(self.optionaldisablecrouchedambush)) {
     return 1;
+  }
 
   self.ambush_scripted_state = get_action_for_assassin("Phase 2: IDLE", "idle_stalk_player");
   childthread loop_crouch_position(self.ambush_scripted_state);
@@ -514,8 +545,9 @@ assassin_ready_attack(var_0) {
   self endon("death");
   self endon("ready_to_attack");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   common_scripts\utility::_id_379A("ready_to_attack");
 }
@@ -523,23 +555,27 @@ assassin_ready_attack(var_0) {
 assassin_execute_ambush() {
   self endon("death");
 
-  if(!common_scripts\utility::_id_562E(self.readytosprint) && !common_scripts\utility::_id_562E(self.isassassindemo))
+  if(!common_scripts\utility::_id_562E(self.readytosprint) && !common_scripts\utility::_id_562E(self.isassassindemo)) {
     self.readytosprint = 1;
+  }
 
   self.assassin_should_execute_voulnerability = "walk_to_sprint_asn";
 
   if(common_scripts\utility::_id_3794("Assassin did go idle")) {
-    if(should_assassin_lounge())
+    if(should_assassin_lounge()) {
       self.assassin_should_execute_voulnerability = "idle_to_atk_asn";
-    else
+    } else {
       self.assassin_should_execute_voulnerability = "idle_to_vul_asn";
+    }
   }
 
-  if(should_move_main())
+  if(should_move_main()) {
     move_main();
+  }
 
-  if(isDefined(self.ambush_scripted_state))
+  if(isDefined(self.ambush_scripted_state)) {
     preform_assassin_crouch_interrupt(self.ambush_scripted_state);
+  }
 
   assassin_ready_attack();
   thread run_asssassin_active_timer();
@@ -547,15 +583,17 @@ assassin_execute_ambush() {
 }
 
 should_move_main() {
-  if(common_scripts\utility::_id_562E(self.noflurry))
+  if(common_scripts\utility::_id_562E(self.noflurry)) {
     return 0;
+  }
 
   var_0 = self getnegotiationstartnode();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0.origin;
-  else
+  } else {
     var_1 = self getpathgoalpos();
+  }
 
   return isDefined(var_1);
 }
@@ -565,8 +603,9 @@ run_asssassin_active_timer() {
   self notify("new_timer");
   self endon("new_timer");
 
-  if(!isDefined(self.assassinleveltimer))
+  if(!isDefined(self.assassinleveltimer)) {
     self.assassinleveltimer = 0;
+  }
 
   for(;;) {
     self.assassinleveltimer = self.assassinleveltimer + 1;
@@ -577,17 +616,20 @@ run_asssassin_active_timer() {
 loop_crouch_position(var_0) {
   self endon("zmb_assassin_is_alarmed");
 
-  for(;;)
+  for(;;) {
     _id_0547::_id_7D1A(var_0);
+  }
 }
 
 get_action_for_assassin(var_0, var_1) {
-  if(!isDefined(self.optionalassassinactionoverrides))
+  if(!isDefined(self.optionalassassinactionoverrides)) {
     return var_1;
+  }
 
   foreach(var_3 in self.optionalassassinactionoverrides) {
-    if(_id_0547::_id_5565(var_3.phase_flag, var_0))
+    if(_id_0547::_id_5565(var_3.phase_flag, var_0)) {
       return var_3.override_action;
+    }
   }
 
   return var_1;
@@ -606,8 +648,9 @@ assassin_continue_attack() {
     return 1;
   }
 
-  if(!isDefined(self.assassinattacktimeout))
+  if(!isDefined(self.assassinattacktimeout)) {
     childthread assassin_attack_timeout();
+  }
 
   return self.assassinattacktimeout > 17.5 || all_players_ignored();
 }
@@ -619,8 +662,9 @@ assassin_revert_to_phase_3() {
     return 1;
   }
 
-  if(!common_scripts\utility::_id_562E(self.readytosprint))
+  if(!common_scripts\utility::_id_562E(self.readytosprint)) {
     self.readytosprint = 1;
+  }
 
   self.assassinattacktimeout = undefined;
   self.has_exited = 1;
@@ -640,27 +684,31 @@ get_should_revert_to_previous_phase() {
   self endon("death");
   self.previoushole = self._id_1928;
 
-  if(has_exits_disabled())
+  if(has_exits_disabled()) {
     return 1;
+  }
 
-  if(maps\mp\mp_zombie_island::agent_is_in_secret_room())
+  if(maps\mp\mp_zombie_island::agent_is_in_secret_room()) {
     return 1;
+  }
 
   if(is_close_enough_to_exit()) {
-    if(common_scripts\utility::_id_3794("assassin_was_koed") || is_sunlight_exposed() || common_scripts\utility::_id_562E(self.isassassindemo) || common_scripts\utility::_id_562E(self.isfirstlethalassassin))
+    if(common_scripts\utility::_id_3794("assassin_was_koed") || is_sunlight_exposed() || common_scripts\utility::_id_562E(self.isassassindemo) || common_scripts\utility::_id_562E(self.isfirstlethalassassin)) {
       maps\mp\zombies\zombie_assassin_spawner_logic::set_assassin_removed_from_game();
-    else
+    } else {
       maps\mp\zombies\zombie_assassin_spawner_logic::set_new_assassin_origin(self._id_1928);
+    }
 
     return 1;
   }
 
-  if(must_leave_by_exit())
+  if(must_leave_by_exit()) {
     return 0;
-  else if(assassin_leave_has_timed_out())
+  } else if(assassin_leave_has_timed_out()) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 assassin_attack_timeout() {
@@ -679,8 +727,9 @@ init_assassin_phase_revert() {
   self.readytosprint = 1;
   childthread seek_assassin_level_exit();
 
-  if(!isDefined(self.leavetimer))
+  if(!isDefined(self.leavetimer)) {
     thread timeout_assassin_leave();
+  }
 }
 
 assassin_leave_has_timed_out() {
@@ -714,8 +763,9 @@ must_leave_by_exit() {
 assassin_is_far_from_players() {
   if(self.leavetimer >= 3.5) {
     foreach(var_1 in level.players) {
-      if(distance(self.origin, var_1.origin) < 512)
+      if(distance(self.origin, var_1.origin) < 512) {
         return 0;
+      }
     }
   }
 
@@ -784,16 +834,18 @@ ghost_through_passives() {
       var_3 = 8 * vectorNormalize(anglestoright(self.angles));
       var_4 = -8 * vectorNormalize(anglestoright(self.angles));
 
-      if(distance(var_2.origin, self.origin + var_3) < distance(var_2.origin, self.origin + var_4))
+      if(distance(var_2.origin, self.origin + var_3) < distance(var_2.origin, self.origin + var_4)) {
         var_5 = _func_2E1(var_2.origin + var_3);
-      else
+      } else {
         var_5 = _func_2E1(var_2.origin + var_4);
+      }
 
       var_6 = 0;
       var_2 setOrigin(var_5, var_6);
 
-      if(isDefined(var_2.bufffx))
+      if(isDefined(var_2.bufffx)) {
         var_2 maps\mp\zombies\zombie_assassin_frontline::spawn_assassin_frontline_fx();
+      }
     }
 
     waitframe();
@@ -801,31 +853,35 @@ ghost_through_passives() {
 }
 
 should_assassin_lounge() {
-  if(isDefined(self._id_000A) && self._id_000A == level._id_746E)
+  if(isDefined(self._id_000A) && self._id_000A == level._id_746E) {
     return 0;
+  }
 
   foreach(var_1 in level.players) {
     if(!isalive(var_1) || common_scripts\utility::_id_562E(var_1._id_5728)) {
       continue;
     }
-    if(maps\mp\_utility::_id_3B8E(self, var_1, 35) && distance(self.origin, var_1.origin) < 250)
+    if(maps\mp\_utility::_id_3B8E(self, var_1, 35) && distance(self.origin, var_1.origin) < 250) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 set_assassin_phase(var_0) {
-  foreach(var_2 in self.phases)
-  common_scripts\utility::_id_3796(var_2.name);
+  foreach(var_2 in self.phases) {
+    common_scripts\utility::_id_3796(var_2.name);
+  }
 
   common_scripts\utility::_id_379A(var_0);
 }
 
 get_assassin_phase() {
   foreach(var_1 in self.phases) {
-    if(common_scripts\utility::_id_3794(var_1.name))
+    if(common_scripts\utility::_id_3794(var_1.name)) {
       return var_1.name;
+    }
   }
 }
 
@@ -836,19 +892,22 @@ wait_for_close_player(var_0, var_1) {
   var_3 = 0;
 
   while(!var_3) {
-    if(!assassin_has_valid_target())
+    if(!assassin_has_valid_target()) {
       return undefined;
+    }
 
     foreach(var_5 in level.players) {
-      if(distance(var_5.origin, self.origin) < var_0)
+      if(distance(var_5.origin, self.origin) < var_0) {
         return var_5;
+      }
     }
 
     var_2 = var_2 + 0.125;
 
     if(isDefined(var_1)) {
-      if(var_2 >= var_1)
+      if(var_2 >= var_1) {
         return;
+      }
     }
 
     wait 0.125;
@@ -856,12 +915,14 @@ wait_for_close_player(var_0, var_1) {
 }
 
 there_is_close_player(var_0) {
-  if(!assassin_has_valid_target())
+  if(!assassin_has_valid_target()) {
     return 0;
+  }
 
   foreach(var_2 in level.players) {
-    if(distance(var_2.origin, self.origin) < var_0)
+    if(distance(var_2.origin, self.origin) < var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -873,8 +934,9 @@ initalize_assassin_despawners() {
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::_id_46B7(var_2.target, "targetname");
 
-    foreach(var_5 in var_3)
-    var_5.getnegotiationnextnode = var_2.getnegotiationnextnode;
+    foreach(var_5 in var_3) {
+      var_5.getnegotiationnextnode = var_2.getnegotiationnextnode;
+    }
   }
 }
 
@@ -884,21 +946,25 @@ get_all_special_assassins() {
 }
 
 zombie_assassin_move_mode_func() {
-  if(!common_scripts\utility::_id_562E(self.nochill) && common_scripts\utility::_id_562E(self.assassinragecooldown) && !common_scripts\utility::_id_3794("Phase 4: EXITING") && !common_scripts\utility::_id_562E(self.assassinmustleave) && !common_scripts\utility::_id_562E(self.assassinmuststopattackingandleave))
+  if(!common_scripts\utility::_id_562E(self.nochill) && common_scripts\utility::_id_562E(self.assassinragecooldown) && !common_scripts\utility::_id_3794("Phase 4: EXITING") && !common_scripts\utility::_id_562E(self.assassinmustleave) && !common_scripts\utility::_id_562E(self.assassinmuststopattackingandleave)) {
     return "walk";
+  }
 
-  if(common_scripts\utility::_id_562E(self.bossintroassassin))
+  if(common_scripts\utility::_id_562E(self.bossintroassassin)) {
     return "walk";
+  }
 
-  if(!common_scripts\utility::_id_562E(self.readytosprint) || common_scripts\utility::_id_562E(self.isassassindemo) && !common_scripts\utility::_id_562E(self.isassassindemocansprint))
+  if(!common_scripts\utility::_id_562E(self.readytosprint) || common_scripts\utility::_id_562E(self.isassassindemo) && !common_scripts\utility::_id_562E(self.isassassindemocansprint)) {
     return "walk";
+  }
 
   return "sprint";
 }
 
 init_my_phase_flags() {
-  foreach(var_1 in level.zmb_asn_agent_phases)
-  common_scripts\utility::_id_3799(var_1.name);
+  foreach(var_1 in level.zmb_asn_agent_phases) {
+    common_scripts\utility::_id_3799(var_1.name);
+  }
 }
 
 is_boss_assassin() {
@@ -931,8 +997,9 @@ start_assassin_taunt() {
 handle_character_sighting_vo() {}
 
 play_my_assassin_id_fx(var_0) {
-  while(self.model == "tag_origin")
+  while(self.model == "tag_origin") {
     waitframe();
+  }
 
   var_1 = get_my_assassin_fx();
 
@@ -954,8 +1021,9 @@ attach_assassin_mod_fx() {
 get_my_assassin_fx() {
   var_0 = undefined;
 
-  if(!isDefined(self.assassin_modifier))
+  if(!isDefined(self.assassin_modifier)) {
     return var_0;
+  }
 
   switch (self.assassin_modifier) {
     case "zombie_assassin_frontline":
@@ -987,8 +1055,9 @@ alarm_assassin_on(var_0) {
   self endon("death");
   self endon("zmb_assassin_is_alarmed");
 
-  foreach(var_2 in var_0)
-  childthread assassin_alarm_listener(var_2, "zmb_assassin_is_alarmed");
+  foreach(var_2 in var_0) {
+    childthread assassin_alarm_listener(var_2, "zmb_assassin_is_alarmed");
+  }
 }
 
 assassin_alarm_listener(var_0, var_1) {
@@ -1009,8 +1078,9 @@ assassin_is_in_fog() {
 there_is_no_fog() {
   wait 1;
 
-  while(assassin_is_in_fog())
+  while(assassin_is_in_fog()) {
     wait 0.125;
+  }
 
   return "Assassin Alarmed! FOG RECEDED!";
 }
@@ -1021,8 +1091,9 @@ assassin_recieved_damage() {
 }
 
 players_have_left() {
-  while(!_id_055A::_id_586A("isolated_room_zone") || maps\mp\zombies\zombie_assassin_spawner_logic::everyone_in_pommel_room(1))
+  while(!_id_055A::_id_586A("isolated_room_zone") || maps\mp\zombies\zombie_assassin_spawner_logic::everyone_in_pommel_room(1)) {
     waitframe();
+  }
 
   return "players left room!";
 }
@@ -1031,8 +1102,9 @@ players_are_too_close() {
   var_0 = undefined;
 
   while(!isDefined(var_0) || distance(self.origin, var_0.origin) > 235) {
-    if(isDefined(level.players) && level.players.size > 0)
+    if(isDefined(level.players) && level.players.size > 0) {
       var_0 = common_scripts\utility::_id_4461(self.origin, level.players);
+    }
 
     waitframe();
   }
@@ -1069,8 +1141,9 @@ recharge_special_ability(var_0) {
   self.specialoverheated = 1;
   wait(var_0 * 0.8);
 
-  if(!common_scripts\utility::_id_562E(self.reverse_assassin_specials_visuals) && !common_scripts\utility::_id_562E(self.is_being_asked_to_leave_soon))
+  if(!common_scripts\utility::_id_562E(self.reverse_assassin_specials_visuals) && !common_scripts\utility::_id_562E(self.is_being_asked_to_leave_soon)) {
     enable_assassin_chest_fx();
+  }
 
   wait(var_0 * 0.2);
 
@@ -1094,35 +1167,41 @@ phase_handler(var_0) {
 
   if(!var_1) {
     foreach(var_3 in var_0.reasons_to_block_progress) {
-      if(self[[var_3._id_3F02]]() == var_3.value)
+      if(self[[var_3._id_3F02]]() == var_3.value) {
         return;
+      }
     }
 
     var_1 = common_scripts\utility::makeentitysentient(var_0.func_and_data);
   }
 
-  if(var_1)
+  if(var_1) {
     set_assassin_phase(var_0.next_phase);
+  }
 }
 
 assassin_has_excuse_to_skip(var_0) {
-  if(!isDefined(var_0.reasons_to_skip))
+  if(!isDefined(var_0.reasons_to_skip)) {
     return 0;
+  }
 
   foreach(var_2 in var_0.reasons_to_skip) {
-    if(common_scripts\utility::_id_3794(var_2))
+    if(common_scripts\utility::_id_3794(var_2)) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 assassin_strike_near_players(var_0, var_1) {
-  if(!isPlayer(var_0))
+  if(!isPlayer(var_0)) {
     return var_1;
+  }
 
-  if(distance(self.origin, var_0.origin) > 800)
+  if(distance(self.origin, var_0.origin) > 800) {
     return var_1;
+  }
 
   var_2 = self.attackpointoffset * vectorNormalize(anglesToForward(var_0 _meth_8566()));
   var_3 = var_2 + self.attackpointoffset * vectorNormalize(anglestoright(var_0 _meth_8566()));
@@ -1130,10 +1209,11 @@ assassin_strike_near_players(var_0, var_1) {
   var_5 = var_2 + self.attackpointoffset * vectorNormalize(anglestoright(var_0 _meth_8566() + (0, 180, 0)));
   var_6 = _func_2E1(var_0.origin + var_5, self);
 
-  if(self.assassin_melee_side > 0)
+  if(self.assassin_melee_side > 0) {
     return var_6;
-  else
+  } else {
     return var_4;
+  }
 }
 
 is_an_elite_assassin() {
@@ -1154,8 +1234,9 @@ init_assassin_vo_flags() {
   level.asn_dmg_flags["zombie_assassin_shellshock"] = "zombie_assassin_shellshockasn_damaged";
   level.asn_dmg_flags["zombie_assassin_camoflauge"] = "zombie_assassin_camoflaugeasn_damaged";
 
-  foreach(var_1 in level.asn_dmg_flags)
-  common_scripts\utility::flag_init(var_1);
+  foreach(var_1 in level.asn_dmg_flags) {
+    common_scripts\utility::flag_init(var_1);
+  }
 }
 
 zombie_assassin_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
@@ -1167,13 +1248,15 @@ zombie_assassin_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     return;
   }
 
-  if(isDefined(self.assassin_special_damage_callback))
+  if(isDefined(self.assassin_special_damage_callback)) {
     [[self.assassin_special_damage_callback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  }
 
-  if(var_8 == "head" && var_5 != "panzerschreck_zm" && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && var_5 != "raven_sword_zm")
+  if(var_8 == "head" && var_5 != "panzerschreck_zm" && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && var_5 != "raven_sword_zm") {
     var_2 = var_2 * 0.8;
-  else if(var_5 != "panzerschreck_zm" && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && var_5 != "raven_sword_zm")
+  } else if(var_5 != "panzerschreck_zm" && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && var_5 != "raven_sword_zm") {
     var_2 = var_2 * 0.6;
+  }
 
   if(!is_boss_assassin() && !_id_0547::_id_5565(self._id_0BA4, "traverse") && (common_scripts\utility::_id_3794("Phase 3: ATTACK") || common_scripts\utility::_id_3794("Phase 2: EXIT AMBUSH"))) {
     if(!isDefined(self.headshotthreshold)) {
@@ -1182,13 +1265,15 @@ zombie_assassin_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     }
 
     if(!common_scripts\utility::_id_562E(self.assassin_stunned)) {
-      if(_id_0547::_id_5565(var_8, "head"))
+      if(_id_0547::_id_5565(var_8, "head")) {
         self.headshotthreshold = self.headshotthreshold + 2.7 * var_2;
-      else
+      } else {
         self.headshotthreshold = self.headshotthreshold + var_2;
+      }
 
-      if(!isDefined(self.assassin_stunned))
+      if(!isDefined(self.assassin_stunned)) {
         self.next_assassin_stun = self.maxhealth * 0.15;
+      }
 
       if(self.headshotthreshold > self.next_assassin_stun) {
         self.headshotthreshold = 0;
@@ -1209,17 +1294,19 @@ zombie_assassin_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   }
 
   if(is_boss_assassin() && !common_scripts\utility::_id_562E(self.enable_final_death)) {
-    if(!isDefined(self.assassin_boss_health))
+    if(!isDefined(self.assassin_boss_health)) {
       self.assassin_boss_health = self.maxhealth;
+    }
 
     if(!isDefined(self._id_3794["assassin_was_koed"]) || common_scripts\utility::_id_3794("assassin_was_koed")) {
       return;
     }
     if(isDefined(var_1) && isPlayer(var_1)) {
-      if(_id_0547::_id_5565(var_8, "head"))
+      if(_id_0547::_id_5565(var_8, "head")) {
         var_1 thread _id_04C7::_id_A102("headshot");
-      else
+      } else {
         var_1 thread _id_04C7::_id_A102("standard");
+      }
     }
 
     self.assassin_boss_health = common_scripts\utility::_id_98E7(self.assassin_boss_health - var_2 <= 0, 0, self.assassin_boss_health - var_2);
@@ -1239,8 +1326,9 @@ zombie_assassin_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 
 should_target_others() {
   if(level.players.size == 1) {
-    if(!isDefined(self.solo_ignore_counter))
+    if(!isDefined(self.solo_ignore_counter)) {
       self.solo_ignore_counter = 0;
+    }
 
     if(self.solo_ignore_counter < 1) {
       self.solo_ignore_counter++;
@@ -1278,8 +1366,9 @@ remove_player_from_list_in_time(var_0) {
   self endon("death");
   wait 6.5;
 
-  if(isDefined(var_0) && isDefined(self.my_ignore_players_list))
+  if(isDefined(var_0) && isDefined(self.my_ignore_players_list)) {
     self.my_ignore_players_list = common_scripts\utility::_id_0F93(self.my_ignore_players_list, var_0);
+  }
 }
 
 headshot_drain() {
@@ -1288,8 +1377,9 @@ headshot_drain() {
   for(;;) {
     self.headshotthreshold = self.headshotthreshold - int(100 * level.players.size);
 
-    if(self.headshotthreshold < 0)
+    if(self.headshotthreshold < 0) {
       self.headshotthreshold = 0;
+    }
 
     wait 1;
   }
@@ -1387,8 +1477,9 @@ transition_to_assassin_idle() {
   self endon("death");
   self endon("zmb_assassin_is_alarmed");
 
-  if(common_scripts\utility::_id_562E(self.skipped_straight_to_idle))
+  if(common_scripts\utility::_id_562E(self.skipped_straight_to_idle)) {
     _id_053C::_id_06CE(_func_2E1(self.origin, self));
+  }
 
   prepare_assassin_action("walk_2_crouch", undefined, undefined);
   common_scripts\utility::_id_379A("Assassin did go idle");
@@ -1409,10 +1500,11 @@ preform_assassin_crouch() {
 preform_assassin_crouch_interrupt(var_0) {
   self scragentsetscripted(0);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, var_0);
-  else
+  } else {
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "idle_stalk_player");
+  }
 }
 
 preform_assassin_ko() {
@@ -1459,8 +1551,9 @@ preform_assassin_strike_interrupt() {
 }
 
 prepare_assassin_action(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "scripted_anim";
+  }
 
   if(isDefined(self.overrridehitreact)) {
     var_0 = self.overrridehitreact;
@@ -1474,10 +1567,11 @@ prepare_assassin_action(var_0, var_1, var_2) {
   var_4 = self getanimentrycount(var_3);
   var_5 = randomint(var_4);
 
-  if(!isDefined(self.forcedtarget) && isDefined(self.player_facing_times) && isDefined(self.player_facing_times[var_0]))
+  if(!isDefined(self.forcedtarget) && isDefined(self.player_facing_times) && isDefined(self.player_facing_times[var_0])) {
     thread handle_facing_player(self.player_facing_times[var_0]);
-  else
+  } else {
     self scragentsetorientmode("face angle abs", self.angles);
+  }
 
   self scragentsetanimmode("anim deltas");
 
@@ -1576,8 +1670,9 @@ dodamageonjoints(var_0, var_1, var_2) {
         var_10 = _abs(var_8.origin[2] - var_6[2]);
 
         if(!common_scripts\utility::_id_0F79(var_3, var_8) && var_9 < var_1 && var_10 < 230) {
-          if(common_scripts\utility::_id_562E(var_2) && randomint(100) > 30)
+          if(common_scripts\utility::_id_562E(var_2) && randomint(100) > 30) {
             thread assassin_attack_cooldown();
+          }
 
           var_3 = common_scripts\utility::_id_0F6F(var_3, var_8);
           var_8 dodamage(90, var_6, self, self, "MOD_IMPACT");
@@ -1610,8 +1705,9 @@ zombie_assassin_spawn_voulnerability_cleanup() {
 init_assassin_spawns_and_exits() {
   var_0 = common_scripts\utility::_id_46B7("zmb_assassin_spawnpoint", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread maps\mp\zombies\zombie_assassin_spawner_logic::wait_for_activation();
+  foreach(var_2 in var_0) {
+    var_2 thread maps\mp\zombies\zombie_assassin_spawner_logic::wait_for_activation();
+  }
 
   initalize_assassin_despawners();
 }

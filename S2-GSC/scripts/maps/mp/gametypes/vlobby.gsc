@@ -41,8 +41,9 @@ _id_6111(var_0) {
 _id_6BAF() {
   _setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_WAR");
   maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_WAR");
@@ -78,14 +79,16 @@ _id_4696(var_0) {
     }
   }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = var_2[0];
+  }
 
   self._id_13B6 = var_3;
   return var_3;
 }
 
 _id_6BA7() {
-  if(isDefined(level._id_A592))
+  if(isDefined(level._id_A592)) {
     self[[level._id_A592]]();
+  }
 }

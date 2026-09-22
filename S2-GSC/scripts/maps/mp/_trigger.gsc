@@ -52,8 +52,9 @@ _id_5258() {
       }
     }
 
-    if(var_15)
+    if(var_15) {
       var_11 = common_scripts\utility::_id_0F93(var_11, var_14);
+    }
   }
 
   if(isDefined(var_11) && var_11.size > 0) {
@@ -61,16 +62,20 @@ _id_5258() {
   }
 
   for(var_23 = 0; var_23 < var_4.size; var_23++) {
-    if(isDefined(var_4[var_23].setgoalnode))
+    if(isDefined(var_4[var_23].setgoalnode)) {
       level thread _id_028C::_id_9DAC(var_4[var_23]);
+    }
 
-    if(isDefined(var_4[var_23].pushplayer))
+    if(isDefined(var_4[var_23].pushplayer)) {
       level thread _id_028C::_id_9DAB(var_4[var_23]);
+    }
 
-    if(isDefined(var_4[var_23].addroll))
+    if(isDefined(var_4[var_23].addroll)) {
       var_4[var_23] thread _id_028C::_id_9D85();
+    }
 
-    if(isDefined(var_4[var_23].physicslaunchserver))
+    if(isDefined(var_4[var_23].physicslaunchserver)) {
       var_4[var_23].setdepthoffield = var_4[var_23].physicslaunchserver;
+    }
   }
 }

@@ -350,6 +350,7 @@ main() {
   level.water_wake = "vfx/treadfx/body_wake_water_bloody";
   level.water_wake_stationary = "vfx/treadfx/body_wake_water_stationary_bloody";
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_zombie_island_fx::main();
+  }
 }

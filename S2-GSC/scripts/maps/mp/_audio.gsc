@@ -4,8 +4,9 @@
 **************************************/
 
 _id_5163() {
-  if(!isDefined(level._id_1355))
+  if(!isDefined(level._id_1355)) {
     level._id_1355 = spawnStruct();
+  }
 
   _id_5255();
   _id_5286();
@@ -33,10 +34,11 @@ _id_095A(var_0, var_1, var_2, var_3, var_4) {
 _id_55FC(var_0) {}
 
 _id_0F2B(var_0) {
-  if(!isDefined(level._id_1355._id_7E43[var_0]))
+  if(!isDefined(level._id_1355._id_7E43[var_0])) {
     var_1 = level._id_1355._id_7E43["default"];
-  else
+  } else {
     var_1 = level._id_1355._id_7E43[var_0];
+  }
 
   self setreverb("snd_enveffectsprio_level", var_1["roomtype"], var_1["drylevel"], var_1["wetlevel"], var_1["fadetime"]);
 }
@@ -73,11 +75,13 @@ _id_8D29(var_0, var_1) {
   var_2 = [var_0, var_1];
 
   foreach(var_4 in var_2) {
-    if(var_4 > 100)
+    if(var_4 > 100) {
       var_4 = 100;
+    }
 
-    if(var_4 < 1)
+    if(var_4 < 1) {
       var_4 = 1;
+    }
   }
 
   var_6 = _randomintrange(1, 100);
@@ -95,24 +99,28 @@ _id_8D29(var_0, var_1) {
 }
 
 _id_8DAE(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "null";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "null";
+  }
 
   if(level.teambased) {
     foreach(var_3 in level.players) {
       if(isDefined(var_3) && _issentient(var_3) && _issentient(self) && var_3.team != self.team) {
-        if(_soundexists(var_1))
+        if(_soundexists(var_1)) {
           var_3 playlocalsound(var_1);
+        }
 
         continue;
       }
 
       if(isDefined(var_3) && _issentient(var_3) && _issentient(self) && var_3.team == self.team) {
-        if(_soundexists(var_0))
+        if(_soundexists(var_0)) {
           var_3 playlocalsound(var_0);
+        }
       }
     }
   }
@@ -134,63 +142,74 @@ _id_8E8B(var_0, var_1, var_2) {
       if(_isarray(var_0)) {
         var_4 = var_0[var_3];
 
-        if(isDefined(var_4))
+        if(isDefined(var_4)) {
           self playSound(var_4);
+        }
 
         continue;
       }
 
-      if(var_1 == var_3)
+      if(var_1 == var_3) {
         self playSound(var_0);
+      }
     }
   }
 }
 
 setoffhandsecondaryclass(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level endon(var_4);
+  }
 
   var_0 scriptmodelplayanimdeltamotion(var_1, var_2);
   thread getoffhandsecondaryclass(var_0, var_2, var_3, var_4, var_5, var_6);
 }
 
 getoffhandsecondaryclass(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level endon(var_3);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_0 endon(var_4);
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_0 endon(var_5);
+  }
 
   var_0 endon("death");
 
   for(;;) {
     var_0 waittill(var_1, var_6);
 
-    if(isDefined(var_6) && var_6 == var_1)
+    if(isDefined(var_6) && var_6 == var_1) {
       var_0 playSound(var_2);
+    }
   }
 }
 
 endlocationselection(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level endon(var_5);
+  }
 
   var_0 scriptmodelplayanimdeltamotion(var_1, var_2);
   thread beginlocationselection(var_0, var_2, var_3, var_4, var_5, var_6, var_7);
 }
 
 beginlocationselection(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level endon(var_4);
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_0 endon(var_5);
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_0 endon(var_6);
+  }
 
   var_0 endon("death");
 
@@ -202,8 +221,9 @@ beginlocationselection(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
       if(isDefined(var_8)) {
         for(var_9 = 0; var_9 < var_7; var_9++) {
-          if(var_8 == var_2[var_9])
+          if(var_8 == var_2[var_9]) {
             var_0 playSound(var_3[var_9]);
+          }
         }
       }
     }
@@ -211,8 +231,9 @@ beginlocationselection(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     for(;;) {
       var_0 waittill(var_1, var_8);
 
-      if(isDefined(var_8) && var_8 == var_2)
+      if(isDefined(var_8) && var_8 == var_2) {
         var_0 playSound(var_3);
+      }
     }
   }
 }
@@ -222,13 +243,13 @@ _id_8DF9(var_0, var_1, var_2) {
   var_4 = [var_0, var_1, var_2];
   var_5[0] = spawn("script_origin", var_3.origin);
   var_5[0] linktosynchronizedparent(var_3);
-  var_5[0] playloopsound(var_0);
+  var_5[0] playLoopSound(var_0);
   var_5[1] = spawn("script_origin", var_3.origin);
   var_5[1] linktosynchronizedparent(var_3);
-  var_5[1] playloopsound(var_1);
+  var_5[1] playLoopSound(var_1);
   var_5[2] = spawn("script_origin", var_3.origin);
   var_5[2] linktosynchronizedparent(var_3);
-  var_5[2] playloopsound(var_2);
+  var_5[2] playLoopSound(var_2);
   var_3 waittill("death");
 
   foreach(var_7 in var_5) {
@@ -265,11 +286,12 @@ _id_2D76(var_0, var_1) {
 _id_8DA8(var_0, var_1, var_2, var_3) {
   var_4 = 0.2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_3;
+  }
 
   var_5 = spawn("script_origin", var_1);
-  var_5 playloopsound(var_0);
+  var_5 playLoopSound(var_0);
   thread _id_8E89(var_5, var_2, var_4);
   return var_5;
 }
@@ -287,8 +309,9 @@ _id_8E89(var_0, var_1, var_2) {
 _id_8DCD(var_0) {
   level._id_9A0E = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.1;
+  }
 
   for(;;) {
     _iprintln(level._id_9A0E);
@@ -315,8 +338,9 @@ _id_8DA2(var_0, var_1, var_2, var_3) {
 }
 
 _id_8DA4(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.05;
+  }
 
   var_3 = _func_351(var_0, var_1, undefined, undefined, undefined, "hard", undefined, var_2);
 }
@@ -335,11 +359,13 @@ _id_136C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_12 = var_7;
     var_13 = 0;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_11 = var_1;
+    }
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_13 = var_5;
+    }
 
     var_11 = var_11 * -1;
 
@@ -364,11 +390,13 @@ _id_136C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       thread _id_136D(var_4);
+    }
 
-    if(!isDefined(var_6))
+    if(!isDefined(var_6)) {
       var_6 = 0.05;
+    }
 
     self endon("death");
     self endon("aud_stop_3D_print");
@@ -377,8 +405,9 @@ _id_136C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     while(isDefined(self)) {
       var_16 = var_0;
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_16 = var_16 + self[[var_3]]();
+      }
 
       wait(var_6);
     }
@@ -389,8 +418,9 @@ _id_136D(var_0) {
   self endon("death");
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("aud_stop_3D_print");
+  }
 }
 
 _id_8DFA() {}

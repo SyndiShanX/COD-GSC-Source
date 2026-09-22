@@ -6,8 +6,9 @@
 main() {
   _id_84F8();
 
-  if(level._id_01D4 && getDvar("2695") != "true")
+  if(level._id_01D4 && getDvar("2695") != "true") {
     xbox_optimizations();
+  }
 
   level thread maps\mp\_utility::_id_6F74(::onplayerspawned);
   thread set_anchor_pulse_lights_off();
@@ -45,86 +46,98 @@ set_dagger_step03_light() {
 set_anchor_lights() {
   var_0 = _getscriptablearray("anchor_light_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lightpart", "on", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lightpart", "on", 0);
+  }
 }
 
 set_anchor_pulse_lights_off() {
   var_0 = _getscriptablearray("anchor_light_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("part_pulse_switch", "off", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("part_pulse_switch", "off", 0);
+  }
 }
 
 set_anchor_pulse_lights_on() {
   var_0 = _getscriptablearray("anchor_light_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("part_pulse_switch", "on", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("part_pulse_switch", "on", 0);
+  }
 }
 
 set_anchor_fast_pulse_lights() {
   var_0 = _getscriptablearray("anchor_light_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("part_pulse_switch", "pulse_fast", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("part_pulse_switch", "pulse_fast", 0);
+  }
 }
 
 set_anchor_slow_pulse_lights() {
   var_0 = _getscriptablearray("anchor_light_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("part_pulse_switch", "pulse_slow", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("part_pulse_switch", "pulse_slow", 0);
+  }
 }
 
 straub_death_start_lights() {
   var_0 = _getscriptablearray("straub_lights_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("light_straub", "color_change_init", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("light_straub", "color_change_init", 0);
+  }
 }
 
 straub_death_start_02_lights() {
   var_0 = _getscriptablearray("straub_lights_02_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("light_straub", "color_change_init", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("light_straub", "color_change_init", 0);
+  }
 }
 
 straub_death_kill_lights() {
   wait 21;
   var_0 = _getscriptablearray("straub_lights_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("light_straub", "off", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("light_straub", "off", 0);
+  }
 }
 
 straub_death_kill_fill_lights() {
   wait 21;
   var_0 = _getscriptablearray("straub_fill_lights_scriptable", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("light_straub", "off", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("light_straub", "off", 0);
+  }
 }
 
 airship_alarm_lights() {
   wait 21;
   var_0 = _getscriptablearray("airship_alarm_lights", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lightpart", "pulse", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lightpart", "pulse", 0);
+  }
 
   var_4 = _getscriptablearray("airship_corrupsing_sparks", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 setscriptablepartstate("part_spark", "flicker_on_1", 0);
+  foreach(var_6 in var_4) {
+    var_6 setscriptablepartstate("part_spark", "flicker_on_1", 0);
+  }
 }
 
 airship_lowering_light_intensity_control(var_0) {
   var_1 = _getscriptablearray("airship_fill_control", "targetname");
 
-  foreach(var_3 in var_1)
-  var_3 setscriptablepartstate("lightpart", var_0, 0);
+  foreach(var_3 in var_1) {
+    var_3 setscriptablepartstate("lightpart", var_0, 0);
+  }
 }
 
 xbox_optimizations() {
@@ -143,6 +156,7 @@ neo_optimizations() {
 set_airship_corrupsing_spark_off() {
   var_0 = _getscriptablearray("airship_corrupsing_sparks", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("part_spark", "initial_off", 0);
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("part_spark", "initial_off", 0);
+  }
 }

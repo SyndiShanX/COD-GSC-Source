@@ -8,11 +8,13 @@ main() {
   level thread maps\mp\_utility::_id_6F74(::onplayerspawned);
   var_0 = _getscriptablearray("auto62", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lightpart", "off");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lightpart", "off");
+  }
 
-  if(level._id_01D4 && getDvar("2695") != "true")
+  if(level._id_01D4 && getDvar("2695") != "true") {
     xbox_optimizations();
+  }
 }
 
 _id_84F8() {

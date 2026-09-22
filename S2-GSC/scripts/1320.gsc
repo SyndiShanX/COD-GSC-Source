@@ -27,17 +27,19 @@ _id_A150() {
   var_0 = 0;
   var_1 = "allies";
 
-  if(self.team == "axis")
+  if(self.team == "axis") {
     var_1 = "axis";
+  }
 
-  if(level._id_9854[var_1])
+  if(level._id_9854[var_1]) {
     var_0 = -2;
-  else if(level._id_9850[var_1])
+  } else if(level._id_9850[var_1]) {
     var_0 = -1;
-  else if(level._id_9854[maps\mp\_utility::getotherteam(var_1)])
+  } else if(level._id_9854[maps\mp\_utility::getotherteam(var_1)]) {
     var_0 = 2;
-  else if(level._id_9850[maps\mp\_utility::getotherteam(var_1)])
+  } else if(level._id_9850[maps\mp\_utility::getotherteam(var_1)]) {
     var_0 = 1;
+  }
 
   self setclientomnvar("ui_minimap_antiair_state", var_0);
 }
@@ -48,13 +50,15 @@ _id_A14F() {
   if(isDefined(level._id_3CE0)) {
     var_0 = 2;
 
-    if(level._id_3CE0 != self)
+    if(level._id_3CE0 != self) {
       var_0 = var_0 * -1;
+    }
   } else if(isDefined(level._id_2694)) {
     var_0 = 1;
 
-    if(level._id_2694 != self)
+    if(level._id_2694 != self) {
       var_0 = var_0 * -1;
+    }
   }
 
   self setclientomnvar("ui_minimap_antiair_state", var_0);

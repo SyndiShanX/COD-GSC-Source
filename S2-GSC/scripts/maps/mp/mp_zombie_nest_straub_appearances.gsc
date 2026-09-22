@@ -20,7 +20,7 @@ main() {
   level._id_943B._id_38E6["s2_zom_straub_table_cleaver_exit_4"] = % s2_zom_straub_table_cleaver_exit_4;
   level._id_943B._id_38E6["s2_zom_straub_table_cleaver_exit_6"] = % s2_zom_straub_table_cleaver_exit_6;
   level._id_943B._id_38E6["s2_zom_straub_table_hacksaw_exit_6"] = % s2_zom_straub_table_hacksaw_exit_6;
-  level._id_943B._id_241F = _getent("straub_bullet_clip", "targetname");
+  level._id_943B._id_241F = _getEnt("straub_bullet_clip", "targetname");
   level._effect["temp_straub_radius"] = loadfx("vfx/weaponimpact/zmb_straub_impact");
   level._id_943B._id_9097 = _id_9442();
 
@@ -59,21 +59,25 @@ _id_9445() {
 }
 
 _id_943D(var_0) {
-  if(!common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(var_0)) {
     _id_0557::_id_7870("8B final boss", "final boss battle part 1");
+  }
 
   level notify("stop_straub");
 
   if(isDefined(level._id_943B)) {
-    if(isDefined(level._id_943B._id_241F))
+    if(isDefined(level._id_943B._id_241F)) {
       level._id_943B._id_241F delete();
+    }
 
     if(isDefined(level._id_943B._id_2913)) {
-      if(isDefined(level._id_943B._id_2913._id_00B9))
+      if(isDefined(level._id_943B._id_2913._id_00B9)) {
         level._id_943B._id_2913._id_00B9 delete();
+      }
 
-      if(isDefined(level._id_943B._id_2913._id_9A8E))
+      if(isDefined(level._id_943B._id_2913._id_9A8E)) {
         level._id_943B._id_2913._id_9A8E delete();
+      }
 
       if(isDefined(level._id_943B._id_2913._id_18A8)) {
         _killfxontag(common_scripts\utility::_id_44F5("temp_straub_radius"), level._id_943B._id_2913._id_18A8, "J_MainRoot");
@@ -139,8 +143,9 @@ _id_9442() {
     var_2._id_38E4 = var_2.animation;
     var_2._id_38E5 = var_2.getnegotiationnextnode;
 
-    if(!isDefined(var_2._id_5EB4))
+    if(!isDefined(var_2._id_5EB4)) {
       var_2._id_5EB4 = var_2.origin;
+    }
   }
 
   return var_0;
@@ -154,10 +159,11 @@ _id_9448() {
   self._id_18A8 setModel("zom_hero_straub_wholebody");
   self._id_00B9 = spawn("script_model", self.origin);
   self._id_00B9 setModel("zom_head_kier_org1");
-  self._id_00B9 linkto(self._id_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  self._id_00B9 linkTo(self._id_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
 
-  if(isDefined(level._id_943B._id_241F))
+  if(isDefined(level._id_943B._id_241F)) {
     thread _id_943F();
+  }
 
   var_0 = undefined;
   var_1 = undefined;
@@ -173,7 +179,7 @@ _id_9448() {
   if(isDefined(var_0)) {
     self._id_9A8E = spawn("script_model", self.origin);
     self._id_9A8E setModel(var_0);
-    self._id_9A8E linkto(self._id_18A8, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
+    self._id_9A8E linkTo(self._id_18A8, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
   }
 
   while(!self._id_65F8._id_565E) {
@@ -198,14 +204,16 @@ _id_9448() {
   if(isDefined(self._id_38E5)) {
     wait(_id_0547::_id_9470(self._id_38E5) - var_2);
 
-    if(isDefined(level._id_943B._id_241F))
+    if(isDefined(level._id_943B._id_241F)) {
       level._id_943B._id_241F unlink();
+    }
 
     _killfxontag(common_scripts\utility::_id_44F5("temp_straub_radius"), self._id_18A8, "J_MainRoot");
     self._id_00B9 delete();
 
-    if(isDefined(self._id_9A8E))
+    if(isDefined(self._id_9A8E)) {
       self._id_9A8E delete();
+    }
 
     self._id_18A8 delete();
     self notify("straub_destroyed");
@@ -215,16 +223,17 @@ _id_9448() {
 _id_943F() {
   self endon("straub_destroyed");
   level._id_943B._id_241F.origin = self._id_18A8.origin;
-  level._id_943B._id_241F linkto(self._id_18A8, "tag_origin", (0, 0, 32), (0, 0, 0));
-  level._id_943B._id_241F setcandamage(1);
+  level._id_943B._id_241F linkTo(self._id_18A8, "tag_origin", (0, 0, 32), (0, 0, 0));
+  level._id_943B._id_241F setCanDamage(1);
   level._id_943B._id_241F thread maps\mp\gametypes\_damage::_id_8676(1, undefined, ::_id_9440, ::_id_943E);
 }
 
 _id_943E(var_0, var_1, var_2, var_3) {
   thread _id_9449();
 
-  if(isDefined(var_0) && isPlayer(var_0))
+  if(isDefined(var_0) && isPlayer(var_0)) {
     var_0 maps\mp\gametypes\zombies::_id_47C8("ZM_STRAUB");
+  }
 
   return 0;
 }
@@ -261,8 +270,9 @@ _id_9444(var_0) {
   var_1 = _id_9441(var_0);
   var_2 = _id_9443(var_1);
 
-  if(var_2)
+  if(var_2) {
     var_2 = _bullettracepassed(self._id_5EB4, var_0 getEye(), 0, self._id_18A8);
+  }
 
   return var_2;
 }
@@ -284,12 +294,14 @@ _id_9443(var_0) {
 }
 
 _id_943C(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   foreach(var_2 in level.players) {
-    if(var_0 _id_9444(var_2))
+    if(var_0 _id_9444(var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -311,8 +323,9 @@ _id_9447() {
       case "bunker_speaker":
         level._id_6DD5[level._id_6DD5.size] = var_1;
 
-        if(_id_0547::_id_5565(var_1.setlookatent, "straub_office_speaker"))
+        if(_id_0547::_id_5565(var_1.setlookatent, "straub_office_speaker")) {
           level._id_6DD6[level._id_6DD6.size] = var_1;
+        }
 
         break;
       case "village_speaker":
@@ -349,13 +362,15 @@ _id_09EF(var_0, var_1, var_2, var_3) {
   self._id_5D99[var_0].duration = var_2;
   self._id_5D99[var_0]._id_3DD3 = var_3;
 
-  if(!issubstr(var_0, "_2") && !issubstr(var_0, "_3") && !issubstr(var_0, "_4"))
+  if(!issubstr(var_0, "_2") && !issubstr(var_0, "_3") && !issubstr(var_0, "_4")) {
     self._id_13B1[self._id_13B1.size] = var_0;
+  }
 }
 
 _id_7CFC(var_0) {
-  if(!issubstr(var_0, "_2") && !issubstr(var_0, "_3") && !issubstr(var_0, "_4"))
+  if(!issubstr(var_0, "_2") && !issubstr(var_0, "_3") && !issubstr(var_0, "_4")) {
     level._id_943B._id_13B1 = common_scripts\utility::_id_0F93(level._id_943B._id_13B1, var_0);
+  }
 }
 
 _id_46B3(var_0) {
@@ -363,8 +378,9 @@ _id_46B3(var_0) {
   var_2 = level._id_943B._id_5D99[var_0].duration;
   var_3 = undefined;
 
-  if(isDefined(level._id_943B._id_5D99[var_0]._id_3DD3))
+  if(isDefined(level._id_943B._id_5D99[var_0]._id_3DD3)) {
     var_3 = level._id_943B._id_5D99[var_0]._id_3DD3;
+  }
 
   return [var_1, var_2, var_3];
 }
@@ -392,14 +408,15 @@ _id_74E2(var_0, var_1) {
   }
   if(level._id_943B._id_50D6) {
     if(isDefined(level._id_943B._id_2913)) {
-      if(_id_943C(level._id_943B._id_2913))
+      if(_id_943C(level._id_943B._id_2913)) {
         return;
-      else if(isDefined(level._id_943B._id_2913._id_18A8)) {
+      } else if(isDefined(level._id_943B._id_2913._id_18A8)) {
         level._id_943B._id_2913._id_18A8 hide();
         level._id_943B._id_2913._id_00B9 hide();
 
-        if(isDefined(level._id_943B._id_2913._id_9A8E))
+        if(isDefined(level._id_943B._id_2913._id_9A8E)) {
           level._id_943B._id_2913._id_9A8E hide();
+        }
       }
     }
   }
@@ -473,8 +490,9 @@ _id_74E2(var_0, var_1) {
       level._id_943B._id_2913._id_18A8 show();
       level._id_943B._id_2913._id_00B9 show();
 
-      if(isDefined(level._id_943B._id_2913._id_9A8E))
+      if(isDefined(level._id_943B._id_2913._id_9A8E)) {
         level._id_943B._id_2913._id_9A8E show();
+      }
     }
   }
 }

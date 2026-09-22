@@ -12,14 +12,16 @@ onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(!isDefined(var_0.pers["stats"]))
+    if(!isDefined(var_0.pers["stats"])) {
       var_0.pers["stats"] = [];
+    }
 
     var_0.stats = var_0.pers["stats"];
 
     if(!var_0.stats.size) {
-      foreach(var_3, var_2 in level._id_145B)
-      var_0 maps\mp\_utility::initplayerstat(var_3, level._id_145B[var_3]._id_2BD8);
+      foreach(var_3, var_2 in level._id_145B) {
+        var_0 maps\mp\_utility::initplayerstat(var_3, level._id_145B[var_3]._id_2BD8);
+      }
     }
   }
 }
@@ -209,14 +211,17 @@ _id_535A(var_0, var_1, var_2, var_3, var_4) {
   level._id_145B[var_0] = spawnStruct();
   level._id_145B[var_0]._id_2BD8 = var_1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level._id_145B[var_0]._id_7743 = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level._id_145B[var_0]._id_A2A6 = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level._id_145B[var_0]._id_A2A7 = var_4;
+  }
 }
 
 _id_86F2(var_0, var_1) {
@@ -227,8 +232,9 @@ _id_86F2(var_0, var_1) {
   var_3 = maps\mp\_utility::getplayerstat(var_0);
   var_3 = _id_44EC(var_0, var_3);
 
-  if(var_2 == 0 || var_3 > var_2)
+  if(var_2 == 0 || var_3 > var_2) {
     self setplayerdata(common_scripts\utility::_id_46A7(), "bests", var_0, var_3);
+  }
 }
 
 _id_86F3(var_0) {
@@ -239,16 +245,18 @@ _id_86F3(var_0) {
   var_2 = maps\mp\_utility::getplayerstat(var_0);
   var_2 = _id_44EC(var_0, var_2);
 
-  if(var_1 == 0 || var_2 < var_1)
+  if(var_1 == 0 || var_2 < var_1) {
     self setplayerdata(common_scripts\utility::_id_46A7(), "bests", var_0, var_2);
+  }
 }
 
 _id_1E4F(var_0) {
   var_1 = var_0 maps\mp\_utility::getplayerstat("kills");
   var_2 = var_0 maps\mp\_utility::getplayerstat("deaths");
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     var_2 = 1;
+  }
 
   var_0 maps\mp\_utility::setplayerstat("kdratio", var_1 / var_2);
 }
@@ -256,8 +264,9 @@ _id_1E4F(var_0) {
 _id_46EB(var_0) {
   var_1 = var_0.score;
 
-  if(!level.teambased)
+  if(!level.teambased) {
     var_1 = var_0._id_008F;
+  }
 
   return var_1;
 }
@@ -405,8 +414,9 @@ _id_933F(var_0) {
   var_1 = maps\mp\_utility::getplayerstat(var_0);
   var_2 = level._id_145B[var_0]._id_2BD8;
 
-  if(var_1 == var_2)
+  if(var_1 == var_2) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }

@@ -126,8 +126,9 @@ boost_special_enemy_waves() {
         var_7 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_percentage(var_6);
         var_8 = int(5 * (var_7 / 100) - 1);
 
-        if(var_8 < 0)
+        if(var_8 < 0) {
           var_8 = 0;
+        }
 
         var_9 = var_14 / level._id_3774[var_15][var_14].size;
 
@@ -143,8 +144,9 @@ boost_special_enemy_waves() {
 }
 
 adjust_zombie_health_on_connected() {
-  while(!isDefined(level.players) || level.players.size == 0)
+  while(!isDefined(level.players) || level.players.size == 0) {
     waitframe();
+  }
 
   var_0 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_current_team_level();
   level.zmb_global_zombie_health_multiplier = _func_2CA(1.1, 1.9, maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_percentage(var_0) / 100);
@@ -167,14 +169,17 @@ initialize_care_package_rewards() {
   var_6 = ["teslagun_zm_moon", "teslagun_zm_blood", "teslagun_zm_death", "teslagun_zm_storm", "razergun_pap_zm"];
   var_7 = common_scripts\utility::_id_0F73(["dp28_pap_zm", "dp28_pap_zm", "dp28_pap_zm", "sdk_pap_zm", "charlton_pap_zm", "emp44_pap_zm"], ["m1911_pap_zm", "p38_pap_zm", "svt40_pap_zm", "m1garand_pap_zm"]);
 
-  if(_id_0547::_id_5836("wz35_zm"))
+  if(_id_0547::_id_5836("wz35_zm")) {
     var_7 = ["dp28_pap_zm", "dp28_pap_zm", "emp44_pap_zm", "wz35_pap_zm", "lad_pap_zm", "kgm21_pap_zm", "emp44_pap_zm", "m1911_pap_zm"];
+  }
 
-  if(_id_0547::_id_5836("mas36_zm"))
+  if(_id_0547::_id_5836("mas36_zm")) {
     var_7 = common_scripts\utility::_id_0F73(var_7, ["mas36_pap_zm", "austen_pap_zm"]);
+  }
 
-  if(_id_0547::_id_5836("bechowiec_zm"))
+  if(_id_0547::_id_5836("bechowiec_zm")) {
     var_7 = common_scripts\utility::_id_0F73(var_7, ["bechowiec_pap_zm"]);
+  }
 
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::register_care_package_reward(0, var_0, []);
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::register_care_package_reward(1, var_0, var_4, var_3);

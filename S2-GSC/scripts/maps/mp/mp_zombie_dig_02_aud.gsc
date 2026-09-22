@@ -71,8 +71,9 @@ _id_35E1() {
 _id_7248() {
   soundscripts\_snd_common_zmb_dlc3::dlc3_altered_state_init();
 
-  if(!isDefined(self._id_11CB))
+  if(!isDefined(self._id_11CB)) {
     self._id_11CB = spawnStruct();
+  }
 }
 
 _id_7330() {
@@ -96,7 +97,7 @@ aud_blood_plate_absorb(var_0) {
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
   _id_0380::_id_288B("zmb_dig_soul_suck_blood", undefined, var_2);
-  var_2 moveto(var_0.origin, 1.9);
+  var_2 moveTo(var_0.origin, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -119,44 +120,49 @@ aud_turn_on_bloodfalls(var_0) {
     var_0.fall_snd_ne = _id_0380::_id_6842("zmb_dig_bloodfall_lp", undefined, (125, 1552, 473), 0.75);
     var_0.splat_snd_ne = _id_0380::_id_6842("zmb_dig_bloodfall_splats_lp", undefined, (125, 1552, 131), 0.75);
 
-    if(!isDefined(level._id_11CB.fallcount))
+    if(!isDefined(level._id_11CB.fallcount)) {
       level._id_11CB.fallcount = 1;
-    else
+    } else {
       level._id_11CB.fallcount++;
+    }
   }
 
   if(var_0.targetname == "blood_fount_SE") {
     var_0.fall_snd_se = _id_0380::_id_6842("zmb_dig_bloodfall_lp_2", undefined, (113, 1379, 473), 0.75);
     var_0.splat_snd_se = _id_0380::_id_6842("zmb_dig_bloodfall_splats_lp", undefined, (113, 1379, 131), 0.75);
 
-    if(!isDefined(level._id_11CB.fallcount))
+    if(!isDefined(level._id_11CB.fallcount)) {
       level._id_11CB.fallcount = 1;
-    else
+    } else {
       level._id_11CB.fallcount++;
+    }
   }
 
   if(var_0.targetname == "blood_fount_SW") {
     var_0.fall_snd_sw = _id_0380::_id_6842("zmb_dig_bloodfall_lp_3", undefined, (-88, 1381, 473), 0.75);
     var_0.splat_snd_sw = _id_0380::_id_6842("zmb_dig_bloodfall_splats_lp", undefined, (-88, 1381, 131), 0.75);
 
-    if(!isDefined(level._id_11CB.fallcount))
+    if(!isDefined(level._id_11CB.fallcount)) {
       level._id_11CB.fallcount = 1;
-    else
+    } else {
       level._id_11CB.fallcount++;
+    }
   }
 
   if(var_0.targetname == "blood_fount_NW") {
     var_0.fall_snd_nw = _id_0380::_id_6842("zmb_dig_bloodfall_lp_4", undefined, (-90, 1541, 473), 0.75);
     var_0.splat_snd_nw = _id_0380::_id_6842("zmb_dig_bloodfall_splats_lp", undefined, (-90, 1541, 131), 0.75);
 
-    if(!isDefined(level._id_11CB.fallcount))
+    if(!isDefined(level._id_11CB.fallcount)) {
       level._id_11CB.fallcount = 1;
-    else
+    } else {
       level._id_11CB.fallcount++;
+    }
   }
 
-  if(_id_0547::_id_5565(level._id_11CB.fallcount, 3))
+  if(_id_0547::_id_5565(level._id_11CB.fallcount, 3)) {
     _id_0380::_id_6842("zmb_dig_amb_blood_room_drips_lp", undefined, (6, 1465, 171), 2);
+  }
 }
 
 aud_resonator_hit(var_0) {
@@ -192,8 +198,9 @@ aud_scavenge_generator_turn_off(var_0) {
 }
 
 aud_scavenge_generator_turn_on(var_0) {
-  if(isDefined(level._id_11CB.generator_idle_snd))
+  if(isDefined(level._id_11CB.generator_idle_snd)) {
     _id_0380::_id_6850(level._id_11CB.generator_idle_snd, 0.5);
+  }
 
   _id_0380::_id_288B("zmb_generator_repaired_01", undefined, var_0);
 }
@@ -234,14 +241,17 @@ aud_place_sword_piece(var_0) {
 aud_assemble_sword() {
   var_0 = self;
 
-  if(isDefined(level._id_11CB.sword_piece_place_lp_01))
+  if(isDefined(level._id_11CB.sword_piece_place_lp_01)) {
     _id_0380::_id_6850(level._id_11CB.sword_piece_place_lp_01, 0.75);
+  }
 
-  if(isDefined(level._id_11CB.sword_piece_place_lp_02))
+  if(isDefined(level._id_11CB.sword_piece_place_lp_02)) {
     _id_0380::_id_6850(level._id_11CB.sword_piece_place_lp_02, 0.75);
+  }
 
-  if(isDefined(level._id_11CB.sword_piece_place_lp_03))
+  if(isDefined(level._id_11CB.sword_piece_place_lp_03)) {
     _id_0380::_id_6850(level._id_11CB.sword_piece_place_lp_03, 0.75);
+  }
 
   _id_0380::_id_2889("zmb_dig_forge_sword_buildup", undefined, var_0.origin);
   level._id_11CB.sword_assamble_lp = _id_0380::_id_6842("zmb_dig_forge_sword_lp", undefined, var_0.origin, 3);
@@ -306,8 +316,9 @@ aud_brazier_light() {
 aud_brazier_light_stop() {
   var_0 = self;
 
-  if(isDefined(var_0.snd_handle))
+  if(isDefined(var_0.snd_handle)) {
     _id_0380::_id_6850(var_0.snd_handle, 0.5);
+  }
 }
 
 aud_basalt_move() {
@@ -316,19 +327,23 @@ aud_basalt_move() {
 }
 
 aud_dig_earthquake(var_0, var_1, var_2) {
-  foreach(var_4 in level.players)
-  var_4 clientaddsoundsubmix("dig_earthquake_mix");
+  foreach(var_4 in level.players) {
+    var_4 clientaddsoundsubmix("dig_earthquake_mix");
+  }
 
   var_6 = 1;
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     var_6 = 0.65;
+  }
 
-  if(var_2 == 1)
+  if(var_2 == 1) {
     var_6 = 0.8;
+  }
 
-  if(var_2 == 2)
+  if(var_2 == 2) {
     var_6 = 1;
+  }
 
   switch (var_0) {
     case "rumble1":
@@ -376,20 +391,25 @@ aud_dig_earthquake(var_0, var_1, var_2) {
 aud_dig_earthquake_stop(var_0) {
   _id_0366::_id_8E30(1.0, var_0);
 
-  foreach(var_2 in level.players)
-  var_2 clientclearsoundsubmix("dig_earthquake_mix");
+  foreach(var_2 in level.players) {
+    var_2 clientclearsoundsubmix("dig_earthquake_mix");
+  }
 
-  if(isDefined(level._id_11CB.dig_earthquake_phase1_handle))
+  if(isDefined(level._id_11CB.dig_earthquake_phase1_handle)) {
     _id_0380::_id_6850(level._id_11CB.dig_earthquake_phase1_handle, var_0);
+  }
 
-  if(isDefined(level._id_11CB.dig_earthquake_phase2_handle))
+  if(isDefined(level._id_11CB.dig_earthquake_phase2_handle)) {
     _id_0380::_id_6850(level._id_11CB.dig_earthquake_phase2_handle, var_0 * 1.3);
+  }
 
-  if(isDefined(level._id_11CB.dig_earthquake_phase3_handle))
+  if(isDefined(level._id_11CB.dig_earthquake_phase3_handle)) {
     _id_0380::_id_6850(level._id_11CB.dig_earthquake_phase3_handle, var_0);
+  }
 
-  if(isDefined(level._id_11CB.dig_earthquake_phase4_handle))
+  if(isDefined(level._id_11CB.dig_earthquake_phase4_handle)) {
     _id_0380::_id_6850(level._id_11CB.dig_earthquake_phase4_handle, var_0);
+  }
 
   level._id_11CB.dig_earthquake_phase1_handle = undefined;
   level._id_11CB.dig_earthquake_phase2_handle = undefined;
@@ -420,10 +440,11 @@ aud_trap_spikes(var_0) {
     _id_0380::_id_2889("trap_spikes", undefined, var_0);
     _id_0380::_id_2889("zmb_dig_spike_trap_splash", undefined, (1, 1490, 192));
 
-    if(var_2 < 19)
+    if(var_2 < 19) {
       var_2++;
-    else
+    } else {
       var_1 = 0;
+    }
 
     wait 1;
   }
@@ -434,7 +455,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 moveto(var_1, 1.9);
+  var_2 moveTo(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }

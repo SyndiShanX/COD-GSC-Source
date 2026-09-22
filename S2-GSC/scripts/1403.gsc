@@ -14,22 +14,25 @@ _id_9E3E(var_0, var_1) {
 }
 
 _id_73BA(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level._id_1EB9;
+  }
 
   var_1 = int(gettime() + var_0 * 1000);
 
   if(isDefined(self._id_2747) && self._id_2747) {
     var_2 = self getclientomnvar("ui_zm_camo");
 
-    if(var_2 >= var_1)
+    if(var_2 >= var_1) {
       return;
+    }
   }
 
   self notify("playerCamouflageMode");
 
-  if(!isDefined(self._id_2747))
+  if(!isDefined(self._id_2747)) {
     self._id_2747 = 0;
+  }
 
   self playlocalsound("zmb_ss_camo_use");
   self._id_2747++;

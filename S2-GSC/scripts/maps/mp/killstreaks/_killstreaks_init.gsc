@@ -7,8 +7,9 @@ init() {
   if(isDefined(level._id_585D) && level._id_585D && (!isDefined(level.zombiekillstreaksenabled) || isDefined(level.zombiekillstreaksenabled) && !level.zombiekillstreaksenabled)) {
     return;
   }
-  if(maps\mp\_utility::_id_571D())
+  if(maps\mp\_utility::_id_571D()) {
     maps\mp\_utility::_id_2F6D();
+  }
 
   if(maps\mp\_utility::_id_571D()) {
     return;

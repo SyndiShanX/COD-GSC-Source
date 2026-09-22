@@ -67,12 +67,14 @@ _id_23A0() {
   var_0 = _id_0547::_id_408F();
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       var_2 _id_8605();
+    }
   }
 
-  foreach(var_5 in level._id_08CB)
-  maps\mp\mp_zombie_nest_special_event_creator_interface::_id_23C4(var_5);
+  foreach(var_5 in level._id_08CB) {
+    maps\mp\mp_zombie_nest_special_event_creator_interface::_id_23C4(var_5);
+  }
 }
 
 _id_8605(var_0) {
@@ -82,10 +84,11 @@ _id_8605(var_0) {
   self._id_60D0 = undefined;
   self notify("clear_tower_behavior");
 
-  if(!common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(var_0)) {
     self._id_9ACD = "not interested";
-  else
+  } else {
     self._id_9ACD = "ignore the tower";
+  }
 }
 
 _id_9BCF(var_0, var_1, var_2) {
@@ -125,42 +128,49 @@ _id_24E4() {
     if(common_scripts\utility::_id_562E(var_3._id_5539)) {
       continue;
     }
-    if(!isDefined(var_3._id_9ACD))
+    if(!isDefined(var_3._id_9ACD)) {
       var_4 = "";
-    else
+    } else {
       var_4 = var_3._id_9ACD;
+    }
 
     var_3 hudoutlinedisable();
 
     switch (var_4) {
       case "not interested":
-        if(var_1 == 3)
+        if(var_1 == 3) {
           var_3 hudoutlineenable(0, 0);
+        }
 
         break;
       case "travel to idle":
-        if(var_1 == 3)
+        if(var_1 == 3) {
           var_3 hudoutlineenable(0, 0);
+        }
 
         break;
       case "travel to attack":
-        if(var_1 >= 2)
+        if(var_1 >= 2) {
           var_3 hudoutlineenable(2, 0);
+        }
 
         break;
       case "idling at tower":
-        if(var_1 == 3)
+        if(var_1 == 3) {
           var_3 hudoutlineenable(0, 0);
+        }
 
         break;
       case "attacking point":
-        if(var_1 >= 1)
+        if(var_1 >= 1) {
           var_3 hudoutlineenable(1, 0);
+        }
 
         break;
       case "ignore the tower":
-        if(var_1 == 3)
+        if(var_1 == 3) {
           var_3 hudoutlineenable(1, 0);
+        }
 
         break;
     }
@@ -241,11 +251,13 @@ _id_9E0E(var_0, var_1, var_2, var_3, var_4) {
       var_9 = _id_AB87(var_0[var_6], var_8, var_7);
       var_10 = 0;
 
-      if(isDefined(var_9))
+      if(isDefined(var_9)) {
         var_10 = _id_9BCF(var_9, var_0[var_6], var_7);
+      }
 
-      if(!var_10 && _id_1172(var_1) && !_id_AC05(var_8, var_4))
+      if(!var_10 && _id_1172(var_1) && !_id_AC05(var_8, var_4)) {
         _id_9E10(var_0[var_6], var_7);
+      }
     }
   }
 
@@ -253,16 +265,18 @@ _id_9E0E(var_0, var_1, var_2, var_3, var_4) {
     var_0 = _id_0547::_id_408F();
 
     foreach(var_12 in var_0) {
-      if(!var_12 _id_A7F2())
+      if(!var_12 _id_A7F2()) {
         var_12 _id_8605();
+      }
     }
   }
 }
 
 _id_5552(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(self._id_0A4B) && self._id_0A4B == var_0[var_1])
+    if(isDefined(self._id_0A4B) && self._id_0A4B == var_0[var_1]) {
       return 1;
+    }
   }
 
   return 0;
@@ -278,10 +292,11 @@ _id_7C0F(var_0, var_1) {
       if(isDefined(var_5) && isalive(var_5)) {
         if(var_5 _id_3E77()) {
           if(var_5 _id_561C() || common_scripts\utility::_id_562E(var_5._id_2FDA) || !var_5 _id_5552(var_1)) {
-            if(common_scripts\utility::_id_562E(var_5._id_2FDA) || !var_5 _id_5552(var_1))
+            if(common_scripts\utility::_id_562E(var_5._id_2FDA) || !var_5 _id_5552(var_1)) {
               var_5 _id_8605(1);
-            else if(var_5 _id_561C())
+            } else if(var_5 _id_561C()) {
               var_5 _id_8605();
+            }
 
             var_5 notify("is_tower_battle_distracted");
             var_0[var_3]._id_AB4E[var_4] _id_23D5();
@@ -307,15 +322,17 @@ _id_561C() {
 }
 
 _id_A658(var_0, var_1, var_2) {
-  while(distance(var_0.origin, self.origin) > var_1)
+  while(distance(var_0.origin, self.origin) > var_1) {
     wait 0.1;
+  }
 }
 
 _id_49A2(var_0) {
   self endon("death");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     thread _id_A645(var_0[var_1]);
+  }
 
   self waittill("tower_behavior_cancel_reason_found");
   self notify("clear_tower_behavior_handled");
@@ -337,8 +354,9 @@ _id_AB87(var_0, var_1, var_2) {
   var_3 = [];
 
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
-    if(isDefined(var_1[var_4]._id_9ACD) && common_scripts\utility::_id_562E(var_1[var_4]._id_9ACD != "attacking point") && distance(var_0.origin, var_2.origin) < distance(var_1[var_4].origin, var_2.origin))
+    if(isDefined(var_1[var_4]._id_9ACD) && common_scripts\utility::_id_562E(var_1[var_4]._id_9ACD != "attacking point") && distance(var_0.origin, var_2.origin) < distance(var_1[var_4].origin, var_2.origin)) {
       return var_1[var_4];
+    }
   }
 
   return undefined;
@@ -376,8 +394,9 @@ _id_AC05(var_0, var_1) {
 _id_9E10(var_0, var_1) {
   var_2 = _id_9E0B(var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     _id_10CD(var_0, var_2, self);
+  }
 }
 
 _id_ABF5(var_0) {
@@ -393,8 +412,9 @@ _id_50A4() {
 }
 
 _id_8419(var_0) {
-  if(!isDefined(self._id_9ACD) || !(self._id_9ACD == "travel to attack" || self._id_9ACD == "attacking point"))
+  if(!isDefined(self._id_9ACD) || !(self._id_9ACD == "travel to attack" || self._id_9ACD == "attacking point")) {
     _id_8603(var_0);
+  }
 }
 
 _id_23D5() {
@@ -408,8 +428,9 @@ _id_412A(var_0) {
   for(var_3 = 0; var_3 < var_0._id_AB4E.size; var_3++) {
     var_4 = var_0._id_AB4E[var_3]._id_65FB;
 
-    if(isDefined(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isalive(var_4)) {
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_4);
+    }
   }
 
   return var_2;
@@ -417,8 +438,9 @@ _id_412A(var_0) {
 
 _id_8F14(var_0, var_1) {
   foreach(var_3 in level.players) {
-    if(distance(var_0, var_3.origin) < var_1)
+    if(distance(var_0, var_3.origin) < var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -442,8 +464,9 @@ _id_4082(var_0) {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2] maps\mp\mp_zombie_nest_ee_util::_id_442B();
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_0[var_2]);
+    }
   }
 
   return var_1;
@@ -475,8 +498,9 @@ _id_52DD(var_0) {
       foreach(var_5 in self[var_1]._id_65E8) {
         var_6 = common_scripts\utility::_id_4461(var_5.origin, var_0._id_ABEA._id_1176, 250);
 
-        if(isDefined(var_6))
+        if(isDefined(var_6)) {
           var_5._id_65DE = var_6;
+        }
       }
     }
   }
@@ -484,8 +508,9 @@ _id_52DD(var_0) {
 
 _id_459C(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(var_0[var_1] maps\mp\mp_zombie_nest_ee_util::_id_996A())
+    if(var_0[var_1] maps\mp\mp_zombie_nest_ee_util::_id_996A()) {
       return var_0[var_1];
+    }
   }
 
   return common_scripts\utility::random(var_0);
@@ -493,8 +518,9 @@ _id_459C(var_0) {
 
 _id_7590(var_0, var_1) {
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] _id_7591(var_0))
+    if(var_1[var_2] _id_7591(var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -509,8 +535,9 @@ _id_9E0B(var_0) {
   var_1._id_7588 = var_0;
   var_1._id_9110 = var_1._id_7588 maps\mp\mp_zombie_nest_ee_util::_id_442B();
 
-  if(isDefined(var_1._id_7588) && isDefined(var_1._id_9110))
+  if(isDefined(var_1._id_7588) && isDefined(var_1._id_9110)) {
     return var_1;
-  else
+  } else {
     return undefined;
+  }
 }

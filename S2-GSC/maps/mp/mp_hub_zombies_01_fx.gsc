@@ -15,6 +15,7 @@ main() {
   level._effect["test_effect"] = loadfx("vfx/test/test_fx");
   level._effect["zmb_hub_canon_env_fx"] = LoadFX("vfx/map/mp_zombie_hub/zmb_war_machine_canon_env");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_hub_zombies_01_fx::main();
+  }
 }

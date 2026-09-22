@@ -4,25 +4,29 @@
 *******************************************/
 
 _id_7759() {
-  if(maps\mp\_utility::_id_585F())
+  if(maps\mp\_utility::_id_585F()) {
     _setclientmatchdata("scoreboardPlayerCount", 0);
+  }
 
-  foreach(var_1 in level.placement["all"])
-  var_1 _id_8701();
+  foreach(var_1 in level.placement["all"]) {
+    var_1 _id_8701();
+  }
 
   if(maps\mp\_utility::_id_585F()) {
     _id_1D5A("neutral");
 
-    foreach(var_1 in level.players)
-    var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "neutral");
+    foreach(var_1 in level.players) {
+      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "neutral");
+    }
 
     _setclientmatchdata("alliesScore", level._id_A980);
     _setclientmatchdata("axisScore", _getomnvar("ui_game_duration"));
   } else if(level._id_6520) {
     _id_1D5A("multiteam");
 
-    foreach(var_1 in level.players)
-    var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "multiteam");
+    foreach(var_1 in level.players) {
+      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "multiteam");
+    }
 
     _setclientmatchdata("alliesScore", -1);
     _setclientmatchdata("axisScore", -1);
@@ -30,12 +34,13 @@ _id_7759() {
     var_7 = _getteamscore("allies");
     var_8 = _getteamscore("axis");
 
-    if(var_7 == var_8)
+    if(var_7 == var_8) {
       var_9 = "tied";
-    else if(var_7 > var_8)
+    } else if(var_7 > var_8) {
       var_9 = "allies";
-    else
+    } else {
       var_9 = "axis";
+    }
 
     _setclientmatchdata("alliesScore", var_7);
     _setclientmatchdata("axisScore", var_8);
@@ -60,14 +65,16 @@ _id_7759() {
     } else {
       _id_1D5A(var_9);
 
-      foreach(var_1 in level.players)
-      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", var_9);
+      foreach(var_1 in level.players) {
+        var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", var_9);
+      }
     }
   } else {
     _id_1D5A("neutral");
 
-    foreach(var_1 in level.players)
-    var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "neutral");
+    foreach(var_1 in level.players) {
+      var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "scoreboardType", "neutral");
+    }
 
     _setclientmatchdata("alliesScore", -1);
     _setclientmatchdata("axisScore", -1);
@@ -80,12 +87,14 @@ _id_7759() {
     if(maps\mp\_utility::_id_585F()) {
       var_18 = var_1._id_AB46["xp"] - var_1._id_AB46["totalXP"];
 
-      if(maps\mp\_utility::iszombiegameshattermode())
+      if(maps\mp\_utility::iszombiegameshattermode()) {
         var_19 = var_1._id_AB46["shotgunXP"] - var_1._id_AB46["preShotgunXP"];
+      }
     } else if(!var_1 maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E())
       var_18 = var_1.pers["summary"]["xp"];
-    else
+    else {
       var_18 = var_1 gettotalmpxp() - var_1.pers["summary"]["matchStartXp"];
+    }
 
     var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "totalXp", var_18);
     var_1 setplayerdata(common_scripts\utility::_id_46A7(), "round", "totalShotgunXp", var_19);
@@ -131,10 +140,11 @@ _id_8701() {
     var_8 = self.pers["kills"];
     _setclientmatchdata("players", self._id_241A, "kills", var_8);
 
-    if(level.gametype == "ctf" || level.gametype == "sr" || level.gametype == "gun")
+    if(level.gametype == "ctf" || level.gametype == "sr" || level.gametype == "gun") {
       var_9 = self._id_0021;
-    else
+    } else {
       var_9 = self.pers["assists"];
+    }
 
     _setclientmatchdata("players", self._id_241A, "assists", var_9);
     var_10 = self.pers["deaths"];
@@ -151,8 +161,9 @@ _id_8701() {
     _setclientmatchdata("players", self._id_241A, "extrascore1", var_15);
     var_16 = 0;
 
-    if(isDefined(self.pers["division"]) && isDefined(self.pers["division"]["index"]))
+    if(isDefined(self.pers["division"]) && isDefined(self.pers["division"]["index"])) {
       var_16 = self.pers["division"]["index"];
+    }
 
     _setclientmatchdata("players", self._id_241A, "division", var_16);
     var_0++;

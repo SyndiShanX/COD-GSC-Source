@@ -36,15 +36,17 @@ player_fire_tracking() {
       var_1.origin = _vectorlerp(var_4, var_7["position"], 0.99);
       var_1 set_fx("trap_ready");
 
-      if(_id_0547::_id_5565(var_3, "delisle_pap_zm"))
+      if(_id_0547::_id_5565(var_3, "delisle_pap_zm")) {
         wait 2;
-      else
+      } else {
         wait 1;
+      }
 
-      if(_id_0547::_id_5565(var_3, "delisle_pap_zm"))
+      if(_id_0547::_id_5565(var_3, "delisle_pap_zm")) {
         var_1 set_fx("trap_ready_red");
-      else
+      } else {
         var_1 set_fx("trap_ready_blue");
+      }
 
       wait 1;
       var_9 = 10;
@@ -84,10 +86,11 @@ get_close_zombies(var_0, var_1) {
   var_2 = [];
   var_3 = self;
 
-  if(var_1)
+  if(var_1) {
     var_4 = 375;
-  else
+  } else {
     var_4 = 160;
+  }
 
   foreach(var_6 in _id_0547::_id_408F()) {
     if(distance(var_3.origin, var_6.origin) > var_4) {
@@ -100,15 +103,17 @@ get_close_zombies(var_0, var_1) {
 }
 
 clear_betty() {
-  if(isDefined(self.fx))
+  if(isDefined(self.fx)) {
     self.fx delete();
+  }
 }
 
 set_fx(var_0) {
   var_1 = self;
 
-  if(isDefined(var_1.fx))
+  if(isDefined(var_1.fx)) {
     var_1.fx delete();
+  }
 
   var_2 = _spawnlinkedfx(level._effect[var_0], var_1, "tag_origin");
   _triggerfx(var_2);

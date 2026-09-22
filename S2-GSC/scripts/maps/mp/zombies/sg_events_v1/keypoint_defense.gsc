@@ -19,15 +19,17 @@ init() {
 }
 
 basic_defense_run(var_0) {
-  if(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::not_the_final_objective())
+  if(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::not_the_final_objective()) {
     level._id_1CC0 = ["zombie_generic"];
+  }
 
   level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_rideau_defense_comment();
   var_1 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_defense_common_zombie_attacker_allow_bombers");
   var_2 = ["zombie_generic"];
 
-  if(var_1)
+  if(var_1) {
     var_2 = ["zombie_generic", "zombie_exploder"];
+  }
 
   var_3 = common_scripts\utility::_id_46B5("zmb_shotgun_keypoint_defend_point_a", "targetname");
   var_4 = common_scripts\utility::_id_46B5("zmb_shotgun_keypoint_defend_point_b", "targetname");
@@ -38,11 +40,13 @@ basic_defense_run(var_0) {
   var_7 setModel("tag_origin");
   var_7.ammo_attack_points = common_scripts\utility::_id_46B7(var_6._id_0165, "targetname");
 
-  if(isDefined(var_6.angles))
+  if(isDefined(var_6.angles)) {
     var_7.angles = var_6.angles;
+  }
 
-  if(isDefined(var_6.ondamagetakenfunc))
+  if(isDefined(var_6.ondamagetakenfunc)) {
     var_7.ondamagetakenfunc = var_6.ondamagetakenfunc;
+  }
 
   var_8 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("defense_common");
   var_8 = var_8 + maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_defense_common_generator_health_buff");
@@ -55,8 +59,9 @@ basic_defense_run(var_0) {
   var_9 = spawn("script_model", var_7.origin);
   var_9 setModel("zmb_uberschnalle_battery_chunk_01");
 
-  if(isDefined(var_7.angles))
+  if(isDefined(var_7.angles)) {
     var_9.angles = var_7.angles;
+  }
 
   level thread maps\mp\_utility::_id_6F74(::showoutlinehelp, [var_9]);
   common_scripts\utility::flag_set("zmb_objectives_defense_start");
@@ -65,8 +70,9 @@ basic_defense_run(var_0) {
   var_12 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_defense_common_zombie_attacker_count_wave");
   var_10 = var_10 + var_12;
 
-  if(var_10 > var_11)
+  if(var_10 > var_11) {
     var_10 = var_11;
+  }
 
   var_7 thread maps\mp\mp_zombies_attack_object::create_inanimate_zombie_enemy(var_10, var_8, "obj_destroyed", 99999, 400, ::basic_defense_on_finished, [], var_7.ammo_attack_points, var_2, ["zombie_is_passive", "zombie_is_crawler", "zombie_is_objective", "zombie_is_stunned"]);
   var_7 thread basic_defense_wait_for_destruction();
@@ -77,13 +83,15 @@ basic_defense_run(var_0) {
   level thread maps\mp\_utility::_id_6F74(::canceloutlinehelp);
   var_9 hide();
 
-  if((_id_0547::_id_5565(var_13, "sg_obj_timeout") || _id_0547::_id_5565(var_13, "zombie_wave_ended")) && isDefined(var_7))
+  if((_id_0547::_id_5565(var_13, "sg_obj_timeout") || _id_0547::_id_5565(var_13, "zombie_wave_ended")) && isDefined(var_7)) {
     var_7.shouldterminate = 1;
+  }
 
-  if(_id_0547::_id_5565(var_13, "sg_obj_timeout") && common_scripts\utility::_id_562E(level.zmb_sg_objectives[var_0].timeout_win) || _id_0547::_id_5565(var_13, "zombie_wave_ended"))
+  if(_id_0547::_id_5565(var_13, "sg_obj_timeout") && common_scripts\utility::_id_562E(level.zmb_sg_objectives[var_0].timeout_win) || _id_0547::_id_5565(var_13, "zombie_wave_ended")) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 initialize_defend_point() {
@@ -138,8 +146,9 @@ uberschnell_pile_update_visuals() {
     self.healthstate++;
     self.nexthealthcheckpoint = self.nexthealthcheckpoint - var_0;
 
-    if(self.nexthealthcheckpoint < var_0)
+    if(self.nexthealthcheckpoint < var_0) {
       self.nexthealthcheckpoint = 1;
+    }
 
     thread set_condition(self.healthstate);
   }
@@ -157,8 +166,9 @@ set_condition(var_0) {
     var_2 = common_scripts\utility::_id_40B0(self.origin, var_2);
 
     foreach(var_5, var_4 in var_2) {
-      if(var_5 < 4)
+      if(var_5 < 4) {
         var_4 _meth_8682(0, 10, 1, "none", 1);
+      }
     }
   }
 
@@ -200,8 +210,9 @@ spawn_defense_fx(var_0) {
 }
 
 clear_dmg_fx() {
-  if(isDefined(self.dmgfx))
+  if(isDefined(self.dmgfx)) {
     self.dmgfx delete();
+  }
 }
 
 basic_defense_skip_cleanup(var_0) {

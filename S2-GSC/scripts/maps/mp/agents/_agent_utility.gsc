@@ -121,8 +121,9 @@ _id_5344(var_0, var_1) {
   var_0 _id_34A8();
   var_0 _id_5291();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0._id_0A4B = var_1;
+  }
 }
 
 _id_3B8C(var_0) {
@@ -149,8 +150,9 @@ _id_44EE(var_0) {
   if(isDefined(var_1)) {
     var_1 _id_5291();
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_1._id_0A4B = var_0;
+    }
 
     return var_1;
   }
@@ -170,14 +172,17 @@ _id_2A74() {
   self notify("deactivateAgentDelayed");
   self endon("deactivateAgentDelayed");
 
-  if(!isDefined(level._id_2DA2))
+  if(!isDefined(level._id_2DA2)) {
     level._id_2DA2 = [];
+  }
 
-  if(!common_scripts\utility::_id_0F79(level._id_2DA2, self))
+  if(!common_scripts\utility::_id_0F79(level._id_2DA2, self)) {
     level._id_2DA2 = common_scripts\utility::_id_0F6F(level._id_2DA2, self);
+  }
 
-  if(maps\mp\_utility::_id_56FF(self))
+  if(maps\mp\_utility::_id_56FF(self)) {
     _id_050D::_id_7CDF();
+  }
 
   _removefromcharactersarray(self);
   waitframe();
@@ -190,8 +195,9 @@ _id_2A74() {
   foreach(var_1 in _func_2D1()) {
     if(isDefined(var_1._id_1193)) {
       foreach(var_4, var_3 in var_1._id_1193) {
-        if(var_3 == self)
+        if(var_3 == self) {
           var_1._id_1193[var_4] = undefined;
+        }
       }
     }
   }
@@ -204,8 +210,9 @@ _id_2A74() {
 }
 
 _id_45BB(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
   var_1 = _id_43FD(var_0);
   return var_1.size;
@@ -214,13 +221,15 @@ _id_45BB(var_0) {
 _id_43FD(var_0) {
   var_1 = [];
 
-  if(!isDefined(level._id_0A4E))
+  if(!isDefined(level._id_0A4E)) {
     return var_1;
+  }
 
   foreach(var_3 in level._id_0A4E) {
     if(isDefined(var_3._id_565F) && var_3._id_565F) {
-      if(var_0 == "all" || var_3._id_0A4B == var_0)
+      if(var_0 == "all" || var_3._id_0A4B == var_0) {
         var_1[var_1.size] = var_3;
+      }
     }
   }
 
@@ -234,14 +243,16 @@ _id_45C7(var_0) {
 _id_45C8(var_0, var_1) {
   var_2 = 0;
 
-  if(!isDefined(level._id_0A4E))
+  if(!isDefined(level._id_0A4E)) {
     return var_2;
+  }
 
   foreach(var_4 in level._id_0A4E) {
     if(isDefined(var_4._id_565F) && var_4._id_565F) {
       if(isDefined(var_4._id_0117) && var_4._id_0117 == var_0) {
-        if(var_1 == "all" || var_4._id_0A4B == var_1)
+        if(var_1 == "all" || var_4._id_0A4B == var_1) {
           var_2++;
+        }
       }
     }
   }
@@ -250,14 +261,16 @@ _id_45C8(var_0, var_1) {
 }
 
 _id_45AE(var_0) {
-  if(!isDefined(level._id_60A5))
+  if(!isDefined(level._id_60A5)) {
     level._id_60A5 = level.maxlives;
-  else
+  } else {
     level._id_60A5++;
+  }
 
   if(maps\mp\_utility::_id_585F()) {
-    if(level._id_60A5 > 10000)
+    if(level._id_60A5 > 10000) {
       level._id_60A5 = level.maxlives;
+    }
   }
 
   level._id_5CC7[level._id_60A5] = gettime();
@@ -267,16 +280,18 @@ _id_45AE(var_0) {
 _id_470C(var_0, var_1) {
   var_2 = _getnodesinradius(self.origin, 350, 64, 128, "Path");
 
-  if(!isDefined(var_2) || var_2.size == 0)
+  if(!isDefined(var_2) || var_2.size == 0) {
     return undefined;
+  }
 
   if(isDefined(level._id_A966) && isDefined(level._id_9DC7)) {
     var_3 = var_2;
     var_2 = [];
 
     foreach(var_5 in var_3) {
-      if(var_5.origin[2] > level._id_A966 || !_ispointinvolume(var_5.origin, level._id_9DC7))
+      if(var_5.origin[2] > level._id_A966 || !_ispointinvolume(var_5.origin, level._id_9DC7)) {
         var_2[var_2.size] = var_5;
+      }
     }
   }
 
@@ -285,11 +300,13 @@ _id_470C(var_0, var_1) {
   var_9 = _func_2D4(self);
   var_10 = (0, 0, var_9);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_11 = [];
   var_12 = [];
@@ -321,30 +338,35 @@ _id_470C(var_0, var_1) {
     var_20 = self.origin + var_10;
     var_21 = var_14.origin + var_10;
 
-    if(var_17 > 0)
+    if(var_17 > 0) {
       waitframe();
+    }
 
     if(!_sighttracepassed(var_20, var_21, 0, self)) {
       continue;
     }
     if(var_1) {
-      if(var_17 > 0)
+      if(var_17 > 0) {
         waitframe();
+      }
 
       var_22 = _playerphysicstrace(var_14.origin + var_10, var_14.origin);
 
-      if(distancesquared(var_22, var_14.origin) > 1)
+      if(distancesquared(var_22, var_14.origin) > 1) {
         continue;
+      }
     }
 
     if(var_0) {
-      if(var_17 > 0)
+      if(var_17 > 0) {
         waitframe();
+      }
 
       var_22 = _physicstrace(var_20, var_21);
 
-      if(distancesquared(var_22, var_21) > 1)
+      if(distancesquared(var_22, var_21) > 1) {
         continue;
+      }
     }
 
     return var_14;
@@ -360,8 +382,9 @@ _id_5A39() {
 }
 
 deleteentonagentdeath(var_0) {
-  if(!isDefined(self.agentondeathcleanup))
+  if(!isDefined(self.agentondeathcleanup)) {
     self.agentondeathcleanup = [];
+  }
 
   self.agentondeathcleanup[self.agentondeathcleanup.size] = var_0;
   thread watchentdeleteforagentdeath(var_0);
@@ -376,8 +399,9 @@ watchentdeleteforagentdeath(var_0) {
 cleanupentsonagentdeath() {
   if(isDefined(self.agentondeathcleanup)) {
     foreach(var_1 in self.agentondeathcleanup) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 }
@@ -385,8 +409,9 @@ cleanupentsonagentdeath() {
 get_max_agents() {
   var_0 = _getmaxagents();
 
-  if(isDefined(level.overridemaxagents))
+  if(isDefined(level.overridemaxagents)) {
     var_0 = level.overridemaxagents;
+  }
 
   return var_0;
 }

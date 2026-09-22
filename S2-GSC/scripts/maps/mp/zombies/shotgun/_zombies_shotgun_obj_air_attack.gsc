@@ -27,9 +27,9 @@ run_air_attack(var_0) {
   level thread air_attack_cloud_handler();
   [var_2, var_3] = level common_scripts\utility::_id_A70E(level, "flag_players_have_won", level, "sg_obj_timeout");
 
-  if(var_2 == "flag_players_have_won")
+  if(var_2 == "flag_players_have_won") {
     return 1;
-  else {
+  } else {
     common_scripts\utility::flag_set("flag_players_have_won");
     return 0;
   }
@@ -45,14 +45,17 @@ air_attack_skip_cleanup() {
 air_attack_set_rules() {
   level.aagun_ee_difficulty = level.players.size;
 
-  if(level.aagun_ee_difficulty == 1)
+  if(level.aagun_ee_difficulty == 1) {
     level.points_to_win = 10;
+  }
 
-  if(level.aagun_ee_difficulty == 2)
+  if(level.aagun_ee_difficulty == 2) {
     level.points_to_win = 12;
+  }
 
-  if(level.aagun_ee_difficulty >= 3)
+  if(level.aagun_ee_difficulty >= 3) {
     level.points_to_win = 13;
+  }
 }
 
 air_attack_adjust_rules() {
@@ -60,11 +63,13 @@ air_attack_adjust_rules() {
   var_1 = level.players.size;
 
   if(var_1 >= var_0) {
-    if(var_1 == 2)
+    if(var_1 == 2) {
       level.points_to_win = 12;
+    }
 
-    if(var_1 >= 3)
+    if(var_1 >= 3) {
       level.points_to_win = 13;
+    }
   }
 }
 
@@ -85,20 +90,25 @@ air_attack_cloud_handler() {
   var_3 = common_scripts\utility::_id_46B7("struct_cloud_fx_spawner_d", "targetname");
   var_4 = common_scripts\utility::_id_46B7("struct_cloud_fx_spawner_f", "targetname");
 
-  foreach(var_6 in var_0)
-  playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (1, 1, 0));
+  foreach(var_6 in var_0) {
+    playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (1, 1, 0));
+  }
 
-  foreach(var_6 in var_1)
-  playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (1, -1, 0));
+  foreach(var_6 in var_1) {
+    playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (1, -1, 0));
+  }
 
-  foreach(var_6 in var_2)
-  playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (-1, -1, 0));
+  foreach(var_6 in var_2) {
+    playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (-1, -1, 0));
+  }
 
-  foreach(var_6 in var_3)
-  playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (-1, 1, 0));
+  foreach(var_6 in var_3) {
+    playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (-1, 1, 0));
+  }
 
-  foreach(var_6 in var_4)
-  playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (0, -1, 0));
+  foreach(var_6 in var_4) {
+    playFX(common_scripts\utility::_id_44F5("zmb_clouds_puff_static"), var_6.origin, (0, -1, 0));
+  }
 }
 
 air_attack_wave_handler() {
@@ -108,8 +118,9 @@ air_attack_wave_handler() {
     var_1 = common_scripts\utility::random(var_0);
     var_0 = common_scripts\utility::_id_0F93(var_0, var_1);
 
-    if(var_0.size <= 0)
+    if(var_0.size <= 0) {
       var_0 = [1, 2, 3, 4];
+    }
 
     switch (var_1) {
       case 1:
@@ -186,8 +197,9 @@ aa_gun_trap_init() {
     var_2 thread aa_gun_use_think();
   }
 
-  foreach(var_5 in aa_gun_get_all_turrets())
-  var_5 thread aa_gun_manage_swaps();
+  foreach(var_5 in aa_gun_get_all_turrets()) {
+    var_5 thread aa_gun_manage_swaps();
+  }
 }
 
 aa_gun_get_all_turrets() {
@@ -205,7 +217,7 @@ aa_gun_trap_prep() {
         self._id_9D65.hint_string_available = &"ZOMBIE_ISLAND_BUY_FLAK";
         self._id_9D65.hint_string_unavailable = &"ZOMBIE_ISLAND_FLAK_DISABLED";
         self._id_9D65.hint_string_no_power = &"ZOMBIES_REQUIRES_POWER";
-        var_2 sethintstring(self._id_9D65.hint_string_unavailable);
+        var_2 setHintString(self._id_9D65.hint_string_unavailable);
         var_2 common_scripts\utility::_id_9D9F();
         break;
       case "tur_flak_gun":
@@ -229,10 +241,10 @@ aa_gun_use_think() {
   self._id_9D65._id_267B = 750;
   level waittill("air_attack_start");
   self._id_9D65 common_scripts\utility::_id_9DA3();
-  self._id_9D65 sethintstring(self._id_9D65.hint_string_no_power);
+  self._id_9D65 setHintString(self._id_9D65.hint_string_no_power);
   common_scripts\utility::_id_3C9F("flag_flak_cannons_powered_on");
   self.wall_model thread aa_gun_open_gate();
-  self._id_9D65 sethintstring(self._id_9D65.hint_string_available);
+  self._id_9D65 setHintString(self._id_9D65.hint_string_available);
   thread aa_gun_wait_for_use();
   var_0 = undefined;
 
@@ -243,10 +255,11 @@ aa_gun_use_think() {
       continue;
     }
     if(!isPlayer(var_1)) {
-      if(common_scripts\utility::_id_562E(var_1))
+      if(common_scripts\utility::_id_562E(var_1)) {
         aa_gun_set_locked();
+      }
 
-      self._id_9D65 sethintstring(self._id_9D65.hint_string_available);
+      self._id_9D65 setHintString(self._id_9D65.hint_string_available);
       continue;
     } else
       var_0 = var_1;
@@ -268,10 +281,10 @@ aa_gun_use_think() {
       self.wall_model thread aa_gun_open_gate();
       wait 1;
       self._id_9D65 common_scripts\utility::_id_9DA3();
-      self._id_9D65 sethintstring(self._id_9D65.hint_string_unavailable);
+      self._id_9D65 setHintString(self._id_9D65.hint_string_unavailable);
       wait 12.5;
       aa_gun_set_locked();
-      self._id_9D65 sethintstring(self._id_9D65.hint_string_available);
+      self._id_9D65 setHintString(self._id_9D65.hint_string_available);
     }
   }
 }
@@ -300,7 +313,7 @@ aa_gun_power_switch_init() {
     switch (var_3._id_0165) {
       case "use_trigger":
         self._id_9D65 = var_3;
-        self._id_9D65 sethintstring(&"ZOMBIES_POWER_ON");
+        self._id_9D65 setHintString(&"ZOMBIES_POWER_ON");
         self._id_9D65 common_scripts\utility::_id_9D9F();
         break;
     }
@@ -315,7 +328,7 @@ aa_gun_power_switch_think() {
     self._id_9D65 waittill("trigger", var_0);
     level.aagun_switches_on++;
     self._id_9D65 common_scripts\utility::_id_9D9F();
-    self._id_9D65 sethintstring(&"ZOMBIES_EMPTY_STRING");
+    self._id_9D65 setHintString(&"ZOMBIES_EMPTY_STRING");
     self.computer_panels setscriptablepartstate("cbreaker", "ready");
     self.computer_panels setscriptablepartstate("light_red", "off");
     self.computer_panels setscriptablepartstate("light_green", "on");
@@ -327,7 +340,7 @@ aa_gun_power_switch_think() {
 
 aa_gun_set_locked() {
   while(common_scripts\utility::_id_562E(level.aa_guns_locked)) {
-    self._id_9D65 sethintstring(self._id_9D65.hint_string_unavailable);
+    self._id_9D65 setHintString(self._id_9D65.hint_string_unavailable);
     wait 0.125;
   }
 }
@@ -365,8 +378,9 @@ aa_gun_terminate_nuke() {
   var_1 = 0;
 
   foreach(var_3 in common_scripts\utility::_id_40B0(self.origin, var_0, undefined, undefined, 200)) {
-    if(_id_0547::_id_5565(var_3._id_0A4B, "zombie_generic") || _id_0547::_id_5565(var_3._id_0A4B, "zombie_berserker"))
+    if(_id_0547::_id_5565(var_3._id_0A4B, "zombie_generic") || _id_0547::_id_5565(var_3._id_0A4B, "zombie_berserker")) {
       var_3 _id_056D::_id_5A86();
+    }
   }
 }
 
@@ -405,8 +419,9 @@ aa_gun_player_left_listen(var_0) {
 aa_gun_player_death_listen(var_0) {
   self endon(var_0);
 
-  while(isDefined(self.turret_player) && isalive(self.turret_player) && !common_scripts\utility::_id_562E(self.turret_player._id_5728))
+  while(isDefined(self.turret_player) && isalive(self.turret_player) && !common_scripts\utility::_id_562E(self.turret_player._id_5728)) {
     waitframe();
+  }
 }
 
 aa_gun_player_disconnect_listen(var_0) {
@@ -438,8 +453,9 @@ aa_gun_manage_swaps() {
     self waittill("turretownerchange");
     var_0 = self getturretowner();
 
-    if(isDefined(var_0) && isPlayer(var_0))
+    if(isDefined(var_0) && isPlayer(var_0)) {
       thread aa_gun_capture_turret_fire(var_0);
+    }
   }
 }
 
@@ -492,7 +508,7 @@ plane_cleanup() {
 
 plane_damage_player() {
   self endon("death");
-  var_0 = _getent("vol_plane_damage_area", "targetname");
+  var_0 = _getEnt("vol_plane_damage_area", "targetname");
 
   while(common_scripts\utility::_id_3794("turret_on")) {
     var_1 = self.origin;
@@ -507,8 +523,9 @@ plane_damage_player() {
       var_7 = _sortbydistance(var_7, var_6, var_4, 1);
 
       foreach(var_9 in var_7) {
-        if(_bullettracepassed(var_6 + (0, 0, 25), var_9 getEye(), 0))
+        if(_bullettracepassed(var_6 + (0, 0, 25), var_9 getEye(), 0)) {
           var_9 dodamage(80, self.origin);
+        }
       }
 
       var_11 = _sortbydistance(level.players, var_6, var_4, 1);
@@ -537,8 +554,8 @@ plane_gun_think() {
   thread plane_damage_player();
 
   while(common_scripts\utility::_id_3794("turret_on")) {
-    _playfxontag(common_scripts\utility::_id_44F5("zmb_isl_enemy_plane_tracer"), self, "TAG_MUZZLE_FX_1");
-    _playfxontag(common_scripts\utility::_id_44F5("zmb_isl_enemy_plane_tracer"), self, "TAG_MUZZLE_FX_2");
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_isl_enemy_plane_tracer"), self, "TAG_MUZZLE_FX_1");
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_isl_enemy_plane_tracer"), self, "TAG_MUZZLE_FX_2");
     wait 0.2;
   }
 }
@@ -549,16 +566,19 @@ plane_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   if(common_scripts\utility::_id_562E(self.findingacrashpath)) {
     return;
   }
-  if(isDefined(var_1._id_01D1) && !isPlayer(var_1))
+  if(isDefined(var_1._id_01D1) && !isPlayer(var_1)) {
     var_1 = var_1 getturretowner();
+  }
 
-  if(isDefined(self._id_6E74))
+  if(isDefined(self._id_6E74)) {
     var_12 = self._id_6E74;
-  else
+  } else {
     var_12 = self;
+  }
 
-  if(var_5 != "turretweapon_ger_btry_flak38_mp_zombie" && var_5 != "bazooka_mp" && var_5 != "panzerschreck_mp" && var_5 != "fliegerfaust_zm" && var_5 != "fliegerfaust_pap_zm")
+  if(var_5 != "turretweapon_ger_btry_flak38_mp_zombie" && var_5 != "bazooka_mp" && var_5 != "panzerschreck_mp" && var_5 != "fliegerfaust_zm" && var_5 != "fliegerfaust_pap_zm") {
     var_2 = 1;
+  }
 
   var_12.health = var_12.health - var_2;
 
@@ -566,12 +586,14 @@ plane_on_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     if(isDefined(var_1)) {
       var_1 _id_04C7::_id_A102("killshot");
 
-      if(isDefined(level.zmb_events_player_destroyed_stuka))
+      if(isDefined(level.zmb_events_player_destroyed_stuka)) {
         var_1 thread[[level.zmb_events_player_destroyed_stuka]]();
+      }
     }
 
-    if(isDefined(var_5) && isPlayer(var_1))
+    if(isDefined(var_5) && isPlayer(var_1)) {
       var_1 notify("plane_crashy", var_5);
+    }
 
     var_12 plane_crashy();
   } else if(isDefined(var_1))
@@ -618,8 +640,9 @@ plane_crashy() {
     common_scripts\utility::waittill_notify_or_timeout("veh_collision", _randomfloatrange(0.5, 3.0));
   }
 
-  if(!isDefined(self.crashingspecial) || self.crashingspecial == 0)
+  if(!isDefined(self.crashingspecial) || self.crashingspecial == 0) {
     plane_go_boom();
+  }
 }
 
 plane_wait_for_valid_crash_path() {
@@ -735,8 +758,9 @@ plane_get_path_getfunc_reverse(var_0) {
 }
 
 plane_death_roll_on() {
-  if(self.health > 0)
+  if(self.health > 0) {
     self._id_7ED6 = 1;
+  }
 }
 
 plane_death_roll_off() {
@@ -764,10 +788,11 @@ plane_node_wait(var_0, var_1, var_2) {
     return;
   }
 
-  if(isDefined(self._id_A01E))
+  if(isDefined(self._id_A01E)) {
     var_3 = "node_wait_triggered" + self._id_A01E;
-  else
+  } else {
     var_3 = "node_wait_triggered";
+  }
 
   if(!isDefined(var_0._id_9DBB) || var_0._id_9DBB != gettime()) {
     var_4 = spawnStruct();
@@ -785,8 +810,9 @@ plane_wait_til_node_wait_triggered(var_0, var_1, var_2, var_3) {
     var_4++;
     thread plane_node_wait_triggered(var_0, var_1, var_2);
 
-    if(!isDefined(var_2.target))
+    if(!isDefined(var_2.target)) {
       return;
+    }
   }
 }
 
@@ -803,8 +829,9 @@ plane_node_wait_triggered(var_0, var_1, var_2) {
 plane_vehicle_paths_non_heli(var_0) {
   self notify("newpath");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self._id_1146 = var_0;
+  }
 
   var_1 = self._id_1146;
   self._id_2944 = self._id_1146;
@@ -820,10 +847,11 @@ plane_vehicle_paths_non_heli(var_0) {
   var_5 = plane_get_path_getfunc(var_1);
   var_6 = plane_get_path_getfunc_reverse(var_1);
 
-  if(self._id_01C1 == "reverse")
+  if(self._id_01C1 == "reverse") {
     var_7 = var_6;
-  else
+  } else {
     var_7 = var_5;
+  }
 
   while(isDefined(var_4)) {
     plane_node_wait(var_4, var_3, var_7);
@@ -851,73 +879,91 @@ plane_vehicle_paths_non_heli(var_0) {
     if(isDefined(var_4.setdepthoffield)) {
       var_8 = var_4.setviewmodeldepthoffield;
 
-      if(isDefined(var_8))
+      if(isDefined(var_8)) {
         level maps\mp\_utility::_id_2CED(var_8, common_scripts\_exploder::exploder, var_4.setdepthoffield);
-      else
+      } else {
         level common_scripts\_exploder::exploder(var_4.setdepthoffield);
+      }
     }
 
-    if(isDefined(var_4._id_81A0))
+    if(isDefined(var_4._id_81A0)) {
       common_scripts\utility::flag_set(var_4._id_81A0);
+    }
 
-    if(isDefined(var_4.stunplayer))
+    if(isDefined(var_4.stunplayer)) {
       common_scripts\utility::_id_379A(var_4.stunplayer);
+    }
 
-    if(isDefined(var_4.shellshock))
+    if(isDefined(var_4.shellshock)) {
       common_scripts\utility::_id_3796(var_4.shellshock);
+    }
 
-    if(isDefined(var_4.getdoorpathnode))
+    if(isDefined(var_4.getdoorpathnode)) {
       common_scripts\utility::_id_3C7B(var_4.getdoorpathnode);
+    }
 
     if(isDefined(var_4._id_0165)) {
-      if(var_4._id_0165 == "godon")
+      if(var_4._id_0165 == "godon") {
         self._id_480F = 1;
+      }
 
-      if(var_4._id_0165 == "godoff")
+      if(var_4._id_0165 == "godoff") {
         self._id_480F = 0;
+      }
 
-      if(var_4._id_0165 == "engineoff")
+      if(var_4._id_0165 == "engineoff") {
         self vehicle_turnengineoff();
+      }
     }
 
-    if(isDefined(var_4.setanimknoballlimitedrestart))
+    if(isDefined(var_4.setanimknoballlimitedrestart)) {
       self.setanimknoballlimitedrestart = var_4.setanimknoballlimitedrestart;
+    }
 
-    if(isDefined(var_4.seteq))
+    if(isDefined(var_4.seteq)) {
       self.seteq = var_4.seteq;
+    }
 
-    if(isDefined(var_4.movex))
+    if(isDefined(var_4.movex)) {
       self.movex = var_4.movex;
+    }
 
-    if(isDefined(var_4.solid))
+    if(isDefined(var_4.solid)) {
       self notify("turning", var_4.solid);
+    }
 
     if(isDefined(var_4.setrightarc)) {
-      if(var_4.setrightarc == 0)
+      if(var_4.setrightarc == 0) {
         thread plane_death_roll_off();
-      else
+      } else {
         thread plane_death_roll_on();
+      }
     }
 
     if(isDefined(var_4.getweaponslist)) {
-      if(isDefined(var_4.setlookatent) && var_4.setlookatent == "queue")
+      if(isDefined(var_4.setlookatent) && var_4.setlookatent == "queue") {
         self._id_7889 = 1;
+      }
     }
 
-    if(isDefined(var_4.allowfire))
+    if(isDefined(var_4.allowfire)) {
       self._id_01C0 = var_4.allowfire;
+    }
 
-    if(isDefined(var_4.finishplayerdamage))
+    if(isDefined(var_4.finishplayerdamage)) {
       self._id_01C3 = var_4.finishplayerdamage;
+    }
 
-    if(isDefined(var_4.setvehweapon))
+    if(isDefined(var_4.setvehweapon)) {
       self._id_01C1 = var_4.setvehweapon;
+    }
 
     if(isDefined(var_4.stopshellshock)) {
       var_9 = 35;
 
-      if(isDefined(var_4.setleftarc))
+      if(isDefined(var_4.setleftarc)) {
         var_9 = var_4.setleftarc;
+      }
 
       self vehicle_setspeed(0, var_9);
       common_scripts\utility::_id_379C(var_4.stopshellshock);
@@ -927,8 +973,9 @@ plane_vehicle_paths_non_heli(var_0) {
       }
       var_10 = 60;
 
-      if(isDefined(var_4.script_accel))
+      if(isDefined(var_4.script_accel)) {
         var_10 = var_4.script_accel;
+      }
 
       self resumespeed(var_10);
     }
@@ -939,10 +986,11 @@ plane_vehicle_paths_non_heli(var_0) {
       break;
     }
 
-    if(self._id_01C1 == "reverse")
+    if(self._id_01C1 == "reverse") {
       var_7 = var_6;
-    else
+    } else {
       var_7 = var_5;
+    }
 
     var_4 = [[var_7]](var_4.target);
 
@@ -972,7 +1020,7 @@ plane_track_damage(var_0, var_1) {
 }
 
 plane_waittill_damage_from(var_0) {
-  self setcandamage(1);
+  self setCanDamage(1);
 
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
@@ -1025,8 +1073,9 @@ aud_plane_mission_start() {
 aud_plane_spawn() {
   var_0 = self;
 
-  foreach(var_2 in level.players)
-  var_2 thread aud_plane_spawn_watcher(var_0);
+  foreach(var_2 in level.players) {
+    var_2 thread aud_plane_spawn_watcher(var_0);
+  }
 }
 
 aud_plane_spawn_watcher(var_0) {

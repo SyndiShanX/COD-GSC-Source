@@ -24,8 +24,9 @@ complete_shattered_trophy_event_2() {
 }
 
 run_shattered_trophy_event_2() {
-  while(!common_scripts\utility::_id_3C83("flag_sword_assembled"))
+  while(!common_scripts\utility::_id_3C83("flag_sword_assembled")) {
     wait 0.5;
+  }
 
   common_scripts\utility::_id_3C9F("flag_sword_assembled");
   complete_shattered_trophy_event_2();
@@ -39,8 +40,9 @@ complete_shattered_trophy_event_3() {
 }
 
 complete_shattered_trophy_event_4(var_0, var_1, var_2) {
-  if(var_1.size - var_2.size > 25)
+  if(var_1.size - var_2.size > 25) {
     maps\mp\gametypes\zombies::_id_47A8("DLC3_ZM_BABY", var_0, 0);
+  }
 }
 
 complete_shattered_trophy_event_5() {
@@ -65,8 +67,9 @@ complete_shattered_escape_event() {
 }
 
 complete_shattered_trophy_event_7() {
-  if(!common_scripts\utility::_id_562E(level.guardian_solo_trophy_fail))
+  if(!common_scripts\utility::_id_562E(level.guardian_solo_trophy_fail)) {
     maps\mp\gametypes\zombies::_id_47A8("DLC3_ZM_GOLIATH", undefined, 0);
+  }
 }
 
 run_shattered_trophy_event_7() {
@@ -100,8 +103,9 @@ run_shattered_trophy_event_9() {
 complete_shattered_trophy_event_10() {
   var_0 = 0;
 
-  foreach(var_2 in level.players)
-  var_0 = var_0 | common_scripts\utility::_id_562E(var_2.shotgun_escape_trophy_fail);
+  foreach(var_2 in level.players) {
+    var_0 = var_0 | common_scripts\utility::_id_562E(var_2.shotgun_escape_trophy_fail);
+  }
 
   var_4 = _id_0547::zombie_shattered_get_map_number();
 
@@ -114,8 +118,9 @@ complete_shattered_trophy_event_10() {
       var_7 = var_7 | var_5;
       var_2 setplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "ETDMapInfo", var_7);
 
-      if(var_7 >= 7)
+      if(var_7 >= 7) {
         maps\mp\gametypes\zombies::_id_47A8("DLC3_ZM_EXTRA", var_2, 0);
+      }
     }
   }
 }
@@ -152,8 +157,9 @@ monitor_player_shotgun_level(var_0) {
   var_1 endon("disconnect");
   level endon(var_0.trophyflag);
 
-  while(!isDefined(level.zmshotgunmaxlevel))
+  while(!isDefined(level.zmshotgunmaxlevel)) {
     wait 0.5;
+  }
 
   for(;;) {
     var_1 waittill("shotgun_level_up");

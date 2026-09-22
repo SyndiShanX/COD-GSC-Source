@@ -65,7 +65,7 @@ _id_737D(var_0, var_1, var_2) {
     var_0 hide();
     var_3 = spawn("script_model", var_0.origin);
     var_3 setModel("vm_zom_jack_in_the_box");
-    var_3 linkto(var_0, "tag_weapon", (0, 0, 0), (0, 90, 0));
+    var_3 linkTo(var_0, "tag_weapon", (0, 0, 0), (0, 90, 0));
     var_3 scriptmodelplayanim("va_jackinbox_box_close_idle");
     var_3 notsolid();
     var_3.origin = var_0.origin;
@@ -92,21 +92,24 @@ _id_2E63(var_0, var_1, var_2, var_3) {
 
   thread _id_11C8();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   self.targetname = "jokerGrenade";
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self thread[[var_3]]("jack_exploded");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     wait(var_2);
-  else
+  } else {
     wait 7;
+  }
 
   self scriptmodelclearanim();
-  _playfxontag(common_scripts\utility::_id_44F5("jack_fuse"), self, "wick_02");
+  _playFXOnTag(common_scripts\utility::_id_44F5("jack_fuse"), self, "wick_02");
   _id_0378::_id_8D74("aud_jack_open");
   self scriptmodelplayanim("va_jackinbox_box_open");
   wait 1;
@@ -117,8 +120,9 @@ _id_2E63(var_0, var_1, var_2, var_3) {
     if(isDefined(var_10) && distance(var_10.origin, self.origin) < 128) {
       var_10 dodamage(var_4, self.origin, var_1, self, "MOD_GRENADE", "jack_in_box_decoy_zm");
 
-      if(isPlayer(var_1) && isalive(var_1) && !_id_0547::_id_577E(var_1))
+      if(isPlayer(var_1) && isalive(var_1) && !_id_0547::_id_577E(var_1)) {
         var_1 maps\mp\gametypes\zombies::_id_4798(50);
+      }
     }
   }
 
@@ -126,28 +130,32 @@ _id_2E63(var_0, var_1, var_2, var_3) {
   self notify("jack_exploded");
   level notify("jack_exploded", self.origin);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 
   waitframe();
 
-  if(isDefined(var_1 _id_0586::_id_078A("blunderbuss_pap_zm")))
+  if(isDefined(var_1 _id_0586::_id_078A("blunderbuss_pap_zm"))) {
     var_1 maps\mp\zombies\weapons\_zombie_funderbuss::fire_funderbuss_grenades(var_12, (80, 0, 0));
+  }
 }
 
 _id_11C8() {
   self endon("jack_exploded");
 
-  if(level.players.size > 0)
+  if(level.players.size > 0) {
     self._id_4883 = _func_2E1(self.origin, level.players[0]);
-  else
+  } else {
     self._id_4883 = self.origin;
+  }
 
   level notify("jack_in_box_live");
   var_0 = 0;
 
-  if(isDefined(level._id_AC80) && isDefined(level._id_AC80._id_ACB3) && level._id_AC80._id_ACB3.size > 0)
+  if(isDefined(level._id_AC80) && isDefined(level._id_AC80._id_ACB3) && level._id_AC80._id_ACB3.size > 0) {
     var_0 = _id_055A::_id_578A(self._id_4883, 1);
+  }
 
   if(!var_0) {
     return;
@@ -191,8 +199,9 @@ _id_11C8() {
 }
 
 _id_4769() {
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
   level.players[randomint(level.players.size)] thread _id_4766();
   wait 0.5;

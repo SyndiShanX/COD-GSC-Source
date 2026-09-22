@@ -13,8 +13,9 @@ callback_hostmigration() {
   var_0++;
   setmatchdata("match_common", "hostMigrationCount", var_0);
 
-  foreach(var_2 in _func_2D1())
-  var_2._id_4E05 = 0;
+  foreach(var_2 in _func_2D1()) {
+    var_2._id_4E05 = 0;
+  }
 
   level.hostmigrationtimer = 1;
   setDvar("ui_inhostmigration", 1);
@@ -22,11 +23,13 @@ callback_hostmigration() {
   maps\mp\gametypes\_gamelogic::_id_A17B();
 
   foreach(var_2 in _func_2D1()) {
-    if(isDefined(var_2.waterwakevfxdeletefunc))
+    if(isDefined(var_2.waterwakevfxdeletefunc)) {
       var_2[[var_2.waterwakevfxdeletefunc]]();
+    }
 
-    if(isDefined(var_2.onhostmigrationbeginfunc))
+    if(isDefined(var_2.onhostmigrationbeginfunc)) {
       var_2[[var_2.onhostmigrationbeginfunc]]();
+    }
 
     var_2 thread _id_4E0A();
 
@@ -63,26 +66,32 @@ _id_4E0D() {
 }
 
 _id_4E07(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return "<removed_ent>";
+  }
 
   var_1 = -1;
   var_2 = "?";
 
-  if(isDefined(var_0.entity_number))
+  if(isDefined(var_0.entity_number)) {
     var_1 = var_0.entity_number;
+  }
 
-  if(isPlayer(var_0) && isDefined(var_0.name))
+  if(isPlayer(var_0) && isDefined(var_0.name)) {
     var_2 = var_0.name;
+  }
 
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     return "player <" + var_2 + "> (entNum " + var_1 + " )";
+  }
 
-  if(_isagent(var_0) && maps\mp\_utility::_id_56FF(var_0))
+  if(_isagent(var_0) && maps\mp\_utility::_id_56FF(var_0)) {
     return "participant agent <" + var_1 + ">";
+  }
 
-  if(_isagent(var_0))
+  if(_isagent(var_0)) {
     return "non-participant agent <" + var_1 + ">";
+  }
 
   return "unknown entity <" + var_1 + ">";
 }
@@ -93,8 +102,9 @@ _id_4E0B() {
   self endon("disconnect");
   self._id_4E05 = 1;
 
-  while(!maps\mp\_utility::isreallyalive(self))
+  while(!maps\mp\_utility::isreallyalive(self)) {
     self waittill("spawned");
+  }
 
   maps\mp\_utility::freezecontrolswrapper(1);
   self disableammogeneration();
@@ -105,8 +115,9 @@ _id_4E0A() {
   level endon("host_migration_begin");
   self endon("disconnect");
 
-  if(_isagent(self))
+  if(_isagent(self)) {
     self endon("death");
+  }
 
   _id_4E0B();
 
@@ -121,8 +132,9 @@ _id_4E0A() {
 }
 
 _id_A782() {
-  if(!isDefined(level.hostmigrationtimer))
+  if(!isDefined(level.hostmigrationtimer)) {
     return 0;
+  }
 
   var_0 = gettime();
   level waittill("host_migration_end");

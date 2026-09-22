@@ -10,11 +10,13 @@ _id_52A4() {
 canusearmor(var_0) {
   var_1 = self;
 
-  if(!_id_0561::_id_1F7B())
+  if(!_id_0561::_id_1F7B()) {
     return 0;
+  }
 
-  if(var_1 _id_056A::_id_4B53())
+  if(var_1 _id_056A::_id_4B53()) {
     return 0;
+  }
 
   return 1;
 }
@@ -27,8 +29,9 @@ usearmor(var_0) {
 }
 
 getarmorcharges(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":

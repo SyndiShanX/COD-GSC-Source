@@ -31,8 +31,9 @@ _id_09B1(var_0) {
   var_1 = var_0 getentitynumber();
   var_2 = level._id_ABD1[var_1];
 
-  foreach(var_4 in level._id_47DF)
-  var_2._id_A902 = common_scripts\utility::_id_0F6F(var_2._id_A902, var_4);
+  foreach(var_4 in level._id_47DF) {
+    var_2._id_A902 = common_scripts\utility::_id_0F6F(var_2._id_A902, var_4);
+  }
 }
 
 _id_540E(var_0) {
@@ -58,8 +59,9 @@ _id_7BFE(var_0, var_1, var_2, var_3) {
 }
 
 _id_7BF3(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   return _id_7BF4(var_0, 2, var_1, var_2, var_3);
 }
@@ -77,13 +79,15 @@ _id_7BDD(var_0) {
 }
 
 _id_7BE1(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return _id_7BF4(var_0, 6, var_1, var_2, var_3, var_4);
-  else
+  } else {
     return _id_7BE4(6, var_1, var_2, var_3, var_4);
+  }
 }
 
 _id_7BE4(var_0, var_1, var_2, var_3, var_4) {
@@ -111,11 +115,13 @@ _id_2823(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_9D65 = var_1;
   var_5._id_6641 = var_2;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = var_1.origin;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 250;
+  }
 
   var_5._id_5EB5 = var_3;
   var_5.radial_progress_time = var_4;
@@ -161,8 +167,9 @@ _id_44FF(var_0) {
 }
 
 _id_267D(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_1;
+  }
 
   return var_0;
 }
@@ -227,10 +234,11 @@ hideinteractprompt(var_0, var_1) {
 }
 
 _id_4205(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = var_2 - var_0 getEye();
-  else
+  } else {
     var_3 = var_1.origin - var_0 getEye();
+  }
 
   var_4 = vectorNormalize((var_3[0], var_3[1], 0));
   var_5 = anglesToForward(var_0.angles);
@@ -255,13 +263,15 @@ _id_21B8(var_0, var_1) {
   if(var_1.type == 3) {
     var_2 = var_1._id_9FD3._id_1B72 _id_0548::_id_43FF(var_0);
 
-    if(var_1._id_9FD3._id_1B6F != var_2)
+    if(var_1._id_9FD3._id_1B6F != var_2) {
       return int(var_2);
+    }
   } else if(var_1.type == 5) {
     var_3 = var_0 _id_0577::_id_4687();
 
-    if(var_3 != 1)
+    if(var_3 != 1) {
       return int(var_3 * var_1._id_9FD3._id_3259);
+    }
   }
 
   return undefined;
@@ -324,10 +334,11 @@ check_progressive_interact_input(var_0, var_1) {
       continue;
     }
 
-    if(!isDefined(self.interactneedrelease) || !self usebuttonpressed())
+    if(!isDefined(self.interactneedrelease) || !self useButtonPressed()) {
       self.interactneedrelease = 0;
+    }
 
-    var_4 = self usebuttonpressed() && !self.interactneedrelease;
+    var_4 = self useButtonPressed() && !self.interactneedrelease;
 
     if(!var_3) {
       if(var_4) {
@@ -357,9 +368,9 @@ _id_A151(var_0) {
     var_3 = var_0 playergetuseent(1);
 
     if(var_2._id_4DBA) {
-      if(!isDefined(var_3) || var_2._id_2903._id_9D65 != var_3)
+      if(!isDefined(var_3) || var_2._id_2903._id_9D65 != var_3) {
         hideinteractprompt(var_0, var_2);
-      else {
+      } else {
         var_4 = _id_21B8(var_0, var_2._id_2903);
         var_5 = needsrefresh(var_1, var_2._id_2903);
 
@@ -391,8 +402,9 @@ _id_A151(var_0) {
 needsrefresh(var_0, var_1) {
   var_2 = var_1._id_9FD3.refresh_internal_times_per_player[var_0];
 
-  if(!isDefined(var_2) || var_2 < var_1._id_9FD3.refresh_internal_time)
+  if(!isDefined(var_2) || var_2 < var_1._id_9FD3.refresh_internal_time) {
     return 1;
+  }
 
   return 0;
 }
@@ -419,11 +431,12 @@ refreshplayerinteractprompts(var_0, var_1) {
     if(var_5) {
       if(common_scripts\utility::_id_562E(var_4._id_6641)) {
         var_4._id_9D65 _meth_8660(1, var_4._id_5EB5);
-        var_4._id_9D65 usetriggerrequirelookat(0);
+        var_4._id_9D65 useTriggerRequireLookAt(0);
       }
 
-      if(!isDefined(var_1._id_2903) || var_4 != var_1._id_2903)
+      if(!isDefined(var_1._id_2903) || var_4 != var_1._id_2903) {
         markrefreshed(var_2, var_4);
+      }
     }
 
     if(common_scripts\utility::_id_562E(var_4._id_9FD3.require_standing)) {

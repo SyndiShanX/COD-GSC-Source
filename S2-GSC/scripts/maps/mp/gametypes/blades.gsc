@@ -49,8 +49,9 @@ main() {
   level.disabledivisionpassives = 1;
   level.disabledivisionskills = 1;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   _setteammode("ffa");
   _setdynamicdvar("scr_game_compassRadarUpdateTime", 9);
@@ -58,8 +59,9 @@ main() {
   game["dialog"]["defense_obj"] = "gbl_start";
   game["dialog"]["offense_obj"] = "gbl_start";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 }
 
 _id_5300() {
@@ -106,26 +108,29 @@ _id_6B5C(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
-    if(isDefined(var_5.score) && var_5.score > var_3)
+    if(isDefined(var_5.score) && var_5.score > var_3) {
       var_3 = var_5.score;
+    }
   }
 
-  if(game["state"] == "postgame" && var_1.score >= var_3)
+  if(game["state"] == "postgame" && var_1.score >= var_3) {
     var_1._id_3B4B = 1;
+  }
 }
 
 _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0;
 
   if(_id_57BE(var_0, var_3, var_4)) {
-    if(isriflebulletkill(var_3, var_4))
+    if(isriflebulletkill(var_3, var_4)) {
       var_5 = getdvarint("blades_score_riflebullet", 10);
-    else if(isdefectivegrenadekill(var_3, var_4))
+    } else if(isdefectivegrenadekill(var_3, var_4)) {
       var_5 = getdvarint("blades_score_defectivegrenade", 6);
-    else if(_id_5754(var_3, var_4))
+    } else if(_id_5754(var_3, var_4)) {
       var_5 = getdvarint("blades_score_melee", 3);
-    else if(_id_5806(var_3, var_4))
+    } else if(_id_5806(var_3, var_4)) {
       var_5 = getdvarint("blades_score_throwingknife", 0);
+    }
 
     var_1 _id_04D2::_id_A161(var_1, var_5);
   }
@@ -146,8 +151,9 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!isDefined(var_1)) {
     return;
   }
-  if(var_3 == "MOD_TRIGGER_HURT" && !isPlayer(var_1))
+  if(var_3 == "MOD_TRIGGER_HURT" && !isPlayer(var_1)) {
     var_1 = self;
+  }
 
   if(var_3 == "MOD_FALLING" || isPlayer(var_1)) {
     if(var_3 == "MOD_FALLING" || var_1 == self || _id_5806(var_4, var_3)) {
@@ -177,17 +183,19 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
         return;
       }
     } else if(_id_57BE("kill", var_4, var_3) && !_id_5806(var_4, var_3)) {
-      if(var_1.lastscoretime + 3000 > gettime())
+      if(var_1.lastscoretime + 3000 > gettime()) {
         var_1 thread _id_047A::quickbladesscoreevent();
+      }
 
       var_1.lastscoretime = gettime();
 
-      if(isriflebulletkill(var_4, var_3))
+      if(isriflebulletkill(var_4, var_3)) {
         var_1 thread _id_047A::increasedbladesscoreriflebulletevent();
-      else if(isdefectivegrenadekill(var_4, var_3))
+      } else if(isdefectivegrenadekill(var_4, var_3)) {
         var_1 thread _id_047A::increasedbladesscoredefectivegrenadeevent();
-      else if(_id_5754(var_4, var_3))
+      } else if(_id_5754(var_4, var_3)) {
         var_1 thread _id_047A::increasedbladesscoremeleeevent();
+      }
     }
   }
 }
@@ -203,8 +211,9 @@ getleadingplayer() {
       continue;
     }
 
-    if(isDefined(var_3.score) && var_3.score == var_0)
+    if(isDefined(var_3.score) && var_3.score == var_0) {
       var_1 = undefined;
+    }
   }
 
   return var_1;
@@ -304,10 +313,11 @@ _id_A6F3() {
   givesticksnstonesloadout();
 
   if(self._id_8C15) {
-    if(self.setbackduetosuicide)
+    if(self.setbackduetosuicide) {
       thread _id_047A::bankruptedbladesscoresuicideevent();
-    else
+    } else {
       thread _id_047A::bankruptedbladesscoreevent();
+    }
 
     self._id_8C15 = 0;
     self.setbackduetosuicide = 0;

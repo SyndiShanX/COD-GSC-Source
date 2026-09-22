@@ -49,13 +49,15 @@ restore_tactical_usage_on_spawn() {
     if(_id_0547::_id_5866(self.zmb_plr_tactical)) {
       self setoffhandsecondaryclass(self.zmb_plr_tactical);
 
-      if(!self hasweapon(self.zmb_plr_tactical))
+      if(!self hasweapon(self.zmb_plr_tactical)) {
         _id_0586::_id_078C(self.zmb_plr_tactical);
+      }
 
       var_0 = 0;
 
-      if(isDefined(level.persistent_ammo_tacticals) && common_scripts\utility::_id_0F79(level.persistent_ammo_tacticals, self.zmb_plr_tactical))
+      if(isDefined(level.persistent_ammo_tacticals) && common_scripts\utility::_id_0F79(level.persistent_ammo_tacticals, self.zmb_plr_tactical)) {
         var_0 = 1;
+      }
 
       self setweaponammoclip(self.zmb_plr_tactical, var_0);
     }
@@ -64,10 +66,11 @@ restore_tactical_usage_on_spawn() {
 
 _id_420E(var_0) {
   if(!common_scripts\utility::_id_562E(level._id_5F5A)) {
-    if(var_0)
+    if(var_0) {
       return 5;
-    else
+    } else {
       return 4;
+    }
   } else
     return 6;
 }
@@ -193,18 +196,20 @@ _id_532C(var_0, var_1) {
     var_12._id_6F63 = var_2.name;
     var_2._id_537C = 1;
 
-    if(var_2.name == "perk_all" && isDefined(var_12.look_at_loc))
+    if(var_2.name == "perk_all" && isDefined(var_12.look_at_loc)) {
       var_12 _meth_8660(1, var_12.look_at_loc.origin);
-    else
+    } else {
       var_12 _meth_8660(1, var_12.issighted.origin + (0, 0, 52));
+    }
 
     var_12._id_8C82 = var_1;
 
     if(_id_0547::_id_5819(var_12)) {
-      if(var_2.name == "perk_all")
+      if(var_2.name == "perk_all") {
         _id_0547::_id_8A4F(var_12, ::assignperkallmachinetoplayer);
-      else
+      } else {
         _id_0547::_id_8A4F(var_12, ::_id_10E2, ::_id_4D16);
+      }
     } else {}
 
     if(var_2.name == "perk_random") {
@@ -225,8 +230,9 @@ _id_45A0(var_0, var_1) {
   var_2 = _sortbydistance(var_0, self.origin);
   var_3 = [];
 
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     var_3[var_4] = var_2[var_4];
+  }
 
   return var_3;
 }
@@ -246,8 +252,9 @@ assignperkallmachinetoplayer(var_0) {
 _id_10E2(var_0) {
   var_0 endon("disconnect");
 
-  if(1)
+  if(1) {
     self._id_65DC = _id_0552::_id_7BF3(var_0, self, 1, self.issighted.origin + (0, 0, 52));
+  }
 
   thread _id_8C11(var_0);
   thread _id_6F62(var_0);
@@ -287,8 +294,9 @@ _id_6F5E(var_0, var_1) {
     }
   }
 
-  if(!common_scripts\utility::_id_562E(var_1))
+  if(!common_scripts\utility::_id_562E(var_1)) {
     var_2 _id_8719(var_0);
+  }
 }
 
 _id_A149(var_0, var_1) {
@@ -309,8 +317,9 @@ _id_6F62(var_0) {
   var_2 = 0;
   var_3 = 250000;
 
-  if(isDefined(level.blitz_react_dist_override))
+  if(isDefined(level.blitz_react_dist_override)) {
     var_3 = level.blitz_react_dist_override;
+  }
 
   if(common_scripts\utility::_id_562E(level.blitz_always_open)) {
     wait 0.25;
@@ -347,8 +356,9 @@ _id_6F62(var_0) {
 }
 
 should_open_based_on_distance(var_0, var_1) {
-  if(common_scripts\utility::_id_562E(var_0.wasperkgreeted))
+  if(common_scripts\utility::_id_562E(var_0.wasperkgreeted)) {
     return 1;
+  }
 
   return distancesquared(var_0.origin, self.origin) < var_1;
 }
@@ -379,8 +389,9 @@ _id_6F61(var_0, var_1) {
   level endon("game_over");
   var_3 = level._id_6F5C[var_0];
 
-  if(isDefined(var_3._id_8F63) && var_3._id_267B == var_3._id_8F63)
+  if(isDefined(var_3._id_8F63) && var_3._id_267B == var_3._id_8F63) {
     thread _id_A183(var_0);
+  }
 
   for(;;) {
     [var_5, var_6] = _id_0547::_id_A795();
@@ -402,27 +413,32 @@ _id_6F61(var_0, var_1) {
       _id_0555::issprinting("armor_full", var_5);
       continue;
     } else if(var_5 maps\mp\gametypes\zombies::_id_11C2(var_7)) {
-      if(var_5 _id_056B::_id_9D19(self._id_6F63))
+      if(var_5 _id_056B::_id_9D19(self._id_6F63)) {
         var_5 _id_056B::_id_9D1A(self._id_6F63);
-      else
+      } else {
         var_5 _id_0578::_id_A245();
+      }
 
-      if(!isDefined(self._id_8C82))
+      if(!isDefined(self._id_8C82)) {
         _id_6F5D(var_5);
+      }
 
-      if(isDefined(var_3._id_868B))
+      if(isDefined(var_3._id_868B)) {
         var_5[[var_3._id_868B]]();
+      }
 
       var_5._id_6F5F++;
 
       if(var_0 == "armor") {
-        if(!isDefined(var_5._id_0F60))
+        if(!isDefined(var_5._id_0F60)) {
           var_5._id_0F60 = 0;
+        }
 
         var_5._id_0F60++;
 
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           playFX(level._effect["zmb_pm_armor_use"], var_1.origin, anglesToForward(var_1.angles));
+        }
 
         var_1 _id_0378::_id_8D74("aud_use_armor_machine");
         _id_0547::_id_4AE4(var_5, "armor_booth", var_7, "none", "none");
@@ -440,11 +456,13 @@ _id_6F61(var_0, var_1) {
       var_5 _id_0547::_id_7ACD();
 
       if(isDefined(var_3._id_8F63) && var_3._id_267B == var_3._id_8F63) {
-        if(!isDefined(var_5.numperkbuys))
+        if(!isDefined(var_5.numperkbuys)) {
           var_5.numperkbuys = [];
+        }
 
-        if(!isDefined(var_5.numperkbuys[var_0]))
+        if(!isDefined(var_5.numperkbuys[var_0])) {
           var_5.numperkbuys[var_0] = 0;
+        }
 
         var_5.numperkbuys[var_0]++;
         var_3._id_6731++;
@@ -468,8 +486,9 @@ allperkmachinethink(var_0) {
     var_7 = 0;
 
     if(var_4 maps\mp\gametypes\zombies::_id_11C2(var_6)) {
-      if(!isDefined(self._id_8C82))
+      if(!isDefined(self._id_8C82)) {
         _id_6F5D(var_4, 1);
+      }
 
       var_4 _id_4772();
       var_4._id_6F5F++;
@@ -507,14 +526,17 @@ _id_7A5A(var_0) {
     var_6 = ["quickrevive", "doubletap", "fastreload", "punchperk", "runperk", "electriccherry"];
 
     if(level._id_6F5C["quickrevive"]._id_6078 > -1) {
-      if(!isDefined(var_4.numperkbuys))
+      if(!isDefined(var_4.numperkbuys)) {
         var_4.numperkbuys = [];
+      }
 
-      if(!isDefined(var_4.numperkbuys["quickrevive"]))
+      if(!isDefined(var_4.numperkbuys["quickrevive"])) {
         var_4.numperkbuys["quickrevive"] = 0;
+      }
 
-      if(isDefined(var_4.numselfrevivedowns) && var_4.numselfrevivedowns >= level._id_6F5C["quickrevive"]._id_6078 && level.players.size == 1)
+      if(isDefined(var_4.numselfrevivedowns) && var_4.numselfrevivedowns >= level._id_6F5C["quickrevive"]._id_6078 && level.players.size == 1) {
         var_6 = common_scripts\utility::_id_0F93(var_6, "quickrevive");
+      }
     }
 
     var_7 = common_scripts\utility::random(var_6);
@@ -536,8 +558,9 @@ _id_7A5A(var_0) {
     if(var_4 maps\mp\gametypes\zombies::_id_11C2(var_8)) {
       var_4 _id_0578::_id_A245();
 
-      if(!isDefined(self._id_8C82))
+      if(!isDefined(self._id_8C82)) {
         _id_6F5D(var_4);
+      }
 
       var_4[[level._id_6F5C[var_7]._id_868B]]();
       var_4._id_6F5F++;
@@ -552,11 +575,13 @@ _id_7A5A(var_0) {
       if(level._id_6F5C[var_7]._id_6078 > -1 && level.players.size == 1) {
         level._id_6F5C[var_7]._id_6731++;
 
-        if(!isDefined(var_4.numperkbuys))
+        if(!isDefined(var_4.numperkbuys)) {
           var_4.numperkbuys = [];
+        }
 
-        if(!isDefined(var_4.numperkbuys[level._id_6F5C[var_7].name]))
+        if(!isDefined(var_4.numperkbuys[level._id_6F5C[var_7].name])) {
           var_4.numperkbuys[level._id_6F5C[var_7].name] = 0;
+        }
 
         var_4.numperkbuys[level._id_6F5C[var_7].name]++;
       }
@@ -571,8 +596,9 @@ _id_7A59(var_0) {
   var_0 endon("death");
   wait 120;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.random_blitz_resetting = 0;
+  }
 }
 
 _id_6F5D(var_0, var_1) {
@@ -581,8 +607,8 @@ _id_6F5D(var_0, var_1) {
   var_3 = self._id_741E.angles * (1, 0, 0) + var_0.angles * (0, 1, 0);
   var_2.angles = var_3;
   var_0 playerlinktoblend(var_2, "tag_origin", 0.25);
-  var_2 moveto(self._id_741E.origin, 0.25);
-  var_2 rotateto(self._id_741E.angles, 0.25);
+  var_2 moveTo(self._id_741E.origin, 0.25);
+  var_2 rotateTo(self._id_741E.angles, 0.25);
   var_0 common_scripts\utility::_id_0603();
   var_0 common_scripts\utility::_disableoffhandweapons();
   var_0 maps\mp\_utility::freezecontrolswrapper(1);
@@ -591,8 +617,9 @@ _id_6F5D(var_0, var_1) {
   wait 0.25;
   var_4 = isDefined(var_0.has_purchased_any_blitz) && var_0.has_purchased_any_blitz || common_scripts\utility::_id_562E(level.iszombiesshotgun);
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_4 = 1;
+  }
 
   var_0 _id_0586::_id_078C("unarmed_perk_machine_zm");
   var_0 _id_0586::_id_078E("unarmed_perk_machine_zm", 0, var_4);
@@ -606,15 +633,17 @@ _id_6F5D(var_0, var_1) {
 
   var_6 = 4.1;
 
-  if(var_4)
+  if(var_4) {
     var_6 = 2.1;
+  }
 
   var_0 thread _id_2CE0(var_6);
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     playFX(common_scripts\utility::_id_44F5("zmb_pm_random_use"), self.fake_scriptable.origin, anglesToForward(self.fake_scriptable.angles), anglestoup(self.fake_scriptable.angles));
-  else
+  } else {
     self.issighted setscriptablepartstate("machine_main", "use");
+  }
 
   var_7 = undefined;
 
@@ -622,7 +651,7 @@ _id_6F5D(var_0, var_1) {
     var_7 = spawn("script_model", (0, 0, 0));
     var_7.angles = level.groundrefent.angles;
     var_0 playersetgroundreferenceent(var_7);
-    var_7 rotateto((0, 0, 0), 0.3325);
+    var_7 rotateTo((0, 0, 0), 0.3325);
   }
 
   wait 1.33;
@@ -630,8 +659,9 @@ _id_6F5D(var_0, var_1) {
   if(isDefined(level.groundrefent)) {
     var_0 playersetgroundreferenceent(level.groundrefent);
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_7 delete();
+    }
   }
 
   var_0 maps\mp\_utility::freezecontrolswrapper(0);
@@ -640,8 +670,9 @@ _id_6F5D(var_0, var_1) {
   var_0._id_5799 = 0;
   var_0.has_purchased_any_blitz = 1;
 
-  if(common_scripts\utility::_id_562E(level.zmb_player_safe_teleport_on_perk_buy))
+  if(common_scripts\utility::_id_562E(level.zmb_player_safe_teleport_on_perk_buy)) {
     var_0 setOrigin(_func_2E1(self._id_741E.origin, var_0) + (0, 0, 1));
+  }
 }
 
 _id_0F62() {
@@ -665,8 +696,9 @@ _id_2CE0(var_0) {
   common_scripts\utility::_id_0614();
   self notify("can_use_consumable");
 
-  if(self hasweapon("unarmed_perk_machine_zm"))
+  if(self hasweapon("unarmed_perk_machine_zm")) {
     _id_0586::_id_0790("unarmed_perk_machine_zm");
+  }
 }
 
 isusingperkmachine() {
@@ -674,17 +706,21 @@ isusingperkmachine() {
 }
 
 _id_4B7E(var_0) {
-  if(!isDefined(self._id_6F66))
+  if(!isDefined(self._id_6F66)) {
     self._id_6F66 = [];
+  }
 
-  if(var_0 == "perk_random")
+  if(var_0 == "perk_random") {
     return 0;
+  }
 
-  if(var_0 == "perk_all")
+  if(var_0 == "perk_all") {
     return 0;
+  }
 
-  if(isDefined(self._id_6F66[var_0]))
+  if(isDefined(self._id_6F66[var_0])) {
     return 1;
+  }
 
   return 0;
 }
@@ -702,11 +738,13 @@ _id_A183(var_0) {
         var_1._id_267B = var_1._id_64F7;
 
         foreach(var_3 in level.players) {
-          if(!isDefined(var_3.numperkbuys))
+          if(!isDefined(var_3.numperkbuys)) {
             var_3.numperkbuys = [];
+          }
 
-          if(!isDefined(var_3.numperkbuys[var_0]))
+          if(!isDefined(var_3.numperkbuys[var_0])) {
             var_3.numperkbuys[var_0] = 0;
+          }
 
           var_3 notify("update_trigger_cost");
         }
@@ -724,8 +762,9 @@ _id_A183(var_0) {
         var_3 notify("update_trigger_cost");
 
         if(var_0 == "quickrevive") {
-          if(isDefined(var_3.numselfrevivedowns) && var_3.numselfrevivedowns >= var_1._id_6078 && var_3 _id_4B7E(var_0))
+          if(isDefined(var_3.numselfrevivedowns) && var_3.numselfrevivedowns >= var_1._id_6078 && var_3 _id_4B7E(var_0)) {
             var_3 _id_95D7(var_0);
+          }
         }
       }
     }
@@ -736,17 +775,20 @@ _id_4772(var_0) {
   if(_id_0547::_id_577E(self)) {
     return;
   }
-  if(_id_0547::_id_57E1(self))
+  if(_id_0547::_id_57E1(self)) {
     return 0;
+  }
 
-  if(self.sessionstate == "spectator")
+  if(self.sessionstate == "spectator") {
     return 0;
+  }
 
   level._id_5F5A = 1;
   var_1 = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   foreach(var_3 in level._id_6F5C) {
     if(var_0 == 0 || common_scripts\utility::_id_562E(var_3._id_537C)) {
@@ -764,17 +806,20 @@ givefreemachineperks(var_0, var_1, var_2) {
   level._id_5F5A = 1;
   var_3 = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   var_4 = [];
   var_5 = [];
 
-  foreach(var_7 in level._id_6F5C)
-  var_5 = common_scripts\utility::_id_0F6F(var_5, var_7.name);
+  foreach(var_7 in level._id_6F5C) {
+    var_5 = common_scripts\utility::_id_0F6F(var_5, var_7.name);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 = var_2;
+  }
 
   foreach(var_7 in var_5) {
     if(var_7 != "armor" && var_7 != "perk_random" && var_7 != "perk_all" && !_id_4B7E(var_7)) {
@@ -793,13 +838,15 @@ givefreemachineperks(var_0, var_1, var_2) {
 }
 
 _id_95D0(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   foreach(var_2 in level._id_6F5C) {
     if(var_0 == 0 || common_scripts\utility::_id_562E(var_2._id_537C)) {
-      if(var_2.name != "armor" && var_2.name != "perk_random" && var_2.name != "perk_all")
+      if(var_2.name != "armor" && var_2.name != "perk_random" && var_2.name != "perk_all") {
         _id_95D7(var_2.name);
+      }
     }
   }
 }
@@ -817,8 +864,9 @@ _id_4792(var_0) {
 _id_95D7(var_0) {
   var_1 = level._id_6F5C[var_0];
 
-  if(isDefined(var_1._id_A067))
+  if(isDefined(var_1._id_A067)) {
     self[[var_1._id_A067]]();
+  }
 }
 
 _id_95D8(var_0) {
@@ -839,8 +887,9 @@ _id_95D8(var_0) {
       var_7 = var_6._id_00D4;
       var_8 = level._id_6F5C[var_6.name].perkid;
 
-      if(isDefined(var_8))
+      if(isDefined(var_8)) {
         var_4 = var_4 << 3 | var_8;
+      }
     }
 
     var_10 = "ui_zm_blitz_" + self.characterclientindex;
@@ -873,18 +922,20 @@ _id_4793(var_0, var_1) {
       var_8 = var_7._id_00D4;
       var_9 = level._id_6F5C[var_7.name].perkid;
 
-      if(isDefined(var_9))
+      if(isDefined(var_9)) {
         var_5 = var_5 << 3 | var_9;
+      }
     }
 
     var_11 = "ui_zm_blitz_" + self.characterclientindex;
     _setomnvar(var_11, var_5);
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     _id_0555::issprinting("biltz_replaced", self, var_0, var_3);
-  else
+  } else {
     _id_0555::issprinting("buy_blitz", self, var_0);
+  }
 }
 
 _id_47B5() {
@@ -899,8 +950,9 @@ _id_95F1() {
   if(!_id_4B7E("fastreload")) {
     return;
   }
-  if(maps\mp\_utility::_hasperk("specialty_fastreload"))
+  if(maps\mp\_utility::_hasperk("specialty_fastreload")) {
     maps\mp\_utility::_id_0735("specialty_fastreload");
+  }
 
   _id_95D8("fastreload");
 }
@@ -937,11 +989,13 @@ _id_95F3() {
   if(!_id_4B7E("runperk")) {
     return;
   }
-  if(maps\mp\_utility::_hasperk("specialty_lightweight"))
+  if(maps\mp\_utility::_hasperk("specialty_lightweight")) {
     maps\mp\_utility::_id_0735("specialty_lightweight");
+  }
 
-  if(maps\mp\_utility::_hasperk("specialty_marathon"))
+  if(maps\mp\_utility::_hasperk("specialty_marathon")) {
     maps\mp\_utility::_id_0735("specialty_marathon");
+  }
 
   _id_0547::_id_7ACD();
   _id_95D8("runperk");
@@ -975,11 +1029,13 @@ _id_95D5() {
   }
   self notify("take_electriccherry");
 
-  if(isDefined(self._id_6F66["electriccherry"]._id_AAC0))
+  if(isDefined(self._id_6F66["electriccherry"]._id_AAC0)) {
     self._id_6F66["electriccherry"]._id_AAC0 delete();
+  }
 
-  if(isDefined(self._id_6F66["electriccherry"]._id_AAC1))
+  if(isDefined(self._id_6F66["electriccherry"]._id_AAC1)) {
     self._id_6F66["electriccherry"]._id_AAC1 delete();
+  }
 
   _id_95D8("electriccherry");
 }
@@ -994,7 +1050,7 @@ _id_35B0() {
   var_1._id_258C = 0;
   var_1._id_AAC1 = spawn("script_model", (0, 0, 0));
   var_1._id_AAC1 setModel("tag_origin");
-  var_1._id_AAC1 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1._id_AAC1 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 thread maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_1._id_AAC1);
   var_1._id_AAC0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_elec_cherry_wv"), var_1._id_AAC1, "tag_origin");
   var_1._id_AAC0 _meth_8006(var_0);
@@ -1098,8 +1154,9 @@ _id_35AD(var_0) {
   self endon("take_electriccherry");
   var_1 = 0.25;
 
-  if(maps\mp\_utility::_hasperk("specialty_fastreload"))
+  if(maps\mp\_utility::_hasperk("specialty_fastreload")) {
     var_1 = var_1 * 0.5;
+  }
 
   var_2 = var_1 + 3;
   wait(var_2);
@@ -1118,8 +1175,9 @@ _id_95D3() {
   if(!_id_4B7E("doubletap")) {
     return;
   }
-  if(maps\mp\_utility::_hasperk("specialty_rof"))
+  if(maps\mp\_utility::_hasperk("specialty_rof")) {
     maps\mp\_utility::_id_0735("specialty_rof");
+  }
 
   _id_95D8("doubletap");
 }
@@ -1139,14 +1197,16 @@ _id_5F1E() {
     if(isDefined(var_2.target)) {
       var_3 = common_scripts\utility::_id_46B5(var_2.target, "targetname");
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_2 _meth_8660(1, var_3.origin);
-      else
-        var_2 usetriggerrequirelookat(1);
+      } else {
+        var_2 useTriggerRequireLookAt(1);
+      }
     }
 
-    if(isDefined(var_3) && isDefined(var_3.target))
-      var_2._id_191E = _getent(var_3.target, "targetname");
+    if(isDefined(var_3) && isDefined(var_3.target)) {
+      var_2._id_191E = _getEnt(var_3.target, "targetname");
+    }
 
     _id_0547::_id_8A4F(var_2, ::_id_5F22);
   }
@@ -1220,8 +1280,9 @@ lostandfoundcountdown(var_0) {
   wait 15;
 
   if(common_scripts\utility::_id_562E(var_0._id_6F93)) {
-    if(isDefined(level._id_5F1D))
+    if(isDefined(level._id_5F1D)) {
       var_0[[level._id_5F1D]]();
+    }
   }
 }
 
@@ -1239,8 +1300,9 @@ _id_5F21(var_0) {
         var_2 thread _id_054E::playeruselostandfound();
         var_2 notify("lost_and_found_restored");
 
-        if(isDefined(level._id_5F1D))
+        if(isDefined(level._id_5F1D)) {
           var_2[[level._id_5F1D]]();
+        }
       }
     }
   }
@@ -1252,8 +1314,9 @@ lostandfoundsaveweapon(var_0) {
   var_2._id_A9E0 = var_0;
   var_2.ammoinfo = var_1 _id_0586::_id_4129(var_0);
 
-  if(!isDefined(var_1.lostandfoundinfos))
+  if(!isDefined(var_1.lostandfoundinfos)) {
     var_1.lostandfoundinfos = [];
+  }
 
   var_1.lostandfoundinfos[var_1.lostandfoundinfos.size] = var_2;
 }
@@ -1265,8 +1328,9 @@ lostandfoundgetbackupweapon(var_0) {
     return;
   }
   foreach(var_3 in var_1.lostandfoundinfos) {
-    if(weaponinventorytype(var_3._id_A9E0) == var_0)
+    if(weaponinventorytype(var_3._id_A9E0) == var_0) {
       return var_3._id_A9E0;
+    }
   }
 }
 
@@ -1292,8 +1356,9 @@ _id_5F20() {
 
   var_6 = self getweaponslistoffhands();
 
-  foreach(var_3 in var_6)
-  var_0 lostandfoundsaveweapon(var_3);
+  foreach(var_3 in var_6) {
+    var_0 lostandfoundsaveweapon(var_3);
+  }
 
   var_9 = self getweaponslistitems();
 
@@ -1313,11 +1378,11 @@ _id_5F20() {
     var_15 = lostandfoundgetbackupweapon("primary");
     var_16 = lostandfoundgetbackupweapon("offhand");
 
-    if(isDefined(var_15))
+    if(isDefined(var_15)) {
       self._id_6F94 = var_15;
-    else if(isDefined(var_16))
+    } else if(isDefined(var_16)) {
       self._id_6F94 = var_16;
-    else {
+    } else {
       var_17 = _id_0548::_id_454B(self, "shovel_zm");
       self._id_6F94 = var_17;
     }
@@ -1368,8 +1433,9 @@ _id_5F1F() {
     }
   }
 
-  if(var_9 != "none")
+  if(var_9 != "none") {
     _id_0586::_id_078E(var_9, 1);
+  }
 }
 
 _id_5BFE() {
@@ -1430,15 +1496,18 @@ _id_4602(var_0, var_1) {
   var_2 = level._id_6F5C[var_1._id_6F63];
   var_3 = var_2._id_267B;
 
-  if(var_1._id_6F63 == "perk_all")
+  if(var_1._id_6F63 == "perk_all") {
     return var_3;
+  }
 
-  if(isDefined(var_2._id_8F63) && level.players.size == 1)
+  if(isDefined(var_2._id_8F63) && level.players.size == 1) {
     var_3 = var_2._id_8F63;
+  }
 
   if(var_1._id_6F63 == "armor" && isDefined(var_0._id_0F60)) {
-    for(var_4 = 0; var_4 < var_0._id_0F60; var_4++)
+    for(var_4 = 0; var_4 < var_0._id_0F60; var_4++) {
       var_3 = _id_0547::_id_4522(var_3);
+    }
   }
 
   var_5 = var_0 _id_0578::_id_4717(var_1);
@@ -1452,8 +1521,9 @@ _id_0F66(var_0) {
   _id_0559::_id_7BE2(var_0, self, "armor");
   var_2 = undefined;
 
-  if(1)
+  if(1) {
     var_2 = _id_0552::_id_7BF3(var_0, self);
+  }
 
   for(;;) {
     waittillframeend;
@@ -1472,10 +1542,11 @@ _id_0F66(var_0) {
 }
 
 _id_0F65(var_0) {
-  if(!var_0 _id_4B53())
+  if(!var_0 _id_4B53()) {
     return level._id_6F5C["armor"]._id_00C5;
-  else
+  } else {
     return &"ZOMBIES_EMPTY_STRING";
+  }
 }
 
 _id_4B53() {

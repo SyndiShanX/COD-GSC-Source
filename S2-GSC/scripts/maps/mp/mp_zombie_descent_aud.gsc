@@ -418,8 +418,9 @@ zmb_cave_drips_05() {
 }
 
 _id_7248() {
-  if(!isDefined(self._id_11CB))
+  if(!isDefined(self._id_11CB)) {
     self._id_11CB = spawnStruct();
+  }
 }
 
 _id_7330() {
@@ -447,8 +448,9 @@ stormraven_bloodfall() {
   }
   level._id_11CB.bloodfall_snd[level._id_11CB.bloodfall_counter] = _id_0380::_id_6844("zmb_stormraven_bloodfall_lp", undefined, self);
 
-  if(level._id_11CB.bloodfall_counter < 3)
+  if(level._id_11CB.bloodfall_counter < 3) {
     level._id_11CB.bloodfall_counter = level._id_11CB.bloodfall_counter + 1;
+  }
 }
 
 stormraven_bloodstopper_pickup() {
@@ -469,11 +471,13 @@ stop_stormraven_bloodfall() {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(level._id_11CB.bloodfall_snd[level._id_11CB.bloodfall_counter]))
+  if(isDefined(level._id_11CB.bloodfall_snd[level._id_11CB.bloodfall_counter])) {
     _id_0380::_id_6850(level._id_11CB.bloodfall_snd[level._id_11CB.bloodfall_counter]);
+  }
 
-  if(level._id_11CB.bloodfall_counter > 0)
+  if(level._id_11CB.bloodfall_counter > 0) {
     level._id_11CB.bloodfall_counter = level._id_11CB.bloodfall_counter - 1;
+  }
 }
 
 stormraven_warhammer_spawn() {
@@ -526,8 +530,9 @@ stormraven_warhammer_steady_mvmt() {
   thread stormraven_warhammer_mvmt_one_shot_handler(self);
   level waittill("stormraven_hammer_tethered");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _id_0380::_id_6850(var_0);
+  }
 }
 
 stormraven_warhammer_mvmt_one_shot_handler(var_0) {
@@ -566,8 +571,9 @@ stormraven_warhammer_run_charged() {
   var_0 = _id_0380::_id_6844("zmb_stormraven_warhammer_rune_charged", undefined, self);
   self waittill("aud_rune_charge_transferred");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _id_0380::_id_6850(var_0);
+  }
 }
 
 stormraven_warhammer_rune_strike() {
@@ -584,8 +590,9 @@ stormraven_warhammer_timed_charge() {
   var_0 = _id_0380::_id_6844("zmb_stormraven_warhammer_charged", undefined, self);
   self waittill("aud_stop_charged_warhammer");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _id_0380::_id_6850(var_0);
+  }
 }
 
 stormraven_charge_puzzle_spin(var_0) {
@@ -611,8 +618,9 @@ stormraven_warhammer_puz_run_ch() {
   var_0 = _id_0380::_id_6844("zmb_stormraven_warhammer_rune_charged", undefined, self);
   self waittill("aud_rune_charge_done");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _id_0380::_id_6850(var_0);
+  }
 }
 
 stormraven_warhammer_trial_strikes(var_0) {
@@ -630,8 +638,9 @@ stormraven_warhammer_ascend_strike(var_0) {
   var_1 = _id_0380::_id_6842("zmb_stormraven_warhammer_rune_charged", undefined, var_0, 2.0);
   wait 4.5;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     _id_0380::_id_6850(var_1, 2.0);
+  }
 
   _id_0380::_id_2889("zmb_stormraven_warhammer_rune_hit", undefined, var_0);
 }
@@ -661,7 +670,7 @@ aud_blood_plate_absorb(var_0) {
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
   _id_0380::_id_288B("zmb_dig_soul_suck_blood", undefined, var_2);
-  var_2 moveto(var_0.origin, 1.9);
+  var_2 moveTo(var_0.origin, 1.9);
   wait 2.0;
   var_2 delete();
   _id_0380::_id_2889("zombie_soul_suck_threshold", undefined, var_1.origin);
@@ -691,7 +700,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 moveto(var_1, 1.9);
+  var_2 moveTo(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -758,8 +767,9 @@ deathraven_scythe_heat_stage_1() {
 deathraven_scythe_heat_stage_2() {
   var_0 = self;
 
-  if(!isDefined(level._id_11CB.scythe_sizzle_stage_2))
+  if(!isDefined(level._id_11CB.scythe_sizzle_stage_2)) {
     level._id_11CB.scythe_sizzle_stage_2 = _id_0380::_id_6844("zmb_dsnt_scythe_sizzle_lvl_2_lp", undefined, var_0, 0.2);
+  }
 }
 
 deathraven_scythe_heated() {
@@ -824,8 +834,9 @@ moonraven_orrery_lower_gears_move() {
   self endon("disconnect");
 
   while(!common_scripts\utility::_id_3C77("moonraven_gears_stop_rotation")) {
-    if(!isDefined(self.lower_gear_lp))
+    if(!isDefined(self.lower_gear_lp)) {
       self.lower_gear_lp = _id_0380::_id_6842("zmb_orrery_gears_lower_lp", undefined, self.origin + (0, 50, 0), 0.2);
+    }
 
     waitframe();
   }
@@ -837,8 +848,9 @@ moonraven_orrery_lower_gears_move() {
 moonraven_orrery_move(var_0) {
   level._id_11CB.moon_count++;
 
-  if(level._id_11CB.moon_count > 4)
+  if(level._id_11CB.moon_count > 4) {
     level._id_11CB.moon_count = 4;
+  }
 
   switch (level._id_11CB.moon_count) {
     case 0:
@@ -868,8 +880,9 @@ moonraven_orrery_move(var_0) {
 moonraven_orrery_stop(var_0) {
   level._id_11CB.moon_count--;
 
-  if(level._id_11CB.moon_count < 0)
+  if(level._id_11CB.moon_count < 0) {
     level._id_11CB.moon_count = 0;
+  }
 
   switch (level._id_11CB.moon_count) {
     case 0:
@@ -1095,16 +1108,17 @@ citadel_wpn_placement(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(var_0 == "shield_emp")
+  if(var_0 == "shield_emp") {
     _id_0380::_id_2889("zmb_citadel_emp_shield_place", undefined, var_1);
-  else if(var_0 == "hammer_emp")
+  } else if(var_0 == "hammer_emp") {
     _id_0380::_id_2889("zmb_citadel_emp_hammer_place", undefined, var_1);
-  else if(var_0 == "scythe_emp")
+  } else if(var_0 == "scythe_emp") {
     _id_0380::_id_2889("zmb_citadel_emp_scythe_place", undefined, var_1);
-  else if(var_0 == "spike_emp")
+  } else if(var_0 == "spike_emp") {
     _id_0380::_id_2889("zmb_citadel_emp_spike_place", undefined, var_1);
-  else
+  } else {
     return;
+  }
 }
 
 citadel_pillar_ignite(var_0) {
@@ -1182,8 +1196,9 @@ citadel_entrance(var_0) {
 }
 
 aud_gdk_intro() {
-  foreach(var_1 in level.players)
-  var_1 clientaddsoundsubmix("god_king_intro", 2.0);
+  foreach(var_1 in level.players) {
+    var_1 clientaddsoundsubmix("god_king_intro", 2.0);
+  }
 
   _id_0366::_id_8E33(3);
   var_3 = _id_0380::_id_6840("zmb_mus_god_king_intro");
@@ -1205,8 +1220,9 @@ aud_gdk_intro() {
     var_3 = undefined;
   }
 
-  foreach(var_1 in level.players)
-  var_1 clientclearsoundsubmix("god_king_intro");
+  foreach(var_1 in level.players) {
+    var_1 clientclearsoundsubmix("god_king_intro");
+  }
 }
 
 gdk_intro_viv_vox() {
@@ -1222,8 +1238,9 @@ gdk_intro_magic() {
 boss_music_start() {
   wait 1;
 
-  foreach(var_1 in level.players)
-  var_1 clientaddsoundsubmix("god_king_fight", 2.0);
+  foreach(var_1 in level.players) {
+    var_1 clientaddsoundsubmix("god_king_fight", 2.0);
+  }
 
   if(!isDefined(level._id_11CB.boss_music_playing) && !isDefined(level._id_11CB.boss_is_dead)) {
     level._id_11CB.boss_music_playing = 1;
@@ -1283,11 +1300,13 @@ raven_fly_away() {
 }
 
 outro_vo_submix_start() {
-  foreach(var_1 in level.players)
-  var_1 clientaddsoundsubmix("outro_vo");
+  foreach(var_1 in level.players) {
+    var_1 clientaddsoundsubmix("outro_vo");
+  }
 }
 
 outro_vo_submix_end() {
-  foreach(var_1 in level.players)
-  var_1 clientclearsoundsubmix("outro_vo");
+  foreach(var_1 in level.players) {
+    var_1 clientclearsoundsubmix("outro_vo");
+  }
 }

@@ -4,52 +4,63 @@
 **************************************/
 
 init() {
-  if(isDefined(level.water_wake))
+  if(isDefined(level.water_wake)) {
     level._effect["water_wake"] = loadfx(level.water_wake);
-  else
+  } else {
     level._effect["water_wake"] = loadfx("vfx/treadfx/body_wake_water");
+  }
 
-  if(isDefined(level.water_wake_stationary))
+  if(isDefined(level.water_wake_stationary)) {
     level._effect["water_wake_stationary"] = loadfx(level.water_wake_stationary);
-  else
+  } else {
     level._effect["water_wake_stationary"] = loadfx("vfx/treadfx/body_wake_water_stationary");
+  }
 
-  if(isDefined(level.water_splash_emerge))
+  if(isDefined(level.water_splash_emerge)) {
     level._effect["water_splash_emerge"] = loadfx(level.water_splash_emerge);
-  else
+  } else {
     level._effect["water_splash_emerge"] = loadfx("vfx/water/body_splash_exit");
+  }
 
-  if(isDefined(level.water_splash_enter))
+  if(isDefined(level.water_splash_enter)) {
     level._effect["water_splash_enter"] = loadfx(level.water_splash_enter);
-  else
+  } else {
     level._effect["water_splash_enter"] = loadfx("vfx/water/body_splash");
+  }
 
   _precacheshellshock("underwater");
 
-  if(!isDefined(level._id_A968))
+  if(!isDefined(level._id_A968)) {
     level._id_A968 = [];
-
-  if(!isDefined(level._id_A969))
-    level._id_A969 = 0;
-
-  if(!isDefined(level._id_8ACF)) {
-    if(isDefined(level._id_585D) && level._id_585D)
-      _id_8720("shovel_zm");
-    else
-      _id_8720("iw5_underwater_mp");
   }
 
-  if(!isDefined(level._id_2B7C))
+  if(!isDefined(level._id_A969)) {
+    level._id_A969 = 0;
+  }
+
+  if(!isDefined(level._id_8ACF)) {
+    if(isDefined(level._id_585D) && level._id_585D) {
+      _id_8720("shovel_zm");
+    } else {
+      _id_8720("iw5_underwater_mp");
+    }
+  }
+
+  if(!isDefined(level._id_2B7C)) {
     _id_865D("iw5_underwater_mp");
+  }
 
-  if(!isDefined(level._id_0C19))
+  if(!isDefined(level._id_0C19)) {
     level._id_0C19 = 1;
+  }
 
-  if(level._id_2B7C == level._id_8ACF)
+  if(level._id_2B7C == level._id_8ACF) {
     level._id_0C19 = 0;
+  }
 
-  if(!isDefined(level._id_9545))
+  if(!isDefined(level._id_9545)) {
     level._id_9545 = 48;
+  }
 
   var_0 = getEntArray("trigger_underwater", "targetname");
   level._id_A964 = var_0;
@@ -65,10 +76,11 @@ init() {
 }
 
 _id_7320(var_0) {
-  if(var_0)
+  if(var_0) {
     self._id_5525 = 1;
-  else
+  } else {
     self._id_5525 = undefined;
+  }
 }
 
 _id_A90E() {
@@ -79,8 +91,9 @@ _id_A90E() {
   for(;;) {
     self waittill("player_migrated");
 
-    foreach(var_1 in level._id_A968)
-    self _meth_84E9(var_1._id_0165, var_1);
+    foreach(var_1 in level._id_A968) {
+      self _meth_84E9(var_1._id_0165, var_1);
+    }
   }
 }
 
@@ -91,8 +104,9 @@ _id_6B6E() {
     level waittill("connected", var_0);
     var_0 thread _id_A90E();
 
-    foreach(var_2 in level._id_A968)
-    var_0 _meth_84E9(var_2._id_0165, var_2);
+    foreach(var_2 in level._id_A968) {
+      var_0 _meth_84E9(var_2._id_0165, var_2);
+    }
   }
 }
 
@@ -215,10 +229,11 @@ _id_740D(var_0) {
     if(_id_53CA(var_0, 32)) {
       self._id_542A = undefined;
 
-      if(isDefined(level._id_A96A))
+      if(isDefined(level._id_A96A)) {
         self.watermovespeedscale = level._id_A96A;
-      else
+      } else {
         self.watermovespeedscale = 1;
+      }
 
       _id_0513::_id_A13B();
     }
@@ -238,10 +253,11 @@ _id_740D(var_0) {
 
       self._id_A019 = 1;
 
-      if(isDefined(level._id_A96B))
+      if(isDefined(level._id_A96B)) {
         self thread[[level._id_A96B]]();
-      else if(!(level.gametype == "prop" && self.team != game["defenders"]))
+      } else if(!(level.gametype == "prop" && self.team != game["defenders"])) {
         thread _id_73F2();
+      }
 
       maps\mp\_utility::_id_73AF(0);
 
@@ -255,16 +271,18 @@ _id_740D(var_0) {
       if(var_3 != "none") {
         var_4 = weaponinventorytype(var_3);
 
-        if(var_4 == "primary" || var_4 == "altmode")
+        if(var_4 == "primary" || var_4 == "altmode") {
           self._id_A95F = var_3;
-        else if(maps\mp\_utility::iskillstreakweapon(var_3))
+        } else if(maps\mp\_utility::iskillstreakweapon(var_3)) {
           self._id_A95F = _id_051E::_id_73EB();
-        else if(isDefined(self._id_5BC5) && self hasweapon(self._id_5BC5))
+        } else if(isDefined(self._id_5BC5) && self hasweapon(self._id_5BC5)) {
           self._id_A95F = self._id_5BC5;
+        }
       }
 
-      if(isDefined(level._id_3FC9))
+      if(isDefined(level._id_3FC9)) {
         self[[level._id_3FC9]](var_0);
+      }
     }
 
     if(isDefined(self._id_A019) && (isDefined(self._id_57F2) || !isDefined(self._id_5849)) && (_id_53CA(var_0, level._id_9545) || self getstance() == "prone" || !level._id_0C19)) {
@@ -295,8 +313,9 @@ _id_740D(var_0) {
         _id_73DE("deep");
     }
 
-    if(isDefined(self._id_1561))
+    if(isDefined(self._id_1561)) {
       self._id_1561 = getdvarint("scr_ball_water_drop_delay", 10);
+    }
 
     if(isDefined(self._id_A019) && _id_565D(var_0, 0) && !isunderwaterprop()) {
       self._id_A019 = undefined;
@@ -349,8 +368,9 @@ _id_5660(var_0) {
     var_1 = self.pers["killstreaks"][self._id_5A69]._id_944C;
 
     if(isDefined(var_1)) {
-      if(issubstr(var_1, "turret") || issubstr(var_1, "sentry"))
+      if(issubstr(var_1, "turret") || issubstr(var_1, "sentry")) {
         return 1;
+      }
     }
   }
 
@@ -380,8 +400,9 @@ inwaterwakevfxcleanup() {
     maps\mp\agents\_agent_utility::deleteentonagentdeath(self.fxentstationary);
   }
 
-  if(!isDefined(self.waterwakevfxdeletefunc))
+  if(!isDefined(self.waterwakevfxdeletefunc)) {
     self.waterwakevfxdeletefunc = ::waterwakevfxdelete;
+  }
 
   common_scripts\utility::_id_A70C(self, "death", level, "game_ended", self, "disconnect", self, "out_of_water", self.fxentwake, "entitydeleted", self.fxentstationary, "entitydeleted");
   thread waterwakevfxdelete();
@@ -394,14 +415,17 @@ waterwakevfxdelete() {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(self.fxentwake))
+  if(isDefined(self.fxentwake)) {
     self.fxentwake delete();
+  }
 
-  if(isDefined(self.fxentstationary))
+  if(isDefined(self.fxentstationary)) {
     self.fxentstationary delete();
+  }
 
-  if(isDefined(self.waterwakevfxdeletefunc))
+  if(isDefined(self.waterwakevfxdeletefunc)) {
     self.waterwakevfxdeletefunc = undefined;
+  }
 }
 
 _id_5526(var_0) {
@@ -430,10 +454,11 @@ _id_5526(var_0) {
     var_7 = self getvelocity();
     var_1 = distance(var_7, (0, 0, 0));
 
-    if(var_1 > 0)
+    if(var_1 > 0) {
       wait(max(1 - var_1 / 120, 0.1));
-    else
+    } else {
       wait 0.3;
+    }
 
     var_8 = _id_471B(var_0) - self.origin[2];
 
@@ -459,8 +484,9 @@ _id_73F2() {
   wait 13;
 
   for(;;) {
-    if(!isDefined(self._id_5738) || self._id_5738 == 0)
+    if(!isDefined(self._id_5738) || self._id_5738 == 0) {
       self dodamage(20, self.origin + anglesToForward(self.angles) * 5, undefined, undefined, "MOD_TRIGGER_HURT");
+    }
 
     wait 1;
   }
@@ -485,20 +511,23 @@ _id_6B74() {
 }
 
 _id_53CA(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 32;
+  }
 
-  if(level _id_471B(var_0) - self.origin[2] <= var_1)
+  if(level _id_471B(var_0) - self.origin[2] <= var_1) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_565D(var_0, var_1) {
-  if(_id_4620() + var_1 >= level _id_471B(var_0))
+  if(_id_4620() + var_1 >= level _id_471B(var_0)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_4620() {
@@ -524,26 +553,30 @@ _id_73DE(var_0) {
   self endon("disconnect");
   self endon("end_swimming");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "shallow";
+  }
 
-  if(var_0 == "shallow" && self hasweapon(level._id_8ACF) || var_0 == "deep" && self hasweapon(level._id_2B7C) || isDefined(level._id_2F6B))
+  if(var_0 == "shallow" && self hasweapon(level._id_8ACF) || var_0 == "deep" && self hasweapon(level._id_2B7C) || isDefined(level._id_2F6B)) {
     self._id_3236 = 1;
+  }
 
   switch (var_0) {
     case "deep":
       _id_476D(level._id_2B7C);
 
-      if(!_id_5728())
+      if(!_id_5728()) {
         self switchtoweaponimmediate(level._id_2B7C);
+      }
 
       self._id_A01A = "deep";
       break;
     case "shallow":
       _id_476D(level._id_8ACF);
 
-      if(!_id_5728())
+      if(!_id_5728()) {
         self switchtoweaponimmediate(level._id_8ACF);
+      }
 
       self._id_A01A = "shallow";
       break;
@@ -553,8 +586,9 @@ _id_73DE(var_0) {
     default:
       _id_476D(level._id_8ACF);
 
-      if(!_id_5728())
+      if(!_id_5728()) {
         self switchtoweaponimmediate(level._id_8ACF);
+      }
 
       self._id_A01A = "shallow";
       break;
@@ -580,16 +614,19 @@ _id_73D6() {
     if(isDefined(self._id_5738) && self._id_5738 == 1 && isDefined(self._id_4C26)) {
       self allowfire(1);
 
-      if(!isDefined(self._id_4C26._id_4B77) || self._id_4C26._id_4B77 == 0)
+      if(!isDefined(self._id_4C26._id_4B77) || self._id_4C26._id_4B77 == 0) {
         self disableoffhandweapons();
+      }
 
-      if(!isDefined(self._id_4C26._id_4B8E) || self._id_4C26._id_4B8E == 0)
+      if(!isDefined(self._id_4C26._id_4B8E) || self._id_4C26._id_4B8E == 0) {
         self disableoffhandsecondaryweapons();
-      else
+      } else {
         self enableoffhandsecondaryweapons();
+      }
     } else if(isDefined(self._id_A95F)) {
-      if(!_id_5728())
+      if(!_id_5728()) {
         maps\mp\_utility::_id_955C(self._id_A95F);
+      }
     }
 
     switch (var_0) {
@@ -612,13 +649,15 @@ _id_73D6() {
 }
 
 _id_476D(var_0) {
-  if(!isDefined(self._id_3236) || !self._id_3236)
+  if(!isDefined(self._id_3236) || !self._id_3236) {
     self giveweapon(var_0);
+  }
 }
 
 _id_95CF(var_0) {
-  if(!isDefined(self._id_3236) || !self._id_3236)
+  if(!isDefined(self._id_3236) || !self._id_3236) {
     self takeweapon(var_0);
+  }
 }
 
 _id_8720(var_0) {

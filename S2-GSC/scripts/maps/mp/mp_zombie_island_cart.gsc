@@ -18,24 +18,28 @@ transport_trigger_manager(var_0, var_1, var_2, var_3) {
       case "purchase":
         execute_station_leave(var_1, var_2, var_5, var_6.player);
 
-        if(isDefined(var_5))
+        if(isDefined(var_5)) {
           var_5 = undefined;
+        }
 
         break;
       case "call":
         execute_station_leave(var_1, var_2, var_6.getnegotiationnextnode);
         break;
       case "lockdown":
-        if(isDefined(var_6.getnegotiationnextnode))
+        if(isDefined(var_6.getnegotiationnextnode)) {
           execute_station_leave(var_1, var_2, var_6.getnegotiationnextnode);
+        }
 
         level.zmb_mine_cart_is_locked = 1;
 
-        foreach(var_8 in level.valid_island_cart_destinations)
-        maps\mp\mp_zombie_island_cart_station_functions::set_transport_light_states(var_8, "deactivated");
+        foreach(var_8 in level.valid_island_cart_destinations) {
+          maps\mp\mp_zombie_island_cart_station_functions::set_transport_light_states(var_8, "deactivated");
+        }
 
-        if(isDefined(var_6.script_flag_lock))
+        if(isDefined(var_6.script_flag_lock)) {
           var_5 = var_6.script_flag_lock;
+        }
 
         update_trigger_hints(var_1, var_2, &"ZOMBIE_ISLAND_TRANSPORT_DISABLED");
         break;
@@ -103,8 +107,9 @@ main() {
 }
 
 override_notetracks_for_cart() {
-  while(!isDefined(anim._id_67D4))
+  while(!isDefined(anim._id_67D4)) {
     waitframe();
+  }
 
   anim._id_67D4["fadetoblack_"] = ::_id_67AA;
   anim._id_67D4["fadefromblack_"] = ::_id_67A9;
@@ -122,8 +127,9 @@ players_have_abandoned_minecart_ride(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(!common_scripts\utility::_id_562E(var_3.abandonedcarride))
+    if(!common_scripts\utility::_id_562E(var_3.abandonedcarride)) {
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
+    }
   }
 
   return var_1;
@@ -148,8 +154,9 @@ get_initial_dir() {
 }
 
 initialize_sled_junction(var_0, var_1, var_2) {
-  if(!isDefined(level.zmb_island_cart_junctions))
+  if(!isDefined(level.zmb_island_cart_junctions)) {
     level.zmb_island_cart_junctions = [];
+  }
 
   level.zmb_island_cart_junctions[var_0 + var_1] = common_scripts\utility::_id_46B5(var_2, "script_noteworthy");
   level.zmb_island_cart_junctions[var_1 + var_0] = common_scripts\utility::_id_46B5(var_2, "script_noteworthy");
@@ -158,8 +165,9 @@ initialize_sled_junction(var_0, var_1, var_2) {
 initialize_first_location(var_0, var_1) {
   var_2 = maps\mp\mp_zombie_island_cart_station_functions::get_all_carts_with(var_0);
 
-  foreach(var_4 in level.island_cart_structs)
-  var_4.mine_cart_model hide();
+  foreach(var_4 in level.island_cart_structs) {
+    var_4.mine_cart_model hide();
+  }
 
   level.zmb_island_artillery_sled = var_2[0].mine_cart_model;
   level.zmb_island_artillery_sled.dontdeleterevivespot = 1;
@@ -217,12 +225,13 @@ set_player_arrival_offset(var_0, var_1, var_2, var_3, var_4) {
 
     var_17 unlink();
     var_17 setOrigin(var_18);
-    var_17 playerlinkto(self);
+    var_17 playerlinkTo(self);
     var_17 setplayerangles(var_2);
     var_17.haspommelflushed = 1;
 
-    if(!common_scripts\utility::_id_562E(var_17.oncartride))
+    if(!common_scripts\utility::_id_562E(var_17.oncartride)) {
       var_17 thread attach_to_cart(var_3, var_4, _id_0547::_id_429D(var_17));
+    }
 
     var_8 = common_scripts\utility::_id_0F93(var_8, var_18);
   }
@@ -251,7 +260,7 @@ run_upgrade_machine_pickups() {
 }
 
 give_upgrade_fuse() {
-  self.zmb_pap_fuse_pickup_trigger sethintstring(&"ZOMBIE_ISLAND_GRAB_PAP_POWER");
+  self.zmb_pap_fuse_pickup_trigger setHintString(&"ZOMBIE_ISLAND_GRAB_PAP_POWER");
   self.zmb_pap_fuse_pickup_trigger waittill("trigger", var_0);
   var_0 thread _id_0367::_id_8E3C("papcircuitpickup");
   self.zmb_pap_fuse_pickup_trigger delete();
@@ -325,13 +334,14 @@ attach_players_to_transport(var_0, var_1, var_2) {
 zmb_events_report_player_on_cart() {
   var_0 = self;
 
-  if(isDefined(level.zmb_events_player_rode_minecart))
+  if(isDefined(level.zmb_events_player_rode_minecart)) {
     var_0 thread[[level.zmb_events_player_rode_minecart]]();
+  }
 }
 
 handle_pomel_exit() {
-  var_0 = _getent("pomel_room_exit_whirlpool", "targetname");
-  var_0 sethintstring(&"ZOMBIE_ISLAND_POMEL_EXIT");
+  var_0 = _getEnt("pomel_room_exit_whirlpool", "targetname");
+  var_0 setHintString(&"ZOMBIE_ISLAND_POMEL_EXIT");
   var_1 = common_scripts\utility::_id_46B7("pomel_exit_launcher", "targetname");
   var_0 thread disable_on_usable_touching();
 
@@ -352,14 +362,16 @@ disable_on_usable_touching() {
     var_1 = getEntArray("baby_statue_spawn", "targetname");
 
     foreach(var_3 in var_1) {
-      if(_distance2d(var_3.origin, self.origin) < 70 && self.origin[2] < var_3.origin[2] + 64)
+      if(_distance2d(var_3.origin, self.origin) < 70 && self.origin[2] < var_3.origin[2] + 64) {
         var_0 = 1;
+      }
     }
 
-    if(var_0)
+    if(var_0) {
       common_scripts\utility::_id_9D9F();
-    else
+    } else {
       common_scripts\utility::_id_9DA3();
+    }
 
     wait 0.125;
   }
@@ -369,8 +381,9 @@ assassin_worshipers_alive() {
   var_0 = _id_0547::_id_408F();
 
   foreach(var_2 in var_0) {
-    if(common_scripts\utility::_id_562E(var_2.assassin_prayer))
+    if(common_scripts\utility::_id_562E(var_2.assassin_prayer)) {
       return 1;
+    }
   }
 
   return 0;
@@ -391,8 +404,9 @@ respawn_pommel_room_zombies_if_player_vacant() {
 
     foreach(var_2 in var_0) {
       if(var_2 maps\mp\mp_zombie_island::agent_is_in_secret_room(1)) {
-        if(!common_scripts\utility::_id_562E(var_2.wasteleported))
+        if(!common_scripts\utility::_id_562E(var_2.wasteleported)) {
           var_2 _id_056D::_id_5A86();
+        }
       }
     }
   }
@@ -407,9 +421,9 @@ pomel_launch(var_0) {
   waitframe();
   self setOrigin(var_0.vec_point_1);
   var_4 = spawn("script_model", self.origin);
-  var_4 moveto(var_0.vec_point_2, var_2);
+  var_4 moveTo(var_0.vec_point_2, var_2);
   self setplayerangles(vectortoangles(var_0.vec_point_2 - var_0.vec_point_1));
-  self playerlinkto(var_4);
+  self playerlinkTo(var_4);
   maps\mp\mp_zombie_island_fog_zones::set_should_restore_fog_vision_isolated_room();
   thread animscripts\notetracks_common::do_fade_from_black(var_2 / 2);
   wait(var_2);
@@ -443,8 +457,9 @@ handle_pomel_detor() {
   foreach(var_2 in var_0) {
     common_scripts\utility::flag_init(var_2.getnegotiationnextnode + "_bomb_placed");
 
-    if(!common_scripts\utility::_id_3C83(var_2.getnegotiationnextnode + "_bomb_detonated"))
+    if(!common_scripts\utility::_id_3C83(var_2.getnegotiationnextnode + "_bomb_detonated")) {
       common_scripts\utility::flag_init(var_2.getnegotiationnextnode + "_bomb_detonated");
+    }
 
     var_3 = common_scripts\utility::_id_44BE(var_2.target, "targetname");
     var_2.rock_blockers = [];
@@ -494,8 +509,9 @@ run_pomel_door_explosion() {
     if(common_scripts\utility::_id_562E(level.zmb_island_pommel_detor_blocked)) {
       continue;
     }
-    if(!common_scripts\utility::_id_3C77("flag_found_pommel_door"))
+    if(!common_scripts\utility::_id_3C77("flag_found_pommel_door")) {
       maps\mp\_utility::_id_2CED(1.4, common_scripts\utility::flag_set, "flag_found_pommel_door");
+    }
 
     level thread try_to_snag_players_from_cart(var_0);
   }
@@ -506,8 +522,9 @@ try_to_snag_players_from_cart(var_0) {
 
   for(var_2 = 0; var_2 < 3; var_2++) {
     foreach(var_4 in level.players) {
-      if(common_scripts\utility::_id_562E(var_4.oncartride) && !common_scripts\utility::_id_562E(var_4.isenteringpommelroom) && (var_4 usebuttonpressed() || var_1))
+      if(common_scripts\utility::_id_562E(var_4.oncartride) && !common_scripts\utility::_id_562E(var_4.isenteringpommelroom) && (var_4 useButtonPressed() || var_1)) {
         var_4 thread handle_pomel_room_enter(var_0);
+      }
     }
 
     waitframe();
@@ -525,11 +542,11 @@ handle_pomel_room_enter(var_0) {
   var_4 = vectorNormalize(self.origin - var_1.origin);
   thread animscripts\notetracks_common::_id_30B4(var_3 / 2);
   var_5 = spawn("script_model", self.origin);
-  var_5 moveto(var_1.origin, var_3);
+  var_5 moveTo(var_1.origin, var_3);
   var_5.angles = self.angles;
   self setplayerangles(vectortoangles(var_1.origin - self.origin));
-  self playerlinkto(var_5);
-  var_5 rotateto(vectortoangles(var_1.origin - var_5.origin), var_3 / 1.1);
+  self playerlinkTo(var_5);
+  var_5 rotateTo(vectortoangles(var_1.origin - var_5.origin), var_3 / 1.1);
   wait(var_3 / 2);
   thread animscripts\notetracks_common::do_fade_from_black(var_3 / 2);
   self setplayerangles((self.angles[0], self.angles[1] + 180, self.angles[2]));
@@ -548,8 +565,9 @@ killzombiesonisland() {
     var_0 = _id_0547::_id_408F();
 
     foreach(var_2 in var_0) {
-      if(!_id_055A::_id_AC29(var_2, "isolated_room_zone") && !_id_055A::_id_AC29(var_2, "isolated_room_entry_zone"))
+      if(!_id_055A::_id_AC29(var_2, "isolated_room_zone") && !_id_055A::_id_AC29(var_2, "isolated_room_entry_zone")) {
         var_2 _id_056D::_id_5A86();
+      }
     }
   }
 }
@@ -561,32 +579,36 @@ cancel_screen_fade() {
   self notify("do_fade_to_black");
   waitframe();
 
-  if(isDefined(self._id_6772))
+  if(isDefined(self._id_6772)) {
     self._id_6772 destroy();
+  }
 }
 
 wait_for_bomber_explosion() {
   var_0 = 256;
   var_1 = 999;
 
-  for(var_2 = common_scripts\utility::_id_46B5("zmb_island_secret_rock_exit_struct", "targetname"); var_1 > var_0; var_1 = distance(var_3, var_2.origin))
+  for(var_2 = common_scripts\utility::_id_46B5("zmb_island_secret_rock_exit_struct", "targetname"); var_1 > var_0; var_1 = distance(var_3, var_2.origin)) {
     level waittill("objective_zombie_exploder_detonation", var_3);
+  }
 
   common_scripts\utility::flag_set(self.getnegotiationnextnode + "_bomb_detonated");
 }
 
 set_bomb_exploded(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  foreach(var_2 in self.wall_pieces)
-  var_2 delete();
+  foreach(var_2 in self.wall_pieces) {
+    var_2 delete();
+  }
 }
 
 set_bomb_placed() {
   var_0 = spawn("script_model", self.bomb_placement.origin);
   var_0 setModel("zom_bomb");
-  var_0 setcandamage(1);
+  var_0 setCanDamage(1);
   return var_0;
 }
 
@@ -638,15 +660,16 @@ set_level_model(var_0) {
 
 connect_to_transport() {
   foreach(var_1 in level.island_cart_structs) {
-    if(self.getnegotiationnextnode == var_1.getnegotiationnextnode)
+    if(self.getnegotiationnextnode == var_1.getnegotiationnextnode) {
       self.mytransport = var_1;
+    }
   }
 }
 
 run_lever() {
   var_0 = get_initial_dir();
   self.mytransport.forced_index++;
-  self.lever_trig sethintstring(&"ZOMBIE_ISLAND_TRANSPORT_TOGGLE");
+  self.lever_trig setHintString(&"ZOMBIE_ISLAND_TRANSPORT_TOGGLE");
 
   for(;;) {
     self.lever_model toggle_lever(var_0);
@@ -687,17 +710,17 @@ toggle_lever(var_0) {
 }
 
 do_spider() {
-  var_0 = _getent(self.target, "targetname");
-  var_1 = _getent(var_0.target, "targetname");
-  var_2 = _getent(var_1.target, "targetname");
-  var_3 = _getent(var_2.target, "targetname");
+  var_0 = _getEnt(self.target, "targetname");
+  var_1 = _getEnt(var_0.target, "targetname");
+  var_2 = _getEnt(var_1.target, "targetname");
+  var_3 = _getEnt(var_2.target, "targetname");
   var_4 = [var_0, var_2];
   var_1 linktosynchronizedparent(var_0);
   var_2 linktosynchronizedparent(var_1);
   var_3 linktosynchronizedparent(var_2);
 
   if(isDefined(var_3.target)) {
-    var_5 = _getent(var_3.target, "targetname");
+    var_5 = _getEnt(var_3.target, "targetname");
     var_5 linktosynchronizedparent(var_3);
   }
 
@@ -715,8 +738,9 @@ do_spider() {
 toggle_destination() {
   self.forced_index++;
 
-  if(self.forced_index >= self.possible_dests.size)
+  if(self.forced_index >= self.possible_dests.size) {
     self.forced_index = 0;
+  }
 }
 
 spawn_a_mine_cart(var_0, var_1) {
@@ -752,8 +776,9 @@ execute_station_leave(var_0, var_1, var_2, var_3) {
   }
   level.zmb_mine_cart_is_locked = 1;
 
-  if(isDefined(level.mine_cart_notification))
+  if(isDefined(level.mine_cart_notification)) {
     level notify(level.mine_cart_notification);
+  }
 
   disable_transport_triggers(var_0, var_1);
   run_cart_depart(level.zmb_transport_system["current_station"], var_2, var_3);
@@ -766,10 +791,11 @@ execute_station_leave(var_0, var_1, var_2, var_3) {
 }
 
 next_transport_request() {
-  if(level.zmb_mine_cart_transport_requests.size == 0)
+  if(level.zmb_mine_cart_transport_requests.size == 0) {
     var_0 = wait_for_tranport_request();
-  else
+  } else {
     var_0 = execute_next_transport_request();
+  }
 
   level.zmb_mine_cart_transport_requests = common_scripts\utility::_id_0F93(level.zmb_mine_cart_transport_requests, var_0);
   return var_0;
@@ -782,12 +808,13 @@ wait_for_transport_done() {
 
 set_trigger_hints(var_0, var_1, var_2, var_3) {
   foreach(var_5 in common_scripts\utility::_id_0F73(var_0, var_1)) {
-    if(isDefined(var_2))
-      var_5 sethintstring(var_2);
-    else if(common_scripts\utility::_id_562E(level.free_cart_rides))
-      var_5 sethintstring(var_5.transporthintfree);
-    else
-      var_5 sethintstring(var_5.transporthint);
+    if(isDefined(var_2)) {
+      var_5 setHintString(var_2);
+    } else if(common_scripts\utility::_id_562E(level.free_cart_rides)) {
+      var_5 setHintString(var_5.transporthintfree);
+    } else {
+      var_5 setHintString(var_5.transporthint);
+    }
 
     if(isDefined(var_3)) {
       var_5 setsecondaryhintstring(var_3);
@@ -832,8 +859,9 @@ get_trigger_for_station(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(_id_0547::_id_5565(var_4.getnegotiationnextnode, var_1))
+    if(_id_0547::_id_5565(var_4.getnegotiationnextnode, var_1)) {
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_4);
+    }
   }
 
   return var_2;
@@ -849,16 +877,18 @@ watch_for_transport_requests(var_0, var_1) {
     if(common_scripts\utility::_id_562E(level.zmb_mine_cart_is_locked)) {
       continue;
     }
-    if(var_4 && !var_2 transport_purchase_successful(var_3))
+    if(var_4 && !var_2 transport_purchase_successful(var_3)) {
       continue;
-    else
+    } else {
       make_a_transport_request(var_2, var_3, common_scripts\utility::_id_98E7(var_4, "purchase", "call"), var_3.getnegotiationnextnode);
+    }
   }
 }
 
 watch_for_interact(var_0) {
-  if(common_scripts\utility::_id_562E(var_0))
+  if(common_scripts\utility::_id_562E(var_0)) {
     self._id_267B = 250;
+  }
 
   for(;;) {
     self waittill("trigger", var_1);
@@ -867,8 +897,9 @@ watch_for_interact(var_0) {
 }
 
 transport_purchase_successful(var_0) {
-  if(common_scripts\utility::_id_562E(level.free_cart_rides))
+  if(common_scripts\utility::_id_562E(level.free_cart_rides)) {
     return 1;
+  }
 
   if(!maps\mp\gametypes\zombies::_id_11C2(var_0._id_267B)) {
     thread _id_054E::_id_0695("needmoney");
@@ -981,14 +1012,17 @@ initialize_this_cart() {
 
   self._id_9D65.getnegotiationnextnode = self.getnegotiationnextnode;
 
-  foreach(var_13 in self.info_trigs)
-  var_13.getnegotiationnextnode = self.getnegotiationnextnode;
+  foreach(var_13 in self.info_trigs) {
+    var_13.getnegotiationnextnode = self.getnegotiationnextnode;
+  }
 
-  if(!isDefined(level.zmb_transport_activation_triggers))
+  if(!isDefined(level.zmb_transport_activation_triggers)) {
     level.zmb_transport_activation_triggers = [];
+  }
 
-  if(!isDefined(level.zmb_transport_call_triggers))
+  if(!isDefined(level.zmb_transport_call_triggers)) {
     level.zmb_transport_call_triggers = [];
+  }
 
   level.zmb_transport_activation_triggers = common_scripts\utility::_id_0F6F(level.zmb_transport_activation_triggers, self._id_9D65);
   level.zmb_transport_call_triggers = common_scripts\utility::_id_0F73(level.zmb_transport_call_triggers, self.info_trigs);
@@ -996,8 +1030,9 @@ initialize_this_cart() {
   var_15 = self.mine_cart_model_struct.origin;
   var_16 = self.mine_cart_model_struct.angles;
 
-  if(!isDefined(var_16))
+  if(!isDefined(var_16)) {
     var_16 = (0, 0, 0);
+  }
 
   self.mine_cart_model = spawn("script_model", var_15);
   self.mine_cart_model setModel("zmi_mine_cart_01");
@@ -1010,8 +1045,9 @@ initialize_this_cart() {
 }
 
 add_a_transport_indicator_light(var_0, var_1) {
-  if(!isDefined(level.transport_light_indicators))
+  if(!isDefined(level.transport_light_indicators)) {
     level.transport_light_indicators = [];
+  }
 
   var_2 = spawnStruct();
   var_2.light_model = var_0;
@@ -1020,33 +1056,37 @@ add_a_transport_indicator_light(var_0, var_1) {
 }
 
 initialize_my_door() {
-  if(!isDefined(self.zmb_mine_cart_gate_left_near))
+  if(!isDefined(self.zmb_mine_cart_gate_left_near)) {
     return;
+  }
 }
 
 initialize_possible_destinations() {
   self.possible_dests = [];
 
   foreach(var_1 in level.island_cart_structs) {
-    if(var_1 != self && common_scripts\utility::_id_0F79(level.valid_island_cart_destinations, var_1.getnegotiationnextnode))
+    if(var_1 != self && common_scripts\utility::_id_0F79(level.valid_island_cart_destinations, var_1.getnegotiationnextnode)) {
       self.possible_dests = common_scripts\utility::_id_0F6F(self.possible_dests, var_1);
+    }
   }
 }
 
 get_dest_by_flag(var_0) {
   foreach(var_2 in self.possible_dests) {
-    if(_id_0547::_id_5565(var_2.getnegotiationnextnode, var_0))
+    if(_id_0547::_id_5565(var_2.getnegotiationnextnode, var_0)) {
       return var_2;
+    }
   }
 }
 
 attach_to_cart(var_0, var_1, var_2) {
-  if(self getcurrentprimaryweapon() == "stone_baby_zm")
+  if(self getcurrentprimaryweapon() == "stone_baby_zm") {
     self allowcrouch(1);
+  }
 
   self setstance("crouch");
   self allowstand(0);
-  self playerlinkto(level.zmb_island_artillery_sled);
+  self playerlinkTo(level.zmb_island_artillery_sled);
   self.oncartride = 1;
   self._id_00CE = 1;
   common_scripts\utility::flag_set("any_minecart_used");
@@ -1059,17 +1099,19 @@ set_has_left_cart(var_0, var_1) {
   self allowstand(1);
   self setstance("stand");
 
-  if(self getcurrentprimaryweapon() == "stone_baby_zm")
+  if(self getcurrentprimaryweapon() == "stone_baby_zm") {
     self allowcrouch(0);
+  }
 
   self._id_00CE = 0;
   self.oncartride = 0;
   self unlink();
 
-  if(isDefined(var_0.zmb_island_dropoff_z_height))
+  if(isDefined(var_0.zmb_island_dropoff_z_height)) {
     self setOrigin((self.origin[0], self.origin[1], var_0.zmb_island_dropoff_z_height.origin[2] + 1));
-  else
+  } else {
     self setOrigin(var_0.unlink_spawns[var_1].origin);
+  }
 }
 
 do_cart_path(var_0, var_1) {
@@ -1078,8 +1120,9 @@ do_cart_path(var_0, var_1) {
   maps\mp\mp_zombie_island_cart_station_functions::set_station_leaving(self.getnegotiationnextnode);
   maps\mp\mp_zombie_island_cart_station_functions::set_transport_light_states(self.getnegotiationnextnode, "deactivated", var_0.getnegotiationnextnode, "arriving");
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     maps\mp\mp_zombie_island_cart_station_functions::set_station_arriving(var_0.getnegotiationnextnode);
+  }
 
   wait 0.95;
   level.zmb_island_artillery_sled thread set_cart_path(self, var_0, var_1);
@@ -1104,8 +1147,9 @@ do_cart_path(var_0, var_1) {
       var_4++;
     }
 
-    if(var_4 == level.players.size)
+    if(var_4 == level.players.size) {
       var_0 move_zombies_to_destination();
+    }
   }
 
   maps\mp\mp_zombie_island_cart_station_functions::set_station_arriving(var_0.getnegotiationnextnode);
@@ -1148,8 +1192,9 @@ move_zombies_to_destination() {
     var_0[var_2].wasteleported = 1;
     var_0[var_2] thread maps\mp\zquests\casual\island_ee_util::_id_ABE1("transport complete");
 
-    if(!var_0[var_2] _id_0547::_id_4B2C())
+    if(!var_0[var_2] _id_0547::_id_4B2C()) {
       var_0[var_2] _id_0547::disableoffhandsecondaryweapons();
+    }
 
     var_2++;
   }
@@ -1180,10 +1225,11 @@ set_cart_path(var_0, var_1, var_2) {
   thread start_screenshake();
 
   foreach(var_9 in var_3) {
-    if(!isDefined(var_9.setviewkickscale.angles))
+    if(!isDefined(var_9.setviewkickscale.angles)) {
       var_10 = (0, 0, 0);
-    else
+    } else {
       var_10 = var_9.setviewkickscale.angles;
+    }
 
     var_7 = getlinkedplayers();
     self.ridingplayers = var_7;
@@ -1214,36 +1260,42 @@ set_cart_path(var_0, var_1, var_2) {
       thread spawn_mine_transport_bombers(var_0.getnegotiationnextnode, var_1.getnegotiationnextnode);
     }
 
-    if(var_5 == 2)
+    if(var_5 == 2) {
       thread set_player_arrival_offset(var_7, "front", var_1.arrival_angles.angles);
+    }
 
     var_13 = var_9.path_anim_length;
 
-    if(var_5 == 2 && common_scripts\utility::_id_562E(var_2))
+    if(var_5 == 2 && common_scripts\utility::_id_562E(var_2)) {
       level thread do_cart_zombie_spawns(var_1._id_ABFE, var_13 / 2);
+    }
 
     _id_0378::_id_8D74("mine_cart_transportation", var_5);
     wait(var_13);
     self notify("island_cart", "end");
 
-    if(isDefined(var_7) && var_7.size > 0 && var_5 == 0)
+    if(isDefined(var_7) && var_7.size > 0 && var_5 == 0) {
       self notify("cart_start_leave_done");
+    }
 
     common_scripts\utility::_id_379A(var_4[var_5]);
     var_5++;
   }
 
-  foreach(var_16 in level.players)
-  var_16.abandonedcarride = 0;
+  foreach(var_16 in level.players) {
+    var_16.abandonedcarride = 0;
+  }
 
   stop_screenshake();
 
-  if(!common_scripts\utility::_id_562E(var_2))
+  if(!common_scripts\utility::_id_562E(var_2)) {
     level thread do_cart_zombie_spawns(var_1._id_ABFE, 0);
+  }
 
   foreach(var_16 in var_7) {
-    if(isDefined(var_16._id_6772))
+    if(isDefined(var_16._id_6772)) {
       var_16._id_6772 destroy();
+    }
   }
 }
 
@@ -1279,7 +1331,7 @@ start_screenshake() {
         if(common_scripts\utility::_id_562E(var_1.abandonedcarride)) {
           continue;
         }
-        var_1 playrumbleonentity("damage_heavy");
+        var_1 playRumbleOnEntity("damage_heavy");
       }
     }
   }
@@ -1322,8 +1374,9 @@ do_cart_zombie_spawns(var_0, var_1) {
   if(var_3 == 0) {
     return;
   }
-  if(!isDefined(level.last_minecart_punishment))
+  if(!isDefined(level.last_minecart_punishment)) {
     level.last_minecart_punishment = -1;
+  }
 
   if(level.last_minecart_punishment >= level._id_A980) {
     return;
@@ -1346,8 +1399,9 @@ spawn_mine_transport_bombers(var_0, var_1) {
   waitframe();
   var_2 = 95;
 
-  if(!isDefined(level.last_minecart_bmb_punishment))
+  if(!isDefined(level.last_minecart_bmb_punishment)) {
     level.last_minecart_bmb_punishment = -1;
+  }
 
   if(level.last_minecart_bmb_punishment >= level._id_A980) {
     return;
@@ -1386,8 +1440,9 @@ spawn_mine_transport_bombers(var_0, var_1) {
 spawn_a_mine_cart_bomber(var_0, var_1) {
   var_2 = _id_054D::_id_90BA("zombie_exploder", var_1, "tunnel bombers", 0, 1, 1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return undefined;
+  }
 
   var_2.isminecartbomber = 1;
   var_2.ispassiveexempt = 1;
@@ -1404,8 +1459,9 @@ remove_passive_behavior() {
   self endon("death");
   waitframe();
 
-  while(!common_scripts\utility::_id_3798("zombie_passive"))
+  while(!common_scripts\utility::_id_3798("zombie_passive")) {
     waitframe();
+  }
 
   _id_053C::_id_4F7F("player close");
 }
@@ -1419,8 +1475,9 @@ make_mine_tunnel_zombie(var_0, var_1) {
   childthread cleanup_cart_bmb(var_0);
   _id_0547::disableoffhandsecondaryweapons();
 
-  while(distance(self.origin, level.zmb_island_artillery_sled.origin) > 92)
+  while(distance(self.origin, level.zmb_island_artillery_sled.origin) > 92) {
     waitframe();
+  }
 
   _id_0563::_id_AB99(level.player, level.player, 1000, undefined, "MOD_BULLET", "m1911_zm", self.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
 }
@@ -1435,8 +1492,9 @@ getlinkedplayers() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(!isPlayer(var_3))
+    if(!isPlayer(var_3)) {
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
+    }
   }
 
   var_0 = common_scripts\utility::_id_0F94(var_0, var_1);
@@ -1522,8 +1580,9 @@ set_all_players_on_cart_facing_path_start(var_0) {
 get_cart_path_from(var_0) {
   var_1 = [];
 
-  for(var_1[0] = var_0; isDefined(var_1[var_1.size - 1].target); var_1 = common_scripts\utility::_id_0F6F(var_1, var_2))
+  for(var_1[0] = var_0; isDefined(var_1[var_1.size - 1].target); var_1 = common_scripts\utility::_id_0F6F(var_1, var_2)) {
     var_2 = common_scripts\utility::_id_46B5(var_1[var_1.size - 1].target, "targetname");
+  }
 
   return var_1;
 }
@@ -1533,8 +1592,9 @@ get_random_destination(var_0) {
   var_1 = ["secret_room_zone", "pack_a_punch_opened", "pack_a_punch_exit"];
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(common_scripts\utility::_id_562E(var_0[var_2].cart_activated) && !common_scripts\utility::_id_0F79(var_1, var_0[var_2].getnegotiationnextnode))
+    if(common_scripts\utility::_id_562E(var_0[var_2].cart_activated) && !common_scripts\utility::_id_0F79(var_1, var_0[var_2].getnegotiationnextnode)) {
       return var_0[var_2];
+    }
   }
 
   return undefined;

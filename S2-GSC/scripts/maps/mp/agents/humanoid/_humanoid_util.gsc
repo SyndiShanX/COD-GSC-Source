@@ -4,16 +4,18 @@
 **************************************************************/
 
 _id_1F51(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
   var_3 = (0, 0, 1) * var_2;
   var_4 = var_0 + var_3;
   var_5 = var_1 + var_3;
   var_6 = 1;
 
-  if(isDefined(self._id_64AB))
+  if(isDefined(self._id_64AB)) {
     var_6 = 0;
+  }
 
   return _capsuletracepassed(var_4, self.radius, self._id_00BD - var_2, self, var_6, 0, 0, var_5);
 }
@@ -37,8 +39,9 @@ _id_4582(var_0) {
 }
 
 _id_A275(var_0) {
-  if(!isDefined(self._id_60F3))
+  if(!isDefined(self._id_60F3)) {
     self._id_60F3 = [];
+  }
 
   if(!isDefined(self._id_60F3[var_0])) {
     self._id_60F3[var_0] = [];
@@ -62,20 +65,23 @@ _id_45DC(var_0) {
     if(isDefined(self._id_3043) && var_0 == self._id_3043 && _id_4B59()) {
       var_2 = _id_459E();
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_1 = var_2.origin;
+      }
     }
   } else if(isPlayer(var_0) && (var_0 isjumping() || var_0 ishighjumping())) {
-    if(!isDefined(var_0._id_73F1))
+    if(!isDefined(var_0._id_73F1)) {
       var_0._id_73F1 = 0;
+    }
 
     if(gettime() > var_0._id_73F1) {
       var_0._id_73F0 = _getgroundposition(var_0.origin, 15);
       var_0._id_73F1 = gettime();
     }
 
-    if(isDefined(var_0._id_73F0))
+    if(isDefined(var_0._id_73F0)) {
       var_1 = var_0._id_73F0;
+    }
   }
 
   return var_1;
@@ -86,8 +92,9 @@ _id_4BA3(var_0, var_1) {
     var_3 = var_0 _id_4582(var_1);
     var_4 = var_3[var_2];
 
-    if(isDefined(var_4.origin))
+    if(isDefined(var_4.origin)) {
       return 1;
+    }
   }
 
   return 0;
@@ -99,8 +106,9 @@ _id_1E52() {
   if(isDefined(var_0)) {
     var_1 = _nodegetsplitgroup(var_0);
 
-    if(!isDefined(self._id_3043._id_663C))
+    if(!isDefined(self._id_3043._id_663C)) {
       self._id_3043._id_663C = [];
+    }
 
     var_2 = 0;
     var_3 = 500;
@@ -109,10 +117,11 @@ _id_1E52() {
     for(var_5 = undefined; !isDefined(var_4) && var_3 <= 1500; var_3 = var_3 + 500) {
       var_6 = [];
 
-      if(isDefined(level._id_663D))
+      if(isDefined(level._id_663D)) {
         var_6 = _getnodesinradiussorted(self._id_3043._id_4883, var_3, var_2, level._id_663D);
-      else
+      } else {
         var_6 = _getnodesinradiussorted(self._id_3043._id_4883, var_3, var_2);
+      }
 
       var_7 = undefined;
 
@@ -129,12 +138,13 @@ _id_1E52() {
       var_2 = var_3;
     }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       self._id_3043._id_663C[var_1] = var_4;
-    else if(isDefined(var_5))
+    } else if(isDefined(var_5)) {
       self._id_3043._id_663C[var_1] = var_5;
-    else
+    } else {
       self._id_3043._id_663C[var_1] = 0;
+    }
   }
 }
 
@@ -144,8 +154,9 @@ _id_4B59() {
   if(isDefined(var_0) && isDefined(self._id_3043._id_663C)) {
     var_1 = self._id_3043._id_663C[_nodegetsplitgroup(var_0)];
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       return 1;
+    }
   }
 
   return 0;
@@ -155,18 +166,20 @@ _id_459E() {
   var_0 = self getnearestnode();
   var_1 = self._id_3043._id_663C[_nodegetsplitgroup(var_0)];
 
-  if(!_isnumber(var_1))
+  if(!_isnumber(var_1)) {
     return var_1;
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_8BAE() {
   if(_id_4B59()) {
     var_0 = _id_459E();
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       return 0;
+    }
   }
 
   return 1;
@@ -174,8 +187,9 @@ _id_8BAE() {
 
 _id_56DE(var_0) {
   if(isDefined(self._id_3043) && var_0 == self._id_3043) {
-    if(self._id_3044 > 5)
+    if(self._id_3044 > 5) {
       return 1;
+    }
   }
 
   return 0;
@@ -194,12 +208,14 @@ _id_4583(var_0, var_1) {
     for(var_8 = 0; var_8 < _id_45C6(); var_8++) {
       var_9 = var_2[var_8];
 
-      if(isDefined(var_9._id_230B) && var_9._id_230B == self)
+      if(isDefined(var_9._id_230B) && var_9._id_230B == self) {
         var_7 = var_9._id_686A;
+      }
     }
 
-    if(var_7 < 0)
+    if(var_7 < 0) {
       var_7 = self getentitynumber() % _id_45C6();
+    }
 
     var_10 = var_7;
   } else {
@@ -225,18 +241,20 @@ _id_4583(var_0, var_1) {
     for(var_18 = var_13; var_18 != var_14; var_18 = var_18 + var_15) {
       var_19 = var_7 + var_17 * var_18;
 
-      if(var_19 >= var_16)
+      if(var_19 >= var_16) {
         var_19 = var_19 - var_16;
-      else if(var_19 < 0)
+      } else if(var_19 < 0) {
         var_19 = var_19 + var_16;
+      }
 
       var_9 = var_2[var_19];
 
       if(!isDefined(var_12) && gettime() - var_9._id_9A18 >= self._id_60F6) {
-        if(isDefined(level._id_9E16) && isDefined(level._id_9E16[self._id_0A4B]))
+        if(isDefined(level._id_9E16) && isDefined(level._id_9E16[self._id_0A4B])) {
           [[level._id_9E16[self._id_0A4B]]](var_9, var_4, self._id_11AB, self.radius);
-        else
+        } else {
           _id_9E16(var_9, var_4, self._id_11AB, self.radius);
+        }
       }
 
       if(!isDefined(var_12) && isDefined(var_9.origin)) {
@@ -253,8 +271,9 @@ _id_4583(var_0, var_1) {
             var_9._id_230B.botsetdifficulty = undefined;
           }
 
-          if(isDefined(self.botsetdifficulty) && self.botsetdifficulty != var_9)
+          if(isDefined(self.botsetdifficulty) && self.botsetdifficulty != var_9) {
             self.botsetdifficulty._id_230B = undefined;
+          }
 
           self.botsetdifficulty = var_9;
           var_9._id_230B = self;
@@ -290,18 +309,21 @@ _id_9E16(var_0, var_1, var_2, var_3) {
 }
 
 _id_34AB(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 18;
+  }
 
   var_4 = var_0 + (0, 0, var_3);
   var_5 = var_0 + (0, 0, var_3 * -1);
   var_6 = self aiphysicstrace(var_4, var_5, var_1, var_2, 1);
 
-  if(_abs(var_6[2] - var_4[2]) < 0.1)
+  if(_abs(var_6[2] - var_4[2]) < 0.1) {
     return undefined;
+  }
 
-  if(_abs(var_6[2] - var_5[2]) < 0.1)
+  if(_abs(var_6[2] - var_5[2]) < 0.1) {
     return undefined;
+  }
 
   return var_6;
 }
@@ -311,17 +333,19 @@ _id_56BC() {
 }
 
 _id_4580() {
-  if(!isDefined(self._id_5F4C) || self._id_5F4C)
+  if(!isDefined(self._id_5F4C) || self._id_5F4C) {
     return self._id_60EF;
-  else
+  } else {
     return self._id_60F0;
+  }
 }
 
 _id_4581() {
-  if(!isDefined(self._id_5F4C) || self._id_5F4C)
+  if(!isDefined(self._id_5F4C) || self._id_5F4C) {
     return self._id_60F2;
-  else
+  } else {
     return self._id_60F1;
+  }
 }
 
 _id_5F4E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -339,16 +363,18 @@ _id_5F4B() {
   if(isDefined(self._id_2F7D) && self._id_2F7D > 0) {
     self._id_2F7D--;
 
-    if(self._id_2F7D > 0)
+    if(self._id_2F7D > 0) {
       return;
+    }
   }
 
   self._id_5F4C = 1;
 }
 
 _id_5F4A() {
-  if(!isDefined(self._id_2F7D))
+  if(!isDefined(self._id_2F7D)) {
     self._id_2F7D = 0;
+  }
 
   self._id_2F7D++;
   self._id_5F4C = 0;
@@ -361,24 +387,27 @@ _id_3141(var_0, var_1, var_2, var_3) {
   self._id_3137 = ["back", "right", "left"];
   self._id_3138 = [];
 
-  foreach(var_6, var_5 in self._id_3137)
-  self._id_3138[var_6] = level._effect[var_3 + var_5];
+  foreach(var_6, var_5 in self._id_3137) {
+    self._id_3138[var_6] = level._effect[var_3 + var_5];
+  }
 }
 
 _id_313D() {
   if(isDefined(self._id_2F77) && self._id_2F77 > 0) {
     self._id_2F77--;
 
-    if(self._id_2F77 > 0)
+    if(self._id_2F77 > 0) {
       return;
+    }
   }
 
   self._id_313E = 1;
 }
 
 _id_313C() {
-  if(!isDefined(self._id_2F77))
+  if(!isDefined(self._id_2F77)) {
     self._id_2F77 = 0;
+  }
 
   self._id_2F77++;
   self._id_313E = 0;
@@ -402,16 +431,18 @@ _id_5C52() {
   if(isDefined(self._id_2F7C) && self._id_2F7C > 0) {
     self._id_2F7C--;
 
-    if(self._id_2F7C > 0)
+    if(self._id_2F7C > 0) {
       return;
+    }
   }
 
   self._id_5C53 = 1;
 }
 
 _id_5C51() {
-  if(!isDefined(self._id_2F7C))
+  if(!isDefined(self._id_2F7C)) {
     self._id_2F7C = 0;
+  }
 
   self._id_2F7C++;
   self._id_5C53 = 0;
@@ -474,20 +505,24 @@ getcurrentoffhand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   self endon("death");
   self endon("ScriptedAnimationInterrupt");
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 0;
+  }
 
   var_11 = [];
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 0;
+  }
 
   if(var_7) {
-    if(!_id_0547::_id_5816(var_8))
+    if(!_id_0547::_id_5816(var_8)) {
       var_11 = common_scripts\utility::_id_0F73(var_11, [level, var_8]);
+    }
 
-    if(!_id_0547::_id_5816(var_9))
+    if(!_id_0547::_id_5816(var_9)) {
       var_11 = common_scripts\utility::_id_0F73(var_11, [self, var_9]);
+    }
   }
 
   var_12 = self getanimentrycount(var_2);
@@ -497,27 +532,31 @@ getcurrentoffhand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
     self scragentsetscripted(1);
     maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "ScriptedAnimation");
 
-    if(var_4)
+    if(var_4) {
       self._id_53D9 = 1;
+    }
 
     self scragentsetanimmode("anim deltas");
     self scragentsetorientmode("face angle abs", var_1);
     self scragentsetanimscale(1, 1);
     var_13 = "noclip";
 
-    if(isDefined(var_10) && isDefined(var_10["physMode"]))
+    if(isDefined(var_10) && isDefined(var_10["physMode"])) {
       var_13 = var_10["physMode"];
+    }
 
     self scragentsetphysicsmode(var_13);
     var_14 = undefined;
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35(var_2);
-    else if(isDefined(var_10) && isDefined(var_10["timeOffset"]))
+    } else if(isDefined(var_10) && isDefined(var_10["timeOffset"])) {
       var_14 = _float(var_10["timeOffset"]);
+    }
 
-    if(!var_6)
+    if(!var_6) {
       _id_5CA6(var_2, var_3);
+    }
 
     self.origin = var_0;
     self.angles = var_1;
@@ -528,8 +567,9 @@ getcurrentoffhand(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
     } else {
       var_15 = "end";
 
-      if(isDefined(var_10) && isDefined(var_10["end_notetrack"]))
+      if(isDefined(var_10) && isDefined(var_10["end_notetrack"])) {
         var_15 = var_10["end_notetrack"];
+      }
 
       maps\mp\agents\_scripted_agent_anim_util::_id_71FD(var_2, var_3, "scripted_anim", var_15, var_5, var_14);
     }
@@ -604,10 +644,11 @@ _id_45F8(var_0, var_1) {
     var_3 = int(var_1 * 0.5);
     var_4 = var_3 + var_1 % 2;
 
-    if(var_0 < 0)
+    if(var_0 < 0) {
       var_2 = randomint(var_4);
-    else
+    } else {
       var_2 = var_3 + randomint(var_4);
+    }
   }
 
   return var_2;
@@ -616,31 +657,36 @@ _id_45F8(var_0, var_1) {
 _id_56DD(var_0) {
   var_1 = self.origin[2] + self._id_00BD;
 
-  if(var_0.origin[2] < var_1)
+  if(var_0.origin[2] < var_1) {
     return 0;
+  }
 
   var_2 = self.origin[2] + self._id_00BD + 2 * self.radius;
 
-  if(var_0.origin[2] > var_2)
+  if(var_0.origin[2] > var_2) {
     return 0;
+  }
 
   if(isPlayer(var_0)) {
     var_3 = var_0 getvelocity()[2];
 
-    if(_abs(var_3) > 12)
+    if(_abs(var_3) > 12) {
       return 0;
+    }
   }
 
   var_4 = 15.0;
 
-  if(isDefined(var_0.radius))
+  if(isDefined(var_0.radius)) {
     var_4 = var_0.radius;
+  }
 
   var_5 = self.radius + var_4;
   var_5 = var_5 * var_5;
 
-  if(_distance2dsquared(self.origin, var_0.origin) > var_5)
+  if(_distance2dsquared(self.origin, var_0.origin) > var_5) {
     return 0;
+  }
 
   return 1;
 }
@@ -670,8 +716,9 @@ _id_362B() {
   if(isDefined(self._id_2F79) && self._id_2F79 > 0) {
     self._id_2F79--;
 
-    if(self._id_2F79 > 0)
+    if(self._id_2F79 > 0) {
       return;
+    }
   }
 
   self._id_4B6F = 1;
@@ -681,8 +728,9 @@ _id_362B() {
 }
 
 _id_2F43() {
-  if(!isDefined(self._id_2F79))
+  if(!isDefined(self._id_2F79)) {
     self._id_2F79 = 0;
+  }
 
   self._id_2F79++;
   _id_2F44();
@@ -726,16 +774,18 @@ _id_70C9(var_0) {
   if(!isDefined(self._id_1919)) {
     return;
   }
-  if(self._id_1919 != "no_boost_fx")
-    _playfxontag(var_0, self, self._id_1919);
+  if(self._id_1919 != "no_boost_fx") {
+    _playFXOnTag(var_0, self, self._id_1919);
+  }
 }
 
 _id_3B85(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.players) {
-    if(_id_0547::_id_577E(var_3))
+    if(_id_0547::_id_577E(var_3)) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   var_5 = [];
@@ -763,32 +813,37 @@ _id_3B85(var_0) {
 }
 
 _id_AA51(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self._id_28D2;
+  }
 
-  if(_id_4580() == self._id_60F0)
+  if(_id_4580() == self._id_60F0) {
     return _id_AA52(var_0);
+  }
 
   var_1 = distancesquared(self.origin, var_0.origin) <= _id_4581();
   return var_1;
 }
 
 _id_AA52(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self._id_28D2;
+  }
 
   var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1;
 
   if(!var_1 && (isPlayer(var_0) || _isagent(var_0))) {
     var_2 = var_0 getgroundentity();
 
-    if(isDefined(var_2) && isDefined(var_2.targetname) && var_2.targetname == "care_package")
+    if(isDefined(var_2) && isDefined(var_2.targetname) && var_2.targetname == "care_package") {
       var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1 * 4;
+    }
   }
 
   if(!var_1 && isPlayer(var_0) && common_scripts\utility::_id_562E(var_0._id_571F)) {
-    if(length(self getvelocity()) < 5)
+    if(length(self getvelocity()) < 5) {
       var_1 = distancesquared(self.origin, var_0.origin) <= self._id_60F1 * 4;
+    }
   }
 
   return var_1;

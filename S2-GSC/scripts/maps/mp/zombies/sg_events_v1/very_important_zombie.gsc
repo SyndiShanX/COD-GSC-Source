@@ -11,8 +11,9 @@ init() {
 }
 
 basic_assassinate_run(var_0) {
-  if(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::not_the_final_objective())
+  if(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::not_the_final_objective()) {
     level._id_1CC0 = ["zombie_generic"];
+  }
 
   var_1 = basic_vip_run(var_0, "assassinate_common");
   level._id_1CC0 = undefined;
@@ -70,14 +71,16 @@ basic_vip_run(var_0, var_1) {
   var_2 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_other_zombies_count");
   var_3 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_repitions");
 
-  if(!_id_0547::_id_5565(var_1, "assassinate_common"))
+  if(!_id_0547::_id_5565(var_1, "assassinate_common")) {
     var_3 = 1;
+  }
 
   if(level.objectivescompleted == 0) {
     var_4 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_repitions_first_max");
 
-    if(var_3 > var_4)
+    if(var_3 > var_4) {
       var_3 = var_4;
+    }
   }
 
   var_5 = undefined;
@@ -94,8 +97,9 @@ basic_vip_run(var_0, var_1) {
   }
 
   foreach(var_7 in var_5) {
-    if(isDefined(var_7.setlookatent))
+    if(isDefined(var_7.setlookatent)) {
       var_7._id_8C95 = 1;
+    }
 
     var_7.ignoreforcedzombietype = 1;
   }
@@ -108,16 +112,19 @@ basic_vip_run(var_0, var_1) {
   if(_id_0547::_id_5565(var_1, "assassinate_common")) {
     var_12 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_red_skull_repitions");
 
-    if(var_12 > 0)
+    if(var_12 > 0) {
       var_3 = var_12;
+    }
 
     var_13 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_red_skull_count");
 
-    if(var_13 > 0)
+    if(var_13 > 0) {
       var_10 = var_13;
+    }
 
-    if(var_12 == 0 && level.objectivescompleted >= 2 && level.players.size > 1)
+    if(var_12 == 0 && level.objectivescompleted >= 2 && level.players.size > 1) {
       var_11 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_double_trouble_chance");
+    }
   }
 
   var_14 = randomint(100);
@@ -130,8 +137,9 @@ basic_vip_run(var_0, var_1) {
   for(var_15 = 0; var_15 < var_3; var_15++) {
     basic_vip_clear();
 
-    if(var_9 == var_5.size)
+    if(var_9 == var_5.size) {
       var_9 = 0;
+    }
 
     var_16 = spawn_new_important_bomber(var_0, var_1, var_2, var_5, var_9, var_10);
     var_9++;
@@ -142,8 +150,9 @@ basic_vip_run(var_0, var_1) {
     } else
       _setomnvar("ui_zm_waypoint_ents_type", 0);
 
-    if(var_15 != var_3 - 1)
+    if(var_15 != var_3 - 1) {
       wait(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_next_spawn_time"));
+    }
   }
 
   level thread maps\mp\_utility::_id_6F74(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 0, "sg_VIP_finished");
@@ -216,11 +225,13 @@ basic_vip_move_to_destination(var_0, var_1) {
   var_2 = self;
   var_2 endon("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(var_1 < 2)
+  if(var_1 < 2) {
     level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::single_ent_health_display_start(var_2, -40, 1);
+  }
 
   var_2 thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::important_zombie_show_destination(var_0, var_2.waypoints[var_2.waypoints.size - 1].origin);
   var_2 childthread pushplayervib();
@@ -228,13 +239,15 @@ basic_vip_move_to_destination(var_0, var_1) {
   for(var_3 = 0; var_3 < var_2.waypoints.size; var_3++) {
     var_2._id_1928 = var_2.waypoints[var_3];
 
-    if(var_3 > 0)
+    if(var_3 > 0) {
       var_2.previousbosswaitingpoint = var_2.waypoints[var_3 - 1];
-    else
+    } else {
       var_2.previousbosswaitingpoint = var_2.waypoints[var_3];
+    }
 
-    while(distance(var_2.origin, var_2.waypoints[var_3].origin) > 75)
+    while(distance(var_2.origin, var_2.waypoints[var_3].origin) > 75) {
       waitframe();
+    }
   }
 
   common_scripts\utility::flag_set("flag_sg_VIP_complete");
@@ -243,8 +256,9 @@ basic_vip_move_to_destination(var_0, var_1) {
   var_2 endon("death");
   waitframe();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 suicide();
+  }
 }
 
 pushplayervib() {
@@ -258,8 +272,9 @@ pushplayervib() {
 
     foreach(var_6 in level.players) {
       if(var_6 istouching(self) || _distance2d(var_6.origin, var_4) < var_2 && _abs(var_6.origin[2] - var_4[2]) < 64) {
-        if(!isDefined(var_6.lastvibpush))
+        if(!isDefined(var_6.lastvibpush)) {
           var_6.lastvibpush = gettime();
+        }
 
         if(var_6 isonground() && gettime() - var_6.lastvibpush > 300) {
           var_3 = 1;
@@ -291,15 +306,17 @@ basic_vip_waitfor_done_death_or_timeout(var_0, var_1, var_2) {
   level endon("round complete");
 
   if(!common_scripts\utility::_id_562E(var_0)) {
-    foreach(var_4 in var_1)
-    thread basic_vip_timeout_listener(var_4);
+    foreach(var_4 in var_1) {
+      thread basic_vip_timeout_listener(var_4);
+    }
   }
 
   thread basic_vip_kill_listener(var_1);
   common_scripts\utility::_id_3CA2("flag_sg_VIP_killed", "flag_sg_VIP_complete", "flag_sg_VIP_timeout");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 notify("stop_modifying_wave");
+  }
 
   return common_scripts\utility::_id_3C77("flag_sg_VIP_killed");
 }
@@ -315,16 +332,18 @@ basic_vip_kill_listener(var_0) {
   level endon("sg_VIP_finished");
   var_1 = 1;
 
-  while(!common_scripts\utility::_id_3C77("flag_sg_VIP_complete") && any_vib_alive(var_0))
+  while(!common_scripts\utility::_id_3C77("flag_sg_VIP_complete") && any_vib_alive(var_0)) {
     waitframe();
+  }
 
   common_scripts\utility::flag_set("flag_sg_VIP_killed");
 }
 
 any_vib_alive(var_0) {
   foreach(var_2 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
-    if(common_scripts\utility::_id_562E(var_2.sgvip))
+    if(common_scripts\utility::_id_562E(var_2.sgvip)) {
       return 1;
+    }
   }
 
   return 0;
@@ -356,8 +375,9 @@ spawn_new_important_bomber(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(var_5 > 1) {
-    for(var_10 = 0; var_10 < var_5; var_10++)
+    for(var_10 = 0; var_10 < var_5; var_10++) {
       var_6[var_6.size] = new_important_bomber(var_0, var_1, var_2, var_3[var_10], var_5);
+    }
 
     level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::double_ent_health_display_setup(var_6[0], var_6[1]);
   } else
@@ -407,13 +427,15 @@ new_important_bomber(var_0, var_1, var_2, var_3, var_4) {
     var_5 thread basic_assassinate_sprint_when_near_death();
     var_5.exploder_godmode = 1;
 
-    if(0)
+    if(0) {
       var_5 basic_assassinate_model_swap();
+    }
 
     var_6 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_energy_hold");
 
-    if(var_6 != 1)
+    if(var_6 != 1) {
       var_5.noenergyhold = 1;
+    }
   } else {
     level thread maps\mp\_utility::_id_6F74(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 1, "sg_VIP_finished");
     var_5 maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);

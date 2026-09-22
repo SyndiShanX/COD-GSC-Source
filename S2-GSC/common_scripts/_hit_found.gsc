@@ -16,8 +16,9 @@ _id_4161(var_0, var_1, var_2) {
 }
 
 _id_9F90(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_5 = [];
   var_6 = [];
@@ -91,8 +92,9 @@ _id_9F90(var_0, var_1, var_2, var_3, var_4) {
         }
       }
 
-      if(1 && !var_20 && (var_6[var_26]["surface_flags"] & 134217728 || var_6[var_26]["surface_flags"] & 67108864))
+      if(1 && !var_20 && (var_6[var_26]["surface_flags"] & 134217728 || var_6[var_26]["surface_flags"] & 67108864)) {
         var_20 = 1;
+      }
 
       var_32 = var_6[var_26]["position"];
     } else
@@ -111,8 +113,9 @@ _id_9F90(var_0, var_1, var_2, var_3, var_4) {
     var_6[var_26]["brush_model_solid_surfacetype"] = var_35;
     var_6[var_26]["entity"] = var_36;
 
-    if(!isDefined(var_17) || var_34[2] > var_17)
+    if(!isDefined(var_17) || var_34[2] > var_17) {
       var_17 = var_34[2];
+    }
 
     if(!isDefined(var_15)) {
       var_15 = var_26;
@@ -171,8 +174,9 @@ _id_9F90(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(var_44)
+    if(var_44) {
       return [var_9, var_10, var_12];
+    }
   }
 
   return [undefined, undefined, undefined];
@@ -203,39 +207,43 @@ _id_1D85(var_0, var_1, var_2, var_3, var_4) {
   var_7 = ~0;
   var_8 = 0;
 
-  if(var_2)
+  if(var_2) {
     var_9 = 377552881;
-  else
+  } else {
     var_9 = 377749489;
+  }
 
   var_6 = _func_335(var_0, var_1, var_9, var_7, self, undefined, var_8);
 
-  if(var_6["is_matching_hit_found"])
+  if(var_6["is_matching_hit_found"]) {
     return [var_6["position"], var_6["surfacetype"], var_6["entity"]];
-  else
+  } else {
     return [undefined, undefined];
+  }
 }
 
 _id_6FAC(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = getdvarint("turret_plant_debug") == 2;
 
   if(var_0["is_hit"]) {
-    if(!var_6)
+    if(!var_6) {
       return;
+    }
   }
 
   var_7 = var_1;
   var_8 = var_2;
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_9 = _physicstrace(var_7, var_8, var_3);
-  else {
+  } else {
     var_10 = _func_335(var_7, var_8, var_5, undefined, var_3);
 
-    if(var_10["is_matching_hit_found"])
+    if(var_10["is_matching_hit_found"]) {
       var_9 = var_10["position"];
-    else
+    } else {
       var_9 = var_8;
+    }
   }
 
   if(!isDefined(var_0["current_angle"])) {
@@ -261,14 +269,15 @@ _id_42BA(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
   var_7 = [];
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 20;
+  }
 
   var_8 = undefined;
 
-  if(var_3 > 0)
+  if(var_3 > 0) {
     var_8 = int(var_3 / var_4) + 2;
-  else {
+  } else {
     var_4 = -1 * var_4;
     var_8 = int(var_3 / var_4) + 2;
   }
@@ -276,17 +285,19 @@ _id_42BA(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 = 0;
 
   for(var_10 = 0; var_10 < var_8; var_10++) {
-    if(var_10 == var_8 - 1)
+    if(var_10 == var_8 - 1) {
       var_9 = var_3;
-    else
+    } else {
       var_9 = var_10 * var_4;
+    }
 
     var_11 = undefined;
 
-    if(0)
+    if(0) {
       var_11 = _combineangles(var_1, (0, var_9, 0));
-    else
+    } else {
       var_11 = (var_1[0], _angleclamp180(var_1[1] + var_9), var_1[2]);
+    }
 
     var_12 = anglesToForward(var_11) * var_2;
     var_6[var_10] = var_12 + var_0;
@@ -317,10 +328,11 @@ _id_6FAB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       break;
     }
 
-    if(var_6)
+    if(var_6) {
       var_17 = var_13[var_16];
-    else
+    } else {
       var_17 = var_12[var_16];
+    }
 
     var_18 = (var_17[0], var_17[1], var_0 + _id_028D::_id_41B5());
     var_10 = _id_6FAC(var_10, var_17, var_18, var_7, var_15, var_8);
@@ -425,24 +437,29 @@ _id_43D8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   var_21 = 7;
   [var_23, var_24, var_25, var_26] = _id_41EB(self, var_17, var_20, var_21);
 
-  if(!isDefined(var_23) || var_23 > var_7)
+  if(!isDefined(var_23) || var_23 > var_7) {
     var_23 = var_7;
+  }
 
-  if(!isDefined(var_24) || var_24 > var_8)
+  if(!isDefined(var_24) || var_24 > var_8) {
     var_24 = var_8;
+  }
 
-  if(!isDefined(var_25) || var_25 > var_9)
+  if(!isDefined(var_25) || var_25 > var_9) {
     var_25 = var_9;
+  }
 
-  if(!isDefined(var_26) || var_26 > var_10)
+  if(!isDefined(var_26) || var_26 > var_10) {
     var_26 = var_10;
+  }
 
   return [var_23, var_24, var_25, var_26];
 }
 
 _id_10D0(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0;
+  }
 
   var_0._id_5C66 = var_0 _meth_85A3();
   var_0._id_7E86 = var_0 _meth_85A4();
@@ -468,27 +485,33 @@ _id_10D0(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 15;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_4 - var_3;
+  }
 
   var_17 = var_10 + var_4;
   var_18 = var_5 - var_7;
   [var_20, var_21, var_22, var_23] = _id_43D8(var_2[2], var_7, var_5, var_8, var_18[2], 0, var_17, var_0._id_5C66, var_0._id_7E86, var_0._id_9A95, var_0._id_1B4B);
 
-  if(isDefined(var_20) && var_20 < var_0 _meth_85A3())
+  if(isDefined(var_20) && var_20 < var_0 _meth_85A3()) {
     var_0 setleftarc(var_20);
+  }
 
-  if(isDefined(var_21) && var_21 < var_0 _meth_85A4())
+  if(isDefined(var_21) && var_21 < var_0 _meth_85A4()) {
     var_0 setrightarc(var_21);
+  }
 
-  if(isDefined(var_22) && var_22 < var_0 gettoparc())
+  if(isDefined(var_22) && var_22 < var_0 gettoparc()) {
     var_0 settoparc(var_22);
+  }
 
-  if(isDefined(var_23) && var_23 < var_0 getbottomarc())
+  if(isDefined(var_23) && var_23 < var_0 getbottomarc()) {
     var_0 setbottomarc(var_23);
+  }
 }
 
 _id_41EB(var_0, var_1, var_2, var_3) {
@@ -516,9 +539,9 @@ _id_41EB(var_0, var_1, var_2, var_3) {
       var_10 = var_3;
     }
 
-    if(var_9.trace_type == "arc_radial")
+    if(var_9.trace_type == "arc_radial") {
       var_7 = _id_6FAB(var_9._id_7064, var_9._id_0F40, var_9._id_7EDF, var_9._id_0F42, var_9._id_0F3E, 5.0, var_9._id_32D3, var_0, var_9.custom_mask);
-    else if(var_9.trace_type == "arc_multi") {
+    } else if(var_9.trace_type == "arc_multi") {
       var_11 = add_padding_and_get_signed_arc_angle_override_if_needed(var_9._id_0F3E, var_13, var_4, var_10);
       var_7 = _id_6FAA(var_9._id_0F40, var_9._id_7EDF, var_9._id_0F42, var_11, 10.0, var_9._id_0F3F + var_3, var_0, var_9.custom_mask);
     } else if(var_9.trace_type == "arc_single") {
@@ -530,11 +553,13 @@ _id_41EB(var_0, var_1, var_2, var_3) {
       var_12 = var_7["hit_angle"];
       var_12 = _abs(_angleclamp180(var_12));
 
-      if(var_12 > 10)
+      if(var_12 > 10) {
         var_12 = var_12 - var_10;
+      }
 
-      if(!isDefined(var_4[var_5]) || var_12 < var_4[var_5])
+      if(!isDefined(var_4[var_5]) || var_12 < var_4[var_5]) {
         var_4[var_5] = var_12;
+      }
     }
 
     var_6++;
@@ -544,17 +569,19 @@ _id_41EB(var_0, var_1, var_2, var_3) {
 }
 
 add_padding_and_get_signed_arc_angle_override_if_needed(var_0, var_1, var_2, var_3) {
-  if(_func_2C6(var_1, "le") && isDefined(var_2["left"]))
+  if(_func_2C6(var_1, "le") && isDefined(var_2["left"])) {
     var_4 = var_2["left"];
-  else if(_func_2C6(var_1, "ri") && isDefined(var_2["right"]))
+  } else if(_func_2C6(var_1, "ri") && isDefined(var_2["right"])) {
     var_4 = var_2["right"];
-  else
+  } else {
     var_4 = _abs(var_0);
+  }
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     var_5 = -1 * (var_4 + var_3);
-  else
+  } else {
     var_5 = var_4 + var_3;
+  }
 
   return var_5;
 }
@@ -569,8 +596,9 @@ _id_6FAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_16 = vectortoangles(vectorNormalize(var_11[var_15] - var_0));
     var_16 = _combineangles(var_16, (0, 0, 90));
 
-    if(var_5 > 0)
+    if(var_5 > 0) {
       var_5 = var_5 * -1;
+    }
 
     var_9[var_15] = common_scripts\utility::_id_6FA9(var_0, var_16, var_2, var_5, var_6, var_7);
   }
@@ -591,17 +619,21 @@ _id_6FAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 _id_7E4B(var_0) {
-  if(isDefined(var_0._id_5C66))
+  if(isDefined(var_0._id_5C66)) {
     var_0 setleftarc(var_0._id_5C66);
+  }
 
-  if(isDefined(var_0._id_7E86))
+  if(isDefined(var_0._id_7E86)) {
     var_0 setrightarc(var_0._id_7E86);
+  }
 
-  if(isDefined(var_0._id_9A95))
+  if(isDefined(var_0._id_9A95)) {
     var_0 settoparc(var_0._id_9A95);
+  }
 
-  if(isDefined(var_0._id_1B4B))
+  if(isDefined(var_0._id_1B4B)) {
     var_0 setbottomarc(var_0._id_1B4B);
+  }
 
   var_0._id_5C66 = undefined;
   var_0._id_7E86 = undefined;

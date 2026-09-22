@@ -87,13 +87,14 @@ _id_5FC8() {
     if(_getpathdist(self.origin, var_0) > 0) {
       var_1 = randomint(10);
 
-      if(var_1 >= 0 &var_1 < 6)
+      if(var_1 >= 0 &var_1 < 6) {
         var_2 = "tabun_grenade_mp";
-      else if(var_1 >= 6 &var_1 < 9) {
+      } else if(var_1 >= 6 &var_1 < 9) {
         var_2 = "smoke_grenade_mp";
 
-        if(isDefined(self.team) && self.team == "axis")
+        if(isDefined(self.team) && self.team == "axis") {
           var_2 = "smoke_grenade_axis_mp";
+        }
       } else
         var_2 = "killstreak_carepackage_grenade_mp";
 
@@ -145,24 +146,26 @@ _id_2817(var_0) {
   _objective_position(var_1._id_3EE2, var_0);
   _objective_icon(var_1._id_3EE2, "cb_compassping_minion_friend_mp");
 
-  if(!level.teambased)
+  if(!level.teambased) {
     _objective_playerenemyteam(var_1._id_3EE2, self getentitynumber());
-  else
+  } else {
     _objective_team(var_1._id_3EE2, self.team);
+  }
 
   var_1._id_3770 = _id_04D1::_id_45A9();
   _objective_add(var_1._id_3770, "invisible", (0, 0, 0));
   _objective_position(var_1._id_3770, var_0);
   _objective_icon(var_1._id_3770, "cb_compassping_enemy_objective");
 
-  if(!level.teambased)
+  if(!level.teambased) {
     _objective_playerteam(var_1._id_3770, self getentitynumber());
-  else
+  } else {
     _objective_team(var_1._id_3770, level._id_6C63[self.team]);
+  }
 
-  if(self._id_4B78)
+  if(self._id_4B78) {
     thread _id_63CF(var_1);
-  else {
+  } else {
     self._id_622D = common_scripts\utility::_id_0F98(var_1, self._id_622D);
     maps\mp\_utility::_objective_delete(var_1._id_3770);
     maps\mp\_utility::_objective_delete(var_1._id_3EE2);
@@ -192,8 +195,9 @@ _id_63CF(var_0) {
 _id_2F9E() {
   self notify("MisinformationDisabled");
 
-  if(isDefined(self._id_622B))
+  if(isDefined(self._id_622B)) {
     self._id_622B delete();
+  }
 
   if(isDefined(self._id_622D)) {
     self._id_622D = common_scripts\utility::_id_0FA0(self._id_622D);

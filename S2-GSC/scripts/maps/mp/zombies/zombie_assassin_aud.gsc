@@ -22,10 +22,11 @@ update_assassin_audio_info() {
     self.assassinaudioinformation.players_far = [];
 
     foreach(var_2 in level.players) {
-      if(distance(self.origin, var_2.origin) > 700)
+      if(distance(self.origin, var_2.origin) > 700) {
         self.assassinaudioinformation.players_far = common_scripts\utility::_id_0F6F(self.assassinaudioinformation.players_far, var_2);
-      else
+      } else {
         self.assassinaudioinformation.players_near = common_scripts\utility::_id_0F6F(self.assassinaudioinformation.players_near, var_2);
+      }
 
       self.assassinaudioinformation.isagressive = common_scripts\utility::_id_3794("zmb_assassin_is_alarmed");
       self.assassinaudioinformation.isrunningaway = common_scripts\utility::_id_3794("Phase 4: EXITING");

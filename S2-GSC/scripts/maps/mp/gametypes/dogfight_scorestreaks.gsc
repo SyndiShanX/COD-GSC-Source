@@ -61,21 +61,23 @@ fighter_scorestreak_watcher(var_0) {
   if(isPlayer(var_0) && !isbot(var_0)) {
     var_0 notifyonplayercommand("activate_fighter_scorestreak", "+actionslot 4");
 
-    if(!level._id_258F)
+    if(!level._id_258F) {
       var_0 notifyonplayercommand("activate_fighter_scorestreak_keyboard", "+actionslot 5");
+    }
   }
 
   for(;;) {
     var_1 = var_0 common_scripts\utility::waittill_any_return("activate_fighter_scorestreak", "activate_fighter_scorestreak_keyboard");
 
     if(isDefined(var_1)) {
-      if(var_1 == "activate_fighter_scorestreak" && !var_0 common_scripts\utility::_id_55E0())
+      if(var_1 == "activate_fighter_scorestreak" && !var_0 common_scripts\utility::_id_55E0()) {
         continue;
-      else if(var_1 == "activate_fighter_scorestreak_keyboard" && var_0 common_scripts\utility::_id_55E0()) {
+      } else if(var_1 == "activate_fighter_scorestreak_keyboard" && var_0 common_scripts\utility::_id_55E0()) {
         continue;
       }
-      if(isDefined(var_0._id_5A69))
+      if(isDefined(var_0._id_5A69)) {
         var_0 _id_051E::_id_5A7A();
+      }
     }
 
     waitframe();
@@ -95,12 +97,13 @@ dogfight_flakisvalidtarget(var_0) {
 dogfight_flakgetzonescale(var_0, var_1) {
   var_2 = 1.0;
 
-  if(self.origin[2] > var_1)
+  if(self.origin[2] > var_1) {
     var_2 = 1.0;
-  else if(self.origin[2] < var_0)
+  } else if(self.origin[2] < var_0) {
     var_2 = 0.0;
-  else
+  } else {
     var_2 = (self.origin[2] - var_0) / (var_1 - var_0);
+  }
 
   return var_2;
 }
@@ -137,8 +140,9 @@ dogfight_atmosphereflak(var_0, var_1) {
       var_2 = undefined;
       var_3 = getflaktargets();
 
-      if(var_3.size > 0)
+      if(var_3.size > 0) {
         var_2 = dogfight_flakselectradomtarget(var_3, var_0, var_1, 0);
+      }
 
       if(isDefined(var_2)) {
         if(getdvarint("dogfightFlakDamageWeightEnabled", 1)) {
@@ -179,21 +183,23 @@ dogfight_flakexplosioneffects(var_0, var_1) {
   var_2.origin = var_0;
   var_2 show();
   waitframe();
-  _playfxontag(common_scripts\utility::_id_44F5("flak_gun_explosion"), var_2, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("flak_gun_explosion"), var_2, "tag_origin");
   _id_0378::_id_8D74("ks_flak_cannon_explo", var_0);
   wait 4.5;
   var_2 delete();
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     level._id_3CE1--;
+  }
 }
 
 dogfight_flakgetnearfighterexplosionlocation(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = (0, 0, 1);
   var_8 = anglesToForward(var_0.angles);
 
-  if(vectordot(var_8, var_7) <= 0)
+  if(vectordot(var_8, var_7) <= 0) {
     var_8 = (var_8[0], var_8[1], 0);
+  }
 
   var_9 = (0, _randomfloatrange(-1 * var_6, var_6), 0);
   var_8 = _rotatevector(var_8, var_9);
@@ -228,21 +234,23 @@ dogfight_flakrundamage(var_0, var_1) {
       thread dogfight_flakexplosioneffects(var_10, 0);
       var_11 = 0;
 
-      if(_isagent(var_3.occupied_player))
+      if(_isagent(var_3.occupied_player)) {
         var_11 = _randomfloatrange(450, 500) * 10;
-      else
+      } else {
         var_11 = _randomfloatrange(75, 110) * 10;
+      }
 
       var_12 = 1.0;
 
-      if(getdvarint("dogfightFlakDamageScaleEnabled", 1))
+      if(getdvarint("dogfightFlakDamageScaleEnabled", 1)) {
         var_12 = var_4;
+      }
 
       var_11 = var_11 * var_12;
       var_3 dodamage(var_11, var_10, self, undefined, "MOD_UNKNOWN", "killstreak_flak_gun_raids");
 
       if(1) {
-        var_3.occupied_player playrumbleonentity("artillery_rumble");
+        var_3.occupied_player playRumbleOnEntity("artillery_rumble");
         _earthquake(0.7, 0.5, var_3.origin, 800, var_3.occupied_player);
       }
     }
@@ -256,8 +264,9 @@ destroy_remaining_agents() {
   var_0 = getflaktargets();
 
   foreach(var_2 in var_0) {
-    if(_isagent(var_2.occupied_player))
+    if(_isagent(var_2.occupied_player)) {
       var_2 dodamage(_randomfloatrange(450, 500) * 10, var_2.origin, self, undefined, "MOD_UNKNOWN", "killstreak_flak_gun_raids");
+    }
   }
 }
 
@@ -266,14 +275,16 @@ getflaktargets() {
 
   foreach(var_2 in level.pp_array) {
     if(level.teambased) {
-      if(isDefined(var_2.team) && var_2.team == common_scripts\utility::_id_416F(self.team))
+      if(isDefined(var_2.team) && var_2.team == common_scripts\utility::_id_416F(self.team)) {
         var_0 = common_scripts\utility::_id_0F6F(var_0, var_2);
+      }
 
       continue;
     }
 
-    if(isDefined(var_2.occupied_player) && self != var_2.occupied_player)
+    if(isDefined(var_2.occupied_player) && self != var_2.occupied_player) {
       var_0 = common_scripts\utility::_id_0F6F(var_0, var_2);
+    }
   }
 
   return var_0;
@@ -282,6 +293,7 @@ getflaktargets() {
 clear_flak_death_flags() {
   var_0 = getflaktargets();
 
-  foreach(var_2 in var_0)
-  var_2.occupied_player.hasdiedtoflak = undefined;
+  foreach(var_2 in var_0) {
+    var_2.occupied_player.hasdiedtoflak = undefined;
+  }
 }

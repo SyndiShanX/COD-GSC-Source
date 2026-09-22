@@ -4,11 +4,13 @@
 *************************************************************************/
 
 spawn_a_stone_baby_pickup(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = getbabyhintstring(var_4);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "npc_zom_baby_statue_01";
+  }
 
   var_0 = _func_2E1(var_0);
   var_5 = spawn("script_model", var_0);
@@ -19,15 +21,17 @@ spawn_a_stone_baby_pickup(var_0, var_1, var_2, var_3, var_4) {
   var_6 = bulletTrace(var_5.origin + (0, 0, 32), var_5.origin + (0, 0, -1000), 0);
   var_5.origin = var_6["position"] + (0, 0, -4);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_7 = getbabyfxformodel(var_2);
-  else
+  } else {
     var_7 = "gk_raven_hc_ee_baby_stg_3";
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 _id_0547::_id_AC41(var_1, undefined, var_3);
-  else
+  } else {
     var_5 _id_0547::_id_AC41(var_1, (0, 0, 8));
+  }
 
   var_5._id_6949 = var_4;
   var_5 thread wait_for_baby_statue_pickup();
@@ -62,8 +66,9 @@ wait_for_baby_statue_pickup() {
     if(_id_0547::_id_5864(var_1) && !_id_0547::_id_5565(var_1, var_2)) {
       continue;
     }
-    if(isDefined(self.mybabyfx))
+    if(isDefined(self.mybabyfx)) {
       self.mybabyfx delete();
+    }
 
     _id_0547::_id_AC40();
     var_0 thread _id_3481(self._id_6949);
@@ -91,8 +96,9 @@ _id_42F2(var_0) {
   self endon("baby_lost");
 
   while(isDefined(self)) {
-    if(self isonground())
+    if(self isonground()) {
       var_0._id_A269 = self.origin;
+    }
 
     wait 0.15;
   }
@@ -111,8 +117,9 @@ set_player_holding_an_baby_statue(var_0) {
   maps\mp\_utility::giveperk("specialty_ballcarrier");
   self disableweaponswitch();
 
-  if(!common_scripts\utility::_id_562E(self.oncartride))
+  if(!common_scripts\utility::_id_562E(self.oncartride)) {
     self allowcrouch(0);
+  }
 
   self allowprone(0);
   self allowjump(0);
@@ -136,8 +143,9 @@ wait_for_baby_lost() {
   self waittill("baby_lost", var_0);
   self allowcrouch(1);
 
-  if(!common_scripts\utility::_id_3794("flag_player_in_water"))
+  if(!common_scripts\utility::_id_3794("flag_player_in_water")) {
     self allowprone(1);
+  }
 
   var_1 = 1;
 
@@ -166,8 +174,9 @@ waitforbabydeposit() {
 }
 
 try_to_deposit_baby(var_0) {
-  if(common_scripts\utility::_id_562E(self.isswitchingtostatuepart))
+  if(common_scripts\utility::_id_562E(self.isswitchingtostatuepart)) {
     return 0;
+  }
 
   if((!isDefined(self.currentstatueobjectiveid) || self.currentstatueobjectiveid == var_0) && _id_0586::player_is_holding_baby_statue()) {
     self notify("baby_deposited");
@@ -183,8 +192,9 @@ set_player_dropping_an_baby_statue(var_0) {
     var_1 = self.origin;
     var_2 = wait_for_safe_baby_origin();
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = var_1;
+    }
 
     spawn_a_stone_baby_pickup(var_2, undefined, getbabymodel(self.currentstatueobjectiveid), undefined, self.currentstatueobjectiveid);
   }
@@ -207,8 +217,9 @@ getbabymodel(var_0) {
 getbabyhintstring(var_0) {
   var_1 = &"ZOMBIE_ISLAND_PICK_STONE_BABY";
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return var_1;
+  }
 
   switch (var_0) {
     case "__":
@@ -226,8 +237,9 @@ take_baby_statue_from_player() {
   maps\mp\_utility::_id_0735("specialty_ballcarrier");
 
   if(!_id_0547::_id_577E(self)) {
-    if(isDefined(self._id_5B98) && self._id_5B98 != "none")
+    if(isDefined(self._id_5B98) && self._id_5B98 != "none") {
       _id_0586::_id_078E(self._id_5B98);
+    }
 
     self allowjump(1);
   }
@@ -237,8 +249,9 @@ wait_for_safe_baby_origin() {
   self endon("disconnect");
   self endon("death");
 
-  while(!self isonground())
+  while(!self isonground()) {
     waitframe();
+  }
 
   return self.origin;
 }
@@ -249,7 +262,8 @@ dialog_babyweight() {
   if(!common_scripts\utility::_id_562E(self.dlg_flag_statue_weight)) {
     var_0 = _id_0367::_id_8E3D("zepbabypickup");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       self.dlg_flag_statue_weight = 1;
+    }
   }
 }

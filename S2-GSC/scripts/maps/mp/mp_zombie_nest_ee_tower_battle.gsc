@@ -48,14 +48,16 @@ _id_6A77(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::_id_46B5("tower_battle_sfx_top", "targetname");
   var_3 thread _id_0378::_id_8D74("aud_tower_alarm");
 
-  foreach(var_5 in var_0)
-  var_5._id_08BC = level._id_A980;
+  foreach(var_5 in var_0) {
+    var_5._id_08BC = level._id_A980;
+  }
 
   if(!var_1) {
-    if(var_2 == 1)
+    if(var_2 == 1) {
       _id_0557::_id_7822("5 Right Hand fuses", &"ZOMBIE_NEST_HINT_STEP_FIRST_LIGHTNING_ROD");
-    else if(var_2 == 2)
+    } else if(var_2 == 2) {
       _id_0557::_id_7822("5 Right Hand fuses", &"ZOMBIE_NEST_HINT_STEP_TWO_LIGHTNING_RODS");
+    }
   }
 }
 
@@ -70,15 +72,17 @@ _id_6A78(var_0, var_1, var_2) {
   }
 
   foreach(var_8 in var_0._id_65E8) {
-    if(isDefined(var_8._id_65DE) && isDefined(var_8._id_65DE._id_299D))
+    if(isDefined(var_8._id_65DE) && isDefined(var_8._id_65DE._id_299D)) {
       var_8._id_65DE._id_299D delete();
+    }
   }
 
   var_0._id_65E8[0] thread _id_0378::_id_8D74("aud_tower_machine_move_stop");
 
   foreach(var_11 in var_2) {
-    if(isDefined(var_11._id_4D91))
+    if(isDefined(var_11._id_4D91)) {
       _id_0559::_id_2D8E(var_11._id_4D91);
+    }
   }
 }
 
@@ -86,8 +90,9 @@ get_lowest_attack_spot_health(var_0) {
   var_1 = 999;
 
   foreach(var_3 in var_0) {
-    if(var_3._id_28FF < var_1)
+    if(var_3._id_28FF < var_1) {
       var_1 = var_3._id_28FF;
+    }
   }
 
   return var_1;
@@ -105,16 +110,18 @@ _id_6A76(var_0, var_1) {
   var_0._id_65E8[0] thread _id_0378::_id_8D74("aud_tower_machine_destroyed");
 
   foreach(var_7 in level.players) {
-    if(distance(var_7.origin, var_1[0].origin) < 300)
+    if(distance(var_7.origin, var_1[0].origin) < 300) {
       var_7 maps\mp\_utility::_id_2CED(4, _id_0367::_id_8E3C, "lightningrodbroke");
+    }
   }
 
   _id_0557::_id_7822("5 Right Hand fuses", &"ZOMBIE_NEST_HINT_STEP_LIGHTNING_RESET");
 }
 
 _id_6A7D(var_0, var_1, var_2) {
-  if(!isDefined(level._id_9B19))
+  if(!isDefined(level._id_9B19)) {
     level._id_9B19 = 0;
+  }
 
   if(var_2 && !level._id_9B19) {
     foreach(var_4 in level.players) {
@@ -151,8 +158,9 @@ _id_A0E2(var_0, var_1) {
   }
   if(var_0 <= var_1 * 0.75 && var_0 > var_1 * 0.5) {
     if(self._id_28FC != 1) {
-      if(isDefined(self._id_299D))
+      if(isDefined(self._id_299D)) {
         self._id_299D delete();
+      }
 
       var_2 = anglesToForward(self.angles);
       self._id_299D = _spawnfx(level._effect["zmb_ee_fuse_dmg_lt"], self.origin, var_2);
@@ -161,8 +169,9 @@ _id_A0E2(var_0, var_1) {
     }
   } else if(var_0 <= var_1 * 0.5 && var_0 > var_1 * 0.25) {
     if(self._id_28FC != 2) {
-      if(isDefined(self._id_299D))
+      if(isDefined(self._id_299D)) {
         self._id_299D delete();
+      }
 
       var_2 = anglesToForward(self.angles);
       self._id_299D = _spawnfx(level._effect["zmb_ee_fuse_dmg_med"], self.origin, var_2);
@@ -171,8 +180,9 @@ _id_A0E2(var_0, var_1) {
     }
   } else if(var_0 <= var_1 * 0.25 && var_0 > 0) {
     if(self._id_28FC != 3) {
-      if(isDefined(self._id_299D))
+      if(isDefined(self._id_299D)) {
         self._id_299D delete();
+      }
 
       var_2 = anglesToForward(self.angles);
       self._id_299D = _spawnfx(level._effect["zmb_ee_fuse_dmg_hvy"], self.origin, var_2);
@@ -181,8 +191,9 @@ _id_A0E2(var_0, var_1) {
     }
   } else if(var_0 <= 0) {
     if(self._id_28FC != 4) {
-      if(isDefined(self._id_299D))
+      if(isDefined(self._id_299D)) {
         self._id_299D delete();
+      }
 
       var_2 = anglesToForward(self.angles);
       self._id_299D = _spawnfx(common_scripts\utility::_id_44F5("ee_fuse_blowout"), self.origin, var_2);
@@ -196,8 +207,9 @@ _id_8A37(var_0, var_1) {
   if(1) {
     var_2 = [];
 
-    for(var_3 = 0; var_3 < var_1.size; var_3++)
-      var_2[var_3] = _getent(var_1[var_3], "targetname");
+    for(var_3 = 0; var_3 < var_1.size; var_3++) {
+      var_2[var_3] = _getEnt(var_1[var_3], "targetname");
+    }
 
     var_4 = _id_0557::_id_782F(undefined, var_2);
     _id_0557::_id_781D(var_0, var_4);
@@ -216,13 +228,15 @@ _id_A69B(var_0, var_1, var_2) {
   var_4 = 0;
 
   foreach(var_6 in var_0) {
-    if(!isDefined(var_6._id_57A4))
+    if(!isDefined(var_6._id_57A4)) {
       var_4 = 0;
+    }
 
-    if(!isDefined(var_6._id_4D91))
+    if(!isDefined(var_6._id_4D91)) {
       var_6._id_4D91 = _id_0559::_id_7BE3(var_6, "lightning_rod");
+    }
 
-    var_6 sethintstring(&"ZOMBIE_NEST_LIFT_RODS");
+    var_6 setHintString(&"ZOMBIE_NEST_LIFT_RODS");
     var_7 = common_scripts\utility::_id_4461(var_6.origin, var_2);
     var_6 thread _id_A6C0(var_4, var_7);
   }
@@ -234,28 +248,32 @@ _id_A69B(var_0, var_1, var_2) {
     level waittill("ee trigger was repaired", var_3, var_6);
     var_10 = var_3;
 
-    if(common_scripts\utility::_id_0F79(var_0, var_6))
+    if(common_scripts\utility::_id_0F79(var_0, var_6)) {
       var_9++;
+    }
   }
 
-  foreach(var_6 in var_0)
-  var_6._id_65E7 _id_A180(3);
+  foreach(var_6 in var_0) {
+    var_6._id_65E7 _id_A180(3);
+  }
 }
 
 _id_A6AE(var_0) {
   foreach(var_2 in var_0) {
-    if(!isDefined(var_2._id_08BC))
+    if(!isDefined(var_2._id_08BC)) {
       return;
+    }
   }
 
   foreach(var_2 in var_0) {
     var_2 common_scripts\utility::_id_9DA3();
-    var_2 sethintstring(&"ZOMBIE_NEST_MACHINE_COOLING");
+    var_2 setHintString(&"ZOMBIE_NEST_MACHINE_COOLING");
     var_2 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
   }
 
-  while(var_0[0]._id_08BC == level._id_A980)
+  while(var_0[0]._id_08BC == level._id_A980) {
     wait 1;
+  }
 }
 
 _id_2EA5(var_0) {
@@ -271,14 +289,15 @@ _id_46EF(var_0) {
 }
 
 _id_8A05() {
-  self._id_1170 = _getent(self.target, "targetname");
+  self._id_1170 = _getEnt(self.target, "targetname");
   self._id_1170.setscriptmoverkillcam = getEntArray(self._id_1170.target, "targetname");
   self._id_1170._id_65F7 = self;
 }
 
 _id_4ADA(var_0) {
-  foreach(var_2 in var_0)
-  var_2 _id_A180(0);
+  foreach(var_2 in var_0) {
+    var_2 _id_A180(0);
+  }
 }
 
 _id_A6C0(var_0, var_1) {
@@ -291,8 +310,9 @@ _id_A6C0(var_0, var_1) {
     self waittill("trigger", var_2);
     self._id_65E7 thread _id_0378::_id_8D74("aud_tower_machine_use");
 
-    if(isDefined(var_1._id_299D))
+    if(isDefined(var_1._id_299D)) {
       var_1._id_299D delete();
+    }
 
     if(var_0 == 0 || var_2 maps\mp\gametypes\zombies::_id_11C2(var_0)) {
       self._id_28D5 = 0;
@@ -385,10 +405,11 @@ _id_64AC(var_0) {
 
   switch (var_0) {
     case 0:
-      if(isDefined(var_1._id_7EC5))
+      if(isDefined(var_1._id_7EC5)) {
         var_1._id_7EBF = var_1._id_7EC5 * var_1._id_7EC3;
-      else
+      } else {
         var_1._id_7EBF = var_1._id_7EC3;
+      }
 
       var_1._id_7EBE = var_1._id_7EC3 - var_1._id_7EBF;
       var_1 scriptmodelplayanim(var_1._id_7EC2, "", var_1._id_7EBE, 1, 1);
@@ -451,7 +472,7 @@ _id_9EC8() {
 }
 
 _id_8A4B() {
-  var_0 = _getent("nest_ee_fuse_piece_lift", "targetname");
+  var_0 = _getEnt("nest_ee_fuse_piece_lift", "targetname");
   level notify("flag_fuse_entered_correct");
   var_0 _id_8A05();
   return var_0;
@@ -459,23 +480,25 @@ _id_8A4B() {
 
 _id_2E7C() {
   wait 3;
-  var_0 = _getent("inner_spire", "targetname");
+  var_0 = _getEnt("inner_spire", "targetname");
 
   if(isDefined(var_0)) {
     foreach(var_2 in level.players) {
-      if(_distance2d(var_2.origin, var_0.origin) < 750)
+      if(_distance2d(var_2.origin, var_0.origin) < 750) {
         var_2 thread _id_0367::_id_8E3C("lightningrodpart2");
+      }
     }
   }
 }
 
 _id_A180(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     thread _id_A181(var_0);
-  else if(var_1)
+  } else if(var_1) {
     thread _id_A181(var_0);
-  else
+  } else {
     thread _id_A181(var_2);
+  }
 }
 
 _id_52FA(var_0) {
@@ -483,8 +506,8 @@ _id_52FA(var_0) {
   var_2 = [];
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    var_4 = _getent(var_0[var_3], "targetname");
-    var_4._id_65E6 = _getent(var_4.target, "targetname");
+    var_4 = _getEnt(var_0[var_3], "targetname");
+    var_4._id_65E6 = _getEnt(var_4.target, "targetname");
     _id_5DA3(var_4._id_65E6.target, var_4);
     var_1 = common_scripts\utility::_id_0F6F(var_1, var_4);
   }
@@ -494,26 +517,26 @@ _id_52FA(var_0) {
 }
 
 _id_5DA3(var_0, var_1) {
-  var_2 = _getent(var_0, "targetname");
+  var_2 = _getEnt(var_0, "targetname");
   var_2._id_65DA = var_1;
 }
 
 _id_52ED() {
-  var_0 = _getent("nest_ee_fuse_piece_lift", "targetname");
+  var_0 = _getEnt("nest_ee_fuse_piece_lift", "targetname");
   var_0 common_scripts\utility::_id_9D9F();
-  var_0 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  var_0 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   var_0 thread _id_2EB2();
-  var_0._id_65E7 = _getent("inner_spire_lever", "targetname");
-  var_0._id_65E7._id_65E6 = _getent(var_0._id_65E7.target, "targetname");
+  var_0._id_65E7 = _getEnt("inner_spire_lever", "targetname");
+  var_0._id_65E7._id_65E6 = _getEnt(var_0._id_65E7.target, "targetname");
   var_0._id_65E7 _id_A180(0);
   var_0._id_65E7 _id_A180(4);
   var_1 = getEntArray("nest_ee_fuse_outter_objectives", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+    var_3 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
     var_3 thread _id_2EB2();
-    var_3._id_65E7 = _getent(var_3.target, "targetname");
-    var_3._id_65E7._id_65E6 = _getent(var_3._id_65E7.target, "targetname");
+    var_3._id_65E7 = _getEnt(var_3.target, "targetname");
+    var_3._id_65E7._id_65E6 = _getEnt(var_3._id_65E7.target, "targetname");
     var_3._id_65E7 _id_A180(0);
     var_3._id_65E7 _id_A180(4);
   }
@@ -530,13 +553,14 @@ _id_2EB2() {
       break;
     }
 
-    if(common_scripts\utility::_id_562E(var_0._id_3072))
+    if(common_scripts\utility::_id_562E(var_0._id_3072)) {
       continue;
-    else {
+    } else {
       var_1 = var_0 _id_0367::_id_8E3D("lightningrodmachine");
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_0._id_3072 = 1;
+      }
     }
   }
 }
@@ -549,7 +573,7 @@ _id_46ED(var_0, var_1, var_2) {
   var_3["attack_positions"] = [];
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
-    var_3["attack_positions"][var_4] = _getent(var_2[var_4], "targetname");
+    var_3["attack_positions"][var_4] = _getEnt(var_2[var_4], "targetname");
     var_3["attack_positions"][var_4]._id_AC6A = common_scripts\utility::_id_46B7(var_3["attack_positions"][var_4].target, "targetname");
   }
 

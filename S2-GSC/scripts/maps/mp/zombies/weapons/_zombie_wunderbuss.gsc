@@ -27,8 +27,9 @@ init() {
 }
 
 wunderbuss_kill_info_fallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(isDefined(var_0) && isDefined(self) && isDefined(self._id_0A4B))
+  if(isDefined(var_0) && isDefined(self) && isDefined(self._id_0A4B)) {
     var_0.secondaryzombiecheck = self._id_0A4B;
+  }
 }
 
 _id_5330() {
@@ -46,8 +47,9 @@ onwunderbussequip() {
     self waittill("weapon_switch_started", var_0);
 
     if(var_0 == "wunderbuss_zm") {
-      if(1)
+      if(1) {
         self setweaponammostock("alt+wunderbuss_zm", 1);
+      }
 
       if(!common_scripts\utility::_id_562E(self.wunderbusshintshown)) {
         thread showwunderbussinstructions();
@@ -63,29 +65,34 @@ cleanupbolt(var_0, var_1) {
   var_2 = var_0._id_0117;
   var_2.wunderbussbolts = common_scripts\utility::_id_0F93(var_2.wunderbussbolts, var_0);
 
-  if(isDefined(var_0._id_6FD8))
+  if(isDefined(var_0._id_6FD8)) {
     var_0._id_6FD8 delete();
+  }
 
-  if(isDefined(var_0._id_776C))
+  if(isDefined(var_0._id_776C)) {
     thread deleteboltprojectile(var_0, var_1);
+  }
 
-  if(isDefined(var_0.droppedbolt))
+  if(isDefined(var_0.droppedbolt)) {
     thread deletedroppedbolt(var_0);
+  }
 }
 
 onenemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = self;
 
   if(0) {
-    if(var_9._id_0A4B == "zombie_sizzler")
+    if(var_9._id_0A4B == "zombie_sizzler") {
       spawnnewsizzlerbolt(var_9, 1);
+    }
   }
 
   if(_id_0547::_id_5565(var_4, "wunderbuss_zm")) {}
 
   if(isDefined(var_9.stuckwunderbussbolts)) {
-    foreach(var_11 in var_9.stuckwunderbussbolts)
-    unstickboltfromenemy(var_11, 1);
+    foreach(var_11 in var_9.stuckwunderbussbolts) {
+      unstickboltfromenemy(var_11, 1);
+    }
   }
 }
 
@@ -101,8 +108,9 @@ onboltfired(var_0) {
   var_1 thread manageboltstick(var_0);
   var_1 thread manageboltdelete(var_0);
 
-  if(1)
+  if(1) {
     var_1 setweaponammostock("alt+wunderbuss_zm", 1);
+  }
 
   return 1;
 }
@@ -159,9 +167,9 @@ manageboltstick(var_0) {
 
   if(isDefined(var_2) && (_isagent(var_2) || isPlayer(var_2))) {
     if(_isagent(var_2)) {
-      if(isalive(var_2) && !_id_0547::_id_5565(var_2._id_0A4B, "zombie_bob"))
+      if(isalive(var_2) && !_id_0547::_id_5565(var_2._id_0A4B, "zombie_bob")) {
         boltstucktoenemy(var_0, var_2);
-      else {
+      } else {
         var_3 = var_0.boltstruct;
         boltammoinstantreward(var_3, var_2, var_0);
         unstickboltfromenemy(var_0, 0);
@@ -178,11 +186,13 @@ boltstucktoenemy(var_0, var_1) {
   var_0 endon("death");
   var_3 = var_0.boltstruct;
 
-  if(!isDefined(var_1.stuckwunderbussbolts))
+  if(!isDefined(var_1.stuckwunderbussbolts)) {
     var_1.stuckwunderbussbolts = [];
+  }
 
-  if(!0)
+  if(!0) {
     boltammoinstantreward(var_3, var_1);
+  }
 
   if(isDefined(var_1.stuckwunderbussbolts[var_3.playerindex])) {
     thread unstickboltfromenemy(var_0);
@@ -205,13 +215,13 @@ boltstucktoenemyrumbles(var_0, var_1) {
   var_3 = var_0.boltstruct;
 
   while(isDefined(var_2) && isalive(var_2) && isDefined(var_1) && isalive(var_1) && isDefined(var_0) && !common_scripts\utility::_id_562E(var_3.targetdrained)) {
-    var_2 playrumbleonentity("viewmodel_small");
+    var_2 playRumbleOnEntity("viewmodel_small");
     wait 0.25;
   }
 
-  var_2 playrumbleonentity("viewmodel_small");
+  var_2 playRumbleOnEntity("viewmodel_small");
   wait 0.2;
-  var_2 playrumbleonentity("viewmodel_small");
+  var_2 playRumbleOnEntity("viewmodel_small");
 }
 
 boltfx_stuck(var_0) {
@@ -231,12 +241,13 @@ boltfx_chargebeam(var_0, var_1, var_2, var_3) {
   }
   var_4 = undefined;
 
-  if(isDefined(var_2) && !isDefined(var_2.wunder_beams))
+  if(isDefined(var_2) && !isDefined(var_2.wunder_beams)) {
     var_2.wunder_beams = [];
+  }
 
   if(var_2.wunder_beams.size < 1) {
     var_5 = var_0 common_scripts\utility::_id_8FFC();
-    var_5 linkto(var_0, "Tag_FX", (0, 0, 0), (0, 180, 0));
+    var_5 linkTo(var_0, "Tag_FX", (0, 0, 0), (0, 180, 0));
     var_5 thread boltfx_chargebeamupdateangle(var_2);
     var_4 = _func_382("zmb_wunderbuss_charge_beam", var_5, "tag_origin", var_2, "Tag_Origin");
     var_4 _id_0378::_id_8D74("aud_ber_wunderbuss_charge_beam", var_5.origin, var_2.origin);
@@ -287,16 +298,18 @@ boltfx_ground() {
 }
 
 unstickboltfromenemy(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = var_0.boltstruct;
 
   if(common_scripts\utility::_id_562E(var_2._id_5F5C) || !0) {
     var_2 notify("bolt_kill");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       playFX(common_scripts\utility::_id_44F5("zmb_ber_szlr_geistkraftdrain_1"), var_0.origin);
+    }
 
     cleanupbolt(var_2);
     return;
@@ -325,15 +338,17 @@ unstickboltfromally(var_0) {
   var_1 = var_0.boltstruct;
   var_1 notify("bolt_kill");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     playFX(common_scripts\utility::_id_44F5("zmb_ber_szlr_geistkraftdrain_1"), var_0.origin);
+  }
 
   cleanupbolt(var_1);
 }
 
 deleteboltprojectile(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(common_scripts\utility::_id_562E(var_0.projectiledeleting)) {
     return;
@@ -372,9 +387,9 @@ boltstucktogeo(var_0) {
   var_1 = var_0.boltstruct;
   var_1.stucktogeo = 1;
 
-  if(common_scripts\utility::_id_562E(var_1._id_5F5C))
+  if(common_scripts\utility::_id_562E(var_1._id_5F5C)) {
     cleanupbolt(var_1);
-  else {
+  } else {
     if(1) {
       thread delayedcleanupbolt(5, var_1);
       return;
@@ -397,13 +412,14 @@ createpickuptrigger(var_0, var_1, var_2) {
   }
 
   var_3 = spawn("trigger_radius", var_1.origin, 0, 64, 64);
-  var_3 enablelinkto();
-  var_3 linkto(var_1);
+  var_3 enablelinkTo();
+  var_3 linkTo(var_1);
   var_3.targetname = "stuck_wunderbuss_bolt";
   var_0._id_6FD8 = var_3;
 
-  if(1)
+  if(1) {
     var_1 hudoutlineenableforclient(var_0._id_0117, 0, 0);
+  }
 
   for(;;) {
     waitframe();
@@ -432,12 +448,14 @@ createpickuptrigger(var_0, var_1, var_2) {
     }
 
     if(0) {
-      if(isDefined(var_0.ammoreward))
+      if(isDefined(var_0.ammoreward)) {
         var_4 wunderbussaddenergyammo(var_0.ammoreward);
+      }
     }
 
-    if(1)
+    if(1) {
       var_1 hudoutlinedisableforclient(var_0._id_0117);
+    }
 
     cleanupbolt(var_0);
     return;
@@ -458,8 +476,9 @@ spawnnewsizzlerbolt(var_0, var_1) {
     cleanupbolt(var_3, var_1);
   }
 
-  if(0)
+  if(0) {
     thread createpickuptrigger(var_2, var_2.droppedbolt, var_1);
+  }
 }
 
 handlecliponlyhack() {
@@ -469,14 +488,16 @@ handlecliponlyhack() {
     var_0 common_scripts\utility::_id_A70A("weapon_given", "heavyMeleeClip_earned");
     waitframe();
 
-    if(var_0 hasweapon("wunderbuss_zm"))
+    if(var_0 hasweapon("wunderbuss_zm")) {
       wunderbussaddenergyammo(0);
+    }
   }
 }
 
 scaledamage() {
-  while(!isDefined(level._id_0A50) || !isDefined(level._id_0A50["zombie_generic"]))
+  while(!isDefined(level._id_0A50) || !isDefined(level._id_0A50["zombie_generic"])) {
     waitframe();
+  }
 
   var_0 = 1;
   var_1 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), 16);
@@ -500,8 +521,9 @@ boltdot(var_0) {
     wait 1.5;
     var_3 = var_1;
 
-    if(var_0.stuckto._id_0A4B == "zombie_heavy")
+    if(var_0.stuckto._id_0A4B == "zombie_heavy") {
       var_3 = var_3 * 5;
+    }
 
     var_0._id_0117 wunderbussaddenergyammo(1);
     wunderbuss_challenges_report_zombie_hit_by_bolt(var_0._id_0117, var_0.stucktoagenttype);
@@ -516,11 +538,13 @@ boltammoinstantreward(var_0, var_1, var_2) {
   var_0.bolt_juice_collected = 0;
   var_3 = 5;
 
-  if(_id_0547::_id_5565(var_1._id_0A4B, "zombie_heavy"))
+  if(_id_0547::_id_5565(var_1._id_0A4B, "zombie_heavy")) {
     var_3 = 1;
+  }
 
-  if(_id_0547::_id_5565(var_1._id_0A4B, "zombie_bob"))
+  if(_id_0547::_id_5565(var_1._id_0A4B, "zombie_bob")) {
     var_3 = 1;
+  }
 
   wunderbuss_challenges_report_zombie_hit_by_bolt(var_0._id_0117, var_1._id_0A4B, var_2);
   var_0._id_0117 wunderbussaddenergyammo(var_3);
@@ -528,8 +552,9 @@ boltammoinstantreward(var_0, var_1, var_2) {
 }
 
 wunderbussmodifyenergydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(var_4 == "alt+wunderbuss_zm")
+  if(var_4 == "alt+wunderbuss_zm") {
     return 0;
+  }
 
   return level.wunderbussenergydamage;
 }
@@ -539,8 +564,9 @@ wunderbussmodifyboltdamageoninstakill(var_0, var_1, var_2, var_3, var_4, var_5, 
 }
 
 wunderbuss_challenges_report_zombie_hit_by_bolt(var_0, var_1, var_2) {
-  if(isDefined(level.add_zombie_type_to_geistkraft_challenge))
+  if(isDefined(level.add_zombie_type_to_geistkraft_challenge)) {
     level thread[[level.add_zombie_type_to_geistkraft_challenge]](var_0, var_1, var_2);
+  }
 }
 
 wunderbussmaxammofunc(var_0) {
@@ -553,8 +579,9 @@ wunderbussaddenergyammo(var_0) {
   var_1 = self;
   var_2 = _weaponclipsize("wunderbuss_zm", var_1);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = var_2;
+  }
 
   var_3 = var_1 getweaponammoclip("wunderbuss_zm");
   var_4 = var_1 getweaponammostock("wunderbuss_zm");

@@ -28,14 +28,16 @@ main() {
 }
 
 _id_7830() {
-  var_0 = _getent("bunker_ent_dialogue", "targetname");
+  var_0 = _getEnt("bunker_ent_dialogue", "targetname");
   var_0 _id_A77B();
 
-  if(!_id_0557::_id_42D6("1 fire well"))
+  if(!_id_0557::_id_42D6("1 fire well")) {
     _id_0557::_id_8564("1 fire well", 1);
+  }
 
-  if(!_id_0557::_id_434E("1 fire well"))
+  if(!_id_0557::_id_434E("1 fire well")) {
     _id_0557::_id_8596("1 fire well", 1);
+  }
 
   _id_0557::_id_782D("explore village", "find bunker entrance");
 }
@@ -56,19 +58,22 @@ _id_785E() {
     var_4 = common_scripts\utility::_id_46B7("power_switch", "targetname");
     var_5 = [];
 
-    foreach(var_7 in var_4)
-    var_5[var_5.size] = var_7._id_6298;
+    foreach(var_7 in var_4) {
+      var_5[var_5.size] = var_7._id_6298;
+    }
 
     var_9 = common_scripts\utility::_id_0F73(var_5, var_0.setclientdvars);
     var_3 = _id_0557::_id_782F(undefined, var_9);
     _id_0557::_id_781D("explore village", var_3);
   }
 
-  if(!common_scripts\utility::_id_3C77("power_sz2"))
+  if(!common_scripts\utility::_id_3C77("power_sz2")) {
     common_scripts\utility::_id_3C9F("power_sz2");
+  }
 
-  foreach(var_11 in var_0.setclientdvars)
-  var_11 setscriptablepartstate("light", "green");
+  foreach(var_11 in var_0.setclientdvars) {
+    var_11 setscriptablepartstate("light", "green");
+  }
 
   if(0) {
     _id_0557::_id_7847("explore village", var_3);
@@ -110,8 +115,9 @@ _id_1DA7() {
 }
 
 _id_A776(var_0) {
-  foreach(var_2 in var_0)
-  var_2 thread _id_680E();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_680E();
+  }
 
   level waittill("bunker area open", var_4);
   return var_4;
@@ -135,30 +141,30 @@ _id_44F7() {
 }
 
 _id_AA06() {
-  var_0 = _getent("well_clip_bottom", "script_noteworthy");
+  var_0 = _getEnt("well_clip_bottom", "script_noteworthy");
   var_0.origin = var_0.origin + (0, 0, 128);
   var_0._id_50D0 = 0;
   waitframe();
   var_0 notsolid();
-  var_1 = _getent("well_clip_top_plug", "script_noteworthy");
+  var_1 = _getEnt("well_clip_top_plug", "script_noteworthy");
   var_1.origin = var_1.origin + (0, 0, -128);
   var_1._id_50D0 = 1;
   waitframe();
-  var_1 disconnectpaths();
-  var_2 = _getent("well_clip_door", "script_noteworthy");
+  var_1 disconnectPaths();
+  var_2 = _getEnt("well_clip_door", "script_noteworthy");
   var_2.origin = var_2.origin + (0, 0, -128);
   var_2._id_50D0 = 1;
-  var_3 = _getent("well_clip_door_ai", "script_noteworthy");
+  var_3 = _getEnt("well_clip_door_ai", "script_noteworthy");
   var_3.origin = var_3.origin + (0, 0, -128);
   var_3._id_50D0 = 1;
   waitframe();
-  var_3 disconnectpaths();
+  var_3 disconnectPaths();
 }
 
 _id_AA05() {
   var_0 = getEntArray("well_clip_top", "script_noteworthy");
-  var_1 = _getent("well_clip_top_plug", "script_noteworthy");
-  var_2 = _getent("well_clip_door", "script_noteworthy");
+  var_1 = _getEnt("well_clip_top_plug", "script_noteworthy");
+  var_2 = _getEnt("well_clip_door", "script_noteworthy");
 
   foreach(var_4 in var_0) {
     var_4 notsolid();
@@ -172,7 +178,7 @@ _id_AA05() {
 }
 
 _id_AA04() {
-  var_0 = _getent("well_clip_bottom", "script_noteworthy");
+  var_0 = _getEnt("well_clip_bottom", "script_noteworthy");
 
   if(!var_0._id_50D0) {
     var_0.origin = var_0.origin + (0, 0, -128);
@@ -181,16 +187,16 @@ _id_AA04() {
 
   waitframe();
   var_0 solid();
-  var_1 = _getent("well_clip_top_plug", "script_noteworthy");
+  var_1 = _getEnt("well_clip_top_plug", "script_noteworthy");
   var_1 solid();
-  var_2 = _getent("well_clip_door", "script_noteworthy");
+  var_2 = _getEnt("well_clip_door", "script_noteworthy");
   var_2 solid();
-  var_3 = _getent("well_clip_door_ai", "script_noteworthy");
+  var_3 = _getEnt("well_clip_door_ai", "script_noteworthy");
   var_3 solid();
 }
 
 _id_AA07() {
-  var_0 = _getent("well_clip_bottom", "script_noteworthy");
+  var_0 = _getEnt("well_clip_bottom", "script_noteworthy");
 
   if(!var_0._id_50D0) {
     var_0.origin = var_0.origin + (0, 0, -128);
@@ -199,25 +205,25 @@ _id_AA07() {
 
   waitframe();
   var_0 solid();
-  var_1 = _getent("well_clip_door_ai", "script_noteworthy");
+  var_1 = _getEnt("well_clip_door_ai", "script_noteworthy");
   var_1 connectpaths();
   var_1 notsolid();
 }
 
 _id_AA08() {
-  var_0 = _getent("well_clip_bottom", "script_noteworthy");
+  var_0 = _getEnt("well_clip_bottom", "script_noteworthy");
   var_0 notsolid();
   waitframe();
   var_0 delete();
-  var_1 = _getent("well_clip_top_plug", "script_noteworthy");
+  var_1 = _getEnt("well_clip_top_plug", "script_noteworthy");
   var_1 notsolid();
-  var_1 disconnectpaths();
-  var_2 = _getent("well_clip_door", "script_noteworthy");
+  var_1 disconnectPaths();
+  var_2 = _getEnt("well_clip_door", "script_noteworthy");
   var_2 notsolid();
   var_2 delete();
-  var_3 = _getent("well_clip_door_ai", "script_noteworthy");
+  var_3 = _getEnt("well_clip_door_ai", "script_noteworthy");
   var_3 notsolid();
-  var_3 disconnectpaths();
+  var_3 disconnectPaths();
 }
 
 _id_0985() {
@@ -231,27 +237,31 @@ _id_0985() {
 
   common_scripts\utility::_id_3C9F(var_0.getnegotiationnextnode);
 
-  if(0)
+  if(0) {
     _id_0557::_id_7847("1 fire well", var_1);
+  }
 }
 
 _id_7856() {
-  var_0 = _getent("pilot_light_trigger", "targetname");
+  var_0 = _getEnt("pilot_light_trigger", "targetname");
   var_1 = spawnStruct();
   var_0 childthread common_scripts\utility::_id_A75D("trigger", var_1);
 
-  foreach(var_3 in level._id_3EFB)
-  var_3 childthread common_scripts\utility::_id_A75D("valve_complete", var_1);
+  foreach(var_3 in level._id_3EFB) {
+    var_3 childthread common_scripts\utility::_id_A75D("valve_complete", var_1);
+  }
 
   var_1 waittill("returned", var_5, var_6);
   var_1 notify("die");
   var_7 = var_6;
 
-  if(!_id_0557::_id_42D6("1 fire well"))
+  if(!_id_0557::_id_42D6("1 fire well")) {
     _id_0557::_id_8564("1 fire well", 1);
+  }
 
-  if(!_id_0557::_id_434E("1 fire well"))
+  if(!_id_0557::_id_434E("1 fire well")) {
     _id_0557::_id_8596("1 fire well", 1);
+  }
 
   if(var_7 == var_0) {
     _id_0557::_id_7822("1 fire well", &"ZOMBIE_NEST_HINT_STEP_FIND_VALVE");
@@ -281,15 +291,16 @@ _id_7855() {
   common_scripts\utility::_id_3CA1(var_0);
   var_4 = _getscriptablearray("green", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 setscriptablepartstate("light", "green");
+  foreach(var_6 in var_4) {
+    var_6 setscriptablepartstate("light", "green");
+  }
 
   _id_0557::_id_7822("1 fire well", &"ZOMBIE_NEST_HINT_STEP_PILOT_LIGHT");
-  var_8 = _getent("pilot_light_trigger", "targetname");
+  var_8 = _getEnt("pilot_light_trigger", "targetname");
 
   if(0) {
     if(isDefined(var_8)) {
-      var_9 = _getent("nest_ee_pilot_light_model", "targetname");
+      var_9 = _getEnt("nest_ee_pilot_light_model", "targetname");
       var_10 = _id_0557::_id_782F(undefined, [var_9]);
       _id_0557::_id_781D("1 fire well", var_10);
     }
@@ -322,8 +333,9 @@ _id_A29E() {
 }
 
 _id_7854() {
-  if(!isDefined(level._id_6FEB))
+  if(!isDefined(level._id_6FEB)) {
     level._id_6FEB = level.player;
+  }
 
   var_0 = common_scripts\utility::_id_46B7("well_explosion", "script_noteworthy");
   var_1 = var_0[0].origin;
@@ -378,8 +390,9 @@ _id_7854() {
 }
 
 _id_9CAB(var_0) {
-  if(!isDefined(level._id_6FEB))
+  if(!isDefined(level._id_6FEB)) {
     level._id_6FEB = level.player;
+  }
 
   var_1 = common_scripts\utility::_id_46B7("well_explosion", "script_noteworthy");
   var_2 = var_1[0].origin;
@@ -476,10 +489,11 @@ _id_3C29(var_0, var_1, var_2) {
     level waittill(var_1, var_5);
     var_4 delete();
 
-    if(var_5)
+    if(var_5) {
       var_4 = _id_0547::_id_8FBA(var_3, "zmb_nest_generator_bulb_green");
-    else
+    } else {
       var_4 = _id_0547::_id_8FBA(var_3, "zmb_nest_generator_bulb_red");
+    }
 
     _triggerfx(var_4);
   }
@@ -508,10 +522,11 @@ _id_2EB3(var_0, var_1) {
     case 1:
       var_2 = undefined;
 
-      if(common_scripts\utility::_id_562E(var_1._id_306A) || common_scripts\utility::_id_562E(var_1._id_3068))
+      if(common_scripts\utility::_id_562E(var_1._id_306A) || common_scripts\utility::_id_562E(var_1._id_3068)) {
         var_2 = var_1 _id_0367::_id_8E3D("valvenext");
-      else
+      } else {
         var_2 = var_1 _id_0367::_id_8E3D("valvefirst");
+      }
 
       if(isDefined(var_2)) {
         foreach(var_4 in level.players) {
@@ -526,12 +541,13 @@ _id_2EB3(var_0, var_1) {
     case 2:
       var_2 = undefined;
 
-      if(common_scripts\utility::_id_562E(var_1._id_3073))
+      if(common_scripts\utility::_id_562E(var_1._id_3073)) {
         var_2 = var_1 _id_0367::_id_8E3D("valveturning");
-      else if(common_scripts\utility::_id_562E(var_1._id_306A) || common_scripts\utility::_id_562E(var_1._id_3068))
+      } else if(common_scripts\utility::_id_562E(var_1._id_306A) || common_scripts\utility::_id_562E(var_1._id_3068)) {
         var_2 = var_1 _id_0367::_id_8E3D("valvenext");
-      else
+      } else {
         var_2 = var_1 _id_0367::_id_8E3D("valvefirst");
+      }
 
       if(isDefined(var_2)) {
         foreach(var_4 in level.players) {
@@ -542,15 +558,16 @@ _id_2EB3(var_0, var_1) {
 
       break;
     case 3:
-      foreach(var_4 in level.players)
-      var_4._id_3076 = 0;
+      foreach(var_4 in level.players) {
+        var_4._id_3076 = 0;
+      }
 
       break;
   }
 }
 
 _id_AC98() {
-  var_0 = _getent("pilot_light_trigger", "targetname");
+  var_0 = _getEnt("pilot_light_trigger", "targetname");
   var_0 thread _id_AC99();
 
   for(;;) {
@@ -567,7 +584,7 @@ _id_AC98() {
     if(common_scripts\utility::_id_3C77("fuel_valve_1") && common_scripts\utility::_id_3C77("fuel_valve_2") && common_scripts\utility::_id_3C77("fuel_valve_3")) {
       level._id_6FEB = var_1;
       common_scripts\utility::flag_set("Pilot light activated");
-      var_0 sethintstring(&"ZOMBIES_EMPTY_STRING");
+      var_0 setHintString(&"ZOMBIES_EMPTY_STRING");
       break;
     } else
       thread _id_2E85(var_1);
@@ -575,21 +592,21 @@ _id_AC98() {
 }
 
 _id_AC99() {
-  self sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  self setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   common_scripts\utility::_id_3CA0("fuel_valve_1", "fuel_valve_2", "fuel_valve_3");
-  self sethintstring(&"ZOMBIE_NEST_PILOTLIGHT");
+  self setHintString(&"ZOMBIE_NEST_PILOTLIGHT");
 }
 
 hideviewmodel(var_0) {
   if(common_scripts\utility::_id_562E(level._id_1CBA) && !common_scripts\utility::_id_562E(var_0)) {
     return;
   }
-  var_1 = _getent("pilot_light_trigger", "targetname");
+  var_1 = _getEnt("pilot_light_trigger", "targetname");
   var_1 common_scripts\utility::_id_9DA3();
 }
 
 showviewmodel() {
-  var_0 = _getent("pilot_light_trigger", "targetname");
+  var_0 = _getEnt("pilot_light_trigger", "targetname");
   var_0 common_scripts\utility::_id_9D9F();
 }
 
@@ -605,26 +622,30 @@ _id_2E85(var_0) {
   } else if(common_scripts\utility::_id_562E(var_0._id_3076)) {
     var_1 = var_0 _id_0367::_id_8E3D("pressuretank");
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_0._id_3076 = 0;
+    }
   }
 }
 
 _id_3BEA() {
   var_0 = _getscriptablearray("bigfire", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("heat", "enable");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("heat", "enable");
+  }
 
   wait 0.1;
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("heat", "die");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("heat", "die");
+  }
 
   var_6 = _getscriptablearray("smlfire", "targetname");
 
-  foreach(var_8 in var_6)
-  var_8 setscriptablepartstate("heat2", "enable");
+  foreach(var_8 in var_6) {
+    var_8 setscriptablepartstate("heat2", "enable");
+  }
 
   var_10 = _getscriptablearray("onoff", "targetname");
 
@@ -708,13 +729,15 @@ _id_3C20(var_0) {
     var_1 = common_scripts\utility::_id_0F73(var_1, var_2);
   }
 
-  foreach(var_4 in var_1)
-  var_4 thread _id_3C21();
+  foreach(var_4 in var_1) {
+    var_4 thread _id_3C21();
+  }
 
   var_6 = common_scripts\utility::_id_46B5("well_explosion_zombie_grab_radius", "script_noteworthy");
 
-  if(!isDefined(level._id_3BD3))
+  if(!isDefined(level._id_3BD3)) {
     level._id_3BD3 = spawn("trigger_radius", var_6.origin, 0, var_6.radius, 128);
+  }
 
   if(isDefined(var_0)) {
     level.fire_well_trap = level._id_3BD3;
@@ -725,8 +748,9 @@ _id_3C20(var_0) {
   level._id_3BD3 thread _id_3C21();
   wait 4;
 
-  foreach(var_8 in level.players)
-  var_8._id_5685 = 0;
+  foreach(var_8 in level.players) {
+    var_8._id_5685 = 0;
+  }
 
   level notify("flame_jets_done");
 }
@@ -783,8 +807,9 @@ _id_3C21() {
         var_1._id_6B39 = gettime();
         var_1 dodamage(5, var_1.origin);
 
-        if(!common_scripts\utility::_id_562E(var_1._id_5685) && self.classname != "trigger_radius")
+        if(!common_scripts\utility::_id_562E(var_1._id_5685) && self.classname != "trigger_radius") {
           var_1 notify("fire_touched");
+        }
       }
     }
   }

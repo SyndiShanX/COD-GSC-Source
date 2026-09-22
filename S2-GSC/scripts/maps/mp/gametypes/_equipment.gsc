@@ -17,8 +17,9 @@ _id_A956(var_0) {
         return;
       }
 
-      if(!isDefined(var_0) || var_0 == 0)
+      if(!isDefined(var_0) || var_0 == 0) {
         var_1 hide();
+      }
 
       var_1 waittill("missile_stuck");
 
@@ -42,8 +43,9 @@ _id_A956(var_0) {
 
       self._id_9DCF = common_scripts\utility::_id_0FA0(self._id_9DCF);
 
-      if(self._id_9DCF.size >= level._id_6092)
+      if(self._id_9DCF.size >= level._id_6092) {
         self._id_9DCF[0] thread _id_9DD0();
+      }
 
       var_5 = spawn("script_model", var_1.origin);
       var_5 setModel("mp_trophy_system");
@@ -56,10 +58,11 @@ _id_A956(var_0) {
       var_5._id_94B9 = 0;
       level._id_9DCB[level._id_9DCB.size] = var_5;
 
-      if(isDefined(self._id_9DD6) && self._id_9DD6 > 0)
+      if(isDefined(self._id_9DD6) && self._id_9DD6 > 0) {
         var_5._id_0D95 = self._id_9DD6;
-      else
+      } else {
         var_5._id_0D95 = 2;
+      }
 
       var_5._id_9D65 = spawn("script_origin", var_5.origin);
       var_5 thread _id_9DD2(self);
@@ -69,15 +72,17 @@ _id_A956(var_0) {
       var_5 thread _id_9DDB(self);
       var_5 thread _id_0513::_id_1DF6();
 
-      if(level.teambased)
+      if(level.teambased) {
         var_5 _id_0479::_id_873C(var_5.team, (0, 0, 65));
-      else
+      } else {
         var_5 _id_0479::_id_86FC(var_5._id_0117, (0, 0, 65));
+      }
 
       waitframe();
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1 delete();
+      }
     }
   }
 }
@@ -87,27 +92,29 @@ _id_9DD8() {
     return;
   }
   self._id_94B9 = 1;
-  _playfxontag(common_scripts\utility::_id_44F5("mine_stunned"), self, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("mine_stunned"), self, "tag_origin");
 }
 
 _id_9DD9() {
   self._id_94B9 = 0;
-  _stopfxontag(common_scripts\utility::_id_44F5("mine_stunned"), self, "tag_origin");
+  _stopFXOnTag(common_scripts\utility::_id_44F5("mine_stunned"), self, "tag_origin");
 }
 
 _id_9DD1(var_0) {
-  if(isDefined(self._id_37D3))
+  if(isDefined(self._id_37D3)) {
     self._id_37D3 destroy();
+  }
 
   self notify("change_owner");
   self._id_0117 = var_0;
   self.team = var_0.team;
   var_0._id_9DCF[var_0._id_9DCF.size] = self;
 
-  if(level.teambased)
+  if(level.teambased) {
     _id_0479::_id_873C(self.team, (0, 0, 65));
-  else
+  } else {
     _id_0479::_id_86FC(self._id_0117, (0, 0, 65));
+  }
 
   thread _id_9DD2(var_0);
   thread _id_9DCC(var_0);
@@ -120,8 +127,8 @@ _id_9DDB(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 endon("death");
-  self._id_9D65 setcursorhint("HINT_NOICON");
-  self._id_9D65 sethintstring(&"MP_PICKUP_TROPHY");
+  self._id_9D65 setCursorHint("HINT_NOICON");
+  self._id_9D65 setHintString(&"MP_PICKUP_TROPHY");
   self._id_9D65 maps\mp\_utility::setselfusable(var_0);
   self._id_9D65 thread maps\mp\_utility::_id_6819(var_0);
 
@@ -158,14 +165,17 @@ _id_9DCC(var_0, var_1, var_2, var_3) {
   self endon("change_owner");
   self endon("trophyDisabled");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 384;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "trophy_mp";
+  }
 
   var_4 = var_1 * var_1;
 
@@ -208,8 +218,9 @@ _id_9DCC(var_0, var_1, var_2, var_3) {
           continue;
       }
 
-      if(!isDefined(var_7._id_0117))
+      if(!isDefined(var_7._id_0117)) {
         var_7._id_0117 = _getmissileowner(var_7);
+      }
 
       if(isDefined(var_7._id_0117) && level.teambased && var_7._id_0117.team == var_0.team) {
         continue;
@@ -226,8 +237,9 @@ _id_9DCC(var_0, var_1, var_2, var_3) {
         if(_bullettracepassed(var_7.origin, self.origin, 0, self)) {
           var_9 = self.origin + (0, 0, 32);
 
-          if(isDefined(self._id_5B09))
+          if(isDefined(self._id_5B09)) {
             var_9 = self._id_5B09.origin;
+          }
 
           playFX(common_scripts\utility::_id_44F5("trophy_detonation"), var_9, var_7.origin - self.origin, anglestoup(self.angles));
           thread _id_9DD4(var_0, var_7);
@@ -243,18 +255,21 @@ _id_9DCC(var_0, var_1, var_2, var_3) {
 
             playFX(common_scripts\utility::_id_44F5("trophy_detonation"), var_7.origin);
 
-            if(isDefined(level._id_15CA))
+            if(isDefined(level._id_15CA)) {
               var_7 playSound(level._id_15CA);
+            }
           }
 
           var_0 thread _id_776D(var_7, self);
           var_0 maps\mp\gametypes\_missions::processchallenge("ch_noboomforyou");
 
-          if(!var_2)
+          if(!var_2) {
             self._id_0D95--;
+          }
 
-          if(self._id_0D95 <= 0)
+          if(self._id_0D95 <= 0) {
             thread _id_9DD0();
+          }
         }
       }
     }
@@ -262,16 +277,18 @@ _id_9DCC(var_0, var_1, var_2, var_3) {
 }
 
 _id_9DD7(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
   self._id_61C0 = var_0;
   self._id_9DCE = var_1;
 }
 
 _id_9DDC(var_0) {
-  if(!isDefined(self._id_61C0))
+  if(!isDefined(self._id_61C0)) {
     return 1;
+  }
 
   var_1 = anglesToForward(self.angles + self._id_9DCE);
   var_2 = vectorNormalize(var_0.origin - self.origin);
@@ -341,7 +358,7 @@ _id_9DD2(var_0) {
   self endon("death");
   var_0 endon("death");
   self endon("change_owner");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.health = 999999;
   self.maxhealth = 100;
   self._id_006A = 0;
@@ -373,25 +390,30 @@ _id_9DD2(var_0) {
     if(!isDefined(self)) {
       return;
     }
-    if(maps\mp\_utility::_id_5755(var_5))
+    if(maps\mp\_utility::_id_5755(var_5)) {
       self._id_006A = self._id_006A + self.maxhealth;
+    }
 
-    if(isDefined(var_9) && var_9 &level._id_5039)
+    if(isDefined(var_9) && var_9 &level._id_5039) {
       self._id_A86F = 1;
+    }
 
     self._id_A86E = 1;
 
-    if(isDefined(var_10) && (var_10 == "emp_grenade_mp" || var_10 == "emp_grenade_killstreak_mp"))
+    if(isDefined(var_10) && (var_10 == "emp_grenade_mp" || var_10 == "emp_grenade_killstreak_mp")) {
       self._id_006A = self._id_006A + self.maxhealth;
+    }
 
     self._id_006A = self._id_006A + var_1;
 
-    if(isPlayer(var_2))
+    if(isPlayer(var_2)) {
       var_2 _id_04C7::_id_A102("trophy");
+    }
 
     if(self._id_006A >= self.maxhealth) {
-      if(isDefined(var_0) && var_2 != var_0)
+      if(isDefined(var_0) && var_2 != var_0) {
         var_2 notify("destroyed_explosive");
+      }
 
       thread _id_9DD0();
     }
@@ -399,21 +421,24 @@ _id_9DD2(var_0) {
 }
 
 _id_9DD0() {
-  _playfxontag(common_scripts\utility::_id_44F5("sentry_explode_mp"), self, "tag_origin");
-  _playfxontag(common_scripts\utility::_id_44F5("sentry_smoke_mp"), self, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("sentry_explode_mp"), self, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("sentry_smoke_mp"), self, "tag_origin");
   self playSound("sentry_explode");
   self notify("death");
   var_0 = self.origin;
   self._id_9D65 makeunusable();
 
-  if(isDefined(self._id_5B09))
+  if(isDefined(self._id_5B09)) {
     self._id_5B09 delete();
+  }
 
   wait 3;
 
-  if(isDefined(self._id_9D65))
+  if(isDefined(self._id_9D65)) {
     self._id_9D65 delete();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }

@@ -98,8 +98,9 @@ init_zones() {
   level.zmb_registered_quest_zones = [];
 
   foreach(var_2, var_1 in level._id_AC80._id_ACB3) {
-    if(issubstr(var_2, "airship"))
+    if(issubstr(var_2, "airship")) {
       level.zmb_registered_quest_zones = common_scripts\utility::_id_0F6F(level.zmb_registered_quest_zones, var_2);
+    }
   }
 
   level.zmb_registered_quest_zones = common_scripts\utility::_id_0F6F(level.zmb_registered_quest_zones, "zone_finale");
@@ -135,8 +136,9 @@ init_drop_pod_doors() {
 
   foreach(var_2 in var_0) {
     foreach(var_4 in var_2.setclientdvars) {
-      if(var_4 _meth_85CE() == "animated_zbr_drop_pod")
+      if(var_4 _meth_85CE() == "animated_zbr_drop_pod") {
         var_4 setscriptablepartstate("light", "red", 0);
+      }
     }
   }
 }
@@ -151,8 +153,9 @@ init_quests() {
 
 all_flags_exist(var_0) {
   foreach(var_2 in var_0) {
-    if(!common_scripts\utility::_id_3C83(var_2))
+    if(!common_scripts\utility::_id_3C83(var_2)) {
       return 0;
+    }
   }
 
   return 1;
@@ -162,17 +165,20 @@ init_berlin_quest_notebook() {
   var_0 = "flag_hc_projector_notebook";
   var_1 = ["flag_quest_wunderbuss_battery_collected", "flag_quest_wunderbuss_geistbolt_collected", maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), "pap_ww_blasted_2", "flag_hc_quest_bat_step01_contact_survivor_complete", "flag_hc_quest_bat_step02_give_weapon_complete", "flag_hc_quest_bat_step02_give_jolts_complete", maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), _id_0557::_id_7838("quest_contact_hq", "step_use_radio"), "quest_contact_soviets", _id_0557::_id_7838("quest_draw_airship", "step_ignite_flare"), _id_0557::_id_7838("quest_bring_down_airship", "step_reel_anchors"), "apartment_dagger_painting_found", var_0, maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), "flag_hc_quest_finale_door_open", "statue_puzzle_success", maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), "flag_hc_quest_axe_step02_obtained_scale_cup", "flag_hc_quest_axe_step03_placed_sizzler_armored_head", maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), "quest_bring_down_airship", "quest_defeat_straub", "berlin_cinematic_done"];
 
-  foreach(var_3 in [maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), var_0])
-  common_scripts\utility::flag_init(var_3);
+  foreach(var_3 in [maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), var_0]) {
+    common_scripts\utility::flag_init(var_3);
+  }
 
-  for(var_5 = 0; !all_flags_exist(var_1); var_5++)
+  for(var_5 = 0; !all_flags_exist(var_1); var_5++) {
     waitframe();
+  }
 
   var_6 = ["flag_hc_quest_dagger_step01_painting_complete", "flag_hc_quest_dagger_step01_projector_on_complete"];
   _id_0547::_id_3C8A(var_6, var_0);
 
-  foreach(var_3 in var_1)
-  _id_0557::_id_AB8C(var_3);
+  foreach(var_3 in var_1) {
+    _id_0557::_id_AB8C(var_3);
+  }
 }
 
 init_berlin_traps() {
@@ -206,8 +212,9 @@ init_sizzler_arrival() {
   common_scripts\utility::flag_init("flag_sizzlers_active");
   common_scripts\utility::_id_3C9F("flag_sizzlers_active");
 
-  if(isDefined(level.straub_airship))
+  if(isDefined(level.straub_airship)) {
     level.straub_airship.canmakesizzlers = 1;
+  }
 
   make_fodders_sizzler_airship();
 }
@@ -215,12 +222,14 @@ init_sizzler_arrival() {
 make_fodders_sizzler_airship() {
   level endon("entered_airship_sizzler_pause");
 
-  while(!isDefined(level.maxactivesizzlers))
+  while(!isDefined(level.maxactivesizzlers)) {
     waitframe();
+  }
 
   while(common_scripts\utility::_id_3C77("flag_sizzlers_active")) {
-    if(common_scripts\utility::_id_562E(level.straub_airship.canmakesizzlers))
+    if(common_scripts\utility::_id_562E(level.straub_airship.canmakesizzlers)) {
       maps\mp\mp_zombie_berlin_utils::airship_turret_update_valid_targets();
+    }
 
     wait 5;
   }
@@ -232,8 +241,9 @@ sizzler_max_count_manager() {
   level.next_sizzler_inc_round = level._id_A980 + _randomintrange(3, 5);
 
   for(;;) {
-    while(level._id_A980 < level.next_sizzler_inc_round)
+    while(level._id_A980 < level.next_sizzler_inc_round) {
       level waittill("zombie_wave_started");
+    }
 
     if(level.maxactivesizzlers < 6) {
       level.maxactivesizzlers++;
@@ -264,14 +274,14 @@ mute_audio_on_intro() {
 }
 
 init_casual_melee_pickups() {
-  var_0 = _getent("casual_knife_pickup_trig", "targetname");
-  var_1 = _getent("casual_bat_pickup_trig", "targetname");
-  var_2 = _getent("casual_axe_pickup_trig", "targetname");
-  var_3 = _getent("shovel_pickup_trig", "targetname");
-  var_0 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_KNIFE");
-  var_1 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_BAT");
-  var_2 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_AXE");
-  var_3 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_SHOVEL");
+  var_0 = _getEnt("casual_knife_pickup_trig", "targetname");
+  var_1 = _getEnt("casual_bat_pickup_trig", "targetname");
+  var_2 = _getEnt("casual_axe_pickup_trig", "targetname");
+  var_3 = _getEnt("shovel_pickup_trig", "targetname");
+  var_0 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_KNIFE");
+  var_1 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_BAT");
+  var_2 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_AXE");
+  var_3 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_SHOVEL");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_1, "bat_casual");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_0, "dagger_casual");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_2, "pickaxe_casual");
@@ -279,8 +289,9 @@ init_casual_melee_pickups() {
 }
 
 performance_stuff() {
-  if(level._id_0149 && getDvar("3957") == "true")
+  if(level._id_0149 && getDvar("3957") == "true") {
     var_0 = 1;
+  }
 }
 
 church_door_listener() {
@@ -288,8 +299,9 @@ church_door_listener() {
   common_scripts\utility::_id_3C9F("garden_to_church");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "garden_to_church" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "garden_to_church" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
       var_1 notify("open", undefined);
+    }
   }
 }
 
@@ -298,8 +310,9 @@ cabaret_door_listener() {
   common_scripts\utility::_id_3C9F("club_to_garden");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "club_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "club_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
       var_1 notify("open", undefined);
+    }
   }
 }
 
@@ -308,19 +321,21 @@ museum_door_listener() {
   common_scripts\utility::_id_3C9F("museum_to_garden");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "museum_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "museum_to_garden" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
       var_1 notify("open", undefined);
+    }
   }
 }
 
 tether_fakery() {
   level waittill("airship_anchor_courtyard_impact");
-  level.tether_fakery_vol = _getent("tether_fakery_vol", "targetname");
+  level.tether_fakery_vol = _getEnt("tether_fakery_vol", "targetname");
   var_0 = 225;
 
   for(;;) {
-    foreach(var_2 in level.players)
-    var_2 tether_fakery_update(var_0);
+    foreach(var_2 in level.players) {
+      var_2 tether_fakery_update(var_0);
+    }
 
     wait 0.25;
   }
@@ -329,8 +344,9 @@ tether_fakery() {
 tether_fakery_update(var_0) {
   level endon("flag_hc_quest_finale_door_open");
 
-  if(!isDefined(self.fake_tether_visible))
+  if(!isDefined(self.fake_tether_visible)) {
     self.fake_tether_visible = 0;
+  }
 
   if(self istouching(level.tether_fakery_vol) && !self.fake_tether_visible && !common_scripts\utility::_id_3C77("flag_hc_quest_finale_door_open")) {
     self.fake_tether_visible = 1;
@@ -344,8 +360,8 @@ tether_fakery_update(var_0) {
 }
 
 airship_wunderbuss_picker() {
-  var_0 = _getent("airship_wunderbuss_pickup_trig", "targetname");
-  var_0 sethintstring(&"ZOMBIE_BERLIN_WEAPON_PICKUP");
+  var_0 = _getEnt("airship_wunderbuss_pickup_trig", "targetname");
+  var_0 setHintString(&"ZOMBIE_BERLIN_WEAPON_PICKUP");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -353,8 +369,9 @@ airship_wunderbuss_picker() {
     var_3 = var_1 getweaponlistprimaries();
 
     foreach(var_5 in var_3) {
-      if(var_5 == "wunderbuss_zm")
+      if(var_5 == "wunderbuss_zm") {
         var_2 = 1;
+      }
     }
 
     if(!var_2) {

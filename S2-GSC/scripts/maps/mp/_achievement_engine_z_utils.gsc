@@ -10,8 +10,9 @@ _achievment_engine_z_report_event(var_0, var_1, var_2, var_3) {
   var_4 = self;
 
   if(var_1.size > 0) {
-    if(!maps\mp\_events_z::get_testing_contracts_offline())
+    if(!maps\mp\_events_z::get_testing_contracts_offline()) {
       var_4 _meth_8697(var_0, var_1);
+    }
   }
 }
 
@@ -29,13 +30,15 @@ ae_zm_sendkillevent(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = add_player_kill_special(var_8, var_5);
   var_8 = add_key_and_value(var_8, 8, int(level._id_A980));
 
-  if(is_community_kill(var_7, var_0))
+  if(is_community_kill(var_7, var_0)) {
     var_9 = level.players;
-  else
+  } else {
     var_9 = [var_6];
+  }
 
-  foreach(var_11 in var_9)
-  var_11 _achievment_engine_z_report_event(34, var_8, "Single Zombie Kill", var_5);
+  foreach(var_11 in var_9) {
+    var_11 _achievment_engine_z_report_event(34, var_8, "Single Zombie Kill", var_5);
+  }
 }
 
 ae_zm_sendmultikillevent(var_0) {
@@ -44,22 +47,26 @@ ae_zm_sendmultikillevent(var_0) {
   var_3 = get_singular_mkill_data(var_0, "means_of_death");
   var_4 = get_singular_mkill_data(var_0, "weapon");
 
-  if(_id_0547::_id_5565(var_4, "island_grenade_hc_zm"))
+  if(_id_0547::_id_5565(var_4, "island_grenade_hc_zm")) {
     var_3 = "MOD_EXPLOSIVE";
+  }
 
   if(!isDefined(var_3)) {
     return;
   }
-  if(issubstr(var_3, "MOD_GRENADE") || issubstr(var_3, "MOD_GRENADE_SPLASH") || issubstr(var_3, "MOD_EXPLOSIVE") || issubstr(var_3, "MOD_PROJECTILE"))
+  if(issubstr(var_3, "MOD_GRENADE") || issubstr(var_3, "MOD_GRENADE_SPLASH") || issubstr(var_3, "MOD_EXPLOSIVE") || issubstr(var_3, "MOD_PROJECTILE")) {
     var_2 = add_key_and_value(var_2, 3, 3);
-
-  if(isDefined(var_4)) {
-    if(var_4 == "drag_explosive_zombie_zm" || var_4 == "drag_explosive_zm")
-      var_2 = add_key_and_value(var_2, 2, 1);
   }
 
-  if(var_0.size >= 10)
+  if(isDefined(var_4)) {
+    if(var_4 == "drag_explosive_zombie_zm" || var_4 == "drag_explosive_zm") {
+      var_2 = add_key_and_value(var_2, 2, 1);
+    }
+  }
+
+  if(var_0.size >= 10) {
     var_2 = add_key_and_value(var_2, 5, 1);
+  }
 
   var_1 _achievment_engine_z_report_event(35, var_2, "Multi Zombie Kill");
 }
@@ -91,8 +98,9 @@ ae_sendwavesurvivalevent_zm(var_0, var_1, var_2, var_3) {
   if(var_1 != "survival_wave_single") {
     var_7 = get_challenge_bitval(var_1);
 
-    if(var_1 == "survival_area")
+    if(var_1 == "survival_area") {
       var_6 = survival_get_zone_bitval(var_3);
+    }
 
     var_4 = add_key_and_value(var_4, 1, int(var_2));
     var_4 = add_key_and_value(var_4, 2, var_7);
@@ -133,8 +141,9 @@ ae_sendzombiesspecial_zm(var_0, var_1, var_2, var_3) {
       var_4 = add_key_and_value(var_4, 1, 2);
       var_9 = get_player_current_ability(var_0);
 
-      if(isDefined(var_9) && var_9 == 2)
+      if(isDefined(var_9) && var_9 == 2) {
         var_4 = add_key_and_value(var_4, 2, 1);
+      }
 
       if(isDefined(var_8)) {
         var_7 = common_scripts\utility::_id_0F6F(var_7, var_8);
@@ -152,8 +161,9 @@ ae_sendzombiesspecial_zm(var_0, var_1, var_2, var_3) {
 
       break;
     case "player_zombie_aquire_jolts":
-      if(!isDefined(var_0.nextjoltsgoal))
+      if(!isDefined(var_0.nextjoltsgoal)) {
         var_0.nextjoltsgoal = 5000;
+      }
 
       if(var_0.nextjoltsgoal < 10000000) {
         if(var_2 >= var_0.nextjoltsgoal) {
@@ -177,10 +187,11 @@ ae_sendzombiesspecial_zm(var_0, var_1, var_2, var_3) {
       var_4 = add_key_and_value(var_4, 1, 8);
       break;
     case "mp_zombie_nest_01_final_boss":
-      if(common_scripts\utility::_id_562E(var_2))
+      if(common_scripts\utility::_id_562E(var_2)) {
         var_4 = add_key_and_value(var_4, 1, 13);
-      else
+      } else {
         var_4 = add_key_and_value(var_4, 1, 9);
+      }
 
       break;
     case "mp_zombie_island_final_boss":
@@ -196,13 +207,15 @@ ae_sendzombiesspecial_zm(var_0, var_1, var_2, var_3) {
       var_4 = add_key_and_value(var_4, 1, 12);
       break;
     case "any_boss_completed":
-      if(should_report_boss_defeats_for_currency())
+      if(should_report_boss_defeats_for_currency()) {
         var_4 = add_key_and_value(var_4, 1, 23);
+      }
 
       break;
     case "any_boss_completed_small":
-      if(should_report_boss_defeats_for_currency())
+      if(should_report_boss_defeats_for_currency()) {
         var_4 = add_key_and_value(var_4, 1, 24);
+      }
 
       break;
     case "player_zombie_upgrade_weapon":
@@ -223,8 +236,9 @@ should_report_boss_defeats_for_currency() {
 get_unique_players_revived_val(var_0) {
   var_1 = undefined;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   switch (var_0) {
     case 3:
@@ -239,15 +253,17 @@ ae_sendmapwon_zm(var_0, var_1, var_2, var_3) {
   var_4 = [];
   var_4 = add_current_map(var_4);
 
-  if(_id_0547::zombie_shattered_get_map_number() > 0)
+  if(_id_0547::zombie_shattered_get_map_number() > 0) {
     var_4 = add_key_and_value(var_4, 1, var_0 getplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "isMapInSequence"));
+  }
 
   var_0 _achievment_engine_z_report_event(41, var_4, "Won Map Event");
 }
 
 survival_get_zone_bitval(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return get_zone_bitval(var_0[0]);
+  }
 }
 
 add_current_map(var_0, var_1) {
@@ -299,10 +315,11 @@ add_current_map(var_0, var_1) {
       break;
   }
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     return var_3;
-  else
+  } else {
     return var_0;
+  }
 }
 
 get_zombie_type_val(var_0) {
@@ -352,8 +369,9 @@ get_zombie_type_val(var_0) {
 add_weapon_type(var_0, var_1, var_2) {
   var_3 = _id_0547::zm_get_weapon_class(var_1);
 
-  if(var_1 == "raven_gun_zm" || var_1 == "raven_gun_pap_zm")
+  if(var_1 == "raven_gun_zm" || var_1 == "raven_gun_pap_zm") {
     var_3 = "weapon_pistol";
+  }
 
   switch (var_3) {
     case "weapon_assault":
@@ -475,8 +493,9 @@ get_player_kill_special(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [];
   var_6 = [];
 
-  if(isDefined(var_0) && var_0.size > 0)
+  if(isDefined(var_0) && var_0.size > 0) {
     var_5 = var_0;
+  }
 
   foreach(var_8 in level.register_unique_kill_funcs) {
     var_9 = [[var_8._id_3F02]](var_1, var_2, var_3, var_4);
@@ -486,8 +505,9 @@ get_player_kill_special(var_0, var_1, var_2, var_3, var_4) {
       continue;
     }
 
-    if(!isDefined(var_8.value) && isDefined(var_9))
+    if(!isDefined(var_8.value) && isDefined(var_9)) {
       var_5 = common_scripts\utility::_id_0F6F(var_5, var_9);
+    }
   }
 
   return var_5;
@@ -500,14 +520,16 @@ add_player_kill_special(var_0, var_1) {
 }
 
 get_bitwise_value(var_0) {
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     return undefined;
+  }
 
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_1 = var_1 | 1 << var_3;
+    }
   }
 
   return var_1;
@@ -682,14 +704,17 @@ get_item_value(var_0) {
 }
 
 is_community_kill(var_0, var_1) {
-  if(_id_0547::_id_5565(var_0, 10))
+  if(_id_0547::_id_5565(var_0, 10)) {
     return 1;
+  }
 
-  if(_id_0547::_id_5565(var_0, 5))
+  if(_id_0547::_id_5565(var_0, 5)) {
     return 1;
+  }
 
-  if(common_scripts\utility::_id_562E(var_1._id_5A3D))
+  if(common_scripts\utility::_id_562E(var_1._id_5A3D)) {
     return 1;
+  }
 
   return 0;
 }
@@ -709,17 +734,21 @@ add_key_and_value(var_0, var_1, var_2) {
 }
 
 is_damage_electrical(var_0, var_1, var_2, var_3) {
-  if(common_scripts\utility::_id_562E(var_1.iselectrified))
+  if(common_scripts\utility::_id_562E(var_1.iselectrified)) {
     return 1;
+  }
 
-  if(issubstr(var_2, "teslagun"))
+  if(issubstr(var_2, "teslagun")) {
     return 1;
+  }
 
-  if(var_2 == "turretweapon_zeppelin_gun_zm")
+  if(var_2 == "turretweapon_zeppelin_gun_zm") {
     return 1;
+  }
 
-  if(common_scripts\utility::_id_562E(var_1._id_0103) && (var_2 == "razergun_zm" || var_2 == "razergun_pap_zm"))
+  if(common_scripts\utility::_id_562E(var_1._id_0103) && (var_2 == "razergun_zm" || var_2 == "razergun_pap_zm")) {
     return 1;
+  }
 
   return 0;
 }
@@ -728,8 +757,9 @@ get_singular_mkill_data(var_0, var_1) {
   var_2 = var_0[0][var_1];
 
   foreach(var_4 in var_0) {
-    if(!issubstr(var_4[var_1], var_2))
+    if(!issubstr(var_4[var_1], var_2)) {
       return undefined;
+    }
   }
 
   return var_2;

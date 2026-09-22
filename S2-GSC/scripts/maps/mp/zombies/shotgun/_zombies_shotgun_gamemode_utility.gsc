@@ -6,8 +6,9 @@
 _________general_shotgun_objective_utils_________() {}
 
 sg_obj_register(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!_isarray(var_2))
+  if(!_isarray(var_2)) {
     var_2 = [var_2];
+  }
 
   var_10 = 1;
   var_11 = 0;
@@ -21,21 +22,26 @@ sg_obj_register(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   level.zmb_sg_objectives[var_0].type = var_1;
   level.zmb_sg_objectives[var_0].valid_waves = [];
 
-  foreach(var_14 in var_2)
-  level.zmb_sg_objectives[var_0].valid_waves = common_scripts\utility::_id_0F6F(level.zmb_sg_objectives[var_0].valid_waves, var_14);
+  foreach(var_14 in var_2) {
+    level.zmb_sg_objectives[var_0].valid_waves = common_scripts\utility::_id_0F6F(level.zmb_sg_objectives[var_0].valid_waves, var_14);
+  }
 
   if(isDefined(level.zmb_sg_obj_basic_funcs[var_1])) {
-    if(!isDefined(var_4) && isDefined(level.zmb_sg_obj_basic_funcs[var_1].default_callback))
+    if(!isDefined(var_4) && isDefined(level.zmb_sg_obj_basic_funcs[var_1].default_callback)) {
       var_4 = level.zmb_sg_obj_basic_funcs[var_1].default_callback;
+    }
 
-    if(!isDefined(var_3) && isDefined(level.zmb_sg_obj_basic_funcs[var_1].default_timer))
+    if(!isDefined(var_3) && isDefined(level.zmb_sg_obj_basic_funcs[var_1].default_timer)) {
       var_3 = level.zmb_sg_obj_basic_funcs[var_1].default_timer;
+    }
 
-    if(isDefined(level.zmb_sg_obj_basic_funcs[var_1].timeout_win))
+    if(isDefined(level.zmb_sg_obj_basic_funcs[var_1].timeout_win)) {
       var_12 = level.zmb_sg_obj_basic_funcs[var_1].timeout_win;
+    }
 
-    if(!isDefined(var_8) && isDefined(level.zmb_sg_obj_basic_funcs[var_1].is_endless_wave))
+    if(!isDefined(var_8) && isDefined(level.zmb_sg_obj_basic_funcs[var_1].is_endless_wave)) {
       var_8 = level.zmb_sg_obj_basic_funcs[var_1].is_endless_wave;
+    }
   }
 
   level.zmb_sg_objectives[var_0]._id_9A07 = var_3;
@@ -89,12 +95,14 @@ sg_obj_register_defaults(var_0, var_1, var_2, var_3, var_4) {
 
 sg_obj_add_required_flags(var_0, var_1) {
   if(isDefined(var_1)) {
-    if(!_isarray(var_1))
+    if(!_isarray(var_1)) {
       var_1 = [var_1];
+    }
 
     foreach(var_3 in var_1) {
-      if(!common_scripts\utility::_id_3C83(var_3))
+      if(!common_scripts\utility::_id_3C83(var_3)) {
         common_scripts\utility::flag_init(var_3);
+      }
 
       level.zmb_sg_objectives[var_0].required_flags = common_scripts\utility::_id_0F6F(level.zmb_sg_objectives[var_0].required_flags, var_3);
     }
@@ -104,13 +112,15 @@ sg_obj_add_required_flags(var_0, var_1) {
 }
 
 sg_obj_set_timeout_win(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.zmb_sg_objectives[var_0].timeout_win = var_1;
+  }
 }
 
 sg_obj_set_endless_no_heavies(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.zmb_sg_objectives[var_0].endless_no_heavies = var_1;
+  }
 }
 
 sg_obj_select() {
@@ -134,14 +144,15 @@ sg_obj_select() {
   }
 
   if(var_0.size > 0) {
-    if(var_0.size == 1)
+    if(var_0.size == 1) {
       var_1 = var_0[0];
-    else {
+    } else {
       var_1 = common_scripts\utility::random(var_0);
 
       foreach(var_3 in var_0) {
-        if(var_3.priority > var_1.priority)
+        if(var_3.priority > var_1.priority) {
           var_1 = var_3;
+        }
       }
     }
 
@@ -153,8 +164,9 @@ sg_obj_select() {
 
 sg_obj_check_valid_for_this_round(var_0) {
   foreach(var_2 in var_0.valid_waves) {
-    if(level._id_A980 == var_2)
+    if(level._id_A980 == var_2) {
       return 1;
+    }
   }
 
   return 0;
@@ -163,8 +175,9 @@ sg_obj_check_valid_for_this_round(var_0) {
 sg_obj_check_flags(var_0) {
   if(isDefined(var_0.required_flags)) {
     foreach(var_2 in var_0.required_flags) {
-      if(!common_scripts\utility::_id_3C77(var_2))
+      if(!common_scripts\utility::_id_3C77(var_2)) {
         return 0;
+      }
     }
   }
 
@@ -173,8 +186,9 @@ sg_obj_check_flags(var_0) {
 
 sg_obj_check_occurence_count(var_0) {
   if(isDefined(var_0.max_occurences)) {
-    if(isDefined(var_0.times_selected) && var_0.times_selected >= var_0.max_occurences)
+    if(isDefined(var_0.times_selected) && var_0.times_selected >= var_0.max_occurences) {
       return 0;
+    }
   }
 
   return 1;
@@ -201,10 +215,11 @@ basic_boss_run(var_0) {
   var_2 maps\mp\zombies\sg_events_v1\_boss_util::set_zombie_boss_has_weapon_loot();
   var_3 = basic_boss_waitfor_defeated();
 
-  if(!isDefined(var_3) || !var_3)
+  if(!isDefined(var_3) || !var_3) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 basic_boss_waitfor_defeated() {
@@ -217,8 +232,9 @@ basic_boss_waitfor_defeated() {
     var_0 = 1;
 
     foreach(var_3 in var_1) {
-      if(common_scripts\utility::_id_562E(var_3.sgboss) && !common_scripts\utility::_id_562E(var_3.longdeath))
+      if(common_scripts\utility::_id_562E(var_3.sgboss) && !common_scripts\utility::_id_562E(var_3.longdeath)) {
         var_0 = 0;
+      }
     }
 
     if(var_0) {
@@ -250,17 +266,19 @@ basic_escort_skip_cleanup(var_0) {
 basic_collect_init() {
   level.sg_obj_collection_parts = getEntArray("collect_objective_part_object", "targetname");
 
-  foreach(var_1 in level.sg_obj_collection_parts)
-  var_1 hide();
+  foreach(var_1 in level.sg_obj_collection_parts) {
+    var_1 hide();
+  }
 
   sg_obj_register_defaults("collect", ::basic_collect_run, 180, 0, 1);
 }
 
 basic_collect_run(var_0) {
-  foreach(var_2 in level.players)
-  var_2.sg_obj_collect_holding_parts = 0;
+  foreach(var_2 in level.players) {
+    var_2.sg_obj_collect_holding_parts = 0;
+  }
 
-  var_4 = _getent("collect_objective_destination_object", "targetname");
+  var_4 = _getEnt("collect_objective_destination_object", "targetname");
   var_5 = ["zom_infantrya_bodywhole"];
   level.sg_obj_collection_parts = getEntArray("collect_objective_part_object", "targetname");
   var_6 = 600 / level.players.size;
@@ -271,11 +289,13 @@ basic_collect_run(var_0) {
   level.parts_destroyed = 0;
   level.sg_obj_collection_parts = common_scripts\utility::array_randomize(level.sg_obj_collection_parts);
 
-  for(var_8 = 0; var_8 < level.sg_obj_collection_parts.size; var_8++)
+  for(var_8 = 0; var_8 < level.sg_obj_collection_parts.size; var_8++) {
     level.sg_obj_collection_parts[var_8] thread basic_collect_part_think(var_8, var_5, var_4, var_6, var_7);
+  }
 
-  foreach(var_2 in level.players)
-  var_2 childthread basic_collect_additional_ui();
+  foreach(var_2 in level.players) {
+    var_2 childthread basic_collect_additional_ui();
+  }
 
   while(level.parts_collected < level.parts_required) {
     var_11 = basic_collect_waitfor_collection_timeout_or_destroyed();
@@ -299,10 +319,11 @@ basic_collect_run(var_0) {
 
   basic_collect_cleanup();
 
-  if(level.parts_collected >= level.parts_required)
+  if(level.parts_collected >= level.parts_required) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 basic_collect_part_think(var_0, var_1, var_2, var_3, var_4) {
@@ -325,8 +346,9 @@ basic_collect_part_think(var_0, var_1, var_2, var_3, var_4) {
   self.maxattackingzombies = 0;
 
   if(self.maxattackingzombies > 0) {
-    foreach(var_8 in self._id_1171)
-    var_8 linktosynchronizedparent(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    foreach(var_8 in self._id_1171) {
+      var_8 linktosynchronizedparent(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    }
   }
 
   common_scripts\utility::_id_3799("obj_destroyed");
@@ -344,16 +366,18 @@ basic_collect_part_think(var_0, var_1, var_2, var_3, var_4) {
 
   _id_0547::_id_AC41(&"ZOMBIE_DLC3_OBJECT_PICKUP");
 
-  foreach(var_13 in level.players)
-  thread basic_collect_part_stencil_think(var_13);
+  foreach(var_13 in level.players) {
+    thread basic_collect_part_stencil_think(var_13);
+  }
 
-  for(var_15 = _getent(var_2.target, "targetname"); !common_scripts\utility::_id_3794("obj_collected"); var_13.sg_obj_collect_holding_parts = 0) {
+  for(var_15 = _getEnt(var_2.target, "targetname"); !common_scripts\utility::_id_3794("obj_collected"); var_13.sg_obj_collect_holding_parts = 0) {
     self waittill("player_used", var_13);
     var_13.sg_obj_collect_holding_parts++;
     level notify("update_collect_obj_ui");
 
-    if(var_13.sg_obj_collect_holding_parts == 1)
+    if(var_13.sg_obj_collect_holding_parts == 1) {
       var_15 hudoutlineenableforclient(var_13, 2, 0);
+    }
 
     basic_collect_attach_part_to_player_think(self, var_13, var_2);
     var_15 hudoutlinedisableforclient(var_13);
@@ -379,9 +403,9 @@ basic_collect_attach_part_to_player_think(var_0, var_1, var_2) {
 
   var_3 = var_0 basic_collect_waitfor_part_dropped_or_returned(var_2, var_1);
 
-  if(isDefined(var_3) && var_3 == "returned")
+  if(isDefined(var_3) && var_3 == "returned") {
     var_0 common_scripts\utility::_id_379A("obj_collected");
-  else {
+  } else {
     var_0 unlink();
     waitframe();
     var_0.origin = var_1.origin + (_randomintrange(-30, 30), _randomintrange(-30, 30), 0);
@@ -391,8 +415,9 @@ basic_collect_attach_part_to_player_think(var_0, var_1, var_2) {
     var_0 show();
     var_0 _id_0547::_id_AC41(&"ZOMBIE_DLC3_OBJECT_PICKUP");
 
-    if(var_0.maxattackingzombies > 0)
+    if(var_0.maxattackingzombies > 0) {
       var_0.maxzombies = var_0.maxattackingzombies;
+    }
 
     var_1.sg_obj_collect_holding_parts = 0;
     level notify("update_collect_obj_ui");
@@ -410,8 +435,9 @@ basic_collect_give_part_weapon() {
   self allowjump(0);
   self waittill("weapon_change");
 
-  while(self isswitchingweapon())
+  while(self isswitchingweapon()) {
     waitframe();
+  }
 
   self enableweaponswitch();
 }
@@ -441,8 +467,9 @@ basic_collect_part_switched_think(var_0) {
   self endon("sg_obj_collect_part_dropped");
   var_0 endon("player_picking_up_new_part");
 
-  while(!var_0 isswitchingweapon() && !var_0 _meth_84F1())
+  while(!var_0 isswitchingweapon() && !var_0 _meth_84F1()) {
     waitframe();
+  }
 
   self notify("sg_obj_collect_part_dropped");
 }
@@ -473,14 +500,16 @@ basic_collect_part_stencil_think(var_0) {
       self hudoutlinedisableforclient(var_0);
       var_2 = -1;
 
-      while(distance(self.origin, var_0.origin) > var_3)
+      while(distance(self.origin, var_0.origin) > var_3) {
         waitframe();
+      }
     } else {
       if(self.maxattackingzombies > 0) {
-        if(self.health < self.maxhealth * 0.3)
+        if(self.health < self.maxhealth * 0.3) {
           var_1 = 1;
-        else if(self.health < self.maxhealth * 0.65)
+        } else if(self.health < self.maxhealth * 0.65) {
           var_1 = 0;
+        }
       } else
         var_1 = 2;
 
@@ -541,18 +570,21 @@ basic_collect_additional_ui_think(var_0, var_1) {
 }
 
 basic_collect_additional_ui_cleanup(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\mp\gametypes\_hud_util::destroyelem();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 maps\mp\gametypes\_hud_util::destroyelem();
+  }
 }
 
 basic_collect_cleanup() {
   level notify("sg_obj_collect_cleanup");
 
-  foreach(var_1 in level.sg_obj_collection_parts)
-  var_1 basic_collect_part_cleanup();
+  foreach(var_1 in level.sg_obj_collection_parts) {
+    var_1 basic_collect_part_cleanup();
+  }
 }
 
 basic_collect_part_cleanup() {
@@ -561,12 +593,14 @@ basic_collect_part_cleanup() {
     var_0 = getEntArray(self.target, "targetname");
 
     if(isDefined(var_0) && var_0.size > 0) {
-      foreach(var_2 in var_0)
-      var_2 delete();
+      foreach(var_2 in var_0) {
+        var_2 delete();
+      }
     }
 
-    if(isDefined(self._id_9D65))
+    if(isDefined(self._id_9D65)) {
       self._id_9D65 delete();
+    }
 
     self delete();
   }
@@ -622,8 +656,9 @@ assign_health_bar(var_0) {
 }
 
 draw_waypoint_on_struct(var_0, var_1) {
-  if(!isDefined(level.zmb_event_waypoints))
+  if(!isDefined(level.zmb_event_waypoints)) {
     level.zmb_event_waypoints = [];
+  }
 
   if(!isDefined(var_0._id_95AB)) {
     var_0._id_95AB = var_0 common_scripts\utility::_id_8FFC();
@@ -651,17 +686,20 @@ clear_all_waypoints() {
     if(!isDefined(var_1)) {
       continue;
     }
-    if(isDefined(var_1._id_95AB))
+    if(isDefined(var_1._id_95AB)) {
       var_1._id_95AB delete();
+    }
 
-    foreach(var_3 in var_1.waypoints)
-    clear_waypoint_safe(var_3);
+    foreach(var_3 in var_1.waypoints) {
+      clear_waypoint_safe(var_3);
+    }
   }
 }
 
 clear_waypoint_safe(var_0) {
-  if(isDefined(var_0) && !_isremovedentity(var_0))
+  if(isDefined(var_0) && !_isremovedentity(var_0)) {
     var_0 destroy();
+  }
 }
 
 get_modified_boss_health(var_0) {
@@ -678,16 +716,18 @@ single_ent_health_display_update(var_0) {
   level endon(var_0._id_3013 + "_new_single_ent_health_display_update");
   thread hide_waypoint_on_death(var_0);
 
-  if(!isDefined(level.zmb_waypoint_ents))
+  if(!isDefined(level.zmb_waypoint_ents)) {
     level.zmb_waypoint_ents = [];
+  }
 
   level.zmb_waypoint_ents[level.zmb_waypoint_ents.size] = var_0;
 
   for(;;) {
-    if(isDefined(self.capture_health))
+    if(isDefined(self.capture_health)) {
       var_1 = self.capture_health;
-    else
+    } else {
       var_1 = self.health;
+    }
 
     _setomnvar(var_0._id_3013, var_1 / self.maxhealth);
     _id_0547::_id_A6F6();
@@ -695,8 +735,9 @@ single_ent_health_display_update(var_0) {
     if(var_1 <= 0) {
       level notify("sg_defense_failed");
 
-      if(!_isagent(self) && !isDefined(self.capture_health))
+      if(!_isagent(self) && !isDefined(self.capture_health)) {
         self delete();
+      }
     }
   }
 }
@@ -713,11 +754,13 @@ set_waypoints_to_enemy(var_0) {
 spawn_player_reward(var_0, var_1, var_2, var_3) {
   var_4 = _id_0547::_id_5868(var_1);
 
-  if(!common_scripts\utility::_id_0F79(get_berlin_melee_weapons(), var_1))
+  if(!common_scripts\utility::_id_0F79(get_berlin_melee_weapons(), var_1)) {
     var_1 = _id_0548::_id_454B(var_0, var_1);
+  }
 
-  if(var_4)
+  if(var_4) {
     var_1 = var_0 _id_0586::_id_078B(_id_0547::_id_AAF9(var_1));
+  }
 
   var_5 = spawn_a_floating_weapon_award(var_1, var_2, var_0);
   var_6 = var_5.fx;
@@ -733,9 +776,9 @@ spawn_player_reward(var_0, var_1, var_2, var_3) {
   var_3._id_9DA0 = 0;
   var_3.issighted = undefined;
 
-  if(!isDefined(var_3._id_A9E0))
+  if(!isDefined(var_3._id_A9E0)) {
     var_3 initialize_weapon_pickup_trigger(var_0, var_9, 1);
-  else {
+  } else {
     var_3._id_A9E0 = _id_0547::_id_AAF9(var_9, 1);
     var_3._id_A7D7 = 1;
     var_3._id_6C5C = var_3._id_A9E0;
@@ -772,10 +815,11 @@ set_shown_only_to_player(var_0) {
 }
 
 prespawn_a_floating_award(var_0, var_1, var_2) {
-  if(isDefined(var_2) && issubstr(var_0, "_pap_"))
+  if(isDefined(var_2) && issubstr(var_0, "_pap_")) {
     var_3 = var_2 _id_0586::_id_078B(_id_0547::_id_AAF9(var_0));
-  else
+  } else {
     var_3 = var_0;
+  }
 
   var_4 = spawn("weapon_" + var_3, _func_2E1(var_1) + (0, 0, 8));
   var_4.angles = (var_4.angles[0] - 30, randomint(360), var_4.angles[2]);
@@ -787,14 +831,15 @@ prespawn_a_floating_award(var_0, var_1, var_2) {
   var_4.origin = var_5.origin;
   var_4 linktosynchronizedparent(var_5, "tag_origin");
   var_4.linkent = var_5;
-  var_5 rotateyaw(36000, 850);
+  var_5 rotateYaw(36000, 850);
   var_6 = spawnStruct();
   var_6.origin = var_4.origin;
 
-  if(issubstr(var_0, "_pap_"))
+  if(issubstr(var_0, "_pap_")) {
     var_7 = _id_0547::_id_8FBA(var_6, "zmb_ber_gun_cone_glow_pap");
-  else
+  } else {
     var_7 = _id_0547::_id_8FBA(var_6, "zmb_ber_gun_cone_glow");
+  }
 
   var_7.origin = var_6.origin;
   var_4.fx = var_7;
@@ -814,16 +859,18 @@ spawn_a_floating_weapon_award(var_0, var_1, var_2) {
   var_5 = gettime() + var_4;
 
   while(gettime() < var_5) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_6 = [var_2];
-    else
+    } else {
       var_6 = level.players;
+    }
 
     var_7 = 1;
 
     foreach(var_9 in var_6) {
-      if(!var_9 worldweaponsloaded(var_0))
+      if(!var_9 worldweaponsloaded(var_0)) {
         var_7 = 0;
+      }
     }
 
     if(var_7) {
@@ -838,13 +885,14 @@ spawn_a_floating_weapon_award(var_0, var_1, var_2) {
 }
 
 initialize_weapon_pickup_trigger(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_3 = level.players;
-  else
+  } else {
     var_3 = [var_0];
+  }
 
   var_4 = self;
-  var_4 usetriggerrequirelookat(1);
+  var_4 useTriggerRequireLookAt(1);
   var_4._id_A9E0 = _id_0547::_id_AAF9(var_1, 1);
   var_4._id_6C5C = var_4._id_A9E0;
 
@@ -862,22 +910,27 @@ initialize_weapon_pickup_trigger(var_0, var_1, var_2) {
 should_activate_redskull_mode(var_0) {
   var_1 = 0;
 
-  if(common_scripts\utility::_id_562E(var_0) && !is_redskull_activation_round())
+  if(common_scripts\utility::_id_562E(var_0) && !is_redskull_activation_round()) {
     return 0;
-
-  foreach(var_3 in level.players) {
-    if(common_scripts\utility::_id_562E(var_3.optedintohc))
-      var_1++;
   }
 
-  if(var_1 == 4)
+  foreach(var_3 in level.players) {
+    if(common_scripts\utility::_id_562E(var_3.optedintohc)) {
+      var_1++;
+    }
+  }
+
+  if(var_1 == 4) {
     return 1;
+  }
 
-  if(_func_371())
+  if(_func_371()) {
     return var_1 == level.players.size;
+  }
 
-  if(!_func_371() && common_scripts\utility::_id_562E(var_0))
+  if(!_func_371() && common_scripts\utility::_id_562E(var_0)) {
     return var_1 == level.players.size;
+  }
 
   return 0;
 }
@@ -888,8 +941,9 @@ run_perk_powerup(var_0) {
   foreach(var_1 in level.players) {
     var_3 = var_1 _id_056A::givefreemachineperks(0, 2, level.zmb_sg_desired_perk_order);
 
-    foreach(var_5 in var_3)
-    var_1 thread maps\mp\gametypes\_hud_message::_id_9102(get_perk_splash(var_5));
+    foreach(var_5 in var_3) {
+      var_1 thread maps\mp\gametypes\_hud_message::_id_9102(get_perk_splash(var_5));
+    }
   }
 }
 
@@ -924,8 +978,9 @@ run_mini_monies(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   var_3 = wait_for_powerup_taken(var_2, "dlc_pickup_zombies_01_money_gj_2", var_0);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\mp\gametypes\zombies::_id_4798(int(var_1 / 4));
+  }
 }
 
 run_armor_powerup(var_0) {
@@ -947,8 +1002,9 @@ wait_for_powerup_taken(var_0, var_1, var_2) {
     var_2 endon("disconnect");
 
     foreach(var_5 in level.players) {
-      if(var_5 != var_2)
+      if(var_5 != var_2) {
         var_3[0] _meth_8006(var_5);
+      }
     }
 
     for(var_7 = undefined; !_id_0547::_id_5565(var_7, var_2); var_7 = var_3[1] wait_for_player_close_or_timeout(20)) {}
@@ -960,11 +1016,13 @@ wait_for_powerup_taken(var_0, var_1, var_2) {
 }
 
 clear_powerup(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 playlocalsound("zmb_pickup_general");
+  }
 
-  foreach(var_3 in var_0)
-  var_3 delete();
+  foreach(var_3 in var_0) {
+    var_3 delete();
+  }
 }
 
 spawn_fake_powerup(var_0, var_1) {
@@ -983,8 +1041,9 @@ wait_for_player_close_or_timeout(var_0) {
 
   while(var_2 < var_0) {
     foreach(var_4 in level.players) {
-      if(distance(var_4.origin, self.origin) < 48)
+      if(distance(var_4.origin, self.origin) < 48) {
         return var_4;
+      }
     }
 
     var_2 = var_2 + var_1;
@@ -1016,8 +1075,9 @@ _id_A653(var_0, var_1, var_2, var_3) {
   } else if(_id_0547::_id_5565(var_2, "jack_in_box_decoy_zm"))
     var_4 _id_057D::_id_4766();
   else {
-    if(_id_0547::_id_73F9(var_4, var_2))
+    if(_id_0547::_id_73F9(var_4, var_2)) {
       var_4 _id_0586::_id_0790(var_2);
+    }
 
     _id_0548::_id_A7D6(var_4, var_2);
   }
@@ -1048,8 +1108,9 @@ delete_in_time(var_0, var_1, var_2, var_3) {
     wait(var_4);
   }
 
-  if(common_scripts\utility::_id_562E(var_3))
+  if(common_scripts\utility::_id_562E(var_3)) {
     level notify("wustling_weapon_pickup");
+  }
 
   remove_weapon_pickup(var_1, var_2);
 }
@@ -1073,11 +1134,13 @@ delete_usable(var_0) {
     self.linkent delete();
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 blink_weap_expiring() {
@@ -1124,44 +1187,49 @@ run_ingame_cinematic(var_0) {
   var_15 = common_scripts\utility::_id_46B7(var_14.target, "targetname");
   var_16 = common_scripts\utility::random(var_15);
 
-  if(isDefined(var_14.dest))
+  if(isDefined(var_14.dest)) {
     var_16 = var_14.dest;
+  }
 
   var_17 = spawn("script_model", var_14.origin);
   var_17 setModel("tag_player");
 
-  if(isDefined(var_14.angles))
+  if(isDefined(var_14.angles)) {
     var_17.angles = var_14.angles;
+  }
 
   var_18 = var_17.origin + (var_1.origin - var_1 getEye());
   var_19 = var_1.angles;
 
   if(common_scripts\utility::_id_562E(var_7)) {
     var_1 = self;
-    var_1 cameralinkto(var_17, "tag_player");
+    var_1 cameralinkTo(var_17, "tag_player");
   } else {
-    if(isDefined(var_17.angles))
+    if(isDefined(var_17.angles)) {
       var_1 setplayerangles(var_17.angles, 1);
-    else
+    } else {
       var_1 setplayerangles((0, 0, 0), 1);
+    }
 
     var_1 setOrigin(var_18, 1);
-    var_1 playerlinkto(var_17, "tag_player", 1.0, 0, 0, 0, 0, 1);
+    var_1 playerlinkTo(var_17, "tag_player", 1.0, 0, 0, 0, 0, 1);
   }
 
-  var_17 moveto(var_16.origin, var_4, 0, var_11);
+  var_17 moveTo(var_16.origin, var_4, 0, var_11);
   var_1 childthread do_fade_in_and_out(var_4, var_9, var_10);
 
-  if(!common_scripts\utility::_id_562E(var_1.incinematicmode))
+  if(!common_scripts\utility::_id_562E(var_1.incinematicmode)) {
     var_1 childthread _id_0547::set_player_cinematic_mode(!common_scripts\utility::_id_562E(var_7));
+  }
 
   wait_for_move_done(var_4, var_3, var_10, var_9);
 
   if(var_8) {
     var_1 _id_0547::unset_player_cinematic_mode(!common_scripts\utility::_id_562E(var_7));
 
-    if(!common_scripts\utility::_id_562E(var_7))
+    if(!common_scripts\utility::_id_562E(var_7)) {
       var_1 setplayerangles(var_19);
+    }
 
     var_1 childthread animscripts\notetracks_common::do_fade_from_black(var_10);
   }
@@ -1189,11 +1257,13 @@ outro_zombie_taunt(var_0) {
   var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_7A35("board_taunt_base");
 
   if(isDefined(var_0)) {
-    for(var_2 = 0; var_2 < var_0; var_2++)
+    for(var_2 = 0; var_2 < var_0; var_2++) {
       maps\mp\agents\_scripted_agent_anim_util::_id_71FA("board_taunt_base", var_1, 1.0, "taunt_anim");
+    }
   } else {
-    for(;;)
+    for(;;) {
       maps\mp\agents\_scripted_agent_anim_util::_id_71FA("board_taunt_base", var_1, 1.0, "taunt_anim");
+    }
   }
 
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "cinematic taunt");
@@ -1201,28 +1271,33 @@ outro_zombie_taunt(var_0) {
 }
 
 add_difficulty_setting(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!isDefined(level.zmb_sg_difficulty_settings))
+  if(!isDefined(level.zmb_sg_difficulty_settings)) {
     level.zmb_sg_difficulty_settings = [];
+  }
 
-  if(!isDefined(level.zmb_sg_difficulty_settings_debugname))
+  if(!isDefined(level.zmb_sg_difficulty_settings_debugname)) {
     level.zmb_sg_difficulty_settings_debugname = [];
+  }
 
   level.zmb_sg_difficulty_settings_debugname[var_1] = var_0;
   var_8 = 4;
   level.zmb_sg_difficulty_settings[var_1] = [];
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
   if(_isarray(var_2)) {
     if(var_2.size < var_8) {
       var_9 = var_2.size;
 
-      for(var_10 = var_9; var_10 < var_8; var_10++)
+      for(var_10 = var_9; var_10 < var_8; var_10++) {
         var_2[var_10] = var_2[var_9 - 1];
+      }
     }
 
     for(var_11 = 0; var_11 < 5; var_11++) {
@@ -1258,11 +1333,13 @@ add_difficulty_setting(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 add_player_level_setting(var_0, var_1, var_2) {
-  if(!isDefined(level.zmb_sg_player_rank_modifiers[var_1]))
+  if(!isDefined(level.zmb_sg_player_rank_modifiers[var_1])) {
     level.zmb_sg_player_rank_modifiers[var_1] = [];
+  }
 
-  if(!isDefined(level.zmb_sg_player_rank_modifier_debug_names))
+  if(!isDefined(level.zmb_sg_player_rank_modifier_debug_names)) {
     level.zmb_sg_player_rank_modifier_debug_names = [];
+  }
 
   level.zmb_sg_player_rank_modifier_debug_names[var_1] = var_0;
 
@@ -1278,14 +1355,16 @@ get_player_level_setting(var_0, var_1) {
   var_2 = get_current_team_level();
   var_3 = get_player_level_percentage(var_2);
 
-  if(common_scripts\utility::_id_562E(level.zmb_red_skull_mode_activated))
+  if(common_scripts\utility::_id_562E(level.zmb_red_skull_mode_activated)) {
     var_3 = 200;
+  }
 
   var_4 = level.zmb_sg_player_rank_modifiers[var_0][0];
 
   foreach(var_6 in level.zmb_sg_player_rank_modifiers[var_0]) {
-    if(var_3 >= var_6.min_level)
+    if(var_3 >= var_6.min_level) {
       var_4 = var_6;
+    }
   }
 
   return var_4._id_627D;
@@ -1298,72 +1377,82 @@ get_player_level_percentage(var_0) {
 get_current_team_level() {
   var_0 = 0;
 
-  foreach(var_2 in level.players)
-  var_0 = var_0 + int(var_2 maps\mp\zombies\_zombies_progression::get_zm_shotgun_player_level());
+  foreach(var_2 in level.players) {
+    var_0 = var_0 + int(var_2 maps\mp\zombies\_zombies_progression::get_zm_shotgun_player_level());
+  }
 
   var_0 = var_0 / level.players.size;
   return var_0;
 }
 
 return_high_round_modifier(var_0, var_1, var_2) {
-  if(var_2 >= 2)
+  if(var_2 >= 2) {
     var_3 = 1;
-  else
+  } else {
     var_3 = var_2 / 3;
+  }
 
   return _func_2CA(var_0, var_1, var_3);
 }
 
 get_difficulty_setting(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.zmb_sg_difficulty_settings))
+  if(!isDefined(level.zmb_sg_difficulty_settings)) {
     return undefined;
+  }
 
   var_4 = level.zmb_sg_difficulty_settings[var_0];
   var_5 = undefined;
   var_6 = 1;
 
-  if(isDefined(level.players) && level.players.size > 0)
+  if(isDefined(level.players) && level.players.size > 0) {
     var_6 = level.players.size;
+  }
 
   var_7 = level.objectivescompleted;
 
-  if(common_scripts\utility::_id_562E(level.zmb_red_skull_mode_activated))
+  if(common_scripts\utility::_id_562E(level.zmb_red_skull_mode_activated)) {
     var_7 = var_7 + 1;
+  }
 
   var_8 = 4;
 
-  if(var_7 > var_8)
+  if(var_7 > var_8) {
     var_7 = var_8;
+  }
 
   if(isDefined(var_4)) {
-    if(_isarray(var_4))
+    if(_isarray(var_4)) {
       var_5 = var_4[var_7][var_6 - 1];
-    else {
+    } else {
       var_9 = _func_2CA(var_4.minval, var_4.maxval, get_player_frac(var_6 - 1));
       var_5 = var_9 * [[var_4._id_3F02]](var_4._id_6E5C);
       var_5 = var_5 * return_high_round_modifier(var_4.low_round_mult, var_4.high_round_mult, var_7);
     }
   }
 
-  if(var_5 < 1 && var_5 > 0)
+  if(var_5 < 1 && var_5 > 0) {
     return var_5;
-  else
+  } else {
     return int(var_5);
+  }
 }
 
 _id_7F2C(var_0, var_1) {
-  if(var_1 == 0)
+  if(var_1 == 0) {
     return var_0;
+  }
 
   var_2 = _abs(var_0) % var_1;
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     return var_0;
+  }
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     return -1 * (_abs(var_0) - var_2);
-  else
+  } else {
     return var_0 + var_1 - var_2;
+  }
 }
 
 get_player_frac(var_0) {
@@ -1372,10 +1461,11 @@ get_player_frac(var_0) {
 }
 
 current_fodder_zombie_health(var_0) {
-  if(level._id_A980 < var_0)
+  if(level._id_A980 < var_0) {
     var_1 = var_0;
-  else
+  } else {
     var_1 = level._id_A980;
+  }
 
   return maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), var_1);
 }
@@ -1393,8 +1483,9 @@ altered_state_apply(var_0, var_1, var_2) {
   }
   var_3 altered_state_fade();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 30;
+  }
 
   var_3.in_altered_state = 1;
   var_3 notify("altered_state_start");
@@ -1403,12 +1494,13 @@ altered_state_apply(var_0, var_1, var_2) {
   var_6 = "dlc_zmb_dig02_hallucination_01";
 
   if(level._id_258F) {
-    if(_id_0547::_id_5565(var_2, 1))
+    if(_id_0547::_id_5565(var_2, 1)) {
       var_6 = "dlc_zmb_dig02_hallucination_01";
-    else if(_id_0547::_id_5565(var_2, 2))
+    } else if(_id_0547::_id_5565(var_2, 2)) {
       var_6 = "dlc_zmb_dig02_hallucination_02";
-    else if(_id_0547::_id_5565(var_2, 3))
+    } else if(_id_0547::_id_5565(var_2, 3)) {
       var_6 = "dlc_zmb_dig02_hallucination_03";
+    }
   }
 
   var_3.altered_state_fx = _spawnlinkedfxforclient(common_scripts\utility::_id_44F5(var_6), var_3, "tag_origin", var_3);
@@ -1455,8 +1547,9 @@ altered_state_fade() {
   var_0 = self;
   var_0 endon("disconnect");
 
-  if(!isDefined(var_0.altered_state_overlay_fade))
+  if(!isDefined(var_0.altered_state_overlay_fade)) {
     var_0.altered_state_overlay_fade = altered_state_create_client_overlay("white", 1, var_0);
+  }
 
   var_1 = 1;
   var_2 = 0.25;
@@ -1479,8 +1572,9 @@ altered_state_end_overlay(var_0) {
 
   if(var_2) {} else if(var_3) {}
 
-  if(isDefined(var_1.altered_state_fx))
+  if(isDefined(var_1.altered_state_fx)) {
     var_1.altered_state_fx delete();
+  }
 
   var_1 _meth_866F(1, 0, 1);
   var_1.in_altered_state = 0;
@@ -1508,13 +1602,15 @@ altered_state_death_listener() {
 altered_state_create_client_overlay(var_0, var_1, var_2, var_3) {
   var_4 = 1;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_3;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 = _newclienthudelem(var_2);
-  else
+  } else {
     var_5 = newhudelem();
+  }
 
   var_5.x = 0;
   var_5.y = 0;
@@ -1569,8 +1665,9 @@ special_melee_get_weapon_name(var_0) {
 }
 
 register_banned_objective(var_0) {
-  if(!isDefined(level.zmb_sg_banned_objectives))
+  if(!isDefined(level.zmb_sg_banned_objectives)) {
     level.zmb_sg_banned_objectives = [];
+  }
 
   level.zmb_sg_banned_objectives = common_scripts\utility::_id_0F6F(level.zmb_sg_banned_objectives, var_0);
 }
@@ -1586,14 +1683,17 @@ spawn_extra_redskull_assassins(var_0) {
 }
 
 try_activate_redskull_mode(var_0) {
-  if(common_scripts\utility::_id_562E(level.zmb_red_skull_mode_activated))
+  if(common_scripts\utility::_id_562E(level.zmb_red_skull_mode_activated)) {
     return 0;
+  }
 
-  if(common_scripts\utility::_id_562E(var_0) && is_redskull_activation_round())
+  if(common_scripts\utility::_id_562E(var_0) && is_redskull_activation_round()) {
     remove_redskull_mode_activation();
+  }
 
-  if(should_activate_redskull_mode(var_0))
+  if(should_activate_redskull_mode(var_0)) {
     maps\mp\zombies\shotgun\_zombies_shotgun_gamemode::activate_redskull_mode();
+  }
 }
 
 remove_redskull_mode_activation() {
@@ -1611,8 +1711,9 @@ remove_redskull_visuals() {
     level.shattered_opt_in_ents = common_scripts\utility::_id_0F97(level.shattered_opt_in_ents);
     level.shattered_opt_in_ents = common_scripts\utility::_id_0FA0(level.shattered_opt_in_ents);
 
-    foreach(var_1 in level.shattered_opt_in_ents)
-    var_1 delete();
+    foreach(var_1 in level.shattered_opt_in_ents) {
+      var_1 delete();
+    }
   }
 }
 

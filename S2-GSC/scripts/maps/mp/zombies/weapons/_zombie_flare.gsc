@@ -81,8 +81,9 @@ flare_handle_effects(var_0, var_1) {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(level.zmb_on_signal_flare_stuck))
+  if(isDefined(level.zmb_on_signal_flare_stuck)) {
     level thread[[level.zmb_on_signal_flare_stuck]](self);
+  }
 
   var_2 = spawnStruct();
   var_2.landing_point = self.origin;
@@ -93,7 +94,7 @@ flare_handle_effects(var_0, var_1) {
   var_2._id_3F83 = common_scripts\utility::_id_8FFC();
   var_2._id_3F83 linktosynchronizedparent(self);
   var_2._id_3F83 show();
-  _playfxontag(common_scripts\utility::_id_44F5("signal_flare_zombie"), var_2._id_3F83, "TAG_ORIGIN");
+  _playFXOnTag(common_scripts\utility::_id_44F5("signal_flare_zombie"), var_2._id_3F83, "TAG_ORIGIN");
   thread flare_handle_cleanup(var_2);
   wait 1;
 
@@ -132,9 +133,11 @@ flare_handle_cleanup(var_0) {
   self waittill("death");
   _killfxontag(common_scripts\utility::_id_44F5("signal_flare_zombie"), var_0._id_3F83, "TAG_ORIGIN");
 
-  if(isDefined(var_0._id_3F71))
+  if(isDefined(var_0._id_3F71)) {
     var_0._id_3F71 delete();
+  }
 
-  if(isDefined(var_0._id_3F83))
+  if(isDefined(var_0._id_3F83)) {
     var_0._id_3F83 delete();
+  }
 }

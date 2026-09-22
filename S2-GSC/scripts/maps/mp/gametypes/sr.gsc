@@ -42,13 +42,15 @@ main() {
   level._id_3FC7 = maps\mp\gametypes\common_sd_sr::_id_5782;
   level._id_0C25 = 0;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   game["dialog"]["gametype"] = "sr_intro";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 
   game["dialog"]["offense_obj"] = "obj_destroy";
   game["dialog"]["defense_obj"] = "obj_defend";
@@ -87,8 +89,9 @@ _id_5300() {
 }
 
 _id_6BAF() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -149,57 +152,69 @@ _id_6BA7() {
     level notify("sr_player_joined", self);
     maps\mp\_utility::_id_867B(0);
 
-    if(isDefined(self.pers["plants"]))
+    if(isDefined(self.pers["plants"])) {
       maps\mp\_utility::_id_867B(self.pers["plants"]);
+    }
 
     maps\mp\_utility::_id_867C(0);
 
-    if(isDefined(self.pers["defuses"]))
+    if(isDefined(self.pers["defuses"])) {
       maps\mp\_utility::_id_867C(self.pers["defuses"]);
+    }
 
     self._id_0021 = 0;
 
-    if(isDefined(self.pers["denied"]))
+    if(isDefined(self.pers["denied"])) {
       self._id_0021 = self.pers["denied"];
+    }
   }
 }
 
 _id_8BAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(self._id_9566))
+  if(isDefined(self._id_9566)) {
     return 0;
+  }
 
-  if(isDefined(self._id_A878))
+  if(isDefined(self._id_A878)) {
     return 0;
+  }
 
-  if(isDefined(var_1) && var_1 == self)
+  if(isDefined(var_1) && var_1 == self) {
     return 0;
+  }
 
-  if(level.teambased && isDefined(var_1) && isDefined(var_1.team) && var_1.team == self.team)
+  if(level.teambased && isDefined(var_1) && isDefined(var_1.team) && var_1.team == self.team) {
     return 0;
+  }
 
-  if(isDefined(var_1) && !isDefined(var_1.team) && (var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn"))
+  if(isDefined(var_1) && !isDefined(var_1.team) && (var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn")) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     self setclientomnvar("ui_carrying_bomb", 0);
+  }
 
-  if(!maps\mp\_utility::gameflag("prematch_done"))
+  if(!maps\mp\_utility::gameflag("prematch_done")) {
     maps\mp\gametypes\_playerlogic::mayspawn();
-  else {
+  } else {
     var_10 = _id_8BAA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 
-    if(var_10)
+    if(var_10) {
       var_10 = var_10 && !maps\mp\_utility::isreallyalive(self);
+    }
 
-    if(var_10)
+    if(var_10) {
       var_10 = var_10 && !maps\mp\gametypes\_playerlogic::mayspawn();
+    }
 
-    if(var_10)
+    if(var_10) {
       level thread _id_903E(self, var_1);
+    }
   }
 
   thread maps\mp\gametypes\common_sd_sr::_id_21AB();
@@ -210,8 +225,9 @@ _id_903E(var_0, var_1) {
   if(_isagent(var_0)) {
     return;
   }
-  if(_isagent(var_1))
+  if(_isagent(var_1)) {
     var_1 = var_1._id_0117;
+  }
 
   var_2 = var_0.origin + (0, 0, 14);
 
@@ -278,11 +294,13 @@ _id_8C21(var_0, var_1) {
   self hide();
 
   foreach(var_3 in level.players) {
-    if(var_3.team == var_1)
+    if(var_3.team == var_1) {
       self showtoplayer(var_3);
+    }
 
-    if(var_3.team == "spectator" && var_1 == "allies")
+    if(var_3.team == "spectator" && var_1 == "allies") {
       self showtoplayer(var_3);
+    }
   }
 
   for(;;) {
@@ -290,11 +308,13 @@ _id_8C21(var_0, var_1) {
     self hide();
 
     foreach(var_3 in level.players) {
-      if(var_3.team == var_1)
+      if(var_3.team == var_1) {
         self showtoplayer(var_3);
+      }
 
-      if(var_3.team == "spectator" && var_1 == "allies")
+      if(var_3.team == "spectator" && var_1 == "allies") {
         self showtoplayer(var_3);
+      }
     }
   }
 }
@@ -322,8 +342,9 @@ _id_A6E1() {
 }
 
 _id_6BBF(var_0) {
-  if(isDefined(var_0._id_0117))
+  if(isDefined(var_0._id_0117)) {
     var_0 = var_0._id_0117;
+  }
 
   if(var_0.pers["team"] == self._id_A496) {
     self._id_9D65 playSound("mp_snd_ally_revive");
@@ -335,19 +356,22 @@ _id_6BBF(var_0) {
     }
 
     if(isDefined(self._id_A490)) {
-      if(!level.gameended)
+      if(!level.gameended) {
         self._id_A490 thread _id_913F();
+      }
     }
 
     var_0 maps\mp\gametypes\_missions::processchallenge("ch_rescuer");
 
-    if(!isDefined(var_0._id_7D26))
+    if(!isDefined(var_0._id_7D26)) {
       var_0._id_7D26 = [];
+    }
 
     var_0._id_7D26[self._id_A490.guid] = 1;
 
-    if(var_0._id_7D26.size == 4)
+    if(var_0._id_7D26.size == 4) {
       var_0 maps\mp\gametypes\_missions::processchallenge("ch_helpme");
+    }
   } else {
     self._id_9D65 playSound("mp_killconfirm_tags_pickup");
     var_0 thread _id_047A::_id_35D3();
@@ -411,8 +435,9 @@ _id_2404(var_0) {
       objective_delete(level._id_31F9[var_1]._id_698A);
       level._id_31F9[var_1]._id_9D65 delete();
 
-      for(var_2 = 0; var_2 < level._id_31F9[var_1]._id_A582.size; var_2++)
+      for(var_2 = 0; var_2 < level._id_31F9[var_1]._id_A582.size; var_2++) {
         level._id_31F9[var_1]._id_A582[var_2] delete();
+      }
 
       level._id_31F9[var_1] notify("deleted");
       level._id_31F9[var_1] = undefined;

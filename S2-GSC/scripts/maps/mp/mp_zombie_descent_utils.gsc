@@ -15,8 +15,9 @@ earthquake_alive_players(var_0, var_1, var_2) {
   var_3 = [];
 
   foreach(var_5 in level.players) {
-    if(isalive(var_5))
+    if(isalive(var_5)) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   _earthquake(var_0, var_1, (0, 0, 0), 9999999, var_3);
@@ -26,12 +27,14 @@ earthquake_alive_players_with_origin(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
   foreach(var_6 in level.players) {
-    if(isalive(var_6) && distance(var_6.origin, var_3.origin) <= var_2)
+    if(isalive(var_6) && distance(var_6.origin, var_3.origin) <= var_2) {
       var_4[var_4.size] = var_6;
+    }
   }
 
-  if(var_4.size > 0)
+  if(var_4.size > 0) {
     _earthquake(var_0, var_1, var_3.origin, var_2, var_4);
+  }
 }
 
 flag_try_set(var_0) {
@@ -54,11 +57,13 @@ lockin_system_monitor_unuse(var_0, var_1, var_2) {
   self endon("stop_using_station");
   waitframe();
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     thread lockin_system_monitor_b_button();
+  }
 
-  if(common_scripts\utility::_id_562E(var_2))
+  if(common_scripts\utility::_id_562E(var_2)) {
     thread lockin_system_monitor_use_button_exit();
+  }
 
   if(!isDefined(var_0)) {
     return;
@@ -92,11 +97,12 @@ lockin_system_monitor_b_button() {
 lockin_system_monitor_use_button_exit() {
   self endon("stop_using_station");
 
-  while(self usebuttonpressed())
+  while(self useButtonPressed()) {
     waitframe();
+  }
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       break;
     }
 
@@ -107,8 +113,9 @@ lockin_system_monitor_use_button_exit() {
 }
 
 zombies_players_secret_room_handle_ignore(var_0) {
-  if(!isPlayer(var_0))
+  if(!isPlayer(var_0)) {
     return 0;
+  }
 
   var_1 = agents_are_separated(var_0, self);
   return var_1;
@@ -121,8 +128,9 @@ agents_are_separated(var_0, var_1) {
 agent_is_in_secret_room(var_0) {
   var_1 = undefined;
 
-  if(common_scripts\utility::_id_562E(var_0) && !common_scripts\utility::_id_562E(self.wasteleported))
+  if(common_scripts\utility::_id_562E(var_0) && !common_scripts\utility::_id_562E(self.wasteleported)) {
     var_1 = _id_0547::_id_5565(self._id_9024, level.current_secret_room_zone);
+  }
 
   return common_scripts\utility::_id_562E(var_1) || _id_055A::_id_AC29(self, level.current_secret_room_zone);
 }
@@ -131,8 +139,9 @@ set_default_spawn_room(var_0, var_1, var_2) {
   level.temp_spawn_locations = var_1;
   level.temp_spawn_location_players = var_0;
 
-  foreach(var_4 in var_0)
-  var_4 thread set_default_room_for_player(var_2);
+  foreach(var_4 in var_0) {
+    var_4 thread set_default_room_for_player(var_2);
+  }
 }
 
 set_default_room_for_player(var_0) {}
@@ -230,8 +239,9 @@ initwavestories() {
 }
 
 vo_intro() {
-  while(!level.gamehasstarted)
+  while(!level.gamehasstarted) {
     waitframe();
+  }
 
   _id_0547::_id_A78B();
   wait 5;
@@ -244,10 +254,11 @@ vo_intro() {
     }
   }
 
-  if(var_0)
+  if(var_0) {
     maps\mp\zombies\_zombies_audio_dlc2::try_run_conversation(level.descent_wave_stories["intro"], 1, 35);
-  else
+  } else {
     maps\mp\zombies\_zombies_audio_dlc2::try_run_conversation(level.descent_wave_stories["intro_no_oliv"], 1, 35);
+  }
 }
 
 vo_blood_tube_enter(var_0) {
@@ -258,21 +269,22 @@ vo_blood_tube_enter(var_0) {
     if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
       return;
     }
-    if(common_scripts\utility::_id_562E(self.dlg_playedbloodtubeenterline))
+    if(common_scripts\utility::_id_562E(self.dlg_playedbloodtubeenterline)) {
       return;
+    }
   }
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros"))
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
     var_1 = "oohwedidnthaveoneofthesei";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
     var_1 = "idontlikethisidontlikethi";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari")) {
     var_1 = "ivegotabadfeelingaboutthi";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
     var_1 = "thissmellsofbloodoldblood";
-  else {}
+  } else {}
 
   if(!isDefined(var_1)) {
     return;
@@ -289,21 +301,22 @@ vo_blood_tube_exit(var_0) {
     if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
       return;
     }
-    if(common_scripts\utility::_id_562E(self.dlg_playedbloodtubeexitline))
+    if(common_scripts\utility::_id_562E(self.dlg_playedbloodtubeexitline)) {
       return;
+    }
   }
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros"))
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
     var_1 = "sothatswhatitfeelsliketob";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
     var_1 = "tellmeidonthavetodothatag";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari")) {
     var_1 = "deargoddidtheytravelthisw";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
     var_1 = "nosanemindwouldcreatesuch";
-  else {}
+  } else {}
 
   if(!isDefined(var_1)) {
     return;
@@ -317,28 +330,31 @@ vo_hear_klaus(var_0) {
     if(common_scripts\utility::_id_562E(self._id_57DE)) {
       return;
     }
-    if(common_scripts\utility::_id_562E(level.wavestories.story_playing))
+    if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
       return;
+    }
   }
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros"))
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
     var_1 = "wheredoiknowthatvoicefrom";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
     var_1 = "ohhellisthatwhoithinkitis";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
     var_2 = 0;
 
     foreach(var_4 in level.players) {
-      if(_id_0547::_id_5565(_id_0378::_id_307B(var_4._id_20D8), "mari"))
+      if(_id_0547::_id_5565(_id_0378::_id_307B(var_4._id_20D8), "mari")) {
         var_2 = 1;
+      }
     }
 
-    if(var_2 || common_scripts\utility::_id_562E(var_0))
+    if(var_2 || common_scripts\utility::_id_562E(var_0)) {
       var_1 = "mariemarieyousaidthatyouh";
-    else
+    } else {
       var_1 = undefined;
+    }
   } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari"))
     var_1 = "cryingiknewitklausklausme";
   else {}
@@ -357,29 +373,31 @@ vo_see_corpse_eater(var_0) {
     if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
       return;
     }
-    if(common_scripts\utility::_id_562E(self.dlg_playedseecorpseeaterline))
+    if(common_scripts\utility::_id_562E(self.dlg_playedseecorpseeaterline)) {
       return;
+    }
   }
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros"))
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
     var_1 = "ohhellaretheyallthisbigju";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
     var_1 = "lookslikewevefoundtheorig";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari")) {
     var_1 = "mytheoryageneticanomalyth";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
     var_1 = "thisiswherehorrorwasbornt";
-  else {}
+  } else {}
 
   if(!isDefined(var_1)) {
     return;
   }
   _id_0367::_id_8E3D(var_1);
 
-  foreach(var_3 in level.players)
-  var_3.dlg_playedseecorpseeaterline = 1;
+  foreach(var_3 in level.players) {
+    var_3.dlg_playedseecorpseeaterline = 1;
+  }
 }
 
 vo_see_feed_listen() {
@@ -409,21 +427,22 @@ vo_see_corpse_eater_feed(var_0) {
     if(common_scripts\utility::_id_562E(self.dlg_playedseecorpseeaterfeedline)) {
       return;
     }
-    if(!common_scripts\utility::_id_562E(self.dlg_playedseecorpseeaterline))
+    if(!common_scripts\utility::_id_562E(self.dlg_playedseecorpseeaterline)) {
       return;
+    }
   }
 
   var_1 = undefined;
 
-  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros"))
+  if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "dros")) {
     var_1 = "gahonlythingworsethanthew";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "jeff")) {
     var_1 = "whyaretheyattackingthenaz";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "mari")) {
     var_1 = "theyarentfeedingonthefles";
-  else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv"))
+  } else if(_id_0547::_id_5565(_id_0378::_id_307B(self._id_20D8), "oliv")) {
     var_1 = "thisiswherethelegendsofth";
-  else {}
+  } else {}
 
   if(!isDefined(var_1)) {
     return;
@@ -435,11 +454,13 @@ vo_see_corpse_eater_feed(var_0) {
 vo_can_play_radio_convo() {
   var_0 = 0;
 
-  if(common_scripts\utility::_id_562E(level.wavestories.story_playing))
+  if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
     return 0;
+  }
 
-  if(common_scripts\utility::_id_562E(level.radio_convo_playing))
+  if(common_scripts\utility::_id_562E(level.radio_convo_playing)) {
     return 0;
+  }
 
   return 1;
 }
@@ -447,16 +468,18 @@ vo_can_play_radio_convo() {
 vo_queue_play_radio_convo() {
   var_0 = 0;
 
-  while(common_scripts\utility::_id_562E(level.wavestories.story_playing) || common_scripts\utility::_id_562E(level.radio_convo_playing))
+  while(common_scripts\utility::_id_562E(level.wavestories.story_playing) || common_scripts\utility::_id_562E(level.radio_convo_playing)) {
     waitframe();
+  }
 
   wait 0.65;
   return 1;
 }
 
 vo_radio_convo_map_start(var_0) {
-  if(!common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(var_0)) {
     vo_queue_play_radio_convo();
+  }
 
   level.radio_convo_playing = 1;
   level.wavestories.story_playing = 1;
@@ -478,8 +501,9 @@ vo_radio_convo_boss_start(var_0) {
       level notify("story_interrupt");
     }
 
-    while(common_scripts\utility::_id_562E(level.radio_convo_playing))
+    while(common_scripts\utility::_id_562E(level.radio_convo_playing)) {
       waitframe();
+    }
   }
 
   level.radio_convo_playing = 1;
@@ -508,8 +532,9 @@ vo_radio_convo_boss_end(var_0) {
 }
 
 vo_play_radio_convo_on_all_players(var_0, var_1) {
-  foreach(var_3 in level.players)
-  var_3 thread vo_play_radio_convo_on_player(var_0, var_1);
+  foreach(var_3 in level.players) {
+    var_3 thread vo_play_radio_convo_on_player(var_0, var_1);
+  }
 }
 
 vo_play_radio_convo_on_player(var_0, var_1) {
@@ -524,13 +549,14 @@ vo_play_radio_convo_on_player(var_0, var_1) {
 vo_play_radio_line_on_player(var_0) {
   var_1 = self;
 
-  if(!isDefined(level.radio_speaker))
+  if(!isDefined(level.radio_speaker)) {
     level.radio_speaker = spawn("script_origin", (0, 0, -10000));
+  }
 
   if(var_1 issplitscreenplayer()) {
-    if(var_1 issplitscreenplayerprimary())
+    if(var_1 issplitscreenplayerprimary()) {
       var_1._id_071D.pa_vo_on_player = _id_0380::_id_288B(var_0, var_1, level.radio_speaker, 0, 1);
-    else {}
+    } else {}
   } else
     var_1._id_071D.pa_vo_on_player = _id_0380::_id_288B(var_0, var_1, level.radio_speaker, 0, 1);
 
@@ -564,19 +590,23 @@ vo_init_weapon_whispers() {
 }
 
 vo_can_hear_whisper(var_0) {
-  if(common_scripts\utility::_id_562E(self._id_57DE))
+  if(common_scripts\utility::_id_562E(self._id_57DE)) {
     return 0;
+  }
 
-  if(common_scripts\utility::_id_562E(level.wavestories.story_playing))
+  if(common_scripts\utility::_id_562E(level.wavestories.story_playing)) {
     return 0;
+  }
 
-  if(common_scripts\utility::_id_562E(self.ishearingwhisper))
+  if(common_scripts\utility::_id_562E(self.ishearingwhisper)) {
     return 0;
+  }
 
   var_1 = self getcurrentprimaryweapon();
 
-  if(!issubstr(var_1, level.ravenweaponmanager[var_0]._id_01D0))
+  if(!issubstr(var_1, level.ravenweaponmanager[var_0]._id_01D0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -693,23 +723,27 @@ _id_902A(var_0) {
 }
 
 dirtspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_dirt");
+  }
 }
 
 mudspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_mud");
+  }
 }
 
 concretespawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_concrete");
+  }
 }
 
 sandspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_sand");
+  }
 }
 
 waterspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
@@ -727,8 +761,9 @@ bloodspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
 }
 
 snowspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_snow");
+  }
 }
 
 zombiedripfx(var_0) {
@@ -737,14 +772,16 @@ zombiedripfx(var_0) {
   }
   var_1 = "spawn_water_drip";
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0 + "_drip";
+  }
 
   var_2 = ["J_Spine4"];
 
   foreach(var_5 in var_2) {
-    if(isDefined(self gettagorigin(var_5)))
+    if(isDefined(self gettagorigin(var_5))) {
       _id_0547::_id_74A5(common_scripts\utility::_id_44F5(var_1), self, var_5);
+    }
   }
 
   zombiedripfxcleanup(var_2, var_1);
@@ -767,8 +804,9 @@ zombiedripfxcleanup(var_0, var_1) {
     return;
   }
   foreach(var_3 in var_0) {
-    if(isDefined(self gettagorigin(var_3)))
+    if(isDefined(self gettagorigin(var_3))) {
       _id_0547::_id_9406(common_scripts\utility::_id_44F5(var_1), self, var_3);
+    }
   }
 }
 
@@ -789,8 +827,9 @@ try_catch_on_fire() {
   var_0 = 0;
 
   foreach(var_2 in _id_0547::_id_408F()) {
-    if(common_scripts\utility::_id_562E(var_2.isonfire))
+    if(common_scripts\utility::_id_562E(var_2.isonfire)) {
       var_0++;
+    }
   }
 
   if(var_0 < 4) {
@@ -806,7 +845,7 @@ start_screenshake(var_0) {
   while(var_0 > 0) {
     var_2 = 0.55 + _randomfloat(0.55);
     var_0 = var_0 - var_2;
-    var_1 playrumbleonentity("damage_heavy");
+    var_1 playRumbleOnEntity("damage_heavy");
     _earthquake(0.4, var_2, self.origin, 96);
     wait(var_2);
   }
@@ -814,16 +853,18 @@ start_screenshake(var_0) {
 
 reveal_first_room_door() {
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "flag_limbo_to_cave_intro" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "flag_limbo_to_cave_intro" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
       var_1 notify("open", undefined);
+    }
   }
 }
 
 spine_pickup_anim(var_0) {
   var_1 = self;
 
-  while(var_1 isswitchingweapon())
+  while(var_1 isswitchingweapon()) {
     waitframe();
+  }
 
   var_2 = var_1 getcurrentweapon();
   var_1 common_scripts\utility::_id_0603();
@@ -840,15 +881,17 @@ spine_pickup_anim(var_0) {
   var_1 wait_for_weapon_change(var_0);
   wait 3;
 
-  if(!_id_0547::_id_73F9(self, var_2))
+  if(!_id_0547::_id_73F9(self, var_2)) {
     var_2 = var_1 _id_0547::_id_AB2B();
+  }
 
   var_1 _id_0586::_id_078E(var_2);
   var_1 common_scripts\utility::_id_0617();
   var_1 common_scripts\utility::_id_0614();
 
-  if(var_1 hasweapon(var_0))
+  if(var_1 hasweapon(var_0)) {
     var_1 _id_0586::_id_0790(var_0);
+  }
 
   var_1 _meth_8546(1);
   var_1 allowlean(1);
@@ -873,27 +916,31 @@ wait_for_weapon_change(var_0) {
 }
 
 set_fx(var_0, var_1) {
-  if(isDefined(self.fx))
+  if(isDefined(self.fx)) {
     self.fx delete();
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "tag_fx";
+  }
 
   self._id_3F74 = var_0;
   self.fx = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0), self, var_1);
   _triggerfx(self.fx);
 
-  if(_isagent(self))
+  if(_isagent(self)) {
     maps\mp\agents\_agent_utility::deleteentonagentdeath(self.fx);
-  else
+  } else {
     self.fx thread _id_0547::_id_2D19(self);
+  }
 }
 
 wait_for_player_close(var_0) {
   for(;;) {
     foreach(var_2 in level.players) {
-      if(distance(var_2.origin, self.origin) < var_0)
+      if(distance(var_2.origin, self.origin) < var_0) {
         return var_2;
+      }
     }
 
     waitframe();

@@ -42,13 +42,15 @@ main() {
   level._id_0C25 = 1;
   level._id_6876 = 0;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   game["dialog"]["gametype"] = "demo_intro";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 
   game["dialog"]["offense_obj"] = "gbl_destroyobj";
   game["dialog"]["defense_obj"] = "gbl_defendobj";
@@ -79,8 +81,9 @@ _id_5300() {
 }
 
 _id_6BAF() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -91,12 +94,13 @@ _id_6BAF() {
 
   _setomnvar("ui_war_attacker_team", maps\mp\_utility::_id_46D4(game["attackers"]));
 
-  if(game["status"] == "halftime")
+  if(game["status"] == "halftime") {
     _setomnvar("ui_current_round", 2);
-  else if(game["status"] == "overtime")
+  } else if(game["status"] == "overtime") {
     _setomnvar("ui_current_round", 3);
-  else if(game["status"] == "overtime_halftime")
+  } else if(game["status"] == "overtime_halftime") {
     _setomnvar("ui_current_round", 4);
+  }
 
   _setclientnamemode("manual_change");
   level._effect["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
@@ -120,8 +124,9 @@ _id_6BAF() {
     var_2[1] = "demo_bombzone_ot";
     level.demobombbteam = "exploded";
 
-    foreach(var_4 in level.players)
-    var_4 setclientomnvar("ui_demo_bomb_b_state", 2);
+    foreach(var_4 in level.players) {
+      var_4 setclientomnvar("ui_demo_bomb_b_state", 2);
+    }
   } else
     var_2[1] = "demo_bombzone";
 
@@ -149,31 +154,35 @@ _id_6BA7() {
 
   maps\mp\_utility::_id_867B(0);
 
-  if(isDefined(self.pers["plants"]))
+  if(isDefined(self.pers["plants"])) {
     maps\mp\_utility::_id_867B(self.pers["plants"]);
+  }
 
   maps\mp\_utility::_id_867C(0);
 
-  if(isDefined(self.pers["defuses"]))
+  if(isDefined(self.pers["defuses"])) {
     maps\mp\_utility::_id_867C(self.pers["defuses"]);
+  }
 
-  if(!isDefined(level.demobombateam))
+  if(!isDefined(level.demobombateam)) {
     self setclientomnvar("ui_demo_bomb_a_state", 0);
-  else if(level.demobombateam == "exploded")
+  } else if(level.demobombateam == "exploded") {
     self setclientomnvar("ui_demo_bomb_a_state", 2);
-  else if(level.demobombateam == self.team)
+  } else if(level.demobombateam == self.team) {
     self setclientomnvar("ui_demo_bomb_a_state", 3);
-  else
+  } else {
     self setclientomnvar("ui_demo_bomb_a_state", 1);
+  }
 
-  if(!isDefined(level.demobombbteam))
+  if(!isDefined(level.demobombbteam)) {
     self setclientomnvar("ui_demo_bomb_b_state", 0);
-  else if(level.demobombbteam == "exploded")
+  } else if(level.demobombbteam == "exploded") {
     self setclientomnvar("ui_demo_bomb_b_state", 2);
-  else if(level.demobombbteam == self.team)
+  } else if(level.demobombbteam == self.team) {
     self setclientomnvar("ui_demo_bomb_b_state", 3);
-  else
+  } else {
     self setclientomnvar("ui_demo_bomb_b_state", 1);
+  }
 
   level notify("spawned_player");
 }
@@ -201,8 +210,9 @@ _id_A121() {
 _id_5782(var_0) {
   if(isDefined(level._id_1913)) {
     foreach(var_2 in level._id_1913) {
-      if(distancesquared(self.origin, var_2._id_9D65.origin) < 4096)
+      if(distancesquared(self.origin, var_2._id_9D65.origin) < 4096) {
         return 0;
+      }
     }
   }
 
@@ -225,17 +235,20 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     var_1 thread _id_047A::_id_2C80(var_10, var_9, var_4);
     var_1 thread maps\mp\gametypes\_missions::_id_80BB(var_4, var_3);
 
-    if(var_10._id_5777)
+    if(var_10._id_5777) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_interrupt");
+    }
 
-    if(var_10._id_56C2)
+    if(var_10._id_56C2) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_protector");
+    }
   }
 }
 
 _id_6B5C(var_0, var_1, var_2) {
-  if(game["state"] == "postgame" && (var_0.team == game["defenders"] || !level._id_18F9))
+  if(game["state"] == "postgame" && (var_0.team == game["defenders"] || !level._id_18F9)) {
     var_1._id_3B4B = 1;
+  }
 }
 
 _id_18FD() {
@@ -266,8 +279,9 @@ _id_18FD() {
       var_4 = getEntArray("script_brushmodel", "classname");
 
       foreach(var_7 in var_4) {
-        if(distance(var_7.origin, var_2.origin) <= 200 && isDefined(var_7.dropweapon) && (game["status"] != "overtime" && var_7.dropweapon == "demo_bombzone" || game["status"] == "overtime" && var_7.dropweapon == "demo_bombzone_ot") && isDefined(var_7.shootblank) && var_7.shootblank == level.demolition_site_mod[var_1])
+        if(distance(var_7.origin, var_2.origin) <= 200 && isDefined(var_7.dropweapon) && (game["status"] != "overtime" && var_7.dropweapon == "demo_bombzone" || game["status"] == "overtime" && var_7.dropweapon == "demo_bombzone_ot") && isDefined(var_7.shootblank) && var_7.shootblank == level.demolition_site_mod[var_1]) {
           var_5 = var_7;
+        }
       }
     }
 
@@ -329,7 +343,7 @@ _id_18FD() {
     }
 
     level._id_1913[level._id_1913.size] = var_11;
-    var_11._id_18D5 = _getent(var_3[0].target, "targetname");
+    var_11._id_18D5 = _getEnt(var_3[0].target, "targetname");
     var_11._id_18D5.origin = var_11._id_18D5.origin + (0, 0, -10000);
     var_11._id_18D5.label = var_12;
     var_11._id_18D5 usetriggertouchcheckstance(1);
@@ -339,8 +353,9 @@ _id_18FD() {
     var_14 = [];
 
     for(var_15 = 0; var_15 < level._id_1913.size; var_15++) {
-      if(var_15 != var_1)
+      if(var_15 != var_1) {
         var_14[var_14.size] = level._id_1913[var_15];
+      }
     }
 
     level._id_1913[var_1]._id_6C61 = var_14;
@@ -369,8 +384,9 @@ _id_6BC8(var_0) {
 _id_7156(var_0) {
   var_1 = common_scripts\utility::_id_0F93(level.players, var_0);
 
-  if(var_1.size)
+  if(var_1.size) {
     var_0 maps\mp\_utility::_id_74C3("snd_bomb_button_press_lp", undefined, var_1);
+  }
 }
 
 _id_93D6(var_0) {
@@ -380,7 +396,7 @@ _id_93D6(var_0) {
 _id_8A29(var_0) {
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  var_1 rotateyaw(-45, 0.05);
+  var_1 rotateYaw(-45, 0.05);
   waitframe();
   var_2 = self.origin + (0, 0, 5);
   var_3 = self.origin + anglesToForward(var_1.angles) * 100 + (0, 0, 128);
@@ -403,8 +419,9 @@ _id_6ABF(var_0) {
 
     var_0._id_56C2 = 1;
 
-    if(isDefined(self._id_2D65))
+    if(isDefined(self._id_2D65)) {
       self._id_2D65 hide();
+    }
   }
 }
 
@@ -438,18 +455,20 @@ _id_6AFC(var_0, var_1, var_2) {
   level thread _id_93D6(var_1);
 
   if(_id_04D1::_id_56FB(var_1.pers["team"])) {
-    if(isDefined(self._id_2D65) && !var_2)
+    if(isDefined(self._id_2D65) && !var_2) {
       self._id_2D65 show();
+    }
   }
 }
 
 _id_18FA(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("disconnect");
-  var_0 playerlinkto(var_1);
+  var_0 playerlinkTo(var_1);
 
-  while(var_0 getcurrentweapon() == self._id_A248)
+  while(var_0 getcurrentweapon() == self._id_A248) {
     waitframe();
+  }
 
   var_0 unlink();
 }
@@ -458,29 +477,34 @@ _id_18F9(var_0, var_1) {
   level notify("bomb_planted", var_0);
   var_2 = "allies";
 
-  if(isDefined(var_1) && isDefined(var_1.team))
+  if(isDefined(var_1) && isDefined(var_1.team)) {
     var_2 = var_1.team;
+  }
 
-  if(!isDefined(level._id_686C))
+  if(!isDefined(level._id_686C)) {
     level._id_686C = 1;
-  else
+  } else {
     level._id_686C++;
+  }
 
-  if(game["status"] == "overtime")
+  if(game["status"] == "overtime") {
     var_0 _id_04D1::_id_86EC(var_2);
+  }
 
   maps\mp\gametypes\_gamelogic::_id_6F27();
 
-  if(maps\mp\_utility::gethalftime() && game["status"] != "halftime")
+  if(maps\mp\_utility::gethalftime() && game["status"] != "halftime") {
     _setgameendtime(gettime() + (int(maps\mp\gametypes\_gamelogic::_id_46E5()) - int(maps\mp\_utility::gettimelimit() * 60 * 1000 * 0.5)), 1);
-  else
+  } else {
     _setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::_id_46E5()), 1);
+  }
 
   level._id_18F9 = 1;
   var_1._id_0112 = 0;
 
-  if(isPlayer(var_1) && !level._id_6510)
+  if(isPlayer(var_1) && !level._id_6510) {
     var_1 setclientomnvar("ui_carrying_bomb", 0);
+  }
 
   var_0._id_568E = 0;
   var_0._id_A582[0] thread maps\mp\gametypes\_gamelogic::_id_74E5();
@@ -494,10 +518,11 @@ _id_18F9(var_0, var_1) {
   var_4 setModel("npc_gen_s_and_d_bomb");
   level._id_2D65[var_3] = var_4;
 
-  if(var_3 == "_a")
+  if(var_3 == "_a") {
     level.demobombateam = var_2;
-  else if(var_3 == "_b")
+  } else if(var_3 == "_b") {
     level.demobombbteam = var_2;
+  }
 
   foreach(var_6 in level.players) {
     if(var_6.team == var_2) {
@@ -532,10 +557,11 @@ _id_18F9(var_0, var_1) {
   var_10._id_190E = var_0;
   var_10._id_2D65 = var_4;
 
-  if(var_3 == "_a" || var_3 == "_A")
+  if(var_3 == "_a" || var_3 == "_A") {
     _setomnvar("ui_broadcaster_game_mode_status_1", 1);
-  else if(var_3 == "_b" || var_3 == "_B")
+  } else if(var_3 == "_b" || var_3 == "_B") {
     _setomnvar("ui_broadcaster_game_mode_status_1", 2);
+  }
 
   maps\mp\_utility::playsoundinspace("mp_snd_bomb_planted", var_4.origin + (0, 0, 1));
   var_0 _id_190B(var_3);
@@ -547,13 +573,15 @@ _id_18F9(var_0, var_1) {
   level._id_18EE = 1;
   _setomnvar("ui_broadcaster_game_mode_status_1", 0);
 
-  if(var_3 == "_a")
+  if(var_3 == "_a") {
     level.demobombateam = "exploded";
-  else if(var_3 == "_b")
+  } else if(var_3 == "_b") {
     level.demobombbteam = "exploded";
+  }
 
-  foreach(var_6 in level.players)
-  var_6 setclientomnvar("ui_demo_bomb" + var_3 + "_state", 2);
+  foreach(var_6 in level.players) {
+    var_6 setclientomnvar("ui_demo_bomb" + var_3 + "_state", 2);
+  }
 
   var_13 = var_4.origin;
   var_13 = var_13 + (0, 0, 10);
@@ -568,8 +596,9 @@ _id_18F9(var_0, var_1) {
 
   var_14 = "bomb_explosion";
 
-  if(isDefined(var_0._id_9D65._id_359B))
+  if(isDefined(var_0._id_9D65._id_359B)) {
     var_14 = var_0._id_9D65._id_359B;
+  }
 
   var_15 = _randomfloat(360);
   var_16 = var_13 + (0, 0, 50);
@@ -580,25 +609,29 @@ _id_18F9(var_0, var_1) {
   _earthquake(0.75, 2.0, var_13, 2000);
   thread maps\mp\_utility::playsoundinspace("mp_snd_bomb_detonated", var_13);
 
-  if(isDefined(var_0._id_3947))
+  if(isDefined(var_0._id_3947)) {
     common_scripts\_exploder::exploder(var_0._id_3947);
+  }
 
   var_10 _id_04D1::_id_2F93();
   var_10 _id_04D1::_id_2D58();
   _id_04D2::_id_47BD(var_2, 1, 1);
 
-  if(!isDefined(level._id_6876))
+  if(!isDefined(level._id_6876)) {
     level._id_6876 = 1;
-  else
+  } else {
     level._id_6876++;
+  }
 
-  if(level._id_6876 == 2)
+  if(level._id_6876 == 2) {
     _id_2D63(var_2, game["end_reason"]["target_destroyed"]);
+  }
 
-  if(maps\mp\_utility::gethalftime() && game["status"] != "halftime")
+  if(maps\mp\_utility::gethalftime() && game["status"] != "halftime") {
     _setgameendtime(gettime() + (int(maps\mp\gametypes\_gamelogic::_id_46E5()) - int(maps\mp\_utility::gettimelimit() * 60 * 1000 * 0.5)), 1);
-  else
+  } else {
     _setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::_id_46E5()), 1);
+  }
 
   level._id_686C--;
 
@@ -626,8 +659,9 @@ _id_4ACC(var_0, var_1) {
   _setomnvar("ui_bomb" + var_0 + "_timer_endtime", 0);
   var_2 = maps\mp\gametypes\_hostmigration::_id_A782();
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     _setomnvar("ui_bomb" + var_0 + "_timer_endtime", var_1 + var_2);
+  }
 }
 
 _id_6BC3(var_0) {
@@ -638,10 +672,11 @@ _id_6BC3(var_0) {
   if(level._id_686C < 1) {
     maps\mp\gametypes\_gamelogic::_id_7DFC();
 
-    if(maps\mp\_utility::gethalftime() && game["status"] != "halftime")
+    if(maps\mp\_utility::gethalftime() && game["status"] != "halftime") {
       _setgameendtime(gettime() + (int(maps\mp\gametypes\_gamelogic::_id_46E5()) - int(maps\mp\_utility::gettimelimit() * 60 * 1000 * 0.5)), 1);
-    else
+    } else {
       _setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::_id_46E5()), 1);
+    }
 
     level._id_18F9 = 0;
   }
@@ -649,10 +684,11 @@ _id_6BC3(var_0) {
   self._id_2D65 delete();
   self._id_190E._id_18F9 = 0;
 
-  if(game["status"] == "overtime")
+  if(game["status"] == "overtime") {
     var_1 = "any";
-  else
+  } else {
     var_1 = "enemy";
+  }
 
   self._id_190E _id_04D1::_id_0C30(var_1);
   self._id_190E _id_04D1::_id_8A60("any");
@@ -662,8 +698,9 @@ _id_6BC3(var_0) {
   maps\mp\_utility::playsoundonplayers(game["bomb_disarm_sound"], game["defenders"]);
   var_2 = "defuse";
 
-  if(isDefined(self._id_190E._id_18F8) && maps\mp\_utility::isreallyalive(self._id_190E._id_18F8) && self._id_190E._id_18F8._id_18FB + 6000 + level._id_2CA9 * 1000 > gettime())
+  if(isDefined(self._id_190E._id_18F8) && maps\mp\_utility::isreallyalive(self._id_190E._id_18F8) && self._id_190E._id_18F8._id_18FB + 6000 + level._id_2CA9 * 1000 > gettime()) {
     var_2 = "ninja_defuse";
+  }
 
   var_0 thread _id_047A::_id_18D4(var_2);
   var_0 thread _id_0468::_id_0A22("demoBombDefused");
@@ -675,16 +712,19 @@ _id_18D3() {
   self._id_190E maps\mp\gametypes\_gamelogic::_id_9415();
   self._id_190E._id_568E = 1;
 
-  if(game["status"] == "overtime")
+  if(game["status"] == "overtime") {
     self._id_190E _id_04D1::_id_86EC("any");
+  }
 
-  if(self.label == "_a")
+  if(self.label == "_a") {
     level.demobombateam = undefined;
-  else if(self.label == "_b")
+  } else if(self.label == "_b") {
     level.demobombbteam = undefined;
+  }
 
-  foreach(var_1 in level.players)
-  var_1 setclientomnvar("ui_demo_bomb" + self.label + "_state", 0);
+  foreach(var_1 in level.players) {
+    var_1 setclientomnvar("ui_demo_bomb" + self.label + "_state", 0);
+  }
 
   _setomnvar("ui_bomb" + self.label + "_timer_endtime", 0);
   _setomnvar("ui_broadcaster_game_mode_status_1", 0);
@@ -696,12 +736,13 @@ _id_6AC9(var_0) {
 }
 
 _id_6BB6() {
-  if(game["teamScores"]["axis"] == game["teamScores"]["allies"])
+  if(game["teamScores"]["axis"] == game["teamScores"]["allies"]) {
     _id_2D63("tie", game["end_reason"]["time_limit_reached"]);
-  else if(game["teamScores"][game["defenders"]] > game["teamScores"]["allies"])
+  } else if(game["teamScores"][game["defenders"]] > game["teamScores"]["allies"]) {
     _id_2D63(game["defenders"], game["end_reason"]["time_limit_reached"]);
-  else
+  } else {
     _id_2D63(game["attackers"], game["end_reason"]["time_limit_reached"]);
+  }
 }
 
 _id_6B42(var_0) {
@@ -721,13 +762,15 @@ _id_2D63(var_0, var_1) {
       }
     }
 
-    if(var_2)
+    if(var_2) {
       _id_04CE::_id_3801();
+    }
   }
 
   if(game["status"] == "normal") {
-    if(var_1 == game["end_reason"]["target_destroyed"])
+    if(var_1 == game["end_reason"]["target_destroyed"]) {
       game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::getwatcheddvar("timelimit") * 60 * 1000 / 2.0;
+    }
 
     var_0 = "halftime";
     var_1 = game["end_reason"]["switching_sides"];
@@ -737,8 +780,9 @@ _id_2D63(var_0, var_1) {
       var_1 = game["end_reason"]["switching_sides"];
     } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"])
       var_0 = "axis";
-    else
+    else {
       var_0 = "allies";
+    }
   }
 
   thread maps\mp\gametypes\_gamelogic::_id_36B9(var_0, var_1);
@@ -758,6 +802,7 @@ _id_21AB() {
     var_0 = 1;
   }
 
-  if(var_0)
+  if(var_0) {
     _id_050F::_id_A16A();
+  }
 }

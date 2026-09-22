@@ -87,12 +87,14 @@ srvupdatemovemode() {
 }
 
 srvroundstart() {
-  if(level._id_A980 > 0 && level._id_A980 % 5 == 0)
+  if(level._id_A980 > 0 && level._id_A980 % 5 == 0) {
     unlock_next_reciever();
+  }
 
   if(level._id_A980 > 0 && level._id_A980 % 5 == 0) {
-    if(level._id_7F1B >= 2)
+    if(level._id_7F1B >= 2) {
       level._id_7F1B--;
+    }
   }
 
   switch (level._id_A980) {
@@ -123,8 +125,9 @@ srvshowpapfuse() {
 }
 
 run_pack_a_punch_log() {
-  if(isDefined(level.upgrade_machine_upgrade_func))
+  if(isDefined(level.upgrade_machine_upgrade_func)) {
     level thread[[level.upgrade_machine_upgrade_func]]();
+  }
 }
 
 collect_souls_to_unlock_pack_a_punch() {
@@ -133,8 +136,9 @@ collect_souls_to_unlock_pack_a_punch() {
   var_2 = common_scripts\utility::_id_46B7("zmb_sg_availablility_light_display", "targetname");
   var_3 = _getscriptablearray("zmb_sg_reciver_scriptable", "targetname");
 
-  foreach(var_5 in var_3)
-  var_5 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84DC();
+  foreach(var_5 in var_3) {
+    var_5 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::_id_84DC();
+  }
 
   if(var_1.size < 3) {
     return;
@@ -157,22 +161,25 @@ collect_souls_to_unlock_pack_a_punch() {
 }
 
 wait_for_pap_available() {
-  var_0 = _getent("pack_a_punch_weapon_display", "targetname");
+  var_0 = _getEnt("pack_a_punch_weapon_display", "targetname");
   var_0 ghost();
 
-  for(var_1 = 0; var_1 < 3; var_1++)
+  for(var_1 = 0; var_1 < 3; var_1++) {
     common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_flag_" + (var_1 + 1));
+  }
 }
 
 unlock_next_reciever() {
-  if(!isDefined(level.zmb_pap_reciver_unlocks))
+  if(!isDefined(level.zmb_pap_reciver_unlocks)) {
     level.zmb_pap_reciver_unlocks = 0;
+  }
 
   level.zmb_pap_reciver_unlocks++;
   var_0 = "zmb_sg_soul_collect_ready_flag_" + level.zmb_pap_reciver_unlocks;
 
-  if(common_scripts\utility::_id_3C83(var_0))
+  if(common_scripts\utility::_id_3C83(var_0)) {
     common_scripts\utility::flag_set(var_0);
+  }
 }
 
 handle_unlock_lights(var_0, var_1) {
@@ -201,8 +208,9 @@ set_pack_key_unlocked() {
   common_scripts\utility::_id_3C9F("zmb_sg_soul_collect_ready_flag_" + self.setmovespeedscale);
   var_2 = 400;
 
-  if(common_scripts\utility::_id_562E(level.sg_pack_use_small_radius))
+  if(common_scripts\utility::_id_562E(level.sg_pack_use_small_radius)) {
     var_2 = 256;
+  }
 
   var_1.ignoresighttrace = 1;
   var_1 maps\mp\mp_zombies_soul_collection::_id_170B(10, var_2, 70, "zmb_sg_soul_collect_ping_" + var_0, undefined, "tag_origin", undefined, "tag_origin");
@@ -238,8 +246,9 @@ try_catch_on_fire() {
     if(_id_0547::_id_5565(var_2._id_0A4B, "zombie_sizzler")) {
       continue;
     }
-    if(common_scripts\utility::_id_562E(var_2.isonfire))
+    if(common_scripts\utility::_id_562E(var_2.isonfire)) {
       var_0++;
+    }
   }
 
   if(var_0 < 4) {
@@ -250,23 +259,27 @@ try_catch_on_fire() {
 }
 
 dirtspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_dirt");
+  }
 }
 
 mudspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_mud");
+  }
 }
 
 concretespawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_concrete");
+  }
 }
 
 sandspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
-  if(var_0 == "zom_spawn_event")
+  if(var_0 == "zom_spawn_event") {
     thread zombiespawnfx("zmb_spawn_sand");
+  }
 }
 
 waterspawnnotetrackhandler(var_0, var_1, var_2, var_3) {
@@ -282,14 +295,16 @@ zombiedripfx(var_0) {
   }
   var_1 = "spawn_water_drip";
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0 + "_drip";
+  }
 
   var_2 = ["J_Shoulder_RI", "J_Shoulder_LE", "J_Hip_LE", "J_Hip_RI", "J_Head"];
 
   foreach(var_5 in var_2) {
-    if(isDefined(self gettagorigin(var_5)))
+    if(isDefined(self gettagorigin(var_5))) {
       _id_0547::_id_74A5(common_scripts\utility::_id_44F5(var_1), self, var_5);
+    }
   }
 
   zombiedripfxcleanup(var_2, var_1);
@@ -312,8 +327,9 @@ zombiedripfxcleanup(var_0, var_1) {
     return;
   }
   foreach(var_3 in var_0) {
-    if(isDefined(self gettagorigin(var_3)))
+    if(isDefined(self gettagorigin(var_3))) {
       _id_0547::_id_9406(common_scripts\utility::_id_44F5(var_1), self, var_3);
+    }
   }
 }
 

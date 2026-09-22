@@ -18,36 +18,41 @@ xbox_optimizations() {
 lightningrodlights() {
   var_0 = _getscriptablearray("lightningrodlights", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lightpart", "on");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lightpart", "on");
+  }
 }
 
 bossintrolightson() {
   var_0 = _getscriptablearray("boss_intro_lgt", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lightpart", "on");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lightpart", "on");
+  }
 }
 
 bossintrolightsoff() {
   var_0 = _getscriptablearray("boss_intro_lgt", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lightpart", "off");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lightpart", "off");
+  }
 }
 
 bossarenalightsoff() {
   var_0 = _getscriptablearray("boss_arena_lgt", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lightpart", "off");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lightpart", "off");
+  }
 }
 
 bossarenalightson() {
   var_0 = _getscriptablearray("boss_arena_lgt", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("lightpart", "on");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("lightpart", "on");
+  }
 }
 
 _id_84F8() {

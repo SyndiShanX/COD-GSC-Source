@@ -16,31 +16,38 @@ _id_20CA(var_0) {
     return;
   }
   foreach(var_2 in level.players) {
-    if(isDefined(var_2._id_072E._id_6008))
+    if(isDefined(var_2._id_072E._id_6008)) {
       var_2._id_072E._id_6008 delete();
+    }
 
-    if(isDefined(var_2._id_072E._id_6009))
+    if(isDefined(var_2._id_072E._id_6009)) {
       var_2._id_072E._id_6009 delete();
+    }
 
     if(isDefined(var_2._id_600A) && isDefined(var_2._id_600A._id_3F3F)) {
       foreach(var_5, var_4 in var_2._id_600A._id_3F3F) {
-        if(isDefined(var_4._id_376D))
+        if(isDefined(var_4._id_376D)) {
           var_4._id_376D delete();
+        }
 
-        if(isDefined(var_4._id_3EE0))
+        if(isDefined(var_4._id_3EE0)) {
           var_4._id_3EE0 delete();
+        }
 
-        if(isDefined(var_4._id_376C))
+        if(isDefined(var_4._id_376C)) {
           var_4._id_376C delete();
+        }
 
-        if(isDefined(var_4._id_3EDF))
+        if(isDefined(var_4._id_3EDF)) {
           var_4._id_3EDF delete();
+        }
       }
     }
   }
 
-  foreach(var_2 in level.players)
-  var_2 _id_9976(var_0);
+  foreach(var_2 in level.players) {
+    var_2 _id_9976(var_0);
+  }
 
   level._id_072E._id_08E4 = var_0;
 }
@@ -48,8 +55,9 @@ _id_20CA(var_0) {
 _id_46DD() {
   var_0 = getDvar("threat_detection_highlight_style", level._id_072E._id_2BBA);
 
-  if(var_0 != level._id_072E._id_08E4)
+  if(var_0 != level._id_072E._id_08E4) {
     _id_20CA(var_0);
+  }
 
   return var_0;
 }
@@ -89,8 +97,9 @@ onplayerspawned() {
     self waittill("spawned_player");
     var_0 = _id_46DD();
 
-    if(var_0 == "attached_glow")
+    if(var_0 == "attached_glow") {
       _id_A573(::_id_A576, ::_id_4513, undefined);
+    }
   }
 }
 
@@ -144,8 +153,9 @@ _id_2B54() {
     var_0 = distance(self.origin, level.players[0].origin);
     thread common_scripts\utility::_id_33BA(level.players[0].origin, self.origin, 1, 1, 1, 0.3);
 
-    if(isDefined(self._id_072E._id_6008))
+    if(isDefined(self._id_072E._id_6008)) {
       thread common_scripts\utility::_id_33BA(level.players[0].origin, self._id_072E._id_6008.origin, 1, 1, 1, 0.3);
+    }
 
     wait 0.3;
   }
@@ -163,24 +173,27 @@ _id_238E() {
 _id_7CFE() {
   foreach(var_1 in level.players) {
     foreach(var_3 in var_1._id_072E._id_8C07) {
-      if(var_3.player == self)
+      if(var_3.player == self) {
         var_3._id_36ED = 0;
+      }
     }
   }
 
   var_6 = _id_46DD();
 
-  if(var_6 == "attached_glow")
+  if(var_6 == "attached_glow") {
     _id_A573(::_id_A575, ::_id_4513, undefined);
+  }
 }
 
 _id_2E59(var_0, var_1, var_2) {
   var_3 = _newclienthudelem(var_0);
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_3.color = (0.1, 0.0015, 0.0015);
-  else
+  } else {
     var_3.color = (1, 0.015, 0.015);
+  }
 
   var_3.alpha = 1.0;
   var_3 setradarhighlight(var_1);
@@ -188,17 +201,19 @@ _id_2E59(var_0, var_1, var_2) {
 }
 
 _id_2E58(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 destroy();
+  }
 }
 
 _id_2E57(var_0, var_1, var_2, var_3) {
   var_4 = _id_2E59(var_0, var_1, var_2);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_0 common_scripts\utility::waittill_notify_or_timeout(var_3, var_1);
-  else
+  } else {
     wait(var_1);
+  }
 
   _id_2E58(var_4);
 }
@@ -214,34 +229,38 @@ _id_2E56(var_0, var_1, var_2, var_3) {
   var_4 setradarping(int(var_3 + var_5 / 2), int(var_5), var_2 + 0.05);
   wait(var_2);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 destroy();
+  }
 }
 
 _id_3902(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 = _newclienthudelem(var_3);
-  else
+  } else {
     var_5 = newhudelem();
+  }
 
   var_5.x = var_0[0];
   var_5.y = var_0[1];
   var_5._id_01D9 = var_0[2];
 
-  if(isDefined(var_4) && var_4)
+  if(isDefined(var_4) && var_4) {
     var_5.color = (0.05, 0.05, 0.05);
-  else
+  } else {
     var_5.color = (0.8, 0.8, 0.8);
+  }
 
   var_5.alpha = 0.05;
   var_6 = getdvarint("scr_exopingwidth", 100);
   var_5 setradarping(int(var_2), int(var_6), var_1 + 0.05);
   wait(var_1);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 destroy();
+  }
 }
 
 _id_09F5(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -253,17 +272,19 @@ _id_09F5(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 = var_7 - 9 * (var_1 * 1000) / 10;
   var_9 = _id_46DD();
 
-  if(var_7 - var_8 < 250)
+  if(var_7 - var_8 < 250) {
     var_8 = 250 + var_6;
+  }
 
-  if(var_9 == "model")
+  if(var_9 == "model") {
     var_8 = var_6;
-  else if(var_9 == "vfx_model")
+  } else if(var_9 == "vfx_model") {
     var_8 = var_6;
-  else if(var_9 == "attached_glow")
+  } else if(var_9 == "attached_glow") {
     var_8 = var_7;
-  else if(var_9 == "stencil_outline")
+  } else if(var_9 == "stencil_outline") {
     var_8 = var_7;
+  }
 
   foreach(var_11 in var_0) {
     var_12 = 0;
@@ -290,31 +311,36 @@ _id_09F5(var_0, var_1, var_2, var_3, var_4, var_5) {
       self._id_072E._id_8C07[var_16]._id_38C5 = var_2;
 
       if(isPlayer(self)) {
-        if(!isDefined(var_5) || var_5)
+        if(!isDefined(var_5) || var_5) {
           self playlocalsound("flag_spawned");
+        }
       }
     }
   }
 
   if(isPlayer(self)) {
-    if(var_4)
+    if(var_4) {
       _id_A573(::_id_A57A, ::_id_44F0, undefined);
+    }
 
-    if(var_3)
+    if(var_3) {
       _id_A573(::_id_A57A, ::_id_4513, undefined);
+    }
   }
 }
 
 _id_9414(var_0) {
   foreach(var_2 in self._id_072E._id_8C07) {
-    if(var_2._id_38C5 == var_0)
+    if(var_2._id_38C5 == var_0) {
       var_2._id_36ED = 0;
+    }
   }
 
   var_4 = _id_46DD();
 
-  if(var_4 == "attached_glow")
+  if(var_4 == "attached_glow") {
     _id_A573(::_id_A575, ::_id_4513, undefined);
+  }
 }
 
 _id_A573(var_0, var_1, var_2) {
@@ -324,9 +350,9 @@ _id_A573(var_0, var_1, var_2) {
     foreach(var_6, var_5 in self._id_600A._id_3F3F)[[var_0]]([[var_1]](var_5), var_2, level._id_072E._id_3F3D[var_6][0]);
   } else if(var_3 == "model")
     [[var_0]]([[var_1]](self._id_072E), var_2, "tag_origin");
-  else if(var_3 == "vfx_model")
+  else if(var_3 == "vfx_model") {
     [[var_0]]([[var_1]](self._id_072E), var_2, "tag_origin");
-  else if(var_3 == "attached_glow") {
+  } else if(var_3 == "attached_glow") {
     foreach(var_6, var_5 in self._id_600A._id_3F3F)[[var_0]]([[var_1]](var_5), var_2, level._id_072E._id_3F3D[var_6][0]);
   } else if(var_3 == "stencil_outline")
     [[var_0]](self, var_2, "tag_origin");
@@ -337,16 +363,17 @@ _id_A576(var_0, var_1, var_2) {
   var_0 unlink();
   var_0.origin = self gettagorigin(var_2);
   var_0.angles = self gettagangles(var_2);
-  var_0 linkto(self, var_2);
+  var_0 linkTo(self, var_2);
   waitframe();
-  _playfxontag(var_0.fx, var_0, "tag_origin");
+  _playFXOnTag(var_0.fx, var_0, "tag_origin");
 }
 
 _id_A575(var_0, var_1, var_2) {
   var_3 = _id_46DD();
 
-  if(var_3 == "attached_glow")
-    _stopfxontag(var_0.fx, var_0, "tag_origin");
+  if(var_3 == "attached_glow") {
+    _stopFXOnTag(var_0.fx, var_0, "tag_origin");
+  }
 }
 
 _id_A57A(var_0, var_1, var_2) {
@@ -354,14 +381,15 @@ _id_A57A(var_0, var_1, var_2) {
   var_0.origin = self gettagorigin(var_2);
   var_0.angles = self gettagangles(var_2);
 
-  if(var_3 == "glow")
+  if(var_3 == "glow") {
     _triggerfx(var_0);
-  else if(var_3 == "model") {
+  } else if(var_3 == "model") {
     var_4 = "mp_hud_" + self getstance() + "_char";
     var_5 = var_0 != self._id_072E._id_6009;
 
-    if(var_5)
+    if(var_5) {
       var_4 = var_4 + "_hostile";
+    }
 
     var_6 = var_0.model;
 
@@ -430,62 +458,63 @@ _id_A57A(var_0, var_1, var_2) {
 _id_4513(var_0) {
   var_1 = _id_46DD();
 
-  if(var_1 == "glow")
+  if(var_1 == "glow") {
     return var_0._id_376D;
-  else if(var_1 == "model")
+  } else if(var_1 == "model") {
     return var_0._id_6008;
-  else if(var_1 == "vfx_model")
+  } else if(var_1 == "vfx_model") {
     return var_0._id_6008;
-  else if(var_1 == "attached_glow")
+  } else if(var_1 == "attached_glow") {
     return var_0;
-  else if(var_1 == "stencil_outline")
+  } else if(var_1 == "stencil_outline") {
     return var_0;
-  else {}
+  } else {}
 }
 
 _id_44F0(var_0) {
   var_1 = _id_46DD();
 
-  if(var_1 == "glow")
+  if(var_1 == "glow") {
     return var_0._id_3EE0;
-  else if(var_1 == "model")
+  } else if(var_1 == "model") {
     return var_0._id_6009;
-  else if(var_1 == "vfx_model")
+  } else if(var_1 == "vfx_model") {
     return var_0._id_6009;
-  else {}
+  } else {}
 }
 
 _id_44EF(var_0) {
   var_1 = _id_46DD();
 
-  if(var_1 == "glow")
+  if(var_1 == "glow") {
     return var_0._id_3EDF;
-  else if(var_1 == "model")
+  } else if(var_1 == "model") {
     return var_0._id_6009;
-  else if(var_1 == "vfx_model")
+  } else if(var_1 == "vfx_model") {
     return var_0._id_6009;
-  else {}
+  } else {}
 }
 
 _id_4512(var_0) {
   var_1 = _id_46DD();
 
-  if(var_1 == "glow")
+  if(var_1 == "glow") {
     return var_0._id_376C;
-  else if(var_1 == "model")
+  } else if(var_1 == "model") {
     return var_0._id_6008;
-  else if(var_1 == "vfx_model")
+  } else if(var_1 == "vfx_model") {
     return var_0._id_6008;
-  else if(var_1 == "attached_glow")
+  } else if(var_1 == "attached_glow") {
     return var_0;
-  else if(var_1 == "stencil_outline")
+  } else if(var_1 == "stencil_outline") {
     return var_0;
-  else {}
+  } else {}
 }
 
 _id_A574(var_0, var_1, var_2) {
-  foreach(var_4 in var_0)
-  var_4 hide();
+  foreach(var_4 in var_0) {
+    var_4 hide();
+  }
 }
 
 _id_0850(var_0) {
@@ -557,7 +586,7 @@ _id_63EC() {
         self._id_072E._id_6008 hide();
       } else if(var_10 == "attached_glow") {
         foreach(var_13, var_5 in self._id_600A._id_3F3F) {
-          _stopfxontag(var_5.fx, var_5, "tag_origin");
+          _stopFXOnTag(var_5.fx, var_5, "tag_origin");
           var_5 hide();
         }
       } else {}
@@ -587,18 +616,20 @@ _id_63EC() {
 
 _id_76A0(var_0, var_1, var_2) {
   if(var_0) {
-    if(var_1 == "attached_glow")
+    if(var_1 == "attached_glow") {
       _id_8C1D(var_2, ::_id_44EF, ::_id_4512, ::_id_A577);
+    }
   }
 }
 
 _id_A577(var_0, var_1, var_2) {
-  _playfxontag(var_0.fx, var_0, "tag_origin");
+  _playFXOnTag(var_0.fx, var_0, "tag_origin");
 }
 
 _id_217C(var_0) {
-  if(_bullettracepassed(var_0.player getEye(), self getEye(), 0, var_0.player))
+  if(_bullettracepassed(var_0.player getEye(), self getEye(), 0, var_0.player)) {
     return 1;
+  }
 
   return 0;
 }
@@ -654,7 +685,7 @@ _id_9976(var_0) {
       var_8 show();
       var_8.origin = self gettagorigin(var_3[0]);
       var_8.angles = self gettagangles(var_3[0]);
-      var_8 linkto(self, var_3[0]);
+      var_8 linkTo(self, var_3[0]);
       var_8.fx = var_3[1];
       var_1._id_3F3F[var_5] = var_8;
     }
@@ -683,10 +714,11 @@ _id_8C1D(var_0, var_1, var_2, var_3) {
   }
   var_4 = var_2;
 
-  if((level.teambased || level._id_6520) && var_0.team == self.team)
+  if((level.teambased || level._id_6520) && var_0.team == self.team) {
     var_4 = var_1;
-  else if(var_0 == self)
+  } else if(var_0 == self) {
     var_4 = var_1;
+  }
 
   _id_A573(var_3, var_4, var_0);
 }

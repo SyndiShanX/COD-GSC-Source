@@ -122,18 +122,20 @@ dlc3_carepackage_parachute() {
 dlc3_carepackage_firstimpact() {
   var_0 = self;
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     _id_0380::_id_6844("mp_ks_crpkg_imp_allies", undefined, self);
-  else
+  } else {
     _id_0380::_id_6844("mp_ks_crpkg_imp_axis", undefined, self);
+  }
 }
 
 dlc3_player_repair_start(var_0, var_1) {
   var_2 = self;
   wait 1.2;
 
-  if(var_0 == "war_wrench_assemble_mp")
+  if(var_0 == "war_wrench_assemble_mp") {
     level._id_11CB.repair_wrench_snd = _id_0380::_id_2889("buildable_barbed_wire_wrench", undefined, var_1.origin);
+  }
 }
 
 dlc3_player_repair_stop(var_0) {
@@ -161,15 +163,17 @@ dlc3_stop_escape_music(var_0) {
   if(isDefined(level._id_11CB.escape_music_playing)) {
     var_2 = 10;
 
-    foreach(var_4 in level.players)
-    var_4 thread dlc3_play_escape_complete_stinger(var_2);
+    foreach(var_4 in level.players) {
+      var_4 thread dlc3_play_escape_complete_stinger(var_2);
+    }
 
     wait(var_2);
     wait(var_1);
     var_6 = 10;
 
-    foreach(var_4 in level.players)
-    var_4 _id_0366::_id_8E32(var_6);
+    foreach(var_4 in level.players) {
+      var_4 _id_0366::_id_8E32(var_6);
+    }
 
     foreach(var_4 in level.players) {
       var_4 _id_0366::snd_set_auto_wave_music_enabled(1);
@@ -227,8 +231,9 @@ dlc3_altered_state_fade() {
 }
 
 dlc3_altered_state_apply(var_0, var_1) {
-  if(isDefined(self._id_11CB.dlc3_altered_state_submix))
+  if(isDefined(self._id_11CB.dlc3_altered_state_submix)) {
     dlc3_altered_state_clear();
+  }
 
   if(isDefined(self._id_11CB.in_the_void)) {
     return;
@@ -358,8 +363,9 @@ dlc_handle_bob_killed_music() {
   level._id_11CB.bob_music_playing = undefined;
   level._id_11CB.bob_is_dead = 1;
 
-  foreach(var_1 in level.players)
-  var_1 thread dlc_play_boss_killed_stinger();
+  foreach(var_1 in level.players) {
+    var_1 thread dlc_play_boss_killed_stinger();
+  }
 }
 
 dlc_play_boss_killed_stinger() {
@@ -556,8 +562,9 @@ dlc3_wave_mus_switcher() {
       var_7 = var_17;
       var_16 = var_0 _id_0366::_id_8D46();
 
-      if(_id_0378::_id_8D1B(0.02))
+      if(_id_0378::_id_8D1B(0.02)) {
         var_16 = "ravens";
+      }
 
       var_0 _id_0366::_id_8DCF(var_16);
       _id_0366::_id_8E32(var_14);

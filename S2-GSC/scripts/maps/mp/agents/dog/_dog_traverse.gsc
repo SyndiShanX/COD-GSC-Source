@@ -6,8 +6,9 @@
 main() {
   self endon("killanimscript");
 
-  if(!isDefined(level._id_31FA))
+  if(!isDefined(level._id_31FA)) {
     _id_52AE();
+  }
 
   var_0 = self getnegotiationstartnode();
   var_1 = self getnegotiationendnode();
@@ -37,10 +38,11 @@ main() {
     var_7 = self getanimentry(var_6, 0);
     var_8 = _getnotetracktimes(var_7, "code_move");
 
-    if(var_8.size > 0)
+    if(var_8.size > 0) {
       var_9 = _getmovedelta(var_7, 0, var_8[0]);
-    else
+    } else {
       var_9 = _getmovedelta(var_7, 0, 1);
+    }
 
     var_10 = maps\mp\agents\_scriptedagents::_id_441C(var_2, var_9);
     self scragentsetphysicsmode("noclip");
@@ -53,11 +55,13 @@ main() {
           var_12 = 1;
           var_13 = 1;
 
-          if(_length2dsquared(var_4) < 0.64 * _length2dsquared(var_9))
+          if(_length2dsquared(var_4) < 0.64 * _length2dsquared(var_9)) {
             var_12 = 0.4;
+          }
 
-          if(var_2[2] < 0.75 * var_9[2])
+          if(var_2[2] < 0.75 * var_9[2]) {
             var_13 = 0.5;
+          }
 
           self scragentsetanimscale(var_12, var_13);
           maps\mp\agents\_scriptedagents::_id_71FC(var_6, 0, "traverse", "traverse_jump_start");
@@ -69,11 +73,13 @@ main() {
           var_17 = var_1.origin - self.origin;
           var_18 = var_9 - var_15;
 
-          if(_length2dsquared(var_17) < 0.5625 * _length2dsquared(var_18))
+          if(_length2dsquared(var_17) < 0.5625 * _length2dsquared(var_18)) {
             var_12 = 0.75;
+          }
 
-          if(var_17[2] < 0.75 * var_18[2])
+          if(var_17[2] < 0.75 * var_18[2]) {
             var_13 = 0.75;
+          }
 
           var_19 = var_9 - var_16;
           var_20 = (var_19[0] * var_12, var_19[1] * var_12, var_19[2] * var_13);
@@ -165,13 +171,15 @@ _id_0085() {
 }
 
 _id_46BF() {
-  if(isDefined(self._id_9829))
+  if(isDefined(self._id_9829)) {
     return self._id_9829;
+  }
 
-  var_0 = _getent(self.target, "targetname");
+  var_0 = _getEnt(self.target, "targetname");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   self._id_9829 = var_0.origin;
   var_0 delete();

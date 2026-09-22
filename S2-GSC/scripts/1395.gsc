@@ -8,11 +8,13 @@ _id_52A4() {
 }
 
 _id_1F5C(var_0) {
-  if(!_id_0561::_id_1F7B())
+  if(!_id_0561::_id_1F7B()) {
     return 0;
+  }
 
-  if(_id_4B7B())
+  if(_id_4B7B()) {
     return 0;
+  }
 
   return 1;
 }
@@ -24,16 +26,18 @@ _id_A21F(var_0) {
   self._id_65EC.type = var_1;
   self._id_65EC._id_267C = 1 - _id_4599(var_1);
 
-  if(common_scripts\utility::_id_562E(level.reworkedconsumabledenabled))
+  if(common_scripts\utility::_id_562E(level.reworkedconsumabledenabled)) {
     self._id_65EC.flatdiscount = 1250;
+  }
 
   _id_0561::notifywallbuytriggers();
   _id_0548::playsoundasmaster();
 }
 
 _id_4598(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":
@@ -50,8 +54,9 @@ _id_4598(var_0) {
 }
 
 _id_4599(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "common":
@@ -65,8 +70,9 @@ _id_4599(var_0) {
 }
 
 _id_4B7B() {
-  if(isDefined(self._id_65EC))
+  if(isDefined(self._id_65EC)) {
     return 1;
+  }
 
   return 0;
 }

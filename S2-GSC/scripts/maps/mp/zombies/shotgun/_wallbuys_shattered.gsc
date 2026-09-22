@@ -8,11 +8,13 @@ override_wall_buys_by_class() {
   level.plr_custom_on_scoreboard_open_func = ::show_wallbuy_waypoints;
   level.plr_custom_on_scoreboard_off_func = ::hide_wallbuy_waypoints;
 
-  while(!isDefined(level._id_A7DE))
+  while(!isDefined(level._id_A7DE)) {
     waitframe();
+  }
 
-  if(!isDefined(level.rand_wallbuys))
+  if(!isDefined(level.rand_wallbuys)) {
     level.rand_wallbuys = [];
+  }
 
   var_0 = _getscriptablearray("wallbuy_lgt", "targetname");
 
@@ -21,8 +23,9 @@ override_wall_buys_by_class() {
       level.rand_wallbuys = common_scripts\utility::_id_0F6F(level.rand_wallbuys, var_2);
       var_3 = common_scripts\utility::_id_4461(var_2.origin, var_0);
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_2.scriptable_light = var_3;
+      }
 
       foreach(var_5 in var_2._id_A7E3) {
         var_5.weapon_class = _id_0547::zm_get_weapon_class(var_2._id_0165);
@@ -82,8 +85,9 @@ show_wallbuy_waypoints(var_0) {
     var_2._id_01D9 = var_5.origin[2] + 35;
     var_2 setwaypoint(0, 0, 0);
 
-    if(!isDefined(var_0.shwaypoints))
+    if(!isDefined(var_0.shwaypoints)) {
       var_0.shwaypoints = [];
+    }
 
     var_0.shwaypoints = common_scripts\utility::_id_0F6F(var_0.shwaypoints, var_2);
     var_5._id_A98D = var_2;
@@ -92,16 +96,18 @@ show_wallbuy_waypoints(var_0) {
 
 hide_wallbuy_waypoints(var_0) {
   foreach(var_2 in level.active_zombie_models_to_outline) {
-    if(isDefined(var_2._id_A98D) && !_isremovedentity(var_2._id_A98D))
+    if(isDefined(var_2._id_A98D) && !_isremovedentity(var_2._id_A98D)) {
       var_2._id_A98D destroy();
+    }
 
     var_2 hudoutlinedisableforclient(var_0);
   }
 
   if(isDefined(var_0.shwaypoints)) {
     foreach(var_5 in var_0.shwaypoints) {
-      if(isDefined(var_5) && !_isremovedentity(var_5))
+      if(isDefined(var_5) && !_isremovedentity(var_5)) {
         var_5 destroy();
+      }
     }
   }
 
@@ -119,8 +125,9 @@ run_wallbuy_mysterybox_mod() {
   if(isDefined(self.wallbuyguncard)) {
     var_4 = get_wallbuy_gun_card_model(var_3);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       self.wallbuyguncard setModel(var_4);
+    }
   }
 
   var_5 = get_current_weapon_level(var_3);
@@ -223,20 +230,23 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
 
     var_3 = var_7[var_8];
 
-    if(isDefined(getDvar("testingWallBuyWeap")) && getDvar("testingWallBuyWeap") != "")
+    if(isDefined(getDvar("testingWallBuyWeap")) && getDvar("testingWallBuyWeap") != "") {
       var_3 = getDvar("testingWallBuyWeap");
+    }
 
     var_2._id_6C5C = var_3;
     var_8++;
 
-    if(var_8 >= var_7.size)
+    if(var_8 >= var_7.size) {
       var_8 = 0;
+    }
 
     var_12 = var_3;
 
     if(isDefined(var_2.lastclaimedplayer) && isPlayer(var_2.lastclaimedplayer)) {
-      if(var_2.lastclaimedplayer _id_0579::_id_4BA5())
+      if(var_2.lastclaimedplayer _id_0579::_id_4BA5()) {
         var_3 = var_2.lastclaimedplayer._id_A99B;
+      }
 
       var_12 = _id_0548::_id_454B(var_2.lastclaimedplayer, var_3);
     }
@@ -250,11 +260,13 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
     level._id_11CB._id_65F4 = _id_0380::_id_2889("zmb_mystery_box_elec", undefined, var_2._id_A9E3);
     var_2._id_586E showtoplayer(var_13);
 
-    if(!isDefined(var_2._id_586E._id_6C4E))
+    if(!isDefined(var_2._id_586E._id_6C4E)) {
       var_2._id_586E._id_6C4E = var_2._id_586E.origin;
+    }
 
-    if(!isDefined(var_2.itementlink._id_6C4E))
+    if(!isDefined(var_2.itementlink._id_6C4E)) {
       var_2.itementlink._id_6C4E = var_2.itementlink.origin;
+    }
 
     var_2._id_586E.origin = var_2._id_586E._id_6C4E;
     var_2.itementlink.origin = var_2.itementlink._id_6C4E;
@@ -262,16 +274,18 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
     var_2._id_586E slide_left();
     var_2._id_586E linktosynchronizedparent(var_2.itementlink);
     var_14 = var_2._id_A9E3 + 6 * vectorNormalize(anglestoright(var_2._id_A9BD));
-    var_2.itementlink moveto(var_14, 0.15);
+    var_2.itementlink moveTo(var_14, 0.15);
     wait 0.25;
 
-    if(var_13 _id_0579::_id_4BA5())
+    if(var_13 _id_0579::_id_4BA5()) {
       var_13 _id_0579::_id_A246();
+    }
 
-    if(_id_0547::_id_585C(var_12))
+    if(_id_0547::_id_585C(var_12)) {
       _id_0548::_id_A7D5(var_13, var_12);
-    else
+    } else {
       _id_0548::_id_A7D6(var_13, var_12);
+    }
 
     if(!common_scripts\utility::_id_562E(var_13._id_4B72)) {
       if(randomint(100) < level.zmb_shotgun_jack_in_box_odds) {
@@ -285,16 +299,18 @@ run_wallbuy_trigger_mysterybox_mod(var_0, var_1) {
 
     var_2._id_586E ghost();
 
-    if(!common_scripts\utility::_id_562E(var_2.onceonly))
+    if(!common_scripts\utility::_id_562E(var_2.onceonly)) {
       var_2 wallbuymysterygatebuycycle();
-    else
+    } else {
       waitframe();
+    }
 
     var_2 notify("mystery_wallbuy_done");
   }
 
-  if(isDefined(var_2.itementlink))
+  if(isDefined(var_2.itementlink)) {
     var_2.itementlink delete();
+  }
 }
 
 get_wallbuy_jack_multiplier(var_0) {
@@ -331,8 +347,9 @@ watch_player_consumable_usage(var_0) {
     var_0._id_65DC._id_6642 = 1;
     var_3 = var_0._id_6C5C;
 
-    if(var_2 _id_0579::_id_4BA5())
+    if(var_2 _id_0579::_id_4BA5()) {
       var_3 = var_2._id_A99B;
+    }
 
     var_3 = _id_0548::_id_454B(var_2, var_3);
     setwallbuyitements(var_1, var_0, var_3);
@@ -347,8 +364,9 @@ replace_wallbuy_weapon(var_0, var_1) {
   var_2 = var_0._id_A9E3;
   var_3 = (0, 0, 0);
 
-  if(isDefined(var_0._id_A9BD))
+  if(isDefined(var_0._id_A9BD)) {
     var_3 = var_0._id_A9BD;
+  }
 
   var_4 = spawn("weapon_" + var_1, var_2, 1);
   var_4.angles = var_3;
@@ -359,18 +377,20 @@ showwaywallbuypointping(var_0) {
   var_1 = self;
   var_2 = _newclienthudelem(var_1);
 
-  if(!isDefined(var_1.pingingwaypoints))
+  if(!isDefined(var_1.pingingwaypoints)) {
     var_1.pingingwaypoints = [];
+  }
 
   var_1.pingingwaypoints = common_scripts\utility::_id_0FA0(var_1.pingingwaypoints);
   var_1.pingingwaypoints = common_scripts\utility::_id_0F6F(var_1.pingingwaypoints, var_2);
   var_3 = var_0.weap_origin;
   var_4 = var_0.weap_class;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_2 setshader(level.zombies_shotgun_weapon_waypoints[var_4], 1, 1);
-  else
+  } else {
     var_2 setshader(level.zmb_sg_wallbuy_waypoint_icon, 1, 1);
+  }
 
   var_2.alpha = 0;
   var_2.color = (1, 1, 1);
@@ -395,8 +415,9 @@ showwaywallbuypointping(var_0) {
   var_2.alpha = 0;
   wait 2;
 
-  if(waypoint_exists(var_2))
+  if(waypoint_exists(var_2)) {
     var_2 destroy();
+  }
 }
 
 waypoint_exists(var_0) {
@@ -417,8 +438,9 @@ give_wallbuy_materials() {
 
 broadcast_and_unlock_available_weapon_wallbuys() {
   foreach(var_1 in level.sg_wallbuyclasses) {
-    if(level.wallbuymaterials > 1 && level.wallbuymaterials == level.zombies_shotgun_weapons_level[var_1])
+    if(level.wallbuymaterials > 1 && level.wallbuymaterials == level.zombies_shotgun_weapons_level[var_1]) {
       level thread maps\mp\_utility::_id_6F74(maps\mp\gametypes\_hud_message::_id_9102, level.zombies_shotgun_weapons_splashes[var_1]);
+    }
   }
 
   unlock_new_wallbuys();
@@ -430,15 +452,17 @@ set_prompt_data_needs_refresh() {
   var_0 = level._id_ABD1;
 
   for(var_1 = 0; var_1 < 4; var_1++) {
-    if(var_0[var_1] is_valid_prompt())
+    if(var_0[var_1] is_valid_prompt()) {
       var_0[var_1]._id_2903._id_9FD3._id_6642 = 1;
+    }
   }
 
   var_0 = level._id_AC0C;
 
   for(var_1 = 0; var_1 < 4; var_1++) {
-    if(var_0[var_1] is_valid_prompt())
+    if(var_0[var_1] is_valid_prompt()) {
       var_0[var_1]._id_2903._id_9FD3._id_6642 = 1;
+    }
   }
 }
 
@@ -464,22 +488,27 @@ _id_4D1B(var_0) {
 }
 
 getwallbuytriggercost(var_0) {
-  if(maps\mp\_utility::gameflag("fire_sale"))
+  if(maps\mp\_utility::gameflag("fire_sale")) {
     return int(10);
+  }
 
   var_1 = 1000;
 
-  if(isDefined(self._id_267B))
+  if(isDefined(self._id_267B)) {
     var_1 = self._id_267B;
+  }
 
-  if(isPlayer(var_0) && var_0 _id_0573::_id_4B7B())
+  if(isPlayer(var_0) && var_0 _id_0573::_id_4B7B()) {
     var_1 = var_1 - var_0._id_65EC.flatdiscount;
+  }
 
-  if(isPlayer(var_0) && var_0 _id_0577::_id_4B95())
+  if(isPlayer(var_0) && var_0 _id_0577::_id_4B95()) {
     var_1 = var_1 - var_0._id_8C71.flatdiscount;
+  }
 
-  if(var_1 < 0)
+  if(var_1 < 0) {
     var_1 = 0;
+  }
 
   return int(var_1);
 }
@@ -606,8 +635,9 @@ start_hammer() {
   var_3 = var_1[0];
 
   foreach(var_5 in var_1) {
-    if(common_scripts\utility::_id_0F79(var_1, var_2))
+    if(common_scripts\utility::_id_0F79(var_1, var_2)) {
       var_3 = var_2;
+    }
   }
 
   _id_0548::_id_A7D6(var_0, "war_hammer_assemble_mp");
@@ -620,15 +650,17 @@ take_hammer(var_0) {
   var_1 _id_0586::_id_0790("war_hammer_assemble_mp");
   var_1 enableweaponswitch();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 _id_0586::_id_078E(var_0);
+  }
 }
 
 wallbuymysterytogglegatescriptables(var_0) {
   var_1 = "zmb_wallbuy_close";
 
-  if(common_scripts\utility::_id_562E(var_0))
+  if(common_scripts\utility::_id_562E(var_0)) {
     var_1 = "zmb_wallbuy_open";
+  }
 
   var_2 = _id_0380::_id_2889(var_1, undefined, self._id_A9E3);
   _id_0378::_id_8D14(var_2);
@@ -645,17 +677,19 @@ wallbuymysterytogglegate(var_0, var_1) {
   if(isDefined(self.wallbuy.scriptable_light)) {
     var_2 = "off";
 
-    if(common_scripts\utility::_id_562E(var_0))
+    if(common_scripts\utility::_id_562E(var_0)) {
       var_2 = "on";
+    }
 
     self.wallbuy.scriptable_light setscriptablepartstate("lightpart", var_2);
   }
 
   if(isDefined(self.wallbuy.wallbuyguncard) && isDefined(var_1) && isPlayer(var_1)) {
-    if(common_scripts\utility::_id_562E(var_0))
+    if(common_scripts\utility::_id_562E(var_0)) {
       self.wallbuy.wallbuyguncard showtoplayer(var_1);
-    else
+    } else {
       self.wallbuy.wallbuyguncard _meth_8006(var_1);
+    }
   }
 
   self.isopen = var_0;
@@ -693,19 +727,22 @@ assignwallbuymysterypurchasetoplayer(var_0) {
   var_0 clientclaimtrigger(var_1);
   var_1.lastclaimedplayer = var_0;
 
-  if(!isDefined(var_0.claimedwbtriggers))
+  if(!isDefined(var_0.claimedwbtriggers)) {
     var_0.claimedwbtriggers = [];
+  }
 
   var_0.claimedwbtriggers[var_0.claimedwbtriggers.size] = var_1;
 
-  while(common_scripts\utility::_id_562E(var_0.playerconnectedbuthasntstreamedweapons))
+  while(common_scripts\utility::_id_562E(var_0.playerconnectedbuthasntstreamedweapons)) {
     waitframe();
+  }
 
   wait(_randomfloat(0.5));
   var_1 notify("modify_wallbuy_data", var_0);
 
-  if(isDefined(var_1._id_6C1D))
+  if(isDefined(var_1._id_6C1D)) {
     var_1._id_6C1D delete();
+  }
 
   var_2 = _id_0552::_id_7BE1(var_0, self);
   _id_0559::_id_7BE2(var_0, self, "wallbuy_dlc3");

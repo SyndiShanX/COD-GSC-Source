@@ -55,8 +55,8 @@ _id_85BE() {
   level._id_320F = loadfx("vfx/unique/vfx_marker_dom_white");
   level._id_3CDF = 0;
   level._id_7043 = [];
-  level._id_702F = _getent("plane_care_package_start", "targetname");
-  level._id_702E = _getent("plane_care_package_end", "targetname");
+  level._id_702F = _getEnt("plane_care_package_start", "targetname");
+  level._id_702E = _getEnt("plane_care_package_end", "targetname");
   level._id_5FEB = (0, 0, 0);
   level.makeglobalusable = [];
   level.makeglobalunusable = [];
@@ -64,8 +64,9 @@ _id_85BE() {
   _id_0529::_id_8A0E();
   setdvarifuninitialized("hub_flak_event_force_start", 0);
 
-  if(!level._id_4F50 && _isonlinegame())
+  if(!level._id_4F50 && _isonlinegame()) {
     thread _id_63BD();
+  }
 
   thread _id_6396();
   thread _id_63BC();
@@ -75,16 +76,18 @@ _id_63BD() {
   level endon("game_ended");
 
   for(;;) {
-    while(getdvarint("spv_hub_planes_kswitch", 1) == 1 || getdvarint("1258", 0))
+    while(getdvarint("spv_hub_planes_kswitch", 1) == 1 || getdvarint("1258", 0)) {
       wait 1;
+    }
 
     var_0 = getdvarint("spv_hub_plane_event_freq", 14400);
     var_1 = getdvarint("spv_hub_plane_event_range_time", 3600);
     var_0 = _randomintrange(var_0 - var_1, var_0 + var_1);
     wait(var_0);
 
-    if(getdvarint("spv_hub_planes_kswitch", 1) == 0)
+    if(getdvarint("spv_hub_planes_kswitch", 1) == 0) {
       _id_4ADF();
+    }
   }
 }
 
@@ -94,8 +97,9 @@ _id_6396() {
   for(;;) {
     setDvar("hub_flak_event_force_start", 0);
 
-    while(getdvarint("hub_flak_event_force_start", 0) == 0)
+    while(getdvarint("hub_flak_event_force_start", 0) == 0) {
       wait 1;
+    }
 
     _id_4ADF();
   }
@@ -135,8 +139,9 @@ handlenormalexit(var_0) {
   var_0 waittill("turretownerchange");
   self notify("exit_aa_turret");
 
-  foreach(var_2 in level._id_7043)
-  var_2 _id_2F96(self);
+  foreach(var_2 in level._id_7043) {
+    var_2 _id_2F96(self);
+  }
 
   self disableslowaim();
   self _meth_85C7();
@@ -144,14 +149,17 @@ handlenormalexit(var_0) {
   _id_04E0::_id_870B(0);
   self setclientomnvar("ui_hub_in_flakgun", 0);
 
-  if(isDefined(var_0._id_15C9[0]))
+  if(isDefined(var_0._id_15C9[0])) {
     var_0._id_15C9[0] solid();
+  }
 
-  if(isDefined(var_0._id_15C9[1]))
+  if(isDefined(var_0._id_15C9[1])) {
     var_0._id_15C9[1] solid();
+  }
 
-  if(isDefined(var_0._id_15C9[2]))
+  if(isDefined(var_0._id_15C9[2])) {
     var_0._id_15C9[2] solid();
+  }
 
   _id_04E0::_id_7E4E(3);
   _id_04E0::_id_7E4F(2);
@@ -181,14 +189,17 @@ enteraaturret(var_0) {
   _id_04E0::_id_870B(1);
   self setclientomnvar("ui_hub_in_flakgun", 1);
 
-  if(isDefined(var_0._id_15C9[0]))
+  if(isDefined(var_0._id_15C9[0])) {
     var_0._id_15C9[0] notsolid();
+  }
 
-  if(isDefined(var_0._id_15C9[1]))
+  if(isDefined(var_0._id_15C9[1])) {
     var_0._id_15C9[1] notsolid();
+  }
 
-  if(isDefined(var_0._id_15C9[2]))
+  if(isDefined(var_0._id_15C9[2])) {
     var_0._id_15C9[2] notsolid();
+  }
 
   thread handleleaveactivity(var_0);
   thread handlenormalexit(var_0);
@@ -214,12 +225,14 @@ _id_681D(var_0) {
   var_2 = [];
 
   foreach(var_4 in level.players) {
-    if(!isDefined(var_0) || var_4 != var_0)
+    if(!isDefined(var_0) || var_4 != var_0) {
       var_2[var_2.size] = var_4;
+    }
   }
 
-  if(isDefined(var_2) && var_2.size > 0)
+  if(isDefined(var_2) && var_2.size > 0) {
     _id_0380::_id_2889("mp_hub_allies_npc_flak_tail", var_2, var_1);
+  }
 }
 
 _id_4ADF() {
@@ -237,8 +250,9 @@ _id_4ADF() {
   level._id_2DC7 = 0;
 
   foreach(var_1 in level.players) {
-    if(var_1._id_572A)
+    if(var_1._id_572A) {
       continue;
+    }
   }
 
   _setomnvar("ui_flak_gun_event", 1);
@@ -259,20 +273,23 @@ _id_4ADF() {
     }
   }
 
-  if(level._id_2DCA > 0)
+  if(level._id_2DCA > 0) {
     level._id_2DC7 = 1;
+  }
 
   level._id_2DCA = -1;
 
-  while(level._id_1FFD.size > 0 || level._id_A984)
+  while(level._id_1FFD.size > 0 || level._id_A984) {
     wait 1;
+  }
 
   _setomnvar("ui_fge_planes_shot_down", level.totalplanesdestroyed);
   _setomnvar("ui_fge_carepackages_remaining", level._id_1FFD.size);
 
   foreach(var_5 in level._id_7043) {
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_5 thread _id_5F15();
+    }
   }
 
   if(level._id_2758 > 0) {
@@ -281,8 +298,9 @@ _id_4ADF() {
       var_1 iprintln(&"MP_RECEIVED_ARMORY_CREDITS", level._id_2758 * 10);
     }
   } else if(level._id_2DC7) {
-    foreach(var_1 in level.players)
-    var_1 _id_0468::_id_0A21(0);
+    foreach(var_1 in level.players) {
+      var_1 _id_0468::_id_0A21(0);
+    }
   }
 
   _setomnvar("ui_fge_carepackages_secured", level._id_2758);
@@ -333,8 +351,9 @@ _id_92F2() {
   thread _id_9061();
   thread managefighterplanetracers();
 
-  while(level._id_1FFD.size < 1 || level._id_7043.size < 1)
+  while(level._id_1FFD.size < 1 || level._id_7043.size < 1) {
     wait 1;
+  }
 
   level._id_A984 = 0;
 }
@@ -349,18 +368,21 @@ _id_4D4C() {
 
   level waittill("plane_event_end");
 
-  while(level._id_A984)
+  while(level._id_A984) {
     wait 1;
+  }
 
-  while(level._id_7043.size > 0)
+  while(level._id_7043.size > 0) {
     wait 1;
+  }
 
   foreach(var_1 in level._id_0813) {
     var_1 makeunusable();
     var_4 = var_1 getturretowner();
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 remotecontrolturretoff(var_1);
+    }
   }
 }
 
@@ -369,8 +391,9 @@ destroycrateaftertime(var_0) {
   self endon("crate_start_countdown");
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_0529::_id_2D30(1, 1, 1);
+  }
 }
 
 _id_4ACA() {
@@ -381,8 +404,9 @@ _id_4ACA() {
     var_0 = self getturretowner();
 
     if(isDefined(var_0) && isPlayer(var_0)) {
-      foreach(var_2 in level._id_7043)
-      var_2 _id_365E(var_0);
+      foreach(var_2 in level._id_7043) {
+        var_2 _id_365E(var_0);
+      }
     }
 
     self waittill("turretownerchange");
@@ -394,8 +418,9 @@ _id_365E(var_0) {
     foreach(var_2 in level._id_0813) {
       var_0 = var_2 getturretowner();
 
-      if(isDefined(var_0) && isPlayer(var_0))
+      if(isDefined(var_0) && isPlayer(var_0)) {
         self hudoutlineenableforclient(var_0, 1, 0);
+      }
     }
   } else
     self hudoutlineenableforclient(var_0, 1, 0);
@@ -403,8 +428,9 @@ _id_365E(var_0) {
 
 _id_2F96(var_0) {
   if(!isDefined(var_0)) {
-    foreach(var_0 in level.players)
-    self hudoutlinedisableforclient(var_0);
+    foreach(var_0 in level.players) {
+      self hudoutlinedisableforclient(var_0);
+    }
   } else
     self hudoutlinedisableforclient(var_0);
 }
@@ -431,11 +457,11 @@ _id_3EB7(var_0) {
 _id_649F(var_0) {
   level endon("game_ended");
   var_1 = 10;
-  self moveto(level._id_702E.origin + (0, 0, 1500), var_1);
+  self moveTo(level._id_702E.origin + (0, 0, 1500), var_1);
   wait 6.75;
-  self moveto(level._id_702E.origin + (0, 0, 1500), var_1);
+  self moveTo(level._id_702E.origin + (0, 0, 1500), var_1);
   _id_7032();
-  self moveto(level._id_702E.origin + (0, 0, 1500), 2);
+  self moveTo(level._id_702E.origin + (0, 0, 1500), 2);
   wait 1;
   _id_39CB(var_0, 1);
   wait 1;
@@ -466,28 +492,32 @@ _id_4ACD(var_0) {
   common_scripts\utility::waittill_notify_or_timeout("crate_start_countdown", 120);
 
   if(isDefined(self._id_321B)) {
-    if(!isDefined(self._id_321B._id_7450))
+    if(!isDefined(self._id_321B._id_7450)) {
       self._id_321B._id_7450 = 0;
+    }
 
     notifyplayers(self, &"init_supply_drop_countdown");
     wait 1;
 
     for(var_1 = 9; var_1 > 0; var_1--) {
       for(var_2 = 0; self._id_321B._id_7450 > 0; var_2 = 1) {
-        if(!var_2)
+        if(!var_2) {
           notifyplayers(self, &"set_supply_drop_countdown");
+        }
 
         wait 0.25;
       }
 
-      if(var_2)
+      if(var_2) {
         notifyplayers(self, &"set_supply_drop_countdown");
+      }
 
       wait 1;
     }
 
-    while(self._id_321B._id_7450 > 0)
+    while(self._id_321B._id_7450 > 0) {
       wait 0.25;
+    }
   }
 }
 
@@ -496,11 +526,13 @@ _id_4AB3(var_0) {
   self endon("death");
   _id_4ACD(var_0);
 
-  if(isDefined(self) && isDefined(self._id_6E4A))
+  if(isDefined(self) && isDefined(self._id_6E4A)) {
     self._id_6E4A delete();
+  }
 
-  if(isDefined(self) && isDefined(self._id_6E4C))
+  if(isDefined(self) && isDefined(self._id_6E4C)) {
     self._id_6E4C delete();
+  }
 
   notifyplayers(self, &"delete_supply_drop_countdown");
   common_scripts\utility::_id_0F93(level._id_1FFD, self);
@@ -520,7 +552,7 @@ _id_4AAD(var_0) {
   var_1._id_944E = "ammo";
   var_1.targetname = "care_package";
   var_1 setModel("usa_carepackage_crate");
-  _playfxontag(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_1, "TAG_FX");
+  _playFXOnTag(common_scripts\utility::_id_44F5("care_package_allies_beacon"), var_1, "TAG_FX");
   var_2 = spawn("script_model", var_1 gettagorigin("tag_origin") + (0, 0, -10));
   var_2.angles = (0, 180, 0);
   var_2 setModel("usa_carepackage_parachute_anim");
@@ -531,7 +563,7 @@ _id_4AAD(var_0) {
   var_3 = spawn("script_model", var_2.origin);
   var_3.angles = var_2.angles;
   var_3 setModel("ger_carepackage_parachute");
-  var_3 setcandamage(1);
+  var_3 setCanDamage(1);
   var_3 hide();
   var_3 linktosynchronizedparent(var_2);
   var_1.angles = var_2 gettagangles("TAG_CRATE");
@@ -545,8 +577,9 @@ _id_4AAD(var_0) {
   wait 1.75;
   var_2._id_2D6A = 1;
 
-  if(isDefined(var_1._id_6E4A))
+  if(isDefined(var_1._id_6E4A)) {
     var_2 scriptmodelplayanim("carepackage_parachute_loop");
+  }
 
   var_2 thread _id_0529::_id_63BB(var_1, var_2);
   var_3 thread _id_0529::_id_63BA(var_2, var_1);
@@ -562,10 +595,11 @@ _id_64B8() {
   thread _id_1FF9();
 
   for(;;) {
-    if(!isDefined(self._id_2D6A) || !self._id_2D6A)
-      self moveto(self.origin - (0, 0, 35), 0.05);
-    else
-      self moveto(self.origin - (0, 0, self._id_3A1C), 0.05);
+    if(!isDefined(self._id_2D6A) || !self._id_2D6A) {
+      self moveTo(self.origin - (0, 0, 35), 0.05);
+    } else {
+      self moveTo(self.origin - (0, 0, self._id_3A1C), 0.05);
+    }
 
     waitframe();
   }
@@ -610,18 +644,21 @@ _id_9061() {
     if(var_6 == var_2) {
       var_6++;
 
-      if(var_6 >= var_1.size)
+      if(var_6 >= var_1.size) {
         var_6 = 0;
+      }
     }
   }
 }
 
 objnum(var_0) {
-  if(!isDefined(level._id_68A7))
+  if(!isDefined(level._id_68A7)) {
     level._id_68A7 = [];
+  }
 
-  if(!isDefined(level._id_68A7[var_0]))
+  if(!isDefined(level._id_68A7[var_0])) {
     level._id_68A7[var_0] = level._id_68A7.size + 1;
+  }
 
   return level._id_68A7[var_0];
 }
@@ -683,17 +720,17 @@ managefighterplanetracers() {
     foreach(var_2 in level._id_7043) {
       if(var_2.firing && !var_0) {
         var_3 = common_scripts\utility::_id_44F5("hub_plane_tracer");
-        _stopfxontag(var_3, var_2, "tag_muzzle_fx_1");
-        _stopfxontag(var_3, var_2, "tag_muzzle_fx_2");
+        _stopFXOnTag(var_3, var_2, "tag_muzzle_fx_1");
+        _stopFXOnTag(var_3, var_2, "tag_muzzle_fx_2");
         var_2.firing = 0;
       }
 
       if(!var_2.firing && var_0) {
         var_3 = common_scripts\utility::_id_44F5("hub_plane_tracer");
         waitframe();
-        _playfxontag(var_3, var_2, "tag_muzzle_fx_1");
+        _playFXOnTag(var_3, var_2, "tag_muzzle_fx_1");
         waitframe();
-        _playfxontag(var_3, var_2, "tag_muzzle_fx_2");
+        _playFXOnTag(var_3, var_2, "tag_muzzle_fx_2");
         var_2.firing = 1;
       }
     }
@@ -709,8 +746,9 @@ _id_3BD4() {
   self endon("stop_shooting");
 
   for(;;) {
-    while(!isDefined(level._id_1FFD) || level._id_1FFD.size == 0)
+    while(!isDefined(level._id_1FFD) || level._id_1FFD.size == 0) {
       wait 1;
+    }
 
     var_0 = randomint(level._id_94DE);
 
@@ -727,8 +765,9 @@ _id_3BD4() {
     }
 
     for(var_1 = 0; var_1 < 4; var_1++) {
-      if(isDefined(self._id_9823) && !isDefined(self._id_9823._id_5AFA))
+      if(isDefined(self._id_9823) && !isDefined(self._id_9823._id_5AFA)) {
         _id_0380::_id_6842("mp_hub_plane_shot", undefined, self.origin);
+      }
 
       wait 0.5;
     }
@@ -737,10 +776,11 @@ _id_3BD4() {
       var_2 = self.origin;
       _id_0380::_id_2889("mp_hub_care_package_hit", undefined, var_2);
       self._id_9823._id_2748 = self._id_9823._id_2748 - 11;
-      _playfxontag(level._effect["care_package_hit"], self._id_9823, "tag_origin");
+      _playFXOnTag(level._effect["care_package_hit"], self._id_9823, "tag_origin");
 
-      if(self._id_9823._id_2748 <= 11)
-        _playfxontag(level._effect["fire_small"], self._id_9823, "tag_origin");
+      if(self._id_9823._id_2748 <= 11) {
+        _playFXOnTag(level._effect["fire_small"], self._id_9823, "tag_origin");
+      }
 
       if(self._id_9823._id_2748 <= 0 && isDefined(self._id_9823._id_6E4C)) {
         _id_0380::_id_2889("mp_hub_care_package_exp", undefined, var_2);
@@ -759,18 +799,19 @@ _id_64B9() {
 
   for(;;) {
     if(self._id_A995 % 2 == 0) {
-      self moveto(level._id_705E[self._id_A995].origin + self._id_6A15, 7);
+      self moveTo(level._id_705E[self._id_A995].origin + self._id_6A15, 7);
       wait 7;
     } else {
-      self moveto(level._id_705E[self._id_A995].origin + self._id_6A15, 14);
+      self moveTo(level._id_705E[self._id_A995].origin + self._id_6A15, 14);
       wait 14;
     }
 
     self.angles = level._id_705E[self._id_A995].angles;
     self._id_A995++;
 
-    if(self._id_A995 == 4)
+    if(self._id_A995 == 4) {
       self._id_A995 = 0;
+    }
   }
 }
 
@@ -778,8 +819,9 @@ _id_9BC4(var_0) {
   level endon("game_ended");
   self endon("crashing");
 
-  if(!isDefined(self._id_669B))
+  if(!isDefined(self._id_669B)) {
     self._id_669B = self.origin;
+  }
 
   while(isDefined(self)) {
     self._id_6A67 = self._id_669B;
@@ -800,18 +842,20 @@ _id_9BC4(var_0) {
       var_2 = _distance2dsquared(var_1.origin, self.origin);
 
       if(var_2 < 30000000) {
-        if(isDefined(var_1._id_6E4C))
+        if(isDefined(var_1._id_6E4C)) {
           var_1._id_6E4C dodamage(1, var_1.origin, self);
+        }
 
         playFX(level._id_5959, var_1.origin);
         var_1._id_2DC4 = 1;
         self._id_5A45 = 1;
         _setomnvar("ui_fge_carepackages_remaining", level._id_1FFD.size);
 
-        if(isDefined(self._id_4F7D))
+        if(isDefined(self._id_4F7D)) {
           self._id_4F7D destroy();
+        }
 
-        self moveto(self._id_2952.origin, 5);
+        self moveTo(self._id_2952.origin, 5);
         wait 5;
         _id_2F96();
         _id_2D47();
@@ -848,11 +892,13 @@ _id_2D47() {
     _setomnvar("ui_fge_planes_remaining", level._id_7043.size);
   }
 
-  if(level._id_2DCA >= 12)
+  if(level._id_2DCA >= 12) {
     level notify("spawnNextWave");
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_2D48(var_0) {
@@ -860,8 +906,9 @@ _id_2D48(var_0) {
   self endon("death");
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_2D47();
+  }
 }
 
 _id_7040(var_0, var_1, var_2, var_3) {
@@ -870,31 +917,36 @@ _id_7040(var_0, var_1, var_2, var_3) {
 }
 
 _id_7030(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0._id_01D1) && !isPlayer(var_0))
+  if(isDefined(var_0._id_01D1) && !isPlayer(var_0)) {
     var_0 = var_0 getturretowner();
+  }
 
   var_0 _id_04C7::_id_A102("standard_nosound");
   return var_3;
 }
 
 _id_703F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(var_1._id_01D1) && !isPlayer(var_1))
+  if(isDefined(var_1._id_01D1) && !isPlayer(var_1)) {
     var_1 = var_1 getturretowner();
+  }
 
-  if(isDefined(self._id_6E74))
+  if(isDefined(self._id_6E74)) {
     var_12 = self._id_6E74;
-  else
+  } else {
     var_12 = self;
+  }
 
   var_12._id_1193 = maps\mp\_utility::_id_2341(var_12._id_1193);
 
-  if(!common_scripts\utility::_id_0F79(var_12._id_1193, var_1))
+  if(!common_scripts\utility::_id_0F79(var_12._id_1193, var_1)) {
     var_12._id_1193[var_1.guid] = var_1;
+  }
 
   playFX(level._id_5959, self.origin);
 
-  if(var_5 != "turretweapon_ger_btry_flak38_mp" && var_5 != "bazooka_mp" && var_5 != "panzerschreck_mp")
+  if(var_5 != "turretweapon_ger_btry_flak38_mp" && var_5 != "bazooka_mp" && var_5 != "panzerschreck_mp") {
     var_2 = 1;
+  }
 
   var_12.health = var_12.health - var_2;
 
@@ -902,8 +954,9 @@ _id_703F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_1 _id_04C7::_id_A102("killshot_nosound");
     var_12 _id_5F15();
 
-    foreach(var_14 in var_12._id_1193)
-    var_14 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_aagun");
+    foreach(var_14 in var_12._id_1193) {
+      var_14 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_aagun");
+    }
   } else
     var_1 _id_04C7::_id_A102("standard_nosound");
 }
@@ -916,14 +969,16 @@ _id_5F15() {
     return;
   }
   var_0 = common_scripts\utility::_id_44F5("hub_plane_tracer");
-  _stopfxontag(var_0, self, "tag_muzzle_fx_1");
-  _stopfxontag(var_0, self, "tag_muzzle_fx_2");
+  _stopFXOnTag(var_0, self, "tag_muzzle_fx_1");
+  _stopFXOnTag(var_0, self, "tag_muzzle_fx_2");
 
-  if(isDefined(self._id_4F7D))
+  if(isDefined(self._id_4F7D)) {
     self._id_4F7D destroy();
+  }
 
-  foreach(var_2 in level.players)
-  _id_2F96(var_2);
+  foreach(var_2 in level.players) {
+    _id_2F96(var_2);
+  }
 
   self notify("crashing");
   self._id_56BB = 1;

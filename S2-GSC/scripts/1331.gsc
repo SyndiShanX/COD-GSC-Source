@@ -26,13 +26,15 @@ init() {
   self._id_7ED1 = [];
   level._id_7ED0 = [];
 
-  if(isDefined(level._id_7BF5))
+  if(isDefined(level._id_7BF5)) {
     level[[level._id_7BF5]]();
-  else
+  } else {
     _id_7BA6();
+  }
 
-  foreach(var_1 in level._id_7ED0)
-  level thread[[var_1._id_52BC]]();
+  foreach(var_1 in level._id_7ED0) {
+    level thread[[var_1._id_52BC]]();
+  }
 
   level thread onplayerconnect();
   setdvarifuninitialized("rolePowerGainOnDeathShouldCheckWasActive", 0);
@@ -43,8 +45,9 @@ onplayerconnect() {
     level waittill("connected", var_0);
 
     if(!maps\mp\_utility::_id_585F()) {
-      if(!isDefined(var_0.pers["roleRespawnPower"]))
+      if(!isDefined(var_0.pers["roleRespawnPower"])) {
         var_0.pers["roleRespawnPower"] = 0;
+      }
     }
 
     var_0 thread onplayerspawned();
@@ -99,10 +102,11 @@ _id_6B76() {
     var_2 = self _meth_85BA("active");
 
     if(!var_0 && (var_1 || var_2)) {
-      if(maps\mp\_utility::_id_585F())
+      if(maps\mp\_utility::_id_585F()) {
         _id_0378::_id_8D74("role_ready");
-      else
+      } else {
         self playsoundtoplayer("ks_earn_dna_bomb", self, 1);
+      }
 
       return;
     } else
@@ -134,10 +138,11 @@ _id_3662(var_0) {
 
   var_1 = level._id_7ED0[var_0];
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self thread[[var_1._id_6AF7]]();
-  else
+  } else {
     return;
+  }
 
   self._id_7ED1[var_0] = 1;
   thread _id_2F94(var_0);
@@ -151,10 +156,11 @@ _id_2F9E(var_0) {
   self notify("DisabledRoleAbility_" + var_0);
   var_1 = level._id_7ED0[var_0];
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self thread[[var_1._id_6AED]]();
-  else
+  } else {
     return;
+  }
 
   if(maps\mp\_utility::_id_585F()) {
     var_2 = self getentitynumber();
@@ -177,20 +183,24 @@ _id_2408() {
 }
 
 _id_0F37(var_0, var_1, var_2) {
-  if(isDefined(self.powerbuffamount))
+  if(isDefined(self.powerbuffamount)) {
     var_0 = var_0 * self.powerbuffamount;
+  }
 
-  if(var_0 > 0.0 && var_0 < 1.0 && isDefined(level._zmb_roles_positive_power_multiplier))
+  if(var_0 > 0.0 && var_0 < 1.0 && isDefined(level._zmb_roles_positive_power_multiplier)) {
     var_0 = var_0 * level._zmb_roles_positive_power_multiplier;
+  }
 
   if(!getdvarint("1936")) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   if(self.sessionstate == "dead") {
     if(isDefined(self.pers["roleRespawnPower"])) {
@@ -213,34 +223,40 @@ _id_0F37(var_0, var_1, var_2) {
   } else {
     var_5 = self _meth_85BA("active");
 
-    if(!var_5 || var_2)
+    if(!var_5 || var_2) {
       self _meth_85B9(var_0, var_1);
+    }
   }
 }
 
 _id_3F90() {
-  if(!maps\mp\_utility::_id_585F())
+  if(!maps\mp\_utility::_id_585F()) {
     _id_0F37(0.07);
+  }
 }
 
 _id_6BCF(var_0) {
-  if(!maps\mp\_utility::_id_585F())
+  if(!maps\mp\_utility::_id_585F()) {
     _id_0F37(0.0425);
+  }
 }
 
 _id_942F() {
   var_0 = self _meth_85BB();
 
-  if(isDefined(self.pers["roleRespawnPower"]))
+  if(isDefined(self.pers["roleRespawnPower"])) {
     self.pers["roleRespawnPower"] = var_0;
+  }
 }
 
 _id_7D6B() {
-  if(isDefined(self.pers["roleRespawnPower"]))
+  if(isDefined(self.pers["roleRespawnPower"])) {
     self.pers["roleRespawnPower"] = 0;
+  }
 }
 
 _id_7DF5() {
-  if(isDefined(self.pers["roleRespawnPower"]))
+  if(isDefined(self.pers["roleRespawnPower"])) {
     self _meth_85B9(self.pers["roleRespawnPower"]);
+  }
 }

@@ -47,8 +47,9 @@ main() {
   level._effect["hp_contested_vertical"] = loadfx("vfx/unique/hardpoint_chevron_contested_vertical");
   game["dialog"]["gametype"] = "hpt_intro";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 
   game["objective_active"] = "mp_hp_new_hardpoint_active";
   game["objective_gained_sound"] = "mp_obj_notify_pos_sml";
@@ -91,8 +92,9 @@ _id_A140(var_0) {
 }
 
 _id_6BAF() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -112,10 +114,11 @@ _id_6BAF() {
     maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_KOTH_SCORE");
   }
 
-  if(level._id_530D)
+  if(level._id_530D) {
     _id_A140(level._id_6947);
-  else
+  } else {
     _id_A140(level._id_6945);
+  }
 
   _setclientnamemode("auto_change");
   _id_050D::_id_10E4();
@@ -130,11 +133,13 @@ _id_6BAF() {
   level thread _id_5E9C();
   var_3 = getEntArray("hp_broadcaster_placeholder", "targetname");
 
-  foreach(var_5 in var_3)
-  var_5 hide();
+  foreach(var_5 in var_3) {
+    var_5 hide();
+  }
 
-  if(_func_37E() && maps\mp\_utility::inovertime() && !isDefined(level._id_501A))
+  if(_func_37E() && maps\mp\_utility::inovertime() && !isDefined(level._id_501A)) {
     _id_6B86();
+  }
 }
 
 onplayerconnect() {
@@ -168,13 +173,15 @@ _id_4F05() {
 _id_8FDD() {
   _id_5A87();
 
-  if(isDefined(level._id_AC7C.broadcastermesh))
+  if(isDefined(level._id_AC7C.broadcastermesh)) {
     level._id_AC7C.broadcastermesh hide();
+  }
 
-  if(level._id_7A62)
+  if(level._id_7A62) {
     level._id_AC7C = _id_45B0();
-  else
+  } else {
     level._id_AC7C = _id_45AF();
+  }
 
   _id_8A70();
   _id_86D4();
@@ -184,8 +191,9 @@ _id_8FDD() {
   game["roundsPlayed"]++;
   level notify("round_switch", "next_zone");
 
-  if(isDefined(level._id_AC7C._id_5E5D))
+  if(isDefined(level._id_AC7C._id_5E5D)) {
     _setomnvar("ui_hardpoint_minimap_location_callout", level._id_AC7C._id_5E5D);
+  }
 
   maps\mp\_utility::_id_863E(5, "free");
 }
@@ -220,26 +228,29 @@ _id_4F03() {
     var_4 = level._id_AC7C._id_3FCA _id_04D1::_id_45F7();
     var_1 = gettime();
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_2 = var_4;
+    }
 
     _reconevent("script_mp_hp: gameTime %d, hp_origin %v, owner %s", var_1, level._id_AC7C.origin, var_2);
 
     if(var_0 != "none" && var_0 != var_4) {
-      if(isDefined(game["objectiveFlipCount"]))
+      if(isDefined(game["objectiveFlipCount"])) {
         game["objectiveFlipCount"]++;
-      else
+      } else {
         game["objectiveFlipCount"] = 1;
+      }
     }
 
     var_0 = var_4;
 
-    if(var_4 == "allies")
+    if(var_4 == "allies") {
       _id_A141(level._id_6946, level._id_6945);
-    else if(var_4 == "axis")
+    } else if(var_4 == "axis") {
       _id_A141(level._id_6945, level._id_6946);
-    else
+    } else {
       _id_A141(level._id_6945, level._id_6945);
+    }
 
     level._id_AC7C._id_3FCA _id_04D1::_id_0C30("none");
     level._id_AC7C._id_3FCA._id_6BBF = undefined;
@@ -266,8 +277,9 @@ _id_A11F() {
       if(!isDefined(var_1.team) || !isDefined(var_1.sessionstate)) {
         continue;
       }
-      if(var_1.team == "spectator" || var_1.sessionstate == "spectator")
+      if(var_1.team == "spectator" || var_1.sessionstate == "spectator") {
         var_2 = var_1 getspectatingplayer();
+      }
 
       if(var_1 ismlgspectator()) {
         if(var_1._id_1E99._id_A4A8 == "third_person") {
@@ -306,8 +318,9 @@ _id_868F(var_0, var_1) {
   if(var_1) {
     var_2 = 1;
 
-    if(isDefined(level._id_AC7C._id_3FCA._id_56B7) && level._id_AC7C._id_3FCA._id_56B7)
+    if(isDefined(level._id_AC7C._id_3FCA._id_56B7) && level._id_AC7C._id_3FCA._id_56B7) {
       var_2 = 2;
+    }
 
     if(!var_0.touchinghardpoint) {
       thread _id_0485::_id_5E93("hp_enter", var_0.origin, level._id_AC7C.setmovespeedscale);
@@ -357,8 +370,9 @@ _id_4B1C() {
 
       foreach(var_2 in level.players) {
         if(var_2 ismlgspectator() && getdvarint("spv_enableHPBroadcasterMesh") != 0 && (isDefined(var_2._id_1E99._id_A4A8) && var_2._id_1E99._id_A4A8 == "third_person")) {
-          if(isDefined(level._id_AC7C.broadcastermesh))
+          if(isDefined(level._id_AC7C.broadcastermesh)) {
             level._id_AC7C.broadcastermesh showtoplayer(var_2);
+          }
         }
       }
     }
@@ -390,8 +404,9 @@ _id_4B1C() {
     level._id_AC7C._id_3FCA _id_04D1::playsoundtoteam("broadcaster", undefined);
     level notify("zone_reset");
 
-    if(isDefined(level._id_4F01) && level._id_4F01 == 1)
+    if(isDefined(level._id_4F01) && level._id_4F01 == 1) {
       level waittill("ready_for_next_hp_zone");
+    }
 
     _id_8FDD();
     wait 0.5;
@@ -431,8 +446,9 @@ _id_6BD8(var_0) {
     var_4 = [];
     var_5 = getarraykeys(self._id_9AC3[var_1]);
 
-    for(var_6 = 0; var_6 < var_5.size; var_6++)
+    for(var_6 = 0; var_6 < var_5.size; var_6++) {
       var_4[var_5[var_6]] = self._id_9AC3[var_1][var_5[var_6]];
+    }
 
     level thread _id_4756(var_4, var_3, var_1, self._id_5B78);
     level thread maps\mp\_utility::leaderdialog("hp_secured", var_1, "gamemode_objective");
@@ -443,8 +459,9 @@ _id_6BD8(var_0) {
   level thread maps\mp\_utility::playsoundonplayers(game["objective_lost_sound"], var_2);
   level._id_4F02 = var_1;
 
-  if(!isDefined(level._id_5B78) || var_1 != level._id_5B78)
+  if(!isDefined(level._id_5B78) || var_1 != level._id_5B78) {
     maps\mp\_utility::_id_863E(6, var_1, var_0 getentitynumber());
+  }
 
   _id_04D1::_id_86EC(var_1);
 
@@ -453,8 +470,9 @@ _id_6BD8(var_0) {
       var_0 = level.players[var_7];
 
       if(var_0.pers["team"] == var_1) {
-        if(isDefined(var_0._id_5BAF) && var_0._id_5BAF + 500 > gettime())
+        if(isDefined(var_0._id_5BAF) && var_0._id_5BAF + 500 > gettime()) {
           var_0 maps\mp\gametypes\_missions::processchallenge("ch_hp_killedLastContester");
+        }
       }
     }
   }
@@ -477,8 +495,9 @@ _id_4756(var_0, var_1, var_2, var_3) {
     if(!_id_57B8(var_6)) {
       var_6 maps\mp\gametypes\_missions::processchallenge("ch_hp_capturedObjective");
 
-      if(level._id_4F04 + 500 > var_1)
+      if(level._id_4F04 + 500 > var_1) {
         var_6 maps\mp\gametypes\_missions::processchallenge("ch_hp_immediateCapture");
+      }
 
       var_6 thread _id_047A::botgetdifficulty(level._id_AC7C.setmovespeedscale);
       var_6 notify("ch_capture", level._id_AC7C);
@@ -535,8 +554,9 @@ _id_6BDA(var_0) {
 }
 
 _id_86D4(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level._id_AC7C;
+  }
 
   if(!isDefined(level._id_AC7C) || var_0 == level._id_AC7C) {
     thread _id_74EF(0);
@@ -552,8 +572,9 @@ _id_86D4(var_0) {
 }
 
 _id_8A63(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level._id_AC7C;
+  }
 
   var_1 = "waypoint_waitfor_flag_neutral";
   var_0._id_3FCA _id_04D1::set2dicon("friendly", var_1);
@@ -597,8 +618,9 @@ _id_8A70() {
   if(!isDefined(level._id_AC7C) || !isDefined(level._id_AC7C._id_356F)) {
     return;
   }
-  foreach(var_1 in level.players)
-  var_1 _id_8A6F();
+  foreach(var_1 in level.players) {
+    var_1 _id_8A6F();
+  }
 }
 
 _id_8A6F() {
@@ -623,8 +645,9 @@ _id_8A6F() {
   }
 
   if(self ismlgspectator() && (isDefined(self._id_1E99._id_A4A8) && self._id_1E99._id_A4A8 == "third_person")) {
-    if(isDefined(level._id_AC7C.broadcastermesh) && getdvarint("spv_enableHPBroadcasterMesh") != 0)
+    if(isDefined(level._id_AC7C.broadcastermesh) && getdvarint("spv_enableHPBroadcasterMesh") != 0) {
       level._id_AC7C.broadcastermesh showtoplayer(self);
+    }
   }
 }
 
@@ -633,8 +656,9 @@ _id_5A87() {
     return;
   }
   foreach(var_1 in level._id_AC7C._id_356F) {
-    foreach(var_3 in var_1)
-    var_3 hide();
+    foreach(var_3 in var_1) {
+      var_3 hide();
+    }
   }
 }
 
@@ -650,28 +674,31 @@ _id_74EF(var_0) {
       var_5 = isDefined(var_4._id_A419) && var_4._id_A419;
 
       if(var_0 == 0) {
-        if(var_5)
+        if(var_5) {
           var_4 _meth_8688(common_scripts\utility::_id_44F5("hp_neutral_vertical"));
-        else
+        } else {
           var_4 _meth_8688(common_scripts\utility::_id_44F5("hp_neutral"));
+        }
 
         continue;
       }
 
       if(var_0 == -1) {
-        if(var_5)
+        if(var_5) {
           var_4 _meth_8688(common_scripts\utility::_id_44F5("hp_contested_vertical"));
-        else
+        } else {
           var_4 _meth_8688(common_scripts\utility::_id_44F5("hp_contested"));
+        }
 
         continue;
       }
 
       if(var_0 == 1 && var_2 == "allies" || var_0 == 2 && var_2 == "axis" || var_2 == "spectator" && var_0 == 1) {
-        if(var_5)
+        if(var_5) {
           var_4 _meth_8688(common_scripts\utility::_id_44F5("hp_enemy_vertical"));
-        else
+        } else {
           var_4 _meth_8688(common_scripts\utility::_id_44F5("hp_enemy"));
+        }
 
         continue;
       }
@@ -700,8 +727,9 @@ _id_64E2(var_0) {
       var_1 = level._id_AC7C._id_3FCA _id_04D1::_id_45F7();
 
       foreach(var_3 in level.players) {
-        if(var_3.pers["team"] == var_1)
+        if(var_3.pers["team"] == var_1) {
           var_3 maps\mp\gametypes\_missions::processchallenge("ch_hp_controlZoneEntirely");
+        }
       }
     }
   }
@@ -727,8 +755,9 @@ _id_1455(var_0, var_1) {
     maps\mp\gametypes\_hostmigration::_id_A782();
 
     if(!level._id_AC7C._id_3FCA._id_56B7) {
-      if(level._id_80AD)
+      if(level._id_80AD) {
         var_4 = level._id_AC7C._id_3FCA._id_689F[var_0];
+      }
 
       _id_04D2::_id_47BD(var_0, var_4, 1);
       var_6 = [];
@@ -738,11 +767,13 @@ _id_1455(var_0, var_1) {
           continue;
         }
         if(var_8 istouching(level._id_AC7C._id_9D5E)) {
-          if(!isDefined(var_8._id_99DE))
+          if(!isDefined(var_8._id_99DE)) {
             var_8._id_99DE = 0;
+          }
 
-          if(!isDefined(var_8._id_4B1D[level._id_AC7C.setmovespeedscale]))
+          if(!isDefined(var_8._id_4B1D[level._id_AC7C.setmovespeedscale])) {
             var_8._id_4B1D[level._id_AC7C.setmovespeedscale] = 0;
+          }
 
           var_8._id_4B1D[level._id_AC7C.setmovespeedscale] = var_8._id_4B1D[level._id_AC7C.setmovespeedscale] + 1;
           var_8._id_99DE = var_8._id_99DE + 1;
@@ -751,8 +782,9 @@ _id_1455(var_0, var_1) {
 
           if(isDefined(var_5) && var_5.size > 0 && common_scripts\utility::_id_0F79(var_5, var_8)) {
             if(isDefined(var_8._id_4C67) && var_8._id_4C67 + var_3 * 1000 <= gettime()) {
-              if(var_8 maps\mp\_utility::_hasperk("specialty_improvedobjectives"))
+              if(var_8 maps\mp\_utility::_hasperk("specialty_improvedobjectives")) {
                 var_8 thread _id_047A::_id_4C68();
+              }
 
               var_8._id_4C67 = gettime();
             }
@@ -775,17 +807,21 @@ _id_255D(var_0, var_1) {
   var_2 = var_0.setmovespeedscale;
   var_3 = var_1.setmovespeedscale;
 
-  if(!isDefined(var_2) && !isDefined(var_3))
+  if(!isDefined(var_2) && !isDefined(var_3)) {
     return 0;
+  }
 
-  if(!isDefined(var_2) && isDefined(var_3))
+  if(!isDefined(var_2) && isDefined(var_3)) {
     return 1;
+  }
 
-  if(isDefined(var_2) && !isDefined(var_3))
+  if(isDefined(var_2) && !isDefined(var_3)) {
     return 0;
+  }
 
-  if(var_2 > var_3)
+  if(var_2 > var_3) {
     return 1;
+  }
 
   return 0;
 }
@@ -793,8 +829,9 @@ _id_255D(var_0, var_1) {
 _id_4749(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return undefined;
+  }
 
   var_2 = 1;
 
@@ -841,8 +878,9 @@ _id_603B(var_0, var_1) {
     }
 
     if(!isDefined(var_4._id_9D5E)) {
-      if(!var_3)
+      if(!var_3) {
         continue;
+      }
     }
 
     var_4._id_9DC6 = var_4._id_9D5E.origin;
@@ -874,13 +912,15 @@ _id_603B(var_0, var_1) {
       var_12 = undefined;
       var_13 = 0;
 
-      if(isDefined(var_11._id_0165) && var_11._id_0165 == "vertical")
+      if(isDefined(var_11._id_0165) && var_11._id_0165 == "vertical") {
         var_13 = 1;
+      }
 
-      if(var_13)
+      if(var_13) {
         var_12 = common_scripts\utility::_id_44F5("hp_neutral_vertical");
-      else
+      } else {
         var_12 = common_scripts\utility::_id_44F5("hp_neutral");
+      }
 
       var_14 = anglesToForward(var_11.angles);
       var_15 = anglestoup(var_11.angles);
@@ -929,14 +969,16 @@ _id_8A33() {
   if(var_0.size == 0) {
     return;
   }
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1]._id_3046 = distancesquared(var_0[var_1].origin, self.origin);
+  }
 
   for(var_1 = 1; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
 
-    for(var_3 = var_1 - 1; var_3 >= 0 && var_2._id_3046 < var_0[var_3]._id_3046; var_3--)
+    for(var_3 = var_1 - 1; var_3 >= 0 && var_2._id_3046 < var_0[var_3]._id_3046; var_3--) {
       var_0[var_3 + 1] = var_0[var_3];
+    }
 
     var_0[var_3 + 1] = var_2;
   }
@@ -947,16 +989,18 @@ _id_8A33() {
   var_7 = [];
   var_8 = var_0.size / 3;
 
-  for(var_1 = 0; var_1 <= var_8; var_1++)
+  for(var_1 = 0; var_1 <= var_8; var_1++) {
     var_4[var_4.size] = var_0[var_1];
+  }
 
   while(var_1 < var_0.size) {
     var_7[var_7.size] = var_0[var_1];
 
-    if(var_1 <= var_8 * 2)
+    if(var_1 <= var_8 * 2) {
       var_5[var_5.size] = var_0[var_1];
-    else
+    } else {
       var_6[var_6.size] = var_0[var_1];
+    }
 
     var_1++;
   }
@@ -985,25 +1029,29 @@ _id_45AF() {
 _id_8C31() {
   level._id_ACB9 = common_scripts\utility::array_randomize(level._id_ACB3);
 
-  if(level._id_AC7C == level._id_ACB9[0])
+  if(level._id_AC7C == level._id_ACB9[0]) {
     level._id_ACB9 = common_scripts\utility::_id_9530(level._id_ACB9, 0, _randomintrange(1, level._id_ACB9.size));
+  }
 }
 
 _id_45B0() {
-  if(level._id_ACB9.size == 0)
+  if(level._id_ACB9.size == 0) {
     _id_8C31();
+  }
 
   var_0 = level._id_ACB9[0];
 
   for(var_1 = 0; var_1 < level._id_ACB3.size; var_1++) {
-    if(var_0 == level._id_ACB3[var_1])
+    if(var_0 == level._id_ACB3[var_1]) {
       level.currentzoneindex = var_1;
+    }
   }
 
   var_2 = [];
 
-  for(var_1 = 1; var_1 < level._id_ACB9.size; var_1++)
+  for(var_1 = 1; var_1 < level._id_ACB9.size; var_1++) {
     var_2[var_1 - 1] = level._id_ACB9[var_1];
+  }
 
   level._id_ACB9 = var_2;
   return var_0;
@@ -1060,8 +1108,9 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 }
 
 _id_6AF9(var_0) {
-  for(var_1 = 0; var_1 < level._id_ACB3.size; var_1++)
+  for(var_1 = 0; var_1 < level._id_ACB3.size; var_1++) {
     level._id_ACB3[var_1]._id_3FCA _id_04D1::_id_0C30("none");
+  }
 }
 
 _id_5E9C() {
@@ -1090,21 +1139,25 @@ _id_A0F0(var_0) {
   self._id_6885++;
   var_1 = maps\mp\_utility::gettimepassed() / 60000;
 
-  if(isPlayer(self) && isDefined(self._id_9A06["total"]))
+  if(isPlayer(self) && isDefined(self._id_9A06["total"])) {
     var_1 = max(self._id_9A06["total"], 1) / 60;
+  }
 
   self._id_1FAB = self._id_6885 / var_1;
 
-  if(self._id_1FAB > self._id_6885)
+  if(self._id_1FAB > self._id_6885) {
     self._id_1FAB = self._id_6885;
+  }
 }
 
 _id_57B8(var_0) {
-  if(!level.rankedmatch)
+  if(!level.rankedmatch) {
     return 0;
+  }
 
-  if(var_0._id_1FAB > level._id_73C0)
+  if(var_0._id_1FAB > level._id_73C0) {
     return 1;
+  }
 
   return 0;
 }
@@ -1122,15 +1175,17 @@ setbroadcastermesh(var_0) {
   waittillframeend;
   var_1 = maps\mp\_utility::_id_4571();
 
-  if(issubstr(var_1, "carentan_s2_winter"))
+  if(issubstr(var_1, "carentan_s2_winter")) {
     var_1 = "mp_carentan_s2";
+  }
 
-  if(var_0 == "allies")
+  if(var_0 == "allies") {
     level._id_AC7C.broadcastermesh setModel(var_1 + "_hp_zone_" + (level.currentzoneindex + 1) + "_" + level.broadcastercolorindexallies);
-  else if(var_0 == "axis")
+  } else if(var_0 == "axis") {
     level._id_AC7C.broadcastermesh setModel(var_1 + "_hp_zone_" + (level.currentzoneindex + 1) + "_" + level.broadcastercolorindexaxis);
-  else if(var_0 == "contested")
+  } else if(var_0 == "contested") {
     level._id_AC7C.broadcastermesh setModel(var_1 + "_hp_zone_" + (level.currentzoneindex + 1) + "_contested");
-  else
+  } else {
     level._id_AC7C.broadcastermesh setModel(var_1 + "_hp_zone_" + (level.currentzoneindex + 1));
+  }
 }

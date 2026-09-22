@@ -37,8 +37,9 @@ init() {
   var_0.energyslowsecondary = 1;
   var_0.throwable = 1;
 
-  if(isDefined(level._id_62AB))
+  if(isDefined(level._id_62AB)) {
     var_0 = [[level._id_62AB]](var_0);
+  }
 
   _id_0547::_id_0A52(var_0, "zombie_exploder");
   level._id_393E = [];
@@ -49,8 +50,9 @@ _id_AB94(var_0) {
     return;
   }
   foreach(var_2 in self._id_4BF4) {
-    if(var_2._id_95A6 == var_0)
+    if(var_2._id_95A6 == var_0) {
       return var_2;
+    }
   }
 }
 
@@ -126,13 +128,15 @@ _id_51C4() {
 
 _id_AB9A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(common_scripts\utility::_id_562E(self._id_392C)) {
-    if(common_scripts\utility::_id_562E(self._id_6734))
+    if(common_scripts\utility::_id_562E(self._id_6734)) {
       self._id_3937 _id_3940();
-    else
+    } else {
       thread _id_AB90();
+    }
 
-    if(isPlayer(var_1) && issubstr(var_4, "shovel") && maps\mp\_utility::_id_4571() == "mp_zombie_nest_01")
+    if(isPlayer(var_1) && issubstr(var_4, "shovel") && maps\mp\_utility::_id_4571() == "mp_zombie_nest_01") {
       var_1 maps\mp\gametypes\zombies::_id_47C8("ZM_SHOVEL");
+    }
   }
 
   level notify("zombie_exploder_killed");
@@ -146,8 +150,9 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       if(isDefined(var_5) && isDefined(var_8) && isDefined(var_1) && isPlayer(var_1)) {
         var_11 = var_1 _meth_850B(var_5, var_8);
 
-        if(var_11 != 0)
+        if(var_11 != 0) {
           var_2 = int(var_2 / var_11);
+        }
       }
 
       self._id_3937 _id_3943(var_2, var_1, var_5, var_4);
@@ -156,8 +161,9 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     return;
   }
 
-  if(common_scripts\utility::_id_562E(self.sgvip) && _id_AB95(self, var_0, var_1, var_2, var_4, var_5, var_6, var_7, var_8, var_10))
+  if(common_scripts\utility::_id_562E(self.sgvip) && _id_AB95(self, var_0, var_1, var_2, var_4, var_5, var_6, var_7, var_8, var_10)) {
     var_2 = int(var_2 * 1.1);
+  }
 
   if(!common_scripts\utility::_id_562E(self.exploder_godmode) && !self._id_4B34) {
     var_12 = _id_AB94(var_10);
@@ -183,8 +189,9 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
               var_13 = "\nExploder dropped bomb";
               _id_AB90();
 
-              if(isPlayer(var_1) && !_id_0547::_id_577E(var_1))
+              if(isPlayer(var_1) && !_id_0547::_id_577E(var_1)) {
                 var_1 thread _id_054E::_id_18EC();
+              }
 
               self._id_6CC4 = "scripted_pain_drop_bomb";
             }
@@ -202,11 +209,13 @@ _id_AB99(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 _id_AB95(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_0 = self;
 
-  if(common_scripts\utility::_id_562E(self._id_392C) && _id_0547::_id_5565(var_9, _tolower("TAG_WEAPON")))
+  if(common_scripts\utility::_id_562E(self._id_392C) && _id_0547::_id_5565(var_9, _tolower("TAG_WEAPON"))) {
     return 1;
+  }
 
-  if(common_scripts\utility::_id_562E(self.sgvip) && zombie_vib_exploder_is_weak_point(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9))
+  if(common_scripts\utility::_id_562E(self.sgvip) && zombie_vib_exploder_is_weak_point(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9)) {
     return 1;
+  }
 
   return _id_054D::_id_5714(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
@@ -255,7 +264,7 @@ _id_AB90() {
   self._id_349C._id_A99D = "TAG_WEAPON";
   _id_0BBF(self._id_349C, self._id_349C._id_A99D, self, self._id_A99D);
   self._id_349C _id_0547::init_damageable_script_model();
-  self._id_349C setcanradiusdamage(1);
+  self._id_349C setCanRadiusDamage(1);
   self._id_349C.health = self._id_3937._id_3935;
   self._id_349C._id_3937 = self._id_3937;
   self._id_3937._id_6280 = self._id_349C;
@@ -269,10 +278,11 @@ _id_AB90() {
 _id_3940() {
   self notify("exploder_shutdown");
 
-  if(isDefined(self._id_0117) && common_scripts\utility::_id_562E(self._id_0117._id_392C))
+  if(isDefined(self._id_0117) && common_scripts\utility::_id_562E(self._id_0117._id_392C)) {
     self._id_0117 _id_AB9D();
-  else
+  } else {
     _id_5F07();
+  }
 }
 
 _id_3943(var_0, var_1, var_2, var_3) {
@@ -289,15 +299,17 @@ _id_3943(var_0, var_1, var_2, var_3) {
 
   self._id_3935 = self._id_3935 - var_0;
 
-  if(self._id_3935 <= 0 || self._id_72A1 >= 4)
+  if(self._id_3935 <= 0 || self._id_72A1 >= 4) {
     thread _id_0893(var_1, var_2);
+  }
 }
 
 zombie_exploder_attempt_detonate(var_0, var_1) {
   var_2 = self;
 
-  if(common_scripts\utility::_id_562E(self._id_392C))
+  if(common_scripts\utility::_id_562E(self._id_392C)) {
     self._id_3937 thread _id_0893(var_0, var_1);
+  }
 }
 
 _id_A88A() {
@@ -337,8 +349,9 @@ _id_0893(var_0, var_1) {
   } else
     var_4 = undefined;
 
-  if(isDefined(self._id_0117) && common_scripts\utility::_id_562E(self._id_0117._id_392C))
+  if(isDefined(self._id_0117) && common_scripts\utility::_id_562E(self._id_0117._id_392C)) {
     self._id_0117 thread zombie_exploder_ensure_die_from_attached_explosion(var_4);
+  }
 
   _id_3940();
   _id_AB9C(var_2, var_4);
@@ -352,11 +365,13 @@ zombie_exploder_ensure_die_from_attached_explosion(var_0) {
   var_1 endon("death");
   waitframe();
 
-  if(isDefined(var_0) && !isPlayer(var_0._id_0117))
+  if(isDefined(var_0) && !isPlayer(var_0._id_0117)) {
     var_0 = undefined;
+  }
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 dodamage(var_1.maxhealth + 666, var_1.origin, var_0, undefined, "MOD_EXPLOSIVE", "drag_explosive_zombie_zm");
+  }
 }
 
 _id_AB9C(var_0, var_1) {
@@ -371,8 +386,9 @@ _id_AB9E(var_0) {
     return;
   }
   foreach(var_2 in level.players) {
-    if(distance(var_0, var_2.origin) <= 92)
+    if(distance(var_0, var_2.origin) <= 92) {
       var_2 shellshock("ear_ring_mp", 1.25, 0, 0);
+    }
   }
 }
 
@@ -385,8 +401,9 @@ _id_AB97() {
     var_1 = 1;
     var_0 = [[level._id_0A41["zombie"]["move_mode"]]]();
 
-    if(var_0 == "walk")
+    if(var_0 == "walk") {
       var_0 = "run";
+    }
   }
 
   self._id_64C2 = var_1 * _id_054D::_id_4440();
@@ -398,10 +415,11 @@ _id_AB91() {
   var_0 = _id_054D::_id_AC22();
 
   if(common_scripts\utility::_id_562E(self._id_392C)) {
-    if(self._id_3937._id_3F22 == 1)
+    if(self._id_3937._id_3F22 == 1) {
       var_0["script_var"] = "tick_bomb";
-    else
+    } else {
       var_0["script_var"] = "held_bomb";
+    }
   } else
     var_0["script_var"] = "drop_bomb";
 
@@ -490,8 +508,9 @@ _id_3942() {
   for(;;) {
     var_4 = level.players;
 
-    if(common_scripts\utility::_id_562E(var_0.ismooncontrolled))
+    if(common_scripts\utility::_id_562E(var_0.ismooncontrolled)) {
       var_4 = var_0 _id_053C::_id_4F88();
+    }
 
     if(var_0 should_explode(self, var_4)) {
       break;
@@ -504,14 +523,17 @@ _id_3942() {
 }
 
 should_explode(var_0, var_1) {
-  if(_id_0547::_id_5565(self._id_0BA4, "traverse"))
+  if(_id_0547::_id_5565(self._id_0BA4, "traverse")) {
     return 0;
+  }
 
-  if(_id_0547::_id_5565(self._id_0BA4, "scripted"))
+  if(_id_0547::_id_5565(self._id_0BA4, "scripted")) {
     return 0;
+  }
 
-  if(isDefined(common_scripts\utility::_id_4461(var_0 _id_4183(), var_1, 92)))
+  if(isDefined(common_scripts\utility::_id_4461(var_0 _id_4183(), var_1, 92))) {
     return 1;
+  }
 
   return 0;
 }
@@ -572,8 +594,9 @@ _id_2AD8(var_0, var_1, var_2, var_3, var_4) {
   var_5["right"] = (0, 1, 0);
   var_6 = _anglestoaxis(var_1);
 
-  foreach(var_9, var_8 in var_6)
-  var_6[var_9] = var_8 * var_2 * 0.5;
+  foreach(var_9, var_8 in var_6) {
+    var_6[var_9] = var_8 * var_2 * 0.5;
+  }
 
   for(;;) {
     foreach(var_9, var_8 in var_6) {
@@ -598,11 +621,13 @@ _id_6282() {
     var_0 = level._id_393E.size - 12;
     var_1 = [];
 
-    for(var_2 = 0; var_2 < var_0; var_2++)
+    for(var_2 = 0; var_2 < var_0; var_2++) {
       var_1[var_2] = level._id_393E[var_2];
+    }
 
-    foreach(var_4 in var_1)
-    var_4._id_3937 _id_3940();
+    foreach(var_4 in var_1) {
+      var_4._id_3937 _id_3940();
+    }
   }
 }
 
@@ -612,15 +637,17 @@ _id_6281() {
 }
 
 _id_AB92() {
-  if(common_scripts\utility::_id_562E(level.zmb_exploder_always_chases))
+  if(common_scripts\utility::_id_562E(level.zmb_exploder_always_chases)) {
     return 99999;
+  }
 
   return 350;
 }
 
 _id_AB93() {
-  if(common_scripts\utility::_id_562E(level.zmb_exploder_always_chases))
+  if(common_scripts\utility::_id_562E(level.zmb_exploder_always_chases)) {
     return 999990;
+  }
 
   return 450;
 }
@@ -631,17 +658,20 @@ _id_AB98(var_0) {
 
 _id_AB9B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(!common_scripts\utility::_id_562E(self._id_55AB) && var_5 == "panzerschreck_zm" || var_5 == "bazooka_zm") {
-    if(common_scripts\utility::_id_562E(self.sgvip))
+    if(common_scripts\utility::_id_562E(self.sgvip)) {
       var_2 = int(self.maxhealth / 5);
-    else
+    } else {
       var_2 = self.maxhealth;
+    }
   }
 
-  if(common_scripts\utility::_id_562E(self.sgvip) && isDefined(level.zmb_boss_damage_reduction_func))
+  if(common_scripts\utility::_id_562E(self.sgvip) && isDefined(level.zmb_boss_damage_reduction_func)) {
     var_2 = [[level.zmb_boss_damage_reduction_func]](var_5, var_2);
+  }
 
-  if(isDefined(self.on_took_damage_func))
+  if(isDefined(self.on_took_damage_func)) {
     self thread[[self.on_took_damage_func]](anglesToForward(self.angles), var_8, var_5, var_4, var_2, var_0, var_1);
+  }
 
   _id_054D::_id_6BD1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }

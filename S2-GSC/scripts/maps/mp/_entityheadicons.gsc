@@ -27,34 +27,43 @@ _id_869E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   if(maps\mp\_utility::_id_56FF(var_0) && !isPlayer(var_0)) {
     return;
   }
-  if(!isDefined(self._id_37D6))
+  if(!isDefined(self._id_37D6)) {
     self._id_37D6 = [];
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 0.05;
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 1;
+  }
 
-  if(!isDefined(var_8))
+  if(!isDefined(var_8)) {
     var_8 = 1;
+  }
 
-  if(!isDefined(var_9))
+  if(!isDefined(var_9)) {
     var_9 = 0;
+  }
 
-  if(!isDefined(var_10))
+  if(!isDefined(var_10)) {
     var_10 = 1;
+  }
 
-  if(!isDefined(var_11))
+  if(!isDefined(var_11)) {
     var_11 = "";
+  }
 
   if(!isPlayer(var_0) && var_0 == "none") {
     foreach(var_15, var_14 in self._id_37D6) {
-      if(isDefined(var_14))
+      if(isDefined(var_14)) {
         var_14 destroy();
+      }
 
       self._id_37D6[var_15] = undefined;
     }
@@ -96,10 +105,11 @@ _id_869E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
         }
       }
 
-      if(isDefined(var_12))
+      if(isDefined(var_12)) {
         var_14 = _func_19D(var_0, var_12);
-      else
+      } else {
         var_14 = _newteamhudelem(var_0);
+      }
 
       self._id_37D6[var_0] = var_14;
     }
@@ -123,16 +133,18 @@ _id_869E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_14.x = var_2[0];
       var_14.y = var_2[1];
       var_14._id_01D9 = var_2[2];
-      var_14 settargetent(self, var_11);
+      var_14 settargetEnt(self, var_11);
     }
 
     thread _id_2DCF();
 
-    if(isPlayer(var_0))
+    if(isPlayer(var_0)) {
       var_14 thread _id_2DD5(var_0);
+    }
 
-    if(isPlayer(self))
+    if(isPlayer(self)) {
       var_14 thread _id_2DD5(self);
+    }
   }
 }
 
@@ -186,35 +198,40 @@ _id_873C(var_0, var_1, var_2, var_3) {
   if(!level.teambased) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "";
+  }
 
   if(!isDefined(self._id_37D7)) {
     self._id_37D7 = "none";
     self._id_37D3 = undefined;
   }
 
-  if(isDefined(var_3) && var_3 == 0)
+  if(isDefined(var_3) && var_3 == 0) {
     var_4 = undefined;
+  }
 
   var_5 = var_0;
 
-  if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1))
+  if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1)) {
     var_5 = maps\mp\_utility::getotherteam(var_0);
+  }
 
   var_6 = game["entity_headicon_" + var_5];
   self._id_37D7 = var_0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_37D4 = var_1;
-  else
+  } else {
     self._id_37D4 = (0, 0, 0);
+  }
 
   self notify("kill_entity_headicon_thread");
 
   if(var_0 == "none") {
-    if(isDefined(self._id_37D3))
+    if(isDefined(self._id_37D3)) {
       self._id_37D3 destroy();
+    }
 
     return;
   }
@@ -236,7 +253,7 @@ _id_873C(var_0, var_1, var_2, var_3) {
       var_7.x = self._id_37D4[0];
       var_7.y = self._id_37D4[1];
       var_7._id_01D9 = self._id_37D4[2];
-      var_7 settargetent(self, var_2);
+      var_7 settargetEnt(self, var_2);
     }
   } else {
     var_8 = anglestoup(self.angles);
@@ -251,7 +268,7 @@ _id_873C(var_0, var_1, var_2, var_3) {
       var_7.x = var_9[0];
       var_7.y = var_9[1];
       var_7._id_01D9 = var_9[2];
-      var_7 settargetent(self, var_2);
+      var_7 settargetEnt(self, var_2);
     }
   }
 
@@ -262,8 +279,9 @@ _id_86FC(var_0, var_1, var_2) {
   if(level.teambased) {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "";
+  }
 
   if(!isDefined(self._id_37D7)) {
     self._id_37D7 = "none";
@@ -273,8 +291,9 @@ _id_86FC(var_0, var_1, var_2) {
   self notify("kill_entity_headicon_thread");
 
   if(!isDefined(var_0)) {
-    if(isDefined(self._id_37D3))
+    if(isDefined(self._id_37D3)) {
       self._id_37D3 destroy();
+    }
 
     return;
   }
@@ -282,15 +301,17 @@ _id_86FC(var_0, var_1, var_2) {
   var_3 = var_0.team;
   self._id_37D7 = var_3;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_37D4 = var_1;
-  else
+  } else {
     self._id_37D4 = (0, 0, 0);
+  }
 
-  if(var_3 == "spectator")
+  if(var_3 == "spectator") {
     var_4 = game["entity_headicon_allies"];
-  else
+  } else {
     var_4 = game["entity_headicon_" + var_3];
+  }
 
   var_5 = _newclienthudelem(var_0);
   var_5.archived = 1;
@@ -308,7 +329,7 @@ _id_86FC(var_0, var_1, var_2) {
     var_5.x = self._id_37D4[0];
     var_5.y = self._id_37D4[1];
     var_5._id_01D9 = self._id_37D4[2];
-    var_5 settargetent(self, var_2);
+    var_5 settargetEnt(self, var_2);
   }
 
   thread _id_2DCE();

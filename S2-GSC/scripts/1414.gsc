@@ -10,8 +10,9 @@ _id_AC73() {
   level._id_6092 = 2;
   level._id_6B83 = ::_id_AC75;
 
-  if(isDefined(level._id_AC71))
+  if(isDefined(level._id_AC71)) {
     [[level._id_AC71]]();
+  }
 
   _id_0547::_id_7BA9(::_id_ABD7);
   thread _id_AC74();
@@ -48,8 +49,9 @@ _id_AC74() {
 }
 
 _id_AC75() {
-  if(isDefined(level._id_AC72))
+  if(isDefined(level._id_AC72)) {
     [[level._id_AC72]]();
+  }
 }
 
 _id_09E0(var_0) {
@@ -57,31 +59,35 @@ _id_09E0(var_0) {
 }
 
 _id_5776(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   foreach(var_2 in level._id_ABE4) {
-    if(var_2 == var_0)
+    if(var_2 == var_0) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 _id_478A(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = [var_0];
-  else
+  } else {
     var_1 = level.players;
+  }
 
   foreach(var_0 in var_1) {
     var_3 = var_0 getlethalweapon();
     var_4 = var_0 getoffhandsecondaryclass();
 
-    if(0)
+    if(0) {
       var_5 = [var_3, var_4];
-    else
+    } else {
       var_5 = [var_3];
+    }
 
     foreach(var_7 in var_5) {
       if(var_7 == "none" || _id_0548::is_grenadier_immune_weapon(var_7)) {
@@ -110,15 +116,18 @@ _id_A918() {
     if(isDefined(level.zm_grenade_funcs[var_1])) {
       var_2 = [[level.zm_grenade_funcs[var_1]]](var_0);
 
-      if(var_2)
+      if(var_2) {
         continue;
+      }
     }
 
-    if(!isDefined(self.equipmentused))
+    if(!isDefined(self.equipmentused)) {
       self.equipmentused = 0;
+    }
 
-    if(_id_0547::_id_585C(var_1))
+    if(_id_0547::_id_585C(var_1)) {
       self.equipmentused++;
+    }
 
     var_0._id_3BE1 = self._id_569F;
   }
@@ -127,25 +136,31 @@ _id_A918() {
 _id_0667(var_0) {
   var_1 = weaponinventorytype(var_0);
 
-  if(var_1 != "primary" && var_1 != "altmode")
+  if(var_1 != "primary" && var_1 != "altmode") {
     return 0;
+  }
 
-  if(maps\mp\_utility::_id_5670(var_0))
+  if(maps\mp\_utility::_id_5670(var_0)) {
     return 1;
+  }
 
-  if(var_0 == self _meth_82D5())
+  if(var_0 == self _meth_82D5()) {
     return 1;
+  }
 
   var_2 = _getweaponbasename(var_0);
 
-  if(_id_0547::_id_5865(var_2))
+  if(_id_0547::_id_5865(var_2)) {
     return 1;
+  }
 
-  if(_id_0547::_id_585B(var_2))
+  if(_id_0547::_id_585B(var_2)) {
     return 1;
+  }
 
-  if(_id_0547::iszombieconsumableweapon(var_2))
+  if(_id_0547::iszombieconsumableweapon(var_2)) {
     return 1;
+  }
 
   return 0;
 }
@@ -160,23 +175,26 @@ _id_063A() {
   var_1 = self getweaponlistprimaries();
 
   foreach(var_3 in var_1) {
-    if(!_id_0667(var_3))
+    if(!_id_0667(var_3)) {
       var_0[var_0.size] = var_3;
+    }
   }
 
   return var_0;
 }
 
 _id_0635() {
-  if(_id_0547::_id_4BA7("specialty_class_mule_kick_zm"))
+  if(_id_0547::_id_4BA7("specialty_class_mule_kick_zm")) {
     return 3;
+  }
 
   return 2;
 }
 
 _id_05DF(var_0) {
-  if(_id_0667(var_0))
+  if(_id_0667(var_0)) {
     return 1;
+  }
 
   return _id_0635() > _id_0639();
 }
@@ -185,16 +203,19 @@ _id_0637() {
   var_0 = _id_063A();
   var_1 = self getcurrentprimaryweapon();
 
-  if(common_scripts\utility::_id_0F79(var_0, var_1))
+  if(common_scripts\utility::_id_0F79(var_0, var_1)) {
     return var_1;
+  }
 
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     return "none";
+  }
 
   var_2 = common_scripts\utility::_id_4550();
 
-  if(common_scripts\utility::_id_0F79(var_0, var_2))
+  if(common_scripts\utility::_id_0F79(var_0, var_2)) {
     return var_2;
+  }
 
   return var_0[0];
 }
@@ -269,12 +290,14 @@ _id_A88C() {
 
       var_6 = var_5._id_5B9F;
 
-      if(!isDefined(var_6))
+      if(!isDefined(var_6)) {
         var_6 = "(removed) " + var_5.currentweapon;
+      }
 
       if(_stricmp(var_2, var_6) != 0) {
-        if(isDefined(var_5._id_5B9F))
+        if(isDefined(var_5._id_5B9F)) {
           self takeweapon(var_5._id_5B9F);
+        }
 
         _id_078D(var_2);
       }
@@ -283,18 +306,21 @@ _id_A88C() {
     var_8 = [];
 
     foreach(var_10, var_5 in self._id_AB4A.weapons) {
-      if(isDefined(var_5._id_5B9F) && !self hasweapon(var_5._id_5B9F))
+      if(isDefined(var_5._id_5B9F) && !self hasweapon(var_5._id_5B9F)) {
         var_8[var_8.size] = var_10;
+      }
     }
 
-    foreach(var_12 in var_8)
-    self._id_AB4A.weapons[var_12] = undefined;
+    foreach(var_12 in var_8) {
+      self._id_AB4A.weapons[var_12] = undefined;
+    }
   }
 }
 
 _id_7BDB(var_0, var_1, var_2) {
-  if(!isDefined(level._id_AB4B))
+  if(!isDefined(level._id_AB4B)) {
     level._id_AB4B = [];
+  }
 
   var_3 = spawnStruct();
   level._id_AB4B[var_0] = var_3;
@@ -317,18 +343,21 @@ _id_4129(var_0) {
   var_3 = _id_0547::_id_AAF9(var_0);
   var_4 = self._id_AB4A.weapons[var_3];
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_2 = var_4._id_5B9F;
-  else
+  } else {
     _id_AC13("get_current_ammo_info: pulling ammo from weapon that isn't in our inventory!Double-check that this weapon was given to the player through _zm_give_weapon: " + var_0);
+  }
 
   var_1._id_0DB3 = self getweaponammoclip(var_2);
 
-  if(issubstr(var_2, "akimbo"))
+  if(issubstr(var_2, "akimbo")) {
     var_1._id_0DB4 = self getweaponammoclip(var_2, "left");
+  }
 
-  if(!_isweaponcliponly(var_0))
+  if(!_isweaponcliponly(var_0)) {
     var_1._id_0DBB = self getweaponammostock(var_2);
+  }
 
   return var_1;
 }
@@ -338,10 +367,11 @@ _id_0F21(var_0, var_1) {
   var_3 = self._id_AB4A.weapons[var_2];
   var_4 = var_0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_3._id_5B9F;
-  else
+  } else {
     _id_AC13("apply_ammo_info: setting ammo on weapon that isn't in our inventory!Double-check that this weapon was given to the player through _zm_give_weapon: " + var_0);
+  }
 
   var_5 = 0;
   var_6 = 0;
@@ -391,8 +421,9 @@ _id_0736(var_0, var_1) {
   thread _id_0641(var_0.currentweapon, var_1, var_0._id_A6DF, var_0.weaponcharmguid);
   var_0._id_5B9F = var_0.currentweapon;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     _id_0F21(var_0.currentweapon, var_3);
+  }
 }
 
 _id_078D(var_0) {
@@ -404,8 +435,9 @@ _zm_give_weapon_mp_api(var_0, var_1, var_2, var_3) {
 }
 
 _id_078C(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_5 = weaponinventorytype(var_0);
   var_6 = _weapontype(var_0);
@@ -415,8 +447,9 @@ _id_078C(var_0, var_1, var_2, var_3, var_4) {
   if(var_5 != "primary" && var_5 != "altmode" || var_6 == "melee") {
     thread _id_0641(var_0, var_7, var_2, var_3, var_4);
 
-    if(common_scripts\utility::_id_562E(var_2))
+    if(common_scripts\utility::_id_562E(var_2)) {
       common_scripts\utility::_id_A70A("zm_stream_cancel_" + var_7, "zm_stream_finish_" + var_7);
+    }
 
     return;
   }
@@ -439,14 +472,16 @@ _id_078C(var_0, var_1, var_2, var_3, var_4) {
   foreach(var_12, var_10 in self._id_AB4A._id_08DF) {
     var_11 = level._id_AB4B[var_12];
 
-    if(isDefined(var_11._id_09AF))
+    if(isDefined(var_11._id_09AF)) {
       self[[var_11._id_09AF]](var_8);
+    }
   }
 
   _id_0736(var_8, var_7);
 
-  if(var_2)
+  if(var_2) {
     common_scripts\utility::_id_A70A("zm_stream_cancel_" + var_7, "zm_stream_finish_" + var_7);
+  }
 }
 
 _id_AC13(var_0) {}
@@ -455,8 +490,9 @@ _id_0632(var_0) {
   var_1 = _id_0547::_id_AAF9(var_0);
   var_2 = self._id_AB4A.weapons[var_1];
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return var_2._id_6C57;
+  }
 
   return var_0;
 }
@@ -464,8 +500,9 @@ _id_0632(var_0) {
 _id_078F() {
   var_0 = getarraykeys(self._id_AB4A.weapons);
 
-  foreach(var_2 in var_0)
-  _id_0790(var_2);
+  foreach(var_2 in var_0) {
+    _id_0790(var_2);
+  }
 
   self takeallweapons();
 }
@@ -475,8 +512,9 @@ _id_0641(var_0, var_1, var_2, var_3, var_4) {
   self endon("zm_stream_cancel_" + var_1);
   self endon("zm_stream_change_" + var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_5 = 0;
   var_5 = self loadweapons([var_0]);
@@ -493,15 +531,17 @@ _id_0641(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 0;
   var_7 = undefined;
 
-  if(!common_scripts\utility::_id_562E(var_4))
+  if(!common_scripts\utility::_id_562E(var_4)) {
     var_7 = _id_056C::getzombiepaintjob(self, var_0);
+  }
 
   maps\mp\_utility::_giveweapon(var_0, var_6, var_7, var_3);
 
-  if(!var_2 && !var_5)
+  if(!var_2 && !var_5) {
     childthread _id_A8C2(var_0, var_1);
-  else
+  } else {
     self notify("zm_stream_finish_" + var_1);
+  }
 }
 
 _id_A8C2(var_0, var_1) {
@@ -534,16 +574,18 @@ _id_0790(var_0) {
 
   var_4 = [];
 
-  if(isDefined(self._id_AB4A.weapons[var_3]))
+  if(isDefined(self._id_AB4A.weapons[var_3])) {
     var_4[var_3] = 1;
+  }
 
   if(var_4.size != 1) {}
 
   foreach(var_17, var_15 in var_4) {
     var_16 = self._id_AB4A.weapons[var_17];
 
-    if(isDefined(var_16._id_5B9F))
+    if(isDefined(var_16._id_5B9F)) {
       self takeweapon(var_16._id_5B9F);
+    }
 
     self._id_AB4A.weapons[var_17] = undefined;
   }
@@ -568,8 +610,9 @@ _id_098F(var_0) {
 
   foreach(var_11, var_8 in self._id_AB4A.weapons) {
     foreach(var_4 in var_1) {
-      if(isDefined(var_4._id_09AF))
+      if(isDefined(var_4._id_09AF)) {
         self[[var_4._id_09AF]](var_8);
+      }
     }
 
     _id_0736(var_8, var_11);
@@ -599,8 +642,9 @@ _id_7CC9(var_0) {
 
   foreach(var_11, var_8 in self._id_AB4A.weapons) {
     foreach(var_4 in var_1) {
-      if(isDefined(var_4._id_2381))
+      if(isDefined(var_4._id_2381)) {
         self[[var_4._id_2381]](var_8);
+      }
     }
 
     _id_0736(var_8, var_11);
@@ -612,8 +656,9 @@ _id_7CC9(var_0) {
 _id_11BB(var_0) {
   var_1 = self getcurrentprimaryweapon();
 
-  if((!isDefined(var_1) || var_1 == "none") && (isDefined(var_0) && var_0 != "none"))
+  if((!isDefined(var_1) || var_1 == "none") && (isDefined(var_0) && var_0 != "none")) {
     _id_078E(var_0, 1);
+  }
 }
 
 _id_7CC8(var_0) {
@@ -624,42 +669,51 @@ _id_078E(var_0, var_1, var_2) {
   var_3 = _id_0547::_id_AAF9(var_0);
   var_4 = self._id_AB4A.weapons[var_3];
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_0 = var_4._id_5B9F;
+  }
 
-  if(common_scripts\utility::_id_562E(var_2))
+  if(common_scripts\utility::_id_562E(var_2)) {
     self _meth_86A5(var_0);
-  else if(common_scripts\utility::_id_562E(var_1))
+  } else if(common_scripts\utility::_id_562E(var_1)) {
     self switchtoweaponimmediate(var_0);
-  else
+  } else {
     self switchtoweapon(var_0);
+  }
 }
 
 _id_2BA2(var_0) {
-  if(!self adsbuttonpressed())
+  if(!self adsButtonPressed()) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_0791(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
-  if(!var_2 && !var_3 && !var_4 && !var_5)
+  if(!var_2 && !var_3 && !var_4 && !var_5) {
     return _stricmp(var_0, var_1) == 0;
+  }
 
-  if((var_0 == "none" || var_1 == "none") && _stricmp(var_0, var_1) != 0)
+  if((var_0 == "none" || var_1 == "none") && _stricmp(var_0, var_1) != 0) {
     return 0;
+  }
 
   var_6 = _func_3A5(var_0);
   var_7 = _func_3A5(var_1);
@@ -679,9 +733,9 @@ _id_0791(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7["weapon"] = _id_0547::_id_9475(var_7["weapon"]);
   }
 
-  if(var_2)
+  if(var_2) {
     return _stricmp(var_6["weapon"], var_7["weapon"]) == 0;
-  else {
+  } else {
     var_0 = _id_0547::_id_062F(var_6);
     var_1 = _id_0547::_id_062F(var_7);
     return _stricmp(var_0, var_1) == 0;
@@ -689,42 +743,49 @@ _id_0791(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_078A(var_0) {
-  if(self hasweapon(var_0))
+  if(self hasweapon(var_0)) {
     return var_0;
+  }
 
   var_1 = _id_0547::_id_AAF9(var_0);
   var_2 = self._id_AB4A.weapons[var_1];
 
-  if(isDefined(var_2) && isDefined(var_2._id_5B9F))
+  if(isDefined(var_2) && isDefined(var_2._id_5B9F)) {
     return var_2._id_5B9F;
+  }
 
   var_3 = self getweaponlistall();
 
   foreach(var_5 in var_3) {
-    if(_id_0791(var_0, var_5))
+    if(_id_0791(var_0, var_5)) {
       return var_5;
+    }
   }
 
   return undefined;
 }
 
 _id_078B(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_4 = self;
 
-  if(var_1)
+  if(var_1) {
     var_4 = undefined;
+  }
 
   if(!isDefined(var_0)) {
     return;
   }
-  if(issubstr(var_0, "_pap_zm"))
+  if(issubstr(var_0, "_pap_zm")) {
     return var_0;
+  }
 
   var_5 = _id_0547::_id_AAF9(var_0, undefined, 1);
   var_6 = _id_0547::_id_9475(var_5) + "_pap_zm";
@@ -752,23 +813,26 @@ _id_078B(var_0, var_1, var_2, var_3) {
       if(!common_scripts\utility::_id_3C83("teslagun_punch_active")) {
         return;
       }
-      if(!common_scripts\utility::_id_3C77("teslagun_punch_active"))
+      if(!common_scripts\utility::_id_3C77("teslagun_punch_active")) {
         return;
+      }
     }
 
     if(issubstr(var_0, "zom_dlc2_1")) {
       if(!common_scripts\utility::_id_3C83("dlc2_melee_packable")) {
         return;
       }
-      if(!common_scripts\utility::_id_3C77("dlc2_melee_packable"))
+      if(!common_scripts\utility::_id_3C77("dlc2_melee_packable")) {
         return;
+      }
     }
   }
 
   var_7 = "pap";
 
-  if(isDefined(level.pap_camo_ref_override))
+  if(isDefined(level.pap_camo_ref_override)) {
     var_7 = level.pap_camo_ref_override;
+  }
 
   if(common_scripts\utility::_id_562E(level.iszombiesshotgun)) {
     var_8 = _id_0547::_id_AAF9(var_0, 0, 0);
@@ -777,8 +841,9 @@ _id_078B(var_0, var_1, var_2, var_3) {
     if(isDefined(level._id_A9CB[var_9]) && isDefined(var_4) && isPlayer(var_4)) {
       var_10 = var_4 getplayerdata(common_scripts\utility::_id_46A8(), "weaponBuildKits", var_9, "bossupgrade");
 
-      if(common_scripts\utility::_id_562E(var_10) && isDefined(level.loot_pap_camo_ref_override))
+      if(common_scripts\utility::_id_562E(var_10) && isDefined(level.loot_pap_camo_ref_override)) {
         var_7 = level.loot_pap_camo_ref_override;
+      }
     }
   }
 
@@ -819,29 +884,34 @@ _id_078B(var_0, var_1, var_2, var_3) {
         var_6 = var_6 + "_pap_zm";
       }
 
-      if(var_20._id_7E18)
+      if(var_20._id_7E18) {
         var_14 = var_20._id_7E18;
+      }
 
-      if(var_20._id_297C)
+      if(var_20._id_297C) {
         var_15 = var_20._id_297C;
+      }
 
       var_12 = common_scripts\utility::_id_0F73(var_12, var_20._id_114C);
     }
 
-    if(common_scripts\utility::_id_562E(var_3) && isDefined(var_20) && isDefined(var_20._id_1EC0))
+    if(common_scripts\utility::_id_562E(var_3) && isDefined(var_20) && isDefined(var_20._id_1EC0)) {
       var_11 = var_20._id_1EC0;
+    }
   }
 
-  while(var_12.size < 6)
+  while(var_12.size < 6) {
     var_12 = common_scripts\utility::_id_0F6F(var_12, 0);
+  }
 
   var_21 = maps\mp\gametypes\_class::_id_1D66(var_6, var_12[0], var_12[1], var_12[2], var_12[3], var_12[4], var_12[5], var_13, var_11, 0, var_14, var_15, var_4, undefined);
   return var_21;
 }
 
 _id_AB31(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   switch (var_0) {
     case "neck":
@@ -857,21 +927,24 @@ _id_ABD6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = _id_43EE(var_1, var_4);
 
   if(_id_176D(var_8, 8)) {
-    if(_id_AB31(var_7))
+    if(_id_AB31(var_7)) {
       var_2 = _id_0975(1, var_2, var_4, var_7, var_1);
-    else if(var_7 != "none")
+    } else if(var_7 != "none") {
       var_2 = _id_0975(-0.2, var_2, var_4, var_7, var_1);
+    }
   }
 
   if(_id_176D(var_8, 16)) {
-    if(_id_AB31(var_7))
+    if(_id_AB31(var_7)) {
       var_2 = _id_0975(-1, var_2, var_4, var_7, var_1);
-    else if(var_7 != "none")
+    } else if(var_7 != "none") {
       var_2 = _id_0975(0.2, var_2, var_4, var_7, var_1);
+    }
   }
 
-  if(_id_176D(var_8, 64))
+  if(_id_176D(var_8, 64)) {
     var_2 = var_2 * 1.75;
+  }
 
   return var_2;
 }
@@ -879,8 +952,9 @@ _id_ABD6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 _id_0975(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_4 _meth_850B(var_2, var_3);
 
-  if(var_5 == 0)
+  if(var_5 == 0) {
     return 0;
+  }
 
   var_1 = var_1 / var_5 * max(var_5 + var_0, 0);
   return var_1;
@@ -905,34 +979,41 @@ _id_ABD7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
   var_9 = var_1 _meth_82D5();
 
-  if(var_4 == "frag_skull_zm")
+  if(var_4 == "frag_skull_zm") {
     var_4 = var_1 getcurrentprimaryweapon();
+  }
 
-  if(var_4 == var_9)
+  if(var_4 == var_9) {
     var_4 = var_1 getcurrentprimaryweapon();
+  }
 
   var_10 = _id_43EE(var_1, var_4);
 
   if(maps\mp\_utility::_id_5755(var_3)) {
-    if(_id_176D(var_10, 2))
+    if(_id_176D(var_10, 2)) {
       var_1 _id_ABD5(20, "rip_and_tear");
+    }
   } else {
     if(_id_176D(var_10, 1)) {
-      if(_id_AB31(var_6))
+      if(_id_AB31(var_6)) {
         var_1 _id_ABD5(10, "head_hunter");
+      }
     }
 
     if(_id_176D(var_10, 128)) {
-      if(_id_054D::_id_2EF2())
+      if(_id_054D::_id_2EF2()) {
         var_1 maps\mp\gametypes\zombies::_id_47AE("one_shot_one_kill");
+      }
     }
 
-    if(_id_176D(var_10, 4))
+    if(_id_176D(var_10, 4)) {
       _id_9B91(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+    }
   }
 
-  if(_id_176D(var_10, 256))
+  if(_id_176D(var_10, 256)) {
     var_1 _id_50FA(var_4, self);
+  }
 }
 
 _id_176D(var_0, var_1) {
@@ -952,10 +1033,11 @@ _id_43EE(var_0, var_1) {
       if(var_4._id_A9F8) {
         var_5 = _func_31A(var_4._id_A9F8, 43);
 
-        if(isDefined(var_5))
+        if(isDefined(var_5)) {
           var_3 = int(var_5);
-        else
+        } else {
           var_3 = 0;
+        }
 
         var_0._id_AC30[var_2] = var_3;
       }
@@ -974,8 +1056,9 @@ _id_9B91(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = var_1._id_5BDC;
   var_10 = gettime();
 
-  if(isDefined(self._id_6730))
+  if(isDefined(self._id_6730)) {
     var_10 = self._id_6730;
+  }
 
   if(!isDefined(var_9)) {
     var_9 = spawnStruct();
@@ -1012,8 +1095,9 @@ _id_1453() {
   self endon("efficient_kill");
   waittillframeend;
 
-  while(isDefined(level._id_AB27) && level._id_AB29 > 0)
+  while(isDefined(level._id_AB27) && level._id_AB29 > 0) {
     waitframe();
+  }
 
   if(!isDefined(self._id_5BDC)) {
     return;
@@ -1046,8 +1130,9 @@ _id_50FA(var_0, var_1) {
   var_2 = _id_0547::_id_AAF9(var_0, 0);
   var_3 = self._id_18AD[var_2];
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_3++;
 
@@ -1058,8 +1143,9 @@ _id_50FA(var_0, var_1) {
     var_5 = _func_2E1(var_5, self);
     var_6 = _func_2DC(self.origin, var_5, self, 1);
 
-    if(var_6["fraction"] < 1.0)
+    if(var_6["fraction"] < 1.0) {
       var_5 = self.origin + anglesToForward(self.angles);
+    }
 
     var_7 = maps\mp\gametypes\zombies::_id_3B9B(var_5);
     maps\mp\gametypes\zombies::_id_281C("nuke", var_7, "body_count", 1, 0);
@@ -1086,8 +1172,9 @@ zombies_hit_by_melee_cone(var_0, var_1, var_2) {
 }
 
 _id_43F1(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = _id_0547::_id_408F();
+  }
 
   var_5 = [];
   var_6 = _cos(var_3 / 2);

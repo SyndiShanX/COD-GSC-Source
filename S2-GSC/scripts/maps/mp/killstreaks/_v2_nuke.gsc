@@ -23,13 +23,15 @@ _id_9E3D(var_0) {
     return 0;
   }
 
-  if(maps\mp\_utility::isusingremote())
+  if(maps\mp\_utility::isusingremote()) {
     return 0;
+  }
 
   thread _id_3252();
 
-  if(level.gametype != "infect")
+  if(level.gametype != "infect") {
     maps\mp\gametypes\_missions::processchallenge("ch_streak_v2rocket");
+  }
 
   _id_0485::_id_5E9A("v2_rocket", self.origin);
   return 1;
@@ -70,8 +72,9 @@ _id_3252() {
   level.nukecoolingdown = 1;
   _setomnvar("ui_bomb_a_state", 4);
 
-  if(!level.teambased && !level.hardcoremode)
+  if(!level.teambased && !level.hardcoremode) {
     self iprintlnbold(&"MP_FRIENDLY_TACTICAL_NUKE");
+  }
 
   level thread _id_2CEE(level._id_6866, ::_id_6861);
   level thread _id_2CEE(level._id_6866, ::_id_6860);
@@ -149,8 +152,9 @@ _id_6867() {
   level endon("nuke_cancelled");
   var_0 = "dna_bomb";
 
-  if(isDefined(level._id_3092))
+  if(isDefined(level._id_3092)) {
     var_0 = level._id_3092;
+  }
 
   level._id_6868 = 1;
 
@@ -162,8 +166,9 @@ _id_6867() {
   level waittill("nuke_death");
   wait 3.0;
 
-  foreach(var_2 in level.players)
-  var_2 setclienttriggervisionset("", 10);
+  foreach(var_2 in level.players) {
+    var_2 setclienttriggervisionset("", 10);
+  }
 
   level._id_6868 = undefined;
 }
@@ -177,8 +182,9 @@ _id_6858() {
 
   foreach(var_2 in level.players) {
     if(level.teambased) {
-      if(isDefined(level._id_685E.team) && var_2.team == level._id_685E.team)
+      if(isDefined(level._id_685E.team) && var_2.team == level._id_685E.team) {
         continue;
+      }
     } else if(isDefined(level._id_685E.player) && var_2 == level._id_685E.player) {
       continue;
     }
@@ -187,8 +193,9 @@ _id_6858() {
     if(isalive(var_2)) {
       var_2 thread maps\mp\gametypes\_damage::_id_3BAC(level._id_685E.player, level._id_685E.player, 999999, 0, "MOD_EXPLOSIVE", "v2_rocket_mp", var_2.origin, var_2.origin, "none", 0, 0);
 
-      if(isDefined(var_2._id_5738) && var_2._id_5738 == 1)
+      if(isDefined(var_2._id_5738) && var_2._id_5738 == 1) {
         var_2 dodamage(1, var_2.origin, level._id_685E.player, level._id_685E.player, "MOD_EXPLOSIVE", "v2_rocket_mp");
+      }
 
       var_0 = var_0 + 0.05;
     }
@@ -203,7 +210,7 @@ _id_685A() {
 
   foreach(var_1 in level.players) {
     _earthquake(0.6, 5, var_1.origin, 1000, var_1);
-    var_1 playrumbleonentity("damage_heavy");
+    var_1 playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -229,21 +236,24 @@ _id_6855(var_0) {
   level endon("game_ended");
   var_1 = [];
 
-  if(level.teambased)
+  if(level.teambased) {
     var_1 = level._id_9FDA[maps\mp\_utility::getotherteam(var_0.team)];
-  else
+  } else {
     var_1 = level._id_9FDA;
+  }
 
   foreach(var_3 in var_1) {
-    if(level.teambased && isDefined(var_3.team) && var_3.team != var_0.team || !level.teambased && isDefined(var_3._id_0117) && var_3._id_0117 != var_0)
+    if(level.teambased && isDefined(var_3.team) && var_3.team != var_0.team || !level.teambased && isDefined(var_3._id_0117) && var_3._id_0117 != var_0) {
       var_3 dodamage(99999, var_3.origin, var_0, var_0, "MOD_EXPLOSIVE", "v2_rocket_mp");
+    }
   }
 
   var_5 = level._id_7043;
 
   foreach(var_7 in var_5) {
-    if(level.teambased && isDefined(var_7.team) && var_7.team != var_0.team || !level.teambased && isDefined(var_7._id_0117) && var_7._id_0117 != var_0)
+    if(level.teambased && isDefined(var_7.team) && var_7.team != var_0.team || !level.teambased && isDefined(var_7._id_0117) && var_7._id_0117 != var_0) {
       var_7 dodamage(99999, var_7.origin, var_0, var_0, "MOD_EXPLOSIVE", "v2_rocket_mp");
+    }
   }
 
   var_9 = level._id_6E71;
@@ -251,14 +261,16 @@ _id_6855(var_0) {
   foreach(var_11 in level._id_6E71) {
     if(isDefined(var_11) && isDefined(var_11._id_0117)) {
       if(level.teambased) {
-        if(isDefined(var_11._id_0117.team) && var_11._id_0117.team != var_0.team)
+        if(isDefined(var_11._id_0117.team) && var_11._id_0117.team != var_0.team) {
           var_11 dodamage(var_11.health + 500000, var_11.origin, var_0, var_0, "MOD_EXPLOSIVE", "v2_rocket_mp");
+        }
 
         continue;
       }
 
-      if(var_11._id_0117 != var_0)
+      if(var_11._id_0117 != var_0) {
         var_11 dodamage(var_11.health + 500000, var_11.origin, var_0, var_0, "MOD_EXPLOSIVE", "v2_rocket_mp");
+      }
     }
   }
 }
@@ -273,8 +285,9 @@ _id_A0D6() {
   level waittill("host_migration_begin");
   var_1 = maps\mp\gametypes\_hostmigration::_id_A782();
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     _setomnvar("ui_nuke_end_milliseconds", var_0 + var_1);
+  }
 }
 
 _id_3D58(var_0) {
@@ -284,17 +297,19 @@ _id_3D58(var_0) {
   var_1 = gettime() + var_0 * 1000;
 
   while(gettime() < var_1) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     waitframe();
   }
 }
 
 applyv2flash(var_0, var_1) {
-  if(!isDefined(self._id_3D46) || var_0 > self._id_3D46)
+  if(!isDefined(self._id_3D46) || var_0 > self._id_3D46) {
     self._id_3D46 = var_0;
+  }
 
-  if(!isDefined(self._id_3D57) || var_1 > self._id_3D57)
+  if(!isDefined(self._id_3D57) || var_1 > self._id_3D57) {
     self._id_3D57 = var_1;
+  }
 
   waitframe();
 
@@ -304,8 +319,9 @@ applyv2flash(var_0, var_1) {
     thread maps\mp\_utility::_id_5D22("flashed", 0.05, 0.1, 0.55);
   }
 
-  if(isDefined(self._id_3D57))
+  if(isDefined(self._id_3D57)) {
     thread _id_3D58(self._id_3D57);
+  }
 
   self._id_3D46 = undefined;
   self._id_3D57 = undefined;

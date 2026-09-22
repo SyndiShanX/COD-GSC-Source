@@ -43,8 +43,9 @@ _id_784F() {
   var_2 = undefined;
 
   foreach(var_4 in level._id_7606) {
-    if(_id_0547::_id_5565(var_4.getnegotiationnextnode, var_1))
+    if(_id_0547::_id_5565(var_4.getnegotiationnextnode, var_1)) {
       var_2 = var_4;
+    }
   }
 
   if(isDefined(var_2) && isDefined(var_2._id_6298)) {
@@ -66,12 +67,14 @@ _id_7851() {
 
 _id_7867() {
   if(1) {
-    if(!1 || 1 && level.players.size == 1)
+    if(!1 || 1 && level.players.size == 1) {
       level thread quest_step_reroute_power_helper();
+    }
   }
 
-  if(common_scripts\utility::_id_3C77("flag_med_enigma_set") || common_scripts\utility::_id_3C77("flag_rnd_enigma_set"))
+  if(common_scripts\utility::_id_3C77("flag_med_enigma_set") || common_scripts\utility::_id_3C77("flag_rnd_enigma_set")) {
     _id_0557::_id_7822("2 open salt mine", &"ZOMBIE_NEST_HINT_STEP_REROUTE_POWER_2");
+  }
 
   if(0) {
     level._id_3590 = _id_0557::_id_782F(undefined, level._id_358F);
@@ -86,8 +89,9 @@ quest_step_reroute_power_helper() {
     var_0 = level._id_A980;
     var_1 = var_0 + 2;
 
-    if(1)
+    if(1) {
       wait 200;
+    }
 
     if(1) {
       if(level._id_A980 <= var_1) {
@@ -105,8 +109,9 @@ quest_step_reroute_power_helper() {
       level.rotor_objective_helper_tripped = 1;
 
       foreach(var_3 in level._id_358F) {
-        foreach(var_5 in level.players)
-        var_3 hudoutlineenableforclient(var_5, 0, 0);
+        foreach(var_5 in level.players) {
+          var_3 hudoutlineenableforclient(var_5, 0, 0);
+        }
       }
     } else {
       level._id_3590 = _id_0557::_id_782F(undefined, level._id_358F);
@@ -122,13 +127,15 @@ _id_5348() {
   var_3 = var_1[0];
 
   foreach(var_5 in var_0) {
-    if(var_5.classname == "script_model" && var_5.model == "zmb_circuit_breaker_02")
+    if(var_5.classname == "script_model" && var_5.model == "zmb_circuit_breaker_02") {
       var_2 = var_5;
+    }
   }
 
   foreach(var_5 in var_1) {
-    if(var_5.classname == "script_model" && var_5.model == "zmb_circuit_breaker_02")
+    if(var_5.classname == "script_model" && var_5.model == "zmb_circuit_breaker_02") {
       var_3 = var_5;
+    }
   }
 
   level._id_358F = [var_3, var_2];
@@ -146,8 +153,9 @@ _id_785F() {
     if(0) {
       if(common_scripts\utility::_id_562E(level.rotor_objective_helper_tripped)) {
         foreach(var_3 in level._id_358F) {
-          foreach(var_5 in level.players)
-          var_3 hudoutlinedisableforclient(var_5);
+          foreach(var_5 in level.players) {
+            var_3 hudoutlinedisableforclient(var_5);
+          }
         }
       }
     }
@@ -176,7 +184,7 @@ _id_52B6() {
 }
 
 _id_3B98() {
-  var_0 = _getent("enter_com_trig", "targetname");
+  var_0 = _getEnt("enter_com_trig", "targetname");
 
   if(isDefined(var_0)) {
     for(;;) {
@@ -189,8 +197,9 @@ _id_3B98() {
       wait 0.25;
     }
 
-    if(!_id_0557::_id_783E("2 open salt mine", "explore bunker"))
+    if(!_id_0557::_id_783E("2 open salt mine", "explore bunker")) {
       _id_0557::_id_7822("2 open salt mine", &"ZOMBIE_NEST_HINT_STEP_FIND_SM_DOOR");
+    }
   }
 }
 
@@ -200,8 +209,9 @@ lerpfov() {
   if(!maps\mp\mp_zombie_nest_ee_hc_tools_of_the_trade::_id_8B98()) {
     var_0 = getEntArray("enigma_place", "targetname");
 
-    foreach(var_2 in var_0)
-    var_2 delete();
+    foreach(var_2 in var_0) {
+      var_2 delete();
+    }
   }
 
   if(level._id_36B0) {
@@ -228,13 +238,15 @@ _id_7EFD() {
 }
 
 _id_7D6D(var_0) {
-  for(var_1 = 0; var_1 < level._id_358E.size; var_1++)
+  for(var_1 = 0; var_1 < level._id_358E.size; var_1++) {
     level._id_358E[var_1] common_scripts\utility::_id_9D9F();
+  }
 
   _id_7D6C();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(var_0) {
     var_2 = _id_4470();
@@ -261,22 +273,26 @@ _id_7D6C() {
 }
 
 _id_7AAC() {
-  for(var_0 = 0; var_0 < level._id_358E.size; var_0++)
+  for(var_0 = 0; var_0 < level._id_358E.size; var_0++) {
     level._id_358E[var_0] common_scripts\utility::_id_9DA3();
+  }
 }
 
 _id_8A3F() {
-  self usetriggerrequirelookat();
-  self._id_5F59 = _getent(self.target, "targetname");
+  self useTriggerRequireLookAt();
+  self._id_5F59 = _getEnt(self.target, "targetname");
 
-  if(isDefined(self._id_5F59.target))
+  if(isDefined(self._id_5F59.target)) {
     self._id_6643 = common_scripts\utility::_id_44BD(self._id_5F59.target, "targetname");
+  }
 
-  if(isDefined(self._id_6643) && isDefined(self._id_6643.target))
+  if(isDefined(self._id_6643) && isDefined(self._id_6643.target)) {
     self._id_6646 = common_scripts\utility::_id_44BD(self._id_6643.target, "targetname");
+  }
 
-  if(isDefined(self._id_6646) && isDefined(self._id_6646.target))
+  if(isDefined(self._id_6646) && isDefined(self._id_6646.target)) {
     self._id_6647 = common_scripts\utility::_id_44BD(self._id_6646.target, "targetname");
+  }
 }
 
 _id_7EFC() {
@@ -297,8 +313,9 @@ _id_7EFC() {
       }
     }
 
-    if(!isDefined(self._id_08A9))
+    if(!isDefined(self._id_08A9)) {
       self._id_08A9 = 0;
+    }
 
     self._id_5F59 thread _id_8717();
 
@@ -309,8 +326,9 @@ _id_7EFC() {
       var_0 thread _id_2EB7();
 
       if(level._id_3591 == 1 && 1) {
-        if(level._id_358D == 0 && !level._id_3593)
+        if(level._id_358D == 0 && !level._id_3593) {
           _id_0557::_id_7822("2 open salt mine", &"ZOMBIE_NEST_HINT_STEP_REROUTE_POWER_2");
+        }
 
         thread _id_92C4();
         thread _id_A0FF("unlock");
@@ -322,8 +340,9 @@ _id_7EFC() {
         common_scripts\utility::flag_set("flag_both_enigmas_set");
         var_0 _id_0378::_id_8D74("aud_saltmine_door_powered");
 
-        if(isDefined(level._id_3590))
+        if(isDefined(level._id_3590)) {
           _id_0557::_id_7847("2 open salt mine", level._id_3590);
+        }
 
         _id_0557::_id_782D("2 open salt mine", "use power machines");
 
@@ -370,18 +389,18 @@ _id_8715() {
 }
 
 _id_86C0() {
-  if(common_scripts\utility::_id_562E(self._id_568A))
+  if(common_scripts\utility::_id_562E(self._id_568A)) {
     _id_940A("off");
-  else {
+  } else {
     self hidepart("TAG_POWER_ON", self.model);
     self showpart("TAG_POWER_OFF", self.model);
   }
 }
 
 _id_86C1() {
-  if(common_scripts\utility::_id_562E(self._id_568A))
+  if(common_scripts\utility::_id_562E(self._id_568A)) {
     _id_940A("on");
-  else {
+  } else {
     self hidepart("TAG_POWER_OFF", self.model);
     self showpart("TAG_POWER_ON", self.model);
   }
@@ -421,11 +440,13 @@ _id_8716(var_0) {
 }
 
 _id_A10E(var_0, var_1) {
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     self hidepart(var_0[var_2], self.model);
+  }
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     self showpart(var_1[var_2], self.model);
+  }
 }
 
 _id_A0FF(var_0) {
@@ -457,19 +478,22 @@ _id_A0FF(var_0) {
     return;
   }
   if(common_scripts\utility::_id_562E(var_1._id_5671)) {
-    while(var_1._id_5671)
+    while(var_1._id_5671) {
       wait 0.1;
+    }
   }
 
   var_1._id_5671 = 1;
 
-  foreach(var_6 in var_1.setclientdvars)
-  var_6 setscriptablepartstate("gate", var_2);
+  foreach(var_6 in var_1.setclientdvars) {
+    var_6 setscriptablepartstate("gate", var_2);
+  }
 
   wait(var_4);
 
-  foreach(var_6 in var_1.setclientdvars)
-  var_6 setscriptablepartstate("gate", var_3);
+  foreach(var_6 in var_1.setclientdvars) {
+    var_6 setscriptablepartstate("gate", var_3);
+  }
 
   var_1._id_5671 = 0;
 }
@@ -479,34 +503,39 @@ _id_A10A(var_0, var_1) {
   var_3 = undefined;
   var_4 = undefined;
 
-  if(var_0 == "rnd")
+  if(var_0 == "rnd") {
     var_3 = "light_r";
-  else if(var_0 == "med")
+  } else if(var_0 == "med") {
     var_3 = "light_l";
+  }
 
-  if(var_1 == "green")
+  if(var_1 == "green") {
     var_4 = "on";
-  else if(var_1 == "red")
+  } else if(var_1 == "red") {
     var_4 = "off";
+  }
 
-  foreach(var_6 in var_2.setclientdvars)
-  var_6 setscriptablepartstate(var_3, var_4);
+  foreach(var_6 in var_2.setclientdvars) {
+    var_6 setscriptablepartstate(var_3, var_4);
+  }
 }
 
 _id_92C4() {
   var_0 = 60;
   var_1 = 0;
 
-  foreach(var_3 in level._id_358E)
-  var_3 thread _id_9300(var_0);
+  foreach(var_3 in level._id_358E) {
+    var_3 thread _id_9300(var_0);
+  }
 
   thread _id_0378::_id_8D74("aud_fuse_timer_start", level._id_358E);
 
   while(!level._id_3593 && !var_1) {
     if(var_0 < 10) {
       foreach(var_6 in level.players) {
-        if(var_6 maps\mp\mp_zombie_nest_ee_util::_id_7402())
+        if(var_6 maps\mp\mp_zombie_nest_ee_util::_id_7402()) {
           thread _id_0378::_id_8D74("aud_start_enigma_timer", var_0, var_1);
+        }
       }
     }
 
@@ -521,8 +550,9 @@ _id_92C4() {
         }
       }
 
-      if(level._id_358D == 0 && !level._id_3593)
+      if(level._id_358D == 0 && !level._id_3593) {
         _id_0557::_id_7822("2 open salt mine", &"ZOMBIE_NEST_HINT_STEP_REROUTE_RESET");
+      }
 
       level._id_358D++;
       thread _id_7D6D();
@@ -537,28 +567,28 @@ _id_9300(var_0) {
   if(!isDefined(self._id_6643) || !isDefined(self._id_6646) || !isDefined(self._id_6647)) {
     return;
   }
-  self._id_6643 moveto(self._id_6647.origin, 0.1, 0, 0);
+  self._id_6643 moveTo(self._id_6647.origin, 0.1, 0, 0);
   wait 0.1;
-  self._id_6643 moveto(self._id_6646.origin, var_0 - 0.1, 0, 0);
+  self._id_6643 moveTo(self._id_6646.origin, var_0 - 0.1, 0, 0);
 }
 
 _id_8714() {
   if(!isDefined(self._id_6643) || !isDefined(self._id_6647)) {
     return;
   }
-  self._id_6643 moveto(self._id_6647.origin, 0.5, 0, 0);
+  self._id_6643 moveTo(self._id_6647.origin, 0.5, 0, 0);
 }
 
 _id_8713() {
   if(!isDefined(self._id_6643) || !isDefined(self._id_6646)) {
     return;
   }
-  self._id_6643 moveto(self._id_6646.origin, 0.5, 0, 0);
+  self._id_6643 moveTo(self._id_6646.origin, 0.5, 0, 0);
 }
 
 _id_2EA6() {
   level endon("flag_both_enigmas_set");
-  var_0 = _getent("saltmine_ent_dialogue", "targetname");
+  var_0 = _getEnt("saltmine_ent_dialogue", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -570,8 +600,9 @@ _id_2EA6() {
       common_scripts\utility::flag_set("flag_salt_mine_door_found");
       var_2 = var_1 _id_0367::_id_8E3D("saltminedoorexamine");
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_1._id_306B = 1;
+      }
     }
   }
 }
@@ -596,8 +627,9 @@ _id_2EA7() {
   if(!isDefined(self._id_3065) && isPlayer(self)) {
     var_0 = thread _id_0367::_id_8E3D("saltminereset");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       self._id_3065 = 1;
+    }
   }
 }
 

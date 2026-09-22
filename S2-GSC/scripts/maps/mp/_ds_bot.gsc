@@ -29,16 +29,19 @@ _id_09F4() {
   setDvar("scr_testclients", 0);
   var_1 = _id_9918();
 
-  if(var_0)
+  if(var_0) {
     setDvar("bot_DisableAutoConnect", "1");
+  }
 
-  if(var_1)
+  if(var_1) {
     level thread[[level.bot_funcs["bots_spawn"]]](var_0, "autoassign");
-  else
+  } else {
     level _id_9007(var_0);
+  }
 
-  if(maps\mp\_utility::matchmakinggame())
+  if(maps\mp\_utility::matchmakinggame()) {
     setmatchdata("match_common", "has_bots", 1);
+  }
 
   thread _id_8744();
   thread _id_871C();
@@ -73,10 +76,11 @@ _id_9007(var_0) {
   while(var_1.size < var_0) {
     waitframe();
 
-    if(_func_367())
+    if(_func_367()) {
       var_2 = _func_166(1, level._id_746E);
-    else
+    } else {
       var_2 = _func_166(1);
+    }
 
     if(!isDefined(var_2)) {
       wait 1;
@@ -97,8 +101,9 @@ _id_9007(var_0) {
     var_4 = 0;
 
     foreach(var_3 in var_1) {
-      if(var_3._id_7ABD || var_3._id_0843)
+      if(var_3._id_7ABD || var_3._id_0843) {
         var_4++;
+      }
     }
 
     waitframe();
@@ -110,8 +115,9 @@ _id_535E(var_0, var_1) {
     waitframe();
 
     if(!isDefined(self)) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1._id_0843 = 1;
+      }
 
       return;
     }
@@ -124,8 +130,9 @@ _id_535E(var_0, var_1) {
     waitframe();
 
     if(!isDefined(self)) {
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_1._id_0843 = 1;
+      }
 
       return;
     }
@@ -141,16 +148,18 @@ _id_535E(var_0, var_1) {
   common_scripts\utility::waittill_notify_or_timeout("spawned_player", 0.5);
   wait 0.1;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1._id_7ABD = 1;
+  }
 }
 
 _id_9918() {
   var_0 = getdvarint("scr_testclients_type") == 0;
 
   if(var_0) {
-    if(!isDefined(level.bot_funcs) || !isDefined(level.bot_funcs["bots_spawn"]))
+    if(!isDefined(level.bot_funcs) || !isDefined(level.bot_funcs["bots_spawn"])) {
       var_0 = 0;
+    }
   }
 
   return var_0;

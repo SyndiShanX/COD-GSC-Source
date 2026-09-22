@@ -96,17 +96,21 @@ ondnkstartgame() {
 }
 
 ondnkroundend() {
-  if(level._id_A980 == 1)
+  if(level._id_A980 == 1) {
     level thread maps\mp\mp_zombie_dnk_code::wave_story_wave_1();
+  }
 
-  if(level._id_A980 == 4)
+  if(level._id_A980 == 4) {
     level thread maps\mp\mp_zombie_dnk_code::wave_story_wave_4();
+  }
 
-  if(level._id_A980 == 9)
+  if(level._id_A980 == 9) {
     level thread maps\mp\mp_zombie_dnk_code::wave_story_pre_boss();
+  }
 
-  if(level._id_A980 == 10)
+  if(level._id_A980 == 10) {
     level thread maps\mp\mp_zombie_dnk_code::wave_story_post_boss();
+  }
 
   level.shiptiltingtimermin = level.shiptiltingtimermin - 2;
   level.shiptiltingtimermax = level.shiptiltingtimermax - 2;
@@ -137,15 +141,16 @@ beast_boss_run(var_0) {
   var_2 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_boss_health");
   var_2 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_modified_boss_health(var_2);
 
-  if(int(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("zmb_fireman_boss_is_uber")))
+  if(int(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("zmb_fireman_boss_is_uber"))) {
     level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::spawn_extra_redskull_assassins("zombie_assassin_freefire");
+  }
 
   level.boss maps\mp\agents\_agent_common::_id_83FD(int(var_2));
   var_3 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::basic_boss_waitfor_defeated();
 
-  if(!common_scripts\utility::_id_562E(var_3))
+  if(!common_scripts\utility::_id_562E(var_3)) {
     return 0;
-  else {
+  } else {
     foreach(var_5 in level.players) {
       var_6 = _id_0547::_id_4745(var_5, "totalBossDefeats");
       var_6++;
@@ -180,17 +185,19 @@ intro_special_zombies_attach() {
   self.hasprop = 1;
   self.prop_decorator = spawn("script_model", self.origin);
 
-  if(common_scripts\utility::_id_24A6())
+  if(common_scripts\utility::_id_24A6()) {
     self.prop_decorator setModel("bsh_life_preserve_01");
-  else
+  } else {
     self.prop_decorator setModel("bsh_life_preserve_01_snow");
+  }
 
-  self.prop_decorator linkto(self, "J_SpineLower", (0, 0, 0), (0, 90, -90));
+  self.prop_decorator linkTo(self, "J_SpineLower", (0, 0, 0), (0, 90, -90));
 }
 
 special_decorator_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(isDefined(self.prop_decorator))
+  if(isDefined(self.prop_decorator)) {
     self.prop_decorator common_scripts\utility::_id_2CBE(4, ::delete);
+  }
 }
 
 performance_stuff() {

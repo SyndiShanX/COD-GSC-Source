@@ -45,17 +45,19 @@ _id_002D(var_0, var_1, var_2, var_3) {
   } else
     var_4 = [[var_1]](var_2);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 3;
+  }
 
-  if(var_4 == anim._id_39EB)
+  if(var_4 == anim._id_39EB) {
     return 0;
-  else if(var_4 == anim._id_94D4)
+  } else if(var_4 == anim._id_94D4) {
     return 1;
-  else if(var_4 == anim._id_7FB8)
+  } else if(var_4 == anim._id_7FB8) {
     return 2;
-  else
+  } else {
     return 3;
+  }
 }
 
 _id_1CD8(var_0) {}

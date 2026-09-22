@@ -128,8 +128,9 @@ _id_7BBA() {
 }
 
 _id_7248() {
-  if(!isDefined(self._id_11CB))
+  if(!isDefined(self._id_11CB)) {
     self._id_11CB = spawnStruct();
+  }
 
   if(isDefined(level._id_11CB.intro_assault_executing)) {
     var_0 = 1;
@@ -150,8 +151,9 @@ _id_A979(var_0) {
   self _meth_85A7("snd_randomize_ambient_mus_layers");
   waitframe();
 
-  if(!common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(var_0)) {
     thread isla_wave_mus_switcher();
+  }
 }
 
 _id_A97A() {
@@ -186,8 +188,9 @@ isla_wave_mus_switcher() {
     var_9 = var_0.origin;
     var_18 = var_2;
 
-    if(var_0 _id_0366::snd_zmb_plr_is_in_thick_fog())
+    if(var_0 _id_0366::snd_zmb_plr_is_in_thick_fog()) {
       var_18 = var_18 * 2;
+    }
 
     if(var_17) {
       if(!var_8) {
@@ -360,8 +363,9 @@ waves_splash_on_rocks() {
 }
 
 _id_1CC1() {
-  foreach(var_1 in level.players)
-  var_1 clientaddsoundsubmix("brute_intro", 2.0);
+  foreach(var_1 in level.players) {
+    var_1 clientaddsoundsubmix("brute_intro", 2.0);
+  }
 
   _id_0366::_id_8E33(3);
   _id_0380::_id_6840("zmb_mus_brute_intro");
@@ -380,8 +384,9 @@ _id_1CC2() {
 snd_zmb_fog_assassin_vox() {
   waitframe();
 
-  foreach(var_1 in level.players)
-  var_1 thread ambient_assassin_vox_watcher();
+  foreach(var_1 in level.players) {
+    var_1 thread ambient_assassin_vox_watcher();
+  }
 }
 
 ambient_assassin_vox_watcher() {
@@ -422,19 +427,21 @@ aud_fog_rolling_in() {
   var_0 = self;
   wait 2;
 
-  if(var_0.current_volume_is_interior)
+  if(var_0.current_volume_is_interior) {
     _id_0380::_id_6840("zmb_indoor_fog_rolling_in", var_0);
-  else
+  } else {
     _id_0380::_id_6840("zmb_fog_rolling_in", var_0);
+  }
 }
 
 aud_fog_rolling_out() {
   var_0 = self;
 
-  if(var_0.current_volume_is_interior)
+  if(var_0.current_volume_is_interior) {
     _id_0380::_id_6840("zmb_indoor_fog_rolling_out", var_0);
-  else
+  } else {
     _id_0380::_id_6840("zmb_fog_rolling_out", var_0);
+  }
 }
 
 aud_fog_lifted() {
@@ -450,10 +457,11 @@ fog_music_mix_monitor() {
   var_1 = 5;
   var_2 = _id_0366::snd_zmb_plr_is_in_thick_fog();
 
-  if(var_2)
+  if(var_2) {
     var_0 clientaddsoundsubmix("fog_music_mix");
-  else
+  } else {
     var_0 clientaddsoundsubmix("no_fog_music_mix");
+  }
 
   var_3 = var_2;
 
@@ -487,10 +495,11 @@ _id_8E8F() {
     }
 
     if(var_3 != var_1) {
-      if(var_3)
+      if(var_3) {
         self clientclearsoundsubmix("pa_inside", 1.0);
-      else
+      } else {
         self clientaddsoundsubmix("pa_inside", 1.0);
+      }
 
       var_1 = var_3;
     }
@@ -601,8 +610,9 @@ _id_3FE4(var_0, var_1) {
   var_2 = self;
   var_3 = var_2 getentitynumber();
 
-  if(!isDefined(level._id_11CB._id_A28E))
+  if(!isDefined(level._id_11CB._id_A28E)) {
     level._id_11CB._id_A28E = [];
+  }
 
   var_4 = level._id_11CB._id_A28E[var_3];
 
@@ -622,38 +632,44 @@ _id_3FE4(var_0, var_1) {
       _id_046C::_id_8DA0("zmb_valve_start_unlock", var_2.origin);
       break;
     case "opening":
-      if(isDefined(var_4._id_9E98))
+      if(isDefined(var_4._id_9E98)) {
         _func_352(var_4._id_9E98, 0.1);
+      }
 
       var_4._id_9E98 = _func_351("zmb_valve_opening_lp", var_2, undefined, undefined, undefined, "hard");
 
-      if(var_1)
+      if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 1, self._id_A29D);
+      }
 
       break;
     case "closing":
-      if(isDefined(var_4._id_9E98))
+      if(isDefined(var_4._id_9E98)) {
         _func_352(var_4._id_9E98, 0.1);
+      }
 
       var_4._id_9E98 = _func_351("zmb_valve_closing_lp", var_2, undefined, undefined, undefined, "hard");
 
-      if(var_1)
+      if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 0, self._id_A29D);
+      }
 
       break;
     case "open":
       _id_046C::_id_8DA0("zmb_valve_open", var_2.origin);
 
-      if(var_1)
+      if(var_1) {
         _id_0380::_id_684E(var_4._id_3FE3, 0.666, 2.0);
+      }
 
       _func_352(var_4._id_9E98, 0.1);
       break;
     case "closed":
       _id_046C::_id_8DA0("zmb_valve_stop_lock", var_2.origin);
 
-      if(isDefined(var_4._id_9E98))
+      if(isDefined(var_4._id_9E98)) {
         _func_352(var_4._id_9E98, 0.1);
+      }
 
       if(isDefined(var_4._id_3FE3)) {
         _id_0380::_id_6850(var_4._id_3FE3, 0.1);
@@ -669,7 +685,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 moveto(var_1, 1.9);
+  var_2 moveTo(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -741,8 +757,9 @@ plane_spawn() {
   common_scripts\utility::flag_init("aud_last_plane_spawned");
   var_0 = self;
 
-  foreach(var_2 in level.players)
-  var_2 thread plane_spawn_watcher(var_0);
+  foreach(var_2 in level.players) {
+    var_2 thread plane_spawn_watcher(var_0);
+  }
 }
 
 plane_spawn_watcher(var_0) {
@@ -787,10 +804,11 @@ plane_tailspin() {
   self endon("death");
   var_0 = self;
 
-  if(!common_scripts\utility::_id_3C77("aud_last_plane_spawned"))
+  if(!common_scripts\utility::_id_3C77("aud_last_plane_spawned")) {
     _id_0380::_id_288D("plane_destruct_death_pop", undefined, var_0, undefined, undefined, 0.1);
-  else
+  } else {
     _id_0380::_id_288D("last_plane_crash_flyby_main", undefined, var_0, undefined, undefined, 0.1);
+  }
 }
 
 plane_explode(var_0) {
@@ -800,8 +818,9 @@ plane_explode(var_0) {
 last_plane_spawn() {
   var_0 = self;
 
-  foreach(var_2 in level.players)
-  var_2 thread last_plane_spawn_watcher(var_0);
+  foreach(var_2 in level.players) {
+    var_2 thread last_plane_spawn_watcher(var_0);
+  }
 }
 
 last_plane_spawn_watcher(var_0) {
@@ -828,8 +847,9 @@ last_plane_crash(var_0) {
   _id_0380::_id_2889("last_plane_crash_explode_main", undefined, var_0);
   level notify("stop_plane_int_submix");
 
-  foreach(var_2 in level.players)
-  var_2 clientclearsoundsubmix("isl_plane_interior_mix");
+  foreach(var_2 in level.players) {
+    var_2 clientclearsoundsubmix("isl_plane_interior_mix");
+  }
 }
 
 dist_artillery_shot() {
@@ -842,8 +862,9 @@ dist_ship_artillery_inc() {
   _id_0380::_id_288B("zmb_ship_artillery_inc", undefined, var_0);
   wait 2.7;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _id_0380::_id_288B("zmb_ship_artillery_inc_whizby", undefined, var_0);
+  }
 }
 
 dist_ship_artillery_impact() {
@@ -889,10 +910,11 @@ artillery_power_filled() {
   waitframe();
   var_0 = (285, 3469, 1153);
 
-  if(level._id_11CB.artillery_battery_placed)
+  if(level._id_11CB.artillery_battery_placed) {
     level._id_11CB.artillery_battery_placed = 0;
-  else
+  } else {
     _id_0380::_id_2889("zmb_artillery_charged_up", undefined, var_0);
+  }
 }
 
 artillery_power_depleted() {
@@ -942,8 +964,9 @@ radio_tower_incoming_mortar() {
   _id_0380::_id_288B("zmb_ship_artillery_inc", undefined, var_0);
   wait 2.7;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _id_0380::_id_288B("zmb_ship_artillery_inc_whizby", undefined, var_0);
+  }
 }
 
 radio_tower_mortar_impact() {
@@ -1078,16 +1101,18 @@ corpse_gate_talk(var_0) {
       break;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     corpse_gate_german_dialogue(var_2);
+  }
 }
 
 corpse_gate_german_dialogue(var_0) {
   if(common_scripts\utility::_id_562E(self.is_opened) || !isDefined(self._id_00B9)) {
     return;
   }
-  while(common_scripts\utility::_id_562E(self._id_00B9.is_speaking))
+  while(common_scripts\utility::_id_562E(self._id_00B9.is_speaking)) {
     waitframe();
+  }
 
   self._id_00B9.is_speaking = 1;
   var_1 = self._id_00B9;
@@ -1130,8 +1155,9 @@ pagan_head_place(var_0, var_1) {
 
 pagan_room_earthquake(var_0, var_1, var_2) {
   foreach(var_4 in level.players) {
-    if(distance(var_4.origin, var_2) < 500)
+    if(distance(var_4.origin, var_2) < 500) {
       var_4 clientaddsoundsubmix("paganearthquake");
+    }
   }
 
   switch (var_0) {
@@ -1162,14 +1188,17 @@ pagan_room_earthquake(var_0, var_1, var_2) {
 pagan_room_earthquake_stop(var_0) {
   _id_0366::_id_8E30(1.0, var_0);
 
-  foreach(var_2 in level.players)
-  var_2 clientclearsoundsubmix("paganearthquake");
+  foreach(var_2 in level.players) {
+    var_2 clientclearsoundsubmix("paganearthquake");
+  }
 
-  if(isDefined(level._id_11CB.paganearthquake_rumble_handle))
+  if(isDefined(level._id_11CB.paganearthquake_rumble_handle)) {
     _id_0380::_id_6850(level._id_11CB.paganearthquake_rumble_handle, var_0);
+  }
 
-  if(isDefined(level._id_11CB.zone1earthquake_quake_handle))
+  if(isDefined(level._id_11CB.zone1earthquake_quake_handle)) {
     _id_0380::_id_6850(level._id_11CB.zone1earthquake_quake_handle, var_0);
+  }
 
   level._id_11CB.paganearthquake_rumble_handle = undefined;
   level._id_11CB.paganearthquake_quake_handle = undefined;

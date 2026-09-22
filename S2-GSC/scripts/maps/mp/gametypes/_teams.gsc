@@ -80,8 +80,9 @@ _id_9BC3() {
 
   if(!_func_367()) {
     if(maps\mp\_utility::_id_585F()) {
-      if(common_scripts\utility::_id_562E(level.zombie_game_was_restarted))
+      if(common_scripts\utility::_id_562E(level.zombie_game_was_restarted)) {
         wait 30;
+      }
     }
 
     _lootservicestarttrackingplaytime(self._id_01D6);
@@ -118,8 +119,9 @@ _id_A153() {
   for(;;) {
     maps\mp\gametypes\_hostmigration::_id_A782();
 
-    foreach(var_1 in level.players)
-    var_1 _id_A14E();
+    foreach(var_1 in level.players) {
+      var_1 _id_A14E();
+    }
 
     wait 1.0;
   }
@@ -169,24 +171,26 @@ _id_A172() {
   for(;;) {
     var_0 = getdvarint("scr_teambalance");
 
-    if(level._id_984C != var_0)
+    if(level._id_984C != var_0) {
       level._id_984C = getdvarint("scr_teambalance");
+    }
 
     wait 1;
   }
 }
 
 _id_A171() {
-  if(_getteammode() == "hub")
+  if(_getteammode() == "hub") {
     level._id_9858 = level._id_6079;
-  else {
+  } else {
     level._id_9858 = level._id_6079 / 2;
     level thread _id_A172();
     wait 0.15;
 
     if(level._id_984C && maps\mp\_utility::isroundbased()) {
-      if(isDefined(game["BalanceTeamsNextRound"]))
+      if(isDefined(game["BalanceTeamsNextRound"])) {
         _iprintlnbold(&"MP_AUTOBALANCE_NEXT_ROUND");
+      }
 
       level waittill("restarting");
 
@@ -213,8 +217,9 @@ _id_A171() {
           _iprintlnbold(&"MP_AUTOBALANCE_SECONDS", 15);
           wait 15.0;
 
-          if(!_id_46C4())
+          if(!_id_46C4()) {
             level _id_1502();
+          }
         }
 
         wait 59.0;
@@ -236,14 +241,16 @@ _id_46C4() {
       continue;
     }
 
-    if(isDefined(var_0[var_1].pers["team"]) && var_0[var_1].pers["team"] == "axis")
+    if(isDefined(var_0[var_1].pers["team"]) && var_0[var_1].pers["team"] == "axis") {
       level.team["axis"]++;
+    }
   }
 
-  if(level.team["allies"] > level.team["axis"] + level._id_984C || level.team["axis"] > level.team["allies"] + level._id_984C)
+  if(level.team["allies"] > level.team["axis"] + level._id_984C || level.team["axis"] > level.team["allies"] + level._id_984C) {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 _id_1502() {
@@ -261,8 +268,9 @@ _id_1502() {
       continue;
     }
 
-    if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis")
+    if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis") {
       var_1[var_1.size] = var_2[var_3];
+    }
   }
 
   var_4 = undefined;
@@ -278,8 +286,9 @@ _id_1502() {
           continue;
         }
 
-        if(var_0[var_5].pers["teamTime"] > var_4.pers["teamTime"])
+        if(var_0[var_5].pers["teamTime"] > var_4.pers["teamTime"]) {
           var_4 = var_0[var_5];
+        }
       }
 
       var_4[[level._id_6BB4]]("axis");
@@ -293,8 +302,9 @@ _id_1502() {
           continue;
         }
 
-        if(var_1[var_5].pers["teamTime"] > var_4.pers["teamTime"])
+        if(var_1[var_5].pers["teamTime"] > var_4.pers["teamTime"]) {
           var_4 = var_1[var_5];
+        }
       }
 
       var_4[[level._id_6BB4]]("allies");
@@ -311,8 +321,9 @@ _id_1502() {
         continue;
       }
 
-      if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis")
+      if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis") {
         var_1[var_1.size] = var_2[var_3];
+      }
     }
   }
 }
@@ -323,8 +334,9 @@ _id_873E(var_0, var_1) {}
 
 _id_86FF() {
   if(level._id_6520) {
-    for(var_0 = 0; var_0 < level._id_985B.size; var_0++)
+    for(var_0 = 0; var_0 < level._id_985B.size; var_0++) {
       _id_873E(level._id_985B[var_0], game[level._id_985B[var_0]]);
+    }
   } else {
     _id_873E("allies", game["allies"]);
     _id_873E("axis", game["axis"]);
@@ -334,8 +346,9 @@ _id_86FF() {
 }
 
 _id_73CA() {
-  if(_isagent(self) && !getdvarint("4017", 0))
+  if(_isagent(self) && !getdvarint("4017", 0)) {
     return 1;
+  }
 
   if(!isDefined(self._id_5097) || !self._id_5097) {
     self _meth_84C7(self._id_267E, undefined, 1, 1);
@@ -348,29 +361,32 @@ _id_73CA() {
 }
 
 _id_A27D(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_2 = _func_282(var_0, var_1);
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    if(var_0[var_3] != var_2[var_3])
+    if(var_0[var_3] != var_2[var_3]) {
       return 0;
+    }
   }
 
   return 1;
 }
 
 _id_448C() {
-  var_0 = _common_scripts/_bcs_location_trigs();
+  var_0 = _common_scripts / _bcs_location_trigs();
   return var_0;
 }
 
 _id_4430() {
-  if(isDefined(self._id_0079))
+  if(isDefined(self._id_0079)) {
     var_0 = _func_333(self._id_0079, 0);
-  else
+  } else {
     var_0 = _func_332();
+  }
 
   return var_0;
 }
@@ -398,8 +414,9 @@ _id_4636() {
 _id_4503() {
   var_0 = 2;
 
-  if(self.pers["team"] == "axis")
+  if(self.pers["team"] == "axis") {
     var_0 = 1;
+  }
 
   var_1 = _getcostumefromtable(level._id_4B16, var_0);
   return var_1;
@@ -414,8 +431,9 @@ _id_7427(var_0, var_1) {
 _id_2697() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < level._id_985B.size; var_1++)
+  for(var_1 = 0; var_1 < level._id_985B.size; var_1++) {
     var_0[level._id_985B[var_1]] = 0;
+  }
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
     if(level.players[var_1] == self) {
@@ -424,8 +442,9 @@ _id_2697() {
     if(level.players[var_1].pers["team"] == "spectator") {
       continue;
     }
-    if(isDefined(level.players[var_1].pers["team"]))
+    if(isDefined(level.players[var_1].pers["team"])) {
       var_0[level.players[var_1].pers["team"]]++;
+    }
   }
 
   return var_0;
@@ -436,8 +455,9 @@ _id_9BA7() {
 
   if(!_func_367()) {
     if(maps\mp\_utility::_id_585F()) {
-      if(common_scripts\utility::_id_562E(level.zombie_game_was_restarted))
+      if(common_scripts\utility::_id_562E(level.zombie_game_was_restarted)) {
         wait 30;
+      }
     }
 
     _lootservicestarttrackingplaytime(self._id_01D6);
@@ -473,11 +493,13 @@ _id_A115() {
   for(;;) {
     var_0++;
 
-    if(var_0 >= level.players.size)
+    if(var_0 >= level.players.size) {
       var_0 = 0;
+    }
 
-    if(isDefined(level.players[var_0]))
+    if(isDefined(level.players[var_0])) {
       level.players[var_0] _id_A114();
+    }
 
     wait 1.0;
   }
@@ -517,14 +539,17 @@ _id_A114() {
 }
 
 _id_452D(var_0) {
-  if(maps\mp\_utility::_id_56B9())
+  if(maps\mp\_utility::_id_56B9()) {
     return 1;
+  }
 
-  if(level.gametype == "infect")
+  if(level.gametype == "infect") {
     return 1;
+  }
 
-  if(_getteammode() == "hub")
+  if(_getteammode() == "hub") {
     return 1;
+  }
 
   var_1 = 0;
   var_2 = level.players;
@@ -535,15 +560,17 @@ _id_452D(var_0) {
     if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_0) {
       var_1++;
 
-      if(isbot(var_4))
+      if(isbot(var_4)) {
         return 1;
+      }
     }
   }
 
-  if(var_1 < level._id_9858)
+  if(var_1 < level._id_9858) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_650C(var_0) {

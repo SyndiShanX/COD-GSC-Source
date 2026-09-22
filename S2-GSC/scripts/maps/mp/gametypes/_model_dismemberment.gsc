@@ -4,8 +4,9 @@
 **************************************************************/
 
 _id_2E43(var_0, var_1) {
-  if(getdvarint("scr_dismemberment_style", 0) == 0)
+  if(getdvarint("scr_dismemberment_style", 0) == 0) {
     return;
+  }
 }
 
 _id_5E60(var_0) {
@@ -36,8 +37,9 @@ _id_5E60(var_0) {
 }
 
 _id_20AF(var_0) {
-  if(isDefined(self._id_4B53) && var_0 != 16)
+  if(isDefined(self._id_4B53) && var_0 != 16) {
     return 1;
+  }
 
   switch (var_0) {
     case 1:
@@ -49,8 +51,9 @@ _id_20AF(var_0) {
     case 8:
       return 0.5;
     case 16:
-      if(common_scripts\utility::_id_562E(self._id_4B6E) || common_scripts\utility::_id_562E(self._id_4B5A))
+      if(common_scripts\utility::_id_562E(self._id_4B6E) || common_scripts\utility::_id_562E(self._id_4B5A)) {
         return 1;
+      }
 
       return 0.65;
     default:
@@ -78,8 +81,9 @@ _id_4559(var_0, var_1) {
   if(isDefined(self._id_2FE3) && isDefined(self._id_2FE3[var_0])) {
     var_2 = self._id_2FE3[var_0][var_1];
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       return var_2;
+    }
   }
 
   var_3 = level._id_2FDE[var_0][var_1];
@@ -132,15 +136,15 @@ _id_4AAB(var_0) {
   var_4 = undefined;
 
   if(isDefined(var_0) && _isstring(var_0)) {
-    if(var_0 == "left_leg")
+    if(var_0 == "left_leg") {
       var_4 = var_2[0];
-    else if(var_0 == "right_leg")
+    } else if(var_0 == "right_leg") {
       var_4 = var_2[1];
-    else if(var_0 == "left_arm")
+    } else if(var_0 == "left_arm") {
       var_4 = var_2[2];
-    else if(var_0 == "right_arm")
+    } else if(var_0 == "right_arm") {
       var_4 = var_2[3];
-    else {}
+    } else {}
   } else {
     var_5 = self._id_18A8 getcorpseanim();
 
@@ -163,22 +167,26 @@ _id_4AAB(var_0) {
 
     var_6 = _randomfloat(1.0);
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = var_4[3];
+    }
 
-    if(!common_scripts\utility::_id_562E(var_0) && var_3 < var_6)
+    if(!common_scripts\utility::_id_562E(var_0) && var_3 < var_6) {
       return;
+    }
   }
 
   var_7 = self._id_267E;
 
   if(self.classname == "script_model") {
-    if(isDefined(self.team))
+    if(isDefined(self.team)) {
       var_1 = self.team;
+    }
   }
 
-  if(isbot(self))
+  if(isbot(self)) {
     var_7[1] = 0;
+  }
 
   var_7[2] = 0;
   var_7[3] = 0;

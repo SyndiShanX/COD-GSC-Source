@@ -14,8 +14,9 @@ _id_3D93() {
       if(maps\mp\_utility::_hasperk("specialty_bulletpenetration")) {
         maps\mp\_utility::_id_0735("specialty_bulletpenetration");
 
-        if(!maps\mp\_utility::_hasperk("specialty_superbulletpenetration"))
+        if(!maps\mp\_utility::_hasperk("specialty_superbulletpenetration")) {
           maps\mp\_utility::_id_0735("specialty_armorpiercing");
+        }
       }
 
       waitframe();

@@ -4,21 +4,24 @@
 ************************************************************/
 
 main() {
-  for(var_0 = 1; var_0 <= 3; var_0++)
+  for(var_0 = 1; var_0 <= 3; var_0++) {
     common_scripts\utility::flag_init("quest_item_blimp_uberschnelle_" + var_0);
+  }
 
   var_1 = maps\mp\mp_zombie_nest_ee_util::_id_44C8("blimp_uberschnell_deposit");
 
-  foreach(var_3 in var_1)
-  var_3 hide();
+  foreach(var_3 in var_1) {
+    var_3 hide();
+  }
 
-  var_5 = _getent("lhog_control", "targetname");
+  var_5 = _getEnt("lhog_control", "targetname");
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 thread maps\mp\mp_zombie_nest_ee_util::_id_4D77("off");
+  }
 
   var_1[0] show();
-  _playfxontag(level._effect["zmb_uberschnelle_charge"], var_1[0], "tag_origin");
+  _playFXOnTag(level._effect["zmb_uberschnelle_charge"], var_1[0], "tag_origin");
   _id_0557::_id_7846("6B Left Hand overcharge", ::_id_6C9E, ["5 Right Hand fuses"], &"ZOMBIE_NEST_HINT_QUEST_OVERCHARGE", "ZOMBIE_NEST_HINT_QUEST_OVERCHARGE");
   _id_0557::_id_781E("6B Left Hand overcharge", "examine left hand", ::_id_7862, _id_0557::_id_30D8, &"ZOMBIE_NEST_STUDY_LEFT_HAND");
   _id_0557::_id_781E("6B Left Hand overcharge", "activate left hand", ::_id_7861, ::_id_714D, &"ZOMBIE_NEST_HINT_STEP_INTERACT_LEFT_HAND");
@@ -36,21 +39,22 @@ _id_6C9E() {
 }
 
 _id_714D() {
-  var_0 = _getent("left_hand_of_god_model", "targetname");
-  _playfxontag(level._effect["zmb_lhog_init"], var_0, "tag_origin");
+  var_0 = _getEnt("left_hand_of_god_model", "targetname");
+  _playFXOnTag(level._effect["zmb_lhog_init"], var_0, "tag_origin");
 }
 
 _id_7862() {
   level notify("nest_ee_fuses_complete");
-  var_0 = _getent("overcharge_trig", "targetname");
+  var_0 = _getEnt("overcharge_trig", "targetname");
   var_0._id_4D91 = _id_0559::_id_7BE3(var_0, "lhog");
-  var_0 sethintstring(&"ZOMBIES_SWITCH_HINT_GENERIC_EXAMINE");
+  var_0 setHintString(&"ZOMBIES_SWITCH_HINT_GENERIC_EXAMINE");
   var_0._id_17A9 = 0;
-  var_1 = _getent("left_hand_of_god_model", "targetname");
-  var_2 = _getent("lhog_control", "targetname");
+  var_1 = _getEnt("left_hand_of_god_model", "targetname");
+  var_2 = _getEnt("lhog_control", "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 thread maps\mp\mp_zombie_nest_ee_util::_id_4D77("red");
+  }
 
   if(1) {
     var_3 = _id_0557::_id_782F(undefined, [var_1]);
@@ -74,11 +78,12 @@ _id_7862() {
         _id_0557::_id_7822("6B Left Hand overcharge", &"ZOMBIE_NEST_HINT_STEP_MORE_BATTERIES");
       } else if(var_0._id_17A9 == 2)
         thread _id_2E9C(2, var_8);
-      else if(var_0._id_17A9 == 3)
+      else if(var_0._id_17A9 == 3) {
         thread _id_2E9C(3, var_8);
+      }
 
       var_4[var_0._id_17A9] show();
-      _playfxontag(level._effect["zmb_uberschnelle_charge"], var_4[var_0._id_17A9], "tag_origin");
+      _playFXOnTag(level._effect["zmb_uberschnelle_charge"], var_4[var_0._id_17A9], "tag_origin");
       _id_0378::_id_8D74("aud_uberschnelle_place_altar");
       _id_86A4();
       common_scripts\utility::flag_set("quest_item_blimp_uberschnelle_" + var_0._id_17A9);
@@ -100,23 +105,26 @@ _id_92B6(var_0) {
   var_1 = common_scripts\utility::_id_46B7("zombie_spawner", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3.setgoalnode) && var_3.setgoalnode == "zombie_blimp_player_blocker")
+    if(isDefined(var_3.setgoalnode) && var_3.setgoalnode == "zombie_blimp_player_blocker") {
       var_3 childthread _id_179C();
+    }
   }
 }
 
 _id_179C() {
   self._id_686D = randomint(3) + 1;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self._id_301B = common_scripts\utility::_id_46B5(self.target, "targetname");
+  }
 
   while(self._id_686D > 0) {
     foreach(var_1 in level.players) {
-      if(isDefined(self._id_301B))
+      if(isDefined(self._id_301B)) {
         var_2 = distance(self._id_301B.origin, var_1.origin) < 150;
-      else
+      } else {
         var_2 = distance(var_1.origin, self.origin) < 512;
+      }
 
       if(var_1 _id_0586::_id_72C3() && var_2) {
         var_3 = self._id_686D;
@@ -134,9 +142,9 @@ _id_179C() {
 }
 
 _id_7861() {
-  var_0 = _getent("left_hand_of_god_model", "targetname");
-  var_1 = _getent("overcharge_trig", "targetname");
-  var_1 sethintstring(&"ZOMBIE_NEST_ENABLE_LEFT_HAND");
+  var_0 = _getEnt("left_hand_of_god_model", "targetname");
+  var_1 = _getEnt("overcharge_trig", "targetname");
+  var_1 setHintString(&"ZOMBIE_NEST_ENABLE_LEFT_HAND");
 
   if(1) {
     var_2 = undefined;
@@ -149,7 +157,7 @@ _id_7861() {
 
   wait 0.5;
   var_1 waittill("trigger", var_3);
-  var_4 = _getent("lhog_control", "targetname");
+  var_4 = _getEnt("lhog_control", "targetname");
 
   if(isDefined(var_4)) {
     var_4 thread maps\mp\mp_zombie_nest_ee_util::_id_4D76();
@@ -177,10 +185,11 @@ _id_8C24() {
       }
     }
 
-    if(var_1)
+    if(var_1) {
       common_scripts\utility::_id_9DA3();
-    else
+    } else {
       common_scripts\utility::_id_9D9F();
+    }
 
     wait 0.5;
   }
@@ -201,8 +210,9 @@ _id_784B() {
     wait 1;
   }
 
-  while(!isDefined(level._id_179A._id_6655))
+  while(!isDefined(level._id_179A._id_6655)) {
     wait 1;
+  }
 
   thread _id_86A7(level._id_179A._id_6655);
 }
@@ -250,8 +260,9 @@ _id_A788(var_0, var_1) {
   var_1 thread _id_A787(var_0);
   level waittill(var_0, var_1);
 
-  if(!common_scripts\utility::_id_562E(var_1._id_73E3))
+  if(!common_scripts\utility::_id_562E(var_1._id_73E3)) {
     _id_86A5(var_1);
+  }
 }
 
 _id_A787(var_0) {
@@ -284,8 +295,9 @@ _id_86A7(var_0) {
   _id_0557::_id_7822("6A Left Hand blimp parts", &"ZOMBIE_NEST_SHOOT_BLIMP_GUN");
   level common_scripts\utility::_id_A70A("destroyed_blimp_gun", "blimp_ee_look_for_battery");
 
-  if(0)
+  if(0) {
     _id_0557::_id_7847("6A Left Hand blimp parts", var_1);
+  }
 }
 
 _id_86A4() {
@@ -317,8 +329,9 @@ _id_86A5(var_0) {
   _id_0557::_id_7822("6A Left Hand blimp parts", &"ZOMBIE_NEST_BLIMP_KILL_ZOMBIES");
   level waittill("nest_ee_overcharge_remove_uberschnell_hint");
 
-  if(0)
+  if(0) {
     _id_0557::_id_7847("6A Left Hand blimp parts", var_1);
+  }
 }
 
 _id_86A3() {
@@ -333,7 +346,7 @@ _id_8C89() {
     return;
   }
   level._id_5C6A = 0;
-  var_0 = _getent("overcharge_trig", "targetname");
+  var_0 = _getEnt("overcharge_trig", "targetname");
   var_0 notify("bypassed");
 }
 
@@ -345,7 +358,7 @@ _id_20C7(var_0) {
   var_0 thread _id_2E8D();
   var_0 common_scripts\utility::_id_A70A("trigger", "soft_triggered", "bypassed");
   _id_0557::_id_7822("6B Left Hand overcharge", &"ZOMBIE_NEST_HINT_STEP_BATTERIES");
-  var_0 sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
+  var_0 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
   var_0 notify("discovered");
 }
 
@@ -375,14 +388,16 @@ _id_2EB0() {
       }
     }
 
-    if(var_4)
+    if(var_4) {
       var_0 = var_0 + var_2;
-    else
+    } else {
       var_0 = 0;
+    }
 
     if(var_0 >= var_1) {
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_3 thread _id_0367::_id_8E3C("lefthandaltarclue");
+      }
 
       self notify("soft_triggered");
       break;

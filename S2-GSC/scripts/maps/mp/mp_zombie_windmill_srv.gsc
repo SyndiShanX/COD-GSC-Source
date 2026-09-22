@@ -77,8 +77,9 @@ house_door_listener() {
   common_scripts\utility::_id_3C9F("zone_plaza_to_zone_house");
 
   foreach(var_1 in level._id_AC1D) {
-    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "zone_plaza_to_zone_house" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1))
+    if(isDefined(var_1.getnegotiationnextnode) && var_1.getnegotiationnextnode == "zone_plaza_to_zone_house" && (!isDefined(var_1._id_6BE1) || !var_1._id_6BE1)) {
       var_1 notify("open", undefined);
+    }
   }
 }
 
@@ -99,19 +100,20 @@ windmill_srv_ee() {
   level.ducks_per_window = 1;
   var_0 = 5;
   var_1 = getEntArray("hunt_ee", "targetname");
-  var_2 = _getent("dog_ee", "targetname");
+  var_2 = _getEnt("dog_ee", "targetname");
   var_2 setModel("zmw_tinker_toy_set_02");
 
-  foreach(var_4 in var_1)
-  var_4 setModel("zmw_belongings_toy_duck_01");
+  foreach(var_4 in var_1) {
+    var_4 setModel("zmw_belongings_toy_duck_01");
+  }
 
   var_2.target_struct = common_scripts\utility::_id_46B5(var_2.target, "targetname");
   var_2._id_926A = var_2.origin;
   var_2.raised_position = var_2.target_struct.origin;
   var_2.is_dog = 1;
-  var_6 = _getent("srv_pap_fuse_spawn_loc", "targetname");
-  var_6 linkto(var_2);
-  var_7 = _getent("srv_pap_fuse_pickup_trig", "targetname");
+  var_6 = _getEnt("srv_pap_fuse_spawn_loc", "targetname");
+  var_6 linkTo(var_2);
+  var_7 = _getEnt("srv_pap_fuse_pickup_trig", "targetname");
   var_7 common_scripts\utility::_id_9D9F();
 
   foreach(var_4 in var_1) {
@@ -140,8 +142,9 @@ windmill_srv_ee() {
       var_15 = undefined;
       var_16 = var_1;
 
-      if(var_13 == 1)
+      if(var_13 == 1) {
         var_16 = common_scripts\utility::_id_0F93(var_16, var_11);
+      }
 
       level.ducks_killed_in_window = 0;
 
@@ -157,8 +160,9 @@ windmill_srv_ee() {
         waitframe();
       }
 
-      foreach(var_4 in var_14)
-      var_4 thread ee_raise();
+      foreach(var_4 in var_14) {
+        var_4 thread ee_raise();
+      }
 
       level common_scripts\utility::waittill_notify_or_timeout("all_ducks_in_window_killed", var_0);
 
@@ -172,8 +176,9 @@ windmill_srv_ee() {
           break;
         }
       } else {
-        foreach(var_4 in var_14)
-        var_4 thread ee_lower();
+        foreach(var_4 in var_14) {
+          var_4 thread ee_lower();
+        }
 
         var_2 ee_show_dog_fail();
         level waittill("zombie_wave_started");
@@ -191,48 +196,49 @@ windmill_srv_ee() {
 }
 
 ee_show_dog_fail() {
-  self moveto(self.raised_position, 1, 0.1, 0.1);
+  self moveTo(self.raised_position, 1, 0.1, 0.1);
   wait 1;
   self vibrate(anglestoright(self.angles), 0.3, 0.3, 5);
   wait 5;
-  self moveto(self._id_926A, 3, 0.1, 0.1);
+  self moveTo(self._id_926A, 3, 0.1, 0.1);
   wait 3;
-  self moveto(self._id_926A + (0, 0, 15), 0.25, 0.1, 0.1);
+  self moveTo(self._id_926A + (0, 0, 15), 0.25, 0.1, 0.1);
   wait 4;
-  self moveto(self._id_926A, 3, 0.1, 0.1);
+  self moveTo(self._id_926A, 3, 0.1, 0.1);
   wait 3;
 }
 
 ee_show_dog_success(var_0) {
-  self moveto(self.raised_position, 1, 0.1, 0.1);
+  self moveTo(self.raised_position, 1, 0.1, 0.1);
   wait 2;
   var_0 unlink();
   var_0 thread ee_toss_fuse();
   wait 1;
-  self moveto(self._id_926A, 1);
+  self moveTo(self._id_926A, 1);
 }
 
 ee_toss_fuse() {
   var_0 = self;
   var_1 = common_scripts\utility::_id_46B5("srv_pap_fuse_land_path", "targetname");
-  var_0 moveto(var_1.origin, 0.15);
+  var_0 moveTo(var_1.origin, 0.15);
   var_2 = common_scripts\utility::_id_46B5(var_1.target, "targetname");
   wait 0.15;
 
   while(isDefined(var_2)) {
-    var_0 moveto(var_2.origin, 0.15);
+    var_0 moveTo(var_2.origin, 0.15);
 
-    if(isDefined(var_2.target))
+    if(isDefined(var_2.target)) {
       var_2 = common_scripts\utility::_id_46B5(var_2.target, "targetname");
-    else
+    } else {
       var_2 = undefined;
+    }
 
     wait 0.15;
   }
 
-  var_3 = _getent("srv_pap_fuse_pickup_trig", "targetname");
+  var_3 = _getEnt("srv_pap_fuse_pickup_trig", "targetname");
   var_3 common_scripts\utility::_id_9DA3();
-  var_3 usetriggerrequirelookat(1);
+  var_3 useTriggerRequireLookAt(1);
   var_3 waittill("trigger");
   var_0 delete();
   var_3 common_scripts\utility::_id_9D9F();
@@ -243,18 +249,19 @@ ee_raise(var_0) {
   if(!_id_0547::_id_5565(self._id_931A, "lowered")) {
     return;
   }
-  self setcandamage(1);
+  self setCanDamage(1);
   self setdamagecallbackon(1);
   self._id_552B = 1;
   self._id_931A = "raising";
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.5;
+  }
 
-  if(var_0 <= 0)
+  if(var_0 <= 0) {
     self.origin = self.raised_position;
-  else {
-    self moveto(self.raised_position, var_0, 0.1, 0.1);
+  } else {
+    self moveTo(self.raised_position, var_0, 0.1, 0.1);
     wait(var_0);
   }
 
@@ -267,23 +274,25 @@ ee_lower(var_0, var_1) {
   }
   self._id_931A = "lowering";
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(common_scripts\utility::_id_562E(var_1)) {
-    self setcandamage(0);
+    self setCanDamage(0);
     self setdamagecallbackon(0);
     self._id_552B = 0;
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.5;
+  }
 
-  self moveto(self._id_926A, var_0, 0.1, 0.1);
+  self moveTo(self._id_926A, var_0, 0.1, 0.1);
   wait(var_0);
 
   if(!common_scripts\utility::_id_562E(var_1)) {
-    self setcandamage(0);
+    self setCanDamage(0);
     self setdamagecallbackon(0);
     self._id_552B = 0;
   }
@@ -319,7 +328,8 @@ ee_dmg_listen(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var
     thread ee_lower(undefined, 1);
     level.ducks_killed_in_window++;
 
-    if(level.ducks_killed_in_window >= level.ducks_per_window)
+    if(level.ducks_killed_in_window >= level.ducks_per_window) {
       level notify("all_ducks_in_window_killed");
+    }
   }
 }

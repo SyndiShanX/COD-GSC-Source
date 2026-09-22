@@ -43,8 +43,9 @@ drop_pod_init_drop_points() {
           var_2.contents_pos = var_5;
           break;
         case "drop_pod_debris_model":
-          if(!isDefined(var_2.debris_models))
+          if(!isDefined(var_2.debris_models)) {
             var_2.debris_models = [];
+          }
 
           var_2.debris_models[var_2.debris_models.size] = var_5;
           break;
@@ -64,7 +65,7 @@ drop_pod_spawn_drop() {
   var_0.spawned_model = var_3;
   var_0.clip_fall linktosynchronizedparent(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0.clip_fall solid();
-  _playfxontag(level._effect["zmb_zep_battery_fire_trail"], var_3, "tag_origin");
+  _playFXOnTag(level._effect["zmb_zep_battery_fire_trail"], var_3, "tag_origin");
   var_3 _id_0378::_id_8D74("aud_droppod_launch");
   var_4 = (0, 0, -800);
   var_5 = 1;
@@ -74,8 +75,9 @@ drop_pod_spawn_drop() {
   var_8 = var_6 * (var_7, var_7, 0);
   var_3 movegravity(var_8, var_5);
 
-  if(isDefined(var_2))
-    var_3 rotateto(var_2, var_5);
+  if(isDefined(var_2)) {
+    var_3 rotateTo(var_2, var_5);
+  }
 
   wait(var_5);
   var_3.origin = var_0.pod_model.origin;
@@ -100,7 +102,7 @@ drop_pod_open_pod_doors() {
 drop_pod_set_drop_point_active() {
   if(isDefined(self.clip_shell)) {
     self.clip_shell solid();
-    self.clip_shell disconnectpaths();
+    self.clip_shell disconnectPaths();
   }
 
   waitframe();
@@ -112,8 +114,9 @@ drop_pod_set_drop_point_active() {
 
   waitframe();
 
-  if(isDefined(self.clip_door))
+  if(isDefined(self.clip_door)) {
     self.clip_door solid();
+  }
 
   self.spawned_debris = [];
 
@@ -121,8 +124,9 @@ drop_pod_set_drop_point_active() {
     var_2 = spawn("script_model", var_1.origin);
     var_2 setModel(var_1.setlookatent);
 
-    if(isDefined(var_1.angles))
+    if(isDefined(var_1.angles)) {
       var_2.angles = var_1.angles;
+    }
 
     self.spawned_debris[self.spawned_debris.size] = var_2;
   }
@@ -134,15 +138,16 @@ drop_pod_set_drop_point_active() {
       if(isPlayer(var_6)) {
         var_7 = self.spawned_model.origin;
 
-        if(_canspawn(var_7))
+        if(_canspawn(var_7)) {
           var_6 setOrigin(var_7);
-        else {
+        } else {
           var_8 = _func_2E1(var_7);
 
-          if(_canspawn(var_8))
+          if(_canspawn(var_8)) {
             var_6 setOrigin(var_8);
-          else
+          } else {
             _id_0488::_id_A047(var_6, 0);
+          }
         }
 
         var_6 dodamage(var_6.health + 666, self.spawned_model.origin, undefined, undefined, "MOD_CRUSH");
@@ -169,8 +174,9 @@ drop_pod_set_drop_point_inactive() {
   self.clip_floor ghost();
   self.spawned_model delete();
 
-  foreach(var_1 in self.spawned_debris)
-  var_1 delete();
+  foreach(var_1 in self.spawned_debris) {
+    var_1 delete();
+  }
 
   self.spawned_debris = [];
   self._id_57F7 = 0;
@@ -190,15 +196,16 @@ drop_pod_clip_exploit_listener() {
       if(isDefined(var_2) && var_2 == self.clip_shell) {
         var_3 = self.spawned_model.origin;
 
-        if(_canspawn(var_3))
+        if(_canspawn(var_3)) {
           var_1 setOrigin(var_3);
-        else {
+        } else {
           var_4 = _func_2E1(var_3);
 
-          if(_canspawn(var_4))
+          if(_canspawn(var_4)) {
             var_1 setOrigin(var_4);
-          else
+          } else {
             _id_0488::_id_A047(var_1, 0);
+          }
         }
 
         var_1 dodamage(var_1.health + 666, self.spawned_model.origin, undefined, undefined, "MOD_CRUSH");
@@ -218,8 +225,9 @@ aud_blimp_turret_explode() {
   _id_046C::_id_8DA0("zmb_blimp_elec_turret_explo", self.origin);
   wait 1.2;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     _id_046C::_id_8DA2("zmb_blimp_elec_turret_fall", self);
+  }
 }
 
 aud_blimp_battery_land(var_0) {

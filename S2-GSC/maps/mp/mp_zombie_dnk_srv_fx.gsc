@@ -103,6 +103,7 @@ main() {
   level._effect["zmb_dnk_altered_ash_cloud"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_ash_cloud");
   level._effect["zmb_dnk_altered_zepellin"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_zepellin");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_zombie_dnk_srv_fx::main();
+  }
 }

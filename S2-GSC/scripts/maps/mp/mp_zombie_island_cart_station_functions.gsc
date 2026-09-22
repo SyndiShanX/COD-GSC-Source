@@ -4,8 +4,9 @@
 ***********************************************************************/
 
 set_all_doors_locked() {
-  foreach(var_1 in level.valid_island_cart_destinations)
-  set_station_closed(var_1);
+  foreach(var_1 in level.valid_island_cart_destinations) {
+    set_station_closed(var_1);
+  }
 }
 
 set_station_leaving(var_0) {
@@ -25,8 +26,9 @@ set_station_closed(var_0) {
 }
 
 activate_station_spawners(var_0, var_1) {
-  foreach(var_3 in level.zmb_isl_conditional_cart_spawns._id_905E[var_0])
-  var_3.is_zombies_spawner_script_disabled = !var_1;
+  foreach(var_3 in level.zmb_isl_conditional_cart_spawns._id_905E[var_0]) {
+    var_3.is_zombies_spawner_script_disabled = !var_1;
+  }
 }
 
 set_station_arriving(var_0) {
@@ -54,7 +56,7 @@ set_cart_station_state(var_0, var_1, var_2, var_3) {
 #using_animtree("animated_props_zombies_DLC1");
 
 set_doors_closed(var_0) {
-  self.zmb_mine_cart_path_blocker[var_0] disconnectpaths();
+  self.zmb_mine_cart_path_blocker[var_0] disconnectPaths();
   self.zmb_mine_cart_path_blocker[var_0] solid();
   var_1 = "s2_zom_mine_cart_gate_close";
 
@@ -87,8 +89,9 @@ get_all_carts_with(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.island_cart_structs) {
-    if(_id_0547::_id_5565(var_3.getnegotiationnextnode, var_0))
+    if(_id_0547::_id_5565(var_3.getnegotiationnextnode, var_0)) {
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
+    }
   }
 
   return var_1;
@@ -96,11 +99,13 @@ get_all_carts_with(var_0) {
 
 set_transport_light_states(var_0, var_1, var_2, var_3) {
   foreach(var_5 in level.transport_light_indicators) {
-    if(_id_0547::_id_5565(var_5.transport_flag, var_0))
+    if(_id_0547::_id_5565(var_5.transport_flag, var_0)) {
       var_5 set_transport_light_state(var_1);
+    }
 
-    if(_id_0547::_id_5565(var_5.transport_flag, var_2))
+    if(_id_0547::_id_5565(var_5.transport_flag, var_2)) {
       var_5 set_transport_light_state(var_3);
+    }
   }
 }
 

@@ -18,8 +18,9 @@ spawn_an_aod() {
   playFX(common_scripts\utility::_id_44F5("stunning_burst_aoe"), var_0);
   _id_0378::_id_8D74("aud_assassin_use_shell_shock");
 
-  if(isDefined(self.custom_on_shellshock_func))
+  if(isDefined(self.custom_on_shellshock_func)) {
     self thread[[self.custom_on_shellshock_func]]();
+  }
 
   foreach(var_2 in level.players) {
     if(!isalive(var_2)) {
@@ -29,8 +30,9 @@ spawn_an_aod() {
       continue;
     }
     if(_distance2d(var_0, var_2.origin) < 265 && _abs(self.origin[2] - var_2.origin[2]) < 128) {
-      if(_id_0564::should_longburn(var_2))
+      if(_id_0564::should_longburn(var_2)) {
         thread _id_0564::prolonged_damage(var_2, 5);
+      }
 
       var_3 = 3 * (_distance2d(var_0, var_2.origin) / 265);
       var_4 = 4 * (_distance2d(var_0, var_2.origin) / 265);
@@ -51,7 +53,7 @@ run_shellshock(var_0, var_1, var_2) {
   self endon("death");
   self shellshock("zm_heavy_hit", var_0 * 1.4, var_1);
   self allowsprint(0);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_4 = self.origin - var_2;
   var_4 = (var_4[0], var_4[1], 0);
   var_4 = var_3 * vectorNormalize(var_4);
@@ -62,8 +64,9 @@ run_shellshock(var_0, var_1, var_2) {
 }
 
 assassin_stunning_burst_notetrack_handler(var_0, var_1, var_2, var_3) {
-  if(!isDefined(self.asn_notetrack_count))
+  if(!isDefined(self.asn_notetrack_count)) {
     self.asn_notetrack_count = 0;
+  }
 
   switch (var_0) {
     case "footstep_walk_left_asn":
@@ -94,8 +97,9 @@ throw_debris() {
   var_5 = common_scripts\utility::array_randomize(var_5);
   var_5 = common_scripts\utility::_id_0FA3(var_5, 0, var_0);
 
-  if(common_scripts\utility::_id_562E(level.players_sacrificed_jack))
+  if(common_scripts\utility::_id_562E(level.players_sacrificed_jack)) {
     var_5 = common_scripts\utility::_id_0F6F(var_5, "vm_zom_jack_in_the_box");
+  }
 
   var_6 = 0;
 

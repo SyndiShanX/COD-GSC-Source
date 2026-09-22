@@ -26,21 +26,23 @@ add_player_fuse_count() {
 
 handle_island_pack_a_punch(var_0) {
   level thread handle_fuses(var_0);
-  var_1 = _getent("zmb_pack_a_punch_elevator", "targetname");
+  var_1 = _getEnt("zmb_pack_a_punch_elevator", "targetname");
   var_2 = common_scripts\utility::_id_46B5("zmb_pack_a_punch_scripted_node", "targetname");
-  var_3 = _getent("pack_a_punch_dummy", "targetname");
-  var_4 = _getent("zmb_pack_a_punch_door_clip", "targetname");
+  var_3 = _getEnt("pack_a_punch_dummy", "targetname");
+  var_4 = _getEnt("zmb_pack_a_punch_door_clip", "targetname");
 
-  while(!isDefined(level.pap_model))
+  while(!isDefined(level.pap_model)) {
     waitframe();
+  }
 
   var_3.origin = (level.pap_model.origin[0] + 6.16, level.pap_model.origin[1] - 0.28, var_3.origin[2] + 2.056 - 2);
   waitframe();
   var_3 linktosynchronizedparent(var_1, "cart");
   var_5 = getEntArray("elevator_linked_prop", "targetname");
 
-  foreach(var_7 in var_5)
-  var_7 linktosynchronizedparent(var_1, "cart");
+  foreach(var_7 in var_5) {
+    var_7 linktosynchronizedparent(var_1, "cart");
+  }
 
   var_1 thread open_elevator_doors(var_2);
   var_9 = [];
@@ -97,11 +99,12 @@ wait_for_upgrade_machine_arrived(var_0, var_1) {
 }
 
 open_elevator_doors(var_0) {
-  var_1 = _getent("zmb_pack_a_punch_elevator_door", "targetname");
+  var_1 = _getEnt("zmb_pack_a_punch_elevator_door", "targetname");
   var_2 = "";
 
-  while(var_2 != "door_open")
+  while(var_2 != "door_open") {
     self waittill("scripted_anim", var_2);
+  }
 
   _id_0378::_id_8D74("pap_elevator_door_open");
   var_1 scriptmodelplayanimdeltamotionfrompos("zmb_elevator_door_open_02", var_0.origin, var_0.angles, "script_anim");
@@ -129,7 +132,7 @@ handle_fuses(var_0) {
   }
 
   var_1._id_9D65 _meth_8660(1, var_1.fuse_spawns[1].origin);
-  var_1._id_9D65 sethintstring(&"ZOMBIE_ISLAND_PAP_INSERT");
+  var_1._id_9D65 setHintString(&"ZOMBIE_ISLAND_PAP_INSERT");
   var_1 show_fuse(0);
   var_1._id_9D65 waittill("trigger", var_6);
   var_1._id_9D65 common_scripts\utility::_id_9D9F();
@@ -159,12 +162,13 @@ show_fuse(var_0) {
 }
 
 insert_fuse(var_0) {
-  self.fuse_spawns[var_0] moveto(self.fuse_spawns[var_0]._id_6C4E, 1);
+  self.fuse_spawns[var_0] moveTo(self.fuse_spawns[var_0]._id_6C4E, 1);
 
-  if(var_0 <= 2)
+  if(var_0 <= 2) {
     self.fuse_spawns[var_0] _id_0378::_id_8D74("pap_schell_insert");
-  else if(var_0 == 3)
+  } else if(var_0 == 3) {
     self.fuse_spawns[var_0] _id_0378::_id_8D74("pap_schell_insert_final");
+  }
 }
 
 wait_for_user_electroschnell_insert(var_0, var_1) {
@@ -187,8 +191,9 @@ wait_for_user_electroschnell_insert(var_0, var_1) {
 }
 
 init_upgrade_machine_visuals() {
-  if(!isDefined(level.zmb_pack_a_punch_fuse_box))
-    level.zmb_pack_a_punch_fuse_box = _getent("fuse_machine", "script_noteworthy");
+  if(!isDefined(level.zmb_pack_a_punch_fuse_box)) {
+    level.zmb_pack_a_punch_fuse_box = _getEnt("fuse_machine", "script_noteworthy");
+  }
 
   level.zmb_pack_a_punch_fuse_box set_light(1, "RED");
   level.zmb_pack_a_punch_fuse_box set_light(2, "RED");
@@ -199,8 +204,9 @@ init_upgrade_machine_visuals() {
 }
 
 set_upgrade_machine_visuals(var_0) {
-  if(!isDefined(level.zmb_pack_a_punch_fuse_box))
-    level.zmb_pack_a_punch_fuse_box = _getent("fuse_machine", "script_noteworthy");
+  if(!isDefined(level.zmb_pack_a_punch_fuse_box)) {
+    level.zmb_pack_a_punch_fuse_box = _getEnt("fuse_machine", "script_noteworthy");
+  }
 
   level.zmb_pack_a_punch_fuse_box set_light(var_0, "GREEN");
 }

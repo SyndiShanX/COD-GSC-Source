@@ -30,17 +30,19 @@ fire_funderbuss_grenades(var_0, var_1) {
   var_2 = self;
   var_3 = var_2 _meth_8566();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   var_4 = anglesToForward(var_3);
   var_5 = anglestoup(var_3);
   var_6 = anglestoright(var_3);
 
-  if(!isDefined(var_2.zmb_blundergrenades))
+  if(!isDefined(var_2.zmb_blundergrenades)) {
     var_2.zmb_blundergrenades = [];
-  else
+  } else {
     var_2.zmb_blundergrenades = common_scripts\utility::_id_0FA0(var_2.zmb_blundergrenades);
+  }
 
   if(var_2.zmb_blundergrenades.size > 0) {
     return;
@@ -56,11 +58,13 @@ fire_funderbuss_grenades(var_0, var_1) {
     var_9 = var_9 * var_2 playerads();
     var_9 = 10 - var_9;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_9 = 10;
+    }
 
-    if(var_9 < 1)
+    if(var_9 < 1) {
       var_9 = 1;
+    }
 
     if(isDefined(var_0)) {
       var_8 = var_0;
@@ -81,8 +85,9 @@ monitor_active_grenades() {
     var_0 = common_scripts\utility::_id_0FA0(level.zmb_blundergrenades);
 
     foreach(var_2 in var_0) {
-      if(!isDefined(var_2.life))
+      if(!isDefined(var_2.life)) {
         var_2.life = 0;
+      }
 
       var_2.life = var_2.life + 0.1;
 

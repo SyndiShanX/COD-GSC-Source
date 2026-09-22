@@ -8,8 +8,9 @@ _id_52A4() {
 }
 
 canuserngability(var_0) {
-  if(!_id_0561::_id_1F7B())
+  if(!_id_0561::_id_1F7B()) {
     return 0;
+  }
 
   return 1;
 }
@@ -25,8 +26,9 @@ userngability(var_0) {
   var_4 = var_2 wait_for_timeout_or_disable(var_3.abilityname);
   var_2.rentingability = undefined;
 
-  if(common_scripts\utility::_id_562E(var_4))
+  if(common_scripts\utility::_id_562E(var_4)) {
     var_2[[var_3._id_6AED]]();
+  }
 }
 
 wait_for_timeout_or_disable(var_0) {
@@ -60,8 +62,9 @@ get_random_other_role() {
 }
 
 getrngabilitycharges(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":

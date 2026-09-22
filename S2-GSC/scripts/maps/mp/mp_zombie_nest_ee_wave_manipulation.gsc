@@ -8,30 +8,33 @@ main() {
 }
 
 _id_8606() {
-  if(level._id_294B != "wave_mod_maxed")
+  if(level._id_294B != "wave_mod_maxed") {
     level._id_294B = "wave_mod_maxed";
-  else
+  } else {
     return;
+  }
 
   _id_056D::_id_8A6E(0);
   level thread _id_3DF2("cancel_max_zombie_count");
 }
 
 _id_8607() {
-  if(level._id_294B != "wave_mod_normal")
+  if(level._id_294B != "wave_mod_normal") {
     level._id_294B = "wave_mod_normal";
-  else
+  } else {
     return;
+  }
 
   level notify("cancel_max_zombie_count");
   _id_056D::_id_8A6E(0);
 }
 
 _id_8608() {
-  if(level._id_294B != "wave_mod_paused")
+  if(level._id_294B != "wave_mod_paused") {
     level._id_294B = "wave_mod_paused";
-  else
+  } else {
     return;
+  }
 
   level notify("cancel_max_zombie_count");
   _id_056D::_id_8A6E(1);
@@ -40,10 +43,11 @@ _id_8608() {
 _id_3DF2(var_0) {
   level endon(var_0);
 
-  if(!isDefined(level.means_of_skipping_rounds_func))
+  if(!isDefined(level.means_of_skipping_rounds_func)) {
     level thread _id_8C8E(var_0);
-  else
+  } else {
     level thread[[level.means_of_skipping_rounds_func]](var_0);
+  }
 
   for(;;) {
     var_1 = _id_0547::_id_408F();
@@ -51,8 +55,9 @@ _id_3DF2(var_0) {
     foreach(var_3 in var_1) {
       var_3._id_6816 = 1;
 
-      if(common_scripts\utility::_id_562E(level.maxed_zombies_sprint) && _id_0547::_id_5565(var_3._id_0A4B, "zombie_generic"))
+      if(common_scripts\utility::_id_562E(level.maxed_zombies_sprint) && _id_0547::_id_5565(var_3._id_0A4B, "zombie_generic")) {
         var_3._id_6941 = 1;
+      }
     }
 
     wait 0.5;
@@ -94,15 +99,17 @@ enforce_zombie_limit(var_0, var_1) {
   for(;;) {
     var_2 = _id_0547::_id_408F();
 
-    if(var_2.size >= self.zombie_count)
+    if(var_2.size >= self.zombie_count) {
       _id_8608();
-    else
+    } else {
       _id_8606();
+    }
 
     if(isDefined(var_1)) {
       if(self.zombie_count > var_1) {
-        foreach(var_4 in var_2)
-        var_4._id_6941 = 1;
+        foreach(var_4 in var_2) {
+          var_4._id_6941 = 1;
+        }
       }
     }
 
@@ -116,10 +123,11 @@ restore_normal_rounds(var_0) {
 }
 
 _id_4DA1(var_0) {
-  if(level._id_258F)
+  if(level._id_258F) {
     self._id_35D5.fontscale = 1;
-  else
+  } else {
     self._id_35D5.fontscale = 0.08;
+  }
 
   self._id_35D5.x = 0;
   self._id_35D5.y = -40;
@@ -141,13 +149,15 @@ _id_4DA1(var_0) {
   self._id_1739._id_01CA = "middle";
   self._id_1739.sort = -1;
 
-  if(level._id_258F)
+  if(level._id_258F) {
     self._id_1739 setshader("popmenu_bg", 650, 52);
-  else
+  } else {
     self._id_1739 setshader("popmenu_bg", 650, 42);
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.5;
+  }
 
   self._id_1739.alpha = var_0;
 }

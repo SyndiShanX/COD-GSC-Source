@@ -9,16 +9,18 @@ init() {
   level._effect["zmb_raven_sword_barb_burst"] = loadfx("vfx/zombie/zmb_sword_barb_burst");
   level._effect["zmb_giestkraft_impact"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
 
-  if(!isDefined(level._id_6DF9))
+  if(!isDefined(level._id_6DF9)) {
     level._id_6DF9 = [];
+  }
 
   thread sword_init();
   thread scale_dlc3_melee_damage();
 }
 
 scale_dlc3_melee_damage() {
-  while(!isDefined(level._id_0A50) || !isDefined(level._id_0A50["zombie_generic"]))
+  while(!isDefined(level._id_0A50) || !isDefined(level._id_0A50["zombie_generic"])) {
     waitframe();
+  }
 
   level.swordcleavedamages = [0.9, 0.6, 0.5, 0.4];
   var_0 = 1;
@@ -27,8 +29,9 @@ scale_dlc3_melee_damage() {
     var_1 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), var_0);
     var_2 = var_1;
 
-    if(isDefined(level.zmb_global_zombie_health_multiplier) && isDefined(level.zmb_global_zombie_health_multiplier_wave_start) && level._id_A980 >= level.zmb_global_zombie_health_multiplier_wave_start)
+    if(isDefined(level.zmb_global_zombie_health_multiplier) && isDefined(level.zmb_global_zombie_health_multiplier_wave_start) && level._id_A980 >= level.zmb_global_zombie_health_multiplier_wave_start) {
       var_2 = int(var_1 * level.zmb_global_zombie_health_multiplier);
+    }
 
     level.sworddamage = max(1, var_2 * 0.26);
     level.swordcleavedamagebase = var_2;
@@ -54,10 +57,11 @@ watch_melee_weapon_ownership(var_0) {
     var_2 = [[var_0.hasfunc]]();
 
     if(var_1 != var_2) {
-      if(var_2)
+      if(var_2) {
         thread[[var_0.gainedfunc]]();
-      else
+      } else {
         thread[[var_0.lostfunc]]();
+      }
 
       var_1 = var_2;
     }
@@ -67,8 +71,9 @@ watch_melee_weapon_ownership(var_0) {
 }
 
 setup_melee_abilityinfo(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.25;
+  }
 
   var_5 = spawnStruct();
   var_5._id_953E = var_0;
@@ -90,15 +95,17 @@ setup_heavy_melee_abilityinfo(var_0, var_1, var_2, var_3) {
 run_melee_ability(var_0) {
   self endon("disconnect");
 
-  if(isDefined(var_0.weaponlostendon))
+  if(isDefined(var_0.weaponlostendon)) {
     self endon(var_0.weaponlostendon);
+  }
 
   for(;;) {
     self waittill("melee_fired", var_1);
 
     if(issubstr(var_1, var_0._id_953E) && var_0.isheavymelee == self _meth_8661()) {
-      if(isDefined(var_0.firedelay))
+      if(isDefined(var_0.firedelay)) {
         wait(var_0.firedelay);
+      }
 
       if(melee_ability_in_melee_state(var_0)) {
         thread[[var_0.firingfunction]](var_0);
@@ -109,24 +116,27 @@ run_melee_ability(var_0) {
         }
 
         if(var_0.isheavymelee) {
-          while(self _meth_8661())
+          while(self _meth_8661()) {
             waitframe();
+          }
 
           continue;
         }
 
-        while(self ismeleeing())
+        while(self ismeleeing()) {
           waitframe();
+        }
       }
     }
   }
 }
 
 melee_ability_in_melee_state(var_0) {
-  if(var_0.isheavymelee)
+  if(var_0.isheavymelee) {
     return self _meth_8661();
-  else
+  } else {
     return self ismeleeing();
+  }
 }
 
 bayo_charge_watcher_zm(var_0, var_1, var_2) {
@@ -144,8 +154,9 @@ bayo_charge_watcher_zm(var_0, var_1, var_2) {
     }
     togglemarathonability(0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       self thread[[var_1]]();
+    }
 
     thread bayochargeendingtracking(var_2);
     thread bayochargehittracking(var_2);
@@ -155,8 +166,9 @@ bayo_charge_watcher_zm(var_0, var_1, var_2) {
 bayochargecleanup(var_0, var_1) {
   togglemarathonability(1);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self thread[[var_0]](var_1);
+  }
 
   self notify("bayoCleanup");
 }
@@ -180,10 +192,11 @@ togglemarathonability(var_0) {
   if(!_id_056A::_id_4B7E("runperk")) {
     return;
   }
-  if(var_0)
+  if(var_0) {
     maps\mp\_utility::giveperk("specialty_marathon");
-  else
+  } else {
     maps\mp\_utility::_id_0735("specialty_marathon");
+  }
 }
 
 sword_init() {
@@ -223,14 +236,17 @@ sword_init() {
   level._effect["zmb_giestbomb_priming"] = loadfx("vfx/zombie/zmb_giestbomb_prime");
   level._effect["zmb_giestbomb_detonation"] = loadfx("vfx/zombie/zmb_giestbomb_exp_10s");
 
-  if(!isDefined(level._effect["zmb_delivery_radius"]))
+  if(!isDefined(level._effect["zmb_delivery_radius"])) {
     level._effect["zmb_delivery_radius"] = loadfx("vfx/zombie/zmb_giestbomb_radius");
+  }
 
-  if(!isDefined(level._effect["zmb_delivery_radius_128"]))
+  if(!isDefined(level._effect["zmb_delivery_radius_128"])) {
     level._effect["zmb_delivery_radius_128"] = loadfx("vfx/zombie/zmb_giestbomb_radius_128");
+  }
 
-  if(!isDefined(level._effect["zmb_delivery_radius_256"]))
+  if(!isDefined(level._effect["zmb_delivery_radius_256"])) {
     level._effect["zmb_delivery_radius_256"] = loadfx("vfx/zombie/zmb_giestbomb_radius_256");
+  }
 
   var_0 = [];
   var_0[16]["noGib"] = 1;
@@ -283,15 +299,17 @@ sword_modify_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 sword_think() {
   var_0 = self;
 
-  if(!isDefined(var_0.swordinvestment))
+  if(!isDefined(var_0.swordinvestment)) {
     var_0.swordinvestment = spawnStruct();
+  }
 
   var_1 = setup_normal_melee_abilityinfo("zom_dlc3_5_zm", 0.45, "sword_lost", ::sword_melee_cone);
   var_1.afterfiringdelay = 0.05;
   thread run_melee_ability(var_1);
 
-  if(common_scripts\utility::_id_562E(1))
+  if(common_scripts\utility::_id_562E(1)) {
     self.laststandlastmomentcallback = ::geist_bomb_revive_last_chance;
+  }
 
   thread sword_geist_bomb_detonate_think();
   thread sword_handle_empower();
@@ -306,14 +324,16 @@ sword_melee_cone(var_0) {
   foreach(var_5 in var_1) {
     var_6 = sword_can_throw(var_5);
 
-    if(var_5 maps\mp\agents\humanoid\_humanoid_util::_id_56BC())
+    if(var_5 maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
       var_6 = 0;
+    }
 
     if(var_6) {
       var_6 = var_6 &is_sword_stunned_zombie(var_5);
 
-      if(common_scripts\utility::_id_562E(1))
+      if(common_scripts\utility::_id_562E(1)) {
         var_6 = var_6 | is_sword_secondary_stunned_zombie(var_5);
+      }
     }
 
     if(var_6) {
@@ -354,8 +374,9 @@ delayed_sword_hit(var_0, var_1, var_2) {
   var_3 endon("disconnect");
   var_0 endon("death");
 
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     waitframe();
+  }
 
   if(var_2) {
     wait 0;
@@ -377,19 +398,21 @@ delayed_sword_hit(var_0, var_1, var_2) {
     }
 
     if(common_scripts\utility::_id_562E(1)) {
-      if(isDefined(var_6) && isDefined(var_6.energyholdkill))
+      if(isDefined(var_6) && isDefined(var_6.energyholdkill)) {
         var_8 = var_0.maxhealth + 10;
+      }
     }
 
     _id_0378::_id_8D74("zmb_sword_melee_hit_delayed", var_0.origin);
     var_0 dodamage(var_8, var_3 getEye(), var_3, var_3, "MOD_MELEE", "zom_dlc3_5_aoe_zm", "none");
-    _playfxontag(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
+    _playFXOnTag(level._effect["zmb_giestkraft_impact"], var_0, "J_Spine4");
 
     if(common_scripts\utility::_id_562E(0)) {
       if(!common_scripts\utility::_id_562E(1) || level.players.size <= 0) {
         if(isDefined(var_0._id_0A4B)) {
-          if(isDefined(var_6) && common_scripts\utility::_id_562E(var_6.knockbybladebarbarossa))
+          if(isDefined(var_6) && common_scripts\utility::_id_562E(var_6.knockbybladebarbarossa)) {
             _id_0547::_id_7D1B(var_3, var_0, "far");
+          }
         }
       }
     }
@@ -400,16 +423,18 @@ sword_cleave_get_damage(var_0) {
   var_1 = level.players.size;
   var_1 = int(clamp(var_1, 1, 4));
 
-  if(!common_scripts\utility::_id_562E(1) || common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(1) || common_scripts\utility::_id_562E(var_0)) {
     var_1 = 1;
+  }
 
   var_2 = level.swordcleavedamages[var_1 - 1];
   return level.swordcleavedamagebase * var_2;
 }
 
 is_sword_weapon(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   switch (var_0) {
     case "zom_dlc3_5_bomb_zm":
@@ -432,14 +457,16 @@ sword_onenemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
     var_9 thread playzombiekilledbeamexplodefx();
 
     if(var_4 != "zom_dlc3_5_bomb_zm") {
-      if(1)
+      if(1) {
         var_9 sword_empower_handle_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+      }
     }
   }
 
   if(isDefined(var_1) && isPlayer(var_1) && var_1 has_sword()) {
-    if(common_scripts\utility::_id_562E(self._id_0103))
+    if(common_scripts\utility::_id_562E(self._id_0103)) {
       var_9 thread sword_on_heavy_melee_kill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+    }
   }
 
   var_9 sword_stun_handle_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
@@ -450,8 +477,9 @@ sword_onenemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
 playzombiekilledbeamexplodefx() {
   var_0 = self gettagorigin("J_MainRoot");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.origin;
+  }
 
   playFX(common_scripts\utility::_id_44F5("zmb_blood_blast"), var_0);
 }
@@ -459,8 +487,9 @@ playzombiekilledbeamexplodefx() {
 sword_stun_on_zombie_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   var_11 = self;
 
-  if(issubstr(var_5, "zom_dlc3_5_zm") && var_1 _meth_8661() && !common_scripts\utility::_id_562E(var_11._id_0103))
+  if(issubstr(var_5, "zom_dlc3_5_zm") && var_1 _meth_8661() && !common_scripts\utility::_id_562E(var_11._id_0103)) {
     var_1 attempt_sword_stun(var_11);
+  }
 }
 
 attempt_sword_stun(var_0) {
@@ -475,14 +504,16 @@ attempt_sword_stun(var_0) {
   var_2 = sword_get_player_num(var_1);
 
   if(common_scripts\utility::_id_562E(1)) {
-    if(var_0._id_0A4B == "zombie_heavy")
+    if(var_0._id_0A4B == "zombie_heavy") {
       var_0 thread _id_0567::zombie_heavy_set_grudge(var_1);
+    }
   }
 
   var_0 notify("sword_stun_begin_" + var_2);
 
-  if(!isDefined(var_0.activeswordstunplayers))
+  if(!isDefined(var_0.activeswordstunplayers)) {
     var_0.activeswordstunplayers = [];
+  }
 
   var_0.lastswordstunplayer = var_1;
 
@@ -516,8 +547,9 @@ sword_stun_handle_expire(var_0, var_1) {
 play_shock_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
   self notify(var_4);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 endon("disconnect");
+  }
 
   self endon("death");
   self endon(var_4);
@@ -526,10 +558,11 @@ play_shock_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(;;) {
     var_6 = gettime() / 1000;
 
-    if(isDefined(self.recentshockfxtime) && var_6 - self.recentshockfxtime < var_3)
+    if(isDefined(self.recentshockfxtime) && var_6 - self.recentshockfxtime < var_3) {
       wait(var_3 - (var_6 - self.recentshockfxtime));
+    }
 
-    _playfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
     self.recentshockfxtime = var_6;
     wait(var_3);
   }
@@ -548,8 +581,9 @@ sword_stun_expire(var_0, var_1) {
 
 sword_stun_verify_stunners(var_0) {
   foreach(var_3, var_2 in var_0.activeswordstunplayers) {
-    if(!isDefined(var_2) || !isPlayer(var_2))
+    if(!isDefined(var_2) || !isPlayer(var_2)) {
       var_0.activeswordstunplayers[var_3] = undefined;
+    }
   }
 }
 
@@ -560,8 +594,9 @@ sword_stun_handle_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
     level sword_stun_verify_stunners(var_9);
     var_10 = var_9.activeswordstunplayers;
 
-    foreach(var_13, var_12 in var_10)
-    level thread sword_stun_expire(var_9, var_13);
+    foreach(var_13, var_12 in var_10) {
+      level thread sword_stun_expire(var_9, var_13);
+    }
   }
 
   thread sword_stun_secondary_aoe_trigger_cleanup(var_9);
@@ -580,15 +615,17 @@ sword_stun_run(var_0) {
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "barb_sword_stun");
   var_1 _id_0542::set_invalid_melee_pairing_reason("barb_sword_stun", 1);
 
-  if(common_scripts\utility::_id_562E(1))
+  if(common_scripts\utility::_id_562E(1)) {
     thread sword_stun_secondary_aoe_trigger(var_1);
+  }
 
   sword_stun_intro(var_0);
   sword_stun_loop(var_0);
 
   if(common_scripts\utility::_id_562E(1) && isDefined(var_2) && isalive(var_2)) {
-    if(sword_can_stun_kill(var_1))
+    if(sword_can_stun_kill(var_1)) {
       var_1 dodamage(var_1.maxhealth + 10, var_2 getEye(), var_2, var_2, "MOD_MELEE", "zom_dlc3_5_aoe_zm", "none");
+    }
   }
 
   sword_stun_recover(var_0);
@@ -600,10 +637,11 @@ sword_stun_intro(var_0) {
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("energy_hold_start");
   var_4 = self getanimentrycount(var_3);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 = var_2;
-  else
+  } else {
     var_5 = randomint(var_4);
+  }
 
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);
@@ -617,10 +655,11 @@ sword_stun_loop_pain_anim(var_0) {
   var_3 = var_1 maps\mp\agents\_scripted_agent_anim_util::_id_434D("energy_hold_pain");
   var_4 = var_1 getanimentrycount(var_3);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 = var_2;
-  else
+  } else {
     var_5 = randomint(var_4);
+  }
 
   var_1 scragentsetanimmode("anim deltas");
   var_1 scragentsetorientmode("face angle abs", self.angles);
@@ -636,10 +675,11 @@ sword_stun_loop_anim(var_0) {
   var_3 = var_1 maps\mp\agents\_scripted_agent_anim_util::_id_434D("energy_hold_loop");
   var_4 = var_1 getanimentrycount(var_3);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 = var_2;
-  else
+  } else {
     var_5 = randomint(var_4);
+  }
 
   var_1 scragentsetanimmode("anim deltas");
   var_1 scragentsetorientmode("face angle abs", self.angles);
@@ -670,10 +710,11 @@ sword_stun_recover(var_0) {
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("energy_hold_end");
   var_3 = self getanimentrycount(var_2);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 = var_1;
-  else
+  } else {
     var_4 = randomint(var_3);
+  }
 
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);
@@ -754,10 +795,11 @@ sword_throw_run(var_0) {
   var_1 maps\mp\agents\_scripted_agent_anim_util::_id_8732(1, "barb_sword_throw");
   var_1 thread sword_throw_handle_collision(var_0);
 
-  if(common_scripts\utility::_id_562E(1))
+  if(common_scripts\utility::_id_562E(1)) {
     var_1 thread sword_throw_damage_impacted_zombies(var_0);
+  }
 
-  _playfxontag(common_scripts\utility::_id_44F5("zmb_sword_zmb_throw"), var_1, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_sword_zmb_throw"), var_1, "tag_origin");
   var_1 _id_0378::_id_8D74("dlc3_barbarosa_swrd_knockback");
   var_1 sword_throw_animate(var_0);
 }
@@ -820,8 +862,9 @@ sword_throw_handle_collision(var_0) {
       if(isDefined(var_1.thrownimpacts)) {
         var_17 = var_1.thrownimpacts[var_16 getentitynumber()];
 
-        if(isDefined(var_17) && gettime() - var_17 <= 100)
+        if(isDefined(var_17) && gettime() - var_17 <= 100) {
           continue;
+        }
       }
 
       sword_throw_zombie_impact_damage(var_0, var_1, var_16);
@@ -860,23 +903,27 @@ sword_throw_damage_impacted_zombies(var_0) {
 }
 
 sword_throw_zombie_impact_damage(var_0, var_1, var_2) {
-  if(sword_can_stun(var_2) || sword_can_secondary_stun(var_2) || sword_can_secondary_slow(var_2))
+  if(sword_can_stun(var_2) || sword_can_secondary_stun(var_2) || sword_can_secondary_slow(var_2)) {
     _id_0547::_id_7D1B(_id_0547::create_temp_tackler(var_1), var_2, "close", var_1.swordthrowowner);
+  }
 
   var_2 dodamage(level.swordthrowimpactdamage, var_1.origin, var_0._id_0117, var_0._id_0117, "MOD_MELEE", "zom_dlc3_5_throw_zm");
 
   if(common_scripts\utility::_id_562E(1) && isalive(var_2)) {
-    if(var_2._id_0A4B == "zombie_heavy")
+    if(var_2._id_0A4B == "zombie_heavy") {
       var_2 thread _id_0567::zombie_heavy_set_grudge(var_0._id_0117);
+    }
   }
 
-  if(var_1._id_0A4B == "zombie_exploder")
+  if(var_1._id_0A4B == "zombie_exploder") {
     var_1 _id_0563::zombie_exploder_attempt_detonate(var_0._id_0117, "zom_dlc3_5_throw_zm");
+  }
 
   var_1 dodamage(level.swordthrowimpactdamage, var_1.origin, var_0._id_0117, var_0._id_0117, "MOD_MELEE", "zom_dlc3_5_throw_zm");
 
-  if(!isDefined(var_1.thrownimpacts))
+  if(!isDefined(var_1.thrownimpacts)) {
     var_1.thrownimpacts = [];
+  }
 
   var_1.thrownimpacts[var_2 getentitynumber()] = gettime();
 }
@@ -885,8 +932,9 @@ sword_throw_handle_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   var_9 = self;
 
   if(isDefined(self.swordthrowstate)) {
-    if(var_9._id_0A4B == "zombie_exploder")
+    if(var_9._id_0A4B == "zombie_exploder") {
       var_9 _id_0563::zombie_exploder_attempt_detonate(var_9.swordthrowowner, "zom_dlc3_5_throw_zm");
+    }
   }
 }
 
@@ -934,51 +982,61 @@ solve_yaw_for_throw_anim(var_0, var_1, var_2) {
 sword_throw_interrupt(var_0) {}
 
 sword_can_stun(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_0547::_id_0A51(var_0._id_0A4B);
+  }
 
-  if(common_scripts\utility::_id_562E(var_0.noenergyhold))
+  if(common_scripts\utility::_id_562E(var_0.noenergyhold)) {
     return 0;
+  }
 
   return common_scripts\utility::_id_562E(var_1.energyhold);
 }
 
 sword_can_secondary_stun(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_0547::_id_0A51(var_0._id_0A4B);
+  }
 
-  if(common_scripts\utility::_id_562E(var_0.noenergyholdsecondary))
+  if(common_scripts\utility::_id_562E(var_0.noenergyholdsecondary)) {
     return 0;
+  }
 
   return common_scripts\utility::_id_562E(var_1.energyholdsecondary);
 }
 
 sword_can_secondary_slow(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_0547::_id_0A51(var_0._id_0A4B);
+  }
 
-  if(common_scripts\utility::_id_562E(var_0.noenergyslowsecondary))
+  if(common_scripts\utility::_id_562E(var_0.noenergyslowsecondary)) {
     return 0;
+  }
 
   return common_scripts\utility::_id_562E(var_1.energyslowsecondary);
 }
 
 sword_can_throw(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_0547::_id_0A51(var_0._id_0A4B);
+  }
 
-  if(common_scripts\utility::_id_562E(var_0.notthrowable))
+  if(common_scripts\utility::_id_562E(var_0.notthrowable)) {
     return 0;
+  }
 
   return common_scripts\utility::_id_562E(var_1.throwable);
 }
 
 sword_can_stun_kill(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_0547::_id_0A51(var_0._id_0A4B);
+  }
 
-  if(common_scripts\utility::_id_562E(var_0.noenergyholdkill))
+  if(common_scripts\utility::_id_562E(var_0.noenergyholdkill)) {
     return 0;
+  }
 
   return common_scripts\utility::_id_562E(var_1.energyholdkill);
 }
@@ -989,8 +1047,9 @@ sword_throw_end(var_0) {
   var_1 set_sword_throw_state(2);
   var_1 notify("sword_throw_end");
 
-  if(var_1._id_0A4B == "zombie_exploder")
+  if(var_1._id_0A4B == "zombie_exploder") {
     var_1 _id_0563::zombie_exploder_attempt_detonate(var_0._id_0117, "zom_dlc3_5_throw_zm");
+  }
 
   var_1 dodamage(var_1.health + 1, var_1.origin, var_0._id_0117, var_0._id_0117, "MOD_MELEE", "zom_dlc3_5_throw_zm", "head");
   var_1 scragentsetscripted(0);
@@ -1009,11 +1068,13 @@ sword_add_secondary_stun(var_0) {
   if(common_scripts\utility::_id_562E(1)) {
     var_2 = var_0.lastswordstunplayer;
 
-    if(!isDefined(var_2) || !isPlayer(var_2))
+    if(!isDefined(var_2) || !isPlayer(var_2)) {
       var_2 = common_scripts\utility::_id_0F82(var_0.activeswordstunplayers);
+    }
 
-    if(var_1._id_0A4B == "zombie_heavy" && isDefined(var_2) && isPlayer(var_2))
+    if(var_1._id_0A4B == "zombie_heavy" && isDefined(var_2) && isPlayer(var_2)) {
       var_1 thread _id_0567::zombie_heavy_set_grudge(var_2);
+    }
   }
 
   var_3 = _id_0547::_id_0A51(var_1._id_0A4B);
@@ -1024,11 +1085,13 @@ sword_add_secondary_stun(var_0) {
   var_4 = var_0 getentitynumber();
   var_1 notify("secondary_stun_begin_" + var_4);
 
-  if(!isDefined(var_1.activesecondarystuns))
+  if(!isDefined(var_1.activesecondarystuns)) {
     var_1.activesecondarystuns = [];
+  }
 
-  if(!isDefined(var_0.outgoingstuns))
+  if(!isDefined(var_0.outgoingstuns)) {
     var_0.outgoingstuns = [];
+  }
 
   if(var_1.activesecondarystuns.size == 0) {
     var_1 thread play_shock_fx("zmb_barb_sword_stun_secondary", "J_Spine4", undefined, 1.0, "sword_secondary_stun_shock", "all_secondary_stuns_expired");
@@ -1070,10 +1133,11 @@ sword_secondary_stun_expire(var_0) {
   var_1 notify("secondary_stun_end_" + var_2);
 
   if(var_1.activesecondarystuns.size == 0) {
-    if(sword_can_secondary_stun(var_1, var_3))
+    if(sword_can_secondary_stun(var_1, var_3)) {
       var_1 _id_0547::remove_zombie_stun("barb_sword_secondary");
-    else if(sword_can_secondary_slow(var_1, var_3))
+    } else if(sword_can_secondary_slow(var_1, var_3)) {
       var_1 removeswordsecondaryslowdebuff();
+    }
 
     var_1 notify("all_secondary_stuns_expired");
   }
@@ -1118,16 +1182,18 @@ sword_secondary_stun_loop(var_0) {
     var_4 = self getanimentrycount(var_3);
 
     if(self._id_0A4B == "zombie_exploder") {
-      if(common_scripts\utility::_id_562E(self._id_392C))
+      if(common_scripts\utility::_id_562E(self._id_392C)) {
         var_2 = 0;
-      else
+      } else {
         var_2 = 1;
+      }
     }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_5 = var_2;
-    else
+    } else {
       var_5 = randomint(var_4);
+    }
 
     self scragentsetanimmode("anim deltas");
     self scragentsetorientmode("face angle abs", self.angles);
@@ -1157,8 +1223,9 @@ sword_secondary_stun_cleanup_outgoing_stuns() {
   if(isDefined(var_0.outgoingstuns)) {
     var_1 = var_0.outgoingstuns;
 
-    foreach(var_3 in var_1)
-    var_3 thread sword_secondary_stun_expire(var_0);
+    foreach(var_3 in var_1) {
+      var_3 thread sword_secondary_stun_expire(var_0);
+    }
   }
 }
 
@@ -1169,8 +1236,9 @@ sword_secondary_stun_handle_zombie_killed(var_0, var_1, var_2, var_3, var_4, var
   if(isDefined(var_9.activesecondarystuns)) {
     var_10 = var_9.activesecondarystuns;
 
-    foreach(var_12 in var_10)
-    var_9 thread sword_secondary_stun_expire(var_12);
+    foreach(var_12 in var_10) {
+      var_9 thread sword_secondary_stun_expire(var_12);
+    }
   }
 }
 
@@ -1188,8 +1256,9 @@ getswordsecondaryslowdebuff() {
   var_0 = self;
   var_1 = var_0 _id_054D::_id_443F("secondary_slow");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0 spawnswordsecondaryslowdebuff();
+  }
 
   return var_1;
 }
@@ -1232,8 +1301,9 @@ sword_on_heavy_melee_kill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     if(!var_11 || var_12) {
       var_15 = var_10 thread sword_try_grant_armor();
 
-      if(var_15 && common_scripts\utility::_id_562E(1) && !var_13)
+      if(var_15 && common_scripts\utility::_id_562E(1) && !var_13) {
         var_10 sword_empower_off();
+      }
     }
   }
 
@@ -1243,8 +1313,9 @@ sword_on_heavy_melee_kill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 sword_try_grant_armor() {
   var_0 = self;
 
-  if(var_0.health < var_0.maxhealth)
+  if(var_0.health < var_0.maxhealth) {
     var_0 notify("immediateHealthRegen");
+  }
 
   if(var_0 _id_0547::_id_73E9() < var_0 _id_0547::playergetmaxarmorcount()) {
     var_0 thread sword_grant_armor_internal();
@@ -1268,8 +1339,9 @@ sword_handle_empower() {
   var_0.swordempower = spawnStruct();
   var_0.swordempower.empowerkills = 0;
 
-  if(common_scripts\utility::_id_562E(0))
+  if(common_scripts\utility::_id_562E(0)) {
     thread sword_empower_watch_player_meter();
+  }
 
   thread sword_empower_watch_last_stand();
   thread sword_empower_watch_game_end();
@@ -1327,8 +1399,9 @@ sword_empower_handle_zombie_killed(var_0, var_1, var_2, var_3, var_4, var_5, var
   var_9 = var_1;
   var_9.swordempower.empowerkills++;
 
-  if(!common_scripts\utility::_id_562E(var_9.swordempower._id_08BE) && var_9.swordempower.empowerkills >= 30)
+  if(!common_scripts\utility::_id_562E(var_9.swordempower._id_08BE) && var_9.swordempower.empowerkills >= 30) {
     var_9 thread sword_empower_on();
+  }
 }
 
 sword_empower_on() {
@@ -1343,8 +1416,9 @@ sword_empower_on() {
     var_3 = issubstr(var_2, "zom_dlc3_5_zm");
 
     if(var_3) {
-      if(!var_1)
+      if(!var_1) {
         thread sword_empower_fx_on();
+      }
     } else if(var_1)
       thread sword_empower_fx_off();
 
@@ -1352,8 +1426,9 @@ sword_empower_on() {
     var_0 common_scripts\utility::_id_A70A("weapon_given", "weapon_taken", "zombie_player_spawn_finished", "melee_weapon_change", "weapon_switch_started");
     waitframe();
 
-    while(var_0 isswitchingweapon())
+    while(var_0 isswitchingweapon()) {
       waitframe();
+    }
   }
 }
 
@@ -1395,11 +1470,13 @@ sword_empower_fx_on() {
 sword_empower_fx_off() {
   var_0 = self;
 
-  if(isDefined(var_0.swordempower._id_35A6))
+  if(isDefined(var_0.swordempower._id_35A6)) {
     var_0.swordempower._id_35A6 delete();
+  }
 
-  if(isDefined(var_0.swordempower.wv_effects))
+  if(isDefined(var_0.swordempower.wv_effects)) {
     var_0.swordempower.wv_effects delete();
+  }
 }
 
 sword_handle_power_investment(var_0) {
@@ -1412,8 +1489,9 @@ sword_handle_power_investment(var_0) {
   thread sword_offer_power_investment(var_0);
   var_1 = common_scripts\utility::_id_562E(sword_wait_investment_choice(var_0));
 
-  if(var_1)
+  if(var_1) {
     thread sword_activate_investment(var_0);
+  }
 
   thread sword_revoke_power_investment_offer();
 }
@@ -1453,10 +1531,11 @@ sword_investment_handle_corpse_transition(var_0) {
   var_2 = var_1[1];
   var_3 = var_1[0];
 
-  if(var_1.size > 2)
+  if(var_1.size > 2) {
     var_4 = common_scripts\utility::_id_0FA3(var_1, 2, var_1.size);
-  else
+  } else {
     var_4 = [];
+  }
 
   self.swordinvestment._id_2670 = var_4[0];
   self.swordinvestment._id_2670 waittill("entitydeleted");
@@ -1470,13 +1549,15 @@ sword_corpse_wait_success() {
   var_0 endon("disconnect");
 
   if(!isDefined(var_0.swordinvestment._id_2670)) {
-    if(common_scripts\utility::_id_562E(var_0.swordinvestment.no_corpse))
+    if(common_scripts\utility::_id_562E(var_0.swordinvestment.no_corpse)) {
       return 0;
+    }
 
     var_0.swordinvestment waittill("corpse_update");
 
-    if(!isDefined(var_0.swordinvestment._id_2670))
+    if(!isDefined(var_0.swordinvestment._id_2670)) {
       return 0;
+    }
   }
 
   return 1;
@@ -1489,42 +1570,50 @@ sword_wait_investment_choice(var_0) {
   self endon("disconnect");
   childthread sword_notify_on_heavy_melee_end();
 
-  while(!self usebuttonpressed())
+  while(!self useButtonPressed()) {
     waitframe();
+  }
 
   return 1;
 }
 
 sword_notify_on_heavy_melee_end() {
-  while(self _meth_8661())
+  while(self _meth_8661()) {
     waitframe();
+  }
 
   self notify("investment_expire");
 }
 
 sword_player_can_invest(var_0) {
-  if(isDefined(var_0) && _id_0547::_id_5565(var_0._id_2A9D, "scripted_soul_eat"))
+  if(isDefined(var_0) && _id_0547::_id_5565(var_0._id_2A9D, "scripted_soul_eat")) {
     return 0;
+  }
 
-  if(!isDefined(self.swordempower) || !common_scripts\utility::_id_562E(self.swordempower._id_08BE))
+  if(!isDefined(self.swordempower) || !common_scripts\utility::_id_562E(self.swordempower._id_08BE)) {
     return 0;
+  }
 
   if(common_scripts\utility::_id_562E(0)) {
-    if(self _meth_85BA("active"))
+    if(self _meth_85BA("active")) {
       return 0;
+    }
 
-    if(self _meth_85BB() < 1.0)
+    if(self _meth_85BB() < 1.0) {
       return 0;
+    }
   }
 
   if(common_scripts\utility::_id_562E(1)) {
-    if(_id_0547::_id_73E9() < _id_0547::playergetmaxarmorcount())
+    if(_id_0547::_id_73E9() < _id_0547::playergetmaxarmorcount()) {
       return 0;
+    }
   }
 
   if(common_scripts\utility::_id_562E(1)) {
-    if(_id_0547::playergetmaxarmorcount() == 0)
+    if(_id_0547::playergetmaxarmorcount() == 0) {
       return 0;
+    }
   }
 
   return 1;
@@ -1533,19 +1622,22 @@ sword_player_can_invest(var_0) {
 sword_activate_investment(var_0) {
   var_1 = self;
 
-  if(common_scripts\utility::_id_562E(0))
+  if(common_scripts\utility::_id_562E(0)) {
     var_1 _id_0533::_id_0F37(-1.0, 1, 1);
+  }
 
-  if(common_scripts\utility::_id_562E(0))
+  if(common_scripts\utility::_id_562E(0)) {
     var_1 _id_0547::_id_7454(0);
+  }
 
   if(common_scripts\utility::_id_562E(1)) {
     var_1 _id_0547::playersetmaxarmorcount(var_1 _id_0547::playergetmaxarmorcount() - 1);
     _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_barb_victim_drain_armor"), var_1, "J_Spine4", var_1);
   }
 
-  if(1)
+  if(1) {
     var_1 sword_empower_off();
+  }
 
   var_2 = geist_bomb_create(var_0, var_1);
 }
@@ -1553,8 +1645,9 @@ sword_activate_investment(var_0) {
 geist_bomb_create(var_0, var_1) {
   var_2 = spawnStruct();
 
-  if(!isDefined(var_1.geistbombs))
+  if(!isDefined(var_1.geistbombs)) {
     var_1.geistbombs = [];
+  }
 
   var_1.geistbombs = common_scripts\utility::_id_0F6F(var_1.geistbombs, var_2);
   var_2.player = var_1;
@@ -1562,8 +1655,9 @@ geist_bomb_create(var_0, var_1) {
   var_2._id_8203 setModel("tag_origin");
 
   if(isDefined(var_0)) {
-    if(_isagent(var_0))
+    if(_isagent(var_0)) {
       var_2._id_AB4D = var_0;
+    }
   }
 
   var_2 thread geist_bomb_think();
@@ -1579,8 +1673,9 @@ geist_bomb_think() {
   thread geist_bomb_creation_zombie_fx();
   thread geist_bomb_handle_vesting();
 
-  if(common_scripts\utility::_id_562E(1))
+  if(common_scripts\utility::_id_562E(1)) {
     thread geist_bomb_handle_revive();
+  }
 
   thread geist_bomb_handle_withdrawal();
 }
@@ -1589,15 +1684,17 @@ geist_bomb_handle_initial_positioning() {
   var_0 = self;
   var_1 = var_0.player;
 
-  if(isDefined(var_1.swordinvestment._id_2670))
+  if(isDefined(var_1.swordinvestment._id_2670)) {
     var_0._id_8203.origin = var_1.swordinvestment._id_2670.origin + (0, 0, 48);
-  else
+  } else {
     var_0._id_8203.origin = var_1.origin + anglesToForward(var_1.angles) * 36 + (0, 0, 48);
+  }
 
   var_0._id_487B = _getgroundposition(var_0._id_8203.origin, 24, 48, 0, 0);
 
-  if(!isDefined(var_0._id_487B))
+  if(!isDefined(var_0._id_487B)) {
     var_0._id_487B = var_0._id_8203.origin - (0, 0, 24);
+  }
 }
 
 geist_bomb_creation_zombie_fx() {
@@ -1611,7 +1708,7 @@ geist_bomb_creation_zombie_fx() {
   var_2 = var_1.swordinvestment._id_2670;
   var_0.creation_fx_beam = _func_382("zmb_geistkraft_reg_beam_med", var_2, "j_neck", var_0._id_8203, "tag_origin");
   var_1 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_0.creation_fx_beam);
-  _playfxontag(common_scripts\utility::_id_44F5("zmb_barb_victim_geist_drain"), var_2, "j_neck");
+  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_barb_victim_geist_drain"), var_2, "j_neck");
   common_scripts\utility::_id_A70D(10, var_1.swordinvestment, "corpse_update", var_0, "geist_bomb_cleanup");
   var_0.creation_fx_beam delete();
 }
@@ -1646,11 +1743,13 @@ geist_bomb_withdraw_power() {
   var_0 = self;
   var_1 = var_0.player;
 
-  if(common_scripts\utility::_id_562E(1))
+  if(common_scripts\utility::_id_562E(1)) {
     var_1 _id_0547::_id_7454(var_1 _id_0547::playergetmaxarmorcount());
+  }
 
-  if(common_scripts\utility::_id_562E(0))
+  if(common_scripts\utility::_id_562E(0)) {
     var_1 _id_0533::_id_0F37(1.0, 1, 1);
+  }
 
   geist_bomb_cleanup();
 }
@@ -1662,18 +1761,21 @@ geist_bomb_handle_revive() {
   var_0 endon("geist_bomb_cleanup");
   var_0 geist_bomb_wait_for_vesting();
 
-  if(!isDefined(var_1.geist_bomb_revives))
+  if(!isDefined(var_1.geist_bomb_revives)) {
     var_1.geist_bomb_revives = [];
+  }
 
   var_0.revive_enabled = 1;
   var_1.geist_bomb_revives = common_scripts\utility::_id_0F6F(var_1.geist_bomb_revives, var_0);
 
-  if(var_1.geist_bomb_revives.size == 1)
+  if(var_1.geist_bomb_revives.size == 1) {
     var_1.mapreviveenabled = 1;
+  }
 
   for(;;) {
-    if(!_id_0547::_id_577E(var_1))
+    if(!_id_0547::_id_577E(var_1)) {
       var_1 waittill("enter_last_stand");
+    }
 
     var_0 geist_bomb_attempt_revive();
   }
@@ -1683,11 +1785,13 @@ geist_bomb_cleanup_revive() {
   var_0 = self;
   var_1 = var_0.player;
 
-  if(common_scripts\utility::_id_562E(var_0.revive_enabled))
+  if(common_scripts\utility::_id_562E(var_0.revive_enabled)) {
     var_1.geist_bomb_revives = common_scripts\utility::_id_0F93(var_1.geist_bomb_revives, var_0);
+  }
 
-  if(var_1.geist_bomb_revives.size == 0)
+  if(var_1.geist_bomb_revives.size == 0) {
     var_1.mapreviveenabled = undefined;
+  }
 }
 
 geist_bomb_attempt_revive() {
@@ -1698,23 +1802,27 @@ geist_bomb_attempt_revive() {
   while(_id_0547::_id_577E(var_1)) {
     var_2 = 0;
 
-    if(_distance2d(var_1.origin, var_0._id_8203.origin) > 75)
+    if(_distance2d(var_1.origin, var_0._id_8203.origin) > 75) {
       var_2 = 1;
+    }
 
-    if(_abs(var_1.origin[2] - var_0._id_487B[2]) > 74)
+    if(_abs(var_1.origin[2] - var_0._id_487B[2]) > 74) {
       var_2 = 1;
+    }
 
     if(!var_2) {
       var_3 = _func_38E(var_1.origin, var_0._id_8203.origin);
 
-      if(var_3 > 75)
+      if(var_3 > 75) {
         var_2 = 1;
+      }
     }
 
-    if(var_2)
+    if(var_2) {
       geist_bomb_revive_too_far();
-    else
+    } else {
       geist_bomb_revive_within_range();
+    }
 
     wait 0.5;
   }
@@ -1723,8 +1831,9 @@ geist_bomb_attempt_revive() {
 geist_bomb_revive_too_far() {
   var_0 = self;
 
-  if(common_scripts\utility::_id_562E(var_0.within_revive_distance))
+  if(common_scripts\utility::_id_562E(var_0.within_revive_distance)) {
     var_0 notify("bomb_too_far_away");
+  }
 
   var_0.within_revive_distance = 0;
 }
@@ -1736,8 +1845,9 @@ geist_bomb_revive_within_range() {
   if(!common_scripts\utility::_id_562E(var_0.within_revive_distance)) {
     thread geist_bomb_revive_fx();
 
-    if(common_scripts\utility::_id_562E(0))
+    if(common_scripts\utility::_id_562E(0)) {
       thread geist_bomb_revive_timer();
+    }
   }
 
   var_0.within_revive_distance = 1;
@@ -1757,13 +1867,15 @@ geist_bomb_revive_timer() {
   while(var_2 < var_3) {
     var_4 = 0;
 
-    if(common_scripts\utility::_id_562E(var_1._id_172C))
+    if(common_scripts\utility::_id_562E(var_1._id_172C)) {
       var_4 = 1;
+    }
 
-    if(var_4)
+    if(var_4) {
       var_2 = 0;
-    else
+    } else {
       var_2++;
+    }
 
     waitframe();
   }
@@ -1796,8 +1908,9 @@ get_geist_bomb_for_position(var_0, var_1) {
   if(isDefined(var_1.geistbombs)) {
     foreach(var_3 in var_1.geist_bomb_revives) {
       if(_distance2d(var_0, var_3._id_8203.origin) < 75) {
-        if(_abs(var_1.origin[2] - var_3._id_487B[2]) <= 74)
+        if(_abs(var_1.origin[2] - var_3._id_487B[2]) <= 74) {
           return var_3;
+        }
       }
     }
   }
@@ -1819,8 +1932,9 @@ geist_bomb_revive_fx() {
 geist_bomb_wait_for_vesting() {
   var_0 = self;
 
-  if(!common_scripts\utility::_id_562E(var_0.vested))
+  if(!common_scripts\utility::_id_562E(var_0.vested)) {
     var_0 waittill("geist_bomb_vested");
+  }
 }
 
 geist_bomb_run_vesting() {
@@ -1845,8 +1959,9 @@ geist_bomb_run_vesting() {
       var_4 = level.currentwave - var_0.starting_round;
       var_5 = level.objectivescompleted - var_0.starting_objective_count;
 
-      if(var_4 > 0 && var_5 > 0)
+      if(var_4 > 0 && var_5 > 0) {
         var_2 = 1;
+      }
     }
   } else
     var_2 = 1;
@@ -1863,7 +1978,7 @@ geist_bomb_ready_vfx() {
   _id_0378::_id_8D74("dlc3_geist_bomb_activate", var_0);
 
   for(;;) {
-    _playfxontag(common_scripts\utility::_id_44F5("zmb_barb_geist_bomb_ready"), var_0._id_8203, "tag_origin");
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_barb_geist_bomb_ready"), var_0._id_8203, "tag_origin");
     _triggerfx(var_0.radiusvfx);
     wait 3;
   }
@@ -1872,8 +1987,9 @@ geist_bomb_ready_vfx() {
 geist_bomb_ready_vfx_cleanup() {
   var_0 = self;
 
-  if(isDefined(var_0.radiusvfx))
+  if(isDefined(var_0.radiusvfx)) {
     var_0.radiusvfx delete();
+  }
 }
 
 geist_bomb_cleanup() {
@@ -1891,8 +2007,9 @@ geist_bomb_cleanup() {
       if(common_scripts\utility::_id_562E(1)) {
         var_1 _id_0547::playersetmaxarmorcount(var_1 _id_0547::playergetmaxarmorcount() + 1);
 
-        if(isalive(var_1))
+        if(isalive(var_1)) {
           _playfxontagforclients(common_scripts\utility::_id_44F5("zmb_barb_victim_drain_armor"), var_1, "J_Spine4", var_1);
+        }
       }
     }
 
@@ -1928,8 +2045,9 @@ sword_geist_bomb_detonate_think() {
     if(isDefined(var_0.priminggeistbomb) && _id_0547::_id_5565(var_2, var_0.priminggeistbomb)) {
       var_0.priminggeistbombtime = var_0.priminggeistbombtime + var_1;
 
-      if(!common_scripts\utility::_id_562E(var_0.priminggeistbomb.is_armed) && var_0.priminggeistbombtime > 1)
+      if(!common_scripts\utility::_id_562E(var_0.priminggeistbomb.is_armed) && var_0.priminggeistbombtime > 1) {
         var_0.priminggeistbomb thread geist_bomb_armed();
+      }
 
       continue;
     }
@@ -1942,23 +2060,29 @@ sword_geist_bomb_detonate_think() {
 sword_geist_bomb_detonate_pick_bomb() {
   var_0 = self;
 
-  if(!isDefined(var_0.swordempower) || !common_scripts\utility::_id_562E(var_0.swordempower._id_08BE))
+  if(!isDefined(var_0.swordempower) || !common_scripts\utility::_id_562E(var_0.swordempower._id_08BE)) {
     return undefined;
+  }
 
-  if(!isDefined(var_0.geistbombs) || var_0.geistbombs.size == 0)
+  if(!isDefined(var_0.geistbombs) || var_0.geistbombs.size == 0) {
     return undefined;
+  }
 
-  if(isDefined(var_0.swordinvestment) && common_scripts\utility::_id_562E(var_0.swordinvestment.offer))
+  if(isDefined(var_0.swordinvestment) && common_scripts\utility::_id_562E(var_0.swordinvestment.offer)) {
     return undefined;
+  }
 
-  if(var_0 getstance() != "stand")
+  if(var_0 getstance() != "stand") {
     return undefined;
+  }
 
-  if(!var_0 adsbuttonpressed(0))
+  if(!var_0 adsButtonPressed(0)) {
     return undefined;
+  }
 
-  if(!issubstr(var_0 getcurrentprimaryweapon(), "zom_dlc3_5_zm"))
+  if(!issubstr(var_0 getcurrentprimaryweapon(), "zom_dlc3_5_zm")) {
     return undefined;
+  }
 
   var_1 = undefined;
   var_2 = 0;
@@ -1988,7 +2112,7 @@ geist_bomb_start_priming() {
   _id_0378::_id_8D74("dlc3_giest_bomb_arm", var_0);
 
   for(;;) {
-    _playfxontag(common_scripts\utility::_id_44F5("zmb_giestbomb_priming"), var_0._id_8203, "tag_origin");
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_giestbomb_priming"), var_0._id_8203, "tag_origin");
     wait 2.5;
   }
 }
@@ -2011,7 +2135,7 @@ geist_bomb_armed() {
   for(;;) {
     wait(var_3);
 
-    if(var_1 usebuttonpressed()) {
+    if(var_1 useButtonPressed()) {
       var_2 = var_2 + var_3;
 
       if(var_2 > 1) {
@@ -2062,8 +2186,9 @@ geist_bomb_detonate_kill_radius() {
   var_0 endon("geist_bomb_detonate_end");
   var_1 endon("disconnect");
 
-  if(!isDefined(level.geistbomblastid))
+  if(!isDefined(level.geistbomblastid)) {
     level.geistbomblastid = 0;
+  }
 
   var_2 = level.geistbomblastid;
   level.geistbomblastid++;
@@ -2095,8 +2220,9 @@ geist_bomb_detonate_kill_radius() {
     }
     var_6 = var_4.bombsabotagefunc;
 
-    if(!isDefined(var_6))
+    if(!isDefined(var_6)) {
       var_6 = var_5.bombsabotagefunc;
+    }
 
     if(isDefined(var_6)) {
       if(!isDefined(var_4.bombsabotages) || !common_scripts\utility::_id_562E(var_4.bombsabotages[var_2])) {
@@ -2127,8 +2253,9 @@ sword_delivery_init() {
   level.sworddelivery._id_7546 = [];
   level.sworddelivery._id_206B = var_2;
 
-  if(!isDefined(level.sworddelivery._id_206B))
+  if(!isDefined(level.sworddelivery._id_206B)) {
     var_3 = 0;
+  }
 
   foreach(var_5 in var_1) {
     var_6 = var_5.setmovespeedscale;
@@ -2138,8 +2265,9 @@ sword_delivery_init() {
       continue;
     }
 
-    if(isDefined(level.sworddelivery._id_7546[var_6]))
+    if(isDefined(level.sworddelivery._id_7546[var_6])) {
       var_3 = 0;
+    }
 
     var_8 = spawnStruct();
     level.sworddelivery._id_7546[var_6] = var_8;
@@ -2178,21 +2306,25 @@ sword_delivery_init() {
     }
 
     if(isDefined(var_8.onent) && isDefined(var_8.offent)) {
-      if(distance(var_8.onent.origin, var_8.offent.origin) > 36)
+      if(distance(var_8.onent.origin, var_8.offent.origin) > 36) {
         var_3 = 0;
+      }
     }
   }
 
-  if(var_12.size > 0)
+  if(var_12.size > 0) {
     var_3 = 0;
+  }
 
   if(common_scripts\utility::_id_562E(level.sworddeliveryoff)) {
     foreach(var_8 in level.sworddelivery._id_7546) {
-      if(isDefined(var_8.onent))
+      if(isDefined(var_8.onent)) {
         var_8.onent delete();
+      }
 
-      if(isDefined(var_8.offent))
+      if(isDefined(var_8.offent)) {
         var_8.offent delete();
+      }
     }
 
     level.sworddelivery = undefined;
@@ -2206,22 +2338,25 @@ sword_delivery_init() {
 }
 
 sword_delivery_position_checking() {
-  foreach(var_1 in level.sworddelivery._id_7546)
-  var_1.dist2d = _distance2d(var_1.origin, level.sworddelivery._id_206B.origin);
+  foreach(var_1 in level.sworddelivery._id_7546) {
+    var_1.dist2d = _distance2d(var_1.origin, level.sworddelivery._id_206B.origin);
+  }
 
   var_3 = common_scripts\utility::_id_7897(level.sworddelivery._id_7546, ::delivery_point_sort_from_center);
   var_4 = common_scripts\utility::_id_0FA3(var_3, 0, 3);
   var_5 = 0;
 
-  foreach(var_1 in var_4)
-  var_5 = var_5 + var_1.dist2d;
+  foreach(var_1 in var_4) {
+    var_5 = var_5 + var_1.dist2d;
+  }
 
   level.sworddelivery.innerradius = var_5 / 3;
   var_8 = common_scripts\utility::_id_0FA3(var_3, 3, 7);
   var_5 = 0;
 
-  foreach(var_1 in var_8)
-  var_5 = var_5 + var_1.dist2d;
+  foreach(var_1 in var_8) {
+    var_5 = var_5 + var_1.dist2d;
+  }
 
   level.sworddelivery.outerradius = var_5 / 4;
 }
@@ -2235,16 +2370,19 @@ sword_delivery_per_player() {
   var_0 endon("disconnect");
   var_1 = 0;
 
-  if(_isonlinegame() && var_0 getplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "hasCompletedEESequence"))
+  if(_isonlinegame() && var_0 getplayerdata(common_scripts\utility::_id_46A8(), "zmShatteredRecord", "hasCompletedEESequence")) {
     var_1 = 1;
+  }
 
   if(!var_1) {
     foreach(var_3 in level.sworddelivery._id_7546) {
-      if(isDefined(var_3.offent) && var_3.offent.targetname != "circle_point_struct")
+      if(isDefined(var_3.offent) && var_3.offent.targetname != "circle_point_struct") {
         var_3.offent _meth_8006(var_0);
+      }
 
-      if(isDefined(var_3.onent) && var_3.onent.targetname != "circle_point_struct")
+      if(isDefined(var_3.onent) && var_3.onent.targetname != "circle_point_struct") {
         var_3.onent _meth_8006(var_0);
+      }
     }
 
     return;
@@ -2254,11 +2392,13 @@ sword_delivery_per_player() {
     var_0.sworddeliverypointsactive = [];
 
     foreach(var_3 in level.sworddelivery._id_7546) {
-      if(isDefined(var_3.offent) && var_3.offent.targetname != "circle_point_struct")
+      if(isDefined(var_3.offent) && var_3.offent.targetname != "circle_point_struct") {
         var_3.offent showtoplayer(var_0);
+      }
 
-      if(isDefined(var_3.onent) && var_3.onent.targetname != "circle_point_struct")
+      if(isDefined(var_3.onent) && var_3.onent.targetname != "circle_point_struct") {
         var_3.onent _meth_8006(var_0);
+      }
 
       var_0 thread sword_delivery_point_watch_buy(var_3);
     }
@@ -2307,11 +2447,13 @@ sword_delivery_point_watch_buy(var_0) {
     foreach(var_11, var_8 in var_4) {
       var_9 = 48;
 
-      if(isDefined(var_0.onent.scriptmodelplayanim))
+      if(isDefined(var_0.onent.scriptmodelplayanim)) {
         var_9 = var_0.onent.scriptmodelplayanim;
+      }
 
-      if(isDefined(var_0.offent.scriptmodelplayanim))
+      if(isDefined(var_0.offent.scriptmodelplayanim)) {
         var_9 = var_0.offent.scriptmodelplayanim;
+      }
 
       if(distance(var_0.origin, var_8.origin) > var_9) {
         continue;
@@ -2333,8 +2475,9 @@ sword_delivery_point_watch_buy(var_0) {
     }
     var_12 = 1;
 
-    foreach(var_11, var_14 in var_6)
-    var_12 = var_12 &var_4[var_11] _id_0544::sharemoneyremoveamountbyplayer(var_1, var_14);
+    foreach(var_11, var_14 in var_6) {
+      var_12 = var_12 &var_4[var_11] _id_0544::sharemoneyremoveamountbyplayer(var_1, var_14);
+    }
 
     break;
   }
@@ -2345,16 +2488,18 @@ sword_delivery_point_watch_buy(var_0) {
 sword_delivery_wait_until_activation() {
   var_0 = self;
 
-  while(var_0.sworddeliverypointsactive.size < 7)
+  while(var_0.sworddeliverypointsactive.size < 7) {
     var_0 waittill("sword_delivery_point_activated");
+  }
 }
 
 sword_delivery_handle_revive() {
   var_0 = self;
   var_1 = "zmb_delivery_radius_128";
 
-  if(common_scripts\utility::_id_562E(level.sworddelivery_uselargeradius))
+  if(common_scripts\utility::_id_562E(level.sworddelivery_uselargeradius)) {
     var_1 = "zmb_delivery_radius_256";
+  }
 
   var_2 = _spawnfxforclient(common_scripts\utility::_id_44F5(var_1), level.sworddelivery._id_206B.origin, var_0, anglesToForward(level.sworddelivery._id_206B.angles), anglestoup(level.sworddelivery._id_206B.angles));
   _triggerfx(var_2);
@@ -2363,29 +2508,34 @@ sword_delivery_handle_revive() {
   var_3 = var_0 sword_delivery_revive_wait_for_position();
   var_0 thread sword_delivery_revive();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 sword_delivery_revive_wait_for_position() {
   var_0 = self;
 
   for(;;) {
-    if(!_id_0547::_id_577E(var_0))
+    if(!_id_0547::_id_577E(var_0)) {
       var_0 waittill("enter_last_stand");
+    }
 
     var_1 = 0;
     var_2 = level.sworddelivery.innerradius;
 
-    if(isDefined(level.sworddelivery_checkradius))
+    if(isDefined(level.sworddelivery_checkradius)) {
       var_2 = level.sworddelivery_checkradius;
+    }
 
-    if(_distance2d(var_0.origin, level.sworddelivery._id_206B.origin) > var_2)
+    if(_distance2d(var_0.origin, level.sworddelivery._id_206B.origin) > var_2) {
       var_1 = 1;
+    }
 
     if(!var_1) {
-      if(_abs(var_0.origin[2] - level.sworddelivery._id_206B.origin[2]) > 84)
+      if(_abs(var_0.origin[2] - level.sworddelivery._id_206B.origin[2]) > 84) {
         var_1 = 1;
+      }
     }
 
     if(!var_1) {
@@ -2404,8 +2554,9 @@ sword_delivery_revive() {
   var_0 _id_0586::_id_078C("zom_dlc3_5_zm");
   var_0 thread sword_pull_out_animation();
 
-  if(common_scripts\utility::_id_562E(1))
+  if(common_scripts\utility::_id_562E(1)) {
     var_0 thread sword_delivery_after_death();
+  }
 }
 
 sword_pull_out_animation() {
@@ -2421,8 +2572,9 @@ sword_pull_out_animation() {
     if(issubstr(var_0 getcurrentprimaryweapon(), "zom_dlc3_5_zm")) {
       return;
     }
-    while(var_0 isswitchingweapon())
+    while(var_0 isswitchingweapon()) {
       waitframe();
+    }
 
     var_0 _id_0586::_id_078E("zom_dlc3_5_zm");
     waitframe();
@@ -2446,11 +2598,13 @@ sword_delivery_after_death() {
 sword_delivery_point_on_purchase(var_0) {
   var_1 = self;
 
-  if(isDefined(var_0.offent) && var_0.offent.targetname != "circle_point_struct")
+  if(isDefined(var_0.offent) && var_0.offent.targetname != "circle_point_struct") {
     var_0.offent _meth_8006(var_1);
+  }
 
-  if(isDefined(var_0.onent) && var_0.onent.targetname != "circle_point_struct")
+  if(isDefined(var_0.onent) && var_0.onent.targetname != "circle_point_struct") {
     var_0.onent showtoplayer(var_1);
+  }
 
   thread sword_delivery_point_purchase_vfx(var_0);
   var_1.sworddeliverypointsactive[var_0._id_00D4] = 1;
@@ -2474,7 +2628,7 @@ sword_post_ee_complete_handler() {
   if(!isDefined(var_0.target)) {
     return;
   }
-  var_1 = _getent(var_0.target, "targetname");
+  var_1 = _getEnt(var_0.target, "targetname");
   var_2 = 0;
 
   if(_isonlinegame()) {
@@ -2487,8 +2641,9 @@ sword_post_ee_complete_handler() {
   }
 
   if(!var_2) {
-    foreach(var_4 in level.players)
-    var_1 disableplayeruse(var_4);
+    foreach(var_4 in level.players) {
+      var_1 disableplayeruse(var_4);
+    }
   } else {
     var_8 = spawn("script_model", var_0.origin);
     var_8.angles = var_0.angles;
@@ -2503,7 +2658,7 @@ sword_post_ee_complete_handler() {
         var_8 showtoplayer(var_4);
         var_1 enableplayeruse(var_4);
         var_1 _meth_8660(1, var_0.origin);
-        var_1 sethintstring(&"ZOMBIE_DLC3_PICKUP_SWORD");
+        var_1 setHintString(&"ZOMBIE_DLC3_PICKUP_SWORD");
         level thread sword_post_ee_complete_trig_think(var_1, var_0, var_4);
         continue;
       }

@@ -17,8 +17,9 @@ _id_51CF() {
   level._id_6FBF["Fireman Head"]["extraTimeoutSecs"] = 180;
   level._id_6FBF["Fireman Head"]["outline"] = 1;
 
-  if(!isDefined(level._id_4BDF))
+  if(!isDefined(level._id_4BDF)) {
     level._id_4BDF = [];
+  }
 
   level thread maps\mp\_utility::_id_6F74(::_id_AC25);
 }
@@ -75,8 +76,9 @@ _id_6312() {
 _id_437B(var_0) {
   var_1 = var_0.origin;
 
-  if(isDefined(var_0._id_218D))
+  if(isDefined(var_0._id_218D)) {
     var_1 = var_0._id_218D;
+  }
 
   return var_1;
 }
@@ -86,24 +88,28 @@ _id_5626(var_0) {
   var_2 = _id_437B(var_0);
   var_3 = var_1 getEye();
 
-  if(distancesquared(var_3, var_2) > _squared(300))
+  if(distancesquared(var_3, var_2) > _squared(300)) {
     return 0;
+  }
 
   var_4 = var_2 - var_3;
   var_5 = length(var_4);
 
-  if(var_5 < 1)
+  if(var_5 < 1) {
     return 1;
+  }
 
   var_6 = var_4 / var_5;
   var_7 = anglesToForward(var_1 getplayerangles());
   var_8 = _acos(vectordot(var_7, var_6));
 
-  if(var_8 > 30)
+  if(var_8 > 30) {
     return 0;
+  }
 
-  if(!common_scripts\utility::_id_562E(var_0._id_8C80) && !_sighttracepassed(var_3, var_2, 0, var_0))
+  if(!common_scripts\utility::_id_562E(var_0._id_8C80) && !_sighttracepassed(var_3, var_2, 0, var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -111,14 +117,16 @@ _id_5626(var_0) {
 _id_0984(var_0, var_1, var_2) {
   var_3 = var_0.origin;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1.origin;
+  }
 
   var_0._id_218D = var_3;
   var_0._id_7E39 = var_2;
 
-  if(!isDefined(level._id_4BDF))
+  if(!isDefined(level._id_4BDF)) {
     level._id_4BDF = [];
+  }
 
   level._id_4BDF = common_scripts\utility::_id_0F6F(level._id_4BDF, var_0);
 }
@@ -186,8 +194,9 @@ _id_6360() {
     if(self getcurrentweapon() == "sentryhead_zm") {
       continue;
     }
-    if(_id_314D(self))
+    if(_id_314D(self)) {
       _id_95CB();
+    }
   }
 }
 
@@ -208,8 +217,9 @@ _id_8FA7(var_0, var_1) {
       }
     }
 
-    if(var_3 == 4)
+    if(var_3 == 4) {
       var_3 = 0;
+    }
 
     var_2 = level._id_3C0A[var_3];
     level._id_3C0A = common_scripts\utility::_id_0F9A(level._id_3C0A, var_3);
@@ -228,7 +238,7 @@ _id_8FA7(var_0, var_1) {
   var_2.origin = var_0;
   var_2 makeusable();
   var_2 show();
-  var_2 sethintstring(&"ZOMBIE_NEST_PICKUP_HEAD");
+  var_2 setHintString(&"ZOMBIE_NEST_PICKUP_HEAD");
   var_2 physicslaunchserver(var_2.origin + var_7, var_4, var_5, var_6);
   var_2._id_558F = 0;
   var_2 notify("recycle_fireman_head");
@@ -250,7 +260,7 @@ _id_8FA7(var_0, var_1) {
   var_2 physicsstop();
   var_2 makeunusable();
   var_2 hudoutlinedisable();
-  var_2 sethintstring(&"ZOMBIES_EMPTY_STRING");
+  var_2 setHintString(&"ZOMBIES_EMPTY_STRING");
   var_2 show();
   var_2 ghost();
 }
@@ -263,14 +273,16 @@ _id_633A() {
     foreach(var_2 in level._id_3C0A) {
       if(!common_scripts\utility::_id_562E(var_2._id_558F)) {
         if(var_0.size == 0) {
-          if(isDefined(var_2))
+          if(isDefined(var_2)) {
             var_2 hudoutlinedisable();
+          }
 
           continue;
         }
 
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           var_2 hudoutlineenableforclients(var_0, 0, 1);
+        }
       }
     }
   }

@@ -25,8 +25,9 @@ init() {
 }
 
 _id_9E2F(var_0) {
-  if(maps\mp\_utility::_id_5668())
+  if(maps\mp\_utility::_id_5668()) {
     return 0;
+  }
 
   if(isDefined(self._id_6E6B) && self._id_6E6B) {
     self iprintlnbold(&"KILLSTREAKS_DLC4_CANT_USE_STREAK_WHILE_PARATROOPING");
@@ -44,8 +45,9 @@ _id_9E2F(var_0) {
     wait 0.75;
     var_2 = self getcurrentweapon();
 
-    if(var_2 == "none" || maps\mp\_utility::iskillstreakweapon(var_2))
+    if(var_2 == "none" || maps\mp\_utility::iskillstreakweapon(var_2)) {
       self switchtoweapon(common_scripts\utility::_id_4550());
+    }
 
     return 0;
   }
@@ -61,14 +63,16 @@ _id_92D3(var_0) {
   maps\mp\_utility::freezecontrolswrapper(1);
   var_1 = level._id_5A6B;
 
-  if(isDefined(level._id_47CD))
+  if(isDefined(level._id_47CD)) {
     var_1 = level._id_47CD;
+  }
 
   thread _id_0526::_id_8A61(0.05, level._id_5A7C, var_1);
   _id_0526::_id_A232(1);
 
-  if(level.gametype == "scorestreak_training")
+  if(level.gametype == "scorestreak_training") {
     maps\mp\gametypes\scorestreak_training::_id_244D();
+  }
 
   var_2 = _id_49DA();
   thread _id_3496(var_0, var_2);
@@ -77,24 +81,27 @@ _id_92D3(var_0) {
 _id_3EEA(var_0, var_1) {
   var_2 = 0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
+  }
 
   var_3 = 0;
   var_4 = 1;
   var_5 = 1;
   var_6 = "fritzx_projectile_mp";
 
-  if(var_2)
+  if(var_2) {
     var_6 = "fritzx_projectile_grenadier_mp";
+  }
 
   var_7 = _getweaponexplosionradius(var_6);
   var_8 = 100;
   var_9 = 0;
   var_10 = _func_1FF(var_6, var_9, var_8);
 
-  if(var_10 > var_7)
+  if(var_10 > var_7) {
     var_10 = var_7;
+  }
 
   var_11 = var_10 * 2;
   self._id_5A88 = _func_190("script_model", var_1);
@@ -114,19 +121,23 @@ _id_3EEA(var_0, var_1) {
 _id_3EE9() {
   var_0 = 0;
 
-  if(isDefined(self._id_29E1))
+  if(isDefined(self._id_29E1)) {
     self._id_29E1 _meth_8352(80, var_0);
+  }
 
-  if(isDefined(self._id_5A88))
+  if(isDefined(self._id_5A88)) {
     self._id_5A88 _meth_8352(80, var_0);
+  }
 
   wait 0.08;
 
-  if(isDefined(self._id_29E1))
+  if(isDefined(self._id_29E1)) {
     self._id_29E1 delete();
+  }
 
-  if(isDefined(self._id_5A88))
+  if(isDefined(self._id_5A88)) {
     self._id_5A88 delete();
+  }
 }
 
 _id_49DA() {
@@ -137,24 +148,26 @@ _id_49DA() {
   var_3 = spawn("script_model", var_2._id_92FA);
   var_3 setModel("tag_origin");
   var_3.angles = (90, 0, 0);
-  self cameralinkto(var_3, "tag_origin");
+  self cameralinkTo(var_3, "tag_origin");
   var_4 = spawn("script_model", var_2._id_92FA + (-1 * var_1, 0, -1 * var_0 - 52));
   var_4 notsolid();
 
-  if(isDefined(self.team) && self.team == "allies")
+  if(isDefined(self.team) && self.team == "allies") {
     var_4 setModel("usa_glidebomb_hatchdoors");
-  else
+  } else {
     var_4 setModel("ger_glidebomb_hatchdoors");
+  }
 
   var_4 hide();
   var_4 showtoplayer(self);
   var_4 scriptmodelplayanim("ks_usa_glidebomb_hatchdoors_open");
   var_5 = spawn("script_model", var_2._id_92FA + (-1 * var_1, 0, -1 * var_0));
 
-  if(isDefined(level._id_47CF))
+  if(isDefined(level._id_47CF)) {
     _playfxontagforclients(common_scripts\utility::_id_44F5(level._id_47CF), var_4, "TAG_ORIGIN", self);
-  else
+  } else {
     _playfxontagforclients(common_scripts\utility::_id_44F5("glidebomb_hatchdoors_light_med"), var_4, "TAG_ORIGIN", self);
+  }
 
   thread _id_5A06(var_4);
   var_6 = _getnorthyaw();
@@ -167,20 +180,23 @@ _id_49DA() {
 
   var_7 = "ger_glidebomb_fritzx";
 
-  if(isDefined(self.team) && self.team == "allies")
+  if(isDefined(self.team) && self.team == "allies") {
     var_7 = "usa_glidebomb_azon";
+  }
 
   var_5 setModel(var_7);
   var_5 hide();
   var_5 showtoplayer(self);
 
-  if(isDefined(level._id_47CD))
+  if(isDefined(level._id_47CD)) {
     self lightsetforplayer(level._id_47CD);
+  }
 
   wait 0.7;
 
-  if(isDefined(level._id_47CE))
+  if(isDefined(level._id_47CE)) {
     self lightsetforplayer(level._id_47CE);
+  }
 
   var_8 = spawnStruct();
   var_8._id_3290 = var_4;
@@ -196,10 +212,11 @@ _id_49DA() {
 _id_5A06(var_0) {
   level waittill("bomb_start");
 
-  if(isDefined(level._id_47CF))
+  if(isDefined(level._id_47CF)) {
     _killfxontagforclient(common_scripts\utility::_id_44F5(level._id_47CF), var_0, "TAG_ORIGIN", self);
-  else
+  } else {
     _killfxontagforclient(common_scripts\utility::_id_44F5("glidebomb_hatchdoors_light_med"), var_0, "TAG_ORIGIN", self);
+  }
 }
 
 _id_3496(var_0, var_1) {
@@ -210,13 +227,15 @@ _id_3496(var_0, var_1) {
   if(isDefined(var_4) && var_4) {
     var_5 = "azon_projectile_grenadier_mp";
 
-    if(isDefined(self.team) && self.team == "axis")
+    if(isDefined(self.team) && self.team == "axis") {
       var_5 = "fritzx_projectile_grenadier_mp";
+    }
   } else {
     var_5 = "azon_projectile_mp";
 
-    if(isDefined(self.team) && self.team == "axis")
+    if(isDefined(self.team) && self.team == "axis") {
       var_5 = "fritzx_projectile_mp";
+    }
   }
 
   var_1._id_8203 hide();
@@ -267,18 +286,21 @@ _id_700F() {
 _id_49F7(var_0) {
   var_1 = self;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     thread _id_3EE7(var_1, var_0);
+  }
 
   var_2 = [];
 
   foreach(var_4 in level.players) {
-    if(!isDefined(var_0) || var_4 != var_0)
+    if(!isDefined(var_0) || var_4 != var_0) {
       var_2[var_2.size] = var_4;
+    }
   }
 
-  if(isDefined(var_2) && var_2.size > 0)
+  if(isDefined(var_2) && var_2.size > 0) {
     thread _id_3EE6(var_1, var_2);
+  }
 }
 
 _id_3EE7(var_0, var_1) {
@@ -309,8 +331,9 @@ _id_1E9A(var_0, var_1) {
   var_5 = 0;
   var_6 = _getnorthyaw();
 
-  if(var_6 != 0)
+  if(var_6 != 0) {
     self.angles = self.angles + (0, var_6, 0);
+  }
 
   level notify("bomb_start");
 
@@ -323,10 +346,11 @@ _id_1E9A(var_0, var_1) {
       var_10 = vectorNormalize(var_9);
 
       if(var_4) {
-        if(_getnorthyaw() != 0)
+        if(_getnorthyaw() != 0) {
           var_11 = var_10 * (-1 * var_7) + (-1 * var_8, 0, 0);
-        else
+        } else {
           var_11 = var_10 * (-1 * var_7) + (0, -1 * var_8, 0);
+        }
 
         var_12 = self.angles;
 
@@ -350,11 +374,12 @@ _id_1E9A(var_0, var_1) {
           var_4 = 1;
           var_1 maps\mp\_utility::freezecontrolswrapper(0);
 
-          if(getdvarint("5270", 1))
+          if(getdvarint("5270", 1)) {
             var_1 setclientomnvar("ui_show_fritzx_hud", 1);
+          }
 
           var_1 thread _id_7CF0(var_0, var_1);
-          _playfxontag(common_scripts\utility::_id_44F5("fritz_streamers"), var_0, "tag_tip_fx");
+          _playFXOnTag(common_scripts\utility::_id_44F5("fritz_streamers"), var_0, "tag_tip_fx");
           _playfxontagforclients(common_scripts\utility::_id_44F5("fritz_flying_1P"), var_0, "tag_tip_fx", var_1);
           var_11 = var_10 * (-1 * var_7);
           var_2 = _vectorlerp(var_2, var_11, var_5);
@@ -368,7 +393,7 @@ _id_1E9A(var_0, var_1) {
     }
 
     var_3 = var_0.origin;
-    var_1 playrumbleonentity("damage_light");
+    var_1 playRumbleOnEntity("damage_light");
     waitframe();
   }
 }
@@ -388,8 +413,9 @@ _id_2380(var_0, var_1) {
     _id_0526::_id_A232(0);
     self._id_4B69 = undefined;
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       _playfxontagforclients(common_scripts\utility::_id_44F5("fritz_explosion_1P"), var_0, "tag_tip_fx", self);
+    }
 
     self notify("missile_strike_complete");
   }
@@ -477,8 +503,9 @@ _id_4434(var_0) {
     foreach(var_6 in var_3._id_A280) {
       var_3._id_9099 = var_3._id_9099 + 1;
 
-      if(_bullettracepassed(var_6.origin + (0, 0, 32), var_3.origin, 0, var_6))
+      if(_bullettracepassed(var_6.origin + (0, 0, 32), var_3.origin, 0, var_6)) {
         var_3._id_9099 = var_3._id_9099 + 3;
+      }
 
       if(var_3._id_9099 > var_13._id_9099) {
         var_13 = var_3;
@@ -486,8 +513,9 @@ _id_4434(var_0) {
       }
 
       if(var_3._id_9099 == var_13._id_9099) {
-        if(common_scripts\utility::_id_24A6())
+        if(common_scripts\utility::_id_24A6()) {
           var_13 = var_3;
+        }
       }
     }
   }
@@ -508,14 +536,16 @@ _id_4433() {
   var_1 = common_scripts\utility::_id_44BE("remoteMissileSpawn", "targetname");
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3.target))
-      var_3._id_01A4 = _getent(var_3.target, "targetname");
+    if(isDefined(var_3.target)) {
+      var_3._id_01A4 = _getEnt(var_3.target, "targetname");
+    }
   }
 
-  if(var_1.size > 0)
+  if(var_1.size > 0) {
     var_5 = _id_4434(var_1);
-  else
+  } else {
     var_5 = undefined;
+  }
 
   var_0._id_92FA = undefined;
   var_0._id_9834 = undefined;
@@ -525,8 +555,9 @@ _id_4433() {
     var_0._id_9834 = var_5._id_01A4.origin;
     var_6 = 5500;
 
-    if(isDefined(level._id_7C62))
+    if(isDefined(level._id_7C62)) {
       var_6 = level._id_7C62;
+    }
 
     var_7 = vectorNormalize(var_0._id_92FA - var_0._id_9834);
     var_0._id_92FA = var_7 * var_6 + var_0._id_9834;
@@ -554,8 +585,9 @@ _id_7445() {
   _id_7CEF(self);
   self setclientomnvar("ui_show_fritzx_hud", 0);
 
-  if(!level.gameended || isDefined(self._id_3B4B))
+  if(!level.gameended || isDefined(self._id_3B4B)) {
     _id_0526::_id_745C();
+  }
 
   waitframe();
   maps\mp\gametypes\_hostmigration::_id_A782();
@@ -568,11 +600,13 @@ _id_7445() {
   self cameraunlink();
   maps\mp\_utility::freezecontrolswrapper(0);
 
-  if(maps\mp\_utility::isusingremote())
+  if(maps\mp\_utility::isusingremote()) {
     maps\mp\_utility::clearusingremote();
+  }
 
-  if(getdvarint("311"))
+  if(getdvarint("311")) {
     maps\mp\_utility::setthirdpersondof(1);
+  }
 
   maps\mp\_utility::_id_7447();
 }
@@ -601,8 +635,9 @@ _id_7242(var_0, var_1) {
   if(isDefined(self)) {
     self _meth_8201();
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       _killfxontagforclient(common_scripts\utility::_id_44F5("fritz_flying_1P"), var_1, "tag_tip_fx", self);
+    }
   }
 }
 
@@ -629,10 +664,11 @@ _id_5C81(var_0) {
     if(var_1 >= 1.2) {
       var_0._id_3DBF = var_0._id_3DBF - 4.0;
 
-      if(var_0._id_4C35 < 32)
+      if(var_0._id_4C35 < 32) {
         var_0._id_4C35 = var_0._id_4C35 + 0.7;
-      else
+      } else {
         var_0._id_4C35 = var_0._id_4C35 + 0.2;
+      }
     } else if(var_0._id_4C35 < 32)
       var_0._id_4C35 = var_0._id_4C35 + 0.5;
 

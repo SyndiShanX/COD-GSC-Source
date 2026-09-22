@@ -25,20 +25,24 @@ _id_9FC6() {}
 _id_3E57() {}
 
 _id_2597() {
-  if(!isDefined(level._id_A565))
+  if(!isDefined(level._id_A565)) {
     level._id_A565 = [];
+  }
 
   var_0 = getEntArray("trigger_multiple_light_visionset", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.canmantle))
+    if(isDefined(var_2.canmantle)) {
       _id_2598(var_2.canmantle);
+    }
 
-    if(isDefined(var_2.ismantling))
+    if(isDefined(var_2.ismantling)) {
       _id_2598(var_2.ismantling);
+    }
 
-    if(isDefined(var_2.forcemantle))
+    if(isDefined(var_2.forcemantle)) {
       _id_2598(var_2.forcemantle);
+    }
   }
 }
 
@@ -52,8 +56,9 @@ _id_2598(var_0) {
 }
 
 _id_27C7(var_0) {
-  if(!isDefined(level._id_A56A))
+  if(!isDefined(level._id_A56A)) {
     level._id_A56A = [];
+  }
 
   var_1 = spawnStruct();
   var_1.name = var_0;
@@ -83,8 +88,9 @@ _id_278D(var_0) {
 }
 
 _id_27C6(var_0) {
-  if(!isDefined(level._id_A565))
+  if(!isDefined(level._id_A565)) {
     level._id_A565 = [];
+  }
 
   var_1 = spawnStruct();
   var_1.name = var_0;
@@ -155,17 +161,19 @@ _id_4F63() {
     var_1[var_7].fontscale = 2;
     var_1[var_7].sort = 20;
 
-    if(var_7 == var_3)
+    if(var_7 == var_3) {
       var_1[var_7].alpha = 1;
-    else
+    } else {
       var_1[var_7].alpha = var_6;
+    }
 
     var_1[var_7].x = 20;
     var_1[var_7].y = var_4;
     var_1[var_7] _id_06DC(".");
 
-    if(var_7 == var_3)
+    if(var_7 == var_3) {
       var_5 = var_5 * -1;
+    }
 
     var_6 = var_6 + var_5;
     var_4 = var_4 - var_2;
@@ -175,8 +183,9 @@ _id_4F63() {
 }
 
 _id_0681() {
-  if(!isDefined(level._id_8309))
+  if(!isDefined(level._id_8309)) {
     level._id_8309 = [];
+  }
 
   var_0 = newhudelem();
   level._id_8309[level._id_8309.size] = var_0;
@@ -295,8 +304,9 @@ _id_8659(var_0) {
 }
 
 _id_419B(var_0) {
-  if(!isDefined(level._id_A565))
+  if(!isDefined(level._id_A565)) {
     level._id_A565 = [];
+  }
 
   var_1 = level._id_A565[var_0];
   return var_1;
@@ -323,14 +333,17 @@ _id_7406() {
 _id_1DCA(var_0, var_1) {
   var_2 = level.player buttonPressed(var_0);
 
-  if(!var_2)
+  if(!var_2) {
     var_2 = level.player buttonPressed(var_1);
+  }
 
-  if(!isDefined(level._id_1DDF[var_0]))
+  if(!isDefined(level._id_1DDF[var_0])) {
     level._id_1DDF[var_0] = 0;
+  }
 
-  if(gettime() < level._id_1DDF[var_0])
+  if(gettime() < level._id_1DDF[var_0]) {
     return 0;
+  }
 
   level._id_1DDF[var_0] = gettime() + 400;
   return var_2;
@@ -368,8 +381,9 @@ _id_0FD1() {
 _id_0FCE() {}
 
 _id_27A5(var_0) {
-  if(!isDefined(level._id_5D21))
+  if(!isDefined(level._id_5D21)) {
     level._id_5D21 = [];
+  }
 
   var_1 = spawnStruct();
   var_1.name = var_0;
@@ -384,14 +398,16 @@ getvisionsetindexfromname(var_0) {
   var_1 = 0;
 
   foreach(var_4, var_3 in level._id_A565) {
-    if(var_4 == var_0)
+    if(var_4 == var_0) {
       return var_1;
+    }
 
     var_1++;
   }
 
   var_5 = "";
 
-  foreach(var_4, var_3 in level._id_A565)
-  var_5 = var_5 + "'" + var_4 + "'";
+  foreach(var_4, var_3 in level._id_A565) {
+    var_5 = var_5 + "'" + var_4 + "'";
+  }
 }

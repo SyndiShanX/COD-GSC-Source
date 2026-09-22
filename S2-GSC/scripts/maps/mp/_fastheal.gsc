@@ -9,8 +9,9 @@ _id_A908() {
   self endon("death");
   self endon("faux_spawn");
 
-  if(!isDefined(level._id_3A58))
+  if(!isDefined(level._id_3A58)) {
     _id_3A57();
+  }
 
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
@@ -31,8 +32,9 @@ _id_3A57() {
 }
 
 _id_9E29() {
-  if(!isDefined(self._id_3A58))
+  if(!isDefined(self._id_3A58)) {
     _id_3A57();
+  }
 
   _id_7D5D();
   thread _id_92CC();
@@ -54,16 +56,18 @@ _id_92CC() {
   self._id_98E2 = undefined;
   self._id_56E9 = 0;
 
-  if(isDefined(self._id_3A58._id_6CA4))
+  if(isDefined(self._id_3A58._id_6CA4)) {
     self._id_3A58._id_6CA4 destroy();
+  }
 
   self notify("EndFastHeal");
 }
 
 _id_7D5D() {
   if(isDefined(self._id_56E9) && self._id_56E9 == 1) {
-    if(isDefined(self._id_3A58._id_6CA4))
+    if(isDefined(self._id_3A58._id_6CA4)) {
       self._id_3A58._id_6CA4 destroy();
+    }
 
     self._id_98E1 = undefined;
     self._id_98E2 = undefined;
@@ -78,8 +82,9 @@ _id_63BF() {
   self._id_98E2 = undefined;
   self._id_56E9 = 0;
 
-  if(isDefined(self._id_3A58._id_6CA4))
+  if(isDefined(self._id_3A58._id_6CA4)) {
     self._id_3A58._id_6CA4 destroy();
+  }
 }
 
 _id_7723() {

@@ -32,7 +32,7 @@ _id_AAED() {
     }
     var_3 = var_2[randomint(var_2.size)];
     var_4 = "j_head";
-    _playfxontag(common_scripts\utility::_id_44F5("storm_plasma_unstable"), var_0, "tag_origin");
+    _playFXOnTag(common_scripts\utility::_id_44F5("storm_plasma_unstable"), var_0, "tag_origin");
     var_0 _id_0378::_id_8D74("aud_ww_projectile_zap");
     _physicsexplosioncylinder(var_0.origin, _id_43EC(), 0, 1);
     var_0 _id_0580::_id_98F7(var_3);
@@ -49,11 +49,13 @@ _id_9430() {
   var_3 = var_2 / var_1;
   var_4 = _id_405C();
 
-  if(var_4 > var_3)
+  if(var_4 > var_3) {
     var_4 = var_3;
+  }
 
-  if(var_3 > 0)
-    var_0 moveto(var_0._id_2DA7, var_3, var_4, 0);
+  if(var_3 > 0) {
+    var_0 moveTo(var_0._id_2DA7, var_3, var_4, 0);
+  }
 
   var_0._id_2A92 = _id_0580::_id_4385() + var_3;
 }
@@ -74,18 +76,19 @@ _id_9435() {
   }
 
   _id_0580::_id_98E9(var_0.origin, _id_43EC(), var_0.player, undefined, var_0._id_953E, (0.168627, 0.294118, 0.435294));
-  _playfxontag(common_scripts\utility::_id_44F5("storm_plasma_unstable"), var_0, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("storm_plasma_unstable"), var_0, "tag_origin");
   var_0 _id_0378::_id_8D74("aud_storm_proj_loop_end");
 
-  if(var_0._id_9B7F < 1)
+  if(var_0._id_9B7F < 1) {
     wait(_id_4192());
+  }
 
   var_0 delete();
 }
 
 _id_9431() {
   var_0 = self;
-  _playfxontag(common_scripts\utility::_id_44F5("storm_plasma_stable"), var_0, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("storm_plasma_stable"), var_0, "tag_origin");
   var_0 _id_0378::_id_8D74("aud_storm_proj_loop_strt");
   var_0 _id_9430();
   var_0 thread _id_AAED();

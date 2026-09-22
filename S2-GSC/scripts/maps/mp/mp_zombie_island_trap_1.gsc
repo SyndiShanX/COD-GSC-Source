@@ -4,8 +4,9 @@
 *******************************************************/
 
 trap_1(var_0) {
-  if(isDefined(level.zmb_on_any_trap_activated))
+  if(isDefined(level.zmb_on_any_trap_activated)) {
     [[level.zmb_on_any_trap_activated]]();
+  }
 
   var_1 = common_scripts\utility::_id_44BE(var_0.target, "targetname");
 
@@ -16,8 +17,9 @@ trap_1(var_0) {
     if(!isDefined(var_3._id_0165)) {
       continue;
     }
-    if(_id_0547::_id_5565(var_3._id_0165, "fx_trap"))
+    if(_id_0547::_id_5565(var_3._id_0165, "fx_trap")) {
       var_3 thread aud_play_spike_sound();
+    }
 
     if(var_3._id_0165 == "spike_damage") {
       var_0 thread trap_trigger_watch(var_3);
@@ -66,8 +68,9 @@ trap_1_damage_fx_watch(var_0) {
       if(isDefined(var_2._id_66D3) && var_2._id_66D3 > gettime()) {
         continue;
       }
-      if(var_1 + 3000 > gettime())
+      if(var_1 + 3000 > gettime()) {
         continue;
+      }
     } else {
       playFX(common_scripts\utility::_id_44F5("zmb_isl_med_trap_gib_rnr"), var_2.origin);
       var_4 = var_2 modify_damage_to_island_zombie_types(5);
@@ -77,14 +80,17 @@ trap_1_damage_fx_watch(var_0) {
 }
 
 modify_damage_to_island_zombie_types(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
-  if(!isDefined(self.maxhealth))
+  if(!isDefined(self.maxhealth)) {
     return 0;
+  }
 
-  if(_id_0547::_id_5565(self._id_0A4B, "zombie_fireman") || _id_0547::_id_5565(self._id_0A4B, "zombie_assassin") || _id_0547::_id_5565(self._id_0A4B, "zombie_heavy"))
+  if(_id_0547::_id_5565(self._id_0A4B, "zombie_fireman") || _id_0547::_id_5565(self._id_0A4B, "zombie_assassin") || _id_0547::_id_5565(self._id_0A4B, "zombie_heavy")) {
     return int(self.maxhealth * 0.15 / var_0);
-  else
+  } else {
     return self.health + 666;
+  }
 }

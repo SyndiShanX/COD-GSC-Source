@@ -10,8 +10,9 @@ init() {
   var_0 = common_scripts\utility::_id_46B7("birds", "script_noteworthy");
   level._id_AB5A = var_0.size * 0.2;
 
-  foreach(var_2 in var_0)
-  var_2 thread _id_1769();
+  foreach(var_2 in var_0) {
+    var_2 thread _id_1769();
+  }
 }
 
 _id_1769() {
@@ -46,11 +47,13 @@ _id_1769() {
   for(;;) {
     var_7 = 1;
 
-    if(var_7)
+    if(var_7) {
       wait(_randomfloatrange(10.0, 30.0));
+    }
 
-    while(level._id_AB58 >= level._id_AB5A || _id_0F0B(390) || _id_0F0D(0))
+    while(level._id_AB58 >= level._id_AB5A || _id_0F0B(390) || _id_0F0D(0)) {
       wait 5;
+    }
 
     thread _id_1764();
     thread _id_1766();
@@ -63,15 +66,17 @@ _id_1769() {
     var_10 = gettime() * 0.001;
     var_11 = 30;
 
-    if(var_10 - level._id_AB59 < var_11)
+    if(var_10 - level._id_AB59 < var_11) {
       var_8 = "never_mind";
+    }
 
     switch (var_8) {
       case "fly_away":
         level._id_AB59 = var_10;
 
-        if(isPlayer(var_9))
+        if(isPlayer(var_9)) {
           _id_055B::_id_5976(var_9);
+        }
 
         thread _id_8FAA(var_9);
         thread _id_3D7C();
@@ -92,8 +97,9 @@ _id_3D7C() {
   wait 0.25;
 
   foreach(var_1 in level.players) {
-    if(isDefined(var_1) && var_1 istouching(self._id_78CB) && var_1 _id_72E5(self._id_AA2A, 0))
+    if(isDefined(var_1) && var_1 istouching(self._id_78CB) && var_1 _id_72E5(self._id_AA2A, 0)) {
       var_1 thread _id_3D7B();
+    }
   }
 }
 
@@ -123,10 +129,11 @@ _id_1763(var_0, var_1) {
   var_5 = undefined;
 
   if(isPlayer(var_1)) {
-    if(distance(var_1.origin, self.origin) > 96)
+    if(distance(var_1.origin, self.origin) > 96) {
       var_5 = common_scripts\utility::_id_4461(self.origin, maps\mp\agents\_agent_utility::_id_43FD("all"));
-    else
+    } else {
       var_5 = var_1;
+    }
   }
 
   if(isDefined(var_1)) {
@@ -176,8 +183,9 @@ _id_1760() {
       if(distance(var_7.origin, self.origin) < var_0 + 128) {
         var_4 = 1;
 
-        if(var_7.health < var_5)
+        if(var_7.health < var_5) {
           var_5 = var_7.health;
+        }
       }
     }
 
@@ -186,10 +194,11 @@ _id_1760() {
       continue;
     }
 
-    if(var_4)
+    if(var_4) {
       var_9 = var_1;
-    else
+    } else {
       var_9 = var_2;
+    }
 
     radiusdamage(self.origin, var_0, var_9, var_9 * 0.5, undefined, undefined, undefined, undefined, 0);
     break;
@@ -197,24 +206,28 @@ _id_1760() {
 }
 
 _id_0F0B(var_0) {
-  if(!isDefined(level.players))
+  if(!isDefined(level.players)) {
     return 0;
+  }
 
   foreach(var_2 in level.players) {
-    if(distance(var_2.origin, self.origin) < var_0)
+    if(distance(var_2.origin, self.origin) < var_0) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 _id_0F0D(var_0) {
-  if(var_0 == 0)
+  if(var_0 == 0) {
     return 0;
+  }
 
   foreach(var_2 in maps\mp\agents\_agent_utility::_id_43FD("all")) {
-    if(distance(var_2.origin, self.origin) < var_0)
+    if(distance(var_2.origin, self.origin) < var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -258,8 +271,9 @@ _id_1768(var_0) {
 
     var_0 notify("never_mind");
 
-    while(isalive(var_2) && var_2 istouching(self))
+    while(isalive(var_2) && var_2 istouching(self)) {
       wait 1;
+    }
 
     wait 10;
   }
@@ -271,8 +285,9 @@ _id_1764() {
   for(;;) {
     wait 5;
 
-    if(_id_0F0D(0))
+    if(_id_0F0D(0)) {
       self notify("birds_command", "never_mind");
+    }
   }
 }
 

@@ -8,7 +8,7 @@ trap_cage_blitz(var_0) {
   var_2 = common_scripts\utility::_id_46B5("struct_trap_cage_blitz", "script_noteworthy");
   var_3 = common_scripts\utility::_id_46B5("cage_spark_fx_trap", "script_noteworthy");
   var_3 thread trap_cage_idle_spark();
-  var_4 = _getent("cage_damage", "script_noteworthy");
+  var_4 = _getEnt("cage_damage", "script_noteworthy");
   var_4._id_9C92 = var_0;
   var_4._id_9CBB = "trap_cage_blitz";
   wait 0.3;
@@ -17,19 +17,23 @@ trap_cage_blitz(var_0) {
   var_6 = common_scripts\utility::_id_46B7("cage_current_fx_trap", "script_noteworthy");
   _id_0378::_id_8D74("start_trap_cage", 1.0, var_1);
 
-  foreach(var_8 in var_5)
-  var_8 thread trap_cage_arcs();
+  foreach(var_8 in var_5) {
+    var_8 thread trap_cage_arcs();
+  }
 
-  foreach(var_8 in var_6)
-  var_8 thread trap_cage_current();
+  foreach(var_8 in var_6) {
+    var_8 thread trap_cage_current();
+  }
 
   wait(var_1);
 
-  foreach(var_8 in var_5)
-  var_8 notify("stop_fx");
+  foreach(var_8 in var_5) {
+    var_8 notify("stop_fx");
+  }
 
-  foreach(var_8 in var_6)
-  var_8 notify("stop_fx");
+  foreach(var_8 in var_6) {
+    var_8 notify("stop_fx");
+  }
 
   _id_0378::_id_8D74("stop_trap_cage");
   waitframe();

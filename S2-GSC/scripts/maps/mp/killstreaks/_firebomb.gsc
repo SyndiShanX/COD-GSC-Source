@@ -60,17 +60,19 @@ _id_749B(var_0, var_1) {
   _triggerfx(var_2);
   wait 12;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 _id_749A(var_0, var_1) {
   var_2 = _id_0380::_id_6842("ks_firebomb_burn_loop", undefined, var_0, 2);
 
-  if(var_1)
+  if(var_1) {
     wait 16;
-  else
+  } else {
     wait 12;
+  }
 
   _id_0380::_id_6850(var_2, 1.5);
 }
@@ -87,10 +89,11 @@ _id_6393(var_0, var_1, var_2, var_3, var_4) {
   var_7 = (var_7[0], var_7[1], 0);
   var_7 = vectorNormalize(var_7);
 
-  if(var_4)
+  if(var_4) {
     var_8 = 16;
-  else
+  } else {
     var_8 = 12;
+  }
 
   while(var_6 < var_8) {
     foreach(var_10 in level.players) {
@@ -119,13 +122,15 @@ _id_6393(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_73E1(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   var_3 = var_0 getorigin();
 
-  if(var_3[2] - var_1[2] > 256)
+  if(var_3[2] - var_1[2] > 256) {
     return 0;
+  }
 
   var_4 = 103;
   var_5 = _id_2825(var_1, var_2, var_4);
@@ -144,10 +149,11 @@ _id_2825(var_0, var_1, var_2) {
 }
 
 _id_740F(var_0, var_1) {
-  if(var_0.origin[2] <= var_1[2])
+  if(var_0.origin[2] <= var_1[2]) {
     return _bullettracepassed(var_0.origin + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0) && _bullettracepassed(var_1 + (0, 0, 10), (var_0.origin[0], var_0.origin[1], var_1[2] + 10), 0, var_0);
-  else
+  } else {
     return _bullettracepassed(var_1 + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0) && _bullettracepassed(var_0.origin + (0, 0, 10), (var_1[0], var_1[1], var_0.origin[2] + 10), 0, var_0);
+  }
 }
 
 _id_7542(var_0, var_1) {

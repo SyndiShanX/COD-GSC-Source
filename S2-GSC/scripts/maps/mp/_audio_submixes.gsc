@@ -11,8 +11,9 @@ _id_524C() {
 _id_1E76(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   foreach(var_12 in level.players) {
     if(_issplitscreen() == 1) {
-      if(var_12 issplitscreenplayer() == 1 && var_12 issplitscreenplayerprimary() == 0)
+      if(var_12 issplitscreenplayer() == 1 && var_12 issplitscreenplayerprimary() == 0) {
         continue;
+      }
     }
 
     if(isDefined(var_0) == 1 && isDefined(var_12.pers["team"]) == 1 && var_12.pers["team"] != var_0) {
@@ -23,11 +24,13 @@ _id_1E76(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 submixexistsquick(var_0) {
-  if(!isDefined(level._id_94CA))
+  if(!isDefined(level._id_94CA)) {
     level._id_94CA = [];
+  }
 
-  if(isDefined(level._id_94CA[var_0]))
+  if(isDefined(level._id_94CA[var_0])) {
     return level._id_94CA[var_0];
+  }
 
   var_1 = _id_02EF::_id_94CA(var_0);
   level._id_94CA[var_0] = var_1;
@@ -40,8 +43,9 @@ _sfx_player_submix_init() {
   if(isDefined(var_0) == 0) {
     return;
   }
-  if(isDefined(var_0._audiosubmixes) == 0)
+  if(isDefined(var_0._audiosubmixes) == 0) {
     var_0._audiosubmixes = [];
+  }
 }
 
 _id_8A9D(var_0, var_1, var_2, var_3) {
@@ -55,16 +59,19 @@ _id_8A9D(var_0, var_1, var_2, var_3) {
   if(submixexistsquick(var_0) == 0) {
     return;
   }
-  if(isDefined(var_1) == 0)
+  if(isDefined(var_1) == 0) {
     var_1 = 0.1;
+  }
 
-  if(isDefined(var_2) == 0)
+  if(isDefined(var_2) == 0) {
     var_2 = 1.0;
+  }
 
-  if(isDefined(var_3) == 1)
+  if(isDefined(var_3) == 1) {
     var_4 clientaddsoundsubmix(var_0, var_1, var_2, var_3);
-  else
+  } else {
     var_4 clientaddsoundsubmix(var_0, var_1, var_2);
+  }
 
   var_4._audiosubmixes[var_0] = var_2;
   var_4 _id_8A9E(var_0, var_2, var_1);
@@ -106,8 +113,9 @@ _id_8A9E(var_0, var_1, var_2) {
   if(submixexistsquick(var_0) == 0) {
     return;
   }
-  if(isDefined(var_3._audiosubmixes[var_0]) == 0)
+  if(isDefined(var_3._audiosubmixes[var_0]) == 0) {
     var_3 _id_8A9D(var_0, 0.0, 0.0);
+  }
 
   if(isDefined(var_2) == 1) {
     var_3 clientblendsoundsubmix(var_0, var_1, var_2);
@@ -164,11 +172,13 @@ _id_06B6(var_0, var_1, var_2, var_3) {
 }
 
 _id_7A39(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.5;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "shared_default";
+  }
 
   if(!isDefined(level._id_05AB)) {
     level._id_05AB = spawnStruct();
@@ -180,13 +190,15 @@ _id_7A39(var_0, var_1, var_2, var_3) {
   var_3 = var_3 * 5;
   var_4 = 0;
 
-  for(var_5 = 0; var_5 < var_3; var_5++)
+  for(var_5 = 0; var_5 < var_3; var_5++) {
     var_4 = var_4 + _randomfloatrange(var_0, var_1);
+  }
 
   var_6 = var_4 / var_3;
 
-  if(var_6 > var_1 * 0.5)
+  if(var_6 > var_1 * 0.5) {
     var_6 = var_6 - var_1;
+  }
 
   var_6 = var_6 + var_1 * 0.5;
   var_7 = level._id_05AB.label;
@@ -221,10 +233,11 @@ _id_06C6(var_0, var_1, var_2) {
   }
   var_3 = self;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 waittill(var_0);
-  else
+  } else {
     level waittill(var_0);
+  }
 
   _id_02F0::enableammogeneration(var_3, var_1);
 }
@@ -234,8 +247,9 @@ setturretdismountorg(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9 = _id_02F0::_id_800B(var_0, var_8, var_6, var_5, var_2, var_7);
 
   if(isDefined(var_9) == 1) {
-    if(isDefined(var_4) == 1)
+    if(isDefined(var_4) == 1) {
       _id_02F0::disableplayeruse(var_9, var_4, 0.0);
+    }
 
     var_9 thread _id_06C6(var_1, var_3, var_8);
   }
@@ -247,8 +261,9 @@ _id_7FFA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = _id_02F0::_id_800A(var_0, var_1, var_3, var_6);
 
   if(isDefined(var_7) == 1) {
-    if(isDefined(var_5) == 1)
+    if(isDefined(var_5) == 1) {
       _id_02F0::disableplayeruse(var_7, var_5, 0.0);
+    }
 
     var_7 thread _id_06C6(var_2, var_4);
   }
@@ -260,8 +275,9 @@ _id_7FF9(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = _id_02F0::_id_800A(var_0, undefined, var_2, var_5);
 
   if(isDefined(var_6) == 1) {
-    if(isDefined(var_4) == 1)
+    if(isDefined(var_4) == 1) {
       _id_02F0::disableplayeruse(var_6, var_4, 0.0);
+    }
 
     var_6 thread _id_06C6(var_1, var_3);
   }
@@ -274,8 +290,9 @@ playershow(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9 = _id_02F0::_id_800B(var_0, var_8, var_6, var_5, var_2, var_7);
 
   if(isDefined(var_9) == 1) {
-    if(isDefined(var_4) == 1)
+    if(isDefined(var_4) == 1) {
       _id_02F0::disableplayeruse(var_9, var_4, 0.0);
+    }
 
     var_9 thread _id_06C6(var_1, var_3, var_8);
   }
@@ -287,8 +304,9 @@ _id_8002(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = _id_02F0::_id_800A(var_0, undefined, var_2, var_5);
 
   if(isDefined(var_6) == 1) {
-    if(isDefined(var_4) == 1)
+    if(isDefined(var_4) == 1) {
       _id_02F0::disableplayeruse(var_6, var_4, 0.0);
+    }
 
     var_6 thread _id_06C6(var_1, var_3);
   }
@@ -297,8 +315,9 @@ _id_8002(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_6262(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_4) == 1 && var_4 > 0.0)
+  if(isDefined(var_4) == 1 && var_4 > 0.0) {
     wait(var_4);
+  }
 
   _id_02EF::_id_8AB8(var_0, var_1, var_2, var_3, var_5);
 }

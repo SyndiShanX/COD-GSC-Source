@@ -100,6 +100,7 @@ main() {
   level._effect["zmb_med_trap_gib"] = loadfx("vfx/zombie/zmb_med_trap_gib");
   level._effect["dlc_zmb_dig_02_spike_trap_on"] = loadfx("vfx/map/mp_zombie_dig02/dlc_zmb_dig_02_spike_trap_on");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_zombie_dig_02_srv_fx::main();
+  }
 }

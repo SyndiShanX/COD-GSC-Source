@@ -48,8 +48,9 @@ _id_280D(var_0, var_1, var_2, var_3) {
   var_4._id_6642 = 0;
   var_4._id_2F74 = 0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4._id_5A16 = var_3;
+  }
 
   return var_4;
 }
@@ -73,11 +74,13 @@ _id_2D8F(var_0, var_1) {
 }
 
 _id_2D8E(var_0) {
-  foreach(var_2 in level.players)
-  _id_2D8F(var_2, var_0);
+  foreach(var_2 in level.players) {
+    _id_2D8F(var_2, var_0);
+  }
 
-  if(isDefined(var_0._id_5A16))
+  if(isDefined(var_0._id_5A16)) {
     level notify(var_0._id_5A16);
+  }
 }
 
 _id_8655(var_0, var_1) {

@@ -116,28 +116,32 @@ main_engine_loop(var_0) {
 
       self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 0.99;
 
-      if(self._id_11CB.engine_pitch_multiplier < 0.8)
+      if(self._id_11CB.engine_pitch_multiplier < 0.8) {
         self._id_11CB.engine_pitch_multiplier = 0.85;
+      }
 
       self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 1.1;
 
-      if(self._id_11CB.engine_vol_multiplier > 1)
+      if(self._id_11CB.engine_vol_multiplier > 1) {
         self._id_11CB.engine_vol_multiplier = 1;
+      }
     } else if(var_6 < 0.5 && var_6 >= 0 && self._id_11CB.pitching == 0) {
       if(self._id_11CB.p47_throttle_on == 1 || self._id_11CB.p47_brake_on == 1) {
         self._id_11CB.p47_throttle_on = 0;
         self._id_11CB.p47_brake_on = 0;
       }
 
-      if(self._id_11CB.engine_pitch_multiplier > 1)
+      if(self._id_11CB.engine_pitch_multiplier > 1) {
         self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 0.99;
-      else if(self._id_11CB.engine_pitch_multiplier < 1)
+      } else if(self._id_11CB.engine_pitch_multiplier < 1) {
         self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 1.01;
+      }
 
-      if(self._id_11CB.engine_vol_multiplier > var_4)
+      if(self._id_11CB.engine_vol_multiplier > var_4) {
         self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 0.99;
-      else if(self._id_11CB.engine_vol_multiplier < var_4)
+      } else if(self._id_11CB.engine_vol_multiplier < var_4) {
         self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 1.01;
+      }
     } else if(var_6 >= 0.5 || self._id_11CB.pitching == 1) {
       if(self._id_11CB.p47_throttle_on == 0) {
         self._id_11CB.p47_throttle_on = 1;
@@ -147,16 +151,19 @@ main_engine_loop(var_0) {
 
       self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 1.01;
 
-      if(self._id_11CB.engine_pitch_multiplier > 1.4)
+      if(self._id_11CB.engine_pitch_multiplier > 1.4) {
         self._id_11CB.engine_pitch_multiplier = self._id_11CB.engine_pitch_multiplier * 0.998;
+      }
 
-      if(self._id_11CB.engine_pitch_multiplier > 1.6)
+      if(self._id_11CB.engine_pitch_multiplier > 1.6) {
         self._id_11CB.engine_pitch_multiplier = 1.6;
+      }
 
       self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 1.1;
 
-      if(self._id_11CB.engine_vol_multiplier > 1)
+      if(self._id_11CB.engine_vol_multiplier > 1) {
         self._id_11CB.engine_vol_multiplier = 1;
+      }
     }
 
     _id_0380::_id_684D(var_0, self._id_11CB.engine_pitch_multiplier, 0.05);
@@ -164,17 +171,20 @@ main_engine_loop(var_0) {
     if(isDefined(self._id_11CB.duck_engine_for_turn) && self._id_11CB.duck_engine_for_turn == 1) {
       self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier * 0.98;
 
-      if(self._id_11CB.engine_vol_multiplier < 0.1)
+      if(self._id_11CB.engine_vol_multiplier < 0.1) {
         self._id_11CB.engine_vol_multiplier = 0.1;
+      }
     }
 
     if(isDefined(self._id_11CB.duck_engine_for_turn) && self._id_11CB.duck_engine_for_turn == 0) {
-      if(self._id_11CB.engine_vol_multiplier < var_4)
+      if(self._id_11CB.engine_vol_multiplier < var_4) {
         self._id_11CB.engine_vol_multiplier = self._id_11CB.engine_vol_multiplier + 0.1;
+      }
     }
 
-    if(self._id_11CB.engine_vol_multiplier > 1)
+    if(self._id_11CB.engine_vol_multiplier > 1) {
       self._id_11CB.engine_vol_multiplier = 1;
+    }
 
     _id_0380::_id_684E(var_0, self._id_11CB.engine_vol_multiplier, 0.05);
     waitframe();
@@ -221,11 +231,13 @@ _id_1585(var_0, var_1) {
     var_30 = _id_02EF::startignoringspotlight(var_27, var_6, var_19, 0.0, 1);
     var_31 = var_30;
 
-    if(isDefined(var_16))
+    if(isDefined(var_16)) {
       var_17 = _abs(var_26 - var_16);
+    }
 
-    if(isDefined(var_11))
+    if(isDefined(var_11)) {
       var_14 = _abs(var_28 - var_11);
+    }
 
     var_32 = _id_02EF::startignoringspotlight(var_14, 0, 1.5, 0, 1);
 
@@ -234,29 +246,33 @@ _id_1585(var_0, var_1) {
         var_4 = 1;
         var_18 = 0;
 
-        if(isDefined(self._id_11CB._id_05C4))
+        if(isDefined(self._id_11CB._id_05C4)) {
           _id_0380::_id_6850(self._id_11CB._id_05C4, 1.0);
+        }
 
         self._id_11CB._id_05C4 = _id_0380::_id_6844("blg_p47_banking", var_2, self);
       } else if(var_4 == 0) {
         var_4 = 1;
         var_18 = 0;
 
-        if(isDefined(self._id_11CB._id_05C4))
+        if(isDefined(self._id_11CB._id_05C4)) {
           _id_0380::_id_6850(self._id_11CB._id_05C4, 1.0);
+        }
 
         self._id_11CB._id_05C4 = _id_0380::_id_6844("blg_p47_banking", var_2, self);
       }
 
-      if(var_25 < 1)
+      if(var_25 < 1) {
         var_25 = var_25 + 0.03;
+      }
     }
 
     var_18 = var_18 + 1;
 
     if(var_27 < var_7) {
-      if(var_4 == 1)
+      if(var_4 == 1) {
         var_4 = 0;
+      }
 
       if(var_25 > 0.05) {
         var_25 = var_25 - 0.03;
@@ -271,21 +287,25 @@ _id_1585(var_0, var_1) {
         self._id_11CB.duck_engine_for_turn = 1;
         var_15 = 1;
 
-        if(var_23 < 1)
+        if(var_23 < 1) {
           var_23 = var_23 + 0.02;
+        }
 
-        if(var_24 < 1.6)
+        if(var_24 < 1.6) {
           var_24 = var_24 + 0.004;
+        }
       }
     } else {
       var_22 = 0;
       self._id_11CB.duck_engine_for_turn = 0;
 
-      if(var_23 > 0)
+      if(var_23 > 0) {
         var_23 = var_23 - 0.1;
+      }
 
-      if(var_24 > 1)
+      if(var_24 > 1) {
         var_24 = var_24 - 0.01;
+      }
 
       if(var_15 == 1) {
         var_15 = 0;
@@ -300,8 +320,9 @@ _id_1585(var_0, var_1) {
         self._id_11CB.pitching = 1;
         var_13 = 0;
 
-        if(var_4 == 0)
+        if(var_4 == 0) {
           _id_0380::_id_6844("blg_p47_pitching_start", var_2, self);
+        }
       }
     } else {
       var_13 = var_13 + 1;
@@ -312,10 +333,11 @@ _id_1585(var_0, var_1) {
       }
     }
 
-    if(var_27 > var_8 && var_29 <= -0.9)
+    if(var_27 > var_8 && var_29 <= -0.9) {
       self._id_11CB.hard_bank = 1;
-    else
+    } else {
       self._id_11CB.hard_bank = 0;
+    }
 
     if(isDefined(self._id_11CB._id_05C4)) {
       var_33 = _id_02EF::startignoringspotlight(var_30, 0, 1, 0.05, 1);
@@ -324,17 +346,20 @@ _id_1585(var_0, var_1) {
       _id_0380::_id_684D(self._id_11CB._id_05C4, var_34, 0.05);
     }
 
-    if(var_23 > 1)
+    if(var_23 > 1) {
       var_23 = 1;
+    }
 
-    if(var_23 < 0)
+    if(var_23 < 0) {
       var_23 = 0;
+    }
 
     _id_0380::_id_684E(var_0, var_23, 0.05);
     _id_0380::_id_684D(var_0, var_24, 0.05);
 
-    if(var_25 > 1)
+    if(var_25 > 1) {
       var_25 = 1;
+    }
 
     _id_0380::_id_684E(var_1, var_25, 0.05);
     var_11 = var_28;
@@ -348,13 +373,15 @@ _id_AA25(var_0) {
   var_1 = 0.3;
 
   while(isDefined(self) == 1) {
-    if(self._id_11CB.p47_throttle_on == 1 || self._id_11CB.hard_bank == 1)
+    if(self._id_11CB.p47_throttle_on == 1 || self._id_11CB.hard_bank == 1) {
       var_1 = var_1 + 0.02;
-    else if(var_1 > 0.3)
+    } else if(var_1 > 0.3) {
       var_1 = var_1 - 0.02;
+    }
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       var_1 = 1;
+    }
 
     _id_0380::_id_684E(var_0, var_1, 0.05);
     waitframe();
@@ -410,10 +437,11 @@ raid_flyby_watcher(var_0) {
       if(var_20 == self || !isDefined(var_22)) {
         continue;
       }
-      if(var_20.team == self.team)
+      if(var_20.team == self.team) {
         var_11 = var_12;
-      else
+      } else {
         var_11 = 1;
+      }
 
       if(!isDefined(self.plane_data[var_21])) {
         self.plane_data[var_21] = spawnStruct();
@@ -438,8 +466,9 @@ raid_flyby_watcher(var_0) {
           self.plane_data[var_21].closetimer = 0;
           var_14 = common_scripts\utility::within_fov(self.origin, self.angles, var_22.origin, _cos(45));
 
-          if(isDefined(var_14) && var_14 == 0)
+          if(isDefined(var_14) && var_14 == 0) {
             var_11 = var_11 * var_13;
+          }
 
           var_23 = _id_02EF::_id_42DD(var_15, "dogfight_close_flybys", 7);
           self.plane_data[var_21].close_flybysound = _id_0380::_id_288E(var_23, self, var_22, 0, var_11, 3, "stop_damage_engine_loop");
@@ -559,16 +588,19 @@ getnormalizedmovementx() {
   if(_isagent(self)) {
     var_0 = self _meth_85E2();
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       return 0;
+    }
 
     var_1 = var_0 vehicle_getspeed();
 
-    if(!isDefined(self.mph_upper) || var_1 > self.mph_upper)
+    if(!isDefined(self.mph_upper) || var_1 > self.mph_upper) {
       self.mph_upper = var_1;
+    }
 
-    if(!isDefined(self.mph_lower) || var_1 < self.mph_lower)
+    if(!isDefined(self.mph_lower) || var_1 < self.mph_lower) {
       self.mph_lower = var_1;
+    }
 
     var_2 = self.mph_upper - self.mph_lower;
 

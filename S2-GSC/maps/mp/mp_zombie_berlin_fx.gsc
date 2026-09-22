@@ -294,6 +294,7 @@ main() {
 
   level._effect["ground_impact"] = LoadFX("vfx/zombie/zmb_ground_impact");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_zombie_berlin_fx::main();
+  }
 }

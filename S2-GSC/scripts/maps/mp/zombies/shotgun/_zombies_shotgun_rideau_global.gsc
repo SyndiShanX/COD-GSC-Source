@@ -7,13 +7,15 @@ run_rideau_supply_drop_comment() {
   var_0 = ["zmb_bp_wind_ride_ivecalledinairsupportourf", "zmb_bp_wind_ride_imcallinginmoresuppliesth", "zmb_bp_wind_ride_welldonecrewletsgetloaded"];
   var_1 = level.objectivescompleted - 1;
 
-  if(var_1 < 0)
+  if(var_1 < 0) {
     var_1 = 0;
+  }
 
-  if(var_1 >= var_0.size)
+  if(var_1 >= var_0.size) {
     var_2 = var_0[var_0.size - 1];
-  else
+  } else {
     var_2 = var_0[var_1];
+  }
 
   if(dlg_played_on_hidden_character(["ride"], [var_2])) {
     return;

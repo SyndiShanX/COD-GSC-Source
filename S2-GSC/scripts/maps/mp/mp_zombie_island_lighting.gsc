@@ -6,11 +6,13 @@
 main() {
   _id_84F8();
 
-  if(level._id_01D4 && getDvar("2695") != "true")
+  if(level._id_01D4 && getDvar("2695") != "true") {
     xbox_optimizations();
+  }
 
-  if(level._id_0149 && getDvar("3957") != "true")
+  if(level._id_0149 && getDvar("3957") != "true") {
     neo_optimizations();
+  }
 
   level thread maps\mp\_utility::_id_6F74(::onplayerspawned);
 }

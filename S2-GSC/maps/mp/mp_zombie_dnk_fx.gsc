@@ -112,6 +112,7 @@ main() {
 
   level._effect["moneyCloud"] = LoadFX("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_zombie_dnk_fx::main();
+  }
 }

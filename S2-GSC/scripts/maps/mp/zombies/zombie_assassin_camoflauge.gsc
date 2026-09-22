@@ -36,8 +36,9 @@ spawn_a_blinding_area() {
 }
 
 showoff() {
-  for(var_0 = 0; var_0 < level.players.size; var_0++)
+  for(var_0 = 0; var_0 < level.players.size; var_0++) {
     level.players[var_0] thread intro_fog_vision();
+  }
 
   playFX(common_scripts\utility::_id_44F5("zmi_assassin_teleport"), self.origin);
 }

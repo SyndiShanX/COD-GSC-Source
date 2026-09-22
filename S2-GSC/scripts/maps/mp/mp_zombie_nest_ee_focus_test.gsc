@@ -30,8 +30,9 @@ _id_3DA4() {
 }
 
 _id_8C92() {
-  if(isDefined(level._id_66D6))
+  if(isDefined(level._id_66D6)) {
     level._id_A981 = level._id_66D6 - 1;
+  }
 
   level._id_ABEC maps\mp\_utility::_id_5DC7();
   level._id_ABED maps\mp\_utility::_id_5DC7();

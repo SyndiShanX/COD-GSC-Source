@@ -38,8 +38,9 @@ enableammogeneration(var_0, var_1, var_2) {
   }
   if(_isarray(var_0) == 1) {
     foreach(var_4 in var_0) {
-      if(_isremovedentity(var_4) == 0)
+      if(_isremovedentity(var_4) == 0) {
         var_4 thread _id_06C9(var_4, var_1);
+      }
     }
   } else
     var_0 thread _id_06C9(var_0, var_1);
@@ -91,15 +92,17 @@ makeportableradar() {
 _id_8014(var_0) {
   var_1 = undefined;
 
-  if(isDefined(var_0) == 0)
+  if(isDefined(var_0) == 0) {
     var_0 = "entity";
+  }
 
   level._id_06B2._id_05F8 = _id_8015(var_0);
 }
 
 _id_8006(var_0) {
-  if(isDefined(var_0._id_8F4E) == 1)
+  if(isDefined(var_0._id_8F4E) == 1) {
     return var_0._id_8F4E;
+  }
 
   return "";
 }
@@ -156,8 +159,9 @@ _id_06BE(var_0, var_1, var_2, var_3) {
     var_4 = (0, 0, 0);
     var_5 = (0, 0, 0);
 
-    if(isDefined(var_1) == 1)
+    if(isDefined(var_1) == 1) {
       var_4 = var_1;
+    }
 
     var_0 linktosynchronizedparent(var_2, var_3, var_4, var_5);
   }
@@ -173,12 +177,13 @@ _id_06BC(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = var_7 + var_1;
   } else if(isDefined(var_2) == 1 && isDefined(var_3) == 1)
     var_7 = var_2 gettagorigin(var_3);
-  else if(isDefined(var_2) == 1)
+  else if(isDefined(var_2) == 1) {
     var_7 = var_2.origin;
-  else if(isDefined(var_2) == 0 && isDefined(var_1) == 0)
+  } else if(isDefined(var_2) == 0 && isDefined(var_1) == 0) {
     var_7 = (-32768, -32768, -32768);
-  else
+  } else {
     var_7 = var_1;
+  }
 
   var_6 = spawn("script_origin", var_7);
   _id_06BE(var_6, var_1, var_2, var_3);
@@ -188,9 +193,9 @@ _id_06BC(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_06BD(var_0) {
-  if(isDefined(var_0) == 1 && _isremovedentity(var_0) == 0)
+  if(isDefined(var_0) == 1 && _isremovedentity(var_0) == 0) {
     var_0 delete();
-  else {}
+  } else {}
 }
 
 _id_06BF(var_0, var_1, var_2, var_3) {
@@ -200,26 +205,29 @@ _id_06BF(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0._id_8F45) == 1) {
     waittillframeend;
 
-    if(_isremovedentity(var_0) == 1)
+    if(_isremovedentity(var_0) == 1) {
       return;
+    }
   }
 
   var_5 = threatdetectedtoplayer(var_4);
 
-  if(isDefined(var_2) == 0 && isDefined(var_5) == 1)
+  if(isDefined(var_2) == 0 && isDefined(var_5) == 1) {
     var_2 = var_5;
+  }
 
-  if(_func_35C(var_1) == 1)
-    var_4 playloopsound(var_1, var_2);
-  else {
+  if(_func_35C(var_1) == 1) {
+    var_4 playLoopSound(var_1, var_2);
+  } else {
     var_6 = "sounddone";
     var_4 playSound(var_1, var_6, undefined, undefined, undefined, var_2);
     var_7 = _getsndaliasvalue(var_1, "secondaryaliasname");
 
-    if(isDefined(var_7) == 1 && var_7 != "")
+    if(isDefined(var_7) == 1 && var_7 != "") {
       var_4 thread _id_06C1(var_1);
-    else
+    } else {
       var_4 thread _id_06C2(var_6);
+    }
   }
 
   var_4._id_8F3E = var_1;
@@ -242,8 +250,9 @@ _id_06C1(var_0) {
   var_2 = _lookupsoundlength(var_0);
   var_3 = _id_02EF::_id_468E(var_0, "pitch_min");
 
-  if(isDefined(var_3) == 1)
+  if(isDefined(var_3) == 1) {
     var_2 = var_2 * (1.0 / var_3);
+  }
 
   wait(var_2);
   _id_06BD(var_1);
@@ -260,11 +269,13 @@ _id_06C3(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 1;
   var_7 = 0.0;
 
-  if(isDefined(var_4) == 0)
+  if(isDefined(var_4) == 0) {
     var_4 = 1.0;
+  }
 
-  if(isDefined(var_5) == 0)
+  if(isDefined(var_5) == 0) {
     var_5 = _id_02EF::_id_4625();
+  }
 
   var_8 = _func_360(var_0, var_1, var_6, var_7, var_4, var_2, var_3, var_5);
   var_8._id_8F45 = var_2;
@@ -273,8 +284,9 @@ _id_06C3(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_06C4(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3) == 0)
+  if(isDefined(var_3) == 0) {
     var_3 = _id_02EF::_id_4625();
+  }
 
   var_0 _meth_863E(0.0, var_2, var_3);
   var_0._id_8F3E = var_1;
@@ -300,15 +312,17 @@ _id_06B9(var_0, var_1) {
 }
 
 _id_06B8(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_1) == 0)
+  if(isDefined(var_1) == 0) {
     var_1 = (0, 0, 0);
+  }
 
   if(isDefined(var_3) == 1) {
     var_3 = var_2 _id_02EF::_id_46BD(var_3);
     var_6 = var_2 gettagorigin(var_3);
 
-    if(isDefined(var_6) == 1)
+    if(isDefined(var_6) == 1) {
       var_1 = var_6 - var_2.origin;
+    }
   }
 
   var_7 = spawnStruct();
@@ -328,16 +342,18 @@ _id_06BA(var_0, var_1, var_2, var_3) {
   var_10 = undefined;
   var_11 = undefined;
 
-  if(isDefined(var_4) == 1)
+  if(isDefined(var_4) == 1) {
     var_7 = "world";
+  }
 
   if(isDefined(var_5) == 1) {
     var_7 = "body";
     var_8 = "soft_oriented";
   }
 
-  if(isDefined(var_3) == 0)
+  if(isDefined(var_3) == 0) {
     var_3 = _id_02EF::_id_4625();
+  }
 
   var_0 = spawnStruct();
   var_0._id_4983 = _func_351(var_1, var_5, var_4, var_7, var_6, var_8, var_9, var_10, var_2, var_11, var_3);
@@ -368,21 +384,25 @@ _id_06C7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8 = var_4;
   var_9 = undefined;
 
-  if(_soundexists(var_1) == 0)
+  if(_soundexists(var_1) == 0) {
     return undefined;
-
-  if(isDefined(level._id_06B2._id_05F8) == 0)
-    var_0 = level._id_06B2._id_05F8;
-
-  if(isDefined(var_5) == 0) {
-    if(_func_35C(var_1) == 1)
-      var_5 = level._id_06B2._id_05F7;
-    else
-      var_5 = 0.0;
   }
 
-  if(isDefined(var_5) == 1 && var_5 > 0.0)
+  if(isDefined(level._id_06B2._id_05F8) == 0) {
+    var_0 = level._id_06B2._id_05F8;
+  }
+
+  if(isDefined(var_5) == 0) {
+    if(_func_35C(var_1) == 1) {
+      var_5 = level._id_06B2._id_05F7;
+    } else {
+      var_5 = 0.0;
+    }
+  }
+
+  if(isDefined(var_5) == 1 && var_5 > 0.0) {
     var_9 = 0.0;
+  }
 
   switch (var_0) {
     case "entity":
@@ -403,8 +423,9 @@ _id_06C7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_5 > 0.0) {
     var_11 = 0.0;
 
-    if(var_0 == "entity" && isDefined(var_2) == 1)
+    if(var_0 == "entity" && isDefined(var_2) == 1) {
       var_11 = 0.05;
+    }
 
     var_7 thread _id_06C8(var_7, var_5, var_11);
   }
@@ -417,15 +438,17 @@ _id_06C9(var_0, var_1) {
   var_2 = var_0._id_8F4E;
   var_3 = var_0._id_8F3E;
 
-  if(isDefined(var_3) == 1 && _func_35C(var_0._id_8F3E) == 1 && isDefined(var_1) == 0)
+  if(isDefined(var_3) == 1 && _func_35C(var_0._id_8F3E) == 1 && isDefined(var_1) == 0) {
     var_1 = level._id_06B2._id_05F7;
+  }
 
   if(isDefined(var_1) == 1) {
     disableplayeruse(var_0, 0.0, var_1);
     wait(var_1 + 0.05);
 
-    if(_isremovedentity(var_0) == 1)
+    if(_isremovedentity(var_0) == 1) {
       return;
+    }
   } else
     var_1 = 0;
 
@@ -458,34 +481,38 @@ _id_06C8(var_0, var_1, var_2) {
     waittillframeend;
   }
 
-  if(isDefined(var_0) && !_isremovedentity(var_0))
+  if(isDefined(var_0) && !_isremovedentity(var_0)) {
     disableplayeruse(var_0, 1.0, var_1);
+  }
 }
 
 _id_8009(var_0, var_1, var_2, var_3) {
   var_4 = self;
 
-  if(isDefined(var_2) == 0)
+  if(isDefined(var_2) == 0) {
     var_2 = 0.0;
+  }
 
-  if(isDefined(var_3) == 0)
+  if(isDefined(var_3) == 0) {
     var_3 = 0.0;
+  }
 
   if(isDefined(var_4._id_8F4E) == 0 && _id_02EF::_id_56DB(var_4) == 1) {
-    var_4 moveto(var_0, var_1, var_2, var_3);
+    var_4 moveTo(var_0, var_1, var_2, var_3);
     return;
   }
 
   switch (var_4._id_8F4E) {
     case "entity":
     default:
-      var_4 moveto(var_0, var_1, var_2, var_3);
+      var_4 moveTo(var_0, var_1, var_2, var_3);
       break;
     case "sndentity":
-      if(isDefined(var_4._id_8F45) == 1)
-        var_4._id_8F45 moveto(var_0, var_1, var_2, var_3);
-      else
-        var_4 moveto(var_0, var_1, var_2, var_3);
+      if(isDefined(var_4._id_8F45) == 1) {
+        var_4._id_8F45 moveTo(var_0, var_1, var_2, var_3);
+      } else {
+        var_4 moveTo(var_0, var_1, var_2, var_3);
+      }
 
       break;
     case "clientsnd":

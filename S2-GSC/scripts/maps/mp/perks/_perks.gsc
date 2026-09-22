@@ -340,8 +340,9 @@ init() {
   level._id_6F6C["specialty_uav"] = _id_052C::_id_A085;
   _id_052C::buildwunderlustweaponlist();
 
-  if(isDefined(level._id_3FDE))
+  if(isDefined(level._id_3FDE)) {
     [[level._id_3FDE]]();
+  }
 
   _id_532A();
   level thread maps\mp\perks\_medic::initmedic();
@@ -349,11 +350,13 @@ init() {
 }
 
 _id_A277(var_0, var_1) {
-  if(getdvarint("scr_game_perks") == 0)
+  if(getdvarint("scr_game_perks") == 0) {
     return 0;
+  }
 
-  if(_func_30D(var_1))
+  if(_func_30D(var_1)) {
     var_1 = maps\mp\_utility::_id_452B(var_1);
+  }
 
   if(isDefined(level._id_3FE0)) {
     var_2 = [[level._id_3FE0]](var_0, var_1);
@@ -445,10 +448,11 @@ _id_A277(var_0, var_1) {
     case "specialty_class_juggernaut":
     case "specialty_class_stopping_power":
     case "specialty_class_snowblind":
-      if(maps\mp\_utility::areexperimentalbasictrainingsenabled())
+      if(maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
         return maps\mp\_utility::_id_452A(var_1);
-      else
+      } else {
         return 0;
+      }
     case "specialty_class_toughness":
     case "specialty_bulletaccuracy":
     case "specialty_sprintreload":
@@ -464,8 +468,9 @@ _id_A277(var_0, var_1) {
 _id_44B5() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 9; var_1++)
+  for(var_1 = 0; var_1 < 9; var_1++) {
     var_0[var_1] = 0;
+  }
 
   return var_0;
 }
@@ -491,8 +496,9 @@ onplayerspawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    if(maps\mp\_utility::_hasperk("specialty_sixthsense"))
+    if(maps\mp\_utility::_hasperk("specialty_sixthsense")) {
       thread _id_052C::_id_63E3();
+    }
   }
 }
 
@@ -500,15 +506,18 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = 0;
 
   if(maps\mp\_utility::isbulletdamage(var_3)) {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       return var_2;
+    }
 
-    if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_deadeye"))
+    if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_deadeye")) {
       var_1 _id_052C::setdeadeyeinternal();
+    }
 
     if(isPlayer(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_paint_pro") && !maps\mp\_utility::iskillstreakweapon(var_4) && (isPlayer(var_0) || _isagent(var_0))) {
-      if(!var_0 _id_052C::_id_576D())
+      if(!var_0 _id_052C::_id_576D()) {
         var_1 maps\mp\gametypes\_missions::processchallenge("ch_bulletpaint");
+      }
 
       var_0 thread _id_052C::_id_86ED(var_1, 1);
     }
@@ -517,29 +526,34 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_9 = var_9 - (var_2 - 1);
       var_10 = var_2;
 
-      if(isPlayer(var_1) && isDefined(var_1._id_4B50) && var_1._id_4B50)
+      if(isPlayer(var_1) && isDefined(var_1._id_4B50) && var_1._id_4B50) {
         var_10 = var_10 * level._id_0A07;
+      }
 
       thread _id_0535::_id_0F31(var_10);
     } else if(isPlayer(var_1) && isDefined(var_1._id_4B50) && var_1._id_4B50 && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
       var_9 = var_9 + var_2 * (level._id_0A07 - level._id_0F6A);
-    else if(isPlayer(var_1) && isDefined(var_1._id_4B50) && var_1._id_4B50)
+    else if(isPlayer(var_1) && isDefined(var_1._id_4B50) && var_1._id_4B50) {
       var_9 = var_9 + var_2 * level._id_0A07;
-    else if(isPlayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") || var_1 maps\mp\_utility::_hasperk("specialty_moredamage")) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+    } else if(isPlayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") || var_1 maps\mp\_utility::_hasperk("specialty_moredamage")) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_9 = var_9 + 0;
-    else if(isPlayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") || var_1 maps\mp\_utility::_hasperk("specialty_moredamage")))
+    } else if(isPlayer(var_1) && (var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") || var_1 maps\mp\_utility::_hasperk("specialty_moredamage"))) {
       var_9 = var_9 + var_2 * level._id_1D7C;
-    else if(var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+    } else if(var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_9 = var_9 - var_2 * level._id_0F6A;
+    }
   } else if(_isexplosivedamagemod(var_3) || var_3 == "MOD_GAS") {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       return var_2;
+    }
 
-    if(isPlayer(var_1) && var_1 != var_0 && var_1 maps\mp\_utility::_hasperk("specialty_paint") && (!maps\mp\_utility::iskillstreakweapon(var_4) || issubstr(var_4, "killstreak_molotov_cocktail")))
+    if(isPlayer(var_1) && var_1 != var_0 && var_1 maps\mp\_utility::_hasperk("specialty_paint") && (!maps\mp\_utility::iskillstreakweapon(var_4) || issubstr(var_4, "killstreak_molotov_cocktail"))) {
       var_0 thread _id_052C::_id_86ED(var_1, 0);
+    }
 
-    if(maps\mp\_utility::getweaponclass(var_4) == "weapon_projectile" && weaponclass(var_4) == "rocketlauncher" && isPlayer(var_1) && _weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasperk("specialty_class_launched"))
+    if(maps\mp\_utility::getweaponclass(var_4) == "weapon_projectile" && weaponclass(var_4) == "rocketlauncher" && isPlayer(var_1) && _weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasperk("specialty_class_launched")) {
       var_2 = var_2 * level.launchedrocketlauncherdamagemod;
+    }
 
     if(_id_0513::_id_57F6(var_4) && var_0 maps\mp\_utility::_hasperk("specialty_stun_resistance")) {
       var_2 = 1;
@@ -549,46 +563,54 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       thread _id_0530::_id_0F31(var_2);
     } else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("specialty_blastshield2") && var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")))
       var_9 = var_9 + var_2 * level.clumsydamagemod;
-    else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("specialty_blastshield2")))
+    else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasperk("specialty_blastshield2"))) {
       var_9 = var_9 + 0;
-    else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")))
+    } else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && (var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage") && var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection"))) {
       var_9 = var_9 + (var_2 * level._id_395D + var_2 * level.clumsydamagemod);
-    else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage"))
+    } else if(isPlayer(var_1) && _weaponinheritsperks(var_4) && var_1 maps\mp\_utility::_hasexperimentalbtperk("specialty_explosivedamage")) {
       var_9 = var_9 + var_2 * level._id_395D;
-    else if(var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection"))
+    } else if(var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")) {
       var_9 = var_9 + var_2 * level.clumsydamagemod;
-    else if(var_0 maps\mp\_utility::_hasperk("specialty_blastshield2") && isDefined(var_0._id_90D4) && (var_4 != "semtex_mp" || var_2 < 145) && !_id_0513::_id_57F6(var_4) && !_id_3154(var_4))
+    } else if(var_0 maps\mp\_utility::_hasperk("specialty_blastshield2") && isDefined(var_0._id_90D4) && (var_4 != "semtex_mp" || var_2 < 145) && !_id_0513::_id_57F6(var_4) && !_id_3154(var_4)) {
       var_2 = var_2 * var_0._id_90D4;
+    }
 
-    if(maps\mp\_utility::iskillstreakweapon(var_4) && isPlayer(var_1) && var_0 maps\mp\_utility::_hasperk("specialty_streakshield"))
+    if(maps\mp\_utility::iskillstreakweapon(var_4) && isPlayer(var_1) && var_0 maps\mp\_utility::_hasperk("specialty_streakshield")) {
       var_2 = var_2 * var_0._id_944B;
+    }
 
-    if(_id_0513::_id_513A())
+    if(_id_0513::_id_513A()) {
       var_2 = var_2 * level._id_597E;
+    }
   } else if(var_3 == "MOD_FALLING") {
     if(var_0 maps\mp\_utility::_hasperk("specialty_falldamage") && isDefined(var_0._id_3A0F)) {
       var_9 = 0;
       var_2 = var_2 * var_0._id_3A0F;
     }
 
-    if(var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection"))
+    if(var_0 maps\mp\_utility::_hasexperimentalbtperk("specialty_reducedexplosivefallprotection")) {
       var_9 = var_9 + var_2 * level.clumsydamagemod;
+    }
   } else if(maps\mp\_utility::_id_5755(var_3)) {
-    if(var_1 maps\mp\_utility::_hasperk("specialty_increasedmeleedamage"))
+    if(var_1 maps\mp\_utility::_hasperk("specialty_increasedmeleedamage")) {
       var_2 = var_2 * level._id_60E3;
+    }
 
     if(isDefined(var_0._id_4B76) && var_0._id_4B76) {
-      if(issubstr(var_4, "riotshield") || var_4 == "exoshield_equipment_mp")
+      if(issubstr(var_4, "riotshield") || var_4 == "exoshield_equipment_mp") {
         var_2 = int(var_0.maxhealth * 0.66);
-      else
+      } else {
         var_2 = var_0.maxhealth + 1;
+      }
     }
   } else if(maps\mp\_utility::_id_5697(var_3, var_4)) {
-    if(isDefined(var_1) && isPlayer(var_1) && var_1 != var_0 && var_1 maps\mp\_utility::_hasperk("specialty_paint") && (!maps\mp\_utility::iskillstreakweapon(var_4) || issubstr(var_4, "killstreak_molotov_cocktail")) && !issubstr(var_4, "dragon_breath"))
+    if(isDefined(var_1) && isPlayer(var_1) && var_1 != var_0 && var_1 maps\mp\_utility::_hasperk("specialty_paint") && (!maps\mp\_utility::iskillstreakweapon(var_4) || issubstr(var_4, "killstreak_molotov_cocktail")) && !issubstr(var_4, "dragon_breath")) {
       var_0 thread _id_052C::_id_86ED(var_1, 0);
+    }
 
-    if(var_0 maps\mp\_utility::_hasperk("specialty_fireshield") && isDefined(var_0._id_90D8))
+    if(var_0 maps\mp\_utility::_hasperk("specialty_fireshield") && isDefined(var_0._id_90D8)) {
       var_2 = var_2 * var_0._id_90D8;
+    }
   }
 
   var_11 = _getweaponbasename(var_4);
@@ -625,8 +647,9 @@ _id_1E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     }
   }
 
-  if(var_2 < 1 && _func_367())
+  if(var_2 < 1 && _func_367()) {
     return 0;
+  }
 
   if(var_2 <= 1) {
     var_2 = 1;
@@ -666,8 +689,9 @@ _id_4778() {
   maps\mp\_utility::giveperk("specialty_blindeye");
   self._id_907E = 1;
 
-  while(!isDefined(self._id_1444))
+  while(!isDefined(self._id_1444)) {
     waitframe();
+  }
 
   while(self._id_1444 > 0) {
     self._id_1444 = self._id_1444 - 0.05;
@@ -697,10 +721,11 @@ _id_0F36() {
     return;
   }
 
-  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled())
+  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     _id_04CC::setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(self._id_0079);
-  else
+  } else {
     _id_04CC::_id_8667(self._id_0079);
+  }
 
   if(maps\mp\_utility::_hasperk("specialty_class_hustle")) {
     maps\mp\_utility::giveperk("specialty_sprintreload");
@@ -716,8 +741,9 @@ _id_0F36() {
     maps\mp\_utility::giveperk("specialty_falldamage");
 
     if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
-      if(!maps\mp\_utility::_hasperk("specialty_sprintfasterovertime"))
+      if(!maps\mp\_utility::_hasperk("specialty_sprintfasterovertime")) {
         maps\mp\_utility::giveperk("specialty_lightweight");
+      }
     } else
       maps\mp\_utility::giveperk("specialty_sprintfastrecovery");
   }
@@ -740,8 +766,9 @@ _id_0F36() {
     maps\mp\_utility::giveperk("specialty_quickswap");
   }
 
-  if(maps\mp\_utility::_hasperk("specialty_class_primed"))
+  if(maps\mp\_utility::_hasperk("specialty_class_primed")) {
     maps\mp\_utility::giveperk("specialty_sharp_focus");
+  }
 
   if(maps\mp\_utility::_hasperk("specialty_class_forage")) {
     maps\mp\_utility::giveperk("specialty_scavenger");
@@ -766,12 +793,14 @@ _id_0F36() {
     }
   }
 
-  if(maps\mp\_utility::_hasperk("specialty_class_serrated"))
+  if(maps\mp\_utility::_hasperk("specialty_class_serrated")) {
     maps\mp\_utility::giveperk("specialty_fastermelee");
+  }
 
   if(maps\mp\_utility::_hasperk("specialty_class_requisitions")) {
-    if(!maps\mp\_utility::areexperimentalbasictrainingsenabled())
+    if(!maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
       maps\mp\_utility::giveperk("specialty_supportstreaks");
+    }
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_concussed")) {}
@@ -784,8 +813,9 @@ _id_0F36() {
       maps\mp\_utility::giveperk("specialty_blastshield2");
       self._id_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale", 55) / 100;
 
-      if(isDefined(level.hardcoremode) && level.hardcoremode)
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self._id_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale_HC", 14) / 100;
+      }
     }
   }
 
@@ -809,8 +839,9 @@ _id_0F36() {
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_instincts")) {
-    if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF())
+    if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
       maps\mp\_utility::giveperk("specialty_perception");
+    }
 
     maps\mp\_utility::giveperk("specialty_detectexplosive");
 
@@ -834,8 +865,9 @@ _id_0F36() {
   }
 
   if(maps\mp\_utility::isproductionlevelactive(7)) {
-    if(maps\mp\_utility::_hasperk("specialty_class_saboteur"))
+    if(maps\mp\_utility::_hasperk("specialty_class_saboteur")) {
       maps\mp\_utility::giveperk("specialty_shortfuse");
+    }
   }
 
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
@@ -855,26 +887,31 @@ _id_0F36() {
   }
 
   if(getdvarint("6020", 1) == 1) {
-    if(maps\mp\_utility::_hasperk("specialty_class_wanderlust"))
+    if(maps\mp\_utility::_hasperk("specialty_class_wanderlust")) {
       maps\mp\_utility::giveperk("specialty_randomgun");
+    }
 
-    if(maps\mp\_utility::_hasperk("specialty_class_escalation"))
+    if(maps\mp\_utility::_hasperk("specialty_class_escalation")) {
       maps\mp\_utility::giveperk("specialty_boostafterkill");
+    }
 
     if(maps\mp\_utility::_hasperk("specialty_class_specialist")) {
-      if(!maps\mp\_utility::_id_579B())
+      if(!maps\mp\_utility::_id_579B()) {
         maps\mp\_utility::giveperk("specialty_perkstreaks");
+      }
     }
   }
 
   if(getdvarint("6019", 1) == 1) {
     if(maps\mp\_utility::_hasperk("specialty_class_frenzy")) {
-      if(!maps\mp\_utility::areexperimentalbasictrainingsenabled())
+      if(!maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
         maps\mp\_utility::giveperk("specialty_sessionProgressionA");
+      }
     }
 
-    if(maps\mp\_utility::_hasperk("specialty_class_remedy"))
+    if(maps\mp\_utility::_hasperk("specialty_class_remedy")) {
       maps\mp\_utility::giveperk("specialty_fasterhealthregen");
+    }
   }
 
   if(maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
@@ -900,8 +937,9 @@ _id_0F36() {
       maps\mp\_utility::giveperk("specialty_reducedexplosivefallprotection");
     }
 
-    if(maps\mp\_utility::_hasperk("specialty_class_humbug"))
+    if(maps\mp\_utility::_hasperk("specialty_class_humbug")) {
       thread _id_052C::monitorhumbug();
+    }
 
     if(maps\mp\_utility::_hasperk("specialty_class_thaw")) {
       maps\mp\_utility::giveperk("specialty_marathon");
@@ -913,14 +951,17 @@ _id_0F36() {
     maps\mp\_utility::giveperk("specialty_improvedstreaks");
     maps\mp\_utility::giveperk("specialty_fourthstreak");
 
-    if(maps\mp\_utility::_hasperk("specialty_class_stopping_power"))
+    if(maps\mp\_utility::_hasperk("specialty_class_stopping_power")) {
       maps\mp\_utility::giveperk("specialty_moredamage");
+    }
 
-    if(maps\mp\_utility::_hasperk("specialty_class_juggernaut"))
+    if(maps\mp\_utility::_hasperk("specialty_class_juggernaut")) {
       maps\mp\_utility::giveperk("specialty_armorvest");
+    }
 
-    if(maps\mp\_utility::_hasperk("specialty_class_danger_close"))
+    if(maps\mp\_utility::_hasperk("specialty_class_danger_close")) {
       maps\mp\_utility::giveperk("specialty_explosivedamage");
+    }
 
     if(maps\mp\_utility::_hasperk("specialty_class_one_man_army")) {
       maps\mp\_utility::giveperk("specialty_rof");

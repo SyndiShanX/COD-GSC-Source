@@ -8,8 +8,9 @@ _id_52A4() {
 }
 
 _id_1F8C(var_0) {
-  if(!_id_0561::_id_1F7B())
+  if(!_id_0561::_id_1F7B()) {
     return 0;
+  }
 
   return 1;
 }
@@ -31,8 +32,9 @@ _id_A247(var_0) {
 }
 
 _id_4721(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":
@@ -54,8 +56,9 @@ _id_398B(var_0) {
 }
 
 _id_4BA5() {
-  if(isDefined(self._id_A99B))
+  if(isDefined(self._id_A99B)) {
     return 1;
+  }
 
   return 0;
 }

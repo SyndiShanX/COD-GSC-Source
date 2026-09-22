@@ -7,8 +7,9 @@ _id_7DA2() {
   var_0 = _id_45C5();
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0; var_2++)
+  for(var_2 = 0; var_2 < var_0; var_2++) {
     var_1[var_2] = [];
+  }
 
   foreach(var_4 in level.players) {
     if(isalive(var_4)) {
@@ -38,14 +39,16 @@ _id_7DA2() {
 
       foreach(var_13 in var_5) {
         if(var_13 == var_11) {
-          if(!isDefined(var_13._id_6024))
+          if(!isDefined(var_13._id_6024)) {
             var_13._id_6024 = 0;
+          }
 
           var_17 = 0;
 
           foreach(var_4 in var_5) {
-            if(isDefined(var_4._id_6024))
+            if(isDefined(var_4._id_6024)) {
               var_17 = var_17 + var_4._id_6024;
+            }
           }
 
           var_13._id_6024 = var_13._id_6024 + var_17;
@@ -58,16 +61,18 @@ _id_7DA2() {
   }
 
   foreach(var_4 in level.players) {
-    if(isDefined(var_4._id_1B7E) && var_4._id_1B7E)
+    if(isDefined(var_4._id_1B7E) && var_4._id_1B7E) {
       var_4._id_6024 = 0;
+    }
   }
 }
 
 _id_45C5() {
   var_0 = -1;
 
-  for(var_1 = "temp"; var_1 != ""; var_1 = _tablelookupbyrow("mp/braggingrights.csv", var_0, 0))
+  for(var_1 = "temp"; var_1 != ""; var_1 = _tablelookupbyrow("mp/braggingrights.csv", var_0, 0)) {
     var_0++;
+  }
 
   return var_0;
 }

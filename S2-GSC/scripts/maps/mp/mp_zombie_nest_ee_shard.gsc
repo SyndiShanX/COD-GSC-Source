@@ -28,8 +28,8 @@ _id_7852() {
 
 _id_786A() {
   if(1) {
-    var_0 = _getent("nest_ee_shard_intro_start_trig", "targetname");
-    var_1 = _getent("hilt_altar_model", "targetname");
+    var_0 = _getEnt("nest_ee_shard_intro_start_trig", "targetname");
+    var_1 = _getEnt("hilt_altar_model", "targetname");
 
     if(isDefined(var_0)) {
       var_2 = undefined;
@@ -40,10 +40,10 @@ _id_786A() {
       }
 
       var_0._id_4D91 = _id_0559::_id_7BE3(var_0, "hilt");
-      var_0 sethintstring(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
+      var_0 setHintString(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
       level thread _id_2E79();
       var_0 waittill("trigger", var_3);
-      var_4 = _getent("hilt_control", "targetname");
+      var_4 = _getEnt("hilt_control", "targetname");
 
       if(isDefined(var_4)) {
         var_4 thread maps\mp\mp_zombie_nest_ee_util::_id_4D76();
@@ -60,7 +60,7 @@ _id_786A() {
 }
 
 _id_784E() {
-  _playfxontag(level._effect["zmb_gk_hilt_init"], level._id_3571, "TAG_FX");
+  _playFXOnTag(level._effect["zmb_gk_hilt_init"], level._id_3571, "TAG_FX");
   _id_0378::_id_8D74("aud_claw_move_start", level._id_3571, 0);
   level._id_3576 _id_202A();
   _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
@@ -75,17 +75,18 @@ _id_784E() {
   var_1 = common_scripts\utility::_id_46B5("zmb_hilt_effects", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
-  _playfxontag(level._effect["zmb_geistkraft_radius_400"], var_2, "tag_origin");
+  _playFXOnTag(level._effect["zmb_geistkraft_radius_400"], var_2, "tag_origin");
   level._id_3576 maps\mp\mp_zombie_nest_special_event_creator::_id_170B(10, 400, undefined, "zombie soul", undefined, "extend_shroud");
   _killfxontag(level._effect["zmb_geistkraft_radius_400"], var_2, "tag_origin");
   var_2 delete();
-  _playfxontag(level._effect["zmb_gk_hilt"], level._id_3576, "TAG_FX");
+  _playFXOnTag(level._effect["zmb_gk_hilt"], level._id_3576, "TAG_FX");
   thread _id_089D();
   common_scripts\utility::flag_set("flag_shard_souls_collected");
 
   if(1) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       _id_0557::_id_7847("3 shard", var_0);
+    }
   }
 
   wait 3;
@@ -98,8 +99,9 @@ _id_784E() {
 _id_089D() {
   var_0 = _getscriptablearray("shardlgt_activate", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 setscriptablepartstate("shard", "active");
+  foreach(var_2 in var_0) {
+    var_2 setscriptablepartstate("shard", "active");
+  }
 }
 
 _id_7866() {
@@ -109,7 +111,7 @@ _id_7866() {
     _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
 
     if(0) {
-      var_0 = _getent("shard_valve", "targetname");
+      var_0 = _getEnt("shard_valve", "targetname");
       var_1 = _id_0557::_id_782F(undefined, var_0);
       _id_0557::_id_781D("3 shard", var_1);
     }
@@ -239,21 +241,23 @@ _id_52EA() {
   level._id_3572 _id_0547::_id_A283(["s2_zom_shroud_cover_lift_open", "s2_zom_shroud_cover_lift_close", "s2_zom_shroud_cover_lift_stuck_idle"], ::_id_2022);
   level._id_3595._id_9EC3 = ::_id_2718;
   level._id_3595._id_9EC2 = ::_id_2717;
-  var_0 = _getent("shard_valve_light", "targetname");
+  var_0 = _getEnt("shard_valve_light", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 thread _id_2021();
+  }
 
-  var_1 = _getent("hilt_control", "targetname");
+  var_1 = _getEnt("hilt_control", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 thread maps\mp\mp_zombie_nest_ee_util::_id_4D77("red");
+  }
 
   level._id_3576 thread _id_202E();
 }
 
 _id_8A10(var_0, var_1) {
-  var_2 = _getent(var_0, "targetname");
+  var_2 = _getEnt(var_0, "targetname");
   var_2._id_0BBE = var_1;
   var_3 = var_2 _id_0547::_id_4315();
   var_2 _id_8A12(var_3);
@@ -263,19 +267,21 @@ _id_8A10(var_0, var_1) {
 _id_8A12(var_0) {
   self._id_9ED0 = var_0["turnOnAnim"];
 
-  if(isDefined(self._id_9ED0))
+  if(isDefined(self._id_9ED0)) {
     self._id_9ED7 = _id_0547::_id_A285(self._id_9ED0);
+  }
 
   self._id_9ECA = var_0["turnOffAnim"];
 
-  if(isDefined(self._id_9ECA))
+  if(isDefined(self._id_9ECA)) {
     self._id_9ECE = _id_0547::_id_A285(self._id_9ECA);
+  }
 
   self._id_5058 = var_0["idleOffAnim"];
 }
 
 _id_8A45(var_0, var_1) {
-  var_2 = _getent(var_0, "targetname");
+  var_2 = _getEnt(var_0, "targetname");
   var_2._id_0BBE = common_scripts\utility::_id_46B5(var_1, "targetname");
   var_2._id_6C4E = var_2.origin;
   return var_2;
@@ -305,8 +311,8 @@ _id_2E88(var_0) {
 
 _id_2E79() {
   level endon("flag_shard_souls_collected");
-  var_0 = _getent("hilt_altar_model", "targetname");
-  var_0 setcandamage(1);
+  var_0 = _getEnt("hilt_altar_model", "targetname");
+  var_0 setCanDamage(1);
 
   for(;;) {
     var_0 waittill("damage", var_1, var_2);
@@ -319,7 +325,7 @@ _id_2E79() {
     wait 5;
   }
 
-  var_0 setcandamage(0);
+  var_0 setCanDamage(0);
 }
 
 _id_2E7A(var_0) {
@@ -330,8 +336,9 @@ _id_2E7A(var_0) {
 _id_2E7E() {
   if(!common_scripts\utility::_id_3C77("flag_com_valve_turned")) {
     foreach(var_1 in level.players) {
-      if(_id_055A::_id_7413(var_1, "zone3_1_com") || _id_055A::_id_7413(var_1, "zone4_1_mine") || _id_055A::_id_7413(var_1, "zone4_2_hilt"))
+      if(_id_055A::_id_7413(var_1, "zone3_1_com") || _id_055A::_id_7413(var_1, "zone4_1_mine") || _id_055A::_id_7413(var_1, "zone4_2_hilt")) {
         var_1 thread _id_0367::_id_8E3C("clawstuck");
+      }
     }
   }
 }

@@ -21,8 +21,9 @@ _id_5350() {
   level._id_903A = _id_4690(3);
   level._id_903B = _id_4690(4);
 
-  if(getdvarint("spawning_revised_frontline") != 0 && level.gametype == "war")
+  if(getdvarint("spawning_revised_frontline") != 0 && level.gametype == "war") {
     level._id_909B["preferClaimedSpawn"]["scoreFactorWeight"] = 0.0;
+  }
 
   if(maps\mp\_utility::_id_56B1() && level.gametype == "dom") {
     level._id_909B["preferAllyDomPoints"]["scoreFactorWeight"] = 1.0;
@@ -163,8 +164,9 @@ _id_4698(var_0) {
   var_1 = [];
   var_2 = tablelookup("mp/spawnFactorsPerMode.csv", 0, level.gametype, var_0);
 
-  if(!isDefined(var_2) || var_2 == "")
+  if(!isDefined(var_2) || var_2 == "") {
     return var_1;
+  }
 
   var_3 = level._id_909C[var_2];
   var_4 = _tablegetcolumncount(var_3);
@@ -188,8 +190,9 @@ _id_4698(var_0) {
 _id_4670(var_0, var_1) {
   var_2 = tablelookup(var_0, 0, maps\mp\_utility::_id_4571(), var_1);
 
-  if(!isDefined(var_2) || var_2 == "")
+  if(!isDefined(var_2) || var_2 == "") {
     var_2 = tablelookup(var_0, 0, "mp_default", var_1);
+  }
 
   return _float(var_2);
 }
@@ -198,13 +201,15 @@ _id_4690(var_0) {
   var_1 = [];
   var_2 = tablelookup("mp/spawnFactorsPerMode.csv", 0, level.gametype, var_0);
 
-  if(!isDefined(var_2) || !_id_56BD(var_2))
+  if(!isDefined(var_2) || !_id_56BD(var_2)) {
     return var_1;
+  }
 
   var_3 = "mp/spawnCriticalFactors.csv";
 
-  if(getdvarint("spawning_revised_frontline") != 0)
+  if(getdvarint("spawning_revised_frontline") != 0) {
     var_3 = "mp/spawnCriticalFactors_EXPERIMENTAL.csv";
+  }
 
   var_4 = _tablegetcolumncount(var_3);
   var_5 = -1;
@@ -243,8 +248,9 @@ _id_3890(var_0, var_1, var_2) {
     var_7 = level._id_9039[var_5]["criticalFactorFunc"];
 
     if(isDefined(var_7)) {
-      if(!_id_050C::_id_2857(var_7, var_0, var_1))
+      if(!_id_050C::_id_2857(var_7, var_0, var_1)) {
         return var_4;
+      }
     }
   }
 
@@ -254,8 +260,9 @@ _id_3890(var_0, var_1, var_2) {
 _id_388F(var_0, var_1) {
   var_2 = level._id_903A;
 
-  if(isDefined(level._id_746E) && var_0 != level._id_746E)
+  if(isDefined(level._id_746E) && var_0 != level._id_746E) {
     var_2 = level._id_903B;
+  }
 
   if(isDefined(var_2) && var_2.size > 0) {
     var_3 = ["bad", "secondary", "primary"];
@@ -264,8 +271,9 @@ _id_388F(var_0, var_1) {
       if(isDefined(var_2[var_5]) && var_2[var_5].size > 0) {
         var_6 = _id_3890(var_0, var_1, var_2[var_5]);
 
-        if(isDefined(var_6))
+        if(isDefined(var_6)) {
           return var_6;
+        }
       }
     }
   }
@@ -302,8 +310,9 @@ _id_3895(var_0, var_1) {
 }
 
 _id_80AE(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2._id_6884 = var_1.size;
+  }
 
   foreach(var_4 in var_1) {
     if(isDefined(level._id_746E) && var_0 != level._id_746E) {
@@ -322,14 +331,16 @@ _id_4007(var_0, var_1, var_2, var_3) {
 
   if(!_id_050D::_id_580F()) {
     if(!isDefined(level._id_4B94)) {
-      if(isDefined(level._id_602F))
+      if(isDefined(level._id_602F)) {
         [[level._id_602F]]("LOG_GENERIC_MESSAGE", gettime(), "ERROR: TTLOS System disabled! Could not access visDistData");
+      }
 
       level._id_4B94 = 1;
     }
 
-    if(getdvarint("3950", 0) == 1 && level.gametype != "zombies" && !maps\mp\_utility::_id_579B())
+    if(getdvarint("3950", 0) == 1 && level.gametype != "zombies" && !maps\mp\_utility::_id_579B()) {
       _iprintlnbold("Spawning a player without any LOS data!");
+    }
   }
 
   _id_050D::_id_A167();
@@ -342,10 +353,11 @@ _id_4007(var_0, var_1, var_2, var_3) {
     var_6._id_285B = var_7["criticalFactorResult"];
     var_6._id_285A = var_7["criticalFactorName"];
 
-    if(!isDefined(var_6._id_285A) || var_6._id_285A == "")
+    if(!isDefined(var_6._id_285A) || var_6._id_285A == "") {
       var_6._id_2859 = -1;
-    else
+    } else {
       var_6._id_2859 = level._id_9039[var_6._id_285A]["criticalFactorAnalyticsIndex"];
+    }
 
     var_4[var_6._id_285B][var_4[var_6._id_285B].size] = var_6;
   }
@@ -364,16 +376,18 @@ _id_4007(var_0, var_1, var_2, var_3) {
       var_9 = var_4["primary"][0]._id_9AB8;
 
       foreach(var_6 in var_4["primary"]) {
-        if(isDefined(var_6._id_9AB8) && var_6._id_9AB8 > var_9)
+        if(isDefined(var_6._id_9AB8) && var_6._id_9AB8 > var_9) {
           var_9 = var_6._id_9AB8;
+        }
       }
 
       _id_80AE(var_0, var_4["secondary"], undefined);
       var_12 = 0;
 
       foreach(var_6 in var_4["secondary"]) {
-        if(isDefined(var_6._id_9AB8) && var_6._id_9AB8 > var_9)
+        if(isDefined(var_6._id_9AB8) && var_6._id_9AB8 > var_9) {
           var_12++;
+        }
       }
 
       var_2._id_689C = var_12;
@@ -398,12 +412,13 @@ _id_909E(var_0, var_1) {
   return var_0._id_9AB8 > var_1._id_9AB8;
 }
 
-scragentsetgoalradius(var_0, var_1, var_2, var_3) {
+scragentsetgoalRadius(var_0, var_1, var_2, var_3) {
   var_4 = _id_4007(var_0, var_1, var_2, 0);
 
   foreach(var_6 in var_1) {
-    if(isDefined(var_3) && var_3)
+    if(isDefined(var_3) && var_3) {
       _id_050B::_id_7AF5(var_6);
+    }
   }
 
   var_8 = [];
@@ -435,8 +450,9 @@ scragentsetgoalradius(var_0, var_1, var_2, var_3) {
         continue;
       }
 
-      if(var_6._id_9AB8 == var_11)
+      if(var_6._id_9AB8 == var_11) {
         var_10[var_10.size] = var_6;
+      }
     }
   }
 
@@ -445,11 +461,13 @@ scragentsetgoalradius(var_0, var_1, var_2, var_3) {
     var_15 = [];
 
     if(isDefined(var_2)) {
-      if(isDefined(var_2._id_9087) && isDefined(var_2._id_9087.origin))
+      if(isDefined(var_2._id_9087) && isDefined(var_2._id_9087.origin)) {
         var_14 = var_2._id_9087;
+      }
 
-      if(isDefined(var_2._id_3A5D))
+      if(isDefined(var_2._id_3A5D)) {
         var_15 = var_2._id_3A5D;
+      }
     }
 
     var_16 = 0;
@@ -457,23 +475,27 @@ scragentsetgoalradius(var_0, var_1, var_2, var_3) {
     foreach(var_18 in var_15) {
       if(var_18["spawnCount"] >= 2 || var_18["spawnsSinceLastUsed"] > 0 && var_18["spawnsSinceLastUsed"] <= 2) {
         if(common_scripts\utility::_id_0F79(var_8, var_18["spawnPoint"])) {
-          if(var_8.size > 1)
+          if(var_8.size > 1) {
             var_8 = common_scripts\utility::_id_0F93(var_8, var_18["spawnPoint"]);
-          else
+          } else {
             var_16 = 1;
+          }
         }
 
-        if(common_scripts\utility::_id_0F79(var_10, var_18["spawnPoint"]))
+        if(common_scripts\utility::_id_0F79(var_10, var_18["spawnPoint"])) {
           var_10 = common_scripts\utility::_id_0F93(var_10, var_18["spawnPoint"]);
+        }
       }
     }
 
     if(isDefined(var_14)) {
-      if(var_8.size > 1 && common_scripts\utility::_id_0F79(var_8, var_14))
+      if(var_8.size > 1 && common_scripts\utility::_id_0F79(var_8, var_14)) {
         var_8 = common_scripts\utility::_id_0F93(var_8, var_14);
+      }
 
-      if((var_10.size > 1 || !var_16) && common_scripts\utility::_id_0F79(var_10, var_14))
+      if((var_10.size > 1 || !var_16) && common_scripts\utility::_id_0F79(var_10, var_14)) {
         var_10 = common_scripts\utility::_id_0F93(var_10, var_14);
+      }
     }
 
     if(var_16 && var_10.size > 0) {
@@ -482,12 +504,14 @@ scragentsetgoalradius(var_0, var_1, var_2, var_3) {
         var_21 = [];
 
         foreach(var_6 in var_10) {
-          if(_distance2d(var_6.origin, var_20.origin) <= 1300)
+          if(_distance2d(var_6.origin, var_20.origin) <= 1300) {
             var_21[var_21.size] = var_6;
+          }
         }
 
-        if(var_21.size > 0)
+        if(var_21.size > 0) {
           var_8 = var_21;
+        }
       }
     }
   }
@@ -497,23 +521,26 @@ scragentsetgoalradius(var_0, var_1, var_2, var_3) {
 
 _id_4706(var_0) {
   if(isDefined(var_0._id_0165)) {
-    if(var_0._id_0165 == "primary_override")
+    if(var_0._id_0165 == "primary_override") {
       return "primary";
-    else if(var_0._id_0165 == "secondary_override")
+    } else if(var_0._id_0165 == "secondary_override") {
       return "secondary";
-    else if(var_0._id_0165 == "tertiary_override")
+    } else if(var_0._id_0165 == "tertiary_override") {
       return "tertiary";
+    }
   }
 
-  if(!isDefined(var_0._id_7702) || var_0._id_7702)
+  if(!isDefined(var_0._id_7702) || var_0._id_7702) {
     return "primary";
-  else
+  } else {
     return "secondary";
+  }
 }
 
 scragentsetanimscale(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_1 = undefined;
   var_0 = common_scripts\utility::array_randomize(var_0);
@@ -573,8 +600,9 @@ scragentsetanimscale(var_0) {
     }
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0[0];
+  }
 
   return var_1;
 }
@@ -582,12 +610,13 @@ scragentsetanimscale(var_0) {
 scragentsetgoalentity(var_0, var_1, var_2, var_3) {
   level._id_9068._id_9090 = var_1;
 
-  if(isDefined(level._id_746E) && var_0 != level._id_746E)
-    return scragentsetgoalradius(var_0, var_1, var_2, var_3);
-  else if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0))
+  if(isDefined(level._id_746E) && var_0 != level._id_746E) {
+    return scragentsetgoalRadius(var_0, var_1, var_2, var_3);
+  } else if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0)) {
     return scragentsetanimscale(var_1);
-  else
-    return scragentsetgoalradius(var_0, var_1, var_2, var_3);
+  } else {
+    return scragentsetgoalRadius(var_0, var_1, var_2, var_3);
+  }
 }
 
 _id_8BA2() {
@@ -658,18 +687,21 @@ _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
   level._id_A6EC = 1;
 
   if(level._id_A239 && ((maps\mp\_utility::_id_585F() || level.teambased) && level.ingraceperiod || !level.teambased && maps\mp\_utility::gettimepassed() == 0)) {
-    if(level.teambased)
+    if(level.teambased) {
       var_6 = _id_050D::_id_46A0(var_0);
-    else
+    } else {
       var_6 = _id_050D::_id_46A0("allies");
+    }
 
-    if(level.gametype == "zombies")
+    if(level.gametype == "zombies") {
       var_6 = _id_050D::_id_3ACC(var_6);
+    }
   } else {
     var_6 = _id_050D::_id_44F9(var_0);
 
-    if(level.gametype == "zombies" && isDefined(level.zombies_active_spawn_event))
+    if(level.gametype == "zombies" && isDefined(level.zombies_active_spawn_event)) {
       var_6 = _id_050D::filterspawnpointszombiesactiveevent(var_6);
+    }
   }
 
   var_7 = scragentsetgoalentity(var_0, var_6, var_1, var_3);
@@ -682,27 +714,30 @@ _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isDefined(self)) {
       var_10 = self._id_6870;
 
-      if(!isDefined(var_10))
+      if(!isDefined(var_10)) {
         var_10 = -1;
+      }
 
       _reconspatialevent(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", self.name, self._id_5CC6, var_10, var_0, var_8, var_9);
     } else
       _reconspatialevent(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", "unknown", -1, -1, var_0, var_8, var_9);
 
-    if(isDefined(game["spawnClaimFlipCount"]))
+    if(isDefined(game["spawnClaimFlipCount"])) {
       game["spawnClaimFlipCount"]++;
-    else
+    } else {
       game["spawnClaimFlipCount"] = 1;
+    }
 
     var_7._id_2055 = 1;
   } else
     var_7._id_2055 = 0;
 
   if(var_5 && !_func_367() && isDefined(level._id_9034)) {
-    if(level._id_9034)
+    if(level._id_9034) {
       var_11 = var_0;
-    else
+    } else {
       var_11 = maps\mp\_utility::getotherteam(var_0);
+    }
 
     if(var_7._id_2BD3 == var_11) {
       var_8 = gettime();
@@ -711,23 +746,26 @@ _id_4436(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(isDefined(self)) {
         var_10 = self._id_6870;
 
-        if(!isDefined(var_10))
+        if(!isDefined(var_10)) {
           var_10 = -1;
+        }
 
         _reconspatialevent(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", self.name, self._id_5CC6, var_10, var_0, var_8, var_9);
       } else
         _reconspatialevent(var_7.origin, "script_mp_spawn_flip: player_name %s, life_id %d, life_index %d, team %s, gameTime %d, spawnVersion %f", "unknown", -1, -1, var_0, var_8, var_9);
 
-      if(isDefined(game["spawnClaimFlipCount"]))
+      if(isDefined(game["spawnClaimFlipCount"])) {
         game["spawnClaimFlipCount"]++;
-      else
+      } else {
         game["spawnClaimFlipCount"] = 1;
+      }
 
       if(level.gametype == "war" || level.gametype == "conf") {
-        if(isDefined(game["objectiveFlipCount"]))
+        if(isDefined(game["objectiveFlipCount"])) {
           game["objectiveFlipCount"]++;
-        else
+        } else {
           game["objectiveFlipCount"] = 1;
+        }
       }
 
       level._id_9034 = !level._id_9034;
@@ -755,8 +793,9 @@ _id_2B5D() {
   }
   var_0 = maps\mp\_utility::getotherteam(level.players[0].team);
 
-  if(var_0 == "none")
+  if(var_0 == "none") {
     var_0 = "axis";
+  }
 
   var_1 = _id_050D::_id_44F9(var_0);
   var_2 = spawnStruct();
@@ -764,11 +803,13 @@ _id_2B5D() {
 }
 
 _id_5767(var_0) {
-  if(!isDefined(level._id_746E))
+  if(!isDefined(level._id_746E)) {
     return 1;
+  }
 
-  if(isDefined(var_0.team))
+  if(isDefined(var_0.team)) {
     return var_0.team == level._id_746E;
+  }
 
   return 0;
 }

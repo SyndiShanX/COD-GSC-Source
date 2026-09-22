@@ -144,8 +144,9 @@ dlc4_wave_mus_switcher() {
       var_7 = var_17;
       var_16 = var_0 _id_0366::_id_8D46();
 
-      if(_id_0378::_id_8D1B(0.02))
+      if(_id_0378::_id_8D1B(0.02)) {
         var_16 = "ravens";
+      }
 
       var_0 _id_0366::_id_8DCF(var_16);
       _id_0366::_id_8E32(var_14);
@@ -187,8 +188,9 @@ dlc4_throw_hammer() {
 dlc4_hammer_catch(var_0, var_1) {
   var_2 = self;
 
-  if(var_1 < 400 && !isDefined(var_2.catch_snd))
+  if(var_1 < 400 && !isDefined(var_2.catch_snd)) {
     var_2.catch_snd = _id_0380::_id_2889("zmb_weap_hammer_catch", undefined, var_0);
+  }
 
   wait 2;
   var_2.catch_snd = undefined;
@@ -360,8 +362,9 @@ scythe_proj_impact() {
 }
 
 scythe_charged_loop_start() {
-  if(!isDefined(self.scythe_charged_loop))
+  if(!isDefined(self.scythe_charged_loop)) {
     self.scythe_charged_loop = _id_0380::_id_288B("zmb_weap_scythe_charged_lp", self, self, 0);
+  }
 }
 
 scythe_charged_loop_stop() {
@@ -377,7 +380,7 @@ corpse_eater_soul_suck(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 moveto(var_1, 1.9);
+  var_2 moveTo(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -492,11 +495,13 @@ god_king_flame_wave_runner_start(var_0, var_1) {
 }
 
 god_king_flame_wave_runner_stop(var_0, var_1) {
-  if(isDefined(var_1.flamewave_lp))
+  if(isDefined(var_1.flamewave_lp)) {
     _id_0380::_id_6850(var_1.flamewave_lp, 2);
+  }
 
-  if(isDefined(var_1.flamewave_close_lp))
+  if(isDefined(var_1.flamewave_close_lp)) {
     _id_0380::_id_6850(var_1.flamewave_close_lp, 2);
+  }
 
   wait 1;
   _id_0380::_id_288B("zmb_gdkng_flamewave_end", var_1, var_0);
@@ -510,8 +515,9 @@ god_king_giestdrain(var_0, var_1) {
   var_0 thread drain_king(var_0, var_1);
 
   foreach(var_3 in level.blood_plates) {
-    if(_id_0547::_id_5565(var_3.setlookatent, "plate_boss_room"))
+    if(_id_0547::_id_5565(var_3.setlookatent, "plate_boss_room")) {
       thread drain_plate(var_3, var_1);
+    }
   }
 
   thread zombie_giestdrain_submix(var_0, var_1);
@@ -525,10 +531,11 @@ zombie_giestdrain_submix(var_0, var_1) {
     for(;;) {
       var_4 = _distance2d(var_3.origin, var_0.origin);
 
-      if(var_4 < 800)
+      if(var_4 < 800) {
         var_3 clientaddsoundsubmix("godking_giestdrain_mute_zvox");
-      else
+      } else {
         var_3 clientclearsoundsubmix("godking_giestdrain_mute_zvox");
+      }
 
       wait 0.2;
     }
@@ -571,8 +578,9 @@ god_king_giestdrain_plate_destroyed() {
 clear_mute_zvox_for_drain() {
   level notify("end_geistdrain_submix");
 
-  foreach(var_1 in level.players)
-  var_1 clientclearsoundsubmix("godking_giestdrain_mute_zvox");
+  foreach(var_1 in level.players) {
+    var_1 clientclearsoundsubmix("godking_giestdrain_mute_zvox");
+  }
 }
 
 god_king_sun_cast() {
@@ -607,7 +615,7 @@ god_king_detonate_throw(var_0) {
   var_1 = self;
   var_1.drain_ent = spawn("script_origin", var_1.origin);
   var_1.beam_snd = _id_0380::_id_288B("zmb_gdkng_drain", undefined, var_1.drain_ent);
-  var_1.drain_ent moveto(var_0.origin, 1.5);
+  var_1.drain_ent moveTo(var_0.origin, 1.5);
   wait 1.6;
   var_1.drain_ent delete();
 }
@@ -623,8 +631,9 @@ god_king_force_summon() {
 god_king_force_kneel() {
   wait 1;
 
-  foreach(var_1 in level.players)
-  _id_0380::_id_2888("zmb_gdkng_kneel", var_1);
+  foreach(var_1 in level.players) {
+    _id_0380::_id_2888("zmb_gdkng_kneel", var_1);
+  }
 }
 
 god_king_finale_drain_first() {

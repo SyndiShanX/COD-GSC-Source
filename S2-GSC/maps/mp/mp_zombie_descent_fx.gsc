@@ -334,6 +334,7 @@ main() {
 
   level._effect["spikeTrap"] = LoadFX("vfx/zombie/prototype_fx/zmb_med_spike_trap_on_descent");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_zombie_descent_fx::main();
+  }
 }

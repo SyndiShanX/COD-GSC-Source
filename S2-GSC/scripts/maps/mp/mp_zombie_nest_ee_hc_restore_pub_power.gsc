@@ -19,21 +19,21 @@ _id_8B28(var_0, var_1) {
   var_3 = _getanimlength(%zmb_obj_glass_fuse_open);
 
   while(!_id_3B8F(self["weather_vane"], var_2, 30, 1)) {
-    self["weather_vane"] rotateyaw(15, 0.1);
+    self["weather_vane"] rotateYaw(15, 0.1);
     _id_0378::_id_8D74("aud_weathervane_rotate", "short");
     wait 0.3;
   }
 
   var_4 = vectortoangles(var_2.origin - self["weather_vane"].origin);
   var_5 = common_scripts\utility::_id_98E7(var_4[1] + 180 > 360, var_4[1] - 180, var_4[1] + 180);
-  self["weather_vane"] rotateto((self["weather_vane"].angles[0], var_5, self["weather_vane"].angles[2]), 0.15);
+  self["weather_vane"] rotateTo((self["weather_vane"].angles[0], var_5, self["weather_vane"].angles[2]), 0.15);
   _id_0378::_id_8D74("aud_weathervane_rotate", "short");
   wait 0.15;
   var_2 setscriptablepartstate("fuse", "open");
   wait(var_3);
   var_2 setscriptablepartstate("fuse", "open_idle");
   var_2 waittill("damage");
-  _playfxontag(level._effect["zmb_ee_switch_sparks"], var_2, "tag_origin");
+  _playFXOnTag(level._effect["zmb_ee_switch_sparks"], var_2, "tag_origin");
   var_2 _id_0378::_id_8D74("aud_switch_damaged");
   common_scripts\utility::flag_set("flag_nest_hc_ee_weathervane_switch_shot");
   thread _id_8B1C();
@@ -45,8 +45,9 @@ _id_3B8F(var_0, var_1, var_2, var_3) {
   var_6 = anglesToForward(var_0.angles);
   var_7 = var_5 - var_0.origin;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_7 = var_0.origin - var_5;
+  }
 
   var_6 = var_6 * (1, 1, 0);
   var_7 = var_7 * (1, 1, 0);
@@ -54,10 +55,11 @@ _id_3B8F(var_0, var_1, var_2, var_3) {
   var_6 = vectorNormalize(var_6);
   var_8 = vectordot(var_7, var_6);
 
-  if(var_8 >= var_4)
+  if(var_8 >= var_4) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_8B1C() {
@@ -67,7 +69,7 @@ _id_8B1C() {
   thread _id_9419();
   self["waterwheel"] _id_0378::_id_8D74("aud_waterwheel");
   common_scripts\utility::_id_3C9F(_id_0557::_id_7838("5 Right Hand fuses", "lift outter rods"));
-  self["electric_panel"] setcandamage(1);
+  self["electric_panel"] setCanDamage(1);
   self["electric_panel"] thread maps\mp\gametypes\_damage::_id_8676(1, "head_gibs", maps\mp\mp_zombie_nest_ee_util::_id_9902, maps\mp\mp_zombie_nest_ee_util::_id_9903);
   self["electric_panel"] waittill("death", var_0, var_1, var_2);
   thread _id_77AB();
@@ -116,7 +118,7 @@ _id_7EF1() {
   }
 
   self["weather_vane"] notify("stop struggling");
-  self["weather_vane"] rotateyaw(360, 0.7);
+  self["weather_vane"] rotateYaw(360, 0.7);
   _id_0378::_id_8D74("aud_weathervane_rotate", "long");
   wait 0.75;
   thread _id_8B28();
@@ -126,10 +128,10 @@ _id_9485() {
   self endon("stop struggling");
 
   for(;;) {
-    self rotateyaw(-15.0, 0.6);
+    self rotateYaw(-15.0, 0.6);
     _id_0378::_id_8D74("aud_weathervane_rotate", "struggle");
     wait 0.65;
-    self rotateyaw(15.0, 0.1);
+    self rotateYaw(15.0, 0.1);
     _id_0378::_id_8D74("aud_weathervane_rotate", "struggle");
     wait 0.155;
   }
@@ -152,14 +154,14 @@ _id_A787(var_0) {
 
 _id_52E7() {
   var_0 = common_scripts\utility::_id_46B5("hc_objective_weather_vane_hint_struct", "targetname");
-  var_1 = _getent(var_0.target, "targetname");
+  var_1 = _getEnt(var_0.target, "targetname");
   var_1._id_693D = common_scripts\utility::_id_46B5(var_1.target, "targetname");
   var_2 = common_scripts\utility::_id_46B5("objective_2_possible_locations_struct", "targetname");
   var_3 = _getscriptablearray(var_2.target, "targetname");
   var_4 = common_scripts\utility::_id_44BD("objective_2_waterwheel_struct", "targetname");
   var_5 = common_scripts\utility::_id_44BD(var_4.target, "targetname");
   var_6 = common_scripts\utility::_id_46B5("objective_2_pub_panel", "targetname");
-  var_7 = _getent(var_6.target, "targetname");
+  var_7 = _getEnt(var_6.target, "targetname");
   var_8 = common_scripts\utility::_id_46B5("objective_2_pub_record_player", "targetname");
   var_9 = _getscriptablearray("zmb_phonograph_model", "targetname");
   var_10 = var_9[0];

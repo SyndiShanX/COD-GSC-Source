@@ -63,8 +63,9 @@ main() {
 }
 
 no_points_for_thule(var_0, var_1) {
-  if(common_scripts\utility::_id_562E(var_1.iszombieking))
+  if(common_scripts\utility::_id_562E(var_1.iszombieking)) {
     return 0;
+  }
 
   return 1;
 }
@@ -77,8 +78,9 @@ spawnfadein() {
   self._id_6772._id_01CA = "fullscreen";
   self._id_6772.foreground = 0;
 
-  while(!level.gamehasstarted)
+  while(!level.gamehasstarted) {
     waitframe();
+  }
 
   thread animscripts\notetracks_common::do_fade_from_black(1.15);
 }
@@ -91,29 +93,37 @@ player_clear_stuff_on_death() {
     self waittill("death");
     waitframe();
 
-    if(isDefined(self.isintrial))
+    if(isDefined(self.isintrial)) {
       self.isintrial = undefined;
+    }
 
-    if(isDefined(self.inasneakyplace))
+    if(isDefined(self.inasneakyplace)) {
       self.inasneakyplace = 0;
+    }
 
-    if(isDefined(self.hitchingaride))
+    if(isDefined(self.hitchingaride)) {
       self.hitchingaride = 0;
+    }
 
-    if(isDefined(self.isbloodtubemoonorbblocked))
+    if(isDefined(self.isbloodtubemoonorbblocked)) {
       self.isbloodtubemoonorbblocked = undefined;
+    }
 
-    if(isDefined(self.forcedblooddest))
+    if(isDefined(self.forcedblooddest)) {
       self.forcedblooddest = 0;
+    }
 
-    if(isDefined(self.tryingtoleavepap))
+    if(isDefined(self.tryingtoleavepap)) {
       self.tryingtoleavepap = 0;
+    }
 
-    if(isDefined(self.isonpushcooldown))
+    if(isDefined(self.isonpushcooldown)) {
       self.isonpushcooldown = 0;
+    }
 
-    if(isDefined(self._id_480F))
+    if(isDefined(self._id_480F)) {
       self._id_480F = 0;
+    }
   }
 }
 
@@ -129,8 +139,9 @@ handle_conditional_spawners() {
 toggle_active() {
   var_0 = self;
 
-  while(!isDefined(level.players) || level.players.size == 0)
+  while(!isDefined(level.players) || level.players.size == 0) {
     waitframe();
+  }
 
   for(;;) {
     var_0.is_zombies_spawner_script_disabled = 0;
@@ -152,8 +163,9 @@ toggle_active() {
 }
 
 descent_player_ignore_extra(var_0) {
-  if(common_scripts\utility::_id_562E(var_0.is_in_side_ee_mini_game))
+  if(common_scripts\utility::_id_562E(var_0.is_in_side_ee_mini_game)) {
     return 1;
+  }
 
   return 0;
 }
@@ -180,8 +192,9 @@ handle_boss_battle_playtest() {
   if(!getdvarint("spv_dlc4_activate_boss_battle_on_start", 0)) {
     return;
   }
-  while(!isDefined(level._id_A980))
+  while(!isDefined(level._id_A980)) {
     waitframe();
+  }
 
   level._id_A980 = 18;
   level thread maps\mp\_utility::_id_6F74(::give_all_boss_battle_perks);
@@ -197,14 +210,16 @@ give_all_boss_battle_perks() {
   var_0 endon("disconnect");
   wait 1;
 
-  while(!isalive(var_0) || !var_0 _meth_8648())
+  while(!isalive(var_0) || !var_0 _meth_8648()) {
     wait 1;
+  }
 
   var_1 = var_0 getweaponlistprimaries();
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(_weapontype(var_1[var_2]) != "melee")
+    if(_weapontype(var_1[var_2]) != "melee") {
       var_0 _id_0586::_id_0790(var_1[var_2]);
+    }
   }
 
   foreach(var_4 in ["m1911_pap_zm", "svt40_pap_zm"]) {
@@ -230,8 +245,9 @@ init_blood_plates() {
   level.blood_plates = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.setlookatent) && var_3.setlookatent == "plate_frontdoor")
+    if(isDefined(var_3.setlookatent) && var_3.setlookatent == "plate_frontdoor") {
       level.blood_plates["first_door"] = var_3;
+    }
 
     if(isDefined(var_3.setlookatent) && var_3.setlookatent == "plate_trial_room") {
       level.blood_plates["trial"] = var_3;
@@ -282,8 +298,9 @@ init_blood_plates() {
     }
   }
 
-  foreach(var_8, var_7 in level.blood_plates)
-  var_7 setup_blood_plates(var_8);
+  foreach(var_8, var_7 in level.blood_plates) {
+    var_7 setup_blood_plates(var_8);
+  }
 
   level thread maps\mp\_utility::_id_6F74(::pressure_plate_player_listen, level.blood_plates);
 }
@@ -291,8 +308,9 @@ init_blood_plates() {
 setup_blood_plates(var_0) {
   var_1 = self;
 
-  if(isDefined(self.blood_pool))
-    var_1.blood_pool moveto(var_1.blood_pool.origin + (0, 0, 30), 0.05);
+  if(isDefined(self.blood_pool)) {
+    var_1.blood_pool moveTo(var_1.blood_pool.origin + (0, 0, 30), 0.05);
+  }
 
   var_2 = "flag_plate_filled_" + var_0;
   var_3 = "flag_plate_pressed_" + var_0;
@@ -309,11 +327,13 @@ setup_blood_plates(var_0) {
   var_1.plate_failsafe_nodes = [];
   var_1.souls_max = 30;
 
-  if(var_1 == level.blood_plates["first_door"] || var_1 == level.blood_plates["trial"])
+  if(var_1 == level.blood_plates["first_door"] || var_1 == level.blood_plates["trial"]) {
     var_1.souls_max = 5;
+  }
 
-  if(var_1 == level.blood_plates["shelf"])
+  if(var_1 == level.blood_plates["shelf"]) {
     var_1.souls_max = 6;
+  }
 
   var_4 = common_scripts\utility::_id_44BE(var_1.target, "targetname");
 
@@ -369,15 +389,18 @@ blood_fill_think() {
   for(;;) {
     var_0 waittill("blood_status_updated");
 
-    if(_id_0547::_id_5565(var_0.isbloodfull, 0))
+    if(_id_0547::_id_5565(var_0.isbloodfull, 0)) {
       var_0 plate_enable_blood_collect();
+    }
 
     if(_id_0547::_id_5565(var_0.isbloodfull, 1)) {
-      while(var_0.isbloodfull == 1)
+      while(var_0.isbloodfull == 1) {
         waitframe();
+      }
 
-      if(var_0 common_scripts\utility::_id_3794("plate_reserved"))
+      if(var_0 common_scripts\utility::_id_3794("plate_reserved")) {
         var_0 common_scripts\utility::_id_37A1("plate_reserved");
+      }
     }
   }
 }
@@ -402,8 +425,9 @@ blood_state_think() {
       var_0 thread delete_fx_blood_full();
     }
 
-    if(isDefined(self.blood_pool))
+    if(isDefined(self.blood_pool)) {
       thread blood_move_gutters(var_1);
+    }
 
     var_0 notify("blood_status_updated");
     waitframe();
@@ -413,13 +437,15 @@ blood_state_think() {
 get_blood_fill_frac() {
   var_0 = self;
 
-  if(!isDefined(var_0.souls_current))
+  if(!isDefined(var_0.souls_current)) {
     var_1 = 0;
-  else
+  } else {
     var_1 = var_0.souls_current / var_0.souls_max;
+  }
 
-  if(var_1 >= 1)
+  if(var_1 >= 1) {
     var_1 = 1;
+  }
 
   return var_1;
 }
@@ -428,7 +454,7 @@ blood_move_gutters(var_0) {
   if(_id_0547::_id_5565(self.blood_pool.old_frac, var_0)) {
     return;
   }
-  self.blood_pool moveto(self.blood_pool.min_pos + (0, 0, 28 * var_0), 0.05);
+  self.blood_pool moveTo(self.blood_pool.min_pos + (0, 0, 28 * var_0), 0.05);
   self.blood_pool.old_frac = var_0;
 }
 
@@ -466,8 +492,9 @@ plate_blood_collect_think() {
   var_0.optionaldisablearclightning = 1;
   var_0 thread maps\mp\mp_zombies_soul_collection::beginazombiesoulcollectionobjectiveonstruct(var_0.souls_max, 300, 60, "plate_blood_collect_" + var_0._id_00D4, undefined, "TAG_ORIGIN", undefined, "TAG_ORIGIN", undefined, var_0.plate_model, (0, 0, 16), undefined, 1);
 
-  while(var_0.isbloodfull != 1)
+  while(var_0.isbloodfull != 1) {
     waitframe();
+  }
 
   var_0 notify("blood_plate_full");
 }
@@ -476,8 +503,9 @@ get_full_boss_blood_plates() {
   var_0 = [];
 
   foreach(var_2 in level.blood_plates) {
-    if(common_scripts\utility::_id_562E(var_2.isbloodfull) && _id_0547::_id_5565(var_2.setlookatent, "plate_boss_room"))
+    if(common_scripts\utility::_id_562E(var_2.isbloodfull) && _id_0547::_id_5565(var_2.setlookatent, "plate_boss_room")) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   return var_0;
@@ -487,8 +515,9 @@ get_not_full_boss_blood_plates() {
   var_0 = [];
 
   foreach(var_2 in level.blood_plates) {
-    if(!common_scripts\utility::_id_562E(var_2.isbloodfull) && _id_0547::_id_5565(var_2.setlookatent, "plate_boss_room"))
+    if(!common_scripts\utility::_id_562E(var_2.isbloodfull) && _id_0547::_id_5565(var_2.setlookatent, "plate_boss_room")) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   return var_0;
@@ -503,8 +532,9 @@ blood_plate_boss_reserve(var_0) {
   var_1 = self;
   var_1 common_scripts\utility::_id_379A("plate_reserved");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 thread blood_plate_reserved_fx(var_0);
+  }
 
   var_1 _id_A752("release_plate", 25);
   var_1 blood_plate_boss_release();
@@ -527,23 +557,26 @@ blood_plate_reserved_fx(var_0) {
     _triggerfx(var_5);
   }
 
-  while(var_1 common_scripts\utility::_id_3794("plate_reserved"))
+  while(var_1 common_scripts\utility::_id_3794("plate_reserved")) {
     waitframe();
+  }
 
   var_2 delete();
   var_3 delete();
   var_4 delete();
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 delete();
+  }
 }
 
 blood_plate_subtract() {
   self notify("blood_drain");
   self.souls_current = self.souls_current - 1;
 
-  if(self.souls_current < 0)
+  if(self.souls_current < 0) {
     self.souls_current = 0;
+  }
 }
 
 blood_plate_empty() {
@@ -565,26 +598,31 @@ blood_plate_unresolved_collide(var_0) {
 blood_plate_get_unresolved_collision_locs(var_0, var_1) {
   var_2 = [];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2[var_2.size] = var_0;
+  }
 
-  if(isDefined(var_0.plate_failsafe_nodes) && _isarray(var_0.plate_failsafe_nodes))
+  if(isDefined(var_0.plate_failsafe_nodes) && _isarray(var_0.plate_failsafe_nodes)) {
     var_2 = common_scripts\utility::_id_0F73(var_2, var_0.plate_failsafe_nodes);
+  }
 
-  if(isDefined(level._id_9068._id_9090) && _isarray(level._id_9068._id_9090))
+  if(isDefined(level._id_9068._id_9090) && _isarray(level._id_9068._id_9090)) {
     var_2 = common_scripts\utility::_id_0F73(var_2, level._id_9068._id_9090);
+  }
 
   return var_2;
 }
 
 on_zombie_soul_collected_func(var_0) {
-  if(!isDefined(level.blood_plate_zombie_souls_on_field))
+  if(!isDefined(level.blood_plate_zombie_souls_on_field)) {
     level.blood_plate_zombie_souls_on_field = 0;
+  }
 
   plate_souls_incriment(var_0.origin);
 
-  if(level.blood_plate_zombie_souls_on_field < level.zmb_max_soul_collection_beams)
+  if(level.blood_plate_zombie_souls_on_field < level.zmb_max_soul_collection_beams) {
     thread blood_plate_soul_fx(var_0);
+  }
 
   maps\mp\mp_zombies_soul_collection::try_play_scripted_soul_suck_anim("scripted_blood_plate");
 }
@@ -595,15 +633,17 @@ plate_souls_incriment(var_0) {
   if(!isDefined(var_1)) {
     return;
   }
-  if(!_id_0547::_id_5565(var_1.isbloodfull, 1))
+  if(!_id_0547::_id_5565(var_1.isbloodfull, 1)) {
     var_1.souls_current = var_1.souls_current + 1;
+  }
 }
 
 blood_plate_soul_fx(var_0) {
   _id_0378::_id_8D74("aud_blood_plate_absorb", var_0);
 
-  if(!isDefined(level.blood_plate_zombie_souls_on_field))
+  if(!isDefined(level.blood_plate_zombie_souls_on_field)) {
     level.blood_plate_zombie_souls_on_field = 0;
+  }
 
   self waittill("body_spawned", var_1);
 
@@ -623,16 +663,18 @@ blood_plate_soul_fx(var_0) {
   if(isDefined(var_4)) {
     var_7 = var_3;
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_7 = var_5;
+    }
 
-    _playfxontag(level._effect[var_4], var_0, var_7);
+    _playFXOnTag(level._effect[var_4], var_0, var_7);
   }
 
   wait 1;
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_6 delete();
+  }
 
   level.blood_plate_zombie_souls_on_field--;
 }
@@ -643,31 +685,36 @@ pressure_plate_player_listen(var_0) {
   level endon("disable_plate_movement");
   var_2 = [];
 
-  foreach(var_4 in var_0)
-  var_2 = common_scripts\utility::_id_0F6F(var_2, var_4.plate_trig);
+  foreach(var_4 in var_0) {
+    var_2 = common_scripts\utility::_id_0F6F(var_2, var_4.plate_trig);
+  }
 
   for(;;) {
     var_6 = undefined;
     var_4 = undefined;
 
     foreach(var_8 in var_2) {
-      if(var_1 istouching(var_8))
+      if(var_1 istouching(var_8)) {
         var_6 = var_8;
+      }
     }
 
     if(isDefined(var_6)) {
       var_4 = var_6.associated_struct;
       var_10 = 1;
 
-      if(common_scripts\utility::_id_3C77(var_4.pressed_flagname))
+      if(common_scripts\utility::_id_3C77(var_4.pressed_flagname)) {
         var_10 = 0;
+      }
 
-      if(isDefined(var_4.pressing_player))
+      if(isDefined(var_4.pressing_player)) {
         var_10 = 0;
+      }
 
       if(common_scripts\utility::_id_562E(var_10)) {
-        if(!_id_0547::_id_5565(var_1.pressed_plate, var_4))
+        if(!_id_0547::_id_5565(var_1.pressed_plate, var_4)) {
           var_1.pressed_plate = var_4;
+        }
 
         var_4 thread pressure_plate_press(var_1);
       }
@@ -677,8 +724,9 @@ pressure_plate_player_listen(var_0) {
       foreach(var_8 in var_2) {
         var_4 = var_8.associated_struct;
 
-        if(_id_0547::_id_5565(var_4.pressing_player, var_1))
+        if(_id_0547::_id_5565(var_4.pressing_player, var_1)) {
           var_4 thread pressure_plate_release();
+        }
       }
     }
 
@@ -689,13 +737,14 @@ pressure_plate_player_listen(var_0) {
 pressure_plate_press(var_0) {
   var_1 = self;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1.pressing_player = var_0;
+  }
 
   common_scripts\utility::flag_set(var_1.pressed_flagname);
   level notify("plate_pressed", var_1.plate_name);
   _id_0378::_id_8D74("aud_blood_plate_press", var_1.plate_model);
-  var_1.plate_model moveto(var_1.model_start_origin + (0, 0, -5), 1, 0.25, 0.25);
+  var_1.plate_model moveTo(var_1.model_start_origin + (0, 0, -5), 1, 0.25, 0.25);
   wait 1;
 }
 
@@ -705,7 +754,7 @@ pressure_plate_release() {
   common_scripts\utility::_id_3C7B(var_0.pressed_flagname);
   level notify("plate_unpressed", var_0.plate_name);
   _id_0378::_id_8D74("aud_blood_plate_release", var_0.plate_model);
-  var_0.plate_model moveto(var_0.model_start_origin, 1, 0.25, 0.25);
+  var_0.plate_model moveTo(var_0.model_start_origin, 1, 0.25, 0.25);
   wait 1;
 }
 
@@ -781,8 +830,9 @@ text_log_enable_when_unseen() {
     var_0 = 0;
 
     foreach(var_2 in level.players) {
-      if(text_log_player_near_or_looking(var_2, self))
+      if(text_log_player_near_or_looking(var_2, self)) {
         var_0 = 1;
+      }
     }
 
     if(!var_0) {
@@ -799,24 +849,28 @@ text_log_enable_when_unseen() {
 text_log_player_near_or_looking(var_0, var_1) {
   var_2 = distancesquared(var_0.origin, var_1.origin);
 
-  if(var_2 < 16384)
+  if(var_2 < 16384) {
     return 1;
+  }
 
-  if(var_2 > 250000)
+  if(var_2 > 250000) {
     return 0;
+  }
 
-  if(!_sighttracepassed(var_0.origin, var_1.origin, 0, var_1, var_0))
+  if(!_sighttracepassed(var_0.origin, var_1.origin, 0, var_1, var_0)) {
     return 0;
+  }
 
   var_3 = var_0 getEye();
   var_4 = var_0 _meth_8566();
   var_5 = anglesToForward(var_4);
   var_6 = vectorNormalize(var_1.origin - var_3);
 
-  if(vectordot(var_5, var_6) > 0.766)
+  if(vectordot(var_5, var_6) > 0.766) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 text_log_enable(var_0) {
@@ -830,18 +884,21 @@ text_log_disable(var_0) {
 }
 
 handle_door_orb_blockers() {
-  while(!isDefined(level._id_AC1D))
+  while(!isDefined(level._id_AC1D)) {
     waitframe();
+  }
 
   var_0 = getEntArray("door_orb_blocker", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 thread door_orb_blocker_wait_for_door_open(var_2._id_0165);
+  foreach(var_2 in var_0) {
+    var_2 thread door_orb_blocker_wait_for_door_open(var_2._id_0165);
+  }
 }
 
 door_orb_blocker_wait_for_door_open(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self delete();
+  }
 
   common_scripts\utility::_id_3C9F(var_0);
   self delete();
@@ -862,8 +919,9 @@ spawn_ice_breakers_on_door_open() {
 
   var_6 = common_scripts\utility::_id_4461(var_1[0].origin, level.players);
 
-  if(isPlayer(var_6))
+  if(isPlayer(var_6)) {
     var_6 maps\mp\_utility::_id_2CED(4, maps\mp\mp_zombie_descent_utils::vo_see_corpse_eater);
+  }
 
   wait 0.5;
   spawn_ice_breakers();
@@ -933,8 +991,9 @@ spawn_ice_breakers(var_0) {
     thread spawn_ice_breaker_ice(var_14);
     var_14.startcorpseeater = 1;
 
-    foreach(var_3 in var_1)
-    var_3 maps\mp\mp_zombie_descent_ee_main::ice_block_break();
+    foreach(var_3 in var_1) {
+      var_3 maps\mp\mp_zombie_descent_ee_main::ice_block_break();
+    }
   }
 }
 
@@ -965,36 +1024,44 @@ descent_round_start() {}
 descent_round_end() {
   thread descent_attempt_wave_story();
 
-  if(level._id_A980 >= 3)
+  if(level._id_A980 >= 3) {
     common_scripts\utility::flag_set("flag_log_reveal_24");
+  }
 
-  if(level._id_A980 >= 5)
+  if(level._id_A980 >= 5) {
     common_scripts\utility::flag_set("flag_log_reveal_25");
+  }
 
-  if(level._id_A980 >= 7)
+  if(level._id_A980 >= 7) {
     common_scripts\utility::flag_set("flag_log_reveal_26");
+  }
 
-  if(level._id_A980 >= 9)
+  if(level._id_A980 >= 9) {
     common_scripts\utility::flag_set("flag_log_reveal_27");
+  }
 
-  if(level._id_A980 >= 11)
+  if(level._id_A980 >= 11) {
     common_scripts\utility::flag_set("flag_log_reveal_28");
+  }
 
-  if(level._id_A980 >= 13)
+  if(level._id_A980 >= 13) {
     common_scripts\utility::flag_set("flag_log_reveal_29");
+  }
 
-  if(level._id_A980 >= 15)
+  if(level._id_A980 >= 15) {
     common_scripts\utility::flag_set("flag_log_reveal_30");
+  }
 }
 
 descent_attempt_wave_story() {
   wait(_randomintrange(1, 3));
 
-  if(level._id_A980 >= 3 && !common_scripts\utility::_id_562E(level.has_played_radio_convo_1) && common_scripts\utility::_id_562E(maps\mp\mp_zombie_descent_utils::vo_can_play_radio_convo()))
+  if(level._id_A980 >= 3 && !common_scripts\utility::_id_562E(level.has_played_radio_convo_1) && common_scripts\utility::_id_562E(maps\mp\mp_zombie_descent_utils::vo_can_play_radio_convo())) {
     level thread maps\mp\mp_zombie_descent_utils::vo_radio_convo_map_start();
-  else if(common_scripts\utility::_id_24A6()) {
-    if(!common_scripts\utility::_id_562E(level.bossceremonyactive))
+  } else if(common_scripts\utility::_id_24A6()) {
+    if(!common_scripts\utility::_id_562E(level.bossceremonyactive)) {
       level thread maps\mp\zombies\_zombies_audio_dlc2::playnextwavestory();
+    }
   }
 }
 
@@ -1074,8 +1141,9 @@ hack_swap_basement_cloest_door_flag() {
   var_6 = [];
 
   foreach(var_8 in var_1) {
-    if(_id_0547::_id_5565(var_8.getnegotiationnextnode, var_3))
+    if(_id_0547::_id_5565(var_8.getnegotiationnextnode, var_3)) {
       var_2[var_2.size] = var_8;
+    }
   }
 
   foreach(var_8 in var_2) {
@@ -1088,8 +1156,9 @@ hack_swap_basement_cloest_door_flag() {
   if(isDefined(var_5)) {
     var_5.getnegotiationnextnode = "flag_closet_to_basement_1";
 
-    foreach(var_13 in var_6)
-    var_13.getnegotiationnextnode = "flag_closet_to_basement_1";
+    foreach(var_13 in var_6) {
+      var_13.getnegotiationnextnode = "flag_closet_to_basement_1";
+    }
   }
 }
 
@@ -1112,17 +1181,20 @@ initflags() {
 initquestnotebook() {
   var_0 = [_id_0557::_id_7838("quest_firstdoor", "quest_firstdoor_bloodpool"), _id_0557::_id_7838("quest_pap", "quest_pap_1"), _id_0557::_id_7838("quest_deathraven", "quest_deathraven_activate_rush"), _id_0557::_id_7838("quest_deathraven", "quest_deathraven_pickup_weap"), "deathraven_spine_collected", "deathraven_metal_collected", _id_0557::_id_7838("quest_deathraven", "quest_deathraven_assemble_weap"), _id_0557::_id_7838("quest_deathraven", "quest_deathraven_fuse_weap"), _id_0557::_id_7838("quest_deathraven", "quest_deathraven_enter_trial"), "flag_blood_pool_0", "flag_blood_pool_1", "stopper_collected", "flag_blood_pool_2", _id_0557::_id_7838("quest_bloodraven", "quest_bloodraven_acquire_sheild"), "flag_radio_picked_up", _id_0557::_id_7838("quest_bloodraven", "quest_bloodraven_complete_trial"), "flag_stormraven_stopper_1_collected", "flag_stormraven_stopper_2_collected", "flag_stormraven_stopper_3_collected", "flag_stormraven_stopper_4_collected", "flag_stormraven_stoppers_placed", "flag_stormraven_runes_charged", "flag_stormraven_hammer_picked_up", "flag_stormraven_charge_puzzle_activated", "flag_stormraven_charge_puzzle_stage_three_complete", _id_0557::_id_7838("quest_stormraven", "step_stormraven_trial"), "moonraven_key_collected_01", "moonraven_key_collected_02", _id_0557::_id_7838("quest_moonraven", "quest_moonraven_reveal_chart"), "flag_gears_collected_1", "flag_gears_collected_2", "flag_gears_collected_3", "moonraven_gears_all_placed", _id_0557::_id_7838("quest_moonraven", "quest_moonraven_power_orrery"), _id_0557::_id_7838("quest_moonraven", "quest_moonraven_acquire_scepter"), "moon_constellation_1_complete", "moon_constellation_2_complete", "moon_constellation_3_complete", _id_0557::_id_7838("quest_moonraven", "quest_moonraven_unlock_trial"), _id_0557::_id_7838("quest_moonraven", "quest_moonraven_enter_trial"), "flag_plinth_all_weapons_placed", _id_0557::_id_7838("quest_bossfight", "quest_bossfight_start")];
 
-  for(var_1 = 0; !all_flags_exist(var_0); var_1++)
+  for(var_1 = 0; !all_flags_exist(var_0); var_1++) {
     waitframe();
+  }
 
-  foreach(var_3 in var_0)
-  _id_0557::_id_AB8C(var_3);
+  foreach(var_3 in var_0) {
+    _id_0557::_id_AB8C(var_3);
+  }
 }
 
 all_flags_exist(var_0) {
   foreach(var_2 in var_0) {
-    if(!common_scripts\utility::_id_3C83(var_2))
+    if(!common_scripts\utility::_id_3C83(var_2)) {
       return 0;
+    }
   }
 
   return 1;
@@ -1234,15 +1306,17 @@ trap_archives_spikes_damage_players(var_0) {
     var_4 = _distance2d(var_3.origin, var_0.origin);
 
     if(var_4 < 100 && var_3.origin[2] < self.origin[2]) {
-      if(isalive(var_3) && !_id_0547::_id_577E(var_3))
+      if(isalive(var_3) && !_id_0547::_id_577E(var_3)) {
         var_3 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
+      }
     }
   }
 }
 
 door_death_fix() {
-  while(!isDefined(level._id_AC1D))
+  while(!isDefined(level._id_AC1D)) {
     waitframe();
+  }
 
   add_zombie_door_collision_handling("flag_gallery_to_bridge_1", 1, 1);
 }
@@ -1250,14 +1324,16 @@ door_death_fix() {
 add_zombie_door_collision_handling(var_0, var_1, var_2) {
   var_3 = get_zombie_door(var_0);
 
-  foreach(var_5 in var_3._id_64C5)
-  var_3 thread assign_collision_handling(var_5, var_1, var_2);
+  foreach(var_5 in var_3._id_64C5) {
+    var_3 thread assign_collision_handling(var_5, var_1, var_2);
+  }
 }
 
 get_zombie_door(var_0) {
   foreach(var_2 in level._id_AC1D) {
-    if(_id_0547::_id_5565(var_2.getnegotiationnextnode, var_0))
+    if(_id_0547::_id_5565(var_2.getnegotiationnextnode, var_0)) {
       return var_2;
+    }
   }
 }
 
@@ -1266,11 +1342,13 @@ assign_collision_handling(var_0, var_1, var_2) {
   var_3 = 2;
 
   foreach(var_5 in self.setclientdvars) {
-    if(common_scripts\utility::_id_562E(var_1))
+    if(common_scripts\utility::_id_562E(var_1)) {
       var_0 assign_door_collision_node(var_5, 1);
+    }
 
-    if(common_scripts\utility::_id_562E(var_2))
+    if(common_scripts\utility::_id_562E(var_2)) {
       var_0 assign_door_collision_node(var_5, 0);
+    }
   }
 
   var_0._id_A045 = ::zmd_door_collision_handler;

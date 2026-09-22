@@ -22,16 +22,18 @@ _id_1A0D(var_0, var_1) {
     if(isDefined(var_3)) {
       var_4 = strtok(var_3, "| ");
 
-      if(maps\mp\_utility::getweaponclass(maps\mp\_utility::_id_452B(var_0)) == "weapon_pistol")
+      if(maps\mp\_utility::getweaponclass(maps\mp\_utility::_id_452B(var_0)) == "weapon_pistol") {
         var_4 = ["cqb", "run_and_gun"];
+      }
 
       if(var_4.size > 0) {
         var_5 = undefined;
 
-        if(common_scripts\utility::_id_0F79(var_4, var_1))
+        if(common_scripts\utility::_id_0F79(var_4, var_1)) {
           var_5 = var_1;
-        else
+        } else {
           var_5 = common_scripts\utility::random(var_4);
+        }
 
         maps\mp\bots\_bots_util::_id_1AD5(var_5);
       }

@@ -23,8 +23,9 @@ _id_87A7() {
     level._id_0A41["leprechauns"]["think"] = ::leprechaun_think;
     level._id_0A41["leprechauns"]["on_killed"] = ::on_leprechaun_killed;
 
-    while(!isDefined(level._id_0A41) || !isDefined(level._id_0A41["player"]))
+    while(!isDefined(level._id_0A41) || !isDefined(level._id_0A41["player"])) {
       waitframe();
+    }
 
     level._id_0A41["leprechauns"]["on_damaged"] = level._id_0A41["player"]["on_damaged"];
     level._id_0A41["leprechauns"]["on_damaged_finished"] = level._id_0A41["player"]["on_damaged_finished"];
@@ -33,10 +34,11 @@ _id_87A7() {
     level.spawns_without_leprechaun = 0;
     var_0 = randomint(2);
 
-    if(var_0 == 0)
+    if(var_0 == 0) {
       level.leprechauns_team = "axis";
-    else
+    } else {
       level.leprechauns_team = "allies";
+    }
 
     level thread try_spawn_leprechauns();
   }
@@ -64,8 +66,9 @@ try_spawn_leprechauns() {
     }
     var_1 = getdvarint("spv_lep_chance", 30);
 
-    if(var_1 <= 0)
+    if(var_1 <= 0) {
       var_1 = 1;
+    }
 
     var_2 = randomint(var_1);
 
@@ -81,22 +84,25 @@ try_spawn_leprechauns() {
     var_5 = [];
 
     foreach(var_7 in level.players) {
-      if(maps\mp\_utility::isreallyalive(var_7))
+      if(maps\mp\_utility::isreallyalive(var_7)) {
         var_5[var_5.size] = var_7;
+      }
     }
 
     if(isDefined(var_5) && var_5.size > 0) {
       var_9 = randomint(var_5.size);
 
-      if(isDefined(var_5[var_9]))
+      if(isDefined(var_5[var_9])) {
         var_4 = var_5[var_9].origin;
+      }
     }
 
     if(isDefined(var_4)) {
       level.leprechaun_spawns = _getnodesinradiussorted(var_4, 2000, 1000, 500, "Path");
 
-      if(level.leprechaun_spawns.size > 0)
+      if(level.leprechaun_spawns.size > 0) {
         level spawn_leprechaun_handler();
+      }
     }
   }
 }
@@ -112,11 +118,13 @@ spawn_leprechaun_handler() {
 spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("disconnect");
 
-  while(!isDefined(level._id_4696))
+  while(!isDefined(level._id_4696)) {
     waitframe();
+  }
 
-  if(self._id_4B60)
+  if(self._id_4B60) {
     wait(_randomintrange(6, 10));
+  }
 
   maps\mp\agents\_agent_utility::_id_5334(1);
 
@@ -141,24 +149,28 @@ spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_11 = var_7;
   var_12 = _playerphysicstrace(var_10, var_11);
 
-  if(distancesquared(var_12, var_10) > 1)
+  if(distancesquared(var_12, var_10) > 1) {
     var_7 = var_12;
+  }
 
   self spawnagent(var_7, var_8);
   self[[level.bot_funcs["bot_set_difficulty"]]]("veteran");
   self[[level.bot_funcs["bot_set_personality"]]]("run_and_gun");
   maps\mp\agents\_agent_common::_id_83FD(getdvarint("spv_lep_health", 700));
 
-  if(isDefined(var_4) && var_4)
+  if(isDefined(var_4) && var_4) {
     self._id_7DAD = 1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     maps\mp\agents\_agent_utility::hudoutlineenable(var_2.team, var_2);
-  else
+  } else {
     maps\mp\agents\_agent_utility::hudoutlineenable(level.leprechauns_team);
+  }
 
-  if(isDefined(self._id_0117))
+  if(isDefined(self._id_0117)) {
     self thread[[level._id_0A55]](self._id_0117);
+  }
 
   thread maps\mp\_flashgrenades::_id_6394();
   self enableanimstate(0);
@@ -173,8 +185,9 @@ spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self thread[[level.bot_funcs["bot_think_tactical_goals"]]]();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
 
-  if(!self._id_4B60)
+  if(!self._id_4B60) {
     _id_050D::_id_09FA();
+  }
 
   thread _id_0513::_id_9B90();
   self._id_4B60 = 0;
@@ -203,10 +216,11 @@ spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   thread watch_leprechaun_damage();
   level.total_leprechauns++;
 
-  if(level.leprechauns_team == "allies")
+  if(level.leprechauns_team == "allies") {
     level.leprechauns_team = "axis";
-  else if(level.leprechauns_team == "axis")
+  } else if(level.leprechauns_team == "axis") {
     level.leprechauns_team = "allies";
+  }
 
   thread message_leprechaun_arrival();
 }
@@ -214,16 +228,18 @@ spawn_leprechaun(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 message_leprechaun_arrival() {
   level endon("game_ended");
 
-  foreach(var_1 in level.players)
-  var_1 iprintlnbold(&"SPLASHES_MTX3_5_LEPRECHAUN_SPAWN");
+  foreach(var_1 in level.players) {
+    var_1 iprintlnbold(&"SPLASHES_MTX3_5_LEPRECHAUN_SPAWN");
+  }
 }
 
 message_leprechaun_death() {
   level endon("game_ended");
   wait 1;
 
-  foreach(var_1 in level.players)
-  var_1 iprintlnbold(&"SPLASHES_MTX3_5_LEPRECHAUN_DEATH");
+  foreach(var_1 in level.players) {
+    var_1 iprintlnbold(&"SPLASHES_MTX3_5_LEPRECHAUN_DEATH");
+  }
 }
 
 leprechaun_behavior_loop() {
@@ -253,15 +269,17 @@ setup_leprechaun_aim_assist() {
     return;
   }
   foreach(var_1 in level.players) {
-    if(isDefined(var_1.team) && var_1.team == self.team)
+    if(isDefined(var_1.team) && var_1.team == self.team) {
       var_1 _meth_8656(self);
+    }
   }
 
   for(;;) {
     level waittill("player_spawned", var_1);
 
-    if(isDefined(var_1.team) && var_1.team == self.team)
+    if(isDefined(var_1.team) && var_1.team == self.team) {
       var_1 _meth_8656(self);
+    }
   }
 }
 
@@ -293,32 +311,36 @@ on_leprechaun_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
     var_1 thread _id_0468::_id_0A22("lepKill");
   }
 
-  if(isDefined(level._id_6A75))
+  if(isDefined(level._id_6A75)) {
     [[level._id_6A75]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  }
 
   if(self._id_565F) {
     self._id_4B60 = 1;
 
-    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self._id_7DAD) && self._id_7DAD))
+    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self._id_7DAD) && self._id_7DAD)) {
       self thread[[maps\mp\agents\_agent_utility::_id_0A59("spawn")]]();
-    else
+    } else {
       maps\mp\agents\_agent_utility::_id_2A73();
+    }
   }
 
   level.leprechaun = undefined;
 }
 
 get_highest_streak_cost() {
-  if(!isDefined(self.killstreaks))
+  if(!isDefined(self.killstreaks)) {
     return 0;
+  }
 
   var_0 = 0;
 
   foreach(var_2 in self.killstreaks) {
     var_3 = _id_051E::_id_46B4(var_2);
 
-    if(var_3 > var_0)
+    if(var_3 > var_0) {
       var_0 = var_3;
+    }
   }
 
   return var_0;
@@ -331,9 +353,9 @@ give_leprechaun_score_over_time() {
   var_0 = 0;
   var_1 = get_highest_streak_cost();
 
-  if(maps\mp\_utility::_hasperk("specialty_killstreaks"))
+  if(maps\mp\_utility::_hasperk("specialty_killstreaks")) {
     var_0 = 1;
-  else {
+  } else {
     var_0 = 100;
     var_1 = int(var_1 / var_0);
   }
@@ -348,18 +370,21 @@ is_valid_leprechaun_attacker(var_0) {
   var_1 = undefined;
 
   if(isDefined(var_0) && isDefined(self._id_0117)) {
-    if(isDefined(var_0._id_0117) && isPlayer(var_0._id_0117))
+    if(isDefined(var_0._id_0117) && isPlayer(var_0._id_0117)) {
       var_0 = var_0._id_0117;
+    }
 
     if(var_0 == self._id_0117) {
       return;
     }
     if(_issentient(self._id_0117) && _issentient(var_0)) {
-      if(!_isalliedsentient(self._id_0117, var_0))
+      if(!_isalliedsentient(self._id_0117, var_0)) {
         var_1 = var_0;
+      }
     } else if(level.teambased) {
-      if(self._id_0117.team != var_0.team)
+      if(self._id_0117.team != var_0.team) {
         var_1 = var_0;
+      }
     } else if(self._id_0117 != var_0)
       var_1 = var_0;
   }

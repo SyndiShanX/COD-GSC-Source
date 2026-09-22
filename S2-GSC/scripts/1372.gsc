@@ -59,7 +59,7 @@ _id_4759() {
   waitframe();
   waitframe();
   waitframe();
-  _playfxontag(common_scripts\utility::_id_44F5("zmb_sprinter_head_flies"), self, "j_head");
+  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_sprinter_head_flies"), self, "j_head");
 }
 
 _id_AB52() {
@@ -75,15 +75,17 @@ _id_AB56() {
 }
 
 _id_AB55(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(var_5 == "panzerschreck_zm" || var_5 == "bazooka_zm")
+  if(var_5 == "panzerschreck_zm" || var_5 == "bazooka_zm") {
     var_2 = self.maxhealth;
+  }
 
   _id_054D::_id_6BD1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
 _id_AB53(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(var_8) && (var_8 == "head" || var_8 == "helmet"))
+  if(isDefined(var_8) && (var_8 == "head" || var_8 == "helmet")) {
     return 1;
+  }
 
   return 0;
 }

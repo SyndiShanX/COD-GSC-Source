@@ -6,8 +6,9 @@
 main() {
   wait 0;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 codecallback_entityoutofworld() {

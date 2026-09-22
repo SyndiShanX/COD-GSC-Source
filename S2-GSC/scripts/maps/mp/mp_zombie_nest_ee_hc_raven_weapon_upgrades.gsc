@@ -96,27 +96,30 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_21[1] = var_16["success_light_2"];
   var_21[2] = var_16["success_light_3"];
   var_16["hint_light"] thread _id_9870(var_2, var_3, var_12._id_9CD6);
-  var_22 = _getent(var_16["raven_uber_trap_deposit"]._id_3E3C.target, "targetname");
-  var_23 = _getent(var_16["raven_uber_trap_deposit"]._id_3E3C.target, "targetname");
-  var_24 = _getent(var_5, "targetname");
-  var_25 = _getent(var_23.target, "targetname");
+  var_22 = _getEnt(var_16["raven_uber_trap_deposit"]._id_3E3C.target, "targetname");
+  var_23 = _getEnt(var_16["raven_uber_trap_deposit"]._id_3E3C.target, "targetname");
+  var_24 = _getEnt(var_5, "targetname");
+  var_25 = _getEnt(var_23.target, "targetname");
   var_25 hide();
 
-  if(!isDefined(level._id_7A86))
+  if(!isDefined(level._id_7A86)) {
     level._id_7A86 = [];
+  }
 
   level._id_7A86 = common_scripts\utility::_id_0F6F(level._id_7A86, var_23);
   var_12._id_9C92._id_579D = 0;
   var_12._id_9C92 thread _id_A6C1(var_3, var_2, var_16["raven_uber_trap_deposit"], var_16["raven_uber_trap_deposit_alter"], var_21, var_0);
 
-  if(!isDefined(level._id_7A85))
+  if(!isDefined(level._id_7A85)) {
     level._id_7A85 = [];
+  }
 
   level._id_7A85 = common_scripts\utility::_id_0F6F(level._id_7A85, var_24);
   var_24 thread _id_3622(var_23, "5 Right Hand fuses", "lift outter rods");
 
-  if(0)
+  if(0) {
     common_scripts\utility::_id_3C9F(_id_0557::_id_7838("4 cart", "head to com"));
+  }
 
   var_26 = var_12[[var_1]](var_16);
   var_27 = var_26[0];
@@ -131,17 +134,18 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_12._id_9C92._id_9FE5 hide();
   var_29 = _id_0585::_id_8F7E(var_12._id_9C92._id_9FE5.origin, _id_4703(var_0), _id_4702(var_0), var_16["raven_trap_pickup_trig_offset"].origin, var_0);
   var_16["raven_uber_trap_deposit_trig"] common_scripts\utility::_id_9D9F();
-  var_23 sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
+  var_23 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
   var_23 _meth_8660(1, var_16["raven_uber_trap_deposit"]._id_3E3C.origin);
   var_12._id_9C92._id_9FE5._id_65E3 delete();
   var_12._id_9C92._id_9FE5.origin = var_16["raven_uber_trap_deposit"]._id_3E3C.origin;
   var_11 = undefined;
 
-  while(!isDefined(var_11) || !var_11 _id_0585::_id_9E12(var_0))
+  while(!isDefined(var_11) || !var_11 _id_0585::_id_9E12(var_0)) {
     var_23 waittill("trigger", var_11);
+  }
 
   var_12._id_9C92._id_9FE5 show();
-  var_23 sethintstring(&"ZOMBIE_NEST_UBER_TRANSFER");
+  var_23 setHintString(&"ZOMBIE_NEST_UBER_TRANSFER");
   var_16["main_trigger"] = var_23;
   var_30["battleID"] = 3;
   var_30["event_origin"] = var_16["main_trigger"].origin;
@@ -149,7 +153,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_30["notifications"]._id_94D4 = "hc_raven_" + var_0 + "_success";
   var_30["notifications"]._id_39D1 = "hc_raven_" + var_0 + "_fail";
   var_16["activation_triggers"] = [var_23];
-  var_16["attack_positions"] = _getent(var_25.target, "targetname");
+  var_16["attack_positions"] = _getEnt(var_25.target, "targetname");
   var_31 = spawnStruct();
   var_31._id_7B8C = var_16["main_trigger"];
   var_31._id_38C3 = "zombie_" + var_0 + "_rumble";
@@ -160,22 +164,25 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_31._id_38C4["zombieObjectiveMax"] = 3;
   var_31._id_38C4["objectiveHealthSolo"] = 125;
   var_16["main_trigger"]._id_1170 = var_16["attack_positions"];
-  var_32 = _getent("rnd_forge_machine_parts", "targetname");
+  var_32 = _getEnt("rnd_forge_machine_parts", "targetname");
   var_16["main_trigger"]._id_65E8 = [var_32];
 
-  if(var_0 == "moon_raven_hc_ee" || var_0 == "storm_raven_hc_ee")
+  if(var_0 == "moon_raven_hc_ee" || var_0 == "storm_raven_hc_ee") {
     var_33 = "rnd_attack_on_deck_positions_struct";
-  else
+  } else {
     var_33 = "med_attack_on_deck_positions_struct";
+  }
 
-  if(!isDefined(level.raven_forge_active))
+  if(!isDefined(level.raven_forge_active)) {
     level.raven_forge_active = 0;
+  }
 
   maps\mp\mp_zombie_nest_special_event_creator::_id_3135(::_id_A6A4, var_16["main_trigger"], [var_16["attack_positions"]], var_30["battleID"], var_30["notifications"], var_16["activation_triggers"], var_16["main_trigger"]._id_0165, var_30["event_origin"], ::_id_6A77, ::_id_6A76, ::_id_6A78, var_31, ::_id_6A7D, var_33);
   var_23 delete();
 
-  if(!isDefined(level._id_3E3B) || !isDefined(level._id_5981))
+  if(!isDefined(level._id_3E3B) || !isDefined(level._id_5981)) {
     maps\mp\mp_zombie_nest_ee_util::_id_8A53();
+  }
 
   var_34 = level._id_3E3B;
 
@@ -193,8 +200,9 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
   var_11 = var_34 maps\mp\mp_zombie_nest_ee_util::_id_8BEC();
 
-  if(!isDefined(level._id_AACA[var_4]))
+  if(!isDefined(level._id_AACA[var_4])) {
     level._id_AACA[var_4] = maps\mp\mp_zombie_nest_ee_workbench::_id_AA7D(var_4, self);
+  }
 
   var_35 = [0, undefined];
 
@@ -205,7 +213,7 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
   maps\mp\mp_zombie_nest_ee_workbench::_id_AA7A(level._id_AACA[var_4]);
   common_scripts\utility::_id_9DA3();
-  self sethintstring(maps\mp\mp_zombie_nest_ee_workbench::_id_AA71(var_4));
+  self setHintString(maps\mp\mp_zombie_nest_ee_workbench::_id_AA71(var_4));
   var_36 = "";
   var_11 = undefined;
 
@@ -213,25 +221,28 @@ _id_7B96(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
     self waittill("trigger", var_11);
     var_36 = var_11 getcurrentweapon();
 
-    if(!issubstr(var_36, "teslagun_zm"))
+    if(!issubstr(var_36, "teslagun_zm")) {
       var_11 iprintlnbold(&"ZOMBIE_NEST_ASSEMBLE_WW_REQUIRES");
+    }
   }
 
   var_11 _id_0586::_id_0790(var_11 getcurrentweapon());
   var_37 = var_11 getweaponlistprimaries();
 
-  if(var_37.size > 0)
+  if(var_37.size > 0) {
     var_11 switchtoweapon(var_37[0]);
+  }
 
-  self sethintstring(&"ZOMBIE_NEST_ASSEMBLING_WW");
+  self setHintString(&"ZOMBIE_NEST_ASSEMBLING_WW");
   level._id_AACA[var_4] maps\mp\mp_zombie_nest_ee_workbench::_id_AA73();
-  self sethintstring(maps\mp\mp_zombie_nest_ee_workbench::_id_AA72(var_4));
+  self setHintString(maps\mp\mp_zombie_nest_ee_workbench::_id_AA72(var_4));
   level._id_AACA[var_4] thread maps\mp\mp_zombie_nest_ee_workbench::_id_AA76();
   _id_0557::_id_4BC8(var_9);
   _id_0557::_id_4BC8("tesla gun upgraded");
 
-  if(isDefined(var_6) && common_scripts\utility::_id_3C83(var_6))
+  if(isDefined(var_6) && common_scripts\utility::_id_3C83(var_6)) {
     common_scripts\utility::flag_set(var_6);
+  }
 }
 
 _id_7A8E() {
@@ -256,7 +267,7 @@ _id_8F6E(var_0, var_1, var_2, var_3, var_4) {
   var_9 = 1 / var_8;
   var_10 = var_7 * (var_9, var_9, 0);
   var_6 movegravity(var_10, var_8);
-  var_6 rotateto(var_1.angles, var_8);
+  var_6 rotateTo(var_1.angles, var_8);
   wait(var_8);
   var_6.origin = var_1.origin;
 }
@@ -269,15 +280,17 @@ _id_6A77(var_0, var_1, var_2) {
     var_4 common_scripts\utility::_id_9D9F();
   }
 
-  foreach(var_7 in level._id_7A85)
-  var_7 thread _id_2441();
+  foreach(var_7 in level._id_7A85) {
+    var_7 thread _id_2441();
+  }
 }
 
 _id_6A76(var_0, var_1) {
   var_2 = level._id_A980;
 
-  while(level._id_A980 <= var_2)
+  while(level._id_A980 <= var_2) {
     wait 5;
+  }
 
   foreach(var_4 in level._id_7A86) {
     if(!isDefined(var_4)) {
@@ -288,23 +301,27 @@ _id_6A76(var_0, var_1) {
 
   level.raven_forge_active = 0;
 
-  foreach(var_7 in level._id_7A85)
-  var_7 thread _id_6C01();
+  foreach(var_7 in level._id_7A85) {
+    var_7 thread _id_6C01();
+  }
 }
 
 _id_6A78(var_0, var_1, var_2) {
   var_3 = level._id_A980;
 
-  while(level._id_A980 <= var_3)
+  while(level._id_A980 <= var_3) {
     wait 5;
+  }
 
   level.raven_forge_active = 0;
 
-  foreach(var_5 in level._id_7A86)
-  var_5 common_scripts\utility::_id_9DA3();
+  foreach(var_5 in level._id_7A86) {
+    var_5 common_scripts\utility::_id_9DA3();
+  }
 
-  foreach(var_8 in level._id_7A85)
-  var_8 thread _id_6C01();
+  foreach(var_8 in level._id_7A85) {
+    var_8 thread _id_6C01();
+  }
 }
 
 _id_6A7D(var_0, var_1, var_2) {}
@@ -314,8 +331,9 @@ _id_A6A4(var_0, var_1, var_2) {
   var_4 = 0;
 
   foreach(var_6 in var_0) {
-    if(!isDefined(var_6._id_57A4))
+    if(!isDefined(var_6._id_57A4)) {
       var_4 = 0;
+    }
 
     var_6._id_57A4 = 0;
     var_6 thread _id_A6C0(var_4);
@@ -328,8 +346,9 @@ _id_A6A4(var_0, var_1, var_2) {
     level waittill("ee trigger was repaired", var_3, var_6);
     var_9 = var_3;
 
-    if(common_scripts\utility::_id_0F79(var_0, var_6))
+    if(common_scripts\utility::_id_0F79(var_0, var_6)) {
       var_8++;
+    }
   }
 }
 
@@ -340,10 +359,11 @@ _id_A6C0(var_0) {
   while(!self._id_57A4) {
     self waittill("trigger", var_1);
 
-    if(common_scripts\utility::_id_562E(level.raven_forge_active))
+    if(common_scripts\utility::_id_562E(level.raven_forge_active)) {
       continue;
-    else
+    } else {
       level.raven_forge_active = 1;
+    }
 
     if(var_0 == 0 || var_1 maps\mp\gametypes\zombies::_id_11C2(var_0)) {
       self._id_28D5 = 0;
@@ -393,8 +413,9 @@ _id_9870(var_0, var_1, var_2) {
     var_10 = 0;
 
     for(var_11 = 0; var_11 < var_9.size; var_11++) {
-      if(distance(self.origin, var_9[var_11].origin) < 256 && isDefined(var_9[var_11]._id_0A4B) && var_9[var_11]._id_0A4B == var_1)
+      if(distance(self.origin, var_9[var_11].origin) < 256 && isDefined(var_9[var_11]._id_0A4B) && var_9[var_11]._id_0A4B == var_1) {
         var_10 = common_scripts\utility::_id_98E7(var_10 < var_4, var_10 + 1, var_4);
+      }
     }
 
     if(var_10 == var_4 && !common_scripts\utility::_id_562E(var_7._id_5764)) {
@@ -417,8 +438,9 @@ _id_440B() {
     if(var_3._id_000A == level._id_746E) {
       continue;
     }
-    if(isalive(var_3))
+    if(isalive(var_3)) {
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
+    }
   }
 
   return var_1;
@@ -467,19 +489,21 @@ _id_4702(var_0) {
 }
 
 _id_A6B0(var_0) {
-  for(var_1 = undefined; !isDefined(var_1) || var_1 != var_0; var_1 = var_2)
+  for(var_1 = undefined; !isDefined(var_1) || var_1 != var_0; var_1 = var_2) {
     self waittill("player_used", var_2);
+  }
 }
 
 _id_902C(var_0, var_1) {
   var_2 = spawn("script_model", var_0.origin);
   var_2.targetname = var_1 + "_uber_receiver";
 
-  if(isDefined(var_0.angles))
+  if(isDefined(var_0.angles)) {
     var_2.angles = var_0.angles;
+  }
 
   var_2 setModel("zmb_gp_uber_01");
-  _playfxontag(level._effect[var_1 + "_uber"], var_2, "tag_origin");
+  _playFXOnTag(level._effect[var_1 + "_uber"], var_2, "tag_origin");
   return var_2;
 }
 
@@ -497,16 +521,17 @@ _id_44EB(var_0) {
       break;
   }
 
-  var_2 = _getent(var_1, "targetname");
+  var_2 = _getEnt(var_1, "targetname");
   return var_2._id_7AC4;
 }
 
 _id_9FE9(var_0, var_1, var_2, var_3, var_4) {
-  var_2 sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
+  var_2 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
   var_5 = undefined;
 
-  while(!isDefined(var_5) || !var_5 _id_0585::_id_9E12(var_4))
+  while(!isDefined(var_5) || !var_5 _id_0585::_id_9E12(var_4)) {
     var_2 waittill("trigger", var_5);
+  }
 
   var_6 = spawn("script_model", var_1.origin);
   var_6 setModel(var_3);
@@ -539,34 +564,37 @@ _id_2441() {
 _id_7A8A(var_0) {
   if(!0) {
     if(0) {
-      while(!isDefined(level.players) || distance(level.players[0].origin, var_0["tesla_fuse_box"].origin) > 256)
+      while(!isDefined(level.players) || distance(level.players[0].origin, var_0["tesla_fuse_box"].origin) > 256) {
         wait 0.1;
+      }
 
       var_0["zombie_spawner"] thread _id_902D();
     }
 
-    var_0["cover_model"] setcandamage(1);
+    var_0["cover_model"] setCanDamage(1);
     var_1 = 0;
 
     while(!var_1) {
       level waittill("objective_zombie_exploder_detonation", var_2, var_3);
-      var_4 = _getent(var_0["fuse_pickup"].target, "targetname");
+      var_4 = _getEnt(var_0["fuse_pickup"].target, "targetname");
 
-      if(distance(var_4.origin, var_2) <= 150)
+      if(distance(var_4.origin, var_2) <= 150) {
         var_1 = 1;
+      }
     }
   }
 
   var_0["cover_model"] thread _id_1806();
-  var_5 = _getent(var_0["fuse_pickup"].target, "targetname");
+  var_5 = _getEnt(var_0["fuse_pickup"].target, "targetname");
   var_6 = var_0["fuse_pickup"];
   return [var_5, var_6];
 }
 
 _id_7A87(var_0) {
   if(0) {
-    while(!isDefined(level.players) || distance(level.players[0].origin, var_0["cover_model"].origin) > 256)
+    while(!isDefined(level.players) || distance(level.players[0].origin, var_0["cover_model"].origin) > 256) {
       wait 0.1;
+    }
 
     var_0["zombie_spawner"] thread _id_9064();
   }
@@ -574,7 +602,7 @@ _id_7A87(var_0) {
   var_0["fuse_pickup"] hide();
   _id_A6A2(var_0["cover_model"]);
   var_0["cover_model"] thread _id_1806();
-  var_1 = _getent(var_0["fuse_pickup"].target, "targetname");
+  var_1 = _getEnt(var_0["fuse_pickup"].target, "targetname");
   var_2 = var_0["fuse_pickup"];
   return [var_1, var_2];
 }
@@ -608,8 +636,9 @@ _id_7A88(var_0) {
   _id_A6A3(var_0["cover_model"]);
   var_0["cover_model"] hide();
 
-  if(!1)
+  if(!1) {
     maps\mp\mp_zombie_nest_ee_util::_id_A6CE(var_0["tesla_fuse_box"]);
+  }
 
   var_1 = var_0["fuse_pickup"] _id_A6B9(&"ZOMBIE_NEST_PICKUP_UBER", (0, 0, 32));
   return var_1;
@@ -618,12 +647,12 @@ _id_7A88(var_0) {
 _id_7A89(var_0) {
   level endon("raven up skip");
   var_1 = 0;
-  var_2 = _getent("raven_blood_challenge_lights_start", "targetname");
+  var_2 = _getEnt("raven_blood_challenge_lights_start", "targetname");
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel("tag_origin");
-  var_2 setcandamage(1);
+  var_2 setCanDamage(1);
   var_2 maps\mp\mp_zombie_nest_ee_util::_id_A725("teslagun_zm");
-  _playfxontag(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
   var_3 linktosynchronizedparent(var_2);
   var_4 = maps\mp\mp_zombie_nest_ee_util::_id_44C8(var_2.target, 1);
   var_2._id_775E = 0;
@@ -635,18 +664,19 @@ _id_7A89(var_0) {
     var_2 thread _id_39EA(6);
     var_2 waittill("trigger");
 
-    if(var_2._id_775E >= 0)
+    if(var_2._id_775E >= 0) {
       _id_0378::_id_8D74("tesla_hc_energy_lamp_destruct", var_2.origin);
+    }
 
     var_2._id_775E++;
     wait 0.15;
   }
 
   _id_0378::_id_8D74("tesla_hc_energy_lamp_loop_off", var_2.origin);
-  _stopfxontag(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
-  var_6 = _getent(var_0["fuse_pickup"].target, "targetname");
+  _stopFXOnTag(common_scripts\utility::_id_44F5("temp_hc_challenge_indicator_lights"), var_3, "tag_origin");
+  var_6 = _getEnt(var_0["fuse_pickup"].target, "targetname");
   var_2.origin = var_6.origin;
-  var_7 = _getent(var_0["fuse_pickup"].target, "targetname");
+  var_7 = _getEnt(var_0["fuse_pickup"].target, "targetname");
   var_8 = var_0["fuse_pickup"];
   return [var_7, var_8];
 }
@@ -660,10 +690,11 @@ _id_39EA(var_0) {
 
 _id_A6A3(var_0) {
   level endon("raven up skip");
-  var_0 setcandamage(1);
+  var_0 setCanDamage(1);
 
-  for(var_1 = ""; var_1 != "MOD_GRENADE_SPLASH" && var_1 != "MOD_IMPACT" && var_1 != "MOD_EXPLOSIVE"; var_1 = var_6)
+  for(var_1 = ""; var_1 != "MOD_GRENADE_SPLASH" && var_1 != "MOD_IMPACT" && var_1 != "MOD_EXPLOSIVE"; var_1 = var_6) {
     var_0 waittill("damage", var_2, var_3, var_4, var_5, var_6);
+  }
 }
 
 _id_45CA(var_0) {
@@ -721,11 +752,13 @@ _id_A6C1(var_0, var_1, var_2, var_3, var_4, var_5) {
     self._id_9CB0 = 0;
     var_13 = _id_A667();
 
-    if(!isDefined(var_13))
+    if(!isDefined(var_13)) {
       var_13 = "not zombie";
+    }
 
-    if(var_13 == var_0 || var_0 == "zombie_any")
+    if(var_13 == var_0 || var_0 == "zombie_any") {
       var_11 = _id_9E1E(var_13, var_9, var_6);
+    }
 
     if(common_scripts\utility::_id_562E(var_11)) {
       if(!self._id_579D) {
@@ -738,8 +771,9 @@ _id_A6C1(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_11 = undefined;
       var_12++;
 
-      if(isDefined(self._id_9FE5._id_65E3))
+      if(isDefined(self._id_9FE5._id_65E3)) {
         self._id_9FE5._id_65E3 delete();
+      }
 
       self._id_9FE5._id_65E3 = _id_0547::_id_8FBA(self._id_9FE5._id_65E4, var_5 + "_uber_stg_" + var_12);
       _triggerfx(self._id_9FE5._id_65E3);
@@ -764,11 +798,13 @@ _id_9E1E(var_0, var_1, var_2) {
   while(self._id_9CB0 < var_1) {
     var_3 = _id_A667();
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "not zombie";
+    }
 
-    if(var_3 == var_0 || var_0 == "zombie_any")
+    if(var_3 == var_0 || var_0 == "zombie_any") {
       self._id_9CB0++;
+    }
   }
 
   return 1;
@@ -814,21 +850,24 @@ _id_A6A2(var_0) {
   while(!var_1) {
     level waittill("follower swing", var_2, var_3);
 
-    if(distance(var_0.origin, var_2) < var_3)
+    if(distance(var_0.origin, var_2) < var_3) {
       var_1 = 1;
+    }
   }
 }
 
 _id_A6B9(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
   self show();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     _id_0547::_id_AC41(var_0, undefined, var_2);
-  else
+  } else {
     _id_0547::_id_AC41(var_0, var_1);
+  }
 
   var_4 = "";
   var_5 = undefined;
@@ -837,8 +876,9 @@ _id_A6B9(var_0, var_1, var_2, var_3) {
     self waittill("player_used", var_5);
     var_4 = var_5 getcurrentweapon();
 
-    if(isDefined(var_3) && var_4 != var_3)
+    if(isDefined(var_3) && var_4 != var_3) {
       var_5 iprintln("need wonder weap to skip");
+    }
   }
 
   _id_0547::_id_AC40();
@@ -849,27 +889,31 @@ _id_A6B9(var_0, var_1, var_2, var_3) {
 completedeathreward() {
   common_scripts\utility::_id_3C9F("flag_nest_hc_ee_death_assembled");
 
-  foreach(var_1 in level.players)
-  var_1 _id_054C::_id_AC23("deathraven");
+  foreach(var_1 in level.players) {
+    var_1 _id_054C::_id_AC23("deathraven");
+  }
 }
 
 completebloodreward() {
   common_scripts\utility::_id_3C9F("flag_nest_hc_ee_blood_assembled");
 
-  foreach(var_1 in level.players)
-  var_1 _id_054C::_id_AC23("bloodraven");
+  foreach(var_1 in level.players) {
+    var_1 _id_054C::_id_AC23("bloodraven");
+  }
 }
 
 completestormreward() {
   common_scripts\utility::_id_3C9F("flag_nest_hc_ee_storm_assembled");
 
-  foreach(var_1 in level.players)
-  var_1 _id_054C::_id_AC23("stormraven");
+  foreach(var_1 in level.players) {
+    var_1 _id_054C::_id_AC23("stormraven");
+  }
 }
 
 completemoonreward() {
   common_scripts\utility::_id_3C9F("flag_nest_hc_ee_moon_assembled");
 
-  foreach(var_1 in level.players)
-  var_1 _id_054C::_id_AC23("moonraven");
+  foreach(var_1 in level.players) {
+    var_1 _id_054C::_id_AC23("moonraven");
+  }
 }

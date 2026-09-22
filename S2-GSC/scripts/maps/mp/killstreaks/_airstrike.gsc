@@ -26,45 +26,54 @@ _id_9E23(var_0) {
 _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon("game_ended");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 endon("disconnect");
+  }
 
   level._id_2000 = 1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 thread _id_6B75();
+  }
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_3) && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_0B9C))
+  if(maps\mp\_utility::_id_579B() && isDefined(var_3) && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_0B9C)) {
     thread[[level._id_79C2.setcontents._id_0B9C]](4.0);
-  else
+  } else {
     thread _id_11DA();
+  }
 
   var_6 = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_6 = var_2 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
+  }
 
   var_7 = 3;
 
-  if(var_6)
+  if(var_6) {
     var_7 = 4;
+  }
 
-  if(maps\mp\_utility::_id_579B() && isDefined(var_3) && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_0B98))
+  if(maps\mp\_utility::_id_579B() && isDefined(var_3) && isDefined(level._id_79C2.setcontents) && isDefined(level._id_79C2.setcontents._id_0B98)) {
     var_7 = _round(3 * level._id_79C2.setcontents._id_0B98);
+  }
 
-  if(isDefined(level._id_0811) && level._id_0811)
+  if(isDefined(level._id_0811) && level._id_0811) {
     var_7 = 1;
+  }
 
   for(var_8 = 0; var_8 < var_7 && !maps\mp\_utility::_id_5668(0, var_3); var_8++) {
-    if(isDefined(level._id_0811) && level._id_0811)
+    if(isDefined(level._id_0811) && level._id_0811) {
       wait 1.0;
-    else
+    } else {
       wait 4.0;
+    }
 
     var_9 = _id_0527::_id_4570();
 
-    if(maps\mp\_utility::_id_4571() == "mp_airship")
+    if(maps\mp\_utility::_id_4571() == "mp_airship") {
       var_9 = var_9 - 180;
+    }
 
     var_10 = [];
 
@@ -76,12 +85,13 @@ _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     if(isDefined(var_3)) {
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_9 = var_5;
+      }
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         thread _id_0527::_id_9302(var_0, [var_4], [var_9], var_1, var_3);
-      else {
+      } else {
         var_13 = _id_4435(var_10, var_9, var_3);
         thread _id_0527::_id_9302(var_0, [var_13.origin], [var_9], var_1, var_3);
       }
@@ -102,8 +112,9 @@ _id_0B9A(var_0, var_1, var_2, var_3, var_4, var_5) {
   level._id_2000 = undefined;
   level notify("carpetBombingEnded");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 notify("carpetBombingEnded");
+  }
 }
 
 _id_11DA() {
@@ -116,8 +127,9 @@ _id_4435(var_0, var_1, var_2) {
       continue;
     }
     if(isDefined(var_2)) {
-      if(level.teambased && var_4.team == var_2)
+      if(level.teambased && var_4.team == var_2) {
         continue;
+      }
     } else if(level.teambased && var_4.team == self.team && var_4 != self) {
       continue;
     }
@@ -154,9 +166,9 @@ _id_4435(var_0, var_1, var_2) {
       }
     }
 
-    if(isDefined(self) && var_4 == self)
+    if(isDefined(self) && var_4 == self) {
       continue;
-    else {
+    } else {
       if(!_bullettracepassed(var_4.origin + (0, 0, 32), var_4.origin + (0, 0, 10000), 0, var_4)) {
         var_6._id_7F31 = var_6._id_7F31 + 0.75;
         var_8._id_7F31 = var_8._id_7F31 + 0.5;
@@ -168,15 +180,17 @@ _id_4435(var_0, var_1, var_2) {
     }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_14 = var_2;
-  else
+  } else {
     var_14 = self.team;
+  }
 
   var_15 = level._id_7AD1[maps\mp\_utility::getotherteam(var_14)];
 
-  if(!level.teambased)
+  if(!level.teambased) {
     var_15 = level._id_7AD1["all"];
+  }
 
   foreach(var_17 in var_15) {
     if(!level.teambased && var_17["player"] == self.guid) {
@@ -223,8 +237,9 @@ _id_4435(var_0, var_1, var_2) {
     }
 
     if(var_10._id_7F31 == var_21._id_7F31) {
-      if(common_scripts\utility::_id_24A6())
+      if(common_scripts\utility::_id_24A6()) {
         var_21 = var_10;
+      }
     }
   }
 

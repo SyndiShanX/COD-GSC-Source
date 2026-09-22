@@ -66,8 +66,9 @@ _id_4DED(var_0) {
       var_2 = self._id_AC2C;
       wait(var_0);
 
-      if(self._id_AC2C <= var_2)
+      if(self._id_AC2C <= var_2) {
         var_1 = 1;
+      }
     }
 
     _id_35FC();
@@ -112,8 +113,9 @@ _id_20C6(var_0, var_1) {
   if(!isDefined(self._id_0A4B) || !isalive(self)) {
     return;
   }
-  if(_id_0547::_id_4B2C() && !common_scripts\utility::_id_562E(self._id_4B9F))
+  if(_id_0547::_id_4B2C() && !common_scripts\utility::_id_562E(self._id_4B9F)) {
     _id_ABE1();
+  }
 
   var_2 = _id_410B(var_0);
   self._id_1924 = var_2;
@@ -127,8 +129,9 @@ _id_410B(var_0) {
   var_1 = common_scripts\utility::_id_40B0(self.origin, var_0);
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2]._id_68A2 <= 4 && _abs(var_1[var_2].origin[2] - self.origin[2]) < 256)
+    if(var_1[var_2]._id_68A2 <= 4 && _abs(var_1[var_2].origin[2] - self.origin[2]) < 256) {
       return var_1[var_2];
+    }
   }
 
   return var_1[0];
@@ -146,8 +149,9 @@ _id_9E20() {
   self endon("lose_focus");
   var_0 = self._id_0A4B;
 
-  while(isalive(self) && isDefined(self._id_1924) && distance(self.origin, self._id_1924.origin) > 48)
+  while(isalive(self) && isDefined(self._id_1924) && distance(self.origin, self._id_1924.origin) > 48) {
     wait 0.1;
+  }
 
   self suicide();
   self._id_1924 = undefined;
@@ -182,8 +186,9 @@ _id_27CE(var_0) {
   var_1 = [];
 
   for(var_2 = 0; var_2 + 1 < var_0.size; var_2 = var_2 + 2) {
-    for(var_3 = 0; var_3 < var_0[var_2 + 1]; var_3++)
+    for(var_3 = 0; var_3 < var_0[var_2 + 1]; var_3++) {
       var_1 = common_scripts\utility::_id_0F6F(var_1, var_0[var_2]);
+    }
   }
 
   return common_scripts\utility::array_randomize(var_1);
@@ -224,13 +229,15 @@ _id_11B4(var_0) {
 }
 
 _id_11B1(var_0) {
-  foreach(var_2 in var_0)
-  _setomnvar(var_2._id_3013, -1.0);
+  foreach(var_2 in var_0) {
+    _setomnvar(var_2._id_3013, -1.0);
+  }
 }
 
 _id_11B3(var_0) {
-  foreach(var_2 in var_0)
-  _setomnvar(var_2._id_3013, -1.0);
+  foreach(var_2 in var_0) {
+    _setomnvar(var_2._id_3013, -1.0);
+  }
 }
 
 _id_11B0(var_0) {
@@ -250,8 +257,9 @@ _id_9E11(var_0, var_1, var_2) {
   var_3 = 0.5;
   var_4 = var_2;
 
-  for(var_5 = 0; var_5 < var_4.size; var_5++)
+  for(var_5 = 0; var_5 < var_4.size; var_5++) {
     var_4[var_5] endon(var_1._id_39D1);
+  }
 
   _id_A6AF(var_0, var_3);
   var_4 _id_695C(var_1._id_94D4);
@@ -259,13 +267,15 @@ _id_9E11(var_0, var_1, var_2) {
 }
 
 _id_695C(var_0) {
-  for(var_1 = 0; var_1 < self.size; var_1++)
+  for(var_1 = 0; var_1 < self.size; var_1++) {
     self[var_1] notify(var_0);
+  }
 }
 
 _id_A6AF(var_0, var_1) {
-  for(var_2 = 0; var_2 < var_0; var_2 = var_2 + var_1)
+  for(var_2 = 0; var_2 < var_0; var_2 = var_2 + var_1) {
     wait(var_1);
+  }
 }
 
 _id_45BC() {
@@ -273,8 +283,9 @@ _id_45BC() {
   var_1 = _id_0547::_id_408F();
 
   foreach(var_3 in var_1) {
-    if(isalive(var_3) && isDefined(var_3._id_9ACD) && var_3._id_9ACD == "attacking point" && _distance2dsquared(var_3.origin, self.origin) < 4096)
+    if(isalive(var_3) && isDefined(var_3._id_9ACD) && var_3._id_9ACD == "attacking point" && _distance2dsquared(var_3.origin, self.origin) < 4096) {
       var_0++;
+    }
   }
 
   return var_0;

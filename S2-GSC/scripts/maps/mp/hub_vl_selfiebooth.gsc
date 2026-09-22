@@ -20,8 +20,9 @@ _id_525D() {
 }
 
 _id_7F6F() {
-  while(!isDefined(level.player))
+  while(!isDefined(level.player)) {
     waitframe();
+  }
 
   level.player _id_90A1();
   wait 5;
@@ -40,8 +41,9 @@ _id_7F6F() {
 }
 
 _id_90A1() {
-  while(!isDefined(level.player._id_9042) || !isDefined(level.player._id_9042._id_267E))
+  while(!isDefined(level.player._id_9042) || !isDefined(level.player._id_9042._id_267E)) {
     waitframe();
+  }
 
   var_0 = level.vehicle_planecrash._id_7300.origin;
   var_1 = getdvarfloat("scr_vlobby_selfie_collision_z", 0.0);
@@ -58,20 +60,23 @@ _id_90A1() {
   var_5 setanimclass("vlobby_animclass");
   var_5 setanimstate("lobby_idle", "selfie_01", 1.0);
   var_5 _meth_84C7(level.player._id_9042._id_267E);
-  var_5 linkto(level.vehicle_planecrash._id_7300);
+  var_5 linkTo(level.vehicle_planecrash._id_7300);
   level.vehicle_planecrash._id_242C = var_5;
   self.vehicle_planethrottlereturncontrol = var_5;
 }
 
 _id_8B81() {
-  if(!isDefined(level.player))
+  if(!isDefined(level.player)) {
     return 0;
+  }
 
-  if(!isDefined(level.player._id_9042) || !isDefined(level.player._id_9042._id_267E))
+  if(!isDefined(level.player._id_9042) || !isDefined(level.player._id_9042._id_267E)) {
     return 0;
+  }
 
-  if(level.player _meth_84FC())
+  if(level.player _meth_84FC()) {
     return 0;
+  }
 
   return 1;
 }
@@ -97,6 +102,7 @@ _id_95CD() {
   if(!level.player _meth_8535(level.vehicle_planecrash._id_1EA0.origin, var_0, var_1[2] - var_0[2], 0, 0)) {
     return;
   }
-  while(isDefined(level.player) && !level.player _meth_8500())
+  while(isDefined(level.player) && !level.player _meth_8500()) {
     waitframe();
+  }
 }

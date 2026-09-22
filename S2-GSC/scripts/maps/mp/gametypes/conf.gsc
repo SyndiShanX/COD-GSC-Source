@@ -31,13 +31,15 @@ main() {
   level._id_6BAF = ::_id_6BAF;
   level._id_6B5C = ::_id_6B5C;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   game["dialog"]["gametype"] = "kc_intro";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 
   game["dialog"]["kill_confirmed"] = "kc_killconfirmed";
   game["dialog"]["kill_denied"] = "kc_killdenied";
@@ -62,8 +64,9 @@ _id_5300() {
 _id_6BAF() {
   _setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -95,8 +98,9 @@ _id_6BAF() {
 _id_6B5C(var_0, var_1, var_2) {
   level thread _id_903E(var_0, var_1);
 
-  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level._id_6C63[var_1.team]])
+  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level._id_6C63[var_1.team]]) {
     var_1._id_3B4B = 1;
+  }
 }
 
 _id_903E(var_0, var_1) {
@@ -140,10 +144,11 @@ _id_903E(var_0, var_1) {
     var_0 thread _id_95BD(level._id_31F9[var_0.guid]);
   }
 
-  if(isDefined(var_0._id_6E6B) && var_0._id_6E6B && isDefined(var_0.paratrooperinsertgroundposition))
+  if(isDefined(var_0._id_6E6B) && var_0._id_6E6B && isDefined(var_0.paratrooperinsertgroundposition)) {
     var_5 = var_0.paratrooperinsertgroundposition + (0, 0, 14);
-  else
+  } else {
     var_5 = var_0.origin + (0, 0, 14);
+  }
 
   level._id_31F9[var_0.guid]._id_28D4 = var_5;
   level._id_31F9[var_0.guid]._id_9D65.origin = var_5;
@@ -175,11 +180,13 @@ _id_8C21(var_0, var_1) {
   self hide();
 
   foreach(var_3 in level.players) {
-    if(var_3.team == var_1)
+    if(var_3.team == var_1) {
       self showtoplayer(var_3);
+    }
 
-    if(var_3.team == "spectator" && var_1 == "allies")
+    if(var_3.team == "spectator" && var_1 == "allies") {
       self showtoplayer(var_3);
+    }
   }
 
   for(;;) {
@@ -187,45 +194,53 @@ _id_8C21(var_0, var_1) {
     self hide();
 
     foreach(var_3 in level.players) {
-      if(var_3.team == var_1)
+      if(var_3.team == var_1) {
         self showtoplayer(var_3);
+      }
 
-      if(var_3.team == "spectator" && var_1 == "allies")
+      if(var_3.team == "spectator" && var_1 == "allies") {
         self showtoplayer(var_3);
+      }
 
-      if(var_0._id_A496 == var_3.team && var_3 == var_0._id_1180)
+      if(var_0._id_A496 == var_3.team && var_3 == var_0._id_1180) {
         _objective_state(var_0._id_6989, "invisible");
+      }
     }
   }
 }
 
 _id_6BBF(var_0) {
-  if(isDefined(var_0._id_0117))
+  if(isDefined(var_0._id_0117)) {
     var_0 = var_0._id_0117;
+  }
 
   var_1 = var_0.pers["team"];
 
   if(var_1 == self._id_A496) {
     var_2 = _id_0380::_id_6842("mp_kc_tag_denied", undefined, var_0.origin);
 
-    if(isPlayer(var_0))
+    if(isPlayer(var_0)) {
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_denied");
+    }
 
-    if(isDefined(self._id_1180) && isPlayer(self._id_1180))
+    if(isDefined(self._id_1180) && isPlayer(self._id_1180)) {
       self._id_1180 maps\mp\_utility::leaderdialogonplayer("kc_killlost");
+    }
 
     var_3 = self._id_A490 == var_0;
     var_0 _id_047A::_id_5A38(var_3);
   } else {
     var_4 = _id_0380::_id_6842("mp_kc_tag_collected", undefined, var_0.origin);
 
-    if(isPlayer(self._id_1180) && self._id_1180 != var_0)
+    if(isPlayer(self._id_1180) && self._id_1180 != var_0) {
       level thread maps\mp\gametypes\_rank::_id_1457("team_confirmed", self._id_1180);
+    }
 
     var_0 _id_047A::_id_5A35();
 
-    if(isPlayer(var_0))
+    if(isPlayer(var_0)) {
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_confirmed");
+    }
 
     var_0 _id_04D2::_id_47BD(var_1, 1, 1);
   }
@@ -275,8 +290,9 @@ _id_2404(var_0) {
       objective_delete(level._id_31F9[var_1]._id_6988);
       level._id_31F9[var_1]._id_9D65 delete();
 
-      for(var_2 = 0; var_2 < level._id_31F9[var_1]._id_A582.size; var_2++)
+      for(var_2 = 0; var_2 < level._id_31F9[var_1]._id_A582.size; var_2++) {
         level._id_31F9[var_1]._id_A582[var_2] delete();
+      }
 
       level._id_31F9[var_1] notify("deleted");
       level._id_31F9[var_1] = undefined;

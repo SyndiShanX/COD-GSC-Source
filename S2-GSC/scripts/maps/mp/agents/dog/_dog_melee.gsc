@@ -29,16 +29,17 @@ main() {
     return;
   }
 
-  if(var_2)
+  if(var_2) {
     var_8 = maps\mp\agents\_scriptedagents::_id_1F5B(self.origin, var_3);
-  else
+  } else {
     var_8 = 1;
+  }
 
   var_9 = undefined;
 
-  if(!var_8)
+  if(!var_8) {
     var_10 = 0;
-  else {
+  } else {
     var_9 = _id_8B8E(self._id_28D2);
     var_10 = isDefined(var_9);
   }
@@ -57,21 +58,25 @@ _id_457D() {
 }
 
 _id_8B8E(var_0) {
-  if(!self._id_3658)
+  if(!self._id_3658) {
     return undefined;
+  }
 
   var_1 = 4;
 
-  if(!maps\mp\_utility::_id_56FF(var_0))
+  if(!maps\mp\_utility::_id_56FF(var_0)) {
     return undefined;
+  }
 
-  if(_id_5797(var_0))
+  if(_id_5797(var_0)) {
     return undefined;
+  }
 
   var_2 = self.origin - var_0.origin;
 
-  if(_abs(var_2[2]) > var_1)
+  if(_abs(var_2[2]) > var_1) {
     return undefined;
+  }
 
   var_3 = vectorNormalize((var_2[0], var_2[1], 0));
   var_4 = anglesToForward(var_0.angles);
@@ -95,22 +100,26 @@ _id_8B8E(var_0) {
     }
   }
 
-  if(var_6 == 1)
+  if(var_6 == 1) {
     var_9 = 128;
-  else
+  } else {
     var_9 = 96;
+  }
 
   var_10 = var_0.origin - var_9 * var_7;
   var_11 = maps\mp\agents\_scriptedagents::_id_34A6(var_10);
 
-  if(!isDefined(var_11))
+  if(!isDefined(var_11)) {
     return undefined;
+  }
 
-  if(_abs(var_11[2] - var_10[2]) > var_1)
+  if(_abs(var_11[2] - var_10[2]) > var_1) {
     return undefined;
+  }
 
-  if(!self aiphysicstracepassed(var_0.origin + (0, 0, 4), var_11 + (0, 0, 4), self.radius, self._id_00BD))
+  if(!self aiphysicstracepassed(var_0.origin + (0, 0, 4), var_11 + (0, 0, 4), self.radius, self._id_00BD)) {
     return undefined;
+  }
 
   return var_6;
 }
@@ -141,7 +150,7 @@ _id_397B(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     return;
   }
-  self linkto(var_3);
+  self linkTo(var_3);
   self scragentdoanimrelative(var_0, var_1, var_2);
 }
 
@@ -172,10 +181,11 @@ _id_32AF(var_0, var_1) {
   var_6 = _getanimlength(var_5);
   var_7 = _getnotetracktimes(var_5, "dog_melee");
 
-  if(var_7.size > 0)
+  if(var_7.size > 0) {
     var_8 = var_7[0] * var_6;
-  else
+  } else {
     var_8 = var_6;
+  }
 
   self scragentdoanimlerp(self.origin, var_0, var_8);
   thread _id_A12D(self._id_28D2, var_8, var_1);
@@ -183,21 +193,25 @@ _id_32AF(var_0, var_1) {
   self notify("cancel_updatelerppos");
   var_9 = 0;
 
-  if(isDefined(self._id_28D2))
+  if(isDefined(self._id_28D2)) {
     var_9 = 50;
+  }
 
-  if(isDefined(self._id_60E2))
+  if(isDefined(self._id_60E2)) {
     var_9 = self._id_60E2;
+  }
 
-  if(isDefined(self._id_28D2))
+  if(isDefined(self._id_28D2)) {
     _id_3210(self._id_28D2, var_9, "MOD_IMPACT");
+  }
 
   self._id_28D2 = undefined;
 
-  if(var_3)
+  if(var_3) {
     self scragentsetanimscale(0, 1);
-  else
+  } else {
     self scragentsetanimscale(1, 1);
+  }
 
   self scragentsetphysicsmode("gravity");
   self scragentsetanimmode("anim deltas");
@@ -239,16 +253,17 @@ _id_4707(var_0, var_1) {
     var_3 = var_0.origin - self.origin;
     var_4 = length(var_3);
 
-    if(var_4 < self._id_11AB)
+    if(var_4 < self._id_11AB) {
       return self.origin;
-    else {
+    } else {
       var_3 = var_3 / var_4;
       var_5 = var_0.origin - var_3 * self._id_11AB;
 
-      if(maps\mp\agents\_scriptedagents::_id_1F5B(self.origin, var_5))
+      if(maps\mp\agents\_scriptedagents::_id_1F5B(self.origin, var_5)) {
         return var_5;
-      else
+      } else {
         return undefined;
+      }
     }
   }
 }
@@ -261,8 +276,9 @@ _id_5797(var_0) {
     var_4 = vectordot(var_3, var_1);
 
     if(var_0 _id_048A::_id_4B8D()) {
-      if(var_4 > 0.766)
+      if(var_4 > 0.766) {
         return 1;
+      }
     } else if(var_4 < -0.766)
       return 1;
   }

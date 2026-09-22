@@ -14,8 +14,9 @@ _id_4F3E() {
   level._id_A5A0 = ::_id_A596;
   level._id_A7A2 = _id_04E0::_id_4F45;
 
-  if(getdvarint("3645", 0) == 1)
+  if(getdvarint("3645", 0) == 1) {
     level._id_13AC = ::_id_13AB;
+  }
 
   level._id_1728 = 65;
   level._id_1726 = 356;
@@ -96,17 +97,19 @@ _id_4F3E() {
   setDvar("31", 0.8);
   thread _id_4F3F();
 
-  if(!level._id_A220)
+  if(!level._id_A220) {
     _id_A598();
-  else
+  } else {
     _id_669F();
+  }
 
   level._id_4F49 = ["ch_daily_2", "ch_daily_3", "ch_daily_4", "ch_daily_5"];
 }
 
 waitfor_loadmain() {
-  while(!isDefined(level._id_947C))
+  while(!isDefined(level._id_947C)) {
     waitframe();
+  }
 }
 
 _id_4F3F() {
@@ -140,8 +143,9 @@ _id_4F41() {
 _id_4F42() {
   thread _id_0482::init();
 
-  if(!getdvarint("1258", 0))
+  if(!getdvarint("1258", 0)) {
     thread _id_04D8::_id_85BE();
+  }
 }
 
 _id_87B2() {
@@ -160,8 +164,9 @@ _id_89D4() {
 }
 
 _id_37B9(var_0) {
-  if(!isDefined(var_0._id_745E))
+  if(!isDefined(var_0._id_745E)) {
     var_0._id_745E = 0;
+  }
 
   var_0._id_745E++;
 }
@@ -201,10 +206,11 @@ _id_5302() {
   var_1 = !_func_3B0();
   var_2 = "hq";
 
-  if(common_scripts\utility::_id_562E(level._id_AC5A))
+  if(common_scripts\utility::_id_562E(level._id_AC5A)) {
     var_2 = "zm";
-  else if(_func_3AE() != 0)
+  } else if(_func_3AE() != 0) {
     var_2 = "vl";
+  }
 
   thread _id_0468::_id_0A1B();
   _id_A125();
@@ -218,8 +224,9 @@ _id_5302() {
   maps\mp\gametypes\_missions::updatechalleges();
   thread _id_75D7();
 
-  if(!common_scripts\utility::_id_562E(level._id_AC5A) && _func_3AE() == 0)
+  if(!common_scripts\utility::_id_562E(level._id_AC5A) && _func_3AE() == 0) {
     thread _id_63B7();
+  }
 
   thread _id_0468::_id_2565();
   thread _id_A77F();
@@ -231,8 +238,9 @@ _id_A77F() {
   self _meth_85EF(&"hub_fade_in");
   thread afktimer();
 
-  if(getdvarint("spv_hub_special_qm", 0) == 1)
+  if(getdvarint("spv_hub_special_qm", 0) == 1) {
     _activateclientexploder(15, self);
+  }
 }
 
 afktimer() {
@@ -242,8 +250,9 @@ afktimer() {
   var_0 = 5;
 
   for(;;) {
-    while(getdvarint("spv_hub_afk_timeout", 300) < 0)
+    while(getdvarint("spv_hub_afk_timeout", 300) < 0) {
       wait(var_0);
+    }
 
     var_1 = getdvarint("spv_hub_afk_timeout", 300);
     var_2 = var_1 / var_0;
@@ -254,8 +263,9 @@ afktimer() {
       var_4 = undefined;
 
       for(var_5 = 0; var_5 < var_2; var_5++) {
-        if(!isDefined(var_4))
+        if(!isDefined(var_4)) {
           var_4 = self.origin;
+        }
 
         if(var_4 == self.origin && self getclientomnvar("ui_hub_is_preoccupied") == 0 && self._id_537B == 0) {
           wait(var_0);
@@ -266,8 +276,9 @@ afktimer() {
         break;
       }
 
-      if(var_3)
+      if(var_3) {
         _kick(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
+      }
     }
   }
 }
@@ -326,18 +337,21 @@ _id_6B85() {
   self setclientomnvar("ui_hub_1v1_queueposition", -1);
 
   if(_func_367() && !isDefined(self._id_5520)) {
-    if(level._id_A220)
+    if(level._id_A220) {
       self setclientomnvar("char_scene_state", 3);
+    }
   }
 
   _id_04E0::_id_870B(0);
 
-  if(!isDefined(level._id_4F50))
+  if(!isDefined(level._id_4F50)) {
     level._id_4F50 = 0;
+  }
 
   if(!_isdedicatedserver() && level.players.size <= 1 && _isonlinegame() && getdvarint("2568", 0) == 0) {
-    if(maps\mp\gametypes\_hud_util::shoulddohubtutorialflow() && (getdvarint("5740", 0) || !_id_04E0::_id_4B90()))
+    if(maps\mp\gametypes\_hud_util::shoulddohubtutorialflow() && (getdvarint("5740", 0) || !_id_04E0::_id_4B90())) {
       level._id_4F50 = 1;
+    }
   }
 
   if(level._id_4F50 && getdvarint("intro_anim_debug", 0) != 1) {
@@ -399,8 +413,9 @@ _id_6B85() {
 _id_6BA6() {
   _id_5302();
 
-  if(!isDefined(self._id_572A))
+  if(!isDefined(self._id_572A)) {
     self._id_572A = 0;
+  }
 
   var_0 = undefined;
   self.pers["class"] = "gamemode";
@@ -409,8 +424,9 @@ _id_6BA6() {
   var_0["loadoutDivision"] = 5;
   var_0["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(16994304, 0);
 
-  for(var_1 = 0; var_1 < 6; var_1++)
+  for(var_1 = 0; var_1 < 6; var_1++) {
     var_0["loadoutPrimaryAttachmentsGUID"][var_1] = 0;
+  }
 
   var_0["loadoutPrimaryBuff"] = "specialty_null";
   var_0["loadoutPrimaryCamoGUID"] = 0;
@@ -420,8 +436,9 @@ _id_6BA6() {
   var_0["loadoutPrimaryCharmGUID"] = 0;
   var_0["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(16994304, 0);
 
-  for(var_1 = 0; var_1 < 6; var_1++)
+  for(var_1 = 0; var_1 < 6; var_1++) {
     var_0["loadoutSecondaryAttachmentsGUID"][var_1] = 0;
+  }
 
   var_0["loadoutSecondaryBuff"] = "specialty_null";
   var_0["loadoutSecondaryCamoGUID"] = 0;
@@ -432,14 +449,16 @@ _id_6BA6() {
   var_0["loadoutEquipmentStruct"] = maps\mp\_utility::_id_44CE(0, 0);
   var_0["loadoutOffhandStruct"] = maps\mp\_utility::_id_44CE(0, 0);
 
-  for(var_1 = 0; var_1 < 4; var_1++)
+  for(var_1 = 0; var_1 < 4; var_1++) {
     var_0["loadoutKillstreaksGUID"][var_1] = 0;
+  }
 
   var_0["ignoreMeleeSlotWeapon"] = 1;
   var_0["loadoutJuggernaut"] = 0;
 
-  for(var_1 = 0; var_1 < 9; var_1++)
+  for(var_1 = 0; var_1 < 9; var_1++) {
     var_0["loadoutPerksGUID"][var_1] = 0;
+  }
 
   self.pers["gamemodeLoadout"] = var_0;
   self.class = self.pers["class"];
@@ -449,11 +468,13 @@ _id_6BA6() {
   self.maxhealth = 100;
   self.health = self.maxhealth;
 
-  if(!isDefined(self.pers["killstreaks"]))
+  if(!isDefined(self.pers["killstreaks"])) {
     self.pers["killstreaks"] = [];
+  }
 
-  if(!isDefined(self.pers["kID"]))
+  if(!isDefined(self.pers["kID"])) {
     self.pers["kID"] = 10;
+  }
 
   self setclientomnvar("send_map_load_phase", -1);
   thread _id_6372();
@@ -503,8 +524,9 @@ _id_4B5B(var_0) {
 }
 
 _id_A779(var_0) {
-  while(!_id_4B5B(var_0))
+  while(!_id_4B5B(var_0)) {
     waitframe();
+  }
 }
 
 _id_A77E() {
@@ -532,19 +554,22 @@ _id_6371() {
   }
   var_0 = getEntArray("transient_load_guard", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 threatdetectedtoplayer(self, 1);
+  foreach(var_2 in var_0) {
+    var_2 threatdetectedtoplayer(self, 1);
+  }
 
   var_4 = getEntArray("transient_load_hint", "targetname");
 
-  foreach(var_6 in var_4)
-  var_6 thread _id_63F0();
+  foreach(var_6 in var_4) {
+    var_6 thread _id_63F0();
+  }
 
   _id_A777();
   self._id_16F0 = 1;
 
-  foreach(var_2 in var_0)
-  var_2 threatdetectedtoplayer(self, 0);
+  foreach(var_2 in var_0) {
+    var_2 threatdetectedtoplayer(self, 0);
+  }
 }
 
 _id_63F0() {
@@ -618,24 +643,29 @@ _id_75D7() {
       _id_64BC();
     }
 
-    if(!_func_3B0())
+    if(!_func_3B0()) {
       self freezecontrols(1);
+    }
 
-    if(getdvarint("986") == 0)
+    if(getdvarint("986") == 0) {
       self _meth_85C7();
+    }
 
     self setclientomnvar("ui_hide_1v1scores", 1);
     self _meth_85B2(0, "mp_emote_salute");
     self._id_99FD = _getsystemtime();
 
-    if(isDefined(self._id_162C))
+    if(isDefined(self._id_162C)) {
       _id_04E0::_id_2DD2("hub_baseNameHudElem");
+    }
 
-    if(isDefined(self._id_ACA4))
+    if(isDefined(self._id_ACA4)) {
       _id_04E0::_id_2DD2("hub_zoneHudElem");
+    }
 
-    if(isDefined(self._id_177F))
+    if(isDefined(self._id_177F)) {
       self._id_177F destroy();
+    }
 
     maps\mp\_utility::giveperk("specialty_marathon");
     maps\mp\_utility::giveperk("specialty_falldamage");
@@ -681,10 +711,11 @@ _id_75D7() {
     self _meth_85BE(0);
     self._id_537B = 0;
 
-    if(_func_3AE())
+    if(_func_3AE()) {
       _id_04E0::_id_2FA2();
-    else
+    } else {
       _id_04E0::_id_3663();
+    }
 
     self._id_162C = _id_04E0::_id_2811("hub_baseNameHudElem", &"HUB_ALLIES_BASENAME", [40, -35], 1, "BOTTOM LEFT");
     self._id_ACA4 = _id_04E0::_id_2811("hub_zoneHudElem", &"HUB_ZONE_SPAWN", [40, -46], 1.5, "BOTTOM LEFT");
@@ -714,8 +745,9 @@ _id_75D7() {
     if(getdvarint("intro_anim_debug", 0) == 1) {} else
       _id_04DF::cleanuphubtutorialents();
 
-    if(_func_3AE() == 0)
+    if(_func_3AE() == 0) {
       thread _id_04E0::_id_63EA();
+    }
 
     self enablephysicaldepthoffieldscripting();
     self setphysicaldepthoffield(50, 29, 20, 20);
@@ -741,8 +773,9 @@ _id_63B7() {
   var_0 = getEntArray("officer_tower_collision", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(var_0[var_1]))
+    if(isDefined(var_0[var_1])) {
       var_0[var_1] threatdetectedtoplayer(self, 1);
+    }
   }
 
   for(;;) {
@@ -764,8 +797,9 @@ _id_63B7() {
     if(!isDefined(self._id_56D5)) {
       if(var_5) {
         for(var_1 = 0; var_1 < var_0.size; var_1++) {
-          if(isDefined(var_0[var_1]))
+          if(isDefined(var_0[var_1])) {
             var_0[var_1] threatdetectedtoplayer(self, 0);
+          }
         }
 
         self._id_56D5 = 1;
@@ -773,8 +807,9 @@ _id_63B7() {
         self._id_56D5 = 0;
     } else if(var_5) {
       for(var_1 = 0; var_1 < var_0.size; var_1++) {
-        if(isDefined(var_0[var_1]))
+        if(isDefined(var_0[var_1])) {
           var_0[var_1] threatdetectedtoplayer(self, 0);
+        }
       }
 
       self._id_56D5 = 1;
@@ -789,8 +824,9 @@ _id_21BE() {
   var_1 = maps\mp\gametypes\_rank::getrankxp();
   var_2 = maps\mp\gametypes\_rank::getrankinfomaxxp(level.maxrank);
 
-  if(var_1 >= var_2 || var_0 > 0)
+  if(var_1 >= var_2 || var_0 > 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -798,8 +834,9 @@ _id_21BE() {
 _id_4ADC() {
   level endon("game_ended");
 
-  if(!isDefined(level._id_6CB4))
-    level._id_6CB4 = _getent("officer_tower_trigger", "targetname");
+  if(!isDefined(level._id_6CB4)) {
+    level._id_6CB4 = _getEnt("officer_tower_trigger", "targetname");
+  }
 
   if(!isDefined(level._id_6CB4)) {
     return;
@@ -847,8 +884,9 @@ _id_37BC(var_0) {
 }
 
 _id_38F1(var_0) {
-  if(isDefined(self._id_308C["OverlookDoNotEnter"]))
+  if(isDefined(self._id_308C["OverlookDoNotEnter"])) {
     _id_04E0::_id_2DD2("OverlookDoNotEnter");
+  }
 }
 
 _id_6B78(var_0, var_1) {
@@ -921,10 +959,11 @@ _id_63C6() {
     }
 
     if(var_0 == "player_interact_menu") {
-      if(getdvarint("spv_hub_timer_tag_kswitch", 1) == 0 && var_2.isintimertag && var_3.isintimertag && isDefined(var_2.tagchallenger) && var_2.tagchallenger == var_3)
+      if(getdvarint("spv_hub_timer_tag_kswitch", 1) == 0 && var_2.isintimertag && var_3.isintimertag && isDefined(var_2.tagchallenger) && var_2.tagchallenger == var_3) {
         var_2 _id_04DC::attemptpasstagbomb(var_3);
-      else
+      } else {
         var_3 _id_6B78(var_1, var_2);
+      }
 
       continue;
     }
@@ -974,8 +1013,9 @@ _id_63C6() {
 }
 
 _id_577F() {
-  if(isDefined(self._id_2068))
+  if(isDefined(self._id_2068)) {
     return 1;
+  }
 
   return 0;
 }
@@ -983,8 +1023,9 @@ _id_577F() {
 _id_44B2(var_0) {
   var_1 = common_scripts\utility::_id_46AF();
 
-  if(!_func_3AC())
+  if(!_func_3AC()) {
     var_1 = common_scripts\utility::_id_46AC();
+  }
 
   var_2 = self getplayerdata(var_1, "emotes", var_0, "emote");
   return var_2;
@@ -994,14 +1035,17 @@ checkplayemote() {
   var_0 = _func_2D4(self, 1);
   var_1 = self _meth_856A();
 
-  if(_id_577F())
+  if(_id_577F()) {
     return 0;
+  }
 
-  if(_id_04E0::_id_5790())
+  if(_id_04E0::_id_5790()) {
     return 0;
+  }
 
-  if(self getstance() != "stand" && !_capsuletracepassed(self.origin + (0, 0, 6), var_1, var_0, self))
+  if(self getstance() != "stand" && !_capsuletracepassed(self.origin + (0, 0, 6), var_1, var_0, self)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1046,8 +1090,9 @@ _id_63F4() {
     if(checkplayemote()) {
       var_0 = _id_44B2(0);
 
-      if(_id_7219(var_0))
+      if(_id_7219(var_0)) {
         wait 1;
+      }
     }
   }
 }
@@ -1065,8 +1110,9 @@ _id_6382() {
     if(checkplayemote()) {
       var_0 = _id_44B2(1);
 
-      if(_id_7219(var_0))
+      if(_id_7219(var_0)) {
         wait 1;
+      }
     }
   }
 }
@@ -1085,8 +1131,9 @@ _id_63A9() {
     if(checkplayemote()) {
       var_2 = _id_44B2(2);
 
-      if(_id_7219(var_2))
+      if(_id_7219(var_2)) {
         wait 1;
+      }
     }
   }
 }
@@ -1106,8 +1153,9 @@ _id_63D7() {
       if(checkplayemote()) {
         var_0 = _id_44B2(3);
 
-        if(_id_7219(var_0))
+        if(_id_7219(var_0)) {
           wait 1;
+        }
       }
 
       continue;
@@ -1134,20 +1182,23 @@ _id_63F9() {
     _id_04E0::_id_7471("cao_background_camera");
 
     if(isDefined(self._id_56A4) && self._id_56A4) {
-      if(isDefined(self._id_155F))
+      if(isDefined(self._id_155F)) {
         self._id_155F _id_04E0::_id_1543((0, 0, 80), self);
+      }
     }
 
     for(;;) {
       self waittill("luinotifyserver", var_0, var_1);
 
       if(var_0 == "hub_move_player_to_hub") {
-        while(!isDefined(self._id_9092))
+        while(!isDefined(self._id_9092)) {
           waitframe();
+        }
 
         if(isDefined(self._id_64A4) && self._id_64A4 == 1) {
-          if(!isDefined(self.warpingtosupplydrop))
+          if(!isDefined(self.warpingtosupplydrop)) {
             self setOrigin(self._id_9092);
+          }
         }
 
         self._id_64A4 = 0;
@@ -1178,11 +1229,13 @@ _id_63F8() {
     if(var_0 != "hub_is_menu_open") {
       continue;
     }
-    if(var_1 == 2)
+    if(var_1 == 2) {
       _id_64BC();
+    }
 
-    if(var_1 >= 1)
+    if(var_1 >= 1) {
       _id_63F9();
+    }
   }
 }
 
@@ -1198,8 +1251,9 @@ _id_63E7() {
     }
     var_2 = tablelookup("mp/supplyDropTypes.csv", 1, var_1, 0);
 
-    if(var_2 != "")
+    if(var_2 != "") {
       thread _id_04DD::_id_11BF(var_1);
+    }
   }
 }
 
@@ -1211,8 +1265,9 @@ _id_63CE() {
   self notifyonplayercommand("beginSupplyDrop_Input", "+attack");
   self notifyonplayercommand("beginSupplyDrop_Input", "+attack_akimbo_accessible");
 
-  if(!level._id_258F)
+  if(!level._id_258F) {
     self notifyonplayercommand("beginSupplyDrop_Input_KBM", "+smoke");
+  }
 
   for(;;) {
     var_0 = common_scripts\utility::waittill_any_return("beginSupplyDrop_Input", "beginSupplyDrop_Input_KBM");
@@ -1233,8 +1288,9 @@ _id_63CE() {
     }
     var_2 = self getclientomnvar("ui_hub_in_shootout");
 
-    if(!_id_04E0::_id_5790() && !var_2)
+    if(!_id_04E0::_id_5790() && !var_2) {
       self setclientomnvar("ui_show_supply_drop_selection", 1);
+    }
 
     wait 0.1;
   }
@@ -1256,8 +1312,9 @@ monitortriangle() {
     if(level._id_4F50) {
       continue;
     }
-    if(!_id_04E0::_id_5790())
+    if(!_id_04E0::_id_5790()) {
       self setclientomnvar("ui_hub_show_social_pause", 1);
+    }
 
     wait 1.0;
   }
@@ -1271,17 +1328,18 @@ _id_63CD() {
   thread _id_04E0::disablefocus(int(_tablelookupbyrow("mp/quickchat.csv", 0, 2)) / 1000, "startChatTimeout", var_0);
   var_1 = common_scripts\utility::waittill_any_return("anyDpadPressed", "startChatTimeout");
 
-  if(var_1 == "anyDpadPressed")
+  if(var_1 == "anyDpadPressed") {
     thread _id_04E0::disablefocus(int(_tablelookupbyrow("mp/quickchat.csv", 0, 3)) / 1000, "chatSelectTimeout", var_0);
-  else if(var_1 == "startChatTimeout") {
+  } else if(var_1 == "startChatTimeout") {
     thread _id_04E0::_id_3010("startChatTO", &"HUB_QUICKCHAT_TO", undefined, -100, 0.6, 2);
     return;
   }
 
   var_2 = common_scripts\utility::waittill_any_return("anyDpadPressed", "chatSelectTimeout");
 
-  if(var_2 == "chatSelectTimeout")
+  if(var_2 == "chatSelectTimeout") {
     thread _id_04E0::_id_3010("chatSelectTO", &"HUB_QUICKCHAT_TO", undefined, -100, 0.6, 2);
+  }
 
   return;
 }
@@ -1314,17 +1372,21 @@ _id_A598() {
 _id_A124(var_0) {
   self endon("disconnect");
 
-  if(!isDefined(self._id_20A9))
+  if(!isDefined(self._id_20A9)) {
     self._id_20A9 = [];
+  }
 
-  if(!isDefined(game["challengeStruct"]))
+  if(!isDefined(game["challengeStruct"])) {
     game["challengeStruct"] = [];
+  }
 
-  if(!isDefined(game["challengeStruct"]["limitedChallengesReset"]))
+  if(!isDefined(game["challengeStruct"]["limitedChallengesReset"])) {
     game["challengeStruct"]["limitedChallengesReset"] = [];
+  }
 
-  if(!isDefined(game["challengeStruct"]["challengesCompleted"]))
+  if(!isDefined(game["challengeStruct"]["challengesCompleted"])) {
     game["challengeStruct"]["challengesCompleted"] = [];
+  }
 
   var_1 = maps\mp\gametypes\_hud_util::_id_2098(var_0);
 
@@ -1382,8 +1444,9 @@ _id_637D() {
   level endon("game_ended");
 
   if(isDefined(self._id_572A) && !self._id_572A) {
-    if(isDefined(level._id_4F38))
+    if(isDefined(level._id_4F38)) {
       level._id_4F38._id_787F = common_scripts\utility::_id_0F93(level._id_4F38._id_787F, self);
+    }
 
     self notify("luinotifyserver", "enter_1v1", 0);
   } else if(isDefined(self._id_572A) && self._id_572A)
@@ -1407,22 +1470,25 @@ _id_637D() {
     self._id_A405 = undefined;
   }
 
-  if(isDefined(self._id_9B66))
+  if(isDefined(self._id_9B66)) {
     self._id_9B66 delete();
+  }
 
   foreach(var_1 in level.players) {
     if(isDefined(var_1._id_746C)) {
-      if(!isDefined(self))
+      if(!isDefined(self)) {
         var_1._id_746C = common_scripts\utility::_id_0FA0(var_1._id_746C);
-      else
+      } else {
         var_1._id_746C = common_scripts\utility::_id_0F98(self, var_1._id_746C);
+      }
 
       var_1 _meth_85CD(var_1._id_746C);
     }
   }
 
-  if(isDefined(self._id_8B24))
+  if(isDefined(self._id_8B24)) {
     self._id_8B24 thread _id_04DB::_id_4B07(undefined, undefined, 1);
+  }
 }
 
 _id_906B() {
@@ -1440,6 +1506,7 @@ _id_906B() {
 
   wait 15;
 
-  foreach(var_3 in var_0)
-  var_3 delete();
+  foreach(var_3 in var_0) {
+    var_3 delete();
+  }
 }

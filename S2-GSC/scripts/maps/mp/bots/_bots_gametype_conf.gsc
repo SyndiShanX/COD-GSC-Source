@@ -30,8 +30,9 @@ _id_197D() {
   if(self._id_6F7D == "camper") {
     self._id_257C = 0;
 
-    if(!isDefined(self._id_257D))
+    if(!isDefined(self._id_257D)) {
       self._id_257D = 0;
+    }
   }
 
   for(;;) {
@@ -42,8 +43,9 @@ _id_197D() {
       var_2 = self botgetscriptgoal();
 
       if(maps\mp\bots\_bots_util::_id_1B1C(self._id_95A8._id_487B, var_2)) {
-        if(self botpursuingscriptgoal())
+        if(self botpursuingscriptgoal()) {
           var_1 = 1;
+        }
       } else if(maps\mp\bots\_bots_strategy::_id_1A14("kill_tag") && self._id_95A8 _id_04D1::_id_1F53(self.team)) {
         self._id_95A8 = undefined;
         var_0 = 0;
@@ -70,10 +72,11 @@ _id_197D() {
         self._id_257D = 1;
 
         if(maps\mp\bots\_bots_personality::_id_8B73()) {
-          if(maps\mp\bots\_bots_personality::_id_3B64(self._id_95A8._id_487B, 1000))
+          if(maps\mp\bots\_bots_personality::_id_3B64(self._id_95A8._id_487B, 1000)) {
             childthread _id_1954(self._id_95A8, "camp");
-          else
+          } else {
             self._id_257D = 0;
+          }
         }
       }
 
@@ -89,12 +92,14 @@ _id_197D() {
 
     var_6 = 0;
 
-    if(isDefined(self._id_09B4))
+    if(isDefined(self._id_09B4)) {
       var_6 = self[[self._id_09B4]]();
+    }
 
     if(!isDefined(self._id_95A8)) {
-      if(!var_6)
+      if(!var_6) {
         self[[self._id_6F7F]]();
+      }
     }
 
     if(gettime() > self._id_66B7) {
@@ -116,8 +121,9 @@ _id_196E(var_0) {
 
       if(var_2 > 0) {
         if(var_2 < level._id_1AF5) {
-          if(!isDefined(self._id_5B60))
+          if(!isDefined(self._id_5B60)) {
             self._id_5B60 = 0;
+          }
 
           if(gettime() - self._id_5B60 > 3000) {
             self._id_5B60 = gettime();
@@ -181,8 +187,9 @@ _id_197C(var_0, var_1) {
       }
     }
 
-    if(!var_5)
+    if(!var_5) {
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_4);
+    }
   }
 
   return var_2;
@@ -194,8 +201,9 @@ _id_1A37(var_0, var_1, var_2) {
     var_0._id_1E4D = 1;
   }
 
-  if(isDefined(var_0._id_1E5A))
+  if(isDefined(var_0._id_1E5A)) {
     return 0;
+  }
 
   var_3 = var_0._id_6638;
   var_4 = !isDefined(var_0._id_6AA9);
@@ -211,8 +219,9 @@ _id_1A37(var_0, var_1, var_2) {
           thread _id_1E48(var_0);
           _id_A761(var_0);
 
-          if(!var_0._id_6AA9)
+          if(!var_0._id_6AA9) {
             return 0;
+          }
         }
 
         return 1;
@@ -226,17 +235,19 @@ _id_1A37(var_0, var_1, var_2) {
 _id_19D1(var_0, var_1, var_2) {
   var_3 = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
-  else
+  } else {
     var_3 = self getnearestnode();
+  }
 
   var_4 = undefined;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2;
-  else
+  } else {
     var_4 = self botgetfovdot();
+  }
 
   var_5 = [];
 
@@ -278,16 +289,18 @@ _id_1E48(var_0) {
   if(var_0._id_6AA9) {
     var_0._id_487B = _getgroundposition(var_0._id_28D4, 0, 256, 32);
 
-    if(!isDefined(var_0._id_487B))
+    if(!isDefined(var_0._id_487B)) {
       var_0._id_6AA9 = 0;
+    }
   }
 
   var_0._id_1E5A = undefined;
 }
 
 _id_A761(var_0) {
-  while(!isDefined(var_0._id_6AA9))
+  while(!isDefined(var_0._id_6AA9)) {
     waitframe();
+  }
 }
 
 _id_19C9(var_0, var_1) {
@@ -318,8 +331,9 @@ _id_1AB5(var_0) {
 
   foreach(var_3 in var_0) {
     if(var_3._id_95A6 _id_04D1::_id_1F53(self.team) && maps\mp\bots\_bots_util::_id_1B1C(var_3._id_95A6._id_28D4, var_3.origin)) {
-      if(!_id_196E(var_3._id_95A6) && var_3._id_95A6._id_6AA9)
+      if(!_id_196E(var_3._id_95A6) && var_3._id_95A6._id_6AA9) {
         var_1 = common_scripts\utility::_id_0F6F(var_1, var_3);
+      }
     }
   }
 
@@ -335,14 +349,16 @@ _id_424F(var_0) {
     }
     if(var_3.team == self.team && var_3 != self) {
       if(_isai(var_3)) {
-        if(isDefined(var_3._id_95A8) && var_3._id_95A8 == var_0)
+        if(isDefined(var_3._id_95A8) && var_3._id_95A8 == var_0) {
           var_1++;
+        }
 
         continue;
       }
 
-      if(distancesquared(var_3.origin, var_0._id_28D4) < 160000)
+      if(distancesquared(var_3.origin, var_0._id_28D4) < 160000) {
         var_1++;
+      }
     }
   }
 
@@ -354,8 +370,9 @@ _id_1954(var_0, var_1, var_2) {
   self endon("bot_camp_tag");
   self endon("stop_camping_tag");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self endon(var_2);
+  }
 
   self botsetscriptgoalnode(self._id_6708, var_1, self._id_0D94);
   var_3 = maps\mp\bots\_bots_util::_id_1B21();

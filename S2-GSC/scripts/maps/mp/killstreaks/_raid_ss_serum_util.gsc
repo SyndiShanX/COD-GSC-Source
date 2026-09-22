@@ -4,8 +4,9 @@
 ***************************************************************/
 
 serumhadperk(var_0) {
-  if(isDefined(self.raidpreserumperkslist[var_0]))
+  if(isDefined(self.raidpreserumperkslist[var_0])) {
     return 1;
+  }
 
   return 0;
 }
@@ -54,20 +55,25 @@ altered_state_apply(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(common_scripts\utility::_id_562E(var_6.in_altered_state)) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 30.0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "blue";
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1.0;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0.25;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1.0;
+  }
 
   var_6 notify("altered_state_apply");
   var_6 thread altered_state_death_listener();
@@ -149,8 +155,9 @@ altered_state_fade_in(var_0, var_1) {
   if(!maps\mp\_utility::isreallyalive(var_2)) {
     return;
   }
-  if(!isDefined(var_2.altered_state_overlay_fade))
+  if(!isDefined(var_2.altered_state_overlay_fade)) {
     var_2.altered_state_overlay_fade = altered_state_create_client_overlay("white", var_1, var_2);
+  }
 
   var_2.altered_state_overlay_fade.alpha = 0;
   var_2.altered_state_overlay_fade fadeovertime(var_0);
@@ -179,13 +186,15 @@ altered_state_fade_out(var_0, var_1) {
 altered_state_create_client_overlay(var_0, var_1, var_2, var_3) {
   var_4 = 1;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_3;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 = _newclienthudelem(var_2);
-  else
+  } else {
     var_5 = newhudelem();
+  }
 
   var_5.x = 0;
   var_5.y = 0;
@@ -203,8 +212,9 @@ altered_state_create_client_overlay(var_0, var_1, var_2, var_3) {
 altered_state_hide_client_overlay() {
   var_0 = self;
 
-  if(isDefined(var_0.altered_state_overlay_fade))
+  if(isDefined(var_0.altered_state_overlay_fade)) {
     var_0.altered_state_overlay_fade.alpha = 0.0;
+  }
 }
 
 altered_state_start_fx(var_0) {
@@ -246,11 +256,13 @@ altered_state_start_fx(var_0) {
 altered_state_kill_fx() {
   var_0 = self;
 
-  if(isDefined(var_0.altered_state_fx))
+  if(isDefined(var_0.altered_state_fx)) {
     var_0.altered_state_fx delete();
+  }
 
-  if(isDefined(var_0.altered_state_fx_3rd))
+  if(isDefined(var_0.altered_state_fx_3rd)) {
     var_0.altered_state_fx_3rd delete();
+  }
 }
 
 pickupisserum(var_0) {

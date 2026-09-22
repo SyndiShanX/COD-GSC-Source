@@ -25,14 +25,16 @@ _id_7603() {
   self._id_4D07 = [];
   var_0 = getEntArray(self.target, "targetname");
 
-  foreach(var_2 in var_0)
-  _id_7601(var_2);
+  foreach(var_2 in var_0) {
+    _id_7601(var_2);
+  }
 
   self._id_9835 = var_0;
   var_4 = common_scripts\utility::_id_46B7(self.target, "targetname");
 
-  foreach(var_6 in var_4)
-  _id_7605(var_6);
+  foreach(var_6 in var_4) {
+    _id_7605(var_6);
+  }
 
   self.target_structs = var_4;
 
@@ -119,28 +121,33 @@ _id_7604() {
   for(;;) {
     _id_0378::_id_8D74("generator_power_switch_state", "stopped");
 
-    foreach(var_4 in self._id_8BF7)
-    var_4 hide();
+    foreach(var_4 in self._id_8BF7) {
+      var_4 hide();
+    }
 
-    foreach(var_4 in self._id_4D07)
-    var_4 show();
+    foreach(var_4 in self._id_4D07) {
+      var_4 show();
+    }
 
-    self._id_9D65 setcursorhint("HINT_NOICON");
-    self._id_9D65 sethintstring(&"ZOMBIES_POWER_ON");
+    self._id_9D65 setCursorHint("HINT_NOICON");
+    self._id_9D65 setHintString(&"ZOMBIES_POWER_ON");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 delete();
+    }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
 
     if(isDefined(self._id_5104)) {
       var_1 = _id_0547::_id_8FBA(self._id_5104, self._id_5104._id_81BB);
       _triggerfx(var_1, 0.5);
     }
 
-    if(isDefined(self._id_6298._id_75FB))
+    if(isDefined(self._id_6298._id_75FB)) {
       self._id_6298 scriptmodelplayanim(self._id_6298._id_75FB);
+    }
 
     for(;;) {
       self._id_9D65 waittill("trigger", var_8);
@@ -156,21 +163,23 @@ _id_7604() {
     level._id_7F21[level._id_7F21.size] = self._id_7602;
     level notify("power_on");
     level._id_75FD = 1;
-    self._id_9D65 sethintstring("");
+    self._id_9D65 setHintString("");
     self notify("on");
     common_scripts\utility::flag_set(self.getnegotiationnextnode);
     _id_0378::_id_8D74("generator_power_switch_state", "starting");
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
 
     if(isDefined(self._id_5105)) {
       var_2 = spawn("script_model", self._id_5105.origin);
       var_2.angles = self._id_5105.angles;
       var_2 setModel("tag_origin");
 
-      if(isDefined(self._id_5105._id_81C7))
-        var_2 linkto(self._id_6298, self._id_5105._id_81C7);
+      if(isDefined(self._id_5105._id_81C7)) {
+        var_2 linkTo(self._id_6298, self._id_5105._id_81C7);
+      }
 
       var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5(self._id_5105._id_81BB), var_2, "tag_origin");
       _triggerfx(var_0);
@@ -181,16 +190,19 @@ _id_7604() {
       self._id_6298 waittillmatch("power_on", "end");
     }
 
-    if(isDefined(self._id_6298._id_75FC))
+    if(isDefined(self._id_6298._id_75FC)) {
       self._id_6298 scriptmodelplayanim(self._id_6298._id_75FC);
+    }
 
     _id_0378::_id_8D74("generator_power_switch_state", "running");
 
-    foreach(var_4 in self._id_8BF7)
-    var_4 show();
+    foreach(var_4 in self._id_8BF7) {
+      var_4 show();
+    }
 
-    foreach(var_4 in self._id_4D07)
-    var_4 hide();
+    foreach(var_4 in self._id_4D07) {
+      var_4 hide();
+    }
 
     level waittill("zombie_power_penalty_start");
     self notify("off");
@@ -202,11 +214,13 @@ _id_7604() {
       self._id_6298 waittillmatch("power_on", "end");
     }
 
-    foreach(var_4 in self._id_8BF7)
-    var_4 hide();
+    foreach(var_4 in self._id_8BF7) {
+      var_4 hide();
+    }
 
-    foreach(var_4 in self._id_4D07)
-    var_4 show();
+    foreach(var_4 in self._id_4D07) {
+      var_4 show();
+    }
 
     level waittill("zombie_power_penalty_end");
   }
@@ -222,9 +236,9 @@ _id_7600() {
 
   for(;;) {
     self waittill("on");
-    self._id_1DC7 moveto(var_2, var_0);
+    self._id_1DC7 moveTo(var_2, var_0);
     self waittill("off");
-    self._id_1DC7 moveto(var_1, var_0);
+    self._id_1DC7 moveTo(var_1, var_0);
   }
 }
 
@@ -264,7 +278,8 @@ _id_75F9(var_0) {}
 
 power_switch_find(var_0) {
   foreach(var_2 in level._id_7606) {
-    if(_id_0547::_id_5565(var_0, var_2.getnegotiationnextnode))
+    if(_id_0547::_id_5565(var_0, var_2.getnegotiationnextnode)) {
       return var_2;
+    }
   }
 }

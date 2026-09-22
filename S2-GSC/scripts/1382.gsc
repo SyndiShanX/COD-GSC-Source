@@ -67,8 +67,9 @@ init() {
   var_6.energyholdsecondary = 1;
   var_6.throwable = 1;
 
-  if(isDefined(level._id_62AB))
+  if(isDefined(level._id_62AB)) {
     var_6 = [[level._id_62AB]](var_6);
+  }
 
   _id_0547::_id_0A52(var_6, "zombie_generic");
   _id_0547::registeranimtree("zombie_generic", #animtree);
@@ -86,15 +87,17 @@ _id_ABB5() {
   thread _id_053C::_id_635C();
 
   if(self._id_0A4B == "zombie_generic") {
-    if(!isDefined(level.var_scaling_reach_max_wave))
+    if(!isDefined(level.var_scaling_reach_max_wave)) {
       var_0 = 47;
-    else
+    } else {
       var_0 = level.var_scaling_reach_max_wave;
+    }
 
-    if(!isDefined(level.var_scaling_reach_min_wave))
+    if(!isDefined(level.var_scaling_reach_min_wave)) {
       var_1 = 25;
-    else
+    } else {
       var_1 = level.var_scaling_reach_min_wave;
+    }
 
     var_2 = (self._id_901F - var_1) / (var_0 - var_1);
     var_3 = _func_2CA(60, 72, var_2);
@@ -109,8 +112,9 @@ _id_ABB3() {
 }
 
 zombie_generic_think_wait(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.2;
+  }
 
   wait(common_scripts\utility::_id_98E7(isDefined(self.has_think_waited), var_0, _randomfloat(var_0)));
   self.has_think_waited = 1;
@@ -138,32 +142,37 @@ _id_AB4F() {
 
     switch (var_0[0]) {
       case "attack_hit":
-        if(isDefined(self._id_071D))
+        if(isDefined(self._id_071D)) {
           thread _id_054E::_id_3102("attack_hit", self._id_071D._id_0A47);
+        }
 
         var_1 = var_0[1];
 
         if(isDefined(var_1) && isPlayer(var_1)) {
           if(self._id_0A4B == "zombie_generic" || self._id_0A4B == "zombie_assassin" || self._id_0A4B == "zombie_sizzler") {
-            if(isalive(var_1))
+            if(isalive(var_1)) {
               var_1 _id_0380::_id_2888("zmb_hit", var_1);
-            else
+            } else {
               var_1 _id_0380::_id_288B("zmb_hit", var_1, var_1);
+            }
           } else if(self._id_0A4B == "zombie_heavy" && isDefined(self._id_1F52)) {
-            if(isalive(var_1))
+            if(isalive(var_1)) {
               var_1 _id_0380::_id_2888("zmb_follower_mace_imp", var_1);
-            else
+            } else {
               var_1 _id_0380::_id_288B("zmb_follower_mace_imp", var_1, var_1);
+            }
           } else if(self._id_0A4B == "zombie_bob" && isDefined(self._id_1F52)) {
-            if(isalive(var_1))
+            if(isalive(var_1)) {
               var_1 _id_0380::_id_2888("zmb_bob_melee_hit", var_1);
-            else
+            } else {
               var_1 _id_0380::_id_288B("zmb_bob_melee_hit", var_1, var_1);
+            }
           } else if(self._id_0A4B == "zombie_guardian" && isDefined(self._id_1F52)) {
-            if(isalive(var_1))
+            if(isalive(var_1)) {
               var_1 _id_0380::_id_2888("zmb_hit", var_1);
-            else
+            } else {
               var_1 _id_0380::_id_288B("zmb_hit", var_1, var_1);
+            }
           }
         }
 
@@ -176,16 +185,18 @@ _id_AB4F() {
 }
 
 _id_ABB2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(var_5 == "panzerschreck_zm" || var_5 == "bazooka_zm")
+  if(var_5 == "panzerschreck_zm" || var_5 == "bazooka_zm") {
     var_2 = self.maxhealth;
+  }
 
   if(var_5 == "turretweapon_zeppelin_gun_zm") {
     var_4 = "MOD_RIFLE_BULLET";
 
-    if(common_scripts\utility::_id_562E(self._id_A87C))
+    if(common_scripts\utility::_id_562E(self._id_A87C)) {
       var_2 = var_2 * 0;
-    else
+    } else {
       var_2 = var_2 * 1;
+    }
   }
 
   if(isDefined(self.prop_decorator)) {
@@ -199,7 +210,7 @@ _id_ABB2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
         var_12 = spawn("script_model", var_11.origin);
         var_12 setModel("helmet_collision");
         var_12.angles = var_11.angles;
-        var_11 linkto(var_12);
+        var_11 linkTo(var_12);
         var_12._id_6292 = var_11;
         var_12 thread decoratorlaunch(var_7);
         var_12 hideallparts();
@@ -215,8 +226,9 @@ decoratorlaunch(var_0) {
   var_1 = 5000;
   var_2 = 3000;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = anglesToForward(self.angles);
+  }
 
   var_3 = var_0;
   var_4 = var_3[0] * var_1;
@@ -230,10 +242,11 @@ decoratorlaunch(var_0) {
 }
 
 zombie_generic_get_action_params() {
-  if(isDefined(self.action_param_override_func))
+  if(isDefined(self.action_param_override_func)) {
     var_0 = [[self.action_param_override_func]]();
-  else
+  } else {
     var_0 = _id_054D::_id_AC22();
+  }
 
   return var_0;
 }

@@ -16,8 +16,9 @@ init() {
   level thread onplayerconnect();
   level thread _id_9BA9();
 
-  if(getdvarint("scr_game_radarMode") == 1)
+  if(getdvarint("scr_game_radarMode") == 1) {
     level thread updatesweepinguavstatus();
+  }
 }
 
 _id_9FDD(var_0, var_1) {
@@ -28,18 +29,20 @@ _id_9FDD(var_0, var_1) {
   var_6 = _sin(var_2) * var_4;
   var_7 = level._id_9FDF;
 
-  if(var_0._id_01C8 == "counter_uav")
+  if(var_0._id_01C8 == "counter_uav") {
     var_7 = level._id_28BA;
+  }
 
-  var_0 linkto(var_7, "tag_origin", (var_5, var_6, var_3), (0, var_2 - 90, 0));
+  var_0 linkTo(var_7, "tag_origin", (var_5, var_6, var_3), (0, var_2 - 90, 0));
   var_0 hide();
   var_0 dontinterpolate();
   waitframe();
   var_8 = var_0.origin;
   var_0 unlink();
 
-  if(0 && isDefined(var_0._id_620D))
+  if(0 && isDefined(var_0._id_620D)) {
     var_0._id_620D _meth_8352(3000, 1);
+  }
 
   var_9 = 2625.0;
 
@@ -48,39 +51,44 @@ _id_9FDD(var_0, var_1) {
     thread _id_2692(var_0);
   }
 
-  if(var_0._id_01C8 == "uav")
+  if(var_0._id_01C8 == "uav") {
     thread _id_9FD6(var_0, var_1);
+  }
 
   var_0.origin = var_0.origin + -1 * anglesToForward(var_0.angles) * var_9;
-  var_0 moveto(var_8, 3);
+  var_0 moveTo(var_8, 3);
   var_0 rotateroll(20, 0.05);
   var_0 dontinterpolate();
   level notify("uav_update");
   var_0 maps\mp\gametypes\_hostmigration::_id_A74C("death", 3);
 
-  if(isDefined(var_0))
-    var_0 linkto(var_7, "tag_origin");
+  if(isDefined(var_0)) {
+    var_0 linkTo(var_7, "tag_origin");
+  }
 }
 
 _id_9FDE(var_0, var_1) {
   var_0 unlink();
   var_2 = 2625.0;
 
-  if(var_0._id_01C8 == "counter_uav")
+  if(var_0._id_01C8 == "counter_uav") {
     var_2 = 4200.0;
+  }
 
-  if(var_0._id_01C8 == "uav")
+  if(var_0._id_01C8 == "uav") {
     thread _id_9FD7(var_0, var_1);
+  }
 
   var_3 = var_0.origin + anglesToForward(var_0.angles) * var_2;
-  _playfxontag(common_scripts\utility::_id_44F5("uav_exit"), var_0, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("uav_exit"), var_0, "tag_origin");
   var_0 notify("leaving");
   var_0._id_5745 = 1;
 
-  if(0 && isDefined(var_0._id_620D))
+  if(0 && isDefined(var_0._id_620D)) {
     var_0._id_620D _meth_8352(3000, 0);
+  }
 
-  var_0 moveto(var_3, 3);
+  var_0 moveTo(var_3, 3);
   var_0 rotateroll(-20, 1.0);
   var_0 maps\mp\gametypes\_hostmigration::_id_A74C("death", 2.0);
   var_4 = _id_46FB(var_0._id_01C8, var_0.team);
@@ -93,8 +101,9 @@ _id_9FDE(var_0, var_1) {
   wait 1.0;
   var_0 _id_0527::_id_2DD3();
 
-  if(0 && isDefined(var_0._id_620D))
+  if(0 && isDefined(var_0._id_620D)) {
     var_0._id_620D delete();
+  }
 
   var_0 _id_7D02();
   var_0 delete();
@@ -145,8 +154,9 @@ _id_46FC(var_0) {
       break;
   }
 
-  if(isDefined(var_0) && var_0 == "counter_uav")
+  if(isDefined(var_0) && var_0 == "counter_uav") {
     var_1 = var_1 + 1500;
+  }
 
   return var_1;
 }
@@ -196,15 +206,17 @@ _id_46FD(var_0) {
       break;
   }
 
-  if(isDefined(var_0) && var_0 == "counter_uav")
+  if(isDefined(var_0) && var_0 == "counter_uav") {
     var_1 = var_1 + 2000;
+  }
 
   return var_1;
 }
 
 _id_46FA(var_0, var_1) {
-  if(level.gametype == "onevone")
+  if(level.gametype == "onevone") {
     return 200000;
+  }
 
   if(isDefined(var_1) && var_1) {
     switch (var_0) {
@@ -235,21 +247,24 @@ _id_2692(var_0) {
 }
 
 _id_9FD6(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     _id_0380::_id_288B("ks_uav_recon_plane_enter", [var_1], var_0);
+  }
 }
 
 _id_9FD7(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     _id_0380::_id_6844("ks_uav_recon_plane_exit", [var_1], var_0);
+  }
 }
 
 _id_9FDB(var_0, var_1, var_2, var_3) {
   self notify("death");
   _id_0527::_id_2DD3();
 
-  if(0 && isDefined(self._id_620D))
+  if(0 && isDefined(self._id_620D)) {
     self._id_620D delete();
+  }
 
   _id_7D02();
   self hide();
@@ -272,8 +287,9 @@ _id_9FDB(var_0, var_1, var_2, var_3) {
 _id_2D56() {
   waitframe();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 _id_74E7() {
@@ -283,26 +299,30 @@ _id_74E7() {
   if(self._id_01C8 == "counter_uav") {
     if(var_0 == "allies") {
       if(isDefined(self._id_57FB)) {
-        if(!isDefined(level._effect["counter_uav_explode_allies_chase"]))
+        if(!isDefined(level._effect["counter_uav_explode_allies_chase"])) {
           level._effect["counter_uav_explode_allies_chase"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_allies_chase");
+        }
 
         playFX(common_scripts\utility::_id_44F5("counter_uav_explode_allies_chase"), self.origin, var_1);
       } else {
-        if(!isDefined(level._effect["counter_uav_explode_allies"]))
+        if(!isDefined(level._effect["counter_uav_explode_allies"])) {
           level._effect["counter_uav_explode_allies"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_allies");
+        }
 
         playFX(common_scripts\utility::_id_44F5("counter_uav_explode_allies"), self.origin, var_1);
         _id_0380::_id_2889("ks_plane_destruct_explode", undefined, self.origin);
         _id_0380::_id_288D("ks_plane_destruct_deathspin_long", undefined, self);
       }
     } else if(isDefined(self._id_57FB)) {
-      if(!isDefined(level._effect["counter_uav_explode_axis_chase"]))
+      if(!isDefined(level._effect["counter_uav_explode_axis_chase"])) {
         level._effect["counter_uav_explode_axis_chase"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_chase");
+      }
 
       playFX(common_scripts\utility::_id_44F5("counter_uav_explode_axis_chase"), self.origin, var_1);
     } else {
-      if(!isDefined(level._effect["counter_uav_explode_axis"]))
+      if(!isDefined(level._effect["counter_uav_explode_axis"])) {
         level._effect["counter_uav_explode_axis"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion");
+      }
 
       playFX(common_scripts\utility::_id_44F5("counter_uav_explode_axis"), self.origin, var_1);
       _id_0380::_id_2889("ks_plane_destruct_explode", undefined, self.origin);
@@ -310,26 +330,30 @@ _id_74E7() {
     }
   } else if(var_0 == "allies") {
     if(isDefined(self._id_57FB)) {
-      if(!isDefined(level._effect["uav_explode_allies_chase"]))
+      if(!isDefined(level._effect["uav_explode_allies_chase"])) {
         level._effect["uav_explode_allies_chase"] = loadfx("vfx/explosion/vehicle_uav_explosion_allies_chase");
+      }
 
       playFX(common_scripts\utility::_id_44F5("uav_explode_allies_chase"), self.origin, var_1);
     } else {
-      if(!isDefined(level._effect["uav_explode_allies"]))
+      if(!isDefined(level._effect["uav_explode_allies"])) {
         level._effect["uav_explode_allies"] = loadfx("vfx/explosion/vehicle_uav_explosion_allies");
+      }
 
       playFX(common_scripts\utility::_id_44F5("uav_explode_allies"), self.origin, var_1);
       _id_0380::_id_2889("ks_plane_destruct_explode", undefined, self.origin);
       _id_0380::_id_288D("ks_plane_destruct_deathspin_long", undefined, self);
     }
   } else if(isDefined(self._id_57FB)) {
-    if(!isDefined(level._effect["uav_explode_axis_chase"]))
+    if(!isDefined(level._effect["uav_explode_axis_chase"])) {
       level._effect["uav_explode_axis_chase"] = loadfx("vfx/explosion/vehicle_uav_explosion_chase");
+    }
 
     playFX(common_scripts\utility::_id_44F5("uav_explode_axis_chase"), self.origin, var_1);
   } else {
-    if(!isDefined(level._effect["uav_explode_axis"]))
+    if(!isDefined(level._effect["uav_explode_axis"])) {
       level._effect["uav_explode_axis"] = loadfx("vfx/explosion/vehicle_uav_explosion");
+    }
 
     playFX(common_scripts\utility::_id_44F5("uav_explode_axis"), self.origin, var_1);
     _id_0380::_id_2889("ks_plane_destruct_explode", undefined, self.origin);
@@ -376,11 +400,13 @@ _id_463C(var_0, var_1, var_2, var_3) {
 
   var_10 = var_4;
 
-  if(var_6 > 0)
+  if(var_6 > 0) {
     var_10 = 3;
+  }
 
-  if(getdvarint("scr_game_radarMode") == 1)
+  if(getdvarint("scr_game_radarMode") == 1) {
     var_10++;
+  }
 
   return int(clamp(var_10, _getuavstrengthmin(), _getuavstrengthmax()));
 }
@@ -394,20 +420,23 @@ _id_A188(var_0) {
   var_5 = var_1 >= _getuavstrengthlevelshowenemyfastsweep();
   var_6 = var_1 >= _getuavstrengthlevelshowenemydirectional();
 
-  if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1))
+  if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1)) {
     var_0 = maps\mp\_utility::getotherteam(var_0);
+  }
 
-  if(var_3)
+  if(var_3) {
     _blockteamradar(var_0);
-  else
+  } else {
     _unblockteamradar(var_0);
+  }
 
   _setteamradar(var_0, var_4);
 
-  if(var_5)
+  if(var_5) {
     level._id_014C[var_0] = "fast_radar";
-  else
+  } else {
     level._id_014C[var_0] = "normal_radar";
+  }
 
   foreach(var_8 in level.players) {
     if(var_8.team != var_0) {
@@ -462,8 +491,9 @@ onplayerconnect() {
       level._id_014C[var_0.guid] = "normal_radar";
     }
 
-    if(getdvarint("2043", 0))
+    if(getdvarint("2043", 0)) {
       var_0 setclientomnvar("ui_hide_minimap", 1);
+    }
 
     var_0 thread onplayerspawned();
   }
@@ -493,8 +523,9 @@ onplayerspawned() {
 updatesweepinguavstatus() {
   level endon("game_ended");
 
-  while(!isDefined(level.ingraceperiod) || level.ingraceperiod > 5)
+  while(!isDefined(level.ingraceperiod) || level.ingraceperiod > 5) {
     waitframe();
+  }
 
   level thread sweepinguavhandlehostmigration();
   level notify("uav_update");
@@ -535,13 +566,15 @@ _id_9E22(var_0) {
 }
 
 _id_9E3C(var_0) {
-  if(maps\mp\_utility::_id_5668() || var_0 != "counter_uav" && maps\mp\_utility::_id_5814())
+  if(maps\mp\_utility::_id_5668() || var_0 != "counter_uav" && maps\mp\_utility::_id_5814()) {
     return 0;
+  }
 
   var_1 = self.team;
 
-  if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1))
+  if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1)) {
     var_1 = maps\mp\_utility::getotherteam(var_1);
+  }
 
   var_2 = 0;
 
@@ -555,8 +588,9 @@ _id_9E3C(var_0) {
   if(var_0 == "uav" && getdvarint("4263", 0)) {
     var_3 = _id_83BC(var_0);
 
-    if(!isDefined(var_3) || !var_3)
+    if(!isDefined(var_3) || !var_3) {
       return 0;
+    }
 
     return 1;
   } else if(var_0 == "counter_uav") {
@@ -564,7 +598,7 @@ _id_9E3C(var_0) {
 
     if(isDefined(var_4)) {
       var_4._id_57FB = 1;
-      var_4 setcandamage(0);
+      var_4 setCanDamage(0);
       level thread _id_5C24(self, var_1, var_4);
       return 1;
     }
@@ -593,26 +627,30 @@ _id_5C30(var_0, var_1, var_2, var_3) {
   var_5 = _id_46FF(var_2, var_1);
   var_6 = _id_46FB(var_2, var_1);
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_4 thread _id_39C7(var_6, var_5);
-  else
+  } else {
     var_4 setModel(var_5);
+  }
 
   var_7 = _id_46F8(var_2, var_1);
 
-  if(isDefined(var_7) && var_7 != "")
+  if(isDefined(var_7) && var_7 != "") {
     var_4 scriptmodelplayanim(var_7);
+  }
 
   var_4 thread _id_74E6();
   var_4 thread maps\mp\gametypes\_damage::_id_8676(_id_0527::_id_4612(var_2), undefined, ::_id_9FDB, _id_0527::_id_6B9C, 1);
 
-  if(level.gametype == "onevone")
-    var_4 setcandamage(0);
+  if(level.gametype == "onevone") {
+    var_4 setCanDamage(0);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4._id_6DA6 = 1;
-  else
+  } else {
     var_4._id_0117 = var_0;
+  }
 
   var_4._id_5C2F = gettime();
   var_4._id_01C8 = var_2;
@@ -625,8 +663,9 @@ _id_5C30(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     foreach(var_9 in level.players) {
-      if(isDefined(var_9.team) && var_9.team == var_1)
+      if(isDefined(var_9.team) && var_9.team == var_1) {
         var_4 _id_09A8(var_9, _id_46FE(var_2));
+      }
     }
   } else
     var_4 _id_09A8(var_4._id_0117, _id_46FE(var_2));
@@ -645,8 +684,9 @@ _id_5C30(var_0, var_1, var_2, var_3) {
 
   var_4 maps\mp\gametypes\_hostmigration::_id_A74C("death", _id_46FA(var_2, var_11));
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 notify("cleanup_uav");
+  }
 }
 
 _id_6BBA() {
@@ -660,19 +700,22 @@ _id_2397(var_0, var_1) {
   level endon("game_ended");
   self waittill("cleanup_uav");
 
-  if(var_0 == "counter_uav")
+  if(var_0 == "counter_uav") {
     var_2 = "cuav_ended";
-  else
+  } else {
     var_2 = "uav_ended";
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 thread maps\mp\_utility::leaderdialogonplayer(var_2);
+  }
 
   _id_7CCC(var_0);
   level notify("uav_update");
 
-  if(self._id_006A < self.maxhealth && !isDefined(self._id_57FB))
+  if(self._id_006A < self.maxhealth && !isDefined(self._id_57FB)) {
     thread _id_9FDE(self, var_1);
+  }
 }
 
 _id_A186() {
@@ -687,8 +730,9 @@ _id_A186() {
         if(var_1.team != self.team || 1) {
           self showtoplayer(var_1);
 
-          if(0 && isDefined(self._id_620D))
+          if(0 && isDefined(self._id_620D)) {
             self._id_620D showtoplayer(var_1);
+          }
         }
 
         continue;
@@ -699,8 +743,9 @@ _id_A186() {
       }
       self showtoplayer(var_1);
 
-      if(0 && isDefined(self._id_620D))
+      if(0 && isDefined(self._id_620D)) {
         self._id_620D showtoplayer(var_1);
+      }
     }
   }
 }
@@ -708,10 +753,11 @@ _id_A186() {
 _id_2834() {
   var_0 = getEntArray("minimap_corner", "targetname");
 
-  if(var_0.size)
+  if(var_0.size) {
     var_1 = _id_050D::_id_3B89(var_0[0].origin, var_0[1].origin);
-  else
+  } else {
     var_1 = (0, 0, 0);
+  }
 
   level._id_9FDF = spawn("script_model", var_1);
   level._id_9FDF setModel("c130_zoomrig");
@@ -733,7 +779,7 @@ _id_7EF0(var_0) {
   var_2 = -1 * var_0 * var_1;
 
   for(;;) {
-    self rotateyaw(var_2, var_1);
+    self rotateYaw(var_2, var_1);
     wait(var_1);
   }
 }
@@ -741,7 +787,7 @@ _id_7EF0(var_0) {
 _id_74E6() {
   self endon("death");
   level endon("game_ended");
-  _playfxontag(level._effect["uav_trail"], self, "tag_origin");
+  _playFXOnTag(level._effect["uav_trail"], self, "tag_origin");
 }
 
 _id_39C7(var_0, var_1) {
@@ -756,10 +802,11 @@ _id_46FF(var_0, var_1) {
   switch (var_0) {
     case "advanced_uav":
     case "uav":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return "usa_recon_pipercub_ai";
-      else
+      } else {
         return "ger_recon_storch";
+      }
     case "counter_uav":
       if(isDefined(var_1) && var_1 == "allies") {
         return "usa_bomber_p61_blackwidow_vista";
@@ -775,10 +822,11 @@ _id_46FB(var_0, var_1) {
   switch (var_0) {
     case "advanced_uav":
     case "uav":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return "usa_recon_pipercub_ai_fade";
-      else
+      } else {
         return "ger_recon_storch_fade";
+      }
     case "counter_uav":
       if(isDefined(var_1) && var_1 == "allies") {
         return "usa_bomber_p61_blackwidow_vista_fade";
@@ -794,10 +842,11 @@ _id_46F8(var_0, var_1) {
   switch (var_0) {
     case "advanced_uav":
     case "uav":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return "ks_recon_usa";
-      else
+      } else {
         return "ks_recon_ger";
+      }
     case "counter_uav":
       if(isDefined(var_1) && var_1 == "allies") {
         return "ks_counter_intelligence_usa";
@@ -813,10 +862,11 @@ _id_46F9(var_0, var_1) {
   switch (var_0) {
     case "advanced_uav":
     case "uav":
-      if(isDefined(var_1) && var_1 == "allies")
+      if(isDefined(var_1) && var_1 == "allies") {
         return "ks_recon_usa_animated";
-      else
+      } else {
         return "ks_recon_ger_animated";
+      }
     case "counter_uav":
       if(isDefined(var_1) && var_1 == "allies") {
         return "ks_counter_intelligence_usa_animated";
@@ -865,30 +915,33 @@ _id_5309() {
 _id_09FE() {
   var_0 = self.team;
 
-  if(level.teambased)
+  if(level.teambased) {
     level._id_9FDA[var_0][level._id_9FDA[var_0].size] = self;
-  else
+  } else {
     level._id_9FDA[self._id_0117.guid + "_" + gettime()] = self;
+  }
 }
 
 _id_7D02() {
   self _meth_8012(0);
   var_0 = self.team;
 
-  if(level.teambased)
+  if(level.teambased) {
     level._id_9FDA[var_0] = common_scripts\utility::_id_0F98(self, level._id_9FDA[var_0]);
-  else
+  } else {
     level._id_9FDA = common_scripts\utility::_id_0F98(self, level._id_9FDA);
+  }
 }
 
 _id_0992(var_0) {
   _id_0A05(var_0, 1);
 
   if(var_0 == "counter_uav") {
-    if(level.teambased)
+    if(level.teambased) {
       level._id_9850[maps\mp\_utility::getotherteam(self.team)] = 1;
-    else
+    } else {
       level._id_2694 = self._id_0117;
+    }
 
     level thread _id_0528::_id_A0E0();
   }
@@ -899,8 +952,9 @@ _id_7CCC(var_0) {
 
   if(var_0 == "counter_uav") {
     if(level.teambased) {
-      if(level._id_08D3[self.team] == 0)
+      if(level._id_08D3[self.team] == 0) {
         level._id_9850[maps\mp\_utility::getotherteam(self.team)] = 0;
+      }
     } else if(isDefined(self._id_0117) && level._id_08D3[self._id_0117.guid] == 0)
       level._id_2694 = undefined;
 
@@ -911,24 +965,27 @@ _id_7CCC(var_0) {
 _id_0A05(var_0, var_1) {
   switch (var_0) {
     case "uav":
-      if(level.teambased)
+      if(level.teambased) {
         level._id_08E6[self.team] = level._id_08E6[self.team] + var_1;
-      else if(isDefined(self._id_0117))
+      } else if(isDefined(self._id_0117)) {
         level._id_08E6[self._id_0117.guid] = level._id_08E6[self._id_0117.guid] + var_1;
+      }
 
       break;
     case "counter_uav":
-      if(level.teambased)
+      if(level.teambased) {
         level._id_08D3[self.team] = level._id_08D3[self.team] + var_1;
-      else if(isDefined(self._id_0117))
+      } else if(isDefined(self._id_0117)) {
         level._id_08D3[self._id_0117.guid] = level._id_08D3[self._id_0117.guid] + var_1;
+      }
 
       break;
     case "advanced_uav":
-      if(level.teambased)
+      if(level.teambased) {
         level._id_08CD[self.team] = level._id_08CD[self.team] + var_1;
-      else if(isDefined(self._id_0117))
+      } else if(isDefined(self._id_0117)) {
         level._id_08CD[self._id_0117.guid] = level._id_08CD[self._id_0117.guid] + var_1;
+      }
 
       break;
   }
@@ -981,23 +1038,26 @@ _id_A0F6() {
 
 _id_A09F(var_0) {
   if(getdvarint("2043", 0)) {
-    if(var_0)
+    if(var_0) {
       self setclientomnvar("ui_hide_minimap", 0);
-    else
+    } else {
       self setclientomnvar("ui_hide_minimap", 1);
+    }
   }
 }
 
 _id_83BC(var_0) {
   self endon("stop_location_selection");
 
-  if(!isDefined(level._id_5FF0))
+  if(!isDefined(level._id_5FF0)) {
     level._id_5FF0 = 1024;
+  }
 
   var_1 = level._id_5FF0 / 4;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_1 = var_1 * 1.5;
+  }
 
   var_2 = 0;
   maps\mp\_utility::_id_05D4(var_0, "map_artillery_selector", var_2, var_1);
@@ -1089,8 +1149,9 @@ _id_A6D8() {
   self waittill("stop_location_selection");
   self setblurforplayer(0, 0.3);
 
-  if(maps\mp\gametypes\_hostmigration::_id_A782() > 0)
+  if(maps\mp\gametypes\_hostmigration::_id_A782() > 0) {
     self switchtoweapon(common_scripts\utility::_id_4550());
+  }
 }
 
 _id_479B(var_0, var_1, var_2) {
@@ -1114,8 +1175,9 @@ _id_4475() {
   var_0 = undefined;
   var_1 = level._id_9FDA;
 
-  if(level.teambased)
+  if(level.teambased) {
     var_1 = level._id_9FDA[maps\mp\_utility::getotherteam(self.team)];
+  }
 
   foreach(var_3 in var_1) {
     if(!isDefined(var_3) || isDefined(var_3._id_5745) || isDefined(var_3._id_57FB)) {
@@ -1134,8 +1196,9 @@ _id_4475() {
 }
 
 _id_5C24(var_0, var_1, var_2, var_3) {
-  while(isDefined(var_2) && !var_2 islinked())
+  while(isDefined(var_2) && !var_2 islinked()) {
     waitframe();
+  }
 
   if(!isDefined(var_2)) {
     level thread _id_5C30(var_0, var_1, "counter_uav");
@@ -1149,45 +1212,51 @@ _id_5C24(var_0, var_1, var_2, var_3) {
   var_6.angles = var_2.angles + (0, -55, 0);
   _id_0380::_id_288B("ks_counter_uav_chase", undefined, var_6);
 
-  if(var_2._id_01C8 == "counter_uav")
+  if(var_2._id_01C8 == "counter_uav") {
     _id_0380::_id_288B("ks_counter_uav_chase_target_lg", undefined, var_2);
-  else
+  } else {
     _id_0380::_id_288B("ks_counter_uav_chase_target_sm", undefined, var_2);
+  }
 
   wait 0.5;
   var_7 = _id_46FF("counter_uav", var_1);
   var_8 = _id_46FB("counter_uav", var_1);
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_6 setModel(var_8);
-  else
+  } else {
     var_6 setModel(var_7);
+  }
 
   var_9 = "ks_counter_intelligence_ger_attack";
 
-  if(var_1 == "allies")
+  if(var_1 == "allies") {
     var_9 = "ks_counter_intelligence_usa_attack";
+  }
 
   var_6 scriptmodelplayanimdeltamotion(var_9, "finished_chase_anim");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_6._id_6DA6 = 1;
-  else
+  } else {
     var_6._id_0117 = var_0;
+  }
 
   var_6._id_5C2F = gettime();
   var_6._id_01C8 = "counter_uav";
 
   if(isDefined(var_3)) {
     foreach(var_11 in level.players) {
-      if(isDefined(var_11.team) && var_11.team == var_1)
+      if(isDefined(var_11.team) && var_11.team == var_1) {
         var_6 _id_09A8(var_11, _id_46FE("counter_uav"));
+      }
     }
   } else
     var_6 _id_09A8(var_6._id_0117, _id_46FE("counter_uav"));
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_6 _meth_8450(0, 1, 1.0);
+  }
 
   wait 1.0;
   var_6 setModel(var_7);
@@ -1201,8 +1270,9 @@ _id_5C24(var_0, var_1, var_2, var_3) {
     wait 0.5;
   }
 
-  if(0 && isDefined(var_6._id_620D))
+  if(0 && isDefined(var_6._id_620D)) {
     var_6._id_620D delete();
+  }
 
   var_6 delete();
 }
@@ -1219,8 +1289,9 @@ _id_2695(var_0, var_1) {
 
   var_4 = 2.8;
 
-  if(var_0._id_01C8 == "counter_uav")
+  if(var_0._id_01C8 == "counter_uav") {
     var_4 = 5.0;
+  }
 
   var_5 = gettime();
 
@@ -1244,7 +1315,7 @@ _id_2695(var_0, var_1) {
     wait 0.1;
   }
 
-  var_0 setcandamage(1);
+  var_0 setCanDamage(1);
   var_0 dodamage(var_0.maxhealth * 10, var_0.origin, self._id_0117, self, "MOD_RIFLE_BULLET", "counter_recon_gun_mp");
 
   if(var_0._id_01C8 == "counter_uav") {
@@ -1265,8 +1336,9 @@ _id_9FDC(var_0) {
   var_1 = _id_46F9(var_0._id_01C8, var_0.team);
   var_0 scriptmodelplayanimdeltamotion(var_1, "finished_chase_anim");
 
-  if(0 && isDefined(var_0._id_620D))
+  if(0 && isDefined(var_0._id_620D)) {
     var_0._id_620D _meth_8352(3000, 0);
+  }
 
   var_0 common_scripts\utility::_id_A70A("death", "finished_chase_anim");
   waitframe();
@@ -1275,8 +1347,9 @@ _id_9FDC(var_0) {
   if(isDefined(var_0)) {
     var_0 _id_0527::_id_2DD3();
 
-    if(0 && isDefined(var_0._id_620D))
+    if(0 && isDefined(var_0._id_620D)) {
       var_0._id_620D delete();
+    }
 
     var_0 delete();
   }

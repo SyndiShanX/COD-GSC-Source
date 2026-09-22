@@ -46,27 +46,30 @@ _id_7865() {
   var_2 = undefined;
 
   if(1) {
-    if(isDefined(var_1._id_2590))
+    if(isDefined(var_1._id_2590)) {
       var_2 = _id_0557::_id_782F(undefined, var_1._id_2590);
-    else
+    } else {
       var_2 = _id_0557::_id_782F(undefined, var_1._id_1DD3);
+    }
 
     _id_0557::_id_781D("4 cart", var_2);
   }
 
   var_1._id_92A1 common_scripts\utility::_id_9DA3();
-  var_1._id_92A1 sethintstring(&"ZOMBIE_NEST_MOVE_SHROUD");
+  var_1._id_92A1 setHintString(&"ZOMBIE_NEST_MOVE_SHROUD");
   var_1._id_1DD3 showpart("TAG_LIGHT_GREEN");
   var_1._id_1DD3 hidepart("TAG_LIGHT_RED");
 
-  foreach(var_4 in var_1._id_5D20)
-  var_4 setscriptablepartstate("light", "green");
+  foreach(var_4 in var_1._id_5D20) {
+    var_4 setscriptablepartstate("light", "green");
+  }
 
   var_1._id_92A1 waittill("trigger", var_6);
   var_1 thread _id_64A0();
 
-  if(1)
+  if(1) {
     _id_0557::_id_7847("4 cart", var_2);
+  }
 
   var_1._id_92A1 common_scripts\utility::_id_9D9F();
   _id_0557::_id_782D("4 cart", "press button");
@@ -86,7 +89,7 @@ _id_7859() {
 
 _id_7863() {
   if(1) {
-    var_0 = _getent("ww_part_01_model", "targetname");
+    var_0 = _getEnt("ww_part_01_model", "targetname");
     var_1 = _id_0557::_id_782F(undefined, var_0);
     _id_0557::_id_781D("4 cart", var_1);
   }
@@ -112,7 +115,7 @@ _id_7858() {
 
 _id_7864() {
   if(1) {
-    var_0 = _getent("ww_part_02_model", "targetname");
+    var_0 = _getEnt("ww_part_02_model", "targetname");
     var_1 = _id_0557::_id_782F(undefined, var_0);
     _id_0557::_id_781D("4 cart", var_1);
   }
@@ -140,8 +143,9 @@ _id_7857() {
   level._id_6F18 = 0;
   _id_0378::_id_8D74("aud_bunker_lights", "on");
 
-  if(1)
+  if(1) {
     _id_0557::_id_7847("4 cart", level._id_3571._id_68C1);
+  }
 
   _id_0557::_id_782D("4 cart", "head to com");
 }
@@ -155,15 +159,17 @@ _id_784A() {
   common_scripts\utility::_id_3C9F("flag_ww_forged");
   level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("geistcraft_device_powered");
 
-  foreach(var_2 in level.players)
-  var_2 thread _id_2EB1();
+  foreach(var_2 in level.players) {
+    var_2 thread _id_2EB1();
+  }
 
   _id_0557::_id_782D("4 cart", "assemble ww");
 }
 
 _id_2020() {
-  foreach(var_1 in level.players)
-  var_1 _id_054C::_id_AC23("escortclaw");
+  foreach(var_1 in level.players) {
+    var_1 _id_054C::_id_AC23("escortclaw");
+  }
 }
 
 #using_animtree("animated_props_zombies");
@@ -172,7 +178,7 @@ _id_52DE() {
   maps\mp\mp_zombie_nest_ee_util::_id_8A53();
   maps\mp\mp_zombie_nest_ee_workbench::_id_536B();
   thread _id_2EAD();
-  level._id_3571 = _getent("ee_shard", "targetname");
+  level._id_3571 = _getEnt("ee_shard", "targetname");
   level._id_3571._id_9B8C = [];
   level._id_3571._id_9B8C["rnd_1"] = % s2_zom_shroud_rd_track_1;
   level._id_3571._id_9B8C["rnd_2"] = % s2_zom_shroud_rd_track_2;
@@ -202,16 +208,17 @@ _id_52DE() {
   }
 
   var_5 = spawnStruct();
-  var_5._id_1DD3 = _getent("move_cart_button_model", "targetname");
-  var_5._id_2590 = _getent("move_cart_button_console", "targetname");
-  var_5._id_92A1 = _getent("move_shroud_trig", "targetname");
-  var_5._id_92A1 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  var_5._id_1DD3 = _getEnt("move_cart_button_model", "targetname");
+  var_5._id_2590 = _getEnt("move_cart_button_console", "targetname");
+  var_5._id_92A1 = _getEnt("move_shroud_trig", "targetname");
+  var_5._id_92A1 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   var_5._id_1DD3 showpart("TAG_LIGHT_RED");
   var_5._id_1DD3 hidepart("TAG_LIGHT_GREEN");
   var_5._id_5D20 = _getscriptablearray("move_cart_button_light", "targetname");
 
-  foreach(var_7 in var_5._id_5D20)
-  var_7 setscriptablepartstate("light", "red");
+  foreach(var_7 in var_5._id_5D20) {
+    var_7 setscriptablepartstate("light", "red");
+  }
 
   level._id_64C7 = var_5;
 }
@@ -227,8 +234,9 @@ _id_64A0() {
   self._id_1DD3 showpart("TAG_LIGHT_RED");
   self._id_1DD3 hidepart("TAG_LIGHT_GREEN");
 
-  foreach(var_5 in self._id_5D20)
-  var_5 setscriptablepartstate("light", "red");
+  foreach(var_5 in self._id_5D20) {
+    var_5 setscriptablepartstate("light", "red");
+  }
 
   wait 0.5;
   self._id_1DD3 scriptmodelplayanim("zmb_objective_button_02_reverse");
@@ -236,16 +244,18 @@ _id_64A0() {
 }
 
 _id_2023(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "rnd";
+  }
 
   level._id_3571._id_7E93 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_geistkraft_radius_256"), level._id_3571, "TAG_FX");
   _triggerfx(level._id_3571._id_7E93);
   level._id_3571._id_2DA8 = 1;
   level._id_3571 thread _id_201F(var_0);
 
-  if(var_0 == "rnd")
+  if(var_0 == "rnd") {
     _id_0378::_id_8D74("aud_claw_move_start", level._id_3571);
+  }
 
   level._id_3571 _id_202D(var_0 + "_1");
   _id_0378::_id_8D74("aud_claw_move_stop", level._id_3571);
@@ -272,10 +282,11 @@ _id_2023(var_0) {
 
   level waittill(var_0 + "_create_ww_part");
 
-  if(var_0 == "rnd")
+  if(var_0 == "rnd") {
     level thread _id_A0EF(level._id_3575, 1, 0.04, 0.8);
-  else if(var_0 == "med")
+  } else if(var_0 == "med") {
     level thread _id_A0EF(level._id_3574, 1, 0.05, 0.6);
+  }
 }
 
 _id_201F(var_0) {
@@ -290,8 +301,9 @@ _id_201F(var_0) {
 }
 
 _id_6AA2() {
-  if(!common_scripts\utility::_id_562E(level._id_305F))
+  if(!common_scripts\utility::_id_562E(level._id_305F)) {
     thread _id_2E84();
+  }
 }
 
 _id_6A9F() {
@@ -317,10 +329,10 @@ _id_202D(var_0) {
     case "med_2":
     case "rnd_3":
     case "rnd_2":
-      _playfxontag(level._effect["zmb_gk_claw_full"], self, "TAG_FX");
-      _playfxontag(level._effect["zmb_gk_claw_battery_full_1"], self, "flap1_shroud");
-      _playfxontag(level._effect["zmb_gk_claw_battery_full_2"], self, "flap2_shroud");
-      _playfxontag(level._effect["zmb_gk_claw_battery_full_3"], self, "flap3_shroud");
+      _playFXOnTag(level._effect["zmb_gk_claw_full"], self, "TAG_FX");
+      _playFXOnTag(level._effect["zmb_gk_claw_battery_full_1"], self, "flap1_shroud");
+      _playFXOnTag(level._effect["zmb_gk_claw_battery_full_2"], self, "flap2_shroud");
+      _playFXOnTag(level._effect["zmb_gk_claw_battery_full_3"], self, "flap3_shroud");
       break;
     case "med_1":
     case "rnd_1":
@@ -363,8 +375,9 @@ _id_08B9(var_0) {
       break;
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     [[var_1]]();
+  }
 }
 
 _id_2EBE(var_0) {
@@ -374,15 +387,16 @@ _id_2EBE(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(var_0 == 1)
+  if(var_0 == 1) {
     thread _id_0367::_id_8E3C("workbenchpart3");
-  else if(var_0 == 2)
+  } else if(var_0 == 2) {
     thread _id_0367::_id_8E3C("forgepart");
+  }
 }
 
 _id_2EAD() {
   level endon("flag_ww_forged");
-  var_0 = _getent("ww_creation_station_dialogue", "targetname");
+  var_0 = _getEnt("ww_creation_station_dialogue", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -397,8 +411,9 @@ _id_2EAD() {
     if(!isDefined(var_1._id_3077) && isPlayer(var_1)) {
       var_2 = var_1 _id_0367::_id_8E3D("workbench");
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_1._id_3077 = 1;
+      }
     }
   }
 }
@@ -406,14 +421,15 @@ _id_2EAD() {
 _id_2E7B() {
   level endon("flag_ww_part_01_picked_up");
   var_0 = _id_0557::_id_7838("4 cart", "head to rnd");
-  var_1 = _getent("cart_dialog_trig", "targetname");
+  var_1 = _getEnt("cart_dialog_trig", "targetname");
   var_1._id_0CA5 = 0;
   var_2 = level._id_3571;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1._id_5ED1 = var_2.origin;
-  else
+  } else {
     var_1._id_5ED1 = var_1.origin;
+  }
 
   while(!common_scripts\utility::_id_3C77(var_0)) {
     var_1 waittill("trigger", var_3);
@@ -421,18 +437,20 @@ _id_2E7B() {
     if(!isPlayer(var_3)) {
       continue;
     }
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_1._id_5ED1 = var_2.origin;
-    else
+    } else {
       var_1._id_5ED1 = var_1.origin;
+    }
 
     var_4 = var_1 _id_2025(var_3);
 
     if(var_4 && !isDefined(var_3._id_3060) && level._id_2DA8) {
       var_5 = var_3 _id_0367::_id_8E3D("clawmove");
 
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_3._id_3060 = 1;
+      }
 
       continue;
     }
@@ -446,8 +464,9 @@ _id_2E84() {
     if(_id_0547::_id_577E(var_1)) {
       continue;
     }
-    if(distance(var_1.origin, level._id_3571.origin) < 500)
+    if(distance(var_1.origin, level._id_3571.origin) < 500) {
       var_1 thread _id_0367::_id_8E3C("clawmove2");
+    }
   }
 
   level._id_305F = 1;
@@ -495,11 +514,13 @@ _id_2025(var_0) {
 }
 
 _id_A0EF(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.05;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.1;
+  }
 
   foreach(var_5 in var_0) {
     wait(_randomfloatrange(var_2, var_3));
@@ -523,15 +544,17 @@ _id_8A2B(var_0, var_1, var_2, var_3, var_4) {
 _id_5D7B(var_0, var_1) {
   var_2 = var_0._id_760A;
 
-  if(var_1)
+  if(var_1) {
     var_2 = var_0._id_760B;
+  }
 
   var_0 setscriptablepartstate(var_0._id_760D, var_2, 0);
 }
 
 _id_A12E(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   if(var_2 == common_scripts\utility::_id_0F79(var_0._id_760E, var_1)) {
     return;
@@ -539,12 +562,14 @@ _id_A12E(var_0, var_1, var_2, var_3) {
   if(var_2) {
     var_0._id_760E = common_scripts\utility::_id_0F6F(var_0._id_760E, var_1);
 
-    if(var_0._id_760E.size == 1 && var_3)
+    if(var_0._id_760E.size == 1 && var_3) {
       _id_5D7B(var_0, 1);
+    }
   } else {
     var_0._id_760E = common_scripts\utility::_id_0F93(var_0._id_760E, var_1);
 
-    if(var_0._id_760E.size == 0 && var_3)
+    if(var_0._id_760E.size == 0 && var_3) {
       _id_5D7B(var_0, 0);
+    }
   }
 }

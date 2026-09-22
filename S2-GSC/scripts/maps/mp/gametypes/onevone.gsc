@@ -37,16 +37,18 @@ main() {
   level._id_6B7B = ::_id_6B7B;
   level._id_6BB6 = ::_id_6BB6;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   _setteammode("ffa");
   game["dialog"]["gametype"] = "ffa_intro";
   game["dialog"]["defense_obj"] = "gbl_start";
   game["dialog"]["offense_obj"] = "gbl_start";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 }
 
 _id_5300() {
@@ -89,12 +91,14 @@ _id_6B5C(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
-    if(isDefined(var_5.score) && var_5.score > var_3)
+    if(isDefined(var_5.score) && var_5.score > var_3) {
       var_3 = var_5.score;
+    }
   }
 
-  if(game["state"] == "postgame" && var_1.score >= var_3)
+  if(game["state"] == "postgame" && var_1.score >= var_3) {
     var_1._id_3B4B = 1;
+  }
 }
 
 _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
@@ -102,8 +106,9 @@ _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
     var_5 = 1;
 
     if(var_4 == "MOD_MELEE") {
-      if((!isDefined(level._id_6B17) || !level._id_6B17) && (!isDefined(level._id_6B18) || !level._id_6B18) && (!isDefined(level._id_6B16) || !level._id_6B16) && self._id_5DFE != "shovel_loot3_mp")
+      if((!isDefined(level._id_6B17) || !level._id_6B17) && (!isDefined(level._id_6B18) || !level._id_6B18) && (!isDefined(level._id_6B16) || !level._id_6B16) && self._id_5DFE != "shovel_loot3_mp") {
         var_5 = 2;
+      }
 
       var_1._id_0021++;
     }
@@ -136,8 +141,9 @@ _id_92EE() {
   level.timerpausetime = gettime();
   level._id_6B20 = 1;
 
-  while(level.players.size < 2 || level.ingraceperiod)
+  while(level.players.size < 2 || level.ingraceperiod) {
     waitframe();
+  }
 
   _id_92EF(level.players, undefined);
   level._id_6B20 = 0;
@@ -151,11 +157,11 @@ ishqarenaingungame(var_0) {
 }
 
 isjumping(var_0, var_1) {
-  if(level.gametype == "onevone" && var_1 == 1)
+  if(level.gametype == "onevone" && var_1 == 1) {
     return [26 + randomint(3), 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
-  else if(level.gametype == "onevone" && var_1 == 2)
+  } else if(level.gametype == "onevone" && var_1 == 2) {
     return [3 + randomint(38)];
-  else {
+  } else {
     var_2 = [[3, 4, 5, 6, 7, 33, 34, 46, 47], [8, 9, 10, 11, 12, 13, 48, 49], [14, 15, 19, 35, 50], [16, 17, 18, 36], [20, 21, 22, 37], [23, 24, 38, 39, 41, 43], [26, 27, 25, 40, 42, 44, 45], [41], [42, 43, 44, 45]];
     var_3 = [];
     var_4 = 1;
@@ -228,17 +234,20 @@ isjumping(var_0, var_1) {
         var_7 = 1;
 
         for(var_11 = 0; var_10 && isDefined(level._id_6B1C) && var_11 < level._id_6B1C.size; var_11++) {
-          if(level._id_6B1C[var_11] == var_8)
+          if(level._id_6B1C[var_11] == var_8) {
             var_7 = 0;
+          }
         }
 
         for(var_11 = 0; var_9 && var_11 < var_3.size; var_11++) {
-          if(var_3[var_11] == var_8)
+          if(var_3[var_11] == var_8) {
             var_7 = 0;
+          }
         }
 
-        if(!var_7)
+        if(!var_7) {
           waitframe();
+        }
       }
 
       var_3[var_3.size] = var_8;
@@ -255,22 +264,26 @@ isjumping(var_0, var_1) {
         var_7 = 1;
 
         for(var_11 = 0; var_4 && isDefined(level._id_6B1B) && var_11 < level._id_6B1B.size; var_11++) {
-          if(level._id_6B1B[var_11] == var_15)
+          if(level._id_6B1B[var_11] == var_15) {
             var_7 = 0;
+          }
         }
 
         for(var_11 = 0; var_5 && isDefined(level._id_6B1D) && var_11 < level._id_6B1D.size; var_11++) {
-          if(level._id_6B1D[var_11] == var_15)
+          if(level._id_6B1D[var_11] == var_15) {
             var_7 = 0;
+          }
         }
 
         for(var_11 = 0; isDefined(var_12) && var_11 < var_12.size; var_11++) {
-          if(var_12[var_11] == var_15)
+          if(var_12[var_11] == var_15) {
             var_7 = 0;
+          }
         }
 
-        if(!var_7)
+        if(!var_7) {
           waitframe();
+        }
       }
 
       var_12[var_12.size] = var_15;
@@ -293,8 +306,9 @@ _id_92EF(var_0, var_1) {
   if(level.gametype == "onevone") {
     var_7 = [0, 1, 2];
 
-    foreach(var_9 in var_0)
-    var_9 _id_86E2(var_7, var_2);
+    foreach(var_9 in var_0) {
+      var_9 _id_86E2(var_7, var_2);
+    }
 
     var_7 = _id_6B24(var_4, var_5, var_7, var_0, var_1);
 
@@ -303,8 +317,9 @@ _id_92EF(var_0, var_1) {
     }
     var_6 = _id_44DB(var_7);
 
-    foreach(var_9 in var_0)
-    var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
+    foreach(var_9 in var_0) {
+      var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
+    }
 
     waitframe();
     var_3 = var_2;
@@ -314,14 +329,16 @@ _id_92EF(var_0, var_1) {
   var_7 = isjumping(var_3, var_6);
 
   if(var_6 != 2) {
-    foreach(var_9 in var_0)
-    var_9 _id_86E2(var_7, var_2);
+    foreach(var_9 in var_0) {
+      var_9 _id_86E2(var_7, var_2);
+    }
 
     var_7 = _id_6B24(var_4, var_5, var_7, var_0, var_1);
   }
 
-  foreach(var_9 in var_0)
-  var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
+  foreach(var_9 in var_0) {
+    var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
+  }
 
   if(var_7.size == 0) {
     level._id_6B18 = 0;
@@ -335,8 +352,9 @@ _id_92EF(var_0, var_1) {
     level._id_6B16 = var_17 == 31;
     level._id_6B17 = var_17 == 32;
 
-    if(level._id_6B19)
+    if(level._id_6B19) {
       var_17 = _id_45AB();
+    }
 
     _id_86E3(var_17, var_1);
     level._id_6B1F = 0;
@@ -351,10 +369,11 @@ _id_92EF(var_0, var_1) {
 }
 
 _id_86E3(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else
+  } else {
     var_2 = level;
+  }
 
   var_2.onevone_classchoicenum = var_0;
 
@@ -366,8 +385,9 @@ _id_86E3(var_0, var_1) {
   var_2._id_6B15["loadoutDivision"] = maps\mp\gametypes\_class::table_getdivision(var_2._id_6B21, var_0);
   var_2._id_6B15["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(maps\mp\gametypes\_class::table_getweapon(var_2._id_6B21, var_0, 0), 0);
 
-  for(var_3 = 0; var_3 < 6; var_3++)
+  for(var_3 = 0; var_3 < 6; var_3++) {
     var_2._id_6B15["loadoutPrimaryAttachmentsGUID"][var_3] = maps\mp\gametypes\_class::table_getweaponattachment(var_2._id_6B21, var_0, 0, var_3);
+  }
 
   var_2._id_6B15["loadoutPrimaryCamoGUID"] = maps\mp\gametypes\_class::table_getweaponcamo(var_2._id_6B21, var_0, 0);
   var_2._id_6B15["loadoutPrimaryCamo2GUID"] = maps\mp\gametypes\_class::table_getweaponcamo2(var_2._id_6B21, var_0, 0);
@@ -376,8 +396,9 @@ _id_86E3(var_0, var_1) {
   var_2._id_6B15["loadoutPrimaryCharmGUID"] = 0;
   var_2._id_6B15["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(maps\mp\gametypes\_class::table_getweapon(var_2._id_6B21, var_0, 1), 0);
 
-  for(var_3 = 0; var_3 < 6; var_3++)
+  for(var_3 = 0; var_3 < 6; var_3++) {
     var_2._id_6B15["loadoutSecondaryAttachmentsGUID"][var_3] = maps\mp\gametypes\_class::table_getweaponattachment(var_2._id_6B21, var_0, 1, var_3);
+  }
 
   var_2._id_6B15["loadoutSecondaryCamoGUID"] = maps\mp\gametypes\_class::table_getweaponcamo(var_2._id_6B21, var_0, 1);
   var_2._id_6B15["loadoutSecondaryCamo2GUID"] = maps\mp\gametypes\_class::table_getweaponcamo2(var_2._id_6B21, var_0, 1);
@@ -389,15 +410,17 @@ _id_86E3(var_0, var_1) {
   var_2._id_6B15["loadoutOffhandStruct"] = maps\mp\_utility::_id_44CE(maps\mp\gametypes\_class::table_getoffhand(var_2._id_6B21, var_0), 0);
   var_2._id_6B15["loadoutOffhandNumExtra"] = maps\mp\gametypes\_class::table_getoffhandextra(var_2._id_6B21, var_0);
 
-  for(var_3 = 0; var_3 < 9; var_3++)
+  for(var_3 = 0; var_3 < 9; var_3++) {
     var_2._id_6B15["loadoutPerksGUID"][var_3] = maps\mp\gametypes\_class::table_getperk(var_2._id_6B21, var_0, var_3);
+  }
 }
 
 _id_6B24(var_0, var_1, var_2, var_3, var_4) {
   for(var_5 = 0; var_5 < var_0; var_5++) {
     foreach(var_7 in var_3) {
-      foreach(var_9 in var_3)
-      var_9 setclientomnvar("ui_onevone_show_class_menu", var_7 getentitynumber());
+      foreach(var_9 in var_3) {
+        var_9 setclientomnvar("ui_onevone_show_class_menu", var_7 getentitynumber());
+      }
 
       for(var_11 = 0; var_11 < var_1; var_11++) {
         var_7 thread _id_A703();
@@ -405,14 +428,16 @@ _id_6B24(var_0, var_1, var_2, var_3, var_4) {
         var_7 waittill("1v1_ban_notify");
         waitframe();
 
-        if(isDefined(var_7) && isDefined(var_7._id_21F8))
+        if(isDefined(var_7) && isDefined(var_7._id_21F8)) {
           var_12 = var_7._id_21F8;
-        else
+        } else {
           var_12 = randomint(3);
+        }
 
         if(var_12 < 0 && !_func_367()) {
-          foreach(var_9 in var_3)
-          var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
+          foreach(var_9 in var_3) {
+            var_9 setclientomnvar("ui_onevone_show_class_menu", -1);
+          }
 
           level._id_6B18 = 0;
           level._id_6B19 = 0;
@@ -420,18 +445,20 @@ _id_6B24(var_0, var_1, var_2, var_3, var_4) {
           level._id_6B17 = 0;
           level._id_6B1F = 1;
 
-          if(isDefined(var_4))
+          if(isDefined(var_4)) {
             var_4 notify("onevoneClassCreated");
-          else
+          } else {
             level notify("onevoneClassCreated");
+          }
 
           return [];
         }
 
         var_2[var_12] = -1;
 
-        foreach(var_9 in var_3)
-        var_9 setclientomnvar("ui_onevone_class_" + (var_12 + 1), var_2[var_12]);
+        foreach(var_9 in var_3) {
+          var_9 setclientomnvar("ui_onevone_class_" + (var_12 + 1), var_2[var_12]);
+        }
       }
     }
   }
@@ -461,8 +488,9 @@ _id_A704() {
   self endon("1v1_ban_notify");
   wait 11;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("1v1_ban_notify");
+  }
 }
 
 _id_44DB(var_0) {
@@ -496,8 +524,9 @@ _id_86E1(var_0) {
     maps\mp\_utility::_id_867C(self._id_00E4);
   }
 
-  if(isDefined(level._id_6B14) && level._id_6B14 > 0)
+  if(isDefined(level._id_6B14) && level._id_6B14 > 0) {
     level._id_6B14 = gettime();
+  }
 
   if(!isDefined(level._id_6B15) && (!isDefined(level._id_6B1F) || !level._id_6B1F)) {
     maps\mp\_utility::freezecontrolswrapper(1);
@@ -511,8 +540,9 @@ _id_86E1(var_0) {
   }
 
   if(!level._id_6B1F) {
-    if(_weapontype(maps\mp\_utility::_id_4737(level._id_6B15["loadoutPrimaryWeaponStruct"])) == "melee")
+    if(_weapontype(maps\mp\_utility::_id_4737(level._id_6B15["loadoutPrimaryWeaponStruct"])) == "melee") {
       level._id_6B15["ignoreMeleeSlotWeapon"] = 1;
+    }
 
     self.pers["class"] = "gamemode";
     self.pers["gamemodeLoadout"] = level._id_6B15;
@@ -546,8 +576,9 @@ _id_7B76() {
   self endon("death");
   self endon("disconnect");
 
-  while(self getcurrentprimaryweapon() == "none")
+  while(self getcurrentprimaryweapon() == "none") {
     waitframe();
+  }
 
   var_0 = maps\mp\_utility::_id_4737(self._id_5E00);
 
@@ -556,8 +587,9 @@ _id_7B76() {
     self setweaponammostock(var_0, 0);
   } else if(isDefined(level._id_6B16) && level._id_6B16)
     _id_479A();
-  else
+  else {
     self setweaponammostock(var_0, _id_469F(var_0));
+  }
 }
 
 _id_469F(var_0) {
@@ -570,16 +602,18 @@ _id_469F(var_0) {
     case "weapon_sniper":
     case "weapon_assault":
     case "weapon_smg":
-      if(var_2 > 20)
+      if(var_2 > 20) {
         return int(var_2 * 3 / 4);
-      else
+      } else {
         return var_2;
+      }
     case "weapon_pistol":
     case "weapon_shotgun":
-      if(var_2 < 4)
+      if(var_2 < 4) {
         return int(var_2 * 2);
-      else
+      } else {
         return var_2;
+      }
     default:
       return var_2;
   }
@@ -603,8 +637,9 @@ _id_6BB6() {
   if(!isDefined(var_0)) {
     level._id_99F5 = 1;
 
-    foreach(var_2 in level.players)
-    var_2 iprintlnbold("Next Kill Wins!");
+    foreach(var_2 in level.players) {
+      var_2 iprintlnbold("Next Kill Wins!");
+    }
 
     level common_scripts\utility::_id_A70C(level.players[0], "death", level.players[1], "death");
     var_0 = _id_46E9();
@@ -626,14 +661,16 @@ _id_46E9() {
       continue;
     }
 
-    if(var_4.score == var_2)
+    if(var_4.score == var_2) {
       var_0 = 1;
+    }
   }
 
-  if(!var_0)
+  if(!var_0) {
     return var_1;
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
@@ -650,8 +687,9 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(var_1 == self) {
     return;
   }
-  if(isDefined(level._id_6B1E) && var_1 != level._id_6B1E)
+  if(isDefined(level._id_6B1E) && var_1 != level._id_6B1E) {
     level._id_09B7 = _min(level._id_606F, level._id_09B7 + level._id_3992);
+  }
 
   level._id_6B1E = _id_46E9();
 
@@ -677,8 +715,9 @@ _id_45AB() {
   if(!isDefined(level._id_6B1A) || level._id_6B1A.size == 0) {
     level._id_6B1A = [];
 
-    for(var_0 = 3; var_0 < 28; var_0++)
+    for(var_0 = 3; var_0 < 28; var_0++) {
       level._id_6B1A[level._id_6B1A.size] = var_0;
+    }
 
     level._id_6B1A = common_scripts\utility::array_randomize(level._id_6B1A);
   }
@@ -707,8 +746,9 @@ _id_63F2() {
 
     if(level._id_6B14 + 11000 < var_3) {
       if(var_2 + 8500 < var_3) {
-        foreach(var_5 in level.players)
-        _func_256(var_5.origin, var_5);
+        foreach(var_5 in level.players) {
+          _func_256(var_5.origin, var_5);
+        }
 
         var_2 = var_3;
       }
@@ -730,8 +770,9 @@ _id_4696(var_0) {
     }
   }
 
-  if(isPlayer(var_1))
+  if(isPlayer(var_1)) {
     return _id_6FBC(var_1, level._id_6B20);
+  }
 
   return _id_04D4::_id_4437();
 }
@@ -759,18 +800,20 @@ _id_6FBC(var_0, var_1) {
           continue;
         }
 
-        if(var_3._id_0165 == "spawn_b")
+        if(var_3._id_0165 == "spawn_b") {
           level._id_6B28[level._id_6B28.size] = var_3;
+        }
       }
     }
   }
 
   if(isDefined(level._id_6B29) && isDefined(level._id_6B2A)) {
     if(var_1) {
-      if(var_0 == level.players[0])
+      if(var_0 == level.players[0]) {
         return level._id_6B29;
-      else
+      } else {
         return level._id_6B2A;
+      }
     } else if(level.players.size >= 2 && isDefined(level._id_6B27) && level._id_6B27.size > 1 && isDefined(level._id_6B28) && level._id_6B28.size > 1) {
       var_5 = 0;
       var_6 = 0;
@@ -785,8 +828,9 @@ _id_6FBC(var_0, var_1) {
 
       var_7 = level._id_6B27;
 
-      if(var_5 < var_6)
+      if(var_5 < var_6) {
         var_7 = level._id_6B28;
+      }
 
       return common_scripts\utility::random(var_7);
     }

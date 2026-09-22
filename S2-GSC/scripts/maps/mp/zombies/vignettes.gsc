@@ -36,22 +36,26 @@ vignette_init() {
   level.vignette_solodeath_time_max = 30;
   level.vignette_solodeath_chance = 1;
 
-  while(!isDefined(level.players) || level.players.size == 0)
+  while(!isDefined(level.players) || level.players.size == 0) {
     waitframe();
+  }
 
-  foreach(var_1 in level._id_AC80._id_ACB3)
-  var_1 thread vignette_listen_when_zone_activated();
+  foreach(var_1 in level._id_AC80._id_ACB3) {
+    var_1 thread vignette_listen_when_zone_activated();
+  }
 
   level thread vignette_get_remaining_wave_count();
   var_3 = common_scripts\utility::_id_46B7("vignette_groundkill_org", "targetname");
 
-  foreach(var_5 in var_3)
-  var_5 thread vignette_handler("groundkill");
+  foreach(var_5 in var_3) {
+    var_5 thread vignette_handler("groundkill");
+  }
 
   var_7 = common_scripts\utility::_id_46B7("vignette_wallkill_org", "targetname");
 
-  foreach(var_5 in var_7)
-  var_5 thread vignette_handler("wallkill");
+  foreach(var_5 in var_7) {
+    var_5 thread vignette_handler("wallkill");
+  }
 }
 
 vignette_handler(var_0) {
@@ -100,13 +104,15 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
   var_0 endon("vignette_start");
   var_0 endon("vignette_cleanup");
 
-  while(!isDefined(level.players) || level.players.size == 0)
+  while(!isDefined(level.players) || level.players.size == 0) {
     waitframe();
+  }
 
   var_5 = undefined;
 
-  while(!common_scripts\utility::_id_562E(level._id_AC80._id_08A9))
+  while(!common_scripts\utility::_id_562E(level._id_AC80._id_08A9)) {
     waitframe();
+  }
 
   var_6 = 50;
   var_7 = self.origin + (0, 0, var_6);
@@ -124,13 +130,15 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
 
     var_0.is_in_recently_enabled_zone = 0;
 
-    if(isDefined(var_5) && isDefined(level._id_AC80._id_ACB3[var_5].was_unlocked_on_wave) && level._id_AC80._id_ACB3[var_5].was_unlocked_on_wave > level._id_A980 - level.vignette_recent_wave_buffer)
+    if(isDefined(var_5) && isDefined(level._id_AC80._id_ACB3[var_5].was_unlocked_on_wave) && level._id_AC80._id_ACB3[var_5].was_unlocked_on_wave > level._id_A980 - level.vignette_recent_wave_buffer) {
       var_0.is_in_recently_enabled_zone = 1;
+    }
 
     var_0.radial_cooldown_is_safe = 1;
 
-    if(isDefined(level.vignette_radial_cooldown_loc))
+    if(isDefined(level.vignette_radial_cooldown_loc)) {
       var_0.radial_cooldown_is_safe = distance(level.vignette_radial_cooldown_loc, self.origin) > level.vignette_radial_cooldown_dist;
+    }
 
     var_0.not_over_zombie_limit = var_8.size < level.vignette_max_level_zombies_allowed;
     var_0.wave_isnt_over = !_id_056D::_id_584C(level._id_A980);
@@ -145,36 +153,42 @@ vignette_start_listener(var_0, var_1, var_2, var_3, var_4) {
       foreach(var_13 in level.players) {
         var_14 = 0;
 
-        if(isDefined(self._id_0165))
+        if(isDefined(self._id_0165)) {
           var_14 = common_scripts\utility::stringtofloat(self._id_0165);
+        }
 
         var_15 = common_scripts\utility::within_fov(var_13 getEye(), var_13.angles, var_7, _cos(32.5));
         var_16 = distance(var_7, var_13.origin) < var_2;
         var_17 = distance(var_7, var_13.origin) < level.vignette_min_dist;
         var_18 = 0;
 
-        if(_abs(var_13.origin[2] - self.origin[2]) < 150)
+        if(_abs(var_13.origin[2] - self.origin[2]) < 150) {
           var_18 = 1;
+        }
 
         if(var_15) {
           break;
         }
 
-        if(!var_16)
+        if(!var_16) {
           var_10[var_10.size] = var_13;
+        }
 
         var_19 = common_scripts\utility::within_fov(self.origin, self.angles + (0, var_14, 0), var_13.origin, _cos(60));
         var_20 = 1;
 
-        if(var_4 && !var_19)
+        if(var_4 && !var_19) {
           var_20 = 0;
+        }
 
-        if(!var_17 && var_16 && var_20)
+        if(!var_17 && var_16 && var_20) {
           var_11[var_11.size] = var_13;
+        }
       }
 
-      if(var_11.size > 0 && var_11.size + var_10.size == level.players.size)
+      if(var_11.size > 0 && var_11.size + var_10.size == level.players.size) {
         var_0 notify("vignette_start");
+      }
 
       wait(_randomfloatrange(1.5, 3));
       continue;
@@ -209,8 +223,9 @@ vignette_run(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   level.vignettes_occurred_in_current_wave = level.vignettes_occurred_in_current_wave + 1;
 
-  if(isalive(var_11) && isalive(var_10))
+  if(isalive(var_11) && isalive(var_10)) {
     thread vignette_gunshots(var_11, var_10);
+  }
 
   if(isDefined(var_7) && isalive(var_10)) {
     var_12 = var_10 maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_7);
@@ -225,16 +240,19 @@ vignette_run(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_11 vignette_actor_enter_safe_state();
     var_10 vignette_actor_enter_safe_state();
 
-    if(isDefined(var_1) && isDefined(var_2) && isDefined(var_11) && isalive(var_11) && isDefined(var_10) && isalive(var_10) && !common_scripts\utility::_id_562E(var_11.vignette_interrupted))
+    if(isDefined(var_1) && isDefined(var_2) && isDefined(var_11) && isalive(var_11) && isDefined(var_10) && isalive(var_10) && !common_scripts\utility::_id_562E(var_11.vignette_interrupted)) {
       vignette_execute_paired_scene(var_11, var_10, var_1, var_2, 0);
-    else if(isalive(var_10))
+    } else if(isalive(var_10)) {
       _id_0378::_id_8D74("play_vignette_victim_hurt_vo", var_10);
+    }
 
-    if(isDefined(var_3) && isDefined(var_4) && isDefined(var_11) && isalive(var_11) && isDefined(var_10) && isalive(var_10) && !common_scripts\utility::_id_562E(var_11.vignette_interrupted))
+    if(isDefined(var_3) && isDefined(var_4) && isDefined(var_11) && isalive(var_11) && isDefined(var_10) && isalive(var_10) && !common_scripts\utility::_id_562E(var_11.vignette_interrupted)) {
       vignette_execute_paired_scene(var_11, var_10, var_3, var_4, 1);
+    }
 
-    if(isDefined(var_5) && isDefined(var_6) && isDefined(var_11) && isalive(var_11) && isDefined(var_10) && isalive(var_10) && !common_scripts\utility::_id_562E(var_11.vignette_interrupted))
+    if(isDefined(var_5) && isDefined(var_6) && isDefined(var_11) && isalive(var_11) && isDefined(var_10) && isalive(var_10) && !common_scripts\utility::_id_562E(var_11.vignette_interrupted)) {
       vignette_execute_paired_scene(var_11, var_10, var_5, var_6, 0);
+    }
 
     var_11 vignette_actor_leave_safe_state();
     var_10 vignette_actor_leave_safe_state();
@@ -259,8 +277,9 @@ vignette_execute_paired_scene(var_0, var_1, var_2, var_3, var_4) {
   var_13 = _getstartangles(self.origin, self.angles, var_11);
   var_14 = undefined;
 
-  if(var_4)
+  if(var_4) {
     var_14 = _randomfloatrange(level.vignette_loop_min_timeout, level.vignette_loop_max_timeout);
+  }
 
   var_1 thread vignette_actor_run_anim_entry(var_12, var_13, var_10, var_14);
   var_0 thread vignette_actor_run_anim_entry(var_7, var_8, var_5, var_14);
@@ -277,17 +296,19 @@ vignette_actor_run_anim_entry(var_0, var_1, var_2, var_3) {
   self scragentsetanimscale(1, 1);
   self scragentsetphysicsmode("noclip");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     vignette_zombie_run_loop(var_2, var_3);
-  else
+  } else {
     maps\mp\agents\_scripted_agent_anim_util::_id_71FD(var_2, 0, "scripted_anim");
+  }
 }
 
 vignette_zombie_run_loop(var_0, var_1) {
   self endon("loop_end");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     thread vignette_loop_timeout_or_timeout_notify("loop_end", var_1);
+  }
 
   maps\mp\agents\_scripted_agent_anim_util::_id_71FD(var_0, 0, "scripted_anim");
 }
@@ -306,8 +327,9 @@ vignette_actor_leave_safe_state() {
   if(!isalive(self)) {
     return;
   }
-  if(isDefined(self.vignettepartner))
+  if(isDefined(self.vignettepartner)) {
     self.vignettepartner = undefined;
+  }
 
   self scragentsetscripted(0);
   maps\mp\agents\_scripted_agent_anim_util::_id_8732(0, "vignette spawn");
@@ -330,8 +352,9 @@ vignette_loop_timeout_or_timeout_notify(var_0, var_1) {
 vignette_loop_player_close_notify(var_0, var_1) {
   for(;;) {
     foreach(var_3 in level.players) {
-      if(distance(var_3.origin, var_0.origin) < level.vignette_loop_interrupt_radius)
+      if(distance(var_3.origin, var_0.origin) < level.vignette_loop_interrupt_radius) {
         var_0 notify(var_1);
+      }
     }
 
     wait 0.25;
@@ -368,8 +391,9 @@ vignette_monitor_last_seen() {
   var_0 endon("vignette_cleanup");
   var_0.time_since_loc_seen = 0;
 
-  while(!isDefined(var_0.ent_zone_name))
+  while(!isDefined(var_0.ent_zone_name)) {
     waitframe();
+  }
 
   var_0 thread vignette_monitor_last_seen_ticker();
 
@@ -398,8 +422,9 @@ vignette_monitor_last_seen() {
 vignette_watch_zone_expire() {
   self endon("vignette_start");
 
-  while(!isDefined(self.ent_zone_name))
+  while(!isDefined(self.ent_zone_name)) {
     waitframe();
+  }
 
   level waittillmatch("zone_vignette_cleanup", self.ent_zone_name);
   self notify("vignette_cleanup");
@@ -430,8 +455,9 @@ vignette_gunshots(var_0, var_1) {
   if(var_2 <= level.vignette_gunshot_chance) {
     var_5 = _randomintrange(1, 3);
 
-    if(var_4 == "kar98_zm")
+    if(var_4 == "kar98_zm") {
       var_5 = 1;
+    }
 
     for(var_6 = 0; var_6 < var_5; var_6++) {
       _magicbullet(var_4, var_1.origin, var_1.origin - (0, 0, 10));
@@ -446,15 +472,17 @@ vignette_wave_count_reset() {
 
   for(;;) {
     if(_id_056D::_id_584C(level._id_A980) && !var_0) {
-      if(level.vignettes_total_per_wave_allowed < level.vignettes_total_per_wave_max)
+      if(level.vignettes_total_per_wave_allowed < level.vignettes_total_per_wave_max) {
         level.vignettes_total_per_wave_allowed++;
+      }
 
       level.vignettes_occurred_in_current_wave = 0;
       var_0 = 1;
     }
 
-    if(!_id_056D::_id_584C(level._id_A980) && var_0)
+    if(!_id_056D::_id_584C(level._id_A980) && var_0) {
       var_0 = 0;
+    }
 
     wait 0.1;
   }
@@ -478,8 +506,9 @@ vignette_get_remaining_wave_count_checked() {
     var_2 = level._id_ABED maps\mp\_utility::_id_5DCB();
     var_3 = level._id_AC12 maps\mp\_utility::_id_5DCB();
 
-    if(var_3 > level.wave_start_intended_spawn_count)
+    if(var_3 > level.wave_start_intended_spawn_count) {
       var_3 = 0;
+    }
 
     level.remaining_zomb_count = var_3 + var_0 + var_1 + var_2;
     wait 0.25;
@@ -487,16 +516,19 @@ vignette_get_remaining_wave_count_checked() {
 }
 
 vignette_listen_when_zone_activated() {
-  while(!self._id_556E)
+  while(!self._id_556E) {
     wait 0.5;
+  }
 
-  if(level._id_A980 == 0)
+  if(level._id_A980 == 0) {
     self.was_unlocked_on_wave = 1;
-  else
+  } else {
     self.was_unlocked_on_wave = level._id_A980;
+  }
 
-  while(level._id_A980 <= self.was_unlocked_on_wave + level.vignette_recent_wave_buffer)
+  while(level._id_A980 <= self.was_unlocked_on_wave + level.vignette_recent_wave_buffer) {
     level waittill("zombie_wave_started");
+  }
 
   level notify("zone_vignette_cleanup", self._id_AC8A);
 }
@@ -505,8 +537,9 @@ vignette_is_not_near_zombies() {
   var_0 = _id_0547::_id_408F();
 
   foreach(var_2 in var_0) {
-    if(distance(var_2.origin, self.origin) < level.vignette_min_dist_from_other_zombies)
+    if(distance(var_2.origin, self.origin) < level.vignette_min_dist_from_other_zombies) {
       return 0;
+    }
   }
 
   return 1;
@@ -515,8 +548,9 @@ vignette_is_not_near_zombies() {
 _id_5718(var_0, var_1) {
   if(isDefined(var_0)) {
     foreach(var_3 in var_0) {
-      if(var_3 == var_1)
+      if(var_3 == var_1) {
         return 1;
+      }
     }
   }
 

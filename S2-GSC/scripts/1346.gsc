@@ -18,18 +18,18 @@ _id_5329() {
         switch (var_5._id_0165) {
           case "clip_old":
             var_5 notsolid();
-            var_5 linkto(var_2);
+            var_5 linkTo(var_2);
             var_5 hide();
             break;
           case "clip_vis":
             var_5 notsolid();
             var_2._id_A55B = var_5;
             var_5 hide();
-            var_5 linkto(var_2);
+            var_5 linkTo(var_2);
             break;
           case "clip":
             var_2._id_4033 = var_5;
-            var_5 linkto(var_2);
+            var_5 linkTo(var_2);
             break;
         }
       }
@@ -70,8 +70,9 @@ solvepairedmeleefatalpositioning(var_0) {
 }
 
 _id_52C1() {
-  if(!isDefined(level._id_6DF9))
+  if(!isDefined(level._id_6DF9)) {
     level._id_6DF9 = [];
+  }
 
   var_0 = [];
   var_0[16]["noGib"] = 1;
@@ -117,8 +118,9 @@ _id_457F(var_0, var_1) {
 }
 
 attemptheavymeleekill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!var_0 _meth_864D(var_2) || !var_2 _meth_8661() || !var_2 _id_0547::_id_1F54(var_0, var_5))
+  if(!var_0 _meth_864D(var_2) || !var_2 _meth_8661() || !var_2 _id_0547::_id_1F54(var_0, var_5)) {
     return 0;
+  }
 
   var_10 = (34, 8, 0);
   var_11 = 24;
@@ -126,8 +128,9 @@ attemptheavymeleekill(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   var_13 = _rotatevector(var_10, var_2.angles);
   var_14 = _getgroundposition(var_2.origin + var_13, var_11, 64, 64, 0);
 
-  if(!isDefined(var_14) || _abs(var_14[2] - var_2.origin[2]) > var_12)
+  if(!isDefined(var_14) || _abs(var_14[2] - var_2.origin[2]) > var_12) {
     return 0;
+  }
 
   return 1;
 }
@@ -182,8 +185,9 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     var_30 = 0.2;
     var_31 = "fatal_zombie_snd";
 
-    if(var_5 _meth_8661() && !common_scripts\utility::_id_562E(self._id_0103))
+    if(var_5 _meth_8661() && !common_scripts\utility::_id_562E(self._id_0103)) {
       var_31 = "hit_zombie_snd";
+    }
 
     if(isDefined(var_1[var_31])) {
       var_32 = spawnStruct();
@@ -194,8 +198,9 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       var_32._id_01D0 = var_8;
       var_32.delaysec = var_3;
 
-      if(var_31 == "fatal_zombie_snd" && isDefined(var_1["fatal_zombie_snd_delay"]))
+      if(var_31 == "fatal_zombie_snd" && isDefined(var_1["fatal_zombie_snd_delay"])) {
         var_32.delaysec = var_32.delaysec + var_1["fatal_zombie_snd_delay"];
+      }
 
       var_0 _id_0378::_id_8D74(var_1[var_31], var_32);
     }
@@ -203,8 +208,9 @@ _id_4ADD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     thread _id_4AB1(var_0, var_5, var_14, var_28);
     var_33 = common_scripts\utility::_id_562E(var_0.too_far_for_melee_pairing);
 
-    if(!var_33)
+    if(!var_33) {
       var_0 thread _id_2678(var_2, 0, var_11, var_29, var_28, var_25, var_30);
+    }
   }
 }
 
@@ -218,26 +224,30 @@ _id_2678(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_10 = gettime();
   var_11 = var_8;
 
-  if(getdvarint("paired_death_debug", 0))
+  if(getdvarint("paired_death_debug", 0)) {
     thread maps\mp\_utility::_id_33C0(var_11, var_4, (1, 0, 0), "paired_death_lerp_start");
+  }
 
   var_12 = var_10;
 
   for(var_13 = 0; var_13 <= 1.0; var_12 = gettime()) {
-    if(getdvarint("paired_death_debug", 0))
+    if(getdvarint("paired_death_debug", 0)) {
       thread maps\mp\_utility::_id_33C0(var_11, self.origin, (0, 1, 0), "paired_death_lerp_start");
+    }
 
     var_14 = var_12 * 0.001 - var_3 * var_2;
 
-    if(common_scripts\utility::_id_562E(var_1))
+    if(common_scripts\utility::_id_562E(var_1)) {
       var_15 = common_scripts\utility::_id_627D(var_14, var_7) / var_7;
-    else
+    } else {
       var_15 = clamp(var_14 / var_7, 0, 1);
+    }
 
     var_16 = common_scripts\utility::_id_A2BE();
 
-    if(!getdvarint("cancel_anim_delta", 0))
+    if(!getdvarint("cancel_anim_delta", 0)) {
       var_16 = _getmovedelta(var_0, 0, var_15);
+    }
 
     var_17 = _getangledelta(var_0, 0, var_15);
     var_18 = _transformmove(var_4, var_5, common_scripts\utility::_id_A2BE(), common_scripts\utility::_id_A2BE(), var_16, (0, var_17, 0));
@@ -246,8 +256,9 @@ _id_2678(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self.origin = _vectorlerp(var_8, var_18["origin"], var_19);
     self.angles = _func_10B(var_9, var_18["angles"], var_19);
 
-    if(getdvarint("paired_death_debug", 0))
+    if(getdvarint("paired_death_debug", 0)) {
       thread maps\mp\_utility::_id_33C0(var_11, self.origin, (0, 0, 1), "paired_death_lerp_start");
+    }
 
     var_11 = self.origin;
     waitframe();
@@ -261,8 +272,9 @@ _id_4AB1(var_0, var_1, var_2, var_3) {
   if(getdvarint("paired_death_clip", 0) == 0) {
     return;
   }
-  if(getdvarint("paired_death_debug", 0))
+  if(getdvarint("paired_death_debug", 0)) {
     wait 0;
+  }
 
   var_5 = getdvarint("paried_death_block_length_offset", 30);
   var_6 = getdvarint("paired_death_block_h_length", 30);
@@ -293,17 +305,20 @@ _id_4AB1(var_0, var_1, var_2, var_3) {
     level._id_08CE[var_4] = var_12;
   }
 
-  if(getdvarint("paired_death_debug", 0))
+  if(getdvarint("paired_death_debug", 0)) {
     maps\mp\_utility::_id_33C0(var_3, var_3 + (0, 0, 100), (1, 0, 0), var_4);
+  }
 
   wait(var_2);
 
-  if(getdvarint("paired_death_debug", 0))
+  if(getdvarint("paired_death_debug", 0)) {
     level waittill("blockerName");
+  }
 
   if(var_11) {
-    if(isDefined(level._id_08CE) && isDefined(level._id_08CE[var_4]))
+    if(isDefined(level._id_08CE) && isDefined(level._id_08CE[var_4])) {
       _func_2E4(level._id_08CE[var_4]);
+    }
   }
 
   var_10.origin = var_10._id_6C4E;
@@ -346,8 +361,9 @@ _id_4AB2(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_14 >= 0.0) {
     var_15 = var_14 * var_13 / var_3 - var_4;
 
-    if(var_15 < 0.0)
+    if(var_15 < 0.0) {
       var_15 = 0.0;
+    }
 
     thread _id_0541::_id_AC26(anglestoright(self.angles) + anglestoup(self.angles), var_15);
   }
@@ -369,8 +385,9 @@ handlethirdpersonalignment() {
   self endon("disconnect");
   self _meth_85C9(1);
 
-  while(self _meth_8661())
+  while(self _meth_8661()) {
     waitframe();
+  }
 
   self _meth_85C9(0);
 }
@@ -388,8 +405,9 @@ hackhandleflinching(var_0) {
   if(!isDefined(var_2) || var_2 <= 0.0) {
     return;
   }
-  if(!isDefined(self.premeleeflinchscale))
+  if(!isDefined(self.premeleeflinchscale)) {
     self.premeleeflinchscale = self getviewkickscale();
+  }
 
   self setviewkickscale(0);
   wait(var_2);
@@ -400,13 +418,15 @@ hackhandleflinching(var_0) {
 set_invalid_melee_pairing_reason(var_0, var_1) {
   var_2 = self;
 
-  if(!isDefined(var_2.invalidmeleepairingreasons))
+  if(!isDefined(var_2.invalidmeleepairingreasons)) {
     var_2.invalidmeleepairingreasons = [];
+  }
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_2.invalidmeleepairingreasons[var_0] = 1;
-  else
+  } else {
     var_2.invalidmeleepairingreasons[var_0] = undefined;
+  }
 
   var_3 = var_2.invalidmeleepairingreasons.size == 0;
   var_2 setexomeleechargevalid(var_3);
@@ -429,8 +449,9 @@ zombie_too_far_for_pairing_cleanup(var_0, var_1) {
   var_2 endon("death");
   var_2 endon("zombie_too_far_for_pairing_cleanup_" + var_1);
 
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     var_2 thread zombie_too_far_watch_player_disconnect(var_0, var_1);
+  }
 
   for(;;) {
     waitframe();

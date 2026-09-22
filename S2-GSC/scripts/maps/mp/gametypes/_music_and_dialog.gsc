@@ -62,11 +62,13 @@ init() {
   game["dialog"]["last_alive"] = "gbl_lastman";
   game["dialog"]["boost"] = "gbl_start";
 
-  if(!isDefined(game["dialog"]["offense_obj"]))
+  if(!isDefined(game["dialog"]["offense_obj"])) {
     game["dialog"]["offense_obj"] = "boost";
+  }
 
-  if(!isDefined(game["dialog"]["defense_obj"]))
+  if(!isDefined(game["dialog"]["defense_obj"])) {
     game["dialog"]["defense_obj"] = "boost";
+  }
 
   game["dialog"]["hardcore"] = "hardcore";
   game["dialog"]["highspeed"] = "highspeed";
@@ -218,19 +220,22 @@ _id_74CF() {
 
 init_end_game_music_ent() {
   if(!level.hardcoremode) {
-    if(!isDefined(level.end_game_music_ent))
+    if(!isDefined(level.end_game_music_ent)) {
       level.end_game_music_ent = spawn("script_origin", (0, 0, 0));
+    }
   }
 }
 
 end_game_music_ent_origin_update(var_0) {
-  if(isDefined(level.end_game_music_ent))
+  if(isDefined(level.end_game_music_ent)) {
     level.end_game_music_ent.origin = var_0;
+  }
 }
 
 play_end_game_music(var_0) {
-  if(isDefined(level.end_game_music_ent))
+  if(isDefined(level.end_game_music_ent)) {
     level.end_game_music_ent playSound(var_0);
+  }
 }
 
 stop_end_game_music() {
@@ -251,10 +256,11 @@ _id_7620() {
   if(isDefined(level._id_7621) && level._id_7621) {
     return;
   }
-  if(isDefined(self._id_7624) && self._id_7624)
+  if(isDefined(self._id_7624) && self._id_7624) {
     return;
-  else
+  } else {
     self._id_7624 = 1;
+  }
 
   if(!isDefined(level._id_7622)) {
     if(!_soundexists("mus_practice_round_backing_track")) {
@@ -267,7 +273,7 @@ _id_7620() {
     level._id_7622 hide();
     wait 12;
     self._id_7623 = 1;
-    level._id_7622 playloopsound("mus_practice_round_backing_track");
+    level._id_7622 playLoopSound("mus_practice_round_backing_track");
     _id_74CF();
     level._id_7622 showtoplayer(self);
     level._id_7622 scalevolume(0, 0.05);
@@ -295,8 +301,9 @@ _id_36E0() {
         break;
       }
 
-      if(var_0 - _floor(var_0) >= 0.05)
+      if(var_0 - _floor(var_0) >= 0.05) {
         wait(var_0 - _floor(var_0));
+      }
     }
 
     wait 1.0;
@@ -316,34 +323,39 @@ onplayerspawned() {
 
   if(getDvar("4017") == "0" && !_func_367()) {
     if(!level.splitscreen || level.splitscreen && !isDefined(level._id_7217)) {
-      if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
+      if(!self issplitscreenplayer() || self issplitscreenplayerprimary()) {
         self playlocalsound(game["music"]["spawn_" + self.team]);
+      }
 
-      if(level.splitscreen)
+      if(level.splitscreen) {
         level._id_7217 = 1;
+      }
     }
 
-    if(maps\mp\_utility::_id_761E())
+    if(maps\mp\_utility::_id_761E()) {
       thread _id_7620();
+    }
 
     if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
-      if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies")
+      if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
         maps\mp\_utility::leaderdialogonplayer("allies_gametype");
-      else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
+      } else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
         maps\mp\_utility::leaderdialogonplayer("axis_gametype");
-      else if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
+      } else if(!self issplitscreenplayer() || self issplitscreenplayerprimary()) {
         maps\mp\_utility::leaderdialogonplayer("gametype");
+      }
     }
 
-    if(isDefined(level._id_2EC3))
+    if(isDefined(level._id_2EC3)) {
       self[[level._id_2EC3]]();
-    else {
+    } else {
       wait 5;
       maps\mp\_utility::gameflagwait("prematch_done");
 
       if(self.team == game["attackers"]) {
-        if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
+        if(!self issplitscreenplayer() || self issplitscreenplayerprimary()) {
           maps\mp\_utility::leaderdialogonplayer("offense_obj", "introboost");
+        }
       } else if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
         maps\mp\_utility::leaderdialogonplayer("defense_obj", "introboost");
     }
@@ -402,11 +414,11 @@ _id_6B3E() {
 
   if(level.teambased) {
     if(level.splitscreen) {
-      if(var_0 == "allies")
+      if(var_0 == "allies") {
         maps\mp\_utility::playsoundonplayers(game["music"]["victory_allies"], "allies");
-      else if(var_0 == "axis")
+      } else if(var_0 == "axis") {
         maps\mp\_utility::playsoundonplayers(game["music"]["victory_axis"], "axis");
-      else {
+      } else {
         maps\mp\_utility::playsoundonplayers(game["music"]["draw_allies"], "allies");
         maps\mp\_utility::playsoundonplayers(game["music"]["draw_axis"], "axis");
       }
@@ -435,8 +447,9 @@ _id_6B3E() {
         continue;
       }
 
-      if(!level.splitscreen)
+      if(!level.splitscreen) {
         var_2 playlocalsound(game["music"]["defeat_" + var_2.pers["team"]]);
+      }
     }
   }
 }
@@ -445,11 +458,13 @@ _id_7F2E() {
   level waittill("round_win", var_0);
   var_1 = level._id_7F16 / 4;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     wait(var_1);
+  }
 
-  if(maps\mp\_utility::isprophuntgametype())
+  if(maps\mp\_utility::isprophuntgametype()) {
     thread stop_end_game_music();
+  }
 
   if(!isDefined(var_0) || isPlayer(var_0)) {
     maps\mp\_utility::playsoundonplayers(game["music"]["draw_allies"], "allies");
@@ -476,18 +491,20 @@ _id_3FE1() {
   level waittill("game_win", var_0);
   var_1 = level._id_75EE / 2;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     wait(var_1);
+  }
 
   if(!level.teambased && isDefined(var_0) && isPlayer(var_0)) {
     var_2 = [var_0];
     var_3 = [];
 
     foreach(var_5 in level.players) {
-      if(var_5 == var_0)
+      if(var_5 == var_0) {
         continue;
-      else
+      } else {
         var_3[var_3.size] = var_5;
+      }
     }
 
     maps\mp\_utility::leaderdialog("ffa_win", "allies", undefined, var_3);
@@ -545,8 +562,9 @@ _id_65BC() {
     }
   }
 
-  if(!level.hardcoremode && !maps\mp\_utility::_id_579B() && !maps\mp\_utility::_id_585F() && getdvarint("enable_end_game_music", 1) && !maps\mp\_utility::_id_56B1())
+  if(!level.hardcoremode && !maps\mp\_utility::_id_579B() && !maps\mp\_utility::_id_585F() && getdvarint("enable_end_game_music", 1) && !maps\mp\_utility::_id_56B1()) {
     play_end_game_music(game["music"]["match_ending_soon"]);
+  }
 
   level waittill("match_ending_very_soon");
   maps\mp\_utility::leaderdialog("timesup");

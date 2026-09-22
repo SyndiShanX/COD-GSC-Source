@@ -14,17 +14,19 @@ init() {
   level._id_2FAA = getdvarint("437", 1) == 0;
   maps\mp\_utility::_id_86FB();
 
-  if(getdvarint("5357") == 1)
+  if(getdvarint("5357") == 1) {
     level.onlinegame = 1;
+  }
 
   level._id_015D = _tolower(getDvar("1673"));
 
-  if(_func_367())
+  if(_func_367()) {
     level.gametype = "hub";
-  else if(getdvarint("4017", 0))
+  } else if(getdvarint("4017", 0)) {
     level.gametype = "vlobby";
-  else
+  } else {
     level.gametype = _tolower(getDvar("1924"));
+  }
 
   level._id_985B = ["axis", "allies"];
   level._id_6C63["allies"] = "axis";
@@ -36,8 +38,9 @@ init() {
   level._id_8C03 = 0;
   level._id_9A27 = getdvarint("scr_tispawndelay");
 
-  if(!isDefined(level._id_9FC5))
+  if(!isDefined(level._id_9FC5)) {
     _id_0511::init();
+  }
 
   precachestring(&"MP_HALFTIME");
   precachestring(&"MP_OVERTIME");
@@ -51,17 +54,19 @@ init() {
   precachestring(&"MP_OBITUARY_FRIENDLY");
   precachestring(&"MP_OBITUARY_ENEMY");
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     precachestring(&"MP_ENDED_GAME");
-  else
+  } else {
     precachestring(&"MP_HOST_ENDED_GAME");
+  }
 
   level._id_495B = "halftime";
 
-  if(level.gametype == "dom" || level.gametype == "lockdown")
+  if(level.gametype == "dom" || level.gametype == "lockdown") {
     level._id_4959 = 1;
-  else
+  } else {
     level._id_4959 = 0;
+  }
 
   level.halftimestopwatch = 0;
   level._id_5C00 = 0;
@@ -72,8 +77,9 @@ init() {
   level.placement["all"] = [];
   level._id_75EE = 5.0;
 
-  if(maps\mp\_utility::_id_761E())
+  if(maps\mp\_utility::_id_761E()) {
     level._id_75EE = 0.0;
+  }
 
   level._id_7460 = [];
   _id_7BDF();
@@ -131,8 +137,9 @@ setupcallbacks() {
 }
 
 _id_4437() {
-  if(!isDefined(self._id_9070))
+  if(!isDefined(self._id_9070)) {
     self._id_9070 = spawnStruct();
+  }
 
   var_0 = [[level._id_7658]](_func_2D5(self), self._id_9070, undefined, isPlayer(self), undefined, 1);
 
@@ -153,9 +160,9 @@ _id_4437() {
           if(var_7 == var_0) {
             var_3 = 1;
 
-            if(var_5["spawnsSinceLastUsed"] == 0)
+            if(var_5["spawnsSinceLastUsed"] == 0) {
               var_5["spawnCount"]++;
-            else {
+            } else {
               var_5["spawnsSinceLastUsed"] = 0;
               var_5["spawnCount"] = 1;
             }
@@ -163,12 +170,14 @@ _id_4437() {
             var_5["spawnCount"] = 0;
             var_5["spawnsSinceLastUsed"]++;
 
-            if(var_5["spawnsSinceLastUsed"] > 3)
+            if(var_5["spawnsSinceLastUsed"] > 3) {
               var_6 = 1;
+            }
           }
 
-          if(!var_6)
+          if(!var_6) {
             var_2[var_2.size] = var_5;
+          }
         }
       }
 
@@ -190,8 +199,9 @@ _id_4437() {
     }
   }
 
-  if(isDefined(level._id_A278))
+  if(isDefined(level._id_A278)) {
     self[[level._id_A278]](var_0);
+  }
 
   return var_0;
 }
@@ -233,6 +243,7 @@ _id_6BCE(var_0) {
 }
 
 _id_2B57(var_0, var_1) {
-  for(var_2 = 0; var_2 < 50; var_2++)
+  for(var_2 = 0; var_2 < 50; var_2++) {
     waitframe();
+  }
 }

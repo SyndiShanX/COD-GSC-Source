@@ -29,16 +29,18 @@ get_zm_shotgun_player_level() {
 
   if(var_0 >= 0) {
     if(isDefined(level.zmshotgunmaxlevel)) {
-      if(var_0 > level.zmshotgunmaxlevel)
+      if(var_0 > level.zmshotgunmaxlevel) {
         var_0 = level.zmshotgunmaxlevel;
+      }
     }
 
     return var_0;
   }
 
   if(isDefined(self._id_AB46)) {
-    if(isDefined(self._id_AB46["shotgunLevel"]))
+    if(isDefined(self._id_AB46["shotgunLevel"])) {
       return self._id_AB46["shotgunLevel"];
+    }
   }
 
   return -1;
@@ -46,22 +48,26 @@ get_zm_shotgun_player_level() {
 
 get_zm_shotgun_player_xp() {
   if(isDefined(self._id_AB46)) {
-    if(isDefined(self._id_AB46["shotgunXP"]))
+    if(isDefined(self._id_AB46["shotgunXP"])) {
       return self._id_AB46["shotgunXP"];
+    }
   }
 
   return -1;
 }
 
 zombie_shotgun_mode_bonus_damage(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return var_1;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return var_1;
+  }
 
   var_3 = var_0 get_zm_shotgun_ranktable_value(20);
   var_3 = var_3 / 100.0 + 1;
@@ -75,8 +81,9 @@ get_zm_shotgun_ranktable_value(var_0) {
   if(var_1 >= 0) {
     if(isDefined(level.zmshotgunranktable)) {
       if(isDefined(level.zmshotgunranktable[var_1])) {
-        if(isDefined(level.zmshotgunranktable[var_1][var_0]))
+        if(isDefined(level.zmshotgunranktable[var_1][var_0])) {
           return level.zmshotgunranktable[var_1][var_0];
+        }
       }
     }
   }
@@ -98,8 +105,9 @@ debug_show_shotgun_player_levels() {
 
   for(;;) {
     if(getdvarint("zm_shotgun_show_level", 0)) {
-      foreach(var_1 in level.players)
-      var_2 = var_1 get_zm_shotgun_player_level();
+      foreach(var_1 in level.players) {
+        var_2 = var_1 get_zm_shotgun_player_level();
+      }
     }
 
     wait 5;
@@ -111,8 +119,9 @@ debug_show_shotgun_player_xp() {
 
   for(;;) {
     if(getdvarint("zm_shotgun_show_xp", 0)) {
-      foreach(var_1 in level.players)
-      var_2 = var_1 get_zm_shotgun_player_xp();
+      foreach(var_1 in level.players) {
+        var_2 = var_1 get_zm_shotgun_player_xp();
+      }
     }
 
     wait 5;

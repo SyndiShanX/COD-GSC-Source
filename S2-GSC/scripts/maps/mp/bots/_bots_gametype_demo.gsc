@@ -23,8 +23,9 @@ _id_8792() {
   var_0 = maps\mp\bots\_bots_gametype_common::_id_1B1D(["_a", "_b"]);
 
   if(var_0) {
-    foreach(var_2 in level._id_1913)
-    var_2 thread maps\mp\bots\_bots_gametype_common::_id_62EA();
+    foreach(var_2 in level._id_1913) {
+      var_2 thread maps\mp\bots\_bots_gametype_common::_id_62EA();
+    }
 
     thread _id_1997();
     level._id_19E8 = 1;
@@ -39,8 +40,9 @@ _id_199B() {
   level endon("game_ended");
   self endon("owner_disconnect");
 
-  while(!isDefined(level._id_19E8))
+  while(!isDefined(level._id_19E8)) {
     waitframe();
+  }
 
   self botsetflag("separation", 0);
   self botsetflag("grenade_objectives", 1);
@@ -55,10 +57,11 @@ _id_199B() {
       _id_1998();
     }
 
-    if(maps\mp\_utility::inovertime())
+    if(maps\mp\_utility::inovertime()) {
       var_0 = level._id_1913[0]._id_6DB2 != self.team;
-    else
+    } else {
       var_0 = self.team == game["attackers"];
+    }
 
     if(var_0) {
       _id_1A96("attack");
@@ -83,8 +86,9 @@ _id_199B() {
         }
       } else if(self._id_7ECA == "investigate_someone_using_bomb")
         _id_5519();
-      else if(self._id_7ECA == "atk_bomber")
+      else if(self._id_7ECA == "atk_bomber") {
         _id_7060();
+      }
 
       continue;
     }
@@ -111,8 +115,9 @@ _id_199B() {
       continue;
     }
 
-    if(self._id_7ECA == "defuser")
+    if(self._id_7ECA == "defuser") {
       _id_2C92();
+    }
   }
 }
 
@@ -121,8 +126,9 @@ _id_67F5(var_0) {
   var_2 = maps\mp\bots\_bots_gametype_common::_id_4065(var_0);
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4._id_28EE) && var_1 == var_4._id_28EE)
+    if(isDefined(var_4._id_28EE) && var_1 == var_4._id_28EE) {
       var_4 _id_1999("investigate_someone_using_bomb");
+    }
   }
 }
 
@@ -137,15 +143,17 @@ _id_7060() {
     var_3 = var_2 - level._id_7078 * 2 * 1000;
     var_4 = gettime() + var_3;
 
-    if(var_3 > 0)
+    if(var_3 > 0) {
       maps\mp\bots\_bots_util::_id_1B22(var_3);
+    }
 
     var_5 = var_4 > 0 && gettime() >= var_4;
     var_6 = maps\mp\bots\_bots_gametype_common::_id_1911(level._id_7078 + 2, "bomb_planted", var_5);
     self botclearscriptgoal();
 
-    if(var_6)
+    if(var_6) {
       _id_1998();
+    }
   }
 }
 
@@ -167,10 +175,11 @@ _id_2C92() {
         if(var_2.size <= var_3) {
           var_4 = _botgetclosestnavigablepoint(var_0, 50, self);
 
-          if(isDefined(var_4))
+          if(isDefined(var_4)) {
             self botsetscriptgoal(var_4, 20, "critical");
-          else
+          } else {
             break;
+          }
         } else
           self botsetscriptgoal(var_2[var_3].origin, 20, "critical");
 
@@ -191,27 +200,31 @@ _id_2C92() {
     var_6 = var_5 - level._id_2CA9 * 2 * 1000;
     var_7 = gettime() + var_6;
 
-    if(var_6 > 0)
+    if(var_6 > 0) {
       maps\mp\bots\_bots_util::_id_1B22(var_6);
+    }
 
     var_8 = var_7 > 0 && gettime() >= var_7;
     var_9 = maps\mp\bots\_bots_gametype_common::_id_1911(level._id_2CA9 + 2, "bomb_defused", var_8);
 
-    if(!var_9 && self._id_2CA5 >= 4)
+    if(!var_9 && self._id_2CA5 >= 4) {
       self._id_2CA5++;
+    }
 
     self botclearscriptgoal();
 
-    if(var_9)
+    if(var_9) {
       _id_1998();
+    }
   }
 }
 
 _id_5519() {
   self endon("change_role");
 
-  if(maps\mp\bots\_bots_util::_id_1A2D())
+  if(maps\mp\bots\_bots_util::_id_1A2D()) {
     maps\mp\bots\_bots_strategy::_id_19A3();
+  }
 
   self botsetscriptgoalnode(common_scripts\utility::random(self._id_28EE._id_1B49), "critical");
   var_0 = maps\mp\bots\_bots_util::_id_1B21();
@@ -227,15 +240,17 @@ _id_4297(var_0) {
 
   foreach(var_3 in var_1) {
     if(!_isai(var_3)) {
-      if(var_3._id_56C2)
+      if(var_3._id_56C2) {
         return var_3;
+      }
     }
   }
 
   foreach(var_3 in var_1) {
     if(_isai(var_3)) {
-      if(isDefined(var_3._id_7ECA) && var_3._id_7ECA == "defuser")
+      if(isDefined(var_3._id_7ECA) && var_3._id_7ECA == "defuser") {
         return var_3;
+      }
     }
   }
 
@@ -247,15 +262,17 @@ _id_42A6(var_0) {
 
   foreach(var_3 in var_1) {
     if(!_isai(var_3)) {
-      if(var_3._id_5777)
+      if(var_3._id_5777) {
         return var_3;
+      }
     }
   }
 
   foreach(var_3 in var_1) {
     if(_isai(var_3)) {
-      if(isDefined(var_3._id_7ECA) && var_3._id_7ECA == "atk_bomber")
+      if(isDefined(var_3._id_7ECA) && var_3._id_7ECA == "atk_bomber") {
         return var_3;
+      }
     }
   }
 
@@ -263,8 +280,9 @@ _id_42A6(var_0) {
 }
 
 _id_190F(var_0) {
-  if(var_0._id_A560 == "any" || var_0._id_18F9)
+  if(var_0._id_A560 == "any" || var_0._id_18F9) {
     return 1;
+  }
 
   return 0;
 }
@@ -273,8 +291,9 @@ _id_405F() {
   var_0 = [];
 
   foreach(var_2 in level._id_1913) {
-    if(_id_190F(var_2))
+    if(_id_190F(var_2)) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   return var_0;
@@ -286,14 +305,16 @@ _id_42B2(var_0, var_1) {
 
   foreach(var_5 in var_3) {
     if(_isai(var_5)) {
-      if(isDefined(var_5._id_28EE) && var_5._id_28EE == var_0)
+      if(isDefined(var_5._id_28EE) && var_5._id_28EE == var_0) {
         var_2 = common_scripts\utility::_id_0F6F(var_2, var_5);
+      }
 
       continue;
     }
 
-    if(distancesquared(var_5.origin, var_0._id_28D4) < level._id_7790 * level._id_7790)
+    if(distancesquared(var_5.origin, var_0._id_28D4) < level._id_7790 * level._id_7790) {
       var_2 = common_scripts\utility::_id_0F6F(var_2, var_5);
+    }
   }
 
   return var_2;
@@ -303,19 +324,21 @@ _id_1A94(var_0, var_1) {
   var_2[0] = _id_42B2(var_0[0], game["defenders"]).size;
   var_2[1] = _id_42B2(var_0[1], game["defenders"]).size;
 
-  if(var_2[0] > var_2[1] + var_1)
+  if(var_2[0] > var_2[1] + var_1) {
     return var_0[1];
-  else if(var_2[0] + var_1 < var_2[1])
+  } else if(var_2[0] + var_1 < var_2[1]) {
     return var_0[0];
+  }
 }
 
 _id_1A96(var_0) {
   var_1 = undefined;
 
-  if(var_0 == "attack")
+  if(var_0 == "attack") {
     var_1 = _id_1971();
-  else if(var_0 == "defend")
+  } else if(var_0 == "defend") {
     var_1 = _id_1973();
+  }
 
   if(isDefined(var_1) && (!isDefined(self._id_28EE) || self._id_28EE != var_1)) {
     self._id_28EE = var_1;
@@ -327,9 +350,9 @@ _id_1973() {
   var_0 = _id_405F();
   var_1 = undefined;
 
-  if(var_0.size == 1)
+  if(var_0.size == 1) {
     var_1 = var_0[0];
-  else if(var_0.size == 2) {
+  } else if(var_0.size == 2) {
     var_2[0] = _id_42B2(var_0[0], game["defenders"]).size;
     var_2[1] = _id_42B2(var_0[1], game["defenders"]).size;
     var_3[0] = _id_553C(var_0[0]);
@@ -338,26 +361,29 @@ _id_1973() {
     if(var_3[0] && var_3[1] || !var_3[0] && !var_3[1]) {
       var_4 = 0;
 
-      if(isDefined(self._id_28EE))
+      if(isDefined(self._id_28EE)) {
         var_4 = 1;
+      }
 
       var_1 = _id_1A94(var_0, var_4);
 
-      if(!isDefined(var_1) && !isDefined(self._id_28EE))
+      if(!isDefined(var_1) && !isDefined(self._id_28EE)) {
         var_1 = common_scripts\utility::random(var_0);
+      }
     } else if(var_3[0] || var_3[1]) {
       var_5 = common_scripts\utility::_id_98E7(var_3[0], 0, 1);
       var_6 = common_scripts\utility::_id_98E7(!var_3[0], 0, 1);
 
-      if(var_2[var_5] > var_2[var_6] + 2)
+      if(var_2[var_5] > var_2[var_6] + 2) {
         var_1 = var_0[var_6];
-      else if(var_2[var_5] <= var_2[var_6])
+      } else if(var_2[var_5] <= var_2[var_6]) {
         var_1 = var_0[var_5];
-      else if(!isDefined(self._id_28EE)) {
-        if(var_2[var_5] >= var_2[var_6] + 2)
+      } else if(!isDefined(self._id_28EE)) {
+        if(var_2[var_5] >= var_2[var_6] + 2) {
           var_1 = var_0[var_6];
-        else if(var_2[var_5] < var_2[var_6] + 2)
+        } else if(var_2[var_5] < var_2[var_6] + 2) {
           var_1 = var_0[var_5];
+        }
       }
     }
   }
@@ -369,8 +395,9 @@ _id_4269(var_0) {
   var_1 = _id_405F();
 
   foreach(var_3 in var_1) {
-    if(var_3 != var_0)
+    if(var_3 != var_0) {
       return var_3;
+    }
   }
 }
 
@@ -391,8 +418,9 @@ _id_1971() {
   self._id_28EE = undefined;
 
   if(isDefined(var_1)) {
-    if(_randomfloat(1.0) < 0.25)
+    if(_randomfloat(1.0) < 0.25) {
       return var_1;
+    }
   }
 
   return var_0;
@@ -405,27 +433,29 @@ _id_1B08() {
     var_1 = distance(self.origin, self._id_28EE._id_28D4);
     var_2 = distance(self.origin, var_0._id_28D4);
 
-    if(var_2 < var_1 * 0.6)
+    if(var_2 < var_1 * 0.6) {
       self._id_28EE = var_0;
+    }
   }
 }
 
 _id_1970() {
   if(isDefined(self._id_7ECA)) {
-    if(self._id_7ECA == "investigate_someone_using_bomb")
+    if(self._id_7ECA == "investigate_someone_using_bomb") {
       return;
+    }
   }
 
   var_0 = undefined;
 
-  if(_id_553C(self._id_28EE))
+  if(_id_553C(self._id_28EE)) {
     var_0 = "defend_zone";
-  else {
+  } else {
     var_1 = _id_42A6(self._id_28EE);
 
-    if(!isDefined(var_1) || var_1 == self)
+    if(!isDefined(var_1) || var_1 == self) {
       var_0 = "atk_bomber";
-    else if(_isai(var_1)) {
+    } else if(_isai(var_1)) {
       var_2 = distance(self.origin, self._id_28EE._id_28D4);
       var_3 = distance(var_1.origin, self._id_28EE._id_28D4);
 
@@ -436,16 +466,18 @@ _id_1970() {
     }
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "sweep_zone";
+  }
 
   _id_1999(var_0);
 }
 
 _id_1972() {
   if(isDefined(self._id_7ECA)) {
-    if(self._id_7ECA == "investigate_someone_using_bomb")
+    if(self._id_7ECA == "investigate_someone_using_bomb") {
       return;
+    }
   }
 
   var_0 = undefined;
@@ -453,9 +485,9 @@ _id_1972() {
   if(_id_553C(self._id_28EE)) {
     var_1 = _id_4297(self._id_28EE);
 
-    if(!isDefined(var_1) || var_1 == self)
+    if(!isDefined(var_1) || var_1 == self) {
       var_0 = "defuser";
-    else if(_isai(var_1)) {
+    } else if(_isai(var_1)) {
       var_2 = distance(self.origin, self._id_28EE._id_28D4);
       var_3 = distance(var_1.origin, self._id_28EE._id_28D4);
 
@@ -466,8 +498,9 @@ _id_1972() {
     }
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "defend_zone";
+  }
 
   _id_1999(var_0);
 }
@@ -499,15 +532,17 @@ _id_1997() {
       foreach(var_3 in level.players) {
         if(isDefined(var_3._id_7ECA) && isDefined(var_3._id_28EE) && var_3._id_28EE == var_1) {
           if(!_id_190F(var_1)) {
-            if(var_3._id_7ECA == "atk_bomber" || var_3._id_7ECA == "defuser")
+            if(var_3._id_7ECA == "atk_bomber" || var_3._id_7ECA == "defuser") {
               var_3 _id_1998();
+            }
 
             continue;
           }
 
           if(_id_553C(var_1)) {
-            if(var_3._id_7ECA == "atk_bomber")
+            if(var_3._id_7ECA == "atk_bomber") {
               var_3 _id_1998();
+            }
           }
         }
       }

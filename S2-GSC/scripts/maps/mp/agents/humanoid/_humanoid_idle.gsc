@@ -49,12 +49,13 @@ _id_A16C() {
 }
 
 _id_2E61() {
-  if(isDefined(self._id_505A))
+  if(isDefined(self._id_505A)) {
     return [[self._id_505A]]();
-  else if(_id_8B86())
+  } else if(_id_8B86()) {
     return "idle_combat";
-  else
+  } else {
     return "idle_noncombat";
+  }
 }
 
 _id_37BF(var_0) {
@@ -76,33 +77,38 @@ _id_74A8() {
 _id_A0DE() {
   var_0 = undefined;
 
-  if(isDefined(self._id_9831) && distancesquared(self._id_9831.origin, self.origin) < 262144)
+  if(isDefined(self._id_9831) && distancesquared(self._id_9831.origin, self.origin) < 262144) {
     var_0 = self._id_9831;
-  else if(isDefined(self._id_3043) && distancesquared(self._id_3043._id_4883, self.origin) < 16384)
+  } else if(isDefined(self._id_3043) && distancesquared(self._id_3043._id_4883, self.origin) < 16384) {
     var_0 = self._id_3043;
-  else if(isDefined(self._id_0088) && distancesquared(self._id_0088.origin, self.origin) < 1048576)
+  } else if(isDefined(self._id_0088) && distancesquared(self._id_0088.origin, self.origin) < 1048576) {
     var_0 = self._id_0088;
-  else if(isDefined(self._id_0117) && distancesquared(self._id_0117.origin, self.origin) > 576)
+  } else if(isDefined(self._id_0117) && distancesquared(self._id_0117.origin, self.origin) > 576) {
     var_0 = self._id_0117;
+  }
 
   if(isDefined(var_0)) {
     var_1 = var_0.origin - self.origin;
     var_2 = vectortoangles(var_1);
 
-    if(_abs(_angleclamp180(var_2[1] - self.angles[1])) > 1)
+    if(_abs(_angleclamp180(var_2[1] - self.angles[1])) > 1) {
       _id_9ED9(var_2[1]);
+    }
   }
 }
 
 _id_8B86() {
-  if(!isDefined(self._id_0088))
+  if(!isDefined(self._id_0088)) {
     return 0;
+  }
 
-  if(!maps\mp\_utility::isreallyalive(self._id_0088))
+  if(!maps\mp\_utility::isreallyalive(self._id_0088)) {
     return 0;
+  }
 
-  if(distancesquared(self.origin, self._id_0088.origin) >= 1000000)
+  if(distancesquared(self.origin, self._id_0088.origin) >= 1000000) {
     return 0;
+  }
 
   return 1;
 }
@@ -110,20 +116,22 @@ _id_8B86() {
 _id_46F0(var_0) {
   var_1 = "idle_noncombat_turn";
 
-  if(_id_8B86())
+  if(_id_8B86()) {
     var_1 = "idle_combat_turn";
+  }
 
   var_2 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_1);
   var_3 = self getanimentrycount(var_2);
   var_4 = 0;
 
   if(var_3 == 3) {
-    if(var_0 < -135 || var_0 > 135)
+    if(var_0 < -135 || var_0 > 135) {
       var_4 = 0;
-    else if(var_0 < 0)
+    } else if(var_0 < 0) {
       var_4 = 1;
-    else
+    } else {
       var_4 = 2;
+    }
   }
 
   return [var_2, var_4];
@@ -189,6 +197,7 @@ _id_7EEF(var_0, var_1) {
   var_2 = (0, var_0, 0);
   self scragentsetorientmode("face angle abs", var_2);
 
-  while(_angleclamp180(var_0 - self.angles[1]) > var_1)
+  while(_angleclamp180(var_0 - self.angles[1]) > var_1) {
     wait 0.1;
+  }
 }

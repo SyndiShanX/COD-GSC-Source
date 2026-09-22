@@ -15,8 +15,9 @@ init() {
 }
 
 _id_522E() {
-  if(!isDefined(level._id_6DF9))
+  if(!isDefined(level._id_6DF9)) {
     level._id_6DF9 = [];
+  }
 
   var_0 = [];
   var_0[16]["noGib"] = 1;
@@ -58,10 +59,11 @@ _id_A8DF(var_0) {
     var_2 = _id_4B3A();
 
     if(var_1 != var_2) {
-      if(var_2)
+      if(var_2) {
         thread _id_7A7B();
-      else
+      } else {
         thread _id_7A7D();
+      }
 
       var_1 = var_2;
     }
@@ -72,10 +74,11 @@ _id_A8DF(var_0) {
 
 _id_7A7E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(var_1 _meth_8661()) {
-    if(var_1 _id_0547::_id_1F54(var_0, var_4))
+    if(var_1 _id_0547::_id_1F54(var_0, var_4)) {
       return var_2;
-    else
+    } else {
       return 0;
+    }
   }
 
   var_8 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
@@ -116,15 +119,17 @@ _id_5242() {
 _id_7A80() {
   self._id_7A8D._id_08BE = 1;
 
-  while(self _meth_8661() || self ismeleeing())
+  while(self _meth_8661() || self ismeleeing()) {
     waitframe();
+  }
 
   var_0 = self getcurrentweapon();
   _id_0586::_id_0790("raven_sword_zm");
   _id_0586::_id_078C(level.activeswordname);
 
-  if(issubstr(var_0, "raven_sword"))
+  if(issubstr(var_0, "raven_sword")) {
     self switchtoweaponimmediate(level.activeswordname);
+  }
 
   wait 0.1;
   thread _id_7119();
@@ -144,8 +149,9 @@ _id_7119() {
     common_scripts\utility::_id_A70A("weapon_given", "weapon_taken", "zombie_player_spawn_finished", "melee_weapon_change", "weapon_switch_started");
     waitframe();
 
-    while(self isswitchingweapon())
+    while(self isswitchingweapon()) {
       waitframe();
+    }
 
     var_0 = self getcurrentweapon();
 
@@ -171,8 +177,9 @@ _id_7A81() {
   _id_0586::_id_0790(level.activeswordname);
   _id_0586::_id_078C("raven_sword_zm");
 
-  if(issubstr(var_0, "raven_sword"))
+  if(issubstr(var_0, "raven_sword")) {
     self switchtoweaponimmediate("raven_sword_zm");
+  }
 
   _id_0378::_id_8D74("aud_raven_sword_power_dwn");
 
@@ -184,10 +191,11 @@ _id_7A81() {
 
 _id_9E06(var_0) {
   if(!self._id_7A8D._id_08BE) {
-    if(common_scripts\utility::_id_562E(var_0))
+    if(common_scripts\utility::_id_562E(var_0)) {
       self._id_7A8D._id_5A50 = self._id_7A8D._id_5A50 + 10;
-    else
+    } else {
       self._id_7A8D._id_5A50++;
+    }
 
     if(self._id_7A8D._id_5A50 >= 20) {
       self._id_7A8D._id_20F0 = 12;
@@ -201,8 +209,9 @@ _id_9E06(var_0) {
 _id_90F2(var_0) {
   self._id_7A8D._id_20F0 = self._id_7A8D._id_20F0 - var_0;
 
-  if(self._id_7A8D._id_20F0 <= 0)
+  if(self._id_7A8D._id_20F0 <= 0) {
     _id_7A81();
+  }
 }
 
 _id_5FC5() {
@@ -215,14 +224,16 @@ _id_5FC5() {
       _id_90F2(4);
       thread _id_9AB9();
 
-      while(self _meth_8661())
+      while(self _meth_8661()) {
         waitframe();
+      }
 
       continue;
     }
 
-    while(self _meth_8661())
+    while(self _meth_8661()) {
       waitframe();
+    }
   }
 }
 
@@ -243,8 +254,9 @@ _id_9AB9() {
     foreach(var_4 in _sortbydistance(var_2, self.origin, 100)) {
       var_5 = var_4.health;
 
-      if(var_4 _id_0547::_id_53DC())
+      if(var_4 _id_0547::_id_53DC()) {
         var_5 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980) * 0.1;
+      }
 
       var_4 dodamage(var_5, self.origin, self, self, "MOD_MELEE", "raven_sword_tod_aoe_zm", "none");
       waitframe();
@@ -273,14 +285,16 @@ _id_5FC4() {
       wait 0.45;
       self._id_99FE = gettime();
 
-      if(isDefined(self._id_9A00) && self._id_99FE > self._id_9A00 + 400)
+      if(isDefined(self._id_9A00) && self._id_99FE > self._id_9A00 + 400) {
         _id_2416();
+      }
 
       self._id_9A00 = gettime();
       wait 0.3;
 
-      while(self _meth_8661())
+      while(self _meth_8661()) {
         waitframe();
+      }
     }
   }
 }
@@ -313,10 +327,11 @@ _id_2416() {
       var_10 = _id_0547::_id_0A51(var_9._id_0A4B);
 
       if(isDefined(var_10) && common_scripts\utility::_id_562E(var_10.knockbyravensword)) {
-        if(var_10._id_0A4B != "zombie_heavy" && self._id_7A8D._id_08BE)
+        if(var_10._id_0A4B != "zombie_heavy" && self._id_7A8D._id_08BE) {
           _id_0547::_id_7D1B(self, var_9, "close");
-        else
+        } else {
           _id_0547::_id_7D1B(self, var_9, "far");
+        }
       }
     }
 
@@ -325,8 +340,9 @@ _id_2416() {
 }
 
 _id_7A7C(var_0) {
-  if(!self adsbuttonpressed())
+  if(!self adsButtonPressed()) {
     return 0;
+  }
 
   return 1;
 }
@@ -338,8 +354,9 @@ _id_7A7F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
     switch (var_9) {
       case "raven_sword_zm":
-        if(common_scripts\utility::_id_562E(self._id_0103))
+        if(common_scripts\utility::_id_562E(self._id_0103)) {
           var_10 = 1;
+        }
       case "raven_sword_cleave_zm":
         var_1 _id_9E06(var_10);
         break;

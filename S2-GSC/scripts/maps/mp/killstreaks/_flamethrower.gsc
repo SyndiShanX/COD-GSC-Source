@@ -39,22 +39,26 @@ _id_9569() {
   var_0 = self._id_267E[3];
   var_1 = self.team;
 
-  if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1))
+  if(maps\mp\_utility::_id_579B() && common_scripts\utility::_id_562E(level._id_79C1)) {
     var_1 = maps\mp\_utility::getotherteam(var_1);
+  }
 
   if(!_id_048A::_id_4B8C()) {
-    if(var_1 == "allies")
+    if(var_1 == "allies") {
       self._id_267E[3] = 478;
-    else
+    } else {
       self._id_267E[3] = 479;
+    }
 
-    if(!_isagent(self))
+    if(!_isagent(self)) {
       self _meth_84C7(self._id_267E, self.team, 1);
+    }
 
     self waittill("weapon_change", var_2);
     self._id_267E[3] = var_0;
 
-    if(!_isagent(self))
+    if(!_isagent(self)) {
       self _meth_84C7(self._id_267E, self.team, 1);
+    }
   }
 }

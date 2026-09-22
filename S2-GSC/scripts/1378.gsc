@@ -7,7 +7,7 @@ init() {
   common_scripts\utility::_id_092C("moneyCloud", "vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
 
   foreach(var_1 in ["classic_ee_trigger_01", "classic_ee_trigger_02", "classic_ee_trigger_03", "classic_ee_trigger_04"]) {
-    var_2 = _getent(var_1, "script_noteworthy");
+    var_2 = _getEnt(var_1, "script_noteworthy");
     level._id_231F[var_1] = var_2;
     thread _id_3599(var_2);
   }
@@ -16,8 +16,9 @@ init() {
 }
 
 _id_3599(var_0) {
-  while(!isDefined(level._id_8AD2))
+  while(!isDefined(level._id_8AD2)) {
     waitframe();
+  }
 
   for(;;) {
     level waittill("spawned_money_share");
@@ -52,16 +53,18 @@ _id_62D8(var_0) {
 
 _id_0F4E() {
   foreach(var_1 in level._id_231F) {
-    if(!common_scripts\utility::_id_562E(var_1._id_2320))
+    if(!common_scripts\utility::_id_562E(var_1._id_2320)) {
       return 0;
+    }
   }
 
   return 1;
 }
 
 _id_7E3D() {
-  while(!_id_0F4E())
+  while(!_id_0F4E()) {
     level waittill("theclassic_step_done");
+  }
 
   _id_0548::_id_09C8("ppsh41_classic_zm", "extended_mag", "none", "none");
 }

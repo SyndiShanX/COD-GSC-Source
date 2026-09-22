@@ -56,8 +56,9 @@ start_intermission_music_override_callback() {
 _id_7248() {
   soundscripts\_snd_common_zmb_dlc3::dlc3_altered_state_init();
 
-  if(!isDefined(self._id_11CB))
+  if(!isDefined(self._id_11CB)) {
     self._id_11CB = spawnStruct();
+  }
 }
 
 _id_7330() {
@@ -77,7 +78,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 moveto(var_1, 1.9);
+  var_2 moveTo(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }
@@ -207,10 +208,11 @@ pool_oneshots() {
 zmb_dnk_ship_tilt(var_0) {
   var_1 = 200;
 
-  if(var_0 == "ship_tilting_starboard")
+  if(var_0 == "ship_tilting_starboard") {
     var_2 = var_1;
-  else
+  } else {
     var_2 = -1 * var_1;
+  }
 
   foreach(var_4 in level.players) {
     var_5 = var_4.origin + (var_2, 0, 0);
@@ -409,6 +411,7 @@ _id_3D34() {
   var_0 = (1078, -560, -2196);
   _id_0380::_id_2889("void_flare_vfx", undefined, var_0);
 
-  if(!isDefined(level._id_11CB.void_geist_gun_lp))
+  if(!isDefined(level._id_11CB.void_geist_gun_lp)) {
     level._id_11CB.void_geist_gun_lp = _id_0380::_id_6842("void_geist_gun_lp", undefined, (1016, -392, -2108));
+  }
 }

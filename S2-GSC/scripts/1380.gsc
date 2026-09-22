@@ -42,8 +42,9 @@ init() {
 }
 
 _id_3BFB(var_0) {
-  if(!isDefined(level._id_3C00))
+  if(!isDefined(level._id_3C00)) {
     level._id_3C00 = 1;
+  }
 
   level._id_3BFF = 0;
   level._id_3BFE = 0;
@@ -51,10 +52,11 @@ _id_3BFB(var_0) {
   level._id_3BED = 0;
 
   if(!isDefined(level._id_3BF2)) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       level._id_3BF2 = var_0;
-    else
+    } else {
       level._id_3BF2 = 0;
+    }
   }
 
   thread _id_3C10();
@@ -77,13 +79,15 @@ _id_ABA7() {
     var_1 = _id_053C::_id_4F88();
     var_2 = undefined;
 
-    if(isDefined(var_1) && var_1.size > 0)
+    if(isDefined(var_1) && var_1.size > 0) {
       var_2 = distancesquared(var_1[0].origin, self.origin);
+    }
 
-    if(isDefined(var_2) && var_2 > 50000)
+    if(isDefined(var_2) && var_2 > 50000) {
       return "run";
-    else
+    } else {
       return "walk";
+    }
   }
 }
 
@@ -99,7 +103,7 @@ _id_8A1B() {
   self._id_4013 = 1.0;
   _id_0547::_id_86C8(100);
   _id_0547::_id_86C7(self._id_60F0);
-  self scragentsetgoalradius(self._id_2BCA);
+  self scragentsetgoalRadius(self._id_2BCA);
   self._id_60E4 = 0.25;
   self._id_3CFA = 3;
   self._id_0EAD._id_6AFE["melee"] = ::_id_3BFD;
@@ -135,8 +139,9 @@ _id_ABAB() {
     wait(var_0);
 
     if(!common_scripts\utility::_id_562E(self._id_5580) && !common_scripts\utility::_id_562E(self._id_5748)) {
-      if(_id_053C::_id_4F8C())
+      if(_id_053C::_id_4F8C()) {
         continue;
+      }
     }
 
     if(common_scripts\utility::_id_562E(self._id_5580)) {
@@ -157,8 +162,9 @@ _id_ABAB() {
       }
 
       if(_id_3BF0()) {
-        if(!isDefined(self._id_5BC1) || distancesquared(self._id_5BC1, self.origin) > 256)
+        if(!isDefined(self._id_5BC1) || distancesquared(self._id_5BC1, self.origin) > 256) {
           self._id_60ED = self._id_0108;
+        }
 
         self scragentbeginmelee(self._id_28D2);
         continue;
@@ -176,78 +182,95 @@ _id_ABAB() {
 }
 
 _id_3BEE() {
-  if(self._id_00CA)
+  if(self._id_00CA) {
     return 0;
+  }
 
-  if(!isDefined(self._id_28D2))
+  if(!isDefined(self._id_28D2)) {
     return 0;
+  }
 
-  if(self._id_0BA4 == "melee" || maps\mp\agents\_scripted_agent_anim_util::_id_57E2())
+  if(self._id_0BA4 == "melee" || maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
     return 0;
+  }
 
-  if(!_id_0547::_id_4B2C())
+  if(!_id_0547::_id_4B2C()) {
     return 0;
+  }
 
-  if(maps\mp\agents\humanoid\_humanoid::_id_A7F8())
+  if(maps\mp\agents\humanoid\_humanoid::_id_A7F8()) {
     return 0;
+  }
 
-  if(maps\mp\agents\humanoid\_humanoid::_id_2EE6())
+  if(maps\mp\agents\humanoid\_humanoid::_id_2EE6()) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_3BEF() {
-  if(!_id_3C0F("flame"))
+  if(!_id_3C0F("flame")) {
     return 0;
+  }
 
   var_0 = isDefined(self._id_3CFB) && gettime() - self._id_3CFB <= self._id_3CFA * 1000;
 
-  if(!self._id_3CF9 || var_0)
+  if(!self._id_3CF9 || var_0) {
     return 0;
+  }
 
-  if(self._id_3FEE == 1)
+  if(self._id_3FEE == 1) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_3BF0() {
-  if(!_id_3C0F("melee"))
+  if(!_id_3C0F("melee")) {
     return 0;
+  }
 
   if(isDefined(self._id_60E4) && isDefined(self._id_5BC0)) {
     var_0 = gettime() - self._id_5BC0;
 
-    if(var_0 < self._id_60E4 * 1000)
+    if(var_0 < self._id_60E4 * 1000) {
       return 0;
+    }
   }
 
   return 1;
 }
 
 _id_3C0F(var_0) {
-  if(!isDefined(self._id_28D2))
+  if(!isDefined(self._id_28D2)) {
     return 0;
-
-  if(!maps\mp\_utility::isreallyalive(self._id_28D2))
-    return 0;
-
-  if(self._id_0BA4 == "traverse")
-    return 0;
-
-  if(!maps\mp\agents\humanoid\_humanoid_util::_id_56DD(self._id_28D2)) {
-    if(!maps\mp\agents\humanoid\_humanoid::_id_5859(self._id_28D2.origin))
-      return 0;
-
-    if(var_0 == "flame" && !_id_AA4F())
-      return 0;
-    else if(var_0 == "melee" && !_id_AA53())
-      return 0;
   }
 
-  if(maps\mp\agents\humanoid\_humanoid_melee::_id_5753())
+  if(!maps\mp\_utility::isreallyalive(self._id_28D2)) {
     return 0;
+  }
+
+  if(self._id_0BA4 == "traverse") {
+    return 0;
+  }
+
+  if(!maps\mp\agents\humanoid\_humanoid_util::_id_56DD(self._id_28D2)) {
+    if(!maps\mp\agents\humanoid\_humanoid::_id_5859(self._id_28D2.origin)) {
+      return 0;
+    }
+
+    if(var_0 == "flame" && !_id_AA4F()) {
+      return 0;
+    } else if(var_0 == "melee" && !_id_AA53()) {
+      return 0;
+    }
+  }
+
+  if(maps\mp\agents\humanoid\_humanoid_melee::_id_5753()) {
+    return 0;
+  }
 
   return 1;
 }
@@ -277,8 +300,9 @@ _id_3BF1() {
   self._id_28D2 endon("disconnect");
   var_0 = maps\mp\agents\humanoid\_humanoid::_id_457E(self._id_28D2);
 
-  if(_id_56EE())
+  if(_id_56EE()) {
     return maps\mp\agents\humanoid\_humanoid_melee::_id_60E7();
+  }
 
   var_1 = 0;
   var_2 = undefined;
@@ -312,8 +336,9 @@ _id_3BFD() {
   self._id_28D2 endon("disconnect");
   var_0 = maps\mp\agents\humanoid\_humanoid::_id_457E(self._id_28D2);
 
-  if(maps\mp\agents\humanoid\_humanoid_melee::_id_5753())
+  if(maps\mp\agents\humanoid\_humanoid_melee::_id_5753()) {
     return maps\mp\agents\humanoid\_humanoid_melee::_id_60E7();
+  }
 
   if(var_0._id_A266 && !_id_AA53()) {
     maps\mp\agents\humanoid\_humanoid_melee::_id_60E7();
@@ -348,10 +373,11 @@ _id_3C02(var_0, var_1) {
   var_12 = _id_4511(var_9, var_6, var_10, undefined);
   self scragentsetphysicsmode("gravity");
 
-  if(var_3)
+  if(var_3) {
     self scragentsetorientmode("face enemy");
-  else
+  } else {
     self scragentsetorientmode("face angle abs", (0, _vectortoyaw(var_0.origin - self.origin), 0));
+  }
 
   self scragentsetanimmode("anim deltas");
   maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_4, var_7, var_6);
@@ -367,8 +393,9 @@ _id_3C02(var_0, var_1) {
   self._id_5BC1 = self.origin;
   var_14 = var_9 / var_6 - var_12;
 
-  if(var_14 > 0)
+  if(var_14 > 0) {
     maps\mp\agents\_scripted_agent_anim_util::_id_A79F("attack_anim", "end", var_14);
+  }
 
   self notify("cancel_updatelerppos");
   self scragentsetanimmode("anim deltas");
@@ -390,10 +417,11 @@ _id_3C01(var_0, var_1) {
   var_7 = _getanimlength(var_6);
   self scragentsetphysicsmode("gravity");
 
-  if(var_3)
+  if(var_3) {
     self scragentsetorientmode("face enemy");
-  else
+  } else {
     self scragentsetorientmode("face angle abs", (0, _vectortoyaw(var_0.origin - self.origin), 0));
+  }
 
   self scragentsetanimmode("anim deltas");
   maps\mp\agents\_scripted_agent_anim_util::isenemyaware(var_2, var_5, var_4);
@@ -407,13 +435,15 @@ _id_3C0E(var_0, var_1) {
 }
 
 _id_4511(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2) || var_2.size == 0)
+  if(!isDefined(var_2) || var_2.size == 0) {
     return var_3;
+  }
 
   var_4 = var_0 / var_1 * var_2[0];
 
-  if(isDefined(var_3) && var_3 < var_4)
+  if(isDefined(var_3) && var_3 < var_4) {
     return var_3;
+  }
 
   return var_4;
 }
@@ -446,8 +476,9 @@ _id_A136(var_0, var_1, var_2, var_3) {
       var_8 = var_3;
       var_9 = var_7 - var_4;
 
-      if(_lengthsquared(var_9) > var_8 * var_8)
+      if(_lengthsquared(var_9) > var_8 * var_8) {
         var_7 = var_4 + vectorNormalize(var_9) * var_8;
+      }
     }
 
     self scragentsetorientmode("face enemy");
@@ -487,13 +518,15 @@ _id_3D2A() {
 
         var_11 = 1;
 
-        if(should_longburn(var_9))
+        if(should_longburn(var_9)) {
           var_11 = 5;
+        }
 
-        if(var_11 == 1)
+        if(var_11 == 1) {
           do_fireman_player_unit_damage(var_9);
-        else
+        } else {
           thread prolonged_damage(var_9, var_11);
+        }
       }
     }
 
@@ -510,8 +543,9 @@ should_longburn(var_0) {
 do_fireman_player_unit_damage(var_0) {
   var_0 dodamage(15, var_0 getEye(), self, undefined, "MOD_ENERGY");
 
-  if(!isDefined(self._id_7ACF))
+  if(!isDefined(self._id_7ACF)) {
     self._id_7ACF = 0;
+  }
 
   self._id_7ACF = self._id_7ACF + 15;
 }
@@ -532,7 +566,7 @@ prolonged_damage(var_0, var_1) {
 _id_3D29() {
   var_0 = spawn("script_model", self gettagorigin("tag_flamethrower_fx") + (600, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 linkto(self, "tag_flamethrower_fx");
+  var_0 linkTo(self, "tag_flamethrower_fx");
   var_1 = _func_382("zmb_brenner_flamethrower_beam", self, "tag_flamethrower_fx", var_0, "tag_origin");
   self waittill("cancel_updatelerppos");
   var_1 delete();
@@ -568,20 +602,23 @@ _id_5625(var_0) {
   var_7 = var_4 + var_6 * 50;
   var_8 = var_7 + var_6 * var_1;
 
-  if(_distance2dsquared(self.origin, var_0.origin) > var_2)
+  if(_distance2dsquared(self.origin, var_0.origin) > var_2) {
     return 0;
+  }
 
   var_9 = (var_0.origin - var_4) * (1, 1, 0);
 
-  if(vectordot(var_9, var_6 * (1, 1, 0)) < 0.866)
+  if(vectordot(var_9, var_6 * (1, 1, 0)) < 0.866) {
     return 0;
+  }
 
   var_10 = _id_7540(var_0 getEye(), var_7, var_8);
   var_11 = _id_7540(var_0 gettagorigin("J_Spine4"), var_7, var_8);
   var_12 = _min(var_10, var_11);
 
-  if(var_12 > var_3)
+  if(var_12 > var_3) {
     return 0;
+  }
 
   return 1;
 }
@@ -589,15 +626,17 @@ _id_5625(var_0) {
 _id_7540(var_0, var_1, var_2) {
   var_3 = _lengthsquared(var_2 - var_1);
 
-  if(var_3 == 0)
+  if(var_3 == 0) {
     return _lengthsquared(var_1 - var_0);
+  }
 
   var_4 = vectordot(var_0 - var_1, var_2 - var_1) / var_3;
 
-  if(var_4 < 0)
+  if(var_4 < 0) {
     return _lengthsquared(var_0 - var_1);
-  else if(var_4 > 1)
+  } else if(var_4 > 1) {
     return _lengthsquared(var_0 - var_2);
+  }
 
   var_5 = var_1 + var_4 * (var_2 - var_1);
   var_6 = _lengthsquared(var_0 - var_5);
@@ -646,8 +685,9 @@ _id_21CD(var_0) {
     _id_21CE(var_5, var_1, var_2, var_3, self._id_60E2);
   }
 
-  if(isDefined(var_0) && isDefined(var_0._id_56ED) && var_0._id_56ED)
+  if(isDefined(var_0) && isDefined(var_0._id_56ED) && var_0._id_56ED) {
     _id_21CE(var_0, var_1, var_2, var_3, var_0.maxhealth / 2);
+  }
 }
 
 _id_21CE(var_0, var_1, var_2, var_3, var_4) {
@@ -678,11 +718,13 @@ _id_21CC(var_0, var_1) {
   var_5 = var_0 getEye()[2];
   var_6 = var_0.origin[2];
 
-  if(var_5 >= var_4 && var_5 <= var_3)
+  if(var_5 >= var_4 && var_5 <= var_3) {
     return 1;
+  }
 
-  if(var_6 >= var_4 && var_6 <= var_3)
+  if(var_6 >= var_4 && var_6 <= var_3) {
     return 1;
+  }
 
   return 0;
 }
@@ -747,8 +789,9 @@ _id_1E49(var_0) {
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = self[[var_2[var_3]]](var_0);
 
-    if(var_4 < 0)
+    if(var_4 < 0) {
       return -1;
+    }
 
     var_1 = var_1 + var_4;
   }
@@ -757,30 +800,37 @@ _id_1E49(var_0) {
 }
 
 _id_388D(var_0) {
-  if(!isDefined(var_0) || !isalive(var_0))
+  if(!isDefined(var_0) || !isalive(var_0)) {
     return -1;
+  }
 
-  if(isDefined(var_0._id_00CE) && var_0._id_00CE == 1)
+  if(isDefined(var_0._id_00CE) && var_0._id_00CE == 1) {
     return -1;
+  }
 
-  if(var_0 isnotarget())
+  if(var_0 isnotarget()) {
     return -1;
+  }
 
-  if(_isalliedsentient(var_0, self))
+  if(_isalliedsentient(var_0, self)) {
     return -1;
+  }
 
-  if(_id_0547::_id_8B95(var_0))
+  if(_id_0547::_id_8B95(var_0)) {
     return -1;
+  }
 
-  if(_id_0547::_id_577D(var_0))
+  if(_id_0547::_id_577D(var_0)) {
     return -1;
+  }
 
   return 1;
 }
 
 _id_3889(var_0) {
-  if(!var_0 isjumping() && _distance2dsquared(self.origin, var_0.origin) < 250000)
+  if(!var_0 isjumping() && _distance2dsquared(self.origin, var_0.origin) < 250000) {
     return -1;
+  }
 
   return 1;
 }
@@ -792,8 +842,9 @@ _id_388C(var_0) {
 }
 
 _id_388A(var_0) {
-  if(_id_9B84(self getEye() + (0, 0, 45), var_0, undefined))
+  if(_id_9B84(self getEye() + (0, 0, 45), var_0, undefined)) {
     return 1;
+  }
 
   return -1;
 }
@@ -804,11 +855,13 @@ _id_9B84(var_0, var_1, var_2) {
 }
 
 _id_388B(var_0) {
-  if(!isDefined(self._id_28D2))
+  if(!isDefined(self._id_28D2)) {
     return 1;
+  }
 
-  if(self._id_28D2 == var_0 && _lengthsquared(var_0.origin - self.origin) < _squared(250))
+  if(self._id_28D2 == var_0 && _lengthsquared(var_0.origin - self.origin) < _squared(250)) {
     return -1;
+  }
 
   return 1;
 }
@@ -825,8 +878,9 @@ _id_9E17(var_0, var_1, var_2, var_3) {
       var_6 = var_1 + (0, 0, var_4);
       var_7 = _physicstrace(var_5, var_6);
 
-      if(distancesquared(var_7, var_6) > 1)
+      if(distancesquared(var_7, var_6) > 1) {
         var_0.origin = undefined;
+      }
     }
   }
 }
@@ -843,8 +897,9 @@ _id_ABA9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_11 = self gettagorigin("j_head");
   level notify("fireman_killed");
 
-  if(common_scripts\utility::_id_562E(level._id_3BF2))
+  if(common_scripts\utility::_id_562E(level._id_3BF2)) {
     level thread _id_057E::_id_8FA7(var_11, var_9);
+  }
 
   _id_054D::_id_6BD4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
@@ -853,13 +908,15 @@ _id_3C10() {
   level waittill("zombie_wave_started");
 
   for(;;) {
-    while(level._id_A980 < level._id_66A6)
+    while(level._id_A980 < level._id_66A6) {
       level waittill("zombie_wave_started");
+    }
 
-    if(level._id_7F2A == "zombie_dog")
+    if(level._id_7F2A == "zombie_dog") {
       level._id_66A6++;
-    else if(level._id_3C00)
+    } else if(level._id_3C00) {
       _id_3C13();
+    }
 
     level waittill("zombie_wave_ended");
   }
@@ -873,26 +930,31 @@ _id_3C13() {
     _id_3C14();
     var_2 = _id_3C11(1);
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_0--;
+    }
 
-    if(var_0 > 0)
+    if(var_0 > 0) {
       wait(_randomfloatrange(5, 10));
+    }
   }
 
   var_3 = 5;
   var_4 = 7;
 
-  if(isDefined(level.fireman_round_min))
+  if(isDefined(level.fireman_round_min)) {
     var_3 = level.fireman_round_min;
+  }
 
-  if(isDefined(level.fireman_round_max))
+  if(isDefined(level.fireman_round_max)) {
     var_4 = level.fireman_round_max;
+  }
 
-  if(var_3 == var_4)
+  if(var_3 == var_4) {
     level._id_66A6 = level._id_A980 + var_3;
-  else
+  } else {
     level._id_66A6 = level._id_A980 + _randomintrange(var_3, var_4);
+  }
 
   level._id_3BFE++;
 }
@@ -904,44 +966,52 @@ _id_3C14() {
 _id_3C12() {
   level._id_3BFF++;
 
-  if(level.players.size == 1)
+  if(level.players.size == 1) {
     return 1;
-  else if(level._id_3BFF == 1 || level._id_3BFF == 2)
+  } else if(level._id_3BFF == 1 || level._id_3BFF == 2) {
     return 1;
-  else if(level._id_3BFF == 3 || level._id_3BFF == 4)
+  } else if(level._id_3BFF == 3 || level._id_3BFF == 4) {
     return 2;
-  else
+  } else {
     return 3;
+  }
 }
 
 _id_3C11(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_054D::_id_4696("zombie_fireman", 1, 0);
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return undefined;
+  }
 
   var_3 = 0;
 
-  if(_id_0547::_id_5565(var_1._id_0165, "zombie_sky_spawner") || _id_0547::_id_5565(var_1.setflaggedanimknoball, "scripted_fire_spawn_drop"))
+  if(_id_0547::_id_5565(var_1._id_0165, "zombie_sky_spawner") || _id_0547::_id_5565(var_1.setflaggedanimknoball, "scripted_fire_spawn_drop")) {
     var_3 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_4 = 1;
   var_5 = _id_054D::_id_90BA("zombie_fireman", var_1, "fireman", var_2, var_4, 0, undefined, 0);
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     return undefined;
+  }
 
-  if(var_3)
+  if(var_3) {
     var_5 thread _id_3C0D(var_1.origin);
+  }
 
   var_5.health = _id_3C04(var_5.health);
 
-  if(var_5.health < var_5.maxhealth)
+  if(var_5.health < var_5.maxhealth) {
     var_5.maxhealth = var_5.health;
+  }
 
   level notify("spawned_fireman");
 
@@ -950,8 +1020,9 @@ _id_3C11(var_0, var_1, var_2) {
     var_5 thread _id_3C06();
   }
 
-  if(!common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(var_0)) {
     level._id_66A6 = level._id_A980 + _randomintrange(5, 7);
+  }
 
   return var_5;
 }
@@ -973,16 +1044,18 @@ _id_3C0D(var_0) {
     var_8 = distancesquared(var_7.origin, var_0);
 
     if(var_8 <= var_2) {
-      if(var_7._id_0A4B == "zombie_generic" || var_7._id_0A4B == "zombie_berserker")
+      if(var_7._id_0A4B == "zombie_generic" || var_7._id_0A4B == "zombie_berserker") {
         var_7 suicide();
+      }
     }
   }
 
   foreach(var_11 in level.players) {
     var_8 = distancesquared(var_11.origin, var_0);
 
-    if(var_8 <= var_1)
+    if(var_8 <= var_1) {
       var_11 dodamage(100, var_0, self, self);
+    }
 
     var_12 = (var_4 - var_8) / var_4;
 
@@ -991,7 +1064,7 @@ _id_3C0D(var_0) {
     }
     var_13 = var_12 * 0.15;
     _earthquake(var_13, 0.1, var_0, 1500);
-    var_11 playrumbleonentity("damage_heavy");
+    var_11 playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -1008,8 +1081,9 @@ _id_3C05() {
   self waittill("actor_corpse", var_0);
   wait 60;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_3C07() {}
@@ -1037,8 +1111,9 @@ _id_3C04(var_0) {
 }
 
 _id_3C03(var_0, var_1, var_2) {
-  if(var_0 >= var_1 * var_2)
+  if(var_0 >= var_1 * var_2) {
     var_0 = int(var_1 * var_2);
+  }
 
   return var_0;
 }
@@ -1053,13 +1128,15 @@ _id_3C08() {
       var_4 = strtok(var_2.setlookatent, " ,");
 
       foreach(var_6 in var_4) {
-        if(var_6 == "zombie_fireman")
+        if(var_6 == "zombie_fireman") {
           var_3 = 1;
+        }
       }
     }
 
-    if(level._id_AC80._id_ACB3[var_2._id_AC8A]._id_556E && var_3)
+    if(level._id_AC80._id_ACB3[var_2._id_AC8A]._id_556E && var_3) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   return common_scripts\utility::random(var_0);
@@ -1070,8 +1147,9 @@ _id_ABAA() {
 }
 
 _id_ABA8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(isDefined(level.zmb_boss_damage_reduction_func))
+  if(isDefined(level.zmb_boss_damage_reduction_func)) {
     var_2 = [[level.zmb_boss_damage_reduction_func]](var_5, var_2, var_4);
+  }
 
   if(var_10 == "j_backpack" && self._id_3FEE == 0 && isalive(self)) {
     self._id_3FF1 = self._id_3FF1 - var_2;
@@ -1081,12 +1159,14 @@ _id_ABA8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       thread _id_3FF3(var_6);
     }
 
-    if(!common_scripts\utility::_id_562E(self.godtank) && self._id_3FF1 <= 0)
+    if(!common_scripts\utility::_id_562E(self.godtank) && self._id_3FF1 <= 0) {
       thread _id_3FEF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+    }
   }
 
-  if(var_10 != "j_backpack" && self._id_3FEE == 0 && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && !issubstr(var_5, "razergun") && var_5 != "bazooka_zm" && var_5 != "panzerschreck_zm" && var_5 != "raven_sword_zm")
+  if(var_10 != "j_backpack" && self._id_3FEE == 0 && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && !issubstr(var_5, "razergun") && var_5 != "bazooka_zm" && var_5 != "panzerschreck_zm" && var_5 != "raven_sword_zm") {
     var_2 = var_2 * 0.5;
+  }
 
   if(var_10 == "j_backpack" && self._id_3FEE == 1) {
     var_2 = 0;
@@ -1110,33 +1190,38 @@ _id_3FEF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     self _meth_8682(0.01 * self.maxhealth, 1.5, 20.0, "none", 1, self, var_5);
     self dodamage(self._id_3FF2, self.origin, var_1, var_0, "MOD_EXPLOSIVE", var_5);
 
-    if(isDefined(level.zmb_events_player_destoyed_brenner_gas_tank))
+    if(isDefined(level.zmb_events_player_destoyed_brenner_gas_tank)) {
       var_1 thread[[level.zmb_events_player_destoyed_brenner_gas_tank]]();
+    }
   }
 }
 
 _id_3FF3(var_0) {
-  if(randomint(100) >= 80)
-    _playfxontag(common_scripts\utility::_id_44F5("fireman_leak"), self, "TAG_STOWED_BACK");
+  if(randomint(100) >= 80) {
+    _playFXOnTag(common_scripts\utility::_id_44F5("fireman_leak"), self, "TAG_STOWED_BACK");
+  }
 }
 
 _id_3FF0(var_0) {
-  _playfxontag(common_scripts\utility::_id_44F5("fireman_explosion"), self, "TAG_STOWED_BACK");
+  _playFXOnTag(common_scripts\utility::_id_44F5("fireman_explosion"), self, "TAG_STOWED_BACK");
 }
 
 _id_ABA6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(!common_scripts\utility::_id_562E(self._id_3FEE) && var_9 == "j_backpack")
+  if(!common_scripts\utility::_id_562E(self._id_3FEE) && var_9 == "j_backpack") {
     return 1;
+  }
 
   return _id_054D::_id_5714(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
 
 zombie_fireman_tesla_delayed_dmg(var_0, var_1, var_2) {
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_0 = maps\mp\gametypes\zombies::_id_1E59();
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_0 = var_2;
+  }
 
   return var_0;
 }

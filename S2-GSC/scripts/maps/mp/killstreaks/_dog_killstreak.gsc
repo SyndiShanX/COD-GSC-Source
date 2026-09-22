@@ -37,8 +37,9 @@ _id_9E26(var_0, var_1) {
     return 0;
   }
 
-  if(!maps\mp\_utility::isreallyalive(self))
+  if(!maps\mp\_utility::isreallyalive(self)) {
     return 0;
+  }
 
   self._id_1162 = [];
   return _id_A207();
@@ -48,24 +49,28 @@ _id_A207() {
   level._id_1164 = 1;
   _id_0485::_id_5E9A("attack_dogs", self.origin);
 
-  if(level._id_53C6)
+  if(level._id_53C6) {
     var_0 = _getnodesinradiussorted(self.origin, 10000, 50, 2000, "Path");
-  else
+  } else {
     var_0 = _getnodesinradiussorted(self.origin, 500, 50, 128, "Path");
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0.size <= 0)
+  if(var_0.size <= 0) {
     return 1;
+  }
 
   for(var_1 = 0; var_1 < 4; var_1++) {
     self._id_1162 = common_scripts\utility::_id_0FA0(self._id_1162);
     var_2 = self._id_1162.size;
     self._id_1162[var_2] = maps\mp\agents\_agent_common::_id_2586("dog", self.team);
 
-    if(!isDefined(self._id_1162[var_2]))
+    if(!isDefined(self._id_1162[var_2])) {
       return 0;
+    }
 
     self._id_1162[var_2] maps\mp\agents\_agent_utility::hudoutlineenable(self.team, self);
     var_3 = var_0[var_1].origin;
@@ -93,8 +98,9 @@ _id_77C2() {
   self waittill("end_attack_dogs");
 
   foreach(var_1 in self._id_1162) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       maps\mp\agents\_agent_utility::_id_5A28(var_1);
+    }
   }
 
   level._id_1164 = 0;
@@ -106,8 +112,9 @@ _id_1165() {
   self endon("joined_team");
   self endon("end_attack_dogs");
 
-  for(var_0 = 8; var_0 > 0; var_0--)
+  for(var_0 = 8; var_0 > 0; var_0--) {
     self waittill("respawn_dog");
+  }
 
   level._id_1164 = 0;
   self notify("end_attack_dogs");
@@ -125,13 +132,15 @@ _id_7DA6() {
     var_1 = self._id_1162.size;
     self._id_1162[var_1] = maps\mp\agents\_agent_common::_id_2586("dog", self.team);
 
-    if(!isDefined(self._id_1162[var_1]))
+    if(!isDefined(self._id_1162[var_1])) {
       return 0;
+    }
 
-    if(level._id_53C6)
+    if(level._id_53C6) {
       var_2 = _id_04D4::_id_4437();
-    else
+    } else {
       var_2 = [[level._id_4696]]();
+    }
 
     self._id_1162[var_1] thread[[self._id_1162[var_1] maps\mp\agents\_agent_utility::_id_0A59("spawn")]](var_2.origin, var_2.angles, self);
   }
@@ -142,8 +151,9 @@ _id_6A72(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self._id_4B60 = 0;
   var_1._id_5BB0 = gettime();
 
-  if(isDefined(self._id_0EAD._id_6B2F[self._id_0BA4]))
+  if(isDefined(self._id_0EAD._id_6B2F[self._id_0BA4])) {
     self[[self._id_0EAD._id_6B2F[self._id_0BA4]]]();
+  }
 
   if(isPlayer(var_1) && isDefined(self._id_0117) && var_1 != self._id_0117) {
     self._id_0117 maps\mp\_utility::leaderdialogonplayer("dog_killed");
@@ -152,8 +162,9 @@ _id_6A72(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     if(isPlayer(var_1)) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_notsobestfriend");
 
-      if(!self isonground())
+      if(!self isonground()) {
         var_1 maps\mp\gametypes\_missions::processchallenge("ch_hoopla");
+      }
     }
   }
 
@@ -166,25 +177,29 @@ _id_6A72(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   maps\mp\agents\_agent_utility::_id_2A73();
   self notify("killanimscript");
 
-  if(isDefined(self._id_0117))
+  if(isDefined(self._id_0117)) {
     self._id_0117 notify("respawn_dog");
+  }
 }
 
 _id_6A7E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(!isDefined(self._id_74B4))
+  if(!isDefined(self._id_74B4)) {
     thread _id_716F(2.5);
+  }
 
   var_11 = var_2;
 
   if(isDefined(var_8) && var_8 == "head") {
     var_11 = int(var_11 * 0.6);
 
-    if(var_2 > 0 && var_11 <= 0)
+    if(var_2 > 0 && var_11 <= 0) {
       var_11 = 1;
+    }
   }
 
-  if(self.health - var_11 > 0)
+  if(self.health - var_11 > 0) {
     self[[level._id_31F3]](var_0, var_1, var_11, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+  }
 
   if(isPlayer(var_1)) {
     if(isDefined(self._id_11B5) && self._id_11B5 != "attacking") {
@@ -203,8 +218,9 @@ _id_8F96(var_0, var_1, var_2, var_3) {
   var_4 = "animal_dobernan";
 
   if(isDefined(var_2) && isDefined(var_2.team)) {
-    if(var_2.team == "axis")
+    if(var_2.team == "axis") {
       var_4 = "iw6_dog";
+    }
   }
 
   self setModel(var_4);
@@ -234,16 +250,18 @@ _id_8F96(var_0, var_1, var_2, var_3) {
     maps\mp\agents\_agent_utility::hudoutlineenable(self.team, var_2);
   }
 
-  if(isDefined(var_2) && isDefined(var_2.team))
+  if(isDefined(var_2) && isDefined(var_2.team)) {
     maps\mp\agents\_agent_utility::hudoutlineenable(var_2.team, var_2);
+  }
 
   self setthreatbiasgroup("Dogs");
   self takeallweapons();
   self thread[[maps\mp\agents\_agent_utility::_id_0A59("think")]]();
   wait 0.1;
 
-  if(_ishairrunning())
-    _playfxontag(level._id_3F1E, self, "tag_origin");
+  if(_ishairrunning()) {
+    _playFXOnTag(level._id_3F1E, self, "tag_origin");
+  }
 }
 
 _id_716F(var_0) {
@@ -259,27 +277,30 @@ _id_8F27(var_0) {
     var_2._id_A9FE = 0;
     var_3 = distance(var_2._id_9087.origin, self.origin);
 
-    if(var_3 < 1500)
+    if(var_3 < 1500) {
       var_2._id_A9FE = 1;
-    else if(var_3 > 1500 && var_3 < 2000)
+    } else if(var_3 > 1500 && var_3 < 2000) {
       var_2._id_A9FE = 2;
-    else if(var_3 > 2000 && var_3 < 2500)
+    } else if(var_3 > 2000 && var_3 < 2500) {
       var_2._id_A9FE = 3;
-    else if(var_3 > 2500)
+    } else if(var_3 > 2500) {
       var_2._id_A9FE = 4;
+    }
 
     foreach(var_5 in level.players) {
       var_6 = var_2._id_9087.origin;
       var_7 = var_5.origin;
       var_8 = _sighttracepassed(var_6, var_7, 0, var_5);
 
-      if(var_8)
+      if(var_8) {
         var_2._id_A9FE--;
+      }
 
       var_3 = distance(var_2._id_9087.origin, var_5.origin);
 
-      if(var_3 < 256)
+      if(var_3 < 256) {
         var_2._id_A9FE--;
+      }
     }
   }
 
@@ -307,8 +328,9 @@ _id_0A57() {
   thread _id_0A56();
 
   for(;;) {
-    if(self._id_0BA4 != "melee" && !self._id_018F && self[[level._id_31F5]]() && !self[[level._id_31B2]]())
+    if(self._id_0BA4 != "melee" && !self._id_018F && self[[level._id_31F5]]() && !self[[level._id_31B2]]()) {
       self scragentbeginmelee(self._id_28D2);
+    }
 
     if(self._id_7A58 > gettime()) {
       waitframe();
@@ -345,8 +367,9 @@ _id_0A56() {
   level endon("game_ended");
 
   for(;;) {
-    while(!isDefined(self._id_28D2))
+    while(!isDefined(self._id_28D2)) {
       wait 0.25;
+    }
 
     while(isDefined(self._id_28D2) && distance(self.origin, self._id_28D2.origin) > 200) {
       wait(_randomfloatrange(0, 2));
@@ -397,8 +420,9 @@ _id_5E54() {
   level endon("game_ended");
 
   for(;;) {
-    foreach(var_1 in level._id_6E97)
-    self getenemyinfo(var_1);
+    foreach(var_1 in level._id_6E97) {
+      self getenemyinfo(var_1);
+    }
 
     wait 0.5;
   }

@@ -4,7 +4,7 @@
 *******************************************************/
 
 _id_9CB8(var_0) {
-  var_0._id_9CB9 = _getent("electric_trap_origin", "targetname");
+  var_0._id_9CB9 = _getEnt("electric_trap_origin", "targetname");
   level._id_9CB8 = var_0._id_9CB9;
   level._id_9CB8._id_9C92 = var_0;
   level._id_9CB8._id_9CBB = var_0._id_0165;
@@ -36,7 +36,7 @@ _id_2FF4() {
       self._id_16F7.origin = self.origin;
       self._id_16F2.origin = self gettagorigin("TAG_Chains_0" + (var_0 + 1));
       var_1 = _func_382("zmb_electricity_reg_beam_med", self._id_16F7, "tag_origin", self._id_16F2, "tag_origin");
-      self._id_16F7 moveto(self._id_16F2.origin, 1);
+      self._id_16F7 moveTo(self._id_16F2.origin, 1);
       wait 1;
       var_1 delete();
     }
@@ -62,9 +62,9 @@ _id_30E4(var_0) {
 
         if(isalive(var_3) && var_3._id_0BA4 != "traverse") {
           if(!isDefined(var_3._id_A874) || isDefined(var_3._id_A874) && var_4 > var_3._id_A874 + 1000) {
-            if(var_3 _id_0547::_id_580A())
+            if(var_3 _id_0547::_id_580A()) {
               var_3 dodamage(var_3.health * 0.1, self._id_9CB9.origin, level._id_9CB8, level._id_9CB8, "MOD_EXPLOSIVE", "trap_zm_mp");
-            else {
+            } else {
               maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::_id_6FEE(var_3);
               var_3 dodamage(var_3.health + 666, self._id_9CB9.origin, level._id_9CB8, level._id_9CB8, "MOD_EXPLOSIVE", "trap_zm_mp");
 
@@ -76,8 +76,9 @@ _id_30E4(var_0) {
               }
             }
 
-            if(isalive(var_3))
+            if(isalive(var_3)) {
               var_3._id_A874 = gettime();
+            }
           }
 
           waitframe();
@@ -104,8 +105,9 @@ _id_30E3(var_0) {
         waitframe();
         var_4 = gettime();
 
-        if(!isDefined(var_3._id_A874))
+        if(!isDefined(var_3._id_A874)) {
           var_3._id_A874 = gettime();
+        }
 
         if(isalive(var_3) && var_4 > var_3._id_A874 + 500 && !_id_0547::_id_577E(var_3)) {
           var_3 dodamage(5, self._id_9CB9.origin, undefined, undefined, "MOD_CRUSH");

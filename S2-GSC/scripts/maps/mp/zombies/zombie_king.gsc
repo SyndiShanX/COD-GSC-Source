@@ -77,7 +77,7 @@ attach_levitation_effects() {
   waitframe();
   waitframe();
   waitframe();
-  _playfxontag(level._effect["zmb_king_gk_levitation"], self, "J_Spine4");
+  _playFXOnTag(level._effect["zmb_king_gk_levitation"], self, "J_Spine4");
 }
 
 validate_level_setup() {
@@ -100,8 +100,9 @@ king_think_setup() {
   thread _id_054D::_id_A146();
   self.iszombieking = 1;
 
-  if(_id_0547::is_solo())
+  if(_id_0547::is_solo()) {
     self.issolomode = 1;
+  }
 
   self _meth_85A1("zombie");
   self scragentsetscripted(1);
@@ -125,7 +126,7 @@ king_think_setup() {
   self._id_00BD = 100;
   self.radius = 32;
   self._id_2BCA = self.radius + 1;
-  self scragentsetgoalradius(self._id_2BCA);
+  self scragentsetgoalRadius(self._id_2BCA);
   _id_0547::_id_86C8(280);
   _id_0547::_id_86C7(280);
   self.candamageallies = 1;
@@ -139,7 +140,7 @@ king_think_setup() {
   self.vo_drain_punished_int = 0;
   self.vo_taunt_int = 0;
   self.vo_lines_played = [];
-  self.stunnedclip = _getent("clip_boss_torso", "targetname");
+  self.stunnedclip = _getEnt("clip_boss_torso", "targetname");
 
   if(isDefined(self.stunnedclip)) {
     self.stunnedclip.original_org = self.stunnedclip.origin;
@@ -391,19 +392,22 @@ phases_init() {
   var_0 phase_add_special_move("melee");
   var_0 phase_add_special_move("geist_blast");
 
-  if(!common_scripts\utility::_id_562E(self.issolomode))
+  if(!common_scripts\utility::_id_562E(self.issolomode)) {
     var_0 phase_add_special_move("move_to_enemy", [679.0]);
+  }
 
-  if(!common_scripts\utility::_id_562E(self.issolomode))
+  if(!common_scripts\utility::_id_562E(self.issolomode)) {
     var_0 phase_add_special_move("melee");
+  }
 
   var_0 phase_add_special_move("melee");
   var_0 phase_add_special_move("geist_blast");
 
-  if(!common_scripts\utility::_id_562E(self.issolomode))
+  if(!common_scripts\utility::_id_562E(self.issolomode)) {
     var_0 phase_add_special_move("move_to_enemy");
-  else
+  } else {
     var_0 phase_add_special_move("move_face_enemy");
+  }
 
   var_0 phase_add_special_move("melee");
   var_0 phase_add_special_move("geist_bomb");
@@ -418,8 +422,9 @@ phases_init() {
   var_0 phase_add_special_move("melee");
   var_0 phase_add_special_move("geist_bomb");
 
-  if(common_scripts\utility::_id_562E(self.issolomode))
+  if(common_scripts\utility::_id_562E(self.issolomode)) {
     var_0 phase_add_special_move("move_face_enemy");
+  }
 
   var_0 = spawnStruct();
   self.phases[self.phases.size] = var_0;
@@ -436,10 +441,11 @@ phases_init() {
   var_0 phase_add_special_move("geist_blast");
   var_0 phase_add_special_move("sun");
 
-  if(!common_scripts\utility::_id_562E(self.issolomode))
+  if(!common_scripts\utility::_id_562E(self.issolomode)) {
     var_0 phase_add_special_move("move_to_enemy", [679.0]);
-  else
+  } else {
     var_0 phase_add_special_move("move_face_enemy");
+  }
 
   var_0 phase_add_special_move("geist_lightning");
   var_0 phase_add_special_move("melee");
@@ -468,10 +474,11 @@ phases_init() {
   var_0 phase_add_special_move("geist_lightning");
   var_0 phase_add_special_move("force");
 
-  if(!common_scripts\utility::_id_562E(self.issolomode))
+  if(!common_scripts\utility::_id_562E(self.issolomode)) {
     var_0 phase_add_special_move("move_to_enemy", [679.0]);
-  else
+  } else {
     var_0 phase_add_special_move("move_face_enemy");
+  }
 
   var_0 phase_add_special_move("melee");
   var_0 phase_add_special_move("geist_lightning");
@@ -485,10 +492,11 @@ phases_init() {
   var_0 phase_add_special_move("melee");
   var_0 phase_add_special_move("geist_blast");
 
-  if(!common_scripts\utility::_id_562E(self.issolomode))
+  if(!common_scripts\utility::_id_562E(self.issolomode)) {
     var_0 phase_add_special_move("move_to_enemy", [679.0]);
-  else
+  } else {
     var_0 phase_add_special_move("move_face_enemy");
+  }
 
   var_0 phase_add_special_move("melee");
   var_0 phase_add_special_move("geist_lightning");
@@ -519,10 +527,11 @@ phases_init() {
   var_0 phase_add_special_move("geist_blast");
   var_0 phase_add_special_move("geist_bomb");
 
-  if(!common_scripts\utility::_id_562E(self.issolomode))
+  if(!common_scripts\utility::_id_562E(self.issolomode)) {
     var_0 phase_add_special_move("move_to_enemy", [679.0]);
-  else
+  } else {
     var_0 phase_add_special_move("move_face_enemy");
+  }
 
   var_0 = spawnStruct();
   self.phases[self.phases.size] = var_0;
@@ -617,14 +626,17 @@ king_set_current_phase(var_0) {
 king_set_phase_fx(var_0) {
   var_1 = self;
 
-  if(isDefined(var_1.phase_fx_1_ent))
+  if(isDefined(var_1.phase_fx_1_ent)) {
     var_1.phase_fx_1_ent delete();
+  }
 
-  if(isDefined(var_1.phase_fx_2_ent))
+  if(isDefined(var_1.phase_fx_2_ent)) {
     var_1.phase_fx_2_ent delete();
+  }
 
-  if(isDefined(var_1.phase_fx_3_ent))
+  if(isDefined(var_1.phase_fx_3_ent)) {
     var_1.phase_fx_3_ent delete();
+  }
 
   if(var_1 common_scripts\utility::_id_3794("phase_transition_active") && var_1.current_phase_index != 0) {
     var_2 = "zmb_king_gk_levitation_chn_1";
@@ -645,14 +657,17 @@ king_set_phase_fx(var_0) {
     var_1 common_scripts\utility::_id_37A1("phase_transition_active");
   }
 
-  if(isDefined(var_1.transition_fx_1_ent))
+  if(isDefined(var_1.transition_fx_1_ent)) {
     var_1.transition_fx_1_ent delete();
+  }
 
-  if(isDefined(var_1.transition_fx_2_ent))
+  if(isDefined(var_1.transition_fx_2_ent)) {
     var_1.transition_fx_2_ent delete();
+  }
 
-  if(isDefined(var_1.transition_fx_3_ent))
+  if(isDefined(var_1.transition_fx_3_ent)) {
     var_1.transition_fx_3_ent delete();
+  }
 
   if(isDefined(var_0.fx_1_name)) {
     var_1.phase_fx_1_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0.fx_1_name), var_1, "TAG_FX01");
@@ -687,8 +702,9 @@ king_think() {
     if(king_in_paused_state()) {
       continue;
     }
-    if(process_special_moves())
+    if(process_special_moves()) {
       continue;
+    }
   }
 }
 
@@ -714,8 +730,9 @@ process_special_moves() {
     var_1 = var_0[[var_0.current_special_move.think_func]]();
 
     if(common_scripts\utility::_id_562E(var_1)) {
-      if(isDefined(var_0.current_special_move._id_367E))
+      if(isDefined(var_0.current_special_move._id_367E)) {
         var_0[[var_0.current_special_move._id_367E]]();
+      }
 
       var_0.current_special_move = undefined;
       var_0.standing_pain_allowed = 0;
@@ -727,14 +744,16 @@ process_special_moves() {
   var_3 = undefined;
   var_5 = undefined;
 
-  if(isDefined(var_0.current_phase))
+  if(isDefined(var_0.current_phase)) {
     var_5 = var_0.current_phase.transition_attack_set;
+  }
 
   if(!isDefined(var_2) && var_0 common_scripts\utility::_id_3794("phase_transition_active") && isDefined(var_0.current_phase) && isDefined(var_0.current_phase.transition_attack_set)) {
     var_6 = 0;
 
-    if(isDefined(var_0.transition_move_index))
+    if(isDefined(var_0.transition_move_index)) {
       var_6 = var_0.transition_move_index + 1;
+    }
 
     var_7 = 0;
 
@@ -763,14 +782,16 @@ process_special_moves() {
 
   var_11 = undefined;
 
-  if(isDefined(var_0.current_phase))
+  if(isDefined(var_0.current_phase)) {
     var_11 = var_0.current_phase.special_move_set;
+  }
 
   if(isDefined(var_11) && !isDefined(var_2)) {
     var_12 = 0;
 
-    if(isDefined(var_0.current_special_move_index))
+    if(isDefined(var_0.current_special_move_index)) {
       var_12 = var_0.current_special_move_index + 1;
+    }
 
     for(var_7 = 0; var_7 < var_11.size; var_7++) {
       var_8 = common_scripts\utility::_id_627D(var_7 + var_12, var_11.size);
@@ -779,10 +800,11 @@ process_special_moves() {
       var_2 = level.boss_special_moves[var_9];
       var_3 = var_13._id_6E59;
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_10 = var_0[[var_2.try_func]](var_3);
-      else
+      } else {
         var_10 = var_0[[var_2.try_func]]();
+      }
 
       if(var_10) {
         var_0.current_special_move_index = var_8;
@@ -797,14 +819,16 @@ process_special_moves() {
   if(isDefined(var_2)) {
     var_0.current_special_move = var_2;
 
-    if(common_scripts\utility::_id_562E(var_2.allow_pain))
+    if(common_scripts\utility::_id_562E(var_2.allow_pain)) {
       var_0.standing_pain_allowed = 1;
+    }
 
     if(isDefined(var_2._id_920F)) {
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_10 = var_0[[var_2._id_920F]](var_3);
-      else
+      } else {
         var_10 = var_0[[var_2._id_920F]]();
+      }
     }
 
     return 1;
@@ -817,8 +841,9 @@ wave_management_think() {
   self endon("fight_complete");
   self.wave_management = spawnStruct();
 
-  if(!isDefined(self.wave_management.expected_zombies))
+  if(!isDefined(self.wave_management.expected_zombies)) {
     self.wave_management.expected_zombies = [];
+  }
 
   while(isalive(self)) {
     self waittill("phase_wave_management_update");
@@ -829,8 +854,9 @@ wave_management_think() {
 wave_management_living_think() {
   self endon("phase_wave_management_update");
 
-  foreach(var_1 in self.wave_management.expected_zombies)
-  childthread manage_respawn(var_1);
+  foreach(var_1 in self.wave_management.expected_zombies) {
+    childthread manage_respawn(var_1);
+  }
 }
 
 manage_respawn(var_0) {
@@ -848,8 +874,9 @@ manage_respawn(var_0) {
       }
     }
 
-    while(isDefined(var_3.health) && var_3.health > 0)
+    while(isDefined(var_3.health) && var_3.health > 0) {
       waitframe();
+    }
 
     wait(get_respawn_times());
   }
@@ -901,13 +928,15 @@ wave_management_set(var_0) {
       break;
   }
 
-  if(common_scripts\utility::_id_3794("phase_transition_active"))
+  if(common_scripts\utility::_id_3794("phase_transition_active")) {
     common_scripts\utility::_id_37A1("phase_transition_active");
+  }
 
   self notify("phase_wave_management_update");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     [[var_1]]();
+  }
 }
 
 phase0_wave_management() {
@@ -1080,8 +1109,9 @@ special_geist_blast_start() {
 special_geist_blast_think() {
   var_0 = self;
 
-  if(var_0 king_try_interrupted_by_pain())
+  if(var_0 king_try_interrupted_by_pain()) {
     return 1;
+  }
 
   var_1 = _id_0547::_id_5565(var_0.current_blast.rotation_target, var_0.rotation_target);
   var_2 = var_0 king_enemy_target_is_valid(var_0.current_blast.target);
@@ -1106,8 +1136,9 @@ special_geist_blast_think() {
 
   if(!common_scripts\utility::_id_562E(var_0.current_blast.anim_state_completed)) {
     if(var_1 && var_2) {
-      if(!var_3)
+      if(!var_3) {
         var_0 thread _id_0547::_id_7D1A("geist_blast", undefined, undefined, [var_0, "stand_pain_interrupt"]);
+      }
     }
   } else
     return 1;
@@ -1197,8 +1228,9 @@ geist_blast_throw() {
   var_3 thread geist_blast_zombie_damage();
   _id_0378::_id_8D74("god_king_giestblast_throw", var_3, var_0);
 
-  if(isDefined(level.ice_blocks))
+  if(isDefined(level.ice_blocks)) {
     var_3 thread maps\mp\mp_zombie_descent_ee_main::test_ice_block_projectile_hit(var_0);
+  }
 
   var_0 pause_manual_rotation();
 }
@@ -1215,8 +1247,9 @@ notify_on_notification(var_0, var_1, var_2) {
   self endon("death");
   var_1 waittill(var_2);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify(var_0);
+  }
 }
 
 geist_blast_zombie_damage() {
@@ -1226,8 +1259,9 @@ geist_blast_zombie_damage() {
   var_0 waittill("explode", var_1);
   var_2 = var_0._id_0117;
 
-  if(isDefined(var_2.current_blast) && isDefined(var_2.current_blast._id_776C))
+  if(isDefined(var_2.current_blast) && isDefined(var_2.current_blast._id_776C)) {
     var_2.current_blast._id_776C = undefined;
+  }
 
   var_3 = _id_0547::_id_408F();
   var_3 = _sortbydistance(var_3, var_1, 256);
@@ -1240,41 +1274,46 @@ geist_blast_zombie_damage() {
       continue;
     }
     if(_distance2d(var_5.origin, var_1) <= 64) {
-      if(_id_0547::_id_5565(level.zombie_king, var_5))
+      if(_id_0547::_id_5565(level.zombie_king, var_5)) {
         var_5 dodamage(1800, var_2.origin, var_2, var_2, "MOD_EXPLOSIVE", "geist_blast_red");
-      else
+      } else {
         var_5 dodamage(var_5.health + 666, var_2.origin, var_2, var_2, "MOD_EXPLOSIVE", "geist_blast_red");
+      }
 
       continue;
     }
 
     if(_distance2d(var_5.origin, var_1) <= 128) {
-      if(_id_0547::_id_5565(level.zombie_king, var_5))
+      if(_id_0547::_id_5565(level.zombie_king, var_5)) {
         var_5 dodamage(1200, var_2.origin, var_2, var_2, "MOD_EXPLOSIVE", "geist_blast_red");
-      else
+      } else {
         var_5 dodamage(var_5.maxhealth * 0.66, var_2.origin, var_2, var_2, "MOD_EXPLOSIVE", "geist_blast_red");
+      }
 
       if(isDefined(var_5._id_0A4B)) {
         var_6 = _id_0547::_id_0A51(var_5._id_0A4B);
 
-        if(isDefined(var_6) && common_scripts\utility::_id_562E(var_6.knockbybladebarbarossa))
+        if(isDefined(var_6) && common_scripts\utility::_id_562E(var_6.knockbybladebarbarossa)) {
           _id_0547::_id_7D1B(var_2, var_5, "medium");
+        }
       }
 
       continue;
     }
 
     if(_distance2d(var_5.origin, var_1) <= 256) {
-      if(_id_0547::_id_5565(level.zombie_king, var_5))
+      if(_id_0547::_id_5565(level.zombie_king, var_5)) {
         var_5 dodamage(600, var_2.origin, var_2, var_2, "MOD_EXPLOSIVE", "geist_blast_red");
-      else
+      } else {
         var_5 dodamage(var_5.maxhealth * 0.33, var_2.origin, var_2, var_2, "MOD_EXPLOSIVE", "geist_blast_red");
+      }
 
       if(isDefined(var_5._id_0A4B)) {
         var_6 = _id_0547::_id_0A51(var_5._id_0A4B);
 
-        if(isDefined(var_6) && common_scripts\utility::_id_562E(var_6.knockbybladebarbarossa))
+        if(isDefined(var_6) && common_scripts\utility::_id_562E(var_6.knockbybladebarbarossa)) {
           _id_0547::_id_7D1B(var_2, var_5, "far");
+        }
       }
     }
   }
@@ -1293,8 +1332,9 @@ special_geist_lightning_start() {
 special_geist_lightning_think() {
   var_0 = self;
 
-  if(var_0 king_try_interrupted_by_pain())
+  if(var_0 king_try_interrupted_by_pain()) {
     return 1;
+  }
 
   var_1 = _id_0547::_id_5565(var_0.current_lightning.rotation_target, var_0.rotation_target);
   var_2 = var_0 king_enemy_target_is_valid(var_0.current_lightning.target);
@@ -1303,8 +1343,9 @@ special_geist_lightning_think() {
   if(!var_1 || !var_2) {
     var_4 = var_0.current_lightning.target;
 
-    if(!var_2)
+    if(!var_2) {
       var_4 = var_0 king_get_enemy_target();
+    }
 
     if(isDefined(var_4)) {
       var_0.current_lightning.rotation_target = var_0 create_rotation_target_ent(var_4);
@@ -1314,9 +1355,9 @@ special_geist_lightning_think() {
   }
 
   if(!var_2) {
-    if(!isDefined(var_0.current_lightning.invalid_target_time))
+    if(!isDefined(var_0.current_lightning.invalid_target_time)) {
       var_0.current_lightning.invalid_target_time = gettime();
-    else if(gettime() - var_0.current_lightning.invalid_target_time > 2000) {
+    } else if(gettime() - var_0.current_lightning.invalid_target_time > 2000) {
       var_0 notify("invalid_target_interrupt");
       return 1;
     }
@@ -1327,8 +1368,9 @@ special_geist_lightning_think() {
 
   if(!common_scripts\utility::_id_562E(var_0.current_lightning.anim_state_completed)) {
     if(var_1 && var_2) {
-      if(!var_3)
+      if(!var_3) {
         var_0 thread _id_0547::_id_7D1A("geist_lightning");
+      }
     }
   } else
     return 1;
@@ -1398,8 +1440,9 @@ geist_lightning_shot(var_0) {
   try_lightning(var_0, var_2);
 
   foreach(var_1 in var_2) {
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_1.islightningtarget = undefined;
+    }
   }
 }
 
@@ -1430,22 +1473,26 @@ try_lightning(var_0, var_1) {
   foreach(var_7 in var_1) {
     var_2 = var_2 + 1;
 
-    if(isPlayer(var_7))
+    if(isPlayer(var_7)) {
       var_3 = var_3 + 1;
+    }
   }
 
-  if(var_3 <= 0)
+  if(var_3 <= 0) {
     var_3 = 1;
+  }
 
-  if(common_scripts\utility::_id_562E(var_0.issolomode))
+  if(common_scripts\utility::_id_562E(var_0.issolomode)) {
     var_9 = var_2 - 2 / (1.5 / var_3);
-  else
+  } else {
     var_9 = var_2 - 2 / (level.players.size / var_3);
+  }
 
   var_10 = var_9 / var_1.size;
 
-  if(var_10 < 0.4)
+  if(var_10 < 0.4) {
     var_10 = 0.4;
+  }
 
   foreach(var_20, var_7 in var_1) {
     if(!isDefined(var_4)) {
@@ -1461,8 +1508,9 @@ try_lightning(var_0, var_1) {
     var_16 = "J_Spine4";
     var_17 = undefined;
 
-    if(isDefined(level.ice_blocks))
+    if(isDefined(level.ice_blocks)) {
       var_17 = maps\mp\mp_zombie_descent_ee_main::test_ice_block_bullettrace_hit(var_13 gettagorigin(var_14), var_15 gettagorigin(var_16));
+    }
 
     var_18 = undefined;
 
@@ -1477,7 +1525,7 @@ try_lightning(var_0, var_1) {
 
     var_19 = _func_382("zmb_geistkraft_godking_lightning_beam", var_13, var_14, var_15, var_16);
     var_19 thread delete_time(0.1);
-    _playfxontag(common_scripts\utility::_id_44F5("zmb_giestkraft_impact"), var_7, "J_spine4");
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_giestkraft_impact"), var_7, "J_spine4");
     var_0 _id_0378::_id_8D74("god_king_lightning");
 
     if(_id_0547::_id_5565(var_18, 1)) {
@@ -1496,8 +1544,9 @@ try_lightning(var_0, var_1) {
     if(isDefined(var_7._id_0A4B)) {
       var_22 = _id_0547::_id_0A51(var_7._id_0A4B);
 
-      if(isDefined(var_22) && common_scripts\utility::_id_562E(var_22.knockbybladebarbarossa))
+      if(isDefined(var_22) && common_scripts\utility::_id_562E(var_22.knockbybladebarbarossa)) {
         _id_0547::_id_7D1B(var_0, var_7, "medium");
+      }
     }
   }
 }
@@ -1515,8 +1564,9 @@ special_geist_bombs_start() {
 special_geist_bombs_think() {
   var_0 = self;
 
-  if(var_0 king_try_interrupted_by_pain())
+  if(var_0 king_try_interrupted_by_pain()) {
     return 1;
+  }
 
   var_1 = _id_0547::_id_5565(var_0.current_bombs.rotation_target, var_0.rotation_target);
   var_2 = var_0 king_enemy_target_is_valid(var_0.current_bombs.target);
@@ -1525,8 +1575,9 @@ special_geist_bombs_think() {
   if(!var_1 || !var_2) {
     var_4 = var_0.current_bombs.target;
 
-    if(!var_2)
+    if(!var_2) {
       var_4 = var_0 king_get_enemy_target();
+    }
 
     if(isDefined(var_4)) {
       var_0.current_bombs.rotation_target = var_0 create_rotation_target_ent(var_4);
@@ -1536,9 +1587,9 @@ special_geist_bombs_think() {
   }
 
   if(!var_2) {
-    if(!isDefined(var_0.current_bombs.invalid_target_time))
+    if(!isDefined(var_0.current_bombs.invalid_target_time)) {
       var_0.current_bombs.invalid_target_time = gettime();
-    else if(gettime() - var_0.current_bombs.invalid_target_time > 2000) {
+    } else if(gettime() - var_0.current_bombs.invalid_target_time > 2000) {
       var_0 notify("invalid_target_interrupt");
       return 1;
     }
@@ -1549,8 +1600,9 @@ special_geist_bombs_think() {
 
   if(!common_scripts\utility::_id_562E(var_0.current_bombs.anim_state_completed)) {
     if(var_1 && var_2) {
-      if(!var_3)
+      if(!var_3) {
         var_0 thread _id_0547::_id_7D1A("geist_bomb");
+      }
     }
   } else
     return 1;
@@ -1597,18 +1649,21 @@ geist_bombs_handle_notetracks(var_0, var_1, var_2, var_3) {
 geist_bombs_throw(var_0) {
   var_1 = "TAG_WEAPON_CHEST";
 
-  if(!_id_0547::_id_5565(level.zombie_king, self))
+  if(!_id_0547::_id_5565(level.zombie_king, self)) {
     var_1 = "TAG_ORIGIN";
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0.origin;
-  else
+  } else {
     var_2 = self.current_bombs.last_known_target_origin;
+  }
 
   var_3 = self;
 
-  if(!_id_0547::_id_5565(level.zombie_king, self))
+  if(!_id_0547::_id_5565(level.zombie_king, self)) {
     var_3 = undefined;
+  }
 
   thread vo_play_gdk_ability_line("geist_bomb_toss");
   var_4 = get_bomb_start_pos(var_1);
@@ -1664,19 +1719,21 @@ geist_bombs_static_think(var_0) {
   thread show_bomb_vfx(var_4, var_3, var_5);
   _id_0378::_id_8D74("god_king_giestbomb_projectile", "activate", var_2);
   wait 6;
-  _playfxontag(common_scripts\utility::_id_44F5("zmb_giestbomb_exp_1shot"), var_2, "TAG_ORIGIN");
+  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_giestbomb_exp_1shot"), var_2, "TAG_ORIGIN");
   _id_0378::_id_8D74("god_king_giestbomb_projectile", "explode", var_2);
   var_6 = _id_0547::_id_408F();
   var_7 = level.players;
   var_8 = common_scripts\utility::_id_0F73(var_6, var_7);
 
   foreach(var_10 in var_8) {
-    if(_distance2d(var_10.origin, var_0) <= 160)
+    if(_distance2d(var_10.origin, var_0) <= 160) {
       var_10 dodamage(100, var_0, level.zombie_king, level.zombie_king, "MOD_EXPLOSIVE", "geist_bomb_artil");
+    }
   }
 
-  if(isDefined(level.ice_blocks))
+  if(isDefined(level.ice_blocks)) {
     var_12 = maps\mp\mp_zombie_descent_ee_main::test_ice_block_explosion_hit(var_2.origin, 160);
+  }
 
   waitframe();
   var_2 delete();
@@ -1700,12 +1757,14 @@ special_detonate_try() {
   var_3 = [];
 
   foreach(var_0 in var_2) {
-    if(var_0 _id_0547::_id_4B2C())
+    if(var_0 _id_0547::_id_4B2C()) {
       var_3[var_3.size] = var_0;
+    }
   }
 
-  if(var_3.size > 0)
+  if(var_3.size > 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -1718,8 +1777,9 @@ special_detonate_start() {
 special_detonate_think() {
   var_0 = self;
 
-  if(var_0 king_try_interrupted_by_pain())
+  if(var_0 king_try_interrupted_by_pain()) {
     return 1;
+  }
 
   var_1 = _id_0547::_id_5565(var_0.current_detonate.rotation_target, var_0.rotation_target);
   var_2 = var_0 king_enemy_target_is_valid(var_0.current_detonate.target);
@@ -1728,8 +1788,9 @@ special_detonate_think() {
   if(!var_1 || !var_2) {
     var_4 = var_0.current_detonate.target;
 
-    if(!var_2)
+    if(!var_2) {
       var_4 = var_0 king_get_detonate_target();
+    }
 
     if(isDefined(var_4)) {
       var_0.current_detonate.rotation_target = var_0 create_rotation_target_ent(var_4);
@@ -1739,9 +1800,9 @@ special_detonate_think() {
   }
 
   if(!var_2) {
-    if(!isDefined(var_0.current_detonate.invalid_target_time))
+    if(!isDefined(var_0.current_detonate.invalid_target_time)) {
       var_0.current_detonate.invalid_target_time = gettime();
-    else if(gettime() - var_0.current_detonate.invalid_target_time > 2000) {
+    } else if(gettime() - var_0.current_detonate.invalid_target_time > 2000) {
       var_0 notify("invalid_target_interrupt");
       return 1;
     }
@@ -1752,8 +1813,9 @@ special_detonate_think() {
 
   if(!common_scripts\utility::_id_562E(var_0.current_detonate.anim_state_completed)) {
     if(var_1 && var_2) {
-      if(!var_3)
+      if(!var_3) {
         var_0 thread _id_0547::_id_7D1A("detonate");
+      }
     }
   } else
     return 1;
@@ -1836,32 +1898,38 @@ detonate_victim(var_0) {
 }
 
 try_detonation(var_0) {
-  if(isDefined(self.fuze_fx))
+  if(isDefined(self.fuze_fx)) {
     self.fuze_fx delete();
+  }
 
   var_1 = self gettagorigin("J_Spine4");
   playFX(level._effect["zmb_corpse_eater_detonate"], var_1);
   _id_0378::_id_8D74("aud_corpse_eater_explosion");
 
-  if(common_scripts\utility::_id_562E(self.isforceshieldactive))
+  if(common_scripts\utility::_id_562E(self.isforceshieldactive)) {
     break_force_shield();
+  }
 
-  if(isDefined(self.isempowered))
+  if(isDefined(self.isempowered)) {
     self.isempowered = undefined;
+  }
 
   self dodamage(self.health + 666, self.origin, var_0, var_0, "MOD_ENERGY");
   radiusdamage(self.origin, 200, 200, 160, var_0, "MOD_ENERGY", "corpse_eater_dlc4_zm", 1);
 
-  if(isDefined(level.ice_blocks))
+  if(isDefined(level.ice_blocks)) {
     var_2 = maps\mp\mp_zombie_descent_ee_main::test_ice_block_explosion_hit(self.origin, 200);
+  }
 }
 
 zombie_detonate_clear_property(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(common_scripts\utility::_id_562E(self.isempowered))
+  if(common_scripts\utility::_id_562E(self.isempowered)) {
     self.isempowered = undefined;
+  }
 
-  if(common_scripts\utility::_id_3C77("flag_boss_complete"))
+  if(common_scripts\utility::_id_3C77("flag_boss_complete")) {
     _id_0547::_id_2D8C(::zombie_detonate_clear_property);
+  }
 }
 
 special_geist_pull_try() {
@@ -1881,8 +1949,9 @@ special_geist_pull_think() {
   var_0 = self;
   var_1 = king_has_arrived(var_0.current_pull._id_2DA7);
 
-  if(!var_1)
+  if(!var_1) {
     king_continue_moving(var_0.current_pull._id_2DA7);
+  }
 
   var_2 = _id_0547::_id_5565(var_0.current_pull.rotation_target, var_0.rotation_target);
   var_3 = var_0 king_enemy_target_is_valid(var_0.current_pull.target);
@@ -1891,8 +1960,9 @@ special_geist_pull_think() {
   if(!var_2 || !var_3) {
     var_5 = var_0.current_pull.target;
 
-    if(!var_3)
+    if(!var_3) {
       var_5 = var_0 king_get_enemy_target();
+    }
 
     if(isDefined(var_5)) {
       var_0.current_pull.rotation_target = var_0 create_rotation_target_ent(var_5);
@@ -1902,9 +1972,9 @@ special_geist_pull_think() {
   }
 
   if(!var_3) {
-    if(!isDefined(var_0.current_pull.invalid_target_time))
+    if(!isDefined(var_0.current_pull.invalid_target_time)) {
       var_0.current_pull.invalid_target_time = gettime();
-    else if(gettime() - var_0.current_pull.invalid_target_time > 2000) {
+    } else if(gettime() - var_0.current_pull.invalid_target_time > 2000) {
       var_0 notify("invalid_target_interrupt");
       return 1;
     }
@@ -1915,8 +1985,9 @@ special_geist_pull_think() {
 
   if(!common_scripts\utility::_id_562E(var_0.current_pull.anim_state_completed)) {
     if(var_1 && var_2 && var_3) {
-      if(!var_4)
+      if(!var_4) {
         var_0 thread _id_0547::_id_7D1A("geist_pull");
+      }
     }
   } else
     return 1;
@@ -1963,7 +2034,7 @@ geist_pull_handle_notetracks(var_0, var_1, var_2, var_3) {
 geist_pull_aoe() {
   var_0 = self;
   var_1 = "TAG_WEAPON_LEFT";
-  _playfxontag(common_scripts\utility::_id_44F5("zmb_pommel_energy_field_burst"), var_0, var_1);
+  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_pommel_energy_field_burst"), var_0, var_1);
   var_0 _id_0378::_id_8D74("god_king_pull");
   var_2 = [];
   var_2 = var_0 king_get_targets_in_range(1600);
@@ -1971,8 +2042,9 @@ geist_pull_aoe() {
   _id_0547::_id_7BA9(::boss_mind_control_fx_clear);
 
   if(isDefined(var_2)) {
-    foreach(var_4 in var_2)
-    var_0 thread geist_pull_attack_victim(var_4, 6);
+    foreach(var_4 in var_2) {
+      var_0 thread geist_pull_attack_victim(var_4, 6);
+    }
   }
 
   _id_0547::_id_2D8C(::boss_mind_control_fx_clear);
@@ -2001,8 +2073,9 @@ geist_pull_attack_victim(var_0, var_1) {
   }
   var_11 = 1 - (_distance2d(var_0.origin, var_2.origin) / 1600 - 256) / 1344;
 
-  if(var_11 < 1)
+  if(var_11 < 1) {
     var_11 = 1;
+  }
 
   var_12 = var_1 * var_11 / 2;
   var_13 = var_1 * var_11;
@@ -2011,7 +2084,7 @@ geist_pull_attack_victim(var_0, var_1) {
     if(var_3 && !_id_0547::_id_577E(var_0)) {
       var_0 shellshock("zm_heavy_hit", var_13, var_12);
       var_0 allowsprint(0);
-      var_0 playrumbleonentity("damage_heavy");
+      var_0 playRumbleOnEntity("damage_heavy");
     }
 
     if(!var_3 && var_0 _id_0547::_id_4B2C() && isDefined(var_2.pull_attractor._id_0F6D)) {
@@ -2022,16 +2095,18 @@ geist_pull_attack_victim(var_0, var_1) {
     if(var_9 > var_8) {
       var_2 thread pulse_drag_in_victim(var_0);
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_0 dodamage(var_6, var_2.origin, var_2, var_2, "MOD_CRUSH");
+      }
     } else if(isDefined(var_2))
       var_0 dodamage(var_6, var_2.origin, var_2, var_2, "MOD_CRUSH");
   } else {}
 
   wait(var_1 * var_11);
 
-  if(var_3 && !_id_0547::_id_577E(var_0))
+  if(var_3 && !_id_0547::_id_577E(var_0)) {
     var_0 allowsprint(1);
+  }
 
   waitframe();
 }
@@ -2055,8 +2130,9 @@ pull_mind_control_fx() {
 }
 
 pull_mind_control_clear_fx() {
-  if(isDefined(self.boss_control_fx))
+  if(isDefined(self.boss_control_fx)) {
     self.boss_control_fx delete();
+  }
 }
 
 spawn_attractor_nodes() {
@@ -2081,20 +2157,25 @@ spawn_attractor_nodes() {
   var_0.pull_attractor thread attractor_rotate();
   var_0 common_scripts\utility::_id_A70A("zombie_kneel", "geist_drain_result", "flame_wave_cast");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 delete();
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 delete();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 attractor_rotate() {
@@ -2110,15 +2191,17 @@ attract_to_boss(var_0) {
   var_1 = self;
   var_1 endon("death");
 
-  if(level.players.size > 0)
+  if(level.players.size > 0) {
     var_0._id_4883 = _func_2E1(var_0.origin, level.players[0]);
-  else
+  } else {
     var_0._id_4883 = var_0.origin;
+  }
 
   var_2 = 0;
 
-  if(isDefined(level._id_AC80) && isDefined(level._id_AC80._id_ACB3) && level._id_AC80._id_ACB3.size > 0)
+  if(isDefined(level._id_AC80) && isDefined(level._id_AC80._id_ACB3) && level._id_AC80._id_ACB3.size > 0) {
     var_2 = _id_055A::_id_578A(var_0._id_4883, 1);
+  }
 
   if(!var_2) {
     return;
@@ -2161,8 +2244,9 @@ attract_to_boss(var_0) {
 }
 
 boss_mind_control_fx_clear(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(isDefined(self.boss_control_fx))
+  if(isDefined(self.boss_control_fx)) {
     self.boss_control_fx delete();
+  }
 }
 
 special_geist_sit_try() {
@@ -2185,15 +2269,17 @@ special_geist_sit_think() {
   var_0 = self;
   var_1 = king_has_arrived(var_0.current_sit._id_2DA7);
 
-  if(!var_1)
+  if(!var_1) {
     king_continue_moving(var_0.current_sit._id_2DA7);
+  }
 
   var_2 = var_0 king_is_in_or_waiting_for_scripted_state("sit");
 
   if(!common_scripts\utility::_id_562E(var_0.current_sit.anim_state_completed)) {
     if(var_1) {
-      if(!var_2)
+      if(!var_2) {
         var_0 thread _id_0547::_id_7D1A("sit");
+      }
     }
   } else
     return 1;
@@ -2246,15 +2332,17 @@ special_geist_kneel_think() {
   var_0 = self;
   var_1 = king_has_arrived(var_0.current_kneel._id_2DA7);
 
-  if(!var_1)
+  if(!var_1) {
     king_continue_moving(var_0.current_kneel._id_2DA7);
+  }
 
   var_2 = var_0 king_is_in_or_waiting_for_scripted_state("kneel");
 
   if(!common_scripts\utility::_id_562E(var_0.current_kneel.anim_state_completed)) {
     if(var_1) {
-      if(!var_2)
+      if(!var_2) {
         var_0 thread _id_0547::_id_7D1A("kneel");
+      }
     }
   } else
     return 1;
@@ -2305,8 +2393,9 @@ geist_kneel_aoe() {
   var_0 notify("zombie_kneel");
   thread kill_remaining_zombies();
 
-  foreach(var_3 in var_1)
-  var_3 thread geist_kneel_run(var_0);
+  foreach(var_3 in var_1) {
+    var_3 thread geist_kneel_run(var_0);
+  }
 
   var_0 pause_manual_rotation();
 }
@@ -2321,7 +2410,7 @@ geist_kneel_run(var_0) {
   var_1 setstance("crouch");
   var_1 setdemigod(1);
   var_1 shellshock("zm_heavy_hit", 1.4, 1);
-  var_1 playrumbleonentity("damage_heavy");
+  var_1 playRumbleOnEntity("damage_heavy");
   var_1 thread bow_head();
   var_1 waittill("drain_fake_start");
   var_1 thread geist_kneel_break_you(var_0);
@@ -2349,13 +2438,13 @@ bow_head() {
   var_1.angles = var_2;
   var_0.lerpposent = var_1;
   var_0 playerlinktoblend(var_0.lerpposent, "tag_origin", 0.25);
-  var_1 moveto(var_0.lerpposent.origin, 0.05);
+  var_1 moveTo(var_0.lerpposent.origin, 0.05);
   waitframe();
-  var_1 rotateto(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_0.lerpposent.origin), 0.1);
+  var_1 rotateTo(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_0.lerpposent.origin), 0.1);
   wait 0.1;
-  var_1 rotateto(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_0.lerpposent.origin) + (60, 0, 0), 0.25);
+  var_1 rotateTo(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_0.lerpposent.origin) + (60, 0, 0), 0.25);
   wait 1.2;
-  var_1 rotateto(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_0.lerpposent.origin), 2.8, 1, 1.5);
+  var_1 rotateTo(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_0.lerpposent.origin), 2.8, 1, 1.5);
 }
 
 geist_kneel_break_you(var_0) {
@@ -2416,8 +2505,9 @@ special_geist_drain_think() {
   var_1 = var_0 king_is_in_or_waiting_for_scripted_state("geist_drain");
 
   if(!common_scripts\utility::_id_562E(var_0.current_drain.anim_state_completed)) {
-    if(!var_1)
+    if(!var_1) {
       var_0 thread _id_0547::_id_7D1A("geist_drain");
+    }
   } else
     return 1;
 
@@ -2469,8 +2559,9 @@ anim_state_geist_drain_run() {
     var_0 anim_state_ground_recover_loop();
     var_0.drainpunishactive = undefined;
 
-    if(isDefined(var_0.punishdamage))
+    if(isDefined(var_0.punishdamage)) {
       var_0.punishdamage = undefined;
+    }
 
     var_0 enable_geist_bullet_shield();
     var_1 = maps\mp\agents\_scripted_agent_anim_util::_id_434D("geist_drain_stumble_recover");
@@ -2502,7 +2593,7 @@ enable_body_clip() {
   for(;;) {
     var_2 = self gettagorigin(var_0);
     var_3 = self gettagangles(var_0);
-    self.stunnedclip moveto(var_2, var_1);
+    self.stunnedclip moveTo(var_2, var_1);
     wait(var_1);
   }
 }
@@ -2557,8 +2648,9 @@ anim_state_ground_recover_end_think() {
   var_0 = self;
   var_1 = 8;
 
-  for(var_2 = 1; var_1 > 0; var_1 = var_1 - var_2)
+  for(var_2 = 1; var_1 > 0; var_1 = var_1 - var_2) {
     wait(var_2);
+  }
 
   var_0 notify("geist_recover_result");
 }
@@ -2568,8 +2660,9 @@ geist_drain_cast_handle_notetracks(var_0, var_1, var_2, var_3) {
 
   switch (var_0) {
     case "cast":
-      if(isDefined(var_4.current_drain))
+      if(isDefined(var_4.current_drain)) {
         var_4 thread king_spawn_geist_drain();
+      }
 
       break;
   }
@@ -2625,8 +2718,9 @@ geist_drain_plate_destruction_wait() {
   var_0 endon("death");
   var_0 endon("geist_drain_result");
 
-  for(var_1 = 0; var_1 < 3; var_1++)
+  for(var_1 = 0; var_1 < 3; var_1++) {
     var_0 waittill("plate_destroyed");
+  }
 
   var_0 thread king_geist_drain_report_result("pain");
 }
@@ -2646,8 +2740,9 @@ geist_drain_aoe(var_0) {
   var_2 = 0.25;
   var_3 = 18;
 
-  if(common_scripts\utility::_id_562E(var_1.issolomode))
+  if(common_scripts\utility::_id_562E(var_1.issolomode)) {
     var_3 = 25;
+  }
 
   var_4 = 18 / var_2;
   var_5 = -1 / var_4;
@@ -2675,10 +2770,11 @@ geist_drain_aoe(var_0) {
 
     if(isDefined(var_16)) {
       foreach(var_18 in var_16) {
-        if(_distance2dsquared(var_1 gettagorigin(var_6), var_18.origin) > _distance2dsquared(var_1 gettagorigin(var_7), var_18.origin))
+        if(_distance2dsquared(var_1 gettagorigin(var_6), var_18.origin) > _distance2dsquared(var_1 gettagorigin(var_7), var_18.origin)) {
           var_13 = var_7;
-        else
+        } else {
           var_13 = var_6;
+        }
 
         var_19 = _func_382("zmb_geistkraft_reg_beam_med", var_1, var_13, var_18, "J_Spine4");
         var_19 thread delete_time(int(var_2));
@@ -2708,8 +2804,9 @@ geist_drain_aoe(var_0) {
   }
 
   foreach(var_12 in level.blood_plates) {
-    if(_id_0547::_id_5565(var_12.setlookatent, "plate_boss_room"))
+    if(_id_0547::_id_5565(var_12.setlookatent, "plate_boss_room")) {
       var_12 notify("drain_ended");
+    }
   }
 
   drain_heal_king(100000);
@@ -2721,11 +2818,13 @@ geist_drain_aoe(var_0) {
 drain_heal_king(var_0) {
   var_1 = self;
 
-  if(var_0 + var_1.health >= var_1.maxhealth)
+  if(var_0 + var_1.health >= var_1.maxhealth) {
     var_0 = var_1.maxhealth - var_1.health;
+  }
 
-  if(common_scripts\utility::_id_562E(var_1.issolomode))
+  if(common_scripts\utility::_id_562E(var_1.issolomode)) {
     var_0 = var_0 / 2;
+  }
 
   var_1.health = var_1.health + int(var_0);
 }
@@ -2736,7 +2835,7 @@ drain_plate_think(var_0, var_1, var_2) {
   var_3.drain_fx_ent = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_desc_blood_plates_lt_drain"), var_3.plate_model, "TAG_ORIGIN");
   _triggerfx(var_3.drain_fx_ent);
   var_3.plate_hit_clip solid();
-  var_3.plate_hit_clip setcandamage(1);
+  var_3.plate_hit_clip setCanDamage(1);
   var_3.plate_hit_clip setdamagecallbackon(1);
   var_3.plate_hit_clip.total_damage = 0;
   var_3.plate_hit_clip.my_fount = var_3;
@@ -2745,7 +2844,7 @@ drain_plate_think(var_0, var_1, var_2) {
   var_3 drain_end_wait(var_2);
   var_3.drain_fx_ent delete();
   var_3.plate_hit_clip notsolid();
-  var_3.plate_hit_clip setcandamage(0);
+  var_3.plate_hit_clip setCanDamage(0);
   var_3.plate_hit_clip setdamagecallbackon(0);
   var_3.plate_hit_clip.damagecallback = undefined;
   playFX(common_scripts\utility::_id_44F5("zmb_hilt_sphere_explosion"), var_3.plate_model.origin, anglesToForward(var_3.plate_model.angles));
@@ -2766,8 +2865,9 @@ geist_drain_plate_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
     var_13 = "weakpoint";
     var_1 thread _id_04C7::_id_A102(var_13);
 
-    if(king_check_if_raven_weapons(var_5))
+    if(king_check_if_raven_weapons(var_5)) {
       var_2 = var_2 * 2.5;
+    }
 
     self.total_damage = self.total_damage + var_2;
 
@@ -2826,8 +2926,9 @@ attack_geist_drain_stop() {
 attack_geist_drain_wait_till_stopped() {
   var_0 = self;
 
-  if(common_scripts\utility::_id_562E(var_0._id_08BE))
+  if(common_scripts\utility::_id_562E(var_0._id_08BE)) {
     var_0 waittill("attack_geist_drain_stop");
+  }
 }
 
 uber_flame_wave_try() {
@@ -2848,15 +2949,17 @@ uber_flame_wave_think() {
   var_1 = 0;
   var_1 = king_has_arrived(var_0.current_flame_wave._id_2DA7);
 
-  if(!var_1)
+  if(!var_1) {
     king_continue_moving(var_0.current_flame_wave._id_2DA7);
+  }
 
   var_2 = var_0 king_is_in_or_waiting_for_scripted_state("flame_wave");
 
   if(var_1) {
     if(!common_scripts\utility::_id_562E(var_0.current_flame_wave.anim_state_completed)) {
-      if(!var_2)
+      if(!var_2) {
         var_0 thread _id_0547::_id_7D1A("flame_wave");
+      }
     } else
       return 1;
   }
@@ -2915,8 +3018,9 @@ flame_wave_cast_handle_notetracks(var_0, var_1, var_2, var_3) {
 
   switch (var_0) {
     case "cast":
-      if(isDefined(var_4.current_flame_wave))
+      if(isDefined(var_4.current_flame_wave)) {
         var_4 thread king_spawn_flame_wave();
+      }
 
       break;
   }
@@ -2971,8 +3075,9 @@ flame_wave_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
     if(isDefined(var_12) && _distance2d(var_1.origin, var_11.origin) < var_12) {
       var_11.current_flame_wave._id_4DE0++;
 
-      if(var_11.current_flame_wave._id_4DE0 > 0)
+      if(var_11.current_flame_wave._id_4DE0 > 0) {
         var_11 thread king_flame_wave_report_result("pain");
+      }
     }
   }
 }
@@ -2983,10 +3088,11 @@ attack_flame_wave_spawn(var_0, var_1, var_2) {
   var_3._id_0117 = var_1;
   var_3.istrial = var_2;
 
-  if(!isDefined(level.next_flame_wave_id))
+  if(!isDefined(level.next_flame_wave_id)) {
     level.next_flame_wave_id = 0;
-  else
+  } else {
     level.next_flame_wave_id++;
+  }
 
   var_3.flame_id = level.next_flame_wave_id;
   var_3 thread attack_flame_wave_run();
@@ -3025,10 +3131,11 @@ flame_wave_sound_runner_run(var_0, var_1) {
     var_7 = var_6 < var_0.last_kill_radius;
 
     if(var_7 != var_4) {
-      if(var_7)
+      if(var_7) {
         _id_0378::_id_8D74("flame_wave_runner_inside", var_1, var_2);
-      else
+      } else {
         _id_0378::_id_8D74("flame_wave_runner_outside", var_1, var_2);
+      }
     }
 
     var_4 = var_7;
@@ -3038,7 +3145,7 @@ flame_wave_sound_runner_run(var_0, var_1) {
     var_10 = var_0.origin + var_8 * (var_0.last_kill_radius + var_3);
     var_10 = (var_10[0], var_10[1], var_2.origin[2]);
     var_1.origin = var_9;
-    var_1 moveto(var_10, 0.2);
+    var_1 moveTo(var_10, 0.2);
     wait 0.2;
   }
 }
@@ -3049,10 +3156,11 @@ attack_flame_wave_run() {
   var_1 = _randomfloatrange(0, 360);
   var_2 = anglesToForward((0, var_1, 0));
 
-  if(_id_0547::_id_5565(var_0.istrial, 1))
+  if(_id_0547::_id_5565(var_0.istrial, 1)) {
     var_0.fx = _spawnfx(common_scripts\utility::_id_44F5("zmb_desc_flame_wave_02"), var_0.origin, (0, 1, 0), (0, 0, 1));
-  else
+  } else {
     var_0.fx = _spawnfx(common_scripts\utility::_id_44F5("zmb_desc_flame_wave"), var_0.origin, var_2, (0, 0, 1));
+  }
 
   setfxkillondelete(var_0.fx, 1);
   _triggerfx(var_0.fx);
@@ -3131,19 +3239,21 @@ approximate_script_hit_cylinder(var_0) {
   var_1 = undefined;
   var_2 = undefined;
 
-  if(isDefined(var_0._id_8302))
+  if(isDefined(var_0._id_8302)) {
     var_1 = var_0._id_8302;
-  else if(isDefined(var_0._id_00BD))
+  } else if(isDefined(var_0._id_00BD)) {
     var_1 = var_0._id_00BD;
-  else
+  } else {
     var_1 = 65;
+  }
 
-  if(isDefined(var_0._id_8303))
+  if(isDefined(var_0._id_8303)) {
     var_2 = var_0._id_8303;
-  else if(isDefined(var_0.radius))
+  } else if(isDefined(var_0.radius)) {
     var_2 = var_0.radius;
-  else
+  } else {
     var_2 = 65;
+  }
 
   return [var_2, var_1];
 }
@@ -3164,8 +3274,9 @@ attack_flame_wave_stop() {
 attack_flame_wave_wait_till_stopped() {
   var_0 = self;
 
-  if(common_scripts\utility::_id_562E(var_0._id_08BE))
+  if(common_scripts\utility::_id_562E(var_0._id_08BE)) {
     var_0 waittill("attack_flame_wave_stop");
+  }
 }
 
 uber_force_try() {
@@ -3186,15 +3297,17 @@ uber_force_think() {
   var_1 = 0;
   var_1 = king_has_arrived(var_0.current_force._id_2DA7);
 
-  if(!var_1)
+  if(!var_1) {
     king_continue_moving(var_0.current_force._id_2DA7);
+  }
 
   var_2 = var_0 king_is_in_or_waiting_for_scripted_state("force");
 
   if(var_1) {
     if(!common_scripts\utility::_id_562E(var_0.current_force.anim_state_completed)) {
-      if(!var_2)
+      if(!var_2) {
         var_0 thread _id_0547::_id_7D1A("force");
+      }
     } else
       return 1;
   }
@@ -3237,8 +3350,9 @@ force_handle_notetracks(var_0, var_1, var_2, var_3) {
 force_attack_run() {
   var_0 = "TAG_WEAPON_RIGHT";
 
-  if(!_id_0547::_id_5565(level.zombie_king, self))
+  if(!_id_0547::_id_5565(level.zombie_king, self)) {
     var_0 = "TAG_ORIGIN";
+  }
 
   _id_0378::_id_8D74("god_king_force_summon");
   self waittill("notify_force_unleash");
@@ -3270,11 +3384,12 @@ enable_force_shield() {
 }
 
 break_force_shield() {
-  if(isDefined(self.myforceshield))
+  if(isDefined(self.myforceshield)) {
     self.myforceshield delete();
+  }
 
   self.isforceshieldactive = 0;
-  _playfxontag(common_scripts\utility::_id_44F5("force_zombie_bubble_pop"), self, "J_SpineLower");
+  _playFXOnTag(common_scripts\utility::_id_44F5("force_zombie_bubble_pop"), self, "J_SpineLower");
   self.nomutilate = 0;
   self._id_480F = 0;
 }
@@ -3297,15 +3412,17 @@ uber_sun_think() {
   var_1 = 0;
   var_1 = king_has_arrived(var_0.current_sun._id_2DA7);
 
-  if(!var_1)
+  if(!var_1) {
     king_continue_moving(var_0.current_sun._id_2DA7);
+  }
 
   var_2 = var_0 king_is_in_or_waiting_for_scripted_state("sun");
 
   if(var_1) {
     if(!common_scripts\utility::_id_562E(var_0.current_sun.anim_state_completed)) {
-      if(!var_2)
+      if(!var_2) {
         var_0 thread _id_0547::_id_7D1A("sun");
+      }
     } else
       return 1;
   }
@@ -3348,8 +3465,9 @@ sun_handle_notetracks(var_0, var_1, var_2, var_3) {
 sun_attack_run() {
   var_0 = "TAG_WEAPON_CHEST";
 
-  if(!_id_0547::_id_5565(level.zombie_king, self))
+  if(!_id_0547::_id_5565(level.zombie_king, self)) {
     var_0 = "TAG_ORIGIN";
+  }
 
   self.fx_sun_tell = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_gk_lightsun_buildup"), self, var_0);
   king_handle_attached_vfx_cleanup(self.fx_sun_tell);
@@ -3360,7 +3478,7 @@ sun_attack_run() {
   self waittill("notify_sun_kill");
   self.fx_sun_tell delete();
   self.fx_sun_tell = undefined;
-  _playfxontag(common_scripts\utility::_id_44F5("zmb_gk_lightsun_blast"), self, var_0);
+  _playFXOnTag(common_scripts\utility::_id_44F5("zmb_gk_lightsun_blast"), self, var_0);
   _id_0378::_id_8D74("god_king_sun_blast");
   thread praise_the_sun(var_0);
 }
@@ -3376,8 +3494,9 @@ sun_do_preface_damage(var_0) {
       if(var_4 == self || _id_0547::_id_5565(level.zombie_king, var_4)) {
         continue;
       }
-      if(_bullettracepassed(self gettagorigin(var_0), var_4 getEye(), 0, self))
+      if(_bullettracepassed(self gettagorigin(var_0), var_4 getEye(), 0, self)) {
         var_4 dodamage(5, self.origin, self, self, "MOD_ENERGY", "zombie_king_uber_sun");
+      }
     }
 
     wait 0.4;
@@ -3421,8 +3540,9 @@ special_geist_drain_special_think() {
   var_1 = var_0 king_is_in_or_waiting_for_scripted_state("geist_drain_special");
 
   if(!common_scripts\utility::_id_562E(var_0.current_drain_special.anim_state_completed)) {
-    if(!var_1)
+    if(!var_1) {
       var_0 thread _id_0547::_id_7D1A("geist_drain_special");
+    }
   } else
     return 0;
 
@@ -3473,8 +3593,9 @@ anim_state_geist_drain_special_run() {
     var_0 _id_0378::_id_8D74("god_king_death");
     maps\mp\agents\_scripted_agent_anim_util::_id_71FA(var_2, var_3, 1, "king_attack", "end");
 
-    if(isDefined(level.zombie_king_sword.hitbox))
+    if(isDefined(level.zombie_king_sword.hitbox)) {
       level.zombie_king_sword.hitbox delete();
+    }
 
     if(isDefined(level.zombie_king_sword)) {
       playFX(level._effect["zmb_desc_boss_death_sword_hide"], level.zombie_king_sword.origin, anglesToForward(level.zombie_king_sword.angles));
@@ -3561,21 +3682,23 @@ geist_drain_special_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5,
     return;
   }
   if(isDefined(var_5) && isDefined(var_4)) {
-    if(king_check_if_weapon_op(var_5, var_4) && var_2 > 1)
+    if(king_check_if_weapon_op(var_5, var_4) && var_2 > 1) {
       var_2 = int(var_2 * 0.6);
+    }
   }
 
   if(isDefined(var_5) && isDefined(var_4)) {
-    if(king_check_if_raven_weapons(var_5, var_4) && var_2 > 1)
+    if(king_check_if_raven_weapons(var_5, var_4) && var_2 > 1) {
       var_2 = int(var_2 * 2.5);
+    }
   }
 
   var_11.current_drain_special.damage_taken = var_11.current_drain_special.damage_taken + var_2;
   var_12 = 100000 * level.player.size;
 
-  if(var_11.current_drain_special.damage_taken > var_12)
+  if(var_11.current_drain_special.damage_taken > var_12) {
     var_11 thread king_geist_drain_special_report_result("pain");
-  else {
+  } else {
     var_13 = var_11.current_drain_special.last_finale_minor_pain;
 
     if(!isDefined(var_13) || gettime() > var_13 + 1300.0) {
@@ -3584,10 +3707,11 @@ geist_drain_special_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5,
       if(isDefined(var_8) && var_8 != "head" && isDefined(var_7)) {
         var_15 = anglestoright(var_11.puck.angles);
 
-        if(vectordot(var_15, var_7) > 0)
+        if(vectordot(var_15, var_7) > 0) {
           var_14 = "death_sit_pain_r";
-        else
+        } else {
           var_14 = "death_sit_pain_l";
+        }
       }
 
       var_11.current_drain_special.last_finale_minor_pain = gettime();
@@ -3599,11 +3723,13 @@ geist_drain_special_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5,
 king_check_if_weapon_sap(var_0, var_1) {
   var_2 = 0;
 
-  if(issubstr(var_0, "p38_") && issubstr(var_0, "_pap_zm"))
+  if(issubstr(var_0, "p38_") && issubstr(var_0, "_pap_zm")) {
     var_2 = 1;
+  }
 
-  if(issubstr(var_0, "sdk_") && issubstr(var_0, "_pap_zm"))
+  if(issubstr(var_0, "sdk_") && issubstr(var_0, "_pap_zm")) {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -3611,17 +3737,21 @@ king_check_if_weapon_sap(var_0, var_1) {
 king_check_if_weapon_op(var_0, var_1) {
   var_2 = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(issubstr(var_0, "svt40_") && issubstr(var_0, "_pap_zm"))
+  if(issubstr(var_0, "svt40_") && issubstr(var_0, "_pap_zm")) {
     var_2 = 1;
+  }
 
-  if(issubstr(var_0, "raven_gun_") && issubstr(var_0, "_pap_zm"))
+  if(issubstr(var_0, "raven_gun_") && issubstr(var_0, "_pap_zm")) {
     var_2 = 1;
+  }
 
-  if(_id_0547::_id_5565(var_1, "MOD_EXPLOSIVE") || _id_0547::_id_5565(var_1, "MOD_EXPLOSIVE_BULLET"))
+  if(_id_0547::_id_5565(var_1, "MOD_EXPLOSIVE") || _id_0547::_id_5565(var_1, "MOD_EXPLOSIVE_BULLET")) {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -3629,11 +3759,13 @@ king_check_if_weapon_op(var_0, var_1) {
 king_check_if_raven_weapons(var_0, var_1) {
   var_2 = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(issubstr(var_0, level.ravenweaponmanager["shield"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["shield_emp"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["scythe"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["scythe_emp"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["spike"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["spike_emp"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["hammer"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["hammer_emp"]._id_01D0))
+  if(issubstr(var_0, level.ravenweaponmanager["shield"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["shield_emp"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["scythe"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["scythe_emp"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["spike"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["spike_emp"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["hammer"]._id_01D0) || issubstr(var_0, level.ravenweaponmanager["hammer_emp"]._id_01D0)) {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -3641,11 +3773,13 @@ king_check_if_raven_weapons(var_0, var_1) {
 king_check_if_raven_weapon_cleave(var_0, var_1) {
   var_2 = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(issubstr(var_0, "hammer_cleave_zm") || issubstr(var_0, "hammer_cleave_emp_zm") || issubstr(var_0, "scythe_cleave_zm") || issubstr(var_0, "scythe_cleave_emp_zm") || issubstr(var_0, "scythe_shard_zm") || issubstr(var_0, "shield_cleave_zm") || issubstr(var_0, "shield_cleave_emp_zm") || issubstr(var_0, "zom_hammer_grenade_zm"))
+  if(issubstr(var_0, "hammer_cleave_zm") || issubstr(var_0, "hammer_cleave_emp_zm") || issubstr(var_0, "scythe_cleave_zm") || issubstr(var_0, "scythe_cleave_emp_zm") || issubstr(var_0, "scythe_shard_zm") || issubstr(var_0, "shield_cleave_zm") || issubstr(var_0, "shield_cleave_emp_zm") || issubstr(var_0, "zom_hammer_grenade_zm")) {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -3670,10 +3804,11 @@ geist_drain_special_aoe(var_0) {
   for(var_6 = 0; var_6 < var_3; var_6++) {
     var_7 = var_1 king_get_targets_in_range(2200);
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_8 = common_scripts\utility::_id_0F73(level.players, var_7);
-    else
+    } else {
       var_8 = level.players;
+    }
 
     if(!isDefined(var_8)) {
       wait(var_2);
@@ -3681,17 +3816,19 @@ geist_drain_special_aoe(var_0) {
     }
 
     foreach(var_10 in var_8) {
-      if(_distance2dsquared(var_1 gettagorigin(var_4), var_10.origin) > _distance2dsquared(var_1 gettagorigin(var_5), var_10.origin))
+      if(_distance2dsquared(var_1 gettagorigin(var_4), var_10.origin) > _distance2dsquared(var_1 gettagorigin(var_5), var_10.origin)) {
         var_11 = var_5;
-      else
+      } else {
         var_11 = var_4;
+      }
 
       var_12 = _func_382("zmb_geistkraft_blood_beam_med_drain", var_1, var_11, var_10, "J_Spine4");
       var_12 thread delete_time(int(var_2));
       var_13 = var_10.health + 1;
 
-      if(isPlayer(var_10))
+      if(isPlayer(var_10)) {
         var_13 = 1;
+      }
 
       var_10 dodamage(var_13, var_1.origin, var_1, var_1, "MOD_ENERGY");
       var_1.health = var_1.health + 1;
@@ -3717,8 +3854,9 @@ attack_geist_drain_special_stop() {
 attack_geist_drain_special_wait_till_stopped() {
   var_0 = self;
 
-  if(common_scripts\utility::_id_562E(var_0._id_08BE))
+  if(common_scripts\utility::_id_562E(var_0._id_08BE)) {
     var_0 waittill("attack_geist_drain_special_stop");
+  }
 }
 
 king_zombie_wins(var_0) {
@@ -3755,8 +3893,9 @@ special_geist_drain_special_fake_think() {
   var_1 = var_0 king_is_in_or_waiting_for_scripted_state("geist_drain_special_fake");
 
   if(!common_scripts\utility::_id_562E(var_0.current_drain_special_fake.anim_state_completed)) {
-    if(!var_1)
+    if(!var_1) {
       var_0 thread _id_0547::_id_7D1A("geist_drain_special_fake");
+    }
   } else
     return 1;
 
@@ -3813,10 +3952,11 @@ king_spawn_geist_drain_special_fake() {
   var_2 = "J_Wrist_RI";
 
   foreach(var_4 in level.players) {
-    if(_distance2dsquared(var_0 gettagorigin(var_1), var_4.origin) > _distance2dsquared(var_0 gettagorigin(var_2), var_4.origin))
+    if(_distance2dsquared(var_0 gettagorigin(var_1), var_4.origin) > _distance2dsquared(var_0 gettagorigin(var_2), var_4.origin)) {
       var_5 = var_2;
-    else
+    } else {
       var_5 = var_1;
+    }
 
     var_4.drain_beam = _func_382("zmb_geistkraft_blood_beam_med_drain", var_0, var_5, var_4, "J_Head");
     var_4.drain_beam thread delete_on_parent_notify(var_4, "kill_fake_drain_beam");
@@ -3877,8 +4017,9 @@ special_melee_pick_best_attack_and_yaw(var_0) {
     var_12 = 0;
 
     foreach(var_7 in var_0) {
-      if(_abs(var_7.king_melee_aiming_yaw - var_11.arc_rotation_offset) < var_11._id_0F3E * 0.5 + var_11.facing_rotation_allowed)
+      if(_abs(var_7.king_melee_aiming_yaw - var_11.arc_rotation_offset) < var_11._id_0F3E * 0.5 + var_11.facing_rotation_allowed) {
         var_12++;
+      }
     }
 
     if(var_12 > var_3) {
@@ -3888,8 +4029,9 @@ special_melee_pick_best_attack_and_yaw(var_0) {
     }
   }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 = _angleclamp180(var_4 + var_1.puck.angles[1]);
+  }
 
   return [var_2, var_5];
 }
@@ -3899,8 +4041,9 @@ special_melee_think() {
   var_0 disable_geist_bullet_shield();
   var_1 = var_0 king_is_in_or_waiting_for_scripted_state("king_melee");
 
-  if(!var_1 || common_scripts\utility::_id_562E(var_0.current_melee.anim_state_completed))
+  if(!var_1 || common_scripts\utility::_id_562E(var_0.current_melee.anim_state_completed)) {
     return 1;
+  }
 
   return 0;
 }
@@ -3973,8 +4116,9 @@ melee_strike_notetrack() {
     var_14[var_14.size] = var_16;
   }
 
-  foreach(var_16 in var_14)
-  var_0 thread zombie_king_on_melee_hit_target(var_16);
+  foreach(var_16 in var_14) {
+    var_0 thread zombie_king_on_melee_hit_target(var_16);
+  }
 }
 
 zombie_king_on_melee_hit_target(var_0) {
@@ -3994,7 +4138,7 @@ run_melee_shellshock(var_0) {
   self endon("death");
   self shellshock("zm_heavy_hit", var_2, var_1);
   self allowsprint(0);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_4 = self.origin - var_0;
   var_4 = (var_4[0], var_4[1], 0);
   var_4 = var_3 * vectorNormalize(var_4);
@@ -4008,8 +4152,9 @@ special_move_to_enemy_try(var_0) {
   var_1 = self;
   var_2 = king_get_closest_enemy_target();
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   var_1.current_move_to = spawnStruct();
   var_1.current_move_to._id_375E = var_2;
@@ -4022,8 +4167,9 @@ special_move_to_enemy_start(var_0) {
   var_3 = var_2.origin + (0, 0, 42);
   var_4 = undefined;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_4 = var_0[0];
+  }
 
   var_1 enable_geist_bullet_shield();
   var_1.current_move_to._id_2DA7 = king_create_destination(var_3, var_4);
@@ -4036,8 +4182,9 @@ special_move_to_enemy_think() {
   if(!var_0 king_enemy_target_is_valid(var_0.current_move_to._id_375E)) {
     var_1 = get_victim_player();
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = king_get_enemy_target();
+    }
 
     if(isDefined(var_1)) {
       var_0.current_move_to._id_375E = var_1;
@@ -4050,8 +4197,9 @@ special_move_to_enemy_think() {
 
   var_2 = king_has_arrived(var_0.current_move_to._id_2DA7);
 
-  if(!var_2)
+  if(!var_2) {
     king_continue_moving(var_0.current_move_to._id_2DA7);
+  }
 
   return var_2;
 }
@@ -4072,8 +4220,9 @@ special_move_face_enemy_start(var_0) {
   var_2 = get_new_boss_position();
   var_3 = undefined;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_3 = var_0[0];
+  }
 
   var_1 enable_geist_bullet_shield();
   var_1.current_move._id_2DA7 = king_create_destination(var_2, var_3);
@@ -4086,8 +4235,9 @@ special_move_face_enemy_think() {
   if(!var_0 king_enemy_target_is_valid(var_0.current_move._id_375E)) {
     var_1 = get_victim_player();
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = king_get_enemy_target();
+    }
 
     if(isDefined(var_1)) {
       var_0.current_move._id_375E = var_1;
@@ -4100,8 +4250,9 @@ special_move_face_enemy_think() {
 
   var_2 = king_has_arrived(var_0.current_move._id_2DA7);
 
-  if(!var_2)
+  if(!var_2) {
     king_continue_moving(var_0.current_move._id_2DA7);
+  }
 
   return var_2;
 }
@@ -4112,8 +4263,9 @@ special_move_face_enemy_end() {
 }
 
 register_boss_melee_move(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level.boss_melee_moves))
+  if(!isDefined(level.boss_melee_moves)) {
     level.boss_melee_moves = [];
+  }
 
   if(isDefined(level.boss_melee_moves[var_0])) {}
 
@@ -4129,10 +4281,11 @@ register_boss_melee_move(var_0, var_1, var_2, var_3, var_4) {
 register_boss_special_attack_wrapper(var_0, var_1) {
   var_2 = undefined;
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_2 = self.attack_uber[var_0];
-  else
+  } else {
     var_2 = self.attack_basic[var_0];
+  }
 
   var_3 = var_2._id_116E;
   var_4 = var_2.try_func;
@@ -4147,13 +4300,15 @@ register_boss_special_attack_wrapper(var_0, var_1) {
   var_12 = level.boss_special_moves[var_3];
   var_12.allow_pain = var_2.allow_pain;
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     _id_0547::_id_7BD0(var_9, var_8, undefined, var_10, var_11);
+  }
 }
 
 register_boss_special_move(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level.boss_special_moves))
+  if(!isDefined(level.boss_special_moves)) {
     level.boss_special_moves = [];
+  }
 
   if(isDefined(level.boss_special_moves[var_0])) {}
 
@@ -4169,23 +4324,29 @@ register_boss_special_move(var_0, var_1, var_2, var_3, var_4) {
 king_enemy_target_is_valid(var_0) {
   var_1 = self;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 0;
+  }
 
-  if(_id_0547::_id_5565(level.zombie_king, var_0))
+  if(_id_0547::_id_5565(level.zombie_king, var_0)) {
     return 0;
+  }
 
-  if(var_1 _id_0547::_id_8B95(var_0))
+  if(var_1 _id_0547::_id_8B95(var_0)) {
     return 0;
+  }
 
-  if(var_0._id_00CE || isDefined(var_0._id_0117) && var_0._id_0117._id_00CE)
+  if(var_0._id_00CE || isDefined(var_0._id_0117) && var_0._id_0117._id_00CE) {
     return 0;
+  }
 
-  if(var_0 isnotarget() || isDefined(var_0._id_0117) && var_0._id_0117 isnotarget())
+  if(var_0 isnotarget() || isDefined(var_0._id_0117) && var_0._id_0117 isnotarget()) {
     return 0;
+  }
 
   return 1;
 }
@@ -4224,13 +4385,15 @@ king_get_closest_enemy_target() {
   var_1 = _id_053C::_id_4F88();
 
   foreach(var_3 in var_1) {
-    if(_id_0547::_id_5565(var_3._id_983B, 1))
+    if(_id_0547::_id_5565(var_3._id_983B, 1)) {
       return var_3;
+    }
   }
 
   foreach(var_3 in var_1) {
-    if(king_enemy_target_is_valid(var_3))
+    if(king_enemy_target_is_valid(var_3)) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -4240,19 +4403,22 @@ king_get_enemy_target() {
   var_0 = self;
   var_1 = var_0 king_get_preselected_enemy();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_1;
+  }
 
   var_2 = _id_053C::_id_4F88();
 
   foreach(var_4 in var_2) {
-    if(_id_0547::_id_5565(var_4._id_983B, 1))
+    if(_id_0547::_id_5565(var_4._id_983B, 1)) {
       return var_4;
+    }
   }
 
   foreach(var_4 in var_2) {
-    if(king_enemy_target_is_valid(var_4))
+    if(king_enemy_target_is_valid(var_4)) {
       return var_4;
+    }
   }
 
   return undefined;
@@ -4265,8 +4431,9 @@ king_get_detonate_target() {
   var_0 = common_scripts\utility::_id_0FA2(var_0);
 
   foreach(var_3 in var_0) {
-    if(king_enemy_target_is_valid(var_3) && (!isPlayer(var_3) && var_3 _id_0547::_id_4B2C()))
+    if(king_enemy_target_is_valid(var_3) && (!isPlayer(var_3) && var_3 _id_0547::_id_4B2C())) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -4295,8 +4462,9 @@ king_get_targets_in_range(var_0) {
   var_2 = _sortbydistance(var_2, var_1.origin, var_0);
   var_2 = common_scripts\utility::_id_0FA2(var_2);
 
-  if(var_2.size > 0)
+  if(var_2.size > 0) {
     return var_2;
+  }
 
   return undefined;
 }
@@ -4307,8 +4475,9 @@ get_next_lightning_target() {
   var_0 = _sortbydistance(var_0, var_1.origin, 128);
 
   foreach(var_3 in var_0) {
-    if(king_enemy_target_is_valid(var_3) && !_id_0547::_id_5565(var_3.islightningtarget, 1))
+    if(king_enemy_target_is_valid(var_3) && !_id_0547::_id_5565(var_3.islightningtarget, 1)) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -4321,21 +4490,25 @@ get_victim_player() {
   var_3 = undefined;
   var_4 = var_0 king_get_preselected_enemy_player();
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     return var_4;
-
-  foreach(var_6 in level.players) {
-    if(_id_0547::_id_5565(var_6._id_983B, 1))
-      var_2[var_2.size] = var_6;
-
-    if(!_id_0547::_id_577E(var_6) && !common_scripts\utility::_id_562E(var_6.boss_victim_cooldown))
-      var_1[var_1.size] = var_6;
   }
 
-  if(var_2.size >= 0)
+  foreach(var_6 in level.players) {
+    if(_id_0547::_id_5565(var_6._id_983B, 1)) {
+      var_2[var_2.size] = var_6;
+    }
+
+    if(!_id_0547::_id_577E(var_6) && !common_scripts\utility::_id_562E(var_6.boss_victim_cooldown)) {
+      var_1[var_1.size] = var_6;
+    }
+  }
+
+  if(var_2.size >= 0) {
     var_3 = level.players;
-  else if(var_1.size >= 0)
+  } else if(var_1.size >= 0) {
     var_3 = level.players;
+  }
 
   var_8 = common_scripts\utility::random(var_3);
   var_8 thread set_victim_cooldown();
@@ -4375,11 +4548,13 @@ king_create_destination(var_0, var_1) {
 king_has_arrived(var_0) {
   var_1 = self;
 
-  if(!_id_0547::_id_5565(var_1.current_destination, var_0))
+  if(!_id_0547::_id_5565(var_1.current_destination, var_0)) {
     return 0;
+  }
 
-  if(var_0.move_targets_reached < var_0.move_targets.size)
+  if(var_0.move_targets_reached < var_0.move_targets.size) {
     return 0;
+  }
 
   return 1;
 }
@@ -4387,21 +4562,23 @@ king_has_arrived(var_0) {
 king_continue_moving(var_0) {
   var_1 = self;
 
-  if(!_id_0547::_id_5565(var_1.current_destination, var_0))
+  if(!_id_0547::_id_5565(var_1.current_destination, var_0)) {
     thread king_set_destination_internal(var_0);
-  else {}
+  } else {}
 }
 
 king_is_facing_rotation_target(var_0) {
   var_1 = self;
 
-  if(!_id_0547::_id_5565(var_1.rotation_target, var_0))
+  if(!_id_0547::_id_5565(var_1.rotation_target, var_0)) {
     return 0;
+  }
 
   var_2 = var_1 get_desired_rotation_yaw();
 
-  if(_abs(_angleclamp180(var_2 - var_1.puck.angles[1])) < 22)
+  if(_abs(_angleclamp180(var_2 - var_1.puck.angles[1])) < 22) {
     return 1;
+  }
 
   return 0;
 }
@@ -4470,8 +4647,9 @@ king_handle_attached_vfx_cleanup(var_0, var_1) {
   var_2 = self;
   var_2 maps\mp\agents\_agent_utility::deleteentonagentdeath(var_0);
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_2 thread handle_clear_on_interrupt(var_0);
+  }
 }
 
 handle_clear_on_interrupt(var_0) {
@@ -4483,8 +4661,9 @@ handle_clear_on_interrupt(var_0) {
 }
 
 king_ishitweakpoint(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(var_8) && var_8 == "soft")
+  if(isDefined(var_8) && var_8 == "soft") {
     return 1;
+  }
 
   return 0;
 }
@@ -4493,8 +4672,9 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   var_12 = var_2;
   var_13 = self;
 
-  if(_id_0547::_id_5565(var_13, var_1))
+  if(_id_0547::_id_5565(var_13, var_1)) {
     var_2 = 0;
+  }
 
   if(isPlayer(var_1) && common_scripts\utility::_id_562E(var_13.geistbulletshield) && !king_check_if_raven_weapons(var_5)) {
     var_2 = 0;
@@ -4507,13 +4687,15 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   }
 
   if(isDefined(var_5) && isDefined(var_4)) {
-    if(king_check_if_weapon_op(var_5, var_4) && var_2 > 1)
+    if(king_check_if_weapon_op(var_5, var_4) && var_2 > 1) {
       var_2 = int(var_2 * 0.65);
+    }
   }
 
   if(isDefined(var_5) && isDefined(var_4)) {
-    if(king_check_if_weapon_sap(var_5, var_4) && var_2 > 1)
+    if(king_check_if_weapon_sap(var_5, var_4) && var_2 > 1) {
       var_2 = int(var_2 * 0.5);
+    }
   }
 
   if(king_check_if_raven_weapons(var_5) && !common_scripts\utility::_id_562E(var_13.drainshieldacive)) {
@@ -4522,15 +4704,17 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     var_2 = 49033.2;
   }
 
-  if(king_check_if_raven_weapon_cleave(var_5) && !common_scripts\utility::_id_562E(var_13.drainshieldacive))
+  if(king_check_if_raven_weapon_cleave(var_5) && !common_scripts\utility::_id_562E(var_13.drainshieldacive)) {
     var_2 = 24516.6;
+  }
 
   if(isDefined(var_8) && var_8 == "soft") {
     var_15 = var_1 _meth_850B(var_5, var_8);
     var_16 = var_1 _meth_850B(var_5, "head");
 
-    if(var_15 <= 0)
+    if(var_15 <= 0) {
       var_15 = 1;
+    }
 
     var_17 = var_2 / var_15;
     var_18 = var_17 * var_16;
@@ -4555,8 +4739,9 @@ king_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     var_2 = var_13.maxhealth * 0.03;
   }
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     god_king_impact_vfx(var_6, level._effect["blood_godking_impact_burst"]);
+  }
 
   if(var_2 <= 0) {
     var_14 = "none";
@@ -4588,7 +4773,7 @@ god_king_impact_vfx(var_0, var_1) {
     var_4 = level.god_king_impact_vfx[var_3];
     var_4.origin = var_0;
     var_4 dontinterpolate();
-    _playfxontag(var_1, var_4, "tag_origin");
+    _playFXOnTag(var_1, var_4, "tag_origin");
     level.last_god_king_impact_vfx_index = var_3;
     level.last_god_king_impact_vfx = var_2;
   }
@@ -4605,11 +4790,13 @@ reflect_bullet(var_0, var_1, var_2, var_3, var_4) {
 }
 
 punish_damage_limit_reached() {
-  if(!isDefined(self.punishdamage))
+  if(!isDefined(self.punishdamage)) {
     return 0;
+  }
 
-  if(self.punishdamage > get_zombie_king_punish_limit())
+  if(self.punishdamage > get_zombie_king_punish_limit()) {
     return 1;
+  }
 
   return 0;
 }
@@ -4645,10 +4832,11 @@ king_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     var_1 thread _id_04C7::_id_A102(var_12);
     var_2 = int(var_2 * 1.25);
 
-    if(!isDefined(var_11.punishdamage))
+    if(!isDefined(var_11.punishdamage)) {
       var_11.punishdamage = var_2;
-    else
+    } else {
       var_11.punishdamage = var_11.punishdamage + var_2;
+    }
   } else if(isPlayer(var_1) && common_scripts\utility::_id_562E(var_11.drainpunishactive) && var_11 punish_damage_limit_reached()) {
     var_12 = "none";
     var_1 thread _id_04C7::_id_A102(var_12);
@@ -4658,8 +4846,9 @@ king_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   if(var_2 == 0) {
     return;
   }
-  foreach(var_15, var_14 in var_11.king_damage_finished_funcs)
-  var_11 thread[[var_14]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  foreach(var_15, var_14 in var_11.king_damage_finished_funcs) {
+    var_11 thread[[var_14]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  }
 
   _id_054D::_id_6BD3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
@@ -4693,8 +4882,9 @@ state_default_run() {
   }
 
   for(;;) {
-    if(!common_scripts\utility::_id_562E(var_7))
+    if(!common_scripts\utility::_id_562E(var_7)) {
       var_0 common_scripts\utility::waittill_notify_or_timeout("manual_move_complete", 0.2);
+    }
 
     var_7 = 0;
     var_6 = var_0 get_next_manual_move();
@@ -4758,15 +4948,17 @@ king_control_for_rotation_animation(var_0, var_1) {
   }
   var_7 = var_4 * var_5;
 
-  if(var_7 > 0)
+  if(var_7 > 0) {
     wait(var_7);
+  }
 
   var_8 = var_4 * var_6 - var_7;
   var_9 = (0, var_1, 0);
-  var_2.puck rotateto(var_9, var_8);
+  var_2.puck rotateTo(var_9, var_8);
 
-  if(var_2.rotation_target.type == "ent")
+  if(var_2.rotation_target.type == "ent") {
     var_2 start_manual_rotation();
+  }
 
   wait(var_8);
 }
@@ -4794,16 +4986,17 @@ get_possible_boss_positions() {
   var_0 = undefined;
 
   if(common_scripts\utility::_id_562E(level.king_level_setup)) {
-    if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 0))
+    if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 0)) {
       return level.bossfight.boss_pos_wave0;
-    else if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 1))
+    } else if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 1)) {
       return level.bossfight.boss_pos_wave1;
-    else if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 2))
+    } else if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 2)) {
       return level.bossfight.boss_pos_wave2;
-    else if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 3))
+    } else if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 3)) {
       return level.bossfight.boss_pos_wave3;
-    else if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 6))
+    } else if(_id_0547::_id_5565(level.zombie_king.current_phase_index, 6)) {
       return level.bossfight.boss_pos_wave6;
+    }
 
     return [level.bossfight.default_boss_pos];
   } else {
@@ -4819,8 +5012,9 @@ get_new_boss_position() {
   var_1 = common_scripts\utility::array_randomize(var_1);
 
   foreach(var_3 in var_1) {
-    if(distancesquared(var_3.origin, var_0.puck.origin) > 100)
+    if(distancesquared(var_3.origin, var_0.puck.origin) > 100) {
       return var_3.origin;
+    }
   }
 
   return var_1[0].origin;
@@ -4847,10 +5041,11 @@ get_random_boss_blood_position() {
 
 get_boss_pull_position(var_0) {
   if(common_scripts\utility::_id_562E(level.king_level_setup)) {
-    if(!var_0 common_scripts\utility::_id_3794("phase_transition_active") && _id_0547::_id_5565(var_0.current_phase_index, 3) || _id_0547::_id_5565(var_0.current_phase_index, 4))
+    if(!var_0 common_scripts\utility::_id_3794("phase_transition_active") && _id_0547::_id_5565(var_0.current_phase_index, 3) || _id_0547::_id_5565(var_0.current_phase_index, 4)) {
       var_1 = level.bossfight.throne_pos;
-    else
+    } else {
       var_1 = level.bossfight.boss_drain_pos;
+    }
 
     return var_1.origin;
   } else
@@ -4892,10 +5087,11 @@ anim_state_stand_pain_run(var_0, var_1) {
   if(isDefined(var_0) && var_0 != "head" && isDefined(var_1)) {
     var_4 = anglestoright(var_2.puck.angles);
 
-    if(vectordot(var_4, var_1) > 0)
+    if(vectordot(var_4, var_1) > 0) {
       var_3 = "pain_stand_right";
-    else
+    } else {
       var_3 = "pain_stand_left";
+    }
   }
 
   var_5 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_3);
@@ -4958,13 +5154,13 @@ manual_move_motion(var_0) {
   var_2 = distance(var_1.puck.origin, var_0.origin);
   var_3 = var_2 / var_0._id_018A;
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     waitframe();
-  else {
+  } else {
     var_0._id_9255 = var_1.puck.origin;
     var_0._id_9297 = gettime() / 1000;
     var_0._id_36AD = var_0._id_9297 + var_3;
-    var_1.puck moveto(var_0.origin, var_3);
+    var_1.puck moveTo(var_0.origin, var_3);
     wait(var_3);
     waitframe();
   }
@@ -4979,8 +5175,9 @@ wait_for_valid_manual_move() {
   for(;;) {
     var_1 = get_next_manual_move();
 
-    if(var_0 common_scripts\utility::_id_3794("manual_move_enabled") && isDefined(var_1))
+    if(var_0 common_scripts\utility::_id_3794("manual_move_enabled") && isDefined(var_1)) {
       return var_1;
+    }
 
     var_0 common_scripts\utility::_id_A70A("manual_move_enabled", "new_manual_move");
   }
@@ -4996,8 +5193,9 @@ on_manual_move_complete(var_0) {
 get_next_manual_move() {
   var_0 = self;
 
-  if(!isDefined(var_0.move_targets) || var_0.move_targets.size == 0)
+  if(!isDefined(var_0.move_targets) || var_0.move_targets.size == 0) {
     return undefined;
+  }
 
   return var_0.move_targets[0];
 }
@@ -5019,10 +5217,11 @@ pause_manual_move() {
   if(!var_0 common_scripts\utility::_id_3794("manual_rotate_enabled")) {
     return;
   }
-  var_0.puck moveto(var_0.puck.origin, 0.1);
+  var_0.puck moveTo(var_0.puck.origin, 0.1);
 
-  if(isDefined(var_0.current_move_target))
+  if(isDefined(var_0.current_move_target)) {
     var_0 notify("manual_move_end", "result_paused");
+  }
 
   var_0 common_scripts\utility::_id_3796("manual_move_enabled");
 }
@@ -5043,11 +5242,13 @@ on_move_targets_changed() {
   var_0 = self;
   var_0 notify("new_manual_move");
 
-  if(isDefined(var_0.current_move_target) && !_id_0547::_id_5565(var_0.move_targets[0], var_0.current_move_target))
+  if(isDefined(var_0.current_move_target) && !_id_0547::_id_5565(var_0.move_targets[0], var_0.current_move_target)) {
     var_0 notify("manual_move_end", "result_replaced");
+  }
 
-  if(isDefined(var_0.current_destination))
+  if(isDefined(var_0.current_destination)) {
     var_0.current_destination = undefined;
+  }
 }
 
 add_to_end_of_path(var_0) {
@@ -5064,8 +5265,9 @@ create_move_target(var_0, var_1) {
   var_2 = self;
   var_3 = spawnStruct();
 
-  if(!isDefined(var_1) || var_1 == 0)
+  if(!isDefined(var_1) || var_1 == 0) {
     var_1 = 485;
+  }
 
   var_3.origin = var_0;
   var_3._id_018A = var_1;
@@ -5087,7 +5289,7 @@ handle_manual_rotation() {
 
     if(var_4 > 0) {
       var_4 = max(0.2, var_4);
-      var_0.puck rotateto(var_5, var_4);
+      var_0.puck rotateTo(var_5, var_4);
       var_0.rotation_target.last_yaw_target = var_1;
       var_0.rotation_target.last_end_time = gettime() / 1000 + var_4;
       wait 0.2;
@@ -5125,14 +5327,15 @@ pause_manual_rotation() {
     return;
   }
   var_0 common_scripts\utility::_id_3796("manual_rotate_enabled");
-  var_0.puck rotateto(var_0.puck.angles, 0.05);
+  var_0.puck rotateTo(var_0.puck.angles, 0.05);
 }
 
 get_desired_rotation_yaw() {
   var_0 = self;
 
-  if(!isDefined(var_0.rotation_target))
+  if(!isDefined(var_0.rotation_target)) {
     return var_0.puck.angles[1];
+  }
 
   switch (var_0.rotation_target.type) {
     case "yaw":
@@ -5149,8 +5352,9 @@ get_desired_rotation_yaw() {
 get_manual_rotation_target_yaw_in_time(var_0) {
   var_1 = self;
 
-  if(!var_1 common_scripts\utility::_id_3794("manual_rotate_enabled") || !isDefined(var_1.rotation_target))
+  if(!var_1 common_scripts\utility::_id_3794("manual_rotate_enabled") || !isDefined(var_1.rotation_target)) {
     return var_1.puck.angles[1];
+  }
 
   switch (var_1.rotation_target.type) {
     case "yaw":
@@ -5177,9 +5381,9 @@ get_expected_position_in_time(var_0) {
       var_3 = var_1.current_move_target;
       var_4 = gettime() / 1000 + var_0;
 
-      if(var_4 < var_3._id_9297)
+      if(var_4 < var_3._id_9297) {
         var_2 = var_1.puck.origin;
-      else if(var_4 < var_3._id_36AD) {
+      } else if(var_4 < var_3._id_36AD) {
         var_5 = (var_4 - var_3._id_9297) / (var_3._id_36AD - var_3._id_9297);
         var_2 = _vectorlerp(var_3._id_9255, var_3.origin, clamp(var_5, 0, 1));
       } else
@@ -5199,8 +5403,9 @@ set_rotation_target(var_0) {
 create_rotation_target_shared(var_0) {
   var_1 = spawnStruct();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 220;
+  }
 
   var_1.rot_speed = var_0;
   return var_1;
@@ -5259,15 +5464,17 @@ disable_geist_bullet_shield() {
   }
   var_0.geistbulletshield = undefined;
 
-  if(isDefined(var_0.shieldprotectionfx))
+  if(isDefined(var_0.shieldprotectionfx)) {
     var_0.shieldprotectionfx delete();
+  }
 }
 
 vo_play_gdk_line(var_0) {
   self endon("death");
 
-  while(common_scripts\utility::_id_562E(self.gdk_speaking))
+  while(common_scripts\utility::_id_562E(self.gdk_speaking)) {
     waitframe();
+  }
 
   self.gdk_speaking = 1;
   self.ability_vo = _id_0380::_id_288B(var_0, level.players, self, 0, 1);
@@ -5286,8 +5493,9 @@ vo_play_gdk_ability_line(var_0) {
   self endon("death");
   var_1 = vo_get_gdk_ability_line(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     vo_play_gdk_line(var_1);
+  }
 }
 
 vo_get_gdk_ability_line(var_0) {
@@ -5340,14 +5548,17 @@ vo_get_gdk_ability_line(var_0) {
       break;
   }
 
-  if(common_scripts\utility::_id_562E(var_3) && self.vo_lines_played.size > 0 && isDefined(common_scripts\utility::_id_0F7E(self.vo_lines_played, var_0)) && common_scripts\utility::_id_24A6())
+  if(common_scripts\utility::_id_562E(var_3) && self.vo_lines_played.size > 0 && isDefined(common_scripts\utility::_id_0F7E(self.vo_lines_played, var_0)) && common_scripts\utility::_id_24A6()) {
     var_2 = undefined;
+  }
 
-  if(isDefined(self.vo_lines_played) && !isDefined(common_scripts\utility::_id_0F7E(self.vo_lines_played, var_0)))
+  if(isDefined(self.vo_lines_played) && !isDefined(common_scripts\utility::_id_0F7E(self.vo_lines_played, var_0))) {
     self.vo_lines_played[self.vo_lines_played.size] = var_0;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 = var_1 + var_2;
+  }
 
   return var_2;
 }
@@ -5420,8 +5631,9 @@ zombie_king_play_dead() {
   level.zombie_king_corpse thread vo_play_gdk_ability_line("end_succeed");
 
   while(isDefined(var_0) && _id_0547::_id_5565(var_0._id_0A4B, "zombie_king")) {
-    if(common_scripts\utility::_id_562E(var_0._id_480F))
+    if(common_scripts\utility::_id_562E(var_0._id_480F)) {
       var_0._id_480F = 0;
+    }
 
     var_0 dodamage(var_0.health + 666, var_0.origin);
     waitframe();
@@ -5458,8 +5670,9 @@ spawn_wings_think() {
 spawn_wings() {
   var_0 = self;
 
-  if(isDefined(var_0.wing_fx))
+  if(isDefined(var_0.wing_fx)) {
     var_0.wing_fx delete();
+  }
 
   var_0.wing_fx = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_desc_player_wings"), var_0, "J_Spine4");
   _triggerfx(var_0.wing_fx);
@@ -5486,25 +5699,28 @@ ravenlord_ammo_refill() {
       var_6 = int(var_5 * 0.04);
       var_7 = var_4;
 
-      if(var_6 + var_4 >= var_5)
+      if(var_6 + var_4 >= var_5) {
         var_7 = var_5;
-      else
+      } else {
         var_7 = var_7 + var_6;
+      }
 
       var_0 setweaponammostock(var_1, var_7);
     }
 
     if(var_2 < var_3) {
-      while(var_0 isreloading())
+      while(var_0 isreloading()) {
         waitframe();
+      }
 
       var_8 = int(var_3 * 0.04);
       var_7 = var_2;
 
-      if(var_8 + var_2 >= var_3)
+      if(var_8 + var_2 >= var_3) {
         var_7 = var_3;
-      else
+      } else {
         var_7 = var_7 + var_8;
+      }
 
       var_0 setweaponammoclip(var_1, var_7);
     }
@@ -5527,8 +5743,9 @@ ravenlord_lethal_refill() {
       var_2 = var_0 getweaponammoclip(var_1);
       var_3 = _weaponclipsize(var_0._dlc4_weapon_manager["stored_lethal"], self);
 
-      if(var_2 >= var_3)
+      if(var_2 >= var_3) {
         var_0._dlc4_weapon_manager["stored_lethal_ammo"] = var_3;
+      }
 
       continue;
     }
@@ -5537,8 +5754,9 @@ ravenlord_lethal_refill() {
     var_2 = var_0 getweaponammoclip(var_1);
     var_3 = _weaponclipsize(var_1, var_0);
 
-    if(var_2 < var_3)
+    if(var_2 < var_3) {
       var_0 setweaponammoclip(var_1, var_2 + 1);
+    }
   }
 }
 
@@ -5553,8 +5771,9 @@ ravenlord_tactical_refill() {
       var_2 = var_0 getweaponammoclip(var_1);
       var_3 = _weaponclipsize(var_0._dlc4_weapon_manager["stored_tactical"], self);
 
-      if(var_2 >= var_3)
+      if(var_2 >= var_3) {
         var_0._dlc4_weapon_manager["stored_tactical_ammo"] = var_3;
+      }
 
       continue;
     }
@@ -5563,8 +5782,9 @@ ravenlord_tactical_refill() {
     var_2 = var_0 getweaponammoclip(var_1);
     var_3 = _weaponclipsize(var_1, var_0);
 
-    if(var_2 >= var_3)
+    if(var_2 >= var_3) {
       var_0 setweaponammoclip(var_1, var_2 + 1);
+    }
   }
 }
 
@@ -5587,11 +5807,13 @@ ravenlord_special_refill() {
 }
 
 ravenlord_apply_health_to_players() {
-  if(self.health < self.maxhealth)
+  if(self.health < self.maxhealth) {
     self.health = self.health + 100;
+  }
 
-  if(self.health > self.maxhealth)
+  if(self.health > self.maxhealth) {
     self.health = self.maxhealth;
+  }
 }
 
 _id_7A43(var_0) {

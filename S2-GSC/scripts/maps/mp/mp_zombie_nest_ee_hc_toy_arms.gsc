@@ -27,12 +27,12 @@ _id_47A4() {
 _id_7E3C(var_0, var_1) {
   var_0 hide();
   level waittill("hc_nest_toy_obj_complete");
-  var_2 = _getent("nest_hc_record_drawer", "targetname");
+  var_2 = _getEnt("nest_hc_record_drawer", "targetname");
   var_3 = common_scripts\utility::_id_46B5(var_2.target, "targetname");
   var_0 show();
   var_0 linktosynchronizedparent(var_2);
   var_2 _id_0378::_id_8D74("aud_spinning_top_drawer_open");
-  var_2 moveto(var_3.origin, 1.5, 0, 0.5);
+  var_2 moveTo(var_3.origin, 1.5, 0, 0.5);
   wait 1.5;
   var_0 unlink();
   var_0 _id_A665(var_1);
@@ -45,8 +45,9 @@ _id_7E3C(var_0, var_1) {
 }
 
 _id_A665(var_0) {
-  for(var_1 = 0; !var_1; var_1 = maps\mp\_utility::_id_3B8E(var_2, self, 15))
+  for(var_1 = 0; !var_1; var_1 = maps\mp\_utility::_id_3B8E(var_2, self, 15)) {
     var_0 waittill("trigger", var_2);
+  }
 }
 
 _id_8F6F(var_0, var_1) {
@@ -58,8 +59,9 @@ _id_8F6F(var_0, var_1) {
   var_2.targetname = "nest_ee_hc_shootable_arm_spawn";
   var_2 thread _id_8B1B();
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_2 hudoutlineenable(var_0, 0);
+  }
 }
 
 _id_8573(var_0, var_1) {
@@ -153,11 +155,12 @@ _id_171D(var_0) {
   var_0["trigger"]._id_7EF9 = var_18;
   var_0["trigger"] thread _id_6803(var_18);
 
-  foreach(var_21 in var_18)
-  var_21 thread _id_7EEC(var_17);
+  foreach(var_21 in var_18) {
+    var_21 thread _id_7EEC(var_17);
+  }
 
-  var_23 = _getent("firewell_grab_test", "targetname");
-  var_24 = _getent(var_23.target, "targetname");
+  var_23 = _getEnt("firewell_grab_test", "targetname");
+  var_24 = _getEnt(var_23.target, "targetname");
   level thread _id_4833(var_23, var_4);
 }
 
@@ -183,8 +186,9 @@ _id_7A50(var_0) {
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_4 = 0;
 
-    for(var_5 = _pow(10, var_2.size - var_3); var_0 >= var_5 / 10; var_4++)
+    for(var_5 = _pow(10, var_2.size - var_3); var_0 >= var_5 / 10; var_4++) {
       var_0 = var_0 - var_5 / 10;
+    }
 
     var_2[var_3] = var_4;
   }
@@ -220,8 +224,9 @@ _id_7EEC(var_0) {
   while(!var_1) {
     self waittill("top_interact", var_3);
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       _destroyglass(var_2);
+    }
 
     if(common_scripts\utility::_id_0F79(level._id_665D, self._id_65E5 + 1)) {
       var_1 = 1;
@@ -240,8 +245,9 @@ _id_7EEC(var_0) {
     self rotateby((-30, 0, 0), 0.05);
     waitframe();
 
-    if(self._id_65E0 == 9)
+    if(self._id_65E0 == 9) {
       self.angles = var_4;
+    }
 
     level notify("nest_ee_arm_code_check");
   }
@@ -285,7 +291,7 @@ _id_2DB2() {
 }
 
 _id_8B1B() {
-  self setcandamage(1);
+  self setCanDamage(1);
   self waittill("damage");
   _id_0378::_id_8D74("aud_spinning_top_shot");
   self._id_65E2 = common_scripts\utility::_id_46B5(self.target, "targetname");
@@ -323,24 +329,27 @@ _id_348C(var_0) {
   wait(var_3);
   self.origin = var_0.origin;
 
-  if(isDefined(var_0.angles))
+  if(isDefined(var_0.angles)) {
     self.angles = var_0.angles;
+  }
 }
 
 _id_21AF(var_0) {
   level endon("hc_nest_toy_obj_complete");
   var_1 = 0;
 
-  while(!isDefined(var_0._id_7EF9))
+  while(!isDefined(var_0._id_7EF9)) {
     waitframe();
+  }
 
   while(var_1 != var_0._id_7EF9.size) {
     level waittill("nest_ee_arm_code_check");
     var_1 = 0;
 
     for(var_2 = 0; var_2 < var_0._id_7EF9.size; var_2++) {
-      if(var_0._id_7EF9[var_2]._id_65E0 == level._id_665F[var_2])
+      if(var_0._id_7EF9[var_2]._id_65E0 == level._id_665F[var_2]) {
         var_1++;
+      }
     }
   }
 
@@ -359,8 +368,9 @@ _id_6FCD() {
   var_0 = spawn("trigger_radius", self.origin, 0, 64, 64);
   var_1 = undefined;
 
-  while(!isDefined(var_1) || !isPlayer(var_1))
+  while(!isDefined(var_1) || !isPlayer(var_1)) {
     var_0 waittill("trigger", var_1);
+  }
 
   var_0 delete();
   self delete();
@@ -370,8 +380,9 @@ _id_6FCD() {
 _id_4421() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 12; var_1++)
+  for(var_1 = 0; var_1 < 12; var_1++) {
     var_0[var_1] = common_scripts\utility::_id_46B5(var_1 + 1 + "oc", "script_noteworthy");
+  }
 
   return var_0;
 }
@@ -379,17 +390,18 @@ _id_4421() {
 _id_52EE() {
   var_0 = common_scripts\utility::_id_46B5("nest_ee_hc_arm_models_struct", "targetname");
   var_1 = common_scripts\utility::_id_46B7(var_0.target, "targetname");
-  var_2 = _getent("nest_ee_hc_arm_trig", "targetname");
+  var_2 = _getEnt("nest_ee_hc_arm_trig", "targetname");
   var_3 = maps\mp\mp_zombie_nest_ee_util::_id_44C8("nest_ee_hc_arm_model_window", 1);
   var_2._id_65DD = var_3;
   var_4 = [];
   var_4["trigger"] = var_2;
   var_4["shootable_arms"] = var_1;
-  var_4["reward_pickup"] = _getent("nest_hc_record_spawn", "targetname");
+  var_4["reward_pickup"] = _getEnt("nest_hc_record_spawn", "targetname");
   return var_4;
 }
 
 getrecordreward() {
-  foreach(var_1 in level.players)
-  var_1 _id_054C::_id_AC23("record");
+  foreach(var_1 in level.players) {
+    var_1 _id_054C::_id_AC23("record");
+  }
 }

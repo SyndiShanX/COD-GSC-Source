@@ -4,8 +4,9 @@
 ******************************************************/
 
 waitforbackendreply() {
-  while(!_func_3C5())
+  while(!_func_3C5()) {
     waitframe();
+  }
 }
 
 init() {
@@ -34,12 +35,13 @@ onplayerconnect() {
 }
 
 _id_6B56(var_0) {
-  if(var_0 == "axis")
+  if(var_0 == "axis") {
     _func_263();
-  else if(var_0 == "allies")
+  } else if(var_0 == "allies") {
     _func_262();
-  else
+  } else {
     _func_264();
+  }
 }
 
 onmatchvoid() {
@@ -51,8 +53,9 @@ _id_21BA() {
   var_0["axis"] = 0;
 
   foreach(var_2 in level.players) {
-    if(isDefined(var_2.team) && isDefined(var_0[var_2.team]))
+    if(isDefined(var_2.team) && isDefined(var_0[var_2.team])) {
       var_0[var_2.team]++;
+    }
   }
 
   foreach(var_2 in level.players) {
@@ -85,8 +88,9 @@ getrankformmr(var_0) {
   }
 
   for(var_5 = 0; var_5 < level.ranktablecache.size; var_5++) {
-    if(var_0 >= level.ranktablecache[var_5][0] && var_0 < level.ranktablecache[var_5][1])
+    if(var_0 >= level.ranktablecache[var_5][0] && var_0 < level.ranktablecache[var_5][1]) {
       return var_5 + 1;
+    }
   }
 
   return 0;
@@ -100,33 +104,39 @@ giverankadvancerewards(var_0) {
     var_4 = !self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_0, "mmr_was_adjusted");
     var_5 = var_3 == getdvarint("4697", 10);
 
-    if(!var_4)
+    if(!var_4) {
       var_5 = var_3 == 1;
+    }
 
     if(var_5) {
       var_6 = getrankformmr(var_2);
 
-      if(var_6 < 1)
+      if(var_6 < 1) {
         var_6 = 1;
+      }
 
-      for(var_7 = 1; var_7 <= var_6; var_7++)
+      for(var_7 = 1; var_7 <= var_6; var_7++) {
         _id_0468::ae_sendrankedplayrankupevent(var_7);
+      }
     } else if(!var_4 || var_3 > getdvarint("4697", 10)) {
       if(var_0 == 1) {
         var_8 = self getplayerdata(common_scripts\utility::_id_46AE(), "ranked_play_season_data", var_0, "mmr_max");
         var_9 = getrankformmr(var_8);
 
-        if(var_9 < 1)
+        if(var_9 < 1) {
           var_9 = 1;
+        }
 
-        for(var_7 = 1; var_7 <= var_9; var_7++)
+        for(var_7 = 1; var_7 <= var_9; var_7++) {
           _id_0468::ae_sendrankedplayrankupevent(var_7);
+        }
       } else if(var_2 > var_1) {
         var_6 = getrankformmr(var_2);
         var_10 = getrankformmr(var_1);
 
-        if(var_6 > var_10)
+        if(var_6 > var_10) {
           _id_0468::ae_sendrankedplayrankupevent(var_6);
+        }
       }
     }
   }

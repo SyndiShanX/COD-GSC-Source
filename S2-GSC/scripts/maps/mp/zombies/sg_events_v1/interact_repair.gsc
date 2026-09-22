@@ -25,11 +25,13 @@ basic_keypoint_interact_run(var_0) {
   maps\mp\zombies\sg_events_v1\_options::apply_option(var_0);
   level.kpishouldchain = 1;
 
-  if(var_0 == "dnk_kpi_bomb_defusal")
+  if(var_0 == "dnk_kpi_bomb_defusal") {
     maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::register_banned_objective("keypoint_interact_repair_common");
+  }
 
-  if(var_0 == "keypoint_interact_repair_common")
+  if(var_0 == "keypoint_interact_repair_common") {
     maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::register_banned_objective("dnk_kpi_bomb_defusal");
+  }
 
   if(!isDefined(level.keypointinteracttool)) {
     switch (level.zmb_sg_objectives[var_0].type) {
@@ -50,8 +52,9 @@ basic_keypoint_interact_run(var_0) {
 
   level.keypointinteractholdtime = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_keypoint_interact_repair_common_time");
 
-  if(!isDefined(level.keypointinteractkeypoints))
+  if(!isDefined(level.keypointinteractkeypoints)) {
     level.keypointinteractkeypoints = 3;
+  }
 
   foreach(var_2 in level.players) {
     var_2 setclientomnvar("ui_onevone_class_3", level.keypointinteractkeypoints);
@@ -62,8 +65,9 @@ basic_keypoint_interact_run(var_0) {
   var_5 = getEntArray("keypoint_interact_trigger", "targetname");
 
   foreach(var_7 in var_5) {
-    if(isDefined(var_7._id_0165) && var_7._id_0165 == var_0 || !isDefined(var_7._id_0165))
+    if(isDefined(var_7._id_0165) && var_7._id_0165 == var_0 || !isDefined(var_7._id_0165)) {
       var_4 = common_scripts\utility::_id_0F6F(var_4, var_7);
+    }
   }
 
   var_9 = [];
@@ -72,14 +76,16 @@ basic_keypoint_interact_run(var_0) {
     while(var_9.size < level.keypointinteractkeypoints) {
       var_10 = _randomintrange(0, var_4.size);
 
-      if(!common_scripts\utility::_id_0F79(var_9, var_4[var_10]))
+      if(!common_scripts\utility::_id_0F79(var_9, var_4[var_10])) {
         var_9 = common_scripts\utility::_id_0F6F(var_9, var_4[var_10]);
+      }
 
       waitframe();
     }
   } else {
-    foreach(var_7 in var_4)
-    var_9 = common_scripts\utility::_id_0F6F(var_9, var_7);
+    foreach(var_7 in var_4) {
+      var_9 = common_scripts\utility::_id_0F6F(var_9, var_7);
+    }
   }
 
   var_13 = var_9.size;
@@ -87,24 +93,27 @@ basic_keypoint_interact_run(var_0) {
   level.keypointsinteracted = 0;
   var_14 = basic_keypoint_interact_wait_for_complete_or_timeout(var_13);
 
-  if(common_scripts\utility::_id_562E(var_14))
+  if(common_scripts\utility::_id_562E(var_14)) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 basic_keypoint_interact_trigger_listen(var_0) {
   foreach(var_5, var_2 in var_0) {
-    if(!var_2 _meth_8562())
+    if(!var_2 _meth_8562()) {
       var_2 makeusable();
+    }
 
     var_2 thread basic_keypoint_interact_trigger_hints();
     level thread maps\mp\_utility::_id_6F74(::basic_keypoint_interact_draw_waypoint, var_2);
     var_3 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_keypoint_interact_repair_common_guard_timing_info");
     var_4 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_keypoint_interact_repair_common_guard_min_objective_count");
 
-    if(var_5 + 1 >= var_3 && level.objectivescompleted + 1 >= var_4)
+    if(var_5 + 1 >= var_3 && level.objectivescompleted + 1 >= var_4) {
       level thread spawn_zombie_interact_defenders(var_2.origin);
+    }
 
     if(common_scripts\utility::_id_562E(level.kpishouldchain)) {
       var_2 basic_keypoint_interact_trigger_use();
@@ -135,8 +144,9 @@ basic_keypoint_interact_wait_for_complete_or_timeout(var_0) {
   while(level.keypointsinteracted < var_0) {
     wait 0.1;
 
-    if(level.keypointsinteracted >= var_0)
+    if(level.keypointsinteracted >= var_0) {
       return 1;
+    }
   }
 }
 
@@ -153,10 +163,11 @@ basic_keypoint_interact_trigger_hints() {
       break;
   }
 
-  if(!isDefined(level.keypointinteracthint))
+  if(!isDefined(level.keypointinteracthint)) {
     level.keypointinteracthint = "ZOMBIE_DLC3_KEYPOINT_INTERACT_BUILD";
+  }
 
-  self sethintstring(level.keypointinteracthint);
+  self setHintString(level.keypointinteracthint);
 }
 
 basic_keypoint_interact_trigger_use() {
@@ -167,8 +178,9 @@ basic_keypoint_interact_trigger_use() {
   self._id_565F = 1;
   var_1 = self;
 
-  if(isDefined(self.scriptableinitfunc))
+  if(isDefined(self.scriptableinitfunc)) {
     self thread[[self.scriptableinitfunc]]();
+  }
 
   for(;;) {
     self waittill("trigger", var_2);
@@ -180,15 +192,17 @@ basic_keypoint_interact_trigger_use() {
 
       if(common_scripts\utility::_id_562E(var_4)) {
         self makeunusable();
-        self sethintstring(&"ZOMBIES_EMPTY_STRING");
+        self setHintString(&"ZOMBIES_EMPTY_STRING");
 
-        if(isDefined(self.scriptableinitfunc))
+        if(isDefined(self.scriptableinitfunc)) {
           self thread[[self.scriptablerepairedfunc]]();
+        }
 
         level.keypointsinteracted++;
 
-        foreach(var_2 in level.players)
-        var_2 setclientomnvar("ui_onevone_class_4", level.keypointsinteracted);
+        foreach(var_2 in level.players) {
+          var_2 setclientomnvar("ui_onevone_class_4", level.keypointsinteracted);
+        }
 
         self._id_565F = 0;
         self notify("interact_completed");
@@ -215,14 +229,17 @@ basic_keypoint_interact_hold_think(var_0, var_1, var_2) {
   self._id_A22B = 0;
   var_3 = basic_keypoint_interact_think_loop(var_0, var_1);
 
-  if(!common_scripts\utility::_id_562E(var_3))
+  if(!common_scripts\utility::_id_562E(var_3)) {
     level notify("sg_keypoint_interact_incompleted");
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     thread flicker_trigger();
+  }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
   self notify("useHoldThinkLoopDone");
   var_0.radial_interact_active = undefined;
@@ -244,10 +261,11 @@ basic_keypoint_interact_cleanup(var_0, var_1) {
   var_2 = ["death", "useHoldThinkLoopDone"];
 
   if(isDefined(var_1)) {
-    if(_isarray(var_1))
+    if(_isarray(var_1)) {
       var_2 = maps\mp\_utility::array_combine_no_dupes(var_2, var_1);
-    else
+    } else {
       var_2[var_2.size] = var_1;
+    }
   }
 
   var_3 = common_scripts\utility::_id_A712(var_2);
@@ -259,20 +277,22 @@ basic_keypoint_interact_think_loop(var_0, var_1) {
   var_2 = 0;
   level notify("sg_keypoint_interact_start");
 
-  while(isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && var_0 istouching(self)) {
+  while(isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 useButtonPressed() && var_0 istouching(self)) {
     self._id_28D5 = self._id_28D5 + self._id_A22B * 50;
 
-    if(!common_scripts\utility::_id_562E(var_0.radial_interact_active))
+    if(!common_scripts\utility::_id_562E(var_0.radial_interact_active)) {
       var_0.radial_interact_active = 1;
+    }
 
-    if(!self._id_A22B)
+    if(!self._id_A22B) {
       self._id_A22B = 1;
+    }
 
     var_3 = var_1 - self._id_28D5;
 
-    if(var_3 <= 0)
+    if(var_3 <= 0) {
       return 1;
-    else if(!var_2) {
+    } else if(!var_2) {
       var_2 = 1;
       var_0 _meth_866C(&"start_progressive_interact", 1, var_3);
       var_0.radial_interact_active = undefined;
@@ -292,8 +312,9 @@ basic_keypoint_interact_start_tool(var_0) {
   var_4 = var_2[0];
 
   foreach(var_6 in var_2) {
-    if(common_scripts\utility::_id_0F79(var_2, var_3))
+    if(common_scripts\utility::_id_0F79(var_2, var_3)) {
       var_4 = var_3;
+    }
   }
 
   _id_0548::_id_A7D6(var_1, level.keypointinteracttool);
@@ -306,8 +327,9 @@ basic_keypoint_interact_stop_tool(var_0) {
   var_1 = self;
   var_1 enableweaponswitch();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 _id_0586::_id_078E(var_0);
+  }
 
   var_1 _id_0586::_id_0790(level.keypointinteracttool);
   _id_0378::_id_8D74("dlc3_player_repair_stop", level.keypointinteracttool);

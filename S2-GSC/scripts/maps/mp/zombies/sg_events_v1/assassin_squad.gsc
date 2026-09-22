@@ -7,8 +7,9 @@ init() {
   level.assassin_validation_func = maps\mp\zombies\zombie_assassin_basic::_id_A26F;
   maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_meuchler_common", ::basic_assassin_squad_run, 30, 0, 1);
 
-  while(!isDefined(level._id_0A41))
+  while(!isDefined(level._id_0A41)) {
     waitframe();
+  }
 
   maps\mp\zombies\zombie_assassin_basic::init();
 }
@@ -24,10 +25,11 @@ basic_assassin_squad_run(var_0) {
   var_5 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("meuchler_common_leader_type");
   var_6 = 0;
 
-  if(int(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("meuchler_common_all_leaders")))
+  if(int(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("meuchler_common_all_leaders"))) {
     var_7 = common_scripts\utility::random(var_5);
-  else
+  } else {
     var_7 = undefined;
+  }
 
   level.trucks_are_port_locked = 1;
 
@@ -43,14 +45,16 @@ basic_assassin_squad_run(var_0) {
         var_12 = var_5[var_6];
         var_6++;
 
-        if(var_6 == var_5.size)
+        if(var_6 == var_5.size) {
           var_6 = 0;
+        }
       } else {
         var_11 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("meuchler_common_health");
         var_12 = undefined;
 
-        if(isDefined(var_7))
+        if(isDefined(var_7)) {
           var_12 = var_7;
+        }
       }
 
       var_11 = var_11 * maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("meuchler_common_leader_health_buff");
@@ -84,8 +88,9 @@ respawnanassassinsquadzombie() {
   var_0 = self.health;
   var_1 = 0;
 
-  if(isDefined(self.assassin_modifier))
+  if(isDefined(self.assassin_modifier)) {
     var_1 = 1;
+  }
 
   var_2 = common_scripts\utility::_id_46B7("zmb_assassin_spawnpoint_leader", "targetname");
   var_3 = common_scripts\utility::random(var_2);

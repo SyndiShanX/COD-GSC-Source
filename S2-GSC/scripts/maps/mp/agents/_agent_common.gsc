@@ -7,8 +7,9 @@ _id_003D() {
   maps\mp\agents\_agent_utility::_id_5291();
   var_0 = "axis";
 
-  if(level._id_687D % 2 == 0)
+  if(level._id_687D % 2 == 0) {
     var_0 = "allies";
+  }
 
   level._id_687D++;
   maps\mp\agents\_agent_utility::hudoutlineenable(var_0);
@@ -35,19 +36,23 @@ _id_2581(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0)) {
     var_0._id_2589 = gettime();
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_0 maps\mp\agents\_agent_utility::hudoutlineenable(var_2);
-    else
+    } else {
       var_0 maps\mp\agents\_agent_utility::hudoutlineenable(var_0.team);
+    }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_0._id_231C = var_3;
+    }
 
-    if(isDefined(self.target))
+    if(isDefined(self.target)) {
       var_0._id_90AA = self.target;
+    }
 
-    if(isDefined(level._id_0A41[var_1]) && isDefined(level._id_0A41[var_1]["onAIConnect"]))
+    if(isDefined(level._id_0A41[var_1]) && isDefined(level._id_0A41[var_1]["onAIConnect"])) {
       var_0[[var_0 maps\mp\agents\_agent_utility::_id_0A59("onAIConnect")]]();
+    }
 
     _addtocharactersarray(var_0);
   }

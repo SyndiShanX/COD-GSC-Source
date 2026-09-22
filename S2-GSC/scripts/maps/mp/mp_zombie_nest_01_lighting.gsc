@@ -78,18 +78,22 @@ nightvisiongogglesforceon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   var_8.alpha = var_4;
   var_8 thread _id_236B();
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_8.x = var_5;
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_8.y = var_6;
+  }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_8.sort = var_7;
+  }
 
   if(_isarray(var_1)) {
-    foreach(var_10 in var_1)
-    var_8 setshader(var_10, 640, 480);
+    foreach(var_10 in var_1) {
+      var_8 setshader(var_10, 640, 480);
+    }
   } else
     var_8 setshader(var_1, 640, 480);
 
@@ -97,18 +101,21 @@ nightvisiongogglesforceon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     var_8.alpha = 0;
     var_12 = 1;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_12 = var_2;
+    }
 
     var_13 = 1;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_13 = var_3;
+    }
 
     var_14 = 1;
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_14 = clamp(var_4, 0.0, 1.0);
+    }
 
     var_15 = 0.05;
 

@@ -19,8 +19,9 @@ bcs_dlc_trigs_assign_aliases() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.classname) && issubstr(var_3.classname, "trigger_multiple_bcs"))
+    if(isDefined(var_3.classname) && issubstr(var_3.classname, "trigger_multiple_bcs")) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   foreach(var_3 in var_1) {
@@ -29,8 +30,9 @@ bcs_dlc_trigs_assign_aliases() {
     }
     var_6 = parselocationaliases(level.bcs_location_mappings[var_3.classname]);
 
-    if(var_6.size > 1)
+    if(var_6.size > 1) {
       var_6 = common_scripts\utility::array_randomize(var_6);
+    }
 
     var_3._id_5E5C = var_6;
     anim.bcs_locations[anim.bcs_locations.size] = var_3;
@@ -52,8 +54,9 @@ add_bcs_location_mapping(var_0, var_1) {
 
     foreach(var_6 in var_4) {
       foreach(var_8 in var_3) {
-        if(var_6 == var_8)
+        if(var_6 == var_8) {
           return;
+        }
       }
     }
 
@@ -66,8 +69,9 @@ add_bcs_location_mapping(var_0, var_1) {
 }
 
 bcs_dlc_location_trigger_mapping() {
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     mp_raid_dlc3();
+  }
 }
 
 mp_raid_dlc3() {

@@ -4,8 +4,9 @@
 ******************************************************************/
 
 main() {
-  if(!isDefined(level._id_AC6C) || !isDefined(level._id_AC6C["humanoid"]))
+  if(!isDefined(level._id_AC6C) || !isDefined(level._id_AC6C["humanoid"])) {
     _id_52C7();
+  }
 
   _id_32B7();
 }
@@ -15,13 +16,14 @@ _id_4232(var_0) {
 }
 
 _id_4392(var_0, var_1) {
-  if(var_0.type == "Begin 3D")
+  if(var_0.type == "Begin 3D") {
     var_2 = var_0.origin + (0, 0, -16);
-  else {
+  } else {
     var_2 = _getgroundposition(var_0.origin, var_1, 32, 32, 0);
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = var_0.origin;
+    }
   }
 
   return var_2;
@@ -63,8 +65,9 @@ _id_32B7() {
   var_12 = (var_11["origin"][0], var_11["origin"][1], var_2[2]);
   var_13 = _getgroundposition(var_12, self.radius, 32, 32, 0);
 
-  if(!isDefined(var_13))
+  if(!isDefined(var_13)) {
     var_13 = var_11["origin"];
+  }
 
   self._id_9D07 = vectorNormalize(var_13 - var_1);
 
@@ -148,8 +151,9 @@ disableweapons(var_0, var_1) {
   var_0._id_98C3 = undefined;
   var_0._id_A228 = undefined;
 
-  if(!_id_0547::_id_562C(var_0))
+  if(!_id_0547::_id_562C(var_0)) {
     _func_329(var_0, 0);
+  }
 }
 
 _id_9D0A(var_0, var_1, var_2) {
@@ -177,14 +181,17 @@ _id_0085() {
 }
 
 _id_52C7() {
-  if(!isDefined(level._id_AC6C))
+  if(!isDefined(level._id_AC6C)) {
     level._id_AC6C = [];
+  }
 
-  if(!isDefined(level._id_AC6C["humanoid"]))
+  if(!isDefined(level._id_AC6C["humanoid"])) {
     level._id_AC6C["humanoid"] = [];
+  }
 
-  if(!isDefined(level._id_AC6C["zombie_boss_village"]))
+  if(!isDefined(level._id_AC6C["zombie_boss_village"])) {
     level._id_AC6C["zombie_boss_village"] = [];
+  }
 
   level._id_AC6C["humanoid"]["jump_across_100"] = "traverse_jump_across_100";
   level._id_AC6C["humanoid"]["jump_across_196"] = "traverse_jump_across_196";

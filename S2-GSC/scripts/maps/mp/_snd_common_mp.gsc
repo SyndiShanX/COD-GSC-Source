@@ -85,9 +85,9 @@ _id_7247() {
   self clientaddsoundsubmix("mp_init_mix");
   thread _id_8D7F();
 
-  if(!isDefined(level._id_071D._id_351F) || !level._id_071D._id_351F)
+  if(!isDefined(level._id_071D._id_351F) || !level._id_071D._id_351F) {
     self clientaddsoundsubmix("mp_pre_event_mix");
-  else {
+  } else {
     self clientclearsoundsubmix("mp_pre_event_mix");
     self clientaddsoundsubmix("mp_post_event_mix");
   }
@@ -131,8 +131,9 @@ _id_8D7D(var_0) {
   var_1 clientclearsoundsubmix("mp_focus_mode_mix");
 
   if(isDefined(self._id_3D9B) && var_2 > self._id_3D9B + var_3) {
-    if(!isDefined(var_0) || !var_0)
+    if(!isDefined(var_0) || !var_0) {
       var_1._id_3D9D = _id_0380::_id_2888("focus_mode_end", var_1);
+    }
 
     _id_0380::_stoplocalsound(var_1._id_3D9E, 1.0);
     self._id_3D9B = var_2;
@@ -192,8 +193,9 @@ _id_5ABB() {
   var_1 = var_0.origin;
   wait 1.5;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _id_0380::_id_6842("ks_bomb_run_final_tail", undefined, var_1);
+  }
 }
 
 _id_5ABF() {}
@@ -223,10 +225,11 @@ _id_1FF8() {
 _id_1FF7() {
   var_0 = self;
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     _id_0380::_id_6844("mp_ks_crpkg_imp_allies", undefined, self);
-  else
+  } else {
     _id_0380::_id_6844("mp_ks_crpkg_imp_axis", undefined, self);
+  }
 }
 
 _id_6E73() {
@@ -328,10 +331,11 @@ _id_5AC5(var_0) {
 }
 
 _id_5AC4(var_0) {
-  if(var_0 == "missile_strike")
+  if(var_0 == "missile_strike") {
     _id_0380::_id_6844("mp_ks_incoming_close", undefined, self);
-  else if(var_0 == "mortar_strike")
+  } else if(var_0 == "mortar_strike") {
     _id_0380::_id_6844("mp_ks_incoming_close", undefined, self);
+  }
 }
 
 _id_5AC3() {
@@ -423,35 +427,45 @@ _id_4F28(var_0) {
   var_2 = (-2618, 7584, 737);
 
   if(isDefined(var_0)) {
-    if(var_0 == 1)
+    if(var_0 == 1) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_01", undefined, var_2);
+    }
 
-    if(var_0 == 2)
+    if(var_0 == 2) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_02", undefined, var_2);
+    }
 
-    if(var_0 == 3)
+    if(var_0 == 3) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_03", undefined, var_2);
+    }
 
-    if(var_0 == 4)
+    if(var_0 == 4) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_04", undefined, var_2);
+    }
 
-    if(var_0 == 5)
+    if(var_0 == 5) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_05", undefined, var_2);
+    }
 
-    if(var_0 == 6)
+    if(var_0 == 6) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_06", undefined, var_2);
+    }
 
-    if(var_0 == 7)
+    if(var_0 == 7) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_07", undefined, var_2);
+    }
 
-    if(var_0 == 8)
+    if(var_0 == 8) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_08", undefined, var_2);
+    }
 
-    if(var_0 == 9)
+    if(var_0 == 9) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_09", undefined, var_2);
+    }
 
-    if(var_0 == 10)
+    if(var_0 == 10) {
       _id_0380::_id_6842("mp_hub_prestige_fireworks_rank_10", undefined, var_2);
+    }
   }
 }
 

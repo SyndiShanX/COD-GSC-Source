@@ -32,8 +32,9 @@ init() {
   var_1.energyholdpain = 4;
   var_1.throwable = 0;
 
-  if(isDefined(level._id_62AB))
+  if(isDefined(level._id_62AB)) {
     var_1 = [[level._id_62AB]](var_1);
+  }
 
   _id_0547::_id_0A52(var_1, "zombie_heavy");
   _id_0547::_id_7BD0("heavy_charge", _id_0547::zombie_charge_run, undefined, 2.5, _id_0547::zombie_charge_cleanup);
@@ -65,8 +66,9 @@ _id_ABC7(var_0) {
   self._id_915D = var_0;
   self agentsetfavoriteenemy(var_0);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     thread _id_ABC2();
+  }
 }
 
 _id_ABDB() {
@@ -114,8 +116,9 @@ _id_ABC8() {
   self endon("owner_disconnect");
   self _meth_85A1("zombie_heavy");
 
-  if(!common_scripts\utility::_id_562E(level.iszombiesshotgun))
+  if(!common_scripts\utility::_id_562E(level.iszombiesshotgun)) {
     self._id_6816 = 1;
+  }
 
   self._id_2FA4 = 0;
   self._id_915D = undefined;
@@ -137,8 +140,9 @@ _id_ABC8() {
     var_0 = 0.2;
 
     if(!self._id_5542) {
-      if(_id_053C::_id_4F8C())
+      if(_id_053C::_id_4F8C()) {
         continue;
+      }
     }
 
     if(isDefined(self.custom_think_mode)) {
@@ -149,8 +153,9 @@ _id_ABC8() {
     if(common_scripts\utility::_id_562E(self._id_57C0)) {
       continue;
     }
-    if(self._id_5542)
+    if(self._id_5542) {
       _id_0547::zombie_charge_cleanup(self._id_645E);
+    }
 
     if(_id_053C::_id_4F84()) {
       continue;
@@ -192,11 +197,13 @@ _id_ABC8() {
 }
 
 _id_ABBF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(var_5) || !isDefined(var_6) || !isDefined(var_7))
+  if(!isDefined(var_5) || !isDefined(var_6) || !isDefined(var_7)) {
     return 0;
+  }
 
-  if(var_7 != "torso_upper" && var_7 != "torso_lower")
+  if(var_7 != "torso_upper" && var_7 != "torso_lower") {
     return 0;
+  }
 
   var_9 = self gettagangles("j_spineupper");
   var_10 = anglestoright(var_9);
@@ -204,21 +211,25 @@ _id_ABBF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 _id_ABC4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(var_8 == "right_hand")
+  if(var_8 == "right_hand") {
     var_2 = 0;
+  }
 
   if(_id_ABBF(var_0, var_1, var_2, var_4, var_5, var_6, var_7, var_8, var_10)) {
-    if(isDefined(var_4) && var_4 != "MOD_MELEE")
+    if(isDefined(var_4) && var_4 != "MOD_MELEE") {
       var_2 = var_2 * 4;
-    else
+    } else {
       self._id_14EB = 1;
+    }
   } else if(var_8 == "head" && var_5 != "panzerschreck_zm" && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && var_5 != "raven_sword_zm" && !issubstr(var_5, "razergun") && !issubstr(var_5, "throwingknife"))
     var_2 = var_2 * 0.8;
-  else if(var_5 != "panzerschreck_zm" && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && var_5 != "raven_sword_zm" && !issubstr(var_5, "razergun") && !issubstr(var_5, "throwingknife"))
+  else if(var_5 != "panzerschreck_zm" && !issubstr(var_5, "fliegerfaust") && !issubstr(var_5, "tesla") && var_5 != "raven_sword_zm" && !issubstr(var_5, "razergun") && !issubstr(var_5, "throwingknife")) {
     var_2 = var_2 * 0.6;
+  }
 
-  if(var_5 == "bazooka_zm")
+  if(var_5 == "bazooka_zm") {
     var_2 = self.maxhealth;
+  }
 
   _id_054D::_id_6BD1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
@@ -263,8 +274,9 @@ zombie_heavy_grudge_think() {
 }
 
 zombie_heavy_valid_charge_target(var_0) {
-  if(isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::_id_1F5B(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0))
+  if(isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::_id_1F5B(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -274,8 +286,9 @@ zombie_heavy_charge_allowed() {
 }
 
 _id_ABC5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(self._id_78D7 < self._id_6099)
+  if(self._id_78D7 < self._id_6099) {
     self._id_78D7 = self._id_78D7 + var_2;
+  }
 
   if(self._id_78D7 >= self._id_6099 && zombie_heavy_charge_allowed() && zombie_heavy_valid_charge_target(var_1) && (!isDefined(self._id_3043) || !maps\mp\agents\humanoid\_humanoid_util::_id_8BAE()) && !isDefined(self._id_1927) && (!_id_053C::_id_5686() || !common_scripts\utility::_id_0F79(self._id_983C, var_1)) && !common_scripts\utility::_id_562E(self._id_57C0)) {
     _id_ABB7(var_1);
@@ -287,8 +300,9 @@ _id_ABC5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 _id_ABC3() {
-  if(!isDefined(self._id_64C4))
+  if(!isDefined(self._id_64C4)) {
     self._id_64C4 = 1;
+  }
 
   self._id_64C2 = self._id_64C4 * _id_054D::_id_4440();
   return "walk";
@@ -320,18 +334,21 @@ _id_ABB7(var_0) {
 }
 
 _id_ABC0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(_id_ABBF(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9))
+  if(_id_ABBF(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9)) {
     return 1;
+  }
 
   return 0;
 }
 
 zombie_heavy_tesla_delayed_dmg(var_0, var_1, var_2) {
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_0 = maps\mp\gametypes\zombies::_id_1E59();
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_0 = var_2;
+  }
 
   return var_0;
 }

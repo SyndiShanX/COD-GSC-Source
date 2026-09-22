@@ -20,16 +20,18 @@ _id_0A49() {
   var_0 = undefined;
 
   foreach(var_2 in self._id_0117._id_9AC5) {
-    if(var_2._id_A222._id_502A == "domFlag")
+    if(var_2._id_A222._id_502A == "domFlag") {
       var_0 = var_2;
+    }
   }
 
   if(isDefined(var_0)) {
     var_4 = var_0 maps\mp\gametypes\dom::_id_44E3();
 
     if(var_4 != self.team) {
-      if(!maps\mp\bots\_bots_gametype_dom::_id_1A29(var_0))
+      if(!maps\mp\bots\_bots_gametype_dom::_id_1A29(var_0)) {
         maps\mp\bots\_bots_gametype_dom::_id_1FAD(var_0, "critical", 1);
+      }
 
       return 1;
     }

@@ -33,20 +33,24 @@ use_map() {
 wait_for_user_input() {
   var_0 = 1;
 
-  while(self usebuttonpressed())
+  while(self useButtonPressed()) {
     waitframe();
+  }
 
   wait 0.15;
 
   while(var_0) {
-    if(self usebuttonpressed())
+    if(self useButtonPressed()) {
       return "A";
+    }
 
-    if(self jumpbuttonpressed())
+    if(self jumpbuttonPressed()) {
       return "B";
+    }
 
-    if(self _meth_84F1())
+    if(self _meth_84F1()) {
       return "C";
+    }
 
     wait 0.15;
   }

@@ -32,47 +32,53 @@ _id_1A4E() {
 }
 
 _id_1AB3(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level._id_5A59))
+  if(!isDefined(level._id_5A59)) {
     level._id_5A59 = [];
+  }
 
   level._id_5A59[var_0] = var_1;
 
-  if(!isDefined(level._id_5A58))
+  if(!isDefined(level._id_5A58)) {
     level._id_5A58 = [];
+  }
 
   level._id_5A58[var_0] = var_2;
 
-  if(!isDefined(level._id_5A5A))
+  if(!isDefined(level._id_5A5A)) {
     level._id_5A5A = [];
+  }
 
   level._id_5A5A[var_0] = var_3;
 
-  if(!isDefined(level._id_1AF3))
+  if(!isDefined(level._id_1AF3)) {
     level._id_1AF3 = [];
+  }
 
   level._id_1AF3[level._id_1AF3.size] = var_0;
 }
 
 _id_1A38(var_0, var_1) {
-  if(_id_1A49(var_0, "bots", undefined))
+  if(_id_1A49(var_0, "bots", undefined)) {
     return 1;
-  else if(var_1) {}
+  } else if(var_1) {}
 
   return 0;
 }
 
 _id_1A49(var_0, var_1, var_2) {
-  if(!_id_1A4A(var_0, var_1))
+  if(!_id_1A4A(var_0, var_1)) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_1A4A(var_0, var_1) {
-  if(var_1 == "humans")
+  if(var_1 == "humans") {
     return isDefined(level._id_5A61) && isDefined(level._id_5A61[var_0]) && maps\mp\_utility::_id_453F(var_0) != -1;
-  else if(var_1 == "bots")
+  } else if(var_1 == "bots") {
     return isDefined(level._id_5A59) && isDefined(level._id_5A59[var_0]);
+  }
 }
 
 _id_1B01() {
@@ -83,8 +89,9 @@ _id_1B01() {
   level endon("game_ended");
   self._id_1B2F = undefined;
 
-  while(!isDefined(level._id_5A59))
+  while(!isDefined(level._id_5A59)) {
     waitframe();
+  }
 
   for(;;) {
     if(maps\mp\bots\_bots_util::_id_1937()) {
@@ -112,8 +119,9 @@ _id_1B01() {
               var_6 = self[[var_5]](var_2, var_0, var_4, level._id_5A5A[var_2._id_944C]);
 
               if(!isDefined(var_6) || var_6 == 0) {
-                if(!isDefined(self._id_1A51))
+                if(!isDefined(self._id_1A51)) {
                   self._id_1A51 = [];
+                }
 
                 self._id_1A51[var_2._id_944C] = gettime() + 5000;
               }
@@ -147,20 +155,23 @@ _id_A3EB() {
 }
 
 _id_1963(var_0) {
-  if(isDefined(level.empplayer))
+  if(isDefined(level.empplayer)) {
     return 0;
+  }
 
   var_1 = level._id_6C63[self.team];
 
-  if(isDefined(level.teamemped) && isDefined(level.teamemped[var_1]) && level.teamemped[var_1])
+  if(isDefined(level.teamemped) && isDefined(level.teamemped[var_1]) && level.teamemped[var_1]) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_1961(var_0) {
-  if(isDefined(level._id_0B93))
+  if(isDefined(level._id_0B93)) {
     return 0;
+  }
 
   return 1;
 }
@@ -168,11 +179,13 @@ _id_1961(var_0) {
 _id_1A50(var_0, var_1, var_2, var_3) {
   wait(_randomintrange(3, 5));
 
-  if(!maps\mp\bots\_bots_util::_id_1937())
+  if(!maps\mp\bots\_bots_util::_id_1937()) {
     return 1;
+  }
 
-  if(isDefined(var_2) && !self[[var_2]](var_0))
+  if(isDefined(var_2) && !self[[var_2]](var_0)) {
     return 0;
+  }
 
   _id_1AF4(var_0, var_1, var_0._id_01D0);
   return 1;
@@ -181,22 +194,27 @@ _id_1A50(var_0, var_1, var_2, var_3) {
 bot_killstreak_weapon(var_0, var_1, var_2, var_3) {
   wait(_randomintrange(3, 5));
 
-  if(!maps\mp\bots\_bots_util::_id_1937())
+  if(!maps\mp\bots\_bots_util::_id_1937()) {
     return 1;
+  }
 
-  if(isDefined(var_2) && !self[[var_2]](var_0))
+  if(isDefined(var_2) && !self[[var_2]](var_0)) {
     return 0;
+  }
 
   _id_1AF4(var_0, var_1, var_0._id_01D0);
 
-  while(self getcurrentweapon() != var_0._id_01D0)
+  while(self getcurrentweapon() != var_0._id_01D0) {
     waitframe();
+  }
 
-  while(self getammocount(var_0._id_01D0) > 0 && self getcurrentweapon() == var_0._id_01D0)
+  while(self getammocount(var_0._id_01D0) > 0 && self getcurrentweapon() == var_0._id_01D0) {
     waitframe();
+  }
 
-  if(self getcurrentweapon() == var_0._id_01D0)
+  if(self getcurrentweapon() == var_0._id_01D0) {
     self switchtoweapon("none");
+  }
 
   return 1;
 }
@@ -216,21 +234,25 @@ _id_1A41(var_0, var_1, var_2, var_3) {
 _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
   wait(_randomintrange(2, 4));
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "anywhere";
+  }
 
-  if(!maps\mp\bots\_bots_util::_id_1937())
+  if(!maps\mp\bots\_bots_util::_id_1937()) {
     return 1;
+  }
 
-  if(isDefined(var_2) && !self[[var_2]](var_0))
+  if(isDefined(var_2) && !self[[var_2]](var_0)) {
     return 0;
+  }
 
   var_5 = self getweaponammoclip(var_0._id_01D0) + self getweaponammostock(var_0._id_01D0);
 
   if(var_5 == 0) {
     foreach(var_7 in var_1) {
-      if(isDefined(var_7._id_944C) && var_7._id_944C == var_0._id_944C)
+      if(isDefined(var_7._id_944C) && var_7._id_944C == var_0._id_944C) {
         var_7._id_13AF = 0;
+      }
     }
 
     _id_051E::_id_A129(0);
@@ -244,17 +266,19 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
     var_11 = maps\mp\bots\_bots_util::_id_19FA(0, 750, 0.6, 1);
 
     foreach(var_13 in var_11) {
-      if(_nodeexposedtosky(var_13))
+      if(_nodeexposedtosky(var_13)) {
         var_10 = common_scripts\utility::_id_0F6F(var_10, var_13);
+      }
     }
 
     if(var_11.size > 5 && var_10.size > var_11.size * 0.6) {
       var_15 = common_scripts\utility::_id_40B0(self.origin, var_10, undefined, undefined, undefined, 150);
 
-      if(var_15.size > 0)
+      if(var_15.size > 0) {
         var_9 = common_scripts\utility::random(var_15);
-      else
+      } else {
         var_9 = common_scripts\utility::random(var_10);
+      }
     }
   } else if(var_4 == "hidden") {
     var_16 = _getnodesinradius(self.origin, 256, 0, 40);
@@ -264,8 +288,9 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
       var_18 = [];
 
       foreach(var_13 in var_16) {
-        if(_nodesvisible(var_17, var_13, 1))
+        if(_nodesvisible(var_17, var_13, 1)) {
           var_18 = common_scripts\utility::_id_0F6F(var_18, var_13);
+        }
       }
 
       var_9 = self botnodepick(var_18, 1, "node_hide");
@@ -275,8 +300,9 @@ _id_1A3F(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_9) || var_4 == "anywhere") {
     self botsetflag("disable_movement", 1);
 
-    if(isDefined(var_9))
+    if(isDefined(var_9)) {
       self botlookatpoint(var_9.origin, 2.45, "script_forced");
+    }
 
     _id_1AF4(var_0, var_1, var_0._id_01D0);
     wait 2.0;
@@ -296,9 +322,9 @@ _id_1AF4(var_0, var_1, var_2) {
 }
 
 _id_1A87(var_0, var_1) {
-  if(isDefined(var_0._id_5703) && var_0._id_5703)
+  if(isDefined(var_0._id_5703) && var_0._id_5703) {
     self notify("streakUsed1");
-  else {
+  } else {
     for(var_2 = 0; var_2 < 3; var_2++) {
       if(isDefined(var_1[var_2]._id_944C)) {
         if(var_1[var_2]._id_944C == var_0._id_944C) {
@@ -336,10 +362,11 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
   var_9 = _randomfloat(100) > 50;
 
   for(var_10 = 0; var_10 < var_5; var_10++) {
-    if(var_9)
+    if(var_9) {
       var_11 = var_5 - 1 - var_10;
-    else
+    } else {
       var_11 = var_10;
+    }
 
     if(var_11 != var_4 && _botzonegetindoorpercent(var_11) < 0.25) {
       var_12 = _botzonegetcount(var_11, self.team, "enemy_predict");
@@ -353,12 +380,13 @@ _id_1A3D(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(var_6 >= 0)
+  if(var_6 >= 0) {
     var_13 = _getzoneorigin(var_6);
-  else if(var_8.size > 0)
+  } else if(var_8.size > 0) {
     var_13 = _getzoneorigin(common_scripts\utility::random(var_8));
-  else
+  } else {
     var_13 = _getzoneorigin(randomint(level._id_AC9C));
+  }
 
   var_14 = 1;
 
@@ -386,8 +414,9 @@ _id_1B05() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(level._id_5B27))
+  if(!isDefined(level._id_5B27)) {
     level._id_5B27 = -10000;
+  }
 
   if(!isDefined(level._id_5A5B)) {
     level._id_5A5B["allies"] = [];
@@ -439,15 +468,17 @@ _id_1B05() {
 }
 
 _id_1A31(var_0) {
-  if(!isDefined(self._id_0A2D))
+  if(!isDefined(self._id_0A2D)) {
     return 0;
+  }
 
   return common_scripts\utility::_id_0F79(self._id_0A2D, var_0);
 }
 
 _id_62DF(var_0) {
-  if(!isDefined(self._id_0A2D))
+  if(!isDefined(self._id_0A2D)) {
     self._id_0A2D = [];
+  }
 
   self._id_0A2D[self._id_0A2D.size] = var_0;
   var_1 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
@@ -468,8 +499,9 @@ _id_62DF(var_0) {
 }
 
 _id_9E0D(var_0, var_1) {
-  if(!isDefined(level._id_5A5B[self.team][var_0]))
+  if(!isDefined(level._id_5A5B[self.team][var_0])) {
     level._id_5A5B[self.team][var_0] = 0;
+  }
 
   if(!level._id_5A5B[self.team][var_0]) {
     level._id_5A5B[self.team][var_0] = 1;
@@ -493,13 +525,15 @@ _id_6308(var_0, var_1, var_2) {
 }
 
 _id_3741(var_0) {
-  if(maps\mp\_utility::_id_579B())
+  if(maps\mp\_utility::_id_579B()) {
     return 0;
+  }
 
   if(isDefined(level._id_7C66) && isDefined(level._id_7EBB)) {
     foreach(var_2 in level._id_7EBB) {
-      if(var_2.type == "remote" && var_2.team != var_0)
+      if(var_2.type == "remote" && var_2.team != var_0) {
         return 1;
+      }
     }
   }
 
@@ -507,13 +541,15 @@ _id_3741(var_0) {
 }
 
 _id_36FB(var_0) {
-  if(maps\mp\_utility::_id_579B())
+  if(maps\mp\_utility::_id_579B()) {
     return 0;
+  }
 
   if(isDefined(level.makeglobalusable)) {
     foreach(var_2 in level.makeglobalusable) {
-      if(maps\mp\_utility::_id_57E5(var_2._id_944C, "airstrike") && var_2.team != var_0)
+      if(maps\mp\_utility::_id_57E5(var_2._id_944C, "airstrike") && var_2.team != var_0) {
         return 1;
+      }
     }
   }
 

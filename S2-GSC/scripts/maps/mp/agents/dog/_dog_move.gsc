@@ -211,10 +211,11 @@ _id_1F39(var_0) {
 _id_92E9() {
   var_0 = self getnegotiationstartnode();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0.origin;
-  else
+  } else {
     var_1 = self getpathgoalpos();
+  }
 
   if(distancesquared(var_1, self.origin) < 10000) {
     return;
@@ -226,8 +227,9 @@ _id_92E9() {
   if(_length2dsquared(var_4) > 16) {
     var_4 = vectorNormalize(var_4);
 
-    if(vectordot(var_4, var_2) > 0.707)
+    if(vectordot(var_4, var_2) > 0.707) {
       return;
+    }
   }
 
   var_5 = _angleclamp180(var_3[1] - self.angles[1]);
@@ -242,10 +244,11 @@ _id_92E9() {
   var_10 = _getangledelta3d(var_7);
   self scragentsetanimmode("anim deltas");
 
-  if(3 <= var_6 && var_6 <= 5)
+  if(3 <= var_6 && var_6 <= 5) {
     self scragentsetorientmode("face angle abs", (0, _angleclamp180(var_3[1] - var_10[1]), 0));
-  else
+  } else {
     self scragentsetorientmode("face angle abs", self.angles);
+  }
 
   self._id_17E8 = 1;
   maps\mp\agents\_scriptedagents::_id_71FC("move_start", var_6, "move_start");
@@ -300,8 +303,9 @@ _id_3191() {
 }
 
 _id_4AC2(var_0, var_1, var_2, var_3) {
-  if(1)
+  if(1) {
     return 0;
+  }
 
   switch (var_0) {
     case "footstep_back_right_large":
@@ -319,23 +323,27 @@ _id_4AC2(var_0, var_1, var_2, var_3) {
         self._id_5C01 = var_4;
       } else if(isDefined(self._id_5C01))
         var_4 = self._id_5C01;
-      else
+      else {
         var_4 = "dirt";
+      }
 
-      if(var_4 != "dirt" && var_4 != "concrete" && var_4 != "wood" && var_4 != "metal")
+      if(var_4 != "dirt" && var_4 != "concrete" && var_4 != "wood" && var_4 != "metal") {
         var_4 = "dirt";
+      }
 
-      if(var_4 == "concrete")
+      if(var_4 == "concrete") {
         var_4 = "cement";
+      }
 
-      if(self._id_0BA4 == "traverse")
+      if(self._id_0BA4 == "traverse") {
         var_5 = "land";
-      else if(self._id_0108 == "sprint")
+      } else if(self._id_0108 == "sprint") {
         var_5 = "sprint";
-      else if(self._id_0108 == "fastwalk")
+      } else if(self._id_0108 == "fastwalk") {
         var_5 = "walk";
-      else
+      } else {
         var_5 = "run";
+      }
 
       self playsoundonmovingent("dogstep_" + var_5 + "_" + var_4);
 
@@ -343,10 +351,11 @@ _id_4AC2(var_0, var_1, var_2, var_3) {
         var_6 = "anml_dog_mvmt_accent";
         var_7 = "anml_dog_mvmt_vest";
 
-        if(var_5 == "walk")
+        if(var_5 == "walk") {
           var_8 = "_npc";
-        else
+        } else {
           var_8 = "_run_npc";
+        }
 
         self playsoundonmovingent(var_6 + var_8);
         self playsoundonmovingent(var_7 + var_8);
@@ -364,10 +373,11 @@ _id_31FC(var_0) {
   self._id_018F = 1;
   var_1 = _angleclamp180(var_0 - self.angles[1]);
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     var_2 = 1;
-  else
+  } else {
     var_2 = 0;
+  }
 
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);

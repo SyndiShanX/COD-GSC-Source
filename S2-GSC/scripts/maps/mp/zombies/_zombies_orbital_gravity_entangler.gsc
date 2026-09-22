@@ -33,8 +33,9 @@ init() {
 
 get_color_for_grenade(var_0) {
   foreach(var_2 in level.zmb_all_side_ee_colors) {
-    if(issubstr(var_0, var_2))
+    if(issubstr(var_0, var_2)) {
       return var_2;
+    }
   }
 
   return "";
@@ -47,7 +48,7 @@ watch_for_grab() {
   for(;;) {
     waitframe();
 
-    if(!var_0 usebuttonpressed()) {
+    if(!var_0 useButtonPressed()) {
       continue;
     }
     level.grenades_in_orbit = common_scripts\utility::_id_0FA0(level.grenades_in_orbit);
@@ -86,9 +87,9 @@ watch_for_entanglements() {
           level.grenades_in_orbit = common_scripts\utility::_id_0F93(level.grenades_in_orbit, var_4);
           var_5 = get_hyper_color(var_2._id_3F74, var_4._id_3F74);
 
-          if(isDefined(var_5))
+          if(isDefined(var_5)) {
             var_2 set_fx(var_5);
-          else {
+          } else {
             var_2 _meth_8561(var_2._id_A9E0, var_2._id_0117, var_2);
             var_2 remove_fake_projectile();
           }
@@ -107,8 +108,9 @@ watchplayerjump() {
   var_0 = self;
   var_0 endon("disconnect");
 
-  for(;;)
+  for(;;) {
     var_0 waittill("jumped");
+  }
 }
 
 rotate_me(var_0) {
@@ -117,13 +119,14 @@ rotate_me(var_0) {
   for(;;) {
     var_1 = 1;
 
-    if(common_scripts\utility::_id_562E(var_0))
+    if(common_scripts\utility::_id_562E(var_0)) {
       var_1 = -1;
+    }
 
     if(_isremovedentity(self)) {
       return;
     }
-    self rotateyaw(var_1 * 180, 1);
+    self rotateYaw(var_1 * 180, 1);
     wait 1;
   }
 }
@@ -132,10 +135,11 @@ remove_grenade_color() {
   var_0 = self;
   var_1 = var_0.grenadecolorsheld[0];
 
-  if(var_0.grenadecolorsheld.size > 1)
+  if(var_0.grenadecolorsheld.size > 1) {
     var_0.grenadecolorsheld = common_scripts\utility::_id_0FA3(var_0.grenadecolorsheld, 1);
-  else
+  } else {
     var_0.grenadecolorsheld = [];
+  }
 
   return var_1;
 }
@@ -176,10 +180,11 @@ watch_for_grenades_and_projectiles(var_0) {
     if(!isDefined(var_8)) {
       continue;
     }
-    if(var_9)
+    if(var_9) {
       var_8 linktosynchronizedparent(level.oribital_rotator_1);
-    else
+    } else {
       var_8 linktosynchronizedparent(level.oribital_rotator_2);
+    }
 
     if(!isDefined(var_8)) {
       continue;
@@ -199,18 +204,20 @@ move_no_gravity(var_0, var_1) {
   var_5 = bulletTrace(var_4, var_3, 0);
   var_6 = var_5["position"];
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = var_3;
+  }
 
   var_7 = distance(var_0 getEye(), var_6) / var_1;
-  var_2 moveto(var_6, var_7);
+  var_2 moveTo(var_6, var_7);
   wait(var_7);
   var_2.forcedetonate = 1;
 }
 
 spawn_a_fake_grenade(var_0, var_1) {
-  if(!isDefined(level.zmb_gravity_grenades))
+  if(!isDefined(level.zmb_gravity_grenades)) {
     level.zmb_gravity_grenades = [];
+  }
 
   var_2 = self;
   var_3 = var_2 common_scripts\utility::_id_8FFC();
@@ -227,14 +234,16 @@ spawn_a_fake_grenade(var_0, var_1) {
 }
 
 get_all_magical_grenades() {
-  if(!isDefined(level.zmb_gravity_grenades))
+  if(!isDefined(level.zmb_gravity_grenades)) {
     return [];
+  }
 
   var_0 = [];
 
   foreach(var_2 in level.zmb_gravity_grenades) {
-    if(!_isremovedentity(var_2))
+    if(!_isremovedentity(var_2)) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   return var_0;
@@ -299,33 +308,39 @@ handle_detonation(var_0, var_1) {
 get_hyper_color(var_0, var_1) {
   var_2 = [var_0, var_1];
 
-  if(_id_4B29("blue", var_2) && _id_4B29("yellow", var_2))
+  if(_id_4B29("blue", var_2) && _id_4B29("yellow", var_2)) {
     return "proj_trail_green";
+  }
 
-  if(_id_4B29("blue", var_2) && _id_4B29("red", var_2))
+  if(_id_4B29("blue", var_2) && _id_4B29("red", var_2)) {
     return "proj_trail_magenta";
+  }
 
-  if(_id_4B29("blue", var_2) && _id_4B29("green", var_2))
+  if(_id_4B29("blue", var_2) && _id_4B29("green", var_2)) {
     return "proj_trail_cyan";
+  }
 }
 
 _id_4B29(var_0, var_1) {
   foreach(var_3 in var_1) {
-    if(issubstr(var_3, var_0))
+    if(issubstr(var_3, var_0)) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 wait_frames(var_0) {
-  for(var_1 = 0; var_1 < var_0; var_1++)
+  for(var_1 = 0; var_1 < var_0; var_1++) {
     waitframe();
+  }
 }
 
 set_fx(var_0) {
-  if(isDefined(self.fx))
+  if(isDefined(self.fx)) {
     self.fx delete();
+  }
 
   self._id_3F74 = var_0;
   self.fx = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_0), self, "tag_fx");
@@ -353,16 +368,18 @@ seek_enemy_targets(var_0, var_1) {
 
     var_3--;
 
-    if(!var_2)
+    if(!var_2) {
       waitframe();
+    }
   }
 
   if(_isremovedentity(self)) {
     return;
   }
   if(_id_0547::_id_5565(var_1, "throwingknife_zm")) {
-    if(!isDefined(self.lethallevel))
+    if(!isDefined(self.lethallevel)) {
       self.lethallevel = 0;
+    }
 
     if(self.lethallevel == 0) {
       var_6 = common_scripts\utility::_id_4461(self.origin, _id_0547::_id_408F());
@@ -381,8 +398,9 @@ seek_enemy_targets(var_0, var_1) {
 }
 
 remove_fake_projectile() {
-  if(isDefined(self.fx))
+  if(isDefined(self.fx)) {
     self.fx delete();
+  }
 
   self delete();
 }

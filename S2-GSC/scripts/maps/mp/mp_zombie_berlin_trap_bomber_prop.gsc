@@ -4,10 +4,10 @@
 *****************************************************************/
 
 trap_bomber_prop(var_0) {
-  var_1 = _getent("zmb_trap_bomber_engine_mdl", "script_noteworthy");
-  var_2 = _getent("propeller_center_fx_trap", "script_noteworthy");
+  var_1 = _getEnt("zmb_trap_bomber_engine_mdl", "script_noteworthy");
+  var_2 = _getEnt("propeller_center_fx_trap", "script_noteworthy");
   var_1 _id_0378::_id_8D74("start_trap_prop", 0.5);
-  var_3 = _getent("propeller_damage", "script_noteworthy");
+  var_3 = _getEnt("propeller_damage", "script_noteworthy");
   var_3._id_9C92 = var_0;
   var_3._id_9CBB = "trap_bomber_prop";
   wait 0.3;
@@ -26,9 +26,9 @@ do_damage_propeller(var_0, var_1) {
   for(;;) {
     var_0 waittill("trigger", var_2);
 
-    if(isPlayer(var_2))
+    if(isPlayer(var_2)) {
       var_2 dodamage(10, self.origin, var_0, var_0, "MOD_EXPLOSIVE", "trap_zm_mp");
-    else {
+    } else {
       var_2 toss_ragdoll(var_1, var_0);
       var_0 _id_0378::_id_8D74("trap_prop_damage");
     }

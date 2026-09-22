@@ -23,8 +23,9 @@ init() {
 }
 
 initialize_zmi_final_boss_settings() {
-  if(!isDefined(level.zmi_final_boss_settings))
+  if(!isDefined(level.zmi_final_boss_settings)) {
     level.zmi_final_boss_settings = [];
+  }
 
   set_island_final_boss_settings_casual();
 }
@@ -46,11 +47,13 @@ wait_for_boss_intro_done() {
   self.bossintroassassin = 1;
   self.preformingbossintro = 1;
 
-  if(isDefined(self.mod_fx))
+  if(isDefined(self.mod_fx)) {
     self.mod_fx delete();
+  }
 
-  while(!isDefined(level.zmb_final_boss_intro_goal))
+  while(!isDefined(level.zmb_final_boss_intro_goal)) {
     waitframe();
+  }
 
   while(_distance2d(self.origin, level.zmb_final_boss_intro_goal.origin) > 64) {
     self._id_1928 = level.zmb_final_boss_intro_goal;
@@ -78,8 +81,9 @@ spawn_a_fireman() {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(_id_0547::_id_5565(var_5.getnegotiationnextnode, "zmb_boss_fight_brenner_intro"))
+    if(_id_0547::_id_5565(var_5.getnegotiationnextnode, "zmb_boss_fight_brenner_intro")) {
       var_3 = common_scripts\utility::_id_0F6F(var_3, var_5);
+    }
   }
 
   foreach(var_5 in var_3) {
@@ -95,7 +99,7 @@ spawn_a_fireman() {
   var_11 = [];
 
   for(var_12 = 1; var_12 < 35; var_12++) {
-    var_5 = _getent("fire_panel_" + var_12, "targetname");
+    var_5 = _getEnt("fire_panel_" + var_12, "targetname");
     var_9 = common_scripts\utility::_id_0F6F(var_9, var_5);
   }
 
@@ -112,8 +116,9 @@ spawn_a_fireman() {
     var_16 = var_11;
     var_16 = common_scripts\utility::_id_0FA3(common_scripts\utility::array_randomize(var_16), 0, int(maps\mp\zquests\casual\island_ee_main::get_difficulty_setting("zmb_assassin_boss_num_fire_panels") - 1));
 
-    foreach(var_5 in var_16)
-    level thread maps\mp\zquests\casual\island_ee_main::fire_panels_new(var_5);
+    foreach(var_5 in var_16) {
+      level thread maps\mp\zquests\casual\island_ee_main::fire_panels_new(var_5);
+    }
 
     wait 8.5;
   }
@@ -124,8 +129,9 @@ open_sub_pens_door() {
   level.stop_final_boss_fire_alarm = 1;
   level.continue_final_boss_fire = 0;
 
-  if(level.zmi_final_boss_settings["phase_2_mercy"])
+  if(level.zmi_final_boss_settings["phase_2_mercy"]) {
     level notify("sub_pen_blockers_open");
+  }
 }
 
 ensure_sub_pens_door_opened() {
@@ -136,13 +142,15 @@ start_zombie_island_boss_phase(var_0) {
   level.zmb_locked_spawn_zones = get_spawner_targetname_for_phase(var_0.start_zone);
   var_0 childthread maps\mp\zquests\casual\island_ee_util::enforce_zombie_limit();
 
-  if(isDefined(var_0.assassinmanagerfunc))
+  if(isDefined(var_0.assassinmanagerfunc)) {
     var_0 thread[[var_0.assassinmanagerfunc]]();
+  }
 
   maps\mp\mp_zombie_island_cart::make_a_transport_request(undefined, undefined, "lockdown", var_0.start_zone, var_0.next_zone);
 
-  if(var_0.final_phase)
+  if(var_0.final_phase) {
     level thread maps\mp\mp_zombie_island_ee_fog_manager::set_fog_locked_to_off();
+  }
 
   level thread run_assassin_boss_phase(var_0.phase_flag, var_0.phase_num, var_0.optionalbossspawnoverride, int(maps\mp\zquests\casual\island_ee_main::get_difficulty_setting("zmb_assassin_boss_health_" + var_0.phase_num)), var_0.num_alive, var_0.num_to_kill, var_0.enable_death, var_0.assassin_alarm_overrides, var_0.optionalsetenteredgame);
   wait_for_phase_combat(var_0);
@@ -188,11 +196,13 @@ remove_cart_data(var_0) {
 }
 
 set_fireman_spawn_flag() {
-  while(level.zmb_transport_system["current_station"] != "start_zone")
+  while(level.zmb_transport_system["current_station"] != "start_zone") {
     wait 0.125;
+  }
 
-  while(level.zmb_island_artillery_sled common_scripts\utility::_id_3794("zmb_island_cart_path_mid_complete"))
+  while(level.zmb_island_artillery_sled common_scripts\utility::_id_3794("zmb_island_cart_path_mid_complete")) {
     wait 0.125;
+  }
 
   maps\mp\mp_zombie_island_cart::wait_for_cart_finished_with_mid_route();
   common_scripts\utility::flag_set("spawn_the_fireman_zombie");
@@ -210,8 +220,9 @@ run_assassin_zombie_rush(var_0) {
 get_spawner_targetname_for_phase(var_0) {
   var_1 = [];
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "start_zone";
+  }
 
   switch (var_0) {
     case "start_zone":
@@ -242,8 +253,9 @@ wait_for_phase_combat(var_0) {
 
 wait_for_players_to_mine_cart(var_0) {
   if(!var_0.final_phase) {
-    if(_id_0547::_id_5565(var_0.phase_flag, "zombie_island_boss_phase_1"))
+    if(_id_0547::_id_5565(var_0.phase_flag, "zombie_island_boss_phase_1")) {
       level thread set_fireman_spawn_flag();
+    }
 
     level.zmb_island_artillery_sled waittill("arrived at " + var_0.next_zone);
     common_scripts\utility::flag_set(var_0.phase_flag);
@@ -254,8 +266,9 @@ kill_remaining_zombies(var_0) {
   level.zmb_island_artillery_sled waittill("cart_start_leave_done");
   var_1 = _id_0547::_id_408F();
 
-  foreach(var_3 in var_1)
-  var_3 suicide();
+  foreach(var_3 in var_1) {
+    var_3 suicide();
+  }
 }
 
 get_rush_spawners() {
@@ -298,8 +311,9 @@ show_transport_instructions() {
 }
 
 add_zmb_island_boss_phase(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(!isDefined(level.zmb_island_final_boss_phases))
+  if(!isDefined(level.zmb_island_final_boss_phases)) {
     level.zmb_island_final_boss_phases = [];
+  }
 
   var_11 = spawnStruct();
   var_11.assassinmanagerfunc = var_5;
@@ -329,14 +343,17 @@ run_assassin_boss_phase(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     var_13 = [];
 
     for(var_14 = 0; var_14 < var_4; var_14++) {
-      if(var_1 == 3)
+      if(var_1 == 3) {
         var_11 = ["vista_middle_zone", "high_canon"];
+      }
 
-      if(var_1 == 4)
+      if(var_1 == 4) {
         var_11 = ["start_zone"];
+      }
 
-      if(var_1 == 2)
+      if(var_1 == 2) {
         common_scripts\utility::_id_3C9F("fireman_boss_wait");
+      }
 
       var_15 = undefined;
 
@@ -356,10 +373,11 @@ run_assassin_boss_phase(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       var_19 = "Phase 1: Entrance";
 
       if(common_scripts\utility::_id_562E(var_18)) {
-        if(var_1 <= 1)
+        if(var_1 <= 1) {
           var_19 = "Phase 3: ATTACK";
-        else
+        } else {
           var_19 = "Phase 2: EXIT AMBUSH";
+        }
       }
 
       var_20 = maps\mp\zombies\zombie_assassin_spawner_logic::spawn_an_assassin(var_9[var_10], var_3, var_15, var_18, var_19, 1, 0, undefined, var_17, 1, "boss look", var_11);
@@ -367,8 +385,9 @@ run_assassin_boss_phase(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       if(var_18) {
         var_20 _id_0547::disableoffhandsecondaryweapons();
 
-        if(var_1 <= 1)
+        if(var_1 <= 1) {
           var_20.noflurry = 1;
+        }
       }
 
       var_20.enable_final_death = var_6;
@@ -390,8 +409,9 @@ wait_for_assassin_wave_clear(var_0) {
     var_3 = [];
 
     foreach(var_5 in var_1) {
-      if(common_scripts\utility::_id_562E(var_5.activeassassinboss))
+      if(common_scripts\utility::_id_562E(var_5.activeassassinboss)) {
         var_3 = common_scripts\utility::_id_0F6F(var_3, var_5);
+      }
     }
 
     if(var_3.size == 0) {
@@ -406,8 +426,9 @@ wait_for_assassin_wave_clear(var_0) {
 init_final_boss_event() {
   var_0 = _id_0547::_id_408F();
 
-  foreach(var_2 in var_0)
-  var_2 suicide();
+  foreach(var_2 in var_0) {
+    var_2 suicide();
+  }
 }
 
 move_players_to_boss_start() {
@@ -424,29 +445,33 @@ move_players_to_boss_start() {
     level.players[var_1] maps\mp\mp_zombie_island_fog_zones::set_should_restore_fog_vision_isolated_room();
     level.players[var_1] setOrigin(level.zmb_island_final_boss_phases_spawns[var_1].origin);
 
-    if(isDefined(level.zmb_island_final_boss_phases_spawns[var_1].angles))
+    if(isDefined(level.zmb_island_final_boss_phases_spawns[var_1].angles)) {
       level.players[var_1] setplayerangles(level.zmb_island_final_boss_phases_spawns[var_1].angles);
+    }
 
     level.players[var_1] setclientomnvar("ui_hide_hud", 1);
     level.players[var_1] allowfire(0);
     level.players[var_1] hideviewmodel();
     level.players[var_1] _id_0547::_id_8A6D(1);
-    level.players[var_1] playerlinkto(var_0);
+    level.players[var_1] playerlinkTo(var_0);
     level.players[var_1]._id_480F = 1;
     level.players[var_1] disableoffhandweapons();
     level.players[var_1] disableoffhandsecondaryweapons();
   }
 
-  while(!maps\mp\mp_zombie_island_ee_fog_manager::is_fog_rolling_in())
+  while(!maps\mp\mp_zombie_island_ee_fog_manager::is_fog_rolling_in()) {
     waitframe();
+  }
 
-  for(var_1 = 0; var_1 < level.players.size; var_1++)
+  for(var_1 = 0; var_1 < level.players.size; var_1++) {
     level.players[var_1] maps\mp\mp_zombie_island_fog_zones::set_should_restore_fog_vision_isolated_room();
+  }
 
   waitframe();
 
-  for(var_1 = 0; var_1 < level.players.size; var_1++)
+  for(var_1 = 0; var_1 < level.players.size; var_1++) {
     level.players[var_1] thread maps\mp\mp_zombie_island_fog_zones::set_light_and_fog("mp_zombie_island", "mp_zombie_island", 1, 1);
+  }
 
   common_scripts\utility::flag_set("players_boss_spawn_done");
   wait 1;

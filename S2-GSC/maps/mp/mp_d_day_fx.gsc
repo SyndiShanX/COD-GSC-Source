@@ -171,6 +171,7 @@ main() {
   level._effect["godray"] = loadfx("vfx/map/mp_d_day/godray_d_day");
   level._effect["cloud_shadows_lrg"] = loadfx("vfx/cloud/cloud_shadows_lrg");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_d_day_fx::main();
+  }
 }

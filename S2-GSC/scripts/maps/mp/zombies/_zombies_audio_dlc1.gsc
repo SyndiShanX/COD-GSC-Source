@@ -138,14 +138,15 @@ addwavestory(var_0, var_1, var_2) {
   if(!isDefined(var_0) || isDefined(var_0) && var_0.size <= 0) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_3 = 0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = spawnStruct();
-  else {
+  } else {
     var_3 = level.wavestories.stories.size;
     var_4 = level.wavestories;
   }
@@ -185,27 +186,30 @@ play_wave_story(var_0) {
     var_3 = undefined;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     try_run_conversation(var_3);
-  else {
+  } else {
     if(var_1 >= 0) {
       playnextwavestory(0, var_1);
       return;
     }
 
-    for(var_4 = 0; var_4 < level.wavestories.stories.size; var_4++)
+    for(var_4 = 0; var_4 < level.wavestories.stories.size; var_4++) {
       playnextwavestory(0, var_4);
+    }
   }
 }
 
 playnextwavestory(var_0, var_1, var_2) {
-  if(!isDefined(level.currentwavestoryindex))
+  if(!isDefined(level.currentwavestoryindex)) {
     level.currentwavestoryindex = 0;
+  }
 
   var_3 = level.currentwavestoryindex;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   var_4 = level.wavestories.stories[var_3];
 
@@ -213,8 +217,9 @@ playnextwavestory(var_0, var_1, var_2) {
     return;
   }
   if(!should_play_a_wave_story()) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       level thread[[common_scripts\utility::random(var_2)]]();
+    }
 
     return;
   }
@@ -223,23 +228,29 @@ playnextwavestory(var_0, var_1, var_2) {
 }
 
 should_play_a_wave_story(var_0) {
-  if(level.wavestories.story_playing)
+  if(level.wavestories.story_playing) {
     return 0;
+  }
 
-  if(intense_objective_active(var_0))
+  if(intense_objective_active(var_0)) {
     return 0;
+  }
 
-  if(zombie_wave_maxed())
+  if(zombie_wave_maxed()) {
     return 0;
+  }
 
-  if(common_scripts\utility::_id_562E(level._id_AC21))
+  if(common_scripts\utility::_id_562E(level._id_AC21)) {
     return 0;
+  }
 
-  if(common_scripts\utility::_id_562E(var_0))
+  if(common_scripts\utility::_id_562E(var_0)) {
     return 1;
+  }
 
-  if(players_already_talking())
+  if(players_already_talking()) {
     return 0;
+  }
 
   return 1;
 }
@@ -250,8 +261,9 @@ zombie_wave_maxed() {
 
 players_already_talking() {
   foreach(var_1 in level.players) {
-    if(common_scripts\utility::_id_562E(var_1._id_57DE))
+    if(common_scripts\utility::_id_562E(var_1._id_57DE)) {
       return 1;
+    }
   }
 
   return 0;
@@ -270,8 +282,9 @@ intense_objective_active(var_0) {
   }
 
   foreach(var_4 in var_2) {
-    if(issubstr(var_1, var_4))
+    if(issubstr(var_1, var_4)) {
       return 1;
+    }
   }
 
   return 0;
@@ -279,22 +292,25 @@ intense_objective_active(var_0) {
 
 try_run_conversation(var_0, var_1, var_2, var_3) {
   if(!validate_players_in_story(var_0)) {
-    if(common_scripts\utility::_id_562E(var_3))
+    if(common_scripts\utility::_id_562E(var_3)) {
       wait 5.5;
+    }
 
     return 0;
   }
 
-  if(!isDefined(level.currentwavestoryindex))
+  if(!isDefined(level.currentwavestoryindex)) {
     level.currentwavestoryindex = 0;
+  }
 
   level.wavestories.story_playing = 1;
   level.currentwavestoryindex++;
   var_4 = 0;
   level endon("story_timed_out");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level thread timeout_conversation(var_2);
+  }
 
   foreach(var_6 in var_0._id_5D99) {
     var_7 = var_6._id_90BE;
@@ -338,8 +354,9 @@ timeout_conversation(var_0) {
 }
 
 radio_message_all(var_0) {
-  foreach(var_2 in level.players)
-  var_2 thread plr_play_radio_message(var_0);
+  foreach(var_2 in level.players) {
+    var_2 thread plr_play_radio_message(var_0);
+  }
 }
 
 plr_play_radio_message(var_0) {
@@ -353,11 +370,13 @@ wait_for_radio_message_done(var_0) {
 }
 
 get_speaker_alive(var_0) {
-  if(_id_0547::_id_57E1(var_0))
+  if(_id_0547::_id_57E1(var_0)) {
     return 0;
+  }
 
-  if(var_0.sessionstate == "spectator")
+  if(var_0.sessionstate == "spectator") {
     return 0;
+  }
 
   return 1;
 }
@@ -368,8 +387,9 @@ validate_players_in_story(var_0) {
     var_2 = get_all_alive_player_character_names();
 
     foreach(var_4 in var_1) {
-      if(!common_scripts\utility::_id_0F79(var_2, var_4))
+      if(!common_scripts\utility::_id_0F79(var_2, var_4)) {
         return 0;
+      }
     }
   }
 
@@ -397,8 +417,9 @@ get_all_alive_player_character_names() {
         break;
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = "custom";
+    }
 
     var_0 = common_scripts\utility::_id_0F6F(var_0, var_3);
   }
@@ -409,8 +430,9 @@ get_all_alive_player_character_names() {
 get_expected_characters() {
   var_0 = [];
 
-  foreach(var_2 in self._id_5D99)
-  var_0 = common_scripts\utility::_id_0F6F(var_0, var_2._id_90BE);
+  foreach(var_2 in self._id_5D99) {
+    var_0 = common_scripts\utility::_id_0F6F(var_0, var_2._id_90BE);
+  }
 
   return var_0;
 }

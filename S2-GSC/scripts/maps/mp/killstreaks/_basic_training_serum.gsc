@@ -56,8 +56,9 @@ startcombatbuff() {
   _id_0513::_id_A13B();
 
   foreach(var_1 in level.basictrainingserumperks) {
-    if(!maps\mp\_utility::_hasperk(var_1))
+    if(!maps\mp\_utility::_hasperk(var_1)) {
       maps\mp\_utility::giveperk(var_1);
+    }
   }
 
   thread maps\mp\killstreaks\_raid_ss_serum_util::altered_state_apply(0, level.serumbasictrainingactiveduration, "orange", 0.25, 0.125, 0.4);
@@ -65,8 +66,9 @@ startcombatbuff() {
   self waittill("serum_finished");
 
   foreach(var_1 in level.basictrainingserumperks) {
-    if(!maps\mp\killstreaks\_raid_ss_serum_util::serumhadperk(var_1))
+    if(!maps\mp\killstreaks\_raid_ss_serum_util::serumhadperk(var_1)) {
       maps\mp\_utility::_id_0735(var_1);
+    }
   }
 
   self.raidbasictrainingbuff = undefined;

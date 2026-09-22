@@ -15,10 +15,11 @@ watchaudiologsubmixes() {
     var_1 = getdvarint("snd_playing_log");
 
     if(var_1 != var_0) {
-      if(var_1)
+      if(var_1) {
         level.player clientaddsoundsubmix("zm_audio_log_mix");
-      else
+      } else {
         level.player clientclearsoundsubmix("zm_audio_log_mix");
+      }
 
       var_0 = var_1;
     }

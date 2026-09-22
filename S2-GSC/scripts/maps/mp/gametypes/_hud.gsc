@@ -37,10 +37,11 @@ init() {
 _id_3DDA(var_0) {
   self._id_15FC = self.fontscale;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self._id_6085 = _min(var_0, 6.3);
-  else
+  } else {
     self._id_6085 = _min(self.fontscale * 2, 6.3);
+  }
 
   self._id_5136 = 2;
   self._id_6C71 = 4;

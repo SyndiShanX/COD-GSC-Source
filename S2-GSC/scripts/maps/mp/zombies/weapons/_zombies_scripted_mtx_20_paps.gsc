@@ -23,8 +23,9 @@ required_weapon(var_0) {
   if(_id_0569::_id_55D4(var_2)) {
     var_2 = var_1 maps\mp\_events_z::set_last_checked_weapon(var_2);
 
-    if(!_id_0547::_id_5565(var_2, var_0))
+    if(!_id_0547::_id_5565(var_2, var_0)) {
       return 0;
+    }
   } else
     return 0;
 
@@ -79,7 +80,7 @@ green_splode(var_0) {
   var_0 endon("disconnect");
   var_1.bouttoblow = 1;
   waitframe();
-  _playfxontag(common_scripts\utility::_id_44F5("zmi_m2hyde_acid_dot"), var_1, "tag_eye");
+  _playFXOnTag(common_scripts\utility::_id_44F5("zmi_m2hyde_acid_dot"), var_1, "tag_eye");
   var_1 childthread loop_green_fx();
   wait(_randomfloat(3));
 
@@ -94,7 +95,7 @@ loop_green_fx() {
   var_0 = self;
 
   for(;;) {
-    _playfxontag(common_scripts\utility::_id_44F5("zmb_green_zmb_stun"), var_0, "j_spine4");
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_green_zmb_stun"), var_0, "j_spine4");
     wait 0.75;
   }
 }
@@ -114,13 +115,15 @@ randomize_clip_size() {
   var_1 = _weaponclipsize(var_0.weapontoadjust, var_0);
 
   if(isDefined(var_0.weapontoadjust)) {
-    if(randomint(3) <= 1)
+    if(randomint(3) <= 1) {
       var_2 = _randomintrange(15, 20);
-    else
+    } else {
       var_2 = _randomintrange(30, var_1);
+    }
 
-    if(randomint(100) <= 2)
+    if(randomint(100) <= 2) {
       var_2 = _randomintrange(4, 9);
+    }
 
     self setweaponammoclip(var_0.weapontoadjust, var_2);
     self givemaxammo(var_0.weapontoadjust);
@@ -131,22 +134,25 @@ attempt_reload_action(var_0, var_1) {
   var_2 = self;
   var_2 endon("disconnect");
 
-  if(!var_2 required_weapon(var_1))
+  if(!var_2 required_weapon(var_1)) {
     return;
-  else
+  } else {
     var_2.weapontoadjust = var_2 getcurrentweapon();
+  }
 
   var_2 childthread[[var_0]]();
 
-  while(weapon_clip_empty(var_1))
+  while(weapon_clip_empty(var_1)) {
     waitframe();
+  }
 }
 
 weapon_clip_empty(var_0) {
   var_1 = self;
 
-  if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon())))
+  if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon()))) {
     return 1;
+  }
 
   return var_1 getcurrentweaponclipammo() == 0;
 }
@@ -167,10 +173,11 @@ sqrd_dist_between_segments(var_0, var_1, var_2, var_3) {
   var_16 = 0;
 
   if(var_14 <= var_5) {
-    if(var_11 > var_9)
+    if(var_11 > var_9) {
       var_15 = var_13 / var_11;
-    else
+    } else {
       var_15 = var_12 / var_9;
+    }
   } else {
     var_15 = (var_12 * var_10 - var_11 * var_13) / var_14;
     var_16 = (var_11 * var_12 - var_13 * var_9) / var_14;

@@ -38,8 +38,9 @@ _id_764D() {
 fighterinitmg(var_0) {
   var_1 = 0;
 
-  if(isDefined(self.setlookatanimnodes))
+  if(isDefined(self.setlookatanimnodes)) {
     var_1 = self.setlookatanimnodes;
+  }
 
   self._id_615C = [];
 
@@ -49,36 +50,40 @@ fighterinitmg(var_0) {
     var_6 = _combineangles(var_4, (0, -1 * var_1, 0));
     var_7 = undefined;
 
-    if(isDefined(var_3._id_6A1B))
+    if(isDefined(var_3._id_6A1B)) {
       var_7 = var_5 + _rotatevector(var_3._id_6A1B, var_4);
-    else
+    } else {
       var_7 = var_5;
+    }
 
     var_8 = _spawnturret(var_3._id_231A, var_7, var_3._id_5135);
     var_8._id_01D1 = var_3._id_5135;
     var_8.angles = var_6;
     var_8 dontinterpolate();
 
-    if(isDefined(var_3._id_6A1B))
-      var_8 linkto(self, var_3._id_95A6, var_3._id_6A1B, (0, -1 * var_1, 0));
-    else
-      var_8 linkto(self, var_3._id_95A6, (0, 0, 0), (0, -1 * var_1, 0));
+    if(isDefined(var_3._id_6A1B)) {
+      var_8 linkTo(self, var_3._id_95A6, var_3._id_6A1B, (0, -1 * var_1, 0));
+    } else {
+      var_8 linkTo(self, var_3._id_95A6, (0, 0, 0), (0, -1 * var_1, 0));
+    }
 
     var_8 setModel(var_3.model);
     var_8._id_5847 = 1;
     var_8._id_6DB3 = self;
     var_8 makeusable();
 
-    if(isDefined(var_3._id_00FC))
+    if(isDefined(var_3._id_00FC)) {
       var_8._id_00FC = var_3._id_00FC;
+    }
 
     self._id_615C[self._id_615C.size] = var_8;
   }
 }
 
 buildfighterturret(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level._id_A372))
+  if(!isDefined(level._id_A372)) {
     level._id_A372 = [];
+  }
 
   var_5 = level._id_A635;
   var_6 = spawnStruct();
@@ -87,10 +92,11 @@ buildfighterturret(var_0, var_1, var_2, var_3, var_4) {
   var_6._id_95A6 = var_2;
   var_6.model = var_3;
 
-  if(isDefined(var_4) && var_4 == 1)
+  if(isDefined(var_4) && var_4 == 1) {
     var_6._id_9B81 = 1;
-  else
+  } else {
     var_6._id_9B81 = 0;
+  }
 
   return var_6;
 }
@@ -117,8 +123,9 @@ deathcleanup() {
   _id_36B3();
   _id_941A();
 
-  if(0)
+  if(0) {
     _id_93FF();
+  }
 }
 
 _id_51FB(var_0) {
@@ -126,14 +133,17 @@ _id_51FB(var_0) {
   self._id_2A89 = "tag_trail_fx";
   self._id_9BDD = "tag_trail_fx";
 
-  if(self gettagindex("tag_trail_fx") < 0)
+  if(self gettagindex("tag_trail_fx") < 0) {
     self._id_2A89 = "tag_origin";
+  }
 
-  if(self gettagindex("tag_trail_fx") < 0)
+  if(self gettagindex("tag_trail_fx") < 0) {
     self._id_9BDD = "tag_origin";
+  }
 
-  if(0)
+  if(0) {
     thread _id_721B();
+  }
 
   thread _id_3F3B();
   thread _id_3F5D();
@@ -142,18 +152,21 @@ _id_51FB(var_0) {
 }
 
 spawn_tag_origin_internal() {
-  if(isDefined(level._id_5FEB))
+  if(isDefined(level._id_5FEB)) {
     var_0 = spawn("script_model", level._id_5FEB);
-  else
+  } else {
     var_0 = spawn("script_model", (0, 0, 0));
+  }
 
   var_0 setModel("tag_origin");
 
-  if(isDefined(self.origin))
+  if(isDefined(self.origin)) {
     var_0.origin = self.origin;
+  }
 
-  if(isDefined(self.angles))
+  if(isDefined(self.angles)) {
     var_0.angles = self.angles;
+  }
 
   return var_0;
 }
@@ -188,8 +201,9 @@ _id_6DB8() {
     var_10 = level.players;
     var_10 = common_scripts\utility::_id_0F93(var_10, var_0);
 
-    if(var_10.size > 0)
+    if(var_10.size > 0) {
       _id_02F2::_id_7FFA("raid_hit_air_dmg_npc", var_8, undefined, undefined, undefined, undefined, var_10);
+    }
 
     var_1 = 1;
     var_2 = common_scripts\utility::_id_44F5("20mm_metal_impact_1");
@@ -201,12 +215,13 @@ _id_6DB8() {
       var_11.fx = var_2;
       var_11.origin = var_8;
       var_11.angles = self gettagangles(self._id_9BDD);
-      var_11 linkto(self, self._id_9BDD);
+      var_11 linkTo(self, self._id_9BDD);
       self._id_29B1[self._id_29B1.size] = var_11;
-      _playfxontag(var_11.fx, var_11, "tag_origin");
+      _playFXOnTag(var_11.fx, var_11, "tag_origin");
 
-      if(var_3 > 0)
+      if(var_3 > 0) {
         thread _id_6DB9(var_3, var_11);
+      }
     }
   }
 }
@@ -217,7 +232,7 @@ _id_6DB7() {
   if(isDefined(self._id_29B1)) {
     foreach(var_1 in self._id_29B1) {
       if(isDefined(var_1)) {
-        _stopfxontag(var_1.fx, var_1, "tag_origin");
+        _stopFXOnTag(var_1.fx, var_1, "tag_origin");
         var_1 delete();
       }
     }
@@ -230,12 +245,13 @@ _id_6DB9(var_0, var_1) {
   wait(var_0);
 
   if(isDefined(var_1) && isDefined(self) && isDefined(self._id_29B1)) {
-    _stopfxontag(var_1.fx, var_1, "tag_origin");
+    _stopFXOnTag(var_1.fx, var_1, "tag_origin");
     self._id_29B1 = common_scripts\utility::_id_0F93(self._id_29B1, var_1);
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 _id_721B() {
@@ -245,17 +261,18 @@ _id_721B() {
   common_scripts\utility::_id_379A("engineeffects");
   var_0 = undefined;
 
-  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("p47_exhaust");
-  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+  } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("bf109_exhaust");
+  }
 
   if(isDefined(var_0)) {
     for(;;) {
       common_scripts\utility::_id_379C("engineeffects");
-      _playfxontag(var_0, self, self._id_9BDD);
+      _playFXOnTag(var_0, self, self._id_9BDD);
       common_scripts\utility::_id_37A1("engineeffects");
-      _stopfxontag(var_0, self, self._id_9BDD);
+      _stopFXOnTag(var_0, self, self._id_9BDD);
     }
   }
 }
@@ -267,25 +284,29 @@ _id_93FF() {
 _id_720A() {
   var_0 = undefined;
 
-  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("p47_contrail_ext_vel");
-  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+  } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("bf109_contrail_ext_vel");
+  }
 
-  if(isDefined(var_0))
-    _playfxontag(var_0, self, self._id_9BDD);
+  if(isDefined(var_0)) {
+    _playFXOnTag(var_0, self, self._id_9BDD);
+  }
 }
 
 _id_93FB() {
   var_0 = undefined;
 
-  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("p47_contrail_ext_vel");
-  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+  } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("bf109_contrail_ext_vel");
+  }
 
-  if(isDefined(var_0))
-    _stopfxontag(var_0, self, self._id_9BDD);
+  if(isDefined(var_0)) {
+    _stopFXOnTag(var_0, self, self._id_9BDD);
+  }
 }
 
 _id_36B3() {
@@ -297,25 +318,29 @@ _id_36B3() {
 _id_74EE() {
   var_0 = undefined;
 
-  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("p47_wing_evap");
-  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+  } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("bf109_wing_evap");
+  }
 
-  if(isDefined(var_0))
-    _playfxontag(var_0, self, self._id_9BDD);
+  if(isDefined(var_0)) {
+    _playFXOnTag(var_0, self, self._id_9BDD);
+  }
 }
 
 _id_941A() {
   var_0 = undefined;
 
-  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp")
+  if(self._id_01C8 == "usa_fighter_thunderbolt_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("p47_wing_evap");
-  else if(self._id_01C8 == "ger_fighter_bf109_player_mp")
+  } else if(self._id_01C8 == "ger_fighter_bf109_player_mp") {
     var_0 = common_scripts\utility::_id_44F5("bf109_wing_evap");
+  }
 
-  if(isDefined(var_0))
-    _stopfxontag(var_0, self, self._id_9BDD);
+  if(isDefined(var_0)) {
+    _stopFXOnTag(var_0, self, self._id_9BDD);
+  }
 }
 
 _id_36EF() {
@@ -339,11 +364,13 @@ _id_3F3B() {
     var_5 = var_3[2];
     var_6 = 0;
 
-    if(var_5 > var_1 && var_5 < 360 - var_1 || var_5 < -1 * var_1 && var_5 > -1 * (360 - var_1))
+    if(var_5 > var_1 && var_5 < 360 - var_1 || var_5 < -1 * var_1 && var_5 > -1 * (360 - var_1)) {
       var_6 = 1;
+    }
 
-    if(var_4 > var_2 && var_4 < 360 - var_2 || var_4 < -1 * var_2 && var_4 > -1 * (360 - var_2))
+    if(var_4 > var_2 && var_4 < 360 - var_2 || var_4 < -1 * var_2 && var_4 > -1 * (360 - var_2)) {
       var_6 = 1;
+    }
 
     if(var_6 && !var_0) {
       _id_720A();
@@ -400,8 +427,9 @@ _id_3F5D() {
     var_4 = var_3[2];
     var_5 = 0;
 
-    if(var_4 > var_1 && var_4 < 360 - var_1 || var_4 < -1 * var_1 && var_4 > -1 * (360 - var_1))
+    if(var_4 > var_1 && var_4 < 360 - var_1 || var_4 < -1 * var_1 && var_4 > -1 * (360 - var_1)) {
       var_5 = 1;
+    }
 
     if(var_5 && !var_0) {
       _id_74EE();
@@ -422,8 +450,9 @@ _id_996C() {
     self waittill("veh_collision", var_0, var_1, var_2);
 
     if(!isDefined(var_2) || !isPlayer(var_2)) {
-      if(isDefined(self._id_6703) && !self._id_6703)
+      if(isDefined(self._id_6703) && !self._id_6703) {
         self notify("veh_collision_except_player");
+      }
 
       continue;
     }

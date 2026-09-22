@@ -36,7 +36,7 @@ _id_5F38(var_0) {
       var_3 = var_2 + var_1 * 15000;
       var_4 = bulletTrace(var_2, var_3, 1, var_0, 1, 0, 0, 0, 0);
       var_0._id_5F39.origin = var_4["position"];
-      self missile_settargetent(var_0._id_5F39);
+      self missile_settargetEnt(var_0._id_5F39);
     }
 
     waitframe();
@@ -44,14 +44,16 @@ _id_5F38(var_0) {
 }
 
 _id_5F3A(var_0) {
-  if(!isDefined(self._id_5F37))
+  if(!isDefined(self._id_5F37)) {
     self._id_5F37 = 1;
-  else
+  } else {
     self._id_5F37++;
+  }
 
   var_0 waittill("death");
   self._id_5F37--;
 
-  if(self._id_5F37 == 0)
+  if(self._id_5F37 == 0) {
     self delete();
+  }
 }

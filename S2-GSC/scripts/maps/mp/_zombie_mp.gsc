@@ -159,8 +159,9 @@ zombies_init_generic() {
   var_7.shockbyteslablood = 1;
   var_7.knockbybladebarbarossa = 1;
 
-  if(isDefined(level._id_62AB))
+  if(isDefined(level._id_62AB)) {
     var_7 = [[level._id_62AB]](var_7);
+  }
 
   _id_0547::_id_0A52(var_7, "mp_zombie_generic");
   _id_0547::registeranimtree("mp_zombie_generic", #animtree);
@@ -260,8 +261,9 @@ spawnzombiesforteam(var_0, var_1, var_2) {
       level.zombiearray[level.zombiearray.size] = var_4;
       var_4 thread dozombiethings();
 
-      if(level.gametype == "undead")
+      if(level.gametype == "undead") {
         var_4 handlezombieaggro(level.players, ::quicksort_hardpoint_dist_compare);
+      }
     }
 
     waitframe();
@@ -333,8 +335,9 @@ handlezombieaggro(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(maps\mp\_utility::isreallyalive(var_4))
+    if(maps\mp\_utility::isreallyalive(var_4)) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   var_2 = common_scripts\utility::_id_7897(var_2, var_1);
@@ -375,8 +378,9 @@ _id_6BD7(var_0, var_1, var_2) {
   var_3 _id_0547::_id_AC48("agent_type", self._id_0A4B);
   var_3 _id_0547::_id_AC4D();
 
-  if(isDefined(level._id_AC60[self._id_0A4B]))
+  if(isDefined(level._id_AC60[self._id_0A4B])) {
     level._id_AC60[self._id_0A4B]++;
+  }
 
   thread _id_054D::_id_ABE0();
 }
@@ -384,11 +388,13 @@ _id_6BD7(var_0, var_1, var_2) {
 _id_6BD1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   self playSound("zvox_gen_pain_lrg");
 
-  if(var_4 == "MOD_BURNED")
+  if(var_4 == "MOD_BURNED") {
     var_2 = int(var_2 * 1.5);
+  }
 
-  if(isDefined(var_5) && maps\mp\_utility::getweaponclass(var_5) == "weapon_other" && !issubstr(var_5, "riotshield_mp"))
+  if(isDefined(var_5) && maps\mp\_utility::getweaponclass(var_5) == "weapon_other" && !issubstr(var_5, "riotshield_mp")) {
     var_2 = 666;
+  }
 
   maps\mp\agents\_agents::_id_6A73(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
@@ -401,8 +407,9 @@ _id_6BD4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   _id_054D::_id_90BC(self._id_08D9, var_3, var_4);
 
   if(isPlayer(var_1)) {
-    if(!isDefined(var_1.pers["zombieKills"]))
+    if(!isDefined(var_1.pers["zombieKills"])) {
       var_1.pers["zombieKills"] = 0;
+    }
 
     var_1.pers["zombieKills"]++;
 

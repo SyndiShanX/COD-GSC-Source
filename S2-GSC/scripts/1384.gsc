@@ -82,10 +82,11 @@ _id_5A97(var_0, var_1) {
   var_2 maps\mp\agents\_agent_utility::hudoutlineenable(level._id_746E);
   var_2._id_6701 = 1;
 
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     var_2 _id_0547::disableoffhandsecondaryweapons();
-  else
+  } else {
     var_2 thread _id_0547::_id_7D1A("klauspossum");
+  }
 
   return var_2;
 }
@@ -202,8 +203,9 @@ klaus_knockback_effect_think() {
           var_2 = 200;
           var_3 = 1 - distance(self.origin + (0, 0, 42), var_1.origin) / var_2;
 
-          if(var_3 < 0)
+          if(var_3 < 0) {
             var_3 = 0;
+          }
 
           var_1 klaus_knockback(self.origin + (0, 0, 42), var_3 * var_2 + 100);
         }
@@ -219,8 +221,9 @@ klaus_knockback(var_0, var_1) {
   var_3 = var_1 * vectorNormalize(var_2);
   var_3 = (var_3[0], var_3[1], 150);
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     self setvelocity(var_3);
+  }
 }
 
 _id_5A96() {

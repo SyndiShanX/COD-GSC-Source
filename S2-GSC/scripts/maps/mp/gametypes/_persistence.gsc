@@ -62,11 +62,13 @@ _id_529D() {
 
 statget(var_0) {
   if(maps\mp\_utility::_id_585F()) {
-    if(var_0 == "experience")
+    if(var_0 == "experience") {
       var_0 = "totalXP";
+    }
 
-    if(var_0 == "prestige")
+    if(var_0 == "prestige") {
       var_0 = "prestigeLevel";
+    }
   }
 
   return self getplayerdata(common_scripts\utility::_id_46AE(), var_0);
@@ -99,10 +101,11 @@ statadd(var_0, var_1, var_2) {
 }
 
 statgetchild(var_0, var_1) {
-  if(var_0 == "round")
+  if(var_0 == "round") {
     return self getplayerdata(common_scripts\utility::_id_46A7(), var_0, var_1);
-  else
+  } else {
     return self getplayerdata(common_scripts\utility::_id_46AE(), var_0, var_1);
+  }
 }
 
 statsetchild(var_0, var_1, var_2) {
@@ -115,9 +118,9 @@ statsetchild(var_0, var_1, var_2) {
   if(_func_367()) {
     return;
   }
-  if(var_0 == "round")
+  if(var_0 == "round") {
     self setplayerdata(common_scripts\utility::_id_46A7(), var_0, var_1, var_2);
-  else {
+  } else {
     if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::_id_761E()) {
       return;
     }
@@ -140,8 +143,9 @@ stataddchild(var_0, var_1, var_2) {
 }
 
 statgetchildbuffered(var_0, var_1) {
-  if(!maps\mp\_utility::rankingenabled())
+  if(!maps\mp\_utility::rankingenabled()) {
     return 0;
+  }
 
   return self.bufferedchildstats[var_0][var_1];
 }
@@ -167,11 +171,13 @@ _id_9316(var_0, var_1, var_2) {
   }
   var_3 = statgetbuffered(var_0) + var_1;
 
-  if(var_3 > var_2)
+  if(var_3 > var_2) {
     var_3 = var_2;
+  }
 
-  if(var_3 < statgetbuffered(var_0))
+  if(var_3 < statgetbuffered(var_0)) {
     var_3 = var_2;
+  }
 
   statsetbuffered(var_0, var_3);
 }
@@ -182,18 +188,21 @@ _id_9319(var_0, var_1, var_2, var_3) {
   }
   var_4 = statgetchildbuffered(var_0, var_1) + var_2;
 
-  if(var_4 > var_3)
+  if(var_4 > var_3) {
     var_4 = var_3;
+  }
 
-  if(var_4 < statgetchildbuffered(var_0, var_1))
+  if(var_4 < statgetchildbuffered(var_0, var_1)) {
     var_4 = var_3;
+  }
 
   statsetchildbuffered(var_0, var_1, var_4);
 }
 
 statgetbuffered(var_0) {
-  if(!maps\mp\_utility::rankingenabled())
+  if(!maps\mp\_utility::rankingenabled()) {
     return 0;
+  }
 
   return self.bufferedstats[var_0].value;
 }
@@ -224,8 +233,9 @@ updatebufferedstats() {
     maps\mp\gametypes\_hostmigration::_id_A782();
     var_0++;
 
-    if(var_0 >= level.players.size)
+    if(var_0 >= level.players.size) {
       var_0 = 0;
+    }
 
     if(isDefined(level.players[var_0])) {
       level.players[var_0] writebufferedstats();
@@ -260,8 +270,9 @@ writebufferedstats() {
         continue;
       }
 
-      if(var_0)
+      if(var_0) {
         self setplayerdata(common_scripts\utility::_id_46AE(), var_3, var_7, var_6);
+      }
     }
   }
 }
@@ -319,8 +330,9 @@ _id_50FF(var_0, var_1, var_2) {
         if(var_10 != var_3) {
           var_11 = self getplayerdata(common_scripts\utility::_id_46AE(), "weaponStats", var_10, "kills");
 
-          if(var_5 > var_11)
+          if(var_5 > var_11) {
             self setplayerdata(common_scripts\utility::_id_46AE(), "bestLethalID", maps\mp\_utility::_id_452A(var_3));
+          }
         }
       }
     } else if(var_1 == "assists") {
@@ -330,8 +342,9 @@ _id_50FF(var_0, var_1, var_2) {
         if(var_12 != var_3) {
           var_13 = self getplayerdata(common_scripts\utility::_id_46AE(), "weaponStats", var_12, "assists");
 
-          if(var_5 > var_13)
+          if(var_5 > var_13) {
             self setplayerdata(common_scripts\utility::_id_46AE(), "bestTacticalID", maps\mp\_utility::_id_452A(var_3));
+          }
         }
       }
     }
@@ -392,8 +405,9 @@ incrementscorestreakstat(var_0, var_1, var_2) {
         if(var_9 != var_0) {
           var_10 = self getplayerdata(common_scripts\utility::_id_46AE(), "scorestreakStats", var_9, "killsOrAssists");
 
-          if(var_4 > var_10)
+          if(var_4 > var_10) {
             self setplayerdata(common_scripts\utility::_id_46AE(), "bestScorestreakAttackID", maps\mp\_utility::_id_452A(var_0));
+          }
         }
       }
     }
@@ -427,32 +441,41 @@ _id_A195() {
   }
 
   if(var_2 == "gl") {
-    if(self._id_9BBC > 0)
+    if(self._id_9BBC > 0) {
       _id_50F9(var_2, "shots", self._id_9BBC);
+    }
 
-    if(self._id_9BBA > 0)
+    if(self._id_9BBA > 0) {
       _id_50F9(var_2, "kills", self._id_9BBA);
+    }
 
-    if(self._id_9BB9 > 0)
+    if(self._id_9BB9 > 0) {
       _id_50F9(var_2, "hits", self._id_9BB9);
+    }
 
-    if(self._id_9BB7 > 0)
+    if(self._id_9BB7 > 0) {
       _id_50F9(var_2, "headShots", self._id_9BB7);
+    }
 
-    if(self._id_9BB6 > 0)
+    if(self._id_9BB6 > 0) {
       _id_50F9(var_2, "deaths", self._id_9BB6);
+    }
 
-    if(self._id_9BB8 > 0)
+    if(self._id_9BB8 > 0) {
       _id_50F9(var_2, "hipfirekills", self._id_9BB8);
+    }
 
-    if(self._id_9BBD > 0)
+    if(self._id_9BBD > 0) {
       _id_50F9(var_2, "timeInUse", self._id_9BBD);
+    }
 
-    if(self.trackingweaponassists > 0)
+    if(self.trackingweaponassists > 0) {
       _id_50F9(var_2, "assists", self.trackingweaponassists);
+    }
 
-    if(self.trackingweaponmultikills > 0)
+    if(self.trackingweaponmultikills > 0) {
       _id_50F9(var_2, "multikills", self.trackingweaponmultikills);
+    }
 
     self._id_9BBB = "none";
     self._id_9BBC = 0;
@@ -526,46 +549,55 @@ _id_A195() {
       continue;
     }
     if(self._id_9BBC > 0) {
-      if(var_9 != "tactical")
+      if(var_9 != "tactical") {
         _id_50F9(var_9, "shots", self._id_9BBC);
+      }
     }
 
     if(self._id_9BBA > 0) {
-      if(var_9 != "tactical")
+      if(var_9 != "tactical") {
         _id_50F9(var_9, "kills", self._id_9BBA);
+      }
     }
 
     if(self._id_9BB9 > 0) {
-      if(var_9 != "tactical")
+      if(var_9 != "tactical") {
         _id_50F9(var_9, "hits", self._id_9BB9);
+      }
     }
 
     if(self._id_9BB7 > 0) {
-      if(var_9 != "tactical")
+      if(var_9 != "tactical") {
         _id_50F9(var_9, "headShots", self._id_9BB7);
+      }
     }
 
     if(self._id_9BB8 > 0) {
-      if(var_9 != "tactical")
+      if(var_9 != "tactical") {
         _id_50F9(var_9, "hipfirekills", self._id_9BB8);
+      }
     }
 
     if(self._id_9BBD > 0) {
-      if(var_9 != "tactical")
+      if(var_9 != "tactical") {
         _id_50F9(var_9, "timeInUse", self._id_9BBD);
+      }
     }
 
-    if(self._id_9BB6 > 0)
+    if(self._id_9BB6 > 0) {
       _id_50F9(var_9, "deaths", self._id_9BB6);
+    }
 
     if(self.trackingweaponassists > 0) {
-      if(var_9 != "tactical")
+      if(var_9 != "tactical") {
         _id_50F9(var_9, "assists", self.trackingweaponassists);
+      }
     }
 
     if(self.trackingweaponmultikills > 0) {
-      if(var_9 != "tactical")
+      if(var_9 != "tactical") {
         _id_50F9(var_9, "multikills", self.trackingweaponmultikills);
+      }
     }
   }
 
@@ -594,8 +626,9 @@ _id_A1C2() {
   var_4 = 0;
   var_5 = 0;
 
-  foreach(var_7 in level.players)
-  var_5 = var_5 + var_7._id_9A06["total"];
+  foreach(var_7 in level.players) {
+    var_5 = var_5 + var_7._id_9A06["total"];
+  }
 
   _incrementcounter("global_minutes", int(var_5 / 60));
 

@@ -41,18 +41,21 @@ removed_quest_hint() {
 }
 
 quest_ensure_proper_hints(var_0) {
-  if(common_scripts\utility::_id_562E(level.quest_assert_no_hints) && isDefined(var_0))
+  if(common_scripts\utility::_id_562E(level.quest_assert_no_hints) && isDefined(var_0)) {
     var_0 = undefined;
+  }
 
   return var_0;
 }
 
 _id_7846(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 1;
+  }
 
   var_3 = quest_ensure_proper_hints(var_3);
   var_7 = spawnStruct();
@@ -71,10 +74,11 @@ _id_7846(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7._id_76A7 = common_scripts\utility::_id_98E7(isDefined(var_2), var_2, []);
   level._id_ABE8[var_0] = var_7;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_8 = common_scripts\utility::_id_0F79(["mp_zombie_nest_01", "mp_zombie_training"], maps\mp\_utility::_id_4571());
-  else
+  } else {
     var_4 = "ZOMBIES_EMPTY_STRING";
+  }
 
   var_7._id_4DAD = var_4;
   common_scripts\utility::flag_init(var_0);
@@ -89,8 +93,9 @@ _id_782F(var_0, var_1, var_2) {
   var_3._id_2AF8 = var_2;
 
   if(isDefined(var_1)) {
-    if(!_isarray(var_1))
+    if(!_isarray(var_1)) {
       var_1 = [var_1];
+    }
 
     foreach(var_5 in var_1) {
       if(!_id_5642(var_5)) {
@@ -102,28 +107,31 @@ _id_782F(var_0, var_1, var_2) {
 
   level._id_0BD7 = common_scripts\utility::_id_0F6F(level._id_0BD7, var_3);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_3._id_7B06 = var_0;
-  else if(var_3._id_37C5.size)
+  } else if(var_3._id_37C5.size) {
     var_3._id_7B06 = var_3._id_37C5[0].origin;
+  }
 
   var_3 _id_7844(var_3._id_7B06, "objective_create");
   return var_3;
 }
 
 _id_781D(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 = _id_7832(var_0);
 
   if(var_3._id_933D != "in progress") {
     return;
   }
-  if(var_2)
+  if(var_2) {
     var_3._id_2917 = common_scripts\utility::_id_0F6F(var_3._id_2917, var_1);
-  else
+  } else {
     var_3._id_6F77 = common_scripts\utility::_id_0F6F(var_3._id_6F77, var_1);
+  }
 
   var_1._id_7840 = common_scripts\utility::_id_0F6F(var_1._id_7840, var_0);
 
@@ -132,8 +140,9 @@ _id_781D(var_0, var_1, var_2) {
   }
   level._id_08CC = common_scripts\utility::_id_0F6F(level._id_08CC, var_1);
 
-  foreach(var_5 in _id_42B9())
-  _id_783A(var_5, var_1);
+  foreach(var_5 in _id_42B9()) {
+    _id_783A(var_5, var_1);
+  }
 }
 
 _id_7847(var_0, var_1) {
@@ -174,8 +183,9 @@ _id_783E(var_0, var_1) {
 }
 
 _id_7838(var_0, var_1, var_2) {
-  if(!common_scripts\utility::_id_562E(var_2))
+  if(!common_scripts\utility::_id_562E(var_2)) {
     _id_7820(var_0, var_1);
+  }
 
   return "flag " + var_0 + " " + var_1;
 }
@@ -186,17 +196,18 @@ _id_1D88(var_0) {
   var_1 = _id_7836(var_0);
   var_2 = common_scripts\utility::_id_0F7E(level._id_7874, var_0);
 
-  if(var_0._id_8BDE && isDefined(var_0._id_4DAC) || isDefined(var_1) && var_0._id_8BE1 && isDefined(var_1._id_4DAC))
+  if(var_0._id_8BDE && isDefined(var_0._id_4DAC) || isDefined(var_1) && var_0._id_8BE1 && isDefined(var_1._id_4DAC)) {
     _id_378C(var_0);
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     level._id_7874 = common_scripts\utility::_id_0F93(level._id_7874, var_0);
 
     if(var_2 < 3) {
       _id_7CAF(var_0);
       _id_7CB6(var_0);
 
-      if(level._id_7874.size >= 3)
+      if(level._id_7874.size >= 3) {
         _id_378D(level._id_7874[2]);
+      }
 
       _id_7ACA();
     }
@@ -244,10 +255,11 @@ _id_20BC(var_0, var_1, var_2) {
   var_4 = _id_7835(var_3, var_1);
   var_2 = quest_ensure_proper_hints(var_2);
 
-  if(_id_0547::_id_5565(var_4._id_00D4, var_3._id_939A))
+  if(_id_0547::_id_5565(var_4._id_00D4, var_3._id_939A)) {
     _id_7822(var_0, var_2);
-  else
+  } else {
     var_4._id_4DAC = var_2;
+  }
 }
 
 _id_7822(var_0, var_1) {
@@ -256,8 +268,9 @@ _id_7822(var_0, var_1) {
   var_3 = _id_7836(var_2);
   var_1 = quest_ensure_proper_hints(var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3._id_4DAC = var_1;
+  }
 
   _id_1D88(var_2);
 }
@@ -274,8 +287,9 @@ _id_782A() {
       continue;
     }
 
-    if(var_2.type == 1)
+    if(var_2.type == 1) {
       zombie_collectable_internal_global_collect_on_join(var_2);
+    }
   }
 }
 
@@ -307,14 +321,17 @@ _id_AB88(var_0) {
 }
 
 should_write_match_data(var_0, var_1) {
-  if(common_scripts\utility::_id_562E(level._id_783F))
+  if(common_scripts\utility::_id_562E(level._id_783F)) {
     return 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0 >= var_1)
+  if(var_0 >= var_1) {
     return 0;
+  }
 
   return 1;
 }
@@ -340,8 +357,9 @@ quest_analytics_objective_step(var_0, var_1) {
     if(isDefined(level.player)) {
       var_4 = level.player _id_055A::_id_462D();
 
-      if(!isDefined(var_4))
+      if(!isDefined(var_4)) {
         var_4 = "none";
+      }
 
       setmatchdata("objective_steps", var_2, "area", var_4);
     }
@@ -360,8 +378,9 @@ quest_analytics_match_summary() {
     if(isDefined(var_3._id_924E)) {
       var_6 = var_0;
 
-      if(isDefined(var_3._id_3BA1))
+      if(isDefined(var_3._id_3BA1)) {
         var_6 = var_3._id_3BA1;
+      }
 
       var_5 = (var_6 - var_3._id_924E) * var_4;
     }
@@ -391,16 +410,19 @@ quest_analytics_match_summary() {
     if(quest_should_write_match_data(var_3.objective_index)) {
       var_12 = var_1;
 
-      if(isDefined(var_3.finish_game_ms))
+      if(isDefined(var_3.finish_game_ms)) {
         var_12 = var_3.finish_game_ms;
+      }
 
       var_13 = var_1;
 
-      if(isDefined(var_3.start_game_ms))
+      if(isDefined(var_3.start_game_ms)) {
         var_13 = var_3.start_game_ms;
+      }
 
-      if(!isDefined(var_7))
+      if(!isDefined(var_7)) {
         var_7 = "unknown";
+      }
 
       setmatchdata("objectives", var_3.objective_index, "description", var_3.name);
       setmatchdata("objectives", var_3.objective_index, "start_time_ms", var_13);
@@ -413,24 +435,29 @@ quest_analytics_match_summary() {
 _id_7844(var_0, var_1, var_2, var_3) {
   var_4 = "";
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2.name;
+  }
 
-  if(isDefined(var_2) && !isDefined(var_3))
+  if(isDefined(var_2) && !isDefined(var_3)) {
     var_3 = _id_7836(var_2);
+  }
 
   var_5 = "";
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 = var_3.name;
+  }
 
   var_6 = "";
 
-  if(isDefined(self._id_2AF8))
+  if(isDefined(self._id_2AF8)) {
     var_6 = self._id_2AF8;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "";
+  }
 
   var_7 = _id_0547::_id_AC4B(var_0, "questsubevent");
   var_7 _id_0547::_id_AC48("category", var_1);
@@ -447,13 +474,15 @@ _id_7837() {
   if(isDefined(level._id_ABE8)) {
     foreach(var_3, var_2 in level._id_ABE8) {
       if(var_2._id_933D == "in progress") {
-        if(var_0 != "")
+        if(var_0 != "") {
           var_0 = var_0 + ",";
+        }
 
         var_0 = var_0 + var_3;
 
-        if(isDefined(var_2._id_939A))
+        if(isDefined(var_2._id_939A)) {
           var_0 = var_0 + ("/" + var_2._id_939C[var_2._id_939A].name);
+        }
       }
     }
   }
@@ -480,14 +509,16 @@ _id_7849(var_0) {
   _id_7844(undefined, "quest_start", var_0, undefined);
   _id_20BA(var_0.name, var_0._id_4DAC);
 
-  if(quest_should_write_match_data(var_0.objective_index))
+  if(quest_should_write_match_data(var_0.objective_index)) {
     setmatchdata("objectives", var_0.objective_index, "start_time_ms", var_0.start_game_ms);
+  }
 
   for(var_0._id_939A = 0; var_0._id_939A < var_0._id_939C.size; var_0._id_939A++) {
     var_4 = var_0._id_939C[var_0._id_939A];
 
-    if(isDefined(var_4._id_A09A))
+    if(isDefined(var_4._id_A09A)) {
       level childthread[[var_4._id_A09A]]();
+    }
 
     var_4._id_924E = gettime();
     var_4._id_92AF = level._id_A980;
@@ -506,8 +537,9 @@ _id_7849(var_0) {
     }
 
     foreach(var_7 in var_4._id_9399) {
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         level childthread[[var_7]]();
+      }
     }
   }
 
@@ -529,8 +561,9 @@ _id_7849(var_0) {
     _id_783D(var_5, var_0);
   }
 
-  if(isDefined(var_0._id_782C))
+  if(isDefined(var_0._id_782C)) {
     level childthread[[var_0._id_782C]]();
+  }
 
   common_scripts\utility::flag_set(var_0.name);
 }
@@ -542,8 +575,9 @@ _id_7832(var_0) {
 
 _id_7833(var_0, var_1) {
   foreach(var_3 in var_0._id_939C) {
-    if(var_3.name == var_1)
+    if(var_3.name == var_1) {
       return var_3;
+    }
   }
 }
 
@@ -562,8 +596,9 @@ _id_781F(var_0) {}
 _id_7850(var_0, var_1) {
   var_2 = _id_7832(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   var_3 = _id_7833(var_2, var_1);
   return isDefined(var_3);
@@ -588,16 +623,17 @@ quest_allocate_match_data_counter() {
   var_0 = level._id_782E;
   level._id_782E++;
 
-  if(var_0 < 32)
+  if(var_0 < 32) {
     setmatchdata("objective_count", level._id_782E);
-  else {}
+  } else {}
 
   return var_0;
 }
 
 _id_419A() {
-  if(level._id_7874.size < 3)
+  if(level._id_7874.size < 3) {
     return level._id_7874.size;
+  }
 
   return 3;
 }
@@ -605,30 +641,35 @@ _id_419A() {
 _id_7ACA() {
   if(1) {
     if(isDefined(level.players)) {
-      foreach(var_1 in level.players)
-      _id_5F3D(var_1);
+      foreach(var_1 in level.players) {
+        _id_5F3D(var_1);
+      }
     }
   }
 }
 
 _id_378D(var_0) {
-  if(!isDefined(var_0._id_3007))
+  if(!isDefined(var_0._id_3007)) {
     var_0._id_3007 = var_0._id_4DAC;
+  }
 
   var_1 = _id_7836(var_0);
 
-  if(isDefined(var_1) && !isDefined(var_0._id_3008) && isDefined(var_1._id_4DAC))
+  if(isDefined(var_1) && !isDefined(var_0._id_3008) && isDefined(var_1._id_4DAC)) {
     var_0._id_3008 = var_1._id_4DAC;
+  }
 }
 
 _id_7CB6(var_0) {
-  if(isDefined(var_0._id_3008))
+  if(isDefined(var_0._id_3008)) {
     var_0._id_3008 = undefined;
+  }
 }
 
 _id_7CAF(var_0) {
-  if(isDefined(var_0._id_3007))
+  if(isDefined(var_0._id_3007)) {
     var_0._id_3007 = undefined;
+  }
 }
 
 _id_378C(var_0) {
@@ -646,19 +687,22 @@ _id_378C(var_0) {
     var_2 = 1;
   }
 
-  if(var_2 && level._id_7874.size > 3)
+  if(var_2 && level._id_7874.size > 3) {
     _id_7CAF(level._id_7874[3]);
+  }
 
   _id_378D(var_0);
   _id_7ACA();
 }
 
 _id_5F3B(var_0, var_1) {
-  if(!var_1)
+  if(!var_1) {
     return 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_2 = common_scripts\utility::_id_0F7E(level._id_ABEF, var_0);
   return var_2;
@@ -696,8 +740,9 @@ _id_A8D6(var_0) {
       if(!_id_5642(var_5)) {
         continue;
       }
-      if(isDefined(var_5._id_6F47))
+      if(isDefined(var_5._id_6F47)) {
         var_5._id_6F47[var_1] = undefined;
+      }
     }
 
     var_7 = var_3._id_6925[var_1];
@@ -717,8 +762,9 @@ _id_A8D6(var_0) {
 }
 
 _id_42B9() {
-  if(!isDefined(level.players))
+  if(!isDefined(level.players)) {
     return [];
+  }
 
   var_0 = [];
 
@@ -744,8 +790,9 @@ _id_A8DC(var_0) {
     var_0 waittill(var_1);
     var_0._id_5602 = !var_0._id_5602;
 
-    if(var_0._id_5602 && maps\mp\_utility::_id_585F())
+    if(var_0._id_5602 && maps\mp\_utility::_id_585F()) {
       var_0._id_4DC4++;
+    }
 
     level notify(var_1);
 
@@ -753,27 +800,32 @@ _id_A8DC(var_0) {
       continue;
     }
     if(var_0._id_5602) {
-      if(isDefined(level.plr_custom_on_scoreboard_open_func))
+      if(isDefined(level.plr_custom_on_scoreboard_open_func)) {
         level thread[[level.plr_custom_on_scoreboard_open_func]](var_0);
+      }
 
-      foreach(var_3 in level._id_08CC)
-      _id_783A(var_0, var_3);
+      foreach(var_3 in level._id_08CC) {
+        _id_783A(var_0, var_3);
+      }
 
       continue;
     }
 
-    if(isDefined(level.plr_custom_on_scoreboard_off_func))
+    if(isDefined(level.plr_custom_on_scoreboard_off_func)) {
       level thread[[level.plr_custom_on_scoreboard_off_func]](var_0);
+    }
 
-    foreach(var_3 in level._id_08CC)
-    _id_783C(var_0, var_3, 1.5);
+    foreach(var_3 in level._id_08CC) {
+      _id_783C(var_0, var_3, 1.5);
+    }
   }
 }
 
 _id_5F3C() {
   if(isDefined(level.players)) {
-    foreach(var_1 in level.players)
-    _id_5F3D(var_1);
+    foreach(var_1 in level.players) {
+      _id_5F3D(var_1);
+    }
   }
 
   for(;;) {
@@ -784,8 +836,9 @@ _id_5F3C() {
 }
 
 _id_5642(var_0) {
-  if(_isremovedentity(var_0) || !isDefined(var_0))
+  if(_isremovedentity(var_0) || !isDefined(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -802,11 +855,13 @@ _id_783A(var_0, var_1) {
     if(!_id_5642(var_6)) {
       continue;
     }
-    if(!isDefined(var_6._id_6F47))
+    if(!isDefined(var_6._id_6F47)) {
       var_6._id_6F47 = [];
+    }
 
-    if(!isDefined(var_6._id_6F47[var_2]))
+    if(!isDefined(var_6._id_6F47[var_2])) {
       var_6._id_6F47[var_2] = 0;
+    }
 
     var_6._id_6F47[var_2]++;
 
@@ -816,8 +871,9 @@ _id_783A(var_0, var_1) {
     var_6 hudoutlineenableforclient(var_0, var_3, !var_4);
   }
 
-  if(!isDefined(var_1._id_6925[var_2]))
+  if(!isDefined(var_1._id_6925[var_2])) {
     var_1._id_6925[var_2] = spawnStruct();
+  }
 
   var_8 = var_1._id_6925[var_2];
 
@@ -857,8 +913,9 @@ _id_A98E(var_0, var_1) {
     var_5 = _distance2d(var_1._id_6C17, var_0.origin);
     var_6 = 0.9;
 
-    if(common_scripts\utility::_id_562E(var_2._id_5578) || var_5 < var_3 || var_5 > var_4)
+    if(common_scripts\utility::_id_562E(var_2._id_5578) || var_5 < var_3 || var_5 > var_4) {
       var_6 = 0;
+    }
 
     if(var_6 == var_2.alpha) {
       continue;
@@ -927,8 +984,9 @@ _id_783D(var_0, var_1) {
   }
   level._id_08CC = common_scripts\utility::_id_0F93(level._id_08CC, var_0);
 
-  foreach(var_4 in _id_42B9())
-  _id_783C(var_4, var_0, 0);
+  foreach(var_4 in _id_42B9()) {
+    _id_783C(var_4, var_0, 0);
+  }
 
   _id_7844(var_0._id_7B06, "objective_remove", var_1);
 }
@@ -948,8 +1006,9 @@ _id_AB89(var_0) {
 zombie_collectable_internal_global_collect_on_join(var_0) {
   var_1 = self;
 
-  if(var_0._id_3E41)
+  if(var_0._id_3E41) {
     var_1 quest_omnvar_mark_completed(var_0._id_00D4, 1);
+  }
 }
 
 _id_AB8A(var_0) {
@@ -1019,16 +1078,19 @@ hc_analytics_register_match_data(var_0, var_1, var_2) {
 
 _id_4BC9(var_0, var_1, var_2, var_3) {
   if(common_scripts\utility::_id_562E(var_3)) {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = var_0;
+    }
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = "ZOMBIES_EMPTY_STRING";
+    }
   } else
     common_scripts\utility::flag_init(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level thread hc_analytics_register_match_data(var_0, var_1, var_2);
+  }
 
   thread hc_analytics_watch_autocompletion(var_0);
   thread _id_4BCB(var_0);
@@ -1049,8 +1111,9 @@ quest_omnvar_init() {
   var_1 = int(1.95652) + 1;
   var_0.questprogressbitfield = [];
 
-  for(var_2 = 0; var_2 < var_1; var_2++)
+  for(var_2 = 0; var_2 < var_1; var_2++) {
     var_0.questprogressbitfield[var_2] = 0;
+  }
 
   var_0 _id_23DB("ui_zm_has_quest_item_bits_", 46);
 }
@@ -1060,10 +1123,11 @@ quest_omnvar_mark_completed(var_0, var_1) {
   var_3 = int(var_0 / 23);
   var_4 = var_0 - var_3 * 23;
 
-  if(var_1)
+  if(var_1) {
     var_2.questprogressbitfield[var_3] = var_2.questprogressbitfield[var_3] | 1 << var_4;
-  else
+  } else {
     var_2.questprogressbitfield[var_3] = var_2.questprogressbitfield[var_3] &~(1 << var_4);
+  }
 
   var_5 = "ui_zm_has_quest_item_bits_" + var_3;
   self setclientomnvar(var_5, var_2.questprogressbitfield[var_3]);
@@ -1098,10 +1162,11 @@ _id_8650(var_0, var_1, var_2) {
   var_5 = var_0 + var_3;
   var_6 = self getclientomnvar(var_5);
 
-  if(var_2)
+  if(var_2) {
     var_6 = var_6 | 1 << var_4;
-  else
+  } else {
     var_6 = var_6 &~(1 << var_4);
+  }
 
   self setclientomnvar(var_5, var_6);
 }

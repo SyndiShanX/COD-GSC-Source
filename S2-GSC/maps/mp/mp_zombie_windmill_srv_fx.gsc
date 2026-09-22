@@ -96,6 +96,7 @@ main() {
   level._effect["bombing_run_bomb_explode"] = LoadFX("vfx/explosion/zmb_windmill_boss_explosion_01");
   level._effect["zmb_wm_boss_bmb_target_400"] = LoadFX("vfx/map/mp_zombie_windmill/zmb_wm_boss_bmb_target_400");
 
-  if(getDvar("3508") != "1")
+  if(getDvar("3508") != "1") {
     maps\createfx\mp_zombie_windmill_srv_fx::main();
+  }
 }

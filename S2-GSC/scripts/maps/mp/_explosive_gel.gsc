@@ -54,10 +54,10 @@ _id_A906(var_0) {
   var_1 = 0;
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_1 = 0;
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_1 = var_1 + 0.05;
         waitframe();
       }
@@ -67,7 +67,7 @@ _id_A906(var_0) {
       }
       var_1 = 0;
 
-      while(!self usebuttonpressed() && var_1 < 0.5) {
+      while(!self useButtonPressed() && var_1 < 0.5) {
         var_1 = var_1 + 0.05;
         waitframe();
       }
@@ -101,13 +101,15 @@ _id_939D(var_0) {
     var_6 = 1;
   } else if(var_1["surfacetype"] != "none")
     var_5 = var_1;
-  else
+  else {
     var_5 = var_1;
+  }
 
   var_8 = var_5["position"];
 
-  if(var_8 == var_2["position"])
+  if(var_8 == var_2["position"]) {
     var_8 = var_8 + (0, 0, -5);
+  }
 
   var_9 = spawn("script_model", var_8);
   var_9._id_5817 = var_6;
@@ -139,12 +141,13 @@ _id_27D0(var_0, var_1, var_2) {
   waitframe();
   var_3 thread _id_0513::_id_1908(var_2);
   var_3 setModel(var_0);
-  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   var_3 _meth_80B1();
   self waittill("death");
 
-  if(isDefined(self._id_9D65))
+  if(isDefined(self._id_9D65)) {
     self._id_9D65 delete();
+  }
 
   var_3 delete();
 }
@@ -171,10 +174,11 @@ _id_61D1(var_0, var_1) {
 
     foreach(var_4 in level.players) {
       if(level.teambased) {
-        if(var_4.team == var_2)
+        if(var_4.team == var_2) {
           var_0["friendly"] showtoplayer(var_4);
-        else
+        } else {
           var_0["enemy"] showtoplayer(var_4);
+        }
 
         continue;
       }
@@ -196,15 +200,17 @@ _id_8679(var_0) {
   waitframe();
 
   if(level.teambased) {
-    if(self._id_5817 == 1 || self._id_56F9 == 1)
+    if(self._id_5817 == 1 || self._id_56F9 == 1) {
       _id_0479::_id_873C(var_0, (0, 0, 28), undefined, 1);
-    else
+    } else {
       _id_0479::_id_873C(var_0, (0, 0, 28));
+    }
   } else if(isDefined(self._id_0117)) {
-    if(self._id_5817 == 1)
+    if(self._id_5817 == 1) {
       _id_0479::_id_86FC(self._id_0117, (28, 0, 28));
-    else
+    } else {
       _id_0479::_id_86FC(self._id_0117, (0, 0, 28));
+    }
   }
 }
 
@@ -212,7 +218,7 @@ _id_61DD() {
   self endon("mine_triggered");
   self endon("mine_selfdestruct");
   self endon("death");
-  self setcandamage(1);
+  self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
   var_0 = undefined;
@@ -238,21 +244,25 @@ _id_61DD() {
 
   self notify("mine_destroyed");
 
-  if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE")))
+  if(isDefined(var_4) && (issubstr(var_4, "MOD_GRENADE") || issubstr(var_4, "MOD_EXPLOSIVE"))) {
     self._id_A86B = 1;
+  }
 
-  if(isDefined(var_8) && var_8 &level._id_5039)
+  if(isDefined(var_8) && var_8 &level._id_5039) {
     self._id_A86F = 1;
+  }
 
   self._id_A86E = 1;
 
-  if(isPlayer(var_0))
+  if(isPlayer(var_0)) {
     var_0 _id_04C7::_id_A102("bouncing_betty");
+  }
 
   if(level.teambased) {
     if(isDefined(var_0) && isDefined(var_0.pers["team"]) && isDefined(self._id_0117) && isDefined(self._id_0117.pers["team"])) {
-      if(var_0.pers["team"] != self._id_0117.pers["team"])
+      if(var_0.pers["team"] != self._id_0117.pers["team"]) {
         var_0 notify("destroyed_explosive");
+      }
     }
   } else if(isDefined(self._id_0117) && isDefined(var_0) && var_0 != self._id_0117)
     var_0 notify("destroyed_explosive");
@@ -264,8 +274,9 @@ _id_61E3(var_0) {
   if(!isDefined(self) || !isDefined(self._id_0117)) {
     return;
   }
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self._id_0117;
+  }
 
   self playSound("null");
   var_1 = self gettagorigin("tag_fx");
@@ -278,8 +289,9 @@ _id_61E3(var_0) {
   self hide();
   self radiusdamage(self.origin, 192, 100, 100, var_0, "MOD_EXPLOSIVE");
 
-  if(isDefined(self._id_0117) && isDefined(level._id_5C44))
+  if(isDefined(self._id_0117) && isDefined(level._id_5C44)) {
     self._id_0117 thread[[level._id_5C44]]("mine_destroyed", undefined, undefined, self.origin);
+  }
 
   wait 0.2;
 
@@ -289,8 +301,9 @@ _id_61E3(var_0) {
   thread _id_0F1B();
   self notify("death");
 
-  if(isDefined(self._id_6FD8))
+  if(isDefined(self._id_6FD8)) {
     self._id_6FD8 delete();
+  }
 
   self hide();
 }

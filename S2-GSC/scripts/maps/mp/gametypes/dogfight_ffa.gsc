@@ -27,8 +27,9 @@ main() {
   level._id_6B5C = ::_id_6B5C;
   level._id_6B7F = ::_id_6B7F;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   _setteammode("ffa");
   maps\mp\_utility::_id_873B(0);
@@ -36,8 +37,9 @@ main() {
   game["dialog"]["defense_obj"] = "gbl_start";
   game["dialog"]["offense_obj"] = "gbl_start";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 
   maps\mp\gametypes\dogfight_common::dogfightinit();
 }
@@ -80,12 +82,14 @@ _id_6B5C(var_0, var_1, var_2) {
   var_3 = 0;
 
   foreach(var_5 in level.players) {
-    if(isDefined(var_5.score) && var_5.score > var_3)
+    if(isDefined(var_5.score) && var_5.score > var_3) {
       var_3 = var_5.score;
+    }
   }
 
-  if(game["state"] == "postgame" && var_1.score >= var_3)
+  if(game["state"] == "postgame" && var_1.score >= var_3) {
     var_1._id_3B4B = 1;
+  }
 }
 
 _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
@@ -93,10 +97,11 @@ _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
   var_1 maps\mp\_utility::_id_867B(var_1._id_008F + var_5);
   var_1 _id_04D2::_id_A161(var_1, var_5);
 
-  if(_id_57BF(var_0))
+  if(_id_57BF(var_0)) {
     return 1;
-  else if(_id_57BD(var_0))
+  } else if(_id_57BD(var_0)) {
     return 0;
+  }
 
   return 0;
 }

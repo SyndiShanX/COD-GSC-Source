@@ -23,16 +23,19 @@ init() {
   level thread _id_8A31(0, "game_over", "zmb_mus_sweeper", 0, 0, 0, 0);
   level thread _id_8A31(-1, "player_died", "zmb_mus_deathsting", 1, 0, 0, 0);
 
-  if(isDefined(level._id_2987))
+  if(isDefined(level._id_2987)) {
     level thread[[level._id_2987]]();
+  }
 }
 
 _id_8A31(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(var_3)
+  if(var_3) {
     var_0 = undefined;
+  }
 
-  if(!isDefined(level._id_AB01[var_1]))
+  if(!isDefined(level._id_AB01[var_1])) {
     level._id_AB01[var_1] = spawnStruct();
+  }
 
   if(_isarray(var_2)) {
     level._id_AB01[var_1]._id_0BB4 = var_2[0];
@@ -54,10 +57,11 @@ _id_20CB(var_0, var_1) {
     return;
   }
   if(isDefined(level._id_6A40)) {
-    if(level._id_6A40 == var_2)
+    if(level._id_6A40 == var_2) {
       return;
-    else if(level._id_6A40 == level._id_AB01["game_over"])
+    } else if(level._id_6A40 == level._id_AB01["game_over"]) {
       return;
+    }
   }
 
   thread _id_06A0(var_2, var_1);
@@ -68,12 +72,13 @@ _id_06A0(var_0, var_1) {
   if(1) {
     return;
   }
-  if(isDefined(var_0._id_92AE) && var_0._id_92AE > 0)
+  if(isDefined(var_0._id_92AE) && var_0._id_92AE > 0) {
     wait(var_0._id_92AE);
+  }
 
   if(var_0 == level._id_AB01["round_intermission"]) {
     var_2 = level._id_AB3A[var_0._id_37AB];
-    var_2 playloopsound(var_0._id_0BB4);
+    var_2 playLoopSound(var_0._id_0BB4);
     var_2 scalevolume(1, 0.5);
     wait 10;
     var_2 scalevolume(0, 5);
@@ -84,16 +89,17 @@ _id_06A0(var_0, var_1) {
     var_3 = var_0._id_0BB4;
 
     if(isDefined(var_0._id_0BB5)) {
-      if(!isDefined(var_0._id_5B11))
+      if(!isDefined(var_0._id_5B11)) {
         var_0._id_5B11 = randomint(var_0._id_0BB5.size);
-      else
+      } else {
         var_0._id_5B11 = (var_0._id_5B11 + 1) % var_0._id_0BB5.size;
+      }
 
       var_3 = var_0._id_0BB5[var_0._id_5B11];
       var_0._id_0BB4 = var_3;
     }
 
-    var_2 playloopsound(var_3);
+    var_2 playLoopSound(var_3);
     var_2 scalevolume(1);
     thread _id_0726(var_2, var_0);
 
@@ -114,8 +120,9 @@ _id_0726(var_0, var_1) {
   level endon("zombie_stopOnTimeElapsed");
   level waittill("zombie_wave_ended");
 
-  if(isDefined(var_1._id_93F3) && var_1._id_93F3 > 0)
+  if(isDefined(var_1._id_93F3) && var_1._id_93F3 > 0) {
     wait(var_1._id_93F3);
+  }
 
   var_0 scalevolume(0, 2);
   wait 2;

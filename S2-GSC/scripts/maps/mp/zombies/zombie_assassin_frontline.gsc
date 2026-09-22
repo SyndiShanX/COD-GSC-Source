@@ -52,8 +52,9 @@ apply_boss_buff(var_0) {
   var_1 = undefined;
   self.started_boss_buff = 1;
 
-  if(!isDefined(level.loc_beams))
+  if(!isDefined(level.loc_beams)) {
     level.loc_beams = [];
+  }
 
   if(level.loc_beams.size < 3) {
     var_1 = _func_382("zmb_tesla_storm_beam", var_0, "J_Spine4", self, "J_Spine4");
@@ -72,8 +73,9 @@ apply_boss_buff(var_0) {
 }
 
 spawn_assassin_frontline_fx() {
-  if(isDefined(self.bufffx))
+  if(isDefined(self.bufffx)) {
     self.bufffx delete();
+  }
 
   var_0 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmi_assassin_buff"), self, "J_Spine4");
   maps\mp\agents\_agent_utility::deleteentonagentdeath(var_0);
@@ -103,13 +105,15 @@ set_boss_buff() {
 }
 
 handle_boss_buff(var_0) {
-  if(!isDefined(self.zombie_magic_sheild_health))
+  if(!isDefined(self.zombie_magic_sheild_health)) {
     self.zombie_magic_sheild_health = 2500;
+  }
 
   self.zombie_magic_sheild_health = self.zombie_magic_sheild_health - var_0;
 
-  if(self.zombie_magic_sheild_health <= 0)
+  if(self.zombie_magic_sheild_health <= 0) {
     self_remove_boss_buff();
+  }
 }
 
 self_remove_boss_buff() {
@@ -118,8 +122,9 @@ self_remove_boss_buff() {
   self.zombie_shielding_func = undefined;
   self.zombie_magic_sheild_health = 0;
 
-  if(isDefined(self.bufffx))
+  if(isDefined(self.bufffx)) {
     self.bufffx delete();
+  }
 }
 
 is_boss_buffed() {

@@ -7,13 +7,15 @@ init() {
   level.zmb_total_fish_collected = 0;
   var_0 = getdvarint("spv_zmb_event_mtx7_active", -1);
 
-  if(var_0 == -1)
+  if(var_0 == -1) {
     var_0 = 1;
+  }
 
   var_1 = var_0;
 
-  if(!_isonlinegame())
+  if(!_isonlinegame()) {
     var_1 = 0;
+  }
 
   if(!maps\mp\_utility::isproductionlevelactive(16)) {
     return;
@@ -32,8 +34,9 @@ init() {
   }
   common_scripts\utility::_id_092C("mtx_fish_despawn", "vfx/map/mp_zombie_island/zmb_isl_beach_fish_flop_mtx7");
 
-  if(maps\mp\_utility::_id_4571() == "mp_zombie_island")
+  if(maps\mp\_utility::_id_4571() == "mp_zombie_island") {
     level thread run_fish_quest();
+  }
 
   apply_cosmetic_changes();
   level.zmb_additional_look_check = ::limit_oceanic_zombies;
@@ -43,17 +46,20 @@ limit_oceanic_zombies(var_0) {
   var_1 = 0;
 
   foreach(var_3 in _id_0547::_id_408F()) {
-    if(_id_0547::is_wet_zombie(undefined, var_3))
+    if(_id_0547::is_wet_zombie(undefined, var_3)) {
       var_1++;
+    }
   }
 
   var_5 = 3;
 
-  if(getdvarint("scr_zmbMaxOceanicZombies", 0) > 0)
+  if(getdvarint("scr_zmbMaxOceanicZombies", 0) > 0) {
     var_5 = getdvarint("scr_zmbMaxOceanicZombies", 0);
+  }
 
-  if(var_1 >= var_5)
+  if(var_1 >= var_5) {
     var_0 = common_scripts\utility::_id_0F94(var_0, ["oceana", "oceanb"]);
+  }
 
   return var_0;
 }
@@ -91,16 +97,19 @@ spawn_fish_on_zombies() {
 }
 
 remove_fish_from_zombies(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(isDefined(self.attached_ocean_model))
+  if(isDefined(self.attached_ocean_model)) {
     self.attached_ocean_model delete();
+  }
 
-  if(_id_0547::is_wet_zombie(undefined, self))
+  if(_id_0547::is_wet_zombie(undefined, self)) {
     level thread spawn_pickupable_fish(self.origin, self _meth_8566());
+  }
 }
 
 spawn_pickupable_fish(var_0, var_1) {
-  if(!isDefined(level.mtx7_fish_array))
+  if(!isDefined(level.mtx7_fish_array)) {
     level.mtx7_fish_array = [];
+  }
 
   var_2 = undefined;
 
@@ -154,8 +163,9 @@ fall_onto_ground(var_0, var_1) {
 }
 
 remove_fish(var_0) {
-  if(!common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(var_0)) {
     playFX(common_scripts\utility::_id_44F5("mtx_fish_despawn"), self.origin);
+  }
 
   self ghost();
   self._id_08BE = 0;
@@ -169,8 +179,9 @@ wait_for_player_close_to_fish(var_0, var_1) {
       return;
     }
     foreach(var_4 in level.players) {
-      if(distance(var_4.origin, self.origin) < var_0)
+      if(distance(var_4.origin, self.origin) < var_0) {
         return var_4;
+      }
     }
 
     waitframe();
@@ -191,17 +202,20 @@ get_random_attached_prop() {
 }
 
 add_ocean_zombie_look() {
-  if(!isDefined(level._id_0A50))
+  if(!isDefined(level._id_0A50)) {
     level._id_0A50 = [];
+  }
 
   var_0 = ["zombie_generic", "zombie_heavy"];
 
   foreach(var_2 in var_0) {
-    if(!isDefined(level._id_0A50[var_2]))
+    if(!isDefined(level._id_0A50[var_2])) {
       level._id_0A50[var_2] = [];
+    }
 
-    if(!isDefined(level._id_0A50[var_2]._id_5ED2))
+    if(!isDefined(level._id_0A50[var_2]._id_5ED2)) {
       level._id_0A50[var_2]._id_5ED2 = [];
+    }
   }
 
   add_ocean_look("a");
@@ -243,16 +257,17 @@ run_fish_quest() {
   var_0 thread move_current();
   wait_for_required_fish();
 
-  foreach(var_3 in level.players)
-  _id_0555::issprinting("fish_total_ee", var_3);
+  foreach(var_3 in level.players) {
+    _id_0555::issprinting("fish_total_ee", var_3);
+  }
 
   var_0 wait_for_player_close_to_fish(130);
   wait 1;
   var_0 notify("leaving");
   var_0 movez(-12, 2, 1);
-  var_0 rotateyaw(170, 3);
+  var_0 rotateYaw(170, 3);
   wait 3;
-  var_1 moveto(var_1.origin + (0, 0, 32), 6, 0, 1);
+  var_1 moveTo(var_1.origin + (0, 0, 32), 6, 0, 1);
   var_1 thread vibrate_box();
   var_1 _id_0547::_id_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 16));
   level thread maps\mp\_utility::_id_6F74(::collect_teslaguns, var_1);
@@ -264,8 +279,9 @@ collect_teslaguns(var_0) {
 }
 
 wait_for_required_fish() {
-  while(!isDefined(level.zmb_total_fish_collected) || level.zmb_total_fish_collected < 50)
+  while(!isDefined(level.zmb_total_fish_collected) || level.zmb_total_fish_collected < 50) {
     wait 1;
+  }
 }
 
 vibrate_box() {
@@ -309,9 +325,9 @@ move_current() {
   self._id_6C4E = self.origin;
 
   for(;;) {
-    self moveto(var_0, 2, 1, 1);
+    self moveTo(var_0, 2, 1, 1);
     wait 2;
-    self moveto(self._id_6C4E, 2, 1, 1);
+    self moveTo(self._id_6C4E, 2, 1, 1);
     wait 4;
   }
 }

@@ -53,15 +53,17 @@ _id_636A(var_0) {
 }
 
 getturretpitchrate(var_0, var_1) {
-  var_2 = _getent(var_0, "targetname");
+  var_2 = _getEnt(var_0, "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 setlightintensity(var_1);
+  }
 }
 
 _id_8418(var_0, var_1) {
-  foreach(var_3 in var_0)
-  getturretpitchrate(var_3, var_1);
+  foreach(var_3 in var_0) {
+    getturretpitchrate(var_3, var_1);
+  }
 }
 
 _id_8877() {}
@@ -127,16 +129,18 @@ _id_0953(var_0) {
     }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_60B7[level._id_60B7.size] = var_0;
+  }
 }
 
 _id_6EA2(var_0) {
   foreach(var_2 in var_0) {
     var_3 = var_2._id_01D6;
 
-    if(var_2._id_013B >= 0)
+    if(var_2._id_013B >= 0) {
       _id_0953(var_2);
+    }
   }
 }
 
@@ -158,8 +162,9 @@ _id_631E() {
   var_0 = maps\mp\_utility::_id_4604();
 
   for(;;) {
-    while(!isDefined(level.players) || level.players.size == 0)
+    while(!isDefined(level.players) || level.players.size == 0) {
       waitframe();
+    }
 
     while(isDefined(level.players) && level.players.size > 0) {
       var_1 = [];
@@ -223,14 +228,17 @@ _id_631E() {
         var_9._id_6F69[7] = 0;
         var_9._id_6F69[8] = 0;
 
-        if(isDefined(var_7._id_0129))
+        if(isDefined(var_7._id_0129)) {
           var_9._id_6F69[6] = maps\mp\_utility::_id_452A(tablelookup(var_0, 0, var_7._id_0129, 1));
+        }
 
-        if(isDefined(var_7._id_012A))
+        if(isDefined(var_7._id_012A)) {
           var_9._id_6F69[7] = maps\mp\_utility::_id_452A(tablelookup(var_0, 0, var_7._id_012A, 1));
+        }
 
-        if(isDefined(var_7._id_012B))
+        if(isDefined(var_7._id_012B)) {
           var_9._id_6F69[8] = maps\mp\_utility::_id_452A(tablelookup(var_0, 0, var_7._id_012B, 1));
+        }
 
         var_10 = 1;
         var_11 = 1;
@@ -239,15 +247,17 @@ _id_631E() {
         if(!maps\mp\gametypes\_class::isvalidprimary(var_9._id_76F7, var_10) && !maps\mp\gametypes\_class::isvalidsecondary(var_9.botsetscriptgoalnode, var_11, var_12)) {
           var_9._id_76F7 = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 0);
 
-          for(var_13 = 0; var_13 < 6; var_13++)
+          for(var_13 = 0; var_13 < 6; var_13++) {
             var_9._id_76F3[var_13] = 0;
+          }
         }
 
         if(!maps\mp\gametypes\_class::isvalidsecondary(var_9.botsetscriptgoalnode, var_11, var_12)) {
           var_9.botsetscriptgoalnode = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 1);
 
-          for(var_13 = 0; var_13 < 6; var_13++)
+          for(var_13 = 0; var_13 < 6; var_13++) {
             var_9.botsetflag[var_13] = 0;
+          }
         }
 
         var_9._id_7709 = maps\mp\_utility::_id_473C(var_9._id_76F7, 0);
@@ -288,8 +298,9 @@ _id_631E() {
         var_15 = 0;
         var_16 = "customClasses";
 
-        if(isDefined(var_8._id_294D))
+        if(isDefined(var_8._id_294D)) {
           var_15 = var_8._id_294D;
+        }
 
         var_9.class = "custom" + common_scripts\utility::_id_9AAD(var_15 + 1);
         var_9._id_231B = var_15;

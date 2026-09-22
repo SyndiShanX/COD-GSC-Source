@@ -102,6 +102,7 @@ main() {
 
   level._effect["zmb_mm_tracer_p38"] = LoadFX("vfx/trail/zmb_mm_tracer_p38");
 
-  if(getDvar("3508") != "1" && getDvar("1673") == "mp_zombie_windmill")
+  if(getDvar("3508") != "1" && getDvar("1673") == "mp_zombie_windmill") {
     maps\createfx\mp_zombie_windmill_fx::main();
+  }
 }

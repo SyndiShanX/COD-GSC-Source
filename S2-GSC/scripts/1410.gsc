@@ -30,11 +30,13 @@ _id_29A5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 _id_55EF(var_0, var_1) {
   var_2 = self;
 
-  if(common_scripts\utility::_id_562E(var_2._id_5560))
+  if(common_scripts\utility::_id_562E(var_2._id_5560)) {
     return 0;
+  }
 
-  if(common_scripts\utility::_id_562E(var_1._id_4B2A))
+  if(common_scripts\utility::_id_562E(var_1._id_4B2A)) {
     return 0;
+  }
 
   if(isDefined(var_2._id_0A4B)) {
     switch (var_2._id_0A4B) {
@@ -50,8 +52,9 @@ _id_55EF(var_0, var_1) {
     var_3 = distance(var_2.origin, level._id_94DA) < _id_418A();
     var_4 = _id_0580::_id_4385() - level._id_94DB < 0.5;
 
-    if(var_3 && var_4)
+    if(var_3 && var_4) {
       return 0;
+    }
   }
 
   return 1;
@@ -103,7 +106,7 @@ _id_5995(var_0) {
   var_1 = self;
   var_1 endon("death");
   var_1 thread _id_5994(var_0);
-  _playfxontag(common_scripts\utility::_id_44F5("death_sticky"), var_1, "j_neck");
+  _playFXOnTag(common_scripts\utility::_id_44F5("death_sticky"), var_1, "j_neck");
   var_2 = 0;
 
   while(!var_2) {
@@ -130,11 +133,13 @@ _id_5995(var_0) {
 
     var_7 = common_scripts\utility::_id_4461(var_1.origin, var_5);
 
-    if(!isDefined(var_7))
+    if(!isDefined(var_7)) {
       var_7 = common_scripts\utility::_id_4461(var_1.origin, var_4);
+    }
 
-    if(!isDefined(var_7))
+    if(!isDefined(var_7)) {
       var_7 = common_scripts\utility::_id_4461(var_1.origin, var_3);
+    }
 
     if(!isDefined(var_7)) {
       var_2 = 1;
@@ -144,8 +149,9 @@ _id_5995(var_0) {
     var_1._id_00CA = 1;
     var_1 thread _id_94DC(var_7);
 
-    if(isDefined(var_1._id_0A4B) && common_scripts\utility::_id_0F79(["zombie_exploder", "zombie_generic", "zombie_heavy", "zombie_berserker"], var_1._id_0A4B))
+    if(isDefined(var_1._id_0A4B) && common_scripts\utility::_id_0F79(["zombie_exploder", "zombie_generic", "zombie_heavy", "zombie_berserker"], var_1._id_0A4B)) {
       var_1._id_297D = ::_id_5993;
+    }
 
     while(!var_2) {
       wait 0.7;
@@ -156,8 +162,9 @@ _id_5995(var_0) {
 
       var_1 scragentsetgoalentity(var_1._id_2A97);
 
-      if(distance(var_1.origin, var_1._id_2A97.origin) < _id_418B())
+      if(distance(var_1.origin, var_1._id_2A97.origin) < _id_418B()) {
         var_2 = 1;
+      }
     }
   }
 

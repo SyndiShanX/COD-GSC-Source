@@ -34,9 +34,9 @@ ammo_cache_setup() {
       var_10 _meth_8660(1, var_3.origin);
       var_10.face_pos = var_3.origin;
 
-      if(_id_0547::_id_5819(var_10))
+      if(_id_0547::_id_5819(var_10)) {
         _id_0547::_id_8A4F(var_10, ::ammo_cache_update_hints_for_player);
-      else {}
+      } else {}
 
       var_10 thread ammo_cache_think(var_3, var_10._id_267B);
     }
@@ -63,23 +63,26 @@ ammo_cache_update_hints_for_player(var_0) {
     waittillframeend;
 
     if(_id_0547::_id_5565(var_5, "sg_obj_end")) {
-      if(var_0.ammo_cache_available_uses < 3)
+      if(var_0.ammo_cache_available_uses < 3) {
         var_0.ammo_cache_available_uses++;
+      }
     } else {
       var_3 = var_3 * 2;
 
-      if(var_3 > 2000)
+      if(var_3 > 2000) {
         var_3 = 2000;
+      }
     }
 
     var_7 = "ammo_cache_3";
 
-    if(var_0.ammo_cache_available_uses == 2)
+    if(var_0.ammo_cache_available_uses == 2) {
       var_7 = "ammo_cache_2";
-    else if(var_0.ammo_cache_available_uses == 1)
+    } else if(var_0.ammo_cache_available_uses == 1) {
       var_7 = "ammo_cache_1";
-    else if(var_0.ammo_cache_available_uses <= 0)
+    } else if(var_0.ammo_cache_available_uses <= 0) {
       var_7 = "ammo_cache_0";
+    }
 
     var_2._id_4028 = _id_0552::_id_44FF(var_7);
   }
@@ -130,8 +133,9 @@ ammo_cache_low_ammo_remove_highlights(var_0) {
   var_1 = common_scripts\utility::_id_44BE("ammo_cache", "targetname");
 
   foreach(var_3 in var_1) {
-    foreach(var_5 in var_3._id_629F)
-    var_5 hudoutlinedisableforclient(var_0);
+    foreach(var_5 in var_3._id_629F) {
+      var_5 hudoutlinedisableforclient(var_0);
+    }
   }
 
   var_0.caches_highlighted = 0;
@@ -141,8 +145,9 @@ ammo_cache_low_ammo_apply_highlights(var_0) {
   var_1 = common_scripts\utility::_id_44BE("ammo_cache", "targetname");
 
   foreach(var_3 in var_1) {
-    foreach(var_5 in var_3._id_629F)
-    var_5 hudoutlineenableforclient(var_0, 0, 0);
+    foreach(var_5 in var_3._id_629F) {
+      var_5 hudoutlineenableforclient(var_0, 0, 0);
+    }
   }
 
   var_0.caches_highlighted = 1;
@@ -152,16 +157,18 @@ ammo_cache_low_ammo_highlight() {
   var_0 = self;
   var_0 endon("disconnect");
 
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     var_0 common_scripts\utility::_id_A70A("spawned_player", "faux_spawn");
+  }
 
   var_0.caches_highlighted = 0;
   var_0.ammocachelowammohighlightneedsupdate = 1;
   var_0 childthread ammo_cache_low_ammo_highlight_watcher();
   var_1 = 0.2;
 
-  while(isDefined(var_0) && var_0 getentitynumber() % 4 != int(gettime() / 50) % 4)
+  while(isDefined(var_0) && var_0 getentitynumber() % 4 != int(gettime() / 50) % 4) {
     waitframe();
+  }
 
   var_2 = common_scripts\utility::_id_44BE("ammo_cache", "targetname");
 
@@ -174,8 +181,9 @@ ammo_cache_low_ammo_highlight() {
     var_0.ammocachelowammohighlightneedsupdate = 0;
 
     if(!isalive(var_0)) {
-      if(common_scripts\utility::_id_562E(var_0.caches_highlighted))
+      if(common_scripts\utility::_id_562E(var_0.caches_highlighted)) {
         ammo_cache_low_ammo_remove_highlights(var_0);
+      }
 
       continue;
     }
@@ -194,15 +202,17 @@ ammo_cache_low_ammo_highlight() {
     var_4 = var_0 getfractionmaxammo(var_3);
 
     if(var_4 >= 0.2) {
-      if(common_scripts\utility::_id_562E(var_0.caches_highlighted))
+      if(common_scripts\utility::_id_562E(var_0.caches_highlighted)) {
         ammo_cache_low_ammo_remove_highlights(var_0);
+      }
 
       continue;
     }
 
     if(var_0.ammo_cache_available_uses <= 0) {
-      if(common_scripts\utility::_id_562E(var_0.caches_highlighted))
+      if(common_scripts\utility::_id_562E(var_0.caches_highlighted)) {
         ammo_cache_low_ammo_remove_highlights(var_0);
+      }
 
       continue;
     }
@@ -212,6 +222,7 @@ ammo_cache_low_ammo_highlight() {
 }
 
 ammo_cache_low_ammo_highlight_watcher() {
-  for(var_0 = self; isDefined(var_0); var_0.ammocachelowammohighlightneedsupdate = 1)
+  for(var_0 = self; isDefined(var_0); var_0.ammocachelowammohighlightneedsupdate = 1) {
     [var_2, var_3] = common_scripts\utility::_id_A70E(var_0, "weapon_fired", var_0, "weapon_change", var_0, "ammo_cache_used", var_0, "death", level, "maxAmmoPickup");
+  }
 }

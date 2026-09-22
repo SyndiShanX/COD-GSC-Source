@@ -8,11 +8,13 @@ _id_52A4() {
 }
 
 _id_1F8B(var_0) {
-  if(!_id_0561::_id_1F7B())
+  if(!_id_0561::_id_1F7B()) {
     return 0;
+  }
 
-  if(_id_4BA4())
+  if(_id_4BA4()) {
     return 0;
+  }
 
   return 1;
 }
@@ -23,8 +25,9 @@ _id_A244(var_0) {
 }
 
 _id_4716(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":
@@ -41,11 +44,13 @@ _id_4716(var_0) {
 }
 
 _id_4717(var_0) {
-  if(_id_056B::_id_9D19(var_0._id_6F63))
+  if(_id_056B::_id_9D19(var_0._id_6F63)) {
     return 0;
+  }
 
-  if(_id_4BA4())
+  if(_id_4BA4()) {
     return 0.5;
+  }
 
   return 1;
 }
@@ -57,8 +62,9 @@ _id_4BA4() {
 _id_A245() {
   var_0 = self;
 
-  if(var_0 _id_4BA4())
+  if(var_0 _id_4BA4()) {
     var_0._id_4B7D = undefined;
+  }
 
   var_0 notify("used_vending_machine_discount");
 }

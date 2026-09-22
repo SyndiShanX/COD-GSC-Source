@@ -19,8 +19,9 @@ init() {
   level._effect["zmb_isl_geis_pommel_float"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_geis_pommel_float");
   _id_0547::_id_7BA9(::handle_pommel_kills);
 
-  if(maps\mp\_utility::_id_4571() != "mp_zombie_island")
+  if(maps\mp\_utility::_id_4571() != "mp_zombie_island") {
     init_pommel_aud();
+  }
 
   level thread maps\mp\_utility::_id_6F74(::init_pommel_kill_tracking);
   level thread maps\mp\_utility::_id_6F74(::track_player_pommel_boosts);
@@ -34,8 +35,9 @@ notify_pommel_fired() {
   for(;;) {
     self waittill("grenade_fire", var_0, var_1);
 
-    if(var_1 == "island_grenade_hc_zm")
+    if(var_1 == "island_grenade_hc_zm") {
       thread handle_aoe_state_change("fired", var_1, 0);
+    }
   }
 }
 
@@ -55,10 +57,11 @@ handle_aoe_state_change(var_0, var_1, var_2) {
   if(!_id_0547::_id_5565("island_grenade_hc_zm", var_1)) {
     return;
   }
-  if(var_2)
+  if(var_2) {
     _id_0378::_id_8D74("zmb_pomel_grenade_cook");
-  else
+  } else {
     self notify("aud_stop_pomel_nade_cook");
+  }
 }
 
 initialize_pommel_grenade_pickups() {
@@ -120,8 +123,9 @@ spawn_pommel_special_pickup(var_0, var_1, var_2) {
     if(var_8) {
       var_8 = 0;
 
-      if(maps\mp\_utility::_id_4571() == "mp_zombie_island")
+      if(maps\mp\_utility::_id_4571() == "mp_zombie_island") {
         maps\mp\gametypes\zombies::_id_47A8("DLC1_ZM_DARKER");
+      }
     }
 
     level thread _id_0548::_id_A7D5(var_9, "island_grenade_hc_zm", undefined);
@@ -140,11 +144,13 @@ rotate_pommel() {
 }
 
 register_pommel_step_func(var_0, var_1, var_2) {
-  if(!isDefined(level.pommel_step_funcs_zombies))
+  if(!isDefined(level.pommel_step_funcs_zombies)) {
     level.pommel_step_funcs_zombies = [];
+  }
 
-  if(!isDefined(level.pommel_step_funcs_players))
+  if(!isDefined(level.pommel_step_funcs_players)) {
     level.pommel_step_funcs_players = [];
+  }
 
   var_3 = spawnStruct();
   var_3._id_3F02 = var_0;
@@ -159,11 +165,13 @@ register_pommel_step_func(var_0, var_1, var_2) {
 }
 
 apply_health_to_players() {
-  if(self.health < self.maxhealth)
+  if(self.health < self.maxhealth) {
     self.health = self.health + 4;
+  }
 
-  if(self.health > self.maxhealth)
+  if(self.health > self.maxhealth) {
     self.health = self.maxhealth;
+  }
 }
 
 apply_damage_buff_to_players() {
@@ -202,8 +210,9 @@ track_player_aoe_grenade() {
         _id_0378::_id_8D74("zmb_pomel_grenade_final_explosion", var_4.origin);
         var_5 = var_4 initial_burst(self);
 
-        if(isDefined(var_0))
+        if(isDefined(var_0)) {
           var_0 delete();
+        }
 
         self.pommelkills = 0;
         var_6 = 999;
@@ -219,7 +228,7 @@ track_player_aoe_grenade() {
           }
 
           var_4 _id_0378::_id_8D74("zmb_pomel_grenade_float", self);
-          var_4 moveto(var_7, var_8);
+          var_4 moveTo(var_7, var_8);
           wait 0.15;
         }
 
@@ -262,8 +271,9 @@ initial_burst(var_0) {
   var_1 = [];
   var_2 = _id_0547::_id_408F();
 
-  if(isDefined(level.additional_pommel_targets))
+  if(isDefined(level.additional_pommel_targets)) {
     var_2 = common_scripts\utility::_id_0F73(var_2, level.additional_pommel_targets);
+  }
 
   foreach(var_4 in var_2) {
     var_5 = var_4 is_close_to(self);
@@ -293,8 +303,9 @@ initial_burst(var_0) {
 apply_pommel_damage(var_0, var_1) {
   var_2 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), 30);
 
-  if(var_1 > 8)
+  if(var_1 > 8) {
     var_2 = var_2 / 2;
+  }
 
   self dodamage(var_2 / 2, self.origin, var_0, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
   waitframe();
@@ -302,8 +313,9 @@ apply_pommel_damage(var_0, var_1) {
 }
 
 register_as_pommel_grenade_target(var_0) {
-  if(!isDefined(level.additional_pommel_targets))
+  if(!isDefined(level.additional_pommel_targets)) {
     level.additional_pommel_targets = [];
+  }
 
   level.additional_pommel_targets = common_scripts\utility::_id_0F6F(level.additional_pommel_targets, var_0);
 }
@@ -315,23 +327,27 @@ zap_zombies_vfx() {
   maps\mp\agents\_agent_utility::deleteentonagentdeath(self.pommel_damage);
   wait 0.5;
 
-  if(isDefined(self.pommel_damage))
+  if(isDefined(self.pommel_damage)) {
     self.pommel_damage delete();
+  }
 }
 
 apply_pommel_funcs(var_0, var_1) {
   if(var_0 is_close_to(self)) {
-    foreach(var_3 in var_1)
-    var_0 apply_aoe_func(var_3);
+    foreach(var_3 in var_1) {
+      var_0 apply_aoe_func(var_3);
+    }
   }
 }
 
 is_close_to(var_0) {
-  if(distance(var_0.origin, self.origin) > 128)
+  if(distance(var_0.origin, self.origin) > 128) {
     return 0;
+  }
 
-  if(_abs(var_0.origin[2] - self.origin[2]) > 64)
+  if(_abs(var_0.origin[2] - self.origin[2]) > 64) {
     return 0;
+  }
 
   return 1;
 }
@@ -358,8 +374,9 @@ handle_pommel_kills(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
     var_1.pommelkills++;
     var_1.lifetimepommelkills++;
 
-    if(var_1.lifetimepommelkills == 250 && maps\mp\_utility::_id_4571() == "mp_zombie_island")
+    if(var_1.lifetimepommelkills == 250 && maps\mp\_utility::_id_4571() == "mp_zombie_island") {
       var_1 maps\mp\gametypes\zombies::_id_47C8("DLC1_ZM_POMMEL");
+    }
   }
 }
 

@@ -206,73 +206,82 @@ _id_8750(var_0, var_1, var_2) {
 }
 
 _id_7BFD(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_4) && var_4)
+  if(isDefined(var_4) && var_4) {
     var_3 = getdvarfloat(var_2, var_3);
-  else if(_isstring(var_3))
+  } else if(_isstring(var_3)) {
     var_3 = getDvar(var_2, var_3);
-  else
+  } else {
     var_3 = getdvarint(var_2, var_3);
+  }
 
   switch (var_0) {
     case "rule":
-      if(!isDefined(level._id_7F46[var_1]))
+      if(!isDefined(level._id_7F46[var_1])) {
         level._id_7F46[var_1] = spawnStruct();
+      }
 
       level._id_7F46[var_1].value = var_3;
       level._id_7F46[var_1]._id_5C0D = var_3;
       level._id_7F46[var_1]._id_3515 = var_2;
       break;
     case "game":
-      if(!isDefined(level._id_3FDB[var_1]))
+      if(!isDefined(level._id_3FDB[var_1])) {
         level._id_3FDB[var_1] = spawnStruct();
+      }
 
       level._id_3FDB[var_1].value = var_3;
       level._id_3FDB[var_1]._id_5C0D = var_3;
       level._id_3FDB[var_1]._id_3515 = var_2;
       break;
     case "team":
-      if(!isDefined(level._id_986C[var_1]))
+      if(!isDefined(level._id_986C[var_1])) {
         level._id_986C[var_1] = spawnStruct();
+      }
 
       level._id_986C[var_1].value = var_3;
       level._id_986C[var_1]._id_5C0D = var_3;
       level._id_986C[var_1]._id_3515 = var_2;
       break;
     case "player":
-      if(!isDefined(level._id_747C[var_1]))
+      if(!isDefined(level._id_747C[var_1])) {
         level._id_747C[var_1] = spawnStruct();
+      }
 
       level._id_747C[var_1].value = var_3;
       level._id_747C[var_1]._id_5C0D = var_3;
       level._id_747C[var_1]._id_3515 = var_2;
       break;
     case "class":
-      if(!isDefined(level._id_2326[var_1]))
+      if(!isDefined(level._id_2326[var_1])) {
         level._id_2326[var_1] = spawnStruct();
+      }
 
       level._id_2326[var_1].value = var_3;
       level._id_2326[var_1]._id_5C0D = var_3;
       level._id_2326[var_1]._id_3515 = var_2;
       break;
     case "weapon":
-      if(!isDefined(level._id_A9F3[var_1]))
+      if(!isDefined(level._id_A9F3[var_1])) {
         level._id_A9F3[var_1] = spawnStruct();
+      }
 
       level._id_A9F3[var_1].value = var_3;
       level._id_A9F3[var_1]._id_5C0D = var_3;
       level._id_A9F3[var_1]._id_3515 = var_2;
       break;
     case "hardpoint":
-      if(!isDefined(level._id_4B1E[var_1]))
+      if(!isDefined(level._id_4B1E[var_1])) {
         level._id_4B1E[var_1] = spawnStruct();
+      }
 
       level._id_4B1E[var_1].value = var_3;
       level._id_4B1E[var_1]._id_5C0D = var_3;
       level._id_4B1E[var_1]._id_3515 = var_2;
       break;
     case "hud":
-      if(!isDefined(level._id_4F7C[var_1]))
+      if(!isDefined(level._id_4F7C[var_1])) {
         level._id_4F7C[var_1] = spawnStruct();
+      }
 
       level._id_4F7C[var_1].value = var_3;
       level._id_4F7C[var_1]._id_5C0D = var_3;

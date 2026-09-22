@@ -4,16 +4,18 @@
 ***********************************************/
 
 main() {
-  if(!isDefined(level._id_0E2F))
+  if(!isDefined(level._id_0E2F)) {
     level._id_0E2F = [];
+  }
 
   var_0 = getarraykeys(level._id_0E2F);
 
   foreach(var_2 in var_0) {
     var_3 = getarraykeys(level._id_0E2F[var_2]);
 
-    foreach(var_5 in var_3)
-    _precachempanim(level._id_0E2F[var_2][var_5]);
+    foreach(var_5 in var_3) {
+      _precachempanim(level._id_0E2F[var_2][var_5]);
+    }
   }
 
   waittillframeend;
@@ -24,9 +26,9 @@ main() {
 }
 
 _id_0E9F() {
-  if(isDefined(self.animation))
+  if(isDefined(self.animation)) {
     var_0 = self.animation;
-  else {
+  } else {
     var_1 = getarraykeys(level._id_0E2F[self.model]);
     var_2 = var_1[randomint(var_1.size)];
     var_0 = level._id_0E2F[self.model][var_2];

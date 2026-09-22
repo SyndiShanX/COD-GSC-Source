@@ -51,8 +51,9 @@ run_berlin_trophy_event_5() {
 }
 
 complete_berlin_trophy_event_6(var_0) {
-  if(!common_scripts\utility::_id_562E(level.players_zombies_have_fired_weapon))
+  if(!common_scripts\utility::_id_562E(level.players_zombies_have_fired_weapon)) {
     maps\mp\gametypes\zombies::_id_47A8("DLC2_ZM_AMMO", undefined, 1);
+  }
 }
 
 run_berlin_trophy_event_6() {
@@ -112,28 +113,34 @@ watch_fail_berlin_trophy_event_6(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   if(_id_0547::isvalidequipmentzombies(var_5)) {
     return;
   }
-  if(_id_0547::_id_5565(var_11, "weapon_other"))
+  if(_id_0547::_id_5565(var_11, "weapon_other")) {
     var_12 = 0;
+  }
 
-  if(_id_0547::_id_5565(var_11, "other"))
+  if(_id_0547::_id_5565(var_11, "other")) {
     var_12 = 0;
+  }
 
-  if(issubstr(var_5, "shovel"))
+  if(issubstr(var_5, "shovel")) {
     var_12 = 0;
+  }
 
-  if(maps\mp\zquests\zmb_secret_challenges_util::array_contains_subtring(level.berlin_melee_weapons, var_5))
+  if(maps\mp\zquests\zmb_secret_challenges_util::array_contains_subtring(level.berlin_melee_weapons, var_5)) {
     var_12 = 0;
+  }
 
-  if(var_12)
+  if(var_12) {
     fail_berlin_trophy_event_6();
+  }
 }
 
 set_players_have_fired_shot() {
   var_0 = self;
   var_1 = "wunderbuss";
 
-  while(issubstr(var_1, "wunderbuss"))
+  while(issubstr(var_1, "wunderbuss")) {
     var_0 waittill("weapon_fired", var_1);
+  }
 
   fail_berlin_trophy_event_6();
 }

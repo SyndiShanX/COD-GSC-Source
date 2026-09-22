@@ -59,8 +59,9 @@ start_intermission_music_override_callback() {
 }
 
 _id_7248() {
-  if(!isDefined(self._id_11CB))
+  if(!isDefined(self._id_11CB)) {
     self._id_11CB = spawnStruct();
+  }
 }
 
 _id_7330() {
@@ -79,8 +80,9 @@ _id_A97A() {
 }
 
 lightning_strike_in_play_space(var_0, var_1) {
-  if(!isDefined(level._id_11CB.lightning_strike_counter))
+  if(!isDefined(level._id_11CB.lightning_strike_counter)) {
     level._id_11CB.lightning_strike_counter = 0;
+  }
 
   var_2 = undefined;
   var_3 = common_scripts\utility::_id_627D(level._id_11CB.lightning_strike_counter, 2);
@@ -92,7 +94,7 @@ lightning_strike_in_play_space(var_0, var_1) {
     var_2 = spawn("script_origin", var_0);
     var_4 = _id_0380::_id_6844("zmb_wm_lightning_strike", undefined, var_2);
     _id_0378::_id_8D14(isDefined(var_4), "lightning_strike", 1);
-    var_2 moveto(var_1, 0.2);
+    var_2 moveTo(var_1, 0.2);
   }
 
   level._id_11CB.lightning_strike_counter = level._id_11CB.lightning_strike_counter + 1;
@@ -223,7 +225,7 @@ _id_ABF8(var_0, var_1) {
   var_3 = 0;
   var_4 = 0.875;
   _id_0380::_id_288B("zombie_soul_suck", undefined, var_2, 0, var_4);
-  var_2 moveto(var_1, 1.9);
+  var_2 moveTo(var_1, 1.9);
   wait 2.0;
   var_2 delete();
 }

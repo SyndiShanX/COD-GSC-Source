@@ -38,7 +38,7 @@ _id_78A8(var_0) {
   self endon("personal_uav_removed");
 
   for(;;) {
-    var_0 moveto(self.origin, 0.05);
+    var_0 moveTo(self.origin, 0.05);
     waitframe();
   }
 }
@@ -64,10 +64,11 @@ _id_8711() {}
 _id_A079() {}
 
 _id_8721() {
-  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled())
+  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     self setviewkickscale(0.0);
-  else
+  } else {
     thread monitorsharpfocus();
+  }
 }
 
 monitorsharpfocus() {
@@ -85,10 +86,11 @@ monitorsharpfocus() {
 }
 
 scaleflinchbasedonweapon(var_0) {
-  if(maps\mp\_utility::getweaponclass(var_0) == "weapon_sniper")
+  if(maps\mp\_utility::getweaponclass(var_0) == "weapon_sniper") {
     self setviewkickscale(0.35);
-  else
+  } else {
     self setviewkickscale(0.9);
+  }
 }
 
 _id_A07B() {
@@ -141,10 +143,11 @@ _id_86C6(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 10;
-  else
+  } else {
     var_0 = int(var_0) * 2;
+  }
 
   maps\mp\_utility::_id_870F(var_0);
   self._id_7AD7 = var_0;
@@ -160,10 +163,11 @@ _id_8736(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self._id_94BE = 0.5;
-  else
+  } else {
     self._id_94BE = int(var_0) / 10;
+  }
 }
 
 _id_A082() {
@@ -298,8 +302,9 @@ _id_8663() {}
 _id_A057() {}
 
 _id_86C2() {
-  if(!maps\mp\_utility::_id_56D7())
+  if(!maps\mp\_utility::_id_56D7()) {
     self setmotiontrackervisible(0);
+  }
 }
 
 _id_A06F() {
@@ -339,14 +344,17 @@ _id_6AF6() {
 }
 
 _id_5765(var_0) {
-  if(var_0 == game["menu_onemanarmy"])
+  if(var_0 == game["menu_onemanarmy"]) {
     return 1;
+  }
 
-  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && var_0 == game["menu_onemanarmy_defaults_splitscreen"])
+  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && var_0 == game["menu_onemanarmy_defaults_splitscreen"]) {
     return 1;
+  }
 
-  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && var_0 == game["menu_onemanarmy_custom_splitscreen"])
+  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && var_0 == game["menu_onemanarmy_custom_splitscreen"]) {
     return 1;
+  }
 
   return 0;
 }
@@ -421,8 +429,9 @@ _id_47A0(var_0) {
   common_scripts\utility::_id_0615();
   maps\mp\gametypes\_class::_id_4773(self.pers["team"], var_0, 0);
 
-  if(isDefined(self._id_2013))
+  if(isDefined(self._id_2013)) {
     self attach(self._id_2013, "J_spine4", 1);
+  }
 
   self notify("changed_kit");
   level notify("changed_kit");
@@ -435,8 +444,9 @@ _id_6A6D(var_0) {
   var_2 settext(&"MPUI_CHANGING_KIT");
   var_1 maps\mp\gametypes\_hud_util::_id_A0E3(0, 1 / var_0);
 
-  for(var_3 = 0; var_3 < var_0 && isalive(self) && !level.gameended; var_3 = var_3 + 0.05)
+  for(var_3 = 0; var_3 < var_0 && isalive(self) && !level.gameended; var_3 = var_3 + 0.05) {
     waitframe();
+  }
 
   var_1 maps\mp\gametypes\_hud_util::destroyelem();
   var_2 maps\mp\gametypes\_hud_util::destroyelem();
@@ -469,8 +479,9 @@ _id_240A() {
   self endon("clearPreviousTISpawnpointStarted");
   common_scripts\utility::_id_A70A("disconnect", "joined_team", "joined_spectators");
 
-  if(isDefined(self._id_872A))
+  if(isDefined(self._id_872A)) {
     _id_2D54(self._id_872A);
+  }
 }
 
 _id_A17C() {
@@ -502,10 +513,11 @@ _id_A17C() {
 }
 
 _id_583F(var_0) {
-  if(_canspawn(var_0) && self isonground())
+  if(_canspawn(var_0) && self isonground()) {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_63EF() {
@@ -522,8 +534,9 @@ _id_63EF() {
     if(var_1 != "s2_tactical_insertion_device_mp") {
       continue;
     }
-    if(isDefined(self._id_872A))
+    if(isDefined(self._id_872A)) {
       _id_2D54(self._id_872A);
+    }
 
     if(!isDefined(self._id_9A28)) {
       self iprintlnbold("Invalid spawn location");
@@ -544,7 +557,7 @@ _id_63EF() {
     var_3._id_7464 = self._id_9A28;
     var_3 setotherent(self);
     var_3 common_scripts\utility::_id_5FA9(self.team, 1);
-    var_3 playloopsound("tac_insert_spark_lp");
+    var_3 playLoopSound("tac_insert_spark_lp");
     thread _id_A950();
     self._id_872A = var_3;
     return;
@@ -581,7 +594,7 @@ _id_47EB(var_0) {
   var_1 setModel(level._id_906A["friendly"]);
   var_1 _meth_80B1();
   var_1 thread _id_47EC(self.team, level._id_9069["friendly"], var_0);
-  var_1 playloopsound("tac_insert_spark_lp");
+  var_1 playLoopSound("tac_insert_spark_lp");
   self waittill("death");
   var_1 stoploopsound();
   var_1 delete();
@@ -631,8 +644,9 @@ _id_47EC(var_0, var_1, var_2) {
 _id_6F57(var_0) {
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_6AE7(var_0, var_1, var_2, var_3) {
@@ -650,8 +664,8 @@ _id_47ED(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_PICKUP_TI");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_PICKUP_TI");
   thread _id_A10D(var_0);
 
   for(;;) {
@@ -680,20 +694,25 @@ _id_2D54(var_0) {
     var_0._id_0117 notify("stop_watchTISpawn");
   }
 
-  if(isDefined(var_0._id_3773))
+  if(isDefined(var_0._id_3773)) {
     var_0._id_3773 delete();
+  }
 
-  if(isDefined(var_0._id_9D65))
+  if(isDefined(var_0._id_9D65)) {
     var_0._id_9D65 delete();
+  }
 
-  if(isDefined(var_0._id_359B["friendly"]))
+  if(isDefined(var_0._id_359B["friendly"])) {
     var_0._id_359B["friendly"] delete();
+  }
 
-  if(isDefined(var_0._id_359B["enemy"]))
+  if(isDefined(var_0._id_359B["enemy"])) {
     var_0._id_359B["enemy"] delete();
+  }
 
-  if(isDefined(var_0._id_0117))
+  if(isDefined(var_0._id_0117)) {
     var_0._id_0117._id_872A = undefined;
+  }
 
   var_0 stoploopsound();
   var_0 delete();
@@ -703,8 +722,8 @@ _id_47EA(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self._id_3773 setcursorhint("HINT_NOICON");
-  self._id_3773 sethintstring(&"MP_DESTROY_TI");
+  self._id_3773 setCursorHint("HINT_NOICON");
+  self._id_3773 setHintString(&"MP_DESTROY_TI");
   self._id_3773 maps\mp\_utility::makeenemyusable(var_0);
 
   for(;;) {
@@ -714,8 +733,9 @@ _id_47EA(var_0) {
     level thread maps\mp\gametypes\_rank::_id_1457("tac_insert_destroyed", var_0);
     var_1 maps\mp\gametypes\_missions::processchallenge("ch_boot_field");
 
-    if(var_1 maps\mp\_utility::_hasperk("specialty_detectexplosive"))
+    if(var_1 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_perks3_engineer");
+    }
 
     var_0 _meth_85EF(&"tac_insert_destroyed", 0);
     thread _id_6AE7(var_1);
@@ -735,17 +755,18 @@ _id_A950() {
   self setOrigin(var_0 + (0, 0, 2000));
   self allowads(0);
   var_1 = _magicbullet("tactical_insertion_parachute_mp", self.origin, var_0);
-  self playerlinkto(var_1, undefined, 0, 180, 180, 180, 180, 1);
+  self playerlinkTo(var_1, undefined, 0, 180, 180, 180, 180, 1);
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
   var_2 linktosynchronizedparent(var_1);
   var_3 = spawn("script_model", var_2.origin);
   var_3 hide();
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     var_3 setModel("usa_carepackage_parachute_anim");
-  else
+  } else {
     var_3 setModel("ger_carepackage_parachute_anim");
+  }
 
   var_3._id_62A0 = 0.5;
   var_3 scriptmodelplayanim("carepackage_parachute_loop");
@@ -754,7 +775,7 @@ _id_A950() {
   var_4 = spawn("script_model", var_3.origin);
   var_4.angles = var_3.angles;
   var_4 setModel("ger_carepackage_parachute");
-  var_4 setcandamage(1);
+  var_4 setCanDamage(1);
   var_4 hide();
   var_4 linktosynchronizedparent(var_3);
   var_4 thread _id_A94F(var_1);
@@ -764,8 +785,9 @@ _id_A950() {
 _id_A94F(var_0) {
   common_scripts\utility::_id_A732("damage", "death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 notify("death");
+  }
 }
 
 _id_9A1E(var_0, var_1, var_2, var_3) {
@@ -783,13 +805,15 @@ _id_86ED(var_0, var_1) {
   if(isPlayer(self) || _isagent(self)) {
     if(isDefined(var_0._id_90DA)) {
       if(var_1) {
-        if(!isDefined(self.paintedattackers))
+        if(!isDefined(self.paintedattackers)) {
           self.paintedattackers = [];
+        }
 
         self.paintedattackers[var_0.guid] = gettime();
       } else {
-        if(!isDefined(self.paintedexpeditionaryattackers))
+        if(!isDefined(self.paintedexpeditionaryattackers)) {
           self.paintedexpeditionaryattackers = [];
+        }
 
         self.paintedexpeditionaryattackers[var_0.guid] = gettime();
       }
@@ -829,11 +853,13 @@ _id_576D() {
 }
 
 _id_8710() {
-  if(isDefined(self._id_76F6))
+  if(isDefined(self._id_76F6)) {
     self givemaxammo(self._id_76F6);
+  }
 
-  if(isDefined(self.botsetscriptgoal))
+  if(isDefined(self.botsetscriptgoal)) {
     self givemaxammo(self.botsetscriptgoal);
+  }
 }
 
 _id_8680() {
@@ -883,8 +909,9 @@ _id_86B4(var_0, var_1, var_2) {
   level endon("end_game");
   self._id_5739 = 1;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.25;
+  }
 
   self._id_64CD = var_0;
   _id_0513::_id_A13B();
@@ -897,8 +924,9 @@ _id_86B4(var_0, var_1, var_2) {
     var_4 = 32;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 7;
+  }
 
   if(!isDefined(var_2) || var_2 == 1) {
     self._id_5980 = maps\mp\gametypes\_hud_util::_id_2833("hudsmall", 1.0);
@@ -942,11 +970,13 @@ _id_A06B(var_0) {
     _id_0513::_id_A13B();
   }
 
-  if(isDefined(self._id_597F))
+  if(isDefined(self._id_597F)) {
     self._id_597F destroy();
+  }
 
-  if(isDefined(self._id_5980))
+  if(isDefined(self._id_5980)) {
     self._id_5980 destroy();
+  }
 
   self._id_5739 = undefined;
   self notify("unset_juiced");
@@ -991,16 +1021,18 @@ _id_86BC(var_0) {
 _id_86BB(var_0) {
   self notify("give_light_armor");
 
-  if(isDefined(self._id_5D2E))
+  if(isDefined(self._id_5D2E)) {
     _id_A06E();
+  }
 
   thread _id_7CE7();
   thread _id_7CE8();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self._id_6089 = var_0;
-  else
+  } else {
     self._id_6089 = 150;
+  }
 
   _id_86BC(self._id_6089);
 
@@ -1027,8 +1059,9 @@ _id_7CE7() {
 _id_A06E() {
   _id_86BC(undefined);
 
-  if(isDefined(level._id_5677) && level._id_5677)
+  if(isDefined(level._id_5677) && level._id_5677) {
     self._id_0F67 destroy();
+  }
 
   self notify("remove_light_armor");
 }
@@ -1074,8 +1107,9 @@ _id_867F() {
 _id_A060() {
   _id_0513::_id_A13B();
 
-  if(maps\mp\_utility::_hasperk("specialty_quickdraw_new"))
+  if(maps\mp\_utility::_hasperk("specialty_quickdraw_new")) {
     maps\mp\_utility::_id_0735("specialty_quickdraw_new");
+  }
 }
 
 fightorflightregeneratehealth() {
@@ -1102,16 +1136,19 @@ _id_63E3() {
         continue;
       }
       if(level.teambased && var_2.team != self.team || !level.teambased && var_2 != self) {
-        if(distancesquared(var_2.origin, self.origin) < level._id_6EB1)
+        if(distancesquared(var_2.origin, self.origin) < level._id_6EB1) {
           self._id_4B65 = 1;
+        }
 
-        if(distancesquared(var_2.origin, self.origin) < level._id_08E2)
+        if(distancesquared(var_2.origin, self.origin) < level._id_08E2) {
           var_0 = 1;
+        }
       }
     }
 
-    if(!var_0 && self._id_4B65)
+    if(!var_0 && self._id_4B65) {
       self._id_4B65 = 0;
+    }
 
     waitframe();
   }
@@ -1205,13 +1242,15 @@ _id_6F4E() {
       }
     }
 
-    if(var_2 > 4)
+    if(var_2 > 4) {
       var_2 = 1;
-    else
+    } else {
       var_2 = 0;
+    }
 
-    if(var_3)
+    if(var_3) {
       _id_A147(var_2, 0);
+    }
 
     waitframe();
   }
@@ -1225,8 +1264,9 @@ _id_A932() {
   }
   common_scripts\utility::_id_A70A("disconnect", "removePerception", "death", "perceptionChallengeCheckDone");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self._id_92F1 = 0;
+  }
 }
 
 _id_A933() {
@@ -1257,17 +1297,20 @@ _id_A147(var_0, var_1) {
   var_2 = common_scripts\utility::_id_44F5("perception_glow");
   var_3 = 0;
 
-  if(isDefined(self._id_6F4C))
+  if(isDefined(self._id_6F4C)) {
     var_3 = self._id_6F4C;
+  }
 
   if(isDefined(var_1) && var_1) {
-    if(isDefined(self.model) || self.model)
+    if(isDefined(self.model) || self.model) {
       _killfxontagforclient(var_2, self, "j_head", self);
+    }
   } else if(var_3 != var_0) {
-    if(var_0)
+    if(var_0) {
       _playfxontagforclients(var_2, self, "j_head", self);
-    else
+    } else {
       _killfxontagforclient(var_2, self, "j_head", self);
+    }
   }
 
   self._id_6F4C = var_0;
@@ -1282,16 +1325,17 @@ _id_4601(var_0) {
   var_4 = vectorNormalize(var_4);
   var_5 = vectordot(var_2, var_4);
 
-  if(var_5 >= 0.92388)
+  if(var_5 >= 0.92388) {
     return 2;
-  else if(var_5 >= 0.382683)
+  } else if(var_5 >= 0.382683) {
     return common_scripts\utility::_id_98E7(maps\mp\_utility::_id_5746(self.origin, var_2, var_0.origin), 4, 1);
-  else if(var_5 >= -0.382683)
+  } else if(var_5 >= -0.382683) {
     return common_scripts\utility::_id_98E7(maps\mp\_utility::_id_5746(self.origin, var_2, var_0.origin), 128, 64);
-  else if(var_5 >= -0.92388)
+  } else if(var_5 >= -0.92388) {
     return common_scripts\utility::_id_98E7(maps\mp\_utility::_id_5746(self.origin, var_2, var_0.origin), 32, 8);
-  else
+  } else {
     return 16;
+  }
 }
 
 _id_6011(var_0) {
@@ -1299,9 +1343,9 @@ _id_6011(var_0) {
   self endon("disconnect");
   var_1 = var_0 getentitynumber();
 
-  if(!isDefined(self._id_6F4D))
+  if(!isDefined(self._id_6F4D)) {
     self._id_6F4D = [];
-  else if(isDefined(self._id_6F4D[var_1])) {
+  } else if(isDefined(self._id_6F4D[var_1])) {
     self notify("markAsPerceptionSource");
     self endon("markAsPerceptionSource");
   }
@@ -1321,8 +1365,9 @@ _id_8743() {
     self setgrenadethrowscale(1.25);
     self waittill("grenade_pullback", var_0);
 
-    if(var_0 == "killstreak_carepackage_grenade_mp" || var_0 == "killstreak_carepackage_grenade_axis_mp" || var_0 == "killstreak_emergency_carepackage_grenade_mp" || var_0 == "killstreak_emergency_carepackage_grenade_axis_mp" || var_0 == "gamemode_ball")
+    if(var_0 == "killstreak_carepackage_grenade_mp" || var_0 == "killstreak_carepackage_grenade_axis_mp" || var_0 == "killstreak_emergency_carepackage_grenade_mp" || var_0 == "killstreak_emergency_carepackage_grenade_axis_mp" || var_0 == "gamemode_ball") {
       self setgrenadethrowscale(1.0);
+    }
 
     self waittill("grenade_fire", var_1, var_2);
   }
@@ -1367,20 +1412,22 @@ _id_8678() {
   if(_isai(self) || istestclient(self)) {
     return;
   }
-  if((level.splitscreen || self issplitscreenplayer()) && !_func_3BA())
+  if((level.splitscreen || self issplitscreenplayer()) && !_func_3BA()) {
     self setclientdvars("1806", "90", "1310", "90", "2385", "0.50");
-  else
+  } else {
     self setclientdvars("1806", "225", "1310", "225", "2385", "0.60");
+  }
 }
 
 _id_A05D() {
   if(_isai(self) || istestclient(self)) {
     return;
   }
-  if((level.splitscreen || self issplitscreenplayer()) && !_func_3BA())
+  if((level.splitscreen || self issplitscreenplayer()) && !_func_3BA()) {
     self setclientdvars("1806", "75", "1310", "75", "2385", "0.45");
-  else
+  } else {
     self setclientdvars("1806", "175", "1310", "175", "2385", "0.45");
+  }
 }
 
 setsnowblind() {
@@ -1415,8 +1462,9 @@ monitorthaw() {
 
 setthaw() {
   if(isDefined(self.isinthaw)) {
-    if(self.isinthaw)
+    if(self.isinthaw) {
       self allowsprint(0);
+    }
   }
 }
 
@@ -1470,8 +1518,9 @@ refillpistolmagazineonswitch() {
   wait 0.1;
   var_0 = self getcurrentweapon();
 
-  if(maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol")
+  if(maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol") {
     self setweaponammoclip(var_0, _weaponclipsize(var_0));
+  }
 }
 
 setshiftyunlimitedpistolammunition() {
@@ -1488,8 +1537,9 @@ setshiftyunlimitedpistolammunition() {
     if(var_0 != "none" && !maps\mp\_utility::iskillstreakweapon(var_0) && maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol") {
       var_1 = self getfractionmaxammo(var_0);
 
-      if(var_1 < 1)
+      if(var_1 < 1) {
         self givemaxammo(var_0);
+      }
     }
   }
 }
@@ -1505,20 +1555,23 @@ setdeadeye() {
 }
 
 setdeadeyeinternal() {
-  if(self.critchance < 50)
+  if(self.critchance < 50) {
     self.critchance = (self.deadeyekillcount + 1) * 10;
-  else
+  } else {
     self.critchance = 50;
+  }
 
   var_0 = randomint(100);
 
-  if(var_0 <= self.critchance)
+  if(var_0 <= self.critchance) {
     maps\mp\_utility::giveperk("specialty_moredamage");
+  }
 }
 
 unsetdeadeye() {
-  if(maps\mp\_utility::_hasperk("specialty_moredamage"))
+  if(maps\mp\_utility::_hasperk("specialty_moredamage")) {
     maps\mp\_utility::_id_0735("specialty_moredamage");
+  }
 }
 
 setescalationboostafterkill() {}
@@ -1554,15 +1607,17 @@ handleescalationboostafterkill() {
       self setweaponammostock(var_0, int(var_2 - var_4));
     }
 
-    if(maps\mp\_utility::_hasperk("specialty_boostafterreload"))
+    if(maps\mp\_utility::_hasperk("specialty_boostafterreload")) {
       thread handleclassifiedboostafterreload();
+    }
   }
 
   maps\mp\_utility::giveperk("specialty_quickdraw_new");
   wait 6.0;
 
-  if(maps\mp\_utility::_hasperk("specialty_quickdraw_new"))
+  if(maps\mp\_utility::_hasperk("specialty_quickdraw_new")) {
     maps\mp\_utility::_id_0735("specialty_quickdraw_new");
+  }
 
   self setclientomnvar("ui_escalation_active", 0);
 }
@@ -1582,32 +1637,36 @@ setresistancedivisionscramblerindicator() {
   } else {
     var_0 = _id_04CA::_id_461D(self._id_0079);
 
-    if(!isDefined(self.pers["resistanceScramblerIndicatorActive"]))
+    if(!isDefined(self.pers["resistanceScramblerIndicatorActive"])) {
       self.pers["resistanceScramblerIndicatorActive"] = 1;
+    }
 
     self setclientomnvar("ui_show_division_resistance_ability_prompt", 1);
 
     if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
-      if(self.pers["resistanceScramblerIndicatorActive"])
+      if(self.pers["resistanceScramblerIndicatorActive"]) {
         self setclientomnvar("ui_resistance_state", 3);
-      else
+      } else {
         self setclientomnvar("ui_resistance_state", 2);
+      }
     } else {
       switch (var_0) {
         case "specialty_class_resistance_grandmaster":
         case "specialty_class_resistance_master":
-          if(self.pers["resistanceScramblerIndicatorActive"])
+          if(self.pers["resistanceScramblerIndicatorActive"]) {
             self setclientomnvar("ui_resistance_state", 3);
-          else
+          } else {
             self setclientomnvar("ui_resistance_state", 2);
+          }
 
           break;
         case "specialty_class_resistance_expert":
         case "specialty_class_resistance_enlisted":
-          if(self.pers["resistanceScramblerIndicatorActive"])
+          if(self.pers["resistanceScramblerIndicatorActive"]) {
             self setclientomnvar("ui_resistance_state", 1);
-          else
+          } else {
             self setclientomnvar("ui_resistance_state", 0);
+          }
 
           break;
       }
@@ -1679,13 +1738,15 @@ toggleresistancedivisionscramblerindicator(var_0, var_1) {
 
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     if(!var_1) {
-      if(maps\mp\_utility::_hasperk("specialty_sixthsense"))
+      if(maps\mp\_utility::_hasperk("specialty_sixthsense")) {
         maps\mp\_utility::_id_0735("specialty_sixthsense");
+      }
 
       wait 0.1;
 
-      if(maps\mp\_utility::_hasperk("specialty_gpsjammer"))
+      if(maps\mp\_utility::_hasperk("specialty_gpsjammer")) {
         maps\mp\_utility::_id_0735("specialty_gpsjammer");
+      }
     } else {
       maps\mp\_utility::giveperk("specialty_gpsjammer");
       wait 0.15;
@@ -1696,13 +1757,15 @@ toggleresistancedivisionscramblerindicator(var_0, var_1) {
       case "specialty_class_resistance_grandmaster":
       case "specialty_class_resistance_master":
         if(!var_1) {
-          if(maps\mp\_utility::_hasperk("specialty_sixthsense"))
+          if(maps\mp\_utility::_hasperk("specialty_sixthsense")) {
             maps\mp\_utility::_id_0735("specialty_sixthsense");
+          }
 
           wait 0.1;
 
-          if(maps\mp\_utility::_hasperk("specialty_gpsjammer"))
+          if(maps\mp\_utility::_hasperk("specialty_gpsjammer")) {
             maps\mp\_utility::_id_0735("specialty_gpsjammer");
+          }
         } else {
           maps\mp\_utility::giveperk("specialty_gpsjammer");
           wait 0.15;
@@ -1713,8 +1776,9 @@ toggleresistancedivisionscramblerindicator(var_0, var_1) {
       case "specialty_class_resistance_expert":
       case "specialty_class_resistance_enlisted":
         if(!var_1) {
-          if(maps\mp\_utility::_hasperk("specialty_gpsjammer"))
+          if(maps\mp\_utility::_hasperk("specialty_gpsjammer")) {
             maps\mp\_utility::_id_0735("specialty_gpsjammer");
+          }
 
           wait 0.15;
         } else
@@ -1748,8 +1812,9 @@ handlegrenadiertrainingunlocks() {
     }
   }
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -1761,34 +1826,40 @@ shouldgrantgrenadierperkindex(var_0) {
     return;
   }
   if(isDefined(level.disabledivisionpassives) && level.disabledivisionpassives) {
-    if(var_1 == 1)
+    if(var_1 == 1) {
       return 1;
-    else
+    } else {
       return 0;
+    }
   }
 
-  if(!maps\mp\_utility::_hasperk("specialty_trainingUnlocker" + var_1))
+  if(!maps\mp\_utility::_hasperk("specialty_trainingUnlocker" + var_1)) {
     return 0;
+  }
 
-  if(!isDefined(self.pers["grenadier_kills"]))
+  if(!isDefined(self.pers["grenadier_kills"])) {
     self.pers["grenadier_kills"] = 0;
+  }
 
   var_2 = self.pers["grenadier_kills"];
 
   switch (var_1) {
     case 1:
-      if(var_2 >= 5)
+      if(var_2 >= 5) {
         return 1;
+      }
 
       break;
     case 2:
-      if(var_2 >= 10)
+      if(var_2 >= 10) {
         return 1;
+      }
 
       break;
     case 3:
-      if(var_2 >= 15)
+      if(var_2 >= 15) {
         return 1;
+      }
 
       break;
     default:
@@ -1803,26 +1874,31 @@ monitorgrenadierprogress() {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.enteredfrenzyloop) && self.enteredfrenzyloop == 1)
+  if(isDefined(self.enteredfrenzyloop) && self.enteredfrenzyloop == 1) {
     return;
-  else
+  } else {
     self.enteredfrenzyloop = 0;
+  }
 
-  if(!isDefined(self.grenadierprogressfromtime))
+  if(!isDefined(self.grenadierprogressfromtime)) {
     self.grenadierprogressfromtime = 0;
+  }
 
   var_0 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, level.gametype);
 
-  if(!isDefined(var_0) || var_0 == -1)
+  if(!isDefined(var_0) || var_0 == -1) {
     var_0 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, "default");
+  }
 
   var_1 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_0, 5)) / 100;
 
-  if(!isDefined(self.previousgrenadiertier))
+  if(!isDefined(self.previousgrenadiertier)) {
     self.previousgrenadiertier = 0;
+  }
 
-  if(!isDefined(self.grenadierfrenzy))
+  if(!isDefined(self.grenadierfrenzy)) {
     self.grenadierfrenzy = 0;
+  }
 
   while(self._id_0079 == 7 && !self.grenadierfrenzy && !self.enteredfrenzyloop) {
     wait 1;
@@ -1854,19 +1930,23 @@ monitorgrenadierprogress() {
 }
 
 getgrenadiermodvalue_a() {
-  if(!isDefined(self.pers["sessionProgressionA_Modifier"]))
+  if(!isDefined(self.pers["sessionProgressionA_Modifier"])) {
     return 1;
+  }
 
   var_0 = 0;
 
-  if(self.pers["sessionProgressionA_Modifier"] >= 1)
+  if(self.pers["sessionProgressionA_Modifier"] >= 1) {
     var_0++;
+  }
 
-  if(self.pers["sessionProgressionA_Modifier"] >= 8)
+  if(self.pers["sessionProgressionA_Modifier"] >= 8) {
     var_0++;
+  }
 
-  if(self.pers["sessionProgressionA_Modifier"] >= 15)
+  if(self.pers["sessionProgressionA_Modifier"] >= 15) {
     var_0++;
+  }
 
   var_1 = var_0 * 10 / 100;
   var_2 = self.pers["sessionProgressionA_Modifier"] * 0.02;
@@ -1875,19 +1955,23 @@ getgrenadiermodvalue_a() {
 }
 
 getgrenadiermodvalue_b() {
-  if(!isDefined(self.pers["sessionProgressionB_Modifier"]))
+  if(!isDefined(self.pers["sessionProgressionB_Modifier"])) {
     return 1;
+  }
 
   var_0 = 0;
 
-  if(self.pers["sessionProgressionB_Modifier"] >= 1)
+  if(self.pers["sessionProgressionB_Modifier"] >= 1) {
     var_0++;
+  }
 
-  if(self.pers["sessionProgressionB_Modifier"] >= 10)
+  if(self.pers["sessionProgressionB_Modifier"] >= 10) {
     var_0++;
+  }
 
-  if(self.pers["sessionProgressionB_Modifier"] >= 25)
+  if(self.pers["sessionProgressionB_Modifier"] >= 25) {
     var_0++;
+  }
 
   var_1 = var_0 * 2 / 100;
   var_2 = self.pers["sessionProgressionB_Modifier"] * 0.002;
@@ -1895,19 +1979,23 @@ getgrenadiermodvalue_b() {
 }
 
 getgrenadiermodvalue_c() {
-  if(!isDefined(self.pers["sessionProgressionC_Modifier"]))
+  if(!isDefined(self.pers["sessionProgressionC_Modifier"])) {
     return 1;
+  }
 
   var_0 = 0;
 
-  if(self.pers["sessionProgressionC_Modifier"] >= 1)
+  if(self.pers["sessionProgressionC_Modifier"] >= 1) {
     var_0++;
+  }
 
-  if(self.pers["sessionProgressionC_Modifier"] >= 10)
+  if(self.pers["sessionProgressionC_Modifier"] >= 10) {
     var_0++;
+  }
 
-  if(self.pers["sessionProgressionC_Modifier"] >= 20)
+  if(self.pers["sessionProgressionC_Modifier"] >= 20) {
     var_0++;
+  }
 
   var_1 = var_0 * 5 / 100;
   var_2 = self.pers["sessionProgressionC_Modifier"] * 0.01;
@@ -1944,8 +2032,9 @@ processgrenadierkill() {
 
 togglegrenadierfrenzy(var_0) {
   if(var_0) {
-    if(!isDefined(self.grenadierfrenzy))
+    if(!isDefined(self.grenadierfrenzy)) {
       self.grenadierfrenzy = 0;
+    }
 
     if(self.grenadierfrenzy == 0) {
       self.grenadierfrenzy = 1;
@@ -2046,8 +2135,9 @@ togglegrenadierfrenzy(var_0) {
 getgrenadierprogress() {
   var_0 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, level.gametype);
 
-  if(!isDefined(var_0) || var_0 == -1)
+  if(!isDefined(var_0) || var_0 == -1) {
     var_0 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, "default");
+  }
 
   var_1 = 0;
   var_2 = 0;
@@ -2090,22 +2180,25 @@ monitorfrenzypoints(var_0, var_1) {
   if(self._id_0079 != 7) {
     return;
   }
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self.grenadierfrenzystartscore = var_1;
-  else
+  } else {
     self.grenadierfrenzystartscore = self.score;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.grenadierfrenzycurrentscore = var_0;
-  else
+  } else {
     self.grenadierfrenzycurrentscore = 0;
+  }
 
   self.frenzyscorefromtime = 0;
   self.grenadierworkingtowardfrenzy = 1;
   var_2 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, level.gametype);
 
-  if(!isDefined(var_2) || var_2 == -1)
+  if(!isDefined(var_2) || var_2 == -1) {
     var_2 = _tablelookuprownum("mp/grenadierUpgradeTable.csv", 0, "default");
+  }
 
   var_3 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_2, 4));
   var_4 = int(_tablelookupbyrow("mp/grenadierUpgradeTable.csv", var_2, 5)) / 100;
@@ -2131,18 +2224,20 @@ monitorfrenzypoints(var_0, var_1) {
 
 processgrenadierheadshot() {
   if(maps\mp\_utility::_hasperk("specialty_sessionProgressionC")) {
-    if(!isDefined(self.pers["sessionProgressionC_Modifier"]))
+    if(!isDefined(self.pers["sessionProgressionC_Modifier"])) {
       self.pers["sessionProgressionC_Modifier"] = 0;
+    }
 
     self.pers["sessionProgressionC_Modifier"]++;
     maps\mp\_utility::_id_870F();
 
-    if(self.pers["sessionProgressionC_Modifier"] == 1)
+    if(self.pers["sessionProgressionC_Modifier"] == 1) {
       self _meth_85EF(&"grenadier_tier_earned", 1, 10);
-    else if(self.pers["sessionProgressionC_Modifier"] == 10)
+    } else if(self.pers["sessionProgressionC_Modifier"] == 10) {
       self _meth_85EF(&"grenadier_tier_earned", 1, 11);
-    else if(self.pers["sessionProgressionC_Modifier"] == 20)
+    } else if(self.pers["sessionProgressionC_Modifier"] == 20) {
       self _meth_85EF(&"grenadier_tier_earned", 1, 12);
+    }
   }
 }
 
@@ -2247,8 +2342,9 @@ setregeneratebulletsovertime() {
       }
     }
 
-    if(var_0)
+    if(var_0) {
       _id_04C7::_id_A102("resupply_bullets");
+    }
   }
 }
 
@@ -2285,8 +2381,9 @@ setregenerateequipmentovertime() {
         self setweaponammoclip(var_2, var_1 + 1);
         _id_04C7::_id_A102("resupply_equipment");
 
-        if(var_1 == 0)
+        if(var_1 == 0) {
           self notify("got_lethal_resupply");
+        }
       }
     }
   }
@@ -2302,8 +2399,9 @@ setlaunched() {
   self endon("stopAdditionalLauncherAmmoOnSpawn");
   level endon("game_ended");
 
-  if(!maps\mp\_utility::_hasperk("specialty_class_specialist"))
+  if(!maps\mp\_utility::_hasperk("specialty_class_specialist")) {
     common_scripts\utility::_id_A70C(self, "spawned_player", level, "prematch_over");
+  }
 
   var_0 = self getweaponlistprimaries();
 
@@ -2311,8 +2409,9 @@ setlaunched() {
     foreach(var_2 in var_0) {
       var_3 = maps\mp\_utility::getweaponclass(var_2);
 
-      if(isDefined(var_3) && var_3 == "weapon_projectile")
+      if(isDefined(var_3) && var_3 == "weapon_projectile") {
         self givemaxammo(var_2);
+      }
     }
   }
 }
@@ -2331,8 +2430,9 @@ setrandomgun() {
 
   self.curwunderlustgun = var_0;
 
-  if(!_func_367())
+  if(!_func_367()) {
     common_scripts\utility::_id_A70C(self, "spawned_player", self, "faux_spawn", self, "changed_class", level, "prematch_over");
+  }
 
   waitframe();
   givenextrandomgun(self getcurrentweapon(), var_0);
@@ -2382,8 +2482,9 @@ watchforweaponpickup() {
 
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
-        if(issubstr(var_3, var_0) == 0)
+        if(issubstr(var_3, var_0) == 0) {
           self takeweapon(var_3);
+        }
       }
     }
   }
@@ -2394,52 +2495,62 @@ getnextrandomgun() {
     var_0 = [];
 
     if(isDefined(self.wanderlustgunindex) && isDefined(self.pers["wanderlustGunList"])) {
-      if(self.wanderlustgunindex < self.pers["wanderlustGunList"].size)
+      if(self.wanderlustgunindex < self.pers["wanderlustGunList"].size) {
         var_0[var_0.size] = self.pers["wanderlustGunList"][self.wanderlustgunindex];
+      }
 
-      if(self.wanderlustgunindex + 1 < self.pers["wanderlustGunList"].size)
+      if(self.wanderlustgunindex + 1 < self.pers["wanderlustGunList"].size) {
         var_0[var_0.size] = self.pers["wanderlustGunList"][self.wanderlustgunindex + 1];
+      }
 
-      if(self.wanderlustgunindex + 2 < self.pers["wanderlustGunList"].size)
+      if(self.wanderlustgunindex + 2 < self.pers["wanderlustGunList"].size) {
         var_0[var_0.size] = self.pers["wanderlustGunList"][self.wanderlustgunindex + 2];
+      }
 
-      if(self.wanderlustgunindex + 3 < self.pers["wanderlustGunList"].size)
+      if(self.wanderlustgunindex + 3 < self.pers["wanderlustGunList"].size) {
         var_0[var_0.size] = self.pers["wanderlustGunList"][self.wanderlustgunindex + 3];
+      }
     }
 
     self.wanderlustgunindex = 0;
     var_1 = [];
 
     foreach(var_3 in level.wanderlustweaponlist) {
-      if(common_scripts\utility::_id_562E(var_3["Variant 0"].hidebaseweapon))
+      if(common_scripts\utility::_id_562E(var_3["Variant 0"].hidebaseweapon)) {
         var_4 = var_3["Variant 1"]._id_A9E0;
-      else
+      } else {
         var_4 = var_3["Variant 0"]._id_A9E0;
+      }
 
       var_5 = 6;
       var_6 = maps\mp\_utility::getweaponclass(var_4);
 
-      if(var_6 == "weapon_heavy" || var_6 == "weapon_sniper")
+      if(var_6 == "weapon_heavy" || var_6 == "weapon_sniper") {
         var_5--;
+      }
 
       var_7 = getattachmentsforweapon(var_4, var_5);
       var_8 = 0;
 
       for(var_9 = 0; var_9 < var_7.size; var_9++) {
-        if(issubstr(var_7[var_9], "_sight"))
+        if(issubstr(var_7[var_9], "_sight")) {
           var_8 = 1;
+        }
       }
 
-      if(!var_8 && var_6 == "weapon_sniper")
+      if(!var_8 && var_6 == "weapon_sniper") {
         var_7[var_7.size] = "hold_breath_3";
+      }
 
       var_10 = [];
 
-      for(var_9 = 0; var_9 < var_7.size; var_9++)
+      for(var_9 = 0; var_9 < var_7.size; var_9++) {
         var_10[var_9] = maps\mp\_utility::_id_452A(var_7[var_9]);
+      }
 
-      for(var_9 = var_7.size; var_9 < 6; var_9++)
+      for(var_9 = var_7.size; var_9 < 6; var_9++) {
         var_10[var_9] = 0;
+      }
 
       var_11 = maps\mp\gametypes\_class::_id_1D66(var_4, var_10[0], var_10[1], var_10[2], var_10[3], var_10[4], var_10[5], 0, 0, 0, 0, 0, undefined, 5);
       var_1[var_1.size] = var_11;
@@ -2455,14 +2566,17 @@ getnextrandomgun() {
   var_15 = var_13[self.wanderlustgunindex % var_13.size];
   var_14[var_14.size] = var_15;
 
-  if(self.wanderlustgunindex + 1 < var_13.size)
+  if(self.wanderlustgunindex + 1 < var_13.size) {
     var_14[var_14.size] = var_13[self.wanderlustgunindex + 1];
+  }
 
-  if(self.wanderlustgunindex + 2 < var_13.size)
+  if(self.wanderlustgunindex + 2 < var_13.size) {
     var_14[var_14.size] = var_13[self.wanderlustgunindex + 2];
+  }
 
-  if(self.wanderlustgunindex + 3 < var_13.size)
+  if(self.wanderlustgunindex + 3 < var_13.size) {
     var_14[var_14.size] = var_13[self.wanderlustgunindex + 3];
+  }
 
   self loadweapons(var_14);
   self.wanderlustprevgunindex = self.wanderlustgunindex;
@@ -2478,9 +2592,9 @@ givenextrandomgun(var_0, var_1) {
   self endon("giveNextRandomGun");
   waittillframeend;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else {
+  } else {
     for(var_2 = undefined; !isDefined(var_2) || var_2 == ""; var_2 = getnextrandomgun()) {}
 
     self.curwunderlustgun = var_2;
@@ -2500,27 +2614,30 @@ givenextrandomgun(var_0, var_1) {
 
   if(isDefined(var_4)) {
     foreach(var_6 in var_4) {
-      if(issubstr(var_6, var_2) == 0)
+      if(issubstr(var_6, var_2) == 0) {
         self takeweapon(var_6);
+      }
     }
   }
 
-  if(self getclientomnvar("ui_show_division_sniper_ability_prompt") == 1)
+  if(self getclientomnvar("ui_show_division_sniper_ability_prompt") == 1) {
     self setclientomnvar("ui_show_division_sniper_ability_prompt", 0);
+  }
 
   maps\mp\_utility::_giveweapon(var_2);
   thread watchwanderlustweaponchange(var_2);
   var_8 = _weaponclipsize(var_2);
   self setweaponammoclip(var_2, var_8);
 
-  if(maps\mp\_utility::getweaponclass(var_2) == "weapon_shotgun" && var_8 < 5)
+  if(maps\mp\_utility::getweaponclass(var_2) == "weapon_shotgun" && var_8 < 5) {
     self setweaponammostock(var_2, var_8 * 3);
-  else if(issubstr(var_2, "akimbo"))
+  } else if(issubstr(var_2, "akimbo")) {
     self setweaponammostock(var_2, var_8 * 4);
-  else if(var_8 < 50)
+  } else if(var_8 < 50) {
     self setweaponammostock(var_2, var_8);
-  else
+  } else {
     self setweaponammostock(var_2, 0);
+  }
 
   self switchtoweapon(var_2);
   var_9 = maps\mp\_utility::_id_4431(var_2);
@@ -2536,8 +2653,9 @@ watchwanderlustweaponchange(var_0) {
   wait 2.5;
   var_1 = self getcurrentweapon();
 
-  if(!isDefined(var_1) || var_1 == "" || var_1 == "none")
+  if(!isDefined(var_1) || var_1 == "" || var_1 == "none") {
     givenextrandomgun(var_1);
+  }
 }
 
 unsetrandomgun() {
@@ -2548,8 +2666,9 @@ unsetrandomgun() {
 }
 
 getattachmentsforweapon(var_0, var_1) {
-  if(var_1 <= 0)
+  if(var_1 <= 0) {
     return [];
+  }
 
   var_2 = _getweaponattachmentsbasenames(var_0);
   var_2 = common_scripts\utility::array_randomize(var_2);
@@ -2560,22 +2679,26 @@ getattachmentsforweapon(var_0, var_1) {
     var_6 = 0;
     var_7 = var_2[var_5];
 
-    if(!var_6 && (issubstr(var_7, "special_grip") || issubstr(var_7, "bipod") || issubstr(var_7, "hold_breath") || var_0 == "winchester1897_mp" && issubstr(var_7, "dragon_breath")))
+    if(!var_6 && (issubstr(var_7, "special_grip") || issubstr(var_7, "bipod") || issubstr(var_7, "hold_breath") || var_0 == "winchester1897_mp" && issubstr(var_7, "dragon_breath"))) {
       var_6 = 1;
+    }
 
     if(!var_6 && (issubstr(var_7, "iron_sight") || issubstr(var_7, "telescopic_sight") || issubstr(var_7, "lens_sight") || issubstr(var_7, "aperture_sight"))) {
-      if(common_scripts\utility::_id_24A6())
+      if(common_scripts\utility::_id_24A6()) {
         var_6 = 1;
+      }
     }
 
     if(!var_6 && (issubstr(var_7, "akimbo") || issubstr(var_7, "tactical_knife"))) {
-      if(randomint(100) >= 80)
+      if(randomint(100) >= 80) {
         var_6 = 1;
+      }
     }
 
     if(!var_6 && (issubstr(var_7, "grenade_launcher") || issubstr(var_7, "dragon_breath"))) {
-      if(randomint(100) >= 90)
+      if(randomint(100) >= 90) {
         var_6 = 1;
+      }
     }
 
     if(!var_6 && isDefined(var_3) && var_3.size > 0) {
@@ -2640,8 +2763,9 @@ buildwunderlustweaponlist() {
     }
     var_7 = 0;
 
-    if(_tablelookupbyrow("mp/statstable.csv", var_2, 53) == "1")
+    if(_tablelookupbyrow("mp/statstable.csv", var_2, 53) == "1") {
       var_7 = 1;
+    }
 
     var_8 = _tablelookupbyrow("mp/statstable.csv", var_2, 56);
 
@@ -2657,8 +2781,9 @@ buildwunderlustweaponlist() {
     var_12 = var_10 + "";
     var_13 = "Variant " + var_11;
 
-    if(!isDefined(var_0[var_12]))
+    if(!isDefined(var_0[var_12])) {
       var_0[var_12] = [];
+    }
 
     if(!isDefined(var_0[var_12][var_13])) {
       var_0[var_12][var_13] = spawnStruct();
@@ -2675,8 +2800,9 @@ buildwunderlustweaponlist() {
       continue;
     }
 
-    if(isDefined(var_16) && isDefined(var_16["Variant 0"]) && common_scripts\utility::_id_562E(var_16["Variant 0"].hidebaseweapon) && isDefined(var_16["Variant 1"]) && isDefined(var_16["Variant 1"]._id_A9E0))
+    if(isDefined(var_16) && isDefined(var_16["Variant 0"]) && common_scripts\utility::_id_562E(var_16["Variant 0"].hidebaseweapon) && isDefined(var_16["Variant 1"]) && isDefined(var_16["Variant 1"]._id_A9E0)) {
       var_14 = common_scripts\utility::_id_0F6F(var_14, var_16);
+    }
   }
 
   level.wanderlustweaponlist = var_14;
@@ -2692,8 +2818,9 @@ buildwunderlustweaponlist() {
 }
 
 setperkstreaks() {
-  if(!isDefined(self.pers["specialist_perkstreak_score"]))
+  if(!isDefined(self.pers["specialist_perkstreak_score"])) {
     self.pers["specialist_perkstreak_score"] = 0;
+  }
 
   self setclientomnvar("specialistPoints", self.pers["specialist_perkstreak_score"]);
 }
@@ -2720,31 +2847,36 @@ handlespecialisttrainingunlocks() {
     var_0++;
   }
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     return 1;
+  }
 
   return 0;
 }
 
 isspecialistperk(var_0) {
-  if(!isDefined(self) || !isDefined(self._id_5DFA))
+  if(!isDefined(self) || !isDefined(self._id_5DFA)) {
     return 0;
+  }
 
   for(var_1 = 6; var_1 < 9; var_1++) {
-    if(var_0 == maps\mp\_utility::_id_452B(self._id_5DFA[var_1]))
+    if(var_0 == maps\mp\_utility::_id_452B(self._id_5DFA[var_1])) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 hasspecialistperkunlocked(var_0) {
-  if(!isDefined(self) || !isDefined(self._id_5DFA))
+  if(!isDefined(self) || !isDefined(self._id_5DFA)) {
     return 0;
+  }
 
   for(var_1 = 6; var_1 < 9; var_1++) {
-    if(var_0 == maps\mp\_utility::_id_452B(self._id_5DFA[var_1]))
+    if(var_0 == maps\mp\_utility::_id_452B(self._id_5DFA[var_1])) {
       return shouldgrantspecialistperkindex(var_1);
+    }
   }
 
   return 0;
@@ -2756,16 +2888,18 @@ shouldgrantspecialistperkindex(var_0) {
   if(var_1 <= 0 || var_1 > 3) {
     return;
   }
-  if(!isDefined(self.pers["specialist_perkstreak_score"]))
+  if(!isDefined(self.pers["specialist_perkstreak_score"])) {
     self.pers["specialist_perkstreak_score"] = 0;
+  }
 
   var_2 = self.pers["specialist_perkstreak_score"];
   return var_2 >= getdvarint("specialistBasicTraining" + var_1 + "_score");
 }
 
 shouldgrantspecialistallbasictrainings() {
-  if(!isDefined(self.pers["specialist_perkstreak_score"]))
+  if(!isDefined(self.pers["specialist_perkstreak_score"])) {
     self.pers["specialist_perkstreak_score"] = 0;
+  }
 
   var_0 = self.pers["specialist_perkstreak_score"];
   return var_0 >= getdvarint("specialistBasicTraining4_score");
@@ -2780,8 +2914,9 @@ processspecialistevent(var_0) {
   if(var_1 <= 0) {
     return;
   }
-  if(!isDefined(self.pers["specialist_perkstreak_score"]))
+  if(!isDefined(self.pers["specialist_perkstreak_score"])) {
     self.pers["specialist_perkstreak_score"] = 0;
+  }
 
   var_2 = self.pers["specialist_perkstreak_score"];
   var_3 = var_2 + var_1;
@@ -2837,8 +2972,9 @@ grantallbasictrainingsforspecialist() {
   maps\mp\_utility::giveperk("specialty_class_clandestine");
   maps\mp\_utility::giveperk("specialty_class_escalation");
 
-  if(getdvarint("6019", 1) == 1)
+  if(getdvarint("6019", 1) == 1) {
     maps\mp\_utility::giveperk("specialty_class_remedy");
+  }
 }
 
 resetspecialistperkstreak() {
@@ -2886,8 +3022,9 @@ handleclassifiedboostaftermultikillorheadshot(var_0) {
     level thread maps\mp\gametypes\_rank::_id_1457(var_2, self);
   }
 
-  if(var_0)
+  if(var_0) {
     level thread maps\mp\gametypes\_rank::_id_1457("classified_bonus_headshot", self);
+  }
 
   if(var_1 || var_0) {
     maps\mp\gametypes\_missions::processchallenge("ch_commando_skill");
@@ -2912,8 +3049,9 @@ handleclassifiedboostaftermultikillorheadshot(var_0) {
       }
     }
 
-    if(var_3)
+    if(var_3) {
       _id_04C7::_id_A102("resupply_bullets");
+    }
   }
 }
 
@@ -2934,32 +3072,38 @@ handleclassifiedboostafterreload() {
   self.classifiedboostafterreloadactive = 1;
   var_0 = maps\mp\_utility::_hasperk("specialty_rof");
 
-  if(!var_0)
+  if(!var_0) {
     maps\mp\_utility::giveperk("specialty_rof");
+  }
 
   var_1 = maps\mp\_utility::_hasperk("specialty_bulletaccuracy");
 
-  if(!var_1)
+  if(!var_1) {
     maps\mp\_utility::giveperk("specialty_bulletaccuracy");
+  }
 
   wait 3.5;
 
-  if(maps\mp\_utility::_hasperk("specialty_rof") && !var_0)
+  if(maps\mp\_utility::_hasperk("specialty_rof") && !var_0) {
     maps\mp\_utility::_id_0735("specialty_rof");
+  }
 
-  if(maps\mp\_utility::_hasperk("specialty_bulletaccuracy") && !var_1)
+  if(maps\mp\_utility::_hasperk("specialty_bulletaccuracy") && !var_1) {
     maps\mp\_utility::_id_0735("specialty_bulletaccuracy");
+  }
 
   self setclientomnvar("ui_classifiedboost_active", 0);
   self.classifiedboostafterreloadactive = 0;
 }
 
 isclassifiedsecondbt(var_0) {
-  if(!isDefined(self) || !isDefined(self._id_5DFA))
+  if(!isDefined(self) || !isDefined(self._id_5DFA)) {
     return 0;
+  }
 
-  if(var_0 == maps\mp\_utility::_id_452B(self._id_5DFA[4]))
+  if(var_0 == maps\mp\_utility::_id_452B(self._id_5DFA[4])) {
     return 1;
+  }
 
   return 0;
 }
@@ -2992,8 +3136,9 @@ serumbasictraininglistener() {
       continue;
     }
 
-    if(isDefined(var_1) && common_scripts\utility::_id_562E(self.basictrainingserumactive))
+    if(isDefined(var_1) && common_scripts\utility::_id_562E(self.basictrainingserumactive)) {
       maps\mp\killstreaks\_raid_ss_serum_util::disableserum(var_1);
+    }
   }
 }
 
@@ -3009,8 +3154,9 @@ handleserumbasictraining() {
   }
   wait 0.1;
 
-  if(!isDefined(self.pers["basicTrainingSerumsUsed"]))
+  if(!isDefined(self.pers["basicTrainingSerumsUsed"])) {
     self.pers["basicTrainingSerumsUsed"] = 0;
+  }
 
   if(!isDefined(self.pers["basicTrainingSerumEarnProgress"])) {
     self.pers["basicTrainingSerumEarnTimeRemaining"] = 0;
@@ -3023,16 +3169,19 @@ handleserumbasictraining() {
     if(self.pers["basicTrainingSerumEarnProgress"] >= 1) {
       var_1 = self.pers["basicTrainingSerumsUsed"];
 
-      if(common_scripts\utility::_id_562E(self.raidserumactive))
+      if(common_scripts\utility::_id_562E(self.raidserumactive)) {
         self waittill("serum_finished");
+      }
 
       thread _id_051E::_id_478D("basic_training_serum", 0, 0, self, 1);
 
-      if(!var_0)
+      if(!var_0) {
         thread maps\mp\gametypes\_hud_message::killstreaksplashnotify("basic_training_serum", 500, undefined, undefined);
+      }
 
-      while(var_1 == self.pers["basicTrainingSerumsUsed"])
+      while(var_1 == self.pers["basicTrainingSerumsUsed"]) {
         waitframe();
+      }
 
       wait(level.serumbasictrainingactiveduration);
     }

@@ -15,8 +15,9 @@ _id_5EB1() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!maps\mp\_utility::gameflag("prematch_done"))
+  if(!maps\mp\_utility::gameflag("prematch_done")) {
     level waittill("prematch_over");
+  }
 
   if(isbot(self) || istestclient(self)) {
     return;

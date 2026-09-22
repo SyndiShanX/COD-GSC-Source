@@ -90,27 +90,31 @@ _id_8ADA(var_0, var_1) {
   var_3._id_8AD8 = gettime();
   var_2._id_62D3 = var_2._id_62D3 + var_1;
 
-  if(!common_scripts\utility::_id_0F79(var_0._id_8AD2, var_2))
+  if(!common_scripts\utility::_id_0F79(var_0._id_8AD2, var_2)) {
     var_0._id_8AD2 = common_scripts\utility::_id_0F6F(var_0._id_8AD2, var_2);
+  }
 
   level._id_349D[var_0 getguid()] = level._id_349D[var_0 getguid()] + var_1;
 }
 
 _id_467F(var_0) {
-  if(!isDefined(level._id_349D))
+  if(!isDefined(level._id_349D)) {
     return 0;
+  }
 
   var_1 = level._id_349D[var_0 getguid()];
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   return var_1;
 }
 
 getsharedmoneypickupsbyplayer(var_0) {
-  if(!isDefined(var_0._id_8AD2))
+  if(!isDefined(var_0._id_8AD2)) {
     return [];
+  }
 
   return var_0._id_8AD2;
 }
@@ -118,26 +122,30 @@ getsharedmoneypickupsbyplayer(var_0) {
 getsharedmoneyinpickupbyplayer(var_0) {
   var_1 = _id_4680();
 
-  if(!isDefined(var_1) || !isDefined(var_1._id_8AD3))
+  if(!isDefined(var_1) || !isDefined(var_1._id_8AD3)) {
     return 0;
+  }
 
   var_2 = var_1._id_8AD3[var_0 getentitynumber()];
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
   return var_2._id_0DBD;
 }
 
 _id_2698() {
-  if(!isDefined(level._id_349D))
+  if(!isDefined(level._id_349D)) {
     return 0;
+  }
 
   var_0 = 0;
 
   foreach(var_2 in level._id_349D) {
-    if(var_2 > 0)
+    if(var_2 > 0) {
       var_0++;
+    }
   }
 
   return var_0;
@@ -151,8 +159,9 @@ _id_A90C() {
   foreach(var_3 in var_0._id_8AD2) {
     var_3 _id_8ADD(var_1, 0);
 
-    if(var_3._id_62D3 <= 0)
+    if(var_3._id_62D3 <= 0) {
       level thread maps\mp\gametypes\zombies::_id_7CED(var_3);
+    }
   }
 }
 
@@ -165,8 +174,9 @@ _id_A90B() {
   var_0._id_8AD2 = [];
   var_0 thread _id_A90C();
 
-  if(!isDefined(level._id_349D[var_0 getguid()]))
+  if(!isDefined(level._id_349D[var_0 getguid()])) {
     level._id_349D[var_0 getguid()] = 0;
+  }
 
   for(;;) {
     wait(var_2);
@@ -206,14 +216,16 @@ _id_A90B() {
       var_10 = undefined;
 
       foreach(var_12 in var_0._id_8AD2) {
-        if(!isDefined(var_10) || var_12._id_8AD3[var_0 getentitynumber()]._id_8AD8 < var_10._id_8AD3[var_0 getentitynumber()]._id_8AD8)
+        if(!isDefined(var_10) || var_12._id_8AD3[var_0 getentitynumber()]._id_8AD8 < var_10._id_8AD3[var_0 getentitynumber()]._id_8AD8) {
           var_10 = var_12;
+        }
       }
 
       var_10 _id_8ADD(var_0 getentitynumber());
 
-      if(var_10._id_62D3 <= 0)
+      if(var_10._id_62D3 <= 0) {
         level thread maps\mp\gametypes\zombies::_id_7CED(var_10);
+      }
     }
 
     var_0 notify("money_share_success");
@@ -228,8 +240,9 @@ _id_4680() {
 _id_8ADE(var_0) {
   var_1 = _id_4680();
 
-  foreach(var_3 in getarraykeys(var_1._id_8AD3))
-  _id_8ADD(var_3, var_0);
+  foreach(var_3 in getarraykeys(var_1._id_8AD3)) {
+    _id_8ADD(var_3, var_0);
+  }
 }
 
 _id_47BB(var_0) {
@@ -248,16 +261,18 @@ _id_4681(var_0) {
 }
 
 _id_8ADD(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_7B92();
+  }
 
   var_2 = _id_4680();
   var_3 = var_2._id_8AD3[var_0]._id_0DBD;
   var_4 = maps\mp\gametypes\_playerlogic::_id_4622(var_0);
 
   if(isDefined(var_4)) {
-    if(var_1)
+    if(var_1) {
       var_4 _id_47BB(var_3);
+    }
 
     var_4._id_8AD2 = common_scripts\utility::_id_0F93(var_4._id_8AD2, var_2);
   }
@@ -271,8 +286,9 @@ sharemoneyremoveamountbyplayer(var_0, var_1) {
   var_3 = var_0 getentitynumber();
   var_4 = var_2._id_8AD3[var_3]._id_0DBD;
 
-  if(var_1 > var_4)
+  if(var_1 > var_4) {
     return 0;
+  }
 
   var_2._id_62D3 = var_2._id_62D3 - var_1;
 
@@ -280,8 +296,9 @@ sharemoneyremoveamountbyplayer(var_0, var_1) {
     var_0._id_8AD2 = common_scripts\utility::_id_0F93(var_0._id_8AD2, var_2);
     var_2._id_8AD3[var_3] = undefined;
 
-    if(var_2._id_62D3 <= 0)
+    if(var_2._id_62D3 <= 0) {
       level thread maps\mp\gametypes\zombies::_id_7CED(var_2);
+    }
   }
 
   return 1;

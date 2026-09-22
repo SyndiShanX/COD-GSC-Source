@@ -19,8 +19,9 @@ init() {
   var_2 = var_1;
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4._id_0165))
+    if(isDefined(var_4._id_0165)) {
       var_2 = common_scripts\utility::_id_0F93(var_2, var_4);
+    }
   }
 
   var_6 = common_scripts\utility::random(var_2);
@@ -32,8 +33,9 @@ zm_care_flare_marker(var_0) {
   _id_0547::_id_A78B();
   var_1 = _getgroundposition(var_0.origin + (0, 0, 50), 1);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0.origin;
+  }
 
   var_0.flare_model = spawn("script_model", var_1);
   var_0.flare_model setModel("npc_gen_fusee_flare");
@@ -46,21 +48,24 @@ zm_care_spawn_toggle_fx(var_0, var_1, var_2) {
     var_4 = [];
 
     foreach(var_6 in var_3) {
-      if(_distance2d(var_6.origin, var_2.origin) < 250)
+      if(_distance2d(var_6.origin, var_2.origin) < 250) {
         var_4[var_4.size] = var_6;
+      }
     }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_1 = common_scripts\utility::_id_4461(var_2.origin, var_4);
-    else
+    } else {
       var_1 = common_scripts\utility::random(var_3);
+    }
   }
 
   if(!isDefined(var_1.flare_model)) {
     var_8 = _getgroundposition(var_1.origin + (0, 0, 50), 1);
 
-    if(!isDefined(var_8))
+    if(!isDefined(var_8)) {
       var_8 = var_1.origin;
+    }
 
     var_1.flare_model = spawn("script_model", var_8);
     var_1.flare_model setModel("npc_gen_fusee_flare");
@@ -68,8 +73,9 @@ zm_care_spawn_toggle_fx(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_1.flare_model)) {
-    if(isDefined(var_1._id_3D34))
+    if(isDefined(var_1._id_3D34)) {
       var_1._id_3D34 delete();
+    }
 
     if(common_scripts\utility::_id_562E(var_0)) {
       var_1._id_3D34 = _spawnlinkedfx(common_scripts\utility::_id_44F5("zmb_red_flare_idle"), var_1.flare_model, "TAG_FX");
@@ -79,8 +85,9 @@ zm_care_spawn_toggle_fx(var_0, var_1, var_2) {
 }
 
 zm_care_spawn(var_0, var_1, var_2) {
-  if(!common_scripts\utility::_id_562E(var_2))
+  if(!common_scripts\utility::_id_562E(var_2)) {
     zm_care_spawn_toggle_fx(1, var_1);
+  }
 
   var_3 = _id_0527::_id_4570();
   var_0 _id_0527::_id_9302(var_0, [var_1.origin], [var_3], "zm_carepackage", undefined, "zm");
@@ -128,8 +135,9 @@ unresolved_collision_nearest_node_carepackage(var_0) {
     var_1++;
     var_2 = var_2 + 90;
 
-    if(var_2 > 360)
+    if(var_2 > 360) {
       var_2 = 0;
+    }
 
     if(!_canspawn(var_4)) {
       waitframe();
@@ -144,8 +152,9 @@ unresolved_collision_nearest_node_carepackage(var_0) {
     break;
   }
 
-  if(var_0 getstance() == "prone")
+  if(var_0 getstance() == "prone") {
     var_0 setstance("crouch");
+  }
 
   var_0 setOrigin(var_4);
 }
@@ -167,19 +176,21 @@ zm_care_crate_capture_think(var_0) {
   }
   var_1 = common_scripts\utility::_id_46B7("carepackage_dz", "targetname");
   var_2 = common_scripts\utility::_id_4461(self.origin, var_1, 250);
-  self sethintstring(&"MP_CARE_PACKAGE_PICKUP");
+  self setHintString(&"MP_CARE_PACKAGE_PICKUP");
 
-  if(!self _meth_8562())
+  if(!self _meth_8562()) {
     self makeusable();
-  else if(isDefined(level.players)) {
+  } else if(isDefined(level.players)) {
     foreach(var_4 in level.players) {
-      if(!self _meth_8691(var_4))
+      if(!self _meth_8691(var_4)) {
         self enableplayeruse(var_4);
+      }
     }
   }
 
-  if(isDefined(level.players) && !common_scripts\utility::_id_562E(var_2.no_crate_highlight))
+  if(isDefined(level.players) && !common_scripts\utility::_id_562E(var_2.no_crate_highlight)) {
     self hudoutlineenableforclients(level.players, 2, 0);
+  }
 
   while(isDefined(self)) {
     self waittill("trigger", var_6);
@@ -202,11 +213,13 @@ zm_care_crate_attempt_capture(var_0) {
   var_2 = _id_0547::zmcreatesustainedholdent();
   var_3 = var_2 _id_0547::zmsustainedholdthink(var_0, var_1, ["captured"]);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0._id_56A1 = 0;
+  }
 
   if(!var_3) {
     var_0 notify("attemptCaptureEnd");

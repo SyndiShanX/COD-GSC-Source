@@ -21,8 +21,9 @@ _id_7BA2(var_0) {
     var_0._id_24D2 = _id_0550::_id_24D3(var_0._id_24D1);
     var_1 = [];
 
-    if(!isDefined(var_0._id_9D64))
+    if(!isDefined(var_0._id_9D64)) {
       var_0._id_9D64 = "use";
+    }
 
     if(var_0._id_9D64 == "use") {
       var_1 = getEntArray(var_0._id_378F.target, "targetname");
@@ -32,7 +33,7 @@ _id_7BA2(var_0) {
     }
 
     foreach(var_3 in var_1) {
-      var_3 usetriggerrequirelookat(1);
+      var_3 useTriggerRequireLookAt(1);
       var_0 thread _id_5F10(var_3);
     }
 
@@ -75,8 +76,9 @@ _id_5F12(var_0) {
   var_2 = var_1._id_24D2;
 
   if(isDefined(level.players)) {
-    foreach(var_4 in level.players)
-    var_4 _id_5F11(var_0);
+    foreach(var_4 in level.players) {
+      var_4 _id_5F11(var_0);
+    }
   }
 
   for(;;) {
@@ -95,8 +97,9 @@ _id_5F10(var_0) {
     self._id_378F _meth_8006(var_1);
     var_0 disableplayeruse(var_1);
 
-    if(isDefined(self._id_6FC0))
+    if(isDefined(self._id_6FC0)) {
       self thread[[self._id_6FC0]](var_1);
+    }
 
     if(_id_0550::_id_415C(var_1, self._id_24D2)) {
       continue;

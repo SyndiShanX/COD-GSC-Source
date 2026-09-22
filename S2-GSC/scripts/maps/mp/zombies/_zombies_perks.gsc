@@ -75,14 +75,17 @@ init() {
 _id_0F35(var_0) {}
 
 _id_536E() {
-  foreach(var_2, var_1 in level._id_AB22)
-  level.disableoffhandweapons[var_2] = var_1;
+  foreach(var_2, var_1 in level._id_AB22) {
+    level.disableoffhandweapons[var_2] = var_1;
+  }
 
-  foreach(var_2, var_4 in level._id_AB23)
-  level._id_6F68[var_2] = var_4;
+  foreach(var_2, var_4 in level._id_AB23) {
+    level._id_6F68[var_2] = var_4;
+  }
 
-  foreach(var_2, var_4 in level._id_AB25)
-  level._id_6F6C[var_2] = var_4;
+  foreach(var_2, var_4 in level._id_AB25) {
+    level._id_6F6C[var_2] = var_4;
+  }
 }
 
 _id_0F39() {
@@ -153,8 +156,9 @@ onplayerconnect(var_0) {
 _id_6B81() {
   var_0 = 0;
 
-  if(_id_0547::_id_4BA7("specialty_class_armor_zm"))
+  if(_id_0547::_id_4BA7("specialty_class_armor_zm")) {
     var_0 = _id_0547::playergetmaxarmorcount();
+  }
 
   _id_0547::_id_7454(var_0);
 }
@@ -180,10 +184,11 @@ _id_A062() {
 }
 
 _id_0633() {
-  if(_id_0547::_id_0F0F("specialty_class_longlasting_zm"))
+  if(_id_0547::_id_0F0F("specialty_class_longlasting_zm")) {
     return 5;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_8697() {
@@ -262,16 +267,17 @@ _id_0F38(var_0) {
   _id_054D::_id_099B("suppressive_fire", _id_46BB(var_0));
 
   if(isalive(self)) {
-    _playfxontag(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
-    _playfxontag(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
+    _playFXOnTag(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
+    _playFXOnTag(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
   }
 }
 
 _id_46BB(var_0) {
   var_1 = _id_054D::_id_443F("suppressive_fire");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = _id_90A8();
+  }
 
   var_1._id_5CC8 = 1.0;
   var_1.player = var_0;
@@ -285,8 +291,9 @@ _id_90A8() {
   var_1 = 1.0;
   var_2 = _id_0547::_id_0A51(self._id_0A4B);
 
-  if(isDefined(var_2.suppressive_fire_speed_multiplier))
+  if(isDefined(var_2.suppressive_fire_speed_multiplier)) {
     var_1 = var_2.suppressive_fire_speed_multiplier;
+  }
 
   var_0._id_90F0 = var_1;
   self notify("speed_debuffs_changed");
@@ -295,6 +302,6 @@ _id_90A8() {
 
 _id_7CFD(var_0) {
   self notify("speed_debuffs_changed");
-  _stopfxontag(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
-  _stopfxontag(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
+  _stopFXOnTag(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
+  _stopFXOnTag(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
 }

@@ -8,8 +8,9 @@ init() {
 }
 
 add_zombie_passive_behavior() {
-  while(!isDefined(level._id_0A41) || !isDefined(level._id_0A41["zombie_exploder"]))
+  while(!isDefined(level._id_0A41) || !isDefined(level._id_0A41["zombie_exploder"])) {
     waitframe();
+  }
 
   level._id_0A41["zombie_exploder"]["get_action_params"] = ::_id_AB91;
 }
@@ -18,10 +19,11 @@ _id_AB91() {
   var_0 = _id_054D::_id_AC22();
 
   if(common_scripts\utility::_id_562E(self._id_392C)) {
-    if(self._id_3937._id_3F22 == 1)
+    if(self._id_3937._id_3F22 == 1) {
       var_0["script_var"] = "tick_bomb";
-    else
+    } else {
       var_0["script_var"] = "held_bomb";
+    }
   } else
     var_0["script_var"] = "drop_bomb";
 

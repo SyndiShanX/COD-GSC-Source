@@ -76,34 +76,37 @@ dnk_srv_ee() {
   var_0 = getEntArray("ee_wheel", "targetname");
   level.dnk_srv_wheel_turn_max = var_0.size;
 
-  foreach(var_2 in var_0)
-  var_2 thread dnk_srv_ee_wheel_listen();
+  foreach(var_2 in var_0) {
+    var_2 thread dnk_srv_ee_wheel_listen();
+  }
 }
 
 dnk_srv_ee_wheel_listen() {
   if(!isDefined(self.target)) {
     return;
   }
-  var_0 = _getent(self.target, "targetname");
-  var_0 usetriggerrequirelookat(1);
+  var_0 = _getEnt(self.target, "targetname");
+  var_0 useTriggerRequireLookAt(1);
   var_0 waittill("trigger", var_1);
   var_0 delete();
-  self rotateto((self.angles[0], self.angles[1], self.angles[2] + 180), 1, 0.25, 0.25);
+  self rotateTo((self.angles[0], self.angles[1], self.angles[2] + 180), 1, 0.25, 0.25);
   level.dnk_srv_wheel_turn_count++;
 
-  if(level.dnk_srv_wheel_turn_count >= level.dnk_srv_wheel_turn_max)
+  if(level.dnk_srv_wheel_turn_count >= level.dnk_srv_wheel_turn_max) {
     dnk_srv_drop_fuse();
+  }
 }
 
 dnk_srv_drop_fuse() {
-  var_0 = _getent("srv_pap_fuse_spawn_loc", "targetname");
+  var_0 = _getEnt("srv_pap_fuse_spawn_loc", "targetname");
   var_1 = common_scripts\utility::_id_46B5(var_0.target, "targetname");
-  var_2 = _getent(var_1.target, "targetname");
+  var_2 = _getEnt(var_1.target, "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0 _id_0547::obj_fall_to_ent_location(var_1);
+  }
 
-  var_2 usetriggerrequirelookat(1);
+  var_2 useTriggerRequireLookAt(1);
   var_2 waittill("trigger", var_3);
   var_0 delete();
   var_2 delete();

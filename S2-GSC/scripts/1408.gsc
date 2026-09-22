@@ -27,8 +27,9 @@ _id_98F6(var_0) {
   var_1.player = var_0;
   var_2 = var_0 common_scripts\utility::_id_A74D("disconnect", 5);
 
-  if(!_id_0547::_id_5565("timeout", var_2))
+  if(!_id_0547::_id_5565("timeout", var_2)) {
     var_1.player = undefined;
+  }
 }
 
 _id_98FD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
@@ -54,8 +55,9 @@ _id_98FD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8._id_4DCD = 0;
   var_8._id_94B3 = var_7;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_8 thread _id_98F6(var_1);
+  }
 
   var_2 thread _id_9900(var_2.origin, var_3, var_8, 1, var_1, var_4, var_5);
 }
@@ -92,8 +94,9 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(common_scripts\utility::_id_562E(var_7._id_172A) || var_7 _id_0547::has_scripted_state_queued("tesla_shock")) {
     var_8 = 2000;
 
-    if(isDefined(var_6) && issubstr(var_6, "teslagun_pap_zm"))
+    if(isDefined(var_6) && issubstr(var_6, "teslagun_pap_zm")) {
       var_8 = 6000;
+    }
 
     var_7 dodamage(var_8, var_0, var_4, var_7, var_5, var_6);
     return;
@@ -111,17 +114,19 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(self._id_0A4B != "zombie_heavy" && self._id_0A4B != "zombie_fireman") {
     var_9 = "shock";
 
-    if(isDefined(var_2._id_94B3))
+    if(isDefined(var_2._id_94B3)) {
       var_9 = var_2._id_94B3;
+    }
 
     var_7 thread play_shock_fx(var_9, "j_spine4", 4);
     thread play_shock_sound(4);
   }
 
-  if(isDefined(var_7._id_98F0) && _id_4385() < var_7._id_98F0)
+  if(isDefined(var_7._id_98F0) && _id_4385() < var_7._id_98F0) {
     var_7 _id_9901();
-  else
+  } else {
     var_7 childthread[[var_2._id_6B87]](var_0, var_2);
+  }
 
   var_10 = level._id_98F5;
   wait(var_10._id_0F43);
@@ -153,8 +158,9 @@ _id_9900(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     var_17 = "j_head";
 
-    if(-1 == var_16 gettagindex(var_17))
+    if(-1 == var_16 gettagindex(var_17)) {
       var_17 = "j_spine4";
+    }
 
     var_18 = var_16 gettagorigin(var_17);
 
@@ -171,7 +177,7 @@ play_shock_fx(var_0, var_1, var_2) {
   self endon("death");
 
   for(var_3 = 0; var_3 < var_2; var_3 = var_3 + 0.35) {
-    _playfxontag(common_scripts\utility::_id_44F5(var_0), self, var_1);
+    _playFXOnTag(common_scripts\utility::_id_44F5(var_0), self, var_1);
     wait 0.35;
   }
 }
@@ -187,8 +193,9 @@ play_shock_sound(var_0) {
 _id_9901(var_0) {
   var_1 = 3;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
+  }
 
   var_2 = self;
   var_2._id_98F0 = _id_4385() + var_1 + _randomfloatrange(0.1, 0.6);
@@ -197,9 +204,9 @@ _id_9901(var_0) {
 _id_98FF(var_0, var_1) {
   var_2 = self;
 
-  if(_id_0547::_id_5565(var_2._id_0A4B, "zombie_fireman") || var_2 maps\mp\agents\humanoid\_humanoid_util::_id_56BC() || common_scripts\utility::_id_562E(var_2.isteslastunimmune))
+  if(_id_0547::_id_5565(var_2._id_0A4B, "zombie_fireman") || var_2 maps\mp\agents\humanoid\_humanoid_util::_id_56BC() || common_scripts\utility::_id_562E(var_2.isteslastunimmune)) {
     var_2 thread _id_98EE(var_0, var_1.player, var_1._id_8CD7, var_1._id_953E, 0);
-  else {
+  } else {
     var_3 = getcurrentprimaryweapon(var_0, var_1.player);
     var_2 thread _id_0547::_id_7D1A("tesla_shock", [var_3], 4);
   }
@@ -212,38 +219,43 @@ _id_98EE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     return;
   }
   if(!isDefined(var_0)) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_0 = var_1.origin;
-    else if(isDefined(var_7))
+    } else if(isDefined(var_7)) {
       var_0 = var_7.origin;
+    }
   }
 
   var_8 = "head_sparks";
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_8 = var_5;
+  }
 
   foreach(var_10 in ["j_head", "j_spine4"]) {
     if(-1 == var_7 gettagindex(var_10)) {
       continue;
     }
-    _playfxontag(common_scripts\utility::_id_44F5(var_8), var_7, var_10);
+    _playFXOnTag(common_scripts\utility::_id_44F5(var_8), var_7, var_10);
     break;
   }
 
   var_12 = 2000;
 
-  if(isDefined(var_3) && issubstr(var_3, "teslagun_pap_zm"))
+  if(isDefined(var_3) && issubstr(var_3, "teslagun_pap_zm")) {
     var_12 = 6000;
+  }
 
-  if(isDefined(var_7._id_0A4B))
+  if(isDefined(var_7._id_0A4B)) {
     var_12 = [[var_7 maps\mp\agents\_agent_utility::_id_0A59("tesla_delayed_dmg")]](var_12, var_4, var_6);
+  }
 
   var_7 endon("death");
   var_7._id_172A = 0;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "teslagun_zm";
+  }
 
   var_7 dodamage(var_12, var_0, var_1, var_7, var_2, var_3);
 }
@@ -256,8 +268,9 @@ _id_98E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = _id_0547::_id_408F();
   var_8 = _squared(var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_7 = common_scripts\utility::_id_0F93(var_7, var_3);
+  }
 
   foreach(var_10 in var_7) {
     if(distancesquared(var_10.origin, var_0) > var_8) {
@@ -323,16 +336,18 @@ _id_98FC() {
       }
       var_6 = 30;
 
-      if(isDefined(var_5._id_8303))
+      if(isDefined(var_5._id_8303)) {
         var_6 = var_5._id_8303;
+      }
 
       if(_distance2d(var_5.origin, var_0.origin) > var_6 + var_1) {
         continue;
       }
       var_7 = 70;
 
-      if(isDefined(var_5._id_8302))
+      if(isDefined(var_5._id_8302)) {
         var_7 = var_5._id_8302;
+      }
 
       if(var_0.origin[2] < var_5.origin[2] - var_1 || var_0.origin[2] > var_5.origin[2] + var_7 + var_1) {
         continue;
@@ -344,9 +359,9 @@ _id_98FC() {
       }
       var_2[var_8] = 1;
 
-      if(issubstr(var_0._id_953E, "moon"))
+      if(issubstr(var_0._id_953E, "moon")) {
         var_0 _id_0583::_id_63FC(var_5);
-      else {
+      } else {
         var_0 _id_98F7(var_5);
         var_0 _id_98F8(var_5);
       }
@@ -414,25 +429,28 @@ tesla_ammo_tracker(var_0) {
 }
 
 tesla_drop_watcher(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   for(;;) {
     var_3 = var_0 common_scripts\utility::waittill_any_return("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
 
     if(var_3 == "weapon_change") {
-      if(_id_0547::_id_577E(var_0))
+      if(_id_0547::_id_577E(var_0)) {
         continue;
-      else if(!_id_0547::_id_73F9(var_0, var_1)) {
-        if(var_2)
+      } else if(!_id_0547::_id_73F9(var_0, var_1)) {
+        if(var_2) {
           tesla_variant_set_available(var_1);
+        }
 
         level notify(var_1 + "_stop_tracking");
         return;
       }
     } else if(var_3 == "bleedout" || var_3 == "becameSpectator" || var_3 == "disconnect") {
-      if(var_2)
+      if(var_2) {
         tesla_variant_set_available(var_1);
+      }
 
       return;
     }
@@ -440,13 +458,15 @@ tesla_drop_watcher(var_0, var_1, var_2) {
 }
 
 init_variant_structs_simple() {
-  if(!isDefined(level._id_AACA))
+  if(!isDefined(level._id_AACA)) {
     level._id_AACA = [];
+  }
 
   var_0 = _id_43B4();
 
-  foreach(var_2 in var_0)
-  level._id_AACA[var_2] = tesla_variant_struct_init(var_2);
+  foreach(var_2 in var_0) {
+    level._id_AACA[var_2] = tesla_variant_struct_init(var_2);
+  }
 }
 
 tesla_variant_struct_init(var_0) {
@@ -460,10 +480,11 @@ tesla_variant_struct_init(var_0) {
 tesla_variant_check_if_available(var_0) {
   if(!isDefined(var_0) || !isDefined(level._id_AACA) || !isDefined(level._id_AACA[var_0])) {}
 
-  if(level._id_AACA[var_0]._id_2916 == "available" || level._id_AACA[var_0]._id_2916 == "not built")
+  if(level._id_AACA[var_0]._id_2916 == "available" || level._id_AACA[var_0]._id_2916 == "not built") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 tesla_variant_set_available(var_0) {
@@ -477,8 +498,9 @@ tesla_variant_set_taken(var_0, var_1) {
 }
 
 _id_5533(var_0) {
-  if(!_isstring(var_0))
+  if(!_isstring(var_0)) {
     return 0;
+  }
 
   return issubstr(var_0, "teslagun");
 }
@@ -494,8 +516,9 @@ _id_43B4() {
 }
 
 _id_563A(var_0) {
-  if(!_isstring(var_0))
+  if(!_isstring(var_0)) {
     return 0;
+  }
 
   return common_scripts\utility::_id_0F79(_id_43B4(), var_0);
 }
@@ -547,8 +570,9 @@ getcurrentweapon(var_0) {
   var_1._id_172A = 1;
   var_2 = "scripted_tesla_shock";
 
-  if(var_1 maps\mp\agents\humanoid\_humanoid_util::_id_56BC())
+  if(var_1 maps\mp\agents\humanoid\_humanoid_util::_id_56BC()) {
     var_2 = "stun_hold";
+  }
 
   var_3 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_2);
 
@@ -573,8 +597,9 @@ takeallweapons(var_0) {
   var_1._id_98EF = 0;
   var_1 notify("stop_shock");
 
-  if(isDefined(var_0._id_6AA0))
+  if(isDefined(var_0._id_6AA0)) {
     var_1 thread[[var_0._id_6AA0]](var_0);
-  else
+  } else {
     var_1 thread _id_98EE(var_0._id_29A8, var_0.player, var_0._id_8CD7, var_0._id_953E, 0);
+  }
 }

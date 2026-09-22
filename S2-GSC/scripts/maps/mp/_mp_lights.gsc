@@ -4,20 +4,25 @@
 ******************************************/
 
 init() {
-  if(!isDefined(level._id_94E5))
+  if(!isDefined(level._id_94E5)) {
     level._id_94E5 = getdvarint("1084", 1);
+  }
 
-  if(!isDefined(level._id_94EF))
+  if(!isDefined(level._id_94EF)) {
     level._id_94EF = getdvarfloat("3158", 1.0);
+  }
 
-  if(!isDefined(level._id_911F))
+  if(!isDefined(level._id_911F)) {
     level._id_911F = getdvarint("sm_spotlimit", 4);
+  }
 
-  if(!isDefined(level._id_94EE))
+  if(!isDefined(level._id_94EE)) {
     level._id_94EE = getdvarfloat("5699", 0.25);
+  }
 
-  if(!isDefined(level._id_781B))
+  if(!isDefined(level._id_781B)) {
     level._id_781B = getdvarfloat("sm_qualityspotshadow", 1.0);
+  }
 
   thread _id_63C5();
 
@@ -29,31 +34,38 @@ init() {
 
   var_0 = getEntArray("trigger_multiple_light_sunshadow", "classname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     level thread _id_94E4(var_0[var_1]);
+  }
 }
 
 _id_8588(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._id_94E5 = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level._id_94EF = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level._id_911F = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level._id_94EE = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level._id_781B = var_4;
+  }
 }
 
 _id_63C5() {
   if(isDefined(level.players)) {
-    foreach(var_1 in level.players)
-    var_1 _id_5330();
+    foreach(var_1 in level.players) {
+      var_1 _id_5330();
+    }
   }
 
   for(;;) {
@@ -80,8 +92,9 @@ _id_6379() {
 _id_94E4(var_0) {
   var_1 = 1;
 
-  if(isDefined(var_0._id_817A))
+  if(isDefined(var_0._id_817A)) {
     var_1 = var_0._id_817A;
+  }
 
   for(;;) {
     var_0 waittill("trigger", var_2);
@@ -96,22 +109,27 @@ _id_8599(var_0, var_1) {
   var_5 = var_1._id_94EE;
   var_6 = var_1._id_781B;
 
-  if(isDefined(self.setperk))
+  if(isDefined(self.setperk)) {
     var_2 = self.setperk;
+  }
 
-  if(isDefined(self.clearperks))
+  if(isDefined(self.clearperks)) {
     var_3 = self.clearperks;
+  }
 
-  if(isDefined(self.setyawspeed))
+  if(isDefined(self.setyawspeed)) {
     var_4 = self.setyawspeed;
+  }
 
-  if(isDefined(self.hasperk))
+  if(isDefined(self.hasperk)) {
     var_5 = self.hasperk;
+  }
 
   var_5 = _min(max(0.016, var_5), 32);
 
-  if(isDefined(self.clonebrushmodeltoscriptmodel))
+  if(isDefined(self.clonebrushmodeltoscriptmodel)) {
     var_6 = self.clonebrushmodeltoscriptmodel;
+  }
 
   var_1 setclientdvars("1084", var_2, "3158", var_3, "sm_spotlimit", var_4, "sm_qualityspotshadow", var_6);
   var_1._id_94E5 = var_2;
@@ -161,8 +179,9 @@ _id_5D25() {
 }
 
 _id_279A(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level._id_0672._id_3D62))
+  if(!isDefined(level._id_0672._id_3D62)) {
     level._id_0672._id_3D62 = [];
+  }
 
   var_6 = spawnStruct();
   var_6._id_24F2 = var_1;
@@ -174,14 +193,15 @@ _id_279A(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_4198(var_0) {
-  if(isDefined(level._id_0672._id_3D62) && isDefined(level._id_0672._id_3D62[var_0]))
+  if(isDefined(level._id_0672._id_3D62) && isDefined(level._id_0672._id_3D62[var_0])) {
     return level._id_0672._id_3D62[var_0];
+  }
 
   return undefined;
 }
 
 _id_711E(var_0, var_1, var_2) {
-  var_3 = _getent(var_1, "targetname");
+  var_3 = _getEnt(var_1, "targetname");
 
   if(!isDefined(var_3)) {
     return;
@@ -192,8 +212,9 @@ _id_711E(var_0, var_1, var_2) {
     return;
   }
   if(isDefined(var_2)) {
-    if(var_2 < 0)
+    if(var_2 < 0) {
       var_2 = 0;
+    }
 
     var_4.intensity = var_2;
   }
@@ -206,7 +227,7 @@ _id_711E(var_0, var_1, var_2) {
 }
 
 _id_93CB(var_0, var_1, var_2) {
-  var_3 = _getent(var_1, "targetname");
+  var_3 = _getEnt(var_1, "targetname");
 
   if(!isDefined(var_3)) {
     return;
@@ -215,8 +236,9 @@ _id_93CB(var_0, var_1, var_2) {
     return;
   }
   if(isDefined(var_2)) {
-    if(var_2 < 0)
+    if(var_2 < 0) {
       var_2 = 0;
+    }
   }
 
   var_3 setlightintensity(var_2);
@@ -225,7 +247,7 @@ _id_93CB(var_0, var_1, var_2) {
 }
 
 _id_6F19(var_0, var_1) {
-  var_2 = _getent(var_1, "targetname");
+  var_2 = _getEnt(var_1, "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -237,7 +259,7 @@ _id_6F19(var_0, var_1) {
 }
 
 _id_A03E(var_0, var_1) {
-  var_2 = _getent(var_1, "targetname");
+  var_2 = _getEnt(var_1, "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -262,13 +284,15 @@ _id_351B(var_0, var_1, var_2, var_3) {
     var_6 = var_4;
     var_4 = var_0 + (var_1 - var_0) * _randomfloat(1.0);
 
-    if(var_2 != var_3)
+    if(var_2 != var_3) {
       var_5 = var_5 + _randomfloatrange(var_2, var_3);
-    else
+    } else {
       var_5 = var_5 + var_2;
+    }
 
-    if(var_5 == 0)
+    if(var_5 == 0) {
       var_5 = var_5 + 0.0000001;
+    }
 
     for(var_7 = (var_6 - var_4) * (1 / var_5); var_5 > 0 && !self._id_574A; var_5 = var_5 - 0.05) {
       self setlightcolor(var_4 + var_7 * var_5);
@@ -287,23 +311,28 @@ _id_6284(var_0, var_1, var_2, var_3) {
   var_5 = 0;
   var_6 = _randomfloatrange(0.1, 0.25);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     exploder(var_2);
+  }
 
   while(var_5 < var_1) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       exploder(var_3);
+    }
 
-    foreach(var_8 in var_4)
-    var_8 show();
+    foreach(var_8 in var_4) {
+      var_8 show();
+    }
 
     wait(var_6);
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       _id_93C7(var_3);
+    }
 
-    foreach(var_8 in var_4)
-    var_8 hide();
+    foreach(var_8 in var_4) {
+      var_8 hide();
+    }
 
     var_5++;
     wait(var_6);
@@ -322,14 +351,15 @@ _id_5D1F(var_0, var_1) {
 
 _id_5D10(var_0, var_1, var_2, var_3) {
   if(isDefined(level._id_0672._id_611B[var_0])) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       thread[[level._id_0672._id_611B[var_0]]](var_1, var_2, var_3);
-    else if(isDefined(var_2))
+    } else if(isDefined(var_2)) {
       thread[[level._id_0672._id_611B[var_0]]](var_1, var_2);
-    else if(isDefined(var_1))
+    } else if(isDefined(var_1)) {
       thread[[level._id_0672._id_611B[var_0]]](var_1);
-    else
+    } else {
       thread[[level._id_0672._id_611B[var_0]]]();
+    }
   }
 }
 

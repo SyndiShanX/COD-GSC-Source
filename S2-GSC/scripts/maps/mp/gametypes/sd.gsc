@@ -40,13 +40,15 @@ main() {
   level._id_3FC7 = maps\mp\gametypes\common_sd_sr::_id_5782;
   level._id_0C25 = 0;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   game["dialog"]["gametype"] = "sd_intro";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 
   game["dialog"]["offense_obj"] = "gbl_destroyobj";
   game["dialog"]["defense_obj"] = "gbl_defendobj";
@@ -79,8 +81,9 @@ _id_5300() {
 }
 
 _id_6BAF() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -140,24 +143,28 @@ _id_6BA7() {
 
   maps\mp\_utility::_id_867B(0);
 
-  if(isDefined(self.pers["plants"]))
+  if(isDefined(self.pers["plants"])) {
     maps\mp\_utility::_id_867B(self.pers["plants"]);
+  }
 
   maps\mp\_utility::_id_867C(0);
 
-  if(isDefined(self.pers["defuses"]))
+  if(isDefined(self.pers["defuses"])) {
     maps\mp\_utility::_id_867C(self.pers["defuses"]);
+  }
 
-  if(isDefined(self.pers["cur_kill_streak"]))
+  if(isDefined(self.pers["cur_kill_streak"])) {
     self._id_00E4 = self.pers["cur_kill_streak"];
+  }
 
   self._id_57A7 = undefined;
   level notify("spawned_player");
 }
 
 _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     self setclientomnvar("ui_carrying_bomb", 0);
+  }
 
   thread maps\mp\gametypes\common_sd_sr::_id_21AB();
   maps\mp\gametypes\common_sd_sr::_id_254C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
@@ -174,8 +181,9 @@ openmenu() {
         continue;
       }
 
-      if(var_3._id_9D65.shootblank == "_b")
+      if(var_3._id_9D65.shootblank == "_b") {
         var_1 = var_3;
+      }
     }
   }
 
@@ -194,8 +202,9 @@ openmenu() {
     }
 
     if(!isDefined(var_5)) {
-      if(isDefined(level._id_832F))
+      if(isDefined(level._id_832F)) {
         var_6 = level._id_832F._id_9D65.origin;
+      }
     } else {
       var_6 = var_5.origin;
       var_7 = var_5.name;

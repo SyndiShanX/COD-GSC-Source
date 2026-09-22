@@ -37,8 +37,9 @@ manage_possums() {
       var_14 = level._id_A980 + _randomintrange(2, 5);
       wait_for_jscare_complete(var_8);
 
-      while(level._id_A980 < var_14)
+      while(level._id_A980 < var_14) {
         wait 0.125;
+      }
     } else {}
 
     var_15 = gettime();
@@ -58,8 +59,9 @@ wait_for_jscare_complete(var_0) {
     var_4 = var_2 common_scripts\utility::_id_A71A(var_3, "do_jumpscare", "jscare_zombie_unfrozen");
 
     if(var_4 != "do_jumpscare") {
-      for(var_5 = _id_055A::_id_4626(var_0.scare_zone, 0); var_5.size != 0 && var_4 != "do_jumpscare"; var_5 = _id_055A::_id_4626(var_0.scare_zone, 0))
+      for(var_5 = _id_055A::_id_4626(var_0.scare_zone, 0); var_5.size != 0 && var_4 != "do_jumpscare"; var_5 = _id_055A::_id_4626(var_0.scare_zone, 0)) {
         var_4 = var_2 common_scripts\utility::_id_A71A(1, "do_jumpscare");
+      }
 
       if(var_4 != "do_jumpscare") {
         var_0 notify("end_possum");
@@ -74,8 +76,9 @@ wait_for_cycle(var_0) {
   var_1 = 0;
   var_2 = 5;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 180;
+  }
 
   while(var_1 < var_0) {
     wait(var_2);
@@ -118,8 +121,9 @@ reset_feign_death() {
   var_0 = _randomintrange(1, 5);
   self.anim_sel = var_0;
 
-  if(isDefined(self.setmovespeedscale))
+  if(isDefined(self.setmovespeedscale)) {
     self.anim_sel = self.setmovespeedscale;
+  }
 }
 
 do_feign_death(var_0) {
@@ -153,8 +157,9 @@ execute_ground_scare(var_0, var_1) {
   var_2._id_6816 = 1;
   var_2 execute_frozen_state(var_0._id_0186, self, var_1);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("jscare_zombie_unfrozen");
+  }
 }
 
 execute_frozen_state(var_0, var_1, var_2) {

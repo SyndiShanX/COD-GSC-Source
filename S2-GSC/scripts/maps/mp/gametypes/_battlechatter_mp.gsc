@@ -23,8 +23,9 @@ init() {
 
   level._id_46D9 = _id_0510::_id_46D9;
 
-  if(!isDefined(level._id_1676))
+  if(!isDefined(level._id_1676)) {
     level._id_1676 = [];
+  }
 
   level._id_1676["reload"] = "inform_reloading_generic";
   level._id_1676["frag_out"] = "inform_attack_grenade";
@@ -104,8 +105,9 @@ init() {
   var_6 = getDvar("1924");
   level._id_57F5 = 1;
 
-  if(var_6 == "war" || var_6 == "conf" || var_6 == "dom")
+  if(var_6 == "war" || var_6 == "conf" || var_6 == "dom") {
     level._id_57F5 = 0;
+  }
 
   level thread onplayerconnect();
 }
@@ -132,15 +134,17 @@ onplayerspawned() {
     var_2 = 3;
     var_3 = "";
 
-    if(!_isagent(self) && self hasfemalecustomizationmodel())
+    if(!_isagent(self) && self hasfemalecustomizationmodel()) {
       var_3 = "w";
+    }
 
     self.pers["voiceNum"] = level._id_A601[self.team][var_3];
 
-    if(var_3 == "w")
+    if(var_3 == "w") {
       level._id_A601[self.team][var_3] = (level._id_A601[self.team][var_3] + 1) % var_2;
-    else
+    } else {
       level._id_A601[self.team][var_3] = (level._id_A601[self.team][var_3] + 1) % var_1;
+    }
 
     self.pers["voicePrefix"] = var_0 + var_3 + self.pers["voiceNum"] + "_";
 
@@ -212,12 +216,14 @@ _id_486A() {
             continue;
         }
 
-        if(weaponinventorytype(var_6._id_A9E0) != "offhand" && weaponclass(var_6._id_A9E0) == "grenade")
+        if(weaponinventorytype(var_6._id_A9E0) != "offhand" && weaponclass(var_6._id_A9E0) == "grenade") {
           continue;
+        }
       }
 
-      if(!isDefined(var_6._id_0117) && !var_7)
+      if(!isDefined(var_6._id_0117) && !var_7) {
         var_6._id_0117 = _getmissileowner(var_6);
+      }
 
       if(isDefined(var_6._id_0117) && isDefined(var_6._id_0117.team) && level.teambased && var_6._id_0117.team == self.team) {
         continue;
@@ -228,9 +234,9 @@ _id_486A() {
         if(_bullettracepassed(var_6.origin, self.origin, 0, self)) {
           var_9 = "";
 
-          if(var_7)
+          if(var_7) {
             var_9 = "drone_incoming";
-          else if(isDefined(var_6._id_A9E0)) {
+          } else if(isDefined(var_6._id_A9E0)) {
             switch (var_6._id_A9E0) {
               case "semtex_mp":
                 var_9 = "semtex_incoming";
@@ -255,8 +261,9 @@ _id_486A() {
             }
           }
 
-          if(var_9 == "")
+          if(var_9 == "") {
             var_9 = "grenade_incoming";
+          }
 
           level thread playerlinkweaponviewtodelta(self, var_9);
           wait 5;
@@ -305,8 +312,9 @@ _id_94FD() {
   self endon("stoppedFiring");
   wait 1;
 
-  if(_id_1F69("suppressing_fire"))
+  if(_id_1F69("suppressing_fire")) {
     level thread playerlinkweaponviewtodelta(self, "suppressing_fire");
+  }
 }
 
 _id_7C2A() {
@@ -356,8 +364,9 @@ _id_4872() {
       continue;
     }
 
-    if(var_1 == "tabun_grenade_mp")
+    if(var_1 == "tabun_grenade_mp") {
       level thread playerlinkweaponviewtodelta(self, "tabun_out");
+    }
   }
 }
 
@@ -369,8 +378,9 @@ _id_9132() {
   for(;;) {
     self waittill("sprint_begin");
 
-    if(_id_1F69("moving"))
+    if(_id_1F69("moving")) {
       level thread playerlinkweaponviewtodelta(self, "moving", 0, 0);
+    }
   }
 }
 
@@ -405,9 +415,9 @@ _id_1659() {
     self._id_1656 = 0;
     self waittill("sprint_melee_charge_begin");
 
-    if(!maps\mp\_utility::_id_585F())
+    if(!maps\mp\_utility::_id_585F()) {
       self clientaddsoundsubmix("bayo_submix");
-    else if(isDefined(self.nobayocharge) && self.nobayocharge) {
+    } else if(isDefined(self.nobayocharge) && self.nobayocharge) {
       continue;
     }
     self._id_1655 = "";
@@ -416,17 +426,19 @@ _id_1659() {
     if(self.team != "spectator") {
       var_6 = self.pers["voicePrefix"];
 
-      if(maps\mp\_utility::_id_585F())
+      if(maps\mp\_utility::_id_585F()) {
         var_6 = "plr_";
+      }
 
       if(isDefined(var_6)) {
         if(isDefined(level._id_1676["bayo_charge"])) {
           var_2 = var_6 + level._id_1676["bayo_charge"];
 
-          if(maps\mp\_utility::_hasperk("specialty_sprintmeleechargelonger"))
+          if(maps\mp\_utility::_hasperk("specialty_sprintmeleechargelonger")) {
             var_2 = var_2 + "_intro";
-          else if(maps\mp\_utility::_hasperk("specialty_sprintmeleecharge"))
+          } else if(maps\mp\_utility::_hasperk("specialty_sprintmeleecharge")) {
             var_2 = var_2 + "_intro_short";
+          }
         }
       }
 
@@ -436,8 +448,9 @@ _id_1659() {
       }
     }
 
-    if(_soundexists(var_2))
+    if(_soundexists(var_2)) {
       self._id_1657 = _id_0380::_id_6844(var_2, undefined, self);
+    }
 
     _id_0380::_id_684C(self._id_1657, self, "charge_intro_done");
     thread _id_1653();
@@ -453,15 +466,17 @@ _id_1659() {
     if(self.team != "spectator" && self._id_165B) {
       var_6 = self.pers["voicePrefix"];
 
-      if(maps\mp\_utility::_id_585F())
+      if(maps\mp\_utility::_id_585F()) {
         var_6 = "plr_";
+      }
 
       if(isDefined(var_6)) {
         if(isDefined(level._id_1676["bayo_charge"])) {
           var_0 = var_6 + level._id_1676["bayo_charge"];
 
-          if(!self._id_1656 && !maps\mp\_utility::_id_585F())
+          if(!self._id_1656 && !maps\mp\_utility::_id_585F()) {
             var_0 = var_0 + self._id_1655;
+          }
         }
       }
 
@@ -470,8 +485,9 @@ _id_1659() {
         var_0 = var_0 + ("_" + var_7);
       }
 
-      if(_soundexists(var_0))
+      if(_soundexists(var_0)) {
         self._id_1658 = _id_0380::_id_6844(var_0, undefined, self);
+      }
     }
   }
 }
@@ -481,10 +497,11 @@ _id_1653() {
   var_0 = common_scripts\utility::waittill_any_return("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
 
   if(var_0 == "death" && isDefined(self)) {
-    if(self._id_1656)
+    if(self._id_1656) {
       _id_0380::_id_6850(self._id_1657, 0.1);
-    else
+    } else {
       _id_0380::_id_6850(self._id_1658, 0.1);
+    }
 
     self clientclearsoundsubmix("bayo_submix");
   }
@@ -499,36 +516,41 @@ _id_1654() {
   for(;;) {
     self waittill("sprint_melee_charge_end", var_1);
 
-    if(!maps\mp\_utility::_id_585F())
+    if(!maps\mp\_utility::_id_585F()) {
       self clientclearsoundsubmix("bayo_submix");
+    }
 
     if(!self._id_1656) {
       if(self.team != "spectator") {
         var_2 = self.pers["voicePrefix"];
 
-        if(maps\mp\_utility::_id_585F())
+        if(maps\mp\_utility::_id_585F()) {
           var_2 = "plr_";
+        }
 
         if(isDefined(var_2)) {
           if(isDefined(level._id_1676["bayo_charge_end"])) {
             var_0 = var_2 + level._id_1676["bayo_charge_end"];
 
-            if(!maps\mp\_utility::_id_585F())
+            if(!maps\mp\_utility::_id_585F()) {
               var_0 = var_0 + self._id_1655;
+            }
           }
         }
       }
 
-      if(!self._id_1656)
+      if(!self._id_1656) {
         _id_0380::_id_6850(self._id_1658, 0.1);
+      }
 
       if(maps\mp\_utility::_id_585F()) {
         var_3 = _id_0378::_id_307B(self._id_20D8);
         var_0 = var_0 + ("_" + var_3);
       }
 
-      if(_soundexists(var_0))
+      if(_soundexists(var_0)) {
         _id_0380::_id_6844(var_0, undefined, self, 0.1);
+      }
     }
   }
 }
@@ -543,32 +565,37 @@ _id_1652() {
   for(;;) {
     self waittill("sprint_melee_charge_attack", var_2);
 
-    if(!maps\mp\_utility::_id_585F())
+    if(!maps\mp\_utility::_id_585F()) {
       self clientclearsoundsubmix("bayo_submix");
+    }
 
     if(self.team != "spectator") {
       var_3 = self.pers["voicePrefix"];
 
-      if(maps\mp\_utility::_id_585F())
+      if(maps\mp\_utility::_id_585F()) {
         var_3 = "plr_";
-
-      if(isDefined(var_3)) {
-        if(isDefined(level._id_1676["bayo_charge_end"]))
-          var_0 = var_3 + level._id_1676["bayo_charge_attack"];
       }
 
-      if(!self._id_1656)
+      if(isDefined(var_3)) {
+        if(isDefined(level._id_1676["bayo_charge_end"])) {
+          var_0 = var_3 + level._id_1676["bayo_charge_attack"];
+        }
+      }
+
+      if(!self._id_1656) {
         _id_0380::_id_6850(self._id_1658, 0.1);
-      else
+      } else {
         _id_0380::_id_6850(self._id_1657, 0.1);
+      }
 
       if(maps\mp\_utility::_id_585F()) {
         var_4 = _id_0378::_id_307B(self._id_20D8);
         var_0 = var_0 + ("_" + var_4);
       }
 
-      if(_soundexists(var_0))
+      if(_soundexists(var_0)) {
         _id_0380::_id_6844(var_0, undefined, self, 0.1);
+      }
     }
   }
 }
@@ -655,8 +682,9 @@ _id_998F() {
     var_1 = undefined;
     var_2 = 4000000;
 
-    if(self playerads() > 0.7)
+    if(self playerads() > 0.7) {
       var_2 = 6250000;
+    }
 
     foreach(var_4 in var_0) {
       if(isDefined(var_4) && maps\mp\_utility::isreallyalive(var_4) && !var_4 maps\mp\_utility::_hasperk("specialty_coldblooded") && distancesquared(self.origin, var_4.origin) < var_2) {
@@ -664,10 +692,11 @@ _id_998F() {
         var_1 = var_4;
 
         if(isDefined(var_5) && _id_1F69("callout_location") && _id_3EB6(4840000)) {
-          if(maps\mp\_utility::_hasperk("specialty_silentmovement") || maps\mp\_utility::_hasperk("specialty_quieter") || !_id_3EB6(262144))
+          if(maps\mp\_utility::_hasperk("specialty_silentmovement") || maps\mp\_utility::_hasperk("specialty_quieter") || !_id_3EB6(262144)) {
             level thread playerlinkweaponviewtodelta(self, var_5._id_5E5C[0], 0);
-          else
+          } else {
             level thread playerlinkweaponviewtodelta(self, var_5._id_5E5C[0], 1);
+          }
 
           break;
         }
@@ -679,12 +708,13 @@ _id_998F() {
       var_8 = isDefined(self._id_3EF6);
       var_9 = weaponclass(var_7) == "sniper";
 
-      if(var_8)
+      if(var_8) {
         level thread playerlinkweaponviewtodelta(self, "callout_shield");
-      else if(var_9)
+      } else if(var_9) {
         level thread playerlinkweaponviewtodelta(self, "callout_sniper");
-      else
+      } else {
         level thread playerlinkweaponviewtodelta(self, "callout_generic");
+      }
     }
   }
 }
@@ -740,8 +770,9 @@ playerlinkweaponviewtodelta(var_0, var_1, var_2, var_3) {
 }
 
 _id_32AB(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_4 = self.pers["team"];
   level _id_09ED(self, var_4);
@@ -793,23 +824,27 @@ _id_32AB(var_0, var_1, var_2, var_3) {
   var_8 = 1;
   var_4 = "all";
 
-  if((!isDefined(var_2) || var_2 == 0) && isPlayer(self))
+  if((!isDefined(var_2) || var_2 == 0) && isPlayer(self)) {
     var_8 = 0;
+  }
 
-  if(!var_6)
+  if(!var_6) {
     var_4 = self.team;
+  }
 
   var_9 = self _meth_861E(var_0, var_4, var_8);
 
   if(isDefined(var_9)) {
     var_10 = _lookupsoundlength(var_0);
 
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       wait(var_10);
+    }
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     level _id_7CFB(self, self.team);
+  }
 }
 
 _id_32B5(var_0, var_1) {
@@ -818,10 +853,11 @@ _id_32B5(var_0, var_1) {
   if(var_2 == var_0) {
     var_3 = self.team;
 
-    if(!_isagent(self))
+    if(!_isagent(self)) {
       var_4 = self hasfemalecustomizationmodel();
-    else
+    } else {
       var_4 = 0;
+    }
 
     var_5 = self.pers["voiceNum"];
     var_6 = self.origin;
@@ -840,19 +876,21 @@ _id_32B5(var_0, var_1) {
       if(var_8.team != var_3) {
         continue;
       }
-      if(!_isagent(var_8))
+      if(!_isagent(var_8)) {
         var_9 = var_8 hasfemalecustomizationmodel();
-      else
+      } else {
         var_9 = 0;
+      }
 
       if((var_5 != var_8.pers["voiceNum"] || var_4 != var_9) && distancesquared(var_6, var_8.origin) <= 262144 && !_id_57DD(var_8)) {
         var_10 = var_8.pers["voicePrefix"];
         var_11 = var_10 + "co_loc_" + var_1 + "_echo";
 
-        if(common_scripts\utility::_id_24A6() && _soundexists(var_11))
+        if(common_scripts\utility::_id_24A6() && _soundexists(var_11)) {
           var_12 = var_11;
-        else
+        } else {
           var_12 = var_10 + level._id_1676["callout_response_generic"];
+        }
 
         var_8 thread _id_32AB(var_12, var_1, 0, 0);
         break;
@@ -872,8 +910,9 @@ _id_57DD(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("disconnect");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1000;
+  }
 
   var_2 = var_1 * var_1;
 
@@ -881,14 +920,16 @@ _id_57DD(var_0, var_1) {
     for(var_3 = 0; var_3 < level._id_90C1[var_0.team].size; var_3++) {
       var_4 = level._id_90C1[var_0.team][var_3];
 
-      if(var_4 == var_0)
+      if(var_4 == var_0) {
         return 1;
+      }
 
       if(!isDefined(var_4)) {
         continue;
       }
-      if(distancesquared(var_4.origin, var_0.origin) < var_2)
+      if(distancesquared(var_4.origin, var_0.origin) < var_2) {
         return 1;
+      }
     }
   }
 
@@ -923,20 +964,23 @@ _id_3654(var_0) {
 _id_1F69(var_0) {
   var_1 = self.pers["team"];
 
-  if(var_1 == "spectator")
+  if(var_1 == "spectator") {
     return 0;
+  }
 
   var_2 = level._id_166D["timeout_player"][var_0];
   var_3 = gettime() - self._id_166D["last_say_time"][var_0];
 
-  if(var_2 > var_3)
+  if(var_2 > var_3) {
     return 0;
+  }
 
   var_2 = level._id_166D["timeout"][var_0];
   var_3 = gettime() - level._id_166D["last_say_time"][var_1][var_0];
 
-  if(var_2 < var_3)
+  if(var_2 < var_3) {
     return 1;
+  }
 
   return 0;
 }
@@ -954,13 +998,15 @@ _id_4561() {
 
   if(var_0.size) {
     foreach(var_2 in var_0) {
-      if(!_id_5E57(var_2))
+      if(!_id_5E57(var_2)) {
         return var_2;
+      }
     }
 
     foreach(var_2 in var_0) {
-      if(!_id_5E58(var_2))
+      if(!_id_5E58(var_2)) {
         return var_2;
+      }
     }
   }
 
@@ -973,13 +1019,15 @@ _id_4709(var_0) {
 
   if(var_1.size) {
     foreach(var_3 in var_1) {
-      if(!_id_5E57(var_3) && var_0 _id_1F33(var_3))
+      if(!_id_5E57(var_3) && var_0 _id_1F33(var_3)) {
         return var_3;
+      }
     }
 
     foreach(var_3 in var_1) {
-      if(!_id_5E58(var_3) && var_0 _id_1F33(var_3))
+      if(!_id_5E58(var_3) && var_0 _id_1F33(var_3)) {
         return var_3;
+      }
     }
   }
 
@@ -992,24 +1040,27 @@ _id_4087() {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4._id_5E5C))
+    if(isDefined(var_4._id_5E5C)) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;
 }
 
 _id_A097() {
-  if(isDefined(anim.bcs_locations))
+  if(isDefined(anim.bcs_locations)) {
     anim.bcs_locations = common_scripts\utility::_id_0FA0(anim.bcs_locations);
+  }
 }
 
 _id_559C() {
   var_0 = _id_4087();
 
   foreach(var_2 in var_0) {
-    if(!_id_5E58(var_2))
+    if(!_id_5E58(var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1018,8 +1069,9 @@ _id_559C() {
 _id_5E57(var_0) {
   var_1 = _id_5E5A(var_0._id_5E5C[0]);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1027,13 +1079,15 @@ _id_5E57(var_0) {
 _id_5E58(var_0) {
   var_1 = _id_5E5A(var_0._id_5E5C[0]);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   var_2 = var_1 + 25000;
 
-  if(gettime() < var_2)
+  if(gettime() < var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -1043,8 +1097,9 @@ _id_5E56(var_0) {
 }
 
 _id_5E5A(var_0) {
-  if(isDefined(anim._id_5E5E[var_0]))
+  if(isDefined(anim._id_5E5E[var_0])) {
     return anim._id_5E5E[var_0];
+  }
 
   return undefined;
 }
@@ -1056,8 +1111,9 @@ _id_1F33(var_0) {
     var_5 = _id_4563("concat_loc_" + var_2);
     var_6 = _soundexists(var_3) || _soundexists(var_4) || _soundexists(var_5);
 
-    if(var_6)
+    if(var_6) {
       return var_6;
+    }
   }
 
   return 0;
@@ -1067,8 +1123,9 @@ _id_1F48(var_0) {
   var_1 = var_0._id_5E5C;
 
   foreach(var_3 in var_1) {
-    if(_id_569C(var_3, self))
+    if(_id_569C(var_3, self)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1084,8 +1141,9 @@ _id_4449(var_0) {
       break;
     }
 
-    if(_id_569E(var_4))
+    if(_id_569E(var_4)) {
       var_1 = var_4;
+    }
   }
 
   return var_1;
@@ -1098,20 +1156,23 @@ _id_569E(var_0) {
 _id_569C(var_0, var_1) {
   var_2 = var_1 _id_4563("concat_loc_" + var_0);
 
-  if(_soundexists(var_2))
+  if(_soundexists(var_2)) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_569D(var_0, var_1) {
-  if(issubstr(var_0, "_qa") && _soundexists(var_0))
+  if(issubstr(var_0, "_qa") && _soundexists(var_0)) {
     return 1;
+  }
 
   var_2 = var_1 _id_463B(var_0, 0);
 
-  if(_soundexists(var_2))
+  if(_soundexists(var_2)) {
     return 1;
+  }
 
   return 0;
 }
@@ -1146,13 +1207,15 @@ _id_440A(var_0) {}
 _id_1641(var_0, var_1, var_2) {}
 
 _id_3EB6(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 262144;
+  }
 
   foreach(var_2 in level.players) {
     if(isDefined(var_2) && isDefined(var_2.team) && isDefined(self.pers["team"]) && var_2.team == self.pers["team"]) {
-      if(var_2 != self && distancesquared(var_2.origin, self.origin) <= var_0)
+      if(var_2 != self && distancesquared(var_2.origin, self.origin) <= var_0) {
         return 1;
+      }
     }
   }
 

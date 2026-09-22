@@ -15,8 +15,9 @@ _id_A26F(var_0, var_1, var_2) {
   var_5 = 0;
   var_6 = 0;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "spawn_drop";
+  }
 
   if(!isDefined(var_3)) {
     var_3 = spawnStruct();
@@ -26,13 +27,15 @@ _id_A26F(var_0, var_1, var_2) {
     var_0._id_A27C = var_3;
   }
 
-  if(isDefined(var_3._id_0886[var_1]))
+  if(isDefined(var_3._id_0886[var_1])) {
     return var_3._id_0886[var_1];
+  }
 
   var_7 = undefined;
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 15;
+  }
 
   var_8 = _getgroundposition(var_0.origin, var_7, 64, 64);
   var_0._id_487C = var_8;
@@ -71,8 +74,9 @@ _id_A26F(var_0, var_1, var_2) {
   }
 
   if(var_4 != "") {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_4 = var_2 + "\n" + var_4;
+    }
   }
 
   var_3._id_0886[var_1] = var_6 > 0;
@@ -88,19 +92,22 @@ _id_ABA4(var_0, var_1, var_2, var_3, var_4, var_5) {
     self show();
   }
 
-  if(isDefined(var_4) && common_scripts\utility::_id_562E(var_4.asssassinspawn))
+  if(isDefined(var_4) && common_scripts\utility::_id_562E(var_4.asssassinspawn)) {
     [[level.assassin_validation_func]](var_4, var_3);
-  else if(isDefined(var_4))
+  } else if(isDefined(var_4)) {
     _id_A26F(var_4, var_3);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 2500;
+  }
 
   var_2 = var_0[2] + var_2;
   var_6 = _getgroundposition(var_0, self.radius, 64, 64);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "spawn_drop";
+  }
 
   var_7 = maps\mp\agents\_scripted_agent_anim_util::_id_434D(var_3);
   var_8 = -1;
@@ -117,8 +124,9 @@ _id_ABA4(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_17 = undefined;
   var_18 = self getanimentrycount(var_7);
 
-  for(var_19 = 0; var_19 < var_18; var_19++)
+  for(var_19 = 0; var_19 < var_18; var_19++) {
     var_15[var_15.size] = var_19;
+  }
 
   var_15 = common_scripts\utility::array_randomize(var_15);
 
@@ -168,8 +176,9 @@ _id_ABA4(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 thread _id_17EE(self);
+  }
 
   self setOrigin(var_11["origin"], 1);
   self scragentsetanimmode("anim deltas");
@@ -208,8 +217,9 @@ _id_ABA4(var_0, var_1, var_2, var_3, var_4, var_5) {
   self scragentsetscripted(0);
   _id_0547::disableoffhandsecondaryweapons();
 
-  if(_abs(var_0[2] - self.origin[2]) > 32)
+  if(_abs(var_0[2] - self.origin[2]) > 32) {
     _id_056D::_id_5A86();
+  }
 }
 
 _id_17EE(var_0) {

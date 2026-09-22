@@ -20,16 +20,18 @@ _id_3662() {
   _id_0378::_id_8D74("aud_taunt_use");
   var_2 = _id_0547::_id_408F();
 
-  foreach(var_4 in var_2)
-  thread _id_983E(var_4);
+  foreach(var_4 in var_2) {
+    thread _id_983E(var_4);
+  }
 
   if(_id_0547::_id_4BA7("specialty_class_improvised_def_zm")) {
     var_6 = _id_0547::_id_73E9() + 2;
     _id_0547::_id_7454(int(_min(var_6, 3)));
   }
 
-  if(_id_0547::_id_4BA7("specialty_class_resilient_zm"))
+  if(_id_0547::_id_4BA7("specialty_class_resilient_zm")) {
     self._id_98E1 = 1;
+  }
 
   if(_id_0547::_id_4BA7("specialty_class_team_effort_zm")) {
     foreach(var_8 in level.players) {
@@ -48,8 +50,9 @@ _id_2F9E() {
     self notify("taunt_expired");
     self._id_983B = 0;
 
-    if(_id_0547::_id_4BA7("specialty_class_resilient_zm"))
+    if(_id_0547::_id_4BA7("specialty_class_resilient_zm")) {
       self._id_98E1 = undefined;
+    }
 
     if(_id_0547::_id_4BA7("specialty_class_team_effort_zm")) {
       foreach(var_1 in level.players) {
@@ -72,8 +75,9 @@ _id_983E(var_0) {
   var_0 maps\mp\agents\humanoid\_humanoid_util::_id_867E(self);
   var_0 notify("watchFavoriteEnemyDeath");
 
-  if(!isDefined(var_0._id_983C))
+  if(!isDefined(var_0._id_983C)) {
     var_0._id_983C = [];
+  }
 
   var_0._id_983C = common_scripts\utility::_id_0F6F(var_0._id_983C, self);
   common_scripts\utility::_id_A70A("taunt_expired", "disconnect");
@@ -91,10 +95,11 @@ handlezombietauntfx(var_0, var_1, var_2, var_3) {
   for(;;) {
     var_4 = gettime() / 1000;
 
-    if(isDefined(self.recenttauntfxtime) && var_4 - var_0.recenttauntfxtime < var_3)
+    if(isDefined(self.recenttauntfxtime) && var_4 - var_0.recenttauntfxtime < var_3) {
       wait(var_3 - (var_4 - var_0.recenttauntfxtime));
+    }
 
-    _playfxontag(common_scripts\utility::_id_44F5(var_1), var_0, var_2);
+    _playFXOnTag(common_scripts\utility::_id_44F5(var_1), var_0, var_2);
     var_0.recenttauntfxtime = var_4;
     wait(var_3);
   }
@@ -116,14 +121,17 @@ _id_62A6(var_0, var_1, var_2) {
     foreach(var_5 in self._id_983C) {
       var_6 = 2;
 
-      if(var_5 _id_0547::_id_4BA7("specialty_class_counter_offensive_zm"))
+      if(var_5 _id_0547::_id_4BA7("specialty_class_counter_offensive_zm")) {
         var_6 = 3;
+      }
 
-      if(var_5 _id_0547::_id_4BA7("specialty_class_team_effort_zm"))
+      if(var_5 _id_0547::_id_4BA7("specialty_class_team_effort_zm")) {
         var_3 = max(var_6, var_3);
+      }
 
-      if(var_5 == var_1)
+      if(var_5 == var_1) {
         var_3 = max(var_6, var_3);
+      }
     }
 
     if(maps\mp\_utility::_id_5755(var_2) && common_scripts\utility::_id_562E(var_1._id_983B) && var_1 _id_0547::_id_4BA7("specialty_class_come_get_zm")) {
@@ -133,8 +141,9 @@ _id_62A6(var_0, var_1, var_2) {
     }
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_0 = var_0 * var_3;
+  }
 
   return var_0;
 }
@@ -167,11 +176,13 @@ _id_6B73(var_0) {
       }
     }
 
-    if(common_scripts\utility::_id_562E(var_0._id_55AB))
+    if(common_scripts\utility::_id_562E(var_0._id_55AB)) {
       var_2 = 1;
+    }
 
-    if(var_2)
+    if(var_2) {
       var_1 = maps\mp\gametypes\zombies::_id_1E59(_id_0547::_id_0A51("zombie_generic"), level._id_A980);
+    }
 
     var_0 thread _id_AB11(0.1, var_1, var_0.origin, self, undefined, undefined, "hitem_hard_zm");
     self _meth_866C(&"trigger_mod_proc", 1, "specialty_class_hit_em_hard_zm");
@@ -181,8 +192,9 @@ _id_6B73(var_0) {
 _id_AB11(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
 
-  if(!isDefined(var_0) || var_0 < 0.05)
+  if(!isDefined(var_0) || var_0 < 0.05) {
     var_0 = 1;
+  }
 
   wait(var_0);
   self dodamage(var_1, var_2, var_3, var_4, var_5, var_6);

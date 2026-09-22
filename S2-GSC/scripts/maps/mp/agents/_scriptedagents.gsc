@@ -4,8 +4,9 @@
 ******************************************************/
 
 _id_0114(var_0, var_1) {
-  if(isDefined(self._id_6AFF))
+  if(isDefined(self._id_6AFF)) {
     self[[self._id_6AFF]](var_0, var_1);
+  }
 }
 
 _id_0113() {
@@ -19,8 +20,9 @@ _id_7201(var_0, var_1, var_2, var_3) {
 _id_71FC(var_0, var_1, var_2, var_3, var_4) {
   self setanimstate(var_0, var_1);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "end";
+  }
 
   _id_A79E(var_2, var_3, var_0, var_1, var_4);
 }
@@ -28,8 +30,9 @@ _id_71FC(var_0, var_1, var_2, var_3, var_4) {
 _id_71F9(var_0, var_1, var_2, var_3, var_4, var_5) {
   self setanimstate(var_0, var_1, var_2);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "end";
+  }
 
   _id_A79E(var_3, var_4, var_0, var_1, var_5);
 }
@@ -39,14 +42,16 @@ _id_A79E(var_0, var_1, var_2, var_3, var_4) {
   var_6 = undefined;
   var_7 = undefined;
 
-  if(isDefined(var_2) && isDefined(var_3))
+  if(isDefined(var_2) && isDefined(var_3)) {
     var_7 = _getanimlength(self getanimentry(var_2, var_3));
+  }
 
   for(;;) {
     self waittill(var_0, var_8);
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_6 = (gettime() - var_5) * 0.001 / var_7;
+    }
 
     if(!isDefined(var_7) || var_6 > 0) {
       if(var_8 == var_1 || var_8 == "end" || var_8 == "anim_will_finish" || var_8 == "finish") {
@@ -54,8 +59,9 @@ _id_A79E(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       [[var_4]](var_8, var_2, var_3, var_6);
+    }
   }
 }
 
@@ -85,15 +91,17 @@ _id_441C(var_0, var_1, var_2) {
     var_9 = (var_1[0], var_1[1], 0);
     var_10 = vectorNormalize(var_9);
 
-    if(vectordot(var_10, var_0) < 0)
+    if(vectordot(var_10, var_0) < 0) {
       var_7 = 0;
-    else if(var_5 > 0)
+    } else if(var_5 > 0) {
       var_7 = var_3 / var_5;
+    }
   } else if(var_5 > 0)
     var_7 = var_3 / var_5;
 
-  if(_abs(var_6) > 0.001 && var_6 * var_4 >= 0)
+  if(_abs(var_6) > 0.001 && var_6 * var_4 >= 0) {
     var_8 = var_4 / var_6;
+  }
 
   var_11 = spawnStruct();
   var_11._id_AAE3 = var_7;
@@ -102,38 +110,45 @@ _id_441C(var_0, var_1, var_2) {
 }
 
 _id_4414(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 10;
+  }
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     return int(_ceil((180 + var_0 - var_1) / 45));
-  else
+  } else {
     return int(_floor((180 + var_0 + var_1) / 45));
+  }
 }
 
 _id_34A6(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 18;
+  }
 
   var_2 = var_0 + (0, 0, var_1);
   var_3 = var_0 + (0, 0, var_1 * -1);
   var_4 = self aiphysicstrace(var_2, var_3, self.radius, self._id_00BD, 1);
 
-  if(_abs(var_4[2] - var_2[2]) < 0.1)
+  if(_abs(var_4[2] - var_2[2]) < 0.1) {
     return undefined;
+  }
 
-  if(_abs(var_4[2] - var_3[2]) < 0.1)
+  if(_abs(var_4[2] - var_3[2]) < 0.1) {
     return undefined;
+  }
 
   return var_4;
 }
 
 _id_1F5B(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = self.radius;
+  }
 
   var_4 = (0, 0, 1) * var_2;
   var_5 = var_0 + var_4;
@@ -142,8 +157,9 @@ _id_1F5B(var_0, var_1, var_2, var_3) {
 }
 
 _id_470B(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
   var_3 = (0, 0, 1) * var_2;
   var_4 = var_0 + var_3;

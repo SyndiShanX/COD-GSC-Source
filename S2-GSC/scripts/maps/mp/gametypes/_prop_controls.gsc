@@ -67,8 +67,9 @@ cleanuppropcontrolshudondeath() {
 }
 
 safedestroy(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 destroy();
+  }
 }
 
 cleanuppropcontrolshud() {
@@ -101,14 +102,16 @@ updatetextongamepadchange() {
       var_0 = var_1;
 
       if(var_1) {
-        if(!common_scripts\utility::_id_562E(self.slopelocked))
+        if(!common_scripts\utility::_id_562E(self.slopelocked)) {
           self.matchslopekey.label = &"MP_PH_SLOPE";
-        else
+        } else {
           self.matchslopekey.label = &"MP_PH_SLOPED";
+        }
       } else if(!common_scripts\utility::_id_562E(self.slopelocked))
         self.matchslopekey.label = &"MP_PH_SLOPE_PC";
-      else
+      else {
         self.matchslopekey.label = &"MP_PH_SLOPED_PC";
+      }
     }
 
     waitframe();
@@ -167,8 +170,9 @@ propinputwatch() {
       continue;
     }
 
-    if(var_0 == "cloneProp")
+    if(var_0 == "cloneProp") {
       propclonepower();
+    }
   }
 }
 
@@ -176,23 +180,26 @@ proplockunlock() {
   if(self ismantling()) {
     return;
   }
-  if(self._id_5E61)
+  if(self._id_5E61) {
     unlockprop();
-  else
+  } else {
     lockprop();
+  }
 }
 
 registerpreviousprop(var_0) {
   var_1 = 3;
 
-  if(!isDefined(var_0.usedpropsindex))
+  if(!isDefined(var_0.usedpropsindex)) {
     var_0.usedpropsindex = 0;
+  }
 
   var_0.usedprops[var_0.usedpropsindex] = var_0._id_777D._id_5135;
   var_0.usedpropsindex++;
 
-  if(var_0.usedpropsindex >= var_1)
+  if(var_0.usedpropsindex >= var_1) {
     var_0.usedpropsindex = 0;
+  }
 }
 
 propchange() {
@@ -240,8 +247,9 @@ propsetchangesleft(var_0) {
   if(maps\mp\gametypes\prop::useprophudserver()) {
     self.changepropkey setvalue(self.changesleft);
 
-    if(self.changesleft <= 0)
+    if(self.changesleft <= 0) {
       self.changepropkey.alpha = 0.5;
+    }
   }
 }
 
@@ -265,8 +273,9 @@ propchangeto(var_0) {
   maps\mp\gametypes\prop::applyanglesoffset();
   self._id_777D linktosynchronizedparent(self.propent, "J_prop_1");
 
-  if(self.slopelocked && common_scripts\utility::_id_562E(self._id_5E61))
+  if(self.slopelocked && common_scripts\utility::_id_562E(self._id_5E61)) {
     self.propent set_pitch_roll_for_ground_normal(self._id_777D);
+  }
 
   self.propent linktosynchronizedparent(self.propanchor);
   self.thirdpersonrange = maps\mp\gametypes\prop::getthirdpersonrangeforpropinfo(var_0);
@@ -286,10 +295,11 @@ propmatchslope() {
     }
 
     if(maps\mp\gametypes\prop::useprophudserver()) {
-      if(common_scripts\utility::_id_55E0())
+      if(common_scripts\utility::_id_55E0()) {
         self.matchslopekey.label = &"MP_PH_SLOPED";
-      else
+      } else {
         self.matchslopekey.label = &"MP_PH_SLOPED_PC";
+      }
     }
   } else {
     self.slopelocked = 0;
@@ -303,10 +313,11 @@ propmatchslope() {
     }
 
     if(maps\mp\gametypes\prop::useprophudserver()) {
-      if(common_scripts\utility::_id_55E0())
+      if(common_scripts\utility::_id_55E0()) {
         self.matchslopekey.label = &"MP_PH_SLOPE";
-      else
+      } else {
         self.matchslopekey.label = &"MP_PH_SLOPE_PC";
+      }
     }
   }
 }
@@ -343,8 +354,9 @@ propsetclonesleft(var_0) {
   if(maps\mp\gametypes\prop::useprophudserver()) {
     self.clonekey setvalue(self.clonesleft);
 
-    if(self.clonesleft <= 0)
+    if(self.clonesleft <= 0) {
       self.clonekey.alpha = 0.5;
+    }
   }
 }
 
@@ -363,8 +375,9 @@ propsetflashesleft(var_0) {
   if(maps\mp\gametypes\prop::useprophudserver()) {
     self.abilitykey setvalue(self.abilityleft);
 
-    if(self.abilityleft <= 0)
+    if(self.abilityleft <= 0) {
       self.abilitykey.alpha = 0.5;
+    }
   }
 }
 
@@ -382,10 +395,11 @@ set_pitch_roll_for_ground_normal(var_0) {
   var_6 = anglesToForward(var_4);
   var_7 = vectordot(var_6, var_3);
 
-  if(var_7 < 0)
+  if(var_7 < 0) {
     var_7 = -1;
-  else
+  } else {
     var_7 = 1;
+  }
 
   var_8 = vectordot(var_6, var_2);
   var_9 = var_8 * var_5;
@@ -394,10 +408,11 @@ set_pitch_roll_for_ground_normal(var_0) {
 }
 
 get_ground_normal(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_2 = self;
-  else
+  } else {
     var_2 = var_0;
+  }
 
   var_3 = [self.origin];
 
@@ -448,12 +463,13 @@ propmoveunlock() {
     }
     var_4 = var_3[0] != 0 || var_3[1] != 0;
 
-    if(self._id_5E61 && var_2 && !var_4)
+    if(self._id_5E61 && var_2 && !var_4) {
       var_2 = 0;
-    else if(self._id_5E61 && !var_0 && var_4)
+    } else if(self._id_5E61 && !var_0 && var_4) {
       var_2 = 1;
-    else if(self._id_5E61 && var_4 && !var_2)
+    } else if(self._id_5E61 && var_4 && !var_2) {
       unlockprop();
+    }
 
     var_0 = self._id_5E61;
     var_1 = var_4;
@@ -474,8 +490,9 @@ unlockprop() {
   self._id_5E61 = 0;
   self setclientomnvar("ui_ph_is_locked", 0);
 
-  if(maps\mp\gametypes\prop::useprophudserver())
+  if(maps\mp\gametypes\prop::useprophudserver()) {
     self.lockpropkey.label = &"MP_PH_LOCK";
+  }
 }
 
 lockprop() {
@@ -484,7 +501,7 @@ lockprop() {
   }
   self.propanchor unlink();
   self.propanchor.origin = self.origin;
-  self playerlinkto(self.propanchor);
+  self playerlinkTo(self.propanchor);
 
   if(self.slopelocked) {
     self.propent unlink();
@@ -496,8 +513,9 @@ lockprop() {
   self notify("locked");
   self setclientomnvar("ui_ph_is_locked", 1);
 
-  if(maps\mp\gametypes\prop::useprophudserver())
+  if(maps\mp\gametypes\prop::useprophudserver()) {
     self.lockpropkey.label = &"MP_PH_LOCKED";
+  }
 }
 
 canlock() {
@@ -506,8 +524,9 @@ canlock() {
     var_1 = getEntArray("trigger_hurt", "classname");
 
     foreach(var_3 in var_1) {
-      if(_ispointinvolume(var_0, var_3))
+      if(_ispointinvolume(var_0, var_3)) {
         return 0;
+      }
     }
   }
 
@@ -519,8 +538,9 @@ propspectate() {
   self.propspectating = 0;
   self.endingpropspecate = 0;
 
-  if(!isDefined(self.spectatenumber))
+  if(!isDefined(self.spectatenumber)) {
     self.spectatenumber = 0;
+  }
 
   for(;;) {
     var_0 = common_scripts\utility::waittill_any_return("spectate");
@@ -550,9 +570,9 @@ propspectate() {
 propspectatekeys() {
   self endon("endPropSpectate");
 
-  if(checkifvalidpropspectate())
+  if(checkifvalidpropspectate()) {
     spectateprop();
-  else {
+  } else {
     findvalidspectateprop(1);
     spectateprop();
   }
@@ -580,14 +600,17 @@ propspectatekeys() {
 checkifvalidpropspectate() {
   var_0 = self.spectatableprops[self.spectatenumber];
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0 == self)
+  if(var_0 == self) {
     return 0;
+  }
 
-  if(maps\mp\_utility::isreallyalive(var_0))
+  if(maps\mp\_utility::isreallyalive(var_0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -596,15 +619,17 @@ findvalidspectateprop(var_0) {
   var_1 = self.spectatenumber;
 
   for(;;) {
-    if(common_scripts\utility::_id_562E(var_0))
+    if(common_scripts\utility::_id_562E(var_0)) {
       self.spectatenumber++;
-    else
+    } else {
       self.spectatenumber--;
+    }
 
-    if(var_0 && self.spectatableprops.size <= self.spectatenumber)
+    if(var_0 && self.spectatableprops.size <= self.spectatenumber) {
       self.spectatenumber = 0;
-    else if(self.spectatenumber < 0)
+    } else if(self.spectatenumber < 0) {
       self.spectatenumber = self.spectatableprops.size - 1;
+    }
 
     if(self.spectatenumber == var_1) {
       break;
@@ -651,8 +676,9 @@ createpropspecatehud() {
 }
 
 destroypropspecatehud() {
-  if(isDefined(self.spectatecommands))
+  if(isDefined(self.spectatecommands)) {
     self.spectatecommands destroy();
+  }
 }
 
 spectateprop() {
@@ -662,7 +688,7 @@ spectateprop() {
   self.propanchor.origin = self.origin;
   self setOrigin(var_0.origin);
   self.angles = var_0.angles;
-  self playerlinkto(var_0.propanchor);
+  self playerlinkTo(var_0.propanchor);
 }
 
 movetonewprop() {
@@ -670,16 +696,16 @@ movetonewprop() {
   self unlink();
   self.origin = var_0.origin;
   self.angles = var_0.angles;
-  self playerlinkto(var_0.propanchor);
+  self playerlinkTo(var_0.propanchor);
 }
 
 returntoprop() {
   self unlink();
   self setOrigin(self.propanchor.origin);
 
-  if(self._id_5E61)
-    self playerlinkto(self.propanchor);
-  else {
+  if(self._id_5E61) {
+    self playerlinkTo(self.propanchor);
+  } else {
     self.propanchor linktosynchronizedparent(self);
     self.propanchor.origin = self.origin;
   }
@@ -727,10 +753,10 @@ propcamerazoom() {
 
 proprotate() {
   for(;;) {
-    if(self adsbuttonpressed(1) && !common_scripts\utility::_id_562E(self.propent.spinning)) {
+    if(self adsButtonPressed(1) && !common_scripts\utility::_id_562E(self.propent.spinning)) {
       self.propent setshadowrendering(0);
       self.propent.spinning = 1;
-    } else if(!self adsbuttonpressed(1) && common_scripts\utility::_id_562E(self.propent.spinning)) {
+    } else if(!self adsButtonPressed(1) && common_scripts\utility::_id_562E(self.propent.spinning)) {
       self.propent setshadowrendering(1);
       self.propent.spinning = 0;
     }
@@ -776,11 +802,13 @@ flashtheprops(var_0) {
 }
 
 flashenemies(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.origin;
+  }
 
   playFX(common_scripts\utility::_id_44F5("propFlash"), var_1 + (0, 0, 4));
   playsoundatpos(var_1, "prop_flashbang");
@@ -801,10 +829,11 @@ flashenemies(var_0, var_1) {
     var_7 = 150.0;
 
     if(var_5 <= var_6) {
-      if(var_5 <= var_7)
+      if(var_5 <= var_7) {
         var_8 = 1;
-      else
+      } else {
         var_8 = 1 - (var_5 - var_7) / (var_6 - var_7);
+      }
 
       var_9 = vectorNormalize(var_4);
       var_10 = anglesToForward(var_3 getplayerangles());
@@ -824,8 +853,9 @@ deletepropsifatmax() {
   var_1 = 0;
 
   foreach(var_3 in self.propclones) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_1++;
+    }
   }
 
   if(var_1 + 1 <= var_0) {
@@ -854,10 +884,11 @@ deletepropsifatmax() {
 }
 
 cloneprop() {
-  if(!isDefined(self.propclones))
+  if(!isDefined(self.propclones)) {
     self.propclones = [];
-  else
+  } else {
     deletepropsifatmax();
+  }
 
   var_0 = spawn("script_model", self._id_777D.origin);
   var_0.targetname = "propClone";
@@ -865,7 +896,7 @@ cloneprop() {
   var_0.angles = self._id_777D.angles;
   var_0.health = 50;
   var_0._id_7433 = self;
-  var_0 setcandamage(1);
+  var_0 setCanDamage(1);
   var_0 setdamagecallbackon(1);
   var_0.damagecallback = ::damageclonewatch;
   var_0 thread deleteclone(self);
@@ -898,34 +929,40 @@ deleteclone(var_0) {
   if(isDefined(self._id_00E6)) {
     level thread maps\mp\gametypes\_rank::_id_1457("clone_destroyed", self._id_00E6);
 
-    if(isDefined(self._id_7433))
+    if(isDefined(self._id_7433)) {
       level thread maps\mp\gametypes\_rank::_id_1457("clone_was_destroyed", self._id_7433);
+    }
   }
 
-  if(!isDefined(self.isdying))
+  if(!isDefined(self.isdying)) {
     self.isdying = 1;
+  }
 
   var_2 = "prop_death";
   var_3 = "propDeathFX";
   playsoundatpos(self.origin + (0, 0, 4), var_2);
   playFX(common_scripts\utility::_id_44F5(var_3), self.origin + (0, 0, 4));
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 fadetoblackforxsec(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 5;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 = _newclienthudelem(self);
   var_3.foreground = 0;
@@ -939,14 +976,16 @@ fadetoblackforxsec(var_0, var_1, var_2) {
   var_3.alpha = 0;
   waitframe();
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     var_3 fadeovertime(var_1);
+  }
 
   var_3.alpha = 1;
   maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_0 - var_2);
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     var_3 fadeovertime(var_2);
+  }
 
   var_3.alpha = 0;
   maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(var_2);
@@ -974,20 +1013,23 @@ hidehudintermission() {
     level.whistling.alpha = 0;
   }
 
-  foreach(var_1 in level.players)
-  var_1 propabilitykeysvisible(0);
+  foreach(var_1 in level.players) {
+    var_1 propabilitykeysvisible(0);
+  }
 }
 
 safesetalpha(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.alpha = var_1;
+  }
 }
 
 propabilitykeysvisible(var_0, var_1) {
-  if(common_scripts\utility::_id_562E(var_0))
+  if(common_scripts\utility::_id_562E(var_0)) {
     var_2 = 1;
-  else
+  } else {
     var_2 = 0;
+  }
 
   if(maps\mp\gametypes\prop::useprophudserver() || common_scripts\utility::_id_562E(var_1)) {
     safesetalpha(self.changepropkey, var_2);
@@ -998,7 +1040,8 @@ propabilitykeysvisible(var_0, var_1) {
     safesetalpha(self.clonekey, var_2);
     safesetalpha(self.zoomkey, var_2);
 
-    if(!common_scripts\utility::_id_562E(level.nopropsspectate))
+    if(!common_scripts\utility::_id_562E(level.nopropsspectate)) {
       safesetalpha(self.spectatekey, var_2);
+    }
   }
 }

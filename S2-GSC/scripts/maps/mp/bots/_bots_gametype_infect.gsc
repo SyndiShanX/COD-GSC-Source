@@ -22,8 +22,9 @@ _id_8797() {
 }
 
 _id_1AE4() {
-  if(level._id_5111 && self.team == "axis")
+  if(level._id_5111 && self.team == "axis") {
     return 0;
+  }
 
   return maps\mp\bots\_bots::_id_1AE3();
 }
@@ -38,18 +39,21 @@ _id_1A21() {
 
   for(;;) {
     if(level._id_5111) {
-      if(self.team == "axis" && self botgetpersonality() != "run_and_gun")
+      if(self.team == "axis" && self botgetpersonality() != "run_and_gun") {
         maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
+      }
     }
 
-    if(self._id_1AFA != self.team)
+    if(self._id_1AFA != self.team) {
       self._id_1AFA = self.team;
+    }
 
     if(self.team == "axis") {
       var_0 = maps\mp\bots\_bots_strategy::_id_1A7A();
 
-      if(!isDefined(var_0) || var_0)
+      if(!isDefined(var_0) || var_0) {
         self botclearscriptgoal();
+      }
     }
 
     self[[self._id_6F7F]]();
@@ -67,8 +71,9 @@ _id_1A1D() {
     var_1 = [];
 
     foreach(var_3 in level.players) {
-      if(!isDefined(var_3._id_52D5) && var_3.health > 0 && isDefined(var_3.team) && (var_3.team == "allies" || var_3.team == "axis"))
+      if(!isDefined(var_3._id_52D5) && var_3.health > 0 && isDefined(var_3.team) && (var_3.team == "allies" || var_3.team == "axis")) {
         var_3._id_52D5 = gettime();
+      }
 
       if(isDefined(var_3._id_52D5) && gettime() - var_3._id_52D5 > 5000) {
         if(!isDefined(var_3.team)) {
@@ -79,8 +84,9 @@ _id_1A1D() {
           continue;
         }
 
-        if(var_3.team == "allies")
+        if(var_3.team == "allies") {
           var_1[var_1.size] = var_3;
+        }
       }
     }
 
@@ -88,8 +94,9 @@ _id_1A1D() {
       var_5 = 1;
 
       foreach(var_7 in var_1) {
-        if(isbot(var_7))
+        if(isbot(var_7)) {
           var_5 = 0;
+        }
       }
 
       if(var_5) {
@@ -153,8 +160,9 @@ _id_1A20() {
     self._id_60DB = 0;
     var_0 = self botgetdifficultysetting("throwKnifeChance");
 
-    if(var_0 < 0.25)
+    if(var_0 < 0.25) {
       self botsetdifficultysetting("throwKnifeChance", 0.25);
+    }
 
     self botsetdifficultysetting("allowGrenades", 1);
 
@@ -170,8 +178,9 @@ _id_1A20() {
           } else {
             var_2 = _squared(self botgetdifficultysetting("meleeDist"));
 
-            if(distancesquared(self._id_0088.origin, self.origin) <= var_2)
+            if(distancesquared(self._id_0088.origin, self.origin) <= var_2) {
               self._id_1F1A = var_1;
+            }
 
             var_3 = self._id_0088 getnearestnode();
             var_4 = self getnearestnode();
@@ -190,11 +199,13 @@ _id_1A20() {
             if(self._id_1F1A + 3000 < var_1) {
               if(self._id_60DB + 3000 < var_1) {
                 if(self._id_60D6 + 3000 < var_1) {
-                  if(_id_1A1E(self.origin, self._id_0088.origin))
+                  if(_id_1A1E(self.origin, self._id_0088.origin)) {
                     maps\mp\bots\_bots_util::_id_1AA8("find_node_can_see_ent", ::_id_1A1F, self._id_0088, self._id_60DC);
+                  }
 
-                  if(!self getammocount(level._id_5119))
+                  if(!self getammocount(level._id_5119)) {
                     self setweaponammoclip(level._id_5119, 1);
+                  }
 
                   maps\mp\_utility::waitfortimeornotify(30, "enemy");
                   self botclearscriptgoal();
@@ -211,8 +222,9 @@ _id_1A20() {
 }
 
 _id_1A1E(var_0, var_1) {
-  if(_abs(var_0[2] - var_1[2]) > 56.0 && _distance2dsquared(var_0, var_1) < 2304)
+  if(_abs(var_0[2] - var_1[2]) > 56.0 && _distance2dsquared(var_0, var_1) < 2304) {
     return 1;
+  }
 
   return 0;
 }
@@ -223,8 +235,9 @@ _id_1A1F(var_0, var_1) {
   }
   var_2 = 0;
 
-  if(issubstr(var_1.type, "Begin"))
+  if(issubstr(var_1.type, "Begin")) {
     var_2 = 1;
+  }
 
   var_3 = _getlinkednodes(var_1);
 
@@ -242,8 +255,9 @@ _id_1A1F(var_0, var_1) {
       var_8 = var_6.origin + var_7;
       var_9 = var_0.origin;
 
-      if(isPlayer(var_0))
+      if(isPlayer(var_0)) {
         var_9 = var_0 maps\mp\_utility::_id_469E();
+      }
 
       if(_sighttracepassed(var_8, var_9, 0, self, var_0)) {
         var_10 = _vectortoyaw(var_9 - var_8);

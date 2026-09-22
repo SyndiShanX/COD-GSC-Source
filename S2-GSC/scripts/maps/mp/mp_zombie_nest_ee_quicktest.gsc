@@ -18,8 +18,9 @@ _id_772E() {
       if(common_scripts\utility::_id_562E(var_2._id_6816)) {
         continue;
       }
-      if(var_2._id_901F <= level._id_A980 && var_2._id_6816)
+      if(var_2._id_901F <= level._id_A980 && var_2._id_6816) {
         var_0++;
+      }
     }
 
     _iprintln("zombies left to kill: " + var_0);
@@ -30,8 +31,9 @@ _id_772E() {
 _id_0CAE(var_0, var_1, var_2, var_3) {
   wait 0.5;
 
-  foreach(var_5 in level._id_AC1D)
-  var_5 notify("open", level.players[0]);
+  foreach(var_5 in level._id_AC1D) {
+    var_5 notify("open", level.players[0]);
+  }
 
   var_7 = _id_4420(var_3);
 
@@ -48,8 +50,9 @@ _id_0CAE(var_0, var_1, var_2, var_3) {
 
           level.players[var_8] _id_8706(var_0, var_1);
 
-          if(0)
+          if(0) {
             level.players[var_8]._id_AC5B = 1;
+          }
 
           level.players[var_8] maps\mp\gametypes\zombies::_id_4798(var_2 - 500);
           level.players[var_8] _id_056A::_id_47B5();
@@ -115,8 +118,9 @@ _id_4420(var_0) {
 }
 
 _id_7C11(var_0) {
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
   wait 1;
   level._id_A980 = var_0;

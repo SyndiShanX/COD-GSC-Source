@@ -76,14 +76,16 @@ _id_A88F() {
       self._id_1642 = 1;
 
       foreach(var_1 in level.players) {
-        if(self.team == var_1.team)
+        if(self.team == var_1.team) {
           var_1._id_1649 = 60;
+        }
       }
 
       self._id_1644 = _id_0479::_id_869E(self.team, "waypoint_escort", (0, 0, 90), 14, 14, 0, 0.05, 0, 1, 0, 0, "tag_origin");
 
-      if(isDefined(self._id_1645))
+      if(isDefined(self._id_1645)) {
         self._id_1645.alpha = 1.0;
+      }
 
       foreach(var_1 in level.players) {
         if(!isbot(var_1) && var_1.team == self.team) {
@@ -101,26 +103,30 @@ _id_49A0() {
 
   for(;;) {
     if(self._id_1649 > 0) {
-      if(isDefined(self._id_1645))
+      if(isDefined(self._id_1645)) {
         self._id_1645.alpha = 1.0;
+      }
 
       self._id_1649 = self._id_1649 - 1;
       _id_0513::_id_A13B();
 
-      if(!maps\mp\_utility::_hasperk("specialty_fastreload"))
+      if(!maps\mp\_utility::_hasperk("specialty_fastreload")) {
         maps\mp\_utility::giveperk("specialty_fastreload");
+      }
 
       self._id_98E2 = 4.0;
       self._id_98E1 = 0.1;
       self notify("damage");
     } else if(self._id_1649 == 0) {
-      if(isDefined(self._id_1645))
+      if(isDefined(self._id_1645)) {
         self._id_1645.alpha = 0.0;
+      }
 
       _id_0513::_id_A13B();
 
-      if(maps\mp\_utility::_hasperk("specialty_fastreload"))
+      if(maps\mp\_utility::_hasperk("specialty_fastreload")) {
         maps\mp\_utility::_id_0735("specialty_fastreload");
+      }
 
       self._id_98E2 = undefined;
       self._id_98E1 = undefined;
@@ -139,8 +145,9 @@ _id_A735() {
   for(;;) {
     common_scripts\utility::_id_A70A("disconnect", "death", "faux_spawn");
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       _id_3673();
+    }
   }
 }
 
@@ -149,8 +156,9 @@ _id_3673() {
   self._id_1642 = 0;
   self._id_1649 = 0;
 
-  if(isDefined(self._id_1644))
+  if(isDefined(self._id_1644)) {
     self._id_1644 destroy();
+  }
 }
 
 _id_1647() {
@@ -185,8 +193,9 @@ _id_6511() {
     self waittill("updateRecentKills");
     waitframe();
 
-    if(self._id_7AD2 > 1 && self._id_1642 == 0 && self._id_1647 == 0)
+    if(self._id_7AD2 > 1 && self._id_1642 == 0 && self._id_1647 == 0) {
       _id_1647();
+    }
   }
 }
 
@@ -197,8 +206,9 @@ _id_6633() {
   for(;;) {
     common_scripts\utility::_id_A70A("neardeath_battlecry");
 
-    if(self._id_1642 == 0 && self._id_1647 == 0)
+    if(self._id_1642 == 0 && self._id_1647 == 0) {
       _id_1647();
+    }
   }
 }
 
@@ -209,8 +219,9 @@ _id_7B43() {
   for(;;) {
     common_scripts\utility::_id_A70A("recovery_battlecry");
 
-    if(self._id_1642 == 0 && self._id_1647 == 0)
+    if(self._id_1642 == 0 && self._id_1647 == 0) {
       _id_1647();
+    }
   }
 }
 
@@ -221,8 +232,9 @@ _id_9EA2() {
   for(;;) {
     self waittill("turned_on_battlecry");
 
-    if(self._id_1642 == 0 && self._id_1647 == 0)
+    if(self._id_1642 == 0 && self._id_1647 == 0) {
       _id_1647();
+    }
   }
 }
 
@@ -233,8 +245,9 @@ _id_3212() {
   for(;;) {
     self waittill("dominated_battlecry");
 
-    if(isDefined(self.team) && maps\mp\gametypes\dom::_id_46CC(maps\mp\_utility::getotherteam(self.team)) == level._id_3CC5.size && self._id_1642 == 0 && self._id_1647 == 0)
+    if(isDefined(self.team) && maps\mp\gametypes\dom::_id_46CC(maps\mp\_utility::getotherteam(self.team)) == level._id_3CC5.size && self._id_1642 == 0 && self._id_1647 == 0) {
       _id_1647();
+    }
 
     waitframe();
   }

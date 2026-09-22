@@ -92,8 +92,9 @@ init_bob_phase_handler() {
 }
 
 register_bob_phase(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.zmb_bob_agent_phases))
+  if(!isDefined(level.zmb_bob_agent_phases)) {
     level.zmb_bob_agent_phases = [];
+  }
 
   var_6 = spawnStruct();
   var_6.name = var_0;
@@ -130,8 +131,9 @@ zombie_bob_should_charge() {
     return 0;
   }
 
-  if(self._id_78D7 >= self._id_6099 && isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::_id_1F5B(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0) && (!isDefined(self._id_3043) || !maps\mp\agents\humanoid\_humanoid_util::_id_8BAE()) && !isDefined(self._id_1927) && (!_id_053C::_id_5686() || !common_scripts\utility::_id_0F79(self._id_983C, var_0)) && (!isDefined(level._id_5B1B) || gettime() - level._id_5B1B > 10000) && !common_scripts\utility::_id_562E(self._id_57C0))
+  if(self._id_78D7 >= self._id_6099 && isPlayer(var_0) && _issentient(var_0) && self agentcanseesentient(var_0) && _id_0547::_id_1F5B(self.origin, var_0.origin) && common_scripts\utility::_id_0F79(_id_053C::_id_4F88(), var_0) && (!isDefined(self._id_3043) || !maps\mp\agents\humanoid\_humanoid_util::_id_8BAE()) && !isDefined(self._id_1927) && (!_id_053C::_id_5686() || !common_scripts\utility::_id_0F79(self._id_983C, var_0)) && (!isDefined(level._id_5B1B) || gettime() - level._id_5B1B > 10000) && !common_scripts\utility::_id_562E(self._id_57C0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -141,8 +143,9 @@ zombie_bob_is_charging() {
 }
 
 zombie_bob_charge_cooldown_wait() {
-  if(zombie_bob_is_charging())
+  if(zombie_bob_is_charging()) {
     return 1;
+  }
 
   if(isDefined(self.waiting_for_charge_end) && !zombie_bob_is_charging()) {
     self.waiting_for_charge_end = undefined;
@@ -150,10 +153,11 @@ zombie_bob_charge_cooldown_wait() {
     self._id_78D7 = 0;
     return 1;
   } else if(isDefined(self.last_charge_end_time)) {
-    if(gettime() - self.last_charge_end_time < 1500.0)
+    if(gettime() - self.last_charge_end_time < 1500.0) {
       return 1;
-    else
+    } else {
       self.last_charge_end_time = undefined;
+    }
   }
 
   return 0;
@@ -167,13 +171,15 @@ zombie_bob_do_charge() {
 }
 
 zombie_bob_punch_think() {
-  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2())
+  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
     return 0;
+  }
 
   self.enterednewphase = undefined;
 
-  if(zombie_bob_charge_cooldown_wait())
+  if(zombie_bob_charge_cooldown_wait()) {
     return 0;
+  }
 
   if(self.health <= self.phase2health || common_scripts\utility::_id_3794("FORCE_bob_sizzle") || common_scripts\utility::_id_3794("FORCE_bob_smoke")) {
     self.health = self.phase2health;
@@ -181,18 +187,21 @@ zombie_bob_punch_think() {
     return 1;
   }
 
-  if(zombie_bob_should_charge())
+  if(zombie_bob_should_charge()) {
     zombie_bob_do_charge();
+  }
 
   return 0;
 }
 
 zombie_bob_sizzle_think() {
-  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2())
+  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
     return 0;
+  }
 
-  if(zombie_bob_charge_cooldown_wait())
+  if(zombie_bob_charge_cooldown_wait()) {
     return 0;
+  }
 
   if(self.health <= self.phase3health || common_scripts\utility::_id_3794("FORCE_bob_smoke")) {
     self.health = self.phase3health;
@@ -212,11 +221,13 @@ zombie_bob_sizzle_think() {
     self.enterednewphase = undefined;
   }
 
-  if(zombie_bob_should_charge())
+  if(zombie_bob_should_charge()) {
     zombie_bob_do_charge();
+  }
 
-  if(isDefined(self.nextsizzletime) && gettime() < self.nextsizzletime)
+  if(isDefined(self.nextsizzletime) && gettime() < self.nextsizzletime) {
     return 0;
+  }
 
   self.nextsizzletime = gettime() + var_0 * 1000;
   self.zombie_limit_damage = int(bob_health_scale_per_num_players() * 1500);
@@ -231,11 +242,13 @@ zombie_bob_actually_die() {
 }
 
 zombie_bob_smoke_think() {
-  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2())
+  if(maps\mp\agents\_scripted_agent_anim_util::_id_57E2()) {
     return 0;
+  }
 
-  if(zombie_bob_charge_cooldown_wait())
+  if(zombie_bob_charge_cooldown_wait()) {
     return 0;
+  }
 
   if(self.health <= 1) {
     _id_0378::_id_8D74("aud_bob_engine", "bob_killed");
@@ -260,8 +273,9 @@ zombie_bob_smoke_think() {
     self.enterednewphase = undefined;
   }
 
-  if(zombie_bob_should_charge())
+  if(zombie_bob_should_charge()) {
     zombie_bob_do_charge();
+  }
 
   if(isDefined(self.nextsmoketime) && gettime() < self.nextsmoketime) {
     zombie_bob_phase_3_try_sizzle();
@@ -278,8 +292,9 @@ zombie_bob_smoke_think() {
 zombie_bob_phase_3_try_sizzle() {
   var_0 = 30;
 
-  if(isDefined(self.nextsizzletime) && gettime() < self.nextsizzletime)
+  if(isDefined(self.nextsizzletime) && gettime() < self.nextsizzletime) {
     return 0;
+  }
 
   self.nextsizzletime = gettime() + var_0 * 1000;
   self.zombie_limit_damage = int(bob_health_scale_per_num_players() * 1500);
@@ -340,8 +355,9 @@ zombie_bob_think() {
     if(common_scripts\utility::_id_562E(self._id_57C0)) {
       continue;
     }
-    if(self._id_5542)
+    if(self._id_5542) {
       _id_0547::zombie_charge_cleanup(self._id_645E);
+    }
 
     if(_id_053C::_id_4F84()) {
       continue;
@@ -358,18 +374,21 @@ zombie_bob_think() {
 
 run_bob_phase_logic() {
   foreach(var_1 in level.zmb_bob_agent_phases) {
-    if(common_scripts\utility::_id_3794(var_1.name))
+    if(common_scripts\utility::_id_3794(var_1.name)) {
       bob_phase_handler(var_1);
+    }
   }
 }
 
 bob_has_excuse_to_skip(var_0) {
-  if(!isDefined(var_0.reasons_to_skip))
+  if(!isDefined(var_0.reasons_to_skip)) {
     return 0;
+  }
 
   foreach(var_2 in var_0.reasons_to_skip) {
-    if(common_scripts\utility::_id_3794(var_2))
+    if(common_scripts\utility::_id_3794(var_2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -380,16 +399,18 @@ bob_phase_handler(var_0) {
 
   if(!var_1) {
     foreach(var_3 in var_0.reasons_to_block_progress) {
-      if(self[[var_3._id_3F02]]() == var_3.value)
+      if(self[[var_3._id_3F02]]() == var_3.value) {
         return;
+      }
     }
 
     var_1 = common_scripts\utility::makeentitysentient(var_0.func_and_data);
   }
 
   if(var_1) {
-    if(_id_0547::_id_5565(self.lastweapondamage, "throwingknife_zm"))
+    if(_id_0547::_id_5565(self.lastweapondamage, "throwingknife_zm")) {
       level notify("rebel_set_4_complete");
+    }
 
     self.zombie_bob_can_take_damage = 0;
     set_bob_phase(var_0.next_phase);
@@ -397,8 +418,9 @@ bob_phase_handler(var_0) {
 }
 
 set_bob_phase(var_0) {
-  foreach(var_2 in level.zmb_bob_agent_phases)
-  common_scripts\utility::_id_3796(var_2.name);
+  foreach(var_2 in level.zmb_bob_agent_phases) {
+    common_scripts\utility::_id_3796(var_2.name);
+  }
 
   common_scripts\utility::_id_379A(var_0);
   _id_0378::_id_8D74("aud_bob_engine", var_0);
@@ -429,14 +451,17 @@ zombie_bob_on_damaged_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
   var_11 = 0;
 
-  if(common_scripts\utility::_id_3794("bob_punch"))
+  if(common_scripts\utility::_id_3794("bob_punch")) {
     var_11 = self.phase2health;
+  }
 
-  if(common_scripts\utility::_id_3794("bob_sizzle"))
+  if(common_scripts\utility::_id_3794("bob_sizzle")) {
     var_11 = self.phase3health;
+  }
 
-  if(self.health - var_2 < var_11)
+  if(self.health - var_2 < var_11) {
     var_2 = self.health - var_11;
+  }
 
   if(var_2 == 0) {
     return;
@@ -450,8 +475,9 @@ zombie_bob_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   if(common_scripts\utility::_id_3794("bob_was_koed")) {
     return;
   }
-  if(self._id_78D7 < self._id_6099)
+  if(self._id_78D7 < self._id_6099) {
     self._id_78D7 = self._id_78D7 + var_2;
+  }
 
   self._id_00E6 = var_1;
 
@@ -464,14 +490,15 @@ zombie_bob_on_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
   if(var_5 != "wunderbuss_zm") {
     var_11 = self gettagorigin("engine");
 
-    if(distancesquared(var_11, var_6) > 256)
+    if(distancesquared(var_11, var_6) > 256) {
       return;
+    }
   }
 
   if(common_scripts\utility::_id_3794("bob_smoke") && var_5 != "wunderbuss_zm") {
     return;
   }
-  _playfxontag(level._effect["zmb_bob_metalhit_1"], self, "Engine");
+  _playFXOnTag(level._effect["zmb_bob_metalhit_1"], self, "Engine");
   _id_054D::_id_6BD1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
@@ -493,8 +520,9 @@ zombie_bob_smoke_atk_monitor_health() {
   self endon("bob_stop_engine_pulse");
 
   for(;;) {
-    if(self.health <= 1)
+    if(self.health <= 1) {
       self notify("bob_stop_engine_pulse");
+    }
 
     waitframe();
   }
@@ -505,8 +533,9 @@ zombie_bob_smoke_atk_cloud_damage(var_0) {
 
   for(var_1 = 25; var_1 > 0; var_1 = var_1 - 0.05) {
     foreach(var_3 in level.players) {
-      if(_distance2d(var_3.origin, var_0) < 120)
+      if(_distance2d(var_3.origin, var_0) < 120) {
         var_3 dodamage(1, var_0);
+      }
     }
 
     waitframe();
@@ -522,7 +551,7 @@ zombie_bob_smoke_listen_for_damage(var_0, var_1) {
     playFX(level._effect["zmb_ber_bob_smk_electrify"], var_1);
 
     if(_distance2d(var_0.origin, var_1) < 144.0) {
-      _playfxontag(level._effect["zmb_ber_bob_smk_dmg"], var_0, "Engine");
+      _playFXOnTag(level._effect["zmb_ber_bob_smk_dmg"], var_0, "Engine");
       var_0.smoke_damage = 1;
       var_0 zombie_bob_on_damaged(self, var_3, var_2, var_10, var_6, var_11, var_5, var_4, var_8, 0, var_9);
       var_0.smoke_damage = undefined;
@@ -533,17 +562,18 @@ zombie_bob_smoke_listen_for_damage(var_0, var_1) {
 zombie_bob_smoke_atk_spawn_hit_volumes(var_0, var_1) {
   var_2 = 2;
   wait(var_2);
-  var_3 = _getent("bob_smoke_collision", "targetname");
+  var_3 = _getEnt("bob_smoke_collision", "targetname");
   var_4 = undefined;
 
   if(isDefined(var_3)) {
     var_4 = spawn("script_model", var_1);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 clonebrushmodeltoscriptmodel(var_3);
+    }
   }
 
-  var_5 = _getent("bob_smoke_trigger_damage", "targetname");
+  var_5 = _getEnt("bob_smoke_trigger_damage", "targetname");
   var_6 = undefined;
 
   if(isDefined(var_5)) {
@@ -554,8 +584,9 @@ zombie_bob_smoke_atk_spawn_hit_volumes(var_0, var_1) {
 
   level common_scripts\utility::waittill_notify_or_timeout("bob_stop_smoke", 25);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 delete();
+  }
 
   if(isDefined(var_6)) {
     var_5 notify("stop_damage_listen");
@@ -591,8 +622,9 @@ zombie_bob_smoke_atk() {
 zombie_bob_smoke_atk_cleanup() {}
 
 zombie_bob_make_sizzlers() {
-  if(common_scripts\utility::_id_3794("bob_sizzle"))
+  if(common_scripts\utility::_id_3794("bob_sizzle")) {
     thread zombie_bob_engine_pulse();
+  }
 
   wait 1.8;
   var_0 = _id_0547::_id_4090("zombie_generic");
@@ -639,15 +671,16 @@ zombie_bob_make_sizzlers() {
       var_16 = 400;
       var_17 = (0, 0, -1000);
       var_18 = bulletTrace(var_5, var_5 + var_8 * var_16 + var_17, 1, self);
-      var_4 = _playfxontag(level._effect["zmb_ber_bob_beam_wv"], self, "TAG_FX_GUN");
+      var_4 = _playFXOnTag(level._effect["zmb_ber_bob_beam_wv"], self, "TAG_FX_GUN");
       _id_0378::_id_8D74("aud_bob_shoot_gun", var_5);
     }
 
     waitframe();
   }
 
-  if(common_scripts\utility::_id_3794("bob_sizzle"))
+  if(common_scripts\utility::_id_3794("bob_sizzle")) {
     self notify("bob_stop_engine_pulse");
+  }
 }
 
 zombie_bob_kill_fx_on_death(var_0) {
@@ -671,11 +704,13 @@ zombie_bob_engine_pulse() {
   _triggerfx(self.crank_pulse);
   self waittill("bob_stop_engine_pulse");
 
-  if(isDefined(self.engine_pulse))
+  if(isDefined(self.engine_pulse)) {
     self.engine_pulse delete();
+  }
 
-  if(isDefined(self.crank_pulse))
+  if(isDefined(self.crank_pulse)) {
     self.crank_pulse delete();
+  }
 
   wait 3.5;
   self.zombie_bob_can_take_damage = 0;
@@ -724,8 +759,9 @@ zombie_bob_charge_request(var_0) {
   var_1.box_height_p = 60;
   var_1.tackle_dmg_p = 80;
 
-  if(!_id_0547::has_scripted_state_queued("zombie_bob_charge"))
+  if(!_id_0547::has_scripted_state_queued("zombie_bob_charge")) {
     thread _id_0547::_id_7D1A("zombie_bob_charge", [var_1], 0.5);
+  }
 
   childthread make_vulnerable_while_stage1_charge_roar();
 }
@@ -739,8 +775,9 @@ make_vulnerable_while_stage1_charge_roar() {
   thread zombie_bob_engine_pulse();
   var_0 = gettime() / 1000;
 
-  if(isDefined(self.end_roar_secs) && self.end_roar_secs > var_0)
+  if(isDefined(self.end_roar_secs) && self.end_roar_secs > var_0) {
     wait(self.end_roar_secs - var_0);
+  }
 
   self notify("bob_stop_engine_pulse");
 }

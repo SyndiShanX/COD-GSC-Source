@@ -11,8 +11,9 @@ _id_06EC(var_0) {
   var_3 = var_2[0];
   var_4 = var_2[1];
 
-  if(var_1 < 0)
+  if(var_1 < 0) {
     var_1 = var_4 + var_1;
+  }
 
   var_5 = var_1 + 18.0 * var_0;
   return var_5;
@@ -24,11 +25,13 @@ _id_06ED(var_0, var_1, var_2, var_3) {
   var_6 = var_5[0];
   var_7 = var_5[1];
 
-  if(isDefined(var_3) == 0)
+  if(isDefined(var_3) == 0) {
     var_3 = (1, 1, 1);
+  }
 
-  if(var_4 < 0)
+  if(var_4 < 0) {
     var_4 = var_6 + var_4;
+  }
 
   _id_02EF::_id_8AA0(var_4 + var_0, _id_06EC(var_1), var_2, var_3, 0.75, 1.5);
 }
@@ -36,8 +39,9 @@ _id_06ED(var_0, var_1, var_2, var_3) {
 _id_06E9() {
   var_0 = undefined;
 
-  if(isDefined(self.origin) == 1)
+  if(isDefined(self.origin) == 1) {
     var_0 = self.origin;
+  }
 
   if(isDefined(self.v) == 1) {
     var_0 = self.v["origin"];
@@ -50,13 +54,15 @@ _id_06E9() {
       var_0 = self._id_8F45.origin;
       self._id_8F46 = var_0;
 
-      if(isDefined(self._id_8F49) == 1)
+      if(isDefined(self._id_8F49) == 1) {
         var_0 = var_0 + self._id_8F49;
+      }
     } else if(_isremovedentity(self._id_8F45) == 1 && isDefined(self._id_8F46) == 1) {
       var_0 = self._id_8F46;
 
-      if(isDefined(self._id_8F49) == 1)
+      if(isDefined(self._id_8F49) == 1) {
         var_0 = var_0 + self._id_8F49;
+      }
     } else if(isDefined(self._id_8F49) == 1)
       var_0 = self._id_8F49;
 
@@ -64,8 +70,9 @@ _id_06E9() {
     self._id_6C3F = 1;
   }
 
-  if(_isremovedentity(self) == 1)
+  if(_isremovedentity(self) == 1) {
     return undefined;
+  }
 
   return var_0;
 }
@@ -73,10 +80,11 @@ _id_06E9() {
 _id_06EA() {
   var_0 = "unknown";
 
-  if(isDefined(self.v) == 1 && isDefined(self.v["soundalias"]) == 1)
+  if(isDefined(self.v) == 1 && isDefined(self.v["soundalias"]) == 1) {
     var_0 = self.v["soundalias"];
-  else if(isDefined(self._id_8F3E) == 1)
+  } else if(isDefined(self._id_8F3E) == 1) {
     var_0 = self._id_8F3E;
+  }
 
   return var_0;
 }
@@ -87,28 +95,33 @@ _id_06E8(var_0, var_1, var_2, var_3) {
   var_6 = undefined;
   var_7 = _getsndaliasvalue(var_5, "spatialize");
 
-  if(isDefined(var_7) == 1 && var_7 == "2d")
+  if(isDefined(var_7) == 1 && var_7 == "2d") {
     return -1;
+  }
 
   if(isDefined(var_4) == 1 && var_4 != "") {
-    if(common_scripts\utility::_id_9462(var_5, var_4) < 0)
+    if(common_scripts\utility::_id_9462(var_5, var_4) < 0) {
       return -1;
+    }
   }
 
   var_6 = _id_06E9();
 
-  if(isDefined(var_6) == 0)
+  if(isDefined(var_6) == 0) {
     return -1;
+  }
 
   var_8 = common_scripts\utility::within_fov(var_0, var_1, var_6, var_2);
 
-  if(var_8 == 0)
+  if(var_8 == 0) {
     return -1;
+  }
 
   var_9 = distance(var_0, var_6);
 
-  if(var_3 > 0 && var_3 < var_9)
+  if(var_3 > 0 && var_3 < var_9) {
     return -1;
+  }
 
   return var_9;
 }
@@ -118,8 +131,9 @@ _id_06E3(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = var_1[var_6];
     var_8 = var_7 _id_06E8(var_2, var_3, var_4, var_5);
 
-    if(var_8 >= 0)
+    if(var_8 >= 0) {
       var_0[var_0.size] = var_7;
+    }
   }
 
   return var_0;
@@ -133,21 +147,26 @@ _id_06E2(var_0, var_1) {
   var_6 = getdvarfloat("cg_fov", 65);
   var_7 = _cos(var_6);
 
-  if(isDefined(level._id_05B0) == 1 && var_1 >= 3)
+  if(isDefined(level._id_05B0) == 1 && var_1 >= 3) {
     var_3 = _id_06E3(var_3, level._id_05B0, var_4, var_5, var_7, var_2);
+  }
 
-  if(isDefined(level._id_071D) == 1 && isDefined(level._id_071D._id_0623) == 1)
+  if(isDefined(level._id_071D) == 1 && isDefined(level._id_071D._id_0623) == 1) {
     var_3 = _id_06E3(var_3, level._id_071D._id_0623, var_4, var_5, var_7, var_2);
+  }
 
   if(isDefined(level._id_06B2) == 1) {
-    if(isDefined(level._id_06B2._id_061A) == 1)
+    if(isDefined(level._id_06B2._id_061A) == 1) {
       var_3 = _id_06E3(var_3, level._id_06B2._id_061A, var_4, var_5, var_7, var_2);
+    }
 
-    if(isDefined(level._id_06B2._id_0720) == 1)
+    if(isDefined(level._id_06B2._id_0720) == 1) {
       var_3 = _id_06E3(var_3, level._id_06B2._id_0720, var_4, var_5, var_7, var_2);
+    }
 
-    if(isDefined(level._id_06B2._id_05E5) == 1)
+    if(isDefined(level._id_06B2._id_05E5) == 1) {
       var_3 = _id_06E3(var_3, level._id_06B2._id_05E5, var_4, var_5, var_7, var_2);
+    }
   }
 
   return var_3;
@@ -161,16 +180,18 @@ _id_06E6() {
   var_4 = var_3;
   var_5 = 0;
 
-  if(isDefined(self.angles) == 1)
+  if(isDefined(self.angles) == 1) {
     var_1 = self.angles;
+  }
 
   if(var_2 != "unknown") {
     var_6 = _getsndaliasvalue(var_2, "dist_min");
 
-    if(isDefined(var_6) == 1 && var_6 > 0)
+    if(isDefined(var_6) == 1 && var_6 > 0) {
       var_4 = var_6;
-    else
+    } else {
       var_5 = 1;
+    }
   }
 
   var_7 = 0;
@@ -189,9 +210,9 @@ _id_06E6() {
   var_13 = _id_02EF::_id_A2BB((1, 1, 1), var_12);
   var_14 = 0.5;
 
-  if(var_7 == 1 || var_5 == 1)
+  if(var_7 == 1 || var_5 == 1) {
     _id_02EF::_id_28BB(var_0, var_1, var_4, var_13, var_14, 0, 1);
-  else {}
+  } else {}
 }
 
 _id_06E7(var_0, var_1, var_2) {
@@ -236,11 +257,13 @@ _id_06E5(var_0, var_1) {
     var_13 = _id_02EF::_id_468E(var_7, "dist_min");
     var_14 = _id_02EF::_id_468D(var_7, "dist_max");
 
-    if(isDefined(var_13) == 1 && var_13 > 0)
+    if(isDefined(var_13) == 1 && var_13 > 0) {
       var_8 = var_13;
+    }
 
-    if(isDefined(var_14) == 1 && var_14 > 0)
+    if(isDefined(var_14) == 1 && var_14 > 0) {
       var_9 = var_14;
+    }
   }
 
   if(isDefined(var_7) == 1) {
@@ -248,8 +271,9 @@ _id_06E5(var_0, var_1) {
     var_16 = distance(var_6, var_10);
     var_17 = 1.0;
 
-    if(_isnumber(var_8) == 1 && var_8 > 0 && _isnumber(var_9) == 1 && var_9 > 0)
+    if(_isnumber(var_8) == 1 && var_8 > 0 && _isnumber(var_9) == 1 && var_9 > 0) {
       _id_02EF::startignoringspotlight(var_16, var_8, var_9, 1.0, 0.5);
+    }
 
     var_18 = var_16 * 0.002;
     var_19 = var_15 * var_18;
@@ -277,9 +301,9 @@ _id_06E4(var_0) {
     return;
   }
   if(isDefined(level.players) == 0) {
-    if(isDefined(level.createfx) == 0 || isDefined(level.player) == 0)
+    if(isDefined(level.createfx) == 0 || isDefined(level.player) == 0) {
       return;
-    else {
+    } else {
       level.players = [];
       level.players[level.players.size] = level.player;
     }
@@ -293,8 +317,9 @@ _id_06E4(var_0) {
     level._id_05B8 = common_scripts\utility::_id_0F73(level._id_05B8, var_3);
   }
 
-  if(level.players.size > 1)
+  if(level.players.size > 1) {
     level._id_05B8 = common_scripts\utility::_id_0F97(level._id_05B8);
+  }
 
   var_5 = getdvarint("snd_debugRavenAudioDrawLimit");
   var_6 = 0;
@@ -302,8 +327,9 @@ _id_06E4(var_0) {
   if(level._id_05B8.size >= var_5) {
     var_7 = [];
 
-    foreach(var_2 in level.players)
-    var_7[var_7.size] = var_2 getEye();
+    foreach(var_2 in level.players) {
+      var_7[var_7.size] = var_2 getEye();
+    }
 
     var_10 = common_scripts\utility::_id_A2B9(var_7);
     level._id_05B8 = _sortbydistance(level._id_05B8, var_10);
@@ -355,26 +381,33 @@ _id_06EB(var_0) {
     var_3 = level._id_05B1;
   }
 
-  if(isDefined(level._id_071D) == 1 && isDefined(level._id_071D._id_0623) == 1)
+  if(isDefined(level._id_071D) == 1 && isDefined(level._id_071D._id_0623) == 1) {
     var_4 = level._id_071D._id_0623.size;
+  }
 
-  if(isDefined(level._id_06B2) == 1 && isDefined(level._id_06B2._id_061A) == 1)
+  if(isDefined(level._id_06B2) == 1 && isDefined(level._id_06B2._id_061A) == 1) {
     var_4 = var_4 + level._id_06B2._id_061A.size;
+  }
 
-  if(isDefined(level._id_06B2) == 1 && isDefined(level._id_06B2._id_0720) == 1)
+  if(isDefined(level._id_06B2) == 1 && isDefined(level._id_06B2._id_0720) == 1) {
     var_5 = level._id_06B2._id_0720.size;
+  }
 
-  if(isDefined(level._id_06B2) == 1 && isDefined(level._id_06B2._id_05E5) == 1)
+  if(isDefined(level._id_06B2) == 1 && isDefined(level._id_06B2._id_05E5) == 1) {
     var_6 = level._id_06B2._id_05E5.size;
+  }
 
-  if(isDefined(level._id_05B8) == 1 && level._id_05B8.size > 0 && var_0 >= 3)
+  if(isDefined(level._id_05B8) == 1 && level._id_05B8.size > 0 && var_0 >= 3) {
     var_7 = var_7 + (" (" + level._id_05B8.size + " visible)");
+  }
 
-  if(isDefined(var_1) == 1 && var_1 != "")
+  if(isDefined(var_1) == 1 && var_1 != "") {
     var_8 = var_8 + ("\"" + var_1 + "\"");
+  }
 
-  if(isDefined(level._id_05C5) == 1)
+  if(isDefined(level._id_05C5) == 1) {
     var_9 = level._id_05C5.size;
+  }
 
   _id_06ED(0, 0, "Audio Entity count: " + var_4);
   _id_06ED(0, 1, "Network Sound Entity count: " + var_5);
@@ -389,13 +422,15 @@ _id_06EB(var_0) {
     var_10++;
     var_11 = "";
 
-    if(isDefined(level._id_05B8) == 1 && level._id_05B8.size > 0)
+    if(isDefined(level._id_05B8) == 1 && level._id_05B8.size > 0) {
       var_11 = var_11 + level._id_05B8.size;
-    else
+    } else {
       var_11 = var_11 + "0";
+    }
 
-    if(isDefined(var_1) == 1 && var_1 != "")
+    if(isDefined(var_1) == 1 && var_1 != "") {
       var_11 = var_11 + (" (" + var_8 + ")");
+    }
 
     _id_06ED(0, var_10, " Visible Sound count: " + var_11);
     var_10++;
@@ -437,15 +472,18 @@ _id_06E0(var_0) {
     return;
   }
   if(getDvar("1459") != "on") {
-    if(isDefined(level._id_05B0) == 1 && level._id_05B0.size > 0)
+    if(isDefined(level._id_05B0) == 1 && level._id_05B0.size > 0) {
       return;
+    }
   } else {
-    while(isDefined(level.createfx) == 0)
+    while(isDefined(level.createfx) == 0) {
       waitframe();
+    }
   }
 
-  while(isDefined(level.createfxent) == 0)
+  while(isDefined(level.createfxent) == 0) {
     waitframe();
+  }
 
   level._id_05B0 = [];
   level._id_05B2 = 0;

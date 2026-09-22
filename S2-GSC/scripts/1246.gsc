@@ -62,7 +62,7 @@ _id_A17D() {
     var_2.y = var_1.origin[1];
     var_2._id_01D9 = var_1.origin[2] + 90;
     var_2 setwaypoint(1, 0, 0);
-    var_2 settargetent(var_1);
+    var_2 settargetEnt(var_1);
     var_2._id_6E74 = level._id_A012;
     var_2._id_6E74 maps\mp\gametypes\_hud_util::_id_09A6(var_2);
     var_2.name = "topPlayerElem";
@@ -70,8 +70,9 @@ _id_A17D() {
     var_1._id_9A9C = var_0 + 1;
 
     if(var_0 == 0) {
-      foreach(var_4 in level.players)
-      var_4 iprintln(var_1.name + " is the new top player with a K/D of " + var_1._id_1FF4);
+      foreach(var_4 in level.players) {
+        var_4 iprintln(var_1.name + " is the new top player with a K/D of " + var_1._id_1FF4);
+      }
     }
   }
 
@@ -91,14 +92,17 @@ _id_1E53() {
   var_0 = self getplayerdata(common_scripts\utility::_id_46AE(), "kills");
   var_1 = self getplayerdata(common_scripts\utility::_id_46AE(), "deaths");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(var_1 == 0)
+  if(var_1 == 0) {
     var_1 = 1;
+  }
 
   self._id_1FF4 = var_0 / var_1;
 }

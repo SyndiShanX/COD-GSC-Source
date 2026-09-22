@@ -17,8 +17,9 @@ _id_A102(var_0, var_1) {
     case "resupply_scorestreak":
     case "resupply_intel":
     case "escalation_activated":
-      if(!level.hardcoremode)
+      if(!level.hardcoremode) {
         setdamagepickupclientomnvar(var_0);
+      }
 
       break;
     case "killshot_deadeye_headshot":
@@ -36,17 +37,19 @@ _id_A102(var_0, var_1) {
       _id_865B(var_0);
       break;
     case "weakpoint":
-      if(isDefined(level._id_585D) && level._id_585D)
+      if(isDefined(level._id_585D) && level._id_585D) {
         _id_865B("headshot");
+      }
 
       break;
     case "headshot":
-      if(isDefined(level._id_585D) && level._id_585D)
+      if(isDefined(level._id_585D) && level._id_585D) {
         _id_865B("headshot");
-      else if(!level._id_258F)
+      } else if(!level._id_258F) {
         _id_865B("standard");
-      else
+      } else {
         _id_865B("headshot");
+      }
 
       break;
     case "hitmorehealth":
@@ -59,10 +62,11 @@ _id_A102(var_0, var_1) {
       _id_865B("killshot_headshot");
       break;
     case "minor":
-      if(isDefined(level._id_585D) && level._id_585D)
+      if(isDefined(level._id_585D) && level._id_585D) {
         _id_865B("minor");
-      else
+      } else {
         _id_865B("standard");
+      }
 
       break;
     case "raid_buildable":
@@ -99,8 +103,9 @@ _id_7D5B() {
   wait 1;
   waittillframeend;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self setclientomnvar("damage_feedback", "none");
+  }
 }
 
 setdamagepickupclientomnvar(var_0) {
@@ -114,6 +119,7 @@ resetdamagepickup() {
   wait 1;
   waittillframeend;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self setclientomnvar("damage_pickup", "none");
+  }
 }

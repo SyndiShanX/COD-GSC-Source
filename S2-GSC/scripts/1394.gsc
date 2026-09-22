@@ -8,8 +8,9 @@ _id_52A4() {
 }
 
 _id_1F82(var_0) {
-  if(!_id_0561::_id_1F7B())
+  if(!_id_0561::_id_1F7B()) {
     return 0;
+  }
 
   return 1;
 }
@@ -19,8 +20,9 @@ _id_A21A(var_0) {
 }
 
 _id_4575(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":

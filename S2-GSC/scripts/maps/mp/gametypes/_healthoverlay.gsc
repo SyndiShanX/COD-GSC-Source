@@ -58,8 +58,9 @@ _id_73FC() {
     var_0 = gettime();
     var_6 = self.health / self.maxhealth;
 
-    if(var_6 <= level._id_4C1D)
+    if(var_6 <= level._id_4C1D) {
       self._id_10F4 = 1;
+    }
 
     if(_func_367()) {
       if(isDefined(self._id_5692) && self._id_5692 == 1) {
@@ -88,8 +89,9 @@ _id_1BC0(var_0, var_1, var_2) {
   if(!isPlayer(self)) {
     return;
   }
-  if(isDefined(var_2) && var_2 != "MOD_FALLING" || isDefined(var_1) && var_1 > 1)
+  if(isDefined(var_2) && var_2 != "MOD_FALLING" || isDefined(var_1) && var_1 > 1) {
     _id_720E(var_0);
+  }
 
   if(isDefined(level._id_585D) && level._id_585D) {
     return;
@@ -97,18 +99,21 @@ _id_1BC0(var_0, var_1, var_2) {
   var_3 = maps\mp\_utility::_hasperk("specialty_fasterhealthregen");
   var_4 = level._id_73FA;
 
-  if(var_3)
+  if(var_3) {
     var_4 = level.playerhealth_grenadierregendelay;
+  }
 
-  if(isDefined(self._id_98E1))
+  if(isDefined(self._id_98E1)) {
     var_4 = self._id_98E1 * 1000;
+  }
 
   self._id_1BC1 = var_0 + 0.6 * var_4;
 
-  if(var_3)
+  if(var_3) {
     wait(var_4 / 1000);
-  else
+  } else {
     wait(1.4 * (var_4 / 1000));
+  }
 
   if(!level.gameended && isDefined(self._id_10F4) && self._id_10F4 == 1) {
     self clientclearsoundsubmix("mute_breath");
@@ -132,14 +137,16 @@ _id_720E(var_0) {
   self.breathmute_submix_active = 1;
 
   if(self.team == "axis") {
-    if(self hasfemalecustomizationmodel())
+    if(self hasfemalecustomizationmodel()) {
       self playSound("generic_pain_enemy_fm_" + var_1, "pain_sound_done");
-    else
+    } else {
       self playSound("generic_pain_enemy_" + var_1, "pain_sound_done");
+    }
   } else if(self hasfemalecustomizationmodel())
     self playSound("generic_pain_friendly_fm_" + var_1, "pain_sound_done");
-  else
+  else {
     self playSound("generic_pain_friendly_" + var_1, "pain_sound_done");
+  }
 
   self waittill("pain_sound_done");
 
@@ -169,17 +176,20 @@ _id_4C20() {
   var_1 = maps\mp\_utility::_hasperk("specialty_fasterhealthregen");
   var_2 = level._id_73FA;
 
-  if(var_1)
+  if(var_1) {
     var_2 = level.playerhealth_grenadierregendelay;
+  }
 
-  if(isDefined(self._id_98E1))
+  if(isDefined(self._id_98E1)) {
     var_2 = self._id_98E1 * 1000;
+  }
 
   if(!isDefined(self._id_50A0) || !self._id_50A0) {
-    if(maps\mp\_utility::_id_585F())
+    if(maps\mp\_utility::_id_585F()) {
       common_scripts\utility::waittill_notify_or_timeout("immediateHealthRegen", var_2 / 1000);
-    else
+    } else {
       wait(var_2 / 1000);
+    }
   } else
     self._id_50A0 = 0;
 
@@ -194,8 +204,9 @@ _id_4C20() {
       waitframe();
       var_4 = level._id_73FB;
 
-      if(isDefined(self._id_98E2))
+      if(isDefined(self._id_98E2)) {
         var_4 = self._id_98E2;
+      }
 
       var_5 = self.maxhealth;
 
@@ -203,8 +214,9 @@ _id_4C20() {
         var_3 = var_3 + var_4;
         self.health = int(var_3);
 
-        if(self.health > var_5)
+        if(self.health > var_5) {
           self.health = var_5;
+        }
 
         continue;
       }
@@ -272,10 +284,11 @@ _id_7434() {
       self.breathmute_submix_active = 1;
     }
 
-    if(self hasfemalecustomizationmodel())
+    if(self hasfemalecustomizationmodel()) {
       self playlocalsound("deaths_door_mp_female");
-    else
+    } else {
       self playlocalsound("deaths_door_mp_male");
+    }
 
     wait 1.284;
     wait(0.1 + _randomfloat(0.8));

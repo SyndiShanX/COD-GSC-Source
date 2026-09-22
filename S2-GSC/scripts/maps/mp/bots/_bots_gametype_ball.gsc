@@ -20,24 +20,28 @@ _id_878F() {
   level._id_19D7 = ::_id_4092;
   maps\mp\bots\_bots_util::_id_1B20();
 
-  while(!isDefined(level._id_152B))
+  while(!isDefined(level._id_152B)) {
     waitframe();
+  }
 
   level._id_152B["allies"].shootblank = "allies";
   level._id_152B["axis"].shootblank = "axis";
   bot_setup_ball_goal_node();
   var_0 = _getzonenearest(level._id_152B["allies"].origin);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _botzonesetteam(var_0, "allies");
+  }
 
   var_0 = _getzonenearest(level._id_152B["axis"].origin);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     _botzonesetteam(var_0, "axis");
+  }
 
-  foreach(var_2 in level._id_1562)
-  var_2 thread _id_62E7();
+  foreach(var_2 in level._id_1562) {
+    var_2 thread _id_62E7();
+  }
 
   var_4 = 0;
   thread maps\mp\bots\_bots_gametype_common::_id_19DA();
@@ -58,12 +62,14 @@ _id_62E7() {
       if(!isDefined(var_2)) {
         var_3 = _getnodesinradiussorted(var_1, 512, 0, 6000);
 
-        if(var_3.size > 0)
+        if(var_3.size > 0) {
           var_2 = var_3[0];
+        }
       }
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         self._id_6638 = var_2;
+      }
     }
 
     var_0 = var_1;
@@ -80,8 +86,9 @@ bot_setup_ball_goal_node() {
     if(!isDefined(var_1._id_6638)) {
       var_2 = _getnodesinradiussorted(var_1.origin, 375, 0);
 
-      if(var_2.size > 0)
+      if(var_2.size > 0) {
         var_1._id_6638 = var_2[0];
+      }
     }
 
     waitframe();
@@ -107,20 +114,23 @@ _id_1947(var_0, var_1, var_2) {
 }
 
 _id_1949(var_0, var_1) {
-  if(isDefined(self) && (isPlayer(self) || _isagent(self)))
+  if(isDefined(self) && (isPlayer(self) || _isagent(self))) {
     var_2 = _playerphysicstrace(var_0, var_1, self);
-  else
+  } else {
     var_2 = _playerphysicstrace(var_0, var_1);
+  }
 
   return distancesquared(var_2, var_1) < 1;
 }
 
 _id_2734(var_0) {
-  if(_isagent(self) && !isDefined(var_0._id_1B7B))
+  if(_isagent(self) && !isDefined(var_0._id_1B7B)) {
     return 0;
+  }
 
-  if(_id_4B23())
+  if(_id_4B23()) {
     return 0;
+  }
 
   return 1;
 }
@@ -133,8 +143,9 @@ _id_1948() {
   level endon("game_ended");
   self endon("owner_disconnect");
 
-  while(!isDefined(level._id_19E8))
+  while(!isDefined(level._id_19E8)) {
     waitframe();
+  }
 
   self botsetflag("separation", 0);
   var_0 = randomint(100) < self botgetdifficultysetting("strategyLevel") * 25;
@@ -150,8 +161,9 @@ _id_1948() {
   for(;;) {
     var_4 = !isDefined(self._id_7ECA);
 
-    if(var_4)
+    if(var_4) {
       maps\mp\bots\_bots_gametype_common::_id_19E7();
+    }
 
     self botsetflag("force_sprint", 0);
     var_5 = _id_1942(self.team);
@@ -182,15 +194,17 @@ _id_1948() {
               var_14 = undefined;
               var_15 = _getnodesonpath(var_13, var_2._id_6638.origin);
 
-              if(isDefined(var_15) && var_15.size > 0)
+              if(isDefined(var_15) && var_15.size > 0) {
                 var_14 = var_15[int(var_15.size * _randomfloatrange(0.25, 0.75))].origin;
+              }
 
               _id_23B3();
 
-              if(isDefined(var_14) && maps\mp\bots\_bots_personality::_id_3B64(var_14, 512))
+              if(isDefined(var_14) && maps\mp\bots\_bots_personality::_id_3B64(var_14, 512)) {
                 self botsetscriptgoalnode(self._id_6708, "guard", self._id_0D94);
-              else
+              } else {
                 self botsetscriptgoal(var_13, 16, "guard");
+              }
             }
           } else {
             _id_23B3();
@@ -214,8 +228,9 @@ _id_1948() {
         if(var_18._id_150B) {
           var_19 = var_18 _id_1945();
 
-          if(!self bothasscriptgoal() || !maps\mp\bots\_bots_util::_id_1B1C(var_19, self botgetscriptgoal()))
+          if(!self bothasscriptgoal() || !maps\mp\bots\_bots_util::_id_1B1C(var_19, self botgetscriptgoal())) {
             self botsetscriptgoal(var_19, 16, "objective", undefined, 180);
+          }
         } else
           self botsetscriptgoal(var_18._id_6638.origin, 16, "objective", undefined, 180);
       }
@@ -235,10 +250,11 @@ _id_1948() {
       if(isDefined(var_20)) {
         _id_23B3();
 
-        if(var_20._id_150B)
+        if(var_20._id_150B) {
           self botsetscriptgoal(var_20 _id_1945(), 16, "guard");
-        else
+        } else {
           self botsetscriptgoal(var_20._id_6638.origin, 16, "guard");
+        }
 
         maps\mp\bots\_bots_util::_id_1B21(1.0);
       } else if(!maps\mp\bots\_bots_util::_id_1A33()) {
@@ -359,14 +375,16 @@ _id_1512(var_0) {
   var_2 = var_0 getnearestnode();
 
   if(isDefined(var_1) && isDefined(var_2)) {
-    if(_nodesvisible(var_1, var_2, 1))
+    if(_nodesvisible(var_1, var_2, 1)) {
       return var_2;
+    }
 
     var_3 = _getlinkednodes(var_2);
 
     foreach(var_5 in var_3) {
-      if(_nodesvisible(var_1, var_5, 1))
+      if(_nodesvisible(var_1, var_5, 1)) {
         return var_5;
+      }
     }
   }
 
@@ -378,8 +396,9 @@ _id_1946() {
 }
 
 _id_1943(var_0) {
-  if(var_0.size == 1)
+  if(var_0.size == 1) {
     return var_0[0];
+  }
 
   var_1 = 99999999;
   var_2 = undefined;
@@ -397,21 +416,24 @@ _id_1943(var_0) {
 }
 
 _id_1945() {
-  if(isDefined(self.carrier))
+  if(isDefined(self.carrier)) {
     return self._id_28D4;
-  else
+  } else {
     return self._id_A582[0].origin;
+  }
 }
 
 _id_23B3(var_0) {
-  if(maps\mp\bots\_bots_util::_id_1A2D())
+  if(maps\mp\bots\_bots_util::_id_1A2D()) {
     maps\mp\bots\_bots_strategy::_id_19A3();
+  }
 
   if(self botgetscriptgoaltype() == "objective") {
     var_1 = isDefined(var_0) && var_0 == "objective";
 
-    if(!var_1)
+    if(!var_1) {
       self botclearscriptgoal();
+    }
   }
 }
 
@@ -426,8 +448,9 @@ _id_1944() {
     if(var_2 _id_1946()) {
       continue;
     }
-    if(!isDefined(var_2.carrier))
+    if(!isDefined(var_2.carrier)) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   return var_0;
@@ -440,8 +463,9 @@ _id_1942(var_0) {
     if(var_3 _id_1946()) {
       continue;
     }
-    if(isDefined(var_3.carrier) && var_3.carrier.team == var_0)
+    if(isDefined(var_3.carrier) && var_3.carrier.team == var_0) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;
@@ -455,10 +479,11 @@ _id_1940(var_0) {
   var_5 = var_2 - var_3;
   var_6 = var_4 - var_2;
 
-  if(var_5 < var_6)
+  if(var_5 < var_6) {
     var_7 = int(var_3);
-  else
+  } else {
     var_7 = int(var_4);
+  }
 
   return var_7;
 }
@@ -475,8 +500,9 @@ _id_40BB() {
     level._id_7790 = _min(800, var_1 / 5.5);
   }
 
-  if(!isDefined(level._id_7790))
+  if(!isDefined(level._id_7790)) {
     return 900;
+  }
 
   return level._id_7790;
 }

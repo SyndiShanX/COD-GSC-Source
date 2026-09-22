@@ -49,22 +49,25 @@ _id_A20C(var_0) {
   if(var_0 == "flak_gun") {
     var_2 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
 
-    if(var_2)
+    if(var_2) {
       var_1 = 45;
-    else
+    } else {
       var_1 = 30;
+    }
 
-    if(level.teambased)
+    if(level.teambased) {
       level._id_9854[maps\mp\_utility::getotherteam(self.team)] = 1;
+    }
 
     level._id_3CE0 = self;
   } else if(var_0 == "counter_uav") {
     var_1 = 30;
 
-    if(level.teambased)
+    if(level.teambased) {
       level._id_9850[maps\mp\_utility::getotherteam(self.team)] = 1;
-    else
+    } else {
       level._id_2694 = self;
+    }
   }
 
   level thread _id_0528::_id_A0E0();
@@ -83,15 +86,17 @@ _id_4AC0(var_0, var_1) {
   level._id_3CE2 = 0;
 
   if(var_1 == "flak_gun") {
-    if(level.teambased)
+    if(level.teambased) {
       level._id_9854[maps\mp\_utility::getotherteam(var_0)] = 0;
+    }
 
     level._id_3CE0 = undefined;
   } else if(var_1 == "counter_uav") {
-    if(level.teambased)
+    if(level.teambased) {
       level._id_9850[maps\mp\_utility::getotherteam(var_0)] = 0;
-    else
+    } else {
       level._id_2694 = undefined;
+    }
   }
 
   level thread _id_0528::_id_A0E0();
@@ -103,8 +108,9 @@ _id_2DC2(var_0, var_1) {
   wait 0.6;
   thread _id_2DC1(var_0, var_1);
 
-  if(var_1 == "flak_gun")
+  if(var_1 == "flak_gun") {
     thread _id_2DC0(var_0, var_1);
+  }
 
   wait 0.4;
   level thread _id_1129(var_0, var_1);
@@ -121,15 +127,17 @@ _id_2DC0(var_0, var_1) {
       var_6 = 0;
 
       for(var_7 = 0; var_7 < var_2.size; var_7++) {
-        if(var_2[var_7] == var_5)
+        if(var_2[var_7] == var_5) {
           var_6 = 1;
+        }
       }
 
       if(var_6 || level.teambased && isDefined(var_5.team) && var_5.team == var_0.team || !level.teambased && isDefined(var_5._id_0117) && var_5._id_0117 == var_0) {
         continue;
       }
-      if(isDefined(var_5._id_275E))
+      if(isDefined(var_5._id_275E)) {
         var_5 = var_5._id_376E;
+      }
 
       var_2[var_2.size] = var_5;
       thread _id_2DDA(var_0, var_5, _id_45BD(var_5._id_01C8), var_1);
@@ -147,15 +155,17 @@ _id_2DC1(var_0, var_1) {
   for(;;) {
     var_3 = level._id_9FDA;
 
-    if(level.teambased)
+    if(level.teambased) {
       var_3 = level._id_9FDA[maps\mp\_utility::getotherteam(var_0.team)];
+    }
 
     foreach(var_5 in var_3) {
       var_6 = 0;
 
       for(var_7 = 0; var_7 < var_2.size; var_7++) {
-        if(var_2[var_7] == var_5)
+        if(var_2[var_7] == var_5) {
           var_6 = 1;
+        }
       }
 
       if(var_6 || level.teambased && isDefined(var_5.team) && var_5.team == var_0.team || !level.teambased && isDefined(var_5._id_0117) && var_5._id_0117 == var_0) {
@@ -246,7 +256,7 @@ _id_3CDE(var_0, var_1) {
   var_2.origin = var_0;
   var_2 show();
   waitframe();
-  _playfxontag(common_scripts\utility::_id_44F5("flak_gun_explosion"), var_2, "tag_origin");
+  _playFXOnTag(common_scripts\utility::_id_44F5("flak_gun_explosion"), var_2, "tag_origin");
   _id_0378::_id_8D74("ks_flak_cannon_explo", var_0);
   wait 4.5;
   var_2 delete();

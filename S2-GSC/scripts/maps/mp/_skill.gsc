@@ -26,8 +26,9 @@ _id_534E(var_0) {
   var_1._id_1708 = var_0 getplayerdata(common_scripts\utility::_id_46AE(), "sosRating");
   var_1._id_1709 = var_0 getplayerdata(common_scripts\utility::_id_46AE(), "sosWeight");
 
-  if(var_1._id_1709 <= 0.5)
+  if(var_1._id_1709 <= 0.5) {
     var_1._id_1708 = level._id_8C75;
+  }
 
   var_1._id_1704 = var_0 getplayerdata(common_scripts\utility::_id_46AE(), "gdfRating");
   var_1._id_1705 = var_0 getplayerdata(common_scripts\utility::_id_46AE(), "gdfVariance");
@@ -37,8 +38,9 @@ _id_534E(var_0) {
 }
 
 _id_7743() {
-  foreach(var_1 in level.players)
-  var_1 _id_0738();
+  foreach(var_1 in level.players) {
+    var_1 _id_0738();
+  }
 }
 
 _id_775A() {
@@ -56,22 +58,26 @@ onplayerspawned() {
 }
 
 _id_57D1() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
-  if(isbot(self))
+  if(isbot(self)) {
     return 0;
+  }
 
-  if(!maps\mp\_utility::rankingenabled())
+  if(!maps\mp\_utility::rankingenabled()) {
     return 0;
+  }
 
   return 1;
 }
 
 _id_0663(var_0, var_1) {
   for(var_2 = 1; var_1; var_0 = var_0 * var_0) {
-    if(var_1 & 1)
+    if(var_1 & 1) {
       var_2 = var_2 * var_0;
+    }
 
     var_1 = var_1 >> 1;
   }
@@ -87,11 +93,13 @@ _id_05F3(var_0) {
 }
 
 _id_06AC(var_0) {
-  if(var_0 <= -3)
+  if(var_0 <= -3) {
     return -1;
+  }
 
-  if(var_0 >= 3)
+  if(var_0 >= 3) {
     return 1;
+  }
 
   var_1 = var_0 * var_0;
   var_2 = var_0 * (27 + var_1) / (27 + 9 * var_1);
@@ -99,11 +107,13 @@ _id_06AC(var_0) {
 }
 
 _id_0661(var_0) {
-  if(var_0 <= -1)
+  if(var_0 <= -1) {
     return -3;
+  }
 
-  if(var_0 >= 1)
+  if(var_0 >= 1) {
     return 3;
+  }
 
   var_1 = var_0 * var_0;
   var_2 = var_1 * var_0;
@@ -156,8 +166,9 @@ _id_05D7(var_0, var_1, var_2, var_3) {
   var_4 = var_0 + var_2 * 0.5 + var_3;
   var_5 = var_0 + var_2 + var_1 + 2.0 * var_3;
 
-  if(var_5 == 0)
+  if(var_5 == 0) {
     return 0.5;
+  }
 
   var_6 = var_4 / var_5;
   return var_6;
@@ -174,14 +185,17 @@ _id_0685(var_0) {
   var_1 = 0;
   var_2 = 0;
 
-  foreach(var_4 in var_0)
-  var_1 = var_1 + _abs(var_4);
+  foreach(var_4 in var_0) {
+    var_1 = var_1 + _abs(var_4);
+  }
 
-  if(var_1 != 0)
+  if(var_1 != 0) {
     var_2 = 1.0 / var_1;
+  }
 
-  foreach(var_7, var_4 in var_0)
-  var_0[var_7] = var_0[var_7] * var_2;
+  foreach(var_7, var_4 in var_0) {
+    var_0[var_7] = var_0[var_7] * var_2;
+  }
 
   return var_0;
 }
@@ -190,16 +204,18 @@ _id_060A(var_0, var_1) {
   var_2 = 0;
 
   foreach(var_5, var_4 in var_0) {
-    if(isDefined(var_1[var_5]))
+    if(isDefined(var_1[var_5])) {
       var_2 = var_2 + var_4 * var_1[var_5];
+    }
   }
 
   return var_2;
 }
 
 _id_06AB(var_0) {
-  if(var_0 < -10)
+  if(var_0 < -10) {
     return 0 - var_0;
+  }
 
   return _id_0684(var_0) / _id_0683(var_0);
 }
@@ -217,8 +233,9 @@ _id_0683(var_0) {
   var_2 = 1.0 / (1.0 + 0.5 * var_1);
   var_3 = var_2 * _exp(var_1 * var_1 * -1 - 1.26551 + var_2 * (1.00002 + var_2 * (0.374092 + var_2 * (0.0967842 + var_2 * (-0.186288 + var_2 * (0.278868 + var_2 * (-1.1352 + var_2 * (1.48852 + var_2 * (-0.822152 + var_2 * 0.170873)))))))));
 
-  if(var_0 >= 0)
+  if(var_0 >= 0) {
     var_3 = 2.0 - var_3;
+  }
 
   return 0.5 * var_3;
 }
@@ -233,10 +250,11 @@ _id_0739(var_0) {
   level._id_8F29[var_0._id_8F28]._id_5C17 = maps\mp\_utility::_id_44FB();
   var_1 = level._id_8F29[var_0._id_8F28]._id_5C17 - level._id_8F29[var_0._id_8F28]._id_170A;
 
-  if(var_1 > level._id_8C73 && isDefined(var_0.pers) && isDefined(var_0.pers["score"]))
+  if(var_1 > level._id_8C73 && isDefined(var_0.pers) && isDefined(var_0.pers["score"])) {
     level._id_8F29[var_0._id_8F28]._id_80A6 = var_0.pers["score"] / var_1;
-  else
+  } else {
     level._id_8F29[var_0._id_8F28]._id_80A6 = undefined;
+  }
 }
 
 _id_0738() {
@@ -251,8 +269,9 @@ _id_0738() {
   if(!isDefined(level._id_8F29[self._id_8F28])) {
     return;
   }
-  foreach(var_1 in level.players)
-  _id_0739(var_1);
+  foreach(var_1 in level.players) {
+    _id_0739(var_1);
+  }
 
   var_3 = level._id_8F29[self._id_8F28];
 
@@ -270,8 +289,9 @@ _id_0738() {
   var_12 = 0;
   var_13 = 0;
 
-  if(var_10 == 0.0)
+  if(var_10 == 0.0) {
     var_10 = _min(1.0, max(0.8596 + _abs(var_3._id_1704) * -0.18397, 0.05));
+  }
 
   foreach(var_22, var_15 in level._id_8F29) {
     if(var_22 == self._id_8F28) {
@@ -287,10 +307,11 @@ _id_0738() {
     }
     var_17 = 7.0 + var_10;
 
-    if(var_15._id_1705)
+    if(var_15._id_1705) {
       var_17 = var_17 + var_15._id_1705;
-    else
+    } else {
       var_17 = var_17 + _min(max(_abs(var_15._id_1704) * -0.18397 + 0.8596, 0.05), 1.0);
+    }
 
     var_18 = _sqrt(var_17);
     var_19 = (var_11 - var_15._id_1704) / var_18;

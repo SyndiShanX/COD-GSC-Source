@@ -32,8 +32,9 @@ required_weapon(var_0) {
   if(_id_0569::_id_55D4(var_2)) {
     var_2 = var_1 maps\mp\_events_z::set_last_checked_weapon(var_2);
 
-    if(!_id_0547::_id_5565(var_2, var_0))
+    if(!_id_0547::_id_5565(var_2, var_0)) {
       return 0;
+    }
   } else
     return 0;
 
@@ -50,8 +51,9 @@ scripted_mtx9_dmg(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   if(!isPlayer(var_1)) {
     return;
   }
-  if(_id_0569::_id_55D4(var_5))
+  if(_id_0569::_id_55D4(var_5)) {
     var_11 = var_1 maps\mp\_events_z::set_last_checked_weapon(var_5);
+  }
 }
 
 scripted_mtx9_on_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
@@ -65,8 +67,9 @@ scripted_mtx9_on_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
     return;
   }
   if(issubstr(var_4, "bechowiec") && issubstr(var_4, "_pap_zm")) {
-    if(!isDefined(var_1.bubbleshieldbuildup))
+    if(!isDefined(var_1.bubbleshieldbuildup)) {
       var_1.bubbleshieldbuildup = 0;
+    }
 
     if(!common_scripts\utility::_id_562E(var_1.bubblecharged)) {
       var_1.bubbleshieldbuildup++;
@@ -90,10 +93,11 @@ scripted_mtx9_on_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 }
 
 _id_865C(var_0, var_1) {
-  if(common_scripts\utility::_id_562E(var_1))
+  if(common_scripts\utility::_id_562E(var_1)) {
     self._id_2A9D = var_0;
-  else if(self._id_0BA4 != "traverse")
+  } else if(self._id_0BA4 != "traverse") {
     self._id_2A9D = var_0;
+  }
 }
 
 bubble_sheild_ready() {
@@ -109,8 +113,9 @@ bubble_sheild_ready() {
   var_1 = _id_0547::_id_8FBA(var_0.bubblestruct, "zmb_bren_pap_screen", var_0);
   _triggerfx(var_1);
 
-  while(!var_0 meleebuttonpressed())
+  while(!var_0 meleeButtonPressed()) {
     waitframe();
+  }
 
   var_1 delete();
   var_0.bubblecharged = 0;
@@ -161,8 +166,9 @@ spawn_bubble_bomb(var_0, var_1, var_2) {
   var_3 = self;
   var_4 = "geist_bomb_artil";
 
-  if(common_scripts\utility::_id_562E(var_2))
+  if(common_scripts\utility::_id_562E(var_2)) {
     var_4 = "geist_bomb_artil2";
+  }
 
   var_5 = get_bomb_start_pos(var_0);
   var_6 = _func_1B6(var_4, var_3.origin, var_1, 1, var_5[2] + 42, var_3);
@@ -180,8 +186,9 @@ geist_bombs_projectile_think(var_0, var_1) {
   var_2 waittill("explode", var_3);
   geist_bombs_static_think(var_3, var_0, var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 geist_bombs_static_think(var_0, var_1, var_2) {
@@ -191,13 +198,15 @@ geist_bombs_static_think(var_0, var_1, var_2) {
   var_4.origin = var_3 + (0, 0, 25);
   var_5 = "zmb_godking_giestbomb";
 
-  if(var_2)
+  if(var_2) {
     var_5 = "zmb_godking_giestbomb2";
+  }
 
   var_6 = "zmb_godking_giestbomb_prime";
 
-  if(var_2)
+  if(var_2) {
     var_6 = "zmb_godking_giestbomb2_prime";
+  }
 
   var_7 = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_5), var_4, "TAG_ORIGIN");
   var_8 = _spawnlinkedfx(common_scripts\utility::_id_44F5(var_6), var_4, "TAG_ORIGIN");
@@ -209,30 +218,34 @@ geist_bombs_static_think(var_0, var_1, var_2) {
   _id_0378::_id_8D74("aud_pap_wpn_emp44_bomb_reload", "activate", var_4);
   wait(var_9 + var_10);
 
-  if(!var_2)
-    _playfxontag(common_scripts\utility::_id_44F5("zmb_giestbomb_exp_1shot"), var_4, "TAG_ORIGIN");
+  if(!var_2) {
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmb_giestbomb_exp_1shot"), var_4, "TAG_ORIGIN");
+  }
 
   _id_0378::_id_8D74("aud_pap_wpn_emp44_bomb_reload", "explode", var_4);
   var_11 = _id_0547::_id_408F();
   var_12 = level.players;
   var_13 = common_scripts\utility::_id_0F73(var_11, var_12);
 
-  if(var_2)
+  if(var_2) {
     var_1 maps\mp\zombies\weapons\_zombie_type_38::spawn_electro_blast(var_0, randomint(1) == 0);
-  else {
+  } else {
     foreach(var_15 in var_13) {
-      if(_distance2d(var_15.origin, var_0) <= 160)
+      if(_distance2d(var_15.origin, var_0) <= 160) {
         var_15 dodamage(level.bubble_bomb_dmg, var_0, var_1, var_1, "MOD_EXPLOSIVE", "emp44_zm");
+      }
     }
   }
 
   waitframe();
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_8 delete();
+  }
 
   var_4 delete();
 }
@@ -253,16 +266,18 @@ attempt_reload_action(var_0, var_1) {
   if(weapon_clip_empty(var_1)) {
     var_2 childthread[[var_0]]();
 
-    while(weapon_clip_empty(var_1))
+    while(weapon_clip_empty(var_1)) {
       waitframe();
+    }
   }
 }
 
 weapon_clip_empty(var_0) {
   var_1 = self;
 
-  if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon())))
+  if(!_id_0547::_id_5565(var_0, _id_0547::_id_AAF9(var_1 getcurrentweapon()))) {
     return 1;
+  }
 
   return var_1 getcurrentweaponclipammo() == 0;
 }
@@ -288,8 +303,9 @@ try_charlton_blackhole(var_0, var_1) {
   level.charlton_blackhole thread spawn_blackhole();
   wait 5;
 
-  if(isDefined(level.charlton_blackhole.vfxent_radius))
+  if(isDefined(level.charlton_blackhole.vfxent_radius)) {
     level.charlton_blackhole.vfxent_radius delete();
+  }
 
   if(isDefined(level.charlton_blackhole)) {
     level.charlton_blackhole notify("vortex_end");
@@ -336,8 +352,9 @@ dp28_zm_fire_think() {
     self waittill("missile_fire", var_0, var_1);
 
     if(issubstr(var_1, "dp28")) {
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 thread dp28_death_bolt(self, var_1);
+      }
     }
   }
 }
@@ -348,8 +365,9 @@ sdk_zm_fire_think() {
   for(;;) {
     self waittill("weapon_fired", var_0);
 
-    if(issubstr(var_0, "sdk") && is_paped(var_0))
+    if(issubstr(var_0, "sdk") && is_paped(var_0)) {
       _id_0378::_id_8D74("aud_pap_wpn_sdk_shottysnipe_fire", self getEye());
+    }
   }
 }
 
@@ -358,7 +376,7 @@ dp28_modify_projectile(var_0, var_1) {
   self _meth_8519(0, 0);
 
   if(var_1) {
-    _playfxontag(common_scripts\utility::_id_44F5("zmi_hc_rune_green"), self, "tag_origin");
+    _playFXOnTag(common_scripts\utility::_id_44F5("zmi_hc_rune_green"), self, "tag_origin");
     _id_0378::_id_8D74("aud_pap_wpn_crossbow_cricket_shot");
   }
 
@@ -371,8 +389,9 @@ dp28_death_bolt(var_0, var_1) {
   var_2 childthread do_zombie_damage_better(::missile_do_flight_damage);
   var_4 = var_2 common_scripts\utility::waittill_any_return("missile_stuck", "death", "entitydeleted");
 
-  if(var_4 == "missile_stuck")
+  if(var_4 == "missile_stuck") {
     waitframe();
+  }
 
   var_2 notify("end_air_damage");
 
@@ -387,8 +406,9 @@ dp28_death_bolt(var_0, var_1) {
 }
 
 is_paped(var_0) {
-  if(issubstr(var_0, "_pap_zm"))
+  if(issubstr(var_0, "_pap_zm")) {
     return 1;
+  }
 
   return 0;
 }
@@ -414,8 +434,9 @@ do_zombie_trace_damage(var_0, var_1, var_2) {
     var_9 = var_8 * var_8;
     var_10 = sqrd_dist_between_segments(var_0, var_1, var_5.origin, var_5.origin + (0, 0, var_6));
 
-    if(var_10[0] <= var_9)
+    if(var_10[0] <= var_9) {
       [[var_2]](var_5, var_10[1]);
+    }
   }
 }
 
@@ -426,8 +447,9 @@ missile_do_flight_damage(var_0, var_1) {
   if(isDefined(var_0._id_0A4B)) {
     var_2 = _id_0547::_id_0A51(var_0._id_0A4B);
 
-    if(isDefined(var_2) && common_scripts\utility::_id_562E(var_2.knockbyravensword))
+    if(isDefined(var_2) && common_scripts\utility::_id_562E(var_2.knockbyravensword)) {
       _id_0547::_id_7D1B(self, var_0, "close", self._id_0117);
+    }
 
     var_0 thread missile_set_temp_immunity();
     var_0 dodamage(level.dp38missiledamage, var_1, self._id_0117, self._id_0117, "MOD_EXPLOSIVE", "dp28_pap_zm");
@@ -455,48 +477,55 @@ dp28_noisy_cricket(var_0) {
     if(!isDefined(var_6._id_0A4B) || _id_0547::_id_5565(var_6, var_0)) {
       continue;
     }
-    if(!isDefined(var_6._id_0A4B) || !common_scripts\utility::_id_0F79(["zombie_generic", "zombie_berserker", "zombie_heavy", "zombie_exploder", "zombie_sizzler"], var_6._id_0A4B))
+    if(!isDefined(var_6._id_0A4B) || !common_scripts\utility::_id_0F79(["zombie_generic", "zombie_berserker", "zombie_heavy", "zombie_exploder", "zombie_sizzler"], var_6._id_0A4B)) {
       var_3 = 1;
+    }
 
     if(_distance2d(var_6.origin, var_2) <= 128) {
-      if(common_scripts\utility::_id_562E(var_3))
+      if(common_scripts\utility::_id_562E(var_3)) {
         var_6 dodamage(1800, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
-      else
+      } else {
         var_6 dodamage(level.dp38cricetdamage, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+      }
 
       var_7 = 1;
     } else if(_distance2d(var_6.origin, var_2) <= 192) {
-      if(common_scripts\utility::_id_562E(var_3))
+      if(common_scripts\utility::_id_562E(var_3)) {
         var_6 dodamage(1200, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
-      else
+      } else {
         var_6 dodamage(level.dp38cricetdamage * 0.66, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+      }
 
       if(isDefined(var_6._id_0A4B)) {
         var_8 = _id_0547::_id_0A51(var_6._id_0A4B);
 
-        if(isDefined(var_8) && common_scripts\utility::_id_562E(var_8.knockbybladebarbarossa))
+        if(isDefined(var_8) && common_scripts\utility::_id_562E(var_8.knockbybladebarbarossa)) {
           _id_0547::_id_7D1B(var_0, var_6, "medium");
+        }
       }
 
       var_7 = 1;
     } else if(_distance2d(var_6.origin, var_2) <= 256) {
-      if(common_scripts\utility::_id_562E(var_3))
+      if(common_scripts\utility::_id_562E(var_3)) {
         var_6 dodamage(600, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
-      else
+      } else {
         var_6 dodamage(level.dp38cricetdamage * 0.33, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+      }
 
       if(isDefined(var_6._id_0A4B)) {
         var_8 = _id_0547::_id_0A51(var_6._id_0A4B);
 
-        if(isDefined(var_8) && common_scripts\utility::_id_562E(var_8.knockbybladebarbarossa))
+        if(isDefined(var_8) && common_scripts\utility::_id_562E(var_8.knockbybladebarbarossa)) {
           _id_0547::_id_7D1B(var_0, var_6, "far");
+        }
       }
 
       var_7 = 1;
     }
 
-    if(isDefined(var_6.myshield) && var_7)
+    if(isDefined(var_6.myshield) && var_7) {
       var_6.myshield dodamage(level.dp38cricetdamage * 0.33, var_0.origin, var_0, var_0, "MOD_EXPLOSIVE", "dp28_pap_zm");
+    }
   }
 }
 
@@ -528,10 +557,11 @@ sqrd_dist_between_segments(var_0, var_1, var_2, var_3) {
   var_16 = 0;
 
   if(var_14 <= var_5) {
-    if(var_11 > var_9)
+    if(var_11 > var_9) {
       var_15 = var_13 / var_11;
-    else
+    } else {
       var_15 = var_12 / var_9;
+    }
   } else {
     var_15 = (var_12 * var_10 - var_11 * var_13) / var_14;
     var_16 = (var_11 * var_12 - var_13 * var_9) / var_14;

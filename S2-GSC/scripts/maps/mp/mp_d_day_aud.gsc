@@ -27,11 +27,13 @@ _id_64FF(var_0, var_1) {
     _id_0380::_id_6844("mp_dday_intro_fly_bombers_02_axis", "axis");
   }
 
-  if(var_1 == 105)
+  if(var_1 == 105) {
     _id_0380::_id_6844("mp_dday_intro_fly_bombers_03_allies", "allies", var_2);
+  }
 
-  if(var_1 == 104)
+  if(var_1 == 104) {
     _id_0380::_id_6844("mp_dday_intro_fly_bombers_03_axis", "axis", var_2);
+  }
 
   if(var_1 == 13) {
     _id_0380::_id_6844("mp_dday_intro_fly_fighters_01_allies", "allies", var_2);
@@ -43,11 +45,13 @@ _id_64FF(var_0, var_1) {
     _id_0380::_id_6844("mp_dday_intro_fly_fighters_02_axis", "axis", var_2);
   }
 
-  if(var_1 == 3)
+  if(var_1 == 3) {
     _id_0380::_id_6844("mp_dday_intro_fly_fighters_03_allies", "allies", var_2);
+  }
 
-  if(var_1 == 5)
+  if(var_1 == 5) {
     _id_0380::_id_6844("mp_dday_intro_fly_fighters_04_axis", "axis", var_2);
+  }
 
   if(var_1 == 8) {
     _id_0380::_id_6844("mp_dday_intro_fly_fighters_04_allies", "allies", var_2);

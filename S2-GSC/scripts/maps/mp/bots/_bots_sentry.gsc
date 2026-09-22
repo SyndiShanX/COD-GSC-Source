@@ -10,25 +10,29 @@ _id_1A4D(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   wait(_randomintrange(3, 5));
 
-  while(isDefined(self.getlookaheaddir) && gettime() < self.getlookaheaddir)
+  while(isDefined(self.getlookaheaddir) && gettime() < self.getlookaheaddir) {
     wait 1;
+  }
 
-  if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088))
+  if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088)) {
     return 1;
+  }
 
   var_4 = self.origin;
 
   if(var_3 != "hide_nonlethal") {
     var_4 = _id_1ACA(var_3);
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       return 1;
+    }
   }
 
   _id_1AC5(var_0, var_4, var_3, var_1);
 
-  while(maps\mp\bots\_bots_strategy::_id_1A14("sentry_placement"))
+  while(maps\mp\bots\_bots_strategy::_id_1A14("sentry_placement")) {
     wait 0.5;
+  }
 
   return 1;
 }
@@ -60,8 +64,9 @@ _id_1ACF(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088))
+  if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088)) {
     return 1;
+  }
 
   self.getlookaheaddir = gettime() + 1000;
   return 0;
@@ -75,8 +80,9 @@ _id_1AC7() {
   level endon("game_ended");
 
   for(;;) {
-    if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088))
+    if(isDefined(self._id_0088) && self._id_0088.health > 0 && self botcanseeentity(self._id_0088)) {
       thread _id_1AC6();
+    }
 
     waitframe();
   }
@@ -110,29 +116,34 @@ _id_1ACE(var_0) {
 _id_1ACA(var_0) {
   var_1 = maps\mp\bots\_bots_util::_id_2C6C();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_1;
+  }
 
-  if(isDefined(self._id_6708))
+  if(isDefined(self._id_6708)) {
     return self._id_6708.origin;
+  }
 
   var_2 = _getnodesinradius(self.origin, 1000, 0, 512);
   var_3 = 5;
 
   if(var_0 != "turret") {
-    if(self botgetdifficultysetting("strategyLevel") == 1)
+    if(self botgetdifficultysetting("strategyLevel") == 1) {
       var_3 = 10;
-    else if(self botgetdifficultysetting("strategyLevel") == 0)
+    } else if(self botgetdifficultysetting("strategyLevel") == 0) {
       var_3 = 15;
+    }
   }
 
-  if(var_0 == "turret_air")
+  if(var_0 == "turret_air") {
     var_4 = self botnodepick(var_2, var_3, "node_traffic", "ignore_no_sky");
-  else
+  } else {
     var_4 = self botnodepick(var_2, var_3, "node_traffic");
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     return var_4.origin;
+  }
 }
 
 _id_1AC9(var_0, var_1, var_2, var_3) {
@@ -141,29 +152,32 @@ _id_1AC9(var_0, var_1, var_2, var_3) {
   var_6 = 5;
 
   if(var_2 != "turret") {
-    if(self botgetdifficultysetting("strategyLevel") == 1)
+    if(self botgetdifficultysetting("strategyLevel") == 1) {
       var_6 = 10;
-    else if(self botgetdifficultysetting("strategyLevel") == 0)
+    } else if(self botgetdifficultysetting("strategyLevel") == 0) {
       var_6 = 15;
+    }
   }
 
-  if(var_2 == "turret_air")
+  if(var_2 == "turret_air") {
     var_7 = self botnodepick(var_5, var_6, "node_sentry", var_1, "ignore_no_sky");
-  else if(var_2 == "trap")
+  } else if(var_2 == "trap") {
     var_7 = self botnodepick(var_5, var_6, "node_traffic");
-  else if(var_2 == "hide_nonlethal")
+  } else if(var_2 == "hide_nonlethal") {
     var_7 = self botnodepick(var_5, var_6, "node_hide");
-  else
+  } else {
     var_7 = self botnodepick(var_5, var_6, "node_sentry", var_1);
+  }
 
   if(isDefined(var_7)) {
     var_4 = spawnStruct();
     var_4._id_010D = var_7;
 
-    if(var_1 != var_7.origin && var_2 != "hide_nonlethal")
+    if(var_1 != var_7.origin && var_2 != "hide_nonlethal") {
       var_4._id_AAE8 = _vectortoyaw(var_1 - var_7.origin);
-    else
+    } else {
       var_4._id_AAE8 = undefined;
+    }
 
     var_4._id_01D0 = var_0._id_01D0;
     var_4._id_5A5C = var_0;
@@ -174,14 +188,17 @@ _id_1AC9(var_0, var_1, var_2, var_3) {
 }
 
 _id_1AC8() {
-  if(isDefined(self._id_2004))
+  if(isDefined(self._id_2004)) {
     return self._id_2004;
+  }
 
-  if(isDefined(self._id_2005))
+  if(isDefined(self._id_2005)) {
     return self._id_2005;
+  }
 
-  if(isDefined(self._id_2003))
+  if(isDefined(self._id_2003)) {
     return self._id_2003;
+  }
 }
 
 _id_1AC4(var_0) {
@@ -196,8 +213,9 @@ _id_1AC4(var_0) {
       var_5 = gettime();
       var_6 = self getplayerangles()[1];
 
-      if(isDefined(var_0._id_68FB._id_AAE8))
+      if(isDefined(var_0._id_68FB._id_AAE8)) {
         var_6 = var_0._id_68FB._id_AAE8;
+      }
 
       var_7 = [];
       var_7[0] = var_6 + 180;
@@ -280,8 +298,9 @@ _id_1ACB() {
     _id_1AC2();
     wait 0.25;
 
-    if(var_0 > 2)
+    if(var_0 > 2) {
       _id_1ACC();
+    }
   }
 
   self notify("bot_sentry_exited");

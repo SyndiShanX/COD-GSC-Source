@@ -16,9 +16,9 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(self.carryweapon)) {
     var_8 = var_0 == self.carryweapon;
 
-    if(var_8)
+    if(var_8) {
       return;
-    else if(_id_43DD() == "SCRIPTED_SWAP") {
+    } else if(_id_43DD() == "SCRIPTED_SWAP") {
       self waittill("weapon_plant_dismount");
       _id_2399(1);
     }
@@ -40,13 +40,15 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   } else {
     self._id_7077 = "STATE_FIRST_CARRY";
 
-    if(_id_43DD() == "SCRIPTED_ALTSWITCH" || _id_43DD() == "NATIVE_DPAD_LEFT")
+    if(_id_43DD() == "SCRIPTED_ALTSWITCH" || _id_43DD() == "NATIVE_DPAD_LEFT") {
       self _meth_8328();
+    }
   }
 
   if(_id_43DD() != "NATIVE_DPAD_LEFT") {
-    if(isPlayer(self))
+    if(isPlayer(self)) {
       _id_680D();
+    }
   }
 
   thread _id_9963();
@@ -54,8 +56,9 @@ _id_5369(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   thread _id_A123();
   thread _id_6370();
 
-  if(_id_43DD() == "SCRIPTED_SWAP" || _id_43DD() == "SCRIPTED_ALTSWITCH")
+  if(_id_43DD() == "SCRIPTED_SWAP" || _id_43DD() == "SCRIPTED_ALTSWITCH") {
     thread _id_63F7();
+  }
 }
 
 _id_680D() {
@@ -82,20 +85,23 @@ _id_239A() {
 }
 
 _id_2399(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self notify("weapon_plant_cleanup");
 
-  if(self _meth_803D())
+  if(self _meth_803D()) {
     _id_2FED(var_0);
-  else if(!var_0)
+  } else if(!var_0) {
     _id_2F97();
+  }
 
   self._id_706A = undefined;
 
-  if(_id_43DD() == "SCRIPTED_ALTSWITCH" || _id_43DD() == "NATIVE_DPAD_LEFT")
+  if(_id_43DD() == "SCRIPTED_ALTSWITCH" || _id_43DD() == "NATIVE_DPAD_LEFT") {
     self _meth_8329();
+  }
 
   self._id_7076 = undefined;
   self._id_76E7 = undefined;
@@ -108,8 +114,9 @@ _id_2399(var_0) {
   self._id_A1FC = undefined;
   _id_2373();
 
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     _id_680C();
+  }
 
   self setclientomnvar("ui_lmg_mount_state", 0);
   self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
@@ -118,40 +125,48 @@ _id_2399(var_0) {
 _id_9EA3() {
   var_0 = undefined;
 
-  if(isDefined(self._id_76EC))
+  if(isDefined(self._id_76EC)) {
     var_0 = _lengthsquared(self.angles - self._id_76EC);
+  }
 
   self._id_76EC = self.angles;
   var_1 = getdvarfloat("weapon_plant_max_turn_angle_vect_distance_sq", 70.0);
 
-  if(isDefined(var_0) && var_0 > var_1)
+  if(isDefined(var_0) && var_0 > var_1) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_1F65() {
-  if(isDefined(self._id_2FAF) && self._id_2FAF)
+  if(isDefined(self._id_2FAF) && self._id_2FAF) {
     return 0;
+  }
 
-  if(isDefined(self._id_2016) && isDefined(self._id_2016.carryweapon) && (self._id_2016.carryweapon == "iw5_carrydrone_mp" || self._id_2016.carryweapon == "relic_mp"))
+  if(isDefined(self._id_2016) && isDefined(self._id_2016.carryweapon) && (self._id_2016.carryweapon == "iw5_carrydrone_mp" || self._id_2016.carryweapon == "relic_mp")) {
     return 0;
+  }
 
-  if(isDefined(self._id_5525) && self._id_5525)
+  if(isDefined(self._id_5525) && self._id_5525) {
     return 0;
+  }
 
-  if(!self._id_A1FC && self isonground() && !self _meth_82E5() && !self ismantling() && !self isusingoffhand() && !self isswitchingweapon() && !self isusingturret() && !self _meth_817A() && !_id_9EA3() && !isDefined(self getmovingplatformparent()))
+  if(!self._id_A1FC && self isonground() && !self _meth_82E5() && !self ismantling() && !self isusingoffhand() && !self isswitchingweapon() && !self isusingturret() && !self _meth_817A() && !_id_9EA3() && !isDefined(self getmovingplatformparent())) {
     return 1;
+  }
 
   return 0;
 }
 
 _id_5855() {
-  if(self _meth_803D())
+  if(self _meth_803D()) {
     return 1;
+  }
 
-  if(!isDefined(self._id_7077))
+  if(!isDefined(self._id_7077)) {
     return 0;
+  }
 
   switch (self._id_7077) {
     case "STATE_PLANTED_TO_CARRY":
@@ -165,13 +180,15 @@ _id_5855() {
 }
 
 _id_584E() {
-  if(!isDefined(self._id_7077))
+  if(!isDefined(self._id_7077)) {
     return 0;
+  }
 
-  if(self._id_7077 == "STATE_PLANTED_TO_CARRY")
+  if(self._id_7077 == "STATE_PLANTED_TO_CARRY") {
     return 1;
-  else
+  } else {
     return 0;
+  }
 }
 
 _id_2F97() {
@@ -184,8 +201,9 @@ _id_2F97() {
   self allowmelee(1);
   _id_6518(1);
 
-  if(_id_8B6B())
+  if(_id_8B6B()) {
     common_scripts\utility::_id_0617();
+  }
 
   self enableoffhandweapons();
   self enableusability();
@@ -213,20 +231,23 @@ _id_707A() {
     var_7 = self._id_7076;
     var_8 = self setstance(var_7);
 
-    if(isDefined(self._id_7075) && !var_8)
+    if(isDefined(self._id_7075) && !var_8) {
       var_8 = self setstance(var_7, 0);
+    }
   } else
     var_7 = self._id_76E7;
 
-  if(isDefined(self._id_7075))
+  if(isDefined(self._id_7075)) {
     self._id_7075 = undefined;
+  }
 
   var_9 = undefined;
 
-  if(var_7 == "prone")
+  if(var_7 == "prone") {
     var_9 = vectortoangles(self._id_7073 - self.origin);
-  else
+  } else {
     var_9 = self.angles;
+  }
 
   [var_11, var_12, var_13, var_14] = _id_4355(var_7);
   var_15 = var_11;
@@ -234,27 +255,32 @@ _id_707A() {
   var_17 = var_13;
   var_18 = var_14;
 
-  if(_id_8B53())
+  if(_id_8B53()) {
     [var_15, var_16, var_17, var_18] = _id_028B::_id_43D8(self.origin[2], self._id_7073, var_6, var_9, var_2, var_1, var_0, var_11, var_12, var_13, var_14, _id_4074());
+  }
 
   _id_941B(var_15, var_16, var_17, var_18);
 
-  if(var_7 != "stand")
+  if(var_7 != "stand") {
     self allowstand(0);
+  }
 
-  if(var_7 != "crouch")
+  if(var_7 != "crouch") {
     self allowcrouch(0);
+  }
 
-  if(var_7 != "prone")
+  if(var_7 != "prone") {
     self allowprone(0);
+  }
 
   self allowjump(0);
   self allowmantle(0);
   self allowmelee(0);
   _id_6518(0);
 
-  if(_id_8B6B())
+  if(_id_8B6B()) {
     common_scripts\utility::_id_0603();
+  }
 
   self disableoffhandweapons();
   self disableusability();
@@ -279,13 +305,15 @@ _id_707A() {
   } else if(_id_43DD() == "NATIVE_DPAD_LEFT") {
     thread _id_14F3(0.75);
 
-    while(self getcurrentweapon() != self._id_706A)
+    while(self getcurrentweapon() != self._id_706A) {
       waitframe();
+    }
 
     self _meth_8328();
 
-    while(self _meth_8678() || self _meth_8677())
+    while(self _meth_8678() || self _meth_8677()) {
       waitframe();
+    }
 
     if(self getcurrentweapon() != self._id_706A) {}
   }
@@ -297,8 +325,9 @@ _id_14F3(var_0) {
   self endon("weapon_change");
   wait(var_0);
 
-  if(self getcurrentweapon() != self._id_706A)
+  if(self getcurrentweapon() != self._id_706A) {
     self switchtoweapon(self._id_706A);
+  }
 }
 
 forcedismountweapon() {
@@ -324,15 +353,17 @@ _id_2FED(var_0) {
       var_1 = self getweaponammoclip(self._id_706A);
       var_2 = self getweaponammostock(self._id_706A);
 
-      if(self getcurrentweapon() == self._id_706A)
+      if(self getcurrentweapon() == self._id_706A) {
         self switchtoweapon(self.carryweapon);
+      }
 
       self setweaponammoclip(self.carryweapon, var_1);
       self setweaponammostock(self.carryweapon, var_2);
       common_scripts\utility::_id_A71A(1.0, "weapon_change");
 
-      if(self getcurrentweapon() == self._id_706A)
+      if(self getcurrentweapon() == self._id_706A) {
         self switchtoweapon(self.carryweapon);
+      }
 
       self takeweapon(self._id_706A);
     }
@@ -348,13 +379,15 @@ _id_2FED(var_0) {
     self _meth_8328();
   } else if(_id_43DD() == "NATIVE_DPAD_LEFT") {
     if(var_0) {
-      while(self getcurrentweapon() == self._id_706A)
+      while(self getcurrentweapon() == self._id_706A) {
         waitframe();
+      }
 
       self _meth_8328();
 
-      while(self _meth_8678() || self _meth_8677())
+      while(self _meth_8678() || self _meth_8677()) {
         waitframe();
+      }
 
       if(self getcurrentweapon() == self._id_706A) {}
     } else
@@ -389,8 +422,9 @@ _id_63BE() {
 }
 
 _id_21B6() {
-  if(self._id_A6B4)
+  if(self._id_A6B4) {
     self waittill("plant_button_up");
+  }
 }
 
 _id_A6A5(var_0) {
@@ -401,8 +435,9 @@ _id_A6A5(var_0) {
     childthread _id_21D0(var_0);
     var_1 = common_scripts\utility::waittill_any_return("plant_button_down", "plantOnEntityRemoved", "native_dpad_force_plant");
 
-    if(isDefined(var_1) && var_1 == "plantOnEntityRemoved")
+    if(isDefined(var_1) && var_1 == "plantOnEntityRemoved") {
       return 1;
+    }
   } else
     var_1 = common_scripts\utility::waittill_any_return("plant_button_down", "native_dpad_force_plant");
 
@@ -411,8 +446,9 @@ _id_A6A5(var_0) {
     thread _id_63BE();
     var_2 = getdvarfloat("weapon_plant_input_hold_duration", 0.2);
 
-    if(var_2 > 0)
+    if(var_2 > 0) {
       common_scripts\utility::_id_A63E(var_2, "plant_button_up");
+    }
   }
 
   return 1;
@@ -420,18 +456,20 @@ _id_A6A5(var_0) {
 
 _id_A774() {
   for(;;) {
-    if(self getcurrentweapon() == self._id_706A && !self _meth_8677())
+    if(self getcurrentweapon() == self._id_706A && !self _meth_8677()) {
       return 1;
-    else
+    } else {
       waitframe();
+    }
   }
 }
 
 _id_A772(var_0) {
   _id_98DF();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     childthread _id_21D0(var_0);
+  }
 
   for(;;) {
     if(self getcurrentweapon() == self.carryweapon || self getcurrentweapon() == self._id_706A && self _meth_8677()) {
@@ -498,10 +536,11 @@ _id_9963() {
       case "STATE_CARRY":
       case "STATE_FIRST_CARRY":
         if(isDefined(_id_A6A5())) {
-          if(isDefined(self._id_7073))
+          if(isDefined(self._id_7073)) {
             _id_38F6();
-          else if(self getstance() == "prone" && _id_1F65())
+          } else if(self getstance() == "prone" && _id_1F65()) {
             _id_3A66();
+          }
         }
 
         break;
@@ -511,23 +550,26 @@ _id_9963() {
         _id_38F6();
         break;
       case "STATE_PLANTED_NO_CARRY":
-        if(_id_43DD() == "NATIVE_DPAD_LEFT")
+        if(_id_43DD() == "NATIVE_DPAD_LEFT") {
           _id_A774();
-        else
+        } else {
           _id_21B6();
+        }
 
         _id_38F6();
         break;
       case "STATE_PLANTED":
         var_3 = undefined;
 
-        if(_id_43DD() == "NATIVE_DPAD_LEFT")
+        if(_id_43DD() == "NATIVE_DPAD_LEFT") {
           var_3 = _id_A772(self._id_706D);
-        else
+        } else {
           var_3 = _id_A6A5(self._id_706D);
+        }
 
-        if(isDefined(var_3))
+        if(isDefined(var_3)) {
           _id_38F6();
+        }
 
         break;
       case "STATE_PLANTED_TO_CARRY":
@@ -535,10 +577,11 @@ _id_9963() {
         _id_38F6();
         break;
       case "STATE_CARRY_NO_PLANT":
-        if(_id_43DD() == "NATIVE_DPAD_LEFT")
+        if(_id_43DD() == "NATIVE_DPAD_LEFT") {
           _id_A771();
-        else
+        } else {
           _id_21B6();
+        }
 
         _id_38F6();
         break;
@@ -549,8 +592,9 @@ _id_9963() {
     if(var_0 == var_2) {
       var_1++;
 
-      if(var_1 > 5)
+      if(var_1 > 5) {
         waitframe();
+      }
 
       continue;
     }
@@ -587,10 +631,11 @@ _id_A123() {
       case "STATE_PLANTED":
         self setclientomnvar("ui_lmg_mount_state", 1);
 
-        if(!isDefined(self._id_706E) || !self._id_706E)
+        if(!isDefined(self._id_706E) || !self._id_706E) {
           self setclientomnvar("ui_show_division_lmg_ability_prompt", 1);
-        else
+        } else {
           self setclientomnvar("ui_show_division_lmg_ability_prompt", 0);
+        }
 
         if(_id_43DD() == "SCRIPTED_SWAP") {
           if(isDefined(self._id_706A) && self getcurrentweapon() == self._id_706A) {
@@ -651,22 +696,24 @@ _id_62DA() {
         var_8 = undefined;
         var_7 = getdvarfloat("4485");
 
-        if(var_4)
+        if(var_4) {
           var_8 = var_7;
+        }
 
         var_9 = undefined;
 
-        if(isDefined(self._id_7075))
+        if(isDefined(self._id_7075)) {
           self._id_7073 = self._id_7075;
-        else {
+        } else {
           [var_11, var_12, var_9] = _id_028B::_id_9F90(var_5, var_6, var_4, var_7, var_8);
 
           if(var_4 && isDefined(var_11)) {
             self._id_7073 = var_11;
             self._id_7076 = "prone";
 
-            if(!self _meth_803A(self._id_7073))
+            if(!self _meth_803A(self._id_7073)) {
               self._id_7073 = undefined;
+            }
           } else if(isDefined(var_11) && _id_028B::_id_4B43(var_11, var_7, _id_4074())) {
             self._id_7073 = var_11;
             self._id_7076 = undefined;
@@ -678,9 +725,9 @@ _id_62DA() {
               var_16 = _id_43DE();
               var_17 = var_13 + var_16;
 
-              if(var_15 <= var_17 + 0.001)
+              if(var_15 <= var_17 + 0.001) {
                 self._id_7076 = "stand";
-              else {
+              } else {
                 self._id_7073 = undefined;
                 break;
               }
@@ -692,9 +739,9 @@ _id_62DA() {
                 var_18 = _id_43DA();
                 var_19 = var_14 - var_18;
 
-                if(var_15 >= var_19 - 0.001)
+                if(var_15 >= var_19 - 0.001) {
                   self._id_7076 = "crouch";
-                else {
+                } else {
                   self._id_7073 = undefined;
                   break;
                 }
@@ -703,9 +750,9 @@ _id_62DA() {
           }
         }
 
-        if(isDefined(self._id_7075))
+        if(isDefined(self._id_7075)) {
           var_0 = self._id_7075;
-        else if(isDefined(self._id_7073)) {
+        } else if(isDefined(self._id_7073)) {
           if(isDefined(self._id_706F) && self._id_706F) {
             self._id_7070 = self._id_7073;
             self._id_7073 = undefined;
@@ -730,9 +777,9 @@ _id_62DA() {
     if(_id_43DD() == "NATIVE_DPAD_LEFT") {
       var_20 = undefined;
 
-      if(isDefined(self._id_706E) && self._id_706E)
+      if(isDefined(self._id_706E) && self._id_706E) {
         var_20 = 0;
-      else {
+      } else {
         switch (self._id_7077) {
           case "STATE_CARRY":
           case "STATE_FIRST_CARRY":
@@ -821,15 +868,17 @@ _id_6370() {
     }
   }
 
-  if(common_scripts\utility::_id_562E(self.tmpplayerfreeze))
+  if(common_scripts\utility::_id_562E(self.tmpplayerfreeze)) {
     _id_98DF();
+  }
 
   _id_2399(1);
 }
 
 _id_98DF() {
-  if(_id_43DD() != "NATIVE_DPAD_LEFT")
+  if(_id_43DD() != "NATIVE_DPAD_LEFT") {
     self allowlean(1);
+  }
 
   self allowjump(1);
   self allowmantle(1);
@@ -839,8 +888,9 @@ _id_98DF() {
 _id_98E0() {
   self.tmpplayerfreeze = 1;
 
-  if(_id_43DD() != "NATIVE_DPAD_LEFT")
+  if(_id_43DD() != "NATIVE_DPAD_LEFT") {
     self allowlean(0);
+  }
 
   self allowjump(0);
   self allowmantle(0);
@@ -861,40 +911,44 @@ _id_21D0(var_0) {
   var_6 = var_0.model;
   var_7 = "";
 
-  if(var_0.classname == "scriptable")
+  if(var_0.classname == "scriptable") {
     var_7 = var_0 _meth_866B(0);
+  }
 
   if(_id_5778(var_0)) {
     var_2 = var_0.origin;
     var_3 = var_0.angles;
 
-    if(var_0 _meth_8221() && var_0 gettagangles("TAG_YAW") != -1)
+    if(var_0 _meth_8221() && var_0 gettagangles("TAG_YAW") != -1) {
       var_4 = var_0 gettagangles("TAG_YAW");
+    }
   }
 
   for(;;) {
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_1 = 1;
-    else if(isDefined(var_5) && !var_5 && (var_0.classname == "script_brushmodel" || var_0.classname == "script_model") && var_0 _id_8C6C())
+    } else if(isDefined(var_5) && !var_5 && (var_0.classname == "script_brushmodel" || var_0.classname == "script_model") && var_0 _id_8C6C()) {
       var_1 = 1;
-    else if((var_0.classname == "script_brushmodel" || var_0.classname == "script_model") && !var_0 _meth_86A9())
+    } else if((var_0.classname == "script_brushmodel" || var_0.classname == "script_model") && !var_0 _meth_86A9()) {
       var_1 = 1;
-    else if(var_0.classname == "scriptable" && var_0 _meth_866B(0) != var_7)
+    } else if(var_0.classname == "scriptable" && var_0 _meth_866B(0) != var_7) {
       var_1 = 1;
-    else if(isDefined(var_0.model) && var_0.model != "" && (var_0 _meth_8687() && var_0 _meth_8672() > 0.0))
+    } else if(isDefined(var_0.model) && var_0.model != "" && (var_0 _meth_8687() && var_0 _meth_8672() > 0.0)) {
       var_1 = 1;
-    else if(isDefined(var_2) && _distance2dsquared(var_2, var_0.origin) > 1.0)
+    } else if(isDefined(var_2) && _distance2dsquared(var_2, var_0.origin) > 1.0) {
       var_1 = 1;
-    else if(isDefined(var_3) && distancesquared(var_3, var_0.angles) > 1.0)
+    } else if(isDefined(var_3) && distancesquared(var_3, var_0.angles) > 1.0) {
       var_1 = 1;
-    else if(isDefined(var_4) && _distance2dsquared(var_4, var_0 gettagangles("TAG_YAW")) > 1.0)
+    } else if(isDefined(var_4) && _distance2dsquared(var_4, var_0 gettagangles("TAG_YAW")) > 1.0) {
       var_1 = 1;
+    }
 
     if(var_1) {
       self notify("plantOnEntityRemoved");
 
-      if(_id_43DD() == "NATIVE_DPAD_LEFT")
+      if(_id_43DD() == "NATIVE_DPAD_LEFT") {
         self switchtoweapon(self.carryweapon);
+      }
 
       return;
     }
@@ -904,8 +958,9 @@ _id_21D0(var_0) {
 }
 
 _id_6518(var_0) {
-  if(isDefined(level._id_A9B1._id_6518))
+  if(isDefined(level._id_A9B1._id_6518)) {
     return self[[level._id_A9B1._id_6518]](var_0);
+  }
 }
 
 _id_4295(var_0) {
@@ -989,10 +1044,11 @@ _id_43D9() {
 }
 
 _id_8C6C() {
-  if(isDefined(level._id_A9B1._id_8C6C))
+  if(isDefined(level._id_A9B1._id_8C6C)) {
     return self[[level._id_A9B1._id_8C6C]]();
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_5778(var_0) {

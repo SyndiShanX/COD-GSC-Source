@@ -18,8 +18,9 @@ _id_A1FA() {
 }
 
 _id_4423(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "";
+  }
 
   switch (var_0) {
     case "epic":

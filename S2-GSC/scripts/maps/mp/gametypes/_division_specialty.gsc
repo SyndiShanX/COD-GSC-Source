@@ -35,14 +35,16 @@ _id_8667(var_0) {
       maps\mp\_utility::giveperk("specialty_blastshield2");
       self._id_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale", 35) / 100;
 
-      if(isDefined(level.hardcoremode) && level.hardcoremode)
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self._id_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale_HC", 9) / 100;
+      }
     case "specialty_class_armored_expert":
       maps\mp\_utility::giveperk("specialty_fireshield");
       self._id_90D8 = maps\mp\_utility::getintproperty("perk_fireShieldScale", 35) / 100;
 
-      if(isDefined(level.hardcoremode) && level.hardcoremode)
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self._id_90D8 = maps\mp\_utility::getintproperty("perk_fireShieldScale_HC", 9) / 100;
+      }
     case "specialty_class_armored_enlisted":
       maps\mp\_utility::giveperk("specialty_stun_resistance");
       maps\mp\_utility::giveperk("specialty_resistshellshock");
@@ -97,8 +99,9 @@ _id_8667(var_0) {
       break;
   }
 
-  if(var_2)
+  if(var_2) {
     maps\mp\_utility::_id_47A3(var_1, 0);
+  }
 }
 
 setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
@@ -140,8 +143,9 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
 
       break;
     case "specialty_class_armored_grandmaster":
-      if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF())
+      if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
         maps\mp\_utility::giveperk("specialty_sharp_focus");
+      }
     case "specialty_class_armored_master":
       if(getdvarint("isMLGMatch", 0) == 0 && !_func_3AF()) {
         maps\mp\_utility::giveperk("specialty_superbulletpenetration");
@@ -158,14 +162,16 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
       maps\mp\_utility::giveperk("specialty_blastshield2");
       self._id_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale", 20) / 100;
 
-      if(isDefined(level.hardcoremode) && level.hardcoremode)
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self._id_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale_HC", 5) / 100;
+      }
 
       maps\mp\_utility::giveperk("specialty_fireshield");
       self._id_90D8 = maps\mp\_utility::getintproperty("perk_fireShieldScale", 20) / 100;
 
-      if(isDefined(level.hardcoremode) && level.hardcoremode)
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self._id_90D8 = maps\mp\_utility::getintproperty("perk_fireShieldScale_HC", 5) / 100;
+      }
 
       break;
     case "specialty_class_mountain_grandmaster":
@@ -251,6 +257,7 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(var_0) {
       break;
   }
 
-  if(var_2)
+  if(var_2) {
     maps\mp\_utility::_id_47A3(var_1, 0);
+  }
 }

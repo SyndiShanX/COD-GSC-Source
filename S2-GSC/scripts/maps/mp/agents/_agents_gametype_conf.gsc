@@ -17,11 +17,13 @@ _id_0A44() {
 }
 
 _id_0A48() {
-  if(!isDefined(self._id_95BC))
+  if(!isDefined(self._id_95BC)) {
     self._id_95BC = [];
+  }
 
-  if(!isDefined(self._id_66B7))
+  if(!isDefined(self._id_66B7)) {
     self._id_66B7 = gettime() + 500;
+  }
 
   if(gettime() > self._id_66B7) {
     self._id_66B7 = gettime() + 500;

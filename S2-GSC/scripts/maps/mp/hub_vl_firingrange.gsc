@@ -5,7 +5,7 @@
 
 _id_51D0() {
   var_0 = spawnStruct();
-  var_0._id_3E6C = _getent("firingrange_start", "targetname");
+  var_0._id_3E6C = _getEnt("firingrange_start", "targetname");
   var_0._id_0C3A = _id_3C36();
   var_0._id_0BDC = _id_3C30();
   var_0._id_9C7C = [];
@@ -67,8 +67,9 @@ _id_3C32() {
 _id_3C2E() {
   var_0 = getEntArray("display_3dui_mesh", "targetname");
 
-  foreach(var_2 in var_0)
-  var_2 hide();
+  foreach(var_2 in var_0) {
+    var_2 hide();
+  }
 
   return var_0;
 }
@@ -102,8 +103,9 @@ _id_9DAD() {
 _id_726D(var_0) {
   level endon("shutdown_hologram");
 
-  while(level._id_3C3B._id_57CC == 1)
+  while(level._id_3C3B._id_57CC == 1) {
     wait 0.1;
+  }
 
   var_1 = self;
 
@@ -136,7 +138,7 @@ _id_72DD(var_0) {
 
 _id_72DE(var_0) {
   level endon("shutdown_hologram");
-  var_1 = _getent("firing_range_round_trigger_end", "targetname");
+  var_1 = _getEnt("firing_range_round_trigger_end", "targetname");
   var_1 waittill("trigger");
   level._id_3C3B._id_54F5 = 0;
   thread _id_8C35(var_0, self);
@@ -154,7 +156,7 @@ _id_9838(var_0) {
   var_2 _id_90AA();
   var_2 show();
   var_2 solid();
-  var_2 setcandamage(1);
+  var_2 setCanDamage(1);
   var_2 setdamagecallbackon(1);
   var_2.damagecallback = ::_id_6378;
   var_2.health = 9999;
@@ -203,10 +205,11 @@ _id_637F(var_0, var_1, var_2) {
       var_5 = int(common_scripts\utility::_id_7F03(var_3 * var_4, 0));
 
       if(var_5 != level._id_3C3B._id_7A64) {
-        if(var_5 > 100)
+        if(var_5 > 100) {
           var_5 = 100;
-        else if(var_5 < 0)
+        } else if(var_5 < 0) {
           var_5 = 0;
+        }
 
         level._id_3C3B._id_7A64 = var_5;
         var_0 setclientomnvar("ui_vlobby_round_distance", level._id_3C3B._id_7A64);
@@ -255,15 +258,16 @@ _id_63F6(var_0) {
     self waittill("toggled_up_released");
     var_1 = _distance2d(level._id_3C3B._id_6095.origin, var_0.origin);
 
-    if(var_1 <= 1)
-      var_0 moveto(var_0.origin, 0.05);
-    else {
+    if(var_1 <= 1) {
+      var_0 moveTo(var_0.origin, 0.05);
+    } else {
       var_2 = var_0.origin + anglesToForward(level._id_3C3B._id_0C38[0].angles) * level._id_3C3B._id_4839 * -1;
       var_1 = _distance2d(var_2, var_0.origin);
       var_3 = var_1 / level._id_3C3B._id_981D;
 
-      if(var_3 < 0.05)
+      if(var_3 < 0.05) {
         var_3 = 0.05;
+      }
 
       level._id_3C3B._id_1DE1 = var_3 + 0.05;
       thread _id_64AF(var_2, var_0, self);
@@ -298,15 +302,16 @@ _id_6384(var_0) {
     self waittill("toggled_down_released");
     var_1 = _distance2d(level._id_3C3B._id_621F, var_0.origin);
 
-    if(var_1 <= 1)
-      var_0 moveto(var_0.origin, 0.05);
-    else {
+    if(var_1 <= 1) {
+      var_0 moveTo(var_0.origin, 0.05);
+    } else {
       var_2 = var_0.origin + anglesToForward(level._id_3C3B._id_0C38[0].angles) * level._id_3C3B._id_4839;
       var_1 = _distance2d(var_2, var_0.origin);
       var_3 = var_1 / level._id_3C3B._id_981D;
 
-      if(var_3 < 0.05)
+      if(var_3 < 0.05) {
         var_3 = 0.05;
+      }
 
       level._id_3C3B._id_1DE1 = var_3 + 0.05;
       thread _id_64AF(var_2, var_0, self);
@@ -326,10 +331,11 @@ _id_64AF(var_0, var_1, var_2) {
   } else {
     var_4 = var_3 / level._id_3C3B._id_981D;
 
-    if(var_4 < 0.05)
+    if(var_4 < 0.05) {
       var_4 = 0.05;
+    }
 
-    var_1 moveto(var_0, var_4);
+    var_1 moveTo(var_0, var_4);
   }
 }
 
@@ -346,7 +352,7 @@ _id_64CF(var_0, var_1) {
         continue;
       }
 
-      var_0 moveto(var_0.origin, 0.05);
+      var_0 moveTo(var_0.origin, 0.05);
       level._id_3C3B._id_76AE = 0;
       level._id_3C3B._id_76AF = 0;
     }
@@ -369,8 +375,9 @@ _id_6377(var_0) {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(level._id_3C3B._id_7F1F == 7)
+    if(level._id_3C3B._id_7F1F == 7) {
       self.health = self.maxhealth;
+    }
 
     var_11 = self gettagorigin("tag_chest");
     var_0 playlocalsound("mp_hit_default");
@@ -378,21 +385,24 @@ _id_6377(var_0) {
     var_1 = common_scripts\utility::_id_7F03(_float(var_1) * var_12, 0);
     var_1 = int(var_1);
 
-    if(var_1 > 999)
+    if(var_1 > 999) {
       var_1 = 999;
+    }
 
-    if(var_1 < 0)
+    if(var_1 < 0) {
       var_1 = 0;
+    }
 
     level._id_3C3B._id_29BB = var_1;
     var_13 = level._id_3C3B._id_8B3C + 1;
 
-    if(var_13 > 9999)
+    if(var_13 > 9999) {
       level._id_3C3B._id_8B3C = 0;
-    else if(var_13 < 0)
+    } else if(var_13 < 0) {
       level._id_3C3B._id_8B3C = 0;
-    else
+    } else {
       level._id_3C3B._id_8B3C = var_13;
+    }
 
     level._id_3C3B._id_8BB1 = 1;
   }
@@ -402,24 +412,28 @@ _id_6378(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   if(!isDefined(self)) {
     return;
   }
-  if(level._id_3C3B._id_7F1F == 7)
+  if(level._id_3C3B._id_7F1F == 7) {
     self.health = self.maxhealth;
+  }
 
   var_12 = self gettagorigin("tag_chest");
   var_1 playlocalsound("mp_hit_default");
   var_13 = 1;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_13 = _id_4591(var_5, var_11, var_1);
+  }
 
   var_2 = common_scripts\utility::_id_7F03(_float(var_2) * var_13, 0);
   var_2 = int(var_2);
 
-  if(var_2 > 999)
+  if(var_2 > 999) {
     var_2 = 999;
+  }
 
-  if(var_2 < 0)
+  if(var_2 < 0) {
     var_2 = 0;
+  }
 
   level._id_3C3B._id_29BB = var_2;
 
@@ -429,12 +443,13 @@ _id_6378(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
         var_0._id_2995 = 1;
         var_14 = level._id_3C3B._id_8B3C + 1;
 
-        if(var_14 > 9999)
+        if(var_14 > 9999) {
           level._id_3C3B._id_8B3C = 0;
-        else if(var_14 < 0)
+        } else if(var_14 < 0) {
           level._id_3C3B._id_8B3C = 0;
-        else
+        } else {
           level._id_3C3B._id_8B3C = var_14;
+        }
 
         level._id_3C3B._id_8BB1 = 1;
       }
@@ -449,10 +464,11 @@ _id_268B() {
   level endon("shutdown_hologram");
   self endon("disconnect");
 
-  if(!isDefined(self._id_29E2))
+  if(!isDefined(self._id_29E2)) {
     self._id_29E2 = 1;
-  else
+  } else {
     self._id_29E2++;
+  }
 }
 
 _id_4591(var_0, var_1, var_2) {
@@ -463,16 +479,17 @@ _id_4591(var_0, var_1, var_2) {
 
   if(var_0 != "specialty_null" && var_0 != "none" && var_0 != "combatknife_mp") {
     if(maps\mp\gametypes\_class::isvalidprimary(var_6) || maps\mp\gametypes\_class::isvalidsecondary(var_6, 0)) {
-      if(var_1 == "tag_head")
+      if(var_1 == "tag_head") {
         var_3 = "head";
-      else if(var_1 == "tag_chest")
+      } else if(var_1 == "tag_chest") {
         var_3 = "torso_upper";
-      else if(var_1 == "tag_arms")
+      } else if(var_1 == "tag_arms") {
         var_3 = "right_arm_upper";
-      else if(var_1 == "tag_legs")
+      } else if(var_1 == "tag_legs") {
         var_3 = "torso_lower";
-      else
+      } else {
         var_3 = "none";
+      }
 
       var_4 = var_2 _meth_850B(var_6 + "_mp", var_3);
       return var_4;
@@ -495,8 +512,9 @@ _id_A6DE() {
   var_4 = self getcurrentweaponclipammo("left");
   var_5 = var_1 - var_3 + (var_2 - var_4);
 
-  if(var_5 > 0)
+  if(var_5 > 0) {
     var_0 = var_5;
+  }
 
   return var_0;
 }
@@ -534,17 +552,19 @@ _id_63E2(var_0) {
       if(isDefined(var_0._id_29E2)) {
         var_3 = var_0._id_29E2;
 
-        if(var_1 < var_0._id_29E2)
+        if(var_1 < var_0._id_29E2) {
           var_3 = var_1;
+        }
 
         var_4 = level._id_3C3B._id_8B3C + var_3;
 
-        if(var_4 > 9999)
+        if(var_4 > 9999) {
           level._id_3C3B._id_8B3C = 0;
-        else if(var_4 < 0)
+        } else if(var_4 < 0) {
           level._id_3C3B._id_8B3C = 0;
-        else
+        } else {
           level._id_3C3B._id_8B3C = var_4;
+        }
 
         var_0._id_29E2 = 0;
       }
@@ -599,10 +619,11 @@ _id_639C(var_0) {
       var_1 = common_scripts\utility::_id_7F03(var_1, 0);
 
       if(var_1 != level._id_3C3B._id_6F48) {
-        if(var_1 > 999)
+        if(var_1 > 999) {
           var_1 = 999;
-        else if(var_1 < 0)
+        } else if(var_1 < 0) {
           var_1 = 0;
+        }
 
         level._id_3C3B._id_6F48 = int(var_1);
         level._id_3C3B._id_8BB1 = 1;
@@ -618,8 +639,9 @@ _id_3004(var_0, var_1) {
   level endon("shutdown_hologram");
   var_2 = _id_3B8B(level._id_3C3B._id_0BD8, var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 show();
+  }
 
   for(;;) {
     if(level._id_3C3B._id_8BB1 == 1) {
@@ -636,8 +658,9 @@ _id_3004(var_0, var_1) {
 
 _id_3B8B(var_0, var_1) {
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.setmovespeedscale) && var_3.setmovespeedscale == var_1)
+    if(isDefined(var_3.setmovespeedscale) && var_3.setmovespeedscale == var_1) {
       return var_3;
+    }
   }
 }
 
@@ -662,9 +685,9 @@ _id_9301(var_0) {
     }
   }
 
-  if(level._id_010B)
+  if(level._id_010B) {
     _id_8C14(var_0);
-  else {
+  } else {
     var_7 = _id_8C26(var_0);
     wait 0.1;
     _id_3D67(level._id_3C3B._id_0BDC[var_0]);
@@ -708,10 +731,11 @@ _id_8C27(var_0) {
         var_4 = spawn("script_model", var_2.origin);
         level._id_3C3B._id_9C7D[level._id_3C3B._id_9C7D.size] = var_4;
 
-        if(isDefined(var_2.angles))
+        if(isDefined(var_2.angles)) {
           var_4.angles = var_2.angles;
-        else
+        } else {
           var_4.angles = (0, 0, 0);
+        }
 
         var_4 setModel(var_3);
         var_4 notsolid();
@@ -731,10 +755,11 @@ _id_8C25(var_0) {
         var_4 = spawn("script_model", var_2.origin);
         level._id_3C3B._id_9C7C[level._id_3C3B._id_9C7C.size] = var_4;
 
-        if(isDefined(var_2.angles))
+        if(isDefined(var_2.angles)) {
           var_4.angles = var_2.angles;
-        else
+        } else {
           var_4.angles = (0, 0, 0);
+        }
 
         var_4 setModel(var_3);
         var_4 notsolid();
@@ -794,8 +819,9 @@ _id_2D55() {
     level._id_3C3B._id_9C7D = common_scripts\utility::_id_0F97(level._id_3C3B._id_9C7D);
 
     foreach(var_1 in level._id_3C3B._id_9C7D) {
-      if(isDefined(var_1) && !_isremovedentity(var_1))
+      if(isDefined(var_1) && !_isremovedentity(var_1)) {
         var_1 delete();
+      }
     }
   }
 
@@ -813,8 +839,9 @@ _id_7D00() {
     _id_3D67(var_0);
 
     foreach(var_2 in var_0) {
-      if(isDefined(var_2) && !_isremovedentity(var_2))
+      if(isDefined(var_2) && !_isremovedentity(var_2)) {
         var_2 delete();
+      }
     }
   }
 }
@@ -824,8 +851,9 @@ _id_7CF7() {
     level._id_3C3B.setstablemissile = common_scripts\utility::_id_0F97(level._id_3C3B.setstablemissile);
 
     foreach(var_1 in level._id_3C3B.setstablemissile) {
-      if(isDefined(var_1) && !_isremovedentity(var_1))
+      if(isDefined(var_1) && !_isremovedentity(var_1)) {
         var_1 delete();
+      }
     }
   }
 }
@@ -835,7 +863,7 @@ _id_64A8() {
   var_0 = _randomfloatrange(0.0, 1);
   wait(var_0);
   self setModel("rec_holo_emitter_floor_on");
-  self moveto(self._id_A08D, 0.25, 0.1, 0.1);
+  self moveTo(self._id_A08D, 0.25, 0.1, 0.1);
 }
 
 _id_64A7() {
@@ -843,7 +871,7 @@ _id_64A7() {
   self setModel("rec_holo_emitter_floor_off");
   var_0 = _randomfloatrange(0.0, 1);
   wait(var_0);
-  self moveto(self._id_6A23, 0.25, 0.1, 0.1);
+  self moveTo(self._id_6A23, 0.25, 0.1, 0.1);
 }
 
 _id_8C35(var_0, var_1) {
@@ -863,8 +891,9 @@ _id_8C35(var_0, var_1) {
     var_3 notsolid();
   }
 
-  if(level._id_010B)
+  if(level._id_010B) {
     thread maps\mp\_utility::_id_5C99("lt_shootingrange", 0.25, 6000);
+  }
 
   thread maps\mp\_utility::_id_5C98("lt_shootingrange_bounce", 0.25, 3000);
   thread maps\mp\_utility::_id_5C98("lt_hologram_blue", 0.25, 0.01);
@@ -891,8 +920,9 @@ _id_8C35(var_0, var_1) {
     }
   }
 
-  foreach(var_14 in level._id_3C3B._id_0BD8)
-  var_14 hide();
+  foreach(var_14 in level._id_3C3B._id_0BD8) {
+    var_14 hide();
+  }
 
   level._id_3C3B._id_621E = undefined;
   level._id_3C3B._id_6095 = undefined;
@@ -932,13 +962,14 @@ stopignoringspotlight() {
     for(;;) {
       waitframe();
 
-      if(self._id_50CA == 1 || getdvarint("2454", 0) == 1)
+      if(self._id_50CA == 1 || getdvarint("2454", 0) == 1) {
         continue;
-      else {
+      } else {
         level._id_3C3B._id_8F41 = common_scripts\utility::_id_0F97(level._id_3C3B._id_8F41);
 
-        foreach(var_1 in level._id_3C3B._id_8F41)
-        var_1 scalevolume(0, 0.5);
+        foreach(var_1 in level._id_3C3B._id_8F41) {
+          var_1 scalevolume(0, 0.5);
+        }
       }
     }
   }
@@ -952,8 +983,9 @@ _id_37B1(var_0) {
 _id_A673(var_0, var_1) {
   var_1 endon("enter_lobby");
 
-  if(!level._id_A220)
+  if(!level._id_A220) {
     wait(var_0);
+  }
 
   var_1 setclientomnvar("ui_vlobby_round_state", 0);
   var_1 setclientomnvar("ui_vlobby_round_timer", 0);
@@ -981,24 +1013,28 @@ _id_A673(var_0, var_1) {
   level._id_3C3B._id_8F41 = [];
   var_1 thread stopignoringspotlight();
 
-  if(maps\mp\gametypes\_class::_id_5826(maps\mp\_utility::_id_44CD(var_1._id_5DF5), 0) && !maps\mp\gametypes\_class::_id_5682(var_1._id_5DF5.guid))
+  if(maps\mp\gametypes\_class::_id_5826(maps\mp\_utility::_id_44CD(var_1._id_5DF5), 0) && !maps\mp\gametypes\_class::_id_5682(var_1._id_5DF5.guid)) {
     var_1 thread _id_6311(maps\mp\_utility::_id_44CD(var_1._id_5DF5), 0);
+  }
 
-  if(maps\mp\gametypes\_class::_id_5826(maps\mp\_utility::_id_44CD(var_1._id_5DF8), 0) && !maps\mp\gametypes\_class::_id_5682(var_1._id_5DF8.guid))
+  if(maps\mp\gametypes\_class::_id_5826(maps\mp\_utility::_id_44CD(var_1._id_5DF8), 0) && !maps\mp\gametypes\_class::_id_5682(var_1._id_5DF8.guid)) {
     var_1 thread _id_6311(maps\mp\_utility::_id_44CD(var_1._id_5DF8), 1);
+  }
 
   if(var_1.primaryweapon != "specialty_null" && var_1.primaryweapon != "none" && var_1.primaryweapon != "combatknife_mp" && !issubstr(var_1.primaryweapon, "em1") && !issubstr(var_1.primaryweapon, "epm3") && !issubstr(var_1.primaryweapon, "dlcgun1_mp") && !issubstr(var_1.primaryweapon, "dlcgun1loot")) {
     var_1 thread _id_635E(var_1.primaryweapon);
 
-    if(issubstr(var_1.primaryweapon, "_gl"))
+    if(issubstr(var_1.primaryweapon, "_gl")) {
       var_1 thread _id_635E("alt_" + var_1.primaryweapon);
+    }
   }
 
   if(var_1.botclearscriptenemy != "specialty_null" && var_1.botclearscriptenemy != "none" && var_1.botclearscriptenemy != "combatknife_mp" && !issubstr(var_1.botclearscriptenemy, "em1") && !issubstr(var_1.botclearscriptenemy, "epm3") && !issubstr(var_1.primaryweapon, "dlcgun1_mp") && !issubstr(var_1.primaryweapon, "dlcgun1loot")) {
     var_1 thread _id_635E(var_1.botclearscriptenemy);
 
-    if(issubstr(var_1.botclearscriptenemy, "_gl"))
+    if(issubstr(var_1.botclearscriptenemy, "_gl")) {
       var_1 thread _id_635E("alt_" + var_1.botclearscriptenemy);
+    }
   }
 }
 
@@ -1007,8 +1043,9 @@ _id_47A5() {
   wait 2;
   var_0 = getdvarint("2454", 0);
 
-  if(var_0 == 1 && self._id_50CA == 1)
+  if(var_0 == 1 && self._id_50CA == 1) {
     self allowfire(1);
+  }
 }
 
 _id_089E(var_0) {
@@ -1020,8 +1057,9 @@ _id_089E(var_0) {
   thread _id_639C(var_1);
 
   foreach(var_3 in level._id_3C3B._id_0C3A[var_0]) {
-    foreach(var_5 in var_3)
-    var_5 thread _id_6377(var_1);
+    foreach(var_5 in var_3) {
+      var_5 thread _id_6377(var_1);
+    }
   }
 
   thread _id_3004(var_1, var_0);
@@ -1141,10 +1179,11 @@ _id_9000(var_0, var_1, var_2) {
 
 playsoundonmovingent(var_0, var_1) {
   for(var_2 = 0; var_2 < level._id_2683.size; var_2++) {
-    if(var_1 == "allies")
+    if(var_1 == "allies") {
       var_3 = 0;
-    else
+    } else {
       var_3 = 6;
+    }
 
     var_4 = _tablelookupbyrow("mp/agentcostumetable.csv", var_2 + var_3, var_0);
     self._id_267E[var_2] = int(tablelookup("mp/costumeIdTable.csv", 7, var_4, 4));
@@ -1161,39 +1200,45 @@ _id_3765() {
 }
 
 _id_3764(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_11 = length(self.origin - var_1.origin);
-  else
+  } else {
     var_11 = 0;
+  }
 
   _iprintln(self.name + " " + var_8 + " has been hit for " + var_2 + " at " + var_11);
   return maps\mp\agents\_agents::_id_0A40(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
 _id_6E9B(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = (0, 0, 0);
+  }
 
   var_5 = _spawnfx(var_0, var_1, anglesToForward(var_2), anglestoup(var_2));
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     setfxkillondelete(var_5, var_4);
+  }
 
   _triggerfx(var_5);
 
   if(isDefined(var_3)) {
     wait(var_3);
 
-    if(isDefined(var_5) && !_isremovedentity(var_5))
+    if(isDefined(var_5) && !_isremovedentity(var_5)) {
       var_5 delete();
+    }
   } else {
     level waittill("shutdown_hologram");
 
-    if(isDefined(var_5) && !_isremovedentity(var_5))
+    if(isDefined(var_5) && !_isremovedentity(var_5)) {
       var_5 delete();
+    }
   }
 }
 
@@ -1239,20 +1284,22 @@ _id_64D0() {
       var_2 = distance(self._id_28F5.origin, self.origin);
       var_3 = var_2 / level._id_3C3B._id_7F0E;
 
-      if(var_3 < 0.5)
+      if(var_3 < 0.5) {
         var_3 = 0.5;
+      }
 
-      if(isDefined(self._id_28F5._id_0165) && self._id_28F5._id_0165 == "jump")
-        self moveto(self._id_28F5.origin, var_3 * 0.5, 0, 0.1);
-      else if(isDefined(self._id_5B23._id_0165) && self._id_5B23._id_0165 == "jump")
-        self moveto(self._id_28F5.origin, var_3 * 0.5, 0.1, 0);
-      else
-        self moveto(self._id_28F5.origin, var_3);
+      if(isDefined(self._id_28F5._id_0165) && self._id_28F5._id_0165 == "jump") {
+        self moveTo(self._id_28F5.origin, var_3 * 0.5, 0, 0.1);
+      } else if(isDefined(self._id_5B23._id_0165) && self._id_5B23._id_0165 == "jump") {
+        self moveTo(self._id_28F5.origin, var_3 * 0.5, 0.1, 0);
+      } else {
+        self moveTo(self._id_28F5.origin, var_3);
+      }
 
       self waittill("movedone");
 
       if(isDefined(self._id_28F5.target)) {
-        var_4 = _getent(self._id_28F5.target, "targetname");
+        var_4 = _getEnt(self._id_28F5.target, "targetname");
         self._id_5B23 = self._id_28F5;
         self._id_28F5 = var_4;
       } else
@@ -1270,8 +1317,9 @@ _id_7574() {
   var_2 = self._id_28F5.origin;
   var_3 = self._id_5B23.origin;
 
-  if(self._id_28F5 == self._id_5B23)
+  if(self._id_28F5 == self._id_5B23) {
     var_3 = self._id_6C4F;
+  }
 
   wait(var_0);
 
@@ -1279,12 +1327,12 @@ _id_7574() {
     if(isDefined(self)) {
       var_4 = distance(var_3, var_2);
       var_5 = var_4 / level._id_3C3B._id_7F0E;
-      self moveto(var_3, var_5);
+      self moveTo(var_3, var_5);
       self waittill("movedone");
       wait(var_1);
       var_4 = distance(var_3, var_2);
       var_5 = var_4 / level._id_3C3B._id_7F0E;
-      self moveto(var_2, var_5);
+      self moveTo(var_2, var_5);
       self waittill("movedone");
       wait(var_0);
     }
@@ -1300,14 +1348,15 @@ _id_649E() {
   if(isDefined(self._id_5B23._id_0165) && self._id_5B23._id_0165 == "jump") {
     var_0 = self._id_5B23;
     var_1 = var_0.origin;
-    self._id_5B23 = _getent(var_0.targetname, "target");
+    self._id_5B23 = _getEnt(var_0.targetname, "target");
   }
 
   var_2 = self._id_28F5.origin;
   var_3 = self._id_5B23.origin;
 
-  if(self._id_28F5 == self._id_5B23)
+  if(self._id_28F5 == self._id_5B23) {
     var_3 = self._id_6C4F;
+  }
 
   for(;;) {
     if(isDefined(self)) {
@@ -1315,29 +1364,29 @@ _id_649E() {
         wait 2;
         var_4 = distance(var_1, var_2);
         var_5 = var_4 / level._id_3C3B._id_7F0E;
-        self moveto(var_1, var_5 * 0.5, 0, 0.1);
+        self moveTo(var_1, var_5 * 0.5, 0, 0.1);
         self waittill("movedone");
         var_4 = distance(var_1, var_3);
         var_5 = var_4 / level._id_3C3B._id_7F0E;
-        self moveto(var_3, var_5 * 0.5, 0.1, 0);
+        self moveTo(var_3, var_5 * 0.5, 0.1, 0);
         self waittill("movedone");
         wait 2;
         var_4 = distance(var_1, var_3);
         var_5 = var_4 / level._id_3C3B._id_7F0E;
-        self moveto(var_1, var_5 * 0.5, 0, 0.1);
+        self moveTo(var_1, var_5 * 0.5, 0, 0.1);
         self waittill("movedone");
         var_4 = distance(var_1, var_2);
         var_5 = var_4 / level._id_3C3B._id_7F0E;
-        self moveto(var_2, var_5 * 0.5, 0.1, 0);
+        self moveTo(var_2, var_5 * 0.5, 0.1, 0);
         self waittill("movedone");
       } else {
         var_4 = distance(var_3, var_2);
         var_5 = var_4 / level._id_3C3B._id_7F0E;
-        self moveto(var_3, var_5);
+        self moveTo(var_3, var_5);
         self waittill("movedone");
         var_4 = distance(var_2, var_3);
         var_5 = var_4 / level._id_3C3B._id_7F0E;
-        self moveto(var_2, var_5);
+        self moveTo(var_2, var_5);
         self waittill("movedone");
       }
     }
@@ -1353,8 +1402,9 @@ laseroff() {
     for(var_1 = 0; var_1 < self._id_4DDE.size; var_1++) {
       self._id_4DDE[var_1].time = self._id_4DDE[var_1].time - 1;
 
-      if(self._id_4DDE[var_1].time > 0)
+      if(self._id_4DDE[var_1].time > 0) {
         var_0[var_0.size] = self._id_4DDE[var_1];
+      }
     }
 
     self._id_4DDE = var_0;
@@ -1373,7 +1423,7 @@ _id_980D(var_0) {
   self.maxhealth = 9999;
   self.health = self.maxhealth;
   self._id_3A09 = 100;
-  self setcandamage(1);
+  self setCanDamage(1);
   self._id_0B6E show();
   self._id_0B6E solid();
   self._id_0B6E enableaimassist();
@@ -1405,10 +1455,11 @@ _id_980D(var_0) {
 
       if(isDefined(var_2)) {
         if(isDefined(var_8)) {
-          if(var_8 == "tag_head")
+          if(var_8 == "tag_head") {
             var_2 _id_04C7::_id_A102("killshot_headshot");
-          else if(var_8 == "tag_chest")
+          } else if(var_8 == "tag_chest") {
             var_2 _id_04C7::_id_A102("mp_hit_kill");
+          }
         }
       }
 
@@ -1431,8 +1482,9 @@ _id_9803() {
   level endon("shutdown_hologram");
   self._id_4DDE = [];
 
-  while(isDefined(self) && self.health > 0)
+  while(isDefined(self) && self.health > 0) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+  }
 }
 
 _id_9833(var_0) {
@@ -1476,8 +1528,9 @@ _id_3C30() {
     var_3 notsolid();
     var_4 = undefined;
 
-    if(isDefined(var_3.setmovespeedscale))
+    if(isDefined(var_3.setmovespeedscale)) {
       var_4 = int(var_3.setmovespeedscale);
+    }
 
     if(isDefined(var_4)) {
       if(!_isarray(var_1[var_4])) {
@@ -1500,8 +1553,9 @@ _id_3C31() {
   foreach(var_3 in var_0) {
     var_4 = undefined;
 
-    if(isDefined(var_3.setmovespeedscale))
+    if(isDefined(var_3.setmovespeedscale)) {
       var_4 = int(var_3.setmovespeedscale);
+    }
 
     if(isDefined(var_4)) {
       if(!_isarray(var_1[var_4])) {
@@ -1525,14 +1579,14 @@ _id_3C36() {
     var_3._id_0BC0 = 0;
     var_3.pers["team"] = "axis";
     var_3.team = "axis";
-    var_3._id_6C3E = _getent(var_3.target, "targetname");
-    var_3._id_0B6E = _getent(var_3._id_6C3E.target, "targetname");
+    var_3._id_6C3E = _getEnt(var_3.target, "targetname");
+    var_3._id_0B6E = _getEnt(var_3._id_6C3E.target, "targetname");
     var_3._id_0B6E linktosynchronizedparent(var_3);
     var_3._id_0B6E.pers["team"] = "axis";
     var_3._id_0B6E.team = "axis";
 
     if(isDefined(var_3._id_0B6E.target)) {
-      var_3._id_A580 = _getent(var_3._id_0B6E.target, "targetname");
+      var_3._id_A580 = _getEnt(var_3._id_0B6E.target, "targetname");
       var_3._id_A580 linktosynchronizedparent(var_3);
     } else
       var_3._id_A580 = var_3;
@@ -1595,16 +1649,18 @@ _id_9802() {
 }
 
 _id_9819() {
-  self setcandamage(0);
+  self setCanDamage(0);
   self hide();
   self notsolid();
   self._id_0BC0 = 0;
 
-  if(isDefined(self._id_0B6E))
+  if(isDefined(self._id_0B6E)) {
     self._id_0B6E disableaimassist();
+  }
 
-  if(isDefined(self._id_A580))
+  if(isDefined(self._id_A580)) {
     self._id_A580 hide();
+  }
 }
 
 _id_635E(var_0) {
@@ -1627,9 +1683,9 @@ _id_4864(var_0) {
     foreach(var_2 in level._id_486C) {
       if(isDefined(var_2) && !_isremovedentity(var_2)) {
         if(!isDefined(self) || !isDefined(var_2._id_0117) || _isremovedentity(var_2._id_0117)) {
-          if(!isDefined(var_2._id_A9E0))
+          if(!isDefined(var_2._id_A9E0)) {
             continue;
-          else {
+          } else {
             var_2 notify("death");
             var_2 thread _id_2CC3();
           }
@@ -1638,9 +1694,9 @@ _id_4864(var_0) {
         }
 
         if(var_2._id_0117 == self) {
-          if(!isDefined(var_2._id_A9E0))
+          if(!isDefined(var_2._id_A9E0)) {
             continue;
-          else {
+          } else {
             var_2 notify("death");
             var_2 thread _id_2CC3();
           }
@@ -1653,8 +1709,9 @@ _id_4864(var_0) {
 _id_2CC3() {
   waitframe();
 
-  if(isDefined(self) && !_isremovedentity(self))
+  if(isDefined(self) && !_isremovedentity(self)) {
     self delete();
+  }
 }
 
 _id_6311(var_0, var_1) {

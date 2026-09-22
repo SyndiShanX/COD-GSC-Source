@@ -66,8 +66,9 @@ _id_4F48() {
 }
 
 _id_6BA7() {
-  if(isDefined(level._id_A592))
+  if(isDefined(level._id_A592)) {
     self[[level._id_A592]]();
+  }
 }
 
 hubclass() {
@@ -90,18 +91,19 @@ _id_5300() {
 _id_6B5C(var_0, var_1, var_2) {
   level _id_04D2::_id_47BD(var_1.pers["team"], 1, 0);
 
-  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level._id_6C63[var_1.team]])
+  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level._id_6C63[var_1.team]]) {
     var_1._id_3B4B = 1;
+  }
 }
 
 _id_6BB6() {
   level._id_3B5C = "none";
 
-  if(game["status"] == "overtime")
+  if(game["status"] == "overtime") {
     var_0 = "forfeit";
-  else if(game["teamScores"]["allies"] == game["teamScores"]["axis"])
+  } else if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
     var_0 = "overtime";
-  else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+  } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
     level._id_3B5C = "axis";
     var_0 = "axis";
   } else {
@@ -109,8 +111,9 @@ _id_6BB6() {
     var_0 = "allies";
   }
 
-  if(maps\mp\_utility::_id_761E())
+  if(maps\mp\_utility::_id_761E()) {
     var_0 = "none";
+  }
 
   thread maps\mp\gametypes\_gamelogic::_id_36B9(var_0, game["end_reason"]["time_limit_reached"]);
 }
@@ -118,8 +121,9 @@ _id_6BB6() {
 _id_6BAF() {
   _setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -147,22 +151,27 @@ _id_6BAF() {
 }
 
 _id_4696() {
-  if(isDefined(level._id_A7A2))
+  if(isDefined(level._id_A7A2)) {
     [[level._id_A7A2]]("mp_hub_spawn_5_tr");
+  }
 
-  while(!isDefined(level._id_5FEB))
+  while(!isDefined(level._id_5FEB)) {
     waitframe();
+  }
 
   var_0 = self;
 
-  if(isDefined(var_0._id_572A) && var_0._id_572A && isDefined(var_0._id_6B25))
+  if(isDefined(var_0._id_572A) && var_0._id_572A && isDefined(var_0._id_6B25)) {
     return [[var_0._id_6B25]](var_0);
+  }
 
-  if(isDefined(level._id_13AC))
+  if(isDefined(level._id_13AC)) {
     return [[level._id_13AC]](var_0);
+  }
 
-  if(getdvarint("986", 0) == 1 && isDefined(level._id_A5A0))
+  if(getdvarint("986", 0) == 1 && isDefined(level._id_A5A0)) {
     return [[level._id_A5A0]](var_0);
+  }
 
   var_1 = _id_050D::_id_46A0();
   var_2 = var_0 getentitynumber();

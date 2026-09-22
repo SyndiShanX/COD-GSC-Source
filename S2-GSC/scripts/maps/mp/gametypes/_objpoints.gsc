@@ -8,10 +8,11 @@ init() {
   level._id_6995 = [];
   level._id_6996 = [];
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     level._id_6998 = 15;
-  else
+  } else {
     level._id_6998 = 8;
+  }
 
   level._id_6994 = 0.7;
   level._id_6997 = 1.0;
@@ -20,21 +21,25 @@ init() {
 _id_282F(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = _id_45D6(var_0);
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     _id_2D3E(var_6);
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "objpoint_default";
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1.0;
+  }
 
-  if(var_2 == "all")
+  if(var_2 == "all") {
     var_6 = newhudelem();
-  else if(var_2 == "broadcaster")
+  } else if(var_2 == "broadcaster") {
     var_6 = _newteamhudelem("spectator");
-  else
+  } else {
     var_6 = _newteamhudelem(var_2);
+  }
 
   var_6.name = var_0;
   var_6.x = var_1[0];
@@ -46,10 +51,11 @@ _id_282F(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 setshader(var_3, level._id_6998, level._id_6998);
   var_6 setwaypoint(1, 0);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_6.alpha = var_4;
-  else
+  } else {
     var_6.alpha = level._id_6994;
+  }
 
   var_6._id_15F3 = var_6.alpha;
   var_6._id_00D4 = level._id_6995.size;
@@ -77,14 +83,17 @@ _id_2D3E(var_0) {
 }
 
 _id_A145(var_0) {
-  if(self.x != var_0[0])
+  if(self.x != var_0[0]) {
     self.x = var_0[0];
+  }
 
-  if(self.y != var_0[1])
+  if(self.y != var_0[1]) {
     self.y = var_0[1];
+  }
 
-  if(self._id_01D9 != var_0[2])
+  if(self._id_01D9 != var_0[2]) {
     self._id_01D9 = var_0[2];
+  }
 }
 
 _id_86E6(var_0, var_1) {
@@ -93,17 +102,19 @@ _id_86E6(var_0, var_1) {
 }
 
 _id_45D6(var_0) {
-  if(isDefined(level._id_6996[var_0]))
+  if(isDefined(level._id_6996[var_0])) {
     return level._id_6996[var_0];
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_45D5(var_0) {
-  if(isDefined(level._id_6995[var_0]))
+  if(isDefined(level._id_6995[var_0])) {
     return level._id_6996[level._id_6995[var_0]];
-  else
+  } else {
     return undefined;
+  }
 }
 
 _id_92CF() {

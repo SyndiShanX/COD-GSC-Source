@@ -30,24 +30,28 @@ _id_51B0() {
     }
   }
 
-  foreach(var_5 in self._id_9DC2)
-  var_5 thread _id_11BA(self);
+  foreach(var_5 in self._id_9DC2) {
+    var_5 thread _id_11BA(self);
+  }
 
   self waittill("debris_purchased", var_7);
 
-  if(isDefined(self.getnegotiationnextnode))
+  if(isDefined(self.getnegotiationnextnode)) {
     common_scripts\utility::flag_set(self.getnegotiationnextnode, var_7);
+  }
 
   foreach(var_9 in self._id_17E7) {
-    if(var_9.classname != "script_model")
+    if(var_9.classname != "script_model") {
       var_9 connectpaths();
+    }
 
     var_9 notsolid();
     var_9 delete();
   }
 
-  foreach(var_9 in self._id_9DC2)
-  var_9 common_scripts\utility::_id_9D9F();
+  foreach(var_9 in self._id_9DC2) {
+    var_9 common_scripts\utility::_id_9D9F();
+  }
 }
 
 _id_11BA(var_0) {

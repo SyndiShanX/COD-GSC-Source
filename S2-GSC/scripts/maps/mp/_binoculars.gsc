@@ -22,8 +22,9 @@ _id_93AD() {
     if(issubstr(self getcurrentweapon(), "binoculars") && self playerads() > 0.99) {
       var_0 = 1;
 
-      if(self._id_93AB._id_5E6C.size > 0)
+      if(self._id_93AB._id_5E6C.size > 0) {
         _id_7C96();
+      }
 
       self._id_93AB._id_5E6C = _id_0F95(common_scripts\utility::_id_0FA0(self._id_93AB._id_5E6C));
 
@@ -34,16 +35,17 @@ _id_93AD() {
         }
       }
 
-      if(isDefined(self._id_93AB._id_5E72))
+      if(isDefined(self._id_93AB._id_5E72)) {
         self._id_93AB._id_5E74 = self._id_93AB._id_5E74 + 0.05;
-      else {
+      } else {
         self._id_93AB._id_5E74 = 0;
 
         if(self._id_93AB._id_5E6C.size < 1) {
           self._id_93AB._id_5E72 = _id_40CB();
 
-          if(isDefined(self._id_93AB._id_5E72))
+          if(isDefined(self._id_93AB._id_5E72)) {
             thread _id_5E71();
+          }
         }
       }
 
@@ -54,9 +56,9 @@ _id_93AD() {
         self._id_93AB._id_5E72 = undefined;
       }
 
-      if(self._id_93AB._id_5E6C.size > 0)
+      if(self._id_93AB._id_5E6C.size > 0) {
         self weaponlockfinalize(self._id_93AB._id_5E6C[0]);
-      else {
+      } else {
         self weaponlockfree();
         self notify("stop_javelin_locked_feedback");
       }
@@ -67,8 +69,9 @@ _id_93AD() {
       self notify("stop_javelin_locked_feedback");
       self._id_93AB._id_5E6C = [];
 
-      if(isDefined(self._id_93AB._id_5E72))
+      if(isDefined(self._id_93AB._id_5E72)) {
         self._id_93AB._id_5E72 = undefined;
+      }
 
       self._id_93AB._id_5E74 = 0;
     }
@@ -86,8 +89,9 @@ _id_93AC() {
   for(;;) {
     self waittill("missile_fire", var_0, var_1);
 
-    if(issubstr(var_1, "binoculars"))
+    if(issubstr(var_1, "binoculars")) {
       thread _id_93A6(self, var_0, var_1);
+    }
   }
 }
 
@@ -114,12 +118,13 @@ _id_93A6(var_0, var_1, var_2) {
     if(var_0._id_93AB._id_5E6C.size > 0) {
       var_10 = undefined;
 
-      if(var_6 < var_0._id_93AB._id_5E6C.size)
+      if(var_6 < var_0._id_93AB._id_5E6C.size) {
         var_10 = var_0._id_93AB._id_5E6C[var_6];
-      else
+      } else {
         var_10 = var_0._id_93AB._id_5E6C[randomint(var_0._id_93AB._id_5E6C.size)];
+      }
 
-      var_9 missile_settargetent(var_10, _id_93A9(var_10));
+      var_9 missile_settargetEnt(var_10, _id_93A9(var_10));
       var_9._id_5E70 = var_10;
     }
 
@@ -155,8 +160,9 @@ _id_49F2(var_0, var_1) {
 
 _id_0F12(var_0, var_1) {
   foreach(var_3 in var_0) {
-    if(isDefined(var_3._id_5E70) && var_3._id_5E70 == var_1)
+    if(isDefined(var_3._id_5E70) && var_3._id_5E70 == var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -195,8 +201,9 @@ _id_40CB() {
   var_11 = common_scripts\utility::_id_0F73(var_1, var_6);
   var_11 = common_scripts\utility::_id_0F73(var_11, var_10);
 
-  if(isDefined(level._id_93A8))
+  if(isDefined(level._id_93A8)) {
     var_11 = common_scripts\utility::_id_0F73(var_11, [[level._id_93A8]](self));
+  }
 
   var_12 = self getEye();
   var_13 = anglesToForward(self getplayerangles());
@@ -215,8 +222,9 @@ _id_40CB() {
         if(!var_21) {
           var_22 = _bullettracepassed(var_12, var_18, 0, var_17);
 
-          if(var_22)
+          if(var_22) {
             var_21 = 1;
+          }
         }
 
         if(var_21) {
@@ -235,12 +243,14 @@ _id_5E73(var_0) {
   var_2 = anglesToForward(self getplayerangles());
   var_3 = _id_93AA(var_0);
 
-  if((isPlayer(var_0) || isbot(var_0)) && !maps\mp\_utility::isreallyalive(var_0))
+  if((isPlayer(var_0) || isbot(var_0)) && !maps\mp\_utility::isreallyalive(var_0)) {
     return 0;
+  }
 
   if(vectordot(vectorNormalize(var_3 - var_1), var_2) > _cos(5)) {
-    if(!1 || _bullettracepassed(var_1, var_3, 0, var_0))
+    if(!1 || _bullettracepassed(var_1, var_3, 0, var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -249,13 +259,15 @@ _id_5E73(var_0) {
 _id_7C96() {
   for(var_0 = 0; var_0 <= self._id_93AB._id_5E6C.size; var_0++) {
     if(isDefined(self._id_93AB._id_5E6C[var_0]) && isDefined(self._id_93AB._id_5E6C[var_0].origin)) {
-      if(!isDefined(self._id_93AB._id_5E6C[var_0]._id_8C44))
+      if(!isDefined(self._id_93AB._id_5E6C[var_0]._id_8C44)) {
         self._id_93AB._id_5E6C[var_0]._id_8C44 = -1;
+      }
 
       var_1 = (0, 0, 0);
 
-      if(isPlayer(self._id_93AB._id_5E6C[var_0]) || isbot(self._id_93AB._id_5E6C[var_0]))
+      if(isPlayer(self._id_93AB._id_5E6C[var_0]) || isbot(self._id_93AB._id_5E6C[var_0])) {
         var_1 = (0, 0, 64);
+      }
 
       if(self worldpointinreticle_rect(self._id_93AB._id_5E6C[var_0].origin + var_1, 50, 400, 200)) {
         if(_bullettracepassed(self getEye(), self._id_93AB._id_5E6C[var_0].origin + var_1, 0, self._id_93AB._id_5E6C[var_0])) {
@@ -278,8 +290,9 @@ _id_7C96() {
 }
 
 _id_93AA(var_0) {
-  if(isDefined(var_0._id_46B0))
+  if(isDefined(var_0._id_46B0)) {
     return var_0[[var_0._id_46B0]]();
+  }
 
   return var_0 getpointinbounds(0, 0, 0);
 }
@@ -298,16 +311,18 @@ _id_5E71() {
   for(;;) {
     if(isDefined(level._id_9047)) {
       foreach(var_1 in level._id_9047) {
-        if(isDefined(var_1._id_0117) && isDefined(var_1.player) && isDefined(self._id_93AB._id_5E72) && self._id_93AB._id_5E72 == var_1)
+        if(isDefined(var_1._id_0117) && isDefined(var_1.player) && isDefined(self._id_93AB._id_5E72) && self._id_93AB._id_5E72 == var_1) {
           var_1._id_0117 playlocalsound("wpn_stingerm7_enemy_locked");
+        }
       }
     }
 
-    if(isDefined(level._id_6C24) && isDefined(self._id_93AB._id_5E72) && self._id_93AB._id_5E72 == level._id_6C23)
+    if(isDefined(level._id_6C24) && isDefined(self._id_93AB._id_5E72) && self._id_93AB._id_5E72 == level._id_6C23) {
       level._id_6C24 playlocalsound("wpn_stingerm7_enemy_locked");
+    }
 
     self playlocalsound("wpn_stingerm7_locking");
-    self playrumbleonentity("heavygun_fire");
+    self playRumbleOnEntity("heavygun_fire");
     wait 0.6;
   }
 }
@@ -322,16 +337,18 @@ _id_5E6B() {
   for(;;) {
     if(isDefined(level._id_9047)) {
       foreach(var_1 in level._id_9047) {
-        if(isDefined(var_1._id_0117) && isDefined(var_1.player) && isDefined(self._id_93AB._id_5E6C) && _id_5718(self._id_93AB._id_5E6C, var_1))
+        if(isDefined(var_1._id_0117) && isDefined(var_1.player) && isDefined(self._id_93AB._id_5E6C) && _id_5718(self._id_93AB._id_5E6C, var_1)) {
           var_1._id_0117 playlocalsound("wpn_stingerm7_enemy_locked");
+        }
       }
     }
 
-    if(isDefined(level._id_6C24) && isDefined(self._id_93AB._id_5E6C) && _id_5718(self._id_93AB._id_5E6C, level._id_6C23))
+    if(isDefined(level._id_6C24) && isDefined(self._id_93AB._id_5E6C) && _id_5718(self._id_93AB._id_5E6C, level._id_6C23)) {
       level._id_6C24 playlocalsound("wpn_stingerm7_enemy_locked");
+    }
 
     self playlocalsound("wpn_stingerm7_locked");
-    self playrumbleonentity("heavygun_fire");
+    self playRumbleOnEntity("heavygun_fire");
     wait 0.25;
   }
 }
@@ -356,8 +373,9 @@ _id_7A43(var_0, var_1, var_2) {
 _id_5718(var_0, var_1) {
   if(isDefined(var_0)) {
     foreach(var_3 in var_0) {
-      if(var_3 == var_1)
+      if(var_3 == var_1) {
         return 1;
+      }
     }
   }
 

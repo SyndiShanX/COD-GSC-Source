@@ -16,8 +16,9 @@ _id_5330() {
 }
 
 _id_A6B8() {
-  while(!isDefined(self._id_7871))
+  while(!isDefined(self._id_7871)) {
     waitframe();
+  }
 
   waitframe();
 }
@@ -46,8 +47,9 @@ _id_63FA() {
       }
     }
 
-    if(!var_1)
+    if(!var_1) {
       self._id_293A = -1;
+    }
 
     self setclientomnvar("ui_zm_selected_quest_item", var_2);
   }
@@ -58,8 +60,9 @@ _id_4B71(var_0) {
 
   if(isDefined(self._id_7871)) {
     foreach(var_4, var_3 in self._id_7871) {
-      if(var_3._id_7B79 == var_0)
+      if(var_3._id_7B79 == var_0) {
         var_1 = 1;
+      }
     }
   }
 
@@ -67,8 +70,9 @@ _id_4B71(var_0) {
 }
 
 getbasequestitemname(var_0) {
-  if(!_id_0547::_id_5843(var_0))
+  if(!_id_0547::_id_5843(var_0)) {
     return var_0;
+  }
 
   var_1 = _id_0547::_id_AAF9(var_0, 0, 0);
   return var_1;

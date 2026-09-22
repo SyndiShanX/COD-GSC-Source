@@ -19,8 +19,9 @@ weaponkitsinitshared() {
 }
 
 weaponkitsgetpaintjobfrombaseweaponrefmp(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   var_2 = var_0 getplayerdata(common_scripts\utility::_id_46A8(), "weaponBuildKits", var_1, "paintjob");
   return var_2;
@@ -46,13 +47,15 @@ getweaponkitmp(var_0, var_1) {
 
   var_11 = var_2;
 
-  if(_func_315(var_11))
+  if(_func_315(var_11)) {
     var_11 = _func_312(var_2);
+  }
 
   var_12 = level.weaponguidoverrides[var_11 + ""];
 
-  if(isDefined(var_12) && !common_scripts\utility::_id_562E(level.promisenottogiveweapon))
+  if(isDefined(var_12) && !common_scripts\utility::_id_562E(level.promisenottogiveweapon)) {
     var_2 = var_12;
+  }
 
   var_14 = spawnStruct();
   var_14._id_A9F8 = var_2;

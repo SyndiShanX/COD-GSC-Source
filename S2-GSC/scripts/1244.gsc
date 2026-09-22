@@ -94,9 +94,9 @@ _id_4AE0(var_0) {
 }
 
 challengetotimertag(var_0) {
-  if(getdvarint("spv_hub_timer_tag_kswitch", 1) == 1)
+  if(getdvarint("spv_hub_timer_tag_kswitch", 1) == 1) {
     self iprintln(&"HUB_TIMER_TAG_KSWITCH");
-  else {
+  } else {
     if(_id_04E0::_id_5790(0)) {
       return;
     }
@@ -190,8 +190,9 @@ proposetimertagchallenge(var_0) {
   var_0 notify("tagChoiceMade");
   var_0 _id_04E0::_id_870B(0);
 
-  if(var_2 == 1)
+  if(var_2 == 1) {
     return 1;
+  }
 
   self.tagchallenger = undefined;
   var_0.tagchallenger = undefined;
@@ -212,8 +213,9 @@ starttimertag(var_0) {
   self endon("disconnect");
   self endon("death");
 
-  if(common_scripts\utility::_id_562E(self._id_5721))
+  if(common_scripts\utility::_id_562E(self._id_5721)) {
     _id_04DB::_id_38F2();
+  }
 
   self.canpassbomb = 0;
   _id_04E0::_id_870B(1);
@@ -223,8 +225,9 @@ starttimertag(var_0) {
   self.tagchallenger hudoutlineenableforclient(self, 0, 0);
   _id_04E0::_id_7DF8(0, 0, 0, 0, 1);
 
-  if(self.hastagbomb == 1)
+  if(self.hastagbomb == 1) {
     givetimertagbombmodel();
+  }
 
   thread listenfordeathdisconnect_tag(self);
   thread listenfordeathdisconnect_tag(self.tagchallenger);
@@ -233,8 +236,9 @@ starttimertag(var_0) {
   if(!isDefined(self.tagchallenger)) {
     self iprintln(&"HUB_TAG_OPPONENT_BUSY");
 
-    if(self.hastagbomb)
+    if(self.hastagbomb) {
       deletetimertagbombmodel();
+    }
 
     _id_04E0::_id_A04C();
     self.tagchallenger = undefined;
@@ -250,8 +254,9 @@ starttimertag(var_0) {
   self setclientomnvar("ui_hub_enable_pause", 0);
   self.canpassbomb = 1;
 
-  if(self.hastagbomb == 1)
+  if(self.hastagbomb == 1) {
     self setmovespeedscale(1.1);
+  }
 }
 
 attemptpasstagbomb(var_0) {
@@ -288,15 +293,16 @@ completetimertag() {
   self _meth_85EF(&"timer_tag_result", 1, var_0);
   _id_04E0::_id_7DF8(0, 0, 0, 0, 1);
 
-  if(self.hastagbomb)
+  if(self.hastagbomb) {
     deletetimertagbombmodel();
+  }
 
   if(var_0 == 1) {
     _id_04E0::_id_721A("mp_emote_cheer_yeah");
     self iprintln(&"HUB_YOU_WON");
     _id_0468::_id_0A27("timerTagWin");
   } else {
-    _playfxontag(level._effect["hub_granadier_tag_effect"], self, "tag_origin");
+    _playFXOnTag(level._effect["hub_granadier_tag_effect"], self, "tag_origin");
     _id_0378::_id_8D74("aud_timer_tag_fireworks");
     _id_04E0::_id_721A("mp_emote_defeated_c");
     self iprintln(&"HUB_YOU_LOST");
@@ -308,11 +314,13 @@ completetimertag() {
   _id_04E0::_id_A04C();
   self notify("tag_ended");
 
-  if(maps\mp\_utility::_hasperk("specialty_ballcarrier"))
+  if(maps\mp\_utility::_hasperk("specialty_ballcarrier")) {
     deletetimertagbombmodel();
+  }
 
-  if(isDefined(self.tagchallenger))
+  if(isDefined(self.tagchallenger)) {
     self.tagchallenger hudoutlinedisableforclient(self);
+  }
 
   self.tagchallenger = undefined;
   self.isintimertag = 0;
@@ -326,32 +334,37 @@ listenfordeathdisconnect_tag(var_0) {
   self endon("tag_ended");
   var_1 = var_0 common_scripts\utility::_id_A70A("death", "disconnect");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     cleanupfailedtimertag();
+  }
 }
 
 cleanupfailedtimertag(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(common_scripts\utility::_id_562E(self.isintimertag))
+  if(common_scripts\utility::_id_562E(self.isintimertag)) {
     self iprintln(&"HUB_TAG_FORCE_END");
+  }
 
   self.isintimertag = 0;
 
   if(isDefined(self.tagchallenger)) {
     self.tagchallenger hudoutlinedisableforclient(self);
 
-    if(common_scripts\utility::_id_562E(self.tagchallenger.isintimertag))
+    if(common_scripts\utility::_id_562E(self.tagchallenger.isintimertag)) {
       self.tagchallenger cleanupfailedtimertag();
+    }
   }
 
   self.tagchallenger = undefined;
   self setclientomnvar("ui_hub_in_timer_tag", 0);
   self _meth_85EF(&"timer_tag_result", 1, -1);
 
-  if(self.hastagbomb || maps\mp\_utility::_hasperk("specialty_ballcarrier"))
+  if(self.hastagbomb || maps\mp\_utility::_hasperk("specialty_ballcarrier")) {
     deletetimertagbombmodel();
+  }
 
   self.hastagbomb = -1;
   self setmovespeedscale(1);

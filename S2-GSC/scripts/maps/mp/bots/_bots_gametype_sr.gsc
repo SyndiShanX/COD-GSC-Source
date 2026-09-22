@@ -22,8 +22,9 @@ _id_1AF0() {
   level endon("game_ended");
   self._id_4B44 = undefined;
 
-  while(!isDefined(level._id_19E8))
+  while(!isDefined(level._id_19E8)) {
     waitframe();
+  }
 
   self._id_9526 = undefined;
   childthread _id_95B3();
@@ -45,11 +46,12 @@ _id_95B3() {
     if(var_0.size > 0) {
       var_1 = common_scripts\utility::random(var_0);
 
-      if(distancesquared(self.origin, var_1._id_95A6._id_28D4) < 10000)
+      if(distancesquared(self.origin, var_1._id_95A6._id_28D4) < 10000) {
         _id_913E(var_1._id_95A6);
-      else if(self.team == game["attackers"]) {
-        if(self._id_7ECA != "atk_bomber")
+      } else if(self.team == game["attackers"]) {
+        if(self._id_7ECA != "atk_bomber") {
           _id_913E(var_1._id_95A6);
+        }
       } else if(self._id_7ECA != "defuser")
         _id_913E(var_1._id_95A6);
     }
@@ -66,8 +68,9 @@ _id_913E(var_0) {
   if(!isDefined(self._id_7ECA)) {
     return;
   }
-  if(maps\mp\bots\_bots_util::_id_1A2D())
+  if(maps\mp\bots\_bots_util::_id_1A2D()) {
     maps\mp\bots\_bots_strategy::_id_19A3();
+  }
 
   var_0._id_1A9A[self.team] = self;
   var_0 thread _id_23A9();
@@ -103,14 +106,16 @@ _id_913E(var_0) {
     }
   }
 
-  if(var_2 == "goal" && var_0 _id_04D1::_id_1F53(self.team))
+  if(var_2 == "goal" && var_0 _id_04D1::_id_1F53(self.team)) {
     wait 3.0;
+  }
 
   if(self bothasscriptgoal() && isDefined(var_1)) {
     var_5 = self botgetscriptgoal();
 
-    if(maps\mp\bots\_bots_util::_id_1B1C(var_5, var_1))
+    if(maps\mp\bots\_bots_util::_id_1B1C(var_5, var_1)) {
       self botclearscriptgoal();
+    }
   }
 
   self notify("stop_tag_watcher");
@@ -122,8 +127,9 @@ _id_A8E2(var_0) {
   self endon("stop_watch_tag_destination");
 
   for(;;) {
-    if(!var_0 _id_04D1::_id_1F53(self.team))
+    if(!var_0 _id_04D1::_id_1F53(self.team)) {
       waitframe();
+    }
 
     var_1 = self botgetscriptgoal();
     waitframe();
@@ -138,8 +144,9 @@ _id_913C(var_0) {
     if(var_4 != self && isDefined(var_4._id_7ECA) && var_4._id_7ECA != "atk_bomber" && var_4._id_7ECA != "defuser") {
       var_5 = distance(var_4.origin, var_0._id_28D4);
 
-      if(var_5 < var_1 * 0.5)
+      if(var_5 < var_1 * 0.5) {
         return 1;
+      }
     }
   }
 
@@ -165,8 +172,9 @@ _id_23A8(var_0) {
 _id_6804(var_0, var_1) {
   self endon("stop_tag_watcher");
 
-  while(var_0 _id_04D1::_id_1F53(self.team) && !maps\mp\bots\_bots_gametype_conf::_id_196E(var_0))
+  while(var_0 _id_04D1::_id_1F53(self.team) && !maps\mp\bots\_bots_gametype_conf::_id_196E(var_0)) {
     waitframe();
+  }
 
   self notify(var_1);
 }
@@ -178,8 +186,9 @@ _id_913D(var_0) {
   if(!isDefined(self._id_7ECA)) {
     return;
   }
-  if(maps\mp\bots\_bots_util::_id_1A2D())
+  if(maps\mp\bots\_bots_util::_id_1A2D()) {
     maps\mp\bots\_bots_strategy::_id_19A3();
+  }
 
   var_0._id_1955[self.team] = self;
   var_0 thread _id_23A7();
@@ -190,8 +199,9 @@ _id_913D(var_0) {
 
   while(var_0 _id_04D1::_id_1F53(self.team) && self._id_7ECA == var_1) {
     if(maps\mp\bots\_bots_personality::_id_8B73()) {
-      if(maps\mp\bots\_bots_personality::_id_3B64(var_0._id_28D4, 1000))
+      if(maps\mp\bots\_bots_personality::_id_3B64(var_0._id_28D4, 1000)) {
         childthread maps\mp\bots\_bots_gametype_conf::_id_1954(var_0, "tactical", "new_role");
+      }
     }
 
     waitframe();

@@ -14,8 +14,9 @@ _id_5326() {
   common_scripts\utility::_id_092C("zmb_pack_a_punch_lathe_ammo", "vfx/map/mp_zombie_nest/zmb_pack_a_punch_lathe_ammo");
   var_0 = common_scripts\utility::_id_44BE("pack_a_punch", "targetname");
 
-  foreach(var_2 in var_0)
-  level thread _id_6E40(var_2);
+  foreach(var_2 in var_0) {
+    level thread _id_6E40(var_2);
+  }
 }
 
 _id_6E40(var_0) {
@@ -23,10 +24,11 @@ _id_6E40(var_0) {
   var_1 = strtok(var_0.setlookatent, ",");
   var_2 = int(var_1[0]);
 
-  if(var_1.size > 1)
+  if(var_1.size > 1) {
     var_3 = int(var_1[1]);
-  else
+  } else {
     var_3 = 4000;
+  }
 
   if(getdvarint("spv_zmb_event_mtx5_active", 0)) {
     var_2 = 2000;
@@ -48,7 +50,7 @@ _id_6E40(var_0) {
 
   foreach(var_8 in var_4) {
     if(isDefined(var_8)) {
-      var_8 usetriggerrequirelookat();
+      var_8 useTriggerRequireLookAt();
 
       if(0) {
         var_8._id_1DE6 = &"ZOMBIES_WEAPON_LEVEL_BOX";
@@ -61,10 +63,10 @@ _id_6E40(var_0) {
       var_8._id_6DE0 = var_3;
       var_8.is_pap_trigger = 1;
 
-      if(_id_0547::_id_5819(var_8))
+      if(_id_0547::_id_5819(var_8)) {
         _id_0547::_id_8A4F(var_8, ::_id_10E1, ::_id_4D14);
-      else if(0) {
-        var_8 sethintstring(var_8._id_1DE6);
+      } else if(0) {
+        var_8 setHintString(var_8._id_1DE6);
         var_8 setsecondaryhintstring(var_8._id_1DE5);
       }
 
@@ -77,8 +79,9 @@ _id_45A0(var_0, var_1) {
   var_2 = _sortbydistance(var_0, self.origin);
   var_3 = [];
 
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     var_3[var_4] = var_2[var_4];
+  }
 
   return var_3;
 }
@@ -87,7 +90,7 @@ _id_6E41() {
   var_0 = self;
   level endon("game_over");
   self._id_738D = undefined;
-  var_1 = _getent("pack_a_punch_weapon_display", "targetname");
+  var_1 = _getEnt("pack_a_punch_weapon_display", "targetname");
   var_1 ghost();
 
   for(;;) {
@@ -120,14 +123,16 @@ _id_6E41() {
       _id_0548::_id_AC57(var_3, var_5);
       _id_0547::_id_4AE4(var_3, "pack_a_punch_ammo", var_7, var_5, "none");
 
-      if(!common_scripts\utility::_id_3C77("pap_in_use"))
-        _playfxontag(level._effect["zmb_pack_a_punch_lathe_ammo"], self.issighted, "lathe_01");
+      if(!common_scripts\utility::_id_3C77("pap_in_use")) {
+        _playFXOnTag(level._effect["zmb_pack_a_punch_lathe_ammo"], self.issighted, "lathe_01");
+      }
 
       continue;
     }
 
-    if(isDefined(level.extra_upgrade_func))
+    if(isDefined(level.extra_upgrade_func)) {
       level thread[[level.extra_upgrade_func]](var_3);
+    }
 
     var_8 = var_3 _id_0586::_id_078B(var_5);
 
@@ -157,34 +162,40 @@ _id_6E41() {
 
     var_11 = var_3 getweaponlistprimaries();
 
-    if(var_11.size > 0)
+    if(var_11.size > 0) {
       var_3 _id_0586::_id_078E(var_11[0]);
+    }
 
     _id_0547::_id_4AE4(var_3, "pack_a_punch", var_7, var_8, "none");
 
     if(maps\mp\_utility::_id_4571() == "mp_zombie_nest_01") {
       var_12 = var_3 maps\mp\gametypes\_playerlogic::_id_4005();
 
-      if(!isDefined(var_3.magicboxweaponsrolled))
+      if(!isDefined(var_3.magicboxweaponsrolled)) {
         var_3.magicboxweaponsrolled = [];
+      }
 
-      if(common_scripts\utility::_id_0F79(var_12, var_5) || !common_scripts\utility::_id_0F79(var_3.magicboxweaponsrolled, var_5))
+      if(common_scripts\utility::_id_0F79(var_12, var_5) || !common_scripts\utility::_id_0F79(var_3.magicboxweaponsrolled, var_5)) {
         level._id_400E[level._id_400E.size] = ["survivalist_set 4 -1", var_3];
+      }
     } else if(maps\mp\_utility::_id_4571() == "mp_zombie_island") {
       var_12 = var_3 maps\mp\gametypes\_playerlogic::_id_4005();
 
-      if(!isDefined(var_3.magicboxweaponsrolled))
+      if(!isDefined(var_3.magicboxweaponsrolled)) {
         var_3.magicboxweaponsrolled = [];
+      }
 
-      if(common_scripts\utility::_id_0F79(var_12, var_5) || !common_scripts\utility::_id_0F79(var_3.magicboxweaponsrolled, var_5))
+      if(common_scripts\utility::_id_0F79(var_12, var_5) || !common_scripts\utility::_id_0F79(var_3.magicboxweaponsrolled, var_5)) {
         var_3 notify("invalid_pack_a_punch");
+      }
     }
 
     var_13 = _id_0547::_id_AAF9(var_8);
     _id_0555::issprinting("upgrade", var_3, var_13);
 
-    if(isDefined(level.zmb_events_upgraded_a_weapon))
+    if(isDefined(level.zmb_events_upgraded_a_weapon)) {
       level thread[[level.zmb_events_upgraded_a_weapon]](var_3);
+    }
 
     common_scripts\utility::flag_set("pap_in_use");
     self._id_738D = var_3;
@@ -192,16 +203,18 @@ _id_6E41() {
     self.issighted setexomeleechargevalid(var_5, var_8);
     common_scripts\utility::flag_set("pap_weapon_ready");
 
-    if(0)
+    if(0) {
       self setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
+    }
 
     level notify("pap_state_change");
     var_0 thread _id_7485(var_3);
     var_0 thread _id_9E21(var_3, var_8, var_3 _id_0586::_id_078B(var_5, undefined, undefined, 1));
     common_scripts\utility::_id_A70C(var_0, "pap - player took gun", var_0, "pap - player timed out", var_3, "disconnect");
 
-    if(0)
+    if(0) {
       self setsecondaryhintstring(self._id_1DE5);
+    }
 
     _id_4D1D(self.issighted._id_586E);
     common_scripts\utility::_id_3C7B("pap_weapon_ready");
@@ -224,15 +237,17 @@ _id_9E21(var_0, var_1, var_2) {
   var_5 = common_scripts\utility::_id_562E(var_3.double_tapped);
   var_3.double_tapped = undefined;
 
-  if(var_5)
+  if(var_5) {
     var_1 = var_2;
+  }
 
   var_3 notify("pap - player took gun");
   var_0 common_scripts\utility::_id_379A("flag_player_has_paped");
   var_0 _id_6E46(var_1);
 
-  if(issubstr(var_1, "austen"))
+  if(issubstr(var_1, "austen")) {
     thread _id_0380::_id_6840("zmb_fog_rolling_out_austen", var_0);
+  }
 }
 
 wait_for_response(var_0, var_1) {
@@ -242,8 +257,9 @@ wait_for_response(var_0, var_1) {
   var_2 endon("pap - player timed out");
   var_1 childthread watch_for_pap_double_tap(var_2);
 
-  while(!_id_0547::_id_5565(var_0, var_1))
+  while(!_id_0547::_id_5565(var_0, var_1)) {
     var_2 waittill("trigger", var_0);
+  }
 }
 
 watch_for_pap_double_tap(var_0) {
@@ -254,11 +270,13 @@ watch_for_pap_double_tap(var_0) {
   var_2 = gettime();
 
   for(;;) {
-    while(!var_1 interacting_with_this_trigger(var_0))
+    while(!var_1 interacting_with_this_trigger(var_0)) {
       waitframe();
+    }
 
-    while(var_1 interacting_with_this_trigger(var_0))
+    while(var_1 interacting_with_this_trigger(var_0)) {
       waitframe();
+    }
 
     if(gettime() - var_2 < 500) {
       var_0.double_tapped = 1;
@@ -271,7 +289,7 @@ watch_for_pap_double_tap(var_0) {
 
 interacting_with_this_trigger(var_0) {
   var_1 = self;
-  return var_1 usebuttonpressed() && _id_0547::_id_5565(var_1 playergetuseent(), var_0);
+  return var_1 useButtonPressed() && _id_0547::_id_5565(var_1 playergetuseent(), var_0);
 }
 
 _id_7485(var_0) {
@@ -304,19 +322,21 @@ setexomeleechargevalid(var_0, var_1) {
   _id_0378::_id_8D14(var_3);
   var_4 = self gettagorigin("lathe_01");
   level notify("PAP_display_reset");
-  var_5 = _getent("pack_a_punch_weapon_display", "targetname");
+  var_5 = _getEnt("pack_a_punch_weapon_display", "targetname");
   var_5.origin = (var_5.origin[0], var_5.origin[1], var_4[2]);
 
-  if(!isDefined(level._id_6DDD))
+  if(!isDefined(level._id_6DDD)) {
     level._id_6DDD = var_5 common_scripts\utility::_id_8FFC();
+  }
 
   self._id_6DDD = level._id_6DDD;
   _id_801B(self, var_0);
   var_6 = level._id_6DDD.origin;
   var_7 = level._id_6DDD.angles;
 
-  if(issubstr(var_0, "fliegerfaust"))
+  if(issubstr(var_0, "fliegerfaust")) {
     thread _id_3C72(level._id_6DDD);
+  }
 
   var_8 = _spawnfx(level._effect["zmb_pack_a_punch_lathe"], var_4, anglesToForward(self gettagangles("lathe_01")), anglestoup(self gettagangles("lathe_01")));
   _triggerfx(var_8);
@@ -343,40 +363,47 @@ _id_801B(var_0, var_1) {
   var_2 = (0, 0, 0);
   var_3 = (0, 0, 0);
 
-  if(issubstr(var_1, "springfield") || issubstr(var_1, "bren") || issubstr(var_1, "lewis") || issubstr(var_1, "m1941") || issubstr(var_1, "m1a1") || issubstr(var_1, "breda30"))
+  if(issubstr(var_1, "springfield") || issubstr(var_1, "bren") || issubstr(var_1, "lewis") || issubstr(var_1, "m1941") || issubstr(var_1, "m1a1") || issubstr(var_1, "breda30")) {
     var_2 = (-3, 0, 0);
+  }
 
-  if(issubstr(var_1, "leeenfield") || issubstr(var_1, "mg42") || issubstr(var_1, "m1garand") || issubstr(var_1, "bar_") || issubstr(var_1, "m30") || issubstr(var_1, "karabin") || issubstr(var_1, "g43") || issubstr(var_1, "kar98") || issubstr(var_1, "teslagun"))
+  if(issubstr(var_1, "leeenfield") || issubstr(var_1, "mg42") || issubstr(var_1, "m1garand") || issubstr(var_1, "bar_") || issubstr(var_1, "m30") || issubstr(var_1, "karabin") || issubstr(var_1, "g43") || issubstr(var_1, "kar98") || issubstr(var_1, "teslagun")) {
     var_2 = (-5, 0, 0);
+  }
 
-  if(issubstr(var_1, "svt40") || issubstr(var_1, "walther") || issubstr(var_1, "m1919"))
+  if(issubstr(var_1, "svt40") || issubstr(var_1, "walther") || issubstr(var_1, "m1919")) {
     var_2 = (-7, 0, 0);
+  }
 
   if(issubstr(var_1, "zom_dlc2_1") || issubstr(var_1, "zom_dlc2_2") || issubstr(var_1, "zom_dlc2_3")) {
     var_3 = (-90, 0, 0);
 
-    if(issubstr(var_1, "zom_dlc2_1"))
+    if(issubstr(var_1, "zom_dlc2_1")) {
       var_2 = (2, 0, 0);
-    else
+    } else {
       var_2 = (-7, 0, 0);
+    }
   }
 
-  if(issubstr(var_1, "mg15"))
+  if(issubstr(var_1, "mg15")) {
     var_2 = (-8, 0, 0);
+  }
 
-  if(issubstr(var_1, "fliegerfaust"))
+  if(issubstr(var_1, "fliegerfaust")) {
     var_2 = (0, 0, 10);
+  }
 
   if(isDefined(var_0._id_A6EA)) {
     var_0._id_586E setpickupweapon(var_1);
     var_0._id_586E show();
     var_0._id_A6EA = undefined;
   } else {
-    if(isDefined(var_0._id_586E))
+    if(isDefined(var_0._id_586E)) {
       var_0._id_586E delete();
+    }
 
     var_0._id_586E = spawn("weapon_" + var_1, var_0._id_6DDD.origin);
-    var_0._id_586E linkto(var_0._id_6DDD, "tag_origin", var_2, var_3);
+    var_0._id_586E linkTo(var_0._id_6DDD, "tag_origin", var_2, var_3);
     var_0._id_A6EA = 1;
   }
 
@@ -394,7 +421,7 @@ _id_3C72(var_0) {
   wait 0.5;
   var_0 movez(5, 0.5, 0.1, 0.1);
   wait 1;
-  var_0 rotateyaw(20, 0.5, 0.1, 0.1);
+  var_0 rotateYaw(20, 0.5, 0.1, 0.1);
   wait 1;
   var_0 movez(-10, 0.5, 0.1, 0.1);
 }
@@ -435,17 +462,21 @@ _id_6E44(var_0, var_1) {
   var_3 = "none";
   var_4 = _id_0547::_id_462A(var_0);
 
-  if(var_4 != "none")
+  if(var_4 != "none") {
     var_3 = _getweaponbasename(var_4);
+  }
 
-  if(_id_0547::_id_5868(var_3))
+  if(_id_0547::_id_5868(var_3)) {
     var_2 = 1;
+  }
 
-  if(0)
-    self setcursorhint("HINT_NOICON");
+  if(0) {
+    self setCursorHint("HINT_NOICON");
+  }
 
-  if(1)
+  if(1) {
     var_1.interact_disabled = undefined;
+  }
 
   if(common_scripts\utility::_id_3C77("pap_weapon_ready") && isDefined(self._id_738D) && self._id_738D == var_0) {
     if(1) {
@@ -456,7 +487,7 @@ _id_6E44(var_0, var_1) {
     self._id_3006 = undefined;
 
     if(0) {
-      self sethintstring("Unavailable");
+      self setHintString("Unavailable");
       self setsecondaryhintstring("");
     }
 
@@ -469,7 +500,7 @@ _id_6E44(var_0, var_1) {
     self._id_3006 = undefined;
 
     if(0) {
-      self sethintstring("");
+      self setHintString("");
       self setsecondaryhintstring("");
     }
 
@@ -482,7 +513,7 @@ _id_6E44(var_0, var_1) {
     self._id_3006 = self._id_6DE0;
 
     if(0) {
-      self sethintstring(self._id_1DE4);
+      self setHintString(self._id_1DE4);
       self setsecondaryhintstring(self._id_1DE3);
     }
 
@@ -494,7 +525,7 @@ _id_6E44(var_0, var_1) {
     self._id_3006 = self._id_6DE1;
 
     if(0) {
-      self sethintstring(self._id_1DE6);
+      self setHintString(self._id_1DE6);
       self setsecondaryhintstring(self._id_1DE5);
     }
 
@@ -504,14 +535,16 @@ _id_6E44(var_0, var_1) {
     }
   }
 
-  if(1)
+  if(1) {
     var_1._id_6642 = 1;
+  }
 }
 
 ispappablemeleeweapon(var_0) {
   if(var_0 == "zom_dlc2_3_zm" || var_0 == "zom_dlc2_2_zm" || var_0 == "zom_dlc2_1_zm") {
-    if(common_scripts\utility::_id_3C83("dlc2_melee_packable") && common_scripts\utility::_id_3C77("dlc2_melee_packable"))
+    if(common_scripts\utility::_id_3C83("dlc2_melee_packable") && common_scripts\utility::_id_3C77("dlc2_melee_packable")) {
       return 1;
+    }
   }
 
   return 0;
@@ -520,16 +553,18 @@ ispappablemeleeweapon(var_0) {
 _id_6E43(var_0) {
   var_1 = undefined;
 
-  if(1)
+  if(1) {
     var_1 = _id_0552::_id_7BF3(var_0, self);
+  }
 
   thread _id_21BD(var_0, var_1);
   thread _id_21BB(var_0, var_1);
 }
 
 wait_for_pack_a_punch_conditions() {
-  if(isDefined(level.pack_a_punc_pre_func))
+  if(isDefined(level.pack_a_punc_pre_func)) {
     level[[level.pack_a_punc_pre_func]]();
+  }
 }
 
 _id_4D14(var_0) {
@@ -537,8 +572,9 @@ _id_4D14(var_0) {
 }
 
 _id_8C10(var_0) {
-  if(isDefined(level.upgrade_machine_reveal_func))
+  if(isDefined(level.upgrade_machine_reveal_func)) {
     [[level.upgrade_machine_reveal_func]](var_0, self.issighted);
+  }
 
   self.issighted showtoplayer(var_0);
 }
@@ -556,14 +592,16 @@ _id_86EE(var_0) {
   for(var_5 = 0; var_5 < var_1; var_5++) {
     var_6 = 0;
 
-    for(var_7 = _pow(10, var_1 - var_5); var_3 >= var_7 / 10; var_6++)
+    for(var_7 = _pow(10, var_1 - var_5); var_3 >= var_7 / 10; var_6++) {
       var_3 = var_3 - var_7 / 10;
+    }
 
     var_2[var_5] = var_6;
   }
 
-  for(var_5 = 0; var_5 < var_1; var_5++)
+  for(var_5 = 0; var_5 < var_1; var_5++) {
     self.issighted setscriptablepartstate("gears_0" + (var_5 + 1), "idle_" + var_2[var_5]);
+  }
 }
 
 _id_6E46(var_0) {
@@ -571,15 +609,17 @@ _id_6E46(var_0) {
   self._id_6E48++;
   level notify("PAP_display_reset");
 
-  if(_id_0547::_id_73F9(self, var_0))
+  if(_id_0547::_id_73F9(self, var_0)) {
     _id_0586::_id_0790(var_0);
+  }
 
   thread _id_054E::playerbuyweapon(1);
 
-  if(_id_0547::_id_5864(var_0))
+  if(_id_0547::_id_5864(var_0)) {
     _id_0548::wallbuygivemelee(self, var_0);
-  else
+  } else {
     _id_0548::_id_A7D6(self, var_0);
+  }
 
   _id_0548::_id_AABC(self);
 }
@@ -589,16 +629,18 @@ _id_55D4(var_0) {
 }
 
 _id_40BD(var_0) {
-  if(!isDefined(level._id_40BE))
+  if(!isDefined(level._id_40BE)) {
     level._id_40BE = [];
+  }
 
   var_1 = level._id_40BE[var_0];
 
   if(!isDefined(var_1)) {
     var_1 = _id_40BF(var_0);
 
-    if(level._id_40BE.size < 1000)
+    if(level._id_40BE.size < 1000) {
       level._id_40BE[var_0] = var_1;
+    }
   }
 
   return var_1;

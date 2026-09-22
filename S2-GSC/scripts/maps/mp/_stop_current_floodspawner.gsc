@@ -9,8 +9,9 @@ _id_9DB1(var_0, var_1) {
   var_0 common_scripts\utility::script_delay();
   maps\mp\_utility::_id_0FA8(var_0.target);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::flag_set(var_1, var_2);
+  }
 }
 
 _id_9D7C(var_0) {
@@ -39,7 +40,8 @@ _id_3D85() {
 
     var_1 waittill("death", var_2);
 
-    if(!common_scripts\utility::setautorotationdelay())
+    if(!common_scripts\utility::setautorotationdelay()) {
       wait(_randomfloatrange(5, 9));
+    }
   }
 }

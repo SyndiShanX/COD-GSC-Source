@@ -8,19 +8,23 @@ _id_5159(var_0) {
   var_2 = [];
   var_3 = _tablegetrowcount(var_1);
 
-  for(var_4 = 0; var_4 < var_3; var_4++)
+  for(var_4 = 0; var_4 < var_3; var_4++) {
     var_2[var_2.size] = _id_5DE0(var_0, var_1, var_4);
+  }
 
-  if(!isDefined(level._id_087B))
+  if(!isDefined(level._id_087B)) {
     level._id_087B = [];
+  }
 
   foreach(var_6 in var_2) {
     foreach(var_8 in var_6["actions"]) {
-      if(!isDefined(level._id_087B[var_0]))
+      if(!isDefined(level._id_087B[var_0])) {
         level._id_087B[var_0] = [];
+      }
 
-      if(!isDefined(level._id_087B[var_0][var_8]))
+      if(!isDefined(level._id_087B[var_0][var_8])) {
         level._id_087B[var_0][var_8] = [];
+      }
 
       level._id_087B[var_0][var_8][level._id_087B[var_0][var_8].size] = var_6;
     }
@@ -32,13 +36,15 @@ _id_5159(var_0) {
     foreach(var_14 in ["move_style", "anims", "actions"]) {
       var_15 = var_6[var_14];
 
-      if(!_isarray(var_15))
+      if(!_isarray(var_15)) {
         var_15 = [var_15];
+      }
 
       foreach(var_17 in var_15) {
         if(var_17 != "") {
-          if(!isDefined(var_11[var_14]))
+          if(!isDefined(var_11[var_14])) {
             var_11[var_14] = [];
+          }
 
           if(isDefined(var_11[var_14][var_17])) {
             var_11[var_14][var_17]++;
@@ -73,13 +79,15 @@ _id_5DE0(var_0, var_1, var_2) {
 issplitscreenplayer(var_0, var_1) {
   var_2 = var_0["script_var"];
 
-  if(_id_0547::_id_5816(var_2))
+  if(_id_0547::_id_5816(var_2)) {
     return 1;
+  }
 
   var_3 = var_1["script_var"];
 
-  if(_id_0547::_id_5816(var_3))
+  if(_id_0547::_id_5816(var_3)) {
     return 1;
+  }
 
   return var_2 == var_3;
 }
@@ -87,8 +95,9 @@ issplitscreenplayer(var_0, var_1) {
 _id_087A(var_0, var_1) {
   var_2 = level._id_087B[var_1];
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return undefined;
+  }
 
   return var_2[var_0];
 }
@@ -96,8 +105,9 @@ _id_087A(var_0, var_1) {
 _id_087C(var_0, var_1, var_2) {
   var_3 = _id_087A(var_0, var_1["action_table"]);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return undefined;
+  }
 
   foreach(var_5 in var_3) {
     if(isDefined(var_1["dismember_state"]) && !common_scripts\utility::_id_0F79(var_5["dismember_states"], var_1["dismember_state"])) {
@@ -126,8 +136,9 @@ _id_087C(var_0, var_1, var_2) {
     var_7["move_style"] = undefined;
     var_5 = _id_087C(var_0, var_7, var_2);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   var_8 = _id_6E76(var_1["zombie_subtype"]);
@@ -137,8 +148,9 @@ _id_087C(var_0, var_1, var_2) {
     var_7["zombie_subtype"] = var_8;
     var_5 = _id_087C(var_0, var_7, var_2);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   if(isDefined(var_1["source_project"])) {
@@ -148,8 +160,9 @@ _id_087C(var_0, var_1, var_2) {
     var_7["source_project"] = var_10;
     var_5 = _id_087C(var_0, var_7, var_2);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   if(isDefined(var_1["move_speed"])) {
@@ -157,8 +170,9 @@ _id_087C(var_0, var_1, var_2) {
     var_7["move_speed"] = undefined;
     var_5 = _id_087C(var_0, var_7, var_2);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 
   return undefined;
@@ -179,8 +193,9 @@ _id_4081(var_0, var_1, var_2) {
       foreach(var_8 in var_6["anims"]) {
         var_9 = _func_2CB(var_2, var_8);
 
-        if(!common_scripts\utility::_id_0F79(var_3, var_9))
+        if(!common_scripts\utility::_id_0F79(var_3, var_9)) {
           var_3[var_3.size] = var_9;
+        }
       }
     }
   }
@@ -193,8 +208,9 @@ _id_71FA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self endon("death");
 
   if(isDefined(var_0) && !common_scripts\utility::_id_562E(self.frozen)) {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = 0;
+    }
 
     var_7 = self getanimentry(var_0, var_1);
     var_8 = _getanimlength(var_7);
@@ -203,8 +219,9 @@ _id_71FA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(isDefined(var_6)) {
       var_9 = var_8 - var_6;
 
-      if(var_9 < 0)
+      if(var_9 < 0) {
         var_9 = 0;
+      }
     }
 
     var_9 = var_9 * (1.0 / var_2);
@@ -222,8 +239,9 @@ _id_71FD(var_0, var_1, var_2, var_3, var_4, var_5) {
 _id_71F9(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   isenemyaware(var_0, var_1, var_2, var_6);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "end";
+  }
 
   _id_A79E(var_3, var_4, var_0, var_1, var_5);
 }
@@ -232,8 +250,9 @@ _id_A79F(var_0, var_1, var_2) {
   self endon("disconnect");
   self endon("death");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     childthread _id_678A(var_0, var_2, var_1);
+  }
 
   _id_A79E(var_0, var_1);
   self notify("Notetrack_Timeout");
@@ -244,14 +263,16 @@ _id_A79E(var_0, var_1, var_2, var_3, var_4) {
   var_6 = undefined;
   var_7 = undefined;
 
-  if(isDefined(var_2) && isDefined(var_3))
+  if(isDefined(var_2) && isDefined(var_3)) {
     var_7 = _getanimlength(self getanimentry(var_2, var_3));
+  }
 
   for(;;) {
     self waittill(var_0, var_8);
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_6 = (gettime() - var_5) * 0.001 / var_7;
+    }
 
     if(!isDefined(var_7) || var_6 > 0) {
       if(var_8 == var_1 || var_8 == "end" || var_8 == "anim_will_finish" || var_8 == "finish") {
@@ -259,8 +280,9 @@ _id_A79E(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       [[var_4]](var_8, var_2, var_3, var_6);
+    }
   }
 }
 
@@ -270,10 +292,11 @@ _id_678A(var_0, var_1, var_2) {
   var_1 = max(0.05, var_1);
   wait(var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self notify(var_0, var_2);
-  else
+  } else {
     self notify(var_0, "end");
+  }
 }
 
 _id_71F8(var_0, var_1, var_2, var_3) {
@@ -294,8 +317,9 @@ _id_434D(var_0, var_1, var_2) {
   var_3 = self[[maps\mp\agents\_agent_utility::_id_0A59("get_action_params")]]();
 
   if(isDefined(var_1)) {
-    foreach(var_6, var_5 in var_1)
-    var_3[var_6] = var_5;
+    foreach(var_6, var_5 in var_1) {
+      var_3[var_6] = var_5;
+    }
   }
 
   var_7 = 0;
@@ -304,8 +328,9 @@ _id_434D(var_0, var_1, var_2) {
 }
 
 _id_8410(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   var_3 = _id_434D(var_0);
   isenemyaware(var_3, undefined, var_1, var_2);
@@ -314,41 +339,46 @@ _id_8410(var_0, var_1, var_2) {
 _id_4156() {
   var_0 = self _meth_85A5();
 
-  if(_isendstr(var_0, "_animclass"))
+  if(_isendstr(var_0, "_animclass")) {
     var_0 = getsubstr(var_0, 0, var_0.size - 10);
+  }
 
   return var_0;
 }
 
 isenemyaware(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self setanimstate(var_0, var_1, var_2, var_3);
-  else if(isDefined(var_2))
+  } else if(isDefined(var_2)) {
     self setanimstate(var_0, var_1, var_2);
-  else if(isDefined(var_1))
+  } else if(isDefined(var_1)) {
     self setanimstate(var_0, var_1);
-  else
+  } else {
     self setanimstate(var_0);
+  }
 
   var_4 = self getanimentryname();
   self._id_28ED = _id_43C9(var_4);
   _id_0378::_id_8D74("zombie_set_anim_state", var_0, var_4);
 
-  if(isDefined(self._id_1142))
+  if(isDefined(self._id_1142)) {
     self thread[[self._id_1142]](var_0, var_1, var_2, var_3);
+  }
 }
 
 _id_4416(var_0, var_1) {
-  if(var_1 <= 1)
+  if(var_1 <= 1) {
     return 0;
+  }
 
   var_3 = 360.0 / (var_1 - 1);
   var_4 = var_3 * 0.222222;
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     return int(_ceil((180 + var_0 - var_4) / var_3));
-  else
+  } else {
     return int(_floor((180 + var_0 + var_4) / var_3));
+  }
 }
 
 _id_441C(var_0, var_1, var_2) {
@@ -363,15 +393,17 @@ _id_441C(var_0, var_1, var_2) {
     var_9 = (var_1[0], var_1[1], 0);
     var_10 = vectorNormalize(var_9);
 
-    if(vectordot(var_10, var_0) < 0)
+    if(vectordot(var_10, var_0) < 0) {
       var_7 = 0;
-    else if(var_5 > 0)
+    } else if(var_5 > 0) {
       var_7 = var_3 / var_5;
+    }
   } else if(var_5 > 0)
     var_7 = var_3 / var_5;
 
-  if(_abs(var_6) > 0.001 && var_4 != 0 && var_6 * var_4 > 0)
+  if(_abs(var_6) > 0.001 && var_4 != 0 && var_6 * var_4 > 0) {
     var_8 = var_4 / var_6;
+  }
 
   var_11 = spawnStruct();
   var_11._id_AAE3 = var_7;
@@ -382,8 +414,9 @@ _id_441C(var_0, var_1, var_2) {
 _id_6AFF(var_0, var_1) {
   self notify("killanimscript");
 
-  if(isDefined(self._id_0EAD._id_6B2F[var_0]))
+  if(isDefined(self._id_0EAD._id_6B2F[var_0])) {
     self[[self._id_0EAD._id_6B2F[var_0]]]();
+  }
 
   _id_38ED(var_0);
 
@@ -435,8 +468,9 @@ _id_43C9(var_0) {
       var_3 = getsubstr(var_2, 1);
       var_4 = int(var_3);
 
-      if(common_scripts\utility::_id_9AAD(var_4) == var_3)
+      if(common_scripts\utility::_id_9AAD(var_4) == var_3) {
         return var_4;
+      }
     }
   }
 
@@ -451,8 +485,9 @@ _id_7A35(var_0) {
       var_4 = self getanimentryname(var_0, var_3);
       var_5 = _id_43C9(var_4);
 
-      if(isDefined(var_5) && var_5 == self._id_28ED)
+      if(isDefined(var_5) && var_5 == self._id_28ED) {
         return var_3;
+      }
     }
   }
 
@@ -467,15 +502,17 @@ getnotetracktimeinsecs(var_0, var_1, var_2) {
 _id_45B9(var_0, var_1, var_2) {
   var_3 = _getnotetracktimes(var_0, var_1);
 
-  if(isDefined(var_2) && var_3.size == 0)
+  if(isDefined(var_2) && var_3.size == 0) {
     return var_2;
+  }
 
   return var_3[0];
 }
 
 _id_446A(var_0) {
-  if(_animhasnotetrack(var_0, "code_move"))
+  if(_animhasnotetrack(var_0, "code_move")) {
     return _id_45B9(var_0, "code_move");
+  }
 
   return 1;
 }

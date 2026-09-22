@@ -8,8 +8,9 @@ _id_52A4() {
 }
 
 _id_1F88(var_0) {
-  if(isDefined(self.inlaststand) && self.inlaststand)
+  if(isDefined(self.inlaststand) && self.inlaststand) {
     return 1;
+  }
 
   return 0;
 }
@@ -22,15 +23,17 @@ _id_A234(var_0) {
 _id_467C(var_0) {
   var_1 = self getplayerdata(common_scripts\utility::_id_46A8(), "equippedConsumables", 2, "quantity");
 
-  if(var_1 > 1)
+  if(var_1 > 1) {
     return 2;
-  else
+  } else {
     return var_1;
+  }
 }
 
 _id_4B92() {
-  if(isDefined(self._id_259F) && isDefined(self._id_259F["sReviveSlot"]) && self._id_259F["sReviveSlot"]._id_20F0 > 0)
+  if(isDefined(self._id_259F) && isDefined(self._id_259F["sReviveSlot"]) && self._id_259F["sReviveSlot"]._id_20F0 > 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -52,19 +55,20 @@ lightsetforplayer() {
   wait 1.5;
   var_1 = getdvarint("5107");
 
-  if(!isDefined(var_1) || var_1 <= 0)
+  if(!isDefined(var_1) || var_1 <= 0) {
     var_1 = 250;
+  }
 
   var_2 = 0;
   var_3 = gettime();
 
   for(;;) {
     if(!var_2) {
-      if(self usebuttonpressed()) {
+      if(self useButtonPressed()) {
         var_3 = gettime() + var_1;
         var_2 = 1;
       }
-    } else if(!self usebuttonpressed())
+    } else if(!self useButtonPressed())
       var_2 = 0;
     else if(gettime() >= var_3) {
       self notify("useConsumable_sReviveSlot");

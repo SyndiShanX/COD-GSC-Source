@@ -14,16 +14,18 @@ basic_extermination_run(var_0) {
   level.zmb_temp_zombie_health_buff = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_extermination_health_multiplier");
   level.zmb_disable_all_hitreacts = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_extermination_hitreacts_enabled");
 
-  if(level.zmb_temp_zombie_health_buff == 1)
+  if(level.zmb_temp_zombie_health_buff == 1) {
     level.zmb_temp_zombie_health_buff = undefined;
+  }
 
   if(isDefined(var_1._id_2A35)) {
     if(isDefined(var_1._id_2A35.ext_type)) {
       if(_isarray(var_1._id_2A35.ext_type)) {
-        if(_isarray(var_1._id_2A35.ext_type[0]))
+        if(_isarray(var_1._id_2A35.ext_type[0])) {
           var_2 = common_scripts\utility::random(var_1._id_2A35.ext_type);
-        else
+        } else {
           var_2 = var_1._id_2A35.ext_type;
+        }
       } else
         var_2 = [var_1._id_2A35.ext_type];
     }
@@ -40,16 +42,19 @@ basic_extermination_run(var_0) {
       }
     }
 
-    if(common_scripts\utility::_id_0F79(var_2, "zombie_sizzler") || common_scripts\utility::_id_0F79(var_2, "zombie_generic"))
+    if(common_scripts\utility::_id_0F79(var_2, "zombie_sizzler") || common_scripts\utility::_id_0F79(var_2, "zombie_generic")) {
       level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_extermination_dialog();
+    }
 
     var_7 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting(var_0 + "_delay");
 
-    if(!isDefined(var_7) && isDefined(var_1._id_2A35.ext_spawn_delay))
+    if(!isDefined(var_7) && isDefined(var_1._id_2A35.ext_spawn_delay)) {
       var_7 = var_1._id_2A35.ext_spawn_delay;
+    }
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       level.sg_manual_spawn_delay = var_7;
+    }
 
     var_8 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting(var_0 + "_count");
     var_9 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_player_level_extension");
@@ -57,8 +62,9 @@ basic_extermination_run(var_0) {
     _id_0547::_id_7BA9(::exterminationkillcounter);
     level thread notify_on_extermination_kill_requirement(var_8);
 
-    if(!isDefined(var_8) && isDefined(var_1._id_2A35.ext_wave_count))
+    if(!isDefined(var_8) && isDefined(var_1._id_2A35.ext_wave_count)) {
       var_8 = var_1._id_2A35.ext_wave_count;
+    }
   }
 
   level notify("extermination_round_start", var_2[0]);
@@ -77,10 +83,11 @@ basic_extermination_run(var_0) {
     }
   }
 
-  if(var_11 == "sg_obj_timeout")
+  if(var_11 == "sg_obj_timeout") {
     return 0;
-  else
+  } else {
     return 1;
+  }
 }
 
 notify_on_extermination_kill_requirement(var_0) {
@@ -94,8 +101,9 @@ notify_on_extermination_kill_requirement(var_0) {
     var_2 setclientomnvar("ui_onevone_class_4", level.plr_extermination_kills);
   }
 
-  while(level.plr_extermination_kills < var_0)
+  while(level.plr_extermination_kills < var_0) {
     waitframe();
+  }
 
   level notify("extermination complete");
 }
@@ -106,14 +114,17 @@ exterminationkillcounter(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   }
   var_9 = 0;
 
-  if(_id_0547::_id_5565(self._id_0A4B, "zombie_exploder"))
+  if(_id_0547::_id_5565(self._id_0A4B, "zombie_exploder")) {
     var_9 = 1;
+  }
 
-  if(_id_0547::_id_5565(self._id_0A4B, "zombie_sizzler") && (_id_0547::_id_5565(var_4, "trap_zm_mp") || isDefined(var_1) && isPlayer(var_1)))
+  if(_id_0547::_id_5565(self._id_0A4B, "zombie_sizzler") && (_id_0547::_id_5565(var_4, "trap_zm_mp") || isDefined(var_1) && isPlayer(var_1))) {
     var_9 = 1;
+  }
 
-  if(_id_0547::_id_5565(self._id_0A4B, "zombie_generic") && common_scripts\utility::_id_562E(self.transformingtosizzler) && (_id_0547::_id_5565(var_4, "trap_zm_mp") || isDefined(var_1) && isPlayer(var_1)))
+  if(_id_0547::_id_5565(self._id_0A4B, "zombie_generic") && common_scripts\utility::_id_562E(self.transformingtosizzler) && (_id_0547::_id_5565(var_4, "trap_zm_mp") || isDefined(var_1) && isPlayer(var_1))) {
     var_9 = 1;
+  }
 
   if(var_9) {
     level.plr_extermination_kills++;
@@ -133,10 +144,11 @@ objective_extermination_bomber_movemode() {
     self.bomberforcerundelay = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_bomber_force_run_start");
   }
 
-  if((gettime() - self.bomberforceruntimestart) / 1000 >= self.bomberforcerundelay)
+  if((gettime() - self.bomberforceruntimestart) / 1000 >= self.bomberforcerundelay) {
     return _id_054D::_id_957E(100);
-  else
+  } else {
     return "walk";
+  }
 }
 
 basic_extermination_skip_cleanup() {
@@ -161,15 +173,16 @@ objective_extermination_sizzler_handler() {
       var_2 = _id_0547::_id_4090("zombie_generic");
 
       foreach(var_4 in var_2) {
-        if(!_isagent(var_4) || !isalive(var_4) || var_4 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_4.transformingtosizzler))
+        if(!_isagent(var_4) || !isalive(var_4) || var_4 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_4.transformingtosizzler)) {
           var_5 = common_scripts\utility::_id_0F93(var_2, var_4);
+        }
       }
 
       var_7 = undefined;
 
-      if(var_2.size > 0)
+      if(var_2.size > 0) {
         var_7 = objective_extermination_sizzler_choose_best_generic(var_2);
-      else {
+      } else {
         level waittill("spawned_agent", var_4);
         var_7 = var_4;
         wait 1;
@@ -199,25 +212,28 @@ objective_extermination_sizzler_handler() {
 try_to_become_a_sizzler(var_0) {
   var_1 = self;
 
-  if(!_id_0547::_id_5565(var_1._id_0A4B, "zombie_generic") || !_isagent(var_1) || !isalive(var_1) || var_1 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_1.transformingtosizzler))
+  if(!_id_0547::_id_5565(var_1._id_0A4B, "zombie_generic") || !_isagent(var_1) || !isalive(var_1) || var_1 _meth_85A5() != "zombie_animclass" || common_scripts\utility::_id_562E(var_1.transformingtosizzler)) {
     return 0;
+  }
 
   var_1 objective_extermination_sizzler_think(var_0);
   return 1;
 }
 
 objective_extermination_sizzler_choose_best_generic(var_0) {
-  if(var_0.size == 1)
+  if(var_0.size == 1) {
     return var_0[0];
-  else
+  } else {
     return common_scripts\utility::random(var_0);
+  }
 }
 
 objective_extermination_sizzler_think(var_0) {
   self endon("death");
 
-  if(!common_scripts\utility::_id_562E(var_0))
+  if(!common_scripts\utility::_id_562E(var_0)) {
     thread _id_5D67(self.origin);
+  }
 
   thread maps\mp\zombies\zombie_sizzler::zombie_make_sizzler();
 }
@@ -231,7 +247,7 @@ _id_5D67(var_0) {
   var_3 setModel("tag_origin");
   var_3.angles = var_3.angles + (-90, 0, 0);
   var_4 = _func_382("zmb_wm_lightning_beam", var_2, "tag_origin", var_3, "tag_origin");
-  _playfxontag(level._effect["zmb_wm_lightning_impact_base_rnr"], var_3, "tag_origin");
+  _playFXOnTag(level._effect["zmb_wm_lightning_impact_base_rnr"], var_3, "tag_origin");
   _id_0378::_id_8D74("lightning_strike", var_2.origin, var_0);
   wait(_randomfloatrange(0.25, 0.35));
   var_4 delete();

@@ -10,8 +10,9 @@ init() {
 set_zombie_boss_has_weapon_loot() {
   maps\mp\_events_z::start_boss_battle_tracking();
 
-  if(!isDefined(self.bossloot))
+  if(!isDefined(self.bossloot)) {
     self.bossloot = [];
+  }
 
   self.bossloot = common_scripts\utility::_id_0F6F(self.bossloot, ::spawn_zombie_boss_weapon_loot);
 }
@@ -56,8 +57,9 @@ spawn_zombie_boss_weapon_loot(var_0) {
     }
     var_13 = var_1 getplayerdata(common_scripts\utility::_id_46A8(), "weaponBuildKits", var_12, "bossupgrade");
 
-    if(!isDefined(var_13) || !var_13)
+    if(!isDefined(var_13) || !var_13) {
       var_10 = common_scripts\utility::_id_0F6F(var_10, var_12);
+    }
   }
 
   if(var_10.size > 0) {
@@ -88,11 +90,11 @@ floaty() {
   waitframe();
 
   for(;;) {
-    self moveto(self._id_6C53 + (0, 0, 3), 3, 1, 1);
-    self rotateyaw(180, 3);
+    self moveTo(self._id_6C53 + (0, 0, 3), 3, 1, 1);
+    self rotateYaw(180, 3);
     wait 3;
-    self moveto(self._id_6C53 + (0, 0, -3), 3, 1, 1);
-    self rotateyaw(180, 3);
+    self moveTo(self._id_6C53 + (0, 0, -3), 3, 1, 1);
+    self rotateYaw(180, 3);
     wait 3;
   }
 }
@@ -131,13 +133,15 @@ watch_for_final_boss_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
       var_12 = 5;
     }
 
-    for(var_13 = 0; var_13 < var_11; var_13++)
+    for(var_13 = 0; var_13 < var_11; var_13++) {
       level thread maps\mp\_utility::_id_6F74(var_10, self.origin + (0, var_13 * 32, 0));
+    }
 
     if(var_12 > 0) {
       for(var_14 = 1; var_14 < var_12; var_14++) {
-        for(var_13 = 0; var_13 < var_11; var_13++)
+        for(var_13 = 0; var_13 < var_11; var_13++) {
           level thread maps\mp\_utility::_id_6F74(var_10, self.origin + (var_14 * 32, var_13 * 32, 0));
+        }
       }
     }
   }

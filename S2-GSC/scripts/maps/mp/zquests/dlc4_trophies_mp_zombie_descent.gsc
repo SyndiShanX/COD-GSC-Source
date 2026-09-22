@@ -25,8 +25,9 @@ complete_descent_trophy_event_2(var_0) {
 }
 
 run_shattered_trophy_event_2() {
-  while(!common_scripts\utility::_id_3C83("flag_descent_pap"))
+  while(!common_scripts\utility::_id_3C83("flag_descent_pap")) {
     waitframe();
+  }
 
   common_scripts\utility::_id_3C9F("flag_descent_pap");
   complete_descent_trophy_event_2();
@@ -39,8 +40,9 @@ complete_descent_trophy_event_3(var_0) {
 run_shattered_trophy_event_3() {
   var_0 = ["zombie_fireman", "zombie_king", "zombie_treasurer", "zombie_sizzler"];
 
-  while(!isDefined(level._id_0A50) || level._id_0A50.size == 0)
+  while(!isDefined(level._id_0A50) || level._id_0A50.size == 0) {
     waitframe();
+  }
 
   waitframe();
 
@@ -114,13 +116,15 @@ run_shattered_trophy_event_9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
   }
 
   foreach(var_13, var_10 in var_1.ravenweapontracker) {
-    if(issubstr(var_4, var_13))
+    if(issubstr(var_4, var_13)) {
       var_1.ravenweapontracker[var_13]++;
+    }
   }
 
   foreach(var_13, var_10 in var_1.ravenweapontracker) {
-    if(var_1.ravenweapontracker[var_13] < 100)
+    if(var_1.ravenweapontracker[var_13] < 100) {
       return;
+    }
   }
 
   complete_descent_trophy_event_9(var_1);

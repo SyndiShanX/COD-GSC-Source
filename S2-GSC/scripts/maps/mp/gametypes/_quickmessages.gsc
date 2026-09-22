@@ -181,10 +181,11 @@ _id_329E(var_0, var_1) {
     self playSound(var_2 + var_0);
     self sayteam(var_1);
   } else {
-    if(self._id_0179 == "allies")
+    if(self._id_0179 == "allies") {
       self._id_00BB = "allies";
-    else if(self._id_0179 == "axis")
+    } else if(self._id_0179 == "axis") {
       self._id_00BB = "axis";
+    }
 
     self._id_00BA = "talkingicon";
     self playSound(var_2 + var_0);
@@ -194,17 +195,21 @@ _id_329E(var_0, var_1) {
 }
 
 clearthermalfog() {
-  if(isDefined(self._id_00BA))
+  if(isDefined(self._id_00BA)) {
     self._id_6A5A = self._id_00BA;
+  }
 
-  if(isDefined(self._id_00BB))
+  if(isDefined(self._id_00BB)) {
     self._id_6A5B = self._id_00BB;
+  }
 }
 
 _id_7DF2() {
-  if(isDefined(self._id_6A5A))
+  if(isDefined(self._id_6A5A)) {
     self._id_00BA = self._id_6A5A;
+  }
 
-  if(isDefined(self._id_6A5B))
+  if(isDefined(self._id_6A5B)) {
     self._id_00BB = self._id_6A5B;
+  }
 }

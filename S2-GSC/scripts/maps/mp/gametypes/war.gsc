@@ -31,13 +31,15 @@ main() {
   level._id_6BAF = ::_id_6BAF;
   level._id_6B5C = ::_id_6B5C;
 
-  if(level._id_6031 || level._id_6035)
+  if(level._id_6031 || level._id_6035) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   game["dialog"]["gametype"] = "tdm_intro";
 
-  if(getdvarint("2043"))
+  if(getdvarint("2043")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 
   game["dialog"]["defense_obj"] = "gbl_start";
   game["dialog"]["offense_obj"] = "gbl_start";
@@ -67,8 +69,9 @@ _id_5300() {
 _id_6BAF() {
   _setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -99,18 +102,19 @@ _id_6BAF() {
 _id_6B5C(var_0, var_1, var_2) {
   level _id_04D2::_id_47BD(var_1.pers["team"], 1, 1);
 
-  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level._id_6C63[var_1.team]])
+  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level._id_6C63[var_1.team]]) {
     var_1._id_3B4B = 1;
+  }
 }
 
 _id_6BB6() {
   level._id_3B5C = "none";
 
-  if(game["status"] == "overtime")
+  if(game["status"] == "overtime") {
     var_0 = "forfeit";
-  else if(game["teamScores"]["allies"] == game["teamScores"]["axis"])
+  } else if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
     var_0 = "overtime";
-  else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+  } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
     level._id_3B5C = "axis";
     var_0 = "axis";
   } else {
@@ -118,8 +122,9 @@ _id_6BB6() {
     var_0 = "allies";
   }
 
-  if(maps\mp\_utility::_id_761E())
+  if(maps\mp\_utility::_id_761E()) {
     var_0 = "none";
+  }
 
   thread maps\mp\gametypes\_gamelogic::_id_36B9(var_0, game["end_reason"]["time_limit_reached"]);
 }

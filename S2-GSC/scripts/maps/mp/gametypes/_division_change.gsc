@@ -20,11 +20,13 @@ setclienttriggeraudiozone(var_0, var_1) {
     if(isDefined(level.disabledivisionpassives) && level.disabledivisionpassives) {
       return;
     }
-    if(!isDefined(var_0) || var_0 == 5)
+    if(!isDefined(var_0) || var_0 == 5) {
       _id_A050();
+    }
 
-    while(!maps\mp\_utility::gameflag("prematch_done"))
+    while(!maps\mp\_utility::gameflag("prematch_done")) {
       waitframe();
+    }
 
     thread _id_6379();
 
@@ -81,13 +83,15 @@ _id_A07E(var_0) {
       break;
     case "bayonet_level3":
     case "shield_charge":
-      if(maps\mp\_utility::_hasperk("specialty_sprintmeleechargelonger"))
+      if(maps\mp\_utility::_hasperk("specialty_sprintmeleechargelonger")) {
         maps\mp\_utility::_id_0735("specialty_sprintmeleechargelonger");
+      }
 
       break;
     case "bayonet_level2":
-      if(maps\mp\_utility::_hasperk("specialty_sprintmeleecharge"))
+      if(maps\mp\_utility::_hasperk("specialty_sprintmeleecharge")) {
         maps\mp\_utility::_id_0735("specialty_sprintmeleecharge");
+      }
 
       break;
     case "bayonet_level1":
@@ -98,11 +102,13 @@ _id_A07E(var_0) {
       break;
     case "sharpshooter_level3":
     case "sharpshooter_level2":
-      if(maps\mp\_utility::_hasperk("specialty_marksmanvision"))
+      if(maps\mp\_utility::_hasperk("specialty_marksmanvision")) {
         maps\mp\_utility::_id_0735("specialty_marksmanvision");
+      }
 
-      if(maps\mp\_utility::_hasperk("specialty_improvedholdbreath"))
+      if(maps\mp\_utility::_hasperk("specialty_improvedholdbreath")) {
         maps\mp\_utility::_id_0735("specialty_improvedholdbreath");
+      }
 
       break;
     case "sharpshooter_level1":
@@ -122,8 +128,9 @@ _id_8725(var_0, var_1) {
   if(_isagent(self) || isbot(self)) {
     return;
   }
-  if(maps\mp\_utility::_id_585F())
+  if(maps\mp\_utility::_id_585F()) {
     maps\mp\_utility::giveperk("specialty_sprintmeleechargelonger");
+  }
 
   if(!isDefined(var_0) || !_id_0F5B(var_0)) {
     return;
@@ -216,28 +223,32 @@ _id_6379() {
 }
 
 _id_4B98(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   foreach(var_3 in var_1) {
     switch (var_0) {
       case "sharpshooter_level3":
       case "sharpshooter_level2":
       case "sharpshooter_level1":
-        if(issubstr(var_3, "iron_sight_sniper") || issubstr(var_3, "telescopic_sight"))
+        if(issubstr(var_3, "iron_sight_sniper") || issubstr(var_3, "telescopic_sight")) {
           return 1;
+        }
 
         break;
       case "incendiary_level3":
       case "incendiary_level2":
       case "incendiary_level1":
-        if(issubstr(var_3, "m30_rifle"))
+        if(issubstr(var_3, "m30_rifle")) {
           return 1;
+        }
 
         break;
       case "tacticalknife_level3":
-        if(issubstr(var_3, "akimbo"))
+        if(issubstr(var_3, "akimbo")) {
           return 1;
+        }
 
         break;
       case "flashhider_level3":
@@ -268,20 +279,22 @@ _id_440E(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_6 = common_scripts\utility::_id_0F73(var_6, _id_4688(var_0, 2, var_2, var_3, var_4, var_5));
     var_6 = common_scripts\utility::_id_0F73(var_6, _id_4688(var_0, 3, var_2, var_3, var_4, var_5));
 
-    if(var_1 == 7)
+    if(var_1 == 7) {
       var_6 = common_scripts\utility::_id_0F73(var_6, _id_4688(var_0, 7, var_2, var_3, var_4, var_5));
+    }
 
     return var_6;
   }
 
-  if(isDefined(level.disabledivisionskills) && level.disabledivisionskills)
+  if(isDefined(level.disabledivisionskills) && level.disabledivisionskills) {
     return [];
+  }
 
   var_6 = [];
 
-  if(1)
+  if(1) {
     var_6 = _id_4688(var_0, var_1, var_2, var_3, var_4, var_5);
-  else {
+  } else {
     var_6 = common_scripts\utility::_id_0F73(var_6, _id_4688(var_0, 0, var_2, var_3, var_4, var_5));
     var_6 = common_scripts\utility::_id_0F73(var_6, _id_4688(var_0, 1, var_2, var_3, var_4, var_5));
     var_6 = common_scripts\utility::_id_0F73(var_6, _id_4688(var_0, 2, var_2, var_3, var_4, var_5));
@@ -301,16 +314,19 @@ _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
   var_7 = maps\mp\_utility::_id_45B5(_getweaponbasename(var_2));
 
-  if(!_id_0F5B(var_1))
+  if(!_id_0F5B(var_1)) {
     return [];
+  }
 
-  if(!_id_56C9(var_2))
+  if(!_id_56C9(var_2)) {
     return [];
+  }
 
   var_8 = var_0 _id_04CA::_id_461C(var_1);
 
-  if(_id_4B98(var_8, var_5))
+  if(_id_4B98(var_8, var_5)) {
     return [];
+  }
 
   var_9 = undefined;
   var_10 = undefined;
@@ -321,11 +337,13 @@ _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
     case "incendiary_level3":
       var_9 = "_3";
     case "incendiary_level2":
-      if(!isDefined(var_9))
+      if(!isDefined(var_9)) {
         var_9 = "_2";
+      }
     case "incendiary_level1":
-      if(!isDefined(var_9))
+      if(!isDefined(var_9)) {
         var_9 = "_1";
+      }
 
       var_13 = !maps\mp\_utility::_id_56B1() && !_func_3AF();
 
@@ -359,11 +377,13 @@ _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
     case "bipod_level3":
       var_10 = "_3";
     case "bipod_level2":
-      if(!isDefined(var_10))
+      if(!isDefined(var_10)) {
         var_10 = "_2";
+      }
     case "bipod_level1":
-      if(!isDefined(var_10))
+      if(!isDefined(var_10)) {
         var_10 = "_1";
+      }
 
       if(var_3) {
         if(maps\mp\_utility::getweaponclass(var_2) == "weapon_heavy") {
@@ -401,19 +421,22 @@ _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
             break;
         }
 
-        if(var_16 != "")
+        if(var_16 != "") {
           var_6[var_6.size] = var_16;
+        }
       }
 
       break;
     case "suppressor_level3":
       var_11 = "_3";
     case "suppressor_level2":
-      if(!isDefined(var_11))
+      if(!isDefined(var_11)) {
         var_11 = "_2";
+      }
     case "suppressor_level1":
-      if(!isDefined(var_11))
+      if(!isDefined(var_11)) {
         var_11 = "_1";
+      }
 
       if(maps\mp\_utility::getweaponclass(var_2) == "weapon_smg") {
         var_17 = "";
@@ -449,8 +472,9 @@ _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_12 = "_3";
     case "sharpshooter_level2":
     case "sharpshooter_level1":
-      if(!isDefined(var_12))
+      if(!isDefined(var_12)) {
         var_12 = "_1";
+      }
 
       if(maps\mp\_utility::getweaponclass(var_2) == "weapon_sniper") {
         var_18 = "hold_breath";
@@ -491,8 +515,9 @@ _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
               break;
           }
 
-          if(var_20 != "")
+          if(var_20 != "") {
             var_6[var_6.size] = var_20;
+          }
         }
       }
 
@@ -515,43 +540,51 @@ _id_4688(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_56CA(var_0, var_1) {
-  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled())
+  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     return 0;
+  }
 
   var_2 = maps\mp\_utility::getweaponclass(var_0);
 
   switch (var_2) {
     case "weapon_shotgun":
-      if(issubstr(var_1, "dragon_breath_"))
+      if(issubstr(var_1, "dragon_breath_")) {
         return 1;
+      }
 
       break;
     case "weapon_heavy":
-      if(issubstr(var_1, "bipod"))
+      if(issubstr(var_1, "bipod")) {
         return 1;
+      }
 
       break;
     case "weapon_assault":
-      if(issubstr(var_1, "bayonet_"))
+      if(issubstr(var_1, "bayonet_")) {
         return 1;
+      }
 
-      if(issubstr(var_1, "grenade_launcher"))
+      if(issubstr(var_1, "grenade_launcher")) {
         return 1;
+      }
 
       break;
     case "weapon_smg":
-      if(issubstr(var_1, "suppressor_"))
+      if(issubstr(var_1, "suppressor_")) {
         return 1;
+      }
 
       break;
     case "weapon_sniper":
-      if(issubstr(var_1, "hold_breath"))
+      if(issubstr(var_1, "hold_breath")) {
         return 1;
+      }
 
       break;
     case "weapon_pistol":
-      if(issubstr(var_1, "tacticalknife"))
+      if(issubstr(var_1, "tacticalknife")) {
         return 1;
+      }
 
       break;
   }
@@ -560,14 +593,17 @@ _id_56CA(var_0, var_1) {
 }
 
 _id_7CCD(var_0) {
-  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled())
+  if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     return var_0;
+  }
 
-  if(!isDefined(var_0) || var_0 == "none")
+  if(!isDefined(var_0) || var_0 == "none") {
     return var_0;
+  }
 
-  if(!_id_56C9(var_0))
+  if(!_id_56C9(var_0)) {
     return var_0;
+  }
 
   var_1 = maps\mp\_utility::_id_4738(var_0);
   var_2 = var_1[0];
@@ -583,8 +619,9 @@ _id_7CCD(var_0) {
 }
 
 removealtmodeattachmentsfromweapon(var_0) {
-  if(!isDefined(var_0) || var_0 == "none")
+  if(!isDefined(var_0) || var_0 == "none") {
     return var_0;
+  }
 
   var_1 = maps\mp\_utility::_id_4738(var_0);
   var_2 = var_1[0];
@@ -600,14 +637,17 @@ removealtmodeattachmentsfromweapon(var_0) {
 }
 
 _id_0995(var_0, var_1, var_2, var_3, var_4) {
-  if(var_1 == 5)
+  if(var_1 == 5) {
     return var_2;
+  }
 
-  if(!_id_56C9(var_2))
+  if(!_id_56C9(var_2)) {
     return var_2;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_5 = maps\mp\_utility::_id_472B(var_2);
   var_6 = maps\mp\_utility::_id_4728(var_2);
@@ -621,27 +661,33 @@ _id_0995(var_0, var_1, var_2, var_3, var_4) {
   var_11 = _getweaponbasename(var_2);
   var_12 = var_11;
 
-  foreach(var_14 in var_9)
-  var_12 = var_12 + ("+" + var_14);
+  foreach(var_14 in var_9) {
+    var_12 = var_12 + ("+" + var_14);
+  }
 
-  if(isDefined(var_5) && var_5 != "")
+  if(isDefined(var_5) && var_5 != "") {
     var_12 = var_12 + ("+" + var_5);
+  }
 
-  if(isDefined(var_6) && var_6 != "")
+  if(isDefined(var_6) && var_6 != "") {
     var_12 = var_12 + ("+" + var_6);
+  }
 
-  if(isDefined(var_7) && var_7 != "")
+  if(isDefined(var_7) && var_7 != "") {
     var_12 = var_12 + ("+" + var_7);
+  }
 
-  if(isDefined(var_8) && var_8 != "")
+  if(isDefined(var_8) && var_8 != "") {
     var_12 = var_12 + ("+" + var_8);
+  }
 
   return var_12;
 }
 
 _id_56C9(var_0) {
-  if(var_0 == "none")
+  if(var_0 == "none") {
     return 0;
+  }
 
   switch (maps\mp\_utility::getweaponclass(var_0)) {
     case "weapon_other":
@@ -659,14 +705,17 @@ _id_56C9(var_0) {
 }
 
 _id_0F5B(var_0) {
-  if(getdvarint("5572", 1) == 0)
+  if(getdvarint("5572", 1) == 0) {
     return 0;
+  }
 
-  if(isDefined(level.disabledivisionskills) && level.disabledivisionskills)
+  if(isDefined(level.disabledivisionskills) && level.disabledivisionskills) {
     return 0;
+  }
 
-  if(!maps\mp\_utility::isdivisionsglobaloverhaulenabled() && isDefined(level.disabledivisionpassives) && level.disabledivisionpassives)
+  if(!maps\mp\_utility::isdivisionsglobaloverhaulenabled() && isDefined(level.disabledivisionpassives) && level.disabledivisionpassives) {
     return 0;
+  }
 
   var_1 = "5572";
 
@@ -733,8 +782,9 @@ _id_3657(var_0, var_1) {
 
   var_2 = undefined;
 
-  if(isDefined(level._id_A4BE))
+  if(isDefined(level._id_A4BE)) {
     var_2 = level._id_A4BE;
+  }
 
   switch (var_1) {
     case "flashhider_level3":
@@ -784,8 +834,9 @@ _id_3657(var_0, var_1) {
       break;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self digitaldistortsetparams(var_2["intensity"], var_2["falloff"], var_2["scaleX"], var_2["scaleY"], var_2["squareAspectRatio"], var_2["lerpDuration"]);
+  }
 }
 
 _id_2F7B(var_0, var_1, var_2, var_3) {
@@ -801,8 +852,9 @@ _id_2F7B(var_0, var_1, var_2, var_3) {
   self notify("removeDivisionVignette");
   var_4 = self;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2;
+  }
 
   switch (var_1) {
     case "flashhider_level3":
@@ -833,10 +885,11 @@ _id_2F7B(var_0, var_1, var_2, var_3) {
     case "sharpshooter_level1":
       self setclientomnvar("ui_hide_hud", 0);
 
-      if(!isDefined(var_3))
+      if(!isDefined(var_3)) {
         _id_048E::_id_8D7D(1);
-      else
+      } else {
         _id_048E::_id_8D7D(var_3);
+      }
 
       break;
     default:
@@ -845,31 +898,37 @@ _id_2F7B(var_0, var_1, var_2, var_3) {
 
   var_6 = undefined;
 
-  if(isDefined(level._id_A4B5))
+  if(isDefined(level._id_A4B5)) {
     var_6 = level._id_A4B5;
+  }
 
-  if(isDefined(var_6) && !isDefined(var_6["lerpDuration"]))
+  if(isDefined(var_6) && !isDefined(var_6["lerpDuration"])) {
     var_6["lerpDuration"] = 0.1;
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     self digitaldistortsetparams(var_6["intensity"], var_6["falloff"], var_6["scaleX"], var_6["scaleY"], var_6["squareAspectRatio"], var_6["lerpDuration"]);
+  }
 
   if(maps\mp\_utility::_id_579B() == 0) {
-    if(self playerads() > 0)
+    if(self playerads() > 0) {
       self lerpfovscale(1.0, 0.1);
-    else
+    } else {
       self lerpfovscale(1.0, 0.2);
+    }
   }
 
   var_7 = undefined;
 
-  if(isDefined(level._id_6465))
+  if(isDefined(level._id_6465)) {
     var_7 = level._id_6465;
+  }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     self _meth_866F(var_7["velocityscaler"], var_7["cameraRotationInfluence"], var_7["cameraTranslationInfluence"]);
-  else
+  } else {
     self _meth_866F(0, 0, 0);
+  }
 }
 
 _id_A8FA(var_0, var_1) {
@@ -880,42 +939,49 @@ _id_A8FA(var_0, var_1) {
 }
 
 _id_4499(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_3) || !isDefined(var_1) || !isDefined(var_1._id_0079) || var_1._id_0079 == 5)
+  if(!isDefined(var_3) || !isDefined(var_1) || !isDefined(var_1._id_0079) || var_1._id_0079 == 5) {
     return var_0;
+  }
 
   var_5 = 1;
 
   switch (maps\mp\_utility::getweaponclass(var_3)) {
     case "weapon_assault":
-      if(isDefined(var_1._id_165B) && var_1._id_165B && isDefined(var_4) && maps\mp\_utility::_id_5755(var_4))
+      if(isDefined(var_1._id_165B) && var_1._id_165B && isDefined(var_4) && maps\mp\_utility::_id_5755(var_4)) {
         return "divisions_infantry_kill";
+      }
 
       break;
     case "weapon_sniper":
-      if(isDefined(var_1._id_8AE0) && var_1._id_8AE0)
+      if(isDefined(var_1._id_8AE0) && var_1._id_8AE0) {
         return "divisions_mountain_kill";
+      }
 
       break;
     case "weapon_smg":
       var_6 = issubstr(var_3, "zk383");
 
-      if(maps\mp\_utility::_id_5670(var_3) && !var_6 || var_6 && var_1._id_4B47)
+      if(maps\mp\_utility::_id_5670(var_3) && !var_6 || var_6 && var_1._id_4B47) {
         return "divisions_airborne_kill";
+      }
 
       break;
     case "weapon_heavy":
-      if(issubstr(var_3, "bipod"))
+      if(issubstr(var_3, "bipod")) {
         return "divisions_armored_kill";
+      }
 
       break;
     case "weapon_shotgun":
-      if(maps\mp\_utility::_id_5670(var_3) && issubstr(var_3, "dragon_breath_") || maps\mp\_utility::_id_5697(var_4, var_3))
+      if(maps\mp\_utility::_id_5670(var_3) && issubstr(var_3, "dragon_breath_") || maps\mp\_utility::_id_5697(var_4, var_3)) {
         return "divisions_cavalry_kill";
+      }
 
       break;
     case "weapon_pistol":
-      if(issubstr(var_3, "tactical_knife") && isDefined(var_4) && maps\mp\_utility::_id_5755(var_4))
+      if(issubstr(var_3, "tactical_knife") && isDefined(var_4) && maps\mp\_utility::_id_5755(var_4)) {
         return "division_resistance_kill";
+      }
 
       break;
     default:

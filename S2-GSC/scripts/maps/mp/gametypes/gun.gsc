@@ -54,8 +54,9 @@ main() {
   level.disabledivisionpassives = 1;
   maps\mp\_utility::_id_2F6D();
 
-  if(level._id_6031)
+  if(level._id_6031) {
     level._id_62AD = maps\mp\gametypes\_damage::_id_3FC8;
+  }
 
   _setteammode("ffa");
   setDvar("2693", 1);
@@ -136,8 +137,9 @@ onplayerconnect() {
 }
 
 _id_48E5(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self.pers["class"] = "gamemode";
   self.pers["lastClass"] = "";
@@ -146,8 +148,9 @@ _id_48E5(var_0) {
   self.lastclass = self.pers["lastClass"];
   maps\mp\gametypes\_class::_id_4790(self.team, self.class);
 
-  if(var_0)
+  if(var_0) {
     self loadweapons(level._id_48D2[0]["builtWeaponName"]);
+  }
 }
 
 _id_6BA7() {
@@ -183,10 +186,11 @@ _id_6B7F(var_0, var_1, var_2, var_3, var_4) {
   var_1 maps\mp\_utility::_id_867B(var_1._id_008F + var_5);
   var_1 _id_04D2::_id_A161(var_1, var_5);
 
-  if(var_0 == "gained_gun_score")
+  if(var_0 == "gained_gun_score") {
     return 1;
-  else if(var_0 == "dropped_gun_score")
+  } else if(var_0 == "dropped_gun_score") {
     return level.enableaudiozoom * -1;
+  }
 
   return 0;
 }
@@ -195,8 +199,9 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(!isDefined(var_1)) {
     return;
   }
-  if(var_3 == "MOD_TRIGGER_HURT" && !isPlayer(var_1))
+  if(var_3 == "MOD_TRIGGER_HURT" && !isPlayer(var_1)) {
     var_1 = self;
+  }
 
   if(var_3 == "MOD_FALLING" || isPlayer(var_1)) {
     if(var_3 == "MOD_FALLING" || var_1 == self || maps\mp\_utility::_id_5755(var_3) && var_4 != "riotshield_mp" || var_4 == "boost_slam_mp") {
@@ -222,8 +227,9 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
       }
     } else if((var_3 == "MOD_PISTOL_BULLET" || var_3 == "MOD_RIFLE_BULLET" || var_3 == "MOD_HEAD_SHOT" || var_3 == "MOD_PROJECTILE" || var_3 == "MOD_PROJECTILE_SPLASH" || var_3 == "MOD_EXPLOSIVE" || var_3 == "MOD_IMPACT" || var_3 == "MOD_GRENADE" || var_3 == "MOD_GRENADE_SPLASH" || maps\mp\_utility::_id_5697(var_3, var_4) || maps\mp\_utility::_id_5755(var_3) && var_4 == "riotshield_mp") && var_4 != "v2_rocket_mp") {
       if(isDefined(var_1._id_5BB5) && var_1._id_5BB5 == var_4) {
-        if(isDefined(var_1.lastkilllifeid) && var_1.lastkilllifeid == var_1._id_5CC6 || isDefined(var_1._id_5BB8) && var_1._id_5BB8 + 1000 > gettime())
+        if(isDefined(var_1.lastkilllifeid) && var_1.lastkilllifeid == var_1._id_5CC6 || isDefined(var_1._id_5BB8) && var_1._id_5BB8 + 1000 > gettime()) {
           return;
+        }
       }
 
       if(var_1._id_48CF != var_4 && (!maps\mp\_utility::_id_5670(var_1._id_48CF) || var_1._id_48CF != "alt+" + var_4) && (!isDefined(var_1.lethalweapon) || var_1.lethalweapon != var_4) && !issubstr(var_4, "bipod")) {
@@ -232,8 +238,9 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
       var_1._id_5BB5 = var_4;
       var_1.lastkilllifeid = var_1._id_5CC6;
 
-      if(var_1._id_5BB8 + 5000 > gettime())
+      if(var_1._id_5BB8 + 5000 > gettime()) {
         var_1 thread _id_047A::_id_7893();
+      }
 
       var_1._id_5BB8 = gettime();
       var_1._id_48E7 = var_1._id_48E6;
@@ -251,8 +258,9 @@ _id_6B7B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
         }
       }
 
-      if(var_1._id_48E6 < level._id_48D2.size * level.gun_cyclecount)
+      if(var_1._id_48E6 < level._id_48D2.size * level.gun_cyclecount) {
         var_1 _id_479C(0, var_4);
+      }
     }
   }
 }
@@ -265,31 +273,36 @@ _id_479C(var_0, var_1) {
   self endon("giveNextGun");
   waittillframeend;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   var_2 = _id_45A4();
   var_3 = var_2["builtWeaponName"];
   _id_872D(var_2);
   self._id_48CF = var_3;
 
-  while(!self loadweapons(var_3))
+  while(!self loadweapons(var_3)) {
     waitframe();
+  }
 
-  if(self _meth_803D())
+  if(self _meth_803D()) {
     _id_028D::forcedismountweapon();
+  }
 
   self takeallweapons();
   maps\mp\_utility::_giveweapon(var_3);
   self givestartammo(var_3);
 
-  if(var_0)
+  if(var_0) {
     self switchtoweaponimmediate(var_3);
-  else
+  } else {
     self switchtoweapon(var_3);
+  }
 
-  if(isDefined(var_0) && var_0 == 1)
+  if(isDefined(var_0) && var_0 == 1) {
     self setspawnweapon(var_3);
+  }
 
   var_4 = maps\mp\_utility::_id_4431(var_3);
   self.pers["primaryWeapon"] = var_4;
@@ -335,11 +348,13 @@ _id_45A4() {
   var_4 = var_3["builtWeaponName"];
   var_1[var_1.size] = var_4;
 
-  if(self._id_48E6 + 1 < var_0.size * level.gun_cyclecount)
+  if(self._id_48E6 + 1 < var_0.size * level.gun_cyclecount) {
     var_1[var_1.size] = var_0[(self._id_48E6 + 1) % var_0.size]["builtWeaponName"];
+  }
 
-  if(self._id_48E6 > 0)
+  if(self._id_48E6 > 0) {
     var_1[var_1.size] = var_0[(self._id_48E6 - 1) % var_0.size]["builtWeaponName"];
+  }
 
   self loadweapons(var_1);
   return var_3;
@@ -349,14 +364,15 @@ _id_6BB6() {
   level._id_3B5C = "none";
   var_0 = _id_4509();
 
-  if(!isDefined(var_0) || !var_0.size)
+  if(!isDefined(var_0) || !var_0.size) {
     thread maps\mp\gametypes\_gamelogic::_id_36B9("tie", game["end_reason"]["time_limit_reached"]);
-  else if(var_0.size == 1)
+  } else if(var_0.size == 1) {
     thread maps\mp\gametypes\_gamelogic::_id_36B9(var_0[0], game["end_reason"]["time_limit_reached"]);
-  else if(var_0[var_0.size - 1]._id_48E6 > var_0[var_0.size - 2]._id_48E6)
+  } else if(var_0[var_0.size - 1]._id_48E6 > var_0[var_0.size - 2]._id_48E6) {
     thread maps\mp\gametypes\_gamelogic::_id_36B9(var_0[var_0.size - 1], game["end_reason"]["time_limit_reached"]);
-  else
+  } else {
     thread maps\mp\gametypes\_gamelogic::_id_36B9("tie", game["end_reason"]["time_limit_reached"]);
+  }
 }
 
 _id_4509() {
@@ -384,14 +400,16 @@ _id_7B82() {
     if(isDefined(self.lethalweapon)) {
       self givestartammo(self.lethalweapon);
 
-      if(self.lethalweapon == "throwingknife_mp")
+      if(self.lethalweapon == "throwingknife_mp") {
         _id_04C7::_id_A102("resupply_throwingknife");
-      else
+      } else {
         _id_04C7::_id_A102("resupply_equipment");
+      }
     }
 
-    if(self.primaryweapon == "killstreak_molotov_cocktail_mp")
+    if(self.primaryweapon == "killstreak_molotov_cocktail_mp") {
       self switchtoweaponimmediate(self.primaryweapon);
+    }
   }
 }
 
@@ -415,16 +433,19 @@ _id_872D(var_0) {
   level._id_48D4 = maps\mp\gametypes\_class::_id_44B4();
   level._id_48D4["loadoutDivision"] = var_0["division"];
 
-  if(maps\mp\gametypes\_class::isvalidprimary(var_0["builtWeaponName"]))
+  if(maps\mp\gametypes\_class::isvalidprimary(var_0["builtWeaponName"])) {
     level._id_48D4["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::_id_473C(maps\mp\_utility::_id_452A(var_0["builtWeaponName"]), 0);
-  else if(maps\mp\gametypes\_class::isvalidsecondary(var_0["builtWeaponName"], 0))
+  } else if(maps\mp\gametypes\_class::isvalidsecondary(var_0["builtWeaponName"], 0)) {
     level._id_48D4["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::_id_473C(maps\mp\_utility::_id_452A(var_0["builtWeaponName"]), 0);
+  }
 
-  for(var_1 = 0; var_1 < 9; var_1++)
+  for(var_1 = 0; var_1 < 9; var_1++) {
     level._id_48D4["loadoutPerksGUID"][var_1] = 0;
+  }
 
-  if(var_0["forcedLethal"] != "")
+  if(var_0["forcedLethal"] != "") {
     level._id_48D4["loadoutEquipmentStruct"] = maps\mp\_utility::_id_44CE(maps\mp\_utility::_id_452A(var_0["forcedLethal"]), 0);
+  }
 }
 
 addgun(var_0) {
@@ -618,8 +639,9 @@ setgunsfinal() {
     var_0[var_3] = var_2;
   }
 
-  if(!isDefined(level._id_1152))
+  if(!isDefined(level._id_1152)) {
     maps\mp\_utility::_id_1D3E();
+  }
 
   level._id_48D2 = [];
 
@@ -648,8 +670,9 @@ buildrandomweapontable() {
       break;
     }
 
-    if(!isDefined(level.gungameoptionstable[var_2]))
+    if(!isDefined(level.gungameoptionstable[var_2])) {
       level.gungameoptionstable[var_2] = [];
+    }
 
     var_3 = [];
     var_3["categoryName"] = var_2;
@@ -686,8 +709,9 @@ getrandomweaponfromcategory(var_0, var_1) {
       }
     }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       return undefined;
+    }
 
     var_5 = var_3["weaponName"];
     level.gungameweaponnamelist[var_5] = 1;
@@ -715,16 +739,19 @@ getrandomweaponfromcategory(var_0, var_1) {
 
     var_11 = [];
 
-    for(var_4 = 0; var_4 < var_9.size; var_4++)
+    for(var_4 = 0; var_4 < var_9.size; var_4++) {
       var_11[var_4] = maps\mp\_utility::_id_452A(var_9[var_4]);
+    }
 
-    for(var_4 = var_9.size; var_4 < 6; var_4++)
+    for(var_4 = var_9.size; var_4 < 6; var_4++) {
       var_11[var_4] = 0;
+    }
 
     var_12 = maps\mp\gametypes\_class::_id_1D66(var_5, var_11[0], var_11[1], var_11[2], var_11[3], var_11[4], var_11[5], var_6, 0, 0, 0, 0, undefined, 5);
 
-    if(level.gun_weaponattachments && var_3["forceAltMode"])
+    if(level.gun_weaponattachments && var_3["forceAltMode"]) {
       var_12 = "alt+" + var_12;
+    }
 
     var_3["builtWeaponName"] = var_12;
     return var_3;
@@ -733,8 +760,9 @@ getrandomweaponfromcategory(var_0, var_1) {
 }
 
 getattachmentsforweapon(var_0, var_1, var_2, var_3) {
-  if(var_1 <= 0)
+  if(var_1 <= 0) {
     return [];
+  }
 
   var_4 = var_0["weaponName"];
   var_5 = _getweaponattachmentsbasenames(var_4);
@@ -746,14 +774,17 @@ getattachmentsforweapon(var_0, var_1, var_2, var_3) {
     var_9 = 0;
     var_10 = var_5[var_8];
 
-    if(_id_04CB::_id_56CA(var_4, var_10))
+    if(_id_04CB::_id_56CA(var_4, var_10)) {
       var_9 = 1;
+    }
 
-    if(!var_9 && var_0["banOptic"] && (issubstr(var_10, "iron_sight") || issubstr(var_10, "telescopic_sight") || issubstr(var_10, "lens_sight") || issubstr(var_10, "aperture_sight")))
+    if(!var_9 && var_0["banOptic"] && (issubstr(var_10, "iron_sight") || issubstr(var_10, "telescopic_sight") || issubstr(var_10, "lens_sight") || issubstr(var_10, "aperture_sight"))) {
       var_9 = 1;
+    }
 
-    if(!var_9 && (issubstr(var_10, "special_grip") || issubstr(var_10, "akimbo") || issubstr(var_10, "m30_rifle") || issubstr(var_10, "tactical_knife") || issubstr(var_10, "suppressor")) || issubstr(var_10, "bipod") || issubstr(var_10, "hold_breath") || issubstr(var_10, "extended_mag") || issubstr(var_10, "bayonet") || issubstr(var_10, "grenade_launcher"))
+    if(!var_9 && (issubstr(var_10, "special_grip") || issubstr(var_10, "akimbo") || issubstr(var_10, "m30_rifle") || issubstr(var_10, "tactical_knife") || issubstr(var_10, "suppressor")) || issubstr(var_10, "bipod") || issubstr(var_10, "hold_breath") || issubstr(var_10, "extended_mag") || issubstr(var_10, "bayonet") || issubstr(var_10, "grenade_launcher")) {
       var_9 = 1;
+    }
 
     if(!var_9 && isDefined(var_6) && var_6.size > 0) {
       foreach(var_12 in var_6) {

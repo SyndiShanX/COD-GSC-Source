@@ -33,8 +33,9 @@ agent_player_raid_think() {
 }
 
 _id_9079(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isDefined(level._id_0A41[self._id_0A4B]["onAIConnect"]))
+  if(isDefined(level._id_0A41[self._id_0A4B]["onAIConnect"])) {
     [[maps\mp\agents\_agent_utility::_id_0A59("onAIConnect")]]();
+  }
 
   maps\mp\agents\_agents::_id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   maps\mp\agents\_agent_utility::hudoutlineenable(self.team);
@@ -51,8 +52,9 @@ _id_9079(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 _id_621A() {}
 
 _id_90A6(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(isDefined(level._id_0A41[self._id_0A4B]["onAIConnect"]))
+  if(isDefined(level._id_0A41[self._id_0A4B]["onAIConnect"])) {
     [[maps\mp\agents\_agent_utility::_id_0A59("onAIConnect")]]();
+  }
 
   maps\mp\agents\_agents::_id_8F70(var_0, var_1, var_2, var_3, var_4, var_5, var_6);
   maps\mp\agents\_agent_utility::hudoutlineenable(self.team);
@@ -71,10 +73,11 @@ _id_6BAE() {}
 _id_8727() {
   maps\mp\bots\_bots_util::_id_1AD5("run_and_gun");
 
-  if(isDefined(self._id_2F05))
+  if(isDefined(self._id_2F05)) {
     maps\mp\bots\_bots_util::bot_set_difficulty(self._id_2F05);
-  else
+  } else {
     maps\mp\bots\_bots_util::bot_set_difficulty("regular");
+  }
 
   self._id_2F05 = self botgetdifficulty();
 }
@@ -134,11 +137,13 @@ _id_0C6D() {
 }
 
 _id_17C8(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level._id_791B))
+  if(!isDefined(level._id_791B)) {
     level._id_791B = [];
+  }
 
-  if(level._id_791B.size > 6)
+  if(level._id_791B.size > 6) {
     level._id_791B[0] dodamage(level._id_791B[0].health + 100, level._id_791B[0].origin);
+  }
 
   var_5 = [[level._id_0A4D]]("minion", var_3, undefined, var_0, var_1, undefined, 0, 0, "recruit");
   level._id_791B[level._id_791B.size] = var_5;
@@ -169,16 +174,17 @@ _id_0A5E() {
     }
     self givestartammo(var_4);
 
-    if(var_4 == var_1)
+    if(var_4 == var_1) {
       var_5 = 0;
-    else if(var_4 == var_2)
+    } else if(var_4 == var_2) {
       var_5 = 0;
-    else if(var_4 == "panzerschreck_mp")
+    } else if(var_4 == "panzerschreck_mp") {
       var_5 = 0;
-    else if(var_4 == "bazooka_mp")
+    } else if(var_4 == "bazooka_mp") {
       var_5 = 0;
-    else
+    } else {
       var_5 = _weaponclipsize(var_4, self);
+    }
 
     self setweaponammoclip(var_4, var_5);
   }
@@ -196,15 +202,17 @@ _id_6A79(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self[[level._id_0A5D]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0);
   level thread maps\mp\gametypes\_rank::_id_1457("raids_npc_kill", var_1, var_4, self, var_3);
 
-  if(isDefined(level._id_6A75))
+  if(isDefined(level._id_6A75)) {
     [[level._id_6A75]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  }
 
   if(self._id_565F) {
     self._id_4B60 = 1;
 
-    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self._id_7DAD) && self._id_7DAD))
+    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self._id_7DAD) && self._id_7DAD)) {
       self thread[[maps\mp\agents\_agent_utility::_id_0A59("spawn")]]();
-    else
+    } else {
       maps\mp\agents\_agent_utility::_id_2A73();
+    }
   }
 }

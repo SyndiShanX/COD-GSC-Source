@@ -4,8 +4,9 @@
 **************************************/
 
 init() {
-  if(!isDefined(level.setcorpsefalling))
+  if(!isDefined(level.setcorpsefalling)) {
     level.setcorpsefalling = [];
+  }
 
   level.setsurfacetype["sentry_minigun"] = "sentry";
   level.setcorpsefalling["sentry_minigun"] = spawnStruct();
@@ -57,8 +58,9 @@ init() {
 }
 
 cleanupplayerforsupplydrop() {
-  if(_id_028D::_id_5855())
+  if(_id_028D::_id_5855()) {
     _id_028D::_id_239A();
+  }
 }
 
 _id_11BF(var_0) {
@@ -85,13 +87,14 @@ _id_11BF(var_0) {
     }
   }
 
-  if(_id_2865() && !_id_04E0::_id_5790() && self _meth_85AC(var_0) > 0 && getdvarint("spv_hub_psd_kswitch", 1) == 0)
+  if(_id_2865() && !_id_04E0::_id_5790() && self _meth_85AC(var_0) > 0 && getdvarint("spv_hub_psd_kswitch", 1) == 0) {
     _id_1718(var_0, !var_1);
-  else {
+  } else {
     self setclientomnvar("ui_hub_prep_supplydrop", 0);
 
-    if(self _meth_85AC(var_0) <= 0 && !_id_04E0::_id_5790())
+    if(self _meth_85AC(var_0) <= 0 && !_id_04E0::_id_5790()) {
       thread _id_04E0::_id_3010("outOfSDs", &"HUB_OUT_OF_SD", undefined, -100, 1.65, 1);
+    }
   }
 }
 
@@ -100,8 +103,9 @@ _id_1718(var_0, var_1) {
   self endon("disconnect");
 
   if(self._id_56A4) {
-    if(isDefined(self._id_155F))
+    if(isDefined(self._id_155F)) {
       self._id_155F _id_04E0::_id_1543((0, 0, 80), self);
+    }
   }
 
   self._id_572B = 1;
@@ -222,8 +226,9 @@ _id_63CC(var_0, var_1) {
       }
 
       if(self._id_4DEF._id_1F2F) {
-        while(!self isonground())
+        while(!self isonground()) {
           waitframe();
+        }
 
         break;
       }
@@ -319,8 +324,9 @@ _id_86E7() {
   }
 
   foreach(var_2 in level.players) {
-    if(isDefined(var_2) && var_2 != self)
+    if(isDefined(var_2) && var_2 != self) {
       var_2 showtoplayer(self);
+    }
   }
 }
 
@@ -331,13 +337,15 @@ _id_441F(var_0, var_1) {
   if(var_2) {
     var_3 = tablelookup("mp/supplyDropTypes.csv", 1, var_0, 10);
 
-    if(var_3 == "")
+    if(var_3 == "") {
       var_3 = "hub_lootcrate_normal_fade";
+    }
   } else {
     var_3 = tablelookup("mp/supplyDropTypes.csv", 1, var_0, 9);
 
-    if(var_3 == "")
+    if(var_3 == "") {
       var_3 = "hub_lootcrate_normal";
+    }
   }
 
   return var_3;
@@ -394,9 +402,9 @@ _id_7FAF(var_0, var_1, var_2) {
   self endon("death");
   self endon("disconnect");
 
-  if(common_scripts\utility::_id_562E(var_2))
+  if(common_scripts\utility::_id_562E(var_2)) {
     self._id_08DD._id_5F0A = 1;
-  else if(!_id_6BFE(var_0)) {
+  } else if(!_id_6BFE(var_0)) {
     _id_7423();
     thread _id_238A();
     thread _id_2393(self);
@@ -443,8 +451,9 @@ _id_7FAF(var_0, var_1, var_2) {
 
     if(common_scripts\utility::_id_562E(var_2)) {
       for(var_9 = 0; var_9 < self._id_48CC.size; var_9++) {
-        if(_func_3B2(self._id_48CC[var_9]))
+        if(_func_3B2(self._id_48CC[var_9])) {
           var_8[var_8.size] = self._id_48CC[var_9];
+        }
       }
     } else {
       for(var_9 = 0; var_9 < self._id_48CC.size; var_9++) {
@@ -475,21 +484,24 @@ _id_7FAF(var_0, var_1, var_2) {
   } else {
     self _meth_85D7(self._id_48CC);
 
-    if(isDefined(self.currentguids))
+    if(isDefined(self.currentguids)) {
       self.currentguids = undefined;
+    }
   }
 
   var_10 = 0;
   _id_0E9B(var_2);
 
   while(!var_5) {
-    if(var_3 == var_4 - 1)
+    if(var_3 == var_4 - 1) {
       var_5 = 1;
+    }
 
     var_11 = _id_5106(var_3, var_5, level._id_7A71);
 
-    if(var_11 > var_10)
+    if(var_11 > var_10) {
       var_10 = var_11;
+    }
 
     var_3++;
   }
@@ -501,8 +513,9 @@ _id_7FAF(var_0, var_1, var_2) {
   _id_04E0::_id_50F0(["hubFeatureStats", "hubSupplyDrops", "numSupplyDropSpectators"], var_12, undefined, undefined);
   var_13 = hasextraloot(var_0) && !common_scripts\utility::_id_562E(var_2);
 
-  if(!var_13)
+  if(!var_13) {
     self _meth_85EF(&"supply_drop_all_cards_revealed");
+  }
 
   if(!isDefined(self._id_1388) || !self._id_1388) {
     var_14 = 0;
@@ -514,15 +527,16 @@ _id_7FAF(var_0, var_1, var_2) {
     } else
       var_14 = _id_A6BD();
 
-    if(var_14 != 1)
+    if(var_14 != 1) {
       thread _id_238A();
-    else {
-      if(var_13)
+    } else {
+      if(var_13) {
         self _meth_85D7(var_6);
-      else if(hasextraloot(var_0))
+      } else if(hasextraloot(var_0)) {
         self _meth_85D7([16977920, 16977920, 5]);
-      else
+      } else {
         self _meth_85D7([16977920, 16977920, 16977920]);
+      }
 
       _id_8737(0);
 
@@ -545,8 +559,9 @@ _id_7FAF(var_0, var_1, var_2) {
       self._id_7D07 = undefined;
 
       foreach(var_16 in level.players) {
-        if(isDefined(var_16) && var_16 != self)
+        if(isDefined(var_16) && var_16 != self) {
           var_16 showtoplayer(self);
+        }
       }
 
       thread _id_7423();
@@ -557,10 +572,11 @@ _id_7FAF(var_0, var_1, var_2) {
     if(var_14 == 1) {
       self._id_7D07 = 1;
 
-      if(var_13)
+      if(var_13) {
         thread _id_7D08(var_0, 1);
-      else
+      } else {
         thread _id_7D08(var_0);
+      }
 
       return;
       return;
@@ -573,8 +589,9 @@ _id_7FAF(var_0, var_1, var_2) {
     thread _id_2393(self);
 
     foreach(var_16 in level.players) {
-      if(isDefined(var_16) && var_16 != self)
+      if(isDefined(var_16) && var_16 != self) {
         var_16 showtoplayer(self);
+      }
     }
   }
 }
@@ -584,14 +601,15 @@ _id_991D(var_0, var_1, var_2, var_3) {
   self endon("death");
   wait 0.5;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     self notify("supplydrop", var_0);
-  else if(!isDefined(var_2))
+  } else if(!isDefined(var_2)) {
     self notify("supplydrop", var_0, var_1);
-  else if(!isDefined(var_3))
+  } else if(!isDefined(var_3)) {
     self notify("supplydrop", var_0, var_1, var_2);
-  else
+  } else {
     self notify("supplydrop", var_0, var_1, var_2, var_3);
+  }
 }
 
 _id_6BFE(var_0) {
@@ -614,20 +632,25 @@ _id_A6CB() {
   self waittill("supplydrop", var_0, var_1, var_2, var_3, var_4);
   self._id_48CC = [];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self._id_48CC[self._id_48CC.size] = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self._id_48CC[self._id_48CC.size] = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self._id_48CC[self._id_48CC.size] = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self._id_48CC[self._id_48CC.size] = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self._id_48CC[self._id_48CC.size] = var_4;
+  }
 
   self notify("supplydrop_opened");
   self._id_08DD._id_5F0A = 1;
@@ -666,35 +689,40 @@ _id_5106(var_0, var_1, var_2) {
   var_7 = (var_0 + 1) * 2;
   var_8 = "tag_fx" + common_scripts\utility::_id_9AAD(var_0 + 1);
 
-  if(isDefined(self.currentguids))
+  if(isDefined(self.currentguids)) {
     var_3 = self.currentguids[var_0];
-  else
+  } else {
     var_3 = self._id_48CC[var_0];
+  }
 
   if(var_3 == 5) {} else {
     var_4 = _func_31A(var_3, 1);
     var_5 = int(_func_31A(var_3, 29));
 
-    if(var_0 == 0)
+    if(var_0 == 0) {
       self notify("firstItemComingOut");
+    }
 
     self _meth_85DC(var_0, 0);
     self._id_08DD scriptmodelplayanim("mp_hub_crate_card_" + var_7 + "_out", "card_" + var_7 + "_out_notetrack");
 
-    if(var_5 == 3 || var_5 == 4)
-      _playfxontag(var_2[var_5], self._id_08DD, var_8);
+    if(var_5 == 3 || var_5 == 4) {
+      _playFXOnTag(var_2[var_5], self._id_08DD, var_8);
+    }
 
     self._id_08DD waittillmatch("card_" + var_7 + "_out_notetrack", "show_loot");
     var_9 = "mp_loot_stinger_rarity_0" + (var_5 + 1);
 
-    if(var_5 == 3)
+    if(var_5 == 3) {
       var_9 = "hub_ann_epic";
+    }
 
-    if(var_5 == 4)
+    if(var_5 == 4) {
       var_9 = "hub_ann_heroic";
+    }
 
     self _meth_85A7("hub_reveal_loot_card", self._id_08DD.origin, self._id_08DD.origin, var_9);
-    _playfxontag(var_2[var_5], self._id_08DD, var_8);
+    _playFXOnTag(var_2[var_5], self._id_08DD, var_8);
 
     switch (var_5) {
       case 3:
@@ -710,8 +738,9 @@ _id_5106(var_0, var_1, var_2) {
     self _meth_85DC(var_0, 3);
   }
 
-  if(var_1)
+  if(var_1) {
     self notify("allLootItemsRevealed");
+  }
 
   return var_5;
 }
@@ -769,26 +798,30 @@ _id_A6BD() {
   thread _id_A6BE();
   var_0 = common_scripts\utility::waittill_any_return("reopen_PSD", "exit_PSD_sequence", "noPostPSDInput", "autoFinishSupplyDrop");
 
-  if(var_0 == "exit_PSD_sequence" || var_0 == "noPostPSDInput" || var_0 == "autoFinishSupplyDrop")
+  if(var_0 == "exit_PSD_sequence" || var_0 == "noPostPSDInput" || var_0 == "autoFinishSupplyDrop") {
     return 0;
-  else if(var_0 == "reopen_PSD")
+  } else if(var_0 == "reopen_PSD") {
     return 1;
+  }
 }
 
 _id_21EE(var_0) {
   var_1 = getEntArray("invalid_psd_area", "targetname");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 1;
+  }
 
   foreach(var_3 in var_1) {
-    if(var_0 istouching(var_3))
+    if(var_0 istouching(var_3)) {
       return 0;
+    }
   }
 
   foreach(var_6 in level._id_08DE) {
-    if(distancesquared(var_0.origin, var_6) <= 7225)
+    if(distancesquared(var_0.origin, var_6) <= 7225) {
       return 0;
+    }
   }
 
   return 1;
@@ -819,8 +852,9 @@ _id_7C6A(var_0) {
   var_1 = 10.0;
 
   foreach(var_3 in level._id_08DE) {
-    if((var_3[0] + var_1 <= var_0.origin[0] || var_3[0] - var_1 <= var_0.origin[0]) && (var_3[1] + var_1 <= var_0.origin[1] || var_3[1] - var_1 <= var_0.origin[1]) && (var_3[2] + var_1 <= var_0.origin[2] || var_3[2] - var_1 <= var_0.origin[2]))
+    if((var_3[0] + var_1 <= var_0.origin[0] || var_3[0] - var_1 <= var_0.origin[0]) && (var_3[1] + var_1 <= var_0.origin[1] || var_3[1] - var_1 <= var_0.origin[1]) && (var_3[2] + var_1 <= var_0.origin[2] || var_3[2] - var_1 <= var_0.origin[2])) {
       level._id_08DE = common_scripts\utility::_id_0F93(level._id_08DE, var_3);
+    }
   }
 }
 
@@ -870,8 +904,9 @@ _id_49E9() {
   if(!isDefined(self._id_08DD)) {
     return;
   }
-  if(!isDefined(level._id_08C2))
+  if(!isDefined(level._id_08C2)) {
     level._id_08C2 = [];
+  }
 
   if(level._id_08C2.size >= 10) {
     return;
@@ -961,10 +996,11 @@ _id_743E() {
 }
 
 _id_24E2(var_0) {
-  var_1 = _getent("psd_collision", "targetname");
+  var_1 = _getEnt("psd_collision", "targetname");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return undefined;
+  }
 
   var_2 = ((self.origin[0] + var_0[0]) / 2, (self.origin[1] + var_0[1]) / 2, (self.origin[2] + var_0[2]) / 2 - 25);
   var_3 = spawn("script_model", var_2);
@@ -995,15 +1031,15 @@ _id_7005(var_0, var_1) {
   self setplayerangles(var_6);
   self _meth_85C9(1);
   _id_743D(1);
-  self cameralinkto(self._id_0E9D, "tag_player", 500);
-  self._id_0E9D moveto(var_3, 0.5);
-  self._id_0E9D rotateto(var_6, 0.5);
+  self cameralinkTo(self._id_0E9D, "tag_player", 500);
+  self._id_0E9D moveTo(var_3, 0.5);
+  self._id_0E9D rotateTo(var_6, 0.5);
   self waittill("beginReactionAnims");
   self._id_0E9D.origin = self.origin;
   self._id_0E9D.angles = var_2;
   self._id_0E9D._id_A2B4 = var_2;
   self._id_0E9D.targetname = "animatedPSDCamera";
-  self cameralinkto(self._id_0E9D, "tag_origin_animated");
+  self cameralinkTo(self._id_0E9D, "tag_origin_animated");
   self._id_0E9D scriptmodelplayanimdeltamotion("mp_hub_crate_drop_cam");
   self waittill("firstItemComingOut");
   self._id_0E9D scriptmodelclearanim();
@@ -1029,8 +1065,9 @@ _id_7D55() {
 }
 
 _id_36E1(var_0) {
-  if(isDefined(level._id_08DE) && isDefined(var_0))
+  if(isDefined(level._id_08DE) && isDefined(var_0)) {
     level._id_08DE[level._id_08DE.size] = var_0;
+  }
 
   if(isDefined(self._id_4DEF)) {
     self._id_4DEF delete();
@@ -1041,21 +1078,24 @@ _id_36E1(var_0) {
 }
 
 _id_2FA9() {
-  if(!isDefined(self._id_2F81))
+  if(!isDefined(self._id_2F81)) {
     self._id_2F81 = 0;
+  }
 
   self._id_2F81++;
   self disableweapons();
 }
 
 _id_366B() {
-  if(!isDefined(self._id_2F81))
+  if(!isDefined(self._id_2F81)) {
     self._id_2F81 = 0;
+  }
 
   self._id_2F81--;
 
-  if(!self._id_2F81)
+  if(!self._id_2F81) {
     self enableweapons();
+  }
 }
 
 oncarrierdeathordisconnect() {
@@ -1098,8 +1138,9 @@ _id_A85E() {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!isDefined(level._id_77A6))
+  if(!isDefined(level._id_77A6)) {
     level._id_77A6 = common_scripts\utility::_id_46B7("psd_spawn_location", "targetname");
+  }
 
   var_0 = common_scripts\utility::random(level._id_77A6);
   self.warpingtosupplydrop = 1;
@@ -1139,8 +1180,9 @@ _id_2350(var_0) {
   var_0 endon("death");
   self waittill("disconnect");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 _id_2865() {
@@ -1176,7 +1218,8 @@ monitorsupplydropawarded() {
     }
     var_3 = tablelookup("mp/supplyDropTypes.csv", 1, var_1, 0);
 
-    if(var_3 != "")
+    if(var_3 != "") {
       thread maps\mp\gametypes\_hud_message::_id_9102(var_3, var_1);
+    }
   }
 }
