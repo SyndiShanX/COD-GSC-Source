@@ -60,11 +60,11 @@ init_fx() {
   level._effect[#"soul_fx_water"] = #"zm_ai/fx8_cata_water_purify_trail";
   level._effect[#"soul_fx_air"] = #"zm_ai/fx8_cata_elec_aura";
   level._effect[#"soul_fx_fire"] = #"hash_641c2257723638c2";
-  level._effect[#"soul_capture_earth"] = #"hash_62eafc17a432322a";
-  level._effect[#"soul_capture_water"] = #"hash_1832a0ef5af0040d";
-  level._effect[#"soul_capture_air"] = #"hash_619361bb6a9a5d2d";
-  level._effect[#"soul_capture_fire"] = #"hash_3009e42178ffd484";
-  level._effect[#"hash_4ab2496c89a7d871"] = #"hash_4a305119bc50ca3d";
+  level._effect[#"soul_capture_earth"] = #"zm_ai/fx8_cata_cor_death";
+  level._effect[#"soul_capture_water"] = #"zm_ai/fx8_cata_water_death";
+  level._effect[#"soul_capture_air"] = #"zm_ai/fx8_cata_elec_death";
+  level._effect[#"soul_capture_fire"] = #"zm_ai/fx8_cata_plasma_transform";
+  level._effect[#"hash_4ab2496c89a7d871"] = #"fire/fx8_line_md";
   level._effect[#"packed_artifact"] = #"zombie/fx_ritual_glow_relic_zod_zmb";
   level._effect[#"catalyst_blocker"] = #"zombie/fx8_power_door_amb_quest";
   level._effect[#"sentinel_aura"] = #"hash_3def678deb7f4078";
@@ -491,7 +491,7 @@ function_ac4395b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 planet_glyph_activate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     fx = util::playFXOnTag(localclientnum, level._effect[#"glyph_activate"], self, "tag_origin");
-    playSound(localclientnum, #"hash_6dfc68e5f7739824", self.origin);
+    playSound(localclientnum, #"zmb_planet_glyph_activate", self.origin);
     wait 3.5;
 
     if(isDefined(fx)) {
@@ -506,8 +506,8 @@ function_74e395f7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.blocker_fx = playFX(localclientnum, level._effect[#"catalyst_blocker"], self.origin, v_forward);
 
     if(!isDefined(self.var_99a9007b)) {
-      self playSound(localclientnum, #"hash_2c71df73b17cd28a");
-      self.var_99a9007b = self playLoopSound(#"hash_7e4a7312ab58161e");
+      self playSound(localclientnum, #"zmb_sentinel_trial_blocker_start");
+      self.var_99a9007b = self playLoopSound(#"zmb_sentinel_trial_blocker_lp");
     }
 
     return;
@@ -518,7 +518,7 @@ function_74e395f7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_99a9007b)) {
-    self playSound(localclientnum, #"hash_3366b1b903dc96bf");
+    self playSound(localclientnum, #"zmb_sentinel_trial_blocker_end");
     self stoploopsound(self.var_99a9007b);
     self.var_99a9007b = undefined;
   }
@@ -681,7 +681,7 @@ function_9f92e675(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     util::playFXOnTag(localclientnum, level._effect[#"tree_activate"], self, "tag_origin");
     self playSound(localclientnum, #"zmb_step8_artifact_explode");
-    self.var_3765ceb0 = self playLoopSound(#"hash_453bd80432d8f383");
+    self.var_3765ceb0 = self playLoopSound(#"zmb_step8_water_surge_lp");
     wait 0.25;
 
     while(isDefined(self)) {
@@ -694,12 +694,12 @@ function_9f92e675(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_57196646(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     util::playFXOnTag(localclientnum, level._effect[#"tree_trail"], self, "tag_origin");
-    self playSound(localclientnum, #"hash_c5737dedcdad3a8");
+    self playSound(localclientnum, #"zmb_step8_planet_release");
     return;
   }
 
   util::playFXOnTag(localclientnum, level._effect[#"tree_impact"], self, "tag_origin");
-  self playSound(localclientnum, #"hash_3d9dcef3d979480b");
+  self playSound(localclientnum, #"zmb_step8_planet_poof");
   function_36e4ebd4(localclientnum, #"zm_zodt8_planet_impact");
 }
 

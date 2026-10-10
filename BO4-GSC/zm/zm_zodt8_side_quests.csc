@@ -52,7 +52,7 @@ init_fx() {
   level._effect[#"engine_damage_smoke"] = #"hash_706103079a2bdb6d";
   level._effect[#"hash_3524e302fa83d12e"] = #"hash_3a791d490f01f5c7";
   level._effect[#"engine_damage_sparks"] = #"hash_15dc4292340f0f1c";
-  level._effect[#"engine_damage_boom"] = #"hash_7691f79bfc16f0bf";
+  level._effect[#"engine_damage_boom"] = #"smoke/fx_smk_explode_md";
   level._effect[#"car_lights"] = #"hash_335feb1d213c22f6";
   level._effect[#"hash_1c0ed73a9b21a882"] = #"hash_cc7196a44e2fbe3";
   level._effect[#"hash_704d3c12d59fb5d7"] = #"hash_2aabc11b07ad74d8";

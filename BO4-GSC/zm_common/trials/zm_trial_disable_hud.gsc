@@ -33,7 +33,7 @@ function_afe4a356() {
 
   foreach(player in getPlayers()) {
     player showcrosshair(0);
-    player playsoundtoplayer(#"hash_79fced3c02a68283", player);
+    player playsoundtoplayer(#"zmb_trials_hud_removed", player);
   }
 }
 
@@ -47,6 +47,6 @@ on_end(round_reset) {
 
   foreach(player in getPlayers()) {
     player showcrosshair(1);
-    player playsoundtoplayer(#"hash_18aab7ffde259877", player);
+    player playsoundtoplayer(#"zmb_trials_hud_restored", player);
   }
 }

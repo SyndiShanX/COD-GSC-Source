@@ -530,7 +530,7 @@ function_d7e79438() {
   }
 
   level.pablo_npc notify(#"dumbwaiter_interact_started");
-  playSoundAtPosition(#"hash_512bec1d554e89f1", self.origin);
+  playSoundAtPosition(#"evt_dumbwaiter_place", self.origin);
   level.pablo_npc thread function_39614d4b();
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   self.s_unitrigger = undefined;
@@ -538,6 +538,6 @@ function_d7e79438() {
 
 function_30a02731() {
   self endon(#"death");
-  playSoundAtPosition(#"hash_512bec1d554e89f1", self.origin);
+  playSoundAtPosition(#"evt_dumbwaiter_place", self.origin);
   level.pablo_npc thread function_39614d4b();
 }

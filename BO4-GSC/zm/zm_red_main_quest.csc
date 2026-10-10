@@ -102,7 +102,7 @@ init() {
   level._effect[#"hash_30660c47aae060a9"] = #"zm_ai/fx8_elec_bolt";
   level._effect[#"hash_22acf133b0aa208a"] = #"hash_4d09e042a77cfba3";
   level._effect[#"hash_530e1caa1a8c81d2"] = #"hash_4bbfe2d612f8393d";
-  level._effect[#"hash_6d76e4b7a31537af"] = #"hash_2b71a6c9f08cfe3b";
+  level._effect[#"hash_6d76e4b7a31537af"] = #"maps/zm_escape/fx8_lightning_trail_red";
   level._effect[#"hash_4d77ba61cd7f3eb7"] = #"hash_25c4a39b373bfc67";
   level._effect[#"hash_7fc7f7b5958831d4"] = #"hash_520fd2427c5fcea3";
   level._effect[#"hash_431f319e4b8fe9db"] = #"hash_37bc7da216893b77";
@@ -321,8 +321,8 @@ function_31d064c0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(!isDefined(self.var_1cfdd45e)) {
-      self playSound(localclientnum, #"hash_10f7dee939554f61");
-      self.var_1cfdd45e = self playLoopSound(#"hash_474d2ea03ea86530");
+      self playSound(localclientnum, #"zmb_perseus_energy_release");
+      self.var_1cfdd45e = self playLoopSound(#"zmb_perseus_energy_lp");
     }
 
     return;
@@ -404,7 +404,7 @@ function_d02ccc7c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 spear_fire_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playRumbleOnEntity(localclientnum, #"hash_230077451d7197c1");
+  self playRumbleOnEntity(localclientnum, #"zm_red_spear_fire_rumble");
 }
 
 greek_fire_annihilate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -1467,7 +1467,7 @@ function_83a7c416(localclientnum) {
       level beam::launch(self, str_tag, mdl_fx, "tag_origin", "beam8_zm_red_peg_lightning_strike", 1);
 
       if(var_43997e53 >= 2) {
-        self playSound(localclientnum, #"hash_61c057ffadb7a5af");
+        self playSound(localclientnum, #"wpn_pegasus_electric_bolt");
         var_43997e53 = 0;
       }
 

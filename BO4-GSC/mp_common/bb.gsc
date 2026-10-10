@@ -42,14 +42,14 @@ function_bf5cad4e(gamemodedata) {
   gamemodedata.timeremaining = isDefined(gamemodedata.remainingtime) ? gamemodedata.remainingtime : 0;
   gamemodedata.var_20de6a02 = isDefined(gamemodedata.var_20de6a02) ? gamemodedata.var_20de6a02 : 0;
   gamemodedata.var_be1de2ab = isDefined(gamemodedata.var_be1de2ab) ? gamemodedata.var_be1de2ab : 0;
-  function_92d1707f(#"hash_1a63efe7c6121b24", gamemodedata);
+  function_92d1707f(#"dlog_event_gamemodedata", gamemodedata);
 }
 
 function_95a5b5c2(obj_type, label, team, origin, player) {
   if(sessionmodeismultiplayergame()) {
     var_cfad67d4 = ishash(team) ? team : hash(team);
     clientid = isDefined(player) && isDefined(player.clientid) ? player.clientid : -1;
-    function_92d1707f(#"hash_d424efe4db1dff7", {
+    function_92d1707f(#"dlog_event_mpobjective", {
       #gametime: function_f8d53445(), #objtype: obj_type, #label: label, #team: var_cfad67d4, #playerx: origin[0], #playery: origin[1], #playerz: origin[2], #clientid: clientid
     });
   }
@@ -94,7 +94,7 @@ function_c3b9e07f(eattacker, attackerorigin, attackerspecialist, attackerweapon,
   mpattacks.death = death;
   mpattacks.isusingheropower = isusingheropower;
   mpattacks.killstreak = killstreak;
-  function_92d1707f(#"hash_67e3a427b7ec1819", mpattacks);
+  function_92d1707f(#"dlog_event_mpattacks", mpattacks);
 }
 
 on_player_death(params) {
@@ -171,7 +171,7 @@ function_6661621a() {
 
   mploadout.specialistability = var_c0f05cbb.name;
   mploadout.specialistindex = isDefined(self getspecialistindex()) ? self getspecialistindex() : -1;
-  function_92d1707f(#"hash_30b542620e21966d", #"mploadouts", mploadout);
+  function_92d1707f(#"dlog_event_mploadouts", #"mploadouts", mploadout);
 }
 
 commit_spawn_data() {
@@ -193,7 +193,7 @@ commit_spawn_data() {
   mpplayerlives = {
     #gametime: function_f8d53445(), #spawnid: getplayerspawnid(self), #lifescore: self._bbdata[#"score"], #lifemomentum: self._bbdata[#"momentum"], #lifetime: gettime() - self._bbdata[#"spawntime"], #name: self.name, #specialist: specialistindex
   };
-  function_92d1707f(#"hash_6fc210ad5f081ce8", mpplayerlives);
+  function_92d1707f(#"dlog_event_mpplayerlives", mpplayerlives);
   self function_6661621a();
 }
 

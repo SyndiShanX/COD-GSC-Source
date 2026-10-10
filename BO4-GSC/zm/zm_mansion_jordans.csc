@@ -36,7 +36,7 @@ function_5869f09a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_c51132ba(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrenderoverridebundle(#"hash_429426f01ad84c8b");
+  self playrenderoverridebundle(#"rob_zm_hell_dust");
 }
 
 function_bb6fcc6a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

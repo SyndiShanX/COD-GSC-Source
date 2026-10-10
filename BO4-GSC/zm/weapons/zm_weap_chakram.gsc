@@ -780,7 +780,7 @@ function_481a494b(var_5f94a2e7) {
   self endon(#"weapon_melee", #"weapon_change", #"disconnect", #"bled_out", #"entering_last_stand");
   self.var_a70d2cfe = 1;
   self clientfield::set("" + #"chakram_whirlwind_fx", 1);
-  self playSound(#"hash_6043c078f3675169");
+  self playSound(#"wpn_chakram_whirlwind_activate_npc");
 
   while(isDefined(self.var_a70d2cfe) && self.var_a70d2cfe) {
     self clientfield::increment_to_player("" + #"chakram_rumble", 6);
@@ -820,7 +820,7 @@ function_481a494b(var_5f94a2e7) {
         if(e_target.health < n_damage && isactor(e_target) && var_9a7661ba) {
           gibserverutils::gibhead(e_target);
           e_target clientfield::set("" + #"chakram_head_pop_fx", 1);
-          e_target playSound(#"hash_4332e54b12b06564");
+          e_target playSound(#"wpn_chakram_whirlwind_kill");
           e_target clientfield::increment("" + #"chakram_whirlwind_shred_fx", 1);
         }
 

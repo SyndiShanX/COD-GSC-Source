@@ -88,7 +88,7 @@ function_aae8819(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 function_3a0ab08b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   str_tag = "tag_origin";
 
-  if(self.model === #"hash_32baa51d012e13b9") {
+  if(self.model === #"p8_fxanim_zm_orange_pablo_lift") {
     str_tag = "tag_item_5";
   }
 
@@ -100,7 +100,7 @@ function_3a0ab08b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     self util::waittill_dobj(localclientnum);
     self.stage_fx = util::playFXOnTag(localclientnum, level._effect[#"vessel_stage_1"], self, str_tag);
-    self.var_3177d514 = self playLoopSound(#"hash_218e114cfa2b9a4");
+    self.var_3177d514 = self playLoopSound(#"zmb_vessel_stage_1");
     return;
   }
 
@@ -110,7 +110,7 @@ function_3a0ab08b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     self.stage_fx = util::playFXOnTag(localclientnum, level._effect[#"vessel_stage_2"], self, str_tag);
-    self.var_3177d514 = self playLoopSound(#"hash_218e414cfa2bebd");
+    self.var_3177d514 = self playLoopSound(#"zmb_vessel_stage_2");
     return;
   }
 
@@ -120,7 +120,7 @@ function_3a0ab08b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     self.stage_fx = util::playFXOnTag(localclientnum, level._effect[#"vessel_stage_3"], self, str_tag);
-    self.var_3177d514 = self playLoopSound(#"hash_218e314cfa2bd0a");
+    self.var_3177d514 = self playLoopSound(#"zmb_vessel_stage_3");
     return;
   }
 

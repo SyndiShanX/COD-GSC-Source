@@ -390,7 +390,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
       self zm_score::player_reduce_points("points_lost_on_hit_value", level.var_39e18a71);
 
       if(zm_trial::is_trial_mode()) {
-        self playsoundtoplayer(#"hash_3109126d3731f3d2", self);
+        self playsoundtoplayer(#"zmb_trials_points_loss", self);
       }
     }
 

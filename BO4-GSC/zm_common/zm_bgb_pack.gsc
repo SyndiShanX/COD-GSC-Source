@@ -478,7 +478,7 @@ global_cooldown(n_index) {
   if(self.n_round_counter >= 4) {
     self function_f2173c97(1);
   } else {
-    self playlocalsound(#"hash_2a9d100a5cbc7dbe");
+    self playlocalsound(#"zmb_elixir_common_cooldown_all_end");
   }
 
   self.var_bd0d5874 = 0;
@@ -583,7 +583,7 @@ slot_cooldown(n_index) {
   }
 
   if(self.var_2d8082a0[n_index] <= 0 || isDefined(var_10b7b97a) && var_10b7b97a) {
-    self playsoundtoplayer(#"hash_78bd6c84a567b714", self);
+    self playsoundtoplayer(#"zmb_elixir_common_cooldown_solo_end", self);
     self notify("end_slot_cooldown" + n_index);
     self function_1d5d39b0(n_index, 1);
     self function_b2308cd(n_index, 0);

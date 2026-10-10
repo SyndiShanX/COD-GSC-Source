@@ -122,9 +122,9 @@ slumber_party() {
     level flag::set(#"slumber_party");
     exploder::exploder("fxexp_disco_lgt");
     var_51bef3af = spawn("script_model", (1, 1145, -350));
-    var_51bef3af playSound(#"hash_c8d3a1557c42ab7");
+    var_51bef3af playSound(#"mus_club_code");
     s_notify = level waittilltimeout(253, #"trial_round_end");
-    var_51bef3af stopsound(#"hash_c8d3a1557c42ab7");
+    var_51bef3af stopsound(#"mus_club_code");
     waitframe(1);
     var_51bef3af delete();
     exploder::stop_exploder("fxexp_disco_lgt");

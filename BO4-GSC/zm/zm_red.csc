@@ -109,10 +109,10 @@ function_3b118f17(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   self endon(#"death");
 
   if(newval == 1) {
-    self thread postfx::playpostfxbundle(#"hash_5e6d2d91ca059a03");
+    self thread postfx::playpostfxbundle(#"pstfx_zm_eye_vignette");
     self thread postfx::playpostfxbundle(#"hash_6422033e84a54e2d");
     level waittill(#"pstfx_off");
-    self thread postfx::exitpostfxbundle(#"hash_5e6d2d91ca059a03");
+    self thread postfx::exitpostfxbundle(#"pstfx_zm_eye_vignette");
     self thread postfx::exitpostfxbundle(#"hash_6422033e84a54e2d");
   }
 }

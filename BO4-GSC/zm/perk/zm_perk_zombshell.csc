@@ -28,8 +28,8 @@ __init__() {
 }
 
 function_efe56acb() {
-  level._effect[#"zombshell_aoe"] = #"hash_3d2e7548c7dfc406";
-  level._effect[#"zombshell_explosion"] = #"hash_1900ec48b2f264fe";
+  level._effect[#"zombshell_aoe"] = #"zombie/fx8_perk_zombshell_aoe";
+  level._effect[#"zombshell_explosion"] = #"zombie/fx8_perk_zombshell_exp";
   level._effect[#"zombie_blood_1st"] = #"player/fx8_plyr_pstfx_katana_rush_loop";
 }
 
@@ -46,8 +46,8 @@ zombshell_aoe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
     self.var_a6da95e6 = util::playFXOnTag(localclientnum, level._effect[#"zombshell_aoe"], self, "tag_origin");
 
     if(!isDefined(self.var_e3d27e69)) {
-      self playSound(localclientnum, #"hash_6aa32cc737673479");
-      self.var_e3d27e69 = self playLoopSound(#"hash_d377c202c27be3f");
+      self playSound(localclientnum, #"zmb_vapor_zombshell_start");
+      self.var_e3d27e69 = self playLoopSound(#"zmb_vapor_zombshell_lp");
     }
 
     return;
@@ -59,7 +59,7 @@ zombshell_aoe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
   }
 
   if(isDefined(self.var_e3d27e69)) {
-    self playSound(localclientnum, #"hash_5aa45eab2ab681e8");
+    self playSound(localclientnum, #"zmb_vapor_zombshell_end");
     self stoploopsound(self.var_e3d27e69);
     self.var_e3d27e69 = undefined;
   }

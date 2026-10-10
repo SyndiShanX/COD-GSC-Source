@@ -25,7 +25,7 @@ zombie_arm_blood_splash(localclientnum, oldval, newval, bnewent, binitialsnap, f
   bathtub = struct::get(#"zombie_bathub", "targetname");
 
   if(isDefined(bathtub)) {
-    playFX(localclientnum, #"hash_6e2b2bcea07134d1", bathtub.origin, (0, 0, 1));
+    playFX(localclientnum, #"impacts/fx8_knife_impact_blood", bathtub.origin, (0, 0, 1));
   }
 }
 

@@ -28,7 +28,7 @@ __init__() {
 }
 
 __main__() {
-  level.chest_joker_model = #"hash_4b77dcb67eb0dc91";
+  level.chest_joker_model = #"p8_zm_esc_magic_lock_lrg_red";
   level.chest_joker_custom_movement = &custom_joker_movement;
 }
 

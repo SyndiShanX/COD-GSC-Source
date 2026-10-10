@@ -43,7 +43,7 @@ init() {
   array::thread_all(a_s_scrolls, &function_58c9a8b3, 1);
   a_s_skulls = struct::get_array(#"hash_70b8946b02777c1d");
   array::thread_all(a_s_skulls, &function_58c9a8b3);
-  level thread function_c2e32573("narrative_whispers", array(#"hash_609c2bdb6def129f", #"hash_4af81ddd4ad3f4d1", #"hash_23a8e8f61c4fc32c", #"hash_7f6bf79b60f1e8d4"), 1, #"hash_46aec984fab973b8", #"hash_46ddcfa7b8081e89", 1.5);
+  level thread function_c2e32573("narrative_whispers", array(#"hash_609c2bdb6def129f", #"hash_4af81ddd4ad3f4d1", #"hash_23a8e8f61c4fc32c", #"hash_7f6bf79b60f1e8d4"), 1, #"zmb_sq_audiolog_oracle_start", #"zmb_sq_audiolog_oracle_end", 1.5);
   level thread function_c2e32573("narrative_warning", array(#"hash_5c9150da16c41e10", #"hash_66dd1564ba1e9474", #"hash_4489363f604b439c", #"hash_4e2811c0bd19be20", #"hash_7101f8d31ad66888"), 1);
   level thread function_a38e222b();
   level thread function_831dcf3e();
@@ -162,8 +162,8 @@ function_a38e222b() {
     waitresult = level waittill(#"narrative_explore");
     level flag::set(#"hash_64e187377acec152");
     var_e25ba3b3 = spawn("script_origin", waitresult.v_origin);
-    var_e25ba3b3 playSound(#"hash_d4b330503498b0f");
-    var_e25ba3b3 playLoopSound(#"hash_1da1dccdd4a06b31");
+    var_e25ba3b3 playSound(#"zmb_sq_audiolog_scroll_start");
+    var_e25ba3b3 playLoopSound(#"zmb_sq_audiolog_scroll_lp");
     wait 2;
 
     switch (i) {
@@ -200,7 +200,7 @@ function_a38e222b() {
     }
 
     var_e25ba3b3 stoploopsound();
-    var_e25ba3b3 playSound(#"hash_4242c92643cc6775");
+    var_e25ba3b3 playSound(#"zmb_sq_audiolog_scroll_stop");
     waitframe(1);
     var_e25ba3b3 delete();
     level flag::clear(#"hash_64e187377acec152");
@@ -250,47 +250,47 @@ function_b116e882(var_237f80b0, var_54bb7f87, var_5876458) {
     switch (var_237f80b0) {
       case 0:
         if(var_54bb7f87 == 0) {
-          var_d34b6d2b = #"hash_1ac8c014caa1f64d";
+          var_d34b6d2b = #"zmb_sq_audiolog_quest_sfx_zombies";
         }
 
         if(var_54bb7f87 == 1) {
-          var_d34b6d2b = #"hash_4e8555d4b9f67fb5";
+          var_d34b6d2b = #"zmb_sq_audiolog_quest_sfx_1";
         }
 
         if(var_54bb7f87 == 3) {
-          var_d34b6d2b = #"hash_4e8552d4b9f67a9c";
+          var_d34b6d2b = #"zmb_sq_audiolog_quest_sfx_2";
         }
 
         if(var_54bb7f87 == 4) {
-          var_d34b6d2b = #"hash_4e8553d4b9f67c4f";
+          var_d34b6d2b = #"zmb_sq_audiolog_quest_sfx_3";
         }
 
         break;
       case 2:
         if(var_54bb7f87 == 9) {
-          var_d34b6d2b = #"hash_70155a583c7b3ae2";
+          var_d34b6d2b = #"zmb_sq_audiolog_sacrifice_sfx_1";
         }
 
         if(var_54bb7f87 == 11) {
-          var_d34b6d2b = #"hash_701559583c7b392f";
+          var_d34b6d2b = #"zmb_sq_audiolog_sacrifice_sfx_2";
         }
 
         if(var_54bb7f87 == 12) {
-          var_d34b6d2b = #"hash_701558583c7b377c";
+          var_d34b6d2b = #"zmb_sq_audiolog_sacrifice_sfx_3";
         }
 
         if(var_54bb7f87 == 13) {
-          var_d34b6d2b = #"hash_701557583c7b35c9";
+          var_d34b6d2b = #"zmb_sq_audiolog_sacrifice_sfx_4";
         }
 
         if(var_54bb7f87 == 14) {
-          var_d34b6d2b = #"hash_701556583c7b3416";
+          var_d34b6d2b = #"zmb_sq_audiolog_sacrifice_sfx_5";
         }
 
         break;
       case 3:
         if(var_54bb7f87 == 2) {
-          var_d34b6d2b = #"hash_481d86c03825cd82";
+          var_d34b6d2b = #"zmb_sq_audiolog_appease_sfx_1";
         }
 
         break;

@@ -24,14 +24,14 @@ init_clientfields() {
 jump_scare_lighthouse(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread postfx::playpostfxbundle(#"hash_34d554b44dfcb81d");
-    playSound(localclientnum, #"hash_750bc40787e0e29f", (0, 0, 0));
+    playSound(localclientnum, #"evt_ee_lake_jumpscare_2", (0, 0, 0));
   }
 }
 
 jump_scare_note(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread postfx::playpostfxbundle(#"hash_34d551b44dfcb304");
-    playSound(localclientnum, #"hash_750bc50787e0e452", (0, 0, 0));
+    playSound(localclientnum, #"evt_ee_lake_jumpscare_1", (0, 0, 0));
   }
 }
 

@@ -1976,7 +1976,7 @@ preshootlaserandglinton(ai) {
     ai.laserstatus = 0;
   }
 
-  sniper_glint = #"hash_3db1ecb54b192a49";
+  sniper_glint = #"lensflares/fx8_lf_sniper_glint";
 
   while(true) {
     self waittill(#"about_to_fire");

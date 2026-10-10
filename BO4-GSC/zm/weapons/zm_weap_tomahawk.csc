@@ -26,17 +26,17 @@ __init__() {
   clientfield::register("missile", "tomahawk_trail_fx", 1, var_92c56e8d, "int", &tomahawk_trail_fx, 0, 0);
   setupclientfieldcodecallbacks("toplayer", 1, "tomahawk_in_use");
   setupclientfieldcodecallbacks("toplayer", 1, "" + #"upgraded_tomahawk_in_use");
-  level._effect[#"tomahawk_pickup"] = #"hash_589d0bc9c10726fb";
-  level._effect[#"tomahawk_pickup_upgrade"] = #"hash_5f183257769badd4";
-  level._effect[#"tomahawk_trail"] = #"hash_77b995b902df3cd9";
-  level._effect[#"tomahawk_trail_ug"] = #"hash_5384d01e513526";
-  level._effect[#"tomahawk_charged_trail"] = #"hash_3d47ab5cd1e7b732";
-  level._effect[#"tomahawk_charged_trail_blue"] = #"hash_5c8911bafb8efe53";
-  level._effect[#"tomahawk_impact"] = #"hash_681b2b47d9fb71c9";
-  level._effect[#"tomahawk_impact_ug"] = #"hash_26ef5fefeb29c436";
-  level._effect[#"tomahawk_fire_dot"] = #"hash_5686def5b4c85661";
-  level._effect[#"tomahawk_charge_up"] = #"hash_909f7d24e4e84e3";
-  level._effect[#"tomahawk_charge_up_ug"] = #"hash_de4b918ea7d5e3c";
+  level._effect[#"tomahawk_pickup"] = #"zm_weapons/fx8_tomahawk_pickup";
+  level._effect[#"tomahawk_pickup_upgrade"] = #"zm_weapons/fx8_tomahawk_pickup_ug";
+  level._effect[#"tomahawk_trail"] = #"zm_weapons/fx8_tomahawk_trail";
+  level._effect[#"tomahawk_trail_ug"] = #"zm_weapons/fx8_tomahawk_trail_ug";
+  level._effect[#"tomahawk_charged_trail"] = #"zm_weapons/fx8_tomahawk_trail_charged";
+  level._effect[#"tomahawk_charged_trail_blue"] = #"zm_weapons/fx8_tomahawk_trail_charged_blue";
+  level._effect[#"tomahawk_impact"] = #"zm_weapons/fx8_tomahawk_impact";
+  level._effect[#"tomahawk_impact_ug"] = #"zm_weapons/fx8_tomahawk_impact_ug";
+  level._effect[#"tomahawk_fire_dot"] = #"zombie/fx8_fire_torso_zmb";
+  level._effect[#"tomahawk_charge_up"] = #"zm_weapons/fx8_tomahawk_charge";
+  level._effect[#"tomahawk_charge_up_ug"] = #"zm_weapons/fx8_tomahawk_charge_ug";
 }
 
 tomahawk_in_use(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

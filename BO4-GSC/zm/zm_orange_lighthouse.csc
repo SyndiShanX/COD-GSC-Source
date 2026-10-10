@@ -87,16 +87,16 @@ function_6a10478(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       }
 
       self.fx_id = util::playFXOnTag(localclientnum, level._effect[#"lighthouse_beam_red"], self, "tag_origin");
-      self playSound(localclientnum, #"hash_3734fecc702f7cd0");
+      self playSound(localclientnum, #"zmb_lighthouse_beam_red_start");
       self.centerstruct = spawn(0, self.origin, "script_origin");
-      self.centerstruct playLoopSound(#"hash_518712532057a8b");
+      self.centerstruct playLoopSound(#"zmb_lighthouse_beam_red");
       break;
   }
 }
 
 function_a177b2da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[#"hash_4d1abbf031ca2c63"], self, "j_spine4");
-  self playSound(localclientnum, #"hash_24925b24b30b3991");
+  self playSound(localclientnum, #"zmb_lighthouse_beam_hit");
 }
 
 function_c7fb0e97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

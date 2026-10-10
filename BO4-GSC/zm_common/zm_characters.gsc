@@ -340,7 +340,7 @@ is_character(character) {
 }
 
 function_50b1ae32() {
-  if(is_character(array(#"prt_zm_scarlett", #"hash_1a427f842f175b3c"))) {
+  if(is_character(array(#"prt_zm_scarlett", #"prt_zm_scarlett_dlc0"))) {
     self.revivevox = "scar";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_scar";
@@ -349,7 +349,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"prt_zm_bruno", #"hash_14e91ceb9a7b3eb6"))) {
+  if(is_character(array(#"prt_zm_bruno", #"prt_zm_bruno_dlc0"))) {
     self.talks_in_danger = 1;
     level.rich_sq_player = self;
     self.revivevox = "brun";
@@ -360,7 +360,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"prt_zm_diego", #"hash_26072a3b34719d22"))) {
+  if(is_character(array(#"prt_zm_diego", #"prt_zm_diego_dlc0"))) {
     self.revivevox = "dieg";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_dieg";
@@ -369,7 +369,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_3e63362aea484e09", #"hash_5a906d7137467771"))) {
+  if(is_character(array(#"prt_zm_stanton", #"prt_zm_stanton_dlc0"))) {
     self.revivevox = "shaw";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_shaw";
@@ -481,7 +481,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_515977e191d13967"))) {
+  if(is_character(array(#"prt_zm_psychic"))) {
     self.revivevox = "psyc";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_psyc";

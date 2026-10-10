@@ -1508,7 +1508,7 @@ function_48a1200f(einflictor, attacker, weapon, lpattackteam) {
       damage_done = self.attackerdamage[player.clientid].damage;
 
       if(sessionmodeismultiplayergame() && isDefined(player.currentweapon)) {
-        function_92d1707f(#"hash_d1357992f4715f0", {
+        function_92d1707f(#"dlog_event_mpassists", {
           #gametime: function_f8d53445(), #assistspawnid: getplayerspawnid(player), #assistspecialist: function_b14806c6(player player_role::get(), currentsessionmode()), #assistweapon: player.currentweapon.name
         });
       }

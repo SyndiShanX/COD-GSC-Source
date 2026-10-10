@@ -303,7 +303,7 @@ function_8d3f2364(waitresult) {
         }
       }
 
-      playSoundAtPosition(#"hash_8b7db1eb1a3365b", (0, 0, 0));
+      playSoundAtPosition(#"zmb_mannequin_failure_2d", (0, 0, 0));
       zm_sq::start(#"mee_mixed");
       level.var_e80139f = 4;
       waitresult.attacker zm_audio::create_and_play_dialog("generic", "response_negative");
@@ -320,7 +320,7 @@ function_8d3f2364(waitresult) {
   }
 
   if(level.var_561ae1f8 <= 0) {
-    playSoundAtPosition(#"hash_a24b8d649da9f00", (0, 0, 0));
+    playSoundAtPosition(#"zmb_mannequin_success_2d", (0, 0, 0));
 
     if(zm_utility::is_trials()) {
       waitresult.attacker zm_audio::create_and_play_dialog("generic", "response_positive");

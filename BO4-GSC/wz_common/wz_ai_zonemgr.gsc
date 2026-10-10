@@ -105,8 +105,8 @@ __init__() {
   level.var_a7f72ea1 = #"p8_fxanim_wz_supply_stash_magic_box_mod";
   level.var_f2bbd457 = #"p8_wz_magic_box_chain";
   level.var_b6e3500b = #"p8_wz_teddybear";
-  level.var_96bd78dd = #"hash_1cd5ad7d3323d02c";
-  level.var_591aff35 = #"hash_5afb37e5e38fa248";
+  level.var_96bd78dd = #"c_t8_zmb_3rdclass_male1_santa_hat";
+  level.var_591aff35 = #"c_t8_zmb_3rdclass_male1_santa_hat_green";
   level.var_3b378d26 = #"p8_fxanim_wz_win_supply_stash_magic_box_mod";
   level.var_d8ddf407 = #"p8_wz_win_teddybear";
   level.zmb_laugh_alias = "zmb_player_outofbounds";

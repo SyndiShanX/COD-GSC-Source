@@ -273,7 +273,7 @@ function_aa8bb7be() {
 
 function_c142e8ec(attacker, callback_data) {
   playFX(level._equipment_explode_fx_lg, self.origin);
-  self playSound(#"hash_330c9380b91a673");
+  self playSound(#"dst_shroud_smash");
   var_3c4d4b60 = isDefined(self.owner);
 
   if(isDefined(attacker) && (!var_3c4d4b60 || self.owner util::isenemyplayer(attacker))) {
@@ -313,7 +313,7 @@ function_4b3bc61d(attacker, weapon, target) {
   }
 
   if(validateorigin(self.origin)) {
-    playSoundAtPosition(#"hash_330c9380b91a673", self.origin);
+    playSoundAtPosition(#"dst_shroud_smash", self.origin);
   }
 
   if(isDefined(level.var_d2600afc)) {

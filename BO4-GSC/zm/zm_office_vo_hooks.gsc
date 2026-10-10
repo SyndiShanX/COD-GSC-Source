@@ -181,7 +181,7 @@ play_initial_alarm() {
 }
 
 function_8cbb1711() {
-  play_pentagon_announcer_vox(#"hash_447c4584ae2e8e9c");
+  play_pentagon_announcer_vox(#"vox_pentagon_teleport_interrupt_pann_0");
   e_player = function_d62aaf66();
 
   if(isDefined(e_player)) {

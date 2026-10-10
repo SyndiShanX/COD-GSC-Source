@@ -229,7 +229,7 @@ function_e1a7f79c() {
   self flag::wait_till_all(array(#"hash_481ca29c700e04dd", #"hash_6db6c5251c9721d6", #"hash_69c9295a1129268f"));
   self flag::wait_till(#"hash_23e1b3b7f7f46cb8");
   self flag::set(#"hash_6757075afacfc1b4");
-  self playsoundtoplayer(#"hash_3f4d4c01f45d3fa6", self);
+  self playsoundtoplayer(#"zmb_ee_traps_ward_done", self);
 }
 
 function_a0cf9801() {

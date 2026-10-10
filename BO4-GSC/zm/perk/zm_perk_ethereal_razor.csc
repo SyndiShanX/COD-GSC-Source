@@ -24,11 +24,11 @@ __init__() {
   clientfield::register("actor", "" + #"ethereal_melee_impact", 13000, 1, "counter", &function_f041176c, 0, 0);
   clientfield::register("allplayers", "" + #"hash_450d9f824068dcc2", 13000, 1, "counter", &function_8f9318d5, 0, 0);
   clientfield::register("allplayers", "" + #"hash_4de2dbcd551f1fb7", 13000, 1, "counter", &function_680538e2, 0, 0);
-  level._effect[#"hash_450693824062a9b0"] = #"hash_2e1db0f023ce973f";
-  level._effect[#"hash_450d9f824068dcc2"] = #"hash_2e16c4f023c89a8d";
+  level._effect[#"hash_450693824062a9b0"] = #"zombie/fx8_perk_ethereal_razor_1p";
+  level._effect[#"hash_450d9f824068dcc2"] = #"zombie/fx8_perk_ethereal_razor_3p";
   level._effect[#"hash_5200740c0a0b2719"] = #"hash_2a3552f078e23d4e";
   level._effect[#"hash_4de2dbcd551f1fb7"] = #"hash_4741ce659d06a390";
-  level._effect[#"ethereal_melee_impact"] = #"hash_6e2b2bcea07134d1";
+  level._effect[#"ethereal_melee_impact"] = #"impacts/fx8_knife_impact_blood";
   callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 
@@ -95,7 +95,7 @@ function_58c4bf12(localclientnum) {
         self.var_9f0aad27 = playviewmodelfx(localclientnum, level._effect[#"hash_450693824062a9b0"], "tag_weapon_left");
       }
 
-      self playSound(localclientnum, #"hash_5e4e6d81b10399dc");
+      self playSound(localclientnum, #"zmb_vapor_ethereal_razor_swing");
       self util::function_e532f5da(0.8, self, "notetrack", level, "demo_jump");
       self function_c8066972();
     }

@@ -33,14 +33,14 @@ event_handler[gametype_init] main(eventstruct) {
   level.effect_scriptbundles[#"zoneedgemarkerwndw"] = struct::get_script_bundle("teamcolorfx", "teamcolorfx_koth_edge_marker_window");
   level._effect[#"zoneedgemarker"] = [];
   level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
-  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
-  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
-  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarker"][1] = #"ui/fx8_infil_marker_frnd";
+  level._effect[#"zoneedgemarker"][2] = #"ui/fx8_infil_marker_enmy";
+  level._effect[#"zoneedgemarker"][3] = #"ui/fx8_infil_marker_contested";
   level._effect[#"zoneedgemarkerwndw"] = [];
   level._effect[#"zoneedgemarkerwndw"][0] = #"ui/fx8_infil_marker_neutral_window";
-  level._effect[#"zoneedgemarkerwndw"][1] = #"hash_5565c3fc2c7742fe";
-  level._effect[#"zoneedgemarkerwndw"][2] = #"hash_3283b765fe480df7";
-  level._effect[#"zoneedgemarkerwndw"][3] = #"hash_6a512c225256a2e9";
+  level._effect[#"zoneedgemarkerwndw"][1] = #"ui/fx8_infil_marker_frnd_window";
+  level._effect[#"zoneedgemarkerwndw"][2] = #"ui/fx8_infil_marker_enmy_window";
+  level._effect[#"zoneedgemarkerwndw"][3] = #"ui/fx8_infil_marker_contested_window";
   level.mission_bundle = getscriptbundle("mission_settings_control");
   callback::on_localclient_connect(&on_localclient_connect);
   callback::on_spawned(&function_6e3affdc);
@@ -355,7 +355,7 @@ function_185b0894(localclientnum, oldval, newval) {
         }
       } else {
         if(!zone.var_ce6accbd) {
-          zone.soundid = zone.objectiveentity playLoopSound(#"hash_5a0b392405d5f148");
+          zone.soundid = zone.objectiveentity playLoopSound(#"mpl_infiltration_capture_lp_3d");
           zone.var_ce6accbd = 1;
         }
 

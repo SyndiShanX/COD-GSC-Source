@@ -1061,10 +1061,10 @@ player_stuck() {
 
   if(self.str_name === "pic_gypsy") {
     level.var_9661fac0 = #"scene_zm_mansn_wm_fem_fullsequence";
-    var_cab90298 = #"hash_3475f0b9b2ad7422";
+    var_cab90298 = #"pb_zm_mansn_wm_fem_intro";
   } else {
     level.var_9661fac0 = #"scene_zm_mansn_wm_male_fullsequence";
-    var_cab90298 = #"hash_54f8a53a5930ed55";
+    var_cab90298 = #"pb_zm_mansn_wm_intro";
   }
 
   var_3add8e25 = struct::get("s_stick_scene", "targetname");
@@ -1194,7 +1194,7 @@ function_45cfa31(mdl_ghost) {
       var_80192cb1 = #"hash_762bdec6a06169a5";
       break;
     case 12:
-      var_1f92304d = #"hash_6bec691584ea685f";
+      var_1f92304d = #"vox_ghost_interact_butl_plr_12_0";
       var_1616bdce = #"hash_261ab4742c24d198";
       var_8954c16e = #"hash_4d56b3f9f5d80d5f";
       var_80192cb1 = #"hash_6c4f7d192847d762";
@@ -1206,7 +1206,7 @@ function_45cfa31(mdl_ghost) {
       var_80192cb1 = #"hash_7228b71e32509514";
       break;
     case 9:
-      var_1f92304d = #"hash_5d5042a83172ac71";
+      var_1f92304d = #"vox_ghost_interact_psyc_plr_9_0";
       var_1616bdce = #"hash_5df4633a4e23f150";
       var_8954c16e = #"hash_52a4d5c9366fd9ab";
       var_80192cb1 = #"hash_2a80120b6197a78e";

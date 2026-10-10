@@ -287,8 +287,8 @@ function_8c80503() {
 function_d4c6dc0d() {
   self.is_playing_audio = 1;
   var_df4e73a7 = getEntArray(self.target2, "targetname");
-  var_df4e73a7[0] playSound(#"hash_3cca3c060dacc7de");
-  var_df4e73a7[0] playLoopSound(#"hash_14cf26f9ee5a9962");
+  var_df4e73a7[0] playSound(#"zmb_sq_audiolog_reel_start");
+  var_df4e73a7[0] playLoopSound(#"zmb_sq_audiolog_reel_lp");
 
   while(self.is_playing_audio && var_df4e73a7.size > 0) {
     var_df4e73a7[0] rotatepitch(45, 1);
@@ -298,7 +298,7 @@ function_d4c6dc0d() {
   }
 
   var_df4e73a7[0] stoploopsound(0.5);
-  playSoundAtPosition(#"hash_1f7edbf8f3a60766", self.origin);
+  playSoundAtPosition(#"zmb_sq_audiolog_reel_stop", self.origin);
 }
 
 uin_kls_counteruavdefeated() {
@@ -353,7 +353,7 @@ function_1792ae3(e_item) {
     }
 
     if(isDefined(e_item)) {
-      e_item playSound(#"hash_760800881cd94dd1");
+      e_item playSound(#"zmb_sq_audiolog_pickup");
     }
 
     function_de798ee4();
@@ -396,19 +396,19 @@ function_8352562a() {
     self waittill(#"play_audio");
     exploder::exploder("fxexp_script_projector_off");
     exploder::exploder("fxexp_script_projector_on");
-    level.var_94b00cff playSound(#"hash_7f70f5f71963f7f2");
+    level.var_94b00cff playSound(#"evt_ee_reel_place");
 
     if(isDefined(level.var_19e44f3d)) {
       s_reel = level.var_19e44f3d;
       self.in_use = 1;
       s_reel.in_inventory = 0;
       function_de798ee4();
-      level.var_94b00cff playSound(#"hash_50cae5e74f332b7c");
+      level.var_94b00cff playSound(#"zmb_sq_audiolog_projector_start");
 
       if(s_reel.var_46db68fd === 1) {
         level.var_94b00cff playLoopSound(#"hash_1e451b58f18190b4");
       } else {
-        level.var_94b00cff playLoopSound(#"hash_48cebe2e9cc70ddc");
+        level.var_94b00cff playLoopSound(#"zmb_sq_audiolog_projector_lp");
       }
 
       wait 2;
@@ -418,7 +418,7 @@ function_8352562a() {
 
       var_e578920c++;
       level.var_94b00cff stoploopsound();
-      level.var_94b00cff playSound(#"hash_1f5fc24563134758");
+      level.var_94b00cff playSound(#"zmb_sq_audiolog_projector_stop");
       exploder::stop_exploder("fxexp_script_projector_on");
       exploder::stop_exploder("fxexp_script_projector_off");
 

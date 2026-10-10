@@ -464,7 +464,7 @@ get_best_spawnpoint(point_team, influencer_team, player, predictedspawn, use_fal
       mpspawnpointsused = {
         #reason: "point used", #spawninstanceid: getplayerspawnid(player), #x: spawn_point[#"origin"][0], #y: spawn_point[#"origin"][1], #z: spawn_point[#"origin"][2], #var_50641dd5: var_c1c41f09
       };
-      function_92d1707f(#"hash_608dde355fff78f5", mpspawnpointsused);
+      function_92d1707f(#"dlog_event_mpspawnpointsused", mpspawnpointsused);
     }
   }
 

@@ -852,7 +852,7 @@ function_993de6f7() {
       if(isDefined(ai)) {
         n_spawned += 1;
         level.zombie_total += 1;
-        ai playSound(#"hash_27b6a39054ad63ec");
+        ai playSound(#"zmb_ai_crawler_elec_bolt_spawn");
         ai forceteleport(s_spawn_loc.origin, s_spawn_loc.angles);
         ai zm_ai_white_nova_crawler::function_dc0238e4();
         wait 6;
@@ -1461,7 +1461,7 @@ function_6acd363d(is_completed) {
     level.var_bf802299 = 0;
     level thread callback::on_actor_killed(&function_7ca1064d);
     zm_round_spawning::function_376e51ef(#"nova_crawler", zm_round_logic::get_round_number());
-    playSoundAtPosition(#"hash_70c11b6f27e8119e", (0, -334, -337));
+    playSoundAtPosition(#"zmb_gen_defend_end_success", (0, -334, -337));
     level.var_7a86ba58 function_ccc74648("string_05");
     level exploder::stop_exploder("fxexp_toxic_gas_corridor");
     var_cc5e1906 = getEntArray("event_green_gas_md", "targetname");
@@ -1506,7 +1506,7 @@ function_6acd363d(is_completed) {
   }
 
   level thread function_79f7d595();
-  playSoundAtPosition(#"hash_409e21a8cc122b1f", (0, -334, -337));
+  playSoundAtPosition(#"zmb_gen_defend_end_fail", (0, -334, -337));
   wait 2;
   level.var_8200dc81 zm_hms_util::function_6a0d675d(#"hash_213e287fc814959d", 0, 0);
   level flag::clear(#"hash_639e8274a1b57729");

@@ -951,17 +951,17 @@ begin_grenade_tracking() {
   }
 
   blackboxeventname = #"mpequipmentuses";
-  eventname = #"hash_7cbbee88c5db5494";
+  eventname = #"dlog_event_mpequipmentuses";
 
   if(sessionmodeiscampaigngame()) {
     blackboxeventname = #"cpequipmentuses";
-    eventname = #"hash_4b0d58055ad60c5a";
+    eventname = #"dlog_event_cpequipmentuses";
   } else if(sessionmodeiszombiesgame()) {
     blackboxeventname = #"zmequipmentuses";
-    eventname = #"hash_637ce41bcec9842c";
+    eventname = #"dlog_event_zmequipmentuses";
   } else if(sessionmodeiswarzonegame()) {
     blackboxeventname = #"wzequipmentuses";
-    eventname = #"hash_4f877fbf665a36d8";
+    eventname = #"dlog_event_wzequipmentuses";
   }
 
   function_92d1707f(eventname, blackboxeventname, {

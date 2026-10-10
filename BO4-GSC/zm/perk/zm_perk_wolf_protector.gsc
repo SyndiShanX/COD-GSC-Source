@@ -177,7 +177,7 @@ function_f3cd6eac() {
     if((self.var_2dc0d63c >= level.zombie_health * 6 || self.var_841cdb3 >= 6) && !isDefined(self.var_5e8ff98e) && !self scene::is_igc_active()) {
       iprintlnbold("<dev string:x58>");
 
-      self playSound(#"hash_7c5128882f070d07");
+      self playSound(#"fly_dog_whistle_call");
       self notify(#"wolf_protector_spawn");
       wait 1.5;
 

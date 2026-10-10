@@ -51,14 +51,14 @@ init() {
   level._effect[#"ritual_gobo"] = #"hash_140f0bd65e4d70d2";
   level._effect[#"ritual_gobo_activate"] = #"hash_66bb6697a9882bd6";
   level._effect[#"door_explosion"] = #"explosions/fx8_exp_bomb_wood";
-  level._effect[#"seagull_trail_fx"] = #"hash_5028a74e717df332";
-  level._effect[#"hash_7d5a495febe292e4"] = #"hash_321ad275226af072";
+  level._effect[#"seagull_trail_fx"] = #"maps/zm_escape/fx8_ghost_seagull_trail";
+  level._effect[#"hash_7d5a495febe292e4"] = #"maps/zm_escape/fx8_ghost_seagull_trail_lg";
   level._effect[#"seagull_disappear_fx"] = #"hash_2a63b961f5ed2417";
   level._effect[#"lighthouse_r_b"] = #"hash_362eac491136c198";
   level._effect[#"hash_289e42e25063ac26"] = #"hash_e714752caf5a93d";
   level._effect[#"hash_287c57e25046e96f"] = #"hash_e416a52caccc0f4";
   level._effect[#"hash_287868e250431d7b"] = #"hash_e454d52cad07884";
-  level._effect[#"hash_3959cfb0404cb74a"] = #"hash_5affa48c16d2c319";
+  level._effect[#"hash_3959cfb0404cb74a"] = #"maps/zm_escape/fx8_summoning_key_glow";
   level._effect[#"hash_2928b6d60aaacda6"] = #"hash_271838b9716f9931";
   level._effect[#"brutus_stun"] = #"hash_2241c093176b5a63";
   level._effect[#"hash_86cc6dd23ec4ddb"] = #"hash_152749b3d661b4cd";

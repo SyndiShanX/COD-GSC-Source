@@ -21,10 +21,10 @@ __init__() {
   level._effect[#"hash_2ff87d61167ea531"] = #"wz/fx8_zm_box_marker";
   level._effect[#"hash_1e5c0bbc60604949"] = #"wz/fx8_zm_box_marker_red";
   level._effect[#"hash_7fe086085cbbacac"] = #"wz/fx8_zm_box_marker_rainbow";
-  level._effect[#"hash_4048cb4967032c4a"] = #"hash_1e43d43c6586fcb5";
+  level._effect[#"hash_4048cb4967032c4a"] = #"zombie/fx8_magicbox_marker_fl";
   level._effect[#"hash_1e35a559be3b8286"] = #"wz/fx8_magicbox_marker_fl_red";
-  level._effect[#"t8_leave_fx"] = #"hash_5f376e9395e16666";
-  level._effect[#"hash_4fbab83578c5a7e7"] = #"hash_5c4ef04b0752716a";
+  level._effect[#"t8_leave_fx"] = #"zombie/fx8_magicbox_depart";
+  level._effect[#"hash_4fbab83578c5a7e7"] = #"wz/fx8_zm_box_unlock";
   level._effect[#"hash_538c528b09706dc8"] = #"hash_286e0d228779181";
   level.var_96add4a1 = #"zmb_magicbox_leave";
   level.var_86e1b0cc = #"zmb_box_unlock";

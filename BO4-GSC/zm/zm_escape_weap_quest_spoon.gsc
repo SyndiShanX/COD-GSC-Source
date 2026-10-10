@@ -183,7 +183,7 @@ crane_shock_box() {
     level flag::set(#"hash_2444d210a1dd0dd");
     wait 1.6;
     var_217fca51 thread scene::play("Shot 2");
-    n_anim_length = getanimlength(#"hash_3fbc33140c093c0d");
+    n_anim_length = getanimlength(#"p8_fxanim_zm_esc_crane_water_rotate_anim");
     n_anim_length -= 3.9;
     wait n_anim_length;
     level flag::set(#"hash_6f71660057a5952f");
@@ -204,7 +204,7 @@ crane_shock_box() {
     var_da5e0bea.var_8dfa1155 = 1;
     var_da5e0bea notify(#"turn_off");
     var_217fca51 thread scene::play("Shot 1");
-    n_anim_length = getanimlength(#"hash_923a7a2394d952d");
+    n_anim_length = getanimlength(#"p8_fxanim_zm_esc_crane_dock_rotate_anim");
     wait n_anim_length;
     level flag::clear(#"hash_2444d210a1dd0dd");
     var_da5e0bea.var_8dfa1155 = undefined;
@@ -240,7 +240,7 @@ function_6ff33a91(var_217fca51) {
   level endon(#"hash_4302325b2fe2d5d8");
   level flag::set(#"hash_66f358c0066d77d8");
   var_217fca51 thread scene::play("Shot 3");
-  n_anim_length = getanimlength(#"hash_2bf732b76b5383ba");
+  n_anim_length = getanimlength(#"p8_fxanim_zm_esc_crane_skeleton_arm_fall_anim");
   wait n_anim_length;
   mdl_spoon = var_217fca51.scene_ents[#"skeleton_arm"];
   mdl_spoon hide();

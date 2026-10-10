@@ -127,10 +127,10 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
     var_66ae7054 = 0;
 
     if(math::cointoss() && math::cointoss()) {
-      homunculus playsoundontag(#"hash_8d020e5460f4a95", "j_head");
+      homunculus playsoundontag(#"vox_homun_throw_homu", "j_head");
       var_66ae7054 = 1;
     } else {
-      homunculus playsoundontag(#"hash_689f11fd8983d1a6", "j_head");
+      homunculus playsoundontag(#"vox_homun_throw_exert_homu", "j_head");
     }
 
     homunculus thread scene::play(#"aib_t8_zm_zod_homunculus_throw_loop_01", homunculus);
@@ -156,10 +156,10 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
         var_255a121f = 0;
 
         if(math::cointoss() && math::cointoss() && !var_66ae7054) {
-          homunculus playsoundontag(#"hash_6b4fa8bf14690e0c", "j_head");
+          homunculus playsoundontag(#"vox_homun_land_homu", "j_head");
           var_255a121f = 1;
         } else {
-          homunculus playsoundontag(#"hash_1d6e8d28eabdb1fb", "j_head");
+          homunculus playsoundontag(#"vox_homun_land_exert_homu", "j_head");
         }
 
         mover = util::spawn_model("tag_origin", homunculus.origin, homunculus.angles);
@@ -224,7 +224,7 @@ function_bb17ec5a() {
           start_attack = undefined;
 
           if(math::cointoss() && math::cointoss()) {
-            self playSound(#"hash_22c88cff01a4691b");
+            self playSound(#"vox_homun_jump_homu");
           }
 
           self.mover scene::stop();
@@ -309,7 +309,7 @@ function_c8f642f6(enemy, n_time) {
 
     if(isalive(enemy)) {
       if(math::cointoss() && math::cointoss()) {
-        self playSound(#"hash_ba5815eb0dc4d97");
+        self playSound(#"vox_homun_kill_homu");
       }
 
       enemy playSound(#"wpn_homunculus_melee_imp");
@@ -320,7 +320,7 @@ function_c8f642f6(enemy, n_time) {
 }
 
 function_7bfc867f() {
-  self playsoundontag(#"hash_6e471fde121d0263", "j_head");
+  self playsoundontag(#"vox_homun_death_homu", "j_head");
   self drop_to_ground();
   self.mover scene::stop();
   self.mover scene::play(#"aib_t8_zm_zod_homunculus_dth_01", self);

@@ -1094,9 +1094,9 @@ function_b48e2739(helicopter) {
   helicopter endon(#"hash_69d2c68fdf86b6d7", #"death");
   helicopter.rope endon(#"death");
   helicopter notify(#"hash_3478587618f28c8");
-  helicopter.rope thread animation::play(#"hash_3d52f6faf02fd23", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
+  helicopter.rope thread animation::play(#"p8_fxanim_gp_vehicle_lb_heist_rope_retrieve_anim", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
   playFXOnTag(#"hash_24fa7e1844b116bb", helicopter.rope, "duffel_attach_jnt");
-  var_314ff04b = getanimlength(#"hash_3d52f6faf02fd23") + 15;
+  var_314ff04b = getanimlength(#"p8_fxanim_gp_vehicle_lb_heist_rope_retrieve_anim") + 15;
   wait var_314ff04b;
   function_b09faaf8(helicopter);
 }

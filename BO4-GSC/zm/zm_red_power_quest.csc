@@ -87,7 +87,7 @@ function_5f8c1946(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 perseus_teleport_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self gettagorigin("j_spine4"))) {
     playFX(localclientnum, level._effect[#"perseus_teleport"], self gettagorigin("j_spine4"), anglestoup(self.angles));
-    playSound(localclientnum, #"hash_20e6275c6513eb95", self gettagorigin("j_spine4"));
+    playSound(localclientnum, #"zmb_perseus_warp_in", self gettagorigin("j_spine4"));
   }
 }
 
@@ -141,7 +141,7 @@ pegasus_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   level beam::launch(mdl_pegasus, str_feather, self, str_tag, "beam8_zm_red_peg_lightning_strike", 1);
-  self playSound(localclientnum, #"hash_61c057ffadb7a5af");
+  self playSound(localclientnum, #"wpn_pegasus_electric_bolt");
   level thread chaos_explosion(localclientnum);
   wait 0.3;
   level beam::kill(mdl_pegasus, str_feather, self, str_tag, "beam8_zm_red_peg_lightning_strike");
@@ -261,7 +261,7 @@ function_c96c5397(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(!isDefined(self.n_sfx)) {
-      self.n_sfx = self playLoopSound(#"hash_6d3093fa5bbbbe2f");
+      self.n_sfx = self playLoopSound(#"zmb_sentinel_trial_projectile_lp");
     }
 
     return;
@@ -284,8 +284,8 @@ function_192be936(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(!isDefined(self.var_fc40818b)) {
-      self playSound(localclientnum, #"hash_10f7dee939554f61");
-      self.var_fc40818b = self playLoopSound(#"hash_474d2ea03ea86530");
+      self playSound(localclientnum, #"zmb_perseus_energy_release");
+      self.var_fc40818b = self playLoopSound(#"zmb_perseus_energy_lp");
     }
 
     return;

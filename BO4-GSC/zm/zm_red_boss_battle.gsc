@@ -1646,7 +1646,7 @@ function_caa7eeb() {
   }
 
   self zm_vo::vo_say(#"hash_34171dfc4d06ae4b", 0, 1, 9999);
-  level.var_92830991 = util::spawn_model(#"hash_7ad70aa7f6e8c41f", self.origin + (0, 0, 48), self.angles);
+  level.var_92830991 = util::spawn_model(#"p8_zm_red_key_perseus", self.origin + (0, 0, 48), self.angles);
   level.var_92830991 setscale(4);
   level.var_92830991 thread zm_red_challenges_rewards::function_51fd2597(0);
   level.var_92830991 thread zm_red_challenges_rewards::function_f7cdf2f7(2);
@@ -2072,7 +2072,7 @@ perseus_teleport_fx(v_destination) {
   playFXOnTag(level._effect[#"hash_661c427afb24e5f2"], e_perseus, "tag_weapon_right");
   playFX(level._effect[#"hash_4d8d2bc22add9939"], var_2ff979fa.origin, v_forward, (1, 0, 0));
   level waittill(#"play_teleport_fx");
-  playSoundAtPosition(#"hash_5e07cc4ee28c44e7", e_perseus.origin);
+  playSoundAtPosition(#"evt_perseus_dash_in", e_perseus.origin);
   playFX(level._effect[#"perseus_teleport_dest"], var_2ff979fa.origin, v_forward, (1, 0, 0));
   playFX(level._effect[#"perseus_teleport_boss"], e_perseus gettagorigin("j_spine4"), v_forward, (1, 0, 0));
   wait 2;

@@ -174,7 +174,7 @@ function_aa539d7b() {
   self flag::wait_till(#"enabled");
   playSoundAtPosition(#"zmb_energy_core_insert", self.origin);
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent playLoopSound(#"hash_39e79a32dcbea912");
+  sound_ent playLoopSound(#"zmb_energy_core_install_loop");
   level flag::set(self.script_flag_wait);
   array::thread_all(self.var_3d6b88c4, &function_e714e3a8, "green");
 

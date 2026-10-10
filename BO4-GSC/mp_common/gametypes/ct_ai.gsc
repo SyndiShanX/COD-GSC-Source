@@ -50,7 +50,7 @@ function_4c8f915a(origin) {
   drone vehicle::init_target_group();
   drone vehicle::add_to_target_group(drone);
   drone setneargoalnotifydist(35);
-  drone playLoopSound(#"hash_aa65b39680b8d1b");
+  drone playLoopSound(#"veh_quadtank_mini_loop");
   return drone;
 }
 

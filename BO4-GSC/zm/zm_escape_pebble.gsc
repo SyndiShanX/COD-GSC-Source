@@ -459,7 +459,7 @@ function_bdd1bac8(var_a1a0c2e3) {
 
     if(isDefined(mdl_lock) && !isDefined(mdl_lock.var_1e4fbc72) && n_time - mdl_lock.n_start_time > 1000) {
       mdl_lock.var_1e4fbc72 = 1;
-      mdl_lock setModel(#"hash_2ac3e09056fba532");
+      mdl_lock setModel(#"p8_zm_esc_magic_lock_lrg_blue");
       mdl_lock clientfield::set("" + #"zombie_spectral_key_stun", 0);
 
       foreach(e_player in level.activeplayers) {
@@ -878,7 +878,7 @@ function_27ae51c4(e_player) {
     mdl_fx setvisibletoplayer(e_player);
   }
 
-  playSoundAtPosition(#"hash_6f61076a871fcbab", mdl_fx.origin);
+  playSoundAtPosition(#"zmb_glyph_dissolve", mdl_fx.origin);
   mdl_fx clientfield::set("" + #"hash_46dbc12bdc275121", 1);
   wait 5;
   mdl_fx delete();
@@ -1502,8 +1502,8 @@ audio_log() {
 
   if(isDefined(self.target)) {
     a_mdl_reels = getEntArray(self.target, "targetname");
-    a_mdl_reels[0] playSound(#"hash_3cca3c060dacc7de");
-    a_mdl_reels[0] playLoopSound(#"hash_14cf26f9ee5a9962");
+    a_mdl_reels[0] playSound(#"zmb_sq_audiolog_reel_start");
+    a_mdl_reels[0] playLoopSound(#"zmb_sq_audiolog_reel_lp");
 
     foreach(mdl_reel in a_mdl_reels) {
       mdl_reel.spinning = 1;
@@ -1512,8 +1512,8 @@ audio_log() {
     }
   } else if(!isDefined(self.var_d81f2c52)) {
     self.var_d81f2c52 = spawn("script_origin", self.origin);
-    self.var_d81f2c52 playSound(#"hash_30b34f9e7c34a7c7");
-    self.var_d81f2c52 playLoopSound(#"hash_2e03906cfa1c2389");
+    self.var_d81f2c52 playSound(#"zmb_sq_audiolog_radio_start");
+    self.var_d81f2c52 playLoopSound(#"zmb_sq_audiolog_radio_lp");
   }
 
   switch (self.script_int) {
@@ -1859,7 +1859,7 @@ audio_log() {
   }
 
   if(isDefined(self.var_d81f2c52)) {
-    self.var_d81f2c52 playSound(#"hash_378a275b951b400d");
+    self.var_d81f2c52 playSound(#"zmb_sq_audiolog_radio_stop");
     self.var_d81f2c52 stoploopsound();
     waitframe(1);
     self.var_d81f2c52 delete();
@@ -1883,7 +1883,7 @@ function_175057ad() {
     self waittill(#"rotatedone");
   }
 
-  self playSound(#"hash_1f7edbf8f3a60766");
+  self playSound(#"zmb_sq_audiolog_reel_stop");
   self stoploopsound();
 }
 

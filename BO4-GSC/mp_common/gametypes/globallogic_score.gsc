@@ -533,7 +533,7 @@ function_3172cf59(player, newscore, weapon, mpplayerscore) {
   scorediff = mpplayerscore.delta;
 
   if(sessionmodeismultiplayergame() && !isbot(player)) {
-    function_92d1707f(#"hash_120b2cf3162c3bc1", mpplayerscore);
+    function_92d1707f(#"dlog_event_mpplayerscore", mpplayerscore);
   }
 
   player bb::add_to_stat("score", mpplayerscore.delta);
@@ -910,7 +910,7 @@ function giveteamscore(event, team, player, victim) {
     mpteamscores = {
       #gametime: function_f8d53445(), #event: event, #team: team, #diff: newscore - teamscore, #score: newscore
     };
-    function_92d1707f(#"hash_48d5ef92d24477d2", mpteamscores);
+    function_92d1707f(#"dlog_event_mpteamscores", mpteamscores);
   }
 
   if(teamscore == newscore) {
@@ -931,7 +931,7 @@ giveteamscoreforobjective_delaypostprocessing(team, score) {
     mpteamobjscores = {
       #gametime: function_f8d53445(), #team: team, #diff: newscore - teamscore, #score: newscore
     };
-    function_92d1707f(#"hash_22921c2c027fa389", mpteamobjscores);
+    function_92d1707f(#"dlog_event_mpteamobjscores", mpteamobjscores);
   }
 
   if(teamscore == newscore) {
@@ -963,7 +963,7 @@ giveteamscoreforobjective(team, score) {
     mpteamobjscores = {
       #gametime: function_f8d53445(), #team: team, #diff: newscore - teamscore, #score: newscore
     };
-    function_92d1707f(#"hash_22921c2c027fa389", mpteamobjscores);
+    function_92d1707f(#"dlog_event_mpteamobjscores", mpteamobjscores);
   }
 
   if(teamscore == newscore) {

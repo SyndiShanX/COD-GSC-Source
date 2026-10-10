@@ -1002,9 +1002,9 @@ sndfunctions() {
 }
 
 custom_add_vox() {
-  zm_audio::loadplayervoicecategories(#"hash_41c3d60c9fdc1c1a");
-  zm_audio::loadplayervoicecategories(#"hash_5963a3db3032ab46");
-  zm_audio::loadplayervoicecategories(#"hash_37db46ab64d46fca");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_common_vox.csv");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_story2_vox.csv");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_red_vox.csv");
 }
 
 setupmusic() {
@@ -1284,7 +1284,7 @@ function function_c02e63(var_2753f06a) {
         break;
       case 1:
         if(str_host == "brun") {
-          level.host zm_vo::vo_say(#"hash_6f1df3b4e6354472", 0.5);
+          level.host zm_vo::vo_say(#"vox_solo_end_round1_brun_0_plr_2_0", 0.5);
           level.host zm_vo::vo_say(#"hash_31a9fb6be6fe1013", undefined, undefined, undefined, undefined, 1);
         } else {
           level.host zm_vo::function_a2bd5a0c(#"vox_solo_end_round1_" + str_host, 0, 1);
@@ -1293,7 +1293,7 @@ function function_c02e63(var_2753f06a) {
         break;
       case 2:
         if(str_host == "brun") {
-          level.host zm_vo::vo_say(#"hash_166f0f941a5b1e45", 0.5);
+          level.host zm_vo::vo_say(#"vox_solo_end_round2_brun_0_plr_2_0", 0.5);
           level.host zm_vo::vo_say(#"hash_2c81ea0c696b6232", undefined, undefined, undefined, undefined, 1);
         } else {
           level.host zm_vo::function_a2bd5a0c(#"vox_solo_end_round2_" + str_host, 0, 1);
@@ -1315,16 +1315,16 @@ function function_c02e63(var_2753f06a) {
       case 1:
         switch (str_host) {
           case #"scar":
-            level.host zm_vo::vo_say(#"hash_1da6407e4cd932bf");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round1_scar_plr_1_0");
             break;
           case #"dieg":
-            level.host zm_vo::vo_say(#"hash_1cdc8a3e02fcfce3");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round1_dieg_plr_3_0");
             break;
           case #"brun":
-            level.host zm_vo::vo_say(#"hash_590040ddc7032e94");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round1_brun_plr_2_0");
             break;
           case #"shaw":
-            level.host zm_vo::vo_say(#"hash_7f40dc2d71347256");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round1_shaw_plr_4_0");
             break;
         }
 
@@ -1332,16 +1332,16 @@ function function_c02e63(var_2753f06a) {
       case 2:
         switch (str_host) {
           case #"scar":
-            level.host zm_vo::vo_say(#"hash_6c4dee81df419edc");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round2_scar_plr_1_0");
             break;
           case #"dieg":
-            level.host zm_vo::vo_say(#"hash_24d7b7428867b4f0");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round2_dieg_plr_3_0");
             break;
           case #"brun":
-            level.host zm_vo::vo_say(#"hash_42880967b7a32953");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round2_brun_plr_2_0");
             break;
           case #"shaw":
-            level.host zm_vo::vo_say(#"hash_5fb3938045de5389");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round2_shaw_plr_4_0");
             break;
         }
 
@@ -1349,16 +1349,16 @@ function function_c02e63(var_2753f06a) {
       case 3:
         switch (str_host) {
           case #"scar":
-            level.host zm_vo::vo_say(#"hash_394a9cfe79112d79");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round3_scar_plr_1_0");
             break;
           case #"dieg":
-            level.host zm_vo::vo_say(#"hash_2abbc74b0d21d3f9");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round3_dieg_plr_3_0");
             break;
           case #"brun":
-            level.host zm_vo::vo_say(#"hash_171f4130f28f8812");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round3_brun_plr_2_0");
             break;
           case #"shaw":
-            level.host zm_vo::vo_say(#"hash_7db0de42b6aa9784");
+            level.host zm_vo::vo_say(#"vox_co_op_end_round3_shaw_plr_4_0");
             break;
         }
 

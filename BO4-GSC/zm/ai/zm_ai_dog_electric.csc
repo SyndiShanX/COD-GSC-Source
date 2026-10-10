@@ -17,11 +17,11 @@ __init__() {
 }
 
 function_b2801783() {
-  level._effect[#"hash_33fd6545401e3622"] = #"hash_6eaa36cff74df726";
-  level._effect[#"hash_55d6ab2c7eecbad4"] = #"hash_3fb91b6cfc622661";
-  level._effect[#"dog_head_glow"] = #"hash_646b3a4c74c5e3d4";
-  level._effect[#"hash_5e4d4083a69396b8"] = #"hash_156305f099f6dd2c";
-  level._effect[#"dog_torso_glow"] = #"hash_643c87c938e4616b";
-  level._effect[#"dog_gib"] = #"hash_669db3df31d185d4";
+  level._effect[#"hash_33fd6545401e3622"] = #"zm_ai/fx8_dog_elec_belly_glow";
+  level._effect[#"hash_55d6ab2c7eecbad4"] = #"zm_ai/fx8_dog_elec_eye_glow";
+  level._effect[#"dog_head_glow"] = #"zm_ai/fx8_dog_elec_head_glow";
+  level._effect[#"hash_5e4d4083a69396b8"] = #"zm_ai/fx8_dog_elec_tail_glow";
+  level._effect[#"dog_torso_glow"] = #"zm_ai/fx8_dog_elec_torso_glow";
+  level._effect[#"dog_gib"] = #"zm_ai/fx8_dog_elec_death_exp";
   level.var_17c4823f = #"hash_6a3a7714a2c454fb";
 }

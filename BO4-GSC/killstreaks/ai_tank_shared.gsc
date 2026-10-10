@@ -708,7 +708,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, category, tankarchetype, 
     drone[[level.var_4b38c02b]]();
   }
 
-  drone playLoopSound(#"hash_aa65b39680b8d1b");
+  drone playLoopSound(#"veh_quadtank_mini_loop");
   owner.ai_tank_drone = drone;
 
   foreach(player in level.players) {

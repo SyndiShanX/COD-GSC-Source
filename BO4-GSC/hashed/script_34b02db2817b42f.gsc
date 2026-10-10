@@ -219,7 +219,7 @@ run_step_2() {
   level flag::wait_till(#"chimney_grenaded");
 
   if(!zm_white_main_quest::function_6cebbce1() && zm_utility::is_classic()) {
-    level.var_74170866.e_player thread zm_white_util::function_491673da(#"hash_5dc92cbe0fbe5da");
+    level.var_74170866.e_player thread zm_white_util::function_491673da(#"vox_ww_z_complete_rush_0");
   }
 
   exploder::stop_exploder("fxexp_mk2_Z_smoke_chimney_" + level.var_74170866.s_fireplace.script_string + "_house");
@@ -308,7 +308,7 @@ function_b9a31cb(e_item, e_player) {
   start_step_4();
 
   if(!zm_white_main_quest::function_6cebbce1() && zm_utility::is_classic()) {
-    e_player zm_white_util::function_491673da(#"hash_3fa02403cbe89e77");
+    e_player zm_white_util::function_491673da(#"vox_ww_z_pickup_rush_0");
   }
 }
 

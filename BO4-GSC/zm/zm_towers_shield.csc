@@ -157,7 +157,7 @@ function_8a2b203b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         var_2b01a8ab = level._effect[#"hash_75cfc1cd4cd9154"];
       }
 
-      str_sound = #"hash_5bdfbb591ff7e29d";
+      str_sound = #"wpn_zhield_melee_upgrade_gem_1";
       break;
     case 2:
       if(var_515e20e6) {
@@ -166,7 +166,7 @@ function_8a2b203b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         var_2b01a8ab = level._effect[#"hash_75cff1cd4cd966d"];
       }
 
-      str_sound = #"hash_5bdfb8591ff7dd84";
+      str_sound = #"wpn_zhield_melee_upgrade_gem_2";
       break;
     case 3:
       if(var_515e20e6) {
@@ -180,7 +180,7 @@ function_8a2b203b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       if(oldval != 0) {
-        str_sound = #"hash_5bdfb9591ff7df37";
+        str_sound = #"wpn_zhield_melee_upgrade_gem_3";
       }
 
       if(!isDefined(self.var_dc255e3b)) {
@@ -311,7 +311,7 @@ function_103be84b(localclientnum, str_piece, s_start) {
 
   switch (str_piece) {
     case #"lower":
-      str_model = #"hash_534a8889633c5f83";
+      str_model = #"p8_zm_gla_shield_part_nose_upgrade";
       var_6b518b80 = #"hash_4752663d0689d2c2";
       var_458142a9 = #"hash_4d84827b8da5223d";
       n_drop_time = 1;
@@ -323,7 +323,7 @@ function_103be84b(localclientnum, str_piece, s_start) {
       n_drop_time = 0;
       break;
     case #"upper":
-      str_model = #"hash_a3555c0c041bd06";
+      str_model = #"p8_zm_gla_shield_part_eyes_upgrade";
       var_6b518b80 = #"hash_5be88bdaaf36eedf";
       var_458142a9 = #"hash_586e5d98fff291f8";
       n_drop_time = 0.5;

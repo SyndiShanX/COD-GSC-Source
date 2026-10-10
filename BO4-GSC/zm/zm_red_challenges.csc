@@ -31,19 +31,19 @@ init() {
   level._effect[#"hash_31c3f08749acf655"] = #"hash_482741e21e1bc548";
   level._effect[#"hash_31c0cd8749aa8505"] = #"hash_482b24e21e1f7cd8";
   level._effect[#"hash_5f92f2e28c7ef455"] = #"hash_13cf1738cd97717e";
-  level._effect[#"brazier_fire_blue"] = #"hash_487863cb3f012833";
-  level._effect[#"brazier_fire_green"] = #"hash_276c55785b205f4e";
-  level._effect[#"brazier_fire_orange"] = #"hash_4eff7803b81cd67d";
-  level._effect[#"brazier_fire_purple"] = #"hash_2a46ebc323110b3d";
-  level._effect[#"brazier_fire_white"] = #"hash_79207c9d697f9e30";
-  level._effect[#"apollo_soul_capture"][1] = #"hash_676d05725a4ffab9";
-  level._effect[#"hash_eafc8632695ccef"][1] = #"hash_511e23c849ed0926";
-  level._effect[#"apollo_soul_capture"][2] = #"hash_5199aa40f704fb10";
-  level._effect[#"hash_eafc8632695ccef"][2] = #"hash_1dfbcfd9b38812ed";
-  level._effect[#"apollo_soul_capture"][3] = #"hash_6bfc5d7fce6b2a4e";
+  level._effect[#"brazier_fire_blue"] = #"maps/zm_red/fx8_reward_brazier_fire_blue";
+  level._effect[#"brazier_fire_green"] = #"maps/zm_red/fx8_reward_brazier_fire_green";
+  level._effect[#"brazier_fire_orange"] = #"maps/zm_red/fx8_reward_brazier_fire_orange";
+  level._effect[#"brazier_fire_purple"] = #"maps/zm_red/fx8_reward_brazier_fire_purple";
+  level._effect[#"brazier_fire_white"] = #"maps/zm_red/fx8_reward_brazier_fire_white";
+  level._effect[#"apollo_soul_capture"][1] = #"maps/zm_red/fx8_soul_white";
+  level._effect[#"hash_eafc8632695ccef"][1] = #"maps/zm_red/fx8_soul_charge_white";
+  level._effect[#"apollo_soul_capture"][2] = #"maps/zm_red/fx8_soul_blue";
+  level._effect[#"hash_eafc8632695ccef"][2] = #"maps/zm_red/fx8_soul_charge_blue";
+  level._effect[#"apollo_soul_capture"][3] = #"maps/zm_red/fx8_soul_purple";
   level._effect[#"hash_eafc8632695ccef"][3] = #"maps/zm_red/fx8_soul_charge_purple";
-  level._effect[#"apollo_soul_capture"][4] = #"hash_6cfbd6f08cfc2656";
-  level._effect[#"hash_eafc8632695ccef"][4] = #"hash_17bb97645fa8148b";
+  level._effect[#"apollo_soul_capture"][4] = #"maps/zm_red/fx8_soul_orange";
+  level._effect[#"hash_eafc8632695ccef"][4] = #"maps/zm_red/fx8_soul_charge_orange";
   level._effect[#"pickup_glow"] = #"zm_weapons/fx8_cymbal_monkey_light";
   zm_red_challenges_rewards::init();
   level.var_7987392b = undefined;
@@ -95,7 +95,7 @@ apollo_bowl_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     var_ff01f974 = 4;
   }
 
-  self playSound(localclientnum, #"hash_4b301fe401c4f18");
+  self playSound(localclientnum, #"zmb_challenges_apollo_ignite");
   self.var_b7c1fb99 = self playLoopSound(#"hash_6143f452bc746a62" + var_ff01f974);
 }
 
@@ -139,8 +139,8 @@ tribute_flame_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 
   if(!isDefined(self.var_b10399e)) {
-    self playSound(localclientnum, #"hash_6845d8009f05e81c");
-    self.var_b10399e = self playLoopSound(#"hash_205cc527b5726b4d");
+    self playSound(localclientnum, #"zmb_challenges_tribute_ignite");
+    self.var_b10399e = self playLoopSound(#"zmb_challenges_tribute_ignite_lp");
   }
 }
 

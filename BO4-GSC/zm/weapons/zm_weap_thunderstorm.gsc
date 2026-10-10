@@ -299,7 +299,7 @@ function_b603ab34(e_player, mdl_pegasus) {
   v_forward = anglesToForward(e_player.angles);
   v_pos = e_player.origin + v_forward * 30;
   v_pos = util::ground_position(v_pos + (0, 0, 30), 1000, 12);
-  mdl_temp = util::spawn_model(#"hash_30b0badbca0a10de", v_pos + (0, 0, -5), (0, 0, 0));
+  mdl_temp = util::spawn_model(#"wpn_t8_zm_eqp_lightning_rod_world", v_pos + (0, 0, -5), (0, 0, 0));
   waitframe(1);
   mdl_temp clientfield::set("" + #"pegasus_staff_fx", 1);
   mdl_pegasus waittill(#"hash_7a19b162c9e303dc");

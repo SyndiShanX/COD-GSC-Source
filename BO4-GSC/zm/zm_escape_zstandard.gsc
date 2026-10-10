@@ -138,7 +138,7 @@ function_6e1201a8(n_round) {
 
 function_edd5bb1a() {
   if(zm_utility::function_e37823df()) {
-    zm_utility::function_6df718d(#"hash_6db3dde314ca084", 0);
+    zm_utility::function_6df718d(#"wpn_t8_zm_esc_shield_key_world", 0);
   }
 }
 

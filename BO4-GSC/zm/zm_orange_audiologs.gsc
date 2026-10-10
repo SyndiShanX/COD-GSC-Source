@@ -47,7 +47,7 @@ init_records() {
 pickup_record(e_item, e_player) {
   iprintln("<dev string:x38>" + level.s_audiologs.s_records.n_collected);
 
-  e_item playSound(#"hash_760800881cd94dd1");
+  e_item playSound(#"zmb_sq_audiolog_pickup");
   level.s_audiologs.s_records.n_collected++;
 }
 
@@ -95,7 +95,7 @@ init_reels() {
 pickup_reel(e_item, e_player) {
   iprintln("<dev string:x6c>" + level.s_audiologs.s_reels.n_collected);
 
-  e_item playSound(#"hash_760800881cd94dd1");
+  e_item playSound(#"zmb_sq_audiolog_pickup");
   level.s_audiologs.s_reels.n_collected++;
 }
 

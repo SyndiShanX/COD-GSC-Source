@@ -303,7 +303,7 @@ function function_8916aa62(str_line) {
       str_vo_line = #"hash_499d5f58bb808122";
       break;
     case #"interact_automaton":
-      str_vo_line = #"hash_48e9f010df79bf6b";
+      str_vo_line = #"vox_interact_automaton_orac_0";
       break;
     case #"hash_7004febf4258ee7c":
       str_vo_line = #"hash_4ca81ffc1793c4fd";
@@ -315,13 +315,13 @@ function function_8916aa62(str_line) {
       str_vo_line = #"hash_26935699e93f1db7";
       break;
     case #"interact_sandals":
-      str_vo_line = #"hash_13ae4ec246717759";
+      str_vo_line = #"vox_interact_sandals_orac_0";
       break;
     case #"interact_treasure_chest":
       str_vo_line = #"hash_4125f996df00a018";
       break;
     case #"interact_forge":
-      str_vo_line = #"hash_10cbb1b8573a0040";
+      str_vo_line = #"vox_interact_forge_orac_0";
       break;
     case #"hash_5eff508aba7e72bf":
       str_vo_line = #"hash_3675fc89d07c4c0c";
@@ -330,7 +330,7 @@ function function_8916aa62(str_line) {
       str_vo_line = #"hash_1ca7575800b7ff57";
       break;
     case #"statue_pedestal":
-      str_vo_line = #"hash_5e56b7fe2e124bbd";
+      str_vo_line = #"vox_statue_pedestal_orac_0";
       break;
     case #"hash_4ea1d73b4539f362":
       str_vo_line = #"hash_42068e9344b63c57";
@@ -342,7 +342,7 @@ function function_8916aa62(str_line) {
       str_vo_line = #"hash_3d675b5319c334b7";
       break;
     case #"statue_female":
-      str_vo_line = #"hash_60fc5081c4fd6b7";
+      str_vo_line = #"vox_statue_female_orac_0";
       break;
     default:
       return;
@@ -355,35 +355,35 @@ function_eb6f144(str_line, mdl_collectible) {
   switch (str_line) {
     case #"scroll_1":
       str_vo_line = #"hash_53d277c8b1114728";
-      var_bfdd8441 = #"hash_c7f396aed80374b";
+      var_bfdd8441 = #"zmb_red_scroll_lp_calm";
       break;
     case #"scroll_2":
       str_vo_line = #"hash_e3e70858f5614e3";
-      var_bfdd8441 = #"hash_c7f396aed80374b";
+      var_bfdd8441 = #"zmb_red_scroll_lp_calm";
       break;
     case #"scroll_3":
       str_vo_line = #"hash_748ebfa215a02be6";
-      var_bfdd8441 = #"hash_3d24b9655233513d";
+      var_bfdd8441 = #"zmb_red_scroll_lp_busy";
       break;
     case #"scroll_4":
       str_vo_line = #"hash_52c2f244c43714a9";
-      var_bfdd8441 = #"hash_29c7b1f9e28de2ee";
+      var_bfdd8441 = #"zmb_red_scroll_lp_fight_1";
       break;
     case #"scroll_5":
       str_vo_line = #"hash_2d2ebb39be31994c";
-      var_bfdd8441 = #"hash_22dbce472ee3015b";
+      var_bfdd8441 = #"zmb_red_scroll_lp_torture";
       break;
     case #"scroll_6":
       str_vo_line = #"hash_7cd8582798401757";
-      var_bfdd8441 = #"hash_29c7b0f9e28de13b";
+      var_bfdd8441 = #"zmb_red_scroll_lp_fight_2";
       break;
     case #"scroll_7":
       str_vo_line = #"hash_4081f86f16c90f9a";
-      var_bfdd8441 = #"hash_29c7aff9e28ddf88";
+      var_bfdd8441 = #"zmb_red_scroll_lp_fight_3";
       break;
     case #"scroll_8":
       str_vo_line = #"hash_e902c086e6a174d";
-      var_bfdd8441 = #"hash_73ae4e30dfdf732d";
+      var_bfdd8441 = #"zmb_red_scroll_lp_behind_door";
       break;
     case #"scroll_9":
       str_vo_line = "";
@@ -393,7 +393,7 @@ function_eb6f144(str_line, mdl_collectible) {
       return;
   }
 
-  mdl_collectible playSound(#"hash_764458163b3f25f1");
+  mdl_collectible playSound(#"zmb_red_scroll_start");
   wait 1.2;
   mdl_collectible playSound(str_vo_line);
   mdl_collectible playLoopSound(var_bfdd8441);
@@ -401,14 +401,14 @@ function_eb6f144(str_line, mdl_collectible) {
   if(str_line != "scroll_8") {
     function_d24a0f09(str_vo_line, 0.6);
     mdl_collectible stoploopsound();
-    mdl_collectible playSound(#"hash_13881a5ef6463c90");
+    mdl_collectible playSound(#"zmb_red_scroll_end");
     wait 1;
   } else {
     wait 26.5;
     mdl_collectible stoploopsound();
-    mdl_collectible playSound(#"hash_6af2fc9b90813082");
+    mdl_collectible playSound(#"zmb_red_scroll_door_kick");
     wait 18.1;
-    mdl_collectible playSound(#"hash_13881a5ef6463c90");
+    mdl_collectible playSound(#"zmb_red_scroll_end");
     wait 1;
   }
 

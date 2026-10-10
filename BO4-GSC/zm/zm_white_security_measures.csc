@@ -24,10 +24,10 @@ init() {
   level._effect[#"acid_spray"] = #"hash_424786ecbc7f5672";
   level._effect[#"acid_spray_death"] = #"hash_48d74d13d0c569c";
   level._effect[#"hash_294b19c300d1b482"] = #"hash_29ac72c5aa5398bc";
-  level._effect[#"hash_4391e5c4b43c63c9"] = #"hash_709cca7d0048aa72";
-  level._effect[#"hash_5647f8e593893bce"] = #"hash_69af1783a31b44f7";
+  level._effect[#"hash_4391e5c4b43c63c9"] = #"player/fx8_plyr_pstfx_115_screen";
+  level._effect[#"hash_5647f8e593893bce"] = #"player/fx8_plyr_pstfx_115_smoke";
   level._effect[#"zombie_eye_trail"] = #"zm_ai/fx8_zombie_eye_glow_red_trail";
-  level._effect[#"spinning_blood"] = #"hash_358533e8293f131d";
+  level._effect[#"spinning_blood"] = #"maps/zm_escape/fx8_spinning_trap_blood";
   level._effect[#"fire_trap_blue"] = #"hash_5fdb13b4843bc710";
 }
 
@@ -80,7 +80,7 @@ player_acid_trap_post_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
     self notify(#"player_acid_trap_post_fx_complete");
     self.var_431ddde9 = self playLoopSound(#"zmb_trap_acid_loop_plr");
     self thread function_17956e93(localclientnum);
-    self thread postfx::playpostfxbundle(#"hash_98397d99cb3a03");
+    self thread postfx::playpostfxbundle(#"pstfx_zm_115_dmg");
     self.var_b1409d8f = playfxoncamera(localclientnum, level._effect[#"hash_4391e5c4b43c63c9"]);
     self playrenderoverridebundle(#"hash_216f6c4ece79a4b8");
 
@@ -104,7 +104,7 @@ function_17956e93(localclientnum) {
   self waittill(#"player_acid_trap_post_fx_complete");
 
   if(isDefined(self)) {
-    self postfx::exitpostfxbundle(#"hash_98397d99cb3a03");
+    self postfx::exitpostfxbundle(#"pstfx_zm_115_dmg");
 
     if(isDefined(localclientnum) && isDefined(self.var_b1409d8f)) {
       stopfx(localclientnum, self.var_b1409d8f);
@@ -129,8 +129,8 @@ function_502136a5(str_notify) {
   if(isDefined(self)) {
     localclientnum = self getlocalclientnumber();
 
-    if(self postfx::function_556665f2(#"hash_98397d99cb3a03")) {
-      self postfx::exitpostfxbundle(#"hash_98397d99cb3a03");
+    if(self postfx::function_556665f2(#"pstfx_zm_115_dmg")) {
+      self postfx::exitpostfxbundle(#"pstfx_zm_115_dmg");
     }
 
     if(isDefined(self.var_431ddde9)) {

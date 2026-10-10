@@ -206,7 +206,7 @@ function_30d4f8c4(attacker, smeansofdeath, weapon) {
       str_alias = #"mpl_death_by_weapon_shotgun";
       break;
     case #"eq_sticky_grenade":
-      str_alias = #"hash_5330d1fc9ae03536";
+      str_alias = #"mpl_death_by_grenade_standard";
       break;
     case #"eq_cluster_semtex_grenade":
       str_alias = #"hash_58d3e2978f41dc59";

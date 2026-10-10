@@ -23,8 +23,8 @@ __init__() {
   clientfield::register("scriptmover", "" + #"hash_59623b8b4fc694c8", 1, 2, "int", &function_db9b47b5, 0, 0);
   clientfield::register("scriptmover", "" + #"walnut_teleporter_fx", 1, 1, "counter", &function_2f00e842, 0, 0);
   level._effect[#"hash_7184fc7d78dcf1c0"] = #"hash_73000f9a6abd5658";
-  level._effect[#"hash_20080a107a8533e"] = #"hash_7965ec9e0938553f";
-  level._effect[#"walnut_teleport"] = #"hash_2844b7026fd0f451";
+  level._effect[#"hash_20080a107a8533e"] = #"zm_weapons/fx8_cymbal_monkey_lightning";
+  level._effect[#"walnut_teleport"] = #"maps/zm_escape/fx8_walnut_teleport";
   level._effect[#"hash_7792af358100c735"] = #"hash_3d18884453d39646";
   level._effect[#"light_red"] = #"hash_6fdf0d26a4ab7a7";
 }

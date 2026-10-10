@@ -121,7 +121,7 @@ function_cd53088e(params) {
       e_player clientfield::set_to_player("" + #"fill_blood", 8);
       e_player flag::set(#"hash_3ade5b9424a14f81");
       playSoundAtPosition(#"zmb_bloodbath_drain", level.var_92a01e03.origin);
-      playSoundAtPosition(#"hash_2f578ca03993ba56", level.var_4b9d0136.origin);
+      playSoundAtPosition(#"zmb_water_tower_groan", level.var_4b9d0136.origin);
       level flag::set(#"hash_1a367a4a0dfb0471");
 
       if(level flag::get(#"hash_29dc018e9551ecf")) {

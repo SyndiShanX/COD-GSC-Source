@@ -148,10 +148,10 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   });
 
   if(math::cointoss() && math::cointoss()) {
-    e_grenade thread function_4d71ac38(#"hash_8d020e5460f4a95");
+    e_grenade thread function_4d71ac38(#"vox_homun_throw_homu");
     e_grenade.var_53ba8670 = 1;
   } else {
-    e_grenade thread function_4d71ac38(#"hash_689f11fd8983d1a6");
+    e_grenade thread function_4d71ac38(#"vox_homun_throw_exert_homu");
   }
 
   e_grenade thread scene::play(#"aib_t8_zm_zod_homunculus_throw_loop_01", e_grenade.mdl_anchor);
@@ -163,10 +163,10 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
 
   if(var_3fb36683 && isDefined(e_grenade.var_45eaa114) && e_grenade.var_45eaa114) {
     if(math::cointoss() && math::cointoss() && !e_grenade.var_53ba8670) {
-      e_grenade thread function_4d71ac38(#"hash_6b4fa8bf14690e0c");
+      e_grenade thread function_4d71ac38(#"vox_homun_land_homu");
       e_grenade.var_255a121f = 1;
     } else {
-      e_grenade thread function_4d71ac38(#"hash_1d6e8d28eabdb1fb");
+      e_grenade thread function_4d71ac38(#"vox_homun_land_exert_homu");
     }
 
     e_grenade.mdl_anchor unlink();
@@ -202,7 +202,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   }
 
   e_grenade.script_noteworthy = undefined;
-  e_grenade function_4d71ac38(#"hash_51a9b856a9474bab");
+  e_grenade function_4d71ac38(#"vox_homun_out_bounds_homu");
   level thread grenade_stolen_by_sam(e_grenade);
 }
 
@@ -333,7 +333,7 @@ function_cc9535d0(var_c4a5788c, var_bbab4f84, var_2f916462) {
             self.var_69e642c7 scene::stop();
 
             if(math::cointoss() && math::cointoss()) {
-              self thread function_4d71ac38(#"hash_22c88cff01a4691b");
+              self thread function_4d71ac38(#"vox_homun_jump_homu");
             }
 
             self.var_69e642c7 scene::play(#"aib_t8_zm_zod_homunculus_jump_up_01", self.mdl_anchor);
@@ -386,7 +386,7 @@ function_2c022ba8(e_player, e_grenade) {
       self playSound(#"wpn_homunculus_melee_imp");
 
       if(math::cointoss() && math::cointoss()) {
-        e_grenade thread function_4d71ac38(#"hash_ba5815eb0dc4d97");
+        e_grenade thread function_4d71ac38(#"vox_homun_kill_homu");
       }
 
       self dodamage(var_5d7b4163, self.origin, e_player, undefined, undefined, "MOD_UNKNOWN", 0, level.w_homunculus, undefined, 1);
@@ -596,7 +596,7 @@ grenade_stolen_by_sam(e_grenade) {
 function_e383ca2f() {
   self endoncallback(&function_5e056d93, #"death");
   self waittilltimeout(15, #"hash_90cfd38343f41f2");
-  self function_4d71ac38(#"hash_6e471fde121d0263", 1);
+  self function_4d71ac38(#"vox_homun_death_homu", 1);
   self notify(#"explode");
   self function_f33bde5c();
   self.var_69e642c7 scene::stop();

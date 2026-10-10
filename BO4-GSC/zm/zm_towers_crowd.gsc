@@ -575,7 +575,7 @@ crowd_throw_item(var_2bd26cff) {
   str_powerup = array::random(var_a714ee15);
 
   if(!isDefined(level.zombie_powerups[str_powerup])) {
-    playSoundAtPosition(#"hash_339b376fb02738f5", var_4d611aa2.origin);
+    playSoundAtPosition(#"amb_crowd_throw_something", var_4d611aa2.origin);
 
     if(str_powerup === "rock") {
       e_item = util::spawn_model(#"p8_fxp_debris_rock_02", var_4d611aa2.origin, var_4d611aa2.angles);
@@ -603,7 +603,7 @@ crowd_throw_item(var_2bd26cff) {
       }
     }
   } else {
-    playSoundAtPosition(#"hash_339b376fb02738f5", var_4d611aa2.origin);
+    playSoundAtPosition(#"amb_crowd_throw_something", var_4d611aa2.origin);
     var_354ec191 = array::random(array(#"p8_fxanim_zm_towers_crowd_jar_01_mod", #"p8_fxanim_zm_towers_crowd_jar_02_mod", #"p8_fxanim_zm_towers_crowd_jar_03_mod"));
     e_item = util::spawn_model(var_354ec191, var_4d611aa2.origin, var_4d611aa2.angles);
     e_item fx::play(#"hash_4c4f96aa02c32a2a", e_item.origin, e_item.angles, "crowd_item_fly_fx_stop", 1);

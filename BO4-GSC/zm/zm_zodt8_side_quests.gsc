@@ -614,7 +614,7 @@ function_cbee939b(var_a9e11cb7) {
 
   var_a9e11cb7 clientfield::set("" + #"portal_pass", 2);
   s_loc zm_unitrigger::function_fac87205();
-  playSoundAtPosition(#"hash_1ae92639674c0896", var_a9e11cb7.origin);
+  playSoundAtPosition(#"zmb_portal_being_powerup", var_a9e11cb7.origin);
   var_a9e11cb7 clientfield::set("" + #"portal_pass", 0);
 
   foreach(player in util::get_active_players()) {
@@ -793,7 +793,7 @@ function_bf250d60() {
 
       if(isDefined(self.targetname)) {
         if(self.targetname == #"floaters_toy") {
-          playSoundAtPosition(#"hash_54fc1ee5be2ddd61", self.origin);
+          playSoundAtPosition(#"zmb_statue_crown_fall", self.origin);
         }
 
         if(self.targetname == #"floaters_post") {
@@ -845,7 +845,7 @@ function_ebb2139() {
 
     foreach(var_a89972df in level.var_f02a5fea) {
       var_a89972df show();
-      playSoundAtPosition(#"hash_6cea60c7eda4bc0a", var_a89972df.origin);
+      playSoundAtPosition(#"zmb_statue_piece_drop", var_a89972df.origin);
     }
 
     if(level flag::get(#"boss_fight_started") && !level flag::get(#"boss_fight_all_complete")) {
@@ -1841,7 +1841,7 @@ function_9a6d950f() {
           break;
       }
 
-      self playSound(#"hash_5a8158d766d5258b");
+      self playSound(#"zmb_skeleton_car_flare_impact_good");
       level flag::set(#"skeleton_car_crash");
       break;
     }
@@ -2129,7 +2129,7 @@ function_9dcc74cf() {
 
   zm_unitrigger::function_89380dda(s_unitrigger);
   self waittill(#"hash_3c52547927852e33");
-  self playSound(#"hash_57989a591694c70b");
+  self playSound(#"zmb_sheet_music_pickup");
   self zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   self delete();
 }
@@ -2174,7 +2174,7 @@ function_41ee4286() {
 
     if(isDefined(s_piano.var_32d36a7f)) {
       s_piano.var_1904a11d hide();
-      playSoundAtPosition(#"hash_57989a591694c70b", s_piano.origin);
+      playSoundAtPosition(#"zmb_sheet_music_pickup", s_piano.origin);
 
       if(s_piano.var_32d36a7f == s_piano.script_int) {
         s_piano.var_fd9d797f = 0;
@@ -2196,7 +2196,7 @@ function_41ee4286() {
       s_piano.var_1904a11d function_1f7f2030(e_player.var_32d36a7f);
       s_piano.var_1904a11d show();
       s_piano notify(#"hash_2624818b23ab83dc");
-      playSoundAtPosition(#"hash_6c070e9cd866f23a", s_piano.origin);
+      playSoundAtPosition(#"zmb_sheet_music_drop", s_piano.origin);
       s_piano.var_32d36a7f = e_player.var_32d36a7f;
       e_player.var_32d36a7f = isDefined(var_1b79a086) ? var_1b79a086 : undefined;
 

@@ -151,7 +151,7 @@ function_587e512e() {
 
   foreach(player in getPlayers(self.team)) {
     if(isDefined(player)) {
-      player playsoundtoplayer(#"hash_41def4c864993224", player);
+      player playsoundtoplayer(#"evt_q_complete", player);
     }
   }
 }

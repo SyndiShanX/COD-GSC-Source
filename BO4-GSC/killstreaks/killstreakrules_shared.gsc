@@ -197,7 +197,7 @@ killstreakstop(hardpointtype, team, id) {
     killstreak_debug_text("<dev string:xa3>" + hardpointtype);
 
     if(sessionmodeismultiplayergame()) {
-      function_92d1707f(#"hash_710b205b26e46446", {
+      function_92d1707f(#"dlog_event_mpkillstreakuses", {
         #starttime: 0, #endtime: gettime(), #name: hardpointtype, #team: team
       });
     }
@@ -212,7 +212,7 @@ killstreakstop(hardpointtype, team, id) {
     mpkillstreakuses = {
       #starttime: level.killstreaks_triggered[id][#"starttime"], #endtime: level.killstreaks_triggered[id][#"endtime"], #spawnid: level.killstreaks_triggered[id][#"spawnid"], #name: hardpointtype, #team: team
     };
-    function_92d1707f(#"hash_710b205b26e46446", mpkillstreakuses);
+    function_92d1707f(#"dlog_event_mpkillstreakuses", mpkillstreakuses);
   }
 
   level.killstreaks_triggered[id] = undefined;

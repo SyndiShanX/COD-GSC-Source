@@ -359,7 +359,7 @@ function_12944b2e() {
             mdl_wood thread function_d4646ede();
           }
         } else {
-          mdl_wood setModel(#"hash_4286272708c5e5c0");
+          mdl_wood setModel(#"p8_zm_gla_wood_coal_log_tip_burned");
         }
       }
 
@@ -392,7 +392,7 @@ function_d4646ede() {
   self endon(#"death");
   wait 5;
   level clientfield::set("" + #"hash_445060dbbf244b04", 0);
-  self setModel(#"hash_4286272708c5e5c0");
+  self setModel(#"p8_zm_gla_wood_coal_log_tip_burned");
   self clientfield::set("" + #"hash_273efcc293063e5e", 0);
 }
 
@@ -437,9 +437,9 @@ function_12bc0c40(var_c58a9909) {
       mdl_wood = arraygetclosest(self.origin, var_4cf59c29);
       s_loc = arraygetclosest(self.origin, var_3c244cd3);
       mdl_wood show();
-      mdl_wood setModel(#"hash_4973461a43fcb56");
+      mdl_wood setModel(#"p8_zm_gla_wood_coal_log_dmg");
       mdl_wood clientfield::increment("" + #"hash_6ff3eb2dd0078a51");
-      var_749ba981 = util::spawn_model(#"hash_77659f61538a4beb", mdl_wood.origin, mdl_wood.angles);
+      var_749ba981 = util::spawn_model(#"p8_zm_gla_wood_coal_log_tip", mdl_wood.origin, mdl_wood.angles);
       var_749ba981 moveTo(s_loc.origin, 0.5);
       var_c58a9909.var_1d6dd729 = 1;
       var_8673cc35 = getEntArray("t_fertilizer_tower", "targetname");
@@ -637,7 +637,7 @@ mix_fertilizer_setup(b_skipped) {
     level waittill(#"end_of_round");
   }
 
-  mdl_fertilizer setModel(#"hash_571dce3dbd970ee6");
+  mdl_fertilizer setModel(#"p8_zm_gla_dung_pile_01");
   level clientfield::set("" + #"fertilizer_smell_bowl", 1);
   e_player = mdl_fertilizer zm_unitrigger::function_fac87205("", 96, 1);
   e_player playSound(#"hash_338c802929e278d4");
@@ -660,7 +660,7 @@ place_fertilizer_setup(b_skipped) {
 
   var_2317ee9f = struct::get(#"hash_3fda284f010e01fd");
   var_2317ee9f zm_unitrigger::function_fac87205("", 96, 1);
-  var_2317ee9f.mdl_fertilizer = util::spawn_model(#"hash_571dce3dbd970ee6", var_2317ee9f.origin, var_2317ee9f.angles);
+  var_2317ee9f.mdl_fertilizer = util::spawn_model(#"p8_zm_gla_dung_pile_01", var_2317ee9f.origin, var_2317ee9f.angles);
   var_2317ee9f.mdl_fertilizer setscale(1);
   var_2317ee9f.mdl_fertilizer clientfield::set("" + #"fertilizer_smell", 0);
   var_2317ee9f.mdl_fertilizer playSound(#"hash_5d534ac036533040");

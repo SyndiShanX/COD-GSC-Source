@@ -309,7 +309,7 @@ function_7056aa62() {
 function_4c525901() {
   self endon(#"death");
   s_waitresult = self waittill(#"trigger_activated");
-  self playSound(#"hash_55c30dada4e624a2");
+  self playSound(#"evt_dynamite_bomb_pickup");
   s_waitresult.e_who zm_audio::create_and_play_dialog(#"explosive", #"pickup");
   level.var_518d6e34 = 1;
   zm_ui_inventory::function_7df6bb60("orange_dynamite_bomb_complete", 1);

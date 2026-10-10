@@ -127,8 +127,8 @@ event_handler[level_init] main(eventstruct) {
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level._effect[#"lght_marker"] = #"hash_2eb17822848d1484";
-  level._effect[#"lght_marker_flare"] = #"hash_4d4ecfd7d55314e9";
-  level._effect[#"poltergeist"] = #"hash_64ab8440e31c3057";
+  level._effect[#"lght_marker_flare"] = #"maps/zm_escape/fx8_magicbox_flare";
+  level._effect[#"poltergeist"] = #"maps/zm_escape/fx8_magicbox_poltergeist";
   level.var_a9c40fde = &function_2d2f3503;
   level.var_1e480ea7 = &function_bcc6a9d8;
   namespace_b99141ed::init();
@@ -800,9 +800,9 @@ function_45b0f2f3(str_weapon_name) {
 }
 
 custom_add_vox() {
-  zm_audio::loadplayervoicecategories(#"hash_41c3d60c9fdc1c1a");
-  zm_audio::loadplayervoicecategories(#"hash_6d9aadb58948623b");
-  zm_audio::loadplayervoicecategories(#"hash_5513a399a5c36320");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_common_vox.csv");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_story1_vox.csv");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_escape_vox.csv");
   level.sndweaponpickupoverride = array(#"spoon", #"spork", #"spknifeork", #"tomahawk", #"blundergat", #"acidgat", #"magmagat", #"magmagat_unfinished");
 }
 

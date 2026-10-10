@@ -127,7 +127,7 @@ function_fabb1fba(var_5ea5c94d, ended_early) {
 function_715c9476() {
   waitresult = self waittill(#"trigger");
   level.var_db90b274--;
-  self playSound(#"hash_5104efdd2ef71e39");
+  self playSound(#"evt_ee_portraits_interact");
 
   iprintlnbold("<dev string:x62>");
 
@@ -139,7 +139,7 @@ function_63f29ee9() {
   var_c4cb303c rotateTo(var_c4cb303c.angles - (20, 0, 0), 0.15);
   waitresult = self waittill(#"trigger");
   level.var_db90b274--;
-  self playSound(#"hash_5104efdd2ef71e39");
+  self playSound(#"evt_ee_portraits_interact");
 
   iprintlnbold("<dev string:x80>");
 
@@ -153,7 +153,7 @@ function_bd81f4e2(user) {
     wait 0.1;
     level.var_d5fff1a7 hide();
     level.var_3830a0d3 hide();
-    playSoundAtPosition(#"hash_4b169927b4789180", (0, 0, 0));
+    playSoundAtPosition(#"evt_ee_portraits_complete", (0, 0, 0));
 
     iprintlnbold("<dev string:x9f>");
 

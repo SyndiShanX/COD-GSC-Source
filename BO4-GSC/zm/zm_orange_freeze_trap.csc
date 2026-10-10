@@ -17,8 +17,8 @@ init() {
   level._effect[#"freeze_spray"] = #"hash_424786ecbc7f5672";
   level._effect[#"freeze_spray_death"] = #"hash_48d74d13d0c569c";
   level._effect[#"freeze_zombie_impact"] = #"hash_29ac72c5aa5398bc";
-  level._effect[#"player_freeze_screen"] = #"hash_709cca7d0048aa72";
-  level._effect[#"player_freeze_smoke"] = #"hash_69af1783a31b44f7";
+  level._effect[#"player_freeze_screen"] = #"player/fx8_plyr_pstfx_115_screen";
+  level._effect[#"player_freeze_smoke"] = #"player/fx8_plyr_pstfx_115_smoke";
   forcestreamxmodel("p8_zm_ora_soapstone_01_cold");
 }
 
@@ -119,8 +119,8 @@ function_b487d98d(str_notify) {
   if(isDefined(self)) {
     localclientnum = self getlocalclientnumber();
 
-    if(self postfx::function_556665f2(#"hash_98397d99cb3a03")) {
-      self postfx::exitpostfxbundle(#"hash_98397d99cb3a03");
+    if(self postfx::function_556665f2(#"pstfx_zm_115_dmg")) {
+      self postfx::exitpostfxbundle(#"pstfx_zm_115_dmg");
     }
 
     if(isDefined(self.var_f08ae416)) {

@@ -877,7 +877,7 @@ playlockonsoundsthread(player, heli) {
       }
 
       if(enemylockedon(heli)) {
-        heli.locksounds playsoundtoplayer(#"hash_1683ed70beb3f2", player);
+        heli.locksounds playsoundtoplayer(#"uin_ac130_e_target_lock", player);
         wait 0.125;
       }
 

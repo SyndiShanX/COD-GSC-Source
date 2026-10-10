@@ -484,7 +484,7 @@ function_5804d6ff() {
 
     if(level.var_2dffd020 == 1) {
       if(e_player zm_score::can_player_purchase(level.var_d3a8f03b)) {
-        e_player playSound(#"hash_73188c838e8d29c7");
+        e_player playSound(#"zmb_challenges_activate_tribute");
         e_player thread zm_score::minus_to_player_score(level.var_d3a8f03b);
         level thread start_challenge();
         level.var_c6ab748f = 0;
@@ -496,7 +496,7 @@ function_5804d6ff() {
 
     if(level.var_2dffd020 == 2 && level.var_c6ab748f < 0) {
       if(e_player zm_score::can_player_purchase(level.var_48442709)) {
-        e_player playSound(#"hash_73188c838e8d29c7");
+        e_player playSound(#"zmb_challenges_activate_tribute");
         e_player thread zm_score::minus_to_player_score(level.var_48442709);
         level thread start_challenge();
         level.var_c6ab748f++;
@@ -1222,21 +1222,21 @@ function_836d2b5b() {
     }
 
     if(player.var_6b3806e8 == 0) {
-      player thread zm_vo::vo_say(#"hash_52ef2f977320c648", 0, 1, 9999, 1, 1, 1);
+      player thread zm_vo::vo_say(#"vox_tribute_fair_orac_0", 0, 1, 9999, 1, 1, 1);
       continue;
     }
 
     if(player.var_6b3806e8 <= 0.05) {
-      player thread zm_vo::vo_say(#"hash_dc8a9f0c8308e91", 0, 1, 9999, 1, 1, 1);
+      player thread zm_vo::vo_say(#"vox_tribute_neutral_orac_0", 0, 1, 9999, 1, 1, 1);
       continue;
     }
 
     if(player.var_6b3806e8 <= 0.3) {
-      player thread zm_vo::vo_say(#"hash_5cf9d72bd1aa0071", 0, 1, 9999, 1, 1, 1);
+      player thread zm_vo::vo_say(#"vox_tribute_good_orac_0", 0, 1, 9999, 1, 1, 1);
       continue;
     }
 
-    player thread zm_vo::vo_say(#"hash_2d2de7c6c02699d2", 0, 1, 9999, 1, 1, 1);
+    player thread zm_vo::vo_say(#"vox_tribute_excellent_orac_0", 0, 1, 9999, 1, 1, 1);
   }
 }
 
@@ -1386,6 +1386,6 @@ function_8ff7b0bb() {
   }
 
   foreach(player in getPlayers()) {
-    player thread zm_vo::vo_say(#"hash_3d7811c8269d75cf", 0, 1, 9999, 1, 1, 1);
+    player thread zm_vo::vo_say(#"vox_challenge_available_orac_0", 0, 1, 9999, 1, 1, 1);
   }
 }

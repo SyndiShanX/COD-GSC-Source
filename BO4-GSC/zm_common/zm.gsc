@@ -941,8 +941,8 @@ init_fx() {
   level._effect[#"fall_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
   level._effect[#"fall_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
   level._effect[#"fall_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[#"character_fire_death_sm"] = #"hash_c9cf0acc938a7f6";
-  level._effect[#"character_fire_death_torso"] = #"hash_5686def5b4c85661";
+  level._effect[#"character_fire_death_sm"] = #"zombie/fx8_fire_limb_zmb";
+  level._effect[#"character_fire_death_torso"] = #"zombie/fx8_fire_torso_zmb";
 
   if(!(isDefined(level.fx_exclude_default_explosion) && level.fx_exclude_default_explosion)) {
     level._effect[#"def_explosion"] = #"_t6/explosions/fx_default_explosion";

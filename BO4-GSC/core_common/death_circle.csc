@@ -24,7 +24,7 @@ __init__() {
   level.var_cb450873 = #"evt_death_circle_3d";
   level.var_f6795a59 = [1: #"hash_7c7ea03189fe65d8", 2: #"hash_5c64e89ab323857a", 3: #"hash_3fc5123369b4c59f"];
   level.var_601fc3c5 = [1: #"wz/fx8_player_outside_circle", 2: #"hash_474c4d87482063e0", 3: #"hash_474c4e8748206593"];
-  level.var_7e948a2d = [1: #"wz/fx8_plyr_pstfx_barrier_lvl_01_wz", 2: #"hash_2ccb19ff6223b693", 3: #"hash_559017f41745034e"];
+  level.var_7e948a2d = [1: #"wz/fx8_plyr_pstfx_barrier_lvl_01_wz", 2: #"wz/fx8_plyr_pstfx_barrier_lvl_02_wz", 3: #"wz/fx8_plyr_pstfx_barrier_lvl_03_wz"];
   level.var_c465fd31 = [1: #"hash_775e24c0ca5d7b58", 2: #"hash_775e24c0ca5d7b58", 3: #"hash_316ec537e4167d47"];
   level.var_7d949aad = [1: 0.5, 2: 0, 3: 0];
   level.var_213a0963 = [1: #"hash_57b39f99758cac07", 2: #"hash_301fd347a3614b8b", 3: #"hash_631d14143bf8b26"];

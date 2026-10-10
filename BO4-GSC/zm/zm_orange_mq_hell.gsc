@@ -256,7 +256,7 @@ function_a31d9184(n_points) {
 function_a340f5a2() {
   level endon(#"end_game");
   level clientfield::set("" + #"hash_72b5b0359ca48427", 1);
-  playSoundAtPosition(#"hash_431cadb65b1777ce", (0, 0, 0));
+  playSoundAtPosition(#"evt_turn_to_hell", (0, 0, 0));
   level.var_5d5b7e8e.var_a41818b5 setspeed(2);
   level.var_5d5b7e8e.var_a41818b5 thread vehicle::get_on_and_go_path(level.var_5d5b7e8e.nd_start);
   level.var_5d5b7e8e.var_a41818b5 waittill(#"stop");
@@ -335,7 +335,7 @@ function_25c6ed8d() {
   foreach(e_player in getPlayers()) {
     if(zombie_utility::is_player_valid(e_player, 0, 0)) {
       e_player thread zm_orange_fasttravel_flinger::fling_player(vol_fling);
-      e_player playSound(#"hash_7f08b47352413d9a");
+      e_player playSound(#"evt_flinger_fling_personal");
 
       if(!var_d49079c) {
         e_player thread function_6f0a7fea();

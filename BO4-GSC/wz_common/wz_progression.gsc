@@ -1136,7 +1136,7 @@ on_character_unlock(params) {
     var_4e36df97 = player stats::get_stat(#"characters", #"prt_wz_firebreak", #"unlocked");
     var_a71f1b0f = player stats::get_stat(#"characters", #"prt_wz_enforcer", #"unlocked");
     var_199c1316 = player stats::get_stat(#"characters", #"prt_wz_trapper", #"unlocked");
-    var_6851d31e = player stats::get_stat(#"characters", #"hash_62361c68e083d401", #"unlocked");
+    var_6851d31e = player stats::get_stat(#"characters", #"prt_wz_technomancer", #"unlocked");
     var_f67cceb4 = player stats::get_stat(#"characters", #"prt_wz_swatpolice", #"unlocked");
     var_7fec1dca = player stats::get_stat(#"characters", #"prt_wz_buffassault", #"unlocked");
     var_ccc5605d = player stats::get_stat(#"characters", #"prt_wz_engineer", #"unlocked");
@@ -1149,7 +1149,7 @@ on_character_unlock(params) {
     var_bae2998 = player stats::get_stat(#"characters", #"prt_wz_bruno", #"unlocked");
     var_db2f35af = player stats::get_stat(#"characters", #"prt_wz_scarlett", #"unlocked");
     var_c7bf8a47 = player stats::get_stat(#"characters", #"prt_wz_diego", #"unlocked");
-    var_c0c6b37a = player stats::get_stat(#"characters", #"hash_4f0c567012b33fd9", #"unlocked");
+    var_c0c6b37a = player stats::get_stat(#"characters", #"prt_wz_stanton", #"unlocked");
     var_7434f372 = player stats::get_stat(#"characters", #"prt_wz_dempsey", #"unlocked");
     var_98f0457e = player stats::get_stat(#"characters", #"prt_wz_takeo", #"unlocked");
     var_a5b8977e = player stats::get_stat(#"characters", #"prt_wz_nikolai", #"unlocked");

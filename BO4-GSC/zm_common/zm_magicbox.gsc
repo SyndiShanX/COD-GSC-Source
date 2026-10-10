@@ -46,8 +46,8 @@ autoexec __init__system__() {
 
 __init__() {
   level.start_chest_name = "start_chest";
-  level._effect[#"hash_2ff87d61167ea531"] = #"hash_d66a9f5776f1fba";
-  level._effect[#"hash_4048cb4967032c4a"] = #"hash_1e43d43c6586fcb5";
+  level._effect[#"hash_2ff87d61167ea531"] = #"zombie/fx8_magicbox_marker";
+  level._effect[#"hash_4048cb4967032c4a"] = #"zombie/fx8_magicbox_marker_fl";
   level._effect[#"lght_marker"] = #"zombie/fx_weapon_box_marker_zmb";
   level._effect[#"lght_marker_flare"] = #"zombie/fx_weapon_box_marker_fl_zmb";
   level._effect[#"poltergeist"] = #"zombie/fx_barrier_buy_zmb";
@@ -1687,7 +1687,7 @@ treasure_chest_weapon_spawn(chest, player, respin) {
   self.weapon = rand;
 
   if(!move_the_box && rand === getweapon(#"homunculus")) {
-    self thread zm_vo::vo_say(#"hash_770c96a35322e11d", 0, 0, 0, 1);
+    self thread zm_vo::vo_say(#"vox_homun_raise_homu", 0, 0, 0, 1);
   }
 
   if(isDefined(level.func_magicbox_weapon_spawned)) {
@@ -1897,7 +1897,7 @@ chest_get_max_usage() {
 timer_til_despawn(v_float) {
   self endon(#"kill_weapon_movement");
 
-  if(#"hash_30b0badbca0a10de" === self.model) {
+  if(#"wpn_t8_zm_eqp_lightning_rod_world" === self.model) {
     self.angles = (self.angles[0] + 90, self.angles[1], self.angles[2]);
   }
 
@@ -2040,7 +2040,7 @@ give_offhand_weapon(weapon) {
 
   if(isDefined(self._gadgets_player[1])) {
     if(self gadgetpowerget(1) === 100) {
-      self playsoundtoplayer(#"hash_5069ed8fdae493ce", self);
+      self playsoundtoplayer(#"uin_zmb_equipment_ready", self);
     }
   }
 

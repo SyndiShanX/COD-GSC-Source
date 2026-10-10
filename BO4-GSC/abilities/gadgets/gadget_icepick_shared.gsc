@@ -561,7 +561,7 @@ function_2b2ed159(entity, attackingplayer) {
 
   attackingplayer clientfield::set_player_uimodel("IcePickInfo.currentHackProgress", 1);
   entity clientfield::set("hackStatus", 2);
-  attackingplayer playsoundtoplayer(#"hash_fc83e70c477029c", attackingplayer);
+  attackingplayer playsoundtoplayer(#"mpl_spec_bot_spawn", attackingplayer);
   entity notify(#"hash_2476803a0d5fa572");
   attackingplayer.var_982faa7c = undefined;
 

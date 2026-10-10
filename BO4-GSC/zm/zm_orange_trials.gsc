@@ -290,7 +290,7 @@ function_b4bd25ef() {
 
 function_ff0b7907() {
   level clientfield::set("" + #"hash_72b5b0359ca48427", 1);
-  playSoundAtPosition(#"hash_431cadb65b1777ce", (0, 0, 0));
+  playSoundAtPosition(#"evt_turn_to_hell", (0, 0, 0));
   level thread lui::screen_flash(0.2, 0.5, 1, 0.8, "white");
   wait 0.2;
   setlightingstate(1);

@@ -43,7 +43,7 @@ function_250232f4(localclientnum) {
   level.var_49f26c00.var_8a28a9a = array::random(level.var_49f26c00.var_ece3d654);
   level.var_49f26c00.var_66baa9e8 = array(-1, -1, 0, 1, 3, 2);
   level.var_49f26c00.var_9af0d684 = 1;
-  level.var_49f26c00.var_f538d7d4 = array(#"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_common_mod", #"hash_2c6105fec300cac", #"hash_165b9b0cd81e08af", #"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_epic_mod", #"hash_712426d0934a5cd4");
+  level.var_49f26c00.var_f538d7d4 = array(#"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_common_mod", #"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_rare_mod", #"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_legendary_mod", #"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_epic_mod", #"p8_fxanim_core_frontend_zm_lab_elixir_bottle_fluid_ultra_mod");
   level.var_49f26c00.var_7a5c68f2 = array(#"fx_bottle_common", #"hash_38d4f59cb78344b9", #"hash_78f0379f9bdc006", #"fx_bottle_epic", #"hash_256e8ac9ea9c8ad9");
   level.var_49f26c00.var_b273f2b6 = getEnt(localclientnum, "tube_liquid_01", "targetname");
   level.var_49f26c00.var_c6761aa2 = getEnt(localclientnum, "tube_liquid_02", "targetname");
@@ -986,9 +986,9 @@ function_6198ffc(n_tube_index = 1, b_reverse = 0) {
       break;
     case 5:
       if(b_reverse) {
-        level.var_49f26c00.var_13123ed2 = #"hash_3a6d60badb3dae03";
+        level.var_49f26c00.var_13123ed2 = #"p8_zm_lab_tube_05_script_saturated_reverse";
       } else {
-        level.var_49f26c00.var_13123ed2 = #"hash_513a13fb9a123f22";
+        level.var_49f26c00.var_13123ed2 = #"p8_zm_lab_tube_05_script_saturated";
       }
 
       break;
@@ -1141,7 +1141,7 @@ function_365bef4(localclientnum, b_debug = 0) {
   level flag::clear(#"hash_4bbc47f6a0a31743");
   s_cam = struct::get(#"tag_align_zm_lab");
   playmaincamxcam(localclientnum, "ui_scene_cam_zm_lab_in", 0, "", "", s_cam.origin, s_cam.angles);
-  playSound(localclientnum, #"hash_3e1e95a35dedc6bc");
+  playSound(localclientnum, #"evt_mach_startup");
   level thread scene::play(level.var_49f26c00.var_42c70173, level.var_49f26c00.var_febe408a + "_exit");
   wait 0.5;
   function_6198ffc(1, 0);
@@ -1351,7 +1351,7 @@ skip_to_reveal(localclientnum) {
 }
 
 function_3dd68dd9(localclientnum, var_8bad1c0 = 1) {
-  playSound(localclientnum, #"hash_7ca34384c7d609e0");
+  playSound(localclientnum, #"evt_magnesium_flash");
   frontend::toggle_postfx(localclientnum, 1, #"hash_2d04a3877a927be7");
 
   if(ishash(var_8bad1c0) || isstring(var_8bad1c0)) {
@@ -1677,13 +1677,13 @@ setup_bottles(localclientnum, var_56448842, var_cf59fa73, var_bb17d1ef) {
   function_6198ffc(5, 0);
   var_56448842.mdl_bottle = util::spawn_model(localclientnum, "tag_origin", var_56448842 gettagorigin("bottle_01_link_jnt"), var_56448842 gettagangles("bottle_01_link_jnt"));
   var_56448842.mdl_tube = util::spawn_model(localclientnum, level.var_49f26c00.var_13123ed2, var_56448842 gettagorigin("bottle_01_link_jnt"), var_56448842 gettagangles("bottle_01_link_jnt"));
-  var_56448842.mdl_lid = util::spawn_model(localclientnum, #"hash_cbaf587ef8564b8", var_56448842 gettagorigin("bottlecap_01_link_jnt"), var_56448842 gettagangles("bottlecap_01_link_jnt"));
+  var_56448842.mdl_lid = util::spawn_model(localclientnum, #"p8_zm_elixir_lid_ui_lab", var_56448842 gettagorigin("bottlecap_01_link_jnt"), var_56448842 gettagangles("bottlecap_01_link_jnt"));
   var_cf59fa73.mdl_bottle = util::spawn_model(localclientnum, "tag_origin", var_cf59fa73 gettagorigin("bottle_02_link_jnt"), var_cf59fa73 gettagangles("bottle_02_link_jnt"));
   var_cf59fa73.mdl_tube = util::spawn_model(localclientnum, level.var_49f26c00.var_13123ed2, var_cf59fa73 gettagorigin("bottle_02_link_jnt"), var_cf59fa73 gettagangles("bottle_02_link_jnt"));
-  var_cf59fa73.mdl_lid = util::spawn_model(localclientnum, #"hash_cbaf587ef8564b8", var_cf59fa73 gettagorigin("bottlecap_02_link_jnt"), var_cf59fa73 gettagangles("bottlecap_02_link_jnt"));
+  var_cf59fa73.mdl_lid = util::spawn_model(localclientnum, #"p8_zm_elixir_lid_ui_lab", var_cf59fa73 gettagorigin("bottlecap_02_link_jnt"), var_cf59fa73 gettagangles("bottlecap_02_link_jnt"));
   var_bb17d1ef.mdl_bottle = util::spawn_model(localclientnum, "tag_origin", var_bb17d1ef gettagorigin("bottle_03_link_jnt"), var_bb17d1ef gettagangles("bottle_03_link_jnt"));
   var_bb17d1ef.mdl_tube = util::spawn_model(localclientnum, level.var_49f26c00.var_13123ed2, var_bb17d1ef gettagorigin("bottle_03_link_jnt"), var_bb17d1ef gettagangles("bottle_03_link_jnt"));
-  var_bb17d1ef.mdl_lid = util::spawn_model(localclientnum, #"hash_cbaf587ef8564b8", var_bb17d1ef gettagorigin("bottlecap_03_link_jnt"), var_bb17d1ef gettagangles("bottlecap_03_link_jnt"));
+  var_bb17d1ef.mdl_lid = util::spawn_model(localclientnum, #"p8_zm_elixir_lid_ui_lab", var_bb17d1ef gettagorigin("bottlecap_03_link_jnt"), var_bb17d1ef gettagangles("bottlecap_03_link_jnt"));
   var_56448842.mdl_bottle linkTo(var_56448842, "bottle_01_link_jnt");
   var_cf59fa73.mdl_bottle linkTo(var_cf59fa73, "bottle_02_link_jnt");
   var_bb17d1ef.mdl_bottle linkTo(var_bb17d1ef, "bottle_03_link_jnt");

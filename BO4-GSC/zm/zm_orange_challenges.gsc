@@ -1063,7 +1063,7 @@ function_2fc4d208(s_challenge) {
   s_challenge endon(s_challenge.str_notify);
   s_result = self waittill(#"trigger_activated");
   e_who = s_result.e_who;
-  playSoundAtPosition(#"hash_4b33537532733659", self.origin);
+  playSoundAtPosition(#"zmb_ingredient_pickup", self.origin);
   e_who thread zm_audio::create_and_play_dialog(#"challenge", #"pickup_generic");
   self.e_ingredient delete();
 
@@ -1128,7 +1128,7 @@ function_4ab0f49a(var_d6578e1f) {
     }
 
     if(var_d6578e1f.var_e9a74caf >= 3) {
-      playSoundAtPosition(#"hash_45b15e2671c49618", self.origin);
+      playSoundAtPosition(#"zmb_ingredient_drop", self.origin);
       var_d6578e1f.n_current_progress++;
       var_d6578e1f function_544b63c0(var_d6578e1f.n_current_progress);
       var_d6578e1f.var_735249ac setModel("p8_zm_ora_kitchenware_soup_pot");
@@ -1351,16 +1351,16 @@ function_c40f1feb(s_challenge_station) {
   for(i = 0; i < 5; i++) {
     switch (a_n_sequence[i]) {
       case 0:
-        e_vo zm_audio::do_player_or_npc_playvox(#"hash_2243128c47028806");
+        e_vo zm_audio::do_player_or_npc_playvox(#"vox_challenge_sing_a_herm_0");
         break;
       case 1:
-        e_vo zm_audio::do_player_or_npc_playvox(#"hash_60469dfb06e1b418");
+        e_vo zm_audio::do_player_or_npc_playvox(#"vox_challenge_sing_c_herm_0");
         break;
       case 2:
-        e_vo zm_audio::do_player_or_npc_playvox(#"hash_6358e1a146400a52");
+        e_vo zm_audio::do_player_or_npc_playvox(#"vox_challenge_sing_e_herm_0");
         break;
       case 3:
-        e_vo zm_audio::do_player_or_npc_playvox(#"hash_10d5f47609e63584");
+        e_vo zm_audio::do_player_or_npc_playvox(#"vox_challenge_sing_g_herm_0");
         break;
     }
   }

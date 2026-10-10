@@ -202,7 +202,7 @@ event_handler[gametype_init] main(eventstruct) {
 
 function_e843475e(localclientnum, menuname) {
   lui::createcameramenu(menuname, localclientnum, #"tag_align_frontend_background", #"ui_scene_cam_background");
-  lui::function_9d7ab167(menuname, localclientnum, 3, #"wz_inspection_struct", #"hash_191c3f4fc94449f1");
+  lui::function_9d7ab167(menuname, localclientnum, 3, #"wz_inspection_struct", #"ui_scene_cam_blur_screen");
 }
 
 setupclientmenus(localclientnum) {
@@ -499,7 +499,7 @@ function_daa3f7d0(localclientnum, weaponinfo, should_update_weapon_options = 1) 
     position = struct::get(#"tag_align_inspection_weapon1");
     origin = position.origin + info.offset;
     angles = position.angles + info.angles;
-    level.var_44011752 thread animation::play(#"hash_3689442490c2e5dd", origin, angles);
+    level.var_44011752 thread animation::play(#"o_wpn_t8_ar_accurate_prop_static", origin, angles);
     level thread scene::play(#"scene_frontend_inspection_weapon", "inspection_weapon_full");
     level.var_44011752 show();
   }
@@ -2811,9 +2811,9 @@ function_317ab257(localclientnum, menu_name, var_83a11058) {
   level endon(#"disconnect");
   level endon(menu_name + "_closed");
   self endon(#"cancel_deathfx");
-  var_cc8a3490 = #"hash_521de69029125f63";
-  var_7d89d45 = #"hash_33ffd8c85b4da392";
-  var_e04a6c21 = #"hash_4c04b62047703a60";
+  var_cc8a3490 = #"impacts/fx8_bul_impact_blood_body_nonfatal_exit";
+  var_7d89d45 = #"impacts/fx8_bul_impact_blood_body_fatal_exit";
+  var_e04a6c21 = #"impacts/fx8_bul_impact_blood_head_fatal_exit";
 
   if(![[self]] - > function_ea4ac9f8()) {
     return;
@@ -2822,9 +2822,9 @@ function_317ab257(localclientnum, menu_name, var_83a11058) {
   var_2ae2bfde = function_b52a94ae(var_83a11058);
 
   if(isDefined(var_2ae2bfde)) {
-    var_cc8a3490 = isDefined(var_2ae2bfde.var_cc8a3490) ? var_2ae2bfde.var_cc8a3490 : #"hash_521de69029125f63";
-    var_7d89d45 = isDefined(var_2ae2bfde.var_7d89d45) ? var_2ae2bfde.var_7d89d45 : #"hash_521de69029125f63";
-    var_e04a6c21 = isDefined(var_2ae2bfde.var_e04a6c21) ? var_2ae2bfde.var_e04a6c21 : #"hash_4c04b62047703a60";
+    var_cc8a3490 = isDefined(var_2ae2bfde.var_cc8a3490) ? var_2ae2bfde.var_cc8a3490 : #"impacts/fx8_bul_impact_blood_body_nonfatal_exit";
+    var_7d89d45 = isDefined(var_2ae2bfde.var_7d89d45) ? var_2ae2bfde.var_7d89d45 : #"impacts/fx8_bul_impact_blood_body_nonfatal_exit";
+    var_e04a6c21 = isDefined(var_2ae2bfde.var_e04a6c21) ? var_2ae2bfde.var_e04a6c21 : #"impacts/fx8_bul_impact_blood_head_fatal_exit";
   }
 
   self function_ca43d336(localclientnum);

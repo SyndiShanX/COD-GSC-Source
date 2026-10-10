@@ -1258,7 +1258,7 @@ function_704b8e() {
 }
 
 function_5d874e07() {
-  level zm_white_util::function_ec34b5ee(#"hash_fda2abccee87985");
+  level zm_white_util::function_ec34b5ee(#"vox_s1_denied_rush_0");
   level flag::set(#"clock_step_complete");
 }
 
@@ -3936,7 +3936,7 @@ function_ace163b6() {
       e_mccain showpart("tag_head");
       e_mccain showpart("tag_left_arm");
       e_mccain showpart("tag_right_arm");
-      playSoundAtPosition(#"hash_56952caa95deab79", self.origin);
+      playSoundAtPosition(#"evt_mann_part_put", self.origin);
       level zm_hms_util::pause_zombies(1, 0);
       level zm_hms_util::function_3c173d37();
       level.var_170ea961 zm_hms_util::function_6a0d675d(#"vox_s6_rebuilt", 0, 0, 1);
@@ -4398,7 +4398,7 @@ function_57dda4d1(str_identifier) {
     level.var_247a1d9f += 1;
     level thread function_9840ec4a(self.type, e_who);
     e_part = getEnt(str_identifier + "_part", "targetname");
-    playSoundAtPosition(#"hash_63bd968c7e332594", e_part.origin);
+    playSoundAtPosition(#"evt_mann_part_pickup", e_part.origin);
     e_part delete();
   }
 }

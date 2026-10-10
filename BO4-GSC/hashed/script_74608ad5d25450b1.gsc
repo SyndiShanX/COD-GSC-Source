@@ -366,7 +366,7 @@ function_b9a31cb(e_item, e_player) {
   e_player playSound("evt_canister_pickup");
 
   if(!zm_white_main_quest::function_6cebbce1() && zm_utility::is_classic()) {
-    e_player thread zm_white_util::function_491673da(#"hash_28707927bb714f9");
+    e_player thread zm_white_util::function_491673da(#"vox_ww_x_pickup_rush_0");
   }
 
   start_step_4();

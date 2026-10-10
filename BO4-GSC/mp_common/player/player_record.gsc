@@ -274,7 +274,7 @@ function_96d38b95(result) {
   end_match_specialist.specialist_legs = player function_cde23658();
   end_match_specialist.specialist_torso = player function_92ea4100();
   end_match_specialist.specialist_showcase = showcaseweapon.weapon.name;
-  function_92d1707f(#"hash_4c5946fa1191bc64", #"end_match_info", end_match_info, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", end_match_loadout, #"end_match_totals", end_match_totals, #"end_match_contracts", end_match_contracts, #"end_match_specialist", end_match_specialist);
+  function_92d1707f(#"dlog_event_end_match", #"end_match_info", end_match_info, #"hash_4682ee0eb5071d2", var_811ed119, #"end_match_loadout", end_match_loadout, #"end_match_totals", end_match_totals, #"end_match_contracts", end_match_contracts, #"end_match_specialist", end_match_specialist);
 }
 
 record_special_move_data_for_life(killer) {

@@ -143,11 +143,11 @@ hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shi
               hitalias = #"mpl_hit_body_fatal";
             }
           } else if(weapons::isheadshot(shitloc, mod)) {
-            hitalias = #"hash_29ca1afa9209bfc6";
+            hitalias = #"mpl_hit_head_nf";
           } else if(mod == "MOD_MELEE_WEAPON_BUTT") {} else if(shitloc === "riotshield") {
             hitalias = #"prj_bullet_impact_shield";
           } else {
-            hitalias = #"hash_205c83ac75849f80";
+            hitalias = #"mpl_hit_body_nf";
           }
 
           break;

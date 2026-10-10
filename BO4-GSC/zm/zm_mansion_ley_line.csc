@@ -43,7 +43,7 @@ init_clientfields() {
 
 coil_hit_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    self util::playFXOnTag(localclientnum, #"hash_71f448e1a71c505d", self, "tag_origin");
+    self util::playFXOnTag(localclientnum, #"maps/zm_mansion/fx8_silver_hit_coil", self, "tag_origin");
   }
 }
 

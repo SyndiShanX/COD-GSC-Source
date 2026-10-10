@@ -31,7 +31,7 @@ update_light(localclientnum) {
   self util::waittill_dobj(localclientnum);
 
   while(true) {
-    self.light_fx = util::playFXOnTag(localclientnum, #"hash_69272c24309abc33", self, "tag_fx_front");
+    self.light_fx = util::playFXOnTag(localclientnum, #"weapon/fx8_equip_seeker_light_os", self, "tag_fx_front");
 
     if(isDefined(self.attacking) && self.attacking) {
       wait 0.25;

@@ -36,7 +36,7 @@ on_player_damage(params) {
     str_current_anim = params.einflictor.str_current_anim;
   }
 
-  if(var_e72cb811 === #"crimson_nosferatu" && str_current_anim === #"hash_30a3ae992c453f0c") {
+  if(var_e72cb811 === #"crimson_nosferatu" && str_current_anim === #"ai_t8_zm_mnsn_nfrtu_attack_latch_01_succeed") {
     self notify(#"hash_6938bc311a1a893e");
   }
 }

@@ -37,6 +37,6 @@ function_90b5e96c() {}
 function_4feff2f7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     util::playFXOnTag(localclientnum, level._effect[#"perk_slider_explosion"], self, "j_spine");
-    self playSound(localclientnum, #"hash_25343ce78e1c9c6c");
+    self playSound(localclientnum, #"zmb_vapor_slider_explo");
   }
 }

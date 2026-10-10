@@ -1008,7 +1008,7 @@ function_dcda5d87(mdl_reward, b_rotate = 1, var_b9b24 = 1, n_fx_type = 1) {
     return false;
   }
 
-  self playSound(#"hash_3a681f400deb121b");
+  self playSound(#"zmb_challenges_receive_reward");
   self thread zm_audio::create_and_play_dialog(#"tribute", #"boon");
   return true;
 }

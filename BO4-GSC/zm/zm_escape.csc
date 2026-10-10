@@ -77,7 +77,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
   level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
   level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
-  level._effect[#"hash_4d2e5c87bde94856"] = #"hash_4948d849a833ddd5";
+  level._effect[#"hash_4d2e5c87bde94856"] = #"maps/zm_escape/fx8_shield_residue";
   level._effect[#"hash_6dcb1f6ae15079d5"] = #"hash_52f9d9bb5648c0f3";
   level._effect[#"gondola_light"] = #"hash_45dbe6888cf8a19c";
   zm_escape_catwalk_event::init_fx();
@@ -85,10 +85,10 @@ event_handler[level_init] main(eventstruct) {
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;
   level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_escape_weapons.csv";
-  level._effect[#"hash_2bba72fdcc5508b5"] = #"hash_2ac7ec38d265c496";
+  level._effect[#"hash_2bba72fdcc5508b5"] = #"maps/zm_escape/fx8_magicbox_opened";
   level._effect[#"chest_light_closed"] = #"hash_5b118cefec864e37";
-  level._effect[#"magic_box_arrive"] = #"hash_5a9159bef624d260";
-  level._effect[#"magic_box_leave"] = #"hash_2b008afec3e70add";
+  level._effect[#"magic_box_arrive"] = #"maps/zm_escape/fx8_magicbox_arrival";
+  level._effect[#"magic_box_leave"] = #"maps/zm_escape/fx8_magicbox_depart";
   level._effect[#"switch_sparks"] = #"hash_26f37488feec03c3";
   level.var_5603a802 = "pstfx_zm_hellhole";
   zm_escape_weap_quest_spoon::init();

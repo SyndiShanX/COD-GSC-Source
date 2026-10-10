@@ -45,17 +45,17 @@ __init__() {
   clientfield::register("scriptmover", "" + #"ghost_spoon_fx", 1, 1, "int", &ghost_spoon_fx, 0, 0);
   clientfield::register("scriptmover", "" + #"hash_7f7790ca43a7fffe", 1, 1, "int", &function_5fbccf1d, 0, 0);
   clientfield::register("world", "" + #"hash_437bd1912fc36607", 9000, 1, "int", &function_6c3e8bde, 0, 0);
-  level._effect[#"portal_loop_blue"] = #"hash_46b64b63ec916fb0";
-  level._effect[#"portal_loop_orange"] = #"hash_2737905e546b7cf6";
-  level._effect[#"portal_loop_red"] = #"hash_3408a29da555383b";
-  level._effect[#"portal_loop_white"] = #"hash_17ae3c34b5b4f5d9";
-  level._effect[#"portal_loop_yellow"] = #"hash_6536e7e0d7d0819c";
-  level._effect[#"portal_loop"] = #"hash_5b008f23ef5f92b5";
+  level._effect[#"portal_loop_blue"] = #"maps/zm_escape/fx8_portal_loop_blue";
+  level._effect[#"portal_loop_orange"] = #"maps/zm_escape/fx8_portal_loop_orange";
+  level._effect[#"portal_loop_red"] = #"maps/zm_escape/fx8_portal_loop_red";
+  level._effect[#"portal_loop_white"] = #"maps/zm_escape/fx8_portal_loop_white";
+  level._effect[#"portal_loop_yellow"] = #"maps/zm_escape/fx8_portal_loop_yellow";
+  level._effect[#"portal_loop"] = #"maps/zm_escape/fx8_energy_portal";
   level._effect[#"portal_trails"] = #"hash_356339c6b1b6cfa7";
-  level._effect[#"portal_activate"] = #"hash_141455232c8efbcf";
+  level._effect[#"portal_activate"] = #"maps/zm_escape/fx8_energy_portal_activate";
   level._effect[#"hash_1e033a5d335f9c80"] = #"hash_23bccae9728cc69";
   level._effect[#"tugboat_surround"] = #"hash_263ef2a7714f7e0";
-  level._effect[#"tugboat_fx"] = #"hash_2ab0dbe0ca737540";
+  level._effect[#"tugboat_fx"] = #"maps/zm_escape/fx8_ghost_boat";
   level._effect[#"tugboat_spawn_fx"] = #"hash_584c98e347b6f907";
   level._effect[#"shower_circle_80"] = #"hash_1a2cfde50dc2ab2f";
   level._effect[#"shower_circle_98"] = #"hash_1a297fe50dbf9f3e";
@@ -66,7 +66,7 @@ __init__() {
   level._effect[#"ghost_death_fx"] = #"hash_680b356c3283464f";
   level._effect[#"ghost_spawn_fx"] = #"hash_7c6c9fc790a994bb";
   level._effect[#"ghost_despawn_fx"] = #"hash_652d04bb8b685664";
-  level._effect[#"ghost_spoon_fx"] = #"hash_4f551af60c2eb5d";
+  level._effect[#"ghost_spoon_fx"] = #"maps/zm_escape/fx8_ghoul_spoon";
 }
 
 portal_loop_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -485,12 +485,12 @@ function_126253d1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval > 0) {
     if(!isDefined(self.var_8d1080dd)) {
-      self playSound(localclientnum, #"hash_38ffe6d2575fa1ba");
-      self.var_8d1080dd = self playLoopSound(#"hash_7fdfd0403ec4dcce");
+      self playSound(localclientnum, #"zmb_giggles_3_shower_circle_start");
+      self.var_8d1080dd = self playLoopSound(#"zmb_giggles_3_shower_circle_lp");
     } else if(oldval > newval) {
-      self playSound(localclientnum, #"hash_33facc55fbfba52");
+      self playSound(localclientnum, #"zmb_giggles_3_shower_circle_increase");
     } else if(oldval < newval) {
-      self playSound(localclientnum, #"hash_1a2a408c5055eb7a");
+      self playSound(localclientnum, #"zmb_giggles_3_shower_circle_decrease");
     }
 
     switch (newval) {

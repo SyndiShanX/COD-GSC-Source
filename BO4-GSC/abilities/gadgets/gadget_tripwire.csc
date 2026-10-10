@@ -178,7 +178,7 @@ function_9233eb94(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     self endon(#"death");
     self util::waittill_dobj(localclientnum);
-    self.beam_fx = util::playFXOnTag(localclientnum, #"hash_253c31a9114d6029", self, "tag_origin");
+    self.beam_fx = util::playFXOnTag(localclientnum, #"weapon/fx8_equip_ied_active", self, "tag_origin");
     return;
   }
 
@@ -263,9 +263,9 @@ spawn_previs(localclientnum) {
 
 function_3e8d9b27(local_client_num, previs_weapon, validlocation) {
   if(validlocation) {
-    level.tripwire.localclients[local_client_num].model setModel(#"hash_2edbbbe63af8213d");
+    level.tripwire.localclients[local_client_num].model setModel(#"wpn_t8_eqp_tripwire_ied_projectile_yellow");
   } else {
-    level.tripwire.localclients[local_client_num].model setModel(#"hash_6c54a3e97ce636f0");
+    level.tripwire.localclients[local_client_num].model setModel(#"wpn_t8_eqp_tripwire_ied_projectile_red");
   }
 
   level.tripwire.localclients[local_client_num].model notsolid();

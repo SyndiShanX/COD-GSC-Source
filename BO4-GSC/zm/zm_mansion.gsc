@@ -232,7 +232,7 @@ event_handler[level_init] main(eventstruct) {
   getweapon(#"zitem_silver_molten_part_2").var_25bb96cc = #"zmb_silver_pu";
   getweapon(#"zitem_silver_molten_part_3").var_25bb96cc = #"zmb_silver_pu";
   getweapon(#"zitem_silver_bullet_part_1").var_25bb96cc = #"zmb_charcoal_pu";
-  getweapon(#"zitem_silver_bullet_part_2").var_25bb96cc = #"hash_b94435b24bcdaf7";
+  getweapon(#"zitem_silver_bullet_part_2").var_25bb96cc = #"zmb_saltpeter_pu";
   getweapon(#"zitem_silver_bullet_part_3").var_25bb96cc = #"zmb_sulfur_pu";
   zm_sq::start(#"zm_mansion_pap_quest", 1);
   zm_sq::start(#"zm_mansion_silver_bullet", 1);
@@ -750,9 +750,9 @@ sndfunctions() {
 }
 
 custom_add_vox() {
-  zm_audio::loadplayervoicecategories(#"hash_41c3d60c9fdc1c1a");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_common_vox.csv");
   zm_audio::loadplayervoicecategories(#"hash_c79aaf74e007b22");
-  zm_audio::loadplayervoicecategories(#"hash_74c49b8d4f407798");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_mansion_vox.csv");
 }
 
 setupmusic() {
@@ -975,7 +975,7 @@ function_2d164b86() {
 
   fx_holder notify(#"stop_glow");
   fx_holder delete();
-  playSoundAtPosition(#"hash_3d8fef5997663b17", (0, 0, 0));
+  playSoundAtPosition(#"zmb_sentinel_trial_activate_2d", (0, 0, 0));
   var_5314bd63 = getEnt("veh_power_on_projectile", "targetname");
 
   for(i = 0; i < 4; i++) {

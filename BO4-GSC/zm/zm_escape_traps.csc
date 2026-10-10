@@ -31,10 +31,10 @@ __init__() {
   level._effect[#"acid_spray"] = #"hash_3a65c86ea64668f5";
   level._effect[#"acid_spray_death"] = #"hash_78c487ac760f594c";
   level._effect[#"hash_294b19c300d1b482"] = #"hash_45008cc138e3bba3";
-  level._effect[#"hash_4391e5c4b43c63c9"] = #"hash_215c779c48fd6856";
-  level._effect[#"hash_5647f8e593893bce"] = #"hash_4d61168f93739083";
+  level._effect[#"hash_4391e5c4b43c63c9"] = #"player/fx8_plyr_pstfx_acid_screen";
+  level._effect[#"hash_5647f8e593893bce"] = #"player/fx8_plyr_pstfx_acid_smoke";
   level._effect[#"zombie_eye_trail"] = #"zm_ai/fx8_zombie_eye_glow_red_trail";
-  level._effect[#"spinning_blood"] = #"hash_358533e8293f131d";
+  level._effect[#"spinning_blood"] = #"maps/zm_escape/fx8_spinning_trap_blood";
 }
 
 fan_trap_blood_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -126,7 +126,7 @@ player_acid_trap_post_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
     self thread function_17956e93(localclientnum);
     self thread postfx::playpostfxbundle(#"pstfx_zm_acid_dmg");
     self.var_b1409d8f = playfxoncamera(localclientnum, level._effect[#"hash_4391e5c4b43c63c9"]);
-    self playrenderoverridebundle(#"hash_6efc465a2da0373a");
+    self playrenderoverridebundle(#"rob_zm_viewarm_acid");
 
     if(self zm_utility::function_f8796df3(localclientnum)) {
       self.var_7a7fac87 = playviewmodelfx(localclientnum, level._effect[#"hash_5647f8e593893bce"], "j_wrist_ri");
@@ -165,7 +165,7 @@ function_17956e93(localclientnum) {
       self.var_431ddde9 = undefined;
     }
 
-    self stoprenderoverridebundle(#"hash_6efc465a2da0373a");
+    self stoprenderoverridebundle(#"rob_zm_viewarm_acid");
   }
 }
 
@@ -192,7 +192,7 @@ function_502136a5(str_notify) {
       self.var_7a7fac87 = undefined;
     }
 
-    self stoprenderoverridebundle(#"hash_6efc465a2da0373a");
+    self stoprenderoverridebundle(#"rob_zm_viewarm_acid");
   }
 }
 

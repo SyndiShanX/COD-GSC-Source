@@ -436,7 +436,7 @@ function_7ce0a335(attacker, weapon, target) {
   }
 
   self.detonating = 1;
-  playFX(#"hash_788f36f3ae067065", self.origin);
+  playFX(#"weapon/fx8_hero_sig_shockrifle_spike_exp", self.origin);
   self ghost();
   self notsolid();
   self stoploopsound(0.5);

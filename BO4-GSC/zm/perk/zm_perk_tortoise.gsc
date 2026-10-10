@@ -86,7 +86,7 @@ function_81058b09(w_riotshield) {
     }
   }
 
-  self playSound(#"hash_14f5104610856f3e");
+  self playSound(#"zmb_vapor_tortoise_explo");
   self thread explosion_fx();
   v_explosion_origin = self.origin;
 

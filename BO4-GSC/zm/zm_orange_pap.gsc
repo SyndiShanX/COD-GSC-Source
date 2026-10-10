@@ -233,8 +233,8 @@ function_56db9cdc() {
     } else if(level.var_7d8bf93f == level.var_9d121dce) {
       level flag::set(#"golden_pap_active");
       level thread function_50779c1f();
-      level.var_ab11c23d playSound(#"hash_6a8b750c09391a81");
-      playSoundAtPosition(#"hash_1172b7ba38df5cd4", (-105, -3451, 607));
+      level.var_ab11c23d playSound(#"evt_pap_golden_lighthouse");
+      playSoundAtPosition(#"evt_pap_golden_island", (-105, -3451, 607));
       s_notify = level waittilltimeout(120, #"hash_39b6629ce957cce9");
 
       if(level flag::get(#"island_event_active")) {
@@ -330,12 +330,12 @@ function_e3921120(b_show, var_35c3faab = 0) {
 
 function_69a4b74b(var_16c2b0ed) {
   if(var_16c2b0ed) {
-    self.entity playSound(#"hash_6905307107bb03e");
+    self.entity playSound(#"evt_pap_freeze");
     self scene::play("freeze");
     return;
   }
 
-  self.entity playSound(#"hash_4a246aa22a63bedb");
+  self.entity playSound(#"evt_pap_melt");
   self scene::play("melt");
 }
 

@@ -216,7 +216,7 @@ function_665b4fa6() {
       if(b_using) {
         self.e_crank rotateroll(-36, 0.1);
         wait 0.1;
-        playSoundAtPosition(#"hash_12cbe85436ddc720", self.origin);
+        playSoundAtPosition(#"evt_rotate_crank", self.origin);
         self.var_191e6b71 -= 0.1;
         var_ba7236d5++;
 

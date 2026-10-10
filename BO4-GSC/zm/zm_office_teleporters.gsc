@@ -931,7 +931,7 @@ enable_cage_portal(b_enable = 1) {
   if(self.b_active) {
     level.s_cage_portal zm_unitrigger::create("", 32, &portal_think, 0, 0);
     function_60abbae4(1);
-    level.var_a23b5c5 playSound(#"hash_123af2d6dc30025a");
+    level.var_a23b5c5 playSound(#"evt_ee_cage_lift");
     level.var_a23b5c5 movez(150, 1);
     return;
   }

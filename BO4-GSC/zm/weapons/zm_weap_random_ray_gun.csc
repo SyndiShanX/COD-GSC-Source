@@ -288,7 +288,7 @@ function_84884488(localclientnum) {
   self endon(#"death");
   self zm_utility::good_barricade_damaged(localclientnum);
   wait 0.7;
-  self playrenderoverridebundle(#"hash_429426f01ad84c8b");
+  self playrenderoverridebundle(#"rob_zm_hell_dust");
   wait 0.7;
 
   if(self.archetype === #"zombie" || self.archetype === #"catalyst" || self.archetype === #"nosferatu") {

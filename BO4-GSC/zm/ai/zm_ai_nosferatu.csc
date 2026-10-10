@@ -122,7 +122,7 @@ function_84346679(var_c34665fc) {
 }
 
 nosferatu_spawn_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, #"hash_611d887cc85e2cb8", self, "j_spine2");
+  util::playFXOnTag(localclientnum, #"zm_ai/fx8_bat_transform_impact", self, "j_spine2");
   playSound(localclientnum, #"zmb_bat_transform", self.origin);
 }
 

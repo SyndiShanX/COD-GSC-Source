@@ -633,7 +633,7 @@ function_704f6133() {
   var_7b8000e5 = (0, 18, -32);
   mdl_artifact moveTo(mdl_artifact.origin + var_7b8000e5, 5, 1, 3);
   mdl_artifact waittill(#"movedone");
-  mdl_artifact setModel(#"hash_2c0078538e398b4f");
+  mdl_artifact setModel(#"p8_zm_zod_artifact_combined_fire_all");
   wait 2.5;
   mdl_artifact clientfield::set("activate_sentinel_artifact", 0);
 
@@ -815,13 +815,13 @@ function_b0a7ca7(var_32be30af, var_4c2f2156, var_eb6a4856, var_bbaf1a87, n_time,
     waitresult.activator notify(#"hash_361427de75870cde");
   }
 
-  var_a33249cf playSound(#"hash_7dbe54dbc8709530");
-  var_a33249cf playLoopSound(#"hash_5f1c2aeb92331d60");
+  var_a33249cf playSound(#"zmb_waterdrain_pump_start");
+  var_a33249cf playLoopSound(#"zmb_waterdrain_pump_lp");
   level clientfield::set(var_4cdff787, 1);
   var_4c2f2156 thread function_1d8df872(1);
   function_b40f577b(var_eb6a4856, var_bbaf1a87, n_time, var_65feb6ff, var_c6653d4, var_ff884319, var_90c00a3d, 1);
   var_4c2f2156 thread function_1d8df872(0);
-  var_a33249cf playSound(#"hash_1fc479499a911511");
+  var_a33249cf playSound(#"zmb_waterdrain_pump_end");
   var_a33249cf stoploopsound();
   level clientfield::set(var_4cdff787, 0);
 }
@@ -1164,19 +1164,19 @@ function_32d2bdc8() {
   var_a1310885 = array("zone_state_rooms_front", "zone_state_rooms_rear", "millionaire_suite_zone", "zone_grand_stairs_a_deck", "zone_grand_stairs_b_deck", "zone_grand_stairs_c_deck", "zone_grand_stairs_d_deck", "zone_grand_stairs_bottom", "zone_lounge", "zone_lounge_aft_deck", "zone_promenade_deck", "zone_dining_hall_fore", "zone_dining_hall_aft");
 
   if(isinarray(var_1c65f0a, self.zone_name)) {
-    a_models = array(#"c_t8_zmb_2ndclass_female1", #"hash_5c0ea5a6a5ed7e85", #"c_t8_zmb_2ndclass_female2_hat2", #"c_t8_zmb_2ndclass_female2_hat3", #"hash_7acfc598beff0154", #"c_t8_zmb_2ndclass_female3_hat2", #"c_t8_zmb_2ndclass_female3_hat3", #"hash_2037bec607c2dd03", #"c_t8_zmb_3rdclass_female1", #"hash_527359033a0fec16", #"c_t8_zmb_3rdclass_female2", #"hash_7887f7fa61198709", #"c_t8_zmb_3rdclass_female3", #"hash_7befa3e8cd85887a", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_3rdclass_male3", #"c_t8_zmb_3rdclass_male3_skin2", #"c_t8_zmb_3rdclass_male3_skin3", #"c_t8_zmb_3rdclass_male4", #"c_t8_zmb_3rdclass_male4_skin2", #"c_t8_zmb_3rdclass_male4_skin3", #"hash_2400eb2938a774e4", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4");
+    a_models = array(#"c_t8_zmb_2ndclass_female1", #"c_t8_zmb_2ndclass_female1_nohat", #"c_t8_zmb_2ndclass_female2_hat2", #"c_t8_zmb_2ndclass_female2_hat3", #"c_t8_zmb_2ndclass_female2_nohat", #"c_t8_zmb_2ndclass_female3_hat2", #"c_t8_zmb_2ndclass_female3_hat3", #"c_t8_zmb_2ndclass_female3_nohat", #"c_t8_zmb_3rdclass_female1", #"hash_527359033a0fec16", #"c_t8_zmb_3rdclass_female2", #"c_t8_zmb_3rdclass_female2_nohat", #"c_t8_zmb_3rdclass_female3", #"c_t8_zmb_3rdclass_female3_nohat", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_3rdclass_male3", #"c_t8_zmb_3rdclass_male3_skin2", #"c_t8_zmb_3rdclass_male3_skin3", #"c_t8_zmb_3rdclass_male4", #"c_t8_zmb_3rdclass_male4_skin2", #"c_t8_zmb_3rdclass_male4_skin3", #"c_t8_zmb_crew_sailor1_nohat", #"c_t8_zmb_crew_sailor1", #"c_t8_zmb_crew_sailor1_nohat");
   } else if(isinarray(var_c9c43b66, self.zone_name)) {
-    a_models = array(#"hash_70f7ce06d71221d1", #"hash_490bb2c56163df6", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_3rdclass_male3", #"hash_2400eb2938a774e4", #"c_t8_zmb_3rdclass_male4", #"c_t8_zmb_3rdclass_male4_skin2", #"c_t8_zmb_3rdclass_male4_skin3");
+    a_models = array(#"c_t8_zmb_crew_officer1", #"c_t8_zmb_crew_officer1_nohat", #"c_t8_zmb_crew_sailor1", #"c_t8_zmb_crew_sailor1_nohat", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_3rdclass_male3", #"c_t8_zmb_crew_sailor1_nohat", #"c_t8_zmb_3rdclass_male4", #"c_t8_zmb_3rdclass_male4_skin2", #"c_t8_zmb_3rdclass_male4_skin3");
   } else if(isinarray(var_dd90adf6, self.zone_name)) {
     if(randomint(100) < 33) {
-      a_models = array(#"hash_70f7ce06d71221d1", #"hash_490bb2c56163df6", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4", #"hash_57e580a51c30799e", #"hash_57e580a51c30799e", #"hash_7ba2b528997fa55", #"hash_7ba2b528997fa55");
+      a_models = array(#"c_t8_zmb_crew_officer1", #"c_t8_zmb_crew_officer1_nohat", #"c_t8_zmb_crew_sailor1", #"c_t8_zmb_crew_sailor1_nohat", #"c_t8_zmb_crew_sailor2", #"c_t8_zmb_crew_sailor2", #"c_t8_zmb_crew_sailor2_nohat", #"c_t8_zmb_crew_sailor2_nohat");
     }
   } else if(isinarray(var_a1310885, self.zone_name)) {
-    a_models = array(#"hash_490bb2c56163df6", #"c_t8_zmb_1stclass_male1", #"c_t8_zmb_1stclass_male2", #"c_t8_zmb_1stclass_male3", #"hash_2f441451d3b56959", #"hash_cecf5a5c3d66868", #"hash_70f7ce06d71221d1", #"c_t8_zmb_1stclass_male1_skin2", #"c_t8_zmb_1stclass_male2", #"c_t8_zmb_1stclass_male3", #"c_t8_zmb_1stclass_male1_skin3", #"hash_cecf5a5c3d66868", #"c_t8_zmb_1stclass_female1", #"c_t8_zmb_1stclass_female1_skin2", #"c_t8_zmb_1stclass_female1_skin3", #"c_t8_zmb_1stclass_female1_skin4", #"c_t8_zmb_1stclass_female1_skin5", #"c_t8_zmb_1stclass_female1_skin6", #"hash_5e43ac8e88cc1d41", #"hash_1bc5c2590cdbe137", #"hash_1bc5c1590cdbdf84", #"hash_1bc5c0590cdbddd1", #"hash_1bc5bf590cdbdc1e", #"hash_1bc5be590cdbda6b", #"c_t8_zmb_2ndclass_female1", #"hash_5c0ea5a6a5ed7e85");
+    a_models = array(#"c_t8_zmb_crew_officer1_nohat", #"c_t8_zmb_1stclass_male1", #"c_t8_zmb_1stclass_male2", #"c_t8_zmb_1stclass_male3", #"hash_2f441451d3b56959", #"hash_cecf5a5c3d66868", #"c_t8_zmb_crew_officer1", #"c_t8_zmb_1stclass_male1_skin2", #"c_t8_zmb_1stclass_male2", #"c_t8_zmb_1stclass_male3", #"c_t8_zmb_1stclass_male1_skin3", #"hash_cecf5a5c3d66868", #"c_t8_zmb_1stclass_female1", #"c_t8_zmb_1stclass_female1_skin2", #"c_t8_zmb_1stclass_female1_skin3", #"c_t8_zmb_1stclass_female1_skin4", #"c_t8_zmb_1stclass_female1_skin5", #"c_t8_zmb_1stclass_female1_skin6", #"c_t8_zmb_1stclass_female1_nohat", #"c_t8_zmb_1stclass_female1_nohat_skin2", #"c_t8_zmb_1stclass_female1_nohat_skin3", #"c_t8_zmb_1stclass_female1_nohat_skin4", #"c_t8_zmb_1stclass_female1_nohat_skin5", #"c_t8_zmb_1stclass_female1_nohat_skin6", #"c_t8_zmb_2ndclass_female1", #"c_t8_zmb_2ndclass_female1_nohat");
   } else if(self.zone_name == "zone_bridge") {
-    a_models = array(#"hash_70f7ce06d71221d1", #"hash_490bb2c56163df6", #"hash_57e57fa51c3077eb", #"hash_2400eb2938a774e4", #"hash_2400eb2938a774e4", #"hash_57e580a51c30799e", #"hash_7ba2b528997fa55", #"hash_7ba2b528997fa55");
+    a_models = array(#"c_t8_zmb_crew_officer1", #"c_t8_zmb_crew_officer1_nohat", #"c_t8_zmb_crew_sailor1", #"c_t8_zmb_crew_sailor1_nohat", #"c_t8_zmb_crew_sailor1_nohat", #"c_t8_zmb_crew_sailor2", #"c_t8_zmb_crew_sailor2_nohat", #"c_t8_zmb_crew_sailor2_nohat");
   } else if(self.zone_name == "zone_galley") {
-    a_models = array(#"hash_490bb2c56163df6", #"c_t8_zmb_2ndclass_female1", #"hash_5c0ea5a6a5ed7e85", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_1stclass_male2");
+    a_models = array(#"c_t8_zmb_crew_officer1_nohat", #"c_t8_zmb_2ndclass_female1", #"c_t8_zmb_2ndclass_female1_nohat", #"c_t8_zmb_3rdclass_male1", #"c_t8_zmb_3rdclass_male2", #"c_t8_zmb_1stclass_male2");
   }
 
   if(isDefined(a_models)) {
@@ -1185,9 +1185,9 @@ function_32d2bdc8() {
 }
 
 custom_add_vox() {
-  zm_audio::loadplayervoicecategories(#"hash_41c3d60c9fdc1c1a");
-  zm_audio::loadplayervoicecategories(#"hash_5963a3db3032ab46");
-  zm_audio::loadplayervoicecategories(#"hash_34c18561cc19c360");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_common_vox.csv");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_story2_vox.csv");
+  zm_audio::loadplayervoicecategories(#"gamedata/audio/zm/zm_zodt8_vox.csv");
 }
 
 function_d2ba8baa() {

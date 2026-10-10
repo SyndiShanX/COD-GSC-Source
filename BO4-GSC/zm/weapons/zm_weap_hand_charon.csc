@@ -76,7 +76,7 @@ function_d64a6790(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     wait 0.75;
 
     if(isDefined(self)) {
-      self playrenderoverridebundle(#"hash_429426f01ad84c8b");
+      self playrenderoverridebundle(#"rob_zm_hell_dust");
 
       if(isDefined(self gettagorigin("j_spine4"))) {
         util::playFXOnTag(localclientnum, level._effect[#"hash_355fbaf759524a7c"], self, "j_spine4");
@@ -141,7 +141,7 @@ function_3762b44b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_120153b7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self endon(#"death");
   self zm_utility::good_barricade_damaged(localclientnum);
-  self playrenderoverridebundle(#"hash_429426f01ad84c8b");
+  self playrenderoverridebundle(#"rob_zm_hell_dust");
 
   if(isDefined(self gettagorigin("j_spine4"))) {
     util::playFXOnTag(localclientnum, level._effect[#"charon_impact_torso"], self, "j_spine4");

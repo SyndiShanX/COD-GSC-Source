@@ -1074,7 +1074,7 @@ matchstarttimer() {
 
         if(shouldplaysound) {
           if(sessionmodeiswarzonegame()) {
-            player playlocalsound(#"hash_6a97a2aee9eb2f4");
+            player playlocalsound(#"uin_warzone_countdown_pen");
           } else {
             player playlocalsound(#"uin_start_count_down");
           }
@@ -1274,7 +1274,7 @@ recordplaystyleinformation() {
   mpplaystyles = {
     #averagekilldistance: avgkilldistance, #percentageoftimemoving: percenttimemoving, #averagespeedduringmatch: avgspeedofplayerwhenmoving
   };
-  function_92d1707f(#"hash_5cee5eb6de3811d0", mpplaystyles);
+  function_92d1707f(#"dlog_event_mpplaystyles", mpplaystyles);
 }
 
 updateandfinalizematchrecord() {
@@ -1448,7 +1448,7 @@ function_9022da4e() {
     mpmatchfacts = {
       #gametime: function_f8d53445(), #winner: match::get_winner(), #killstreakcount: level.globalkillstreakscalled
     };
-    function_92d1707f(#"hash_7784f98b4b9750ec", mpmatchfacts);
+    function_92d1707f(#"dlog_event_mpmatchfacts", mpmatchfacts);
   }
 }
 
@@ -2350,7 +2350,7 @@ bbplayermatchend(gamelength, var_c1e98979, gameover) {
   mpplayermatchfacts = {
     #score: self.pers[#"score"], #momentum: self.pers[#"momentum"], #endreason: var_c1e98979, #sessionrank: playerrank, #playtime: int(totaltimeplayed), #xuid: xuid, #gameover: gameover, #team: self.team, #specialist: self getspecialistindex()
   };
-  function_92d1707f(#"hash_7c173cd9201d5271", mpplayermatchfacts);
+  function_92d1707f(#"dlog_event_mpplayermatchfacts", mpplayermatchfacts);
 }
 
 roundenddof() {

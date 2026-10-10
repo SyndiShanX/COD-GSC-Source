@@ -80,7 +80,7 @@ init_clientfields() {
 
 init_fx() {
   level._effect[#"portal_ready"] = #"maps/zm_office/fx8_teleporter_ready";
-  level._effect[#"portal_cooldown"] = #"hash_7793c4c65b08e6ed";
+  level._effect[#"portal_cooldown"] = #"maps/zm_office/fx8_teleporter_cooldown";
   level._effect[#"portal_dest_random"] = #"hash_4860741425dc1daa";
   level._effect[#"portal_dest_panic"] = #"hash_a4954ed961d6327";
   level._effect[#"portal_dest_groom"] = #"hash_28fc28160d26395e";

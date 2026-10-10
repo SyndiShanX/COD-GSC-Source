@@ -252,7 +252,7 @@ function_b5433e55(bookmark) {
   potm_bookmarks.overrideentitycamera = bookmark.overrideentitycamera;
   potm_bookmarks.tableindex = bookmark.eventdata.tableindex;
   potm_bookmarks.event_info = bookmark.eventdata.event_info;
-  function_92d1707f(#"hash_4782850b19da4089", potm_bookmarks);
+  function_92d1707f(#"dlog_event_potm_bookmarks", potm_bookmarks);
 }
 
 function_b5633c73(preparinginformation) {

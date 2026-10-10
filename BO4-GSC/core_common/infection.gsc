@@ -151,7 +151,7 @@ ambient_sound() {
   wait randomintrange(2, 4);
 
   while(true) {
-    str_alias = #"hash_61fc4fa3eeafcf07";
+    str_alias = #"mpl_infection_amb_vox";
     n_wait_min = 2;
     n_wait_max = 5;
 

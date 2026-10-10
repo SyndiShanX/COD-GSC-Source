@@ -1476,7 +1476,7 @@ function_13880aa5(var_481d50cb, var_87eb3522 = 0, var_b0ab4cec) {
 
   if(var_87eb3522 == 1 && isDefined(var_b0ab4cec) && self.var_f18b8e91[var_b0ab4cec] !== 1) {
     self.var_f18b8e91[var_b0ab4cec] = 1;
-    self playsoundtoplayer(#"hash_7e01de7cf0aa4995", self);
+    self playsoundtoplayer(#"zmb_vapor_common_cooldown_end", self);
   } else if(var_87eb3522 != 1) {
     self.var_f18b8e91[var_b0ab4cec] = var_87eb3522;
   }

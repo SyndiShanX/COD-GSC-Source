@@ -179,7 +179,7 @@ function_ca409b53() {
   level.var_86d6efbf rotate((0, 360, 0));
   wait 15;
   level.var_86d6efbf zm_powerups::hide_and_show(&ghost, &show);
-  level.var_86d6efbf playSound(#"hash_5a2daa895f64b2e2");
+  level.var_86d6efbf playSound(#"zmb_triquest_key_timeout");
   level.var_85a8dbba delete();
   level.var_86d6efbf delete();
   level notify(#"stoker_key_timed_out");
@@ -393,8 +393,8 @@ spawn_tricannon(a_ents) {
     mdl_tricannon = a_ents[#"kraken_weapon_drop"];
     mdl_tricannon clientfield::set("" + #"despawn_fx", 1);
     mdl_tricannon waittill(#"kraken_dropped");
-    mdl_tricannon playSound(#"hash_70efc268d0becb47");
-    mdl_tricannon playLoopSound(#"hash_61486fb02b77eed8", 2);
+    mdl_tricannon playSound(#"zmb_triquest_tricannon_appear");
+    mdl_tricannon playLoopSound(#"zmb_triquest_tricannon_loop", 2);
     s_unitrigger = level.var_f3abf34a zm_unitrigger::create(&function_10d4ff8d, (64, 64, 72), &function_e0fe80db);
     level waittill(#"hash_2889330d50a4cc38");
     exploder::stop_exploder(level.var_f3abf34a.str_exploder);

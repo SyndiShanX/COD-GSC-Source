@@ -34,7 +34,7 @@ __init__() {
   level._effect[#"hash_720f204e4406ddbf"] = #"hash_59cdb0226e644934";
   level._effect[#"hash_15593b3f860346f5"] = #"hash_1e957556dba822e6";
   level._effect[#"chakram_head_pop"] = #"hash_68100f653a5baf2f";
-  level._effect[#"chakram_throw_trail"] = #"hash_1ff88e4b147015b2";
+  level._effect[#"chakram_throw_trail"] = #"zm_weapons/fx8_chakram_trail";
   level._effect[#"chakram_throw_impact"] = #"hash_656272f0184ae1fc";
   level._effect[#"hash_5c2ba805602ea484"] = #"hash_3904517ed3636935";
   level._effect[#"hash_455a47023bc1da46"] = #"hash_2109d3278a7b54fa";
@@ -152,7 +152,7 @@ chakram_whirlwind_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 
   if(newval == 1) {
-    self.var_1c7e53dd[localclientnum] = self playLoopSound(#"hash_75e91bf08cd631e8");
+    self.var_1c7e53dd[localclientnum] = self playLoopSound(#"wpn_chakram_whirlwind_lp");
     var_c2545ba4 = self.var_1c7e53dd[localclientnum];
     self.var_4316c62f[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_c995c57914ab2b4"], self, "j_spine4");
     var_4316c62f = self.var_4316c62f[localclientnum];
@@ -191,7 +191,7 @@ chakram_whirlwind_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     return;
   }
 
-  self playSound(localclientnum, #"hash_4f78bd85d9a43e3c");
+  self playSound(localclientnum, #"wpn_chakram_whirlwind_stop");
 
   if(self postfx::function_556665f2(#"pstfx_zm_chakram_whirlwind")) {
     self postfx::stoppostfxbundle(#"pstfx_zm_chakram_whirlwind");

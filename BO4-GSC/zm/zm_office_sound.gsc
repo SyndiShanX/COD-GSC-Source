@@ -52,7 +52,7 @@ function_e856acd2() {
 
   while(true) {
     wait randomintrange(20, 60);
-    playSoundAtPosition(#"hash_2c5321deab41da10", self.origin);
+    playSoundAtPosition(#"zmb_ee_morse_code_hint", self.origin);
   }
 }
 

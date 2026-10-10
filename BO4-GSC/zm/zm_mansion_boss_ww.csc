@@ -42,7 +42,7 @@ init_clientfields() {
 
 init_fx() {
   level._effect[#"hash_1e4fa83f4db14c46"] = #"hash_40a93ef9da58e006";
-  level._effect[#"fx8_boss_eye_glow"] = #"hash_1cd0bfd0a3ff1817";
+  level._effect[#"fx8_boss_eye_glow"] = #"maps/zm_mansion/fx8_boss_eye_glow";
   level._effect[#"hash_420110993bafb86b"] = #"hash_4edfb7b10f36a12b";
   level._effect[#"hash_3665813f5609df50"] = #"hash_105035871586710";
   level._effect[#"hash_2699e8762805fbdc"] = #"hash_f378b1b7c38569c";

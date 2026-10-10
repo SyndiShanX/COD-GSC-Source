@@ -188,7 +188,7 @@ function_46006d68() {
     case 1:
       self.e_tv function_8ebc8dcf(100);
       self thread function_41464ab6();
-      self.e_tv playLoopSound(#"hash_66d823f29bf8f0ce");
+      self.e_tv playLoopSound(#"amb_ww_tv_waiting_charge");
       self.var_53d39cb3 = 2;
       zm_sq_modules::function_3f808d3d(self.var_b9989e12);
       break;

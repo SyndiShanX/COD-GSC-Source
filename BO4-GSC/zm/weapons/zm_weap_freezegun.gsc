@@ -454,23 +454,23 @@ freezegun_debug_print(msg, color) {
 function_1cdfba74(is_upgraded) {
   if(is_upgraded) {
     self clientfield::set("" + #"freezegun_shatter_upgraded_fx", 1);
-    self playSound(#"hash_3bed1320e59a493c");
+    self playSound(#"evt_winters_howl_shatter");
     return;
   }
 
   self clientfield::set("" + #"freezegun_shatter_fx", 1);
-  self playSound(#"hash_3bed1320e59a493c");
+  self playSound(#"evt_winters_howl_shatter");
 }
 
 function_c61abffb(is_upgraded) {
   if(is_upgraded) {
     self clientfield::set("" + #"freezegun_crumple_upgraded_fx", 1);
-    self playSound(#"hash_55070bed4172e08c");
+    self playSound(#"evt_winters_howl_collapse");
     return;
   }
 
   self clientfield::set("" + #"freezegun_crumple_fx", 1);
-  self playSound(#"hash_55070bed4172e08c");
+  self playSound(#"evt_winters_howl_collapse");
 }
 
 function_cdcf36d9() {

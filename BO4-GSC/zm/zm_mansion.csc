@@ -70,7 +70,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
   level._effect[#"power_on_projectile"] = #"hash_6009053e911b946a";
   level._effect[#"power_on_projectile_end"] = #"hash_6c0eb029adb5f6c6";
-  level._effect[#"clock_zombie"] = #"hash_52239162cbb1d01f";
+  level._effect[#"clock_zombie"] = #"zombie/fx_ritual_gateworm_glow_red_zod_zmb";
   level._effect[#"clock_zombie_le"] = #"hash_5a3bedd0f4e1fb20";
   level._effect[#"clock_zombie_ri"] = #"hash_5a7915d0f515ed36";
   level._effect[#"clock_zombie_eye"] = #"hash_482a9c9681f3db75";
@@ -206,7 +206,7 @@ power_on_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     }
 
     if(!isDefined(self.var_353ff2a)) {
-      self.var_353ff2a = self playLoopSound(#"hash_2ac2bbbfef2face4");
+      self.var_353ff2a = self playLoopSound(#"zmb_sentinel_trial_pap_projectile");
     }
 
     return;
@@ -226,7 +226,7 @@ power_on_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 power_on_projectile_end_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     util::playFXOnTag(localclientnum, level._effect[#"power_on_projectile_end"], self, "tag_origin");
-    playSound(localclientnum, #"hash_6da145d367ec64b2", self.origin);
+    playSound(localclientnum, #"zmb_sentinel_trial_pap_projectile_explode", self.origin);
   }
 }
 
@@ -376,8 +376,8 @@ function_328d64bd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_3fc27ef3 = playFX(localclientnum, level._effect[#"hash_1a46c58a5032bb15"], a_trace[#"position"], v_forward);
 
     if(!isDefined(self.var_99a9007b)) {
-      self playSound(localclientnum, #"hash_2c71df73b17cd28a");
-      self.var_99a9007b = self playLoopSound(#"hash_7e4a7312ab58161e");
+      self playSound(localclientnum, #"zmb_sentinel_trial_blocker_start");
+      self.var_99a9007b = self playLoopSound(#"zmb_sentinel_trial_blocker_lp");
     }
 
     return;
@@ -392,7 +392,7 @@ function_328d64bd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_99a9007b)) {
-    self playSound(localclientnum, #"hash_3366b1b903dc96bf");
+    self playSound(localclientnum, #"zmb_sentinel_trial_blocker_end");
     self stoploopsound(self.var_99a9007b);
     self.var_99a9007b = undefined;
   }
@@ -456,7 +456,7 @@ function_be42dd6a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     self.var_2ea06178 = util::playFXOnTag(localclientnum, level._effect[#"artifact_aura"], self, "tag_fx_x_pos");
     self playrenderoverridebundle(#"hash_8cb3b94ffea62fe");
-    self.var_b3673abf = self playLoopSound(#"hash_66df9cab2c64f968");
+    self.var_b3673abf = self playLoopSound(#"zmb_sentinel_artifact_ghosted_lp");
     return;
   }
 

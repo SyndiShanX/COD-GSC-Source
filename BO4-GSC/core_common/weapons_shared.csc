@@ -78,10 +78,10 @@ function_903d2d4c(local_client_num) {
     var_8cf0e703 = function_4878c786(local_client_num, level.weapon_sig_minigun);
 
     if(!var_8cf0e703 && level.var_644fb9ec) {
-      stopforcestreamingxmodel(#"hash_253fe56e77e698b3");
+      stopforcestreamingxmodel(#"wpn_t8_sig_minigun_turret_44");
       level.var_644fb9ec = 0;
     } else if(var_8cf0e703 && !level.var_644fb9ec) {
-      forcestreamxmodel(#"hash_253fe56e77e698b3");
+      forcestreamxmodel(#"wpn_t8_sig_minigun_turret_44");
       level.var_644fb9ec = 1;
     }
 

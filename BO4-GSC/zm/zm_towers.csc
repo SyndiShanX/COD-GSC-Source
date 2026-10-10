@@ -129,7 +129,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
   level._effect[#"hash_73172b799c18404e"] = #"zombie/fx_teleport_flashback_zmb";
   level._effect[#"entry_gate_dust"] = #"hash_43b2eaf6037de947";
-  level._effect[#"special_round_smoke"] = #"hash_7f90f442be248933";
+  level._effect[#"special_round_smoke"] = #"maps/zm_towers/fx8_special_round_green_gas_lg";
   level._effect[#"special_round_fire"] = #"hash_573f4333a69a2e97";
   level._effect[#"special_round_camera_start"] = #"hash_5e456969dcb6d449";
   level._effect[#"special_round_camera_persist"] = #"hash_30a51086d1de2e56";
@@ -145,8 +145,8 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"hash_48ad84f9cf6a33f0"] = #"hash_232d6ea0cf34968b";
   level._effect[#"hash_3974bea828fbf7f7"] = #"hash_6fd3d30a984a4585";
   level._effect[#"hash_3a51c9895d4afcf7"] = #"hash_393af938c98cf4d0";
-  level._effect[#"hash_1add6939914df65a"] = #"hash_24d0d45080034da";
-  level._effect[#"hash_5dc6f97e5850e1d1"] = #"hash_14d7c3ad478543a";
+  level._effect[#"hash_1add6939914df65a"] = #"zombie/fx8_magicbox_lid_poison";
+  level._effect[#"hash_5dc6f97e5850e1d1"] = #"zombie/fx8_magicbox_opened_poison";
   level._effect[#"bull_shield_hit"] = #"hash_266633b36a852fd5";
   level._effect[#"brazier_fire_blue"] = #"hash_6d3f50f00db41676";
   level._effect[#"brazier_fire_green"] = #"hash_1839d27856f4aed9";
@@ -170,20 +170,20 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"hash_3f79f6da0222ebc2"] = #"hash_2f1958cd9b473bec";
   level._effect[#"fertilizer_smell"] = #"hash_48344f893bb65bf2";
   level._effect[#"fertilizer_smell_bowl"] = #"hash_62ef4090559ca8c8";
-  level._effect[#"hash_1f7bfd354d2472e3"] = #"hash_153286962fe0c0c5";
-  level._effect[#"hash_1f7511354d1e7631"] = #"hash_153992962fe6f3d7";
+  level._effect[#"hash_1f7bfd354d2472e3"] = #"player/fx8_plyr_breath_steam_1p";
+  level._effect[#"hash_1f7511354d1e7631"] = #"player/fx8_plyr_breath_steam_3p";
   level._effect[#"maelstrom_initiate"] = #"hash_223c6a623adb13fb";
-  level._effect[#"maelstrom_conduct_elbow"] = #"hash_26b672f2c1c8a570";
-  level._effect[#"maelstrom_conduct_elbow_l"] = #"hash_50ce930e4dd4bc12";
-  level._effect[#"maelstrom_conduct_elbow_r"] = #"hash_50c7bb0e4dcee15c";
-  level._effect[#"hash_4a9ad8ec06102c34"] = #"hash_4d91ce766ebeda81";
-  level._effect[#"hash_4a9abeec06100006"] = #"hash_4db3c6766edbb34f";
+  level._effect[#"maelstrom_conduct_elbow"] = #"zm_ai/fx8_cata_elec_elbow";
+  level._effect[#"maelstrom_conduct_elbow_l"] = #"zm_ai/fx8_cata_elec_elbow_le";
+  level._effect[#"maelstrom_conduct_elbow_r"] = #"zm_ai/fx8_cata_elec_elbow_ri";
+  level._effect[#"hash_4a9ad8ec06102c34"] = #"zm_ai/fx8_cata_elec_shoulder_le";
+  level._effect[#"hash_4a9abeec06100006"] = #"zm_ai/fx8_cata_elec_shoulder_ri";
   level._effect[#"hash_59efd6cf7ca11195"] = #"hash_35d31a887a79e68e";
   level._effect[#"hash_59efc8cf7ca0f9cb"] = #"hash_361dea887ab98078";
-  level._effect[#"hash_416145285a01faa3"] = #"hash_28ad85abec3ad058";
-  level._effect[#"hash_416143285a01f73d"] = #"hash_28479dabebe445ee";
-  level._effect[#"maelstrom_conduct_knee_l"] = #"hash_2543453edaf343d4";
-  level._effect[#"maelstrom_conduct_knee_r"] = #"hash_259b253edb3d834a";
+  level._effect[#"hash_416145285a01faa3"] = #"zm_ai/fx8_cata_elec_hip_le";
+  level._effect[#"hash_416143285a01f73d"] = #"zm_ai/fx8_cata_elec_hip_ri";
+  level._effect[#"maelstrom_conduct_knee_l"] = #"zm_ai/fx8_cata_elec_knee_le";
+  level._effect[#"maelstrom_conduct_knee_r"] = #"zm_ai/fx8_cata_elec_knee_ri";
   level._effect[#"maelstrom_conduct"] = #"zm_ai/fx8_elec_bolt";
   level._effect[#"hash_1814d4cc1867739c"] = #"hash_13f09e4051884309";
   level._effect[#"hash_314d3a2e542805c0"] = #"zombie/fx_powerup_on_red_zmb";
@@ -253,20 +253,20 @@ function_8565be53(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_35bf68a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    forcestreamxmodel(#"hash_77659f61538a4beb");
+    forcestreamxmodel(#"p8_zm_gla_wood_coal_log_tip");
     return;
   }
 
-  stopforcestreamingxmodel(#"hash_77659f61538a4beb");
+  stopforcestreamingxmodel(#"p8_zm_gla_wood_coal_log_tip");
 }
 
 function_605da720(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    forcestreamxmodel(#"hash_4286272708c5e5c0");
+    forcestreamxmodel(#"p8_zm_gla_wood_coal_log_tip_burned");
     return;
   }
 
-  stopforcestreamingxmodel(#"hash_4286272708c5e5c0");
+  stopforcestreamingxmodel(#"p8_zm_gla_wood_coal_log_tip_burned");
 }
 
 function_2312778c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -403,7 +403,7 @@ ra_eyes_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     level beam::launch(self, "tag_origin", self.var_96ce3194, "tag_origin", "beam8_zm_scepter_ray_lvl3");
     self playSound(localclientnum, #"hash_473e265e57e397c8");
     soundlineemitter(#"hash_4bc05f42a04dcfd8", self.origin, self.var_96ce3194.origin);
-    self.var_96ce3194.sfx_id = self.var_96ce3194 playLoopSound(#"hash_c0bb4bb6f79f737");
+    self.var_96ce3194.sfx_id = self.var_96ce3194 playLoopSound(#"vox_path_sorrow_kill_mult_plr_6_gravel_pod_zombie_0");
     return;
   }
 
@@ -897,7 +897,7 @@ snd_crowd_react(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
     a_structs = struct::get_array("mus_crowd_bossbattle", "targetname");
 
     foreach(struct in a_structs) {
-      playSound(localclientnum, #"hash_61052d99f398097", struct.origin);
+      playSound(localclientnum, #"amb_crowd_oneshot_hush", struct.origin);
       waitframe(1);
     }
 
@@ -1294,14 +1294,14 @@ function_57f3914e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         s_fx.n_fire = undefined;
       }
 
-      audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
-      audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
       break;
     case 1:
       s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_blue"], s_fx.origin);
-      playSound(localclientnum, #"hash_6e1881a291ad6bda", s_fx.origin);
-      audio::playloopat(#"hash_929cb50cf634fb4", s_fx.origin);
-      audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
+      playSound(localclientnum, #"zmb_challenges_brazier_ignite", s_fx.origin);
+      audio::playloopat(#"zmb_challenges_brazier_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
       break;
     case 2:
       if(isDefined(s_fx.n_fire)) {
@@ -1310,9 +1310,9 @@ function_57f3914e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_yellow"], s_fx.origin);
-      playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
-      audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
-      audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
+      playSound(localclientnum, #"zmb_challenges_brazier_ignite_complete", s_fx.origin);
+      audio::playloopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_lp", s_fx.origin);
       break;
   }
 }
@@ -1327,14 +1327,14 @@ function_6e6d4bfc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         s_fx.n_fire = undefined;
       }
 
-      audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
-      audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
       break;
     case 1:
       s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_green"], s_fx.origin);
-      playSound(localclientnum, #"hash_6e1881a291ad6bda", s_fx.origin);
-      audio::playloopat(#"hash_929cb50cf634fb4", s_fx.origin);
-      audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
+      playSound(localclientnum, #"zmb_challenges_brazier_ignite", s_fx.origin);
+      audio::playloopat(#"zmb_challenges_brazier_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
       break;
     case 2:
       if(isDefined(s_fx.n_fire)) {
@@ -1343,9 +1343,9 @@ function_6e6d4bfc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_yellow"], s_fx.origin);
-      playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
-      audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
-      audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
+      playSound(localclientnum, #"zmb_challenges_brazier_ignite_complete", s_fx.origin);
+      audio::playloopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_lp", s_fx.origin);
       break;
   }
 }
@@ -1360,14 +1360,14 @@ function_66050c9e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         s_fx.n_fire = undefined;
       }
 
-      audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
-      audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
       break;
     case 1:
       s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_purple"], s_fx.origin);
-      playSound(localclientnum, #"hash_6e1881a291ad6bda", s_fx.origin);
-      audio::playloopat(#"hash_929cb50cf634fb4", s_fx.origin);
-      audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
+      playSound(localclientnum, #"zmb_challenges_brazier_ignite", s_fx.origin);
+      audio::playloopat(#"zmb_challenges_brazier_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
       break;
     case 2:
       if(isDefined(s_fx.n_fire)) {
@@ -1376,9 +1376,9 @@ function_66050c9e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_yellow"], s_fx.origin);
-      playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
-      audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
-      audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
+      playSound(localclientnum, #"zmb_challenges_brazier_ignite_complete", s_fx.origin);
+      audio::playloopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_lp", s_fx.origin);
       break;
   }
 }
@@ -1393,14 +1393,14 @@ function_1c231f3f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         s_fx.n_fire = undefined;
       }
 
-      audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
-      audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
       break;
     case 1:
       s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_red"], s_fx.origin);
-      playSound(localclientnum, #"hash_6e1881a291ad6bda", s_fx.origin);
-      audio::playloopat(#"hash_929cb50cf634fb4", s_fx.origin);
-      audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
+      playSound(localclientnum, #"zmb_challenges_brazier_ignite", s_fx.origin);
+      audio::playloopat(#"zmb_challenges_brazier_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
       break;
     case 2:
       if(isDefined(s_fx.n_fire)) {
@@ -1409,9 +1409,9 @@ function_1c231f3f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       s_fx.n_fire = playFX(localclientnum, level._effect[#"brazier_fire_yellow"], s_fx.origin);
-      playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
-      audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
-      audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
+      playSound(localclientnum, #"zmb_challenges_brazier_ignite_complete", s_fx.origin);
+      audio::playloopat(#"zmb_challenges_brazier_complete_lp", s_fx.origin);
+      audio::stoploopat(#"zmb_challenges_brazier_lp", s_fx.origin);
       break;
   }
 }

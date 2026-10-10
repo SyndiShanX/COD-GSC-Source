@@ -214,7 +214,7 @@ function_2ec6a1aa() {
   self.e_key_2 zm_hms_util::function_dc4ab629(-8, 1.5);
   self.e_key_2 waittill(#"movedone");
   self zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
-  playSoundAtPosition(#"hash_105229c7410bf423", self.origin);
+  playSoundAtPosition(#"evt_vault_key_encrypt", self.origin);
   wait 4;
   self.e_key_1 setModel("p8_zm_ora_keycard_1");
   self.e_key_2 setModel("p8_zm_ora_keycard_2");

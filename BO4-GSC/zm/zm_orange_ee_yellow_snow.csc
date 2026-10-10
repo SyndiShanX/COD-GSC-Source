@@ -13,8 +13,8 @@
 preload() {
   level._effect[#"campfire_soul"] = #"hash_59977c4c851916e0";
   level._effect[#"campfire_soul_end"] = #"hash_1a06427eff8dfe13";
-  level._effect[#"campfire_flames"] = #"hash_487863cb3f012833";
-  level._effect[#"snowpile_swap"] = #"hash_6d8c75ffdf65fe0";
+  level._effect[#"campfire_flames"] = #"maps/zm_red/fx8_reward_brazier_fire_blue";
+  level._effect[#"snowpile_swap"] = #"maps/zm_orange/fx8_snowpile_swap";
   init_clientfields();
   forcestreamxmodel("p8_zm_ora_specimen_container_lrg_cracked");
   forcestreamxmodel("p8_zm_ora_specimen_container_lrg_dmg");

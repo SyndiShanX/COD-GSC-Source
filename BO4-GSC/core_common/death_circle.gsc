@@ -527,7 +527,7 @@ countdown(waitsec, circleindex, nextcircle) {
   }
 
   voiceevent("warCircleCollapseOccurring");
-  playSoundAtPosition(#"hash_3fb30e7a85b2bf7e", (0, 0, 0));
+  playSoundAtPosition(#"uin_start_circle_collapse_warning", (0, 0, 0));
 }
 
 function_9229c3b3(scalesec, newradius, neworigin) {

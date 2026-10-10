@@ -628,7 +628,7 @@ function_cfffc455() {
     return;
   }
 
-  mdl_bile = util::spawn_model(#"hash_36f02781e6db9e53", v_loc + (0, 0, 1));
+  mdl_bile = util::spawn_model(#"p8_zm_man_bat_bile_01", v_loc + (0, 0, 1));
   util::wait_network_frame();
 
   if(!isDefined(mdl_bile)) {
@@ -778,7 +778,7 @@ function_d8648a1e(e_player) {
   level zm_ui_inventory::function_7df6bb60(#"ww_p2_3", 0);
   s_loc = struct::get("nosferatu_pos");
   s_bile = struct::get("s_bile");
-  self.var_76a23f3 = util::spawn_model(#"hash_36f02881e6dba006", s_bile.origin, s_bile.angles);
+  self.var_76a23f3 = util::spawn_model(#"p8_zm_man_bat_bile_02", s_bile.origin, s_bile.angles);
   ai_nosferatu = zm_ai_nosferatu::function_74f25f8a(1, s_loc, 1, 35);
 
   if(isalive(ai_nosferatu)) {

@@ -192,5 +192,5 @@ function_97444b02(localclientnum) {
   }
 
   level.var_e7295382 zm_trial_weapon_locked::function_1e74977(localclientnum);
-  self playSound(localclientnum, #"hash_17c7895c4b5180ce");
+  self playSound(localclientnum, #"zmb_weapon_unavailable");
 }

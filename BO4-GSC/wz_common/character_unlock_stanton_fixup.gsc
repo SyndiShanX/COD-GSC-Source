@@ -13,7 +13,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"stanton_unlock", #"hash_4f0c567012b33fd9", #"cu14_item", &function_d95e620c, #"hash_5495584ec5e9f348");
+  character_unlock_fixup::register_character_unlock(#"stanton_unlock", #"prt_wz_stanton", #"cu14_item", &function_d95e620c, #"hash_5495584ec5e9f348");
 }
 
 function_d95e620c() {

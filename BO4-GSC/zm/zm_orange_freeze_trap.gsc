@@ -143,7 +143,7 @@ function_4bbed101(e_player) {
   n_total_time = 0;
   self thread freeze_trap_fx(1);
   sndent = spawn("script_origin", self.origin);
-  sndent playLoopSound(#"hash_1df9464f442b0b6d", 1);
+  sndent playLoopSound(#"evt_freeze_trap_shower", 1);
 
   if(isDefined(level.s_soapstone) && isDefined(level.s_soapstone.s_placement)) {
     level.s_soapstone.var_e15f0d15 = 1;
@@ -266,7 +266,7 @@ function_be814134() {
   }
 
   self clientfield::set_to_player("player_freeze_trap_post_fx", 1);
-  self playsoundtoplayer(#"hash_35baaf86bb47b64d", self);
+  self playsoundtoplayer(#"evt_freeze_trap_overlay", self);
   wait 0.25;
   self clientfield::set_to_player("player_freeze_trap_post_fx", 0);
   wait 1;

@@ -128,7 +128,7 @@ function_d096f18f() {
   wait 5;
   level.var_ab11c23d rotateTo((-90, level.var_ab11c23d.angles[1], 0), 0.2);
   level zm_orange_util::function_fd24e47f(#"vox_sky_portal_react", -1, 1);
-  var_6df66af8 = float(soundgetplaybacktime(#"hash_2e5e53739622d4e5")) / 1000;
+  var_6df66af8 = float(soundgetplaybacktime(#"vox_pablo_departs_herm_0")) / 1000;
   s_start = struct::get("pablo_rise_start");
   level.npc_pablo setblackboardattribute("_stance", "swim");
   e_mover = util::spawn_model("tag_origin", level.npc_pablo.origin);

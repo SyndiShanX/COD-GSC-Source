@@ -195,7 +195,7 @@ function_22d79d55(player) {
     n_ent_num = player getentitynumber();
 
     if(!isDefined(self.var_824b5a74[n_ent_num])) {
-      self.var_824b5a74[n_ent_num] = util::spawn_model(#"hash_4223616c6451bb89", mdl_shield.origin, mdl_shield.angles);
+      self.var_824b5a74[n_ent_num] = util::spawn_model(#"wpn_t8_zm_tower_shield_bull_lvl2_world", mdl_shield.origin, mdl_shield.angles);
     }
 
     self.var_824b5a74[n_ent_num] setinvisibletoall();
@@ -611,7 +611,7 @@ function_aa1e87dd(b_skipped = 0, var_19e802fa = 0) {
   level endon(#"end_game");
   self endon(#"disconnect");
   self flag::set(#"hash_320a1da5bf925c8b");
-  playSoundAtPosition(#"hash_3a5be037b504d0f0", (0, 0, 0));
+  playSoundAtPosition(#"zmb_bull_all_hit", (0, 0, 0));
   self thread function_3624f8c8(#"lower");
 }
 

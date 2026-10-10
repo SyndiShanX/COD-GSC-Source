@@ -1464,7 +1464,7 @@ function_c0f1d81b() {
 
 function_4366bf50(params) {
   deathmodel = spawn("script_model", self.origin + (0, 0, 150));
-  deathmodel setModel(#"hash_4c315b7f2185c393");
+  deathmodel setModel(#"veh_t8_mil_tank_turret_wz_blk_dead");
   deathmodel.angles = self.angles;
 
   if(!isDefined(level.var_82eb1dab)) {

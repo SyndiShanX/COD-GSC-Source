@@ -61,7 +61,7 @@ function_904b119() {
 function_a425bf07() {
   s_doll = struct::get(#"creepy_friend");
   s_trigger_loc = struct::get(s_doll.target);
-  mdl_doll = util::spawn_model(#"hash_249386b68e19b345", s_doll.origin, s_doll.angles);
+  mdl_doll = util::spawn_model(#"p8_zm_zod_doll_antique", s_doll.origin, s_doll.angles);
   s_unitrigger = s_trigger_loc zm_unitrigger::create(undefined, 32);
   s_trigger_loc waittill(#"trigger_activated");
   mdl_doll thread function_e7fd1a33();
@@ -292,7 +292,7 @@ function_aba430c2(s_unitrigger) {
     e_player = s_result.e_who;
 
     if(isDefined(e_player) && !isDefined(e_player.var_68c35930)) {
-      e_player playSound(#"hash_7e0e4a1fb470d18f");
+      e_player playSound(#"zmb_sq_audiolog_roll_pickup");
       e_player.var_68c35930 = self;
       self hide();
       zm_unitrigger::unregister_unitrigger(s_unitrigger);
@@ -312,7 +312,7 @@ function_63c3fd24(var_314c1b5a) {
         self.var_68c35930.origin = self.origin;
         self.var_68c35930.angles = self.angles;
         self.var_68c35930 show();
-        self.var_68c35930 playSound(#"hash_343bf66b64f5830e");
+        self.var_68c35930 playSound(#"zmb_sq_audiolog_roll_place");
         e_player.var_68c35930 = undefined;
       }
 
@@ -324,16 +324,16 @@ function_63c3fd24(var_314c1b5a) {
       level flag::set(#"phonograph_playing");
       self.var_68c35930 notify(#"hash_2b02b5a5a9af36e0");
       self.var_68c35930 notify(#"hash_44144f80f295a13f");
-      self.var_68c35930 playSound(#"hash_7c91fa775c8a0134");
+      self.var_68c35930 playSound(#"zmb_sq_audiolog_gramo_start");
 
       if(self.var_68c35930.script_int == 0) {
-        self.var_68c35930 playLoopSound(#"hash_3d52d57aceee74ce");
+        self.var_68c35930 playLoopSound(#"zmb_sq_audiolog_bg_disc");
       } else if(self.var_68c35930.script_int == 7) {
-        self.var_68c35930 playLoopSound(#"hash_5b492b8c8a8bb4d8");
+        self.var_68c35930 playLoopSound(#"zmb_sq_audiolog_bg_brun");
       } else if(self.var_68c35930.script_int == 8) {
-        self.var_68c35930 playLoopSound(#"hash_704a9f09fe3a48c2");
+        self.var_68c35930 playLoopSound(#"zmb_sq_audiolog_bg_scar");
       } else {
-        self.var_68c35930 playLoopSound(#"hash_2367dae4a69a4294");
+        self.var_68c35930 playLoopSound(#"zmb_sq_audiolog_gramo_lp");
       }
 
       wait 1;
@@ -341,7 +341,7 @@ function_63c3fd24(var_314c1b5a) {
       level flag::clear(#"phonograph_playing");
       self.var_68c35930 notify(#"roll_stop_spin");
       self.var_68c35930 stoploopsound();
-      self.var_68c35930 playSound(#"hash_376eaa517cd09530");
+      self.var_68c35930 playSound(#"zmb_sq_audiolog_gramo_stop");
       self.var_68c35930 thread function_ad05f6f3();
     }
   }
@@ -383,7 +383,7 @@ function_ad05f6f3() {
     }
   }
 
-  playSoundAtPosition(#"hash_2cf59d6222de4f6f", self.origin);
+  playSoundAtPosition(#"zmb_sq_audiolog_roll_destroy", self.origin);
   self delete();
 }
 

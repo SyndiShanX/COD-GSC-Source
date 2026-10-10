@@ -54,7 +54,7 @@ function_417c12e1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 crystal_explosion_func(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self util::playFXOnTag(localclientnum, level._effect[#"crystal_explosion"], self, "tag_origin");
-  playSound(localclientnum, #"hash_66b733441d74cd21", self.origin);
+  playSound(localclientnum, #"zmb_pap_crystal_break", self.origin);
 }
 
 function_5783c958(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -68,9 +68,9 @@ function_5783c958(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_6c40f793(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    forcestreamxmodel(#"hash_d8483cb5cc65489");
+    forcestreamxmodel(#"c_t8_zmb_dlc2_pegasus_bridle_prop");
     return;
   }
 
-  stopforcestreamingxmodel(#"hash_d8483cb5cc65489");
+  stopforcestreamingxmodel(#"c_t8_zmb_dlc2_pegasus_bridle_prop");
 }

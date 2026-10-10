@@ -503,7 +503,7 @@ function damageeffectarea(owner, position, killcament, normal, weapon, customset
     fireeffectarea = spawn("trigger_radius", trigger_radius_position, spawnflags, radius, trigger_radius_height);
     fireeffectarea function_4e5a1dd3(mdl_anchor);
     firesound = spawn("script_origin", fireeffectarea.origin);
-    firesound playLoopSound(#"hash_bdb30092e9dc406");
+    firesound playLoopSound(#"wpn_equipment_wraithfire_burn_lp");
     level thread influencers::create_grenade_influencers(isDefined(owner) ? owner.team : undefined, weapon, fireeffectarea);
   }
 

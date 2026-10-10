@@ -427,7 +427,7 @@ flame_corpse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 function_c599ed65() {
   if(get_story() == 1) {
     level.var_12b59dee = "rob_zm_eyes_yellow";
-    level._effect[#"eye_glow"] = #"hash_760112479afe6e2";
+    level._effect[#"eye_glow"] = #"zm_ai/fx8_zombie_eye_glow_yellow";
     return;
   }
 

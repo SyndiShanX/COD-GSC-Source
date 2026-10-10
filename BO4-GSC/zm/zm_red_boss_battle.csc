@@ -82,7 +82,7 @@ function_a27b945a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   str_tag = "tag_origin";
   level beam::launch(level.s_boss_battle.var_4475b443, str_tag, self, "j_spine4", "beam8_zm_red_peg_lightning_strike", 1);
-  self playSound(localclientnum, #"hash_61c057ffadb7a5af");
+  self playSound(localclientnum, #"wpn_pegasus_electric_bolt");
   wait 1.5;
   level beam::kill(level.s_boss_battle.var_4475b443, str_tag, self, "j_spine4", "beam8_zm_red_peg_lightning_strike");
 }

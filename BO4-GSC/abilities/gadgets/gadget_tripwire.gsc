@@ -583,7 +583,7 @@ function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
       perpvec = perpendicularvector(explosiondir);
       owner = isDefined(var_2f6adbe3.owner) && isentity(var_2f6adbe3.owner) ? var_2f6adbe3.owner : undefined;
       var_2f6adbe3 cylinderdamage(explosiondir * explosiondist, var_2f6adbe3.origin, nearradius, farradius, maxdamage, mindamage, owner, "MOD_EXPLOSIVE", self.weapon);
-      playFX(#"hash_69455dfeef0311c2", var_2f6adbe3.origin, explosiondir, perpvec);
+      playFX(#"weapon/fx8_equip_tripwire_exp", var_2f6adbe3.origin, explosiondir, perpvec);
       playSoundAtPosition(explosionsound, self.origin);
       playSoundAtPosition(explosionsound, var_2f6adbe3.origin);
       var_2f6adbe3 ghost();
@@ -603,7 +603,7 @@ function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
       }
 
       perpvec = perpendicularvector(explosiondir);
-      playFX(#"hash_69455dfeef0311c2", self.origin, explosiondir, perpvec);
+      playFX(#"weapon/fx8_equip_tripwire_exp", self.origin, explosiondir, perpvec);
       self playSound(explosionsound);
 
       if(!isDefined(self.hitnormal)) {

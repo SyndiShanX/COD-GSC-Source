@@ -1153,7 +1153,7 @@ remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
       scorestreakdata = {
         #gametime: function_f8d53445(), #killstreak: killstreak, #activatedby: getplayerspawnid(self)
       };
-      function_92d1707f(#"hash_1aa07f199266e0c7", scorestreakdata);
+      function_92d1707f(#"dlog_event_scorestreakdata", scorestreakdata);
 
       if(isDefined(isfrominventory) && isfrominventory) {
         remove_used_killstreak(killstreak);

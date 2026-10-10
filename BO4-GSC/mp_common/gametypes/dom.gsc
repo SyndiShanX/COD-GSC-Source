@@ -1857,6 +1857,6 @@ function_1609a882(var_c1e98979) {
     flagcapturedata = {
       #gametime: function_f8d53445(), #round: game.roundsplayed, #label: domflag gameobjects::get_label(), #firstcapture: domflag.firstcapture, #averagetimeheld: isDefined(averagetime) ? averagetime : 0, #timescaptured: domflag.timescaptured
     };
-    function_92d1707f(#"hash_4b747d11b8ad1b23", flagcapturedata);
+    function_92d1707f(#"dlog_event_flagcapturedata", flagcapturedata);
   }
 }

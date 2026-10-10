@@ -177,7 +177,7 @@ function_ee3e7dc8() {
   self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
   self._effect[#"hash_571a3bab8b805854"] = "zm_ai/fx8_nova_crawler_elec_teleport_flash";
   self._effect[#"nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_nova_crawler_elec_teleport_appear";
-  self playSound(#"hash_27b6a39054ad63ec");
+  self playSound(#"zmb_ai_crawler_elec_bolt_spawn");
 }
 
 function_dc0238e4() {

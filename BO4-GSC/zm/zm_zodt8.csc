@@ -457,7 +457,7 @@ pap_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(!isDefined(self.var_353ff2a)) {
-      self.var_353ff2a = self playLoopSound(#"hash_2ac2bbbfef2face4");
+      self.var_353ff2a = self playLoopSound(#"zmb_sentinel_trial_pap_projectile");
     }
 
     return;
@@ -486,7 +486,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
   if(newval == 1) {
     self.fx = util::playFXOnTag(localclientnum, level._effect[#"sentinel_aura"], self, "tag_fx_x_pos");
     self playrenderoverridebundle(#"hash_1589a47f2fdc6c67");
-    self.sfx_id = self playLoopSound(#"hash_66df9cab2c64f968");
+    self.sfx_id = self playLoopSound(#"zmb_sentinel_artifact_ghosted_lp");
     return;
   }
 
@@ -505,7 +505,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
 
     util::playFXOnTag(localclientnum, level._effect[#"sentinel_activate"], self, "tag_fx_x_pos");
 
-    while(isDefined(self) && self.model !== #"hash_2c0078538e398b4f") {
+    while(isDefined(self) && self.model !== #"p8_zm_zod_artifact_combined_fire_all") {
       waitframe(1);
     }
 
@@ -521,7 +521,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
   }
 
   self playSound(localclientnum, #"zmb_sentinel_artifact_explode");
-  self playSound(localclientnum, #"hash_3d8fef5997663b17");
+  self playSound(localclientnum, #"zmb_sentinel_trial_activate_2d");
 }
 
 sndactorunderwater(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -570,7 +570,7 @@ function_b7fc06b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 water_splashies(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self postfx::playpostfxbundle(#"hash_50d5d465e2b9b355");
+  self postfx::playpostfxbundle(#"pstfx_sprite_rain_splash");
 }
 
 water_drippies(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

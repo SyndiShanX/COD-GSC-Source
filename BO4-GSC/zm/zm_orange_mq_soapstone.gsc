@@ -333,7 +333,7 @@ function_9961d00() {
           self setModel("p8_zm_ora_soapstone_01_cold");
           self show();
           level function_88a86ef8(2);
-          self playSound(#"hash_7605be4297c1ed23");
+          self playSound(#"evt_soapstone_gen_cold");
           level.s_soapstone.var_b6e5b65f -= 1;
           self.is_placed = 1;
           level flag::clear(#"hash_57d2cbf7d6c2035a");
@@ -348,7 +348,7 @@ function_9961d00() {
           self setModel("p8_zm_ora_soapstone_01_cold");
           self show();
           level function_88a86ef8(4);
-          self playSound(#"hash_7605be4297c1ed23");
+          self playSound(#"evt_soapstone_gen_cold");
           level.s_soapstone.var_b6e5b65f -= 1;
           self.is_placed = 1;
           level flag::set(#"hash_238e5c8b416f855");
@@ -356,7 +356,7 @@ function_9961d00() {
           self setModel("p8_zm_ora_soapstone_01_hot");
           self show();
           level function_88a86ef8(0);
-          self playSound(#"hash_69b229acb5e3a598");
+          self playSound(#"evt_soapstone_gen_hot");
           level.s_soapstone.var_b6e5b65f -= 1;
           self.is_placed = 1;
           level flag::set(#"hash_57d2cbf7d6c2035a");
@@ -370,7 +370,7 @@ function_9961d00() {
           self setModel("p8_zm_ora_soapstone_01_hot");
           self show();
           level function_88a86ef8(2);
-          self playSound(#"hash_69b229acb5e3a598");
+          self playSound(#"evt_soapstone_gen_hot");
           level.s_soapstone.var_b6e5b65f -= 1;
           self.is_placed = 1;
           level flag::clear(#"hash_238e5c8b416f855");
