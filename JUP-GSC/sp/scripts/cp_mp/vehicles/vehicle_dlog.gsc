@@ -1,0 +1,106 @@
+/******************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: sp\scripts\cp_mp\vehicles\vehicle_dlog.gsc
+******************************************************/
+
+#using scripts\common\utility;
+#using scripts\cp_mp\utility\game_utility;
+#using scripts\engine\utility;
+#namespace vehicle_dlog;
+
+function vehicle_dlog_spawnevent(vehicle, spawntype, vehicletype) {
+  instancedata = vehicle_dlog_getinstancedata(vehicle, 1);
+
+  if(!isDefined(instancedata)) {
+    return;
+  }
+
+  if(!isDefined(vehicletype)) {
+    vehicletype = vehicle.vehiclename;
+  }
+
+  if(!isDefined(spawntype)) {
+    return;
+  }
+
+  if(!isDefined(vehicletype)) {
+    return;
+  }
+
+  dlog_recordevent("dlog_event_vehicle_spawn", ["vehicle_spawn_id", instancedata.id, "pos_x", vehicle.origin[0], "pos_y", vehicle.origin[1], "pos_z", vehicle.origin[2], "matchtime_ms", scripts\cp_mp\utility\game_utility::gettimesincegamestart(), "spawn_type", spawntype, "vehicle_type", vehicletype]);
+}
+
+function vehicle_dlog_exitevent(vehicle, player, seatid, exittype) {
+  if(!isPlayer(player)) {
+    return;
+  }
+
+  instancedata = vehicle_dlog_getinstancedata(vehicle);
+
+  if(!isDefined(instancedata)) {
+    return;
+  }
+
+  if(!isDefined(seatid)) {
+    return;
+  }
+
+  if(!isDefined(exittype)) {
+    return;
+  }
+
+  player dlog_recordplayerevent("dlog_event_player_vehicle_exit", ["vehicle_spawn_id", instancedata.id, "exit_pos_x", vehicle.origin[0], "exit_pos_y", vehicle.origin[1], "exit_pos_z", vehicle.origin[2], "exit_seat_id", seatid, "exit_matchtime_ms", scripts\cp_mp\utility\game_utility::gettimesincegamestart(), "exit_type", exittype]);
+}
+
+function vehicle_dlog_enterevent(vehicle, player, seatid, entertype) {
+  if(!isPlayer(player)) {
+    return;
+  }
+
+  instancedata = vehicle_dlog_getinstancedata(vehicle);
+
+  if(!isDefined(instancedata)) {
+    return;
+  }
+
+  if(!isDefined(seatid)) {
+    return;
+  }
+
+  if(!isDefined(entertype)) {
+    return;
+  }
+
+  player dlog_recordplayerevent("dlog_event_player_vehicle_enter", ["vehicle_spawn_id", instancedata.id, "enter_pos_x", vehicle.origin[0], "enter_pos_y", vehicle.origin[1], "enter_pos_z", vehicle.origin[2], "enter_seat_id", seatid, "enter_matchtime_ms", scripts\cp_mp\utility\game_utility::gettimesincegamestart(), "enter_type", entertype]);
+}
+
+function vehicle_dlog_init() {
+  assertex(isDefined(level.vehicle), "vehicle_dlog_init() called before vehicle_init().");
+  assertex(!isDefined(level.vehicle.dlogdata), "vehicle_dlog_init() should only be called once.");
+  leveldata = spawnStruct();
+  leveldata.uniqueid = 0;
+  level.vehicle.dlogdata = leveldata;
+}
+
+function vehicle_dlog_getleveldata() {
+  assertex(isDefined(level.vehicle.dlogdata), "vehicle_dlog_getLevelData() called before vehicle_dlog_init().");
+  return level.vehicle.dlogdata;
+}
+
+function vehicle_dlog_getinstancedata(vehicle, create) {
+  leveldata = vehicle_dlog_getleveldata();
+  instancedata = vehicle.dlogdata;
+
+  if(!isDefined(instancedata) && istrue(create)) {
+    instancedata = spawnStruct();
+    vehicle.dlogdata = instancedata;
+    instancedata.id = leveldata.uniqueid;
+    leveldata.uniqueid++;
+  }
+
+  return instancedata;
+}
+
+function vehicle_dlog_getuniqueid(vehicle) {
+  return vehicle.dlogid;
+}

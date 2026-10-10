@@ -1,0 +1,13 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\scripts\mp\challenges_mp.gsc
+***********************************************/
+
+#using scripts\common\utility;
+#using scripts\engine\utility;
+#using scripts\mp\utility\game;
+#using scripts\mp\utility\player;
+#using scripts\mp\utility\weapon;
+#namespace challenges_mp;
+
+function init() {}

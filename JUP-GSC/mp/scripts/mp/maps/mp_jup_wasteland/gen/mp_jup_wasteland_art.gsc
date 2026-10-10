@@ -1,0 +1,10 @@
+/****************************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\scripts\mp\maps\mp_jup_wasteland\gen\mp_jup_wasteland_art.gsc
+****************************************************************************/
+
+#namespace mp_jup_wasteland_art;
+
+function main() {
+  level.tweakfile = 1;
+}

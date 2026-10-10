@@ -1,0 +1,12 @@
+/*******************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\xmodelalias\c_jup_zmb_zombie_base_male_merc_head.gsc
+*******************************************************************/
+
+#namespace c_jup_zmb_zombie_base_male_merc_head;
+
+function main() {
+  a[0] = "c_jup_zmb_zombie_base_male_merc_head";
+  a[1] = "c_jup_zmb_zombie_base_male_merc_head_half";
+  return a;
+}

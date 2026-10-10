@@ -1,0 +1,29 @@
+/********************************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\scripts\mp\maps\mp_jup_growhouse\mp_jup_growhouse.gsc
+********************************************************************/
+
+#using scripts\common\utility;
+#using scripts\engine\utility;
+#using scripts\mp\agents\agent_utility;
+#using scripts\mp\compass;
+#using scripts\mp\load;
+#using scripts\mp\maps\mp_jup_growhouse\gen\mp_jup_growhouse_art;
+#using scripts\mp\maps\mp_jup_growhouse\mp_jup_growhouse_fx;
+#using scripts\mp\maps\mp_jup_growhouse\mp_jup_growhouse_lighting;
+#namespace mp_jup_growhouse;
+
+function main() {
+  scripts\mp\maps\mp_jup_growhouse\gen\mp_jup_growhouse_art::main();
+  scripts\mp\maps\mp_jup_growhouse\mp_jup_growhouse_fx::main();
+  scripts\mp\maps\mp_jup_growhouse\mp_jup_growhouse_lighting::main();
+  scripts\mp\load::main();
+  level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
+  level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
+  scripts\mp\compass::setupminimap("compass_map_mp_jup_growhouse");
+  setDvar(@ "hash_7686fcb92ccc5edb", 8);
+  game["attackers"] = "allies";
+  game["defenders"] = "axis";
+  game["allies_outfit"] = "urban";
+  game["axis_outfit"] = "woodland";
+}

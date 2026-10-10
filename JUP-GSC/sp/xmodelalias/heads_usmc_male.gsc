@@ -1,0 +1,14 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: sp\xmodelalias\heads_usmc_male.gsc
+***********************************************/
+
+#namespace heads_usmc_male;
+
+function main() {
+  a[0] = "head_sc_m_ferragamo";
+  a[1] = "head_sc_m_colvin";
+  a[2] = "head_sc_m_valladares";
+  a[3] = "head_sc_m_vasquez";
+  return a;
+}

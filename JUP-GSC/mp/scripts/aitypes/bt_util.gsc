@@ -1,0 +1,40 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: mp\scripts\aitypes\bt_util.gsc
+***********************************************/
+
+#using scripts\asm\asm;
+#namespace bt_util;
+
+function init() {
+  if(isDefined(level._btactions)) {
+    return;
+  }
+
+  level._btactions = [];
+  anim.failure = 0;
+  anim.success = 1;
+  anim.running = 2;
+  anim.skip = 3;
+  anim.invalid = 4;
+}
+
+function bt_init() {
+  assert(!isDefined(self.bt));
+  self.bt = spawnStruct();
+
+  if(isDefined(self.behaviortreeasset)) {
+    self btregistertreeinstance(self.behaviortreeasset);
+  }
+
+  self.bt.instancedata = [];
+}
+
+function bt_terminateandreplace(var_99252870276d5b3e) {
+  self btterminatetreeinstance();
+
+  if(isDefined(var_99252870276d5b3e)) {
+    self.behaviortreeasset = var_99252870276d5b3e;
+    self btregistertreeinstance(self.behaviortreeasset);
+  }
+}
