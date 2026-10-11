@@ -2929,13 +2929,13 @@ plunder_repositorysendcountdownmessage(player, entity, value) {
 
   if(!player _id_2CEDCC356F1B9FC8::isplayeringulag() && player scripts\cp_mp\utility\player_utility::_isalive()) {
     _id_939BDF45CE71425B = undefined;
-    _id_6795239569233693 = 2147483647;
+    bestdistsqr = 2147483647;
 
     foreach(data in player.plundercountdownmessagedata) {
       _id_3321F7BDE264CBF9 = distance2dsquared(player.origin, data.origin);
 
-      if(_id_3321F7BDE264CBF9 < _id_6795239569233693) {
-        _id_6795239569233693 = _id_3321F7BDE264CBF9;
+      if(_id_3321F7BDE264CBF9 < bestdistsqr) {
+        bestdistsqr = _id_3321F7BDE264CBF9;
         _id_939BDF45CE71425B = data;
       }
     }

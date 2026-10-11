@@ -6640,14 +6640,14 @@ relic_nuketimer_globalthread() {
   waitframe();
   level waittill("relic_nuke_explode");
   _id_8552241A89A7D70A = level.relic_nuketimer.nuke_clockobject.origin;
-  _id_5097873650010998 = spawn("script_model", _id_8552241A89A7D70A);
-  _id_5097873650010998 setModel("tag_origin");
-  _id_5097873650010998.team = "axis";
-  _id_5097873650010998.pers = [];
-  _id_5097873650010998.pers["team"] = "axis";
-  _id_5097873650010998.owner = _id_5097873650010998;
-  streakinfo = _id_5097873650010998 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("nuke", _id_5097873650010998);
-  _id_5097873650010998 thread scripts\cp_mp\killstreaks\nuke::nuke_start(streakinfo);
+  nuke_owner = spawn("script_model", _id_8552241A89A7D70A);
+  nuke_owner setModel("tag_origin");
+  nuke_owner.team = "axis";
+  nuke_owner.pers = [];
+  nuke_owner.pers["team"] = "axis";
+  nuke_owner.owner = nuke_owner;
+  streakinfo = nuke_owner scripts\cp_mp\utility\killstreak_utility::createstreakinfo("nuke", nuke_owner);
+  nuke_owner thread scripts\cp_mp\killstreaks\nuke::nuke_start(streakinfo);
   level waittill("nuke_detonated");
   wait 5;
 

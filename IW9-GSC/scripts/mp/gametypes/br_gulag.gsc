@@ -1348,11 +1348,11 @@ manageoutlineactive(arena, fighters, _id_4B434533D3624BEC) {
     if(arena.jailedplayers.size) {
       _id_BE4E32B47AD61C7D = scripts\engine\utility::array_removeundefined(arena.jailedplayers);
 
-      foreach(_id_4570788876702376 in fighters) {
-        if(!isDefined(_id_4570788876702376)) {
+      foreach(fighter in fighters) {
+        if(!isDefined(fighter)) {
           continue;
         }
-        _id_4570788876702376 hudoutlineenableforclients(_id_BE4E32B47AD61C7D, "outline_nodepth_white");
+        fighter hudoutlineenableforclients(_id_BE4E32B47AD61C7D, "outline_nodepth_white");
       }
     }
 
@@ -1382,11 +1382,11 @@ manageoutlinecleanup(arena, fighters) {
   if(!players.size) {
     return;
   }
-  foreach(_id_4570788876702376 in fighters) {
-    if(!isDefined(_id_4570788876702376)) {
+  foreach(fighter in fighters) {
+    if(!isDefined(fighter)) {
       continue;
     }
-    _id_4570788876702376 hudoutlinedisableforclients(players);
+    fighter hudoutlinedisableforclients(players);
   }
 }
 
@@ -3879,11 +3879,11 @@ updatebetplayerfocus(arena, _id_B5FE9E03C0FD6170) {
     _id_CB1A928757E7D0AD = _id_B5FE9E03C0FD6170.owner getEye();
     _id_BE8E4C874F6DECCF = anglesToForward(_id_B5FE9E03C0FD6170.owner getplayerangles());
 
-    foreach(_id_AC0E594AC96AA3A8, _id_4570788876702376 in self.fighters) {
-      if(!isDefined(_id_4570788876702376)) {
+    foreach(_id_AC0E594AC96AA3A8, fighter in self.fighters) {
+      if(!isDefined(fighter)) {
         continue;
       }
-      _id_499A4B568077F460 = _id_4570788876702376.origin + (0, 0, 30);
+      _id_499A4B568077F460 = fighter.origin + (0, 0, 30);
       _id_ECAF2C0500E55585 = vectorNormalize(_id_499A4B568077F460 - _id_CB1A928757E7D0AD);
       _id_A93753D72E9F269D = vectordot(_id_BE8E4C874F6DECCF, _id_ECAF2C0500E55585);
 
@@ -4124,8 +4124,8 @@ getbettingplayers(arena, _id_4B434533D3624BEC) {
   _id_2804A2011E172AB6 = arena.jailedplayers;
 
   if(level.gulag.betting > 1) {
-    foreach(_id_4570788876702376 in _id_4B434533D3624BEC.fighters)
-    _id_2804A2011E172AB6[_id_2804A2011E172AB6.size] = _id_4570788876702376;
+    foreach(fighter in _id_4B434533D3624BEC.fighters)
+    _id_2804A2011E172AB6[_id_2804A2011E172AB6.size] = fighter;
   }
 
   return _id_2804A2011E172AB6;
@@ -4619,7 +4619,7 @@ _id_4BCEDFE145EE674E() {
     _id_D61EA355B2C5B7D5 = strtok(getDvar("dvar_6EF30F04F9851A88"), " ");
     _id_4D4AA257C98F2157 = [];
 
-    for(_id_2613246720524878 = 0; _id_2613246720524878 < _id_D61EA355B2C5B7D5.size; _id_2613246720524878++)
+    for(debugindex = 0; debugindex < _id_D61EA355B2C5B7D5.size; debugindex++)
       _id_4D4AA257C98F2157[_id_4D4AA257C98F2157.size] = int(_id_D61EA355B2C5B7D5[_id_4D4AA257C98F2157.size]);
 
     _id_07D958726E11B327 = _id_4D4AA257C98F2157.size;

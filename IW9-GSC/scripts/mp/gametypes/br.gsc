@@ -1234,7 +1234,7 @@ prematchinitloadouts(table) {
     _id_D61EA355B2C5B7D5 = strtok(getDvar("dvar_FC5F34B202C7515E"), " ");
     _id_4D4AA257C98F2157 = [];
 
-    for(_id_2613246720524878 = 0; _id_2613246720524878 < _id_D61EA355B2C5B7D5.size; _id_2613246720524878++)
+    for(debugindex = 0; debugindex < _id_D61EA355B2C5B7D5.size; debugindex++)
       _id_4D4AA257C98F2157[_id_4D4AA257C98F2157.size] = int(_id_D61EA355B2C5B7D5[_id_4D4AA257C98F2157.size]);
 
     for(_id_1BA75F00ACFEC3A6 = 0; _id_1BA75F00ACFEC3A6 < _id_4D4AA257C98F2157.size; _id_1BA75F00ACFEC3A6++)

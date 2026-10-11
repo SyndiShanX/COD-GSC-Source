@@ -4615,7 +4615,7 @@ axedetachfromcorpse(_id_B368413898131A3C) {
     }
     weaponname = ent.weapon_name;
     _id_3F6103D9666B07CC = ent.owner;
-    _id_8802742623974077 = ent.origin;
+    stuckpoint = ent.origin;
 
     if(isDefined(weaponname) && scripts\mp\utility\weapon::isaxeweapon(weaponname))
       ent relaunchaxe(weaponname, _id_3F6103D9666B07CC);
