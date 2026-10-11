@@ -67,7 +67,7 @@ function onexplode(owner, position) {
       if(isDefined(guy.unittype)) {
         if(guy.unittype == "zombie") {
           if(gametype == "koth_horde" || gametype == "br") {
-            guy utility::function_f3bb4f4911a1beb2("zombie", "stunZombie", 5);
+            guy utility::callsharedfunc("zombie", "stunZombie", 5);
           }
         }
       }
@@ -92,7 +92,7 @@ function onplayerdamaged(data) {
     return false;
   }
 
-  data.inflictor.bundle = scripts\mp\equipment::function_2113b6f7cb462692(data.inflictor.weapon_name);
+  data.inflictor.bundle = scripts\mp\equipment::getequipmentbundlefromweaponname(data.inflictor.weapon_name);
   victim thread applyconcussion(data.inflictor, attacker);
 
   if(isPlayer(attacker)) {

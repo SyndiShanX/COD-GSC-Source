@@ -549,7 +549,7 @@ function function_9b7d604d11c44759() {
 
   foreach(enemy in level.var_b680f0b90d32078b) {
     enemy thread function_91a37530b9d090c6();
-    enemy.var_98add129a7ecb962 = 0;
+    enemy.allowlongdeath = 0;
     enemy.stealth.funcs["silenced_shot_impact"] = &function_917b92dbdc280a05;
   }
 
@@ -1183,7 +1183,7 @@ function function_6f80c9a954eea6d5() {
   if(isDefined(level.var_bfdb4f43205d4328) && isalive(level.var_bfdb4f43205d4328)) {
     var_bc9ca0455514672b = getStruct(level.var_bfdb4f43205d4328.target, "targetname");
     var_bc9ca0455514672b thread anim_loop_solo(level.var_bfdb4f43205d4328, "jup_interaction_patrol_tablet_inventory_loop_01", "stop_loop");
-    level.var_bfdb4f43205d4328 function_613f82ecdf9b56b8(1);
+    level.var_bfdb4f43205d4328 set_allow_death(1);
     wait 5.05;
 
     if(isDefined(level.var_bfdb4f43205d4328) && isalive(level.var_bfdb4f43205d4328)) {
@@ -1850,7 +1850,7 @@ function function_f99d75a81a420b4f() {
     ai.goalradius = 32;
     ai.fixednode = 1;
     ai.grenadeammo = 0;
-    ai.var_98add129a7ecb962 = 0;
+    ai.allowlongdeath = 0;
 
     if(isDefined(ai.script_noteworthy) && ai.script_noteworthy == "konni_chunnel_finale_bomber") {
       level.var_c80b9216ff9840e1 = ai;
@@ -1920,21 +1920,21 @@ function function_5e2fef0b091d328b() {
   self endon("death");
   self endon("entitydeleted");
   self.animname = "generic";
-  var_878df2309ef4e996 = getStruct(self.target, "targetname");
+  s_anim_struct = getStruct(self.target, "targetname");
   thread function_5e775d10d57c2fb1();
   level thread function_553624d50b1017a4(self);
-  var_878df2309ef4e996 thread anim_loop_solo(self, var_878df2309ef4e996.animation, "stop_loop");
+  s_anim_struct thread anim_loop_solo(self, s_anim_struct.animation, "stop_loop");
   value = waittill_any_ents_return(self, "damage_nonlethal", self, "damage_lethal", self, "bulletwhizby", self, "bomber_timeout_shoot", level, "flag_finale_enemies_wave_1_spawns");
   self notify("stop_loop");
 
   if(value == "damage_lethal") {
-    var_878df2309ef4e996 anim_single_solo(self, "jup_interaction_patrol_device_low_right_death_6");
+    s_anim_struct anim_single_solo(self, "jup_interaction_patrol_device_low_right_death_6");
     die();
     return;
   }
 
-  function_613f82ecdf9b56b8(1);
-  var_878df2309ef4e996 anim_single_solo(self, "jup_interaction_patrol_device_low_right_react_2");
+  set_allow_death(1);
+  s_anim_struct anim_single_solo(self, "jup_interaction_patrol_device_low_right_react_2");
   set_deathanim("sdr_com_exp_stand_death01_gut_med_4");
 }
 
@@ -1984,7 +1984,7 @@ function function_f99d76a81a420d82() {
     ai.grenadeammo = 0;
     ai.baseaccuracy = 0.3;
     ai demeanor_override("combat");
-    ai.var_98add129a7ecb962 = 0;
+    ai.allowlongdeath = 0;
     ai.health = 100;
     ai setgoalvolumeauto(var_da6e7ebd96aadcbb);
   }
@@ -2032,7 +2032,7 @@ function function_f99d77a81a420fb5() {
     ai.grenadeammo = 0;
     ai.baseaccuracy = 0.3;
     ai.health = 100;
-    ai.var_98add129a7ecb962 = 0;
+    ai.allowlongdeath = 0;
     ai demeanor_override("combat");
     ai setgoalvolumeauto(var_32cf69782505bc98);
   }
@@ -2133,17 +2133,17 @@ function function_40440737898c08c4(var_f395945f361db8db) {
 
 function function_74b501bb14dd7dcd() {
   var_7e8e9f5d94dabcca = getspawner("sp_finale_makarov", "targetname");
-  level.var_85e0e3c0d71ec871 = var_7e8e9f5d94dabcca spawn_ai(1, 1);
-  level.var_85e0e3c0d71ec871 setModel("body_c_jup_sp_villain_makarov_shirt");
-  level.var_85e0e3c0d71ec871 detach(level.var_85e0e3c0d71ec871.headmodel);
-  level.var_85e0e3c0d71ec871 attach("c_jup_head_hero_makarov", "", 1);
-  level.var_85e0e3c0d71ec871.headmodel = "c_jup_head_hero_makarov";
-  level.var_85e0e3c0d71ec871.ignoreme = 1;
-  level.var_85e0e3c0d71ec871.ignoreall = 1;
-  level.var_85e0e3c0d71ec871.animname = "makarov";
-  level.var_85e0e3c0d71ec871 set_name("Makarov");
-  level.var_85e0e3c0d71ec871.dropweapon = 0;
-  level.var_85e0e3c0d71ec871 gun_remove();
+  level.ai_makarov = var_7e8e9f5d94dabcca spawn_ai(1, 1);
+  level.ai_makarov setModel("body_c_jup_sp_villain_makarov_shirt");
+  level.ai_makarov detach(level.ai_makarov.headmodel);
+  level.ai_makarov attach("c_jup_head_hero_makarov", "", 1);
+  level.ai_makarov.headmodel = "c_jup_head_hero_makarov";
+  level.ai_makarov.ignoreme = 1;
+  level.ai_makarov.ignoreall = 1;
+  level.ai_makarov.animname = "makarov";
+  level.ai_makarov set_name("Makarov");
+  level.ai_makarov.dropweapon = 0;
+  level.ai_makarov gun_remove();
   var_2f2ebf3f037bece1 = getspawner("sp_konni_guy_1", "targetname");
   var_d9eed191f4441050 = getspawner("sp_konni_guy_2", "targetname");
   var_c68ba806e0b9a6af = getspawner("sp_konni_guy_3", "targetname");
@@ -2161,8 +2161,8 @@ function function_74b501bb14dd7dcd() {
   level.outro_konni3.fixednode = 1;
   level.outro_konni4 setgoalpos(level.outro_konni4.origin);
   level.outro_konni4.fixednode = 1;
-  level.var_85e0e3c0d71ec871 setgoalpos(level.var_85e0e3c0d71ec871.origin);
-  level.var_85e0e3c0d71ec871.fixednode = 1;
+  level.ai_makarov setgoalpos(level.ai_makarov.origin);
+  level.ai_makarov.fixednode = 1;
   level.outro_konni1.ignoreme = 1;
   level.outro_konni1.ignoreall = 1;
   level.outro_konni2.ignoreme = 1;
@@ -2232,15 +2232,15 @@ function function_74b501bb14dd7dcd() {
     level.var_e36f079077e42ab9[1] thread scripts\common\anim::anim_single_solo(level.var_e36f079077e42ab9[1], "sdr_com_strafe_jog_start_2");
   }
 
-  level.var_85e0e3c0d71ec871 waittill("goal");
+  level.ai_makarov waittill("goal");
   flag_set("flg_makarov_gone");
 
-  if(isDefined(level.var_85e0e3c0d71ec871) && isalive(level.var_85e0e3c0d71ec871)) {
-    if(isDefined(level.var_85e0e3c0d71ec871.magic_bullet_shield)) {
-      level.var_85e0e3c0d71ec871 stop_magic_bullet_shield();
+  if(isDefined(level.ai_makarov) && isalive(level.ai_makarov)) {
+    if(isDefined(level.ai_makarov.magic_bullet_shield)) {
+      level.ai_makarov stop_magic_bullet_shield();
     }
 
-    level.var_85e0e3c0d71ec871 delete();
+    level.ai_makarov delete();
   }
 
   foreach(var_eee6b70b08de211e in level.var_e36f079077e42ab9) {
@@ -2730,7 +2730,7 @@ function function_ed832ca607826c89(str_start) {
   self enableavoidance(1);
 }
 
-function function_e8e02cb12ef545bf(var_1fc8a153cf951377) {
+function function_e8e02cb12ef545bf(flg_cleanup) {
   self endon("death");
   self endon("entitydeleted");
   self.goalradius = 32;
@@ -2742,12 +2742,12 @@ function function_e8e02cb12ef545bf(var_1fc8a153cf951377) {
   self.dontmelee = 1;
   self.cannotmelee = 1;
 
-  if(isDefined(var_1fc8a153cf951377)) {
-    thread function_f19d721de81462d(var_1fc8a153cf951377);
+  if(isDefined(flg_cleanup)) {
+    thread function_f19d721de81462d(flg_cleanup);
   }
 }
 
-function function_bebee9102c947243(var_1fc8a153cf951377) {
+function function_bebee9102c947243(flg_cleanup) {
   self endon("death");
   self endon("entitydeleted");
   self.goalradius = 32;
@@ -2761,8 +2761,8 @@ function function_bebee9102c947243(var_1fc8a153cf951377) {
   function_c1e075c4168a8bea(1, 0);
   function_61f8d605d3de4b3c();
 
-  if(isDefined(var_1fc8a153cf951377)) {
-    thread function_f19d721de81462d(var_1fc8a153cf951377);
+  if(isDefined(flg_cleanup)) {
+    thread function_f19d721de81462d(flg_cleanup);
   }
 
   thread function_b93f21d1614cf800();
@@ -2779,12 +2779,12 @@ function function_bebee9102c947243(var_1fc8a153cf951377) {
   thread function_d09284e9fc1f4c59(level.var_1181f1897e13785c, "flg_chunnel_intro_track_complete");
 }
 
-function function_d09284e9fc1f4c59(a_ai_enemies, var_9eae206e3da3416f, var_1e73c3c1a72c647a) {
+function function_d09284e9fc1f4c59(a_ai_enemies, flg_endon, var_1e73c3c1a72c647a) {
   self endon("death");
   level.player endon("death");
-  level endon(var_9eae206e3da3416f);
+  level endon(flg_endon);
 
-  if(flag(var_9eae206e3da3416f)) {
+  if(flag(flg_endon)) {
     return;
   }
 
@@ -3184,15 +3184,15 @@ function function_8389606a3cec622b() {
   }
 }
 
-function function_b6bdc8df73d41601(var_1fc8a153cf951377) {
-  if(!isDefined(var_1fc8a153cf951377)) {
-    var_1fc8a153cf951377 = "flg_chunnel_crossover_detonate";
+function function_b6bdc8df73d41601(flg_cleanup) {
+  if(!isDefined(flg_cleanup)) {
+    flg_cleanup = "flg_chunnel_crossover_detonate";
   }
 
   self notify("register_train_corpse");
   self endon("register_train_corpse");
   self endon("entitydeleted");
-  level endon(var_1fc8a153cf951377);
+  level endon(flg_cleanup);
   level.player endon("death");
 
   if(self.animname == "engine") {
@@ -3219,19 +3219,19 @@ function function_b6bdc8df73d41601(var_1fc8a153cf951377) {
   }
 }
 
-function function_5d2b18ef5d71a9ff(train_number, var_ec99d0315dd2567b, var_1fc8a153cf951377) {
+function function_5d2b18ef5d71a9ff(train_number, var_ec99d0315dd2567b, flg_cleanup) {
   if(!isDefined(var_ec99d0315dd2567b)) {
     var_ec99d0315dd2567b = 0;
   }
 
-  if(!isDefined(var_1fc8a153cf951377)) {
-    var_1fc8a153cf951377 = "flg_chunnel_crossover_detonate";
+  if(!isDefined(flg_cleanup)) {
+    flg_cleanup = "flg_chunnel_crossover_detonate";
   }
 
   self notify("register_train_impact");
   self endon("register_train_impact");
   self endon("entitydeleted");
-  level endon(var_1fc8a153cf951377);
+  level endon(flg_cleanup);
   level.player endon("death");
   a_triggerer = [];
 

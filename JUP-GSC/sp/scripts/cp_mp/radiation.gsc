@@ -437,16 +437,16 @@ function private function_8748260c33092d78() {
 
 function private function_8c073da924b036f8() {
   level endon("<dev string:x55d>");
-  var_c046f169b0a7720d = 0;
+  accumulator = 0;
 
   while(true) {
-    if(var_c046f169b0a7720d != 5) {
-      var_c046f169b0a7720d += 1;
+    if(accumulator != 5) {
+      accumulator += 1;
       waitframe();
       continue;
     }
 
-    var_c046f169b0a7720d = 0;
+    accumulator = 0;
 
     if(isDefined(level.radiation.debug_selected)) {
       cylinder(level.radiation.debug_selected.origin, level.radiation.debug_selected.origin + (0, 0, 10000), level.radiation.debug_selected.radius, (1, 0, 0), 0, 5);

@@ -258,7 +258,7 @@ function private function_5666e11b17254d43(time) {
   }
 }
 
-function function_4cadbb00ef649ee1(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_4cadbb00ef649ee1(instance, part, state, player, bautouse, usestring) {
   if(part != "dmz_supply_site") {
     return;
   }

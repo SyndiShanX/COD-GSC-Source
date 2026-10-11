@@ -11,5 +11,5 @@
 
 function main() {
   level.gunshipvisionset = "gunship_color_mp_zooquarium";
-  level.var_49071332a2a99c1e = "gunship_thermal_mp_zooquarium";
+  level.killstreakthermalvisionset = "gunship_thermal_mp_zooquarium";
 }

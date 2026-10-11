@@ -835,13 +835,13 @@ function snake_cam_control(player) {
   og_angles = self.angles;
   minpitch = -90;
   maxpitch = 90;
-  var_cb6680317be1e374 = 90;
+  yawdeltamax = 90;
   var_aae6a37f78b5674 = 90;
-  minyaw = og_angles[1] - var_cb6680317be1e374;
-  maxyaw = og_angles[1] + var_cb6680317be1e374;
+  minyaw = og_angles[1] - yawdeltamax;
+  maxyaw = og_angles[1] + yawdeltamax;
   minroll = og_angles[2] - var_aae6a37f78b5674;
   maxroll = og_angles[2] + var_aae6a37f78b5674;
-  var_827abacd5ca8f6b3 = 20;
+  ddeadzone = 20;
   dmaxroll = 90;
   var_440ebeeb83bd05a8 = 0.6;
   var_75eb1524afeb7f2b = 0.8;
@@ -855,15 +855,15 @@ function snake_cam_control(player) {
 
   while(true) {
     currentangles = self.angles;
-    var_b4f55166f66361e9 = player.cam_ent.angles;
+    currentcamangles = player.cam_ent.angles;
     input = player getnormalizedmovement();
     input = [-1, 1];
     multiplier = 0;
     normalinput = (input[0], input[1], 0);
     normalinput = length(normalinput);
-    var_5eb5724f78d37c4c = math::factor_value(var_848e35f763ce65b0, var_d5e6310914396ac3, normalinput);
-    var_d296b0eaf4a6b00f[0] = math::lerp(var_d296b0eaf4a6b00f[0], input[0], var_5eb5724f78d37c4c);
-    var_d296b0eaf4a6b00f[1] = math::lerp(var_d296b0eaf4a6b00f[1], input[1], var_5eb5724f78d37c4c);
+    inputlerprate = math::factor_value(var_848e35f763ce65b0, var_d5e6310914396ac3, normalinput);
+    var_d296b0eaf4a6b00f[0] = math::lerp(var_d296b0eaf4a6b00f[0], input[0], inputlerprate);
+    var_d296b0eaf4a6b00f[1] = math::lerp(var_d296b0eaf4a6b00f[1], input[1], inputlerprate);
 
     if(currentangles[0] > 0 && var_d296b0eaf4a6b00f[0] < 0) {
       var_13a3fd6ddfa8548f = 1 - math::normalize_value(maxpitch * var_440ebeeb83bd05a8, maxpitch, currentangles[0]);
@@ -874,9 +874,9 @@ function snake_cam_control(player) {
     }
 
     if(currentangles[1] > og_angles[1] && var_d296b0eaf4a6b00f[1] < 0) {
-      var_8366082d034c6132 = 1 - math::normalize_value(maxyaw - var_cb6680317be1e374 * var_75eb1524afeb7f2b, maxyaw, currentangles[1]);
+      var_8366082d034c6132 = 1 - math::normalize_value(maxyaw - yawdeltamax * var_75eb1524afeb7f2b, maxyaw, currentangles[1]);
     } else if(currentangles[1] < og_angles[1] && var_d296b0eaf4a6b00f[1] > 0) {
-      var_8366082d034c6132 = math::normalize_value(minyaw, minyaw + var_cb6680317be1e374 * var_75eb1524afeb7f2b, currentangles[1]);
+      var_8366082d034c6132 = math::normalize_value(minyaw, minyaw + yawdeltamax * var_75eb1524afeb7f2b, currentangles[1]);
     } else {
       var_8366082d034c6132 = 1;
     }
@@ -898,11 +898,11 @@ function snake_cam_control(player) {
     nextyaw = clamp(nextyaw, minyaw, maxyaw);
     inputpitch = var_d296b0eaf4a6b00f[0] * -1;
     nextpitch = currentangles[0] + dpitch * inputpitch * var_13a3fd6ddfa8548f;
-    var_bc4b977758b3324e = minpitch;
+    minpitchclamp = minpitch;
     maxpitchclamp = maxpitch;
-    nextpitch = clamp(nextpitch, var_bc4b977758b3324e, maxpitchclamp);
-    var_6612315290576b0f = (nextpitch, nextyaw, nextroll);
-    movementfactor = length(var_6612315290576b0f - self.angles);
+    nextpitch = clamp(nextpitch, minpitchclamp, maxpitchclamp);
+    snakeangles = (nextpitch, nextyaw, nextroll);
+    movementfactor = length(snakeangles - self.angles);
     movementfactor = math::normalize_value(0, 1.5, movementfactor);
     quake = math::factor_value(0, 0.105, movementfactor);
     rumble = math::factor_value(0, 0.08, movementfactor);
@@ -925,7 +925,7 @@ function snake_cam_control(player) {
     height = 1 - rumble;
     height *= 1000;
     self.rumbleent.origin = player getEye() + (0, 0, height);
-    self.angles = var_6612315290576b0f;
+    self.angles = snakeangles;
     nudge_spot = self.origin + anglesToForward(self.angles) * 12 + anglestoup(self.angles) * -55 + (0, 0, 3);
     player.cam_ent.origin = nudge_spot;
     player.cam_ent.angles = (self.angles[0], self.angles[1], self.angles[2]);

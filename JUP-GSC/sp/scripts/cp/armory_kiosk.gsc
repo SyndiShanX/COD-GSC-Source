@@ -52,7 +52,7 @@ function init() {
   if(level.br_armory_kiosk_enabled) {
     scripts\engine\scriptable::scriptable_addusedcallback(&armorykioskused);
     scripts\engine\scriptable::scriptable_addautousecallback(&armorykioskused);
-    function_9bc69c26770d9533(&onarmorykioskpurchase);
+    registeronluieventcallbacksharedfunc(&onarmorykioskpurchase);
     level.var_d03e6ba38b56b4ab = getdvarint(@ "hash_e77ab3a32453ae92", 1);
     level.var_e9f7702d839b262c = getdvarint(@ "hash_624b1f6964c696d", 180);
     level.randomanglemax = getdvarint(@ "hash_69c62cae4d7929c9", 10);
@@ -442,7 +442,7 @@ function _watchforcircleclosure() {
           continue;
         }
 
-        player thread function_234f5394668ed388("br_kiosks_disabled");
+        player thread showsplashsharedfunc("br_kiosks_disabled");
       }
 
       break;
@@ -486,11 +486,11 @@ function showdiscountsplash(delayseconds) {
   }
 
   if(level.br_armory_kiosk.sales_discount_items.size == 0) {
-    player thread function_234f5394668ed388("br_sales_event_all");
+    player thread showsplashsharedfunc("br_sales_event_all");
     return;
   }
 
-  player thread function_234f5394668ed388("br_sales_event_selective");
+  player thread showsplashsharedfunc("br_sales_event_selective");
 }
 
 function function_8807282a387bb5b4() {
@@ -547,7 +547,7 @@ function onprematchdone() {
 }
 
 function dangercircletick(dangercircleorigin, dangercircleradius) {
-  if(function_946938d9fde4bdce("kiosk") || getdvarint(@ "scr_br_kiosk_ignore_circle", 0) == 1) {
+  if(isfeaturedisabledsharedfunc("kiosk") || getdvarint(@ "scr_br_kiosk_ignore_circle", 0) == 1) {
     return;
   }
 
@@ -561,7 +561,7 @@ function dangercircletick(dangercircleorigin, dangercircleradius) {
 }
 
 function function_1a1709943670772a() {
-  if(function_946938d9fde4bdce("kiosk") || getdvarint(@ "scr_br_kiosk_ignore_circle", 0) == 1) {
+  if(isfeaturedisabledsharedfunc("kiosk") || getdvarint(@ "scr_br_kiosk_ignore_circle", 0) == 1) {
     return;
   }
 
@@ -578,7 +578,7 @@ function function_1a1709943670772a() {
 }
 
 function disableallarmorykiosks() {
-  if(function_946938d9fde4bdce("kiosk")) {
+  if(isfeaturedisabledsharedfunc("kiosk")) {
     return;
   }
 
@@ -635,19 +635,19 @@ function function_3058b3e95a1bf984(instance, player) {
   }
 
   if(istrue(player.iscarrying)) {
-    player function_ced51005e26102fa("MP/CANNOT_USE_GENERIC");
+    player showerrormessagesharedfunc("MP/CANNOT_USE_GENERIC");
     return false;
   }
 
   return true;
 }
 
-function armorykioskused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  if(!function_be79dba5f7b2a51b(instance.type)) {
+function armorykioskused(instance, part, state, player, bautouse, usestring) {
+  if(!iskiosksharedfunc(instance.type)) {
     return;
   }
 
-  if(istrue(var_a5b2c541413aa895) && !function_7e0281196d6407c8()) {
+  if(istrue(bautouse) && !function_7e0281196d6407c8()) {
     return;
   }
 
@@ -655,19 +655,19 @@ function armorykioskused(instance, part, state, player, var_a5b2c541413aa895, us
     player = self;
   }
 
-  if(istrue(var_a5b2c541413aa895) && !isDefined(player.armorykioskpurchaseallowed)) {
+  if(istrue(bautouse) && !isDefined(player.armorykioskpurchaseallowed)) {
     player.armorykioskpurchaseallowed = 0;
   }
 
   if(!function_3058b3e95a1bf984(instance, player)) {
-    if(istrue(var_a5b2c541413aa895)) {
+    if(istrue(bautouse)) {
       player.armorykioskpurchaseallowed = 0;
     }
 
     return;
   }
 
-  if(istrue(var_a5b2c541413aa895)) {
+  if(istrue(bautouse)) {
     if(!player.armorykioskpurchaseallowed) {
       function_28d837f720b03bfa(instance, player);
     }
@@ -736,14 +736,14 @@ function kiosksetupfiresaleforplayer(kiosk, player) {
   }
 
   if(!kiosk checkforactiveobjicon()) {
-    kiosk function_f4c2d922e3610d74("ui_mp_br_mapmenu_icon_poi_plunder_box_firesale", "active", kiosk.origin);
+    kiosk createquestobjiconsharedfunc("ui_mp_br_mapmenu_icon_poi_plunder_box_firesale", "active", kiosk.origin);
   }
 
-  kiosk function_46f7ad16e39b4e0d(player);
+  kiosk showquestobjicontoplayersharedfunc(player);
 }
 
 function function_d7f25b3c73157f5c() {
-  if(function_2f0d084017095d28(2)) {
+  if(ispubliceventoftypeactivesharedfunc(2)) {
     return true;
   }
 
@@ -771,7 +771,7 @@ function kioskfiresaledoneforplayer(kiosk, player) {
     return;
   }
 
-  kiosk function_601b78b411b7479(player);
+  kiosk hidequestobjiconfromplayersharedfunc(player);
   kiosk.firesaleforplayers = array_remove(kiosk.firesaleforplayers, player);
 
   if(!function_d7f25b3c73157f5c()) {
@@ -808,7 +808,7 @@ function _runpurchasemenu(kiosk) {
   player endon("death");
   player.br_kiosk = kiosk;
 
-  if(function_1a0bffd69502c210()) {
+  if(isbrpracticemodesharedfunc()) {
     player notify("kiosk_used");
   }
 
@@ -971,7 +971,7 @@ function function_8c8f1e3f153a6fa3() {}
 function _findgivearmoramountanddropleftovers(fromkiosk, var_2737cac9ee8f6098) {
   player = self;
   var_1cd29382d1867470 = player scripts\cp_mp\armor::function_600f6cf462e983f();
-  var_a81adeb0e1f89320 = player scripts\cp_mp\armor::function_47320a25b8ee003();
+  maxplates = player scripts\cp_mp\armor::function_47320a25b8ee003();
 
   if(getdvarint(@ "scr_br_alt_mode_gg", 0)) {
     bundlecount = 2;
@@ -979,15 +979,15 @@ function _findgivearmoramountanddropleftovers(fromkiosk, var_2737cac9ee8f6098) {
     bundlecount = 5;
   }
 
-  var_bf203ce62dd1c99c = int(max(min(bundlecount, var_a81adeb0e1f89320 - var_1cd29382d1867470), 0));
+  var_bf203ce62dd1c99c = int(max(min(bundlecount, maxplates - var_1cd29382d1867470), 0));
   dropamount = bundlecount - var_bf203ce62dd1c99c;
 
-  if(function_83e3b506365bafc5()) {
+  if(isbackpackinventoryenabledsharedfunc()) {
     lootid = scripts\cp_mp\utility\loot::function_fae5e1d3de32d3f7("brloot_armor_plate");
     fakepickup = spawnStruct();
     fakepickup.scriptablename = "brloot_armor_plate";
     fakepickup.count = dropamount;
-    leftover = player function_ef240aa7c1052d13(lootid, fakepickup, 1);
+    leftover = player additemtobackpacksharedfunc(lootid, fakepickup, 1);
 
     if(leftover > 0 && !istrue(var_2737cac9ee8f6098)) {
       overridedist = undefined;
@@ -997,7 +997,7 @@ function _findgivearmoramountanddropleftovers(fromkiosk, var_2737cac9ee8f6098) {
       }
 
       dropinfo = scripts\cp\pickups::getitemdroporiginandangles(0, player.origin, player.angles, player, undefined, overridedist);
-      function_9d6d4c76abc82cf("brloot_armor_plate", dropinfo, leftover, 1);
+      spawnpickupsharedfunc("brloot_armor_plate", dropinfo, leftover, 1);
     }
   } else if(dropamount > 0 && !istrue(var_2737cac9ee8f6098)) {
     yawoffsetoverride = undefined;
@@ -1006,8 +1006,8 @@ function _findgivearmoramountanddropleftovers(fromkiosk, var_2737cac9ee8f6098) {
       yawoffsetoverride = getkioskyawoffsetoverride();
     }
 
-    dropinfo = function_bb87cfae1e28e70b(0, player.origin, player.angles, player, yawoffsetoverride);
-    function_9d6d4c76abc82cf("brloot_armor_plate", dropinfo, dropamount, 1);
+    dropinfo = getitemdroporiginandanglessharedfunc(0, player.origin, player.angles, player, yawoffsetoverride);
+    spawnpickupsharedfunc("brloot_armor_plate", dropinfo, dropamount, 1);
   }
 
   return var_bf203ce62dd1c99c;
@@ -1032,19 +1032,19 @@ function _validateitempurchase(itemdata, var_6dc0e605ecd21eee, var_7c3865dee4abe
 
   if(itemdata.type == "killstreak") {
     if(!istrue(var_6dc0e605ecd21eee)) {
-      if(player function_77986db57958b676(itemdata.ref)) {
+      if(player haskillstreaksharedfunc(itemdata.ref)) {
         player _closepurchasemenuwithresponse(4);
         return 0;
       }
     }
   } else if(itemdata.type == "fieldupgrade" || itemdata.type == "super") {
-    if(player function_3f422a1c87bd2809()) {
+    if(player issuperinusesharedfunc()) {
       player _closepurchasemenuwithresponse(6);
       return 0;
     }
 
     if(!istrue(var_6dc0e605ecd21eee)) {
-      currentsuperref = player function_97fac14206681b1f();
+      currentsuperref = player getcurrentsuperrefsharedfunc();
 
       if(isDefined(currentsuperref) && itemdata.ref == currentsuperref) {
         player _closepurchasemenuwithresponse(5);
@@ -1052,7 +1052,7 @@ function _validateitempurchase(itemdata, var_6dc0e605ecd21eee, var_7c3865dee4abe
       }
     }
   } else if(itemdata.type == "perk") {
-    if(player function_87072b42853a9c58(itemdata.ref)) {
+    if(player hasperksharedfunc(itemdata.ref)) {
       player _closepurchasemenuwithresponse(5);
       return 0;
     }
@@ -1070,7 +1070,7 @@ function _validateitempurchase(itemdata, var_6dc0e605ecd21eee, var_7c3865dee4abe
             var_6a8b46e184e181cc.count = 1;
           }
 
-          canpickupresult = function_76ae39f27ed53321(var_6a8b46e184e181cc);
+          canpickupresult = cantakepickupsharedfunc(var_6a8b46e184e181cc);
 
           if(canpickupresult != 1) {
             assert(canpickupresult == 4);
@@ -1096,7 +1096,7 @@ function _validateitempurchase(itemdata, var_6dc0e605ecd21eee, var_7c3865dee4abe
 
         var_6a8b46e184e181cc = spawnStruct();
         var_6a8b46e184e181cc.scriptablename = "brloot_equip_gasmask";
-        canpickupresult = function_76ae39f27ed53321(var_6a8b46e184e181cc);
+        canpickupresult = cantakepickupsharedfunc(var_6a8b46e184e181cc);
         assert(canpickupresult == 1);
         break;
       case #"hash_dcf82d1f65a6b16e":
@@ -1106,7 +1106,7 @@ function _validateitempurchase(itemdata, var_6dc0e605ecd21eee, var_7c3865dee4abe
 
         var_6a8b46e184e181cc = spawnStruct();
         var_6a8b46e184e181cc.scriptablename = "brloot_equip_gasmask";
-        canpickupresult = function_76ae39f27ed53321(var_6a8b46e184e181cc);
+        canpickupresult = cantakepickupsharedfunc(var_6a8b46e184e181cc);
         assert(canpickupresult == 1);
         break;
       case #"hash_e67a71b27007444":
@@ -1131,7 +1131,7 @@ function _validateitempurchase(itemdata, var_6dc0e605ecd21eee, var_7c3865dee4abe
 
         break;
       case #"hash_6613e243265c4795":
-        if(function_f41fe8dc1d31d5bf()) {
+        if(respawntokendisabledsharedfunc()) {
           player _closepurchasemenuwithresponse(9);
           return 0;
         }
@@ -1152,7 +1152,7 @@ function _validateitempurchase(itemdata, var_6dc0e605ecd21eee, var_7c3865dee4abe
           return 1;
         }
 
-        if(player function_c8dfc3feceeb2896()) {
+        if(player hasselfrevivetokensharedfunc()) {
           player _closepurchasemenuwithresponse(10);
           return 0;
         }
@@ -1166,7 +1166,7 @@ function _validateitempurchase(itemdata, var_6dc0e605ecd21eee, var_7c3865dee4abe
         var_6a8b46e184e181cc = spawnStruct();
         var_6a8b46e184e181cc.scriptablename = "brloot_offhand_advancedsupplydrop";
         var_6a8b46e184e181cc.count = 1;
-        canpickupresult = function_76ae39f27ed53321(var_6a8b46e184e181cc);
+        canpickupresult = cantakepickupsharedfunc(var_6a8b46e184e181cc);
 
         if(canpickupresult != 1) {
           assert(canpickupresult == 4);
@@ -1314,7 +1314,7 @@ function _handlekillstreakpurchase(itemdata, dropcurrent, droppurchased, var_db9
   activateimmediately = getdvarint(@ "hash_e516a6aa0d85b36d", 0);
 
   if(!activateimmediately) {
-    player function_da31e13c27a6acf4(itemdata.ref, dropcurrent, 1, droppurchased, var_db943473454f6ea6);
+    player forcegivekillstreaksharedfunc(itemdata.ref, dropcurrent, 1, droppurchased, var_db943473454f6ea6);
     function_a573b91325f9ea32(player, itemdata, "killstreak", "br_killstreak_purchased");
     return;
   }
@@ -1330,9 +1330,9 @@ function _handlekillstreakpurchase(itemdata, dropcurrent, droppurchased, var_db9
     player scripts\cp_mp\utility\player_utility::_freezecontrols(0, 1, "kiosk");
 
     if(isDefined(returninfo) && returninfo.string == "confirm_location") {
-      locationtrace = function_5c8ad6e89a9f7b73(returninfo.location);
+      locationtrace = traceselectedmaplocationsharedfunc(returninfo.location);
       player.kstargetlocation = locationtrace["position"];
-      usesuccess = player function_25c4c34d6c3dd08a(itemdata.ref);
+      usesuccess = player forceusekillstreaksharedfunc(itemdata.ref);
 
       if(istrue(usesuccess)) {
         function_a573b91325f9ea32(player, itemdata, "killstreak", "br_killstreak_purchased_and_activated");
@@ -1344,8 +1344,8 @@ function _handlekillstreakpurchase(itemdata, dropcurrent, droppurchased, var_db9
     return;
   }
 
-  player function_da31e13c27a6acf4(itemdata.ref, dropcurrent, 1, var_db943473454f6ea6);
-  usesuccess = player function_25c4c34d6c3dd08a(itemdata.ref);
+  player forcegivekillstreaksharedfunc(itemdata.ref, dropcurrent, 1, var_db943473454f6ea6);
+  usesuccess = player forceusekillstreaksharedfunc(itemdata.ref);
 
   if(istrue(usesuccess)) {
     function_a573b91325f9ea32(player, itemdata, "killstreak", "br_killstreak_purchased_and_activated");
@@ -1360,20 +1360,20 @@ function function_90b0e9eb26e38443(itemdata, var_7dddac09987d559e, var_452130d9d
   var_bada25504e8844d7.count = 1;
   var_bada25504e8844d7.maxcount = level.br_pickups.maxcounts[scriptablename];
   var_bada25504e8844d7.stackable = level.br_pickups.stackable[scriptablename];
-  [ammo, ammoleft, var_35ead47ed0d7507e] = function_cfb85293f9660751(level.br_lootiteminfo[scriptablename].fullweaponobj);
+  [ammo, ammoleft, var_35ead47ed0d7507e] = getdefaultweaponammosharedfunc(level.br_lootiteminfo[scriptablename].fullweaponobj);
   var_bada25504e8844d7.count = ammo * 3;
   var_bada25504e8844d7.countlefthand = ammoleft;
   var_bada25504e8844d7.countalt = var_35ead47ed0d7507e;
-  function_6e3db23952f2e451(var_bada25504e8844d7);
+  takeweaponpickupsharedfunc(var_bada25504e8844d7);
   function_a573b91325f9ea32(self, itemdata, "weapon");
 }
 
 function _handlefieldupgradepurchase(itemdata, var_7dddac09987d559e, var_452130d9d126e506, var_db943473454f6ea6) {
-  function_eb96721d13c5f3df(itemdata.ref, var_7dddac09987d559e, 1, var_452130d9d126e506, var_db943473454f6ea6);
+  forcegivesupersharedfunc(itemdata.ref, var_7dddac09987d559e, 1, var_452130d9d126e506, var_db943473454f6ea6);
   function_a573b91325f9ea32(self, itemdata, "fieldUpgrade", "br_field_upgrade_purchased");
 
   if(level.allowsupers && !istrue(var_452130d9d126e506)) {
-    function_74efaa97ebfec5df(function_19dd797e5d48d987(), undefined, undefined, undefined);
+    givesuperpointssharedfunc(getsuperpointsneededsharedfunc(), undefined, undefined, undefined);
   }
 }
 
@@ -1389,8 +1389,8 @@ function _handlespecialpurchase(itemdata, var_7dddac09987d559e, var_452130d9d126
       purchasesuccess = function_e2db59d7677bfceb(player, "brloot_armor_plate", 1, undefined, 1, var_452130d9d126e506);
 
       if(!purchasesuccess) {
-        dropinfo = function_bb87cfae1e28e70b(0, kiosk.origin, kiosk.angles, player);
-        pickupent = function_9d6d4c76abc82cf("brloot_armor_plate", dropinfo, 1, 1, undefined, 0);
+        dropinfo = getitemdroporiginandanglessharedfunc(0, kiosk.origin, kiosk.angles, player);
+        pickupent = spawnpickupsharedfunc("brloot_armor_plate", dropinfo, 1, 1, undefined, 0);
         purchasesuccess = 1;
       }
 
@@ -1410,16 +1410,16 @@ function _handlespecialpurchase(itemdata, var_7dddac09987d559e, var_452130d9d126
       assert(purchasesuccess);
       break;
     case #"hash_4808e1f340e11163":
-      var_1680a35fe50dc05e = "brloot_equip_gasmask";
-      purchasesuccess = function_e2db59d7677bfceb(player, var_1680a35fe50dc05e, 1, undefined, 1, var_452130d9d126e506);
+      gasmaskscriptablename = "brloot_equip_gasmask";
+      purchasesuccess = function_e2db59d7677bfceb(player, gasmaskscriptablename, 1, undefined, 1, var_452130d9d126e506);
       assert(purchasesuccess);
-      itemdata.lootid = scripts\cp_mp\utility\loot::function_fae5e1d3de32d3f7(var_1680a35fe50dc05e);
+      itemdata.lootid = scripts\cp_mp\utility\loot::function_fae5e1d3de32d3f7(gasmaskscriptablename);
       break;
     case #"hash_dcf82d1f65a6b16e":
-      var_1680a35fe50dc05e = "brloot_equip_gasmask";
-      purchasesuccess = function_e2db59d7677bfceb(player, var_1680a35fe50dc05e, 1, undefined, 1, var_452130d9d126e506);
+      gasmaskscriptablename = "brloot_equip_gasmask";
+      purchasesuccess = function_e2db59d7677bfceb(player, gasmaskscriptablename, 1, undefined, 1, var_452130d9d126e506);
       assert(purchasesuccess);
-      itemdata.lootid = scripts\cp_mp\utility\loot::function_fae5e1d3de32d3f7(var_1680a35fe50dc05e);
+      itemdata.lootid = scripts\cp_mp\utility\loot::function_fae5e1d3de32d3f7(gasmaskscriptablename);
       break;
     case #"hash_e67a71b27007444":
       player function_836c7d119e02d1d5();
@@ -1427,7 +1427,7 @@ function _handlespecialpurchase(itemdata, var_7dddac09987d559e, var_452130d9d126
       player _maxoutequipmentammo(player.equipment["secondary"]);
       break;
     case #"hash_6613e243265c4795":
-      player function_c00f90a28c41febe();
+      player addrespawntokensharedfunc();
       var_b517df938986556f = 0;
       break;
     case #"hash_1c3e21ffbc842487":
@@ -1437,7 +1437,7 @@ function _handlespecialpurchase(itemdata, var_7dddac09987d559e, var_452130d9d126
         purchasesuccess = function_e2db59d7677bfceb(player, var_5db3e79ef6900447, 1, undefined, 1, var_452130d9d126e506);
         assert(purchasesuccess);
       } else {
-        player function_2d5a30d6fe54567b();
+        player addselfrevivetokensharedfunc();
       }
 
       itemdata.lootid = scripts\cp_mp\utility\loot::function_fae5e1d3de32d3f7(var_5db3e79ef6900447);
@@ -1450,7 +1450,7 @@ function _handlespecialpurchase(itemdata, var_7dddac09987d559e, var_452130d9d126
         purchasesuccess = function_e2db59d7677bfceb(player, var_5db3e79ef6900447, 1, undefined, 1, var_452130d9d126e506);
         assert(purchasesuccess);
       } else {
-        player function_2d5a30d6fe54567b();
+        player addselfrevivetokensharedfunc();
       }
 
       itemdata.lootid = scripts\cp_mp\utility\loot::function_fae5e1d3de32d3f7(var_5db3e79ef6900447);
@@ -1494,9 +1494,9 @@ function _handlespecialpurchase(itemdata, var_7dddac09987d559e, var_452130d9d126
       purchasesuccess = player _handlevehiclepurchase(itemdata, var_7dddac09987d559e);
 
       if(purchasesuccess) {
-        player thread function_234f5394668ed388("br_vehicle_purchased");
+        player thread showsplashsharedfunc("br_vehicle_purchased");
       } else {
-        player function_ced51005e26102fa("MP/VEHICLE_PURCHASE_FAILED");
+        player showerrormessagesharedfunc("MP/VEHICLE_PURCHASE_FAILED");
       }
 
       break;
@@ -1522,14 +1522,14 @@ function _handlespecialpurchase(itemdata, var_7dddac09987d559e, var_452130d9d126
       purchasesuccess = isDefined(level.var_3ce1055115edcbbb) && [[level.var_3ce1055115edcbbb]](player, itemdata.ref);
       break;
     case #"hash_bd3c5bede4f8165f":
-      purchasesuccess = isDefined(level.var_efbc646224fda4fa);
-      player thread[[level.var_efbc646224fda4fa]]();
+      purchasesuccess = isDefined(level.skydiveredeploy);
+      player thread[[level.skydiveredeploy]]();
       break;
     case #"hash_c31089e2e50b5079":
     case #"hash_dad2e39dcf5e31c":
       purchasesuccess = 1;
-      player thread function_f5e58b5375381386("sentry_gun");
-      player function_f87529d7af4978b("sentry_gun", "other", undefined, undefined, undefined, 0);
+      player thread showkillstreaksplashsharedfunc("sentry_gun");
+      player awardkillstreaksharedfunc("sentry_gun", "other", undefined, undefined, undefined, 0);
       break;
     case #"hash_a7a7446a3194cb49":
       purchasesuccess = scripts\cp_mp\armor::function_92fec40b905c5112();
@@ -1682,7 +1682,7 @@ function _handlevehiclerepair(itemdata, var_7dddac09987d559e) {
     var_6d294b74de0d301e = getdvarfloat(@ "hash_3c1b0adf9da014a0", 0.25);
     var_e4f8ad64a6e67d4b = int(vehicle.maxhealth * var_6d294b74de0d301e);
     vehicle scripts\cp_mp\vehicles\vehicle_damage::function_653b96ce8310763e(var_e4f8ad64a6e67d4b);
-    players = function_9563f2d4e690856d(self.team, "players");
+    players = getteamdatasharedfunc(self.team, "players");
 
     foreach(player in players) {
       if(getdvarint(@ "hash_38d15e2d7ddbf066", 1) == 1) {
@@ -1729,11 +1729,11 @@ function function_388aa30e37abbb0(upgradetype) {
 
 function function_6e4f7e117d4651c3() {
   player = self;
-  squad = function_9563f2d4e690856d(player.team, "players");
+  squad = getteamdatasharedfunc(player.team, "players");
 
   foreach(squadmate in squad) {
     if(isDefined(squadmate)) {
-      superref = squadmate function_97fac14206681b1f();
+      superref = squadmate getcurrentsuperrefsharedfunc();
 
       if(isDefined(superref) && superref == "super_vehicle_drop") {
         if(squadmate getammocount(squadmate.super.staticdata.weapon) > 0) {
@@ -1759,18 +1759,18 @@ function function_d48c5142f8271c18() {
 }
 
 function function_365e64606d4f3da8(itemdata, var_7dddac09987d559e, var_452130d9d126e506, var_db943473454f6ea6) {
-  function_f87529d7af4978b(itemdata.ref, "other");
-  thread function_234f5394668ed388("br_killstreak_purchased");
+  awardkillstreaksharedfunc(itemdata.ref, "other");
+  thread showsplashsharedfunc("br_killstreak_purchased");
   armorykioskused(0, undefined, undefined, self);
 }
 
 function function_6c02b611541421d2(itemdata, var_7dddac09987d559e, var_452130d9d126e506, var_db943473454f6ea6) {
   function_690e9e142ebc1c69(itemdata.ref);
-  function_4f2bd7da634cba24(itemdata.ref, 1);
-  thread function_234f5394668ed388("br_field_upgrade_purchased");
+  givesupersharedfunc(itemdata.ref, 1);
+  thread showsplashsharedfunc("br_field_upgrade_purchased");
 
   if(level.allowsupers && !istrue(var_452130d9d126e506)) {
-    function_74efaa97ebfec5df(function_19dd797e5d48d987(), undefined, undefined, undefined);
+    givesuperpointssharedfunc(getsuperpointsneededsharedfunc(), undefined, undefined, undefined);
   }
 
   armorykioskused(0, undefined, undefined, self);
@@ -1778,11 +1778,11 @@ function function_6c02b611541421d2(itemdata, var_7dddac09987d559e, var_452130d9d
 
 function function_f1d968fd69ab759a(itemdata, var_7dddac09987d559e, var_452130d9d126e506, var_db943473454f6ea6) {
   function_690e9e142ebc1c69(itemdata.ref);
-  function_4f2bd7da634cba24(itemdata.ref, 1);
-  thread function_234f5394668ed388("br_field_upgrade_purchased");
+  givesupersharedfunc(itemdata.ref, 1);
+  thread showsplashsharedfunc("br_field_upgrade_purchased");
 
   if(level.allowsupers && !istrue(var_452130d9d126e506)) {
-    function_74efaa97ebfec5df(function_19dd797e5d48d987(), undefined, undefined, undefined);
+    givesuperpointssharedfunc(getsuperpointsneededsharedfunc(), undefined, undefined, undefined);
   }
 
   armorykioskused(0, undefined, undefined, self);
@@ -1790,7 +1790,7 @@ function function_f1d968fd69ab759a(itemdata, var_7dddac09987d559e, var_452130d9d
 
 function function_157316f7321dd26b(itemdata, dropcurrent, droppurchased, var_db943473454f6ea6) {
   self endon("disconnect");
-  function_5942f6cdbb6cb63b(itemdata.ref);
+  giveperksharedfunc(itemdata.ref);
   function_a573b91325f9ea32(self, itemdata, "perk", itemdata.ref);
   armorykioskused(0, undefined, undefined, self);
 }
@@ -1826,17 +1826,17 @@ function onarmorykioskpurchase(channel, purchaseindex) {
     return;
   }
 
-  var_6c457c5f341beb23 = "channel: " + channel;
+  menueventparam = "channel: " + channel;
 
   if(isDefined(purchaseindex)) {
-    var_6c457c5f341beb23 = var_6c457c5f341beb23 + ", index: " + purchaseindex;
+    menueventparam = menueventparam + ", index: " + purchaseindex;
   }
 
-  function_e667d74ecc894ceb(player, "menu_purchase", var_6c457c5f341beb23);
+  function_e667d74ecc894ceb(player, "menu_purchase", menueventparam);
   var_7dddac09987d559e = getdvarint(@ "hash_d6a60f25ef560a17", 1);
   var_452130d9d126e506 = getdvarint(@ "hash_8e3b1991482f0d41", 0);
 
-  if(player function_c4d8558fc1592cd6()) {
+  if(player isjuggernautsharedfunc()) {
     var_452130d9d126e506 = 1;
   }
 
@@ -1852,15 +1852,15 @@ function onarmorykioskpurchase(channel, purchaseindex) {
     canpurchase = player _validateitempurchase(itemdata, var_7dddac09987d559e, var_452130d9d126e506);
 
     if(canpurchase) {
-      if(isDefined(itemdata.var_144769f518d71226) && itemdata.var_144769f518d71226 > 0) {
-        itemdata.var_144769f518d71226--;
-        setomnvar("ui_buystation_limited_item_amount_temp", itemdata.var_144769f518d71226);
+      if(isDefined(itemdata.itemamount) && itemdata.itemamount > 0) {
+        itemdata.itemamount--;
+        setomnvar("ui_buystation_limited_item_amount_temp", itemdata.itemamount);
       }
 
       var_db943473454f6ea6 = undefined;
 
-      if(function_83e3b506365bafc5()) {
-        var_db943473454f6ea6 = function_507b98884b41cc8e();
+      if(isbackpackinventoryenabledsharedfunc()) {
+        var_db943473454f6ea6 = getavailabledmzbackpackindexsharedfunc();
       }
 
       if(scripts\cp_mp\utility\game_utility::function_9cdaadfddeda4d7a() && itemdata.type == "killstreak") {
@@ -1892,7 +1892,7 @@ function onarmorykioskpurchase(channel, purchaseindex) {
     loadoutindex = purchaseindex;
     loadoutitemdata = function_601181692f53e4ed("loadout_custom");
 
-    if(function_496ba4f72ba5e5d1(loadoutindex)) {
+    if(isloadoutindexdefaultsharedfunc(loadoutindex)) {
       loadoutitemdata = function_601181692f53e4ed("loadout_default");
       defaultloadout = 1;
     }
@@ -1904,11 +1904,11 @@ function onarmorykioskpurchase(channel, purchaseindex) {
       return;
     }
 
-    newclasschoice = function_6a38b44a9a4e8761(loadoutindex);
+    newclasschoice = getclasschoicesharedfunc(loadoutindex);
     function_90ca6872b70e4c2e(self, "purchasing_new_loadout");
     player.pers["class"] = newclasschoice;
     player.class = newclasschoice;
-    newclassdata = player function_a4968a44b192f2ed(newclasschoice);
+    newclassdata = player preloadandqueueclasssharedfunc(newclasschoice);
     function_be7af2b74939c9b5(player, var_7dddac09987d559e);
     function_a573b91325f9ea32(player, loadoutitemdata, "loadout", "br_loadout_purchased");
 
@@ -1923,7 +1923,7 @@ function onarmorykioskpurchase(channel, purchaseindex) {
 
   if(channel == "br_team_revive") {
     var_bf5d82befbb59efe = purchaseindex - 1;
-    var_eb276d34779513e3 = !function_946938d9fde4bdce("useTokenToReviveTeammate");
+    var_eb276d34779513e3 = !isfeaturedisabledsharedfunc("useTokenToReviveTeammate");
     usetoken = istrue(player.hasrespawntoken) && var_eb276d34779513e3;
     var_69fac551dcf6c2fb = function_601181692f53e4ed("teamrevive");
     var_a120356b021f8e8 = _getactualcost(player, var_69fac551dcf6c2fb);
@@ -1934,7 +1934,7 @@ function onarmorykioskpurchase(channel, purchaseindex) {
     }
 
     var_c7869d69dbcf7fd3 = undefined;
-    squad = function_9563f2d4e690856d(player.team, "players");
+    squad = getteamdatasharedfunc(player.team, "players");
 
     foreach(squadmate in squad) {
       if(!isDefined(squadmate) || squadmate == player) {
@@ -1952,8 +1952,8 @@ function onarmorykioskpurchase(channel, purchaseindex) {
       return;
     }
 
-    if(!var_c7869d69dbcf7fd3 function_b71e2f7afd69d580() && !getdvarint(@ "hash_4d250e4873e1753e", 0)) {
-      if(function_f6c807a601f8a34d(var_c7869d69dbcf7fd3)) {
+    if(!var_c7869d69dbcf7fd3 iseligibleforteamrevivesharedfunc() && !getdvarint(@ "hash_4d250e4873e1753e", 0)) {
+      if(isrespawningfromtokensharedfunc(var_c7869d69dbcf7fd3)) {
         player _closepurchasemenuwithresponse(14);
         return;
       }
@@ -1977,7 +1977,7 @@ function onarmorykioskpurchase(channel, purchaseindex) {
       if(istrue(player.hasrespawntoken)) {
         var_a4c6cda2e74187f2 = 1;
       } else {
-        player function_c00f90a28c41febe(1);
+        player addrespawntokensharedfunc(1);
       }
 
       function_98bd9179435d1557(player, var_a120356b021f8e8, "teamrevive_money", "teamrevive");
@@ -1991,15 +1991,15 @@ function onarmorykioskpurchase(channel, purchaseindex) {
     if(function_3fcb060110170ac9("kioskRevivePlayer")) {
       var_c7869d69dbcf7fd3 thread function_25fb9a3b7ee98d69("kioskRevivePlayer", player, usetoken);
     } else {
-      var_c7869d69dbcf7fd3 thread function_8bd31d20349aa464(player, usetoken);
+      var_c7869d69dbcf7fd3 thread playergulagautowinsharedfunc(player, usetoken);
     }
 
     if(var_a4c6cda2e74187f2) {
-      player function_c00f90a28c41febe(1);
+      player addrespawntokensharedfunc(1);
     }
 
     level thread function_188f8c265a7ef6ea(kiosk.origin, "revive");
-    player thread function_234f5394668ed388("br_squadmate_revived");
+    player thread showsplashsharedfunc("br_squadmate_revived");
     return;
   }
 
@@ -2016,12 +2016,12 @@ function _makekioskpurchase(itemdata) {
     kioskfiresaledoneforplayer(player.br_kiosk, player);
   }
 
-  if(!function_a8a68668a0b2c9c4()) {
-    player thread function_e800498086e36c29("br_kioskBuy", undefined, function_3d48da36c7fd0fdb(itemdata.cost));
+  if(!isanytutorialorbotpracticematchsharedfunc()) {
+    player thread doscoreeventsharedfunc("br_kioskBuy", undefined, calculatepurchasexpsharedfunc(itemdata.cost));
   }
 
   if(cost > 0) {
-    player function_78a18c3b6dbfb0a5(cost);
+    player playerplunderkioskpurchasesharedfunc(cost);
   }
 
   if(!isDefined(level.br_plunder)) {
@@ -2060,7 +2060,7 @@ function function_a573b91325f9ea32(player, itemdata, itemtyperef, splashref, qua
   }
 
   if(isDefined(splashref)) {
-    player thread function_234f5394668ed388(splashref);
+    player thread showsplashsharedfunc(splashref);
   }
 }
 
@@ -2085,11 +2085,11 @@ function playerhandlecirclepickitem() {
   self endlocationselection();
 
   if(isDefined(returninfo) && returninfo.string == "confirm_location") {
-    if(function_9cb5f84f96e33914(returninfo.location, 1)) {
-      locationtrace = function_5c8ad6e89a9f7b73(returninfo.location);
+    if(isvalidpointinboundssharedfunc(returninfo.location, 1)) {
+      locationtrace = traceselectedmaplocationsharedfunc(returninfo.location);
       groundorg = locationtrace["position"];
 
-      if(function_9cb5f84f96e33914(groundorg, 1)) {
+      if(isvalidpointinboundssharedfunc(groundorg, 1)) {
         thread restartcircleelimination(groundorg);
         success = 1;
       } else {
@@ -2110,14 +2110,14 @@ function restartcircleelimination(origin) {
   var_5e344cd3618ee701 = 4;
   var_55a74749a759fc2d = -1;
   var_4d700b38444fab26 = 15;
-  var_8f6402ad8e91da6a = getdvarint(@ "hash_5ef97113d77c0835", var_7c409a7d87b3c6b6);
+  startcircledelay = getdvarint(@ "hash_5ef97113d77c0835", var_7c409a7d87b3c6b6);
   startcircleindex = getdvarint(@ "hash_341f671cd388b556", var_5e344cd3618ee701);
-  var_26189638809f7b88 = getdvarint(@ "hash_b925987adb7fbd3e", var_55a74749a759fc2d);
+  startcircleclosetime = getdvarint(@ "hash_b925987adb7fbd3e", var_55a74749a759fc2d);
   var_937dd942e0664f1a = getdvarint(@ "hash_3c88a1d746d97236", var_4d700b38444fab26);
 
   if(level.script == "<dev string:x22>") {
-    if(var_8f6402ad8e91da6a == var_7c409a7d87b3c6b6) {
-      var_8f6402ad8e91da6a = 25;
+    if(startcircledelay == var_7c409a7d87b3c6b6) {
+      startcircledelay = 25;
     }
 
     if(startcircleindex == var_5e344cd3618ee701) {
@@ -2126,42 +2126,42 @@ function restartcircleelimination(origin) {
   }
 
   if(function_3fcb060110170ac9("restartCircleElimination")) {
-    thread function_25fb9a3b7ee98d69("restartCircleElimination", origin, var_8f6402ad8e91da6a);
+    thread function_25fb9a3b7ee98d69("restartCircleElimination", origin, startcircledelay);
   }
 
   foreach(player in level.players) {
-    player function_234f5394668ed388("br_late_circle_soon");
+    player showsplashsharedfunc("br_late_circle_soon");
   }
 
-  if(function_946938d9fde4bdce("circle")) {
-    function_fa5baabe8489e675(origin, var_8f6402ad8e91da6a, startcircleindex, var_26189638809f7b88);
+  if(isfeaturedisabledsharedfunc("circle")) {
+    initcirclepoststarttocircleindexsharedfunc(origin, startcircledelay, startcircleindex, startcircleclosetime);
     level.brgametype.disabledfeatures["circle"] = undefined;
   }
 
-  if(function_9d18a22123e54d05("allowLateJoiners")) {
+  if(isfeatureenabledsharedfunc("allowLateJoiners")) {
     level.allowlatecomers = 0;
     setnojiptime(1, 1);
     setnojipscore(1, 1);
   }
 
-  var_efcf5eb682ef5688 = max(0, var_8f6402ad8e91da6a - var_937dd942e0664f1a);
+  var_efcf5eb682ef5688 = max(0, startcircledelay - var_937dd942e0664f1a);
   wait var_efcf5eb682ef5688;
 
   foreach(player in level.players) {
-    player function_234f5394668ed388("br_late_circle_now");
+    player showsplashsharedfunc("br_late_circle_now");
   }
 
-  var_ad75dbc17e0faf18 = var_8f6402ad8e91da6a - var_efcf5eb682ef5688;
+  var_ad75dbc17e0faf18 = startcircledelay - var_efcf5eb682ef5688;
   wait var_ad75dbc17e0faf18;
 
-  if(function_946938d9fde4bdce("teamSpectate")) {
+  if(isfeaturedisabledsharedfunc("teamSpectate")) {
     level thread function_baf6855827fe902();
     level.brgametype.disabledfeatures["teamSpectate"] = undefined;
   }
 
-  if(function_946938d9fde4bdce("oneLife")) {
+  if(isfeaturedisabledsharedfunc("oneLife")) {
     level.disablespawning = 1;
-    setdynamicdvar(hashcat(@ "scr_", function_67386b14d0c7d1ee(), "_numLives"), 1);
+    setdynamicdvar(hashcat(@ "scr_", getgametypesharedfunc(), "_numLives"), 1);
   }
 }
 
@@ -2177,7 +2177,7 @@ function playerhandleredeploy() {
   self endlocationselection();
 
   if(isDefined(returninfo) && returninfo.string == "confirm_location") {
-    locationtrace = function_5c8ad6e89a9f7b73(returninfo.location);
+    locationtrace = traceselectedmaplocationsharedfunc(returninfo.location);
     groundorg = locationtrace["position"];
     _closepurchasemenuwithresponse(18);
   }
@@ -2208,10 +2208,10 @@ function playerredeploy(groundorigin, overrideheight, overrideyaw) {
   spawnpoint.origin = groundorigin + (0, 0, height);
   spawnpoint.angles = (0, yaw, 0);
   spawnpoint.height = height;
-  streamorigin = player function_20071a4b90f92b46(spawnpoint);
+  streamorigin = player playerprestreamrespawnoriginsharedfunc(spawnpoint);
   player.forcespawnorigin = streamorigin;
   var_b59f471c2c064e56 = 1;
-  player function_a39e8a33d7378f08();
+  player gulagfadetoblacksharedfunc();
   wait var_b59f471c2c064e56;
   spawnorigin = spawnpoint.origin;
   spawnangles = spawnpoint.angles;
@@ -2221,8 +2221,8 @@ function playerredeploy(groundorigin, overrideheight, overrideyaw) {
     startorigin = streamorigin;
   }
 
-  player function_92e04b29006f91c();
-  player function_2cea92d21876a90a(startorigin, spawnangles);
+  player gulagstreamexitsharedfunc();
+  player playerteleportgulagsharedfunc(startorigin, spawnangles);
   linker = spawn("script_model", startorigin);
   linker setModel("tag_origin");
   linker.angles = spawnangles;
@@ -2230,10 +2230,10 @@ function playerredeploy(groundorigin, overrideheight, overrideyaw) {
   linker showtoplayer(player);
   player playerlinktoabsolute(linker, "tag_origin");
   player function_a593971d75d82113();
-  player thread function_1f5865aab1fdafd(linker);
+  player thread playercleanupentondisconnectsharedfunc(linker);
   waitframe();
-  player function_b4e05f84b56c7bbf();
-  player function_ba38e09a56256701();
+  player playerwaittillstreamhintcompletesharedfunc();
+  player playerclearstreamhintoriginsharedfunc();
   linker playsoundtoplayer("br_ac130_flyby", player);
   wait 1.5;
   player unlink();
@@ -2250,9 +2250,9 @@ function playerredeploy(groundorigin, overrideheight, overrideyaw) {
   player thread scripts\cp_mp\parachute::startfreefall(falltime, 0, undefined, undefined, 1);
   player setclientomnvar("ui_br_transition_type", 0);
   player setclientomnvar("ui_show_spectateHud", -1);
-  player function_4ec23357b146259c();
+  player resetplayermovespeedscalesharedfunc();
   wait 0.5;
-  player function_b17054c9879ea13b();
+  player gulagfadefromblacksharedfunc();
   waitframe();
   linker delete();
 }

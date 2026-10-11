@@ -5,7 +5,7 @@
 
 #using scripts\cp_mp\utility\game_utility;
 #using scripts\engine\utility;
-#namespace namespace_c45ac99c4997e722;
+#namespace telemetry_utils;
 
 function function_1c355f42faf7f4bb() {
   deathmodifiers = [];
@@ -178,7 +178,7 @@ function function_45d01d27e99f49d7() {
 
   round_num = -1;
 
-  if(utility::function_f3bb4f4911a1beb2("game", "isRoundBased")) {
+  if(utility::callsharedfunc("game", "isRoundBased")) {
     round_num = game["roundsPlayed"];
   }
 

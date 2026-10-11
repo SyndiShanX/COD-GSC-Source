@@ -14,7 +14,7 @@ function setupcqbpointsofinterest() {
   level.cqbpointsofinterest = [];
   level.fnfindcqbpointsofinterest = &findcqbpointsofinterest;
 
-  level.var_59df2d95af603e88 = &cqbdebug;
+  level.fncqbdebug = &cqbdebug;
 
   thread gatherdynamiccqbstructs();
 }
@@ -65,7 +65,7 @@ function findcqbpointsofinterest() {
       continue;
     }
 
-    var_c747600bddc1c484 = [];
+    guystoremove = [];
     waited = 0;
 
     foreach(guy in ai) {
@@ -76,10 +76,10 @@ function findcqbpointsofinterest() {
         continue;
       }
 
-      var_c747600bddc1c484[var_c747600bddc1c484.size] = guy;
+      guystoremove[guystoremove.size] = guy;
     }
 
-    foreach(guy in var_c747600bddc1c484) {
+    foreach(guy in guystoremove) {
       level.poi_activeai = array_remove(level.poi_activeai, guy);
     }
 
@@ -194,17 +194,17 @@ function cqbdebug() {
   self notify("<dev string:x1c>");
   self endon("<dev string:x1c>");
   self endon("<dev string:x2d>");
-  level thread function_2cbce60ec0b41d2f();
+  level thread cqbdebugglobal();
 }
 
-function function_2cbce60ec0b41d2f() {
+function cqbdebugglobal() {
   setdvarifuninitialized(@ "hash_e37c013185c9347c", "<dev string:x36>");
 
-  if(isDefined(level.var_2cbce60ec0b41d2f)) {
+  if(isDefined(level.cqbdebugglobal)) {
     return;
   }
 
-  level.var_2cbce60ec0b41d2f = 1;
+  level.cqbdebugglobal = 1;
 
   while(true) {
     if(getDvar(@ "hash_e37c013185c9347c") != "<dev string:x3b>") {

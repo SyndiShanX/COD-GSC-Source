@@ -130,7 +130,7 @@ function display_starts() {
 
   start_list_settext(elems, strings, selected);
   old_selected = selected;
-  var_1a6f1e60b90fbe7c = 0;
+  last_presstime = 0;
 
   for(;;) {
     if(old_selected != selected) {
@@ -138,7 +138,7 @@ function display_starts() {
       old_selected = selected;
     }
 
-    if(gettime() - var_1a6f1e60b90fbe7c > 150) {
+    if(gettime() - last_presstime > 150) {
       up_pressed = 0;
       down_pressed = 0;
     }
@@ -146,7 +146,7 @@ function display_starts() {
     if(!up_pressed) {
       if(level.player buttonPressed("UPARROW") || level.player buttonPressed("DPAD_UP") || level.player buttonPressed("APAD_UP")) {
         up_pressed = 1;
-        var_1a6f1e60b90fbe7c = gettime();
+        last_presstime = gettime();
         selected--;
       }
     } else if(!level.player buttonPressed("UPARROW") && !level.player buttonPressed("DPAD_UP") && !level.player buttonPressed("APAD_UP")) {
@@ -156,7 +156,7 @@ function display_starts() {
     if(!down_pressed) {
       if(level.player buttonPressed("DOWNARROW") || level.player buttonPressed("DPAD_DOWN") || level.player buttonPressed("APAD_DOWN")) {
         down_pressed = 1;
-        var_1a6f1e60b90fbe7c = gettime();
+        last_presstime = gettime();
         selected++;
       }
     } else if(!level.player buttonPressed("DOWNARROW") && !level.player buttonPressed("DPAD_DOWN") && !level.player buttonPressed("APAD_DOWN")) {
@@ -357,7 +357,7 @@ function handle_starts() {
   }
 
   waittillframeend();
-  var_8751813f2dae82ee = [];
+  previously_run_logic_functions = [];
 
   if(!is_default_start() && level.start_point != "no_game") {
     time = gettime();
@@ -390,7 +390,7 @@ function handle_starts() {
       continue;
     }
 
-    if(already_ran_function(start_array["logic_func"], var_8751813f2dae82ee)) {
+    if(already_ran_function(start_array["logic_func"], previously_run_logic_functions)) {
       continue;
     }
 
@@ -404,12 +404,12 @@ function handle_starts() {
       return;
     }
 
-    var_8751813f2dae82ee[var_8751813f2dae82ee.size] = start_array["logic_func"];
+    previously_run_logic_functions[previously_run_logic_functions.size] = start_array["logic_func"];
   }
 }
 
-function already_ran_function(func, var_8751813f2dae82ee) {
-  foreach(logic_function in var_8751813f2dae82ee) {
+function already_ran_function(func, previously_run_logic_functions) {
+  foreach(logic_function in previously_run_logic_functions) {
     if(logic_function == func) {
       return true;
     }

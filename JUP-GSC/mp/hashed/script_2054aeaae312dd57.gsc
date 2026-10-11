@@ -27,10 +27,10 @@ function function_66c502dfb1c607b2() {
   setDvar(@ "ai_showpaths", 1);
   setDvar(@ "hash_9cb701e1b4aa2385", 5);
   setDvar(@ "hash_2f602ff4fd08630f", 2);
-  level thread scripts\engine\dev::function_4da869df964b68db(@ "hash_f97641d4915507b5", &namespace_9fa112241a70b32b::function_caa3566cb86d5538);
-  level thread scripts\engine\dev::function_4da869df964b68db(@ "hash_b32ed87f6e94907d", &namespace_9fa112241a70b32b::function_4166f565abe2876a);
-  level thread scripts\engine\dev::function_4da869df964b68db(@ "hash_5ad71dff2cbc6584", &namespace_9fa112241a70b32b::function_13c592c4aa8f479f);
-  level thread scripts\engine\dev::function_4da869df964b68db(@ "hash_7d823f893b3e9d9f", &namespace_9fa112241a70b32b::function_78bb9ce9a224428f);
+  level thread scripts\engine\dev::devcommandwatcher(@ "hash_f97641d4915507b5", &namespace_9fa112241a70b32b::function_caa3566cb86d5538);
+  level thread scripts\engine\dev::devcommandwatcher(@ "hash_b32ed87f6e94907d", &namespace_9fa112241a70b32b::function_4166f565abe2876a);
+  level thread scripts\engine\dev::devcommandwatcher(@ "hash_5ad71dff2cbc6584", &namespace_9fa112241a70b32b::function_13c592c4aa8f479f);
+  level thread scripts\engine\dev::devcommandwatcher(@ "hash_7d823f893b3e9d9f", &namespace_9fa112241a70b32b::function_78bb9ce9a224428f);
 }
 
 function function_caa3566cb86d5538(command, arglist) {

@@ -25,7 +25,7 @@ function equipmentinteract_init() {
   thread _updateuseobjs();
 }
 
-function equipmentscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function equipmentscriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x1c>");
   equipmentuse(instance.entity, player);
 }
@@ -65,7 +65,7 @@ function _updateuseobjs() {
           continue;
         }
 
-        if(!areenemies || istrue(useobj.isbeingused) || !player scripts\mp\utility\perk::_hasperk("specialty_hack") || player scripts\cp_mp\emp_debuff::is_empd() || player namespace_53fc9ddbb516e6e1::function_c4d8558fc1592cd6() || level.gameended) {
+        if(!areenemies || istrue(useobj.isbeingused) || !player scripts\mp\utility\perk::_hasperk("specialty_hack") || player scripts\cp_mp\emp_debuff::is_empd() || player namespace_53fc9ddbb516e6e1::isjuggernautsharedfunc() || level.gameended) {
           useobj disablescriptableplayeruse(player);
           continue;
         }

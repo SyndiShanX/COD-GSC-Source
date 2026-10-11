@@ -39,25 +39,25 @@ function cap_start(capname, animset, animscripted) {
     function_b69db84955df12e5(capname, animset);
     return;
   } else {
-    self._blackboard.var_7460b96395361857 = undefined;
+    self._blackboard.bseqphase = undefined;
   }
 
   assert(isalive(self) && isDefined(self.asm));
   self setoverridearchetype("animscript", animset, 0);
   self function_24eb7f77bc5e5950(capname);
-  function_fb2e421e36c177a0(capname);
+  cap_terminateandreplace(capname);
 
   if(istrue(animscripted)) {
     bb_setanimScripted();
   }
 }
 
-function function_b69db84955df12e5(var_b5da6777bfe1ace8, archetypename) {
+function function_b69db84955df12e5(baseasmname, archetypename) {
   if(archetypename == "hero_salter" || archetypename == "farah" || archetypename == "soldier_female") {
     scripts\asm\asm_bb::bb_setshort(1);
   }
 
-  self.asmname = var_b5da6777bfe1ace8;
+  self.asmname = baseasmname;
 
   if(!isDefined(self.asm)) {
     self.asm = spawnStruct();
@@ -68,12 +68,12 @@ function function_b69db84955df12e5(var_b5da6777bfe1ace8, archetypename) {
 
   if(isDefined(archetypename)) {
     self.animsetname = archetypename;
-    self.var_6e12b535aff2899b = self.animationarchetype;
+    self.originalanimationarchetype = self.animationarchetype;
     self.animationarchetype = undefined;
   }
 
   self.scriptmodelcap = 1;
-  self asminstantiate(var_b5da6777bfe1ace8);
+  self asminstantiate(baseasmname);
 
   if(!isDefined(level.capscriptmodels)) {
     level.capscriptmodels = [];
@@ -99,23 +99,23 @@ function function_896667bf7f3ed3dc() {
   }
 }
 
-function function_fb2e421e36c177a0(var_f48b8938602f359b, newarchetype) {
+function cap_terminateandreplace(newasmname, newarchetype) {
   self asmterminate();
   self notify("asm_terminated");
-  self.var_a709fbd9fea148f6 = undefined;
+  self.asmtrackasm = undefined;
 
   if(!isDefined(newarchetype)) {
     newarchetype = self.animsetname;
   }
 
-  self[[self.fnasm_init]](tolower(var_f48b8938602f359b), newarchetype);
+  self[[self.fnasm_init]](tolower(newasmname), newarchetype);
 }
 
 function cap_exit() {
   if(!isai(self)) {
     self.asmname = undefined;
-    self.animationarchetype = self.var_6e12b535aff2899b;
-    self.var_6e12b535aff2899b = undefined;
+    self.animationarchetype = self.originalanimationarchetype;
+    self.originalanimationarchetype = undefined;
     self.scriptmodelcap = undefined;
 
     if(array_contains(level.capscriptmodels, self)) {
@@ -135,7 +135,7 @@ function cap_exit() {
     bb_clearanimScripted();
   }
 
-  self.var_a709fbd9fea148f6 = undefined;
+  self.asmtrackasm = undefined;
   self clearcap();
   self.var_30452ad282afcd76 = undefined;
 
@@ -164,7 +164,7 @@ function function_a996f137b4ef05ed() {
   self stopanimScripted();
   self clearoverridearchetype("animscript");
   self function_24eb7f77bc5e5950(undefined);
-  function_fb2e421e36c177a0(self.defaultasm);
+  cap_terminateandreplace(self.defaultasm);
 
   if(isDefined(self.capgroup)) {
     function_5a9987f1e5bbd641();
@@ -178,7 +178,7 @@ function function_b58f0a57adf2948e(origin, capname, animset, var_9e6dcf179d65822
   self endon("death");
 
   if(isDefined(var_9e6dcf179d658229) && var_9e6dcf179d658229) {
-    self.var_cc9da6f81dd0068 = self.scriptgoalpos;
+    self.oldscriptgoalpos = self.scriptgoalpos;
     self.oldgoalradius = self.goalradius;
   }
 
@@ -187,9 +187,9 @@ function function_b58f0a57adf2948e(origin, capname, animset, var_9e6dcf179d65822
   scripts\common\cap::cap_start(capname, animset);
   self waittill("cap_exit_completed");
 
-  if(isDefined(self.var_cc9da6f81dd0068)) {
-    self setgoalpos(self.var_cc9da6f81dd0068, self.oldgoalradius);
-    self.var_cc9da6f81dd0068 = undefined;
+  if(isDefined(self.oldscriptgoalpos)) {
+    self setgoalpos(self.oldscriptgoalpos, self.oldgoalradius);
+    self.oldscriptgoalpos = undefined;
     self.oldgoalradius = undefined;
   }
 }
@@ -201,8 +201,8 @@ function function_3a8bc84c604f9755() {
     self.scriptedarrivalent delete();
   }
 
-  if(isDefined(self.var_ddad29bbdecd1671)) {
-    self.var_ddad29bbdecd1671 = undefined;
+  if(isDefined(self.customarrivalhandler)) {
+    self.customarrivalhandler = undefined;
   }
 
   if(isDefined(msg)) {
@@ -254,11 +254,11 @@ function cap_reach_and_arrive(scriptednode, capname, animset, var_26b7b68bee5a23
 
   asm_fireephemeralevent("path_chosen", "end");
   assertex(archetypehasstate(animset, arrival_state), "Cap Arc (" + animset + ") has no arrival state (" + arrival_state + ")!");
-  self.var_a57082fdf62bc898 = arrival_state;
-  self.var_33b4c07d1f388776 = animset;
+  self.customarrivalstate = arrival_state;
+  self.customarrivalanimset = animset;
   self.customarrivalangles = scriptednode.angles;
   self.var_171120e99df3e286 = 1;
-  self.var_ddad29bbdecd1671 = &function_e1c21b37d95134a;
+  self.customarrivalhandler = &function_e1c21b37d95134a;
   self.capdata = spawnStruct();
   self.capdata.arrivalangles = scriptednode.angles;
   self.capdata.asmname = capname;
@@ -284,9 +284,9 @@ function private function_e1c21b37d95134a() {
   self endon("cap_exit_completed");
   assert(isDefined(self.capdata));
   self.capdata.var_74c9b1f78857273d = 1;
-  cap_start(self.capdata.asmname, self.var_33b4c07d1f388776);
+  cap_start(self.capdata.asmname, self.customarrivalanimset);
   initstate = self asmgetcurrentstate(self.asmname);
-  self asmsetstate(self.asmname, self.var_a57082fdf62bc898);
+  self asmsetstate(self.asmname, self.customarrivalstate);
   timeouttime = gettime() + 5000;
 
   while(!asm_eventfired(self.asmname, "end") && gettime() < timeouttime) {
@@ -308,11 +308,11 @@ function function_a1ed6ae80ed92596(group) {
     level.capgroups = [];
   }
 
-  var_dc40afdd39573c9a = level.capgroups.size;
-  level.capgroups[var_dc40afdd39573c9a] = group;
+  newcapgroup = level.capgroups.size;
+  level.capgroups[newcapgroup] = group;
 
   foreach(ent in group) {
-    ent.capgroup = var_dc40afdd39573c9a;
+    ent.capgroup = newcapgroup;
   }
 }
 
@@ -329,8 +329,8 @@ function function_3327078daa3ecd38() {
   if(isDefined(level.sight_trace_queue) && function_a6025442a4e1c649(level.sight_trace_queue, self)) {
     level notify("player_look_at_process");
 
-    if(isDefined(level.var_f62b6e59c0e00d48.lookatlock)) {
-      level.var_f62b6e59c0e00d48.lookatlock = 0;
+    if(isDefined(level.civreactdata.lookatlock)) {
+      level.civreactdata.lookatlock = 0;
     }
 
     if(isDefined(level.sight_trace_queue)) {
@@ -341,8 +341,8 @@ function function_3327078daa3ecd38() {
   if(isDefined(level.var_3fe0abfd459c8d0) && function_a6025442a4e1c649(level.var_3fe0abfd459c8d0, self)) {
     level notify("civilian_process_eye_look_at");
 
-    if(isDefined(level.var_f62b6e59c0e00d48.var_c02d69c3f71770bd)) {
-      level.var_f62b6e59c0e00d48.var_c02d69c3f71770bd = 0;
+    if(isDefined(level.civreactdata.civilianlookatlock)) {
+      level.civreactdata.civilianlookatlock = 0;
     }
 
     if(isDefined(level.var_3fe0abfd459c8d0)) {

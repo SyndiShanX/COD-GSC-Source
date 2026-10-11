@@ -234,7 +234,7 @@ function function_79e9116ebf7dc551() {
   vehicles = vehicle_interact_getleveldata().vehicles;
 
   if(isDefined(vehicles) && vehicles.size > 0) {
-    level.vehicle.partition = function_21a6a1c613b50a28([], 650);
+    level.vehicle.partition = create_partition([], 650);
 
     foreach(vehicle in vehicles) {
       if(isDefined(vehicle) && isDefined(vehicle.origin)) {
@@ -244,19 +244,19 @@ function function_79e9116ebf7dc551() {
   }
 }
 
-function function_bfc085ddf18e1712(pointred, var_da1c69068b772b09, var_9182c2dd101ae147, activatefunc, var_b5f98a8061379598) {
+function function_bfc085ddf18e1712(pointred, useinstancefunc, cleaninstancefunc, activatefunc, createinstancefunc) {
   leveldata = vehicle_interact_getleveldata();
   interactiontype = spawnStruct();
   callbacks = [];
-  callbacks["useInstance"] = var_da1c69068b772b09;
-  callbacks["cleanInstance"] = var_9182c2dd101ae147;
+  callbacks["useInstance"] = useinstancefunc;
+  callbacks["cleanInstance"] = cleaninstancefunc;
   callbacks["activate"] = activatefunc;
-  callbacks["createInstance"] = var_b5f98a8061379598;
+  callbacks["createInstance"] = createinstancefunc;
   interactiontype.callbacks = callbacks;
   leveldata.interactiontypes[pointred] = interactiontype;
 }
 
-function vehicle_interact_scriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function vehicle_interact_scriptableused(instance, part, state, player, bautouse, usestring) {
   if(state == "vehicle_use") {
     vehicle = instance.entity;
     pointref = part;
@@ -673,12 +673,12 @@ function function_f1f336c41f281c07(pointref, instancedataforpoint, vehicle, play
     seatid = function_91b9e7fb0f262529(player, vehicle, seatid);
   }
 
-  var_d233ea035e59e2f4 = getdvarint(@ "hash_fb517a5a3d736fa0", 0);
+  forceseatid = getdvarint(@ "hash_fb517a5a3d736fa0", 0);
 
-  if(var_d233ea035e59e2f4 > 0) {
+  if(forceseatid > 0) {
     seatids = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getallvehicleseats(vehicle);
-    var_d233ea035e59e2f4 = int(min(var_d233ea035e59e2f4 - 1, seatids.size - 1));
-    seatid = seatids[var_d233ea035e59e2f4];
+    forceseatid = int(min(forceseatid - 1, seatids.size - 1));
+    seatid = seatids[forceseatid];
     iprintlnbold("<dev string:x2d1>" + seatid);
   }
 
@@ -774,8 +774,8 @@ function function_d2b057155910001b(pointref, instancedataforpoint, vehicle, unus
 }
 
 function function_2bc48c2bcc22a4fe(pointref, activationdata, leveldataforvehicle, unusedone) {
-  if(!isDefined(leveldataforvehicle.var_ee340f5cd8ff86a6)) {
-    leveldataforvehicle.var_ee340f5cd8ff86a6 = [];
+  if(!isDefined(leveldataforvehicle.kiosktagarrays)) {
+    leveldataforvehicle.kiosktagarrays = [];
   }
 
   if(!isDefined(leveldataforvehicle.var_cca5fc4158fd7ceb)) {
@@ -786,18 +786,18 @@ function function_2bc48c2bcc22a4fe(pointref, activationdata, leveldataforvehicle
     leveldataforvehicle.var_4dc9e517025a78b6 = [];
   }
 
-  leveldataforvehicle.var_ee340f5cd8ff86a6[pointref] = activationdata[0];
+  leveldataforvehicle.kiosktagarrays[pointref] = activationdata[0];
   leveldataforvehicle.var_cca5fc4158fd7ceb[pointref] = activationdata[1];
   leveldataforvehicle.var_4dc9e517025a78b6[pointref] = activationdata[2];
 }
 
 function function_bd192331e198be64(pointref, instancedataforpoint, vehicle, unusedone) {
   leveldataforvehicle = vehicle_interact_getleveldataforvehicle(vehicle.vehiclename, undefined, 1);
-  assertex(isDefined(leveldataforvehicle.var_ee340f5cd8ff86a6), "<dev string:x3bf>");
-  assertex(isDefined(leveldataforvehicle.var_ee340f5cd8ff86a6[pointref]), "<dev string:x414>");
+  assertex(isDefined(leveldataforvehicle.kiosktagarrays), "<dev string:x3bf>");
+  assertex(isDefined(leveldataforvehicle.kiosktagarrays[pointref]), "<dev string:x414>");
   instancedataforpoint.var_420bbde8d99ec0a = leveldataforvehicle.var_cca5fc4158fd7ceb[pointref];
   instancedataforpoint.var_4dc9e517025a78b6 = leveldataforvehicle.var_4dc9e517025a78b6[pointref];
-  kiosktag = leveldataforvehicle.var_ee340f5cd8ff86a6[pointref];
+  kiosktag = leveldataforvehicle.kiosktagarrays[pointref];
   function_16ab0dcefaa4c681(vehicle, pointref, kiosktag);
 }
 
@@ -884,23 +884,23 @@ function private function_f588087bf9d7fefb() {
 
   function_6c429e1c6f5142ed(gasstations);
   level.gasstations = gasstations;
-  level.var_30437143ffcdc44e = undefined;
+  level.gasstationspawns = undefined;
 }
 
-function function_6c429e1c6f5142ed(var_30437143ffcdc44e) {
-  if(!isDefined(var_30437143ffcdc44e)) {
+function function_6c429e1c6f5142ed(gasstationspawns) {
+  if(!isDefined(gasstationspawns)) {
     return;
   }
 
   var_ece1ce8d6abcd4ae = [];
 
-  foreach(gasstation in var_30437143ffcdc44e) {
+  foreach(gasstation in gasstationspawns) {
     if(!isDefined(gasstation.triggertargetname)) {
       var_ece1ce8d6abcd4ae[var_ece1ce8d6abcd4ae.size] = gasstation;
       continue;
     }
 
-    triggers = function_f159c10d5cf8f0b4(gasstation.triggertargetname, "targetname");
+    triggers = getnoentvolumearray(gasstation.triggertargetname, "targetname");
     gasstation.triggertargetname = undefined;
 
     if(!isDefined(triggers) || triggers.size == 0) {
@@ -960,7 +960,7 @@ function private function_8c5be15142453a9b(trigger) {
       continue;
     }
 
-    if(isDefined(vehicle.var_90c69f8ba6618910)) {
+    if(isDefined(vehicle.refuelingpercentage)) {
       continue;
     }
 
@@ -1020,9 +1020,9 @@ function function_b062b902747a499e(structname) {
   return var_8e0d7eb61f44d9d6;
 }
 
-function function_23960baddc5086ed(structname, var_6b0d97276985d147) {
+function function_23960baddc5086ed(structname, gasstationstruct) {
   if(structname == "gas_station") {
-    radius = ter_op(is_equal(var_6b0d97276985d147.script_noteworthy, "large"), 600, 400);
+    radius = ter_op(is_equal(gasstationstruct.script_noteworthy, "large"), 600, 400);
     scriptablename = "dmz_gas_station";
   } else if(structname == "gas_station_marine") {
     radius = 650;
@@ -1030,40 +1030,40 @@ function function_23960baddc5086ed(structname, var_6b0d97276985d147) {
   } else if(structname == "gas_station_charger") {
     radius = 400;
 
-    if(isDefined(var_6b0d97276985d147.script_noteworthy)) {
-      radius = float(var_6b0d97276985d147.script_noteworthy);
+    if(isDefined(gasstationstruct.script_noteworthy)) {
+      radius = float(gasstationstruct.script_noteworthy);
     }
   }
 
-  scriptable = function_52ba5a6617b2c059(var_6b0d97276985d147.origin, radius, scriptablename);
+  scriptable = function_52ba5a6617b2c059(gasstationstruct.origin, radius, scriptablename);
 
   if(isDefined(scriptable)) {
     scriptable.var_6234172895d0c06f = structname == "gas_station_charger";
-    scriptable.triggertargetname = var_6b0d97276985d147.target;
+    scriptable.triggertargetname = gasstationstruct.target;
 
-    if(!isDefined(level.var_30437143ffcdc44e)) {
-      level.var_30437143ffcdc44e = [];
+    if(!isDefined(level.gasstationspawns)) {
+      level.gasstationspawns = [];
     }
 
-    if(!isDefined(level.var_30437143ffcdc44e[structname])) {
-      level.var_30437143ffcdc44e[structname] = [];
+    if(!isDefined(level.gasstationspawns[structname])) {
+      level.gasstationspawns[structname] = [];
     }
 
-    level.var_30437143ffcdc44e[structname][level.var_30437143ffcdc44e[structname].size] = scriptable;
+    level.gasstationspawns[structname][level.gasstationspawns[structname].size] = scriptable;
   }
 
   return scriptable;
 }
 
 function function_a15a2f4b7fdce1db(structname) {
-  function_6c429e1c6f5142ed(level.var_30437143ffcdc44e[structname]);
+  function_6c429e1c6f5142ed(level.gasstationspawns[structname]);
 
   if(!isDefined(level.gasstations)) {
     level.gasstations = [];
   }
 
-  level.gasstations = array_combine(level.gasstations, level.var_30437143ffcdc44e[structname]);
-  level.var_30437143ffcdc44e[structname] = undefined;
+  level.gasstations = array_combine(level.gasstations, level.gasstationspawns[structname]);
+  level.gasstationspawns[structname] = undefined;
 }
 
 function private function_518f884fc150d957(vehicle, point, radiussquared, driver) {
@@ -1085,7 +1085,7 @@ function private function_518f884fc150d957(vehicle, point, radiussquared, driver
   interactinfo = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle(vehicleref);
   maxfuel = interactinfo.maxfuel;
   isfuelonly = istrue(self.var_6234172895d0c06f);
-  vehicle.var_90c69f8ba6618910 = vehicle function_883613626149ebf8(maxfuel, isfuelonly);
+  vehicle.refuelingpercentage = vehicle function_883613626149ebf8(maxfuel, isfuelonly);
   vehicle.evcharging = isfuelonly;
   team = vehicle.team;
   var_a8cc95b22d8a90cd = istrue(maxfuel == -1);
@@ -1093,7 +1093,7 @@ function private function_518f884fc150d957(vehicle, point, radiussquared, driver
 
   if(!isDefined(vehicle) || !isDefined(vehicle.origin) || !isDefined(vehicle.maxhealth)) {
     if(isDefined(vehicle)) {
-      vehicle.var_90c69f8ba6618910 = undefined;
+      vehicle.refuelingpercentage = undefined;
       vehicle.evcharging = undefined;
     }
 
@@ -1101,7 +1101,7 @@ function private function_518f884fc150d957(vehicle, point, radiussquared, driver
   }
 
   if(distancesquared(vehicle.origin, point) >= radiussquared * 2.25) {
-    vehicle.var_90c69f8ba6618910 = undefined;
+    vehicle.refuelingpercentage = undefined;
     vehicle.evcharging = undefined;
     return;
   }
@@ -1154,9 +1154,9 @@ function private function_518f884fc150d957(vehicle, point, radiussquared, driver
   }
 
   progressbarvisible = 0;
-  vehicle.var_90c69f8ba6618910 = vehicle function_883613626149ebf8(maxfuel, isfuelonly);
+  vehicle.refuelingpercentage = vehicle function_883613626149ebf8(maxfuel, isfuelonly);
 
-  if(vehicle.var_90c69f8ba6618910 < 0.99) {
+  if(vehicle.refuelingpercentage < 0.99) {
     progressbarvisible = 1;
 
     foreach(occupant in vehicle.occupants) {
@@ -1186,13 +1186,13 @@ function private function_518f884fc150d957(vehicle, point, radiussquared, driver
 
   while(isDefined(vehicle) && isDefined(vehicle.origin) && distancesquared(vehicle.origin, point) < radiussquared * 2.25) {
     if(!vehicle function_fc271f387096702f()) {
-      vehicle.var_90c69f8ba6618910 = vehicle function_883613626149ebf8(maxfuel, isfuelonly);
+      vehicle.refuelingpercentage = vehicle function_883613626149ebf8(maxfuel, isfuelonly);
 
       if(isDefined(objidnum) && objidnum != -1) {
-        objective_setprogress(objidnum, vehicle.var_90c69f8ba6618910);
+        objective_setprogress(objidnum, vehicle.refuelingpercentage);
       }
 
-      if(!progressbarvisible && vehicle.var_90c69f8ba6618910 < 0.99) {
+      if(!progressbarvisible && vehicle.refuelingpercentage < 0.99) {
         progressbarvisible = 1;
 
         foreach(occupant in vehicle.occupants) {
@@ -1215,13 +1215,13 @@ function private function_518f884fc150d957(vehicle, point, radiussquared, driver
       }
     }
 
-    vehicle.var_90c69f8ba6618910 = vehicle function_883613626149ebf8(maxfuel, isfuelonly);
+    vehicle.refuelingpercentage = vehicle function_883613626149ebf8(maxfuel, isfuelonly);
 
     if(isDefined(objidnum) && objidnum != -1) {
-      objective_setprogress(objidnum, vehicle.var_90c69f8ba6618910);
+      objective_setprogress(objidnum, vehicle.refuelingpercentage);
     }
 
-    if(progressbarvisible && vehicle.var_90c69f8ba6618910 >= 0.99) {
+    if(progressbarvisible && vehicle.refuelingpercentage >= 0.99) {
       progressbarvisible = 0;
 
       foreach(occupant in vehicle.occupants) {
@@ -1259,14 +1259,14 @@ function private function_518f884fc150d957(vehicle, point, radiussquared, driver
       }
 
       if(isDefined(vehicle) && abs(vehicle.fuel - maxfuel) < 1 && vehicle.health == vehicle.maxhealth && (!isDefined(vehicle.var_c48b10763f1df79a) || vehicle.var_c48b10763f1df79a.size == 0)) {
-        scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onVehicleFullRefuelAndRepair", vehicle, self);
+        scripts\engine\utility::callsharedfunc("pmc_missions", "onVehicleFullRefuelAndRepair", vehicle, self);
 
         if(!isDefined(self.refueled)) {
           self.refueled = [];
         }
 
         if(isDefined(vehicle.owner) && !array_contains(self.refueled, vehicle)) {
-          vehicle.owner scripts\cp_mp\challenges::function_5c3aa65db46763ff(vehicle, "gas_station_refuel");
+          vehicle.owner scripts\cp_mp\challenges::reportvehicleevent(vehicle, "gas_station_refuel");
           self.refueled[self.refueled.size] = vehicle;
         }
       }
@@ -1290,7 +1290,7 @@ function private function_518f884fc150d957(vehicle, point, radiussquared, driver
   }
 
   if(isDefined(vehicle)) {
-    vehicle.var_90c69f8ba6618910 = undefined;
+    vehicle.refuelingpercentage = undefined;
     vehicle.evcharging = undefined;
   }
 
@@ -1333,13 +1333,13 @@ function private function_883613626149ebf8(maxfuel, isfuelonly) {
 }
 
 function function_c5fe005f06fe5684(vehicle, player) {
-  if(isDefined(vehicle.var_90c69f8ba6618910) && vehicle.var_90c69f8ba6618910 < 0.99) {
+  if(isDefined(vehicle.refuelingpercentage) && vehicle.refuelingpercentage < 0.99) {
     vehicle function_3bff37824a58ef7a(player, vehicle.objidnum, vehicle function_d93ec4635290febd());
   }
 }
 
 function function_deb83798a724a77e(vehicle, player) {
-  if(isDefined(vehicle.var_90c69f8ba6618910) && vehicle.var_90c69f8ba6618910 < 0.99) {
+  if(isDefined(vehicle.refuelingpercentage) && vehicle.refuelingpercentage < 0.99) {
     vehicle function_d051e5f825b704ab(player, vehicle.objidnum, vehicle function_d93ec4635290febd());
   }
 }
@@ -1349,16 +1349,16 @@ function private function_3bff37824a58ef7a(player, objidnum, vehicleref) {
     objective_addclienttomask(objidnum, player);
     objective_showtoplayersinmask(objidnum);
     objective_pinforclient(objidnum, player);
-    function_d1b64c3d055ceeb0(2, player);
-    var_e9168d98351236d7 = &"MP/REFUELING";
+    objective_setshowpinnedprogressbar(2, player);
+    refuelingtext = &"MP/REFUELING";
 
     if(vehicleref == "veh9_hummer") {
-      var_e9168d98351236d7 = ter_op(istrue(self.evcharging), &"MP/CHARGING_FUEL_ONLY", &"MP/CHARGING");
+      refuelingtext = ter_op(istrue(self.evcharging), &"MP/CHARGING_FUEL_ONLY", &"MP/CHARGING");
     } else if(vehicleref == "veh9_motorcycle_blood_burner_physics") {
-      var_e9168d98351236d7 = &"MP/REPAIRING";
+      refuelingtext = &"MP/REPAIRING";
     }
 
-    function_8b71eb96e1636edc(var_e9168d98351236d7, player);
+    objective_setpinnedprogressbartext(refuelingtext, player);
     function_82a1c76da877f6a3(player, vehicleref);
   }
 }
@@ -1368,29 +1368,29 @@ function private function_d051e5f825b704ab(player, objidnum, vehicleref, success
     objective_removeclientfrommask(objidnum, player);
     objective_showtoplayersinmask(objidnum);
     objective_unpinforclient(objidnum, player);
-    function_d1b64c3d055ceeb0(0, player);
+    objective_setshowpinnedprogressbar(0, player);
     function_bd48158d51404989(player, vehicleref, success);
   }
 }
 
 function private function_82a1c76da877f6a3(player, vehicleref) {
   if(isDefined(player)) {
-    var_a3c271bd60ec612f = ter_op(vehicleref == "veh9_hummer", "uin_veh_fuel_ev_charger", "uin_veh_fuel_gas_ticker");
-    player playlocalsound(var_a3c271bd60ec612f);
+    refuelingsound = ter_op(vehicleref == "veh9_hummer", "uin_veh_fuel_ev_charger", "uin_veh_fuel_gas_ticker");
+    player playlocalsound(refuelingsound);
   }
 }
 
 function private function_bd48158d51404989(player, vehicleref, success) {
   if(isDefined(player)) {
-    var_a3c271bd60ec612f = "uin_veh_fuel_gas_ticker";
+    refuelingsound = "uin_veh_fuel_gas_ticker";
     var_2d2bbcca8984c48f = "uin_veh_fuel_gas_ticker_stop";
 
     if(vehicleref == "veh9_hummer") {
-      var_a3c271bd60ec612f = "uin_veh_fuel_ev_charger";
+      refuelingsound = "uin_veh_fuel_ev_charger";
       var_2d2bbcca8984c48f = "uin_veh_fuel_ev_charger_stop";
     }
 
-    player stoplocalsound(var_a3c271bd60ec612f);
+    player stoplocalsound(refuelingsound);
 
     if(istrue(success)) {
       player playlocalsound(var_2d2bbcca8984c48f);
@@ -1430,12 +1430,12 @@ function private function_722b030261c05941(vehicleref) {
   topspeed = self vehicle_gettopspeedforward();
   lowfuel = 0;
   outoffuel = 0;
-  var_94d4410a7169a784 = "uin_veh_warning_low_fuel";
-  var_85dfce1880d8e71d = "uin_veh_warning_out_of_fuel";
+  lowfuelsound = "uin_veh_warning_low_fuel";
+  outoffuelsound = "uin_veh_warning_out_of_fuel";
 
   if(istrue(scripts\common\vehicle::ishelicopter())) {
-    var_94d4410a7169a784 = "uin_veh_warning_low_fuel_heli";
-    var_85dfce1880d8e71d = "uin_veh_warning_out_of_fuel_heli";
+    lowfuelsound = "uin_veh_warning_low_fuel_heli";
+    outoffuelsound = "uin_veh_warning_out_of_fuel_heli";
   }
 
   while(true) {
@@ -1477,11 +1477,11 @@ function private function_722b030261c05941(vehicleref) {
         [[getsharedfunc("pmc_missions", "onVehicleOutOfFuel")]](scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getdriver(self));
       }
 
-      function_5a2b3f3e2cd84eb8(var_94d4410a7169a784);
-      function_7c7694a53fa6720a(var_85dfce1880d8e71d);
+      function_5a2b3f3e2cd84eb8(lowfuelsound);
+      function_7c7694a53fa6720a(outoffuelsound);
     } else if(self.fuel > 0 && outoffuel) {
       outoffuel = 0;
-      function_5a2b3f3e2cd84eb8(var_85dfce1880d8e71d);
+      function_5a2b3f3e2cd84eb8(outoffuelsound);
       scripts\cp_mp\vehicles\vehicle_occupancy::function_7c81e0d41cbbce7f();
       scripts\cp_mp\vehicles\vehicle_occupancy::function_9e710c9f3a15ffda();
       scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_allowmovement(self, 1);
@@ -1491,28 +1491,28 @@ function private function_722b030261c05941(vehicleref) {
     if(self.fuel <= 25 && self.fuel > 0 && !lowfuel) {
       lowfuel = 1;
       scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_showwarning("lowFuel", scripts\cp_mp\vehicles\vehicle_occupancy::function_efa75aa7f0a1289(self), vehicleref);
-      function_7c7694a53fa6720a(var_94d4410a7169a784);
+      function_7c7694a53fa6720a(lowfuelsound);
       player = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getdriver(self);
 
       if(isDefined(player) && scripts\engine\utility::issharedfuncdefined("ftue", "player_action")) {
-        var_c4dc2501d7d2b68b = undefined;
+        closestgasstation = undefined;
         var_47415e4e37e805ff = undefined;
 
         foreach(gasstation in level.gasstations) {
-          if(!isDefined(var_c4dc2501d7d2b68b)) {
-            var_c4dc2501d7d2b68b = gasstation;
+          if(!isDefined(closestgasstation)) {
+            closestgasstation = gasstation;
             var_47415e4e37e805ff = distancesquared(self.origin, gasstation.origin);
           }
 
           distancesqr = distancesquared(self.origin, gasstation.origin);
 
           if(distancesqr < var_47415e4e37e805ff) {
-            var_c4dc2501d7d2b68b = gasstation;
+            closestgasstation = gasstation;
             var_47415e4e37e805ff = distancesquared(self.origin, gasstation.origin);
           }
         }
 
-        player[[scripts\engine\utility::getsharedfunc("ftue", "player_action")]]("br_ftue_driving", var_c4dc2501d7d2b68b.origin);
+        player[[scripts\engine\utility::getsharedfunc("ftue", "player_action")]]("br_ftue_driving", closestgasstation.origin);
       }
 
       continue;
@@ -1521,7 +1521,7 @@ function private function_722b030261c05941(vehicleref) {
     if((self.fuel > 25 || self.fuel <= 0) && lowfuel) {
       lowfuel = 0;
       scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_hidewarning("lowFuel", scripts\cp_mp\vehicles\vehicle_occupancy::function_efa75aa7f0a1289(self), vehicleref);
-      function_5a2b3f3e2cd84eb8(var_94d4410a7169a784);
+      function_5a2b3f3e2cd84eb8(lowfuelsound);
     }
   }
 }
@@ -1536,7 +1536,7 @@ function function_e48fd45cf4c7bb86() {
 
   while(true) {
     wait 1;
-    utility::function_f3bb4f4911a1beb2("featurebans", "featurebans_vehicleExplode");
+    utility::callsharedfunc("featurebans", "featurebans_vehicleExplode");
   }
 }
 
@@ -1610,39 +1610,39 @@ function function_557da58e3ad8a579(gascan, var_62cc4a0ecde06ecf) {
   }
 
   vehicle scripts\cp_mp\utility\vehicle_omnvar_utility::function_9da76b0be4b2a2d4();
-  scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onGasCanRefuel", vehicle, var_62cc4a0ecde06ecf);
+  scripts\engine\utility::callsharedfunc("pmc_missions", "onGasCanRefuel", vehicle, var_62cc4a0ecde06ecf);
   return undefined;
 }
 
-function function_cf96fb01f9473d0d(var_f7658eecc6bcc46b) {
+function function_cf96fb01f9473d0d(gascancount) {
   vehicle = scripts\cp_mp\utility\player_utility::getvehicle();
 
   if(!isDefined(vehicle) || !isDefined(vehicle.fuel)) {
-    return ["MP/CANNOT_USE_GAS_CAN", var_f7658eecc6bcc46b];
+    return ["MP/CANNOT_USE_GAS_CAN", gascancount];
   }
 
-  if(!isDefined(var_f7658eecc6bcc46b) || var_f7658eecc6bcc46b == 150) {
-    return ["MP/GAS_CAN_FULL", var_f7658eecc6bcc46b];
+  if(!isDefined(gascancount) || gascancount == 150) {
+    return ["MP/GAS_CAN_FULL", gascancount];
   }
 
   ref = vehicle function_d93ec4635290febd();
   interactinfo = vehicle_interact_getleveldataforvehicle(ref);
 
   if(ref == "veh9_hummer") {
-    return ["MP/GAS_CAN_SIPHON_ON_EV", var_f7658eecc6bcc46b];
+    return ["MP/GAS_CAN_SIPHON_ON_EV", gascancount];
   }
 
-  var_8bffb7a992706b84 = 150 - var_f7658eecc6bcc46b + 1;
+  siphonamount = 150 - gascancount + 1;
 
-  if(vehicle.fuel < var_8bffb7a992706b84) {
-    var_8bffb7a992706b84 = int(floor(vehicle.fuel));
+  if(vehicle.fuel < siphonamount) {
+    siphonamount = int(floor(vehicle.fuel));
   }
 
-  vehicle.fuel = max(0, vehicle.fuel - var_8bffb7a992706b84);
-  var_f7658eecc6bcc46b = int(clamp(var_f7658eecc6bcc46b + var_8bffb7a992706b84 - 1, 1, 150));
+  vehicle.fuel = max(0, vehicle.fuel - siphonamount);
+  gascancount = int(clamp(gascancount + siphonamount - 1, 1, 150));
   vehicle scripts\cp_mp\utility\vehicle_omnvar_utility::function_9da76b0be4b2a2d4();
-  scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onVehicleSiphoned", vehicle);
-  return [undefined, var_f7658eecc6bcc46b];
+  scripts\engine\utility::callsharedfunc("pmc_missions", "onVehicleSiphoned", vehicle);
+  return [undefined, gascancount];
 }
 
 function function_68cdb3d30284be07() {
@@ -1650,26 +1650,26 @@ function function_68cdb3d30284be07() {
     return;
   }
 
-  var_8797136ebd7115cb = vehicle_interact_getleveldataforvehicle(function_d93ec4635290febd());
+  vehicleleveldata = vehicle_interact_getleveldataforvehicle(function_d93ec4635290febd());
 
-  if(!isDefined(level.var_38cc7fdcf6109af7)) {
-    level.var_38cc7fdcf6109af7 = getdvarint(@ "hash_e42fc7d1e9196cff", 1) == 1;
+  if(!isDefined(level.caralarmenabled)) {
+    level.caralarmenabled = getdvarint(@ "hash_e42fc7d1e9196cff", 1) == 1;
   }
 
-  if(!level.var_38cc7fdcf6109af7 || istrue(self.var_408e9e761c8463c5) || isDefined(self.var_c8ef06006ce062c1) && self.var_c8ef06006ce062c1 >= gettime() || !istrue(self.isempty) || !isDefined(var_8797136ebd7115cb) || !isDefined(var_8797136ebd7115cb.alarmpartname) || var_8797136ebd7115cb.alarmpartname == "" || !self getscriptablehaspart(var_8797136ebd7115cb.alarmpartname) || !self getscriptableparthasstate(var_8797136ebd7115cb.alarmpartname, "on")) {
+  if(!level.caralarmenabled || istrue(self.playedcaralarm) || isDefined(self.var_c8ef06006ce062c1) && self.var_c8ef06006ce062c1 >= gettime() || !istrue(self.isempty) || !isDefined(vehicleleveldata) || !isDefined(vehicleleveldata.alarmpartname) || vehicleleveldata.alarmpartname == "" || !self getscriptablehaspart(vehicleleveldata.alarmpartname) || !self getscriptableparthasstate(vehicleleveldata.alarmpartname, "on")) {
     return;
   }
 
   self notify("car_alarm_start");
   self endon("car_alarm_start");
   self endon("death");
-  self setscriptablepartstate(var_8797136ebd7115cb.alarmpartname, "on");
+  self setscriptablepartstate(vehicleleveldata.alarmpartname, "on");
   scripts\stealth\event::event_broadcast_generic("cover_blown", self.origin, 2500, self);
 
   if(isDefined(level.var_503460970f6e03c1)) {
     self.var_c8ef06006ce062c1 = gettime() + level.var_503460970f6e03c1;
   } else {
-    self.var_408e9e761c8463c5 = 1;
+    self.playedcaralarm = 1;
   }
 
   params = spawnStruct();
@@ -1677,8 +1677,8 @@ function function_68cdb3d30284be07() {
   callback::callback("car_alarm_on", params);
   function_a6cf8b7a0d3630b5();
 
-  if(self getscriptableparthasstate(var_8797136ebd7115cb.alarmpartname, "off")) {
-    self setscriptablepartstate(var_8797136ebd7115cb.alarmpartname, "off");
+  if(self getscriptableparthasstate(vehicleleveldata.alarmpartname, "off")) {
+    self setscriptablepartstate(vehicleleveldata.alarmpartname, "off");
   }
 
   callback::callback("car_alarm_off", params);
@@ -1687,8 +1687,8 @@ function function_68cdb3d30284be07() {
 function private function_a6cf8b7a0d3630b5(seconds) {
   self endon("vehicle_owner_update");
 
-  if(isDefined(level.var_cb78b9c3bc5211e9)) {
-    wait level.var_cb78b9c3bc5211e9;
+  if(isDefined(level.vehiclealarmtime)) {
+    wait level.vehiclealarmtime;
     return;
   }
 
@@ -1696,11 +1696,11 @@ function private function_a6cf8b7a0d3630b5(seconds) {
 }
 
 function function_c01316c733e017b7() {
-  if(!level.var_49b09bd5297d4967 || istrue(self.var_9d9132209b6bb2e7)) {
+  if(!level.vehiclelightsenabled || istrue(self.var_9d9132209b6bb2e7)) {
     return;
   }
 
-  if(istrue(self.var_6a73f11d95750b87)) {
+  if(istrue(self.enginelightson)) {
     return;
   }
 
@@ -1732,16 +1732,16 @@ function function_c01316c733e017b7() {
       self setscriptablepartstate(light.tag, "on", 1);
     }
 
-    self.var_6a73f11d95750b87 = 1;
+    self.enginelightson = 1;
   }
 }
 
 function function_49eff91715ae3c1b() {
-  if(!level.var_49b09bd5297d4967 || istrue(self.var_9d9132209b6bb2e7)) {
+  if(!level.vehiclelightsenabled || istrue(self.var_9d9132209b6bb2e7)) {
     return;
   }
 
-  if(!istrue(self.var_6a73f11d95750b87)) {
+  if(!istrue(self.enginelightson)) {
     return;
   }
 
@@ -1774,11 +1774,11 @@ function function_49eff91715ae3c1b() {
     }
   }
 
-  self.var_6a73f11d95750b87 = undefined;
+  self.enginelightson = undefined;
 }
 
 function function_7394e322c553b3f0() {
-  if(!level.var_49b09bd5297d4967 || istrue(self.var_9d9132209b6bb2e7)) {
+  if(!level.vehiclelightsenabled || istrue(self.var_9d9132209b6bb2e7)) {
     return;
   }
 
@@ -1902,7 +1902,7 @@ function function_5519f4e75a7e2d2b() {
 }
 
 function vehicle_interact_initdev() {
-  var_d233ea035e59e2f4 = setdvarifuninitialized(@ "hash_fb517a5a3d736fa0", 0);
+  forceseatid = setdvarifuninitialized(@ "hash_fb517a5a3d736fa0", 0);
 }
 
 function function_c2f090b27fcd0e43(vehicle) {

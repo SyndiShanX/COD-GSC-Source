@@ -837,7 +837,7 @@ function private function_3e24dd3358e863c7(scriptable) {
 }
 
 function private function_a06f32bc36f6c177(scriptable) {
-  scriptable function_b85de89251e1fe76(1000000);
+  scriptable scriptabledodamage(1000000);
 }
 
 function function_aaab78a3cf337331() {

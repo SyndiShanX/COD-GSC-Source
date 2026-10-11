@@ -92,7 +92,7 @@ function function_75f8b3962a591c57() {
 
 function function_52890514a3a728b7(weaponobject) {
   if(istrue(weaponobject.isalternate) && isDefined(weaponobject.underbarrel)) {
-    var_2f5c6aad5bf40045 = function_7c612ac92ba98dcb(weaponobject, weaponobject.underbarrel);
+    var_2f5c6aad5bf40045 = getattachmentbasetype(weaponobject, weaponobject.underbarrel);
 
     if(isDefined(level.var_dfee642d94e9a227[weaponobject.underbarrel])) {
       return weaponobject.underbarrel;

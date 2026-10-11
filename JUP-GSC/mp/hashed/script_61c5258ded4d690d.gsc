@@ -30,7 +30,7 @@ function private init() {
   level callback::add("on_agent_spawned", &function_edf4c2f3f7732c67);
   level callback::add("on_zombie_ai_killed", &on_zombie_ai_killed);
   level callback::add("on_ai_killed", &function_e5ea18b76842725f);
-  callback::function_e7fddda1f0b46b5e("zombie") callback::add("on_zombie_ai_damaged", &on_zombie_ai_damaged);
+  callback::get_template("zombie") callback::add("on_zombie_ai_damaged", &on_zombie_ai_damaged);
 }
 
 function private function_edf4c2f3f7732c67(params) {
@@ -105,11 +105,11 @@ function function_d88acf085f34a24f(einflictor, eattacker, idamage, idflags, smea
     }
 
     if(isDefined(level.gamemodebundle) && istrue(level.gamemodebundle.var_fe33630e0f09e5df) || getdvarint(@ "hash_1661f35e34f544eb", 0)) {
-      scripts\mp\mp_agent_damage::function_c54b2cc2e762c201(eplayer, self, shitloc, smeansofdeath, objweapon, int(dmg_struct.idamage), vpoint, 0, undefined, dmg_struct.var_14edc6d1db3695bc, dmg_struct.var_feef4b237a6beb07);
+      scripts\mp\mp_agent_damage::function_c54b2cc2e762c201(eplayer, self, shitloc, smeansofdeath, objweapon, int(dmg_struct.idamage), vpoint, 0, undefined, dmg_struct.biscritical, dmg_struct.var_feef4b237a6beb07);
     }
 
     if(isPlayer(eattacker) && dmg_struct.idamage > 0 && (!isDefined(shitloc) || shitloc != "shield") && !isDefined(elementfeedback)) {
-      eattacker scripts\cp_mp\damagefeedback::updatedamagefeedback("standard", dmg_struct.idamage >= self.health, dmg_struct.var_14edc6d1db3695bc);
+      eattacker scripts\cp_mp\damagefeedback::updatedamagefeedback("standard", dmg_struct.idamage >= self.health, dmg_struct.biscritical);
     }
   }
 
@@ -170,9 +170,9 @@ function function_743e37eebd6ba8e2(n_damage) {
   self.var_7fff3293eab0f7b8 = undefined;
 }
 
-function private function_3c80d46239ce0a0e(dmg_struct, shitloc, var_29a8ba8c9dd43fd2) {
+function private function_3c80d46239ce0a0e(dmg_struct, shitloc, n_pap_level) {
   if(shitloc == "head" || shitloc == "neck") {
-    dmg_struct.var_14edc6d1db3695bc = 1;
+    dmg_struct.biscritical = 1;
   }
 
   return dmg_struct.idamage;
@@ -205,7 +205,7 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
   dmg_struct.modelindex = modelindex;
   dmg_struct.partname = partname;
   dmg_struct.objweapon = objweapon;
-  dmg_struct.var_14edc6d1db3695bc = 0;
+  dmg_struct.biscritical = 0;
   dmg_struct.var_feef4b237a6beb07 = 0;
 
   if(isDefined(self.var_d37b75616f7c2ee)) {
@@ -215,17 +215,17 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
   }
 
   dmg_struct.num_hits++;
-  var_29a8ba8c9dd43fd2 = 0;
+  n_pap_level = 0;
 
   if(issharedfuncdefined("zombie", "get_pap_level") && isPlayer(dmg_struct.eattacker)) {
-    var_29a8ba8c9dd43fd2 = dmg_struct.eattacker function_f3bb4f4911a1beb2("zombie", "get_pap_level", dmg_struct.objweapon);
+    n_pap_level = dmg_struct.eattacker callsharedfunc("zombie", "get_pap_level", dmg_struct.objweapon);
   }
 
-  if(var_29a8ba8c9dd43fd2 >= 1) {
+  if(n_pap_level >= 1) {
     dmg_struct.idamage /= 2;
   }
 
-  dmg_struct.idamage = function_3c80d46239ce0a0e(dmg_struct, shitloc, var_29a8ba8c9dd43fd2);
+  dmg_struct.idamage = function_3c80d46239ce0a0e(dmg_struct, shitloc, n_pap_level);
 
   if(isPlayer(eattacker) && issharedfuncdefined("player", "onHumanGunPowerupDamage")) {
     adjusted_damage = eattacker[[getsharedfunc("player", "onHumanGunPowerupDamage")]](dmg_struct);
@@ -249,14 +249,14 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
 
   if(isDefined(eattacker) && (isPlayer(eattacker) || isPlayer(eattacker.owner))) {
     eplayer = eattacker;
-    var_2bd7283211fa61e7 = undefined;
+    weaponelementtype = undefined;
 
     if(isPlayer(eattacker.owner)) {
       eplayer = eattacker.owner;
     }
 
     if(isDefined(level.gamemodebundle) && istrue(level.gamemodebundle.var_34f596a1ce19ca) || getdvarint(@ "hash_5e1b3bfc576b756", 0)) {
-      scripts\mp\mp_agent_damage::function_c54b2cc2e762c201(eplayer, self, shitloc, smeansofdeath, sweapon, int(final_damage), vpoint, 0, var_2bd7283211fa61e7, dmg_struct.var_14edc6d1db3695bc, 0);
+      scripts\mp\mp_agent_damage::function_c54b2cc2e762c201(eplayer, self, shitloc, smeansofdeath, sweapon, int(final_damage), vpoint, 0, weaponelementtype, dmg_struct.biscritical, 0);
     }
 
     if(isPlayer(eattacker) && final_damage > 0 && (!isDefined(shitloc) || shitloc != "shield")) {

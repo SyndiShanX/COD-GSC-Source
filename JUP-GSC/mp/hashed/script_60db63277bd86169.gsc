@@ -185,7 +185,7 @@ function function_14808f27c3db4d53(player) {
   var_135375584354a66d = 0;
 
   if(!level.var_92d567c8b79046c2) {
-    if(player.var_bf70ab8d723fc903 >= level.brgametype.var_f90379d3a1b525e8) {
+    if(player.commends >= level.brgametype.var_f90379d3a1b525e8) {
       var_135375584354a66d = 1;
       function_761d2f3c0ae08a4c(player, "commend");
     }
@@ -195,11 +195,11 @@ function function_14808f27c3db4d53(player) {
     var_edc18a0885af9293 = 0;
 
     foreach(player in teamplayers) {
-      if(!isDefined(player.var_bf70ab8d723fc903)) {
+      if(!isDefined(player.commends)) {
         continue;
       }
 
-      var_edc18a0885af9293 += player.var_bf70ab8d723fc903;
+      var_edc18a0885af9293 += player.commends;
     }
 
     if(var_edc18a0885af9293 >= level.brgametype.var_f90379d3a1b525e8) {
@@ -456,7 +456,7 @@ function function_29b527d8b0e817c3(dvar, defaultvalue) {
   return strtok(valuestring, " ");
 }
 
-function function_72beb1ef200ff1b3(instance, var_a5b2c541413aa895) {
+function function_72beb1ef200ff1b3(instance, bautouse) {
   var_193f0fcc8883b966 = isDefined(self.var_e5520effcbe8bd30);
 
   if(!var_193f0fcc8883b966) {
@@ -487,7 +487,7 @@ function function_412c471ac00f23bd(streakinfo) {
     case #"hash_4d5aa76e8707f47b":
     case #"hash_9e36e3bd3a9dd00d":
       if(namespace_db65270d1872d5f7::function_93c1540bbbb4de0b(streakinfo.owner)) {
-        streakinfo.owner function_f3bb4f4911a1beb2("hud", "showErrorMessage", "MP_BR_INGAME/LIMBO_CANNOT_BE_USED_SHIPMENT");
+        streakinfo.owner callsharedfunc("hud", "showErrorMessage", "MP_BR_INGAME/LIMBO_CANNOT_BE_USED_SHIPMENT");
         return 0;
       }
 
@@ -515,7 +515,7 @@ function function_91cd71050f13e80e(owner, supername) {
     case #"hash_51eb45211286556e":
     case #"hash_a14e62dad73e983d":
       if(namespace_db65270d1872d5f7::function_93c1540bbbb4de0b(owner)) {
-        owner function_f3bb4f4911a1beb2("hud", "showErrorMessage", "MP_BR_INGAME/LIMBO_CANNOT_BE_USED_SHIPMENT");
+        owner callsharedfunc("hud", "showErrorMessage", "MP_BR_INGAME/LIMBO_CANNOT_BE_USED_SHIPMENT");
         return 0;
       } else {
         return 1;
@@ -584,8 +584,8 @@ function debugscore(var_fedeab4edff92da5, var_c04a504cc245c1b3) {
       if(!istrue(var_c04a504cc245c1b3)) {
         var_135375584354a66d = function_21de1f4b60801c91(level.players[0], var_36f3228e1d630f1b, 1);
       } else {
-        if(!isDefined(level.players[0].var_bf70ab8d723fc903)) {
-          level.players[0].var_bf70ab8d723fc903 = 140;
+        if(!isDefined(level.players[0].commends)) {
+          level.players[0].commends = 140;
         }
 
         level.players[0] namespace_a29f8cee9c2cca5c::function_b6c9a22dc916543d();

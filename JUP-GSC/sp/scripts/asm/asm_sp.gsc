@@ -20,12 +20,12 @@
 #using scripts\sp\utility;
 #namespace asm_sp;
 
-function asm_init(var_b5da6777bfe1ace8, archetypename) {
+function asm_init(baseasmname, archetypename) {
   if(archetypename == "hero_salter" || archetypename == "farah" || archetypename == "soldier_female") {
     scripts\asm\asm_bb::bb_setshort(1);
   }
 
-  self.asmname = var_b5da6777bfe1ace8;
+  self.asmname = baseasmname;
   first_init = 0;
 
   if(!isDefined(self.asm)) {
@@ -44,7 +44,7 @@ function asm_init(var_b5da6777bfe1ace8, archetypename) {
     self.fndoorneedstoclose = &door_needs_to_close;
     self.fngetdoorcenter = &get_door_center;
     self.fndooralreadyopen = &is_door_already_open;
-    self function_131f6fb305015d0(&scripts\asm\shared\utility::function_b6a072e9e59fb82e);
+    self function_131f6fb305015d0(&scripts\asm\shared\utility::tryopendoor);
   }
 
   assert(isDefined(archetypename) || isDefined(self.animsetname));
@@ -57,14 +57,14 @@ function asm_init(var_b5da6777bfe1ace8, archetypename) {
     }
   }
 
-  if(isDefined(anim.var_cb1f5e85110fe3d) && isDefined(anim.var_cb1f5e85110fe3d[var_b5da6777bfe1ace8])) {
+  if(isDefined(anim.var_cb1f5e85110fe3d) && isDefined(anim.var_cb1f5e85110fe3d[baseasmname])) {
     if(!function_87d74491d0318ba3(self.animsetname) && archetypename != "<dev string:x1c>") {
       level.var_e941151b3a81c996 = 1;
-      self[[anim.var_cb1f5e85110fe3d[var_b5da6777bfe1ace8]]]();
-      scripts\asm\shared\sp\utility::function_ea262b8e6c281e21(var_b5da6777bfe1ace8, archetypename);
+      self[[anim.var_cb1f5e85110fe3d[baseasmname]]]();
+      scripts\asm\shared\sp\utility::function_ea262b8e6c281e21(baseasmname, archetypename);
 
       if(getdvarint(@ "hash_eea71d1ace9f4212", 0) == 1) {
-        assertex(level.var_e941151b3a81c996, "<dev string:x27>" + var_b5da6777bfe1ace8 + "<dev string:x4f>");
+        assertex(level.var_e941151b3a81c996, "<dev string:x27>" + baseasmname + "<dev string:x4f>");
       }
 
       level.var_e941151b3a81c996 = undefined;
@@ -72,7 +72,7 @@ function asm_init(var_b5da6777bfe1ace8, archetypename) {
   }
 
   if(getdvarint(@ "hash_826655be6deb410f", 0) == 1) {
-    function_211ce02c705f8c0c(var_b5da6777bfe1ace8, archetypename);
+    function_211ce02c705f8c0c(baseasmname, archetypename);
   }
 
   function_c051a94f99bd65f1(self.asmname);
@@ -147,18 +147,18 @@ function paininternal() {
       return;
     }
 
-    var_d3b1a8b52402d7e6 = 0;
+    bdidpain = 0;
     result = self asmevalpaintransition(self.asmname);
 
     if(isDefined(result) && result) {
-      var_d3b1a8b52402d7e6 = 1;
+      bdidpain = 1;
     }
 
     if(self.type == "zombie") {
       return;
     }
 
-    if(!var_d3b1a8b52402d7e6 && self.script == "pain") {
+    if(!bdidpain && self.script == "pain") {
       self notify("killanimscript");
     }
   }
@@ -302,28 +302,28 @@ function asm_initfingerposes() {
 
     var_17f47483908fd20f = weights[0];
     var_c163dcdce0c81c63 = var_73cc4a3989eefaad;
-    var_60f4c8371c175047 = weights[1] - var_589c119009395654;
-    var_73cc2c3989eeb8b3 = (var_60f4c8371c175047 > 0.001) - (var_60f4c8371c175047 < -0.001);
+    diff_ikr = weights[1] - var_589c119009395654;
+    state_ikr = (diff_ikr > 0.001) - (diff_ikr < -0.001);
 
-    if(var_73cc2c3989eeb8b3 != var_c163dadce0c817fd) {
-      if(var_73cc2c3989eeb8b3 > 0) {
+    if(state_ikr != var_c163dadce0c817fd) {
+      if(state_ikr > 0) {
         var_589c119009395654 = weights[1];
-        var_c163dadce0c817fd = var_73cc2c3989eeb8b3;
+        var_c163dadce0c817fd = state_ikr;
         wait 0.1;
         asm_ikfingeranim("right");
         continue;
       }
 
-      if(var_73cc2c3989eeb8b3 < 0) {
+      if(state_ikr < 0) {
         var_589c119009395654 = weights[1];
-        var_c163dadce0c817fd = var_73cc2c3989eeb8b3;
+        var_c163dadce0c817fd = state_ikr;
         asm_clearikfingeranim("right");
         continue;
       }
     }
 
     var_589c119009395654 = weights[1];
-    var_c163dadce0c817fd = var_73cc2c3989eeb8b3;
+    var_c163dadce0c817fd = state_ikr;
     wait 0.05;
   }
 }
@@ -351,12 +351,12 @@ function asm_playikfingeranim(side) {
     return;
   }
 
-  var_de98a8c7ccb5fc4d = "ik_finger_pose_r";
+  fingerstate = "ik_finger_pose_r";
   var_6bae40552fced7c0 = "ik_fingers_r";
-  var_f996e26b279379c4 = getweaponbasename(currentweapon);
+  fingeralias = getweaponbasename(currentweapon);
 
   if(side == "left") {
-    var_de98a8c7ccb5fc4d = "ik_finger_pose_l";
+    fingerstate = "ik_finger_pose_l";
     var_6bae40552fced7c0 = "ik_fingers_l";
     weaponattachments = getweaponattachments(currentweapon);
 
@@ -365,41 +365,41 @@ function asm_playikfingeranim(side) {
         attachprefix = getsubstr(atch, 0, 7);
 
         if(attachprefix == "ub_mike") {
-          var_f996e26b279379c4 = "iw9_ub_mike";
+          fingeralias = "iw9_ub_mike";
         }
 
         if(attachprefix == "ub_golf") {
-          var_f996e26b279379c4 = "iw9_ub_golf";
+          fingeralias = "iw9_ub_golf";
         }
 
         if(attachprefix == "gripang") {
-          var_f996e26b279379c4 = "iw9_gripang";
+          fingeralias = "iw9_gripang";
         }
 
         if(attachprefix == "gripver") {
-          var_f996e26b279379c4 = "iw9_gripver";
+          fingeralias = "iw9_gripver";
         }
       }
     }
   }
 
-  if(!asm_hasstatesp(self.animsetname, var_de98a8c7ccb5fc4d)) {
-    println("<dev string:x6f>" + self.animsetname + "<dev string:x8a>" + var_de98a8c7ccb5fc4d);
+  if(!asm_hasstatesp(self.animsetname, fingerstate)) {
+    println("<dev string:x6f>" + self.animsetname + "<dev string:x8a>" + fingerstate);
     return;
   }
 
-  if(!isDefined(var_f996e26b279379c4) || !asm_hasalias(var_de98a8c7ccb5fc4d, var_f996e26b279379c4)) {
-    if(!isDefined(var_f996e26b279379c4)) {
-      var_f996e26b279379c4 = "UNDEFINED";
+  if(!isDefined(fingeralias) || !asm_hasalias(fingerstate, fingeralias)) {
+    if(!isDefined(fingeralias)) {
+      fingeralias = "UNDEFINED";
     }
 
-    println("<dev string:xa0>" + var_de98a8c7ccb5fc4d + "<dev string:xd3>" + var_f996e26b279379c4 + "<dev string:xdb>" + getcompleteweaponname(currentweapon));
+    println("<dev string:xa0>" + fingerstate + "<dev string:xd3>" + fingeralias + "<dev string:xdb>" + getcompleteweaponname(currentweapon));
     return;
   }
 
-  fingeranim = asm_getxanim(var_de98a8c7ccb5fc4d, asm_lookupanimfromalias(var_de98a8c7ccb5fc4d, var_f996e26b279379c4));
-  var_b34ade57980d6c64 = asm_getxanim("knobs", asm_lookupanimfromalias("knobs", var_6bae40552fced7c0));
-  self setanim(var_b34ade57980d6c64, 1, 0.3, 1);
+  fingeranim = asm_getxanim(fingerstate, asm_lookupanimfromalias(fingerstate, fingeralias));
+  fingerknob = asm_getxanim("knobs", asm_lookupanimfromalias("knobs", var_6bae40552fced7c0));
+  self setanim(fingerknob, 1, 0.3, 1);
   self setanim(fingeranim, 1, 0.3, 1);
 }
 
@@ -415,8 +415,8 @@ function asm_clearikfingeranim(side) {
     return;
   }
 
-  var_b34ade57980d6c64 = asm_getxanim("knobs", asm_lookupanimfromalias("knobs", var_6bae40552fced7c0));
-  self clearanim(var_b34ade57980d6c64, 0.3, 1);
+  fingerknob = asm_getxanim("knobs", asm_lookupanimfromalias("knobs", var_6bae40552fced7c0));
+  self clearanim(fingerknob, 0.3, 1);
 }
 
 function asm_playvisorraise(suffix) {
@@ -663,7 +663,7 @@ function asm_setupaim_sp(asmname, statename, blendtime, use_5) {
   }
 
   asm_setstateaimlimits(asmname, statename);
-  var_59c51d94cf774c12 = asm_isfrantic();
+  bfrantic = asm_isfrantic();
   arcname = self.animsetname;
   aim_5 = undefined;
 
@@ -676,10 +676,10 @@ function asm_setupaim_sp(asmname, statename, blendtime, use_5) {
     }
   }
 
-  self setanimknoblimited(asm_getxanim(statename, archetypegetrandomalias(arcname, statename, weapclass + "_aim_8", var_59c51d94cf774c12)), 1, blendtime);
-  self setanimknoblimited(asm_getxanim(statename, archetypegetrandomalias(arcname, statename, weapclass + "_aim_2", var_59c51d94cf774c12)), 1, blendtime);
-  self setanimknoblimited(asm_getxanim(statename, archetypegetrandomalias(arcname, statename, weapclass + "_aim_4", var_59c51d94cf774c12)), 1, blendtime);
-  self setanimknoblimited(asm_getxanim(statename, archetypegetrandomalias(arcname, statename, weapclass + "_aim_6", var_59c51d94cf774c12)), 1, blendtime);
+  self setanimknoblimited(asm_getxanim(statename, archetypegetrandomalias(arcname, statename, weapclass + "_aim_8", bfrantic)), 1, blendtime);
+  self setanimknoblimited(asm_getxanim(statename, archetypegetrandomalias(arcname, statename, weapclass + "_aim_2", bfrantic)), 1, blendtime);
+  self setanimknoblimited(asm_getxanim(statename, archetypegetrandomalias(arcname, statename, weapclass + "_aim_4", bfrantic)), 1, blendtime);
+  self setanimknoblimited(asm_getxanim(statename, archetypegetrandomalias(arcname, statename, weapclass + "_aim_6", bfrantic)), 1, blendtime);
 
   if(isDefined(aim_5)) {
     self setanimlimited(aim_5, 1, blendtime);
@@ -701,13 +701,13 @@ function asm_setupaim_sp(asmname, statename, blendtime, use_5) {
 
   if(var_c09a8195928cd961) {
     self notify("StopCleanupAimKnobs");
-    self.asm.track.aim_2 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_2", var_59c51d94cf774c12));
-    self.asm.track.aim_4 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_4", var_59c51d94cf774c12));
-    self.asm.track.aim_6 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_6", var_59c51d94cf774c12));
-    self.asm.track.aim_8 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_8", var_59c51d94cf774c12));
+    self.asm.track.aim_2 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_2", bfrantic));
+    self.asm.track.aim_4 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_4", bfrantic));
+    self.asm.track.aim_6 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_6", bfrantic));
+    self.asm.track.aim_8 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_8", bfrantic));
 
     if(isDefined(aim_5)) {
-      self.asm.track.aim_5 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_5", var_59c51d94cf774c12));
+      self.asm.track.aim_5 = asm_getxanim(statename, archetypegetrandomalias(arcname, statename, "aim_knob_5", bfrantic));
     }
 
     thread asm_cleanupaimknobsonterminate(statename);
@@ -796,9 +796,9 @@ function door_needs_to_close(door) {
   }
 
   doorcenter = door scripts\sp\door_internal::get_door_bottom_center();
-  var_9dfa31b22e1f2822 = self.origin - doorcenter;
+  doortome = self.origin - doorcenter;
   doordir = anglesToForward(doorangles);
-  return vectordot(doornormal, doordir) * vectordot(doornormal, var_9dfa31b22e1f2822) > 0;
+  return vectordot(doornormal, doordir) * vectordot(doornormal, doortome) > 0;
 }
 
 function close_door(door) {
@@ -856,8 +856,8 @@ function function_716870ebd1589f87() {
   bb_claimshootparams(0);
 
   while(true) {
-    var_7734b74f47002738 = level.player.origin;
-    bb_updateshootparams_pos(var_7734b74f47002738);
+    myshootpos = level.player.origin;
+    bb_updateshootparams_pos(myshootpos);
     wait 0.05;
   }
 }
@@ -888,18 +888,18 @@ function function_211ce02c705f8c0c(asmname, archetypename) {
 
           ontimes = getnotetracktimes(xanim, "<dev string:x11c>");
           offtimes = getnotetracktimes(xanim, "<dev string:x115>");
-          var_bc5c3d73d3734ec9 = 0;
-          var_5ca69b7e9f1f2d0b = -1;
+          lastontime = 0;
+          lastofftime = -1;
 
           if(ontimes.size > 0) {
-            var_bc5c3d73d3734ec9 = ontimes[ontimes.size - 1];
+            lastontime = ontimes[ontimes.size - 1];
           }
 
           if(offtimes.size > 0) {
-            var_5ca69b7e9f1f2d0b = offtimes[offtimes.size - 1];
+            lastofftime = offtimes[offtimes.size - 1];
           }
 
-          if(var_5ca69b7e9f1f2d0b >= var_bc5c3d73d3734ec9) {
+          if(lastofftime >= lastontime) {
             errormsg = "<dev string:x171>" + archetypename + "<dev string:x152>" + statename + "<dev string:x15c>" + alias + "<dev string:x166>" + xanim + "<dev string:x16f>";
             assertmsg(errormsg);
           }

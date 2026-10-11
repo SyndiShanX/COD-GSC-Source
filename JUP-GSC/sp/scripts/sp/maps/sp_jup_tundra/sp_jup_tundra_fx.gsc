@@ -429,13 +429,13 @@ function function_462cdb154f95593() {
   exploder("vfx_debris_silt_main");
   exploder("vfx_player_screen_bubbles");
   wait 0.1;
-  thread function_7d9b815585592db4();
+  thread slowmo_lerp();
   thread function_36228ff8b8d1413b();
   wait 0.15;
   kill_exploder("vfx_vehicle_drive_shadows");
 }
 
-function function_7d9b815585592db4() {
+function slowmo_lerp() {
   if(istrue(level.no_slowmo)) {
     return;
   }
@@ -543,7 +543,7 @@ function function_8fcf5c935fabd79a() {
 function function_266f0187f23b7269() {
   mask = getEnt("player_mask", "targetname");
   animnode = getStruct("scene_maskOff_trigger_test", "targetname");
-  animnode scene::function_bc521bee52fde214(0.2);
+  animnode scene::set_anim_rate(0.2);
   animnode thread scene::play();
   mask linktoplayerview(level.player, "tag_origin", (0.5, 0, 3.5), (-90, 90, 0));
   wait 15;

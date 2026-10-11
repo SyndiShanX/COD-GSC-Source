@@ -407,7 +407,7 @@ function initscoredata(spawnpoint) {
   spawnpoint.analytics.spawntype = 0;
 
   spawnpoint.debugscoredata = [];
-  spawnpoint.var_b158a46400d7573d = [];
+  spawnpoint.debugcriticaldata = [];
 }
 
 function updatespawnpoints(spawnpoints, skipfrontline) {

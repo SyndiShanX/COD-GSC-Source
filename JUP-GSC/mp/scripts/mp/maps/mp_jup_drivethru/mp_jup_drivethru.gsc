@@ -326,8 +326,8 @@ function easter_egg() {
   roof_confetti_loc = getStruct("eg_roof_confetti_loc", "targetname");
   flag_wait_all("flag_easter_egg_trig_1", "flag_easter_egg_trig_2", "flag_easter_egg_trig_3", "flag_easter_egg_trig_4");
 
-  foreach(var_ed8a4f03e8cb0394 in fries) {
-    var_ed8a4f03e8cb0394 hide();
+  foreach(fry in fries) {
+    fry hide();
   }
 
   if(isDefined(level.big_duck)) {

@@ -203,18 +203,18 @@ function animscriptedaction(asmname, statename, params) {
 }
 
 function randomizepassthroughchildren(asmname, statename, tostatename, params) {
-  var_4826b510746869c3 = anim.asm[asmname].states[tostatename];
-  assert(isDefined(var_4826b510746869c3));
+  ptostate = anim.asm[asmname].states[tostatename];
+  assert(isDefined(ptostate));
 
-  if(isDefined(var_4826b510746869c3.transitions)) {
-    if(var_4826b510746869c3.transitions.size == 2) {
+  if(isDefined(ptostate.transitions)) {
+    if(ptostate.transitions.size == 2) {
       if(cointoss()) {
-        temp = var_4826b510746869c3.transitions[0];
-        var_4826b510746869c3.transitions[0] = var_4826b510746869c3.transitions[1];
-        var_4826b510746869c3.transitions[1] = temp;
+        temp = ptostate.transitions[0];
+        ptostate.transitions[0] = ptostate.transitions[1];
+        ptostate.transitions[1] = temp;
       }
     } else {
-      var_4826b510746869c3.transitions = scripts\engine\utility::array_randomize(var_4826b510746869c3.transitions);
+      ptostate.transitions = scripts\engine\utility::array_randomize(ptostate.transitions);
     }
   }
 
@@ -271,7 +271,7 @@ function getarrivalnode() {
 }
 
 function isarrivaltypecivilian(asmname, arrivaltype) {
-  if(isDefined(self.var_a57082fdf62bc898)) {
+  if(isDefined(self.customarrivalstate)) {
     return (arrivaltype == "Custom");
   }
 
@@ -282,10 +282,10 @@ function isarrivaltypecivilian(asmname, arrivaltype) {
   node = getarrivalnode();
 
   if(isDefined(node) && isnode(node) && node iscovermultinode()) {
-    var_bc81741e5658c761 = getbestcovermultinodetype(node);
+    target_nodetype = getbestcovermultinodetype(node);
 
-    if(isDefined(var_bc81741e5658c761)) {
-      node setcovermultinodetype(var_bc81741e5658c761);
+    if(isDefined(target_nodetype)) {
+      node setcovermultinodetype(target_nodetype);
     }
   }
 
@@ -348,7 +348,7 @@ function isarrivaltypecivilian(asmname, arrivaltype) {
 function isarrivaltype(asmname, statename, tostatename, params) {
   arrivaltype = params;
 
-  if(isDefined(self.var_a57082fdf62bc898)) {
+  if(isDefined(self.customarrivalstate)) {
     return (arrivaltype == "Custom");
   }
 
@@ -359,10 +359,10 @@ function isarrivaltype(asmname, statename, tostatename, params) {
   node = getarrivalnode();
 
   if(isDefined(node) && isnode(node) && node iscovermultinode()) {
-    var_bc81741e5658c761 = getbestcovermultinodetype(node);
+    target_nodetype = getbestcovermultinodetype(node);
 
-    if(isDefined(var_bc81741e5658c761) && node.type != var_bc81741e5658c761 && arrivaltype == var_bc81741e5658c761) {
-      node setcovermultinodetype(var_bc81741e5658c761);
+    if(isDefined(target_nodetype) && node.type != target_nodetype && arrivaltype == target_nodetype) {
+      node setcovermultinodetype(target_nodetype);
     }
   }
 
@@ -614,7 +614,7 @@ function closedoorifnecessary(door) {
   }
 }
 
-function function_b6a072e9e59fb82e(asmname, statename, var_d6e02014cb6c5b06) {
+function tryopendoor(asmname, statename, var_d6e02014cb6c5b06) {
   self endon(statename + "_finished");
   self endon("death");
 
@@ -688,7 +688,7 @@ function function_4d06ccc14a583480(asmname, statename, var_d6e02014cb6c5b06) {
   self._blackboard.door_opened = undefined;
   var_36effa6a4b76959f = 1;
   cdooroffset = 160;
-  var_ccd231d7c8137213 = 2;
+  cdoorpadding = 2;
   targetspeed = length2d(self.velocity);
 
   if(!istrue(var_d6e02014cb6c5b06)) {
@@ -701,11 +701,11 @@ function function_4d06ccc14a583480(asmname, statename, var_d6e02014cb6c5b06) {
     }
   }
 
-  var_76c751e661fc569f = var_36effa6a4b76959f + cdooroffset + var_ccd231d7c8137213;
+  var_76c751e661fc569f = var_36effa6a4b76959f + cdooroffset + cdoorpadding;
   doorcenter = self[[self.fngetdoorcenter]](door);
-  var_8a2d1a3f463dffac = distance2d(doorcenter, self.origin);
+  disttodoor = distance2d(doorcenter, self.origin);
 
-  if(var_8a2d1a3f463dffac < var_76c751e661fc569f) {
+  if(disttodoor < var_76c751e661fc569f) {
     self.isopeningdoor = 1;
     thread closedoorifnecessary(door);
     var_382ab682aa991089 = 5;
@@ -714,7 +714,7 @@ function function_4d06ccc14a583480(asmname, statename, var_d6e02014cb6c5b06) {
       var_382ab682aa991089 = 2;
     }
 
-    if(istrue(var_d6e02014cb6c5b06) || var_8a2d1a3f463dffac < var_76c751e661fc569f - targetspeed * var_382ab682aa991089 * level.framedurationseconds) {
+    if(istrue(var_d6e02014cb6c5b06) || disttodoor < var_76c751e661fc569f - targetspeed * var_382ab682aa991089 * level.framedurationseconds) {
       assert(isDefined(self.fndooropen));
       thread function_4dd19bfd2ee610f1(statename);
       t = opendooratreasonabletime();
@@ -737,8 +737,8 @@ function function_4d06ccc14a583480(asmname, statename, var_d6e02014cb6c5b06) {
   }
 }
 
-function function_e183019dcea5b774(doorstate, var_60caa01062501fdc, targetspeed) {
-  doorxanim = asm_getxanim(doorstate, var_60caa01062501fdc);
+function function_e183019dcea5b774(doorstate, opendooranim, targetspeed) {
+  doorxanim = asm_getxanim(doorstate, opendooranim);
   assertex(animhasnotetrack(doorxanim, "<dev string:x49>"), doorxanim + "<dev string:x57>");
   opentimes = getnotetracktimes(doorxanim, "door_touch");
   assert(opentimes.size > 0);
@@ -908,7 +908,7 @@ function chooseanim_weaponclassprepended(asmname, statename, params) {
 }
 
 function getarrivaltype() {
-  if(isDefined(self.var_a57082fdf62bc898)) {
+  if(isDefined(self.customarrivalstate)) {
     return "Custom";
   }
 
@@ -950,10 +950,10 @@ function getarrivaltype() {
   }
 
   if(isnode(node) && node iscovermultinode()) {
-    var_bc81741e5658c761 = getbestcovermultinodetype(node);
+    target_nodetype = getbestcovermultinodetype(node);
 
-    if(isDefined(var_bc81741e5658c761) && var_bc81741e5658c761 != node.type) {
-      node setcovermultinodetype(var_bc81741e5658c761);
+    if(isDefined(target_nodetype) && target_nodetype != node.type) {
+      node setcovermultinodetype(target_nodetype);
     }
   }
 
@@ -1066,7 +1066,7 @@ function chooselightreactionanim(asmname, statename, params) {
   return asm_lookupanimfromalias(statename, direction);
 }
 
-function isshocked(asmname, currentstate, var_caae90accdd1699c, params) {
+function isshocked(asmname, currentstate, transitiontostate, params) {
   if(isDefined(self.damagemod) && self.damagemod == "MOD_IMPACT") {
     return false;
   }
@@ -1132,10 +1132,10 @@ function animscriptedaction_terminate(asmname, statename, params) {
   self.gunposeoverride_internal = undefined;
 
   if(isDefined(self.lookatatrnode)) {
-    var_ae4bd9db62367d96 = asm_getheadlookknobifexists();
+    headlook_graft_node = asm_getheadlookknobifexists();
 
-    if(isDefined(var_ae4bd9db62367d96)) {
-      self clearanim(var_ae4bd9db62367d96, 0.2);
+    if(isDefined(headlook_graft_node)) {
+      self clearanim(headlook_graft_node, 0.2);
       self.lookatatrnode = undefined;
     }
   }
@@ -1143,10 +1143,10 @@ function animscriptedaction_terminate(asmname, statename, params) {
 
 function animsriptedactioncivilian_terminate(asmname, statename, params) {
   if(isDefined(self.lookatatrnode)) {
-    var_ae4bd9db62367d96 = asm_getheadlookknobifexists();
+    headlook_graft_node = asm_getheadlookknobifexists();
 
-    if(isDefined(var_ae4bd9db62367d96)) {
-      self clearanim(var_ae4bd9db62367d96, 0.2, self.lookatatrnode);
+    if(isDefined(headlook_graft_node)) {
+      self clearanim(headlook_graft_node, 0.2, self.lookatatrnode);
       self.lookatatrnode = undefined;
     }
   }
@@ -1347,7 +1347,7 @@ function setupsoldierdefaults() {
   self.minexposedgrenadedist = 750;
   isally = !self isbadguy();
   self.a.lastenemytime = curtime;
-  self.var_98add129a7ecb962 = !isally;
+  self.allowlongdeath = !isally;
   self.a.paintime = 0;
   self.reacttobulletchance = 0.8;
   self._animactive = 0;
@@ -1425,7 +1425,7 @@ function isfixednodeinbadplaceandshouldcrouch() {
 }
 
 function gethighestallowedstance() {
-  var_6e42e802f04ee4b6 = undefined;
+  nodeshighestallowedstance = undefined;
   var_58b5e042653e4c9 = 1;
   var_1462639ed10c0aa5 = 1;
   var_fbc7d1fe7086d737 = 1;
@@ -1435,22 +1435,22 @@ function gethighestallowedstance() {
     var_1462639ed10c0aa5 = self.node doesnodeallowstance("crouch");
     var_fbc7d1fe7086d737 = self.node doesnodeallowstance("prone");
   } else if(!scripts\asm\asm_bb::bb_moverequested() && istrue(self._blackboard.shootparams_valid) && isDefined(self._blackboard.shootparams_pos)) {
-    var_6e728f1543cfb7bf = self isstanceallowed("crouch");
+    bcancrouch = self isstanceallowed("crouch");
 
-    if(var_6e728f1543cfb7bf && isfixednodeinbadplaceandshouldcrouch()) {
+    if(bcancrouch && isfixednodeinbadplaceandshouldcrouch()) {
       return "crouch";
     }
 
-    var_1ffc686a2062eba7 = distancesquared(self.origin, self._blackboard.shootparams_pos);
+    distsqtoshootpos = distancesquared(self.origin, self._blackboard.shootparams_pos);
 
-    if(var_1ffc686a2062eba7 > 262144 && var_6e728f1543cfb7bf && !actor_is3d() && !isusingsidearm()) {
-      var_6e728f1543cfb7bf = 1;
+    if(distsqtoshootpos > 262144 && bcancrouch && !actor_is3d() && !isusingsidearm()) {
+      bcancrouch = 1;
 
       if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 16 && !self.node doesnodeallowstance("crouch")) {
-        var_6e728f1543cfb7bf = abs(angleclamp180(self.node.angles[1] - self.angles[1])) > 90;
+        bcancrouch = abs(angleclamp180(self.node.angles[1] - self.angles[1])) > 90;
       }
 
-      if(var_6e728f1543cfb7bf) {
+      if(bcancrouch) {
         if(sighttracepassed(self.origin + (0, 0, 32), self._blackboard.shootparams_pos, 0, undefined)) {
           return "crouch";
         }
@@ -1542,14 +1542,14 @@ function function_87d74491d0318ba3(archetype) {
 
 function function_d6919795e4b24d3a(asmname, statename, xanim, note) {
   if(!animhasnotetrack(xanim, note)) {
-    print("<dev string:x168>" + note + "<dev string:x1b3>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x1d6>");
+    print("<dev string:x168>" + note + "<dev string:x1b3>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x1d6>");
     level.var_e941151b3a81c996 = 0;
   }
 }
 
 function function_37064c5f2a8f68ef(asmname, statename, xanim, note) {
   if(animhasnotetrack(xanim, note)) {
-    print("<dev string:x1dc>" + note + "<dev string:x1b3>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x1d6>");
+    print("<dev string:x1dc>" + note + "<dev string:x1b3>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x1d6>");
     level.var_e941151b3a81c996 = 0;
   }
 }
@@ -1560,7 +1560,7 @@ function function_6893c43c1838f552(asmname, statename, xanim, note1, note2) {
   }
 
   if(getnotetracktimes(xanim, note1)[0] >= getnotetracktimes(xanim, note2)[0]) {
-    print("<dev string:x227>" + note1 + "<dev string:x26a>" + note2 + "<dev string:x1b3>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x1d6>");
+    print("<dev string:x227>" + note1 + "<dev string:x26a>" + note2 + "<dev string:x1b3>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x1d6>");
     level.var_e941151b3a81c996 = 0;
   }
 }
@@ -1572,7 +1572,7 @@ function function_3474c2003e05a5e0(asmname, statename, xanim, min_translation) {
   if(d < min_translation) {
     println("<dev string:x285>" + min_translation + "<dev string:x2d9>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x2fb>");
     level.var_e941151b3a81c996 = 0;
-    println("<dev string:x300>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x305>" + d);
+    println("<dev string:x300>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x305>" + d);
   }
 }
 
@@ -1599,7 +1599,7 @@ function function_481385c3b908b994(asmname, statename, xanim, max_translation) {
   if(d > max_translation) {
     println("<dev string:x32b>" + max_translation + "<dev string:x2d9>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x2fb>");
     level.var_e941151b3a81c996 = 0;
-    println("<dev string:x300>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x305>" + d);
+    println("<dev string:x300>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x305>" + d);
   }
 }
 
@@ -1610,7 +1610,7 @@ function function_7329f095ddbdb229(asmname, statename, xanim, notetrack, max_tra
     var_ad9ba4beee7c6c8e = getnotetracktimes(xanim, "<dev string:x314>");
 
     if(var_ad9ba4beee7c6c8e.size != 1) {
-      println("<dev string:x37e>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x3ca>" + function_3c8848a3a11b2553(getanimname(xanim)));
+      println("<dev string:x37e>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x3ca>" + getxhashsourcename(getanimname(xanim)));
     }
 
     stop_time = var_ad9ba4beee7c6c8e[0];
@@ -1620,7 +1620,7 @@ function function_7329f095ddbdb229(asmname, statename, xanim, notetrack, max_tra
     finish_notes = getnotetracktimes(xanim, "<dev string:x321>");
 
     if(finish_notes.size != 1) {
-      println("<dev string:x3d0>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x3ca>" + function_3c8848a3a11b2553(getanimname(xanim)));
+      println("<dev string:x3d0>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x3ca>" + getxhashsourcename(getanimname(xanim)));
     }
 
     stop_time = min(stop_time, finish_notes[0]);
@@ -1632,7 +1632,7 @@ function function_7329f095ddbdb229(asmname, statename, xanim, notetrack, max_tra
     notes = getnotetracktimes(xanim, notetrack);
 
     if(notes.size != 1) {
-      println("<dev string:x419>" + notetrack + "<dev string:x44c>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x3ca>" + function_3c8848a3a11b2553(getanimname(xanim)));
+      println("<dev string:x419>" + notetrack + "<dev string:x44c>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x3ca>" + getxhashsourcename(getanimname(xanim)));
     }
 
     start_time = notes[0];
@@ -1646,11 +1646,11 @@ function function_7329f095ddbdb229(asmname, statename, xanim, notetrack, max_tra
   if(d > max_translation) {
     println("<dev string:x460>" + max_translation + "<dev string:x4c3>" + notetrack + "<dev string:x4da>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x2fb>");
     level.var_e941151b3a81c996 = 0;
-    println("<dev string:x300>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x305>" + d);
+    println("<dev string:x300>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x305>" + d);
   }
 }
 
-function function_96b38b91937c6971(asmname, statename, note) {
+function validator_notetrack(asmname, statename, note) {
   if(isagent(self)) {
     return;
   }
@@ -1710,7 +1710,7 @@ function function_fb8af5455aa10890(asmname, statename, params) {
       if(d > tolerance) {
         println("<dev string:x4ef>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x536>" + tolerance + "<dev string:x2fb>");
         level.var_e941151b3a81c996 = 0;
-        println("<dev string:x300>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x305>" + d + "<dev string:x545>" + t);
+        println("<dev string:x300>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x305>" + d + "<dev string:x545>" + t);
         break;
       }
     }
@@ -1772,7 +1772,7 @@ function function_e291a61d131cb535(asmname, statename, params) {
         if(shoottimes.size < var_a401bfc2f3617031) {
           println("<dev string:x5b3>" + asmname + "<dev string:x2f0>" + statename + "<dev string:x2fb>");
           level.var_e941151b3a81c996 = 0;
-          println("<dev string:x5f9>" + alias + "<dev string:x603>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x608>" + shoottimes.size + "<dev string:x616>" + var_a401bfc2f3617031);
+          println("<dev string:x5f9>" + alias + "<dev string:x603>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x608>" + shoottimes.size + "<dev string:x616>" + var_a401bfc2f3617031);
         }
       }
     }
@@ -1794,7 +1794,7 @@ function function_291d962b22a07e21(asmname, statename, alias, xanim) {
   }
 }
 
-function function_5ac3e08bd8b8783b(asmname, statename, params) {
+function validator_arrival(asmname, statename, params) {
   if(isagent(self)) {
     return;
   }
@@ -1875,12 +1875,12 @@ function function_9a500dc0cc17d6da(asmname, statename, params) {
     if(isDefined(anims)) {
       foreach(xanim in anims) {
         if(!animhasnotetrack(xanim, "<dev string:x703>") && !animhasnotetrack(xanim, "<dev string:x711>") && !animhasnotetrack(xanim, "<dev string:x720>")) {
-          print("<dev string:x732>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x1d6>");
+          print("<dev string:x732>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x1d6>");
           level.var_e941151b3a81c996 = 0;
         }
 
         if(!animhasnotetrack(xanim, "<dev string:x6da>") && !animhasnotetrack(xanim, "<dev string:x6eb>")) {
-          print("<dev string:x7c9>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x1d6>");
+          print("<dev string:x7c9>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x1d6>");
           level.var_e941151b3a81c996 = 0;
         }
       }
@@ -1888,7 +1888,7 @@ function function_9a500dc0cc17d6da(asmname, statename, params) {
   }
 }
 
-function function_5cfc0f7a00ff16ae(asmname, statename, params) {
+function validator_exit(asmname, statename, params) {
   if(isagent(self)) {
     return;
   }
@@ -1919,7 +1919,7 @@ function function_5cfc0f7a00ff16ae(asmname, statename, params) {
   }
 }
 
-function function_d63d29d0192b914(asmname, statename, params) {
+function validator_death(asmname, statename, params) {
   if(isagent(self)) {
     return;
   }
@@ -1945,7 +1945,7 @@ function function_d63d29d0192b914(asmname, statename, params) {
 
           foreach(note in ragdoll_times) {
             if(note > var_acfa015f21c55596) {
-              print("<dev string:x86f>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + function_3c8848a3a11b2553(getanimname(xanim)) + "<dev string:x1d6>");
+              print("<dev string:x86f>" + asmname + "<dev string:x1bf>" + statename + "<dev string:x1cb>" + getxhashsourcename(getanimname(xanim)) + "<dev string:x1d6>");
               level.var_e941151b3a81c996 = 0;
             }
           }
@@ -1986,7 +1986,7 @@ function function_a61779d8c4b66cda(asmname, statename, params) {
   }
 }
 
-function function_a92ee440c129eb3b(asmname, statename, params) {
+function validator_reload(asmname, statename, params) {
   if(isagent(self)) {
     return;
   }
@@ -2055,7 +2055,7 @@ function toggle_poiauto(shouldenable, yawmin, yawmax, pitchmin, pitchmax) {
 
   self notify("poiauto_disable");
   self.poiauto = undefined;
-  self.var_7731804dd640d78d = 0;
+  self.poiauto_valid = 0;
   scripts\common\ai::set_gunpose("automatic");
   self stoplookat();
 }
@@ -2237,15 +2237,15 @@ function poiauto_init(yawmin, yawmax, pitchmin, pitchmax) {
   self.poiauto.yawmin = yawmin;
   self.poiauto.pitchmin = pitchmin;
   self.poiauto.pitchmax = pitchmax;
-  self.var_7731804dd640d78d = 1;
+  self.poiauto_valid = 1;
 }
 
 function poiauto_think() {
   self endon("poiauto_disable");
   self endon("death");
   var_c2d5805bcd983331 = 500;
-  var_5c9ae5533ed1462 = 0;
-  var_4fc17a8ee1c0d087 = 0;
+  nextaimtimer = 0;
+  lastaimtimer = 0;
   var_46de370fcb18a1b0 = gettime() + 30000;
 
   if(!isDefined(self.poiauto)) {
@@ -2258,24 +2258,24 @@ function poiauto_think() {
     if(var_46de370fcb18a1b0 <= gettime()) {
       self.poiauto_angles = (0, 0, 0);
 
-      if(var_46de370fcb18a1b0 == var_5c9ae5533ed1462) {
+      if(var_46de370fcb18a1b0 == nextaimtimer) {
         secondaim = 1;
       }
     }
 
-    if(var_5c9ae5533ed1462 <= gettime()) {
+    if(nextaimtimer <= gettime()) {
       var_46de370fcb18a1b0 = gettime() + int(randomfloatrange(0.8, 1.8) * 1000);
-      var_4fc17a8ee1c0d087 = gettime();
+      lastaimtimer = gettime();
       poiauto_setnewaimangle(secondaim);
       var_3080e8000aad4930 = var_c2d5805bcd983331 - gettime();
       var_37b7ec64d7b29bdb = var_46de370fcb18a1b0 - gettime();
 
       if(abs(var_37b7ec64d7b29bdb - var_3080e8000aad4930) >= 550 && cointoss()) {
-        var_5c9ae5533ed1462 = var_46de370fcb18a1b0;
+        nextaimtimer = var_46de370fcb18a1b0;
       } else if(var_3080e8000aad4930 > 3000) {
-        var_5c9ae5533ed1462 = gettime() + randomintrange(2000, 3000);
+        nextaimtimer = gettime() + randomintrange(2000, 3000);
       } else {
-        var_5c9ae5533ed1462 = gettime() + var_3080e8000aad4930 + 550 + randomintrange(1000, 2000);
+        nextaimtimer = gettime() + var_3080e8000aad4930 + 550 + randomintrange(1000, 2000);
       }
     }
 
@@ -2295,7 +2295,7 @@ function poiauto_glancerandom() {
   yaw = randomfloatrange(-45, 45);
   pitch = randomfloatrange(-20, 20);
   pos = poiauto_relativeangletopos((pitch, yaw, 0));
-  self.var_8ce6d9fc1435dd86 = 1;
+  self.poiauto_glancing = 1;
   thread poiauto_glanceend();
   self glanceatpos(pos);
 }
@@ -2304,11 +2304,11 @@ function poiauto_glanceend() {
   self notify("poiauto_glanceend");
   self endon("poiauto_glanceend");
   wait 0.55;
-  self.var_8ce6d9fc1435dd86 = 0;
+  self.poiauto_glancing = 0;
 }
 
 function poiauto_isglancing() {
-  return istrue(self.var_8ce6d9fc1435dd86);
+  return istrue(self.poiauto_glancing);
 }
 
 function poiauto_setnewaimangle(secondaim) {

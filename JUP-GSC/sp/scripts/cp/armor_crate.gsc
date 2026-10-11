@@ -11,35 +11,35 @@
 #namespace armor_crate;
 
 function armor_crate_init() {
-  var_86280fefb94b6b28 = spawnStruct();
-  var_86280fefb94b6b28.id = "armor";
-  var_86280fefb94b6b28.weaponinfo = "iw8_armor_marker_cp";
-  var_86280fefb94b6b28.modelbase = "offhand_2h_wm_armor_box_v0";
-  var_86280fefb94b6b28.hintstring = &"EQUIPMENT_HINTS/ARMOR_BOX_USE";
-  var_86280fefb94b6b28.streakname = "armor";
-  var_86280fefb94b6b28.splashname = "used_support_box";
-  var_86280fefb94b6b28.shadername = "hud_icon_fieldupgrade_armor_box";
-  var_86280fefb94b6b28.headicon = "hud_icon_fieldupgrade_armor_box";
-  var_86280fefb94b6b28.headiconoffset = 20;
-  var_86280fefb94b6b28.lifespan = 90;
-  var_86280fefb94b6b28.usexp = 50;
-  var_86280fefb94b6b28.onusesfx = "ammo_crate_use";
-  var_86280fefb94b6b28.deployedsfx = "ammo_crate_use";
-  var_86280fefb94b6b28.deathvfx = loadfx("vfx/iw9/fieldupgrades/ammobox/vfx_armorbox_timeout.vfx");
-  var_86280fefb94b6b28.onusecallback = &armorbox_onusedeployable;
-  var_86280fefb94b6b28.canusecallback = &armorbox_canusedeployable;
-  var_86280fefb94b6b28.deployfunc = &function_a011821531cf62c8;
-  var_86280fefb94b6b28.onusethanksbc = #"ping_social_thanks";
-  var_86280fefb94b6b28.usetime = 1000;
-  var_86280fefb94b6b28.maxhealth = 100;
-  var_86280fefb94b6b28.maxuses = 3;
-  var_86280fefb94b6b28.canreusebox = 0;
-  var_86280fefb94b6b28.allowmeleedamage = 1;
-  var_86280fefb94b6b28.damagefeedback = "";
-  var_86280fefb94b6b28.grenadeusefunc = &supportbox_grenadelaunchfunc;
-  var_86280fefb94b6b28.ondeploycallback = &supportbox_ondeploy;
-  var_86280fefb94b6b28.deployanimduration = supportbox_getdeployanimduration();
-  level.boxsettings["armor"] = var_86280fefb94b6b28;
+  boxconfig = spawnStruct();
+  boxconfig.id = "armor";
+  boxconfig.weaponinfo = "iw8_armor_marker_cp";
+  boxconfig.modelbase = "offhand_2h_wm_armor_box_v0";
+  boxconfig.hintstring = &"EQUIPMENT_HINTS/ARMOR_BOX_USE";
+  boxconfig.streakname = "armor";
+  boxconfig.splashname = "used_support_box";
+  boxconfig.shadername = "hud_icon_fieldupgrade_armor_box";
+  boxconfig.headicon = "hud_icon_fieldupgrade_armor_box";
+  boxconfig.headiconoffset = 20;
+  boxconfig.lifespan = 90;
+  boxconfig.usexp = 50;
+  boxconfig.onusesfx = "ammo_crate_use";
+  boxconfig.deployedsfx = "ammo_crate_use";
+  boxconfig.deathvfx = loadfx("vfx/iw9/fieldupgrades/ammobox/vfx_armorbox_timeout.vfx");
+  boxconfig.onusecallback = &armorbox_onusedeployable;
+  boxconfig.canusecallback = &armorbox_canusedeployable;
+  boxconfig.deployfunc = &function_a011821531cf62c8;
+  boxconfig.onusethanksbc = #"ping_social_thanks";
+  boxconfig.usetime = 1000;
+  boxconfig.maxhealth = 100;
+  boxconfig.maxuses = 3;
+  boxconfig.canreusebox = 0;
+  boxconfig.allowmeleedamage = 1;
+  boxconfig.damagefeedback = "";
+  boxconfig.grenadeusefunc = &supportbox_grenadelaunchfunc;
+  boxconfig.ondeploycallback = &supportbox_ondeploy;
+  boxconfig.deployanimduration = supportbox_getdeployanimduration();
+  level.boxsettings["armor"] = boxconfig;
   level.deployable_box["armor"] = [];
 }
 
@@ -133,7 +133,7 @@ function supportbox_watchplayerweapon(streakinfo) {
 }
 
 function supportbox_handledamage() {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 }
 
 function supportbox_handledeathdamage(data) {
@@ -141,7 +141,7 @@ function supportbox_handledeathdamage(data) {
   objweapon = data.objweapon;
   type = data.meansofdeath;
   damage = data.damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   attacker notify("destroyed_equipment");
 }
 
@@ -152,7 +152,7 @@ function supportbox_modifydamage(data) {
   damage = data.damage;
   idflags = data.idflags;
   modifieddamage = damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   return modifieddamage;
 }
 

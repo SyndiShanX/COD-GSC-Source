@@ -249,14 +249,14 @@ function patrol_think(spawnpoint, var_f716273270785091) {
 
     if(!isDefined(self.path_data)) {
       wait 0.5;
-      function_9d76b32cac3b3ec();
+      stop_at_node();
       continue;
     }
 
     if(!isDefined(self.path_data.path[node_index])) {
       if(node_index >= self.path_data.path.size) {
         self.cur_state = "path_done";
-        function_9d76b32cac3b3ec();
+        stop_at_node();
       }
 
       wait 0.5;
@@ -517,7 +517,7 @@ function function_a953e534ff89430a(timer) {
   self notify("stop_tracking");
 }
 
-function function_9d76b32cac3b3ec() {
+function stop_at_node() {
   self.move_speed = 0;
   self vehicle_setspeed(0, 12, 12);
 }

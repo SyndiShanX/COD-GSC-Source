@@ -8,7 +8,7 @@
 #using scripts\common\callbacks;
 #using scripts\engine\math;
 #using scripts\engine\utility;
-#namespace namespace_bf163b9d91d432d4;
+#namespace zombie_mimic_audio;
 
 function function_62acb9a556ab5175() {
   if(flag("mimic_audio")) {
@@ -30,9 +30,9 @@ function function_62acb9a556ab5175() {
   function_f11270bb42f7f080("pain_electric_vox", "pain_electric", "vox_ai_mimic_pain_electric", 3);
   function_f11270bb42f7f080("vox_death", "vox_death", "vox_ai_mimic_death", 4);
   level thread function_1dc3dbebbb45158a();
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("killed_body_cloned", &play_death_vo);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_entity_revealed", &function_c0b5ec9f8877f0c2);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_entity_hidden_in_prop", &function_78f226fccfe4f778);
+  callback::get_template(self.animsetname) callback::add("killed_body_cloned", &play_death_vo);
+  callback::get_template(self.animsetname) callback::add("on_entity_revealed", &function_c0b5ec9f8877f0c2);
+  callback::get_template(self.animsetname) callback::add("on_entity_hidden_in_prop", &function_78f226fccfe4f778);
 }
 
 function function_1e388b876cdce171() {
@@ -109,10 +109,10 @@ function function_78c6b4fdf8524643() {
     ambient_notify = params.var_b1b1f6668aecbbe5;
     n_waittime = params.var_39dc1f6992cbf2cf;
 
-    if(isDefined(level.var_3c408363d81b00e0)) {
-      level.var_3c408363d81b00e0++;
+    if(isDefined(level.zombie_ambient_count)) {
+      level.zombie_ambient_count++;
 
-      if(level.var_3c408363d81b00e0 < ambient_cap) {
+      if(level.zombie_ambient_count < ambient_cap) {
         function_f707c26d8f269f94(ambient_notify);
         waitframe();
         ent_flag_waitopen("playing_vo");
@@ -138,10 +138,10 @@ function private function_4e5d15fb46a1875f() {
 
 function private function_1dc3dbebbb45158a() {
   level endon("game_ended");
-  level.var_3c408363d81b00e0 = 0;
+  level.zombie_ambient_count = 0;
 
   while(true) {
-    level.var_3c408363d81b00e0 = 0;
+    level.zombie_ambient_count = 0;
     wait 0.1;
   }
 }

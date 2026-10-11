@@ -38,7 +38,7 @@ function init(eventinfo) {
   }
 
   eventinfo.postinitfunc = &postinitfunc;
-  eventinfo.var_b22310d8fb6c98fa = &function_b1e72752c0777b84;
+  eventinfo.canactivatefunc = &function_b1e72752c0777b84;
   eventinfo.activatefunc = &function_94b6a8cecf4460f4;
   initdialog();
 

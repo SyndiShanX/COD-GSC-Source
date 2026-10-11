@@ -405,12 +405,12 @@ function callback_vehicledamage_internal(data) {
 }
 
 function callback_vehicledeath(data) {
-  if(!isDefined(data.attacker) && isDefined(self.var_9328ded553f15d2b)) {
-    data.attacker = self.var_9328ded553f15d2b;
+  if(!isDefined(data.attacker) && isDefined(self.burndownattacker)) {
+    data.attacker = self.burndownattacker;
   }
 
-  if((!isDefined(data.objweapon) || isnullweapon(data.objweapon)) && isDefined(self.var_3d917147266db534)) {
-    data.objweapon = self.var_3d917147266db534;
+  if((!isDefined(data.objweapon) || isnullweapon(data.objweapon)) && isDefined(self.burndownweapon)) {
+    data.objweapon = self.burndownweapon;
   }
 
   vehiclename = self.vehiclename;

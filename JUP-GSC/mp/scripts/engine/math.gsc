@@ -81,11 +81,11 @@ function scalar_projection(veca, vecb) {
 }
 
 function get_point_on_parabola(start, end, height, t) {
-  var_b850e09eeb4ac957 = t * 2 - 1;
+  parabolic_t = t * 2 - 1;
   direction = end - start;
   up = (0, 0, 1);
   result = start + t * direction;
-  result += (var_b850e09eeb4ac957 * var_b850e09eeb4ac957 * -1 + 1) * height * up;
+  result += (parabolic_t * parabolic_t * -1 + 1) * height * up;
   return result;
 }
 
@@ -283,13 +283,13 @@ function function_d2c0d8330ab7ad7f(start, end, circlecenter, circleradius) {
   sqrtdis = sqrt(dis);
   xa = d * dy;
   xb = scripts\engine\utility::sign(dy) * dx * sqrtdis;
-  var_495ff8baa5da6884 = (xa + xb) / dr + circlecenter[0];
+  point1x = (xa + xb) / dr + circlecenter[0];
   point2x = (xa - xb) / dr + circlecenter[0];
   ya = -1 * d * dx;
   yb = abs(dy) * sqrtdis;
-  var_495ff9baa5da6ab7 = (ya + yb) / dr + circlecenter[1];
-  var_496cf9baa5e87f3c = (ya - yb) / dr + circlecenter[1];
-  return [(var_495ff8baa5da6884, var_495ff9baa5da6ab7, 0), (point2x, var_496cf9baa5e87f3c, 0)];
+  point1y = (ya + yb) / dr + circlecenter[1];
+  point2y = (ya - yb) / dr + circlecenter[1];
+  return [(point1x, point1y, 0), (point2x, point2y, 0)];
 }
 
 function function_cc2ad02dcf5030d8(start, end, circleorigin, circleradius) {
@@ -307,18 +307,18 @@ function function_cc2ad02dcf5030d8(start, end, circleorigin, circleradius) {
     return;
   }
 
-  var_7a5bcc8fdbc7fb9e = function_b2858ff2d7212ba7(result[0], start, end);
-  var_80d347f931a2e541 = function_b2858ff2d7212ba7(result[1], start, end);
+  pt1valid = function_b2858ff2d7212ba7(result[0], start, end);
+  pt2valid = function_b2858ff2d7212ba7(result[1], start, end);
 
-  if(!var_7a5bcc8fdbc7fb9e && !var_80d347f931a2e541) {
+  if(!pt1valid && !pt2valid) {
     return;
   }
 
-  if(var_7a5bcc8fdbc7fb9e && !var_80d347f931a2e541) {
+  if(pt1valid && !pt2valid) {
     return result[0];
   }
 
-  if(var_80d347f931a2e541 && !var_7a5bcc8fdbc7fb9e) {
+  if(pt2valid && !pt1valid) {
     return result[1];
   }
 
@@ -350,26 +350,26 @@ function segmentvssphere(pointa, pointb, spherecenter, sphereradius) {
 
   var_1b1c7be2a8e1295c = spherecenter - pointa;
   atob = pointb - pointa;
-  var_80d56f0dca67f561 = clamp(vectordot(var_1b1c7be2a8e1295c, atob) / vectordot(atob, atob), 0, 1);
-  closestpoint = pointa + atob * var_80d56f0dca67f561;
+  atobscalar = clamp(vectordot(var_1b1c7be2a8e1295c, atob) / vectordot(atob, atob), 0, 1);
+  closestpoint = pointa + atob * atobscalar;
   return lengthsquared(spherecenter - closestpoint) <= sphereradius * sphereradius;
 }
 
-function pointvscone(point, coneorigin, coneforward, coneup, conelen, var_da2ce43c649b224a, coneang, conehalfheight) {
+function pointvscone(point, coneorigin, coneforward, coneup, conelen, conelenoffset, coneang, conehalfheight) {
   starttopoint = point - coneorigin;
-  var_3abe054fbf02d18d = vectordot(starttopoint, coneforward);
-  var_e6cb9c8ccd2bc82d = vectordot(starttopoint, coneup);
+  starttopointforward = vectordot(starttopoint, coneforward);
+  starttopointup = vectordot(starttopoint, coneup);
 
-  if(var_3abe054fbf02d18d > conelen) {
+  if(starttopointforward > conelen) {
     return false;
   }
 
-  if(var_3abe054fbf02d18d < var_da2ce43c649b224a) {
+  if(starttopointforward < conelenoffset) {
     return false;
   }
 
   if(isDefined(conehalfheight)) {
-    if(abs(var_e6cb9c8ccd2bc82d) > conehalfheight) {
+    if(abs(starttopointup) > conehalfheight) {
       return false;
     }
   }
@@ -503,13 +503,13 @@ function function_6c1e6433c5e5cf79(point, center, half_size, forward_angles) {
 }
 
 function random_vector_2d() {
-  var_57338c9e11b3e93 = randomfloat(360);
-  return (cos(var_57338c9e11b3e93), sin(var_57338c9e11b3e93), 0);
+  azimuth = randomfloat(360);
+  return (cos(azimuth), sin(azimuth), 0);
 }
 
 function set_matrix_from_up(new_up) {
-  var_6139c7ae54a7bada = anglesToForward(self.angles);
-  new_right = vectorcross(var_6139c7ae54a7bada, new_up);
+  current_foward = anglesToForward(self.angles);
+  new_right = vectorcross(current_foward, new_up);
   new_forward = vectorcross(new_up, new_right);
   self.angles = axistoangles(new_forward, new_right, new_up);
 }

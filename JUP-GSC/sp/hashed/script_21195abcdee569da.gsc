@@ -69,11 +69,11 @@ function function_4334270d07a014f2() {
     hidecinematicletterboxing(0.1, 0);
   }
 
-  thread function_238c2a0aae70e973("infil_light_002", 1, 0);
-  thread function_238c2a0aae70e973("infil_light_003", 1, 0);
-  thread function_238c2a0aae70e973("infil_light_004", 0.1, 0);
-  thread function_238c2a0aae70e973("infil_light_005", 1, 0);
-  thread function_238c2a0aae70e973("infil_light_006", 1, 0);
+  thread lerp_spot_intensity("infil_light_002", 1, 0);
+  thread lerp_spot_intensity("infil_light_003", 1, 0);
+  thread lerp_spot_intensity("infil_light_004", 0.1, 0);
+  thread lerp_spot_intensity("infil_light_005", 1, 0);
+  thread lerp_spot_intensity("infil_light_006", 1, 0);
   setDvar(@ "hash_5d66c2ef5a9612e0", 1);
   setDvar(@ "hash_dacffbfd52c2fdc5", 8);
   setDvar(@ "hash_eca4b727b01fd254", 8);
@@ -152,10 +152,10 @@ function function_ed6400aa301bcc1e() {
   setDvar(@ "hash_dacffbfd52c2fdc5", 8);
   setDvar(@ "hash_f9190cd77b0b2463", 4);
   wait 2;
-  thread function_238c2a0aae70e973("lgt_capture_nolan_key_01", 1, 2);
-  thread function_238c2a0aae70e973("lgt_capture_nolan_rim_01", 1, 0.3);
-  thread function_238c2a0aae70e973("lgt_capture_nolan_rim_02", 1, 0.3);
-  thread function_238c2a0aae70e973("lgt_capture_nolan_fill_01", 1, 0.2);
+  thread lerp_spot_intensity("lgt_capture_nolan_key_01", 1, 2);
+  thread lerp_spot_intensity("lgt_capture_nolan_rim_01", 1, 0.3);
+  thread lerp_spot_intensity("lgt_capture_nolan_rim_02", 1, 0.3);
+  thread lerp_spot_intensity("lgt_capture_nolan_fill_01", 1, 0.2);
   flag_wait("lgt_capture_nolan_end");
   visionsetnaked("");
   level.player disablephysicaldepthoffieldscripting();
@@ -163,10 +163,10 @@ function function_ed6400aa301bcc1e() {
   setDvar(@ "hash_dacffbfd52c2fdc5", 8);
   setDvar(@ "hash_eca4b727b01fd254", 8);
   setDvar(@ "hash_f9190cd77b0b2463", 0);
-  thread function_238c2a0aae70e973("lgt_capture_nolan_key_01", 1, 0);
-  thread function_238c2a0aae70e973("lgt_capture_nolan_rim_01", 1, 0);
-  thread function_238c2a0aae70e973("lgt_capture_nolan_rim_02", 1, 0);
-  thread function_238c2a0aae70e973("lgt_capture_nolan_fill_01", 1, 0);
+  thread lerp_spot_intensity("lgt_capture_nolan_key_01", 1, 0);
+  thread lerp_spot_intensity("lgt_capture_nolan_rim_01", 1, 0);
+  thread lerp_spot_intensity("lgt_capture_nolan_rim_02", 1, 0);
+  thread lerp_spot_intensity("lgt_capture_nolan_fill_01", 1, 0);
   thread function_9160006a3f10b2cd();
 }
 
@@ -191,9 +191,9 @@ function function_f40a0283748d9e15() {}
 
 function function_21f1f6c11a565371() {}
 
-function function_5664929930aafdf3() {}
+function cp_boss_fight() {}
 
-function function_2811aa7970fedf60() {}
+function cp_hostage() {}
 
 function function_c456e31e8791085c() {}
 
@@ -203,5 +203,5 @@ function function_eee5bf44e4a36c41() {}
 
 function function_42491645cecc764() {
   probe = getEnt("cargo_probe", "targetname");
-  probe linkTo(level.var_ef8b317931748b3);
+  probe linkTo(level.cargo_container);
 }

@@ -10,12 +10,12 @@
 function function_7b25d1c42e7f75be(var_f76baeb1c3556fab) {
   assert(isDefined(var_f76baeb1c3556fab));
 
-  if(!isDefined(level.var_bd62a26aba0d6ccf) || !isDefined(level.var_bd62a26aba0d6ccf[var_f76baeb1c3556fab])) {
-    level.var_bd62a26aba0d6ccf = default_to(level.var_bd62a26aba0d6ccf, []);
-    level.var_bd62a26aba0d6ccf[var_f76baeb1c3556fab] = getscriptbundle(hashcat(%"hash_1971c5ddb7daaf2d", var_f76baeb1c3556fab));
+  if(!isDefined(level.aisettings_cache) || !isDefined(level.aisettings_cache[var_f76baeb1c3556fab])) {
+    level.aisettings_cache = default_to(level.aisettings_cache, []);
+    level.aisettings_cache[var_f76baeb1c3556fab] = getscriptbundle(hashcat(%"hash_1971c5ddb7daaf2d", var_f76baeb1c3556fab));
   }
 
-  settings = level.var_bd62a26aba0d6ccf[var_f76baeb1c3556fab];
+  settings = level.aisettings_cache[var_f76baeb1c3556fab];
 
   if(!isDefined(settings)) {
     return;
@@ -40,7 +40,7 @@ function function_7b25d1c42e7f75be(var_f76baeb1c3556fab) {
     self aisetbounds(settings.boundsradius, settings.boundsheight);
   }
 
-  self.var_aaf0465944b061ed = settings.var_aaf0465944b061ed;
+  self.kiastring = settings.kiastring;
 
   if(istrue(settings.var_51a535c2510cde8a)) {
     self function_d493e7fe15e5eaf4(settings.var_4975344f645984a6);
@@ -76,13 +76,13 @@ function function_7b25d1c42e7f75be(var_f76baeb1c3556fab) {
 
   if(istrue(settings.var_19d949438b5d19)) {
     dvaroverride = getdvarfloat(@ "hash_82918fe00f512e83", -1);
-    var_4b30f61de8daebc4 = settings.lookaheadtime;
+    lookaheadvalue = settings.lookaheadtime;
 
     if(dvaroverride >= 0) {
-      var_4b30f61de8daebc4 = dvaroverride;
+      lookaheadvalue = dvaroverride;
     }
 
-    self function_4956d2ecae01f73c(var_4b30f61de8daebc4);
+    self function_4956d2ecae01f73c(lookaheadvalue);
   }
 
   self.var_83f781810081eef8 = istrue(settings.var_e4e004eb4bd09291);

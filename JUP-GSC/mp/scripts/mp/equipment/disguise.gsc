@@ -44,7 +44,7 @@ function function_38cf81cf267278dc() {
   function_4981209c2c509828("konnig", "body_dmz_disguised_unidentified_iw9_1_1", "head_dmz_disguised_unidentified_iw9_1_1", "mp_vm_dmz_disguised_unidentified_iw9_1_1", "nylon", "millghtgr");
 
   if(issharedfuncdefined("disguise", "disguiseRegisterCustom")) {
-    function_f3bb4f4911a1beb2("disguise", "disguiseRegisterCustom");
+    callsharedfunc("disguise", "disguiseRegisterCustom");
   }
 }
 
@@ -79,7 +79,7 @@ function function_4981209c2c509828(key, body, head, vmarms, cloth, gear) {
 }
 
 function function_310843b56a04e24c() {
-  subarea = scripts\mp\ai_mp_controller::function_a44e168e8cced18(self.origin);
+  subarea = scripts\mp\ai_mp_controller::subarea_findfromorigin(self.origin);
   nationality = scripts\mp\ai_mp_controller::function_f851a2f41cffa860();
 
   if(isDefined(subarea) && isDefined(subarea.nationalityoverride)) {
@@ -93,7 +93,7 @@ function function_466e5ad92c500882(nationality) {
   assertex(isDefined(nationality), "<dev string:x6d>");
 
   if(issharedfuncdefined("disguise", "disguiseNationalityOverride")) {
-    return function_f3bb4f4911a1beb2("disguise", "disguiseNationalityOverride");
+    return callsharedfunc("disguise", "disguiseNationalityOverride");
   }
 
   switch (nationality) {
@@ -134,7 +134,7 @@ function function_67d03e329e13f612(itemslotindex, quantity) {
   thread function_d8d7a08a9fd9a9f();
 
   if(issharedfuncdefined("disguise", "disguiseOnUsed")) {
-    function_f3bb4f4911a1beb2("disguise", "disguiseOnUsed");
+    callsharedfunc("disguise", "disguiseOnUsed");
   }
 
   scripts\engine\utility::delaythread(var_a78681b284f9ae0a, &function_7e30d4841d0abe41, 0);
@@ -233,7 +233,7 @@ function function_9292cbe2dec7d826(delay, ison) {
     self function_ecdccfda4326de02();
     self setcustomization(var_d2f434df04eb7ede.body, var_d2f434df04eb7ede.head);
     self setclothtype(var_d2f434df04eb7ede.cloth);
-    self function_8abe5a968cc3c220(var_d2f434df04eb7ede.gear);
+    self setgeartype(var_d2f434df04eb7ede.gear);
     thread namespace_e0526929a9f43046::function_8bfea85875208730();
     delaythread(1, &function_8dd1c5e3042447b8, 0);
     return;
@@ -245,8 +245,8 @@ function function_9292cbe2dec7d826(delay, ison) {
   var_8f23fe410ad2500e = scripts\cp_mp\operator::function_2dc6ef8b84dfec64(self.operatorcustomization.skinref);
 
   if(isDefined(var_8f23fe410ad2500e)) {
-    self.operatorcustomization.var_3291e2cbec055766 = var_8f23fe410ad2500e;
-    self function_602b3de054f2a81(self.operatorcustomization.var_3291e2cbec055766);
+    self.operatorcustomization.reactiveoperator = var_8f23fe410ad2500e;
+    self function_602b3de054f2a81(self.operatorcustomization.reactiveoperator);
   }
 
   function_81475bb5a5a5c48f();
@@ -287,7 +287,7 @@ function function_da46be98ff60908d(var_575bccb498ed7f9e) {
   function_7e30d4841d0abe41(1);
 
   if(issharedfuncdefined("disguise", "should_finish_execution_first")) {
-    if(function_f3bb4f4911a1beb2("disguise", "should_finish_execution_first")) {
+    if(callsharedfunc("disguise", "should_finish_execution_first")) {
       while(isPlayer(self) && self isinexecutionattack()) {
         waitframe();
       }
@@ -314,16 +314,16 @@ function function_da46be98ff60908d(var_575bccb498ed7f9e) {
   }
 
   if(isDefined(self.operatorcustomization) && isDefined(self.operatorcustomization.geartype) && self.operatorcustomization.geartype != "") {
-    self function_8abe5a968cc3c220(self.operatorcustomization.geartype);
+    self setgeartype(self.operatorcustomization.geartype);
   } else {
-    self function_8abe5a968cc3c220("millghtgr");
+    self setgeartype("millghtgr");
   }
 
   self setclientomnvar("ui_dmz_disguise_sixth_sense_glow", 0);
   scripts\engine\utility::delaythread(takeoffdelay, &function_7e30d4841d0abe41, 0);
 
   if(issharedfuncdefined("disguise", "disguiseOff")) {
-    function_f3bb4f4911a1beb2("disguise", "disguiseOff");
+    callsharedfunc("disguise", "disguiseOff");
   }
 
   self notify("disguise_ended");
@@ -336,7 +336,7 @@ function function_b02057aaa6d29ba1(ison, delay) {
   self setclientomnvar("ui_dmz_disguise_state", ison);
 
   if(issharedfuncdefined("disguise", "getCustomDisguiseVisionSet")) {
-    var_6b46ba0029c65f1 = function_f3bb4f4911a1beb2("disguise", "getCustomDisguiseVisionSet");
+    var_6b46ba0029c65f1 = callsharedfunc("disguise", "getCustomDisguiseVisionSet");
   }
 
   if(isDefined(var_6b46ba0029c65f1)) {
@@ -391,7 +391,7 @@ function function_bc96cf8a43c99435() {
   var_674daafffc0aacf3 = undefined;
 
   if(function_a794fcf9545f2062()) {
-    var_674daafffc0aacf3 = function_b1eef70090b5b7b5(origin, radius, function_869ccb4e3451b8c6(["etype_ai"]), undefined, undefined);
+    var_674daafffc0aacf3 = getentitiesinradiusfrompartitiongrid(origin, radius, createentitytypemask(["etype_ai"]), undefined, undefined);
   } else {
     var_674daafffc0aacf3 = getaiarrayinradius(origin, radius);
   }

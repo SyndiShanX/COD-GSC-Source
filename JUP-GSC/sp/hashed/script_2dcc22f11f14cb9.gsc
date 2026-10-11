@@ -145,7 +145,7 @@ function function_1ef9237ee2cfae7f() {
   self show();
 }
 
-function function_45040b01e83f74e6(var_bab2d71dccda7436) {
+function function_45040b01e83f74e6(flg_end) {
   while(!isDefined(level.var_d18d63c6d75cd1e)) {
     waitframe();
   }
@@ -154,8 +154,8 @@ function function_45040b01e83f74e6(var_bab2d71dccda7436) {
   var_877b958e63de22a3 thread scene::play([level.var_d18d63c6d75cd1e], "idle01");
   level thread function_3514b08077a9e67f();
 
-  if(isDefined(var_bab2d71dccda7436)) {
-    flag_wait(var_bab2d71dccda7436);
+  if(isDefined(flg_end)) {
+    flag_wait(flg_end);
     var_877b958e63de22a3 scene::stop();
 
     if(isDefined(level.var_d18d63c6d75cd1e)) {
@@ -292,15 +292,15 @@ function function_a7fccf73a0607228(e_dog, str_flag) {
   e_dog.name = "Riley";
 }
 
-function function_ab9cf7d3daae04fa(var_bab2d71dccda7436) {
+function function_ab9cf7d3daae04fa(flg_end) {
   var_8758a58e63b7fe1b = getStruct("scene_jup_surge_0190_park_pet", "targetname");
   var_8758a58e63b7fe1b thread scene::play(undefined, "idle");
   level.dog = var_8758a58e63b7fe1b scene::get_entity("dog");
   level.dog.team = "allies";
   level.dog thread namespace_85a51fd192b9a590::function_a91261b17ab0252f();
 
-  if(isDefined(var_bab2d71dccda7436)) {
-    flag_wait(var_bab2d71dccda7436);
+  if(isDefined(flg_end)) {
+    flag_wait(flg_end);
     var_8758a58e63b7fe1b scene::stop();
 
     if(isDefined(level.dog)) {
@@ -482,10 +482,10 @@ function function_ef9fa613f23d50ec() {
 }
 
 function function_7bee4cf8f3203f8() {
-  var_34da6b83b14273eb = scene::get_entities();
+  a_anim_ents = scene::get_entities();
   var_516ff48dede38fa1 = ["igc_300_price", "hideout_gate", "police_car", "jltv_01", "jltv_02"];
 
-  foreach(entity in var_34da6b83b14273eb) {
+  foreach(entity in a_anim_ents) {
     if(isDefined(entity) && !function_5b7e9a4c946f3a13(entity.animname, var_516ff48dede38fa1)) {
       entity delete();
     }
@@ -805,7 +805,7 @@ function train_setup() {
   childthread function_8389606a3cec622b();
 
   foreach(var_a3dd760234cf2c97 in self.var_573c7a1092b362c) {
-    var_a3dd760234cf2c97.var_128e748fcc0a6687 = 1;
+    var_a3dd760234cf2c97.istrainvehicle = 1;
     var_a3dd760234cf2c97 childthread function_b6bdc8df73d41601();
     var_a3dd760234cf2c97 childthread function_5d2b18ef5d71a9ff(self.train_number);
     var_a3dd760234cf2c97 childthread function_d83d645447201039(self.train_number);
@@ -817,9 +817,9 @@ function train_setup() {
   }
 }
 
-function function_84b6866000c1ce19(var_573c7a1092b362c, var_1fc8a153cf951377) {
-  if(!isDefined(var_1fc8a153cf951377)) {
-    var_1fc8a153cf951377 = "flg_chunnel_crossover_detonate";
+function function_84b6866000c1ce19(var_573c7a1092b362c, flg_cleanup) {
+  if(!isDefined(flg_cleanup)) {
+    flg_cleanup = "flg_chunnel_crossover_detonate";
   }
 
   var_475f70b73d8b2291 = 4096;
@@ -830,7 +830,7 @@ function function_84b6866000c1ce19(var_573c7a1092b362c, var_1fc8a153cf951377) {
   flag_wait(var_5b15b888c05c96b);
 
   while(flag(var_5b15b888c05c96b)) {
-    if(flag(var_1fc8a153cf951377)) {
+    if(flag(flg_cleanup)) {
       return;
     }
 
@@ -1119,7 +1119,7 @@ function function_2c1f2d34b1a2e169(var_cea84b689c1af7f1) {
   self endon("entitydeleted");
   self.animname = "hostage";
   self function_b661b022700ba72f("script", 1);
-  self function_d5cda8a759cc36bc("relaxed");
+  self setcivstate("relaxed");
   function_89007ae298fb4b15();
   thread function_ba32fe6d2b577e83();
   thread function_80ce055c4cf16f58();
@@ -1188,14 +1188,14 @@ function function_2c1f2d34b1a2e169(var_cea84b689c1af7f1) {
     set_allowdeath(1);
     s_struct anim_single_solo(self, str_anim);
     self stopanimScripted();
-    self function_d5cda8a759cc36bc("cower");
+    self setcivstate("cower");
 
     while(level.var_370ed1f8bb2fac54 < level.var_b680f0b90d32078b.size) {
       waitframe();
     }
 
     set_forcegoal();
-    self function_d5cda8a759cc36bc("flee");
+    self setcivstate("flee");
 
     if(var_cea84b689c1af7f1 == 0) {
       var_a4378cd9c7704c58 = getnode("nd_garage_hostage_1_final", "targetname");
@@ -1462,7 +1462,7 @@ function scene_0900() {
   thread function_cfd935504ff32edc();
   var_13f0578e0f5cbd02 thread scene::play([level.dirty_bomb], "bomb_outro_idle");
   var_2fb7e344a609a7e3 = make_weapon("iw9_pi_golf18_sp");
-  level.var_85e0e3c0d71ec871 scripts\anim\shared::forceuseweapon(var_2fb7e344a609a7e3, "primary");
+  level.ai_makarov scripts\anim\shared::forceuseweapon(var_2fb7e344a609a7e3, "primary");
   level thread function_571c95da552c2ca5();
   var_13f0578e0f5cbd02 thread function_737fa062c38d4301();
   flag_wait("flg_door_closed");
@@ -1478,13 +1478,13 @@ function function_737fa062c38d4301() {
   scene::function_8207074e79f22926(level.outro_konni4, "end", "outro_konni4");
   scene::function_8207074e79f22926(level.outro_konni1, "end", "outro_konni1");
   scene::function_8207074e79f22926(level.outro_konni2, "end", "outro_konni2");
-  scene::function_8207074e79f22926(level.var_85e0e3c0d71ec871, "makarov_found_them", "makarov");
-  scene::function_8207074e79f22926(level.var_85e0e3c0d71ec871, "defuse_fight_mak_hand_crush", "makarov");
-  scene::function_8207074e79f22926(level.var_85e0e3c0d71ec871, "makarov_speech", "makarov");
-  scene::function_8207074e79f22926(level.var_85e0e3c0d71ec871, "makarov_stabbed", "makarov");
-  scene::function_8207074e79f22926(level.var_85e0e3c0d71ec871, "mak_muz_flash", "makarov");
-  scene::function_8207074e79f22926(level.var_85e0e3c0d71ec871, "konni_call_out", "makarov");
-  scene::function_8207074e79f22926(level.var_85e0e3c0d71ec871, "end", "makarov");
+  scene::function_8207074e79f22926(level.ai_makarov, "makarov_found_them", "makarov");
+  scene::function_8207074e79f22926(level.ai_makarov, "defuse_fight_mak_hand_crush", "makarov");
+  scene::function_8207074e79f22926(level.ai_makarov, "makarov_speech", "makarov");
+  scene::function_8207074e79f22926(level.ai_makarov, "makarov_stabbed", "makarov");
+  scene::function_8207074e79f22926(level.ai_makarov, "mak_muz_flash", "makarov");
+  scene::function_8207074e79f22926(level.ai_makarov, "konni_call_out", "makarov");
+  scene::function_8207074e79f22926(level.ai_makarov, "end", "makarov");
   scene::function_8207074e79f22926(level.ai_soap, "soap_line_cut_off", "soap");
   scene::function_8207074e79f22926(level.ai_soap, "soap_chest_shot", "soap");
   scene::function_8207074e79f22926(level.ai_soap, "defuse_soap_end", "soap");
@@ -1495,10 +1495,10 @@ function function_737fa062c38d4301() {
   scene::function_8207074e79f22926(level.player, "hide_fight_letterbox", "plr");
   scene::function_8207074e79f22926(level.player, "plr_fight_end", "plr");
   thread function_5d5ef4127aa3f62b();
-  level.var_85e0e3c0d71ec871.fixednode = 0;
+  level.ai_makarov.fixednode = 0;
   level.var_d18d63c6d75cd1e.fixednode = 0;
   level.ai_ghost.fixednode = 0;
-  thread scene::play([level.ai_soap, level.ai_ghost, level.var_d18d63c6d75cd1e, level.var_85e0e3c0d71ec871, level.outro_konni1, level.outro_konni2, level.outro_konni3, level.outro_konni4], "exit_fight_combined");
+  thread scene::play([level.ai_soap, level.ai_ghost, level.var_d18d63c6d75cd1e, level.ai_makarov, level.outro_konni1, level.outro_konni2, level.outro_konni3, level.outro_konni4], "exit_fight_combined");
   thread function_9c133a1840d519a0();
   thread function_e77db6cfb3f0033();
   thread function_c20e8d22addc1877();
@@ -1615,10 +1615,10 @@ function function_9c133a1840d519a0() {
   level flag_set("flg_cable_cut_scene_complete");
   level thread namespace_85a51fd192b9a590::function_6ec4e95f104d9902();
   level.player waittill("plr_take_damage_during_fight");
-  level.player dodamage(20, level.var_85e0e3c0d71ec871.origin, level.var_85e0e3c0d71ec871, level.var_85e0e3c0d71ec871, "MOD_PISTOL_BULLET", level.var_85e0e3c0d71ec871.currentprimaryweapon, "left_arm_upper");
+  level.player dodamage(20, level.ai_makarov.origin, level.ai_makarov, level.ai_makarov, "MOD_PISTOL_BULLET", level.ai_makarov.currentprimaryweapon, "left_arm_upper");
   level.player thread scripts\sp\player::bloodoverlay(0.5, 3, 2);
   level.player waittill("plr_kicked_in_face");
-  level.player dodamage(50, level.var_85e0e3c0d71ec871.origin, level.var_85e0e3c0d71ec871, level.var_85e0e3c0d71ec871, "MOD_MELEE", level.var_85e0e3c0d71ec871.meleeweapon, "head");
+  level.player dodamage(50, level.ai_makarov.origin, level.ai_makarov, level.ai_makarov, "MOD_MELEE", level.ai_makarov.meleeweapon, "head");
   level.player thread scripts\sp\player::bloodoverlay(0.3, 3, 5);
   thread function_69c495bbbd136af1();
   level thread namespace_85a51fd192b9a590::function_77dfe79e4f33c2f3();
@@ -1647,27 +1647,27 @@ function function_69c495bbbd136af1() {
 }
 
 function function_c20e8d22addc1877() {
-  level.var_85e0e3c0d71ec871 waittill("makarov_found_them");
+  level.ai_makarov waittill("makarov_found_them");
   thread namespace_f43c40f7bcbe17e7::function_ca3c3c9efac4f12();
-  level.var_85e0e3c0d71ec871 waittill("makarov_stabbed");
-  level.var_85e0e3c0d71ec871 setModel("body_c_jup_sp_villain_makarov_shirt_blood");
-  level.var_85e0e3c0d71ec871 detach(level.var_85e0e3c0d71ec871.headmodel);
-  level.var_85e0e3c0d71ec871 attach("c_jup_head_hero_makarov_shirt_blood", "", 1);
-  level.var_85e0e3c0d71ec871.headmodel = "c_jup_head_hero_makarov_shirt_blood";
-  level.var_85e0e3c0d71ec871 waittill("mak_muz_flash");
+  level.ai_makarov waittill("makarov_stabbed");
+  level.ai_makarov setModel("body_c_jup_sp_villain_makarov_shirt_blood");
+  level.ai_makarov detach(level.ai_makarov.headmodel);
+  level.ai_makarov attach("c_jup_head_hero_makarov_shirt_blood", "", 1);
+  level.ai_makarov.headmodel = "c_jup_head_hero_makarov_shirt_blood";
+  level.ai_makarov waittill("mak_muz_flash");
   var_48420fae1af6a838 = spawn_tag_origin();
 
-  if(isDefined(level.var_85e0e3c0d71ec871)) {
-    playFXOnTag(level._effect["vfx_outro_pistol_muzzleflash"], level.var_85e0e3c0d71ec871, "tag_accessory_right");
+  if(isDefined(level.ai_makarov)) {
+    playFXOnTag(level._effect["vfx_outro_pistol_muzzleflash"], level.ai_makarov, "tag_accessory_right");
   }
 
-  level.var_85e0e3c0d71ec871 waittill("end");
+  level.ai_makarov waittill("end");
   thread function_92289e618d44ad44();
-  level.var_85e0e3c0d71ec871 set_goalRadius(32);
-  level.var_85e0e3c0d71ec871.allowstrafe = 0;
-  level.var_85e0e3c0d71ec871 disable_pain();
+  level.ai_makarov set_goalRadius(32);
+  level.ai_makarov.allowstrafe = 0;
+  level.ai_makarov disable_pain();
   var_6f1e37352fa2ce2a = getnode("nd_chunnel_mak_path_start", "targetname");
-  level.var_85e0e3c0d71ec871 thread scripts\sp\spawner::go_to_node(var_6f1e37352fa2ce2a);
+  level.ai_makarov thread scripts\sp\spawner::go_to_node(var_6f1e37352fa2ce2a);
 }
 
 function function_e77db6cfb3f0033() {

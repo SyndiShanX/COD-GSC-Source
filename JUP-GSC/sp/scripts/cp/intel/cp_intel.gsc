@@ -55,15 +55,15 @@ function function_73a0b19d74034096() {
   var_3004da8038b93d37 = getStructArray("cp_intel", "targetname");
 
   foreach(var_c0c4728da43ffc9e in var_3004da8038b93d37) {
-    if(!isDefined(level.intel_pieces[var_c0c4728da43ffc9e.var_d056801aaf3e50c3])) {
-      level.intel_pieces[var_c0c4728da43ffc9e.var_d056801aaf3e50c3] = [];
+    if(!isDefined(level.intel_pieces[var_c0c4728da43ffc9e.inteltype])) {
+      level.intel_pieces[var_c0c4728da43ffc9e.inteltype] = [];
     }
 
-    if(!isDefined(level.intel_pieces[var_c0c4728da43ffc9e.var_d056801aaf3e50c3][var_c0c4728da43ffc9e.script_noteworthy])) {
-      level.intel_pieces[var_c0c4728da43ffc9e.var_d056801aaf3e50c3][var_c0c4728da43ffc9e.script_noteworthy] = [];
+    if(!isDefined(level.intel_pieces[var_c0c4728da43ffc9e.inteltype][var_c0c4728da43ffc9e.script_noteworthy])) {
+      level.intel_pieces[var_c0c4728da43ffc9e.inteltype][var_c0c4728da43ffc9e.script_noteworthy] = [];
     }
 
-    level.intel_pieces[var_c0c4728da43ffc9e.var_d056801aaf3e50c3][var_c0c4728da43ffc9e.script_noteworthy][level.intel_pieces[var_c0c4728da43ffc9e.var_d056801aaf3e50c3][var_c0c4728da43ffc9e.script_noteworthy].size] = var_c0c4728da43ffc9e;
+    level.intel_pieces[var_c0c4728da43ffc9e.inteltype][var_c0c4728da43ffc9e.script_noteworthy][level.intel_pieces[var_c0c4728da43ffc9e.inteltype][var_c0c4728da43ffc9e.script_noteworthy].size] = var_c0c4728da43ffc9e;
   }
 
   duplicates = [];
@@ -90,7 +90,7 @@ function function_73a0b19d74034096() {
     entry.intel = spawn("script_model", entry.origin);
     entry.intel.angles = entry.angles;
     entry.intel setModel(entry.scriptablename);
-    entry.intel.var_d056801aaf3e50c3 = entry.var_d056801aaf3e50c3;
+    entry.intel.inteltype = entry.inteltype;
     entry.intel.info = entry.script_noteworthy;
     entry.intel.var_681fc3d70cdd28dd = spawnscriptable("cp_intel_found", entry.origin, entry.angles);
 
@@ -99,10 +99,10 @@ function function_73a0b19d74034096() {
       entry.intel linkTo(linkedent);
       entry.intel.linkedent = linkedent;
       offset = rotatevectorinverted(entry.intel.var_681fc3d70cdd28dd.origin - linkedent.origin, linkedent.angles);
-      entry.intel.var_681fc3d70cdd28dd utility::function_6e506f39f121ea8a(linkedent, offset);
+      entry.intel.var_681fc3d70cdd28dd utility::scriptable_setparententity(linkedent, offset);
     }
 
-    if(entry.var_d056801aaf3e50c3 == "geiger" || entry.var_d056801aaf3e50c3 == "burried") {
+    if(entry.inteltype == "geiger" || entry.inteltype == "burried") {
       scripts\cp_mp\equipment\geiger_counter::function_f0d61e14dfde9ccd(entry.intel);
       entry.intel.var_681fc3d70cdd28dd.origin = entry.origin + (0, 0, 18);
     }
@@ -162,7 +162,7 @@ function intel_debug(var_5f9f112a3d6a73af) {
   }
 }
 
-function function_c67a2a3c68f962a1(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_c67a2a3c68f962a1(instance, part, state, player, bautouse, usestring) {
   player thread playerplaypickupanim("iw9_ges_pickup");
   wait 0.35;
   player playlocalsound("iw9_br_pickup_key");
@@ -170,7 +170,7 @@ function function_c67a2a3c68f962a1(instance, part, state, player, var_a5b2c54141
   instance.entity hide();
 }
 
-function intel_onuse(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function intel_onuse(instance, part, state, player, bautouse, usestring) {
   player endon("disconnect");
 
   if(!isDefined(instance.uses)) {
@@ -178,7 +178,7 @@ function intel_onuse(instance, part, state, player, var_a5b2c541413aa895, usestr
   }
 
   instance.uses++;
-  var_d056801aaf3e50c3 = instance.var_d056801aaf3e50c3;
+  inteltype = instance.inteltype;
   player thread playerplaypickupanim("iw9_ges_pickup");
   player playlocalsound("cp_generic_pickup_intel");
   function_99676fb4e1a06631(instance, player);
@@ -294,11 +294,11 @@ function function_99676fb4e1a06631(intel, player) {
     player.var_131e879b6bb142ac = 0;
   }
 
-  if(!isDefined(player.var_681fc3d70cdd28dd[var_f5d35734c484490.var_d056801aaf3e50c3])) {
-    player.var_681fc3d70cdd28dd[var_f5d35734c484490.var_d056801aaf3e50c3] = [];
+  if(!isDefined(player.var_681fc3d70cdd28dd[var_f5d35734c484490.inteltype])) {
+    player.var_681fc3d70cdd28dd[var_f5d35734c484490.inteltype] = [];
   }
 
-  player.var_681fc3d70cdd28dd[var_f5d35734c484490.var_d056801aaf3e50c3][player.var_681fc3d70cdd28dd[var_f5d35734c484490.var_d056801aaf3e50c3].size] = var_f5d35734c484490.info;
+  player.var_681fc3d70cdd28dd[var_f5d35734c484490.inteltype][player.var_681fc3d70cdd28dd[var_f5d35734c484490.inteltype].size] = var_f5d35734c484490.info;
   player.var_131e879b6bb142ac++;
 
   if(scripts\engine\utility::issharedfuncdefined("cp_intel", "givetoplayer")) {
@@ -306,7 +306,7 @@ function function_99676fb4e1a06631(intel, player) {
     player thread[[var_fa03ab34cbdaece2]](intel);
   }
 
-  if(isDefined(var_f5d35734c484490.var_d056801aaf3e50c3) && var_f5d35734c484490.var_d056801aaf3e50c3 == "geiger") {
+  if(isDefined(var_f5d35734c484490.inteltype) && var_f5d35734c484490.inteltype == "geiger") {
     level notify("geigerIntelGiven", player);
   }
 
@@ -472,7 +472,7 @@ function function_659eeda1bb608163() {
   level.var_e319f9bcb1dcc775 = 0;
 }
 
-function function_22b1dddc0c1daadc(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_22b1dddc0c1daadc(instance, part, state, player, bautouse, usestring) {
   player thread playerplaypickupanim("iw9_ges_pickup");
   player playlocalsound("cp_generic_pickup");
   instance.entity hide();
@@ -491,7 +491,7 @@ function function_22b1dddc0c1daadc(instance, part, state, player, var_a5b2c54141
   instance setscriptablepartstate(part, "unusable");
 }
 
-function function_c5c7693371e9ebfc(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_c5c7693371e9ebfc(instance, part, state, player, bautouse, usestring) {
   haspart = 0;
 
   if(part == "interact_radio" && istrue(player.var_2c77748d45bd1b70)) {
@@ -581,7 +581,7 @@ function function_52d31db6d260fbc() {
   }
 }
 
-function function_8ee46d8dd9b85eb4(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_8ee46d8dd9b85eb4(instance, part, state, player, bautouse, usestring) {
   player endon("disconnect");
 
   if(isDefined(player.var_e278c25f33b395d)) {

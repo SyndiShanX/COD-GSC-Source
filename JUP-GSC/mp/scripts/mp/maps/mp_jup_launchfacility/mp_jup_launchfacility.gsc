@@ -229,7 +229,7 @@ function function_d69acc92a86dd80b() {
   var_334a931a867896ae = getStruct("attacker_outro_missile", "targetname");
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 1);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 1);
   }
 
   omnvar = "ui_wm_launch_console_countdown_1";
@@ -246,7 +246,7 @@ function function_d69acc92a86dd80b() {
   wait 1;
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 0, 0.5);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 0, 0.5);
   }
 
   if(isDefined(var_dec8b2d641fcc6d6)) {
@@ -260,7 +260,7 @@ function function_d69acc92a86dd80b() {
   function_df6579cb4cbfbcfd(animstruct);
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 0, 0.5);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 0, 0.5);
   }
 
   var_334a931a867896ae scripts\common\anim::anim_single_solo(var_f409839cf9fc354a, var_981c4bf09e08813d);
@@ -283,21 +283,21 @@ function function_d5f16f7e888c59d3() {
   missile = spawnactor("defender_outro_missile", var_1321643ea8606571, "missile");
   var_5134837896e2585f = spawnactor("defender_outro_missile_01", var_e59087cfb84c6eae, "icbm_launch_01");
   var_5134847896e25a92 = spawnactor("defender_outro_missile_02", var_e59087cfb84c6eae, "icbm_launch_02");
-  var_cd80fe53d42804ae = spawnactor("defender_outro_soldier_01", var_f74e5629cbede10f, "soldier_01");
-  var_cd80fd53d428027b = spawnactor("defender_outro_soldier_02", var_f74e5629cbede10f, "soldier_02");
-  var_cd80fc53d4280048 = spawnactor("defender_outro_soldier_03", var_f74e5629cbede10f, "soldier_03");
-  actors = [tank, var_9cc46de2a314708c, missile, var_5134837896e2585f, var_5134847896e25a92, var_cd80fe53d42804ae, var_cd80fd53d428027b, var_cd80fc53d4280048];
+  soldier01 = spawnactor("defender_outro_soldier_01", var_f74e5629cbede10f, "soldier_01");
+  soldier02 = spawnactor("defender_outro_soldier_02", var_f74e5629cbede10f, "soldier_02");
+  soldier03 = spawnactor("defender_outro_soldier_03", var_f74e5629cbede10f, "soldier_03");
+  actors = [tank, var_9cc46de2a314708c, missile, var_5134837896e2585f, var_5134847896e25a92, soldier01, soldier02, soldier03];
   scene = "defender_outro";
   animnode = getStruct("defender_outro_tank", "targetname");
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 1);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 1);
   }
 
   function_df6579cb4cbfbcfd(animstruct);
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 0, 0.5);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 0, 0.5);
   }
 
   level thread function_26f23107e6cd179f();
@@ -320,7 +320,7 @@ function function_f6a779553c406a5e() {
   wait 5.33;
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 1, 0.5);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 1, 0.5);
   }
 }
 
@@ -381,7 +381,7 @@ function function_26f23107e6cd179f() {
   var_586ba434a3023c12 = spawn("script_model", targetpoint.origin);
 
   foreach(point in var_5731a50da1307842) {
-    turret = function_78422799f477b8e6(point, undefined, undefined, undefined, team);
+    turret = spawnmgturret(point, undefined, undefined, undefined, team);
     turret.var_57abfc2b0a18dd65 = var_586ba434a3023c12;
     turret thread function_3cd75d5bf0fc9989(point, undefined, undefined, undefined, team);
   }
@@ -1115,11 +1115,11 @@ function function_ebcf745913dfa4f7(vehicle, otherent) {
     }
   }
 
-  if(isDefined(otherent.streakname) && !istrue(otherent.var_455a731f2701dd65)) {
+  if(isDefined(otherent.streakname) && !istrue(otherent.ishitbyvehicle)) {
     if(otherent.streakname == "sentry_turret" || otherent.streakname == "remote_turret") {
       wasdestroyed = 1;
       skipshutdown = 1;
-      otherent.var_455a731f2701dd65 = 1;
+      otherent.ishitbyvehicle = 1;
       otherent notify("kill_turret", skipshutdown, wasdestroyed);
     }
   }

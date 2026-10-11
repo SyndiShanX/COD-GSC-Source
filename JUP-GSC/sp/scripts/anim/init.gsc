@@ -191,13 +191,13 @@ function initbattlechatter() {
 function initgrenades() {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    function_b4ebe6632d7e8efe(player, "lethal", randomintrange(1000, 20000));
-    function_b4ebe6632d7e8efe(player, "tactical", randomintrange(1000, 20000));
+    aisetgrenadetimer(player, "lethal", randomintrange(1000, 20000));
+    aisetgrenadetimer(player, "tactical", randomintrange(1000, 20000));
     player thread setnextplayergrenadetime();
   }
 
-  function_b4ebe6632d7e8efe(undefined, "lethal", randomintrange(0, 20000));
-  function_b4ebe6632d7e8efe(undefined, "tactical", randomintrange(0, 20000));
+  aisetgrenadetimer(undefined, "lethal", randomintrange(0, 20000));
+  aisetgrenadetimer(undefined, "tactical", randomintrange(0, 20000));
 }
 
 function setnextplayergrenadetime() {
@@ -211,7 +211,7 @@ function setnextplayergrenadetime() {
       maxtime = 1;
     }
 
-    function_b4ebe6632d7e8efe(self, "lethal", randomintrange(0, maxtime));
+    aisetgrenadetimer(self, "lethal", randomintrange(0, maxtime));
   }
 
   if(isDefined(self.gs.playerdoublegrenadetime)) {

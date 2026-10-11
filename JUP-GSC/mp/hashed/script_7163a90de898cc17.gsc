@@ -37,18 +37,18 @@ function onplayerspawned() {
 
 function function_a84504e876b9bfdd() {
   scripts\mp\flags::function_1240434f4201ac9d("prematch_done");
-  var_91beb5c3a5ab6910 = spawnStruct();
-  var_91beb5c3a5ab6910.victim = self;
-  var_91beb5c3a5ab6910.objweapon = self getcurrentweapon();
+  haywiredata = spawnStruct();
+  haywiredata.victim = self;
+  haywiredata.objweapon = self getcurrentweapon();
 
   if(isagent(self)) {
-    thread scripts\mp\equipment\shock_stick::shockstick_haywireagent(var_91beb5c3a5ab6910);
+    thread scripts\mp\equipment\shock_stick::shockstick_haywireagent(haywiredata);
     return;
   }
 
   if(isPlayer(self)) {
     tableinfo = scripts\cp_mp\equipment::getequipmenttableinfo("equip_shockstick");
     tableinfo.bundle.gestureref = "vm_ges_shockstick_react_looping";
-    thread scripts\mp\equipment\shock_stick::function_c927fd013fc6e502(var_91beb5c3a5ab6910, tableinfo.bundle);
+    thread scripts\mp\equipment\shock_stick::function_c927fd013fc6e502(haywiredata, tableinfo.bundle);
   }
 }

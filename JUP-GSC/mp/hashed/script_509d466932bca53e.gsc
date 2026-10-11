@@ -156,7 +156,7 @@ function init() {
   flares_init();
   shellshock_init();
   bots_init();
-  function_550bcd278c30275e();
+  agents_init();
   outline_init();
   game_utility_init();
   function_b9e6cdc26386e536();
@@ -171,9 +171,9 @@ function init() {
   stealth_init();
   gameskill_init();
   poi_init();
-  function_c1199c7cd79918b3();
+  aggregator_init();
   vehicle_damage_init();
-  function_1bc257700c3d014e();
+  cameras_init();
   function_a30b248a8fc67a00();
   battlechatter_init();
   host_migration_init();
@@ -188,9 +188,9 @@ function gameskill_init() {
 }
 
 function poi_init() {
-  utility::registersharedfunc("poi", "isSystemActive", &poi::function_47d356083884f913);
+  utility::registersharedfunc("poi", "isSystemActive", &poi::poi_issystemactive);
   utility::registersharedfunc("poi", "isInActivePOI", &poi::function_9c93e67f90980177);
-  utility::registersharedfunc("poi", "findPOIOriginIsIn", &poi::function_6cc445c02b5effac);
+  utility::registersharedfunc("poi", "findPOIOriginIsIn", &poi::poi_findpoioriginisin);
   utility::registersharedfunc("poi", "try_TranslatePOI", &poi::function_150af7f3a2874667);
 }
 
@@ -598,7 +598,7 @@ function bots_init() {
   utility::registersharedfunc("bots", "bot_body_is_dead", &bots_killstreaks_remote_vehicle::bot_body_is_dead);
 }
 
-function function_550bcd278c30275e() {
+function agents_init() {
   namespace_84c887a505a8f661::function_ce55987060167d4a();
   utility::registersharedfunc("agents", "deactivateAgent", &agent_utility::deactivateagent);
   utility::registersharedfunc("agents", "spawnNewAgentAiType", &mp_agent::spawnnewagentaitype);
@@ -684,7 +684,7 @@ function function_a92ed2f4c44e5ffa() {
   utility::registersharedfunc("team_utility", "joinTeamAggregator", &join_team_aggregator::registeronplayerjointeamcallback);
 }
 
-function function_c1199c7cd79918b3() {
+function aggregator_init() {
   utility::registersharedfunc("aggregator", "registerOnPlayerSpawnCallback", &spawn_event_aggregator::registeronplayerspawncallback);
   utility::registersharedfunc("aggregator", "registerOnLuiEventCallback", &lui_game_event_aggregator::registeronluieventcallback);
 }
@@ -695,7 +695,7 @@ function vehicle_damage_init() {
   utility::registersharedfunc("vehicle", "set_vehicle_hit_damage_data_for_weapon", &damage::set_vehicle_hit_damage_data_for_weapon);
 }
 
-function function_1bc257700c3d014e() {
+function cameras_init() {
   utility::registersharedfunc("cameras", "tacticalCamera_Hack", &tactical_camera::tacticalcamera_hack);
 }
 

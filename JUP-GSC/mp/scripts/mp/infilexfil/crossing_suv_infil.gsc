@@ -19,7 +19,7 @@
 #namespace crossing_suv_infil;
 
 function function_ff655c7837121a1f(subtype) {
-  scripts\cp_mp\utility\audio_utility::function_f1aed36ab4598ea("crossing_suv_infil");
+  scripts\cp_mp\utility\audio_utility::snd_transient_load("crossing_suv_infil");
   thread function_b2a12312c1552d1d();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -490,7 +490,7 @@ function function_a2938e8d1926687d(var_c3dbf88a21ae118b) {
 function function_b2a12312c1552d1d() {
   level waittill("prematch_over");
   wait 51;
-  scripts\cp_mp\utility\audio_utility::function_f4e0ff5cb899686d("crossing_suv_infil");
+  scripts\cp_mp\utility\audio_utility::snd_transient_unload("crossing_suv_infil");
 }
 
 function function_f9f9146c527fbdd2(alias, delay) {

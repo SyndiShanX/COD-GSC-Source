@@ -232,13 +232,13 @@ function respawnplayer() {
     }
   }
 
-  if(!isbot(self) && scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(!isbot(self) && scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     aeeventname = #"hash_774f005e1bf7d1d3";
     aeeventid = function_6e2deb013c9ca85e(aeeventname);
     params = [function_d6f771aedba70ce7(aeeventname, #"version"), 1, function_d6f771aedba70ce7(aeeventname, #"hash_14cdeb43c9c858c1"), isingulag];
 
     if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-      function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+      callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
     }
   }
 }

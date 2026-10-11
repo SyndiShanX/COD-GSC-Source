@@ -17,7 +17,7 @@ function init() {
   val::group_register("target_marker", ["usability", "gesture", "sprint", "weapon_switch", "offhand_weapons", "melee", "execution_attack", "ladder_placement"]);
 }
 
-function gettargetmarker(streakinfo, var_281c85042194c88f, var_99514d9b932ce768) {
+function gettargetmarker(streakinfo, ignoreplayercommand, var_99514d9b932ce768) {
   assertex(isPlayer(self), "this function needs to be called on a player Entity");
 
   if(!scripts\cp_mp\utility\player_utility::_isalive()) {
@@ -38,7 +38,7 @@ function gettargetmarker(streakinfo, var_281c85042194c88f, var_99514d9b932ce768)
   thread function_46b5bec68eecb29(streakinfo);
   thread function_a3234162c515654f(streakinfo);
 
-  if(!istrue(var_281c85042194c88f)) {
+  if(!istrue(ignoreplayercommand)) {
     if(!isai(self)) {
       self notifyonplayercommand("equip_deploy_end", "+weapnext");
       self notifyonplayercommand("equip_deploy_end", "+weapprev");
@@ -60,7 +60,7 @@ function gettargetmarker(streakinfo, var_281c85042194c88f, var_99514d9b932ce768)
     }
 
     if(markerinfo.string == "equip_deploy_end") {
-      if(!istrue(var_281c85042194c88f)) {
+      if(!istrue(ignoreplayercommand)) {
         break;
       } else {
         scripts\cp\cp_hud_message::showerrormessage("KILLSTREAKS/CANNOT_SWITCH");
@@ -139,14 +139,14 @@ function gettargetmarker(streakinfo, var_281c85042194c88f, var_99514d9b932ce768)
 }
 
 function isplacementplayerobstructed(marker) {
-  var_5866e1790a4c2f2d = 0;
+  placementobstructed = 0;
   placementposition = marker.location;
 
   if(!scripts\engine\trace::sphere_trace_passed(placementposition + (0, 0, 100), placementposition, 20, undefined, scripts\engine\trace::create_character_contents())) {
-    var_5866e1790a4c2f2d = 1;
+    placementobstructed = 1;
   }
 
-  return var_5866e1790a4c2f2d;
+  return placementobstructed;
 }
 
 function watchforinvalidweapon(weapon, streakinfo) {
@@ -264,7 +264,7 @@ function watchforplacementfirestate(streakinfo, endonnotify) {
   level endon("game_ended");
   allowplacement = 0;
   val::set("watchPlacement", "fire", 0);
-  thread function_502f817c790dec40(streakinfo, endonnotify);
+  thread watchforplacementfirestateend(streakinfo, endonnotify);
 
   while(true) {
     placementstate = function_1b5bee429041e503(1, streakinfo, endonnotify);
@@ -334,7 +334,7 @@ function function_d56d5627730f5eeb(notifystruct, timeout) {
   notifystruct notify("waittill_proc", "timeout");
 }
 
-function function_502f817c790dec40(streakinfo, endonnotify) {
+function watchforplacementfirestateend(streakinfo, endonnotify) {
   self endon("death_or_disconnect");
   streakinfo endon("killstreak_finished_with_deploy_weapon");
   level endon("game_ended");
@@ -342,7 +342,7 @@ function function_502f817c790dec40(streakinfo, endonnotify) {
   val::reset_all("watchPlacement");
 }
 
-function waittill_succeed_fail_end(confirmstring, cancelstring, var_37069a8f8e660499, endstring, var_bd92ce9529bd1f2e) {
+function waittill_succeed_fail_end(confirmstring, cancelstring, var_37069a8f8e660499, endstring, classswitchstring) {
   ent = spawnStruct();
 
   if(isDefined(confirmstring)) {
@@ -361,8 +361,8 @@ function waittill_succeed_fail_end(confirmstring, cancelstring, var_37069a8f8e66
     childthread waittill_return(endstring, ent);
   }
 
-  if(isDefined(var_bd92ce9529bd1f2e)) {
-    childthread waittill_return(var_bd92ce9529bd1f2e, ent);
+  if(isDefined(classswitchstring)) {
+    childthread waittill_return(classswitchstring, ent);
   }
 
   childthread waittill_return("death", ent);

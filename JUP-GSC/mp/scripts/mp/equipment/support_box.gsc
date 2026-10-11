@@ -486,26 +486,26 @@ function supportbox_onplayeruse(player) {
       }
 
       if(istrue(weaponobj.hasalternate) && !isaxeweapon(weaponobj)) {
-        var_6890a4ce965bba99 = weaponobj getaltweapon();
-        var_91093ef03654702c = weaponclass(var_6890a4ce965bba99);
+        weaponaltobj = weaponobj getaltweapon();
+        var_91093ef03654702c = weaponclass(weaponaltobj);
 
         if(var_91093ef03654702c == "grenade") {
-          addammo = scripts\mp\weapons::getammooverride(var_6890a4ce965bba99);
-          stockammo = player getweaponammostock(var_6890a4ce965bba99);
+          addammo = scripts\mp\weapons::getammooverride(weaponaltobj);
+          stockammo = player getweaponammostock(weaponaltobj);
           newammo = int(stockammo + addammo);
-          player setweaponammostock(var_6890a4ce965bba99, newammo);
-        } else if(var_6890a4ce965bba99.type == "bullet") {
+          player setweaponammostock(weaponaltobj, newammo);
+        } else if(weaponaltobj.type == "bullet") {
           if(var_91093ef03654702c == "spread") {
-            addammo = scripts\mp\weapons::getammooverride(var_6890a4ce965bba99);
-            stockammo = player getweaponammostock(var_6890a4ce965bba99);
+            addammo = scripts\mp\weapons::getammooverride(weaponaltobj);
+            stockammo = player getweaponammostock(weaponaltobj);
             newammo = int(stockammo + addammo);
-            player setweaponammostock(var_6890a4ce965bba99, newammo);
+            player setweaponammostock(weaponaltobj, newammo);
           }
         } else {
-          addammo = scripts\mp\weapons::getammooverride(var_6890a4ce965bba99);
-          stockammo = player getweaponammostock(var_6890a4ce965bba99);
+          addammo = scripts\mp\weapons::getammooverride(weaponaltobj);
+          stockammo = player getweaponammostock(weaponaltobj);
           newammo = int(stockammo + addammo);
-          player setweaponammostock(var_6890a4ce965bba99, newammo);
+          player setweaponammostock(weaponaltobj, newammo);
         }
       }
 
@@ -770,8 +770,8 @@ function supportbox_handlemovingplatforms(stuckto) {
   data.validateaccuratetouching = 1;
 
   if(isDefined(stuckto) && scripts\cp_mp\utility\train_utility::is_train_ent(stuckto)) {
-    data.var_49cb2c45d3230ed8 = 1;
-    self function_7e73001e97fe87b9(1);
+    data.plantedontrain = 1;
+    self setmissileantilagged(1);
   }
 
   thread scripts\mp\movers::handle_moving_platforms(data);
@@ -1030,5 +1030,5 @@ function supportbox_usedcallback(entity, player) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }

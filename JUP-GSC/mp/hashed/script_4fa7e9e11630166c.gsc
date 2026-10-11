@@ -13,7 +13,7 @@
 function function_61cd287166c3f695(stringreference) {
   activityinstance = self;
   assertex(namespace_68dc261109a9503f::isactivityinstance(activityinstance));
-  activityinstance function_eefe3b65a6590ed2(stringreference, activityinstance.var_6c29f2fdb0054bbe);
+  activityinstance function_eefe3b65a6590ed2(stringreference, activityinstance.playerparticipants);
 }
 
 function function_eefe3b65a6590ed2(stringreference, players) {
@@ -29,7 +29,7 @@ function function_641bc1548cff8210(stringreference, players) {
 function function_716949a1eeeb1f47() {
   activityinstance = self;
   assertex(namespace_68dc261109a9503f::isactivityinstance(activityinstance));
-  activityinstance function_96517b0d8aacf068(activityinstance.var_6c29f2fdb0054bbe);
+  activityinstance function_96517b0d8aacf068(activityinstance.playerparticipants);
 }
 
 function function_96517b0d8aacf068(players) {
@@ -47,7 +47,7 @@ function function_b8b15f7f0820954e(players) {
 function function_c661dba3e304266b(value) {
   activityinstance = self;
   assertex(namespace_68dc261109a9503f::isactivityinstance(activityinstance));
-  activityinstance function_5f6fd55a55ffbc6c(value, activityinstance.var_6c29f2fdb0054bbe);
+  activityinstance function_5f6fd55a55ffbc6c(value, activityinstance.playerparticipants);
 }
 
 function function_5f6fd55a55ffbc6c(value, players) {
@@ -85,7 +85,7 @@ function function_5f6fd55a55ffbc6c(value, players) {
 function function_474722293c221d5c(timeinseconds) {
   activityinstance = self;
   assertex(namespace_68dc261109a9503f::isactivityinstance(activityinstance));
-  activityinstance function_c1c25690399031a3(timeinseconds, activityinstance.var_6c29f2fdb0054bbe);
+  activityinstance function_c1c25690399031a3(timeinseconds, activityinstance.playerparticipants);
 }
 
 function function_c1c25690399031a3(timeinseconds, players) {
@@ -113,7 +113,7 @@ function function_c1c25690399031a3(timeinseconds, players) {
 function function_f0361294db9d74a7(var_e953cfb99ec0d4ac, var_dea46a181189fa4b) {
   activityinstance = self;
   assertex(namespace_68dc261109a9503f::isactivityinstance(activityinstance));
-  activityinstance function_24d7e633e4a9c5c8(var_e953cfb99ec0d4ac, var_dea46a181189fa4b, activityinstance.var_6c29f2fdb0054bbe);
+  activityinstance function_24d7e633e4a9c5c8(var_e953cfb99ec0d4ac, var_dea46a181189fa4b, activityinstance.playerparticipants);
 }
 
 function function_24d7e633e4a9c5c8(var_e953cfb99ec0d4ac, var_dea46a181189fa4b, players) {

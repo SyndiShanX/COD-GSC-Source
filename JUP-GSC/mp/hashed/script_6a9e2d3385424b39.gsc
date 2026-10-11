@@ -157,7 +157,7 @@ function private function_aaf82d7c71b92a61(teamname) {
   task_ended(teamname);
 }
 
-function function_e63f55869e4d74ed(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_e63f55869e4d74ed(instance, part, state, player, bautouse, usestring) {
   instance setscriptablepartstate("dmz_flare_site_use", "unusable");
   instance setscriptablepartstate("dmz_flare_site", "dissipate");
   namespace_1eb3c4e0e28fac71::utilflare_shootflare(instance.origin, "dom");

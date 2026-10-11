@@ -13,11 +13,11 @@ function function_a78debac92a88923() {
   return getdvarint(@ "hash_484421b3752a1b9d", 0);
 }
 
-function function_805f1f0b22ca5026(var_bf7cebbb38bdf01) {
+function function_805f1f0b22ca5026(enrollment) {
   var_5a904f463705ae66 = undefined;
   var_f118da0af461c7e1 = undefined;
 
-  switch (var_bf7cebbb38bdf01) {
+  switch (enrollment) {
     case 1:
       var_5a904f463705ae66 = &namespace_197ebf97e16268de::function_b24a36667938b8d4;
       var_f118da0af461c7e1 = &namespace_197ebf97e16268de::function_b831ccf10a32a4b1;

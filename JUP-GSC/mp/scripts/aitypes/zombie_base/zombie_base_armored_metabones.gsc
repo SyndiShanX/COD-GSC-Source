@@ -14,20 +14,20 @@ function autoexec main() {
 }
 
 function private function_b9f4b7206d76e7ce(params) {
-  function_ebb83c1efeaae2c7(params.var_c02b1f6c1721c844);
+  function_ebb83c1efeaae2c7(params.metabone_name);
 }
 
-function private function_ebb83c1efeaae2c7(var_c02b1f6c1721c844) {
-  if(self getscriptablehaspart(var_c02b1f6c1721c844)) {
-    self setscriptablepartstate(var_c02b1f6c1721c844, "destroyed");
-    function_3d2728c0e2252a1d(var_c02b1f6c1721c844, "exposed");
+function private function_ebb83c1efeaae2c7(metabone_name) {
+  if(self getscriptablehaspart(metabone_name)) {
+    self setscriptablepartstate(metabone_name, "destroyed");
+    function_3d2728c0e2252a1d(metabone_name, "exposed");
 
-    if(var_c02b1f6c1721c844 == "armored_head") {
-      function_7380ccd6f2c49392(var_c02b1f6c1721c844, 1);
+    if(metabone_name == "armored_head") {
+      function_7380ccd6f2c49392(metabone_name, 1);
     }
 
     return;
   }
 
-  assertmsg("<dev string:x1c>" + var_c02b1f6c1721c844);
+  assertmsg("<dev string:x1c>" + metabone_name);
 }

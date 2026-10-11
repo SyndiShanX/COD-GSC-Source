@@ -19,8 +19,8 @@ function private function_f49a30f92555b827() {
   function_a66b42c7ea0c395b();
   function_fc3f9083a8c8a68c();
   function_96f220b689167b22();
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_moving_melee_changed", &on_is_moving_melee_changed);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &on_move_speed_changed);
+  callback::get_template(self.animsetname) callback::add("on_is_moving_melee_changed", &on_is_moving_melee_changed);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &on_move_speed_changed);
   level.scr_anim[self.animname]["spawn"] = "spawn";
   level.scr_anim[self.animname]["spawn_fast"] = "spawn_fast";
   level.scr_anim[self.animname]["emerge"] = "emerge";

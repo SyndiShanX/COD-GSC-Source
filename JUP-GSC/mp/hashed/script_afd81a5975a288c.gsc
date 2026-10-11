@@ -524,8 +524,8 @@ function function_7d81180cfc146b9a(params) {
   level notify("respawn_exit");
 }
 
-function function_f531ac7f1617663c(var_aeddcd74a8fad53c) {
-  wait var_aeddcd74a8fad53c;
+function function_f531ac7f1617663c(numseconds) {
+  wait numseconds;
   level notify("respawn_exit");
 }
 

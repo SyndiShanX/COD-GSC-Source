@@ -5,7 +5,7 @@
 
 #using scripts\common\callbacks;
 #using scripts\engine\utility;
-#namespace namespace_e422f53ac4bc98a4;
+#namespace inplaylimits;
 
 function autoexec main() {
   level.var_b8057c65baf0784a = spawnStruct();
@@ -22,7 +22,7 @@ function function_a114d6863af2f149() {
   }
 
   var_e4fea1d5467252b4 = getscriptbundle(level.gamemodebundle.var_671c47a45645026c);
-  level.var_e422f53ac4bc98a4 = {
+  level.inplaylimits = {
     #match: {
       #deployables: []
     }, #teams: [], #rules: []
@@ -30,10 +30,10 @@ function function_a114d6863af2f149() {
 
   foreach(rulegroup in var_e4fea1d5467252b4.var_8fd13818a31a01ba) {
     foreach(rule in rulegroup.rulelist) {
-      assertex(!isDefined(level.var_e422f53ac4bc98a4.rules[rule.name]), "<dev string:x1c>");
+      assertex(!isDefined(level.inplaylimits.rules[rule.name]), "<dev string:x1c>");
 
       if(rule.type == #"hash_4af11b8034b04aea") {
-        level.var_e422f53ac4bc98a4.rules[rule.name] = rule;
+        level.inplaylimits.rules[rule.name] = rule;
 
         if(isDefined(rule.var_2c1ee79078c7bc2a.permatch) && isDefined(rule.var_2c1ee79078c7bc2a.perteam)) {
           assert(rule.var_2c1ee79078c7bc2a.perteam <= rule.var_2c1ee79078c7bc2a.permatch, "<dev string:x42>");
@@ -62,9 +62,9 @@ function function_784a9a0ec8d203b9(bundle) {
     return;
   }
 
-  if(isDefined(bundle.var_e422f53ac4bc98a4)) {
-    foreach(rule in bundle.var_e422f53ac4bc98a4) {
-      assertex(isDefined(level.var_e422f53ac4bc98a4.rules[rule.name]), "<dev string:x132>");
+  if(isDefined(bundle.inplaylimits)) {
+    foreach(rule in bundle.inplaylimits) {
+      assertex(isDefined(level.inplaylimits.rules[rule.name]), "<dev string:x132>");
     }
   }
 }
@@ -77,7 +77,7 @@ function private function_3fbc4888ac56a(params) {
 
   player = params.player;
   id = params.bundle.var_19fb085453713468;
-  var_dc472c6c6f75536c = params.bundle.var_e422f53ac4bc98a4;
+  var_dc472c6c6f75536c = params.bundle.inplaylimits;
   params.var_ea46784be09b48e0 = function_de91481004edba65(player, id, var_dc472c6c6f75536c);
 }
 
@@ -86,37 +86,37 @@ function private function_de91481004edba65(player, id, var_dc472c6c6f75536c) {
     return true;
   }
 
-  if(!isDefined(player.var_e422f53ac4bc98a4)) {
-    player.var_e422f53ac4bc98a4 = {
+  if(!isDefined(player.inplaylimits)) {
+    player.inplaylimits = {
       #deployables: []
     };
   }
 
-  if(!isDefined(player.var_e422f53ac4bc98a4.deployables[id])) {
-    player.var_e422f53ac4bc98a4.deployables[id] = {
+  if(!isDefined(player.inplaylimits.deployables[id])) {
+    player.inplaylimits.deployables[id] = {
       #counts: []
     };
   }
 
-  if(!isDefined(level.var_e422f53ac4bc98a4.teams[player.team])) {
-    level.var_e422f53ac4bc98a4.teams[player.team] = {
+  if(!isDefined(level.inplaylimits.teams[player.team])) {
+    level.inplaylimits.teams[player.team] = {
       #deployables: []
     };
   }
 
-  if(!isDefined(level.var_e422f53ac4bc98a4.teams[player.team].deployables[id])) {
-    level.var_e422f53ac4bc98a4.teams[player.team].deployables[id] = {
+  if(!isDefined(level.inplaylimits.teams[player.team].deployables[id])) {
+    level.inplaylimits.teams[player.team].deployables[id] = {
       #counts: []
     };
   }
 
-  if(!isDefined(level.var_e422f53ac4bc98a4.match.deployables[id])) {
-    level.var_e422f53ac4bc98a4.match.deployables[id] = {
+  if(!isDefined(level.inplaylimits.match.deployables[id])) {
+    level.inplaylimits.match.deployables[id] = {
       #counts: []
     };
   }
 
-  errormsg = istrue(level.var_e422f53ac4bc98a4.rules[var_dc472c6c6f75536c[0].name].var_8ff5c508700ace25) ? "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" : "KILLSTREAKS/TOO_MANY_KILLSTREAK";
+  errormsg = istrue(level.inplaylimits.rules[var_dc472c6c6f75536c[0].name].var_8ff5c508700ace25) ? "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" : "KILLSTREAKS/TOO_MANY_KILLSTREAK";
 
   if(!function_d56747948459c017(player, id, var_dc472c6c6f75536c)) {
     if(issharedfuncdefined("hud", "showErrorMessage")) {
@@ -132,30 +132,30 @@ function private function_de91481004edba65(player, id, var_dc472c6c6f75536c) {
 
 function private function_d56747948459c017(player, id, var_dc472c6c6f75536c) {
   foreach(ruleref in var_dc472c6c6f75536c) {
-    rule = level.var_e422f53ac4bc98a4.rules[ruleref.name];
+    rule = level.inplaylimits.rules[ruleref.name];
 
     if(rule.type == #"hash_4af11b8034b04aea") {
-      if(!isDefined(player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name])) {
-        player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name] = {
+      if(!isDefined(player.inplaylimits.deployables[id].counts[ruleref.name])) {
+        player.inplaylimits.deployables[id].counts[ruleref.name] = {
           #count: undefined
         };
       }
 
-      if(!isDefined(level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name])) {
-        level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name] = {
+      if(!isDefined(level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name])) {
+        level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name] = {
           #count: undefined
         };
       }
 
-      if(!isDefined(level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name])) {
-        level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name] = {
+      if(!isDefined(level.inplaylimits.match.deployables[id].counts[ruleref.name])) {
+        level.inplaylimits.match.deployables[id].counts[ruleref.name] = {
           #count: undefined
         };
       }
 
-      playercount = player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name];
-      teamcount = level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name];
-      matchcount = level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name];
+      playercount = player.inplaylimits.deployables[id].counts[ruleref.name];
+      teamcount = level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name];
+      matchcount = level.inplaylimits.match.deployables[id].counts[ruleref.name];
 
       if(!function_d0a009b77b2abfeb(rule.var_2c1ee79078c7bc2a, playercount, teamcount, matchcount)) {
         return false;
@@ -168,30 +168,30 @@ function private function_d56747948459c017(player, id, var_dc472c6c6f75536c) {
 
 function private function_4b4a7fc5dbb7f51f(player, id, var_dc472c6c6f75536c) {
   foreach(ruleref in var_dc472c6c6f75536c) {
-    rule = level.var_e422f53ac4bc98a4.rules[ruleref.name];
+    rule = level.inplaylimits.rules[ruleref.name];
 
     if(rule.type == #"hash_4af11b8034b04aea") {
-      if(!isDefined(player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name])) {
-        player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name] = {
+      if(!isDefined(player.inplaylimits.deployables[id].counts[ruleref.name])) {
+        player.inplaylimits.deployables[id].counts[ruleref.name] = {
           #count: undefined
         };
       }
 
-      if(!isDefined(level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name])) {
-        level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name] = {
+      if(!isDefined(level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name])) {
+        level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name] = {
           #count: undefined
         };
       }
 
-      if(!isDefined(level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name])) {
-        level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name] = {
+      if(!isDefined(level.inplaylimits.match.deployables[id].counts[ruleref.name])) {
+        level.inplaylimits.match.deployables[id].counts[ruleref.name] = {
           #count: undefined
         };
       }
 
-      playercount = player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name];
-      teamcount = level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name];
-      matchcount = level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name];
+      playercount = player.inplaylimits.deployables[id].counts[ruleref.name];
+      teamcount = level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name];
+      matchcount = level.inplaylimits.match.deployables[id].counts[ruleref.name];
       function_82da19a6031f4815(rule.var_2c1ee79078c7bc2a, playercount, teamcount, matchcount);
     }
   }
@@ -205,36 +205,36 @@ function private function_b5001bf4e9beeb3e(params) {
   streakinfo = params.streakinfo;
   owner = streakinfo.owner;
   bundle = level.streakglobals.streakbundles[streakinfo.streakname];
-  function_f918710cd8320f22(owner, bundle.var_19fb085453713468, bundle.var_e422f53ac4bc98a4);
+  function_f918710cd8320f22(owner, bundle.var_19fb085453713468, bundle.inplaylimits);
 }
 
 function private function_f918710cd8320f22(player, id, var_dc472c6c6f75536c) {
-  if(isDefined(var_dc472c6c6f75536c) && isDefined(player.var_e422f53ac4bc98a4)) {
+  if(isDefined(var_dc472c6c6f75536c) && isDefined(player.inplaylimits)) {
     foreach(ruleref in var_dc472c6c6f75536c) {
-      rule = level.var_e422f53ac4bc98a4.rules[ruleref.name];
+      rule = level.inplaylimits.rules[ruleref.name];
 
       if(rule.type == #"hash_4af11b8034b04aea") {
-        if(!isDefined(player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name])) {
-          player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name] = {
+        if(!isDefined(player.inplaylimits.deployables[id].counts[ruleref.name])) {
+          player.inplaylimits.deployables[id].counts[ruleref.name] = {
             #count: undefined
           };
         }
 
-        if(!isDefined(level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name])) {
-          level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name] = {
+        if(!isDefined(level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name])) {
+          level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name] = {
             #count: undefined
           };
         }
 
-        if(!isDefined(level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name])) {
-          level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name] = {
+        if(!isDefined(level.inplaylimits.match.deployables[id].counts[ruleref.name])) {
+          level.inplaylimits.match.deployables[id].counts[ruleref.name] = {
             #count: undefined
           };
         }
 
-        playercount = player.var_e422f53ac4bc98a4.deployables[id].counts[ruleref.name];
-        teamcount = level.var_e422f53ac4bc98a4.teams[player.team].deployables[id].counts[ruleref.name];
-        matchcount = level.var_e422f53ac4bc98a4.match.deployables[id].counts[ruleref.name];
+        playercount = player.inplaylimits.deployables[id].counts[ruleref.name];
+        teamcount = level.inplaylimits.teams[player.team].deployables[id].counts[ruleref.name];
+        matchcount = level.inplaylimits.match.deployables[id].counts[ruleref.name];
         function_153a5eceee7d579c(rule.var_2c1ee79078c7bc2a, playercount, teamcount, matchcount);
       }
     }

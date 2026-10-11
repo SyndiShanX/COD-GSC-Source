@@ -98,24 +98,24 @@ function private function_89c75ea3b9bff392() {
   }
 
   var_b23fe13906e7191b = is_injured || var_de7821bc51ab43a0 >= 4 ? 3 : 4;
-  var_98462fcf733f80b5 = is_injured || var_de7821bc51ab43a0 >= 4 ? 6 : var_b23fe13906e7191b + 1;
-  var_d95356124cc5cc35 = randomintrange(var_b23fe13906e7191b, var_98462fcf733f80b5 + 1);
+  max_spawn_count = is_injured || var_de7821bc51ab43a0 >= 4 ? 6 : var_b23fe13906e7191b + 1;
+  var_d95356124cc5cc35 = randomintrange(var_b23fe13906e7191b, max_spawn_count + 1);
 
   for(spawner_i = 0; spawner_i < var_d95356124cc5cc35; spawner_i++) {
     self.var_e49062f063f27791[spawner_i] dontinterpolate();
     self.var_e49062f063f27791[spawner_i].origin = head_pos;
     self.var_e49062f063f27791[spawner_i] utility::function_3ab9164ef76940fd("mobile_spawner", "mobile_spawner_on");
-    var_69e3e4c4a13b7d1 = 0;
+    is_elite = 0;
 
     if(var_b5483230dd35a2b1) {
-      var_69e3e4c4a13b7d1 = spawner_i == 0;
+      is_elite = spawner_i == 0;
 
-      if(!var_69e3e4c4a13b7d1 && var_de7821bc51ab43a0 >= 14) {
-        var_69e3e4c4a13b7d1 = spawner_i == 1;
+      if(!is_elite && var_de7821bc51ab43a0 >= 14) {
+        is_elite = spawner_i == 1;
       }
     }
 
-    thread function_363dbe4e6642291(self.var_e49062f063f27791[spawner_i], var_69e3e4c4a13b7d1);
+    thread function_363dbe4e6642291(self.var_e49062f063f27791[spawner_i], is_elite);
   }
 
   utility::function_3ab9164ef76940fd("mouth_fire", "mouth_fire_on");
@@ -123,7 +123,7 @@ function private function_89c75ea3b9bff392() {
   function_470882fae4167198("<dev string:x40>", head_pos);
 }
 
-function private function_363dbe4e6642291(mobile_spawner, var_69e3e4c4a13b7d1) {
+function private function_363dbe4e6642291(mobile_spawner, is_elite) {
   self endon("death");
   mobile_spawner endon("death");
   forward_vec = anglesToForward(self.angles);
@@ -152,8 +152,8 @@ function private function_363dbe4e6642291(mobile_spawner, var_69e3e4c4a13b7d1) {
   }
 
   mobile_spawner utility::function_3ab9164ef76940fd("mobile_spawner", "mobile_spawner_impact");
-  var_46d416fa1e8b773e = utility::random(var_69e3e4c4a13b7d1 ? self.var_e62a57499d165e15 : self.var_d230d829f6d05081);
-  aitypes = namespace_2b1145f62aa835b8::get_aitype_by_subclass_sharedfunc(var_46d416fa1e8b773e);
+  ai_subclass = utility::random(is_elite ? self.var_e62a57499d165e15 : self.var_d230d829f6d05081);
+  aitypes = namespace_2b1145f62aa835b8::get_aitype_by_subclass_sharedfunc(ai_subclass);
   base_aitype = undefined;
 
   foreach(aitype in aitypes) {
@@ -201,7 +201,7 @@ function private function_363dbe4e6642291(mobile_spawner, var_69e3e4c4a13b7d1) {
     }
   }
 
-  targets = function_143526130b12b2b6(mobile_spawner.origin, 128);
+  targets = getplayersandaiarrayinradius(mobile_spawner.origin, 128);
 
   foreach(target in targets) {
     if(target.team != self.team) {

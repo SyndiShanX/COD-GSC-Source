@@ -147,7 +147,7 @@ function function_e3234be372f6209d(supertable) {
           staticdata.graceperiod = 0;
         }
 
-        initializesuper(function_1823ff50bb28148d(superref));
+        initializesuper(getxhash(superref));
       }
     }
   }

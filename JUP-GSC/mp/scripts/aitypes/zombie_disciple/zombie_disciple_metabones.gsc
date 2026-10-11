@@ -12,12 +12,12 @@ function autoexec main() {
 }
 
 function private function_b9f4b7206d76e7ce(params) {
-  var_c02b1f6c1721c844 = params.var_c02b1f6c1721c844;
+  metabone_name = params.metabone_name;
 
-  if(self getscriptablehaspart(var_c02b1f6c1721c844)) {
-    self setscriptablepartstate(var_c02b1f6c1721c844, "destroyed");
-    function_3d2728c0e2252a1d(var_c02b1f6c1721c844, "destroyed");
-    function_7380ccd6f2c49392(var_c02b1f6c1721c844, 1);
+  if(self getscriptablehaspart(metabone_name)) {
+    self setscriptablepartstate(metabone_name, "destroyed");
+    function_3d2728c0e2252a1d(metabone_name, "destroyed");
+    function_7380ccd6f2c49392(metabone_name, 1);
 
     if(!istrue(self.var_8eea1c7b28ac77b5)) {
       self function_3e89eb3d8e3f1811("in_head_pain", 1);
@@ -26,5 +26,5 @@ function private function_b9f4b7206d76e7ce(params) {
     return;
   }
 
-  assertmsg("<dev string:x1c>" + var_c02b1f6c1721c844);
+  assertmsg("<dev string:x1c>" + metabone_name);
 }

@@ -15,5 +15,5 @@ function main() {
   level.var_6d129920246627ba = "mp_jup_elevated_killstreak";
   level.var_61b254009a0951a6 = "mp_jup_elevated_killstreak";
   level.var_638c653eda9d1cd3 = "mp_jup_elevated_killstreak";
-  level.var_81d39c829ea8e68f = "mp_jup_elevated_killstreak";
+  level.hellstormmissilevisionset = "mp_jup_elevated_killstreak";
 }

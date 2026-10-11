@@ -40,7 +40,7 @@ function function_9a7305ea8ee1e807() {
 
   function_88faf0c0e9782e83();
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     level.startracker = [];
 
     foreach(poiname, poi in level.poi) {
@@ -147,7 +147,7 @@ function function_96b7b6431450dfc0(num, poiname) {
     return;
   }
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(isDefined(poiname) && isDefined(level.startracker[poiname])) {
       level.startracker[poiname].var_a93671354b676c18 += num;
     }
@@ -280,7 +280,7 @@ function function_88249d3440778901(startracker, var_ff838f13c8ca3b6c) {
 }
 
 function function_668252e0e3cbcb41(amount, poiname) {
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(isDefined(poiname) && isDefined(level.startracker[poiname])) {
       level.startracker[poiname].var_bf18e3cc575bc1c8 += amount;
     } else {
@@ -420,7 +420,7 @@ function function_5cc0c507e92f7b47(poiname) {
 
   startracker = level.startracker;
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
       return 0;
     }
@@ -538,7 +538,7 @@ function function_e04dbe0bd8a25be7(agent, starlevel) {
 }
 
 function function_aea62ab225d060a9() {
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     foreach(poiname, poi in level.poi) {
       if(isDefined(level.startracker[poiname]) && level.startracker[poiname].starlevel <= 4) {
         if(level.startracker[poiname].starlevel == 4) {
@@ -568,7 +568,7 @@ function function_aea62ab225d060a9() {
 }
 
 function function_922b62afafec07a5() {
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     foreach(poiname, poi in level.poi) {
       if(isDefined(level.startracker[poiname]) && level.startracker[poiname].starlevel > 0) {
         var_624ebf2f1fe7ae21 = level.startracker[poiname].starlevel - 1;
@@ -588,7 +588,7 @@ function function_922b62afafec07a5() {
 }
 
 function function_8b9921bd8271144b() {
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     foreach(poiname, poi in level.poi) {
       if(isDefined(level.startracker[poiname])) {
         level.startracker[poiname].var_a93671354b676c18 = level.var_1a6233bc0d61faf.reqreinforcements[level.startracker[poiname].starlevel];

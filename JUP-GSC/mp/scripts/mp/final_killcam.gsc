@@ -131,7 +131,7 @@ function preloadfinalkillcam() {
 
   foreach(player in level.players) {
     player loadcustomizationplayerview(spectateentity);
-    player function_bc667001f9dd3808(var_b2d56fe9c46fb7b4);
+    player predictstreamposuntilcleared(var_b2d56fe9c46fb7b4);
   }
 
   if(level.potgenabled) {

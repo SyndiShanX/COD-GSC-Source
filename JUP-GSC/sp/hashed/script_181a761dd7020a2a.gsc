@@ -22,14 +22,14 @@
 function function_c508f809a039cc0(objectivestruct) {
   level endon("game_ended");
   objectivestruct endon("obj_laptop1_destroyed");
-  self.var_1701193cd897285e = 200;
+  self.ihealth = 200;
 
-  while(self.var_1701193cd897285e > 0) {
+  while(self.ihealth > 0) {
     self waittill("damage", idamage, eattacker, vhitdir, vpoint, smeansofdeath);
 
     if(isplayerdamage(eattacker, smeansofdeath)) {
-      self.var_1701193cd897285e = max(self.var_1701193cd897285e - idamage, 0);
-      eattacker scripts\cp\damagefeedback::updatedamagefeedback("standard", self.var_1701193cd897285e == 0);
+      self.ihealth = max(self.ihealth - idamage, 0);
+      eattacker scripts\cp\damagefeedback::updatedamagefeedback("standard", self.ihealth == 0);
     }
   }
 
@@ -64,11 +64,11 @@ function function_1364d4e78e9acc35(targetname) {
   door moveTo(door.destination.origin, 1, 0.2, 0.2);
 }
 
-function function_4e257994365fa73f(var_acba072b7e847a86, trig_targetname) {
+function function_4e257994365fa73f(flag_to_set, trig_targetname) {
   level endon("game_endon");
-  level endon(var_acba072b7e847a86);
+  level endon(flag_to_set);
   function_d14fcd3a04720601(trig_targetname);
-  flag_set(var_acba072b7e847a86);
+  flag_set(flag_to_set);
 }
 
 function function_184e2f7f361596c3() {
@@ -202,8 +202,8 @@ function function_306342617868028a(var_e8fda99be77028d9) {
   self notify("reached_dynamic_path_end");
   self.forced_speed = 0;
   self notify("path_updated");
-  self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
-  self function_77320e794d35465a("p2p", "goalPoint", self.origin);
+  self setconfigvalue("p2p", "brakeAtGoal", 1);
+  self setconfigvalue("p2p", "goalPoint", self.origin);
   self stoppath();
   self vehicle_setspeedimmediate(0, 1, 1);
   self vehicle_cleardrivingstate();
@@ -218,7 +218,7 @@ function function_306342617868028a(var_e8fda99be77028d9) {
   }
 
   function_ecbcec373d227be(0, "default", 1);
-  self function_65aa053c077c003a(1);
+  self vehphys_parkingbrake(1);
   self vehicle_turnengineoff();
   namespace_cbe993018617a21d::function_1686ecaabfdc542d();
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_setteam(self, "neutral");
@@ -263,7 +263,7 @@ function function_137fc90d1f21350c() {
   }
 }
 
-function function_9abe9350cc74539e(spawner_name, vehicle_speed, var_f692565186a11dfc, force_spawn) {
+function function_9abe9350cc74539e(spawner_name, vehicle_speed, ai_think, force_spawn) {
   veh_spawner = getStruct(spawner_name, "targetname");
 
   if(!isDefined(veh_spawner)) {
@@ -271,7 +271,7 @@ function function_9abe9350cc74539e(spawner_name, vehicle_speed, var_f692565186a1
     return;
   }
 
-  if(!isDefined(var_f692565186a11dfc)) {
+  if(!isDefined(ai_think)) {
     assertmsg("Vehicle spawner: " + spawner_name + " does not have an ai_think()!");
     return;
   }
@@ -303,7 +303,7 @@ function function_9abe9350cc74539e(spawner_name, vehicle_speed, var_f692565186a1
     }
   }
 
-  ai_spawn = namespace_a0852b262a68d01::function_6149b301ce19988b(var_2080297e17b86673, var_f692565186a11dfc);
+  ai_spawn = namespace_a0852b262a68d01::function_6149b301ce19988b(var_2080297e17b86673, ai_think);
   vehicle thread function_306342617868028a(vehicle_speed);
   vehicle thread namespace_ba155a12c323dc5a::resume_path();
   return vehicle;
@@ -327,22 +327,22 @@ function function_60dc5c690ccc2a2c(var_cab5bc7f505859d4) {
 }
 
 function function_941cd7a30718ecb8(node) {
-  var_fff15c3ac9cc144e = node.var_9987f724c05e74ba;
+  alt_path = node.choose_path;
 
-  if(!isDefined(var_fff15c3ac9cc144e)) {
+  if(!isDefined(alt_path)) {
     return;
   }
 
-  var_f7983964cc48896e = flag(var_fff15c3ac9cc144e);
+  do_path = flag(alt_path);
 
-  if(!var_f7983964cc48896e) {
+  if(!do_path) {
     return;
   }
 
-  next_node = getStruct(var_fff15c3ac9cc144e + "_active", "targetname");
+  next_node = getStruct(alt_path + "_active", "targetname");
 
   if(!isDefined(next_node)) {
-    assertmsg("Node struct " + var_fff15c3ac9cc144e + "_active does not exist.");
+    assertmsg("Node struct " + alt_path + "_active does not exist.");
     return;
   }
 
@@ -352,9 +352,9 @@ function function_941cd7a30718ecb8(node) {
 }
 
 function function_c89faf236aaf59dc(node) {
-  var_fff15c3ac9cc144e = node.var_9987f724c05e74ba;
+  alt_path = node.choose_path;
 
-  if(!isDefined(var_fff15c3ac9cc144e)) {
+  if(!isDefined(alt_path)) {
     return;
   }
 
@@ -362,11 +362,11 @@ function function_c89faf236aaf59dc(node) {
     return;
   }
 
-  flag_wait(var_fff15c3ac9cc144e);
-  next_node = getStruct(var_fff15c3ac9cc144e + "_active", "targetname");
+  flag_wait(alt_path);
+  next_node = getStruct(alt_path + "_active", "targetname");
 
   if(!isDefined(next_node)) {
-    assertmsg("Node struct " + var_fff15c3ac9cc144e + "_active does not exist.");
+    assertmsg("Node struct " + alt_path + "_active does not exist.");
     return;
   }
 

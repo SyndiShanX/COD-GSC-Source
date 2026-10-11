@@ -501,8 +501,8 @@ function heli_goal_think(basespeed) {
       }
     }
 
-    var_7a0c1f650bbe34c6 = randomfloatrange(level.attackhelimovetime - 0.5, level.attackhelimovetime + 0.5);
-    waittill_notify_or_timeout("damage_by_player", var_7a0c1f650bbe34c6);
+    frand = randomfloatrange(level.attackhelimovetime - 0.5, level.attackhelimovetime + 0.5);
+    waittill_notify_or_timeout("damage_by_player", frand);
   }
 }
 
@@ -614,8 +614,8 @@ function heli_can_see_target() {
     org = self.etarget getEye();
   }
 
-  var_4b9a91106f629c2b = self gettagorigin("tag_flash");
-  can_sight = sighttracepassed(var_4b9a91106f629c2b, org, 0, self);
+  tag_flash_loc = self gettagorigin("tag_flash");
+  can_sight = sighttracepassed(tag_flash_loc, org, 0, self);
   return can_sight;
 }
 
@@ -662,8 +662,8 @@ function heli_get_target() {
 }
 
 function heli_get_target_player_only() {
-  var_a3658e5ee7a7dda1 = getaiarray("allies");
-  etarget = scripts\sp\helicopter_globals::getenemytarget(level.attackhelirange, level.attackhelifov, 1, 0, 0, 0, var_a3658e5ee7a7dda1);
+  aexcluders = getaiarray("allies");
+  etarget = scripts\sp\helicopter_globals::getenemytarget(level.attackhelirange, level.attackhelifov, 1, 0, 0, 0, aexcluders);
 
   if(!isDefined(etarget)) {
     etarget = self.targetdefault;
@@ -953,8 +953,8 @@ function minigun_fire(etarget, burstsize) {
   }
 
   if(isPlayer(etarget)) {
-    var_7a0c1f650bbe34c6 = randomfloatrange(0.5, 3);
-    thread fire_missiles(var_7a0c1f650bbe34c6);
+    frand = randomfloatrange(0.5, 3);
+    thread fire_missiles(frand);
   }
 
   wait burstsize;
@@ -1047,7 +1047,7 @@ function miss_player(player) {
 function can_see_player(player) {
   self endon("death");
   self endon("heli_players_dead");
-  var_4b9a91106f629c2b = self gettagorigin("tag_flash");
+  tag_flash_loc = self gettagorigin("tag_flash");
   pos = (0, 0, 0);
 
   if(isPlayer(player)) {
@@ -1056,7 +1056,7 @@ function can_see_player(player) {
     pos = player.origin;
   }
 
-  if(sighttracepassed(var_4b9a91106f629c2b, pos, 0, undefined)) {
+  if(sighttracepassed(tag_flash_loc, pos, 0, undefined)) {
     return 1;
   }
 
@@ -1366,8 +1366,8 @@ function within_player_fov() {
   }
 
   player = self.etarget;
-  var_594475c14b9b58e5 = within_fov(player getEye(), player getplayerangles(), self.origin, level.cosine["35"]);
-  return var_594475c14b9b58e5;
+  binfov = within_fov(player getEye(), player getplayerangles(), self.origin, level.cosine["35"]);
+  return binfov;
 }
 
 function heli_spotlight_aim_ents_cleanup(eheli) {
@@ -1406,7 +1406,7 @@ function attack_heli_cleanup() {
   }
 }
 
-function heli_default_missiles_on(var_f5c2e7c08c50919f) {
+function heli_default_missiles_on(custommissiles) {
   self endon("death");
   self endon("heli_players_dead");
   self endon("stop_default_heli_missiles");
@@ -1418,27 +1418,27 @@ function heli_default_missiles_on(var_f5c2e7c08c50919f) {
     ishots = undefined;
     delay = undefined;
     self.preferredtarget = undefined;
-    var_9a287933c5bfbd = undefined;
+    enextnode = undefined;
 
     if(isDefined(self.currentnode) && isDefined(self.currentnode.target)) {
-      var_9a287933c5bfbd = getent_or_struct(self.currentnode.target, "targetname");
+      enextnode = getent_or_struct(self.currentnode.target, "targetname");
     }
 
-    if(isDefined(var_9a287933c5bfbd) && isDefined(var_9a287933c5bfbd.script_linkto)) {
-      self.preferredtarget = getent_or_struct(var_9a287933c5bfbd.script_linkto, "script_linkname");
+    if(isDefined(enextnode) && isDefined(enextnode.script_linkto)) {
+      self.preferredtarget = getent_or_struct(enextnode.script_linkto, "script_linkname");
     }
 
     if(isDefined(self.preferredtarget)) {
       etarget = self.preferredtarget;
       ishots = etarget.script_shotcount;
       delay = etarget.script_delay;
-      var_9a287933c5bfbd waittill("trigger");
+      enextnode waittill("trigger");
     } else {
       waittill_any_2("near_goal", "goal");
     }
 
     if(isDefined(etarget)) {
-      thread heli_fire_missiles(etarget, ishots, delay, var_f5c2e7c08c50919f);
+      thread heli_fire_missiles(etarget, ishots, delay, custommissiles);
     }
   }
 }
@@ -1447,13 +1447,13 @@ function heli_default_missiles_off() {
   self notify("stop_default_heli_missiles");
 }
 
-function heli_spotlight_on(stag, var_af408e1e3636ab16, var_d8d5db80fb486480) {
+function heli_spotlight_on(stag, buseattackhelibehavior, var_d8d5db80fb486480) {
   if(!isDefined(stag)) {
     stag = "tag_barrel";
   }
 
-  if(!isDefined(var_af408e1e3636ab16)) {
-    var_af408e1e3636ab16 = 0;
+  if(!isDefined(buseattackhelibehavior)) {
+    buseattackhelibehavior = 0;
   }
 
   if(!isDefined(var_d8d5db80fb486480)) {
@@ -1469,7 +1469,7 @@ function heli_spotlight_on(stag, var_af408e1e3636ab16, var_d8d5db80fb486480) {
     return;
   }
 
-  if(var_af408e1e3636ab16) {
+  if(buseattackhelibehavior) {
     self endon("death");
     self endon("heli_players_dead");
     spawn_origin = self gettagorigin("tag_origin");
@@ -1510,7 +1510,7 @@ function heli_spotlight_random_targets_off() {
   self notify("stop_spotlight_random_targets");
 }
 
-function heli_fire_missiles(etarget, ishots, delay, var_f5c2e7c08c50919f) {
+function heli_fire_missiles(etarget, ishots, delay, custommissiles) {
   self endon("death");
   self endon("heli_players_dead");
 
@@ -1522,8 +1522,8 @@ function heli_fire_missiles(etarget, ishots, delay, var_f5c2e7c08c50919f) {
 
   weaponname = "missile_attackheli";
 
-  if(isDefined(var_f5c2e7c08c50919f)) {
-    weaponname = var_f5c2e7c08c50919f;
+  if(isDefined(custommissiles)) {
+    weaponname = custommissiles;
   }
 
   var_8f26a943256ed058 = undefined;

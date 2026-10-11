@@ -36,7 +36,7 @@ function init_dev_hud() {
   level.cleartextmarker setdevtext("<dev string:x1c>");
 
   for(i = 0; i < level.hudelem_count; i++) {
-    var_9af634fe97c006f5 = [];
+    newstrarray = [];
 
     for(p = 0; p < 1; p++) {
       newstr = newhudelem();
@@ -55,10 +55,10 @@ function init_dev_hud() {
         newstr.color = (0, 0, 0);
       }
 
-      var_9af634fe97c006f5[var_9af634fe97c006f5.size] = newstr;
+      newstrarray[newstrarray.size] = newstr;
     }
 
-    level.hudelems[i] = var_9af634fe97c006f5;
+    level.hudelems[i] = newstrarray;
   }
 
   hud = newhudelem();

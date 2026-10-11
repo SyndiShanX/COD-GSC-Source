@@ -38,7 +38,7 @@ function init() {
   bundle = level.streakglobals.streakbundles["sentry_gun"];
 
   if(isDefined(bundle) && isDefined(bundle.spawnweapon)) {
-    function_a41e3a211a9e37a4("sentry_gun", bundle.spawnweapon, #"large");
+    registerkillstreakdamagedealingweaponsharedfunc("sentry_gun", bundle.spawnweapon, #"large");
   }
 
   setdevdvarifuninitialized(@ "hash_c9bd691ce96079ac", 0);
@@ -118,7 +118,7 @@ function tryusesentryturretfromstruct(streakinfo) {
     return false;
   }
 
-  turret function_641996b5e113c5c6(turret, &function_764a9f25a1a15a4a, &sentryturret_empstarted, &sentryturret_empcleared);
+  turret function_641996b5e113c5c6(turret, &sentryturret_empapplied, &sentryturret_empstarted, &sentryturret_empcleared);
 
   if(issharedfuncdefined(#"hash_d8976e21a6adafba", #"hash_ca0042e3cac99672")) {
     turret[[getsharedfunc(#"hash_d8976e21a6adafba", #"hash_ca0042e3cac99672")]](turret, &function_4b9ae5f8bf842050, &function_4b9ae5f8bf842050);
@@ -313,8 +313,8 @@ function sentryturret_create(turrettype, streakinfo) {
   turret.colmodel dontinterpolate();
   turret.colmodel hide();
 
-  if(isDefined(config.var_34d24162c014a897)) {
-    turret.var_34d24162c014a897 = config.var_34d24162c014a897;
+  if(isDefined(config.hitbyvehiclefunc)) {
+    turret.hitbyvehiclefunc = config.hitbyvehiclefunc;
   }
 
   return turret;
@@ -442,7 +442,7 @@ function function_5c49802fcf1a63ed(turret, config) {
     hintdist = undefined;
     usedist = undefined;
 
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       hinticon = "hud_icon_killstreak_sentry";
       hintduration = "duration_none";
       hintdist = 50;
@@ -526,7 +526,7 @@ function sentryturret_setcarried(turret) {
   switchresult = function_6633c7714fc94777(turret.streakinfo, turret);
 
   if(!istrue(switchresult)) {
-    function_f3bb4f4911a1beb2("killstreak", "refundKillstreak", "sentry", 1, 0, 0, 1);
+    callsharedfunc("killstreak", "refundKillstreak", "sentry", 1, 0, 0, 1);
     return;
   }
 
@@ -535,7 +535,7 @@ function sentryturret_setcarried(turret) {
   if(!isDefined(marker)) {
     turret delete();
     self.bgivensentry = 0;
-    function_f3bb4f4911a1beb2("killstreak", "refundKillstreak", "sentry", 1, 0, 0, 1);
+    callsharedfunc("killstreak", "refundKillstreak", "sentry", 1, 0, 0, 1);
     return;
   }
 
@@ -703,7 +703,7 @@ function sentryturret_disableplayerdismantleonconnect(turret) {
   }
 }
 
-function function_764a9f25a1a15a4a(data) {
+function sentryturret_empapplied(data) {
   bundle = level.streakglobals.streakbundles["sentry_gun"];
   var_e913079a5ffda56d = bundle.var_e913079a5ffda56d;
 
@@ -718,7 +718,7 @@ function function_764a9f25a1a15a4a(data) {
 
 function sentryturret_empstarted(data) {
   if(isDefined(data.attacker)) {
-    data.attacker thread function_f3bb4f4911a1beb2("player", "doScoreEvent", #"emp_disable");
+    data.attacker thread callsharedfunc("player", "doScoreEvent", #"emp_disable");
 
     if(issharedfuncdefined("sentry_gun", "empStarted")) {
       self[[getsharedfunc("sentry_gun", "empStarted")]]();
@@ -950,7 +950,7 @@ function function_8fbbc6a868621dd5(existingturret) {
   return true;
 }
 
-function sentry_attacktargets(var_630af5192659dd3b) {
+function sentry_attacktargets(configoverride) {
   self.owner endon("<dev string:xd2>");
 
   self endon("kill_turret");
@@ -964,7 +964,7 @@ function sentry_attacktargets(var_630af5192659dd3b) {
 
     if(self isfiringturret()) {
       self laseron();
-      thread sentry_burstfirestart(var_630af5192659dd3b);
+      thread sentry_burstfirestart(configoverride);
 
       if(isDefined(level.var_b67b5f9dfe488c2f)) {
         thread[[level.var_b67b5f9dfe488c2f]](self.streakinfo);
@@ -985,7 +985,7 @@ function sentry_attacktargets(var_630af5192659dd3b) {
   }
 }
 
-function function_c057f52574c94670(var_630af5192659dd3b) {
+function function_c057f52574c94670(configoverride) {
   self endon("<dev string:xe9>");
   self endon("<dev string:xf5>");
   level endon("<dev string:xfd>");
@@ -994,15 +994,15 @@ function function_c057f52574c94670(var_630af5192659dd3b) {
   self.turrettarget dontinterpolate();
   self.turrettarget thread function_e2a098b6c28a80cb(self);
   self.turrettarget thread function_2937914e0c4fb627(self);
-  var_50651df7c1ef6241 = undefined;
+  turretconfig = undefined;
 
-  if(isDefined(var_630af5192659dd3b)) {
-    var_50651df7c1ef6241 = var_630af5192659dd3b;
+  if(isDefined(configoverride)) {
+    turretconfig = configoverride;
   } else {
-    var_50651df7c1ef6241 = level.sentrysettings[self.turrettype];
+    turretconfig = level.sentrysettings[self.turrettype];
   }
 
-  sentrymode = var_50651df7c1ef6241.sentrymodeon;
+  sentrymode = turretconfig.sentrymodeon;
   manualmode = "<dev string:x11f>";
   turretmode = sentrymode;
   notifyon = 0;
@@ -1082,9 +1082,9 @@ function function_9004e9c694f0db7b(firepos) {
     thread drawsphere(var_30c9c9336ef2caaf, 2, 1, (0, 1, 1));
     thread drawline(var_30c9c9336ef2caaf, var_30c9c9336ef2caaf + anglesToForward(var_831cc1b8f4225351) * 1800, 1, (0, 1, 1));
     flashtagorigin = self gettagorigin(endtag);
-    var_e0416d7c3c03c91b = self gettagangles(endtag);
+    flashtagangles = self gettagangles(endtag);
     thread drawsphere(flashtagorigin, 2, 1, (1, 1, 0));
-    thread drawline(flashtagorigin, flashtagorigin + anglesToForward(var_e0416d7c3c03c91b) * 1800, 1, (1, 1, 0));
+    thread drawline(flashtagorigin, flashtagorigin + anglesToForward(flashtagangles) * 1800, 1, (1, 1, 0));
     sentry_burstfirestart(undefined, undefined, 1);
     wait 1;
   }
@@ -1127,10 +1127,10 @@ function sentry_targetlocksound() {
   self playSound("sentry_gun_target_lock_beep");
 }
 
-function sentry_spinup(var_630af5192659dd3b) {
+function sentry_spinup(configoverride) {
   thread sentry_targetlocksound();
 
-  while(self.momentum < var_630af5192659dd3b.spinuptime) {
+  while(self.momentum < configoverride.spinuptime) {
     self.momentum += 0.1;
     wait 0.1;
   }
@@ -1140,33 +1140,33 @@ function sentry_spindown() {
   self.momentum = 0;
 }
 
-function sentry_burstfirestart(var_630af5192659dd3b, var_ebed6e83eb956d18, var_7a4f7bd11952e7bc) {
+function sentry_burstfirestart(configoverride, maxroundsoverride, var_7a4f7bd11952e7bc) {
   self endon("death");
   self endon("kill_turret");
   self endon("carried");
   self endon("stop_shooting");
   level endon("game_ended");
-  var_50651df7c1ef6241 = undefined;
+  turretconfig = undefined;
 
-  if(isDefined(var_630af5192659dd3b)) {
-    var_50651df7c1ef6241 = var_630af5192659dd3b;
+  if(isDefined(configoverride)) {
+    turretconfig = configoverride;
   } else {
-    var_50651df7c1ef6241 = level.sentrysettings[self.turrettype];
+    turretconfig = level.sentrysettings[self.turrettype];
   }
 
-  sentry_spinup(var_50651df7c1ef6241);
-  firetime = weaponfiretime(var_50651df7c1ef6241.weaponinfo);
-  minshots = var_50651df7c1ef6241.burstmin;
-  maxshots = var_50651df7c1ef6241.burstmax;
-  minpause = var_50651df7c1ef6241.pausemin;
-  maxpause = var_50651df7c1ef6241.pausemax;
-  lockstrength = var_50651df7c1ef6241.lockstrength;
+  sentry_spinup(turretconfig);
+  firetime = weaponfiretime(turretconfig.weaponinfo);
+  minshots = turretconfig.burstmin;
+  maxshots = turretconfig.burstmax;
+  minpause = turretconfig.pausemin;
+  maxpause = turretconfig.pausemax;
+  lockstrength = turretconfig.lockstrength;
 
   while(true) {
     numshots = randomintrange(minshots, maxshots + 1);
 
-    if(isDefined(var_ebed6e83eb956d18)) {
-      numshots = var_ebed6e83eb956d18;
+    if(isDefined(maxroundsoverride)) {
+      numshots = maxroundsoverride;
     }
 
     prefiretime = self prefireturret();
@@ -1250,7 +1250,7 @@ function turret_coolmonitor() {
   }
 }
 
-function function_ffbb592bde7cbca8(newowner, oldowner) {
+function sentryturret_hack(newowner, oldowner) {
   if(isDefined(newowner)) {
     self notify("turret_hacked");
     self setturretowner(newowner);
@@ -1269,7 +1269,7 @@ function function_ffbb592bde7cbca8(newowner, oldowner) {
     killstreak_dangernotifyplayersinrange(newowner, newowner.team, 2000, self.streakinfo.streakname);
     newowner function_5c49802fcf1a63ed(self);
     newowner thread sentryturret_watchpickup(self);
-    namespace_37987c2865e1a627::function_2eff4cd94c3243e8();
+    namespace_37987c2865e1a627::clearminimapid();
 
     if(issharedfuncdefined("game", "createObjective")) {
       self.minimapid = self[[getsharedfunc("game", "createObjective")]]("hud_icon_minimap_killstreak_sentry", newowner.team, undefined, 1, 1);
@@ -1285,7 +1285,7 @@ function function_ffbb592bde7cbca8(newowner, oldowner) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function elevator_turretcallback() {

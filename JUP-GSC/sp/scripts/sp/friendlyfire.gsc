@@ -142,36 +142,36 @@ function friendly_fire_think(entity) {
       damage = int(damage);
     }
 
-    var_54c4c82bfa9fee40 = 0;
+    bplayersdamage = 0;
 
     if(!isDefined(objweapon)) {
       objweapon = entity.damageweapon;
     }
 
     if(isPlayer(attacker)) {
-      var_54c4c82bfa9fee40 = 1;
+      bplayersdamage = 1;
 
       if(isDefined(objweapon) && isnullweapon(objweapon)) {
-        var_54c4c82bfa9fee40 = 0;
+        bplayersdamage = 0;
       }
 
       if(attacker isusingturret()) {
-        var_54c4c82bfa9fee40 = 1;
+        bplayersdamage = 1;
       }
 
       if(isDefined(var_d23f02852fed23f)) {
-        var_54c4c82bfa9fee40 = 1;
+        bplayersdamage = 1;
       }
     } else if(isDefined(attacker.code_classname) && attacker.code_classname == "script_vehicle") {
       owner = attacker getvehicleowner();
 
       if(isDefined(owner) && isPlayer(owner)) {
         attacker = owner;
-        var_54c4c82bfa9fee40 = 1;
+        bplayersdamage = 1;
       }
     }
 
-    if(!var_54c4c82bfa9fee40) {
+    if(!bplayersdamage) {
       continue;
     }
 
@@ -210,7 +210,7 @@ function friendly_fire_think(entity) {
     }
 
     if(!iscivilian && !killed) {
-      function_216c67ab6749137a(entity, undefined, "friendly_fire");
+      addbattlechatternotify(entity, undefined, "friendly_fire");
     }
 
     if(istrue(level.no_friendly_fire_fail) || istrue(entity.no_friendly_fire_fail)) {

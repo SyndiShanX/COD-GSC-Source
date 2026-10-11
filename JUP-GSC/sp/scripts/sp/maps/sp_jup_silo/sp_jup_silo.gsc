@@ -62,7 +62,7 @@ function main() {
   thread namespace_5643a6b7e3dcbf23::ammo_refill();
   thread namespace_5643a6b7e3dcbf23::function_a4c4199bfb798025();
   thread namespace_5643a6b7e3dcbf23::lock_doors();
-  thread namespace_5643a6b7e3dcbf23::function_ef39228649b4fb51();
+  thread namespace_5643a6b7e3dcbf23::missile_door_open();
   thread namespace_5643a6b7e3dcbf23::function_4f8b3a424771dd64();
   thread namespace_1542dec1529315d1::drone_init();
   thread namespace_5643a6b7e3dcbf23::function_25ed56105e3958be();

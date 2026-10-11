@@ -259,7 +259,7 @@ function init() {
     level.var_76eba5facacd254b = &function_bfd9f11e955ace89;
   }
 
-  level.var_74e0aae435a09a51 = &function_d056e6d06ba65ca8;
+  level.onplayereliminated = &function_d056e6d06ba65ca8;
   setDvar(@ "hash_a6a3fd965485d4bc", 2);
   level thread function_62b40b6a6c2cf37a();
   level thread initstartpoints();
@@ -315,13 +315,13 @@ function function_b52f35a3ff450ecd() {
 
 function function_c2a1bc0c5a905217() {
   battlechatteroverrides = spawnStruct();
-  battlechatteroverrides.var_fd6906dc66b503b4 = getdvarint(@ "hash_3ce6579b3e9456de", 10);
-  battlechatteroverrides.var_4c433dc943a4b16e = getdvarint(@ "hash_5973b1ca7fd76fe0", 20);
-  battlechatteroverrides.var_ac5d474ffe947f53 = getdvarint(@ "hash_41027aea8f94bf2d", 7);
-  battlechatteroverrides.var_8fb4e94454c2b089 = getdvarint(@ "hash_4769e3057df7eaef", 15);
-  battlechatteroverrides.var_de220ee05772f786 = getdvarint(@ "hash_94b723881ade691c", 1);
-  battlechatteroverrides.var_d4692deec4b3b23c = getdvarint(@ "hash_787efbd4ed18ab72", 2);
-  scripts\anim\battlechatter::function_33bdd4ad6aa14edc(battlechatteroverrides);
+  battlechatteroverrides.idlemindelay = getdvarint(@ "hash_3ce6579b3e9456de", 10);
+  battlechatteroverrides.idlemaxdelay = getdvarint(@ "hash_5973b1ca7fd76fe0", 20);
+  battlechatteroverrides.huntmindelay = getdvarint(@ "hash_41027aea8f94bf2d", 7);
+  battlechatteroverrides.huntmaxdelay = getdvarint(@ "hash_4769e3057df7eaef", 15);
+  battlechatteroverrides.combatmindelay = getdvarint(@ "hash_94b723881ade691c", 1);
+  battlechatteroverrides.combatmaxdelay = getdvarint(@ "hash_787efbd4ed18ab72", 2);
+  scripts\anim\battlechatter::init_battlechatteroverrides(battlechatteroverrides);
 }
 
 function function_fba25ae643dd02e8() {
@@ -517,7 +517,7 @@ function function_4fb6f74e053a49d6() {
     wait 5;
   }
 
-  function_f1aed36ab4598ea("mp_gamemode_dmz");
+  snd_transient_load("mp_gamemode_dmz");
 }
 
 function initexternalfeatures() {
@@ -686,7 +686,7 @@ function function_2fe5ef40dc48daf0() {
 
   while(!self istacmapactive()) {
     if(isDefined(self) && isDefined(self.origin)) {
-      if(scripts\mp\poi::function_47d356083884f913() && isDefined(level.teamdata) && isDefined(self.team) && isDefined(level.teamdata[self.team]) && isDefined(level.teamdata[self.team]["startPoint"]) && isDefined(level.teamdata[self.team]["startPoint"].poi)) {
+      if(scripts\mp\poi::poi_issystemactive() && isDefined(level.teamdata) && isDefined(self.team) && isDefined(level.teamdata[self.team]) && isDefined(level.teamdata[self.team]["startPoint"]) && isDefined(level.teamdata[self.team]["startPoint"].poi)) {
         poi = level.teamdata[self.team]["startPoint"].poi;
         poiorigin = scripts\mp\poi::poi_getorigin(poi);
 
@@ -742,7 +742,7 @@ function filtervehiclespawnstructs(vehiclespawnstructs) {
       continue;
     }
 
-    poi = scripts\mp\poi::function_6cc445c02b5effac(struct.origin, 1);
+    poi = scripts\mp\poi::poi_findpoioriginisin(struct.origin, 1);
 
     if(array_contains(level.var_ab20b3a256911579, poi)) {
       continue;
@@ -882,7 +882,7 @@ function function_ed7a5462253ebdef(team) {
       waitframe();
 
       if(!scripts\mp\plea_for_help::function_bfdfd3c9ba0cc7cb(player)) {
-        thread function_74e0aae435a09a51(player);
+        thread onplayereliminated(player);
         continue;
       }
 
@@ -891,7 +891,7 @@ function function_ed7a5462253ebdef(team) {
   }
 }
 
-function function_74e0aae435a09a51(player) {
+function onplayereliminated(player) {
   namespace_25b25d188ef778c4::function_2eda2621150bd589([player], 4);
   player.squadwiped = 1;
 
@@ -989,7 +989,7 @@ function function_5df318837f8d78a2(player) {
   player.var_6af52e47cbd09141 = endtime;
   player scripts\mp\utility\lower_message::setlowermessageomnvar("plea_time", endtime);
   scripts\mp\plea_for_help::function_d8b32f106816afc1(player);
-  thread function_74e0aae435a09a51(player);
+  thread onplayereliminated(player);
 }
 
 function function_d056e6d06ba65ca8(player) {
@@ -1025,7 +1025,7 @@ function function_d056e6d06ba65ca8(player) {
   player.placementbonus = scripts\mp\rank::function_9e1336d25eb66326(var_d6a23fdabd1d282c, var_b01aca3236595958);
 
   if(issharedfuncdefined("seasonalevents", "getFeaturedLootEventActive")) {
-    if(function_f3bb4f4911a1beb2("seasonalevents", "getFeaturedLootEventActive")) {
+    if(callsharedfunc("seasonalevents", "getFeaturedLootEventActive")) {
       function_af5ab021b625cdf8(player);
     }
   }
@@ -1136,7 +1136,7 @@ function function_707d956bdbd4b134() {
           scriptablename = scripts\cp_mp\utility\loot::getscriptablefromlootid(lootid);
           spawnedbackpack = scripts\mp\gametypes\br_pickups::spawnpickup(scriptablename, dropinfo, quantity, 1);
         } else {
-          scripts\engine\utility::function_f3bb4f4911a1beb2(lootid, "pickedUp", self.var_6a4360dcf2a8f3d4, self);
+          scripts\engine\utility::callsharedfunc(lootid, "pickedUp", self.var_6a4360dcf2a8f3d4, self);
           namespace_aead94004cf4c147::function_11f48ae5b87b4525(self, backpackindex, lootid, quantity);
         }
 
@@ -1628,14 +1628,14 @@ function function_73bdf8b18e29b13f(players) {
 }
 
 function function_daf5cd1e02931ea7(player) {
-  var_2e1d1af8afe39ba8 = player getplayerdata(level.var_5d69837cf4db0407, "dmzPlateCarrierLevel");
+  var_2e1d1af8afe39ba8 = player getplayerdata(level.progressiongroup, "dmzPlateCarrierLevel");
   var_9a5097fe8a19dcfd = scripts\cp_mp\armor::function_1348b97715104fe2() * var_2e1d1af8afe39ba8;
   return [var_9a5097fe8a19dcfd, var_2e1d1af8afe39ba8];
 }
 
 function function_8aa3182c50a3094() {
   streampos = getspawnpoint();
-  self function_670863fc4008c3d8(streampos.origin);
+  self setadditionalstreamposuntilcleared(streampos.origin);
 }
 
 function function_927a1c74689ce55a() {
@@ -1774,24 +1774,24 @@ function function_62b40b6a6c2cf37a() {
 }
 
 function function_53109b63a7168074() {
-  currentstreak = self getplayerdata(level.var_5d69837cf4db0407, "currentStreakCount");
-  beststreak = self getplayerdata(level.var_5d69837cf4db0407, "bestStreakCount");
+  currentstreak = self getplayerdata(level.progressiongroup, "currentStreakCount");
+  beststreak = self getplayerdata(level.progressiongroup, "bestStreakCount");
 
   if(!function_61f9109d0eb76f19()) {
-    self setplayerdata(level.var_5d69837cf4db0407, "currentStreakGainedProgress", 0);
-    self setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 0);
+    self setplayerdata(level.progressiongroup, "currentStreakGainedProgress", 0);
+    self setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 0);
     return;
   }
 
   newstreak = currentstreak + 1;
-  self setplayerdata(level.var_5d69837cf4db0407, "currentStreakGainedProgress", 1);
-  self setplayerdata(level.var_5d69837cf4db0407, "currentStreakCount", newstreak);
+  self setplayerdata(level.progressiongroup, "currentStreakGainedProgress", 1);
+  self setplayerdata(level.progressiongroup, "currentStreakCount", newstreak);
 
   if(newstreak > beststreak) {
-    self setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 1);
-    self setplayerdata(level.var_5d69837cf4db0407, "bestStreakCount", newstreak);
+    self setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 1);
+    self setplayerdata(level.progressiongroup, "bestStreakCount", newstreak);
   } else {
-    self setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 0);
+    self setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 0);
   }
 
   var_203eac7388d590a9 = int(tablelookupbyrow("mp/dmz_streakrewards.csv", newstreak + 1, 1));
@@ -1802,7 +1802,7 @@ function function_53109b63a7168074() {
     var_df9fb2cbd434f334 = undefined;
 
     for(i = 0; i < 10; i++) {
-      lootid = self getplayerdata(level.var_5d69837cf4db0407, "DMZExfilPerkStreak", i, "lootID");
+      lootid = self getplayerdata(level.progressiongroup, "DMZExfilPerkStreak", i, "lootID");
 
       if(lootid != 0) {
         var_e59eccd90c6407da[var_e59eccd90c6407da.size] = lootid;
@@ -1819,7 +1819,7 @@ function function_53109b63a7168074() {
 
       foreach(perklootid in perks) {
         if(!array_contains(var_e59eccd90c6407da, perklootid)) {
-          self setplayerdata(level.var_5d69837cf4db0407, "DMZExfilPerkStreak", var_df9fb2cbd434f334, "lootID", perklootid);
+          self setplayerdata(level.progressiongroup, "DMZExfilPerkStreak", var_df9fb2cbd434f334, "lootID", perklootid);
           newperk = perklootid;
           break;
         }
@@ -1837,17 +1837,17 @@ function function_470b4aaafd986a0d(player) {
     return;
   }
 
-  player setplayerdata(level.var_5d69837cf4db0407, "currentStreakGainedProgress", 0);
-  player setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 0);
+  player setplayerdata(level.progressiongroup, "currentStreakGainedProgress", 0);
+  player setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 0);
   [streak, perks] = namespace_a38a2e1fe7519183::function_1558f8fb859c492a(player);
 
   if(streak > 0) {
-    player setplayerdata(level.var_5d69837cf4db0407, "currentStreakCount", streak);
+    player setplayerdata(level.progressiongroup, "currentStreakCount", streak);
     perkindex = 0;
 
     foreach(perklootid in perks) {
       if(perklootid != 0) {
-        player setplayerdata(level.var_5d69837cf4db0407, "DMZExfilPerkStreak", perkindex, "lootID", perklootid);
+        player setplayerdata(level.progressiongroup, "DMZExfilPerkStreak", perkindex, "lootID", perklootid);
         perkindex++;
       }
     }
@@ -1862,7 +1862,7 @@ function function_f0e913c037010a9() {
   perklootids = [];
 
   for(i = 0; i < 10; i++) {
-    lootid = self getplayerdata(level.var_5d69837cf4db0407, "DMZExfilPerkStreak", i, "lootID");
+    lootid = self getplayerdata(level.progressiongroup, "DMZExfilPerkStreak", i, "lootID");
 
     if(lootid != 0) {
       perklootids[perklootids.size] = lootid;
@@ -1921,12 +1921,12 @@ function function_1a425272955d5f75() {
     return;
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, "currentStreakGainedProgress", 0);
-  self setplayerdata(level.var_5d69837cf4db0407, "currentStreakCount", 0);
-  self setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 0);
+  self setplayerdata(level.progressiongroup, "currentStreakGainedProgress", 0);
+  self setplayerdata(level.progressiongroup, "currentStreakCount", 0);
+  self setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 0);
 
   for(i = 0; i < 10; i++) {
-    self setplayerdata(level.var_5d69837cf4db0407, "DMZExfilPerkStreak", i, "lootID", 0);
+    self setplayerdata(level.progressiongroup, "DMZExfilPerkStreak", i, "lootID", 0);
   }
 }
 
@@ -1958,7 +1958,7 @@ function function_adf1fe22b2cd5bd2(player) {
     return;
   }
 
-  currentstreak = player getplayerdata(level.var_5d69837cf4db0407, "currentStreakCount");
+  currentstreak = player getplayerdata(level.progressiongroup, "currentStreakCount");
 
   if(getdvarint(@ "hash_1ec9ac9ef82212cc", 0) > 0) {
     currentstreak = getdvarint(@ "hash_1ec9ac9ef82212cc", 0);
@@ -2059,14 +2059,14 @@ function getdefaultweaponammo(weapon, maxammo) {
   return [var_28aebe3dd6733ed3, var_28aebe3dd6733ed3, var_961012dd15fa29ee];
 }
 
-function showdmzsplash(splash, playerlist, poiname, optionalnumber, playerforplayercard, var_42b1e877ab187c6) {
+function showdmzsplash(splash, playerlist, poiname, optionalnumber, playerforplayercard, splashlistoverride) {
   temp = level.var_cc9e990b6e83975b;
   level.var_cc9e990b6e83975b = 0;
 
   foreach(player in playerlist) {
     if(isPlayer(player)) {
       player setclientomnvar("ui_dmz_poi_name", scripts\mp\poi::function_80cdaea4bd3ecf70(poiname));
-      player thread scripts\mp\hud_message::showsplash(splash, optionalnumber, playerforplayercard, undefined, 1, var_42b1e877ab187c6);
+      player thread scripts\mp\hud_message::showsplash(splash, optionalnumber, playerforplayercard, undefined, 1, splashlistoverride);
     }
   }
 
@@ -2081,8 +2081,8 @@ function function_f7920586b5a59226() {
       setDvar(@ "hash_aa489f8b09e8c2a3", 0);
       poiname = undefined;
 
-      if(scripts\mp\poi::function_47d356083884f913()) {
-        poiname = scripts\mp\poi::function_6cc445c02b5effac(level.players[0].origin, 1);
+      if(scripts\mp\poi::poi_issystemactive()) {
+        poiname = scripts\mp\poi::poi_findpoioriginisin(level.players[0].origin, 1);
       }
 
       splash = undefined;
@@ -3002,16 +3002,16 @@ function function_d8431975bbec1179() {
   scripts\mp\ai_mp_controller::function_2fc80954fa70d153();
   helilocs = array_randomize(getStructArray("heli_loc_protected", "script_noteworthy"));
 
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     temparray = [];
 
     foreach(loc in helilocs) {
       if(!isDefined(loc.poi)) {
-        loc.poi = scripts\mp\poi::function_6cc445c02b5effac(loc.origin, 1);
+        loc.poi = scripts\mp\poi::poi_findpoioriginisin(loc.origin, 1);
       }
 
       if(isDefined(loc.poi) && scripts\mp\poi::poi_ispoiactive(loc.poi)) {
-        subarea = scripts\mp\ai_mp_controller::function_a44e168e8cced18(loc.origin, loc.poi);
+        subarea = scripts\mp\ai_mp_controller::subarea_findfromorigin(loc.origin, loc.poi);
         loc.var_71ad22c5d093d90b = subarea.var_71ad22c5d093d90b;
         temparray[temparray.size] = loc;
       }
@@ -3084,9 +3084,9 @@ function function_3403c13cec1cea46() {
   }
 }
 
-function createlootdropinfo(baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, var_f71d4f78d508da69, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44) {
+function createlootdropinfo(baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, optionaloverridedist, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44) {
   dropstruct = scripts\mp\gametypes\br_pickups::function_7b9f3966a7a42003();
-  return scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(dropstruct, baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, var_f71d4f78d508da69, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44);
+  return scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(dropstruct, baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, optionaloverridedist, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44);
 }
 
 function function_9df0ee7fcb9589d4(player, slot, oldequipment) {
@@ -3099,7 +3099,7 @@ function function_9df0ee7fcb9589d4(player, slot, oldequipment) {
 }
 
 function sorttripwires() {
-  var_1642f84b31faa340 = scripts\mp\poi::function_47d356083884f913();
+  var_1642f84b31faa340 = scripts\mp\poi::poi_issystemactive();
 
   if(var_1642f84b31faa340) {
     scripts\mp\poi::function_44739fe1cf82e29a("tripwires");
@@ -3172,7 +3172,7 @@ function function_f3a2435f8e39438b() {
       continue;
     }
 
-    matchcount = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "modeStats", "br_dmz", "gamesPlayed");
+    matchcount = player getplayerdata(level.progressiongroup, "playerStats", "modeStats", "br_dmz", "gamesPlayed");
 
     if(level.mapname != "mp_bio_lab" && isDefined(matchcount) && matchcount < matchlimit) {
       scripts\cp_mp\overlord::playevent(random(["mission_reminder_1", "mission_reminder_2"]), [player]);
@@ -3267,68 +3267,68 @@ function function_865b1a5a62c49d7(var_74753a0c1c255400) {
   var_e7faf08f327b0fb5 = default_to(self.var_e7faf08f327b0fb5, 0);
 
   if(istrue(level.var_fe38a7ece3409052)) {
-    poisvisited += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 0);
-    explorationxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 1);
-    var_d961222798f5d01a += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 2);
-    lootingxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 3);
-    var_56a4e98c643a1e2d += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 4);
-    missionxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 5);
-    contractscompleted += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 6);
-    contractxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 7);
-    var_8ae6c90597daa60a += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 8);
-    var_ec9a1b9484844fbe += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 9);
-    var_c26450f6e6e47b84 += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 10);
-    uavtowerxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 11);
-    var_35b94c88cc1cea97 += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 12);
-    safeopenedxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 13);
-    doorsunlocked += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 14);
-    areaunlockedxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 15);
-    supplydropsopened += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 16);
-    supplydropsopenedxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 17);
-    agentkills += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 18);
-    agentxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 19);
-    operatorkills += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 20);
-    operatorxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 21);
-    var_8c8050d7d861d06c += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 22);
-    bossxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 23);
-    revives += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 24);
-    revivexp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 25);
-    var_cd58b8ffbeb66495 += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 26);
-    extractionxp += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 27);
-    var_e7faf08f327b0fb5 += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 28);
-    var_fd5c87130f304833 += self getplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 29);
+    poisvisited += self getplayerdata(level.progressiongroup, "DMZaarValue", 0);
+    explorationxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 1);
+    var_d961222798f5d01a += self getplayerdata(level.progressiongroup, "DMZaarValue", 2);
+    lootingxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 3);
+    var_56a4e98c643a1e2d += self getplayerdata(level.progressiongroup, "DMZaarValue", 4);
+    missionxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 5);
+    contractscompleted += self getplayerdata(level.progressiongroup, "DMZaarValue", 6);
+    contractxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 7);
+    var_8ae6c90597daa60a += self getplayerdata(level.progressiongroup, "DMZaarValue", 8);
+    var_ec9a1b9484844fbe += self getplayerdata(level.progressiongroup, "DMZaarValue", 9);
+    var_c26450f6e6e47b84 += self getplayerdata(level.progressiongroup, "DMZaarValue", 10);
+    uavtowerxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 11);
+    var_35b94c88cc1cea97 += self getplayerdata(level.progressiongroup, "DMZaarValue", 12);
+    safeopenedxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 13);
+    doorsunlocked += self getplayerdata(level.progressiongroup, "DMZaarValue", 14);
+    areaunlockedxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 15);
+    supplydropsopened += self getplayerdata(level.progressiongroup, "DMZaarValue", 16);
+    supplydropsopenedxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 17);
+    agentkills += self getplayerdata(level.progressiongroup, "DMZaarValue", 18);
+    agentxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 19);
+    operatorkills += self getplayerdata(level.progressiongroup, "DMZaarValue", 20);
+    operatorxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 21);
+    var_8c8050d7d861d06c += self getplayerdata(level.progressiongroup, "DMZaarValue", 22);
+    bossxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 23);
+    revives += self getplayerdata(level.progressiongroup, "DMZaarValue", 24);
+    revivexp += self getplayerdata(level.progressiongroup, "DMZaarValue", 25);
+    var_cd58b8ffbeb66495 += self getplayerdata(level.progressiongroup, "DMZaarValue", 26);
+    extractionxp += self getplayerdata(level.progressiongroup, "DMZaarValue", 27);
+    var_e7faf08f327b0fb5 += self getplayerdata(level.progressiongroup, "DMZaarValue", 28);
+    var_fd5c87130f304833 += self getplayerdata(level.progressiongroup, "DMZaarValue", 29);
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 0, poisvisited);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 1, explorationxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 2, var_d961222798f5d01a);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 3, lootingxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 4, var_56a4e98c643a1e2d);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 5, missionxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 6, contractscompleted);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 7, contractxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 8, var_8ae6c90597daa60a);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 9, var_ec9a1b9484844fbe);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 10, var_c26450f6e6e47b84);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 11, uavtowerxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 12, var_35b94c88cc1cea97);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 13, safeopenedxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 14, doorsunlocked);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 15, areaunlockedxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 16, supplydropsopened);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 17, supplydropsopenedxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 18, agentkills);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 19, agentxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 20, operatorkills);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 21, operatorxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 22, var_8c8050d7d861d06c);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 23, bossxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 24, revives);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 25, revivexp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 26, var_cd58b8ffbeb66495);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 27, extractionxp);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 28, var_e7faf08f327b0fb5);
-  self setplayerdata(level.var_5d69837cf4db0407, "DMZaarValue", 29, var_fd5c87130f304833);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 0, poisvisited);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 1, explorationxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 2, var_d961222798f5d01a);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 3, lootingxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 4, var_56a4e98c643a1e2d);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 5, missionxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 6, contractscompleted);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 7, contractxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 8, var_8ae6c90597daa60a);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 9, var_ec9a1b9484844fbe);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 10, var_c26450f6e6e47b84);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 11, uavtowerxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 12, var_35b94c88cc1cea97);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 13, safeopenedxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 14, doorsunlocked);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 15, areaunlockedxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 16, supplydropsopened);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 17, supplydropsopenedxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 18, agentkills);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 19, agentxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 20, operatorkills);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 21, operatorxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 22, var_8c8050d7d861d06c);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 23, bossxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 24, revives);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 25, revivexp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 26, var_cd58b8ffbeb66495);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 27, extractionxp);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 28, var_e7faf08f327b0fb5);
+  self setplayerdata(level.progressiongroup, "DMZaarValue", 29, var_fd5c87130f304833);
   self.var_3716375613ca89fd = 1;
 }
 

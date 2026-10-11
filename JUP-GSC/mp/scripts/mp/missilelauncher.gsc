@@ -140,7 +140,7 @@ function missilelauncherusage() {
     self.missilelauncherstage = 0;
   }
 
-  function_5875284c0e0f1e40(self.missilelaunchertarget);
+  missilelauncherdebugdraw(self.missilelaunchertarget);
 
   if(self.missilelauncherstage == 0) {
     targets = scripts\mp\weapons::lockonlaunchers_gettargetarray(0);
@@ -533,12 +533,12 @@ function stingtargstruct_getinlos() {
     hitpos = trace["<dev string:x21>"];
     sphere(hitpos, 10, (1, 0, 0), 0, 1);
     sphere(hitpos, 10, (0, 1, 0), 1, 1);
-    var_29f55613421c5159 = distance(caststart, hitpos);
-    print3d(hitpos + left * -20, "<dev string:x2d>" + var_29f55613421c5159, (1, 1, 1), 1, 1, 1);
-    var_ad791987651b3ba3 = self.player.origin;
-    var_633eaa5f21008b6f = var_ad791987651b3ba3 + left * 50;
+    disttohit = distance(caststart, hitpos);
+    print3d(hitpos + left * -20, "<dev string:x2d>" + disttohit, (1, 1, 1), 1, 1, 1);
+    wingbasepos = self.player.origin;
+    var_633eaa5f21008b6f = wingbasepos + left * 50;
     line(var_633eaa5f21008b6f, hitpos, (0, 1, 0), 1, 1, 1);
-    var_3eacd3938ccd4b6c = var_ad791987651b3ba3 + left * -50;
+    var_3eacd3938ccd4b6c = wingbasepos + left * -50;
     line(var_3eacd3938ccd4b6c, hitpos, (0, 1, 0), 1, 1, 1);
     var_633eaa5f21008b6f += (0, 0, 100);
     line(var_633eaa5f21008b6f, hitpos, (0, 1, 0), 1, 1, 1);
@@ -674,7 +674,7 @@ function function_7ea2aeeed11a82c8(shocksentry) {
   }
 }
 
-function function_5875284c0e0f1e40(target) {
+function missilelauncherdebugdraw(target) {
   if(getDvar(@ "missiledebugdraw") != "<dev string:x3a>") {
     return;
   }

@@ -19,7 +19,7 @@
 #namespace mi8_infil;
 
 function mi8_init(subtype) {
-  scripts\cp_mp\utility\audio_utility::function_f1aed36ab4598ea("mi8_infil");
+  scripts\cp_mp\utility\audio_utility::snd_transient_load("mi8_infil");
   thread function_247774c600595ace();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -135,7 +135,7 @@ function player_mi8_infil_think(infil, spot_index) {
 
   thread infil_radio_idle(infil);
   thread player_infil_end();
-  self function_670863fc4008c3d8(function_901b254bea1ab19f(infil));
+  self setadditionalstreamposuntilcleared(function_901b254bea1ab19f(infil));
   spawnpos = infil.origin;
   spawnang = infil.angles;
   thread infil_player_rig_updated("slot_" + spot_index, spawnpos, spawnang);
@@ -266,7 +266,7 @@ function spawnactors(team, scene_name, extra_crew) {
   self.actors[1].anim_playsound_func = &driver_play_sound_func;
 }
 
-function blima_chief_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function blima_chief_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.blima.players) {
     player playsoundtoplayer(alias, player);
   }
@@ -655,7 +655,7 @@ function spawninfilvehicle(scene_node, team, scene_name) {
   return vehicle;
 }
 
-function commander_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function commander_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     if(soundexists(alias)) {
       self playsoundtoplayer(alias, player);
@@ -663,7 +663,7 @@ function commander_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
   }
 }
 
-function driver_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function driver_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     self playsoundtoplayer(alias, player);
   }
@@ -724,7 +724,7 @@ function modifyscenenode(infil, team, subtype) {
 function function_247774c600595ace() {
   level waittill("prematch_over");
   wait 55;
-  scripts\cp_mp\utility\audio_utility::function_f4e0ff5cb899686d("mi8_infil");
+  scripts\cp_mp\utility\audio_utility::snd_transient_unload("mi8_infil");
 }
 
 function function_6158ef142e9bd640() {

@@ -14,22 +14,22 @@ function function_18a04da230bdecbb(var_7ff959e229d749c3) {
   return struct;
 }
 
-function function_dcbffa8a1a0be491(var_de1f9176204264cf, var_c92e69a2dca65df1, perplayerloot, rewardgrouptype, var_2b5aa40272b0bbce, var_d701a569f30e890f, var_3c90b4a5ec990a09) {
+function function_dcbffa8a1a0be491(rewardcacheassetname, var_c92e69a2dca65df1, perplayerloot, rewardgrouptype, rewardspawnlocationtype, spawnactivationname, spawnactivitymoment) {
   struct = spawnStruct();
   struct.var_fec7733a738249d6 = 1;
-  struct.var_de1f9176204264cf = var_de1f9176204264cf;
+  struct.rewardcacheassetname = rewardcacheassetname;
   struct.var_c92e69a2dca65df1 = var_c92e69a2dca65df1;
   struct.perplayerloot = perplayerloot;
   struct.rewardgrouptype = rewardgrouptype;
-  struct.var_2b5aa40272b0bbce = var_2b5aa40272b0bbce;
-  struct.var_d701a569f30e890f = var_d701a569f30e890f;
-  struct.var_3c90b4a5ec990a09 = var_3c90b4a5ec990a09;
+  struct.rewardspawnlocationtype = rewardspawnlocationtype;
+  struct.spawnactivationname = spawnactivationname;
+  struct.spawnactivitymoment = spawnactivitymoment;
   return struct;
 }
 
 function function_155ac29988933331(var_40bdc956443135c6) {
   if(isDefined(var_40bdc956443135c6)) {
-    return var_40bdc956443135c6.var_de1f9176204264cf;
+    return var_40bdc956443135c6.rewardcacheassetname;
   }
 
   return undefined;
@@ -43,7 +43,7 @@ function function_57339c17a16d5b(var_40bdc956443135c6) {
   return undefined;
 }
 
-function function_d2ce6c5a4f9d52e5(var_40bdc956443135c6) {
+function getperplayerloot(var_40bdc956443135c6) {
   if(isDefined(var_40bdc956443135c6)) {
     return var_40bdc956443135c6.perplayerloot;
   }
@@ -51,7 +51,7 @@ function function_d2ce6c5a4f9d52e5(var_40bdc956443135c6) {
   return undefined;
 }
 
-function function_45864bd1ba317b7f(var_40bdc956443135c6) {
+function getrewardgrouptype(var_40bdc956443135c6) {
   if(isDefined(var_40bdc956443135c6)) {
     return var_40bdc956443135c6.rewardgrouptype;
   }
@@ -61,7 +61,7 @@ function function_45864bd1ba317b7f(var_40bdc956443135c6) {
 
 function function_fe7983e3293f0584(var_40bdc956443135c6) {
   if(isDefined(var_40bdc956443135c6)) {
-    return var_40bdc956443135c6.var_2b5aa40272b0bbce;
+    return var_40bdc956443135c6.rewardspawnlocationtype;
   }
 
   return undefined;
@@ -69,7 +69,7 @@ function function_fe7983e3293f0584(var_40bdc956443135c6) {
 
 function function_bc4d3f90dc517d3d(var_40bdc956443135c6) {
   if(isDefined(var_40bdc956443135c6)) {
-    return var_40bdc956443135c6.var_d701a569f30e890f;
+    return var_40bdc956443135c6.spawnactivationname;
   }
 
   return undefined;
@@ -77,20 +77,20 @@ function function_bc4d3f90dc517d3d(var_40bdc956443135c6) {
 
 function function_9f3743cde2de21b(var_40bdc956443135c6) {
   if(isDefined(var_40bdc956443135c6)) {
-    return var_40bdc956443135c6.var_3c90b4a5ec990a09;
+    return var_40bdc956443135c6.spawnactivitymoment;
   }
 
   return undefined;
 }
 
 function function_e7c2ecccbf00007e(var_40bdc956443135c6) {
-  var_9710a742dddb8c07 = function_155ac29988933331(var_40bdc956443135c6);
+  rewardcachebundlename = function_155ac29988933331(var_40bdc956443135c6);
 
-  if(!isDefined(var_9710a742dddb8c07)) {
+  if(!isDefined(rewardcachebundlename)) {
     return undefined;
   }
 
-  return reward_cache_settings::function_ec54b8019f59c0ef(var_9710a742dddb8c07);
+  return reward_cache_settings::function_ec54b8019f59c0ef(rewardcachebundlename);
 }
 
 function function_9e1216d6f33a3c78(var_40bdc956443135c6) {

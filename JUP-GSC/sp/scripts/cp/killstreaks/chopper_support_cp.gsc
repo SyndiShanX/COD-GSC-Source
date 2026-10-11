@@ -348,13 +348,13 @@ function choppersupport_gettargets_enemy(turret, rangeoverride, var_f8c5d9ba90c7
   players = level.players;
 
   if(scripts\cp_mp\utility\game_utility::islargemap()) {
-    var_397eb484dfddd2da = 4500;
+    radiustocheck = 4500;
 
     if(isDefined(rangeoverride)) {
-      var_397eb484dfddd2da = rangeoverride;
+      radiustocheck = rangeoverride;
     }
 
-    players = utility::playersinsphere(self.origin, var_397eb484dfddd2da);
+    players = utility::playersinsphere(self.origin, radiustocheck);
   }
 
   for(i = 0; i < players.size; i++) {

@@ -37,7 +37,7 @@ function function_d513817a1e585d0f(blueprintname) {
     weaponasset = level.weaponmapdata[weapon].assetname;
   }
 
-  weaponblueprint = function_40fd49171fad19d3(blueprintname);
+  weaponblueprint = getxhashasset(blueprintname);
 
   if(isDefined(weaponasset)) {
     weaponvariants = getweaponblueprintnames(weaponasset);

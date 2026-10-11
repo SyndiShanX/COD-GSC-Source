@@ -84,7 +84,7 @@ function init() {
   level.var_33cf4079b4096eb8 = getdvarint(@ "hash_935057b8878ca60c", 1);
   level.var_1bdf3af6b78dc2ca = getdvarint(@ "hash_db81671bbb108b36", 2);
   level.var_8912ccad342445f7 = getdvarint(@ "hash_f34e4fbaeb441e24", 2048);
-  level.gametypebundle = function_90b5b6e99aef29d6();
+  level.gametypebundle = getgametypescriptbundle();
   level.agentmaxdamage = function_ee26a62ef3d1372d(@ "scr_agent_maxdamage", 45, level.gametypebundle.agentmaxdamage);
   level.var_6ba4985b66d62a71 = function_ee26a62ef3d1372d(@ "hash_7632dab7786bd590", 33, level.gametypebundle.var_23274688e75c2144);
   level.var_7eb56682f591ea8d = function_ee26a62ef3d1372d(@ "hash_81420364ea25c1ea", 80, level.gametypebundle.var_f0c2629e2aa93ace);
@@ -323,7 +323,7 @@ function ai_mp_requestspawnagent(agenttype, groundspawnorigin, spawnangles, prio
 
   assert(isDefined(agenttype) && isDefined(groundspawnorigin) && isDefined(priority) && isDefined(category), "<dev string:x71>");
 
-  if(isDefined(poiname) && scripts\mp\poi::function_47d356083884f913()) {
+  if(isDefined(poiname) && scripts\mp\poi::poi_issystemactive()) {
     assert(scripts\mp\poi::poi_ispoiactive(poiname), "<dev string:xc7>" + poiname + "<dev string:xf3>");
   }
 
@@ -345,12 +345,12 @@ function ai_mp_requestspawnagent(agenttype, groundspawnorigin, spawnangles, prio
     spawndormant = !scripts\mp\flags::gameflagexists("prematch_done") || scripts\mp\flags::gameflagexists("prematch_done") && !scripts\mp\flags::gameflag("prematch_done");
   }
 
-  if(function_47d356083884f913() && !isDefined(poiname)) {
-    poiname = function_6cc445c02b5effac(groundspawnorigin);
+  if(poi_issystemactive() && !isDefined(poiname)) {
+    poiname = poi_findpoioriginisin(groundspawnorigin);
   }
 
   if(!isDefined(subarea)) {
-    subarea = function_a44e168e8cced18(groundspawnorigin, poiname);
+    subarea = subarea_findfromorigin(groundspawnorigin, poiname);
   }
 
   var_644d90de7685f75 = function_8c6dbb64c8e1603c(1, category, groundspawnorigin, poiname, spawndormant, subarea);
@@ -536,9 +536,9 @@ function private function_eea40a1b6180f90a(agenttype, groundspawnorigin, spawnan
     agent setplayeradvanceduavdot(1);
   }
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     poiname = function_80dd9d6a6bf6bbc1(agent, poiname, destination);
-    function_2cb157b29de9dbfa(agent, poiname, destination);
+    subarea_findandassignforagent(agent, poiname, destination);
   }
 
   function_e04dbe0bd8a25be7(agent, function_5cc0c507e92f7b47(poiname));
@@ -568,7 +568,7 @@ function private function_eea40a1b6180f90a(agenttype, groundspawnorigin, spawnan
     }
 
     if(randomint(100) >= level.var_18c5fa4fdebe1971) {
-      agent.var_51642e27c7e7d224 = 1;
+      agent.disablesuppressingfire = 1;
     }
 
     function_1920867ddf76810c(agent, 0);
@@ -684,16 +684,16 @@ function function_f213e61932acbb15(node) {
 function function_8af522ada68b6477(node, poiname, origin) {
   if(isDefined(node)) {
     if(is_equal(node.poi, level.recalculatepoi)) {
-      poiname = scripts\mp\poi::function_6cc445c02b5effac(node.origin);
+      poiname = scripts\mp\poi::poi_findpoioriginisin(node.origin);
       node.poi = poiname;
     }
 
     if(istrue(level.var_7a36d824da6087ef)) {
       if(!isDefined(poiname)) {
-        poiname = scripts\mp\poi::function_6cc445c02b5effac(node.origin);
+        poiname = scripts\mp\poi::poi_findpoioriginisin(node.origin);
       }
 
-      tieroverride = function_6cda15989d9abae0(node.origin, poiname);
+      tieroverride = tieroverride_checkorigin(node.origin, poiname);
 
       if(isDefined(tieroverride)) {
         return tieroverride;
@@ -706,7 +706,7 @@ function function_8af522ada68b6477(node, poiname, origin) {
 
     if(!isDefined(node.var_71ad22c5d093d90b)) {
       var_3a6b42ab825a103e = ter_op(isDefined(origin), origin, node.origin);
-      subarea = function_a44e168e8cced18(var_3a6b42ab825a103e, poiname);
+      subarea = subarea_findfromorigin(var_3a6b42ab825a103e, poiname);
       node.var_71ad22c5d093d90b = subarea.var_71ad22c5d093d90b;
 
       if(!isDefined(poiname) && !isDefined(node.poi)) {
@@ -739,12 +739,12 @@ function function_8af522ada68b6477(node, poiname, origin) {
       return 1;
     }
 
-    poiname = function_6cc445c02b5effac(origin);
+    poiname = poi_findpoioriginisin(origin);
   }
 
   if(isDefined(poiname)) {
     if(istrue(level.var_7a36d824da6087ef)) {
-      tieroverride = function_6cda15989d9abae0(origin, poiname);
+      tieroverride = tieroverride_checkorigin(origin, poiname);
 
       if(isDefined(tieroverride)) {
         return tieroverride;
@@ -788,12 +788,12 @@ function function_7722db2014c7dfbd(node, poiname) {
       if(isDefined(node.poi)) {
         poiname = node.poi;
       } else {
-        poiname = function_6cc445c02b5effac(node.origin);
+        poiname = poi_findpoioriginisin(node.origin);
       }
     }
 
     if(!isDefined(node.var_71ad22c5d093d90b)) {
-      node.var_71ad22c5d093d90b = function_a44e168e8cced18(node.origin, poiname).var_71ad22c5d093d90b;
+      node.var_71ad22c5d093d90b = subarea_findfromorigin(node.origin, poiname).var_71ad22c5d093d90b;
     }
 
     if(isDefined(node.var_71ad22c5d093d90b)) {
@@ -949,7 +949,7 @@ function private function_56e8fd646957529c(priority, ruthless, requestedspawnori
   priorityint = array_find(level.var_41670c1c65f3d3cf.priorities, priority);
   assert(isDefined(priorityint), "<dev string:x317>");
   var_2231df82d7283c43 = 0;
-  subarea = function_a44e168e8cced18(requestedspawnorigin);
+  subarea = subarea_findfromorigin(requestedspawnorigin);
 
   if(isDefined(subarea)) {
     var_ef017ff00ebc23ce = ter_op(isDefined(subarea.var_f27d7498eb54dd99), subarea.var_f27d7498eb54dd99, 0);
@@ -1004,7 +1004,7 @@ function private function_56e8fd646957529c(priority, ruthless, requestedspawnori
         agentlist = array_randomize(function_44c0059e33f55f00(testpriority));
 
         if(isDefined(subarea)) {
-          agentlist = function_baffa48bbd15cdc6(subarea, agentlist);
+          agentlist = subarea_orderagentarraysubareafirst(subarea, agentlist);
         }
       }
     } else if(isDefined(subarea) && !var_2231df82d7283c43) {
@@ -1027,7 +1027,7 @@ function private function_56e8fd646957529c(priority, ruthless, requestedspawnori
       agentlist = array_randomize(function_72ae84d7068be83f(testpriority));
 
       if(isDefined(subarea)) {
-        agentlist = function_baffa48bbd15cdc6(subarea, agentlist);
+        agentlist = subarea_orderagentarraysubareafirst(subarea, agentlist);
       }
     }
 
@@ -1065,7 +1065,7 @@ function function_67224249ba9c2e2e(priority, ruthless, requestedspawnorigin, sub
   assert(isDefined(priorityint), "<dev string:x341>");
 
   if(!isDefined(subarea)) {
-    subarea = function_a44e168e8cced18(requestedspawnorigin);
+    subarea = subarea_findfromorigin(requestedspawnorigin);
   }
 
   foreach(testpriority in level.var_41670c1c65f3d3cf.var_1d7de2571d2c82a7) {
@@ -1074,7 +1074,7 @@ function function_67224249ba9c2e2e(priority, ruthless, requestedspawnorigin, sub
     }
 
     agentlist = array_randomize(function_44c0059e33f55f00(testpriority));
-    agentlist = function_baffa48bbd15cdc6(subarea, agentlist);
+    agentlist = subarea_orderagentarraysubareafirst(subarea, agentlist);
 
     foreach(agent in agentlist) {
       if(agent function_f31bfd56e7806afb(ruthless)) {
@@ -1271,7 +1271,7 @@ function function_d2d3ddd52666dcf0() {
 }
 
 function function_7b8a64e4ec045a1b() {
-  if(!function_47d356083884f913()) {
+  if(!poi_issystemactive()) {
     return;
   }
 
@@ -1298,9 +1298,9 @@ function function_ae8293438b86ca23() {
       continue;
     }
 
-    if(function_47d356083884f913()) {
+    if(poi_issystemactive()) {
       if(!isDefined(spawnpackagemainnode.poi)) {
-        spawnpackagemainnode.poi = function_6cc445c02b5effac(spawnpackagemainnode.origin);
+        spawnpackagemainnode.poi = poi_findpoioriginisin(spawnpackagemainnode.origin);
       }
 
       if(!poi_ispoiactive(spawnpackagemainnode.poi) && !istrue(level.var_4cfd75aa6ddde156)) {
@@ -1316,9 +1316,9 @@ function function_ae8293438b86ca23() {
     poiname = undefined;
     subarea = undefined;
 
-    if(function_47d356083884f913()) {
+    if(poi_issystemactive()) {
       poiname = spawnpackagemainnode.poi;
-      subarea = function_a44e168e8cced18(spawnpackagemainnode.origin, spawnpackagemainnode.poi);
+      subarea = subarea_findfromorigin(spawnpackagemainnode.origin, spawnpackagemainnode.poi);
     }
 
     if(!isDefined(subarea)) {
@@ -1376,16 +1376,16 @@ function function_1d0b1e527bd1bd48() {
 
     subarea = undefined;
 
-    if(function_47d356083884f913()) {
+    if(poi_issystemactive()) {
       if(!isDefined(roofpackagemainnode.poi)) {
-        roofpackagemainnode.poi = function_6cc445c02b5effac(roofpackagemainnode.origin);
+        roofpackagemainnode.poi = poi_findpoioriginisin(roofpackagemainnode.origin);
       }
 
       if(!poi_ispoiactive(roofpackagemainnode.poi) && !istrue(level.var_4cfd75aa6ddde156)) {
         continue;
       }
 
-      subarea = function_a44e168e8cced18(roofpackagemainnode.origin, roofpackagemainnode.poi);
+      subarea = subarea_findfromorigin(roofpackagemainnode.origin, roofpackagemainnode.poi);
     }
 
     if(!isDefined(subarea)) {
@@ -1406,16 +1406,16 @@ function function_b0bb893f94e993b4() {
 
     subarea = undefined;
 
-    if(function_47d356083884f913()) {
+    if(poi_issystemactive()) {
       if(!isDefined(patrolpackagemainnode.poi)) {
-        patrolpackagemainnode.poi = function_6cc445c02b5effac(patrolpackagemainnode.origin);
+        patrolpackagemainnode.poi = poi_findpoioriginisin(patrolpackagemainnode.origin);
       }
 
       if(!poi_ispoiactive(patrolpackagemainnode.poi) && !istrue(level.var_4cfd75aa6ddde156)) {
         continue;
       }
 
-      subarea = function_a44e168e8cced18(patrolpackagemainnode.origin, patrolpackagemainnode.poi);
+      subarea = subarea_findfromorigin(patrolpackagemainnode.origin, patrolpackagemainnode.poi);
     }
 
     if(!isDefined(subarea)) {
@@ -1458,11 +1458,11 @@ function function_f41c155e991af4f9() {
       }
     }
 
-    if(function_47d356083884f913()) {
+    if(poi_issystemactive()) {
       poiname = skitmainnode.poi;
-      subarea = function_a44e168e8cced18(skitmainnode.origin, poiname);
+      subarea = subarea_findfromorigin(skitmainnode.origin, poiname);
     } else {
-      subarea = function_a44e168e8cced18(skitmainnode.origin);
+      subarea = subarea_findfromorigin(skitmainnode.origin);
     }
 
     subarea.skits[subarea.skits.size] = skit;
@@ -1472,7 +1472,7 @@ function function_f41c155e991af4f9() {
 function function_bebc5768175d5170() {
   level.patrolpaths = [];
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     function_44739fe1cf82e29a("patrolPaths");
   }
 
@@ -1486,11 +1486,11 @@ function function_bebc5768175d5170() {
       pathstruct.origin = node.origin;
       level.patrolpaths[level.patrolpaths.size] = pathstruct;
 
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         poiname = node.poi;
 
         if(!isDefined(node.poi)) {
-          poiname = function_6cc445c02b5effac(node.origin);
+          poiname = poi_findpoioriginisin(node.origin);
         }
 
         function_d0e7647e5538eb9d(poiname, "patrolPaths", pathstruct);
@@ -1498,7 +1498,7 @@ function function_bebc5768175d5170() {
     }
   }
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     level thread function_7132401e09a9ccc7();
   }
 }
@@ -1571,7 +1571,7 @@ function function_1353821e73926c69() {
       foreach(node in level.struct_class_names["script_noteworthy"][key]) {
         if(!isDefined(node.targetname)) {
           if(!isDefined(node.poi)) {
-            node.poi = function_6cc445c02b5effac(node.origin);
+            node.poi = poi_findpoioriginisin(node.origin);
           }
 
           if(tolower(key) == "guard" || issubstr(tolower(key), "guard_stationary") || issubstr(tolower(key), "guard_spawnset")) {
@@ -1618,7 +1618,7 @@ function function_645bfe3907dcc2a0() {
       struct.patrolpaths = [];
       poiname = level.struct_class_names["script_noteworthy"][key][0].poi;
 
-      if(function_47d356083884f913() && isDefined(poiname)) {
+      if(poi_issystemactive() && isDefined(poiname)) {
         function_44739fe1cf82e29a("subAreas");
         function_d0e7647e5538eb9d(poiname, "subAreas", struct, key);
         continue;
@@ -1632,7 +1632,7 @@ function function_645bfe3907dcc2a0() {
     }
   }
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     foreach(poiname, poi in level.poi) {
       function_c1e539c16aeb4bd1(poiname);
     }
@@ -1773,7 +1773,7 @@ function function_2fc80954fa70d153() {
     waitframe();
   }
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     while(!istrue(level.var_9589c5a19c1a71fc)) {
       waitframe();
     }
@@ -1816,7 +1816,7 @@ function function_157c2000284999eb(agent, category, subcategory, poiname) {
     function_e812b7065161da79(agent, "everybody");
   }
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(isagent(agent) && isDefined(agent.poi)) {
       poiname = agent.poi;
     }
@@ -1859,7 +1859,7 @@ function private function_1e5307c0d848a9ca(agent, poiname) {
     function_c36f897d56e28169(agent, "everybody");
   }
 
-  if(function_47d356083884f913() && isDefined(poiname)) {
+  if(poi_issystemactive() && isDefined(poiname)) {
     function_d57d61c9f7b4aa77(agent, poiname, category);
 
     if(category != "everybody") {
@@ -1897,11 +1897,11 @@ function function_8c6dbb64c8e1603c(number, category, origin, poiname, spawndorma
 
   var_2231df82d7283c43 = undefined;
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     var_2231df82d7283c43 = 0;
 
     if(!isDefined(subarea)) {
-      subarea = function_a44e168e8cced18(origin, poiname);
+      subarea = subarea_findfromorigin(origin, poiname);
     }
 
     if(isDefined(subarea)) {
@@ -2013,7 +2013,7 @@ function function_7ee4a8954b638ed3(agent, var_28173fd6b5a461f) {
   if(!istrue(agentpers_getagentpersdata(agent, "skipDeathCount")) && !istrue(madedormant)) {
     level.var_41670c1c65f3d3cf.agentdeaths++;
 
-    if(function_47d356083884f913() && isDefined(poiname)) {
+    if(poi_issystemactive() && isDefined(poiname)) {
       level.var_41670c1c65f3d3cf.poi[poiname].agentdeaths++;
     }
 
@@ -2064,7 +2064,7 @@ function function_7ee4a8954b638ed3(agent, var_28173fd6b5a461f) {
   cqbnode = agentpers_getagentpersdata(agent, "cqbNode");
 
   if(isDefined(cqbnode)) {
-    function_25190883a02fdef7(cqbnode);
+    cqb_releasenode(cqbnode);
   }
 
   waittillframeend();
@@ -2242,7 +2242,7 @@ function function_80cd0109b7f5161d() {
     foreach(poi in level.poi) {
       foreach(subarea in poi["subAreas"]) {
         if(!istrue(subarea.delayspawn)) {
-          function_567f8f8cd379059c(subarea);
+          subarea_spawnagentpackages(subarea);
         }
       }
     }
@@ -2264,7 +2264,7 @@ function spawnguard(node, isstationary, var_ba8b04eb4b683e67, priority, category
   }
 
   if(!isDefined(poiname)) {
-    node.poi = scripts\mp\poi::function_6cc445c02b5effac(node.origin);
+    node.poi = scripts\mp\poi::poi_findpoioriginisin(node.origin);
   }
 
   aitype = function_d5bc07eabf352abb(node, poiname);
@@ -2293,7 +2293,7 @@ function spawnguard(node, isstationary, var_ba8b04eb4b683e67, priority, category
   return agent;
 }
 
-function spawnpatrol(pathstruct, var_7ade8fac6578b011, maxagents, var_f28f3885995a439d, priority, category, subcategory) {
+function spawnpatrol(pathstruct, minagents, maxagents, var_f28f3885995a439d, priority, category, subcategory) {
   agents = [];
   path = pathstruct.path;
   angles = (0, 0, 0);
@@ -2302,14 +2302,14 @@ function spawnpatrol(pathstruct, var_7ade8fac6578b011, maxagents, var_f28f388599
     angles = path[0].angles;
   }
 
-  if(isDefined(path[0].var_7ade8fac6578b011)) {
-    var_7ade8fac6578b011 = path[0].var_7ade8fac6578b011;
+  if(isDefined(path[0].minagents)) {
+    minagents = path[0].minagents;
   }
 
-  if(!isDefined(var_7ade8fac6578b011)) {
-    var_7ade8fac6578b011 = 1;
+  if(!isDefined(minagents)) {
+    minagents = 1;
   } else {
-    var_7ade8fac6578b011 = int(var_7ade8fac6578b011);
+    minagents = int(minagents);
   }
 
   if(isDefined(path[0].maxagents)) {
@@ -2322,10 +2322,10 @@ function spawnpatrol(pathstruct, var_7ade8fac6578b011, maxagents, var_f28f388599
     maxagents = int(maxagents);
   }
 
-  numagents = var_7ade8fac6578b011;
+  numagents = minagents;
 
-  if(var_7ade8fac6578b011 < maxagents) {
-    numagents = randomintrange(var_7ade8fac6578b011, maxagents);
+  if(minagents < maxagents) {
+    numagents = randomintrange(minagents, maxagents);
   }
 
   var_10ac129919e367b5 = [];
@@ -2600,7 +2600,7 @@ function function_a767dbcb4dd41ce(startpoints) {
       nodes = function_5649cfac1074189a(count, startpoint);
 
       foreach(node in nodes) {
-        if(isDefined(node) && !istrue(node.used) && (!scripts\mp\poi::function_47d356083884f913() || isDefined(node.poi) && scripts\mp\poi::poi_ispoiactive(node.poi))) {
+        if(isDefined(node) && !istrue(node.used) && (!scripts\mp\poi::poi_issystemactive() || isDefined(node.poi) && scripts\mp\poi::poi_ispoiactive(node.poi))) {
           node.script_noteworthy = "guard";
           spawnguard(node, 1, 1, "low", "firstKillFodder");
           node.used = 1;
@@ -2650,7 +2650,7 @@ function function_a09c0a759d909dc9() {
     return;
   }
 
-  if(!function_47d356083884f913()) {
+  if(!poi_issystemactive()) {
     return;
   }
 
@@ -2808,17 +2808,17 @@ function function_17f07bed46b1496b(subarea) {
   return 1;
 }
 
-function function_9b6306b0cd33bd79(origin) {
-  poiname = function_6cc445c02b5effac(origin);
-  return function_17f07bed46b1496b(function_a44e168e8cced18(origin, poiname));
+function subarea_getsubareadifficultyfromorigin(origin) {
+  poiname = poi_findpoioriginisin(origin);
+  return function_17f07bed46b1496b(subarea_findfromorigin(origin, poiname));
 }
 
-function function_bed4c95709497a6c(origin, subarea, poiname) {
+function subarea_getsubareanationality(origin, subarea, poiname) {
   if(!isDefined(subarea)) {
     if(!isDefined(origin)) {
       return function_f851a2f41cffa860();
     } else {
-      subarea = function_a44e168e8cced18(origin, poiname);
+      subarea = subarea_findfromorigin(origin, poiname);
     }
   }
 
@@ -2830,10 +2830,10 @@ function function_bed4c95709497a6c(origin, subarea, poiname) {
 }
 
 function function_454dee65b310ed1c() {
-  tieroverridevolumes = function_f159c10d5cf8f0b4("tierOverrideVolume", "targetname");
+  tieroverridevolumes = getnoentvolumearray("tierOverrideVolume", "targetname");
 
   foreach(volume in tieroverridevolumes) {
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(volume.origin, 0, 1);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(volume.origin, 0, 1);
 
     if(!isDefined(poiname)) {
       continue;
@@ -2847,7 +2847,7 @@ function function_454dee65b310ed1c() {
   }
 }
 
-function function_6cda15989d9abae0(origin, poiname) {
+function tieroverride_checkorigin(origin, poiname) {
   if(!poi_ispoiactive(poiname)) {
     return;
   }
@@ -2865,10 +2865,10 @@ function function_6cda15989d9abae0(origin, poiname) {
   }
 }
 
-function function_a44e168e8cced18(origin, poiname) {
-  if(function_47d356083884f913()) {
+function subarea_findfromorigin(origin, poiname) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
-      poiname = function_6cc445c02b5effac(origin);
+      poiname = poi_findpoioriginisin(origin);
     }
 
     if(isDefined(poiname) && isDefined(level.poi[poiname]) && isDefined(level.poi[poiname]["subAreas"])) {
@@ -2884,7 +2884,7 @@ function function_a44e168e8cced18(origin, poiname) {
 }
 
 function function_6a35e8934f78d810(poiname) {
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
       return undefined;
     }
@@ -2899,14 +2899,14 @@ function function_6a35e8934f78d810(poiname) {
   }
 }
 
-function function_2cb157b29de9dbfa(agent, poiname, destination) {
+function subarea_findandassignforagent(agent, poiname, destination) {
   origin = agent.origin;
 
   if(isDefined(destination)) {
     origin = destination;
   }
 
-  subarea = function_a44e168e8cced18(origin, poiname);
+  subarea = subarea_findfromorigin(origin, poiname);
 
   if(isDefined(subarea)) {
     subarea.var_3ebb6024e3f220ca[subarea.var_3ebb6024e3f220ca.size] = agent;
@@ -2924,7 +2924,7 @@ function subarea_findandassignfordormancyid(origin, poiname, destination, dorman
     origin = destination;
   }
 
-  subarea = function_a44e168e8cced18(origin, poiname);
+  subarea = subarea_findfromorigin(origin, poiname);
   level.var_879053468f168806[dormancyid].subarea = subarea;
 
   if(isDefined(subarea)) {
@@ -2936,8 +2936,8 @@ function subarea_removeagentfrom(agent, subarea) {
   subarea.var_3ebb6024e3f220ca = function_f3d88b5d7353a90(subarea.var_3ebb6024e3f220ca, agent);
 }
 
-function function_f23bac39c13e1651(poiname) {
-  if(function_47d356083884f913()) {
+function subarea_checkforreinforcementshutdown(poiname) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
       return;
     }
@@ -2971,7 +2971,7 @@ function function_f23bac39c13e1651(poiname) {
   }
 }
 
-function function_baffa48bbd15cdc6(subarea, array) {
+function subarea_orderagentarraysubareafirst(subarea, array) {
   var_de1ef71d45ad3463 = [];
   var_e293f8f41792af61 = [];
 
@@ -2981,7 +2981,7 @@ function function_baffa48bbd15cdc6(subarea, array) {
     if(!isagent(agent)) {
       origin = level.var_879053468f168806[agent].origin;
       poiname = level.var_879053468f168806[agent].poi;
-      var_d6a935a3a4e7c7d1 = function_a44e168e8cced18(origin, poiname);
+      var_d6a935a3a4e7c7d1 = subarea_findfromorigin(origin, poiname);
     } else {
       var_d6a935a3a4e7c7d1 = agentpers_getagentpersdata(agent, "subArea");
     }
@@ -3002,7 +3002,7 @@ function function_baffa48bbd15cdc6(subarea, array) {
   return newarray;
 }
 
-function function_567f8f8cd379059c(subarea) {
+function subarea_spawnagentpackages(subarea) {
   subarea.var_d276b08c96430bfc = array_randomize(subarea.var_d276b08c96430bfc);
 
   foreach(spawnpackage in subarea.var_d276b08c96430bfc) {
@@ -3507,12 +3507,12 @@ function function_77acc10c4823dd8a(numagents, reinforceorigin, priority, categor
   } else if(reinforcementtype == "Unknown") {
     var_6b9806915982d089 = undefined;
 
-    if(function_47d356083884f913()) {
+    if(poi_issystemactive()) {
       if(!isDefined(poiname)) {
-        poiname = function_6cc445c02b5effac(reinforceorigin);
+        poiname = poi_findpoioriginisin(reinforceorigin);
       }
 
-      subarea = function_a44e168e8cced18(reinforceorigin, poiname);
+      subarea = subarea_findfromorigin(reinforceorigin, poiname);
 
       if(isDefined(subarea)) {
         var_6b9806915982d089 = subarea.var_7da9883d4168b7f1.var_84ecaeab58167d39;
@@ -3578,7 +3578,7 @@ function function_77acc10c4823dd8a(numagents, reinforceorigin, priority, categor
   }
 
   if(isDefined(agents) && isarray(agents) && agents.size > 0) {
-    if(function_47d356083884f913() && !isDefined(poiname) && isDefined(agents[0].poi)) {
+    if(poi_issystemactive() && !isDefined(poiname) && isDefined(agents[0].poi)) {
       poiname = agents[0].poi;
     }
 
@@ -3635,13 +3635,13 @@ function function_2f3b04fc531b4115(numagents, reinforceorigin, priority, categor
   } else if((issubstr(reinforcementtype, "heli") || reinforcementtype == "Helicopter") && istrue(level.var_425df8e23aaef18c)) {
     agents = scripts\mp\ai_heli_reinforce::function_3779deb97b61a65(numagents, reinforceorigin, priority, category, subcategory, groupname, team, var_93390a6953905fef, poiname, goalradius, var_21f24aecb313e479, var_ec862c2c00c7ab5d, undefined, undefined, nationality, undefined);
   } else if((issubstr(reinforcementtype, "para") || reinforcementtype == "Paratroopers") && isDefined(level.parareinforcestruct)) {
-    var_7ade8fac6578b011 = level.reinforcementoptions.var_8f0798696a41da93;
+    minagents = level.reinforcementoptions.var_8f0798696a41da93;
 
     if(scripts\mp\gametypes\br_gametype_dmz::function_7a7aa3b5455f0412(poiname)) {
-      var_7ade8fac6578b011 = level.reinforcementoptions.var_533cfe7944a02b81;
+      minagents = level.reinforcementoptions.var_533cfe7944a02b81;
     }
 
-    if(numagents >= var_7ade8fac6578b011) {
+    if(numagents >= minagents) {
       agents = namespace_885300a47c2b51e6::function_55ab9c6da96226e7(numagents, reinforceorigin, 10000, var_ec862c2c00c7ab5d, priority, category, subcategory, team, var_93390a6953905fef, poiname, undefined, undefined, undefined, undefined, undefined, undefined, nationality);
     }
   } else if((issubstr(reinforcementtype, "elevator") || reinforcementtype == "Elevator") && (istrue(level.var_b212a36bec6cf8da) || isDefined(level.reinforceelevators))) {
@@ -3703,7 +3703,7 @@ function function_9ea6eddb437eaca5(numagents, reinforceorigin, priority, categor
   reinforceorigin = function_61cbc488b27a6e61(reinforceorigin);
 
   if(!isDefined(poiname)) {
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(reinforceorigin);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(reinforceorigin);
   }
 
   fortress = function_9c5a68ca1385322e(reinforceorigin, poiname, var_180734f7c2a9866f, var_f03b10101d704759, undefined, var_15383a2c0ba96765);
@@ -3754,7 +3754,7 @@ function function_9c5a68ca1385322e(origin, poiname, var_5477815d6f43aecf, maxdis
   }
 
   if(!isDefined(poiname)) {
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(origin);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(origin);
   }
 
   if(!isDefined(level.poi) || !isDefined(level.poi[poiname]) || !isDefined(level.poi[poiname]["players"]) || !isDefined(level.poi[poiname]["players"].size)) {
@@ -3784,7 +3784,7 @@ function function_9c5a68ca1385322e(origin, poiname, var_5477815d6f43aecf, maxdis
   if(!istrue(var_15383a2c0ba96765)) {
     foreach(fortress in level.var_f1073fbd45b59a06.unusedfortresses) {
       if(!isDefined(fortress.poi)) {
-        fortress.poi = scripts\mp\poi::function_6cc445c02b5effac(fortress.origin);
+        fortress.poi = scripts\mp\poi::poi_findpoioriginisin(fortress.origin);
       }
 
       if(fortress.poi == poiname) {
@@ -3867,7 +3867,7 @@ function function_51014d65a15cf0f9() {
   level.var_64e7362f9d520136 = getdvarint(@ "hash_599c5453cd5cd717", 180) * 1000;
   level.var_6d6312580311c77c = getdvarfloat(@ "hash_90240383479ef5f3", 1);
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     foreach(poiname, poi in level.poi) {
       level thread function_eaa1254a3231f38e(poiname);
     }
@@ -3951,7 +3951,7 @@ function function_4bcc15a45628da41(poiname) {
   while(true) {
     if(level.var_41670c1c65f3d3cf.poi[poiname].reinforcementqueue.size > 0) {
       if(poiname != "saba_S5Reveal" && !istrue(scripts\mp\gametypes\br_gametype_dmz::function_7a7aa3b5455f0412(poiname))) {
-        function_f23bac39c13e1651(poiname);
+        subarea_checkforreinforcementshutdown(poiname);
       }
 
       [reinforceorigin, subarea] = function_8d4c6890cbea3d1(poiname);
@@ -4012,8 +4012,8 @@ function function_4bcc15a45628da41(poiname) {
           println("<dev string:xc9b>" + poiname + "<dev string:xcb8>" + gettime());
         }
 
-        reinforcementtype = function_f3bb4f4911a1beb2("determineReinforceType", poiname);
-        reinforceorigin = default_to(function_f3bb4f4911a1beb2("determineReinforceOrigin", poiname, reinforcementtype), reinforceorigin);
+        reinforcementtype = callsharedfunc("determineReinforceType", poiname);
+        reinforceorigin = default_to(callsharedfunc("determineReinforceOrigin", poiname, reinforcementtype), reinforceorigin);
         agents = function_77acc10c4823dd8a(nextincrement, reinforceorigin, "medium", "reinforcements", undefined, undefined, undefined, undefined, poiname, reinforcementtype, undefined, undefined, undefined, nationality);
 
         if(isDefined(agents) && agents.size > 0) {
@@ -4079,7 +4079,7 @@ function function_8d4c6890cbea3d1(poiname, var_4a5b97d6bbd597a) {
 
   var_be60021f92d78965 = undefined;
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
       return [undefined, undefined];
     }
@@ -4137,7 +4137,7 @@ function function_99b2104c78855a16(subarea) {
     var_abc2b29e98e397c7 = [];
 
     foreach(loc in alllocs) {
-      var_4b70d7484f56a682 = function_a44e168e8cced18(loc.origin, subarea.poi);
+      var_4b70d7484f56a682 = subarea_findfromorigin(loc.origin, subarea.poi);
 
       if(subarea.var_71ad22c5d093d90b == var_4b70d7484f56a682.var_71ad22c5d093d90b) {
         var_abc2b29e98e397c7[var_abc2b29e98e397c7.size] = loc;
@@ -4316,9 +4316,9 @@ function function_e332d48077f00441(poiname) {
 function function_346caf10322931c8(poiname, origin) {
   curtime = gettime();
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname) || !array_contains(getarraykeys(level.poi), poiname)) {
-      poiname = function_6cc445c02b5effac(origin);
+      poiname = poi_findpoioriginisin(origin);
     }
 
     if(!level.var_1171d24dd4142369[poiname] && curtime - level.var_e5fd74b71bdf51fa[poiname] > level.var_d1a95e3c3d6ea9fc) {
@@ -4635,7 +4635,7 @@ function function_5d07b6ef455e7876(agent, groupname) {
   if(!isDefined(groupname)) {
     if(isDefined(agent.poi)) {
       groupname = function_d2d6e405db635dc8(agent.poi);
-    } else if(function_47d356083884f913()) {
+    } else if(poi_issystemactive()) {
       groupname = function_d2d6e405db635dc8(undefined);
     } else {
       groupname = function_1c52f5ede022affe(agent);
@@ -4764,7 +4764,7 @@ function function_912903818a06c431() {
 
 function function_78759441c259f58a(origin, numagents) {
   if(isDefined(origin)) {
-    poiname = function_6cc445c02b5effac(origin);
+    poiname = poi_findpoioriginisin(origin);
     return function_d2d6e405db635dc8(poiname, numagents);
   }
 
@@ -4960,7 +4960,7 @@ function function_44b2bad96489df87() {
 
   var_5f6e843fb2c4cb88 = 1;
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     function_44739fe1cf82e29a("stealthVolumeCenters");
   } else {
     level.stealthvolumecenters = [];
@@ -4973,7 +4973,7 @@ function function_44b2bad96489df87() {
     if(issubstr(key, "_stealthVolume_")) {
       foreach(node in level.struct_class_names["script_noteworthy"][key]) {
         if(var_5f6e843fb2c4cb88) {
-          poiname = function_6cc445c02b5effac(node.origin, 1, 1);
+          poiname = poi_findpoioriginisin(node.origin, 1, 1);
           function_d0e7647e5538eb9d(poiname, "stealthVolumeCenters", node);
           continue;
         }
@@ -4991,9 +4991,9 @@ function function_e86762be42bb72b0(origin, poiname) {
 
   var_a0b3a72bb77aafdd = undefined;
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname) || poiname == "bossArea") {
-      poiname = function_6cc445c02b5effac(origin);
+      poiname = poi_findpoioriginisin(origin);
     }
 
     var_a0b3a72bb77aafdd = function_1af8a41e4c1252c7(poiname, "stealthVolumeCenters");
@@ -5729,7 +5729,7 @@ function function_4a618b49270cfd25(owner, origin, radius) {
   var_a3f9130b1d11dffb = randomintrange(3, 6);
   striketype = 1;
   streakinfo = scripts\cp_mp\utility\killstreak_utility::createstreakinfo(streakname, owner);
-  var_d77253c873d2b420 = anglesToForward(owner.angles);
+  ownerlookforward = anglesToForward(owner.angles);
   ownerforward = anglesToForward(owner.angles);
   ownerright = anglestoright(owner.angles);
 
@@ -5741,8 +5741,8 @@ function function_4a618b49270cfd25(owner, origin, radius) {
   scripts\cp_mp\utility\killstreak_utility::killstreak_dangernotifyplayersinrange(owner, owner.team, 2048, streakname, origin);
 
   for(j = 0; j < var_a3f9130b1d11dffb; j++) {
-    var_fa378e997a33a137 = owner scripts\cp_mp\killstreaks\toma_strike::findunobstructedfiringinfo(origin, 1024, var_d77253c873d2b420, ownerforward, ownerright);
-    owner thread scripts\cp_mp\killstreaks\toma_strike::tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo);
+    bombinginfo = owner scripts\cp_mp\killstreaks\toma_strike::findunobstructedfiringinfo(origin, 1024, ownerlookforward, ownerforward, ownerright);
+    owner thread scripts\cp_mp\killstreaks\toma_strike::tomastrike_firestrike(striketype, bombinginfo, streakinfo);
     timetowait = randomfloatrange(0.25, 1);
     wait timetowait;
   }
@@ -6131,7 +6131,7 @@ function function_576ed049f93d9496() {
         topxpos += 200;
         printtoscreen2d(topxpos, 50, "<dev string:x13f1>" + level.var_41670c1c65f3d3cf.agentdeaths, (0, 0, 1), 1.5);
 
-        if(function_47d356083884f913()) {
+        if(poi_issystemactive()) {
           printtoscreen2d(topxpos + 300, 50, "<dev string:x1403>" + level.poi_names.size, (0, 0, 1), 1.5);
           numlines = 0;
           x = 50;
@@ -6199,7 +6199,7 @@ function function_576ed049f93d9496() {
       printtoscreen2d(750, 50, "<dev string:x13e2>" + function_9368fb9261e4cd0a("<dev string:xf97>"), (0, 0, 1), 1.5);
       printtoscreen2d(1050, 50, "<dev string:x13f1>" + level.var_41670c1c65f3d3cf.agentdeaths, (0, 0, 1), 1.5);
 
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         printtoscreen2d(1300, 50, "<dev string:x1403>" + level.poi_names.size, (0, 0, 1), 1.5);
         x = 50;
         y = 90;
@@ -6224,7 +6224,7 @@ function function_576ed049f93d9496() {
       if(!istrue(level.supportsai)) {
         printtoscreen2d(750, 100, "<dev string:x1466>", (0, 0, 1), 2.5);
       } else if(isDefined(level.startracker)) {
-        if(function_47d356083884f913()) {
+        if(poi_issystemactive()) {
           startx = 150;
           starty = 100;
           x = startx;
@@ -6318,7 +6318,7 @@ function function_576ed049f93d9496() {
       println("<dev string:x1583>");
       println("<dev string:x155a>");
 
-      if(!function_47d356083884f913()) {
+      if(!poi_issystemactive()) {
         println("<dev string:x15a4>" + function_9a83377c98bce82a("<dev string:xe91>") + "<dev string:x145f>" + level.var_41670c1c65f3d3cf.maxagents);
         println("<dev string:x15b5>" + function_9a83377c98bce82a("<dev string:xead>"));
       } else {
@@ -6334,7 +6334,7 @@ function function_576ed049f93d9496() {
     }
 
     if(var_5a77a5f00881f00c == 4) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         x = 250;
         pos = 100;
 
@@ -6778,12 +6778,12 @@ function function_27d0336b6b9b60c(type, origin, team, player) {
   poiname = undefined;
 
   if(isDefined(player)) {
-    poiname = function_6cc445c02b5effac(player.origin);
+    poiname = poi_findpoioriginisin(player.origin);
   }
 
   switch (type) {
     case #"hash_b111a4547c7d9125":
-      agents = function_2f3b04fc531b4115(4, origin, "<dev string:xe2f>", "<dev string:xf97>", "<dev string:xe46>", undefined, team, undefined, poiname, type, undefined, undefined, undefined, function_bed4c95709497a6c(origin, undefined, poiname));
+      agents = function_2f3b04fc531b4115(4, origin, "<dev string:xe2f>", "<dev string:xf97>", "<dev string:xe46>", undefined, team, undefined, poiname, type, undefined, undefined, undefined, subarea_getsubareanationality(origin, undefined, poiname));
       break;
     case #"hash_8d96201d150187de":
       agents = function_2f3b04fc531b4115(4, origin, "<dev string:xe2f>", "<dev string:xf97>", "<dev string:xe46>", undefined, team, undefined, poiname, type);
@@ -6807,7 +6807,7 @@ function function_27d0336b6b9b60c(type, origin, team, player) {
   }
 
   if(isDefined(agents) && isarray(agents)) {
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(origin);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(origin);
     function_96b7b6431450dfc0(agents.size, poiname);
 
     if(isDefined(level.var_d1a95e3c3d6ea9fc)) {
@@ -6823,7 +6823,7 @@ function function_5397fa12cf5b1665() {
     var_d45c6fe613356b23 = getdvarint(@ "hash_1d8682eb59219492", 0);
 
     if(var_d45c6fe613356b23 == 1) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         foreach(poi in level.poi) {
           poiname = level.poi["<dev string:x1733>"];
           poiorigin = poi_getorigin(poiname);
@@ -6839,7 +6839,7 @@ function function_5397fa12cf5b1665() {
     }
 
     if(var_d45c6fe613356b23 == 2) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         foreach(poiname, poi in level.poi) {
           foreach(subarea in poi["<dev string:x16c1>"]) {
             if(subarea.var_71ad22c5d093d90b != "<dev string:x173b>") {
@@ -6858,7 +6858,7 @@ function function_5397fa12cf5b1665() {
     }
 
     if(var_d45c6fe613356b23 == 3) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         foreach(poiname, poi in level.poi) {
           foreach(subarea in poi["<dev string:x16c1>"]) {
             if(subarea.var_71ad22c5d093d90b != "<dev string:x173b>") {
@@ -6886,7 +6886,7 @@ function function_5397fa12cf5b1665() {
     }
 
     if(var_d45c6fe613356b23 == 4) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         foreach(poiname, poi in level.poi) {
           foreach(node in poi["<dev string:x175d>"]) {
             size = 32;
@@ -6904,7 +6904,7 @@ function function_5397fa12cf5b1665() {
     }
 
     if(var_d45c6fe613356b23 == 5) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         foreach(poiname, poi in level.poi) {
           foreach(pathstruct in level.poi[poiname]["<dev string:x1770>"]) {
             size = 32;
@@ -6918,15 +6918,15 @@ function function_5397fa12cf5b1665() {
 
             for(i = 0; i < pathstruct.path.size; i++) {
               node01 = pathstruct.path[i];
-              var_4ff83bffc51fbd1b = undefined;
+              node02 = undefined;
               sphere(node01.origin, size, color);
 
               if(isDefined(node01.target)) {
-                var_4ff83bffc51fbd1b = getStruct(node01.target, "<dev string:x177f>");
+                node02 = getStruct(node01.target, "<dev string:x177f>");
               }
 
-              if(isDefined(var_4ff83bffc51fbd1b)) {
-                line(node01.origin, var_4ff83bffc51fbd1b.origin, color);
+              if(isDefined(node02)) {
+                line(node01.origin, node02.origin, color);
                 continue;
               }
 
@@ -6992,11 +6992,11 @@ function function_87edf0678d74d59a(spawnpackage, type, poiname, var_71ad22c5d093
 
       for(i = 0; i < pathstruct.path.size; i++) {
         node01 = pathstruct.path[i];
-        var_4ff83bffc51fbd1b = pathstruct.path[i + 1];
+        node02 = pathstruct.path[i + 1];
         sphere(node01.origin, 32, (1, 0, 1));
 
-        if(isDefined(var_4ff83bffc51fbd1b)) {
-          line(node01.origin, var_4ff83bffc51fbd1b.origin, (1, 0, 1));
+        if(isDefined(node02)) {
+          line(node01.origin, node02.origin, (1, 0, 1));
           continue;
         }
 
@@ -7155,15 +7155,15 @@ function function_8c74d71ffba1bda8() {
 
           for(i = 0; i < pathstruct.path.size; i++) {
             node01 = pathstruct.path[i];
-            var_4ff83bffc51fbd1b = undefined;
+            node02 = undefined;
             sphere(node01.origin, size, color);
 
             if(isDefined(node01.target)) {
-              var_4ff83bffc51fbd1b = getStruct(node01.target, "<dev string:x177f>");
+              node02 = getStruct(node01.target, "<dev string:x177f>");
             }
 
-            if(isDefined(var_4ff83bffc51fbd1b)) {
-              line(node01.origin, var_4ff83bffc51fbd1b.origin, color);
+            if(isDefined(node02)) {
+              line(node01.origin, node02.origin, color);
               continue;
             }
 

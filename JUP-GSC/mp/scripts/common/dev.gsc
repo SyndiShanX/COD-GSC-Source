@@ -15,10 +15,10 @@ function private initdvars() {
 }
 
 function private initthreads() {
-  thread function_945e8b4a4a05b526();
+  thread devscriptmoversdebugdraw();
 }
 
-function private function_945e8b4a4a05b526() {
+function private devscriptmoversdebugdraw() {
   white = (1, 1, 1);
   red = (1, 0, 0);
   green = (0, 1, 0);
@@ -32,9 +32,9 @@ function private function_945e8b4a4a05b526() {
       scriptmovercounts.scriptmodeltargets = [];
       scriptmovercounts.scriptmodelnoteworthy = [];
       scriptmovercounts.scriptmodelmisc = 0;
-      scriptmovercounts.var_f6496cc6c6cd9606 = [];
-      scriptmovercounts.var_14a5f24d72a497bf = [];
-      scriptmovercounts.var_174f250d6560ec80 = 0;
+      scriptmovercounts.scriptorigintargets = [];
+      scriptmovercounts.scriptoriginnoteworthy = [];
+      scriptmovercounts.scriptoriginmisc = 0;
 
       foreach(ent in script_models) {
         line(ent.origin, ent.origin + anglesToForward(ent.angles) * 10, red);
@@ -97,71 +97,71 @@ function private function_945e8b4a4a05b526() {
           originstring = "<dev string:x4f>" + ent.origin[0] + "<dev string:x54>" + ent.origin[1] + "<dev string:x54>" + ent.origin[2] + "<dev string:x5a>";
           print3d(ent.origin + (0, 0, -20), originstring, color, alpha, scale);
 
-          if(isDefined(scriptmovercounts.var_f6496cc6c6cd9606[ent.targetname])) {
-            scriptmovercounts.var_f6496cc6c6cd9606[ent.targetname] += 1;
+          if(isDefined(scriptmovercounts.scriptorigintargets[ent.targetname])) {
+            scriptmovercounts.scriptorigintargets[ent.targetname] += 1;
           } else {
-            scriptmovercounts.var_f6496cc6c6cd9606[ent.targetname] = 1;
+            scriptmovercounts.scriptorigintargets[ent.targetname] = 1;
           }
 
           continue;
         }
 
         if(isDefined(ent.script_noteworthy)) {
-          if(isDefined(scriptmovercounts.var_14a5f24d72a497bf[ent.script_noteworthy])) {
-            scriptmovercounts.var_14a5f24d72a497bf[ent.script_noteworthy] += 1;
+          if(isDefined(scriptmovercounts.scriptoriginnoteworthy[ent.script_noteworthy])) {
+            scriptmovercounts.scriptoriginnoteworthy[ent.script_noteworthy] += 1;
           } else {
-            scriptmovercounts.var_14a5f24d72a497bf[ent.script_noteworthy] = 1;
+            scriptmovercounts.scriptoriginnoteworthy[ent.script_noteworthy] = 1;
           }
 
           continue;
         }
 
-        scriptmovercounts.var_174f250d6560ec80 += 1;
+        scriptmovercounts.scriptoriginmisc += 1;
       }
 
-      var_bc545feded2c6a23 = 400;
-      var_bc545eeded2c67f0 = 50;
-      var_916c5c90b430d951 = 15;
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:x8e>");
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:xac>");
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:xbe>" + scriptmovercounts.scriptmodelmisc);
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:xd1>");
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
+      screenposx = 400;
+      screenposy = 50;
+      screenposyspacing = 15;
+      printtoscreen2d(screenposx, screenposy, "<dev string:x8e>");
+      screenposy += screenposyspacing;
+      printtoscreen2d(screenposx, screenposy, "<dev string:xac>");
+      screenposy += screenposyspacing;
+      printtoscreen2d(screenposx, screenposy, "<dev string:xbe>" + scriptmovercounts.scriptmodelmisc);
+      screenposy += screenposyspacing;
+      printtoscreen2d(screenposx, screenposy, "<dev string:xd1>");
+      screenposy += screenposyspacing;
 
       foreach(targetname, targetcount in scriptmovercounts.scriptmodeltargets) {
-        printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, targetname + "<dev string:xdc>" + targetcount);
-        var_bc545eeded2c67f0 += var_916c5c90b430d951;
+        printtoscreen2d(screenposx, screenposy, targetname + "<dev string:xdc>" + targetcount);
+        screenposy += screenposyspacing;
       }
 
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:xe2>");
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
+      printtoscreen2d(screenposx, screenposy, "<dev string:xe2>");
+      screenposy += screenposyspacing;
 
       foreach(noteworthyname, noteworthycount in scriptmovercounts.scriptmodelnoteworthy) {
-        printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, noteworthyname + "<dev string:xdc>" + noteworthycount);
-        var_bc545eeded2c67f0 += var_916c5c90b430d951;
+        printtoscreen2d(screenposx, screenposy, noteworthyname + "<dev string:xdc>" + noteworthycount);
+        screenposy += screenposyspacing;
       }
 
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:xf1>");
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:xbe>" + scriptmovercounts.var_174f250d6560ec80);
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:xd1>");
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
+      printtoscreen2d(screenposx, screenposy, "<dev string:xf1>");
+      screenposy += screenposyspacing;
+      printtoscreen2d(screenposx, screenposy, "<dev string:xbe>" + scriptmovercounts.scriptoriginmisc);
+      screenposy += screenposyspacing;
+      printtoscreen2d(screenposx, screenposy, "<dev string:xd1>");
+      screenposy += screenposyspacing;
 
-      foreach(targetname, targetcount in scriptmovercounts.var_f6496cc6c6cd9606) {
-        printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, targetname + "<dev string:xdc>" + targetcount);
-        var_bc545eeded2c67f0 += var_916c5c90b430d951;
+      foreach(targetname, targetcount in scriptmovercounts.scriptorigintargets) {
+        printtoscreen2d(screenposx, screenposy, targetname + "<dev string:xdc>" + targetcount);
+        screenposy += screenposyspacing;
       }
 
-      printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, "<dev string:xe2>");
-      var_bc545eeded2c67f0 += var_916c5c90b430d951;
+      printtoscreen2d(screenposx, screenposy, "<dev string:xe2>");
+      screenposy += screenposyspacing;
 
-      foreach(noteworthyname, noteworthycount in scriptmovercounts.var_14a5f24d72a497bf) {
-        printtoscreen2d(var_bc545feded2c6a23, var_bc545eeded2c67f0, noteworthyname + "<dev string:xdc>" + noteworthycount);
-        var_bc545eeded2c67f0 += var_916c5c90b430d951;
+      foreach(noteworthyname, noteworthycount in scriptmovercounts.scriptoriginnoteworthy) {
+        printtoscreen2d(screenposx, screenposy, noteworthyname + "<dev string:xdc>" + noteworthycount);
+        screenposy += screenposyspacing;
       }
     }
 

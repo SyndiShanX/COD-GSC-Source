@@ -66,8 +66,8 @@ function scriptable_addautousecallback(usecallback) {
   level.scriptable_autouse_funcs = array_add(level.scriptable_autouse_funcs, usecallback);
 }
 
-function scriptable_engineused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  if(istrue(var_a5b2c541413aa895)) {
+function scriptable_engineused(instance, part, state, player, bautouse, usestring) {
+  if(istrue(bautouse)) {
     if(isDefined(level.scriptable_autouse_funcs)) {
       foreach(used_func in level.scriptable_autouse_funcs) {
         [[used_func]](instance, part, state, player, 1, usestring);
@@ -178,7 +178,7 @@ function scriptable_addnotifycallback(funckey, func) {
   level.scriptable_notify_callback_funcs[funckey][level.scriptable_notify_callback_funcs[funckey].size] = func;
 }
 
-function scriptable_enginenotifycallback(instance, note, param, ent, var_535d9c3fdddab5a9) {
+function scriptable_enginenotifycallback(instance, note, param, ent, instigator) {
   funckey = note;
 
   if(!isDefined(level.scriptable_notify_callback_funcs)) {
@@ -193,10 +193,10 @@ function scriptable_enginenotifycallback(instance, note, param, ent, var_535d9c3
 
   foreach(func in funcarray) {
     if(isDefined(ent)) {
-      ent[[func]](instance, note, param, var_535d9c3fdddab5a9);
+      ent[[func]](instance, note, param, instigator);
       continue;
     }
 
-    level[[func]](instance, note, param, var_535d9c3fdddab5a9);
+    level[[func]](instance, note, param, instigator);
   }
 }

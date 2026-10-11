@@ -1220,7 +1220,7 @@ function getmissedinfilcamerapositions(team) {
 
 function function_658c8f668d2cd83c() {
   wait 5;
-  function_f1aed36ab4598ea("mp_gamemode_gw");
+  snd_transient_load("mp_gamemode_gw");
 }
 
 function spawnai() {

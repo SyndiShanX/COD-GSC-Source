@@ -152,7 +152,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_7_investigate";
   s.reverse_route = "0";
@@ -179,7 +179,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_3";
   s.reverse_route = "0";
@@ -194,7 +194,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_3_start_drinking";
   s.reverse_route = "1";
@@ -209,7 +209,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_3_smoke";
   s.reverse_route = "0";
@@ -224,7 +224,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_7_start_smoke";
   s.reverse_route = "0";
@@ -254,7 +254,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_7_cellphone";
   s.reverse_route = "0";
@@ -269,7 +269,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_6_smoke";
   s.reverse_route = "0";
@@ -284,7 +284,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_6_start_cellphone";
   s.reverse_route = "1";
@@ -311,7 +311,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_S";
   s.reverse_route = "0";
@@ -326,7 +326,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_S_start_investigate";
   s.reverse_route = "0";
@@ -354,7 +354,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_2_investigate";
   s.reverse_route = "0";
@@ -369,7 +369,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_2_start_lean";
   s.reverse_route = "1";
@@ -435,7 +435,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_S";
   s.reverse_route = "0";
@@ -450,7 +450,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_1_cellphone";
   s.reverse_route = "0";
@@ -477,7 +477,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_2";
   s.reverse_route = "0";
@@ -518,7 +518,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_2_start_investigate";
   s.reverse_route = "1";
@@ -532,7 +532,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_2";
   s.reverse_route = "0";
@@ -547,7 +547,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Rooftop_E_smoke";
   s.reverse_route = "0";
@@ -561,7 +561,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Rooftop_E_start";
   s.reverse_route = "1";
@@ -575,7 +575,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_1";
   s.reverse_route = "0";
@@ -589,7 +589,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Rooftop_E";
   s.reverse_route = "0";
@@ -603,7 +603,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Rooftop_W";
   s.reverse_route = "0";
@@ -618,7 +618,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_4_investigate";
   s.reverse_route = "0";
@@ -633,7 +633,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_4_start_smoke";
   s.reverse_route = "1";
@@ -648,7 +648,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Rooftop_W_start_cellphone";
   s.reverse_route = "1";
@@ -663,7 +663,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Rooftop_W_stretching";
   s.reverse_route = "0";
@@ -677,7 +677,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_2";
   s.reverse_route = "0";
@@ -692,7 +692,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_2_start_investigate";
   s.reverse_route = "1";
@@ -707,7 +707,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_2_drinking";
   s.reverse_route = "0";
@@ -722,7 +722,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_1_cellphone";
   s.reverse_route = "0";
@@ -737,7 +737,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_3_cellphone";
   s.reverse_route = "0";
@@ -751,7 +751,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_3_start";
   s.reverse_route = "1";
@@ -766,7 +766,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_6_drinking";
   s.reverse_route = "0";
@@ -794,7 +794,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_4_smoke";
   s.reverse_route = "0";
@@ -808,7 +808,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_4_start";
   s.reverse_route = "0";
@@ -823,7 +823,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_1_start_investigate";
   s.reverse_route = "1";
@@ -838,7 +838,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_1_smoke";
   s.reverse_route = "0";
@@ -853,7 +853,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_3_investigate";
   s.reverse_route = "0";
@@ -881,7 +881,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_3_start";
   s.reverse_route = "1";
@@ -896,7 +896,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Helipad_investigate";
   s.reverse_route = "0";
@@ -936,7 +936,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_4";
   s.reverse_route = "0";
@@ -993,7 +993,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_5";
   s.reverse_route = "0";
@@ -1008,7 +1008,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_5_start_stretching";
   s.reverse_route = "1";
@@ -1022,7 +1022,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_5";
   s.reverse_route = "0";
@@ -1050,7 +1050,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_5_investigate";
   s.reverse_route = "0";
@@ -1088,7 +1088,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_W_Dock_smoke";
   s.reverse_route = "0";
@@ -1102,7 +1102,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_W_Dock";
   s.reverse_route = "0";
@@ -1173,7 +1173,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_9_drinking";
   s.reverse_route = "0";
@@ -1200,7 +1200,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Helipad";
   s.reverse_route = "0";
@@ -1215,7 +1215,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Helipad_smoking";
   s.reverse_route = "1";
@@ -1229,7 +1229,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Helipad_Start";
   s.reverse_route = "0";
@@ -1243,7 +1243,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_1";
   s.reverse_route = "0";
@@ -1258,7 +1258,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_1_start_smoke";
   s.reverse_route = "1";
@@ -1272,7 +1272,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_1";
   s.reverse_route = "0";
@@ -1286,7 +1286,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_1";
   s.reverse_route = "0";
@@ -1300,7 +1300,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Dock";
   s.reverse_route = "0";
@@ -1315,7 +1315,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Dock_start_investigate";
   s.reverse_route = "1";
@@ -1330,7 +1330,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Dock_smoke";
   s.reverse_route = "0";
@@ -1344,7 +1344,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_5";
   s.reverse_route = "0";
@@ -1359,7 +1359,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_5_start_smoke";
   s.reverse_route = "1";
@@ -1374,7 +1374,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_5_cellphone";
   s.reverse_route = "0";
@@ -1412,7 +1412,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_1_stretching";
   s.reverse_route = "0";
@@ -1426,7 +1426,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_1";
   s.reverse_route = "0";
@@ -1441,7 +1441,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "2";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_1_start_investigate";
   s.reverse_route = "1";
@@ -1455,7 +1455,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_6";
   s.reverse_route = "0";
@@ -1470,7 +1470,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_6_start_investigate";
   s.reverse_route = "1";
@@ -1497,7 +1497,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_1_Start";
   s.reverse_route = "1";
@@ -1511,7 +1511,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_8";
   s.reverse_route = "0";
@@ -1526,7 +1526,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_8_start_smoke";
   s.reverse_route = "1";
@@ -1553,7 +1553,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_8";
   s.reverse_route = "0";
@@ -1568,7 +1568,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_8_cellphone";
   s.reverse_route = "0";
@@ -1595,7 +1595,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_7";
   s.reverse_route = "0";
@@ -1610,7 +1610,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_7_start_cellphone";
   s.reverse_route = "1";
@@ -1625,7 +1625,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_7_investigate";
   s.reverse_route = "0";
@@ -1681,7 +1681,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_2_smoke";
   s.reverse_route = "0";
@@ -1708,7 +1708,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_2_start";
   s.reverse_route = "1";
@@ -1819,7 +1819,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_4";
   s.reverse_route = "0";
@@ -1883,7 +1883,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_RPG_4_investigate";
   s.reverse_route = "0";
@@ -1925,7 +1925,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_4";
   s.reverse_route = "0";
@@ -1940,7 +1940,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_4_start";
   s.reverse_route = "1";
@@ -1954,7 +1954,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_4";
   s.reverse_route = "0";
@@ -1969,7 +1969,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_4_smoke";
   s.reverse_route = "0";
@@ -1993,7 +1993,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "2";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_3";
   s.reverse_route = "0";
@@ -2008,7 +2008,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "2";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_3_start_smoke";
   s.reverse_route = "1";
@@ -2022,7 +2022,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "2";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_3";
   s.reverse_route = "0";
@@ -2037,7 +2037,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "2";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_3_cellphone";
   s.reverse_route = "0";
@@ -2051,7 +2051,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_4";
   s.reverse_route = "0";
@@ -2065,7 +2065,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_4";
   s.reverse_route = "0";
@@ -2086,7 +2086,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_4_start_smoke";
   s.reverse_route = "1";
@@ -2114,7 +2114,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_4_investigate";
   s.reverse_route = "0";
@@ -2128,7 +2128,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_5";
   s.reverse_route = "0";
@@ -2143,7 +2143,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_5_start_investigate";
   s.reverse_route = "1";
@@ -2157,7 +2157,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_5";
   s.reverse_route = "0";
@@ -2172,7 +2172,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_5_investigate";
   s.reverse_route = "0";
@@ -2186,7 +2186,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_9_start";
   s.reverse_route = "1";
@@ -2200,7 +2200,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_HeavyTactician_9";
   s.reverse_route = "0";
@@ -2328,7 +2328,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_1";
   s.reverse_route = "0";
@@ -2551,7 +2551,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Heli_North_West";
   s.reverse_route = "0";
@@ -2795,7 +2795,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Heli_North_West_start_investigate";
   s.reverse_route = "1";
@@ -2842,7 +2842,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_2_cellphone";
   s.reverse_route = "0";
@@ -2910,7 +2910,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_Heli_North_West_smoke";
   s.reverse_route = "0";
@@ -3134,7 +3134,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_W_Dock_2_smoke";
   s.reverse_route = "0";
@@ -3148,7 +3148,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_W_Dock_2_start";
   s.reverse_route = "1";
@@ -3178,7 +3178,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Soldier_Mortar_W_Dock_start";
   s.reverse_route = "1";
@@ -3192,7 +3192,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Captain_6";
   s.reverse_route = "0";
@@ -3219,7 +3219,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_6";
   s.reverse_route = "0";
@@ -3233,7 +3233,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.name = "Manor_Patrol_Point_Specialist_Long_6_start";
   s.reverse_route = "1";
@@ -3252,13 +3252,13 @@ function cleanup() {
 }
 
 function function_fd69cf02ba4d90a2() {
-  var_d13c18af4084bdfd = spawnStruct();
-  var_d13c18af4084bdfd.name = "REV_OB_WARLORD";
-  var_d13c18af4084bdfd.scriptbundle = "jup_ob_activitydefinition_warlord_rainmaker";
-  var_d13c18af4084bdfd.mainfunction = &main;
-  var_d13c18af4084bdfd.var_6e7eb28b2997b5b4 = &function_82613e20fba2deb9;
-  var_d13c18af4084bdfd.var_ad1dcd56d202e9ac = &function_6da2952367672ac0;
-  return var_d13c18af4084bdfd;
+  activityinfostruct = spawnStruct();
+  activityinfostruct.name = "REV_OB_WARLORD";
+  activityinfostruct.scriptbundle = "jup_ob_activitydefinition_warlord_rainmaker";
+  activityinfostruct.mainfunction = &main;
+  activityinfostruct.var_6e7eb28b2997b5b4 = &function_82613e20fba2deb9;
+  activityinfostruct.metadatafunction = &function_6da2952367672ac0;
+  return activityinfostruct;
 }
 
 function function_82613e20fba2deb9(instancename, fe, us, cf) {

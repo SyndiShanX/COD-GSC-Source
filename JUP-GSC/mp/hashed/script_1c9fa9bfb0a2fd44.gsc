@@ -382,7 +382,7 @@ function function_c1a7a6a8e7fd451b(swapname, swapstate, hintduration) {
   var_6f52ec16d42ecdad = [];
 
   foreach(domnode in level.var_d6ae5cc7b162c730.var_1949b6e747ca100) {
-    if(function_2fa9202bce90f090(domnode.origin, swapname, swapstate)) {
+    if(is_origin_in_area_swap(domnode.origin, swapname, swapstate)) {
       if(isDefined(domnode.tasks)) {
         foreach(task in domnode.tasks) {
           if(isDefined(task.tablet)) {
@@ -537,8 +537,8 @@ function function_5827342a45eaf2aa() {
   return bestnode;
 }
 
-function function_c75bd0f88a8e39be(instance, part, state, useplayer, var_a5b2c541413aa895, usestring) {
-  thread namespace_e1bfa87a2a692d3c::function_a22ac2645c342456(instance, part, state, useplayer, var_a5b2c541413aa895, usestring);
+function function_c75bd0f88a8e39be(instance, part, state, useplayer, bautouse, usestring) {
+  thread namespace_e1bfa87a2a692d3c::function_a22ac2645c342456(instance, part, state, useplayer, bautouse, usestring);
 }
 
 function intel_resetusability(instance, interactingteam) {

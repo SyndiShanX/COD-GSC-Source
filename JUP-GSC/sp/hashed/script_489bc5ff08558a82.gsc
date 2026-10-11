@@ -277,8 +277,8 @@ function detectplayersinvicinity() {
 
   while(true) {
     wait 0.1;
-    var_49be45f83be0135e = scripts\cp\utility::give_closest_player_nearby(self.origin, 443556);
-    eplayer = var_49be45f83be0135e;
+    playernear = scripts\cp\utility::give_closest_player_nearby(self.origin, 443556);
+    eplayer = playernear;
 
     if(!isDefined(eplayer)) {
       if(isDefined(self.storedtarget)) {
@@ -303,7 +303,7 @@ function detectplayersinvicinity() {
       self.storedtarget = eplayer;
     }
 
-    if(self.storedtarget == var_49be45f83be0135e) {
+    if(self.storedtarget == playernear) {
       if(istrue(self.suppressedturret)) {
         continue;
       }
@@ -395,7 +395,7 @@ function doidlemovement() {
     self.model.angles = (0, 0, 0);
   }
 
-  var_87177c53dee5138a = (0, 0, 0);
+  idletarget = (0, 0, 0);
 
   while(true) {
     if(isDefined(self.storedtarget)) {
@@ -403,9 +403,9 @@ function doidlemovement() {
       continue;
     }
 
-    var_87177c53dee5138a = ter_op(randomint(2) > 0, self.model.angles + (0, 45, 0), self.model.angles - (0, 45, 0));
+    idletarget = ter_op(randomint(2) > 0, self.model.angles + (0, 45, 0), self.model.angles - (0, 45, 0));
     var_278f6f130d46fd99 = 1;
-    self.model rotateTo(var_87177c53dee5138a, 5);
+    self.model rotateTo(idletarget, 5);
     wait 5;
   }
 }
@@ -480,7 +480,7 @@ function draw_lines_based_on_delay(delay, start, end) {
   }
 }
 
-function calculaterotationmatrixaroundx(var_1c36976f30623512, theta, var_3d0b3618ba9f1949, var_3d0b3518ba9f1716, var_3d0b3418ba9f14e3) {
+function calculaterotationmatrixaroundx(var_1c36976f30623512, theta, var_3d0b3618ba9f1949, var_3d0b3518ba9f1716, onlyz) {
   x = vectordot(var_1c36976f30623512, (1, 0, 0));
   y = vectordot(var_1c36976f30623512, (0, 1, 0));
   z = vectordot(var_1c36976f30623512, (0, 0, 1));
@@ -496,14 +496,14 @@ function calculaterotationmatrixaroundx(var_1c36976f30623512, theta, var_3d0b361
     return (0, var_24b3efbde46c7e2a, 0);
   }
 
-  if(istrue(var_3d0b3418ba9f14e3)) {
+  if(istrue(onlyz)) {
     return (0, 0, var_24b3eebde46c7bf7);
   }
 
   return (var_24b3f0bde46c805d, var_24b3efbde46c7e2a, var_24b3eebde46c7bf7);
 }
 
-function calculaterotationmatrixaroundy(var_1c36976f30623512, theta, var_3d0b3618ba9f1949, var_3d0b3518ba9f1716, var_3d0b3418ba9f14e3) {
+function calculaterotationmatrixaroundy(var_1c36976f30623512, theta, var_3d0b3618ba9f1949, var_3d0b3518ba9f1716, onlyz) {
   x = vectordot(var_1c36976f30623512, (1, 0, 0));
   y = vectordot(var_1c36976f30623512, (0, 1, 0));
   z = vectordot(var_1c36976f30623512, (0, 0, 1));
@@ -519,14 +519,14 @@ function calculaterotationmatrixaroundy(var_1c36976f30623512, theta, var_3d0b361
     return (0, var_24b3efbde46c7e2a, 0);
   }
 
-  if(istrue(var_3d0b3418ba9f14e3)) {
+  if(istrue(onlyz)) {
     return (0, 0, var_24b3eebde46c7bf7);
   }
 
   return (var_24b3f0bde46c805d, var_24b3efbde46c7e2a, var_24b3eebde46c7bf7);
 }
 
-function calculaterotationmatrixaroundz(var_1c36976f30623512, theta, var_3d0b3618ba9f1949, var_3d0b3518ba9f1716, var_3d0b3418ba9f14e3) {
+function calculaterotationmatrixaroundz(var_1c36976f30623512, theta, var_3d0b3618ba9f1949, var_3d0b3518ba9f1716, onlyz) {
   x = vectordot(var_1c36976f30623512, (1, 0, 0));
   y = vectordot(var_1c36976f30623512, (0, 1, 0));
   z = vectordot(var_1c36976f30623512, (0, 0, 1));
@@ -542,7 +542,7 @@ function calculaterotationmatrixaroundz(var_1c36976f30623512, theta, var_3d0b361
     return (0, var_24b3efbde46c7e2a, 0);
   }
 
-  if(istrue(var_3d0b3418ba9f14e3)) {
+  if(istrue(onlyz)) {
     return (0, 0, var_24b3eebde46c7bf7);
   }
 

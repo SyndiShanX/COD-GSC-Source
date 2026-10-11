@@ -244,9 +244,9 @@ function call_elevator(call_floor) {
 }
 
 function get_floor(player) {
-  var_bd15884f5cd41f16 = get_outer_doorsets();
+  bifloor = get_outer_doorsets();
 
-  if(var_bd15884f5cd41f16.size == 2) {
+  if(bifloor.size == 2) {
     curfloor = get_curfloor();
     self.moveto_floor = !curfloor;
     return;
@@ -464,8 +464,8 @@ function build_elevators() {
   assertex(isDefined(elevator_groups) && elevator_groups.size, "Radiant: Missing elevator bounding origins");
   var_20aa4eadbc86b00 = getEntArray("elevator_housing", "targetname");
   assertex(isDefined(var_20aa4eadbc86b00) && var_20aa4eadbc86b00.size >= elevator_groups.size, "Fail! Missing the whole elevator, script_brushmodel with [targetname = elevator_housing] must be correctly placed");
-  var_99d29b5b670be15 = getEntArray("elevator_doorset", "targetname");
-  assertex(isDefined(var_99d29b5b670be15) && var_99d29b5b670be15.size >= elevator_groups.size, "Radiant: Missing elevator door(s)");
+  elevator_doorsets = getEntArray("elevator_doorset", "targetname");
+  assertex(isDefined(elevator_doorsets) && elevator_doorsets.size >= elevator_groups.size, "Radiant: Missing elevator door(s)");
 
   foreach(elevator_bound in elevator_groups) {
     var_57dff06718226286 = getEnt(elevator_bound.target, "targetname");
@@ -491,15 +491,15 @@ function build_elevators() {
           continue;
         }
 
-        var_29a503d62f6811d9 = getEnt(elevator_housing.target, "targetname");
-        parts.e["housing"]["left_door"] = var_29a503d62f6811d9;
-        parts.e["housing"]["left_door_opened_pos"] = var_29a503d62f6811d9.origin;
-        var_b6a12b29f856d2c2 = getEnt(var_29a503d62f6811d9.target, "targetname");
-        parts.e["housing"]["right_door"] = var_b6a12b29f856d2c2;
-        parts.e["housing"]["right_door_opened_pos"] = var_b6a12b29f856d2c2.origin;
-        var_701670bfd9f3bf8 = (var_29a503d62f6811d9.origin - var_b6a12b29f856d2c2.origin) * (0.5, 0.5, 0.5) + var_b6a12b29f856d2c2.origin;
+        inner_leftdoor = getEnt(elevator_housing.target, "targetname");
+        parts.e["housing"]["left_door"] = inner_leftdoor;
+        parts.e["housing"]["left_door_opened_pos"] = inner_leftdoor.origin;
+        inner_rightdoor = getEnt(inner_leftdoor.target, "targetname");
+        parts.e["housing"]["right_door"] = inner_rightdoor;
+        parts.e["housing"]["right_door_opened_pos"] = inner_rightdoor.origin;
+        var_701670bfd9f3bf8 = (inner_leftdoor.origin - inner_rightdoor.origin) * (0.5, 0.5, 0.5) + inner_rightdoor.origin;
         parts.e["housing"]["door_closed_pos"] = var_701670bfd9f3bf8;
-        door_trigger = getEnt(var_b6a12b29f856d2c2.target, "targetname");
+        door_trigger = getEnt(inner_rightdoor.target, "targetname");
         parts.e["housing"]["door_trigger"] = door_trigger;
         inside_trigger = getEnt(door_trigger.target, "targetname");
         parts.e["housing"]["inside_trigger"] = inside_trigger;
@@ -512,7 +512,7 @@ function build_elevators() {
     assert(isDefined(parts.e["housing"]));
     parts.e["outer_doorset"] = [];
 
-    foreach(elevator_doorset in var_99d29b5b670be15) {
+    foreach(elevator_doorset in elevator_doorsets) {
       if(elevator_doorset isinbound(var_4195778095aaca54)) {
         var_d1c3449bfb5c7cd0 = isDefined(elevator_doorset.script_noteworthy) && elevator_doorset.script_noteworthy == "closed_for_lighting";
         var_f6a5cf1c5d09a6fe = parts.e["outer_doorset"].size;
@@ -579,7 +579,7 @@ function build_elevators() {
     var_57dff06718226286 delete();
   }
 
-  foreach(elevator_doorset in var_99d29b5b670be15) {
+  foreach(elevator_doorset in elevator_doorsets) {
     elevator_doorset delete();
   }
 
@@ -789,15 +789,15 @@ function get_housing_models() {
 
 function get_housing_primarylight() {
   parts = self.e["housing"]["mainframe"];
-  var_6ddff02957646117 = [];
+  temp_primarylights = [];
 
   foreach(part in parts) {
     if(part.code_classname == "light") {
-      var_6ddff02957646117[var_6ddff02957646117.size] = part;
+      temp_primarylights[temp_primarylights.size] = part;
     }
   }
 
-  return var_6ddff02957646117;
+  return temp_primarylights;
 }
 
 function get_housing_musak_model() {
@@ -868,24 +868,24 @@ function waittill_finish_moving(ent1, var_e46b13ef3f8c9dcb, ent2, var_4ed727c032
   }
 }
 
-function isinbound(var_45287878f0bc903f) {
+function isinbound(bounding_box) {
   assertex(isDefined(self) && isDefined(self.origin), "Fail! Can not test bounds with the entity called on");
   v_x = self.origin[0];
   v_y = self.origin[1];
-  min_x = var_45287878f0bc903f[0];
-  max_x = var_45287878f0bc903f[1];
-  min_y = var_45287878f0bc903f[2];
-  max_y = var_45287878f0bc903f[3];
+  min_x = bounding_box[0];
+  max_x = bounding_box[1];
+  min_y = bounding_box[2];
+  max_y = bounding_box[3];
   return v_x >= min_x && v_x <= max_x && v_y >= min_y && v_y <= max_y;
 }
 
-function isinboundingspere(var_45287878f0bc903f) {
+function isinboundingspere(bounding_box) {
   v_x = self.origin[0];
   v_y = self.origin[1];
-  min_x = var_45287878f0bc903f[0];
-  max_x = var_45287878f0bc903f[1];
-  min_y = var_45287878f0bc903f[2];
-  max_y = var_45287878f0bc903f[3];
+  min_x = bounding_box[0];
+  max_x = bounding_box[1];
+  min_y = bounding_box[2];
+  max_y = bounding_box[3];
   mid_x = (min_x + max_x) / 2;
   mid_y = (min_y + max_y) / 2;
   radius = abs(distance((min_x, min_y, 0), (mid_x, mid_y, 0)));

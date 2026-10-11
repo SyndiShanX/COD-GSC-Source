@@ -16,7 +16,7 @@
 #using scripts\common\callbacks;
 #using scripts\common\utility;
 #using scripts\engine\utility;
-#namespace namespace_5a87d005bee83137;
+#namespace zombie_abom_asm;
 
 function precache(params) {
   function_cf142512f48666b7(params);

@@ -16,12 +16,12 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_enemy_specialist_bishop");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_4815c41776311ed2");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_4815c41776311ed2");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 480;
   self.maxhealth = 480;
   self.behaviortreeasset = "rusher_jup_ob";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "rusher";
   scripts\common\ai_settings::function_7b25d1c42e7f75be("aisettings_soldier_base_ob");
   primaryweaponhash = "iw9_pi_decho, [ comp_decho_03, laserir_pstl, pgrip_tac_p25 ], none, none";
@@ -46,9 +46,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();

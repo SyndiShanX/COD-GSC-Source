@@ -26,10 +26,10 @@ function chooseanim_customidle(asmname, statename, params) {
 }
 
 function function_c929d0a507d24467(asmname, statename, tostatename, params) {
-  return isDefined(self.var_ddad29bbdecd1671);
+  return isDefined(self.customarrivalhandler);
 }
 
 function function_a08c428057e0222a(asmname, statename, params) {
-  assert(isDefined(self.var_ddad29bbdecd1671));
-  self[[self.var_ddad29bbdecd1671]]();
+  assert(isDefined(self.customarrivalhandler));
+  self[[self.customarrivalhandler]]();
 }

@@ -242,11 +242,11 @@ function private function_673f910f067ac67a(structname) {
 
     if(var_cbc63cf0f68e053f) {
       statename = function_15468d13080662ca(loc.var_2023ce1979fe53f7);
-      var_cbc63cf0f68e053f = statename != function_1823ff50bb28148d(loc.areaswap_state);
+      var_cbc63cf0f68e053f = statename != getxhash(loc.areaswap_state);
     }
 
     if(var_cbc63cf0f68e053f) {
-      function_a630813f938520d5(loc, function_1823ff50bb28148d(loc.var_2023ce1979fe53f7), function_1823ff50bb28148d(loc.areaswap_state));
+      function_a630813f938520d5(loc, getxhash(loc.var_2023ce1979fe53f7), getxhash(loc.areaswap_state));
     } else {
       function_a80b36bc796b3a90(loc);
     }

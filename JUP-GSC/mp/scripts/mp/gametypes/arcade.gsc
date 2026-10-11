@@ -122,7 +122,7 @@ function private function_e88d9ec1d5270bad() {
   level.aonloadout["loadoutFieldUpgrade2"] = "none";
 }
 
-function function_2a1ce8d7b1f21db9(player) {
+function spawn_aliens(player) {
   player endon("death");
   player endon("disconnect");
 
@@ -163,7 +163,7 @@ function find_player() {
 
   while(true) {
     ai setgoalpos(getclosestpointonnavmesh(level.player.origin), 16);
-    ai.var_d4ae052f5bda013 = 0;
+    ai.bhasnopath = 0;
     ai.goalradius = 16;
     ai.stealth_enabled = 0;
     ai.pathenemyfightdist = 0;
@@ -340,7 +340,7 @@ function getspawnpoint() {
 function onspawnplayer(revivespawn) {
   scripts\mp\hud_message::function_f004ef4606b9efdc("kill");
   thread function_c97e11b8cda0d02a();
-  level thread function_2a1ce8d7b1f21db9(self);
+  level thread spawn_aliens(self);
 
   if(!istrue(level.testtdmanywhere)) {
     return;

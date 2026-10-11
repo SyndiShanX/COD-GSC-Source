@@ -152,8 +152,8 @@ function reset_player_damage_performance(player) {
 
 function calculate_damage_score(player, var_41a9c90605002d6f) {
   var_af7452d5c3c28da1 = get_player_encounter_performance(player, "damage_done_on_agent");
-  var_5665f99b8d71126a = min(999999, var_af7452d5c3c28da1 * 0.2);
-  return int(var_5665f99b8d71126a);
+  damage_done_score_earned = min(999999, var_af7452d5c3c28da1 * 0.2);
+  return int(damage_done_score_earned);
 }
 
 function update_agent_damage_performance(eattacker, idamage, smeansofdeath) {

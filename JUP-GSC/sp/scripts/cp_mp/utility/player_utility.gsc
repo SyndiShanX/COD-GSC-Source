@@ -50,9 +50,9 @@ function setusingremote(remotename) {
   }
 }
 
-function clearusingremote(var_2c111f02d48e2671) {
+function clearusingremote(bypassweaponswitch) {
   if(issharedfuncdefined("player", "clearUsingRemote")) {
-    [[getsharedfunc("player", "clearUsingRemote")]](var_2c111f02d48e2671);
+    [[getsharedfunc("player", "clearUsingRemote")]](bypassweaponswitch);
   }
 }
 

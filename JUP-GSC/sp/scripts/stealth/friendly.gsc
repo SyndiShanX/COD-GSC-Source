@@ -34,7 +34,7 @@ function init_settings() {
   ent_flag_init("stealth_in_shadow");
   scripts\stealth\utility::group_flag_init("stealth_spotted");
   scripts\stealth\utility::group_add();
-  self.var_fe5ebefa740c7106 = 0;
+  self.stealth_bsmstate = 0;
 }
 
 function spotted_thread() {

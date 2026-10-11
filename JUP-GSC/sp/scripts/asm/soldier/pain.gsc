@@ -230,7 +230,7 @@ function choosedirectionalpainanim_transition(asmname, statename, params) {
   return asm_getrandomanim(statename);
 }
 
-function playpainaniminternal(asmname, statename, params, var_837bcc3e005feb5d, var_96d69c0cc6fb90c1, statenameoverride, var_b6a66cc6c81067a0, var_94987ccb5819c6e9) {
+function playpainaniminternal(asmname, statename, params, shouldplayadditives, var_96d69c0cc6fb90c1, statenameoverride, dontsetorientmode, var_94987ccb5819c6e9) {
   self endon(statename + "_finished");
 
   if(isDefined(self.a.paintime)) {
@@ -260,7 +260,7 @@ function playpainaniminternal(asmname, statename, params, var_837bcc3e005feb5d, 
 
   self animmode("gravity");
 
-  if(!istrue(var_b6a66cc6c81067a0)) {
+  if(!istrue(dontsetorientmode)) {
     self orientmode("face angle", self.angles[1]);
   }
 
@@ -595,7 +595,7 @@ function transition_flashfinished(asmname, fromstate, tostate, params) {
   return asm_eventfired(asmname, "end") || asm_eventfired(asmname, "finish");
 }
 
-function function_f0cf338a66c2a842(asmname, statename, params) {
+function playanim_stunned(asmname, statename, params) {
   if(isDefined(self.stunnedcallback)) {
     self[[self.stunnedcallback]]();
   }
@@ -669,10 +669,10 @@ function cleanupflashanim(asmname, statename, params) {
 
 function playanim_burning(asmname, statename, params) {
   self endon(statename + "_finished");
-  var_fc3f189c0832aec2 = scripts\anim\battlechatter_events::function_c666e714b2411844(self.damageweapon);
+  bcs_subcategory = scripts\anim\battlechatter_events::function_c666e714b2411844(self.damageweapon);
 
-  if(isDefined(var_fc3f189c0832aec2)) {
-    function_216c67ab6749137a(self, undefined, "burn", var_fc3f189c0832aec2);
+  if(isDefined(bcs_subcategory)) {
+    addbattlechatternotify(self, undefined, "burn", bcs_subcategory);
   }
 
   burninganim = asm_getanim(asmname, statename, params);
@@ -805,18 +805,18 @@ function clearpainturnrate(asmname, statename, params) {
 }
 
 function function_111158d9cee51970(asmname, statename, params) {
-  var_5443645c78427889 = undefined;
+  animaliasparam = undefined;
 
   if(isDefined(params) && isstring(params)) {
-    var_5443645c78427889 = params;
+    animaliasparam = params;
   }
 
   self endon(statename + "_finished");
   self orientmode("face current");
   self animmode("live_ragdoll");
 
-  if(isDefined(var_5443645c78427889)) {
-    animid = asm_getanim(asmname, statename, var_5443645c78427889);
+  if(isDefined(animaliasparam)) {
+    animid = asm_getanim(asmname, statename, animaliasparam);
   } else {
     animid = asm_getanim(asmname, statename);
   }
@@ -865,8 +865,8 @@ function function_b3b20911062201ad() {
   scripts\anim\shared::placeweaponon(self.weapon, "right");
 }
 
-function function_e585c560d79f00f8(asmname, statename, tostatename, params) {
-  return istrue(self.var_e585c560d79f00f8);
+function disablerunpain(asmname, statename, tostatename, params) {
+  return istrue(self.disablerunpain);
 }
 
 function function_5e9e03bdd9237c0f(asmname, statename, params) {

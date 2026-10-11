@@ -224,14 +224,14 @@ function prekillcamnotify(attacker) {
       attacker makeentitysentient(team);
 
       if(!isDefined(level.var_58a42cd072629ca) || [[level.var_58a42cd072629ca]]()) {
-        self function_bc667001f9dd3808(attacker getEye());
+        self predictstreamposuntilcleared(attacker getEye());
       }
 
       return;
     }
 
     if(!isDefined(level.var_58a42cd072629ca) || [[level.var_58a42cd072629ca]]()) {
-      self function_bc667001f9dd3808(attacker getEye());
+      self predictstreamposuntilcleared(attacker getEye());
     }
 
     if(isPlayer(attacker)) {
@@ -310,7 +310,7 @@ function calckillcamtimes(einflictor, inflictoragentinfo, attacker, attackernum,
     } else if(isDefined(einflictor.sentrytype) && einflictor.sentrytype == "multiturret") {
       camtime = 2;
     } else if(objweapon.basename == "ims_charge_explosive_mp" && issharedfuncdefined("ims", "ims_getKillCamTime")) {
-      camtime = function_f3bb4f4911a1beb2("ims", "ims_getKillCamTime");
+      camtime = callsharedfunc("ims", "ims_getKillCamTime");
     } else if(!var_53c65e436a20e8e4 || var_53c65e436a20e8e4 > 5) {
       camtime = 5;
     } else if(weaponrootname == "frag_grenade" || objweapon.basename == "frag_grenade_short_mp" || objweapon.basename == "semtex_mp" || objweapon.basename == "semtexproj_mp" || objweapon.basename == "mortar_shell__mp" || objweapon.basename == "cluster_grenade_mp") {
@@ -472,7 +472,7 @@ function killcam(einflictor, inflictoragentinfo, attackernum, killcamentityindex
     level endon("game_ended");
   }
 
-  function_f3bb4f4911a1beb2("super_evg", "evg_handleKillcam", attacker);
+  callsharedfunc("super_evg", "evg_handleKillcam", attacker);
   printspawnmessage("killcam::killcam() START");
   resetplayeromnvarsonkillcam();
 

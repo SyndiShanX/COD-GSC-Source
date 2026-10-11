@@ -717,7 +717,7 @@ function function_9478a061111af71f(fade_state, var_a1d797ec9d2d9038, callback_fu
 
 function function_44ee9d2850aafaf5() {
   if(function_ada0825249682644("hud_fade_overlay")) {
-    function_fb3c9a259f146781("hud_fade_overlay");
+    scripted_widget_destroy("hud_fade_overlay");
   }
 }
 
@@ -789,7 +789,7 @@ function fade_in(time, shader) {
     return;
   }
 
-  if(function_3cb5da19764baa3() == "T10" && (!isDefined(shader) || shader == "black")) {
+  if(getprojectname() == "T10" && (!isDefined(shader) || shader == "black")) {
     fadestate = function_c83baa57f3055403(time, 1);
     level.player function_9478a061111af71f(fadestate, 1);
     return;
@@ -821,7 +821,7 @@ function get_optional_overlay(shader) {
 }
 
 function fade_out(time, shader) {
-  if(function_3cb5da19764baa3() == "T10" && (!isDefined(shader) || shader == "black")) {
+  if(getprojectname() == "T10" && (!isDefined(shader) || shader == "black")) {
     fadestate = function_c83baa57f3055403(time, 0);
     level.player function_9478a061111af71f(fadestate, 0);
     return;

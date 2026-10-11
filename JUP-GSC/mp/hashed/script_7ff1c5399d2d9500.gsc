@@ -51,7 +51,7 @@ function init() {
   level.vault_manager thread function_f5041efcb5c830e0();
   level.vault_manager thread function_50eaf1d6526a26c3();
   level.vault_manager thread function_ed2e505118e05ca4();
-  level.vault_manager.var_6c29f2fdb0054bbe = [];
+  level.vault_manager.playerparticipants = [];
 }
 
 function function_d248cfa981edc561() {
@@ -169,7 +169,7 @@ function function_145c21969dc1144d(requestid, instance, agent, data) {
     agent namespace_c77c96f1aa8fcce1::function_5213d881f2e26966(agent.origin, 1000);
     agent waittill("death", attacker);
     var_c9b69aecc5c631ed = attacker scripts\cp_mp\utility\squad_utility::getsquadmembers();
-    self.vault_manager.var_6c29f2fdb0054bbe = array_combine_unique(self.vault_manager.var_6c29f2fdb0054bbe, var_c9b69aecc5c631ed);
+    self.vault_manager.playerparticipants = array_combine_unique(self.vault_manager.playerparticipants, var_c9b69aecc5c631ed);
     agent function_3ecabd59662c63e4("b");
     agent thread function_9749f093b0e831ec("ob_jup_item_weapon_pi_decho" + "_blue");
     function_c7311cb3f768f21e("bishop_encounter", 40);
@@ -249,12 +249,12 @@ function function_213b8f238df26b55(requestid, instance, agent, data) {
   agent.ignoreme = 1;
   agent.accuracy = 1;
   agent.forcesuppressai = 1;
-  agent.var_51642e27c7e7d224 = 0;
+  agent.disablesuppressingfire = 0;
   agent function_65cdab0fc78aba8f(agent.origin, 5000);
   agent setgoalpos(agent.origin, 126);
   agent waittill("death", attacker);
   var_c9b69aecc5c631ed = attacker scripts\cp_mp\utility\squad_utility::getsquadmembers();
-  self.vault_manager.var_6c29f2fdb0054bbe = array_combine_unique(self.vault_manager.var_6c29f2fdb0054bbe, var_c9b69aecc5c631ed);
+  self.vault_manager.playerparticipants = array_combine_unique(self.vault_manager.playerparticipants, var_c9b69aecc5c631ed);
   agent function_3ecabd59662c63e4("r");
   agent thread function_9749f093b0e831ec("ob_jup_item_weapon_sn_boscar" + "_blue");
 }
@@ -374,7 +374,7 @@ function function_50eaf1d6526a26c3() {
 
 function private function_a8e25edd9bd5d91(transmission_device, player) {
   var_c9b69aecc5c631ed = player scripts\cp_mp\utility\squad_utility::getsquadmembers();
-  level.vault_manager.var_6c29f2fdb0054bbe = array_combine_unique(level.vault_manager.var_6c29f2fdb0054bbe, var_c9b69aecc5c631ed);
+  level.vault_manager.playerparticipants = array_combine_unique(level.vault_manager.playerparticipants, var_c9b69aecc5c631ed);
   s_vault_pawn_encounter = getStruct("s_vault_pawn_encounter", "targetname");
 
   if(isDefined(s_vault_pawn_encounter)) {
@@ -438,10 +438,10 @@ function private function_bed20391ba8dcfce(requestid, instance, agent, data) {
   if(agent.agent_type == "actor_jup_ob_enemy_specialist_knight") {
     instance.knight_ai = agent;
     agent.var_7e4b076a06c6df27 = 1;
-    agent.var_534e788bc498be9f.displayname = &"JUP_OB_OBJECTIVES/THE_KNIGHT";
+    agent.subclass_scriptbundle.displayname = &"JUP_OB_OBJECTIVES/THE_KNIGHT";
     agent waittill("death", attacker);
     var_c9b69aecc5c631ed = attacker scripts\cp_mp\utility\squad_utility::getsquadmembers();
-    self.vault_manager.var_6c29f2fdb0054bbe = array_combine_unique(self.vault_manager.var_6c29f2fdb0054bbe, var_c9b69aecc5c631ed);
+    self.vault_manager.playerparticipants = array_combine_unique(self.vault_manager.playerparticipants, var_c9b69aecc5c631ed);
     agent function_3ecabd59662c63e4("h");
     agent thread function_9749f093b0e831ec("ob_jup_item_weapon_lm_foxtrot" + "_blue");
   }
@@ -479,7 +479,7 @@ function private function_9f49e74f355beae1() {
         function_a2f48e85dd453198(players);
       }
 
-      function_42eb11c189051210(40);
+      set_vehicle_speed(40);
 
       if(isDefined(self.team) && self.team != "team_hundred_ninety") {
         scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_setteam(self, "team_hundred_ninety");
@@ -491,7 +491,7 @@ function private function_9f49e74f355beae1() {
         function_e3eed47d3d829f6a();
       }
     } else {
-      function_42eb11c189051210(26);
+      set_vehicle_speed(26);
 
       if(isDefined(self.team) && self.team != "neutral") {
         scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_setteam(self, "neutral");
@@ -515,13 +515,13 @@ function private function_e3eed47d3d829f6a(var_49e1c02ad714708e) {
   }
 }
 
-function private function_42eb11c189051210(vehicle_speed, var_3464e6452137cd18) {
+function private set_vehicle_speed(vehicle_speed, var_3464e6452137cd18) {
   if(!isDefined(var_3464e6452137cd18)) {
     var_3464e6452137cd18 = 30;
   }
 
   if(!self.var_365e0ef7b20d47d8) {
-    self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(vehicle_speed));
+    self setconfigvalue("p2p", "manualSpeed", mph_to_ips(vehicle_speed));
     self vehicle_setspeedimmediate(0, 1, 1);
     childthread function_c87978976b1e2686("speed", var_3464e6452137cd18);
   }
@@ -572,8 +572,8 @@ function private function_90a3bfcfefc8a07a(player) {
 }
 
 function private function_9ca6ea0ca85c0fbf() {
-  self function_65aa053c077c003a(1);
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(0));
+  self vehphys_parkingbrake(1);
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(0));
   self vehicle_setspeedimmediate(0, 1, 1);
   self vehicle_cleardrivingstate();
   self.isstopped = 1;
@@ -597,8 +597,8 @@ function private function_9ca6ea0ca85c0fbf() {
 
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_setteam(self, "neutral");
   self setscriptablepartstate("single", "vehicle_use");
-  self function_9cab25983e27246();
-  self function_65aa053c077c003a(0);
+  self vehicleclearanims();
+  self vehphys_parkingbrake(0);
   function_38d372701ae1e2d9(self.requestid);
   thread function_598bba9d433d8d5a(self.requestid);
 }
@@ -648,12 +648,12 @@ function private function_5a285e11881bf4c4() {
   function_b61f675503083701();
   goalpoint = getStruct("vault_knight_h_to_e", "targetname");
   self vehicle_teleport(goalpoint.origin + (0, 0, 100), goalpoint.angles);
-  var_bfe90410fad38aaa = mph_to_ips(var_6b962f57738d2659);
-  self function_77320e794d35465a("p2p", "manualSpeed", var_bfe90410fad38aaa);
+  speedips = mph_to_ips(var_6b962f57738d2659);
+  self setconfigvalue("p2p", "manualSpeed", speedips);
   thread scripts\common\vehicle_paths::checkvehiclenavsplinestuck();
 
   while(isDefined(goalpoint)) {
-    self function_77320e794d35465a("p2p", "goalPoint", goalpoint.origin);
+    self setconfigvalue("p2p", "goalPoint", goalpoint.origin);
     self waittill("near_goal");
     oldgoalpoint = goalpoint;
     goalpoint = getStruct(goalpoint.target, "targetname");
@@ -694,25 +694,25 @@ function private function_b61f675503083701(addpath, var_784030f0b32d0f1d) {
     }
   }
 
-  self function_77320e794d35465a("p2p", "checkStuck", 0);
-  self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
-  self function_77320e794d35465a("p2p", "automaticNormal", 1);
-  self function_77320e794d35465a("p2p", "brakeOnGoalGasbrake", 1);
-  self function_77320e794d35465a("p2p", "goalPoint", self.origin);
-  self function_77320e794d35465a("p2p", "goalThreshold", 200);
-  self function_77320e794d35465a("p2p", "throttleSpeedClose", 1);
-  self function_77320e794d35465a("p2p", "throttleSpeedThreshold", 1);
-  self function_77320e794d35465a("p2p", "automaticFastTopspeedFraction", 1);
-  self function_77320e794d35465a("p2p", "throttleSpeedFarBelow", 1);
-  self function_77320e794d35465a("p2p", "throttleSpeedFarAbove", 4);
-  self function_77320e794d35465a("p2p", "throttleSpeedClose", 2);
-  self function_77320e794d35465a("p2p", "gasToStopMovement", 0.9);
-  self function_77320e794d35465a("p2p", "steeringMultiplier", 2);
-  self function_77320e794d35465a("path", "radiusToStep", 300);
+  self setconfigvalue("p2p", "checkStuck", 0);
+  self setconfigvalue("p2p", "brakeAtGoal", 1);
+  self setconfigvalue("p2p", "automaticNormal", 1);
+  self setconfigvalue("p2p", "brakeOnGoalGasbrake", 1);
+  self setconfigvalue("p2p", "goalPoint", self.origin);
+  self setconfigvalue("p2p", "goalThreshold", 200);
+  self setconfigvalue("p2p", "throttleSpeedClose", 1);
+  self setconfigvalue("p2p", "throttleSpeedThreshold", 1);
+  self setconfigvalue("p2p", "automaticFastTopspeedFraction", 1);
+  self setconfigvalue("p2p", "throttleSpeedFarBelow", 1);
+  self setconfigvalue("p2p", "throttleSpeedFarAbove", 4);
+  self setconfigvalue("p2p", "throttleSpeedClose", 2);
+  self setconfigvalue("p2p", "gasToStopMovement", 0.9);
+  self setconfigvalue("p2p", "steeringMultiplier", 2);
+  self setconfigvalue("path", "radiusToStep", 300);
   self.stopping = 0;
 }
 
-function private function_a646f25304f0c578(splinepoints, var_bfe90410fad38aaa) {
+function private function_a646f25304f0c578(splinepoints, speedips) {
   durations = [];
   assert(splinepoints.size <= 48);
 
@@ -720,7 +720,7 @@ function private function_a646f25304f0c578(splinepoints, var_bfe90410fad38aaa) {
     for(index = 0; index < splinepoints.size - 1; index++) {
       currentpoint = splinepoints[index];
       nextpoint = splinepoints[index + 1];
-      durations[durations.size] = function_215e10bf17f98702(currentpoint, nextpoint, var_bfe90410fad38aaa);
+      durations[durations.size] = function_215e10bf17f98702(currentpoint, nextpoint, speedips);
     }
 
     durations[durations.size] = durations[durations.size - 1];
@@ -813,7 +813,7 @@ function function_94b78afd5298be48(var_c606b11086a2b24b) {
       self.unlock_terminal disablescriptableplayeruse(player);
     }
 
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       if(isPlayer(player)) {
         self.unlock_terminal enablescriptableplayeruse(player);
       }
@@ -838,7 +838,7 @@ function function_8884edbcdf7fafcf(var_27d6902091f45267, var_92d6f86c9665c12e) {
   }
 }
 
-function private function_29e2ee863284984c(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_29e2ee863284984c(instance, part, state, player, bautouse, usestring) {
   if(!isPlayer(player)) {
     return;
   }

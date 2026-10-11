@@ -75,7 +75,7 @@ function throwing_knife_mp_trytopickup(equipmentref, variantid) {
   return true;
 }
 
-function function_4d6d6bc790611975(eattacker, einflictor, victim, idamage, objweapon, smeansofdeath, shitloc, idflags, var_be4285b26ed99ab1, unmodifieddamage, partname, var_1da1a66b5c6a06a7) {
+function function_4d6d6bc790611975(eattacker, einflictor, victim, idamage, objweapon, smeansofdeath, shitloc, idflags, var_be4285b26ed99ab1, unmodifieddamage, partname, lightarmordamage) {
   if(!scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
     return;
   }
@@ -109,12 +109,12 @@ function function_4d6d6bc790611975(eattacker, einflictor, victim, idamage, objwe
   }
 
   if(victim.armorhealth > 0 && idamage <= victim.armorhealth) {
-    var_1da1a66b5c6a06a7 = idamage;
+    lightarmordamage = idamage;
   } else {
-    healthdamage = idamage - var_1da1a66b5c6a06a7;
+    healthdamage = idamage - lightarmordamage;
   }
 
-  return [healthdamage, var_1da1a66b5c6a06a7];
+  return [healthdamage, lightarmordamage];
 }
 
 function function_3ea0bf8465c74efc(victim, partname) {

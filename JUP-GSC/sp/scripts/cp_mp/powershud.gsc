@@ -63,8 +63,8 @@ function powershud_updatepowermaxcharges(slot, maxcharges) {
   self setclientomnvar(powershud_getslotomnvar(slot, 1), int(maxcharges));
 }
 
-function powershud_updatepowerdrain(slot, var_bc08c87c9773ae0) {
-  self setclientomnvar(powershud_getslotomnvar(slot, 4), var_bc08c87c9773ae0);
+function powershud_updatepowerdrain(slot, is_draining) {
+  self setclientomnvar(powershud_getslotomnvar(slot, 4), is_draining);
 }
 
 function powershud_updatepowermeter(slot, meter_value) {
@@ -76,8 +76,8 @@ function powershud_updatepowerdisabled(slot, disabled) {
 }
 
 function powershud_updatepoweroffcooldown(slot, oncooldown) {
-  var_cabc886d846dd979 = ter_op(oncooldown, 1, 0);
-  self setclientomnvar(powershud_getslotomnvar(slot, 6), var_cabc886d846dd979);
+  omnvarval = ter_op(oncooldown, 1, 0);
+  self setclientomnvar(powershud_getslotomnvar(slot, 6), omnvarval);
 }
 
 function powershud_updatepowerstate(slot, state) {
@@ -126,7 +126,7 @@ function powershud_updatepowerdrainprogress(slot, percent) {
   powershud_updatepowermeter(slot, 1000 * percent);
 }
 
-function powershud_getslotomnvar(slot, var_b09f732395c5d400) {
+function powershud_getslotomnvar(slot, omnvar_ref) {
   if(slot == "scripted") {
     return;
   }
@@ -134,5 +134,5 @@ function powershud_getslotomnvar(slot, var_b09f732395c5d400) {
   assert(isDefined(level.power_hud_info));
   assert(isDefined(level.power_hud_info.omnvarnames));
   assert(isDefined(level.power_hud_info.omnvarnames[slot]));
-  return level.power_hud_info.omnvarnames[slot][var_b09f732395c5d400];
+  return level.power_hud_info.omnvarnames[slot][omnvar_ref];
 }

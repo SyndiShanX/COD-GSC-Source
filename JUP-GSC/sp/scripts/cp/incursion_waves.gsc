@@ -248,7 +248,7 @@ function function_8f1f42604edb1fd9(body, head, weapon, grenade_type, armor, helm
 }
 
 function function_130532172349e887() {
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
 }
 
 function function_ad05e00ece389a29() {
@@ -460,7 +460,7 @@ function function_9c1525e5e9da73f2(module_name, spawner_name, min_override, max_
     min_dist = min_override;
   }
 
-  var_6a3cc2111e30d71d = min_dist * min_dist;
+  min_dist_sq = min_dist * min_dist;
   spawners = [];
   num = 5;
 
@@ -493,7 +493,7 @@ function function_9c1525e5e9da73f2(module_name, spawner_name, min_override, max_
   }
 
   for(i = 0; i < var_eeca462ce9f2a320.size; i++) {
-    if(distancesquared(org, var_eeca462ce9f2a320[i].origin) > var_6a3cc2111e30d71d) {
+    if(distancesquared(org, var_eeca462ce9f2a320[i].origin) > min_dist_sq) {
       spawners[spawners.size] = var_eeca462ce9f2a320[i];
 
       if(spawners.size > num) {

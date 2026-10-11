@@ -16,7 +16,7 @@
 function main() {
   level.dialogue_playing = 0;
   level.current_dialogue = "";
-  level.var_9a62261b5b534b06 = &function_7c1afbf215d163de;
+  level.vo_playsoundfunc = &function_7c1afbf215d163de;
   level.var_c3d9ceba74248998 = &function_e136e2ae04079980;
   level.var_1da0697a602f5a04 = &function_46b7602a9a7bf8b4;
 }
@@ -27,7 +27,7 @@ function function_e136e2ae04079980(origin, radius, desiredteam, excludeents) {
   }
 
   if(function_a794fcf9545f2062()) {
-    return function_b1eef70090b5b7b5(origin, radius, function_869ccb4e3451b8c6(["etype_player"]), excludeents, desiredteam);
+    return getentitiesinradiusfrompartitiongrid(origin, radius, createentitytypemask(["etype_player"]), excludeents, desiredteam);
   }
 
   var_7f25e2c1d613b4d0 = [];
@@ -57,7 +57,7 @@ function function_46b7602a9a7bf8b4(origin, radius, desiredteam, excludeents) {
   }
 
   if(function_a794fcf9545f2062()) {
-    return function_b1eef70090b5b7b5(origin, radius, function_869ccb4e3451b8c6(["etype_ai"]), excludeents, desiredteam);
+    return getentitiesinradiusfrompartitiongrid(origin, radius, createentitytypemask(["etype_ai"]), excludeents, desiredteam);
   }
 
   if(isDefined(excludeents) && excludeents.size) {
@@ -183,9 +183,9 @@ function get_intensity(alias) {
     return self.var_9af882a4ef5986c0;
   }
 
-  var_c59c1d18b26c886e = ["sm", "sm", "md", "lg"];
+  intensities = ["sm", "sm", "md", "lg"];
   intensity = default_to(function_d159656d2b07f8a5(alias), 0);
-  return var_c59c1d18b26c886e[intensity];
+  return intensities[intensity];
 }
 
 function function_6b4248f9a3f02e2(alias, audience) {
@@ -354,7 +354,7 @@ function anim_facialfiller(msg, looktarget, force, msg_ent, intensity) {
   }
 
   archetype = scripts\asm\shared\utility::function_2285421dfc79c4d5();
-  var_6b7315aedc52f8e2 = self.defaulttalk;
+  talkanim = self.defaulttalk;
   headknob = self.scriptedtalkingknob;
   assert(isalive(self));
   scripts\asm\shared\utility::setfacialstate("filler");
@@ -368,7 +368,7 @@ function anim_facialfiller(msg, looktarget, force, msg_ent, intensity) {
       scripts\asm\shared\utility::setfacialindexfornonai("talk_" + intensity);
     }
   } else {
-    self setanimknoblimitedrestart(var_6b7315aedc52f8e2, 1, 0, 1);
+    self setanimknoblimitedrestart(talkanim, 1, 0, 1);
     self setanim(headknob, 5, 0.267);
   }
 
@@ -376,7 +376,7 @@ function anim_facialfiller(msg, looktarget, force, msg_ent, intensity) {
 
   if(archetype != "" && isai(self)) {
     self setfacialindex("none");
-  } else if(istrue(self.var_5247d15da29e8539) && isDefined(self.var_7a140ee03cfc699e)) {
+  } else if(istrue(self.var_5247d15da29e8539) && isDefined(self.capanimset)) {
     scripts\asm\shared\utility::function_ee3e5d584e317d35("none");
   }
 

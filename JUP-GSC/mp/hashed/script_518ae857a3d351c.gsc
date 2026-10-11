@@ -184,7 +184,7 @@ function setup_sentry(var_804269875f5062f1, team, damage_type, turret_model, par
 }
 
 function sentryturret_empstarted(data) {
-  if(isDefined(data.attacker) && isPlayer(data.attacker) && function_f3bb4f4911a1beb2("game", "getGameType") != "wm") {
+  if(isDefined(data.attacker) && isPlayer(data.attacker) && callsharedfunc("game", "getGameType") != "wm") {
     if(scripts\engine\utility::issharedfuncdefined("player", "doScoreEvent")) {
       data.attacker thread[[scripts\engine\utility::getsharedfunc("player", "doScoreEvent")]](#"hash_7410841fd4c63028");
     }
@@ -399,7 +399,7 @@ function function_ee8a913e5baf0c5d() {
   return false;
 }
 
-function function_836cdac4b1d38941(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_836cdac4b1d38941(instance, part, state, player, bautouse, usestring) {
   if(part == "trap_defuse_object") {
     instance setscriptablepartstate("trap_defuse_object", "off");
     defusestruct = instance.parent_struct;
@@ -536,7 +536,7 @@ function function_a9a8361dace89499() {
         time = min(2, lookupsoundlength("cp_laser_trigger") * 0.001);
         wait time;
 
-        if(function_f3bb4f4911a1beb2("game", "getGameType") == "wm") {
+        if(callsharedfunc("game", "getGameType") == "wm") {
           var_ca1c9242e75e271 = anglesToForward(defuse_struct.angles);
 
           if(var_ca1c9242e75e271[0] > 0) {

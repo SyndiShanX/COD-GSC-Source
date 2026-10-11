@@ -11,7 +11,7 @@
 #namespace namespace_315cb3d67bf2880c;
 
 function main() {
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     scripts\mp\gametypes\mgl_mp::function_53ae52a625b5c703();
     return;
   }

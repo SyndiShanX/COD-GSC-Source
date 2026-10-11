@@ -111,7 +111,7 @@ function function_1bc16ffbb7c1131e() {
   function_c0b0a582ff9e4d57("recon_drone_color_dark_mp");
 }
 
-function function_57fd8a7006975cd6() {
+function tryuserecondrone() {
   streakinfo = createstreakinfo("radar_drone_recon", self);
   return function_ab931b44a2efddf7(streakinfo);
 }
@@ -232,10 +232,10 @@ function function_cbd53bead95f8409(streakname) {
   hitstokill = level.helperdronesettings[streakname].hitstokill;
   weaponname = "emp_grenade_mp";
   weaponhitsperattack = hitstokill;
-  var_8b4500d6a881b7b2 = hitstokill;
+  weaponhitstokill = hitstokill;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 }
 
@@ -639,16 +639,16 @@ function function_86e1c4f92c53ccfb(config) {
         var_ed5deadf98f2b1bd[var_ed5deadf98f2b1bd.size] = target;
       }
 
-      var_d3a3374bbd2c0ec7 = array_combine(targetarray, var_ed5deadf98f2b1bd);
+      combinedarray = array_combine(targetarray, var_ed5deadf98f2b1bd);
     } else {
-      var_d3a3374bbd2c0ec7 = targetarray;
+      combinedarray = targetarray;
     }
 
     if(issharedfuncdefined("helper_drone", "get_outer_reticle_targets")) {
-      var_d3a3374bbd2c0ec7 = self[[getsharedfunc("helper_drone", "get_outer_reticle_targets")]](config);
+      combinedarray = self[[getsharedfunc("helper_drone", "get_outer_reticle_targets")]](config);
     }
 
-    foreach(ent in var_d3a3374bbd2c0ec7) {
+    foreach(ent in combinedarray) {
       if(!function_2f23cbe83e1e57df(ent)) {
         continue;
       }
@@ -908,7 +908,7 @@ function function_2fd033ded40b93a9(target, targettype, automarker) {
 
 function function_4f43ed745364f234(target, targettype) {
   if(issharedfuncdefined("player", "doScoreEvent")) {
-    self.owner thread[[getsharedfunc("player", "doScoreEvent")]](hashcat(function_1823ff50bb28148d(self.helperdronetype), "_", targettype, "_marked"));
+    self.owner thread[[getsharedfunc("player", "doScoreEvent")]](hashcat(getxhash(self.helperdronetype), "_", targettype, "_marked"));
   }
 
   if(issharedfuncdefined("player", "playerHasMoved")) {
@@ -1819,17 +1819,17 @@ function function_cccbd62549b4440b(scantarget, scanfov, var_5e43b44751d01b1a) {
     defaultorigin += scantarget.recondronetraceoffset;
   }
 
-  var_20c094516733ffb1 = [defaultorigin];
+  pointstocheck = [defaultorigin];
 
   if(isPlayer(scantarget)) {
     headpos = scantarget scripts\cp_mp\utility\player_utility::getstancetop();
     centerpos = scantarget scripts\cp_mp\utility\player_utility::getstancecenter();
-    var_20c094516733ffb1 = [headpos, centerpos, defaultorigin];
+    pointstocheck = [headpos, centerpos, defaultorigin];
   } else if(isagent(scantarget)) {
-    var_20c094516733ffb1 = [defaultorigin + (0, 0, 1)];
+    pointstocheck = [defaultorigin + (0, 0, 1)];
   }
 
-  foreach(point in var_20c094516733ffb1) {
+  foreach(point in pointstocheck) {
     if(self worldpointinreticle_circle(point, scanfov, var_5e43b44751d01b1a)) {
       inreticle = 1;
       break;

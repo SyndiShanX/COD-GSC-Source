@@ -1196,8 +1196,8 @@ function giveonemanarmyclass(classname) {
 function omausebar(duration) {
   self endon("disconnect");
   usebar = hud_util::createprimaryprogressbar();
-  var_721e3650de671da6 = hud_util::createprimaryprogressbartext();
-  var_721e3650de671da6 settext(&"MPUI_CHANGING_KIT");
+  usebartext = hud_util::createprimaryprogressbartext();
+  usebartext settext(&"MPUI_CHANGING_KIT");
   usebar hud_util::updatebar(0, 1 / duration);
   waitedtime = 0;
 
@@ -1207,7 +1207,7 @@ function omausebar(duration) {
   }
 
   usebar hud_util::destroyelem();
-  var_721e3650de671da6 hud_util::destroyelem();
+  usebartext hud_util::destroyelem();
 }
 
 function setafterburner() {
@@ -5529,7 +5529,7 @@ function markequipment_updatestate() {
       break;
     }
 
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_occupantisvehicledriver(self) && !self function_a7de57196f4b5d16()) {
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_occupantisvehicledriver(self) && !self isinvehicleleanout()) {
       break;
     }
 
@@ -6642,9 +6642,9 @@ function function_de6e36b06bd630c4(pickupent, fromkiosk, var_db943473454f6ea6, b
       pickupremains = br_pickups::takeequipmentpickup(pickupent, fromkiosk, var_db943473454f6ea6, backpackequip);
       return pickupremains;
     } else {
-      var_7349319252d8e770 = min(pickupent.count * var_29f26361d277c4c8, var_7ab9a8f132665d68);
+      newarmoramount = min(pickupent.count * var_29f26361d277c4c8, var_7ab9a8f132665d68);
       pickupent.count = 0;
-      armor::setarmorhealth(var_7349319252d8e770);
+      armor::setarmorhealth(newarmoramount);
       return 0;
     }
 
@@ -6675,8 +6675,8 @@ function function_c5d5909e07c87005(armor) {
       armor::setarmorhealth(var_7ab9a8f132665d68);
       return true;
     } else {
-      var_7349319252d8e770 = min(var_29f26361d277c4c8, var_7ab9a8f132665d68);
-      armor::setarmorhealth(var_7349319252d8e770);
+      newarmoramount = min(var_29f26361d277c4c8, var_7ab9a8f132665d68);
+      armor::setarmorhealth(newarmoramount);
       return true;
     }
   }
@@ -7509,7 +7509,7 @@ function function_f660aecf9c2aeec6(bundle, var_34aba8d62374a55b) {
 
     playermodel = player getviewmodel();
 
-    if(!isDefined(playermodel) || !function_fed3925eb5331836(playermodel, "j_spinelower")) {
+    if(!isDefined(playermodel) || !modelhastag(playermodel, "j_spinelower")) {
       continue;
     }
 
@@ -8499,14 +8499,14 @@ function function_e77e0f080cbde77a() {
     return;
   }
 
-  var_d7d948c55db143ae = var_ce97d61299ae4f64.var_d7d948c55db143ae;
+  perk_faster_field_upgrade_rate = var_ce97d61299ae4f64.perk_faster_field_upgrade_rate;
 
-  if(isnumber(var_d7d948c55db143ae)) {
+  if(isnumber(perk_faster_field_upgrade_rate)) {
     if(!isDefined(self.perktunables)) {
       self.perktunables = spawnStruct();
     }
 
-    self.perktunables.var_d7d948c55db143ae = var_d7d948c55db143ae;
+    self.perktunables.perk_faster_field_upgrade_rate = perk_faster_field_upgrade_rate;
   }
 }
 
@@ -8515,8 +8515,8 @@ function function_91c59fd71ce44c87() {
     return;
   }
 
-  if(isDefined(self.perktunables.var_d7d948c55db143ae)) {
-    self.perktunables.var_d7d948c55db143ae = undefined;
+  if(isDefined(self.perktunables.perk_faster_field_upgrade_rate)) {
+    self.perktunables.perk_faster_field_upgrade_rate = undefined;
   }
 }
 
@@ -8544,8 +8544,8 @@ function unsetoutlander() {
 
 function function_2a32431b16c54b0d() {
   if(!istrue(self.var_9ee4330fe38ffc6) && istrue(self.var_29c2f60059bfa3aa) && istrue(self.isincircle)) {
-    if(!isDefined(self.var_740c1298f33f5910) || self.var_740c1298f33f5910 != getdvarfloat(@ "hash_f12f9c3e925d6a69", 0.1)) {
-      self.var_740c1298f33f5910 = getdvarfloat(@ "hash_f12f9c3e925d6a69", 0.1);
+    if(!isDefined(self.outlanderspeedmod) || self.outlanderspeedmod != getdvarfloat(@ "hash_f12f9c3e925d6a69", 0.1)) {
+      self.outlanderspeedmod = getdvarfloat(@ "hash_f12f9c3e925d6a69", 0.1);
       scripts\mp\weapons::updatemovespeedscale();
       function_332887b37621cafe("outlander");
     }
@@ -8553,8 +8553,8 @@ function function_2a32431b16c54b0d() {
     return;
   }
 
-  if(isDefined(self.var_740c1298f33f5910) && self.var_740c1298f33f5910 != 0) {
-    self.var_740c1298f33f5910 = 0;
+  if(isDefined(self.outlanderspeedmod) && self.outlanderspeedmod != 0) {
+    self.outlanderspeedmod = 0;
     scripts\mp\weapons::updatemovespeedscale();
     function_dc6425bc8ea85ac0("outlander");
   }
@@ -8626,7 +8626,7 @@ function function_61f59f06b860e9de() {
 function function_a107792339aa634a() {
   level endon("game_ended");
   self endon("disconnect");
-  var_73b315283a02415d = getdvarint(@ "hash_526707faa275db17", 3000);
+  speedbuffduration = getdvarint(@ "hash_526707faa275db17", 3000);
   var_a3bec96e7cc640f3 = getdvarfloat(@ "hash_f01c092cfcf11d56", 0.05);
   var_910c617d84c5e97c = getdvarint(@ "hash_13b7c83a06a9ea71", 3000);
 
@@ -8638,7 +8638,7 @@ function function_a107792339aa634a() {
     speedmod = 0;
     timestamp = gettime();
 
-    if(!istrue(self.var_9ee4330fe38ffc6) && isDefined(self.lastshottime) && isreallyalive(self) && self.lastshottime + var_73b315283a02415d >= timestamp) {
+    if(!istrue(self.var_9ee4330fe38ffc6) && isDefined(self.lastshottime) && isreallyalive(self) && self.lastshottime + speedbuffduration >= timestamp) {
       speedmod = var_a3bec96e7cc640f3;
     }
 
@@ -9014,41 +9014,41 @@ function function_388eaeb897276caa(event, objweapon) {
 }
 
 function setmutationmodeperk01() {
-  function_f3bb4f4911a1beb2("game", "setMutationModePerk01");
+  callsharedfunc("game", "setMutationModePerk01");
 }
 
 function setmutationmodeperk02() {
-  function_f3bb4f4911a1beb2("game", "setMutationModePerk02");
+  callsharedfunc("game", "setMutationModePerk02");
 }
 
 function setmutationmodeperk03() {
-  function_f3bb4f4911a1beb2("game", "setMutationModePerk03");
+  callsharedfunc("game", "setMutationModePerk03");
 }
 
 function setmutationmodeperk04() {
-  function_f3bb4f4911a1beb2("game", "setMutationModePerk04");
+  callsharedfunc("game", "setMutationModePerk04");
 }
 
 function setmutationmodeperk05() {
-  function_f3bb4f4911a1beb2("game", "setMutationModePerk05");
+  callsharedfunc("game", "setMutationModePerk05");
 }
 
 function unsetmutationmodeperk01() {
-  function_f3bb4f4911a1beb2("game", "unsetMutationModePerk01");
+  callsharedfunc("game", "unsetMutationModePerk01");
 }
 
 function unsetmutationmodeperk02() {
-  function_f3bb4f4911a1beb2("game", "unsetMutationModePerk02");
+  callsharedfunc("game", "unsetMutationModePerk02");
 }
 
 function unsetmutationmodeperk03() {
-  function_f3bb4f4911a1beb2("game", "unsetMutationModePerk03");
+  callsharedfunc("game", "unsetMutationModePerk03");
 }
 
 function unsetmutationmodeperk04() {
-  function_f3bb4f4911a1beb2("game", "unsetMutationModePerk04");
+  callsharedfunc("game", "unsetMutationModePerk04");
 }
 
 function unsetmutationmodeperk05() {
-  function_f3bb4f4911a1beb2("game", "unsetMutationModePerk05");
+  callsharedfunc("game", "unsetMutationModePerk05");
 }

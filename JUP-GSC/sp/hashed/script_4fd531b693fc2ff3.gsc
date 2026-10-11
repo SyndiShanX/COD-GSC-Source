@@ -44,14 +44,14 @@ function function_e0ea9506f0e9d2b9() {
   level.price setModel("body_c_jup_sp_hero_price_tundra_diver");
   level.ally01 = spawn_targetname("ally01", 1);
   level.ally01.name = "Gaz";
-  level.ally01 function_ab35ae296c8f8609("Bravo 6-1");
+  level.ally01 set_callsign("Bravo 6-1");
   level.ally01 setModel("body_c_jup_sp_hero_gaz_tundra_diver");
   level.ally01 gun_remove();
   level.ally01 function_36d8c0ddc6500bb7(1);
   level.ally02 = spawn_targetname("ally02", 1);
   level.ally02.animname = "ally02";
   level.ally02.name = "Soap";
-  level.ally02 function_ab35ae296c8f8609("Bravo 7-1");
+  level.ally02 set_callsign("Bravo 7-1");
   level.ally02 setModel("body_c_jup_sp_hero_soap_tundra_diver");
   level.ally02 gun_remove();
   level.ally02 function_36d8c0ddc6500bb7(1);

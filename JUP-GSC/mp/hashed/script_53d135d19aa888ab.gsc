@@ -33,7 +33,7 @@ function autoexec main() {
 }
 
 function private function_a2a8b2608a9edf57() {
-  if(!istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("warlords", "warlordIsDisabled", "WARLORD_ALLFORONE"))) {
+  if(!istrue(scripts\engine\utility::callsharedfunc("warlords", "warlordIsDisabled", "WARLORD_ALLFORONE"))) {
     namespace_609d2ee77dae3d8c::function_447c6ab4bea16b52("objective", "REV_OB_WARLORD", &namespace_75b9b66caa533c31::function_8abadf3d8f19384a, &namespace_21bf7da565c2f6ec::function_fd69cf02ba4d90a2);
   }
 }
@@ -68,7 +68,7 @@ function oninitialization(agent, userdata) {
     agent.callbackdamaged = &warlord_damaged;
   }
 
-  traptriggers = function_f159c10d5cf8f0b4("auto_afo_closet", "targetname");
+  traptriggers = getnoentvolumearray("auto_afo_closet", "targetname");
 
   if(isDefined(traptriggers)) {
     foreach(traptrigger in traptriggers) {
@@ -76,7 +76,7 @@ function oninitialization(agent, userdata) {
     }
   }
 
-  traptriggers = function_f159c10d5cf8f0b4("warlord_allforone_encounter", "targetname");
+  traptriggers = getnoentvolumearray("warlord_allforone_encounter", "targetname");
 
   if(isarray(traptriggers) && traptriggers.size > 0) {
     foreach(trapvolume in traptriggers) {
@@ -177,7 +177,7 @@ function function_22bbd2d65e43a26b(agent) {
 }
 
 function function_77d09d16e6dea696(warlord) {
-  triggervolumes = function_f159c10d5cf8f0b4("warlord_allforone_encounter", "targetname");
+  triggervolumes = getnoentvolumearray("warlord_allforone_encounter", "targetname");
 
   if(isarray(triggervolumes) && triggervolumes.size > 0) {
     foreach(triggervolume in triggervolumes) {

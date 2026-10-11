@@ -123,7 +123,7 @@ function function_2a27f30882f6a886() {
   function_c0b0a582ff9e4d57("assault_drone_color_dark_mp");
 }
 
-function function_e24ef5600f59548e() {
+function tryuseassaultdrone() {
   streakinfo = createstreakinfo("assault_drone", self);
   return function_2445adf5d64eef6f(streakinfo);
 }
@@ -290,10 +290,10 @@ function function_8648618e4fac5041(streakname) {
   hitstokill = level.helperdronesettings[streakname].hitstokill;
   weaponname = "emp_grenade_mp";
   weaponhitsperattack = hitstokill;
-  var_8b4500d6a881b7b2 = hitstokill;
+  weaponhitstokill = hitstokill;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 }
 

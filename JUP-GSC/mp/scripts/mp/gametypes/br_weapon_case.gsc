@@ -66,7 +66,7 @@ function private function_7e20c3b647ab66af(args) {
       splash = level.var_53f1209f53f48f29.locatedsplash;
 
       if(isDefined(splash) && splash != "<dev string:x4a>") {
-        scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splash, [player], scripts\mp\poi::function_6cc445c02b5effac((0, 0, 0), undefined, undefined, 1));
+        scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splash, [player], scripts\mp\poi::poi_findpoioriginisin((0, 0, 0), undefined, undefined, 1));
       }
 
       break;
@@ -74,7 +74,7 @@ function private function_7e20c3b647ab66af(args) {
       splash = level.var_53f1209f53f48f29.pickedupsplash;
 
       if(isDefined(splash) && splash != "<dev string:x4a>") {
-        scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splash, [player], scripts\mp\poi::function_6cc445c02b5effac((0, 0, 0), undefined, undefined, 1));
+        scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splash, [player], scripts\mp\poi::poi_findpoioriginisin((0, 0, 0), undefined, undefined, 1));
       }
 
       break;
@@ -82,7 +82,7 @@ function private function_7e20c3b647ab66af(args) {
       splash = level.var_53f1209f53f48f29.transfersplash;
 
       if(isDefined(splash) && splash != "<dev string:x4a>") {
-        scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splash, [player], scripts\mp\poi::function_6cc445c02b5effac((0, 0, 0), undefined, undefined, 1));
+        scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splash, [player], scripts\mp\poi::poi_findpoioriginisin((0, 0, 0), undefined, undefined, 1));
       }
 
       break;
@@ -204,7 +204,7 @@ function function_aa629573b9b452b7(var_e384a29fa99c895c) {
         scriptable = level.var_b220727281972841.scriptable;
 
         if(isDefined(splash) && splash != "") {
-          scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splash, level.players, scripts\mp\poi::function_6cc445c02b5effac(scriptable.origin, undefined, undefined, 1));
+          scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splash, level.players, scripts\mp\poi::poi_findpoioriginisin(scriptable.origin, undefined, undefined, 1));
         }
       }
 

@@ -24,7 +24,7 @@ function function_b60c68caa2f279ab() {
 }
 
 function function_32e0e65cc21dd2fe(itembundlename) {
-  itembundle = function_50f8a8f765bad85e(hashcat(%"itemspawnentry:", itembundlename), [#"subtype", #"scriptable"]);
+  itembundle = getscriptbundlefieldvalues(hashcat(%"itemspawnentry:", itembundlename), [#"subtype", #"scriptable"]);
 
   if(isDefined(itembundle.subtype) && itembundle.subtype == "essence" && isDefined(itembundle.scriptable) && !arraycontains(level.commonitem.var_48c807bcc0ab526, itembundle.scriptable)) {
     level.commonitem.var_48c807bcc0ab526[level.commonitem.var_48c807bcc0ab526.size] = itembundle.scriptable;
@@ -37,16 +37,16 @@ function function_794ffcdb7828ea7a(itembundle, item, auto_use, var_18fc734ec7194
 
 function use_currency(itembundle, item, auto_use) {
   currencytype = itembundle.subtype;
-  var_3d7ffadeef043c6 = item.count;
+  currencyamount = item.count;
 
   if(!isDefined(currencytype) || currencytype == "" || currencytype != "essence") {
     itembundlename = common_item::function_2cdc55ba39d97d70(item.type);
     assertmsg("<dev string:x1c>" + itembundlename + "<dev string:x55>");
-    return [var_3d7ffadeef043c6, 0];
+    return [currencyamount, 0];
   }
 
   if(isDefined(self.zombie_point_scalar) && !istrue(item.var_8f6468c1705602c2)) {
-    var_3d7ffadeef043c6 *= self.zombie_point_scalar;
+    currencyamount *= self.zombie_point_scalar;
   }
 
   reason = #"itemuse";
@@ -55,8 +55,8 @@ function use_currency(itembundle, item, auto_use) {
     reason = #"cache";
   }
 
-  currency::function_3036cef61495210f(currencytype, var_3d7ffadeef043c6, reason);
-  return [0, var_3d7ffadeef043c6];
+  currency::function_3036cef61495210f(currencytype, currencyamount, reason);
+  return [0, currencyamount];
 }
 
 function get_currency() {
@@ -131,7 +131,7 @@ function function_aba001929fc2df47(params) {
     return;
   }
 
-  if(isDefined(params.var_7558f98f3236963d)) {
+  if(isDefined(params.newseatid)) {
     return;
   }
 
@@ -169,7 +169,7 @@ function watch_vehicle_overlap_essence(vehicle) {
     scriptables = getlootscriptablearrayinradius(undefined, undefined, vehicle_midpoint, var_8b0579be668e5c32);
 
     foreach(scriptable in scriptables) {
-      if(!scriptable getscriptableisusableonanypart() || !arraycontains(level.commonitem.var_48c807bcc0ab526, function_40fd49171fad19d3(scriptable.type))) {
+      if(!scriptable getscriptableisusableonanypart() || !arraycontains(level.commonitem.var_48c807bcc0ab526, getxhashasset(scriptable.type))) {
         continue;
       }
 

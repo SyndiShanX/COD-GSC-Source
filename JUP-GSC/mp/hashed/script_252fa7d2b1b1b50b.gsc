@@ -105,7 +105,7 @@ function spawn_reinforcements(location, requests, var_461b8c89eb0f0715, params) 
   agents = [];
   var_2984a3a7b3c051a7 = getclosestpointonnavmesh(location);
   group_name = scripts\mp\ai_mp_controller::function_78759441c259f58a();
-  poi_name = scripts\mp\poi::function_6cc445c02b5effac(var_2984a3a7b3c051a7);
+  poi_name = scripts\mp\poi::poi_findpoioriginisin(var_2984a3a7b3c051a7);
 
   foreach(type in var_461b8c89eb0f0715) {
     if(issubstr(type, "heli") && istrue(level.var_425df8e23aaef18c)) {

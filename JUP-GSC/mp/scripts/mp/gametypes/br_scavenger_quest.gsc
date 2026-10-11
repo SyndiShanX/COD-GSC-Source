@@ -275,7 +275,7 @@ function function_8ed931d61f597107() {
           cache.cacheentity disablescriptableplayeruse(player);
         }
 
-        cache.cacheentity scripts\engine\utility::function_ad9433aab9fcdf04(level.var_cf05afb32024800a.var_cac1fbf08ec5989b, "death", &delete);
+        cache.cacheentity scripts\engine\utility::delaycallendon(level.var_cf05afb32024800a.var_cac1fbf08ec5989b, "death", &delete);
         continue;
       }
 
@@ -696,7 +696,7 @@ function function_94a078c4cae0d6a4(cacheentity) {
   }
 }
 
-function scavengerlootcacheused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function scavengerlootcacheused(instance, part, state, player, bautouse, usestring) {
   if(istrue(player scripts\mp\gametypes\br_gametypes::runbrgametypefunc("playerSkipLootPickup", instance))) {
     return;
   }
@@ -714,7 +714,7 @@ function scavengerlootcacheused(instance, part, state, player, var_a5b2c541413aa
 
     instance setscriptablepartstate("body", "scavenger_opening");
     var_c0858aceea4bb7d9 = getdvarint(@ "hash_28b9017071772839", 30);
-    instance.entity scripts\engine\utility::function_ad9433aab9fcdf04(var_c0858aceea4bb7d9, "death_or_disconnect", &delete);
+    instance.entity scripts\engine\utility::delaycallendon(var_c0858aceea4bb7d9, "death_or_disconnect", &delete);
 
     if(!isDefined(task.cachescollected) || task.cachescollected == 0) {
       items = getscriptcachecontents("br_quest_scav_one", level.var_cf05afb32024800a.var_fb4d6eb8dfba5101);

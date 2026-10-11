@@ -24,7 +24,7 @@ function bulletwhizby_monitor() {
       continue;
     }
 
-    scripts\common\whizby::function_a6e6611efb4164d5(attacker, distance, position, forward);
+    scripts\common\whizby::whizbyeffect(attacker, distance, position, forward);
   }
 }
 

@@ -107,7 +107,7 @@ function function_2d117eeb564f6ea3(grenade) {
 
   var_b608af6e8d86fe42 = 0;
 
-  if(namespace_53fc9ddbb516e6e1::function_87072b42853a9c58("specialty_uav_buff")) {
+  if(namespace_53fc9ddbb516e6e1::hasperksharedfunc("specialty_uav_buff")) {
     var_b608af6e8d86fe42 = 1;
   }
 
@@ -370,5 +370,5 @@ function function_a8d0b1afb1554b5a() {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }

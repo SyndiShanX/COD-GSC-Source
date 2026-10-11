@@ -109,9 +109,9 @@ function disable_powerups() {
   utility::flag_clear("drop_powerups");
 }
 
-function function_6823175ab6619608(var_c770cb3b93d58b48) {
+function function_6823175ab6619608(alias_to_play) {
   foreach(player in level.players) {
-    player playlocalsound(var_c770cb3b93d58b48);
+    player playlocalsound(alias_to_play);
   }
 }
 
@@ -178,13 +178,13 @@ function function_e6d957d831735a78(player) {
 
   if(getdvarint(@ "hash_f116cb4dd07fc940", 1)) {
     if(!istrue(player.hasgoldenammo)) {
-      player utility::function_f3bb4f4911a1beb2("ob_golden_ammo", "set_goldenAmmo");
+      player utility::callsharedfunc("ob_golden_ammo", "set_goldenAmmo");
     }
   }
 
   if(getdvarint(@ "hash_3e375980aa802475", 1)) {
     if(!istrue(player.var_28c033c3c5b37f1f)) {
-      player utility::function_f3bb4f4911a1beb2("ob_armor", "set_golden_armor");
+      player utility::callsharedfunc("ob_armor", "set_golden_armor");
     }
   }
 
@@ -222,7 +222,7 @@ function init_lightning() {
   level.var_2b182934c713e39a = spawnscriptable(%"hash_67315e48e910687f", (0, 0, 0));
   scriptable::scriptable_addnotifycallback("aether_storm_lightning_strike_damage", &_lightning_strike_damage);
   scriptable::scriptable_addnotifycallback("aether_storm_lightning_strike_finished", &_lightning_strike_finished);
-  level.var_a244b385cd427036 = objective_marker_bundle_helper::function_594acad17d5c9722(%"hash_528cbe8d883829a4");
+  level.var_a244b385cd427036 = objective_marker_bundle_helper::createobjectivemarkerfrombundlexhash(%"hash_528cbe8d883829a4");
   objidpoolmanager::function_f21e9b2e78de984b(level.var_a244b385cd427036, level.var_c338e159d5bb9a6e, level.var_e415cde5da5a3409);
   objective_disableping(level.var_a244b385cd427036, 1);
   objective_setpings(level.var_a244b385cd427036, 0);
@@ -260,7 +260,7 @@ function function_d9fcb5cdd7d24bc4(player) {
       if(var_8689ace32731da70 >= lightning_delay) {
         lightning_state = level.var_2b182934c713e39a getscriptablepartstate(#"strike", 1);
 
-        if(isDefined(lightning_state) && function_1823ff50bb28148d(lightning_state) == #"on") {
+        if(isDefined(lightning_state) && getxhash(lightning_state) == #"on") {
           level.var_2b182934c713e39a waittill("aether_storm_lightning_strike_finished");
         }
 
@@ -290,10 +290,10 @@ function function_655a1532a10e2e3a(strike_origin) {
   objidpoolmanager::update_objective_state(level.var_a244b385cd427036, "empty");
 }
 
-function private _lightning_strike_damage(instance, note, param, var_535d9c3fdddab5a9) {
-  function_3d8d8ad244283e65(#"hash_dba294ecb4b55928");
+function private _lightning_strike_damage(instance, note, param, instigator) {
+  profilebeginevent(#"hash_dba294ecb4b55928");
   radiusdamage(instance.origin, level.var_6aada0ffd2de106f, level.var_de371020b7c43674, level.var_de371020b7c43674, undefined, undefined, undefined, 1, 1);
-  players = namespace_2b1145f62aa835b8::function_883458a342af3041(instance.origin, level.var_6aada0ffd2de106f);
+  players = namespace_2b1145f62aa835b8::getplayersinradiussharedfunc(instance.origin, level.var_6aada0ffd2de106f);
 
   foreach(player in players) {
     thread aether_storm::function_1ccf067179383388(player, level.var_b9a0e95957ebb0fa, level.var_de371020b7c43674 + player.var_3420a36c00dc27d1);
@@ -311,10 +311,10 @@ function private _lightning_strike_damage(instance, note, param, var_535d9c3fddd
     thread aether_storm::function_88888e5d4a0feebd(soldier, level.var_b9a0e95957ebb0fa, level.var_de371020b7c43674);
   }
 
-  function_7f3923ed3d66f8ad();
+  profileendevent();
 }
 
-function private _lightning_strike_finished(instance, note, param, var_535d9c3fdddab5a9) {
+function private _lightning_strike_finished(instance, note, param, instigator) {
   instance notify("aether_storm_lightning_strike_finished");
 }
 
@@ -354,8 +354,8 @@ function function_d583b3fb3ef5c2af() {
     return;
   }
 
-  location_volumes = function_f159c10d5cf8f0b4(level.ob_unstable_rift_location, "target");
-  var_846432ad9b08b0b8 = function_f159c10d5cf8f0b4("ob_unstable_rift_aiallowedvolume", "script_noteworthy");
+  location_volumes = getnoentvolumearray(level.ob_unstable_rift_location, "target");
+  var_846432ad9b08b0b8 = getnoentvolumearray("ob_unstable_rift_aiallowedvolume", "script_noteworthy");
   level.var_c3d0776d96557e6b = [];
 
   foreach(location_volume in location_volumes) {
@@ -468,8 +468,8 @@ function init_teleporters() {
     return;
   }
 
-  location_volumes = function_f159c10d5cf8f0b4(level.ob_unstable_rift_location, "target");
-  teleport_volumes = function_f159c10d5cf8f0b4("ob_unstable_rift_teleportvolume", "script_noteworthy");
+  location_volumes = getnoentvolumearray(level.ob_unstable_rift_location, "target");
+  teleport_volumes = getnoentvolumearray("ob_unstable_rift_teleportvolume", "script_noteworthy");
   level.var_52d7d5c63da761c5 = [];
 
   foreach(location_volume in location_volumes) {
@@ -1343,7 +1343,7 @@ function do_countdown(total_seconds, visible_seconds) {
   waitframe();
 
   while(!timer.progresscomplete) {
-    time_remaining = int(timer.var_621cb2c0d9b1cdae);
+    time_remaining = int(timer.currentprogressvalue);
 
     if(time_remaining <= visible_seconds) {
       foreach(player in level.players) {
@@ -1422,7 +1422,7 @@ function private function_6e509d5aa1517140(request_id, user_data, agent, data) {
   agent.var_b8dfbbe1ede0d967 = 1;
 
   if(level.var_3c7d99e140c880d7) {
-    agent.objective_marker = objective_marker_bundle_helper::function_594acad17d5c9722(%"hash_59192eabb1abc65e");
+    agent.objective_marker = objective_marker_bundle_helper::createobjectivemarkerfrombundlexhash(%"hash_59192eabb1abc65e");
     objidpoolmanager::update_objective_onentity(agent.objective_marker, agent);
 
     switch (agent.subclass) {

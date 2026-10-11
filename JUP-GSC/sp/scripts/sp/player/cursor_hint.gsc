@@ -54,10 +54,10 @@ function function_5c79b14fd1f528b0(parms, hintstring, linktag, offsetorigin) {
     }
   }
 
-  return create_cursor_hint(linktag, offsetorigin, hintstring, parms.var_df024a1642f13910, parms.var_1d15541035909a45, parms.var_2312d6385ae695a8, parms.ignoretrace, parms.blinkhint, parms.var_9e9b6d24b7a157f0, parms.uniqueicon, parms.holdduration, parms.usecommand, parms.lockmovement, parms.var_40d4d7a8ad6420e3, parms.var_7cff52334740fd08, parms.var_429e3ca51e37df3c);
+  return create_cursor_hint(linktag, offsetorigin, hintstring, parms.displayfovoverride, parms.displaydistoverride, parms.usedistoverride, parms.ignoretrace, parms.blinkhint, parms.var_9e9b6d24b7a157f0, parms.uniqueicon, parms.holdduration, parms.usecommand, parms.lockmovement, parms.usefovoverride, parms.useanglesoverride, parms.whileencumbered);
 }
 
-function create_cursor_hint(linktag, originoffset, hintstring, var_df024a1642f13910, var_1d15541035909a45, var_2312d6385ae695a8, ignoretrace, blinkhint, var_9e9b6d24b7a157f0, uniqueicon, holdduration, usecommand, lockmovement, var_40d4d7a8ad6420e3, var_7cff52334740fd08, var_429e3ca51e37df3c) {
+function create_cursor_hint(linktag, originoffset, hintstring, displayfovoverride, displaydistoverride, usedistoverride, ignoretrace, blinkhint, var_9e9b6d24b7a157f0, uniqueicon, holdduration, usecommand, lockmovement, usefovoverride, useanglesoverride, whileencumbered) {
   hintent = self;
 
   if(isstruct(hintent) || is_equal(hintent.code_classname, "script_origin") || isDefined(originoffset)) {
@@ -108,29 +108,29 @@ function create_cursor_hint(linktag, originoffset, hintstring, var_df024a1642f13
 
   displayfov = 360;
 
-  if(isDefined(var_df024a1642f13910)) {
-    displayfov = var_df024a1642f13910;
+  if(isDefined(displayfovoverride)) {
+    displayfov = displayfovoverride;
   }
 
   hintent sethintdisplayfov(displayfov);
   usefov = 65;
 
-  if(isDefined(var_40d4d7a8ad6420e3)) {
-    usefov = var_40d4d7a8ad6420e3;
+  if(isDefined(usefovoverride)) {
+    usefov = usefovoverride;
   }
 
   hintent setusefov(usefov);
   displayrange = 500;
 
-  if(isDefined(var_1d15541035909a45)) {
-    displayrange = var_1d15541035909a45;
+  if(isDefined(displaydistoverride)) {
+    displayrange = displaydistoverride;
   }
 
   hintent sethintdisplayrange(displayrange);
   userange = 80;
 
-  if(isDefined(var_2312d6385ae695a8)) {
-    userange = var_2312d6385ae695a8;
+  if(isDefined(usedistoverride)) {
+    userange = usedistoverride;
   }
 
   hintent setuserange(userange);
@@ -168,14 +168,14 @@ function create_cursor_hint(linktag, originoffset, hintstring, var_df024a1642f13
   }
 
   hintent sethintlockplayermovement(istrue(lockmovement));
-  hintent setusewhenhandsoccupied(istrue(var_429e3ca51e37df3c));
+  hintent setusewhenhandsoccupied(istrue(whileencumbered));
 
-  if(isDefined(var_7cff52334740fd08)) {
-    thread internal_hint_toggle_use_by_angles(hintent, var_7cff52334740fd08, userange);
+  if(isDefined(useanglesoverride)) {
+    thread internal_hint_toggle_use_by_angles(hintent, useanglesoverride, userange);
   }
 }
 
-function create_cursor_hint_forced(linktag, originoffset, hintstring, var_df024a1642f13910, var_1d15541035909a45, var_2312d6385ae695a8, ignoretrace, blinkhint, var_9e9b6d24b7a157f0, uniqueicon, holdduration, usecommand, lockmovement, var_40d4d7a8ad6420e3, var_7cff52334740fd08) {
+function create_cursor_hint_forced(linktag, originoffset, hintstring, displayfovoverride, displaydistoverride, usedistoverride, ignoretrace, blinkhint, var_9e9b6d24b7a157f0, uniqueicon, holdduration, usecommand, lockmovement, usefovoverride, useanglesoverride) {
   hintent = self;
 
   if(isstruct(hintent) || hintent.code_classname == "script_origin" || isDefined(originoffset)) {
@@ -226,29 +226,29 @@ function create_cursor_hint_forced(linktag, originoffset, hintstring, var_df024a
 
   displayfov = 360;
 
-  if(isDefined(var_df024a1642f13910)) {
-    displayfov = var_df024a1642f13910;
+  if(isDefined(displayfovoverride)) {
+    displayfov = displayfovoverride;
   }
 
   hintent sethintdisplayfov(displayfov);
   usefov = 65;
 
-  if(isDefined(var_40d4d7a8ad6420e3)) {
-    usefov = var_40d4d7a8ad6420e3;
+  if(isDefined(usefovoverride)) {
+    usefov = usefovoverride;
   }
 
   hintent setusefov(usefov);
   displayrange = 500;
 
-  if(isDefined(var_1d15541035909a45)) {
-    displayrange = var_1d15541035909a45;
+  if(isDefined(displaydistoverride)) {
+    displayrange = displaydistoverride;
   }
 
   hintent sethintdisplayrange(displayrange);
   userange = 80;
 
-  if(isDefined(var_2312d6385ae695a8)) {
-    userange = var_2312d6385ae695a8;
+  if(isDefined(usedistoverride)) {
+    userange = usedistoverride;
   }
 
   hintent setuserange(userange);
@@ -289,27 +289,27 @@ function create_cursor_hint_forced(linktag, originoffset, hintstring, var_df024a
     hintent sethintlockplayermovement(0);
   }
 
-  if(isDefined(var_7cff52334740fd08)) {
-    thread internal_hint_toggle_use_by_angles(hintent, var_7cff52334740fd08, userange);
+  if(isDefined(useanglesoverride)) {
+    thread internal_hint_toggle_use_by_angles(hintent, useanglesoverride, userange);
   }
 }
 
-function function_fa06de21f8aaee3b(anime, scriptednode, linktag, originoffset, hintstring, var_df024a1642f13910, var_1d15541035909a45, var_4e6ef8fe3c3a2fbb, ignoretrace, blinkhint, var_9e9b6d24b7a157f0, uniqueicon, holdduration, usecommand, lockmovement, var_40d4d7a8ad6420e3, var_94370a44392f701b) {
-  if(!isDefined(var_4e6ef8fe3c3a2fbb)) {
-    var_4e6ef8fe3c3a2fbb = 0;
+function function_fa06de21f8aaee3b(anime, scriptednode, linktag, originoffset, hintstring, displayfovoverride, displaydistoverride, usedistadjustment, ignoretrace, blinkhint, var_9e9b6d24b7a157f0, uniqueicon, holdduration, usecommand, lockmovement, usefovoverride, useanglesadjustment) {
+  if(!isDefined(usedistadjustment)) {
+    usedistadjustment = 0;
   }
 
-  if(!isDefined(var_94370a44392f701b)) {
-    var_94370a44392f701b = 0;
+  if(!isDefined(useanglesadjustment)) {
+    useanglesadjustment = 0;
   }
 
-  if(!isDefined(var_40d4d7a8ad6420e3)) {
-    var_40d4d7a8ad6420e3 = 45;
+  if(!isDefined(usefovoverride)) {
+    usefovoverride = 45;
   }
 
   rig = spawn_anim_model("player_rig", self.origin, self.angles);
   rig hide();
-  startpositions = scriptednode function_6d41ac1c3d718a62(anime, rig);
+  startpositions = scriptednode getanim_starts(anime, rig);
 
   hintfloor = self.origin;
 
@@ -352,7 +352,7 @@ function function_fa06de21f8aaee3b(anime, scriptednode, linktag, originoffset, h
   }
 
   distave = array_average(var_d85cc836998c34dd);
-  var_3a1cff486b7956dc = 60 + distave + var_4e6ef8fe3c3a2fbb;
+  newusedist = 60 + distave + usedistadjustment;
 
   if(startpositions.size > 1) {
     var_11257a1ff69c8cf6 = 30;
@@ -368,17 +368,17 @@ function function_fa06de21f8aaee3b(anime, scriptednode, linktag, originoffset, h
     angle = 0;
   }
 
-  var_b22fa04e81595347 = var_11257a1ff69c8cf6 + angle + var_94370a44392f701b;
+  var_b22fa04e81595347 = var_11257a1ff69c8cf6 + angle + useanglesadjustment;
 
   if(getdvarint(@ "hash_398da46238160a6", 0)) {
     iprintln("<dev string:x53>" + distave);
-    iprintln("<dev string:x66>" + var_3a1cff486b7956dc);
+    iprintln("<dev string:x66>" + newusedist);
     iprintln("<dev string:x73>" + angle);
     iprintln("<dev string:x89>" + var_b22fa04e81595347);
   }
 
   rig delete();
-  create_cursor_hint(linktag, originoffset, hintstring, var_df024a1642f13910, var_1d15541035909a45, var_3a1cff486b7956dc, ignoretrace, blinkhint, var_9e9b6d24b7a157f0, uniqueicon, holdduration, usecommand, lockmovement, var_40d4d7a8ad6420e3, var_b22fa04e81595347);
+  create_cursor_hint(linktag, originoffset, hintstring, displayfovoverride, displaydistoverride, newusedist, ignoretrace, blinkhint, var_9e9b6d24b7a157f0, uniqueicon, holdduration, usecommand, lockmovement, usefovoverride, var_b22fa04e81595347);
 }
 
 function private internal_hint_toggle_use_by_angles(hintent, useangles, userange) {

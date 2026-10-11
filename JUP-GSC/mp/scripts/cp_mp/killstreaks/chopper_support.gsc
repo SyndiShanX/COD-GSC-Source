@@ -625,12 +625,12 @@ function choppersupport_setattackpoint(turret, turrettarget, centerpoint, attack
 }
 
 function choppersupport_turretlookingattarget() {
-  var_97f0985016aa48cb = 0.992;
+  maxviewangle = 0.992;
   turretforward = anglesToForward(self gettagangles("tag_flash"));
   targetdisplace = vectorNormalize(self.groundtargetent.origin - self.origin);
   var_ff53e400dd536b82 = vectordot(turretforward, targetdisplace);
 
-  if(isDefined(self gettargetentity(1)) && var_ff53e400dd536b82 >= var_97f0985016aa48cb) {
+  if(isDefined(self gettargetentity(1)) && var_ff53e400dd536b82 >= maxviewangle) {
     return true;
   }
 
@@ -1146,18 +1146,18 @@ function choppersupport_gettargets(turret, rangeoverride, var_f8c5d9ba90c73623, 
   players = [];
 
   if(islargemap()) {
-    var_397eb484dfddd2da = 4500;
+    radiustocheck = 4500;
 
     if(isDefined(rangeoverride)) {
-      var_397eb484dfddd2da = rangeoverride;
+      radiustocheck = rangeoverride;
     }
 
     if(isDefined(self.gettargetfunc)) {
       players = self[[self.gettargetfunc]]();
     } else if(isbrstylegametype()) {
-      players = utility::function_2d7fd59d039fa69b(self.origin, var_397eb484dfddd2da, undefined);
+      players = utility::function_2d7fd59d039fa69b(self.origin, radiustocheck, undefined);
     } else {
-      players = utility::function_2d7fd59d039fa69b(self.origin, var_397eb484dfddd2da, 0);
+      players = utility::function_2d7fd59d039fa69b(self.origin, radiustocheck, 0);
     }
   } else {
     agents = [];
@@ -1373,9 +1373,9 @@ function choppersupport_getbesttarget(turret, targets) {
 }
 
 function getcorrectheight(x, y, randheightoffset, var_1d3a4b020ae79012) {
-  var_dc8bb6300463cf1e = self.heightoffset[2];
+  offgroundheight = self.heightoffset[2];
   groundheight = tracegroundpoint(x, y, var_1d3a4b020ae79012);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   trueheight += randomint(randheightoffset);
   return trueheight;
 }
@@ -1588,14 +1588,14 @@ function beginevasivemaneuvers() {
 }
 
 function getcorrectheightescort(x, y, rand, minheight) {
-  var_dc8bb6300463cf1e = 200;
+  offgroundheight = 200;
 
   if(isDefined(minheight)) {
-    var_dc8bb6300463cf1e = minheight;
+    offgroundheight = minheight;
   }
 
   groundheight = tracegroundpoint(x, y);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   trueheight += randomint(rand);
   return trueheight;
 }
@@ -1626,34 +1626,34 @@ function function_635f6112bf87d114(streakname) {
 function function_6561cd64026004d8(streakname) {
   weaponname = "thermite_bolt_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 36;
+  weaponhitstokill = 36;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "thermite_xmike109_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 100;
+  weaponhitstokill = 100;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "semtex_bolt_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 13;
+  weaponhitstokill = 13;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "semtex_xmike109_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 24;
+  weaponhitstokill = 24;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 }
 

@@ -574,11 +574,11 @@ function objective_show_progress(objid, show, unfill) {
 }
 
 function function_7299a742781a5030(state, player) {
-  function_d1b64c3d055ceeb0(state, player);
+  objective_setshowpinnedprogressbar(state, player);
 }
 
 function function_8f7a55bda12ebb21(text, player) {
-  function_8b71eb96e1636edc(text, player);
+  objective_setpinnedprogressbartext(text, player);
 }
 
 function objective_show_team_progress(objid, team) {

@@ -192,11 +192,11 @@ function function_61aea37385c298a9(params) {
   thread scripts\cp_mp\overlord::playevent("s3_rr_portal_spawn", [self], 0.5);
 }
 
-function function_6d274d4ea8783210(var_6f8af5eb76deac21) {
+function function_6d274d4ea8783210(relevantinfostruct) {
   level endon("game_ended");
 }
 
-function function_6e96108f17efa162(var_6f8af5eb76deac21) {
+function function_6e96108f17efa162(relevantinfostruct) {
   flag_wait("obelisks_setup");
 
   switch (self.type) {
@@ -214,7 +214,7 @@ function function_6e96108f17efa162(var_6f8af5eb76deac21) {
   }
 }
 
-function function_6af4c434f6564f56(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_6af4c434f6564f56(instance, part, state, player, bautouse, usestring) {
   if(isDefined(player) && part == "nexus_activity_joiner_phone") {
     foreach(obelisk in level.obelisks) {
       if(obelisk.activityinstance.type == instance.activity_instance.type) {
@@ -262,8 +262,8 @@ function private function_7c6ca3693ae0340e() {
   namespace_4fda5d7358015a06::endactivity(self, 1);
 }
 
-function _contract_complete(var_6f8af5eb76deac21) {
-  function_6d274d4ea8783210(var_6f8af5eb76deac21);
+function _contract_complete(relevantinfostruct) {
+  function_6d274d4ea8783210(relevantinfostruct);
   obelisk_completed(level.var_747eee71c41ccadc);
 }
 
@@ -546,7 +546,7 @@ function function_10097590634ee94b(item) {
   item.move_to_point setModel("tag_origin");
   item.move = spawn("script_model", item.origin);
   item.move setModel("jup_zm_item_mover_invisible");
-  item utility::function_6e506f39f121ea8a(item.move);
+  item utility::scriptable_setparententity(item.move);
   return item;
 }
 
@@ -661,7 +661,7 @@ function private function_2f52cfcbc16f6617(var_95b54b56e5fedf) {
   v_spawn_pos = var_95b54b56e5fedf.origin + offset - (0, 0, 8);
 
   if(isDefined(v_spawn_pos) && isDefined(scripts\common\powerups::function_519d44e54a9b8ae5(str_powerup))) {
-    e_powerup = namespace_53fc9ddbb516e6e1::function_f4927f5a7aa5c6ab(str_powerup, v_spawn_pos);
+    e_powerup = namespace_53fc9ddbb516e6e1::droppowerupsharedfunc(str_powerup, v_spawn_pos);
   }
 }
 
@@ -738,7 +738,7 @@ function function_e20a2ea1061978ac() {
   level endon("game_ended");
 
   if(getdvarint(@ "hash_2dca309bcd066c61", 0)) {
-    var_97cdc01a6f73c5aa = max(1, 0.5 / function_676cfe2ab64ea758());
+    var_97cdc01a6f73c5aa = max(1, 0.5 / getframeduration());
   }
 
   while(true) {
@@ -1012,9 +1012,9 @@ function function_aee09905df73108() {
   level.var_e0eabcf3e2b9c0da = getStruct("rr_damage_object_proximity_spawn", "targetname");
   level.var_5a23243b27ec2602 = getStruct("rr_movement_object_proximity_spawn", "targetname");
   level.var_49a91aa847fad815 = getStruct("rr_vision_object_proximity_spawn", "targetname");
-  var_af3f89771327058a = function_f159c10d5cf8f0b4("rr_damage_object_proximity_trigger", "targetname");
-  var_fd36a7d73b0695a2 = function_f159c10d5cf8f0b4("rr_movement_object_proximity_trigger", "targetname");
-  var_af610f07aac25c21 = function_f159c10d5cf8f0b4("rr_vision_object_proximity_trigger", "targetname");
+  var_af3f89771327058a = getnoentvolumearray("rr_damage_object_proximity_trigger", "targetname");
+  var_fd36a7d73b0695a2 = getnoentvolumearray("rr_movement_object_proximity_trigger", "targetname");
+  var_af610f07aac25c21 = getnoentvolumearray("rr_vision_object_proximity_trigger", "targetname");
 
   if(isarray(var_af3f89771327058a) && var_af3f89771327058a.size > 0) {
     foreach(var_e49ce046b0ea3e3d in var_af3f89771327058a) {
@@ -1113,8 +1113,8 @@ function weakpoint_setup() {
     weakpoint.shield = utility::spawn_model("jup_zm_weakpoint_shell", ground_pos - (0, 0, 1), raynormal);
     weakpoint.shield solid();
     weakpoint.shield.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_rift_weakpoint_healthbar");
-    weakpoint.shield.var_534e788bc498be9f = getscriptbundle(%"hash_1e1140be0648fb42");
-    weakpoint.shield.subclass = weakpoint.shield.var_534e788bc498be9f.name;
+    weakpoint.shield.subclass_scriptbundle = getscriptbundle(%"hash_1e1140be0648fb42");
+    weakpoint.shield.subclass = weakpoint.shield.subclass_scriptbundle.name;
     weakpoint.shield setCanDamage(1);
     weakpoint.shield.health = 100;
     weakpoint.shield.navobstacleid = createnavobstaclebyent(weakpoint.shield);
@@ -1315,8 +1315,8 @@ function function_4bb2f4017b25f5d3() {
   rift_heart.shield = utility::spawn_model("jup_zm_heart_shell", ground_pos - (0, 0, 1), raynormal);
   rift_heart.shield solid();
   rift_heart.shield.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_rift_heart_healthbar");
-  rift_heart.shield.var_534e788bc498be9f = getscriptbundle(%"hash_29ceeef6c31e0bfb");
-  rift_heart.shield.subclass = rift_heart.shield.var_534e788bc498be9f.name;
+  rift_heart.shield.subclass_scriptbundle = getscriptbundle(%"hash_29ceeef6c31e0bfb");
+  rift_heart.shield.subclass = rift_heart.shield.subclass_scriptbundle.name;
   rift_heart.shield setCanDamage(1);
   rift_heart.shield.health = 7000;
   rift_heart.shield.navobstacleid = createnavobstaclebyent(rift_heart.shield);
@@ -1863,7 +1863,7 @@ function function_b2082fcbe629a6f() {
   }
 
   flag_wait("ob_infil_completed");
-  filtered_volumes = function_f159c10d5cf8f0b4("rr_starting_platform_trigger", "targetname");
+  filtered_volumes = getnoentvolumearray("rr_starting_platform_trigger", "targetname");
 
   if(filtered_volumes.size > 0) {
     while(self istouching(filtered_volumes[0])) {

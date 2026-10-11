@@ -18,15 +18,15 @@ function function_12d7ca3ff609caba() {
   level._effect["thorwstar_impact_flesh"] = loadfx("vfx/iw9/core/equipment/throwstar/vfx_throwstar_impact_flesh.vfx");
   level._effect["thorwstar_impact_water"] = loadfx("vfx/iw9/core/equipment/throwstar/vfx_throwstar_impact_water.vfx");
   setdvarifuninitialized(@ "hash_e34dbb045ad712e7", 0);
-  function_f3bb4f4911a1beb2("throwstar", "init");
+  callsharedfunc("throwstar", "init");
 }
 
 function function_e7715ffb329c1b40(equipmentref, equipmentslot, variantid) {
-  function_f3bb4f4911a1beb2("throwstar", "onGive");
+  callsharedfunc("throwstar", "onGive");
 }
 
 function function_92e126d1a5d3fb2(equipmentref, equipmentslot) {
-  function_f3bb4f4911a1beb2("throwstar", "onTake");
+  callsharedfunc("throwstar", "onTake");
 }
 
 function function_709581d70ebb07cd(grenade) {

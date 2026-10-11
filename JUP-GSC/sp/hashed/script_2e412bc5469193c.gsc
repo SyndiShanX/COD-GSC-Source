@@ -870,7 +870,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_reinforcements_pickup";
   s.load_ai = "1";
   s.script_speed = int(40);
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcements_pickup_group";
   fe[[f]](s, us, cf, (-1951.04, -366.09, 130.95), (0, 355.93, 0), "reinforcements_truck_manor_side", "cspf_0_auto15774");
   s = s();
@@ -1013,7 +1013,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_ranch_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (1814.32, 1175.26, 143.79), (0, 157.3, 0), "veh_initial_truck_retired");
   s = s();
   s.cs_flag = "cp_jup_ranch_create_script";
@@ -1056,7 +1056,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_reinforcements_pickup";
   s.load_ai = "1";
   s.script_speed = int(40);
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcements_pickup_group";
   fe[[f]](s, us, cf, (2287.74, 3582.14, 35.89), (0, 280.93, 0), "reinforcements_truck_barn", "cspf_0_auto15783");
   s = s();
@@ -1308,7 +1308,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_ranch_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (2527.03, -251.17, 74.07), (0, 236.5, 0), "veh_initial_truck_retired");
   s = s();
   s.cs_flag = "cp_jup_ranch_create_script";
@@ -1316,7 +1316,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_reinforcements_pickup";
   s.load_ai = "1";
   s.script_speed = int(40);
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcements_pickup_group";
   fe[[f]](s, us, cf, (533.14, -4796.55, 142.93), (0, 110.63, 0), "reinforcements_truck_start", "cspf_0_auto15753");
   s = s();
@@ -1325,7 +1325,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_reinforcements_pickup";
   s.load_ai = "1";
   s.script_speed = int(40);
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcements_pickup_group";
   fe[[f]](s, us, cf, (474.81, 3561.68, 26.02), (0, 243.83, 0), "reinforcements_truck_building1_rear", "cspf_0_auto15772");
   s = s();
@@ -1540,7 +1540,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_reinforcements_pickup";
   s.load_ai = "1";
   s.script_speed = int(40);
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcements_pickup_group";
   fe[[f]](s, us, cf, (449.68, 3489.26, 26.18), (0, 250.73, 0), "reinforcements_truck_building1_side", "cspf_0_auto15763");
   s = s();
@@ -1549,7 +1549,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_patrols_pickup";
   s.load_ai = "1";
   s.script_speed = int(7);
-  s.var_1e33f32152f60866 = "veh_jup_jltv_mg";
+  s.script_vehicleref = "veh_jup_jltv_mg";
   s.spawngroup = "patrols_pickup_group";
   fe[[f]](s, us, cf, (-903.92, -35.7, 95.97), (0, 351.5, 0), "spawner_patrols_pickup", "cspf_0_auto15507");
   s = s();
@@ -1558,7 +1558,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_reinforcements_pickup";
   s.load_ai = "1";
   s.script_speed = int(40);
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcements_pickup_group";
   fe[[f]](s, us, cf, (456.37, 3520.03, 67.67), (0, 260.78, 0), "reinforcements_truck_center", "cspf_0_auto110");
   s = s();
@@ -1567,7 +1567,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_reinforcements_pickup";
   s.load_ai = "1";
   s.script_speed = int(40);
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcements_pickup_group";
   fe[[f]](s, us, cf, (2419.86, 3617.8, 32.58), (0, 271.19, 0), "reinforcements_truck_roadwest", "cspf_0_auto15790");
   s = s();
@@ -1576,7 +1576,7 @@ function createstructs(fe, us, cf) {
   s.var_72772fa651ecbe2b = "spawn_func_reinforcements_pickup";
   s.load_ai = "1";
   s.script_speed = int(60);
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcements_pickup_group";
   fe[[f]](s, us, cf, (629.14, -5043.05, 142.93), (0, 105.23, 0), "reinforcements_truck_south", "cspf_0_auto15758");
   s = s();
@@ -2762,7 +2762,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_ranch_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (-310.39, 1087.18, 68.09), (0, 101.89, 0), "veh_initial_truck");
   s = s();
   s.cs_flag = "cp_jup_ranch_create_script";
@@ -4129,7 +4129,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_ranch_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (626.61, 60.18, 80.09), (0, 302.6, 0), "veh_initial_truck");
   s = s();
   s.cs_flag = "cp_jup_ranch_create_script";

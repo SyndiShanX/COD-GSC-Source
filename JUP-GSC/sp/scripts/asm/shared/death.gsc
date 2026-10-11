@@ -16,7 +16,7 @@
 #using scripts\engine\utility;
 #namespace death;
 
-function function_7f42b3806988f8db(asmname, statename, params) {
+function playdeathanimcommon(asmname, statename, params) {
   stop_sounds();
   self stoplookat();
 
@@ -90,8 +90,8 @@ function function_7f42b3806988f8db(asmname, statename, params) {
   assertex(isDefined(self.deathalias) && isDefined(self.deathstate) || !isDefined(self.deathalias) && !isDefined(self.deathstate), ".deathAlias and .deathState must both be defined, or neither defined");
   var_4d3cebad4e3e8617 = isDefined(self.deathalias) && isDefined(self.deathstate);
 
-  if(!isDefined(self.skipdeathanim) || istrue(self.var_aa0214e1292a7b3)) {
-    deathanimdata = function_ea379d7359bd10ae(asmname, statename, params);
+  if(!isDefined(self.skipdeathanim) || istrue(self.diedintransition)) {
+    deathanimdata = getdeathanimdata(asmname, statename, params);
     assert(isDefined(deathanimdata) && deathanimdata.size == 2);
     deathanim = deathanimdata[0];
     deathxanim = deathanimdata[1];
@@ -156,7 +156,7 @@ function function_7f42b3806988f8db(asmname, statename, params) {
     thread startragdollwithoutwait();
   } else {
     if(!isDefined(deathanimdata)) {
-      deathanimdata = function_ea379d7359bd10ae(asmname, statename, params);
+      deathanimdata = getdeathanimdata(asmname, statename, params);
     }
 
     assert(isDefined(deathanimdata) && deathanimdata.size == 2);
@@ -179,7 +179,7 @@ function function_7f42b3806988f8db(asmname, statename, params) {
   self endon("terminate_death_thread");
 
   if(!isagent(self)) {
-    if(isDefined(self.skipdeathanim) && !istrue(self.var_aa0214e1292a7b3)) {
+    if(isDefined(self.skipdeathanim) && !istrue(self.diedintransition)) {
       wait 0.05;
     } else {
       notestatename = statename;
@@ -217,7 +217,7 @@ function deathnotetracks(note) {
   scripts\anim\notetracks::notetrack_prefix_handler(note);
 }
 
-function function_ea379d7359bd10ae(asmname, statename, params) {
+function getdeathanimdata(asmname, statename, params) {
   assertex(isDefined(self.deathalias) && isDefined(self.deathstate) || !isDefined(self.deathalias) && !isDefined(self.deathstate), ".deathAlias and .deathState must both be defined, or neither defined");
   var_4d3cebad4e3e8617 = isDefined(self.deathalias) && isDefined(self.deathstate);
 

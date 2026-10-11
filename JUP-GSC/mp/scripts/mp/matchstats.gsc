@@ -99,19 +99,19 @@ function writeplayerinfo() {
 
     switch (patharray.size) {
       case 1:
-        self setplayerdata(level.var_5d69837cf4db0407, "matchStats", patharray[0], value);
+        self setplayerdata(level.progressiongroup, "matchStats", patharray[0], value);
         break;
       case 2:
-        self setplayerdata(level.var_5d69837cf4db0407, "matchStats", patharray[0], patharray[1], value);
+        self setplayerdata(level.progressiongroup, "matchStats", patharray[0], patharray[1], value);
         break;
       case 3:
-        self setplayerdata(level.var_5d69837cf4db0407, "matchStats", patharray[0], patharray[1], patharray[2], value);
+        self setplayerdata(level.progressiongroup, "matchStats", patharray[0], patharray[1], patharray[2], value);
         break;
       case 4:
-        self setplayerdata(level.var_5d69837cf4db0407, "matchStats", patharray[0], patharray[1], patharray[2], patharray[3], value);
+        self setplayerdata(level.progressiongroup, "matchStats", patharray[0], patharray[1], patharray[2], patharray[3], value);
         break;
       case 5:
-        self setplayerdata(level.var_5d69837cf4db0407, "matchStats", patharray[0], patharray[1], patharray[2], patharray[3], patharray[4], value);
+        self setplayerdata(level.progressiongroup, "matchStats", patharray[0], patharray[1], patharray[2], patharray[3], patharray[4], value);
         break;
     }
   }

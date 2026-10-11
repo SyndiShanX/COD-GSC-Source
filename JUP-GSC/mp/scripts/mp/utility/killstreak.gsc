@@ -486,7 +486,7 @@ function function_394de31762a977eb(weaponname, damagesize) {
   level.var_c6411e8929fa12b3[weaponname] = damagesize;
 }
 
-function getmodifiedantikillstreakdamage(attacker, objweapon, meansofdeath, amount, maxhealth, var_cb15fa5174e71840, var_be7c04516c5d9ccd, var_ca960a517459fe15, var_8aceb016baaf67af, var_64103c6b531d18f0, explodeoverride) {
+function getmodifiedantikillstreakdamage(attacker, objweapon, meansofdeath, amount, maxhealth, divisorlrg, divisormed, divisorlow, divisormelee, divisortick, explodeoverride) {
   var_f20bc25347c9baaf = 0;
   var_4d8dc8aa1757e7a9 = 0;
 
@@ -658,19 +658,19 @@ function getmodifiedantikillstreakdamage(attacker, objweapon, meansofdeath, amou
         divisor = 1;
       } else if(damagesize == #"large") {
         self.largeprojectiledamage = 1;
-        divisor = var_cb15fa5174e71840;
+        divisor = divisorlrg;
       } else if(damagesize == #"medium") {
         self.largeprojectiledamage = 1;
-        divisor = var_be7c04516c5d9ccd;
+        divisor = divisormed;
       } else if(damagesize == #"low") {
         self.largeprojectiledamage = 0;
-        divisor = var_ca960a517459fe15;
+        divisor = divisorlow;
       } else if(damagesize == #"tick") {
         self.largeprojectiledamage = 0;
-        divisor = var_64103c6b531d18f0;
+        divisor = divisortick;
       } else if(damagesize == #"melee") {
         self.largeprojectiledamage = 0;
-        divisor = var_8aceb016baaf67af;
+        divisor = divisormelee;
       }
     }
 
@@ -842,8 +842,8 @@ function getenemytargets(owner) {
   return enemytargets;
 }
 
-function _beginlocationselection(streakname, selectortype, var_8e536aa74b9c997d, size) {
-  self beginlocationselection(selectortype, var_8e536aa74b9c997d, "circle_marker", size);
+function _beginlocationselection(streakname, selectortype, directionality, size) {
+  self beginlocationselection(selectortype, directionality, "circle_marker", size);
   self.selectinglocation = 1;
   self setblurforplayer(10.3, 0.3);
   thread endselectiononaction("cancel_location");

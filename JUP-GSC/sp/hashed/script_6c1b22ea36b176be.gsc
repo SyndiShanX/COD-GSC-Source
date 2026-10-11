@@ -92,7 +92,7 @@ function slidetriggerplayerthink(trig) {
   endsliding(trig.script_stance, trig.script_damage, trig.script_gesture, trig.script_noteworthy);
 }
 
-function doslide(slidemodel, allowedacceleration, var_f8d869e874843e58) {
+function doslide(slidemodel, allowedacceleration, dampening) {
   self endon("death");
   self endon("stop_sliding");
   player = self;
@@ -109,7 +109,7 @@ function doslide(slidemodel, allowedacceleration, var_f8d869e874843e58) {
     slidemodel.slidevelocity += movement * allowedacceleration;
     player.fx_tag.origin = slidemodel.origin + anglesToForward(slidemodel.gesture_target.angles) * 400;
     waitframe();
-    slidemodel.slidevelocity *= 1 - var_f8d869e874843e58;
+    slidemodel.slidevelocity *= 1 - dampening;
   }
 }
 
@@ -150,34 +150,34 @@ function function_6009f043b924d50(slidevolume) {
 function function_71d30054f4d134d() {
   self endon("stop_sliding");
   self endon("death");
-  var_48642c20d8f8703c = 4;
+  numframestocheck = 4;
   prevpositions = [];
 
-  for(i = 0; i < var_48642c20d8f8703c; i++) {
+  for(i = 0; i < numframestocheck; i++) {
     prevpositions[i] = self.slidemodel.origin;
     waitframe();
   }
 
-  var_1d3a21a69ce70731 = 0;
+  stagnant = 0;
 
-  while(!var_1d3a21a69ce70731 && isDefined(self.slidemodel)) {
-    var_1d3a21a69ce70731 = 1;
+  while(!stagnant && isDefined(self.slidemodel)) {
+    stagnant = 1;
 
-    for(i = 0; i < var_48642c20d8f8703c - 1; i++) {
+    for(i = 0; i < numframestocheck - 1; i++) {
       if(prevpositions[i] != prevpositions[i + 1]) {
-        var_1d3a21a69ce70731 = 0;
+        stagnant = 0;
         prevpositions[i] = prevpositions[i + 1];
       }
     }
 
-    prevpositions[var_48642c20d8f8703c - 1] = self.slidemodel.origin;
+    prevpositions[numframestocheck - 1] = self.slidemodel.origin;
     waitframe();
   }
 
   self.var_a084a815b06d6479 = 1;
 }
 
-function beginsliding(velocity, allowedacceleration, var_f8d869e874843e58, gesture, surfacetype) {
+function beginsliding(velocity, allowedacceleration, dampening, gesture, surfacetype) {
   self endon("stop_sliding");
   self endon("death");
   assert(isPlayer(self));
@@ -239,8 +239,8 @@ function beginsliding(velocity, allowedacceleration, var_f8d869e874843e58, gestu
     allowedacceleration = 10;
   }
 
-  if(!isDefined(var_f8d869e874843e58)) {
-    var_f8d869e874843e58 = 0.035;
+  if(!isDefined(dampening)) {
+    dampening = 0.035;
   }
 
   slidemodel moveslide((0, 0, 15), 15, velocity);
@@ -292,7 +292,7 @@ function beginsliding(velocity, allowedacceleration, var_f8d869e874843e58, gestu
     player val::set("slide", "sprint", 0);
   }
 
-  player thread doslide(slidemodel, allowedacceleration, var_f8d869e874843e58);
+  player thread doslide(slidemodel, allowedacceleration, dampening);
 
   if(isDefined(surfacetype) && getdvarint(@ "hash_94150a895cddf69d", 0)) {
     player childthread function_ddf979aedbe53699(surfacetype);
@@ -301,8 +301,8 @@ function beginsliding(velocity, allowedacceleration, var_f8d869e874843e58, gestu
   }
 
   if(utility::issharedfuncdefined("player", "get_rumble_ent")) {
-    player.rumble_ent = utility::function_f3bb4f4911a1beb2("player", "get_rumble_ent");
-    player.rumble_ent thread utility::function_f3bb4f4911a1beb2("player", "rumble_ramp_to", 0.6, 3);
+    player.rumble_ent = utility::callsharedfunc("player", "get_rumble_ent");
+    player.rumble_ent thread utility::callsharedfunc("player", "rumble_ramp_to", 0.6, 3);
   }
 }
 
@@ -371,7 +371,7 @@ function endsliding(endingstance, endingdamage, gesture, surfacetype) {
   player notify("stop_sliding");
 }
 
-function beginslidinglegacy(velocity, allowedacceleration, var_f8d869e874843e58) {
+function beginslidinglegacy(velocity, allowedacceleration, dampening) {
   assert(isPlayer(self));
   player = self;
 
@@ -394,8 +394,8 @@ function beginslidinglegacy(velocity, allowedacceleration, var_f8d869e874843e58)
     allowedacceleration = 10;
   }
 
-  if(!isDefined(var_f8d869e874843e58)) {
-    var_f8d869e874843e58 = 0.035;
+  if(!isDefined(dampening)) {
+    dampening = 0.035;
   }
 
   assert(!isDefined(player.slidemodel));
@@ -414,7 +414,7 @@ function beginslidinglegacy(velocity, allowedacceleration, var_f8d869e874843e58)
   player val::set("slide_legacy", "prone", 0);
   player val::set("slide_legacy", "crouch", 1);
   player val::set("slide_legacy", "stand", 0);
-  player thread doslide(slidemodel, allowedacceleration, var_f8d869e874843e58);
+  player thread doslide(slidemodel, allowedacceleration, dampening);
 }
 
 function endslidinglegacy() {

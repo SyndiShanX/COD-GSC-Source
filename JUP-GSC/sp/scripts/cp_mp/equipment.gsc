@@ -198,15 +198,15 @@ function loadequipmentbundles() {
             baseweapon = makeweapon(weaponname);
 
             if(!isnullweapon(baseweapon)) {
-              attachments = function_6527364c1ecca6c6(weaponname);
+              attachments = getweapondefaultattachments(weaponname);
             }
 
             struct.objweapon = makeweapon(weaponname, attachments);
             blueprints = getweaponblueprintnames(weaponname);
 
             foreach(id in blueprints) {
-              var_1092bc40c58c1c9a = weaponname + "|" + string(id);
-              level.equipmentblueprints[var_1092bc40c58c1c9a] = function_3211981142ec5aee(weaponname, blueprint);
+              svariantid = weaponname + "|" + string(id);
+              level.equipmentblueprints[svariantid] = function_3211981142ec5aee(weaponname, blueprint);
             }
           }
 
@@ -281,8 +281,8 @@ function buildequipment(weaponname, variantid) {
 
   if(isDefined(variantid) && variantid > 0) {
     weapon = makeweapon(weaponname, [], undefined, undefined, variantid);
-    var_1092bc40c58c1c9a = weaponname + "|" + string(variantid);
-    attachments = level.equipmentblueprints[var_1092bc40c58c1c9a];
+    svariantid = weaponname + "|" + string(variantid);
+    attachments = level.equipmentblueprints[svariantid];
 
     foreach(variant in attachments) {
       weapon = weapon withattachment(attachment, variant);
@@ -847,7 +847,7 @@ function function_7f245729fcb6414d(weaponname) {
   return undefined;
 }
 
-function function_2113b6f7cb462692(weaponname) {
+function getequipmentbundlefromweaponname(weaponname) {
   if(!isDefined(weaponname)) {
     return undefined;
   }

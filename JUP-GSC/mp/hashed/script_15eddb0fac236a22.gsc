@@ -45,7 +45,7 @@ function private function_7e3861fd7026453() {
 
   if(!function_9c138fdbc077542()) {
     self.var_e557be412f9c91ab = 0;
-  } else if(istrue(level.var_f20fe98bf14887b6)) {
+  } else if(istrue(level.istrainingcourse)) {
     self.var_e557be412f9c91ab = 0;
   } else {
     self.var_e557be412f9c91ab = 1;
@@ -269,9 +269,9 @@ function function_99b3339dca12abde(damagevalue) {
 
   damagevalue = int(clamp(damagevalue, 0, 65535));
   scripts\mp\utility\stats::initpersstat("damageReceived");
-  var_e7ec701163e1b30c = int(clamp(getpersstat("damageReceived") + damagevalue, 0, 65535));
-  self.pers["damageReceived"] = var_e7ec701163e1b30c;
-  self.damagereceived = var_e7ec701163e1b30c;
+  clampeddamage = int(clamp(getpersstat("damageReceived") + damagevalue, 0, 65535));
+  self.pers["damageReceived"] = clampeddamage;
+  self.damagereceived = clampeddamage;
 }
 
 function function_968efd4a57cd5164(cashvalue) {

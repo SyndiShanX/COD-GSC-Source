@@ -175,7 +175,7 @@ function function_e2674314764bdf3() {
     scripts\mp\objidpoolmanager::function_846c2acd91309cd8(newchopper.objectiveiconid, 246, 192, 72);
     newchopper.scriptedobjid = newchopper.objectiveiconid;
     self.objectiveiconid = newchopper.objectiveiconid;
-    newchopper function_1cd1ee312fd03bb4(1);
+    newchopper vehicleunpingable(1);
     thread function_b012a5a56983477(newchopper);
     newchopper.task = self;
     self.chopper = newchopper;

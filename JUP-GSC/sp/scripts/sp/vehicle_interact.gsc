@@ -67,9 +67,9 @@ function main_vehicle_interact(structs) {
 
     assertex(isDefined(struct.vehicle), "No ent or scriptable associated with interact vehicle at this position, " + struct.origin);
     struct.cover_nodes = [];
-    var_9b966dd8a1ac987a = getStructArray(struct.script_linkto, "script_linkname");
+    doors_avail = getStructArray(struct.script_linkto, "script_linkname");
 
-    foreach(door in var_9b966dd8a1ac987a) {
+    foreach(door in doors_avail) {
       assertex(isDefined(door.script_namenumber), "Linked to a stuct with no script_namenumber setting which door or cover node it is!");
 
       if(strtok(door.script_namenumber, " ")[0] == "cover") {
@@ -151,14 +151,14 @@ function interact_door_setup(door) {
     }
   }
 
-  var_e88c9fd4344fc3e0 = undefined;
+  getin_hint = undefined;
 
   if(isDefined(door.script_linkto)) {
     inside_hint = getStruct(door.script_linkto, "script_linkname");
     assertex(isDefined(inside_hint.script_namenumber), "No getin hint for " + door.script_namenumber);
-    var_e88c9fd4344fc3e0 = strtok(inside_hint.script_namenumber, "_")[1];
-    self.getin_hints[var_e88c9fd4344fc3e0] = inside_hint;
-    self.door_open[var_e88c9fd4344fc3e0] = 0;
+    getin_hint = strtok(inside_hint.script_namenumber, "_")[1];
+    self.getin_hints[getin_hint] = inside_hint;
+    self.door_open[getin_hint] = 0;
     door_col = getEnt(door.script_linkto, "script_linkname");
 
     if(isDefined(door_col)) {
@@ -167,7 +167,7 @@ function interact_door_setup(door) {
       }
 
       door_col linkTo(self.vehicle, self.hint_bones[door.script_namenumber]);
-      self.door_col[var_e88c9fd4344fc3e0] = door_col;
+      self.door_col[getin_hint] = door_col;
     }
   }
 
@@ -179,7 +179,7 @@ function interact_door_setup(door) {
   }
 
   hint_ent.door_name = door.script_namenumber;
-  self.getin_hints[var_e88c9fd4344fc3e0].hint_ent = hint_ent;
+  self.getin_hints[getin_hint].hint_ent = hint_ent;
   hint_ent endon("death");
   hint_ent create_cursor_hint("tag_origin", undefined, undefined, 180, 100, 60, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 180);
   hint_ent waittill("trigger");
@@ -245,9 +245,9 @@ function interact_interior_door_open_remove(hint_ent) {
 }
 
 function interact_vehicle_inside(door) {
-  var_9b255abfdc4df054 = strtok(door.script_namenumber, "_")[1];
+  getin_key = strtok(door.script_namenumber, "_")[1];
 
-  if(!isDefined(self.getin_hints[var_9b255abfdc4df054])) {
+  if(!isDefined(self.getin_hints[getin_key])) {
     return;
   }
 
@@ -260,7 +260,7 @@ function interact_vehicle_inside(door) {
   }
 
   pathend = get_next_struct(pathstart);
-  block_for_mantle(self.getin_hints[var_9b255abfdc4df054]);
+  block_for_mantle(self.getin_hints[getin_key]);
 
   foreach(door_struct in self.doors) {
     if(door_struct != door) {
@@ -448,7 +448,7 @@ function create_mantle_hint() {
   level.interact_vehicle_mantle_hint setshader("hud_icon_mantle", 24, 24);
 }
 
-function block_for_push(var_9b255abfdc4df054, duration) {
+function block_for_push(getin_key, duration) {
   self endon("death");
 
   if(isDefined(duration)) {
@@ -460,9 +460,9 @@ function block_for_push(var_9b255abfdc4df054, duration) {
   count = 0;
 
   for(;;) {
-    dist = distance2dsquared(level.player.origin, self.getin_hints[var_9b255abfdc4df054].origin);
+    dist = distance2dsquared(level.player.origin, self.getin_hints[getin_key].origin);
     input = level.player getnormalizedmovement();
-    dot = math::get_dot(self.getin_hints[var_9b255abfdc4df054].origin, self.getin_hints[var_9b255abfdc4df054].angles, level.player.origin);
+    dot = math::get_dot(self.getin_hints[getin_key].origin, self.getin_hints[getin_key].angles, level.player.origin);
 
     if(dist < 900 && abs(input[1]) > 0.2) {
       count += 1;
@@ -532,18 +532,18 @@ function get_prev_struct(struct) {
   return undefined;
 }
 
-function get_opposite_door(var_2d90be230c1d4de0) {
+function get_opposite_door(door_namenumber) {
   var_23ff9149209744ca = undefined;
 
-  if(var_2d90be230c1d4de0 == "outside_lr") {
+  if(door_namenumber == "outside_lr") {
     var_23ff9149209744ca = "outside_rr";
-  } else if(var_2d90be230c1d4de0 == "outside_rr") {
+  } else if(door_namenumber == "outside_rr") {
     var_23ff9149209744ca = "outside_lr";
   }
 
-  var_9b966dd8a1ac987a = getStructArray(self.script_linkto, "script_linkname");
+  doors_avail = getStructArray(self.script_linkto, "script_linkname");
 
-  foreach(door in var_9b966dd8a1ac987a) {
+  foreach(door in doors_avail) {
     if(isDefined(door.script_namenumber) && door.script_namenumber == var_23ff9149209744ca) {
       return door;
     }
@@ -591,10 +591,10 @@ function interact_vehicle_movement(struct, door, pathstart, pathend) {
     if(self.movelength > 0) {
       var_fe3c611cdad7110e = nextpos + self.velocity;
       var_fe3c611cdad7110e = (var_fe3c611cdad7110e[0], var_fe3c611cdad7110e[1], 0);
-      var_27bb2a56eee65fec = (pathstart.origin[0], pathstart.origin[1], 0);
-      var_a9d61648da0acac1 = (pathend.origin[0], pathend.origin[1], 0);
+      pathstart2d = (pathstart.origin[0], pathstart.origin[1], 0);
+      pathend2d = (pathend.origin[0], pathend.origin[1], 0);
 
-      if(vectordot(self.pathdir, vectorNormalize(var_27bb2a56eee65fec - var_fe3c611cdad7110e)) > 0) {
+      if(vectordot(self.pathdir, vectorNormalize(pathstart2d - var_fe3c611cdad7110e)) > 0) {
         exit = struct wait_for_mantle_inside(pathstart);
 
         if(exit) {
@@ -602,7 +602,7 @@ function interact_vehicle_movement(struct, door, pathstart, pathend) {
         } else {
           self.velocity = (0, 0, 0);
         }
-      } else if(vectordot(self.pathdir, vectorNormalize(var_a9d61648da0acac1 - var_fe3c611cdad7110e)) < 0) {
+      } else if(vectordot(self.pathdir, vectorNormalize(pathend2d - var_fe3c611cdad7110e)) < 0) {
         exit = struct wait_for_mantle_inside(pathend);
 
         if(exit) {
@@ -739,9 +739,9 @@ function set_moverate_along_dir() {
     }
   }
 
-  var_266051abdf333968 = self.movedist / 10;
-  velmult = get_scoot_velocity(var_266051abdf333968);
-  self.velocity_bump = get_scoot_velocity_bump(var_266051abdf333968);
+  scootpercent = self.movedist / 10;
+  velmult = get_scoot_velocity(scootpercent);
+  self.velocity_bump = get_scoot_velocity_bump(scootpercent);
   self.moveviewmult = velmult;
   self.velocity *= velmult + self.velocity_bump;
 }
@@ -791,9 +791,9 @@ function set_viewangles() {
     roll *= -1;
   }
 
-  var_dd3f39726d4223e5 = is_pos_in_front(self.pathstart.midpoint.origin, self.origin, self.pathstart.midpoint.right);
+  onrightside = is_pos_in_front(self.pathstart.midpoint.origin, self.origin, self.pathstart.midpoint.right);
 
-  if(var_dd3f39726d4223e5) {
+  if(onrightside) {
     var_c7a69cd71108ddf5 = (0, 0, -5);
   } else {
     var_c7a69cd71108ddf5 = (0, 0, 5);
@@ -819,7 +819,7 @@ function set_viewangles() {
 
     duckrotation = (0, 2, -10);
 
-    if(var_dd3f39726d4223e5) {
+    if(onrightside) {
       duckangles = anglelerpquatfrac((0, 0, 0), duckrotation, duckpercent);
     } else {
       duckangles = anglelerpquatfrac((0, 0, 0), duckrotation * -1, duckpercent);
@@ -858,10 +858,10 @@ function set_viewangles() {
 }
 
 function is_pos_in_front(relativepos, objectpos, dir) {
-  var_abea560fe9718122 = (objectpos[0], objectpos[1], 0);
-  var_9e78858751869b23 = (relativepos[0], relativepos[1], 0);
-  var_3c6560027930bc25 = vectordot(dir, vectorNormalize(var_abea560fe9718122 - var_9e78858751869b23));
-  return var_3c6560027930bc25 > 0;
+  objectpos2d = (objectpos[0], objectpos[1], 0);
+  relativepos2d = (relativepos[0], relativepos[1], 0);
+  isinfront = vectordot(dir, vectorNormalize(objectpos2d - relativepos2d));
+  return isinfront > 0;
 }
 
 function interact_give_control_back(time, ent) {

@@ -138,7 +138,7 @@ function jugg_makejuggernaut(juggconfig, streakinfo) {
     jugg_setModel();
     scripts\cp\utility\player::_setsuit(juggconfig.suit);
     self.suit = juggconfig.suit;
-    self setclothtype(function_1823ff50bb28148d(juggconfig.clothtype));
+    self setclothtype(getxhash(juggconfig.clothtype));
   } else {
     self setclothtype(#"vestheavy");
     viewmodelname = self getcustomizationviewmodel();
@@ -672,7 +672,7 @@ function jugg_removejuggernaut() {
   self.suit = juggcontext.prevsuit;
 
   if(isDefined(self.prevclothtype)) {
-    self setclothtype(function_1823ff50bb28148d(juggcontext.prevclothtype));
+    self setclothtype(getxhash(juggcontext.prevclothtype));
   }
 
   if(!istrue(self.streakinfo.var_ca56839b2e00edce)) {

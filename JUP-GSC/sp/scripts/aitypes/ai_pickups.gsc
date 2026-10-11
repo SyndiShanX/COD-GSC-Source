@@ -11,24 +11,24 @@ function function_fbc045e84cf575ae(name, seekradius, pickupgoalradius, var_47f82
   }
 
   assert(!isDefined(level.var_634b074c62f96cd3[name]));
-  var_7b92a81604ca9034 = spawnStruct();
-  var_7b92a81604ca9034.seekradius = seekradius;
-  var_7b92a81604ca9034.pickupgoalradius = pickupgoalradius;
-  var_7b92a81604ca9034.var_47f82a4d9a77876f = var_47f82a4d9a77876f;
-  var_7b92a81604ca9034.var_c4356a88633f476d = var_c4356a88633f476d;
-  var_7b92a81604ca9034.var_65d0778d90ececae = var_65d0778d90ececae;
-  var_7b92a81604ca9034.canusefunc = canusefunc;
-  var_7b92a81604ca9034.usefunc = usefunc;
-  var_7b92a81604ca9034.additionaldata = additionaldata;
-  level.var_634b074c62f96cd3[name] = var_7b92a81604ca9034;
+  newpickupdef = spawnStruct();
+  newpickupdef.seekradius = seekradius;
+  newpickupdef.pickupgoalradius = pickupgoalradius;
+  newpickupdef.var_47f82a4d9a77876f = var_47f82a4d9a77876f;
+  newpickupdef.var_c4356a88633f476d = var_c4356a88633f476d;
+  newpickupdef.var_65d0778d90ececae = var_65d0778d90ececae;
+  newpickupdef.canusefunc = canusefunc;
+  newpickupdef.usefunc = usefunc;
+  newpickupdef.additionaldata = additionaldata;
+  level.var_634b074c62f96cd3[name] = newpickupdef;
 }
 
 function function_7bf8496cb1c4eee8(ent) {
-  return level.var_634b074c62f96cd3[ent.var_447891d63f8a9e28];
+  return level.var_634b074c62f96cd3[ent.aipickupname];
 }
 
 function function_cb0d4933a6762cf9(pickupname) {
-  self.var_447891d63f8a9e28 = pickupname;
+  self.aipickupname = pickupname;
   pickupdef = function_7bf8496cb1c4eee8(self);
   assertex(isDefined(pickupdef), "Pickup def needs to be defined for this pickupName before pickup can be added");
   function_45e8de724a35faf2(self, pickupdef.seekradius);
@@ -50,7 +50,7 @@ function function_48eefcb82b853c11(taskid) {
   return anim.failure;
 }
 
-function function_a686ba7a3ef1cefa(taskid) {
+function seekpickupitem_setgoal(taskid) {
   if(!isDefined(self.bt.pickupitem)) {
     return anim.failure;
   }
@@ -63,7 +63,7 @@ function function_a686ba7a3ef1cefa(taskid) {
   return anim.success;
 }
 
-function function_edc6e91837522e22(taskid) {
+function seekpickupitem_update(taskid) {
   if(!isDefined(self.bt.pickupitem)) {
     return anim.failure;
   }

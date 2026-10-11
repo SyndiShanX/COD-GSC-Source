@@ -18,7 +18,7 @@
 #namespace jltv_infil;
 
 function function_20d96b1495a37dbc(subtype) {
-  scripts\cp_mp\utility\audio_utility::function_f1aed36ab4598ea("jltv_infil");
+  scripts\cp_mp\utility\audio_utility::snd_transient_load("jltv_infil");
   thread function_55fd55bdea97d9be();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -420,7 +420,7 @@ function function_fea19c0d10ed34e9() {
 function function_55fd55bdea97d9be() {
   level waittill("prematch_over");
   wait 51;
-  scripts\cp_mp\utility\audio_utility::function_f4e0ff5cb899686d("jltv_infil");
+  scripts\cp_mp\utility\audio_utility::snd_transient_unload("jltv_infil");
 }
 
 function function_6158ef142e9bd640() {

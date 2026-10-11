@@ -157,7 +157,7 @@ function function_3588066237370357() {
   }
 
   for(i = 0; i < var_d08f3ac86be7ae9e.size; i++) {
-    mission_name = function_1cbe81bf66185af4(i);
+    mission_name = get_mission_name(i);
 
     if(is_equal(mission_name, "s0_act2")) {
       var_d08f3ac86be7ae9e[i].var_35d53d54bebe2864 = 1;
@@ -183,7 +183,7 @@ function function_cd828662014a857e() {
   }
 }
 
-function function_1cbe81bf66185af4(n_act) {
+function get_mission_name(n_act) {
   switch (n_act) {
     case 0:
       str_mission = "s0_act1";

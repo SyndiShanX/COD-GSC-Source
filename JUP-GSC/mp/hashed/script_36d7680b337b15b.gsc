@@ -56,7 +56,7 @@ function private function_ee486eaddde6fd68() {
   self.var_a60b211ca1cf2a4e = 0;
   self.var_cadb0f258ae78683 = 400;
   self.var_3f4dee1c560fc063 = undefined;
-  is_fast = istrue(self function_11e2d4051ea44b35("snakebite_fast"));
+  is_fast = istrue(self getaiblackboarddynamic("snakebite_fast"));
   playback_rate = is_fast ? 2 : 1;
   tracking_time = 4000;
   alive_percentage = [[self.var_c54a21ea717fe8a5]]();
@@ -167,7 +167,7 @@ function private snake_bite_danger_zone() {
 
   while(true) {
     if(isDefined(self.var_3f4dee1c560fc063)) {
-      players = function_883458a342af3041(self.var_3f4dee1c560fc063, var_a3986c6c03221f24);
+      players = getplayersinradiussharedfunc(self.var_3f4dee1c560fc063, var_a3986c6c03221f24);
 
       if(function_2113bc484dd870c2()) {
         sphere(self.var_3f4dee1c560fc063, var_a3986c6c03221f24, (1, 1, 0));
@@ -226,7 +226,7 @@ function melee_impact(var_f238c840934e431e, damage_radius, max_damage) {
   assert(isDefined(head_pos));
   var_b9f231daf3d07f7d = 60000;
   var_ac4af4d91d50f961 = 50000;
-  targets = function_143526130b12b2b6(head_pos, damage_radius);
+  targets = getplayersandaiarrayinradius(head_pos, damage_radius);
 
   foreach(target in targets) {
     var_fbe2fca375ce1bbb = max_damage;

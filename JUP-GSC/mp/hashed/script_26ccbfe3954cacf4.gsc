@@ -1086,10 +1086,10 @@ function function_719a071e30a49f1() {
 
 function function_6f0140d48aee879() {
   aliveteamcount = 0;
-  var_638aaa73bdeb51c9 = function_a0f36ff3eae203ae();
+  onlyhumanteam = function_a0f36ff3eae203ae();
 
   foreach(entry in level.teamnamelist) {
-    if(function_947d35b32cf46531(entry, var_638aaa73bdeb51c9)) {
+    if(function_947d35b32cf46531(entry, onlyhumanteam)) {
       aliveteamcount++;
 
       if(aliveteamcount > 1) {
@@ -1113,14 +1113,14 @@ function function_a0f36ff3eae203ae() {
   return level.br_circle.circleindex + 1 >= level.br_level.br_circlecenters.size - level.br_level.br_movingcirclecount;
 }
 
-function function_947d35b32cf46531(team, var_638aaa73bdeb51c9) {
+function function_947d35b32cf46531(team, onlyhumanteam) {
   alivecount = scripts\mp\utility\teams::getteamdata(team, "aliveCount");
 
   if(alivecount <= 0) {
     return 0;
   }
 
-  if(istrue(var_638aaa73bdeb51c9)) {
+  if(istrue(onlyhumanteam)) {
     players = scripts\mp\utility\teams::getteamdata(team, "players");
 
     foreach(teammate in players) {
@@ -1139,7 +1139,7 @@ function forceendgame() {
   level.var_7b37b2193f163b9b.var_b871280cbdc11caf = 1;
   endgamemethod = getdvarint(@ "hash_14a1f07fa4c28b94", 0);
   logstring("ForceEndGame. endGameMethod=" + endgamemethod);
-  namespace_92443376a63aa4bd::function_873c0be4897bd6c8(endgamemethod);
+  namespace_92443376a63aa4bd::debuglogforceendgame(endgamemethod);
 
   if(endgamemethod == 0) {
     thread scripts\mp\gamelogic::forceend();
@@ -1159,18 +1159,18 @@ function forceendgame() {
 }
 
 function function_5b81a287d0eff6ad() {
-  var_638aaa73bdeb51c9 = 1;
+  onlyhumanteam = 1;
 
   foreach(entry in level.teamnamelist) {
-    if(function_947d35b32cf46531(entry, var_638aaa73bdeb51c9)) {
+    if(function_947d35b32cf46531(entry, onlyhumanteam)) {
       return entry;
     }
   }
 
-  var_638aaa73bdeb51c9 = 0;
+  onlyhumanteam = 0;
 
   foreach(entry in level.teamnamelist) {
-    if(function_947d35b32cf46531(entry, var_638aaa73bdeb51c9)) {
+    if(function_947d35b32cf46531(entry, onlyhumanteam)) {
       return entry;
     }
   }

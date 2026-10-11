@@ -17,8 +17,8 @@
 #namespace namespace_210ed44cfcc32348;
 
 function init() {
-  foreach(var_70643c8580524236 in level.squaddata) {
-    foreach(squad in var_70643c8580524236) {
+  foreach(squadarray in level.squaddata) {
+    foreach(squad in squadarray) {
       squad.var_c6c2e6d7497d13bc = 0;
       squad.properties["relicJournalAetherZombieKills"] = 0;
     }
@@ -121,8 +121,8 @@ function private function_160aa80fac8de160() {
   while(true) {
     waitframe();
 
-    foreach(var_70643c8580524236 in level.squaddata) {
-      foreach(squad in var_70643c8580524236) {
+    foreach(squadarray in level.squaddata) {
+      foreach(squad in squadarray) {
         if(isDefined(squad.properties) && isDefined(squad.index) && isDefined(squad) && isDefined(squad.properties["<dev string:x17c>"]) && !istrue(squad.var_c6c2e6d7497d13bc)) {
           function_26a0f86f43115971("<dev string:x19d>" + squad.index + "<dev string:x1a8>" + squad.properties["<dev string:x17c>"]);
         }

@@ -216,7 +216,7 @@ function spawn_carriables_from_scriptables_individual_percentage() {
   }
 }
 
-function scriptable_carriable_use(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function scriptable_carriable_use(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:xd9>");
 
   if(istrue(level.gameended)) {
@@ -436,8 +436,8 @@ function carriable_lightfuse(player) {
 
 function carriable_fuse_ui(player) {
   usebar = player createprimaryprogressbar();
-  var_721e3650de671da6 = player createprimaryprogressbartext();
-  var_721e3650de671da6 settext("FUSE LIT");
+  usebartext = player createprimaryprogressbartext();
+  usebartext settext("FUSE LIT");
   fuse = getdvarfloat(@ "hash_7bba431554c05335", 5);
 
   if(fuse <= 0) {
@@ -447,7 +447,7 @@ function carriable_fuse_ui(player) {
   usebar updatebar(0, 1 / fuse);
   player waittill_any_3("death", "weapon_fired", "drop_object");
   usebar destroyelem();
-  var_721e3650de671da6 destroyelem();
+  usebartext destroyelem();
 }
 
 function carriable_explode() {
@@ -1004,7 +1004,7 @@ function carriable_inactive_delete_wait() {
 }
 
 function carriable_detonate_propane() {
-  var_d1ae17964fa90b93 = 2;
+  phyexpmagnitude = 2;
   bottom = self.origin + (0, 0, -96);
   end_pos = physicstrace(self.origin, bottom);
   inairdetonation = end_pos == bottom;
@@ -1111,7 +1111,7 @@ function cleanupexplosionleftovers(waittime) {
 }
 
 function carriable_detonate_neurotoxin() {
-  var_d1ae17964fa90b93 = 2;
+  phyexpmagnitude = 2;
   bottom = self.origin + (0, 0, -96);
   end_pos = physicstrace(self.origin, bottom);
   inairdetonation = end_pos == bottom;

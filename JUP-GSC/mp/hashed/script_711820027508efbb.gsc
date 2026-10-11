@@ -228,8 +228,8 @@ function function_6023fdec597394f3() {
   namespace_22b8ba12655bf3f2::function_d589c49c4b9b50a0(&scripts\mp\gametypes\ob::function_91d032246bb24684);
 }
 
-function function_f531ac7f1617663c(var_aeddcd74a8fad53c) {
-  wait var_aeddcd74a8fad53c;
+function function_f531ac7f1617663c(numseconds) {
+  wait numseconds;
   level notify("respawn_exit");
 }
 
@@ -283,10 +283,10 @@ function function_5b64b44ac4335194(params) {
 }
 
 function function_6f4043d9fde2be30(infostruct) {
-  var_d1c7613187e69022 = namespace_3485b020a23acaae::function_b9c4aa88ad97ee68(self);
+  activitycustomproperties = namespace_3485b020a23acaae::function_b9c4aa88ad97ee68(self);
 
-  if(isDefined(var_d1c7613187e69022)) {
-    var_d1c7613187e69022.var_3f8e801d4fddc931 = 0;
+  if(isDefined(activitycustomproperties)) {
+    activitycustomproperties.var_3f8e801d4fddc931 = 0;
   }
 
   level.var_a2bcb45a0ad08c1d = self;
@@ -337,7 +337,7 @@ function function_a420046da7bae925(params) {
   namespace_70aa82e7f409bc33::function_8b5b2a3392fc7e2a("ActivitySuccess", &function_4cff8aa3f0645696, "REV_OB_OUTLAST");
 }
 
-function function_4cff8aa3f0645696(var_6f8af5eb76deac21) {
+function function_4cff8aa3f0645696(relevantinfostruct) {
   level thread spawn_portal();
   level thread namespace_e82bfd865c02eb4b::betrayal();
 }
@@ -1281,7 +1281,7 @@ function private function_160ae06b18d8a8c4() {
   itembundle = getscriptbundle(%"hash_d03ed75a2d0089");
 
   if(!isDefined(itembundle)) {
-    assertmsg("<dev string:x215>" + function_3c8848a3a11b2553(%"hash_d03ed75a2d0089") + "<dev string:x253>");
+    assertmsg("<dev string:x215>" + getxhashsourcename(%"hash_d03ed75a2d0089") + "<dev string:x253>");
     return;
   }
 

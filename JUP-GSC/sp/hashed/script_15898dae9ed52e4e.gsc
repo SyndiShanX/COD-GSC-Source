@@ -18,7 +18,7 @@ function main() {
   self.health = 150;
   self.maxhealth = 150;
   self.behaviortreeasset = "soldier_agent";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "soldier";
   primaryweaponhash = "iw9_ar_akilo_mp, [ none, none, none, none, none, none ], none, none";
   self.weapon = level.var_67b54180a55f70e1[primaryweaponhash];
@@ -26,8 +26,8 @@ function main() {
   self setspawnweapon(self.weapon);
   self.bulletsinclip = weaponclipsize(self.weapon);
   self.primaryweapon = self.weapon;
-  var_4f04b9c326eb7400 = "iw9_pi_golf17_mp, [ none, none, none, none, none, none ], none, none";
-  self.sidearm = level.var_67b54180a55f70e1[var_4f04b9c326eb7400];
+  sidearmweaponhash = "iw9_pi_golf17_mp, [ none, none, none, none, none, none ], none, none";
+  self.sidearm = level.var_67b54180a55f70e1[sidearmweaponhash];
   grenadeweaponhash = "frag";
   self.grenadeweapon = level.var_67b54180a55f70e1[grenadeweaponhash];
   self.grenadeammo = 2;
@@ -44,9 +44,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();
@@ -94,10 +94,10 @@ function setup_weapons() {
     level.var_67b54180a55f70e1[primaryweaponhash] = scripts\cp\cp_weapon::function_e83615f8a92e4378("iw9_ar_akilo_mp", ["none", "none", "none", "none", "none", "none"], "none", "none");
   }
 
-  var_4f04b9c326eb7400 = "iw9_pi_golf17_mp, [ none, none, none, none, none, none ], none, none";
+  sidearmweaponhash = "iw9_pi_golf17_mp, [ none, none, none, none, none, none ], none, none";
 
-  if(!isDefined(level.var_67b54180a55f70e1[var_4f04b9c326eb7400])) {
-    level.var_67b54180a55f70e1[var_4f04b9c326eb7400] = scripts\cp\cp_weapon::function_e83615f8a92e4378("iw9_pi_golf17_mp", ["none", "none", "none", "none", "none", "none"], "none", "none");
+  if(!isDefined(level.var_67b54180a55f70e1[sidearmweaponhash])) {
+    level.var_67b54180a55f70e1[sidearmweaponhash] = scripts\cp\cp_weapon::function_e83615f8a92e4378("iw9_pi_golf17_mp", ["none", "none", "none", "none", "none", "none"], "none", "none");
   }
 
   grenadeweaponhash = "frag";

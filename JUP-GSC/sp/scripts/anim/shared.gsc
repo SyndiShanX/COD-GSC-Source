@@ -20,30 +20,30 @@
 
 function placeweaponon(weapon, position, activeweapon) {
   assert(isDefined(weapon));
-  var_9843089f949dca89 = undefined;
+  placeweaponobj = undefined;
   placeweaponname = undefined;
 
   if(isweapon(weapon)) {
-    var_9843089f949dca89 = weapon;
+    placeweaponobj = weapon;
     placeweaponname = getcompleteweaponname(weapon);
   } else {
-    var_9843089f949dca89 = makeweaponfromstring(weapon);
+    placeweaponobj = makeweaponfromstring(weapon);
     placeweaponname = weapon;
   }
 
-  assert(aihasweapon(var_9843089f949dca89));
+  assert(aihasweapon(placeweaponobj));
   self notify("weapon_position_change");
   curposition = self.weaponinfo[placeweaponname].position;
-  assert(curposition == "none" || isDefined(self.a.weaponpos[curposition]) && self.a.weaponpos[curposition] == var_9843089f949dca89);
+  assert(curposition == "none" || isDefined(self.a.weaponpos[curposition]) && self.a.weaponpos[curposition] == placeweaponobj);
 
-  if(position != "none" && isDefined(self.a.weaponpos[position]) && self.a.weaponpos[position] == var_9843089f949dca89) {
+  if(position != "none" && isDefined(self.a.weaponpos[position]) && self.a.weaponpos[position] == placeweaponobj) {
     return;
   }
 
   detachallweaponmodels();
 
   if(curposition != "none") {
-    detachweapon(var_9843089f949dca89);
+    detachweapon(placeweaponobj);
   }
 
   if(position == "none") {
@@ -60,10 +60,10 @@ function placeweaponon(weapon, position, activeweapon) {
   }
 
   if(activeweapon && (position == "left" || position == "right")) {
-    attachweapon(var_9843089f949dca89, position);
-    self.weapon = var_9843089f949dca89;
+    attachweapon(placeweaponobj, position);
+    self.weapon = placeweaponobj;
   } else {
-    attachweapon(var_9843089f949dca89, position);
+    attachweapon(placeweaponobj, position);
   }
 
   updateattachedweaponmodels();
@@ -209,10 +209,10 @@ function gettagforpos(position) {
 
 function dropaiweaponinternal(weapon) {
   if(function_335d7d001eb868f()) {
-    if(weapon hasattachment(self.var_e0675e48962c6d55)) {
+    if(weapon hasattachment(self.flashlight_attachment)) {
       scripts\anim\shared::detachweapon(weapon);
-      weapon = weapon withoutattachment(self.var_e0675e48962c6d55);
-      scripts\anim\shared::forceuseweapon(weapon, self.var_b5ce31099294cf74);
+      weapon = weapon withoutattachment(self.flashlight_attachment);
+      scripts\anim\shared::forceuseweapon(weapon, self.flashlight_slot);
     }
   }
 
@@ -311,8 +311,8 @@ function dropallaiweapons() {
     self.a.weaponpos[position] = undefined;
 
     if(function_335d7d001eb868f()) {
-      if(weapon hasattachment(self.var_e0675e48962c6d55)) {
-        weapon = weapon withoutattachment(self.var_e0675e48962c6d55);
+      if(weapon hasattachment(self.flashlight_attachment)) {
+        weapon = weapon withoutattachment(self.flashlight_attachment);
       }
     }
 
@@ -377,15 +377,15 @@ function dropweaponwrapper(weapon, position) {
 
     tagorigin = self gettagorigin(tagname);
     tagangles = self gettagangles(tagname);
-    var_93cd9b84a4e18201 = getcompleteweaponname(actualdroppedweapon);
-    droppedweaponentity = spawn("weapon_" + var_93cd9b84a4e18201, tagorigin);
+    weaponcompletename = getcompleteweaponname(actualdroppedweapon);
+    droppedweaponentity = spawn("weapon_" + weaponcompletename, tagorigin);
     droppedweaponentity.angles = tagangles;
     tagdelta = tagorigin - previoustagorigin;
-    var_f437bc51b4d819fa = vectorNormalize(tagdelta);
-    var_c0f18187ba0798ec = 20;
-    var_6a8655e4b569b964 = 50;
-    var_737df2e9aaf94a3e = min(length(tagdelta) * var_c0f18187ba0798ec, var_6a8655e4b569b964);
-    tagvelocity = var_f437bc51b4d819fa * var_737df2e9aaf94a3e;
+    normalizedtagdelta = vectorNormalize(tagdelta);
+    tagvelocityscalar = 20;
+    maximumtagvelocity = 50;
+    tagvelocitymagnitude = min(length(tagdelta) * tagvelocityscalar, maximumtagvelocity);
+    tagvelocity = normalizedtagdelta * tagvelocitymagnitude;
     var_4e12423804db75ad = (0, 0, 950);
     launchvelocity = tagvelocity + var_4e12423804db75ad;
     droppedweaponentity physicslaunchserveritem(tagorigin, launchvelocity);
@@ -397,7 +397,7 @@ function dropweaponwrapper(weapon, position) {
       physics_setbodyangvel(bodyid, bodyangvel[0], bodyangvel[1], bodyangvel[2]);
     }
 
-    function_f3bb4f4911a1beb2("loot", "dropWeapon", droppedweaponentity);
+    callsharedfunc("loot", "dropWeapon", droppedweaponentity);
     self notify("weapon_dropped", droppedweaponentity);
   } else {
     self dropweapon(actualdroppedweapon, position, 0);
@@ -419,7 +419,7 @@ function dropweaponwrapper(weapon, position) {
 }
 
 function function_335d7d001eb868f() {
-  if(isDefined(self.var_e0675e48962c6d55)) {
+  if(isDefined(self.flashlight_attachment)) {
     return true;
   }
 
@@ -481,7 +481,7 @@ function weapondrop_physics_callback_monitor(droppedent) {
   }
 
   if(isDefined(droppedent.classname) && isDefined(self)) {
-    self function_7d738013c1cfbc9d(surfacetype);
+    self playweapondropsound(surfacetype);
   }
 }
 
@@ -533,10 +533,10 @@ function ramboaiminternal(baseyaw) {}
 
 function decidenumshotsforburst() {
   numshots = 0;
-  var_8ba699667e1a6d48 = weaponburstcount(self.weapon);
+  fixedburstcount = weaponburstcount(self.weapon);
 
-  if(var_8ba699667e1a6d48) {
-    numshots = var_8ba699667e1a6d48;
+  if(fixedburstcount) {
+    numshots = fixedburstcount;
   } else if(scripts\anim\weaponlist::usingsemiautoweapon()) {
     numshots = anim.semifirenumshots[randomint(anim.semifirenumshots.size)];
   } else if(self.fastburst) {
@@ -720,9 +720,9 @@ function movetonodeovertime(node, time) {
 
   for(i = 0; i < frames; i++) {
     nodeorigin = node.origin;
-    var_e907009ead5acaf2 = self.origin - nodeorigin;
-    var_e907009ead5acaf2 = vectorNormalize(var_e907009ead5acaf2);
-    adjustedstartpos = nodeorigin + var_e907009ead5acaf2 * startdist;
+    nodetoself = self.origin - nodeorigin;
+    nodetoself = vectorNormalize(nodetoself);
+    adjustedstartpos = nodeorigin + nodetoself * startdist;
     lerppos = adjustedstartpos + (nodeorigin - adjustedstartpos) * (i + 1) / frames;
     self safeteleport(lerppos);
     wait 0.05;
@@ -737,19 +737,19 @@ function returntrue() {
 
 #using_animtree("generic_human");
 
-function playlookanimation(lookanim, looktime, var_3eda4dd47f961142) {
-  if(!isDefined(var_3eda4dd47f961142)) {
-    var_3eda4dd47f961142 = &returntrue;
+function playlookanimation(lookanim, looktime, canstopcallback) {
+  if(!isDefined(canstopcallback)) {
+    canstopcallback = &returntrue;
   }
 
   for(i = 0; i < looktime * 10; i++) {
     if(isalive(self.enemy)) {
-      if(canseeenemy() && [[var_3eda4dd47f961142]]()) {
+      if(canseeenemy() && [[canstopcallback]]()) {
         return;
       }
     }
 
-    if(issuppressedwrapper() && [[var_3eda4dd47f961142]]()) {
+    if(issuppressedwrapper() && [[canstopcallback]]()) {
       return;
     }
 
@@ -893,14 +893,14 @@ function forceuseweapon(newweapon, targetslot) {
     assert(self.weapon != newweaponobj);
 
     if(iscurrentsidearm) {
-      var_86d39f2fc4d668d5 = "none";
+      holstertarget = "none";
     } else if(isnewsecondary) {
-      var_86d39f2fc4d668d5 = "back";
+      holstertarget = "back";
     } else {
-      var_86d39f2fc4d668d5 = "chest";
+      holstertarget = "chest";
     }
 
-    placeweaponon(self.weapon, var_86d39f2fc4d668d5);
+    placeweaponon(self.weapon, holstertarget);
     self.lastweapon = self.weapon;
   } else {
     self.lastweapon = newweaponobj;
@@ -927,19 +927,19 @@ function updateweaponarchetype(weapclass) {
     return;
   }
 
-  if(self function_18cb2157393fbf5b()) {
+  if(self ignoreweaponarchetypes()) {
     return;
   }
 
-  var_b363904de331d30 = self getbasearchetype();
+  basearchetypename = self getbasearchetype();
 
   if(weapclass == "pistol" && archetypeassetloaded(self.animsetname + "_pistol")) {
     self setoverridearchetype("weapon", self.animsetname + "_pistol");
     return;
   }
 
-  if(weapclass == "pistol" && archetypeassetloaded(var_b363904de331d30 + "_pistol")) {
-    self setoverridearchetype("weapon", var_b363904de331d30 + "_pistol");
+  if(weapclass == "pistol" && archetypeassetloaded(basearchetypename + "_pistol")) {
+    self setoverridearchetype("weapon", basearchetypename + "_pistol");
     return;
   }
 
@@ -948,8 +948,8 @@ function updateweaponarchetype(weapclass) {
     return;
   }
 
-  if(weapclass == "mg" && archetypeassetloaded(var_b363904de331d30 + "_lmg")) {
-    self setoverridearchetype("weapon", var_b363904de331d30 + "_lmg");
+  if(weapclass == "mg" && archetypeassetloaded(basearchetypename + "_lmg")) {
+    self setoverridearchetype("weapon", basearchetypename + "_lmg");
     return;
   }
 

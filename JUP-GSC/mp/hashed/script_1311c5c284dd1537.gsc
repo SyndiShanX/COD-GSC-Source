@@ -532,18 +532,18 @@ function function_d103dc61e5b6abc3(player) {
   }
 
   if(level.teambased) {
-    if(!isDefined(level.var_7d17467eca3737aa) || !isDefined(level.var_7d17467eca3737aa[player.team])) {
+    if(!isDefined(level.teammarkedents) || !isDefined(level.teammarkedents[player.team])) {
       return;
     }
 
     if(shouldmodesetsquads()) {
-      if(isDefined(level.var_7d17467eca3737aa[player.team][player.sessionsquadid])) {
-        return level.var_7d17467eca3737aa[player.team][player.sessionsquadid];
+      if(isDefined(level.teammarkedents[player.team][player.sessionsquadid])) {
+        return level.teammarkedents[player.team][player.sessionsquadid];
       } else {
         return;
       }
     } else {
-      return level.var_7d17467eca3737aa[player.team];
+      return level.teammarkedents[player.team];
     }
 
     return;
@@ -780,7 +780,7 @@ function function_ea3e848c25e3c926(player, unset, supername) {
   }
 
   isfriendly = scripts\cp_mp\utility\player_utility::isfriendly(self.owner.team, player);
-  var_7295a6a7d7aafad7 = function_49aabe4cb7c4c0a4(player, supername);
+  usingcamerasuper = function_49aabe4cb7c4c0a4(player, supername);
 
   if(isfriendly) {
     if(istrue(unset)) {
@@ -793,7 +793,7 @@ function function_ea3e848c25e3c926(player, unset, supername) {
       return;
     }
 
-    if(var_7295a6a7d7aafad7) {
+    if(usingcamerasuper) {
       if(istrue(player.isusingcamera)) {
         function_2f6abcf7fcc02f(player);
         return;
@@ -1420,7 +1420,7 @@ function function_ff216d4d2c47565c(state) {
   self setclientomnvar("ui_rcd_controls", state);
 }
 
-function private function_c9fce57d5da1f571(camera, var_43b83976503b9e6d) {
+function private function_c9fce57d5da1f571(camera, overrideholdtime) {
   if(!isDefined(self) || !isDefined(camera)) {
     return;
   }
@@ -1437,8 +1437,8 @@ function private function_c9fce57d5da1f571(camera, var_43b83976503b9e6d) {
 
   holdtime = getdvarfloat(@ "hash_8720ead849d3fbc3", 0.25);
 
-  if(isDefined(var_43b83976503b9e6d)) {
-    holdtime = var_43b83976503b9e6d;
+  if(isDefined(overrideholdtime)) {
+    holdtime = overrideholdtime;
   }
 
   updaterate = level.framedurationseconds;
@@ -1525,13 +1525,13 @@ function private function_4842c3896892dc17(markdata, camuser) {
   teamref = camuser.team;
 
   if(level.teambased) {
-    if(isDefined(level.var_7d17467eca3737aa)) {
+    if(isDefined(level.teammarkedents)) {
       if(shouldmodesetsquads()) {
-        if(isDefined(level.var_7d17467eca3737aa[teamref][camuser.sessionsquadid])) {
-          level.var_7d17467eca3737aa[teamref][camuser.sessionsquadid] = array_remove_key(level.var_7d17467eca3737aa[teamref][camuser.sessionsquadid], markdata.targetnum);
+        if(isDefined(level.teammarkedents[teamref][camuser.sessionsquadid])) {
+          level.teammarkedents[teamref][camuser.sessionsquadid] = array_remove_key(level.teammarkedents[teamref][camuser.sessionsquadid], markdata.targetnum);
         }
-      } else if(isDefined(level.var_7d17467eca3737aa[teamref])) {
-        level.var_7d17467eca3737aa[teamref] = array_remove_key(level.var_7d17467eca3737aa[teamref], markdata.targetnum);
+      } else if(isDefined(level.teammarkedents[teamref])) {
+        level.teammarkedents[teamref] = array_remove_key(level.teammarkedents[teamref], markdata.targetnum);
       }
     }
 
@@ -1547,22 +1547,22 @@ function private function_9921a8095e089065(markdata, camuser) {
   teamref = camuser.team;
 
   if(level.teambased) {
-    if(!isDefined(level.var_7d17467eca3737aa)) {
-      level.var_7d17467eca3737aa = [];
+    if(!isDefined(level.teammarkedents)) {
+      level.teammarkedents = [];
     }
 
-    if(!isDefined(level.var_7d17467eca3737aa[teamref])) {
-      level.var_7d17467eca3737aa[teamref] = [];
+    if(!isDefined(level.teammarkedents[teamref])) {
+      level.teammarkedents[teamref] = [];
     }
 
     if(shouldmodesetsquads()) {
-      if(!isDefined(level.var_7d17467eca3737aa[teamref][camuser.sessionsquadid])) {
-        level.var_7d17467eca3737aa[teamref][camuser.sessionsquadid] = [];
+      if(!isDefined(level.teammarkedents[teamref][camuser.sessionsquadid])) {
+        level.teammarkedents[teamref][camuser.sessionsquadid] = [];
       }
 
-      level.var_7d17467eca3737aa[teamref][camuser.sessionsquadid][markdata.targetnum] = markdata;
+      level.teammarkedents[teamref][camuser.sessionsquadid][markdata.targetnum] = markdata;
     } else {
-      level.var_7d17467eca3737aa[teamref][markdata.targetnum] = markdata;
+      level.teammarkedents[teamref][markdata.targetnum] = markdata;
     }
 
     return;
@@ -1693,7 +1693,7 @@ function function_f6ba29efe27b0f81(target) {
     var_51743d62f4cf524e = self.pilot getvieworigin();
   }
 
-  var_b5837ee451eabc71 = anglesToForward(camangles);
+  camfwdvec = anglesToForward(camangles);
   defaultorigin = target.origin;
   headpos = (0, 0, 0);
 
@@ -1711,10 +1711,10 @@ function function_f6ba29efe27b0f81(target) {
   var_9ae205c4c40af967 = 0;
 
   foreach(point in tracepoints) {
-    var_f4a43e5290bce44b = point - var_51743d62f4cf524e;
-    dotangle = math::anglebetweenvectors(var_b5837ee451eabc71, var_f4a43e5290bce44b);
-    var_878f0eb51ab6a646 = math::anglebetweenvectors(var_b5837ee451eabc71, (0, 0, 1));
-    var_cea5805c08f245d2 = math::anglebetweenvectors(var_f4a43e5290bce44b, (0, 0, 1));
+    cam2targetvec = point - var_51743d62f4cf524e;
+    dotangle = math::anglebetweenvectors(camfwdvec, cam2targetvec);
+    var_878f0eb51ab6a646 = math::anglebetweenvectors(camfwdvec, (0, 0, 1));
+    var_cea5805c08f245d2 = math::anglebetweenvectors(cam2targetvec, (0, 0, 1));
 
     if(isDefined(self.pilot)) {
       var_e077f4a68ed9a464 = distancesquared(var_51743d62f4cf524e, point);
@@ -1743,11 +1743,11 @@ function private function_1b1409af5e47b098(scantarget, scanfov, var_5e43b44751d0
   targetorigin = scantarget.origin;
   scanpoints = [targetorigin];
   var_c3d9e0b30c6f14a4 = distancesquared(self getvieworigin(), scantarget.origin);
-  var_251f6ff6684a460c = 0;
+  isusingextrapoints = 0;
 
   if(var_c3d9e0b30c6f14a4 <= 10000) {
     var_5e43b44751d01b1a *= getdvarfloat(@ "hash_20c9852b3129de04", 2.5);
-    var_251f6ff6684a460c = 1;
+    isusingextrapoints = 1;
   }
 
   if(isPlayer(scantarget)) {
@@ -1760,7 +1760,7 @@ function private function_1b1409af5e47b098(scantarget, scanfov, var_5e43b44751d0
       scanpoints = array_add(scanpoints, targetorigin);
     }
 
-    if(var_251f6ff6684a460c) {
+    if(isusingextrapoints) {
       var_102502c44898b35c = (headpos + centerpos) / 2;
       extrapoints = [var_102502c44898b35c];
 
@@ -1776,7 +1776,7 @@ function private function_1b1409af5e47b098(scantarget, scanfov, var_5e43b44751d0
     headpos = scantarget scripts\mp\agents\agent_utility::function_2e1b23386b967c10();
     scanpoints = [targetorigin + (0, 0, 1), centerpos, headpos];
 
-    if(var_251f6ff6684a460c) {
+    if(isusingextrapoints) {
       var_264b006395220d6 = (centerpos + targetorigin) / 2;
       var_102502c44898b35c = (headpos + centerpos) / 2;
       extrapoints = [var_264b006395220d6, var_102502c44898b35c];
@@ -1904,7 +1904,7 @@ function function_5e8b74f5e3dc4c60() {
   }
 }
 
-function function_2e2ac10bd717d529(cameratype, var_863c619037f3ac74, var_da8cec9bce12f9cb) {
+function function_2e2ac10bd717d529(cameratype, pointtocheck, teamtocheck) {
   pointinoutofbounds = 0;
   var_ac939183eb3c79d8 = function_f0698aee89c18210(cameratype).var_106bf36856a998f;
 
@@ -1912,8 +1912,8 @@ function function_2e2ac10bd717d529(cameratype, var_863c619037f3ac74, var_da8cec9
     return pointinoutofbounds;
   } else {
     foreach(trigger in var_ac939183eb3c79d8) {
-      if(ispointinvolume(var_863c619037f3ac74, trigger)) {
-        if(isDefined(trigger.script_team) && isDefined(var_da8cec9bce12f9cb) && trigger.script_team != var_da8cec9bce12f9cb) {
+      if(ispointinvolume(pointtocheck, trigger)) {
+        if(isDefined(trigger.script_team) && isDefined(teamtocheck) && trigger.script_team != teamtocheck) {
           continue;
         }
 
@@ -2163,10 +2163,10 @@ function function_fc89b224136fe202(camera) {
   camera endon("death");
   self endon("playerLeavingCurrentCamera");
   self.targetsinouterradius = [];
-  entmask = function_869ccb4e3451b8c6(["etype_player", "etype_ai"]);
+  entmask = createentitytypemask(["etype_player", "etype_ai"]);
 
   while(true) {
-    targetarray = function_b1eef70090b5b7b5(camera.origin, 1575, entmask);
+    targetarray = getentitiesinradiusfrompartitiongrid(camera.origin, 1575, entmask);
 
     foreach(ent in targetarray) {
       var_32608e38aa3071c4 = function_2d3e2d45f75d7b9f(camera, ent);
@@ -2185,10 +2185,10 @@ function function_c99b3a2b715c288b(duration, supername) {
   self.owner endon("disconnect");
   self endon("death");
   self endon("entering");
-  entmask = function_869ccb4e3451b8c6(["etype_player", "etype_ai"]);
+  entmask = createentitytypemask(["etype_player", "etype_ai"]);
 
   while(true) {
-    targetarray = function_b1eef70090b5b7b5(self.origin, 1575, entmask);
+    targetarray = getentitiesinradiusfrompartitiongrid(self.origin, 1575, entmask);
 
     foreach(ent in targetarray) {
       if(!isDefined(ent)) {
@@ -3522,7 +3522,7 @@ function function_2699a7c2c0b71d3e(camera, cameratype) {
 }
 
 function private function_e4d938ad226591fd(cam) {
-  cam function_5226227bce83ebe9(3, cam.ownerteam);
+  cam setentityhudoutlinedata(3, cam.ownerteam);
   return cam;
 }
 
@@ -3551,13 +3551,13 @@ function function_a268c4595bd106ff(target) {
   }
 
   params = function_f0698aee89c18210(self.cameratype);
-  var_7e2345a74ee18a53 = params.var_4fbadc7102d30912;
+  detectrangesq = params.var_4fbadc7102d30912;
 
   if(istrue(self.isunderwater) || istrue(target isswimmingunderwater())) {
-    var_7e2345a74ee18a53 = params.var_16187e4d354c3c97;
+    detectrangesq = params.var_16187e4d354c3c97;
   }
 
-  return distancesquared(self.origin, target.origin) < var_7e2345a74ee18a53;
+  return distancesquared(self.origin, target.origin) < detectrangesq;
 }
 
 function function_9d2bec87e0754872(target) {

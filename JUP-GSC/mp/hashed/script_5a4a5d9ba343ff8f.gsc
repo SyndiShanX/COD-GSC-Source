@@ -125,10 +125,10 @@ function private function_a29b12dda2453832() {
           remainingms = 0;
 
           foreach(effect in effects) {
-            var_67e76145ecffd7cb = effect.end_time - now;
+            effect_remainingms = effect.end_time - now;
 
-            if(var_67e76145ecffd7cb > remainingms) {
-              remainingms = var_67e76145ecffd7cb;
+            if(effect_remainingms > remainingms) {
+              remainingms = effect_remainingms;
             }
 
             if(isDefined(effect.unique_id)) {

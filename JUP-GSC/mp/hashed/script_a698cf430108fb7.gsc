@@ -15,7 +15,7 @@
 #namespace namespace_ba300dc864b9baf9;
 
 function function_cfb677b5f7d5e644() {
-  if(!isalive(self) || self isparachuting() || self isskydiving() || self isonladder() || self function_9cc921a57ff4deb5() || self isinexecutionattack() || self isinexecutionvictim()) {
+  if(!isalive(self) || self isparachuting() || self isskydiving() || self isonladder() || self isonascender() || self isinexecutionattack() || self isinexecutionvictim()) {
     return false;
   }
 
@@ -63,8 +63,8 @@ function function_6caa4b447cb1ee5c(isteleporting) {
 }
 
 function function_4b2fa585273dbb8c() {
-  var_3f1786887462af7d = getdvarfloat(@ "hash_62c67df9c015a11b", 1);
-  wait var_3f1786887462af7d;
+  timebeforefade = getdvarfloat(@ "hash_62c67df9c015a11b", 1);
+  wait timebeforefade;
   fadetoblackforplayer(self, 1, 0.25);
   removeperk("specialty_third_person");
   self setOrigin(function_3754ea1a27eecdd8());

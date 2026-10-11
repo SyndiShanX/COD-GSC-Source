@@ -973,7 +973,7 @@ function function_8277f49f79bff530(animname, spawnpos, spawnang) {
   if(isDefined(self)) {
     self unlink();
     function_5471a04faad16a00();
-    thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 
   if(isDefined(var_e3bda5be1db297f)) {
@@ -1014,7 +1014,7 @@ function function_a3a4a2cdca554483(animname, spawnpos, spawnang) {
   if(isDefined(self)) {
     self unlink();
     function_5471a04faad16a00();
-    thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 
   if(isDefined(var_54d7b76a2a71e284)) {
@@ -2190,7 +2190,7 @@ function function_ed073d24cd8ed3c5(player) {
 
   carl = abs(player.origin[2] - self.body.origin[2]);
   tim = level.var_f224e09983ef4b2a;
-  var_9d113850fd61075d = abs(player.origin[2] - self.body.origin[2]) < level.var_f224e09983ef4b2a;
+  bobby = abs(player.origin[2] - self.body.origin[2]) < level.var_f224e09983ef4b2a;
   return abs(player.origin[2] - self.body.origin[2]) < level.var_f224e09983ef4b2a;
 }
 
@@ -2315,7 +2315,7 @@ function function_189d41172d946149() {
       }
     }
 
-    level.var_fcbb998d4a3f2da = function_21a6a1c613b50a28(validplayers, 700);
+    level.var_fcbb998d4a3f2da = create_partition(validplayers, 700);
     wait 1;
   }
 }

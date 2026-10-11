@@ -20,8 +20,8 @@ function function_1fa609d0d2a30cf9(params) {
 
   utility::flag_set("deathworm_arena_precache_init");
   function_567352b560bfa797();
-  level.var_e8b533c647a37168 = function_f159c10d5cf8f0b4("deathworm_exclude_unburrow", "script_noteworthy");
-  level.var_b3a50e9cc45c0150 = function_f159c10d5cf8f0b4("deathworm_exclude_melee", "script_noteworthy");
+  level.var_e8b533c647a37168 = getnoentvolumearray("deathworm_exclude_unburrow", "script_noteworthy");
+  level.var_b3a50e9cc45c0150 = getnoentvolumearray("deathworm_exclude_melee", "script_noteworthy");
 
   level thread draw_arena();
 }

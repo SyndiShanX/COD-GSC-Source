@@ -28,7 +28,7 @@ function main() {
 
   setdvarifuninitialized(@ "hash_6af159684591cb79", "0");
 
-  if(function_3cb5da19764baa3() == "T10") {
+  if(getprojectname() == "T10") {
     setdvarifuninitialized(@ "hash_1fbf179e197540f3", "0");
   } else {
     setdvarifuninitialized(@ "hash_1fbf179e197540f3", "1");
@@ -396,7 +396,7 @@ function _autosave_game_now(suppress_print, suppress_notify, var_bc910db033e0a28
   }
 
   filename = "save_now";
-  var_aed6d94a7c103648 = getdescription();
+  descriptionstring = getdescription();
 
   if(getdvarint(@ "map_reloading") != 0) {
     autosaveprint("_autosave_game_now() Game is restarting", 0);
@@ -409,9 +409,9 @@ function _autosave_game_now(suppress_print, suppress_notify, var_bc910db033e0a28
   }
 
   if(isDefined(suppress_print)) {
-    saveid = savegamenocommit(filename, var_aed6d94a7c103648, "$default", 1);
+    saveid = savegamenocommit(filename, descriptionstring, "$default", 1);
   } else {
-    saveid = savegamenocommit(filename, var_aed6d94a7c103648);
+    saveid = savegamenocommit(filename, descriptionstring);
   }
 
   autosaveprint("_autosave_game_now() Saving", undefined, saveid);
@@ -497,8 +497,8 @@ function tryautosave(name, description, image, timeout, var_f78389d2b10c1f26, su
     return 0;
   }
 
-  if(!isDefined(level.var_93f4c5209aa8ebbe)) {
-    level.var_93f4c5209aa8ebbe = 0;
+  if(!isDefined(level.autosavecount)) {
+    level.autosavecount = 0;
   }
 
   autosaveprint("tryAutoSave() called name = " + name, 2);
@@ -548,8 +548,8 @@ function tryautosave(name, description, image, timeout, var_f78389d2b10c1f26, su
   }
 
   flag_set("game_saving");
-  var_aed6d94a7c103648 = getdescription();
-  var_fd303234cc718d0b = gettime();
+  descriptionstring = getdescription();
+  start_save_time = gettime();
   timeout_time = undefined;
 
   if(isDefined(timeout)) {
@@ -571,7 +571,7 @@ function tryautosave(name, description, image, timeout, var_f78389d2b10c1f26, su
     }
 
     if(isDefined(timeout_time) && gettime() > timeout_time) {
-      autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var_fd303234cc718d0b + " milliseconds", 0);
+      autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - start_save_time + " milliseconds", 0);
       break;
     }
 
@@ -590,7 +590,7 @@ function tryautosave(name, description, image, timeout, var_f78389d2b10c1f26, su
         break;
       }
 
-      saveid = savegamenocommit(level.var_93f4c5209aa8ebbe, var_aed6d94a7c103648, image, suppress_print);
+      saveid = savegamenocommit(level.autosavecount, descriptionstring, image, suppress_print);
       autosaveprint("tryAutoSave() Saving no commit", 2, saveid);
 
       if(saveid < 0) {
@@ -601,7 +601,7 @@ function tryautosave(name, description, image, timeout, var_f78389d2b10c1f26, su
       wait time0;
 
       if(isDefined(timeout_time) && gettime() > timeout_time) {
-        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var_fd303234cc718d0b + " milliseconds", 0);
+        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - start_save_time + " milliseconds", 0);
         break;
       }
 
@@ -619,7 +619,7 @@ function tryautosave(name, description, image, timeout, var_f78389d2b10c1f26, su
       wait time1;
 
       if(isDefined(timeout_time) && gettime() > timeout_time) {
-        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var_fd303234cc718d0b + " milliseconds", 0);
+        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - start_save_time + " milliseconds", 0);
         break;
       }
 
@@ -640,7 +640,7 @@ function tryautosave(name, description, image, timeout, var_f78389d2b10c1f26, su
       wait time2;
 
       if(isDefined(timeout_time) && gettime() > timeout_time) {
-        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - var_fd303234cc718d0b + " milliseconds", 0);
+        autosaveprint("tryAutoSave() Autosave timed out after " + gettime() - start_save_time + " milliseconds", 0);
         break;
       }
 
@@ -686,7 +686,7 @@ function tryautosave(name, description, image, timeout, var_f78389d2b10c1f26, su
   flag_clear("game_saving");
 
   if(isDefined(result) && result) {
-    level.var_93f4c5209aa8ebbe++;
+    level.autosavecount++;
   }
 
   return result;
@@ -739,13 +739,13 @@ function autosavecheck_not_picky(saveid) {
   return autosavecheck(0, 0, saveid);
 }
 
-function autosavecheck(var_9a6be9e4b6d6b6d1, var_f78389d2b10c1f26, saveid) {
+function autosavecheck(dopickychecks, var_f78389d2b10c1f26, saveid) {
   if(isDefined(level.autosave_check_override)) {
-    var_475e02596edf24af = spawnStruct();
-    var_475e02596edf24af.var_9a6be9e4b6d6b6d1 = var_9a6be9e4b6d6b6d1;
-    var_475e02596edf24af.var_f78389d2b10c1f26 = var_f78389d2b10c1f26;
-    var_475e02596edf24af.saveid = saveid;
-    return [[level.autosave_check_override]](var_475e02596edf24af);
+    autosavecheckparams = spawnStruct();
+    autosavecheckparams.dopickychecks = dopickychecks;
+    autosavecheckparams.var_f78389d2b10c1f26 = var_f78389d2b10c1f26;
+    autosavecheckparams.saveid = saveid;
+    return [[level.autosave_check_override]](autosavecheckparams);
   }
 
   if(isDefined(level.special_autosavecondition) && ![[level.special_autosavecondition]]()) {
@@ -757,8 +757,8 @@ function autosavecheck(var_9a6be9e4b6d6b6d1, var_f78389d2b10c1f26, saveid) {
     return 0;
   }
 
-  if(!isDefined(var_9a6be9e4b6d6b6d1)) {
-    var_9a6be9e4b6d6b6d1 = level.dopickyautosavechecks;
+  if(!isDefined(dopickychecks)) {
+    dopickychecks = level.dopickyautosavechecks;
   }
 
   if(!isDefined(var_f78389d2b10c1f26)) {
@@ -775,17 +775,17 @@ function autosavecheck(var_9a6be9e4b6d6b6d1, var_f78389d2b10c1f26, saveid) {
     return 0;
   }
 
-  if(var_9a6be9e4b6d6b6d1 && !level.player autosaveammocheck(saveid)) {
+  if(dopickychecks && !level.player autosaveammocheck(saveid)) {
     return 0;
   }
 
   if(level.autosave_threat_check_enabled) {
-    if(!autosavethreatcheck(var_9a6be9e4b6d6b6d1, saveid)) {
+    if(!autosavethreatcheck(dopickychecks, saveid)) {
       return 0;
     }
   }
 
-  if(!level.player autosaveplayercheck(var_9a6be9e4b6d6b6d1, saveid)) {
+  if(!level.player autosaveplayercheck(dopickychecks, saveid)) {
     return 0;
   }
 
@@ -805,7 +805,7 @@ function autosavecheck(var_9a6be9e4b6d6b6d1, var_f78389d2b10c1f26, saveid) {
   return 1;
 }
 
-function autosaveplayercheck(var_9a6be9e4b6d6b6d1, saveid) {
+function autosaveplayercheck(dopickychecks, saveid) {
   assert(isPlayer(self));
 
   if(function_db03dec8d1dd5a3c()) {
@@ -813,7 +813,7 @@ function autosaveplayercheck(var_9a6be9e4b6d6b6d1, saveid) {
     return false;
   }
 
-  if(self ismeleeing() && var_9a6be9e4b6d6b6d1) {
+  if(self ismeleeing() && dopickychecks) {
     autosaveprint("player is meleeing", 0, saveid);
     return false;
   }
@@ -839,7 +839,7 @@ function autosaveplayercheck(var_9a6be9e4b6d6b6d1, saveid) {
   }
 
   if(self isswimming()) {
-    if(scripts\common\swim_common::function_ea8199f09c110522()) {
+    if(scripts\common\swim_common::isbreathcritical()) {
       autosaveprint(" player's remaining breath is too low ", 0, saveid);
       return false;
     }
@@ -897,26 +897,26 @@ function autosavefriendlyfirecheck(saveid) {
     return true;
   }
 
-  var_cfb65343cd42a773 = [];
+  playernades = [];
 
   foreach(nade in nades) {
     if(isvalidmissile(nade) && isPlayer(getmissileowner(nade))) {
-      var_cfb65343cd42a773[var_cfb65343cd42a773.size] = nade;
+      playernades[playernades.size] = nade;
     }
   }
 
-  if(var_cfb65343cd42a773.size == 0) {
+  if(playernades.size == 0) {
     return true;
   }
 
-  if(playernadessafe(var_cfb65343cd42a773)) {
+  if(playernadessafe(playernades)) {
     return true;
   }
 
   allies = getaiarray("allies");
 
   foreach(ally in allies) {
-    foreach(playernade in var_cfb65343cd42a773) {
+    foreach(playernade in playernades) {
       if(distancesquared(ally.origin, playernade.origin) < 6400) {
         autosaveprint("autoSaveFriendlyFireCheck() player nade is too close to friendlies", 0, saveid);
         return false;
@@ -927,8 +927,8 @@ function autosavefriendlyfirecheck(saveid) {
   return true;
 }
 
-function playernadessafe(var_cfb65343cd42a773) {
-  foreach(nade in var_cfb65343cd42a773) {
+function playernadessafe(playernades) {
+  foreach(nade in playernades) {
     if(offhand_is_dangerous(nade)) {
       return false;
     }
@@ -1016,7 +1016,7 @@ function autosavehealthcheck(saveid) {
   return true;
 }
 
-function autosavethreatcheck(var_9a6be9e4b6d6b6d1, saveid) {
+function autosavethreatcheck(dopickychecks, saveid) {
   enemies = getaiunittypearray("bad_guys", "all");
 
   foreach(enemy in enemies) {
@@ -1072,7 +1072,7 @@ function autosavethreatcheck(var_9a6be9e4b6d6b6d1, saveid) {
     }
 
     canshootandsee = undefined;
-    shotrecently = enemy._blackboard.var_60dcaa3d3be97ab > gettime() - 1500;
+    shotrecently = enemy._blackboard.shootparams_lastshoottime > gettime() - 1500;
 
     if(shotrecently) {
       canshootandsee = enemy getcanshootandsee();
@@ -1091,15 +1091,15 @@ function autosavethreatcheck(var_9a6be9e4b6d6b6d1, saveid) {
       canshootandsee = enemy getcanshootandsee();
     }
 
-    if(canshootandsee && isDefined(enemy.var_a709fbd9fea148f6)) {
-      if(enemy scripts\asm\asm::asm_currentstatehasflag(enemy.var_a709fbd9fea148f6, "aim")) {
+    if(canshootandsee && isDefined(enemy.asmtrackasm)) {
+      if(enemy scripts\asm\asm::asm_currentstatehasflag(enemy.asmtrackasm, "aim")) {
         if(getdvarint(@ "hash_6af159684591cb79")) {
           enemy thread scripts\sp\debug::function_e31e954e5ae9ad1d("<dev string:xb3>", (0, 0, 85), 0.8, (1, 0, 0));
         }
 
         autosaveprint("AI (" + enemy getentitynumber() + ") aiming at player", 0, saveid);
         return false;
-      } else if(enemy scripts\asm\asm::asm_currentstatehasflag(enemy.var_a709fbd9fea148f6, "notetrackaim")) {
+      } else if(enemy scripts\asm\asm::asm_currentstatehasflag(enemy.asmtrackasm, "notetrackaim")) {
         if(getdvarint(@ "hash_6af159684591cb79")) {
           enemy thread scripts\sp\debug::function_e31e954e5ae9ad1d("<dev string:xca>", (0, 0, 85), 0.8, (1, 0, 0));
         }

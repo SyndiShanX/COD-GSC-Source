@@ -195,8 +195,8 @@ function function_d269abf0e45a98c2() {
 
     if(isalive(self) && !istrue(scripts\mp\gametypes\br_public::isplayerinorgoingtogulag()) && istrue(self.var_9753fa8faf6f1587)) {
       thread scripts\mp\utility\points::giveunifiedpoints("br_pe_auavscan_unspotted");
-      var_17c8d9e220164807 = game["music"]["pe_auavscan_music_not_spotted"].size;
-      tracknum = randomint(var_17c8d9e220164807);
+      numtracks = game["music"]["pe_auavscan_music_not_spotted"].size;
+      tracknum = randomint(numtracks);
       self setplayermusicstate(game["music"]["pe_auavscan_music_not_spotted"][tracknum]);
       self setclientomnvar("ui_publicevent_fullscreen_atlas_type", 0);
     }
@@ -359,8 +359,8 @@ function function_13e90ba0d8a6e1c3() {
   self function_b267cbac73e99f49(1);
   thread function_d4fc77fecf5fc687();
   wait 0.25;
-  var_17c8d9e220164807 = game["music"]["pe_auavscan_music_spotted"].size;
-  tracknum = randomint(var_17c8d9e220164807);
+  numtracks = game["music"]["pe_auavscan_music_spotted"].size;
+  tracknum = randomint(numtracks);
   self setplayermusicstate(game["music"]["pe_auavscan_music_spotted"][tracknum]);
   self playsoundtoplayer("sfx_occupation_scan_spotted_flash", self);
 }

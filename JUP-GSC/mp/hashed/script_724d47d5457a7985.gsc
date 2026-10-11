@@ -64,8 +64,8 @@ function function_7794956942b5db04() {
     self.var_e726c726c6fb7dec = 1;
   }
 
-  var_45c17c8bd7095cc4 = function_b9c4aa88ad97ee68(self);
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_b9c4aa88ad97ee68(self);
+  self.variant_definition = activityvariantdefinition;
   var_52262832127326a7 = getStructArray(self.varianttag, "target");
   self.var_da2e58464627b802 = [];
 
@@ -148,21 +148,21 @@ function function_9e3d5d8870156844() {
   self endon("instance_destroyed");
   callback::callback("weapon_stash_started");
   function_b479115b8fc652d0();
-  function_3075c891e48a5474(self.var_6c29f2fdb0054bbe[0], 1);
+  function_3075c891e48a5474(self.playerparticipants[0], 1);
   thread function_f8594b26184f2bd1();
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player.activitykey = self.activitykey;
     self.safe enablescriptableplayeruse(player);
   }
 
-  self.on_mission = zombie_challenges::function_f578373042c34e16(16635, "quest_s0a2t2_safecrack_start", self.var_6c29f2fdb0054bbe);
+  self.on_mission = zombie_challenges::function_f578373042c34e16(16635, "quest_s0a2t2_safecrack_start", self.playerparticipants);
 
   if(!self.on_mission) {
     thread function_1281c7fff9456e18("contract_weaponstash_accept_conv");
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player callback::callback("weapon_stash_started");
   }
 
@@ -174,7 +174,7 @@ function function_9e3d5d8870156844() {
   callback::callback("safe_opened");
   waitframe();
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player callback::callback("weapon_stash_completed");
   }
 
@@ -190,8 +190,8 @@ function function_1813a3a4d9f2b830(activity_succeeded) {
   }
 
   if(!self.on_mission) {
-    if(isDefined(self.var_6c29f2fdb0054bbe[0])) {
-      self.on_mission = function_5acc35fc66331385(self.var_6c29f2fdb0054bbe[0], 16140);
+    if(isDefined(self.playerparticipants[0])) {
+      self.on_mission = function_5acc35fc66331385(self.playerparticipants[0], 16140);
     }
 
     if(!self.on_mission) {
@@ -235,7 +235,7 @@ function function_e6180bf27c299ba3() {
 }
 
 function function_d726e56dacf73235(params) {
-  if(self.var_6c29f2fdb0054bbe.size == 0) {
+  if(self.playerparticipants.size == 0) {
     self notify("abandoned");
     waitframe();
     var_110aca939d912394 = self.safe getscriptablepartstate("dmz_secret_stash", 1);
@@ -265,7 +265,7 @@ function function_f8594b26184f2bd1() {
   wait 3;
 
   while(true) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       dist = distance2dsquared(player.origin, self.safe.origin);
 
       if(dist < 9000000) {
@@ -277,7 +277,7 @@ function function_f8594b26184f2bd1() {
   }
 }
 
-function function_626179fa845fc04d(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_626179fa845fc04d(instance, part, state, player, bautouse, usestring) {
   if(isDefined(player) && istrue(player.var_859654e0445a36d9)) {
     player scripts\mp\hud_message::showerrormessage("MP/DENY_USE_CARRY");
     return;
@@ -305,7 +305,7 @@ function function_626179fa845fc04d(instance, part, state, player, var_a5b2c54141
       if(!isDefined(instance.contents)) {
         instance.containertype = 4;
         instance.var_6a4915c949e9e77e = 1;
-        common_cache::function_d71a41afca697376(instance, instance.lootlist, instance.numitems);
+        common_cache::fillcontentsfromlist(instance, instance.lootlist, instance.numitems);
       }
     } else if(isDefined(instance.contents) && state == "partially_open_usable") {
       if(instance getscriptableparthasstate(part, "fully_opening_unusable")) {
@@ -313,7 +313,7 @@ function function_626179fa845fc04d(instance, part, state, player, var_a5b2c54141
       }
     }
 
-    scripts\cp_mp\loot\common_cache::function_30f5ea60517f9e06(instance, player);
+    scripts\cp_mp\loot\common_cache::openlootablecontainer(instance, player);
   }
 }
 
@@ -530,7 +530,7 @@ function function_ad0115b28e7b12e(trigger, radius) {
   while(true) {
     trigger waittill("trigger", player);
 
-    if(!isPlayer(player) || array_contains(self.nearbyplayers, player) || !array_contains(self.activity.var_6c29f2fdb0054bbe, player)) {
+    if(!isPlayer(player) || array_contains(self.nearbyplayers, player) || !array_contains(self.activity.playerparticipants, player)) {
       continue;
     }
 
@@ -779,7 +779,7 @@ function private function_8735e24dceeb7187() {
   self endon("interact_finished");
   waittill_any_2("last_stand_start", "interact_interrupt");
   logstring("OB RWS -- Drilling anim interrupted, removing Gunless");
-  scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+  scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
 }
 
 function function_f05bfb2a652d7625(player) {
@@ -805,7 +805,7 @@ function function_f05bfb2a652d7625(player) {
   logstring("OB RWS -- Player stance and moveto set");
   var_cd9982adb17761a8 = gettime();
   player thread function_8735e24dceeb7187();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = movetotime - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000;
   waittime = max(0, var_218f64cb035d54be);
@@ -910,7 +910,7 @@ function function_1931531a97158d1f() {
   waitframe();
   self.var_2a2f4483763847a0 = "current";
   function_6f02ac608d44fdbf(self.var_6b9eefeff825604b, 0);
-  self.ping_owner = self.var_6c29f2fdb0054bbe[0];
+  self.ping_owner = self.playerparticipants[0];
   self.ping_index = self.ping_owner scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(11, self.safe.origin + (0, 0, 85), self.var_6b9eefeff825604b);
   self waittill("activity_ended");
   function_765b706dc170e214(self.var_6b9eefeff825604b);

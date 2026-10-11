@@ -47,7 +47,7 @@ function c4_used(grenade) {
     grenade[[getsharedfunc(#"hash_d8976e21a6adafba", #"hash_ca0042e3cac99672")]](grenade);
   }
 
-  grenade.bundle = scripts\mp\equipment::function_2113b6f7cb462692(grenade.weapon_name);
+  grenade.bundle = scripts\mp\equipment::getequipmentbundlefromweaponname(grenade.weapon_name);
   grenade.var_e73a396a2a6b1d56 = istrue(grenade.bundle.var_f9f61f3d350beae0);
   grenade.throwtime = gettime();
   grenade scripts\cp_mp\ent_manager::registerspawn(1, &sweepc4);
@@ -188,7 +188,7 @@ function c4_explode(attacker) {
   }
 
   if(getdvarint(@ "mgl", 0)) {
-    thread scripts\common\ai::function_f8903387ea945165(self.origin, 2);
+    thread scripts\common\ai::mgladdactivesmoke(self.origin, 2);
   }
 
   self setentityowner(attacker);
@@ -542,7 +542,7 @@ function c4_resetaltdetonpickup(bundle) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function c4_addtoarray(owner, grenade) {

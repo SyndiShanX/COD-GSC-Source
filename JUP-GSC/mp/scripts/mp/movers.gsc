@@ -634,7 +634,7 @@ function player_update_unresolved_collision(mover, penetration) {
       radius = getdvarint(@ "scr_unresolved_collision_door_check_radius", 1000);
       nearestdoor = function_65eef2622bd403cf(self.origin, radius);
 
-      if(isDefined(nearestdoor) && nearestdoor function_73cc0f04c4c5001d()) {
+      if(isDefined(nearestdoor) && nearestdoor isscriptableinstance()) {
         allowsuicide = player_should_be_killed_by_mover(mover);
         mover unresolved_collision_nearest_node(self, allowsuicide, mover, 1);
         self.unresolved_collision_count = 0;
@@ -743,7 +743,7 @@ function unresolved_collision_nearest_node(player, var_4258fb168fb20ba6, mover, 
 
   if(isDefined(mover)) {
     if(isDefined(mover.elevator)) {
-      if(player scripts\common\elevators::function_8e2d666b5b0f2bd3(mover)) {
+      if(player scripts\common\elevators::isinsideelevator(mover)) {
         return;
       }
     }
@@ -1043,7 +1043,7 @@ function handle_moving_platform_touch(data) {
       }
     }
 
-    if(isDefined(data.var_49cb2c45d3230ed8) && data.var_49cb2c45d3230ed8) {
+    if(isDefined(data.plantedontrain) && data.plantedontrain) {
       if(scripts\cp_mp\utility\train_utility::is_train_ent(platform)) {
         waitframe();
         continue;

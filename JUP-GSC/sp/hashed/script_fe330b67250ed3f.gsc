@@ -13,7 +13,7 @@ function getfunction(funcid) {
     case #"hash_4d7ca12cb5ce1028":
       return &startcap;
     case #"hash_96053be986d24f88":
-      return &function_8add99cb1b82b964;
+      return &ondeleteuser;
     case #"hash_b74f6be2a082d8a4":
       return &function_c41ad0adbb33bbd7;
     case #"hash_9910be4166a4ce32":
@@ -32,20 +32,20 @@ function startcap(statename, params) {
   namespace_f901a4f9d899be59::startcap(statename, params);
 }
 
-function function_8add99cb1b82b964(interactionid) {
+function ondeleteuser(interactionid) {
   namespace_f901a4f9d899be59::function_25c933655d73066a(interactionid);
-  return namespace_f901a4f9d899be59::function_8add99cb1b82b964(interactionid);
+  return namespace_f901a4f9d899be59::ondeleteuser(interactionid);
 }
 
 function function_c41ad0adbb33bbd7(params) {
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
   return function_60d6151af81a343(id, "OverflowBypass");
 }
 
 function function_67556aff182e237a(params) {
-  self.var_be96bc0cf51de950 = 1;
+  self.interactionholdingpattern = 1;
 }
 
 function function_ca8028e5808a134b(params) {
-  self.var_be96bc0cf51de950 = undefined;
+  self.interactionholdingpattern = undefined;
 }

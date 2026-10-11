@@ -64,7 +64,7 @@ function function_26b13dc209dedbe() {
   foreach(agent in var_674daafffc0aacf3) {
     if(agent cansee(self)) {
       agent setthreatsight(self, 1);
-      agent function_68f50ada6e19d8f4(self.origin, "med");
+      agent setpatrolreact(self.origin, "med");
 
       if(istrue(agent.stealth_enabled)) {
         agent setstealthstate("combat");

@@ -152,8 +152,8 @@ function function_e157c0ce32f71cbe(target, var_a7fa0e3c9034f2f4, meleedirection,
           setsaveddvar(@ "player_meleeDamageMultiplier", 0.05);
         }
 
-        if(isDefined(self.var_1a0d03789f333f98)) {
-          meleepower = self.var_1a0d03789f333f98;
+        if(isDefined(self.meleepoweroverride)) {
+          meleepower = self.meleepoweroverride;
         }
 
         overrideenemy = undefined;
@@ -180,9 +180,9 @@ function function_e157c0ce32f71cbe(target, var_a7fa0e3c9034f2f4, meleedirection,
 
           if(!shieldactive) {
             isonscreen = 0;
-            var_20c094516733ffb1 = [self.origin, self getapproxeyepos(), (self.origin + self getapproxeyepos()) / 2];
+            pointstocheck = [self.origin, self getapproxeyepos(), (self.origin + self getapproxeyepos()) / 2];
 
-            foreach(point in var_20c094516733ffb1) {
+            foreach(point in pointstocheck) {
               if(isDefined(target worldpointtoscreenpos(point, 55))) {
                 isonscreen = 1;
                 break;
@@ -281,9 +281,9 @@ function melee_shouldabort(asmname, statename, tostatename, params) {
         return bstop;
       }
     } else if(self.var_6a4a5c698277c54d) {
-      var_602e5b5e7dc6f071 = asm_eventfired(asmname, "melee_stop");
+      beventfired = asm_eventfired(asmname, "melee_stop");
 
-      if(!var_602e5b5e7dc6f071) {
+      if(!beventfired) {
         self.var_9ea242cb88e6301e = 1;
         return 0;
       }
@@ -312,8 +312,8 @@ function candomeleebehind_anim(asmname, statename, tostatename, params) {}
 function candomeleeanim_internal(meleeanim) {
   target = self.meleetarget;
   targetpos = target.origin;
-  var_79b0b08b6461b1ff = self.origin - targetpos;
-  targetangles = vectortoangles(var_79b0b08b6461b1ff);
+  targettome = self.origin - targetpos;
+  targetangles = vectortoangles(targettome);
   startpos = getstartorigin(targetpos, targetangles, meleeanim);
   self.var_290be0985580a7a0 = getstartangles(targetpos, targetangles, meleeanim)[1];
   target.var_290be0985580a7a0 = targetangles[1];
@@ -421,7 +421,7 @@ function on_execution_begin(asmname, statename, params) {
   distfromcenter = 40;
   halfheight = 40;
   self function_4cd0eaf5381f92db(0);
-  otherguy = function_f3bb4f4911a1beb2("player", "getExecutionPartner");
+  otherguy = callsharedfunc("player", "getExecutionPartner");
 
   if(isDefined(otherguy)) {
     assertex(isPlayer(otherguy), "<dev string:x37>");

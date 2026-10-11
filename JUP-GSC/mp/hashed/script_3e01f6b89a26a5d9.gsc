@@ -47,7 +47,7 @@ function init() {
 
 function function_60fccb021222ec4c() {
   var_eb5dfd5a5629cdcf = namespace_e23f629a8349dfaf::function_e7b6474ebd683537("<dev string:x103>", "<dev string:x118>");
-  var_e1922afab23ca6c6 = namespace_e23f629a8349dfaf::function_e7b6474ebd683537("<dev string:x103>", "<dev string:x12e>");
+  n_player_radius = namespace_e23f629a8349dfaf::function_e7b6474ebd683537("<dev string:x103>", "<dev string:x12e>");
 
   while(true) {
     foreach(player in level.players) {
@@ -58,9 +58,9 @@ function function_60fccb021222ec4c() {
 
       if(player ent_flag("<dev string:x163>")) {
         cylinder(player.origin, player.origin + (0, 0, 72), var_eb5dfd5a5629cdcf, (1, 0, 0));
-        cylinder(player.origin, player.origin + (0, 0, 72), var_e1922afab23ca6c6, (0.5, 0, 1));
+        cylinder(player.origin, player.origin + (0, 0, 72), n_player_radius, (0.5, 0, 1));
         printtoscreen2d(325, 250, "<dev string:x179>" + var_eb5dfd5a5629cdcf, (1, 0, 0), 2);
-        printtoscreen2d(325, 300, "<dev string:x18e>" + var_e1922afab23ca6c6, (0.5, 0, 1), 2);
+        printtoscreen2d(325, 300, "<dev string:x18e>" + n_player_radius, (0.5, 0, 1), 2);
       }
     }
 
@@ -97,8 +97,8 @@ function function_eaafe219c8e1fa28() {
     if(deploysuccess) {
       self setscriptablepartstate("wand_fx", "wand_on_tesla_storm", 0);
       var_eb5dfd5a5629cdcf = namespace_e23f629a8349dfaf::function_e7b6474ebd683537("super_tesla_storm", "teslaStormAIRadius");
-      var_e1922afab23ca6c6 = namespace_e23f629a8349dfaf::function_e7b6474ebd683537("super_tesla_storm", "teslaStormPlayerRadius");
-      thread tesla_storm_active(var_e1922afab23ca6c6, var_eb5dfd5a5629cdcf);
+      n_player_radius = namespace_e23f629a8349dfaf::function_e7b6474ebd683537("super_tesla_storm", "teslaStormPlayerRadius");
+      thread tesla_storm_active(n_player_radius, var_eb5dfd5a5629cdcf);
       return true;
     }
   }

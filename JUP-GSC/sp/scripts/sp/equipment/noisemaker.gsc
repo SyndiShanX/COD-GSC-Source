@@ -41,10 +41,10 @@ function noisemakerfiremain(noisemaker, weapon) {
     }
   }
 
-  var_ba9666bc2ced143f = spawn("script_model", noisemaker.origin);
-  var_ba9666bc2ced143f.angles = noisemaker.angles;
-  var_ba9666bc2ced143f setModel(level.currentthrowobject);
-  var_ba9666bc2ced143f thread noisemakerwaitpickup(weapon);
+  noisemakerpickup = spawn("script_model", noisemaker.origin);
+  noisemakerpickup.angles = noisemaker.angles;
+  noisemakerpickup setModel(level.currentthrowobject);
+  noisemakerpickup thread noisemakerwaitpickup(weapon);
   showcursor = 1;
 
   if(isDefined(level.allownoisemakerpickups) && !level.allownoisemakerpickups) {
@@ -62,16 +62,16 @@ function noisemakersenablecursors() {
   if(!istrue(level.disablenoisemakers)) {
     noisemakerpickups = getEntArray("offhand_noisemaker", "targetname");
 
-    foreach(var_ba9666bc2ced143f in noisemakerpickups) {
-      if(isDefined(var_ba9666bc2ced143f.script_parameters)) {
-        var_ba9666bc2ced143f.zoffset = stringtofloat(var_ba9666bc2ced143f.script_parameters);
+    foreach(noisemakerpickup in noisemakerpickups) {
+      if(isDefined(noisemakerpickup.script_parameters)) {
+        noisemakerpickup.zoffset = stringtofloat(noisemakerpickup.script_parameters);
       } else {
-        var_ba9666bc2ced143f.zoffset = 1.5;
+        noisemakerpickup.zoffset = 1.5;
       }
 
-      if(!isDefined(var_ba9666bc2ced143f.cursor_hint_ent)) {
-        originoffset = rotatevectorinverted((0, 0, var_ba9666bc2ced143f.zoffset), var_ba9666bc2ced143f.angles);
-        var_ba9666bc2ced143f scripts\sp\player\cursor_hint::create_cursor_hint(undefined, originoffset, &"CAPTIVE/CURSOR_PICKUP", 360, 128, 64);
+      if(!isDefined(noisemakerpickup.cursor_hint_ent)) {
+        originoffset = rotatevectorinverted((0, 0, noisemakerpickup.zoffset), noisemakerpickup.angles);
+        noisemakerpickup scripts\sp\player\cursor_hint::create_cursor_hint(undefined, originoffset, &"CAPTIVE/CURSOR_PICKUP", 360, 128, 64);
       }
     }
   }
@@ -80,8 +80,8 @@ function noisemakersenablecursors() {
 function noisemakersdisablecursors() {
   noisemakerpickups = getEntArray("offhand_noisemaker", "targetname");
 
-  foreach(var_ba9666bc2ced143f in noisemakerpickups) {
-    var_ba9666bc2ced143f scripts\sp\player\cursor_hint::remove_cursor_hint();
+  foreach(noisemakerpickup in noisemakerpickups) {
+    noisemakerpickup scripts\sp\player\cursor_hint::remove_cursor_hint();
   }
 }
 

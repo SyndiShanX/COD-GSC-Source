@@ -420,7 +420,7 @@ function private function_e9591df01126977(target, var_6c8ee20b233ca1aa) {
   tier3chance = level.elimprops.tier3weight / totalweight;
   tier2chance = level.elimprops.tier2weight / totalweight + tier3chance;
   var_25baf6dc730b79ad = level.elimprops.var_8ebba99852aa5265 / totalweight;
-  basetier = scripts\mp\ai_mp_controller::function_9b6306b0cd33bd79(self.node.origin);
+  basetier = scripts\mp\ai_mp_controller::subarea_getsubareadifficultyfromorigin(self.node.origin);
 
   foreach(node in var_bd0799062ead03a4) {
     rand = randomfloat(1);

@@ -234,11 +234,11 @@ function function_83373446144cfe7d(instance) {
   level.contentmanager.spawnedinstances = spawnedinstances;
 }
 
-function spawn_interact(struct, var_91839babd32261f4, usecallback, offset) {
+function spawn_interact(struct, scriptable_name, usecallback, offset) {
   assert(isstruct(struct));
   assert(isDefined(usecallback));
   offset = default_to(offset, (0, 0, 0));
-  interact = spawnscriptable(var_91839babd32261f4, struct.origin + offset, struct.angles);
+  interact = spawnscriptable(scriptable_name, struct.origin + offset, struct.angles);
   function_32645103f7520635(interact, usecallback);
   interact interact_show(1);
   return interact;

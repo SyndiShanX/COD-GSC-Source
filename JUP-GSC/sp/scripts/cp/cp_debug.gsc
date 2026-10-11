@@ -24,8 +24,8 @@ function debuginit_demo() {
 }
 
 function function_eef8fed381e4deec(dvar, input_func) {
-  level notify("watchFor_" + function_f28fd66285fa2c9(dvar));
-  level endon("watchFor_" + function_f28fd66285fa2c9(dvar));
+  level notify("watchFor_" + getxhashhexname(dvar));
+  level endon("watchFor_" + getxhashhexname(dvar));
   setdvarifuninitialized(dvar, "");
 
   while(true) {
@@ -70,7 +70,7 @@ function function_aa8545c4caff39ef() {
   }
 
   foreach(player in level.players) {
-    player thread function_d8acbb08ac0dc074(player);
+    player thread watchforplayerdisconnect(player);
   }
 
   level thread function_d028c8aea81e0fb0();
@@ -96,7 +96,7 @@ function function_d028c8aea81e0fb0() {
   }
 }
 
-function function_d8acbb08ac0dc074(player) {
+function watchforplayerdisconnect(player) {
   player waittill("<dev string:x195>", player);
   wait 1;
 

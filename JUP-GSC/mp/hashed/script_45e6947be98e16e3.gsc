@@ -494,7 +494,7 @@ function function_d022875f2be5b645(params) {
     var_364d691b501cd27f = scripts\cp_mp\armor::function_20b8437058079297();
 
     if(var_364d691b501cd27f > 0) {
-      return scripts\cp_mp\armor::function_cf37789d18fbcc1b();
+      return scripts\cp_mp\armor::caninsertarmor();
     }
   }
 

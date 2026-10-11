@@ -306,7 +306,7 @@ function function_cc815bd31c5e382d() {
   player kill();
 }
 
-function function_cbeeeb6eaffaa114(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_cbeeeb6eaffaa114(instance, part, state, player, bautouse, usestring) {
   if(!player scripts\mp\gametypes\br_public::isplayerinorgoingtogulag()) {
     return;
   }

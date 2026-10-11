@@ -33,12 +33,12 @@ function function_2d4c340dd3908b2d(fov) {
   self.fov = fov;
 }
 
-function function_b8f86028bcc64f84(fstop, focusdist, focusspeed, aperturespeed, var_c06551440b16249c) {
+function function_b8f86028bcc64f84(fstop, focusdist, focusspeed, aperturespeed, focalpoint) {
   self.fstop = fstop;
   self.focusdist = focusdist;
   self.focusspeed = focusspeed;
   self.aperturespeed = aperturespeed;
-  self.var_c06551440b16249c = var_c06551440b16249c;
+  self.focalpoint = focalpoint;
 }
 
 function add_pack_modelanim(ent, animation) {
@@ -312,7 +312,7 @@ function add_pack_characteranim(modelname, extramodels, animation, animstr, anim
   return model;
 }
 
-function allplayers_setphysicaldof(fstop, focusdist, focusspeed, aperturespeed, var_c06551440b16249c) {
+function allplayers_setphysicaldof(fstop, focusdist, focusspeed, aperturespeed, focalpoint) {
   if(!isDefined(focusspeed)) {
     focusspeed = 100;
   }
@@ -327,8 +327,8 @@ function allplayers_setphysicaldof(fstop, focusdist, focusspeed, aperturespeed, 
       player enablephysicaldepthoffieldscripting();
     }
 
-    if(isDefined(var_c06551440b16249c)) {
-      player setphysicaldepthoffield(fstop, focusdist, focusspeed, aperturespeed, var_c06551440b16249c);
+    if(isDefined(focalpoint)) {
+      player setphysicaldepthoffield(fstop, focusdist, focusspeed, aperturespeed, focalpoint);
       continue;
     }
 

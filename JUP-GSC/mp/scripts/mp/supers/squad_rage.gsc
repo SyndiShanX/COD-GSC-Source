@@ -48,7 +48,7 @@ function private initvariables() {
   level.var_699a1785b1375779.superid = scripts\mp\supers::getsuperid("super_squadrage");
   level.var_699a1785b1375779.throttle = throttle_initialize("squad_rage_throttle", 3, 0.2);
   level.var_699a1785b1375779.var_6bca48baec64109c = getdvarint(@ "hash_b4e3b6bb467a6aef", 1);
-  function_f1aed36ab4598ea("eqp_squadrage");
+  snd_transient_load("eqp_squadrage");
 }
 
 function private function_247c0da754494285() {
@@ -86,7 +86,7 @@ function private function_247c0da754494285() {
     scripts\cp_mp\challenges::function_8359cadd253f9604(player, "full_team_squad_rage", 1);
   }
 
-  player thread function_92e76fa20cb89f9a(player.var_d4afb17212d1b2cc, var_67d84be6232392d2);
+  player thread monitorplayerdisconnect(player.var_d4afb17212d1b2cc, var_67d84be6232392d2);
   var_9c4c9186f375df3b = 0;
   player function_c35c3441b3cbdb88(var_9c4c9186f375df3b);
   function_6fce2e1d1f1f4e9b(player, player.var_d4afb17212d1b2cc);
@@ -178,7 +178,7 @@ function private function_f97ae6f81b6d1a2a(player, var_67d84be6232392d2) {
   player thread scripts\mp\equipment\battlerage::function_739a5f064c7debdf(3);
 }
 
-function private function_92e76fa20cb89f9a(var_9cd097913ee71546, var_67d84be6232392d2) {
+function private monitorplayerdisconnect(var_9cd097913ee71546, var_67d84be6232392d2) {
   player = self;
   player endon("squadRageEnd");
   player waittill("disconnect");

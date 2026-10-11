@@ -28,7 +28,7 @@ function precache(params) {
   settings = function_cb7771bf461049eb(params);
 
   if(isDefined(settings)) {
-    add_fx("mangler_weakpoint_impact_fx", settings.var_b8482d7232ea8ac4);
+    add_fx("mangler_weakpoint_impact_fx", settings.weakpointvfxpath);
   }
 }
 
@@ -38,21 +38,21 @@ function private function_f49a30f92555b827(params) {
   function_8e401d26d58bc32d();
   function_3ff40056b91b6e90();
   function_303a0a4b0a91563();
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_turned", &function_e809d2e0583ea302);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("shocked", &function_c8bbb80c04cd9a37);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("shocked_end", &function_deadba29b36b687d);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("burned", &function_bf0fe7b30fa14180);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("burned_end", &function_788a3fa28ef17f52);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("napalm_burned", &function_dbb5710ec418627e);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("napalm_burned_end", &function_afa5ec2deb3f62a0);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("pre_killed_body_cloned", &function_299ef5b8dcedc53f);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_c3fded253ea1fc75);
+  callback::get_template(self.animsetname) callback::add("on_turned", &function_e809d2e0583ea302);
+  callback::get_template(self.animsetname) callback::add("shocked", &function_c8bbb80c04cd9a37);
+  callback::get_template(self.animsetname) callback::add("shocked_end", &function_deadba29b36b687d);
+  callback::get_template(self.animsetname) callback::add("burned", &function_bf0fe7b30fa14180);
+  callback::get_template(self.animsetname) callback::add("burned_end", &function_788a3fa28ef17f52);
+  callback::get_template(self.animsetname) callback::add("napalm_burned", &function_dbb5710ec418627e);
+  callback::get_template(self.animsetname) callback::add("napalm_burned_end", &function_afa5ec2deb3f62a0);
+  callback::get_template(self.animsetname) callback::add("pre_killed_body_cloned", &function_299ef5b8dcedc53f);
+  callback::get_template(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_c3fded253ea1fc75);
 }
 
 function function_e3e1894798c371bf(taskid) {
   assert(isDefined(self.zombieaisetting));
-  function_7415ae9399ba8e75(self.zombieaisetting);
+  zombie_init_ai(self.zombieaisetting);
   assert(isDefined(self.zombieaisettings.var_e58a65b7a8f5973c));
   callback::add("on_first_ai_init", &function_f49a30f92555b827);
   function_265e0e58c950559();
@@ -199,6 +199,6 @@ function private function_afa5ec2deb3f62a0(var_12c084a213d7ad2) {
 
 function private function_e809d2e0583ea302(var_8c62cb683d643eb7) {
   utility::function_3ab9164ef76940fd("brainrot", "brainrot_on");
-  namespace_277ce153e9305d9d::function_d04d397bd793d2a3(0, 1);
+  zombie_mangler_berserk::function_d04d397bd793d2a3(0, 1);
   self._blackboard.var_8d19c6ba087e7a86 = 1;
 }

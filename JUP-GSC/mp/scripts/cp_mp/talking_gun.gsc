@@ -646,7 +646,7 @@ function function_556866c3c047a8b8(victim) {
 }
 
 function function_f0b105c339fb3e1(objweapon) {
-  weapongroup = function_f3bb4f4911a1beb2("weapons", "getWeaponGroup", objweapon);
+  weapongroup = callsharedfunc("weapons", "getWeaponGroup", objweapon);
   return isDefined(weapongroup) && (weapongroup == "weapon_sniper" || weapongroup == "weapon_dmr");
 }
 
@@ -922,7 +922,7 @@ function function_572b61079927196b() {
 }
 
 function function_ef6885141252869(player, grenade) {
-  issuper = function_f3bb4f4911a1beb2("weapons", "isSuperWeapon", grenade.weapon_object);
+  issuper = callsharedfunc("weapons", "isSuperWeapon", grenade.weapon_object);
 
   if(issuper) {
     function_55b08d6d71b41402(player, "equipment_deployed");
@@ -1145,30 +1145,30 @@ function function_a5408bdf77302300() {
     eventname = getDvar(@ "hash_ed477691433d09ec");
 
     if(eventname != "<dev string:xe0>") {
-      var_cabc886d846dd979 = 0;
+      omnvarval = 0;
 
       switch (eventname) {
         case #"hash_dd65780f43656833":
-          var_cabc886d846dd979 = 1;
+          omnvarval = 1;
           break;
         case #"hash_bcd16c32933c3b91":
-          var_cabc886d846dd979 = 2;
+          omnvarval = 2;
           break;
         case #"hash_1f1d7b3efcb82111":
-          var_cabc886d846dd979 = 3;
+          omnvarval = 3;
           break;
         case #"hash_95f8d06c03be72f6":
-          var_cabc886d846dd979 = 7;
+          omnvarval = 7;
           break;
         case #"hash_ec1d2322d127982b":
-          var_cabc886d846dd979 = 8;
+          omnvarval = 8;
           break;
         case #"hash_379a17913fa2594a":
-          var_cabc886d846dd979 = 9;
+          omnvarval = 9;
           break;
       }
 
-      self setclientomnvar("<dev string:x13a>", var_cabc886d846dd979);
+      self setclientomnvar("<dev string:x13a>", omnvarval);
       setDvar(@ "hash_ed477691433d09ec", "<dev string:xe0>");
     }
 

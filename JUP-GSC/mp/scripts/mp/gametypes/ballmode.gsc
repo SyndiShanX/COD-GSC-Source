@@ -191,7 +191,7 @@ function function_d7522ff35ba39906() {
   position.angles = self.angles;
   spawndata = vehiclespawn_getspawndata(position);
   vehicle = scripts\cp_mp\vehicles\vehicle::vehicle_spawn(level.var_227023e744a288b6, spawndata);
-  vehicle.var_a8f4bb03b366aa80 = 1;
+  vehicle.dontspawnhusk = 1;
   vehicle.godmode = 1;
   vehicle.preventrespawn = 1;
   vehicle.lastpushtime = -1;
@@ -997,7 +997,7 @@ function function_263274274f7871fa() {
         self.pers["hasDoneAnyCombat"] = 1;
 
         for(x = 0; x < 5; x++) {
-          self.vehicle function_e0201404a8b6f664(anglesToForward(self.vehicle.angles), 55, 0);
+          self.vehicle vehphys_impulse(anglesToForward(self.vehicle.angles), 55, 0);
           wait 0.1;
 
           if(!isDefined(self.vehicle)) {

@@ -1221,13 +1221,13 @@ function manualturret_watchammotracker(user) {
   user endon("disconnect");
   level endon("game_ended");
   config = level.sentrysettings[self.turrettype];
-  var_83fb464c27e79a0e = weaponfiretime(config.weaponinfo);
+  turretfiredelay = weaponfiretime(config.weaponinfo);
 
   if(!isDefined(self.hideammoindex)) {
     self.hideammoindex = 1;
   }
 
-  assertex(isDefined(var_83fb464c27e79a0e) && var_83fb464c27e79a0e > 0, "turretFireDelay is either not defined or less than 0, make sure your turret weapon has a valid fire time");
+  assertex(isDefined(turretfiredelay) && turretfiredelay > 0, "turretFireDelay is either not defined or less than 0, make sure your turret weapon has a valid fire time");
 
   while(user isusingturret()) {
     while(user attackButtonPressed()) {
@@ -1248,7 +1248,7 @@ function manualturret_watchammotracker(user) {
         break;
       }
 
-      wait var_83fb464c27e79a0e;
+      wait turretfiredelay;
     }
 
     waitframe();

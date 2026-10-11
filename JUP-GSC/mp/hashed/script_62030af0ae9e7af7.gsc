@@ -245,7 +245,7 @@ function private function_a07d239817137b11() {
 }
 
 function function_3d5e2b560f11caeb() {
-  if(!isDefined(self) || !isagent(self) || !isalive(self) || !isagent(self) || self.unittype != "soldier" || isDefined(self function_92435c7a6ae85c3c())) {
+  if(!isDefined(self) || !isagent(self) || !isalive(self) || !isagent(self) || self.unittype != "soldier" || isDefined(self getinteractionid())) {
     return false;
   }
 
@@ -296,7 +296,7 @@ function function_16ab2219925a2f43() {
   radiussquared = getdvarint(@ "hash_bfc9963224070271", 2000);
 
   if(function_a794fcf9545f2062()) {
-    nearbyai = function_b1eef70090b5b7b5(self.origin, radiussquared, function_869ccb4e3451b8c6(["etype_ai"]), [], "team_hundred_ninety");
+    nearbyai = getentitiesinradiusfrompartitiongrid(self.origin, radiussquared, createentitytypemask(["etype_ai"]), [], "team_hundred_ninety");
   } else {
     nearbyai = getaiarrayinradius(self.origin, radiussquared, "team_hundred_ninety");
   }
@@ -318,7 +318,7 @@ function function_16ab2219925a2f43() {
 
 function function_8bdfc9247fd9402f(radius, excludelist, var_f1850a701d655011) {
   if(function_a794fcf9545f2062()) {
-    nearbytargets = function_b1eef70090b5b7b5(self.origin, radius, function_869ccb4e3451b8c6(["etype_player"]), excludelist);
+    nearbytargets = getentitiesinradiusfrompartitiongrid(self.origin, radius, createentitytypemask(["etype_player"]), excludelist);
   } else {
     nearbytargets = scripts\mp\utility\player::getplayersinradius(self.origin, radius, undefined, excludelist);
   }
@@ -465,7 +465,7 @@ function private function_b341b363d683c952(launcher, var_68ee057779a106c1) {
   launcher.fired = 0;
   thread handle_ai_launcher_death(launcher);
 
-  while(isDefined(self function_92435c7a6ae85c3c()) || !self asmhasstate(self.asmname, "animscripted")) {
+  while(isDefined(self getinteractionid()) || !self asmhasstate(self.asmname, "animscripted")) {
     wait 1;
   }
 
@@ -514,14 +514,14 @@ function private mortar_cooldown(launcher) {
   waittill_any_2("death", "teleport_to_nearby_spawner");
 
   if(isDefined(launcher) && isent(launcher)) {
-    var_9e373019b587e34 = getdvarint(@ "hash_9f9ad08ef36acbf7", 1000);
+    cooldownduration = getdvarint(@ "hash_9f9ad08ef36acbf7", 1000);
 
     if(isDefined(launcher.operator)) {
       launcher.operator clear_operator_data();
     }
 
     launcher.operator = undefined;
-    launcher.oncooldown = gettime() + var_9e373019b587e34;
+    launcher.oncooldown = gettime() + cooldownduration;
   }
 }
 
@@ -587,11 +587,11 @@ function private launch_mortar(start, end, agent, optional_height) {
     }
   }
 
-  var_d86011592b884052 = spawn_tag_origin(start, (0, 0, 0));
-  var_d86011592b884052 setModel("equipment_mortar_shell_improvised_01");
+  mortarshell = spawn_tag_origin(start, (0, 0, 0));
+  mortarshell setModel("equipment_mortar_shell_improvised_01");
   playFX(getfx("vfx_mortar_fire"), self.origin, anglesToForward(self.angles));
   playsoundatpos(start, "weap_mortar_fire_dist");
-  var_d86011592b884052 show();
+  mortarshell show();
   time = self.var_1115d9ebad86e77;
   apex_height = 1200;
 
@@ -605,16 +605,16 @@ function private launch_mortar(start, end, agent, optional_height) {
   }
 
   self.fired = 1;
-  thread function_330f2cf2ca649a29(var_d86011592b884052, start, end, time, apex_height);
+  thread function_330f2cf2ca649a29(mortarshell, start, end, time, apex_height);
   self.current_target = undefined;
-  wait_until_impact(var_d86011592b884052, time);
+  wait_until_impact(mortarshell, time);
 
-  if(isDefined(var_d86011592b884052)) {
-    stopFXOnTag(getfx("vfx_mortar_trail"), var_d86011592b884052, "tag_origin");
-    var_d86011592b884052 stoploopsound();
-    end = var_d86011592b884052.origin;
+  if(isDefined(mortarshell)) {
+    stopFXOnTag(getfx("vfx_mortar_trail"), mortarshell, "tag_origin");
+    mortarshell stoploopsound();
+    end = mortarshell.origin;
     z_offset = (0, 0, 40);
-    attacker = isalive(agent) ? agent : var_d86011592b884052;
+    attacker = isalive(agent) ? agent : mortarshell;
     damageradius = getdvarfloat(@ "hash_101ff87dc41f06f9", 256);
     var_1e0b46f8a186c68 = getdvarfloat(@ "hash_14b3e4a59a909146", 200);
     var_9c95151112f60200 = getdvarfloat(@ "hash_78477d931c1e8ace", 150);
@@ -623,7 +623,7 @@ function private launch_mortar(start, end, agent, optional_height) {
     playrumbleonposition("cp_chopper_rumble", end);
     playsoundatpos(end, "weap_mortar_expl_trans");
     magicgrenademanual("jup_mortar_mp", end + (0, 0, 2), (0, 0, -1), 0.1);
-    var_d86011592b884052 delete();
+    mortarshell delete();
   }
 }
 
@@ -689,14 +689,14 @@ function private check_for_early_impact(mortar, next_loc) {
   }
 }
 
-function private wait_until_impact(var_d86011592b884052, time) {
-  var_d86011592b884052 endon("early_impact");
-  var_d86011592b884052 endon("death");
+function private wait_until_impact(mortarshell, time) {
+  mortarshell endon("early_impact");
+  mortarshell endon("death");
   wait 0.1;
-  playFXOnTag(getfx("vfx_mortar_trail"), var_d86011592b884052, "tag_origin");
-  var_d86011592b884052 playLoopSound("weap_mortar_fly_lp");
+  playFXOnTag(getfx("vfx_mortar_trail"), mortarshell, "tag_origin");
+  mortarshell playLoopSound("weap_mortar_fly_lp");
   wait time - 1.7;
-  var_d86011592b884052 playSound("weap_mortar_incoming");
+  mortarshell playSound("weap_mortar_incoming");
   wait 1.7;
 }
 

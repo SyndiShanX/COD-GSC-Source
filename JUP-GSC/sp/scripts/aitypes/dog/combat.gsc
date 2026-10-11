@@ -12,7 +12,7 @@
 
 function dog_init(taskid) {
   self.fixednode = 0;
-  self function_9f82c74eb1b7caf9(0, "entity");
+  self setcanusecover(0, "entity");
   self._blackboard.movetype = "walk";
   self.meleechargedist = 384;
   self.meleechargedistvsplayer = 384;
@@ -66,7 +66,7 @@ function updateeveryframe_stealth(taskid) {
   target = function_9f06ea4aea71cf56();
   var_4f3c8b6363feecc2 = isDefined(target);
 
-  switch (self.var_fe5ebefa740c7106) {
+  switch (self.stealth_bsmstate) {
     case 0:
       if(var_4f3c8b6363feecc2) {
         disttotargetsq = distancesquared(target.origin, self.origin);
@@ -82,7 +82,7 @@ function updateeveryframe_stealth(taskid) {
         disttotargetsq = distancesquared(target.origin, self.origin);
 
         if(disttotargetsq > self.smellouterradiussq) {
-          if(self function_f4d54a90334a7dea(target, 4)) {
+          if(self getthreatsightflag(target, 4)) {
             function_4acf2a2179e158ff("idle");
           }
         } else if(disttotargetsq < self.combatradiussq && self cansee(target)) {
@@ -115,7 +115,7 @@ function enableeventlisteners(benable) {
 function dog_idle_init() {
   enableeventlisteners(1);
   self clearenemy();
-  self function_ea50442798fca4c1("hidden");
+  self setsightstate("hidden");
   scripts\stealth\event::event_escalation_clear();
   self function_1aff80c5fc5a3eea("noncombat");
 
@@ -134,7 +134,7 @@ function dog_idle_init() {
 
 function dog_idle_init_task(taskid) {
   self.bt.instancedata[taskid] = spawnStruct();
-  self.var_d17737f2fb2cea58 = 0;
+  self.stealthidlecurious = 0;
 }
 
 function dog_idle(taskid) {
@@ -145,13 +145,13 @@ function dog_idle(taskid) {
     threatsight = self getthreatsight(target);
     var_8213e01cd2d8165c = 0.25;
 
-    if(self.var_d17737f2fb2cea58) {
+    if(self.stealthidlecurious) {
       var_abf709c364b55431 = 2000;
 
       if(gettime() > instancedata.curiousstarttime + var_abf709c364b55431) {
         if(threatsight < var_8213e01cd2d8165c * 0.9) {
-          self.var_d17737f2fb2cea58 = 0;
-          self.var_e0164bf8693e15e1 = undefined;
+          self.stealthidlecurious = 0;
+          self.stealthidlecurioustarget = undefined;
 
           if(!isDefined(self.pathgoalpos) && instancedata.var_56e56b012c1a75a6) {
             self function_3b67788e61393d91(1);
@@ -160,10 +160,10 @@ function dog_idle(taskid) {
         }
       }
     } else if(threatsight >= var_8213e01cd2d8165c) {
-      self.var_d17737f2fb2cea58 = 1;
-      self.var_e0164bf8693e15e1 = target;
+      self.stealthidlecurious = 1;
+      self.stealthidlecurioustarget = target;
       instancedata.curiousstarttime = gettime();
-      instancedata.idlenode.var_56e56b012c1a75a6 = self._blackboard.var_6ff150891bb0c47;
+      instancedata.idlenode.var_56e56b012c1a75a6 = self._blackboard.idlenodeisvalid;
 
       if(instancedata.var_56e56b012c1a75a6) {
         self function_3b67788e61393d91(0);
@@ -172,10 +172,10 @@ function dog_idle(taskid) {
       }
     }
   } else {
-    self.var_d17737f2fb2cea58 = 0;
-    self.var_e0164bf8693e15e1 = undefined;
+    self.stealthidlecurious = 0;
+    self.stealthidlecurioustarget = undefined;
 
-    if(!isDefined(self.pathgoalpos) && instancedata.var_6ff150891bb0c47) {
+    if(!isDefined(self.pathgoalpos) && instancedata.idlenodeisvalid) {
       self function_e4b58a023e0da030(instancedata.idlenode.origin, instancedata.idlenode.angles, instancedata.idlenode.var_da71d4b2d374ea7a);
     }
   }
@@ -186,8 +186,8 @@ function dog_idle(taskid) {
 
 function dog_idle_terminate_task(taskid) {
   self.bt.instancedata[taskid] = undefined;
-  self.var_d17737f2fb2cea58 = 0;
-  self.var_e0164bf8693e15e1 = undefined;
+  self.stealthidlecurious = 0;
+  self.stealthidlecurioustarget = undefined;
 }
 
 function dog_investigate_init_task(taskid) {
@@ -257,12 +257,12 @@ function dog_followenemy(taskid) {
     instancedata.nextupdatetime = curtime + 500;
     var_aa54644c41d855b8 = 192;
     metotarget = target.origin - self.origin;
-    var_e69c9108f53988f3 = length(metotarget);
+    distmetotarget = length(metotarget);
 
-    if(var_e69c9108f53988f3 > var_aa54644c41d855b8 && !istrue(self.dontmelee)) {
+    if(distmetotarget > var_aa54644c41d855b8 && !istrue(self.dontmelee)) {
       metotarget = (metotarget[0], metotarget[1], 0);
-      var_e69c9108f53988f3 = length(metotarget);
-      desiredgoalpos = target.origin - metotarget * var_aa54644c41d855b8 / var_e69c9108f53988f3;
+      distmetotarget = length(metotarget);
+      desiredgoalpos = target.origin - metotarget * var_aa54644c41d855b8 / distmetotarget;
       snappedgoalpos = getclosestpointonnavmesh(desiredgoalpos, self);
       self setbtgoalpos(3, snappedgoalpos);
       self setbtgoalRadius(3, 64);
@@ -291,12 +291,12 @@ function dog_followenemy_terminate(taskid) {
 function dog_combat_init() {
   enableeventlisteners(0);
   scripts\stealth\event::event_escalation_clear();
-  self function_ea50442798fca4c1("spotted");
+  self setsightstate("spotted");
 }
 
 function enterstealthstate(state) {
-  exitstealthstate(self.var_fe5ebefa740c7106);
-  self.var_fe5ebefa740c7106 = state;
+  exitstealthstate(self.stealth_bsmstate);
+  self.stealth_bsmstate = state;
 
   switch (state) {
     case 0:
@@ -338,7 +338,7 @@ function function_4acf2a2179e158ff(state, event) {
 
 function function_9f06ea4aea71cf56() {
   target = undefined;
-  var_9d3d458ad88ac030 = 0;
+  highestthreatsight = 0;
   var_73246713dda5c662 = undefined;
   targets = sortbydistance(level.players, self.origin);
 
@@ -349,9 +349,9 @@ function function_9f06ea4aea71cf56() {
 
     threatsight = self getthreatsight(targets[i]);
 
-    if(!isDefined(target) || threatsight > var_9d3d458ad88ac030) {
+    if(!isDefined(target) || threatsight > highestthreatsight) {
       target = targets[i];
-      var_9d3d458ad88ac030 = threatsight;
+      highestthreatsight = threatsight;
     }
   }
 

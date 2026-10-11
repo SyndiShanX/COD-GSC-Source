@@ -404,7 +404,7 @@ function uav_create(launchorigin, owner, uavtype, streakinfo, var_da662696203dc4
     uavmodel thread uav_handleincomingstinger();
     uavmodel thread uav_trackvelocity();
     bundle = level.streakglobals.streakbundles[uavmodel.uavtype];
-    uavmodel thread scripts\cp_mp\utility\killstreak_utility::killstreak_registerminimapinfo(bundle, function_1823ff50bb28148d(uavmodel.uavtype));
+    uavmodel thread scripts\cp_mp\utility\killstreak_utility::killstreak_registerminimapinfo(bundle, getxhash(uavmodel.uavtype));
     uavmodel setscriptablepartstate("lights", "on", 0);
 
     if(uavmodel.uavtype == "counter_uav") {
@@ -742,24 +742,24 @@ function uav_watchdamage() {
       }
     }
 
-    var_cb15fa5174e71840 = 1;
-    var_be7c04516c5d9ccd = 1;
-    var_ca960a517459fe15 = 1;
-    var_8aceb016baaf67af = 0;
-    var_64103c6b531d18f0 = 3;
+    divisorlrg = 1;
+    divisormed = 1;
+    divisorlow = 1;
+    divisormelee = 0;
+    divisortick = 3;
 
     if(self.uavtype == "counter_uav") {
-      var_cb15fa5174e71840 = 1;
-      var_be7c04516c5d9ccd = 2;
-      var_ca960a517459fe15 = 3;
-      var_8aceb016baaf67af = 0;
-      var_64103c6b531d18f0 = 0;
+      divisorlrg = 1;
+      divisormed = 2;
+      divisorlow = 3;
+      divisormelee = 0;
+      divisortick = 0;
     } else if(self.uavtype == "directional_uav") {
-      var_cb15fa5174e71840 = 5;
-      var_be7c04516c5d9ccd = 6;
-      var_ca960a517459fe15 = 7;
-      var_8aceb016baaf67af = 0;
-      var_64103c6b531d18f0 = 0;
+      divisorlrg = 5;
+      divisormed = 6;
+      divisorlow = 7;
+      divisormelee = 0;
+      divisortick = 0;
     }
 
     if(isDefined(objweapon)) {
@@ -769,7 +769,7 @@ function uav_watchdamage() {
         bundle = level.streakglobals.streakbundles[self.uavtype];
         modifieddamage = self[[getsharedfunc("killstreak", "getModifiedDamageUsingDamageTuning")]](attacker, objweapon, meansofdeath, modifieddamage, self.maxhealth, bundle.var_e913079a5ffda56d);
       } else if(issharedfuncdefined("killstreak", "getModifiedAntiKillstreakDamage")) {
-        modifieddamage = self[[getsharedfunc("killstreak", "getModifiedAntiKillstreakDamage")]](attacker, objweapon, meansofdeath, modifieddamage, self.maxhealth, var_cb15fa5174e71840, var_be7c04516c5d9ccd, var_ca960a517459fe15, var_8aceb016baaf67af, var_64103c6b531d18f0);
+        modifieddamage = self[[getsharedfunc("killstreak", "getModifiedAntiKillstreakDamage")]](attacker, objweapon, meansofdeath, modifieddamage, self.maxhealth, divisorlrg, divisormed, divisorlow, divisormelee, divisortick);
       }
 
       if(issharedfuncdefined("killstreak", "killstreakHit")) {
@@ -1154,7 +1154,7 @@ function function_225e3594843d2ac(uavtype, lifetimeoverride, owner) {
 
   if(isDefined(lifetimeoverride)) {
     duration = lifetimeoverride;
-  } else if(isDefined(owner) && owner namespace_53fc9ddbb516e6e1::function_87072b42853a9c58("specialty_uav_buff")) {
+  } else if(isDefined(owner) && owner namespace_53fc9ddbb516e6e1::hasperksharedfunc("specialty_uav_buff")) {
     duration *= ter_op(isDefined(level.var_1408c77a4f773854), level.var_1408c77a4f773854, 1);
   }
 

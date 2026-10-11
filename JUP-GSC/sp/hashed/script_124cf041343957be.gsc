@@ -19,10 +19,10 @@ function main() {
     waitframe();
   }
 
-  thread function_e6926f1db06eb503();
+  thread global_submix();
 }
 
-function function_e6926f1db06eb503() {
+function global_submix() {
   waitframe();
   level.player setsoundsubmix("sp_jup_milbase_global_mix", 0, 1);
 }
@@ -138,7 +138,7 @@ function function_19813e462cbab96c() {
   level.player playSound("sp_jup_milbase_pre_exfil_heli_incoming");
   var_8e3b83bdc37ff852 = (6959, 47003, 1694);
   var_9fad48ba63c620b3 = snd_play("sp_jup_milbase_pre_exfil_heli_lp", var_8e3b83bdc37ff852);
-  function_74726126b3d8b0aa(var_9fad48ba63c620b3, "start_heli_exfil", 1);
+  snd_stop_on_level_notify(var_9fad48ba63c620b3, "start_heli_exfil", 1);
   level.player clearsoundsubmix("sp_jup_milbase_escape_sequence");
 }
 
@@ -146,7 +146,7 @@ function function_d832a8c5ebdf4139() {
   level.player playSound("sp_jup_milbase_exfil_heli_incoming");
   var_41c97e6bfd9c695e = (6959, 47003, 1694);
   heli_idle_lp = snd_play("sp_jup_milbase_exfil_heli_idle", var_41c97e6bfd9c695e);
-  function_74726126b3d8b0aa(heli_idle_lp, "chopper_reached", 2);
+  snd_stop_on_level_notify(heli_idle_lp, "chopper_reached", 2);
 }
 
 function function_a8ee3f549e9967e3() {

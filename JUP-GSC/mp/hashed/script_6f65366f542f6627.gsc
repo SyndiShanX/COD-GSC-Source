@@ -326,7 +326,7 @@ function function_161a9b230a5d1a5e(player, var_83212420e39bdbc2) {
   var_576f57af0204c38c = isDefined(player.s_exfil.var_576f57af0204c38c) ? player.s_exfil.var_576f57af0204c38c : player.var_cac91eb6521df629;
   player val::set("exfil", "damage", 0);
   player.var_65be3afaddfe3a79 = 1;
-  player setplayerdata(level.var_5d69837cf4db0407, "currentSessionStreakCount", player.var_4b8e8742f0763613.var_ae06e623319b2568);
+  player setplayerdata(level.progressiongroup, "currentSessionStreakCount", player.var_4b8e8742f0763613.var_ae06e623319b2568);
 
   if(!istrue(player.var_764da0de2a46452c)) {
     wait 2.5;
@@ -338,7 +338,7 @@ function function_161a9b230a5d1a5e(player, var_83212420e39bdbc2) {
 
   s_exfil notify("exfil_vehicle_gone");
   player.var_65be3afaddfe3a79 = undefined;
-  player setplayerdata(level.var_5d69837cf4db0407, "currentSessionStreakCount", 0);
+  player setplayerdata(level.progressiongroup, "currentSessionStreakCount", 0);
 
   if(isDefined(var_576f57af0204c38c) && !istrue(player.var_68b9486f4adbcb62)) {
     logstring("==OB EXFIL: " + player.name + " jumped out of exfil vehicle for " + s_exfil.name + " after vehicle started leaving");
@@ -409,7 +409,7 @@ function function_161a9b230a5d1a5e(player, var_83212420e39bdbc2) {
       params.exfil_chopper = var_576f57af0204c38c;
       params.s_exfil = s_exfil;
       level callback::callback("quest_exfil_complete", params);
-      function_f9a207358d70923c(getdvarint(@ "hash_337167177f9034b4", 8), ["exfil_fully_completed"], &function_a5426cbe311426c0, player, s_exfil, var_1a32758b940764f4);
+      delaythreadendon(getdvarint(@ "hash_337167177f9034b4", 8), ["exfil_fully_completed"], &function_a5426cbe311426c0, player, s_exfil, var_1a32758b940764f4);
       return;
     } else {
       logstring("Trying to quest exfil from " + (isDefined(s_exfil.name) ? s_exfil.name : "") + " but ob_map_transition_playlist dvar is disabled!");
@@ -495,7 +495,7 @@ function function_a5426cbe311426c0(player, s_exfil, var_1a32758b940764f4) {
   waitframe();
 
   if(issharedfuncdefined("seasonalevents", "getFeaturedLootEventActive")) {
-    if(function_f3bb4f4911a1beb2("seasonalevents", "getFeaturedLootEventActive")) {
+    if(callsharedfunc("seasonalevents", "getFeaturedLootEventActive")) {
       function_af5ab021b625cdf8(player);
     }
   }
@@ -505,7 +505,7 @@ function function_a5426cbe311426c0(player, s_exfil, var_1a32758b940764f4) {
   scripts\mp\gamelogic::processlobbydataforclient(player);
   scripts\mp\scoreboard::processcommonplayerdataforplayer(player);
   processlobbydata();
-  player namespace_7177e11e3871c8f4::function_1b6b6e760a1bdd78();
+  player namespace_7177e11e3871c8f4::take_juggernaut_perk();
   level.skipplaybodycountsound = 1;
   spawnpoint = spawnStruct();
   spawnpoint.origin = player.exfilpos;
@@ -1104,7 +1104,7 @@ function containment_init() {
   self.var_4b8e8742f0763613.var_1013af6f1d055a93 = 0;
   self.var_4b8e8742f0763613.var_884e7862cd02ee0a = 0;
   self.var_4b8e8742f0763613.var_11879f765be021e1 = function_cbab630c2a3acda0(self);
-  var_76723deda1f19107 = self getplayerdata(level.var_5d69837cf4db0407, "currentStreakCount");
+  var_76723deda1f19107 = self getplayerdata(level.progressiongroup, "currentStreakCount");
 
   if(isDefined(level.gametypebundle) && isDefined(level) && isDefined(level.gametypebundle.var_e61e7212585decdd)) {
     foreach(index, s_tier in level.gametypebundle.var_e61e7212585decdd) {
@@ -1128,26 +1128,26 @@ function containment_init() {
 }
 
 function function_86924395ad6e3c5e() {
-  currentstreak = self getplayerdata(level.var_5d69837cf4db0407, "currentStreakCount");
-  beststreak = self getplayerdata(level.var_5d69837cf4db0407, "bestStreakCount");
+  currentstreak = self getplayerdata(level.progressiongroup, "currentStreakCount");
+  beststreak = self getplayerdata(level.progressiongroup, "bestStreakCount");
 
   if(!function_827fc26017a2344f(self)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "currentStreakGainedProgress", 0);
-    self setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 0);
-    self setplayerdata(level.var_5d69837cf4db0407, "currentSessionStreakCount", 0);
+    self setplayerdata(level.progressiongroup, "currentStreakGainedProgress", 0);
+    self setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 0);
+    self setplayerdata(level.progressiongroup, "currentSessionStreakCount", 0);
     return;
   }
 
   newstreak = self.var_4b8e8742f0763613.var_ae06e623319b2568 + currentstreak - self.var_e755151728396f5c;
-  self setplayerdata(level.var_5d69837cf4db0407, "currentSessionStreakCount", self.var_4b8e8742f0763613.var_ae06e623319b2568);
-  self setplayerdata(level.var_5d69837cf4db0407, "currentStreakGainedProgress", 1);
-  self setplayerdata(level.var_5d69837cf4db0407, "currentStreakCount", newstreak);
+  self setplayerdata(level.progressiongroup, "currentSessionStreakCount", self.var_4b8e8742f0763613.var_ae06e623319b2568);
+  self setplayerdata(level.progressiongroup, "currentStreakGainedProgress", 1);
+  self setplayerdata(level.progressiongroup, "currentStreakCount", newstreak);
 
   if(newstreak > beststreak) {
-    self setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 1);
-    self setplayerdata(level.var_5d69837cf4db0407, "bestStreakCount", newstreak);
+    self setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 1);
+    self setplayerdata(level.progressiongroup, "bestStreakCount", newstreak);
   } else {
-    self setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 0);
+    self setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 0);
   }
 
   function_3c2a023833792e67(self, newstreak);
@@ -1165,9 +1165,9 @@ function function_b13047a59d730787() {
       } else {
         tier_reduction = getdvarint(@ "hash_2f1c0c275e3ef7e2", 1) + 1;
         var_b8fd9cbd6ac969b7 = level.gametypebundle.var_e61e7212585decdd[var_45b3d22c6cca7734 - tier_reduction].var_7401bd57f180cbb1;
-        self setplayerdata(level.var_5d69837cf4db0407, "currentStreakCount", var_b8fd9cbd6ac969b7);
+        self setplayerdata(level.progressiongroup, "currentStreakCount", var_b8fd9cbd6ac969b7);
         var_b0557c2682a12788 = self.var_4b8e8742f0763613.var_ae06e623319b2568 - var_b8fd9cbd6ac969b7;
-        self setplayerdata(level.var_5d69837cf4db0407, "currentSessionStreakCount", var_b0557c2682a12788);
+        self setplayerdata(level.progressiongroup, "currentSessionStreakCount", var_b0557c2682a12788);
         function_3c2a023833792e67(self, var_b8fd9cbd6ac969b7);
       }
 
@@ -1184,7 +1184,7 @@ function function_cbab630c2a3acda0(player) {
   var_2c949c82af2f8e5e = 0;
 
   if(ob::function_baf75ba94ab12e1d()) {
-    player.var_e755151728396f5c = player getplayerdata(level.var_5d69837cf4db0407, "currentSessionStreakCount");
+    player.var_e755151728396f5c = player getplayerdata(level.progressiongroup, "currentSessionStreakCount");
   } else {
     player.var_e755151728396f5c = 0;
   }
@@ -1207,10 +1207,10 @@ function function_cbab630c2a3acda0(player) {
     }
   }
 
-  player setplayerdata(level.var_5d69837cf4db0407, "currentStreakGainedProgress", 0);
-  player setplayerdata(level.var_5d69837cf4db0407, "bestStreakGainedProgress", 0);
-  player setplayerdata(level.var_5d69837cf4db0407, "currentSessionStreakCount", 0);
-  player setplayerdata(level.var_5d69837cf4db0407, "currentStreakCount", streak);
+  player setplayerdata(level.progressiongroup, "currentStreakGainedProgress", 0);
+  player setplayerdata(level.progressiongroup, "bestStreakGainedProgress", 0);
+  player setplayerdata(level.progressiongroup, "currentSessionStreakCount", 0);
+  player setplayerdata(level.progressiongroup, "currentStreakCount", streak);
   return var_2c949c82af2f8e5e;
 }
 
@@ -1280,7 +1280,7 @@ function private function_2ee217c2644e30b0() {
 function function_5ab36fe089f88f56(player, var_150d6bbae4f030fd) {
   player ent_flag_wait("exfil_streak_initialized");
   player.var_4b8e8742f0763613.var_ae06e623319b2568 += var_150d6bbae4f030fd;
-  player setplayerdata(level.var_5d69837cf4db0407, "currentSessionStreakCount", player.var_4b8e8742f0763613.var_ae06e623319b2568);
+  player setplayerdata(level.progressiongroup, "currentSessionStreakCount", player.var_4b8e8742f0763613.var_ae06e623319b2568);
   player setclientomnvar("ui_is_exfil_countdown", 1);
   player setclientomnvar("ui_match_start_countdown", 0);
   waitframe();

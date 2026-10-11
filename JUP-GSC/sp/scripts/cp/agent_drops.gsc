@@ -144,8 +144,8 @@ function function_526976d2fd70521f(drop_name) {
   if(randomint(100) < drop_chance) {
     if(function_6c418592a0f5850d(drop_name)) {
       time = gettime();
-      var_67940dbf6482e648 = function_a74a1ad1bba9f0fd(drop_name);
-      return (time >= var_67940dbf6482e648);
+      next_spawn_time = function_a74a1ad1bba9f0fd(drop_name);
+      return (time >= next_spawn_time);
     } else {
       return 1;
     }
@@ -549,7 +549,7 @@ function function_9eec29e4018e3bd9() {
   if(isDefined(self.var_d0e9753b09126417)) {
     drop_name = "brloot_powerup_ammo";
     amount = 1;
-    var_a5b2c541413aa895 = 1;
+    bautouse = 1;
     drop_chance = getdvarint(@ "hash_5b1597cf9406744", 5);
 
     switch (self.var_d0e9753b09126417) {
@@ -559,7 +559,7 @@ function function_9eec29e4018e3bd9() {
         break;
       case #"hash_f7690febb5e098cb":
         drop_name = scripts\engine\utility::random(["brloot_offhand_claymore", "brloot_offhand_c4", "brloot_offhand_frag", "brloot_offhand_molotov", "brloot_offhand_semtex", "brloot_offhand_thermite", "brloot_offhand_throwingknife"]);
-        var_a5b2c541413aa895 = 0;
+        bautouse = 0;
         amount = 4;
         break;
       case #"hash_2eb74e6e69980388":
@@ -569,13 +569,13 @@ function function_9eec29e4018e3bd9() {
       case #"hash_55798564991651ac":
         drop_name = "brloot_armor_plate";
         amount = 1;
-        var_a5b2c541413aa895 = getdvarint(@ "hash_9925f8ad1812f844", 1);
+        bautouse = getdvarint(@ "hash_9925f8ad1812f844", 1);
         break;
     }
 
     dropinfo = getitemdroporiginandangles(function_b1c55038843de38b(), self.origin, self.angles, self);
     dropinfo.var_a61783b788746c54 = 1;
-    item = spawnpickup(drop_name, dropinfo, amount, 0, undefined, var_a5b2c541413aa895);
+    item = spawnpickup(drop_name, dropinfo, amount, 0, undefined, bautouse);
     return true;
   }
 

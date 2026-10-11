@@ -234,7 +234,7 @@ function gas_watchtriggerexit() {
         continue;
       }
 
-      if(player istouching(self) && !function_da8a31143b88e833(player)) {
+      if(player istouching(self) && !ignoretriggerconditions(player)) {
         continue;
       }
 
@@ -246,7 +246,7 @@ function gas_watchtriggerexit() {
   }
 }
 
-function function_da8a31143b88e833(player) {
+function ignoretriggerconditions(player) {
   if(player function_7ee20cf3c0390e21()) {
     return true;
   }
@@ -259,15 +259,15 @@ function gas_badplace(duration, scale) {
     return;
   }
 
-  var_e786fa50656bc2ff = 0.66;
+  navobstaclescaler = 0.66;
   pre_wait = duration * 0.15;
   post_wait = duration * 0.25;
   assertex(pre_wait + post_wait <= duration, "Incorrect pre/post wait values");
   wait pre_wait;
-  var_f369d822d2af09e5 = 256 * scale * var_e786fa50656bc2ff;
-  var_dbdbad4a509c08e8 = 175 * scale * var_e786fa50656bc2ff;
+  navobstacleradius = 256 * scale * navobstaclescaler;
+  navobstacleheight = 175 * scale * navobstaclescaler;
   zeroangles = (0, 0, 0);
-  navobstacle = createnavbadplacebyshape(self.origin, zeroangles, 8, var_f369d822d2af09e5, var_dbdbad4a509c08e8);
+  navobstacle = createnavbadplacebyshape(self.origin, zeroangles, 8, navobstacleradius, navobstacleheight);
   wait max(0.05, duration - pre_wait - post_wait);
 
   if(isDefined(navobstacle)) {
@@ -415,14 +415,14 @@ function gas_clearcough(fromdeath) {
   }
 }
 
-function gas_monitorcoughweaponfired(var_33f644489e4f15ae) {
+function gas_monitorcoughweaponfired(coughweaponobj) {
   self endon("gas_coughWeaponTaken");
   self endon("gas_coughDuration");
 
   while(true) {
     self waittill("offhand_fired", weaponobj);
 
-    if(issameweapon(weaponobj, var_33f644489e4f15ae)) {
+    if(issameweapon(weaponobj, coughweaponobj)) {
       break;
     }
   }
@@ -430,11 +430,11 @@ function gas_monitorcoughweaponfired(var_33f644489e4f15ae) {
   self notify("gas_coughWeaponFired");
 }
 
-function gas_monitorcoughweapontaken(var_33f644489e4f15ae) {
+function gas_monitorcoughweapontaken(coughweaponobj) {
   self endon("gas_coughWeaponFired");
   self endon("gas_coughDuration");
 
-  while(self hasweapon(var_33f644489e4f15ae)) {
+  while(self hasweapon(coughweaponobj)) {
     waitframe();
   }
 
@@ -562,10 +562,10 @@ function gas_applyspeedredux() {
     self.gasspeedmod = 0;
   }
 
-  var_d255a8b6d0ef299d = -0.35;
+  targetspeedmod = -0.35;
 
   if(scripts\cp\utility::_hasperk("specialty_gas_grenade_resist")) {
-    var_d255a8b6d0ef299d = -0.15;
+    targetspeedmod = -0.15;
   } else if(isDefined(self.gastriggerstouching)) {
     foreach(trigger in self.gastriggerstouching) {
       if(isDefined(trigger) && isDefined(trigger.owner) && trigger.owner == self) {
@@ -573,13 +573,13 @@ function gas_applyspeedredux() {
           break;
         }
 
-        var_d255a8b6d0ef299d = -0.15;
+        targetspeedmod = -0.15;
       }
     }
   }
 
-  gas_modifyspeed(var_d255a8b6d0ef299d);
-  self.gasspeedmod = var_d255a8b6d0ef299d;
+  gas_modifyspeed(targetspeedmod);
+  self.gasspeedmod = targetspeedmod;
   self[[level.move_speed_scale]]();
 }
 
@@ -597,12 +597,12 @@ function gas_removespeedredux() {
   self[[level.move_speed_scale]]();
 }
 
-function gas_modifyspeed(var_d255a8b6d0ef299d) {
+function gas_modifyspeed(targetspeedmod) {
   timeelapsed = 0;
 
   while(timeelapsed <= 0.65) {
     timeelapsed += 0.05;
-    self.gasspeedmod = math::lerp(self.gasspeedmod, var_d255a8b6d0ef299d, min(1, timeelapsed / 0.65));
+    self.gasspeedmod = math::lerp(self.gasspeedmod, targetspeedmod, min(1, timeelapsed / 0.65));
     self[[level.move_speed_scale]]();
     wait 0.05;
   }

@@ -84,8 +84,8 @@ function at_mine_use(grenade) {
   if(isDefined(stuckto)) {
     if(isent(stuckto) && is_train_ent(stuckto)) {
       grenade.origin += (0, 0, 1.6);
-      data.var_49cb2c45d3230ed8 = 1;
-      grenade function_7e73001e97fe87b9(1);
+      data.plantedontrain = 1;
+      grenade setmissileantilagged(1);
     }
 
     grenade linkTo(stuckto);
@@ -745,5 +745,5 @@ function function_97f28317850da77d(data) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }

@@ -26,7 +26,7 @@ function init() {
 
   if(!level.calloutglobals.var_41e0068712e63739) {
     if(getdvarint(@ "hash_aa26c2e5021f3cfc") && getdvarint(@ "hash_aa26c2e5021f3cfc")) {
-      mapinfo = function_79404c2fcca1c184();
+      mapinfo = getmapscriptbundle();
 
       if(isDefined(mapinfo)) {
         level.calloutglobals.calloutlist = [];

@@ -14,9 +14,9 @@ function init() {
   level.var_6392befa93ae3cc6 = undefined;
   level.var_91ca776f27d516c0 = undefined;
   scripts\common\rat::init();
-  scripts\common\rat::function_7a2df9055cb22721("RatGetPlayerTeam", &ratgetplayerteam, "string");
-  scripts\common\rat::function_7a2df9055cb22721("RatGetTeamCount", &ratgetteamcount, "int64_t");
-  scripts\common\rat::function_7a2df9055cb22721("RatGetPlayerEquipment", &ratgetplayerequipment, "string");
+  scripts\common\rat::ratregisterfunction("RatGetPlayerTeam", &ratgetplayerteam, "string");
+  scripts\common\rat::ratregisterfunction("RatGetTeamCount", &ratgetteamcount, "int64_t");
+  scripts\common\rat::ratregisterfunction("RatGetPlayerEquipment", &ratgetplayerequipment, "string");
 }
 
 function ratgetplayerteam(params) {

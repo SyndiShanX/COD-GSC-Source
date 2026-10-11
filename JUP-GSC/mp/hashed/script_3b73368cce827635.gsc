@@ -141,8 +141,8 @@ function function_2a5c422870861dd9(player) {
     squadmembers = player scripts\cp_mp\utility\squad_utility::getsquadmembers(undefined, 1);
     var_a6aa6ac57e10810c = scripts\mp\utility\player::getplayersinradius(player.origin, 500);
 
-    foreach(var_49be45f83be0135e in var_a6aa6ac57e10810c) {
-      var_49be45f83be0135e earthquakeforplayer(0.5, 1, player.origin, 500);
+    foreach(playernear in var_a6aa6ac57e10810c) {
+      playernear earthquakeforplayer(0.5, 1, player.origin, 500);
     }
 
     foreach(squadmember in squadmembers) {

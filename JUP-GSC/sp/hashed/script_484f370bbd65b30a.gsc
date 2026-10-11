@@ -44,7 +44,7 @@ function function_86a88b13dcfe495e() {
 function function_43de679a99606c07() {
   thread function_f104d3f59e3fdd6();
   thread function_871fc21b56c849b5();
-  function_64aa262d16ae7f08();
+  intro_anim_scene();
 }
 
 function function_67284e12c35a9944() {
@@ -108,7 +108,7 @@ function function_8b09f4e11779ca18(music_delay) {
   flag_wait("cine_intro_end");
 }
 
-function function_64aa262d16ae7f08() {
+function intro_anim_scene() {
   level.player player::focusdisable();
   function_1ae8f046dee579e0(1);
   setsaveddvar(@ "hash_fa84e9dc55b9d406", 0);
@@ -211,7 +211,7 @@ function function_de6d4086f35c3f42() {
   var_8fa31955e3b7a652 = var_e86b25000c0fb10e scene::get_entity("Prop 11");
   var_948a093a5ae43398 = var_e86b25000c0fb10e scene::get_entity("Prop 8");
   var_f64043562f527791 = var_e86b25000c0fb10e scene::get_entity("Prop 17");
-  level.var_d65e5d52fe34e0a1 = [var_efbfff0726c683b0, ally1_glowstick_on, var_a75b3906f1c3367b, var_e3bb812f6073a78d, ally2_glowstick_on, var_2c78472f95d7c18e, var_8fa31955e3b7a652, var_948a093a5ae43398, var_f64043562f527791];
+  level.glowsticks = [var_efbfff0726c683b0, ally1_glowstick_on, var_a75b3906f1c3367b, var_e3bb812f6073a78d, ally2_glowstick_on, var_2c78472f95d7c18e, var_8fa31955e3b7a652, var_948a093a5ae43398, var_f64043562f527791];
   ally1_glowstick_on hide();
   ally2_glowstick_on hide();
   var_948a093a5ae43398 hide();
@@ -393,8 +393,8 @@ function function_18cb72f43f56aa7c() {
   function_1ae8f046dee579e0(0);
   setsaveddvar(@ "hash_fa84e9dc55b9d406", 1);
 
-  if(isDefined(level.var_d65e5d52fe34e0a1)) {
-    foreach(stick in level.var_d65e5d52fe34e0a1) {
+  if(isDefined(level.glowsticks)) {
+    foreach(stick in level.glowsticks) {
       if(isDefined(stick)) {
         stick show();
         waitframe();
@@ -442,7 +442,7 @@ function function_8534f1015a66ec6() {
   println("<dev string:x58>");
 
   while(true) {
-    waterheight = function_b81e710fd636efab(level.player.origin);
+    waterheight = getwaterheightatlocation(level.player.origin);
 
     if(isDefined(waterheight)) {
       var_7601b59440541c5f = (level.player.origin[0], level.player.origin[1], waterheight);
@@ -464,7 +464,7 @@ function function_ec9ece71a79e97b0() {
   level.player playerlinkTo(var_41d4ecb14a6d8d2f);
 
   while(true) {
-    waterheightz = function_b81e710fd636efab(level.player.origin);
+    waterheightz = getwaterheightatlocation(level.player.origin);
 
     if(isDefined(waterheightz)) {
       zdiff = var_41d4ecb14a6d8d2f.origin[2] - waterheightz;

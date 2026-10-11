@@ -68,7 +68,7 @@ function waitforgesture(flag) {
   self endon("death");
   self endon("smartobject_logic_finished");
   self setlookatentity();
-  childthread function_522562e28309afaa(10);
+  childthread waitforgesture_timeout(10);
 
   while(true) {
     self waittill(flag, status);
@@ -81,7 +81,7 @@ function waitforgesture(flag) {
   scripts\asm\asm::asm_fireevent(self.asmname, "smartobject_finished");
 }
 
-function function_522562e28309afaa(t) {
+function waitforgesture_timeout(t) {
   wait t;
   scripts\asm\asm::asm_fireevent(self.asmname, "smartobject_finished");
 }

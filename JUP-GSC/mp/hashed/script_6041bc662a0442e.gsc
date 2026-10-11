@@ -18,6 +18,6 @@ function function_f383491974a17b9a() {
 }
 
 function function_1f3181d1053887e6(escortheli) {
-  escortheli function_5226227bce83ebe9(3, escortheli.team);
+  escortheli setentityhudoutlinedata(3, escortheli.team);
   return escortheli;
 }

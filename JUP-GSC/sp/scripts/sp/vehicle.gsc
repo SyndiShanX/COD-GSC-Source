@@ -64,9 +64,9 @@ function spawnvehicle_sp(spawndata, faildata) {
   vehicle = undefined;
 
   if(isDefined(spawndata.initialvelocity)) {
-    vehicle = spawnVehicle(spawndata.modelname, spawndata.targetname, spawndata.vehicletype, spawndata.origin, spawndata.angles, spawndata.owner, spawndata.initialvelocity, spawndata.var_131ea86b569e731);
+    vehicle = spawnVehicle(spawndata.modelname, spawndata.targetname, spawndata.vehicletype, spawndata.origin, spawndata.angles, spawndata.owner, spawndata.initialvelocity, spawndata.dospawnedcallback);
   } else {
-    vehicle = spawnVehicle(spawndata.modelname, spawndata.targetname, spawndata.vehicletype, spawndata.origin, spawndata.angles, spawndata.owner, undefined, spawndata.var_131ea86b569e731);
+    vehicle = spawnVehicle(spawndata.modelname, spawndata.targetname, spawndata.vehicletype, spawndata.origin, spawndata.angles, spawndata.owner, undefined, spawndata.dospawnedcallback);
   }
 
   if(!isDefined(vehicle)) {
@@ -77,7 +77,7 @@ function spawnvehicle_sp(spawndata, faildata) {
   return vehicle;
 }
 
-function function_99d930044ab93cc(vehicle) {
+function deletevehicle_sp(vehicle) {
   vehicle delete();
 }
 
@@ -158,11 +158,11 @@ function function_fbef61d68f733524(veh) {
   self hidelegsandshadow();
 
   if(veh hascomponent("p2p")) {
-    veh function_77320e794d35465a("p2p", "pause", 1);
+    veh setconfigvalue("p2p", "pause", 1);
   }
 
   if(veh hascomponent("path")) {
-    veh function_77320e794d35465a("path", "pause", 1);
+    veh setconfigvalue("path", "pause", 1);
   }
 
   if(isDefined(veh.turret)) {
@@ -170,7 +170,7 @@ function function_fbef61d68f733524(veh) {
     self remotecontrolturret(veh.turret);
   }
 
-  veh function_65aa053c077c003a(0);
+  veh vehphys_parkingbrake(0);
 
   if(isDefined(veh.classname_mp)) {
     veh scripts\common\vehicle::function_65976a53a9cbd110();

@@ -16,7 +16,7 @@ function _spawnVehicle(spawndata, faildata) {
         faildata.fail = "total_limit_exceeded";
       }
 
-      if(istrue(level.var_4e89ea3291f12198)) {
+      if(istrue(level.debugvehiclespawns)) {
         println("<dev string:x1c>" + spawndata.modelname + "<dev string:x49>" + level.vehiclecount + "<dev string:x63>" + level.maxvehiclecount);
       }
 
@@ -28,14 +28,14 @@ function _spawnVehicle(spawndata, faildata) {
     }
   }
 
-  vehicle = spawnVehicle(spawndata.modelname, spawndata.targetname, spawndata.vehicletype, spawndata.origin, spawndata.angles, spawndata.owner, spawndata.initialvelocity, spawndata.var_131ea86b569e731);
+  vehicle = spawnVehicle(spawndata.modelname, spawndata.targetname, spawndata.vehicletype, spawndata.origin, spawndata.angles, spawndata.owner, spawndata.initialvelocity, spawndata.dospawnedcallback);
 
   if(!isDefined(vehicle)) {
     if(isDefined(faildata)) {
       faildata.fail = "code";
     }
 
-    if(istrue(level.var_4e89ea3291f12198)) {
+    if(istrue(level.debugvehiclespawns)) {
       println("<dev string:x80>" + spawndata.modelname);
     }
 
@@ -175,7 +175,7 @@ function getvehiclespawndata(vehicle) {
 
 function copyvehiclespawndata(from, to) {
   to.modelname = from.modelname;
-  to.var_14cde247ac3313a4 = from.var_14cde247ac3313a4;
+  to.skinoverride = from.skinoverride;
   to.targetname = from.targetname;
   to.vehicletype = from.vehicletype;
   to.origin = from.origin;
@@ -244,11 +244,11 @@ function function_5c8408cb68649308(vehiclename, spawntype, limit) {
   assertex(isDefined(level.vehicle), "<dev string:x223>");
   assertex(isDefined(level.vehicle.instances), "<dev string:x26a>");
 
-  if(!isDefined(level.vehicle.var_eb26b962268635b[vehiclename])) {
-    level.vehicle.var_eb26b962268635b[vehiclename] = [];
+  if(!isDefined(level.vehicle.spawntypeinstancelimits[vehiclename])) {
+    level.vehicle.spawntypeinstancelimits[vehiclename] = [];
   }
 
-  level.vehicle.var_eb26b962268635b[vehiclename][spawntype] = limit;
+  level.vehicle.spawntypeinstancelimits[vehiclename][spawntype] = limit;
 }
 
 function vehicle_tracking_limitownerinstances(vehiclename, limit, message) {
@@ -281,12 +281,12 @@ function vehicle_tracking_atinstancelimit(vehiclename, owner, team, spawntype, s
     }
   }
 
-  var_8fe403544e073db7 = undefined;
-  var_6536066694c661fb = undefined;
+  spawntypelimit = undefined;
+  spawntypecount = undefined;
 
-  if(isDefined(spawntype) && isDefined(level.vehicle.var_eb26b962268635b) && isDefined(level.vehicle.var_eb26b962268635b[vehiclename]) && isDefined(level.vehicle.var_eb26b962268635b[vehiclename][spawntype])) {
-    var_8fe403544e073db7 = level.vehicle.var_eb26b962268635b[vehiclename][spawntype];
-    var_6536066694c661fb = 0;
+  if(isDefined(spawntype) && isDefined(level.vehicle.spawntypeinstancelimits) && isDefined(level.vehicle.spawntypeinstancelimits[vehiclename]) && isDefined(level.vehicle.spawntypeinstancelimits[vehiclename][spawntype])) {
+    spawntypelimit = level.vehicle.spawntypeinstancelimits[vehiclename][spawntype];
+    spawntypecount = 0;
   }
 
   ownerlimit = undefined;
@@ -305,7 +305,7 @@ function vehicle_tracking_atinstancelimit(vehiclename, owner, team, spawntype, s
     teamcount = 0;
   }
 
-  if(!isDefined(ownerlimit) && !isDefined(teamlimit) && !isDefined(var_8fe403544e073db7)) {
+  if(!isDefined(ownerlimit) && !isDefined(teamlimit) && !isDefined(spawntypelimit)) {
     return false;
   }
 
@@ -326,10 +326,10 @@ function vehicle_tracking_atinstancelimit(vehiclename, owner, team, spawntype, s
       }
     }
 
-    if(isDefined(var_8fe403544e073db7) && isDefined(instance.spawndata) && isDefined(instance.spawndata.spawntype) && instance.spawndata.spawntype == spawntype) {
-      var_6536066694c661fb++;
+    if(isDefined(spawntypelimit) && isDefined(instance.spawndata) && isDefined(instance.spawndata.spawntype) && instance.spawndata.spawntype == spawntype) {
+      spawntypecount++;
 
-      if(var_6536066694c661fb >= var_8fe403544e073db7) {
+      if(spawntypecount >= spawntypelimit) {
         return true;
       }
     }
@@ -421,7 +421,7 @@ function vehicle_tracking_instancesarelimited(vehiclename) {
     return true;
   }
 
-  if(isDefined(level.vehicle.var_eb26b962268635b[vehiclename])) {
+  if(isDefined(level.vehicle.spawntypeinstancelimits[vehiclename])) {
     return true;
   }
 
@@ -442,7 +442,7 @@ function vehicle_tracking_init() {
   level.vehicle.instancelimits = [];
   level.vehicle.ownerinstancelimits = [];
   level.vehicle.teaminstancelimits = [];
-  level.vehicle.var_eb26b962268635b = [];
+  level.vehicle.spawntypeinstancelimits = [];
   level.vehicle.instancelimitmessages = [];
   level.vehicle.ownerinstancelimitmessages = [];
   level.vehicle.teaminstancelimitmessages = [];

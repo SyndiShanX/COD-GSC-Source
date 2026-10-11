@@ -882,10 +882,10 @@ function can_purchase_interaction(interaction_struct, amount, spend_type, weapon
   }
 
   if(interaction_is_weapon_buy(interaction_struct)) {
-    var_895fa4b47e915c65 = interaction_struct.script_noteworthy;
+    wallweapon = interaction_struct.script_noteworthy;
 
     if(interaction_struct.script_parameters == "tickets") {
-      if(self hasweapon(var_895fa4b47e915c65)) {
+      if(self hasweapon(wallweapon)) {
         return false;
       }
 
@@ -896,7 +896,7 @@ function can_purchase_interaction(interaction_struct, amount, spend_type, weapon
     max_ammo = weaponmaxammo(interaction_struct.script_noteworthy);
     var_629f6083f99f1d29 = scripts\cp\perks\cp_prestige::prestige_getminammo();
     scaled_ammo = int(var_629f6083f99f1d29 * max_ammo);
-    current_ammo = self getweaponammostock(var_895fa4b47e915c65);
+    current_ammo = self getweaponammostock(wallweapon);
 
     if(current_ammo >= scaled_ammo) {
       return false;
@@ -1662,9 +1662,9 @@ function is_permitted_guided_interaction(player, struct, currentstruct) {
     var_ee46ba4828993237 = get_spawn_volumes_player_is_in(0, undefined, player);
 
     foreach(var_27dfbfcbd63d339e in var_ee46ba4828993237) {
-      var_eb6e6263d4667983 = var_27dfbfcbd63d339e get_adjacent_volumes_from_volume();
+      avolumes = var_27dfbfcbd63d339e get_adjacent_volumes_from_volume();
 
-      foreach(volume in var_eb6e6263d4667983) {
+      foreach(volume in avolumes) {
         if(ispointinvolume(struct.origin, volume)) {
           return 0;
         }

@@ -53,7 +53,7 @@ function function_369cd45b595b9c13() {
     return;
   }
 
-  if(issharedfuncdefined("hud", "showErrorMessage") && !scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(issharedfuncdefined("hud", "showErrorMessage") && !scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     self[[getsharedfunc("hud", "showErrorMessage")]]("MP/CANNOT_USE_GENERIC");
   }
 

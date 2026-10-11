@@ -44,7 +44,7 @@ function function_2d2bf9bf75ae791e(var_bd4d9cdcb3a696c8, message) {
   }
 
   if(isDefined(message)) {
-    message = function_8c14a8a658013e4e(message);
+    message = getlocstringindex(message);
   }
 
   if(isDefined(self.compass_messaging.messages[var_bd4d9cdcb3a696c8]) && (!isDefined(message) || array_contains(self.compass_messaging.messages[var_bd4d9cdcb3a696c8].messages, message))) {
@@ -57,7 +57,7 @@ function function_2d2bf9bf75ae791e(var_bd4d9cdcb3a696c8, message) {
 function function_376aee39c931c5ff(var_bd4d9cdcb3a696c8, message) {
   if(isDefined(self.compass_messaging) && isDefined(self.compass_messaging.messages[var_bd4d9cdcb3a696c8])) {
     if(isDefined(message) && isistring(message)) {
-      message = function_8c14a8a658013e4e(message);
+      message = getlocstringindex(message);
     }
 
     if(!isDefined(message) || self.compass_messaging.messages[var_bd4d9cdcb3a696c8].messages.size == 1 && self.compass_messaging.messages[var_bd4d9cdcb3a696c8].messages[0] == message) {

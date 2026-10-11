@@ -556,10 +556,10 @@ function _ai_head_weight_blend_in() {
 
   while(gettime() / 1000 - start_time < self.blend_in_time * 2) {
     norm_val = (gettime() / 1000 - start_time) / self.blend_in_time * 2;
-    var_2d2b457aa37db993 = smoothstep(0, 1, norm_val);
+    smooth_val = smoothstep(0, 1, norm_val);
     var_1253d54849fc8641 = smoothstep(0, 10, norm_val);
-    weight = lerp_float(0, 1, var_2d2b457aa37db993);
-    part_weight = lerp_float(0, 10, var_2d2b457aa37db993);
+    weight = lerp_float(0, 1, smooth_val);
+    part_weight = lerp_float(0, 10, smooth_val);
     self setanimlimited(%lookat_left_right, weight, 0.2);
     self setanimlimited(%lookat_up_down, weight, 0.2);
     self setanimlimited(%lookat_head_base_partial, part_weight, 0.2);
@@ -882,13 +882,13 @@ function ai_gesture_point(pointat) {
   character_origin = self gettagorigin("J_Spine4");
   var_84debf527911a15d = anglestoright(character_angles);
   var_4bd579fa63eb0ed2 = anglestoup(character_angles);
-  var_53b34aadf7b8e731 = vectorNormalize(lookat - character_origin);
+  vec_to_target = vectorNormalize(lookat - character_origin);
   var_b4291343f067bb1d = scripts\engine\utility::flatten_vector(var_84debf527911a15d);
   var_ebf67e00f0184992 = scripts\engine\utility::flatten_vector(var_4bd579fa63eb0ed2);
-  var_af48fc7d3df203f1 = scripts\engine\utility::flatten_vector(var_53b34aadf7b8e731);
+  var_af48fc7d3df203f1 = scripts\engine\utility::flatten_vector(vec_to_target);
   dot_vec = vectordot(var_b4291343f067bb1d, var_af48fc7d3df203f1) * -1;
   var_8e8c89b2cbb6bc04 = dot_vec * -1;
-  var_2208a80dc5f47661 = clamp(float_remap(dot_vec, 0.2, 1, 0, 1), 0, 1);
+  clamped_dot = clamp(float_remap(dot_vec, 0.2, 1, 0, 1), 0, 1);
   var_824c03276d8cdcec = clamp(float_remap(var_8e8c89b2cbb6bc04, 0.2, 1, 0, 1), 0, 1);
   var_9088cba4a109b331 = self gettagorigin("J_Spine4");
   var_20f493dca3c1483f = vectorNormalize(lookat - var_9088cba4a109b331);
@@ -925,7 +925,7 @@ function ai_gesture_point(pointat) {
       }
 
       self setanimlimited(self.point_left_anim, var_824c03276d8cdcec, 0.25, 0.85);
-      self setanimlimited(self.point_right_anim, var_2208a80dc5f47661, 0.25, 0.85);
+      self setanimlimited(self.point_right_anim, clamped_dot, 0.25, 0.85);
     }
   } else {
     if(demeanor != "casual" && demeanor != "casual_gun") {
@@ -1060,50 +1060,50 @@ function ai_gesture_simple(var_7ca8d1ce367054f8) {
     self.gesture_fallback_up_anim = % hm_grnd_org_gest_fallback_up;
   }
 
-  var_d36c326e46c200a3 = undefined;
+  anim_to_play = undefined;
 
   switch (var_7ca8d1ce367054f8) {
     case #"hash_f95a6a3ee8c001ec":
-      var_d36c326e46c200a3 = self.gesture_shrug_anim;
+      anim_to_play = self.gesture_shrug_anim;
       break;
     case #"hash_eb00cb01bd7a6e7b":
-      var_d36c326e46c200a3 = self.gesture_cross_anim;
+      anim_to_play = self.gesture_cross_anim;
       break;
     case #"hash_40a1376c2c1dba9a":
-      var_d36c326e46c200a3 = self.gesture_nod_anim;
+      anim_to_play = self.gesture_nod_anim;
       break;
     case #"hash_c7d247b0c27f20b1":
-      var_d36c326e46c200a3 = self.gesture_salute_anim;
+      anim_to_play = self.gesture_salute_anim;
       break;
     case #"hash_bda5687440fc2934":
-      var_d36c326e46c200a3 = self.gesture_wave_anim;
+      anim_to_play = self.gesture_wave_anim;
       break;
     case #"hash_bdf347744138cb00":
-      var_d36c326e46c200a3 = self.gesture_wait_anim;
+      anim_to_play = self.gesture_wait_anim;
       break;
     case #"hash_dd93195493d0c818":
       self.is_partial = 1;
-      var_d36c326e46c200a3 = self.gesture_hold_anim;
+      anim_to_play = self.gesture_hold_anim;
       break;
     case #"hash_b8e7e4b53801f40f":
       self.is_partial = 1;
-      var_d36c326e46c200a3 = self.gesture_onme_anim;
+      anim_to_play = self.gesture_onme_anim;
       break;
     case #"hash_c49910ada754deb4":
       self.is_partial = 1;
-      var_d36c326e46c200a3 = self.gesture_moveup_anim;
+      anim_to_play = self.gesture_moveup_anim;
       break;
     case #"hash_486396f4d5e0cc51":
       self.is_partial = 1;
-      var_d36c326e46c200a3 = self.gesture_fallback_up_anim;
+      anim_to_play = self.gesture_fallback_up_anim;
       break;
     case #"hash_f61262b439059658":
       self.is_partial = 1;
-      var_d36c326e46c200a3 = self.gesture_fallback_down_anim;
+      anim_to_play = self.gesture_fallback_down_anim;
       break;
     case #"hash_de706ce2cae61473":
       self.is_partial = 1;
-      var_d36c326e46c200a3 = self.gesture_armup_anim;
+      anim_to_play = self.gesture_armup_anim;
       break;
   }
 
@@ -1114,20 +1114,20 @@ function ai_gesture_simple(var_7ca8d1ce367054f8) {
   }
 
   if(self.is_partial) {
-    thread blend_partial_in(self.simple_gesture_parent, var_d36c326e46c200a3, 0.5);
+    thread blend_partial_in(self.simple_gesture_parent, anim_to_play, 0.5);
   } else {
     self setanimlimited(self.simple_gesture_parent, 1, 0.5);
-    self setanimlimited(var_d36c326e46c200a3, 1, 0.5, 0.75);
+    self setanimlimited(anim_to_play, 1, 0.5, 0.75);
   }
 
-  wait_time = getanimlength(var_d36c326e46c200a3) * 0.85;
+  wait_time = getanimlength(anim_to_play) * 0.85;
   wait wait_time;
 
   if(self.is_partial) {
-    thread blend_partial_out(self.simple_gesture_parent, var_d36c326e46c200a3, 0.5);
+    thread blend_partial_out(self.simple_gesture_parent, anim_to_play, 0.5);
   } else {
     self clearanim(self.simple_gesture_parent, 0.5);
-    self clearanim(var_d36c326e46c200a3, 0.5);
+    self clearanim(anim_to_play, 0.5);
   }
 
   self.is_partial = 0;
@@ -1226,13 +1226,13 @@ function ai_gesture_directional_custom(target, anim_array, partial_bool) {
   character_origin = self gettagorigin("tag_origin");
   var_84debf527911a15d = anglestoright(character_angles);
   var_4bd579fa63eb0ed2 = anglesToForward(character_angles);
-  var_53b34aadf7b8e731 = vectorNormalize(lookat - character_origin);
+  vec_to_target = vectorNormalize(lookat - character_origin);
   var_b4291343f067bb1d = scripts\engine\utility::flatten_vector(var_84debf527911a15d);
   var_ebf67e00f0184992 = scripts\engine\utility::flatten_vector(var_4bd579fa63eb0ed2);
-  var_af48fc7d3df203f1 = scripts\engine\utility::flatten_vector(var_53b34aadf7b8e731);
+  var_af48fc7d3df203f1 = scripts\engine\utility::flatten_vector(vec_to_target);
   dot_vec = vectordot(var_b4291343f067bb1d, var_af48fc7d3df203f1);
   var_8e8c89b2cbb6bc04 = dot_vec * -1;
-  var_2208a80dc5f47661 = clamp(float_remap(dot_vec, 0.2, 1, 0, 1), 0, 1);
+  clamped_dot = clamp(float_remap(dot_vec, 0.2, 1, 0, 1), 0, 1);
   var_824c03276d8cdcec = clamp(float_remap(var_8e8c89b2cbb6bc04, 0.2, 1, 0, 1), 0, 1);
   var_9088cba4a109b331 = self gettagorigin("J_Spine4");
   var_20f493dca3c1483f = vectorNormalize(lookat - var_9088cba4a109b331);
@@ -1266,7 +1266,7 @@ function ai_gesture_directional_custom(target, anim_array, partial_bool) {
     }
 
     self setanimlimited(var_18e5b6b83a6361c0, var_824c03276d8cdcec, 0.25, 1);
-    self setanimlimited(var_b849486170a283ff, var_2208a80dc5f47661, 0.25, 1);
+    self setanimlimited(var_b849486170a283ff, clamped_dot, 0.25, 1);
   } else {
     if(isDefined(partial_bool)) {
       self setanimlimited(gesture_body_knob, 0.001, 0.1);

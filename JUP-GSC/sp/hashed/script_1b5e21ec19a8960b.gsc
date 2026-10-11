@@ -85,7 +85,7 @@ function function_f454179adec481d0() {
   level.sentrysettings["dungeon_sentry"].scorepopup = "destroyed_sentry";
   level.sentrysettings["dungeon_sentry"].lightfxtag = "tag_fx";
   level.sentrysettings["dungeon_sentry"].iskillstreak = 1;
-  level.sentrysettings["dungeon_sentry"].var_34d24162c014a897 = &scripts\cp\killstreaks\sentry_gun_cp::function_dad8d4cd587ec141;
+  level.sentrysettings["dungeon_sentry"].hitbyvehiclefunc = &scripts\cp\killstreaks\sentry_gun_cp::function_dad8d4cd587ec141;
 
   setdevdvarifuninitialized(@ "hash_69de6d4d9ba136d1", 0);
   scripts\common\devgui::function_6e7290c8ee4f558b("<dev string:x1c>");
@@ -180,8 +180,8 @@ function setup_enemy_sentry(var_804269875f5062f1, turret_model, var_385e9c9e5375
   turret.colmodel.var_d1f953c063dff1eb = 1;
   turret.colmodel.turretowner = turret;
 
-  if(isDefined(config.var_34d24162c014a897)) {
-    turret.var_34d24162c014a897 = config.var_34d24162c014a897;
+  if(isDefined(config.hitbyvehiclefunc)) {
+    turret.hitbyvehiclefunc = config.hitbyvehiclefunc;
   }
 
   turret.navobstacle = createnavobstaclebybounds(turret.origin, (16, 16, 16), (0, 0, 0));
@@ -804,11 +804,11 @@ function function_1adc5a7001847ae6() {
   }
 }
 
-function sentry_spinup(var_630af5192659dd3b) {
+function sentry_spinup(configoverride) {
   self endon("stop_sentry_basic_think");
   thread sentry_targetlocksound();
 
-  while(self.momentum < var_630af5192659dd3b.spinuptime) {
+  while(self.momentum < configoverride.spinuptime) {
     self.momentum += 0.1;
     wait 0.1;
   }
@@ -818,7 +818,7 @@ function sentry_spindown() {
   self.momentum = 0;
 }
 
-function sentry_burstfirestart(var_630af5192659dd3b, var_ebed6e83eb956d18, var_7a4f7bd11952e7bc) {
+function sentry_burstfirestart(configoverride, maxroundsoverride, var_7a4f7bd11952e7bc) {
   self endon("death");
   self endon("stop_shooting");
   self endon("stop_sentry_basic_think");
@@ -835,8 +835,8 @@ function sentry_burstfirestart(var_630af5192659dd3b, var_ebed6e83eb956d18, var_7
   for(;;) {
     numshots = randomintrange(minshots, maxshots + 1);
 
-    if(isDefined(var_ebed6e83eb956d18)) {
-      numshots = var_ebed6e83eb956d18;
+    if(isDefined(maxroundsoverride)) {
+      numshots = maxroundsoverride;
     }
 
     for(i = 0; i < numshots && !self.overheated; i++) {

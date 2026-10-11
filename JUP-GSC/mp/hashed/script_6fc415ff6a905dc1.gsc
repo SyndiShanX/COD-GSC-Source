@@ -101,7 +101,7 @@ function function_5332e1c0f06b0245(var_3064fa24dbbd5bbf) {
   }
 
   println(self.name + "<dev string:x62>");
-  self setplayerdata(level.var_5d69837cf4db0407, "lootedCash", self.plundercount);
+  self setplayerdata(level.progressiongroup, "lootedCash", self.plundercount);
   var_1d4db10d5290694a = snapshotbackpack();
 
   foreach(item in var_1d4db10d5290694a) {
@@ -155,8 +155,8 @@ function function_5332e1c0f06b0245(var_3064fa24dbbd5bbf) {
 
   namespace_a8b2b88699fc40fb::function_5704ab2a9381630f(self);
   namespace_a38a2e1fe7519183::function_ed325a060adcbe65(self);
-  var_68c58fc50db46dc6 = self getplayerdata(level.var_5d69837cf4db0407, "dmzBankedCash");
-  self setplayerdata(level.var_5d69837cf4db0407, "dmzBankedCash", var_68c58fc50db46dc6 + self.plundercount);
+  var_68c58fc50db46dc6 = self getplayerdata(level.progressiongroup, "dmzBankedCash");
+  self setplayerdata(level.progressiongroup, "dmzBankedCash", var_68c58fc50db46dc6 + self.plundercount);
   scripts\mp\pmc_missions::onexfil(self, inventory, var_1d4db10d5290694a, clipammo, self.plundercount, var_3064fa24dbbd5bbf);
   println(self.name + "<dev string:x8b>");
 }
@@ -175,7 +175,7 @@ function private function_f95e462ad75806a2() {
     }
 
     if(isDefined(index)) {
-      currentquantity = self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "quantity");
+      currentquantity = self getplayerdata(level.progressiongroup, "dmzInventory", index, "quantity");
       ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(item.lootid);
 
       println("<dev string:xb2>");
@@ -287,9 +287,9 @@ function function_e249cffd8b8f7a9(index, lootid, quantity, cooldown) {
     cooldown = 0;
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "lootID", lootid);
-  self setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "quantity", quantity);
-  self setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "cooldownEndTime", cooldown);
+  self setplayerdata(level.progressiongroup, "dmzInventory", index, "lootID", lootid);
+  self setplayerdata(level.progressiongroup, "dmzInventory", index, "quantity", quantity);
+  self setplayerdata(level.progressiongroup, "dmzInventory", index, "cooldownEndTime", cooldown);
 }
 
 function function_7f18210bf7cedd4b(index, lootedquantity) {
@@ -297,7 +297,7 @@ function function_7f18210bf7cedd4b(index, lootedquantity) {
     lootedquantity = 0;
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "lootedQuantity", lootedquantity);
+  self setplayerdata(level.progressiongroup, "dmzInventory", index, "lootedQuantity", lootedquantity);
 }
 
 function function_c324d060cde743e3(lootid, quantity) {
@@ -312,7 +312,7 @@ function function_c324d060cde743e3(lootid, quantity) {
       for(i = 0; i < quantity; i++) {
         index = function_752a16f10a698186(lootid, &function_ae513b3a65d8bfbc);
 
-        if(isDefined(index) && self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "cooldownEndTime") > getsystemtime()) {
+        if(isDefined(index) && self getplayerdata(level.progressiongroup, "dmzInventory", index, "cooldownEndTime") > getsystemtime()) {
           function_e249cffd8b8f7a9(index, lootid, 1, 0);
           function_7f18210bf7cedd4b(index, 1);
         }
@@ -332,8 +332,8 @@ function function_c324d060cde743e3(lootid, quantity) {
   index = function_752a16f10a698186(lootid);
 
   if(isDefined(index)) {
-    currentquantity = self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "quantity");
-    var_fdfd1b213ef1e39c = self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "lootedQuantity");
+    currentquantity = self getplayerdata(level.progressiongroup, "dmzInventory", index, "quantity");
+    var_fdfd1b213ef1e39c = self getplayerdata(level.progressiongroup, "dmzInventory", index, "lootedQuantity");
     function_e249cffd8b8f7a9(index, lootid, currentquantity + quantity);
     function_7f18210bf7cedd4b(index, var_fdfd1b213ef1e39c + quantity);
     return;
@@ -353,10 +353,10 @@ function function_4be4a391f94837bf(lootid) {
   }
 
   for(i = 0; i < 50; i++) {
-    currentlootid = self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", i, "lootID");
+    currentlootid = self getplayerdata(level.progressiongroup, "dmzInventory", i, "lootID");
 
     if(lootid == currentlootid) {
-      if(self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", i, "cooldownEndTime") > getsystemtime()) {
+      if(self getplayerdata(level.progressiongroup, "dmzInventory", i, "cooldownEndTime") > getsystemtime()) {
         return i;
       }
     }
@@ -366,7 +366,7 @@ function function_4be4a391f94837bf(lootid) {
 }
 
 function function_25be694d7a22db61(itemindex) {
-  if(self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", itemindex, "cooldownEndTime") > getsystemtime()) {
+  if(self getplayerdata(level.progressiongroup, "dmzInventory", itemindex, "cooldownEndTime") > getsystemtime()) {
     return false;
   }
 
@@ -374,7 +374,7 @@ function function_25be694d7a22db61(itemindex) {
 }
 
 function function_ae513b3a65d8bfbc(itemindex) {
-  if(self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", itemindex, "cooldownEndTime") > getsystemtime()) {
+  if(self getplayerdata(level.progressiongroup, "dmzInventory", itemindex, "cooldownEndTime") > getsystemtime()) {
     return true;
   }
 
@@ -387,7 +387,7 @@ function function_752a16f10a698186(lootid, testvalid) {
   }
 
   for(i = 0; i < 50; i++) {
-    currentlootid = self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", i, "lootID");
+    currentlootid = self getplayerdata(level.progressiongroup, "dmzInventory", i, "lootID");
 
     if(lootid == currentlootid) {
       if(!isDefined(testvalid) || self[[testvalid]](i)) {
@@ -401,7 +401,7 @@ function function_752a16f10a698186(lootid, testvalid) {
 
 function function_e89462f915a860fd() {
   for(i = 0; i < 50; i++) {
-    currentlootid = self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", i, "lootID");
+    currentlootid = self getplayerdata(level.progressiongroup, "dmzInventory", i, "lootID");
 
     if(currentlootid == 0) {
       return i;
@@ -413,16 +413,16 @@ function function_e89462f915a860fd() {
 
 function function_7f04a682872040db(player) {
   for(itemindex = 0; itemindex < 50; itemindex++) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", itemindex, "lootedQuantity", 0);
+    player setplayerdata(level.progressiongroup, "dmzInventory", itemindex, "lootedQuantity", 0);
   }
 }
 
 function function_ee79f56d03f6a83d(player) {
   for(itemindex = 0; itemindex < 50; itemindex++) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", itemindex, "lootID", 0);
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", itemindex, "quantity", 0);
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", itemindex, "lootedQuantity", 0);
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzInventory", itemindex, "cooldownEndTime", 0);
+    player setplayerdata(level.progressiongroup, "dmzInventory", itemindex, "lootID", 0);
+    player setplayerdata(level.progressiongroup, "dmzInventory", itemindex, "quantity", 0);
+    player setplayerdata(level.progressiongroup, "dmzInventory", itemindex, "lootedQuantity", 0);
+    player setplayerdata(level.progressiongroup, "dmzInventory", itemindex, "cooldownEndTime", 0);
   }
 }
 
@@ -757,25 +757,25 @@ function function_2d55e66e05614871() {
   println(self.name + "<dev string:x13e>");
 
   for(i = 0; i < 11; i++) {
-    lootid = self getplayerdata(level.var_5d69837cf4db0407, "dmzBackpackFE", i, "lootID");
-    quantity = self getplayerdata(level.var_5d69837cf4db0407, "dmzBackpackFE", i, "quantity");
+    lootid = self getplayerdata(level.progressiongroup, "dmzBackpackFE", i, "lootID");
+    quantity = self getplayerdata(level.progressiongroup, "dmzBackpackFE", i, "quantity");
     ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(lootid);
 
     println("<dev string:xd2>" + i + "<dev string:x164>" + lootid + "<dev string:xe0>" + ref + "<dev string:xe6>" + lootid);
     println("<dev string:xd2>" + i + "<dev string:x16e>" + lootid + "<dev string:xe0>" + ref + "<dev string:xe6>" + quantity);
 
     getlootidatbackpackindex(i);
-    function_897b29adb37f06a7(i);
+    getquantityatbackpackindex(i);
     namespace_512200f0f9e6ebc9::function_bac731e0fdaa0ccb(lootid);
-    self setplayerdata(level.var_5d69837cf4db0407, "dmzBackpackFE", i, "lootID", 0);
-    self setplayerdata(level.var_5d69837cf4db0407, "dmzBackpackFE", i, "quantity", 0);
+    self setplayerdata(level.progressiongroup, "dmzBackpackFE", i, "lootID", 0);
+    self setplayerdata(level.progressiongroup, "dmzBackpackFE", i, "quantity", 0);
   }
 
   println(self.name + "<dev string:x17e>");
 
   for(i = 0; i < 11; i++) {
-    lootid = self getplayerdata(level.var_5d69837cf4db0407, "dmzBackpackFE", i, "lootID");
-    quantity = self getplayerdata(level.var_5d69837cf4db0407, "dmzBackpackFE", i, "quantity");
+    lootid = self getplayerdata(level.progressiongroup, "dmzBackpackFE", i, "lootID");
+    quantity = self getplayerdata(level.progressiongroup, "dmzBackpackFE", i, "quantity");
     ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(lootid);
 
     println("<dev string:xd2>" + i + "<dev string:x164>" + lootid + "<dev string:xe0>" + ref + "<dev string:xe6>" + lootid);
@@ -786,7 +786,7 @@ function function_2d55e66e05614871() {
 
   for(i = 0; i < 11; i++) {
     lootid = getlootidatbackpackindex(i);
-    quantity = function_897b29adb37f06a7(i);
+    quantity = getquantityatbackpackindex(i);
     ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(lootid);
 
     println("<dev string:xd2>" + i + "<dev string:x164>" + lootid + "<dev string:xe0>" + ref + "<dev string:xe6>" + lootid);

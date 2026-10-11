@@ -195,7 +195,7 @@ function function_59dd9b163e569a63() {
 }
 
 function function_a36dfafc12f9a469() {
-  return scripts\mp\gametypes\br_public::iseligibleforteamrevive() || scripts\mp\gametypes\br_public::function_8f0e6614368f64c2();
+  return scripts\mp\gametypes\br_public::iseligibleforteamrevive() || scripts\mp\gametypes\br_public::isplayerwaitingresurgencerespawn();
 }
 
 function function_81973eac6cda5de8() {

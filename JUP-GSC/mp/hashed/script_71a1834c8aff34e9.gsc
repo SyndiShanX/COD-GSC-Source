@@ -44,11 +44,11 @@ function powerup_apply_zombie_legs(n_lifetime) {
     n_lifetime = powerups::function_e419d148895ea689("zombie_legs");
   }
 
-  thread namespace_2b1145f62aa835b8::function_a93fbc5ac33fc2f2("zombie_legs", n_lifetime);
+  thread namespace_2b1145f62aa835b8::showpoweruphudsharedfunc("zombie_legs", n_lifetime);
 
   if(!istrue(self.var_9ee4330fe38ffc6)) {
     self.var_9ee4330fe38ffc6 = 1;
-    namespace_2b1145f62aa835b8::function_5942f6cdbb6cb63b("specialty_zombie_legs");
+    namespace_2b1145f62aa835b8::giveperksharedfunc("specialty_zombie_legs");
     thread function_569121dd947653d1();
   }
 
@@ -58,7 +58,7 @@ function powerup_apply_zombie_legs(n_lifetime) {
 
 function powerup_remove_zombie_legs() {
   self notify("powerup_remove_zombie_legs");
-  namespace_2b1145f62aa835b8::function_edbac3224d97a666("specialty_zombie_legs");
+  namespace_2b1145f62aa835b8::removeperksharedfunc("specialty_zombie_legs");
   self.var_9ee4330fe38ffc6 = undefined;
 }
 
@@ -68,7 +68,7 @@ function function_569121dd947653d1() {
 
   while(self.var_9ee4330fe38ffc6) {
     self waittill("giveLoadout");
-    namespace_2b1145f62aa835b8::function_5942f6cdbb6cb63b("specialty_zombie_legs");
+    namespace_2b1145f62aa835b8::giveperksharedfunc("specialty_zombie_legs");
   }
 }
 

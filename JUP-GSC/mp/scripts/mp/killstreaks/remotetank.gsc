@@ -460,17 +460,17 @@ function createtank(tanktype, owner, streakinfo, spawnloc) {
 }
 
 function function_b0f0e3d826fdb35(bundle, var_a84cfd847dc1f677, blueprintindex) {
-  var_9b32d1936831f5aa = undefined;
+  genericblueprintname = undefined;
 
-  if(isDefined(bundle.var_d96d3e6ceed581fd.blueprints) && bundle.var_d96d3e6ceed581fd.blueprints.size > 0 && blueprintindex > 0) {
-    var_9b32d1936831f5aa = bundle.var_d96d3e6ceed581fd.blueprints[blueprintindex - 1].genericblueprint;
-  } else if(isDefined(bundle.var_d96d3e6ceed581fd.blueprint_default)) {
-    var_9b32d1936831f5aa = bundle.var_d96d3e6ceed581fd.blueprint_default;
+  if(isDefined(bundle.genericblueprintlist.blueprints) && bundle.genericblueprintlist.blueprints.size > 0 && blueprintindex > 0) {
+    genericblueprintname = bundle.genericblueprintlist.blueprints[blueprintindex - 1].genericblueprint;
+  } else if(isDefined(bundle.genericblueprintlist.blueprint_default)) {
+    genericblueprintname = bundle.genericblueprintlist.blueprint_default;
   }
 
-  bodymodel = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", "bodyModel");
-  turretmodel = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", "turretModel");
-  compositemodel = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", "xcompositeModel");
+  bodymodel = function_29e16a88682086b2(genericblueprintname, #"xmodel", "bodyModel");
+  turretmodel = function_29e16a88682086b2(genericblueprintname, #"xmodel", "turretModel");
+  compositemodel = function_29e16a88682086b2(genericblueprintname, #"xmodel", "xcompositeModel");
   var_a84cfd847dc1f677.bodymodel = bodymodel;
   var_a84cfd847dc1f677.turretmodel = turretmodel;
   var_a84cfd847dc1f677.modelbase = compositemodel;
@@ -505,42 +505,42 @@ function function_89445073f3e86e5c(streakname) {
 function function_e2797fdb403c45e0(streakname) {
   weaponname = "thermite_bolt_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 18;
+  weaponhitstokill = 18;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "thermite_xmike109_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 25;
+  weaponhitstokill = 25;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "semtex_bolt_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 7;
+  weaponhitstokill = 7;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "semtex_xmike109_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 8;
+  weaponhitstokill = 8;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "c4_mp";
   weaponhitsperattack = 5;
-  var_8b4500d6a881b7b2 = undefined;
+  weaponhitstokill = undefined;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 }
 
@@ -623,7 +623,7 @@ function function_cfd4851e4ca5b834(remotetank) {
 
   remotetank scripts\cp_mp\equipment\haywire::function_172d848d58051fdf(&function_f149e9383f183cf0);
   remotetank scripts\cp_mp\equipment\haywire::function_aa823a31304ed981(&function_5c67fa91fe5b79);
-  remotetank function_f3bb4f4911a1beb2("escort", "registerEscortCollisionCallback", &function_ec5cf58c50eedc47);
+  remotetank callsharedfunc("escort", "registerEscortCollisionCallback", &function_ec5cf58c50eedc47);
   _freezecontrols(0);
 }
 
@@ -929,11 +929,11 @@ function function_1dcee2ab6d1348c2() {
   level endon("game_ended");
   var_a84cfd847dc1f677 = level.tanksettings[self.tanktype];
   updaterate = level.framedurationseconds;
-  holdtime = ter_op(function_ba5574c7f287c587(), 0.01, 0.25);
+  holdtime = ter_op(ismagellanmode(), 0.01, 0.25);
   self.autosentry = 0;
   hinticon = undefined;
 
-  if(function_ba5574c7f287c587()) {
+  if(ismagellanmode()) {
     hinticon = "hud_icon_killstreak_wheelson";
   }
 
@@ -1033,14 +1033,14 @@ function function_44208c5a6449e697(target) {
       return 0;
     }
 
-    var_da8cec9bce12f9cb = scripts\cp_mp\agents\agent_utils::agentpers_getagentpersdata(target, "team");
+    teamtocheck = scripts\cp_mp\agents\agent_utils::agentpers_getagentpersdata(target, "team");
 
-    if(!isDefined(var_da8cec9bce12f9cb)) {
-      var_da8cec9bce12f9cb = target.team;
+    if(!isDefined(teamtocheck)) {
+      teamtocheck = target.team;
     }
 
     if(level.teambased) {
-      if(isDefined(var_da8cec9bce12f9cb) && var_da8cec9bce12f9cb == self.team) {
+      if(isDefined(teamtocheck) && teamtocheck == self.team) {
         return 0;
       }
     }
@@ -1239,7 +1239,7 @@ function function_3c864cee6ca51e89(var_93c07017fa762d2b) {
         self function_481c2a63f2ba3332(0);
       }
     } else {
-      self function_65aa053c077c003a(var_93c07017fa762d2b);
+      self vehphys_parkingbrake(var_93c07017fa762d2b);
     }
   }
 
@@ -1405,7 +1405,7 @@ function function_db443c859c55e450(isenabled) {
 function function_e4adb8dfbd1e62dd(isdisable, var_e796719320e13e49) {
   if(isdisable) {
     if(var_e796719320e13e49) {
-      self function_77320e794d35465a("p2p", "pause", 1);
+      self setconfigvalue("p2p", "pause", 1);
     } else {
       scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_showwarning("movementDisabled", self.owner, scripts\cp_mp\vehicles\vehicle::function_d93ec4635290febd());
       self function_64d8ae560c3ec9b6(1);
@@ -1416,7 +1416,7 @@ function function_e4adb8dfbd1e62dd(isdisable, var_e796719320e13e49) {
   }
 
   if(var_e796719320e13e49) {
-    self function_77320e794d35465a("p2p", "resume", 1);
+    self setconfigvalue("p2p", "resume", 1);
     return;
   }
 
@@ -1562,10 +1562,10 @@ function function_a03fd14f53c89e53(startpoint, spawnpoint) {
   collisioncontents = create_contents(1, 1, 1, 1, 1, 1, 1, 0, 1);
   tracestart = startpoint + zoffset;
   traceend = spawnpoint + zoffset;
-  var_ddeb1b8d9d4632e6 = 40;
-  var_cb0a84b6d7f42d67 = ray_trace_passed(tracestart, traceend, self, collisioncontents);
+  spheretestradius = 40;
+  forwardtracepassed = ray_trace_passed(tracestart, traceend, self, collisioncontents);
 
-  if(!istrue(var_cb0a84b6d7f42d67)) {
+  if(!istrue(forwardtracepassed)) {
     return result;
   }
 
@@ -1573,14 +1573,14 @@ function function_a03fd14f53c89e53(startpoint, spawnpoint) {
 
   if(isDefined(groundtrace["position"]) && groundtrace["hittype"] != "hittype_none") {
     testspawnpos = groundtrace["position"] + zoffset;
-    var_2db6453133b55e73 = sphere_trace_passed(testspawnpos, testspawnpos, var_ddeb1b8d9d4632e6, level.players, collisioncontents);
-    var_da8cec9bce12f9cb = undefined;
+    var_2db6453133b55e73 = sphere_trace_passed(testspawnpos, testspawnpos, spheretestradius, level.players, collisioncontents);
+    teamtocheck = undefined;
 
     if(level.teambased) {
-      var_da8cec9bce12f9cb = self.team;
+      teamtocheck = self.team;
     }
 
-    if(istrue(var_2db6453133b55e73) && !scripts\mp\outofbounds::ispointinoutofbounds(groundtrace["position"], var_da8cec9bce12f9cb)) {
+    if(istrue(var_2db6453133b55e73) && !scripts\mp\outofbounds::ispointinoutofbounds(groundtrace["position"], teamtocheck)) {
       result = groundtrace["position"];
 
       debugspawns = getdvarint(@ "hash_fd16625ce7800c7e", 0);
@@ -1588,7 +1588,7 @@ function function_a03fd14f53c89e53(startpoint, spawnpoint) {
       if(debugspawns) {
         line(tracestart, traceend, (0, 1, 0), 1, 0, 300);
         line(traceend, result, (0, 1, 0), 1, 0, 300);
-        sphere(testspawnpos, var_ddeb1b8d9d4632e6, (0, 1, 0), 0, 300);
+        sphere(testspawnpos, spheretestradius, (0, 1, 0), 0, 300);
         self iprintlnbold("<dev string:xc1>");
       }
     } else {
@@ -1597,7 +1597,7 @@ function function_a03fd14f53c89e53(startpoint, spawnpoint) {
       if(debugspawns) {
         line(tracestart, traceend, (1, 0, 0), 1, 0, 300);
         line(traceend, testspawnpos, (1, 0, 0), 1, 0, 300);
-        sphere(testspawnpos, var_ddeb1b8d9d4632e6, (1, 0, 0), 0, 300);
+        sphere(testspawnpos, spheretestradius, (1, 0, 0), 0, 300);
       }
     }
   }
@@ -1681,7 +1681,7 @@ function function_865318fe12d890e8() {
 }
 
 function function_8cba478f80e8ac72(remotetank) {
-  remotetank function_5226227bce83ebe9(3, remotetank.team);
+  remotetank setentityhudoutlinedata(3, remotetank.team);
   return remotetank;
 }
 

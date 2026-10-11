@@ -243,7 +243,7 @@ function sentryturret_create(turretstruct) {
   return turret;
 }
 
-function function_2b164bf1240548cd(turret, owner) {
+function sentryturret_setactive(turret, owner) {
   if(isDefined(turret.damagetaken) && isDefined(turret.maxhealth)) {
     if(turret.damagetaken >= turret.maxhealth) {
       return;
@@ -749,10 +749,10 @@ function function_b4eba4dcc6448af9(targetposition) {
   self endon("turret_no_target");
   self.groundtargetent moveTo(targetposition, 2, 0.05, 0.05);
   self.groundtargetent waittill("movedone");
-  thread function_6a9ab54415bc867a();
+  thread turret_idle_anim();
 }
 
-function function_6a9ab54415bc867a() {
+function turret_idle_anim() {
   self endon("death");
   self endon("turret_inactive");
   self endon("turret_target_acquired");
@@ -861,8 +861,8 @@ function function_ed5702508e97d57d(a_potential_targets) {
     }
   }
 
-  var_3b78132bd62a1e7d = array_combine(var_a2baaa82705aff05, a_targets);
-  return var_3b78132bd62a1e7d;
+  a_all_targets = array_combine(var_a2baaa82705aff05, a_targets);
+  return a_all_targets;
 }
 
 function function_ac0fab225e39ae0f() {
@@ -910,7 +910,7 @@ function sentry_targetlocksound() {
   self playSound("sentry_gun_target_lock_beep");
 }
 
-function sentry_spinup(var_630af5192659dd3b) {
+function sentry_spinup(configoverride) {
   thread sentry_targetlocksound();
   self notify("found_target");
   self startbarrelspin();
@@ -975,7 +975,7 @@ function sentryturret_modifydamage(data) {
     return;
   }
 
-  var_3a8030d138e837c8 = level.sentrysettings["defend_turret"];
+  sentryconfig = level.sentrysettings["defend_turret"];
   attacker = data.attacker;
   objweapon = data.objweapon;
   type = data.meansofdeath;
@@ -993,7 +993,7 @@ function sentryturret_modifydamage(data) {
 
   var_8ed0a351aa70ec7 = self.damagetaken + modifieddamage;
 
-  if(var_8ed0a351aa70ec7 >= var_3a8030d138e837c8.maxhealth * 0.5 && !istrue(self.damagedstate)) {
+  if(var_8ed0a351aa70ec7 >= sentryconfig.maxhealth * 0.5 && !istrue(self.damagedstate)) {
     self.damagedstate = 1;
     self setscriptablepartstate("turret_damage", "on", 0);
   }
@@ -1001,21 +1001,21 @@ function sentryturret_modifydamage(data) {
   if(self getscriptablehaspart("model_damage")) {
     switch (self.var_92bbee4bd337ac4a) {
       case 0:
-        if(var_8ed0a351aa70ec7 >= var_3a8030d138e837c8.maxhealth * 0.25) {
+        if(var_8ed0a351aa70ec7 >= sentryconfig.maxhealth * 0.25) {
           self setscriptablepartstate("model_damage", "damaged_25percent", 0);
           self.var_92bbee4bd337ac4a++;
         }
 
         break;
       case 1:
-        if(var_8ed0a351aa70ec7 >= var_3a8030d138e837c8.maxhealth * 0.5) {
+        if(var_8ed0a351aa70ec7 >= sentryconfig.maxhealth * 0.5) {
           self setscriptablepartstate("model_damage", "damaged_50percent", 0);
           self.var_92bbee4bd337ac4a++;
         }
 
         break;
       case 2:
-        if(var_8ed0a351aa70ec7 >= var_3a8030d138e837c8.maxhealth * 0.75) {
+        if(var_8ed0a351aa70ec7 >= sentryconfig.maxhealth * 0.75) {
           self setscriptablepartstate("model_damage", "damaged_75percent", 0);
           self.var_92bbee4bd337ac4a++;
         }
@@ -1037,7 +1037,7 @@ function sentryturret_monitordamage(turret) {
   turret thread function_281365f70fb776c(turret.maxhealth, "hitequip", &sentryturret_handledeathdamage, &sentryturret_modifydamage, 1);
 }
 
-function function_281365f70fb776c(maxhealth, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak, rumble, resetdamagetaken) {
+function function_281365f70fb776c(maxhealth, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak, rumble, resetdamagetaken) {
   self endon("death");
   level endon("game_ended");
   self endon("monitorDamageEnd");
@@ -1049,20 +1049,20 @@ function function_281365f70fb776c(maxhealth, damagefeedback, ondeathfunc, var_d7
   self setCanDamage(1);
   self.maxhealth = maxhealth;
   self.health = 999999;
-  var_f3e89f9924fb5b0d = 0;
+  last_damage_time = 0;
 
   if(!isDefined(self.damagetaken) || istrue(resetdamagetaken)) {
     self.damagetaken = 0;
   }
 
-  for(running = 1; running; running = function_265ff6c0cb7b3248(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak)) {
+  for(running = 1; running; running = function_265ff6c0cb7b3248(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak)) {
     self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, origin, angles, normal, inflictor);
 
-    if(gettime() < var_f3e89f9924fb5b0d + 124) {
+    if(gettime() < last_damage_time + 124) {
       damage = 0;
     }
 
-    var_f3e89f9924fb5b0d = gettime();
+    last_damage_time = gettime();
     objweapon = scripts\mp\utility\weapon::mapweapon(objweapon, inflictor);
 
     if(rumble) {
@@ -1071,7 +1071,7 @@ function function_281365f70fb776c(maxhealth, damagefeedback, ondeathfunc, var_d7
   }
 }
 
-function function_265ff6c0cb7b3248(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak) {
+function function_265ff6c0cb7b3248(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak) {
   if(!isDefined(self)) {
     return false;
   }
@@ -1097,11 +1097,11 @@ function function_265ff6c0cb7b3248(damage, attacker, direction_vec, point, means
   if(isDefined(objweapon)) {
     damagedata = scripts\cp_mp\utility\damage_utility::packdamagedata(attacker, self, damage, objweapon, meansofdeath, inflictor, point, direction_vec, modelname, partname, tagname, idflags);
 
-    if(!isDefined(var_d7b6456018542238)) {
-      var_d7b6456018542238 = &sentryturret_modifydamage;
+    if(!isDefined(modifydamagefunc)) {
+      modifydamagefunc = &sentryturret_modifydamage;
     }
 
-    modifieddamage = self[[var_d7b6456018542238]](damagedata);
+    modifieddamage = self[[modifydamagefunc]](damagedata);
   }
 
   if(!isDefined(modifieddamage) || isDefined(modifieddamage) && modifieddamage <= 0) {
@@ -1150,7 +1150,7 @@ function function_24355aab94ecce49() {
     self.nearby_players = scripts\mp\utility\player::getplayersinradius(self.origin, 320);
 
     foreach(player in self.nearby_players) {
-      if(!istrue(player.var_2ef2ab0184ab1341)) {
+      if(!istrue(player.turret_in_range)) {
         player thread function_97b57ba8ec58079a(self);
       }
     }
@@ -1162,7 +1162,7 @@ function function_24355aab94ecce49() {
 function function_97b57ba8ec58079a(turret) {
   self endon("death");
   self endon("disconnect");
-  self.var_2ef2ab0184ab1341 = 1;
+  self.turret_in_range = 1;
 
   while(true) {
     if(istrue(turret.active) && isarray(turret.nearby_players) && array_contains(turret.nearby_players, self)) {
@@ -1182,7 +1182,7 @@ function function_97b57ba8ec58079a(turret) {
       self stoprumble("damage_light");
     }
 
-    self.var_2ef2ab0184ab1341 = 0;
+    self.turret_in_range = 0;
     self.var_f30179b027db50f4 = undefined;
     return;
   }
@@ -1226,7 +1226,7 @@ function function_fab5b8af52414726(a_params) {
 function function_bcce652f671ae7ff(a_params) {
   foreach(turret in level.turrets) {
     if(isDefined(turret)) {
-      namespace_8ef157d888576350::function_2b164bf1240548cd(turret);
+      namespace_8ef157d888576350::sentryturret_setactive(turret);
     }
   }
 }

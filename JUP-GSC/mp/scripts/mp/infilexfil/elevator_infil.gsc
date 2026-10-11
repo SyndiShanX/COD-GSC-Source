@@ -21,7 +21,7 @@
 #namespace elevator_infil;
 
 function elevator_init(subtype) {
-  function_f1aed36ab4598ea("elevator_infil");
+  snd_transient_load("elevator_infil");
   thread function_438c617a7d6892c8();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -469,7 +469,7 @@ function function_7330aa81e1f66e19(var_8068764aee94f2f4, playerstring) {
 function function_438c617a7d6892c8() {
   level waittill("prematch_over");
   wait 51;
-  function_f4e0ff5cb899686d("elevator_infil");
+  snd_transient_unload("elevator_infil");
 }
 
 function function_6158ef142e9bd640() {

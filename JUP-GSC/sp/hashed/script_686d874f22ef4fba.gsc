@@ -546,7 +546,7 @@ function function_6fddbeea8afb2ce3() {
   goal_vol = getEnt("v_shipyard_top_shed_roof", "targetname");
   set_grenadeweapon("frag");
   self.grenadeammo = 9;
-  self.var_c941fa004da444e2 = 1;
+  self.bignoregrenadecooldown = 1;
   self.script_forcegrenade = 1;
   self.var_feba70fe0d4000f = 1;
   self.var_b938a79ed8856e2f = 1500;
@@ -684,7 +684,7 @@ function function_70aa7c0de6b236e() {
   level utility::flag_set("flag_shipyard_cargo_ship_fallback");
 }
 
-function function_c437fafa892bc69d(var_4351daa719f72255) {
+function function_c437fafa892bc69d(str_flag_wait) {
   self endon("death");
   a_ai_allies = [level.farah, level.soap];
   set_attackeraccuracy(0.25);
@@ -698,7 +698,7 @@ function function_c437fafa892bc69d(var_4351daa719f72255) {
     self getenemyinfo(level.player);
   }
 
-  level flag_wait(var_4351daa719f72255);
+  level flag_wait(str_flag_wait);
 
   if(cointoss()) {
     set_attackeraccuracy(0.75);
@@ -711,15 +711,15 @@ function function_c437fafa892bc69d(var_4351daa719f72255) {
   set_favoriteenemy(level.player);
 }
 
-function function_5c1a68dcf290d147(var_4351daa719f72255, var_679425c26ece9909, var_9aa63fd1d476501d, var_7df44b9920ba6d93) {
+function function_5c1a68dcf290d147(str_flag_wait, var_679425c26ece9909, var_9aa63fd1d476501d, b_delete_on_goal) {
   self endon("death");
-  var_7df44b9920ba6d93 = default_to(var_7df44b9920ba6d93, 0);
+  b_delete_on_goal = default_to(b_delete_on_goal, 0);
   vol_fallback = getEnt(var_679425c26ece9909, "targetname");
 
-  if(isarray(var_4351daa719f72255)) {
-    level utility::function_665d474ff040b446(var_4351daa719f72255);
+  if(isarray(str_flag_wait)) {
+    level utility::flag_wait_any_array(str_flag_wait);
   } else {
-    level utility::flag_wait(var_4351daa719f72255);
+    level utility::flag_wait(str_flag_wait);
   }
 
   if(level utility::flag("flag_shipyard_go_loud")) {
@@ -738,7 +738,7 @@ function function_5c1a68dcf290d147(var_4351daa719f72255, var_679425c26ece9909, v
     self setgoalvolumeauto(vol_fallback, level.player.origin - vol_fallback.origin);
   }
 
-  if(istrue(var_7df44b9920ba6d93)) {
+  if(istrue(b_delete_on_goal)) {
     thread function_a2b72ea53c7a311c(vol_fallback);
   }
 
@@ -976,10 +976,10 @@ function function_50f3b30f4b06ffcf(a_ai_enemies, var_ef2ce443bff9166c, var_5f853
   level utility::flag_set(var_ef2ce443bff9166c);
 }
 
-function function_1b4022377216f4bd(s_manager, var_b09cdbf7dab2434a) {
+function function_1b4022377216f4bd(s_manager, str_endon_flag) {
   level.player endon("death");
   level endon("flag_shipyard_complete");
-  level endon(var_b09cdbf7dab2434a);
+  level endon(str_endon_flag);
   self waittill("death", attacker);
 
   if(isDefined(attacker) && isPlayer(attacker)) {
@@ -993,7 +993,7 @@ function function_9ae761b5d5aeba92() {
   thread namespace_8339f6377b6ba60e::function_5717b4e7fcce1693(0, 0);
 }
 
-function function_d9756000789dbf32(var_4351daa719f72255) {
+function function_d9756000789dbf32(str_flag_wait) {
   self endon("death");
   level.player endon("death");
   self.vehiclerunexit = 1;
@@ -1009,7 +1009,7 @@ function function_d9756000789dbf32(var_4351daa719f72255) {
     self getenemyinfo(level.player);
   }
 
-  level flag_wait(var_4351daa719f72255);
+  level flag_wait(str_flag_wait);
 
   if(cointoss()) {
     set_attackeraccuracy(0.75);
@@ -1022,29 +1022,29 @@ function function_d9756000789dbf32(var_4351daa719f72255) {
   set_favoriteenemy(level.player);
 }
 
-function function_4442dd131c5baf87(var_94d08343de33ee25) {
+function function_4442dd131c5baf87(a_ai_array) {
   level.player endon("death");
   var_e6f83d3227873a25 = undefined;
   var_b0d21722f3c720c0 = undefined;
 
   while(!level utility::flag("flag_shipyard_jltv_fallback")) {
-    var_94d08343de33ee25 = array_removedead_or_dying(var_94d08343de33ee25);
+    a_ai_array = array_removedead_or_dying(a_ai_array);
 
-    if(var_94d08343de33ee25.size == 0) {
+    if(a_ai_array.size == 0) {
       return;
     }
 
-    foreach(ai in var_94d08343de33ee25) {
+    foreach(ai in a_ai_array) {
       if(ai.grenadeammo == 0) {
-        var_94d08343de33ee25 = array_remove(var_94d08343de33ee25, ai);
+        a_ai_array = array_remove(a_ai_array, ai);
       }
     }
 
-    if(var_94d08343de33ee25.size == 0) {
+    if(a_ai_array.size == 0) {
       return;
     }
 
-    var_3cbabdb9ec5e00ae = var_94d08343de33ee25;
+    var_3cbabdb9ec5e00ae = a_ai_array;
 
     foreach(ai in var_3cbabdb9ec5e00ae) {
       if(isDefined(var_b0d21722f3c720c0) && ai == var_b0d21722f3c720c0) {
@@ -1154,7 +1154,7 @@ function function_51372fb7b9c06e01() {
       }
 
       visionset = utility::ter_op(var_9c63f33c07671893, "sp_jup_tundra_shipyard_whiteout_less", "sp_jup_tundra_shipyard_whiteout");
-      var_c3adea4db7020ce3 = utility::ter_op(var_9c63f33c07671893, 1.5, 3);
+      blendin = utility::ter_op(var_9c63f33c07671893, 1.5, 3);
       blendout = utility::ter_op(var_9c63f33c07671893, 2.5, 4.5);
       enemy_accuracy = utility::ter_op(var_9c63f33c07671893, 0.75, 0.33);
       duration_min = utility::ter_op(var_9c63f33c07671893, 8, 5);
@@ -1183,7 +1183,7 @@ function function_51372fb7b9c06e01() {
       }
 
       level thread namespace_f74ba02cf5fc717a::function_89261962aa444c35();
-      visionsetnaked(visionset, var_c3adea4db7020ce3);
+      visionsetnaked(visionset, blendin);
       level thread function_3ed0f9973be6594b("strong");
       n_duration = randomfloatrange(duration_min, duration_max);
       msg = level.player waittill_notify_or_timeout_return("shipyard_player_underwater", n_duration);
@@ -1283,8 +1283,8 @@ function function_51372fb7b9c06e01() {
   flag_clear("flag_shipyard_snowdrift_on");
   flag_set("flag_shipyard_snowdrift_off");
   level thread function_3ed0f9973be6594b("weak");
-  screen_origin thread utility::function_b4b04de87729a6f3(3);
-  var_7b557f184ad06d46 thread utility::function_b4b04de87729a6f3(3);
+  screen_origin thread utility::delete_after_delay(3);
+  var_7b557f184ad06d46 thread utility::delete_after_delay(3);
 }
 
 function function_3ed0f9973be6594b(intensity) {
@@ -1537,13 +1537,13 @@ function function_21f567e8ed316079(str_noteworthy) {
   var_10a647d9b5f6c82 = s_mb_start.origin + (0, 0, 128);
   var_78d61d8414b8e127 = var_c255f25e3abd7952.origin;
   n_shots = randomintrange(3, 12);
-  var_d87eed0d83ccb96e = 0.15;
-  var_a99ae48232710bf6 = ter_op(cointoss(), -24, 24);
+  n_fire_delay = 0.15;
+  n_offset_x = ter_op(cointoss(), -24, 24);
 
   for(i = 0; i < n_shots; i++) {
     n_offset_y = randomfloatrange(-12, 12);
-    magicbullet("iw9_ar_mike4_sp", var_10a647d9b5f6c82, var_78d61d8414b8e127 + (var_a99ae48232710bf6, n_offset_y, 0));
-    wait var_d87eed0d83ccb96e;
+    magicbullet("iw9_ar_mike4_sp", var_10a647d9b5f6c82, var_78d61d8414b8e127 + (n_offset_x, n_offset_y, 0));
+    wait n_fire_delay;
   }
 }
 
@@ -1658,10 +1658,10 @@ function function_2f250d3bc4b4a574(s_manager, var_111a1ac1afaefc7c) {
   }
 }
 
-function function_993b68a1314f7cda(s_manager, var_231fa8c79b0b9aa3, var_9eae206e3da3416f) {
+function function_993b68a1314f7cda(s_manager, var_231fa8c79b0b9aa3, flg_endon) {
   level.player endon("death");
-  var_9eae206e3da3416f = default_to(var_9eae206e3da3416f, "flag_shipyard_go_loud");
-  level endon(var_9eae206e3da3416f);
+  flg_endon = default_to(flg_endon, "flag_shipyard_go_loud");
+  level endon(flg_endon);
   self endon("death");
   var_231fa8c79b0b9aa3 = default_to(var_231fa8c79b0b9aa3, 0);
   var_8fbb1e13df110370 = squared(384);
@@ -1695,10 +1695,10 @@ function function_993b68a1314f7cda(s_manager, var_231fa8c79b0b9aa3, var_9eae206e
   }
 }
 
-function function_87cf8740a2dc3c14(s_manager, var_231fa8c79b0b9aa3, var_9eae206e3da3416f) {
+function function_87cf8740a2dc3c14(s_manager, var_231fa8c79b0b9aa3, flg_endon) {
   level.player endon("death");
-  var_9eae206e3da3416f = default_to(var_9eae206e3da3416f, "flag_shipyard_go_loud");
-  level endon(var_9eae206e3da3416f);
+  flg_endon = default_to(flg_endon, "flag_shipyard_go_loud");
+  level endon(flg_endon);
   self endon("death");
   var_231fa8c79b0b9aa3 = default_to(var_231fa8c79b0b9aa3, 0);
 
@@ -1721,11 +1721,11 @@ function function_87cf8740a2dc3c14(s_manager, var_231fa8c79b0b9aa3, var_9eae206e
   }
 }
 
-function function_236c9ffe175446af(s_manager, var_231fa8c79b0b9aa3, var_9eae206e3da3416f) {
+function function_236c9ffe175446af(s_manager, var_231fa8c79b0b9aa3, flg_endon) {
   level.player endon("death");
   self endon("stop_quiet_enemy_monitor");
-  var_9eae206e3da3416f = default_to(var_9eae206e3da3416f, "flag_shipyard_go_loud");
-  level endon(var_9eae206e3da3416f);
+  flg_endon = default_to(flg_endon, "flag_shipyard_go_loud");
+  level endon(flg_endon);
   var_231fa8c79b0b9aa3 = default_to(var_231fa8c79b0b9aa3, 0);
   self waittill("death", attacker, meansofdeath, objweapon, damagelocation);
   assertex(isDefined(attacker), "Shipyard quiet guy died mysteriously at " + self.origin);

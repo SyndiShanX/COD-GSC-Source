@@ -25,7 +25,7 @@ function init_deadwire() {
   var_746d800f9d085b2a = default_to(level.var_f1240a9ac4f65616.deadwirepercentage, 0.2);
   var_ad5528a4132dc97d = default_to(level.var_f1240a9ac4f65616.var_d582785a41a462cd, 0.04);
   cooldownentity = default_to(level.var_f1240a9ac4f65616.var_508bf57826aa4710, 0);
-  var_bcbfc6de4213b6af = default_to(level.var_f1240a9ac4f65616.var_f5d90e6daa6bbab4, 15);
+  cooldownattacker = default_to(level.var_f1240a9ac4f65616.var_f5d90e6daa6bbab4, 15);
   cooldownglobal = default_to(level.var_f1240a9ac4f65616.var_f2f97526966640ac, 15);
   var_f27a8d5708fd9c4d = default_to(level.var_f1240a9ac4f65616.var_724408de2e09faac, 1);
   damagefeedbackicon = default_to(level.var_f1240a9ac4f65616.var_1212283d4ed9b1a1, "");
@@ -34,7 +34,7 @@ function init_deadwire() {
   level.deadwire_throttle = throttle_initialize("deadwire", 2, 1);
   level.var_347f02218c1bdfaa = [];
   level.var_474baa8191a671a8 = [];
-  function_7f759db5de1b44b0("deadwire", 3, var_746d800f9d085b2a, var_ad5528a4132dc97d, cooldownentity, var_bcbfc6de4213b6af, cooldownglobal, var_f27a8d5708fd9c4d, &function_9f332972d199fdda, damagefeedbackicon, damagefeedbacksound, &function_34506c532bfbda54, element, &function_dc3f0e5b8db53339);
+  function_7f759db5de1b44b0("deadwire", 3, var_746d800f9d085b2a, var_ad5528a4132dc97d, cooldownentity, cooldownattacker, cooldownglobal, var_f27a8d5708fd9c4d, &function_9f332972d199fdda, damagefeedbackicon, damagefeedbacksound, &function_34506c532bfbda54, element, &function_dc3f0e5b8db53339);
   flag_set("deadwire_ready");
 
   level thread function_6c46532ee1ae7b03();
@@ -228,7 +228,7 @@ function deadwire_timer(death, attacker, mod, sweapon, vpoint, shitloc, modelind
 function function_9a617a4a862078ca() {
   foreach(player in level.players) {
     currentweapon = player getcurrentweapon();
-    player function_6c40f58b29a952a9(currentweapon, "<dev string:x1c>");
+    player add_ammo_mod_to_weapon(currentweapon, "<dev string:x1c>");
     player iprintlnbold("<dev string:x28>");
   }
 }

@@ -354,7 +354,7 @@ function binoculars_processtargetdata() {
         }
 
         var_56bf4e4b2bb221a7 = [];
-        var_cb791416725e9bc6 = 0;
+        hasvalidtarget = 0;
 
         foreach(targetent in targetarray) {
           targetnum = targetent function_77eb550af880483a();
@@ -456,7 +456,7 @@ function binoculars_processtargetdata() {
         if(gettime() - lastseentime > 250) {
           lastseentime = gettime();
 
-          if(istrue(level.var_9b60ec72f9c75a17) && isDefined(currenttarget.var_3d33ce746b270d75) && istrue(currenttarget.var_3d33ce746b270d75.is_objective)) {
+          if(istrue(level.var_9b60ec72f9c75a17) && isDefined(currenttarget.discoveries) && istrue(currenttarget.discoveries.is_objective)) {
             cansee = function_42beae79b9afdeef(currenttarget);
           } else {
             cansee = function_67da6f8a8e37737b(currenttarget);
@@ -591,7 +591,7 @@ function function_67da6f8a8e37737b(targetent) {
       self.binocularsstruct.var_b395fc404387c5c0[targetid] = 1;
       return 1;
     }
-  } else if(istrue(level.var_9b60ec72f9c75a17) && isDefined(targetent.var_3d33ce746b270d75) && istrue(targetent.var_3d33ce746b270d75.is_objective)) {
+  } else if(istrue(level.var_9b60ec72f9c75a17) && isDefined(targetent.discoveries) && istrue(targetent.discoveries.is_objective)) {
     var_7052d6ad22659ddb = function_42beae79b9afdeef(targetent);
     self.binocularsstruct.var_b395fc404387c5c0[targetid] = var_7052d6ad22659ddb;
     return var_7052d6ad22659ddb;
@@ -726,8 +726,8 @@ function binoculars_updatetargetmarker(targetent, ismarked) {
 function binoculars_hidetargetmarker(targetent) {
   if(istrue(level.var_9b60ec72f9c75a17)) {
     if(namespace_4e11149030890e64::function_bd27c13c6b8f16fd(targetent) || namespace_8c7f8f6b3076a74a::function_409b4b9bee1fbe1c(targetent)) {
-      if(isDefined(targetent.var_3d33ce746b270d75.var_7230693117949738)) {
-        delaythread(0.65, &scripts\cp_mp\targetmarkergroups::targetmarkergroup_unmarkentity, targetent.var_3d33ce746b270d75.var_7230693117949738, self.binocularsstruct.targetmarkergroup);
+      if(isDefined(targetent.discoveries.var_7230693117949738)) {
+        delaythread(0.65, &scripts\cp_mp\targetmarkergroups::targetmarkergroup_unmarkentity, targetent.discoveries.var_7230693117949738, self.binocularsstruct.targetmarkergroup);
         return;
       } else {
         return;
@@ -759,11 +759,11 @@ function binoculars_addheadicon(targetent) {
   markicon = "hud_icon_new_marked";
   var_f9cd7fda74e92e2a = 8;
   drawthroughgeo = 1;
-  var_c5409ca7522182b3 = 0;
+  maxdrawdist = 0;
   naturaldist = 500;
   targetdata = self.binocularsstruct.targetdata[targetent function_77eb550af880483a()];
   assert(isDefined(targetdata));
-  targetdata.headicon = targetent scripts\cp_mp\entityheadicons::setheadicon_singleimage([], markicon, var_f9cd7fda74e92e2a, drawthroughgeo, var_c5409ca7522182b3, naturaldist, undefined, 1, 1);
+  targetdata.headicon = targetent scripts\cp_mp\entityheadicons::setheadicon_singleimage([], markicon, var_f9cd7fda74e92e2a, drawthroughgeo, maxdrawdist, naturaldist, undefined, 1, 1);
   thread binoculars_cleanupheadiconondisconnect(targetent);
 }
 
@@ -899,7 +899,7 @@ function binoculars_onstatemarkpendingupdate(targetent, cansee) {
     return 2;
   }
 
-  if(istrue(level.var_9b60ec72f9c75a17) && namespace_8c7f8f6b3076a74a::function_409b4b9bee1fbe1c(targetent) && istrue(targetent.var_3d33ce746b270d75.skip_spotter_delay)) {
+  if(istrue(level.var_9b60ec72f9c75a17) && namespace_8c7f8f6b3076a74a::function_409b4b9bee1fbe1c(targetent) && istrue(targetent.discoveries.skip_spotter_delay)) {
     return 5;
   }
 
@@ -919,7 +919,7 @@ function binoculars_onstatemarkpendingupdate(targetent, cansee) {
 }
 
 function binoculars_onstatemarkedenter(targetent) {
-  if(!isDefined(targetent.var_3d33ce746b270d75)) {
+  if(!isDefined(targetent.discoveries)) {
     binoculars_addheadicon(targetent);
     binoculars_updateheadiconvisibility(targetent);
   }
@@ -1033,7 +1033,7 @@ function binoculars_istargetinrange(targetent) {
 }
 
 function binoculars_istargetinbroadfov(targetent) {
-  if(istrue(level.var_9b60ec72f9c75a17) && namespace_8c7f8f6b3076a74a::function_409b4b9bee1fbe1c(targetent) && istrue(targetent.var_3d33ce746b270d75.is_objective)) {
+  if(istrue(level.var_9b60ec72f9c75a17) && namespace_8c7f8f6b3076a74a::function_409b4b9bee1fbe1c(targetent) && istrue(targetent.discoveries.is_objective)) {
     return 1;
   }
 
@@ -1043,22 +1043,22 @@ function binoculars_istargetinbroadfov(targetent) {
 function binoculars_iswithinprojectiondistance_compute(targetent) {
   pointa = self getvieworigin();
   pointb = pointa + anglesToForward(self getplayerangles()) * self.binocularsstruct.maxrange;
-  var_20c094516733ffb1 = [targetent.origin + (0, 0, 15)];
+  pointstocheck = [targetent.origin + (0, 0, 15)];
 
   if(!istrue(level.var_9b60ec72f9c75a17) || !namespace_4e11149030890e64::function_bd27c13c6b8f16fd(targetent)) {
     if(isPlayer(targetent)) {
       headpos = targetent scripts\cp_mp\utility\player_utility::getstancetop();
       centerpos = targetent scripts\cp_mp\utility\player_utility::getstancecenter();
-      var_20c094516733ffb1 = [headpos, centerpos, targetent.origin];
+      pointstocheck = [headpos, centerpos, targetent.origin];
     } else if(isagent(targetent)) {
-      var_20c094516733ffb1 = [targetent.origin + (0, 0, 48)];
+      pointstocheck = [targetent.origin + (0, 0, 48)];
     }
   }
 
-  if(istrue(level.var_9b60ec72f9c75a17) && isDefined(targetent.var_3d33ce746b270d75) && istrue(targetent.var_3d33ce746b270d75.is_objective)) {
+  if(istrue(level.var_9b60ec72f9c75a17) && isDefined(targetent.discoveries) && istrue(targetent.discoveries.is_objective)) {
     return function_42beae79b9afdeef(targetent);
   } else {
-    foreach(point in var_20c094516733ffb1) {
+    foreach(point in pointstocheck) {
       distsq = lengthsquared(vectorfromlinetopoint(pointa, pointb, point));
 
       if(distsq < self.binocularsstruct.projdistsq) {
@@ -1371,7 +1371,7 @@ function function_b1ff3731b2ae4f66(targetpoint) {
 
 function function_77eb550af880483a() {
   if(namespace_4e11149030890e64::function_bd27c13c6b8f16fd(self)) {
-    return self.var_3d33ce746b270d75.id;
+    return self.discoveries.id;
   }
 
   return self getentitynumber();
@@ -1381,8 +1381,8 @@ function function_6226cd474c01848f(targetent) {
   if(namespace_4e11149030890e64::function_bd27c13c6b8f16fd(targetent) && !namespace_8c7f8f6b3076a74a::function_409b4b9bee1fbe1c(targetent)) {
     targetent namespace_4e11149030890e64::function_6021e91c9efbc35c();
 
-    if(isDefined(targetent.var_3d33ce746b270d75.var_7230693117949738)) {
-      return targetent.var_3d33ce746b270d75.var_7230693117949738;
+    if(isDefined(targetent.discoveries.var_7230693117949738)) {
+      return targetent.discoveries.var_7230693117949738;
     }
   } else if(istrue(targetent.var_b41f2d4772efac2d)) {
     return targetent;
@@ -1427,7 +1427,7 @@ function function_42beae79b9afdeef(objective) {
 
   var_7e53bfb39bee6ede = undefined;
 
-  if(isDefined(objective.var_3d33ce746b270d75.spotter_ignore_water) && istrue(objective.var_3d33ce746b270d75.spotter_ignore_water)) {
+  if(isDefined(objective.discoveries.spotter_ignore_water) && istrue(objective.discoveries.spotter_ignore_water)) {
     var_7e53bfb39bee6ede = "physicscontents_water";
   }
 
@@ -1437,10 +1437,10 @@ function function_42beae79b9afdeef(objective) {
     return false;
   }
 
-  if(isDefined(objective.var_3d33ce746b270d75.min_distance) && isDefined(viewpoint)) {
+  if(isDefined(objective.discoveries.min_distance) && isDefined(viewpoint)) {
     var_2aac420621d1c008 = distancesquared(self.origin, viewpoint);
 
-    if(var_2aac420621d1c008 < squared(objective.var_3d33ce746b270d75.min_distance)) {
+    if(var_2aac420621d1c008 < squared(objective.discoveries.min_distance)) {
       return false;
     }
   }
@@ -1463,8 +1463,8 @@ function function_42beae79b9afdeef(objective) {
         continue;
       }
 
-      if(isDefined(objective.var_3d33ce746b270d75.objective_radius)) {
-        searchradius = objective.var_3d33ce746b270d75.objective_radius;
+      if(isDefined(objective.discoveries.objective_radius)) {
+        searchradius = objective.discoveries.objective_radius;
       }
 
       var_f25430617ab002f8 = distance(objective.origin, var_3d4f9af0f44e9e9[i]);
@@ -1507,7 +1507,7 @@ function function_93683605237cc77e() {
   self endon("disconnect");
   binoculars_init();
   thread binoculars_watchforads();
-  attachments = function_6527364c1ecca6c6("offhand_spotter_scope_cp");
+  attachments = getweapondefaultattachments("offhand_spotter_scope_cp");
   weaponobj = makeweapon("offhand_spotter_scope_cp", attachments);
   self notifyonplayercommand("spotter_hotkey_pressed", "+actionslot 1");
 

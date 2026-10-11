@@ -168,9 +168,9 @@ function player_gestures_input_disable(gesturename, pronemovement, mantle, sprin
   if(isDefined(disabletime)) {
     wait disabletime;
   } else {
-    self waittill("gesture_stopped", var_8f353b054812a006);
+    self waittill("gesture_stopped", stoppedgesturename);
 
-    if(var_8f353b054812a006 != gesturename) {
+    if(stoppedgesturename != gesturename) {
       while(true) {
         if(!self isgestureplaying(gesturename)) {
           break;

@@ -162,7 +162,7 @@ function private function_eab942a53deb62d(v_loc, str_type, a_players, lootid) {
 function private wait_for_trigger_or_timeout(n_timeout) {
   self endon("death");
   self endon("trigger_timeout");
-  thread function_b4b04de87729a6f3(n_timeout);
+  thread delete_after_delay(n_timeout);
   self waittill("trigger", player);
   return player;
 }

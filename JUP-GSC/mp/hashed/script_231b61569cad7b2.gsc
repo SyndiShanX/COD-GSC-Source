@@ -94,7 +94,7 @@ function function_dfd20fa6ae9ecbb1() {
   self.repairing = 1;
 
   if(istrue(self.var_d6132fcd1f1b1da2)) {
-    self function_65aa053c077c003a(1);
+    self vehphys_parkingbrake(1);
     self vehicle_setspeedimmediate(0);
     self.var_2d245c20ed997af6 = 1;
   }
@@ -130,7 +130,7 @@ function function_dfd20fa6ae9ecbb1() {
       self.var_2d245c20ed997af6 = 0;
     }
 
-    self function_65aa053c077c003a(0);
+    self vehphys_parkingbrake(0);
   }
 
   self.repairing = 0;
@@ -194,7 +194,7 @@ function function_2e24c0e75afea368() {
   var_53a1ee9711299e43 = scripts\cp_mp\agents\ai_spawn_director::spawn_request("ai_encounter:enc_ob_ambient_s2_5_rift_small", var_e5971246bca6222.origin, 700, 1, 1, 0);
   self.isimmune = 0;
   self.var_d6132fcd1f1b1da2 = 1;
-  self function_65aa053c077c003a(0);
+  self vehphys_parkingbrake(0);
   self vehicle_setspeedimmediate(6);
   self vehicle_turnengineon();
   thread function_486469bd0c74b8ed();
@@ -212,7 +212,7 @@ function function_2e24c0e75afea368() {
     waitframe();
   }
 
-  self function_65aa053c077c003a(1);
+  self vehphys_parkingbrake(1);
   self vehicle_setspeedimmediate(0);
   thread function_970ca31546ea9a1d();
 }
@@ -229,7 +229,7 @@ function function_c8217e4d6033ce87() {
   function_9b8829ab4092a7d7("use_miniboss_buckets", 1);
   function_606642b946a01237("ambient_blocker_orb_pickup", level.var_59a5ab1b4256bb79.origin, 8000, 0);
   self.var_d6132fcd1f1b1da2 = 1;
-  self function_65aa053c077c003a(0);
+  self vehphys_parkingbrake(0);
   self vehicle_setspeedimmediate(6);
   self vehicle_turnengineon();
   thread function_486469bd0c74b8ed();
@@ -247,7 +247,7 @@ function function_c8217e4d6033ce87() {
     waitframe();
   }
 
-  self function_65aa053c077c003a(1);
+  self vehphys_parkingbrake(1);
   self vehicle_setspeedimmediate(0);
   thread function_3706bfdc9306bb23();
   scripts\cp_mp\overlord::playconversation("s2_orb_pickup", level.players);
@@ -266,7 +266,7 @@ function function_21794c4da288d340() {
   var_ec61016e980b1556 = getStruct("escort_post_orb_encounter_location", "targetname");
   var_ab15e30ebee70e4f = scripts\cp_mp\agents\ai_spawn_director::spawn_request("ai_encounter:enc_ob_ambient_s2_5_rift_medium", var_ec61016e980b1556.origin, 700, 1, 1, 0);
   self.var_d6132fcd1f1b1da2 = 1;
-  self function_65aa053c077c003a(0);
+  self vehphys_parkingbrake(0);
   self vehicle_setspeedimmediate(6);
   self vehicle_turnengineon();
   thread function_486469bd0c74b8ed();
@@ -284,7 +284,7 @@ function function_21794c4da288d340() {
     waitframe();
   }
 
-  self function_65aa053c077c003a(1);
+  self vehphys_parkingbrake(1);
   self vehicle_setspeedimmediate(0);
   level.var_767f0511c6ecd9c3 = 1;
   var_44d600dd175b86fa = getStruct("ambient_blocker_stronghold_in_progress", "targetname");
@@ -317,16 +317,16 @@ function function_21794c4da288d340() {
 }
 
 function stronghold_triggers() {
-  var_f1067a7d9bfc5956 = 4;
+  numtriggers = 4;
   level.var_b638221ce9565e9c = [];
   var_3be6f15b5b74f3a9 = [(-28257, -20944, 410), (-24904, -18691, 490), (-24509, -21011, 490), (-26125, -22329, 446)];
-  var_c7fdc5a8cdabf7 = 400;
+  radi = 400;
   height = 400;
 
-  for(i = 0; i < var_f1067a7d9bfc5956; i++) {
-    level thread scripts\mp\utility\debug::drawsphere(var_3be6f15b5b74f3a9[i], var_c7fdc5a8cdabf7, 99900, (0, 1, 0));
+  for(i = 0; i < numtriggers; i++) {
+    level thread scripts\mp\utility\debug::drawsphere(var_3be6f15b5b74f3a9[i], radi, 99900, (0, 1, 0));
 
-    var_14e808311a8f5717 = spawn("trigger_radius", var_3be6f15b5b74f3a9[i], 1, var_c7fdc5a8cdabf7, height);
+    var_14e808311a8f5717 = spawn("trigger_radius", var_3be6f15b5b74f3a9[i], 1, radi, height);
 
     if(issharedfuncdefined("game", "makeEnterExitTrigger")) {
       [[getsharedfunc("game", "makeEnterExitTrigger")]](var_14e808311a8f5717, &function_c9d8c391758a9b50, undefined);
@@ -366,7 +366,7 @@ function function_e79033ed2ec481f1() {
   var_743aca92aa95283d = getStruct("escort_post_mall_encounter_location", "targetname");
   var_4c317df294c23716 = scripts\cp_mp\agents\ai_spawn_director::spawn_request("ai_encounter:enc_ob_ambient_s2_5_rift_large", var_743aca92aa95283d.origin, 700, 1, 1, 0);
   self.var_d6132fcd1f1b1da2 = 1;
-  self function_65aa053c077c003a(0);
+  self vehphys_parkingbrake(0);
   self vehicle_setspeedimmediate(6);
   self vehicle_turnengineon();
   thread function_486469bd0c74b8ed();
@@ -385,7 +385,7 @@ function function_e79033ed2ec481f1() {
     waitframe();
   }
 
-  self function_65aa053c077c003a(1);
+  self vehphys_parkingbrake(1);
   self vehicle_setspeedimmediate(0);
 }
 
@@ -619,7 +619,7 @@ function function_abbf11c262d080bf() {
       if(isDefined(level.var_59a5ab1b4256bb79)) {
         level.var_59a5ab1b4256bb79.origin = (-31232, -23522, 250);
         level.var_59a5ab1b4256bb79.angles = (10, 327, 0);
-        level.var_59a5ab1b4256bb79 function_65aa053c077c003a(1);
+        level.var_59a5ab1b4256bb79 vehphys_parkingbrake(1);
         level.var_59a5ab1b4256bb79 vehicle_setspeedimmediate(0);
         level.var_59a5ab1b4256bb79 thread function_3706bfdc9306bb23();
       }

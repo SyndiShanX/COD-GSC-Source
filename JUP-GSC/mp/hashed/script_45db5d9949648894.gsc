@@ -23,7 +23,7 @@ function function_3f11738e6c8250e1(target_ent, arm_used) {
 }
 
 function function_550c2a40a7f8e322() {
-  return istrue(self._blackboard.var_6b0939cf3fd5d7a1);
+  return istrue(self._blackboard.zombieunreachableisattacking);
 }
 
 function private function_abafe9cd03c2c0ab() {
@@ -62,7 +62,7 @@ function private function_f104d7887d46f98e() {
     target = closest_zombie.enemy;
 
     if(!closest_zombie function_550c2a40a7f8e322()) {
-      closest_zombie._blackboard.var_6b0939cf3fd5d7a1 = 1;
+      closest_zombie._blackboard.zombieunreachableisattacking = 1;
       closest_zombie._blackboard.var_d15d23565f5a60a1 = randomint(2) == 0;
       closest_zombie notify("<dev string:xa7>");
     }

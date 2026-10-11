@@ -72,7 +72,7 @@ function pip_on_ent(ent, tag, fov, origin_offset, angles_offset, no_hud) {
   }
 }
 
-function bink_pip(var_22cd6ae7dcae5e3f) {
+function bink_pip(bink_name) {
   level.player playSound("ui_pip_on_hud_right");
   setomnvar("ui_pip_message_text_top", "script_pip_default_top");
   setomnvar("ui_pip_message_text_bottom", "script_pip_default_bottom");
@@ -84,7 +84,7 @@ function bink_pip(var_22cd6ae7dcae5e3f) {
   setomnvar("ui_show_pip", 0);
   wait 0.05;
   setomnvar("ui_show_pip", 1);
-  cinematicingame(var_22cd6ae7dcae5e3f);
+  cinematicingame(bink_name);
 
   while(!iscinematicplaying()) {
     wait 0.05;

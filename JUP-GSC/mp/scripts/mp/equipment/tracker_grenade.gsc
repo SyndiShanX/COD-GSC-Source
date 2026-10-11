@@ -72,7 +72,7 @@ function function_7eb7507182cfbd94(position, owner, bundle) {
       continue;
     }
 
-    if(istrue(function_f3bb4f4911a1beb2("player", "isInLastStand", player))) {
+    if(istrue(callsharedfunc("player", "isInLastStand", player))) {
       continue;
     }
 

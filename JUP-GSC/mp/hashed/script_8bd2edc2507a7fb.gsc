@@ -24,7 +24,7 @@ function init_shatterblast() {
   var_746d800f9d085b2a = default_to(level.var_f1240a9ac4f65616.var_f5387c043922f4f8, 0.3);
   var_ad5528a4132dc97d = default_to(level.var_f1240a9ac4f65616.var_af198a8967836363, 0.1);
   cooldownentity = default_to(level.var_f1240a9ac4f65616.var_b65eda3e32b8f22e, 0);
-  var_bcbfc6de4213b6af = default_to(level.var_f1240a9ac4f65616.var_f745464cd01e695a, 25);
+  cooldownattacker = default_to(level.var_f1240a9ac4f65616.var_f745464cd01e695a, 25);
   cooldownglobal = default_to(level.var_f1240a9ac4f65616.var_1046b942dfff8dd2, 3);
   var_f27a8d5708fd9c4d = default_to(level.var_f1240a9ac4f65616.var_f2b6efc00a3c8036, 1);
   damagefeedbackicon = default_to(level.var_f1240a9ac4f65616.var_d4f5c6e6b4cec483, "");
@@ -33,7 +33,7 @@ function init_shatterblast() {
   level.var_1efb9d8964ce6df8 = [];
   level.var_8a2e0c6154011aea = [];
   level.shatterblastthrottle = throttle_initialize("shatterblast_throttle", 1, level.framedurationseconds);
-  function_7f759db5de1b44b0("shatterblast", 5, var_746d800f9d085b2a, var_ad5528a4132dc97d, cooldownentity, var_bcbfc6de4213b6af, cooldownglobal, var_f27a8d5708fd9c4d, &function_74dd9dad02bab584, damagefeedbackicon, damagefeedbacksound, &function_d68ef8ba212c85a, element, &function_3f5765f3394eadbb);
+  function_7f759db5de1b44b0("shatterblast", 5, var_746d800f9d085b2a, var_ad5528a4132dc97d, cooldownentity, cooldownattacker, cooldownglobal, var_f27a8d5708fd9c4d, &function_74dd9dad02bab584, damagefeedbackicon, damagefeedbacksound, &function_d68ef8ba212c85a, element, &function_3f5765f3394eadbb);
   flag_set("shatterblast_ready");
 
   level thread function_d2a179c33526b945();
@@ -197,14 +197,14 @@ function function_1e0fc29da12fb06d(shitloc, vpoint) {
     return;
   }
 
-  var_c02b1f6c1721c844 = function_ae12b32b13b42c5e(shitloc);
+  metabone_name = function_ae12b32b13b42c5e(shitloc);
 
-  if(!isDefined(var_c02b1f6c1721c844)) {
-    var_c02b1f6c1721c844 = function_b8f2b0917b1d3c98(vpoint);
+  if(!isDefined(metabone_name)) {
+    metabone_name = function_b8f2b0917b1d3c98(vpoint);
   }
 
-  if(function_adb7b3f940cde3b5(var_c02b1f6c1721c844)) {
-    function_b51afbf2bd72c825(var_c02b1f6c1721c844);
+  if(function_adb7b3f940cde3b5(metabone_name)) {
+    destroy_metabone(metabone_name);
   }
 }
 
@@ -239,7 +239,7 @@ function function_69f37932abc632da(eattacker) {
       continue;
     }
 
-    function_b51afbf2bd72c825(var_e7c68f035d44458c, eattacker, eattacker);
+    destroy_metabone(var_e7c68f035d44458c, eattacker, eattacker);
   }
 
   waitframe();
@@ -250,7 +250,7 @@ function function_69f37932abc632da(eattacker) {
 function function_3b2ca0163dee88a4() {
   foreach(player in level.players) {
     currentweapon = player getcurrentweapon();
-    player function_6c40f58b29a952a9(currentweapon, "<dev string:x1c>");
+    player add_ammo_mod_to_weapon(currentweapon, "<dev string:x1c>");
     player iprintlnbold("<dev string:x2c>");
   }
 }

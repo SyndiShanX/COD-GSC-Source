@@ -405,7 +405,7 @@ function function_2537e0b46ae9a7f1() {
   function_5fb061ad407e6e6c("track_biobunker_entrace", "brloot_tracking_device", "track_biobunker_entrance", "plant_biobunker_entrance", "parts_pouch_comms_cellular_jammer");
 }
 
-function function_c335cf2377039ba5(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_c335cf2377039ba5(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player) || !isDefined(player.team)) {
     return;
   }
@@ -842,7 +842,7 @@ function createprogressbar(icon, offset, team) {
 }
 
 function function_280edf3f47535ae9(name, key, type, var_1fbc3549649926b6) {
-  trigger = function_f159c10d5cf8f0b4(name, key);
+  trigger = getnoentvolumearray(name, key);
 
   if(!isDefined(trigger) || trigger.size == 0) {
     return;
@@ -1139,24 +1139,24 @@ function function_b944a4d927f9c28a(player, incomingid) {
       challengeindex = 0;
 
       if(isDefined(clientnums[memberindex])) {
-        teamplayer setplayerdata(level.var_5d69837cf4db0407, "squadPMCMissionGroups", memberindex, "clientNum", clientnums[memberindex]);
+        teamplayer setplayerdata(level.progressiongroup, "squadPMCMissionGroups", memberindex, "clientNum", clientnums[memberindex]);
       }
 
       if(isDefined(activechallenges[memberindex]) && isDefined(var_a0f0fc2f7ff8f287[memberindex])) {
         for(challengeindex = 0; challengeindex < min(activechallenges[memberindex].size, 1); challengeindex++) {
-          teamplayer setplayerdata(level.var_5d69837cf4db0407, "squadPMCMissionGroups", memberindex, "missions", challengeindex, "challengeID", activechallenges[memberindex][challengeindex]);
+          teamplayer setplayerdata(level.progressiongroup, "squadPMCMissionGroups", memberindex, "missions", challengeindex, "challengeID", activechallenges[memberindex][challengeindex]);
 
           for(childindex = 0; childindex < 4; childindex++) {
-            teamplayer setplayerdata(level.var_5d69837cf4db0407, "squadPMCMissionGroups", memberindex, "missions", challengeindex, "challengeProgress", childindex, var_a0f0fc2f7ff8f287[memberindex][challengeindex][childindex]);
+            teamplayer setplayerdata(level.progressiongroup, "squadPMCMissionGroups", memberindex, "missions", challengeindex, "challengeProgress", childindex, var_a0f0fc2f7ff8f287[memberindex][challengeindex][childindex]);
           }
         }
       }
 
       while(challengeindex < 1) {
-        teamplayer setplayerdata(level.var_5d69837cf4db0407, "squadPMCMissionGroups", memberindex, "missions", challengeindex, "challengeID", 0);
+        teamplayer setplayerdata(level.progressiongroup, "squadPMCMissionGroups", memberindex, "missions", challengeindex, "challengeID", 0);
 
         for(childindex = 0; childindex < 4; childindex++) {
-          teamplayer setplayerdata(level.var_5d69837cf4db0407, "squadPMCMissionGroups", memberindex, "missions", challengeindex, "challengeProgress", childindex, 0);
+          teamplayer setplayerdata(level.progressiongroup, "squadPMCMissionGroups", memberindex, "missions", challengeindex, "challengeProgress", childindex, 0);
         }
 
         challengeindex++;
@@ -1469,9 +1469,9 @@ function function_7bb64b8f4eea0443(player, lootid) {
     waitframe();
 
     if(isDefined(player)) {
-      var_977a87cbf1bc6d6 = player namespace_aead94004cf4c147::function_93f02514431a1f5d(var_5d10fd4182b17097);
-      var_42e59ad4d758c878 = player namespace_aead94004cf4c147::function_93f02514431a1f5d(var_c6d0df64279e57b9);
-      var_5a0f6a793669372a = player namespace_aead94004cf4c147::function_93f02514431a1f5d(skullid);
+      var_977a87cbf1bc6d6 = player namespace_aead94004cf4c147::getbackpackitemcount(var_5d10fd4182b17097);
+      var_42e59ad4d758c878 = player namespace_aead94004cf4c147::getbackpackitemcount(var_c6d0df64279e57b9);
+      var_5a0f6a793669372a = player namespace_aead94004cf4c147::getbackpackitemcount(skullid);
 
       if(var_977a87cbf1bc6d6 && var_42e59ad4d758c878 && var_5a0f6a793669372a) {
         function_8359cadd253f9604(player, "get_backpack_trade_items", 1);
@@ -1538,7 +1538,7 @@ function onexfil(player, inventory, backpackinventory, clipammo, cash, var_3064f
   numdogtags = 0;
 
   foreach(item in backpackinventory) {
-    function_f3bb4f4911a1beb2(item.lootid, "extracted", player, item);
+    callsharedfunc(item.lootid, "extracted", player, item);
 
     if(scripts\mp\gametypes\dmz_dog_tag::function_3c17a26ce6a4668(item.lootid)) {
       numdogtags++;
@@ -1699,7 +1699,7 @@ function function_baeceec743d9a737(player, items, cash, method, isexfil) {
 
     if(isDefined(fixedweaponclass) && fixedweaponclass != 0) {
       attachments = getweaponattachments(item.objweapon);
-      defaultattachments = function_6527364c1ecca6c6(item.objweapon);
+      defaultattachments = getweapondefaultattachments(item.objweapon);
       var_2cb723804483d204 = array_remove_array(attachments, defaultattachments);
 
       if(var_2cb723804483d204.size >= 3) {
@@ -2021,7 +2021,7 @@ function function_815a3dcb943176b3(owner, victim) {
   }
 
   if(isDefined(victim.agent_type)) {
-    subcategory = function_f3bb4f4911a1beb2("ai_mp_controller", "agentPers_getAgentPersData", victim, "subcategory");
+    subcategory = callsharedfunc("ai_mp_controller", "agentPers_getAgentPersData", victim, "subcategory");
 
     if(function_c7496288999ac847(victim.agent_type, subcategory)) {
       function_8359cadd253f9604(owner, "photograph_cartel", 1);
@@ -2587,7 +2587,7 @@ function function_8a7a2427622e7572(team, type, quantity) {
 }
 
 function private function_a269616a6f117980() {
-  level.var_b4973b15ead7e660 = function_f159c10d5cf8f0b4("trigger_hydro_waterwell", "script_noteworthy");
+  level.var_b4973b15ead7e660 = getnoentvolumearray("trigger_hydro_waterwell", "script_noteworthy");
 }
 
 function private ongasgrenadeexplode(position, owner, team) {
@@ -2616,12 +2616,12 @@ function private ongasgrenadeexplode(position, owner, team) {
   }
 }
 
-function private onentermediumbird(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private onentermediumbird(vehicle, seatid, oldseatid, player, data) {
   function_8359cadd253f9604(player, "enter_medium_bird", 1);
 }
 
 function private function_b46e6500bef678bc() {
-  helipads = function_f159c10d5cf8f0b4("trigger_lone_helipad", "script_noteworthy");
+  helipads = getnoentvolumearray("trigger_lone_helipad", "script_noteworthy");
 
   if(!isDefined(helipads) || helipads.size == 0) {
     return;
@@ -2700,9 +2700,9 @@ function private function_1d1a225ab9f876fd(vehicle, driver) {
 
 function private function_c603f3be1379a541() {
   level.var_a524a11dadc4d9fb = [];
-  malltrigger = function_f159c10d5cf8f0b4("trigger_sira_mall", "script_noteworthy");
-  oasistrigger = function_f159c10d5cf8f0b4("pmc_oasis_trigger", "script_noteworthy");
-  var_5f3fcc88f85016c2 = function_f159c10d5cf8f0b4("pmc_sandstorm", "script_noteworthy");
+  malltrigger = getnoentvolumearray("trigger_sira_mall", "script_noteworthy");
+  oasistrigger = getnoentvolumearray("pmc_oasis_trigger", "script_noteworthy");
+  var_5f3fcc88f85016c2 = getnoentvolumearray("pmc_sandstorm", "script_noteworthy");
 
   if(isDefined(malltrigger) && malltrigger.size > 0) {
     level.var_a524a11dadc4d9fb["sira_mall"] = malltrigger[0];
@@ -2718,19 +2718,19 @@ function private function_c603f3be1379a541() {
 }
 
 function private function_4e6833308f41021e() {
-  var_641d70dcbcaf1346 = getentitylessscriptablearray(undefined, undefined, undefined, undefined, "brloot_unhacked_laptop");
+  laptops = getentitylessscriptablearray(undefined, undefined, undefined, undefined, "brloot_unhacked_laptop");
 
-  if(!isDefined(var_641d70dcbcaf1346) || var_641d70dcbcaf1346.size == 0) {
+  if(!isDefined(laptops) || laptops.size == 0) {
     return;
   }
 
-  level.var_1fed93654fa204f8 = var_641d70dcbcaf1346[0];
+  level.var_1fed93654fa204f8 = laptops[0];
 }
 
 function function_44cb8b0c33cef670(player, deaddrop, weapon) {
   if(isDefined(weapon)) {
     attachments = getweaponattachments(weapon);
-    defaultattachments = function_6527364c1ecca6c6(weapon);
+    defaultattachments = getweapondefaultattachments(weapon);
     var_2cb723804483d204 = array_remove_array(attachments, defaultattachments);
 
     if(var_2cb723804483d204.size >= 5) {
@@ -2749,7 +2749,7 @@ function function_44cb8b0c33cef670(player, deaddrop, weapon) {
 
 function private onadditemtodeaddrop(container, lootid) {
   if(issharedfuncdefined(lootid, "addedToDeadDrop")) {
-    return function_f3bb4f4911a1beb2(lootid, "addedToDeadDrop", container, lootid);
+    return callsharedfunc(lootid, "addedToDeadDrop", container, lootid);
   }
 
   if(!isDefined(self) || !isDefined(self.var_2fa5b49969def47)) {
@@ -2783,7 +2783,7 @@ function private function_d2abbcb10a39ff56(lootid) {
   }
 
   if(!isDefined(self.var_2fa5b49969def47.poi)) {
-    self.var_2fa5b49969def47.poi = scripts\mp\poi::function_6cc445c02b5effac(self.var_2fa5b49969def47.origin);
+    self.var_2fa5b49969def47.poi = scripts\mp\poi::poi_findpoioriginisin(self.var_2fa5b49969def47.origin);
   }
 
   if(!isDefined(self.var_2fa5b49969def47.poi) || self.var_2fa5b49969def47.poi != "saba_caves") {
@@ -2804,7 +2804,7 @@ function private function_e53e7e4801c9866() {
   var_6d6612caac7c7233 function_ab5c0b42f31a0d20(function_16ae6d8b5f25f31b("espionage_story"));
 }
 
-function private function_959dc4fe95b93cea(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_959dc4fe95b93cea(instance, part, state, player, bautouse, usestring) {
   if(state != "invisible_usable") {
     return;
   }
@@ -2913,7 +2913,7 @@ function function_5175fa97870923ad() {
   level.var_fe06b29988dc7c85 setscriptablepartstate("dmz_pmc_place_intel", "invisible_unusable");
 }
 
-function function_7cfd9e977f412d78(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_7cfd9e977f412d78(instance, part, state, player, bautouse, usestring) {
   if(state != "invisible_usable") {
     return;
   }
@@ -2930,7 +2930,7 @@ function function_7cfd9e977f412d78(instance, part, state, player, var_a5b2c54141
 }
 
 function function_7868d975ef389aba() {
-  cavetriggers = function_f159c10d5cf8f0b4("trigger_water_cave_docks", "script_noteworthy");
+  cavetriggers = getnoentvolumearray("trigger_water_cave_docks", "script_noteworthy");
 
   if(!isDefined(cavetriggers) || cavetriggers.size == 0) {
     return;
@@ -3047,7 +3047,7 @@ function private function_8ad0dc3070480b2b(location, num, poi) {
   }
 }
 
-function private function_4cdd0981528ff098(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_4cdd0981528ff098(instance, part, state, player, bautouse, usestring) {
   instance setscriptablepartstate(part, "invisible_unusable");
   player thread scripts\mp\gametypes\br_pickups::playerplaypickupanim();
   level.var_3edca7326772514b = array_remove(level.var_3edca7326772514b, instance);
@@ -3098,8 +3098,8 @@ function private function_9414ce99a799a309() {
     level scripts\mp\flags::gameflagwait("prematch_done");
   }
 
-  triggers = function_f159c10d5cf8f0b4("trigger_hydro_gas_station", "script_noteworthy");
-  tower = function_f159c10d5cf8f0b4("trigger_radio_tower_hydro", "script_noteworthy");
+  triggers = getnoentvolumearray("trigger_hydro_gas_station", "script_noteworthy");
+  tower = getnoentvolumearray("trigger_radio_tower_hydro", "script_noteworthy");
 
   if(!isDefined(triggers) || triggers.size == 0 || !isDefined(tower) || tower.size == 0) {
     return;
@@ -3190,7 +3190,7 @@ function private function_69a1e33dfbee41d2(team) {
   return true;
 }
 
-function private function_fffd723ff4050d8e(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_fffd723ff4050d8e(instance, part, state, player, bautouse, usestring) {
   if(state == "usable") {
     instance setscriptablepartstate(part, "unusable");
 
@@ -3329,7 +3329,7 @@ function private function_18445fc8f6589865(isallowed) {
   }
 }
 
-function private function_a2b7f3dafbffa8de(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_a2b7f3dafbffa8de(instance, part, state, player, bautouse, usestring) {
   if(!function_4518b3f7c0343ae4()) {
     player scripts\mp\hud_message::showerrormessage("PMC/NOT_ALL_GAS_STATIONS_ARE_OCCUPIED");
     return;
@@ -3367,7 +3367,7 @@ function private function_a2b7f3dafbffa8de(instance, part, state, player, var_a5
 function private pmc_explosion(origin, damageent, overridesound) {
   explosionpos = origin + (0, 0, 20);
   explosioneffect = spawnfx(level._effect["samsite_bomb_explosion"], explosionpos);
-  explosioneffect thread function_b4b04de87729a6f3(10);
+  explosioneffect thread delete_after_delay(10);
   triggerfx(explosioneffect);
   physicsexplosionsphere(explosionpos, 200, 100, 3);
   playrumbleonposition("grenade_rumble", origin);
@@ -3397,7 +3397,7 @@ function private function_b61326cf101fb540() {
   level thread additemtodeaddrop(missionid, (22656, -55352, 696), 11262, 3);
 }
 
-function private function_d7415966d73d5a1e(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_d7415966d73d5a1e(instance, part, state, player, bautouse, usestring) {
   if(state != "invisible_usable") {
     return;
   }
@@ -3494,7 +3494,7 @@ function private function_c9fb574bc742a62e() {
   var_56593eba3d9c2965 function_ab5c0b42f31a0d20(missionid);
 }
 
-function private function_9e928de0556dd9a1(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_9e928de0556dd9a1(instance, part, state, player, bautouse, usestring) {
   hastracker = istrue(player namespace_aead94004cf4c147::function_6f39f9916649ac48(11206, 1));
 
   if(!hastracker) {
@@ -3506,7 +3506,7 @@ function private function_9e928de0556dd9a1(instance, part, state, player, var_a5
   function_8359cadd253f9604(player, "plant_tracker_on_truck", 1);
 }
 
-function private function_822721b8759d5950(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_822721b8759d5950(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player.team) || !isDefined(instance)) {
     return;
   }
@@ -3660,7 +3660,7 @@ function private function_84247818fc8a16f9(pingindex, pingtype) {
 
     if(isagent(ent) || isPlayer(ent)) {
       if(isDefined(ent.agent_type)) {
-        subcategory = function_f3bb4f4911a1beb2("ai_mp_controller", "agentPers_getAgentPersData", ent, "subcategory");
+        subcategory = callsharedfunc("ai_mp_controller", "agentPers_getAgentPersData", ent, "subcategory");
 
         if(function_c7496288999ac847(ent.agent_type, subcategory)) {
           function_8359cadd253f9604(self, "ping_cartel_member", 1);
@@ -3974,7 +3974,7 @@ function private onspawnexfilheli(var_7e6513b2ae0d5c1d) {
 
   trackerprompt = spawnscriptable("dmz_pmc_place_exfil_tracker", self.origin);
   trackerprompt.var_7e6513b2ae0d5c1d = var_7e6513b2ae0d5c1d;
-  trackerprompt utility::function_6e506f39f121ea8a(self, (-150, 105, -211.5), (180, 270, 20));
+  trackerprompt utility::scriptable_setparententity(self, (-150, 105, -211.5), (180, 270, 20));
   trackerprompt function_ab5c0b42f31a0d20(function_16ae6d8b5f25f31b("exfil_tracking_story"));
 
   if(isDefined(self.callingteam)) {
@@ -3984,7 +3984,7 @@ function private onspawnexfilheli(var_7e6513b2ae0d5c1d) {
   }
 }
 
-function private function_8db9f46c5668c0af(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_8db9f46c5668c0af(instance, part, state, player, bautouse, usestring) {
   hastracker = istrue(player namespace_aead94004cf4c147::function_6f39f9916649ac48(11206, 1));
 
   if(!hastracker) {
@@ -4029,7 +4029,7 @@ function private function_c10af6c88ee96f56(player) {
   function_8ad0dc3070480b2b(reinforcebreaker.origin, 6, "sealion_beachclub");
 }
 
-function private function_71b0774fb2e6261f(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_71b0774fb2e6261f(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(level.var_12177faddacf1082)) {
     return;
   }
@@ -4111,11 +4111,11 @@ function private function_8305df6d2c121acb() {
   level.var_adc92e54d3179af thread function_c1c1f536ab7b9c6b();
 }
 
-function private function_23b4bc828cd125ea(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread function_8df84ba9405587b(instance, part, state, player, var_a5b2c541413aa895, usestring);
+function private function_23b4bc828cd125ea(instance, part, state, player, bautouse, usestring) {
+  level thread function_8df84ba9405587b(instance, part, state, player, bautouse, usestring);
 }
 
-function private function_8df84ba9405587b(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_8df84ba9405587b(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player) || !isDefined(player.team)) {
     return;
   }
@@ -4281,7 +4281,7 @@ function private function_bdfd9501e21e7259() {
   }
 }
 
-function private function_10545602cd6cf0a9(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_10545602cd6cf0a9(instance, part, state, player, bautouse, usestring) {
   if(!istrue(player namespace_aead94004cf4c147::function_6f39f9916649ac48(11206, 1))) {
     player scripts\mp\hud_message::showerrormessage("PMC/NO_TRACKING_DEVICES_IN_BACKPACK");
     return;
@@ -4337,7 +4337,7 @@ function private function_47c562560e28ebc7() {
   prompt function_ab5c0b42f31a0d20(function_16ae6d8b5f25f31b("destroy_plane_story"));
 }
 
-function private function_969b576411f99ad(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_969b576411f99ad(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player.team) || !function_c5e0bac8f123cc88(player.team, function_16ae6d8b5f25f31b("destroy_plane_story"))) {
     player scripts\mp\hud_message::showerrormessage("PMC_S2/CANT_USE_THIS");
     instance disablescriptableplayeruse(player);
@@ -4427,7 +4427,7 @@ function private function_63603418e8aa6cfa() {
   if(distance(self.origin, destination.origin) < 200) {
     function_8359cadd253f9604(level.var_75434aa809a31eb6, "transport_bomb_explode", 1);
     explosioneffect = spawnfx(level._effect["bombsite_explosion"], destination.origin);
-    explosioneffect thread function_b4b04de87729a6f3(10);
+    explosioneffect thread delete_after_delay(10);
     triggerfx(explosioneffect);
     physicsexplosionsphere(destination.origin, 200, 100, 3);
     playrumbleonposition("grenade_rumble", self.origin);
@@ -4478,13 +4478,13 @@ function private function_63603418e8aa6cfa() {
     return;
   }
 
-  if(level.var_58ea889cd5f8ae84 function_73cc0f04c4c5001d()) {
+  if(level.var_58ea889cd5f8ae84 isscriptableinstance()) {
     scripts\mp\gametypes\br_pickups::deregisterscriptableinstance(level.var_58ea889cd5f8ae84);
     level.var_58ea889cd5f8ae84 freescriptable();
   }
 }
 
-function private function_80e7bbf0a2202b9b(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_80e7bbf0a2202b9b(instance, part, state, player, bautouse, usestring) {
   bombindex = player namespace_aead94004cf4c147::function_e05897f5d860188e(19215, undefined, 1);
 
   if(!isDefined(bombindex)) {
@@ -4712,7 +4712,7 @@ function private function_f65b07ef19699719() {
   }
 }
 
-function private function_26c3b83e972a14fd(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_26c3b83e972a14fd(instance, part, state, player, bautouse, usestring) {
   if(!istrue(player namespace_aead94004cf4c147::function_6f39f9916649ac48(21646, 1))) {
     player scripts\mp\hud_message::showerrormessage("PMC_S2/NO_RADIOACTIVE_CHARGE");
     return;
@@ -4907,7 +4907,7 @@ function function_70280eb87761bcd0() {
   useprompt function_ab5c0b42f31a0d20(id);
 }
 
-function function_e3b5db8f3422827e(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_e3b5db8f3422827e(instance, part, state, player, bautouse, usestring) {
   var_6760390f08fad126 = player namespace_aead94004cf4c147::function_106b52ed8f680043(32110);
   var_8edd6a16616bba27 = player namespace_aead94004cf4c147::function_106b52ed8f680043(32111);
 
@@ -4941,7 +4941,7 @@ function private function_9c054602c73df809() {
   scriptable function_ab5c0b42f31a0d20(function_16ae6d8b5f25f31b("plane_encounter"));
 }
 
-function private function_e5aa3c571f674bd3(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_e5aa3c571f674bd3(instance, part, state, player, bautouse, usestring) {
   instance thread function_7993f38e8643f95d(player);
 }
 
@@ -5398,7 +5398,7 @@ function function_ab1164302301c233() {
   }
 }
 
-function function_48a98ebe20dd89f2(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_48a98ebe20dd89f2(instance, part, state, player, bautouse, usestring) {
   if(isDefined(player)) {
     lootid = scripts\cp_mp\utility\loot::getlootidfromref("brloot_flare_stick");
     hasitem = istrue(player namespace_aead94004cf4c147::function_6f39f9916649ac48(lootid, 1));
@@ -5573,7 +5573,7 @@ function private function_68307fc74660904c() {
   }
 }
 
-function private function_c2d1503cc1629dd2(var_11807f242097f672, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_c2d1503cc1629dd2(var_11807f242097f672, part, state, player, bautouse, usestring) {
   if(!isDefined(var_11807f242097f672) || !isDefined(player)) {
     return;
   }
@@ -5837,7 +5837,7 @@ function function_fea699cf9870f641(radar, vehicle) {
     if(isDefined(vehicle.owner) && isDefined(vehicle.owner.team)) {
       triggerportableradarpingteam(radar.origin, vehicle.owner.team, radius, sweeptime * 1000);
       radar playsoundonmovingent("iw9_code_scan_succes");
-      currentpoi = scripts\mp\poi::function_6cc445c02b5effac(radar.origin, 0, 0, 0);
+      currentpoi = scripts\mp\poi::poi_findpoioriginisin(radar.origin, 0, 0, 0);
 
       if(currentpoi == "delta_fleamarket") {
         function_8a7a2427622e7572(vehicle.owner.team, "quidproquo_visited_poi_one", 1);
@@ -5856,7 +5856,7 @@ function function_6300f1d8a3c7644(vehicle) {
 
   while(isDefined(vehicle)) {
     if(isDefined(vehicle.owner) && isDefined(vehicle.owner.team)) {
-      currentpoi = scripts\mp\poi::function_6cc445c02b5effac(vehicle.origin, 0, 0, 0);
+      currentpoi = scripts\mp\poi::poi_findpoioriginisin(vehicle.origin, 0, 0, 0);
 
       if(currentpoi == "delta_fleamarket") {
         function_8a7a2427622e7572(vehicle.owner.team, "quidproquo_visited_poi_one", 1);
@@ -5869,7 +5869,7 @@ function function_6300f1d8a3c7644(vehicle) {
   }
 }
 
-function function_6234d21aecef0158(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_6234d21aecef0158(instance, part, state, player, bautouse, usestring) {
   level endon("game_ended");
   squadmates = teams::getteamdata(player.team, "players");
 
@@ -5893,8 +5893,8 @@ function function_6234d21aecef0158(instance, part, state, player, var_a5b2c54141
   level thread function_6300f1d8a3c7644(var_17160569dab45fd6);
 }
 
-function function_9d1f0973f606c702(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  thread function_6234d21aecef0158(instance, part, state, player, var_a5b2c541413aa895, usestring);
+function function_9d1f0973f606c702(instance, part, state, player, bautouse, usestring) {
+  thread function_6234d21aecef0158(instance, part, state, player, bautouse, usestring);
 }
 
 function function_7616962f7c523a5d(player) {
@@ -5957,11 +5957,11 @@ function function_794d65c4d264dcc0() {
   }
 }
 
-function function_c55dae311ea23861(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  thread function_dacdd049029751a8(instance, part, state, player, var_a5b2c541413aa895, usestring);
+function function_c55dae311ea23861(instance, part, state, player, bautouse, usestring) {
+  thread function_dacdd049029751a8(instance, part, state, player, bautouse, usestring);
 }
 
-function function_dacdd049029751a8(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_dacdd049029751a8(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player) || !isDefined(player.team)) {
     return;
   }
@@ -6116,7 +6116,7 @@ function function_6ce896ca48e4c62a() {
   level.var_a2b890d129c64761 = spawnStruct();
   level.var_a2b890d129c64761.usetime = 3;
   level.var_a2b890d129c64761.capturetype = 2;
-  shipvolume = function_f159c10d5cf8f0b4("subarea_airport_konniship", "script_noteworthy")[0];
+  shipvolume = getnoentvolumearray("subarea_airport_konniship", "script_noteworthy")[0];
   group = spawnStruct();
   group.contributingplayers = [];
   group.used = [];
@@ -6277,11 +6277,11 @@ function function_54e624d4ac58b723() {
   use function_ab5c0b42f31a0d20(function_16ae6d8b5f25f31b("false_reinforcement_signal_story"));
 }
 
-function function_ac56c0ec10ac3e25(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  thread function_6871a50434e7cc31(instance, part, state, player, var_a5b2c541413aa895, usestring);
+function function_ac56c0ec10ac3e25(instance, part, state, player, bautouse, usestring) {
+  thread function_6871a50434e7cc31(instance, part, state, player, bautouse, usestring);
 }
 
-function function_6871a50434e7cc31(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_6871a50434e7cc31(instance, part, state, player, bautouse, usestring) {
   thread namespace_1eb3c4e0e28fac71::utilflare_shootflare(instance.origin, "dom");
   function_8359cadd253f9604(player, "false_signal_sent", 1);
   teammates = getteamdata(player.team, "players");
@@ -6319,7 +6319,7 @@ function function_1665f2fe0ae0d024() {
   nodes = getStructArray("missile_silo", "targetname");
 
   foreach(node in nodes) {
-    poi = scripts\mp\poi::function_6cc445c02b5effac(node.origin, 1, 1);
+    poi = scripts\mp\poi::poi_findpoioriginisin(node.origin, 1, 1);
 
     if(poi == "saba_cemetery") {
       cemeterysilo = function_e13625d770059ef9(node, missionid);
@@ -6332,7 +6332,7 @@ function function_1665f2fe0ae0d024() {
   nodes = array_randomize(nodes);
   silo = function_e13625d770059ef9(nodes[0], missionid);
   silo.collectitem = "silo_plant_second_ir_beacon";
-  poi = scripts\mp\poi::function_6cc445c02b5effac(nodes[0].origin, 1, 1);
+  poi = scripts\mp\poi::poi_findpoioriginisin(nodes[0].origin, 1, 1);
   notepos = coordtransform((51, 0, 65), cemeterysilo.origin, cemeterysilo.angles);
   var_4a122e836c546c35 = combineangles(cemeterysilo.angles, (90, 0, 0));
   note = spawnscriptable("stationary_note_paper", notepos, var_4a122e836c546c35);
@@ -6369,7 +6369,7 @@ function function_afe925f2dee5f03e(silo) {
   }
 }
 
-function function_948991a18b048182(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_948991a18b048182(instance, part, state, player, bautouse, usestring) {
   if(!player isonground() || !isDefined(player.team)) {
     return;
   }
@@ -6626,7 +6626,7 @@ function function_f7d8054ae05de10f(door, player) {
   }
 }
 
-function function_cd8c827e2b6115ea(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_cd8c827e2b6115ea(instance, part, state, player, bautouse, usestring) {
   if(player scripts\mp\equipment\disguise::function_d3b190ee881c5ca7()) {
     instance setscriptablepartstate("brloot_pmc_unobserved_radio", "visible_unusable");
     function_8359cadd253f9604(player, "unobserved_activated_radio", 1);
@@ -7061,7 +7061,7 @@ function function_2e94d8da4a6ed951() {
   scripts\mp\gametypes\br_gametype_dmz::showdmzsplash("dmz_demo_defused_lose", getteamdata(planterteam, "players"));
 
   if(isDefined(self.defuseplayer)) {
-    scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onBombDefused", self.defuseplayer);
+    scripts\engine\utility::callsharedfunc("pmc_missions", "onBombDefused", self.defuseplayer);
   }
 
   self.shouldreinforce = 0;
@@ -7103,7 +7103,7 @@ function function_34a83ef704f155d7(trigger, player, radius) {
   self.nearbyplayers = array_remove(self.nearbyplayers, player);
 }
 
-function function_ec7e73044204b1cf(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_ec7e73044204b1cf(instance, part, state, player, bautouse, usestring) {
   if(part != "dmz_supply_site_use_pmc") {
     return;
   }
@@ -7200,7 +7200,7 @@ function function_ec7e73044204b1cf(instance, part, state, player, var_a5b2c54141
   }
 }
 
-function function_2d2046e72a3653fb(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_2d2046e72a3653fb(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player.team)) {
     return;
   }
@@ -7514,7 +7514,7 @@ function function_b74ad2c2c1691b18() {
   }
 }
 
-function function_c9ec79155b2119ba(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_c9ec79155b2119ba(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player.team)) {
     return;
   }

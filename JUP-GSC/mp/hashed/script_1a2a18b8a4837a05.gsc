@@ -76,17 +76,17 @@ function private function_f9bdc12bcf76bd07() {
   var_f423b07db05160b2 = [0, 0, 1, 0, 1, 0, 0, 0, 0, 0];
   var_db488c3a1777b95e = ["_A", "_B", "_C"];
   outshots = [];
-  var_18e8b4bc3930f848 = "";
+  mixup = "";
 
   for(shotidx = 0; shotidx < const_shots.size; shotidx++) {
     if(!var_6cb889c93ea2fbe2[shotidx]) {
-      var_18e8b4bc3930f848 = "";
+      mixup = "";
     } else if(!var_f423b07db05160b2[shotidx]) {
-      var_18e8b4bc3930f848 = utility::array_random(var_db488c3a1777b95e);
+      mixup = utility::array_random(var_db488c3a1777b95e);
     }
 
     shot = const_shots[shotidx];
-    outshots[outshots.size] = shot + var_18e8b4bc3930f848;
+    outshots[outshots.size] = shot + mixup;
   }
 
   return outshots;
@@ -380,26 +380,26 @@ function function_ad4a7a73c7d7d9e0() {
     infilanimindex = 1;
   }
 
-  var_8e3afd40d3c95b46 = "j_prop_" + infilanimindex + 1;
+  player_link_tag = "j_prop_" + infilanimindex + 1;
   cos45 = cos(45);
 
   if(dotforward < -1 * cos45) {
-    return ["wz_infil_gprop_standard_sh010", level.br_anim["wz_infil_gprop_standard_sh010"], "wz_infil_standardforward_jump_sh010", var_8e3afd40d3c95b46];
+    return ["wz_infil_gprop_standard_sh010", level.br_anim["wz_infil_gprop_standard_sh010"], "wz_infil_standardforward_jump_sh010", player_link_tag];
   }
 
   if(dotright > cos45) {
-    return ["wz_infil_gprop_l90_sh010", level.br_anim["wz_infil_gprop_l90_sh010"], "wz_infil_l90_jump_sh010", var_8e3afd40d3c95b46];
+    return ["wz_infil_gprop_l90_sh010", level.br_anim["wz_infil_gprop_l90_sh010"], "wz_infil_l90_jump_sh010", player_link_tag];
   }
 
   if(dotright < -1 * cos45) {
-    return ["wz_infil_gprop_r90_sh010", level.br_anim["wz_infil_gprop_r90_sh010"], "wz_infil_r90_jump_sh010", var_8e3afd40d3c95b46];
+    return ["wz_infil_gprop_r90_sh010", level.br_anim["wz_infil_gprop_r90_sh010"], "wz_infil_r90_jump_sh010", player_link_tag];
   }
 
   if(dotright > 0) {
-    return ["wz_infil_gprop_l180_sh010", level.br_anim["wz_infil_gprop_l180_sh010"], "wz_infil_l180_jump_sh010", var_8e3afd40d3c95b46];
+    return ["wz_infil_gprop_l180_sh010", level.br_anim["wz_infil_gprop_l180_sh010"], "wz_infil_l180_jump_sh010", player_link_tag];
   }
 
-  return ["wz_infil_gprop_r180_sh010", level.br_anim["wz_infil_gprop_r180_sh010"], "wz_infil_r180_jump_sh010", var_8e3afd40d3c95b46];
+  return ["wz_infil_gprop_r180_sh010", level.br_anim["wz_infil_gprop_r180_sh010"], "wz_infil_r180_jump_sh010", player_link_tag];
 }
 
 function jumpfunc() {
@@ -431,7 +431,7 @@ function function_dc0bc83a31193177() {
 function private function_cd7e1a37d5e2ca2b() {
   level.nosuspensemusic = 1;
   thread scripts\mp\music_and_dialog::stopsuspensemusic();
-  function_f1aed36ab4598ea("mp_gamemode_br_infils_jup");
+  snd_transient_load("mp_gamemode_br_infils_jup");
 }
 
 function private function_26874fd7694aa29() {
@@ -447,7 +447,7 @@ function private function_8d050f78fe1d180f() {
 
 function infilcleanup() {
   function_e66f664ad726f2e();
-  function_f4e0ff5cb899686d("mp_gamemode_br_infils_jup");
+  snd_transient_unload("mp_gamemode_br_infils_jup");
 }
 
 function function_52bedae2ced8e191() {

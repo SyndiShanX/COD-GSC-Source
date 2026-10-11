@@ -574,7 +574,7 @@ function getremotename() {
   return self.usingremote;
 }
 
-function clearusingremote(var_2c111f02d48e2671) {
+function clearusingremote(bypassweaponswitch) {
   val::reset_all("usingRemote");
   scripts\cp_mp\killstreaks\white_phosphorus::disableloopingcoughaudiosupression();
 
@@ -584,7 +584,7 @@ function clearusingremote(var_2c111f02d48e2671) {
 
   self.usingremote = undefined;
 
-  if(!isDefined(var_2c111f02d48e2671)) {
+  if(!isDefined(bypassweaponswitch)) {
     _freezecontrols(0, undefined, "usingRemote");
   }
 

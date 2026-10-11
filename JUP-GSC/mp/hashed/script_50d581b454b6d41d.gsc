@@ -18,26 +18,26 @@ function inittask() {
 }
 
 function function_8a64133f5d5f7dd(taskinstance) {
-  var_2e16d30576073b00 = level.teamdata[taskinstance.team]["alivePlayers"][0];
-  instance = function_e92b6ecc9ab0f07a(taskinstance.info.ref, var_2e16d30576073b00);
+  representative = level.teamdata[taskinstance.team]["alivePlayers"][0];
+  instance = function_e92b6ecc9ab0f07a(taskinstance.info.ref, representative);
   instance.taskinfo = taskinstance.info;
   instance thread oncontractend(taskinstance);
   instance thread function_a24a232718dd45b7(taskinstance);
   scripts\mp\gametypes\br_quest_util::onquesttablethide(instance);
-  var_2e16d30576073b00 scripts\mp\gametypes\br_quest_util::takequesttablet(instance);
+  representative scripts\mp\gametypes\br_quest_util::takequesttablet(instance);
 }
 
-function function_e92b6ecc9ab0f07a(taskref, var_2e16d30576073b00) {
-  if(!isDefined(var_2e16d30576073b00)) {
+function function_e92b6ecc9ab0f07a(taskref, representative) {
+  if(!isDefined(representative)) {
     return undefined;
   }
 
   var_173cbd75083beba4 = level.taskinfo.tabletsearchradius;
   var_441c690181a13ac = var_173cbd75083beba4 * var_173cbd75083beba4;
   targettablet = undefined;
-  players = level.teamdata[var_2e16d30576073b00.team]["players"];
+  players = level.teamdata[representative.team]["players"];
   tabletname = scripts\mp\gametypes\br_quest_util::getlootname(taskref);
-  targettablets = getlootscriptablearrayinradius(tabletname, undefined, var_2e16d30576073b00.origin, var_173cbd75083beba4);
+  targettablets = getlootscriptablearrayinradius(tabletname, undefined, representative.origin, var_173cbd75083beba4);
 
   foreach(tablet in targettablets) {
     if(!isDefined(level.questinfo.activetablets["" + tablet.index]) || istrue(tablet.startdisabled)) {
@@ -86,8 +86,8 @@ function function_a24a232718dd45b7(taskinstance) {
 }
 
 function checktaskvalid(selectedtask, team) {
-  var_2e16d30576073b00 = level.teamdata[team]["players"][0];
-  instance = function_e92b6ecc9ab0f07a(selectedtask.ref, var_2e16d30576073b00);
+  representative = level.teamdata[team]["players"][0];
+  instance = function_e92b6ecc9ab0f07a(selectedtask.ref, representative);
 
   if(!isDefined(instance)) {
     return false;

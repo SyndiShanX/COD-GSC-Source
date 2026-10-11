@@ -189,14 +189,14 @@ function function_c5629dcdb6b0da9d() {
     joinresult = waittill_any_return_no_endon_death_2("joined_team", "joined_spectators");
 
     if(isDefined(self.var_5a65e474ab89ffb7) && self.var_5a65e474ab89ffb7 > 0) {
-      var_cc7584781dc01176 = level.streakglobals.streakbundles["juggernaut_recon"].var_d96d3e6ceed581fd.blueprints[self.var_5a65e474ab89ffb7 - 1].genericblueprint;
+      var_cc7584781dc01176 = level.streakglobals.streakbundles["juggernaut_recon"].genericblueprintlist.blueprints[self.var_5a65e474ab89ffb7 - 1].genericblueprint;
       self function_9bc014e7042e8339(var_cc7584781dc01176);
     }
 
     if(joinresult == "joined_team") {
       if(function_115b2477be653b18()) {
         var_a9a49b677e065618 = self.team == "allies" ? 1 : 2;
-        var_2badd71933ecb549 = level.streakglobals.streakbundles["juggernaut_recon"].var_d96d3e6ceed581fd.blueprints[var_a9a49b677e065618 - 1].genericblueprint;
+        var_2badd71933ecb549 = level.streakglobals.streakbundles["juggernaut_recon"].genericblueprintlist.blueprints[var_a9a49b677e065618 - 1].genericblueprint;
         self function_53c61cc39f6a3b11(var_2badd71933ecb549);
         self.var_5a65e474ab89ffb7 = var_a9a49b677e065618;
         self.var_3c9615208f1c09b8 = undefined;
@@ -383,23 +383,23 @@ function function_d1d0cc2cc9b8e653() {
       waitframe();
     }
 
-    var_2e3b2407e9947a23 = undefined;
+    teleportplayer = undefined;
 
     foreach(player in level.players) {
       if(!isbot(player)) {
         continue;
       }
 
-      var_2e3b2407e9947a23 = player;
+      teleportplayer = player;
       break;
     }
 
-    if(!isalive(var_2e3b2407e9947a23) || !isalive(level.player)) {
+    if(!isalive(teleportplayer) || !isalive(level.player)) {
       wait 5;
       continue;
     }
 
-    var_2e3b2407e9947a23 setOrigin(level.player.origin + (0, 0, 1000) + 64 * vectorNormalize(anglesToForward(flat_angle(level.player.angles))));
+    teleportplayer setOrigin(level.player.origin + (0, 0, 1000) + 64 * vectorNormalize(anglesToForward(flat_angle(level.player.angles))));
     wait 8;
   }
 }

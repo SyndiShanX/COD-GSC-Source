@@ -90,7 +90,7 @@ function function_7eb73407060d7cb6(state) {
       var_56b2e73c107aae45 setscriptablepartstate("glyph_part", "on_purple");
       break;
     case 2:
-      if(!obelisk.var_e00ac5b70d752deb) {
+      if(!obelisk.isee) {
         var_56b2e73c107aae45 setscriptablepartstate("glyph_part", "on_red");
       } else {
         var_56b2e73c107aae45 setscriptablepartstate("glyph_part", "on_yellow");
@@ -98,7 +98,7 @@ function function_7eb73407060d7cb6(state) {
 
       break;
     case 3:
-      if(!obelisk.var_e00ac5b70d752deb) {
+      if(!obelisk.isee) {
         var_56b2e73c107aae45 setscriptablepartstate("glyph_part", "on_red");
       }
 

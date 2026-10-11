@@ -22,6 +22,6 @@ function emp_drone_targeted_startmapselectsequence(navmesh, directionalselection
   scripts\mp\killstreaks\mapselect::function_90f093ca8576232f(navmesh, directionalselection, directionaltype, selectortype);
 }
 
-function emp_drone_targeted_monitordamage(maxhealth, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak, rumble, resetdamagetaken) {
-  scripts\mp\damage::monitordamage(maxhealth, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak, rumble, resetdamagetaken);
+function emp_drone_targeted_monitordamage(maxhealth, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak, rumble, resetdamagetaken) {
+  scripts\mp\damage::monitordamage(maxhealth, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak, rumble, resetdamagetaken);
 }

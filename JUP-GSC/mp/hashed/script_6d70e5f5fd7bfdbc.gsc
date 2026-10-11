@@ -209,13 +209,13 @@ function cleanup() {
 }
 
 function function_fd69cf02ba4d90a2() {
-  var_d13c18af4084bdfd = spawnStruct();
-  var_d13c18af4084bdfd.name = "REV_OB_VEHICLE_DRIVE";
-  var_d13c18af4084bdfd.scriptbundle = "jup_activitydefinition_vehicle_drive";
-  var_d13c18af4084bdfd.mainfunction = &main;
-  var_d13c18af4084bdfd.var_6e7eb28b2997b5b4 = &function_82613e20fba2deb9;
-  var_d13c18af4084bdfd.var_ad1dcd56d202e9ac = &function_6da2952367672ac0;
-  return var_d13c18af4084bdfd;
+  activityinfostruct = spawnStruct();
+  activityinfostruct.name = "REV_OB_VEHICLE_DRIVE";
+  activityinfostruct.scriptbundle = "jup_activitydefinition_vehicle_drive";
+  activityinfostruct.mainfunction = &main;
+  activityinfostruct.var_6e7eb28b2997b5b4 = &function_82613e20fba2deb9;
+  activityinfostruct.metadatafunction = &function_6da2952367672ac0;
+  return activityinfostruct;
 }
 
 function function_82613e20fba2deb9(instancename, fe, us, cf) {

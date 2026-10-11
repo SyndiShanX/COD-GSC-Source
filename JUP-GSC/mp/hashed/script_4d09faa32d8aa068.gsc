@@ -57,13 +57,13 @@ function private function_c5e2196bf3620c86(event) {
     return;
   }
 
-  var_b9fd8106c28eab2a = var_42db284ef44b45b.var_b9fd8106c28eab2a;
+  scriptable_part = var_42db284ef44b45b.scriptable_part;
   playbacktime = var_42db284ef44b45b.playbacktime;
   var_2e0a313d03359b86 = var_42db284ef44b45b.var_2e0a313d03359b86;
-  thread function_54cfa98e93367c03(var_b9fd8106c28eab2a, playbacktime, var_2e0a313d03359b86);
+  thread function_54cfa98e93367c03(scriptable_part, playbacktime, var_2e0a313d03359b86);
 }
 
-function function_54cfa98e93367c03(var_b9fd8106c28eab2a, playbacktime, var_2e0a313d03359b86) {
+function function_54cfa98e93367c03(scriptable_part, playbacktime, var_2e0a313d03359b86) {
   self endon("death");
 
   if(self isscriptable()) {
@@ -72,14 +72,14 @@ function function_54cfa98e93367c03(var_b9fd8106c28eab2a, playbacktime, var_2e0a3
     }
 
     if(istrue(var_2e0a313d03359b86)) {
-      if(self getscriptablehaspart(var_b9fd8106c28eab2a)) {
-        self setscriptablepartstate(var_b9fd8106c28eab2a, "on");
-        self.var_daecc3775e583764[self.var_daecc3775e583764.size] = var_b9fd8106c28eab2a;
-        thread function_79c65ef98ad52fab(playbacktime, var_b9fd8106c28eab2a);
+      if(self getscriptablehaspart(scriptable_part)) {
+        self setscriptablepartstate(scriptable_part, "on");
+        self.var_daecc3775e583764[self.var_daecc3775e583764.size] = scriptable_part;
+        thread function_79c65ef98ad52fab(playbacktime, scriptable_part);
       }
 
       foreach(vox in self.var_daecc3775e583764) {
-        if(vox != var_b9fd8106c28eab2a) {
+        if(vox != scriptable_part) {
           self notify("stop" + vox);
           function_ecda43fa32d7ef19(vox);
           waitframe();
@@ -89,43 +89,43 @@ function function_54cfa98e93367c03(var_b9fd8106c28eab2a, playbacktime, var_2e0a3
       return;
     } else if(self.var_daecc3775e583764.size > 1) {
       foreach(vox in self.var_daecc3775e583764) {
-        if(vox == var_b9fd8106c28eab2a) {
-          self notify("stop" + var_b9fd8106c28eab2a);
-          function_ecda43fa32d7ef19(var_b9fd8106c28eab2a);
+        if(vox == scriptable_part) {
+          self notify("stop" + scriptable_part);
+          function_ecda43fa32d7ef19(scriptable_part);
           waitframe();
         }
       }
     }
 
-    if(self getscriptablehaspart(var_b9fd8106c28eab2a) && self getscriptablepartstate(var_b9fd8106c28eab2a) != "on") {
-      utility::function_3ab9164ef76940fd(var_b9fd8106c28eab2a, "on");
-      self.var_daecc3775e583764[self.var_daecc3775e583764.size] = var_b9fd8106c28eab2a;
-      thread function_79c65ef98ad52fab(playbacktime, var_b9fd8106c28eab2a);
+    if(self getscriptablehaspart(scriptable_part) && self getscriptablepartstate(scriptable_part) != "on") {
+      utility::function_3ab9164ef76940fd(scriptable_part, "on");
+      self.var_daecc3775e583764[self.var_daecc3775e583764.size] = scriptable_part;
+      thread function_79c65ef98ad52fab(playbacktime, scriptable_part);
     }
   }
 }
 
-function function_79c65ef98ad52fab(playbacktime, var_b9fd8106c28eab2a) {
+function function_79c65ef98ad52fab(playbacktime, scriptable_part) {
   self endon("death");
   self endon("interruptVO");
-  self endon("stop" + var_b9fd8106c28eab2a);
+  self endon("stop" + scriptable_part);
   wait playbacktime;
-  function_ecda43fa32d7ef19(var_b9fd8106c28eab2a);
+  function_ecda43fa32d7ef19(scriptable_part);
 }
 
-function function_ecda43fa32d7ef19(var_b9fd8106c28eab2a) {
+function function_ecda43fa32d7ef19(scriptable_part) {
   if(self isscriptable()) {
-    if(self getscriptablehaspart(var_b9fd8106c28eab2a) && self getscriptablepartstate(var_b9fd8106c28eab2a) != "off") {
-      utility::function_3ab9164ef76940fd(var_b9fd8106c28eab2a, "off");
-      self.var_daecc3775e583764 = array_remove(self.var_daecc3775e583764, var_b9fd8106c28eab2a);
+    if(self getscriptablehaspart(scriptable_part) && self getscriptablepartstate(scriptable_part) != "off") {
+      utility::function_3ab9164ef76940fd(scriptable_part, "off");
+      self.var_daecc3775e583764 = array_remove(self.var_daecc3775e583764, scriptable_part);
     }
   }
 }
 
-function function_d571b479e74c1c29(event, var_b9fd8106c28eab2a, playbacktime, var_2e0a313d03359b86) {
+function function_d571b479e74c1c29(event, scriptable_part, playbacktime, var_2e0a313d03359b86) {
   level.var_d9c60d7c8f3041f = default_to(level.var_d9c60d7c8f3041f, []);
   state = spawnStruct();
-  state.var_b9fd8106c28eab2a = var_b9fd8106c28eab2a;
+  state.scriptable_part = scriptable_part;
   state.playbacktime = playbacktime;
   state.var_2e0a313d03359b86 = default_to(var_2e0a313d03359b86, 0);
   level.var_d9c60d7c8f3041f[event] = state;

@@ -169,7 +169,7 @@ function function_635532f54eac01c7() {
 function function_c4d555bf9485ac3b() {
   level.var_5966c39cb60075f1 = &function_da58f5fca036ffaa;
   setup_create_script();
-  thread function_dc042011cd0bf02a("default");
+  thread set_stealth_ranges("default");
   level.var_c2c08e4c277e253e = 1;
   function_e00cc8c1c5cc38fb(1);
   namespace_84c374d417dc82cf::load_laser_fx();
@@ -314,7 +314,7 @@ function function_fc4803dc319a81d2() {
   level thread function_222bef19da9c23a4();
   level thread function_2c31d268382bedb0();
   level thread function_137fc90d1f21350c();
-  namespace_53fc9ddbb516e6e1::function_9bc69c26770d9533(&namespace_1170726b2799ea65::function_a455e04c3087c72b);
+  namespace_53fc9ddbb516e6e1::registeronluieventcallbacksharedfunc(&namespace_1170726b2799ea65::function_a455e04c3087c72b);
   add_start("start", &function_877e2b6e2ca1c96a);
   add_start("vip", &function_a49d3c7f34855fdd);
   add_start("guardhouse", &function_b41e71caeb52e385);
@@ -397,7 +397,7 @@ function function_2a0fd836564c6552() {
   level endon("game_ended");
   level endon(self.script_noteworthy);
   level endon("obj_laptop3_completed");
-  vols = function_f159c10d5cf8f0b4("recon_poi_hydraulics", "script_noteworthy");
+  vols = getnoentvolumearray("recon_poi_hydraulics", "script_noteworthy");
 
   foreach(vol in vols) {
     vol namespace_8c7f8f6b3076a74a::function_85aedb842bdb548b();
@@ -597,11 +597,11 @@ function function_c67e8871d2817b30(anim_org) {
 }
 
 function fadein(fadeintime) {
-  thread scripts\cp_mp\utility\game_utility::function_852712268d005332(level.player, 0, fadeintime);
+  thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(level.player, 0, fadeintime);
 }
 
 function fadeout(fadeouttime) {
-  thread scripts\cp_mp\utility\game_utility::function_852712268d005332(level.player, 1, fadeouttime);
+  thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(level.player, 1, fadeouttime);
 }
 
 function play_intro() {
@@ -645,14 +645,14 @@ function play_intro() {
   level.player scripts\cp_mp\utility\game_utility::function_20cb4a5f727abe6e(0);
   thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(level.player, 0, 1);
   fadein(0);
-  level.player function_f484b2c51e0d6f5e(0);
+  level.player allowswimmingunderwater(0);
   thread namespace_9aee6cba55e1ac28::function_fe37660adcbfb21d(anim_org);
   level.playback_scene = anim_org;
   level thread function_f75be718055ec2b3();
   anim_org scripts\common\scene::play(undefined, ["shot_010", "shot_020", "shot_030"], "jup_resort_infil");
   level notify("show_soap");
   anim_org scripts\common\scene::play(undefined, "shot_040", "jup_resort_infil");
-  level.player function_f484b2c51e0d6f5e(1);
+  level.player allowswimmingunderwater(1);
   anim_org scene_cleanup();
   function_860a5c1214190a7c(anim_org);
   level.player playershow();
@@ -738,7 +738,7 @@ function function_876034df29fc1e44() {
   level.player playerhide();
   function_a88c360e19062b00(1);
   level.player hidehudenable();
-  thread function_8615a6b7cd263577();
+  thread exfil_music();
   thread function_a47326c0544f6fb9();
   function_5b13a92c82e81024(1);
   anim_org = function_7a18da6e48b71c35("resort_milena_exfil");
@@ -817,7 +817,7 @@ function function_a47326c0544f6fb9() {
   var_4ba1f7c550bed8a8 linkTo(var_a0f9aa345937f90d, "tag_origin", (0, 0, 0), (0, 0, 0));
 }
 
-function function_8615a6b7cd263577() {
+function exfil_music() {
   stopmusicstate("mx_resort_exfil_end");
 }
 
@@ -856,7 +856,7 @@ function function_cc514f4104398f38(var_6b3bd87d12cded0f) {
   level.player scripts\common\values::reset_all("scene_shot");
   level.player scripts\common\values::reset_all("player_rig");
   level.player playershow();
-  level.player function_f484b2c51e0d6f5e(1);
+  level.player allowswimmingunderwater(1);
   level.player allowfire(1);
   level.player scripts\common\swim_common::function_9368fff2b3156346(0);
   level.player function_3671ec427c125cb(0);
@@ -1248,7 +1248,7 @@ function function_aaf3fa7642b6a2e2() {
   namespace_15c7ce84dd21743d::function_5e59fcaf5bbe49c7();
 }
 
-function function_dc042011cd0bf02a(type) {
+function set_stealth_ranges(type) {
   level notify("level_setting_stealth_ranges");
   level endon("level_setting_stealth_ranges");
 
@@ -1325,7 +1325,7 @@ function function_f98463d49e2f9067(var_4f855452f4b35b26, override_damage_sight_r
   namespace_a0852b262a68d01::function_fac67371e80874db();
   function_82a45e8aef44ce3f(&function_a99a065bb118eed8);
   level thread function_d93d63b293881b1f(self);
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
 }
 
 function function_f99d747ae629971e(group_name, func) {
@@ -1554,7 +1554,7 @@ function function_4fb6c81d40937664() {
   }
 }
 
-function car_alarm_triggered(instance, note, param, var_535d9c3fdddab5a9) {
+function car_alarm_triggered(instance, note, param, instigator) {
   radius = 1000;
   enemiesnearby = getaiarrayinradius(self.origin, radius, "axis");
 

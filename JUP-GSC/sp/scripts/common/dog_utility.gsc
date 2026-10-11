@@ -39,11 +39,11 @@ function go_to_node_internal(node, optional_arrived_at_node_func, var_5e38f20c96
 
   startnode = node[0];
   thread go_to_node_end();
-  var_a749ce9b52022669 = 0;
+  usingpatharray = 0;
   patharray = undefined;
 
   for(;;) {
-    if(!var_a749ce9b52022669) {
+    if(!usingpatharray) {
       if(isDefined(level.var_375b317cc772ef57)) {
         node = [[level.var_375b317cc772ef57]](node);
       } else {
@@ -55,17 +55,17 @@ function go_to_node_internal(node, optional_arrived_at_node_func, var_5e38f20c96
       self.patharrayindex = -1;
 
       if(patharray.size > 1) {
-        var_a749ce9b52022669 = 1;
+        usingpatharray = 1;
       }
     }
 
     self.currentnode = node;
 
-    if(var_a749ce9b52022669) {
+    if(usingpatharray) {
       node = patharray[patharray.size - 1];
       go_through_patharray(patharray, optional_arrived_at_node_func, var_5e38f20c9628ae25);
       patharray = undefined;
-      var_a749ce9b52022669 = 0;
+      usingpatharray = 0;
     } else {
       node_fields_pre_goal(node);
 
@@ -244,10 +244,10 @@ function either_player_looking_at(org, dot, dot_only, ignore_ent) {
 }
 
 function players_within_distance(fdist, org) {
-  var_74a76bbc5f12d7ea = fdist * fdist;
+  fdistsquared = fdist * fdist;
 
   for(i = 0; i < level.players.size; i++) {
-    if(distancesquared(org, level.players[i].origin) < var_74a76bbc5f12d7ea) {
+    if(distancesquared(org, level.players[i].origin) < fdistsquared) {
       return true;
     }
   }

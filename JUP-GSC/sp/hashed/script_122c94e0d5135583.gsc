@@ -52,7 +52,7 @@ function function_393baf20db478c0d() {
     playlist_name = getplaylistname();
   }
 
-  frame_duration = function_676cfe2ab64ea758();
+  frame_duration = getframeduration();
   onmatchbegin();
 
   if(level.gametype == "dungeons") {
@@ -160,7 +160,7 @@ function function_97f88f577c57665f() {
 }
 
 function on_player_spawned(player) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 
@@ -192,7 +192,7 @@ function on_player_spawned(player) {
 }
 
 function function_94bd96d6049d4686(data) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(data.player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(data.player)) {
     return;
   }
 
@@ -245,9 +245,9 @@ function function_6447f24addc0137e(data) {
   }
 
   if(level.teambased) {
-    var_8cc713ff16b24041 = int(player scripts\cp\rank::getteamrankxpmultiplier(player.team));
+    teamxpmodifier = int(player scripts\cp\rank::getteamrankxpmultiplier(player.team));
   } else {
-    var_8cc713ff16b24041 = 0;
+    teamxpmodifier = 0;
   }
 
   total_xp = 0;
@@ -337,11 +337,11 @@ function function_6447f24addc0137e(data) {
   means_of_end = var_8f87c853b986d24a;
 
   if(level.matchmakingmatch) {
-    var_196eccb3049e0c6a = "public";
+    matchtype = "public";
   } else if(level.onlinegame) {
-    var_196eccb3049e0c6a = "private";
+    matchtype = "private";
   } else {
-    var_196eccb3049e0c6a = "solo";
+    matchtype = "solo";
   }
 
   objective_type_on_death = namespace_de6e6777b0937bd7::get_objective_type();
@@ -360,7 +360,7 @@ function function_6447f24addc0137e(data) {
   }
 
   result_text = default_to(data.result, "");
-  player dlog_recordplayerevent("dlog_event_cp_player_match_end", ["utc_connect_time_s", var_7e01e835b5e9cb04, "utc_disconnect_time_s", getsystemtime(), "player_xp_modifier", int(player scripts\cp\rank::getrankxpmultiplier()), "team_xp_modifier", var_8cc713ff16b24041, "weapon_xp_modifier", int(player scripts\cp\cp_weaponrank::getweaponrankxpmultiplier()), "total_xp", total_xp, "score_xp", score_xp, "challenge_xp", challenge_xp, "match_xp", match_xp, "medal_xp", medal_xp, "bonus_xp", bonus_xp, "misc_xp", misc_xp, "rank", rank, "end_xp", end_xp, "end_time_played_total", end_time_played_total, "end_prestige", end_prestige, "disconnect_reason", var_8f87c853b986d24a, "average_speed_during_match", average_speed_during_match, "percent_time_moving", percent_time_moving, "result", result_text, "connected_time_s", connected_time_s, "essence", essence, "salvage", salvage, "means_of_end", means_of_end, "match_type", var_196eccb3049e0c6a, "objective_type_on_death", objective_type_on_death, "map", level.script, "active_objective", namespace_de6e6777b0937bd7::get_objective_type(), "player_count", level.players.size, "round", scripts\cp\utility::function_f0d6acf93c15bd59(), "connect_index", connect_index, "party_id", player getpartyid(), "playlist_id", int(playlist_id), "playlist_name", playlist_name]);
+  player dlog_recordplayerevent("dlog_event_cp_player_match_end", ["utc_connect_time_s", var_7e01e835b5e9cb04, "utc_disconnect_time_s", getsystemtime(), "player_xp_modifier", int(player scripts\cp\rank::getrankxpmultiplier()), "team_xp_modifier", teamxpmodifier, "weapon_xp_modifier", int(player scripts\cp\cp_weaponrank::getweaponrankxpmultiplier()), "total_xp", total_xp, "score_xp", score_xp, "challenge_xp", challenge_xp, "match_xp", match_xp, "medal_xp", medal_xp, "bonus_xp", bonus_xp, "misc_xp", misc_xp, "rank", rank, "end_xp", end_xp, "end_time_played_total", end_time_played_total, "end_prestige", end_prestige, "disconnect_reason", var_8f87c853b986d24a, "average_speed_during_match", average_speed_during_match, "percent_time_moving", percent_time_moving, "result", result_text, "connected_time_s", connected_time_s, "essence", essence, "salvage", salvage, "means_of_end", means_of_end, "match_type", matchtype, "objective_type_on_death", objective_type_on_death, "map", level.script, "active_objective", namespace_de6e6777b0937bd7::get_objective_type(), "player_count", level.players.size, "round", scripts\cp\utility::function_f0d6acf93c15bd59(), "connect_index", connect_index, "party_id", player getpartyid(), "playlist_id", int(playlist_id), "playlist_name", playlist_name]);
   function_8076b5556f48a6cd(player);
 }
 
@@ -369,7 +369,7 @@ function on_player_death(data) {
   victim = data.victim;
   weapon_string = data.weaponfullstring;
 
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(victim)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(victim)) {
     return;
   }
 
@@ -404,10 +404,10 @@ function on_player_death(data) {
   attacker_loadout_index = -1;
   attacker_death_modifiers = [];
 
-  if(namespace_de6e6777b0937bd7::function_892570944f6b6a2(attacker) || function_f639982ff796a722(attacker)) {
+  if(namespace_de6e6777b0937bd7::is_valid_client(attacker) || function_f639982ff796a722(attacker)) {
     attacker_weapon = getweaponbasename(weapon_string);
 
-    if(namespace_de6e6777b0937bd7::function_892570944f6b6a2(attacker)) {
+    if(namespace_de6e6777b0937bd7::is_valid_client(attacker)) {
       var_41fb323b39c88db5 = attacker;
     } else {
       var_41fb323b39c88db5 = undefined;
@@ -533,7 +533,7 @@ function on_player_death(data) {
   victim dlog_recordplayerevent("dlog_event_cp_life", ["attacker", var_41fb323b39c88db5, "spawn_time_from_match_start_ms", spawn_time_from_match_start_ms, "life_index", life_index, "spawn_evaluation_id", spawn_evaluation_id, "spawn_pos_x", spawn_pos[0], "spawn_pos_y", spawn_pos[1], "spawn_pos_z", spawn_pos[2], "team", victim.team, "is_host", victim ishost(), "was_tactical_insertion", was_tactical_insertion, "death_time_from_match_start_ms", death_time_from_match_start_ms, "victim_weapon", victim_weapon, "victim_weapon_attachments", victim_weapon_attachments, "attacker_weapon", attacker_weapon, "attacker_weapon_attachments", attacker_weapon_attachments, "victim_death_modifiers", victim_death_modifiers, "attacker_death_modifiers", attacker_death_modifiers, "death_pos_x", victim.origin[0], "death_pos_y", victim.origin[1], "death_pos_z", victim.origin[2], "death_angle_x", victim.angles[0], "death_angle_y", victim.angles[1], "death_angle_z", victim.angles[2], "attacker_pos_x", attacker_pos[0], "attacker_pos_y", attacker_pos[1], "attacker_pos_z", attacker_pos[2], "attacker_angle_x", attacker_angles[0], "attacker_angle_y", attacker_angles[1], "attacker_angle_z", attacker_angles[2], "means_of_death", means_of_death, "attacker_weapon_alt_mode", attacker_weapon_alt_mode, "attacker_weapon_picked_up", attacker_weapon_picked_up, "victim_weapon_alt_mode", victim_weapon_alt_mode, "victim_weapon_picked_up", victim_weapon_picked_up, "attacker_ads_value", attacker_ads_value, "victim_ads_value", victim_ads_value, "attacker_was_in_victim_fov", attacker_was_in_victim_fov, "victim_was_in_attacker_fov", victim_was_in_attacker_fov, "attacker_mount_type", attacker_mount_type, "victim_mount_type", victim_mount_type, "xp_earned", xp_earned, "score_earned", score_earned, "victim_loadout_index", victim_loadout_index, "attacker_life_index", attacker_life_index, "attacker_loadout_index", attacker_loadout_index, "victim_was_reloading", victim isreloading(), "victim_was_executing", victim isinexecutionattack(), "is_hipfire", is_hipfire, "attacker_shooting_mode", attacker_shooting_mode, "victim_shooting_mode", victim_shooting_mode, "first_damage_delivered_time_ms", first_damage_delivered_time_ms, "first_damage_received_time_ms", first_damage_received_time_ms, "map", level.mapname]);
   victim.pers["telemetry"].life.var_d8bae1f0e4d5e27e = life_index;
 
-  if(namespace_de6e6777b0937bd7::function_892570944f6b6a2(attacker)) {
+  if(namespace_de6e6777b0937bd7::is_valid_client(attacker)) {
     logtournamentdeath(victim getxuid(), attacker getxuid(), weapon_string, means_of_death == "MOD_HEAD_SHOT");
 
     if(isDefined(level.matchrecording_logevent)) {
@@ -548,7 +548,7 @@ function on_player_death(data) {
 }
 
 function function_8076b5556f48a6cd(player) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player) || scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player) || scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
     return;
   }
 
@@ -613,7 +613,7 @@ function update_armor_ammo_stats(data) {
     return;
   }
 
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(data.player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(data.player)) {
     return;
   }
 
@@ -687,7 +687,7 @@ function function_ac6b649326f4b17e(data) {
     return;
   }
 
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 
@@ -699,7 +699,7 @@ function function_ac6b649326f4b17e(data) {
   scoreevent = data.scoreevent;
 
   if(isxhash(scoreevent)) {
-    scoreevent = function_f28fd66285fa2c9(scoreevent);
+    scoreevent = getxhashhexname(scoreevent);
   }
 
   self dlog_recordplayerevent("dlog_event_cp_player_score_event", ["time_from_match_start_ms", timefrommatchstart, "score_event", scoreevent]);
@@ -709,7 +709,7 @@ function on_game_event(data) {
   eventplayer = undefined;
   lifeindex = -1;
 
-  if(isDefined(data.player) && namespace_de6e6777b0937bd7::function_892570944f6b6a2(data.player) && scripts\cp_mp\utility\game_utility::isgameparticipant(data.player)) {
+  if(isDefined(data.player) && namespace_de6e6777b0937bd7::is_valid_client(data.player) && scripts\cp_mp\utility\game_utility::isgameparticipant(data.player)) {
     eventplayer = data.player;
 
     if(isDefined(data.player.pers["telemetry"].life.life_index)) {
@@ -735,7 +735,7 @@ function on_player_award(data) {
   player = data.player;
   awardname = data.awardname;
 
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 

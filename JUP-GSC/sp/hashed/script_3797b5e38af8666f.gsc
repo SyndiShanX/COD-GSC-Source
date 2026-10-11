@@ -22,20 +22,20 @@ function initcap(asmname, statename, params) {
   }
 }
 
-function function_912821adbd16d04c() {}
+function cap_playturnanim() {}
 
-function function_e3189c04775f3a0f() {}
+function cap_chooseturnanim() {}
 
 function function_dc875c74aa7545f4(asmname, statename, params) {
-  if(!isDefined(self._blackboard.var_40a41c70824fa4c4)) {
-    self._blackboard.var_40a41c70824fa4c4 = "a";
+  if(!isDefined(self._blackboard.cowerstate)) {
+    self._blackboard.cowerstate = "a";
   }
 
-  if(self._blackboard.var_40a41c70824fa4c4 == "b") {
-    return function_a0dfeea159aa7f64(asmname, statename, "a_to_b");
+  if(self._blackboard.cowerstate == "b") {
+    return cap_chooseanim(asmname, statename, "a_to_b");
   }
 
-  return function_a0dfeea159aa7f64(asmname, statename, "b_to_a");
+  return cap_chooseanim(asmname, statename, "b_to_a");
 }
 
 function function_e9f61f14d08fcd61(asmname, statename, params) {
@@ -51,7 +51,7 @@ function function_6d55fddf9c7024e2(asmname, statename, params) {
     self forceteleport(self.origin, self.interaction_angles);
   }
 
-  function_59308d53cabcdfdb(asmname, statename, params);
+  cap_playanim(asmname, statename, params);
 }
 
 function function_56c32e6f7b6ed8ed(asmname, statename, params) {

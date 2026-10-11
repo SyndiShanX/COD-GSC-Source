@@ -225,7 +225,7 @@ function function_6eb8ca12ec6fc71(ladderstruct, arena) {
   while(true) {
     trigger waittill("trigger_enter", player);
 
-    if(!player function_9cc921a57ff4deb5()) {
+    if(!player isonascender()) {
       function_f320d154ca60c728(ladderstruct, player);
       thread function_cc61daea9bf5854c(arena, player);
     }

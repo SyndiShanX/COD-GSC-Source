@@ -156,8 +156,8 @@ function function_fe00122676a4c472() {
     println("<dev string:x58>" + level.var_6cbb7e30776f280e);
   }
 
-  foreach(teamname, var_70643c8580524236 in level.squaddata) {
-    foreach(squad in var_70643c8580524236) {
+  foreach(teamname, squadarray in level.squaddata) {
+    foreach(squad in squadarray) {
       if(squad.players.size > 0) {
         level thread function_809182c66f4e3922(teamname, squad.index);
         waitframe();
@@ -245,7 +245,7 @@ function function_82b06dfd59cced40(player) {
   player val::reset_all("ob_infil");
   player playershow(1);
   player lerpfovbypreset("default");
-  player function_af4b9b0f0e7c6c42(0);
+  player playerunlinkblend(0);
   player notify("screen_completely_black");
   player lerpfovscalefactor(1, 1);
   logstring("OB INFIL: Player " + player.name + " status of participating in cinematics after infil: [" + player function_3e2c0f85fe7ca957() + "] at time " + gettime());
@@ -288,8 +288,8 @@ function function_219ccd13654aeca0() {
   level thread function_b34e1f20415bda49(1);
   level thread function_30ce08f2e9b1715a(1);
 
-  foreach(teamname, var_70643c8580524236 in level.squaddata) {
-    foreach(squad in var_70643c8580524236) {
+  foreach(teamname, squadarray in level.squaddata) {
+    foreach(squad in squadarray) {
       if(squad.players.size > 0) {
         players = function_b896c581d1a39b24(teamname, squad.index);
         level thread function_7cec19ffa37cd482(players);
@@ -416,7 +416,7 @@ function function_b34e1f20415bda49(var_cdd0724a1b84bd90) {
   function_b03da05ad9547b7f(var_e8067a3d33f14df6.origin, var_e8067a3d33f14df6.angles, level.var_d8b57d2fd521c427, 1, 1, 1, 0);
 }
 
-function function_30ce08f2e9b1715a(var_cdd0724a1b84bd90, var_4254242e225c8fac, var_7ec747ab678812ae) {
+function function_30ce08f2e9b1715a(var_cdd0724a1b84bd90, var_4254242e225c8fac, customangles) {
   self endon("game_ended");
   flag_wait("ob_infil_squad_setup");
 
@@ -439,8 +439,8 @@ function function_30ce08f2e9b1715a(var_cdd0724a1b84bd90, var_4254242e225c8fac, v
     spawnpoint = var_2de6b144694b16ce.origin;
   }
 
-  if(isDefined(var_7ec747ab678812ae)) {
-    spawnangles = var_7ec747ab678812ae;
+  if(isDefined(customangles)) {
+    spawnangles = customangles;
   } else {
     spawnangles = var_2de6b144694b16ce.angles;
   }
@@ -826,18 +826,18 @@ function function_b60de1b748c7230f() {
 
   waitframe();
   fakeitem = spawnStruct();
-  var_d7732d0238eae9ff = 50;
+  max_stock_ammo = 50;
   item_entry = "ob_jup_item_weapon_ar_acharlie_blue";
   item_bundle = getscriptbundle("itemspawnentry:" + item_entry);
   item_scriptable = item_bundle.scriptable;
-  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(var_d7732d0238eae9ff);
+  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(max_stock_ammo);
   scripts\cp_mp\loot\common_item::function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
   fakeitem = spawnStruct();
-  var_d7732d0238eae9ff = 50;
+  max_stock_ammo = 50;
   item_entry = "ob_jup_item_weapon_sm_coscar635_blue";
   item_bundle = getscriptbundle("itemspawnentry:" + item_entry);
   item_scriptable = item_bundle.scriptable;
-  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(var_d7732d0238eae9ff);
+  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(max_stock_ammo);
   scripts\cp_mp\loot\common_item::function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
   wait 0.5;
   a_weapons = self getweaponslist("primary");
@@ -851,7 +851,7 @@ function function_b60de1b748c7230f() {
 
     waitframe();
     var_4bc27b790622bd85 = randomint(ammo_mods.size);
-    namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(a_weapons[i], ammo_mods[var_4bc27b790622bd85]);
+    namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(a_weapons[i], ammo_mods[var_4bc27b790622bd85]);
   }
 
   waitframe();

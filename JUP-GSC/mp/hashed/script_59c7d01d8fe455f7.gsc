@@ -15,7 +15,7 @@
 #using scripts\asm\shared\variant_asm;
 #using scripts\common\callbacks;
 #using scripts\engine\utility;
-#namespace namespace_50f6658a88689353;
+#namespace zombie_disciple_asm;
 
 function private function_f49a30f92555b827() {
   function_e763a1820edbfd28();
@@ -23,7 +23,7 @@ function private function_f49a30f92555b827() {
   function_3f12f7bb3b0f7b28();
   level.scr_anim[self.animname]["spawn"] = "spawn";
   level.scr_anim[self.animname]["spawn_fast"] = "spawn_fast";
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &on_move_speed_changed);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &on_move_speed_changed);
 }
 
 function function_f4d5b246417ef16a(asmname, statename, params) {

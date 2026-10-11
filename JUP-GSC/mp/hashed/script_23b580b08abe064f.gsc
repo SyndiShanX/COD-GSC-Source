@@ -292,7 +292,7 @@ function private function_23d7a8eb0f1925c9() {
         function_abc58c43845184a4();
       }
     } else if(!istrue(self.petting)) {
-      player = function_85340538f36a13f4();
+      player = move_to_player();
 
       if(isDefined(player)) {
         if(function_4789a6e283cc98dd(player)) {
@@ -306,7 +306,7 @@ function private function_23d7a8eb0f1925c9() {
   }
 }
 
-function private function_85340538f36a13f4() {
+function private move_to_player() {
   level endon("game_ended");
   self endon("death");
   self.var_f79f774d8b98ab5 = self._blackboard.movetype;
@@ -600,7 +600,7 @@ function function_87ddf2d17f5d6db2(dog, interact) {
   cinematic_ent = utility::spawn_model("tag_origin", dog gettagorigin("tag_player"), (0, 180, 0));
   cinematic_ent linkTo(dog, "tag_player", (0, 0, 0), (0, 180, 0));
   var_bb4c9aa220c64019 = vectorNormalize(dog.origin - self.origin);
-  nearbyai = function_143526130b12b2b6(dog.origin, 100);
+  nearbyai = getplayersandaiarrayinradius(dog.origin, 100);
 
   foreach(ai in nearbyai) {
     if(isPlayer(ai) && vectordot(vectorNormalize(ai.origin - self.origin), var_bb4c9aa220c64019) > 0.5 && ai != self) {

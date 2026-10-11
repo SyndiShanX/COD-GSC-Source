@@ -76,8 +76,8 @@ function function_80d68c9701e1aea5(data) {
 
         inrange = 1;
 
-        foreach(var_cadd946c5c39fbf7 in node.allnodes) {
-          dist = distance2dsquared(possiblenode.origin, var_cadd946c5c39fbf7.origin);
+        foreach(chosennode in node.allnodes) {
+          dist = distance2dsquared(possiblenode.origin, chosennode.origin);
 
           if(dist < level.var_6d6a6fcd9e67bc58.var_60a7f94f444a39bb || dist > level.var_6d6a6fcd9e67bc58.var_60c5fe5ca7547989) {
             inrange = 0;
@@ -95,8 +95,8 @@ function function_80d68c9701e1aea5(data) {
     if(node.allnodes.size == level.var_6d6a6fcd9e67bc58.numcaches) {
       nodegroups[nodegroups.size] = node;
 
-      foreach(var_cadd946c5c39fbf7 in node.allnodes) {
-        var_cadd946c5c39fbf7.picked = 1;
+      foreach(chosennode in node.allnodes) {
+        chosennode.picked = 1;
       }
     }
   }
@@ -634,7 +634,7 @@ function function_9a1fde02233cb33a() {
 
           if(isDefined(poi) && poi != "") {
             if(!isDefined(node.poi)) {
-              node.poi = scripts\mp\poi::function_6cc445c02b5effac(node.origin);
+              node.poi = scripts\mp\poi::poi_findpoioriginisin(node.origin);
             }
 
             if(node.poi == poi) {

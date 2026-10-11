@@ -67,7 +67,7 @@ function function_8e34d09c5e2fc0f2() {
     return;
   }
 
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     while(level.poi.size == 0) {
       waitframe();
     }
@@ -87,7 +87,7 @@ function function_8e34d09c5e2fc0f2() {
       }
 
       foreach(index, node in spawnnodes) {
-        if(isDefined(node.var_7643b53b09bbf1d5)) {
+        if(isDefined(node.spawnnodeid)) {
           continue;
         }
 
@@ -163,8 +163,8 @@ function function_6747838fa0463ab2(node, spawnnodes) {
       if(!array_contains(var_46f73294fb8b410c, thisnode)) {
         var_46f73294fb8b410c[var_46f73294fb8b410c.size] = thisnode;
         thisnode = function_a8c8d8521c0de967(thisnode, var_8bae1659c6ed57f9);
-        var_4a3b8372442841e5[var_4a3b8372442841e5.size] = thisnode.var_7643b53b09bbf1d5;
-        thisnode.var_4a3b8372442841e5 = [thisnode.var_7643b53b09bbf1d5];
+        var_4a3b8372442841e5[var_4a3b8372442841e5.size] = thisnode.spawnnodeid;
+        thisnode.var_4a3b8372442841e5 = [thisnode.spawnnodeid];
         var_8bae1659c6ed57f9++;
       }
     } else if(isDefined(thisnode.targetname)) {
@@ -219,7 +219,7 @@ function function_6747838fa0463ab2(node, spawnnodes) {
   package.pathnodes = array_combine_unique(package.pathnodes, allnodes);
 
   foreach(spawnnode in var_46f73294fb8b410c) {
-    package.spawnnodes[spawnnode.var_7643b53b09bbf1d5] = spawnnode;
+    package.spawnnodes[spawnnode.spawnnodeid] = spawnnode;
   }
 
   package.var_4a3b8372442841e5 = var_4a3b8372442841e5;
@@ -233,7 +233,7 @@ function function_64f41b179b2030cc(spawnnode) {
   while(var_428b0c825645a14b < allnodes.size) {
     node = allnodes[var_428b0c825645a14b];
     var_428b0c825645a14b++;
-    node.var_4a3b8372442841e5[node.var_4a3b8372442841e5.size] = spawnnode.var_7643b53b09bbf1d5;
+    node.var_4a3b8372442841e5[node.var_4a3b8372442841e5.size] = spawnnode.spawnnodeid;
 
     if(isDefined(node.target)) {
       childnodes = getStructArray(node.target, "targetname");
@@ -254,7 +254,7 @@ function function_64f41b179b2030cc(spawnnode) {
 
 function function_a8c8d8521c0de967(node, nodeid) {
   node.lastusedtime = 0;
-  node.var_7643b53b09bbf1d5 = nodeid;
+  node.spawnnodeid = nodeid;
   return node;
 }
 
@@ -262,9 +262,9 @@ function function_1172336a24a3fac0(reinforcevehicletype, reinforceorigin, poinam
   spawners = undefined;
   var_37a86a6d390bf8ec = [];
 
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     if(!isDefined(poiname)) {
-      poiname = scripts\mp\poi::function_6cc445c02b5effac(reinforceorigin);
+      poiname = scripts\mp\poi::poi_findpoioriginisin(reinforceorigin);
     }
 
     var_a829cd2e1f4ec42a = sortbydistance(level.poi[poiname]["groundReinforceStruct"].unloadnodes, reinforceorigin);
@@ -294,7 +294,7 @@ function function_1172336a24a3fac0(reinforcevehicletype, reinforceorigin, poinam
 }
 
 function function_3f36fce913f23b19(var_e710a9290407911b, poiname) {
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     foreach(unloadnode in var_e710a9290407911b) {
       package = level.poi[poiname]["groundReinforceStruct"].var_e45aa5237f84ce6f[unloadnode.packageid];
       var_fd5ea9cb37c309d3 = [];
@@ -307,7 +307,7 @@ function function_3f36fce913f23b19(var_e710a9290407911b, poiname) {
 
       if(function_a794fcf9545f2062()) {
         foreach(spawnloc in var_fd5ea9cb37c309d3) {
-          players = function_b1eef70090b5b7b5(spawnloc.origin, level.var_25de264ee4d0e7aa, function_869ccb4e3451b8c6(["etype_player"]), [], undefined);
+          players = getentitiesinradiusfrompartitiongrid(spawnloc.origin, level.var_25de264ee4d0e7aa, createentitytypemask(["etype_player"]), [], undefined);
 
           if(isDefined(players) && players.size > 0) {
             continue;
@@ -342,9 +342,9 @@ function function_3f36fce913f23b19(var_e710a9290407911b, poiname) {
 }
 
 function function_c277806325266d3c(unloadnode, spawnnode, poiname) {
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     if(!isDefined(poiname)) {
-      poiname = scripts\mp\poi::function_6cc445c02b5effac(unloadnode.origin);
+      poiname = scripts\mp\poi::poi_findpoioriginisin(unloadnode.origin);
     }
 
     package = level.poi[poiname]["groundReinforceStruct"].var_e45aa5237f84ce6f[unloadnode.packageid];
@@ -360,7 +360,7 @@ function function_c277806325266d3c(unloadnode, spawnnode, poiname) {
       potentialnodes = [];
 
       foreach(node in currentnode.prev) {
-        if(array_contains(node.var_4a3b8372442841e5, spawnnode.var_7643b53b09bbf1d5)) {
+        if(array_contains(node.var_4a3b8372442841e5, spawnnode.spawnnodeid)) {
           potentialnodes[potentialnodes.size] = node;
         }
       }
@@ -383,15 +383,15 @@ function function_c277806325266d3c(unloadnode, spawnnode, poiname) {
   return origins;
 }
 
-function function_96a6b09d8ce2a773(node, var_7643b53b09bbf1d5, package) {
+function function_96a6b09d8ce2a773(node, spawnnodeid, package) {
   potentialnodes = getStructArray(node.targetname, "target");
 
   foreach(potentialnode in potentialnodes) {
-    if(isDefined(potentialnode.var_7643b53b09bbf1d5) && potentialnode.var_7643b53b09bbf1d5 == var_7643b53b09bbf1d5) {
+    if(isDefined(potentialnode.spawnnodeid) && potentialnode.spawnnodeid == spawnnodeid) {
       return potentialnode;
     }
 
-    if(isDefined(potentialnode.var_4a3b8372442841e5) && array_contains(potentialnode.var_4a3b8372442841e5, var_7643b53b09bbf1d5)) {
+    if(isDefined(potentialnode.var_4a3b8372442841e5) && array_contains(potentialnode.var_4a3b8372442841e5, spawnnodeid)) {
       potentialnodes[potentialnodes.size] = potentialnode;
     }
   }
@@ -424,10 +424,10 @@ function function_a5b0665e0a814be6(numagents, var_ec862c2c00c7ab5d, reinforceori
   }
 
   if(!isDefined(poiname)) {
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(reinforceorigin);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(reinforceorigin);
   }
 
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     if(!isDefined(level.poi[poiname]) || !isDefined(level.poi[poiname]["groundReinforceStruct"]) || level.poi[poiname]["groundReinforceStruct"].var_e45aa5237f84ce6f.size == 0) {
       return [undefined, undefined];
     }
@@ -474,10 +474,10 @@ function function_a5b0665e0a814be6(numagents, var_ec862c2c00c7ab5d, reinforceori
   spawndata.spawntype = "GROUND_REINFORCE";
   spawndata.showheadicon = 1;
   spawndata.initai = 1;
-  var_14cde247ac3313a4 = function_55dace275f65d5b6(reinforcevehicletype);
+  skinoverride = function_55dace275f65d5b6(reinforcevehicletype);
 
-  if(isDefined(var_14cde247ac3313a4)) {
-    spawndata.var_14cde247ac3313a4 = var_14cde247ac3313a4;
+  if(isDefined(skinoverride)) {
+    spawndata.skinoverride = skinoverride;
   }
 
   faildata = spawnStruct();
@@ -637,18 +637,18 @@ function function_95e274db21433c2b() {
 
   if(issubstr(self.classname_mp, "cargo")) {
     namespace_9246f10206f50768::function_1da2c31423c2676a();
-    self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
-    self function_77320e794d35465a("p2p", "goalThreshold", level.var_fcb29aee3f6eab0d * 4);
-    self function_77320e794d35465a("p2p", "steeringMultiplier", 2.5);
-    self function_77320e794d35465a("p2p", "stuckTime", 1);
-    self function_77320e794d35465a("p2p", "manualSpeed", veh_speed);
+    self setconfigvalue("p2p", "brakeAtGoal", 1);
+    self setconfigvalue("p2p", "goalThreshold", level.var_fcb29aee3f6eab0d * 4);
+    self setconfigvalue("p2p", "steeringMultiplier", 2.5);
+    self setconfigvalue("p2p", "stuckTime", 1);
+    self setconfigvalue("p2p", "manualSpeed", veh_speed);
   } else {
     namespace_9246f10206f50768::function_1da2c31423c2676a();
-    self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
-    self function_77320e794d35465a("p2p", "goalThreshold", level.var_fcb29aee3f6eab0d * 4);
-    self function_77320e794d35465a("p2p", "steeringMultiplier", 2.5);
-    self function_77320e794d35465a("p2p", "stuckTime", 1);
-    self function_77320e794d35465a("p2p", "manualSpeed", veh_speed);
+    self setconfigvalue("p2p", "brakeAtGoal", 1);
+    self setconfigvalue("p2p", "goalThreshold", level.var_fcb29aee3f6eab0d * 4);
+    self setconfigvalue("p2p", "steeringMultiplier", 2.5);
+    self setconfigvalue("p2p", "stuckTime", 1);
+    self setconfigvalue("p2p", "manualSpeed", veh_speed);
   }
 
   self.var_9acfc0bd86b2e2c1 = &namespace_9246f10206f50768::fn_damagefeedback;
@@ -680,7 +680,7 @@ function function_95e274db21433c2b() {
     }
 
     if(self.vehiclepathorigins.size == 1) {
-      self function_77320e794d35465a("p2p", "goalThreshold", level.var_fcb29aee3f6eab0d * 4);
+      self setconfigvalue("p2p", "goalThreshold", level.var_fcb29aee3f6eab0d * 4);
     }
 
     namespace_9246f10206f50768::function_28991b23dba743d8(currenttargetorigin);
@@ -860,7 +860,7 @@ function function_9b7d54ce89689d91() {
       waitframe();
     }
 
-    [vehicle, agents] = namespace_43bf74a2ee9234c0::function_a5b0665e0a814be6(getdvarint(@ "hash_59530b43705e341f", 0), ["<dev string:xa0>", "<dev string:xa6>", "<dev string:xad>", "<dev string:xb8>"], level.players[0].origin, "<dev string:xbf>", "<dev string:xc7>", "<dev string:xd9>", undefined, undefined, 1, scripts\mp\poi::function_6cc445c02b5effac(level.players[0].origin));
+    [vehicle, agents] = namespace_43bf74a2ee9234c0::function_a5b0665e0a814be6(getdvarint(@ "hash_59530b43705e341f", 0), ["<dev string:xa0>", "<dev string:xa6>", "<dev string:xad>", "<dev string:xb8>"], level.players[0].origin, "<dev string:xbf>", "<dev string:xc7>", "<dev string:xd9>", undefined, undefined, 1, scripts\mp\poi::poi_findpoioriginisin(level.players[0].origin));
     setDvar(@ "hash_59530b43705e341f", 0);
   }
 }
@@ -868,13 +868,13 @@ function function_9b7d54ce89689d91() {
 function function_389a8c0032be2508() {
   while(true) {
     if(getdvarint(@ "hash_34414e279fdbc0a1", 0) == 1) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         foreach(poiname, poi in level.poi) {
           foreach(package in level.poi[poiname]["<dev string:xe2>"].var_e45aa5237f84ce6f) {
             level thread function_956e403f85aab2f7(package);
 
             foreach(spawnnode in package.spawnnodes) {
-              print3d(spawnnode.origin + (0, 0, 128), "<dev string:xfb>" + spawnnode.var_7643b53b09bbf1d5, (1, 1, 1), 1, 3, 20);
+              print3d(spawnnode.origin + (0, 0, 128), "<dev string:xfb>" + spawnnode.spawnnodeid, (1, 1, 1), 1, 3, 20);
             }
 
             foreach(pathnode in package.pathnodes) {

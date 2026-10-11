@@ -21,7 +21,7 @@
 
 function soldier_init_common() {
   scripts\common\cap::init_cap();
-  self.var_d318c0abaf5b25e = 0;
+  self.disablecoveringfire = 0;
   self.var_6a2525ae2b942b46 = 1.5;
   self function_8bbcaeb23a1512ef("all", 1, "bt");
 }
@@ -43,10 +43,10 @@ function function_33ef051afbf024e2(guy) {
     selfspeed *= -1;
   }
 
-  var_e1d42175c57e7465 = [];
-  var_e1d42175c57e7465[0] = (-50, 0, -10);
+  vehiclejumpoffsets = [];
+  vehiclejumpoffsets[0] = (-50, 0, -10);
 
-  foreach(offsetdata in var_e1d42175c57e7465) {
+  foreach(offsetdata in vehiclejumpoffsets) {
     forwardvector = forward * offsetdata[0];
     leftvector = left * offsetdata[1];
     upvector = up * offsetdata[2];
@@ -78,7 +78,7 @@ function vehiclejump(taskid) {
 
   player_vehicle = level.player.veh;
 
-  if(isDefined(player_vehicle.var_b0c6c07e072eaade)) {
+  if(isDefined(player_vehicle.jumperrider)) {
     return anim.failure;
   }
 
@@ -102,9 +102,9 @@ function vehiclejump(taskid) {
     return anim.failure;
   }
 
-  var_52fc5266dce0c05b = player_vehicle.vehicleanimalias;
-  var_90549d1e920415d4 = string(2);
-  animresult = archetypegetrandomalias(var_52fc5266dce0c05b, "vehicle_jumper_get_up", var_90549d1e920415d4, asm_isfrantic());
+  jumptoarcname = player_vehicle.vehicleanimalias;
+  jumptoalias = string(2);
+  animresult = archetypegetrandomalias(jumptoarcname, "vehicle_jumper_get_up", jumptoalias, asm_isfrantic());
 
   if(!isDefined(animresult)) {
     return anim.failure;
@@ -163,9 +163,9 @@ function vehiclejump(taskid) {
 
   foreach(rider in vehicle.riders) {
     if(self != rider) {
-      var_4f75be2d248978d3 = vehicle.health < 25;
+      drivercanjump = vehicle.health < 25;
 
-      if(rider.vehicle_position != 0 || var_4f75be2d248978d3) {
+      if(rider.vehicle_position != 0 || drivercanjump) {
         if(distancesquared(jumpdata.point, rider.origin) < var_195256e3fcc08d9a) {
           return anim.failure;
         }
@@ -183,14 +183,14 @@ function vehiclejump(taskid) {
   }
 
   self.jumpdata = jumpdata;
-  player_vehicle.var_b0c6c07e072eaade = self;
+  player_vehicle.jumperrider = self;
   level.var_e9c7f2ae8af2293b = gettime() + 20000;
   scripts\common\cap::cap_start("vehicle_jumper", player_vehicle.vehicleanimalias);
   vehicle.riders = array_remove(vehicle.riders, self);
   return anim.success;
 }
 
-function function_a38ad5564fcafc54(taskid) {
+function vehiclemaymelee(taskid) {
   vehicle = self._blackboard.currentvehicle;
 
   if(!isDefined(vehicle)) {
@@ -200,7 +200,7 @@ function function_a38ad5564fcafc54(taskid) {
   pos = self._blackboard.var_9176cae5619d7fba;
   aianims = scripts\common\vehicle_aianim::anim_pos(vehicle, pos);
 
-  if(!istrue(aianims.var_a06d61eb83f02f4)) {
+  if(!istrue(aianims.canmeleeinvehicle)) {
     return anim.failure;
   }
 
@@ -213,18 +213,18 @@ function updateeveryframe_noncombat(taskid) {
 
   if(isDefined(whizbyevent)) {
     if(!self.disablebulletwhizbyreaction) {
-      var_34a49a1027e86ac0 = whizbyevent[0];
-      enemynear = isDefined(var_34a49a1027e86ac0) && distancesquared(self.origin, var_34a49a1027e86ac0.origin) < 160000;
+      whizbyenemy = whizbyevent[0];
+      enemynear = isDefined(whizbyenemy) && distancesquared(self.origin, whizbyenemy.origin) < 160000;
 
       if(enemynear || cointoss()) {
-        self._blackboard.var_9f7c458052d2c805 = gettime() - 50;
+        self._blackboard.whizbyeventtime = gettime() - 50;
       }
     }
   } else {
     var_4b4adf39cfe6c5af = 100;
 
-    if(isDefined(self._blackboard.var_9f7c458052d2c805) && gettime() > self._blackboard.var_9f7c458052d2c805 + var_4b4adf39cfe6c5af) {
-      self._blackboard.var_9f7c458052d2c805 = undefined;
+    if(isDefined(self._blackboard.whizbyeventtime) && gettime() > self._blackboard.whizbyeventtime + var_4b4adf39cfe6c5af) {
+      self._blackboard.whizbyeventtime = undefined;
     }
   }
 
@@ -283,15 +283,15 @@ function mayshoot(task) {
     return anim.failure;
   }
 
-  var_9578a7ed2d4e36ed = shouldshoot();
+  bshouldshoot = shouldshoot();
 
-  if(var_9578a7ed2d4e36ed) {
-    var_9578a7ed2d4e36ed = calcgoodshootpos();
+  if(bshouldshoot) {
+    bshouldshoot = calcgoodshootpos();
   } else {
     self.goodshootpos = undefined;
   }
 
-  if(!var_9578a7ed2d4e36ed) {
+  if(!bshouldshoot) {
     return anim.failure;
   }
 
@@ -315,7 +315,7 @@ function shoot_enableconvergence() {
 }
 
 function isaimedataimtarget() {
-  return isDefined(self.var_a709fbd9fea148f6) && self aimedataimtarget();
+  return isDefined(self.asmtrackasm) && self aimedataimtarget();
 }
 
 function hasatleastammo(threshold) {
@@ -392,13 +392,13 @@ function calcgoodshootpos() {
     }
   }
 
-  var_9578a7ed2d4e36ed = cansuppressenemy();
+  bshouldshoot = cansuppressenemy();
 
-  if(!var_9578a7ed2d4e36ed && getdvarint(@ "hash_3493aa8adc34457e", 0)) {
+  if(!bshouldshoot && getdvarint(@ "hash_3493aa8adc34457e", 0)) {
     print3d(self.origin - (0, 0, 12), "<dev string:x3c>", (1, 0, 0), 1, 0.75);
   }
 
-  return var_9578a7ed2d4e36ed;
+  return bshouldshoot;
 }
 
 function isenemyinlowcover(taskid) {

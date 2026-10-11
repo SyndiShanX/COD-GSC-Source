@@ -575,7 +575,7 @@ function objective_unpin_team(objid, team) {
 
 function private function_781844c0c05b5ac7() {
   if(issharedfuncdefined("super_capture_bot", "captureBot_isGrenadeEntity")) {
-    return function_f3bb4f4911a1beb2("super_capture_bot", "captureBot_isGrenadeEntity");
+    return callsharedfunc("super_capture_bot", "captureBot_isGrenadeEntity");
   }
 
   return 0;
@@ -614,7 +614,7 @@ function function_7299a742781a5030(state, player) {
     return;
   }
 
-  function_d1b64c3d055ceeb0(state, player);
+  objective_setshowpinnedprogressbar(state, player);
 }
 
 function function_8f7a55bda12ebb21(text, player) {
@@ -622,7 +622,7 @@ function function_8f7a55bda12ebb21(text, player) {
     return;
   }
 
-  function_8b71eb96e1636edc(text, player);
+  objective_setpinnedprogressbartext(text, player);
 }
 
 function objective_show_team_progress(objid, team) {

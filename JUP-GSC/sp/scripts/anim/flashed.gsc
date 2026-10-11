@@ -45,9 +45,9 @@ function main() {
   self endon("death");
   self endon("killanimscript");
   scripts\anim\utility::initialize("flashed");
-  var_a0c6a76ddd33b815 = flashbanggettimeleftsec();
+  flashduration = flashbanggettimeleftsec();
 
-  if(var_a0c6a76ddd33b815 <= 0) {
+  if(flashduration <= 0) {
     return;
   }
 
@@ -59,7 +59,7 @@ function main() {
   }
 
   animation = getnextflashanim();
-  flashbangedloop(animation, var_a0c6a76ddd33b815);
+  flashbangedloop(animation, flashduration);
 }
 
 function flashbangedloop(animation, duration) {

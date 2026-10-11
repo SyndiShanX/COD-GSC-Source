@@ -69,8 +69,8 @@ function private function_667a1af25742dded(grenade) {
   grenade endon("death");
   grenade thread monitor_timeout();
   grenade waittill("missile_stuck", hitent);
-  var_f45ac1215b82c32c = isDefined(hitent) && hitent vehicle::isvehicle();
-  grenade.update_time = var_f45ac1215b82c32c ? 0.1 : 0.5;
+  is_on_vehicle = isDefined(hitent) && hitent vehicle::isvehicle();
+  grenade.update_time = is_on_vehicle ? 0.1 : 0.5;
 
   while(true) {
     navmesh_point = grenade function_72269ee58c0811da();
@@ -80,8 +80,8 @@ function private function_667a1af25742dded(grenade) {
     }
 
     if(!isDefined(grenade.vortex_struct)) {
-      grenade.vortex_struct = grenade start_timed_vortex(navmesh_point, 60, 1000, 275, 10, 32, !var_f45ac1215b82c32c);
-      grenade thread function_b24870401644121d(navmesh_point, !var_f45ac1215b82c32c);
+      grenade.vortex_struct = grenade start_timed_vortex(navmesh_point, 60, 1000, 275, 10, 32, !is_on_vehicle);
+      grenade thread function_b24870401644121d(navmesh_point, !is_on_vehicle);
       grenade thread function_d0c0afca2d602641();
     } else {
       grenade.vortex_struct.navmesh_origin = navmesh_point;
@@ -132,7 +132,7 @@ function private end_vortex() {
     self.vortex_struct notify("vortex_implode");
   }
 
-  function_ad9433aab9fcdf04(1.2, "death", &delete);
+  delaycallendon(1.2, "death", &delete);
 }
 
 function private monitor_timeout() {
@@ -164,7 +164,7 @@ function private start_pull(pull_origin, death_range, vortex_center) {
   self._blackboard.vortexpullorigin = pull_origin;
   self._blackboard.var_7b401f435e1b9e8a = death_range;
   self._blackboard.vortexmode = "blackhole";
-  self._blackboard.var_f65c4810e7a7571f = 1;
+  self._blackboard.vortexispulled = 1;
   val::set("blackhole", "ignore_ai_collision");
   val::set("blackhole", "disallow_knockdown");
   val::set("blackhole", "disallow_stun");
@@ -190,7 +190,7 @@ function private start_pull(pull_origin, death_range, vortex_center) {
 
 function private end_pull() {
   self._blackboard.vortexmode = "";
-  self._blackboard.var_f65c4810e7a7571f = 0;
+  self._blackboard.vortexispulled = 0;
   val::reset_all("blackhole");
   cached_weapon = self.var_3e0aca101aac496a;
   self.var_3e0aca101aac496a = undefined;
@@ -209,11 +209,11 @@ function private end_pull() {
   self.do_immediate_ragdoll = undefined;
 }
 
-function function_6a0fdda07c1ebbf7(vortex_struct, var_89d9e69374754848) {
+function function_6a0fdda07c1ebbf7(vortex_struct, is_pulled) {
   assert(isagent(self));
 
-  if(var_89d9e69374754848) {
-    if(!istrue(self._blackboard.var_f65c4810e7a7571f)) {
+  if(is_pulled) {
+    if(!istrue(self._blackboard.vortexispulled)) {
       start_pull(vortex_struct.navmesh_origin, vortex_struct.death_range, vortex_struct.vortex_center);
       vortex_struct.var_406f669bc3bfad72[vortex_struct.var_406f669bc3bfad72.size] = self;
     } else {
@@ -223,7 +223,7 @@ function function_6a0fdda07c1ebbf7(vortex_struct, var_89d9e69374754848) {
     return;
   }
 
-  if(istrue(self._blackboard.var_f65c4810e7a7571f)) {
+  if(istrue(self._blackboard.vortexispulled)) {
     end_pull();
     vortex_struct.var_406f669bc3bfad72 = array_remove(vortex_struct.var_406f669bc3bfad72, self);
   }
@@ -252,13 +252,13 @@ function function_81e9889140d42fa9(vortex_struct, damage_ratio) {
   }
 }
 
-function private pull_zombie(zombie, var_89d9e69374754848) {
+function private pull_zombie(zombie, is_pulled) {
   if(!istrue(zombie.var_7e3144ab69fefa03)) {
     return;
   }
 
   if(istrue(zombie.var_46ff71d1aa27d2ed)) {
-    zombie thread function_6a0fdda07c1ebbf7(self, var_89d9e69374754848);
+    zombie thread function_6a0fdda07c1ebbf7(self, is_pulled);
   }
 }
 
@@ -297,12 +297,12 @@ function private damage_zombie(zombie) {
   zombie function_81e9889140d42fa9(self, var_4e4fede326974d47);
 }
 
-function private pull_soldier(soldier, var_89d9e69374754848) {
+function private pull_soldier(soldier, is_pulled) {
   if(soldier ai::is_warlord()) {
     return;
   }
 
-  soldier thread function_6a0fdda07c1ebbf7(self, var_89d9e69374754848);
+  soldier thread function_6a0fdda07c1ebbf7(self, is_pulled);
 }
 
 function private damage_soldier(soldier) {
@@ -336,16 +336,16 @@ function private function_75fc5c709c8b261e() {
       }
 
       agent_center = agent getcentroid();
-      var_89d9e69374754848 = sighttracepassed(self.vortex_center, agent_center, 0, agent, undefined, 1);
+      is_pulled = sighttracepassed(self.vortex_center, agent_center, 0, agent, undefined, 1);
 
       if(getdvarint(@ "hash_679e2a774cf4d25f", 0)) {
-        line(self.vortex_center, agent_center, var_89d9e69374754848 ? (0, 1, 0) : (1, 0, 0));
+        line(self.vortex_center, agent_center, is_pulled ? (0, 1, 0) : (1, 0, 0));
       }
 
       pull_func = level.var_603671ff1b339327["pull"][agent.unittype];
 
       if(isDefined(pull_func)) {
-        self[[pull_func]](agent, var_89d9e69374754848);
+        self[[pull_func]](agent, is_pulled);
       }
 
       var_37f45f290c89b71++;
@@ -466,11 +466,11 @@ function private spawn_vortex() {
 
   if(isDefined(self.grenade)) {
     self.grenade radiusdamage(self.vortex_center, 300, 500, 250, default_to(self.grenade.owner, self.grenade), "MOD_EXPLOSIVE", self.grenade.weapon_object);
-    self.grenade function_ad9433aab9fcdf04(1, "death", &delete);
+    self.grenade delaycallendon(1, "death", &delete);
   }
 
   if(isDefined(self.vortex)) {
-    self.vortex function_ad9433aab9fcdf04(1, "death", &freescriptable);
+    self.vortex delaycallendon(1, "death", &freescriptable);
   }
 }
 
@@ -569,7 +569,7 @@ function private function_c0f1f631332882f1() {
 }
 
 function private can_teleport() {
-  return !self function_9cc921a57ff4deb5() && !self isonladder() && !self ismantling() && !isDefined(self.vehicle);
+  return !self isonascender() && !self isonladder() && !self ismantling() && !isDefined(self.vehicle);
 }
 
 function private function_3ba1ab88f5ad866e() {
@@ -578,7 +578,7 @@ function private function_3ba1ab88f5ad866e() {
   while(true) {
     throttle::function_f632348cbb773537(level.var_13c65b7115437d69, self);
     portal_center = self.anchor function_804aa4597eb3df2c(self.center_height);
-    self.nearby_players = namespace_2b1145f62aa835b8::function_883458a342af3041(portal_center, 512);
+    self.nearby_players = namespace_2b1145f62aa835b8::getplayersinradiussharedfunc(portal_center, 512);
 
     if(getdvarint(@ "hash_888c38619e0ec63a", 0)) {
       duration = int(0.5 / level.framedurationseconds);
@@ -599,7 +599,7 @@ function private function_6f3e2351189e02d1(player) {
       continue;
     }
 
-    if(function_73f2baa01fa2b921(exit_point, player.team)) {
+    if(ispointinoutofboundssharedfunc(exit_point, player.team)) {
       continue;
     }
 
@@ -610,7 +610,7 @@ function private function_6f3e2351189e02d1(player) {
     }
 
     fallback_exits[1] = exit_point;
-    var_ff2bba10be6a1a4 = function_143526130b12b2b6(exit_point, 250);
+    var_ff2bba10be6a1a4 = getplayersandaiarrayinradius(exit_point, 250);
     var_15d5106746811361 = 1;
 
     foreach(var_fc5a23eb91083583 in var_ff2bba10be6a1a4) {
@@ -708,7 +708,7 @@ function function_e15ef6f504e18e4c(exit_point) {
 function private function_2d1de451f4f1ff6f(exit_point, portal_offset) {
   self endon("death");
   portal = spawnscriptable("equip_blackhole_bomb_portal_exit", exit_point);
-  portal function_ad9433aab9fcdf04(5, "death", &freescriptable);
+  portal delaycallendon(5, "death", &freescriptable);
   destination = exit_point + portal_offset;
   val::set("blackhole_teleport", "freezecontrols", 1);
   val::set("blackhole_teleport", "offhand_weapons", 0);
@@ -754,7 +754,7 @@ function private teleport_players() {
       }
 
       player ent_flag_set("blackhole_teleporting");
-      var_fed4ffe90e980298 = function_f3bb4f4911a1beb2("blackhole_bomb", "override_teleport", player);
+      var_fed4ffe90e980298 = callsharedfunc("blackhole_bomb", "override_teleport", player);
 
       if(!istrue(var_fed4ffe90e980298)) {
         exit_point = function_6f3e2351189e02d1(player);

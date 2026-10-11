@@ -309,28 +309,28 @@ function function_2529487ea7a39317() {
   }
 }
 
-function function_cba960b48c4b1e3c(splashref, contractindex, rewardcash, team, delay, var_42b1e877ab187c6) {
+function function_cba960b48c4b1e3c(splashref, contractindex, rewardcash, team, delay, splashlistoverride) {
   if(isDefined(self.var_e826485c32ad0d74) && !array_contains(self.var_e826485c32ad0d74, splashref)) {
     return;
   }
 
-  function_878ebcc241b54505(splashref, contractindex, rewardcash, team, delay, var_42b1e877ab187c6);
+  function_878ebcc241b54505(splashref, contractindex, rewardcash, team, delay, splashlistoverride);
 }
 
-function function_6a5270845ce88f1e(team, splash_key, params, var_42b1e877ab187c6) {
+function function_6a5270845ce88f1e(team, splash_key, params, splashlistoverride) {
   if(isDefined(self.var_e826485c32ad0d74) && !array_contains(self.var_e826485c32ad0d74, splash_key)) {
     return;
   }
 
-  displayteamsplash(team, splash_key, params, var_42b1e877ab187c6);
+  displayteamsplash(team, splash_key, params, splashlistoverride);
 }
 
-function function_70eb08dc68820a5a(player, splash_key, params, var_42b1e877ab187c6) {
+function function_70eb08dc68820a5a(player, splash_key, params, splashlistoverride) {
   if(isDefined(self.var_e826485c32ad0d74) && !array_contains(self.var_e826485c32ad0d74, splash_key)) {
     return;
   }
 
-  displayplayersplash(player, splash_key, params, var_42b1e877ab187c6);
+  displayplayersplash(player, splash_key, params, splashlistoverride);
 }
 
 function function_ca07a6ca5c3c8af5(player) {
@@ -527,7 +527,7 @@ function function_7b16ac880855a705() {
 
 function function_68046efe0486e9b(contract, instance, team) {
   contractref = "assassination";
-  var_e0ba724f5f288ca0 = "mission_ass_success";
+  dialogsuccess = "mission_ass_success";
   splash = "br_assassination_complete_hunters_win";
   rewardgroup = "assassin_target_killed";
   var_35e7111354d3bd3b = undefined;
@@ -536,7 +536,7 @@ function function_68046efe0486e9b(contract, instance, team) {
 
   if(function_2755c7f527cf8d2()) {
     contractref = "master_" + "assassination";
-    var_e0ba724f5f288ca0 = "mission_master_ass_success";
+    dialogsuccess = "mission_master_ass_success";
   }
 
   var_bcaa72907e20ad94 = contract.targetplayer.lastkilledby;
@@ -593,7 +593,7 @@ function function_68046efe0486e9b(contract, instance, team) {
   }
 
   if(!scripts\mp\gametypes\br_public::function_d6ae35e0ce14bbaf() && !istrue(level.var_7e12f6eb4fcb4ea1.var_2ef19bc785de8e88)) {
-    level thread scripts\mp\gametypes\br_public::brleaderdialogteam(var_e0ba724f5f288ca0, hunterteam, 1, 2);
+    level thread scripts\mp\gametypes\br_public::brleaderdialogteam(dialogsuccess, hunterteam, 1, 2);
   }
 
   contract thread function_ac21667e0f251104(1, rewards, endstate);
@@ -1402,7 +1402,7 @@ function function_210be3d9455cfb83(hunter, victim) {
   level endon("game_ended");
   var_b608af6e8d86fe42 = 0;
 
-  if(isDefined(hunter) && hunter namespace_53fc9ddbb516e6e1::function_87072b42853a9c58("specialty_uav_buff")) {
+  if(isDefined(hunter) && hunter namespace_53fc9ddbb516e6e1::hasperksharedfunc("specialty_uav_buff")) {
     var_b608af6e8d86fe42 = 1;
   }
 

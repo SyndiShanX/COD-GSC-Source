@@ -9,10 +9,10 @@ function main() {
   thread sfx_security_clearance("sfx_security_clearance", "amb_emt_dubai_security_clearance", 3);
 }
 
-function sfx_security_clearance(var_eaad182af1b91884, alias, timer) {
+function sfx_security_clearance(trigname, alias, timer) {
   level endon("game_ended");
   level waittill("matchStartTimer_done");
-  trig = getEnt(var_eaad182af1b91884, "targetname");
+  trig = getEnt(trigname, "targetname");
 
   while(true) {
     trig waittill("trigger");

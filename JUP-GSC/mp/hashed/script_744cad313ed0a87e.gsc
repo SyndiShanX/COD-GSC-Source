@@ -60,7 +60,7 @@ function init() {
   level.var_f45f69ff57434c35 = getdvarint(@ "hash_89b383cbd3e0b74f", 0);
   level.var_b25f34fe30b345d6 = getdvarint(@ "hash_c9b74ec39ec8ea00", 1);
   level.var_53f26aece124345a = getdvarint(@ "hash_f63f442574298198", 1);
-  level.var_216890f92cb91c6e = function_ee26a62ef3d1372d(@ "hash_4e23a23e5741d450", 5000, var_f21aee017029a303.var_71aad4b69e48d695);
+  level.var_216890f92cb91c6e = function_ee26a62ef3d1372d(@ "hash_4e23a23e5741d450", 5000, var_f21aee017029a303.uavpingradius);
   level.var_313687786f342b97 = getdvarint(@ "hash_6f77a6f42b116ea5", 1);
   level.var_9876d350e8206107 = getdvarint(@ "hash_ab03e9221c1e794d", 1);
   level.var_8484c417e9016033 = getdvarint(@ "hash_f9d5124be749fbdd", 0);
@@ -259,7 +259,7 @@ function function_401ab3dde070adde() {
     poiname = undefined;
 
     if(isDefined(zonename)) {
-      poiname = scripts\mp\poi::function_6cc445c02b5effac(zonebounds.midpoint, 1);
+      poiname = scripts\mp\poi::poi_findpoioriginisin(zonebounds.midpoint, 1);
 
       if(isDefined(level.var_ab20b3a256911579) && array_contains(level.var_ab20b3a256911579, poiname)) {
         continue;
@@ -916,30 +916,30 @@ function function_1e0c0f3914e139ea(cleanup) {
   }
 }
 
-function function_94a7b2d653c87e13(var_8e90fa6d5789ad63, value, bitoffset, bitwidth, breset) {
+function function_94a7b2d653c87e13(omnvarref, value, bitoffset, bitwidth, breset) {
   player = self;
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (value &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
-  prevvalue = self getclientomnvar(var_8e90fa6d5789ad63);
+  invertedmask = ~(mask << bitoffset);
+  prevvalue = self getclientomnvar(omnvarref);
 
   if(istrue(breset)) {
-    self setclientomnvar(var_8e90fa6d5789ad63, var_a463992091f1d483);
+    self setclientomnvar(omnvarref, var_a463992091f1d483);
     return;
   } else if(!isDefined(prevvalue)) {
-    prevvalue = var_f8f977081d3da8b4;
+    prevvalue = invertedmask;
   }
 
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
+  cleanedbase = prevvalue &invertedmask;
 
   if(!isDefined(var_a463992091f1d483)) {
     return;
   }
 
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
 
-  if(var_82a90e56e416fa55 != prevvalue) {
-    self setclientomnvar(var_8e90fa6d5789ad63, var_82a90e56e416fa55);
+  if(repackedvalue != prevvalue) {
+    self setclientomnvar(omnvarref, repackedvalue);
   }
 }
 
@@ -1040,7 +1040,7 @@ function function_e2488f451ea1f1e7() {
   level.var_f1073fbd45b59a06.var_f1ab12c7e26976db = [];
 
   foreach(fortress in level.var_f1073fbd45b59a06.var_df987907a483df89) {
-    fortress.poi = scripts\mp\poi::function_6cc445c02b5effac(fortress.origin);
+    fortress.poi = scripts\mp\poi::poi_findpoioriginisin(fortress.origin);
     fortress function_485340cc9569a658();
     fortress thread function_dca4a820d6cf615b(1);
     waitframe();
@@ -1694,7 +1694,7 @@ function private function_ed5dd045e2e3dc5b(fortress, player, shouldshowsplash) {
 
 function function_cab68f487d41de86(blacksite) {
   player = self;
-  var_b677bbe2241c4e3f = player getclientomnvar("ui_br_stronghold_mission");
+  omnvarstate = player getclientomnvar("ui_br_stronghold_mission");
   isonmission = isDefined(blacksite.missiontrigger) && isDefined(blacksite.missiontrigger.touchents) && array_contains(blacksite.missiontrigger.touchents, player);
 
   if(!isDefined(blacksite.var_e2bdca417396359)) {
@@ -1703,15 +1703,15 @@ function function_cab68f487d41de86(blacksite) {
 
   blacksite.var_e2bdca417396359 = function_6d6af8144a5131f1(blacksite.var_e2bdca417396359, player.team);
 
-  if(isDefined(var_b677bbe2241c4e3f)) {
-    isprevstate = var_b677bbe2241c4e3f == 17;
-    isnextstate = var_b677bbe2241c4e3f == 20;
+  if(isDefined(omnvarstate)) {
+    isprevstate = omnvarstate == 17;
+    isnextstate = omnvarstate == 20;
   } else {
     player setclientomnvar("ui_br_stronghold_mission", 19);
     return;
   }
 
-  if(!istrue(isonmission) && isDefined(var_b677bbe2241c4e3f) && !isprevstate && !isnextstate) {
+  if(!istrue(isonmission) && isDefined(omnvarstate) && !isprevstate && !isnextstate) {
     player setclientomnvar("ui_br_stronghold_mission", 19);
   }
 }
@@ -1941,15 +1941,15 @@ function function_d67f15dc6097606d(fortress) {
     numtospawn = fortress.elites.size * fortress.tieroverride / 1 * level.var_af6b6798e49e6f50;
 
     while(fortress.elites.size > numtospawn) {
-      var_7dcdc8e8873aeb30 = fortress.elites[randomint(fortress.elites.size)];
-      fortress.elites = array_remove(fortress.elites, var_7dcdc8e8873aeb30);
+      nodetoremove = fortress.elites[randomint(fortress.elites.size)];
+      fortress.elites = array_remove(fortress.elites, nodetoremove);
     }
   } else if(fortress.guardnodes.size > 0) {
     numtospawn = fortress.guardnodes.size * fortress.tieroverride / 1 * level.var_af6b6798e49e6f50;
 
     while(fortress.guardnodes.size > numtospawn) {
-      var_7dcdc8e8873aeb30 = fortress.guardnodes[randomint(fortress.guardnodes.size)];
-      fortress.guardnodes = array_remove(fortress.guardnodes, var_7dcdc8e8873aeb30);
+      nodetoremove = fortress.guardnodes[randomint(fortress.guardnodes.size)];
+      fortress.guardnodes = array_remove(fortress.guardnodes, nodetoremove);
     }
   }
 
@@ -2012,9 +2012,9 @@ function function_610d7a61f61e81e5(fortress) {
         scripts\mp\gametypes\br_analytics::function_aaf1156bacf6654e(fortress.origin, bossname);
         boss.var_2d670e4d288c86fb = 1;
         boss.var_7d606bec79308eb5 = 350;
-        boss.var_85a0f6383a5dd784 = 150;
+        boss.pursuestopdistance = 150;
         boss.goalheight = 80;
-        boss.var_98add129a7ecb962 = 1;
+        boss.allowlongdeath = 1;
         boss.maxhealth = int(level.var_e34d534debb61eda * level.var_63d0544474ed373);
         boss.health = int(level.var_e34d534debb61eda * level.var_63d0544474ed373);
         boss.maxarmorhealth = int(level.var_2e0a0145252b7f6a * level.var_48d50c4fdd3feb83);
@@ -2633,9 +2633,9 @@ function function_f9ff7c89b3792ccc(dropstruct, blacksite, keyent, originalteam, 
   teamplayers = getteamarray(player.team, 0);
 
   foreach(teamplayer in teamplayers) {
-    var_b677bbe2241c4e3f = teamplayer getclientomnvar("ui_br_stronghold_mission");
+    omnvarstate = teamplayer getclientomnvar("ui_br_stronghold_mission");
 
-    if(isDefined(var_b677bbe2241c4e3f) && var_b677bbe2241c4e3f == 19) {
+    if(isDefined(omnvarstate) && omnvarstate == 19) {
       teamplayer setclientomnvar("ui_br_stronghold_mission", 34);
     }
 
@@ -2652,9 +2652,9 @@ function function_f9ff7c89b3792ccc(dropstruct, blacksite, keyent, originalteam, 
     teamplayers = getteamarray(player.team, 0);
 
     foreach(teamplayer in teamplayers) {
-      var_b677bbe2241c4e3f = teamplayer getclientomnvar("ui_br_stronghold_mission");
+      omnvarstate = teamplayer getclientomnvar("ui_br_stronghold_mission");
 
-      if(isDefined(var_b677bbe2241c4e3f) && (var_b677bbe2241c4e3f != 20 || var_b677bbe2241c4e3f != 36 || var_b677bbe2241c4e3f != 21)) {
+      if(isDefined(omnvarstate) && (omnvarstate != 20 || omnvarstate != 36 || omnvarstate != 21)) {
         teamplayer setclientomnvar("ui_br_stronghold_mission", 255);
       }
     }

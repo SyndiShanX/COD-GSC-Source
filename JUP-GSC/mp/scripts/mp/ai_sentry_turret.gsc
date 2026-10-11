@@ -55,7 +55,7 @@ function init() {
   level.sentrysettings["ai_sentry_turret"].scorepopup = "destroyed_sentry";
   level.sentrysettings["ai_sentry_turret"].lightfxtag = "tag_fx";
 
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     scripts\mp\poi::function_44739fe1cf82e29a("aiSentryTurrets");
   }
 }
@@ -76,7 +76,7 @@ function function_2d24ee630d6c37e2() {
 
   level thread function_fc46b0f912ca62f();
 
-  var_76bc16f4e15dec1c = scripts\mp\poi::function_47d356083884f913();
+  var_76bc16f4e15dec1c = scripts\mp\poi::poi_issystemactive();
   poiname = undefined;
   level.aisentryturrets.var_fd5ea9cb37c309d3 = array_randomize(getStructArray("aiSentryTurret", "script_noteworthy"));
 
@@ -87,7 +87,7 @@ function function_2d24ee630d6c37e2() {
       var_de58ca0235ee107b = 0;
     } else if(var_76bc16f4e15dec1c) {
       if(!isDefined(spawnloc.poi)) {
-        spawnloc.poi = scripts\mp\poi::function_6cc445c02b5effac(spawnloc.origin);
+        spawnloc.poi = scripts\mp\poi::poi_findpoioriginisin(spawnloc.origin);
       }
 
       if(!isDefined(spawnloc.poi) || !scripts\mp\poi::poi_ispoiactive(spawnloc.poi)) {

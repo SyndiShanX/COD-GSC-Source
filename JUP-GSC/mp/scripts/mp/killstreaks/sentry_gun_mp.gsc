@@ -76,7 +76,7 @@ function sentryturret_handledeathdamage(data) {
 }
 
 function sentryturret_modifydamage(data) {
-  var_3a8030d138e837c8 = level.sentrysettings["sentry_turret"];
+  sentryconfig = level.sentrysettings["sentry_turret"];
   bundle = level.streakglobals.streakbundles["sentry_gun"];
   attacker = data.attacker;
   objweapon = data.objweapon;
@@ -101,7 +101,7 @@ function sentryturret_modifydamage(data) {
 
   var_8ed0a351aa70ec7 = self.damagetaken + modifieddamage;
 
-  if(var_8ed0a351aa70ec7 >= var_3a8030d138e837c8.lowhealth && !istrue(self.damagedstate)) {
+  if(var_8ed0a351aa70ec7 >= sentryconfig.lowhealth && !istrue(self.damagedstate)) {
     self.damagedstate = 1;
     self setscriptablepartstate("turret_damage", "on", 0);
   }
@@ -138,8 +138,8 @@ function sentryturret_initsentrysettings() {
   level.sentrysettings["sentry_turret"].streakname = "sentry_gun";
   level.sentrysettings["sentry_turret"].weaponinfo = default_to(bundle.spawnweapon, "sentry_turret_mp");
   level.sentrysettings["sentry_turret"].playerweaponinfo = "sentry_turret_mp";
-  level.sentrysettings["sentry_turret"].modelbaseground = default_to(bundle.var_5fa14c2e0b04da9, "wpn_wm_p45_mg_auto_sentry_v0_mp");
-  level.sentrysettings["sentry_turret"].modeldestroyedground = default_to(bundle.var_68bcc71e755cf4b2, "wpn_wm_p45_mg_auto_sentry_v0_mp");
+  level.sentrysettings["sentry_turret"].modelbaseground = default_to(bundle.sentrymodelbaseground, "wpn_wm_p45_mg_auto_sentry_v0_mp");
+  level.sentrysettings["sentry_turret"].modeldestroyedground = default_to(bundle.sentrymodeldestroyed, "wpn_wm_p45_mg_auto_sentry_v0_mp");
   level.sentrysettings["sentry_turret"].placementhintstring = &"KILLSTREAKS_HINTS/SENTRY_GUN_PLACE";
   level.sentrysettings["sentry_turret"].ownerusehintstring = &"KILLSTREAKS_HINTS/SENTRY_USE";
   level.sentrysettings["sentry_turret"].otherusehintstring = &"KILLSTREAKS_HINTS/SENTRY_OTHER_USE";
@@ -195,6 +195,6 @@ function sentryturret_empcleared() {
 }
 
 function function_21ed6c77fb27d039(turret) {
-  turret function_5226227bce83ebe9(3, turret.team);
+  turret setentityhudoutlinedata(3, turret.team);
   return turret;
 }

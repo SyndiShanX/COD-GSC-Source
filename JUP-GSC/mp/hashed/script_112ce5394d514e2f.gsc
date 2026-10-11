@@ -56,7 +56,7 @@ function init() {
   level thread function_f0245d1b6a36ef77();
   level thread function_9e9b01992f22aaf9();
   level thread function_fde30cebcacdb61e();
-  thread scripts\cp_mp\utility\audio_utility::function_f1aed36ab4598ea("mp_gamemode_lockdown");
+  thread scripts\cp_mp\utility\audio_utility::snd_transient_load("mp_gamemode_lockdown");
   function_5d6ed45785284123();
   level.validautoassignquests = [];
   level.validautoassignquests[0] = "assassination";
@@ -502,8 +502,8 @@ function function_56240586d0ae0b1d() {
     }
 
     cluster = spawnStruct();
-    cluster.var_f945c49af8ce3f75 = var_93bb5850a0334fd2 function_75d1f81d43231b87();
-    assertex(cluster.var_f945c49af8ce3f75.size >= level.brgametype.var_8253cd4c8354424e, "<dev string:x6f>");
+    cluster.neighbours = var_93bb5850a0334fd2 function_75d1f81d43231b87();
+    assertex(cluster.neighbours.size >= level.brgametype.var_8253cd4c8354424e, "<dev string:x6f>");
     cluster.zones = var_93bb5850a0334fd2 function_fafd7a9de6e4ba1e();
     var_c54302bb1c559c77 = cluster.zones.size;
     assertex(var_c54302bb1c559c77 >= function_7876f532a72a3bb8(), "<dev string:xd4>");
@@ -612,7 +612,7 @@ function function_8db616127c1ce8a8(var_7b1e1e474e9570a7) {
 
 function function_b27519f5f601aad1(var_7b1e1e474e9570a7) {
   var_e08e0cc44f5af529 = level.brgametype.var_58b474cb0e57096a[level.brgametype.var_58b474cb0e57096a.size - 1];
-  var_10a5085ada658e2b = level.brgametype.clusters[var_e08e0cc44f5af529].var_f945c49af8ce3f75;
+  var_10a5085ada658e2b = level.brgametype.clusters[var_e08e0cc44f5af529].neighbours;
   var_10a5085ada658e2b = array_remove_array(var_10a5085ada658e2b, var_7b1e1e474e9570a7);
   assertex(var_10a5085ada658e2b.size > 0, "<dev string:x177>");
   var_6780fd50a2d4bc5b = randomint(var_10a5085ada658e2b.size);
@@ -2471,11 +2471,11 @@ function private function_53b59fd7e847103b() {
   zone = self;
   zonehalfsize = zone getboundshalfsize();
   zoneradius = sqrt(squared(zonehalfsize[0]) + squared(zonehalfsize[1]));
-  var_58cab040fd809108 = getlootscriptablearrayinradius(undefined, undefined, zone.origin, zoneradius);
+  scriptablesarray = getlootscriptablearrayinradius(undefined, undefined, zone.origin, zoneradius);
   var_15837bd28f442406 = [];
 
-  if(isDefined(var_58cab040fd809108)) {
-    foreach(scriptableinstance in var_58cab040fd809108) {
+  if(isDefined(scriptablesarray)) {
+    foreach(scriptableinstance in scriptablesarray) {
       var_bd3e849e7b352d21 = scriptableinstance getscriptableisreserved() && isDefined(scriptableinstance.brpickupscriptableid);
 
       if(var_bd3e849e7b352d21 && scripts\mp\gametypes\br_pickups::function_2ae5e94bd6518ab5(scriptableinstance, 0)) {
@@ -3440,7 +3440,7 @@ function function_44b078b40b9e2290() {
 }
 
 function function_9df11da222c118b3(target) {
-  triggervolumes = function_f159c10d5cf8f0b4(target, "targetname");
+  triggervolumes = getnoentvolumearray(target, "targetname");
   zones = [];
 
   while(triggervolumes.size > 0) {

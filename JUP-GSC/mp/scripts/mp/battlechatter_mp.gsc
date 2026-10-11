@@ -113,7 +113,7 @@ function private function_4c2643be02acc9d2(eventname) {
     level.battlechatterfilter = [];
   }
 
-  level.battlechatterfilter[function_1823ff50bb28148d(eventname)] = hashcat(@ "hash_ee1ba8e906086c3c", eventname);
+  level.battlechatterfilter[getxhash(eventname)] = hashcat(@ "hash_ee1ba8e906086c3c", eventname);
 }
 
 function private function_bc76cf7adda53de3(eventname) {
@@ -210,16 +210,16 @@ function validaterecentattackers() {
     return;
   }
 
-  var_9225a7e3e5cc65ff = [];
+  validattackers = [];
   currenttime = gettime();
 
   foreach(event in self.recentattackers) {
     if(currenttime < event.ignoreaftertime) {
-      var_9225a7e3e5cc65ff[var_9225a7e3e5cc65ff.size] = event;
+      validattackers[validattackers.size] = event;
     }
   }
 
-  self.recentattackers = var_9225a7e3e5cc65ff;
+  self.recentattackers = validattackers;
 }
 
 function addrecentattacker(attacker) {
@@ -1064,8 +1064,8 @@ function dosound(soundtype, targetent, location) {
   level addspeaker(self, speakerteam, soundtype, priority);
   updatechatter(soundtype);
   duration = 1.5;
-  thread timehack(function_f28fd66285fa2c9(soundtype), duration);
-  waittill_any_2(function_f28fd66285fa2c9(soundtype), "death_or_disconnect");
+  thread timehack(getxhashhexname(soundtype), duration);
+  waittill_any_2(getxhashhexname(soundtype), "death_or_disconnect");
   level removespeaker(self, speakerteam);
   return 1;
 }
@@ -1113,8 +1113,8 @@ function addspeaker(player, team, soundtype, priority) {
   level.speakers[team][index]["sound_type"] = soundtype;
   level.speakers[team][index]["priority"] = priority;
   level.speakers[team][index]["endTime"] = gettime() + duration * 1000;
-  player thread timehack(function_f28fd66285fa2c9(soundtype), duration);
-  player waittill_any_2(function_f28fd66285fa2c9(soundtype), "death_or_disconnect");
+  player thread timehack(getxhashhexname(soundtype), duration);
+  player waittill_any_2(getxhashhexname(soundtype), "death_or_disconnect");
   level removespeaker(player, team);
 }
 
@@ -1140,7 +1140,7 @@ function monitorspeakers() {
       foreach(speaker in speakerlist) {
         if(speaker["endTime"] <= gettime()) {
           removespeaker(speaker["player"], team);
-          speaker["player"] notify(function_f28fd66285fa2c9(speaker["sound_type"]));
+          speaker["player"] notify(getxhashhexname(speaker["sound_type"]));
         }
       }
     }
@@ -1246,9 +1246,9 @@ function location_called_out_recently(location) {
     return false;
   }
 
-  var_c5e4b26dbee9eb39 = lastcallouttime + 25000;
+  nextcallouttime = lastcallouttime + 25000;
 
-  if(gettime() < var_c5e4b26dbee9eb39) {
+  if(gettime() < nextcallouttime) {
     return true;
   }
 
@@ -1308,21 +1308,21 @@ function canconcat(location) {
 }
 
 function getcannedresponse(speaker) {
-  var_d909d2311d8709d = undefined;
+  cannedresponsealias = undefined;
   aliases = self.locationaliases;
 
   foreach(alias in aliases) {
     if(iscallouttypeqa(alias, speaker) && !isDefined(self.qafinished)) {
-      var_d909d2311d8709d = alias;
+      cannedresponsealias = alias;
       break;
     }
 
     if(iscallouttypereport(alias)) {
-      var_d909d2311d8709d = alias;
+      cannedresponsealias = alias;
     }
   }
 
-  return var_d909d2311d8709d;
+  return cannedresponsealias;
 }
 
 function iscallouttypereport(alias) {
@@ -1330,9 +1330,9 @@ function iscallouttypereport(alias) {
 }
 
 function iscallouttypeconcat(alias, speaker) {
-  var_3f4cc9de41415260 = speaker getloccalloutalias("concat_loc_" + alias);
+  tryqa = speaker getloccalloutalias("concat_loc_" + alias);
 
-  if(soundexists(var_3f4cc9de41415260)) {
+  if(soundexists(tryqa)) {
     return true;
   }
 
@@ -1344,9 +1344,9 @@ function iscallouttypeqa(alias, speaker) {
     return true;
   }
 
-  var_3f4cc9de41415260 = speaker getqacalloutalias(alias, 0);
+  tryqa = speaker getqacalloutalias(alias, 0);
 
-  if(soundexists(var_3f4cc9de41415260)) {
+  if(soundexists(tryqa)) {
     return true;
   }
 
@@ -1417,13 +1417,13 @@ function battlechatter_printdump(alias) {
     return;
   }
 
-  var_47f4bea7f4c50ad9 = -1;
+  secssincelastdump = -1;
 
-  if(isDefined(level.var_529a83d403b4416)) {
-    var_47f4bea7f4c50ad9 = (gettime() - level.var_529a83d403b4416) / 1000;
+  if(isDefined(level.lastdumptime)) {
+    secssincelastdump = (gettime() - level.lastdumptime) / 1000;
   }
 
-  level.var_529a83d403b4416 = gettime();
+  level.lastdumptime = gettime();
 
   if(dumptype == "<dev string:x23>") {
     if(!flag_exist("<dev string:x10b>")) {
@@ -1454,7 +1454,7 @@ function battlechatter_printdump(alias) {
       level.var_97ef0a827c8a39d1 = openfile(filepath, "<dev string:x152>");
     }
 
-    dumpstring = "<dev string:x189>" + var_47f4bea7f4c50ad9 + "<dev string:x18e>";
+    dumpstring = "<dev string:x189>" + secssincelastdump + "<dev string:x18e>";
     dumpstring += alias;
     battlechatter_printdumpline(level.var_97ef0a827c8a39d1, dumpstring, "<dev string:x166>");
   }
@@ -1872,19 +1872,19 @@ function adddamagetaken(attacker, objweapon, idamage) {
     return;
   }
 
-  var_35722c9340d87e9f = 0;
+  issniperdamage = 0;
 
   if(isDefined(objweapon) && isDefined(attacker)) {
     weapongroup = getweapongroup(objweapon);
 
     if(weapongroup == "weapon_sniper" || weapongroup == "weapon_dmr") {
       if(distance2d(self.origin, attacker.origin) > 2250000) {
-        var_35722c9340d87e9f = 1;
+        issniperdamage = 1;
       }
     }
   }
 
-  if(var_35722c9340d87e9f) {
+  if(issniperdamage) {
     level thread trysaylocalsound(self, #"bc_combat_inform_taking_fire_long", undefined, 0.75);
     return;
   }
@@ -2006,7 +2006,7 @@ function trysaylocalsound(player, soundtype, targetent, delay, location, trigger
     return;
   }
 
-  if(function_483cc81bff18273b(player)) {
+  if(issimulationplayer(player)) {
     return;
   }
 
@@ -2061,7 +2061,7 @@ function trysaylocalsound(player, soundtype, targetent, delay, location, trigger
   }
 
   if(function_b96f48dbdcd7110(soundtype) && !player friendly_nearby(level.var_98014172ce4b4e67) && !istrue(level.br_practice_match)) {
-    player battlechatter_debugprint("<dev string:x1bb>" + function_3c8848a3a11b2553(soundtype), "<dev string:xd8>");
+    player battlechatter_debugprint("<dev string:x1bb>" + getxhashsourcename(soundtype), "<dev string:xd8>");
 
     return;
   }
@@ -2070,7 +2070,7 @@ function trysaylocalsound(player, soundtype, targetent, delay, location, trigger
   sound_chance = function_c02b6ba215c2dca8(soundtype);
 
   if(play_chance > sound_chance) {
-    player battlechatter_debugprint("<dev string:x1d5>" + function_3c8848a3a11b2553(soundtype), "<dev string:xd8>");
+    player battlechatter_debugprint("<dev string:x1d5>" + getxhashsourcename(soundtype), "<dev string:xd8>");
 
     return;
   }
@@ -2082,7 +2082,7 @@ function trysaylocalsound(player, soundtype, targetent, delay, location, trigger
   waittime = player getbcwaittime(soundtype, delay);
 
   if(waittime > level.bcinfo["max_wait_time"] + delay * 1000) {
-    player battlechatter_debugprint("<dev string:x1ed>" + function_3c8848a3a11b2553(soundtype), "<dev string:xd8>");
+    player battlechatter_debugprint("<dev string:x1ed>" + getxhashsourcename(soundtype), "<dev string:xd8>");
 
     return;
   }
@@ -2096,7 +2096,7 @@ function trysaylocalsound(player, soundtype, targetent, delay, location, trigger
     player.bcinfoqueued = soundtype;
     player.var_cf34556d563b92ae = gettime();
   } else {
-    player battlechatter_debugprint("<dev string:x204>" + function_3c8848a3a11b2553(soundtype), "<dev string:xd8>");
+    player battlechatter_debugprint("<dev string:x204>" + getxhashsourcename(soundtype), "<dev string:xd8>");
 
     return;
   }
@@ -2111,7 +2111,7 @@ function saylocalsound(waittime, soundtype, targetent, delay, location, triggere
   wait waittime / 1000;
 
   if(saidtoorecently(soundtype)) {
-    battlechatter_debugprint("<dev string:x21f>" + function_3c8848a3a11b2553(soundtype), "<dev string:xd8>");
+    battlechatter_debugprint("<dev string:x21f>" + getxhashsourcename(soundtype), "<dev string:xd8>");
 
     return;
   }
@@ -2121,7 +2121,7 @@ function saylocalsound(waittime, soundtype, targetent, delay, location, triggere
 
     if(isDefined(speakerinfo["higher"])) {
       time = gettime();
-      speakerinfo["higher"]["player"] waittill_any_3(function_f28fd66285fa2c9(speakerinfo["higher"]["sound_alias"]), "death", "disconnect");
+      speakerinfo["higher"]["player"] waittill_any_3(getxhashhexname(speakerinfo["higher"]["sound_alias"]), "death", "disconnect");
       waitframe();
       waittime += gettime() - time;
       continue;
@@ -2131,7 +2131,7 @@ function saylocalsound(waittime, soundtype, targetent, delay, location, triggere
 
     for(i = 0; i < info.size; i++) {
       if(isDefined(info[i]["player"])) {
-        info[i]["player"] notify(function_f28fd66285fa2c9(info[i]["sound_alias"]) + "_interrupt");
+        info[i]["player"] notify(getxhashhexname(info[i]["sound_alias"]) + "_interrupt");
 
         if(soundexists(info[i]["sound_alias"])) {
           info[i]["player"] stoplocalsound(info[i]["sound_alias"]);
@@ -2143,7 +2143,7 @@ function saylocalsound(waittime, soundtype, targetent, delay, location, triggere
   }
 
   if(waittime > level.bcinfo["max_wait_time"] + delay * 1000) {
-    battlechatter_debugprint("<dev string:x234>" + function_3c8848a3a11b2553(soundtype), "<dev string:xd8>");
+    battlechatter_debugprint("<dev string:x234>" + getxhashsourcename(soundtype), "<dev string:xd8>");
 
     self.bcinfoqueued = "none";
     return;
@@ -2160,7 +2160,7 @@ function saylocalsound(waittime, soundtype, targetent, delay, location, triggere
   }
 
   if(saidtoorecently(soundtype)) {
-    battlechatter_debugprint("<dev string:x21f>" + function_3c8848a3a11b2553(soundtype), "<dev string:xd8>");
+    battlechatter_debugprint("<dev string:x21f>" + getxhashsourcename(soundtype), "<dev string:xd8>");
 
     return;
   } else if(isDefined(entid) && isDefined(self.var_797974906694b0b6[entid])) {

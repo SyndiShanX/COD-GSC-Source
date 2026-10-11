@@ -23,9 +23,9 @@ function init() {
   level thread outlineidswatchpending();
 }
 
-function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, type, var_fa3b23d51c2dc7, squadindex) {
-  assertex(type != "<dev string:x1c>" || isDefined(var_fa3b23d51c2dc7), "<dev string:x24>");
-  assertex(type != "<dev string:x77>" || isDefined(var_fa3b23d51c2dc7) && isDefined(squadindex), "<dev string:x80>");
+function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, type, teamvisibleto, squadindex) {
+  assertex(type != "<dev string:x1c>" || isDefined(teamvisibleto), "<dev string:x24>");
+  assertex(type != "<dev string:x77>" || isDefined(teamvisibleto) && isDefined(squadindex), "<dev string:x80>");
 
   if(!isDefined(var_f20913fec7561c5f.outlines)) {
     var_f20913fec7561c5f.outlines = [];
@@ -38,7 +38,7 @@ function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlin
   oinfo.playersvisibletopending = [];
   oinfo.hudoutlineassetname = hudoutlineassetname;
   oinfo.type = type;
-  oinfo.team = var_fa3b23d51c2dc7;
+  oinfo.team = teamvisibleto;
   oinfo.sessionsquadid = squadindex;
   id = outlinegenerateuniqueid();
   var_f20913fec7561c5f.outlines[id] = oinfo;
@@ -60,7 +60,7 @@ function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlin
   }
 
   if(var_cda6602a02c53ba3.size > 0) {
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       var_f20913fec7561c5f function_3430d5003d0cc9f(var_cda6602a02c53ba3, prioritygroup);
     } else {
       var_f20913fec7561c5f _hudoutlineenableforclients(var_cda6602a02c53ba3, oinfo.hudoutlineassetname);
@@ -70,16 +70,16 @@ function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlin
   return id;
 }
 
-function outlinedisableinternal(id, var_420a996e67989dc4) {
-  if(!isDefined(var_420a996e67989dc4)) {
+function outlinedisableinternal(id, entoutlined) {
+  if(!isDefined(entoutlined)) {
     level.outlineents = array_removeundefined(level.outlineents);
     return;
-  } else if(!isDefined(var_420a996e67989dc4.outlines)) {
-    outlineremovefromgloballist(var_420a996e67989dc4);
+  } else if(!isDefined(entoutlined.outlines)) {
+    outlineremovefromgloballist(entoutlined);
     return;
   }
 
-  var_77c349ecef6fb0d9 = var_420a996e67989dc4.outlines[id];
+  var_77c349ecef6fb0d9 = entoutlined.outlines[id];
 
   if(!isDefined(var_77c349ecef6fb0d9) || var_77c349ecef6fb0d9.isdisabled) {
     return;
@@ -94,33 +94,33 @@ function outlinedisableinternal(id, var_420a996e67989dc4) {
 
     if(!canoutlineforplayer(player)) {
       var_77c349ecef6fb0d9.playersvisibletopending[var_77c349ecef6fb0d9.playersvisibletopending.size] = player;
-      level.outlineidspending[id] = var_420a996e67989dc4;
+      level.outlineidspending[id] = entoutlined;
       continue;
     }
 
-    var_25a840a406e8542a = outlinegethighestinfoforplayer(var_420a996e67989dc4, player);
+    var_25a840a406e8542a = outlinegethighestinfoforplayer(entoutlined, player);
 
     if(isDefined(var_25a840a406e8542a)) {
       if(var_25a840a406e8542a.priority <= var_77c349ecef6fb0d9.priority) {
-        var_420a996e67989dc4 _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+        entoutlined _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
       }
 
       continue;
     }
 
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
-      var_420a996e67989dc4 scripts\mp\outline::function_32dfa50c47325abe(player, "equipment", 1);
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
+      entoutlined scripts\mp\outline::function_32dfa50c47325abe(player, "equipment", 1);
       continue;
     }
 
-    var_420a996e67989dc4 hudoutlinedisableforclient(player);
+    entoutlined hudoutlinedisableforclient(player);
   }
 
   if(var_77c349ecef6fb0d9.playersvisibletopending.size == 0) {
-    var_420a996e67989dc4.outlines[id] = undefined;
+    entoutlined.outlines[id] = undefined;
 
-    if(var_420a996e67989dc4.outlines.size == 0) {
-      outlineremovefromgloballist(var_420a996e67989dc4);
+    if(entoutlined.outlines.size == 0) {
+      outlineremovefromgloballist(entoutlined);
     }
   }
 }
@@ -185,14 +185,14 @@ function hudoutline_enable_internal(viewer, channelname, hudoutlineasset) {
     hudoutline_activate_channel(channelname, viewer);
   }
 
-  var_a948959983e82f10 = self.hudoutlinecurchannel.channelpriority;
-  var_c8446d6318008d2c = self.hudoutlinechannels[channelindex].channelpriority;
+  curchannelpriority = self.hudoutlinecurchannel.channelpriority;
+  thischannelpriority = self.hudoutlinechannels[channelindex].channelpriority;
 
   if(!array_contains(self.hudoutlinechannels[channelindex].var_41272a9c461e0853, viewer)) {
     self.hudoutlinechannels[channelindex].var_41272a9c461e0853 = array_add(self.hudoutlinechannels[channelindex].var_41272a9c461e0853, viewer);
   }
 
-  if(self.hudoutlinecurchannel.channelname != channelname && var_a948959983e82f10 < var_c8446d6318008d2c) {
+  if(self.hudoutlinecurchannel.channelname != channelname && curchannelpriority < thischannelpriority) {
     hudoutline_activate_channel(channelname, viewer);
     return;
   }
@@ -202,7 +202,7 @@ function hudoutline_enable_internal(viewer, channelname, hudoutlineasset) {
     return;
   }
 
-  if(self.hudoutlinecurchannel.channelname != channelname && var_a948959983e82f10 > var_c8446d6318008d2c && !array_contains(self.hudoutlinecurchannel.var_41272a9c461e0853, viewer)) {
+  if(self.hudoutlinecurchannel.channelname != channelname && curchannelpriority > thischannelpriority && !array_contains(self.hudoutlinecurchannel.var_41272a9c461e0853, viewer)) {
     hudoutline_activate_channel(channelname, viewer);
   }
 }
@@ -320,12 +320,12 @@ function function_32dfa50c47325abe(var_10afc5ce5a1feebe, channelname, var_d6ee45
   }
 }
 
-function outlinerefreshinternal(var_420a996e67989dc4) {
-  if(!isDefined(var_420a996e67989dc4.outlines) || var_420a996e67989dc4.outlines.size == 0) {
+function outlinerefreshinternal(entoutlined) {
+  if(!isDefined(entoutlined.outlines) || entoutlined.outlines.size == 0) {
     return;
   }
 
-  foreach(oinfo in var_420a996e67989dc4.outlines) {
+  foreach(oinfo in entoutlined.outlines) {
     if(!isDefined(oinfo) || oinfo.isdisabled) {
       continue;
     }
@@ -335,10 +335,10 @@ function outlinerefreshinternal(var_420a996e67989dc4) {
         continue;
       }
 
-      var_25a840a406e8542a = outlinegethighestinfoforplayer(var_420a996e67989dc4, player);
+      var_25a840a406e8542a = outlinegethighestinfoforplayer(entoutlined, player);
 
       if(isDefined(var_25a840a406e8542a)) {
-        var_420a996e67989dc4 _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+        entoutlined _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
       }
     }
   }
@@ -384,14 +384,14 @@ function outlineonplayerjoinedsquad_onfirstspawn(player) {
 function outlineremoveplayerfromvisibletoarrays(player, var_e1f59b5642da1702) {
   level.outlineents = array_removeundefined(level.outlineents);
 
-  foreach(var_420a996e67989dc4 in level.outlineents) {
+  foreach(entoutlined in level.outlineents) {
     var_8408cba753aba3e3 = 0;
 
-    if(!isDefined(var_420a996e67989dc4) || !isDefined(var_420a996e67989dc4.outlines)) {
+    if(!isDefined(entoutlined) || !isDefined(entoutlined.outlines)) {
       continue;
     }
 
-    foreach(oinfo in var_420a996e67989dc4.outlines) {
+    foreach(oinfo in entoutlined.outlines) {
       if(!isDefined(oinfo.playersvisibleto)) {
         continue;
       }
@@ -410,21 +410,21 @@ function outlineremoveplayerfromvisibletoarrays(player, var_e1f59b5642da1702) {
       }
     }
 
-    if(var_8408cba753aba3e3 && isDefined(var_420a996e67989dc4) && isDefined(player)) {
-      var_420a996e67989dc4 hudoutlinedisableforclient(player);
+    if(var_8408cba753aba3e3 && isDefined(entoutlined) && isDefined(player)) {
+      entoutlined hudoutlinedisableforclient(player);
     }
   }
 }
 
 function outlineaddplayertoexistingallandteamoutlines(player) {
-  foreach(var_420a996e67989dc4 in level.outlineents) {
-    if(!isDefined(var_420a996e67989dc4) || !isDefined(var_420a996e67989dc4.outlines)) {
+  foreach(entoutlined in level.outlineents) {
+    if(!isDefined(entoutlined) || !isDefined(entoutlined.outlines)) {
       continue;
     }
 
     var_25a840a406e8542a = undefined;
 
-    foreach(oinfo in var_420a996e67989dc4.outlines) {
+    foreach(oinfo in entoutlined.outlines) {
       if(oinfo.type == "ALL" || oinfo.type == "TEAM" && oinfo.team == player.team) {
         if(!array_contains(oinfo.playersvisibleto, player)) {
           oinfo.playersvisibleto[oinfo.playersvisibleto.size] = player;
@@ -439,7 +439,7 @@ function outlineaddplayertoexistingallandteamoutlines(player) {
     }
 
     if(isDefined(var_25a840a406e8542a)) {
-      var_420a996e67989dc4 _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+      entoutlined _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
     }
   }
 }
@@ -449,14 +449,14 @@ function outlineaddplayertoexistingsquadoutlines(player) {
     assertmsg("<dev string:x1df>");
   }
 
-  foreach(var_420a996e67989dc4 in level.outlineents) {
-    if(!isDefined(var_420a996e67989dc4) || !isDefined(var_420a996e67989dc4.outlines)) {
+  foreach(entoutlined in level.outlineents) {
+    if(!isDefined(entoutlined) || !isDefined(entoutlined.outlines)) {
       continue;
     }
 
     var_25a840a406e8542a = undefined;
 
-    foreach(oinfo in var_420a996e67989dc4.outlines) {
+    foreach(oinfo in entoutlined.outlines) {
       if(oinfo.type == "SQUAD" && oinfo.team == player.team && isDefined(oinfo.sessionsquadid) && oinfo.sessionsquadid == player.sessionsquadid) {
         if(!array_contains(oinfo.playersvisibleto, player)) {
           oinfo.playersvisibleto[oinfo.playersvisibleto.size] = player;
@@ -471,41 +471,41 @@ function outlineaddplayertoexistingsquadoutlines(player) {
     }
 
     if(isDefined(var_25a840a406e8542a)) {
-      var_420a996e67989dc4 _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+      entoutlined _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
     }
   }
 }
 
-function outlinedisableinternalall(var_420a996e67989dc4) {
-  if(!isDefined(var_420a996e67989dc4) || !isDefined(var_420a996e67989dc4.outlines) || var_420a996e67989dc4.outlines.size == 0) {
+function outlinedisableinternalall(entoutlined) {
+  if(!isDefined(entoutlined) || !isDefined(entoutlined.outlines) || entoutlined.outlines.size == 0) {
     return;
   }
 
-  foreach(id, _ in var_420a996e67989dc4.outlines) {
-    outlinedisableinternal(id, var_420a996e67989dc4);
+  foreach(id, _ in entoutlined.outlines) {
+    outlinedisableinternal(id, entoutlined);
   }
 }
 
-function outlineaddtogloballist(var_420a996e67989dc4) {
-  if(!array_contains(level.outlineents, var_420a996e67989dc4)) {
-    level.outlineents[level.outlineents.size] = var_420a996e67989dc4;
+function outlineaddtogloballist(entoutlined) {
+  if(!array_contains(level.outlineents, entoutlined)) {
+    level.outlineents[level.outlineents.size] = entoutlined;
   }
 }
 
-function outlineremovefromgloballist(var_420a996e67989dc4) {
-  level.outlineents = array_remove(level.outlineents, var_420a996e67989dc4);
+function outlineremovefromgloballist(entoutlined) {
+  level.outlineents = array_remove(level.outlineents, entoutlined);
 }
 
-function outlinegethighestpriorityid(var_420a996e67989dc4) {
+function outlinegethighestpriorityid(entoutlined) {
   result = -1;
 
-  if(!isDefined(var_420a996e67989dc4.outlines) || var_420a996e67989dc4.size == 0) {
+  if(!isDefined(entoutlined.outlines) || entoutlined.size == 0) {
     return result;
   }
 
   var_25a840a406e8542a = undefined;
 
-  foreach(id, oinfo in var_420a996e67989dc4.outlines) {
+  foreach(id, oinfo in entoutlined.outlines) {
     if(!isDefined(oinfo) || oinfo.isdisabled) {
       continue;
     }
@@ -519,14 +519,14 @@ function outlinegethighestpriorityid(var_420a996e67989dc4) {
   return result;
 }
 
-function outlinegethighestinfoforplayer(var_420a996e67989dc4, player) {
+function outlinegethighestinfoforplayer(entoutlined, player) {
   var_25a840a406e8542a = undefined;
 
-  if(!isDefined(var_420a996e67989dc4.outlines) || var_420a996e67989dc4.size == 0) {
+  if(!isDefined(entoutlined.outlines) || entoutlined.size == 0) {
     return var_25a840a406e8542a;
   }
 
-  foreach(oinfo in var_420a996e67989dc4.outlines) {
+  foreach(oinfo in entoutlined.outlines) {
     if(!isDefined(oinfo) || oinfo.isdisabled) {
       continue;
     }
@@ -618,8 +618,8 @@ function outlineidswatchpending() {
   }
 }
 
-function outlinerefreshpending(var_420a996e67989dc4, id) {
-  oinfo = var_420a996e67989dc4.outlines[id];
+function outlinerefreshpending(entoutlined, id) {
+  oinfo = entoutlined.outlines[id];
 
   foreach(index, player in oinfo.playersvisibletopending) {
     if(!isDefined(player)) {
@@ -627,12 +627,12 @@ function outlinerefreshpending(var_420a996e67989dc4, id) {
     }
 
     if(canoutlineforplayer(player)) {
-      var_25a840a406e8542a = outlinegethighestinfoforplayer(var_420a996e67989dc4, player);
+      var_25a840a406e8542a = outlinegethighestinfoforplayer(entoutlined, player);
 
       if(isDefined(var_25a840a406e8542a) && var_25a840a406e8542a.hudoutlineassetname != "invisible") {
-        var_420a996e67989dc4 hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+        entoutlined hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
       } else {
-        var_420a996e67989dc4 hudoutlinedisableforclient(player);
+        entoutlined hudoutlinedisableforclient(player);
       }
 
       oinfo.playersvisibletopending[index] = undefined;
@@ -643,11 +643,11 @@ function outlinerefreshpending(var_420a996e67989dc4, id) {
 
   if(oinfo.playersvisibletopending.size == 0) {
     if(oinfo.isdisabled) {
-      var_420a996e67989dc4.outlines[id] = undefined;
+      entoutlined.outlines[id] = undefined;
     }
 
-    if(var_420a996e67989dc4.outlines.size == 0) {
-      outlineremovefromgloballist(var_420a996e67989dc4);
+    if(entoutlined.outlines.size == 0) {
+      outlineremovefromgloballist(entoutlined);
     }
 
     return true;

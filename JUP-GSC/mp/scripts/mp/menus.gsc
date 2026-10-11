@@ -605,7 +605,7 @@ function playerisstreaming() {
   return isDefined(level.playerisstreaming) && self[[level.playerisstreaming]]();
 }
 
-function function_eb9e2bb02ecff5b5() {
+function squadasteamenabled() {
   return getdvarint(@ "hash_61be9f6a05f64523", 0) != 0;
 }
 
@@ -677,7 +677,7 @@ function function_788bcfab4101649a(player) {
     return true;
   }
 
-  if(istrue(level.var_ec2fb549b15ad827) && getdvarint(@ "hash_48d877b577f2565b", 1) != 0) {
+  if(istrue(level.leagueplaymatch) && getdvarint(@ "hash_48d877b577f2565b", 1) != 0) {
     return true;
   }
 
@@ -848,7 +848,7 @@ function bypassclasschoice() {
   self.class = "class0";
 
   if(isDefined(level.gametypebundle) && isDefined(level.gametypebundle.namekey)) {
-    namekey = function_1823ff50bb28148d(level.gametypebundle.namekey);
+    namekey = getxhash(level.gametypebundle.namekey);
 
     if(namekey == #"zm_rb" || namekey == #"zm_turned") {
       self.class = "default1";
@@ -1087,14 +1087,14 @@ function debugprintsquads() {
 
       printtoscreen2d(startx + 250, starty, "<dev string:x1b4>", (1, 1, 1), 1);
 
-      foreach(team, var_70643c8580524236 in level.squaddata) {
+      foreach(team, squadarray in level.squaddata) {
         linecount = 1;
 
         printtoscreen2d(startx, starty + stepy * linecount, "<dev string:x1c2>" + team, (1, 1, 1), 1);
 
         linecount++;
 
-        foreach(squad in var_70643c8580524236) {
+        foreach(squad in squadarray) {
           color = (1, 1, 1);
 
           if(isDefined(squad.activemission)) {

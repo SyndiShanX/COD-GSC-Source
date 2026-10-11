@@ -43,8 +43,8 @@ function function_80d68c9701e1aea5(data) {
   foreach(phone in phones) {
     if(function_c8b12721d3a6c3fc(phone)) {
       origin = phone.origin;
-      poiname = scripts\mp\poi::function_6cc445c02b5effac(origin);
-      subarea = scripts\mp\ai_mp_controller::function_a44e168e8cced18(origin, poiname);
+      poiname = scripts\mp\poi::poi_findpoioriginisin(origin);
+      subarea = scripts\mp\ai_mp_controller::subarea_findfromorigin(origin, poiname);
       struct = spawnStruct();
       struct.origin = origin;
       struct.poi = poiname;
@@ -186,8 +186,8 @@ function private function_688a2acdd7d9d902(teamname) {
 
 function function_c8b12721d3a6c3fc(node) {
   origin = node.origin;
-  poiname = scripts\mp\poi::function_6cc445c02b5effac(origin);
-  subarea = scripts\mp\ai_mp_controller::function_a44e168e8cced18(origin, poiname);
+  poiname = scripts\mp\poi::poi_findpoioriginisin(origin);
+  subarea = scripts\mp\ai_mp_controller::subarea_findfromorigin(origin, poiname);
   return isDefined(subarea) && !namespace_7789f919216d38a2::function_cdcab1374db7f007(origin) && !namespace_9823ee6035594d67::function_f59f68adc71d49b3(origin) && !scripts\mp\locksandkeys::function_64332f29e2409e55(origin);
 }
 

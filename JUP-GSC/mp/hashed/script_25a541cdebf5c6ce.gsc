@@ -27,13 +27,13 @@ function function_c84ae25edc875e49() {
 function function_e1fbc72dd102b947(asmname, statename, tostatename, params) {
   velocity = self.velocity;
   self.var_c8743e7a7c7ea168 = default_to(self.var_c8743e7a7c7ea168, velocity);
-  var_f3292cd494761286 = function_f30eecf314f3f1e0();
+  lookahead_point = function_f30eecf314f3f1e0();
   velocity_norm = vectorNormalize(velocity);
-  trace = navtrace(self.origin, var_f3292cd494761286 + velocity_norm * 30, self, 1);
+  trace = navtrace(self.origin, lookahead_point + velocity_norm * 30, self, 1);
   trace_hit = isDefined(trace) && trace["fraction"] < 1 && isDefined(trace["normal"]);
   self.var_197f81f41a21780c = trace_hit;
 
-  line(self.origin, var_f3292cd494761286 + velocity_norm * 30, (1, 0, 0));
+  line(self.origin, lookahead_point + velocity_norm * 30, (1, 0, 0));
 
   if(trace_hit) {
     self.var_99cf8787b423d8fe = !ent_flag("can_bull_charge_off_ledge");
@@ -96,7 +96,7 @@ function function_4397b9eb5fee6a23(asmname, statename, tostatename, params) {
   var_481af8e3ab10d8f1 = 5;
   speed_sq = lengthsquared(position_delta);
   var_325031e3bd475ad = lengthsquared(self.var_a20667cd8eef2d30);
-  var_62b0f3e6017d4cee = !isDefined(self.var_b0025b27850a89ad);
+  is_first_frame = !isDefined(self.var_b0025b27850a89ad);
 
   bc_print("<dev string:x8f>" + length(position_delta), self.origin + (0, 0, 90));
 
@@ -108,7 +108,7 @@ function function_4397b9eb5fee6a23(asmname, statename, tostatename, params) {
 
   min_speed = 0.1;
 
-  if(speed_sq < squared(min_speed) && !var_62b0f3e6017d4cee) {
+  if(speed_sq < squared(min_speed) && !is_first_frame) {
     bc_print("<dev string:xd3>" + length(position_delta));
 
     return true;
@@ -130,14 +130,14 @@ function function_4397b9eb5fee6a23(asmname, statename, tostatename, params) {
 
   if(istrue(self.var_197f81f41a21780c)) {
     drop_height = self.height * 2;
-    var_f3292cd494761286 = function_f30eecf314f3f1e0(0.3);
-    var_7f04d54a502de2ef = drop_to_ground(var_f3292cd494761286, self.height, -1 * drop_height);
+    lookahead_point = function_f30eecf314f3f1e0(0.3);
+    var_7f04d54a502de2ef = drop_to_ground(lookahead_point, self.height, -1 * drop_height);
 
     if(!isDefined(var_7f04d54a502de2ef)) {
       bc_print("<dev string:x10b>");
 
       return true;
-    } else if(var_f3292cd494761286[2] - var_7f04d54a502de2ef[2] >= drop_height) {
+    } else if(lookahead_point[2] - var_7f04d54a502de2ef[2] >= drop_height) {
       bc_print("<dev string:x135>", var_7f04d54a502de2ef);
 
       ground_entity = self getgroundentity();
@@ -162,9 +162,9 @@ function function_4397b9eb5fee6a23(asmname, statename, tostatename, params) {
         bc_print("<dev string:x1c4>", var_154288d91ba8cf1a);
       }
 
-      var_3f461949a6df342b = 15;
+      xy_epsilon = 15;
 
-      if(!isDefined(var_154288d91ba8cf1a) || distance2dsquared(var_154288d91ba8cf1a, var_7f04d54a502de2ef) > squared(var_3f461949a6df342b)) {
+      if(!isDefined(var_154288d91ba8cf1a) || distance2dsquared(var_154288d91ba8cf1a, var_7f04d54a502de2ef) > squared(xy_epsilon)) {
         bc_print("<dev string:x1dd>");
 
         return true;
@@ -218,7 +218,7 @@ function private function_983f20ad94e67f44() {
     utility::function_3ab9164ef76940fd("charge_vfx", "charge_vfx_off");
     self clearpath();
     self clearbtgoal(0);
-    self function_e64ea2b4e79c4b74(0);
+    self setbtgoalstationary(0);
     self forceupdategoalpos();
     self.var_e96704a2f0c3a889 = undefined;
   }
@@ -238,16 +238,16 @@ function private function_3fbc85b13c2e3772() {
       sphere(damage_point, rumble_radius, (1, 1, 0));
     }
 
-    players = function_883458a342af3041(damage_point, rumble_radius);
+    players = getplayersinradiussharedfunc(damage_point, rumble_radius);
 
     if(players.size > 0) {
       foreach(player in players) {
         if(isalive(player) && player.team != self.team && !player ent_flag("abom_bull_charge_hit")) {
           todamage = damage_point - player.origin;
-          var_d6ed44e5a8551291 = lengthsquared(todamage);
-          var_7895e5c029da0b75 = var_d6ed44e5a8551291 <= squared(damage_radius);
+          distsqrtodamage = lengthsquared(todamage);
+          bindamageradius = distsqrtodamage <= squared(damage_radius);
 
-          if(var_7895e5c029da0b75) {
+          if(bindamageradius) {
             trace_point = player scripts\mp\utility\player::getstancetop("prone");
             hit_something = scripts\engine\trace::ray_trace_passed(damage_point, trace_point, self);
 
@@ -334,7 +334,7 @@ function private function_3fbc85b13c2e3772() {
 function private function_900321733ad57c11() {
   earthquake(0.5, 0.4, self.origin, 700);
   rumble_dist = 700;
-  players = function_883458a342af3041(self.origin, rumble_dist);
+  players = getplayersinradiussharedfunc(self.origin, rumble_dist);
 
   foreach(player in players) {
     player playRumbleOnEntity("artillery_rumble_heavy");
@@ -351,9 +351,9 @@ function private function_6c4b72272cd8e500() {
   while(true) {
     self waittill("start_roar_loop");
 
-    while(istrue(self function_11e2d4051ea44b35("in_roar_loop"))) {
+    while(istrue(self getaiblackboarddynamic("in_roar_loop"))) {
       earthquake(0.4, 1.5, self.origin, rumble_dist);
-      players = function_883458a342af3041(self.origin, rumble_dist);
+      players = getplayersinradiussharedfunc(self.origin, rumble_dist);
 
       foreach(player in players) {
         if(!player ent_flag("abom_roar_rumble")) {
@@ -380,7 +380,7 @@ function private function_2b1518259f8d33b3(player, rumble_dist) {
     if(is_alive) {
       var_1dce2d1958040081 = distance2dsquared(self.origin, player.origin);
       is_far = var_1dce2d1958040081 > squared(rumble_dist);
-      var_70193c40e7108bd5 = !istrue(self function_11e2d4051ea44b35("in_roar_loop"));
+      var_70193c40e7108bd5 = !istrue(self getaiblackboarddynamic("in_roar_loop"));
     }
 
     if(!is_alive || var_70193c40e7108bd5 || is_far) {
@@ -394,11 +394,11 @@ function private function_2b1518259f8d33b3(player, rumble_dist) {
 }
 
 function private function_f30eecf314f3f1e0(var_34e47768dd28215e) {
-  var_890cdef8169db540 = default_to(var_34e47768dd28215e, 0.2);
+  lookahead_dist = default_to(var_34e47768dd28215e, 0.2);
   velocity = self.velocity;
   var_98754adfa114552e = (0, 0, velocity[2] / 2);
-  var_f3292cd494761286 = self.origin + (velocity - var_98754adfa114552e) * var_890cdef8169db540;
-  return var_f3292cd494761286;
+  lookahead_point = self.origin + (velocity - var_98754adfa114552e) * lookahead_dist;
+  return lookahead_point;
 }
 
 function function_b03f7c7561b40e5d() {

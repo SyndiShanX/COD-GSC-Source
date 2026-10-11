@@ -244,7 +244,7 @@ function save_last_goal() {
     }
 
     self.stealth.last_goal = self.patharray[index];
-    self.stealth.var_7fc1729e33311de3 = self.var_a2bac30a03260051;
+    self.stealth.var_7fc1729e33311de3 = self.patharraystartnode;
     return;
   }
 
@@ -278,7 +278,7 @@ function get_patrol_style() {
 }
 
 function set_patrol_react(position, magnitude) {
-  self function_68f50ada6e19d8f4(position, magnitude);
+  self setpatrolreact(position, magnitude);
 }
 
 function function_783cf2a7aaab23c() {
@@ -542,7 +542,7 @@ function is_idling() {
   return self[[self.fnisinstealthidle]]();
 }
 
-function function_c9f8c83eb3de1b32() {
+function is_investigating() {
   if(!isDefined(self.stealth)) {
     return 0;
   }
@@ -550,7 +550,7 @@ function function_c9f8c83eb3de1b32() {
   return self[[self.fnisinstealthinvestigate]]();
 }
 
-function function_cdca96a984fdb85() {
+function is_hunting() {
   if(!isDefined(self.stealth)) {
     return 0;
   }

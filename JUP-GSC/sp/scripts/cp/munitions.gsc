@@ -109,18 +109,18 @@ function function_570918ef81285e16() {
 
   globals.streakbundles = [];
   globals.var_2150da9328528bb9 = [];
-  var_20ee381602c954db = getscriptbundle(scripts\cp_mp\utility\killstreak_utility::function_708853c5d755f72());
+  killstreaklistbundle = getscriptbundle(scripts\cp_mp\utility\killstreak_utility::function_708853c5d755f72());
 
-  foreach(index, var_cc673384f6943c85 in var_20ee381602c954db.killstreak_list) {
+  foreach(index, killstreaklistentry in killstreaklistbundle.killstreak_list) {
     if(!isnumber(index)) {
       continue;
     }
 
-    if(!isDefined(var_cc673384f6943c85)) {
+    if(!isDefined(killstreaklistentry)) {
       continue;
     }
 
-    killstreakbundlename = var_cc673384f6943c85.bundle;
+    killstreakbundlename = killstreaklistentry.bundle;
 
     if(!isDefined(killstreakbundlename)) {
       continue;
@@ -150,7 +150,7 @@ function function_570918ef81285e16() {
     }
 
     bundle.var_19fb085453713468 = killstreakbundlename;
-    function_2ff74098fad17213(var_cc673384f6943c85, streakref);
+    function_2ff74098fad17213(killstreaklistentry, streakref);
     globals.streakbundles[streakref] = bundle;
     globals.var_2150da9328528bb9[streakref] = index;
   }
@@ -165,14 +165,14 @@ function function_65a298ec5c2f2ff4() {
 
   self.munition_slots = [];
   function_25b13e44dca57e67();
-  var_20ee381602c954db = getscriptbundle(scripts\cp_mp\utility\killstreak_utility::function_708853c5d755f72());
+  killstreaklistbundle = getscriptbundle(scripts\cp_mp\utility\killstreak_utility::function_708853c5d755f72());
 
-  foreach(var_cc673384f6943c85 in var_20ee381602c954db.killstreak_list) {
-    if(!isDefined(var_cc673384f6943c85.bundle)) {
+  foreach(killstreaklistentry in killstreaklistbundle.killstreak_list) {
+    if(!isDefined(killstreaklistentry.bundle)) {
       continue;
     }
 
-    initializekillstreak(function_1823ff50bb28148d(var_cc673384f6943c85.ref));
+    initializekillstreak(getxhash(killstreaklistentry.ref));
   }
 }
 
@@ -1727,7 +1727,7 @@ function giveitembasedoncraftingstruct(crafteditem) {
       self notify("munitions_used", "chopper_support");
       break;
     case #"hash_9e36e3bd3a9dd00d":
-      success = scripts\cp_mp\killstreaks\assault_drone::function_e24ef5600f59548e();
+      success = scripts\cp_mp\killstreaks\assault_drone::tryuseassaultdrone();
 
       if(!istrue(success)) {
         return false;
@@ -1741,7 +1741,7 @@ function giveitembasedoncraftingstruct(crafteditem) {
         return false;
       }
 
-      success = scripts\cp_mp\killstreaks\recon_drone::function_57fd8a7006975cd6();
+      success = scripts\cp_mp\killstreaks\recon_drone::tryuserecondrone();
 
       if(!istrue(success)) {
         return false;
@@ -1776,7 +1776,7 @@ function giveitembasedoncraftingstruct(crafteditem) {
 
       break;
     case #"hash_472d8b6c2f51a9c8":
-      success = scripts\killstreaks\ims::function_81c2d38662659380();
+      success = scripts\killstreaks\ims::tryuseims();
 
       if(!istrue(success)) {
         return false;

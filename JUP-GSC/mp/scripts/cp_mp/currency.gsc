@@ -236,10 +236,10 @@ function function_3036cef61495210f(currencytype, amount, reason) {
 }
 
 function function_8301d03eb828b5a5(amount, currencytype) {
-  var_3d7ffadeef043c6 = function_15975e20bbd2c824(currencytype);
-  newamount = var_3d7ffadeef043c6 + amount;
+  currencyamount = function_15975e20bbd2c824(currencytype);
+  newamount = currencyamount + amount;
 
-  if(amount > 0 && newamount < var_3d7ffadeef043c6) {
+  if(amount > 0 && newamount < currencyamount) {
     newamount = 2147483647;
   }
 
@@ -269,10 +269,10 @@ function function_a06aa3b8c98e131e(currencytype, amount, reason, info) {
 }
 
 function function_76906efe4e7c93fc(amount, currencytype) {
-  var_3d7ffadeef043c6 = function_15975e20bbd2c824(currencytype);
-  newamount = var_3d7ffadeef043c6 - amount;
+  currencyamount = function_15975e20bbd2c824(currencytype);
+  newamount = currencyamount - amount;
 
-  if(amount < 0 && newamount < var_3d7ffadeef043c6) {
+  if(amount < 0 && newamount < currencyamount) {
     newamount = 2147483647;
   }
 
@@ -320,7 +320,7 @@ function function_65e84417bc4c405e(currencytype) {
   return self.currency[currencytype];
 }
 
-function function_bcc79745d547a99c(currencytype, cost) {
+function can_afford(currencytype, cost) {
   var_7965af849f61fa07 = 1;
   var_dfe39d340d15cb99 = function_15975e20bbd2c824(currencytype);
 
@@ -332,7 +332,7 @@ function function_bcc79745d547a99c(currencytype, cost) {
 }
 
 function attempt_purchase(currencytype, cost, var_92f8f0879c089e9, var_b138a0b1e1a62a04, reason, info) {
-  if(function_bcc79745d547a99c(currencytype, cost)) {
+  if(can_afford(currencytype, cost)) {
     function_a06aa3b8c98e131e(currencytype, cost, reason, info);
 
     if(isDefined(level.currency[currencytype].buysound) && !istrue(var_92f8f0879c089e9)) {
@@ -368,7 +368,7 @@ function function_d67d3f6e87682c71(var_f246314e1dbaefea, currencytype) {
   var_5454163114cd6502.alignx = "center";
   var_5454163114cd6502.aligny = "top";
   var_5454163114cd6502.vertalign = "fullscreen";
-  var_5454163114cd6502.var_406fd34934f7e3d2 = "fullscreen";
+  var_5454163114cd6502.horizalign = "fullscreen";
   var_5454163114cd6502.font = "smallfixed";
   var_5454163114cd6502.fontscale = 0.75;
   var_6dfa383229c11ead = newclienthudelem(self);
@@ -377,7 +377,7 @@ function function_d67d3f6e87682c71(var_f246314e1dbaefea, currencytype) {
   var_6dfa383229c11ead.alignx = "center";
   var_6dfa383229c11ead.aligny = "top";
   var_6dfa383229c11ead.vertalign = "fullscreen";
-  var_6dfa383229c11ead.var_406fd34934f7e3d2 = "fullscreen";
+  var_6dfa383229c11ead.horizalign = "fullscreen";
   var_6dfa383229c11ead.font = "smallfixed";
   var_6dfa383229c11ead.fontscale = 0.75;
 
@@ -402,11 +402,11 @@ function function_d67d3f6e87682c71(var_f246314e1dbaefea, currencytype) {
 
 function function_2e0cc380e14c340b(currency_type) {
   scripts\common\devgui::function_6e7290c8ee4f558b("<dev string:x207>");
-  scripts\common\devgui::function_b23a59dfb4ca49a1("<dev string:x21a>" + currency_type, "<dev string:x227>" + currency_type, &function_382bfcbb2e043576, 0);
+  scripts\common\devgui::function_b23a59dfb4ca49a1("<dev string:x21a>" + currency_type, "<dev string:x227>" + currency_type, &debug_give_currency, 0);
   scripts\common\devgui::function_fe953f000498048f();
 }
 
-function function_382bfcbb2e043576(params) {
+function debug_give_currency(params) {
   currency_type = params[0];
 
   foreach(player in level.players) {

@@ -478,11 +478,11 @@ function function_d30c8f0e5abea93b(point, var_3643ff40cde29f03) {
 }
 
 function function_1339532e8e759d4b(time) {
-  return round(time * 1000, function_676cfe2ab64ea758()) / 1000;
+  return round(time * 1000, getframeduration()) / 1000;
 }
 
 function function_9da6ea6196cc9cd3(time) {
-  return round(time, function_676cfe2ab64ea758());
+  return round(time, getframeduration());
 }
 
 function function_d12a7c7251710cbf() {
@@ -988,7 +988,7 @@ function private function_aedaba3e159e8c05() {
       currenttime = gettime();
       var_9e32462039c9c7e6.lastupdatetime = currenttime;
       var_9e32462039c9c7e6.var_73c1a1ff05a9f5f1 = level.br_circle.circleindex;
-      frametime = function_676cfe2ab64ea758();
+      frametime = getframeduration();
       var_9078892b0c08d622 = currenttime - var_203649144dd03679;
 
       if(var_9078892b0c08d622 < 1000) {
@@ -1033,7 +1033,7 @@ function private autoexec function_30e4ecc709471035() {
     var_7bac96a2066482e6 = [-31000, -16000];
     var_59faca80fd6628b9 = [-36000, -24000];
     var_8076d05d44da3c09 = 3000;
-    var_addad5d4f86665fa = 3000;
+    ystep = 3000;
     xcoord = var_7bac96a2066482e6[0];
 
     while(xcoord <= var_7bac96a2066482e6[1]) {
@@ -1041,7 +1041,7 @@ function private autoexec function_30e4ecc709471035() {
 
       while(ycoord <= var_59faca80fd6628b9[1]) {
         var_377db4d1a5e868d8[var_377db4d1a5e868d8.size] = scripts\mp\gametypes\br_public::droptogroundmultitrace((xcoord, ycoord, 0));
-        ycoord += var_addad5d4f86665fa;
+        ycoord += ystep;
       }
 
       xcoord += var_8076d05d44da3c09;

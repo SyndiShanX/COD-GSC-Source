@@ -111,8 +111,8 @@ function function_289402be40270fb7(locoverride) {
   instance.bossname = "chopper";
 
   if(isDefined(locoverride) && isstruct(locoverride)) {
-    if(scripts\mp\poi::function_47d356083884f913()) {
-      instance.var_91403901a31fa2f8 = scripts\mp\poi::function_6cc445c02b5effac(locoverride.origin, 1);
+    if(scripts\mp\poi::poi_issystemactive()) {
+      instance.var_91403901a31fa2f8 = scripts\mp\poi::poi_findpoioriginisin(locoverride.origin, 1);
     }
   } else {
     keys = getarraykeys(level.poi_origins);
@@ -524,7 +524,7 @@ function chopper_attack(target) {
   }
 
   var_40130bd790669c04 = target.origin;
-  targetpoi = scripts\mp\poi::function_6cc445c02b5effac(target.origin);
+  targetpoi = scripts\mp\poi::poi_findpoioriginisin(target.origin);
   var_cb9ac661c1f66862 = 1;
 
   if(isDefined(level.var_b4d5f28b79e4c447) && isDefined(targetpoi)) {
@@ -732,11 +732,11 @@ function function_e278235100ed92f4(target) {
 }
 
 function function_dd5ca63b6ca176b8(target) {
-  var_97f0985016aa48cb = 0.8;
+  maxviewangle = 0.8;
   turretforward = anglesToForward(self gettagangles("tag_flash"));
   targetdisplace = vectorNormalize(target.origin - self gettagorigin("tag_flash"));
   var_ff53e400dd536b82 = vectordot(turretforward, targetdisplace);
-  return var_ff53e400dd536b82 >= var_97f0985016aa48cb;
+  return var_ff53e400dd536b82 >= maxviewangle;
 }
 
 function function_6326efaea227c12a(turret) {
@@ -788,8 +788,8 @@ function function_463307a73b2cd8df(player, showicon, var_91e5939bcaba8460) {
 
   poiname = undefined;
 
-  if(scripts\mp\poi::function_47d356083884f913()) {
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(self.spawnloc, 1, 0);
+  if(scripts\mp\poi::poi_issystemactive()) {
+    poiname = scripts\mp\poi::poi_findpoioriginisin(self.spawnloc, 1, 0);
   }
 
   splash = ter_op(istrue(self.spawned), "dmz_chopper_revealed", "dmz_chopper_revealed_circle");

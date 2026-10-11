@@ -91,20 +91,20 @@ function private function_fdb8e2f52b8ca1d2(ent_area) {
     ent_area.scriptable setscriptablepartstate("audio", "deactivate");
     waitframe();
     ent_area.scriptable freescriptable();
-    ent_area function_ad9433aab9fcdf04(15, "death", &delete);
+    ent_area delaycallendon(15, "death", &delete);
   }
 }
 
 function private function_f7c203e43c0e7737() {
-  var_12baea29dc62088 = function_2e9e02e8bda61ef2();
+  movingplatforminfo = function_2e9e02e8bda61ef2();
 
-  if(isDefined(var_12baea29dc62088) && isDefined(var_12baea29dc62088.groundent) && isDefined(var_12baea29dc62088.localorigin) && isDefined(var_12baea29dc62088.localangles)) {
+  if(isDefined(movingplatforminfo) && isDefined(movingplatforminfo.groundent) && isDefined(movingplatforminfo.localorigin) && isDefined(movingplatforminfo.localangles)) {
     if(isDefined(self.linkedparent)) {
-      self.linkedparent linkTo(var_12baea29dc62088.groundent, "", var_12baea29dc62088.localorigin, var_12baea29dc62088.localangles);
+      self.linkedparent linkTo(movingplatforminfo.groundent, "", movingplatforminfo.localorigin, movingplatforminfo.localangles);
       return;
     }
 
-    self linkTo(var_12baea29dc62088.groundent, "", var_12baea29dc62088.localorigin, var_12baea29dc62088.localangles);
+    self linkTo(movingplatforminfo.groundent, "", movingplatforminfo.localorigin, movingplatforminfo.localangles);
   }
 }
 
@@ -118,7 +118,7 @@ function function_a09e395daeb68f70() {
   self.var_d024694422cf29ac = 1;
   area = spawn_tag_origin(self.origin, anglesToForward(self.angles));
   area.remaining_durationms = duration * 1000;
-  area.var_d099defdb7f04dd1 = gettime();
+  area.last_update_time = gettime();
   area.var_44dbf7668c66e452 = [];
   area.owner = self;
   area.should_freeze = 1;
@@ -129,8 +129,8 @@ function function_a09e395daeb68f70() {
 
   while(isDefined(area) && area.remaining_durationms > 0) {
     cur_time = gettime();
-    delta_time = cur_time - area.var_d099defdb7f04dd1;
-    area.var_d099defdb7f04dd1 = cur_time;
+    delta_time = cur_time - area.last_update_time;
+    area.last_update_time = cur_time;
     area.remaining_durationms -= delta_time;
     var_59d8a38b844d1e11 = getaiarrayinradius(area.origin, radius);
 

@@ -490,7 +490,7 @@ function bot_think_watch_aerial_killstreak() {
       var_fe0228cd32ee3063 = 1;
     }
 
-    if(!scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() || level.mapname != "mp_don3_mobile") {
+    if(!scripts\cp_mp\utility\game_utility::ismagellanmode() || level.mapname != "mp_don3_mobile") {
       if(enemy_mortar_strike_exists(self.team)) {
         var_fe0228cd32ee3063 = 1;
         try_place_global_badplace("mortar_strike", &enemy_mortar_strike_exists);

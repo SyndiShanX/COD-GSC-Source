@@ -55,13 +55,13 @@ function function_f54ee3a0c5799ddb() {
 
 function function_82cc4ac452ec042d(relevantparameters) {
   activitytype = relevantparameters[0];
-  var_8807a0ecdc518571 = level.activities.types[activitytype];
-  var_8807a0ecdc518571.commonfunctions[5] = function_35c9943414b3e6ed(5);
-  var_8807a0ecdc518571.commonfunctions[7] = function_35c9943414b3e6ed(7);
-  var_8807a0ecdc518571.commonfunctions[8] = function_35c9943414b3e6ed(8);
+  activitytypestruct = level.activities.types[activitytype];
+  activitytypestruct.commonfunctions[5] = function_35c9943414b3e6ed(5);
+  activitytypestruct.commonfunctions[7] = function_35c9943414b3e6ed(7);
+  activitytypestruct.commonfunctions[8] = function_35c9943414b3e6ed(8);
 }
 
-function function_e757a367525dc6ff(activitytype, varianttag, var_fb6a27936e71b3eb, var_9334fa52c33d9f6e) {
+function function_e757a367525dc6ff(activitytype, varianttag, var_fb6a27936e71b3eb, additionalspawndatastruct) {
   var_50afda8545de94eb = undefined;
 
   if(isDefined(var_fb6a27936e71b3eb)) {
@@ -77,7 +77,7 @@ function function_e757a367525dc6ff(activitytype, varianttag, var_fb6a27936e71b3e
     function_d9c76daf389fd99c(scriptbundlename, activitytype, varianttag, var_fb6a27936e71b3eb);
   }
 
-  return function_67f4d8928c638abb(activitytype, varianttag, undefined, var_9334fa52c33d9f6e);
+  return createactivityinstance(activitytype, varianttag, undefined, additionalspawndatastruct);
 }
 
 function function_8a073180260101c8(relevantparameters) {
@@ -91,7 +91,7 @@ function function_8a073180260101c8(relevantparameters) {
   }
 
   setupinstance(relevantparameters);
-  activitytype = function_de53ed8e35d0ed7a(activityinstance);
+  activitytype = getactivitytype(activityinstance);
   var_cf2f27d96ea6dd79 = activitytype == "REV_OB_MERC_CAMP" || activitytype == "REV_OB_MERC_STRONGHOLD" || activitytype == "REV_OB_BIGBOUNTY";
 
   if(var_cf2f27d96ea6dd79) {
@@ -110,10 +110,10 @@ function function_8a073180260101c8(relevantparameters) {
     }
 
     if(function_1888d1b2aeeda25(activityinstance, "Ambient_AI_Exclusion_Zone")) {
-      var_f8b1af8995e3d601 = function_5bbdc39a533d9d57(activityinstance, "Ambient_AI_Exclusion_Zone");
+      spatialzonespheres = function_5bbdc39a533d9d57(activityinstance, "Ambient_AI_Exclusion_Zone");
       function_99ea7dc018941548(activityinstance, "Ambient_AI_Exclusion_Zone");
 
-      foreach(var_50d4637260359a88 in var_f8b1af8995e3d601) {
+      foreach(var_50d4637260359a88 in spatialzonespheres) {
         origin = function_37c1f31d2434f628(var_50d4637260359a88);
         scaledradius = function_2403f7fe5d40cecc(var_50d4637260359a88) * var_28ae2abcf7206747;
 
@@ -129,7 +129,7 @@ function function_8a073180260101c8(relevantparameters) {
   }
 
   if(namespace_27def95c6086c32a::function_1de0e40ac4e9356f(activityinstance)) {
-    activitytype = function_de53ed8e35d0ed7a(activityinstance);
+    activitytype = getactivitytype(activityinstance);
     activityinstance namespace_262d6474998a2356::function_61cd287166c3f695(activitytype);
   } else {
     addcondition(activityinstance.participationconditions, &function_17b1321ab95e72c1, []);
@@ -200,12 +200,12 @@ function function_1b2b8ed00ba454f6(activityclass, activitytype, var_d035b0ef2ba6
 function private function_7f5a40d6894ebb8f(activityclass, activitytype, var_d035b0ef2ba6d096, var_4c0351dd90f219ee) {
   assertex(isfunction(var_d035b0ef2ba6d096), "<dev string:x8b>");
   var_3ea079d94f16a7fb = [[var_d035b0ef2ba6d096]]();
-  assertex(isfunction(var_3ea079d94f16a7fb.var_ad1dcd56d202e9ac), "<dev string:xe4>");
-  var_acbc16b82771fd3e = [[var_3ea079d94f16a7fb.var_ad1dcd56d202e9ac]]();
+  assertex(isfunction(var_3ea079d94f16a7fb.metadatafunction), "<dev string:xe4>");
+  var_acbc16b82771fd3e = [[var_3ea079d94f16a7fb.metadatafunction]]();
   var_4c0351dd90f219ee = default_to(var_4c0351dd90f219ee, []);
 
-  foreach(varianttag, var_2a5a95af69492377 in var_acbc16b82771fd3e) {
-    if(!isDefined(var_2a5a95af69492377.locationorigin) || !isDefined(var_2a5a95af69492377.locationradius)) {
+  foreach(varianttag, variantmetadata in var_acbc16b82771fd3e) {
+    if(!isDefined(variantmetadata.locationorigin) || !isDefined(variantmetadata.locationradius)) {
       assertmsg("<dev string:x140>" + varianttag + "<dev string:x16d>");
     }
 
@@ -224,7 +224,7 @@ function private function_d9c76daf389fd99c(associatedscriptbundlename, activityt
 }
 
 function private function_55b5ea1ea4a8a4e9(activityinstance, var_fb6a27936e71b3eb) {
-  activitytype = function_de53ed8e35d0ed7a(activityinstance);
+  activitytype = getactivitytype(activityinstance);
   varianttag = function_a4748b32a824c79c(activityinstance);
   var_50afda8545de94eb = undefined;
 
@@ -237,11 +237,11 @@ function private function_55b5ea1ea4a8a4e9(activityinstance, var_fb6a27936e71b3e
     assertmsg("<dev string:x18b>" + activitytype + "<dev string:x1bb>" + varianttag + "<dev string:x1c0>");
   }
 
-  var_30e22f861786af77 = spawnStruct();
-  var_30e22f861786af77.origin = var_50afda8545de94eb.scriptstructorigin;
-  var_30e22f861786af77.angles = (0, 0, 0);
-  scripts\common\create_script_utility::translate_position_with_offset_data(var_50afda8545de94eb.cf, var_30e22f861786af77, var_50afda8545de94eb.scriptstructoriginoffset, (0, 0, 0));
-  function_51ad14107ca158fb(activityinstance, "Center_Spatial_Zone", var_30e22f861786af77.origin);
+  cscenterstruct = spawnStruct();
+  cscenterstruct.origin = var_50afda8545de94eb.scriptstructorigin;
+  cscenterstruct.angles = (0, 0, 0);
+  scripts\common\create_script_utility::translate_position_with_offset_data(var_50afda8545de94eb.cf, cscenterstruct, var_50afda8545de94eb.scriptstructoriginoffset, (0, 0, 0));
+  function_51ad14107ca158fb(activityinstance, "Center_Spatial_Zone", cscenterstruct.origin);
 
   if(isDefined(var_50afda8545de94eb.locationorigin)) {
     function_430113b2f1e49ed1(var_50afda8545de94eb, var_50afda8545de94eb.cf, var_50afda8545de94eb.scriptstructoriginoffset);
@@ -278,27 +278,27 @@ function private function_175770c264b4ed5b(var_ec77238be57c1d5c) {
   return var_ec77238be57c1d5c;
 }
 
-function private function_cd7cc22590239790(activitydefinition, spatialzonename, var_eda1e1681182223b, var_133e05516b126906) {
+function private function_cd7cc22590239790(activitydefinition, spatialzonename, instancemetadata, zonemetadata) {
   spatialzonename = function_175770c264b4ed5b(spatialzonename);
-  var_a845183e758f6b9e = function_cd2417904b1a0cf1(activitydefinition, spatialzonename);
-  var_131a90cd9432b2de = !isDefined(var_a845183e758f6b9e) || istrue(var_a845183e758f6b9e.var_6f7fe78e2cfc9f97);
-  var_760cdd304a3dfba3 = isDefined(var_133e05516b126906);
+  zoneinfostruct = function_cd2417904b1a0cf1(activitydefinition, spatialzonename);
+  var_131a90cd9432b2de = !isDefined(zoneinfostruct) || istrue(zoneinfostruct.var_6f7fe78e2cfc9f97);
+  var_760cdd304a3dfba3 = isDefined(zonemetadata);
 
   if(var_760cdd304a3dfba3 && var_131a90cd9432b2de) {
-    function_430113b2f1e49ed1(var_133e05516b126906, var_eda1e1681182223b.cf, var_eda1e1681182223b.scriptstructoriginoffset);
+    function_430113b2f1e49ed1(zonemetadata, instancemetadata.cf, instancemetadata.scriptstructoriginoffset);
 
-    if(isDefined(var_a845183e758f6b9e) && istrue(var_a845183e758f6b9e.var_b5cd0e17510fe594)) {
+    if(isDefined(zoneinfostruct) && istrue(zoneinfostruct.var_b5cd0e17510fe594)) {
       function_9a33c4470751069d(activitydefinition, spatialzonename);
     } else {
-      function_6636b8cd03ed660e(activitydefinition, spatialzonename);
+      addspatialzone(activitydefinition, spatialzonename);
     }
 
-    for(sphereindex = 0; sphereindex < var_133e05516b126906.locationorigin.size; sphereindex++) {
-      origin = var_133e05516b126906.locationorigin[sphereindex];
-      radius = var_133e05516b126906.locationradius[sphereindex];
+    for(sphereindex = 0; sphereindex < zonemetadata.locationorigin.size; sphereindex++) {
+      origin = zonemetadata.locationorigin[sphereindex];
+      radius = zonemetadata.locationradius[sphereindex];
 
-      if(isDefined(var_a845183e758f6b9e)) {
-        ignoreheight = function_b3a183201cf67100(var_a845183e758f6b9e);
+      if(isDefined(zoneinfostruct)) {
+        ignoreheight = function_b3a183201cf67100(zoneinfostruct);
         function_51ad14107ca158fb(activitydefinition, spatialzonename, origin, radius, ignoreheight);
         continue;
       }
@@ -308,12 +308,12 @@ function private function_cd7cc22590239790(activitydefinition, spatialzonename, 
   }
 }
 
-function private function_430113b2f1e49ed1(var_ced62137574fbb9e, var_c0e98e89e6cd9948, centeroffset) {
+function private function_430113b2f1e49ed1(var_ced62137574fbb9e, createscriptfile, centeroffset) {
   for(originindex = 0; originindex < var_ced62137574fbb9e.locationorigin.size; originindex++) {
     center = spawnStruct();
     center.origin = var_ced62137574fbb9e.locationorigin[originindex];
     center.angles = (0, 0, 0);
-    scripts\common\create_script_utility::translate_position_with_offset_data(var_c0e98e89e6cd9948, center, centeroffset, (0, 0, 0));
+    scripts\common\create_script_utility::translate_position_with_offset_data(createscriptfile, center, centeroffset, (0, 0, 0));
     var_ced62137574fbb9e.locationorigin[originindex] = center.origin;
   }
 }
@@ -323,8 +323,8 @@ function private function_d21df4d7c94286bb(var_fb6a27936e71b3eb, params) {
   activitytype = params[0];
   varianttag = params[1];
   activityclass = params[2];
-  var_9334fa52c33d9f6e = params[3];
-  activityinstance = namespace_98c7625238714297::function_e757a367525dc6ff(activitytype, varianttag, var_fb6a27936e71b3eb, var_9334fa52c33d9f6e);
+  additionalspawndatastruct = params[3];
+  activityinstance = namespace_98c7625238714297::function_e757a367525dc6ff(activitytype, varianttag, var_fb6a27936e71b3eb, additionalspawndatastruct);
   activityinstance thread function_86e100b8e9ebf368(activityclass, activitytype, varianttag);
   return activityinstance;
 }

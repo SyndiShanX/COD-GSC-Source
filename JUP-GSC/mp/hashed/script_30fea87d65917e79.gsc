@@ -119,9 +119,9 @@ function private function_f9cfc875faff6dbe(data) {
   return false;
 }
 
-function private function_8cd2392376db14b4(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_8cd2392376db14b4(vehicle, seatid, oldseatid, player, data) {
   if(istrue(data.success)) {
-    function_a9592fd0c9c9c19d(vehicle, seatid, var_fc7c7a874b43a31a, player, data);
+    function_a9592fd0c9c9c19d(vehicle, seatid, oldseatid, player, data);
   }
 
   if(istrue(vehicle.israllypointvehicle)) {
@@ -139,29 +139,29 @@ function private function_8cd2392376db14b4(vehicle, seatid, var_fc7c7a874b43a31a
   }
 }
 
-function private function_a9592fd0c9c9c19d(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_a9592fd0c9c9c19d(vehicle, seatid, oldseatid, player, data) {
   if(seatid == "driver") {
     player cameradefault();
     thread vehicle_occupancy_disablefirefortime(player, 100);
   }
 
-  vehomn_updateomnvarsonseatenter(vehicle, var_fc7c7a874b43a31a, seatid, player);
-  function_8a1eab7c9242a820(vehicle, var_fc7c7a874b43a31a, seatid, player);
+  vehomn_updateomnvarsonseatenter(vehicle, oldseatid, seatid, player);
+  function_8a1eab7c9242a820(vehicle, oldseatid, seatid, player);
 
   if(seatid == "driver") {
     vehicle thread function_8a5f78f0c60e3e1a(player);
   }
 }
 
-function private function_6896df4f69c410f0(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_6896df4f69c410f0(vehicle, seatid, newseatid, player, data) {
   if(istrue(data.success)) {
-    function_74adb461a2be931(vehicle, seatid, var_7558f98f3236963d, player, data);
+    function_74adb461a2be931(vehicle, seatid, newseatid, player, data);
   }
 }
 
-function private function_74adb461a2be931(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_74adb461a2be931(vehicle, seatid, newseatid, player, data) {
   if(!istrue(data.playerdisconnect)) {
-    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, var_7558f98f3236963d, player, data);
+    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, newseatid, player, data);
 
     if(!success) {
       if(issharedfuncdefined("vehicle_occupancy", "handleSuicideFromVehicles")) {
@@ -174,7 +174,7 @@ function private function_74adb461a2be931(vehicle, seatid, var_7558f98f3236963d,
     }
   }
 
-  vehomn_updateomnvarsonseatexit(vehicle, seatid, var_7558f98f3236963d, player);
+  vehomn_updateomnvarsonseatexit(vehicle, seatid, newseatid, player);
 }
 
 function private function_a7fa2d6f6bc0b312(data) {
@@ -258,7 +258,7 @@ function private function_7585a70307df520f() {
   return leveldataforvehicle.var_528c63bf357fb963;
 }
 
-function private function_8a1eab7c9242a820(vehicle, var_fc7c7a874b43a31a, seatid, player) {
+function private function_8a1eab7c9242a820(vehicle, oldseatid, seatid, player) {
   if(seatid == "driver") {
     vehicle function_f3b33ffcc3787a2();
   }

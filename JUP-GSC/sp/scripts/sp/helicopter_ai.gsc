@@ -23,10 +23,10 @@ function evasive_think(vehicle) {
   }
 }
 
-function evasive_createmaneuvers(vehicle, var_17240fd48aa84699) {
-  assert(isDefined(var_17240fd48aa84699));
+function evasive_createmaneuvers(vehicle, maneuvername) {
+  assert(isDefined(maneuvername));
 
-  switch (var_17240fd48aa84699) {
+  switch (maneuvername) {
     case #"hash_debe8da4c699f42b":
       vehicle evasive_addpoint(3000, -1500, 500, "average");
       vehicle evasive_addpoint(6000, 3000, -700, "average");
@@ -56,12 +56,12 @@ function evasive_createmaneuvers(vehicle, var_17240fd48aa84699) {
       vehicle evasive_addpoint(1000, 1000, -200, "none");
       break;
     case #"hash_82dd7c3e206217c2":
-      var_5f8b2ace8e5b3dc5 = [];
-      var_5f8b2ace8e5b3dc5[0] = "strafe_left_right";
-      var_5f8b2ace8e5b3dc5[1] = "strafe_right_left";
-      var_5f8b2ace8e5b3dc5[2] = "360_clockwise";
-      var_5f8b2ace8e5b3dc5[3] = "360_counter_clockwise";
-      return evasive_createmaneuvers(vehicle, var_5f8b2ace8e5b3dc5[randomint(var_5f8b2ace8e5b3dc5.size)]);
+      maneuvernamelist = [];
+      maneuvernamelist[0] = "strafe_left_right";
+      maneuvernamelist[1] = "strafe_right_left";
+      maneuvernamelist[2] = "360_clockwise";
+      maneuvernamelist[3] = "360_counter_clockwise";
+      return evasive_createmaneuvers(vehicle, maneuvernamelist[randomint(maneuvernamelist.size)]);
   }
 
   points = evasive_getallpoints(vehicle);
@@ -85,24 +85,24 @@ function evasive_startmaneuvers(vehicle, points) {
 
   for(i = 1; i < points.size; i++) {
     if(isDefined(points[i + 1])) {
-      var_29d072a4081c09aa = vectortoangles(points[i + 1]["pos"] - points[i]["pos"]);
+      evadedirectionyaw = vectortoangles(points[i + 1]["pos"] - points[i]["pos"]);
     } else {
-      var_29d072a4081c09aa = (0, forwardyaw, 0);
+      evadedirectionyaw = (0, forwardyaw, 0);
     }
 
-    var_bad4333aad3972a0 = var_29d072a4081c09aa[1];
+    goalyawangle = evadedirectionyaw[1];
 
     if(points[i]["goalYawMethod"] == "average") {
-      var_bad4333aad3972a0 = (var_29d072a4081c09aa[1] + forwardyaw) / 2;
+      goalyawangle = (evadedirectionyaw[1] + forwardyaw) / 2;
     } else if(points[i]["goalYawMethod"] == "forward") {
-      var_bad4333aad3972a0 = vehicle.angles[1];
+      goalyawangle = vehicle.angles[1];
     }
 
     if(getDvar(@ "hash_c9ab8c9fc46c92cf") == "1") {
-      thread draw_line_until_notify(points[i]["pos"], points[i]["pos"] + anglesToForward((0, var_bad4333aad3972a0, 0)) * 250, 1, 1, 0.2, vehicle, "evasive_action_done");
+      thread draw_line_until_notify(points[i]["pos"], points[i]["pos"] + anglesToForward((0, goalyawangle, 0)) * 250, 1, 1, 0.2, vehicle, "evasive_action_done");
     }
 
-    vehicle settargetyaw(var_bad4333aad3972a0);
+    vehicle settargetyaw(goalyawangle);
     vehicle thread scripts\common\vehicle_code::setvehgoalpos_wrap(points[i]["pos"], 0);
     vehicle waittill("near_goal");
   }
@@ -164,14 +164,14 @@ function wingman_think(vehicle) {
   dist_forward = 2200;
   dist_side = 1500;
   dist_up = 0;
-  var_b608f355e5ab52b8 = 1;
-  var_40b0f17ed8bcc0f1 = 1.2;
-  var_f70c456b97d2571b = 50;
-  var_fb993e89949902c0 = 60;
-  var_260b7df16f367f60 = 2000;
-  var_a2e4675d403a8346 = getplayerhelispeed();
-  var_a9848973d185d972 = 0;
-  var_c71354f9021ff3f3 = gettime();
+  goalposupdatetime = 1;
+  wingmanspeedscale = 1.2;
+  wingmanbaseacceleration = 50;
+  wingmanbasedeceleration = 60;
+  vehhelicopter_getspeedtime = 2000;
+  vehhelicopter_currentspeed = getplayerhelispeed();
+  vehhelicopter_oldspeed = 0;
+  vehhelicopter_oldspeedtime = gettime();
   goalpos = wingman_getgoalpos(dist_forward, dist_side, dist_up);
   vehicle vehicle_setspeed(30, 20, 20);
   vehicle settargetyaw(level.playervehicle.angles[1]);
@@ -181,44 +181,44 @@ function wingman_think(vehicle) {
     goalpos = wingman_getgoalpos(dist_forward, dist_side, dist_up);
 
     if(getDvar(@ "hash_c9ab8c9fc46c92cf") == "1") {
-      thread draw_line_for_time(level.playervehicle.origin, goalpos, 0, 1, 0, var_b608f355e5ab52b8);
-      thread draw_line_for_time(level.playervehicle.origin, vehicle.origin, 0, 0, 1, var_b608f355e5ab52b8);
-      thread draw_line_for_time(vehicle.origin, goalpos, 1, 1, 0, var_b608f355e5ab52b8);
+      thread draw_line_for_time(level.playervehicle.origin, goalpos, 0, 1, 0, goalposupdatetime);
+      thread draw_line_for_time(level.playervehicle.origin, vehicle.origin, 0, 0, 1, goalposupdatetime);
+      thread draw_line_for_time(vehicle.origin, goalpos, 1, 1, 0, goalposupdatetime);
     }
 
     time = gettime();
 
-    if(time >= var_c71354f9021ff3f3 + var_260b7df16f367f60) {
-      var_c71354f9021ff3f3 = time;
-      var_a9848973d185d972 = var_a2e4675d403a8346;
-      var_a2e4675d403a8346 = getplayerhelispeed();
+    if(time >= vehhelicopter_oldspeedtime + vehhelicopter_getspeedtime) {
+      vehhelicopter_oldspeedtime = time;
+      vehhelicopter_oldspeed = vehhelicopter_currentspeed;
+      vehhelicopter_currentspeed = getplayerhelispeed();
     }
 
-    var_a50ec07292aca5f5 = 0;
-    var_425db4d77182c705 = 0;
+    bgotogoal = 0;
+    wingmanspeed = 0;
 
-    if(var_a9848973d185d972 > 20) {
-      var_425db4d77182c705 = var_a9848973d185d972;
-      var_a50ec07292aca5f5 = 1;
-    } else if(var_a9848973d185d972 <= 20 && getplayerhelispeed() > 20) {
-      var_425db4d77182c705 = getplayerhelispeed();
-      var_a50ec07292aca5f5 = 1;
+    if(vehhelicopter_oldspeed > 20) {
+      wingmanspeed = vehhelicopter_oldspeed;
+      bgotogoal = 1;
+    } else if(vehhelicopter_oldspeed <= 20 && getplayerhelispeed() > 20) {
+      wingmanspeed = getplayerhelispeed();
+      bgotogoal = 1;
     }
 
-    if(var_a50ec07292aca5f5 && var_425db4d77182c705 > 0) {
-      var_425db4d77182c705 *= var_40b0f17ed8bcc0f1;
-      accel = var_f70c456b97d2571b;
-      decel = var_fb993e89949902c0;
+    if(bgotogoal && wingmanspeed > 0) {
+      wingmanspeed *= wingmanspeedscale;
+      accel = wingmanbaseacceleration;
+      decel = wingmanbasedeceleration;
 
-      if(accel >= var_425db4d77182c705 / 2) {
-        accel = var_425db4d77182c705 / 2;
+      if(accel >= wingmanspeed / 2) {
+        accel = wingmanspeed / 2;
       }
 
-      if(decel >= var_425db4d77182c705 / 2) {
-        decel = var_425db4d77182c705 / 2;
+      if(decel >= wingmanspeed / 2) {
+        decel = wingmanspeed / 2;
       }
 
-      vehicle vehicle_setspeed(var_425db4d77182c705, accel, decel);
+      vehicle vehicle_setspeed(wingmanspeed, accel, decel);
       vehicle settargetyaw(level.playervehicle.angles[1]);
       bstop = 0;
 
@@ -227,13 +227,13 @@ function wingman_think(vehicle) {
       }
 
       if(getDvar(@ "hash_c9ab8c9fc46c92cf") == "1") {
-        iprintln("wingman speed: " + var_425db4d77182c705 + " : " + bstop);
+        iprintln("wingman speed: " + wingmanspeed + " : " + bstop);
       }
 
       vehicle setvehgoalpos(goalpos, bstop);
     }
 
-    wait var_b608f355e5ab52b8;
+    wait goalposupdatetime;
   }
 }
 

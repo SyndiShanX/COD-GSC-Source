@@ -170,7 +170,7 @@ function wp_createplane(droppointorigin, planedirectionyaw, streakinfo) {
   planehalfdistance = 28000;
   planeflyspeed = 5000;
   planeflyheight = 2500;
-  var_361663d437db22f5 = 1500;
+  planebombexplodedistance = 1500;
   planedirection = (0, planedirectionyaw, 0);
 
   if(!isDefined(heightent)) {
@@ -178,10 +178,10 @@ function wp_createplane(droppointorigin, planedirectionyaw, streakinfo) {
     planeflyheight += 3000;
   } else {
     planeflyheight = heightent.origin[2] + 3000;
-    var_361663d437db22f5 = scripts\cp_mp\killstreaks\airstrike::getexplodedistance(planeflyheight);
+    planebombexplodedistance = scripts\cp_mp\killstreaks\airstrike::getexplodedistance(planeflyheight);
   }
 
-  flightpath = scripts\cp_mp\killstreaks\airstrike::getflightpath(droppointorigin, planedirection, planehalfdistance, heightent, planeflyheight, planeflyspeed, var_361663d437db22f5);
+  flightpath = scripts\cp_mp\killstreaks\airstrike::getflightpath(droppointorigin, planedirection, planehalfdistance, heightent, planeflyheight, planeflyspeed, planebombexplodedistance);
   plane = spawn("script_model", flightpath["startPoint"]);
   plane.angles = planedirection;
   plane.flightpath = flightpath;
@@ -741,10 +741,10 @@ function wp_watchdisorienteffect(disorientradius, var_73798c47bd1e4e64, var_1f86
   }
 }
 
-function wp_getplayerswithinrange(var_fe16f116477f0084, range) {
+function wp_getplayerswithinrange(playerstocheck, range) {
   playersinrange = [];
 
-  foreach(player in var_fe16f116477f0084) {
+  foreach(player in playerstocheck) {
     if(distance2dsquared(self.origin, player.origin) <= range * range) {
       playersinrange[playersinrange.size] = player;
     }

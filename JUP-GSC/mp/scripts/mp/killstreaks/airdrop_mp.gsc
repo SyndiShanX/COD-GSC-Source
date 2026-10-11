@@ -130,8 +130,8 @@ function function_bb8fa277bef21a11(owner, team, position, angles, destination, s
   return scripts\cp_mp\killstreaks\airdrop_escort::function_5867a72a727ced43(owner, position, "crate", streakinfo);
 }
 
-function airdrop_outlinedisable(id, var_420a996e67989dc4) {
-  scripts\mp\utility\outline::outlinedisable(id, var_420a996e67989dc4);
+function airdrop_outlinedisable(id, entoutlined) {
+  scripts\mp\utility\outline::outlinedisable(id, entoutlined);
 }
 
 function airdrop_capturelootcachecallback(player) {
@@ -245,7 +245,7 @@ function function_91993094d8aade48(actionnotify) {
 
 function function_bc67641e1dcc58b3(crate) {
   if(isDefined(crate.team)) {
-    crate function_5226227bce83ebe9(3, crate.team);
+    crate setentityhudoutlinedata(3, crate.team);
   }
 
   return crate;

@@ -50,10 +50,10 @@ function function_f3f393d3efa1edd1(instance, player, edgeindex, isinverted) {
   return 1;
 }
 
-function function_65a30198614e57d1(instance, player, edgeindex, isinverted, isvertical, var_7bd9fd9d3e7c7aa) {
+function function_65a30198614e57d1(instance, player, edgeindex, isinverted, isvertical, ascendervec) {
   if(isDefined(level.var_c4182f04fdada4a4)) {
     foreach(used_func in level.var_c4182f04fdada4a4) {
-      [[used_func]](instance, player, edgeindex, isinverted, isvertical, var_7bd9fd9d3e7c7aa);
+      [[used_func]](instance, player, edgeindex, isinverted, isvertical, ascendervec);
     }
   }
 }

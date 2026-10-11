@@ -142,9 +142,9 @@ function private function_edcae4b27a6f7abe() {
   return "jup_mg_jltv_mp";
 }
 
-function private function_7abe06772f227330(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_7abe06772f227330(vehicle, seatid, oldseatid, player, data) {
   if(istrue(data.success)) {
-    thread function_2aa52f506944ea71(vehicle, seatid, var_fc7c7a874b43a31a, player, data);
+    thread function_2aa52f506944ea71(vehicle, seatid, oldseatid, player, data);
     return;
   }
 
@@ -156,24 +156,24 @@ function private function_7abe06772f227330(vehicle, seatid, var_fc7c7a874b43a31a
   }
 }
 
-function private function_2aa52f506944ea71(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_2aa52f506944ea71(vehicle, seatid, oldseatid, player, data) {
   if(seatid == "gunner") {
-    level thread vehicle_occupancy_disablefirefortime(player, ter_op(istrue(vehicle.var_ecc491f42aaceaf4), 850, 2200));
+    level thread vehicle_occupancy_disablefirefortime(player, ter_op(istrue(vehicle.playedfirstraise), 850, 2200));
     turret_weapon = function_edcae4b27a6f7abe();
     player thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_giveturret(player, vehicle, turret_weapon);
-    vehicle.var_ecc491f42aaceaf4 = 1;
+    vehicle.playedfirstraise = 1;
   }
 
-  vehomn_updateomnvarsonseatenter(vehicle, var_fc7c7a874b43a31a, seatid, player);
+  vehomn_updateomnvarsonseatenter(vehicle, oldseatid, seatid, player);
 }
 
-function private function_2fdd0e40db525024(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_2fdd0e40db525024(vehicle, seatid, newseatid, player, data) {
   if(istrue(data.success)) {
-    function_3d7fcd7f8aa45e0d(vehicle, seatid, var_7558f98f3236963d, player, data);
+    function_3d7fcd7f8aa45e0d(vehicle, seatid, newseatid, player, data);
   }
 }
 
-function private function_3d7fcd7f8aa45e0d(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_3d7fcd7f8aa45e0d(vehicle, seatid, newseatid, player, data) {
   if(seatid == "gunner") {
     turret_weapon = function_edcae4b27a6f7abe();
     turret = vehicle_getturretbyweapon(vehicle, turret_weapon);
@@ -195,7 +195,7 @@ function private function_3d7fcd7f8aa45e0d(vehicle, seatid, var_7558f98f3236963d
   }
 
   if(!istrue(data.playerdisconnect)) {
-    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, var_7558f98f3236963d, player, data);
+    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, newseatid, player, data);
 
     if(!success) {
       if(issharedfuncdefined("vehicle_occupancy", "handleSuicideFromVehicles")) {
@@ -206,10 +206,10 @@ function private function_3d7fcd7f8aa45e0d(vehicle, seatid, var_7558f98f3236963d
     }
   }
 
-  vehomn_updateomnvarsonseatexit(vehicle, seatid, var_7558f98f3236963d, player);
+  vehomn_updateomnvarsonseatexit(vehicle, seatid, newseatid, player);
 }
 
-function private function_4b1ad3b1d7810658(vehicle, var_9de41f2ee77c33ba, var_3f68c37bafd38606, player, data) {
+function private function_4b1ad3b1d7810658(vehicle, reenterseatid, var_3f68c37bafd38606, player, data) {
   if(isDefined(var_3f68c37bafd38606) && var_3f68c37bafd38606 == "gunner") {
     turret_weapon = function_edcae4b27a6f7abe();
     thread vehicle_occupancy_taketurret(player, vehicle, turret_weapon, data, 1);
@@ -240,7 +240,7 @@ function private function_9e1cb0f4ea79f09e(vehicle, spawndata, turretweapon) {
 
 #using_animtree("mp_vehicles_always_loaded");
 
-function private function_d09b279cd811f266(vehicle, var_7558f98f3236963d, player, data) {
+function private function_d09b279cd811f266(vehicle, newseatid, player, data) {
   if(istrue(vehicle.door_open)) {
     vehicle vehicleplayanim(%reb_com_veh8_techo_fl_door_close);
     vehicle.door_open = undefined;
@@ -255,7 +255,7 @@ function private function_d09b279cd811f266(vehicle, var_7558f98f3236963d, player
   }
 }
 
-function private function_e1f107025762fca4(vehicle, var_7558f98f3236963d, player, data) {
+function private function_e1f107025762fca4(vehicle, newseatid, player, data) {
   if(!istrue(data.playerdisconnect)) {
     player.isdrivingvehicle = undefined;
   }

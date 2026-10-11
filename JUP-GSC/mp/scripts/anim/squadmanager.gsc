@@ -8,12 +8,12 @@
 #using scripts\engine\utility;
 #namespace squadmanager;
 
-function createsquad(squadname, var_5346a21915702367) {
+function createsquad(squadname, squadcreator) {
   assertex(!isDefined(anim.squads[squadname]), "<dev string:x1c>");
   squad = spawnStruct();
   squad.squadname = squadname;
   anim.squads[squadname] = squad;
-  squad.team = getsquadteam(var_5346a21915702367);
+  squad.team = getsquadteam(squadcreator);
   squad.members = [];
   squad.squadlist = [];
   squad.cooldowntimes = [];
@@ -46,9 +46,9 @@ function deletesquad(squadname) {
   anim notify("squad deleted " + squadname);
 }
 
-function getsquadteam(var_5346a21915702367) {
-  if(isDefined(var_5346a21915702367.team)) {
-    squadteam = var_5346a21915702367.team;
+function getsquadteam(squadcreator) {
+  if(isDefined(squadcreator.team)) {
+    squadteam = squadcreator.team;
   } else {
     squadteam = "allies";
   }
@@ -123,8 +123,8 @@ function removefromsquad(squad, squadid) {
   }
 }
 
-function function_a5c82b8ba8a0c279(var_9cb951de1a571d32, true_value, false_value) {
-  if(var_9cb951de1a571d32) {
+function function_a5c82b8ba8a0c279(statement, true_value, false_value) {
+  if(statement) {
     if(isfunction(true_value)) {
       return [[true_value]]();
     } else {
@@ -164,7 +164,7 @@ function getenemyarray() {
   return array;
 }
 
-function function_48706811c593324b() {
+function enemyisincover() {
   return isDefined(self.enemy) && isDefined(self.enemy.node) && isDefined(self.enemy.covernode);
 }
 
@@ -186,7 +186,7 @@ function memberdeathwaiter(squad, squadid) {
 function updateall() {
   neworigin = (0, 0, 0);
   newheading = (0, 0, 0);
-  var_8bf9f8d903167b37 = 0;
+  numinfluences = 0;
   curenemy = undefined;
   isincombat = 0;
   needheading = !isDefined(self.enemy);
@@ -200,7 +200,7 @@ function updateall() {
       continue;
     }
 
-    var_8bf9f8d903167b37++;
+    numinfluences++;
     neworigin += member.origin;
 
     if(needheading) {
@@ -223,11 +223,11 @@ function updateall() {
     }
   }
 
-  if(var_8bf9f8d903167b37) {
-    self.origin = neworigin / var_8bf9f8d903167b37;
+  if(numinfluences) {
+    self.origin = neworigin / numinfluences;
 
     if(needheading) {
-      self.forward = newheading / var_8bf9f8d903167b37;
+      self.forward = newheading / numinfluences;
     }
   } else {
     self.origin = undefined;

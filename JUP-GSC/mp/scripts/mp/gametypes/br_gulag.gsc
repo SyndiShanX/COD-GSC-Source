@@ -2252,7 +2252,7 @@ function gulagstreamlocationstart(streamorigin) {
   }
 
   self setallstreamloaddist(10000);
-  self function_670863fc4008c3d8(streamorigin);
+  self setadditionalstreamposuntilcleared(streamorigin);
   return true;
 }
 
@@ -3729,15 +3729,15 @@ function gulagplayerlost(arena, var_40d8983fc5e5c7a5, var_93592d4a5fd91ed1) {
       self notify("death_or_disconnect");
       scripts\mp\codcasterclientmatchdata::function_f8b808cd6473e6cc(23, 0);
 
-      if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+      if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
         isplayerreloading = self isreloading();
 
         if(isplayerreloading) {
-          var_5814d27874b48e54 = spawnStruct();
-          var_5814d27874b48e54.player = self;
-          var_5814d27874b48e54.reloadcanceltime = getsystemtimeinmicroseconds();
-          var_5814d27874b48e54.cancelreason = "DISCONNECT";
-          namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_on_reload_cancel", var_5814d27874b48e54);
+          telemetrydata = spawnStruct();
+          telemetrydata.player = self;
+          telemetrydata.reloadcanceltime = getsystemtimeinmicroseconds();
+          telemetrydata.cancelreason = "DISCONNECT";
+          namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_on_reload_cancel", telemetrydata);
         }
       }
 
@@ -4335,7 +4335,7 @@ function function_c3014b9015a55715() {
           spawnangles = spawnpt.angles;
         }
 
-        codcaster function_bc667001f9dd3808(spawnorigin);
+        codcaster predictstreamposuntilcleared(spawnorigin);
       }
     }
   }
@@ -4644,11 +4644,11 @@ function setplayergulagindex(arena) {
   bitoffset = 3;
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (arena.gulagindex &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
+  invertedmask = ~(mask << bitoffset);
   prevvalue = self.game_extrainfo;
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
-  self.game_extrainfo = var_82a90e56e416fa55;
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
+  self.game_extrainfo = repackedvalue;
 }
 
 function startbetting(arena, fighters) {
@@ -5072,7 +5072,7 @@ function spawnrocks(arena) {
   }
 }
 
-function rockused(rock, part, state, player, var_a5b2c541413aa895, usestring) {
+function rockused(rock, part, state, player, bautouse, usestring) {
   if(!isDefined(rock) || !isDefined(player)) {
     return;
   }
@@ -5946,7 +5946,7 @@ function arenaflag_showflagoutline(arena, enable) {
 
     if(arena.arenaplayers.size > 0) {
       self.flagmodel hudoutlineenableforclients(arena.arenaplayers, "outline_nodepth_orange");
-      self.flagmodel function_5226227bce83ebe9(1, "team_hundred_fifty_one");
+      self.flagmodel setentityhudoutlinedata(1, "team_hundred_fifty_one");
     }
 
     return;
@@ -6109,34 +6109,34 @@ function arenaflag_oncontested() {
 function getarenaomnvarbitpackinginfo(dataref, value) {
   bitoffset = 0;
   bitwidth = 0;
-  var_8e90fa6d5789ad63 = "";
+  omnvarref = "";
 
   switch (dataref) {
     case #"hash_f5d0ab7e55587e1d":
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [0, 8, "ui_br_gulag_players_1"];
+      [bitoffset, bitwidth, omnvarref] = [0, 8, "ui_br_gulag_players_1"];
       value += 1;
       break;
     case #"hash_f5d0aa7e55587c8a":
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [8, 8, "ui_br_gulag_players_1"];
+      [bitoffset, bitwidth, omnvarref] = [8, 8, "ui_br_gulag_players_1"];
       value += 1;
       break;
     case #"hash_622ca631d10c4370":
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [16, 8, "ui_br_gulag_players_1"];
+      [bitoffset, bitwidth, omnvarref] = [16, 8, "ui_br_gulag_players_1"];
       value += 1;
       break;
     case #"hash_622ca731d10c4503":
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [24, 8, "ui_br_gulag_players_1"];
+      [bitoffset, bitwidth, omnvarref] = [24, 8, "ui_br_gulag_players_1"];
       value += 1;
       break;
     case #"hash_e89fe3aac33c10c9":
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [0, 8, "ui_br_gulag_data"];
+      [bitoffset, bitwidth, omnvarref] = [0, 8, "ui_br_gulag_data"];
       value += 1;
       break;
     case #"hash_848cf681a543f242":
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [8, 8, "ui_br_gulag_data"];
+      [bitoffset, bitwidth, omnvarref] = [8, 8, "ui_br_gulag_data"];
       break;
     case #"hash_848cf781a543f3d5":
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [16, 8, "ui_br_gulag_data"];
+      [bitoffset, bitwidth, omnvarref] = [16, 8, "ui_br_gulag_data"];
       break;
     default:
       if(!function_1980065ce4dc067b()) {
@@ -6146,28 +6146,28 @@ function getarenaomnvarbitpackinginfo(dataref, value) {
       break;
   }
 
-  return [bitoffset, bitwidth, var_8e90fa6d5789ad63, value];
+  return [bitoffset, bitwidth, omnvarref, value];
 }
 
-function packarenaomnvardata(arena, var_8e90fa6d5789ad63, value, bitoffset, bitwidth) {
+function packarenaomnvardata(arena, omnvarref, value, bitoffset, bitwidth) {
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (value &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
-  prevvalue = arena.omnvardata[var_8e90fa6d5789ad63];
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
-  arena.omnvardata[var_8e90fa6d5789ad63] = var_82a90e56e416fa55;
+  invertedmask = ~(mask << bitoffset);
+  prevvalue = arena.omnvardata[omnvarref];
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
+  arena.omnvardata[omnvarref] = repackedvalue;
 }
 
 function setarenaomnvar(arena, dataref, value) {
   assert(isDefined(dataref) && isstring(dataref));
-  [bitoffset, bitwidth, var_8e90fa6d5789ad63, value] = getarenaomnvarbitpackinginfo(dataref, value);
+  [bitoffset, bitwidth, omnvarref, value] = getarenaomnvarbitpackinginfo(dataref, value);
 
-  if(var_8e90fa6d5789ad63 == "") {
+  if(omnvarref == "") {
     return;
   }
 
-  packarenaomnvardata(arena, var_8e90fa6d5789ad63, value, bitoffset, bitwidth);
+  packarenaomnvardata(arena, omnvarref, value, bitoffset, bitwidth);
 }
 
 function setarenaomnvarplayertype(arena, dataref, player) {
@@ -6225,8 +6225,8 @@ function updatearenaomnvarplayers(arena) {
       player setclientomnvar("ui_br_gulag_match_state", 0);
     }
 
-    var_82a90e56e416fa55 = var_793c4e46c0425bd2 | queueposition << 1;
-    player setclientomnvar("ui_br_gulag_queue_position", var_82a90e56e416fa55);
+    repackedvalue = var_793c4e46c0425bd2 | queueposition << 1;
+    player setclientomnvar("ui_br_gulag_queue_position", repackedvalue);
   }
 }
 
@@ -6282,23 +6282,23 @@ function playersetarenaomnvarwithloadout(arena) {
 function playersetomnvargulag(arena, dataref, value) {
   assert(isPlayer(self));
   assert(isDefined(dataref) && isstring(dataref));
-  [bitoffset, bitwidth, var_8e90fa6d5789ad63, value] = getarenaomnvarbitpackinginfo(dataref, value);
+  [bitoffset, bitwidth, omnvarref, value] = getarenaomnvarbitpackinginfo(dataref, value);
 
-  if(var_8e90fa6d5789ad63 == "") {
+  if(omnvarref == "") {
     return;
   }
 
-  playerpackdataintogulagomnvar(arena, var_8e90fa6d5789ad63, value, bitoffset, bitwidth);
+  playerpackdataintogulagomnvar(arena, omnvarref, value, bitoffset, bitwidth);
 }
 
-function playerpackdataintogulagomnvar(arena, var_8e90fa6d5789ad63, value, bitoffset, bitwidth) {
+function playerpackdataintogulagomnvar(arena, omnvarref, value, bitoffset, bitwidth) {
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (value &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
-  prevvalue = arena.omnvardata[var_8e90fa6d5789ad63];
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
-  self setclientomnvar(var_8e90fa6d5789ad63, var_82a90e56e416fa55);
+  invertedmask = ~(mask << bitoffset);
+  prevvalue = arena.omnvardata[omnvarref];
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
+  self setclientomnvar(omnvarref, repackedvalue);
 }
 
 function updateplayeromnvarsallmatches(arena) {
@@ -6309,8 +6309,8 @@ function updateplayeromnvarsallmatches(arena) {
 function playercleargulagomnvars(arena) {
   var_1283ce7783c79a30 = getarraykeys(arena.omnvardata);
 
-  foreach(var_8e90fa6d5789ad63 in var_1283ce7783c79a30) {
-    self setclientomnvar(var_8e90fa6d5789ad63, 0);
+  foreach(omnvarref in var_1283ce7783c79a30) {
+    self setclientomnvar(omnvarref, 0);
   }
 
   self setclientomnvar("ui_overtime_timer", 0);

@@ -590,11 +590,11 @@ function ammobox_giverandomattachment(objweapon) {
     altstockammo = self getweaponammostock(altweaponobj);
     var_baeada8d49906593 = self getweaponammoclip(altweaponobj, "left");
     var_9ca1030d20188244 = self getweaponammoclip(altweaponobj, "right");
-    var_72672cd81ec1093d = ter_op(var_f184d9de2531004f, var_c233f1525f444c2d, newweaponobj);
+    weapontogive = ter_op(var_f184d9de2531004f, var_c233f1525f444c2d, newweaponobj);
     _takeweapon(objweapon);
-    _giveweapon(var_72672cd81ec1093d, -1, 0, 0);
-    _switchtoweaponimmediate(var_72672cd81ec1093d);
-    scripts\cp_mp\weapon::fixupplayerweapons(self, var_72672cd81ec1093d);
+    _giveweapon(weapontogive, -1, 0, 0);
+    _switchtoweaponimmediate(weapontogive);
+    scripts\cp_mp\weapon::fixupplayerweapons(self, weapontogive);
     self setweaponammostock(newweaponobj, mainstockammo);
     self setweaponammoclip(newweaponobj, var_d1e8a3c0c782161f, "left");
     self setweaponammoclip(newweaponobj, var_3b77670cee4d09d8, "right");

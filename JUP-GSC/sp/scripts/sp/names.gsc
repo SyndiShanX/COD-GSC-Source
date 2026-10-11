@@ -18,26 +18,26 @@ function setup_names() {
     return;
   }
 
-  var_751ffaebfd2f0181[#"unitednations"] = 0;
-  var_751ffaebfd2f0181[#"unitednationsfemale"] = 1;
-  var_751ffaebfd2f0181[#"unitedstates"] = 0;
-  var_751ffaebfd2f0181[#"unitedstatesfemale"] = 1;
-  var_751ffaebfd2f0181[#"sas"] = 0;
-  var_751ffaebfd2f0181[#"sasfemale"] = 1;
-  var_751ffaebfd2f0181[#"fsa"] = 4;
-  var_751ffaebfd2f0181[#"fsafemale"] = 5;
-  var_751ffaebfd2f0181[#"alqatala"] = 2;
-  var_751ffaebfd2f0181[#"alqatalafemale"] = 3;
-  var_751ffaebfd2f0181[#"russian"] = 6;
-  var_751ffaebfd2f0181[#"russianfemale"] = 6;
-  var_751ffaebfd2f0181[#"cartel"] = 8;
-  var_751ffaebfd2f0181[#"hash_3df7c24714e86e6d"] = 8;
-  var_751ffaebfd2f0181[#"hash_d700685400fbffa1"] = 8;
-  var_751ffaebfd2f0181[#"hash_5f1ef8142f0b6fcb"] = 8;
-  var_751ffaebfd2f0181[#"shadowcompany"] = 0;
-  var_751ffaebfd2f0181[#"konni"] = 6;
+  nationalities[#"unitednations"] = 0;
+  nationalities[#"unitednationsfemale"] = 1;
+  nationalities[#"unitedstates"] = 0;
+  nationalities[#"unitedstatesfemale"] = 1;
+  nationalities[#"sas"] = 0;
+  nationalities[#"sasfemale"] = 1;
+  nationalities[#"fsa"] = 4;
+  nationalities[#"fsafemale"] = 5;
+  nationalities[#"alqatala"] = 2;
+  nationalities[#"alqatalafemale"] = 3;
+  nationalities[#"russian"] = 6;
+  nationalities[#"russianfemale"] = 6;
+  nationalities[#"cartel"] = 8;
+  nationalities[#"hash_3df7c24714e86e6d"] = 8;
+  nationalities[#"hash_d700685400fbffa1"] = 8;
+  nationalities[#"hash_5f1ef8142f0b6fcb"] = 8;
+  nationalities[#"shadowcompany"] = 0;
+  nationalities[#"konni"] = 6;
 
-  foreach(nationality, column in var_751ffaebfd2f0181) {
+  foreach(nationality, column in nationalities) {
     level.names[nationality] = [];
 
     if(column < 0) {
@@ -49,13 +49,13 @@ function setup_names() {
 
   init_script_friendnames();
 
-  foreach(nationality, column in var_751ffaebfd2f0181) {
+  foreach(nationality, column in nationalities) {
     remove_script_friendnames_from_list(nationality);
     randomize_name_list(nationality);
     level.nameindex[nationality] = 0;
   }
 
-  var_751ffaebfd2f0181 = undefined;
+  nationalities = undefined;
 }
 
 function table_get_names(nationality, column) {

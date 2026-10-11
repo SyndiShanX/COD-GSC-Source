@@ -20,7 +20,7 @@
 #namespace c17_infil;
 
 function function_2f340eb1a058fd55(subtype) {
-  function_f1aed36ab4598ea("c17_infil");
+  snd_transient_load("c17_infil");
   thread function_725375206755d1c3();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -118,25 +118,25 @@ function function_15c741a7b627d900(infil, spot_index) {
   self clearcinematicmotionoverride();
   self disablephysicaldepthoffieldscripting();
   wait animlength - 0.5;
-  scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 1, 0.5);
+  scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 1, 0.5);
   level waittill("prematch_done");
   function_36154e36d2455566();
   wait 1;
-  scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 1);
+  scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 1);
 }
 
-function function_5994f877fc793456(var_ee69967fa93826fc) {
-  if(var_ee69967fa93826fc == 1) {
+function function_5994f877fc793456(shotnumber) {
+  if(shotnumber == 1) {
     self playlocalsound("jup_infil_c17_shot_01_lr");
     return;
   }
 
-  if(var_ee69967fa93826fc == 2) {
+  if(shotnumber == 2) {
     self playlocalsound("jup_infil_c17_shot_02_lr");
     return;
   }
 
-  if(var_ee69967fa93826fc == 3) {
+  if(shotnumber == 3) {
     self playlocalsound("jup_infil_c17_shot_03_lr");
   }
 }
@@ -527,7 +527,7 @@ function function_89a2405953b84136(var_addd3217bc59a7b8, override_og) {
 function function_725375206755d1c3() {
   level waittill("prematch_over");
   wait 61;
-  function_f4e0ff5cb899686d("c17_infil");
+  snd_transient_unload("c17_infil");
 }
 
 function function_6158ef142e9bd640() {

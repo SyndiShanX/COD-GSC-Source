@@ -41,7 +41,7 @@ function function_f5154a3d477820d9() {
 
   self.battlechatter.lastcombat = gettime();
 
-  if(isstruct(function_16c83724c6b1446d())) {
+  if(isstruct(enemyweaponevent())) {
     return;
   }
 
@@ -53,7 +53,7 @@ function function_f5154a3d477820d9() {
     return;
   }
 
-  if(isstruct(function_6de481ebc9a12469())) {
+  if(isstruct(orderattackevent())) {
     return;
   }
 }
@@ -98,7 +98,7 @@ function function_d2b3539e8cdd93e7() {
   }
 }
 
-function function_6de481ebc9a12469() {
+function orderattackevent() {
   seq = function_f06047156c190734();
 
   if(!isDefined(seq)) {
@@ -135,7 +135,7 @@ function function_e5312c6dfa471fdb() {
 }
 
 function function_a06c6f8b2f6d82d0(direction) {
-  if(self.enemy isnear(self, level.var_fb605061a3778884)) {
+  if(self.enemy isnear(self, level.bcs_mindist)) {
     return;
   }
 
@@ -171,10 +171,10 @@ function get_direction(target) {
     return "high";
   }
 
-  allies = function_fd9e4cb348a5f283(self.origin, level.var_63a73645a8e030ad, self.team);
+  allies = getaiinrange(self.origin, level.bcs_fardist, self.team);
 
   if(self.team == "allies") {
-    allies = array_combine(allies, getplayersinrange(self.origin, level.var_798aa343368f724e));
+    allies = array_combine(allies, getplayersinrange(self.origin, level.bcs_neardist));
   }
 
   if(allies.size == 0) {
@@ -183,8 +183,8 @@ function get_direction(target) {
 
   ally_center = get_average_origin(allies);
   combat_forward = vectorNormalize(function_7969d683dfc4fb9e(allies));
-  var_53b34aadf7b8e731 = vectorNormalize(target.origin - ally_center);
-  dotproduct = vectordot(var_53b34aadf7b8e731, combat_forward);
+  vec_to_target = vectorNormalize(target.origin - ally_center);
+  dotproduct = vectordot(vec_to_target, combat_forward);
 
   if(dotproduct > 0.95) {
     return "ahead";
@@ -195,7 +195,7 @@ function get_direction(target) {
   }
 
   right = vectorcross((0, 0, 1), combat_forward);
-  dotproduct = vectordot(var_53b34aadf7b8e731, right);
+  dotproduct = vectordot(vec_to_target, right);
   return ter_op(dotproduct < 0, "right", "left");
 }
 
@@ -276,13 +276,13 @@ function function_8d862c3d37cb8ebd(enemy) {
   }
 
   enemy_ally = enemy getclosestfriendlyspeaker();
-  var_92efd1e1e657aee9 = isalive(enemy_ally) && enemy_ally isnear(enemy, level.var_798aa343368f724e);
+  var_92efd1e1e657aee9 = isalive(enemy_ally) && enemy_ally isnear(enemy, level.bcs_neardist);
 
   if(!var_92efd1e1e657aee9) {
     return false;
   }
 
-  if(!getplayersinrange(enemy.origin, level.var_63a73645a8e030ad).size > 0) {
+  if(!getplayersinrange(enemy.origin, level.bcs_fardist).size > 0) {
     return false;
   }
 
@@ -307,10 +307,10 @@ function function_771bace1bff17684() {
     return enemy function_93b4f17e4a3474b("target_getting_cover", ["target_getting_cover"]);
   }
 
-  var_eb835b5fde3371bd = getenemiesinrange();
+  enemies_in_range = getenemiesinrange();
 
-  if(isDefined(var_eb835b5fde3371bd) && var_eb835b5fde3371bd.size > 0) {
-    foreach(enemy_entity in var_eb835b5fde3371bd) {
+  if(isDefined(enemies_in_range) && enemies_in_range.size > 0) {
+    foreach(enemy_entity in enemies_in_range) {
       if(function_8d862c3d37cb8ebd(enemy_entity)) {
         return enemy_entity function_93b4f17e4a3474b("enemy_getting_cover", ["enemy_getting_cover"]);
       }
@@ -345,7 +345,7 @@ function function_402ee78fe1df3ace() {
 }
 
 function function_c5ece4fa44d2894e() {
-  allies = function_fd9e4cb348a5f283(self.origin, level.var_798aa343368f724e, self.team);
+  allies = getaiinrange(self.origin, level.bcs_neardist, self.team);
 
   foreach(ally in allies) {
     if(ally == self) {
@@ -359,12 +359,12 @@ function function_c5ece4fa44d2894e() {
   }
 }
 
-function function_859d741dc99bf1a4() {
+function is_wounded() {
   maxhealth = default_to(self.maxhealth, 100);
   return self.health < maxhealth;
 }
 
-function function_16c83724c6b1446d(enemy) {
+function enemyweaponevent(enemy) {
   enemy = default_to(enemy, self.enemy);
 
   if(!function_45f570789ff9a0fd(5, 1)) {
@@ -550,13 +550,13 @@ function useevent(type, var_7cf0530cd57b14) {
   var_32ffe93e49cf51c0 = function_b4d191cb892d2ed9(type);
 
   if(isDefined(var_32ffe93e49cf51c0)) {
-    var_4acfa36a6dd8b797 = 0.5;
+    lastsighttime = 0.5;
 
     if(isselfai) {
-      enemy_speaker = function_8db2aa6f0377958(undefined, undefined, 1, undefined, var_4acfa36a6dd8b797);
+      enemy_speaker = function_8db2aa6f0377958(undefined, undefined, 1, undefined, lastsighttime);
     } else {
-      var_eb835b5fde3371bd = function_74b5af7f20c85724(self.origin, undefined, self.team);
-      enemy_speaker = function_b1ab02cfbfd12e43(var_eb835b5fde3371bd, undefined, undefined, 1, var_4acfa36a6dd8b797);
+      enemies_in_range = function_74b5af7f20c85724(self.origin, undefined, self.team);
+      enemy_speaker = function_b1ab02cfbfd12e43(enemies_in_range, undefined, undefined, 1, lastsighttime);
     }
 
     if(isDefined(enemy_speaker) && isai(enemy_speaker)) {
@@ -632,13 +632,13 @@ function grenadedangerevent(grenade) {
     speakerai = function_b1ab02cfbfd12e43(aiinrange);
 
     if(isDefined(speakerai)) {
-      var_cc22949a3adbc834 = "enemy_grenade_close";
+      bcs_alias = "enemy_grenade_close";
 
       if(aiinrange.size > 1) {
-        var_cc22949a3adbc834 = "team_enemy_grenade_close";
+        bcs_alias = "team_enemy_grenade_close";
       }
 
-      speakerai function_93b4f17e4a3474b("grenade_danger", var_cc22949a3adbc834, level.battlechatter.settings["grenade_danger"]);
+      speakerai function_93b4f17e4a3474b("grenade_danger", bcs_alias, level.battlechatter.settings["grenade_danger"]);
     }
   }
 }
@@ -652,13 +652,13 @@ function burnevent(type) {
     return;
   }
 
-  var_cc22949a3adbc834 = undefined;
+  bcs_alias = undefined;
 
   if(type == "molotov") {
-    var_cc22949a3adbc834 = "hurt_by_molotov";
+    bcs_alias = "hurt_by_molotov";
   }
 
-  if(!isDefined(var_cc22949a3adbc834)) {
+  if(!isDefined(bcs_alias)) {
     if(getdvarint(@ "hash_864d3ab12f741516")) {
       function_51c8ea07cf76cbd7("<dev string:x203>" + type + "<dev string:x233>");
     }
@@ -666,7 +666,7 @@ function burnevent(type) {
     return;
   }
 
-  function_93b4f17e4a3474b("hurt_by_" + type, var_cc22949a3adbc834, level.battlechatter.settings["hurt_by_"]);
+  function_93b4f17e4a3474b("hurt_by_" + type, bcs_alias, level.battlechatter.settings["hurt_by_"]);
 }
 
 function attackevent() {
@@ -748,20 +748,20 @@ function function_3aab8d98361f6ecf() {
   if(percent_chance(15)) {
     self_name = function_2008b43adf7e18ef();
     ask_sequence = [ally, self_name, "ask_low_ammo"];
-    var_c5525bbc1964db31 = [];
+    reply_sequence = [];
     clippercentage = clipammo / clipsize;
 
     if(clippercentage <= 0.3) {
       if(percent_chance(50)) {
-        var_c5525bbc1964db31 = [0.2, self, "reply_low_ammo"];
+        reply_sequence = [0.2, self, "reply_low_ammo"];
       } else {
-        var_c5525bbc1964db31 = [0.2, self, "low_ammo"];
+        reply_sequence = [0.2, self, "low_ammo"];
       }
     } else {
-      var_c5525bbc1964db31 = [0.2, self, "reply_okay", 0.2, ally, "reply_keepshooting"];
+      reply_sequence = [0.2, self, "reply_okay", 0.2, ally, "reply_keepshooting"];
     }
 
-    sequence = array_combine(ask_sequence, var_c5525bbc1964db31);
+    sequence = array_combine(ask_sequence, reply_sequence);
     function_93b4f17e4a3474b("ammo_status", sequence);
   }
 }
@@ -785,7 +785,7 @@ function reloadevent() {
 
   if(check_cooldown("enemy_reloading")) {
     if(isPlayer(self)) {
-      enemies = function_fd9e4cb348a5f283(self.origin, level.var_587de0e7b537210a, "axis");
+      enemies = getaiinrange(self.origin, level.bcs_maxdist, "axis");
     } else {
       enemies = getenemiesinrange();
     }
@@ -815,7 +815,7 @@ function reloadevent() {
   function_93b4f17e4a3474b("reloading", "reloading");
 }
 
-function function_56e490b1816855eb(otherentity, eventsubcategory) {
+function targetmoveevent(otherentity, eventsubcategory) {
   self endon("removed from battleChatter");
   self endon("death");
   self endon("bcs_stateChange");
@@ -923,13 +923,13 @@ function moveevent(var_12853466ce806612) {
   }
 
   if(isDefined(guy2) && percent_chance(65)) {
-    var_948d565f600a3ed3 = guy1 function_2008b43adf7e18ef();
+    guy1_name = guy1 function_2008b43adf7e18ef();
 
     if(percent_chance(30)) {
-      var_948d565f600a3ed3 = 0;
+      guy1_name = 0;
     }
 
-    seq = [guy2, 0.1, var_948d565f600a3ed3, 0.2, order_event, guy1, 0.2, move_event];
+    seq = [guy2, 0.1, guy1_name, 0.2, order_event, guy1, 0.2, move_event];
   } else {
     seq = move_event;
   }
@@ -941,7 +941,7 @@ function moveevent(var_12853466ce806612) {
   function_93b4f17e4a3474b("ally_movement", seq);
 }
 
-function function_453b3867c6ec0ceb(enemy, team, type) {
+function killfirmevent(enemy, team, type) {
   wait 0.6;
 
   if(!isDefined(self) || !isDefined(team) || !isDefined(enemy) || team == "dead") {
@@ -981,7 +981,7 @@ function function_453b3867c6ec0ceb(enemy, team, type) {
   speaker function_93b4f17e4a3474b(name, sequence, level.battlechatter.settings["killfirm"]);
 }
 
-function function_f649c4ef3acdec1d(team) {
+function casualtyevent(team) {
   wait 0.7;
 
   if(!isDefined(self) || !isDefined(team) || team == "dead") {
@@ -1134,7 +1134,7 @@ function function_f06007e1f432ce27() {
     return;
   }
 
-  var_75be11c0a0a035dc = function_fd9e4cb348a5f283(self.origin, level.var_d809dc9f8a466642, self.team);
+  var_75be11c0a0a035dc = getaiinrange(self.origin, level.var_d809dc9f8a466642, self.team);
   var_542b15e7d1da2adb = var_75be11c0a0a035dc.size;
 
   if(var_542b15e7d1da2adb == 1) {
@@ -1196,7 +1196,7 @@ function function_749f5c9deca36473(event, guys) {
     }
 
     if(event == "idle_solo") {
-      var_75be11c0a0a035dc = function_fd9e4cb348a5f283(guys[0].origin, level.var_d809dc9f8a466642, guys[0].team);
+      var_75be11c0a0a035dc = getaiinrange(guys[0].origin, level.var_d809dc9f8a466642, guys[0].team);
       var_542b15e7d1da2adb = var_75be11c0a0a035dc.size;
 
       if(var_542b15e7d1da2adb > 1) {
@@ -1213,7 +1213,7 @@ function function_749f5c9deca36473(event, guys) {
   }
 }
 
-function function_1d268b003b51a5b3(var_cd5f775022dcd2c3) {
+function curiousevent(var_cd5f775022dcd2c3) {
   if(isDefined(var_cd5f775022dcd2c3)) {
     if(var_cd5f775022dcd2c3 == 0) {
       function_93b4f17e4a3474b("patrol_curious", "react_first");
@@ -1290,7 +1290,7 @@ function private function_e8cbb4eef70a6e9c() {
 }
 
 function function_842319303719440c(radio) {
-  allies = function_fd9e4cb348a5f283(self.origin, level.var_587de0e7b537210a, self.team);
+  allies = getaiinrange(self.origin, level.bcs_maxdist, self.team);
   allies = array_remove(allies, self);
   closest_ally = sortbydistance(allies, self.origin)[0];
   radio.closest_ally = closest_ally;
@@ -1309,9 +1309,9 @@ function function_842319303719440c(radio) {
 
     if(!is_dead_or_dying(closest_ally) && isDefined(closest_ally.fnsetstealthstate)) {
       if(!istrue(level.var_2b9d0f1e2beb4de2) || !closest_ally can_path(self.origin)) {
-        sequence2 = ["order_stay_alert", &function_e8cbb4eef70a6e9c, 0.2, &function_1e0fd010aa69762d, "confirming"];
+        sequence2 = ["order_stay_alert", &function_e8cbb4eef70a6e9c, 0.2, &set_reciever, "confirming"];
       } else {
-        sequence2 = ["order_get_visual", 0.2, &function_c7da930cd7ba754f, &function_e8cbb4eef70a6e9c, &function_64d791a1d9d155b1, 0.1, &function_1e0fd010aa69762d, "moving_there"];
+        sequence2 = ["order_get_visual", 0.2, &fallback_seq, &function_e8cbb4eef70a6e9c, &inv_corpse, 0.1, &set_reciever, "moving_there"];
       }
 
       sequence = array_combine(sequence, sequence2);
@@ -1329,7 +1329,7 @@ function closest_radio() {
     return;
   }
 
-  enemies = function_fd9e4cb348a5f283(level.player.origin, level.var_798aa343368f724e, self.speaker.team);
+  enemies = getaiinrange(level.player.origin, level.bcs_neardist, self.speaker.team);
 
   if(enemies.size == 0) {
     return;
@@ -1339,13 +1339,13 @@ function closest_radio() {
   return function_592f13f1a0e078ff(guy);
 }
 
-function function_1e0fd010aa69762d() {
+function set_reciever() {
   if(is_dead_or_dying(level.player)) {
     return;
   }
 
-  enemies = function_fd9e4cb348a5f283(level.player.origin, level.var_63a73645a8e030ad, self.speaker.team);
-  corpses = [[level.var_621af16ef0684a11]](level.var_63a73645a8e030ad);
+  enemies = getaiinrange(level.player.origin, level.bcs_fardist, self.speaker.team);
+  corpses = [[level.var_621af16ef0684a11]](level.bcs_fardist);
   enemies = array_combine(enemies, corpses);
   enemies = array_remove(enemies, self.speaker);
 
@@ -1357,7 +1357,7 @@ function function_1e0fd010aa69762d() {
   self.receivers = guy;
 }
 
-function function_c7da930cd7ba754f() {
+function fallback_seq() {
   if(is_dead_or_dying(self.sequence[self.index])) {
     return [1.5, "ally_missing_multi", undefined];
   }
@@ -1371,7 +1371,7 @@ function function_c315a1b81d2e3288() {
   }
 }
 
-function function_64d791a1d9d155b1() {
+function inv_corpse() {
   thread function_4dc52e4105914357();
   self.owner.battlechatter.npcid = self.speaker.battlechatter.npcid;
   self.owner.battlechatter.lookupid = undefined;
@@ -1426,18 +1426,18 @@ function function_23a29830a84af4cf() {
   function_d54e84a9513b0e45("disguise_enter_investigate", sequence, 1, 2, 10);
 }
 
-function function_bbb539fd7c238608() {
+function enterinvestigateevent() {
   if(!isDefined(self.var_bdf67b527ec1547a) || self.var_bdf67b527ec1547a == "none") {
     return;
   }
 
   sequence = undefined;
   other = getclosestfriendlyspeaker();
-  var_b70b49dc45959168 = isalive(other) && isDefined(other.stealth) && other isnear(self, level.var_798aa343368f724e);
+  other_isnear = isalive(other) && isDefined(other.stealth) && other isnear(self, level.bcs_neardist);
 
-  if(var_b70b49dc45959168 && other.var_fe5ebefa740c7106 == 1) {
+  if(other_isnear && other.stealth_bsmstate == 1) {
     sequence = [self, 0, "react_multi", other, 1.5, "ask_saw_that", self, 1, "confirming", other, 1.5, "team_heard_something"];
-  } else if(var_b70b49dc45959168) {
+  } else if(other_isnear) {
     sequence = [self, 0, "muttered_confusion", other, 1.5, "ask_saw_that", self, 1, "confirming", other, 1, "hunt_inv_order"];
   } else {
     sequence = [self, 0, "react_multi", self, 1.5, "heard_something"];
@@ -1473,9 +1473,9 @@ function function_e46d9fd4c3250863() {
   sequence = [];
   leader = function_592f13f1a0e078ff(self);
   other = getclosestfriendlyspeaker();
-  var_b70b49dc45959168 = isalive(other) && isDefined(other.stealth) && other isnear(self, level.var_798aa343368f724e);
+  other_isnear = isalive(other) && isDefined(other.stealth) && other isnear(self, level.bcs_neardist);
 
-  if(var_b70b49dc45959168) {
+  if(other_isnear) {
     if(percent_chance(50)) {
       sequence = [self, 0, "ask_found_anything", other, 1.5, "resp_sound_first"];
     } else {
@@ -1509,10 +1509,10 @@ function function_ba8bab0dfce1b7d1() {
   sequence = [];
   leader = function_592f13f1a0e078ff(self);
   other = getclosestfriendlyspeaker();
-  var_b70b49dc45959168 = isalive(other) && isDefined(other.stealth) && other isnear(self, level.var_798aa343368f724e);
+  other_isnear = isalive(other) && isDefined(other.stealth) && other isnear(self, level.bcs_neardist);
   wait randomfloatrange(2, 2.5);
 
-  if(var_b70b49dc45959168) {
+  if(other_isnear) {
     sequence = [self, 0, "team_return_idle", other, 1.5, "confirming"];
   } else {
     sequence = [leader, 0, "inv_patrol", self, 1.5, "confirming"];
@@ -1541,9 +1541,9 @@ function function_e906749f6343f822() {
   }
 
   other = getclosestfriendlyspeaker();
-  var_b70b49dc45959168 = isalive(other) && other isnear(self, level.var_798aa343368f724e);
+  other_isnear = isalive(other) && other isnear(self, level.bcs_neardist);
 
-  if(var_b70b49dc45959168) {
+  if(other_isnear) {
     sequence = [self, 2, "team_have_something", self, 2, "team_see_something"];
   } else {
     sequence = [self, 2, "have_something", self, 2, "see_something"];
@@ -1576,7 +1576,7 @@ function function_f713a4757399049c(other) {
   corpse_name = undefined;
 
   if(utility::issp()) {
-    corpses = [[level.var_621af16ef0684a11]](level.var_798aa343368f724e);
+    corpses = [[level.var_621af16ef0684a11]](level.bcs_neardist);
 
     if(corpses.size > 0) {
       corpse = sortbydistance(corpses, self.origin)[0];
@@ -1584,7 +1584,7 @@ function function_f713a4757399049c(other) {
       corpse.var_6ef5f7ac4d441cbb = 1;
     }
   } else if(isDefined(level.var_276311a22caaf5ac)) {
-    corpses = [[level.var_276311a22caaf5ac]](self.origin, level.var_798aa343368f724e);
+    corpses = [[level.var_276311a22caaf5ac]](self.origin, level.bcs_neardist);
 
     if(corpses.size > 0) {
       corpse = sortbydistance(corpses, self.origin)[0];
@@ -1637,7 +1637,7 @@ function announceevent(type, event) {
     return;
   }
 
-  if(function_e3a09ac9c428dbea(function_fd9e4cb348a5f283(self.origin, 4000, self.team))) {
+  if(function_e3a09ac9c428dbea(getaiinrange(self.origin, 4000, self.team))) {
     return;
   }
 
@@ -1654,7 +1654,7 @@ function announceevent(type, event) {
   function_93b4f17e4a3474b("announce_" + type, initial_reaction, level.battlechatter.settings["announce_"], "stealth_combat");
 }
 
-function function_22d252d6cfa50edd() {}
+function reachinvestigateevent() {}
 
 function function_e64dbaaae396fbb8(previousstate) {
   if(previousstate == 1) {
@@ -1666,7 +1666,7 @@ function function_f6c7d545b09f9f0a() {
   self endon("death");
   self endon("stealth_combat");
 
-  if(self.var_fe5ebefa740c7106 != 1 || !isDefined(self.var_bdf67b527ec1547a) || self.var_bdf67b527ec1547a == "none") {
+  if(self.stealth_bsmstate != 1 || !isDefined(self.var_bdf67b527ec1547a) || self.var_bdf67b527ec1547a == "none") {
     return;
   }
 
@@ -1676,9 +1676,9 @@ function function_f6c7d545b09f9f0a() {
     sequence = undefined;
     leader = function_592f13f1a0e078ff(self);
     other = getclosestfriendlyspeaker();
-    var_b70b49dc45959168 = isalive(other) && isDefined(other.stealth) && other isnear(self, level.var_798aa343368f724e);
+    other_isnear = isalive(other) && isDefined(other.stealth) && other isnear(self, level.bcs_neardist);
 
-    if(var_b70b49dc45959168) {
+    if(other_isnear) {
       if(percent_chance(33)) {
         sequence = [self, 0, "alert_search_orders", other, 1.5, "confirming", other, 1, "order_dir_resp"];
       } else if(percent_chance(50)) {
@@ -1710,14 +1710,14 @@ function private function_5748768636a2cea8(player) {
   self.var_e76e4e828c793c74 = 1;
   player.var_e76e4e828c793c74 = 1;
   thread function_b00184a8810e1cb2(player);
-  childthread function_9e4b25719bada8d0(player);
+  childthread clearhunthuntloop(player);
   leader = function_592f13f1a0e078ff(self);
 
-  if(!istrue(self.var_8fc1a615203f7bd1)) {
+  if(!istrue(self.bc_hunt_hunt_loop)) {
     other = hunthuntenter(player, leader);
   }
 
-  self.var_8fc1a615203f7bd1 = 1;
+  self.bc_hunt_hunt_loop = 1;
 
   while(true) {
     if(!isDefined(other) || !isalive(other)) {
@@ -1742,7 +1742,7 @@ function private function_b00184a8810e1cb2(player) {
   }
 }
 
-function function_9e4b25719bada8d0(player) {
+function clearhunthuntloop(player) {
   while(true) {
     if(function_200e534b0a853905(player)) {
       self notify("bc_hunt_hunt_loop_finish");
@@ -1760,13 +1760,13 @@ function private hunthuntenter(player, leader) {
   wait 5;
   self_name = function_3e144fda9848fd5();
   other = getclosestfriendlyspeaker();
-  other_isvalid = isDefined(other) && isalive(other) && isDefined(other.stealth) && other.var_fe5ebefa740c7106 == 2;
+  other_isvalid = isDefined(other) && isalive(other) && isDefined(other.stealth) && other.stealth_bsmstate == 2;
 
   if(other_isvalid) {
-    var_b70b49dc45959168 = other isnear(self, level.var_798aa343368f724e);
+    other_isnear = other isnear(self, level.bcs_neardist);
     sequence_duo = [];
 
-    if(var_b70b49dc45959168) {
+    if(other_isnear) {
       if(cointoss()) {
         sequence_duo = [leader, self_name, 0.6, "report_search", 0.6, self, "hunt_neg", 0.6, "target_still_close", 0.6, leader, "order_continue_search", 0.6, self, "hunt_copy", 0.6];
       } else {
@@ -1790,11 +1790,11 @@ function private hunthuntenter(player, leader) {
 
 function private hunthuntloop(player, leader, other) {
   if(isDefined(other)) {
-    other_isvalid = isalive(other) && isDefined(other.stealth) && other.var_fe5ebefa740c7106 == 2;
-    var_b70b49dc45959168 = other isnear(self, level.var_8e8e487a64d9aa1b);
+    other_isvalid = isalive(other) && isDefined(other.stealth) && other.stealth_bsmstate == 2;
+    other_isnear = other isnear(self, level.var_8e8e487a64d9aa1b);
     [soldier1, soldier2] = ter_op(other_isvalid && cointoss(), [other, self], [self, other]);
 
-    if(!other_isvalid || var_b70b49dc45959168) {
+    if(!other_isvalid || other_isnear) {
       var_34a29ee860da9247 = [soldier1, soldier1 function_7e6d670c76d60628(), 0.6, leader, "reply_hear_you", 0.6, "report_search", 0.6, soldier1, "report_reply_search", 0.6, leader, "confirming", 0.6, "order_continue_search", 0.6];
       chatter = function_93b4f17e4a3474b("hunt_duo_loop_near", var_34a29ee860da9247);
       waitchatter(chatter);
@@ -1809,10 +1809,10 @@ function private hunthuntloop(player, leader, other) {
         return;
       }
 
-      other_isvalid = isalive(soldier2) && isDefined(soldier2.stealth) && soldier2.var_fe5ebefa740c7106 == 2;
-      var_b70b49dc45959168 = soldier2 isnear(soldier1, level.var_8e8e487a64d9aa1b);
+      other_isvalid = isalive(soldier2) && isDefined(soldier2.stealth) && soldier2.stealth_bsmstate == 2;
+      other_isnear = soldier2 isnear(soldier1, level.var_8e8e487a64d9aa1b);
 
-      if(other_isvalid && !var_b70b49dc45959168) {
+      if(other_isvalid && !other_isnear) {
         var_34a29fe860da947a = [soldier1, "inv_ask_second", 0.6, soldier2, "report_nothing", 0.6];
         chatter = function_93b4f17e4a3474b("hunt_duo_loop_far_2", var_34a29fe860da947a);
         waitchatter(chatter);
@@ -1832,7 +1832,7 @@ function private hunthuntloop(player, leader, other) {
 function function_7ce36b78c85185c2() {}
 
 function function_65f8179711192d2b() {
-  foreach(player in getplayersinrange(self.origin, level.var_587de0e7b537210a)) {
+  foreach(player in getplayersinrange(self.origin, level.bcs_maxdist)) {
     if(istrue(player.var_9f44126029ba3947)) {
       player notify("bc_combat_hunt_to_be_cleared");
     }
@@ -1840,8 +1840,8 @@ function function_65f8179711192d2b() {
 
   if(isDefined(self.bc_hunt)) {
     self.bc_hunt = undefined;
-    self.var_ed4d33da8aedbae0 = undefined;
-    self.var_8fc1a615203f7bd1 = undefined;
+    self.bc_combat_hunt_loop = undefined;
+    self.bc_hunt_hunt_loop = undefined;
     self notify("bc_hunt_left");
   }
 }
@@ -1896,7 +1896,7 @@ function function_c6b8da8a2c73763b(player, leader, soldier1) {
 }
 
 function function_d63963e99c9ae77b() {
-  foreach(player in getplayersinrange(self.origin, level.var_587de0e7b537210a)) {
+  foreach(player in getplayersinrange(self.origin, level.bcs_maxdist)) {
     if(istrue(player.var_9f44126029ba3947)) {
       return true;
     }
@@ -1965,7 +1965,7 @@ function function_cdf55cf331718d81(player) {
   player.var_9f44126029ba3947 = 1;
   self.var_9f44126029ba3947 = 1;
   thread function_9e2e203621d4db83(player);
-  var_75be11c0a0a035dc = function_fd9e4cb348a5f283(self.origin, level.var_8b1a7cec63f2e832, self.team);
+  var_75be11c0a0a035dc = getaiinrange(self.origin, level.var_8b1a7cec63f2e832, self.team);
   var_542b15e7d1da2adb = var_75be11c0a0a035dc.size;
   leader = function_592f13f1a0e078ff(self);
   soldier1 = self;
@@ -1987,7 +1987,7 @@ function function_cdf55cf331718d81(player) {
     }
   }
 
-  if(!istrue(self.var_ed4d33da8aedbae0)) {
+  if(!istrue(self.bc_combat_hunt_loop)) {
     chatter = function_93b4f17e4a3474b("enter_hunt_1", sequence_initial);
     waitchatter(chatter);
     wait 10;
@@ -1999,9 +1999,9 @@ function function_cdf55cf331718d81(player) {
   }
 
   other = getclosestfriendlyspeaker();
-  var_b70b49dc45959168 = isDefined(other) && isalive(other) && distancesquared(self.origin, other.origin) < level.var_85b48a519a69f1b9;
+  other_isnear = isDefined(other) && isalive(other) && distancesquared(self.origin, other.origin) < level.var_85b48a519a69f1b9;
 
-  if(var_b70b49dc45959168 && isDefined(other.stealth) && other.var_fe5ebefa740c7106 == 2) {
+  if(other_isnear && isDefined(other.stealth) && other.stealth_bsmstate == 2) {
     if(cointoss()) {
       order = "order_take_point";
     } else {
@@ -2013,7 +2013,7 @@ function function_cdf55cf331718d81(player) {
     sequence_started = [soldier1, "hunt_report_alert", 0.6, other, "cmb_hunt_confirmation", 0.6];
   }
 
-  if(isDefined(sequence_started) && !istrue(self.var_ed4d33da8aedbae0)) {
+  if(isDefined(sequence_started) && !istrue(self.bc_combat_hunt_loop)) {
     chatter = function_93b4f17e4a3474b("enter_hunt_2", sequence_started);
     waitchatter(chatter);
     wait 10;
@@ -2024,7 +2024,7 @@ function function_cdf55cf331718d81(player) {
     return;
   }
 
-  self.var_ed4d33da8aedbae0 = 1;
+  self.bc_combat_hunt_loop = 1;
   childthread function_c6b8da8a2c73763b(player, leader, soldier1);
   childthread function_849082e11feeba9a(player, leader, soldier1);
 }
@@ -2062,9 +2062,9 @@ function private huntidle() {
         }
 
         if(self.bc_hunt == 0) {
-          thread function_78c4f1260a3e4c9c(player);
+          thread huntmain1(player);
         } else {
-          thread function_78c4f4260a3e5335(player);
+          thread huntmain2(player);
         }
 
         break;
@@ -2084,10 +2084,10 @@ function private huntdebug() {
 
       if(self.bc_hunt == 0) {
         color = ter_op(isDefined(self.var_9f44126029ba3947), (1, 0, 0), (0.5, 0.5, 0.5));
-        text = ter_op(isDefined(self.var_ed4d33da8aedbae0), "<dev string:x2a3>", "<dev string:x2bc>");
+        text = ter_op(isDefined(self.bc_combat_hunt_loop), "<dev string:x2a3>", "<dev string:x2bc>");
       } else {
         color = ter_op(isDefined(self.var_e76e4e828c793c74), (1, 1, 0), (0.5, 0.5, 0.5));
-        text = ter_op(isDefined(self.var_8fc1a615203f7bd1), "<dev string:x2d6>", "<dev string:x2ed>");
+        text = ter_op(isDefined(self.bc_hunt_hunt_loop), "<dev string:x2d6>", "<dev string:x2ed>");
       }
 
       debugstar(position, color, 1, text, 0.2);
@@ -2103,7 +2103,7 @@ function private huntvalidate(current_guy) {
   }
 }
 
-function private function_78c4f1260a3e4c9c(player) {
+function private huntmain1(player) {
   self endon("death");
   thread function_cdf55cf331718d81(player);
   waittill_any_4("bc_combat_hunt_ai_na", "bc_combat_hunt_cleared", "bc_hunt_transitioned", "bc_hunt_left");
@@ -2117,7 +2117,7 @@ function private function_78c4f1260a3e4c9c(player) {
   }
 }
 
-function private function_78c4f4260a3e5335(player) {
+function private huntmain2(player) {
   thread function_5748768636a2cea8(player);
 }
 
@@ -2155,7 +2155,7 @@ function function_da9e3311b63335e1(enemyentity) {
   other = getclosestfriendlyspeaker();
   var_2bd00dd4702caf70 = isDefined(other) && isalive(other) && distancesquared(self.origin, other.origin) < level.var_defb33e34eb9dee7;
 
-  if(!var_2bd00dd4702caf70 || !isDefined(other.stealth) || other.var_fe5ebefa740c7106 != 3) {
+  if(!var_2bd00dd4702caf70 || !isDefined(other.stealth) || other.stealth_bsmstate != 3) {
     return;
   }
 
@@ -2175,9 +2175,9 @@ function private function_adc542e4e2305c6b() {
     if(isDefined(player.last_weapon_fired_time) && gettime() <= player.last_weapon_fired_time + 100) {
       var_7bb9290d450b028b = distancesquared(player.origin, self.origin);
 
-      if(isenemyteam(player.team, self.team) && var_7bb9290d450b028b < (level.var_63a73645a8e030ad + 1000) * (level.var_63a73645a8e030ad + 1000) && player scripts\engine\math::is_point_in_front(self.origin)) {
+      if(isenemyteam(player.team, self.team) && var_7bb9290d450b028b < (level.bcs_fardist + 1000) * (level.bcs_fardist + 1000) && player scripts\engine\math::is_point_in_front(self.origin)) {
         struct.var_7bb9290d450b028b = var_7bb9290d450b028b;
-        struct.var_23f37822d0802641 = player.var_23f37822d0802641;
+        struct.last_weapon_fired = player.last_weapon_fired;
 
         if(issp()) {
           struct.enemy = player;
@@ -2220,7 +2220,7 @@ function private function_c6adbc3f1ac04730() {
     if(isPlayer(self)) {
       return self.last_weapon_fired_time;
     } else {
-      return self._blackboard.var_60dcaa3d3be97ab;
+      return self._blackboard.shootparams_lastshoottime;
     }
   }
 
@@ -2339,7 +2339,7 @@ function private function_e18a7412d8dd1189(soldier1, var_6bae4604edc5e4a9, ai_ev
     var_9a14bbbe486374b = self.enemy function_a6a6363c1dd4ba36();
     var_98d2a5998bce56b2 = distancesquared(self.enemy.origin, self.origin);
   } else if(isDefined(var_f962f4443b32b75b)) {
-    var_9a14bbbe486374b = weaponclass(var_f962f4443b32b75b.var_23f37822d0802641);
+    var_9a14bbbe486374b = weaponclass(var_f962f4443b32b75b.last_weapon_fired);
     var_98d2a5998bce56b2 = var_f962f4443b32b75b.var_7bb9290d450b028b;
     backup_enemy = var_f962f4443b32b75b.enemy;
   }
@@ -2373,7 +2373,7 @@ function private function_e18a7412d8dd1189(soldier1, var_6bae4604edc5e4a9, ai_ev
     return [chatter, 1];
   }
 
-  soldier2 = function_d8c3c539bc71c7af(self.team, undefined, undefined, level.var_798aa343368f724e + 200);
+  soldier2 = function_d8c3c539bc71c7af(self.team, undefined, undefined, level.bcs_neardist + 200);
   is_duo = isDefined(soldier2);
 
   if(is_duo) {
@@ -2381,7 +2381,7 @@ function private function_e18a7412d8dd1189(soldier1, var_6bae4604edc5e4a9, ai_ev
     var_547820c918ed54f8 = soldier1 recentlysawenemy(0.05) || soldier2 recentlysawenemy(0.05);
     var_cf22f65a01029532 = soldier1 function_fe408f094c61eee7() || soldier2 function_fe408f094c61eee7();
     var_f794fb43f8a2d2ab = (soldier1 recentlysawenemy() || soldier2 recentlysawenemy()) && (soldier1 function_1309aeea62c4607f() || soldier2 function_1309aeea62c4607f());
-    var_1cc6b5c882d3828a = function_d004e724b5e2939b(soldier1.enemy, level.var_63a73645a8e030ad) > 1 || function_d004e724b5e2939b(soldier2.enemy, level.var_63a73645a8e030ad) > 1 || function_d004e724b5e2939b(backup_enemy, level.var_63a73645a8e030ad) > 1;
+    var_1cc6b5c882d3828a = function_d004e724b5e2939b(soldier1.enemy, level.bcs_fardist) > 1 || function_d004e724b5e2939b(soldier2.enemy, level.bcs_fardist) > 1 || function_d004e724b5e2939b(backup_enemy, level.bcs_fardist) > 1;
 
     if(!var_cf22f65a01029532) {
       chatter = function_93b4f17e4a3474b("comb_fulld_didnt_see_shooting", [soldier1, "enemy_attacking", 0.7, soldier1, "ask_enemy_loc", 0.7, soldier1, "ask_enemy_count", soldier2, "enemy_loc_resp", 0.7, soldier2, &function_ca5cf7e5c88dea1f, &function_68217f6b6c2e6dd5]);
@@ -2405,7 +2405,7 @@ function private function_e18a7412d8dd1189(soldier1, var_6bae4604edc5e4a9, ai_ev
 
 function private function_bb7d302d01228a41(soldier1, ai_event, previous_state) {
   is_handled = 1;
-  var_75be11c0a0a035dc = function_fd9e4cb348a5f283(self.origin, level.var_63a73645a8e030ad, self.team);
+  var_75be11c0a0a035dc = getaiinrange(self.origin, level.bcs_fardist, self.team);
   var_542b15e7d1da2adb = var_75be11c0a0a035dc.size;
 
   if(ai_event == "bulletwhizby" || ai_event == "gunshot_impact" || ai_event == "silenced_shot_impact") {
@@ -2432,10 +2432,10 @@ function private function_bb7d302d01228a41(soldier1, ai_event, previous_state) {
 }
 
 function function_80bfded61c19c9cc(previous_state, ai_event) {
-  thread function_1ae088b4c06d0525(previous_state, ai_event, 1);
+  thread initialcombatevent(previous_state, ai_event, 1);
 }
 
-function function_1ae088b4c06d0525(previous_state, ai_event, var_de837dfd8bcdc3af) {
+function initialcombatevent(previous_state, ai_event, var_de837dfd8bcdc3af) {
   if(!isDefined(ai_event)) {
     ai_event = "none";
   }
@@ -2532,7 +2532,7 @@ function private function_f1f2c29f80ac4b2f() {
 
 function private function_e872439019a2560c() {
   owner = self.owner;
-  var_75be11c0a0a035dc = function_fd9e4cb348a5f283(owner.origin, level.var_63a73645a8e030ad, self.team);
+  var_75be11c0a0a035dc = getaiinrange(owner.origin, level.bcs_fardist, self.team);
   self.var_98a49d4dd75fff17 = var_75be11c0a0a035dc.size;
   self.var_bd758acb28777c09 = function_34a791e14c9f44d0(var_75be11c0a0a035dc);
   self.var_25ae1a4f78cb39c5 = owner.origin;
@@ -2547,7 +2547,7 @@ function private function_96144b7f4c1c227e() {
     owner_origin = self.var_25ae1a4f78cb39c5;
   }
 
-  var_75be11c0a0a035dc = function_fd9e4cb348a5f283(owner_origin, level.var_63a73645a8e030ad, self.team);
+  var_75be11c0a0a035dc = getaiinrange(owner_origin, level.bcs_fardist, self.team);
   var_f74d9ce4b34826d4 = var_75be11c0a0a035dc.size;
 
   if(var_f74d9ce4b34826d4 > self.var_98a49d4dd75fff17) {
@@ -2557,7 +2557,7 @@ function private function_96144b7f4c1c227e() {
   return 0;
 }
 
-function function_8fa36b2ce712a5bb() {
+function firstcombatevent() {
   self endon("death");
 
   if(is_dead_or_dying(self) || istrue(self.battlechatter.var_d611e2f69fa1cac4)) {
@@ -2591,7 +2591,7 @@ function function_baa35784be25b993(target) {
   }
 }
 
-function function_881ab22021be3c6b(fromenter) {
+function joincombatevent(fromenter) {
   self endon("death");
   wait 2;
 
@@ -2599,7 +2599,7 @@ function function_881ab22021be3c6b(fromenter) {
     return;
   }
 
-  if(utility::issp() && function_fd9e4cb348a5f283(self.origin, level.var_798aa343368f724e, self.team).size == 1) {
+  if(utility::issp() && getaiinrange(self.origin, level.bcs_neardist, self.team).size == 1) {
     return;
   }
 
@@ -2607,15 +2607,15 @@ function function_881ab22021be3c6b(fromenter) {
   function_93b4f17e4a3474b("join_combat", seq);
 }
 
-function function_6237814879b07fbf() {
+function entercombatevent() {
   self endon("death");
 
   if(is_dead_or_dying(self) || istrue(self.battlechatter.var_d611e2f69fa1cac4)) {
     return;
   }
 
-  if(function_e3a09ac9c428dbea(function_fd9e4cb348a5f283(self.origin, level.var_798aa343368f724e, self.team))) {
-    return function_881ab22021be3c6b();
+  if(function_e3a09ac9c428dbea(getaiinrange(self.origin, level.bcs_neardist, self.team))) {
+    return joincombatevent();
   }
 
   if(utility::issp()) {
@@ -2662,7 +2662,7 @@ function function_3dac2e167dc9be7a() {
     function_b145367392d5843d(2, 1);
   }
 
-  var_75be11c0a0a035dc = function_fd9e4cb348a5f283(self.origin, level.var_798aa343368f724e, self.team);
+  var_75be11c0a0a035dc = getaiinrange(self.origin, level.bcs_neardist, self.team);
   var_542b15e7d1da2adb = var_75be11c0a0a035dc.size;
   leader = function_592f13f1a0e078ff(self);
 
@@ -2734,16 +2734,16 @@ function function_a364b61121ab136f(targetent) {
   }
 
   enemies = getenemiesinrange();
-  var_96fd8098b75efd0f = 0;
+  sightedmultiple = 0;
 
   foreach(enemy in enemies) {
     if(enemy != targetent && self cansee(enemy, 3)) {
-      var_96fd8098b75efd0f = 1;
+      sightedmultiple = 1;
       break;
     }
   }
 
-  if(var_96fd8098b75efd0f) {
+  if(sightedmultiple) {
     function_93b4f17e4a3474b("enemy_sighted_N", ["enemy_soldiers"]);
     return;
   }
@@ -2759,8 +2759,8 @@ function function_7825e0643a6c5600() {
   soldier2 = getclosestfriendlyspeaker();
 
   if(isDefined(soldier2)) {
-    var_f89f4b49aca39611 = soldier2 function_2008b43adf7e18ef();
-    function_93b4f17e4a3474b("reacquire_push_towards", [self, var_f89f4b49aca39611, 0.2, "order_check_last"]);
+    soldier2_name = soldier2 function_2008b43adf7e18ef();
+    function_93b4f17e4a3474b("reacquire_push_towards", [self, soldier2_name, 0.2, "order_check_last"]);
   }
 }
 
@@ -2780,7 +2780,7 @@ function event_lookup(event_name, data) {
     return;
   }
 
-  countryid = default_to(self.battlechatter.var_96a045a4858e3f20, self.battlechatter.countryid);
+  countryid = default_to(self.battlechatter.countryidoverride, self.battlechatter.countryid);
   faction = default_to(self.battlechatter.lookupid, countryid);
 
   if(!isDefined(faction) || !isDefined(level.battlechatter.eventstrings) || !isDefined(level.battlechatter.eventstrings[faction])) {
@@ -2830,12 +2830,12 @@ function array_event(event, event_name, faction) {
   if(utility::issp()) {
     nearby_players = [level.player];
   } else {
-    nearby_players = getplayersinrange(origin, level.var_587de0e7b537210a);
+    nearby_players = getplayersinrange(origin, level.bcs_maxdist);
   }
 
   foreach(player in nearby_players) {
-    if(isDefined(player.var_2036ddd05c3ffdc9) && isDefined(player.var_2036ddd05c3ffdc9[faction]) && isDefined(player.var_2036ddd05c3ffdc9[faction][event_name])) {
-      index = player.var_2036ddd05c3ffdc9[faction][event_name];
+    if(isDefined(player.bcs_events) && isDefined(player.bcs_events[faction]) && isDefined(player.bcs_events[faction][event_name])) {
+      index = player.bcs_events[faction][event_name];
       break;
     }
   }
@@ -2843,15 +2843,15 @@ function array_event(event, event_name, faction) {
   index = default_to(index, randomint(event.size));
 
   foreach(player in nearby_players) {
-    if(!isDefined(player.var_2036ddd05c3ffdc9)) {
-      player.var_2036ddd05c3ffdc9 = [];
+    if(!isDefined(player.bcs_events)) {
+      player.bcs_events = [];
     }
 
-    if(!isDefined(player.var_2036ddd05c3ffdc9[faction])) {
-      player.var_2036ddd05c3ffdc9[faction] = [];
+    if(!isDefined(player.bcs_events[faction])) {
+      player.bcs_events[faction] = [];
     }
 
-    player.var_2036ddd05c3ffdc9[faction][event_name] = (index + 1) % event.size;
+    player.bcs_events[faction][event_name] = (index + 1) % event.size;
   }
 
   return event[index];

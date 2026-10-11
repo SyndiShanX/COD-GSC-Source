@@ -120,7 +120,7 @@ function function_bdfe768bd3eed7fc() {
 
 function function_ed260c1f4a6de9f8(activity_succeeded) {
   self endon("instance_destroyed");
-  namespace_40713433c91dd86c::function_c402ecda1e84ba27(self.var_6c29f2fdb0054bbe, 0, self.difficulty_region, self.origin);
+  namespace_40713433c91dd86c::function_c402ecda1e84ba27(self.playerparticipants, 0, self.difficulty_region, self.origin);
 }
 
 function function_f0f250986bb9d773() {
@@ -250,7 +250,7 @@ function private function_5f76fcafb2d10aa2() {
 
 function private function_cadf35090e17590() {
   timer = 0;
-  var_fd5a08e385a75f6c = 10;
+  drawframeduration = 10;
 
   while(true) {
     if(!isDefined(level.safes) || !isDefined(level.players)) {
@@ -278,27 +278,27 @@ function private function_cadf35090e17590() {
 
     if(getdvarint(@ "hash_7bba049efb029baa", 0)) {
       foreach(safe in level.safes) {
-        function_32d74f3fc1994781(safe, var_fd5a08e385a75f6c);
-        function_bc558b6c272c65e4(safe, var_fd5a08e385a75f6c);
-        function_1071c808c36a9066(safe, var_fd5a08e385a75f6c);
+        function_32d74f3fc1994781(safe, drawframeduration);
+        function_bc558b6c272c65e4(safe, drawframeduration);
+        function_1071c808c36a9066(safe, drawframeduration);
       }
     }
 
     if(getdvarint(@ "hash_3ec6799528b8c3a3", 0) && timer == 0) {
       foreach(safe in level.safes) {
-        function_32d74f3fc1994781(safe, var_fd5a08e385a75f6c);
+        function_32d74f3fc1994781(safe, drawframeduration);
       }
     }
 
     if(getdvarint(@ "hash_e80ff5758ab695aa", 0) && timer == 0) {
       foreach(safe in level.safes) {
-        function_bc558b6c272c65e4(safe, var_fd5a08e385a75f6c);
+        function_bc558b6c272c65e4(safe, drawframeduration);
       }
     }
 
     if(getdvarint(@ "hash_ecc9f2ec79830d8", 0) && timer == 0) {
       foreach(safe in level.safes) {
-        function_1071c808c36a9066(safe, var_fd5a08e385a75f6c);
+        function_1071c808c36a9066(safe, drawframeduration);
       }
     }
 
@@ -368,23 +368,23 @@ function private function_cadf35090e17590() {
     waitframe();
     timer++;
 
-    if(timer >= var_fd5a08e385a75f6c) {
+    if(timer >= drawframeduration) {
       timer = 0;
     }
   }
 }
 
-function function_32d74f3fc1994781(safe, var_fd5a08e385a75f6c) {
-  line(safe.origin, safe.origin + (0, 0, 3000), (1, 0, 1), 1, 0, var_fd5a08e385a75f6c);
+function function_32d74f3fc1994781(safe, drawframeduration) {
+  line(safe.origin, safe.origin + (0, 0, 3000), (1, 0, 1), 1, 0, drawframeduration);
 }
 
-function function_bc558b6c272c65e4(safe, var_fd5a08e385a75f6c) {
-  orientedbox(safe scriptablegetmidpoint(), 2 * function_abf76cc289cf03a3("<dev string:x258>"), safe.angles, (1, 1, 1), 0, var_fd5a08e385a75f6c);
+function function_bc558b6c272c65e4(safe, drawframeduration) {
+  orientedbox(safe scriptablegetmidpoint(), 2 * function_abf76cc289cf03a3("<dev string:x258>"), safe.angles, (1, 1, 1), 0, drawframeduration);
 }
 
-function function_1071c808c36a9066(safe, var_fd5a08e385a75f6c) {
-  sphere(safe.origin, safe.activity.capture_radius, (0, 1, 0), 0, var_fd5a08e385a75f6c);
-  sphere(safe.origin, safe.activity.attract_radius, (1, 1, 0), 0, var_fd5a08e385a75f6c);
+function function_1071c808c36a9066(safe, drawframeduration) {
+  sphere(safe.origin, safe.activity.capture_radius, (0, 1, 0), 0, drawframeduration);
+  sphere(safe.origin, safe.activity.attract_radius, (1, 1, 0), 0, drawframeduration);
 }
 
 function function_d5622642498f5a6f(player) {
@@ -398,7 +398,7 @@ function function_8048ff4bc7646aa() {
 function function_a7c6874cd9ee87de() {
   self.contents = [];
   self.weaponslotcontents = undefined;
-  common_cache::function_d71a41afca697376(self, self.activity.var_48c4ba670a4f33fc, 5);
+  common_cache::fillcontentsfromlist(self, self.activity.var_48c4ba670a4f33fc, 5);
 }
 
 # /

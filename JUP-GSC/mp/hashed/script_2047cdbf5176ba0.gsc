@@ -394,7 +394,7 @@ function function_116188f556b634f9() {
 function function_98dce743b7f273fd(params) {
   function_447c6ab4bea16b52("startup", "REV_OB_DOGHOUSE", &namespace_f82e883a38a92b9a::function_58fb23fc08762d69, &namespace_bdf6f22a57667e71::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("activity", "REV_OB_HARVESTERORB", &namespace_74c17ccb56a8563f::function_28cb7cb9dd6c20c2, &namespace_220922c5ff40f202::function_fd69cf02ba4d90a2);
-  scripts\engine\utility::function_f3bb4f4911a1beb2("warlords", "tile_a_warlord_registration");
+  scripts\engine\utility::callsharedfunc("warlords", "tile_a_warlord_registration");
   function_447c6ab4bea16b52("activity", "REV_OB_AETHERNEST", &namespace_b45a9c6ad5a91687::function_cf070c7d20b69e36, &namespace_8325b03cc9fa0472::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("global", "REV_OB_TURRET_TRAP", &namespace_47d96238dd467828::function_3d88cdeba8222b15, &namespace_c5c19ce11cea9c1b::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("activity", "REV_OB_ARMORED_CONVOY", &namespace_acf59d30b1f3eca5::function_729f6e368df801f4, &namespace_1a7a63aac7737f90::function_fd69cf02ba4d90a2);
@@ -441,7 +441,7 @@ function function_98dce543b7f26f97(params) {
   function_447c6ab4bea16b52("global", "REV_OB_AETHERTEAR", &namespace_5d8c3870222947b5::function_483ef1bf0c76bedc, &namespace_ccff918adfb660d8::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("global", "REV_OB_TURRET_TRAP", &namespace_47d96238dd467828::function_3d88cdeba8222b15, &namespace_5c50c4d3342bf7bf::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("startup", "REV_OB_MERC_STRONGHOLD", &namespace_5b16b088535e3da4::function_557cb9d43dd5e520, &namespace_8bdc94c286ca8f7::function_fd69cf02ba4d90a2);
-  scripts\engine\utility::function_f3bb4f4911a1beb2("warlords", "tile_c_warlord_registration");
+  scripts\engine\utility::callsharedfunc("warlords", "tile_c_warlord_registration");
 
   if(istrue(getdvarint(@ "hash_b338e81ddf2be38a", 0))) {
     s_params = spawnStruct();
@@ -514,7 +514,7 @@ function function_98dce143b7f266cb(params) {
   function_447c6ab4bea16b52("startup", "REV_OB_MERC_STRONGHOLD", &namespace_5b16b088535e3da4::function_557cb9d43dd5e520, &namespace_2ecb8cfab178288f::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("startup", "REV_OB_ZOMBIE_STRONGHOLD", &namespace_f8638ef0be82c4bd::function_1cf627178cf6bee, &namespace_c5077faf3ce66f44::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("global", "REV_OB_TURRET_TRAP", &namespace_47d96238dd467828::function_3d88cdeba8222b15, &namespace_6577ca27cb9f53b7::function_fd69cf02ba4d90a2);
-  scripts\engine\utility::function_f3bb4f4911a1beb2("warlords", "tile_g_warlord_registration");
+  scripts\engine\utility::callsharedfunc("warlords", "tile_g_warlord_registration");
 
   if(istrue(getdvarint(@ "hash_b338e81ddf2be38a", 0))) {
     s_params = spawnStruct();
@@ -682,7 +682,7 @@ function function_ecacd4e0ca8e97a(params) {
   function_447c6ab4bea16b52("global", "REV_OB_AETHERTEAR", &namespace_5d8c3870222947b5::function_483ef1bf0c76bedc, &namespace_f9ac4a175808c9f4::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("contract", "REV_OB_WEAPON_STASH", &namespace_8cc61b17b84105a5::function_480a44aafd55f27e, &namespace_85f6a49036175b57::function_fd69cf02ba4d90a2);
   function_447c6ab4bea16b52("contract", "REV_OB_VEHICLE_DRIVE", &namespace_32479521133923de::function_89a7a8b0101530ec, &namespace_d2483194d44b06d4::function_fd69cf02ba4d90a2);
-  scripts\engine\utility::function_f3bb4f4911a1beb2("warlords", "tile_i_warlord_registration");
+  scripts\engine\utility::callsharedfunc("warlords", "tile_i_warlord_registration");
 }
 
 function function_78d857de4d17073(params) {

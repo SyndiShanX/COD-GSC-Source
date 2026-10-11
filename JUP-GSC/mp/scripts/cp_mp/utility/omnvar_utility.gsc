@@ -39,13 +39,13 @@ function setcachedclientomnvar(omnvar, value) {
   }
 }
 
-function function_8b532402ee55336e(bitoffset, bitwidth, var_49f3b7a464f1d70d, newvalue) {
+function repackomnvar(bitoffset, bitwidth, prevpackedvalue, newvalue) {
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (newvalue &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
-  cleanedbase = var_49f3b7a464f1d70d &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
-  return var_82a90e56e416fa55;
+  invertedmask = ~(mask << bitoffset);
+  cleanedbase = prevpackedvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
+  return repackedvalue;
 }
 
 function unpackvalue(bitoffset, bitwidth, packedvalue) {
@@ -54,32 +54,32 @@ function unpackvalue(bitoffset, bitwidth, packedvalue) {
   return var_a463992091f1d483;
 }
 
-function function_63437fca39c681dc(var_e9d476a3809cb3f1, bitoffset, bitwidth, value) {
-  prevvalue = self getclientomnvar(var_e9d476a3809cb3f1);
-  var_82a90e56e416fa55 = function_8b532402ee55336e(bitoffset, bitwidth, prevvalue, value);
+function function_63437fca39c681dc(omnvarname, bitoffset, bitwidth, value) {
+  prevvalue = self getclientomnvar(omnvarname);
+  repackedvalue = repackomnvar(bitoffset, bitwidth, prevvalue, value);
 
-  if(prevvalue != var_82a90e56e416fa55) {
-    self setclientomnvar(var_e9d476a3809cb3f1, var_82a90e56e416fa55);
+  if(prevvalue != repackedvalue) {
+    self setclientomnvar(omnvarname, repackedvalue);
   }
 }
 
-function function_40f3e4aeda0e3f00(var_e9d476a3809cb3f1, bitoffset, bitwidth) {
-  value = self getclientomnvar(var_e9d476a3809cb3f1);
-  var_26a6c0adbaffb03f = unpackvalue(bitoffset, bitwidth, value);
-  return var_26a6c0adbaffb03f;
+function function_40f3e4aeda0e3f00(omnvarname, bitoffset, bitwidth) {
+  value = self getclientomnvar(omnvarname);
+  unpackedvalue = unpackvalue(bitoffset, bitwidth, value);
+  return unpackedvalue;
 }
 
-function function_d3cf7ff1a257e2c3(var_e9d476a3809cb3f1, bitoffset, bitwidth, value) {
-  prevvalue = getomnvar(var_e9d476a3809cb3f1);
-  var_82a90e56e416fa55 = function_8b532402ee55336e(bitoffset, bitwidth, prevvalue, value);
+function function_d3cf7ff1a257e2c3(omnvarname, bitoffset, bitwidth, value) {
+  prevvalue = getomnvar(omnvarname);
+  repackedvalue = repackomnvar(bitoffset, bitwidth, prevvalue, value);
 
-  if(prevvalue != var_82a90e56e416fa55) {
-    setomnvar(var_e9d476a3809cb3f1, var_82a90e56e416fa55);
+  if(prevvalue != repackedvalue) {
+    setomnvar(omnvarname, repackedvalue);
   }
 }
 
-function function_610e0cca26bba2f(var_e9d476a3809cb3f1, bitoffset, bitwidth) {
-  value = getomnvar(var_e9d476a3809cb3f1);
-  var_26a6c0adbaffb03f = unpackvalue(bitoffset, bitwidth, value);
-  return var_26a6c0adbaffb03f;
+function function_610e0cca26bba2f(omnvarname, bitoffset, bitwidth) {
+  value = getomnvar(omnvarname);
+  unpackedvalue = unpackvalue(bitoffset, bitwidth, value);
+  return unpackedvalue;
 }

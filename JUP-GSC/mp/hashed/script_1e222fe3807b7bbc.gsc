@@ -65,7 +65,7 @@ function actionprocess(bot) {
       wait restseconds;
     }
   } else if(result == "bad_path" && isDefined(self.decision.lastloot)) {
-    var_8c9d8551140041f7 = bot.mind.var_f0a8822dcc782c9d.var_577f45571c039a54["Pickup"];
+    var_8c9d8551140041f7 = bot.mind.var_f0a8822dcc782c9d.decisions["Pickup"];
 
     if(isDefined(var_8c9d8551140041f7)) {
       var_8c9d8551140041f7 namespace_351e75b9d115392f::function_2d9fcd6970321ba(self.decision.lastloot);
@@ -80,7 +80,7 @@ function actionprocess(bot) {
 }
 
 function function_188de758cb607fa3(decision, squadmaster) {
-  wanderselectdestination = function_63cc4ce09c4659a1("WanderSelectDestination");
+  wanderselectdestination = runcallback("WanderSelectDestination");
 
   if(isDefined(wanderselectdestination)) {
     return wanderselectdestination;
@@ -116,7 +116,7 @@ function function_9e2f5dc882037389(decision, lastloot) {
   var_8f60e685e9ada1d8 = 0.5;
 
   if(randomfloat(1) < var_8f60e685e9ada1d8) {
-    var_8c9d8551140041f7 = self.mind.var_f0a8822dcc782c9d.var_577f45571c039a54["Pickup"];
+    var_8c9d8551140041f7 = self.mind.var_f0a8822dcc782c9d.decisions["Pickup"];
 
     if(isDefined(var_8c9d8551140041f7)) {
       decision.lastloot = var_8c9d8551140041f7 namespace_351e75b9d115392f::function_54f633f649764ea9(self, lastloot);

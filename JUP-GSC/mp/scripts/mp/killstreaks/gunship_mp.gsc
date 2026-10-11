@@ -50,8 +50,8 @@ function gunship_findboxcenter(mins, maxs) {
   return scripts\mp\spawnlogic::findboxcenter(mins, maxs);
 }
 
-function gunship_getbombingpoint(centerpoint, var_a0edd3f59d938fb1) {
-  var_bf366eb7073782af = scripts\cp_mp\killstreaks\toma_strike::tomastrike_getrandombombingpoint(centerpoint, var_a0edd3f59d938fb1);
+function gunship_getbombingpoint(centerpoint, bombingradius) {
+  var_bf366eb7073782af = scripts\cp_mp\killstreaks\toma_strike::tomastrike_getrandombombingpoint(centerpoint, bombingradius);
   return var_bf366eb7073782af.point;
 }
 
@@ -77,6 +77,6 @@ function gunship_assigntargetmarkers(gunner) {
 }
 
 function function_719b6cb36fd371a2(gunship) {
-  gunship function_5226227bce83ebe9(3, gunship.team);
+  gunship setentityhudoutlinedata(3, gunship.team);
   return gunship;
 }

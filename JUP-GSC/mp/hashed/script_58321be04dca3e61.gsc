@@ -26,7 +26,7 @@ function chopperexfil_pack(var_cbfc3ba10cefc8ce) {
     loadinfiltransient(self.transientname);
     setomnvarforallclients("ui_br_end_game_splash_type", 18);
 
-    for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = function_2030cc4ad67d1634(self.transientname)) {
+    for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = isinfiltransientloaded(self.transientname)) {
       waitframe();
     }
   }

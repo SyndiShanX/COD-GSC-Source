@@ -15,7 +15,7 @@ function overrideweapons(loadout) {
 
   primaryweaponclass = function_b8811a0fc04e4b9d(loadout.loadoutprimary, #"menuclass");
 
-  if(isDefined(var_58bf9fc74049f30) && primaryweaponclass != var_58bf9fc74049f30 || weaponisrestricted(loadout.loadoutprimary) || isDefined(primaryweaponclass) && function_dc0d4632189b623a(primaryweaponclass)) {
+  if(isDefined(var_58bf9fc74049f30) && primaryweaponclass != var_58bf9fc74049f30 || weaponisrestricted(loadout.loadoutprimary) || isDefined(primaryweaponclass) && weaponclassisrestricted(primaryweaponclass)) {
     fallbackprimary = scripts\mp\class::table_getweapon(level.classtablename, 0, 0);
     loadout.loadoutprimary = fallbackprimary;
     loadout.loadoutprimaryattachments = [];
@@ -27,7 +27,7 @@ function overrideweapons(loadout) {
 
   secondaryweaponclass = function_b8811a0fc04e4b9d(loadout.loadoutsecondary, #"menuclass");
 
-  if(isDefined(var_58bf9fc74049f30) && secondaryweaponclass != var_58bf9fc74049f30 || weaponisrestricted(loadout.loadoutsecondary) || isDefined(secondaryweaponclass) && function_dc0d4632189b623a(secondaryweaponclass)) {
+  if(isDefined(var_58bf9fc74049f30) && secondaryweaponclass != var_58bf9fc74049f30 || weaponisrestricted(loadout.loadoutsecondary) || isDefined(secondaryweaponclass) && weaponclassisrestricted(secondaryweaponclass)) {
     fallbacksecondary = scripts\mp\class::table_getweapon(level.classtablename, 0, 1);
     loadout.loadoutsecondary = fallbacksecondary;
     loadout.loadoutsecondaryattachments = [];

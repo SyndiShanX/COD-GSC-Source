@@ -57,8 +57,8 @@ function perform_state_change(newstatename) {
     }
 
     if(isDefined(self.currentstate[2])) {
-      var_91d038e0e74b6c98 = self.currentstate[2];
-      thread set_update_function(var_91d038e0e74b6c98);
+      updatefunction = self.currentstate[2];
+      thread set_update_function(updatefunction);
     }
 
     return;
@@ -127,27 +127,27 @@ function set_permanent_notify_handlers(var_baf55632c23b48b4) {
   }
 }
 
-function state_nofity_handler(notifystring, var_dfeff47c18399f7, var_107f1d5307246e8e) {
+function state_nofity_handler(notifystring, handlerfunction, var_107f1d5307246e8e) {
   self endon("death");
   self endon("changed_state");
-  start_handler(notifystring, var_dfeff47c18399f7, var_107f1d5307246e8e);
+  start_handler(notifystring, handlerfunction, var_107f1d5307246e8e);
 }
 
-function permanent_notify_handler(notifystring, var_dfeff47c18399f7, var_107f1d5307246e8e) {
+function permanent_notify_handler(notifystring, handlerfunction, var_107f1d5307246e8e) {
   self endon("death");
-  start_handler(notifystring, var_dfeff47c18399f7, var_107f1d5307246e8e);
+  start_handler(notifystring, handlerfunction, var_107f1d5307246e8e);
 }
 
-function start_handler(notifystring, var_dfeff47c18399f7, var_107f1d5307246e8e) {
+function start_handler(notifystring, handlerfunction, var_107f1d5307246e8e) {
   self notify("new_handler");
 
   for(var_4cd932b295f4ca3c = 1; var_4cd932b295f4ca3c; var_4cd932b295f4ca3c = 0) {
     self waittill(notifystring, params);
 
     if(isDefined(params)) {
-      [[var_dfeff47c18399f7]](params);
+      [[handlerfunction]](params);
     } else {
-      [[var_dfeff47c18399f7]]();
+      [[handlerfunction]]();
     }
 
     if(var_107f1d5307246e8e >= 0) {

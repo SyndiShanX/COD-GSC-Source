@@ -9,7 +9,7 @@
 #using scripts\common\utility;
 #using scripts\common\values;
 #using scripts\engine\utility;
-#namespace namespace_dfe20d80cfb5220c;
+#namespace zombie_base_dismemberment;
 
 function autoexec init() {
   utility::registersharedfunc("zombie_dismemberment", "dismemberHead", &dismember_head);
@@ -22,10 +22,10 @@ function function_582bd4b9c9a2091d(params) {
 }
 
 function function_b718bd8a845dc9ab() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_e2c1f2a81d46d73d);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_killed", &function_d37efd30de1a9951);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("killed_body_cloned", &function_3cf0e5ddfe2f900);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_corpse_annihilated", &on_corpse_annihilated);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_e2c1f2a81d46d73d);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_killed", &function_d37efd30de1a9951);
+  callback::get_template(self.animsetname) callback::add("killed_body_cloned", &function_3cf0e5ddfe2f900);
+  callback::get_template(self.animsetname) callback::add("on_corpse_annihilated", &on_corpse_annihilated);
 }
 
 function function_9d6df53b2bb22d73() {
@@ -33,7 +33,7 @@ function function_9d6df53b2bb22d73() {
     return;
   }
 
-  self._blackboard.var_75b2c9ba4bfca43d = 0;
+  self._blackboard.dismemberedlimbs = 0;
   self.var_3e84854a738e628d = &dismember_head;
   self.var_7fb81e56992abf97 = &function_ef549c6c35e41708;
   self.var_7050024e5f8ca246 = &dismember_annihilate;
@@ -41,7 +41,7 @@ function function_9d6df53b2bb22d73() {
 
 function function_79995fabeaf95d91() {
   assertex(!istrue(isai(self)) && !istrue(isalive(self)), "<dev string:x1c>");
-  function_4b644866a082cf78(16);
+  detach_limbs(16);
 }
 
 function dismember_head(is_lethal) {
@@ -49,30 +49,30 @@ function dismember_head(is_lethal) {
 }
 
 function function_ef549c6c35e41708() {
-  if(!isDefined(self._blackboard.var_75b2c9ba4bfca43d)) {
+  if(!isDefined(self._blackboard.dismemberedlimbs)) {
     return 0;
   }
 
-  return self._blackboard.var_75b2c9ba4bfca43d & 16;
+  return self._blackboard.dismemberedlimbs & 16;
 }
 
 function function_ca5cecb3f1666b6(str_location) {
   limb_flag = function_acb5b44b64b97f9f(str_location);
-  var_44c6db708d4a15fe = 0;
+  dismembered_limbs = 0;
 
   if(isalive(self)) {
-    if(isDefined(self._blackboard.var_75b2c9ba4bfca43d)) {
-      var_44c6db708d4a15fe = self._blackboard.var_75b2c9ba4bfca43d;
+    if(isDefined(self._blackboard.dismemberedlimbs)) {
+      dismembered_limbs = self._blackboard.dismemberedlimbs;
     }
   } else {
     corpse = self getcorpseentity();
 
-    if(isDefined(corpse) && isDefined(corpse.var_44c6db708d4a15fe)) {
-      var_44c6db708d4a15fe = corpse.var_44c6db708d4a15fe;
+    if(isDefined(corpse) && isDefined(corpse.dismembered_limbs)) {
+      dismembered_limbs = corpse.dismembered_limbs;
     }
   }
 
-  return (var_44c6db708d4a15fe &limb_flag) > 0;
+  return (dismembered_limbs &limb_flag) > 0;
 }
 
 function dismember_legs() {
@@ -83,7 +83,7 @@ function dismember_annihilate() {
   dismember(19 | 12, 1, 1);
 }
 
-function private function_f010e99aad3beeff() {
+function private allow_dismemberment() {
   return isalive(self) && !function_8ce7894f1a52fb77("charm") && val::get("allow_dismember");
 }
 
@@ -102,7 +102,7 @@ function private is_friendly_damage(agent, attacker) {
 }
 
 function private function_e2c1f2a81d46d73d(params) {
-  if(!function_f010e99aad3beeff() || weaponisimpaling(params.sweapon)) {
+  if(!allow_dismemberment() || weaponisimpaling(params.sweapon)) {
     return;
   }
 
@@ -193,16 +193,16 @@ function private function_3cf0e5ddfe2f900(params) {
     return;
   }
 
-  if(!isDefined(self._blackboard.var_75b2c9ba4bfca43d)) {
+  if(!isDefined(self._blackboard.dismemberedlimbs)) {
     return;
   }
 
-  if(self._blackboard.var_75b2c9ba4bfca43d == 0) {
+  if(self._blackboard.dismemberedlimbs == 0) {
     return;
   }
 
-  params.body function_4b644866a082cf78(self._blackboard.var_75b2c9ba4bfca43d);
-  params.body.var_44c6db708d4a15fe = self._blackboard.var_75b2c9ba4bfca43d;
+  params.body detach_limbs(self._blackboard.dismemberedlimbs);
+  params.body.dismembered_limbs = self._blackboard.dismemberedlimbs;
 }
 
 function private on_corpse_annihilated(params) {
@@ -252,17 +252,17 @@ function private function_acb5b44b64b97f9f(str_location) {
 }
 
 function function_bce021b0a87015f6(var_332cbc3917a73aa1) {
-  var_5b2447741c6ede0a = (19 | 12) ^ self._blackboard.var_75b2c9ba4bfca43d;
+  available_limbs = (19 | 12) ^ self._blackboard.dismemberedlimbs;
 
-  if(var_5b2447741c6ede0a > 0) {
-    var_a6ef929aaddcf48d = randomint(function_bb2659ad962ee09e(var_5b2447741c6ede0a));
+  if(available_limbs > 0) {
+    var_a6ef929aaddcf48d = randomint(count_limbs(available_limbs));
     var_17bd5a9839793309 = 0;
 
     for(flag_offset = 0;
       (19 | 12) >> flag_offset > 0; flag_offset++) {
       limb = 1 << flag_offset;
 
-      if(var_5b2447741c6ede0a &limb) {
+      if(available_limbs &limb) {
         if(var_17bd5a9839793309 == var_a6ef929aaddcf48d) {
           dismember(limb, var_332cbc3917a73aa1);
           break;
@@ -274,7 +274,7 @@ function function_bce021b0a87015f6(var_332cbc3917a73aa1) {
   }
 }
 
-function private function_4b644866a082cf78(limbs) {
+function private detach_limbs(limbs) {
   if(limbs & 1) {
     utility::function_3677f2be30fdd581("gib_arm_right", "gibbed");
   }
@@ -298,9 +298,9 @@ function private function_4b644866a082cf78(limbs) {
 
 function private dismember(limbs, var_65de9a18ad444853, annihilate) {
   var_9cb196782b2726c9 = limbs;
-  var_9cb196782b2726c9 &= ~self._blackboard.var_75b2c9ba4bfca43d;
+  var_9cb196782b2726c9 &= ~self._blackboard.dismemberedlimbs;
 
-  if(var_9cb196782b2726c9 & 3 && self._blackboard.var_75b2c9ba4bfca43d & 3) {
+  if(var_9cb196782b2726c9 & 3 && self._blackboard.dismemberedlimbs & 3) {
     var_9cb196782b2726c9 &= ~3;
   }
 
@@ -319,8 +319,8 @@ function private dismember(limbs, var_65de9a18ad444853, annihilate) {
     }
   }
 
-  self._blackboard.var_75b2c9ba4bfca43d |= var_9cb196782b2726c9;
-  function_4b644866a082cf78(var_9cb196782b2726c9);
+  self._blackboard.dismemberedlimbs |= var_9cb196782b2726c9;
+  detach_limbs(var_9cb196782b2726c9);
 
   if(var_9cb196782b2726c9 & 16) {
     utility::function_3677f2be30fdd581("base", "base_off");
@@ -331,7 +331,7 @@ function private dismember(limbs, var_65de9a18ad444853, annihilate) {
   }
 
   if(var_9cb196782b2726c9 & 12) {
-    function_dd8dcd65f2ebbb35(1);
+    set_crawling(1);
   }
 
   if(istrue(annihilate)) {
@@ -357,7 +357,7 @@ function annihilate() {
   }
 }
 
-function private function_bb2659ad962ee09e(limbs) {
+function private count_limbs(limbs) {
   num_parts = 0;
 
   while(limbs > 0) {
@@ -379,7 +379,7 @@ function private function_c4f73d6490f607f7() {
 }
 
 function private should_annihilate(eattacker, str_hit_loc, weapon, n_damage, str_damage_type) {
-  if(istrue(self.var_c216c30f467f0ce) || function_95ce7ff0b2df8f26(weapon)) {
+  if(istrue(self.var_c216c30f467f0ce) || isweaponthrowingknife(weapon)) {
     return false;
   }
 
@@ -391,11 +391,11 @@ function private should_annihilate(eattacker, str_hit_loc, weapon, n_damage, str
   return n_damage > self.maxhealth && damage_percent >= 50 && str_damage_type != "MOD_MELEE" && randomint(100) < 25;
 }
 
-function function_dd8dcd65f2ebbb35(is_crawling) {
-  var_93f193eea56d3601 = is_crawling();
-  assertex(istrue(is_crawling) || !istrue(var_93f193eea56d3601), "<dev string:x43>");
+function set_crawling(is_crawling) {
+  already_crawling = is_crawling();
+  assertex(istrue(is_crawling) || !istrue(already_crawling), "<dev string:x43>");
 
-  if(is_crawling != var_93f193eea56d3601 && isDefined(self._blackboard.var_93aa3eefdf57f46)) {
+  if(is_crawling != already_crawling && isDefined(self._blackboard.var_93aa3eefdf57f46)) {
     self._blackboard.var_93aa3eefdf57f46 = is_crawling;
     self.currentpose = "prone";
     callback::callback("on_is_crawling_changed");
@@ -449,7 +449,7 @@ function private make_crawlers(params) {
   all_ai = getaiarray();
 
   foreach(ai in all_ai) {
-    ai function_dd8dcd65f2ebbb35(1);
+    ai set_crawling(1);
   }
 }
 
@@ -458,7 +458,7 @@ function function_d01b0187d13524d0(limbs, var_65de9a18ad444853, annihilate) {
   all_ai = getaiarray();
 
   foreach(ai in all_ai) {
-    if(!isDefined(ai._blackboard.var_75b2c9ba4bfca43d)) {
+    if(!isDefined(ai._blackboard.dismemberedlimbs)) {
       continue;
     }
 

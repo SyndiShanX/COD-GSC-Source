@@ -399,7 +399,7 @@ function callbacksoldieragentgametypekilled(einflictor, eattacker, idamage, smea
 
       if(istrue(level.supportsai)) {
         victimstruct = scripts\cp_mp\challenges::function_137b512700167b00(playerattacker, self);
-        level thread scripts\cp_mp\challenges::function_5a0ae8bc2b80c0c0(einflictor, playerattacker, idamage, smeansofdeath, objweapon, shitloc, playerattacker.modifiers, undefined, self.team, victimstruct);
+        level thread scripts\cp_mp\challenges::onagentkilled(einflictor, playerattacker, idamage, smeansofdeath, objweapon, shitloc, playerattacker.modifiers, undefined, self.team, victimstruct);
       }
 
       scripts\mp\pmc_missions::onaikill(self, playerattacker, objweapon);
@@ -914,7 +914,7 @@ function function_87c3b43d00319847() {
   return isDefined(level.gamemodebundle) && istrue(level.gamemodebundle.var_fe33630e0f09e5df) || getdvarint(@ "hash_1661f35e34f544eb", 0);
 }
 
-function function_c54b2cc2e762c201(eattacker, etargethit, shitloc, smeansofdeath, sweapon, idamage, vpoint, isimmnue, selement, var_14edc6d1db3695bc, var_feef4b237a6beb07) {
+function function_c54b2cc2e762c201(eattacker, etargethit, shitloc, smeansofdeath, sweapon, idamage, vpoint, isimmnue, selement, biscritical, var_feef4b237a6beb07) {
   if(!function_73075c88c97d2d50()) {
     return;
   }
@@ -943,11 +943,11 @@ function function_c54b2cc2e762c201(eattacker, etargethit, shitloc, smeansofdeath
   } else if(istrue(var_feef4b237a6beb07)) {
     var_a3732517126407b2 = 3;
   } else {
-    if(isDefined(selement) && isDefined(etargethit.var_691b16f55274b1c5) && isarray(etargethit.var_691b16f55274b1c5) && istrue(etargethit.var_691b16f55274b1c5[selement])) {
+    if(isDefined(selement) && isDefined(etargethit.elementalweakness) && isarray(etargethit.elementalweakness) && istrue(etargethit.elementalweakness[selement])) {
       var_c9c7e8d091b092ed = level.var_7843c346baff928f[selement];
     }
 
-    if(istrue(var_14edc6d1db3695bc) && weapongroup != "weapon_projectile") {
+    if(istrue(biscritical) && weapongroup != "weapon_projectile") {
       var_a3732517126407b2 = 2;
     }
   }
@@ -995,19 +995,19 @@ function updaterecentagentkills(victim, einflictor, objweapon) {
   }
 
   self.var_5431d89a36b0936++;
-  var_366b0ecc2f28aead = undefined;
+  fullweaponstring = undefined;
 
   if(isDefined(objweapon)) {
     if(isDefined(objweapon.basename) && objweapon.basename == "none") {
       if(isDefined(einflictor) && isDefined(einflictor.weapon_name)) {
-        var_366b0ecc2f28aead = einflictor.weapon_name;
+        fullweaponstring = einflictor.weapon_name;
       }
     } else {
-      var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+      fullweaponstring = getcompleteweaponname(objweapon);
     }
   }
 
-  bufferednotify("update_rapid_agent_kill_buffered", self.var_5431d89a36b0936, var_366b0ecc2f28aead);
+  bufferednotify("update_rapid_agent_kill_buffered", self.var_5431d89a36b0936, fullweaponstring);
   wait 4;
   self.var_5431d89a36b0936 = 0;
 }

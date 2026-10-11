@@ -58,7 +58,7 @@ function br_ending_init() {
     setdvarifuninitialized(hashcat(@ "hash_e340a5ee5afde790", string(i)), "<dev string:x1c>");
   }
 
-  namespace_ab7fb53f62c7ae2e::function_d32f459ab9f5e7af();
+  namespace_ab7fb53f62c7ae2e::accolades_init();
   var_a6b3fae0395f75c3 = function_9afbee75cfe14b8d();
 
   if(scripts\engine\utility::issharedfuncdefined("br_ending_" + var_a6b3fae0395f75c3, "exfil_init")) {
@@ -248,7 +248,7 @@ function play_ending(winners, var_cbfc3ba10cefc8ce) {
       }
 
       if(isDefined(pack.fstop) && isDefined(pack.focusdist)) {
-        allplayers_setphysicaldof(pack.fstop, pack.focusdist, pack.focusspeed, pack.aperturespeed, pack.var_c06551440b16249c);
+        allplayers_setphysicaldof(pack.fstop, pack.focusdist, pack.focusspeed, pack.aperturespeed, pack.focalpoint);
       }
 
       if(isDefined(pack.playerfunc)) {
@@ -820,7 +820,7 @@ function player_equipment_use_stop() {
     scripts\cp_mp\vehicles\vehicle::exitexternalturret();
   }
 
-  if(self function_9cc921a57ff4deb5()) {
+  if(self isonascender()) {
     scripts\mp\gametypes\br_utility::function_fd357ca89e5e29d9();
   }
 

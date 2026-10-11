@@ -9,10 +9,10 @@ function main() {
   level.var_e5e4f305f88c0782 = undefined;
 }
 
-function function_4b119908bdf12329(var_f5713abc5f165cfa, fade_out_time, fade_in_time) {
+function function_4b119908bdf12329(new_submix, fade_out_time, fade_in_time) {
   if(isDefined(level.var_e5e4f305f88c0782)) {
-    if(isDefined(var_f5713abc5f165cfa)) {
-      if(var_f5713abc5f165cfa == level.var_e5e4f305f88c0782) {
+    if(isDefined(new_submix)) {
+      if(new_submix == level.var_e5e4f305f88c0782) {
         return;
       }
     }
@@ -20,26 +20,26 @@ function function_4b119908bdf12329(var_f5713abc5f165cfa, fade_out_time, fade_in_
     level.player clearsoundsubmix(level.var_e5e4f305f88c0782, fade_out_time);
   }
 
-  level.var_e5e4f305f88c0782 = var_f5713abc5f165cfa;
+  level.var_e5e4f305f88c0782 = new_submix;
 
-  if(isDefined(var_f5713abc5f165cfa)) {
-    level.player setsoundsubmix(var_f5713abc5f165cfa, fade_in_time);
+  if(isDefined(new_submix)) {
+    level.player setsoundsubmix(new_submix, fade_in_time);
   }
 }
 
-function function_fcdf5a0628a1911a(var_a4fa05d4abb688b6, fade_out_time, fade_in_time) {
+function function_fcdf5a0628a1911a(transient_submix, fade_out_time, fade_in_time) {
   if(isDefined(level.var_e5e4f305f88c0782)) {
     level.player clearsoundsubmix(level.var_e5e4f305f88c0782, fade_out_time);
   }
 
-  if(function_9b578c5917366e94(var_a4fa05d4abb688b6)) {
-    level.player setsoundsubmix(var_a4fa05d4abb688b6, fade_in_time);
+  if(function_9b578c5917366e94(transient_submix)) {
+    level.player setsoundsubmix(transient_submix, fade_in_time);
   }
 }
 
-function function_c7c5c2ca61454c41(var_a4fa05d4abb688b6, fade_out_time, fade_in_time) {
-  if(function_9b578c5917366e94(var_a4fa05d4abb688b6)) {
-    level.player clearsoundsubmix(var_a4fa05d4abb688b6, fade_out_time);
+function function_c7c5c2ca61454c41(transient_submix, fade_out_time, fade_in_time) {
+  if(function_9b578c5917366e94(transient_submix)) {
+    level.player clearsoundsubmix(transient_submix, fade_out_time);
   }
 
   if(isDefined(level.var_e5e4f305f88c0782)) {

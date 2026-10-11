@@ -1844,7 +1844,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (1256.99, 4744.41, 445), (0, 308.54, 0), "interaction");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "ai_bunker_mover_path_02";
+  s.choose_path = "ai_bunker_mover_path_02";
   fe[[f]](s, us, cf, (288.5, 5578.75, 526), (0, 102.52, 0), "cspf_0_auto5495041608241485334", "ai_bunker_mover_path_02_active");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
@@ -2027,7 +2027,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (1279.37, 5204.35, 440), (0, 0, 0), "cspf_0_auto13116627043479155473", "cspf_0_auto5561588280428687132");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "cy_mover_02_second_path";
+  s.choose_path = "cy_mover_02_second_path";
   fe[[f]](s, us, cf, (-897.5, 5767.25, 548.75), (0, 0, 0), "cspf_0_auto11822920329064947888");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
@@ -2485,11 +2485,11 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-378.07, 3663.97, 353), (0, 341.5, 0), "ai_initialspawn_intro_mover", "cspf_0_auto11562818193918948064");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "intro_mover_second_path_02";
+  s.choose_path = "intro_mover_second_path_02";
   fe[[f]](s, us, cf, (-355, 3601, 355), (0, 28.7, 0), "cspf_0_auto16261007809023275054");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "intro_mover_second_path_01";
+  s.choose_path = "intro_mover_second_path_01";
   fe[[f]](s, us, cf, (-350, 3650, 355), (0, 313.4, 0), "cspf_0_auto11562818193918948064");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
@@ -2511,11 +2511,11 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (4567.71, 4152.48, 630), (0, 272.05, 0), "ai_initialspawn_mansion_mover", "cspf_0_auto8351237541053920508");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "intro_mover_second_path_04";
+  s.choose_path = "intro_mover_second_path_04";
   fe[[f]](s, us, cf, (-323, 3582, 355), (0, 0, 0), "cspf_0_auto5855255682979200016");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "intro_mover_second_path_03";
+  s.choose_path = "intro_mover_second_path_03";
   fe[[f]](s, us, cf, (-293, 3633, 355), (0, 198.3, 0), "cspf_0_auto11665714972340089679");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
@@ -2590,7 +2590,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_resort_create_script";
   s.compositemodel = "1";
   s.script_vehiclegroup = "ai_arrive_2";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (3715.17, 7968.75, 752.99), (6.61, 234.82, 1.4), "parking_arrive_2", "cspf_0_auto3023018183455082665");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
@@ -3122,11 +3122,11 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-1270.88, 3782.95, 244), (0, 340.06, 0), "cspf_0_auto11265884811601089196", "cspf_0_auto11651634636891437461");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "cy_mover_01_second_path_01";
+  s.choose_path = "cy_mover_01_second_path_01";
   fe[[f]](s, us, cf, (-808.5, 5740.5, 545.75), (0, 158.15, 0), "cspf_0_auto4471008803171418915");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "cy_mover_01_second_path_02";
+  s.choose_path = "cy_mover_01_second_path_02";
   fe[[f]](s, us, cf, (-841, 5708.25, 546.75), (0, 113.43, 0), "cspf_0_auto7906123343204048113");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
@@ -3231,7 +3231,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (174.25, 6541.75, 528.25), (0, 115.3, 0), "cspf_0_auto5573752248836677448", "cspf_0_auto16229934365648536320");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
-  s.var_9987f724c05e74ba = "ai_bunker_mover_path_01";
+  s.choose_path = "ai_bunker_mover_path_01";
   fe[[f]](s, us, cf, (249.5, 5625, 526), (0, 87.23, 0), "cspf_0_auto4535262794023539313", "ai_bunker_mover_path_01_active");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
@@ -3586,7 +3586,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_resort_create_script";
   s.compositemodel = "1";
   s.script_vehiclegroup = "AI_arrive_1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (3963.17, 8332.75, 772.99), (6.02, 229.9, 3.07), "parking_arrive_1", "cspf_0_auto17272449379131588609");
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
@@ -3615,7 +3615,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
   s.animation = "reb_stl_idle_stand_smoking";
-  s.var_9987f724c05e74ba = "patio_mover_second_path";
+  s.choose_path = "patio_mover_second_path";
   s.interaction = "idle_smoke";
   s.repeat_interaction = "1";
   s.script_delay = "20";
@@ -3884,7 +3884,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
   s.animation = "reb_stl_idle_stand_smoking";
-  s.var_9987f724c05e74ba = "sitting_mover_second_path_02";
+  s.choose_path = "sitting_mover_second_path_02";
   s.interaction = "idle_smoke";
   s.script_delay = "0";
   s.script_faceangles = "1";
@@ -3925,7 +3925,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_resort_create_script";
   s.animation = "cap_sdr_patrol_conversation01_sdr1_single_loop";
-  s.var_9987f724c05e74ba = "sitting_mover_second_path_01";
+  s.choose_path = "sitting_mover_second_path_01";
   s.interaction = "patrol_conversation01";
   s.script_delay = "0";
   s.script_faceangles = "1";

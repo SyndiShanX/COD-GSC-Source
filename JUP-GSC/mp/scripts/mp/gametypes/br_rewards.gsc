@@ -247,21 +247,21 @@ function br_getrandomkillstreakreward() {
     var_7f64ae5a67fcca8c = 0;
   }
 
-  var_8b591b0bc361ab3d = randomintrange(1, totalchance);
+  diceroll = randomintrange(1, totalchance);
 
-  if(var_8b591b0bc361ab3d <= var_7f64b15a67fcd125) {
+  if(diceroll <= var_7f64b15a67fcd125) {
     level.tierrewardcounts[0]++;
     streaktierlist = array_randomize(level.killstreaktierlist[0]);
     return streaktierlist[0];
   }
 
-  if(var_8b591b0bc361ab3d <= var_7f64b05a67fccef2) {
+  if(diceroll <= var_7f64b05a67fccef2) {
     level.tierrewardcounts[1]++;
     streaktierlist = array_randomize(level.killstreaktierlist[1]);
     return streaktierlist[0];
   }
 
-  if(var_8b591b0bc361ab3d <= var_7f64af5a67fcccbf) {
+  if(diceroll <= var_7f64af5a67fcccbf) {
     level.tierrewardcounts[2]++;
     streaktierlist = array_randomize(level.killstreaktierlist[2]);
     return streaktierlist[0];
@@ -544,9 +544,9 @@ function function_b4255b6f102b056d(var_26784414a3b75d58) {
   if(isDefined(castresults) && castresults.size > 0) {
     var_23892b9ab76d2bf3 = castresults[0]["surfaceflags"];
     var_4b5a75d5223543c8 = physics_getsurfacetypefromflags(var_23892b9ab76d2bf3);
-    var_2b9c39598d19ea34 = var_4b5a75d5223543c8["name"];
+    stringsurfacename = var_4b5a75d5223543c8["name"];
 
-    if(isstartstr(var_2b9c39598d19ea34, "surftype_water")) {
+    if(isstartstr(stringsurfacename, "surftype_water")) {
       return true;
     }
   }
@@ -888,8 +888,8 @@ function calculatedroplocationnearlocation(location, mindist, maxdist) {
   pos = location.origin;
   x = undefined;
   y = undefined;
-  var_8b591b0bc361ab3d = randomint(2);
-  direction = ter_op(var_8b591b0bc361ab3d, -1, 1);
+  diceroll = randomint(2);
+  direction = ter_op(diceroll, -1, 1);
 
   if(direction > 0) {
     x = randomfloatrange(pos[0] + mindist * direction, pos[0] + maxdist * direction);
@@ -905,8 +905,8 @@ function calculatedroplocationnearlocation(location, mindist, maxdist) {
     }
   }
 
-  var_8b591b0bc361ab3d = randomint(2);
-  direction = ter_op(var_8b591b0bc361ab3d, -1, 1);
+  diceroll = randomint(2);
+  direction = ter_op(diceroll, -1, 1);
 
   if(direction > 0) {
     y = randomfloatrange(pos[1] + mindist * direction, pos[1] + maxdist * direction);

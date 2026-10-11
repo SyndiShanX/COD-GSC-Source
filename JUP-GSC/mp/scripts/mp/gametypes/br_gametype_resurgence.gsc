@@ -1234,8 +1234,8 @@ function function_611500f4751aaf1(bitfield, teamindex, arrayindex) {
   leftshift = 8 * arrayindex;
   bitmask = var_5ba62be302f54d98 - 1;
   bitmask <<= leftshift;
-  var_f8f977081d3da8b4 = ~bitmask;
-  bitfield &= var_f8f977081d3da8b4;
+  invertedmask = ~bitmask;
+  bitfield &= invertedmask;
   var_1cc902f24ef7cc11 = teamindex << leftshift;
   bitfield |= var_1cc902f24ef7cc11;
   return bitfield;
@@ -2844,7 +2844,7 @@ function function_90507e372a40c684() {
 }
 
 function function_793956fb93de9504(perkref) {
-  return isDefined(level.perkbundles[perkref]) && istrue(level.perkbundles[perkref].var_594af43597023062) && istrue(level.perkbundles[perkref].specialistbr) && !istrue(level.perkbundles[perkref].brdisabled);
+  return isDefined(level.perkbundles[perkref]) && istrue(level.perkbundles[perkref].showninmenu) && istrue(level.perkbundles[perkref].specialistbr) && !istrue(level.perkbundles[perkref].brdisabled);
 }
 
 function function_10870c1a437402b() {
@@ -3021,7 +3021,7 @@ function function_cb7114374c912a6f() {
 
 function function_927f6139e79412c1(event) {
   aliveplayers = getteamdata(self.team, "<dev string:x35c>");
-  event = function_1823ff50bb28148d(event);
+  event = getxhash(event);
   aliveplayers[0] scripts\mp\utility\points::doscoreevent(event);
 }
 

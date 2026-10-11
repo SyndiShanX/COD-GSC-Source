@@ -42,7 +42,7 @@ function main() {
     if(!istrue(level.gametypebundle.var_e77038812bc72875) && !istrue(level.brenableagents)) {
       return;
     }
-  } else if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() && scripts\mp\utility\game::getsubgametype() != "champion") {
+  } else if(scripts\cp_mp\utility\game_utility::ismagellanmode() && scripts\mp\utility\game::getsubgametype() != "champion") {
     return;
   }
 
@@ -145,7 +145,7 @@ function function_8a38b0ab8ed5310d() {
   }
 }
 
-function add_humanoid_agent(agent_type, team, class, optional_spawnorigin, optional_spawnangles, optional_owner, var_9fee3fe2e8ddd1f3, respawn_on_death, difficulty, classcallback, disableloadout, var_b72e32b38f8041c6, disablehealthregen, disablebattlechatter) {
+function add_humanoid_agent(agent_type, team, class, optional_spawnorigin, optional_spawnangles, optional_owner, use_randomized_personality, respawn_on_death, difficulty, classcallback, disableloadout, var_b72e32b38f8041c6, disablehealthregen, disablebattlechatter) {
   agent = scripts\mp\agents\agent_common::connectnewagent(agent_type, team, class);
 
   if(isDefined(classcallback)) {
@@ -154,13 +154,13 @@ function add_humanoid_agent(agent_type, team, class, optional_spawnorigin, optio
   }
 
   if(isDefined(agent)) {
-    agent thread[[agent agentfunc("spawn")]](optional_spawnorigin, optional_spawnangles, optional_owner, var_9fee3fe2e8ddd1f3, respawn_on_death, difficulty, disableloadout, var_b72e32b38f8041c6, disablehealthregen, disablebattlechatter);
+    agent thread[[agent agentfunc("spawn")]](optional_spawnorigin, optional_spawnangles, optional_owner, use_randomized_personality, respawn_on_death, difficulty, disableloadout, var_b72e32b38f8041c6, disablehealthregen, disablebattlechatter);
   }
 
   return agent;
 }
 
-function spawn_agent_player(optional_spawnorigin, optional_spawnangles, optional_owner, var_9fee3fe2e8ddd1f3, respawn_on_death, difficulty, disableloadout, var_b72e32b38f8041c6, disablehealthregen, disablebattlechatter) {
+function spawn_agent_player(optional_spawnorigin, optional_spawnangles, optional_owner, use_randomized_personality, respawn_on_death, difficulty, disableloadout, var_b72e32b38f8041c6, disablehealthregen, disablebattlechatter) {
   self endon("disconnect");
 
   while(!isDefined(level.getspawnpoint)) {
@@ -199,7 +199,7 @@ function spawn_agent_player(optional_spawnorigin, optional_spawnangles, optional
 
   assertmsg("<dev string:xb7>");
 
-  if(isDefined(var_9fee3fe2e8ddd1f3) && var_9fee3fe2e8ddd1f3) {
+  if(isDefined(use_randomized_personality) && use_randomized_personality) {
     scripts\mp\bots\bots::function_70008d3ab47d171d();
 
     scripts\mp\bots\bots_personality::bot_assign_personality_functions();

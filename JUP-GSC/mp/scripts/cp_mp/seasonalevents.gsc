@@ -28,7 +28,7 @@ function private getcurrenttime() {
 
   if(level.var_c5f55642efa61b9c) {
     foreach(player in level.players) {
-      timewarpoffsetseconds = player getplayerdata(level.var_5d69837cf4db0407, "timeWarpOffsetSeconds");
+      timewarpoffsetseconds = player getplayerdata(level.progressiongroup, "timeWarpOffsetSeconds");
 
       if(!isDefined(timewarpoffsetseconds)) {
         timewarpoffsetseconds = 0;
@@ -60,7 +60,7 @@ function private loadeventdata() {
     return;
   }
 
-  level.var_c5f55642efa61b9c = getdvarint(@ "hash_dec5cd614ac064d", 0) && !istrue(level.var_ec2fb549b15ad827) && !istrue(level.var_77907d733abe8b63);
+  level.var_c5f55642efa61b9c = getdvarint(@ "hash_dec5cd614ac064d", 0) && !istrue(level.leagueplaymatch) && !istrue(level.var_77907d733abe8b63);
   seasonalevents = [];
   var_fe50eb1b16b6a9dd = undefined;
 

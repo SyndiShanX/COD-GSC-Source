@@ -78,7 +78,7 @@ function function_12920ead9cafd0e1(origin, angles) {
 
 function private function_76ab1a108d9b14ef(instance, player) {}
 
-function private function_37918fa831854a31(safe, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_37918fa831854a31(safe, part, state, player, bautouse, usestring) {
   if(isDefined(player) && istrue(player.var_859654e0445a36d9)) {
     player scripts\mp\hud_message::showerrormessage("MP/DENY_USE_CARRY");
     return;
@@ -125,7 +125,7 @@ function private function_37918fa831854a31(safe, part, state, player, var_a5b2c5
       }
     }
 
-    scripts\cp_mp\loot\common_cache::function_30f5ea60517f9e06(safe, player);
+    scripts\cp_mp\loot\common_cache::openlootablecontainer(safe, player);
     return;
   }
 
@@ -134,7 +134,7 @@ function private function_37918fa831854a31(safe, part, state, player, var_a5b2c5
       safe setscriptablepartstate(part, "fully_opening_unusable");
     }
 
-    scripts\cp_mp\loot\common_cache::function_30f5ea60517f9e06(safe, player);
+    scripts\cp_mp\loot\common_cache::openlootablecontainer(safe, player);
   }
 }
 
@@ -158,7 +158,7 @@ function private function_70ff902643fc02d(safe, part, state, player) {
     }
 
     if(issharedfuncdefined("safe", "onStartUnlocking")) {
-      function_f3bb4f4911a1beb2("safe", "onStartUnlocking", safe, part, state, player);
+      callsharedfunc("safe", "onStartUnlocking", safe, part, state, player);
     }
 
     safe notify("safe_unlocking");
@@ -360,7 +360,7 @@ function private function_7c9992633ba2713f(player) {
   player setstance("stand");
   var_cd9982adb17761a8 = gettime();
   player thread function_8735e24dceeb7187();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = movetotime - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000;
   waittime = max(0, var_218f64cb035d54be);
@@ -403,7 +403,7 @@ function private function_8735e24dceeb7187() {
   self endon("death_or_disconnect");
   self endon("interact_finished");
   waittill_any_2("last_stand_start", "interact_interrupt");
-  scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+  scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
 }
 
 function private function_e8369984e9eef428(isallowed) {

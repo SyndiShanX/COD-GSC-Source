@@ -642,17 +642,17 @@ function function_e552fdbccca8f866() {
 }
 
 function function_7f7b72ed922a1c24(arena) {
-  arena.var_5f525e1e05714bb5 = 1;
+  arena.onevone = 1;
 }
 
 function function_df994a817536ae7b(arena) {
-  if(isDefined(arena.var_5f525e1e05714bb5)) {
-    arena.var_5f525e1e05714bb5 = undefined;
+  if(isDefined(arena.onevone)) {
+    arena.onevone = undefined;
   }
 }
 
 function function_cf70188e00c433c4(arena) {
-  if(istrue(arena.var_5f525e1e05714bb5)) {
+  if(istrue(arena.onevone)) {
     return 1;
   }
 
@@ -1293,7 +1293,7 @@ function function_740fbc412dff7c67(arena) {
   }
 }
 
-function function_15ae52c5e218380a(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_15ae52c5e218380a(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player) || !isPlayer(player) || !player scripts\mp\gametypes\br_public::isplayerinorgoingtogulag() || istrue(player.var_4af73ce40a5d8572)) {
     return;
   }
@@ -2416,13 +2416,13 @@ function function_b2d8f9adee070020(arena) {
   while(var_7205fab5ac6f58e < level.var_f684d37d5503eeba.var_b61a334ec66db6a9) {
     var_7205fab5ac6f58e++;
     var_9ae625e33b2fc5f6 = var_a29ac4899acd2c08.size;
-    var_8b591b0bc361ab3d = randomint(var_9ae625e33b2fc5f6);
+    diceroll = randomint(var_9ae625e33b2fc5f6);
     var_efcce422369f16a3 = arena.var_2a7e62879a75ffe.size;
     var_d6a189deafcb31fd = randomint(var_efcce422369f16a3);
     scriptablename = arena.var_2a7e62879a75ffe[var_d6a189deafcb31fd][var_7205fab5ac6f58e - 1];
 
     if(!isDefined(scriptablename) || scriptablename == "") {
-      var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[var_8b591b0bc361ab3d]);
+      var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[diceroll]);
       continue;
     }
 
@@ -2438,12 +2438,12 @@ function function_b2d8f9adee070020(arena) {
     }
 
     dropinfo = spawnStruct();
-    dropinfo.origin = var_a29ac4899acd2c08[var_8b591b0bc361ab3d].origin;
+    dropinfo.origin = var_a29ac4899acd2c08[diceroll].origin;
     dropinfo.angles = (0, 0, 0);
     dropinfo.payload = 0;
     lootitem = scripts\mp\gametypes\br_pickups::spawnpickup(scriptablename, dropinfo, pickupcount);
-    var_39ce9039c3660d76 = var_a29ac4899acd2c08[var_8b591b0bc361ab3d].script_noteworthy;
-    var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[var_8b591b0bc361ab3d]);
+    var_39ce9039c3660d76 = var_a29ac4899acd2c08[diceroll].script_noteworthy;
+    var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[diceroll]);
     var_a29ac4899acd2c08 = function_7f32923c29bcf243(arena.var_2a7e62879a75ffe, var_a29ac4899acd2c08, scriptablename, var_39ce9039c3660d76, pickupcount);
   }
 }
@@ -2456,11 +2456,11 @@ function function_fcc8620f60ca604c(arena) {
   while(spawneditemindex < level.var_f684d37d5503eeba.var_1d8a378e37a1b6e5 && spawneditemindex < arena.var_49e6d5114201a22b[0].size) {
     spawneditemindex++;
     var_9ae625e33b2fc5f6 = var_a29ac4899acd2c08.size;
-    var_8b591b0bc361ab3d = randomint(var_9ae625e33b2fc5f6);
+    diceroll = randomint(var_9ae625e33b2fc5f6);
     scriptablename = arena.var_49e6d5114201a22b[0][spawneditemindex - 1];
 
     if(!isDefined(scriptablename) || scriptablename == "") {
-      var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[var_8b591b0bc361ab3d]);
+      var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[diceroll]);
       continue;
     }
 
@@ -2471,13 +2471,13 @@ function function_fcc8620f60ca604c(arena) {
     }
 
     dropinfo = spawnStruct();
-    dropinfo.origin = var_a29ac4899acd2c08[var_8b591b0bc361ab3d].origin;
+    dropinfo.origin = var_a29ac4899acd2c08[diceroll].origin;
     dropinfo.angles = (0, 0, 0);
     dropinfo.payload = 0;
     lootitem = scripts\mp\gametypes\br_pickups::spawnpickup(scriptablename, dropinfo, pickupcount);
     lootitem.var_1b46a808091ea19c = 1;
-    var_39ce9039c3660d76 = var_a29ac4899acd2c08[var_8b591b0bc361ab3d].script_noteworthy;
-    var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[var_8b591b0bc361ab3d]);
+    var_39ce9039c3660d76 = var_a29ac4899acd2c08[diceroll].script_noteworthy;
+    var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[diceroll]);
     var_a29ac4899acd2c08 = function_7f32923c29bcf243(arena.var_49e6d5114201a22b, var_a29ac4899acd2c08, scriptablename, var_39ce9039c3660d76, pickupcount);
   }
 }
@@ -2509,11 +2509,11 @@ function function_d674739c4e4039b(arena, eventref, scriptablename) {
   if(level.var_f684d37d5503eeba.var_b50451c7ab918479 == 1) {
     while(var_410a59c41f3537f7 < level.var_f684d37d5503eeba.var_d5a4802dae58c710 && var_410a59c41f3537f7 < arena.var_c8ada8b232d73a0a[0].size) {
       var_410a59c41f3537f7++;
-      var_8b591b0bc361ab3d = randomint(var_a29ac4899acd2c08.size);
+      diceroll = randomint(var_a29ac4899acd2c08.size);
       scriptablename = arena.var_c8ada8b232d73a0a[0][var_410a59c41f3537f7 - 1];
 
       if(!isDefined(scriptablename) || scriptablename == "") {
-        var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[var_8b591b0bc361ab3d]);
+        var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[diceroll]);
         continue;
       }
 
@@ -2524,12 +2524,12 @@ function function_d674739c4e4039b(arena, eventref, scriptablename) {
       }
 
       dropinfo = spawnStruct();
-      dropinfo.origin = var_a29ac4899acd2c08[var_8b591b0bc361ab3d].origin;
+      dropinfo.origin = var_a29ac4899acd2c08[diceroll].origin;
       dropinfo.angles = (0, 0, 0);
       dropinfo.payload = 0;
       lootitem = scripts\mp\gametypes\br_pickups::spawnpickup(scriptablename, dropinfo, pickupcount);
       lootitem.var_1b46a808091ea19c = 1;
-      var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[var_8b591b0bc361ab3d]);
+      var_a29ac4899acd2c08 = array_remove(var_a29ac4899acd2c08, var_a29ac4899acd2c08[diceroll]);
     }
   }
 }

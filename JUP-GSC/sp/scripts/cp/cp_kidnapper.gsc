@@ -92,7 +92,7 @@ function spawn_kidnapper_for_player(target_player) {
   soldier scripts\engine\utility::set_movement_speed(200);
   soldier getenemyinfo(target_player);
   soldier scripts\cp\spawning::set_character_models("body_al_qatala_1_ar", "head_al_qatala_ar");
-  soldier.var_98add129a7ecb962 = 0;
+  soldier.allowlongdeath = 0;
   soldier.is_kidnapping_player = 1;
   soldier thread get_to_target_player(soldier, target_player);
   soldier thread watch_for_kidnapper_death(soldier, target_player);
@@ -330,12 +330,12 @@ function sort_players_based_on_previous_kidnap_attempt_time() {
       swapped = 0;
 
       for(i = 1; i <= var_3852d4eb6b004d93 - 1; i++) {
-        var_97d28dc646322d36 = player_sorted[i - 1];
-        var_a3b583db23b50298 = player_sorted[i];
+        player_in_front = player_sorted[i - 1];
+        player_in_back = player_sorted[i];
 
-        if(var_a3b583db23b50298.previous_kidnap_attempt_time < var_97d28dc646322d36.previous_kidnap_attempt_time) {
-          player_sorted[i - 1] = var_a3b583db23b50298;
-          player_sorted[i] = var_97d28dc646322d36;
+        if(player_in_back.previous_kidnap_attempt_time < player_in_front.previous_kidnap_attempt_time) {
+          player_sorted[i - 1] = player_in_back;
+          player_sorted[i] = player_in_front;
           swapped = 1;
         }
       }

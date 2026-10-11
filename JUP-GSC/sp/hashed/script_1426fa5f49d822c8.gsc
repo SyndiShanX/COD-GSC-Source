@@ -55,7 +55,7 @@ function function_bff1ad7aec0290c7() {
   level.player switchtoweapon(startweapon);
   var_2f7136cf6c5b1b14 = [];
   offhandprecache(var_2f7136cf6c5b1b14);
-  scripts\sp\equipment\offhands::function_c7e46ad834e413f("ks_gesture_phone_mp", 0);
+  scripts\sp\equipment\offhands::overrideweaponoffhandtype("ks_gesture_phone_mp", 0);
 }
 
 function function_1d5893b30c552e0d() {
@@ -438,7 +438,7 @@ function function_fdcadce0aa083a2b() {
   ai_civ_park_statue = ai_civ_park_statue spawn_ai(1);
   ai_civ_park_statue.animname = "generic";
   ai_civ_park_statue function_b661b022700ba72f("script", 1);
-  ai_civ_park_statue function_d5cda8a759cc36bc("relaxed");
+  ai_civ_park_statue setcivstate("relaxed");
   ai_civ_park_statue.ignoreme = 1;
   ai_civ_park_statue.ignoreall = 1;
   ai_civ_park_statue.goalradius = 32;
@@ -478,7 +478,7 @@ function function_424fc9ed4697bd85() {
   if(isDefined(ai_park_popcorn_civ)) {
     ai_park_popcorn_civ = ai_park_popcorn_civ spawn_ai(1);
     ai_park_popcorn_civ function_b661b022700ba72f("script", 1);
-    ai_park_popcorn_civ function_d5cda8a759cc36bc("relaxed");
+    ai_park_popcorn_civ setcivstate("relaxed");
     ai_park_popcorn_civ function_89007ae298fb4b15();
     ai_park_popcorn_civ.ignoreme = 1;
     ai_park_popcorn_civ.ignoreall = 1;
@@ -595,7 +595,7 @@ function function_eae70b127f98985b() {
   wait 2.5;
   level.player clearadditionalstreampos();
   var_c6dc70083eeebbf9 = (-2735.5, 3255.9, 55.6);
-  level.player function_670863fc4008c3d8(var_c6dc70083eeebbf9);
+  level.player setadditionalstreamposuntilcleared(var_c6dc70083eeebbf9);
   utility::flag_wait("flg_streets_cctv_track_done");
   level.player clearadditionalstreampos();
 }
@@ -924,10 +924,10 @@ function function_54ab7590d2f1297() {
 function function_b5e9bf214bf2b05d() {}
 
 function function_e179dc089d6a2222(var_d6fd0fecf21803cf, var_a134b18ad96c9b3f) {
-  var_e0f4b3c8cf6c79a = getspawnerarray(var_d6fd0fecf21803cf);
-  array_spawn_function(var_e0f4b3c8cf6c79a, &function_e92e2de5964389c2, undefined, 1);
+  a_ai_civ = getspawnerarray(var_d6fd0fecf21803cf);
+  array_spawn_function(a_ai_civ, &function_e92e2de5964389c2, undefined, 1);
 
-  foreach(ai_civ in var_e0f4b3c8cf6c79a) {
+  foreach(ai_civ in a_ai_civ) {
     if(isDefined(ai_civ.script_parameters)) {
       if(ai_civ.script_parameters == "actor") {
         ai = ai_civ spawn_ai(1);
@@ -1043,7 +1043,7 @@ function spawn_hacker(var_7eafdc52084bd6f2) {
   level.ai_hacker.ignoreall = 1;
   level.ai_hacker.goalradius = 32;
   level.ai_hacker function_b661b022700ba72f("script", 1);
-  level.ai_hacker function_d5cda8a759cc36bc("relaxed");
+  level.ai_hacker setcivstate("relaxed");
   level.ai_hacker function_89007ae298fb4b15();
   level.ai_hacker.animname = "generic";
   level.ai_hacker.script_noteworthy = "whiskey";
@@ -1167,7 +1167,7 @@ function function_6666cc3b4b37ec2() {
 
   flag_wait("flg_intro_done");
   scripts\stealth\threat_sight::threat_sight_set_enabled(1);
-  self function_24cb3b5e0d4216b1("investigate");
+  self setthreatsightstate("investigate");
   function_ce78fcefc5534fd6(self, level.player, 0);
 
   while(!flag("flg_park_failed") && !flag("flg_park_whiskey_path_2_arrived")) {
@@ -1313,7 +1313,7 @@ function function_735fb40088dd6a60() {
     return;
   }
 
-  level.ai_hacker function_d5cda8a759cc36bc("flee");
+  level.ai_hacker setcivstate("flee");
   level.ai_hacker function_d45457463f7a8eab(200);
   level.ai_hacker function_92c056ec351f2f6e(200);
   level.ai_hacker function_2198a1a54be3d161("nd_hacker_path_3_start");

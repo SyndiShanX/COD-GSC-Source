@@ -553,7 +553,7 @@ function function_f0a2a1c924655499() {
   rig linkTo(self, "", (0, 0, 0), (0, 0, 0));
   rig.state = "ready_to_idle";
   rig.var_83918575d24f54ea = "none";
-  rig.var_27910895b15ae097 = 0;
+  rig.prevspeed = 0;
   rig.prevyaw = 0;
   self.rig = rig;
   thread function_4fea809b18da0a25();
@@ -606,7 +606,7 @@ function function_96e8908605c86308(neworigin) {
     }
 
     rig.prevyaw = 0;
-    rig.var_27910895b15ae097 = 0;
+    rig.prevspeed = 0;
     return;
   }
 
@@ -622,7 +622,7 @@ function function_96e8908605c86308(neworigin) {
   rig setcustomnodegameparameter("yaw", yaw);
   rig setcustomnodegameparameter("speed", speed * 20);
   rig.prevyaw = yaw;
-  rig.var_27910895b15ae097 = speed;
+  rig.prevspeed = speed;
 }
 
 function function_9f3dd4832f5530c4() {
@@ -1000,7 +1000,7 @@ function function_45f560ad90c3224d() {
   function_ecf63a220d11561f("delete");
 }
 
-function function_631bda4c092cbca8(var_4fbd4a28aa8dc92) {
+function function_631bda4c092cbca8(landorigin) {
   self endon("death");
   level.player endon("death");
   rig = self.rig;
@@ -1011,7 +1011,7 @@ function function_631bda4c092cbca8(var_4fbd4a28aa8dc92) {
     anime = "toeup_jump";
   } else {
     right = anglestoright(self.moveangles);
-    normal = vectorNormalize(var_4fbd4a28aa8dc92 - self.origin);
+    normal = vectorNormalize(landorigin - self.origin);
     dot = vectordot(normal, right);
 
     if(dot > 0) {

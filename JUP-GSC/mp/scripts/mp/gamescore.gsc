@@ -242,7 +242,7 @@ function giveplayerscore(event, points, victim, eventinfo) {
   var_7e2c53b0bcf117d9 = spawnStruct();
   var_7e2c53b0bcf117d9.player = player;
   var_7e2c53b0bcf117d9.scoreevent = event;
-  namespace_c45ac99c4997e722::function_80820d6d364c1836("callback_player_score_event", var_7e2c53b0bcf117d9);
+  telemetry_utils::function_80820d6d364c1836("callback_player_score_event", var_7e2c53b0bcf117d9);
   player pet_watch::addobjectivescorecharge(event, int(originalpoints), eventinfo);
   params = {
     #event: event
@@ -1121,7 +1121,7 @@ function awardbuffdebuffassists(attacker, victim) {
   }
 }
 
-function function_6251f7723be2f90c(victim, var_10f37e0e73fd3a4c) {
+function function_6251f7723be2f90c(victim, assistingplayers) {
   attacker = self;
 
   if(isDefined(attacker.team) && scripts\engine\utility::issharedfuncdefined("game", "getTeamData")) {
@@ -1133,17 +1133,17 @@ function function_6251f7723be2f90c(victim, var_10f37e0e73fd3a4c) {
 
     attackersquad = [[scripts\engine\utility::getsharedfunc("game", "getTeamData")]](attacker.team, teamplayers);
 
-    if(isDefined(var_10f37e0e73fd3a4c)) {
-      if(!isarray(var_10f37e0e73fd3a4c)) {
-        var_10f37e0e73fd3a4c = [var_10f37e0e73fd3a4c];
+    if(isDefined(assistingplayers)) {
+      if(!isarray(assistingplayers)) {
+        assistingplayers = [assistingplayers];
       }
 
       if(getdvarint(@ "hash_dda9d67c21b0f4b4", 0)) {
-        attackersquad = array_remove_array(attackersquad, var_10f37e0e73fd3a4c);
+        attackersquad = array_remove_array(attackersquad, assistingplayers);
       } else {
         var_a0b5666a0cdebb0b = [];
 
-        foreach(var_f43e7c1fdaeb88f7 in var_10f37e0e73fd3a4c) {
+        foreach(var_f43e7c1fdaeb88f7 in assistingplayers) {
           if(isDefined(var_f43e7c1fdaeb88f7) && isDefined(var_f43e7c1fdaeb88f7.guid)) {
             attackerdata = victim.attackerdata[var_f43e7c1fdaeb88f7.guid];
 

@@ -435,7 +435,7 @@ function spawnscavengerlootcache(inorigin, var_5b9c864b21207ff6, locale) {
   }
 }
 
-function scavengerlootcacheused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function scavengerlootcacheused(instance, part, state, player, bautouse, usestring) {
   if(istrue(player scripts\mp\gametypes\br_gametypes::runbrgametypefunc("playerSkipLootPickup", instance))) {
     return;
   }
@@ -452,7 +452,7 @@ function scavengerlootcacheused(instance, part, state, player, var_a5b2c541413aa
 
     instance setscriptablepartstate("body", "scavenger_opening");
     var_c0858aceea4bb7d9 = getdvarint(@ "hash_28b9017071772839", 30);
-    instance.entity scripts\engine\utility::function_ad9433aab9fcdf04(var_c0858aceea4bb7d9, "death_or_disconnect", &delete);
+    instance.entity scripts\engine\utility::delaycallendon(var_c0858aceea4bb7d9, "death_or_disconnect", &delete);
     questinstance registercontributingplayers(player);
 
     switch (instance.entity.questlocale.phaseindex) {

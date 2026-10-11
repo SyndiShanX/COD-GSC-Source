@@ -46,7 +46,7 @@ function givestreakpointswithtext(event, objweapon, pointsoverride) {
     points = pointsoverride;
   } else {
     points = scripts\mp\rank::getscoreinfovalue(event);
-    assertex(isDefined(points), "<dev string:x1c>" + function_3c8848a3a11b2553(event) + "<dev string:x47>");
+    assertex(isDefined(points), "<dev string:x1c>" + getxhashsourcename(event) + "<dev string:x47>");
   }
 
   points = modifyunifiedpoints(event, points, objweapon);
@@ -66,7 +66,7 @@ function givexpwithtext(event, pointsoverride) {
     points = pointsoverride;
   } else {
     points = scripts\mp\rank::getscoreinfovalue(event);
-    assertex(isDefined(points), "<dev string:x91>" + function_3c8848a3a11b2553(event) + "<dev string:x47>");
+    assertex(isDefined(points), "<dev string:x91>" + getxhashsourcename(event) + "<dev string:x47>");
   }
 
   thread scripts\mp\rank::giverankxp(event, points);
@@ -96,7 +96,7 @@ function doscoreevent(event, objweapon, pointsoverride, xpoverride, victim, var_
   }
 
   if(getdvarint(@ "hash_28825c0c0b691b0d", 0) == 1) {
-    hexname = function_f28fd66285fa2c9(event);
+    hexname = getxhashhexname(event);
     hashname = hashcat(@ "hash_1e443aaa4347a9c", hexname);
 
     if(getdvarint(hashname, 0) == 1) {
@@ -173,7 +173,7 @@ function giveunifiedpoints(event, objweapon, pointsoverride, xpoverride, victim,
 
   if(!isxhash(event)) {
     assertex(1, event);
-    event = function_1823ff50bb28148d(event);
+    event = getxhash(event);
   }
 
   if(istrue(level.ignorescoring)) {
@@ -199,7 +199,7 @@ function giveunifiedpoints(event, objweapon, pointsoverride, xpoverride, victim,
     points = scripts\mp\rank::getscoreinfovalue(event);
 
     if(level.mapname != "<dev string:x167>" && level.mapname != "<dev string:x179>") {
-      assertex(isDefined(points), "<dev string:x190>" + function_3c8848a3a11b2553(event) + "<dev string:x47>");
+      assertex(isDefined(points), "<dev string:x190>" + getxhashsourcename(event) + "<dev string:x47>");
     }
 
     if(!isDefined(points)) {

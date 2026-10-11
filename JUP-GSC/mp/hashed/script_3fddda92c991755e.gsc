@@ -39,7 +39,7 @@ function updategametypedvars() {
   level.enableflagcheckpoint = dvarintvalue("enableFlagCheckPoint", 0, 0, 1);
 }
 
-function function_a892b65a4cfef993(flagpoints) {
+function createteamflags(flagpoints) {
   if(flagpoints.size == 0) {
     assertmsg("<dev string:x1c>");
     return;

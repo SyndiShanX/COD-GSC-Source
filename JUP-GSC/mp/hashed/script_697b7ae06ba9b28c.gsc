@@ -17,7 +17,7 @@
 #using scripts\mp\teams;
 #using scripts\mp\utility\game;
 #using scripts\mp\utility\teams;
-#namespace namespace_e1e2759f008e3233;
+#namespace leagueplay_br;
 
 function init() {
   if(!level.var_77907d733abe8b63) {
@@ -145,7 +145,7 @@ function function_adcdfd1b1a3efa51(player) {
       params = [ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_d708505d31d66ef6"), 0, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_c9361150947eb728"), function_94c7ae7049488358(), ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_e03f5709c8cd8a03"), function_4f9373a1227db35c(), ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_23d400c5be24f34b"), var_bca6691d9622c899, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_5fba2f25f07000f5"), level.var_cbbf84a8e78caeee, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_e8d0ec1cb1f306c4"), namespace_bf9ffd2b22c7d819::function_e3bd94413509bc25()];
 
       if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-        player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+        player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
       }
 
       return;
@@ -154,7 +154,7 @@ function function_adcdfd1b1a3efa51(player) {
     params = [ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_d708505d31d66ef6"), 0, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_c9361150947eb728"), function_94c7ae7049488358(), ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_e03f5709c8cd8a03"), function_4f9373a1227db35c(), ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_5fba2f25f07000f5"), level.var_cbbf84a8e78caeee, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_e8d0ec1cb1f306c4"), namespace_bf9ffd2b22c7d819::function_e3bd94413509bc25()];
 
     if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-      player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+      player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
     }
   }
 }
@@ -620,7 +620,7 @@ function function_6c42f05b6c82b35e() {
   xuid = player getxuid();
   player.pers["subpartyIndex"] = function_508d1cbb2f7d25c1(xuid);
   logstring("LeaguePlay: initializing subparty index to: " + player.pers["subpartyIndex"] + " for xuid: " + xuid);
-  player.pers["sr"] = player getplayerdata(level.var_5d69837cf4db0407, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "season", level.var_f67ee22da6041b9b, "sr");
+  player.pers["sr"] = player getplayerdata(level.progressiongroup, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "season", level.var_f67ee22da6041b9b, "sr");
   player.pers["leaguePlayInit"] = 1;
 }
 
@@ -719,7 +719,7 @@ function match_start() {
     params = [ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_5c84471bbbd6a98e"), level.leagueid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_23d400c5be24f34b"), var_bca6691d9622c899, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_c9361150947eb728"), matchid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_e03f5709c8cd8a03"), lobbyid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_f1733e44a51e82be"), level.var_75b72a33aeab21d4, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_5fba2f25f07000f5"), level.var_cbbf84a8e78caeee, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_9a5ce95c690217e7"), level.var_a176083f858ec97b, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_5e6b6b11777a5cb"), level.var_9573ac4c1f716a60];
 
     if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-      function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+      callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
     }
   }
 }
@@ -792,7 +792,7 @@ function match_end(placement, var_bedbe1ce13e22104, is_disconnect) {
   }
 
   if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-    player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", "80", reportvalues);
+    player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", "80", reportvalues);
   }
 }
 
@@ -801,7 +801,7 @@ function function_43230c03c0098996(reportvalues) {
   waittill_any_timeout_1(var_2876bd36736c8c7f, "disconnect");
 
   if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-    function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", "80", reportvalues);
+    callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", "80", reportvalues);
   }
 }
 
@@ -837,7 +837,7 @@ function function_e6da5914f27071a0() {
       params = [ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_5c84471bbbd6a98e"), level.leagueid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_d555f3589ac28cc"), matchresult, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_23d400c5be24f34b"), var_bca6691d9622c899, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_c9361150947eb728"), matchid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_e03f5709c8cd8a03"), lobbyid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_f1733e44a51e82be"), level.var_75b72a33aeab21d4, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_cb5895c719e93d31"), var_abbf42875a7797ad, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_d885ae7541734272"), 1, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_5fba2f25f07000f5"), level.var_cbbf84a8e78caeee, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_28284b187b4b4c21"), 100, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_334ca6ff472c2d06"), placement, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_d708505d31d66ef6"), 0, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_e8d0ec1cb1f306c4"), namespace_bf9ffd2b22c7d819::function_e3bd94413509bc25()];
 
       if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-        player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+        player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
       }
     }
   }
@@ -1138,19 +1138,19 @@ function function_54a23beb9c779f84() {
   }
 }
 
-function function_9a9e71365eb6010b(var_10f37e0e73fd3a4c, victim) {
+function function_9a9e71365eb6010b(assistingplayers, victim) {
   attacker = self;
   level endon("game_ended");
 
   if(isDefined(attacker.team) && issharedfuncdefined("game", "getTeamData")) {
     attackersquad = [[getsharedfunc("game", "getTeamData")]](attacker.team, "players");
 
-    if(isDefined(var_10f37e0e73fd3a4c)) {
-      if(!isarray(var_10f37e0e73fd3a4c)) {
-        var_10f37e0e73fd3a4c = [var_10f37e0e73fd3a4c];
+    if(isDefined(assistingplayers)) {
+      if(!isarray(assistingplayers)) {
+        assistingplayers = [assistingplayers];
       }
 
-      attackersquad = array_remove_array(attackersquad, var_10f37e0e73fd3a4c);
+      attackersquad = array_remove_array(attackersquad, assistingplayers);
     }
 
     foreach(squadmate in attackersquad) {
@@ -1256,13 +1256,13 @@ function function_7e9f0b973f0cdda3(attacker, var_b9c265f657115663) {
         attacker[[level.var_561addf876799987]]("kill", victim);
       }
 
-      var_10f37e0e73fd3a4c = victim.attackers;
+      assistingplayers = victim.attackers;
 
       if(istrue(victim.var_f215f63a4834bb72)) {
-        var_10f37e0e73fd3a4c[var_10f37e0e73fd3a4c.size] = self.lastattackedshieldplayer;
+        assistingplayers[assistingplayers.size] = self.lastattackedshieldplayer;
       }
 
-      attacker scripts\mp\gamescore::function_6251f7723be2f90c(victim, var_10f37e0e73fd3a4c);
+      attacker scripts\mp\gamescore::function_6251f7723be2f90c(victim, assistingplayers);
     }
   }
 

@@ -321,7 +321,7 @@ function private function_795b60c4ae5793a2(teamname) {
     effect = "hostage_bomb_explosion";
     explosionpos = self.c4.origin + (0, 0, 50);
     explosioneffect = spawnfx(level._effect[effect], explosionpos);
-    explosioneffect thread function_b4b04de87729a6f3(10);
+    explosioneffect thread delete_after_delay(10);
     triggerfx(explosioneffect);
     physicsexplosionsphere(explosionpos, 200, 100, 3);
     playrumbleonposition("grenade_rumble", self.c4.origin);
@@ -509,7 +509,7 @@ function private function_c0ccb94fcfe50916() {
   thread function_cb2f74520e05756f();
 }
 
-function private function_b7a8186b8098b13f(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_b7a8186b8098b13f(instance, part, state, player, bautouse, usestring) {
   if(part != "dmz_hostage") {
     return;
   }
@@ -844,7 +844,7 @@ function function_8277f49f79bff530(animname, spawnpos, spawnang) {
 
   if(isDefined(self)) {
     self unlink();
-    thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 
   if(isDefined(var_e3bda5be1db297f)) {
@@ -884,7 +884,7 @@ function function_a3a4a2cdca554483(animname, spawnpos, spawnang) {
 
   if(isDefined(self)) {
     self unlink();
-    thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 
   if(isDefined(var_54d7b76a2a71e284)) {
@@ -1007,7 +1007,7 @@ function function_3b8913dc82881267(player) {
   self hidefromplayer(player);
   self.animname = "hostage_pickup";
   self useanimtree(level.scr_animtree["hostage_pickup"]);
-  self._blackboard.var_7460b96395361857 = "getting_picked_up";
+  self._blackboard.bseqphase = "getting_picked_up";
   animstruct = spawnStruct();
   animstruct.origin = player.origin;
   animstruct.angles = player.angles;
@@ -1126,7 +1126,7 @@ function drophostage(forcedrop) {
     self.hostage.angles = dropangles;
     self.hostage.animstance = dropstance;
     localoffset = coordtransformtranspose(droporigin, var_7a2d144a06a00b97.origin, var_7a2d144a06a00b97.angles);
-    localangles = function_848155be2b7da2cb(dropangles, var_7a2d144a06a00b97.angles);
+    localangles = combineanglesinverted(dropangles, var_7a2d144a06a00b97.angles);
 
     if(!isDefined(self.var_90758efde9b783b7)) {
       self.var_90758efde9b783b7 = spawn("script_origin", droporigin);
@@ -1164,7 +1164,7 @@ function drophostage(forcedrop) {
     waitframe();
   }
 
-  self.hostage._blackboard.var_7460b96395361857 = "getting_dropped";
+  self.hostage._blackboard.bseqphase = "getting_dropped";
   animlength = getanimlength(%iw9_mp_hostage_dropped_stand);
 
   if(!istrue(self.failure)) {
@@ -1194,7 +1194,7 @@ function drophostage(forcedrop) {
       }
     }
 
-    self.hostage._blackboard.var_7460b96395361857 = "dropped";
+    self.hostage._blackboard.bseqphase = "dropped";
     self.instance.origin = self.hostage.origin;
     self.instance scriptablesetparententity(self.hostage, (0, 0, 15), (0, 0, 0));
 
@@ -1538,7 +1538,7 @@ function function_b6b601986dcad85a() {
       continue;
     }
 
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(spawnloc.origin);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(spawnloc.origin);
     ai = scripts\mp\ai_mp_controller::ai_mp_requestspawnagent("civilian_mp_dmz_hostage", getclosestpointonnavmesh(spawnloc.origin), spawnloc.angles, "absolute", "mission", undefined, "civs", "civilian", undefined, poiname, 1, undefined, 0);
 
     if(!isDefined(ai)) {
@@ -1549,7 +1549,7 @@ function function_b6b601986dcad85a() {
     ai.ignoreme = 1;
     ai.health = 250;
     ai.maxhealth = 250;
-    ai function_9f82c74eb1b7caf9(0);
+    ai setcanusecover(0);
     ai function_b661b022700ba72f("script", 1);
     ai.callbackdamaged = &function_164927827f9f0870;
     ai scripts\common\cap::cap_start("cap_hostage", "civilian_dmz_hostage");

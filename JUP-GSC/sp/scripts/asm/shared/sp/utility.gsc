@@ -37,7 +37,7 @@ function loopanimfortime(asmname, statename, params) {
   asm_fireevent(asmname, endevent);
 }
 
-function function_148ee35e7bb45d3a(asmname, statename, params) {
+function loopanimfortime_blendspace(asmname, statename, params) {
   self endon(statename + "_finished");
   endevent = "loop_end";
   t = 2;
@@ -249,7 +249,7 @@ function playerhealth() {
 
 function meleegrab_common() {
   self.hackable = 0;
-  self.var_8da037cbe81e4f8f = 1;
+  self.bmeleeinprogress = 1;
 
   if(isDefined(anim)) {
     if(isPlayer(self.meleetarget)) {
@@ -323,7 +323,7 @@ function playercounterpress() {
 function meleegrab_counterhint(delay, presstime) {
   level.player endon("meleegrab_interupt");
   growtime = 0.2;
-  var_a4972f5c6a743696 = 0.3;
+  post_growtime = 0.3;
   wait delay - growtime - 0.05;
 
   if(isDefined(self.melee.meleecounterhint)) {
@@ -355,8 +355,8 @@ function meleegrab_counterhint(delay, presstime) {
     return;
   }
 
-  self.melee.meleecounterhint fadeovertime(var_a4972f5c6a743696);
-  self.melee.meleecounterhint changefontscaleovertime(var_a4972f5c6a743696);
+  self.melee.meleecounterhint fadeovertime(post_growtime);
+  self.melee.meleecounterhint changefontscaleovertime(post_growtime);
   self.melee.meleecounterhint.fontscale = 1.2;
 }
 

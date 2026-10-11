@@ -72,7 +72,7 @@ function corpse_found(event) {
   self endon("death");
 
   if(isDefined(level.battlechatter)) {
-    function_216c67ab6749137a(self, undefined, "corpse_found");
+    addbattlechatternotify(self, undefined, "corpse_found");
   }
 
   corpse = event.entity;
@@ -95,7 +95,7 @@ function corpse_found(event) {
 
 function corpse_seen(event) {
   if(isDefined(level.battlechatter)) {
-    function_216c67ab6749137a(self, undefined, "corpse_seen");
+    addbattlechatternotify(self, undefined, "corpse_seen");
   }
 
   corpse = event.entity;

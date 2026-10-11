@@ -48,7 +48,7 @@ function function_1eeed7712fef95ac() {
     n_lifetime = self[[level.powerup_timeout_override]](n_lifetime);
   }
 
-  thread namespace_2b1145f62aa835b8::function_a93fbc5ac33fc2f2("insta_kill", n_lifetime);
+  thread namespace_2b1145f62aa835b8::showpoweruphudsharedfunc("insta_kill", n_lifetime);
 
   if(isDefined(level.var_29a59b6489c9891c)) {
     self[[level.var_29a59b6489c9891c]](n_lifetime, "end_insta_kill");

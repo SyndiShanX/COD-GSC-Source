@@ -42,7 +42,7 @@ function patrol_idle_cleanup(asmname, statename, params) {
 
 function patrol_idle_istype(asmname, statename, tostatename, params) {
   assert(isDefined(params));
-  assert(self._blackboard.var_6ff150891bb0c47);
+  assert(self._blackboard.idlenodeisvalid);
   assert(isDefined(self._blackboard.var_fe458d6a41146a8c));
   return self._blackboard.var_fe458d6a41146a8c == params;
 }
@@ -89,9 +89,9 @@ function patrol_playidleintro(asmname, statename, params) {
   self animmode("zonly_physics", 0);
   desiredangle = self.angles[1];
 
-  if(self._blackboard.var_6ff150891bb0c47) {
-    if(isDefined(self._blackboard.var_227cc162483aa47)) {
-      desiredangle = self._blackboard.var_227cc162483aa47[1];
+  if(self._blackboard.idlenodeisvalid) {
+    if(isDefined(self._blackboard.idlenodeangles)) {
+      desiredangle = self._blackboard.idlenodeangles[1];
     } else {
       desiredangle = 0;
     }
@@ -147,9 +147,9 @@ function patrol_playidlereact(asmname, statename, params) {
   patrolxanim = asm_getxanim(statename, patrolanim);
   animrate = 1;
 
-  if(isDefined(self.var_aebf462ec3f3362d)) {
+  if(isDefined(self.stealthreactendtime)) {
     animlength = getanimlength(patrolxanim);
-    desiredlength = (self.var_aebf462ec3f3362d - gettime()) / 2000;
+    desiredlength = (self.stealthreactendtime - gettime()) / 2000;
 
     if(desiredlength < animlength) {
       if(desiredlength < 0.3) {
@@ -321,12 +321,12 @@ function patrol_notehandler_drinking(note, statename) {
 function patrol_playidlesittingloop(asmname, statename, params) {
   self endon(statename + "_finished");
   self animmode("noclip");
-  groundpos = scripts\engine\utility::drop_to_ground(self._blackboard.var_8fe741f6905abcb9, 8, -128);
+  groundpos = scripts\engine\utility::drop_to_ground(self._blackboard.idlenodeorigin, 8, -128);
 
   if(isDefined(params)) {
-    assert(self._blackboard.var_6ff150891bb0c47);
+    assert(self._blackboard.idlenodeisvalid);
     assert(isDefined(level.fnanimatedprop_setup));
-    [[level.fnanimatedprop_setup]]("idle_chair", params, groundpos, self._blackboard.var_227cc162483aa47);
+    [[level.fnanimatedprop_setup]]("idle_chair", params, groundpos, self._blackboard.idlenodeangles);
   }
 
   var_b95ecd0bf886bb98 = 1;
@@ -341,10 +341,10 @@ function patrol_playidlesittingloop(asmname, statename, params) {
     prevanim = loopanim;
 
     if(var_b95ecd0bf886bb98) {
-      assert(self._blackboard.var_6ff150891bb0c47);
+      assert(self._blackboard.idlenodeisvalid);
       movedelta = getmovedelta(loopxanim);
-      startpos = groundpos - rotatevector(movedelta, self._blackboard.var_227cc162483aa47);
-      self startcoverarrival(startpos, self._blackboard.var_227cc162483aa47[1]);
+      startpos = groundpos - rotatevector(movedelta, self._blackboard.idlenodeangles);
+      self startcoverarrival(startpos, self._blackboard.idlenodeangles[1]);
       thread patrol_idlesitting_checkforcoverarrivalcomplete(statename, groundpos);
       var_b95ecd0bf886bb98 = 0;
     }
@@ -475,7 +475,7 @@ function patrol_chooseanim_custom(asmname, statename, params) {
 }
 
 function patrol_idle_custom_init(asmname, statename, params) {
-  assert(self._blackboard.var_6ff150891bb0c47);
+  assert(self._blackboard.idlenodeisvalid);
   assert(isDefined(self._blackboard.var_fe458d6a41146a8c));
   self._blackboard.customidlenode = self._blackboard.var_fe458d6a41146a8c;
   patrol_idle_init(asmname, statename, params);

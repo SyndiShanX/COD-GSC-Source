@@ -409,8 +409,8 @@ function oncontractend(success, endstate) {
       return;
     }
 
-    var_7e70b89613643be8 = self.targetteam;
-    newtarget = function_a3076b6364918058(self.hunterteam, var_7e70b89613643be8);
+    lasttarget = self.targetteam;
+    newtarget = function_a3076b6364918058(self.hunterteam, lasttarget);
 
     if(isDefined(newtarget)) {
       function_8e36bd0d4f403330(self.hunterteam, newtarget);
@@ -467,18 +467,18 @@ function function_efed774aa2ac46b9() {
   }
 }
 
-function function_a3076b6364918058(hunterteam, var_7e70b89613643be8) {
+function function_a3076b6364918058(hunterteam, lasttarget) {
   switch (level.pe_bountyroyale.var_1d61f5b54c77c3c2) {
     case 0:
-      return function_1a11bf1f128d1147(hunterteam, var_7e70b89613643be8);
+      return function_1a11bf1f128d1147(hunterteam, lasttarget);
     case 1:
       return function_47875c900cc6ea2c(hunterteam, undefined);
     case 2:
-      return function_47875c900cc6ea2c(hunterteam, var_7e70b89613643be8);
+      return function_47875c900cc6ea2c(hunterteam, lasttarget);
   }
 }
 
-function function_1a11bf1f128d1147(hunterteam, var_7e70b89613643be8) {
+function function_1a11bf1f128d1147(hunterteam, lasttarget) {
   var_29f6d200784f77b3 = function_46eb8dc4be18be53(hunterteam);
   var_df489f5f35b5223c = [];
   toremove = [];
@@ -490,7 +490,7 @@ function function_1a11bf1f128d1147(hunterteam, var_7e70b89613643be8) {
       continue;
     }
 
-    if(team == var_7e70b89613643be8 && level.pe_bountyroyale.eventdata.var_63f39a17b089760a.size > 2) {
+    if(team == lasttarget && level.pe_bountyroyale.eventdata.var_63f39a17b089760a.size > 2) {
       continue;
     }
 
@@ -529,7 +529,7 @@ function function_1a11bf1f128d1147(hunterteam, var_7e70b89613643be8) {
   return target;
 }
 
-function function_47875c900cc6ea2c(hunterteam, var_7e70b89613643be8) {
+function function_47875c900cc6ea2c(hunterteam, lasttarget) {
   var_29f6d200784f77b3 = function_46eb8dc4be18be53(hunterteam);
   toremove = [];
   closestplayer = undefined;
@@ -540,7 +540,7 @@ function function_47875c900cc6ea2c(hunterteam, var_7e70b89613643be8) {
       continue;
     }
 
-    if(isDefined(var_7e70b89613643be8) && team == var_7e70b89613643be8 && level.pe_bountyroyale.eventdata.var_63f39a17b089760a.size > 2) {
+    if(isDefined(lasttarget) && team == lasttarget && level.pe_bountyroyale.eventdata.var_63f39a17b089760a.size > 2) {
       continue;
     }
 
@@ -651,8 +651,8 @@ function function_a2ff10734881cdd8(var_25a9983ace778b7a) {
   var_b6970f580273b509 = [];
 
   foreach(cluster in var_20d4f6638c24feff) {
-    var_9e1f6cbdec7850a2 = function_69c091a3d7584cf6(cluster.teams);
-    var_b6970f580273b509 = array_combine_non_integer_indices(var_b6970f580273b509, var_9e1f6cbdec7850a2);
+    bounties = function_69c091a3d7584cf6(cluster.teams);
+    var_b6970f580273b509 = array_combine_non_integer_indices(var_b6970f580273b509, bounties);
   }
 
   return var_b6970f580273b509;
@@ -767,9 +767,9 @@ function function_91497d8b29654b3(clusters, var_643fc3561caf0e49, var_5fd6ab1863
     if(var_58a1ce32127d1047 == 1) {
       var_c88e297a523e96c3 = 1;
     } else {
-      var_8589b674304f894 = var_5fd6ab1863ef6405[var_e29c52feb07735ef];
+      squadcenter = var_5fd6ab1863ef6405[var_e29c52feb07735ef];
       var_913e33347180eb86 = var_187f0b6030e8fa03.centroid;
-      var_c88e297a523e96c3 = distance2dsquared(var_913e33347180eb86, var_8589b674304f894) < var_59cc5922efef9f4;
+      var_c88e297a523e96c3 = distance2dsquared(var_913e33347180eb86, squadcenter) < var_59cc5922efef9f4;
     }
 
     if(var_c88e297a523e96c3) {
@@ -1220,12 +1220,12 @@ function function_8c25d42d610355de(position) {
   }
 }
 
-function function_4d4fe2c60744d274(clusters, var_5fd6ab1863ef6405, var_fda53fb854604b76) {
+function function_4d4fe2c60744d274(clusters, var_5fd6ab1863ef6405, redraw) {
   if(getdvarint(@ "hash_abd886dfdd042260", 0) == 0) {
     return;
   }
 
-  if(istrue(var_fda53fb854604b76)) {
+  if(istrue(redraw)) {
     level notify("<dev string:x1dd>");
   }
 
@@ -1250,9 +1250,9 @@ function function_4d4fe2c60744d274(clusters, var_5fd6ab1863ef6405, var_fda53fb85
       }
 
       foreach(team in cluster.teams) {
-        var_8589b674304f894 = var_5fd6ab1863ef6405[team];
-        sphere(var_8589b674304f894, 50, red, 0, 1);
-        line(position, var_8589b674304f894, red);
+        squadcenter = var_5fd6ab1863ef6405[team];
+        sphere(squadcenter, 50, red, 0, 1);
+        line(position, squadcenter, red);
       }
     }
 

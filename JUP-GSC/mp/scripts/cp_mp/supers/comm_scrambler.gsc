@@ -137,7 +137,7 @@ function function_1d4ab8d63dbf796e(deletiondelay, wasdestroyed) {
   }
 
   function_e016066e327d42b6();
-  function_2eff4cd94c3243e8();
+  clearminimapid();
   scripts\cp_mp\utility\game_utility::function_af5604ce591768e1();
 
   if(issharedfuncdefined("dlog", "fieldUpgradeExpired")) {
@@ -528,8 +528,8 @@ function function_d25ff4a17fd8fb37(stuckto) {
   data.validateaccuratetouching = 1;
 
   if(isDefined(stuckto) && scripts\cp_mp\utility\train_utility::is_train_ent(stuckto)) {
-    data.var_49cb2c45d3230ed8 = 1;
-    self function_7e73001e97fe87b9(1);
+    data.plantedontrain = 1;
+    self setmissileantilagged(1);
   }
 
   if(issharedfuncdefined("game", "handlemovingplatforms")) {
@@ -668,7 +668,7 @@ function function_7b2d108a7fefb17(player) {
 }
 
 function commscrambler_onhacked(newowner, oldowner) {
-  function_2eff4cd94c3243e8();
+  clearminimapid();
 
   if(issharedfuncdefined("game", "createObjective")) {
     self.minimapid = self[[getsharedfunc("game", "createObjective")]]("jup_hud_icon_minimap_fieldupgrade_commscrambler", self.team, 0, 1, 1);

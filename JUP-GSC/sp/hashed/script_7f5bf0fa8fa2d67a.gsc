@@ -17,14 +17,14 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"hash_73d7935d302b182c");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_d4c1580d6bc10b4");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_d4c1580d6bc10b4");
+  self.subclass = self.subclass_scriptbundle.name;
   self.grenadeweapon = makeweapon("frag");
   self.grenadeammo = 2;
   self.secondaryweapon = nullweapon();
   self.sidearm = makeweapon("iw9_pi_papa220_sp");
   self.behaviortreeasset = "enemy_combatant";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "soldier";
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
@@ -42,9 +42,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       return function_9ac26a51c94ccf52();

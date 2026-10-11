@@ -469,7 +469,7 @@ function getspawnpoint() {
       var_4ac41c9583912b8f = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle(vehicleref).var_51b047bd40d984fe;
 
       if(isDefined(driver) && isDefined(var_4ac41c9583912b8f) && var_4ac41c9583912b8f != "") {
-        driver thread scripts\mp\utility\points::doscoreevent(function_1823ff50bb28148d(var_4ac41c9583912b8f));
+        driver thread scripts\mp\utility\points::doscoreevent(getxhash(var_4ac41c9583912b8f));
       }
 
       self.spawningintovehicle = 1;
@@ -876,14 +876,14 @@ function picklane(lane) {
     return;
   }
 
-  var_4e2f30f5b1dfa9f3 = self.team == "allies";
+  isallies = self.team == "allies";
   laneindex = 0;
 
   switch (lane) {
     case #"hash_2eafa9a536901cad":
     case #"hash_7270631ce8f6357f":
     case #"hash_c9b3133a17a3b2d0":
-      laneindex = ter_op(var_4e2f30f5b1dfa9f3, 0, 2);
+      laneindex = ter_op(isallies, 0, 2);
       break;
     case #"hash_2881ce6c1efb40c5":
     case #"hash_2eafa6a5369017f4":
@@ -893,7 +893,7 @@ function picklane(lane) {
     case #"hash_2eafa7a536901987":
     case #"hash_726a231ce8f15391":
     case #"hash_96815ce4f2a3dbc5":
-      laneindex = ter_op(var_4e2f30f5b1dfa9f3, 2, 0);
+      laneindex = ter_op(isallies, 2, 0);
       break;
   }
 
@@ -1411,7 +1411,7 @@ function keepstreamposfresh(origin) {
   self endon("keepStreamPosFresh");
 
   while(true) {
-    self function_bc667001f9dd3808(origin, 1);
+    self predictstreamposuntilcleared(origin, 1);
     wait 1;
   }
 }

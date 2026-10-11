@@ -27,8 +27,8 @@ function soldier_init(asmname, statename, params) {
   self.defaultturnthreshold = 59;
   self.anglelerprate = 100;
 
-  if(!isDefined(self.var_98add129a7ecb962)) {
-    self.var_98add129a7ecb962 = 1;
+  if(!isDefined(self.allowlongdeath)) {
+    self.allowlongdeath = 1;
   }
 
   if(isDefined(self.fnasm_initfingerposes)) {
@@ -127,68 +127,68 @@ function initaimlimits(asmname) {
   }
 
   if(!isDefined(level.aimlimitstatemappings[asmname])) {
-    var_26893ce84a67261 = [];
-    var_26893ce84a67261["cover_stand_exposed"] = "cover_stand_exposed";
-    var_26893ce84a67261["cover_stand_hide_to_exposed"] = "cover_stand_exposed";
-    var_26893ce84a67261["cover_stand_full_exposed"] = "exposed_idle";
-    var_26893ce84a67261["cover_stand_hide_to_full_exposed"] = "exposed_idle";
-    var_26893ce84a67261["cover_stand_to_exposed_idle"] = "exposed_idle";
-    var_26893ce84a67261["wall_run_exit"] = "exposed_idle";
-    var_26893ce84a67261["wall_run_continue"] = "exposed_idle";
-    var_26893ce84a67261["wall_run_left_shoot"] = "exposed_idle";
-    var_26893ce84a67261["wall_run_right_shoot"] = "exposed_idle";
-    var_26893ce84a67261["wall_run_attach_left_shoot"] = "exposed_idle";
-    var_26893ce84a67261["wall_run_attach_right_shoot"] = "exposed_idle";
-    var_26893ce84a67261["cover_crouch_hide_to_stand"] = "exposed_idle";
-    var_26893ce84a67261["cover_crouch_hide_to_aim"] = "cover_crouch_aim";
-    var_26893ce84a67261["cover_crouch_hide_to_right"] = "cover_crouch_aim";
-    var_26893ce84a67261["cover_crouch_hide_to_left"] = "cover_crouch_aim";
-    var_26893ce84a67261["cover_crouch_hide_to_lean"] = "cover_crouch_lean";
-    var_26893ce84a67261["cover_crouch_aim"] = "cover_crouch_aim";
-    var_26893ce84a67261["cover_crouch_lean"] = "cover_crouch_lean";
-    var_26893ce84a67261["cover_crouch_exposed_left"] = "cover_crouch_aim";
-    var_26893ce84a67261["cover_crouch_exposed_right"] = "cover_crouch_aim";
-    var_26893ce84a67261["cover_crouch_stand"] = "exposed_idle";
-    var_26893ce84a67261["cover_crouch_to_exposed_idle"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_exposed_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_hide_to_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_exposed_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_hide_to_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_a_to_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_b_to_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_crouch_exposed_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_crouch_exposed_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_crouch_hide_to_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_crouch_hide_to_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_crouch_a_to_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_crouch_b_to_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_right_lean"] = "cover_right_lean";
-    var_26893ce84a67261["cover_right_hide_to_lean"] = "cover_right_lean";
-    var_26893ce84a67261["cover_right_crouch_hide_to_lean"] = "cover_right_crouch_lean";
-    var_26893ce84a67261["cover_right_crouch_lean"] = "cover_right_crouch_lean";
-    var_26893ce84a67261["cover_right_to_exposed_idle"] = "exposed_idle";
-    var_26893ce84a67261["cover_left_exposed_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_left_exposed_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_left_hide_to_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_left_hide_to_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_left_a_to_b"] = "exposed_idle";
-    var_26893ce84a67261["cover_left_b_to_a"] = "exposed_idle";
-    var_26893ce84a67261["cover_left_hide_to_lean"] = "cover_left_lean";
-    var_26893ce84a67261["cover_left_lean"] = "cover_left_lean";
-    var_26893ce84a67261["cover_left_crouch_hide_to_lean"] = "cover_left_crouch_lean";
-    var_26893ce84a67261["cover_left_crouch_lean"] = "cover_left_crouch_lean";
-    var_26893ce84a67261["cover_left_to_exposed_idle"] = "exposed_idle";
-    var_26893ce84a67261["cqb_idle"] = "exposed_idle";
-    var_26893ce84a67261["cqb_stand_loop"] = "exposed_idle";
-    var_26893ce84a67261["cqb_stand_strafe_loop"] = "exposed_idle";
-    var_26893ce84a67261["stand_run_strafe_loop"] = "exposed_idle";
-    var_26893ce84a67261["exposed_reload"] = "exposed_idle";
-    var_26893ce84a67261["exposed_weaponswitch"] = "exposed_idle";
-    var_26893ce84a67261["exposed_stand_turn"] = "exposed_idle";
-    var_26893ce84a67261["exposed_idle"] = "exposed_idle";
-    var_26893ce84a67261["exposed_prone"] = "exposed_idle";
-    var_26893ce84a67261["exposed_stand_infantry_reaction"] = "exposed_idle";
-    level.aimlimitstatemappings[asmname] = var_26893ce84a67261;
+    aimlimitmapping = [];
+    aimlimitmapping["cover_stand_exposed"] = "cover_stand_exposed";
+    aimlimitmapping["cover_stand_hide_to_exposed"] = "cover_stand_exposed";
+    aimlimitmapping["cover_stand_full_exposed"] = "exposed_idle";
+    aimlimitmapping["cover_stand_hide_to_full_exposed"] = "exposed_idle";
+    aimlimitmapping["cover_stand_to_exposed_idle"] = "exposed_idle";
+    aimlimitmapping["wall_run_exit"] = "exposed_idle";
+    aimlimitmapping["wall_run_continue"] = "exposed_idle";
+    aimlimitmapping["wall_run_left_shoot"] = "exposed_idle";
+    aimlimitmapping["wall_run_right_shoot"] = "exposed_idle";
+    aimlimitmapping["wall_run_attach_left_shoot"] = "exposed_idle";
+    aimlimitmapping["wall_run_attach_right_shoot"] = "exposed_idle";
+    aimlimitmapping["cover_crouch_hide_to_stand"] = "exposed_idle";
+    aimlimitmapping["cover_crouch_hide_to_aim"] = "cover_crouch_aim";
+    aimlimitmapping["cover_crouch_hide_to_right"] = "cover_crouch_aim";
+    aimlimitmapping["cover_crouch_hide_to_left"] = "cover_crouch_aim";
+    aimlimitmapping["cover_crouch_hide_to_lean"] = "cover_crouch_lean";
+    aimlimitmapping["cover_crouch_aim"] = "cover_crouch_aim";
+    aimlimitmapping["cover_crouch_lean"] = "cover_crouch_lean";
+    aimlimitmapping["cover_crouch_exposed_left"] = "cover_crouch_aim";
+    aimlimitmapping["cover_crouch_exposed_right"] = "cover_crouch_aim";
+    aimlimitmapping["cover_crouch_stand"] = "exposed_idle";
+    aimlimitmapping["cover_crouch_to_exposed_idle"] = "exposed_idle";
+    aimlimitmapping["cover_right_exposed_a"] = "exposed_idle";
+    aimlimitmapping["cover_right_hide_to_a"] = "exposed_idle";
+    aimlimitmapping["cover_right_exposed_b"] = "exposed_idle";
+    aimlimitmapping["cover_right_hide_to_b"] = "exposed_idle";
+    aimlimitmapping["cover_right_a_to_b"] = "exposed_idle";
+    aimlimitmapping["cover_right_b_to_a"] = "exposed_idle";
+    aimlimitmapping["cover_right_crouch_exposed_a"] = "exposed_idle";
+    aimlimitmapping["cover_right_crouch_exposed_b"] = "exposed_idle";
+    aimlimitmapping["cover_right_crouch_hide_to_a"] = "exposed_idle";
+    aimlimitmapping["cover_right_crouch_hide_to_b"] = "exposed_idle";
+    aimlimitmapping["cover_right_crouch_a_to_b"] = "exposed_idle";
+    aimlimitmapping["cover_right_crouch_b_to_a"] = "exposed_idle";
+    aimlimitmapping["cover_right_lean"] = "cover_right_lean";
+    aimlimitmapping["cover_right_hide_to_lean"] = "cover_right_lean";
+    aimlimitmapping["cover_right_crouch_hide_to_lean"] = "cover_right_crouch_lean";
+    aimlimitmapping["cover_right_crouch_lean"] = "cover_right_crouch_lean";
+    aimlimitmapping["cover_right_to_exposed_idle"] = "exposed_idle";
+    aimlimitmapping["cover_left_exposed_a"] = "exposed_idle";
+    aimlimitmapping["cover_left_exposed_b"] = "exposed_idle";
+    aimlimitmapping["cover_left_hide_to_a"] = "exposed_idle";
+    aimlimitmapping["cover_left_hide_to_b"] = "exposed_idle";
+    aimlimitmapping["cover_left_a_to_b"] = "exposed_idle";
+    aimlimitmapping["cover_left_b_to_a"] = "exposed_idle";
+    aimlimitmapping["cover_left_hide_to_lean"] = "cover_left_lean";
+    aimlimitmapping["cover_left_lean"] = "cover_left_lean";
+    aimlimitmapping["cover_left_crouch_hide_to_lean"] = "cover_left_crouch_lean";
+    aimlimitmapping["cover_left_crouch_lean"] = "cover_left_crouch_lean";
+    aimlimitmapping["cover_left_to_exposed_idle"] = "exposed_idle";
+    aimlimitmapping["cqb_idle"] = "exposed_idle";
+    aimlimitmapping["cqb_stand_loop"] = "exposed_idle";
+    aimlimitmapping["cqb_stand_strafe_loop"] = "exposed_idle";
+    aimlimitmapping["stand_run_strafe_loop"] = "exposed_idle";
+    aimlimitmapping["exposed_reload"] = "exposed_idle";
+    aimlimitmapping["exposed_weaponswitch"] = "exposed_idle";
+    aimlimitmapping["exposed_stand_turn"] = "exposed_idle";
+    aimlimitmapping["exposed_idle"] = "exposed_idle";
+    aimlimitmapping["exposed_prone"] = "exposed_idle";
+    aimlimitmapping["exposed_stand_infantry_reaction"] = "exposed_idle";
+    level.aimlimitstatemappings[asmname] = aimlimitmapping;
   }
 }
 
@@ -389,8 +389,8 @@ function choosecrouchturnanim(asmname, statename, params) {
 
 function reload_cleanup(asmname, statename, params) {
   nullweapon = nullweapon();
-  weap = self.var_1e61bb39def2d99d;
-  self.var_1e61bb39def2d99d = nullweapon;
+  weap = self.asmreloadweapon;
+  self.asmreloadweapon = nullweapon;
 
   if(!isDefined(self.weaponinfo)) {
     return;
@@ -417,14 +417,14 @@ function reload_cleanup(asmname, statename, params) {
 
     if(isDefined(clipmodel)) {
       battached = asm_eventfired(asmname, "attach clip left") || asm_eventfired(asmname, "attach clip right");
-      var_7cb5a062f767fb6f = asm_eventfired(asmname, "detach clip left") || asm_eventfired(asmname, "detach clip right") || asm_eventfired(asmname, "detach clip nohand");
+      bdetached = asm_eventfired(asmname, "detach clip left") || asm_eventfired(asmname, "detach clip right") || asm_eventfired(asmname, "detach clip nohand");
 
       if(!battached) {
         self notify("abort_reload");
         return;
       }
 
-      if(battached && !var_7cb5a062f767fb6f) {
+      if(battached && !bdetached) {
         if(asm_eventfired(asmname, "attach clip left")) {
           tagname = "tag_accessory_left";
         } else {
@@ -502,8 +502,8 @@ function playturnanim_turnanimanglefixup(turnxanim, statename) {
     yawtoenemy = getyawtospot(enemy.origin);
     self.stepoutyaw = angleclamp180(self.angles[1] + yawtoenemy);
     currentanimtime = self aigetanimtime(turnxanim);
-    var_993a8f9635e274cf = getangledelta(turnxanim, currentanimtime, 1);
-    remainingyaw = angleclamp180(yawtoenemy - var_993a8f9635e274cf);
+    animyawdelta = getangledelta(turnxanim, currentanimtime, 1);
+    remainingyaw = angleclamp180(yawtoenemy - animyawdelta);
     self orientmode("face angle", angleclamp(self.angles[1] + remainingyaw * lerpfraction));
     remainingframes--;
     wait 0.05;
@@ -560,8 +560,8 @@ function facegoalthread_newenemyreaction(statename, reactworldyaw) {
 
   while(true) {
     multiplier = 0.25;
-    var_fd4e44b47427d5c6 = angleclamp180(reactworldyaw - self.angles[1]);
-    self orientmode("face angle", self.angles[1] + var_fd4e44b47427d5c6 * multiplier);
+    reactlocalyaw = angleclamp180(reactworldyaw - self.angles[1]);
+    self orientmode("face angle", self.angles[1] + reactlocalyaw * multiplier);
     waitframe();
   }
 }
@@ -570,8 +570,8 @@ function handlefacegoalnotetrack_newenemyreaction(statename, note, lastknown) {
   assert(isDefined(lastknown));
 
   if(note == "face_goal") {
-    var_63cc85541246c7b4 = lastknown - self.origin;
-    reactworldyaw = vectortoyaw(var_63cc85541246c7b4);
+    metopos = lastknown - self.origin;
+    reactworldyaw = vectortoyaw(metopos);
     thread facegoalthread_newenemyreaction(statename, reactworldyaw);
     return true;
   }

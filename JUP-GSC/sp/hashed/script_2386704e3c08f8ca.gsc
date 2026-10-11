@@ -103,7 +103,7 @@ function function_d4dd82f70477e0e() {
 }
 
 function function_75d8d5ad2dfaa11a(music_alias) {
-  level.var_f579a2baf358aa24 = music_alias;
+  level.current_music_state = music_alias;
   setmusicstate(music_alias);
 }
 
@@ -461,7 +461,7 @@ function function_e7d972eb870870a6() {
         continue;
       }
 
-      if(!isDefined(guy.stealth) || !isDefined(guy.var_fe5ebefa740c7106)) {
+      if(!isDefined(guy.stealth) || !isDefined(guy.stealth_bsmstate)) {
         y += var_26f37fdbb80dc467;
         var_458c7a875747dcad = guy getentitynumber();
         guy_classname = ter_op(isDefined(guy.classname), guy.classname, "<dev string:x21>");
@@ -485,7 +485,7 @@ function function_3e00b40f72895078() {
       continue;
     }
 
-    if(isDefined(guy.var_fe5ebefa740c7106) && guy.var_fe5ebefa740c7106 == 3) {
+    if(isDefined(guy.stealth_bsmstate) && guy.stealth_bsmstate == 3) {
       var_9a7be71d3cdb8d0f = gettime() - guy.starttimestamp;
       var_facfcfd6b22cf447 += var_9a7be71d3cdb8d0f;
     }

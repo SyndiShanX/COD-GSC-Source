@@ -205,15 +205,15 @@ function function_7f1a9c43113121f9(speed, acceleration, deceleration) {
   }
 }
 
-function function_8bf385621c6c99ab(var_35bc92cc3c2fc0a8, mindamage) {
+function function_8bf385621c6c99ab(deathquotearray, mindamage) {
   level.player endon("death");
   level endon("game_ended");
 
-  if(!isDefined(var_35bc92cc3c2fc0a8)) {
-    var_35bc92cc3c2fc0a8 = [255];
+  if(!isDefined(deathquotearray)) {
+    deathquotearray = [255];
   }
 
-  assertex(isarray(var_35bc92cc3c2fc0a8), "deathQuoteArray must be an array!");
+  assertex(isarray(deathquotearray), "deathQuoteArray must be an array!");
 
   if(!isDefined(mindamage)) {
     mindamage = 20;
@@ -233,7 +233,7 @@ function function_8bf385621c6c99ab(var_35bc92cc3c2fc0a8, mindamage) {
     break;
   }
 
-  scripts\sp\player_death::set_custom_death_quote(array_randomize(var_35bc92cc3c2fc0a8)[0]);
+  scripts\sp\player_death::set_custom_death_quote(array_randomize(deathquotearray)[0]);
   missionfailedwrapper();
 }
 

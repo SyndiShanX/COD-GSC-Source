@@ -10,33 +10,33 @@
 
 function function_40062e64625f8b19(bundlename) {
   bundlexhash = hashcat(%"hash_334a4b8da1c7fd3f", bundlename);
-  return function_594acad17d5c9722(bundlexhash);
+  return createobjectivemarkerfrombundlexhash(bundlexhash);
 }
 
-function function_594acad17d5c9722(bundlexhash) {
+function createobjectivemarkerfrombundlexhash(bundlexhash) {
   if(!isDefined(level.var_9e689c10231cd26a)) {
     function_62882d44d01e1bed();
   }
 
-  var_1bd1cc823b281c6e = getscriptbundle(bundlexhash);
+  objectivemarkerbundle = getscriptbundle(bundlexhash);
 
-  if(isDefined(var_1bd1cc823b281c6e)) {
+  if(isDefined(objectivemarkerbundle)) {
     objectivemarkerid = scripts\mp\objidpoolmanager::requestobjectiveid(0);
 
     if(objectivemarkerid == -1) {
-      assertmsg("<dev string:x1c>" + function_3c8848a3a11b2553(bundlexhash) + "<dev string:x82>");
+      assertmsg("<dev string:x1c>" + getxhashsourcename(bundlexhash) + "<dev string:x82>");
       return -1;
     }
 
-    function_8678d41b7abe69c(var_1bd1cc823b281c6e, objectivemarkerid);
-    function_42343c058b711417(var_1bd1cc823b281c6e, objectivemarkerid);
-    function_21cb5c5225485f2a(var_1bd1cc823b281c6e, objectivemarkerid);
-    function_a7836ce77f8d8cc0(var_1bd1cc823b281c6e, objectivemarkerid);
-    function_bd9b7f8bf8d0835d(var_1bd1cc823b281c6e, objectivemarkerid);
+    function_8678d41b7abe69c(objectivemarkerbundle, objectivemarkerid);
+    function_42343c058b711417(objectivemarkerbundle, objectivemarkerid);
+    function_21cb5c5225485f2a(objectivemarkerbundle, objectivemarkerid);
+    function_a7836ce77f8d8cc0(objectivemarkerbundle, objectivemarkerid);
+    function_bd9b7f8bf8d0835d(objectivemarkerbundle, objectivemarkerid);
     return objectivemarkerid;
   }
 
-  assertmsg("<dev string:x95>" + function_3c8848a3a11b2553(bundlexhash) + "<dev string:xb9>");
+  assertmsg("<dev string:x95>" + getxhashsourcename(bundlexhash) + "<dev string:xb9>");
   return -1;
 }
 
@@ -64,12 +64,12 @@ function private function_6859acd104e04215() {
   return var_9e689c10231cd26a;
 }
 
-function private function_8678d41b7abe69c(var_1bd1cc823b281c6e, objectivemarkerid) {
-  generalsettings = var_1bd1cc823b281c6e.generalsettings;
-  minimapsettings = var_1bd1cc823b281c6e.minimapsettings;
-  var_4b16eeed74027f36 = var_1bd1cc823b281c6e.var_4b16eeed74027f36;
-  compasssettings = var_1bd1cc823b281c6e.compasssettings;
-  hudsettings = var_1bd1cc823b281c6e.hudsettings;
+function private function_8678d41b7abe69c(objectivemarkerbundle, objectivemarkerid) {
+  generalsettings = objectivemarkerbundle.generalsettings;
+  minimapsettings = objectivemarkerbundle.minimapsettings;
+  var_4b16eeed74027f36 = objectivemarkerbundle.var_4b16eeed74027f36;
+  compasssettings = objectivemarkerbundle.compasssettings;
+  hudsettings = objectivemarkerbundle.hudsettings;
   objective_icon(objectivemarkerid, generalsettings.var_63d1b5b543ef6387);
   objective_state(objectivemarkerid, generalsettings.state);
   function_5fd2627c5ce186db(objectivemarkerid, generalsettings.isoptional);
@@ -90,8 +90,8 @@ function private function_8678d41b7abe69c(var_1bd1cc823b281c6e, objectivemarkeri
   }
 }
 
-function private function_42343c058b711417(var_1bd1cc823b281c6e, objectivemarkerid) {
-  minimapsettings = var_1bd1cc823b281c6e.minimapsettings;
+function private function_42343c058b711417(objectivemarkerbundle, objectivemarkerid) {
+  minimapsettings = objectivemarkerbundle.minimapsettings;
   objective_setminimapiconsize(objectivemarkerid, minimapsettings.minimapsize);
   function_9766d0b79eada249(objectivemarkerid, minimapsettings.var_2c9e3e6eb028ae83);
   function_865f9c5d005f9a08(objectivemarkerid, minimapsettings.var_ca24ca64976c2e5a);
@@ -99,21 +99,21 @@ function private function_42343c058b711417(var_1bd1cc823b281c6e, objectivemarker
   objective_setrotateonminimap(objectivemarkerid, minimapsettings.var_750c1118d84c32bc);
 }
 
-function private function_21cb5c5225485f2a(var_1bd1cc823b281c6e, objectivemarkerid) {
-  var_4b16eeed74027f36 = var_1bd1cc823b281c6e.var_4b16eeed74027f36;
+function private function_21cb5c5225485f2a(objectivemarkerbundle, objectivemarkerid) {
+  var_4b16eeed74027f36 = objectivemarkerbundle.var_4b16eeed74027f36;
   function_9427cb5974c925d9(objectivemarkerid, var_4b16eeed74027f36.var_3105aa9935faca5a);
   function_2b46ef80dca002f9(objectivemarkerid, var_4b16eeed74027f36.var_2ca015b89073d0f6);
   function_9929f54e3253dbb4(objectivemarkerid, var_4b16eeed74027f36.var_49d9c4f6fdf7fee2);
   objective_sethideelevation(objectivemarkerid, var_4b16eeed74027f36.hideelevation);
 }
 
-function private function_a7836ce77f8d8cc0(var_1bd1cc823b281c6e, objectivemarkerid) {
-  compasssettings = var_1bd1cc823b281c6e.compasssettings;
+function private function_a7836ce77f8d8cc0(objectivemarkerbundle, objectivemarkerid) {
+  compasssettings = objectivemarkerbundle.compasssettings;
   objective_setshowoncompass(objectivemarkerid, compasssettings.showoncompass);
 }
 
-function private function_bd9b7f8bf8d0835d(var_1bd1cc823b281c6e, objectivemarkerid) {
-  hudsettings = var_1bd1cc823b281c6e.hudsettings;
+function private function_bd9b7f8bf8d0835d(objectivemarkerbundle, objectivemarkerid) {
+  hudsettings = objectivemarkerbundle.hudsettings;
   objective_setpulsate(objectivemarkerid, hudsettings.var_ae2a59338cbf7d38);
   objective_setshowprogress(objectivemarkerid, hudsettings.showprogressbar);
   objective_setplayintro(objectivemarkerid, hudsettings.var_155aeca74730ee1a);

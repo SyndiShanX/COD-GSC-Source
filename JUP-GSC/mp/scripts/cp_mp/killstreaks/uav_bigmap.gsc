@@ -61,7 +61,7 @@ function function_123f8da350e72770() {
 
     foreach(teamname, arr in level.var_1a92f34363247d37) {
       if(level.var_1a92f34363247d37[teamname].size > 0) {
-        var_8506ba4041fbe9bb = 0;
+        cleanarray = 0;
 
         for(i = level.var_1a92f34363247d37[teamname].size - 1; i >= 0; i--) {
           uavstruct = level.var_1a92f34363247d37[teamname][i];
@@ -91,17 +91,17 @@ function function_123f8da350e72770() {
 
           if(uavstruct.starttimes.size == 0) {
             level.var_1a92f34363247d37[teamname][i] = undefined;
-            var_8506ba4041fbe9bb = 1;
+            cleanarray = 1;
             continue;
           }
 
           if(!(isalive(uavstruct.owner) && !isDefined(uavstruct.owner.fauxdead) && !istrue(uavstruct.owner.delayedspawnedplayernotify) && !istrue(uavstruct.owner.liveragdoll))) {
             level.var_1a92f34363247d37[teamname][i] = undefined;
-            var_8506ba4041fbe9bb = 1;
+            cleanarray = 1;
           }
         }
 
-        if(var_8506ba4041fbe9bb) {
+        if(cleanarray) {
           level.var_1a92f34363247d37[teamname] = array_removeundefined(level.var_1a92f34363247d37[teamname]);
         }
 

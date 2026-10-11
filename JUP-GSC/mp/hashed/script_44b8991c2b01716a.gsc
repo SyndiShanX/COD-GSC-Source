@@ -247,9 +247,9 @@ function private function_edf2c8bda9343e81(player) {
   level endon("game_ended");
   player endon("death_or_disconnect");
   entitynumber = player getentitynumber();
-  var_80a38f44b08d29b = getdvarfloat(@ "hash_7a2b51f4615759d3", 30);
+  spamdelay = getdvarfloat(@ "hash_7a2b51f4615759d3", 30);
   level.var_8336fb035950fe34.var_e4841d3c199d8c76[entitynumber] = 1;
-  wait var_80a38f44b08d29b;
+  wait spamdelay;
   level.var_8336fb035950fe34.var_e4841d3c199d8c76[entitynumber] = undefined;
 }
 

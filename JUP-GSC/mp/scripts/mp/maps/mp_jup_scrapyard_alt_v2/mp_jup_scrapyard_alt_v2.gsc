@@ -45,12 +45,12 @@ function main() {
 }
 
 function function_476e26432f5d3edd() {
-  var_8b1c18e78b52638 = getStructArray("jackolantern", "script_noteworthy");
-  var_140e4695f31a730d = 4096;
+  pumpkins = getStructArray("jackolantern", "script_noteworthy");
+  testdist = 4096;
 
-  foreach(var_ac64400b9ee8389b in var_8b1c18e78b52638) {
-    if(distance2dsquared(var_ac64400b9ee8389b.origin, (428.998, 883.746, -173.375)) <= var_140e4695f31a730d) {
-      deletestruct_ref(var_ac64400b9ee8389b);
+  foreach(pumpkin in pumpkins) {
+    if(distance2dsquared(pumpkin.origin, (428.998, 883.746, -173.375)) <= testdist) {
+      deletestruct_ref(pumpkin);
     }
   }
 }

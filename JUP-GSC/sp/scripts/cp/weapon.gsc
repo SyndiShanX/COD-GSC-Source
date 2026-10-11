@@ -170,8 +170,8 @@ function initeffects() {
 }
 
 function setupminesettings() {
-  var_1fcc848e179898ee = 70;
-  level.claymoredetectiondot = cos(var_1fcc848e179898ee);
+  claymoredetectionconeangle = 70;
+  level.claymoredetectiondot = cos(claymoredetectionconeangle);
   level.claymoredetectionmindist = 20;
   level.claymoredetectiongraceperiod = 0.75;
   level.claymoredetonateradius = 192;
@@ -204,10 +204,10 @@ function setupconfigs() {
   config.killcamoffset = 12;
   level.weaponconfigs["proximity_explosive_mp"] = config;
   config = spawnStruct();
-  var_504e2e39dfc3b1f9 = 800;
-  var_502b2039df9d4b77 = 200;
-  config.radius_max_sq = var_504e2e39dfc3b1f9 * var_504e2e39dfc3b1f9;
-  config.radius_min_sq = var_502b2039df9d4b77 * var_502b2039df9d4b77;
+  ninebangradiusmax = 800;
+  ninebangradiusmin = 200;
+  config.radius_max_sq = ninebangradiusmax * ninebangradiusmax;
+  config.radius_min_sq = ninebangradiusmin * ninebangradiusmin;
   config.onexplodesfx = "iw9_flash_grenade_expl_trans";
   config.vfxradius = 72;
   level.weaponconfigs["flash_grenade_mp"] = config;
@@ -308,7 +308,7 @@ function getcompleteweaponnamenoalt(objweapon) {
 }
 
 function isattachmentselectfire(weapon, attachment) {
-  basetype = function_7c612ac92ba98dcb(weapon, attachment);
+  basetype = getattachmentbasetype(weapon, attachment);
   return basetype == "selectfire";
 }
 
@@ -784,7 +784,7 @@ function sniperdustwatcher() {
   self endon("disconnect");
   level endon("game_ended");
 
-  for(var_1c3dd0ef777cf9b5 = undefined;; var_1c3dd0ef777cf9b5 = gettime()) {
+  for(lastlargeshotfiredtime = undefined;; lastlargeshotfiredtime = gettime()) {
     self waittill("weapon_fired");
 
     if(self getstance() != "prone") {
@@ -799,7 +799,7 @@ function sniperdustwatcher() {
 
     playerforward = anglesToForward(self.angles);
 
-    if(!isDefined(var_1c3dd0ef777cf9b5) || gettime() - var_1c3dd0ef777cf9b5 > 2000) {}
+    if(!isDefined(lastlargeshotfiredtime) || gettime() - lastlargeshotfiredtime > 2000) {}
   }
 }
 
@@ -2016,7 +2016,7 @@ function begingrenadetracking() {
     case #"hash_7983828e72e83a3e":
     case #"hash_22f1c67a16accbe":
       if(issharedfuncdefined("super_hb_sensor", "hb_sensor_used")) {
-        thread function_f3bb4f4911a1beb2("super_hb_sensor", "hb_sensor_used", grenade);
+        thread callsharedfunc("super_hb_sensor", "hb_sensor_used", grenade);
       }
 
       break;
@@ -2351,24 +2351,24 @@ function minedeletetrigger(trigger) {
   }
 }
 
-function doblinkinglight(tagname, var_a351267a57d8cc5a, var_5e0e0d71b0b44f35) {
-  if(!isDefined(var_a351267a57d8cc5a)) {
-    var_a351267a57d8cc5a = getfx("weap_blink_friend");
+function doblinkinglight(tagname, friendlyfxsrc, enemyfxsrc) {
+  if(!isDefined(friendlyfxsrc)) {
+    friendlyfxsrc = getfx("weap_blink_friend");
   }
 
-  if(!isDefined(var_5e0e0d71b0b44f35)) {
-    var_5e0e0d71b0b44f35 = getfx("weap_blink_enemy");
+  if(!isDefined(enemyfxsrc)) {
+    enemyfxsrc = getfx("weap_blink_enemy");
   }
 
-  self.blinkinglightfx["friendly"] = var_a351267a57d8cc5a;
-  self.blinkinglightfx["enemy"] = var_5e0e0d71b0b44f35;
+  self.blinkinglightfx["friendly"] = friendlyfxsrc;
+  self.blinkinglightfx["enemy"] = enemyfxsrc;
   self.blinkinglighttag = tagname;
-  thread updateblinkinglight(var_a351267a57d8cc5a, var_5e0e0d71b0b44f35, tagname);
+  thread updateblinkinglight(friendlyfxsrc, enemyfxsrc, tagname);
   self waittill("death");
   stopblinkinglight();
 }
 
-function updateblinkinglight(var_a351267a57d8cc5a, var_5e0e0d71b0b44f35, tagname) {
+function updateblinkinglight(friendlyfxsrc, enemyfxsrc, tagname) {
   self endon("death");
   self endon("carried");
   self endon("emp_damage");
@@ -2380,14 +2380,14 @@ function updateblinkinglight(var_a351267a57d8cc5a, var_5e0e0d71b0b44f35, tagname
 
   delay = randomfloatrange(0.05, 0.25);
   wait delay;
-  childthread onjointeamblinkinglight(var_a351267a57d8cc5a, var_5e0e0d71b0b44f35, tagname, checkfunc);
+  childthread onjointeamblinkinglight(friendlyfxsrc, enemyfxsrc, tagname, checkfunc);
 
   foreach(player in level.players) {
     if(isDefined(player)) {
       if(self.owner[[checkfunc]](player)) {
-        playfxontagforclients(var_a351267a57d8cc5a, self, tagname, player);
+        playfxontagforclients(friendlyfxsrc, self, tagname, player);
       } else {
-        playfxontagforclients(var_5e0e0d71b0b44f35, self, tagname, player);
+        playfxontagforclients(enemyfxsrc, self, tagname, player);
       }
 
       wait 0.05;
@@ -2403,7 +2403,7 @@ function checkteam(other) {
   return self.team == other.team;
 }
 
-function onjointeamblinkinglight(var_a351267a57d8cc5a, var_5e0e0d71b0b44f35, tagname, checkfunc) {
+function onjointeamblinkinglight(friendlyfxsrc, enemyfxsrc, tagname, checkfunc) {
   self endon("death");
   level endon("game_ended");
   self endon("emp_damage");
@@ -2412,11 +2412,11 @@ function onjointeamblinkinglight(var_a351267a57d8cc5a, var_5e0e0d71b0b44f35, tag
     level waittill("joined_team", player);
 
     if(self.owner[[checkfunc]](player)) {
-      playfxontagforclients(var_a351267a57d8cc5a, self, tagname, player);
+      playfxontagforclients(friendlyfxsrc, self, tagname, player);
       continue;
     }
 
-    playfxontagforclients(var_5e0e0d71b0b44f35, self, tagname, player);
+    playfxontagforclients(enemyfxsrc, self, tagname, player);
   }
 }
 
@@ -2472,10 +2472,10 @@ function function_756a543a0b8f6670(owner, grenade, weaponname) {
   grenade.equipmentref = "equip_throwing_knife";
   grenade thread watchgrenadedeath();
 
-  grenade thread function_dec7a62735f22d28();
+  grenade thread drawdebugcylinder();
 }
 
-function function_dec7a62735f22d28() {
+function drawdebugcylinder() {
   self endon("<dev string:x107>");
 
   while(true) {
@@ -2765,9 +2765,9 @@ function minethrown(owner, weaponname, spawnfunc, var_fbf2bd8b1706fe46) {
   }
 
   normal = vectorNormalize(trace["normal"]);
-  var_97019a6d379d522 = vectortoangles(normal);
-  var_97019a6d379d522 += (90, 0, 0);
-  mine = [[spawnfunc]](pos, owner, weaponname, var_97019a6d379d522);
+  plantangles = vectortoangles(normal);
+  plantangles += (90, 0, 0);
+  mine = [[spawnfunc]](pos, owner, weaponname, plantangles);
   mine thread minedamagemonitor();
   self delete();
 }
@@ -2857,15 +2857,15 @@ function shouldaffectclaymore(claymore) {
 
   pos = self.origin + (0, 0, 32);
   dirtopos = pos - claymore.origin;
-  var_3ed85f41db72266a = anglesToForward(claymore.angles);
-  dist = vectordot(dirtopos, var_3ed85f41db72266a);
+  claymoreforward = anglesToForward(claymore.angles);
+  dist = vectordot(dirtopos, claymoreforward);
 
   if(dist < level.claymoredetectionmindist) {
     return false;
   }
 
   dirtopos = vectorNormalize(dirtopos);
-  dot = vectordot(dirtopos, var_3ed85f41db72266a);
+  dot = vectordot(dirtopos, claymoreforward);
   return dot > level.claymoredetectiondot;
 }
 
@@ -2883,7 +2883,7 @@ function deleteondeath(ent) {
   }
 }
 
-function onlethalequipmentplanted(var_40d7ea0d7a20a4e3, powername, var_959103ee6629ea1d) {
+function onlethalequipmentplanted(newlethal, powername, var_959103ee6629ea1d) {
   if(self.plantedlethalequip.size) {
     self.plantedlethalequip = array_removeundefined(self.plantedlethalequip);
 
@@ -2896,15 +2896,15 @@ function onlethalequipmentplanted(var_40d7ea0d7a20a4e3, powername, var_959103ee6
     }
   }
 
-  self.plantedlethalequip[self.plantedlethalequip.size] = var_40d7ea0d7a20a4e3;
-  entnum = var_40d7ea0d7a20a4e3 getentitynumber();
-  level.mines[entnum] = var_40d7ea0d7a20a4e3;
+  self.plantedlethalequip[self.plantedlethalequip.size] = newlethal;
+  entnum = newlethal getentitynumber();
+  level.mines[entnum] = newlethal;
   level notify("mine_planted");
 }
 
-function add_to_mine_list(var_40d7ea0d7a20a4e3) {
-  entnum = var_40d7ea0d7a20a4e3 getentitynumber();
-  level.mines[entnum] = var_40d7ea0d7a20a4e3;
+function add_to_mine_list(newlethal) {
+  entnum = newlethal getentitynumber();
+  level.mines[entnum] = newlethal;
 }
 
 function clustergrenadeused() {
@@ -2962,9 +2962,9 @@ function clustergrenadeexplode(position, delays, owner, killcament) {
     killcament.shellshockondamage = ter_op(i == 0, 1, undefined);
     killcament radiusdamage(position, 256, 800, 400, owner, "MOD_EXPLOSIVE", "cluster_grenade_zm");
     yaw = ter_op(i < 4, 90 * i + var_39a64ef99549e28e, randomint(360));
-    var_8870c770846c1a02 = ter_op(var_3234df3086482e07, 110, 90);
+    pitchoffset = ter_op(var_3234df3086482e07, 110, 90);
     pitchrange = ter_op(var_3234df3086482e07, 12, 45);
-    pitch = var_8870c770846c1a02 + randomint(pitchrange * 2) - pitchrange;
+    pitch = pitchoffset + randomint(pitchrange * 2) - pitchrange;
     dist = randomint(60) + 30;
     x = cos(yaw) * sin(pitch);
     y = sin(yaw) * sin(pitch);
@@ -3023,7 +3023,7 @@ function semtexused(grenade) {
   grenade waittill("missile_stuck", stuckto);
 
   if(isagent(stuckto)) {
-    function_216c67ab6749137a(stuckto, undefined, "semtex_stuck");
+    addbattlechatternotify(stuckto, undefined, "semtex_stuck");
   }
 
   if(isagent(stuckto) && !istrue(stuckto.var_274d3a7704e351ef)) {
@@ -3602,12 +3602,12 @@ function cleanupexplosivesondeath() {
   equipnum = self getentitynumber();
   equipkillcament = self.killcament;
   equiptrigger = self.trigger;
-  var_150bc605dfcc72b9 = self.sensor;
+  equipsensor = self.sensor;
   self waittill("death");
-  cleanupequipment(equipnum, equipkillcament, equiptrigger, var_150bc605dfcc72b9);
+  cleanupequipment(equipnum, equipkillcament, equiptrigger, equipsensor);
 }
 
-function cleanupequipment(equipnum, equipkillcament, equiptrigger, var_150bc605dfcc72b9) {
+function cleanupequipment(equipnum, equipkillcament, equiptrigger, equipsensor) {
   if(isDefined(self.weapon_name)) {
     if(self.weapon_name == "c4_mp") {
       self.owner notify("c4_update", 0);
@@ -3634,12 +3634,12 @@ function cleanupequipment(equipnum, equipkillcament, equiptrigger, var_150bc605d
     equiptrigger delete();
   }
 
-  if(isDefined(var_150bc605dfcc72b9)) {
-    var_150bc605dfcc72b9 delete();
+  if(isDefined(equipsensor)) {
+    equipsensor delete();
   }
 }
 
-function monitordamage(maxhealth, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak, rumble) {
+function monitordamage(maxhealth, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak, rumble) {
   self endon("death");
   level endon("game_ended");
 
@@ -3656,7 +3656,7 @@ function monitordamage(maxhealth, damagefeedback, ondeathfunc, var_d7b6456018542
     biskillstreak = 0;
   }
 
-  for(running = 1; running; running = monitordamageoneshot(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak)) {
+  for(running = 1; running; running = monitordamageoneshot(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak)) {
     self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, origin, angles, normal, inflictor);
 
     if(rumble) {
@@ -3694,7 +3694,7 @@ function monitordamageend() {
   self setCanDamage(0);
 }
 
-function monitordamageoneshot(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak) {
+function monitordamageoneshot(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak) {
   if(!isDefined(self)) {
     return false;
   }
@@ -3715,11 +3715,11 @@ function monitordamageoneshot(damage, attacker, direction_vec, point, meansofdea
 
   damagedata = scripts\cp_mp\utility\damage_utility::packdamagedata(attacker, self, damage, objweapon, meansofdeath, inflictor, point, direction_vec, modelname, partname, tagname, idflags);
 
-  if(!isDefined(var_d7b6456018542238)) {
-    var_d7b6456018542238 = &scripts\cp\damage::modifydamage;
+  if(!isDefined(modifydamagefunc)) {
+    modifydamagefunc = &scripts\cp\damage::modifydamage;
   }
 
-  modifieddamage = self[[var_d7b6456018542238]](damagedata);
+  modifieddamage = self[[modifydamagefunc]](damagedata);
 
   if(modifieddamage <= 0) {
     return true;
@@ -3899,13 +3899,13 @@ function non_player_add_ignore_damage_signature(attacker, objweapon, inflictor, 
   return id;
 }
 
-function explosivehandlemovers(parent, var_b5f7c0806632d99b) {
+function explosivehandlemovers(parent, usedefaultinvalidparentcallback) {
   data = spawnStruct();
   data.linkparent = parent;
   data.deathoverridecallback = &movingplatformdetonate;
   data.endonstring = "death";
 
-  if(!isDefined(var_b5f7c0806632d99b) || !var_b5f7c0806632d99b) {
+  if(!isDefined(usedefaultinvalidparentcallback) || !usedefaultinvalidparentcallback) {
     data.invalidparentoverridecallback = &scripts\cp\cp_movers::moving_platform_empty_func;
   }
 
@@ -3931,7 +3931,7 @@ function isplantedequipment(ent) {
   return isDefined(level.mines[ent getentitynumber()]) || istrue(ent.planted);
 }
 
-function equipmentwatchuse(owner, var_51bae54bde94fb33) {
+function equipmentwatchuse(owner, updateposition) {
   self notify("equipmentWatchUse");
   self endon("spawned_player");
   self endon("disconnect");
@@ -3941,7 +3941,7 @@ function equipmentwatchuse(owner, var_51bae54bde94fb33) {
   self.trigger setselfusable(owner);
   self.trigger thread notusableforjoiningplayers(owner);
 
-  if(isDefined(var_51bae54bde94fb33) && var_51bae54bde94fb33) {
+  if(isDefined(updateposition) && updateposition) {
     thread updatetriggerposition();
   }
 
@@ -3983,19 +3983,19 @@ function deleteexplosive(pickedup) {
     equipnum = self getentitynumber();
     equipkillcament = self.killcament;
     equiptrigger = self.trigger;
-    var_150bc605dfcc72b9 = self.sensor;
-    cleanupequipment(equipnum, equipkillcament, equiptrigger, var_150bc605dfcc72b9);
+    equipsensor = self.sensor;
+    cleanupequipment(equipnum, equipkillcament, equiptrigger, equipsensor);
     self notify("deleted_equipment");
     self delete();
   }
 }
 
-function ontacticalequipmentplanted(var_290d0681688fc94c, equipmentref, deletefunc) {
-  var_290d0681688fc94c.equipmentref = equipmentref;
-  var_290d0681688fc94c.deletefunc = deletefunc;
-  var_290d0681688fc94c.planted = 1;
+function ontacticalequipmentplanted(newtactical, equipmentref, deletefunc) {
+  newtactical.equipmentref = equipmentref;
+  newtactical.deletefunc = deletefunc;
+  newtactical.planted = 1;
 
-  if(!istrue(var_290d0681688fc94c.issuper)) {
+  if(!istrue(newtactical.issuper)) {
     if(self.plantedtacticalequip.size) {
       self.plantedtacticalequip = array_removeundefined(self.plantedtacticalequip);
 
@@ -4004,11 +4004,11 @@ function ontacticalequipmentplanted(var_290d0681688fc94c, equipmentref, deletefu
       }
     }
 
-    self.plantedtacticalequip[self.plantedtacticalequip.size] = var_290d0681688fc94c;
+    self.plantedtacticalequip[self.plantedtacticalequip.size] = newtactical;
   }
 
-  entnum = var_290d0681688fc94c getentitynumber();
-  level.mines[entnum] = var_290d0681688fc94c;
+  entnum = newtactical getentitynumber();
+  level.mines[entnum] = newtactical;
   level notify("mine_planted");
 }
 
@@ -4651,7 +4651,7 @@ function function_29ba39c7e2adb57b(rootname, attachments, variantid) {
   return allattachments;
 }
 
-function debug_circle(center, radius, duration, color, startdelay, var_d5c216e05ee2afc5) {
+function debug_circle(center, radius, duration, color, startdelay, fillcenter) {
   circle_sides = 16;
   anglefrac = 360 / circle_sides;
   circlepoints = [];
@@ -4670,16 +4670,16 @@ function debug_circle(center, radius, duration, color, startdelay, var_d5c216e05
     wait startdelay;
   }
 
-  thread function_74b455b83954e07b(circlepoints, duration, color, var_d5c216e05ee2afc5, center);
+  thread debug_circle_drawlines(circlepoints, duration, color, fillcenter, center);
 }
 
-function function_74b455b83954e07b(circlepoints, duration, color, var_d5c216e05ee2afc5, center) {
-  if(!isDefined(var_d5c216e05ee2afc5)) {
-    var_d5c216e05ee2afc5 = 0;
+function debug_circle_drawlines(circlepoints, duration, color, fillcenter, center) {
+  if(!isDefined(fillcenter)) {
+    fillcenter = 0;
   }
 
   if(!isDefined(center)) {
-    var_d5c216e05ee2afc5 = 0;
+    fillcenter = 0;
   }
 
   for(i = 0; i < circlepoints.size; i++) {
@@ -4693,7 +4693,7 @@ function function_74b455b83954e07b(circlepoints, duration, color, var_d5c216e05e
 
     thread scripts\cp\cp_debug::debug_line(start, end, duration, color);
 
-    if(var_d5c216e05ee2afc5) {
+    if(fillcenter) {
       thread scripts\cp\cp_debug::debug_line(center, start, duration, color);
     }
   }
@@ -4706,7 +4706,7 @@ function function_2778968efa18eb6a() {
   while(true) {
     flag_wait("<dev string:x14a>");
     flag_clear("<dev string:x14a>");
-    var_adf413595ed38fe3 = setDvar(@ "hash_2e8bd550ed0544cd", 1);
+    cosmetics = setDvar(@ "hash_2e8bd550ed0544cd", 1);
     camos = setDvar(@ "hash_900dcba8cdf5e65c", 1);
     attachments = setDvar(@ "hash_99387041680b1bdf", 1);
     variants = setDvar(@ "hash_ca742b19bf89b13d", 1);
@@ -5012,9 +5012,9 @@ function attachmentroll(rootname) {
 
   if(isDefined(level.attachmentmap[rootname])) {
     var_d7af4ffcc6535706 = array_randomize(level.attachmentmap[rootname]);
-    var_a8e6266c4ed31034 = attachmentrollcount();
+    maxattach = attachmentrollcount();
 
-    for(idx = 0; idx < var_a8e6266c4ed31034 && idx < var_d7af4ffcc6535706.size; idx++) {
+    for(idx = 0; idx < maxattach && idx < var_d7af4ffcc6535706.size; idx++) {
       attachments[attachments.size] = var_d7af4ffcc6535706[idx];
     }
   }
@@ -5141,7 +5141,7 @@ function grenadeinitialize(grenade, weapon_object, tickpercent, originalowner) {
   if(isDefined(equipmentref)) {
     grenade.equipmentref = equipmentref;
     grenade.isequipment = 1;
-    grenade.bundle = scripts\cp_mp\equipment::function_2113b6f7cb462692(grenade.weapon_name);
+    grenade.bundle = scripts\cp_mp\equipment::getequipmentbundlefromweaponname(grenade.weapon_name);
   }
 
   grenade.threwback = isDefined(originalowner);
@@ -5851,8 +5851,8 @@ function getweapon_hero(weaponname, weaponarray) {
 }
 
 function getweapon_aq(type, weaponname, weaponarray) {
-  var_e052c0161d3ef54 = [];
-  var_c8f4fe738c61245a = [];
+  possibilities = [];
+  attachment_combos = [];
 
   switch (type) {
     case #"hash_8cdaf2e4ecfe5b51":
@@ -5876,7 +5876,7 @@ function getweapon_aq(type, weaponname, weaponarray) {
       break;
   }
 
-  return randomize_weapon(weaponname, var_e052c0161d3ef54, var_c8f4fe738c61245a);
+  return randomize_weapon(weaponname, possibilities, attachment_combos);
 }
 
 function make_weapon_special(weapon) {
@@ -5961,7 +5961,7 @@ function make_weapon(basename, attachments, reticle, camo, lootid, alt_mode) {
     rootname = getweaponrootname(basename);
   }
 
-  defaults = scripts\cp_mp\weapon::function_d7f1989d63343007(basename);
+  defaults = scripts\cp_mp\weapon::getweaponattachmentdefaultattachments(basename);
   defaults = utility::removeconflictingattachments(attachments, defaults, rootname);
   attachments = array_combine(attachments, defaults);
   weaponassetname = weaponassetnamemap(rootname, lootid);
@@ -5999,8 +5999,8 @@ function make_weapon(basename, attachments, reticle, camo, lootid, alt_mode) {
   return weapon;
 }
 
-function randomize_weapon(weaponname, var_e052c0161d3ef54, var_c8f4fe738c61245a) {
-  attachments = utility::get_random_attachments(var_e052c0161d3ef54, var_c8f4fe738c61245a);
+function randomize_weapon(weaponname, possibilities, attachment_combos) {
+  attachments = utility::get_random_attachments(possibilities, attachment_combos);
   weapon = make_weapon(weaponname, attachments);
 
   if(getdvarint(@ "hash_45281f93550798")) {
@@ -6035,7 +6035,7 @@ function randomize_weapon(weaponname, var_e052c0161d3ef54, var_c8f4fe738c61245a)
 
     var_a1b938aeb3589f83 = 1;
 
-    foreach(possibility in var_e052c0161d3ef54) {
+    foreach(possibility in possibilities) {
       probability_100 = 0;
 
       if(isint(possibility[0]) && possibility[0] == 100) {
@@ -6587,7 +6587,7 @@ function function_a5ad598dd7668b55() {
 function function_8cffc9416e0ab766(default_weapon, weapon_class) {
   weaponroot = getweaponrootname(default_weapon);
   index = 0;
-  var_928c1cac31ea99e5 = weaponroot + "|" + index;
+  weaponvariantkey = weaponroot + "|" + index;
   exclude_list = [];
   exclude_list["iw9_lm_mkilo3"] = [2];
   exclude_list["iw9_ar_akilo"] = [2];
@@ -6596,7 +6596,7 @@ function function_8cffc9416e0ab766(default_weapon, weapon_class) {
   for(variant_found = 1; variant_found; variant_found = 0) {
     waitframe();
 
-    if(isDefined(level.weaponlootmapdata[var_928c1cac31ea99e5])) {
+    if(isDefined(level.weaponlootmapdata[weaponvariantkey])) {
       var_6eeaeb3717f8724c = 0;
 
       if(isDefined(exclude_list[weaponroot])) {
@@ -6610,7 +6610,7 @@ function function_8cffc9416e0ab766(default_weapon, weapon_class) {
 
       if(var_6eeaeb3717f8724c) {
         index++;
-        var_928c1cac31ea99e5 = weaponroot + "|" + index;
+        weaponvariantkey = weaponroot + "|" + index;
         continue;
       }
 
@@ -6625,23 +6625,23 @@ function function_8cffc9416e0ab766(default_weapon, weapon_class) {
       cmd = "devgui_cmd \"CP Debug:2 / Weapons /" + path + "\" \"set scr_debug debugGiveWeapon_+" + default_weapon + "|" + index + "\" \n";
       addentrytodevgui(cmd);
       index++;
-      var_928c1cac31ea99e5 = weaponroot + "|" + index;
+      weaponvariantkey = weaponroot + "|" + index;
       continue;
     }
   }
 }
 
 function function_f123cc18b09056d1(weapon) {
-  var_441f289555e2ccf = [];
+  silencers = [];
   attachments = function_75b035199842693d(weapon, "frontpiece");
 
   for(i = 0; i < attachments.size; i++) {
     if(scripts\cp_mp\weapon::issilencerattach(weapon, attachments[i])) {
-      var_441f289555e2ccf[var_441f289555e2ccf.size] = attachments[i];
+      silencers[silencers.size] = attachments[i];
     }
   }
 
-  return var_441f289555e2ccf;
+  return silencers;
 }
 
 function function_b65ad646eb126204(weapon_key) {

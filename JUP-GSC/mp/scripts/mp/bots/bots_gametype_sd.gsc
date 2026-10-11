@@ -30,7 +30,7 @@ function setup_callbacks() {
   level.bot_funcs["know_enemies_on_start"] = undefined;
   level.bot_funcs["notify_enemy_bots_bomb_used"] = &notify_enemy_team_bomb_used;
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     level.bot_funcs["player_spawned_gamemode"] = &namespace_da125b44c190d236::function_5f51c5c13fd2911b;
     level.modifyplayerdamage = &namespace_da125b44c190d236::modifyplayerdamage;
   }

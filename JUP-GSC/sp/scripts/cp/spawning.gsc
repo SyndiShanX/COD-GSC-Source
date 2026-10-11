@@ -547,12 +547,12 @@ function ai_watchforbadpath() {
   self endon("death");
   self notify("ai_watchForBadPath");
   self endon("ai_watchForBadPath");
-  var_29d65c2e0b18c7f6 = 0;
-  var_b3bffc9a15155a83 = 0;
+  bad_path_count = 0;
+  last_bad_path_time = 0;
   wait 5;
 
   while(true) {
-    self waittill("bad_path", var_772edbdcfe906c73);
+    self waittill("bad_path", badpathpos);
 
     if(getdvarint(@ "hash_9758cec587280b4a", 0)) {
       break;
@@ -561,18 +561,18 @@ function ai_watchforbadpath() {
     if(!has_never_kill_off_flag()) {
       time = gettime();
 
-      if(time - var_b3bffc9a15155a83 > 5000) {
-        var_29d65c2e0b18c7f6 = 0;
-        var_b3bffc9a15155a83 = time;
+      if(time - last_bad_path_time > 5000) {
+        bad_path_count = 0;
+        last_bad_path_time = time;
         continue;
       }
 
-      var_29d65c2e0b18c7f6++;
-      var_b3bffc9a15155a83 = time;
+      bad_path_count++;
+      last_bad_path_time = time;
 
-      if(var_29d65c2e0b18c7f6 >= 10) {
+      if(bad_path_count >= 10) {
         if(passed_kill_off_time_checks(gettime())) {
-          teleport_to_nearby_spawner("Bad Path", var_772edbdcfe906c73);
+          teleport_to_nearby_spawner("Bad Path", badpathpos);
         }
       }
 
@@ -3108,8 +3108,8 @@ function function_a1a803521137f145() {
       self takeallweapons();
     }
 
-    var_72672cd81ec1093d = random(level.arweapons);
-    newprimary = scripts\cp\weapon::function_768c9a047aed19f4(var_72672cd81ec1093d);
+    weapontogive = random(level.arweapons);
+    newprimary = scripts\cp\weapon::function_768c9a047aed19f4(weapontogive);
     newprimary = newprimary scripts\cp\weapon::function_dcb52bcbbcb80b00(attachments);
     self.weapon = newprimary;
     initweapon(self.weapon);
@@ -3124,8 +3124,8 @@ function function_a1a803521137f145() {
       self takeallweapons();
     }
 
-    var_72672cd81ec1093d = random(level.var_4a2590c2dfe94983);
-    newprimary = scripts\cp\weapon::function_768c9a047aed19f4(var_72672cd81ec1093d);
+    weapontogive = random(level.var_4a2590c2dfe94983);
+    newprimary = scripts\cp\weapon::function_768c9a047aed19f4(weapontogive);
     newprimary = newprimary scripts\cp\weapon::function_dcb52bcbbcb80b00(attachments);
     self.weapon = newprimary;
     initweapon(self.weapon);
@@ -3140,8 +3140,8 @@ function function_a1a803521137f145() {
       self takeallweapons();
     }
 
-    var_72672cd81ec1093d = random(level.var_f0525567bc0ffa6a);
-    newprimary = scripts\cp\weapon::function_768c9a047aed19f4(var_72672cd81ec1093d);
+    weapontogive = random(level.var_f0525567bc0ffa6a);
+    newprimary = scripts\cp\weapon::function_768c9a047aed19f4(weapontogive);
     newprimary = newprimary scripts\cp\weapon::function_dcb52bcbbcb80b00(attachments);
     self.weapon = newprimary;
     initweapon(self.weapon);
@@ -3156,8 +3156,8 @@ function function_a1a803521137f145() {
       self takeallweapons();
     }
 
-    var_72672cd81ec1093d = random(level.var_f121b39847bca5e8);
-    newprimary = scripts\cp\weapon::function_768c9a047aed19f4(var_72672cd81ec1093d);
+    weapontogive = random(level.var_f121b39847bca5e8);
+    newprimary = scripts\cp\weapon::function_768c9a047aed19f4(weapontogive);
     newprimary = newprimary scripts\cp\weapon::function_dcb52bcbbcb80b00(attachments);
     self.weapon = newprimary;
     initweapon(self.weapon);
@@ -3189,25 +3189,25 @@ function set_kill_off_time(override) {
   }
 
   if(isDefined(override)) {
-    var_bbc66ad67526db08 = override * 1000;
+    time_to_add = override * 1000;
   } else if(isDefined(self.group) && isDefined(self.group.kill_off_time_override)) {
-    var_bbc66ad67526db08 = self.group.kill_off_time_override * 1000;
+    time_to_add = self.group.kill_off_time_override * 1000;
   } else if(isDefined(self.spawnpoint) && isDefined(self.spawnpoint.script_timer)) {
-    var_bbc66ad67526db08 = self.spawnpoint.script_timer * 1000;
+    time_to_add = self.spawnpoint.script_timer * 1000;
   } else if(isDefined(self.group) && istrue(self.group.cqb_module)) {
-    var_bbc66ad67526db08 = 2500000;
+    time_to_add = 2500000;
   } else {
-    var_bbc66ad67526db08 = 20000;
+    time_to_add = 20000;
   }
 
-  new_time = gettime() + var_bbc66ad67526db08;
+  new_time = gettime() + time_to_add;
 
   if(!isDefined(self.killofftime) || new_time > self.killofftime) {
     self.killofftime = new_time;
   }
 
   if(istrue(self.entered_combat)) {
-    wait_time = var_bbc66ad67526db08 / 1000;
+    wait_time = time_to_add / 1000;
     thread add_to_kill_off_list(wait_time);
     return;
   }
@@ -4664,8 +4664,8 @@ function get_enemy_info_loop(tickrate) {
                 }
 
                 if(self seerecently(target_player, var_934f2bd9f0e5c04b)) {
-                  var_3a1644f2929823d8 = distancesquared(target_pos, self.origin);
-                  dist_valid = var_3a1644f2929823d8 <= self.engagemaxdist * self.engagemaxdist;
+                  dist_to_enemy = distancesquared(target_pos, self.origin);
+                  dist_valid = dist_to_enemy <= self.engagemaxdist * self.engagemaxdist;
 
                   if(istrue(var_eeeaa28f8fa549d1) && dist_valid || isDefined(target_player.vehicle_riding_on)) {
                     var_eeeaa28f8fa549d1 = 0;
@@ -4778,21 +4778,21 @@ function get_player_info_proc(player) {
   }
 
   var_934f2bd9f0e5c04b = 5;
-  var_2ab4eb5f9bf4dd77 = 5;
+  last_seen_time = 5;
 
   if(getdvarfloat(@ "hash_c39932314d687d48", 0) > 0) {
     var_934f2bd9f0e5c04b = getdvarfloat(@ "hash_c39932314d687d48");
   }
 
   if(getdvarfloat(@ "hash_f5c00cbc60277e7d", 0) > 0) {
-    var_2ab4eb5f9bf4dd77 = getdvarfloat(@ "hash_f5c00cbc60277e7d");
+    last_seen_time = getdvarfloat(@ "hash_f5c00cbc60277e7d");
   }
 
   if(self seerecently(player, var_934f2bd9f0e5c04b)) {
     player.lastseentime = gettime();
     self getenemyinfo(player);
     return true;
-  } else if(isDefined(player.lastseentime) && gettime() < player.lastseentime + var_2ab4eb5f9bf4dd77 * 1000) {
+  } else if(isDefined(player.lastseentime) && gettime() < player.lastseentime + last_seen_time * 1000) {
     self getenemyinfo(player);
     return true;
   } else if(isDefined(self.pathgoalpos) && distancesquared(self.pathgoalpos, player.origin) < 262144 && self pathdisttogoal() < 2048) {
@@ -4806,7 +4806,7 @@ function z_is_excessive(override_position) {
   start_pos = self.origin;
   max_z = 256;
 
-  if(self function_e8ca4080d02a0bb4()) {
+  if(self aiissniper()) {
     max_z = 512;
   }
 
@@ -5435,7 +5435,7 @@ function go_to_node_internal(node, optional_arrived_at_node_func, var_5e38f20c96
   }
 
   thread go_to_node_end();
-  var_a749ce9b52022669 = 0;
+  usingpatharray = 0;
   patharrayindex = 0;
   patharray = undefined;
 
@@ -5446,23 +5446,23 @@ function go_to_node_internal(node, optional_arrived_at_node_func, var_5e38f20c96
   }
 
   for(;;) {
-    if(!var_a749ce9b52022669) {
+    if(!usingpatharray) {
       node = get_least_used_from_array(node);
-      self.var_a2bac30a03260051 = startnode;
+      self.patharraystartnode = startnode;
       patharray = get_path_array(node, startnode);
 
       if(patharray.size > 1) {
-        var_a749ce9b52022669 = 1;
+        usingpatharray = 1;
       }
     }
 
     self.currentnode = node;
 
-    if(var_a749ce9b52022669) {
+    if(usingpatharray) {
       node = patharray[patharray.size - 1];
       go_through_patharray(patharray, optional_arrived_at_node_func, var_5e38f20c9628ae25);
       patharray = undefined;
-      var_a749ce9b52022669 = 0;
+      usingpatharray = 0;
     } else {
       node_fields_pre_goal(node);
 
@@ -5477,7 +5477,7 @@ function go_to_node_internal(node, optional_arrived_at_node_func, var_5e38f20c96
     node notify("trigger", self);
     node_fields_after_goal(node, optional_arrived_at_node_func);
     node_fields_after_goal_skit(node);
-    interactionid = self function_92435c7a6ae85c3c();
+    interactionid = self getinteractionid();
 
     if(isDefined(interactionid)) {
       self waittill("bseq_user_deleted");
@@ -5588,7 +5588,7 @@ function get_path_array(node, startnode) {
 
     if(!istrue(node.var_97c8a15d77788e5a)) {
       if(isDefined(node.target)) {
-        node.interactionid = function_5d6132045b29baf5(node.target);
+        node.interactionid = getinteractionidfortargetname(node.target);
       }
 
       node.var_97c8a15d77788e5a = 1;
@@ -6051,7 +6051,7 @@ function function_480f99299b4cbc38() {
   self endon("death");
 
   if(isDefined(self.currentnode) && isDefined(self.currentnode.interactionid) && isDefined(self.currentnode.interaction)) {
-    if(isDefined(self function_92435c7a6ae85c3c())) {
+    if(isDefined(self getinteractionid())) {
       self waittill("bseq_user_deleted");
     }
 

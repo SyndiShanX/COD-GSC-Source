@@ -88,7 +88,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
   s.script_parameters = "olive";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (-3360.2, 26885.2, 1032.14), (0, 11.51, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -1521,7 +1521,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (2489.8, 26182.3, 933.6), (0, 161.92, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -1911,18 +1911,18 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (-1365.94, 26954.1, 912.19), (0, 29.85, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
   s.script_parameters = "olive";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (-2269.7, 24035, 947.72), (0, 239.68, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (3390.65, 24425, 898.82), (0, 282, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -1940,7 +1940,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
   s.script_parameters = "olive";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (-5391.42, 22276, 1025.89), (0, 81.82, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -2096,7 +2096,7 @@ function createstructs(fe, us, cf) {
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_parameters = "mg_backup_jltv_6";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (3351.4, 23479.9, 1047), (0, 262.23, 0), "cspf_11_auto14178096562518098978", "cspf_11_auto13588778830825543685", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -2134,7 +2134,7 @@ function createstructs(fe, us, cf) {
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_parameters = "mg_backup_jltv_4";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-4668.34, 23494.1, 1050.01), (0, 338.43, 0), "cspf_11_auto13586942676269496818", "cspf_11_auto8120781921823662431", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -2166,7 +2166,7 @@ function createstructs(fe, us, cf) {
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_parameters = "mg_backup_jltv_5";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-2490.41, 23235.2, 1050.01), (0, 158.43, 0), "cspf_11_auto7658674836229102381", "cspf_11_auto10149013129877407283", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -2186,7 +2186,7 @@ function createstructs(fe, us, cf) {
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_parameters = "mg_backup_jltv_1";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-670.66, 26530.4, 1050.01), (0, 158.43, 0), "cspf_11_auto740059131152680123", "cspf_11_auto6842665538257435441", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -2220,7 +2220,7 @@ function createstructs(fe, us, cf) {
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_parameters = "mg_backup_jltv_2";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (6987.6, 27097.1, 1050.01), (0, 236.43, 0), "cspf_11_auto6639418876249424304", "cspf_11_auto9327529018298932367", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -2253,7 +2253,7 @@ function createstructs(fe, us, cf) {
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_parameters = "mg_backup_jltv_3";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-3349.65, 29536.4, 1050.01), (0, 308.43, 0), "cspf_11_auto3972230883345642758", "cspf_11_auto5339039937728440658", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -2464,7 +2464,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-4714.34, 23512.1, 1050.01), (0, 338.43, 0), "mg_backup_jltv_4", "cspf_11_auto4141283167109696846", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -2527,7 +2527,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_accel = "10";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "intro_jltv_1_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-4653.54, 25656.4, 1276.26), (0, 74.53, 0), "intro_jltv_1", "cspf_11_auto2958689556705366344", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -2550,7 +2550,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.classname_mp = "script_vehicle_jup_jltv_physics";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "intro_jltv_2_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-263.43, 21249.2, 1292.51), (0, 139.32, 0), "intro_jltv_2", "cspf_11_auto16655108668130657188", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -3142,7 +3142,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (3360.1, 23531.1, 1047), (0, 262.23, 0), "mg_backup_jltv_6", "cspf_11_auto10616867599970620186", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -3166,7 +3166,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (6987.6, 27147.1, 1066.01), (0, 238.43, 0), "mg_backup_jltv_2", "cspf_11_auto3824812572553428964", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -3202,7 +3202,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-3469.52, 29695.4, 1050.01), (0, 308.43, 0), "mg_backup_jltv_3", "cspf_11_auto10343092355549565823", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -3256,7 +3256,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-626.66, 26512.4, 1050.01), (0, 158.43, 0), "mg_backup_jltv_1", "cspf_11_auto209324495382041851", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -3292,7 +3292,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.classname_mp = "script_vehicle_jup_jltv_physics";
   s.script_speed = "30";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "reinforcement_jltv_group";
   s.vehicletype = "veh_jup_jltv_physics_mp";
   fe[[f]](s, us, cf, (-2434.41, 23217.2, 1050.01), (0, 158.43, 0), "mg_backup_jltv_5", "cspf_11_auto5538031121692769051", undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -4173,7 +4173,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv_mg";
+  s.script_vehicleref = "veh_jup_jltv_mg";
   fe[[f]](s, us, cf, (-5047.08, 22754.2, 1073.84), (0, 71.55, 0), "airdrop_jltv");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -4440,7 +4440,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
   s.script_parameters = "olive";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (-6875.04, 26835.3, 1033.4), (0, 310.5, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -4573,7 +4573,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
   s.script_parameters = "olive";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (4445.4, 28145.6, 1024.5), (0, 267.16, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -4735,7 +4735,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (-6489.27, 27834.6, 1124.99), (0, 304.41, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -4920,7 +4920,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
   s.script_parameters = "des_camo";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (1947.35, 26007.8, 967.82), (0, 75.25, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -5220,7 +5220,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (-10077.8, 29942.8, 1270.6), (0, 247.74, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -5239,7 +5239,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "custom";
@@ -5259,7 +5259,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -5280,7 +5280,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "3";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -5300,7 +5300,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -5311,7 +5311,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -5343,7 +5343,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -5353,7 +5353,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "5";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -5363,7 +5363,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-2567.87, 29254.9, 1024), (0, 254, 0), "cspf_27_auto248000633527914309", "interaction", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5371,7 +5371,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "0.85";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -5382,7 +5382,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -5411,7 +5411,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2887.93, 27588.1, 1012), (0, 0, 0), "cspf_28_auto4749170135710986487", "cspf_28_auto4249709675322132675", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5625,7 +5625,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "2";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -5643,7 +5643,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -5679,7 +5679,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "2";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.script_faceangles = "1";
@@ -5690,7 +5690,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2742.8, 28128.7, 1008), (0, 0, 0), "cspf_28_auto14145350145028832506", "cspf_28_auto9136292362840389678", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5699,7 +5699,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -5708,7 +5708,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2540.33, 27593.3, 1013.37), (0, 0, 0), "cspf_28_auto6503110032219573057", "cspf_28_auto18287988413781581413", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5724,7 +5724,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "2";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (3954.5, 26598.5, 1007.58), (0, 0, 0), "cspf_28_auto6406069805015479756", "cspf_28_auto7745815201309619085", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5772,7 +5772,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2862.01, 27587.3, 1004), (0, 0, 0), "cspf_28_auto14368364596286256303", "cspf_28_auto7430094104309562773", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5788,7 +5788,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2520.49, 27587.3, 1006), (0, 0, 0), "cspf_28_auto4814830631147979924", "cspf_28_auto14739617902428217588", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5796,7 +5796,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "4";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.script_faceangles = "true";
@@ -5807,7 +5807,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "4";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.script_faceangles = "true";
@@ -5826,7 +5826,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "2";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.script_faceangles = "1";
   s.spawn_filter = "none";
@@ -5836,7 +5836,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -5845,7 +5845,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "2";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1530.76, 28281.6, 1006), (0, 0, 0), "cspf_28_auto824991743783826292", "cspf_28_auto18438187875754151753", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5853,7 +5853,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1433.48, 28465.9, 1006), (0, 0, 0), "cspf_28_auto18437034563822748289", "cspf_28_auto14907456027442333869", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5861,7 +5861,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -5888,7 +5888,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2059.61, 28467.5, 1014), (0, 77.1, 0), "cspf_28_auto2463024385878254075", "cspf_28_auto5202047441547181444", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5896,7 +5896,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2754.36, 28126.4, 1024), (0, 0, 0), "cspf_28_auto17107378706161438268", "cspf_28_auto3735267078623510139", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5905,7 +5905,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -5914,7 +5914,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (3833.53, 27333.2, 1024), (0, 0, 0), "cspf_28_auto3799600181789747264", "cspf_28_auto4501773887134367616", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5922,7 +5922,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (3205.24, 27184.6, 1024), (0, 0, 0), "cspf_28_auto10754669226157582910", "cspf_28_auto10433506958572486799", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -5931,7 +5931,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.var_6e0a6627ae6fea2 = "true";
   s.spawn_filter = "none";
@@ -5968,7 +5968,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -5999,14 +5999,14 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (1112.4, 21861.7, 1025), (0, 90, 0), undefined, undefined, "ai_encounter_spawnpoint", undefined, undefined, (0, 0, 0), (0, 0, 0));
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "sentry_truck_rider";
   fe[[f]](s, us, cf, (774.09, 22369.5, 1053.16), (0, 0.66, 0), "sentry_truck", undefined, undefined, undefined, undefined, (0, 0, 0), (0, 0, 0));
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1844.23, 20473.3, 1024), (0, 0, 0), "cspf_29_auto16488101579131743420", "cspf_29_auto11896666727574407080", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6030,7 +6030,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "15";
-  s.var_acaed5eee748b3f = "20";
+  s.min_wait_time = "20";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1736.73, 20200.8, 1168), (0, 0, 0), "cspf_29_auto11896666727574407080", "cspf_29_auto2293592225358421324", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6048,7 +6048,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-728.27, 21354.6, 1007), (0, 344, 0), "cspf_29_auto14943861860688158937", "cspf_29_auto13049505604322167994", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6062,7 +6062,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-1020.27, 21559.1, 1007), (0, 344, 0), "cspf_29_auto15482258838734488235", "cspf_29_auto15652025897928183971", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6102,7 +6102,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-995.63, 20642.1, 997.77), (0, 344, 0), "cspf_29_auto15228002635430839687", "cspf_29_auto10610737219610189243", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6169,7 +6169,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -6190,7 +6190,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1487.23, 21276.8, 1024), (0, 0, 0), "cspf_29_auto16246167811083024024", "cspf_29_auto513000695867262704", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6232,7 +6232,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-1238.2, 20933.5, 1004), (0, 344, 0), "cspf_29_auto16311482868261559607", "cspf_29_auto9270259449691596201", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6248,7 +6248,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (41.99, 20390.6, 969.25), (0, 344, 0), "cspf_29_auto2805160759590774115", "cspf_29_auto4214469166081541290", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6374,7 +6374,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -6416,7 +6416,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -6454,7 +6454,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (419.73, 20353.6, 1001), (0, 344, 0), "cspf_29_auto18121560456175706677", "cspf_29_auto11615011382666426190", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6463,7 +6463,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -6502,7 +6502,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -6512,7 +6512,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (775.33, 22116, 1024), (0, 344, 0), "cspf_29_auto18193535646742969273", "cspf_29_auto13801347227457848765", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6521,7 +6521,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -6530,7 +6530,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (521.48, 22307.8, 1024), (0, 344, 0), "cspf_29_auto10532575786833547412", "cspf_29_auto7360343222692118758", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6538,7 +6538,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -6549,7 +6549,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -6583,7 +6583,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "0.85";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -6622,7 +6622,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "20";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -6642,7 +6642,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -6652,7 +6652,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "custom";
@@ -6673,7 +6673,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-2372.85, 25433.3, 1129.01), (0, 74, 0), "cspf_27_auto940678854775661023", "cspf_27_auto14293098630282843767", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6681,7 +6681,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -6747,7 +6747,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-1864.09, 24589.4, 1192), (0, 254, 0), "cspf_27_auto13935024131822468972", "cspf_27_auto11138557208874558266", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6756,7 +6756,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "0";
@@ -6773,7 +6773,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-2056.09, 23789.4, 1192), (0, 254, 0), "cspf_27_auto11138557208874558266", "cspf_27_auto436594530413550322", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6781,7 +6781,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-1856.09, 23733.4, 1192), (0, 254, 0), "cspf_27_auto436594530413550322", "cspf_27_auto2755958607702934531", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6790,7 +6790,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "5";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -6805,7 +6805,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -6846,7 +6846,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -6864,7 +6864,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "20";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -6887,7 +6887,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -6916,7 +6916,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-3178.75, 21427.7, 1024), (0, 104, 0), "cspf_27_auto5209377188001164405", "cspf_27_auto11131738687143690680", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6924,7 +6924,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-3041.48, 21877.7, 1024), (0, 104, 0), "cspf_27_auto8534124652539026501", "cspf_27_auto5209377188001164405", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6956,7 +6956,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-5279.54, 22349.4, 1001), (0, 119, 0), "cspf_27_auto18253250380659988636", "cspf_27_auto12001755184760412188", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -6964,7 +6964,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "30";
-  s.var_acaed5eee748b3f = "25";
+  s.min_wait_time = "25";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -6985,7 +6985,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "20";
-  s.var_acaed5eee748b3f = "15";
+  s.min_wait_time = "15";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-3787.21, 22535.7, 1024), (0, 104, 0), "cspf_27_auto279991301123636438", "cspf_27_auto10223258715411403987", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7001,7 +7001,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-3290.48, 22429.7, 1024), (0, 104, 0), "cspf_27_auto4040207907477759541", "cspf_27_auto10565226819172275369", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7010,7 +7010,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "15";
-  s.var_acaed5eee748b3f = "15";
+  s.min_wait_time = "15";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7046,7 +7046,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7076,7 +7076,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2388.57, 25051.5, 1007), (0, 74, 0), "cspf_27_auto2426673975000444465", "cspf_27_auto1165662580833812316", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7094,7 +7094,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "7";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7112,7 +7112,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "28";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7132,7 +7132,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-2328.89, 25442.9, 1129.05), (0, 74, 0), "cspf_27_auto5023591922431953524", "cspf_27_auto17498796740309889446", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7143,7 +7143,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-5484.74, 22601, 1420), (0, 284, 0), "cspf_27_auto1471741855687536409", "cspf_27_auto10925551681800427091", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7152,7 +7152,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7197,7 +7197,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -7215,7 +7215,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -7353,7 +7353,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2580.57, 24899.5, 1007), (0, 74, 0), "cspf_27_auto15146121402837187106", "cspf_27_auto2946710922697460344", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7372,7 +7372,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "3";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7476,7 +7476,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "0";
@@ -7485,7 +7485,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -7543,7 +7543,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -7553,7 +7553,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-2103.73, 25276.7, 1012.5), (0, 74, 0), "cspf_27_auto18090556485051158575", "cspf_27_auto940678854775661023", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7561,7 +7561,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-4991.78, 22360.3, 1001), (0, 119, 0), "cspf_27_auto17763948116856187515", "cspf_27_auto15663917716678937573", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7569,7 +7569,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -7580,7 +7580,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7598,7 +7598,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (978.18, 24867, 1007.5), (0, 74, 0), "cspf_27_auto17559672403276430878", "cspf_27_auto17942586650998113774", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7606,7 +7606,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (902.18, 24608.5, 1112.5), (0, 74, 0), "cspf_27_auto17942586650998113774", "cspf_27_auto2568496809104612832", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7614,7 +7614,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "0.85";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7674,7 +7674,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7684,7 +7684,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7702,7 +7702,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "10";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7729,7 +7729,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7797,7 +7797,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-4929.96, 22569.8, 1001), (0, 119, 0), "cspf_27_auto15663917716678937573", "cspf_27_auto2024595556565406004", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7838,7 +7838,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "8";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -7848,7 +7848,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2556.88, 22699.6, 996), (0, 74, 0), "cspf_27_auto3636265920912080963", "cspf_27_auto16835238452553888831", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7857,7 +7857,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7867,7 +7867,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7876,7 +7876,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (-1601.03, 24564.9, 1192), (0, 254, 0), "cspf_27_auto885873668172491873", "cspf_27_auto17933349213426986756", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7884,7 +7884,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -7894,7 +7894,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (558.74, 24709.5, 1128), (0, 44, 0), "cspf_27_auto2568496809104612832", undefined, "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7903,7 +7903,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7913,7 +7913,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7922,7 +7922,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "8";
+  s.min_wait_time = "8";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1671.3, 22962.8, 1007), (0, 344, 0), "cspf_27_auto9069185513986714327", "cspf_27_auto6918300616729186991", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7930,7 +7930,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1591.6, 22822.1, 1007), (0, 344, 0), "cspf_27_auto11386978747685910381", "cspf_27_auto9069185513986714327", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7939,7 +7939,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "8";
+  s.min_wait_time = "8";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7948,7 +7948,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2564.61, 22882.5, 1008), (0, 74, 0), "cspf_27_auto9975014575600447483", "cspf_27_auto16830169599153190732", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7956,7 +7956,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "15";
-  s.var_acaed5eee748b3f = "10";
+  s.min_wait_time = "10";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (2438.81, 22469.2, 1008), (0, 74, 0), "cspf_27_auto16830169599153190732", "cspf_27_auto3636265920912080963", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7964,7 +7964,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "30";
-  s.var_acaed5eee748b3f = "20";
+  s.min_wait_time = "20";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1457.81, 22840.2, 1007), (0, 74, 0), "cspf_27_auto9285712107176466913", "cspf_27_auto11386978747685910381", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7973,7 +7973,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -7982,7 +7982,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1292.2, 22922.3, 1007), (0, 74, 0), "cspf_27_auto15111011319037870557", "cspf_27_auto16066876104964997701", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -7990,7 +7990,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "30";
-  s.var_acaed5eee748b3f = "20";
+  s.min_wait_time = "20";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1382.88, 22843.6, 1007), (0, 74, 0), "cspf_27_auto3376665321749533646", "cspf_27_auto15111011319037870557", "ai_encounter_patrol_point", undefined, "cspf_27_3", (0, 0, 0), (0, 0, 0));
@@ -7998,7 +7998,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (1352.81, 22683.2, 1007), (0, 74, 0), "cspf_27_auto2351891323195050872", "cspf_27_auto3376665321749533646", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -8007,7 +8007,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -8016,7 +8016,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "15";
-  s.var_acaed5eee748b3f = "10";
+  s.min_wait_time = "10";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (625.79, 23482.2, 1316), (0, 74, 0), "cspf_27_auto11315197513366410887", "cspf_27_auto11462192724876932417", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -8025,7 +8025,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "10";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.spawn_filter = "none";
   s.start_point = "1";
@@ -8034,7 +8034,7 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "15";
-  s.var_acaed5eee748b3f = "10";
+  s.min_wait_time = "10";
   s.move_speed = "1";
   s.spawn_filter = "none";
   fe[[f]](s, us, cf, (807.55, 23375.9, 1316), (0, 74, 0), "cspf_27_auto11462192724876932417", "cspf_27_auto17630140919698292094", "ai_encounter_patrol_point", undefined, undefined, (0, 0, 0), (0, 0, 0));
@@ -8153,7 +8153,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.script_parameters = "red";
-  s.var_1e33f32152f60866 = "veh_jup_suv_1996";
+  s.script_vehicleref = "veh_jup_suv_1996";
   fe[[f]](s, us, cf, (5514.3, 26910.1, 1040.99), (0, 74.32, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -8328,12 +8328,12 @@ function createstructs(fe, us, cf) {
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
   s.script_parameters = "olive";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (-1082.31, 21651.2, 1030.41), (0, 131.16, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.script_parameters = "tan";
-  s.var_1e33f32152f60866 = "veh_jup_pickup_2014";
+  s.script_vehicleref = "veh_jup_pickup_2014";
   fe[[f]](s, us, cf, (-8295.75, 31007.5, 1231.5), (0, 164.34, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -9724,7 +9724,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_atv";
+  s.script_vehicleref = "veh_jup_atv";
   fe[[f]](s, us, cf, (-2830.31, 29254.1, 1027.98), (0, 296.98, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
@@ -10111,17 +10111,17 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.script_parameters = "black";
-  s.var_1e33f32152f60866 = "veh_jup_suv_1996";
+  s.script_vehicleref = "veh_jup_suv_1996";
   fe[[f]](s, us, cf, (-8629.13, 24604.2, 1056.49), (0, 0.21, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.script_parameters = "blue";
-  s.var_1e33f32152f60866 = "veh_jup_suv_1996";
+  s.script_vehicleref = "veh_jup_suv_1996";
   fe[[f]](s, us, cf, (-6464.88, 21672.2, 1041.49), (0, 345.41, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";
   s.script_parameters = "black";
-  s.var_1e33f32152f60866 = "veh_jup_pickup_2014";
+  s.script_vehicleref = "veh_jup_pickup_2014";
   fe[[f]](s, us, cf, (1100, 29370.5, 1052.5), (0, 256.38, 0), "player_vehicles");
   s = s();
   s.cs_flag = "cp_jup_chemical_create_script";

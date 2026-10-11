@@ -361,10 +361,10 @@ function questcircle_run_vo_hint_when_close(player) {
 }
 
 function function_1faae1bb72f526fb(scriptable, event) {
-  var_91839babd32261f4 = scriptable function_bea6c5f32629f766();
+  scriptable_name = scriptable function_bea6c5f32629f766();
   returnstr = "";
 
-  switch (var_91839babd32261f4) {
+  switch (scriptable_name) {
     case #"hash_7461b582f15d5954":
       if(event == "near") {
         returnstr = "robj_player_close_to_indoor_objective";
@@ -683,22 +683,22 @@ function function_6268e5fd6df4c426(struct) {
   var_ecc05c023267c301 = getentitylessscriptablearray(heli_flare_circle_start.target, "targetname")[0];
   var_ecc05c023267c301 setscriptablepartstate("light_part", "on", 0);
   scriptable = var_ecc05c023267c301;
-  var_96ddc4ea6dc265d4 = getentitylessscriptablearray("scriptable_secure_lighting_helicopter_light_on_01", "classname");
-  var_96ddc4ea6dc265d4 = array_remove(var_96ddc4ea6dc265d4, scriptable);
-  waittime = (level.bombtimer - 5) / var_96ddc4ea6dc265d4.size / 2;
+  scriptable_array = getentitylessscriptablearray("scriptable_secure_lighting_helicopter_light_on_01", "classname");
+  scriptable_array = array_remove(scriptable_array, scriptable);
+  waittime = (level.bombtimer - 5) / scriptable_array.size / 2;
 
   while(true) {
     scriptable setscriptablepartstate("light_part", "on", 0);
     thread function_12f94ddad72e1143(scriptable);
     wait waittime;
-    var_96ddc4ea6dc265d4 = array_remove(var_96ddc4ea6dc265d4, scriptable);
-    scriptable = getclosest(scriptable.origin, var_96ddc4ea6dc265d4, 64);
+    scriptable_array = array_remove(scriptable_array, scriptable);
+    scriptable = getclosest(scriptable.origin, scriptable_array, 64);
 
     if(!isDefined(scriptable)) {
       break;
     }
 
-    if(var_96ddc4ea6dc265d4.size == 0) {
+    if(scriptable_array.size == 0) {
       break;
     }
   }
@@ -990,8 +990,8 @@ function setupobjective(trigger, skipobjid, var_5ddbc1faed2c56e6) {
   model = getEnt(bombzone.trigger.target, "targetname");
   trigger = getEnt(model.target, "targetname");
   bombzone.var_cea6fac6a8f24927 = getStruct(trigger.target, "targetname");
-  var_91839babd32261f4 = model function_bea6c5f32629f766();
-  scriptable = spawnscriptable(var_91839babd32261f4, model.origin, model.angles);
+  scriptable_name = model function_bea6c5f32629f766();
+  scriptable = spawnscriptable(scriptable_name, model.origin, model.angles);
   function_a9a2bef3ba198a85(scriptable);
   scriptable setscriptablepartstate("dmz_uav_tower", "unusable");
   model delete();
@@ -999,7 +999,7 @@ function setupobjective(trigger, skipobjid, var_5ddbc1faed2c56e6) {
   bombzone.noweapondropallowedtrigger = spawn("trigger_radius", bombzone.curorigin, 0, 140, 100);
   bombzone.audioent = spawn("script_origin", bombzone.scriptable function_c3393659916e4f86());
 
-  if(var_91839babd32261f4 == "mp_secure_electrical_panel_objective_01") {
+  if(scriptable_name == "mp_secure_electrical_panel_objective_01") {
     bombzone.trigger setHintString(&"JUP_MP/SECURE_USE");
   } else {
     bombzone.trigger setHintString(&"JUP_MP/SECURE_INTERACT");
@@ -1680,7 +1680,7 @@ function typinganimstart(player) {
   player.linktoent rotateTo(goalangles, movetotime, 0.1, 0.1);
   player setstance("crouch");
   var_cd9982adb17761a8 = gettime();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = max(0, movetotime - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000);
   wait var_218f64cb035d54be;

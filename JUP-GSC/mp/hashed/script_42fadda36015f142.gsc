@@ -154,14 +154,14 @@ function function_b147c6e7b40b5c0c() {
         flag_set(self.script_flag_set);
       }
 
-      var_458b50e445194527 = function_18d8da04fcbae777();
+      players_to_teleport = function_18d8da04fcbae777();
 
-      for(i = 0; i < var_458b50e445194527.size; i++) {
-        var_458b50e445194527[i] function_20b01242856aa97c();
-        level function_c4ab3b08781de0ed(var_458b50e445194527[i], undefined, self.var_db24c681e6d4e208[i], 1, undefined, undefined, 1);
+      for(i = 0; i < players_to_teleport.size; i++) {
+        players_to_teleport[i] function_20b01242856aa97c();
+        level function_c4ab3b08781de0ed(players_to_teleport[i], undefined, self.var_db24c681e6d4e208[i], 1, undefined, undefined, 1);
 
-        if(scripts\mp\utility\player::isinlaststand(var_458b50e445194527[i])) {
-          var_458b50e445194527[i] thread namespace_f585f5e438cbdbc8::revive_player();
+        if(scripts\mp\utility\player::isinlaststand(players_to_teleport[i])) {
+          players_to_teleport[i] thread namespace_f585f5e438cbdbc8::revive_player();
         }
       }
 
@@ -216,13 +216,13 @@ function function_778ff9a25743d1c1(structspawn) {
       flag_set(self.script_flag_set);
     }
 
-    var_458b50e445194527 = function_18d8da04fcbae777();
+    players_to_teleport = function_18d8da04fcbae777();
 
-    for(i = 0; i < var_458b50e445194527.size; i++) {
-      level function_c4ab3b08781de0ed(var_458b50e445194527[i], undefined, self.var_db24c681e6d4e208[i], 1);
+    for(i = 0; i < players_to_teleport.size; i++) {
+      level function_c4ab3b08781de0ed(players_to_teleport[i], undefined, self.var_db24c681e6d4e208[i], 1);
 
-      if(scripts\mp\utility\player::isinlaststand(var_458b50e445194527[i])) {
-        var_458b50e445194527[i] thread namespace_f585f5e438cbdbc8::revive_player();
+      if(scripts\mp\utility\player::isinlaststand(players_to_teleport[i])) {
+        players_to_teleport[i] thread namespace_f585f5e438cbdbc8::revive_player();
       }
     }
   }
@@ -533,34 +533,34 @@ function private function_c39cc8ea8a52f609(wait_time, fade_in_time) {
   wait_time = default_to(wait_time, 1);
   fade_in_time = default_to(fade_in_time, 0.6);
 
-  if(!isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4 = newclienthudelem(self);
-    self.var_ad173ac833a970d4.x = 0;
-    self.var_ad173ac833a970d4.y = 0;
-    self.var_ad173ac833a970d4 setshader("white", 640, 480);
-    self.var_ad173ac833a970d4.alignx = "left";
-    self.var_ad173ac833a970d4.aligny = "top";
-    self.var_ad173ac833a970d4.sort = 1;
-    self.var_ad173ac833a970d4.horzalign = "fullscreen";
-    self.var_ad173ac833a970d4.vertalign = "fullscreen";
-    self.var_ad173ac833a970d4.alpha = 0;
-    self.var_ad173ac833a970d4.foreground = 1;
-    self.var_ad173ac833a970d4.archived = 0;
-    self.var_ad173ac833a970d4.scramblerdisabled = 1;
+  if(!isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay = newclienthudelem(self);
+    self.white_screen_overlay.x = 0;
+    self.white_screen_overlay.y = 0;
+    self.white_screen_overlay setshader("white", 640, 480);
+    self.white_screen_overlay.alignx = "left";
+    self.white_screen_overlay.aligny = "top";
+    self.white_screen_overlay.sort = 1;
+    self.white_screen_overlay.horzalign = "fullscreen";
+    self.white_screen_overlay.vertalign = "fullscreen";
+    self.white_screen_overlay.alpha = 0;
+    self.white_screen_overlay.foreground = 1;
+    self.white_screen_overlay.archived = 0;
+    self.white_screen_overlay.scramblerdisabled = 1;
   }
 
   var_52bee65a8171b558 = fade_in_time;
   n_target_alpha = 1;
-  self.var_ad173ac833a970d4 fadeovertime(var_52bee65a8171b558);
-  self.var_ad173ac833a970d4.alpha = n_target_alpha;
+  self.white_screen_overlay fadeovertime(var_52bee65a8171b558);
+  self.white_screen_overlay.alpha = n_target_alpha;
   wait wait_time;
   var_52bee65a8171b558 = 0.5;
-  self.var_ad173ac833a970d4 fadeovertime(var_52bee65a8171b558);
-  self.var_ad173ac833a970d4.alpha = 0;
+  self.white_screen_overlay fadeovertime(var_52bee65a8171b558);
+  self.white_screen_overlay.alpha = 0;
   wait var_52bee65a8171b558;
 
-  if(isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4 destroy();
+  if(isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay destroy();
   }
 }
 

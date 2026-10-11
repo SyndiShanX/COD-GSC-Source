@@ -24,12 +24,12 @@ function main() {
 
   if(applyheadlook && (isDefined(self.animsetname) || isDefined(self.animationarchetype))) {
     if(isDefined(self.codescripted["pitch_min"])) {
-      var_ae4bd9db62367d96 = asm_getheadlookknobifexists();
+      headlook_graft_node = asm_getheadlookknobifexists();
 
-      if(isDefined(var_ae4bd9db62367d96)) {
+      if(isDefined(headlook_graft_node)) {
         self.lookatatrnode = self.codescripted["lookat_atr_node"];
         self setanimlookatranges(self.codescripted["pitch_min"], self.codescripted["pitch_max"], self.codescripted["yaw_min"], self.codescripted["yaw_max"]);
-        self setanim(var_ae4bd9db62367d96, 1, 0.2, 1, self.lookatatrnode);
+        self setanim(headlook_graft_node, 1, 0.2, 1, self.lookatatrnode);
       }
     }
   }

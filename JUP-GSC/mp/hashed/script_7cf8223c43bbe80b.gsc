@@ -134,8 +134,8 @@ function function_f642dae0d375aef() {
 
         inrange = 1;
 
-        foreach(var_cadd946c5c39fbf7 in node.allnodes) {
-          dist = distance2dsquared(possiblenode.origin, var_cadd946c5c39fbf7.origin);
+        foreach(chosennode in node.allnodes) {
+          dist = distance2dsquared(possiblenode.origin, chosennode.origin);
 
           if(dist < level.var_6d6a6fcd9e67bc58.var_60a7f94f444a39bb || dist > level.var_6d6a6fcd9e67bc58.var_60c5fe5ca7547989) {
             inrange = 0;
@@ -153,8 +153,8 @@ function function_f642dae0d375aef() {
     if(node.allnodes.size == level.var_6d6a6fcd9e67bc58.numcaches) {
       nodegroups[nodegroups.size] = node;
 
-      foreach(var_cadd946c5c39fbf7 in node.allnodes) {
-        var_cadd946c5c39fbf7.picked = 1;
+      foreach(chosennode in node.allnodes) {
+        chosennode.picked = 1;
       }
     }
   }

@@ -12,7 +12,7 @@
 function function_5451dca3c782adc7(asmname, statename, params) {
   if(!isDefined(params)) {
     if(isDefined(self.var_2b7fd37b90be5d3)) {
-      result = scripts\asm\cap::function_18e6c36c02a94dbd(statename, self.var_2b7fd37b90be5d3);
+      result = scripts\asm\cap::cap_lookupanimfromalias(statename, self.var_2b7fd37b90be5d3);
 
       if(isDefined(result)) {
         self.var_2b7fd37b90be5d3 = undefined;
@@ -20,10 +20,10 @@ function function_5451dca3c782adc7(asmname, statename, params) {
       }
     }
 
-    randomalias = scripts\asm\cap::function_976d6ccb0a2807f3(statename);
+    randomalias = scripts\asm\cap::cap_lookuprandomalias(statename);
 
     if(isDefined(randomalias)) {
-      return scripts\asm\cap::function_18e6c36c02a94dbd(statename, randomalias);
+      return scripts\asm\cap::cap_lookupanimfromalias(statename, randomalias);
     }
   }
 
@@ -31,7 +31,7 @@ function function_5451dca3c782adc7(asmname, statename, params) {
 
   if(isDefined(self.var_2b7fd37b90be5d3)) {
     alias = self.var_2b7fd37b90be5d3 + "_" + params;
-    result = scripts\asm\cap::function_18e6c36c02a94dbd(statename, alias);
+    result = scripts\asm\cap::cap_lookupanimfromalias(statename, alias);
 
     if(isDefined(result)) {
       if(params == "end") {
@@ -45,10 +45,10 @@ function function_5451dca3c782adc7(asmname, statename, params) {
   prefixstr = scripts\asm\asm_bb::bb_getprefixstring(params);
 
   if(isDefined(prefixstr)) {
-    randomalias = scripts\asm\cap::function_976d6ccb0a2807f3(statename, prefixstr);
-    result = scripts\asm\cap::function_18e6c36c02a94dbd(statename, randomalias);
+    randomalias = scripts\asm\cap::cap_lookuprandomalias(statename, prefixstr);
+    result = scripts\asm\cap::cap_lookupanimfromalias(statename, randomalias);
   } else {
-    result = scripts\asm\cap::function_18e6c36c02a94dbd(statename, params);
+    result = scripts\asm\cap::cap_lookupanimfromalias(statename, params);
   }
 
   return result;

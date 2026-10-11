@@ -100,7 +100,7 @@ function function_4dfe4cb7805442c3() {
 
   function_ee7c0ccde65de2ec(%"hash_3c269008aceca445");
   level.intro_lights = intro_lights;
-  level.unique_lights["intro_sh010_09"] function_f5600319797ffa1e(level.unique_lights["intro_sh010_09"].og_intensity);
+  level.unique_lights["intro_sh010_09"] set_light_intensity(level.unique_lights["intro_sh010_09"].og_intensity);
   wait 2.5;
   level.unique_lights["intro_sh010_02"] thread function_70a9f70afd49dead(0, level.unique_lights["intro_sh010_02"].og_intensity, 0.4);
   wait 0.9;
@@ -125,12 +125,12 @@ function function_4b65276da49e2658() {
     light setlightintensity(0);
   }
 
-  level.unique_lights["intro_sh010_02"] function_f5600319797ffa1e(0);
-  level.unique_lights["intro_sh010_04"] function_f5600319797ffa1e(0);
-  level.unique_lights["intro_sh010_06"] function_f5600319797ffa1e(0);
-  level.unique_lights["intro_sh010_03"] function_f5600319797ffa1e(0);
-  level.unique_lights["intro_sh010_08"] function_f5600319797ffa1e(0);
-  level.unique_lights["intro_sh010_09"] function_f5600319797ffa1e(0);
+  level.unique_lights["intro_sh010_02"] set_light_intensity(0);
+  level.unique_lights["intro_sh010_04"] set_light_intensity(0);
+  level.unique_lights["intro_sh010_06"] set_light_intensity(0);
+  level.unique_lights["intro_sh010_03"] set_light_intensity(0);
+  level.unique_lights["intro_sh010_08"] set_light_intensity(0);
+  level.unique_lights["intro_sh010_09"] set_light_intensity(0);
   function_90fb4916aa7fd9f3(%"hash_3c269008aceca445");
 }
 
@@ -292,7 +292,7 @@ function function_d2f026db9170974b(light_list, scene_shot) {
   }
 }
 
-function function_f5600319797ffa1e(intensity) {
+function set_light_intensity(intensity) {
   if(isDefined(self) && is_light()) {
     self setlightintensity(intensity);
   }
@@ -401,7 +401,7 @@ function function_5b76132c6404f4b6() {
 }
 
 function function_48279e8861f39927() {
-  level.unique_lights["sh030_lightswitch_01"] function_f5600319797ffa1e(0);
+  level.unique_lights["sh030_lightswitch_01"] set_light_intensity(0);
   wait 3.8;
   level.unique_lights["sh030_lightswitch_01"] thread function_70a9f70afd49dead(0, level.unique_lights["sh030_lightswitch_01"].og_intensity, 0.5);
   visionsetnaked("sp_jup_silo_IGC_outro", 1);
@@ -431,16 +431,16 @@ function function_54fcf0081bccd7d4() {
 }
 
 function function_7c2e8c3dbe095561() {
-  level.unique_lights["sh050_lightswitch_01"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_001"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_04"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_06"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_07"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_08"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_09"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_10"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_11"] function_f5600319797ffa1e(0);
-  level.unique_lights["sh050_lightswitch_12"] function_f5600319797ffa1e(0);
+  level.unique_lights["sh050_lightswitch_01"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_001"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_04"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_06"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_07"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_08"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_09"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_10"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_11"] set_light_intensity(0);
+  level.unique_lights["sh050_lightswitch_12"] set_light_intensity(0);
   wait 3.15;
   level.unique_lights["sh050_lightswitch_01"] thread function_70a9f70afd49dead(0, level.unique_lights["sh050_lightswitch_01"].og_intensity, 1.75);
   level.unique_lights["sh050_lightswitch_001"] thread function_70a9f70afd49dead(0, level.unique_lights["sh050_lightswitch_001"].og_intensity, 1.75);

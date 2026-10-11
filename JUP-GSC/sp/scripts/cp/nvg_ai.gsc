@@ -71,7 +71,7 @@ function flashlight_off(bsafe) {
 
   self.flashlight = 0;
 
-  if(isDefined(self.var_b5ce31099294cf74)) {
+  if(isDefined(self.flashlight_slot)) {
     self laserforceoff();
     return;
   }
@@ -130,7 +130,7 @@ function flashlight_laser_off() {
 }
 
 function function_d73f1b97acba6597() {
-  if(isDefined(self.var_b5ce31099294cf74)) {
+  if(isDefined(self.flashlight_slot)) {
     self laserforceon();
     return 1;
   }
@@ -142,7 +142,7 @@ function function_d73f1b97acba6597() {
   foreach(attachment_name in attachments_names) {
     if(currweapon canuseattachment(attachment_name)) {
       newweapon = currweapon withattachment(attachment_name);
-      self.var_e0675e48962c6d55 = attachment_name;
+      self.flashlight_attachment = attachment_name;
       break;
     }
   }
@@ -161,7 +161,7 @@ function function_d73f1b97acba6597() {
     self.lastweapon = newweapon;
   }
 
-  self.var_b5ce31099294cf74 = slot;
+  self.flashlight_slot = slot;
   scripts\anim\shared::detachweapon(currweapon);
   scripts\anim\shared::forceuseweapon(newweapon, slot);
   self laserforceon();
@@ -412,7 +412,7 @@ function function_c3d4be9fc432cbcd() {
 
   kill_flashlight_fx();
 
-  if(isDefined(self.var_b5ce31099294cf74)) {
+  if(isDefined(self.flashlight_slot)) {
     enable_flashlight(1);
   }
 

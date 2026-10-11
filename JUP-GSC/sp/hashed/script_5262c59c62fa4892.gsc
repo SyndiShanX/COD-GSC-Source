@@ -6,26 +6,26 @@
 #using scripts\asm\asm;
 #namespace cap_ai_revival;
 
-function function_a09401c58c128dc7(asmname, statename, params) {
-  var_47a4a726ad89e165 = absangleclamp180(self.revivetargetangles[1] - self.angles[1]);
+function needtoturninplace(asmname, statename, params) {
+  angletodyingguy = absangleclamp180(self.revivetargetangles[1] - self.angles[1]);
   turnthresh = 45;
 
-  if(var_47a4a726ad89e165 > turnthresh) {
+  if(angletodyingguy > turnthresh) {
     return true;
   }
 
   return false;
 }
 
-function function_85c5a3c3c6f345c4(asmname, statename, params) {
-  var_47a4a726ad89e165 = angleclamp180(self.revivetargetangles[1] - self.angles[1]);
-  animindex = scripts\asm\asm::yawdiffto2468(var_47a4a726ad89e165);
+function capchooseturnanim(asmname, statename, params) {
+  angletodyingguy = angleclamp180(self.revivetargetangles[1] - self.angles[1]);
+  animindex = scripts\asm\asm::yawdiffto2468(angletodyingguy);
   turnanim = scripts\asm\asm::asm_lookupanimfromalias(statename, animindex);
   return turnanim;
 }
 
 function function_17d1a1ec59138f9a(asmname, statename, params) {
-  dyingguy = function_fa0aae45ce9c1727();
+  dyingguy = getdyingguy();
   self.var_3b3c2e088b48d1e2 = 6;
   self.damagedirsuffix = "_back";
 
@@ -66,12 +66,12 @@ function function_9b9513aae33ced31(asmname, statename, params) {
   return scripts\asm\asm::asm_lookupanimfromalias(statename, self.var_3b3c2e088b48d1e2 + self.damagedirsuffix);
 }
 
-function function_abc0c090a4a71a80(note, params) {
+function stimnotehandler(note, params) {
   scriptablepart = "revival_helper_stim";
 
   if(self isscriptable() && self getscriptablehaspart(scriptablepart)) {
     statename = self asmgetcurrentstate(self.asmname);
-    function_41d5881b0952a9d5(note, statename);
+    notehandler_stim(note, statename);
   }
 }
 
@@ -80,8 +80,8 @@ function function_c723942576c01fdc(asmname, statename, params) {
 
   if(isDefined(self.revivetarget)) {
     totarget = self.revivetarget.origin - self.origin;
-    var_47a4a726ad89e165 = angleclamp180(vectortoyaw(totarget) - self.angles[1]);
-    self.var_3b3c2e088b48d1e2 = scripts\asm\asm::yawdiffto2468(var_47a4a726ad89e165);
+    angletodyingguy = angleclamp180(vectortoyaw(totarget) - self.angles[1]);
+    self.var_3b3c2e088b48d1e2 = scripts\asm\asm::yawdiffto2468(angletodyingguy);
   }
 
   stance = "";
@@ -99,7 +99,7 @@ function function_8a538717dfbbb166(asmname, statename, params) {
   return scripts\asm\asm::asm_lookupanimfromalias(statename, self.var_3b3c2e088b48d1e2 + self.damagedirsuffix);
 }
 
-function function_27bee089d16bc7c2(note, params) {
+function remoterevivenotehandler(note, params) {
   switch (note) {
     case #"hash_2c1d80fc22d55f17":
       self shoot(100, self.revivetarget);
@@ -127,7 +127,7 @@ function getdamagedirectionsuffix() {
     return forcedsuffix;
   }
 
-  if(self.var_10ec904bc7121440) {
+  if(self.longdeathanims_shootenabled) {
     return "";
   }
 
@@ -148,7 +148,7 @@ function getdamagedirectionsuffix() {
   return "_l";
 }
 
-function private function_41d5881b0952a9d5(note, statename) {
+function private notehandler_stim(note, statename) {
   self endon("death");
   self endon(statename + "_finished");
   scriptablepart = "revival_helper_stim";
@@ -180,14 +180,14 @@ function private isrighthand(note) {
 }
 
 function private function_bc9015ad281a7a18() {
-  id = self function_92435c7a6ae85c3c();
-  users = function_fce201c1f66b31b6(id, "reviving_guy");
+  id = self getinteractionid();
+  users = getbsequserswithtag(id, "reviving_guy");
   return users[0];
 }
 
-function private function_fa0aae45ce9c1727() {
-  id = self function_92435c7a6ae85c3c();
-  users = function_fce201c1f66b31b6(id, "dying_guy");
+function private getdyingguy() {
+  id = self getinteractionid();
+  users = getbsequserswithtag(id, "dying_guy");
   return users[0];
 }
 

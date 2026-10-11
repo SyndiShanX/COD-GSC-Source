@@ -28,7 +28,7 @@ function setup_bot_gun() {
 
 function bot_gun_pick_personality_from_weapon(weaponname, preferred_personality) {
   if(isDefined(weaponname) && weaponname != "none") {
-    var_6f94db6d48b3fd6d = scripts\cp_mp\weapon::function_309bcc0c19de2d18(weaponname);
+    var_6f94db6d48b3fd6d = scripts\cp_mp\weapon::getweaponbotpersonalities(weaponname);
 
     if(isDefined(var_6f94db6d48b3fd6d) && var_6f94db6d48b3fd6d.size > 0) {
       choice = undefined;

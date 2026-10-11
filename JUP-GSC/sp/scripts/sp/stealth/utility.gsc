@@ -129,7 +129,7 @@ function add_announce_debounce(snd, delaytime) {
 
 function play_stealth_vo(snd, var_63eab21a30b0ace, eventstruct) {
   result = 0;
-  var_2fbd15f53beeba71 = undefined;
+  radiotransmitto = undefined;
 
   if(!isDefined(self.stealth.voiceid)) {
     return 0;
@@ -185,7 +185,7 @@ function play_stealth_vo(snd, var_63eab21a30b0ace, eventstruct) {
         snd = "_reinforcements_" + randomintrange(1, 7);
 
         if(isDefined(eventstruct) && isDefined(eventstruct.entity) && isai(eventstruct.entity) && isalive(eventstruct.entity) && distance2d(self.origin, eventstruct.entity.origin) >= 350) {
-          var_2fbd15f53beeba71 = eventstruct.entity;
+          radiotransmitto = eventstruct.entity;
         }
       } else {
         snd = "_reinforcements";
@@ -212,7 +212,7 @@ function play_stealth_vo(snd, var_63eab21a30b0ace, eventstruct) {
       if(isDefined(level.stealth.candidatesvoice) && level.stealth.candidatesvoice.size > 1) {
         foreach(guy in level.stealth.candidatesvoice) {
           if(isalive(guy) && distance(self.origin, guy.origin) > 550) {
-            var_2fbd15f53beeba71 = guy;
+            radiotransmitto = guy;
             break;
           }
         }
@@ -263,7 +263,7 @@ function play_stealth_vo(snd, var_63eab21a30b0ace, eventstruct) {
       if(isDefined(level.stealth.candidatesvoice) && level.stealth.candidatesvoice.size > 1) {
         foreach(guy in level.stealth.candidatesvoice) {
           if(isalive(guy) && distance(self.origin, guy.origin) > 550) {
-            var_2fbd15f53beeba71 = guy;
+            radiotransmitto = guy;
             break;
           }
         }
@@ -281,7 +281,7 @@ function play_stealth_vo(snd, var_63eab21a30b0ace, eventstruct) {
     case #"hash_5567fda2832cbf6e":
       if(isDefined(eventstruct) && isDefined(eventstruct.typeorig) && eventstruct.typeorig == "unresponsive_teammate" && isDefined(eventstruct.origin)) {
         snd = "_searchreport_" + randomintrange(1, 7);
-        var_2fbd15f53beeba71 = eventstruct.origin;
+        radiotransmitto = eventstruct.origin;
       } else {
         snd = "_searchreport";
       }
@@ -293,7 +293,7 @@ function play_stealth_vo(snd, var_63eab21a30b0ace, eventstruct) {
   }
 
   alias = prefix + self.stealth.voiceid + snd;
-  result = play_stealth_vo_alias(alias, var_2fbd15f53beeba71);
+  result = play_stealth_vo_alias(alias, radiotransmitto);
   return result;
 }
 
@@ -374,7 +374,7 @@ function try_cardinal_patrol_update(volume) {
   return alias;
 }
 
-function play_stealth_vo_alias(alias, var_2fbd15f53beeba71) {
+function play_stealth_vo_alias(alias, radiotransmitto) {
   result = 0;
   self.stealth.current_requested_snd = undefined;
 
@@ -390,11 +390,11 @@ function play_stealth_vo_alias(alias, var_2fbd15f53beeba71) {
 
       self.stealth_vo_ent playSound(alias, "stealth_vo", 1);
 
-      if(isDefined(var_2fbd15f53beeba71)) {
-        delaythread(0.3, &playradiotransmission, alias, var_2fbd15f53beeba71);
+      if(isDefined(radiotransmitto)) {
+        delaythread(0.3, &playradiotransmission, alias, radiotransmitto);
       }
 
-      if(should_try_generic_radio_confirmation(alias) && !isDefined(var_2fbd15f53beeba71)) {
+      if(should_try_generic_radio_confirmation(alias) && !isDefined(radiotransmitto)) {
         thread generic_radio_confrimation();
       }
     }

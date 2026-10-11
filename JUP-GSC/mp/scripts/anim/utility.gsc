@@ -129,7 +129,7 @@ function showlastenemysightpos(string) {
   }
 }
 
-function function_f5e6ad17591107bc(string, org, printtime, color) {
+function printdebugtextproc(string, org, printtime, color) {
   level notify("<dev string:x126>" + org);
   level endon("<dev string:x126>" + org);
 
@@ -147,9 +147,9 @@ function function_f5e6ad17591107bc(string, org, printtime, color) {
   }
 }
 
-function function_e125b2100c281c9c(string, org, printtime, color) {
+function printdebugtext(string, org, printtime, color) {
   if(getDvar(@ "anim_debug") != "<dev string:x13b>") {
-    level thread function_f5e6ad17591107bc(string, org, printtime, color);
+    level thread printdebugtextproc(string, org, printtime, color);
   }
 }
 
@@ -200,19 +200,19 @@ function debugpossize(org, string, size) {
 
 function debugburstprint(numshots, maxshots) {
   burstsize = numshots / maxshots;
-  var_67c3f18015d8d33b = undefined;
+  burstsizestr = undefined;
 
   if(numshots == self.bulletsinclip) {
-    var_67c3f18015d8d33b = "all rounds";
+    burstsizestr = "all rounds";
   } else if(burstsize < 0.25) {
-    var_67c3f18015d8d33b = "small burst";
+    burstsizestr = "small burst";
   } else if(burstsize < 0.5) {
-    var_67c3f18015d8d33b = "med burst";
+    burstsizestr = "med burst";
   } else {
-    var_67c3f18015d8d33b = "long burst";
+    burstsizestr = "long burst";
   }
 
-  thread debugpossize(self.origin + (0, 0, 42), var_67c3f18015d8d33b, 1.5);
+  thread debugpossize(self.origin + (0, 0, 42), burstsizestr, 1.5);
   thread debugpos(self.origin + (0, 0, 60), "Suppressing");
 }
 
@@ -254,11 +254,11 @@ function showdebugline(frompoint, topoint, color, printtime) {
 }
 
 function shootenemywrapper_normal(var_9bc9d0ee2a8a46f5) {
-  self._blackboard.var_60dcaa3d3be97ab = gettime();
+  self._blackboard.shootparams_lastshoottime = gettime();
   scripts\common\gameskill::set_accuracy_based_on_situation();
   self notify("shooting");
 
-  if(self function_e8ca4080d02a0bb4() && istrue(self._blackboard.shootparams_valid) && isDefined(self._blackboard.shootparams_pos)) {
+  if(self aiissniper() && istrue(self._blackboard.shootparams_valid) && isDefined(self._blackboard.shootparams_pos)) {
     if(isDefined(self.var_3568703b0bab6334) && self.var_145c08825430f207 > gettime() - 250) {
       self shoot(1, self.var_3568703b0bab6334, 1, 0, 1);
     } else {
@@ -281,7 +281,7 @@ function shootenemywrapper_shootnotify(var_9bc9d0ee2a8a46f5) {
 }
 
 function shootposwrapper(shootpos, var_9bc9d0ee2a8a46f5) {
-  self._blackboard.var_60dcaa3d3be97ab = gettime();
+  self._blackboard.shootparams_lastshoottime = gettime();
 
   if(!isDefined(var_9bc9d0ee2a8a46f5)) {
     var_9bc9d0ee2a8a46f5 = 1;
@@ -289,19 +289,19 @@ function shootposwrapper(shootpos, var_9bc9d0ee2a8a46f5) {
 
   self notify("shooting");
 
-  if(self function_e8ca4080d02a0bb4()) {
+  if(self aiissniper()) {
     self shoot(1, shootpos, 1, 1, 1);
     return;
   }
 
-  var_6da568df7fced105 = 0;
+  bignoreenemy = 0;
 
   if(isDefined(self.enemy) && istrue(self.enemy.underlowcover)) {
-    var_6da568df7fced105 = 1;
+    bignoreenemy = 1;
   }
 
   endpos = bulletspread(self getmuzzlepos(), shootpos, 4);
-  self shoot(1, endpos, var_9bc9d0ee2a8a46f5, var_6da568df7fced105);
+  self shoot(1, endpos, var_9bc9d0ee2a8a46f5, bignoreenemy);
 }
 
 function throwgun() {
@@ -649,31 +649,31 @@ function getcurrentweaponslotname() {
   return "primary";
 }
 
-function lookupanim(var_4cabf1b2b096a23a, anim_index) {
+function lookupanim(animset_name, anim_index) {
   assert(isai(self));
 
   if(isDefined(self.animarchetype)) {
     assertex(isDefined(anim.archetypes[self.animarchetype]), "<dev string:x25f>" + self.animarchetype);
 
-    if(isDefined(anim.archetypes[self.animarchetype][var_4cabf1b2b096a23a]) && isDefined(anim.archetypes[self.animarchetype][var_4cabf1b2b096a23a][anim_index])) {
-      return anim.archetypes[self.animarchetype][var_4cabf1b2b096a23a][anim_index];
+    if(isDefined(anim.archetypes[self.animarchetype][animset_name]) && isDefined(anim.archetypes[self.animarchetype][animset_name][anim_index])) {
+      return anim.archetypes[self.animarchetype][animset_name][anim_index];
     }
   }
 
-  assertex(isDefined(anim.archetypes["<dev string:x27b>"][var_4cabf1b2b096a23a][anim_index]), "<dev string:x286>" + var_4cabf1b2b096a23a + "<dev string:x2af>" + anim_index + "<dev string:x2b5>");
-  return anim.archetypes["soldier"][var_4cabf1b2b096a23a][anim_index];
+  assertex(isDefined(anim.archetypes["<dev string:x27b>"][animset_name][anim_index]), "<dev string:x286>" + animset_name + "<dev string:x2af>" + anim_index + "<dev string:x2b5>");
+  return anim.archetypes["soldier"][animset_name][anim_index];
 }
 
-function lookupanimarray(var_4cabf1b2b096a23a) {
+function lookupanimarray(animset_name) {
   assert(isai(self));
 
   if(isDefined(self.animarchetype)) {
     assertex(isDefined(anim.archetypes[self.animarchetype]), "<dev string:x25f>" + self.animarchetype);
 
-    if(isDefined(anim.archetypes[self.animarchetype][var_4cabf1b2b096a23a])) {
-      animset = anim.archetypes["soldier"][var_4cabf1b2b096a23a];
+    if(isDefined(anim.archetypes[self.animarchetype][animset_name])) {
+      animset = anim.archetypes["soldier"][animset_name];
 
-      foreach(key, value in anim.archetypes[self.animarchetype][var_4cabf1b2b096a23a]) {
+      foreach(key, value in anim.archetypes[self.animarchetype][animset_name]) {
         animset[key] = value;
       }
 
@@ -681,19 +681,19 @@ function lookupanimarray(var_4cabf1b2b096a23a) {
     }
   }
 
-  assertex(isDefined(anim.archetypes["<dev string:x27b>"][var_4cabf1b2b096a23a]), "<dev string:x2ba>" + var_4cabf1b2b096a23a + "<dev string:x2b5>");
-  return anim.archetypes["soldier"][var_4cabf1b2b096a23a];
+  assertex(isDefined(anim.archetypes["<dev string:x27b>"][animset_name]), "<dev string:x2ba>" + animset_name + "<dev string:x2b5>");
+  return anim.archetypes["soldier"][animset_name];
 }
 
 function isenergyweapon(weapon) {
   return weaponusesenergybullets(weapon);
 }
 
-function function_b5216a6d7bd17210(str_gestureweapon, var_d160dd91a3ae5bb8) {
+function function_b5216a6d7bd17210(str_gestureweapon, disallow_reload) {
   assertex(isDefined(str_gestureweapon), "<dev string:x2e9>");
-  var_d160dd91a3ae5bb8 = default_to(var_d160dd91a3ae5bb8, 0);
+  disallow_reload = default_to(disallow_reload, 0);
 
-  if(var_d160dd91a3ae5bb8) {
+  if(disallow_reload) {
     self cancelreload();
   }
 
@@ -704,7 +704,7 @@ function function_b5216a6d7bd17210(str_gestureweapon, var_d160dd91a3ae5bb8) {
     return;
   }
 
-  if(var_d160dd91a3ae5bb8) {
+  if(disallow_reload) {
     thread function_422595121745c8a1(gestureweapon);
     self allowreload(0);
     waittill_any_2("offhand_fired", "weapon_gesture_failed");

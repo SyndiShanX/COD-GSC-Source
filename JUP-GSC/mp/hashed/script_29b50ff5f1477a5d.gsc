@@ -68,8 +68,8 @@ function function_ed03dff524b1f1ec() {
   activity_instance = self;
   activity_instance endon("activity_ended");
   activity_instance endon("instance_destroyed");
-  var_45c17c8bd7095cc4 = function_4188e118731a30f4();
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_4188e118731a30f4();
+  self.variant_definition = activityvariantdefinition;
   self.s_center = getStruct(self.varianttag, "targetname");
   self.difficulty_region = namespace_4df2ab39b0e96ec7::function_4d8bb2d866771a10(self.s_center.origin);
 
@@ -130,7 +130,7 @@ function function_ed03dff524b1f1ec() {
 }
 
 function function_92e06b144888d213(var_d6bfa53c531546d6) {
-  if(function_de53ed8e35d0ed7a(self) != "REV_OB_AETHERNEST") {
+  if(getactivitytype(self) != "REV_OB_AETHERNEST") {
     return;
   }
 
@@ -341,7 +341,7 @@ function function_c2f1ea19349c995e() {
 }
 
 function function_b9c12dbbc627c840() {
-  trigger_volumes = function_f159c10d5cf8f0b4("aethernest_interior_trigger", "targetname");
+  trigger_volumes = getnoentvolumearray("aethernest_interior_trigger", "targetname");
   self.var_83116f41aad4fc96 = trigger_volumes;
   self.var_1258379e7ea78440 = [];
 
@@ -465,14 +465,14 @@ function function_af2f8c2f34b7292c() {
   thread function_bde54847b120dfb5();
   self waittill("aethernest_start");
   thread namespace_277c27ef297ef569::function_1281c7fff9456e18("activity_aethernest_damaged");
-  playsoundeventonplayers("snd_aethernest_start", self.var_6c29f2fdb0054bbe);
+  playsoundeventonplayers("snd_aethernest_start", self.playerparticipants);
   thread function_f62fd3496b0a06e8();
   self.started = 1;
   thread function_a26e39e03a0d6739();
   thread function_c769482a1e8c11d5();
   thread function_8e5f7aaa701e23f8();
   self waittill("nest_cleared");
-  playsoundeventonplayers("snd_aethernest_cleared", self.var_6c29f2fdb0054bbe);
+  playsoundeventonplayers("snd_aethernest_cleared", self.playerparticipants);
   earthquake(0.6, 1.7, self.s_center.origin, 500);
   playrumbleonposition("grenade_rumble", self.s_center.origin);
   endactivity(activity_instance, 1);
@@ -751,7 +751,7 @@ function function_e9836f11aaedad08(einflictor, eattacker, instance, idamage, idf
 
       eattacker scripts\cp_mp\damagefeedback::updatehitmarker("standard", instance.health <= 0, 0, 0, undefined);
 
-      if(!array_contains(instance.activity_instance.var_6c29f2fdb0054bbe, eattacker)) {
+      if(!array_contains(instance.activity_instance.playerparticipants, eattacker)) {
         function_bbdcd857d0c2a65e(instance.activity_instance, eattacker);
       }
     }
@@ -778,7 +778,7 @@ function function_e9836f11aaedad08(einflictor, eattacker, instance, idamage, idf
         instance.activity_instance.var_2090e50657f45b8a = 0;
       }
 
-      if(function_de53ed8e35d0ed7a(instance.activity_instance) == "REV_OB_ZOMBIE_STRONGHOLD") {
+      if(getactivitytype(instance.activity_instance) == "REV_OB_ZOMBIE_STRONGHOLD") {
         if(isPlayer(eattacker) && !istrue(eattacker.var_d45cc2b767709d2d)) {
           squad = eattacker scripts\cp_mp\utility\squad_utility::getsquadmembers();
 
@@ -905,12 +905,12 @@ function function_8e5f7aaa701e23f8() {
   function_24b55c1a13b9a63a("ai_flood_fill_encounter:ob_aethernest_flood_fill_encounter", undefined, undefined, 1);
   self waittill("first_threshold_reached");
   thread wave_logic("second_threshold_reached", "size_5", 16);
-  playsoundeventonplayers("snd_aethernest_healthchange", self.var_6c29f2fdb0054bbe);
+  playsoundeventonplayers("snd_aethernest_healthchange", self.playerparticipants);
   earthquake(0.35, 1.7, self.s_center.origin, 500);
   playrumbleonposition("grenade_rumble", self.s_center.origin);
   self waittill("second_threshold_reached");
   thread wave_logic("nest_cleared", "size_7", 20);
-  playsoundeventonplayers("snd_aethernest_healthchange", self.var_6c29f2fdb0054bbe);
+  playsoundeventonplayers("snd_aethernest_healthchange", self.playerparticipants);
   earthquake(0.47, 1.7, self.s_center.origin, 500);
   playrumbleonposition("grenade_rumble", self.s_center.origin);
 }
@@ -1087,7 +1087,7 @@ function function_f2842b850f8fed3b() {
 
 function function_43705e033b99948e(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_f9b067b93ae7bb66(var_b381b0883bcd4847) {
@@ -1105,8 +1105,8 @@ function function_5c710295d42036e9() {
   thread function_a26e39e03a0d6739();
   function_45addf4a995d163(self.var_1258379e7ea78440);
 
-  if(self.var_8b79601f5cca1fa9) {
-    namespace_40713433c91dd86c::function_c402ecda1e84ba27(self.var_6c29f2fdb0054bbe, 0, self.difficulty_region, self.s_center.origin);
+  if(self.successfullycompleted) {
+    namespace_40713433c91dd86c::function_c402ecda1e84ba27(self.playerparticipants, 0, self.difficulty_region, self.s_center.origin);
     scripts\common\powerups::powerup_drop("full_ammo", getclosestpointonnavmesh(self.s_center.origin) + (0, 0, 30));
 
     if(isDefined(self.cache)) {
@@ -1118,7 +1118,7 @@ function function_5c710295d42036e9() {
       }
     }
 
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       player thread function_b006b89a63144ac5();
     }
   }

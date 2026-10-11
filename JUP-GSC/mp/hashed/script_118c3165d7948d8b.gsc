@@ -44,8 +44,8 @@ function function_72f2b1796fa07fa6() {
   activity_instance = self;
   activity_instance endon("activity_ended");
   activity_instance endon("instance_destroyed");
-  var_45c17c8bd7095cc4 = function_b9c4aa88ad97ee68(self);
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_b9c4aa88ad97ee68(self);
+  self.variant_definition = activityvariantdefinition;
   self.despawntimer = self.variant_definition.despawntimer;
   self.var_8708fa90e69653da = self.despawntimer + 2;
   self.var_b08a5eb0bbb07ab9 = self.variant_definition.var_b08a5eb0bbb07ab9;
@@ -317,34 +317,34 @@ function function_7669f67b44245f73(wait_time, fade_in_time) {
   wait_time = default_to(wait_time, 1);
   fade_in_time = default_to(fade_in_time, 0.6);
 
-  if(!isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4 = newclienthudelem(self);
-    self.var_ad173ac833a970d4.x = 0;
-    self.var_ad173ac833a970d4.y = 0;
-    self.var_ad173ac833a970d4 setshader("white", 640, 480);
-    self.var_ad173ac833a970d4.alignx = "left";
-    self.var_ad173ac833a970d4.aligny = "top";
-    self.var_ad173ac833a970d4.sort = 1;
-    self.var_ad173ac833a970d4.horzalign = "fullscreen";
-    self.var_ad173ac833a970d4.vertalign = "fullscreen";
-    self.var_ad173ac833a970d4.alpha = 0;
-    self.var_ad173ac833a970d4.foreground = 1;
-    self.var_ad173ac833a970d4.archived = 0;
-    self.var_ad173ac833a970d4.scramblerdisabled = 1;
+  if(!isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay = newclienthudelem(self);
+    self.white_screen_overlay.x = 0;
+    self.white_screen_overlay.y = 0;
+    self.white_screen_overlay setshader("white", 640, 480);
+    self.white_screen_overlay.alignx = "left";
+    self.white_screen_overlay.aligny = "top";
+    self.white_screen_overlay.sort = 1;
+    self.white_screen_overlay.horzalign = "fullscreen";
+    self.white_screen_overlay.vertalign = "fullscreen";
+    self.white_screen_overlay.alpha = 0;
+    self.white_screen_overlay.foreground = 1;
+    self.white_screen_overlay.archived = 0;
+    self.white_screen_overlay.scramblerdisabled = 1;
   }
 
   var_52bee65a8171b558 = fade_in_time;
   n_target_alpha = 1;
-  self.var_ad173ac833a970d4 fadeovertime(var_52bee65a8171b558);
-  self.var_ad173ac833a970d4.alpha = n_target_alpha;
+  self.white_screen_overlay fadeovertime(var_52bee65a8171b558);
+  self.white_screen_overlay.alpha = n_target_alpha;
   wait wait_time;
   var_52bee65a8171b558 = 0.5;
-  self.var_ad173ac833a970d4 fadeovertime(var_52bee65a8171b558);
-  self.var_ad173ac833a970d4.alpha = 0;
+  self.white_screen_overlay fadeovertime(var_52bee65a8171b558);
+  self.white_screen_overlay.alpha = 0;
   wait var_52bee65a8171b558;
 
-  if(isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4 destroy();
+  if(isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay destroy();
   }
 }
 
@@ -490,7 +490,7 @@ function function_5236025830b9bc9e() {
         waitframe();
         move_to_point = spawn("script_model", item.origin);
         move_to_point setModel("tag_origin");
-        item utility::function_6e506f39f121ea8a(move_to_point);
+        item utility::scriptable_setparententity(move_to_point);
         activity_instance.var_8f03ddc94cda8be2 = array_add(activity_instance.var_8f03ddc94cda8be2, move_to_point);
         activity_instance thread function_c07392437df9ec0c(move_to_point, activity_instance.oscillationtime, cross_vec, item);
         break;
@@ -625,7 +625,7 @@ function function_81c481082c5b5b33() {
 
 function function_1531bbf5cff97dc0(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_5c651df8cfad0810(var_b381b0883bcd4847) {

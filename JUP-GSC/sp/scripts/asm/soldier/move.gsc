@@ -57,17 +57,17 @@ function playanim_exit(asmname, statename, params) {
 }
 
 function chooseanim_exit(asmname, statename, params) {
-  var_ee2a14cc5b990a1b = 0;
+  bsoldierversion = 0;
 
   if(isDefined(params)) {
     if(isarray(params)) {
-      var_ee2a14cc5b990a1b = istrue(params[0]);
+      bsoldierversion = istrue(params[0]);
     } else {
-      var_ee2a14cc5b990a1b = istrue(params);
+      bsoldierversion = istrue(params);
     }
   }
 
-  if(var_ee2a14cc5b990a1b) {
+  if(bsoldierversion) {
     return chooseanim_exitsoldier(asmname, statename, params);
   }
 
@@ -196,14 +196,14 @@ function determinestartanim(statename, var_8a1b6d26fbf96ea9, optionalsuffix) {
 
   if(var_8a1b6d26fbf96ea9) {
     lookaheadpos = self.origin + self.lookaheaddir * self.lookaheaddist;
-    var_5dce5380d64570b5 = lookaheadpos;
+    nearlookaheadpos = lookaheadpos;
   } else {
     lookaheadpos = self getposonpath(128);
-    var_5dce5380d64570b5 = self getposonpath(32);
+    nearlookaheadpos = self getposonpath(32);
   }
 
   lookaheadangles = vectortoangles(lookaheadpos - self.origin);
-  nearlookaheadangles = vectortoangles(var_5dce5380d64570b5 - self.origin);
+  nearlookaheadangles = vectortoangles(nearlookaheadpos - self.origin);
 
   if(nodeshouldfaceangles(exitnode) && !var_8a1b6d26fbf96ea9) {
     currentangles = exitnode.angles;
@@ -358,7 +358,7 @@ function playstartanim(asmname, statename, startanim, var_bef3b4b769e8abe4) {
     endtimefrac = var_370a8c08be55a7a5[0];
   }
 
-  var_f49f40eb39da8b4e = getangledelta3d(startxanim, 0, endtimefrac);
+  startanimangles = getangledelta3d(startxanim, 0, endtimefrac);
   self animmode("zonly_physics", 0);
   self setuseanimgoalweight(0.2);
   exitrate = self.moveplaybackrate;
@@ -387,18 +387,18 @@ function playstartanim(asmname, statename, startanim, var_bef3b4b769e8abe4) {
   if(isDefined(self.asm.customdata.ignoreexitwarp)) {} else if(cornertimes.size > 0) {
     cornertranslation = getmovedelta(startxanim, 0, cornertimes[0]);
     cornerdist = length(cornertranslation);
-    var_583b1c0039d7eba0 = self getposonpath(cornerdist);
+    cornerposonpath = self getposonpath(cornerdist);
     var_5076fb03fb7166e3 = var_9c52e37b49e97a0b;
 
     if(var_c4ec2d674bc02eb4 - cornerdist < 2) {
       var_5076fb03fb7166e3 = self getposonpath(var_c4ec2d674bc02eb4 + 6);
     }
 
-    var_f41896ed9d57f898 = var_5076fb03fb7166e3 - var_583b1c0039d7eba0;
+    var_f41896ed9d57f898 = var_5076fb03fb7166e3 - cornerposonpath;
     var_364f8dea82c92744 = vectortoyaw(var_f41896ed9d57f898);
 
     if(warpstarttimes.size > 0 && warpstarttimes[0] > 0 && warpstarttimes[0] < cornertimes[0]) {
-      animdata.posalongpath = var_583b1c0039d7eba0;
+      animdata.posalongpath = cornerposonpath;
       animdata.anglealongpath = var_364f8dea82c92744;
       animdata.endnote = "corner";
 
@@ -406,10 +406,10 @@ function playstartanim(asmname, statename, startanim, var_bef3b4b769e8abe4) {
         animdata.duration = int((var_d9a20f501851b31e[0] - warpstarttimes[0]) * getanimlength(startxanim) * 1000 / exitrate);
       }
     } else {
-      motionwarpwithnotetracks(startxanim, var_583b1c0039d7eba0, (0, var_364f8dea82c92744, 0), undefined, "corner", undefined, 0);
+      motionwarpwithnotetracks(startxanim, cornerposonpath, (0, var_364f8dea82c92744, 0), undefined, "corner", undefined, 0);
     }
   } else if(warpstarttimes.size == 0 || warpstarttimes[0] == 0) {
-    assertex(var_370a8c08be55a7a5.size > 0, "Animation requires code_move for motion warp: " + function_3c8848a3a11b2553(getanimname(startxanim)));
+    assertex(var_370a8c08be55a7a5.size > 0, "Animation requires code_move for motion warp: " + getxhashsourcename(getanimname(startxanim)));
     duration = undefined;
 
     if(warpstarttimes.size > 0 && var_d9a20f501851b31e.size > 0 && var_d9a20f501851b31e[0] < var_370a8c08be55a7a5[0]) {
@@ -543,7 +543,7 @@ function checktransitionpreconditions() {
   return true;
 }
 
-function function_b2fce9f29bd45cc3(asmname, statename, params) {
+function chooseanim_runngun(asmname, statename, params) {
   self.runngun = 1;
   assertex(isDefined(self.enemy), "No enemy?! This should be guaranteed via check in ai_asm_builtin.cpp::ShouldRunNGun");
   shootfrompos = self getshootfrompos();
@@ -555,26 +555,26 @@ function function_b2fce9f29bd45cc3(asmname, statename, params) {
     targetpos = self lastknownpos(self.enemy);
   }
 
-  var_84dba057067c3c3e = targetpos - self getposonpath(14);
-  var_51da48562495c03a = vectortoyaw(var_84dba057067c3c3e);
+  metotargetdir = targetpos - self getposonpath(14);
+  metotargetyaw = vectortoyaw(metotargetdir);
   pathyaw = vectortoyaw(self.lookaheaddir);
-  var_43810d21f771f553 = angleclamp180(var_51da48562495c03a - pathyaw);
-  var_9bed543f317c7601 = -1;
+  faceyawdelta = angleclamp180(metotargetyaw - pathyaw);
+  runningfireanim = -1;
 
-  if(var_43810d21f771f553 > 100) {
-    var_9bed543f317c7601 = asm_lookupanimfromalias(statename, "run_n_gun_hard_left");
-  } else if(var_43810d21f771f553 < -100) {
-    var_9bed543f317c7601 = asm_lookupanimfromalias(statename, "run_n_gun_hard_right");
-  } else if(var_43810d21f771f553 > 0) {
-    var_9bed543f317c7601 = asm_lookupanimfromalias(statename, "run_n_gun_soft_left");
+  if(faceyawdelta > 100) {
+    runningfireanim = asm_lookupanimfromalias(statename, "run_n_gun_hard_left");
+  } else if(faceyawdelta < -100) {
+    runningfireanim = asm_lookupanimfromalias(statename, "run_n_gun_hard_right");
+  } else if(faceyawdelta > 0) {
+    runningfireanim = asm_lookupanimfromalias(statename, "run_n_gun_soft_left");
   } else {
-    var_9bed543f317c7601 = asm_lookupanimfromalias(statename, "run_n_gun_soft_right");
+    runningfireanim = asm_lookupanimfromalias(statename, "run_n_gun_soft_right");
   }
 
   self.var_5185accfc2476d43 = 1;
   self.var_1f91d3da0786a2 = 0;
   self function_952292d70c3bd39c();
-  return var_9bed543f317c7601;
+  return runningfireanim;
 }
 
 function stoprunngun(asmname, statename, params) {
@@ -584,9 +584,9 @@ function stoprunngun(asmname, statename, params) {
 }
 
 function shouldstrafeaimchange(asmname, statename, tostatename, params) {
-  var_c7662529da3a7f64 = 1;
+  bdisableaimchange = 1;
 
-  if(var_c7662529da3a7f64) {
+  if(bdisableaimchange) {
     return false;
   }
 
@@ -628,21 +628,21 @@ function shouldstrafeaimchange(asmname, statename, tostatename, params) {
   var_8c3ab01d2f494a38 = self asmeventfiredwithin(asmname, "sharp_turn", 50);
 
   if(var_8c3ab01d2f494a38) {
-    var_185171d0a16d0416 = angleclamp180(pathyaw - self.angles[1]);
-    var_c1350e6cda2f627a = angleclamp180(vectortoyaw(self.velocity) - self.angles[1]);
+    newheadingyawdelta = angleclamp180(pathyaw - self.angles[1]);
+    headingyawdelta = angleclamp180(vectortoyaw(self.velocity) - self.angles[1]);
 
-    if(abs(angleclamp180(var_c1350e6cda2f627a - var_185171d0a16d0416)) > 45) {
+    if(abs(angleclamp180(headingyawdelta - newheadingyawdelta)) > 45) {
       return false;
     }
   } else {
-    var_c1350e6cda2f627a = angleclamp180(pathyaw - self.angles[1]);
+    headingyawdelta = angleclamp180(pathyaw - self.angles[1]);
   }
 
   shootfrompos = self getshootfrompos();
   targetposstruct = self getshootpos(shootfrompos);
 
   if(self.facemotion || self.predictedfacemotion || self shouldcautiousstrafe()) {
-    var_43810d21f771f553 = 0;
+    faceyawdelta = 0;
   } else if(isDefined(targetposstruct) || self iscurrentenemyvalid()) {
     if(isDefined(targetposstruct)) {
       targetpos = targetposstruct.shootpos;
@@ -658,14 +658,14 @@ function shouldstrafeaimchange(asmname, statename, tostatename, params) {
       return false;
     }
 
-    var_84dba057067c3c3e = targetpos - self getposonpath(32);
-    var_51da48562495c03a = vectortoyaw(var_84dba057067c3c3e);
+    metotargetdir = targetpos - self getposonpath(32);
+    metotargetyaw = vectortoyaw(metotargetdir);
 
-    if(abs(angleclamp180(var_51da48562495c03a - self.angles[1])) < 45) {
+    if(abs(angleclamp180(metotargetyaw - self.angles[1])) < 45) {
       return false;
     }
 
-    var_43810d21f771f553 = angleclamp180(pathyaw - var_51da48562495c03a);
+    faceyawdelta = angleclamp180(pathyaw - metotargetyaw);
   } else if(istrue(self._blackboard.forcestrafe)) {
     return false;
   } else {
@@ -673,15 +673,15 @@ function shouldstrafeaimchange(asmname, statename, tostatename, params) {
       return false;
     }
 
-    var_43810d21f771f553 = angleclamp180(pathyaw - self.desiredangle);
+    faceyawdelta = angleclamp180(pathyaw - self.desiredangle);
   }
 
-  if(abs(angleclamp180(var_c1350e6cda2f627a - var_43810d21f771f553)) < 45) {
+  if(abs(angleclamp180(headingyawdelta - faceyawdelta)) < 45) {
     return false;
   }
 
-  curdir = scripts\asm\asm::yawdiffto2468(var_c1350e6cda2f627a);
-  desireddir = scripts\asm\asm::yawdiffto2468(var_43810d21f771f553);
+  curdir = scripts\asm\asm::yawdiffto2468(headingyawdelta);
+  desireddir = scripts\asm\asm::yawdiffto2468(faceyawdelta);
 
   if(curdir == desireddir) {
     return false;
@@ -730,35 +730,35 @@ function shouldrestartaimchange(asmname, statename, tostatename, params) {
   return false;
 }
 
-function aimchangeorientation(turnxanim, rate, endtime, var_da53c72859d22ed6, totalanimlength) {
+function aimchangeorientation(turnxanim, rate, endtime, faceyawtarget, totalanimlength) {
   self endon("end_aim_change_orient");
   self.aimchange_oldturnrate = self.turnrate;
-  var_c6741e13d5c04d5a = getangledelta(turnxanim, 0, endtime);
-  yawtotarget = var_da53c72859d22ed6 - self.angles[1];
+  totalangledelta = getangledelta(turnxanim, 0, endtime);
+  yawtotarget = faceyawtarget - self.angles[1];
   yawtotarget = angleclamp180(yawtotarget);
-  var_573cd9df7b140b5a = angleclamp180(yawtotarget - var_c6741e13d5c04d5a);
-  var_74fb9d076076aa21 = var_c6741e13d5c04d5a;
+  totalyawfixup = angleclamp180(yawtotarget - totalangledelta);
+  animyawremaining = totalangledelta;
 
   while(isDefined(self) && isalive(self)) {
     currentanimtime = self aigetanimtime(turnxanim);
     nextanimtime = min(currentanimtime + level.frameduration / 1000 / totalanimlength * rate, 1);
     var_8ccbb038d1a5d254 = getangledelta(turnxanim, currentanimtime, nextanimtime);
 
-    if((var_74fb9d076076aa21 - var_8ccbb038d1a5d254) * var_74fb9d076076aa21 > 0) {
-      var_74fb9d076076aa21 -= var_8ccbb038d1a5d254;
+    if((animyawremaining - var_8ccbb038d1a5d254) * animyawremaining > 0) {
+      animyawremaining -= var_8ccbb038d1a5d254;
     } else {
-      var_8ccbb038d1a5d254 = var_74fb9d076076aa21;
-      var_74fb9d076076aa21 = 0;
+      var_8ccbb038d1a5d254 = animyawremaining;
+      animyawremaining = 0;
     }
 
-    lerpfraction = var_8ccbb038d1a5d254 / var_c6741e13d5c04d5a;
-    var_bac2c21af365572b = var_573cd9df7b140b5a * lerpfraction;
-    var_d5655124cc692c6f = var_8ccbb038d1a5d254 + var_bac2c21af365572b;
-    faceangle = angleclamp(self.angles[1] + var_d5655124cc692c6f);
-    var_6b38b069b1d09ad = angleclamp(self.angles[1] + clamp(var_d5655124cc692c6f * 3, -179, 179.9));
+    lerpfraction = var_8ccbb038d1a5d254 / totalangledelta;
+    var_bac2c21af365572b = totalyawfixup * lerpfraction;
+    rotatethisframe = var_8ccbb038d1a5d254 + var_bac2c21af365572b;
+    faceangle = angleclamp(self.angles[1] + rotatethisframe);
+    var_6b38b069b1d09ad = angleclamp(self.angles[1] + clamp(rotatethisframe * 3, -179, 179.9));
     self orientmode("face angle", var_6b38b069b1d09ad);
 
-    if(var_d5655124cc692c6f != 0) {
+    if(rotatethisframe != 0) {
       turnrate = abs(angleclamp180(self.angles[1] - faceangle)) / level.frameduration;
 
       if(turnrate > 0) {
@@ -788,19 +788,19 @@ function playanim_strafeaimchange(asmname, statename, params) {
 
   self aisetanim(statename, animindex, rate);
   asm_playfacialanim(asmname, statename, turnxanim);
-  var_1cf3cc2bfbd90835 = getnotetracktimes(turnxanim, "code_move");
+  codemovetimes = getnotetracktimes(turnxanim, "code_move");
   finishnotes = getnotetracktimes(turnxanim, "finish");
   endtime = 1;
 
-  if(var_1cf3cc2bfbd90835.size > 0) {
-    endtime = var_1cf3cc2bfbd90835[0];
+  if(codemovetimes.size > 0) {
+    endtime = codemovetimes[0];
   } else if(finishnotes.size > 0) {
     endtime = finishnotes[0];
   }
 
   totalanimlength = getanimlength(turnxanim);
   animlength = totalanimlength * endtime;
-  var_da53c72859d22ed6 = vectortoyaw(self.lookaheaddir);
+  faceyawtarget = vectortoyaw(self.lookaheaddir);
   facetargetpos = undefined;
 
   if(!istrue(self.facemotion) && !istrue(self.predictedfacemotion) && !self shouldcautiousstrafe()) {
@@ -817,13 +817,13 @@ function playanim_strafeaimchange(asmname, statename, params) {
     }
 
     if(isDefined(enemypos)) {
-      var_84dba057067c3c3e = vectorNormalize(enemypos - pathendpos);
-      var_da53c72859d22ed6 = vectortoyaw(var_84dba057067c3c3e);
+      metotargetdir = vectorNormalize(enemypos - pathendpos);
+      faceyawtarget = vectortoyaw(metotargetdir);
       facetargetpos = enemypos;
     }
   }
 
-  thread aimchangeorientation(turnxanim, rate, endtime, var_da53c72859d22ed6, totalanimlength);
+  thread aimchangeorientation(turnxanim, rate, endtime, faceyawtarget, totalanimlength);
   note = asm_donotetracks(asmname, statename, asm_getnotehandler(asmname, statename));
   self notify("end_aim_change_orient");
 
@@ -839,7 +839,7 @@ function playanim_strafeaimchange(asmname, statename, params) {
     if(isDefined(facetargetpos)) {
       self orientmode("face point", facetargetpos);
     } else {
-      self orientmode("face angle", var_da53c72859d22ed6);
+      self orientmode("face angle", faceyawtarget);
     }
 
     self animmode("normal");
@@ -891,8 +891,8 @@ function handlestrafenotetracks(note) {
 function playanim_strafereverse(asmname, statename, params) {
   self endon(statename + "_finished");
   zonlytime = 0.4;
-  var_878ed8f396ed59bd = asm_getanim(asmname, statename);
-  self aisetanim(statename, var_878ed8f396ed59bd);
+  blankanimid = asm_getanim(asmname, statename);
+  self aisetanim(statename, blankanimid);
   self orientmode("face enemy or motion");
   self setstrafereverse(1);
   endnote = asm_donotetracks(asmname, statename, undefined, undefined, undefined, 0);
@@ -966,8 +966,8 @@ function movewalkandtalk(asmname, statename, params) {
         result = i * i * (3 - 2 * i);
         transitiondegree = anglediff;
         actualangle = transitiondegree * result;
-        var_1b374815fb658b4b = transitiondegree - actualangle;
-        animweights = getwalkandtalkanimweights(var_1b374815fb658b4b);
+        interpolatedangle = transitiondegree - actualangle;
+        animweights = getwalkandtalkanimweights(interpolatedangle);
 
         for(animindex = 0; animindex < animweights.size; animindex++) {
           self setanim(anims[animindex], animweights[animindex], 0.2, 1, 1);
@@ -1008,13 +1008,13 @@ function movewalkandtalk(asmname, statename, params) {
 
       while(index <= blendframes) {
         anglediff = anglediffwalkandtalk();
-        var_14d30308b9f18e3f = lastplayerangle - anglediff;
+        secondarylargetransition = lastplayerangle - anglediff;
 
-        if(var_14d30308b9f18e3f < 0) {
-          var_14d30308b9f18e3f *= -1;
+        if(secondarylargetransition < 0) {
+          secondarylargetransition *= -1;
         }
 
-        if(var_14d30308b9f18e3f >= 60) {
+        if(secondarylargetransition >= 60) {
           if(index == 1) {
             index = 1;
           } else {
@@ -1034,8 +1034,8 @@ function movewalkandtalk(asmname, statename, params) {
         result = i * i * (3 - 2 * i);
         transitiondegree = anglediff - var_71ea1ef57b26f1b9;
         actualangle = transitiondegree * result;
-        var_1b374815fb658b4b = actualangle + lastangle;
-        animweights = getwalkandtalkanimweights(var_1b374815fb658b4b);
+        interpolatedangle = actualangle + lastangle;
+        animweights = getwalkandtalkanimweights(interpolatedangle);
 
         for(animindex = 0; animindex < animweights.size; animindex++) {
           self setanim(anims[animindex], animweights[animindex], 0.2, 1, 1);
@@ -1139,7 +1139,7 @@ function movestartbattlechatter(var_2e5e380655d9414) {
   movetype = scripts\asm\asm::asm_getdemeanor();
 
   if(movetype == "frantic" || movetype == "combat" || movetype == "sprint") {
-    function_216c67ab6749137a(self, undefined, "move", var_2e5e380655d9414);
+    addbattlechatternotify(self, undefined, "move", var_2e5e380655d9414);
   }
 }
 

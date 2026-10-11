@@ -156,7 +156,7 @@ function stingerusage() {
     self.stingerstage = 0;
   }
 
-  function_ea032d8f50d4fef2(self.stingertarget);
+  stingerdebugdraw(self.stingertarget);
 
   if(self.stingerstage == 0) {
     targets = lockonlaunchers_gettargetarray(0);
@@ -332,9 +332,9 @@ function lockonlaunchers_gettargetarray(addcharacters) {
 
     tacrovers = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("tac_rover");
 
-    foreach(var_af4e3d6d8c66ff39 in tacrovers) {
-      if(var_af4e3d6d8c66ff39.team != self.team || var_e688b198aa9a4b3f) {
-        targets[targets.size] = var_af4e3d6d8c66ff39;
+    foreach(tacrover in tacrovers) {
+      if(tacrover.team != self.team || var_e688b198aa9a4b3f) {
+        targets[targets.size] = tacrover;
       }
     }
 
@@ -412,9 +412,9 @@ function lockonlaunchers_gettargetarray(addcharacters) {
 
     tacrovers = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances("tac_rover");
 
-    foreach(var_af4e3d6d8c66ff39 in tacrovers) {
-      if(var_af4e3d6d8c66ff39.owner != self || var_e688b198aa9a4b3f) {
-        targets[targets.size] = var_af4e3d6d8c66ff39;
+    foreach(tacrover in tacrovers) {
+      if(tacrover.owner != self || var_e688b198aa9a4b3f) {
+        targets[targets.size] = tacrover;
       }
     }
 
@@ -871,7 +871,7 @@ function function_7ea2aeeed11a82c8(shocksentry) {
   }
 }
 
-function function_ea032d8f50d4fef2(target) {
+function stingerdebugdraw(target) {
   if(getDvar(@ "missiledebugdraw") != "<dev string:x22>") {
     return;
   }

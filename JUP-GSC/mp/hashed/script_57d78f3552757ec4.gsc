@@ -45,7 +45,7 @@ function function_d99864f8b4032562(element, base_struct, var_5f8bb464b19d1f53, o
   obelisk.completed = 0;
   obelisk.unique_name = obelisk_struct.targetname;
   obelisk.players = undefined;
-  obelisk.var_e00ac5b70d752deb = undefined;
+  obelisk.isee = undefined;
   obelisk.var_fa9e06a77032916e = 0;
   obelisk.puzzle_state = 0;
   obelisk.var_fc394e11bae17823 = var_fc394e11bae17823;
@@ -159,7 +159,7 @@ function function_5a3e2f3da27cb304() {
   }
 
   while(true) {
-    if(istrue(obelisk.var_e00ac5b70d752deb)) {
+    if(istrue(obelisk.isee)) {
       assert(isDefined(obelisk.players));
       function_1831b668cb43b6c9(obelisk, 1);
     } else if(!istrue(obelisk.var_713f07f1f3d7b5f7)) {
@@ -280,7 +280,7 @@ function function_6abd388d691cb822(obelisk) {
       obelisk thread[[obelisk.var_7eb73407060d7cb6]](obelisk.puzzle_state);
     }
 
-    obelisk.var_e00ac5b70d752deb = 1;
+    obelisk.isee = 1;
     obelisk.players = eattacker scripts\cp_mp\utility\squad_utility::getsquadmembers();
     obelisk.players = function_fdc9d5557c53078e(obelisk.players);
 
@@ -356,8 +356,8 @@ function activate_obelisk(player) {
       }
     }
 
-    if(!istrue(obelisk.var_e00ac5b70d752deb) || obelisk.puzzle_state == 2 || obelisk.puzzle_state == 3) {
-      obelisk.var_e00ac5b70d752deb = 0;
+    if(!istrue(obelisk.isee) || obelisk.puzzle_state == 2 || obelisk.puzzle_state == 3) {
+      obelisk.isee = 0;
       obelisk.rune_manager function_a63a2112c7b585e5();
       obelisk.players = player scripts\cp_mp\utility\squad_utility::getsquadmembers();
       obelisk.players = function_fdc9d5557c53078e(obelisk.players);
@@ -402,13 +402,13 @@ function activate_obelisk(player) {
 
   iprintlnbold("<dev string:xe8>");
 
-  if(istrue(obelisk.var_e00ac5b70d752deb)) {
+  if(istrue(obelisk.isee)) {
     if(obelisk.season == 5) {
       thread scripts\cp_mp\overlord::playevent("STY_S5_5_SPEEQ_Visualized", obelisk.players, 3);
     } else {
       thread scripts\cp_mp\overlord::playevent("STY_S3_5_SPEEQ_Visualized", obelisk.players, 3);
     }
-  } else if(!istrue(obelisk.var_e00ac5b70d752deb)) {
+  } else if(!istrue(obelisk.isee)) {
     thread scripts\cp_mp\overlord::playevent("RFT_S3_5_RGUQ_Accept_Unattuned", obelisk.players, 3);
   }
 
@@ -578,7 +578,7 @@ function function_6e42339d9503b6b7(params) {
         function_2b6783f1c69393ff(self.origin + (0, 0, 40), obelisk.orb_struct.origin, 0.25, obelisk);
 
         if(obelisk.killcount == obelisk.var_3144cc2ba8121676 / 2) {
-          if(istrue(obelisk.var_e00ac5b70d752deb)) {
+          if(istrue(obelisk.isee)) {
             if(obelisk.season == 5) {
               thread scripts\cp_mp\overlord::playevent("STY_S5_5_SPEEQ_50_Charged", obelisk.players, 1);
             } else {
@@ -588,7 +588,7 @@ function function_6e42339d9503b6b7(params) {
             continue;
           }
 
-          if(!istrue(obelisk.var_e00ac5b70d752deb)) {
+          if(!istrue(obelisk.isee)) {
             thread scripts\cp_mp\overlord::playevent("RFT_S3_5_RGUQ_50_Charged", obelisk.players);
           }
         }
@@ -686,7 +686,7 @@ function obelisk_completed(obelisk) {
 
   waitframe();
 
-  if(!obelisk.var_e00ac5b70d752deb) {
+  if(!obelisk.isee) {
     function_de57fa38335a4b65(obelisk);
     return;
   }
@@ -790,7 +790,7 @@ function reset_puzzle(obelisk) {
     obelisk thread[[obelisk.var_7eb73407060d7cb6]](obelisk.puzzle_state);
   }
 
-  obelisk.var_e00ac5b70d752deb = undefined;
+  obelisk.isee = undefined;
 
   foreach(player in obelisk.players) {
     if(isDefined(player)) {
@@ -866,9 +866,9 @@ function function_510aa363d2583f0(params) {
   return cache.contents;
 }
 
-function function_ae2ad994e01b239e(var_ed118e6dd8c246) {
+function function_ae2ad994e01b239e(lootfunctionargs) {
   cache = spawnStruct();
-  s3_name = namespace_9866a3bced571d62::function_54b2c5a00ed87d60(var_ed118e6dd8c246.obelisk.element);
+  s3_name = namespace_9866a3bced571d62::function_54b2c5a00ed87d60(lootfunctionargs.obelisk.element);
   items = function_bc2f4857c90f5344("ob_jup_hydro_obelisk_reward_" + s3_name + "_attuned_s3", 1);
   common_cache::function_fd95ef820bb2b980(items, cache);
   return cache.contents;
@@ -904,7 +904,7 @@ function spawn_reward(obelisk) {
     reward_groups[reward_groups.size] = [player];
   }
 
-  if(istrue(obelisk.var_e00ac5b70d752deb)) {
+  if(istrue(obelisk.isee)) {
     namespace_e8853d3344e33cf6::function_863be9e39e19fe2f(reward_groups, obelisk.var_f5acf56d7a0a1404, &function_510aa363d2583f0, undefined, obelisk);
 
     if(obelisk.season == 5) {
@@ -925,8 +925,8 @@ function spawn_reward(obelisk) {
       }
     }
   } else {
-    var_ed118e6dd8c246 = spawnStruct();
-    var_ed118e6dd8c246.obelisk = obelisk;
+    lootfunctionargs = spawnStruct();
+    lootfunctionargs.obelisk = obelisk;
     reward_groups = [];
 
     foreach(player in obelisk.var_152662fdff5f3b47) {
@@ -935,7 +935,7 @@ function spawn_reward(obelisk) {
       }
     }
 
-    namespace_e8853d3344e33cf6::function_863be9e39e19fe2f(reward_groups, obelisk.var_f5acf56d7a0a1404, &function_ae2ad994e01b239e, var_ed118e6dd8c246, obelisk);
+    namespace_e8853d3344e33cf6::function_863be9e39e19fe2f(reward_groups, obelisk.var_f5acf56d7a0a1404, &function_ae2ad994e01b239e, lootfunctionargs, obelisk);
 
     if(obelisk.element == "fire") {
       thread scripts\cp_mp\overlord::playevent("RFT_S3_5_RGUQ_Collect_Journal", obelisk.players, 3);

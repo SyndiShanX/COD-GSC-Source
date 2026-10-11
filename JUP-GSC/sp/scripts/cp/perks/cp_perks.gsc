@@ -524,10 +524,10 @@ function sixthsense_think_internal() {
         continue;
       }
 
-      var_97f0985016aa48cb = 0.984808;
+      maxviewangle = 0.984808;
       var_33e2af87c7b68ce8 = length(fromotherplayer);
 
-      if(dot < var_97f0985016aa48cb * var_33e2af87c7b68ce8) {
+      if(dot < maxviewangle * var_33e2af87c7b68ce8) {
         continue;
       }
 
@@ -1253,7 +1253,7 @@ function run_track_enemy_patrollers() {
   var_820e590cb5620371 = 0;
   self.view_list = [];
   self.outlineids = [];
-  var_2ab4eb5f9bf4dd77 = 5000;
+  last_seen_time = 5000;
 
   while(true) {
     enemy_list = level.spawned_enemies;
@@ -1282,9 +1282,9 @@ function run_track_enemy_patrollers() {
 
       var_820e590cb5620371++;
       entnum = guy getentitynumber();
-      var_25ab57d46f5f99f9 = within_fov(self getEye(), self getplayerangles(), guy.origin, tracker_fov);
+      is_in_fov = within_fov(self getEye(), self getplayerangles(), guy.origin, tracker_fov);
 
-      if(!var_25ab57d46f5f99f9) {
+      if(!is_in_fov) {
         continue;
       }
 
@@ -1293,7 +1293,7 @@ function run_track_enemy_patrollers() {
       if(!passed) {
         if(isDefined(self.view_list[entnum])) {
           cur_time = gettime();
-          var_77c5b5dd30fc2909 = cur_time - var_2ab4eb5f9bf4dd77;
+          var_77c5b5dd30fc2909 = cur_time - last_seen_time;
 
           if(self.view_list[entnum] < var_77c5b5dd30fc2909) {} else {
             guy add_outline(entnum, self);
@@ -1387,9 +1387,9 @@ function recharge_lethals_over_time(timer) {
 
   while(true) {
     self waittill("grenade_fire", grenade, objweapon, tickpercent, originalowner);
-    var_d690ef8fdb341e60 = get_weapon_in_power_slot(self, "primary");
+    lethal_grenade_name = get_weapon_in_power_slot(self, "primary");
 
-    if(objweapon.basename == var_d690ef8fdb341e60) {
+    if(objweapon.basename == lethal_grenade_name) {
       thread delay_give_lethal_grenade(self, timer);
     }
 

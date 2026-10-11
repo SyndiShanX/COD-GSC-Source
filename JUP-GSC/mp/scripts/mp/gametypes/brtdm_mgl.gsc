@@ -149,7 +149,7 @@ function onstartgametype() {
   initspawns();
 
   level thread function_14d9ef66ff3c55fe();
-  level thread function_4e89ea3291f12198();
+  level thread debugvehiclespawns();
   level thread function_3fe54271a36d4f0d();
 
   scripts\mp\gametypes\bradley_spawner::inittankspawns();
@@ -966,7 +966,7 @@ function function_14d9ef66ff3c55fe() {
   }
 }
 
-function function_4e89ea3291f12198() {
+function debugvehiclespawns() {
   while(true) {
     if(getdvarint(@ "hash_7f2b6c7d2b29dde9") == 1) {
       if(isDefined(level.vehiclespawnlocs)) {

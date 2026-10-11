@@ -283,7 +283,7 @@ function function_9065b3738ac07df0(items, cache, player, contents) {
     cache.originalcontents = contentscache.contents;
   }
 
-  scripts\mp\loot::function_30f5ea60517f9e06(player, cache);
+  scripts\mp\loot::openlootablecontainer(player, cache);
   return [];
 }
 
@@ -305,7 +305,7 @@ function lootspawnitemlist(dropstruct, items, fromcache, player, distoverride, y
   }
 
   if(isDefined(self) && isDefined(self.type) && scripts\engine\utility::issharedfuncdefined(self.type, "spawnLoot")) {
-    extraitems = scripts\engine\utility::function_f3bb4f4911a1beb2(self.type, "spawnLoot", player, dropstruct);
+    extraitems = scripts\engine\utility::callsharedfunc(self.type, "spawnLoot", player, dropstruct);
 
     if(isDefined(extraitems)) {
       foreach(extraitem in extraitems) {
@@ -468,7 +468,7 @@ function function_c56e597e3aa81261(instance, player) {
   lootcacheused(instance, "body", "closed_usable", player, 0, undefined);
 }
 
-function lootcacheused(instance, part, state, player, var_a5b2c541413aa895, usestring, var_9f39a1d0187cefb8) {
+function lootcacheused(instance, part, state, player, bautouse, usestring, var_9f39a1d0187cefb8) {
   if(istrue(player scripts\mp\gametypes\br_gametypes::runbrgametypefunc("playerSkipLootPickup", instance))) {
     return;
   }
@@ -550,7 +550,7 @@ function lootcacheused(instance, part, state, player, var_a5b2c541413aa895, uses
       items = function_728bdc627d7df6c2(items, instance);
 
       if(isDefined(instance.type) && scripts\engine\utility::issharedfuncdefined(instance.type, "opened")) {
-        items = instance scripts\engine\utility::function_f3bb4f4911a1beb2(instance.type, "opened", items, player);
+        items = instance scripts\engine\utility::callsharedfunc(instance.type, "opened", items, player);
       }
 
       if(scripts\mp\gametypes\br_gametypes::isbrgametypefuncdefined("lootCacheAdjustItems")) {
@@ -744,7 +744,7 @@ function lootcacheused(instance, part, state, player, var_a5b2c541413aa895, uses
     }
   }
 
-  player thread utility::function_f3bb4f4911a1beb2("featurebans", "featurebans_jumpScare", instance);
+  player thread utility::callsharedfunc("featurebans", "featurebans_jumpScare", instance);
   scripts\common\callbacks::callback("cache_opened", var_e384a29fa99c895c);
 }
 

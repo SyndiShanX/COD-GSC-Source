@@ -159,12 +159,12 @@ function function_8e5aab643e51aaf9() {
       continue;
     }
 
-    println(player getplayerdata(level.var_5d69837cf4db0407, "<dev string:x1c>") + "<dev string:x2d>");
+    println(player getplayerdata(level.progressiongroup, "<dev string:x1c>") + "<dev string:x2d>");
     println(player.name + "<dev string:x57>");
     player namespace_aead94004cf4c147::printinventory();
     var_e1cf43f3ae9d77e7 = function_9e02f22decaaaf1f(self.playercontents[player.guid].contents);
     totalcash = player namespace_512200f0f9e6ebc9::function_e2f4f470c55123b8(var_e1cf43f3ae9d77e7, 1);
-    println(player getplayerdata(level.var_5d69837cf4db0407, "<dev string:x1c>") + "<dev string:x88>");
+    println(player getplayerdata(level.progressiongroup, "<dev string:x1c>") + "<dev string:x88>");
 
     foreach(item in self.playercontents[player.guid].contents) {
       ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(item["lootID"]);
@@ -190,8 +190,8 @@ function function_8e5aab643e51aaf9() {
 
     println(player.name + "<dev string:xb0>");
     player namespace_aead94004cf4c147::printinventory();
-    var_68c58fc50db46dc6 = player getplayerdata(level.var_5d69837cf4db0407, "dmzBankedCash");
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzBankedCash", var_68c58fc50db46dc6 + totalcash);
+    var_68c58fc50db46dc6 = player getplayerdata(level.progressiongroup, "dmzBankedCash");
+    player setplayerdata(level.progressiongroup, "dmzBankedCash", var_68c58fc50db46dc6 + totalcash);
     weaponitem = undefined;
 
     if(istrue(weaponslotid)) {
@@ -279,7 +279,7 @@ function function_cbca59c109ae17af(itemtype, itemindex) {
           return [0, 0, undefined];
         }
 
-        lootid = self getplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "lootItemID");
+        lootid = self getplayerdata(level.progressiongroup, "dmzWeapon", "lootItemID");
         var_ec22a950f210e39 = namespace_aead94004cf4c147::function_2985254128b1c262(self);
         return [lootid, 1, var_ec22a950f210e39];
       }
@@ -304,7 +304,7 @@ function function_cbca59c109ae17af(itemtype, itemindex) {
       quantity = 1;
 
       if(scripts\mp\gametypes\br_pickups::function_d345eec68e01361f(lootid)) {
-        quantity = namespace_aead94004cf4c147::function_897b29adb37f06a7(itemindex);
+        quantity = namespace_aead94004cf4c147::getquantityatbackpackindex(itemindex);
       }
 
       return [lootid, quantity];

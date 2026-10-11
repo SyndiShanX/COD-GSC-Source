@@ -370,7 +370,7 @@ function function_6ae5fdf1da1acaa9() {
 
   function_97647a54bce1049(var_158ae1c93d9fcf79);
   damagetrigger = getEnt("zone_2_gas_leak_damage_1", "script_noteworthy");
-  damagetrigger thread function_2efdac326ca0118();
+  damagetrigger thread dogasdamage();
   level.gastriggers[level.gastriggers.size] = damagetrigger;
 
   if(istrue(level.enablezombie)) {
@@ -394,7 +394,7 @@ function function_6ae5fdf1da1acaa9() {
 
   function_97647a54bce1049(var_158ae1c93d9fcf79);
   damagetrigger = getEnt("zone_2_gas_leak_damage_2", "script_noteworthy");
-  damagetrigger thread function_2efdac326ca0118();
+  damagetrigger thread dogasdamage();
   level.gastriggers[level.gastriggers.size] = damagetrigger;
 
   damagetrigger thread function_80015dd551dd42e6();
@@ -852,7 +852,7 @@ function function_1adb1683fc784f99() {
   }
 }
 
-function function_2efdac326ca0118() {
+function dogasdamage() {
   level endon("game_ended");
   level endon("zone_2" + "_objective_end");
 
@@ -1041,7 +1041,7 @@ function function_faf3d7108ac14849(owner, streakinfo, mappointinfo, preset) {
   planeflyheight = 3250;
   planehoverheight = 1000;
   heightoffset = (0, 0, 0);
-  var_361663d437db22f5 = 1500;
+  planebombexplodedistance = 1500;
   var_505331ad630bbc6b = 1;
 
   if(isDefined(heightent)) {
@@ -1060,7 +1060,7 @@ function function_faf3d7108ac14849(owner, streakinfo, mappointinfo, preset) {
     heightent = undefined;
   }
 
-  flightpath = scripts\cp_mp\killstreaks\airstrike::getflightpath(maplocation, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, var_361663d437db22f5, streakinfo.streakname, var_505331ad630bbc6b);
+  flightpath = scripts\cp_mp\killstreaks\airstrike::getflightpath(maplocation, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, planebombexplodedistance, streakinfo.streakname, var_505331ad630bbc6b);
   pathstart = flightpath["startPoint"];
   pathgoal = flightpath["endPoint"];
   bundle = level.streakglobals.streakbundles["hover_jet"];
@@ -1563,15 +1563,15 @@ function function_fad186e07908db0c() {
     setDvar(@ "hash_de40dd963ae8453", 0);
 
     if(istrue(active)) {
-      var_3481c88117495d50 = getEntArray("<dev string:x1ad>", "<dev string:x161>");
+      roofs = getEntArray("<dev string:x1ad>", "<dev string:x161>");
       var_797f676eac2f5f5d = getStructArray("<dev string:x1bb>", "<dev string:x161>");
       var_24e1eee4a6f213b7 = getentitylessscriptablearray("<dev string:x1ca>", "<dev string:x5d>");
       var_633452f052c3d4ba = getscriptablearray("<dev string:x1dd>", "<dev string:x5d>");
 
       if(active == 2) {
-        scripts\mp\maps\mp_jup_skydiving\mp_jup_skydiving::function_c8a59331ffa83829(var_3481c88117495d50, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 1, var_633452f052c3d4ba);
+        scripts\mp\maps\mp_jup_skydiving\mp_jup_skydiving::function_c8a59331ffa83829(roofs, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 1, var_633452f052c3d4ba);
       } else if(active == 1) {
-        scripts\mp\maps\mp_jup_skydiving\mp_jup_skydiving::function_c8a59331ffa83829(var_3481c88117495d50, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 0.5, var_633452f052c3d4ba);
+        scripts\mp\maps\mp_jup_skydiving\mp_jup_skydiving::function_c8a59331ffa83829(roofs, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 0.5, var_633452f052c3d4ba);
       }
     }
 

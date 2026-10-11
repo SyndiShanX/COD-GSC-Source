@@ -132,12 +132,12 @@ function private function_250357933f00dc3() {
             continue;
           }
         } else if(self.item_type == "armor_plates") {
-          var_2c969f7f11c3c8b9 = level.player scripts\sp\player::function_85e373bb15921966();
+          currplayerplates = level.player scripts\sp\player::function_85e373bb15921966();
           var_b292f33e2fd2bdbd = level.player scripts\sp\player::function_c241aeec324282f0();
-          var_75e244e5f45c894d = var_b292f33e2fd2bdbd - var_2c969f7f11c3c8b9;
+          var_75e244e5f45c894d = var_b292f33e2fd2bdbd - currplayerplates;
           var_b46066922139e5c2 = self.item_count;
           var_75e244e5f45c894d = int(min(var_b46066922139e5c2, var_75e244e5f45c894d));
-          refillamount = var_2c969f7f11c3c8b9 + var_75e244e5f45c894d;
+          refillamount = currplayerplates + var_75e244e5f45c894d;
           level.player scripts\sp\player::function_e9e42cffedaa98d5(refillamount);
           self.item_count = var_b46066922139e5c2 - var_75e244e5f45c894d;
         } else if(issharedfuncdefined("offhandBox", "_onUse", 0)) {
@@ -171,15 +171,15 @@ function private function_250357933f00dc3() {
           } else {
             current_offhand = function_105e215e72df8f98(offhand_type);
             current_ammo = 0;
-            var_3e77e279a9f4de1e = undefined;
+            current_lootname = undefined;
 
             if(current_offhand != "none") {
-              var_3e77e279a9f4de1e = scripts\sp\loot::function_3fd5749f637651b7(current_offhand);
+              current_lootname = scripts\sp\loot::function_3fd5749f637651b7(current_offhand);
 
-              if(!isDefined(var_3e77e279a9f4de1e)) {
+              if(!isDefined(current_lootname)) {
                 current_ammo = 0;
               } else {
-                current_ammo = scripts\sp\loot::getoffhandcurrentammo(var_3e77e279a9f4de1e);
+                current_ammo = scripts\sp\loot::getoffhandcurrentammo(current_lootname);
               }
 
               level.player take_player_offhand_by_name(current_offhand);
@@ -188,7 +188,7 @@ function private function_250357933f00dc3() {
             lootname = self.item_type;
             max_ammo = scripts\sp\loot::function_57888d406854dc7f(lootname);
 
-            if(isDefined(var_3e77e279a9f4de1e) && var_3e77e279a9f4de1e != lootname) {
+            if(isDefined(current_lootname) && current_lootname != lootname) {
               ammo_needed = self.item_count;
             } else {
               ammo_needed = max_ammo - current_ammo;
@@ -202,7 +202,7 @@ function private function_250357933f00dc3() {
 
             if(current_offhand != "none") {
               self.item_count = current_ammo;
-              self.item_type = var_3e77e279a9f4de1e;
+              self.item_type = current_lootname;
               thread update_global_offhand_boxes();
             } else {
               self.item_count -= ammo_needed;
@@ -269,7 +269,7 @@ function private function_863bc5d68813ee8a(radius) {
 
     foreach(player in level.players) {
       if(distancesquared(player.origin, self.origin) < radiussq) {
-        spawnpool = scripts\sp\loot::function_bea35dd59e0df4ac("Offhand", "frag");
+        spawnpool = scripts\sp\loot::getspawnpool("Offhand", "frag");
 
         if(spawnpool.size > 0) {
           self.item_type = spawnpool[randomintrange(0, spawnpool.size)];

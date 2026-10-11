@@ -33,7 +33,7 @@ function playgrenadereturnthrowanim(asmname, statename, params) {
     }
 
     self pickupgrenade();
-    function_216c67ab6749137a(self, undefined, "use", "frag_grenade");
+    addbattlechatternotify(self, undefined, "use", "frag_grenade");
     grenadevel = self getgrenadetossvel();
 
     if(isDefined(grenadevel)) {
@@ -46,7 +46,7 @@ function playgrenadereturnthrowanim(asmname, statename, params) {
     thread asm_donotetracks(asmname, statename);
     self waittillmatch(statename, "grenade_throw");
     self pickupgrenade();
-    function_216c67ab6749137a(self, undefined, "use", "frag_grenade");
+    addbattlechatternotify(self, undefined, "use", "frag_grenade");
   }
 
   if(isDefined(self.grenade)) {
@@ -121,9 +121,9 @@ function shouldgrenadedive(asmname, statename, tostatename, params) {
   diveanim = asm_getanim(asmname, tostatename);
   divexanim = asm_getxanim(tostatename, diveanim);
   moveby = getmovedelta(divexanim, 0, 0.5);
-  var_597d30b536cff2cc = self localtoworldcoords(moveby);
+  divetopos = self localtoworldcoords(moveby);
 
-  if(!self maymovetopoint(var_597d30b536cff2cc)) {
+  if(!self maymovetopoint(divetopos)) {
     return false;
   }
 

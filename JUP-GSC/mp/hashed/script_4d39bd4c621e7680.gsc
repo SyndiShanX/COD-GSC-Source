@@ -7,33 +7,33 @@
 #using script_41387eecc35b88bf;
 #using scripts\common\utility;
 #using scripts\engine\utility;
-#namespace namespace_688ed4709dca758f;
+#namespace activity_scriptables;
 
-function function_cb2e672e5fb4f3(activityinstance, scriptablename, origin, var_401b874a8c1c501f) {
+function function_cb2e672e5fb4f3(activityinstance, scriptablename, origin, destructionmoment) {
   origin = default_to(origin, namespace_68dc261109a9503f::function_8988a4c89289d7f4(activityinstance));
-  var_401b874a8c1c501f = default_to(var_401b874a8c1c501f, "InstanceEnd");
+  destructionmoment = default_to(destructionmoment, "InstanceEnd");
   scriptable = spawnscriptable(scriptablename, origin);
 
   if(isDefined(scriptable)) {
-    function_5b71b730bfefd36a(activityinstance, scriptable, var_401b874a8c1c501f);
+    function_5b71b730bfefd36a(activityinstance, scriptable, destructionmoment);
     return scriptable;
   }
 
   return undefined;
 }
 
-function function_5b71b730bfefd36a(activityinstance, scriptable, var_401b874a8c1c501f) {
-  var_401b874a8c1c501f = default_to(var_401b874a8c1c501f, "None");
+function function_5b71b730bfefd36a(activityinstance, scriptable, destructionmoment) {
+  destructionmoment = default_to(destructionmoment, "None");
 
   if(isDefined(scriptable)) {
-    function_a51ade79202d2b36(activityinstance, scriptable, var_401b874a8c1c501f);
+    function_a51ade79202d2b36(activityinstance, scriptable, destructionmoment);
     function_2d1d9d6ca99f0047(activityinstance, scriptable);
   }
 }
 
-function function_5c4c35644d53846f(activityinstance, scriptables, var_401b874a8c1c501f) {
+function function_5c4c35644d53846f(activityinstance, scriptables, destructionmoment) {
   foreach(scriptable in scriptables) {
-    function_5b71b730bfefd36a(activityinstance, scriptable, var_401b874a8c1c501f);
+    function_5b71b730bfefd36a(activityinstance, scriptable, destructionmoment);
   }
 }
 
@@ -77,7 +77,7 @@ function function_dfe0a21d9848315e(activityinstance, activitymoment) {
       continue;
     }
 
-    if(var_c6787d1914826ac6.var_401b874a8c1c501f == activitymoment) {
+    if(var_c6787d1914826ac6.destructionmoment == activitymoment) {
       if(isDefined(var_c6787d1914826ac6.scriptable.origin)) {
         level notify("lootcache_opened_kill_callout" + var_c6787d1914826ac6.scriptable.origin);
       }
@@ -108,10 +108,10 @@ function function_494bce73f65c6b6f(activityinstance) {
   return var_d7037f8ce7fba1c6;
 }
 
-function function_d81c572daff63cf9(activityinstance) {
+function activityscriptablecleanup(activityinstance) {
   foreach(var_c6787d1914826ac6 in activityinstance.var_67c56bf0b03688bf) {
     if(isDefined(var_c6787d1914826ac6.scriptable)) {
-      var_9107f7cc534da975 = isDefined(var_c6787d1914826ac6.var_401b874a8c1c501f) && var_c6787d1914826ac6.var_401b874a8c1c501f == "None";
+      var_9107f7cc534da975 = isDefined(var_c6787d1914826ac6.destructionmoment) && var_c6787d1914826ac6.destructionmoment == "None";
       var_ae601fd44828f827 = !var_9107f7cc534da975;
 
       if(var_ae601fd44828f827) {
@@ -125,31 +125,31 @@ function function_d81c572daff63cf9(activityinstance) {
   }
 }
 
-function private function_e9ff3fa066f12d9f(scriptable, var_401b874a8c1c501f) {
-  var_401b874a8c1c501f = default_to(var_401b874a8c1c501f, "None");
+function private function_e9ff3fa066f12d9f(scriptable, destructionmoment) {
+  destructionmoment = default_to(destructionmoment, "None");
   var_c6787d1914826ac6 = spawnStruct();
   var_c6787d1914826ac6.scriptable = scriptable;
   var_c6787d1914826ac6.partnames = [];
-  var_c6787d1914826ac6.var_401b874a8c1c501f = var_401b874a8c1c501f;
+  var_c6787d1914826ac6.destructionmoment = destructionmoment;
   return var_c6787d1914826ac6;
 }
 
-function private function_a51ade79202d2b36(activityinstance, scriptable, var_401b874a8c1c501f) {
-  var_401b874a8c1c501f = default_to(var_401b874a8c1c501f, "None");
+function private function_a51ade79202d2b36(activityinstance, scriptable, destructionmoment) {
+  destructionmoment = default_to(destructionmoment, "None");
 
   if(isDefined(activityinstance.var_67c56bf0b03688bf[scriptable.index])) {
     return activityinstance.var_67c56bf0b03688bf[scriptable.index];
   }
 
-  var_c6787d1914826ac6 = function_e9ff3fa066f12d9f(scriptable, var_401b874a8c1c501f);
+  var_c6787d1914826ac6 = function_e9ff3fa066f12d9f(scriptable, destructionmoment);
   activityinstance.var_67c56bf0b03688bf[scriptable.index] = var_c6787d1914826ac6;
   return var_c6787d1914826ac6;
 }
 
 function private function_2d1d9d6ca99f0047(activityinstance, scriptable) {
-  var_c09d25aab2388391 = scriptable function_90069777043e7833();
+  scriptablepartnames = scriptable function_90069777043e7833();
 
-  foreach(partname in var_c09d25aab2388391) {
+  foreach(partname in scriptablepartnames) {
     if(isstartstr(toupper(partname), "NEXUSMANAGEDSCRIPTABLEPART")) {
       var_ec5849fb65eb261a = namespace_70aa82e7f409bc33::function_c795f9c21a9bc8();
 

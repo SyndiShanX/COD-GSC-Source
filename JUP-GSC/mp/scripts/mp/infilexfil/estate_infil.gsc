@@ -19,7 +19,7 @@
 #namespace estate_infil;
 
 function estate_init(subtype) {
-  function_f1aed36ab4598ea("palfa_estate_infil");
+  snd_transient_load("palfa_estate_infil");
   thread function_99fbfc1d5ecbea75();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -431,7 +431,7 @@ function vehicles_anims(subtype, team, originalsubtype) {
 function function_99fbfc1d5ecbea75() {
   level waittill("prematch_over");
   wait 66;
-  function_f4e0ff5cb899686d("palfa_estate_infil");
+  snd_transient_unload("palfa_estate_infil");
 }
 
 function function_e33b9b53992e051d() {

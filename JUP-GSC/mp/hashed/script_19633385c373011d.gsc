@@ -564,8 +564,8 @@ function function_611500f4751aaf1(bitfield, teamindex, arrayindex) {
   leftshift = 8 * arrayindex;
   bitmask = var_5ba62be302f54d98 - 1;
   bitmask <<= leftshift;
-  var_f8f977081d3da8b4 = ~bitmask;
-  bitfield &= var_f8f977081d3da8b4;
+  invertedmask = ~bitmask;
+  bitfield &= invertedmask;
   var_1cc902f24ef7cc11 = teamindex << leftshift;
   bitfield |= var_1cc902f24ef7cc11;
   return bitfield;

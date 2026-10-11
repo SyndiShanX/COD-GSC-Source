@@ -678,7 +678,7 @@ function function_8c8e1037bb8c3ef4(heli) {
     relativeoffset = rotatevector(offset, heli.angles);
     dropinfo = scripts\mp\gametypes\br_pickups::getitemdropinfo(heli.origin + relativeoffset, var_bf80f581fdce86d2);
     gasmask = scripts\mp\gametypes\br_pickups::spawnpickup("brloot_equip_gasmask", dropinfo, 108);
-    gasmask utility::function_6e506f39f121ea8a(heli, offset);
+    gasmask utility::scriptable_setparententity(heli, offset);
   }
 }
 
@@ -833,7 +833,7 @@ function function_d15cbb4f920e92fd(players, info) {
 
     player.extracted = 1;
 
-    if(namespace_a8b2b88699fc40fb::function_5a7168b0b511bec3(player)) {
+    if(namespace_a8b2b88699fc40fb::didextractwithweaponcase(player)) {
       has_weapon_case = 1;
     }
 
@@ -895,7 +895,7 @@ function private handleplayerexfildone(endingid, var_394aebba88e4e8c2) {
   assert(istrue(player.extracted));
   namespace_a8b2b88699fc40fb::function_5704ab2a9381630f(player);
   player scripts\mp\utility\stats::incpersstat("secondaryVictories", 1);
-  holding_weapon_case = namespace_a8b2b88699fc40fb::function_5a7168b0b511bec3(player);
+  holding_weapon_case = namespace_a8b2b88699fc40fb::didextractwithweaponcase(player);
 
   if(holding_weapon_case) {
     player scripts\mp\utility\stats::incpersstat("weaponCaseExfils", 1);

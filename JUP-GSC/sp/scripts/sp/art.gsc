@@ -50,7 +50,7 @@ function tweakart() {
   setDvar(@ "scr_dof_farblur", level.dof["<dev string:x22>"]["<dev string:x27>"]["<dev string:x5a>"]);
   level.fogfraction = 1;
   file = undefined;
-  function_88bd2443c439782e();
+  dofvarupdate();
   printed = 0;
 
   for(;;) {
@@ -67,14 +67,14 @@ function tweakart() {
       hud_init();
     }
 
-    function_88bd2443c439782e();
+    dofvarupdate();
     function_934935ccb50fdc01();
     dump = dumpsettings();
     wait 0.05;
   }
 }
 
-function function_88bd2443c439782e() {
+function dofvarupdate() {
   nearstart = getdvarint(@ "scr_dof_nearstart");
   nearend = getdvarint(@ "scr_dof_nearend");
   nearblur = getdvarfloat(@ "scr_dof_nearblur");
@@ -210,7 +210,7 @@ function dumpsettings() {
   }
 
   function mb_init() {
-    if(!function_e46da0cb5358cb18()) {
+    if(!isplatformmobile()) {
       setsaveddvar(@ "hash_8fef9b7e4f880571", 1);
       create_motion_blur_defaults(1, 1);
       motion_blur_enable();
@@ -375,16 +375,16 @@ function dumpsettings() {
     }
 
     var_9f836feedd16035c = 10;
-    var_2788acaf356c4e35 = max(var_9f836feedd16035c, abs(level.dof["ads"]["current"]["nearStart"] - level.dof["ads"]["goal"]["nearStart"]) * var_b3beab783cd9bd5c);
-    var_e1fabfc962847a82 = max(var_9f836feedd16035c, abs(level.dof["ads"]["current"]["nearEnd"] - level.dof["ads"]["goal"]["nearEnd"]) * var_b3beab783cd9bd5c);
-    var_5948d982df05004 = max(var_9f836feedd16035c, abs(level.dof["ads"]["current"]["farStart"] - level.dof["ads"]["goal"]["farStart"]) * var_b3beab783cd9bd5c);
-    var_3310b168855060db = max(var_9f836feedd16035c, abs(level.dof["ads"]["current"]["farEnd"] - level.dof["ads"]["goal"]["farEnd"]) * var_b3beab783cd9bd5c);
+    nearstartmaxchange = max(var_9f836feedd16035c, abs(level.dof["ads"]["current"]["nearStart"] - level.dof["ads"]["goal"]["nearStart"]) * var_b3beab783cd9bd5c);
+    nearendmaxchange = max(var_9f836feedd16035c, abs(level.dof["ads"]["current"]["nearEnd"] - level.dof["ads"]["goal"]["nearEnd"]) * var_b3beab783cd9bd5c);
+    farstartmaxchange = max(var_9f836feedd16035c, abs(level.dof["ads"]["current"]["farStart"] - level.dof["ads"]["goal"]["farStart"]) * var_b3beab783cd9bd5c);
+    farendmaxchange = max(var_9f836feedd16035c, abs(level.dof["ads"]["current"]["farEnd"] - level.dof["ads"]["goal"]["farEnd"]) * var_b3beab783cd9bd5c);
     blurmaxchange = 0.1;
-    level.dof["ads"]["current"]["nearStart"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["nearStart"], level.dof["ads"]["goal"]["nearStart"], var_2788acaf356c4e35, 0.33);
-    level.dof["ads"]["current"]["nearEnd"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["nearEnd"], level.dof["ads"]["goal"]["nearEnd"], var_e1fabfc962847a82, 0.33);
+    level.dof["ads"]["current"]["nearStart"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["nearStart"], level.dof["ads"]["goal"]["nearStart"], nearstartmaxchange, 0.33);
+    level.dof["ads"]["current"]["nearEnd"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["nearEnd"], level.dof["ads"]["goal"]["nearEnd"], nearendmaxchange, 0.33);
     level.dof["ads"]["current"]["nearBlur"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["nearBlur"], level.dof["ads"]["goal"]["nearBlur"], blurmaxchange, 0.33);
-    level.dof["ads"]["current"]["farStart"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["farStart"], level.dof["ads"]["goal"]["farStart"], var_5948d982df05004, 0.33);
-    level.dof["ads"]["current"]["farEnd"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["farEnd"], level.dof["ads"]["goal"]["farEnd"], var_3310b168855060db, 0.33);
+    level.dof["ads"]["current"]["farStart"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["farStart"], level.dof["ads"]["goal"]["farStart"], farstartmaxchange, 0.33);
+    level.dof["ads"]["current"]["farEnd"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["farEnd"], level.dof["ads"]["goal"]["farEnd"], farendmaxchange, 0.33);
     level.dof["ads"]["current"]["farBlur"] = dof_blend_interior_ads_element(level.dof["ads"]["current"]["farBlur"], level.dof["ads"]["goal"]["farBlur"], blurmaxchange, 0.33);
     level.dof["ads"]["current"]["weight"] = 1;
   }
@@ -459,8 +459,8 @@ function dumpsettings() {
     }
 
     tracedist = getdvarfloat(@ "hash_16d3b68a571cd9cc", 4096);
-    var_ebd028b565f4bedb = getdvarfloat(@ "hash_f920da78c320d7c9", 0);
-    var_602ebb6e55fcfada = getdvarint(@ "hash_46a24e55882202b4", 5000);
+    maxenemydist = getdvarfloat(@ "hash_f920da78c320d7c9", 0);
+    playerforgetenemytime = getdvarint(@ "hash_46a24e55882202b4", 5000);
     nearstartscale = getdvarfloat(@ "hash_70ad5c8b5390da5b", 0.25);
     nearendscale = getdvarfloat(@ "hash_cb3ccd57ba94fab4", 0.85);
     farstartscale = getdvarfloat(@ "hash_8260157d7099d0a", 1.15);
@@ -468,12 +468,12 @@ function dumpsettings() {
     nearblur = getdvarfloat(@ "hash_46ecedfd7e9e40a4", 4);
     farblur = getdvarfloat(@ "hash_ad993fc2da2f7edd", 8);
     playereye = self getEye();
-    var_972972d6c58949c3 = self getplayerangles();
+    playeranglesrel = self getplayerangles();
 
     if(isDefined(self.dof_ref_ent)) {
-      playerangles = combineangles(self.dof_ref_ent.angles, var_972972d6c58949c3);
+      playerangles = combineangles(self.dof_ref_ent.angles, playeranglesrel);
     } else {
-      playerangles = var_972972d6c58949c3;
+      playerangles = playeranglesrel;
     }
 
     playerforward = vectorNormalize(anglesToForward(playerangles));
@@ -499,7 +499,7 @@ function dumpsettings() {
 
     foreach(enemy in enemies) {
       enemyaware = enemy isenemyaware();
-      enemyseen = enemy hasenemybeenseen(var_602ebb6e55fcfada);
+      enemyseen = enemy hasenemybeenseen(playerforgetenemytime);
 
       if(!enemyaware && !enemyseen) {
         continue;
@@ -518,10 +518,10 @@ function dumpsettings() {
         nearend = distfrom - 30;
       }
 
-      var_a7306ab28e96771e = min(distfrom, var_ebd028b565f4bedb);
+      distfromfar = min(distfrom, maxenemydist);
 
-      if(var_a7306ab28e96771e + 30 > farstart) {
-        farstart = var_a7306ab28e96771e + 30;
+      if(distfromfar + 30 > farstart) {
+        farstart = distfromfar + 30;
       }
     }
 
@@ -560,30 +560,30 @@ function dumpsettings() {
     }
 
     tracedist = getdvarfloat(@ "hash_16d3b68a571cd9cc", 4096);
-    var_ebd028b565f4bedb = getdvarfloat(@ "hash_f920da78c320d7c9", 0);
-    var_602ebb6e55fcfada = getdvarint(@ "hash_46a24e55882202b4", 5000);
+    maxenemydist = getdvarfloat(@ "hash_f920da78c320d7c9", 0);
+    playerforgetenemytime = getdvarint(@ "hash_46a24e55882202b4", 5000);
     mountfrac = self playermount();
     playereye = self getEye();
-    var_972972d6c58949c3 = self getplayerangles();
+    playeranglesrel = self getplayerangles();
 
     if(mountfrac > 0) {
       switch (level.player playermounttype()) {
         case #"hash_b882c19d3b9f4eb6":
-          playereye += anglestoright(var_972972d6c58949c3) * -3;
+          playereye += anglestoright(playeranglesrel) * -3;
           break;
         case #"hash_c00b1399e3e96eeb":
-          playereye += anglestoright(var_972972d6c58949c3) * 3;
+          playereye += anglestoright(playeranglesrel) * 3;
           break;
         case #"hash_d45b94ed344be47e":
-          playereye += anglestoup(var_972972d6c58949c3) * 3;
+          playereye += anglestoup(playeranglesrel) * 3;
           break;
       }
     }
 
     if(isDefined(self.dof_ref_ent)) {
-      playerangles = combineangles(self.dof_ref_ent.angles, var_972972d6c58949c3);
+      playerangles = combineangles(self.dof_ref_ent.angles, playeranglesrel);
     } else {
-      playerangles = var_972972d6c58949c3;
+      playerangles = playeranglesrel;
     }
 
     playerforward = vectorNormalize(anglesToForward(playerangles));
@@ -595,7 +595,7 @@ function dumpsettings() {
 
     foreach(enemy in enemies) {
       enemyaware = enemy isenemyaware();
-      enemyseen = enemy hasenemybeenseen(var_602ebb6e55fcfada);
+      enemyseen = enemy hasenemybeenseen(playerforgetenemytime);
 
       if(!enemyaware && !enemyseen) {
         continue;
@@ -614,10 +614,10 @@ function dumpsettings() {
         results["start"] = distfrom;
       }
 
-      var_a7306ab28e96771e = min(distfrom, var_ebd028b565f4bedb);
+      distfromfar = min(distfrom, maxenemydist);
 
-      if(var_a7306ab28e96771e > results["end"]) {
-        results["end"] = var_a7306ab28e96771e;
+      if(distfromfar > results["end"]) {
+        results["end"] = distfromfar;
       }
     }
 
@@ -757,7 +757,7 @@ function dumpsettings() {
         wait 0.5;
       }
 
-      thread function_9c8da89540111999();
+      thread dof_debug_start();
 
       while(true) {
         if(getDvar(@ "hash_3c32490464e4a898") == "<dev string:x20>") {
@@ -767,7 +767,7 @@ function dumpsettings() {
         wait 0.5;
       }
 
-      thread function_d231250b2db3c453();
+      thread dof_debug_stop();
     }
   }
 
@@ -869,7 +869,7 @@ function dumpsettings() {
     bar setshader("<dev string:x228>", int(bar_width * actual_weight), 8);
   }
 
-  function function_9c8da89540111999() {
+  function dof_debug_start() {
     level notify("<dev string:x253>");
     level endon("<dev string:x253>");
     x = 40;
@@ -896,7 +896,7 @@ function dumpsettings() {
     }
   }
 
-  function function_d231250b2db3c453() {
+  function dof_debug_stop() {
     level notify("<dev string:x253>");
     level.var_335b99f5e3345111["<dev string:x22e>"].bar destroy();
     level.var_335b99f5e3345111["<dev string:x22>"].bar destroy();
@@ -912,9 +912,9 @@ function dumpsettings() {
   }
 
   function tess_init() {
-    var_75e889a96a1e1e5 = getDvar(@ "hash_3914a6109ddfa630");
+    using_tessellation = getDvar(@ "hash_3914a6109ddfa630");
 
-    if(var_75e889a96a1e1e5 == "") {
+    if(using_tessellation == "") {
       return;
     }
 
@@ -932,8 +932,8 @@ function dumpsettings() {
     }
   }
 
-  function tess_set_goal(var_92ad28aede5bf05e, cutoff_falloff, blend_time) {
-    level.tess.cutoff_distance_goal = var_92ad28aede5bf05e;
+  function tess_set_goal(cutoff_distance, cutoff_falloff, blend_time) {
+    level.tess.cutoff_distance_goal = cutoff_distance;
     level.tess.cutoff_falloff_goal = cutoff_falloff;
     level.tess.time_remaining = blend_time;
   }
@@ -949,9 +949,9 @@ function dumpsettings() {
       if(level.tess.time_remaining > 0) {
         frames = level.tess.time_remaining * 20;
         distance_increment = (level.tess.cutoff_distance_goal - level.tess.cutoff_distance_current) / frames;
-        var_f18ef0f6f6349b6b = (level.tess.cutoff_falloff_goal - level.tess.cutoff_falloff_current) / frames;
+        falloff_increment = (level.tess.cutoff_falloff_goal - level.tess.cutoff_falloff_current) / frames;
         level.tess.cutoff_distance_current += distance_increment;
-        level.tess.cutoff_falloff_current += var_f18ef0f6f6349b6b;
+        level.tess.cutoff_falloff_current += falloff_increment;
         level.tess.time_remaining -= 0.05;
       } else {
         level.tess.cutoff_distance_current = level.tess.cutoff_distance_goal;
@@ -1068,7 +1068,7 @@ function dumpsettings() {
     level._clearalltextafterhudelem = 0;
   }
 
-  function function_67bc9d1f5c5c787c() {
+  function reset_cmds() {
     setdevdvar(@ "hash_de86d29dde73df", 0);
     setdevdvar(@ "hash_cc21f65bade3fb07", 0);
   }

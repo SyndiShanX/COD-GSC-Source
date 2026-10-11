@@ -242,11 +242,11 @@ function function_cecaa2fcd2694301(node) {
 
   if(getdvarint(@ "hash_973bce2266588096")) {
     jltv = scripts\cp_mp\vehicles\vehicle::vehicle_spawn("veh9_jltv_cargo", node);
-    jltv.var_a8f4bb03b366aa80 = 1;
+    jltv.dontspawnhusk = 1;
   } else {
     node.modeloverride = "veh9_mil_lnd_jltv_turret_cargo_vehphys_mp";
     jltv = scripts\cp_mp\vehicles\vehicle::vehicle_spawn("veh9_jltv_mg", node);
-    jltv.var_a8f4bb03b366aa80 = 1;
+    jltv.dontspawnhusk = 1;
     jltv.var_7ee6203c5532a9e6 = 1;
   }
 
@@ -272,7 +272,7 @@ function function_cf8f787850f621f9(vehicle) {
     triggerfx(explosioneffect);
     thread play_sound_in_space("mp_dmz_cargo_destroyed", explosionpos);
     payload delete();
-    explosioneffect thread function_b4b04de87729a6f3(10);
+    explosioneffect thread delete_after_delay(10);
   }
 }
 
@@ -304,7 +304,7 @@ function private function_6259c52471af01f2(agent, killer) {
   }
 }
 
-function private function_259857d59f9c9072(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_259857d59f9c9072(instance, part, state, player, bautouse, usestring) {
   instance setscriptablepartstate("dmz_sliding_barn_door", "opening");
   destroynavobstacle(instance.navblocker);
   instance.open = 1;

@@ -23,7 +23,7 @@ function init_napalmburst() {
   var_746d800f9d085b2a = default_to(level.var_f1240a9ac4f65616.var_4fb51392aae1ecd2, 0.2);
   var_ad5528a4132dc97d = default_to(level.var_f1240a9ac4f65616.var_4bf233f673b39379, 0.05);
   cooldownentity = default_to(level.var_f1240a9ac4f65616.var_55707674312df73c, 0);
-  var_bcbfc6de4213b6af = default_to(level.var_f1240a9ac4f65616.var_24269ee9413f1198, 3);
+  cooldownattacker = default_to(level.var_f1240a9ac4f65616.var_24269ee9413f1198, 3);
   cooldownglobal = default_to(level.var_f1240a9ac4f65616.var_13e6d0008e908b78, 3);
   var_f27a8d5708fd9c4d = default_to(level.var_f1240a9ac4f65616.var_c36a27ee3aa677b0, 1);
   damagefeedbackicon = default_to(level.var_f1240a9ac4f65616.var_d3b2954397f84855, "");
@@ -31,7 +31,7 @@ function init_napalmburst() {
   element = default_to(level.var_f1240a9ac4f65616.var_667e3a3f69aae5ba, "fire");
   level.var_f6b318184143b63e = [];
   level.var_c5af74f2886aa77c = [];
-  function_7f759db5de1b44b0("napalmburst", 4, var_746d800f9d085b2a, var_ad5528a4132dc97d, cooldownentity, var_bcbfc6de4213b6af, cooldownglobal, var_f27a8d5708fd9c4d, &function_a428cc7d938fa416, damagefeedbackicon, damagefeedbacksound, &function_af75491a8a4c3790, element);
+  function_7f759db5de1b44b0("napalmburst", 4, var_746d800f9d085b2a, var_ad5528a4132dc97d, cooldownentity, cooldownattacker, cooldownglobal, var_f27a8d5708fd9c4d, &function_a428cc7d938fa416, damagefeedbackicon, damagefeedbacksound, &function_af75491a8a4c3790, element);
   flag_set("napalmburst_ready");
 
   level thread function_439421327ad70eb();
@@ -104,7 +104,7 @@ function function_af75491a8a4c3790() {
 function function_746dda921942d946() {
   foreach(player in level.players) {
     currentweapon = player getcurrentweapon();
-    player function_6c40f58b29a952a9(currentweapon, "<dev string:x1c>");
+    player add_ammo_mod_to_weapon(currentweapon, "<dev string:x1c>");
     player iprintlnbold("<dev string:x2b>");
   }
 }

@@ -502,7 +502,7 @@ function setbuybackpingmessage() {
           }
 
           if(teammate != self && !istrue(teammate.gulag)) {
-            teammate namespace_88bfae359020fdd3::function_1976438a8865ac27("br_ftue_buyback");
+            teammate namespace_88bfae359020fdd3::ftue_triggertip("br_ftue_buyback");
           }
         }
 
@@ -583,9 +583,9 @@ function forceplayerspectatetarget(playertospectate) {
 
   if(isDefined(playertospectate.streampoint)) {
     streamorigin = playertospectate.streampoint.origin;
-    player function_670863fc4008c3d8(streamorigin);
+    player setadditionalstreamposuntilcleared(streamorigin);
   } else {
-    player function_670863fc4008c3d8(streamorigin, 0, playertospectate);
+    player setadditionalstreamposuntilcleared(streamorigin, 0, playertospectate);
   }
 
   player loadcustomizationplayerview(playertospectate);
@@ -614,7 +614,7 @@ function forceplayerspectatetarget(playertospectate) {
 
       if(distsq > var_e044db8497eee961) {
         streamorigin = playertospectate.origin;
-        player function_670863fc4008c3d8(streamorigin, 0, playertospectate);
+        player setadditionalstreamposuntilcleared(streamorigin, 0, playertospectate);
         nextpositionupdate = gettime() + var_2d124f5cac8360e2;
       }
     }
@@ -634,7 +634,7 @@ function forceplayerspectatetarget(playertospectate) {
 
   while((isDefined(playertospectate.streampoint) || !isalive(playertospectate) || istrue(playertospectate.gulag) && !istrue(playertospectate.jailed)) && gettime() < timeout) {
     if(gettime() > var_8cabe71736d798a7) {
-      player function_670863fc4008c3d8(streamorigin);
+      player setadditionalstreamposuntilcleared(streamorigin);
       var_8cabe71736d798a7 = gettime() + var_1e41981f0fa40795;
     }
 

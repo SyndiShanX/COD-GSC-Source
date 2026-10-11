@@ -391,7 +391,7 @@ function function_2f29283af6ca7518(slot) {
     if(!isDefined(self.var_475ffd1b4c1bd315["primary"]) && !isDefined(self.var_475ffd1b4c1bd315["secondary"])) {
       self notify("mutation_recharge_stop");
       self.var_755a747d2250ffd8 = 0;
-      function_f9a207358d70923c(level.framedurationseconds, ["mutation_recharge_set", "disconnect"], &function_7b17e939dc4b9f10);
+      delaythreadendon(level.framedurationseconds, ["mutation_recharge_set", "disconnect"], &function_7b17e939dc4b9f10);
     }
   }
 }

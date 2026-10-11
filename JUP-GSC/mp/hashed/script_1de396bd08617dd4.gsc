@@ -22,7 +22,7 @@ function function_794ffcdb7828ea7a(itembundle, item, auto_use, var_18fc734ec7194
 
 function use_currency(itembundle, item, auto_use) {
   currencytype = itembundle.subtype;
-  var_3d7ffadeef043c6 = function_b8bfea9514c89a77(item.count);
+  currencyamount = function_b8bfea9514c89a77(item.count);
 
   if(!isDefined(currencytype) || currencytype == "") {
     itembundlename = function_2cdc55ba39d97d70(item.type);
@@ -31,9 +31,9 @@ function use_currency(itembundle, item, auto_use) {
   }
 
   if(currencytype == "essence" && isDefined(self.zombie_point_scalar)) {
-    var_3d7ffadeef043c6 *= self.zombie_point_scalar;
+    currencyamount *= self.zombie_point_scalar;
   }
 
-  scripts\cp_mp\currency::function_3036cef61495210f(currencytype, var_3d7ffadeef043c6);
+  scripts\cp_mp\currency::function_3036cef61495210f(currencytype, currencyamount);
   return false;
 }

@@ -67,7 +67,7 @@ function function_701902185150632a(player) {
   }
 }
 
-function function_7df76584d6078b46(vehicle, var_7558f98f3236963d, player, data) {
+function function_7df76584d6078b46(vehicle, newseatid, player, data) {
   player.isdrivingvehicle = 1;
 
   if(istrue(level.var_d39df167f3a996b0)) {
@@ -78,7 +78,7 @@ function function_7df76584d6078b46(vehicle, var_7558f98f3236963d, player, data) 
   }
 }
 
-function function_40ce047405104c04(vehicle, var_7558f98f3236963d, player, data) {
+function function_40ce047405104c04(vehicle, newseatid, player, data) {
   if(!istrue(data.playerdisconnect)) {
     player.isdrivingvehicle = undefined;
   }

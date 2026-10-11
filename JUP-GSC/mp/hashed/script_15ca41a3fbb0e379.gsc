@@ -79,7 +79,7 @@ function function_9533653868e59fb6(identifier, classname, script_noteworthy, mod
       level.var_197dd712f141b8c9 = [];
     }
 
-    level.var_197dd712f141b8c9[level.var_197dd712f141b8c9.size] = function_aab2831f2d0f944a(identifier) + function_b1b21a5b869b18da(gettime()) + function_30bf74c984738a04(classname) + function_278982e83dc6ce99(script_noteworthy) + function_1bcd1f2b4cce887e(model) + function_4d7beaffcd9fe273(targetname) + function_d6253982f9352e40(target) + function_3a41ae43e44d1c4b(poi) + function_8ca7e0ea3c4eba9f(origin);
+    level.var_197dd712f141b8c9[level.var_197dd712f141b8c9.size] = function_aab2831f2d0f944a(identifier) + function_b1b21a5b869b18da(gettime()) + function_30bf74c984738a04(classname) + function_278982e83dc6ce99(script_noteworthy) + function_1bcd1f2b4cce887e(model) + function_4d7beaffcd9fe273(targetname) + function_d6253982f9352e40(target) + function_3a41ae43e44d1c4b(poi) + origintostring(origin);
   }
 }
 
@@ -100,9 +100,9 @@ function private function_8db779c9344416cf() {
     }
 
     if(loot.type == 0) {
-      strings[strings.size] = "<dev string:x8f>" + function_8ca7e0ea3c4eba9f(loot.origin);
+      strings[strings.size] = "<dev string:x8f>" + origintostring(loot.origin);
     } else if(loot.type == 1) {
-      strings[strings.size] = "<dev string:xba>" + function_8ca7e0ea3c4eba9f(loot.origin);
+      strings[strings.size] = "<dev string:xba>" + origintostring(loot.origin);
     }
 
     linenum++;
@@ -139,12 +139,12 @@ function private function_b293bcd46c2e94f3() {
   startpointstrings = [];
 
   foreach(startpoint in getStructArray("<dev string:x119>", "<dev string:x130>")) {
-    startpointstrings[startpointstrings.size] = "<dev string:x145>" + "<dev string:x119>" + "<dev string:x184>" + function_3a41ae43e44d1c4b(startpoint.poi) + function_8ca7e0ea3c4eba9f(startpoint.origin);
+    startpointstrings[startpointstrings.size] = "<dev string:x145>" + "<dev string:x119>" + "<dev string:x184>" + function_3a41ae43e44d1c4b(startpoint.poi) + origintostring(startpoint.origin);
   }
 
   for(i = 1; getStructArray("<dev string:x18e>" + i, "<dev string:x130>").size > 0; i++) {
     foreach(startpoint in getStructArray("<dev string:x18e>" + i, "<dev string:x130>")) {
-      startpointstrings[startpointstrings.size] = "<dev string:x1b1>" + i + "<dev string:x1cc>" + "<dev string:x119>" + i + "<dev string:x184>" + function_3a41ae43e44d1c4b(startpoint.poi) + function_8ca7e0ea3c4eba9f(startpoint.origin);
+      startpointstrings[startpointstrings.size] = "<dev string:x1b1>" + i + "<dev string:x1cc>" + "<dev string:x119>" + i + "<dev string:x184>" + function_3a41ae43e44d1c4b(startpoint.poi) + origintostring(startpoint.origin);
     }
   }
 
@@ -155,12 +155,12 @@ function private function_6094c4cbc86f7349() {
   var_68bb623616b45317 = [];
 
   foreach(exfil in getStructArray("<dev string:x1fb>", "<dev string:x130>")) {
-    var_68bb623616b45317[var_68bb623616b45317.size] = "<dev string:x212>" + "<dev string:x1fb>" + "<dev string:x184>" + function_3a41ae43e44d1c4b(exfil.poi) + function_8ca7e0ea3c4eba9f(exfil.origin);
+    var_68bb623616b45317[var_68bb623616b45317.size] = "<dev string:x212>" + "<dev string:x1fb>" + "<dev string:x184>" + function_3a41ae43e44d1c4b(exfil.poi) + origintostring(exfil.origin);
   }
 
   for(i = 1; getStructArray("<dev string:x25a>" + i, "<dev string:x130>").size > 0; i++) {
     foreach(exfil in getStructArray("<dev string:x25a>" + i, "<dev string:x130>")) {
-      var_68bb623616b45317[var_68bb623616b45317.size] = "<dev string:x274>" + i + "<dev string:x1cc>" + "<dev string:x25a>" + i + "<dev string:x184>" + function_3a41ae43e44d1c4b(exfil.poi) + function_8ca7e0ea3c4eba9f(exfil.origin);
+      var_68bb623616b45317[var_68bb623616b45317.size] = "<dev string:x274>" + i + "<dev string:x1cc>" + "<dev string:x25a>" + i + "<dev string:x184>" + function_3a41ae43e44d1c4b(exfil.poi) + origintostring(exfil.origin);
     }
   }
 
@@ -171,7 +171,7 @@ function private function_67c705226d08e320() {
   uavstrings = [];
 
   foreach(uav in getStructArray("<dev string:x292>", "<dev string:x29f>")) {
-    uavstrings[uavstrings.size] = "<dev string:x2ad>" + function_3a41ae43e44d1c4b(uav.poi) + function_8ca7e0ea3c4eba9f(uav.origin);
+    uavstrings[uavstrings.size] = "<dev string:x2ad>" + function_3a41ae43e44d1c4b(uav.poi) + origintostring(uav.origin);
   }
 
   return uavstrings;
@@ -181,7 +181,7 @@ function private function_a81f0b5aab63247d() {
   var_3f39b05bdfa514d3 = [];
 
   foreach(fortress in getStructArray("<dev string:x312>", "<dev string:x29f>")) {
-    var_3f39b05bdfa514d3[var_3f39b05bdfa514d3.size] = "<dev string:x31e>" + fortress.script_noteworthy + "<dev string:x360>" + fortress.target + "<dev string:x382>" + function_8ca7e0ea3c4eba9f(fortress.origin);
+    var_3f39b05bdfa514d3[var_3f39b05bdfa514d3.size] = "<dev string:x31e>" + fortress.script_noteworthy + "<dev string:x360>" + fortress.target + "<dev string:x382>" + origintostring(fortress.origin);
   }
 
   return var_3f39b05bdfa514d3;
@@ -195,7 +195,7 @@ function private function_82123529e3e33752() {
 
     if(issubstr(zonename, "<dev string:x388>")) {
       zonebounds = function_6a9090e74fd4e90a(zoneindex);
-      var_604292aa57d017e4[var_604292aa57d017e4.size] = "<dev string:x393>" + zonename + "<dev string:x3cf>" + function_8ca7e0ea3c4eba9f(zonebounds.midpoint);
+      var_604292aa57d017e4[var_604292aa57d017e4.size] = "<dev string:x393>" + zonename + "<dev string:x3cf>" + origintostring(zonebounds.midpoint);
     }
   }
 
@@ -206,7 +206,7 @@ function private function_c76b3a8b1579f6b3() {
   var_e396a2efd83e0241 = [];
 
   foreach(buystation in getStructArray("<dev string:x3db>", "<dev string:x29f>")) {
-    var_e396a2efd83e0241[var_e396a2efd83e0241.size] = "<dev string:x3ea>" + function_3a41ae43e44d1c4b(buystation.poi) + function_8ca7e0ea3c4eba9f(buystation.origin);
+    var_e396a2efd83e0241[var_e396a2efd83e0241.size] = "<dev string:x3ea>" + function_3a41ae43e44d1c4b(buystation.poi) + origintostring(buystation.origin);
   }
 
   return var_e396a2efd83e0241;
@@ -216,11 +216,11 @@ function private function_a96ecbceeaded59e() {
   var_afe74a4a4eb003f8 = [];
 
   foreach(gasstation in getStructArray("<dev string:x465>", "<dev string:x29f>")) {
-    var_afe74a4a4eb003f8[var_afe74a4a4eb003f8.size] = "<dev string:x474>" + function_3a41ae43e44d1c4b(gasstation.poi) + function_8ca7e0ea3c4eba9f(gasstation.origin);
+    var_afe74a4a4eb003f8[var_afe74a4a4eb003f8.size] = "<dev string:x474>" + function_3a41ae43e44d1c4b(gasstation.poi) + origintostring(gasstation.origin);
   }
 
   foreach(gasstation in getStructArray("<dev string:x4c3>", "<dev string:x29f>")) {
-    var_afe74a4a4eb003f8[var_afe74a4a4eb003f8.size] = "<dev string:x4d9>" + function_3a41ae43e44d1c4b(gasstation.poi) + function_8ca7e0ea3c4eba9f(gasstation.origin);
+    var_afe74a4a4eb003f8[var_afe74a4a4eb003f8.size] = "<dev string:x4d9>" + function_3a41ae43e44d1c4b(gasstation.poi) + origintostring(gasstation.origin);
   }
 
   return var_afe74a4a4eb003f8;
@@ -230,7 +230,7 @@ function private function_d04d1f2b66d72ca() {
   reinforcestrings = [];
 
   foreach(node in getStructArray("<dev string:x536>", "<dev string:x130>")) {
-    reinforcestrings[reinforcestrings.size] = "<dev string:x545>" + function_4d7beaffcd9fe273(node.targetname) + "<dev string:x382>" + function_3a41ae43e44d1c4b(node.poi) + function_8ca7e0ea3c4eba9f(node.origin);
+    reinforcestrings[reinforcestrings.size] = "<dev string:x545>" + function_4d7beaffcd9fe273(node.targetname) + "<dev string:x382>" + function_3a41ae43e44d1c4b(node.poi) + origintostring(node.origin);
   }
 
   return reinforcestrings;
@@ -247,7 +247,7 @@ function private function_aa334e5e3d060a5a() {
         vehicletype = vehicleref;
       }
 
-      var_8cc7b67b8bd0fefc[var_8cc7b67b8bd0fefc.size] = "<dev string:x5b4>" + vehicletype + "<dev string:x5c3>" + vehicletype + "<dev string:x382>" + function_1bcd1f2b4cce887e(vehicledata.model) + "<dev string:x184>" + function_8ca7e0ea3c4eba9f(spawnstruct.origin);
+      var_8cc7b67b8bd0fefc[var_8cc7b67b8bd0fefc.size] = "<dev string:x5b4>" + vehicletype + "<dev string:x5c3>" + vehicletype + "<dev string:x382>" + function_1bcd1f2b4cce887e(vehicledata.model) + "<dev string:x184>" + origintostring(spawnstruct.origin);
     }
   }
 
@@ -271,7 +271,7 @@ function private function_9c160c396ef3a059() {
 
 function private getaiarraystrings(array, struct, identifier) {
   foreach(node in array) {
-    struct.strings[struct.strings.size] = "<dev string:x5b4>" + identifier + "<dev string:x634>" + function_278982e83dc6ce99(node.script_noteworthy) + "<dev string:x382>" + function_4d7beaffcd9fe273(node.targetname) + function_d6253982f9352e40(node.target) + function_3a41ae43e44d1c4b(node.poi) + function_8ca7e0ea3c4eba9f(node.origin);
+    struct.strings[struct.strings.size] = "<dev string:x5b4>" + identifier + "<dev string:x634>" + function_278982e83dc6ce99(node.script_noteworthy) + "<dev string:x382>" + function_4d7beaffcd9fe273(node.targetname) + function_d6253982f9352e40(node.target) + function_3a41ae43e44d1c4b(node.poi) + origintostring(node.origin);
   }
 }
 
@@ -284,9 +284,9 @@ function private function_59b40f693aa4f4f9() {
     loot = getlootspawnpoint(i);
 
     if(loot.type == 0) {
-      strings[strings.size] = "<dev string:x650>" + function_8ca7e0ea3c4eba9f(loot.origin);
+      strings[strings.size] = "<dev string:x650>" + origintostring(loot.origin);
     } else if(loot.type == 1) {
-      strings[strings.size] = "<dev string:x674>" + function_8ca7e0ea3c4eba9f(loot.origin);
+      strings[strings.size] = "<dev string:x674>" + origintostring(loot.origin);
     }
 
     linenum++;
@@ -329,7 +329,7 @@ function private function_573e0a776acce440() {
 }
 
 function private function_bc14aaa5b9b5cab3(node, name) {
-  return "<dev string:x5b4>" + name + "<dev string:x705>" + name + function_278982e83dc6ce99(node.script_noteworthy) + function_1bcd1f2b4cce887e(node.model) + function_4d7beaffcd9fe273(node.targetname) + "<dev string:x382>" + function_3a41ae43e44d1c4b(node.poi) + function_8ca7e0ea3c4eba9f(node.origin);
+  return "<dev string:x5b4>" + name + "<dev string:x705>" + name + function_278982e83dc6ce99(node.script_noteworthy) + function_1bcd1f2b4cce887e(node.model) + function_4d7beaffcd9fe273(node.targetname) + "<dev string:x382>" + function_3a41ae43e44d1c4b(node.poi) + origintostring(node.origin);
 }
 
 function private function_455766fa035b448b(includetime) {
@@ -341,7 +341,7 @@ function private function_72c9cdffd3f822e0(includetime) {
   strings = [];
 
   foreach(corner in level.mapcorners) {
-    strings[strings.size] = "<dev string:x756>" + ter_op(istrue(includetime), "<dev string:x734>", "<dev string:x73f>") + "<dev string:x5c3>" + level.minimapmaterial + "<dev string:x773>" + function_8ca7e0ea3c4eba9f(corner.origin);
+    strings[strings.size] = "<dev string:x756>" + ter_op(istrue(includetime), "<dev string:x734>", "<dev string:x73f>") + "<dev string:x5c3>" + level.minimapmaterial + "<dev string:x773>" + origintostring(corner.origin);
   }
 
   return strings;
@@ -403,7 +403,7 @@ function private function_d6253982f9352e40(target) {
   return "<dev string:x382>";
 }
 
-function private function_8ca7e0ea3c4eba9f(origin) {
+function private origintostring(origin) {
   assert(isDefined(origin));
   return "<dev string:x7ce>" + origin[0] + "<dev string:x7ce>" + origin[1] + "<dev string:x7ce>" + origin[2];
 }

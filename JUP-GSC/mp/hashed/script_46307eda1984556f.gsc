@@ -169,8 +169,8 @@ function private function_b13ac97633c63624(vehicle, spawndata, weaponname) {
   turret linkTo(vehicle, var_a3f821b135a9eb0d, (0, 0, 0), (0, 0, 0));
   model = ter_op(vehicle.var_39a0d8ee3716ac3a, "veh9_mil_lnd_tank_turret_gun", "veh9_mil_lnd_tank_cougar_turret_gun");
 
-  if(isDefined(spawndata.var_14cde247ac3313a4)) {
-    model = spawndata.var_14cde247ac3313a4 + "::" + model;
+  if(isDefined(spawndata.skinoverride)) {
+    model = spawndata.skinoverride + "::" + model;
   }
 
   turret setModel(model);
@@ -649,13 +649,13 @@ function private function_9af3933c15dee53f(player) {
   vehomn_hidewarning("burningDown", player, self.vehicleref);
 }
 
-function private function_2b551bb5fd2a71ea(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_2b551bb5fd2a71ea(vehicle, seatid, oldseatid, player, data) {
   if(istrue(data.success)) {
-    thread function_96c9a47c791faad7(vehicle, seatid, var_fc7c7a874b43a31a, player, data);
+    thread function_96c9a47c791faad7(vehicle, seatid, oldseatid, player, data);
   }
 }
 
-function private function_96c9a47c791faad7(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_96c9a47c791faad7(vehicle, seatid, oldseatid, player, data) {
   if(seatid == "driver") {
     thread vehicle_occupancy_disablefirefortime(player, 250);
     player killstreak_savenvgstate();
@@ -674,25 +674,25 @@ function private function_96c9a47c791faad7(vehicle, seatid, var_fc7c7a874b43a31a
     thread function_9d6846994acaa116(player);
   }
 
-  if(!isDefined(var_fc7c7a874b43a31a)) {
+  if(!isDefined(oldseatid)) {
     vehicle function_b1240a7393ce6237(player);
   }
 
-  vehomn_updateomnvarsonseatenter(vehicle, var_fc7c7a874b43a31a, seatid, player);
-  function_f0a2ee74a6062970(vehicle, var_fc7c7a874b43a31a, seatid, player);
+  vehomn_updateomnvarsonseatenter(vehicle, oldseatid, seatid, player);
+  function_f0a2ee74a6062970(vehicle, oldseatid, seatid, player);
 
   if(seatid == "driver") {
     vehicle thread function_e0c40131c7b05ab4(player);
   }
 }
 
-function private function_e4f419f5eb18e42(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_e4f419f5eb18e42(vehicle, seatid, newseatid, player, data) {
   if(istrue(data.success)) {
-    thread function_dd16ede536092cf(vehicle, seatid, var_7558f98f3236963d, player, data);
+    thread function_dd16ede536092cf(vehicle, seatid, newseatid, player, data);
   }
 }
 
-function private function_dd16ede536092cf(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_dd16ede536092cf(vehicle, seatid, newseatid, player, data) {
   if(seatid == "driver") {
     vehicle notify("cougar_driver_exit");
 
@@ -725,11 +725,11 @@ function private function_dd16ede536092cf(vehicle, seatid, var_7558f98f3236963d,
   }
 
   if(!istrue(data.playerdisconnect)) {
-    if(!isDefined(var_7558f98f3236963d)) {
+    if(!isDefined(newseatid)) {
       vehicle function_b1240a7393ce6237(player);
     }
 
-    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, var_7558f98f3236963d, player, data);
+    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, newseatid, player, data);
 
     if(!success) {
       if(issharedfuncdefined("vehicle_occupancy", "handleSuicideFromVehicles")) {
@@ -740,7 +740,7 @@ function private function_dd16ede536092cf(vehicle, seatid, var_7558f98f3236963d,
     }
   }
 
-  scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsonseatexit(vehicle, seatid, var_7558f98f3236963d, player);
+  scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsonseatexit(vehicle, seatid, newseatid, player);
 }
 
 function private function_9d6846994acaa116(player) {
@@ -751,7 +751,7 @@ function private function_64261a02a23bc333(player) {
   player clearclienttriggeraudiozone(0.2);
 }
 
-function private function_cf6f72b7ff33fe2e(vehicle, var_9de41f2ee77c33ba, var_3f68c37bafd38606, player, data) {
+function private function_cf6f72b7ff33fe2e(vehicle, reenterseatid, var_3f68c37bafd38606, player, data) {
   if(isDefined(var_3f68c37bafd38606) && var_3f68c37bafd38606 == "gunner") {
     turretweapon = vehicle function_268d9321d5ac7af8();
     thread vehicle_occupancy_taketurret(player, vehicle, turretweapon, data, 1);
@@ -1183,8 +1183,8 @@ function private function_623c9e05c6d3cd5b(vehicle, owner, ownerchanged, ownerte
   }
 }
 
-function private function_f0a2ee74a6062970(vehicle, var_fc7c7a874b43a31a, var_7558f98f3236963d, player) {
-  if(var_7558f98f3236963d == "driver") {
+function private function_f0a2ee74a6062970(vehicle, oldseatid, newseatid, player) {
+  if(newseatid == "driver") {
     vehicle function_326a22d7feae6244();
   }
 

@@ -44,13 +44,13 @@ function addtosystem() {
   self.chatinitialized = 1;
 }
 
-function setup_mp_hero(var_c6910a7018189965, var_4189af81d34b8804, var_10e927a072c477b) {
+function setup_mp_hero(var_c6910a7018189965, combatmapid, stealthmapid) {
   var_e530e91be23a6bc9 = tolower(default_to(var_c6910a7018189965, self.script_friendname));
   self.battlechatter.countryid = var_e530e91be23a6bc9;
   self.battlechatter.npcid = undefined;
   self.battlechatter.ishero = 1;
-  anim.var_6d557183af1d1db5[var_e530e91be23a6bc9] = var_4189af81d34b8804;
-  anim.var_7f532a5dc6603698[var_e530e91be23a6bc9] = var_10e927a072c477b;
+  anim.var_6d557183af1d1db5[var_e530e91be23a6bc9] = combatmapid;
+  anim.var_7f532a5dc6603698[var_e530e91be23a6bc9] = stealthmapid;
 }
 
 function function_ffd2cfb5b8a113ac(text, duration) {
@@ -125,7 +125,7 @@ function setvoice(voice) {
   assign_npcid();
 }
 
-function function_da324cd732971e8c() {
+function reassignvoiceid() {
   clearvoice();
   assign_npcid();
 }
@@ -136,8 +136,8 @@ function removefromsystem(squad) {
   }
 
   if(!isalive(self) && isDefined(self.attacker) && !is_equal(squad.team, self.attacker.team) && squad.team != "neutral") {
-    self.attacker thread function_453b3867c6ec0ceb(self, self.attacker.team);
-    thread function_f649c4ef3acdec1d(squad.team);
+    self.attacker thread killfirmevent(self, self.attacker.team);
+    thread casualtyevent(squad.team);
   }
 
   if(isDefined(self.battlechatter) && isDefined(self.battlechatter.npcid) && isDefined(self.voice)) {
@@ -171,7 +171,7 @@ function function_bd6944098e09347f(team, countryid, npcid, name) {
   corpse = undefined;
 
   while(!isDefined(corpse)) {
-    array = [[level.var_621af16ef0684a11]](level.var_798aa343368f724e);
+    array = [[level.var_621af16ef0684a11]](level.bcs_neardist);
 
     foreach(corpseent in array) {
       if(corpseent getentitynumber() == entnum) {
@@ -235,10 +235,10 @@ function aithreadwaiter() {
 function waittill_missile_fire() {
   while(true) {
     self waittill("missile_fire", missile, objweapon);
-    var_fc3f189c0832aec2 = function_c666e714b2411844(objweapon);
+    bcs_subcategory = function_c666e714b2411844(objweapon);
 
-    if(isDefined(var_fc3f189c0832aec2)) {
-      function_216c67ab6749137a(self, undefined, "use", var_fc3f189c0832aec2);
+    if(isDefined(bcs_subcategory)) {
+      addbattlechatternotify(self, undefined, "use", bcs_subcategory);
     }
   }
 }
@@ -248,10 +248,10 @@ function waittill_grenade_fire() {
     self waittill("grenade_fire", grenade);
 
     if(isDefined(grenade) && isDefined(grenade.weapon_object)) {
-      var_fc3f189c0832aec2 = function_c666e714b2411844(grenade.weapon_object);
+      bcs_subcategory = function_c666e714b2411844(grenade.weapon_object);
 
-      if(function_8f8de1d6f307f960(var_fc3f189c0832aec2)) {
-        function_216c67ab6749137a(self, grenade, "grenade_danger", var_fc3f189c0832aec2);
+      if(function_8f8de1d6f307f960(bcs_subcategory)) {
+        addbattlechatternotify(self, grenade, "grenade_danger", bcs_subcategory);
       }
     }
   }
@@ -260,7 +260,7 @@ function waittill_grenade_fire() {
 function function_ad344a5a58977b39() {
   while(true) {
     self waittill("weapon_fired");
-    function_216c67ab6749137a(self, undefined, "attack");
+    addbattlechatternotify(self, undefined, "attack");
   }
 }
 
@@ -269,7 +269,7 @@ function waittill_move() {
     self waittill("goal_changed");
 
     if(distance2dsquared(self.origin, self.goalpos) > 10000) {
-      function_216c67ab6749137a(self, undefined, "move");
+      addbattlechatternotify(self, undefined, "move");
     }
   }
 }
@@ -282,7 +282,7 @@ function function_69110de99255d852() {
       var_5fedaa69e3ddfd3 = !var_5fedaa69e3ddfd3;
 
       if(var_5fedaa69e3ddfd3) {
-        function_216c67ab6749137a(self, undefined, "red_alert");
+        addbattlechatternotify(self, undefined, "red_alert");
       }
     }
 

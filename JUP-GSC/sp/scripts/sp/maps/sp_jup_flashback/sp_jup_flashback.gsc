@@ -55,13 +55,13 @@ function main() {
   add_global_spawn_function("axis", &function_2af739d19d5426cd);
   flag_init("introscreen_start_wait");
   level thread function_b1e3c22d0bf5b7b6();
-  level.var_eccaa394f663ffab = 1;
+  level.debug_badpath = 1;
   waitframe();
   thread objectives();
 }
 
 function startpoints() {
-  function_cecf9bab19082e9f();
+  initialize_transients();
   level.var_4291dad1008f93e6 = ["sp_jup_flashback_upper_westside_tr", "sp_jup_flashback_lower_westside_tr", "sp_jup_flashback_suburbs_tr", "sp_jup_flashback_ext_plaza_tr", "sp_jup_flashback_vista_tr"];
   level.var_a67ce3c274f5544e = ["sp_jup_flashback_lower_westside_tr", "sp_jup_flashback_suburbs_tr", "sp_jup_flashback_ext_plaza_tr", "sp_jup_flashback_vista_tr"];
   level.var_1cdebbdf0e614d2d = ["sp_jup_flashback_upper_westside_tr", "sp_jup_flashback_lower_westside_tr", "sp_jup_flashback_ext_plaza_tr"];
@@ -95,7 +95,7 @@ function startpoints() {
   add_start("makarov_escort_2", &function_dde4441415c2c7d6, &function_b287a28ff875c4c8, level.var_4291dad1008f93e6, &function_76fee1bbca1cbd31);
   add_start("escort_stadium_exit", &function_2baa4207f261ebd4, &function_8dd8339057b31e02, level.var_4291dad1008f93e6, &function_5e1d3677756c3fd3);
   add_start("makarov_escort_3", &function_87efde534fc49cd9, &function_7ef72faa51a3bc49, level.var_4291dad1008f93e6, &function_530c0fcf8f478a46);
-  add_start("exfil", &function_c3ae60ce78a6e109, &function_c491ef4666deb499, level.var_4291dad1008f93e6, &function_6da48ae496824cd6);
+  add_start("exfil", &exfil_setup, &exfil_main, level.var_4291dad1008f93e6, &exfil_catchup);
   set_default_start("infil_intro");
 }
 
@@ -131,7 +131,7 @@ function function_2af739d19d5426cd() {
   }
 
   thread record_flashed();
-  thread namespace_47819225b08b445d::function_127a31c7d0c84559(70, "neutral");
+  thread namespace_47819225b08b445d::navrepulsorremoveondeath(70, "neutral");
 }
 
 function record_flashed() {
@@ -260,7 +260,7 @@ function precache() {
   }
 }
 
-function function_cecf9bab19082e9f() {
+function initialize_transients() {
   transient_init("sp_jup_flashback_upper_westside_tr");
   transient_init("sp_jup_flashback_lower_westside_tr");
   transient_init("sp_jup_flashback_suburbs_tr");

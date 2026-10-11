@@ -9,9 +9,9 @@
 #using scripts\common\devgui;
 #using scripts\common\utility;
 #using scripts\engine\utility;
-#namespace namespace_bef38f3f43af8ebb;
+#namespace zombie_emergence_spawning;
 
-function function_77162a69f1bd973e(var_6e0fb0c557889b56, var_2411f6b1a46295a6) {
+function register_emergence_spawning_settings(var_6e0fb0c557889b56, var_2411f6b1a46295a6) {
   function_8abb92a7be2335d4(var_6e0fb0c557889b56);
   self.var_57f34b07b40854e8 = [];
   self._blackboard.var_955e413d1be8201a = 1;
@@ -38,7 +38,7 @@ function function_abed6225e0fce55c(params) {
   }
 }
 
-function function_4221e1b246248997(params) {
+function disable_emergence_spawning(params) {
   if(isDefined(self._blackboard.var_c6d286a55d32d53) && istrue(self._blackboard.var_c6d286a55d32d53)) {
     self._blackboard.var_c6d286a55d32d53 = 0;
   }
@@ -46,7 +46,7 @@ function function_4221e1b246248997(params) {
 
 function private function_8abb92a7be2335d4(var_6e0fb0c557889b56) {
   foreach(var_8e5735736895a5ec in var_6e0fb0c557889b56) {
-    self function_c6007f7404057c67(var_8e5735736895a5ec.var_c8b64adafd8e5711);
+    self function_c6007f7404057c67(var_8e5735736895a5ec.aisubclass);
   }
 }
 

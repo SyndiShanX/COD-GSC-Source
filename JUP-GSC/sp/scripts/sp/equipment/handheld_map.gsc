@@ -77,16 +77,16 @@ function function_cffffc8e6c8d7875() {
   }
 
   if(requiredmapaspectratio > 0) {
-    var_9f72e62e262287df = vectordot(northwest - southeast, north);
-    var_755d4c721ecb6165 = vectordot(northwest - southeast, west);
-    mapaspectratio = var_755d4c721ecb6165 / var_9f72e62e262287df;
+    northportion = vectordot(northwest - southeast, north);
+    westportion = vectordot(northwest - southeast, west);
+    mapaspectratio = westportion / northportion;
 
     if(mapaspectratio < requiredmapaspectratio) {
       incr = requiredmapaspectratio / mapaspectratio;
-      addvec = vecscale(west, var_755d4c721ecb6165 * (incr - 1) * 0.5);
+      addvec = vecscale(west, westportion * (incr - 1) * 0.5);
     } else {
       incr = mapaspectratio / requiredmapaspectratio;
-      addvec = vecscale(north, var_9f72e62e262287df * (incr - 1) * 0.5);
+      addvec = vecscale(north, northportion * (incr - 1) * 0.5);
     }
 
     northwest += addvec;

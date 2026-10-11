@@ -14,10 +14,10 @@
 
 function function_efcef5f4202ca985() {
   var_91453439419c79cd = getdvarfloat(@ "hash_39d77d3dc4a00ecc", 30);
-  addpowerbutton(self, "shout", "+frag", &function_5c2396a10a0c5296, 0, undefined, undefined, undefined, &"MP_ZXP/SHOUT", undefined, var_91453439419c79cd, "shoutStatus", "shoutProgress");
+  addpowerbutton(self, "shout", "+frag", &playeractivecamo, 0, undefined, undefined, undefined, &"MP_ZXP/SHOUT", undefined, var_91453439419c79cd, "shoutStatus", "shoutProgress");
 }
 
-function function_5c2396a10a0c5296(powerstruct, powerref) {
+function playeractivecamo(powerstruct, powerref) {
   zombie = self;
 
   if(!isDefined(zombie)) {
@@ -34,7 +34,7 @@ function function_5c2396a10a0c5296(powerstruct, powerref) {
   }
 
   if(zombie scripts\mp\utility\weapon::grenadeinpullback()) {
-    zombie function_187fb04ebd01baea();
+    zombie canceloffhands();
   }
 
   zombie thread function_120695737abd78f4(powerstruct, powerref);
@@ -53,7 +53,7 @@ function function_747fdce9aa07ad2b(powerstruct, powerref) {
   zombie endon("disconnect");
   zombie endon("zombie_unset");
   level endon("game_ended");
-  zombie.var_a2906c0a3da2c192 = 1;
+  zombie.shouting = 1;
 
   if(isDefined(powerstruct.powers[powerref].statusupdate)) {
     function_936f0ef6e203a7fc(powerstruct.powers[powerref].statusupdate, 4);
@@ -62,7 +62,7 @@ function function_747fdce9aa07ad2b(powerstruct, powerref) {
   self setscriptablepartstate("mutant_cloak", "cloak_on");
   wait 10;
   self setscriptablepartstate("mutant_cloak", "off");
-  zombie.var_a2906c0a3da2c192 = 0;
+  zombie.shouting = 0;
   zombie notify("zombie_shouting_finished");
   zombie.buffed = 1;
   zombie thread function_74b142ac51e57492();

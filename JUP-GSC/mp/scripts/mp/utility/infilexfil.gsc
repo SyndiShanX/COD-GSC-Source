@@ -611,7 +611,7 @@ function infil_player_rig_updated(animname, spawnpos, spawnang) {
   if(isDefined(self)) {
     println("<dev string:x8a>" + self.name + "<dev string:x6f>" + animname + "<dev string:x7f>" + isDefined(self.player_rig));
     self unlink();
-    thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 
   if(isDefined(player_rig)) {
@@ -932,7 +932,7 @@ function handleweaponstatenotetrack(state) {
       self.player thread cleanupswaploadoutflags();
 
       if(!isai(self.player) && isDefined(self) && isDefined(self.player) && isalive(self.player)) {
-        self.player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+        self.player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
       }
 
       if(istrue(self.updatedversion)) {
@@ -966,7 +966,7 @@ function handleweaponstatenotetrack(state) {
       }
 
       if(!isai(self.player)) {
-        self.player scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+        self.player scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
       }
 
       if(istrue(self.updatedversion) && self.player islinked()) {

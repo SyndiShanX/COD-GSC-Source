@@ -92,7 +92,7 @@ function main() {
     scripts\mp\utility\disconnect_event_aggregator::registerondisconnecteventcallback(&onplayerdisconnect);
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     scripts\mp\gametypes\mgl_mp::function_47e2a0de1d6b6115();
   }
 
@@ -219,7 +219,7 @@ function onnormaldeath(victim, attacker, lifeid, meansofdeath, objweapon, iskill
 function onspawnplayer(revivespawn) {
   scripts\mp\hud_message::function_f004ef4606b9efdc("kill_collect_tags");
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     thread scripts\mp\gametypes\mgl_mp::function_f9ae07213a0af3de();
   }
 
@@ -311,7 +311,7 @@ function givesuper() {
 
 function function_5ed2699b0bd6cd0a() {
   level.wrapkillstreaks = 1;
-  killstreaktype = function_1823ff50bb28148d("temp_v");
+  killstreaktype = getxhash("temp_v");
   scripts\mp\killstreaks\killstreaks::givestreakpoints(killstreaktype, 1, 0);
 
   if(!isDefined(self.numvials)) {

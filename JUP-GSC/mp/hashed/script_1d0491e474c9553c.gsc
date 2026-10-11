@@ -18,20 +18,20 @@ function autoexec main() {
   function_d6736c5ef5ac2990(var_601bcee5d276f46d, &function_3d588dcd552b26db);
 }
 
-function function_fe9929b42e5a99e4() {
+function init_metabones() {
   setdvarifuninitialized(@ "hash_9dd191a7e11820fd", 0);
   thread function_995a6309e572cf14();
 }
 
 function function_3d588dcd552b26db(params) {
-  var_c02b1f6c1721c844 = params.var_c02b1f6c1721c844;
-  index = function_f83b17b2b8d7a76d(var_c02b1f6c1721c844);
+  metabone_name = params.metabone_name;
+  index = get_weakpoint_index(metabone_name);
 
   if(index == -1) {
     return;
   }
 
-  name = var_c02b1f6c1721c844 + "_weakpoint";
+  name = metabone_name + "_weakpoint";
   utility::function_3677f2be30fdd581(name, "destroyed");
   self.entitydata.var_21544f0d5a3ef4d2 -= 1;
   self.entitydata.weakpoints[index].state = "destroyed";
@@ -54,9 +54,9 @@ function private function_995a6309e572cf14() {
   self endon("<dev string:x1c>");
 
   while(true) {
-    var_46a3e181e35f46ab = function_97fd256a244527b4(self.metabones.bundle_name);
+    metabones_def = function_97fd256a244527b4(self.metabones.bundle_name);
 
-    foreach(metabone in var_46a3e181e35f46ab.metabones) {
+    foreach(metabone in metabones_def.metabones) {
       foreach(tag in metabone.tags) {
         is_active = function_6db512214e7e7009(metabone.name + "<dev string:x25>");
         draw_tag(tag.tagname, tag.radius, is_active);

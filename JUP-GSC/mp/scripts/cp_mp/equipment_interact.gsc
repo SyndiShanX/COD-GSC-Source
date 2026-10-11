@@ -22,7 +22,7 @@ function equipmentinteract_init() {
   thread _updateuseobjs();
 }
 
-function equipmentscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function equipmentscriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x1c>");
   equipmentuse(instance.entity, player);
 }
@@ -63,7 +63,7 @@ function _updateuseobjs() {
       nearplayers = utility::playersnear(useobj.origin, 300);
 
       foreach(player in nearplayers) {
-        if(!istrue(scripts\cp_mp\utility\player_utility::playersareenemies(player, useobj.owner)) || istrue(useobj.isbeingused) || issharedfuncdefined("perk", "hasPerk") && !player[[getsharedfunc("perk", "hasPerk")]]("specialty_hack") || player scripts\cp_mp\emp_debuff::is_empd() || player namespace_53fc9ddbb516e6e1::function_c4d8558fc1592cd6() || level.gameended) {
+        if(!istrue(scripts\cp_mp\utility\player_utility::playersareenemies(player, useobj.owner)) || istrue(useobj.isbeingused) || issharedfuncdefined("perk", "hasPerk") && !player[[getsharedfunc("perk", "hasPerk")]]("specialty_hack") || player scripts\cp_mp\emp_debuff::is_empd() || player namespace_53fc9ddbb516e6e1::isjuggernautsharedfunc() || level.gameended) {
           useobj disablescriptableplayeruse(player);
           continue;
         }

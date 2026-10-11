@@ -100,7 +100,7 @@ function function_88ca4dca7931b39b(var_1e88d0b4c5322e0e) {
   warpstruct.useprompt.locname = locname;
 
   if(!istrue(warpstruct.useprompt.instantwarp)) {
-    triggers = function_f159c10d5cf8f0b4(var_1e88d0b4c5322e0e.targetname, "targetname");
+    triggers = getnoentvolumearray(var_1e88d0b4c5322e0e.targetname, "targetname");
 
     if(isDefined(triggers)) {
       warpstruct.useprompt.trigger = triggers[0];
@@ -123,7 +123,7 @@ function function_7e139d3ab9acb1a9(var_1e88d0b4c5322e0e) {
   return scriptable;
 }
 
-function function_7e2e0f563fa9008a(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_7e2e0f563fa9008a(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance.locname) && instance.locname == "oasis") {
     scripts\mp\pmc_missions::function_b49c89ad7edcf17b(player);
   }
@@ -398,12 +398,12 @@ function function_3209b7c7f08a12da(players, maptarget, spawnlocid) {
 function function_e43e0f078b1006ce(trigger, spawnlocid) {
   level endon("game_ended");
 
-  if(!scripts\mp\poi::function_47d356083884f913()) {
+  if(!scripts\mp\poi::poi_issystemactive()) {
     thread function_8ad822e2a2cefa44(trigger, spawnlocid);
     return;
   }
 
-  poiname = function_6cc445c02b5effac(trigger.origin);
+  poiname = poi_findpoioriginisin(trigger.origin);
 
   while(true) {
     if(isDefined(level.poi[poiname]) && isDefined(level.poi[poiname]["players"])) {

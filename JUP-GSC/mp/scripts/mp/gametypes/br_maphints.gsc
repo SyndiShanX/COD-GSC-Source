@@ -113,12 +113,12 @@ function initlocs_radio() {
   }
 }
 
-function maphint_keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function maphint_keypadscriptableused(instance, part, state, player, bautouse) {
   assert(part == "<dev string:x1c>");
-  level thread _maphint_keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+  level thread _maphint_keypadscriptableused(instance, part, state, player, bautouse);
 }
 
-function _maphint_keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _maphint_keypadscriptableused(instance, part, state, player, bautouse) {
   if(state == "on") {
     playsoundatpos(player.origin, "br_keypad_deny");
     instance setscriptablepartstate("maphint_keypad", "off");
@@ -127,12 +127,12 @@ function _maphint_keypadscriptableused(instance, part, state, player, var_a5b2c5
   }
 }
 
-function maphint_phonescriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function maphint_phonescriptableused(instance, part, state, player, bautouse) {
   assert(part == "<dev string:x2e>");
-  level thread _maphint_phonescriptableused(instance, part, state, player, var_a5b2c541413aa895);
+  level thread _maphint_phonescriptableused(instance, part, state, player, bautouse);
 }
 
-function _maphint_phonescriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _maphint_phonescriptableused(instance, part, state, player, bautouse) {
   if(state == "on") {
     playsoundatpos(player.origin, "br_phone_deny");
     instance setscriptablepartstate("maphint_phone", "off");
@@ -141,12 +141,12 @@ function _maphint_phonescriptableused(instance, part, state, player, var_a5b2c54
   }
 }
 
-function maphint_computerscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function maphint_computerscriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x3f>");
-  level thread _maphint_computerscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+  level thread _maphint_computerscriptableused(instance, part, state, player, bautouse);
 }
 
-function _maphint_computerscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _maphint_computerscriptableused(instance, part, state, player, bautouse) {
   if(state == "on") {
     playsoundatpos(player.origin, "br_computer_deny");
     instance setscriptablepartstate("maphint_computer", "off");
@@ -418,7 +418,7 @@ function assignintelchallenges() {
         firstfound = undefined;
       }
 
-      completed = self getplayerdata(level.var_5d69837cf4db0407, "missionComplete", key);
+      completed = self getplayerdata(level.progressiongroup, "missionComplete", key);
 
       if(!isDefined(firstfound) && !completed) {
         firstfound = entry.week;
@@ -441,7 +441,7 @@ function assignintelchallenges() {
   }
 }
 
-function intelused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function intelused(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance) && isDefined(instance.type) && instance.type == "intel") {
     cancollect = 1;
 

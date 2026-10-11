@@ -27,15 +27,15 @@
 #namespace namespace_acac8960cc6d8d64;
 
 function function_21672171040d6aae() {
-  var_45c17c8bd7095cc4 = namespace_c8e2077fca5ac679::function_b9c4aa88ad97ee68(self);
+  activityvariantdefinition = namespace_c8e2077fca5ac679::function_b9c4aa88ad97ee68(self);
   self.var_3fe5574cd4504d62 = [];
   self.var_70b5f128bfa2986e = [];
   self.var_9009411bf4edf20b = [];
-  self.var_d9a91303aea799de = undefined;
+  self.nd_spline_start = undefined;
   self.s_center = getStruct(self.varianttag, "targetname");
-  self.var_d9a91303aea799de = function_b71aa24dbd5946e1();
-  assertex(isDefined(self.var_d9a91303aea799de), "<dev string:x1c>");
-  function_e6b1206e1d6c42a3(var_45c17c8bd7095cc4);
+  self.nd_spline_start = function_b71aa24dbd5946e1();
+  assertex(isDefined(self.nd_spline_start), "<dev string:x1c>");
+  function_e6b1206e1d6c42a3(activityvariantdefinition);
 
   if(!isDefined(self.s_center)) {
     assertmsg("<dev string:x49>" + self.varianttag + "<dev string:x86>");
@@ -45,7 +45,7 @@ function function_21672171040d6aae() {
   self.var_7f5ba3a22b83fd6c = "sg_" + self.varianttag;
 
   if(!isDefined(function_dbc2d928c8e424d9(self.var_7f5ba3a22b83fd6c))) {
-    function_ff39fd6d3d8e4d65(self.var_7f5ba3a22b83fd6c);
+    stealthinitgroup(self.var_7f5ba3a22b83fd6c);
   }
 
   iprintln("<dev string:x97>" + self.varianttag);
@@ -72,7 +72,7 @@ function function_21672171040d6aae() {
 
 function function_e6b1206e1d6c42a3(var_28af8e747331e08d) {
   if(issharedfuncdefined("armored_convoy_activity", "CustomParseParams")) {
-    function_f3bb4f4911a1beb2("armored_convoy_activity", "CustomParseParams", var_28af8e747331e08d);
+    callsharedfunc("armored_convoy_activity", "CustomParseParams", var_28af8e747331e08d);
   }
 
   self.ai_team = default_to(var_28af8e747331e08d.aiteam, "team_hundred_ninety");
@@ -88,7 +88,7 @@ function function_e6b1206e1d6c42a3(var_28af8e747331e08d) {
   self.maxvehicles = 0;
 
   if(issharedfuncdefined("armored_convoy_activity", "GetMaxVehicles")) {
-    self.maxvehicles = function_f3bb4f4911a1beb2("armored_convoy_activity", "GetMaxVehicles");
+    self.maxvehicles = callsharedfunc("armored_convoy_activity", "GetMaxVehicles");
   }
 
   if(isDefined(var_28af8e747331e08d)) {
@@ -113,13 +113,13 @@ function function_e6b1206e1d6c42a3(var_28af8e747331e08d) {
       riderencounter = "ai_encounter:armored_convoy_rider_enc_soldier";
 
       if(issharedfuncdefined("armored_convoy_activity", "GetRiderEncounterFromIndex")) {
-        riderencounter = function_f3bb4f4911a1beb2("armored_convoy_activity", "GetRiderEncounterFromIndex", i);
+        riderencounter = callsharedfunc("armored_convoy_activity", "GetRiderEncounterFromIndex", i);
       }
 
       vehicleref = "veh_jup_pickup_2014";
 
       if(issharedfuncdefined("armored_convoy_activity", "GetVehicleRefFromIndex")) {
-        vehicleref = function_f3bb4f4911a1beb2("armored_convoy_activity", "GetVehicleRefFromIndex", i);
+        vehicleref = callsharedfunc("armored_convoy_activity", "GetVehicleRefFromIndex", i);
       }
 
       self.var_a5aa6c6f1908df45[i] = spawnStruct();
@@ -236,7 +236,7 @@ function function_130f27dbf7b9d56b() {
   foreach(veh in self.var_3fe5574cd4504d62) {
     params = spawnStruct();
     params.activity_instance = self;
-    params.players = self.var_6c29f2fdb0054bbe;
+    params.players = self.playerparticipants;
     veh callback::callback("veh_on_convoy_ended", params);
   }
 
@@ -244,12 +244,12 @@ function function_130f27dbf7b9d56b() {
 
   if(isDefined(vh_array) && vh_array.size > 0) {
     if(issharedfuncdefined("armored_convoy_activity", "PlayVehDestroyedVO")) {
-      function_f3bb4f4911a1beb2("armored_convoy_activity", "PlayVehDestroyedVO", self, 1);
+      callsharedfunc("armored_convoy_activity", "PlayVehDestroyedVO", self, 1);
     } else {
       thread namespace_277c27ef297ef569::function_1281c7fff9456e18("activity_armored_convoy_vehicles_remain_broadcast");
     }
   } else if(issharedfuncdefined("armored_convoy_activity", "PlayVehDestroyedVO")) {
-    function_f3bb4f4911a1beb2("armored_convoy_activity", "PlayVehDestroyedVO", self);
+    callsharedfunc("armored_convoy_activity", "PlayVehDestroyedVO", self);
   } else {
     thread namespace_277c27ef297ef569::function_1281c7fff9456e18("activity_armored_convoy_vehicles_destroyed_broadcast");
   }
@@ -280,7 +280,7 @@ function private function_aaf6792b4f3ff726() {
 
               if(b_trace_passed == 1) {
                 if(issharedfuncdefined("armored_convoy_activity", "PlayEngageVO")) {
-                  function_f3bb4f4911a1beb2("armored_convoy_activity", "PlayEngageVO", self, 1);
+                  callsharedfunc("armored_convoy_activity", "PlayEngageVO", self, 1);
                 } else {
                   thread namespace_277c27ef297ef569::function_1281c7fff9456e18("activity_armored_convoy_engage_enemy_broadcast");
                 }
@@ -359,7 +359,7 @@ function private function_e9c3e6397f1be2c4() {
 }
 
 function private function_73ebd648f533a034(activityinstance) {
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(0));
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(0));
   self vehicle_setspeedimmediate(0, 1, 1);
   self vehicle_cleardrivingstate();
 
@@ -375,7 +375,7 @@ function private function_73ebd648f533a034(activityinstance) {
     self removecomponent("animator");
   }
 
-  self function_65aa053c077c003a(1);
+  self vehphys_parkingbrake(1);
   waitframe();
   function_6590c1e6e798dd19();
   self waittill("unloaded");
@@ -383,8 +383,8 @@ function private function_73ebd648f533a034(activityinstance) {
   self.isunloaded = 1;
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_setteam(self, "neutral");
   self setscriptablepartstate("single", "vehicle_use");
-  self function_9cab25983e27246();
-  self function_65aa053c077c003a(0);
+  self vehicleclearanims();
+  self vehphys_parkingbrake(0);
 
   if(istrue(activityinstance.var_e63f28f54dc0a813)) {
     function_2169641d6a403864(self.var_542f8d001288419d);
@@ -407,12 +407,12 @@ function private function_9cdfbab7600978aa(activityinstance) {
   self stoppath();
   self removecomponent("path");
   waitframe();
-  self function_77320e794d35465a("p2p", "throttleSpeedFarBelow", 1);
-  self function_77320e794d35465a("p2p", "throttleSpeedFarAbove", 4);
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(crash_speed));
-  self function_77320e794d35465a("p2p", "goalPoint", crash_point);
-  self function_77320e794d35465a("p2p", "goalThreshold", 50);
-  self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
+  self setconfigvalue("p2p", "throttleSpeedFarBelow", 1);
+  self setconfigvalue("p2p", "throttleSpeedFarAbove", 4);
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(crash_speed));
+  self setconfigvalue("p2p", "goalPoint", crash_point);
+  self setconfigvalue("p2p", "goalThreshold", 50);
+  self setconfigvalue("p2p", "brakeAtGoal", 1);
   waittill_any_timeout_3(2, "goal", "near_goal", "path_blocked");
   function_73ebd648f533a034(activityinstance);
 }
@@ -421,13 +421,13 @@ function function_181fd18526171d6b(var_cffe525bfe66cdca, var_59d52445d26e52ea) {
   vehiclearray = [];
   num_vehicles = self.maxvehicles;
   spawndata = spawnStruct();
-  spawndata.angles = self.var_d9a91303aea799de.angles;
+  spawndata.angles = self.nd_spline_start.angles;
   spawndata.team = self.ai_team;
   spawndata.initai = 1;
   spawndata.preventrespawn = 1;
   spawndata.var_699ac4a9c9e9f0ec = 1;
   spawndata.var_24993ee24f7c7c0 = 1;
-  offsetdirection = vectorNormalize(anglesToForward(self.var_d9a91303aea799de.angles) * (1, 1, 0));
+  offsetdirection = vectorNormalize(anglesToForward(self.nd_spline_start.angles) * (1, 1, 0));
   offsetstep = 640;
   var_67c9742ae410b71c = ["veh_jup_pickup_2014"];
   self.vehicle_ref = default_to(var_59d52445d26e52ea, random(var_67c9742ae410b71c));
@@ -436,7 +436,7 @@ function function_181fd18526171d6b(var_cffe525bfe66cdca, var_59d52445d26e52ea) {
   for(index = 0; index < num_vehicles; index++) {
     var_26e8177cafb3f245 = randomfloatrange(10, 35);
     var_92ffab909b4632c6 = offsetstep + var_26e8177cafb3f245;
-    spawndata.origin = self.var_d9a91303aea799de.origin - offsetdirection * (index + 1) * var_92ffab909b4632c6 + (0, 0, 100);
+    spawndata.origin = self.nd_spline_start.origin - offsetdirection * (index + 1) * var_92ffab909b4632c6 + (0, 0, 100);
     vehicle = undefined;
     self.var_1c1e93b32ed347a7[index] = spawnStruct();
     vehicle = vehicle_spawn(self.var_a5aa6c6f1908df45[index].vehicleref, spawndata);
@@ -493,14 +493,14 @@ function function_181fd18526171d6b(var_cffe525bfe66cdca, var_59d52445d26e52ea) {
     vehicle.var_aa4804cc1bc59e93 = 1;
 
     if(istrue(self.var_4f77d28d75ebd61c)) {
-      vehicle.var_408e9e761c8463c5 = 1;
+      vehicle.playedcaralarm = 1;
     }
 
     vehicle.isunloaded = 0;
     scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_setteam(vehicle, "team_hundred_ninety");
 
     if(issharedfuncdefined("armored_convoy_activity", "SpawnLootCache")) {
-      vehicle.lootcache = function_f3bb4f4911a1beb2("armored_convoy_activity", "SpawnLootCache", vehicle);
+      vehicle.lootcache = callsharedfunc("armored_convoy_activity", "SpawnLootCache", vehicle);
     }
 
     vehicle function_df8142211bdf35cf();
@@ -590,7 +590,7 @@ function function_50c2476a67740c1e(activityinstance) {
       activityinstance notify("under_attack");
 
       if(issharedfuncdefined("armored_convoy_activity", "PlayEngageVO")) {
-        function_f3bb4f4911a1beb2("armored_convoy_activity", "PlayEngageVO", activityinstance);
+        callsharedfunc("armored_convoy_activity", "PlayEngageVO", activityinstance);
       } else {
         activityinstance thread namespace_277c27ef297ef569::function_1281c7fff9456e18("activity_armored_convoy_engage_player_broadcast");
       }
@@ -602,7 +602,7 @@ function function_50c2476a67740c1e(activityinstance) {
       self notify("damage_heavy");
 
       if(issharedfuncdefined("armored_convoy_activity", "PlayEngageVO")) {
-        function_f3bb4f4911a1beb2("armored_convoy_activity", "PlayEngageVO", activityinstance);
+        callsharedfunc("armored_convoy_activity", "PlayEngageVO", activityinstance);
       } else {
         activityinstance thread namespace_277c27ef297ef569::function_1281c7fff9456e18("activity_armored_convoy_engage_player_broadcast");
       }
@@ -684,15 +684,15 @@ function function_1e9c7b94e0a76915(activityinstance) {
   self stoppath();
   self removecomponent("path");
   waitframe();
-  self function_77320e794d35465a("p2p", "throttleSpeedFarBelow", 2);
-  self function_77320e794d35465a("p2p", "throttleSpeedFarAbove", 8);
-  self function_77320e794d35465a("p2p", "automaticFast", 1);
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(crash_speed));
-  self function_77320e794d35465a("p2p", "goalPoint", crash_point);
-  self function_77320e794d35465a("p2p", "goalThreshold", 50);
-  self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
+  self setconfigvalue("p2p", "throttleSpeedFarBelow", 2);
+  self setconfigvalue("p2p", "throttleSpeedFarAbove", 8);
+  self setconfigvalue("p2p", "automaticFast", 1);
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(crash_speed));
+  self setconfigvalue("p2p", "goalPoint", crash_point);
+  self setconfigvalue("p2p", "goalThreshold", 50);
+  self setconfigvalue("p2p", "brakeAtGoal", 1);
   waittill_any_timeout_3(5, "goal", "near_goal", "path_blocked");
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(0));
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(0));
   waitframe();
   activityinstance notify("vehicle_down");
   function_6590c1e6e798dd19();
@@ -741,24 +741,24 @@ function function_df8142211bdf35cf(var_5f487a4ba2d7c5a, addpath, var_784030f0b32
   }
 
   if(self hascomponent("p2p")) {
-    self function_77320e794d35465a("p2p", "checkStuck", 0);
-    self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
-    self function_77320e794d35465a("p2p", "automaticNormal", 1);
-    self function_77320e794d35465a("p2p", "brakeOnGoalGasbrake", 1);
-    self function_77320e794d35465a("p2p", "goalPoint", self.origin);
-    self function_77320e794d35465a("p2p", "goalThreshold", 200);
-    self function_77320e794d35465a("p2p", "throttleSpeedClose", 1);
-    self function_77320e794d35465a("p2p", "throttleSpeedThreshold", 1);
-    self function_77320e794d35465a("p2p", "automaticFastTopspeedFraction", 1);
-    self function_77320e794d35465a("p2p", "throttleSpeedFarBelow", 1);
-    self function_77320e794d35465a("p2p", "throttleSpeedFarAbove", 4);
-    self function_77320e794d35465a("p2p", "throttleSpeedClose", 2);
-    self function_77320e794d35465a("p2p", "gasToStopMovement", 0.9);
-    self function_77320e794d35465a("p2p", "steeringMultiplier", 2);
+    self setconfigvalue("p2p", "checkStuck", 0);
+    self setconfigvalue("p2p", "brakeAtGoal", 1);
+    self setconfigvalue("p2p", "automaticNormal", 1);
+    self setconfigvalue("p2p", "brakeOnGoalGasbrake", 1);
+    self setconfigvalue("p2p", "goalPoint", self.origin);
+    self setconfigvalue("p2p", "goalThreshold", 200);
+    self setconfigvalue("p2p", "throttleSpeedClose", 1);
+    self setconfigvalue("p2p", "throttleSpeedThreshold", 1);
+    self setconfigvalue("p2p", "automaticFastTopspeedFraction", 1);
+    self setconfigvalue("p2p", "throttleSpeedFarBelow", 1);
+    self setconfigvalue("p2p", "throttleSpeedFarAbove", 4);
+    self setconfigvalue("p2p", "throttleSpeedClose", 2);
+    self setconfigvalue("p2p", "gasToStopMovement", 0.9);
+    self setconfigvalue("p2p", "steeringMultiplier", 2);
   }
 
   if(self hascomponent("path")) {
-    self function_77320e794d35465a("path", "radiusToStep", 300);
+    self setconfigvalue("path", "radiusToStep", 300);
   }
 
   self.dontunloadonend = 1;
@@ -823,13 +823,13 @@ function function_f0f07d0530132d6b(activityinstance) {
   self endon("death");
   activityinstance endon("activity_ended");
   activityinstance endon("instance_destroyed");
-  startingnode = activityinstance.var_d9a91303aea799de;
+  startingnode = activityinstance.nd_spline_start;
   nodeindex = getvehiclenodeindex(startingnode.targetname, "targetname");
   waitframe();
 
   if(isDefined(self)) {
-    self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(activityinstance.var_269a59bcee49ce1));
-    self function_77320e794d35465a("path", "radiantId", nodeindex);
+    self setconfigvalue("p2p", "manualSpeed", mph_to_ips(activityinstance.var_269a59bcee49ce1));
+    self setconfigvalue("path", "radiantId", nodeindex);
     self vehicle_turnengineon();
   }
 }
@@ -847,7 +847,7 @@ function function_57cb82ad7a3ea8e4(speed, var_47377dd95777e070) {
     self.var_269a59bcee49ce1 = speed;
 
     if(vehicle hascomponent("p2p")) {
-      vehicle function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(speed));
+      vehicle setconfigvalue("p2p", "manualSpeed", mph_to_ips(speed));
       vehicle.var_c8ede22a39f49745 = speed;
       continue;
     }
@@ -889,7 +889,7 @@ function private armored_convoy_vehicle_update_spacing() {
       if(var_f6df7509780987e0) {
         for(index = 0; index < var_4b1a1ec87d5ac862.size; index++) {
           if(isDefined(var_4b1a1ec87d5ac862[index].var_c8ede22a39f49745) && var_4b1a1ec87d5ac862[index].var_c8ede22a39f49745 > self.var_269a59bcee49ce1) {
-            var_4b1a1ec87d5ac862[index] function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(self.var_269a59bcee49ce1));
+            var_4b1a1ec87d5ac862[index] setconfigvalue("p2p", "manualSpeed", mph_to_ips(self.var_269a59bcee49ce1));
             var_4b1a1ec87d5ac862[index].var_c8ede22a39f49745 = self.var_269a59bcee49ce1;
           }
         }
@@ -944,11 +944,11 @@ function private armored_convoy_vehicle_update_spacing() {
               newspeed = var_4b1a1ec87d5ac862[index - 1].var_c8ede22a39f49745 * 0.9;
             }
 
-            var_4b1a1ec87d5ac862[index] function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(newspeed));
+            var_4b1a1ec87d5ac862[index] setconfigvalue("p2p", "manualSpeed", mph_to_ips(newspeed));
             var_4b1a1ec87d5ac862[index].var_c8ede22a39f49745 = newspeed;
           } else if(!var_f6df7509780987e0) {
             newspeed = self.var_269a59bcee49ce1 * 1.1;
-            var_4b1a1ec87d5ac862[index] function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(newspeed));
+            var_4b1a1ec87d5ac862[index] setconfigvalue("p2p", "manualSpeed", mph_to_ips(newspeed));
             var_4b1a1ec87d5ac862[index].var_c8ede22a39f49745 = newspeed;
           }
         } else if(!var_f6df7509780987e0) {
@@ -956,7 +956,7 @@ function private armored_convoy_vehicle_update_spacing() {
 
           if(var_752bd535848b768 > 1000000) {
             newspeed = self.var_269a59bcee49ce1 * 1.1;
-            var_4b1a1ec87d5ac862[index] function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(newspeed));
+            var_4b1a1ec87d5ac862[index] setconfigvalue("p2p", "manualSpeed", mph_to_ips(newspeed));
             var_4b1a1ec87d5ac862[index].var_c8ede22a39f49745 = newspeed;
           }
         }
@@ -1002,27 +1002,27 @@ function function_617a1b569134ba77(activityinstance) {
 
 function function_7aa120c6895b1b0(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_53ecaed01e5352a0(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
 
   if(issharedfuncdefined("armored_convoy_activity", "PlayApproachConvoyVO")) {
-    function_f3bb4f4911a1beb2("armored_convoy_activity", "OnPlayerLeftActivity", self, var_b381b0883bcd4847);
+    callsharedfunc("armored_convoy_activity", "OnPlayerLeftActivity", self, var_b381b0883bcd4847);
   }
 }
 
 function function_586d9c599add1552(var_d6bfa53c531546d6) {
-  activity_type = namespace_4fda5d7358015a06::function_de53ed8e35d0ed7a(self);
+  activity_type = namespace_4fda5d7358015a06::getactivitytype(self);
 
   if(isDefined(activity_type) && activity_type == "REV_OB_ARMORED_CONVOY") {
-    if(istrue(var_d6bfa53c531546d6.enteredzone) && istrue(var_d6bfa53c531546d6.var_ebdc26444cd57171) && !istrue(self.var_de6f66d8d51587f1)) {
+    if(istrue(var_d6bfa53c531546d6.enteredzone) && istrue(var_d6bfa53c531546d6.firsttimeinzone) && !istrue(self.var_de6f66d8d51587f1)) {
       player_list = [];
       player_list = array_add(player_list, var_d6bfa53c531546d6.player);
 
       if(issharedfuncdefined("armored_convoy_activity", "PlayApproachConvoyVO")) {
-        function_f3bb4f4911a1beb2("armored_convoy_activity", "PlayApproachConvoyVO", self, player_list);
+        callsharedfunc("armored_convoy_activity", "PlayApproachConvoyVO", self, player_list);
         return;
       }
 
@@ -1111,21 +1111,21 @@ function private function_b61f675503083701(addpath, var_784030f0b32d0f1d) {
     }
   }
 
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x225>", 0);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x233>", 1);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x242>", 1);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x255>", 1);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x26c>", self.origin);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x279>", 200);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x28a>", 1);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x2a0>", 1);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x2ba>", 1);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x2db>", 1);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x2f4>", 4);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x28a>", 2);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x30d>", 0.9);
-  self function_77320e794d35465a("<dev string:x20a>", "<dev string:x322>", 2);
-  self function_77320e794d35465a("<dev string:x211>", "<dev string:x338>", 300);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x225>", 0);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x233>", 1);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x242>", 1);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x255>", 1);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x26c>", self.origin);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x279>", 200);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x28a>", 1);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x2a0>", 1);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x2ba>", 1);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x2db>", 1);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x2f4>", 4);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x28a>", 2);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x30d>", 0.9);
+  self setconfigvalue("<dev string:x20a>", "<dev string:x322>", 2);
+  self setconfigvalue("<dev string:x211>", "<dev string:x338>", 300);
   self.stopping = 0;
 }
 
@@ -1140,7 +1140,7 @@ function private function_215e10bf17f98702(startpos, endpos, speed) {
   return moverate;
 }
 
-function private function_a646f25304f0c578(splinepoints, var_bfe90410fad38aaa) {
+function private function_a646f25304f0c578(splinepoints, speedips) {
   durations = [];
   assert(splinepoints.size <= 48);
 
@@ -1148,7 +1148,7 @@ function private function_a646f25304f0c578(splinepoints, var_bfe90410fad38aaa) {
     for(index = 0; index < splinepoints.size - 1; index++) {
       currentpoint = splinepoints[index];
       nextpoint = splinepoints[index + 1];
-      durations[durations.size] = function_215e10bf17f98702(currentpoint, nextpoint, var_bfe90410fad38aaa);
+      durations[durations.size] = function_215e10bf17f98702(currentpoint, nextpoint, speedips);
     }
 
     durations[durations.size] = durations[durations.size - 1];
@@ -1196,10 +1196,10 @@ function private function_cd400918a8463816(params) {
   var_a8c9b5fffa6387d = isnavmeshloaded("<dev string:x36a>");
   navmeshlayer = ter_op(var_34bb55fbc59c2e1d, "<dev string:x359>", ter_op(var_a8c9b5fffa6387d, "<dev string:x36a>", undefined));
   var_c2202bf0909145b5 = ter_op(istrue(params[0] == "<dev string:x348>"), 2, 1);
-  splinepoints = vehicle function_187aaba5fbba21d0(startlocation, goallocation, 50, 200, 100, vehicleforward, (0, 0, 0), 300, 0.4, 0, 1, navmeshlayer, 0, var_c2202bf0909145b5);
+  splinepoints = vehicle findsplinepath(startlocation, goallocation, 50, 200, 100, vehicleforward, (0, 0, 0), 300, 0.4, 0, 1, navmeshlayer, 0, var_c2202bf0909145b5);
   speedmph = 30;
-  var_bfe90410fad38aaa = mph_to_ips(speedmph);
-  vehicle function_77320e794d35465a("<dev string:x20a>", "<dev string:x37a>", var_bfe90410fad38aaa);
+  speedips = mph_to_ips(speedmph);
+  vehicle setconfigvalue("<dev string:x20a>", "<dev string:x37a>", speedips);
 
   if(isDefined(splinepoints)) {
     if(istrue(params[0] == "<dev string:x348>")) {
@@ -1207,9 +1207,9 @@ function private function_cd400918a8463816(params) {
         splinepoints = array_slice(splinepoints, 0, 47);
       }
 
-      var_f70515e8a2d1ba64 = function_a646f25304f0c578(splinepoints, var_bfe90410fad38aaa);
+      var_f70515e8a2d1ba64 = function_a646f25304f0c578(splinepoints, speedips);
       splineid = function_6e313dda90fb035f(splinepoints, var_f70515e8a2d1ba64);
-      vehicle function_77320e794d35465a("<dev string:x211>", "<dev string:x389>", splineid);
+      vehicle setconfigvalue("<dev string:x211>", "<dev string:x389>", splineid);
     }
 
     vehicle thread scripts\common\vehicle_paths::function_68d5232181fec390(splinepoints, ter_op(isDefined(navmeshlayer), (1, 1, 1), (1, 0, 0)));

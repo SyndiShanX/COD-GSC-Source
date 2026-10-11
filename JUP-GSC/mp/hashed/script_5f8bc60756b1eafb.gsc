@@ -22,7 +22,7 @@ function init() {
   }
 
   level.scripted_melee.var_1fc4fd3ef975e8c8 = &function_78748799de25da5f;
-  level.scripted_melee.var_2ec260ca66f2378 = &function_65bbb083561fa648;
+  level.scripted_melee.var_2ec260ca66f2378 = &set_player_rig;
   level.scripted_melee.var_efaa5d51e08521eb = &enable_victims;
   level.scripted_melee.var_3522908002cc5af = &function_b3cab4bbbd2f27bf;
   level.scripted_melee.var_16a2ad3bccc62bb5 = &function_53bc249de0d47b05;
@@ -133,7 +133,7 @@ function function_b0c99390cdb7edd5() {
   utility::function_7a5a6498179656fc("vm_sp_takedown_knife_crouch_right_02", "right", &function_65931e2cbca86748, undefined, "crouch", "crouch");
 }
 
-function function_65bbb083561fa648() {
+function set_player_rig() {
   self.scripted_melee_player_rig = scripts\engine\sp\utility::spawn_anim_model("scripted_melee_player_rig", self.origin, self.angles);
   self.scripted_melee_player_rig scripts\common\anim::function_1cb661b457551a3(1, self, 0.35);
 }

@@ -25,8 +25,8 @@ function shouldcoverexposedreload(asmname, statename, tostatename, params) {
   return 0;
 }
 
-function calcanimstartpos(stoppos, stopangle, animdelta, var_f73bea4534a3831f) {
-  dangle = stopangle - var_f73bea4534a3831f;
+function calcanimstartpos(stoppos, stopangle, animdelta, animangledelta) {
+  dangle = stopangle - animangledelta;
   angles = (0, dangle, 0);
   worlddelta = rotatevector(animdelta, angles);
   return stoppos - worlddelta;
@@ -146,14 +146,14 @@ function lerpto(covernode, var_2f841227a5cdde35, endonstr) {
 
   while(true) {
     metodest = covernode.origin - self.origin;
-    var_28660e5725a496a2 = length(metodest);
+    distmetodest = length(metodest);
 
-    if(var_28660e5725a496a2 < var_2f841227a5cdde35) {
+    if(distmetodest < var_2f841227a5cdde35) {
       self safeteleport(covernode.origin);
       break;
     }
 
-    metodest /= var_28660e5725a496a2;
+    metodest /= distmetodest;
     dest = self.origin + metodest * var_2f841227a5cdde35;
     self safeteleport(dest);
     wait 0.05;

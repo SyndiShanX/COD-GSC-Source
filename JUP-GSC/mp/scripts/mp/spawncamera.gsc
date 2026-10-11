@@ -656,7 +656,7 @@ function streamforslamzoomonspawn() {
   }
 
   self function_a304dc5184b0df29(0);
-  self function_bc667001f9dd3808(self getEye());
+  self predictstreamposuntilcleared(self getEye());
   self waittill("spawn_camera_complete");
   self clearpredictedstreampos();
   self function_a304dc5184b0df29(1);

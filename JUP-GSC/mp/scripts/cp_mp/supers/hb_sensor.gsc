@@ -103,7 +103,7 @@ function function_6e9e734982349368(objweapon) {
   self setclientomnvar("ui_hb_sensor_battery_percentage", percentageremaining);
   wait 0.533;
 
-  if(!scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(!scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     thread function_fc7e5d7d7f99703a();
   }
 }

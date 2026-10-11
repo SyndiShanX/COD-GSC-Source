@@ -61,7 +61,7 @@ function sentryturret_munitionused(streakinfo, ignorecancel) {
 function function_dad8d4cd587ec141(vehicle) {
   wasdestroyed = 1;
   skipshutdown = 1;
-  self.var_455a731f2701dd65 = 1;
+  self.ishitbyvehicle = 1;
   self notify("kill_turret", skipshutdown, wasdestroyed);
 }
 
@@ -114,7 +114,7 @@ function sentryturret_initsentrysettings() {
   level.sentrysettings["sentry_turret"].lightfxtag = "tag_fx";
   level.sentrysettings["sentry_turret"].iskillstreak = 1;
   level.sentrysettings["sentry_turret"].headiconoffset = (0, 0, 75);
-  level.sentrysettings["sentry_turret"].var_34d24162c014a897 = &function_dad8d4cd587ec141;
+  level.sentrysettings["sentry_turret"].hitbyvehiclefunc = &function_dad8d4cd587ec141;
 }
 
 function sentryturret_laststandwatcher() {
@@ -202,7 +202,7 @@ function sentryturret_handledeathdamage(data) {
 }
 
 function sentryturret_modifydamage(data) {
-  var_3a8030d138e837c8 = level.sentrysettings["sentry_turret"];
+  sentryconfig = level.sentrysettings["sentry_turret"];
   attacker = data.attacker;
   objweapon = data.objweapon;
   type = data.meansofdeath;
@@ -211,7 +211,7 @@ function sentryturret_modifydamage(data) {
   modifieddamage = damage;
 
   if(issharedfuncdefined("killstreak", "getModifiedAntiKillstreakDamage")) {
-    modifieddamage = self[[getsharedfunc("killstreak", "getModifiedAntiKillstreakDamage")]](attacker, objweapon, type, modifieddamage, var_3a8030d138e837c8.maxhealth, 1, 1, 1);
+    modifieddamage = self[[getsharedfunc("killstreak", "getModifiedAntiKillstreakDamage")]](attacker, objweapon, type, modifieddamage, sentryconfig.maxhealth, 1, 1, 1);
   }
 
   if(!isDefined(self.damagetaken)) {
@@ -220,7 +220,7 @@ function sentryturret_modifydamage(data) {
 
   var_8ed0a351aa70ec7 = self.damagetaken + modifieddamage;
 
-  if(var_8ed0a351aa70ec7 >= var_3a8030d138e837c8.maxhealth * 0.5 && !istrue(self.damagedstate)) {
+  if(var_8ed0a351aa70ec7 >= sentryconfig.maxhealth * 0.5 && !istrue(self.damagedstate)) {
     self.damagedstate = 1;
     self setscriptablepartstate("turret_damage", "on", 0);
   }
@@ -362,8 +362,8 @@ function function_8f7dc0e13b5d8b1f(turret) {
 }
 
 function function_2d27a885e0d2bed0(damagedata) {
-  var_d7b6456018542238 = &scripts\cp\damage::modifydamage;
-  modifieddamage = self[[var_d7b6456018542238]](damagedata);
+  modifydamagefunc = &scripts\cp\damage::modifydamage;
+  modifieddamage = self[[modifydamagefunc]](damagedata);
   modifieddamage *= 0.5;
   return modifieddamage;
 }

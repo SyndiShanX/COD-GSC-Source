@@ -43,7 +43,7 @@ function dowhizby(attacker, distance, position, forward, effecttime) {
   currenttime = gettime();
 
   if(!isusingremote()) {
-    thread scripts\common\whizby::function_a6e6611efb4164d5(attacker, distance, position, forward);
+    thread scripts\common\whizby::whizbyeffect(attacker, distance, position, forward);
   }
 
   weapon = attacker getcurrentweapon();

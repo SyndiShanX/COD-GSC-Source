@@ -112,7 +112,7 @@ function function_577419b6760f20e() {
 
 function function_d52be86cf922bec2(instance, player) {}
 
-function function_a3bc9a96e7494b90(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_a3bc9a96e7494b90(instance, part, state, player, bautouse, usestring) {
   if(!function_ace73c6f69026c0b(instance.type)) {
     return;
   }
@@ -150,7 +150,7 @@ function function_245e4c4f2c8f50df(container, player, lootid, quantity, itemtype
 
 function function_1459744b58026a21(key_name, owner) {
   self.turret_trap_panel setscriptablepartstate("body_turret_trap_panel", "closed_unusable");
-  function_2b164bf1240548cd(self.turret, owner);
+  sentryturret_setactive(self.turret, owner);
   turreticon = "jup_ui_map_icon_poi_turret_trap";
 
   if(issharedfuncdefined("game", "createObjective")) {
@@ -164,19 +164,19 @@ function function_1459744b58026a21(key_name, owner) {
 
   switch (key_name) {
     case #"hash_c99f80fc7285c624":
-      self.turret.owner namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(turret_info, "brainrot");
+      self.turret.owner namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(turret_info, "brainrot");
       break;
     case #"hash_406a9b154cc52cae":
-      self.turret.owner namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(turret_info, "deadwire");
+      self.turret.owner namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(turret_info, "deadwire");
       break;
     case #"hash_4263a081cbbc42cb":
-      self.turret.owner namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(turret_info, "cryofreeze");
+      self.turret.owner namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(turret_info, "cryofreeze");
       break;
     case #"hash_5caf5c606cbae692":
-      self.turret.owner namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(turret_info, "napalmburst");
+      self.turret.owner namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(turret_info, "napalmburst");
       break;
     case #"hash_fb7fb4f322446308":
-      self.turret.owner namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(turret_info, "shatterblast");
+      self.turret.owner namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(turret_info, "shatterblast");
       break;
     default:
       self.turret.owner namespace_dc2e59577d3a271f::function_b4da81e43557ada1(turret_info);
@@ -331,7 +331,7 @@ function function_c160909504e47884(spawn_struct) {
 
 function function_1531bbf5cff97dc0(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_5c651df8cfad0810(var_b381b0883bcd4847) {
@@ -370,22 +370,22 @@ function function_de07a0000b48b33(params) {
 
   switch (params[0]) {
     case #"hash_588b588d16332e1d":
-      function_38e113a4c30f6c0d("<dev string:x1f4>", level.players[0].origin);
+      spawnnewitemfromscriptablesharedfunc("<dev string:x1f4>", level.players[0].origin);
       return;
     case #"hash_afaaf053b2461f8a":
-      function_38e113a4c30f6c0d("<dev string:x227>", level.players[0].origin);
+      spawnnewitemfromscriptablesharedfunc("<dev string:x227>", level.players[0].origin);
       return;
     case #"hash_41d942d30dd3f804":
-      function_38e113a4c30f6c0d("<dev string:x267>", level.players[0].origin);
+      spawnnewitemfromscriptablesharedfunc("<dev string:x267>", level.players[0].origin);
       return;
     case #"hash_4f5cd54aaf7f106":
-      function_38e113a4c30f6c0d("<dev string:x2aa>", level.players[0].origin);
+      spawnnewitemfromscriptablesharedfunc("<dev string:x2aa>", level.players[0].origin);
       return;
     case #"hash_fe0fd5228eda0f07":
-      function_38e113a4c30f6c0d("<dev string:x2eb>", level.players[0].origin);
+      spawnnewitemfromscriptablesharedfunc("<dev string:x2eb>", level.players[0].origin);
       return;
     case #"hash_853faa00a9ff1020":
-      function_38e113a4c30f6c0d("<dev string:x329>", level.players[0].origin);
+      spawnnewitemfromscriptablesharedfunc("<dev string:x329>", level.players[0].origin);
       return;
   }
 

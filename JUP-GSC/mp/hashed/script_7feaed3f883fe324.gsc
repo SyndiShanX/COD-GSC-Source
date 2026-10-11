@@ -280,7 +280,7 @@ function function_9097cec00b0a918a(powerup_ref, spawn_pos, var_a3bd3a0466a6a50b)
   platform_info = powerup scripts\common\utility::function_2e9e02e8bda61ef2();
 
   if(isDefined(platform_info) && !isDefined(platform_info.groundent.vehicletype)) {
-    powerup utility::function_6e506f39f121ea8a(platform_info.groundent, platform_info.localorigin + height_offset, platform_info.localangles);
+    powerup utility::scriptable_setparententity(platform_info.groundent, platform_info.localorigin + height_offset, platform_info.localangles);
     powerup.trigger = spawn("trigger_radius", ground_pos, 0, 10, 10);
     powerup.trigger enablelinkTo();
     powerup.trigger linkTo(platform_info.groundent, "", platform_info.localorigin + height_offset, platform_info.localangles);
@@ -349,7 +349,7 @@ function function_26d7152de10f312f(delay) {
       continue;
     }
 
-    if(!istrue(info.var_872243630fdf0168) && istrue(player.inlaststand)) {
+    if(!istrue(info.powerupcanpickupinlaststand) && istrue(player.inlaststand)) {
       continue;
     }
 
@@ -477,24 +477,24 @@ function debug_init() {
 function function_8d84a74b56d3e373() {
   origin = level.player.origin + (0, 0, 500);
   info = powerups::function_519d44e54a9b8ae5("<dev string:x285>");
-  var_91839babd32261f4 = info.scriptable;
+  scriptable_name = info.scriptable;
   ent = spawn("<dev string:x296>", origin);
   ent setModel("<dev string:x2a6>");
-  powerup = spawnscriptable(var_91839babd32261f4, origin, (0, 0, 0));
+  powerup = spawnscriptable(scriptable_name, origin, (0, 0, 0));
   powerup setscriptablepartstate("<dev string:x2b4>", "<dev string:x2bf>");
-  powerup utility::function_6e506f39f121ea8a(ent, (0, 0, 0), (0, 0, 0));
+  powerup utility::scriptable_setparententity(ent, (0, 0, 0), (0, 0, 0));
   ent thread function_f3d67f6efe03526b();
   ent = spawn("<dev string:x296>", origin);
   ent setModel("<dev string:x2a6>");
-  powerup = spawnscriptable(var_91839babd32261f4, origin, (0, 0, 0));
+  powerup = spawnscriptable(scriptable_name, origin, (0, 0, 0));
   powerup setscriptablepartstate("<dev string:x2b4>", "<dev string:x2bf>");
-  powerup utility::function_6e506f39f121ea8a(ent, (0, 0, 0), (0, 0, 0));
+  powerup utility::scriptable_setparententity(ent, (0, 0, 0), (0, 0, 0));
   ent thread function_f52df32abe0fc9ea();
   ent = spawn("<dev string:x296>", origin);
   ent setModel("<dev string:x2a6>");
-  powerup = spawnscriptable(var_91839babd32261f4, origin, (0, 0, 0));
+  powerup = spawnscriptable(scriptable_name, origin, (0, 0, 0));
   powerup setscriptablepartstate("<dev string:x2b4>", "<dev string:x2bf>");
-  powerup utility::function_6e506f39f121ea8a(ent, (0, 100, 0), (0, 0, 0));
+  powerup utility::scriptable_setparententity(ent, (0, 100, 0), (0, 0, 0));
   ent thread function_f52df42abe0fcc1d();
 }
 

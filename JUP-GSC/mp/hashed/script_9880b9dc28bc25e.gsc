@@ -21,7 +21,7 @@ function autoexec init() {
 function function_eb4aeba58080eb81() {
   level.active_attractors = [];
   level.var_f0ca262664a2c6c0 = [];
-  callback::function_e7fddda1f0b46b5e("zombie") callback::add("damage_point", &function_561a075da0b0a82d);
+  callback::get_template("zombie") callback::add("damage_point", &function_561a075da0b0a82d);
   thread function_569a4f4cf02304eb();
   thread function_6bc8c49a7e617194();
 
@@ -263,10 +263,10 @@ function function_29dcd907bcbec6df(attractor_struct, origin, angles, radius, num
     x = radius * cos(angle_i + angles[1]);
     y = radius * sin(angle_i + angles[1]);
     pos = (x, y, 0) + origin;
-    var_4526111c13164192 = 60;
+    capsule_height = 60;
     capsule_radius = 15;
 
-    if(isDefined(attractor_struct.source) && !attractor_struct.source aiphysicstracepassed(origin + (0, 0, 5), pos + (0, 0, 5), capsule_radius, var_4526111c13164192, 1)) {
+    if(isDefined(attractor_struct.source) && !attractor_struct.source aiphysicstracepassed(origin + (0, 0, 5), pos + (0, 0, 5), capsule_radius, capsule_height, 1)) {
       if(spot_i % 2 == 1) {
         waitframe();
       }
@@ -343,7 +343,7 @@ function private function_569a4f4cf02304eb() {
 
           if(isDefined(ai.target_attractor)) {
             goal_info = ai function_b0441752fb8134be();
-            ai._blackboard.var_7e3081ff77305aa8 = 1;
+            ai._blackboard.zombieattractoristarget = 1;
             ai._blackboard.var_bba2444008510c91 = isDefined(goal_info) ? goal_info.reachable_goal : ai.origin;
 
             if(istrue(ai.target_attractor.is_attackable)) {
@@ -366,7 +366,7 @@ function private function_569a4f4cf02304eb() {
               ai._blackboard.var_e2ff8f281ac0a21d = 0;
             }
           } else {
-            ai._blackboard.var_7e3081ff77305aa8 = 0;
+            ai._blackboard.zombieattractoristarget = 0;
           }
         }
 

@@ -73,7 +73,7 @@ function function_b2c69230002d223d(taskid, params) {
 function function_aebbe83f2fdc628(taskid, params) {
   settings = function_6ed820130bc9b67f();
 
-  if(self function_11e2d4051ea44b35("in_lightning_strike") < 2) {
+  if(self getaiblackboarddynamic("in_lightning_strike") < 2) {
     return anim.running;
   }
 
@@ -106,7 +106,7 @@ function function_aebbe83f2fdc628(taskid, params) {
           function_e7594d6f2ba674e(self.var_730fcb57528054fb.var_604a388e9ca055ae);
           function_1721cb88b7d01455();
           timedelay = settings.chargetime * 0.25 * 0.001;
-          function_f9a207358d70923c(timedelay, self.var_730fcb57528054fb.var_8602f084896203b4, &function_3dc41a713eedb5b1);
+          delaythreadendon(timedelay, self.var_730fcb57528054fb.var_8602f084896203b4, &function_3dc41a713eedb5b1);
         }
 
         function_e60a22ee5835cfb6();
@@ -167,7 +167,7 @@ function function_4627f093a696bf5f(var_cd49914bf215b4f3) {
 
   self.entitydata.attack_lastattacktime = gettime();
   self function_3e89eb3d8e3f1811("in_lightning_strike", 0);
-  self.entitydata.var_9adf21d0962a922b = 0;
+  self.entitydata.entitystate = 0;
 }
 
 function private function_e7594d6f2ba674e(var_ae5c9952fc39b03e) {
@@ -183,14 +183,14 @@ function private function_e7594d6f2ba674e(var_ae5c9952fc39b03e) {
 
     if(isDefined(island.var_e98ecb0e8f990265)) {
       foreach(var_e2acb53fb28f1400 in island.var_e98ecb0e8f990265) {
-        function_f9a207358d70923c(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_8602f084896203b4, &function_78eaa48aa4a9b4b, var_e2acb53fb28f1400);
+        delaythreadendon(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_8602f084896203b4, &function_78eaa48aa4a9b4b, var_e2acb53fb28f1400);
         var_3b9fa7959a95ea60++;
       }
 
       continue;
     }
 
-    function_f9a207358d70923c(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_8602f084896203b4, &function_78eaa48aa4a9b4b, island);
+    delaythreadendon(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_8602f084896203b4, &function_78eaa48aa4a9b4b, island);
     var_3b9fa7959a95ea60++;
   }
 
@@ -283,7 +283,7 @@ function private function_1ff41ff97941904a(var_e4f9026b2b11083a) {
       island.scriptable setscriptablepartstate("lightning_charge", "off", 0);
 
       if(istrue(var_e4f9026b2b11083a)) {
-        function_f9a207358d70923c(0.1, self.var_730fcb57528054fb.var_8602f084896203b4, &function_4a5e775c6690594a, island);
+        delaythreadendon(0.1, self.var_730fcb57528054fb.var_8602f084896203b4, &function_4a5e775c6690594a, island);
         continue;
       }
 
@@ -324,12 +324,12 @@ function private function_78eaa48aa4a9b4b(island) {
   testangles = vectortoangles(upvector);
   var_e935bc41ae8e04da rotateTo(testangles, 0.05);
   thread function_5ee1730c2e122134(var_e935bc41ae8e04da, "lightning_charge_end");
-  var_d705a4ae90ec3f37 = spawnfx(getfx("entity_lightning_charge_vfx"), island.origin, upvector);
+  chargevfx = spawnfx(getfx("entity_lightning_charge_vfx"), island.origin, upvector);
 
-  if(isDefined(var_d705a4ae90ec3f37)) {
-    triggerfx(var_d705a4ae90ec3f37);
-    var_d705a4ae90ec3f37 function_cea710f9d017694a(1);
-    thread function_5ee1730c2e122134(var_d705a4ae90ec3f37, "lightning_charge_end");
+  if(isDefined(chargevfx)) {
+    triggerfx(chargevfx);
+    chargevfx forcenetfieldhighlod_sharedfunc(1);
+    thread function_5ee1730c2e122134(chargevfx, "lightning_charge_end");
   }
 }
 
@@ -386,13 +386,13 @@ function private function_1c589d92d8ddd361(var_ae5c9952fc39b03e) {
 
     if(isDefined(island.var_e98ecb0e8f990265)) {
       foreach(var_e2acb53fb28f1400 in island.var_e98ecb0e8f990265) {
-        function_f9a207358d70923c(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_4674902b1ffe1500, &function_129c910190cc13ea, var_e2acb53fb28f1400);
+        delaythreadendon(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_4674902b1ffe1500, &function_129c910190cc13ea, var_e2acb53fb28f1400);
       }
     } else {
-      function_f9a207358d70923c(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_4674902b1ffe1500, &function_129c910190cc13ea, island);
+      delaythreadendon(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_4674902b1ffe1500, &function_129c910190cc13ea, island);
     }
 
-    function_f9a207358d70923c(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_4674902b1ffe1500, &function_2971ef2fb6df97f4, island);
+    delaythreadendon(0.1 * var_3b9fa7959a95ea60, self.var_730fcb57528054fb.var_4674902b1ffe1500, &function_2971ef2fb6df97f4, island);
     var_3b9fa7959a95ea60++;
   }
 
@@ -404,7 +404,7 @@ function private function_129c910190cc13ea(island) {
   self endon("death");
   self endon("fake_death");
   level endon("game_ended");
-  function_3d8d8ad244283e65(#"hash_4d468d8852c2e62e");
+  profilebeginevent(#"hash_4d468d8852c2e62e");
   lightningpos = getrandomnavpoint(island.origin, 100);
 
   if(!isDefined(lightningpos)) {
@@ -416,18 +416,18 @@ function private function_129c910190cc13ea(island) {
   var_d9e80a671452617f = function_3b3825d7947867dd(getfx("entity_lightning_vfx"), var_85d4a0106b97123b, island.angles, lightningpos);
   playFX(getfx("entity_lightning_impact_vfx"), lightningpos);
   var_d9e80a671452617f thread function_10e846e7342fdb9c();
-  function_7f3923ed3d66f8ad();
+  profileendevent();
 }
 
 function private function_2971ef2fb6df97f4(island) {
   self endon("death");
   self endon("fake_death");
   level endon("game_ended");
-  function_3d8d8ad244283e65(#"hash_b506d0b247b36370");
+  profilebeginevent(#"hash_b506d0b247b36370");
   settings = function_6ed820130bc9b67f();
 
   if(function_a794fcf9545f2062()) {
-    var_21fe9a8469d10e30 = function_b1eef70090b5b7b5(island.origin, island.radius, function_869ccb4e3451b8c6(["etype_ai", "etype_player"]), [], undefined);
+    var_21fe9a8469d10e30 = getentitiesinradiusfrompartitiongrid(island.origin, island.radius, createentitytypemask(["etype_ai", "etype_player"]), [], undefined);
 
     foreach(ent in var_21fe9a8469d10e30) {
       if(!isDefined(ent) || !isalive(ent) || istrue(ent.inlaststand)) {
@@ -481,7 +481,7 @@ function private function_2971ef2fb6df97f4(island) {
     }
   }
 
-  function_7f3923ed3d66f8ad();
+  profileendevent();
 }
 
 function private function_10e846e7342fdb9c() {

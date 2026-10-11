@@ -67,8 +67,8 @@ function vehicle_airdrop(vehicleref, spawndata, faildata) {
   fakevehicle.animname = vehicleref;
   model = vehicledata.model;
 
-  if(isDefined(spawndata.var_14cde247ac3313a4)) {
-    model = spawndata.var_14cde247ac3313a4 + "::" + model;
+  if(isDefined(spawndata.skinoverride)) {
+    model = spawndata.skinoverride + "::" + model;
   }
 
   fakevehicle setModel(model);
@@ -253,7 +253,7 @@ function private airdrop_land(airdropdata, position, angles) {
   earthquake(airdropdata.earthquakescale, airdropdata.earthquakeduration, position, airdropdata.earthquakeradius);
   playrumbleonposition("grenade_rumble", position);
   physicsexplosionsphere(position, airdropdata.physicsouterradius, airdropdata.physicsinnerradius, airdropdata.physicsscale);
-  self function_65aa053c077c003a(1);
+  self vehphys_parkingbrake(1);
   self.landed = 1;
   self notify("landed");
 }

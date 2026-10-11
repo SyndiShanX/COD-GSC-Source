@@ -188,9 +188,9 @@ function init_script_triggers() {
     }
   }
 
-  var_ed07cf11c0353267 = ["trigger_multiple", "trigger_once", "trigger_use", "trigger_radius", "trigger_lookat", "trigger_disk", "trigger_damage"];
+  code_classes = ["trigger_multiple", "trigger_once", "trigger_use", "trigger_radius", "trigger_lookat", "trigger_disk", "trigger_damage"];
 
-  foreach(triggertype in var_ed07cf11c0353267) {
+  foreach(triggertype in code_classes) {
     triggers = getEntArray(triggertype, "code_classname");
 
     foreach(trigger in triggers) {
@@ -1425,16 +1425,16 @@ function trigger_multiple_tessellationcutoff(trigger) {
 
   while(true) {
     trigger waittill("trigger", player);
-    var_92ad28aede5bf05e = trigger.script_tess_distance;
+    cutoff_distance = trigger.script_tess_distance;
     cutoff_falloff = trigger.script_tess_falloff;
     time = trigger.script_delay;
 
-    if(var_92ad28aede5bf05e != level.tess.cutoff_distance_goal || cutoff_falloff != level.tess.cutoff_falloff_goal) {
-      var_92ad28aede5bf05e = max(0, var_92ad28aede5bf05e);
-      var_92ad28aede5bf05e = min(10000, var_92ad28aede5bf05e);
+    if(cutoff_distance != level.tess.cutoff_distance_goal || cutoff_falloff != level.tess.cutoff_falloff_goal) {
+      cutoff_distance = max(0, cutoff_distance);
+      cutoff_distance = min(10000, cutoff_distance);
       cutoff_falloff = max(0, cutoff_falloff);
       cutoff_falloff = min(10000, cutoff_falloff);
-      scripts\sp\art::tess_set_goal(var_92ad28aede5bf05e, cutoff_falloff, time);
+      scripts\sp\art::tess_set_goal(cutoff_distance, cutoff_falloff, time);
       continue;
     }
 
@@ -1766,7 +1766,7 @@ function trigger_outofbounds(trigger, var_aa6a5ebd98bc3b10) {
       fields = [];
 
       if(isDefined(var_aa6a5ebd98bc3b10)) {
-        fields["msg_index"] = function_8c14a8a658013e4e(var_aa6a5ebd98bc3b10);
+        fields["msg_index"] = getlocstringindex(var_aa6a5ebd98bc3b10);
       }
 
       fields["countdown"] = 1;
@@ -1796,7 +1796,7 @@ function outofbounds_failthread() {
   self endon("death");
   self endon("stop_failthread");
   self waittill("trigger");
-  level.player function_fb3c9a259f146781("scripted_widget_out_of_bounds");
+  level.player scripted_widget_destroy("scripted_widget_out_of_bounds");
   setomnvar("ui_out_of_bounds_countdown", 0);
   scripts\sp\player_death::set_custom_death_quote(29);
   missionfailedwrapper();

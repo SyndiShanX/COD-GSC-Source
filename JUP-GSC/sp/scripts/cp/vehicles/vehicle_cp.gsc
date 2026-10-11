@@ -83,10 +83,10 @@ function spawn_script_model_at_pos(posindex, tag, animname, xanim, model) {
 }
 
 function spawn_vehicle_accessory(model, on_tag, origin_offset, angles_offset) {
-  var_c6296a5ec3b3611e = spawn("script_model", self.origin);
-  var_c6296a5ec3b3611e setModel(model);
-  var_c6296a5ec3b3611e notsolid();
-  var_c6296a5ec3b3611e show();
+  modeltospawn = spawn("script_model", self.origin);
+  modeltospawn setModel(model);
+  modeltospawn notsolid();
+  modeltospawn show();
 
   if(!isDefined(origin_offset)) {
     origin_offset = (0, 0, 0);
@@ -105,19 +105,19 @@ function spawn_vehicle_accessory(model, on_tag, origin_offset, angles_offset) {
   tagorigin = self gettagorigin(tag);
 
   if(isDefined(tagorigin)) {
-    var_c6296a5ec3b3611e linkTo(self, tag, origin_offset, angles_offset);
+    modeltospawn linkTo(self, tag, origin_offset, angles_offset);
   } else {
-    var_c6296a5ec3b3611e linkTo(self);
+    modeltospawn linkTo(self);
   }
 
-  var_c6296a5ec3b3611e.targetname = self.targetname + "_accessory";
+  modeltospawn.targetname = self.targetname + "_accessory";
 
   if(!isDefined(self.accessories)) {
     self.accessories = [];
   }
 
-  self.accessories[self.accessories.size] = var_c6296a5ec3b3611e;
-  return var_c6296a5ec3b3611e;
+  self.accessories[self.accessories.size] = modeltospawn;
+  return modeltospawn;
 }
 
 function vehicle_cp_create(vehicle, spawndata) {

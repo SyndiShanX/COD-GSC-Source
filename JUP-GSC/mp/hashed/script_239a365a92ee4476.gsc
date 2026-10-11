@@ -342,7 +342,7 @@ function function_83423a80381525e1(typemask) {
   origin = self.origin;
   assert(-1);
   assert(-1);
-  ents = function_b1eef70090b5b7b5(origin, 2755, typemask, [self]);
+  ents = getentitiesinradiusfrompartitiongrid(origin, 2755, typemask, [self]);
 
   foreach(checkplayer in ents) {
     if(!isDefined(checkplayer)) {
@@ -390,7 +390,7 @@ function function_e72755ab509c1ff() {
   level endon("game_ended");
   updatetime = 1000 * getdvarint(@ "hash_1da7540b953c3277", 2);
   maxprocess = getdvarint(@ "hash_661fbc0e07f4c8bf", 3);
-  typemask = function_869ccb4e3451b8c6(["etype_player"]);
+  typemask = createentitytypemask(["etype_player"]);
 
   if(level.var_75dbbfeb5401a7f2.size == 0) {
     level waittill("contextual_tip_player_add");
@@ -511,7 +511,7 @@ function function_f3942ee6819263f5(tipkey) {
 
   if(isDefined(tipresult)) {
     if(tipresult == "currentContextualTipCompleted") {
-      childthread printtoscreen("<dev string:x5e>" + function_3c8848a3a11b2553(tipkey));
+      childthread printtoscreen("<dev string:x5e>" + getxhashsourcename(tipkey));
 
       function_a25d14ecf8dcb49e(function_b4641ae08979f8ce(tipkey));
 
@@ -519,12 +519,12 @@ function function_f3942ee6819263f5(tipkey) {
         return;
       }
     } else {
-      childthread printtoscreen("<dev string:x7c>" + function_3c8848a3a11b2553(tipkey));
+      childthread printtoscreen("<dev string:x7c>" + getxhashsourcename(tipkey));
     }
   } else {
     function_6fba31415caeee6e(0, level.ftuedata.var_f09f2ffd8a67fe03);
 
-    childthread printtoscreen("<dev string:x98>" + function_3c8848a3a11b2553(tipkey));
+    childthread printtoscreen("<dev string:x98>" + getxhashsourcename(tipkey));
   }
 
   self.var_657f5a0d17435bc.var_5e4d29a54d7eddf6 = undefined;
@@ -676,7 +676,7 @@ function function_58c9ac5c1aad6962(var_c0e68595c1877b35) {
   self endon("currentContextualTipCompleted");
   self endon("currentContextualTipAborted");
 
-  childthread printtoscreen("<dev string:xe3>" + function_3c8848a3a11b2553(var_c0e68595c1877b35));
+  childthread printtoscreen("<dev string:xe3>" + getxhashsourcename(var_c0e68595c1877b35));
 
   var_ff0f9c5ebef8424e = level.var_305547d6de59eba4.contextualtips[var_c0e68595c1877b35];
 
@@ -1018,7 +1018,7 @@ function function_69d2bf97401ca611(tipkey) {
     return;
   }
 
-  var_794fe72a0defb619 = function_1823ff50bb28148d(tipkey);
+  var_794fe72a0defb619 = getxhash(tipkey);
 
   if(!isDefined(level.var_305547d6de59eba4.contextualtips[var_794fe72a0defb619])) {
     return;

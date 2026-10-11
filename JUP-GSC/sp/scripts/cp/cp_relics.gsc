@@ -292,9 +292,9 @@ function unset_passive_random_attachment(player) {}
 
 function getweaponswithpassive(player, passive) {
   temparray = [];
-  var_8c788f3a616d44b5 = getarraykeys(player.weapon_passives);
+  weaponkeys = getarraykeys(player.weapon_passives);
 
-  foreach(key in var_8c788f3a616d44b5) {
+  foreach(key in weaponkeys) {
     for(i = 0; i < player.weapon_passives[key].size; i++) {
       if(player.weapon_passives[key][i].name == passive) {
         temparray[temparray.size] = key;
@@ -567,18 +567,18 @@ function doublekillreloadwatcher(sweapon, player, victim, smeansofdeath, shitloc
     maxclipammo = weaponclipsize(sweapon);
     var_afea921d82329afb = player getweaponammostock(sweapon);
     var_fb6da439a30039cd = player getweaponammoclip(sweapon);
-    var_d7724e7657d45522 = min(maxclipammo - var_fb6da439a30039cd, var_afea921d82329afb);
-    var_94d2e0ad0368ab91 = min(var_fb6da439a30039cd + var_d7724e7657d45522, maxclipammo);
+    refundcount = min(maxclipammo - var_fb6da439a30039cd, var_afea921d82329afb);
+    var_94d2e0ad0368ab91 = min(var_fb6da439a30039cd + refundcount, maxclipammo);
     player setweaponammoclip(sweapon, int(var_94d2e0ad0368ab91));
-    player setweaponammostock(sweapon, int(var_afea921d82329afb - var_d7724e7657d45522));
+    player setweaponammostock(sweapon, int(var_afea921d82329afb - refundcount));
 
     if(player isdualwielding()) {
       var_afea921d82329afb = player getweaponammostock(sweapon);
       var_fb6da439a30039cd = player getweaponammoclip(sweapon, "left");
-      var_d7724e7657d45522 = min(maxclipammo - var_fb6da439a30039cd, var_afea921d82329afb);
-      var_94d2e0ad0368ab91 = min(var_fb6da439a30039cd + var_d7724e7657d45522, maxclipammo);
+      refundcount = min(maxclipammo - var_fb6da439a30039cd, var_afea921d82329afb);
+      var_94d2e0ad0368ab91 = min(var_fb6da439a30039cd + refundcount, maxclipammo);
       player setweaponammoclip(sweapon, int(var_94d2e0ad0368ab91), "left");
-      player setweaponammostock(sweapon, int(var_afea921d82329afb - var_d7724e7657d45522));
+      player setweaponammostock(sweapon, int(var_afea921d82329afb - refundcount));
     }
   }
 }
@@ -1771,14 +1771,14 @@ function updatepassivecolddamage(player, weapon, victim) {
   }
 }
 
-function unsetslowmovementaftertime(victim, var_a29497b5a1296685) {
+function unsetslowmovementaftertime(victim, oldspeed) {
   level endon("game_ended");
   victim endon("death");
   wait 10;
 
-  if(isDefined(var_a29497b5a1296685)) {
-    victim.movemode = var_a29497b5a1296685;
-    victim scripts\asm\asm_bb::bb_requestmovetype(var_a29497b5a1296685);
+  if(isDefined(oldspeed)) {
+    victim.movemode = oldspeed;
+    victim scripts\asm\asm_bb::bb_requestmovetype(oldspeed);
   }
 }
 
@@ -5467,29 +5467,29 @@ function function_2e08463451cf36ec() {
   }
 
   level.var_1a70639bf6482bc2 = [];
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_pi_decho_mp", array_combine(function_6527364c1ecca6c6("iw9_pi_decho_mp"), ["ammo_50p", "bar_pi_hvylong_p25", "comp_decho_01", "mag_pi_large_p25", "stockno_pi_p25", "trigger_p25"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_pi_papa220_mp", array_combine(function_6527364c1ecca6c6("iw9_pi_papa220_mp"), ["silencer01_pi", "iw9_minireddot01_pstl"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_pi_golf17_mp", array_combine(function_6527364c1ecca6c6("iw9_pi_golf17_mp"), ["mag_pi_xlarge_p24"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_pi_swhiskey_mp", array_combine(function_6527364c1ecca6c6("iw9_pi_swhiskey_mp"), ["akimbo_swhiskey"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sh_mbravo_mp", function_6527364c1ecca6c6("iw9_sh_mbravo_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sh_mike1014_mp", function_6527364c1ecca6c6("iw9_sh_mike1014_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sh_mviktor_mp", function_6527364c1ecca6c6("iw9_sh_mviktor_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sm_papa90_mp", function_6527364c1ecca6c6("iw9_sm_papa90_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sm_beta_mp", array_combine(function_6527364c1ecca6c6("iw9_sm_beta_mp"), ["holo01", "pgrip_p04"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_br_msecho_mp", function_6527364c1ecca6c6("iw9_br_msecho_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_br_soscar14_mp", array_combine(function_6527364c1ecca6c6("iw9_br_soscar14_mp"), ["arscope01"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_ar_scharlie_mp", function_6527364c1ecca6c6("iw9_ar_scharlie_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_dm_mike24_mp", function_6527364c1ecca6c6("iw9_dm_mike24_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_lm_rkilo_mp", array_combine(function_6527364c1ecca6c6("iw9_lm_rkilo_mp"), ["bipod_rkilo", "fourx02"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_lm_slima_mp", function_6527364c1ecca6c6("iw9_lm_slima_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_dm_sbeta_mp", array_combine(function_6527364c1ecca6c6("iw9_dm_sbeta_mp"), ["dmscope01", "lever_heavy_p19"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sn_limax_mp", array_combine(function_6527364c1ecca6c6("iw9_sn_limax_mp"), ["ammo_50b"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_la_rpapa7_mp", function_6527364c1ecca6c6("iw9_la_rpapa7_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_la_mike32_mp", function_6527364c1ecca6c6("iw9_la_mike32_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_lm_dblmg2_cp", array_combine(function_6527364c1ecca6c6("iw9_lm_dblmg2_cp"), ["dynamic_null_dblmg", "laserads_bright_dblmg"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sn_mromeo_mp", function_6527364c1ecca6c6("iw9_sn_mromeo_mp"));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_dm_la700_mp", array_combine(function_6527364c1ecca6c6("iw9_dm_la700_mp"), ["fourxtherm01", "xmag_sn_p20", "bar_sn_p20_la700"]));
-  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sm_victor_mp", array_combine(function_6527364c1ecca6c6("iw9_sm_victor_mp"), ["lasercyl_hip03", "drum_p10", "holo01", "grip_vert04"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_pi_decho_mp", array_combine(getweapondefaultattachments("iw9_pi_decho_mp"), ["ammo_50p", "bar_pi_hvylong_p25", "comp_decho_01", "mag_pi_large_p25", "stockno_pi_p25", "trigger_p25"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_pi_papa220_mp", array_combine(getweapondefaultattachments("iw9_pi_papa220_mp"), ["silencer01_pi", "iw9_minireddot01_pstl"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_pi_golf17_mp", array_combine(getweapondefaultattachments("iw9_pi_golf17_mp"), ["mag_pi_xlarge_p24"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_pi_swhiskey_mp", array_combine(getweapondefaultattachments("iw9_pi_swhiskey_mp"), ["akimbo_swhiskey"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sh_mbravo_mp", getweapondefaultattachments("iw9_sh_mbravo_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sh_mike1014_mp", getweapondefaultattachments("iw9_sh_mike1014_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sh_mviktor_mp", getweapondefaultattachments("iw9_sh_mviktor_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sm_papa90_mp", getweapondefaultattachments("iw9_sm_papa90_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sm_beta_mp", array_combine(getweapondefaultattachments("iw9_sm_beta_mp"), ["holo01", "pgrip_p04"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_br_msecho_mp", getweapondefaultattachments("iw9_br_msecho_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_br_soscar14_mp", array_combine(getweapondefaultattachments("iw9_br_soscar14_mp"), ["arscope01"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_ar_scharlie_mp", getweapondefaultattachments("iw9_ar_scharlie_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_dm_mike24_mp", getweapondefaultattachments("iw9_dm_mike24_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_lm_rkilo_mp", array_combine(getweapondefaultattachments("iw9_lm_rkilo_mp"), ["bipod_rkilo", "fourx02"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_lm_slima_mp", getweapondefaultattachments("iw9_lm_slima_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_dm_sbeta_mp", array_combine(getweapondefaultattachments("iw9_dm_sbeta_mp"), ["dmscope01", "lever_heavy_p19"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sn_limax_mp", array_combine(getweapondefaultattachments("iw9_sn_limax_mp"), ["ammo_50b"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_la_rpapa7_mp", getweapondefaultattachments("iw9_la_rpapa7_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_la_mike32_mp", getweapondefaultattachments("iw9_la_mike32_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_lm_dblmg2_cp", array_combine(getweapondefaultattachments("iw9_lm_dblmg2_cp"), ["dynamic_null_dblmg", "laserads_bright_dblmg"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sn_mromeo_mp", getweapondefaultattachments("iw9_sn_mromeo_mp"));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_dm_la700_mp", array_combine(getweapondefaultattachments("iw9_dm_la700_mp"), ["fourxtherm01", "xmag_sn_p20", "bar_sn_p20_la700"]));
+  level.var_1a70639bf6482bc2[level.var_1a70639bf6482bc2.size] = buildweapon("iw9_sm_victor_mp", array_combine(getweapondefaultattachments("iw9_sm_victor_mp"), ["lasercyl_hip03", "drum_p10", "holo01", "grip_vert04"]));
 }
 
 function create_primary_weapon_obj_from_custom_loadout(player, custom_loadout_index) {
@@ -6107,7 +6107,7 @@ function function_43474778d36c627b() {
   wait 0.05;
   function_c0d2c91f2688ece4(0, 1);
   level.var_317452953c148027 = undefined;
-  level.var_ad799295a6692b29 = 1;
+  level.dontdroploot = 1;
   level.oitc = 1;
 }
 
@@ -6474,7 +6474,7 @@ function ondamagerelicsteelballs(player, weapon, victim, meansofdeath, shitloc, 
   victim.shouldhelmetpop = undefined;
 
   if(isDefined(victim.original_disablelongdeath)) {
-    victim.var_98add129a7ecb962 = victim.var_56ada34122c13f70;
+    victim.allowlongdeath = victim.var_56ada34122c13f70;
   }
 
   if(!isDefined(player) || !isalive(player)) {
@@ -6487,8 +6487,8 @@ function ondamagerelicsteelballs(player, weapon, victim, meansofdeath, shitloc, 
 
   victim.forceexplosivedeath = 1;
   victim.shouldhelmetpop = 1;
-  victim.var_56ada34122c13f70 = victim.var_98add129a7ecb962;
-  victim.var_98add129a7ecb962 = 0;
+  victim.var_56ada34122c13f70 = victim.allowlongdeath;
+  victim.allowlongdeath = 0;
 }
 
 function relic_steelballs_health_boost() {
@@ -7362,7 +7362,7 @@ function set_relic_doubletap_params_internal() {
       }
     }
 
-    if(scripts\cp\spawning::is_riding_vehicle() || istrue(self.playing_skit) || !self.var_98add129a7ecb962 || istrue(self.attempting_teleport) || istrue(self.bhasriotshieldattached) || isDefined(meansofdeath) && meansofdeath == "MOD_FIRE" || isDefined(self.script) && (self.script == "scripted" || self.script == "<custom>") || istrue(self._blackboard.animscriptedactive)) {
+    if(scripts\cp\spawning::is_riding_vehicle() || istrue(self.playing_skit) || !self.allowlongdeath || istrue(self.attempting_teleport) || istrue(self.bhasriotshieldattached) || isDefined(meansofdeath) && meansofdeath == "MOD_FIRE" || isDefined(self.script) && (self.script == "scripted" || self.script == "<custom>") || istrue(self._blackboard.animscriptedactive)) {
       self.health = 1;
       return;
     }
@@ -7419,7 +7419,7 @@ function relic_doubletap_helper() {
   self.longdeathnoncombat = 1;
 
   while(true) {
-    self.var_4ad177ab3ddde8fd = undefined;
+    self.longdeathanims_earlyfinishtime = undefined;
     self.desiredtimeofdeath = gettime() + 1000;
     self.bulletsinclip = 0;
     wait 0.05;

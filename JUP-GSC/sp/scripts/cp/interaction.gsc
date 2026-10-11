@@ -1538,9 +1538,9 @@ function is_permitted_guided_interaction(player, struct, currentstruct) {
     var_ee46ba4828993237 = get_spawn_volumes_player_is_in(0, undefined, player);
 
     foreach(var_27dfbfcbd63d339e in var_ee46ba4828993237) {
-      var_eb6e6263d4667983 = var_27dfbfcbd63d339e get_adjacent_volumes_from_volume();
+      avolumes = var_27dfbfcbd63d339e get_adjacent_volumes_from_volume();
 
-      foreach(volume in var_eb6e6263d4667983) {
+      foreach(volume in avolumes) {
         if(ispointinvolume(struct.origin, volume)) {
           return 0;
         }

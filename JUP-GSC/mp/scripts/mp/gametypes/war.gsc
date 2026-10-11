@@ -101,7 +101,7 @@ function main() {
 
   if(namespace_ef54497d29a56093::function_5a60778277d6ae4b()) {
     namespace_ef54497d29a56093::function_d4cc0fe3bc1557bf();
-  } else if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() || scripts\cp_mp\utility\game_utility::function_6493ec89ae923684()) {
+  } else if(scripts\cp_mp\utility\game_utility::ismagellanmode() || scripts\cp_mp\utility\game_utility::function_6493ec89ae923684()) {
     scripts\mp\gametypes\mgl_mp::function_ce76a0f1345b7f4f();
 
     if(scripts\cp_mp\utility\game_utility::function_6493ec89ae923684()) {
@@ -110,7 +110,7 @@ function main() {
   }
 
   if(function_2898a9c3d425a919()) {
-    function_f3bb4f4911a1beb2("slam", "init");
+    callsharedfunc("slam", "init");
   }
 
   level.reinitspawns = &reinitspawns;
@@ -123,7 +123,7 @@ function initializematchrules() {
   setdynamicdvar(@ "hash_bb6e8f8d9be104f4", 0);
 
   if(function_2898a9c3d425a919()) {
-    function_f3bb4f4911a1beb2("slam", "initializeMatchRules");
+    callsharedfunc("slam", "initializeMatchRules");
   }
 }
 
@@ -174,7 +174,7 @@ function onstartgametype() {
 
 function onplayerconnect(player) {
   if(function_2898a9c3d425a919()) {
-    player function_f3bb4f4911a1beb2("slam", "onPlayerConnect");
+    player callsharedfunc("slam", "onPlayerConnect");
   }
 }
 
@@ -276,12 +276,12 @@ function getspawnpoint() {
 function onspawnplayer(revivespawn) {
   scripts\mp\hud_message::function_f004ef4606b9efdc("kill");
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     thread scripts\mp\gametypes\mgl_mp::function_f9ae07213a0af3de();
   }
 
   if(function_2898a9c3d425a919()) {
-    function_f3bb4f4911a1beb2("slam", "onSpawnPlayer", revivespawn);
+    callsharedfunc("slam", "onSpawnPlayer", revivespawn);
   }
 
   thread onspawnfinished();
@@ -342,7 +342,7 @@ function onnormaldeath(victim, attacker, lifeid, meansofdeath, objweapon, iskill
   }
 
   if(function_2898a9c3d425a919()) {
-    function_f3bb4f4911a1beb2("slam", "onNormalDeath", victim, attacker, meansofdeath);
+    callsharedfunc("slam", "onNormalDeath", victim, attacker, meansofdeath);
   }
 
   scripts\mp\gametypes\common::oncommonnormaldeath(victim, attacker, lifeid, meansofdeath, objweapon, iskillstreakweapon);

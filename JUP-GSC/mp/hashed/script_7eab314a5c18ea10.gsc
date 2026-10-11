@@ -116,12 +116,12 @@ function private function_6bbe26534b23bb81() {
 
 function function_da8dd7e0115a7063(params) {
   option = params[0];
-  var_8f07c7b330e08f30 = int(params[1]);
+  activityfunctiontype = int(params[1]);
   newfunction = undefined;
 
   switch (option) {
     case #"hash_7038dec66d8275be":
-      newfunction = activity_common::function_35c9943414b3e6ed(var_8f07c7b330e08f30);
+      newfunction = activity_common::function_35c9943414b3e6ed(activityfunctiontype);
       break;
     case #"hash_f43afb7b1b11f010":
       newfunction = &function_cc447c65d0cb6dec;
@@ -150,8 +150,8 @@ function function_da8dd7e0115a7063(params) {
     return;
   }
 
-  activitytype = namespace_4fda5d7358015a06::function_de53ed8e35d0ed7a(instance);
-  activity_common::function_89384091f7a2dbd(activitytype, var_8f07c7b330e08f30, newfunction);
+  activitytype = namespace_4fda5d7358015a06::getactivitytype(instance);
+  activity_common::function_89384091f7a2dbd(activitytype, activityfunctiontype, newfunction);
 
   if(option == "<dev string:x1307>") {
     iprintln("<dev string:x138e>");
@@ -161,11 +161,11 @@ function function_da8dd7e0115a7063(params) {
   iprintln("<dev string:x13a9>");
 }
 
-function private function_cc447c65d0cb6dec(var_ed118e6dd8c246) {
+function private function_cc447c65d0cb6dec(lootfunctionargs) {
   return undefined;
 }
 
-function private function_b77759c4dc1c9af5(var_6f8af5eb76deac21) {
+function private function_b77759c4dc1c9af5(relevantinfostruct) {
   group = [];
   return [group];
 }
@@ -226,21 +226,21 @@ function function_8051570293371e2e(playergroups, placementstruct, var_62f5b2662f
   var_dddc9860f82c0df0 = function_18a04da230bdecbb(var_167a6a2fafb71948);
 
   if(default_to(var_62f5b2662f131620, 0)) {
-    var_f07d96bc912b9e7b = namespace_81b7e1672a7e54da::function_2d81488c136e7154(undefined);
+    rewardcachebehaviorsettings = namespace_81b7e1672a7e54da::function_2d81488c136e7154(undefined);
   } else {
-    var_f07d96bc912b9e7b = namespace_55960efed51f8481::function_9e1216d6f33a3c78(var_dddc9860f82c0df0);
+    rewardcachebehaviorsettings = namespace_55960efed51f8481::function_9e1216d6f33a3c78(var_dddc9860f82c0df0);
   }
 
-  var_bae6a1d8f73bc001 = namespace_55960efed51f8481::function_e7c2ecccbf00007e(var_dddc9860f82c0df0);
-  var_ce0e8fe5ee941ba9 = &namespace_71ca15b739deab72::function_69406b22706f2162;
+  rewardcachesettings = namespace_55960efed51f8481::function_e7c2ecccbf00007e(var_dddc9860f82c0df0);
+  func_openlootablecontainer = &namespace_71ca15b739deab72::function_69406b22706f2162;
   var_5110040e4247ddb8 = &function_aaecaf3c5ebb48d4;
-  function_75e180b08f394748(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8);
+  function_75e180b08f394748(rewardcachesettings, rewardcachebehaviorsettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8);
 }
 
 function function_1d6fde9c84af8229() {
   if(isDefined(level.var_b7886ea73702cf1b)) {
-    namespace_6d633d94b557096d::function_f1c1ef5a544c2add(level.var_b7886ea73702cf1b);
-    namespace_6d633d94b557096d::function_6099c5a2ad80e231(level.var_b7886ea73702cf1b);
+    managed_reward_cache::function_f1c1ef5a544c2add(level.var_b7886ea73702cf1b);
+    managed_reward_cache::function_6099c5a2ad80e231(level.var_b7886ea73702cf1b);
     waitframe();
   }
 
@@ -248,7 +248,7 @@ function function_1d6fde9c84af8229() {
   var_262870a606179376 waittill("<dev string:x13e0>", var_3c5ef6d979d35982);
   level.var_b7886ea73702cf1b = var_3c5ef6d979d35982;
   thread function_1f57a3b46d10fa99(var_3c5ef6d979d35982);
-  namespace_6d633d94b557096d::function_a52e804f95d8ef78(var_3c5ef6d979d35982);
+  managed_reward_cache::function_a52e804f95d8ef78(var_3c5ef6d979d35982);
 }
 
 function function_1f57a3b46d10fa99(var_90fb64f0224fa64d) {
@@ -261,7 +261,7 @@ function function_1f57a3b46d10fa99(var_90fb64f0224fa64d) {
 
 function function_92f87dba4058fb48() {
   if(isDefined(level.var_b7886ea73702cf1b)) {
-    namespace_6d633d94b557096d::function_f1c1ef5a544c2add(level.var_b7886ea73702cf1b);
+    managed_reward_cache::function_f1c1ef5a544c2add(level.var_b7886ea73702cf1b);
   }
 }
 
@@ -270,7 +270,7 @@ function function_ec623faf77071b55() {
     cache = spawnStruct();
     items = common_item::function_bc2f4857c90f5344("<dev string:x1425>", 1);
     common_cache::function_fd95ef820bb2b980(items, cache);
-    namespace_6d633d94b557096d::function_b6ffbbaf23178f9b(level.var_b7886ea73702cf1b, level.players[0], cache.contents);
+    managed_reward_cache::function_b6ffbbaf23178f9b(level.var_b7886ea73702cf1b, level.players[0], cache.contents);
   }
 }
 
@@ -287,9 +287,9 @@ function function_a9d48cab10e470f0() {
     common_cache::function_fd95ef820bb2b980(items, cache);
     var_90fb64f0224fa64d = level.var_b7886ea73702cf1b;
     player = level.players[0];
-    var_a52f80b73fc2a002 = level.var_7e64537d346dd9ac;
+    reserveditemslotindex = level.var_7e64537d346dd9ac;
     item = cache.contents[0];
-    function_8b4f7ed65818ac99(var_90fb64f0224fa64d, player, var_a52f80b73fc2a002, item);
+    function_8b4f7ed65818ac99(var_90fb64f0224fa64d, player, reserveditemslotindex, item);
   }
 }
 
@@ -344,17 +344,17 @@ function function_800fca52b91a419c(var_8d3bc2cdb73e80ae, spawnnearby) {
   lootfunc = &function_aaecaf3c5ebb48d4;
   var_f7f66a8bcca0ac73 = undefined;
   var_42f5a7aef7be50f9 = undefined;
-  var_a1bdf2e1fd12ffc = &namespace_71ca15b739deab72::function_aae7d234bf6eaaa9;
-  var_bae6a1d8f73bc001 = reward_cache_settings::function_ec54b8019f59c0ef("<dev string:x153b>");
+  func_onitemadded = &namespace_71ca15b739deab72::function_aae7d234bf6eaaa9;
+  rewardcachesettings = reward_cache_settings::function_ec54b8019f59c0ef("<dev string:x153b>");
   despawndistance = 500;
-  var_d9c7c84351cf42df = 10;
+  despawntimerseconds = 10;
   var_d99131f23781644f = 5;
   var_dcbc42d7f8d81f9a = 1;
   spawndelayseconds = 0;
-  var_228c0115e2e06985 = 7500;
-  var_f07d96bc912b9e7b = namespace_81b7e1672a7e54da::function_3db94080a2ab11a4(despawndistance, var_d9c7c84351cf42df, var_d99131f23781644f, var_dcbc42d7f8d81f9a, var_228c0115e2e06985, spawndelayseconds);
-  var_ce0e8fe5ee941ba9 = &namespace_3dd7203b843229f9::function_885b8eee6652a555;
-  namespace_6d633d94b557096d::function_75e180b08f394748(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b, [reward_group], placement, var_ce0e8fe5ee941ba9, lootfunc, var_f7f66a8bcca0ac73, var_42f5a7aef7be50f9, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f);
+  objectivemarkervisibilitydistance = 7500;
+  rewardcachebehaviorsettings = namespace_81b7e1672a7e54da::function_3db94080a2ab11a4(despawndistance, despawntimerseconds, var_d99131f23781644f, var_dcbc42d7f8d81f9a, objectivemarkervisibilitydistance, spawndelayseconds);
+  func_openlootablecontainer = &namespace_3dd7203b843229f9::function_885b8eee6652a555;
+  managed_reward_cache::function_75e180b08f394748(rewardcachesettings, rewardcachebehaviorsettings, [reward_group], placement, func_openlootablecontainer, lootfunc, var_f7f66a8bcca0ac73, var_42f5a7aef7be50f9, func_onitemadded, var_3c99a2a84c4b850f);
   return var_3c99a2a84c4b850f;
 }
 
@@ -367,7 +367,7 @@ function function_54f49ba0c0e779a8(params) {
   }
 
   activitymoment = params[0];
-  namespace_68dc261109a9503f::function_735ee8e9d0f1b00b(instance, activitymoment);
+  namespace_68dc261109a9503f::announceactivitymoment(instance, activitymoment);
 }
 
 function function_3e599a727dc23cff(params) {

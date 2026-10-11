@@ -50,16 +50,16 @@ function private function_ea6f670b79578ba0(data) {
 }
 
 function private function_54dca51d6309297a(data) {
-  var_5814d27874b48e54 = function_c86ff8cfc88b4677(data);
-  var_5814d27874b48e54 = function_7fadd2dc679f8f4c(var_5814d27874b48e54, data);
-  data.player dlog_recordplayerevent("dlog_event_ftue_step_finished", var_5814d27874b48e54);
+  telemetrydata = function_c86ff8cfc88b4677(data);
+  telemetrydata = function_7fadd2dc679f8f4c(telemetrydata, data);
+  data.player dlog_recordplayerevent("dlog_event_ftue_step_finished", telemetrydata);
 }
 
 function private function_9ba5bff1f30b7938(data) {
-  var_5814d27874b48e54 = function_c86ff8cfc88b4677(data);
-  data.player dlog_recordplayerevent("dlog_event_ftue_step_start", var_5814d27874b48e54);
-  var_5814d27874b48e54 = function_7fadd2dc679f8f4c(var_5814d27874b48e54, data);
-  data.player dlog_recordplayerevent("dlog_event_ftue_step_finished", var_5814d27874b48e54);
+  telemetrydata = function_c86ff8cfc88b4677(data);
+  data.player dlog_recordplayerevent("dlog_event_ftue_step_start", telemetrydata);
+  telemetrydata = function_7fadd2dc679f8f4c(telemetrydata, data);
+  data.player dlog_recordplayerevent("dlog_event_ftue_step_finished", telemetrydata);
 }
 
 function private function_c86ff8cfc88b4677(data) {

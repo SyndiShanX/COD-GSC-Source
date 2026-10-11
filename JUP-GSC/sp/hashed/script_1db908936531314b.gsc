@@ -77,8 +77,8 @@ function private function_c8fdb79316f72ed9(inputvalue, userdata) {
       if(var_a97e1ee1445592c2.snd.submix3d.distanceattenuation > var_99434a3c2f6fe2fa) {
         var_99434a3c2f6fe2fa = var_a97e1ee1445592c2.snd.submix3d.distanceattenuation;
 
-        if(isDefined(var_a97e1ee1445592c2.snd.submix3d.var_c73348459be85799)) {
-          var_99434a3c2f6fe2fa *= var_a97e1ee1445592c2.snd.submix3d.var_c73348459be85799;
+        if(isDefined(var_a97e1ee1445592c2.snd.submix3d.submixscale)) {
+          var_99434a3c2f6fe2fa *= var_a97e1ee1445592c2.snd.submix3d.submixscale;
         }
       }
     }
@@ -140,13 +140,13 @@ function private function_f41485b4614e621a(userdata) {
   }
 }
 
-function private function_ab906084b9213a8b(submix, var_c73348459be85799, distancemin, distancemax, var_a1560db470f0d641) {
+function private function_ab906084b9213a8b(submix, submixscale, distancemin, distancemax, var_a1560db470f0d641) {
   var_8566b0fa1d69298a = self;
   assertex(isDefined(var_8566b0fa1d69298a), "audio entity must be defined");
   assertex(isDefined(submix), "submix must be defined");
 
-  if(isDefined(var_c73348459be85799) == 0) {
-    var_c73348459be85799 = 1;
+  if(isDefined(submixscale) == 0) {
+    submixscale = 1;
   }
 
   if(isDefined(distancemin) == 0 || isDefined(distancemax) == 0 || isDefined(var_a1560db470f0d641) == 0) {
@@ -158,9 +158,9 @@ function private function_ab906084b9213a8b(submix, var_c73348459be85799, distanc
       return;
     }
 
-    distancemin = function_8a2af68cee25cdf7(var_8566b0fa1d69298a.soundalias, "dist_min");
-    distancemax = function_8a2af68cee25cdf7(var_8566b0fa1d69298a.soundalias, "dist_max");
-    var_a1560db470f0d641 = function_8a2af68cee25cdf7(var_8566b0fa1d69298a.soundalias, "volumefalloffcurve");
+    distancemin = getsndaliasvalue(var_8566b0fa1d69298a.soundalias, "dist_min");
+    distancemax = getsndaliasvalue(var_8566b0fa1d69298a.soundalias, "dist_max");
+    var_a1560db470f0d641 = getsndaliasvalue(var_8566b0fa1d69298a.soundalias, "volumefalloffcurve");
 
     if(isDefined(var_a1560db470f0d641) == 0 || var_a1560db470f0d641 == "" || var_a1560db470f0d641 == "$default" || var_a1560db470f0d641 == "default") {
       var_a1560db470f0d641 = "default_vfcurve";
@@ -176,7 +176,7 @@ function private function_ab906084b9213a8b(submix, var_c73348459be85799, distanc
   var_ebc662a0caef9b36.distancemax = distancemax;
   var_ebc662a0caef9b36.var_a1560db470f0d641 = var_a1560db470f0d641;
   var_ebc662a0caef9b36.submix = submix;
-  var_ebc662a0caef9b36.var_c73348459be85799 = var_c73348459be85799;
+  var_ebc662a0caef9b36.submixscale = submixscale;
   var_ebc662a0caef9b36.time = 0;
   function_b3e5599c9f6a8895(var_8566b0fa1d69298a);
   assertex(isstruct(var_8566b0fa1d69298a.snd));
@@ -208,8 +208,8 @@ function private function_ab906084b9213a8b(submix, var_c73348459be85799, distanc
   }
 }
 
-function function_14757b69209c039a(submix, var_c73348459be85799, distancemin, distancemax, var_a1560db470f0d641) {
-  thread function_ab906084b9213a8b(submix, var_c73348459be85799, distancemin, distancemax, var_a1560db470f0d641);
+function function_14757b69209c039a(submix, submixscale, distancemin, distancemax, var_a1560db470f0d641) {
+  thread function_ab906084b9213a8b(submix, submixscale, distancemin, distancemax, var_a1560db470f0d641);
 }
 
 function function_e2d87a63dd216b07() {
@@ -231,12 +231,12 @@ function function_e2d87a63dd216b07() {
 }
 
 function function_c3751c463dc674a1(dimvolume, dimbutton) {
-  level thread function_ea684ece7f0a1b98(dimvolume, dimbutton);
+  level thread dimmer_thread(dimvolume, dimbutton);
 }
 
-function private function_ea684ece7f0a1b98(dimvolume, dimbutton, dimbuttontime) {
+function private dimmer_thread(dimvolume, dimbutton, dimbuttontime) {
   volume_dvar = @ "hash_455f5221de27673d";
-  var_d350711d075718f1 = 0;
+  isdimmed = 0;
   isbuttonpressed = 0;
   defaultvolume = 0.8;
   setdevdvar(volume_dvar, "<dev string:x24>" + defaultvolume);
@@ -257,7 +257,7 @@ function private function_ea684ece7f0a1b98(dimvolume, dimbutton, dimbuttontime) 
   lastbuttonpressed = isbuttonpressed;
   dimhud = undefined;
   buttondowntime = 0;
-  assert(isDefined(var_d350711d075718f1));
+  assert(isDefined(isdimmed));
   assert(isDefined(defaultvolume));
   assert(isDefined(dimvolume));
   assert(isDefined(lastvolume));
@@ -275,18 +275,18 @@ function private function_ea684ece7f0a1b98(dimvolume, dimbutton, dimbuttontime) 
     }
 
     if(isbuttonpressed == 1 && buttondowntime > 0) {
-      var_f7ef816ae86f91f1 = gettime() - buttondowntime;
+      buttonholdtime = gettime() - buttondowntime;
 
-      if(var_f7ef816ae86f91f1 >= dimbuttontime) {
+      if(buttonholdtime >= dimbuttontime) {
         var_54faa24a906d6b9d = 1;
         buttondowntime = 0;
       }
     }
 
     if(var_54faa24a906d6b9d == 1) {
-      var_d350711d075718f1 = !var_d350711d075718f1;
+      isdimmed = !isdimmed;
 
-      switch (var_d350711d075718f1) {
+      switch (isdimmed) {
         case 0:
         default:
           setdevdvar(volume_dvar, "<dev string:x24>" + defaultvolume);
@@ -297,7 +297,7 @@ function private function_ea684ece7f0a1b98(dimvolume, dimbutton, dimbuttontime) 
       }
     }
 
-    if(var_d350711d075718f1 == 1 && isDefined(dimhud) == 0) {
+    if(isdimmed == 1 && isDefined(dimhud) == 0) {
       color = (1, 0.623529, 0.498039);
       alpha = 0.333;
       fontscale = 2;
@@ -319,7 +319,7 @@ function private function_ea684ece7f0a1b98(dimvolume, dimbutton, dimbuttontime) 
       dimhud.shadowed = 1;
       dimhud.foreground = 1;
       dimhud.label = dimstring;
-    } else if(var_d350711d075718f1 == 0 && isDefined(dimhud)) {
+    } else if(isdimmed == 0 && isDefined(dimhud)) {
       dimhud destroy();
       dimhud = undefined;
     }
@@ -453,10 +453,10 @@ function function_8b2208523132fa90() {
 function function_ff2551404bb53223(time_min, time_max, random_curve) {
   values = [];
   values[0] = time_min;
-  var_f1d815fca5ec80b = level.snd.var_81b664ea82102a8e[random_curve].size;
-  step = (time_max - time_min) / (var_f1d815fca5ec80b - 1);
+  values_cnt = level.snd.var_81b664ea82102a8e[random_curve].size;
+  step = (time_max - time_min) / (values_cnt - 1);
 
-  for(i = 1; i < var_f1d815fca5ec80b - 1; i++) {
+  for(i = 1; i < values_cnt - 1; i++) {
     values[i] = values[i - 1] + step;
   }
 
@@ -483,12 +483,12 @@ function function_58b4be4667013c74(w, amount) {
 }
 
 function function_3a936ade9c53e549(w, v) {
-  var_f1d815fca5ec80b = w.size;
+  values_cnt = w.size;
   r = randomfloat(1);
   total = 0;
   ret_value = v[v.size - 1];
 
-  for(i = 0; i < var_f1d815fca5ec80b; i++) {
+  for(i = 0; i < values_cnt; i++) {
     total += w[i];
 
     if(r < total) {
@@ -501,12 +501,12 @@ function function_3a936ade9c53e549(w, v) {
 }
 
 function function_d3101e7a53711d56(w) {
-  var_f1d815fca5ec80b = w.size;
+  values_cnt = w.size;
   r = randomfloat(1);
   total = 0;
   ret_value = w.size - 1;
 
-  for(i = 0; i < var_f1d815fca5ec80b; i++) {
+  for(i = 0; i < values_cnt; i++) {
     total += w[i];
 
     if(r < total) {
@@ -616,7 +616,7 @@ function function_4c14bc367fc3a09(alias, submix, scale, attack, release, radio) 
     return;
   }
 
-  volmod = function_8a2af68cee25cdf7(alias, "vol_mod");
+  volmod = getsndaliasvalue(alias, "vol_mod");
 
   if(function_110d3ab280057f5b(volmod != "dialog_critical", "alias '" + alias + "' volmod not 'dialog_critical' ('" + volmod + "')")) {
     var_5de261c412fd939b = 0;
@@ -634,17 +634,17 @@ function function_4c14bc367fc3a09(alias, submix, scale, attack, release, radio) 
   }
 
   if(var_5de261c412fd939b == 1) {
-    var_e05aeab5341d4573 = function_8a2af68cee25cdf7(alias, "dist_min");
-    var_e07e00b53443bd8d = function_8a2af68cee25cdf7(alias, "dist_max");
-    thresh = var_e07e00b53443bd8d * 0.5;
-    var_a10a4080b15de80c = squared(thresh);
+    falloffmin = getsndaliasvalue(alias, "dist_min");
+    falloffmax = getsndaliasvalue(alias, "dist_max");
+    thresh = falloffmax * 0.5;
+    thresh_sq = squared(thresh);
     dist_sq = 0;
 
     if(isDefined(ent) && isDefined(ent.origin) && radio == 0) {
       dist_sq = distancesquared(ent.origin, level.player.origin);
     }
 
-    if(dist_sq > var_a10a4080b15de80c) {
+    if(dist_sq > thresh_sq) {
       var_5de261c412fd939b = 0;
 
       if(function_ec24f13736bfc421() > 0) {
@@ -726,19 +726,19 @@ function private function_8ed5f37dfe5595a(scalefunc) {
   assertex(isDefined(scalefunc), "scale completed with unknown scaleFunc");
 
   if(scalefunc == &function_39e69965841fa467) {
-    self.snd.scale.var_8ef6ac3969a6c990 = undefined;
+    self.snd.scale.isscalingvolume = undefined;
     scalestring = "volume";
   }
 
   if(scalefunc == &function_394f85a9b323c069) {
-    self.snd.scale.var_2f60e0a3d98be6ec = undefined;
+    self.snd.scale.isscalingpitch = undefined;
     scalestring = "pitch";
   }
 
   assert(isDefined(scalestring));
   self.snd.scale.threads[scalestring] = undefined;
 
-  if(isDefined(self.snd.scale.var_8ef6ac3969a6c990) == 0 && isDefined(self.snd.scale.var_2f60e0a3d98be6ec) == 0) {
+  if(isDefined(self.snd.scale.isscalingvolume) == 0 && isDefined(self.snd.scale.isscalingpitch) == 0) {
     self.snd.scale.isscaling = undefined;
   }
 
@@ -764,17 +764,17 @@ function private function_9d9326a28f4ae880(curve, scale, time, scalefunc, callba
   timeremainder = float(time) % frametime;
   time = float(time) + frametime - timeremainder;
   timeinterval = float(time) / float(curvepts);
-  var_1bab9a5dcb8b8cc4 = timeinterval % frametime;
-  timeinterval = timeinterval + frametime - var_1bab9a5dcb8b8cc4;
+  timeintervalremainder = timeinterval % frametime;
+  timeinterval = timeinterval + frametime - timeintervalremainder;
   timeinterval = max(timeinterval, frametime);
-  var_a99a7c1f162492e5 = int(timeinterval * 1000 + 0.5);
+  timeintervalms = int(timeinterval * 1000 + 0.5);
   timems = int(time * 1000 + 0.5);
-  var_533d6b6dea3ed270 = int(0);
+  timecounterms = int(0);
 
   if(isDefined(self.snd.scale.isscaling)) {
     var_3f04bb8f81987348 = 0;
 
-    if(isDefined(self.snd.scale.var_8ef6ac3969a6c990) && scalefunc == &function_39e69965841fa467 || isDefined(self.snd.scale.var_2f60e0a3d98be6ec) && scalefunc == &function_394f85a9b323c069) {
+    if(isDefined(self.snd.scale.isscalingvolume) && scalefunc == &function_39e69965841fa467 || isDefined(self.snd.scale.isscalingpitch) && scalefunc == &function_394f85a9b323c069) {
       var_3f04bb8f81987348 = 1;
     }
 
@@ -802,12 +802,12 @@ function private function_9d9326a28f4ae880(curve, scale, time, scalefunc, callba
   scalestring = undefined;
 
   if(scalefunc == &function_39e69965841fa467) {
-    self.snd.scale.var_8ef6ac3969a6c990 = 1;
+    self.snd.scale.isscalingvolume = 1;
     scalestring = "volume";
   }
 
   if(scalefunc == &function_394f85a9b323c069) {
-    self.snd.scale.var_2f60e0a3d98be6ec = 1;
+    self.snd.scale.isscalingpitch = 1;
     scalestring = "pitch";
   }
 
@@ -815,16 +815,16 @@ function private function_9d9326a28f4ae880(curve, scale, time, scalefunc, callba
   self.snd.scale.threads[scalestring] = getthread();
   self endon("snd_stop_scale_" + scalestring);
 
-  while(var_533d6b6dea3ed270 < timems && isDefined(self) && isDefined(self.snd.scale.threads[scalestring])) {
-    remainingtime = (timems - var_533d6b6dea3ed270) * 0.001;
+  while(timecounterms < timems && isDefined(self) && isDefined(self.snd.scale.threads[scalestring])) {
+    remainingtime = (timems - timecounterms) * 0.001;
 
     if(isDefined(self.snd.scale.waitinterval)) {
       timeinterval = max(self.snd.scale.waitinterval, frametime);
     }
 
     waittime = min(timeinterval, remainingtime);
-    var_533d6b6dea3ed270 += int(waittime * 1000 + 0.5);
-    timefrac = float(var_533d6b6dea3ed270) / float(timems);
+    timecounterms += int(waittime * 1000 + 0.5);
+    timefrac = float(timecounterms) / float(timems);
     scalevalue = 1;
 
     if(inversecurve > 0) {
@@ -877,7 +877,7 @@ function snd_scale(soundobject, scalewhat, value, time, curve, callbackfunc) {
   assertex(function_5b8457b9d8edb521(soundobject) == 0, "snd_scale: called on removed entity");
   assert(isDefined(value));
   function_6f015404fd952b0b(soundobject);
-  var_a36b81f450d2c3ae = value;
+  clampedvalue = value;
   scalefunc = undefined;
   scalestring = undefined;
 
@@ -886,30 +886,30 @@ function snd_scale(soundobject, scalewhat, value, time, curve, callbackfunc) {
       curve = default_to(curve, "easeout");
       scalefunc = &function_39e69965841fa467;
       scalestring = "volume";
-      var_a36b81f450d2c3ae = clamp(value, 0, 4);
-      function_110d3ab280057f5b(value != var_a36b81f450d2c3ae, "snd_scale: clamped volume " + value + " -> " + var_a36b81f450d2c3ae);
+      clampedvalue = clamp(value, 0, 4);
+      function_110d3ab280057f5b(value != clampedvalue, "snd_scale: clamped volume " + value + " -> " + clampedvalue);
       break;
     case #"hash_d7a0f5b3b8320991":
       curve = default_to(curve, "linear");
       scalefunc = &function_394f85a9b323c069;
       scalestring = "pitch";
-      var_a36b81f450d2c3ae = clamp(value, 0.00390625, 2);
-      function_110d3ab280057f5b(value != var_a36b81f450d2c3ae, "snd_scale: clamped pitch " + value + " -> " + var_a36b81f450d2c3ae);
+      clampedvalue = clamp(value, 0.00390625, 2);
+      function_110d3ab280057f5b(value != clampedvalue, "snd_scale: clamped pitch " + value + " -> " + clampedvalue);
       break;
   }
 
   assert(isDefined(soundobject));
 
   if(isDefined(time) == 0 || time == 0) {
-    [[scalefunc]](soundobject, var_a36b81f450d2c3ae, 0);
-    function_bb64367b01278da4(soundobject, var_a36b81f450d2c3ae, scalefunc);
+    [[scalefunc]](soundobject, clampedvalue, 0);
+    function_bb64367b01278da4(soundobject, clampedvalue, scalefunc);
     soundobject notify("snd_scale_completed", scalefunc);
     soundobject notify("snd_scale_interrupted");
     soundobject notify("snd_stop_scale_" + scalestring);
     return;
   }
 
-  soundobject thread function_9d9326a28f4ae880(curve, var_a36b81f450d2c3ae, time, scalefunc, callbackfunc);
+  soundobject thread function_9d9326a28f4ae880(curve, clampedvalue, time, scalefunc, callbackfunc);
 
   if(scalefunc == &function_39e69965841fa467) {
     soundobject notify("stopfade");
@@ -1064,10 +1064,10 @@ function snd_timer(totaltime, tickalias, tockalias, endalias, pitchlo, pitchhi, 
 
 function private function_25cd589593729f1(var_c1cc78e068001d23) {
   level endon("radioConvoStop");
-  var_b609fc03c4b98503 = [];
-  var_4ef7f927f8917d38 = [];
+  radioconvo = [];
+  lastconvo = [];
   assertex(isstruct(level.snd), "snd was not initialized.");
-  assert(isarray(level.snd.var_117aac49a4007550));
+  assert(isarray(level.snd.radioconvos));
   waitforplayers();
 
   while(true) {
@@ -1076,14 +1076,14 @@ function private function_25cd589593729f1(var_c1cc78e068001d23) {
 
     if(isDefined(level.snd.var_35a5d01e6e6e88f7) == 0 || level.snd.var_35a5d01e6e6e88f7.size == 0) {
       function_f98c715cf7000bec();
-      level.snd.var_35a5d01e6e6e88f7 = array_remove(level.snd.var_35a5d01e6e6e88f7, var_4ef7f927f8917d38);
+      level.snd.var_35a5d01e6e6e88f7 = array_remove(level.snd.var_35a5d01e6e6e88f7, lastconvo);
     }
 
-    var_b609fc03c4b98503 = level.snd.var_35a5d01e6e6e88f7[0];
-    var_4ef7f927f8917d38 = var_b609fc03c4b98503;
+    radioconvo = level.snd.var_35a5d01e6e6e88f7[0];
+    lastconvo = radioconvo;
 
-    while(isarray(var_b609fc03c4b98503) && var_b609fc03c4b98503.size > 0) {
-      radioline = var_b609fc03c4b98503[0];
+    while(isarray(radioconvo) && radioconvo.size > 0) {
+      radioline = radioconvo[0];
 
       if(soundexists(radioline)) {
         playtime = lookupsoundlength(radioline) / 1000;
@@ -1096,10 +1096,10 @@ function private function_25cd589593729f1(var_c1cc78e068001d23) {
         wait 0.666;
       }
 
-      var_b609fc03c4b98503 = array_remove(var_b609fc03c4b98503, radioline);
+      radioconvo = array_remove(radioconvo, radioline);
     }
 
-    level.snd.var_35a5d01e6e6e88f7 = array_remove(level.snd.var_35a5d01e6e6e88f7, var_4ef7f927f8917d38);
+    level.snd.var_35a5d01e6e6e88f7 = array_remove(level.snd.var_35a5d01e6e6e88f7, lastconvo);
   }
 }
 
@@ -1116,16 +1116,16 @@ function radioconvostop() {
 }
 
 function function_f98c715cf7000bec() {
-  if(isDefined(level.snd.var_117aac49a4007550)) {
-    level.snd.var_35a5d01e6e6e88f7 = array_randomize(level.snd.var_117aac49a4007550);
+  if(isDefined(level.snd.radioconvos)) {
+    level.snd.var_35a5d01e6e6e88f7 = array_randomize(level.snd.radioconvos);
   }
 }
 
-function function_83ad3db1a9ccd7f8(flag_name, var_220cfd744ed0ba55, fade_in_time, fade_out_time) {
-  level thread function_704e6701c74424db(flag_name, var_220cfd744ed0ba55, fade_in_time, fade_out_time);
+function submix_flag(flag_name, submix_name, fade_in_time, fade_out_time) {
+  level thread function_704e6701c74424db(flag_name, submix_name, fade_in_time, fade_out_time);
 }
 
-function private function_704e6701c74424db(flag_name, var_220cfd744ed0ba55, fade_in_time, fade_out_time) {
+function private function_704e6701c74424db(flag_name, submix_name, fade_in_time, fade_out_time) {
   level.player endon("death");
 
   if(!flag_exist(flag_name)) {
@@ -1142,9 +1142,9 @@ function private function_704e6701c74424db(flag_name, var_220cfd744ed0ba55, fade
 
   while(true) {
     flag_wait(flag_name);
-    level.player setsoundsubmix(var_220cfd744ed0ba55, fade_in_time);
+    level.player setsoundsubmix(submix_name, fade_in_time);
     flag_waitopen(flag_name);
-    level.player clearsoundsubmix(var_220cfd744ed0ba55, fade_out_time);
+    level.player clearsoundsubmix(submix_name, fade_out_time);
   }
 }
 

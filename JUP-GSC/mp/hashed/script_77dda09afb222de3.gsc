@@ -27,7 +27,7 @@ function function_93a03eb03bc2c8ae(var_e2a66792e953b612) {
     triggername = "darkZone";
   }
 
-  triggers = function_f159c10d5cf8f0b4(triggername, "targetname");
+  triggers = getnoentvolumearray(triggername, "targetname");
 
   if(!isDefined(triggers)) {
     return;
@@ -37,11 +37,11 @@ function function_93a03eb03bc2c8ae(var_e2a66792e953b612) {
     return;
   }
 
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     function_44739fe1cf82e29a("lightZones");
 
     foreach(trigger in triggers) {
-      poiname = function_6cc445c02b5effac(trigger.origin, 1, 1);
+      poiname = poi_findpoioriginisin(trigger.origin, 1, 1);
       function_d0e7647e5538eb9d(poiname, "lightZones", trigger);
     }
 
@@ -113,7 +113,7 @@ function function_3d7298d1b868205b(defaultsetting) {
     return;
   }
 
-  triggers = function_f159c10d5cf8f0b4("sandstormZone", "targetname");
+  triggers = getnoentvolumearray("sandstormZone", "targetname");
 
   if(!isDefined(triggers)) {
     return;
@@ -123,11 +123,11 @@ function function_3d7298d1b868205b(defaultsetting) {
     return;
   }
 
-  if(scripts\mp\poi::function_47d356083884f913()) {
+  if(scripts\mp\poi::poi_issystemactive()) {
     function_44739fe1cf82e29a("sandstormZones");
 
     foreach(trigger in triggers) {
-      poiname = function_6cc445c02b5effac(trigger.origin, 1, 1);
+      poiname = poi_findpoioriginisin(trigger.origin, 1, 1);
       function_d0e7647e5538eb9d(poiname, "sandstormZones", trigger);
     }
 

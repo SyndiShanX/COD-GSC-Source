@@ -151,19 +151,19 @@ function cp_get_spot_by_priority(team) {
     return force_seat;
   }
 
-  var_f60dd12c7b65ae3b = undefined;
+  bestspot = undefined;
   bestpriority = -1;
 
   foreach(spot in available_spots) {
     priority = game["infil"][team]["spots"][spot]["priority"];
 
-    if(!isDefined(var_f60dd12c7b65ae3b) || priority < bestpriority) {
-      var_f60dd12c7b65ae3b = spot;
+    if(!isDefined(bestspot) || priority < bestpriority) {
+      bestspot = spot;
       bestpriority = priority;
     }
   }
 
-  return var_f60dd12c7b65ae3b;
+  return bestspot;
 }
 
 function cp_player_join_infil_cp() {
@@ -287,7 +287,7 @@ function infil_player_rig(animname, rig_model, var_40a4287d8d2e7ef9) {
   }
 }
 
-function infil_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function infil_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.players) {
     player playsoundtoplayer(alias, player);
   }

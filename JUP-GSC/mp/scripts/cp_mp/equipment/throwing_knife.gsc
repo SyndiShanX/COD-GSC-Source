@@ -72,12 +72,12 @@ function throwing_knife_used(grenade) {
 
   grenade setscriptablepartstate("showLocation", "active", 0);
 
-  grenade thread function_dec7a62735f22d28();
+  grenade thread drawdebugcylinder();
 
   grenade throwing_knife_makepickup();
 }
 
-function function_dec7a62735f22d28() {
+function drawdebugcylinder() {
   self endon("<dev string:x36>");
 
   while(true) {

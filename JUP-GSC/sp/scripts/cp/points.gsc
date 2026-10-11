@@ -113,7 +113,7 @@ function giveunifiedpoints(event, objweapon, pointsoverride, xpoverride, victim,
 
   if(!isxhash(event)) {
     assertex(1, event);
-    event = function_1823ff50bb28148d(event);
+    event = getxhash(event);
   }
 
   if(istrue(level.ignorescoring)) {
@@ -137,7 +137,7 @@ function giveunifiedpoints(event, objweapon, pointsoverride, xpoverride, victim,
     points = pointsoverride;
   } else {
     points = scripts\cp\rank::getscoreinfovalue(event);
-    assertex(isDefined(points), "giveUnifiedPoints() with event \"" + function_3c8848a3a11b2553(event) + "\", but that event doesn't exist in the gametype's scoreeventlist asset");
+    assertex(isDefined(points), "giveUnifiedPoints() with event \"" + getxhashsourcename(event) + "\", but that event doesn't exist in the gametype's scoreeventlist asset");
 
     if(!isDefined(points)) {
       points = 0;
@@ -417,7 +417,7 @@ function updatematchbonusscores(winner) {
 function givematchbonus(scoretype, score) {
   self endon("disconnect");
   level waittill("give_match_bonus");
-  scripts\cp\rank::giverankxp(function_1823ff50bb28148d(scoretype), score);
+  scripts\cp\rank::giverankxp(getxhash(scoretype), score);
 
   if(scoretype == "win") {
     thread doscoreevent(#"hash_fe606101a22e3e79");
@@ -460,7 +460,7 @@ function calculateweaponmatchbonus(gamelength) {
   foreach(data in self.pers["killsPerWeapon"]) {
     ratio = (var_162a122a3e3cce1a - data.killcount) / totaldiff;
     xpgain = int(var_4b7cf89acaabdcac * ratio);
-    scripts\cp\rank::incrankxp(0, data, xpgain, function_1823ff50bb28148d("WeaponMatchBonus"));
+    scripts\cp\rank::incrankxp(0, data, xpgain, getxhash("WeaponMatchBonus"));
 
     foreach(datastruct in self.pers["weaponStats"]) {
       if(issubstr(var_10ca4bf7aa9c3ed2, weaponkey)) {

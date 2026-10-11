@@ -50,7 +50,7 @@ function main() {
   }
 
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
-  allvolumes = function_f159c10d5cf8f0b4("noent_volume_minimap", "classname");
+  allvolumes = getnoentvolumearray("noent_volume_minimap", "classname");
 
   foreach(volume in allvolumes) {
     volume delete();

@@ -165,7 +165,7 @@ function spawnchoppers(numchoppers) {
       scripts\mp\objidpoolmanager::function_2946e9eb07acb3f1(newchopper.objectiveiconid, &"VEHICLES/LOOT_CHOPPER");
       scripts\mp\objidpoolmanager::update_objective_setbackground(newchopper.objectiveiconid, 11);
       newchopper.scriptedobjid = newchopper.objectiveiconid;
-      newchopper function_1cd1ee312fd03bb4(1);
+      newchopper vehicleunpingable(1);
       newchopper setscriptablepartstate("objective", "hidden");
     }
 

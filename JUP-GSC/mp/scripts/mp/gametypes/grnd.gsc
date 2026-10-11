@@ -1197,31 +1197,31 @@ function onspawnplayer(revivespawn) {
 
 function gethqownerteamvalue(ownerteam) {
   if(ownerteam == "allies") {
-    var_cabc886d846dd979 = 2;
+    omnvarval = 2;
   } else if(ownerteam == "axis") {
-    var_cabc886d846dd979 = 1;
+    omnvarval = 1;
   } else {
-    var_cabc886d846dd979 = 0;
+    omnvarval = 0;
   }
 
-  return var_cabc886d846dd979;
+  return omnvarval;
 }
 
 function updateservericons(state, contested) {
-  var_cabc886d846dd979 = -1;
+  omnvarval = -1;
 
   if(contested) {
-    var_cabc886d846dd979 = -2;
+    omnvarval = -2;
   } else if(isgameplayteam(state)) {
     player = thread getownerteamplayer(state);
 
     if(isDefined(player)) {
-      var_cabc886d846dd979 = player getentitynumber();
+      omnvarval = player getentitynumber();
     }
   } else {
     switch (state) {
       case #"hash_3bf8ec5fe1d42da8":
-        var_cabc886d846dd979 = -3;
+        omnvarval = -3;
         break;
       case #"hash_c312107e6bce703c":
       default:
@@ -1229,7 +1229,7 @@ function updateservericons(state, contested) {
     }
   }
 
-  setomnvar("ui_hardpoint", var_cabc886d846dd979);
+  setomnvar("ui_hardpoint", omnvarval);
 }
 
 function getownerteamplayer(ownerteam) {

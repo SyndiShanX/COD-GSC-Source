@@ -23,7 +23,7 @@ function function_fb9de2c84b81e225() {
   function_cdfd74e95368bd63(1);
   function_8368f8fe908ce8be(300);
   function_3c6ca4287e09d8b4(300);
-  function_129c37cc2498c0d5(1000);
+  stealthsetdefaulttimetodropthreatsight(1000);
   function_c3c56969a259ab89(600);
   flag_wait("sentientpoolmanager_initialized");
   function_3d7d85d395df9243("Lethal_Static");

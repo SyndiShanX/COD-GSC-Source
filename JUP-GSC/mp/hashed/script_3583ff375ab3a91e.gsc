@@ -536,7 +536,7 @@ function function_d8f18f1d691c0ef8(arena) {
   if(level.var_43307855f189eb31.var_82fedf664ad855eb == 1) {
     return true;
   } else if(level.var_43307855f189eb31.var_82fedf664ad855eb == 2) {
-    if(!istrue(arena.var_5f525e1e05714bb5)) {
+    if(!istrue(arena.onevone)) {
       return true;
     }
   }
@@ -946,7 +946,7 @@ function function_85b349978cd4de4f(arena) {
 
   if(level.var_43307855f189eb31.var_592faf90ea5616f5) {
     player scripts\cp_mp\utility\inventory_utility::function_f1e9d0c09f38006b(0);
-    player thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    player thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 
   player namespace_8bfdb6eb5a3df67a::function_e68e4bb4f65f5fe4();

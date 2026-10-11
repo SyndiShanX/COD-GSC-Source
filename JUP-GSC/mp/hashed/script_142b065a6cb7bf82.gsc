@@ -19,8 +19,8 @@ function init() {
   level.var_f84366b8fdd80cf2 = getdvarint(@ "hash_1d024c82743aa4ce", 0);
   level.infilstruct.c130model = "veh8_mil_air_mindia8_open_back_infil";
   level.infilstruct.var_30e653e12f358438 = "veh8_mil_air_mindia8_interior_vm_infil";
-  level.infilstruct.var_477bd548940c3a78 = "mp_donetsk_mindia8_intro";
-  level.infilstruct.var_10d27b439af13a2a = ter_op(level.var_f84366b8fdd80cf2, 0.1, 5);
+  level.infilstruct.binkname = "mp_donetsk_mindia8_intro";
+  level.infilstruct.binktime = ter_op(level.var_f84366b8fdd80cf2, 0.1, 5);
   level.infilstruct.var_b381e33e977da440 = &function_55f2480b4b819aea;
   level.infilstruct.var_ae9e4023110acc6e = &function_ad4a7a73c7d7d9e0;
   level.infilstruct.var_a6547e85663b3bc2 = &function_b766175a1f0eeb13;
@@ -652,26 +652,26 @@ function function_ad4a7a73c7d7d9e0() {
     self.infilanimindex = 1;
   }
 
-  var_8e3afd40d3c95b46 = "j_prop_" + self.infilanimindex + 2;
+  player_link_tag = "j_prop_" + self.infilanimindex + 2;
   cos45 = cos(45);
 
   if(dotforward < -1 * cos45) {
-    return ["wz_infil_mindia8_jump_genpropx10", level.br_anim["wz_infil_mindia8_jump_genpropx10"], "wz_infil_mindia8_jump01_pl01", var_8e3afd40d3c95b46];
+    return ["wz_infil_mindia8_jump_genpropx10", level.br_anim["wz_infil_mindia8_jump_genpropx10"], "wz_infil_mindia8_jump01_pl01", player_link_tag];
   }
 
   if(dotright > cos45) {
-    return ["wz_infil_mindia8_jump_genpropx10_90_l", level.br_anim["wz_infil_mindia8_jump_genpropx10_90_l"], "wz_infil_mindia8_jump01_pl01_90_l", var_8e3afd40d3c95b46];
+    return ["wz_infil_mindia8_jump_genpropx10_90_l", level.br_anim["wz_infil_mindia8_jump_genpropx10_90_l"], "wz_infil_mindia8_jump01_pl01_90_l", player_link_tag];
   }
 
   if(dotright < -1 * cos45) {
-    return ["wz_infil_mindia8_jump_genpropx10_90_r", level.br_anim["wz_infil_mindia8_jump_genpropx10_90_r"], "wz_infil_mindia8_jump01_pl01_90_r", var_8e3afd40d3c95b46];
+    return ["wz_infil_mindia8_jump_genpropx10_90_r", level.br_anim["wz_infil_mindia8_jump_genpropx10_90_r"], "wz_infil_mindia8_jump01_pl01_90_r", player_link_tag];
   }
 
   if(dotright > 0) {
-    return ["wz_infil_mindia8_jump_genpropx10_180_l", level.br_anim["wz_infil_mindia8_jump_genpropx10_180_l"], "wz_infil_mindia8_jump01_pl01_180_l", var_8e3afd40d3c95b46];
+    return ["wz_infil_mindia8_jump_genpropx10_180_l", level.br_anim["wz_infil_mindia8_jump_genpropx10_180_l"], "wz_infil_mindia8_jump01_pl01_180_l", player_link_tag];
   }
 
-  return ["wz_infil_mindia8_jump_genpropx10_180_r", level.br_anim["wz_infil_mindia8_jump_genpropx10_180_r"], "wz_infil_mindia8_jump01_pl01_180_r", var_8e3afd40d3c95b46];
+  return ["wz_infil_mindia8_jump_genpropx10_180_r", level.br_anim["wz_infil_mindia8_jump_genpropx10_180_r"], "wz_infil_mindia8_jump01_pl01_180_r", player_link_tag];
 }
 
 function function_b766175a1f0eeb13(movedestination, movetime) {

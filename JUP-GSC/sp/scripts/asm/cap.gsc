@@ -48,7 +48,7 @@ function function_11bc1c4cee238a68(asmname, statename, params) {
   }
 
   aliasname = aliasprefix + angleindex;
-  turnanim = function_18e6c36c02a94dbd(statename, aliasname);
+  turnanim = cap_lookupanimfromalias(statename, aliasname);
   return turnanim;
 }
 
@@ -56,7 +56,7 @@ function function_64d568ec73ec23f9(asmname, statename, params) {
   self.lasttimepushed = gettime();
   self.attitude = "curious";
   namespace_2b520709cc9e7442::function_fff7117076af2d16(self, level.var_9958731831312749.var_30f007ac9a8e642e, "curious", 0, 1);
-  function_59308d53cabcdfdb(asmname, statename, params);
+  cap_playanim(asmname, statename, params);
 }
 
 function function_286c69ed2c750e6c(asmname, sourceciv) {
@@ -68,29 +68,29 @@ function function_286c69ed2c750e6c(asmname, sourceciv) {
   }
 
   movedirnormalized = vectorNormalize(sourceciv.origin - player.origin);
-  var_6342bb081f0d1fa8 = sourceciv.origin;
+  sourcecivorigin = sourceciv.origin;
   wait 0.5;
 
-  foreach(otherciv in level.var_f62b6e59c0e00d48.civs) {
+  foreach(otherciv in level.civreactdata.civs) {
     if(!isalive(otherciv) || otherciv == sourceciv) {
       continue;
     }
 
-    if(isDefined(otherciv.capgroup) && isDefined(sourceciv.var_a2c8b8008309aae2)) {
-      if(level.capgroups[otherciv.var_a2c8b8008309aae2] == level.capgroups[sourceciv.capgroup]) {
+    if(isDefined(otherciv.capgroup) && isDefined(sourceciv.gapgroup)) {
+      if(level.capgroups[otherciv.gapgroup] == level.capgroups[sourceciv.capgroup]) {
         continue;
       }
     }
 
-    var_81d4d535a858f508 = otherciv.origin - var_6342bb081f0d1fa8;
-    var_691f481a8bba4062 = lengthsquared(var_81d4d535a858f508);
+    tootherciv = otherciv.origin - sourcecivorigin;
+    var_691f481a8bba4062 = lengthsquared(tootherciv);
     maxdistance = 80;
 
     if(var_691f481a8bba4062 > maxdistance * maxdistance) {
       continue;
     }
 
-    var_332ea4b12d924c65 = vectorNormalize(var_81d4d535a858f508);
+    var_332ea4b12d924c65 = vectorNormalize(tootherciv);
     dot = vectordot(var_332ea4b12d924c65, movedirnormalized);
 
     if(dot > 0.96) {
@@ -103,7 +103,7 @@ function function_c72398c24fe24b5b(asmname, statename, params) {
   thread function_286c69ed2c750e6c(asmname, self);
   self.lasttimepushed = gettime();
   self.attitude = "angered";
-  function_59308d53cabcdfdb(asmname, statename, params);
+  cap_playanim(asmname, statename, params);
 }
 
 function function_f16999f33ef5381d(statename) {
@@ -114,7 +114,7 @@ function function_f16999f33ef5381d(statename) {
   startorigin = self.origin;
   startangles = self.angles;
   targetpos = getclosestpointonnavmesh(self.origin, self);
-  xanim = animsetgetanimfromindex(self.animsetname, statename, self.var_44c80d2697dce15b);
+  xanim = animsetgetanimfromindex(self.animsetname, statename, self.capanimid);
   animend = getoriginforanimtime(self.origin, self.angles, xanim, 1);
   animlength = getanimlength(xanim);
   starttime = gettime();
@@ -134,9 +134,9 @@ function function_f16999f33ef5381d(statename) {
   self notify("lerp_arrive_finished");
 }
 
-function function_59308d53cabcdfdb(asmname, statename, params) {
-  self.var_44c80d2697dce15b = asm_getanim(asmname, statename);
-  function_fb8afeabd23a5ef5(asmname, statename, params, self.var_44c80d2697dce15b);
+function cap_playanim(asmname, statename, params) {
+  self.capanimid = asm_getanim(asmname, statename);
+  function_fb8afeabd23a5ef5(asmname, statename, params, self.capanimid);
 }
 
 function function_fb8afeabd23a5ef5(asmname, statename, params, animid) {
@@ -147,8 +147,8 @@ function function_fb8afeabd23a5ef5(asmname, statename, params, animid) {
   if(isai(self)) {
     self aisetanim(statename, animid);
   } else {
-    var_34ee65b16925d791 = asm_lookupanimfromalias("knobs", "body");
-    bodyxanim = asm_getxanim("knobs", var_34ee65b16925d791);
+    bodyanimid = asm_lookupanimfromalias("knobs", "body");
+    bodyxanim = asm_getxanim("knobs", bodyanimid);
     self setflaggedanimknoballrestart(statename, xanim, bodyxanim, 1, 0.2, 1);
     self setanim(bodyxanim, 1, 0.2);
 
@@ -158,19 +158,19 @@ function function_fb8afeabd23a5ef5(asmname, statename, params, animid) {
       proceduralturn = params[1];
 
       if(proceduralturn) {
-        childthread function_f498a27eb642642c();
+        childthread cap_proceduralturn();
       }
     }
   }
 
   function_7d6e619c3450bef3(statename, xanim);
-  function_c779dc23caccb19c(asmname, statename, params);
+  cap_propanim(asmname, statename, params);
   asm_playfacialanim(asmname, statename, xanim);
   cap_donotetracks(asmname, statename);
 }
 
 function function_e7652690c4fbe131(asmname, statename, params) {
-  function_59308d53cabcdfdb(asmname, statename, params);
+  cap_playanim(asmname, statename, params);
 
   if(isDefined(self.node)) {
     self.keepclaimednodeifvalid = 1;
@@ -211,7 +211,7 @@ function function_38adb9f7ae99df6a(statename, xanim, animtime) {
 }
 
 function function_76b0413f0e5d4dd2() {
-  if(isDefined(self.var_e0676499119d450b)) {
+  if(isDefined(self.scriptednodebypass)) {
     return undefined;
   }
 
@@ -261,7 +261,7 @@ function function_c886dae06eba7d4a(statename, xanim) {
   }
 }
 
-function function_f498a27eb642642c() {
+function cap_proceduralturn() {
   while(true) {
     player = namespace_2b520709cc9e7442::getclosestplayer(self.origin);
 
@@ -277,21 +277,21 @@ function function_f498a27eb642642c() {
     }
 
     totarget = target.origin - self.origin;
-    var_b047d1b68e9701c9 = lengthsquared(totarget);
+    distsqrtotarget = lengthsquared(totarget);
     anglediff = angleclamp180(vectortoyaw(totarget) - self.angles[1]);
     var_706fe99ce1efa2b7 = [[300, 180], [0, 10]];
-    var_3ada4c6e49483364 = 0;
+    angletouse = 0;
 
     foreach(pair in var_706fe99ce1efa2b7) {
       distancesqr = pair[0] * pair[0];
 
-      if(var_b047d1b68e9701c9 > distancesqr) {
-        var_3ada4c6e49483364 = pair[1];
+      if(distsqrtotarget > distancesqr) {
+        angletouse = pair[1];
         break;
       }
     }
 
-    shouldrotate = abs(anglediff) > var_3ada4c6e49483364;
+    shouldrotate = abs(anglediff) > angletouse;
 
     if(shouldrotate) {
       rotationspeed = 25;
@@ -324,21 +324,21 @@ function function_46602711ed8e40d6() {
     }
 
     totarget = origin - self.origin;
-    var_b047d1b68e9701c9 = lengthsquared(totarget);
+    distsqrtotarget = lengthsquared(totarget);
     anglediff = angleclamp180(vectortoyaw(totarget) - self.angles[1]);
     var_706fe99ce1efa2b7 = [[300, 180], [0, 10]];
-    var_3ada4c6e49483364 = 0;
+    angletouse = 0;
 
     foreach(pair in var_706fe99ce1efa2b7) {
       distancesqr = pair[0] * pair[0];
 
-      if(var_b047d1b68e9701c9 > distancesqr) {
-        var_3ada4c6e49483364 = pair[1];
+      if(distsqrtotarget > distancesqr) {
+        angletouse = pair[1];
         break;
       }
     }
 
-    shouldrotate = abs(anglediff) > var_3ada4c6e49483364;
+    shouldrotate = abs(anglediff) > angletouse;
 
     if(shouldrotate) {
       duration = abs(anglediff) / rotationspeed * 1000;
@@ -365,7 +365,7 @@ function function_f9d6133768491200(xanim, tracktime) {}
 
 function function_7495a975f79b957(player) {}
 
-function function_c6f62de5c6e04207(asmname, statename, params) {
+function cap_loopanim(asmname, statename, params) {
   self endon(statename + "_finished");
 
   while(true) {
@@ -377,12 +377,12 @@ function function_c6f62de5c6e04207(asmname, statename, params) {
       self aisetanim(statename, animid);
       asm_playfacialanim(asmname, statename, xanim);
     } else {
-      var_34ee65b16925d791 = asm_lookupanimfromalias("knobs", "body");
-      bodyxanim = asm_getxanim("knobs", var_34ee65b16925d791);
+      bodyanimid = asm_lookupanimfromalias("knobs", "body");
+      bodyxanim = asm_getxanim("knobs", bodyanimid);
       self setflaggedanimknoballrestart(statename, xanim, bodyxanim, 1, 0.2, 1);
     }
 
-    function_c779dc23caccb19c(asmname, statename, params);
+    cap_propanim(asmname, statename, params);
     cap_donotetracks(asmname, statename);
   }
 }
@@ -400,51 +400,51 @@ function cap_notetrackhandler(notetrack) {
   return undefined;
 }
 
-function function_a0dfeea159aa7f64(asmname, statename, params) {
+function cap_chooseanim(asmname, statename, params) {
   if(!isDefined(params)) {
-    randomalias = function_976d6ccb0a2807f3(statename);
-    return function_18e6c36c02a94dbd(statename, randomalias);
+    randomalias = cap_lookuprandomalias(statename);
+    return cap_lookupanimfromalias(statename, randomalias);
   }
 
   result = undefined;
   prefixstr = bb_getprefixstring(params);
 
   if(isDefined(prefixstr)) {
-    randomalias = function_976d6ccb0a2807f3(statename, prefixstr);
-    result = function_18e6c36c02a94dbd(statename, randomalias);
+    randomalias = cap_lookuprandomalias(statename, prefixstr);
+    result = cap_lookupanimfromalias(statename, randomalias);
   } else {
-    result = function_18e6c36c02a94dbd(statename, params);
+    result = cap_lookupanimfromalias(statename, params);
   }
 
   return result;
 }
 
-function function_f179ede0989e6734(statename, alias) {
+function cap_hasalias(statename, alias) {
   animresult = archetypegetrandomalias(self.animsetname, statename, alias, 0);
   return isDefined(animresult);
 }
 
 function function_b6050fd3b28e7aef(asmname, statename, params) {
   neardistthreshold = 450;
-  var_cba2d21a29a6d238 = neardistthreshold * neardistthreshold;
+  neardistthresholdsqr = neardistthreshold * neardistthreshold;
   player = namespace_2b520709cc9e7442::getclosestplayer(self.origin);
 
   if(!isDefined(player)) {
     distancealias = "far";
 
-    if(function_f179ede0989e6734(statename, distancealias)) {
-      result = function_18e6c36c02a94dbd(statename, distancealias);
+    if(cap_hasalias(statename, distancealias)) {
+      result = cap_lookupanimfromalias(statename, distancealias);
       return result;
     }
 
-    randomalias = function_976d6ccb0a2807f3(statename);
-    return function_18e6c36c02a94dbd(statename, randomalias);
+    randomalias = cap_lookuprandomalias(statename);
+    return cap_lookupanimfromalias(statename, randomalias);
   }
 
   distsqr = distancesquared(self.origin, player.origin);
   distancealias = undefined;
 
-  if(distsqr < var_cba2d21a29a6d238) {
+  if(distsqr < neardistthresholdsqr) {
     contents = scripts\engine\trace::create_contents(1, 0, 0, 0, 0, 0, 0);
     excludelist = [player, self];
     origin = self.origin + (0, 0, 30);
@@ -465,18 +465,18 @@ function function_b6050fd3b28e7aef(asmname, statename, params) {
     distancealias = "far";
   }
 
-  if(function_f179ede0989e6734(statename, distancealias)) {
-    result = function_18e6c36c02a94dbd(statename, distancealias);
+  if(cap_hasalias(statename, distancealias)) {
+    result = cap_lookupanimfromalias(statename, distancealias);
     return result;
   }
 
-  randomalias = function_976d6ccb0a2807f3(statename);
-  return function_18e6c36c02a94dbd(statename, randomalias);
+  randomalias = cap_lookuprandomalias(statename);
+  return cap_lookupanimfromalias(statename, randomalias);
 }
 
 function function_7c6b7c2cd3357729(asmname, statename, params) {
   if(!isDefined(params)) {
-    randomalias = function_976d6ccb0a2807f3(statename);
+    randomalias = cap_lookuprandomalias(statename);
     return function_658df657ca37f542(statename, randomalias);
   }
 
@@ -484,7 +484,7 @@ function function_7c6b7c2cd3357729(asmname, statename, params) {
   prefixstr = bb_getprefixstring(params);
 
   if(isDefined(prefixstr)) {
-    randomalias = function_976d6ccb0a2807f3(statename, prefixstr);
+    randomalias = cap_lookuprandomalias(statename, prefixstr);
     result = function_658df657ca37f542(statename, randomalias);
   } else {
     result = function_658df657ca37f542(statename, params);
@@ -493,7 +493,7 @@ function function_7c6b7c2cd3357729(asmname, statename, params) {
   return result;
 }
 
-function function_18e6c36c02a94dbd(statename, alias) {
+function cap_lookupanimfromalias(statename, alias) {
   arcname = self.animsetname;
   assertex(isDefined(arcname), "AI does not have archetype defined.");
   animresult = archetypegetrandomalias(arcname, statename, alias, asm_isfrantic());
@@ -527,7 +527,7 @@ function function_658df657ca37f542(statename, alias) {
   return animresult;
 }
 
-function function_976d6ccb0a2807f3(statename, optionalprefix, allownone) {
+function cap_lookuprandomalias(statename, optionalprefix, allownone) {
   archetype = self.animsetname;
   aliases = archetypegetaliases(archetype, statename);
   possible = 0;
@@ -614,7 +614,7 @@ function function_304541cf33d2193c(asmname, statename, params) {
   self._blackboard.var_9fbdce5fa10f8964 = 1;
 }
 
-function function_c779dc23caccb19c(asmname, statename, params) {
+function cap_propanim(asmname, statename, params) {
   if(!isDefined(self.animprops)) {
     return;
   }
@@ -663,7 +663,7 @@ function cap_exit(asmname, statename, params) {
   scripts\common\cap::cap_exit();
 }
 
-function function_a646f2b30e1f417(asmname, statename, params) {
+function cap_exit_long_death_death(asmname, statename, params) {
   scripts\common\cap::cap_exit();
   asm_setstate("long_death_death");
 }
@@ -797,7 +797,7 @@ function private function_9f458b5f165cfd34(params, dosighttrace) {
   return false;
 }
 
-function function_eef8d65ad14bc7d(asmname, statename, tostatename, params) {
+function cap_isidling(asmname, statename, tostatename, params) {
   if(!isDefined(self.stealth)) {
     return 0;
   }
@@ -805,7 +805,7 @@ function function_eef8d65ad14bc7d(asmname, statename, tostatename, params) {
   return self[[self.fnisinstealthidle]]();
 }
 
-function function_2c8145ed8b6c8504(asmname, statename, tostatename, params) {
+function cap_isinvestigating(asmname, statename, tostatename, params) {
   if(!isDefined(self.stealth)) {
     return 0;
   }
@@ -813,7 +813,7 @@ function function_2c8145ed8b6c8504(asmname, statename, tostatename, params) {
   return self[[self.fnisinstealthinvestigate]]();
 }
 
-function function_9bfddb0e0134923b(asmname, statename, tostatename, params) {
+function cap_ishunting(asmname, statename, tostatename, params) {
   if(!isDefined(self.stealth)) {
     return 0;
   }
@@ -821,7 +821,7 @@ function function_9bfddb0e0134923b(asmname, statename, tostatename, params) {
   return self[[self.fnisinstealthhunt]]();
 }
 
-function function_df51607ee78d1190(asmname, statename, tostatename, params) {
+function cap_iscombating(asmname, statename, tostatename, params) {
   if(!isDefined(self.stealth)) {
     return 1;
   }
@@ -839,7 +839,7 @@ function function_8439b78c94685919(asmname, statename, tostatename, params) {
     return false;
   }
 
-  if(istrue(self.var_be96bc0cf51de950)) {
+  if(istrue(self.interactionholdingpattern)) {
     return false;
   }
 
@@ -852,7 +852,7 @@ function function_8439b78c94685919(asmname, statename, tostatename, params) {
   return true;
 }
 
-function function_2bd39480ae487049(note, params) {
+function capnotehandler(note, params) {
   statename = self asmgetcurrentstate(self.asmname);
 
   if(isstartstr(note, "cigarette")) {
@@ -869,31 +869,31 @@ function function_2bd39480ae487049(note, params) {
     notehandler_drinking(note, statename);
   } else if(isstartstr(note, "flashlight")) {
     note = getsubstr(note, 7);
-    function_65bcde73638156e(note, statename);
+    notehandler_flashlight(note, statename);
   } else if(isstartstr(note, "bread")) {
     note = getsubstr(note, 6);
-    function_fb2c788fbeb2ed0e(note, statename);
+    notehandler_bread(note, statename);
   } else if(isstartstr(note, "chips")) {
     note = getsubstr(note, 6);
-    function_2059f541bb4ec92b(note, statename);
+    notehandler_chips(note, statename);
   } else if(isstartstr(note, "pistol")) {
     note = getsubstr(note, 7);
-    function_9e1b3a33e6a8c117(note, statename);
+    notehandler_pistol(note, statename);
   } else if(isstartstr(note, "laptop")) {
     note = getsubstr(note, 7);
-    function_8b7e11da82242584(note, statename);
+    notehandler_laptop(note, statename);
   } else if(isstartstr(note, "tablet")) {
     note = getsubstr(note, 7);
-    function_f0a5a6335f173f80(note, statename);
+    notehandler_tablet(note, statename);
   } else if(isstartstr(note, "radio")) {
     note = getsubstr(note, 6);
-    function_2e7191a29c3331b3(note, statename);
+    notehandler_radio(note, statename);
   } else if(isstartstr(note, "chair")) {
     note = getsubstr(note, 6);
-    function_ad40b641674a572d(note, statename);
+    notehandler_chair(note, statename);
   } else if(isstartstr(note, "crowbar")) {
     note = getsubstr(note, 8);
-    function_75ab18574236de38(note, statename);
+    notehandler_crowbar(note, statename);
   } else {
     function_245f3c9cf9fb2ed4(note, statename);
   }
@@ -925,22 +925,22 @@ function function_245f3c9cf9fb2ed4(note, statename) {
       notehandler_drinking(note, statename);
       break;
     case #"hash_39f24bc45741f688":
-      function_65bcde73638156e(note, statename);
+      notehandler_flashlight(note, statename);
       break;
     case #"hash_7fb4c7dc8b3bba9a":
-      function_9e1b3a33e6a8c117(note, statename);
+      notehandler_pistol(note, statename);
       break;
     case #"hash_60794fd45ef8d7ee":
-      function_8b7e11da82242584(note, statename);
+      notehandler_laptop(note, statename);
       break;
     case #"hash_595ae802da4a9716":
       function_425680112c205848(note, statename);
       break;
     case #"hash_83798f841323be0f":
-      function_2e7f07f6090ddeb5(note, statename);
+      notehandler_sleeping(note, statename);
       break;
     case #"hash_d179924720fd42a4":
-      function_18f4224c27507c56(note, statename);
+      notehandler_bag(note, statename);
       break;
   }
 }
@@ -970,7 +970,7 @@ function function_c2c313a844d139b9() {
   self delete();
 }
 
-function function_591bd29f12b13862(note) {
+function gethandtag(note) {
   handtag = "tag_accessory_right";
   hand = getsubstr(note, 7);
 
@@ -983,7 +983,7 @@ function function_591bd29f12b13862(note) {
 
 function notehandler_cellphone(note, statename) {
   self endon(statename + "_finished");
-  handtag = function_591bd29f12b13862(note);
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     if(isDefined(self.idle_prop)) {
@@ -1013,9 +1013,9 @@ function idle_getcellphone() {
   return modelname;
 }
 
-function function_f0a5a6335f173f80(note, statename) {
+function notehandler_tablet(note, statename) {
   self endon(statename + "_finished");
-  handtag = function_591bd29f12b13862(note);
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     if(isDefined(self.idle_prop)) {
@@ -1045,9 +1045,9 @@ function function_4c8b20626e0c2f54() {
   return modelname;
 }
 
-function function_2e7191a29c3331b3(note, statename) {
+function notehandler_radio(note, statename) {
   self endon(statename + "_finished");
-  handtag = function_591bd29f12b13862(note);
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     if(isDefined(self.idle_prop)) {
@@ -1077,9 +1077,9 @@ function function_cc9b64be81cb46ef() {
   return modelname;
 }
 
-function function_fb2c788fbeb2ed0e(note, statename) {
+function notehandler_bread(note, statename) {
   self endon(statename + "_finished");
-  handtag = function_591bd29f12b13862(note);
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     self.idle_prop = scripts\common\anim::anim_link_tag_model("food_bread_slice", handtag);
@@ -1095,9 +1095,9 @@ function function_fb2c788fbeb2ed0e(note, statename) {
   }
 }
 
-function function_2059f541bb4ec92b(note, statename) {
+function notehandler_chips(note, statename) {
   self endon(statename + "_finished");
-  handtag = function_591bd29f12b13862(note);
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     self.idle_prop = scripts\common\anim::anim_link_tag_model("food_trash_bag_chips_01", handtag);
@@ -1114,7 +1114,7 @@ function function_2059f541bb4ec92b(note, statename) {
 }
 
 function notehandler_smoking(note, statename) {
-  handtag = function_591bd29f12b13862(note);
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     if(isDefined(self.idle_prop)) {
@@ -1202,7 +1202,7 @@ function smoking_cleanup(asmname, statename, params) {
 
 function function_78fc852578a2d6a9(note, statename) {
   action = getsubstr(note, 0, 6);
-  handtag = function_591bd29f12b13862(note);
+  handtag = gethandtag(note);
 
   switch (action) {
     case #"hash_2d1403e602f082a4":
@@ -1233,8 +1233,8 @@ function function_34554aaf056d23d() {
   return modelname;
 }
 
-function function_65bcde73638156e(note, statename) {
-  handtag = function_591bd29f12b13862(note);
+function notehandler_flashlight(note, statename) {
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     if(isDefined(self.idle_prop)) {
@@ -1266,7 +1266,7 @@ function idle_focusflashlight() {
 }
 
 function notehandler_drinking(note, statename) {
-  handtag = function_591bd29f12b13862(note);
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     if(isDefined(self.idle_prop)) {
@@ -1296,8 +1296,8 @@ function function_6d9a6be03f41b2c() {
   return modelname;
 }
 
-function function_75ab18574236de38(note, statename) {
-  handtag = function_591bd29f12b13862(note);
+function notehandler_crowbar(note, statename) {
+  handtag = gethandtag(note);
 
   if(isstartstr(note, "attach")) {
     if(isDefined(self.idle_prop)) {
@@ -1327,17 +1327,17 @@ function function_ccfa6fb9cdc07744() {
   return modelname;
 }
 
-function function_2e7f07f6090ddeb5(note, statename) {
-  if(isDefined(self function_92435c7a6ae85c3c())) {
+function notehandler_sleeping(note, statename) {
+  if(isDefined(self getinteractionid())) {
     spawnchair();
   }
 }
 
-function function_9e1b3a33e6a8c117(note, statename) {
+function notehandler_pistol(note, statename) {
   handtag = "tag_accessory_right";
   gun = "weapon_wm_pi_mike1911_phys";
 
-  if(isDefined(self function_92435c7a6ae85c3c())) {
+  if(isDefined(self getinteractionid())) {
     if(isDefined(self.idle_prop)) {
       return;
     }
@@ -1360,8 +1360,8 @@ function function_9e1b3a33e6a8c117(note, statename) {
   }
 }
 
-function function_ad085c5f946742f4(note, statename) {
-  if(isDefined(self function_92435c7a6ae85c3c())) {
+function notehandler_table(note, statename) {
+  if(isDefined(self getinteractionid())) {
     if(!isDefined(self.idle_table)) {
       tableoffset = anglesToForward(self.angles) * 18 + (0, 0, -2);
       self.idle_table = utility::spawn_model(function_fe4813e6b6140728(), self.origin + tableoffset, self.angles);
@@ -1369,10 +1369,10 @@ function function_ad085c5f946742f4(note, statename) {
   }
 }
 
-function function_8b7e11da82242584(note, statename) {
+function notehandler_laptop(note, statename) {
   handtag = "tag_accessory_right";
 
-  if(isDefined(self function_92435c7a6ae85c3c())) {
+  if(isDefined(self getinteractionid())) {
     spawnchair();
 
     if(!isDefined(self.idle_table)) {
@@ -1384,8 +1384,8 @@ function function_8b7e11da82242584(note, statename) {
       return;
     }
 
-    var_a1862b426c15f10e = anglesToForward(self.angles) * 30 + (0, 0, 31);
-    self.idle_laptop = utility::spawn_model(function_1ee6622550f2a5d0(), self.origin + var_a1862b426c15f10e, self.angles);
+    laptopoffset = anglesToForward(self.angles) * 30 + (0, 0, 31);
+    self.idle_laptop = utility::spawn_model(function_1ee6622550f2a5d0(), self.origin + laptopoffset, self.angles);
   }
 }
 
@@ -1402,7 +1402,7 @@ function function_1ee6622550f2a5d0() {
 function function_425680112c205848(note, statename) {
   handtag = "tag_accessory_right";
 
-  if(isDefined(self function_92435c7a6ae85c3c())) {
+  if(isDefined(self getinteractionid())) {
     if(isDefined(self.idle_prop)) {
       return;
     }
@@ -1419,11 +1419,11 @@ function function_425680112c205848(note, statename) {
   }
 }
 
-function function_18f4224c27507c56(note, statename) {
+function notehandler_bag(note, statename) {
   modelname = "container_fertilizer_bag_01_open";
   offset = (0, 0, -13);
 
-  if(isDefined(self function_92435c7a6ae85c3c())) {
+  if(isDefined(self getinteractionid())) {
     if(!isDefined(self.idle_bag)) {
       propanim = level.scr_anim["idle_bag"]["wait"];
       self.idle_bag = utility::spawn_model(modelname, self._blackboard.var_ad5eda311c73f5d7, self._blackboard.var_66c82b7660f29059);
@@ -1459,7 +1459,7 @@ function function_399c8ad9434488e8() {
   self endon("death");
   self.idle_bag endon("death");
 
-  while(isDefined(self function_92435c7a6ae85c3c())) {
+  while(isDefined(self getinteractionid())) {
     waitframe();
   }
 
@@ -1467,13 +1467,13 @@ function function_399c8ad9434488e8() {
   self.idle_bag = undefined;
 }
 
-function function_ad40b641674a572d(note, statename) {
+function notehandler_chair(note, statename) {
   if(isstartstr(note, "spawn")) {
     spawnchair();
   }
 
   if(!isDefined(self.idle_chair)) {
-    origin = function_bbfc94714c82788b(self function_92435c7a6ae85c3c());
+    origin = getinteractionorigin(self getinteractionid());
     chairs = getscriptablearray("interactable_chair", "script_noteworthy");
     maxdist = 16;
     self.idle_chair = getclosest(origin, chairs, maxdist);
@@ -1627,33 +1627,33 @@ function function_eaf18f0250abb7e7(asmname, statename, params) {
 }
 
 function ininteraction(asmname, statename, params) {
-  return isDefined(self function_92435c7a6ae85c3c());
+  return isDefined(self getinteractionid());
 }
 
 function incap(asmname, statename, params) {
-  return self.asmname != "civilian_react" || isDefined(self.var_33b4c07d1f388776);
+  return self.asmname != "civilian_react" || isDefined(self.customarrivalanimset);
 }
 
 function function_8c68332a9a43f4ea(asmname, statename, params) {
-  if(!isDefined(self._blackboard.var_60b33cf695f1d6ed)) {
-    var_60b33cf695f1d6ed = asm_getrandomalias(statename);
-    self._blackboard.var_60b33cf695f1d6ed = function_18e6c36c02a94dbd(statename, var_60b33cf695f1d6ed);
+  if(!isDefined(self._blackboard.coweralias)) {
+    coweralias = asm_getrandomalias(statename);
+    self._blackboard.coweralias = cap_lookupanimfromalias(statename, coweralias);
   }
 
-  alias = self._blackboard.var_60b33cf695f1d6ed;
+  alias = self._blackboard.coweralias;
 
   if(statename == "cower_to_panicked") {
-    self._blackboard.var_60b33cf695f1d6ed = undefined;
+    self._blackboard.coweralias = undefined;
   }
 
   return alias;
 }
 
-function function_741a8c95a0ba229a(asmname, statename, tostatename, params) {
+function shouldskiptransition(asmname, statename, tostatename, params) {
   return istrue(self._blackboard.skiptransition);
 }
 
-function function_85c5a3c3c6f345c4(asmname, statename, params) {
+function capchooseturnanim(asmname, statename, params) {
   yawtotarget = vectortoyaw(self.turntarget.origin - self.origin);
   anglediff = angleclamp180(yawtotarget - self.angles[1]);
   turnanim = undefined;

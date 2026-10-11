@@ -8,10 +8,10 @@
 #using scripts\common\callbacks;
 #using scripts\engine\scriptable;
 #using scripts\engine\utility;
-#namespace namespace_6d633d94b557096d;
+#namespace managed_reward_cache;
 
-function function_75e180b08f394748(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f) {
-  thread function_bba4e34b29ba13f1(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f);
+function function_75e180b08f394748(rewardcachesettings, rewardcachebehaviorsettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f) {
+  thread function_bba4e34b29ba13f1(rewardcachesettings, rewardcachebehaviorsettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f);
 }
 
 function function_6099c5a2ad80e231(var_90fb64f0224fa64d) {
@@ -33,16 +33,16 @@ function function_805de4f236be02cc(var_90fb64f0224fa64d, player) {
   return reward_cache::function_1f4c33cae718bc25(rewardcache, player);
 }
 
-function function_8b4f7ed65818ac99(var_90fb64f0224fa64d, player, var_f71227aeabe614eb, item) {
+function function_8b4f7ed65818ac99(var_90fb64f0224fa64d, player, reservedslotindex, item) {
   rewardcache = function_6a3fb8b0f82a6608(var_90fb64f0224fa64d);
-  function_77eb3b9f9e4993c6(rewardcache, player, var_f71227aeabe614eb, item);
+  function_77eb3b9f9e4993c6(rewardcache, player, reservedslotindex, item);
 }
 
 function function_a52e804f95d8ef78(var_90fb64f0224fa64d) {
   if(isDefined(var_90fb64f0224fa64d) && istrue(var_90fb64f0224fa64d.var_c796363b5db0ff3d)) {
     var_90fb64f0224fa64d.allowdespawn = 0;
-    var_9034903ebbba6749 = reward_cache::function_1a020d38f2327a5c(var_90fb64f0224fa64d.rewardcache);
-    function_1c972fc13937297c("Blocking managed reward cache from despawning (" + var_9034903ebbba6749 + ")");
+    rewardcacheinfostring = reward_cache::function_1a020d38f2327a5c(var_90fb64f0224fa64d.rewardcache);
+    function_1c972fc13937297c("Blocking managed reward cache from despawning (" + rewardcacheinfostring + ")");
   }
 }
 
@@ -57,8 +57,8 @@ function function_f1c1ef5a544c2add(var_90fb64f0224fa64d) {
 
   var_90fb64f0224fa64d.allowdespawn = 1;
   var_90fb64f0224fa64d notify("allow_despawn");
-  var_9034903ebbba6749 = reward_cache::function_1a020d38f2327a5c(var_90fb64f0224fa64d.rewardcache);
-  function_1c972fc13937297c("Allowing managed reward cache to despawn (" + var_9034903ebbba6749 + ")");
+  rewardcacheinfostring = reward_cache::function_1a020d38f2327a5c(var_90fb64f0224fa64d.rewardcache);
+  function_1c972fc13937297c("Allowing managed reward cache to despawn (" + rewardcacheinfostring + ")");
 }
 
 function function_b85bd94f620bff4d(var_90fb64f0224fa64d) {
@@ -81,32 +81,32 @@ function private function_5a390d87abd73ea9(var_90fb64f0224fa64d, durationseconds
   function_f1c1ef5a544c2add(var_90fb64f0224fa64d);
 }
 
-function private function_bba4e34b29ba13f1(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f) {
+function private function_bba4e34b29ba13f1(rewardcachesettings, rewardcachebehaviorsettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f) {
   if(!function_f9797f263f83b5db()) {
     function_8a1f174dff87026d();
   }
 
-  if(!isDefined(var_bae6a1d8f73bc001) || !isstruct(var_bae6a1d8f73bc001) || !istrue(var_bae6a1d8f73bc001.var_ca97045f00d9e8d1)) {
+  if(!isDefined(rewardcachesettings) || !isstruct(rewardcachesettings) || !istrue(rewardcachesettings.var_ca97045f00d9e8d1)) {
     function_962000cd2f24f683(var_3c99a2a84c4b850f);
     reward_cache::function_e02e37e34dec2042("Could not spawn managed reward cache. Reason: invalid rewardCacheSettings (either undefined or an invalid struct).");
     return;
   }
 
-  if(!isDefined(var_f07d96bc912b9e7b) || !isstruct(var_bae6a1d8f73bc001) || !istrue(var_f07d96bc912b9e7b.var_e87bbb6687a470cb)) {
+  if(!isDefined(rewardcachebehaviorsettings) || !isstruct(rewardcachesettings) || !istrue(rewardcachebehaviorsettings.var_e87bbb6687a470cb)) {
     function_962000cd2f24f683(var_3c99a2a84c4b850f);
     reward_cache::function_e02e37e34dec2042("Could not spawn managed reward cache. Reason: invalid rewardCacheBehaviorSettings (either undefined or an invalid struct).");
     return;
   }
 
-  function_7cf93f546f99ec52(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b);
-  spawndelayseconds = namespace_81b7e1672a7e54da::function_1390dfbeba11bd06(var_f07d96bc912b9e7b);
+  function_7cf93f546f99ec52(rewardcachesettings, rewardcachebehaviorsettings);
+  spawndelayseconds = namespace_81b7e1672a7e54da::getspawndelayseconds(rewardcachebehaviorsettings);
 
   if(spawndelayseconds > 0) {
     wait spawndelayseconds;
   }
 
-  var_1ef25734ad342445 = var_bae6a1d8f73bc001;
-  function_3efd8c5e5178e70f(var_bae6a1d8f73bc001, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_1ef25734ad342445);
+  var_1ef25734ad342445 = rewardcachesettings;
+  spawnrewardcache(rewardcachesettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_1ef25734ad342445);
   var_1ef25734ad342445 waittill("reward_cache_spawn_done", rewardcache);
 
   if(!isDefined(rewardcache)) {
@@ -115,7 +115,7 @@ function private function_bba4e34b29ba13f1(var_bae6a1d8f73bc001, var_f07d96bc912
     return;
   }
 
-  var_90fb64f0224fa64d = function_82dd2c1df451e2d8(rewardcache, var_f07d96bc912b9e7b);
+  var_90fb64f0224fa64d = function_82dd2c1df451e2d8(rewardcache, rewardcachebehaviorsettings);
   function_625a9b76f256ef2c(var_90fb64f0224fa64d);
   function_7351ae1c7acdfe05(var_90fb64f0224fa64d);
 
@@ -124,7 +124,7 @@ function private function_bba4e34b29ba13f1(var_bae6a1d8f73bc001, var_f07d96bc912
   }
 }
 
-function private function_82dd2c1df451e2d8(rewardcache, var_f07d96bc912b9e7b) {
+function private function_82dd2c1df451e2d8(rewardcache, rewardcachebehaviorsettings) {
   if(!isDefined(level.var_1b8364c4179a5d0d)) {
     level.var_1b8364c4179a5d0d = 0;
   } else {
@@ -133,7 +133,7 @@ function private function_82dd2c1df451e2d8(rewardcache, var_f07d96bc912b9e7b) {
 
   var_90fb64f0224fa64d = spawnStruct();
   var_90fb64f0224fa64d.rewardcache = rewardcache;
-  var_90fb64f0224fa64d.behaviorsettings = var_f07d96bc912b9e7b;
+  var_90fb64f0224fa64d.behaviorsettings = rewardcachebehaviorsettings;
   var_90fb64f0224fa64d.allowdespawn = 1;
   var_90fb64f0224fa64d.id = level.var_1b8364c4179a5d0d;
   var_90fb64f0224fa64d.var_c796363b5db0ff3d = 1;
@@ -159,9 +159,9 @@ function private function_7f5879fa6d0f4644(var_90fb64f0224fa64d) {
   level.var_28853a1b752a9a5a = array_remove(level.var_28853a1b752a9a5a, var_90fb64f0224fa64d);
 }
 
-function private function_7cf93f546f99ec52(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b) {
-  if(namespace_81b7e1672a7e54da::function_7f6409712a4fed0(var_f07d96bc912b9e7b)) {
-    reward_cache_settings::function_3a6f51417a1eccbd(var_bae6a1d8f73bc001, 0);
+function private function_7cf93f546f99ec52(rewardcachesettings, rewardcachebehaviorsettings) {
+  if(namespace_81b7e1672a7e54da::function_7f6409712a4fed0(rewardcachebehaviorsettings)) {
+    reward_cache_settings::function_3a6f51417a1eccbd(rewardcachesettings, 0);
   }
 }
 
@@ -170,8 +170,8 @@ function private function_625a9b76f256ef2c(var_90fb64f0224fa64d) {
   var_dcbc42d7f8d81f9a = namespace_81b7e1672a7e54da::function_7f6409712a4fed0(var_90fb64f0224fa64d.behaviorsettings);
 
   if(istrue(var_dcbc42d7f8d81f9a)) {
-    foreach(var_c359824d10b7dbd3 in rewardcache.var_55b52f7bc45800e0) {
-      thread function_578fdf854f247ff(var_90fb64f0224fa64d, var_c359824d10b7dbd3);
+    foreach(grouprewardcache in rewardcache.grouprewardcaches) {
+      thread function_578fdf854f247ff(var_90fb64f0224fa64d, grouprewardcache);
     }
   }
 
@@ -180,16 +180,16 @@ function private function_625a9b76f256ef2c(var_90fb64f0224fa64d) {
   thread function_6069980f5e216bf1(var_90fb64f0224fa64d);
 }
 
-function private function_578fdf854f247ff(var_90fb64f0224fa64d, var_c359824d10b7dbd3) {
-  rewardcache = var_c359824d10b7dbd3.var_81d4f50295d743eb;
+function private function_578fdf854f247ff(var_90fb64f0224fa64d, grouprewardcache) {
+  rewardcache = grouprewardcache.rewardcacheowner;
   rewardcache endon("despawn");
 
   while(true) {
-    var_c359824d10b7dbd3 waittill("closed");
+    grouprewardcache waittill("closed");
     function_c85912811be68bac(var_90fb64f0224fa64d);
 
-    if(function_baba3a8fbc912f3d(var_c359824d10b7dbd3)) {
-      reward_cache::function_2f75f3a22eb7b56f(var_c359824d10b7dbd3);
+    if(function_baba3a8fbc912f3d(grouprewardcache)) {
+      reward_cache::function_2f75f3a22eb7b56f(grouprewardcache);
     }
 
     function_3f49eb16e2358fdf(var_90fb64f0224fa64d);
@@ -197,10 +197,10 @@ function private function_578fdf854f247ff(var_90fb64f0224fa64d, var_c359824d10b7
 }
 
 function private function_b2335dc4d0d582a4(var_90fb64f0224fa64d) {
-  var_d9c7c84351cf42df = namespace_81b7e1672a7e54da::function_ac56ad97c1a63439(var_90fb64f0224fa64d.behaviorsettings);
+  despawntimerseconds = namespace_81b7e1672a7e54da::function_ac56ad97c1a63439(var_90fb64f0224fa64d.behaviorsettings);
   rewardcache = var_90fb64f0224fa64d.rewardcache;
   rewardcache endon("despawn");
-  wait var_d9c7c84351cf42df;
+  wait despawntimerseconds;
   function_56af4a69d55d969f(var_90fb64f0224fa64d.rewardcache, "TIMER EXPIRED");
   function_c85912811be68bac(var_90fb64f0224fa64d);
   function_6099c5a2ad80e231(var_90fb64f0224fa64d);
@@ -209,7 +209,7 @@ function private function_b2335dc4d0d582a4(var_90fb64f0224fa64d) {
 function private function_970625a4872d1eb0(var_90fb64f0224fa64d) {
   rewardcache = var_90fb64f0224fa64d.rewardcache;
   rewardcache endon("despawn");
-  despawndistance = namespace_81b7e1672a7e54da::function_64fa791e7ba0c5c8(var_90fb64f0224fa64d.behaviorsettings);
+  despawndistance = namespace_81b7e1672a7e54da::getdespawndistance(var_90fb64f0224fa64d.behaviorsettings);
   despawndistancesquared = despawndistance * despawndistance;
 
   while(true) {
@@ -264,21 +264,21 @@ function private function_b03d531238fefdd6(var_90fb64f0224fa64d) {
   var_d99131f23781644f = namespace_81b7e1672a7e54da::function_18ff06d7a702f239(var_90fb64f0224fa64d.behaviorsettings);
   reward_cache::function_49baf487775e6ddb(rewardcache);
   wait var_d99131f23781644f;
-  function_2260bfc08cd754ea(rewardcache);
+  cleanuprewardcache(rewardcache);
   function_7f5879fa6d0f4644(var_90fb64f0224fa64d);
 }
 
-function private function_6a3fb8b0f82a6608(var_9162f7d6d0e432bd) {
-  if(!isstruct(var_9162f7d6d0e432bd)) {
+function private function_6a3fb8b0f82a6608(rewardcachevariant) {
+  if(!isstruct(rewardcachevariant)) {
     return undefined;
   }
 
-  if(istrue(var_9162f7d6d0e432bd.var_b8039209fb3f728c)) {
-    return var_9162f7d6d0e432bd;
+  if(istrue(rewardcachevariant.isrewardcache)) {
+    return rewardcachevariant;
   }
 
-  if(istrue(var_9162f7d6d0e432bd.var_c796363b5db0ff3d)) {
-    return var_9162f7d6d0e432bd.rewardcache;
+  if(istrue(rewardcachevariant.var_c796363b5db0ff3d)) {
+    return rewardcachevariant.rewardcache;
   }
 
   return undefined;
@@ -323,7 +323,7 @@ function private function_6d1405b0c8e865f9(players, origin, var_f5499c708b0be15f
   return true;
 }
 
-function private function_56af4a69d55d969f(rewardcache, var_6e62e08e9e75ee4c) {
+function private function_56af4a69d55d969f(rewardcache, despawnreasonstring) {
   if(istrue(getdvarint(@ "hash_c81336f4624077f5", 0))) {
     return;
   }
@@ -332,8 +332,8 @@ function private function_56af4a69d55d969f(rewardcache, var_6e62e08e9e75ee4c) {
   infostring = function_1a020d38f2327a5c(rewardcache, var_f1126f87cbfb3910);
   prefix = "Despawned ";
 
-  if(isDefined(var_6e62e08e9e75ee4c)) {
-    prefix += "for reason (" + var_6e62e08e9e75ee4c + ") ";
+  if(isDefined(despawnreasonstring)) {
+    prefix += "for reason (" + despawnreasonstring + ") ";
   }
 
   function_1c972fc13937297c(prefix + infostring);

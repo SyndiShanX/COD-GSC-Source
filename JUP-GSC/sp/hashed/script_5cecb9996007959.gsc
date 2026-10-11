@@ -11,9 +11,9 @@
 function getfunction(funcid) {
   switch (funcid) {
     case #"hash_dab0d83df51da4d":
-      return &function_3dbd361f74b442f9;
+      return &onuserinit;
     case #"hash_722d767fd6d40f56":
-      return &function_a157fbbc31d9eb1a;
+      return &onuserterminate;
     case #"hash_902f9e79d5e57c83":
       return &oneventreceived;
     case #"hash_1637227a26307eb5":
@@ -25,9 +25,9 @@ function getfunction(funcid) {
   assertmsg("Missing function pointer for " + funcid);
 }
 
-function function_3dbd361f74b442f9(interactionid) {}
+function onuserinit(interactionid) {}
 
-function function_a157fbbc31d9eb1a(interactionid) {
+function onuserterminate(interactionid) {
   self clearbtgoal(1);
   self notify("endusearmorplate");
 
@@ -63,7 +63,7 @@ function oneventreceived(receiver, info, origin) {
 }
 
 function setstationary(statename, params) {
-  self function_e64ea2b4e79c4b74(1);
+  self setbtgoalstationary(1);
   self setbtgoalRadius(1, params[0]);
 }
 
@@ -76,12 +76,12 @@ function usearmorplate(statename, params) {
     scripts\common\cap::cap_start(capname, "caps/interactions/cap_use_armor_plate_solo");
   }
 
-  function_30b70873a0937989("Using Armor Plate!");
+  tempdialogue("Using Armor Plate!");
   self waittill("cap_exit_completed");
   asm_fireephemeralevent("use_armor_plate", "end");
 }
 
-function function_30b70873a0937989(var_22e9090a351646e9) {
+function tempdialogue(var_22e9090a351646e9) {
   debug = getdvarint(@ "hash_3e267ec6e066e2b", 0);
 
   if(istrue(debug)) {

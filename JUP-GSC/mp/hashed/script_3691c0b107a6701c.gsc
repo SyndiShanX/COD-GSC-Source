@@ -115,7 +115,7 @@ function function_f7a3d129963fe612() {
     return;
   }
 
-  self.hunterteam = self.var_6c29f2fdb0054bbe[0].team;
+  self.hunterteam = self.playerparticipants[0].team;
   self.targetteam = self.targetplayer.team;
   function_632b43ad8c51d71(1);
   function_c78fcbb8d5b8311c();
@@ -142,8 +142,8 @@ function function_c78fcbb8d5b8311c() {
 }
 
 function function_20f0caea2a03d942() {
-  origin = self.var_6c29f2fdb0054bbe[0].origin;
-  hunterteam = self.var_6c29f2fdb0054bbe[0].team;
+  origin = self.playerparticipants[0].origin;
+  hunterteam = self.playerparticipants[0].team;
   targetplayer = undefined;
   maxscore = -1;
 
@@ -464,7 +464,7 @@ function function_4933e17301571873() {
 function function_6ba7cb17933b089d() {
   self endon("instance_destroyed");
   var_6c1956fd6ce84917 = 1;
-  var_cc7aa96a854fd8ee = namespace_71ca15b739deab72::function_3ae7f99339b96499(self.var_6c29f2fdb0054bbe[0].origin, var_6c1956fd6ce84917);
+  var_cc7aa96a854fd8ee = namespace_71ca15b739deab72::function_3ae7f99339b96499(self.playerparticipants[0].origin, var_6c1956fd6ce84917);
   return var_cc7aa96a854fd8ee;
 }
 

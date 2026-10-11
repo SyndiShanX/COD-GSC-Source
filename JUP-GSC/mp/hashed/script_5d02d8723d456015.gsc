@@ -54,8 +54,8 @@ function function_866135ff44f9a1b8() {
     self.var_e726c726c6fb7dec = 1;
   }
 
-  var_45c17c8bd7095cc4 = function_b9c4aa88ad97ee68(self);
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_b9c4aa88ad97ee68(self);
+  self.variant_definition = activityvariantdefinition;
   self.spawnradius = self.variant_definition.spawnradius;
   self.circleradius = self.variant_definition.circleradius;
   self.spawnmaxdist = self.variant_definition.maxdist;
@@ -129,7 +129,7 @@ function function_866135ff44f9a1b8() {
     }
 
     random_key = random_weighted(self.var_3d51c5307549c964, weights);
-    self.var_db0e660397a76bd8 = random_key.var_c8b64adafd8e5711;
+    self.var_db0e660397a76bd8 = random_key.aisubclass;
   }
 
   switch (self.var_db0e660397a76bd8) {
@@ -226,13 +226,13 @@ function function_1ddc9629c6534e38() {
   activity_instance = self;
   activity_instance endon("activity_ended");
   activity_instance endon("instance_destroyed");
-  self.on_mission = zombie_challenges::function_f578373042c34e16(16651, "quest_s0a2t3_bountyhunt_start", self.var_6c29f2fdb0054bbe);
+  self.on_mission = zombie_challenges::function_f578373042c34e16(16651, "quest_s0a2t3_bountyhunt_start", self.playerparticipants);
 
   if(!self.on_mission && !istrue(self.var_24a16c52437dde0f)) {
     thread function_1281c7fff9456e18("contract_bigbounty_start");
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player setclientomnvar("ui_br_objective_param", function_e56334b856964aef());
     params = spawnStruct();
     params.player = player;
@@ -252,8 +252,8 @@ function function_1ddc9629c6534e38() {
   var_ec5900b94ec05c4a = (goo_origin[0], goo_origin[1], goo_origin[2] - 1);
   self.goo = utility::spawn_model("jup_zm_pile_of_goo", var_ec5900b94ec05c4a, self.ai_zombie.angles);
   self.goo setscriptablepartstate("audio", "spawned");
-  var_6c29f2fdb0054bbe = self.var_6c29f2fdb0054bbe;
-  thread function_6f3caa9ac6c424a9(var_6c29f2fdb0054bbe, goo_origin);
+  playerparticipants = self.playerparticipants;
+  thread function_6f3caa9ac6c424a9(playerparticipants, goo_origin);
   function_2c8097c0bcd7e70();
 }
 
@@ -308,7 +308,7 @@ function function_3bab4fee62f0fbd8() {
       self notify("bigbounty_ping_marker_moved");
       self.var_7ca681f995301d27 = function_b51e0dd3c4ef0eed(self.aispawnstruct);
 
-      foreach(player in self.var_6c29f2fdb0054bbe) {
+      foreach(player in self.playerparticipants) {
         if(isDefined(player)) {
           self.pingindex = player scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(11, self.var_7ca681f995301d27, self.activity_id);
           thread scripts\cp_mp\calloutmarkerping::function_9a7200f5142066ba(player, self.pingindex, undefined, ["bigbounty_ping_marker_moved"]);
@@ -331,7 +331,7 @@ function function_6b9c1b0c02633e65() {
   self endon("AI_seen");
 
   while(true) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       if(!isDefined(player) || !isalive(player)) {
         continue;
       }
@@ -487,7 +487,7 @@ function function_70785f5ff53b07c9() {
   ai_spawned = 0;
 
   while(!ai_spawned) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       if(distancesquared(player.origin, self.aispawnstruct.origin) <= squared(self.spawnradius)) {
         ai_spawned = 1;
         spawn_point = getclosestpointonnavmesh(self.aispawnstruct.origin);
@@ -571,7 +571,7 @@ function function_f069e10a4ee93d9f() {
   var_682d602ddf0d8234 = 0;
 
   while(!var_682d602ddf0d8234) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       if(distancesquared(player.origin, self.aispawnstruct.origin) <= squared(self.circleradius)) {
         infov = 0;
 
@@ -710,7 +710,7 @@ function function_3a38fb1773a90e3d() {
   scripts\mp\objidpoolmanager::update_objective_position(self.activity_id, self.var_7ca681f995301d27);
   waitframe();
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     if(isDefined(player)) {
       self.pingindex = player scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(11, self.var_7ca681f995301d27, self.activity_id);
       break;
@@ -719,7 +719,7 @@ function function_3a38fb1773a90e3d() {
 
   function_6b6b6273f8180522("BigBounty_Ob", self.var_7ca681f995301d27, self.circleradius);
 
-  foreach(member in self.var_6c29f2fdb0054bbe) {
+  foreach(member in self.playerparticipants) {
     function_cfd53c8f6878014f(member);
   }
 }
@@ -780,7 +780,7 @@ function function_93cc9badd07b3211(var_b381b0883bcd4847) {
 
 function function_e2827300b9992692(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_f0f14142a301b2e2(var_b381b0883bcd4847) {

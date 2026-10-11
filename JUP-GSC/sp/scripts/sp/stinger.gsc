@@ -458,7 +458,7 @@ function weaponhaslockon() {
 
 function settargettooclose(ent) {
   assert(self.classname == "player");
-  var_14f87fbccd62729c = 250;
+  minimum_sti_distance = 250;
 
   if(!isDefined(ent)) {
     return 0;
@@ -466,7 +466,7 @@ function settargettooclose(ent) {
 
   dist = distance2d(self.origin, ent.origin);
 
-  if(dist < var_14f87fbccd62729c) {
+  if(dist < minimum_sti_distance) {
     self.stinger.targettoclose = 1;
     self weaponlocktargettooclose(1);
     return;

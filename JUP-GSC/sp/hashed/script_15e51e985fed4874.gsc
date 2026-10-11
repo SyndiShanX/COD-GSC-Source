@@ -5,7 +5,7 @@
 
 #using script_1d34b11a5f86a870;
 #using scripts\engine\utility;
-#namespace namespace_f25c04305d4c9e56;
+#namespace vfx_ambientwar;
 
 function main() {
   function_605874f5b079939e();
@@ -84,7 +84,7 @@ function create(group_id, aliases_arr, min_delay, max_delay, min_dist, max_dist)
   struct.dist.max = max_dist;
   struct.is_active = 0;
   struct.var_7e4ccd3a6bb57da0 = 1;
-  struct.var_536ecb8efadff56f = 1;
+  struct.rumbles_enabled = 1;
   level._fx.ambientwar.groups[group_id] = struct;
 
   level notify("<dev string:xf1>");
@@ -139,14 +139,14 @@ function shutdown() {
   }
 }
 
-function add_alias(fx_alias, shake_alias, rumble_alias, func_hit, var_1c138e1bfe6fe275) {
+function add_alias(fx_alias, shake_alias, rumble_alias, func_hit, func_leadin) {
   struct = spawnStruct();
   struct.fx_alias = fx_alias;
   struct.shake_alias = shake_alias;
   struct.rumble_alias = rumble_alias;
   struct.func = spawnStruct();
   struct.func.hit = func_hit;
-  struct.func.leadin = var_1c138e1bfe6fe275;
+  struct.func.leadin = func_leadin;
   return struct;
 }
 
@@ -194,21 +194,21 @@ function set_delay(group_id, var_90e4c321e57aafe6, var_9893026561ada098, time) {
   level thread lerp_delays(group_id, var_90e4c321e57aafe6, var_9893026561ada098, time);
 }
 
-function set_distance(group_id, var_30e6164cdbb20da7, var_b51b726d07e7bbc9) {
+function set_distance(group_id, new_min_dist, new_max_dist) {
   if(!exists(group_id)) {
     return;
   }
 
-  if(var_b51b726d07e7bbc9 <= var_30e6164cdbb20da7) {
+  if(new_max_dist <= new_min_dist) {
     println("<dev string:x1d>" + "<dev string:x18f>" + group_id);
     return;
   }
 
-  level._fx.ambientwar.groups[group_id].dist.min = var_30e6164cdbb20da7;
-  level._fx.ambientwar.groups[group_id].dist.max = var_b51b726d07e7bbc9;
+  level._fx.ambientwar.groups[group_id].dist.min = new_min_dist;
+  level._fx.ambientwar.groups[group_id].dist.max = new_max_dist;
 }
 
-function set_callback(group_id, fx_alias, func_hit, var_1c138e1bfe6fe275) {
+function set_callback(group_id, fx_alias, func_hit, func_leadin) {
   if(!exists(group_id)) {
     return;
   }
@@ -216,7 +216,7 @@ function set_callback(group_id, fx_alias, func_hit, var_1c138e1bfe6fe275) {
   foreach(idx, alias in level._fx.ambientwar.groups[group_id].aliases) {
     if(alias.fx_alias == fx_alias) {
       level._fx.ambientwar.groups[group_id].aliases[idx].func.hit = func_hit;
-      level._fx.ambientwar.groups[group_id].aliases[idx].func.leadin = var_1c138e1bfe6fe275;
+      level._fx.ambientwar.groups[group_id].aliases[idx].func.leadin = func_leadin;
     }
   }
 }
@@ -246,12 +246,12 @@ function function_e52c396d5b27fa3f(group_id) {
   function_7e4ccd3a6bb57da0(group_id, 0);
 }
 
-function function_90b826a459896ae7(group_id) {
-  function_536ecb8efadff56f(group_id, 1);
+function enable_rumbles(group_id) {
+  rumbles_enabled(group_id, 1);
 }
 
-function function_2e3298a0d1303612(group_id) {
-  function_536ecb8efadff56f(group_id, 0);
+function disable_rumbles(group_id) {
+  rumbles_enabled(group_id, 0);
 }
 
 function cinematic_mode(enabled) {
@@ -355,7 +355,7 @@ function private update(group_id) {
         parms.shake_alias = undefined;
         parms.rumble_alias = undefined;
         func_hit = undefined;
-        var_1c138e1bfe6fe275 = undefined;
+        func_leadin = undefined;
         rand_idx = randomintrange(0, locations.size);
         rand_loc = locations[rand_idx];
         rand_delay = randomfloatrange(delay.min, delay.max);
@@ -364,7 +364,7 @@ function private update(group_id) {
         ai_present = function_f09cfe1ad75009d9(player, rand_loc);
         cinematic_mode = level._fx.ambientwar.cinematic_mode;
         var_7e4ccd3a6bb57da0 = level._fx.ambientwar.groups[group_id].var_7e4ccd3a6bb57da0;
-        var_536ecb8efadff56f = level._fx.ambientwar.groups[group_id].var_536ecb8efadff56f;
+        rumbles_enabled = level._fx.ambientwar.groups[group_id].rumbles_enabled;
         msg = "";
 
         if(in_range && !ai_present) {
@@ -380,7 +380,7 @@ function private update(group_id) {
             parms.shake_alias = aliases[var_e8782b22925ef04d].shake_alias;
             parms.rumble_alias = aliases[var_e8782b22925ef04d].rumble_alias;
             func_hit = aliases[var_e8782b22925ef04d].func.hit;
-            var_1c138e1bfe6fe275 = aliases[var_e8782b22925ef04d].func.leadin;
+            func_leadin = aliases[var_e8782b22925ef04d].func.leadin;
 
             msg = parms.fx_alias;
           }
@@ -389,8 +389,8 @@ function private update(group_id) {
             rand_loc.angles = (0, 0, 0);
           }
 
-          if(isDefined(var_1c138e1bfe6fe275)) {
-            rand_loc thread[[var_1c138e1bfe6fe275]](parms, rand_delay, "aws_stop_" + group_id);
+          if(isDefined(func_leadin)) {
+            rand_loc thread[[func_leadin]](parms, rand_delay, "aws_stop_" + group_id);
           }
 
           wait rand_delay;
@@ -405,7 +405,7 @@ function private update(group_id) {
               do_earthquake(parms.shake_alias, rand_loc.origin);
             }
 
-            if(isDefined(parms.rumble_alias) && parms.rumble_alias != "" && var_536ecb8efadff56f && !cinematic_mode) {
+            if(isDefined(parms.rumble_alias) && parms.rumble_alias != "" && rumbles_enabled && !cinematic_mode) {
               playrumbleonposition(parms.rumble_alias, rand_loc.origin);
             }
 
@@ -427,7 +427,7 @@ function private update(group_id) {
               }
 
               if(isDefined(parms.rumble_alias)) {
-                enabled = ter_op(var_536ecb8efadff56f, "<dev string:x211>", "<dev string:x219>");
+                enabled = ter_op(rumbles_enabled, "<dev string:x211>", "<dev string:x219>");
                 text_row -= 4;
                 print3d(rand_loc.origin + (0, 0, text_row), "<dev string:x22d>" + parms.rumble_alias + "<dev string:x227>" + enabled + "<dev string:x22a>", (1, 1, 1), 1, 0.15, 10, 0);
               }
@@ -468,9 +468,9 @@ function private function_7e4ccd3a6bb57da0(group_id, enabled) {
   }
 }
 
-function private function_536ecb8efadff56f(group_id, enabled) {
+function private rumbles_enabled(group_id, enabled) {
   if(exists(group_id)) {
-    level._fx.ambientwar.groups[group_id].var_536ecb8efadff56f = enabled;
+    level._fx.ambientwar.groups[group_id].rumbles_enabled = enabled;
   }
 }
 

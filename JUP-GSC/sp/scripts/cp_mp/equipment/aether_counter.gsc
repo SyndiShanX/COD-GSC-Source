@@ -14,7 +14,7 @@ function function_af629bfd2cc31d67() {
 
   level.var_9c6bcabc08e74a5e = 1;
   level.var_b38bd8b30b329ecd = spawnStruct();
-  level.var_b38bd8b30b329ecd.partition = function_21a6a1c613b50a28([], 4000);
+  level.var_b38bd8b30b329ecd.partition = create_partition([], 4000);
   level.var_b38bd8b30b329ecd.radiationmaxdist = getdvarint(@ "hash_ac8dcf3f0fa3df5b", 1000);
   registersharedfunc("equip_aethercounter", "used", &function_88108e9a7fefa45c);
   registersharedfunc("equip_aethercounter", "onGive", &function_2ee478f031f97735);

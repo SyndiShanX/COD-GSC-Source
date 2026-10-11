@@ -56,7 +56,7 @@ function function_4c4df9aeb773709a(pos, vehicle, model, patrolradius, name) {
     return;
   }
 
-  chopper.poi = scripts\mp\poi::function_6cc445c02b5effac(pos);
+  chopper.poi = scripts\mp\poi::poi_findpoioriginisin(pos);
   chopper.speed = 60;
   chopper.originalspeed = chopper.speed;
   chopper.accel = 50;
@@ -483,9 +483,9 @@ function tracegroundpoint(x, y) {
 }
 
 function getcorrectheight(x, y, rand) {
-  var_dc8bb6300463cf1e = self.heightoffset[2];
+  offgroundheight = self.heightoffset[2];
   groundheight = tracegroundpoint(x, y);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   trueheight += randomint(rand);
   return trueheight;
 }
@@ -873,10 +873,10 @@ function chopper_oncrateuse(player) {
   for(i = 0; i < 6; i++) {
     var_1e251ffd71396d15 = random(["brloot_weapon_sm_papa90_rare", "brloot_weapon_sh_romeo870_rare", "brloot_weapon_sn_sbeta_lege"]);
     itemname = ter_op(i % 3 == 0, "brloot_armor_plate", var_1e251ffd71396d15);
-    var_144769f518d71226 = ter_op(i % 3 == 0, 8, 1);
+    itemamount = ter_op(i % 3 == 0, 8, 1);
     pos = drop_to_ground(self.origin + rotatepointaroundvector((0, 0, 1), (30, 0, 0), 60 * i));
     dropinfo = scripts\mp\gametypes\br_pickups::getitemdropinfo(pos);
-    pickup = scripts\mp\gametypes\br_pickups::spawnpickup(itemname, dropinfo, var_144769f518d71226);
+    pickup = scripts\mp\gametypes\br_pickups::spawnpickup(itemname, dropinfo, itemamount);
     pickups[pickups.size] = pickup;
     self.itemsdropped++;
   }

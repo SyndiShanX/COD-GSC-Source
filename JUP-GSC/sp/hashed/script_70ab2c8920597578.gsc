@@ -40,7 +40,7 @@ function init() {
   fx_init();
   ai_init();
   bots_init();
-  function_550bcd278c30275e();
+  agents_init();
   outline_init();
   game_utility_init();
   rank_init();
@@ -53,9 +53,9 @@ function init() {
   stealth_init();
   gameskill_init();
   poi_init();
-  function_c1199c7cd79918b3();
-  level thread function_cc460dedff0277f();
-  function_1bc257700c3d014e();
+  aggregator_init();
+  level thread activities_init();
+  cameras_init();
   function_a30b248a8fc67a00();
   battlechatter_init();
   host_migration_init();
@@ -69,7 +69,7 @@ function poi_init() {}
 function stealth_init() {}
 
 function anim_init() {
-  registersharedfunc("anim", "scriptModelPlayAnimDeltaMotion", &function_ebd14952ee0df63e);
+  registersharedfunc("anim", "scriptModelPlayAnimDeltaMotion", &scriptmodelplayanimdeltamotion_sp);
   registersharedfunc("anim", "ASM_PlayFacialAnim", &asm_playfacialanim_sp);
   registersharedfunc("anim", "HandleNoteTrack", &handlenotetrack);
 }
@@ -85,10 +85,10 @@ function killstreak_init() {
   registersharedfunc("killstreak", "restoreKillstreakPlayerAngles", &namespace_2032e3f42315b9b2::restorekillstreakplayerangles);
   registersharedfunc("killstreak", "killstreak_setupVehicleDamageFunctionality", &namespace_2032e3f42315b9b2::killstreak_setupvehicledamagefunctionality);
   registersharedfunc("killstreak", "streakDeploy_doWeaponFiredDeploy", &namespace_2032e3f42315b9b2::function_edd13bb02e6204e4);
-  registersharedfunc("hellstorm_missile", "assignTargetMarkers", &namespace_2032e3f42315b9b2::function_ceb8da3185ad3803);
-  registersharedfunc("chopper_gunner", "assignTargetMarkers", &namespace_2032e3f42315b9b2::function_ceb8da3185ad3803);
-  registersharedfunc("gunship", "assignTargetMarkers", &namespace_2032e3f42315b9b2::function_ceb8da3185ad3803);
-  registersharedfunc("cruise_predator", "assignTargetMarkers", &namespace_2032e3f42315b9b2::function_ceb8da3185ad3803);
+  registersharedfunc("hellstorm_missile", "assignTargetMarkers", &namespace_2032e3f42315b9b2::killstreak_assigntargetmarkers);
+  registersharedfunc("chopper_gunner", "assignTargetMarkers", &namespace_2032e3f42315b9b2::killstreak_assigntargetmarkers);
+  registersharedfunc("gunship", "assignTargetMarkers", &namespace_2032e3f42315b9b2::killstreak_assigntargetmarkers);
+  registersharedfunc("cruise_predator", "assignTargetMarkers", &namespace_2032e3f42315b9b2::killstreak_assigntargetmarkers);
 }
 
 function equipment_init() {
@@ -103,7 +103,7 @@ function player_init() {
   registersharedfunc("player", "_isAlive", &playerisalive);
   registersharedfunc("player", "fadeToBlackForPlayer", &fadetoblackforplayer);
   registersharedfunc("player", "freezeControls", &function_9e4bdc60395a22be);
-  registersharedfunc("player", "getSuperFaction", &function_9f7f3dbbcc95bb29);
+  registersharedfunc("player", "getSuperFaction", &getsuperfactionsp);
   registersharedfunc("player", "getPlayersInRadius", &scripts\sp\player::getplayersinradius);
   registersharedfunc("player", "get_rumble_ent", &utility::get_rumble_ent);
   registersharedfunc("player", "rumble_ramp_to", &utility::rumble_ramp_to);
@@ -119,7 +119,7 @@ function host_migration_init() {
 function vehicle_init() {
   registersharedfunc("vehicle", "reserveVehicle", &scripts\sp\vehicle::reservevehicle);
   registersharedfunc("vehicle", "spawnVehicle", &scripts\sp\vehicle::spawnvehicle_sp);
-  registersharedfunc("vehicle", "deleteVehicle", &scripts\sp\vehicle::function_99d930044ab93cc);
+  registersharedfunc("vehicle", "deleteVehicle", &scripts\sp\vehicle::deletevehicle_sp);
   registersharedfunc("vehicle", "vehicle_damage_setCanDamage", &scripts\sp\vehicle::function_36dbb623c325c79);
   registersharedfunc("vehicle", "vehicle_driverShowViewModel", &scripts\sp\vehicle::function_9b59f5c375018695);
 }
@@ -152,18 +152,18 @@ function flares_init() {}
 function shellshock_init() {}
 
 function fx_init() {
-  registersharedfunc("fx", "SpawnFXForClient", &function_bbc64ca6213bb6ec);
+  registersharedfunc("fx", "SpawnFXForClient", &spawnfxforclient_sp);
 }
 
 function ai_init() {
-  registersharedfunc("ai", "giveAIWeapon", &function_b38b4e8270e79930);
-  registersharedfunc("ai", "GetFreeAICount", &function_ada2ef6d77db0d44);
-  registersharedfunc("ai", "spawnNewAIType_SharedFunc", &function_e5c8a24ca58a645e);
+  registersharedfunc("ai", "giveAIWeapon", &giveaiweapon_sp);
+  registersharedfunc("ai", "GetFreeAICount", &getfreeaicount_sp);
+  registersharedfunc("ai", "spawnNewAIType_SharedFunc", &spawnnewaitype_sp);
 }
 
 function bots_init() {}
 
-function function_550bcd278c30275e() {}
+function agents_init() {}
 
 function outline_init() {}
 
@@ -183,9 +183,9 @@ function challenges_init() {}
 
 function function_a92ed2f4c44e5ffa() {}
 
-function function_c1199c7cd79918b3() {}
+function aggregator_init() {}
 
-function function_1bc257700c3d014e() {}
+function cameras_init() {}
 
 function function_a30b248a8fc67a00() {}
 
@@ -195,7 +195,7 @@ function function_f677f2d747d21482() {
   create_func_ref("setsaveddvar", &setsaveddvar);
 }
 
-function function_cc460dedff0277f() {
+function activities_init() {
   while(!isDefined(level.mapname)) {
     waitframe();
   }
@@ -217,21 +217,21 @@ function private playsoundtoplayer_sp(aliasname, player, srcentity) {
   }
 }
 
-function private function_bbc64ca6213bb6ec(fxid, position, player, forward, up) {
+function private spawnfxforclient_sp(fxid, position, player, forward, up) {
   assert(isDefined(level.player) && player == level.player);
   return spawnfx(fxid, position, forward, up);
 }
 
-function private function_b38b4e8270e79930(weapname) {
+function private giveaiweapon_sp(weapname) {
   self.weapon = weapname;
 }
 
-function private function_ada2ef6d77db0d44() {
+function private getfreeaicount_sp() {
   return getfreeaicount();
 }
 
-function private function_e5c8a24ca58a645e(aitype, position, angles, team, var_42e5c77b1d7fe6e7) {
-  newai = dospawnaitype(aitype, position, angles, 1, undefined, undefined, undefined, undefined, var_42e5c77b1d7fe6e7);
+function private spawnnewaitype_sp(aitype, position, angles, team, characterlistname) {
+  newai = dospawnaitype(aitype, position, angles, 1, undefined, undefined, undefined, undefined, characterlistname);
 
   if(isDefined(newai)) {
     newai thread scripts\sp\spawner::spawn_think();
@@ -242,7 +242,7 @@ function private function_e5c8a24ca58a645e(aitype, position, angles, team, var_4
 
 #using_animtree("script_model");
 
-function private function_ebd14952ee0df63e(animname, notifystring, var_d3a7686bdb2b1c76, blendtype) {
+function private scriptmodelplayanimdeltamotion_sp(animname, notifystring, animstarttimeseconds, blendtype) {
   animation = function_d2fff5ce136ca7b(animname, #animtree);
 
   if(isDefined(animation)) {
@@ -250,8 +250,8 @@ function private function_ebd14952ee0df63e(animname, notifystring, var_d3a7686bd
     self useanimtree(#animtree);
     self animScripted(notifystring, self.origin, self.angles, animation);
 
-    if(isDefined(var_d3a7686bdb2b1c76)) {
-      coef = var_d3a7686bdb2b1c76 / getanimlength(animation);
+    if(isDefined(animstarttimeseconds)) {
+      coef = animstarttimeseconds / getanimlength(animation);
       self setanimtime(animname, coef);
     }
   }
@@ -277,7 +277,7 @@ function function_9e4bdc60395a22be(frozen, force, debug) {
   val::reset("sharedFunc", "freezecontrols");
 }
 
-function function_9f7f3dbbcc95bb29(player) {
+function getsuperfactionsp(player) {
   return false;
 }
 
@@ -285,7 +285,7 @@ function playerisalive() {
   return isalive(self);
 }
 
-function targetmarkergroup_on(var_21323aee11762c98, showto, tomark, groupowner, friendlymarker, markonspawn, var_262f4b55aa151de1) {
+function targetmarkergroup_on(markerwidgetname, showto, tomark, groupowner, friendlymarker, markonspawn, var_262f4b55aa151de1) {
   if(isDefined(tomark) && !isarray(tomark)) {
     tomark = [tomark];
   }
@@ -298,7 +298,7 @@ function targetmarkergroup_on(var_21323aee11762c98, showto, tomark, groupowner, 
   level.activetargetmarkergroups[id] = tomark;
 
   if(isarray(tomark)) {
-    if(issubstr(var_21323aee11762c98, "enemy")) {
+    if(issubstr(markerwidgetname, "enemy")) {
       array_thread(tomark, &scripts\engine\sp\utility::hudoutline_enable_new, "outline_nodepth_red");
     } else {
       array_thread(tomark, &scripts\engine\sp\utility::hudoutline_enable_new, "outline_nodepth_green");
@@ -308,14 +308,14 @@ function targetmarkergroup_on(var_21323aee11762c98, showto, tomark, groupowner, 
   return id;
 }
 
-function targetmarkergroup_off(var_4226c12910d867d4) {
-  if(isDefined(level.activetargetmarkergroups[var_4226c12910d867d4])) {
-    if(isarray(level.activetargetmarkergroups[var_4226c12910d867d4])) {
-      array_thread(level.activetargetmarkergroups[var_4226c12910d867d4], &scripts\engine\sp\utility::hudoutline_disable);
+function targetmarkergroup_off(targetmarkergroupid) {
+  if(isDefined(level.activetargetmarkergroups[targetmarkergroupid])) {
+    if(isarray(level.activetargetmarkergroups[targetmarkergroupid])) {
+      array_thread(level.activetargetmarkergroups[targetmarkergroupid], &scripts\engine\sp\utility::hudoutline_disable);
     }
   }
 
-  level.activetargetmarkergroups[var_4226c12910d867d4] = undefined;
+  level.activetargetmarkergroups[targetmarkergroupid] = undefined;
 }
 
 function private function_3b7b5cc9ae0f8ee2(b_value) {}

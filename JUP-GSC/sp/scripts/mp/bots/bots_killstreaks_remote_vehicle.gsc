@@ -130,10 +130,10 @@ function function_afae965b7274c594(nodes) {
     wait 0.05;
   }
 
-  thread function_394a8d2890e007c4(nodes);
+  thread bot_draw_debug_heli_nodes(nodes);
 }
 
-function function_394a8d2890e007c4(nodes) {
+function bot_draw_debug_heli_nodes(nodes) {
   self notify("<dev string:x7c>");
   self endon("<dev string:x7c>");
   level endon("<dev string:x96>");
@@ -1161,7 +1161,7 @@ function heli_pilot_control_heli_aiming() {
   self notify("heli_pilot_control_heli_aiming");
   self endon("heli_pilot_control_heli_aiming");
   var_4ac4b608421ecbbb = undefined;
-  var_4d571df5f3a8befc = undefined;
+  last_enemy_seen = undefined;
   target_loc = undefined;
   var_befbf47bff2227bd = 0;
   var_ea189b55de5c8fa7 = 0;
@@ -1173,12 +1173,12 @@ function heli_pilot_control_heli_aiming() {
     var_d430bcda6275a38b = 0;
     var_4b05a8497817406a = 0;
 
-    if(isDefined(var_4d571df5f3a8befc) && var_4d571df5f3a8befc.health <= 0 && gettime() - var_4d571df5f3a8befc.deathtime < 2000) {
+    if(isDefined(last_enemy_seen) && last_enemy_seen.health <= 0 && gettime() - last_enemy_seen.deathtime < 2000) {
       var_d430bcda6275a38b = 1;
       var_4b05a8497817406a = 1;
     } else if(isalive(self.enemy) && (self botcanseeentity(self.enemy) || gettime() - self lastknowntime(self.enemy) <= 300)) {
       var_d430bcda6275a38b = 1;
-      var_4d571df5f3a8befc = self.enemy;
+      last_enemy_seen = self.enemy;
       var_4ac4b608421ecbbb = self.enemy.origin;
 
       if(self botcanseeentity(self.enemy)) {
@@ -1729,10 +1729,10 @@ function bot_odin_should_airdrop_at_marker() {
   if(var_a891caa86bc4a7f7 - var_e2d98fc247820509 >= 2) {
     allies_sorted = get_array_of_closest(self.odin.targeting_marker.origin, zone_allies[marker_zone]);
     enemies_sorted = get_array_of_closest(self.odin.targeting_marker.origin, zone_enemies[marker_zone]);
-    var_a0cdc235271ae7e0 = distance(self.odin.targeting_marker.origin, allies_sorted[0].origin);
+    closest_ally_dist = distance(self.odin.targeting_marker.origin, allies_sorted[0].origin);
     var_d512083e84b3ce24 = distance(self.odin.targeting_marker.origin, enemies_sorted[0].origin);
 
-    if(var_a0cdc235271ae7e0 + 120 < var_d512083e84b3ce24) {
+    if(closest_ally_dist + 120 < var_d512083e84b3ce24) {
       return true;
     }
   }

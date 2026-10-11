@@ -8,9 +8,9 @@
 #using scripts\mp\utility\game;
 #namespace compass;
 
-function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8) {
+function setupminimap(material, var_11f306b80ae0c39e, numtiles) {
   requiredmapaspectratio = getdvarfloat(@ "scr_requiredmapaspectratio", 1);
-  mapinfo = function_79404c2fcca1c184();
+  mapinfo = getmapscriptbundle();
 
   if(isDefined(mapinfo) && isDefined(mapinfo.var_cea11b0bd8f76b2d)) {
     foreach(minimapversion in mapinfo.var_cea11b0bd8f76b2d) {
@@ -29,7 +29,7 @@ function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8) {
   }
 
   corners = [];
-  allvolumes = function_f159c10d5cf8f0b4("noent_volume_minimap", "classname");
+  allvolumes = getnoentvolumearray("noent_volume_minimap", "classname");
 
   if(allvolumes.size > 0) {
     if(allvolumes.size != 1) {
@@ -37,7 +37,7 @@ function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8) {
       return;
     }
 
-    minimapcorners = allvolumes[0] function_f69c3df4767470dc();
+    minimapcorners = allvolumes[0] getboundscorners();
     corners[0] = spawn("script_origin", minimapcorners[0]);
     corners[1] = spawn("script_origin", minimapcorners[1]);
   } else {
@@ -109,7 +109,7 @@ function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8) {
 
   if(allvolumes.size > 0) {
     north = (cos(allvolumes[0].angles[1]), sin(allvolumes[0].angles[1]), 0);
-    function_148d3ec6861d8b59(allvolumes[0].angles[1]);
+    setnorthyaw(allvolumes[0].angles[1]);
   }
 
   west = (0 - north[1], north[0], 0);
@@ -133,16 +133,16 @@ function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8) {
   }
 
   if(requiredmapaspectratio > 0) {
-    var_9f72e62e262287df = vectordot(northwest - southeast, north);
-    var_755d4c721ecb6165 = vectordot(northwest - southeast, west);
-    mapaspectratio = var_755d4c721ecb6165 / var_9f72e62e262287df;
+    northportion = vectordot(northwest - southeast, north);
+    westportion = vectordot(northwest - southeast, west);
+    mapaspectratio = westportion / northportion;
 
     if(mapaspectratio < requiredmapaspectratio) {
       incr = requiredmapaspectratio / mapaspectratio;
-      addvec = vecscale(west, var_755d4c721ecb6165 * (incr - 1) * 0.5);
+      addvec = vecscale(west, westportion * (incr - 1) * 0.5);
     } else {
       incr = mapaspectratio / requiredmapaspectratio;
-      addvec = vecscale(north, var_9f72e62e262287df * (incr - 1) * 0.5);
+      addvec = vecscale(north, northportion * (incr - 1) * 0.5);
     }
 
     northwest += addvec;
@@ -158,23 +158,23 @@ function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8) {
   level.mapcorners[1].angles = generateaxisanglesfromforwardvector(vectorNormalize(level.mapcorners[0].origin - level.mapcorners[1].origin), (0, 0, 1));
   level.mapcorners[1] addyaw(45);
 
-  if(!isDefined(var_3b70dd7d0d5b9a8) || var_3b70dd7d0d5b9a8 < 1) {
-    var_3b70dd7d0d5b9a8 = 1;
+  if(!isDefined(numtiles) || numtiles < 1) {
+    numtiles = 1;
   }
 
   level.minimapmaterial = material;
 
-  setminimap(material, northwest[0], northwest[1], southeast[0], southeast[1], var_3b70dd7d0d5b9a8, var_11f306b80ae0c39e);
+  setminimap(material, northwest[0], northwest[1], southeast[0], southeast[1], numtiles, var_11f306b80ae0c39e);
 }
 
 function vecscale(vec, scalar) {
   return (vec[0] * scalar, vec[1] * scalar, vec[2] * scalar);
 }
 
-function getcornersfromarray(array, var_c6f1388c16a82062) {
+function getcornersfromarray(array, uselocale) {
   corners = [];
 
-  if(var_c6f1388c16a82062) {
+  if(uselocale) {
     foreach(corner in array) {
       if(isDefined(corner.script_noteworthy) && corner.script_noteworthy == level.localeid) {
         corners[corners.size] = corner;

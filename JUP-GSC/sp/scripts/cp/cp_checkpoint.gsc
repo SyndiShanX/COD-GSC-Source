@@ -494,7 +494,7 @@ function checkpoint_get_item(checkpoint, item_type) {
 }
 
 function function_ee15fb8d39d4f4dd(checkpoint) {
-  scripts\engine\utility::function_f3bb4f4911a1beb2("game", "checkpoint_set", checkpoint);
+  scripts\engine\utility::callsharedfunc("game", "checkpoint_set", checkpoint);
 
   if(function_b4c58bbbae8c7412(checkpoint)) {
     return istrue(function_58beb11b01fb7b92(checkpoint));

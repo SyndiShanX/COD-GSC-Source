@@ -10,10 +10,10 @@
 #namespace visibility_mode;
 
 function main(funcsarray) {
-  level thread function_741772fd1005a4c9(funcsarray);
+  level thread visibilitymode_start(funcsarray);
 }
 
-function private function_741772fd1005a4c9(funcsarray) {
+function private visibilitymode_start(funcsarray) {
   var_36256eeb4f76a38c = getDvar(@ "hash_33a01af682caae50", 0);
   setdvarifuninitialized(@ "hash_33a01af682caae50", var_36256eeb4f76a38c);
 
@@ -33,7 +33,7 @@ function private function_741772fd1005a4c9(funcsarray) {
     level.visibilitymode.funcs[index] = func;
   }
 
-  if(!istrue(function_9ddaf19178508d55())) {
+  if(!istrue(checkshouldrun())) {
     return;
   }
 
@@ -42,7 +42,7 @@ function private function_741772fd1005a4c9(funcsarray) {
   level thread function_8977a3724ec5ce9e();
 }
 
-function private function_9ddaf19178508d55() {
+function private checkshouldrun() {
   if(isDefined(level.visibilitymode.funcs["shouldRun"])) {
     return level[[level.visibilitymode.funcs["shouldRun"]]]();
   }
@@ -101,7 +101,7 @@ function private function_afe539c207a6b2fb(firstplayer, secondplayer) {
 }
 
 function private function_753e2e2a70ae2d65(ent) {
-  return isalive(ent) || istrue(ent.var_d4ca148f5670a1f6);
+  return isalive(ent) || istrue(ent.visibilitymode_forced);
 }
 
 function private function_c3ae50f84a8329ac(client) {
@@ -138,8 +138,8 @@ function private function_c3ae50f84a8329ac(client) {
         continue;
       }
 
-      if(isDefined(active_targets[i].var_79a7c8a11ed7c0e3)) {
-        if(isDefined(active_targets[i].var_79a7c8a11ed7c0e3[playernum])) {
+      if(isDefined(active_targets[i].visibilitymode_outlineids)) {
+        if(isDefined(active_targets[i].visibilitymode_outlineids[playernum])) {
           continue;
         }
       }
@@ -161,8 +161,8 @@ function private function_8419f0f3143cdcfa(client) {
 
   playernum = client getentitynumber();
 
-  if(isDefined(self.var_79a7c8a11ed7c0e3)) {
-    if(isDefined(self.var_79a7c8a11ed7c0e3[playernum])) {
+  if(isDefined(self.visibilitymode_outlineids)) {
+    if(isDefined(self.visibilitymode_outlineids[playernum])) {
       return;
     }
   }
@@ -178,30 +178,30 @@ function private function_8419f0f3143cdcfa(client) {
       return;
     }
 
-    self.var_23e106fcb074622f = client function_ea4e39208c784a4a();
+    self.visibilitymode_outline = client function_ea4e39208c784a4a();
   } else if(isPlayer(self)) {
     if(var_517520758f9c478f == "enemiesonly") {
       return;
     }
 
-    self.var_23e106fcb074622f = client function_63a1833b6a352cd7();
+    self.visibilitymode_outline = client function_63a1833b6a352cd7();
   } else {
     if(var_517520758f9c478f == "enemiesonly") {
       return;
     }
 
-    self.var_23e106fcb074622f = client function_4448756918b98e87();
+    self.visibilitymode_outline = client function_4448756918b98e87();
   }
 
   enablefunc = level.visibilitymode.funcs["enableForClient"];
 
-  if(!isDefined(self.var_79a7c8a11ed7c0e3)) {
-    self.var_79a7c8a11ed7c0e3 = [];
+  if(!isDefined(self.visibilitymode_outlineids)) {
+    self.visibilitymode_outlineids = [];
   }
 
-  id = self[[enablefunc]](client, self.var_23e106fcb074622f, "lowest");
+  id = self[[enablefunc]](client, self.visibilitymode_outline, "lowest");
   clientnum = client getentitynumber();
-  self.var_79a7c8a11ed7c0e3[clientnum] = id;
+  self.visibilitymode_outlineids[clientnum] = id;
   thread visibilitymode_disableoutlineoncallback(client);
   thread visibilitymode_disableoutlineondeath();
   thread visibilitymode_disableonsmokeocclude(client);
@@ -213,7 +213,7 @@ function private visibilitymode_disableoutlineondeath() {
   self endon("visibilityMode_disableOutlineOnDeath");
   outlineids = [];
 
-  foreach(id in self.var_79a7c8a11ed7c0e3) {
+  foreach(id in self.visibilitymode_outlineids) {
     outlineids[outlineids.size] = id;
   }
 
@@ -225,8 +225,8 @@ function private visibilitymode_disableoutlineondeath() {
     }
   }
 
-  self.var_23e106fcb074622f = undefined;
-  self.var_79a7c8a11ed7c0e3 = undefined;
+  self.visibilitymode_outline = undefined;
+  self.visibilitymode_outlineids = undefined;
 }
 
 function private visibilitymode_disableoutlineoncallback(client) {
@@ -260,17 +260,17 @@ function private visibilitymode_disableoutlineoncallback(client) {
 }
 
 function private function_6b814eafddccdd4d(client) {
-  if(!isDefined(self.var_79a7c8a11ed7c0e3)) {
+  if(!isDefined(self.visibilitymode_outlineids)) {
     return;
   }
 
-  foreach(playernum, id in self.var_79a7c8a11ed7c0e3) {
+  foreach(playernum, id in self.visibilitymode_outlineids) {
     clientnum = client getentitynumber();
 
     if(clientnum == playernum) {
       if(isDefined(id)) {
         self[[level.visibilitymode.funcs["disable"]]](id);
-        self.var_79a7c8a11ed7c0e3[playernum] = undefined;
+        self.visibilitymode_outlineids[playernum] = undefined;
       }
     }
   }
@@ -316,7 +316,7 @@ function private function_3359e7308038233e(client) {
 
   if(issentient(self)) {
     self_eye = self getEye();
-  } else if(istrue(self.var_d4ca148f5670a1f6)) {
+  } else if(istrue(self.visibilitymode_forced)) {
     if(self tagexists("TAG_EYE")) {
       self_eye = self gettagorigin("TAG_EYE");
     } else if(self tagexists("TAG_HEAD")) {
@@ -334,7 +334,7 @@ function private function_3359e7308038233e(client) {
   return false;
 }
 
-function function_8c2e8285c9915b12(invalue, outlinevalue) {
+function visibilitymode_unpackvalue(invalue, outlinevalue) {
   println("<dev string:x1c>" + invalue);
   unpackdata = spawnStruct();
   unpackdata.currentvalue = invalue;
@@ -479,7 +479,7 @@ function private function_c4e7b8218a1533cc() {
   tracedata = function_b8618b0d8d7ff3e3();
   entity = tracedata.entity;
 
-  if(isDefined(entity) && isDefined(entity.team) && isDefined(entity.var_23e106fcb074622f)) {
+  if(isDefined(entity) && isDefined(entity.team) && isDefined(entity.visibilitymode_outline)) {
     var_517520758f9c478f = function_266da5d877397673();
 
     if(function_afe539c207a6b2fb(entity, self)) {
@@ -561,53 +561,53 @@ function private function_b8618b0d8d7ff3e3() {
   playerangles = self getgunangles();
   traceend = self getEye() + anglesToForward(playerangles) * tracedist;
   traceoffset = (0, 0, 0);
-  var_9ccff25b22cb483b = 32;
+  tracevecoffset = 32;
   returndata = spawnStruct();
   returndata.entity = undefined;
   returndata.type = "middle";
 
   for(i = 0; i < 15; i++) {
     if(i == 1) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * -1, 0), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * -1, 0), playerangles);
       returndata.type = "left";
     } else if(i == 2) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b, 0), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset, 0), playerangles);
       returndata.type = "right";
     } else if(i == 3) {
-      traceoffset = rotatevector((0, 0, var_9ccff25b22cb483b), playerangles);
+      traceoffset = rotatevector((0, 0, tracevecoffset), playerangles);
       returndata.type = "middle_near";
     } else if(i == 4) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * -1, var_9ccff25b22cb483b), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * -1, tracevecoffset), playerangles);
       returndata.type = "left";
     } else if(i == 5) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b, var_9ccff25b22cb483b), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset, tracevecoffset), playerangles);
       returndata.type = "right";
     } else if(i == 6) {
-      traceoffset = rotatevector((0, 0, var_9ccff25b22cb483b * -1), playerangles);
+      traceoffset = rotatevector((0, 0, tracevecoffset * -1), playerangles);
       returndata.type = "middle_near";
     } else if(i == 7) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * -1, var_9ccff25b22cb483b * -1), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * -1, tracevecoffset * -1), playerangles);
       returndata.type = "left";
     } else if(i == 8) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b, var_9ccff25b22cb483b * -1), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset, tracevecoffset * -1), playerangles);
       returndata.type = "right";
     } else if(i == 9) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * -2, var_9ccff25b22cb483b), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * -2, tracevecoffset), playerangles);
       returndata.type = "left";
     } else if(i == 10) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * -2, 0), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * -2, 0), playerangles);
       returndata.type = "left";
     } else if(i == 11) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * -2, var_9ccff25b22cb483b * -1), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * -2, tracevecoffset * -1), playerangles);
       returndata.type = "left";
     } else if(i == 12) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * 2, var_9ccff25b22cb483b), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * 2, tracevecoffset), playerangles);
       returndata.type = "right";
     } else if(i == 13) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * 2, 0), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * 2, 0), playerangles);
       returndata.type = "right";
     } else if(i == 14) {
-      traceoffset = rotatevector((0, var_9ccff25b22cb483b * 2, var_9ccff25b22cb483b * -1), playerangles);
+      traceoffset = rotatevector((0, tracevecoffset * 2, tracevecoffset * -1), playerangles);
       returndata.type = "right";
     }
 
@@ -628,12 +628,12 @@ function private function_b8618b0d8d7ff3e3() {
 
 function private function_4ffad916a54ca2f(trace, playerangles, tracedist) {
   hitpos = trace["position"];
-  var_1dc4c86806743c5c = trace["entity"] getEye();
+  targeteyespos = trace["entity"] getEye();
   targetoriginpos = trace["entity"] gettagorigin("tag_origin", 1);
   var_734d8fcbdd28f284 = self getEye() + anglesToForward(playerangles) * tracedist * 1.5;
 
-  if(isDefined(var_1dc4c86806743c5c) && isDefined(targetoriginpos)) {
-    data = scripts\engine\utility::closestdistancebetweenlines(targetoriginpos, var_1dc4c86806743c5c, self getEye(), var_734d8fcbdd28f284);
+  if(isDefined(targeteyespos) && isDefined(targetoriginpos)) {
+    data = scripts\engine\utility::closestdistancebetweenlines(targetoriginpos, targeteyespos, self getEye(), var_734d8fcbdd28f284);
 
     if(isDefined(data) && data[2] < 7) {
       return "middle";
@@ -655,7 +655,7 @@ function private function_4ffad916a54ca2f(trace, playerangles, tracedist) {
 }
 
 function private function_d26ee9ff27d79349() {
-  self.var_ff7a6caa0a544d30 = 0;
+  self.visibilitymodeads = 0;
   self.var_44446bd6d8fd6ed0 = 0;
   self notifyonplayercommand("vis_sprint_pressed", "+breath_sprint");
   self notifyonplayercommand("vis_sprint_pressed", "+melee_breath");
@@ -675,8 +675,8 @@ function private function_d26ee9ff27d79349() {
     playerads = self playerads();
 
     if(playerads == 1) {
-      if(self.var_ff7a6caa0a544d30 == 0) {
-        self.var_ff7a6caa0a544d30 = 1;
+      if(self.visibilitymodeads == 0) {
+        self.visibilitymodeads = 1;
         thread function_dc7453c8550c512c();
         thread function_eec104c84dc70618("vis_sprint_pressed");
       }
@@ -685,7 +685,7 @@ function private function_d26ee9ff27d79349() {
     }
 
     if(playerads < 1) {
-      self.var_ff7a6caa0a544d30 = 0;
+      self.visibilitymodeads = 0;
       self.var_44446bd6d8fd6ed0 = 0;
       self notify("visibilityMode_stopads");
     }
@@ -790,12 +790,12 @@ function private function_dc7453c8550c512c() {
       continue;
     }
 
-    var_c92a4399b993144a = distancesquared(clientenemies[i].origin, self.origin);
+    disttome = distancesquared(clientenemies[i].origin, self.origin);
 
-    if(var_c92a4399b993144a < maxdistsq) {
+    if(disttome < maxdistsq) {
       if(soundexists("uin_ping_enemy")) {
         clientenemies[i] playSound("uin_ping_enemy");
-        delay = math::remap(var_c92a4399b993144a, 0, maxdistsq, 0.15, 0.6);
+        delay = math::remap(disttome, 0, maxdistsq, 0.15, 0.6);
         wait delay;
       }
     }
@@ -811,7 +811,7 @@ function private function_49afc10334084167() {
   }
 
   flag_wait("objectives_registered");
-  var_4267b02eda9e961 = [];
+  objposarray = [];
 
   for(i = 0; i < level.worldobjidpool.active.size; i++) {
     if(isDefined(level.worldobjidpool.active[i].identifier) && level.worldobjidpool.active[i].identifier == "nonobj_marker") {
@@ -821,21 +821,21 @@ function private function_49afc10334084167() {
     objstruct = spawnStruct();
     objstruct.objinfo = level.worldobjidpool.active[i];
     objstruct.origin = objective_getlocation(level.worldobjidpool.active[i].objid, 0);
-    var_4267b02eda9e961[var_4267b02eda9e961.size] = objstruct;
+    objposarray[objposarray.size] = objstruct;
   }
 
-  var_4267b02eda9e961 = sortbydistance(var_4267b02eda9e961, self.origin);
+  objposarray = sortbydistance(objposarray, self.origin);
 
-  for(i = 0; i < var_4267b02eda9e961.size; i++) {
-    var_8137caff89efd99 = function_bd41d880db5c1bad(var_4267b02eda9e961[i].objinfo.identifier);
+  for(i = 0; i < objposarray.size; i++) {
+    potentialcustomsound = function_bd41d880db5c1bad(objposarray[i].objinfo.identifier);
 
-    if(isDefined(var_8137caff89efd99)) {
-      level thread function_95cd04544bc213e5(var_4267b02eda9e961[i].origin, self, var_8137caff89efd99);
+    if(isDefined(potentialcustomsound)) {
+      level thread function_95cd04544bc213e5(objposarray[i].origin, self, potentialcustomsound);
     } else {
-      level thread function_95cd04544bc213e5(var_4267b02eda9e961[i].origin, self);
+      level thread function_95cd04544bc213e5(objposarray[i].origin, self);
     }
 
-    if(var_4267b02eda9e961.size > 1) {
+    if(objposarray.size > 1) {
       wait 1;
     }
   }
@@ -980,8 +980,8 @@ function function_88ec96d66632c2b9() {
   playernum = self getentitynumber();
 
   for(i = 0; i < active_targets.size; i++) {
-    if(isDefined(active_targets[i].var_79a7c8a11ed7c0e3)) {
-      if(isDefined(active_targets[i].var_79a7c8a11ed7c0e3[playernum])) {
+    if(isDefined(active_targets[i].visibilitymode_outlineids)) {
+      if(isDefined(active_targets[i].visibilitymode_outlineids[playernum])) {
         returnguys[returnguys.size] = active_targets[i];
       }
     }
@@ -1076,7 +1076,7 @@ function function_8ba05ef17e2b7d10(entity, team) {
     level.visibilitymode.forced_ents = [];
   }
 
-  entity.var_d4ca148f5670a1f6 = 1;
+  entity.visibilitymode_forced = 1;
   ent_number = entity getentitynumber();
 
   if(!is_equal(entity.team, team)) {
@@ -1091,7 +1091,7 @@ function function_b6e23e71bb7ad50f(entity) {
     ent_number = entity getentitynumber();
 
     if(isDefined(level.visibilitymode.forced_ents) && isDefined(level.visibilitymode.forced_ents[ent_number])) {
-      entity.var_d4ca148f5670a1f6 = undefined;
+      entity.visibilitymode_forced = undefined;
       level.visibilitymode.forced_ents[ent_number] = undefined;
     }
   }
@@ -1102,7 +1102,7 @@ function function_d5f76e611c78509a() {
   model = entity.model;
   headmodel = entity.headmodel;
 
-  if(istrue(entity.var_d4ca148f5670a1f6)) {
+  if(istrue(entity.visibilitymode_forced)) {
     return;
   }
 
@@ -1142,5 +1142,5 @@ function private function_8977a3724ec5ce9e() {
 
 function private function_bf79c9a4bc54b7da(val) {
   val = int(val);
-  level.players[0] function_8c2e8285c9915b12(val);
+  level.players[0] visibilitymode_unpackvalue(val);
 }

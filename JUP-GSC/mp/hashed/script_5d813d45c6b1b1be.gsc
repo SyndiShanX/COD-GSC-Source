@@ -96,9 +96,9 @@ function function_a4dfabe55dd4a652(players, reward_struct, rewards, var_ecfd7797
     reward_struct = namespace_bd7428f3122be80f::function_3ae7f99339b96499(player.origin, 1);
   }
 
-  var_ed118e6dd8c246 = spawnStruct();
-  var_ed118e6dd8c246.rewards = rewards;
-  namespace_e8853d3344e33cf6::function_863be9e39e19fe2f([reward_groups], reward_struct, &function_6c8d574fc2049e38, var_ed118e6dd8c246);
+  lootfunctionargs = spawnStruct();
+  lootfunctionargs.rewards = rewards;
+  namespace_e8853d3344e33cf6::function_863be9e39e19fe2f([reward_groups], reward_struct, &function_6c8d574fc2049e38, lootfunctionargs);
 }
 
 function private function_77e93c78c6c685c3(players) {
@@ -117,8 +117,8 @@ function private function_77e93c78c6c685c3(players) {
   return reward_groups;
 }
 
-function private function_6c8d574fc2049e38(var_ed118e6dd8c246) {
-  rewards = var_ed118e6dd8c246.rewards;
+function private function_6c8d574fc2049e38(lootfunctionargs) {
+  rewards = lootfunctionargs.rewards;
   assertex(isDefined(rewards), "<dev string:x1c>");
   contents = [];
 

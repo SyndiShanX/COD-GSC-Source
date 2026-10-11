@@ -48,8 +48,8 @@ function autoexec main() {
   namespace_ad1f398af6f48cb1::function_56e8f78ce1511d35("Maestro", &oninitialization);
   namespace_ad1f398af6f48cb1::function_dbfada6bda9049b3("Maestro", &function_325892ecd89575e1);
   scripts\engine\utility::registersharedfunc("warlords", "tile_g_warlord_registration", &function_3185a43162bd15e2);
-  level.ob.warlordparameters["Maestro"].goalvolume = function_f159c10d5cf8f0b4("goalVolume", "script_noteworthy");
-  var_da47572a9821e77d = function_f159c10d5cf8f0b4("goalSubVolume", "script_noteworthy");
+  level.ob.warlordparameters["Maestro"].goalvolume = getnoentvolumearray("goalVolume", "script_noteworthy");
+  var_da47572a9821e77d = getnoentvolumearray("goalSubVolume", "script_noteworthy");
   level.ob.warlordparameters["Maestro"].var_da47572a9821e77d = array_sort_by_script_index(var_da47572a9821e77d);
 
   foreach(volume in level.ob.warlordparameters["Maestro"].goalvolume) {
@@ -94,17 +94,17 @@ function autoexec main() {
 }
 
 function private function_3185a43162bd15e2() {
-  if(!istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("warlords", "warlordIsDisabled", "WARLORD_MAESTRO"))) {
+  if(!istrue(scripts\engine\utility::callsharedfunc("warlords", "warlordIsDisabled", "WARLORD_MAESTRO"))) {
     namespace_609d2ee77dae3d8c::function_447c6ab4bea16b52("objective", "REV_OB_WARLORD", &namespace_75b9b66caa533c31::function_8abadf3d8f19384a, &namespace_bb6f88126dc368e8::function_fd69cf02ba4d90a2);
   }
 }
 
 function oninitialization(agent, data) {
   warlordparameters = namespace_ad1f398af6f48cb1::function_9acf953fd6bf2e46("Maestro");
-  level.ob.warlordparameters["Maestro"].requestid = agent.var_ad46aadd4e3290d7;
-  function_3c85fe57dbc02e4e(agent.var_ad46aadd4e3290d7, &function_a0c7cc505f1c5675, agent);
-  function_5b9ffa6991e4d730(agent.var_ad46aadd4e3290d7, &function_a2fef9d268c4b5c2, agent);
-  requestdata = function_9a39e23c3c52c2af(agent.var_ad46aadd4e3290d7);
+  level.ob.warlordparameters["Maestro"].requestid = agent.directorrequestid;
+  function_3c85fe57dbc02e4e(agent.directorrequestid, &function_a0c7cc505f1c5675, agent);
+  function_5b9ffa6991e4d730(agent.directorrequestid, &function_a2fef9d268c4b5c2, agent);
+  requestdata = function_9a39e23c3c52c2af(agent.directorrequestid);
   agent.var_47e0dccd1b8b6d95 = spawn_request("ai_flood_fill_encounter:enc_ob_activity_flood_warlord_maestro", requestdata.origin, requestdata.radius, 1, 1, 0);
   function_c67c7b9e7cbf3821(agent.var_47e0dccd1b8b6d95, &function_20076ce5ca820299, agent);
   function_c6942df117004b8(agent.var_47e0dccd1b8b6d95, &function_6fe30a922ca26cb0, agent);
@@ -172,7 +172,7 @@ function function_79bb0c9010db500f(warlord, params) {
   warlord.var_7562828a4ad55ff7 = 1;
   warlord.damagephase = 0;
   warlord.var_b8a5d15fbaa9387d = getdvarint(@ "hash_312502a35e1237e2", 10000);
-  warlord function_f3bb4f4911a1beb2(#"emp", #"hash_a865e3770eb96298", warlord, &function_45294eab84bd3fc4);
+  warlord callsharedfunc(#"emp", #"hash_a865e3770eb96298", warlord, &function_45294eab84bd3fc4);
   warlord.var_970170ffd4b081ac = &function_e6b424a8da46b2f0;
   warlord.var_d935d530a63e48ba = 0;
   warlord.var_c557ad4f44477f11 = 1;
@@ -187,8 +187,8 @@ function function_79bb0c9010db500f(warlord, params) {
     wheelson.deathcallback = &function_120b1e4e62e7695c;
     wheelson.var_1e0eb63ecb3f1e2 = 1;
     wheelson.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_wheelson_healthbar");
-    wheelson.var_534e788bc498be9f = getscriptbundle(%"hash_6647d2ce83e8c20a");
-    wheelson.subclass = wheelson.var_534e788bc498be9f.name;
+    wheelson.subclass_scriptbundle = getscriptbundle(%"hash_6647d2ce83e8c20a");
+    wheelson.subclass = wheelson.subclass_scriptbundle.name;
     wheelson.var_52dcdba485e7ceeb = "tag_body";
     wheelson.var_af81370570c04ca = 8;
     wheelson.var_7cfe1b189bcf3cad = getdvarint(@ "hash_8e928149711b5a66", 10);
@@ -198,7 +198,7 @@ function function_79bb0c9010db500f(warlord, params) {
   warlord thread function_e39419538782659e(params);
   params.trackers.wheelsons[params.trackers.wheelsons.size] = wheelson;
   warlord.callbackdamaged = &function_fea10e99d08599d7;
-  triggers = function_f159c10d5cf8f0b4("reinforcement_trigger", "targetname");
+  triggers = getnoentvolumearray("reinforcement_trigger", "targetname");
 
   foreach(trigger in triggers) {
     trigger thread function_4b8b0afabc972cf8(warlord);
@@ -272,8 +272,8 @@ function private function_5bb38d64c886e080(params) {
   hasapproached = 0;
 
   while(true) {
-    if(self.ob.instancedata.var_6c29f2fdb0054bbe.size > 0) {
-      foreach(player in self.ob.instancedata.var_6c29f2fdb0054bbe) {
+    if(self.ob.instancedata.playerparticipants.size > 0) {
+      foreach(player in self.ob.instancedata.playerparticipants) {
         if(isinlaststand(player) || istrue(player.notarget) || istrue(player.ignoreme)) {
           continue;
         }
@@ -857,8 +857,8 @@ function function_35a2d548eaf273dd(point, params, var_a4ca108d5180304, var_4c12c
   drone.forcestop = 0;
   drone.health = 999999;
   drone.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_bombdrone_healthbar");
-  drone.var_534e788bc498be9f = getscriptbundle(%"hash_781de85130f2625a");
-  drone.subclass = drone.var_534e788bc498be9f.name;
+  drone.subclass_scriptbundle = getscriptbundle(%"hash_781de85130f2625a");
+  drone.subclass = drone.subclass_scriptbundle.name;
   drone.var_1e0eb63ecb3f1e2 = 1;
   drone.var_4919d15787f01154 = 1;
   drone.max_fake_health = params.dronehealth;
@@ -917,17 +917,17 @@ function function_35a2d548eaf273dd(point, params, var_a4ca108d5180304, var_4c12c
   drone thread function_31bd1c2dc85b7b5c();
   drone thread drone_watchfordeath();
   drone thread function_3e42dda71c258e8a();
-  drone function_f3bb4f4911a1beb2(#"emp", #"hash_a865e3770eb96298", drone, &function_7c3b5beb399db271);
+  drone callsharedfunc(#"emp", #"hash_a865e3770eb96298", drone, &function_7c3b5beb399db271);
   return drone;
 }
 
-function function_aeaae75fa8cfd4cb(var_91beb5c3a5ab6910) {
+function function_aeaae75fa8cfd4cb(haywiredata) {
   level endon("game_ended");
   self endon("death");
-  victim = var_91beb5c3a5ab6910.victim;
-  attacker = var_91beb5c3a5ab6910.attacker;
-  objweapon = var_91beb5c3a5ab6910.objweapon;
-  inflictor = var_91beb5c3a5ab6910.inflictor;
+  victim = haywiredata.victim;
+  attacker = haywiredata.attacker;
+  objweapon = haywiredata.objweapon;
+  inflictor = haywiredata.inflictor;
 
   if(isstruct(inflictor)) {
     inflictor = attacker;
@@ -993,8 +993,8 @@ function function_19d48dfe8f3cbc84(shield_on, drone, params) {
     drone.clip linkTo(drone, "j_body");
     drone.clip enableaimassist();
     drone.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_bombdrone_healthbar");
-    drone.var_534e788bc498be9f = getscriptbundle(%"hash_781de85130f2625a");
-    drone.subclass = drone.var_534e788bc498be9f.name;
+    drone.subclass_scriptbundle = getscriptbundle(%"hash_781de85130f2625a");
+    drone.subclass = drone.subclass_scriptbundle.name;
     drone.clip.health = 999999;
     drone.clip.var_1e0eb63ecb3f1e2 = 1;
     drone.clip.var_4919d15787f01154 = 1;
@@ -1939,8 +1939,8 @@ function function_c810b23729e64272(copydrone, target) {
   drone.forcestop = 0;
   drone.health = 999999;
   drone.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_bombdrone_healthbar");
-  drone.var_534e788bc498be9f = getscriptbundle(%"hash_781de85130f2625a");
-  drone.subclass = drone.var_534e788bc498be9f.name;
+  drone.subclass_scriptbundle = getscriptbundle(%"hash_781de85130f2625a");
+  drone.subclass = drone.subclass_scriptbundle.name;
   drone.var_1e0eb63ecb3f1e2 = 1;
   drone.var_4919d15787f01154 = 1;
   drone.max_fake_health = params.dronehealth;
@@ -1959,7 +1959,7 @@ function function_c810b23729e64272(copydrone, target) {
   drone thread drone_watchfordeath();
   drone thread function_3e42dda71c258e8a();
   drone thread function_2395aa8d473eb61f();
-  drone function_f3bb4f4911a1beb2(#"emp", #"hash_a865e3770eb96298", drone, &function_7c3b5beb399db271);
+  drone callsharedfunc(#"emp", #"hash_a865e3770eb96298", drone, &function_7c3b5beb399db271);
   drone setscriptablepartstate("Spawn_Reveal", "Reveal_Instant", 0);
   return drone;
 }
@@ -2119,8 +2119,8 @@ function function_5cbe39f2741ec0b0(chokepointindex, restock_path, patrol_center,
   while(true) {
     areplayersnear = 0;
 
-    if(self.ob.instancedata.var_6c29f2fdb0054bbe.size > 0) {
-      foreach(player in self.ob.instancedata.var_6c29f2fdb0054bbe) {
+    if(self.ob.instancedata.playerparticipants.size > 0) {
+      foreach(player in self.ob.instancedata.playerparticipants) {
         if(distance(player.origin, patrol_center) < 4000) {
           areplayersnear = 1;
           break;
@@ -2434,12 +2434,12 @@ function wheelson_spawn(pos, patrolstruct, vehicle, model, patrolradius, name, o
   remotetank.spinuptime = 1;
   remotetank laseron();
   remotetank addcomponent("p2p");
-  remotetank function_77320e794d35465a("p2p", "reverseGasNormal", 1.5);
-  remotetank function_77320e794d35465a("p2p", "steeringMultiplier", 20);
-  remotetank function_77320e794d35465a("p2p", "manualSpeed", 10);
-  remotetank function_77320e794d35465a("p2p", "reverseForBehindGoal", 1);
-  remotetank function_77320e794d35465a("p2p", "stuckTime", 4);
-  remotetank function_77320e794d35465a("p2p", "goalThreshold", 50);
+  remotetank setconfigvalue("p2p", "reverseGasNormal", 1.5);
+  remotetank setconfigvalue("p2p", "steeringMultiplier", 20);
+  remotetank setconfigvalue("p2p", "manualSpeed", 10);
+  remotetank setconfigvalue("p2p", "reverseForBehindGoal", 1);
+  remotetank setconfigvalue("p2p", "stuckTime", 4);
+  remotetank setconfigvalue("p2p", "goalThreshold", 50);
   remotetank scripts\cp_mp\emp_debuff::set_start_emp_callback(&empstarted);
   remotetank scripts\cp_mp\emp_debuff::set_clear_emp_callback(&empcleared);
   remotetank scripts\cp_mp\equipment\haywire::function_172d848d58051fdf(&function_f149e9383f183cf0);
@@ -2497,7 +2497,7 @@ function function_120b1e4e62e7695c(inflictor, attacker, damage, idflags, meansof
   turretdir = anglesToForward(self gettagangles("tag_flash"));
   self setturrettargetvec(turretdir * 500 + (0, -800, 0));
   wait 0.3;
-  self function_77320e794d35465a("p2p", "pause", 1);
+  self setconfigvalue("p2p", "pause", 1);
   wait 1.2;
   self playSound("veh_ks_wheelson_explode");
   self setscriptablepartstate("explode", "on", 0);

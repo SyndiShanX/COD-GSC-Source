@@ -47,9 +47,9 @@ function function_304c63cbb536c526(shouldstrip) {
 }
 
 function function_d03eea41ff9cfe90() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &function_36985b9cd291d92);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_moving_melee_changed", &function_9fd711257824bb04);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_crawling_changed", &function_f32e8d8176ba8554);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &function_36985b9cd291d92);
+  callback::get_template(self.animsetname) callback::add("on_is_moving_melee_changed", &function_9fd711257824bb04);
+  callback::get_template(self.animsetname) callback::add("on_is_crawling_changed", &function_f32e8d8176ba8554);
 }
 
 function function_3426adec3c5d6cb6() {
@@ -123,23 +123,23 @@ function private function_3efc6f398dd71d26(alias) {
 
 function private wander_listener() {
   self endon("death");
-  var_43a41b8e241075d9 = self.var_274e0c05ec5c89c0;
-  var_f1a9200c39365c50 = self.var_d28e54645050df58;
+  var_43a41b8e241075d9 = self.collide_with_ai_allies;
+  var_f1a9200c39365c50 = self.script_pushable_by_ai;
   var_e7559f0d8df0d81b = self.script_pushable;
   var_5551942656a0fa38 = self.var_8f499cbc08e88e90;
   var_22af11ae0bd93d28 = 0.5;
 
   while(true) {
     self waittill("wander_start");
-    move_speed = self.zombieaisettings.var_96e932e5fc805af8[1].movetype;
+    move_speed = self.zombieaisettings.speedthreshold_list[1].movetype;
 
     if(function_2201d3f3d7ab07a7() > 20) {
       move_speed = "wander_agitated";
     }
 
     function_f1e5805da192a1ef(move_speed, "wander", 22);
-    self.var_274e0c05ec5c89c0 = 0;
-    self.var_d28e54645050df58 = 0;
+    self.collide_with_ai_allies = 0;
+    self.script_pushable_by_ai = 0;
     self.script_pushable = 0;
 
     if(self.turnrate > 0 && self.turnrate * var_22af11ae0bd93d28 > 0) {
@@ -148,9 +148,9 @@ function private wander_listener() {
 
     self waittill("wander_end");
     function_f1e5805da192a1ef(undefined, "wander");
-    self.var_274e0c05ec5c89c0 = var_43a41b8e241075d9;
-    self.var_d28e54645050df58 = var_f1a9200c39365c50;
-    self.var_d28e54645050df58 = var_e7559f0d8df0d81b;
+    self.collide_with_ai_allies = var_43a41b8e241075d9;
+    self.script_pushable_by_ai = var_f1a9200c39365c50;
+    self.script_pushable_by_ai = var_e7559f0d8df0d81b;
 
     if(self.turnrate > 0 && self.turnrate / var_22af11ae0bd93d28 > 0) {
       self.turnrate /= var_22af11ae0bd93d28;

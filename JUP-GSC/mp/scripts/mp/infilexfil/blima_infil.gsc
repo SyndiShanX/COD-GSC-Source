@@ -20,7 +20,7 @@
 #namespace blima_infil;
 
 function function_6cb969a7647dc10f(subtype) {
-  function_f1aed36ab4598ea("blima_infil");
+  snd_transient_load("blima_infil");
   thread function_f764364c2ac0250d();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -286,16 +286,16 @@ function infilthink(team, scene_name) {
 
 function ropethink(scene_name) {
   self.linktoent.var_7d1a90814c8500ff = self.linktoent spawn_anim_model("rope_l", "origin_animate_jnt", "equipment_fast_rope_wm_01_infil_heli_l");
-  self.linktoent.var_7d1aa6814c853161 = self.linktoent spawn_anim_model("rope_r", "origin_animate_jnt", "equipment_fast_rope_wm_01_infil_heli_l");
+  self.linktoent.roper = self.linktoent spawn_anim_model("rope_r", "origin_animate_jnt", "equipment_fast_rope_wm_01_infil_heli_l");
   self.linktoent.var_7d1a90814c8500ff anim_first_frame_solo(self.linktoent.var_7d1a90814c8500ff, "blima_infil");
-  self.linktoent.var_7d1aa6814c853161 anim_first_frame_solo(self.linktoent.var_7d1aa6814c853161, "blima_infil");
+  self.linktoent.roper anim_first_frame_solo(self.linktoent.roper, "blima_infil");
   self.linktoent thread anim_single_solo(self.linktoent.var_7d1a90814c8500ff, "blima_infil", "origin_animate_jnt");
-  self.linktoent thread anim_single_solo(self.linktoent.var_7d1aa6814c853161, "blima_infil", "origin_animate_jnt");
+  self.linktoent thread anim_single_solo(self.linktoent.roper, "blima_infil", "origin_animate_jnt");
   duration = getanimlength(level.scr_anim[self.linktoent.var_7d1a90814c8500ff.animname]["blima_infil"]);
   wait duration;
   self.linktoent notify("rope_drop");
   self.linktoent.var_7d1a90814c8500ff unlink();
-  self.linktoent.var_7d1aa6814c853161 unlink();
+  self.linktoent.roper unlink();
 }
 
 function vehiclethink(team, scene_node, scene_name, extra_crew) {
@@ -736,12 +736,12 @@ function function_f764364c2ac0250d() {
 
   if(level.mapname == "mp_jup_launchfacility") {
     wait 70;
-    function_f4e0ff5cb899686d("blima_infil");
+    snd_transient_unload("blima_infil");
     return;
   }
 
   wait 56;
-  function_f4e0ff5cb899686d("blima_infil");
+  snd_transient_unload("blima_infil");
 }
 
 function function_6158ef142e9bd640() {

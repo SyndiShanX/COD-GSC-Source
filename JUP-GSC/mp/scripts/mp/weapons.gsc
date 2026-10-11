@@ -467,16 +467,16 @@ function watchchangeweapon() {
   self endon("joined_spectators");
   self endon("faux_spawn");
   level endon("game_ended");
-  var_8d9fb0db0c319184 = spawnStruct();
+  weaponcallbackparams = spawnStruct();
 
   for(lastweapon = undefined; true; lastweapon = objweapon) {
     objweapon = self getcurrentweapon();
 
     if(isDefined(objweapon)) {
       dochangeweapon(objweapon);
-      var_8d9fb0db0c319184.lastweapon = lastweapon;
-      var_8d9fb0db0c319184.weapon = objweapon;
-      callback::callback("player_weapon_change", var_8d9fb0db0c319184);
+      weaponcallbackparams.lastweapon = lastweapon;
+      weaponcallbackparams.weapon = objweapon;
+      callback::callback("player_weapon_change", weaponcallbackparams);
     }
 
     self waittill("weapon_change");
@@ -746,7 +746,7 @@ function function_c49a0d832ace8e5e() {
       weaponname = weapon::getweaponrootname(self.lastweaponobj);
     }
 
-    currenttime = namespace_c45ac99c4997e722::function_1b15450e092933cf(gettime()) / 1000;
+    currenttime = telemetry_utils::function_1b15450e092933cf(gettime()) / 1000;
     initpersstat("currentWeaponStartTime");
     totaltime = currenttime - scripts\mp\utility\stats::getpersstat("currentWeaponStartTime");
     var_7e2c53b0bcf117d9 = spawnStruct();
@@ -756,7 +756,7 @@ function function_c49a0d832ace8e5e() {
     var_7e2c53b0bcf117d9.incvalue = totaltime;
     var_7e2c53b0bcf117d9.variantid = getweaponvariantindex(self.lastweaponobj);
     var_7e2c53b0bcf117d9.weaponobj = self.lastweaponobj;
-    namespace_c45ac99c4997e722::function_80820d6d364c1836("callback_update_weapon_stats", var_7e2c53b0bcf117d9);
+    telemetry_utils::function_80820d6d364c1836("callback_update_weapon_stats", var_7e2c53b0bcf117d9);
     self.pers["currentWeaponStartTime"] = currenttime;
   }
 }
@@ -818,8 +818,8 @@ function savealtstates() {
   foreach(objweapon in weapons) {
     if(!isundefinedweapon(self.primaryweaponobj) && objweapon == self.primaryweaponobj || !isundefinedweapon(self.secondaryweaponobj) && objweapon == self.secondaryweaponobj) {
       if(shouldweaponsavealtstate(objweapon) && self isalternatemode(objweapon, 1)) {
-        var_366b0ecc2f28aead = weapon::getcompleteweaponnamenoalt(objweapon);
-        self.pers["altStates"][var_366b0ecc2f28aead] = 1;
+        fullweaponstring = weapon::getcompleteweaponnamenoalt(objweapon);
+        self.pers["altStates"][fullweaponstring] = 1;
       }
     }
   }
@@ -832,24 +832,24 @@ function savetogglescopestates() {
 
   foreach(objweapon in weapons) {
     if(!isundefinedweapon(self.primaryweaponobj) && objweapon == self.primaryweaponobj || !isundefinedweapon(self.secondaryweaponobj) && objweapon == self.secondaryweaponobj) {
-      var_366b0ecc2f28aead = undefined;
+      fullweaponstring = undefined;
 
       if(isDefined(objweapon.scope) && istogglescope(objweapon, objweapon.scope)) {
-        var_366b0ecc2f28aead = weapon::getcompleteweaponnamenoalt(objweapon);
-        self.pers["toggleScopeStates"][var_366b0ecc2f28aead] = self gethybridscopestate(objweapon);
+        fullweaponstring = weapon::getcompleteweaponnamenoalt(objweapon);
+        self.pers["toggleScopeStates"][fullweaponstring] = self gethybridscopestate(objweapon);
       }
 
       if(self function_f033d1a86348766a(objweapon)) {
-        if(!isDefined(var_366b0ecc2f28aead)) {
-          var_366b0ecc2f28aead = weapon::getcompleteweaponnamenoalt(objweapon);
+        if(!isDefined(fullweaponstring)) {
+          fullweaponstring = weapon::getcompleteweaponnamenoalt(objweapon);
         }
 
-        self.pers["tacticalADSStates"][var_366b0ecc2f28aead] = self function_c603bed3b1c8d11(objweapon, 1);
+        self.pers["tacticalADSStates"][fullweaponstring] = self function_c603bed3b1c8d11(objweapon, 1);
 
         if(!isalive(self) && self function_ad155da412bac439()) {
-          if(self.pers["tacticalADSStates"][var_366b0ecc2f28aead] != 0) {
+          if(self.pers["tacticalADSStates"][fullweaponstring] != 0) {
             self function_9378bae9f62493fe();
-            self.pers["tacticalADSStates"][var_366b0ecc2f28aead] = 0;
+            self.pers["tacticalADSStates"][fullweaponstring] = 0;
           }
         }
       }
@@ -858,16 +858,16 @@ function savetogglescopestates() {
 }
 
 function updatetogglescopestate(objweapon) {
-  var_366b0ecc2f28aead = weapon::getcompleteweaponnamenoalt(objweapon);
+  fullweaponstring = weapon::getcompleteweaponnamenoalt(objweapon);
 
-  if(isDefined(scripts\mp\utility\stats::getpersstat("toggleScopeStates")) && isDefined(scripts\mp\utility\stats::getpersstat("toggleScopeStates")[var_366b0ecc2f28aead])) {
-    self sethybridscopestate(objweapon, scripts\mp\utility\stats::getpersstat("toggleScopeStates")[var_366b0ecc2f28aead]);
+  if(isDefined(scripts\mp\utility\stats::getpersstat("toggleScopeStates")) && isDefined(scripts\mp\utility\stats::getpersstat("toggleScopeStates")[fullweaponstring])) {
+    self sethybridscopestate(objweapon, scripts\mp\utility\stats::getpersstat("toggleScopeStates")[fullweaponstring]);
   } else if(function_dab7bc436f0b0bde(objweapon)) {
     self sethybridscopestate(objweapon, 1);
   }
 
-  if(isDefined(scripts\mp\utility\stats::getpersstat("tacticalADSStates")) && isDefined(scripts\mp\utility\stats::getpersstat("tacticalADSStates")[var_366b0ecc2f28aead]) && self function_f033d1a86348766a(objweapon)) {
-    self function_ed96bc79d7607d3d(objweapon, scripts\mp\utility\stats::getpersstat("tacticalADSStates")[var_366b0ecc2f28aead]);
+  if(isDefined(scripts\mp\utility\stats::getpersstat("tacticalADSStates")) && isDefined(scripts\mp\utility\stats::getpersstat("tacticalADSStates")[fullweaponstring]) && self function_f033d1a86348766a(objweapon)) {
+    self function_ed96bc79d7607d3d(objweapon, scripts\mp\utility\stats::getpersstat("tacticalADSStates")[fullweaponstring]);
   }
 }
 
@@ -883,9 +883,9 @@ function updatesavedaltstate(objweapon) {
   assertex(!objweapon.isalternate, "<dev string:x1c>");
 
   if(isDefined(self.pers["altStates"]) && istrue(objweapon.hasalternate)) {
-    var_366b0ecc2f28aead = weapon::getcompleteweaponnamenoalt(objweapon);
+    fullweaponstring = weapon::getcompleteweaponnamenoalt(objweapon);
 
-    if(isDefined(self.pers["altStates"][var_366b0ecc2f28aead]) && self.pers["altStates"][var_366b0ecc2f28aead]) {
+    if(isDefined(self.pers["altStates"][fullweaponstring]) && self.pers["altStates"][fullweaponstring]) {
       objweapon = objweapon getaltweapon();
     }
   }
@@ -898,7 +898,7 @@ function istogglescope(weapon, attachment) {
     return false;
   }
 
-  basetype = function_7c612ac92ba98dcb(weapon, attachment);
+  basetype = getattachmentbasetype(weapon, attachment);
   return basetype == "hybrid";
 }
 
@@ -917,7 +917,7 @@ function shouldattachmentsavealtstate(objweapon, attachunique) {
 }
 
 function isattachmentselectfire(weapon, attachment) {
-  basetype = function_7c612ac92ba98dcb(weapon, attachment);
+  basetype = getattachmentbasetype(weapon, attachment);
   return basetype == "selectfire";
 }
 
@@ -1786,10 +1786,10 @@ function addattachmenttoweapon(newweapon, var_effb4ae1788a8b10) {
   }
 
   hasnvg = scripts\cp_mp\utility\game_utility::function_d2d2b803a7b741a4();
-  attachment1slot = function_4add228b999c26aa(newweapon, var_effb4ae1788a8b10);
+  attachment1slot = getattachmentslot(newweapon, var_effb4ae1788a8b10);
 
   foreach(idx, a in attachments) {
-    attachment2slot = function_4add228b999c26aa(newweapon, attachments[idx]);
+    attachment2slot = getattachmentslot(newweapon, attachments[idx]);
 
     if(attachment1slot == attachment2slot && attachment1slot != "other") {
       attachments[idx] = var_effb4ae1788a8b10;
@@ -1801,20 +1801,20 @@ function addattachmenttoweapon(newweapon, var_effb4ae1788a8b10) {
 }
 
 function function_71dc088dc384ef8d(weaponname, numattachments, var_a4d5e0f6b90df7eb) {
-  var_72672cd81ec1093d = weaponname;
+  weapontogive = weaponname;
   newweaponobj = undefined;
 
   if(!isweapon(weaponname)) {
-    var_72672cd81ec1093d = makeweapon(weaponname);
+    weapontogive = makeweapon(weaponname);
   }
 
-  attachments = function_8df87e6b1d13c15a(var_72672cd81ec1093d, numattachments, var_a4d5e0f6b90df7eb);
+  attachments = function_8df87e6b1d13c15a(weapontogive, numattachments, var_a4d5e0f6b90df7eb);
 
   foreach(attachment in attachments) {
-    newweaponobj = addattachmenttoweapon(var_72672cd81ec1093d, attachment);
+    newweaponobj = addattachmenttoweapon(weapontogive, attachment);
 
     if(isDefined(newweaponobj)) {
-      var_72672cd81ec1093d = newweaponobj;
+      weapontogive = newweaponobj;
     }
 
     if(!isDefined(newweaponobj)) {
@@ -1822,7 +1822,7 @@ function function_71dc088dc384ef8d(weaponname, numattachments, var_a4d5e0f6b90df
     }
   }
 
-  return var_72672cd81ec1093d;
+  return weapontogive;
 }
 
 function function_8df87e6b1d13c15a(weaponobj, numattachments, var_a4d5e0f6b90df7eb, excludeslots, minpriority) {
@@ -1851,7 +1851,7 @@ function function_8df87e6b1d13c15a(weaponobj, numattachments, var_a4d5e0f6b90df7
         var_6121d10df35555a6 = [];
 
         foreach(attachment in attachment_array) {
-          attachpriority = function_1dd1f56bc3d72b7e(var_e4d2b96bef75b948, attachment);
+          attachpriority = getattachmentslotpriority(var_e4d2b96bef75b948, attachment);
 
           if(attachpriority < minpriority) {
             continue;
@@ -1989,12 +1989,12 @@ function isgraverobberattachment(weapon, attachmentbasename) {
 function notifyuiofpickedupweapon() {}
 
 function itemremoveammofromaltmodes() {
-  var_b2cac67dce789126 = getitemweaponname();
-  var_f3a75b200cedf31f = weaponaltweaponname(var_b2cac67dce789126);
+  origweapname = getitemweaponname();
+  curweapname = weaponaltweaponname(origweapname);
 
-  for(altindex = 1; var_f3a75b200cedf31f != "none" && var_f3a75b200cedf31f != var_b2cac67dce789126; altindex++) {
+  for(altindex = 1; curweapname != "none" && curweapname != origweapname; altindex++) {
     self itemweaponsetammo(0, 0, 0, altindex);
-    var_f3a75b200cedf31f = weaponaltweaponname(var_f3a75b200cedf31f);
+    curweapname = weaponaltweaponname(curweapname);
   }
 }
 
@@ -2194,10 +2194,10 @@ function onscavengerbagpickup(player) {
     player function_722431104048241d(player.origin);
 
     if(istrue(level.teambased)) {
-      var_1ff5e84e31eebd6b = scripts\mp\utility\player::getplayersinradius(player.origin, 700, player.team, player);
+      allylist = scripts\mp\utility\player::getplayersinradius(player.origin, 700, player.team, player);
       var_ddccd08a9a9f2c00 = [];
 
-      foreach(ally in var_1ff5e84e31eebd6b) {
+      foreach(ally in allylist) {
         if(isDefined(ally.var_78ede70519cfb53b)) {
           var_ddccd08a9a9f2c00 = array_combine_unique(var_ddccd08a9a9f2c00, ally.var_78ede70519cfb53b);
 
@@ -2655,9 +2655,9 @@ function onweaponfired(objweapon, missileent) {
       scripts\mp\utility\stats::incpersstat("shotsFired", 1);
     }
 
-    var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+    fullweaponstring = getcompleteweaponname(objweapon);
 
-    if(issubstr(var_366b0ecc2f28aead, "jup_jp22_la_dromeo")) {
+    if(issubstr(fullweaponstring, "jup_jp22_la_dromeo")) {
       self setweaponammoclip(objweapon, 999);
       var_a2cfbc2c4f504a0e = getgametype() == "ob";
 
@@ -2677,25 +2677,25 @@ function onweaponfired(objweapon, missileent) {
 
 function processactiveshots(objweapon, missileent) {
   self endon("disconnect");
-  var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
-  self notify("processActiveShots_" + var_366b0ecc2f28aead);
-  self endon("processActiveShots_" + var_366b0ecc2f28aead);
+  fullweaponstring = getcompleteweaponname(objweapon);
+  self notify("processActiveShots_" + fullweaponstring);
+  self endon("processActiveShots_" + fullweaponstring);
 
   if(!isDefined(self.activeshots)) {
     self.activeshots = [];
   }
 
-  if(!isDefined(self.activeshots[var_366b0ecc2f28aead])) {
-    self.activeshots[var_366b0ecc2f28aead] = 0;
+  if(!isDefined(self.activeshots[fullweaponstring])) {
+    self.activeshots[fullweaponstring] = 0;
   }
 
-  self.activeshots[var_366b0ecc2f28aead]++;
+  self.activeshots[fullweaponstring]++;
 
   if(!isDefined(self.activemissiles)) {
     self.activemissiles = [];
   }
 
-  if(issubstr(var_366b0ecc2f28aead, "jup_jp22_la_dromeo") && !objweapon hasattachment("jup_dromeo_rec_amp")) {
+  if(issubstr(fullweaponstring, "jup_jp22_la_dromeo") && !objweapon hasattachment("jup_dromeo_rec_amp")) {
     self setweaponammoclip(objweapon, 999);
     var_a2cfbc2c4f504a0e = getgametype() == "ob";
 
@@ -2707,22 +2707,22 @@ function processactiveshots(objweapon, missileent) {
   }
 
   if(isDefined(missileent)) {
-    if(!isDefined(self.activemissiles[var_366b0ecc2f28aead])) {
-      self.activemissiles[var_366b0ecc2f28aead] = [];
+    if(!isDefined(self.activemissiles[fullweaponstring])) {
+      self.activemissiles[fullweaponstring] = [];
     }
 
-    self.activemissiles[var_366b0ecc2f28aead][self.activemissiles[var_366b0ecc2f28aead].size] = missileent;
+    self.activemissiles[fullweaponstring][self.activemissiles[fullweaponstring].size] = missileent;
   }
 
   setweaponstat(objweapon, 1, "shots");
   scripts\mp\utility\stats::incpersstat("shotsFired", 1);
   thread namespace_6b49ddb858f34366::function_298b6dd0b26f13bd();
   thread namespace_6b49ddb858f34366::function_2efd6926efd58b49(0);
-  watchformiss(objweapon, var_366b0ecc2f28aead);
-  totalshots = self.activeshots[var_366b0ecc2f28aead];
-  hitshots = isDefined(self.hits[var_366b0ecc2f28aead]) ? self.hits[var_366b0ecc2f28aead] : 0;
-  var_a35ea66201ac92e8 = isDefined(self.agenthits[var_366b0ecc2f28aead]) ? self.agenthits[var_366b0ecc2f28aead] : 0;
-  var_202acce87e9d7f6 = isDefined(self.playerhits[var_366b0ecc2f28aead]) ? self.playerhits[var_366b0ecc2f28aead] : 0;
+  watchformiss(objweapon, fullweaponstring);
+  totalshots = self.activeshots[fullweaponstring];
+  hitshots = isDefined(self.hits[fullweaponstring]) ? self.hits[fullweaponstring] : 0;
+  var_a35ea66201ac92e8 = isDefined(self.agenthits[fullweaponstring]) ? self.agenthits[fullweaponstring] : 0;
+  var_202acce87e9d7f6 = isDefined(self.playerhits[fullweaponstring]) ? self.playerhits[fullweaponstring] : 0;
   missedshots = totalshots - hitshots;
 
   if(weaponcanstoreaccuracystats(objweapon)) {
@@ -2740,24 +2740,24 @@ function processactiveshots(objweapon, missileent) {
 
   scripts\mp\events::shotmissed(totalshots, hitshots);
   scripts\mp\events::function_cf1cfbbec7d07d44(totalshots, missedshots);
-  self.activeshots[var_366b0ecc2f28aead] = 0;
-  self.hits[var_366b0ecc2f28aead] = 0;
-  self.agenthits[var_366b0ecc2f28aead] = 0;
-  self.playerhits[var_366b0ecc2f28aead] = 0;
+  self.activeshots[fullweaponstring] = 0;
+  self.hits[fullweaponstring] = 0;
+  self.agenthits[fullweaponstring] = 0;
+  self.playerhits[fullweaponstring] = 0;
 
-  if(isDefined(self.activemissiles[var_366b0ecc2f28aead])) {
-    self.activemissiles[var_366b0ecc2f28aead] = [];
+  if(isDefined(self.activemissiles[fullweaponstring])) {
+    self.activemissiles[fullweaponstring] = [];
   }
 }
 
-function private watchformiss(objweapon, var_366b0ecc2f28aead) {
+function private watchformiss(objweapon, fullweaponstring) {
   self endon("disconnect");
 
-  if(isDefined(self.activemissiles[var_366b0ecc2f28aead])) {
+  if(isDefined(self.activemissiles[fullweaponstring])) {
     while(true) {
       activemissiles = 0;
 
-      foreach(missile in self.activemissiles[var_366b0ecc2f28aead]) {
+      foreach(missile in self.activemissiles[fullweaponstring]) {
         if(isDefined(missile)) {
           activemissiles++;
         }
@@ -2790,23 +2790,23 @@ function watchfornearmisswhizby() {
 function checkhit(objweapon, victim, shitloc, idamage) {
   self endon("disconnect");
 
-  if(function_483cc81bff18273b(self)) {
+  if(issimulationplayer(self)) {
     return;
   }
 
-  var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+  fullweaponstring = getcompleteweaponname(objweapon);
 
   if(objweapon.isalternate) {
     attachments = getweaponattachments(objweapon);
 
     if(array_contains(attachments, "shotgun") || array_contains(attachments, "gl") || array_contains(attachments, "glsmoke") || array_contains(attachments, "glgas") || array_contains(attachments, "glconc") || array_contains(attachments, "glflash") || array_contains(attachments, "glincendiary") || array_contains(attachments, "glsemtex") || array_contains(attachments, "glsnap")) {
-      self.hits[var_366b0ecc2f28aead] = 1;
+      self.hits[fullweaponstring] = 1;
 
       if(isDefined(victim)) {
         if(isagent(victim)) {
-          self.agenthits[var_366b0ecc2f28aead] = 1;
+          self.agenthits[fullweaponstring] = 1;
         } else if(isPlayer(victim)) {
-          self.playerhits[var_366b0ecc2f28aead] = 1;
+          self.playerhits[fullweaponstring] = 1;
         }
       }
     }
@@ -2822,16 +2822,16 @@ function checkhit(objweapon, victim, shitloc, idamage) {
     return;
   }
 
-  if(!isDefined(self.hits[var_366b0ecc2f28aead])) {
-    self.hits[var_366b0ecc2f28aead] = 0;
+  if(!isDefined(self.hits[fullweaponstring])) {
+    self.hits[fullweaponstring] = 0;
   }
 
-  if(!isDefined(self.agenthits[var_366b0ecc2f28aead])) {
-    self.agenthits[var_366b0ecc2f28aead] = 0;
+  if(!isDefined(self.agenthits[fullweaponstring])) {
+    self.agenthits[fullweaponstring] = 0;
   }
 
-  if(!isDefined(self.playerhits[var_366b0ecc2f28aead])) {
-    self.playerhits[var_366b0ecc2f28aead] = 0;
+  if(!isDefined(self.playerhits[fullweaponstring])) {
+    self.playerhits[fullweaponstring] = 0;
   }
 
   switch (weaponclass(objweapon)) {
@@ -2840,42 +2840,42 @@ function checkhit(objweapon, victim, shitloc, idamage) {
     case #"hash_8cdaf2e4ecfe5b51":
     case #"hash_900cb96c552c5e8e":
     case #"hash_fa24dff6bd60a12d":
-      self.hits[var_366b0ecc2f28aead]++;
+      self.hits[fullweaponstring]++;
 
       if(isagent(victim)) {
-        self.agenthits[var_366b0ecc2f28aead]++;
+        self.agenthits[fullweaponstring]++;
       } else if(isPlayer(victim)) {
-        self.playerhits[var_366b0ecc2f28aead]++;
+        self.playerhits[fullweaponstring]++;
       }
 
       break;
     case #"hash_690c0d6a821b42e":
-      self.hits[var_366b0ecc2f28aead] = 1;
+      self.hits[fullweaponstring] = 1;
 
       if(isagent(victim)) {
-        self.agenthits[var_366b0ecc2f28aead] = 1;
+        self.agenthits[fullweaponstring] = 1;
       } else if(isPlayer(victim)) {
-        self.playerhits[var_366b0ecc2f28aead] = 1;
+        self.playerhits[fullweaponstring] = 1;
       }
 
       break;
     case #"hash_61e969dacaaf9881":
-      self.hits[var_366b0ecc2f28aead] = 1;
+      self.hits[fullweaponstring] = 1;
 
       if(isagent(victim)) {
-        self.agenthits[var_366b0ecc2f28aead] = 1;
+        self.agenthits[fullweaponstring] = 1;
       } else if(isPlayer(victim)) {
-        self.playerhits[var_366b0ecc2f28aead] = 1;
+        self.playerhits[fullweaponstring] = 1;
       }
 
       break;
     case #"hash_e224d0b635d0dadd":
-      self.hits[var_366b0ecc2f28aead] = 1;
+      self.hits[fullweaponstring] = 1;
 
       if(isagent(victim)) {
-        self.agenthits[var_366b0ecc2f28aead] = 1;
+        self.agenthits[fullweaponstring] = 1;
       } else if(isPlayer(victim)) {
-        self.playerhits[var_366b0ecc2f28aead] = 1;
+        self.playerhits[fullweaponstring] = 1;
       }
 
       break;
@@ -2884,27 +2884,27 @@ function checkhit(objweapon, victim, shitloc, idamage) {
   }
 
   if(isriotshield(objweapon.basename) || objweapon.basename == "iw8_knife_mp") {
-    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_366b0ecc2f28aead, self.hits[var_366b0ecc2f28aead], "hits");
-    self.hits[var_366b0ecc2f28aead] = 0;
-    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_366b0ecc2f28aead, self.agenthits[var_366b0ecc2f28aead], "ai_hits");
-    self.agenthits[var_366b0ecc2f28aead] = 0;
-    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_366b0ecc2f28aead, self.playerhits[var_366b0ecc2f28aead], "player_hits");
-    self.playerhits[var_366b0ecc2f28aead] = 0;
+    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(fullweaponstring, self.hits[fullweaponstring], "hits");
+    self.hits[fullweaponstring] = 0;
+    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(fullweaponstring, self.agenthits[fullweaponstring], "ai_hits");
+    self.agenthits[fullweaponstring] = 0;
+    thread scripts\mp\gamelogic::threadedsetweaponstatbyname(fullweaponstring, self.playerhits[fullweaponstring], "player_hits");
+    self.playerhits[fullweaponstring] = 0;
   }
 
   if(!var_881576b7106f54ce) {
     scripts\mp\codcasterclientmatchdata::function_1882f80b14421089(1, 1);
   }
 
-  if(!isDefined(self.lasthittime[var_366b0ecc2f28aead])) {
-    self.lasthittime[var_366b0ecc2f28aead] = 0;
+  if(!isDefined(self.lasthittime[fullweaponstring])) {
+    self.lasthittime[fullweaponstring] = 0;
   }
 
-  if(self.lasthittime[var_366b0ecc2f28aead] == gettime()) {
+  if(self.lasthittime[fullweaponstring] == gettime()) {
     return;
   }
 
-  self.lasthittime[var_366b0ecc2f28aead] = gettime();
+  self.lasthittime[fullweaponstring] = gettime();
 
   if(onlinestatsenabled()) {
     totalshots = getplayerstat("combatStats", "totalShots");
@@ -3070,7 +3070,7 @@ function watchgrenadethrows() {
   grenadeused(grenade);
 
   if(isDefined(grenade)) {
-    grenade function_5226227bce83ebe9(3, self.team);
+    grenade setentityhudoutlinedata(3, self.team);
   }
 }
 
@@ -3124,10 +3124,10 @@ function grenadeused(grenade) {
 
       if(blueprintindex > 0) {
         tableinfo = getequipmenttableinfo(grenade.equipmentref);
-        var_9b32d1936831f5aa = function_71efed8bf57f1d39(tableinfo.bundle, blueprintindex);
+        genericblueprintname = function_71efed8bf57f1d39(tableinfo.bundle, blueprintindex);
 
-        if(isDefined(var_9b32d1936831f5aa)) {
-          self function_9bc014e7042e8339(var_9b32d1936831f5aa);
+        if(isDefined(genericblueprintname)) {
+          self function_9bc014e7042e8339(genericblueprintname);
         }
       }
     }
@@ -3193,7 +3193,7 @@ function grenadeused(grenade) {
         thread scripts\mp\equipment\c4::c4_used(grenade);
         break;
       case #"hash_3c2d21aea30374d4":
-        thread function_f3bb4f4911a1beb2("emp_grenade", "emp_grenade_used", grenade);
+        thread callsharedfunc("emp_grenade", "emp_grenade_used", grenade);
         break;
       case #"hash_42dcb6ce7ecb709c":
         thread scripts\mp\equipment\snapshot_grenade::snapshot_grenade_used(grenade, 0);
@@ -3254,7 +3254,7 @@ function grenadeused(grenade) {
       case #"hash_7983828e72e83a3e":
       case #"hash_cedad6d52b2b36c2":
         if(issharedfuncdefined("super_hb_sensor", "hb_sensor_used")) {
-          thread function_f3bb4f4911a1beb2("super_hb_sensor", "hb_sensor_used", grenade);
+          thread callsharedfunc("super_hb_sensor", "hb_sensor_used", grenade);
         }
 
         break;
@@ -3311,7 +3311,7 @@ function grenadeused(grenade) {
         break;
       case #"hash_2994f46753d1edff":
         if(issharedfuncdefined("equip_aethercounter", "used")) {
-          thread function_f3bb4f4911a1beb2("equip_aethercounter", "used", grenade);
+          thread callsharedfunc("equip_aethercounter", "used", grenade);
         }
 
         break;
@@ -3362,7 +3362,7 @@ function grenadeused(grenade) {
         thread scripts\cp_mp\equipment\thermal_phone::function_230403b8cf5ea1e8(grenade);
         break;
       case #"hash_444e24c19329aec0":
-        thread scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onFlarePlaced", grenade);
+        thread scripts\engine\utility::callsharedfunc("pmc_missions", "onFlarePlaced", grenade);
         break;
       case #"hash_151a2c18538b6dc4":
         thread scripts\mp\equipment\spycam::function_ba4f176b24eb2f54(grenade);
@@ -3416,7 +3416,7 @@ function grenadeused(grenade) {
         thread scripts\mp\supers\vehicle_drop::function_604ed6f2f8323ea6(grenade);
         break;
       case #"hash_d111e0af321b440f":
-        thread function_f3bb4f4911a1beb2("equip_tracker_mine", "tracker_mine_used", grenade);
+        thread callsharedfunc("equip_tracker_mine", "tracker_mine_used", grenade);
         break;
       default:
         if(isDefined(level.ongrenadeused)) {
@@ -3766,8 +3766,8 @@ function function_d24bf01d284ef941(objweapon) {
     return false;
   }
 
-  var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
-  return istrue(issubstr(var_366b0ecc2f28aead, "jup_jp22_la_dromeo"));
+  fullweaponstring = getcompleteweaponname(objweapon);
+  return istrue(issubstr(fullweaponstring, "jup_jp22_la_dromeo"));
 }
 
 function movingplatformdetonate(data) {
@@ -3994,22 +3994,22 @@ function equipmenthit(owner, attacker, objweapon, meansofdeath) {
       return;
     }
 
-    var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+    fullweaponstring = getcompleteweaponname(objweapon);
 
     if(!isDefined(attacker.lasthittime)) {
       attacker.lasthittime = [];
     }
 
-    if(!isDefined(attacker.lasthittime[var_366b0ecc2f28aead])) {
-      attacker.lasthittime[var_366b0ecc2f28aead] = 0;
+    if(!isDefined(attacker.lasthittime[fullweaponstring])) {
+      attacker.lasthittime[fullweaponstring] = 0;
     }
 
-    if(attacker.lasthittime[var_366b0ecc2f28aead] == gettime()) {
+    if(attacker.lasthittime[fullweaponstring] == gettime()) {
       return;
     }
 
-    attacker.lasthittime[var_366b0ecc2f28aead] = gettime();
-    attacker thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_366b0ecc2f28aead, 1, "hits");
+    attacker.lasthittime[fullweaponstring] = gettime();
+    attacker thread scripts\mp\gamelogic::threadedsetweaponstatbyname(fullweaponstring, 1, "hits");
 
     if(onlinestatsenabled()) {
       totalshots = attacker getplayerstat("combatStats", "totalShots");
@@ -4146,7 +4146,7 @@ function private function_1d982537b9dcb924(player) {
   }
 
   if(issharedfuncdefined("game", "isCommonItemEnabled")) {
-    if(!function_f3bb4f4911a1beb2("game", "isCommonItemEnabled")) {
+    if(!callsharedfunc("game", "isCommonItemEnabled")) {
       return false;
     }
 
@@ -4210,7 +4210,7 @@ function makeexplosiveusabletag(tagname, isgrenade) {
 
       owner thread scripts\mp\equipment\c4::c4_resetaltdetonpickup();
       owner notify("scavenged_ammo", weaponname);
-      attachments = function_6527364c1ecca6c6(weaponname);
+      attachments = getweapondefaultattachments(weaponname);
       objweapon = makeweapon(weaponname, attachments);
     }
 
@@ -4238,12 +4238,12 @@ function makeexplosiveusabletag(tagname, isgrenade) {
         } else if(isDefined(level.onnewequipmentpickup)) {
           [[level.onnewequipmentpickup]](self.owner, equipmentref);
         } else if(function_1d982537b9dcb924(self.owner)) {
-          itembundlename = function_f3bb4f4911a1beb2("game", "getItemBundleNameFromRef", equipmentref);
+          itembundlename = callsharedfunc("game", "getItemBundleNameFromRef", equipmentref);
           itembundle = getscriptbundle("itemspawnentry:" + itembundlename);
           fakeitem = spawnStruct();
           fakeitem.count = 1;
           fakeitem.type = itembundle.scriptable;
-          self.owner function_f3bb4f4911a1beb2("game", "obtainItemEquip", fakeitem, 0);
+          self.owner callsharedfunc("game", "obtainItemEquip", fakeitem, 0);
         }
       }
     }
@@ -4316,18 +4316,18 @@ function setexplosiveusablehintstring(weaponname) {
   }
 }
 
-function explosivehandlemovers(parent, var_b5f7c0806632d99b) {
+function explosivehandlemovers(parent, usedefaultinvalidparentcallback) {
   data = spawnStruct();
   data.linkparent = parent;
   data.deathoverridecallback = &movingplatformdetonate;
   data.endonstring = "death";
 
   if(scripts\cp_mp\utility\train_utility::is_train_ent(parent)) {
-    data.var_49cb2c45d3230ed8 = 1;
-    self function_7e73001e97fe87b9(1);
+    data.plantedontrain = 1;
+    self setmissileantilagged(1);
   }
 
-  if(!isDefined(var_b5f7c0806632d99b) || !var_b5f7c0806632d99b) {
+  if(!isDefined(usedefaultinvalidparentcallback) || !usedefaultinvalidparentcallback) {
     data.invalidparentoverridecallback = &scripts\mp\movers::moving_platform_empty_func;
   }
 
@@ -4882,8 +4882,8 @@ function updatemovespeedscale() {
     speedperc += self.fastcrouchspeedmod;
   }
 
-  if(!isDefined(self.playerstreakspeedscale) && isDefined(self.var_740c1298f33f5910)) {
-    speedperc += self.var_740c1298f33f5910;
+  if(!isDefined(self.playerstreakspeedscale) && isDefined(self.outlanderspeedmod)) {
+    speedperc += self.outlanderspeedmod;
   }
 
   if(isDefined(self.adrenalinespeed)) {
@@ -4898,8 +4898,8 @@ function updatemovespeedscale() {
     speedperc += self.var_ce58e8eff85f7366;
   }
 
-  if(isDefined(self.var_7e94104134f2f40b)) {
-    speedperc += self.var_7e94104134f2f40b;
+  if(isDefined(self.perkzombielegsspeedmod)) {
+    speedperc += self.perkzombielegsspeedmod;
   }
 
   if(isDefined(self.var_26beacac25790313)) {
@@ -5488,7 +5488,7 @@ function grenadestucktosplash(var_d658f0b6bc4fd513, stuckto) {
       player = player.owner;
     }
 
-    if(function_3cb5da19764baa3() != "JUP") {
+    if(getprojectname() != "JUP") {
       player hud_message::showsplash(var_d658f0b6bc4fd513, undefined, undefined, undefined, 1, undefined, 1);
     }
   }
@@ -5863,7 +5863,7 @@ function function_e7dbbe9220d5e27b(surfacetype) {
     surfacetype = "user_terrain_" + user_number;
   }
 
-  self function_7d738013c1cfbc9d(surfacetype);
+  self playweapondropsound(surfacetype);
 }
 
 function weapondrop_physics_timeout(time) {
@@ -6050,7 +6050,7 @@ function function_2cd4f9393314e60a() {
   }
 
   if(isjuggernaut()) {
-    function_f3bb4f4911a1beb2("hud", "showErrorMessage", "KILLSTREAKS/JUGG_CANNOT_BE_USED");
+    callsharedfunc("hud", "showErrorMessage", "KILLSTREAKS/JUGG_CANNOT_BE_USED");
     return false;
   }
 
@@ -6385,7 +6385,7 @@ function grenadeinitialize(grenade, weapon_object, tickpercent, originalowner) {
   if(isDefined(equipmentref)) {
     grenade.equipmentref = equipmentref;
     grenade.isequipment = 1;
-    grenade.bundle = equipment::function_2113b6f7cb462692(grenade.weapon_name);
+    grenade.bundle = equipment::getequipmentbundlefromweaponname(grenade.weapon_name);
 
     if(equipmentref == "equip_smoke") {
       grenade.owner stats::incpersstat("smokesUsed", 1);
@@ -6704,14 +6704,14 @@ function burnfxcorpstablefunc(corpsetable) {
 function semtex_used(grenade) {
   self endon("disconnect");
   grenade endon("death");
-  grenade.bundle = equipment::function_2113b6f7cb462692(grenade.weapon_name);
+  grenade.bundle = equipment::getequipmentbundlefromweaponname(grenade.weapon_name);
   grenade waittill("missile_stuck", stuckto);
 
   if(isPlayer(stuckto) || isagent(stuckto)) {
     thread grenadestuckto(grenade, stuckto);
 
     if(isagent(stuckto)) {
-      function_216c67ab6749137a(stuckto, undefined, "semtex_stuck");
+      addbattlechatternotify(stuckto, undefined, "semtex_stuck");
     }
 
     if(isagent(stuckto) && !istrue(stuckto.var_274d3a7704e351ef)) {
@@ -6978,14 +6978,14 @@ function function_e0780928b2591268(objweapon, missileent) {
     }
 
     if(istrue(level.var_3976c9c03dc06d9b)) {
-      foreach(var_bb19a0b11e79e6cb in level.var_fc4bb27a820f54dd.var_cd2de8814a52f22c) {
-        if(!isDefined(var_bb19a0b11e79e6cb) || !istrue(var_bb19a0b11e79e6cb.b_occupied)) {
+      foreach(redeploydrone in level.var_fc4bb27a820f54dd.var_cd2de8814a52f22c) {
+        if(!isDefined(redeploydrone) || !istrue(redeploydrone.b_occupied)) {
           continue;
         }
 
-        if(distancesquared(self.origin, var_bb19a0b11e79e6cb.origin) <= 96884649) {
-          if(self worldpointinreticle_circle(var_bb19a0b11e79e6cb.origin, 65, 90) == 1) {
-            dronetrace = ray_trace(vieweye, var_bb19a0b11e79e6cb.origin, missileent, undefined, 0, 1, 1);
+        if(distancesquared(self.origin, redeploydrone.origin) <= 96884649) {
+          if(self worldpointinreticle_circle(redeploydrone.origin, 65, 90) == 1) {
+            dronetrace = ray_trace(vieweye, redeploydrone.origin, missileent, undefined, 0, 1, 1);
 
             if(isDefined(dronetrace) && isDefined(dronetrace["scriptable"]) && isDefined(dronetrace["scriptable"].type) && dronetrace["scriptable"].type == "scriptable_redeploy_drone" && isDefined(dronetrace["scriptable"].var_3545410459b16762)) {
               var_38b853e7e5c069f8 = function_6d6af8144a5131f1(var_38b853e7e5c069f8, dronetrace["scriptable"]);
@@ -7187,7 +7187,7 @@ function function_e0780928b2591268(objweapon, missileent) {
       } else if(ent.streakname == "loitering_munition") {
         ent dodamage(10, self.origin, self, self, "MOD_EXPLOSIVE", self.currentprimaryweapon);
         data = damage_utility::packdamagedata(self, ent, 1, self.currentprimaryweapon, "MOD_EXPLOSIVE", self);
-        ent utility::function_f3bb4f4911a1beb2("loitering_munition", "loiteringMunition_droneGunEmpApplied", data);
+        ent utility::callsharedfunc("loitering_munition", "loiteringMunition_droneGunEmpApplied", data);
       }
 
       continue;
@@ -7305,12 +7305,12 @@ function function_e0780928b2591268(objweapon, missileent) {
   foreach(scriptable in var_38b853e7e5c069f8) {
     if(issubstr(scriptable.classname, "scriptable")) {
       if(scriptable.type == "ob_aethernest_cyst_scriptable") {
-        scriptable function_b85de89251e1fe76(200, self, self);
+        scriptable scriptabledodamage(200, self, self);
         continue;
       }
 
       if(scriptable.type == "jup_ob_zombie_control_spore") {
-        scriptable function_b85de89251e1fe76(200, self, self);
+        scriptable scriptabledodamage(200, self, self);
         continue;
       }
 
@@ -7643,7 +7643,7 @@ function function_aa3939ed0f60d04e(objweapon, missileent) {
   foreach(scriptable in var_38b853e7e5c069f8) {
     if(scriptable.classname == "scriptable") {
       if(scriptable.type == "ob_aethernest_cyst_scriptable") {
-        scriptable function_b85de89251e1fe76(300, self, self);
+        scriptable scriptabledodamage(300, self, self);
       }
     }
   }
@@ -7689,8 +7689,8 @@ function function_a0a176ec45783695(attacker, time) {
     self.var_85dc59c6a906819f = 1;
     thread scripts\cp_mp\emp_debuff::function_9d31a370d60f86da(self, 2);
 
-    if(isDefined(self.var_5d67315cdcf62026)) {
-      self thread[[self.var_5d67315cdcf62026]]();
+    if(isDefined(self.ksempapplycallback)) {
+      self thread[[self.ksempapplycallback]]();
     }
   } else {
     return;
@@ -7704,8 +7704,8 @@ function function_a0a176ec45783695(attacker, time) {
     self notify("emp_cleared");
     self notify("stopLauncherCheck");
 
-    if(isDefined(self.var_2ba749157b05bad7)) {
-      self[[self.var_2ba749157b05bad7]]();
+    if(isDefined(self.ksempclearcallback)) {
+      self[[self.ksempclearcallback]]();
     }
   }
 }
@@ -7716,14 +7716,14 @@ function function_258b974cf7d16877(attackingplayer) {
   self endon("object_hit_by_dronegun");
   data = damage_utility::packdamagedata(attackingplayer, self, 1, attackingplayer.currentprimaryweapon, "MOD_EXPLOSIVE", attackingplayer);
 
-  if(isDefined(self.var_5d67315cdcf62026)) {
-    self thread[[self.var_5d67315cdcf62026]](data);
+  if(isDefined(self.ksempapplycallback)) {
+    self thread[[self.ksempapplycallback]](data);
   }
 
   wait 5;
 
-  if(isDefined(self.var_2ba749157b05bad7)) {
-    self thread[[self.var_2ba749157b05bad7]](data);
+  if(isDefined(self.ksempclearcallback)) {
+    self thread[[self.ksempclearcallback]](data);
   }
 }
 

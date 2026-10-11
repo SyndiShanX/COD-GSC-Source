@@ -64,7 +64,7 @@ function function_f1918f2fce663b2c() {
   return isDefined(player) && istrue(player.wasingulag);
 }
 
-function function_8f0e6614368f64c2() {
+function isplayerwaitingresurgencerespawn() {
   player = self;
   return isDefined(player) && isDefined(player.respawndelay) && player.respawndelay > 0;
 }
@@ -512,29 +512,29 @@ function packstatintoextrainfo(value, bitoffset, bitwidth, infoindex) {
   infovalues = [player.extrascore0, player.extrascore1, player.extrascore2, player.extrascore3, player.extrascore4, player.extrascore5];
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (value &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
+  invertedmask = ~(mask << bitoffset);
   prevvalue = infovalues[infoindex];
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
 
   switch (infoindex) {
     case 0:
-      player.extrascore0 = var_82a90e56e416fa55;
+      player.extrascore0 = repackedvalue;
       break;
     case 1:
-      player.extrascore1 = var_82a90e56e416fa55;
+      player.extrascore1 = repackedvalue;
       break;
     case 2:
-      player.extrascore2 = var_82a90e56e416fa55;
+      player.extrascore2 = repackedvalue;
       break;
     case 3:
-      player.extrascore3 = var_82a90e56e416fa55;
+      player.extrascore3 = repackedvalue;
       break;
     case 4:
-      player.extrascore4 = var_82a90e56e416fa55;
+      player.extrascore4 = repackedvalue;
       break;
     case 5:
-      player.extrascore5 = var_82a90e56e416fa55;
+      player.extrascore5 = repackedvalue;
       break;
     default:
       break;
@@ -1066,7 +1066,7 @@ function playerstreamhintlocationinternal(streamorigin, timeoutms, streamcustomi
   }
 
   if(namespace_81156089ff1fe819::function_59e8b4ed75ca8b92()) {
-    self function_bc667001f9dd3808(streamorigin);
+    self predictstreamposuntilcleared(streamorigin);
   }
 
   if(istrue(streamcustomization)) {
@@ -1103,7 +1103,7 @@ function playerstreamhintlocationinternal(streamorigin, timeoutms, streamcustomi
 
       while(var_4a1d79951b2bd56c == -1 || gettime() < timeout) {
         if(gettime() > var_8cabe71736d798a7) {
-          self function_bc667001f9dd3808(streamorigin);
+          self predictstreamposuntilcleared(streamorigin);
           var_8cabe71736d798a7 = gettime() + var_1e41981f0fa40795;
         }
 
@@ -1147,7 +1147,7 @@ function function_2dcd6a9eb79260a6() {
     scripts\mp\equipment\molotov::molotov_clear_burning();
   }
 
-  if(self function_9cc921a57ff4deb5()) {
+  if(self isonascender()) {
     scripts\mp\gametypes\br_utility::function_fd357ca89e5e29d9();
   }
 

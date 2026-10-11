@@ -62,7 +62,7 @@ function function_aa8545c4caff39ef() {
   }
 
   foreach(player in level.players) {
-    player thread function_d8acbb08ac0dc074(player);
+    player thread watchforplayerdisconnect(player);
   }
 
   level thread function_d028c8aea81e0fb0();
@@ -88,7 +88,7 @@ function function_d028c8aea81e0fb0() {
   }
 }
 
-function function_d8acbb08ac0dc074(player) {
+function watchforplayerdisconnect(player) {
   player waittill("<dev string:x101>", player);
   wait 1;
 
@@ -99,7 +99,7 @@ function function_d8acbb08ac0dc074(player) {
   }
 }
 
-function debug_circle(center, radius, duration, color, startdelay, var_d5c216e05ee2afc5) {
+function debug_circle(center, radius, duration, color, startdelay, fillcenter) {
   circle_sides = 16;
   anglefrac = 360 / circle_sides;
   circlepoints = [];
@@ -118,16 +118,16 @@ function debug_circle(center, radius, duration, color, startdelay, var_d5c216e05
     wait startdelay;
   }
 
-  thread function_74b455b83954e07b(circlepoints, duration, color, var_d5c216e05ee2afc5, center);
+  thread debug_circle_drawlines(circlepoints, duration, color, fillcenter, center);
 }
 
-function function_74b455b83954e07b(circlepoints, duration, color, var_d5c216e05ee2afc5, center) {
-  if(!isDefined(var_d5c216e05ee2afc5)) {
-    var_d5c216e05ee2afc5 = 0;
+function debug_circle_drawlines(circlepoints, duration, color, fillcenter, center) {
+  if(!isDefined(fillcenter)) {
+    fillcenter = 0;
   }
 
   if(!isDefined(center)) {
-    var_d5c216e05ee2afc5 = 0;
+    fillcenter = 0;
   }
 
   for(i = 0; i < circlepoints.size; i++) {
@@ -141,7 +141,7 @@ function function_74b455b83954e07b(circlepoints, duration, color, var_d5c216e05e
 
     thread scripts\cp\cp_debug::debug_line(start, end, duration, color);
 
-    if(var_d5c216e05ee2afc5) {
+    if(fillcenter) {
       thread scripts\cp\cp_debug::debug_line(center, start, duration, color);
     }
   }
@@ -676,33 +676,33 @@ function function_3d8bf9aa27135ec7() {
     level.var_5971f579c15e2d5 = 1;
   }
 
-  var_fb118aca74cba38e = newhudelem();
-  var_fb118aca74cba38e.location = 0;
-  var_fb118aca74cba38e.foreground = 1;
-  var_fb118aca74cba38e.fontscale = 0.7;
-  var_fb118aca74cba38e.sort = 20;
-  var_fb118aca74cba38e.alpha = 0;
-  var_fb118aca74cba38e.x = -100;
-  var_fb118aca74cba38e.y = 0;
-  level.var_e3f40cd279339928[level.var_e3f40cd279339928.size] = var_fb118aca74cba38e;
-  var_fb118bca74cba5c1 = newhudelem();
-  var_fb118bca74cba5c1.location = 0;
-  var_fb118bca74cba5c1.foreground = 1;
-  var_fb118bca74cba5c1.fontscale = 0.7;
-  var_fb118bca74cba5c1.sort = 20;
-  var_fb118bca74cba5c1.alpha = 0;
-  var_fb118bca74cba5c1.x = -100;
-  var_fb118bca74cba5c1.y = 10;
-  level.var_e3f40cd279339928[level.var_e3f40cd279339928.size] = var_fb118bca74cba5c1;
-  var_fb1188ca74cb9f28 = newhudelem();
-  var_fb1188ca74cb9f28.location = 0;
-  var_fb1188ca74cb9f28.foreground = 1;
-  var_fb1188ca74cb9f28.fontscale = 0.7;
-  var_fb1188ca74cb9f28.sort = 20;
-  var_fb1188ca74cb9f28.alpha = 0;
-  var_fb1188ca74cb9f28.x = -100;
-  var_fb1188ca74cb9f28.y = 20;
-  level.var_e3f40cd279339928[level.var_e3f40cd279339928.size] = var_fb1188ca74cb9f28;
+  hud0 = newhudelem();
+  hud0.location = 0;
+  hud0.foreground = 1;
+  hud0.fontscale = 0.7;
+  hud0.sort = 20;
+  hud0.alpha = 0;
+  hud0.x = -100;
+  hud0.y = 0;
+  level.var_e3f40cd279339928[level.var_e3f40cd279339928.size] = hud0;
+  hud1 = newhudelem();
+  hud1.location = 0;
+  hud1.foreground = 1;
+  hud1.fontscale = 0.7;
+  hud1.sort = 20;
+  hud1.alpha = 0;
+  hud1.x = -100;
+  hud1.y = 10;
+  level.var_e3f40cd279339928[level.var_e3f40cd279339928.size] = hud1;
+  hud2 = newhudelem();
+  hud2.location = 0;
+  hud2.foreground = 1;
+  hud2.fontscale = 0.7;
+  hud2.sort = 20;
+  hud2.alpha = 0;
+  hud2.x = -100;
+  hud2.y = 20;
+  level.var_e3f40cd279339928[level.var_e3f40cd279339928.size] = hud2;
   var_fb1189ca74cba15b = newhudelem();
   var_fb1189ca74cba15b.location = 0;
   var_fb1189ca74cba15b.foreground = 1;
@@ -912,7 +912,7 @@ function function_dafd118808f0b454(player, playername, ip1) {
   counter = 0;
 
   foreach(array in level.scoreinfo) {
-    typename = function_3c8848a3a11b2553(type);
+    typename = getxhashsourcename(type);
     cmd = "<dev string:x730>" + typename + "<dev string:x763>" + typename + "<dev string:x77d>";
     addentrytodevgui(cmd);
     counter++;
@@ -958,7 +958,7 @@ function function_7538161c9f63be60() {
     event = getDvar(@ "hash_4fc6daf665167bfe");
 
     if(!isxhash(event)) {
-      event = function_1823ff50bb28148d(event);
+      event = getxhash(event);
     }
 
     points = scripts\cp\rank::getscoreinfovalue(event);

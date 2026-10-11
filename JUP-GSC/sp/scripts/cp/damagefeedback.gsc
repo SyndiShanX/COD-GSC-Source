@@ -59,7 +59,7 @@ function hudicontype(typehit) {
   }
 }
 
-function function_4e514dcd8e549d1(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, var_1da1a66b5c6a06a7, var_986b2e0350629522, var_708152dedbc0117) {
+function function_4e514dcd8e549d1(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, lightarmordamage, heavyarmordamage, var_708152dedbc0117) {
   process_damage_feedback(einflictor, eattacker, idamage, idflags, smeansofdeath, objweapon, undefined, undefined, shitloc, undefined, victim);
 }
 

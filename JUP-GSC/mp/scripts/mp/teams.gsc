@@ -123,7 +123,7 @@ function function_6f61a7ebcd7859f6() {
   projectscriptbundle = undefined;
 
   if(!isDefined(level.projectbundle)) {
-    projectscriptbundle = function_811510b694ddd963();
+    projectscriptbundle = getprojectscriptbundle();
   } else {
     projectscriptbundle = level.projectbundle;
   }
@@ -155,7 +155,7 @@ function function_67fd50c33d15b163() {
   projectscriptbundle = undefined;
 
   if(!isDefined(level.projectbundle)) {
-    projectscriptbundle = function_811510b694ddd963();
+    projectscriptbundle = getprojectscriptbundle();
   } else {
     projectscriptbundle = level.projectbundle;
   }
@@ -352,7 +352,7 @@ function updateplayedtime() {
 
   if(scripts\mp\gametypes\br_public::isplayeringulag()) {
     self.timeplayed["gulag"] = self.timeplayed["gulag"] + self.timeplayed["game"];
-  } else if(scripts\mp\gametypes\br_public::function_8f0e6614368f64c2()) {
+  } else if(scripts\mp\gametypes\br_public::isplayerwaitingresurgencerespawn()) {
     self.timeplayed["resurgenceRespawn"] = self.timeplayed["resurgenceRespawn"] + self.timeplayed["game"];
   } else if(isDefined(self.c130) || istrue(self.brneverlanded)) {
     self.timeplayed["infil"] = self.timeplayed["infil"] + self.timeplayed["game"];
@@ -452,7 +452,7 @@ function getteambalance() {
 
 function balanceteams() {
   iprintlnbold(game["strings"]["autobalance"]);
-  var_4b60537d15df5108 = [];
+  alliedplayers = [];
   axisplayers = [];
   players = level.players;
 
@@ -462,7 +462,7 @@ function balanceteams() {
     }
 
     if(isDefined(players[i].pers["team"]) && players[i].pers["team"] == "allies") {
-      var_4b60537d15df5108[var_4b60537d15df5108.size] = players[i];
+      alliedplayers[alliedplayers.size] = players[i];
       continue;
     }
 
@@ -473,25 +473,25 @@ function balanceteams() {
 
   mostrecent = undefined;
 
-  while(var_4b60537d15df5108.size > axisplayers.size + 1 || axisplayers.size > var_4b60537d15df5108.size + 1) {
-    if(var_4b60537d15df5108.size > axisplayers.size + 1) {
-      for(j = 0; j < var_4b60537d15df5108.size; j++) {
-        if(isDefined(var_4b60537d15df5108[j].dont_auto_balance)) {
+  while(alliedplayers.size > axisplayers.size + 1 || axisplayers.size > alliedplayers.size + 1) {
+    if(alliedplayers.size > axisplayers.size + 1) {
+      for(j = 0; j < alliedplayers.size; j++) {
+        if(isDefined(alliedplayers[j].dont_auto_balance)) {
           continue;
         }
 
         if(!isDefined(mostrecent)) {
-          mostrecent = var_4b60537d15df5108[j];
+          mostrecent = alliedplayers[j];
           continue;
         }
 
-        if(var_4b60537d15df5108[j].pers["teamTime"] > mostrecent.pers["teamTime"]) {
-          mostrecent = var_4b60537d15df5108[j];
+        if(alliedplayers[j].pers["teamTime"] > mostrecent.pers["teamTime"]) {
+          mostrecent = alliedplayers[j];
         }
       }
 
       mostrecent[[level.onteamselection]]("axis");
-    } else if(axisplayers.size > var_4b60537d15df5108.size + 1) {
+    } else if(axisplayers.size > alliedplayers.size + 1) {
       for(j = 0; j < axisplayers.size; j++) {
         if(isDefined(axisplayers[j].dont_auto_balance)) {
           continue;
@@ -511,13 +511,13 @@ function balanceteams() {
     }
 
     mostrecent = undefined;
-    var_4b60537d15df5108 = [];
+    alliedplayers = [];
     axisplayers = [];
     players = level.players;
 
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i].pers["team"]) && players[i].pers["team"] == "allies") {
-        var_4b60537d15df5108[var_4b60537d15df5108.size] = players[i];
+        alliedplayers[alliedplayers.size] = players[i];
         continue;
       }
 
@@ -584,7 +584,7 @@ function setcharactermodels(bodymodelname, headmodelname, viewmodelname) {
     self detach(self.headmodel);
   }
 
-  if(function_f3bb4f4911a1beb2("escort", "isDogZombie")) {
+  if(callsharedfunc("escort", "isDogZombie")) {
     return;
   }
 
@@ -701,8 +701,8 @@ function setupplayermodel() {
   setcharactermodels(self.operatorcustomization.defaultbody, self.operatorcustomization.defaulthead, self.operatorcustomization.defaultvm);
   _setsuit(self.operatorcustomization.suit);
 
-  if(isDefined(self.operatorcustomization.var_3291e2cbec055766)) {
-    self function_602b3de054f2a81(self.operatorcustomization.var_3291e2cbec055766);
+  if(isDefined(self.operatorcustomization.reactiveoperator)) {
+    self function_602b3de054f2a81(self.operatorcustomization.reactiveoperator);
   }
 
   scripts\cp_mp\execution::_giveexecution(self.operatorcustomization.execution);
@@ -782,7 +782,7 @@ function createoperatorcustomization(operatorref, operatorskin) {
 
   operatorcustomization.operatorref = operatorref;
   operatorcustomization.skinref = operatorskin;
-  operatorcustomization.var_3291e2cbec055766 = scripts\cp_mp\operator::function_2dc6ef8b84dfec64(operatorskin);
+  operatorcustomization.reactiveoperator = scripts\cp_mp\operator::function_2dc6ef8b84dfec64(operatorskin);
   operatorcustomization.skinlootid = function_29b2af59258d6501(operatorskin);
   operatorcustomization.gender = getoperatorgender(operatorref);
   operatorcustomization.voice = getoperatorvoice(operatorref, operatorskin);
@@ -1324,9 +1324,9 @@ function getoperatorcustomization() {
 
     if(body == "" || head == "") {
       assertmsg("<dev string:x29b>" + head + "<dev string:x2dd>" + body);
-      var_f91a44e31cde7d97 = scripts\cp_mp\operator::function_df7d12571397a2b5(self.operatorcustomization.operatorref);
-      body = scripts\cp_mp\operator::function_8eba78e65f4be793(var_f91a44e31cde7d97);
-      head = scripts\cp_mp\operator::function_223061772e2a61b9(var_f91a44e31cde7d97);
+      defaultskin = scripts\cp_mp\operator::function_df7d12571397a2b5(self.operatorcustomization.operatorref);
+      body = scripts\cp_mp\operator::function_8eba78e65f4be793(defaultskin);
+      head = scripts\cp_mp\operator::function_223061772e2a61b9(defaultskin);
     }
 
     self.bodymodelname = body;
@@ -1758,7 +1758,7 @@ function watchafk() {
         continue;
       }
 
-      if(level.var_ec2fb549b15ad827) {
+      if(level.leagueplaymatch) {
         if(var_cb0d938e64f611fc && infirstround && gettime() - var_e82b77c55ccc4f76 < var_7b9be079890a7b0) {
           level.players[nexttoupdate] checkforafk(var_9bce2d454a1f6e47, var_b5ec3f69645ca491, var_f2b8892cfaa7df7a);
         } else {
@@ -1894,7 +1894,7 @@ function checkforafk(var_6d2f7985df18659a, var_55d48eee7e287cda, var_bdbf4608f99
   afknokillsorassists = nokillsorassists && timesincelastpasseddistcheck > 120;
   hasrecentmovementimmunity = default_to(self.var_3681793bfd7b68e, 0) > gettime();
   distrackingpassed = istrue(scripts\mp\utility\stats::getpersstat("distTrackingPassed")) || hasrecentmovementimmunity;
-  isplayermoving = self function_34465874fa328acc() || self issprinting();
+  isplayermoving = self iswalking() || self issprinting();
 
   if(level.rankedmatch && isplayermoving && !distrackingpassed && self function_f771642d3445111f() == 0 && self.sessionstate == "playing" && nokillsorassists) {
     self dlog_recordplayerevent("dlog_event_player_ranked_boosting_detection", ["kills", kills, "assists", assists, "lastDistTrackingPassedTime", lastdisttrackingpassedtime, "timeSinceLastPassedDistCheck", timesincelastpasseddistcheck, "afkDistTimeThreshold", afkdisttimethreshold, "afkNoKillsOrAssists", afknokillsorassists, "hasRecentMovementImmunity", hasrecentmovementimmunity, "disTrackingPassed", distrackingpassed]);
@@ -1930,7 +1930,7 @@ function checkforafk(var_6d2f7985df18659a, var_55d48eee7e287cda, var_bdbf4608f99
     }
   }
 
-  if(istrue(level.var_ec2fb549b15ad827) && isDefined(var_e817fdf4412ba4ec) && var_e817fdf4412ba4ec > 0 && level.var_808e471a357552a4 > afkdisttimethreshold - var_e817fdf4412ba4ec) {
+  if(istrue(level.leagueplaymatch) && isDefined(var_e817fdf4412ba4ec) && var_e817fdf4412ba4ec > 0 && level.var_808e471a357552a4 > afkdisttimethreshold - var_e817fdf4412ba4ec) {
     level.var_808e471a357552a4 = afkdisttimethreshold - var_e817fdf4412ba4ec;
   }
 
@@ -2230,7 +2230,7 @@ function function_ada9a2308a4046e2(operatorref) {
 
   if(!isDefined(suit) || suit == "") {
     if(isDefined(level.gamemodebundle)) {
-      suit = default_to(level.gamemodebundle.var_576fc201a1d5b6dc, "iw9_suit_generic_west_mp");
+      suit = default_to(level.gamemodebundle.playerdefaultsuit, "iw9_suit_generic_west_mp");
     } else {
       suit = "iw9_suit_generic_west_mp";
     }
@@ -2385,7 +2385,7 @@ function function_d650608c959c9675() {
     level.var_b113f6fe0e7c93bf["axis"] = [];
   }
 
-  operatorrefs = scripts\cp_mp\operator::function_462ac94dd54da47d();
+  operatorrefs = scripts\cp_mp\operator::getoperatorrefs();
 
   foreach(operatorref in operatorrefs) {
     if(!isDefined(operatorref) || operatorref == "") {

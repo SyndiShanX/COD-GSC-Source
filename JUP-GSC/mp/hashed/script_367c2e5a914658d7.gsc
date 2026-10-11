@@ -85,7 +85,7 @@ function function_a9eaf2243763094d() {
   denieds = 0;
   nonodes = 0;
   var_9a1c1b5c5cb9c1e = 0;
-  volumes = function_f159c10d5cf8f0b4("building_bounds", "script_noteworthy");
+  volumes = getnoentvolumearray("building_bounds", "script_noteworthy");
 
   for(i = 0; i < volumes.size; i++) {
     aitype = scripts\mp\ai_mp_controller::function_7f1a2e2ebe0c1693("pistol", 1);

@@ -1066,13 +1066,13 @@ function function_d7ddd4f92aa2f365() {
   var_6bd149235314dd38 = gettime() - self.var_4c9ec1894f2acd2c;
 
   if(self.var_35e5c4d85b393e70 > 10 && var_65c5443c57d5a3c0 > 2000 || var_6bd149235314dd38 >= 30000) {
-    var_2d58e8aae155cc83 = distance(self.origin, level.player.origin);
+    distancefromplayer = distance(self.origin, level.player.origin);
 
     if(getdvarint(@ "hash_b829e1e0eacd17a4", 0)) {
-      iprintlnbold(var_2d58e8aae155cc83);
+      iprintlnbold(distancefromplayer);
     }
 
-    if(var_2d58e8aae155cc83 < 3500) {
+    if(distancefromplayer < 3500) {
       target_eye = level.player.origin + (0, 0, 60);
 
       if(!sighttracepassed(self.origin, target_eye, 0, self, self.minigun)) {
@@ -1690,7 +1690,7 @@ function ispointnearpilot(heli, dmgpoint) {
   left = anglestoleft(self.angles);
   point1 = self.origin + fwd * 133 + (0, 0, -70);
   point2 = self.origin + fwd * 112 + left * 17 + (0, 0, -70);
-  var_bf69da3c5a539d7a = self.origin + fwd * 112 + (0, 0, -50);
+  point3 = self.origin + fwd * 112 + (0, 0, -50);
 
   if(distance(dmgpoint, point1) <= 25) {
     return 1;
@@ -1700,7 +1700,7 @@ function ispointnearpilot(heli, dmgpoint) {
     return 1;
   }
 
-  if(distance(dmgpoint, var_bf69da3c5a539d7a) <= 25) {
+  if(distance(dmgpoint, point3) <= 25) {
     return 1;
   }
 
@@ -1760,13 +1760,13 @@ function function_29d0c931ff7731cd(heli) {
 function function_b7e4041a3c02d74a() {
   if(isDefined(self.riders)) {
     foreach(rider in self.riders) {
-      if(isDefined(rider._blackboard) && isDefined(rider._blackboard.chosenvehicleanimpos) && istrue(rider._blackboard.var_41c9f8c7891f19da)) {
+      if(isDefined(rider._blackboard) && isDefined(rider._blackboard.chosenvehicleanimpos) && istrue(rider._blackboard.chosenvehicleanimpos_deathimpulse)) {
         var_adf3664b12362142 = 500;
         velocity = self vehicle_getvelocity();
         rider.do_immediate_ragdoll = 1;
         rider.ragdollhitloc = "torso_lower";
         rider.ragdollimpactvector = (rider.origin - self.origin) * var_adf3664b12362142 + velocity;
-        rider._blackboard.var_80912ec8ade08716 = 1;
+        rider._blackboard.chosenvehicleanimpos_deathragdoll = 1;
       }
 
       rider kill();

@@ -335,7 +335,7 @@ function function_8d35d9ef24e364e3(lockdoor) {
 }
 
 function function_76345fed7f6c60cb() {
-  if(!self function_73cc0f04c4c5001d()) {
+  if(!self isscriptableinstance()) {
     assertmsg("<dev string:x168>");
     return false;
   }

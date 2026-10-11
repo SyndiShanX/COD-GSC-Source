@@ -14,7 +14,7 @@
 #using scripts\asm\shared\variant_asm;
 #using scripts\common\callbacks;
 #using scripts\engine\utility;
-#namespace namespace_d94cac041d4a3fb0;
+#namespace zombie_mangler_asm;
 
 function private function_f49a30f92555b827() {
   function_304c63cbb536c526();

@@ -20,7 +20,7 @@ function use_perk(itembundle, item) {
   usedperk = 0;
 
   if(!istrue(item.fromcache)) {
-    usedperk = function_fd9a6fb7a67bcf3e(itembundle.ref);
+    usedperk = grab_and_use_perk(itembundle.ref);
   } else if(!has_perk(itembundle.ref)) {
     give_perk(itembundle.ref, 1);
     usedperk = 1;

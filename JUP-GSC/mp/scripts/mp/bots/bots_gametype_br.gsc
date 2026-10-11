@@ -226,7 +226,7 @@ function bot_parachute_into_map() {
   }
 
   parachute_time = gettime() + randomfloatrange(5, 10) * 1000;
-  var_ee69440f3c9f1e1 = 0;
+  chute_pulled = 0;
 
   while(istrue(self isskydiving()) || istrue(self isparachuting())) {
     if(level.br_circle.circleindex > 0 && istrue(level.circleclosing) && !scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(self.desired_landing_spot)) {
@@ -244,9 +244,9 @@ function bot_parachute_into_map() {
     self botlookatpoint(self.desired_landing_spot, 0.05, "script_forced");
     self botsetscriptmove(angles_to_goal[1], 0.05, speed);
 
-    if(gettime() > parachute_time && !var_ee69440f3c9f1e1) {
+    if(gettime() > parachute_time && !chute_pulled) {
       self botpressbutton("jump", 1);
-      var_ee69440f3c9f1e1 = 1;
+      chute_pulled = 1;
     }
 
     wait 0.05;

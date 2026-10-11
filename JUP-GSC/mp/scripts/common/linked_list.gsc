@@ -7,17 +7,17 @@
 #using scripts\engine\utility;
 #namespace linked_list;
 
-function function_e0143bb4b41a77c4() {
+function createstruct_linkedlist() {
   linkedlist = spawnStruct();
   linkedlist.startnode = undefined;
   linkedlist.endnode = undefined;
   linkedlist.nodecount = 0;
-  linkedlist.var_dd1ede0842d8e484 = 1;
+  linkedlist.islinkedlist = 1;
   return linkedlist;
 }
 
-function function_dd1ede0842d8e484(var_ab177af9e881324f) {
-  return isstruct(var_ab177af9e881324f) && var_ab177af9e881324f.var_dd1ede0842d8e484 == 1;
+function islinkedlist(possiblelinkedlist) {
+  return isstruct(possiblelinkedlist) && possiblelinkedlist.islinkedlist == 1;
 }
 
 function function_11a80ea7fe6ea9e0() {
@@ -28,7 +28,7 @@ function function_11a80ea7fe6ea9e0() {
 }
 
 function addnode(newnode, var_f3b9a2fb70be7) {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
 
   if(linkedlist getsize() == 0) {
@@ -52,22 +52,22 @@ function addnode(newnode, var_f3b9a2fb70be7) {
   }
 }
 
-function removenode(var_7dcdc8e8873aeb30) {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+function removenode(nodetoremove) {
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
-  isstartnode = !isDefined(var_7dcdc8e8873aeb30.prevnode);
-  isendnode = !isDefined(var_7dcdc8e8873aeb30.nextnode);
+  isstartnode = !isDefined(nodetoremove.prevnode);
+  isendnode = !isDefined(nodetoremove.nextnode);
 
   if(isstartnode && linkedlist getsize() > 1) {
-    linkedlist.startnode = var_7dcdc8e8873aeb30.nextnode;
+    linkedlist.startnode = nodetoremove.nextnode;
   } else if(!isstartnode) {
-    var_7dcdc8e8873aeb30.prevnode.nextnode = var_7dcdc8e8873aeb30.nextnode;
+    nodetoremove.prevnode.nextnode = nodetoremove.nextnode;
   }
 
   if(isendnode && linkedlist getsize() > 1) {
-    linkedlist.endnode = var_7dcdc8e8873aeb30.prevnode;
+    linkedlist.endnode = nodetoremove.prevnode;
   } else if(!isendnode) {
-    var_7dcdc8e8873aeb30.nextnode.prevnode = var_7dcdc8e8873aeb30.prevnode;
+    nodetoremove.nextnode.prevnode = nodetoremove.prevnode;
   }
 
   linkedlist.nodecount = max(linkedlist.nodecount - 1, 0);
@@ -79,7 +79,7 @@ function removenode(var_7dcdc8e8873aeb30) {
 }
 
 function removestartnode() {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
 
   if(isDefined(linkedlist.startnode) && linkedlist getsize() > 1) {
@@ -99,7 +99,7 @@ function removestartnode() {
 }
 
 function removeendnode() {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
 
   if(isDefined(linkedlist.endnode) && linkedlist getsize() > 1) {
@@ -118,16 +118,16 @@ function removeendnode() {
   }
 }
 
-function function_7f2de7f012dc412f(var_d9e7db9b48a182d5) {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+function movenodetostart(nodetomove) {
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
 
-  if(linkedlist.startnode == var_d9e7db9b48a182d5) {
+  if(linkedlist.startnode == nodetomove) {
     return;
   }
 
-  linkedlist removenode(var_d9e7db9b48a182d5);
-  linkedlist addnode(var_d9e7db9b48a182d5, 1);
+  linkedlist removenode(nodetomove);
+  linkedlist addnode(nodetomove, 1);
 
   if(linkedlist function_63fe00fb459ea917()) {
     function_22573254f7088750("<dev string:x98>");
@@ -136,19 +136,19 @@ function function_7f2de7f012dc412f(var_d9e7db9b48a182d5) {
 }
 
 function getsize() {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
   return linkedlist.nodecount;
 }
 
 function getstartnode() {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
   return linkedlist.startnode;
 }
 
 function getendnode() {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
   return linkedlist.endnode;
 }
@@ -156,20 +156,20 @@ function getendnode() {
 function function_d35c195d3d01e75e() {}
 
 function function_c09bf9c86f65e4ac(var_ad80ec0659e85f9e) {
-  var_93981ad709abb3f9 = function_e0143bb4b41a77c4();
-  var_93981ad709abb3f9 function_3a28dcc9cc1b6ae3(var_ad80ec0659e85f9e);
-  return var_93981ad709abb3f9;
+  debuglinkedlist = createstruct_linkedlist();
+  debuglinkedlist function_3a28dcc9cc1b6ae3(var_ad80ec0659e85f9e);
+  return debuglinkedlist;
 }
 
 function function_3a28dcc9cc1b6ae3(var_ad80ec0659e85f9e) {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
-  var_93981ad709abb3f9 = self;
-  var_93981ad709abb3f9.var_1a19bd75a8860186 = 1;
-  var_93981ad709abb3f9.var_ad80ec0659e85f9e = var_ad80ec0659e85f9e;
+  assertex(islinkedlist(self), "<dev string:x1c>");
+  debuglinkedlist = self;
+  debuglinkedlist.var_1a19bd75a8860186 = 1;
+  debuglinkedlist.var_ad80ec0659e85f9e = var_ad80ec0659e85f9e;
 }
 
-function function_c4e2f2dcd675c939(var_ad80ec0659e85f9e) {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+function printlinkedlist(var_ad80ec0659e85f9e) {
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
   nodecount = 1;
   nodereference = linkedlist.startnode;
@@ -187,13 +187,13 @@ function function_c4e2f2dcd675c939(var_ad80ec0659e85f9e) {
 }
 
 function private function_808f3bc4b7fcee6d() {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
-  var_93981ad709abb3f9 = self;
-  function_c4e2f2dcd675c939(var_93981ad709abb3f9.var_ad80ec0659e85f9e);
+  assertex(islinkedlist(self), "<dev string:x1c>");
+  debuglinkedlist = self;
+  printlinkedlist(debuglinkedlist.var_ad80ec0659e85f9e);
 }
 
 function private function_63fe00fb459ea917() {
-  assertex(function_dd1ede0842d8e484(self), "<dev string:x1c>");
+  assertex(islinkedlist(self), "<dev string:x1c>");
   linkedlist = self;
   return istrue(linkedlist.var_1a19bd75a8860186);
 }

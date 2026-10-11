@@ -33,11 +33,11 @@ function delete_formation(formationname) {
     return;
   }
 
-  function_795225119619e713(level.formationlist[formationname]);
+  deleteaiformation(level.formationlist[formationname]);
   level.formationlist[formationname] = undefined;
 }
 
-function function_73d6d4ee28a18071(formationname, var_129f5d1ec2e3fec5, formationtype) {
+function function_73d6d4ee28a18071(formationname, aitoadd, formationtype) {
   if(!isDefined(formationtype)) {
     formationtype = 3;
   }
@@ -50,19 +50,19 @@ function function_73d6d4ee28a18071(formationname, var_129f5d1ec2e3fec5, formatio
     function_a18d80bcfacb9e00(formationname, formationtype);
   }
 
-  if(!isarray(var_129f5d1ec2e3fec5)) {
-    var_129f5d1ec2e3fec5 = [var_129f5d1ec2e3fec5];
+  if(!isarray(aitoadd)) {
+    aitoadd = [aitoadd];
   }
 
-  foreach(ai in var_129f5d1ec2e3fec5) {
+  foreach(ai in aitoadd) {
     ai enter_formation(level.formationlist[formationname]);
     ai thread need_to_run(formationname);
   }
 }
 
-function function_98e62e94c2b167e0(formationname, horizontalcount, verticalcount, var_b4060a330731f1bd, var_1b9a7d48f06da667, var_9af84e76946ada66) {
-  if(!isDefined(var_9af84e76946ada66)) {
-    var_9af84e76946ada66 = 0;
+function function_98e62e94c2b167e0(formationname, horizontalcount, verticalcount, horizontalseparation, verticalseparation, leaderinfront) {
+  if(!isDefined(leaderinfront)) {
+    leaderinfront = 0;
   }
 
   if(!isDefined(level.formationlist[formationname])) {
@@ -74,16 +74,16 @@ function function_98e62e94c2b167e0(formationname, horizontalcount, verticalcount
 
   for(verticalindex = 0; verticalindex < verticalcount; verticalindex++) {
     for(horizontalindex = 0; horizontalindex < horizontalcount; horizontalindex++) {
-      if(!var_9af84e76946ada66 && verticalindex == 0 && horizontalindex == mid) {
+      if(!leaderinfront && verticalindex == 0 && horizontalindex == mid) {
         continue;
       }
 
-      yoffset = var_b4060a330731f1bd * -1 * (horizontalindex - mid);
-      xoffset = var_1b9a7d48f06da667 * -1 * verticalindex;
+      yoffset = horizontalseparation * -1 * (horizontalindex - mid);
+      xoffset = verticalseparation * -1 * verticalindex;
 
-      if(var_9af84e76946ada66) {
-        yoffset -= 0.5 * (horizontalcount - 1) % 2 * var_b4060a330731f1bd;
-        xoffset -= var_1b9a7d48f06da667;
+      if(leaderinfront) {
+        yoffset -= 0.5 * (horizontalcount - 1) % 2 * horizontalseparation;
+        xoffset -= verticalseparation;
       }
 
       function_c412284514efc768(level.formationlist[formationname], offsetcount, (xoffset, yoffset, 0));
@@ -92,9 +92,9 @@ function function_98e62e94c2b167e0(formationname, horizontalcount, verticalcount
   }
 }
 
-function function_cf3f27c3c5266ee2(formationname, var_3f4d3640a452a225, numai, var_b4060a330731f1bd, var_1b9a7d48f06da667, var_9af84e76946ada66) {
-  if(!isDefined(var_9af84e76946ada66)) {
-    var_9af84e76946ada66 = 0;
+function function_cf3f27c3c5266ee2(formationname, formationshape, numai, horizontalseparation, verticalseparation, leaderinfront) {
+  if(!isDefined(leaderinfront)) {
+    leaderinfront = 0;
   }
 
   if(!isDefined(level.formationlist[formationname])) {
@@ -105,11 +105,11 @@ function function_cf3f27c3c5266ee2(formationname, var_3f4d3640a452a225, numai, v
     return 1;
   }
 
-  if(var_9af84e76946ada66 && var_3f4d3640a452a225 != 1) {
+  if(leaderinfront && formationshape != 1) {
     numai--;
   }
 
-  switch (var_3f4d3640a452a225) {
+  switch (formationshape) {
     case 1:
       dimension = ceil((sqrt(8 * numai + 1) - 1) / 2);
       offsetcount = 1;
@@ -120,14 +120,14 @@ function function_cf3f27c3c5266ee2(formationname, var_3f4d3640a452a225, numai, v
             continue;
           }
 
-          yoffset = var_b4060a330731f1bd * (horizontalindex - verticalindex / 2);
-          xoffset = var_1b9a7d48f06da667 * -1 * verticalindex;
+          yoffset = horizontalseparation * (horizontalindex - verticalindex / 2);
+          xoffset = verticalseparation * -1 * verticalindex;
           function_c412284514efc768(level.formationlist[formationname], offsetcount, (xoffset, yoffset, 0));
           offsetcount++;
         }
       }
 
-      return ((dimension - 1) * var_b4060a330731f1bd);
+      return ((dimension - 1) * horizontalseparation);
     case 2:
       mid = 0;
       horizontalcount = 1;
@@ -154,16 +154,16 @@ function function_cf3f27c3c5266ee2(formationname, var_3f4d3640a452a225, numai, v
 
   for(verticalindex = 0; verticalindex < verticalcount; verticalindex++) {
     for(horizontalindex = 0; horizontalindex < horizontalcount; horizontalindex++) {
-      if(!var_9af84e76946ada66 && verticalindex == 0 && horizontalindex == mid) {
+      if(!leaderinfront && verticalindex == 0 && horizontalindex == mid) {
         continue;
       }
 
-      yoffset = var_b4060a330731f1bd * -1 * (horizontalindex - mid);
-      xoffset = var_1b9a7d48f06da667 * -1 * verticalindex;
+      yoffset = horizontalseparation * -1 * (horizontalindex - mid);
+      xoffset = verticalseparation * -1 * verticalindex;
 
-      if(var_9af84e76946ada66) {
-        yoffset -= 0.5 * (horizontalcount - 1) % 2 * var_b4060a330731f1bd;
-        xoffset -= var_1b9a7d48f06da667;
+      if(leaderinfront) {
+        yoffset -= 0.5 * (horizontalcount - 1) % 2 * horizontalseparation;
+        xoffset -= verticalseparation;
       }
 
       function_c412284514efc768(level.formationlist[formationname], offsetcount, (xoffset, yoffset, 0));
@@ -171,18 +171,18 @@ function function_cf3f27c3c5266ee2(formationname, var_3f4d3640a452a225, numai, v
     }
   }
 
-  return (horizontalcount - 1) * var_b4060a330731f1bd;
+  return (horizontalcount - 1) * horizontalseparation;
 }
 
-function function_e780688c49cc9549(formationname, var_93e0bc97a6d45499) {
+function function_e780688c49cc9549(formationname, customoffsetlist) {
   if(!isDefined(level.formationlist[formationname])) {
     return;
   }
 
-  assertex(var_93e0bc97a6d45499.size < 31, "<dev string:x3a>" + 32 - 1 + "<dev string:x6b>" + level.formationlist[formationname]);
+  assertex(customoffsetlist.size < 31, "<dev string:x3a>" + 32 - 1 + "<dev string:x6b>" + level.formationlist[formationname]);
   count = 1;
 
-  foreach(offset in var_93e0bc97a6d45499) {
+  foreach(offset in customoffsetlist) {
     function_c412284514efc768(level.formationlist[formationname], count, offset);
     count++;
   }
@@ -206,12 +206,12 @@ function set_goal(formationname, goalposition) {
   function_e29a9a1d854faa6a(level.formationlist[formationname], goalposition);
 }
 
-function leave_formation(var_cc408e19cc4792d2) {
-  if(!isarray(var_cc408e19cc4792d2)) {
-    var_cc408e19cc4792d2 = [var_cc408e19cc4792d2];
+function leave_formation(aitoremove) {
+  if(!isarray(aitoremove)) {
+    aitoremove = [aitoremove];
   }
 
-  foreach(ai in var_cc408e19cc4792d2) {
+  foreach(ai in aitoremove) {
     ai exit_formation();
   }
 }
@@ -314,9 +314,9 @@ function private need_to_run(formationname) {
       draw_circle(goal, var_4a9b8203f0e14a0, (0, 1, 0), 50);
     }
 
-    var_dd47ec6a7eac4674 = "sprint";
+    idledemeanoroverride = "sprint";
 
-    if(self.var_7bd1c0edbaafb6e0 != var_dd47ec6a7eac4674 && disttogoal > var_5ceb8e651146f51c) {
+    if(self.var_7bd1c0edbaafb6e0 != idledemeanoroverride && disttogoal > var_5ceb8e651146f51c) {
       self enableavoidance(1);
 
       if(!isDefined(self.var_3bca4b669ba7140c) || !isDefined(self.var_d008717a85388441)) {
@@ -324,9 +324,9 @@ function private need_to_run(formationname) {
         self.var_d008717a85388441 = self.var_5bdfa4fd67341cf5;
       }
 
-      self.var_7bd1c0edbaafb6e0 = var_dd47ec6a7eac4674;
-      self.var_5bdfa4fd67341cf5 = var_dd47ec6a7eac4674;
-    } else if(self.var_7bd1c0edbaafb6e0 == var_dd47ec6a7eac4674 && disttogoal < var_4a9b8203f0e14a0) {
+      self.var_7bd1c0edbaafb6e0 = idledemeanoroverride;
+      self.var_5bdfa4fd67341cf5 = idledemeanoroverride;
+    } else if(self.var_7bd1c0edbaafb6e0 == idledemeanoroverride && disttogoal < var_4a9b8203f0e14a0) {
       self enableavoidance(0);
       self.var_7bd1c0edbaafb6e0 = self.var_3bca4b669ba7140c;
       self.var_5bdfa4fd67341cf5 = self.var_d008717a85388441;

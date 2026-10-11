@@ -82,8 +82,8 @@ function main() {
   }
 
   if(getdvarint(@ "ob_unstable_rift", 0)) {
-    utility::function_f3bb4f4911a1beb2("ob_unstable_rift", "init_map");
-    utility::function_f3bb4f4911a1beb2("ob_unstable_rift", "init_mode");
+    utility::callsharedfunc("ob_unstable_rift", "init_map");
+    utility::callsharedfunc("ob_unstable_rift", "init_mode");
   }
 }
 

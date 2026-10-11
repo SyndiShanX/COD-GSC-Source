@@ -350,7 +350,7 @@ function function_a1b50967422392a4() {
   self.ignoreall = 0;
   self.ignoreme = 0;
   thread alarm_init();
-  ids = function_b052fa8d568c8f0a(self.animname);
+  ids = getinteractionidsfortargetname(self.animname);
   function_323be8f4542e0ea6(ids);
 }
 
@@ -372,7 +372,7 @@ function function_5ca84a3afe2581a() {
   self.ignoreme = 0;
   utility::waittill_notify_or_timeout("unload", 6);
   enemies = getaiarray("axis");
-  var_d08346ccb8ef116b = 0;
+  goloud = 0;
   distmax = squared(800);
 
   if(isDefined(enemies) && enemies.size > 0) {
@@ -384,11 +384,11 @@ function function_5ca84a3afe2581a() {
       }
 
       if(istrue(result)) {
-        var_d08346ccb8ef116b = 1;
+        goloud = 1;
       }
     }
 
-    if(istrue(var_d08346ccb8ef116b)) {
+    if(istrue(goloud)) {
       function_2fb932e41fa56ad5("combat", level.player.origin);
     } else {
       function_2fb932e41fa56ad5("investigate", self.origin);
@@ -542,11 +542,11 @@ function function_642a2c7d04246a0d() {
       continue;
     }
 
-    if(self.bisincombat || isDefined(self.stealth) && self.var_fe5ebefa740c7106 != 0) {
+    if(self.bisincombat || isDefined(self.stealth) && self.stealth_bsmstate != 0) {
       break;
     }
 
-    if(self function_a4a9e73b2d25ff8b() || isDefined(self.var_fd01ad49b4e38ae8)) {
+    if(self shouldpatrolreact() || isDefined(self.var_fd01ad49b4e38ae8)) {
       break;
     }
 
@@ -647,9 +647,9 @@ function function_fc8aa183d73025ea() {
   utility::waittill_either("reached_path_end", "goal");
   self.goalradius = 1000;
   ids = [];
-  ids[0] = function_5d6132045b29baf5(self.animname + "_01");
-  ids[1] = function_5d6132045b29baf5(self.animname + "_02");
-  ids[2] = function_5d6132045b29baf5(self.animname + "_03");
+  ids[0] = getinteractionidfortargetname(self.animname + "_01");
+  ids[1] = getinteractionidfortargetname(self.animname + "_02");
+  ids[2] = getinteractionidfortargetname(self.animname + "_03");
   function_323be8f4542e0ea6(ids);
 }
 
@@ -719,7 +719,7 @@ function function_c25c6207ef06656e() {
   self endon("death");
   self.goalradius = 1000;
   thread alarm_init();
-  ids = function_b052fa8d568c8f0a(self.animname);
+  ids = getinteractionidsfortargetname(self.animname);
   function_323be8f4542e0ea6(ids);
 }
 
@@ -878,7 +878,7 @@ function function_90f133bd3ad3e515() {
   level.baseboss = self;
   self.goalradius = 1000;
   self function_d493e7fe15e5eaf4("default_no_ai");
-  ids = function_b052fa8d568c8f0a(self.animname);
+  ids = getinteractionidsfortargetname(self.animname);
   childthread function_323be8f4542e0ea6(ids);
   childthread function_54504ff39113ddca();
   utility::flag_set("base_boss_spawned");
@@ -1748,7 +1748,7 @@ function function_54c376187683579a() {
   self endon("death");
   self.combatmode = "ambush";
   self.fixednode = 1;
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
   self.var_428407c1b0a62c2f = "stop_loop_" + self.animname;
   animnode = utility::getStruct("outro_animnode", "targetname");
   var_4f5da32e76b66561 = 0;
@@ -2021,7 +2021,7 @@ function function_323be8f4542e0ea6(ids) {
   while(true) {
     waitframe();
 
-    if(self.var_fe5ebefa740c7106 != 0) {
+    if(self.stealth_bsmstate != 0) {
       continue;
     }
 
@@ -2473,7 +2473,7 @@ function function_d611bfc0be2d9563() {
   }
 }
 
-function function_ef39228649b4fb51() {
+function missile_door_open() {
   utility::flag_wait("scriptables_ready");
   animnode = getStruct("silo_room_animnode", "targetname");
   rocket = getEnt("silo_container", "targetname");

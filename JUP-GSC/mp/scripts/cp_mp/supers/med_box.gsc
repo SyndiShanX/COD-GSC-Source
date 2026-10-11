@@ -567,8 +567,8 @@ function function_354b5edf045a416d(stuckto) {
   data.validateaccuratetouching = 1;
 
   if(isDefined(stuckto) && scripts\cp_mp\utility\train_utility::is_train_ent(stuckto)) {
-    data.var_49cb2c45d3230ed8 = 1;
-    self function_7e73001e97fe87b9(1);
+    data.plantedontrain = 1;
+    self setmissileantilagged(1);
   }
 
   if(issharedfuncdefined("game", "handlemovingplatforms")) {
@@ -721,7 +721,7 @@ function function_3122c424cb613711(entity, player) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function function_58225ad9f963583d() {

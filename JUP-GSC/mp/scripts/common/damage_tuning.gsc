@@ -35,13 +35,13 @@ function function_4a2ecb33b6adeb85(damagedata, var_e913079a5ffda56d) {
   }
 
   if(isstring(meansofdeath)) {
-    meansofdeath = function_1823ff50bb28148d(meansofdeath);
+    meansofdeath = getxhash(meansofdeath);
   }
 
   thisweaponclass = weaponclass(objweapon);
 
   if(isstring(thisweaponclass)) {
-    thisweaponclass = function_1823ff50bb28148d(thisweaponclass);
+    thisweaponclass = getxhash(thisweaponclass);
   }
 
   foreach(var_e1e1bfdd0ed6864f in var_b66e269a387db351) {
@@ -76,13 +76,13 @@ function getmodifieddamageusingdamagetuning(attacker, objweapon, mod, amount, ma
   }
 
   if(isstring(mod)) {
-    mod = function_1823ff50bb28148d(mod);
+    mod = getxhash(mod);
   }
 
   thisweaponclass = weaponclass(objweapon);
 
   if(isstring(thisweaponclass)) {
-    thisweaponclass = function_1823ff50bb28148d(thisweaponclass);
+    thisweaponclass = getxhash(thisweaponclass);
   }
 
   damageamount = amount;
@@ -100,14 +100,14 @@ function getmodifieddamageusingdamagetuning(attacker, objweapon, mod, amount, ma
       continue;
     }
 
-    var_b41d21142ce58d82 = var_a5c813dce206559b.hitstokill;
+    hitstokillamount = var_a5c813dce206559b.hitstokill;
 
-    if(var_b41d21142ce58d82 <= 0) {
-      assertmsg("<dev string:xe0>" + var_b41d21142ce58d82 + "<dev string:xf0>");
+    if(hitstokillamount <= 0) {
+      assertmsg("<dev string:xe0>" + hitstokillamount + "<dev string:xf0>");
       continue;
     }
 
-    damageamount = int(ceil(float(self.maxhealth) / var_b41d21142ce58d82));
+    damageamount = int(ceil(float(self.maxhealth) / hitstokillamount));
     return damageamount;
   }
 

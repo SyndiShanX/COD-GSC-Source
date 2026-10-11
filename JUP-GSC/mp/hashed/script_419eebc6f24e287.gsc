@@ -59,8 +59,8 @@ function function_80d68c9701e1aea5(data) {
 
   foreach(phone in phones) {
     origin = phone.origin;
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(origin);
-    subarea = scripts\mp\ai_mp_controller::function_a44e168e8cced18(origin, poiname);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(origin);
+    subarea = scripts\mp\ai_mp_controller::subarea_findfromorigin(origin, poiname);
 
     if(isDefined(subarea) && isDefined(subarea.var_7da9883d4168b7f1) && isDefined(subarea.var_7da9883d4168b7f1.var_84ecaeab58167d39) && subarea.var_7da9883d4168b7f1.var_84ecaeab58167d39 >= minimumdifficulty) {
       struct = spawnStruct();

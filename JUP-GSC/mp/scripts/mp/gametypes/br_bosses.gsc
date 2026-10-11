@@ -140,9 +140,9 @@ function function_565fbc2a83508f2d(name, node) {
   boss = [[level.bosses[name].var_e68429b39c75b6ee]](node);
   boss.var_2d670e4d288c86fb = 1;
   boss.var_7d606bec79308eb5 = 350;
-  boss.var_85a0f6383a5dd784 = 150;
+  boss.pursuestopdistance = 150;
   boss.goalheight = 80;
-  boss.var_98add129a7ecb962 = 1;
+  boss.allowlongdeath = 1;
   boss.maxhealth = int(level.var_e34d534debb61eda * level.var_63d0544474ed373);
   boss.health = int(level.var_e34d534debb61eda * level.var_63d0544474ed373);
   boss.maxarmorhealth = int(level.var_2e0a0145252b7f6a * level.var_48d50c4fdd3feb83);

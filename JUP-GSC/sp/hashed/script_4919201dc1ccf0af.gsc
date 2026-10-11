@@ -590,7 +590,7 @@ function private function_3ddcab276130bdff() {
   anim_stopanimScripted();
 
   if(scripts\engine\utility::issharedfuncdefined("aiReact", "combatHot")) {
-    scripts\engine\utility::function_f3bb4f4911a1beb2("aiReact", "combatHot");
+    scripts\engine\utility::callsharedfunc("aiReact", "combatHot");
   }
 }
 

@@ -18,31 +18,31 @@
 function function_a7dc4a67100b768c(relevantparameters) {
   assertex(relevantparameters.size > 0 && isactivityinstance(relevantparameters[0]), "<dev string:x1c>");
   activityinstance = relevantparameters[0];
-  var_9334fa52c33d9f6e = function_4481ee309bf2c75c(activityinstance);
+  additionalspawndatastruct = function_4481ee309bf2c75c(activityinstance);
 
-  if(istrue(var_9334fa52c33d9f6e.var_7273458500a1706)) {
-    activitytype = function_de53ed8e35d0ed7a(activityinstance);
+  if(istrue(additionalspawndatastruct.var_7273458500a1706)) {
+    activitytype = getactivitytype(activityinstance);
 
     if(activitytype == "REV_OB_BIGBOUNTY") {
       var_6608bafe66c4007b = [];
-      player = var_9334fa52c33d9f6e.var_b20fac6bac1d6fde;
+      player = additionalspawndatastruct.var_b20fac6bac1d6fde;
       customproperties = function_b9c4aa88ad97ee68(activityinstance);
 
       if(isDefined(player) && isDefined(customproperties) && isDefined(customproperties.var_9a430cc35610a8ae)) {
         varianttag = function_a4748b32a824c79c(activityinstance);
-        var_5d23c1ad1f4411ad = getStructArray(varianttag, "script_noteworthy");
+        variantscriptstructs = getStructArray(varianttag, "script_noteworthy");
         payload = [#"teamselect", player getentitynumber()];
         a_squad = player scripts\cp_mp\utility\squad_utility::getsquadmembers();
 
-        foreach(scriptstruct in var_5d23c1ad1f4411ad) {
+        foreach(scriptstruct in variantscriptstructs) {
           if(scriptstruct.targetname == "activity_nexus_instance_joiner") {
-            var_8cb27b6c067f0fe0 = spawnscriptable(customproperties.var_9a430cc35610a8ae, scriptstruct.origin, scriptstruct.angles, undefined, payload);
-            var_6608bafe66c4007b[var_6608bafe66c4007b.size] = var_8cb27b6c067f0fe0;
-            namespace_68dc261109a9503f::function_62b3e2a4e6e15396(activityinstance, var_8cb27b6c067f0fe0, 1);
+            joininteractscriptable = spawnscriptable(customproperties.var_9a430cc35610a8ae, scriptstruct.origin, scriptstruct.angles, undefined, payload);
+            var_6608bafe66c4007b[var_6608bafe66c4007b.size] = joininteractscriptable;
+            namespace_68dc261109a9503f::function_62b3e2a4e6e15396(activityinstance, joininteractscriptable, 1);
 
             foreach(unknown_player in level.players) {
               if(!array_contains(a_squad, unknown_player)) {
-                var_8cb27b6c067f0fe0 disablescriptableplayeruse(unknown_player);
+                joininteractscriptable disablescriptableplayeruse(unknown_player);
               }
             }
           }
@@ -64,23 +64,23 @@ function function_f805f042fa2f4b2(var_7273458500a1706) {
 
 function function_6e345470b71653a4(activityinstance, params) {
   assertex(!isDefined(params) || params.size != 0, "<dev string:x87>");
-  return function_511be8bcaede8b52(activityinstance) == "Objective";
+  return getactivitycategory(activityinstance) == "Objective";
 }
 
 function function_a74910a9002633d0(activityinstance, params) {
   assertex(!isDefined(params) || params.size != 0, "<dev string:x87>");
-  return function_511be8bcaede8b52(activityinstance) == "Activity";
+  return getactivitycategory(activityinstance) == "Activity";
 }
 
 function function_c37214cf3d029093(activityinstance, params) {
   assertex(!isDefined(params) || params.size != 0, "<dev string:x87>");
   activity_type = params[0];
-  return function_de53ed8e35d0ed7a(activityinstance) != activity_type;
+  return getactivitytype(activityinstance) != activity_type;
 }
 
 function function_1de0e40ac4e9356f(activityinstance, params) {
   assertex(!isDefined(params) || params.size != 0, "<dev string:x87>");
-  return function_511be8bcaede8b52(activityinstance) == "Contract";
+  return getactivitycategory(activityinstance) == "Contract";
 }
 
 function function_4a1651413519d392(activityinstance, params) {

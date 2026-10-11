@@ -297,10 +297,10 @@ function function_ec9a35eb23caf07c(trigger) {
     }
   }
 
-  var_d1e5bc9c621233e2 = 1;
-  setaudiotriggerstate("security_door", "security_door_closed", var_d1e5bc9c621233e2);
-  level.meetup.door2 rotateTo(level.meetup.struct2.angles, var_d1e5bc9c621233e2);
-  level.meetup.door2 moveTo(level.meetup.struct2.origin, var_d1e5bc9c621233e2);
+  doorclosetime = 1;
+  setaudiotriggerstate("security_door", "security_door_closed", doorclosetime);
+  level.meetup.door2 rotateTo(level.meetup.struct2.angles, doorclosetime);
+  level.meetup.door2 moveTo(level.meetup.struct2.origin, doorclosetime);
   level.meetup.door2 playSound("scn_door_metal_heavy_close_fast");
 }
 
@@ -630,14 +630,14 @@ function function_1d1b842f443a69b0() {
 
 function function_ade8b458bbcf24ac() {
   animnode = utility::getStruct("maintenance_door_animnode", "targetname");
-  var_a74fc3fb31676a23 = getEnt("maintenance_door_l", "targetname");
-  var_a74fc3fb31676a23 utility::assign_animtree("maintenance_door_l");
-  clip = getEnt(var_a74fc3fb31676a23.target, "targetname");
-  clip linkTo(var_a74fc3fb31676a23);
-  var_a74fc1fb316765bd = getEnt("maintenance_door_r", "targetname");
-  var_a74fc1fb316765bd utility::assign_animtree("maintenance_door_r");
-  clip = getEnt(var_a74fc1fb316765bd.target, "targetname");
-  clip linkTo(var_a74fc1fb316765bd);
+  doorl = getEnt("maintenance_door_l", "targetname");
+  doorl utility::assign_animtree("maintenance_door_l");
+  clip = getEnt(doorl.target, "targetname");
+  clip linkTo(doorl);
+  doorr = getEnt("maintenance_door_r", "targetname");
+  doorr utility::assign_animtree("maintenance_door_r");
+  clip = getEnt(doorr.target, "targetname");
+  clip linkTo(doorr);
   button = utility::spawn_anim_model("maintenance_button");
   animnode animation::anim_first_frame_solo(button, "maintenance_door_enter_alt");
   utility::flag_wait("2nd_floor_ambush_death");
@@ -681,7 +681,7 @@ function function_ade8b458bbcf24ac() {
   delaythread(1, &function_f024005ec95e9860);
   thread start_fan();
   animnode notify(level.partner.var_428407c1b0a62c2f);
-  animnode thread animation::anim_single([var_a74fc3fb31676a23, var_a74fc1fb316765bd], "maintenance_door_exit");
+  animnode thread animation::anim_single([doorl, doorr], "maintenance_door_exit");
   animnode thread animation::anim_single_solo(button, "maintenance_door_exit");
   animnode animation::anim_single_solo(level.partner, "maintenance_door_exit");
   utility::flag_set("player_enters_maintenance_room");
@@ -1175,22 +1175,22 @@ function function_7665f1d8193268cd(alias, var_39cad1f9e143826e) {
 }
 
 function function_d9f5caa06bcb843e(mintime, var_c2d69812ffbb3eac, var_af88adaaa4c70875, var_3bcab9de8372a161) {
-  var_fb118bca74cba5c1 = newhudelem();
-  var_fb118bca74cba5c1.alignx = "center";
-  var_fb118bca74cba5c1.aligny = "middle";
-  var_fb118bca74cba5c1.x = 320;
-  var_fb118bca74cba5c1.y = 35;
-  var_fb118bca74cba5c1.fontscale = 1;
-  var_fb118bca74cba5c1.alpha = 0;
-  var_fb118bca74cba5c1 settext(&"SP_JUP_SILO/UI_EXIT_01");
-  thread function_bba3a26b0e214ff(var_fb118bca74cba5c1);
-  var_fb1188ca74cb9f28 = newhudelem();
-  var_fb1188ca74cb9f28.alignx = "center";
-  var_fb1188ca74cb9f28.aligny = "middle";
-  var_fb1188ca74cb9f28.x = 320;
-  var_fb1188ca74cb9f28.y = 50;
-  var_fb1188ca74cb9f28.fontscale = 2;
-  var_fb1188ca74cb9f28.alpha = 0;
+  hud1 = newhudelem();
+  hud1.alignx = "center";
+  hud1.aligny = "middle";
+  hud1.x = 320;
+  hud1.y = 35;
+  hud1.fontscale = 1;
+  hud1.alpha = 0;
+  hud1 settext(&"SP_JUP_SILO/UI_EXIT_01");
+  thread function_bba3a26b0e214ff(hud1);
+  hud2 = newhudelem();
+  hud2.alignx = "center";
+  hud2.aligny = "middle";
+  hud2.x = 320;
+  hud2.y = 50;
+  hud2.fontscale = 2;
+  hud2.alpha = 0;
   minnum = 5;
 
   if(isDefined(mintime)) {
@@ -1219,7 +1219,7 @@ function function_d9f5caa06bcb843e(mintime, var_c2d69812ffbb3eac, var_af88adaaa4
   level.timer["start"] = gettime();
   level.timer["end"] = level.timer["start"] + function_a9ab389753b32597(minnum);
   level.timer["total"] = level.timer["end"] - level.timer["start"];
-  var_fb1188ca74cb9f28 settext("" + minnum + ":" + var_556252566b1a442b + var_3ac9201391352744 + "." + var_8d806073e1432ad8);
+  hud2 settext("" + minnum + ":" + var_556252566b1a442b + var_3ac9201391352744 + "." + var_8d806073e1432ad8);
   level notify("audio_timer_started");
   thread namespace_318af18595992d06::function_4b119908bdf12329("sp_jup_silo_bunker_lower_exit_tunnels", 3.5, 3.5);
 
@@ -1231,8 +1231,8 @@ function function_d9f5caa06bcb843e(mintime, var_c2d69812ffbb3eac, var_af88adaaa4
     }
 
     if(utility::flag("final_button_pushed")) {
-      var_fb118bca74cba5c1 destroy();
-      var_fb1188ca74cb9f28 destroy();
+      hud1 destroy();
+      hud2 destroy();
       return;
     }
 
@@ -1257,17 +1257,17 @@ function function_d9f5caa06bcb843e(mintime, var_c2d69812ffbb3eac, var_af88adaaa4
       var_8d806073e1432ad8--;
     }
 
-    var_fb1188ca74cb9f28 settext("" + minnum + ":" + var_556252566b1a442b + var_3ac9201391352744 + "." + var_8d806073e1432ad8);
+    hud2 settext("" + minnum + ":" + var_556252566b1a442b + var_3ac9201391352744 + "." + var_8d806073e1432ad8);
   }
 
   flag_set("timer_ran_out");
 
-  if(isDefined(var_fb118bca74cba5c1)) {
-    var_fb118bca74cba5c1 destroy();
+  if(isDefined(hud1)) {
+    hud1 destroy();
   }
 
-  if(isDefined(var_fb1188ca74cb9f28)) {
-    var_fb1188ca74cb9f28 destroy();
+  if(isDefined(hud2)) {
+    hud2 destroy();
   }
 
   player_death::set_custom_death_quote(531);

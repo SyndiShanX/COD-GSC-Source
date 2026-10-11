@@ -227,9 +227,9 @@ function player_gestures_input_disable(gesturename, pronemovement, mantle, sprin
   if(isDefined(disabletime)) {
     wait disabletime;
   } else {
-    self waittill("gesture_stopped", var_8f353b054812a006);
+    self waittill("gesture_stopped", stoppedgesturename);
 
-    if(var_8f353b054812a006 != gesturename) {
+    if(stoppedgesturename != gesturename) {
       while(true) {
         if(!self isgestureplaying(gesturename)) {
           break;
@@ -401,12 +401,12 @@ function wait_combat_cooldown(cooltime, timeout, radius) {
 }
 
 function function_53f1cff70b5d2981(time, radius) {
-  fired_recently = isDefined(level.player.var_a350546e224ce766) && !time_has_passed(level.player.var_a350546e224ce766, time);
-  var_95613ae52f97ad40 = isDefined(level.player.var_2216ecbcdd3468a4) && !time_has_passed(level.player.var_2216ecbcdd3468a4, time);
+  fired_recently = isDefined(level.player.last_fire_time) && !time_has_passed(level.player.last_fire_time, time);
+  aimed_recently = isDefined(level.player.var_2216ecbcdd3468a4) && !time_has_passed(level.player.var_2216ecbcdd3468a4, time);
   var_d13b91a3e165b579 = isDefined(level.player.var_b4410f6c6f5b0f5) && !time_has_passed(level.player.var_b4410f6c6f5b0f5, time);
   damaged = level.player.health < level.player.maxhealth;
 
-  if(level.player isfiring() || fired_recently || var_95613ae52f97ad40 || damaged) {
+  if(level.player isfiring() || fired_recently || aimed_recently || damaged) {
     return true;
   }
 
@@ -506,7 +506,7 @@ function function_e4c009184c8a30e6() {
   civs = getaiarrayinradius(level.player.origin, 1500, "neutral");
 
   foreach(civ in civs) {
-    if(istrue(civ.var_63e89ca6beccae42)) {
+    if(istrue(civ.forcegundown)) {
       allies[allies.size] = civ;
     }
   }
@@ -520,10 +520,10 @@ function function_e4c009184c8a30e6() {
 
 function function_b2385036531deb4d(ent, max_dist, player_eye, player_forward, var_b1edb654de127cc7) {
   ent_point = ent getapproxeyepos() - (0, 0, 15);
-  var_132a7e059d13e4da = vectordot(ent_point - player_eye, player_forward) > 0;
+  in_front_of_player = vectordot(ent_point - player_eye, player_forward) > 0;
   var_5979848104c205bc = length(vectorfromlinetopoint(player_eye, player_eye + player_forward, ent_point));
 
-  if(!var_132a7e059d13e4da || var_5979848104c205bc > var_b1edb654de127cc7) {
+  if(!in_front_of_player || var_5979848104c205bc > var_b1edb654de127cc7) {
     return 0;
   }
 

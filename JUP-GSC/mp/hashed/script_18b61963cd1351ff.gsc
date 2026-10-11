@@ -386,9 +386,9 @@ function function_a6dc3a7d16338e02() {
 }
 
 function function_5dee2cde694b7cda() {
-  var_f0125a769d3cfb1e = 2;
+  numminions = 2;
 
-  while(level.var_a2bcb45a0ad08c1d.agents.size < var_f0125a769d3cfb1e + 1) {
+  while(level.var_a2bcb45a0ad08c1d.agents.size < numminions + 1) {
     waitframe();
   }
 

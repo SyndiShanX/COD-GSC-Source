@@ -23,7 +23,7 @@ function function_6a4d394e7f9fc34e() {
   while(true) {
     if(isDefined(self.currentweapon) && function_a48875a04bede9a6(self.currentweapon)) {
       if(isDefined(level.var_ca0f41fe9610167a) && level.var_ca0f41fe9610167a) {
-        childthread function_844dc249ef1b3a5e();
+        childthread targetdistanceupdate();
       } else {
         childthread function_48c1bb804931bb07();
       }
@@ -61,9 +61,9 @@ function function_48c1bb804931bb07() {
   }
 }
 
-function function_844dc249ef1b3a5e() {
+function targetdistanceupdate() {
   self endon("weapon_change");
-  thread function_46d948b40cc362dc();
+  thread targetenemychanged();
   contents = create_contents(1, 1, 1, 0, 0, 1, 0, 0, 0, 0);
 
   while(true) {
@@ -100,7 +100,7 @@ function function_3e83a8605613947c(contents) {
   }
 }
 
-function function_46d948b40cc362dc() {
+function targetenemychanged() {
   lastenemy = undefined;
   thread function_86dae4285c17eba2();
 

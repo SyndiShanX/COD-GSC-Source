@@ -11,7 +11,7 @@
 #namespace namespace_522dbf6c246fea47;
 
 function autoexec main() {
-  level.var_7bf42d565645a485 = 1;
+  level.shouldinitvehicles = 1;
   function_c0b3ddc9a6bdcc46("veh_jup_blima_anim_infil", &function_aece8e9cd30f3540);
 }
 
@@ -39,7 +39,7 @@ function private function_be7c293f00e99691(spawndata, faildata) {
     vehicle.vehiclesetuprope = 1;
     vehicle vehicle_setspeed(60, 20, 10);
     vehicle.preventrespawn = 1;
-    vehicle.var_a8f4bb03b366aa80 = 1;
+    vehicle.dontspawnhusk = 1;
     vehicle.deathfunc = &vehicle_death;
     vehicle scripts\cp_mp\vehicles\vehicle_occupancy::function_a91927df280e94e4();
   }

@@ -209,8 +209,8 @@ function istouchingoobtrigger() {
   return false;
 }
 
-function ispointinoutofbounds(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
-  if(isDefined(level.var_29977dc303738053) && istrue([[level.var_29977dc303738053]](var_863c619037f3ac74, var_da8cec9bce12f9cb))) {
+function ispointinoutofbounds(pointtocheck, teamtocheck) {
+  if(isDefined(level.var_29977dc303738053) && istrue([[level.var_29977dc303738053]](pointtocheck, teamtocheck))) {
     return 1;
   }
 
@@ -220,8 +220,8 @@ function ispointinoutofbounds(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
     return pointinoutofbounds;
   } else {
     foreach(trigger in level.outofboundstriggers) {
-      if(ispointinvolume(var_863c619037f3ac74, trigger)) {
-        if(isDefined(trigger.script_team) && isDefined(var_da8cec9bce12f9cb) && trigger.script_team != var_da8cec9bce12f9cb) {
+      if(ispointinvolume(pointtocheck, trigger)) {
+        if(isDefined(trigger.script_team) && isDefined(teamtocheck) && trigger.script_team != teamtocheck) {
           continue;
         }
 
@@ -406,7 +406,7 @@ function playerentercallback(exitnotify, clearnotify, triggertype) {
   val::group_set("enterOOB", 0);
 
   if(isDefined(self.offhandweapon) && self isthrowinggrenade() && scripts\mp\utility\weapon::issuperweapon(self.offhandweapon)) {
-    self function_187fb04ebd01baea();
+    self canceloffhands();
   }
 
   if(!isDefined(self.vehicle)) {
@@ -784,7 +784,7 @@ function interactswithgivenoobtrigger(trigger, ent) {
     ref = ent scripts\cp_mp\vehicles\vehicle::function_d93ec4635290febd();
 
     if(issharedfuncdefined(ref, "interactsWithOOBTrigger")) {
-      if(!function_f3bb4f4911a1beb2(ref, "interactsWithOOBTrigger", trigger, ent)) {
+      if(!callsharedfunc(ref, "interactsWithOOBTrigger", trigger, ent)) {
         return false;
       }
     }

@@ -118,7 +118,7 @@ function binoculars_watchforads() {
     waittillframeend();
     death = istrue(raceresult.death);
     take = istrue(raceresult.take);
-    adsoff = istrue(raceresult.adsoff) || istrue(raceresult.laststand) || istrue(raceresult.enteredvehicle) || istrue(raceresult.ishaywire) || istrue(raceresult.var_a003e9e51f2cf83) || istrue(raceresult.detonateequipment) || istrue(raceresult.invalidweapon);
+    adsoff = istrue(raceresult.adsoff) || istrue(raceresult.laststand) || istrue(raceresult.enteredvehicle) || istrue(raceresult.ishaywire) || istrue(raceresult.iscoughing) || istrue(raceresult.detonateequipment) || istrue(raceresult.invalidweapon);
     adson = !adsoff && istrue(raceresult.adson);
 
     if(death || take) {
@@ -219,7 +219,7 @@ function function_f802aa89b1f729a0(raceresult) {
     break;
   }
 
-  raceresult.var_a003e9e51f2cf83 = 1;
+  raceresult.iscoughing = 1;
   self notify("binoculars_watchRaceStart");
 }
 
@@ -324,7 +324,7 @@ function binoculars_processtargetdata() {
       if(binoculars_isads()) {
         targetarray = sortbydistance(self function_c5140fff72feca2d(self.binocularsstruct.maxrange, binoculars_getfov(), level.var_2c4f2a5075921418, 0), self.origin);
         var_56bf4e4b2bb221a7 = [];
-        var_cb791416725e9bc6 = 0;
+        hasvalidtarget = 0;
 
         foreach(targetent in targetarray) {
           targetnum = targetent getentitynumber();
@@ -674,11 +674,11 @@ function binoculars_addheadicon(targetent) {
 
   var_f9cd7fda74e92e2a = 8;
   drawthroughgeo = 1;
-  var_c5409ca7522182b3 = 0;
+  maxdrawdist = 0;
   naturaldist = 500;
   targetdata = self.binocularsstruct.targetdata[targetent getentitynumber()];
   assert(isDefined(targetdata));
-  targetdata.headicon = targetent scripts\cp_mp\entityheadicons::setheadicon_singleimage([], markicon, var_f9cd7fda74e92e2a, drawthroughgeo, var_c5409ca7522182b3, naturaldist, undefined, 1, 1);
+  targetdata.headicon = targetent scripts\cp_mp\entityheadicons::setheadicon_singleimage([], markicon, var_f9cd7fda74e92e2a, drawthroughgeo, maxdrawdist, naturaldist, undefined, 1, 1);
   thread binoculars_cleanupheadiconondisconnect(targetent);
 }
 
@@ -916,17 +916,17 @@ function binoculars_istargetinbroadfov(targetent) {
 function binoculars_iswithinprojectiondistance_compute(targetent) {
   pointa = self getvieworigin();
   pointb = pointa + anglesToForward(self getplayerangles()) * self.binocularsstruct.maxrange;
-  var_20c094516733ffb1 = [targetent.origin];
+  pointstocheck = [targetent.origin];
 
   if(isPlayer(targetent)) {
     headpos = targetent scripts\mp\utility\player::getstancetop();
     centerpos = targetent scripts\mp\utility\player::getstancecenter();
-    var_20c094516733ffb1 = [headpos, centerpos, targetent.origin];
+    pointstocheck = [headpos, centerpos, targetent.origin];
   } else if(isagent(targetent)) {
-    var_20c094516733ffb1 = [targetent.origin + (0, 0, 48)];
+    pointstocheck = [targetent.origin + (0, 0, 48)];
   }
 
-  foreach(point in var_20c094516733ffb1) {
+  foreach(point in pointstocheck) {
     distsq = lengthsquared(vectorfromlinetopoint(pointa, pointb, point));
 
     if(distsq < self.binocularsstruct.projdistsq) {

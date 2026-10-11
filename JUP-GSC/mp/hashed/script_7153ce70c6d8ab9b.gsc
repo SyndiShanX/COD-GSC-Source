@@ -37,7 +37,7 @@ function function_a052c2969b025a94(callback_type, manager, eattacker) {
   }
 
   for(i = 0; i < level.rune_callbacks[callback_type]; i++) {
-    utility::function_f3bb4f4911a1beb2("zombie", callback_type + string(i), manager.targetname, eattacker);
+    utility::callsharedfunc("zombie", callback_type + string(i), manager.targetname, eattacker);
   }
 }
 
@@ -260,7 +260,7 @@ function function_e43f71d6d1c35383(einflictor, eattacker, instance, idamage, idf
   }
 
   if(issharedfuncdefined("zombie", "isAttackerValidForRune")) {
-    if(!function_f3bb4f4911a1beb2("zombie", "isAttackerValidForRune", eattacker)) {
+    if(!callsharedfunc("zombie", "isAttackerValidForRune", eattacker)) {
       instance setscriptablepartstate("health", "damageable");
       return;
     }

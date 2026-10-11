@@ -52,11 +52,11 @@ function codecallback_playerdisconnect(reason) {
     isplayerreloading = self isreloading();
 
     if(isplayerreloading) {
-      var_5814d27874b48e54 = spawnStruct();
-      var_5814d27874b48e54.player = self;
-      var_5814d27874b48e54.reloadcanceltime = getsystemtimeinmicroseconds();
-      var_5814d27874b48e54.cancelreason = "DISCONNECT";
-      namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_on_reload_cancel", var_5814d27874b48e54);
+      telemetrydata = spawnStruct();
+      telemetrydata.player = self;
+      telemetrydata.reloadcanceltime = getsystemtimeinmicroseconds();
+      telemetrydata.cancelreason = "DISCONNECT";
+      namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_on_reload_cancel", telemetrydata);
     }
   }
 

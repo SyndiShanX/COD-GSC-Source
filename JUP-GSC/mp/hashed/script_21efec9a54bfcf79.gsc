@@ -32,7 +32,7 @@ function should_drop() {
 
 function drop_powerup(spawn_pos, lifetime_override) {
   if(utility::issharedfuncdefined("powerups", "dropPowerup")) {
-    return utility::function_f3bb4f4911a1beb2("powerups", "dropPowerup", "nuke", spawn_pos, lifetime_override);
+    return utility::callsharedfunc("powerups", "dropPowerup", "nuke", spawn_pos, lifetime_override);
   }
 }
 

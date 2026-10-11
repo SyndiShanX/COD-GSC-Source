@@ -224,7 +224,7 @@ function init() {
   level.maxplunderextractions = getdvarint(@ "hash_23f4eae3aeebefd3", 7);
   level.var_ad5e78c78f492751 = getdvarint(@ "hash_2be698011074fc01", 1) == 1;
   level.var_3bee9b0a6835e07b = getdvarint(@ "hash_5a9165d11e511873", 0);
-  var_813da151d7b2ca7e = ter_op(function_ba5574c7f287c587(), 0, 1);
+  var_813da151d7b2ca7e = ter_op(ismagellanmode(), 0, 1);
   level.var_a83a4e71446bfef7 = getdvarint(@ "hash_9e2a261d00656441", var_813da151d7b2ca7e);
   level.var_5a2620a56cf4bb = getdvarint(@ "hash_b61802a00edccfa9", var_813da151d7b2ca7e);
   level.var_37172573e0865e02 = getdvarint(@ "hash_3f51edcd4ab0e8e0", 0);
@@ -425,7 +425,7 @@ function onpickuptakenintobackpack(pickupent) {
   var_7c0646d93451368c = scripts\mp\gametypes\br_pickups::function_b77386f2a0293169(pickupent.scriptablename);
 
   if(var_7c0646d93451368c) {
-    namespace_88bfae359020fdd3::function_1976438a8865ac27("br_ftue_valuables");
+    namespace_88bfae359020fdd3::ftue_triggertip("br_ftue_valuables");
   }
 }
 
@@ -725,13 +725,13 @@ function function_34e46d26df79fdad() {
   totalcash = self.plundercount + self.plunderbanked;
   var_cdf68f979a48cea6 = self.var_db548fc480c33eac[0] + self.var_db548fc480c33eac[1] + self.var_db548fc480c33eac[2] - self.var_db548fc480c33eac[3] - self.var_db548fc480c33eac[4];
   var_4e673c880cb3ff65 = var_cdf68f979a48cea6 - totalcash;
-  self setplayerdata(level.var_5d69837cf4db0407, "plunderAARValue", 0, int(var_4e673c880cb3ff65));
-  self setplayerdata(level.var_5d69837cf4db0407, "plunderAARValue", 1, int(self.var_db548fc480c33eac[4]));
-  self setplayerdata(level.var_5d69837cf4db0407, "plunderAARValue", 2, int(self.var_db548fc480c33eac[3]));
-  self setplayerdata(level.var_5d69837cf4db0407, "plunderAARValue", 3, int(self.var_db548fc480c33eac[2]));
-  self setplayerdata(level.var_5d69837cf4db0407, "plunderAARValue", 4, int(self.var_db548fc480c33eac[1]));
-  self setplayerdata(level.var_5d69837cf4db0407, "plunderAARValue", 5, int(self.var_db548fc480c33eac[0]));
-  self setplayerdata(level.var_5d69837cf4db0407, "plunderAARValue", 6, int(totalcash));
+  self setplayerdata(level.progressiongroup, "plunderAARValue", 0, int(var_4e673c880cb3ff65));
+  self setplayerdata(level.progressiongroup, "plunderAARValue", 1, int(self.var_db548fc480c33eac[4]));
+  self setplayerdata(level.progressiongroup, "plunderAARValue", 2, int(self.var_db548fc480c33eac[3]));
+  self setplayerdata(level.progressiongroup, "plunderAARValue", 3, int(self.var_db548fc480c33eac[2]));
+  self setplayerdata(level.progressiongroup, "plunderAARValue", 4, int(self.var_db548fc480c33eac[1]));
+  self setplayerdata(level.progressiongroup, "plunderAARValue", 5, int(self.var_db548fc480c33eac[0]));
+  self setplayerdata(level.progressiongroup, "plunderAARValue", 6, int(totalcash));
   scripts\mp\gametypes\br_analytics::function_9d458fb3a5d1e86a(scripts\mp\gametypes\br_plunder::getteamplunder(self.team) * 100, game["teamPlacements"][self.team], totalcash, self.var_db548fc480c33eac[0], self.var_db548fc480c33eac[1], self.var_db548fc480c33eac[2], self.var_db548fc480c33eac[3], self.var_db548fc480c33eac[4]);
 
   if(istrue(level.var_db813db0fa91a0ce)) {
@@ -2068,10 +2068,10 @@ function helidestroyvehiclestouchtrace() {
 }
 
 function tracegroundheight(start) {
-  var_dc8bb6300463cf1e = 125;
+  offgroundheight = 125;
   groundpt = tracegroundpoint(start, 100, [self]);
   groundheight = groundpt[2];
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   return trueheight;
 }
 
@@ -3303,10 +3303,10 @@ function healdamage() {
 }
 
 function tracegroundheightexfil(start) {
-  var_dc8bb6300463cf1e = 256;
+  offgroundheight = 256;
   groundpt = tracegroundpoint(start, 100, [self]);
   groundheight = groundpt[2];
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   return trueheight;
 }
 
@@ -3571,21 +3571,21 @@ function eomawardplayerxp() {
         combatxp = 0;
       }
 
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 0, combatxp);
+      player setplayerdata(level.progressiongroup, "aarValue", 0, combatxp);
       missionxp = player.pers["missionXP"];
 
       if(!isDefined(missionxp)) {
         missionxp = 0;
       }
 
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 1, missionxp);
+      player setplayerdata(level.progressiongroup, "aarValue", 1, missionxp);
       lootingxp = player.pers["lootingXP"];
 
       if(!isDefined(lootingxp)) {
         lootingxp = 0;
       }
 
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 2, lootingxp);
+      player setplayerdata(level.progressiongroup, "aarValue", 2, lootingxp);
       heldscore = 0;
 
       if(isDefined(player.plundercount)) {
@@ -3604,32 +3604,32 @@ function eomawardplayerxp() {
         player scripts\mp\rank::giverankxp(#"hash_31a9f06f2a47aeff", score, undefined, 1, 1);
       }
 
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 3, score);
+      player setplayerdata(level.progressiongroup, "aarValue", 3, score);
       reconxp = player.pers["reconXP"];
 
       if(!isDefined(reconxp)) {
         reconxp = 0;
       }
 
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 4, reconxp);
+      player setplayerdata(level.progressiongroup, "aarValue", 4, reconxp);
       matchbonus = 0;
 
       if(isDefined(player.matchbonus)) {
         matchbonus = int(player.matchbonus);
       }
 
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 5, matchbonus);
+      player setplayerdata(level.progressiongroup, "aarValue", 5, matchbonus);
 
       if(placementscore > 0) {
         player scripts\mp\rank::giverankxp(#"placement_bonus", placementscore, undefined, 1, 1);
       }
 
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 6, placementscore);
+      player setplayerdata(level.progressiongroup, "aarValue", 6, placementscore);
       squadplayxp = player scripts\mp\utility\stats::getpersstat("squadPlayXP");
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 7, isDefined(squadplayxp) ? squadplayxp : 0);
-      initialxp = player getplayerdata(level.var_5d69837cf4db0407, "aarValue", 7);
+      player setplayerdata(level.progressiongroup, "aarValue", 7, isDefined(squadplayxp) ? squadplayxp : 0);
+      initialxp = player getplayerdata(level.progressiongroup, "aarValue", 7);
       finalxp = initialxp + player.pers["summary"]["xp"];
-      player setplayerdata(level.var_5d69837cf4db0407, "aarValue", 8, finalxp);
+      player setplayerdata(level.progressiongroup, "aarValue", 8, finalxp);
       player function_34e46d26df79fdad();
     }
 

@@ -8,7 +8,7 @@
 #using scripts\engine\utility;
 #namespace swim_common;
 
-function function_e05aeec06b7b52aa(var_dc6dc154664cf0aa, var_575e6f276810675e, var_a1e7fb7b162a7323, enterfunc, exitfunc, surfacefunc, descendfunc, playsoundfunc, visionsetfunc, drownfunc, var_bb67e91ffc4e7632, var_cc3e168e41362ff2) {
+function initcommonswim(var_dc6dc154664cf0aa, var_575e6f276810675e, var_a1e7fb7b162a7323, enterfunc, exitfunc, surfacefunc, descendfunc, playsoundfunc, visionsetfunc, drownfunc, var_bb67e91ffc4e7632, var_cc3e168e41362ff2) {
   setdvarifuninitialized(@ "hash_2a4f08bc79265550", 0);
   level.swim = spawnStruct();
   level.swim.var_dc6dc154664cf0aa = var_dc6dc154664cf0aa;
@@ -152,7 +152,7 @@ function function_fc7d07d4cc7ae9f1() {
   self.swim.sprinting = 0;
   self.swim.heartbeat = 0;
   self.swim.sfxstate = "none";
-  function_5bcf4e2bd107536f();
+  createswimoverlay();
   thread function_d2c67316e3340d42();
   thread deathcleanup();
   self endon("death");
@@ -219,9 +219,9 @@ function function_d2c67316e3340d42() {
   var_946b001669de27fb = [self.swim.swimoverlay];
   waittill_any_3("death", "disconnect", "showing_final_killcam");
 
-  foreach(var_bed6393fb2e34b6a in var_946b001669de27fb) {
-    if(isDefined(var_bed6393fb2e34b6a)) {
-      var_bed6393fb2e34b6a destroy();
+  foreach(hudelm in var_946b001669de27fb) {
+    if(isDefined(hudelm)) {
+      hudelm destroy();
     }
   }
 }
@@ -229,18 +229,18 @@ function function_d2c67316e3340d42() {
 function deathcleanup() {
   self endon("disconnect");
   waittill_any_2("death", "showing_final_killcam");
-  function_3b00a7c45356a6e1();
+  deathcleanup_internal();
 }
 
-function function_3b00a7c45356a6e1() {
-  function_40d220afd2eb67b5();
+function deathcleanup_internal() {
+  uideathcleanup();
   function_179cdce690151ad6();
-  function_38fe3b60e5adf79c();
-  function_aa183ca1083d279();
+  scriptabledeathcleanup();
+  clearbreathcritical();
   self.swim = undefined;
 }
 
-function function_40d220afd2eb67b5() {
+function uideathcleanup() {
   self setclientomnvar("swim_breath_meter_hide", 1);
 }
 
@@ -248,7 +248,7 @@ function function_179cdce690151ad6() {
   function_b66c4e6d072630c(0.05);
 }
 
-function function_38fe3b60e5adf79c() {
+function scriptabledeathcleanup() {
   self setscriptablepartstate("swimDebris", "aboveWater");
   self setscriptablepartstate("swimBubbles", "aboveWater");
 }
@@ -261,7 +261,7 @@ function function_8173a7a676c2aa00() {
   childthread function_458135edd51d48b8();
   childthread function_a3b4435c21f67884();
   childthread function_da4d3d2e5560fe3a();
-  function_aa183ca1083d279();
+  clearbreathcritical();
   function_542add828c78e976();
   self childthread[[level.swim.surfacefunc]]();
 }
@@ -485,17 +485,17 @@ function function_3b40f73c6038a3b0() {
 }
 
 function function_fb5bfd7783364f80() {
-  var_6fcfedc89a8dc3d5 = 0;
+  pulsequaked = 0;
   var_21c40030c467a5f6 = function_d4a3e79cc1808058();
 
   while(true) {
     waittillframeend();
 
-    if(function_ea8199f09c110522()) {
+    if(isbreathcritical()) {
       pulsetime = self.heartbeat.pulsetime;
       time = gettime();
 
-      if(pulsetime > 0.9 && !var_6fcfedc89a8dc3d5) {
+      if(pulsetime > 0.9 && !pulsequaked) {
         if(function_c2be12529b0f0ad2()) {
           factor = math::normalize_value(0, var_21c40030c467a5f6, self.swim.breath);
 
@@ -510,9 +510,9 @@ function function_fb5bfd7783364f80() {
           childthread scripts\common\heartbeat::function_b7c36a804415225b(heartbeat);
         }
 
-        var_6fcfedc89a8dc3d5 = 1;
-      } else if(pulsetime < 0.5 && var_6fcfedc89a8dc3d5) {
-        var_6fcfedc89a8dc3d5 = 0;
+        pulsequaked = 1;
+      } else if(pulsetime < 0.5 && pulsequaked) {
+        pulsequaked = 0;
       }
     }
 
@@ -525,14 +525,14 @@ function function_5d9e116115d3c60d() {
     self setclientomnvar("swim_breath_meter_hide", 0);
   }
 
-  var_4ab9ecb27b15881d = function_90c418d9bae08d74(0.66);
-  var_4ab9e9b27b158184 = function_90c418d9bae08d74(0.33);
+  lightbubbles1 = function_90c418d9bae08d74(0.66);
+  lightbubbles2 = function_90c418d9bae08d74(0.33);
   starttime = gettime();
 
   for(godmode = 0; true; godmode = swim_drown(godmode)) {
     while(self.swim.breath > 0) {
       godmode = 0;
-      var_fd9f67f7fb502bd3 = [[function_706e311766a84377()]]();
+      breathholdtime = [[function_706e311766a84377()]]();
 
       if(getdvarint(@ "hash_2a4f08bc79265550")) {
         self.swim.breath = 100;
@@ -542,7 +542,7 @@ function function_5d9e116115d3c60d() {
         }
 
         if(!function_9b65944d3ce0f852()) {
-          self.swim.breath -= 100 / var_fd9f67f7fb502bd3 * 0.05;
+          self.swim.breath -= 100 / breathholdtime * 0.05;
           self.swim.breath = clamp(self.swim.breath, 0, 100);
         }
       }
@@ -555,22 +555,22 @@ function function_5d9e116115d3c60d() {
         self.swim.sprinting = 0;
       }
 
-      if(!var_4ab9ecb27b15881d && function_90c418d9bae08d74(0.66)) {
+      if(!lightbubbles1 && function_90c418d9bae08d74(0.66)) {
         lightbubbles();
-        var_4ab9ecb27b15881d = 1;
+        lightbubbles1 = 1;
       }
 
-      if(!var_4ab9e9b27b158184 && function_90c418d9bae08d74(0.33)) {
+      if(!lightbubbles2 && function_90c418d9bae08d74(0.33)) {
         lightbubbles();
-        var_4ab9e9b27b158184 = 1;
+        lightbubbles2 = 1;
       }
 
       if(!function_7e903535100a53f3() && function_3776bacc92b445d3()) {
         function_f53f052ec435e9c5();
       }
 
-      if(!function_ea8199f09c110522() && function_e40b04d1193aa8c3()) {
-        function_2635b692c9c491b4();
+      if(!isbreathcritical() && function_e40b04d1193aa8c3()) {
+        setbreathcritical();
         function_1bb8793f81f3dd35();
       }
 
@@ -584,7 +584,7 @@ function function_5d9e116115d3c60d() {
 function swim_drown(wasgodmode) {
   self endon("swim_stop_drowning");
   self notify("swim_start_drowning");
-  var_cecfcb613ccbacba = undefined;
+  drownweaponobj = undefined;
 
   if(wasgodmode) {
     wait 0.5;
@@ -594,8 +594,8 @@ function swim_drown(wasgodmode) {
     if(true) {
       self setclienttriggeraudiozone("underwater_deathsdoor", 4);
 
-      if(isDefined(level.var_372a9eab717e5d8d)) {
-        vision = level.var_372a9eab717e5d8d;
+      if(isDefined(level.drownvisionoverride)) {
+        vision = level.drownvisionoverride;
       } else {
         vision = "drowning";
       }
@@ -615,10 +615,10 @@ function swim_drown(wasgodmode) {
     }
 
     function_4d1eaa072369ad4b();
-    var_cecfcb613ccbacba = self[[level.swim.drownfunc]]();
+    drownweaponobj = self[[level.swim.drownfunc]]();
   }
 
-  self dodamage(self.health + 10000, self.origin, self, self, "MOD_SUICIDE", var_cecfcb613ccbacba, "torso_upper");
+  self dodamage(self.health + 10000, self.origin, self, self, "MOD_SUICIDE", drownweaponobj, "torso_upper");
   return true;
 }
 
@@ -702,8 +702,8 @@ function function_8c3428aeb7c8b1f4(amount, var_3918dd3a9b1b12a9) {
     self function_746d32fac66e0b73(int(self.swim.breath));
     var_21c40030c467a5f6 = function_d4a3e79cc1808058();
 
-    if(self.swim.breath > var_21c40030c467a5f6 && function_ea8199f09c110522()) {
-      function_aa183ca1083d279();
+    if(self.swim.breath > var_21c40030c467a5f6 && isbreathcritical()) {
+      clearbreathcritical();
       self clearsoundsubmix("iw9_player_drowning", 0);
       self setclienttriggeraudiozone("underwater", 5);
     }
@@ -746,12 +746,12 @@ function updateswimoverlaycolor() {
 
   if(isDefined(level.var_19d38dec02a818ce) && [[level.var_19d38dec02a818ce]]("player", "updateSwimOverlayColor")) {
     colorfunc = [[level.var_49b393a31d0b0b95]]("player", "updateSwimOverlayColor");
-    color = [[colorfunc]](self.swim.breath, function_ea8199f09c110522(), var_21c40030c467a5f6, 100);
+    color = [[colorfunc]](self.swim.breath, isbreathcritical(), var_21c40030c467a5f6, 100);
     self.swim.swimoverlay.color = color;
     return;
   }
 
-  if(function_ea8199f09c110522()) {
+  if(isbreathcritical()) {
     colormax = (0.2, 0.1, 0.1);
     colormin = (0.25, 0.05, 0.05);
     factor = math::normalize_value(0, var_21c40030c467a5f6, self.swim.breath);
@@ -772,22 +772,22 @@ function function_66cd16083cc71a78() {
     assertmsg("<dev string:x1c>");
   }
 
-  if(function_ea8199f09c110522()) {
-    var_bb45e9e6f61e1633 = 0.1;
-    var_e3c581a803bd0fa5 = 0.2;
-    var_3179113a20b106b9 = 0.5;
-    var_1e4a3810e3cce69f = 0.75;
+  if(isbreathcritical()) {
+    minminalpha = 0.1;
+    minmaxalpha = 0.2;
+    maxminalpha = 0.5;
+    maxmaxalpha = 0.75;
     factor = math::normalize_value(0, var_21c40030c467a5f6, self.swim.breath);
   } else {
-    var_bb45e9e6f61e1633 = 0;
-    var_e3c581a803bd0fa5 = 0.3;
-    var_3179113a20b106b9 = 0.2;
-    var_1e4a3810e3cce69f = 0.6;
+    minminalpha = 0;
+    minmaxalpha = 0.3;
+    maxminalpha = 0.2;
+    maxmaxalpha = 0.6;
     factor = math::normalize_value(var_21c40030c467a5f6, 100, self.swim.breath);
   }
 
-  maxalpha = math::factor_value(var_1e4a3810e3cce69f, var_3179113a20b106b9, factor);
-  minalpha = math::factor_value(var_e3c581a803bd0fa5, var_bb45e9e6f61e1633, factor);
+  maxalpha = math::factor_value(maxmaxalpha, maxminalpha, factor);
+  minalpha = math::factor_value(minmaxalpha, minminalpha, factor);
   self.swim.swimoverlay.alpha = math::factor_value(minalpha, maxalpha, self.heartbeat.pulsetime);
 }
 
@@ -796,11 +796,11 @@ function function_3776bacc92b445d3() {
     return false;
   }
 
-  var_62f2a5497a3c2c34 = function_75a367e461c6389a();
-  return self.swim.breath < var_62f2a5497a3c2c34;
+  breathheartbeatthreshold = function_75a367e461c6389a();
+  return self.swim.breath < breathheartbeatthreshold;
 }
 
-function function_ea8199f09c110522() {
+function isbreathcritical() {
   return self.swim.breathcritical;
 }
 
@@ -826,11 +826,11 @@ function function_90c418d9bae08d74(var_bb85a75787c26d48) {
     return false;
   }
 
-  var_62cf7f9ce94b7f89 = function_317e02dca870dff(var_bb85a75787c26d48);
-  return self.swim.breath < var_62cf7f9ce94b7f89;
+  lightbubblesthreshold = function_317e02dca870dff(var_bb85a75787c26d48);
+  return self.swim.breath < lightbubblesthreshold;
 }
 
-function function_aa183ca1083d279() {
+function clearbreathcritical() {
   self setclientomnvar("swim_breath_meter_critical", 0);
 
   if(isDefined(self.swim)) {
@@ -839,7 +839,7 @@ function function_aa183ca1083d279() {
   }
 }
 
-function function_2635b692c9c491b4() {
+function setbreathcritical() {
   self setclienttriggeraudiozone("underwater_drowning", 5);
   self setsoundsubmix("iw9_player_drowning", 5);
   self.swim.breathcritical = 1;
@@ -874,30 +874,30 @@ function function_102c01b146eedc7d() {
 }
 
 function function_75a367e461c6389a() {
-  var_fd9f67f7fb502bd3 = [[function_706e311766a84377()]]();
-  var_80574e7bbde66c18 = var_fd9f67f7fb502bd3 - 6;
-  return var_80574e7bbde66c18 / var_fd9f67f7fb502bd3 * 100;
+  breathholdtime = [[function_706e311766a84377()]]();
+  var_80574e7bbde66c18 = breathholdtime - 6;
+  return var_80574e7bbde66c18 / breathholdtime * 100;
 }
 
 function function_d4a3e79cc1808058() {
-  var_fd9f67f7fb502bd3 = [[function_706e311766a84377()]]();
+  breathholdtime = [[function_706e311766a84377()]]();
   var_647e0301d37aebf7 = [[level.swim.var_575e6f276810675e]]();
-  return var_647e0301d37aebf7 / var_fd9f67f7fb502bd3 * 100;
+  return var_647e0301d37aebf7 / breathholdtime * 100;
 }
 
 function function_317e02dca870dff(var_bb85a75787c26d48) {
-  var_fd9f67f7fb502bd3 = [[function_706e311766a84377()]]();
+  breathholdtime = [[function_706e311766a84377()]]();
   var_647e0301d37aebf7 = [[level.swim.var_575e6f276810675e]]();
-  var_71c2d4c5700674f7 = var_647e0301d37aebf7 + var_bb85a75787c26d48 * (var_fd9f67f7fb502bd3 - var_647e0301d37aebf7);
-  return var_71c2d4c5700674f7 / var_fd9f67f7fb502bd3 * 100;
+  lightbubblestime = var_647e0301d37aebf7 + var_bb85a75787c26d48 * (breathholdtime - var_647e0301d37aebf7);
+  return lightbubblestime / breathholdtime * 100;
 }
 
 function function_b1b34805f6f1b18f() {
-  var_fd9f67f7fb502bd3 = [[function_706e311766a84377()]]();
-  return var_fd9f67f7fb502bd3 * self.swim.breath / 100;
+  breathholdtime = [[function_706e311766a84377()]]();
+  return breathholdtime * self.swim.breath / 100;
 }
 
-function function_5bcf4e2bd107536f() {
+function createswimoverlay() {
   self.swim.swimoverlay = newclienthudelem(self);
   self.swim.swimoverlay.sort = 1;
   self.swim.swimoverlay.x = 0;

@@ -85,8 +85,8 @@ function shoot_enemy_until_he_hides_then_shoot_wall(ent) {
     eye = enemy getEye();
     angles = vectortoangles(eye - ent.origin);
     angles = anglesToForward(angles);
-    var_5e6ce37bb5c4acd9 = 150;
-    timer = distance(ent.origin, self.last_enemy_sighting_position) / var_5e6ce37bb5c4acd9;
+    units_per_second = 150;
+    timer = distance(ent.origin, self.last_enemy_sighting_position) / units_per_second;
 
     if(timer > 0) {
       ent moveTo(self.last_enemy_sighting_position, timer);

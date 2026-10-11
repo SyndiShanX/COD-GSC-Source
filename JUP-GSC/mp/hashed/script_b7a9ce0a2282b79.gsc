@@ -308,7 +308,7 @@ function function_ea56934c1996d527(player, location, sublocation) {
 
   if(isDefined(childids) && isDefined(childids[5]) && isDefined(loottype) && loottype == "camo") {
     weaponcamo = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(childids[5]);
-    bundledata = function_50f8a8f765bad85e(hashcat(%"hash_1345cc24140e89b8", weaponcamo), [#"ref"]);
+    bundledata = getscriptbundlefieldvalues(hashcat(%"hash_1345cc24140e89b8", weaponcamo), [#"ref"]);
     struct.weaponcamo = bundledata.ref;
   }
 
@@ -488,19 +488,19 @@ function function_bf2fa755e8269ca8(keys, values, instance, var_d3c548c09bb62da2)
 function function_a839b9ad5740477d(player, location, sublocation, var_223785486725cd51) {
   weaponstruct = function_ea56934c1996d527(player, location, sublocation);
   rootname = scripts\cp_mp\weapon::getweaponrootname(weaponstruct.weaponref);
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "weapon", rootname);
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "variantID", weaponstruct.weaponvariant);
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "lootItemID", weaponstruct.lootitemid);
+  player setplayerdata(level.progressiongroup, "dmzWeapon", "weapon", rootname);
+  player setplayerdata(level.progressiongroup, "dmzWeapon", "variantID", weaponstruct.weaponvariant);
+  player setplayerdata(level.progressiongroup, "dmzWeapon", "lootItemID", weaponstruct.lootitemid);
   var_428a6c7cd65625c0 = 0;
 
   if(isDefined(weaponstruct.attachmentrefs)) {
     for(attachmentindex = 0; attachmentindex < weaponstruct.attachmentrefs.size; attachmentindex++) {
-      player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "attachment", weaponstruct.attachmentrefs[attachmentindex]);
-      player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "variantID", weaponstruct.attachmentids[attachmentindex]);
+      player setplayerdata(level.progressiongroup, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "attachment", weaponstruct.attachmentrefs[attachmentindex]);
+      player setplayerdata(level.progressiongroup, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "variantID", weaponstruct.attachmentids[attachmentindex]);
 
       if(isDefined(weaponstruct.var_eae5a591e200672) && isDefined(weaponstruct.var_eae5a591e200672[attachmentindex])) {
-        player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "customTune", 0, function_f3c863dd3265167(weaponstruct.var_eae5a591e200672[attachmentindex][0]));
-        player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "customTune", 1, function_f3c863dd3265167(weaponstruct.var_eae5a591e200672[attachmentindex][1]));
+        player setplayerdata(level.progressiongroup, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "customTune", 0, function_f3c863dd3265167(weaponstruct.var_eae5a591e200672[attachmentindex][0]));
+        player setplayerdata(level.progressiongroup, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "customTune", 1, function_f3c863dd3265167(weaponstruct.var_eae5a591e200672[attachmentindex][1]));
       }
 
       var_428a6c7cd65625c0++;
@@ -508,21 +508,21 @@ function function_a839b9ad5740477d(player, location, sublocation, var_2237854867
   }
 
   if(isDefined(weaponstruct.weaponcamo)) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "camo", weaponstruct.weaponcamo);
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "camo", weaponstruct.weaponcamo);
   }
 
   if(isDefined(weaponstruct.weaponreticle)) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "reticle", weaponstruct.weaponreticle);
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "reticle", weaponstruct.weaponreticle);
   }
 
   if(isDefined(weaponstruct.var_67dfd35699ba2d3e)) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "cosmeticAttachment", weaponstruct.var_67dfd35699ba2d3e);
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "cosmeticAttachment", weaponstruct.var_67dfd35699ba2d3e);
   }
 
   if(isDefined(weaponstruct.weaponstickers)) {
     for(var_36d2abbdcbcb186c = 0; var_36d2abbdcbcb186c < weaponstruct.weaponstickers.size; var_36d2abbdcbcb186c++) {
       if(isDefined(weaponstruct.weaponstickers[var_36d2abbdcbcb186c])) {
-        player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "sticker", var_36d2abbdcbcb186c, weaponstruct.weaponstickers[var_36d2abbdcbcb186c]);
+        player setplayerdata(level.progressiongroup, "dmzWeapon", "sticker", var_36d2abbdcbcb186c, weaponstruct.weaponstickers[var_36d2abbdcbcb186c]);
       }
     }
   }
@@ -597,12 +597,12 @@ function function_787f50a063a49187(player, kind, location, sublocation, weaponob
             attachmentlootid = scripts\mp\weapons::function_1c6803f36c2ea0a6(weaponobj.basename, attachment, weaponobj.attachmentvarindices[attachment]);
 
             if(!isDefined(attachmentlootid)) {
-              attachmentlootid = scripts\cp_mp\weapon::function_693e108cb61ceeb5(rootname, attachment);
+              attachmentlootid = scripts\cp_mp\weapon::getattachmentlootid(rootname, attachment);
             }
 
             subcomponents[attachmentindex] = attachmentlootid;
           } else {
-            subcomponents[attachmentindex] = scripts\cp_mp\weapon::function_693e108cb61ceeb5(rootname, attachment);
+            subcomponents[attachmentindex] = scripts\cp_mp\weapon::getattachmentlootid(rootname, attachment);
           }
 
           attachmentindex += 1;
@@ -1162,8 +1162,8 @@ function function_33366ade5697aa38(player) {
     lootid = lootinstance.lootid;
     quantity = function_423648b9c03fdaa1(3, lootinstance, 0);
     quantity = int(default_to(quantity, 1));
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzBackpack", backpackindex, "lootID", lootid);
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzBackpack", backpackindex, "quantity", quantity);
+    player setplayerdata(level.progressiongroup, "dmzBackpack", backpackindex, "lootID", lootid);
+    player setplayerdata(level.progressiongroup, "dmzBackpack", backpackindex, "quantity", quantity);
     player namespace_512200f0f9e6ebc9::function_bac731e0fdaa0ccb(lootid);
   }
 
@@ -1171,7 +1171,7 @@ function function_33366ade5697aa38(player) {
 
   for(backpackindex = 0; backpackindex < 11; backpackindex++) {
     lootid = player getlootidatbackpackindex(backpackindex);
-    quantity = player function_897b29adb37f06a7(backpackindex);
+    quantity = player getquantityatbackpackindex(backpackindex);
     ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(lootid);
 
     println("<dev string:x19c>" + backpackindex + "<dev string:x1a1>" + lootid + "<dev string:x1ab>" + ref + "<dev string:x1b1>" + lootid);
@@ -1294,7 +1294,7 @@ function savecash(player) {
     return;
   }
 
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzPocketCash", plundercount);
+  player setplayerdata(level.progressiongroup, "dmzPocketCash", plundercount);
 }
 
 function function_cd234cdd6b1b3699(player) {
@@ -1334,7 +1334,7 @@ function function_ea65e35c77f7679b(player) {
 
         if(var_a38e261031751c09) {
           ownedstashitems[lootinstance.lootid] = 1;
-          currentquantity = player namespace_aead94004cf4c147::function_897b29adb37f06a7(backpackindex);
+          currentquantity = player namespace_aead94004cf4c147::getquantityatbackpackindex(backpackindex);
           function_f605baf61d74d8df(player, lootinstance, currentquantity);
         }
       }
@@ -1385,7 +1385,7 @@ function function_1341f0ae49d492cd(player, var_fd5de2fbc2159648, infil) {
       }
 
       if(!istrue(infil)) {
-        currentquantity = player namespace_aead94004cf4c147::function_897b29adb37f06a7(backpackindex);
+        currentquantity = player namespace_aead94004cf4c147::getquantityatbackpackindex(backpackindex);
 
         if(scripts\mp\gametypes\dmz_dog_tag::function_3c17a26ce6a4668(lootinstance.lootid)) {
           currentquantity = scripts\mp\gametypes\dmz_dog_tag::function_20d00accaa12c27f();
@@ -1470,13 +1470,13 @@ function private function_e29c498dd636939a(instance, prefix) {
 }
 
 function function_ddd16c8b86863b56(player) {
-  operatorindex = player getplayerdata(level.var_5d69837cf4db0407, "dmzActiveOperatorSlot");
+  operatorindex = player getplayerdata(level.progressiongroup, "dmzActiveOperatorSlot");
   return operatorindex - 100;
 }
 
 function function_1d6d967dbf6dfa05(player) {
-  cash = player getplayerdata(level.var_5d69837cf4db0407, "dmzPocketCash");
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzPocketCash", 0);
+  cash = player getplayerdata(level.progressiongroup, "dmzPocketCash");
+  player setplayerdata(level.progressiongroup, "dmzPocketCash", 0);
   return cash;
 }
 
@@ -2026,7 +2026,7 @@ function function_c0cc833a07b24cd8(player, instance, paramoffset, unlockeventpar
   variantref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(lootid);
   rootname = scripts\cp_mp\weapon::getweaponrootname(variantref);
   assetname = scripts\cp_mp\weapon::getweaponassetname(rootname);
-  attachments = function_6527364c1ecca6c6(assetname);
+  attachments = getweapondefaultattachments(assetname);
 
   foreach(attachment in attachments) {
     attachmentscriptbundle = getscriptbundle(hashcat(%"hash_3c2c9813bb16552f", attachment));
@@ -2105,7 +2105,7 @@ function unlockitems(player) {
   assertmsg(var_23d99faf8c73c <= 49, "<dev string:x1c8>" + var_23d99faf8c73c + "<dev string:x1ee>" + 49 + "<dev string:x218>");
 
   if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-    player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, unlockeventparams);
+    player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, unlockeventparams);
   }
 }
 
@@ -2446,8 +2446,8 @@ function function_6e0f57c0fdd64f13(player) {
 
       if(backpackindex <= 12) {
         var_239511438b021cbe = backpackindex - 1;
-        player setplayerdata(level.var_5d69837cf4db0407, "dmzBackpack", var_239511438b021cbe, "lootID", 0);
-        player setplayerdata(level.var_5d69837cf4db0407, "dmzBackpack", var_239511438b021cbe, "quantity", 0);
+        player setplayerdata(level.progressiongroup, "dmzBackpack", var_239511438b021cbe, "lootID", 0);
+        player setplayerdata(level.progressiongroup, "dmzBackpack", var_239511438b021cbe, "quantity", 0);
       }
 
       function_dc67872cc4cfae72(player, 2, backpackindex);

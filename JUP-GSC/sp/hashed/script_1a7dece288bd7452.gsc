@@ -275,7 +275,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_utv";
+  s.script_vehicleref = "veh_jup_utv";
   fe[[f]](s, us, cf, (6343.87, -387.35, 413.91), (0, 267.2, 0), "utv_spawner");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
@@ -1454,7 +1454,7 @@ function createstructs(fe, us, cf) {
   s.dont_kill_off = "1";
   s.never_kill_off = "1";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "intro_vehicle02_ai";
   fe[[f]](s, us, cf, (4008.7, -6017.45, 58), (0, 1.41, 0), "intro_vehicle02_DISABLED", "cspf_0_auto3968962513839606426");
   s = s();
@@ -1914,7 +1914,7 @@ function createstructs(fe, us, cf) {
   s.never_kill_off = "1";
   s.compositemodel = "1";
   s.script_vehiclegroup = "intro_vehicle_ai";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (2188.46, -646.08, 56), (0, 90.81, 0), "intro_vehicle01", "cspf_0_auto11245622739644502019");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
@@ -3629,7 +3629,7 @@ function createstructs(fe, us, cf) {
   s.never_kill_off = "1";
   s.compositemodel = "1";
   s.script_vehiclegroup = "outro_vehicle01_ai";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (5578.96, -2106.58, 60), (0, 90.81, 0), "outro_vehicle01", "cspf_0_auto4718018290111385019");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
@@ -4359,7 +4359,7 @@ function createstructs(fe, us, cf) {
   s.never_kill_off = "1";
   s.compositemodel = "1";
   s.script_vehiclegroup = "ai_exfiltruck_01";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (2163.27, -698.17, 62), (0, 272, 0), "exfiltruck_01_DISABLED", "cspf_0_auto75");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
@@ -4458,7 +4458,7 @@ function createstructs(fe, us, cf) {
   s.never_kill_off = "1";
   s.compositemodel = "1";
   s.script_vehiclegroup = "outro_vehicle02_ai";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (5553.96, -2481.58, 56), (0, 90.81, 0), "outro_vehicle02", "cspf_0_auto5609408004634273059");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
@@ -4514,7 +4514,7 @@ function createstructs(fe, us, cf) {
   s.compositemodel = "1";
   s.script_checkpoint = "found_gps_tracker";
   s.script_vehiclegroup = "ai_ship_vehicle";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (5040.45, -4470.3, 58), (0, 91.41, 0), "ship_vehicle", "cspf_0_auto8863015087730546803");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
@@ -4657,7 +4657,7 @@ function createstructs(fe, us, cf) {
   s.never_kill_off = "1";
   s.compositemodel = "1";
   s.script_vehiclegroup = "ai_convoy_01";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (2184.74, -5785.38, 62), (0, 89.31, 0), "convoy_01", "cspf_0_auto24");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
@@ -4866,7 +4866,7 @@ function createstructs(fe, us, cf) {
   s.never_kill_off = "1";
   s.compositemodel = "1";
   s.script_vehiclegroup = "ai_boattruck_01";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (3428.58, -2262.96, 62), (0, 270.86, 0), "boattruck_01", "cspf_0_auto9480416747209152702");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
@@ -4902,21 +4902,21 @@ function createstructs(fe, us, cf) {
   s.dont_kill_off = "1";
   s.never_kill_off = "1";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (4833.24, -6701.88, 62), (0, 67.81, 0), "parked_vehicle01");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
   s.dont_kill_off = "1";
   s.never_kill_off = "1";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (4647.56, -6637.73, 56), (0, 161.41, 0), "parked_vehicle02");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";
   s.dont_kill_off = "1";
   s.never_kill_off = "1";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (1355.47, -4133.13, 58), (0, 217.31, 0), "parked_vehicle03");
   s = s();
   s.cs_flag = "cp_jup_port_create_script";

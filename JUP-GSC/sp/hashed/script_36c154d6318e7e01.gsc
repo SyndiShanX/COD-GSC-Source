@@ -20,7 +20,7 @@ function main() {
   self.secondaryweapon = makeweapon("iw9_me_riotshield_sp");
   self.sidearm = makeweapon("jup_jp12_pi_mike93_sp");
   self.behaviortreeasset = "riotshield_sp";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "soldier";
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
@@ -38,9 +38,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       return function_9ac26a51c94ccf52();

@@ -43,7 +43,7 @@ function private function_b3802ac8327a6687(var_ca3f9f388971b729) {
 
   switch (var_ca3f9f388971b729) {
     case 3:
-      function_f3bb4f4911a1beb2("ob_disciple_bottle", "spawn_disciple_pet");
+      callsharedfunc("ob_disciple_bottle", "spawn_disciple_pet");
       break;
     case 1:
       spawn_hellhound_pet();

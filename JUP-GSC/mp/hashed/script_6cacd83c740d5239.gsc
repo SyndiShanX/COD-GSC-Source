@@ -628,13 +628,13 @@ function function_3cfa9c416247ce77() {
     ammo_crate = spawnscriptable("military_ammo_restock_noent", struct.origin, struct.angles);
   }
 
-  var_96ddc4ea6dc265d4 = ["ob_seismic_refractor_summon_a", "ob_seismic_refractor_summon_b", "ob_seismic_refractor_summon_c", "ob_seismic_refractor_summon_d"];
+  scriptable_array = ["ob_seismic_refractor_summon_a", "ob_seismic_refractor_summon_b", "ob_seismic_refractor_summon_c", "ob_seismic_refractor_summon_d"];
   key_array = ["obloot_key_summon_a", "obloot_key_summon_b", "obloot_key_summon_c", "obloot_key_summon_d"];
   var_671b4c56d9271130 = [ &"JUP_OB_OBJECTIVES/SUMMON_REFRACTOR_A_NO_KEYCARD", &"JUP_OB_OBJECTIVES/SUMMON_REFRACTOR_B_NO_KEYCARD", &"JUP_OB_OBJECTIVES/SUMMON_REFRACTOR_C_NO_KEYCARD", &"JUP_OB_OBJECTIVES/SUMMON_REFRACTOR_D_NO_KEYCARD"];
   var_136714198bebc58f = [ &"JUP_OB_OBJECTIVES/SUMMON_REFRACTOR_A_NOT_ACTIVE", &"JUP_OB_OBJECTIVES/SUMMON_REFRACTOR_B_NOT_ACTIVE", &"JUP_OB_OBJECTIVES/SUMMON_REFRACTOR_C_NOT_ACTIVE", &"JUP_OB_OBJECTIVES/SUMMON_REFRACTOR_D_NOT_ACTIVE"];
 
   foreach(idx, struct in var_89e3d0ed94b39a38) {
-    refractor = ob_seismic_refractor::spawn_refractor(struct, var_96ddc4ea6dc265d4[idx]);
+    refractor = ob_seismic_refractor::spawn_refractor(struct, scriptable_array[idx]);
     refractor ob_seismic_refractor::function_cf139bdff2bdcaad(&function_61f59a9cc42c932);
     refractor.key_name = key_array[idx];
     refractor.var_8c2f2d93ef1b5a63 = var_671b4c56d9271130[idx];

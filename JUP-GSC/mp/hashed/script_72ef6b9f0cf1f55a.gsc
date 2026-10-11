@@ -7,7 +7,7 @@
 #using scripts\common\ui;
 #using scripts\common\utility;
 #using scripts\engine\utility;
-#namespace namespace_6917e6eed10cfc44;
+#namespace hud_management;
 
 function private autoexec __init__system__() {
   system::register(#"hash_58f5dc856591d010", undefined, &pre_main, undefined);
@@ -18,15 +18,15 @@ function private pre_main() {
     level.player = getEntArray("player", "classname")[0];
   }
 
-  if(!isDefined(level.var_6917e6eed10cfc44)) {
-    level.var_6917e6eed10cfc44 = spawnStruct();
+  if(!isDefined(level.hud_management)) {
+    level.hud_management = spawnStruct();
   }
 
-  if(!isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d)) {
-    level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d = spawnStruct();
+  if(!isDefined(level.hud_management.scripted_widgets)) {
+    level.hud_management.scripted_widgets = spawnStruct();
   }
 
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  data = level.hud_management.scripted_widgets;
   data.widget_types = [];
   data.anchor_types = [];
   data.archetypes = [];
@@ -38,16 +38,16 @@ function private pre_main() {
   scripts\common\ui::lui_registercallback("scripted_widget_closed", &scripted_widget_closed);
 }
 
-function private function_ce0d74e919485109(var_44c1d0100b18dd6d) {
-  if(!isDefined(var_44c1d0100b18dd6d)) {
+function private function_ce0d74e919485109(scripted_widgets) {
+  if(!isDefined(scripted_widgets)) {
     return;
   }
 
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  data.var_4dc78c94cd673b03 = var_44c1d0100b18dd6d.var_348f35d05ac9a37e;
+  data = level.hud_management.scripted_widgets;
+  data.max_widgets = scripted_widgets.var_348f35d05ac9a37e;
 
-  if(isDefined(var_44c1d0100b18dd6d.archetypes)) {
-    foreach(archetype in var_44c1d0100b18dd6d.archetypes) {
+  if(isDefined(scripted_widgets.archetypes)) {
+    foreach(archetype in scripted_widgets.archetypes) {
       archetype_data = getscriptbundle("scriptedwidgetarchetype:" + archetype.archetype);
       archetype_name = tolower(archetype.archetype);
 
@@ -75,8 +75,8 @@ function private function_ce0d74e919485109(var_44c1d0100b18dd6d) {
     }
   }
 
-  if(isDefined(var_44c1d0100b18dd6d.anchors)) {
-    foreach(anchor in var_44c1d0100b18dd6d.anchors) {
+  if(isDefined(scripted_widgets.anchors)) {
+    foreach(anchor in scripted_widgets.anchors) {
       anchor_data = getscriptbundle("scriptedwidgetanchorsettings:" + anchor.anchor);
       anchor_name = tolower(anchor.anchor);
 
@@ -86,12 +86,12 @@ function private function_ce0d74e919485109(var_44c1d0100b18dd6d) {
     }
   }
 
-  foreach(widget in var_44c1d0100b18dd6d.var_44c1d0100b18dd6d) {
+  foreach(widget in scripted_widgets.scripted_widgets) {
     function_26f299852d555394(widget.scripted_widget);
   }
 
-  if(isDefined(var_44c1d0100b18dd6d.var_fe35ca9b37873aa2) && var_44c1d0100b18dd6d.var_fe35ca9b37873aa2 > 0) {
-    data.var_56a961d04403887.max_items = var_44c1d0100b18dd6d.var_fe35ca9b37873aa2;
+  if(isDefined(scripted_widgets.var_fe35ca9b37873aa2) && scripted_widgets.var_fe35ca9b37873aa2 > 0) {
+    data.var_56a961d04403887.max_items = scripted_widgets.var_fe35ca9b37873aa2;
     data.var_56a961d04403887.num_groups = ceil(data.var_56a961d04403887.max_items / 8);
     data.var_56a961d04403887.group_mask = 0;
     data.var_56a961d04403887.group_shift = 0;
@@ -104,7 +104,7 @@ function private function_ce0d74e919485109(var_44c1d0100b18dd6d) {
 }
 
 function private function_26f299852d555394(widget_name) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  data = level.hud_management.scripted_widgets;
   widget_data = getscriptbundle("scriptedwidget:" + widget_name);
   widget_name = tolower(widget_name);
 
@@ -170,8 +170,8 @@ function function_efa7d98eea1fb836(widget_name, child_name, var_35de4a7a76aee370
   child_name = tolower(child_name);
   var_35de4a7a76aee370 = tolower(var_35de4a7a76aee370);
 
-  if(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_name]) && isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_name].children[child_name]) && isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_name].children[child_name][var_35de4a7a76aee370])) {
-    return level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_name].children[child_name][var_35de4a7a76aee370].widget;
+  if(isDefined(level.hud_management.scripted_widgets.widget_types[widget_name]) && isDefined(level.hud_management.scripted_widgets.widget_types[widget_name].children[child_name]) && isDefined(level.hud_management.scripted_widgets.widget_types[widget_name].children[child_name][var_35de4a7a76aee370])) {
+    return level.hud_management.scripted_widgets.widget_types[widget_name].children[child_name][var_35de4a7a76aee370].widget;
   }
 
   return undefined;
@@ -182,23 +182,23 @@ function function_ade28fda795d5664(widget_name, child_name, var_35de4a7a76aee370
   child_name = tolower(child_name);
   var_35de4a7a76aee370 = tolower(var_35de4a7a76aee370);
 
-  if(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_name]) && isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_name].children[child_name]) && isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_name].children[child_name][var_35de4a7a76aee370])) {
-    return level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_name].children[child_name][var_35de4a7a76aee370].index;
+  if(isDefined(level.hud_management.scripted_widgets.widget_types[widget_name]) && isDefined(level.hud_management.scripted_widgets.widget_types[widget_name].children[child_name]) && isDefined(level.hud_management.scripted_widgets.widget_types[widget_name].children[child_name][var_35de4a7a76aee370])) {
+    return level.hud_management.scripted_widgets.widget_types[widget_name].children[child_name][var_35de4a7a76aee370].index;
   }
 
   return undefined;
 }
 
 function function_63d35b39e955e65c(var_fee88e2c79edd2f, var_1212b8095077474c) {
-  if(!isDefined(level.var_6917e6eed10cfc44)) {
-    level.var_6917e6eed10cfc44 = spawnStruct();
+  if(!isDefined(level.hud_management)) {
+    level.hud_management = spawnStruct();
   }
 
-  if(!isDefined(level.var_6917e6eed10cfc44.var_f212ecf957ec73f0)) {
-    level.var_6917e6eed10cfc44.var_f212ecf957ec73f0 = spawnStruct();
+  if(!isDefined(level.hud_management.var_f212ecf957ec73f0)) {
+    level.hud_management.var_f212ecf957ec73f0 = spawnStruct();
   }
 
-  data = level.var_6917e6eed10cfc44.var_f212ecf957ec73f0;
+  data = level.hud_management.var_f212ecf957ec73f0;
   data.omnvar = var_fee88e2c79edd2f;
   data.widgets = [];
 
@@ -216,11 +216,11 @@ function function_63d35b39e955e65c(var_fee88e2c79edd2f, var_1212b8095077474c) {
 }
 
 function function_5c5dd45babfb8d7d(widgets, shouldhide) {
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x1dc>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_f212ecf957ec73f0), "<dev string:x1dc>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_f212ecf957ec73f0.widgets), "<dev string:x1dc>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_f212ecf957ec73f0.omnvar), "<dev string:x228>");
-  data = level.var_6917e6eed10cfc44.var_f212ecf957ec73f0;
+  assertex(isDefined(level.hud_management), "<dev string:x1dc>");
+  assertex(isDefined(level.hud_management.var_f212ecf957ec73f0), "<dev string:x1dc>");
+  assertex(isDefined(level.hud_management.var_f212ecf957ec73f0.widgets), "<dev string:x1dc>");
+  assertex(isDefined(level.hud_management.var_f212ecf957ec73f0.omnvar), "<dev string:x228>");
+  data = level.hud_management.var_f212ecf957ec73f0;
 
   if(!isarray(widgets)) {
     widgets = [widgets];
@@ -236,9 +236,9 @@ function function_5c5dd45babfb8d7d(widgets, shouldhide) {
 
 function function_90de31b2cbef19f9(widget_ref, widget_type, widget_struct) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x30e>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x30e>");
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  assertex(isDefined(level.hud_management), "<dev string:x30e>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x30e>");
+  data = level.hud_management.scripted_widgets;
   widget_ref = tolower(widget_ref);
   widget_type = tolower(widget_type);
 
@@ -289,8 +289,8 @@ function function_90de31b2cbef19f9(widget_ref, widget_type, widget_struct) {
 }
 
 function function_6cd0a8e23ff14e13(widget_prefix) {
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x436>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x436>");
+  assertex(isDefined(level.hud_management), "<dev string:x436>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x436>");
   assertex(isDefined(widget_prefix), "<dev string:x494>");
   widget = function_6627dd3016f3d63f(widget_prefix, getDvar(@ "g_mapname"));
 
@@ -298,7 +298,7 @@ function function_6cd0a8e23ff14e13(widget_prefix) {
     return widget;
   }
 
-  widget = function_6627dd3016f3d63f(widget_prefix, [function_3cb5da19764baa3(), level.gametype]);
+  widget = function_6627dd3016f3d63f(widget_prefix, [getprojectname(), level.gametype]);
 
   if(isDefined(widget)) {
     return widget;
@@ -312,13 +312,13 @@ function function_6cd0a8e23ff14e13(widget_prefix) {
     mode = "sp";
   }
 
-  widget = function_6627dd3016f3d63f(widget_prefix, [function_3cb5da19764baa3(), mode]);
+  widget = function_6627dd3016f3d63f(widget_prefix, [getprojectname(), mode]);
 
   if(isDefined(widget)) {
     return widget;
   }
 
-  widget = function_6627dd3016f3d63f(widget_prefix, function_3cb5da19764baa3());
+  widget = function_6627dd3016f3d63f(widget_prefix, getprojectname());
 
   if(isDefined(widget)) {
     return widget;
@@ -346,8 +346,8 @@ function function_6cd0a8e23ff14e13(widget_prefix) {
 }
 
 function function_6627dd3016f3d63f(widget_prefix, params) {
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x436>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x436>");
+  assertex(isDefined(level.hud_management), "<dev string:x436>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x436>");
   assertex(isDefined(widget_prefix), "<dev string:x494>");
   assertex(isDefined(params) && (isstring(params) || isarray(params)), "<dev string:x4df>");
   var_25f11f8236d36f82 = "";
@@ -381,20 +381,20 @@ function function_6627dd3016f3d63f(widget_prefix, params) {
 
 function function_a0ae4b54aa48ade2(widget_type) {
   widget_type = tolower(widget_type);
-  return isDefined(level.var_6917e6eed10cfc44) && isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d) && isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_type]);
+  return isDefined(level.hud_management) && isDefined(level.hud_management.scripted_widgets) && isDefined(level.hud_management.scripted_widgets.widget_types[widget_type]);
 }
 
-function function_956ab5009d077253(widget_asset, param_name, var_a66ee63570312822) {
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x562>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x562>");
+function function_956ab5009d077253(widget_asset, param_name, property_name) {
+  assertex(isDefined(level.hud_management), "<dev string:x562>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x562>");
   widget_data = getscriptbundle("scriptedwidget:" + widget_asset);
   param_index = function_7be2b65191088c8a(widget_asset, param_name);
 
   if(isDefined(param_index)) {
-    var_a66ee63570312822 = tolower(var_a66ee63570312822);
+    property_name = tolower(property_name);
 
     foreach(property in widget_data.parameters[param_index].properties) {
-      if(property.variant_object.property == var_a66ee63570312822) {
+      if(property.variant_object.property == property_name) {
         return property.variant_object.value;
       }
     }
@@ -404,22 +404,22 @@ function function_956ab5009d077253(widget_asset, param_name, var_a66ee6357031282
 }
 
 function function_7be2b65191088c8a(widget_asset, param_name) {
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x436>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x436>");
+  assertex(isDefined(level.hud_management), "<dev string:x436>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x436>");
   widget_asset = tolower(widget_asset);
   param_name = tolower(param_name);
-  return level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_asset].parameters[param_name];
+  return level.hud_management.scripted_widgets.widget_types[widget_asset].parameters[param_name];
 }
 
-function private function_95809d3a84b2020b(widget_ref, var_a79e2ddd22fbba9a, var_54a61fbefc52eb7f, var_5a4ed2926457d0b) {
+function private function_95809d3a84b2020b(widget_ref, omnvar_suffix, omnvar_override, var_5a4ed2926457d0b) {
   var_b8868bce74340be6 = spawnStruct();
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  data = level.hud_management.scripted_widgets;
   widget_ref = tolower(widget_ref);
 
-  if(isDefined(var_54a61fbefc52eb7f)) {
-    var_b8868bce74340be6.omnvar = var_54a61fbefc52eb7f;
+  if(isDefined(omnvar_override)) {
+    var_b8868bce74340be6.omnvar = omnvar_override;
     var_b8868bce74340be6.type = widget_ref;
-    var_b8868bce74340be6.var_26595f30949d77ee = var_5a4ed2926457d0b;
+    var_b8868bce74340be6.time_omnvar = var_5a4ed2926457d0b;
     assert(isDefined(data.widget_types[widget_ref]));
   } else {
     if(!function_ada0825249682644(widget_ref)) {
@@ -427,31 +427,31 @@ function private function_95809d3a84b2020b(widget_ref, var_a79e2ddd22fbba9a, var
     }
 
     active_widget = self.var_a14cb42739301f30[widget_ref];
-    var_b8868bce74340be6.omnvar = "ui_scripted_widget_" + var_a79e2ddd22fbba9a + active_widget.index;
+    var_b8868bce74340be6.omnvar = "ui_scripted_widget_" + omnvar_suffix + active_widget.index;
     var_b8868bce74340be6.type = active_widget.widget_type;
-    var_b8868bce74340be6.var_26595f30949d77ee = "ui_scripted_widget_" + "time_" + active_widget.index;
+    var_b8868bce74340be6.time_omnvar = "ui_scripted_widget_" + "time_" + active_widget.index;
   }
 
   return var_b8868bce74340be6;
 }
 
-function function_af4f62f0f944a8f1(widget_ref, param_ref, var_54a61fbefc52eb7f) {
+function function_af4f62f0f944a8f1(widget_ref, param_ref, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x5bb>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x5bb>");
-  data = function_95809d3a84b2020b(widget_ref, "param_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:x5bb>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x5bb>");
+  data = function_95809d3a84b2020b(widget_ref, "param_", omnvar_override);
 
   if(isDefined(data)) {
-    parameters = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[data.type].parameters;
+    parameters = level.hud_management.scripted_widgets.widget_types[data.type].parameters;
     function_cc46ab20b75d5c58(param_ref, data.omnvar, parameters);
   }
 }
 
-function function_b52897e8afbb0968(widget_ref, data_val, var_54a61fbefc52eb7f) {
+function function_b52897e8afbb0968(widget_ref, data_val, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x613>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x613>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:x613>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x613>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(isDefined(data)) {
     function_cc46ab20b75d5c58(data_val, data.omnvar);
@@ -459,20 +459,20 @@ function function_b52897e8afbb0968(widget_ref, data_val, var_54a61fbefc52eb7f) {
 }
 
 function function_daff24f3e11825ae(widget_asset, state_name) {
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x66a>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x66a>");
+  assertex(isDefined(level.hud_management), "<dev string:x66a>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x66a>");
   state_name = tolower(state_name);
-  return level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[widget_asset].states[state_name];
+  return level.hud_management.scripted_widgets.widget_types[widget_asset].states[state_name];
 }
 
-function function_d28fa5295a04d555(widget_ref, state, var_54a61fbefc52eb7f) {
+function function_d28fa5295a04d555(widget_ref, state, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x6c8>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x6c8>");
-  data = function_95809d3a84b2020b(widget_ref, "state_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:x6c8>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x6c8>");
+  data = function_95809d3a84b2020b(widget_ref, "state_", omnvar_override);
 
   if(isDefined(data)) {
-    states = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.widget_types[data.type].states;
+    states = level.hud_management.scripted_widgets.widget_types[data.type].states;
     function_cc46ab20b75d5c58(state, data.omnvar, states);
   }
 }
@@ -486,7 +486,7 @@ function function_7a82d07837107ae6(widget_ref, anchor_ent, anchor_type) {
   }
 
   anchor_type = tolower(anchor_type);
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  data = level.hud_management.scripted_widgets;
   assertex(isDefined(data.anchor_types) && isDefined(data.anchor_types[anchor_type]), "<dev string:x720>" + anchor_type + "<dev string:x730>");
 
   if(!isDefined(self.var_414b9a0d57c1e081)) {
@@ -512,15 +512,15 @@ function function_7a82d07837107ae6(widget_ref, anchor_ent, anchor_type) {
 
   active_widget.ent_num = ent_num;
   self.var_414b9a0d57c1e081[ent_num][widget_ref] = active_widget.index;
-  var_2486ed5c4df7182c = "ui_scripted_widget_" + "ent_" + active_widget.index;
-  self setclientomnvar(var_2486ed5c4df7182c, anchor_ent);
+  ent_omnvar = "ui_scripted_widget_" + "ent_" + active_widget.index;
+  self setclientomnvar(ent_omnvar, anchor_ent);
   function_cc46ab20b75d5c58(data.anchor_types[anchor_type], "ui_scripted_widget_" + "position_" + active_widget.index);
   thread function_583777ac2b762d3(anchor_ent);
 }
 
-function function_f4c37324750dc183(widget_ref, x_pos, y_pos, horizontal_anchor, vertical_anchor, var_5bf6089ef591d224, var_54a61fbefc52eb7f) {
+function function_f4c37324750dc183(widget_ref, x_pos, y_pos, horizontal_anchor, vertical_anchor, var_5bf6089ef591d224, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  data = function_95809d3a84b2020b(widget_ref, "position_", var_54a61fbefc52eb7f);
+  data = function_95809d3a84b2020b(widget_ref, "position_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
@@ -607,9 +607,9 @@ function function_863b22a1564f8eb(datatype) {
   }
 }
 
-function function_d2da2b563383891f(widget_ref, var_d66aa55144b09de9, var_54a61fbefc52eb7f) {
+function function_d2da2b563383891f(widget_ref, var_d66aa55144b09de9, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  data = function_95809d3a84b2020b(widget_ref, "position_", var_54a61fbefc52eb7f);
+  data = function_95809d3a84b2020b(widget_ref, "position_", omnvar_override);
 
   if(!isDefined(data)) {
     return undefined;
@@ -655,33 +655,33 @@ function function_d2da2b563383891f(widget_ref, var_d66aa55144b09de9, var_54a61fb
   return (x_pos, y_pos, 0);
 }
 
-function function_1ec2f3bcef4a8818(widget_ref, priority, var_54a61fbefc52eb7f) {
+function function_1ec2f3bcef4a8818(widget_ref, priority, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  data = function_95809d3a84b2020b(widget_ref, "priority_", var_54a61fbefc52eb7f);
+  data = function_95809d3a84b2020b(widget_ref, "priority_", omnvar_override);
 
   if(isDefined(data)) {
     self setclientomnvar(data.omnvar, priority);
   }
 }
 
-function function_14a0ee2aaf9128c3(widget_ref, field_values, no_timestamp, var_54a61fbefc52eb7f, var_5a4ed2926457d0b) {
+function function_14a0ee2aaf9128c3(widget_ref, field_values, no_timestamp, omnvar_override, var_5a4ed2926457d0b) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x8f4>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x8f4>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f, var_5a4ed2926457d0b);
+  assertex(isDefined(level.hud_management), "<dev string:x8f4>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x8f4>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override, var_5a4ed2926457d0b);
 
   if(!isDefined(data)) {
     return;
   }
 
-  function_e375e5ca24ea7bf4(data.type, data.omnvar, field_values, data.var_26595f30949d77ee);
+  function_e375e5ca24ea7bf4(data.type, data.omnvar, field_values, data.time_omnvar);
 }
 
-function function_6e45b720d0914f42(widget_ref, field, value, var_54a61fbefc52eb7f) {
+function function_6e45b720d0914f42(widget_ref, field, value, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x8f4>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x8f4>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:x8f4>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x8f4>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
@@ -690,11 +690,11 @@ function function_6e45b720d0914f42(widget_ref, field, value, var_54a61fbefc52eb7
   function_e6df6627eb26284f(data.type, data.omnvar, field, value);
 }
 
-function function_2d3bf675525ba34c(widget_ref, field, var_54a61fbefc52eb7f) {
+function function_2d3bf675525ba34c(widget_ref, field, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x8f4>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x8f4>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:x8f4>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x8f4>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
@@ -704,63 +704,63 @@ function function_2d3bf675525ba34c(widget_ref, field, var_54a61fbefc52eb7f) {
   function_e6df6627eb26284f(data.type, data.omnvar, field, !value[field]);
 }
 
-function function_ddc9d8c3b0ef6b87(widget_ref, current_pct, target_pct, time, var_54a61fbefc52eb7f, var_5a4ed2926457d0b) {
+function function_ddc9d8c3b0ef6b87(widget_ref, current_pct, target_pct, time, omnvar_override, var_5a4ed2926457d0b) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x953>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x953>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:x953>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x953>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
   }
 
-  function_ab8c8292f0d469c4(data.type, data.omnvar, current_pct, target_pct, time, data.var_26595f30949d77ee);
+  function_ab8c8292f0d469c4(data.type, data.omnvar, current_pct, target_pct, time, data.time_omnvar);
 }
 
-function function_315df71064cc10b8(widget_ref, current_pct, bool, var_54a61fbefc52eb7f, var_5a4ed2926457d0b) {
+function function_315df71064cc10b8(widget_ref, current_pct, bool, omnvar_override, var_5a4ed2926457d0b) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x9ae>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x9ae>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:x9ae>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x9ae>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
   }
 
-  function_42866bf1e84c1d21(data.type, data.omnvar, current_pct, bool, data.var_26595f30949d77ee);
+  function_42866bf1e84c1d21(data.type, data.omnvar, current_pct, bool, data.time_omnvar);
 }
 
-function function_a435f7db4b861f0c(widget_ref, current_pct, current_alpha, var_54a61fbefc52eb7f, var_5a4ed2926457d0b) {
+function function_a435f7db4b861f0c(widget_ref, current_pct, current_alpha, omnvar_override, var_5a4ed2926457d0b) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:xa0e>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:xa0e>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:xa0e>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:xa0e>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
   }
 
-  function_7db1020b4d70e9e7(data.type, data.omnvar, current_pct, current_alpha, data.var_26595f30949d77ee);
+  function_7db1020b4d70e9e7(data.type, data.omnvar, current_pct, current_alpha, data.time_omnvar);
 }
 
-function function_2181b4358a46aab3(widget_ref, count, max_count, time, var_54a61fbefc52eb7f, var_5a4ed2926457d0b) {
+function function_2181b4358a46aab3(widget_ref, count, max_count, time, omnvar_override, var_5a4ed2926457d0b) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:xa6f>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:xa6f>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:xa6f>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:xa6f>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
   }
 
-  function_99bfbb496e5ac12a(data.type, data.omnvar, count, max_count, time, data.var_26595f30949d77ee);
+  function_99bfbb496e5ac12a(data.type, data.omnvar, count, max_count, time, data.time_omnvar);
 }
 
-function function_b93f1b828644c021(widget_ref, horizontal_alignment, vertical_alignment, var_54a61fbefc52eb7f) {
+function function_b93f1b828644c021(widget_ref, horizontal_alignment, vertical_alignment, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:xac7>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:xac7>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:xac7>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:xac7>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
@@ -769,11 +769,11 @@ function function_b93f1b828644c021(widget_ref, horizontal_alignment, vertical_al
   function_36bba30ae80af891(data.type, data.omnvar, horizontal_alignment, vertical_alignment);
 }
 
-function function_1f51eabeded054f0(widget_ref, timestamp, var_54a61fbefc52eb7f) {
+function function_1f51eabeded054f0(widget_ref, timestamp, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:xb2d>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:xb2d>");
-  data = function_95809d3a84b2020b(widget_ref, "time_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:xb2d>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:xb2d>");
+  data = function_95809d3a84b2020b(widget_ref, "time_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
@@ -782,11 +782,11 @@ function function_1f51eabeded054f0(widget_ref, timestamp, var_54a61fbefc52eb7f) 
   self setclientomnvar(data.omnvar, timestamp);
 }
 
-function function_1f1c11d26b17770f(widget_ref, fields, var_54a61fbefc52eb7f) {
+function function_1f1c11d26b17770f(widget_ref, fields, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:x8f4>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:x8f4>");
-  data = function_95809d3a84b2020b(widget_ref, "data_", var_54a61fbefc52eb7f);
+  assertex(isDefined(level.hud_management), "<dev string:x8f4>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:x8f4>");
+  data = function_95809d3a84b2020b(widget_ref, "data_", omnvar_override);
 
   if(!isDefined(data)) {
     return;
@@ -795,10 +795,10 @@ function function_1f1c11d26b17770f(widget_ref, fields, var_54a61fbefc52eb7f) {
   return function_61dda643ffbb43a0(data.type, data.omnvar, fields);
 }
 
-function function_fb3c9a259f146781(widget_ref) {
+function scripted_widget_destroy(widget_ref) {
   assertex(isPlayer(self), "<dev string:x2ef>");
-  assertex(isDefined(level.var_6917e6eed10cfc44), "<dev string:xb89>");
-  assertex(isDefined(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d), "<dev string:xb89>");
+  assertex(isDefined(level.hud_management), "<dev string:xb89>");
+  assertex(isDefined(level.hud_management.scripted_widgets), "<dev string:xb89>");
   widget_ref = tolower(widget_ref);
 
   if(!function_ada0825249682644(widget_ref)) {
@@ -808,9 +808,9 @@ function function_fb3c9a259f146781(widget_ref) {
   index = function_cca9604860a60e2a(widget_ref);
 
   if(isDefined(index)) {
-    data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-    var_94a50c0a0059e601 = "ui_scripted_widget_" + "type_" + index;
-    self setclientomnvar(var_94a50c0a0059e601, 0);
+    data = level.hud_management.scripted_widgets;
+    type_omnvar = "ui_scripted_widget_" + "type_" + index;
+    self setclientomnvar(type_omnvar, 0);
     self notify("scripted_widget_destroyed_" + widget_ref);
   }
 }
@@ -818,7 +818,7 @@ function function_fb3c9a259f146781(widget_ref) {
 function function_ada0825249682644(widget_ref) {
   assertex(isPlayer(self), "<dev string:x2ef>");
   widget_ref = tolower(widget_ref);
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  data = level.hud_management.scripted_widgets;
   return isDefined(self.var_a14cb42739301f30) && isDefined(self.var_a14cb42739301f30[widget_ref]);
 }
 
@@ -841,7 +841,7 @@ function function_440f285bc17a2787(list_ref, widget_type, list_items) {
 function function_cf43a9641fd024af(list_ref) {
   assertex(isPlayer(self), "<dev string:x2ef>");
   list_ref = tolower(list_ref);
-  function_fb3c9a259f146781(list_ref);
+  scripted_widget_destroy(list_ref);
   function_b267732c9e92f306(list_ref);
 }
 
@@ -860,12 +860,12 @@ function function_c9e5319d68e22011(list_ref, list_items, var_3cefc2b0c7f6f3ec) {
 
   foreach(item_ref, item_type in list_items) {
     item_type = tolower(item_type);
-    var_3de03bfa4e76b915 = function_eabc5d231d49caab(list_ref, tolower(item_ref), item_type);
-    assertex(isDefined(var_3de03bfa4e76b915), "<dev string:xbd7>");
+    omnvar_index = function_eabc5d231d49caab(list_ref, tolower(item_ref), item_type);
+    assertex(isDefined(omnvar_index), "<dev string:xbd7>");
 
-    if(isDefined(var_3de03bfa4e76b915)) {
+    if(isDefined(omnvar_index)) {
       items[items.size] = item_type;
-      omnvars[omnvars.size] = var_3de03bfa4e76b915;
+      omnvars[omnvars.size] = omnvar_index;
     }
   }
 
@@ -881,7 +881,7 @@ function function_1114ac444eb63515(list_ref, items) {
   foreach(index, item_ref in items) {
     item_data = function_9cee54c391590f92(list_ref, item_ref);
     assertex(isDefined(item_data), "<dev string:xc8b>" + item_ref + "<dev string:xcd8>");
-    self.var_a14cb42739301f30[list_ref].list[index] = item_data.var_3de03bfa4e76b915;
+    self.var_a14cb42739301f30[list_ref].list[index] = item_data.omnvar_index;
   }
 
   function_989fbe51aaf74cb(list_ref);
@@ -896,21 +896,21 @@ function function_5270193c147bd4f(list_ref, var_e9648468480b0e14, var_e964876848
   assertex(isDefined(var_8ad346cd8693695e), "<dev string:xcdd>" + var_e9648768480b14ad + "<dev string:xd00>");
   index_1 = undefined;
   index_2 = undefined;
-  var_ee925786ed8c373f = var_8ad345cd8693672b.var_3de03bfa4e76b915;
-  var_ee925886ed8c3972 = var_8ad346cd8693695e.var_3de03bfa4e76b915;
+  var_ee925786ed8c373f = var_8ad345cd8693672b.omnvar_index;
+  var_ee925886ed8c3972 = var_8ad346cd8693695e.omnvar_index;
 
-  foreach(index, var_3de03bfa4e76b915 in self.var_a14cb42739301f30[list_ref].list) {
-    if(var_3de03bfa4e76b915 == var_ee925786ed8c373f) {
+  foreach(index, omnvar_index in self.var_a14cb42739301f30[list_ref].list) {
+    if(omnvar_index == var_ee925786ed8c373f) {
       index_1 = index;
     }
 
-    if(var_3de03bfa4e76b915 == var_ee925886ed8c3972) {
+    if(omnvar_index == var_ee925886ed8c3972) {
       index_2 = index;
     }
   }
 
-  self.var_a14cb42739301f30[list_ref].list[index_1] = var_8ad346cd8693695e.var_3de03bfa4e76b915;
-  self.var_a14cb42739301f30[list_ref].list[index_2] = var_8ad345cd8693672b.var_3de03bfa4e76b915;
+  self.var_a14cb42739301f30[list_ref].list[index_1] = var_8ad346cd8693695e.omnvar_index;
+  self.var_a14cb42739301f30[list_ref].list[index_2] = var_8ad345cd8693672b.omnvar_index;
   function_989fbe51aaf74cb(list_ref);
 }
 
@@ -962,10 +962,10 @@ function function_31a20eb9ab140d08(list_ref, list_items, var_7a0a75a3e70333fe) {
 
   foreach(item_ref in list_items) {
     item_ref = tolower(item_ref);
-    var_3de03bfa4e76b915 = function_fbb932b933235b5e(list_ref, item_ref);
+    omnvar_index = function_fbb932b933235b5e(list_ref, item_ref);
 
-    if(isDefined(var_3de03bfa4e76b915)) {
-      omnvars[omnvars.size - 1] = var_3de03bfa4e76b915;
+    if(isDefined(omnvar_index)) {
+      omnvars[omnvars.size - 1] = omnvar_index;
     }
   }
 
@@ -996,9 +996,9 @@ function function_88f7dd62c7058ef5(list_ref, item_ref, param) {
   item_data = function_9cee54c391590f92(list_ref, item_ref);
 
   if(isDefined(item_data)) {
-    data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+    data = level.hud_management.scripted_widgets;
     group = self.var_a14cb42739301f30[list_ref].group;
-    omnvar = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "param_");
+    omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "param_");
     function_cc46ab20b75d5c58(param, omnvar, data.widget_types[item_data.widget_type].parameters);
   }
 }
@@ -1010,9 +1010,9 @@ function function_1f9e6ee15b7f47c9(list_ref, item_ref, state) {
   item_data = function_9cee54c391590f92(list_ref, item_ref);
 
   if(isDefined(item_data)) {
-    data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+    data = level.hud_management.scripted_widgets;
     group = self.var_a14cb42739301f30[list_ref].group;
-    omnvar = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "state_");
+    omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "state_");
     function_cc46ab20b75d5c58(state, omnvar, data.widget_types[item_data.widget_type].states);
   }
 }
@@ -1024,9 +1024,9 @@ function function_cee2207c6855e73c(list_ref, item_ref, data_val) {
   item_data = function_9cee54c391590f92(list_ref, item_ref);
 
   if(isDefined(item_data)) {
-    data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+    data = level.hud_management.scripted_widgets;
     group = self.var_a14cb42739301f30[list_ref].group;
-    omnvar = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "data_");
+    omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "data_");
     function_cc46ab20b75d5c58(data_val, omnvar);
   }
 }
@@ -1039,14 +1039,14 @@ function function_3eec25a52a78f31f(list_ref, item_ref, field_values, no_timestam
 
   if(isDefined(item_data)) {
     group = self.var_a14cb42739301f30[list_ref].group;
-    omnvar = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "data_");
-    var_26595f30949d77ee = undefined;
+    omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "data_");
+    time_omnvar = undefined;
 
     if(!istrue(no_timestamp)) {
-      var_26595f30949d77ee = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "time_");
+      time_omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "time_");
     }
 
-    function_e375e5ca24ea7bf4(item_data.widget_type, omnvar, field_values, var_26595f30949d77ee);
+    function_e375e5ca24ea7bf4(item_data.widget_type, omnvar, field_values, time_omnvar);
   }
 }
 
@@ -1058,9 +1058,9 @@ function function_9d1591ce32fb0823(list_ref, item_ref, current_pct, target_pct, 
 
   if(isDefined(item_data)) {
     group = self.var_a14cb42739301f30[list_ref].group;
-    omnvar = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "data_");
-    var_26595f30949d77ee = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "time_");
-    function_ab8c8292f0d469c4(item_data.widget_type, omnvar, current_pct, target_pct, time, var_26595f30949d77ee);
+    omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "data_");
+    time_omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "time_");
+    function_ab8c8292f0d469c4(item_data.widget_type, omnvar, current_pct, target_pct, time, time_omnvar);
   }
 }
 
@@ -1072,9 +1072,9 @@ function function_6f4f043fa2101c0f(list_ref, item_ref, count, max_count, time) {
 
   if(isDefined(item_data)) {
     group = self.var_a14cb42739301f30[list_ref].group;
-    omnvar = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "data_");
-    var_26595f30949d77ee = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "time_");
-    function_99bfbb496e5ac12a(item_data.widget_type, omnvar, count, max_count, time, var_26595f30949d77ee);
+    omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "data_");
+    time_omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "time_");
+    function_99bfbb496e5ac12a(item_data.widget_type, omnvar, count, max_count, time, time_omnvar);
   }
 }
 
@@ -1086,7 +1086,7 @@ function function_f86a348db854d294(list_ref, item_ref, timestamp) {
 
   if(isDefined(item_data)) {
     group = self.var_a14cb42739301f30[list_ref].group;
-    omnvar = function_e5a3c7e8ca795281(group, item_data.var_3de03bfa4e76b915, "time_");
+    omnvar = function_e5a3c7e8ca795281(group, item_data.omnvar_index, "time_");
     function_cc46ab20b75d5c58(timestamp, omnvar);
   }
 }
@@ -1135,10 +1135,10 @@ function function_ad5527feaeffa977(anchor_ent, widget_ref, state) {
   function_d28fa5295a04d555(widget_ref, state);
 }
 
-function function_e426dd1d2fd9f6b5(anchor_ent, widget_ref, field_values, var_54a61fbefc52eb7f) {
+function function_e426dd1d2fd9f6b5(anchor_ent, widget_ref, field_values, omnvar_override) {
   assertex(isPlayer(self), "<dev string:x2ef>");
   widget_ref = tolower(widget_ref) + anchor_ent getentitynumber();
-  return function_1f1c11d26b17770f(widget_ref, field_values, var_54a61fbefc52eb7f);
+  return function_1f1c11d26b17770f(widget_ref, field_values, omnvar_override);
 }
 
 function function_d0cd9bfbc5529d31(anchor_ent, widget_ref, field_values, no_timestamp) {
@@ -1193,7 +1193,7 @@ function function_b76083c9909e209a(anchor_ent, widget_ref) {
 function private function_bb8cf49fbbe8c0d8(widget_ref, ent_num) {
   if(isDefined(self.var_414b9a0d57c1e081[ent_num])) {
     if(isDefined(self.var_414b9a0d57c1e081[ent_num][widget_ref])) {
-      function_fb3c9a259f146781(widget_ref);
+      scripted_widget_destroy(widget_ref);
     }
 
     self.var_414b9a0d57c1e081[ent_num][widget_ref] = undefined;
@@ -1208,7 +1208,7 @@ function private function_bb8cf49fbbe8c0d8(widget_ref, ent_num) {
 function private function_984451ca1b1af664(ent_num) {
   if(isDefined(self.var_414b9a0d57c1e081) && isDefined(self.var_414b9a0d57c1e081[ent_num])) {
     foreach(widget_ref, index in self.var_414b9a0d57c1e081[ent_num]) {
-      function_fb3c9a259f146781(widget_ref);
+      scripted_widget_destroy(widget_ref);
     }
 
     self.var_414b9a0d57c1e081[ent_num] = undefined;
@@ -1229,7 +1229,7 @@ function private function_583777ac2b762d3(ent) {
 }
 
 function private function_b36e048ccaca2da4(value, archetype, field, packed_value, clear) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+  data = level.hud_management.scripted_widgets.archetypes;
   assertex(isDefined(data[archetype]), "<dev string:xdbe>" + archetype + "<dev string:xe06>");
   assertex(isDefined(data[archetype][field]), "<dev string:xe21>" + archetype + "<dev string:xe69>" + field + "<dev string:xe7b>");
 
@@ -1250,7 +1250,7 @@ function private function_b36e048ccaca2da4(value, archetype, field, packed_value
 }
 
 function private function_f58cb12303817e47(value, archetype, field) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+  data = level.hud_management.scripted_widgets.archetypes;
   assertex(isDefined(data[archetype]), "<dev string:xdbe>" + archetype + "<dev string:xe06>");
   assertex(isDefined(data[archetype][field]), "<dev string:xe21>" + archetype + "<dev string:xe69>" + field + "<dev string:xe7b>");
   value = (value &data[archetype][field].mask) >> data[archetype][field].shift;
@@ -1258,9 +1258,9 @@ function private function_f58cb12303817e47(value, archetype, field) {
   return value;
 }
 
-function private function_e375e5ca24ea7bf4(widget_type, omnvar, field_values, var_26595f30949d77ee) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  widget_archetypes = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+function private function_e375e5ca24ea7bf4(widget_type, omnvar, field_values, time_omnvar) {
+  data = level.hud_management.scripted_widgets;
+  widget_archetypes = level.hud_management.scripted_widgets.archetypes;
   assertex(isDefined(data.widget_types[widget_type]), "<dev string:xeff>" + widget_type + "<dev string:xe7b>");
   archetype = data.widget_types[widget_type].archetype;
   assertex(isDefined(archetype), "<dev string:xeff>" + widget_type + "<dev string:xf10>");
@@ -1274,14 +1274,14 @@ function private function_e375e5ca24ea7bf4(widget_type, omnvar, field_values, va
 
   self setclientomnvar(omnvar, packed_value);
 
-  if(isDefined(var_26595f30949d77ee)) {
-    self setclientomnvar(var_26595f30949d77ee, gettime());
+  if(isDefined(time_omnvar)) {
+    self setclientomnvar(time_omnvar, gettime());
   }
 }
 
 function private function_e6df6627eb26284f(widget_type, omnvar, field, value) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  widget_archetypes = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+  data = level.hud_management.scripted_widgets;
+  widget_archetypes = level.hud_management.scripted_widgets.archetypes;
   assertex(isDefined(data.widget_types[widget_type]), "<dev string:xeff>" + widget_type + "<dev string:xe7b>");
   archetype = data.widget_types[widget_type].archetype;
   assertex(isDefined(archetype), "<dev string:xeff>" + widget_type + "<dev string:xf10>");
@@ -1293,8 +1293,8 @@ function private function_e6df6627eb26284f(widget_type, omnvar, field, value) {
 }
 
 function private function_61dda643ffbb43a0(widget_type, omnvar, fields) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  widget_archetypes = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+  data = level.hud_management.scripted_widgets;
+  widget_archetypes = level.hud_management.scripted_widgets.archetypes;
   assertex(isDefined(data.widget_types[widget_type]), "<dev string:xeff>" + widget_type + "<dev string:xe7b>");
   archetype = data.widget_types[widget_type].archetype;
   assertex(isDefined(archetype), "<dev string:xeff>" + widget_type + "<dev string:xf10>");
@@ -1315,9 +1315,9 @@ function private function_61dda643ffbb43a0(widget_type, omnvar, fields) {
   return ret_fields;
 }
 
-function private function_ab8c8292f0d469c4(widget_type, omnvar, current_pct, target_pct, time, var_26595f30949d77ee) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  widget_archetypes = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+function private function_ab8c8292f0d469c4(widget_type, omnvar, current_pct, target_pct, time, time_omnvar) {
+  data = level.hud_management.scripted_widgets;
+  widget_archetypes = level.hud_management.scripted_widgets.archetypes;
   archetype = "scripted_widget_archetype_progress";
   assertex(data.widget_types[widget_type].archetype == archetype, "<dev string:xeff>" + widget_type + "<dev string:xf65>" + archetype + "<dev string:xf75>");
   current_pct = clamp(current_pct, 0, widget_archetypes[archetype]["current_pct"].max_value);
@@ -1327,12 +1327,12 @@ function private function_ab8c8292f0d469c4(widget_type, omnvar, current_pct, tar
   packed_value = function_b36e048ccaca2da4(target_pct, archetype, "target_pct", packed_value);
   packed_value = function_b36e048ccaca2da4(time, archetype, "time", packed_value);
   self setclientomnvar(omnvar, packed_value);
-  self setclientomnvar(var_26595f30949d77ee, gettime());
+  self setclientomnvar(time_omnvar, gettime());
 }
 
-function private function_42866bf1e84c1d21(widget_type, omnvar, current_pct, bool, var_26595f30949d77ee) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  widget_archetypes = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+function private function_42866bf1e84c1d21(widget_type, omnvar, current_pct, bool, time_omnvar) {
+  data = level.hud_management.scripted_widgets;
+  widget_archetypes = level.hud_management.scripted_widgets.archetypes;
   archetype = "scripted_widget_archetype_progress_bool";
   assertex(data.widget_types[widget_type].archetype == archetype, "<dev string:xeff>" + widget_type + "<dev string:xf65>" + archetype + "<dev string:xf75>");
   current_pct = clamp(current_pct, 0, widget_archetypes[archetype]["current_pct"].max_value);
@@ -1340,12 +1340,12 @@ function private function_42866bf1e84c1d21(widget_type, omnvar, current_pct, boo
   packed_value = function_b36e048ccaca2da4(current_pct, archetype, "current_pct", packed_value);
   packed_value = function_b36e048ccaca2da4(bool, archetype, "bool", packed_value);
   self setclientomnvar(omnvar, packed_value);
-  self setclientomnvar(var_26595f30949d77ee, gettime());
+  self setclientomnvar(time_omnvar, gettime());
 }
 
-function private function_7db1020b4d70e9e7(widget_type, omnvar, current_pct, current_alpha, var_26595f30949d77ee) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  widget_archetypes = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+function private function_7db1020b4d70e9e7(widget_type, omnvar, current_pct, current_alpha, time_omnvar) {
+  data = level.hud_management.scripted_widgets;
+  widget_archetypes = level.hud_management.scripted_widgets.archetypes;
   archetype = "scripted_widget_archetype_progress_alpha";
   assertex(data.widget_types[widget_type].archetype == archetype, "<dev string:xeff>" + widget_type + "<dev string:xf65>" + archetype + "<dev string:xf75>");
   current_pct = clamp(current_pct, 0, widget_archetypes[archetype]["current_pct"].max_value);
@@ -1354,12 +1354,12 @@ function private function_7db1020b4d70e9e7(widget_type, omnvar, current_pct, cur
   packed_value = function_b36e048ccaca2da4(current_pct, archetype, "current_pct", packed_value);
   packed_value = function_b36e048ccaca2da4(current_alpha, archetype, "current_alpha", packed_value);
   self setclientomnvar(omnvar, packed_value);
-  self setclientomnvar(var_26595f30949d77ee, gettime());
+  self setclientomnvar(time_omnvar, gettime());
 }
 
-function private function_99bfbb496e5ac12a(widget_type, omnvar, count, max_count, time, var_26595f30949d77ee) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  widget_archetypes = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+function private function_99bfbb496e5ac12a(widget_type, omnvar, count, max_count, time, time_omnvar) {
+  data = level.hud_management.scripted_widgets;
+  widget_archetypes = level.hud_management.scripted_widgets.archetypes;
   archetype = "scripted_widget_archetype_count";
   assertex(data.widget_types[widget_type].archetype == archetype, "<dev string:xeff>" + widget_type + "<dev string:xf65>" + archetype + "<dev string:xf75>");
   count = clamp(count, 0, widget_archetypes[archetype]["count"].max_value);
@@ -1380,14 +1380,14 @@ function private function_99bfbb496e5ac12a(widget_type, omnvar, count, max_count
   packed_value = function_b36e048ccaca2da4(time, archetype, "time", packed_value);
   self setclientomnvar(omnvar, packed_value);
 
-  if(time > 0 && isDefined(var_26595f30949d77ee)) {
-    self setclientomnvar(var_26595f30949d77ee, gettime());
+  if(time > 0 && isDefined(time_omnvar)) {
+    self setclientomnvar(time_omnvar, gettime());
   }
 }
 
 function private function_36bba30ae80af891(widget_type, omnvar, horizontal_alignment, vertical_alignment) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  widget_archetypes = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.archetypes;
+  data = level.hud_management.scripted_widgets;
+  widget_archetypes = level.hud_management.scripted_widgets.archetypes;
   archetype = "scripted_widget_archetype_list_item_alignment";
   assertex(data.widget_types[widget_type].archetype == archetype, "<dev string:xeff>" + widget_type + "<dev string:xf65>" + archetype + "<dev string:xf75>");
   horizontal_alignment = clamp(horizontal_alignment, 0, widget_archetypes[archetype]["horizontal_alignment"].max_value);
@@ -1411,9 +1411,9 @@ function private function_cc46ab20b75d5c58(value, omnvar, ref_table, mask, shift
     }
 
     if(isDefined(mask)) {
-      var_24db96216c5f6124 = self getclientomnvar(omnvar);
-      var_24db96216c5f6124 &= ~mask;
-      value |= var_24db96216c5f6124;
+      omnvar_value = self getclientomnvar(omnvar);
+      omnvar_value &= ~mask;
+      value |= omnvar_value;
     }
 
     self setclientomnvar(omnvar, value);
@@ -1441,14 +1441,14 @@ function private function_f801c3e967c7768a(widget, shouldhide) {
 }
 
 function private function_f94203b920f0ba27(widget_ref, widget_type) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  data = level.hud_management.scripted_widgets;
   index = undefined;
   assertex(isPlayer(self), "<dev string:xf8b>");
 
   if(!isDefined(self.var_a219288779b991ce)) {
     self.var_a219288779b991ce = [];
 
-    for(i = 0; i < data.var_4dc78c94cd673b03; i++) {
+    for(i = 0; i < data.max_widgets; i++) {
       self.var_a219288779b991ce[i] = i;
     }
   }
@@ -1470,7 +1470,7 @@ function private function_f94203b920f0ba27(widget_ref, widget_type) {
 }
 
 function private function_cca9604860a60e2a(widget_ref) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  data = level.hud_management.scripted_widgets;
   index = undefined;
   assertex(isPlayer(self), "<dev string:xf8b>");
 
@@ -1489,37 +1489,37 @@ function private function_cca9604860a60e2a(widget_ref) {
 function private scripted_widget_closed(index) {
   foreach(widget_ref, data in self.var_a14cb42739301f30) {
     if(data.index == index) {
-      thread function_fb3c9a259f146781(widget_ref);
+      thread scripted_widget_destroy(widget_ref);
       return;
     }
   }
 }
 
 function private function_f77df8178a108beb(index) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
-  var_94a50c0a0059e601 = "ui_scripted_widget_" + "type_" + index;
-  var_418596c509f2b084 = "ui_scripted_widget_" + "param_" + index;
-  var_fb6072b6259477f9 = "ui_scripted_widget_" + "data_" + index;
-  var_8b4b1b0e9bbc298 = "ui_scripted_widget_" + "state_" + index;
-  var_26595f30949d77ee = "ui_scripted_widget_" + "time_" + index;
-  var_6a79480548de351c = "ui_scripted_widget_" + "position_" + index;
-  var_25bcde66ae59b81d = "ui_scripted_widget_" + "priority_" + index;
-  var_2486ed5c4df7182c = "ui_scripted_widget_" + "ent_" + index;
+  data = level.hud_management.scripted_widgets;
+  type_omnvar = "ui_scripted_widget_" + "type_" + index;
+  param_omnvar = "ui_scripted_widget_" + "param_" + index;
+  data_omnvar = "ui_scripted_widget_" + "data_" + index;
+  state_omnvar = "ui_scripted_widget_" + "state_" + index;
+  time_omnvar = "ui_scripted_widget_" + "time_" + index;
+  position_omnvar = "ui_scripted_widget_" + "position_" + index;
+  priority_omnvar = "ui_scripted_widget_" + "priority_" + index;
+  ent_omnvar = "ui_scripted_widget_" + "ent_" + index;
   var_5410df86be1ea9f = "ui_scripted_widget_" + "under_hud_" + index;
-  self setclientomnvar(var_94a50c0a0059e601, 0);
-  self setclientomnvar(var_418596c509f2b084, 0);
-  self setclientomnvar(var_fb6072b6259477f9, 0);
-  self setclientomnvar(var_8b4b1b0e9bbc298, 0);
-  self setclientomnvar(var_26595f30949d77ee, 0);
-  self setclientomnvar(var_6a79480548de351c, 0);
-  self setclientomnvar(var_25bcde66ae59b81d, 0);
-  self setclientomnvar(var_2486ed5c4df7182c, undefined);
+  self setclientomnvar(type_omnvar, 0);
+  self setclientomnvar(param_omnvar, 0);
+  self setclientomnvar(data_omnvar, 0);
+  self setclientomnvar(state_omnvar, 0);
+  self setclientomnvar(time_omnvar, 0);
+  self setclientomnvar(position_omnvar, 0);
+  self setclientomnvar(priority_omnvar, 0);
+  self setclientomnvar(ent_omnvar, undefined);
   self setclientomnvar(var_5410df86be1ea9f, 0);
 }
 
 function private function_eabc5d231d49caab(list_ref, item_ref, widget_type) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.var_56a961d04403887;
-  var_3de03bfa4e76b915 = undefined;
+  data = level.hud_management.scripted_widgets.var_56a961d04403887;
+  omnvar_index = undefined;
 
   if(!isDefined(self.var_1dcdf3ab55136138)) {
     self.var_1dcdf3ab55136138 = [];
@@ -1569,7 +1569,7 @@ function private function_eabc5d231d49caab(list_ref, item_ref, widget_type) {
   array_index = self.var_1dcdf3ab55136138[group].size - 1;
 
   if(array_index >= 0) {
-    var_3de03bfa4e76b915 = self.var_1dcdf3ab55136138[group][array_index];
+    omnvar_index = self.var_1dcdf3ab55136138[group][array_index];
     self.var_1dcdf3ab55136138[group][array_index] = undefined;
 
     if(!isDefined(self.var_5805a2cdb3ddbe56[list_ref])) {
@@ -1577,17 +1577,17 @@ function private function_eabc5d231d49caab(list_ref, item_ref, widget_type) {
     }
 
     self.var_5805a2cdb3ddbe56[list_ref][item_ref] = spawnStruct();
-    self.var_5805a2cdb3ddbe56[list_ref][item_ref].var_3de03bfa4e76b915 = var_3de03bfa4e76b915;
+    self.var_5805a2cdb3ddbe56[list_ref][item_ref].omnvar_index = omnvar_index;
     self.var_5805a2cdb3ddbe56[list_ref][item_ref].widget_type = widget_type;
-    function_496f711a9ab7a47f(group, var_3de03bfa4e76b915);
+    function_496f711a9ab7a47f(group, omnvar_index);
   }
 
-  return var_3de03bfa4e76b915;
+  return omnvar_index;
 }
 
 function private function_91905deae6454c5d(list_ref, group_index) {
-  group_mask = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.var_56a961d04403887.group_mask;
-  group_shift = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.var_56a961d04403887.group_shift;
+  group_mask = level.hud_management.scripted_widgets.var_56a961d04403887.group_mask;
+  group_shift = level.hud_management.scripted_widgets.var_56a961d04403887.group_shift;
 
   if(isDefined(group_mask) && isDefined(group_shift)) {
     omnvar = "ui_scripted_widget_" + "data_" + self.var_a14cb42739301f30[list_ref].index;
@@ -1598,15 +1598,15 @@ function private function_91905deae6454c5d(list_ref, group_index) {
 }
 
 function private function_fbb932b933235b5e(list_ref, item_ref) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.var_56a961d04403887;
-  var_3de03bfa4e76b915 = undefined;
+  data = level.hud_management.scripted_widgets.var_56a961d04403887;
+  omnvar_index = undefined;
 
   if(isDefined(self.var_5805a2cdb3ddbe56[list_ref]) && isDefined(self.var_5805a2cdb3ddbe56[list_ref][item_ref])) {
-    var_3de03bfa4e76b915 = self.var_5805a2cdb3ddbe56[list_ref][item_ref].var_3de03bfa4e76b915;
+    omnvar_index = self.var_5805a2cdb3ddbe56[list_ref][item_ref].omnvar_index;
 
-    if(isDefined(var_3de03bfa4e76b915)) {
+    if(isDefined(omnvar_index)) {
       group = self.var_a14cb42739301f30[list_ref].group;
-      self.var_1dcdf3ab55136138[group][self.var_1dcdf3ab55136138[group].size] = var_3de03bfa4e76b915;
+      self.var_1dcdf3ab55136138[group][self.var_1dcdf3ab55136138[group].size] = omnvar_index;
       self.var_5805a2cdb3ddbe56[list_ref][item_ref] = undefined;
 
       if(self.var_5805a2cdb3ddbe56[list_ref].size == 0) {
@@ -1615,18 +1615,18 @@ function private function_fbb932b933235b5e(list_ref, item_ref) {
     }
   }
 
-  return var_3de03bfa4e76b915;
+  return omnvar_index;
 }
 
 function private function_b267732c9e92f306(list_ref) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.var_56a961d04403887;
+  data = level.hud_management.scripted_widgets.var_56a961d04403887;
 
   if(isDefined(self.var_5805a2cdb3ddbe56[list_ref])) {
     if(self.var_5805a2cdb3ddbe56[list_ref].size > 0) {
       group = self.var_a14cb42739301f30[list_ref].group;
 
       foreach(item_data in self.var_5805a2cdb3ddbe56[list_ref]) {
-        self.var_1dcdf3ab55136138[group][self.var_1dcdf3ab55136138[group].size] = item_data.var_3de03bfa4e76b915;
+        self.var_1dcdf3ab55136138[group][self.var_1dcdf3ab55136138[group].size] = item_data.omnvar_index;
       }
     }
 
@@ -1641,11 +1641,11 @@ function private function_5afd39d9a06be177(list_ref, items, omnvars, var_3cefc2b
     self.var_a14cb42739301f30[list_ref].list = array_combine(self.var_a14cb42739301f30[list_ref].list, omnvars);
   }
 
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d;
+  data = level.hud_management.scripted_widgets;
 
   foreach(index, item in items) {
-    var_94a50c0a0059e601 = function_e5a3c7e8ca795281(self.var_a14cb42739301f30[list_ref].group, omnvars[index], "type_");
-    self setclientomnvar(var_94a50c0a0059e601, data.widget_types[item].index);
+    type_omnvar = function_e5a3c7e8ca795281(self.var_a14cb42739301f30[list_ref].group, omnvars[index], "type_");
+    self setclientomnvar(type_omnvar, data.widget_types[item].index);
   }
 
   function_989fbe51aaf74cb(list_ref);
@@ -1660,9 +1660,9 @@ function private function_989fbe51aaf74cb(list_ref) {
   max_items = 8;
   value = 0;
 
-  if(level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.var_56a961d04403887.num_groups > 1) {
+  if(level.hud_management.scripted_widgets.var_56a961d04403887.num_groups > 1) {
     max_items -= 1;
-    value = self.var_a14cb42739301f30[list_ref].group << level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.var_56a961d04403887.group_shift;
+    value = self.var_a14cb42739301f30[list_ref].group << level.hud_management.scripted_widgets.var_56a961d04403887.group_shift;
   }
 
   list = self.var_a14cb42739301f30[list_ref].list;
@@ -1676,31 +1676,31 @@ function private function_989fbe51aaf74cb(list_ref) {
   function_b52897e8afbb0968(list_ref, value);
 }
 
-function private function_496f711a9ab7a47f(group, var_3de03bfa4e76b915) {
-  var_3de03bfa4e76b915 = function_3e551e16074e030e(group, var_3de03bfa4e76b915);
-  var_94a50c0a0059e601 = "ui_scripted_list_item_" + "type_" + var_3de03bfa4e76b915;
-  var_418596c509f2b084 = "ui_scripted_list_item_" + "param_" + var_3de03bfa4e76b915;
-  var_fb6072b6259477f9 = "ui_scripted_list_item_" + "data_" + var_3de03bfa4e76b915;
-  var_8b4b1b0e9bbc298 = "ui_scripted_list_item_" + "state_" + var_3de03bfa4e76b915;
-  var_26595f30949d77ee = "ui_scripted_list_item_" + "time_" + var_3de03bfa4e76b915;
-  self setclientomnvar(var_94a50c0a0059e601, 0);
-  self setclientomnvar(var_418596c509f2b084, 0);
-  self setclientomnvar(var_fb6072b6259477f9, 0);
-  self setclientomnvar(var_8b4b1b0e9bbc298, 0);
-  self setclientomnvar(var_26595f30949d77ee, 0);
+function private function_496f711a9ab7a47f(group, omnvar_index) {
+  omnvar_index = function_3e551e16074e030e(group, omnvar_index);
+  type_omnvar = "ui_scripted_list_item_" + "type_" + omnvar_index;
+  param_omnvar = "ui_scripted_list_item_" + "param_" + omnvar_index;
+  data_omnvar = "ui_scripted_list_item_" + "data_" + omnvar_index;
+  state_omnvar = "ui_scripted_list_item_" + "state_" + omnvar_index;
+  time_omnvar = "ui_scripted_list_item_" + "time_" + omnvar_index;
+  self setclientomnvar(type_omnvar, 0);
+  self setclientomnvar(param_omnvar, 0);
+  self setclientomnvar(data_omnvar, 0);
+  self setclientomnvar(state_omnvar, 0);
+  self setclientomnvar(time_omnvar, 0);
 }
 
 function private function_3e551e16074e030e(group, index) {
   return index + group * 8;
 }
 
-function private function_e5a3c7e8ca795281(group, var_3de03bfa4e76b915, var_a79e2ddd22fbba9a) {
-  var_3de03bfa4e76b915 = function_3e551e16074e030e(group, var_3de03bfa4e76b915);
-  return "ui_scripted_list_item_" + var_a79e2ddd22fbba9a + var_3de03bfa4e76b915;
+function private function_e5a3c7e8ca795281(group, omnvar_index, omnvar_suffix) {
+  omnvar_index = function_3e551e16074e030e(group, omnvar_index);
+  return "ui_scripted_list_item_" + omnvar_suffix + omnvar_index;
 }
 
 function private function_9cee54c391590f92(list_ref, item_ref) {
-  data = level.var_6917e6eed10cfc44.var_44c1d0100b18dd6d.var_56a961d04403887;
+  data = level.hud_management.scripted_widgets.var_56a961d04403887;
 
   if(isDefined(self.var_5805a2cdb3ddbe56) && isDefined(self.var_5805a2cdb3ddbe56[list_ref]) && isDefined(self.var_5805a2cdb3ddbe56[list_ref][item_ref])) {
     return self.var_5805a2cdb3ddbe56[list_ref][item_ref];

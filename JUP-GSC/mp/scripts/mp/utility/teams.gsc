@@ -402,7 +402,7 @@ function function_f5f92738a88b4577(teamref) {
 }
 
 function getteamfactionsfrommap(teamref) {
-  mapbundle = function_79404c2fcca1c184();
+  mapbundle = getmapscriptbundle();
   mapfaction = undefined;
   var_b051af13cb960b7a = % "hash_6a3e9234e0d7e26d";
 

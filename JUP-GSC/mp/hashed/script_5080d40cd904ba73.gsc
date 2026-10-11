@@ -435,15 +435,15 @@ function function_fe7df93324621658() {
 }
 
 function ai_cleanup() {
-  var_94d08343de33ee25 = getaiarray();
+  a_ai_array = getaiarray();
 
-  for(i = 0; i < var_94d08343de33ee25.size; i++) {
-    if(isalive(var_94d08343de33ee25[i]) && isDefined(var_94d08343de33ee25[i].agent_type) && var_94d08343de33ee25[i].agent_type != "actor_jup_spawner_zombie_deathworm_quest" && !isDefined(var_94d08343de33ee25[i].var_69b049cf4b18c73b)) {
-      if(isDefined(var_94d08343de33ee25[i].magic_bullet_shield)) {
-        var_94d08343de33ee25[i] scripts\common\ai::stop_magic_bullet_shield();
+  for(i = 0; i < a_ai_array.size; i++) {
+    if(isalive(a_ai_array[i]) && isDefined(a_ai_array[i].agent_type) && a_ai_array[i].agent_type != "actor_jup_spawner_zombie_deathworm_quest" && !isDefined(a_ai_array[i].var_69b049cf4b18c73b)) {
+      if(isDefined(a_ai_array[i].magic_bullet_shield)) {
+        a_ai_array[i] scripts\common\ai::stop_magic_bullet_shield();
       }
 
-      var_94d08343de33ee25[i] kill();
+      a_ai_array[i] kill();
       waitframe();
     }
   }
@@ -626,7 +626,7 @@ function function_bf01aba31e9023d1(var_ec133e81bf98bedc, a_players, var_a6b3fae0
     scripts\mp\gamelogic::processlobbydataforclient(player);
     scripts\mp\scoreboard::processcommonplayerdataforplayer(player);
     processlobbydata();
-    player namespace_7177e11e3871c8f4::function_1b6b6e760a1bdd78();
+    player namespace_7177e11e3871c8f4::take_juggernaut_perk();
     level.skipplaybodycountsound = 1;
     spawnpoints = getEntArray("mp_global_intermission", "classname");
     spawnpoint = array_random(spawnpoints);
@@ -674,7 +674,7 @@ function function_3b564213c8be506d() {
 function function_933a8cdaac11b439() {
   level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(self, 1, 1);
   wait 2;
-  namespace_7177e11e3871c8f4::function_1b6b6e760a1bdd78();
+  namespace_7177e11e3871c8f4::take_juggernaut_perk();
   spawnpoints = getEntArray("mp_global_intermission", "classname");
   spawnpoint = array_random(spawnpoints);
   scripts\mp\gametypes\br_spectate::spawnintermissionatplayer(self);

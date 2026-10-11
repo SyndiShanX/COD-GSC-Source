@@ -265,7 +265,7 @@ function function_a3335da8620d547c(var_dd967d0c568c7873) {
   jumpdistance = distance2d(var_dd967d0c568c7873, self.origin);
 
   if(jumpdistance < getdvarint(@ "hash_bd303228300d36d7", 715)) {
-    self.var_f56a71aaddbdd434 = 1;
+    self.smalljump = 1;
   }
 
   if(is_equal(self.curclass, "default2")) {
@@ -285,7 +285,7 @@ function function_a3335da8620d547c(var_dd967d0c568c7873) {
   wait 0.2;
   self allowmelee(1);
   self allowjump(1);
-  self.var_f56a71aaddbdd434 = undefined;
+  self.smalljump = undefined;
   self.var_1a7940ce78dd1720 = undefined;
 }
 

@@ -207,7 +207,7 @@ function private addheadicon(player, bountysettings) {
     bountysettings.overrideorigin = player.origin;
   }
 
-  headicon = player scripts\cp_mp\entityheadicons::setheadicon_multiimage(showtoteams, bountysettings.headiconfriendly, bountysettings.headiconfriendly, bountysettings.headiconenemy, undefined, 1, bountysettings.var_c5409ca7522182b3, bountysettings.naturaldist, undefined, 1, bountysettings.var_b3ea37733a1577e5, bountysettings.overrideorigin, bountysettings.showonminimap);
+  headicon = player scripts\cp_mp\entityheadicons::setheadicon_multiimage(showtoteams, bountysettings.headiconfriendly, bountysettings.headiconfriendly, bountysettings.headiconenemy, undefined, 1, bountysettings.maxdrawdist, bountysettings.naturaldist, undefined, 1, bountysettings.var_b3ea37733a1577e5, bountysettings.overrideorigin, bountysettings.showonminimap);
   setheadiconteam(headicon, player.team);
   function_ce9d0299637c2c24(headicon, 1);
   scripts\cp_mp\entityheadicons::setheadicon_removeclientfrommask(headicon, player);
@@ -229,7 +229,7 @@ function private function_82c32d2cb649e5e3(bountysettings, showtoteams, headicon
     wait updatetime;
     scripts\cp_mp\entityheadicons::setheadicon_deleteicon(headicon);
     neworigin = player.origin;
-    headicon = player scripts\cp_mp\entityheadicons::setheadicon_multiimage(showtoteams, bountysettings.headiconfriendly, bountysettings.headiconfriendly, bountysettings.headiconenemy, undefined, 1, bountysettings.var_c5409ca7522182b3, bountysettings.naturaldist, undefined, 1, bountysettings.var_b3ea37733a1577e5, neworigin, bountysettings.showonminimap);
+    headicon = player scripts\cp_mp\entityheadicons::setheadicon_multiimage(showtoteams, bountysettings.headiconfriendly, bountysettings.headiconfriendly, bountysettings.headiconenemy, undefined, 1, bountysettings.maxdrawdist, bountysettings.naturaldist, undefined, 1, bountysettings.var_b3ea37733a1577e5, neworigin, bountysettings.showonminimap);
     setheadiconteam(headicon, player.team);
     function_ce9d0299637c2c24(headicon, 1);
     scripts\cp_mp\entityheadicons::setheadicon_removeclientfrommask(headicon, player);
@@ -278,7 +278,7 @@ function private function_563873982a6bc459(player, overridesettings) {
   bountysettings.var_d77771d6bfb89518 = default_to(overridesettings.var_d77771d6bfb89518, "icon_skull_large");
   bountysettings.circleradius = default_to(overridesettings.circleradius, level.bountycircleradius);
   bountysettings.circleupdatetime = default_to(overridesettings.circleupdatetime, level.var_d4e0758bcddaa616);
-  bountysettings.var_c5409ca7522182b3 = default_to(overridesettings.var_c5409ca7522182b3, 0);
+  bountysettings.maxdrawdist = default_to(overridesettings.maxdrawdist, 0);
   bountysettings.naturaldist = default_to(overridesettings.naturaldist, 500);
   bountysettings.var_b3ea37733a1577e5 = default_to(overridesettings.var_b3ea37733a1577e5, 0);
   bountysettings.overrideorigin = overridesettings.overrideorigin;
@@ -379,9 +379,9 @@ function private function_9a0cb7b36cf2f5a3(bountysettings) {
     proximityorigin = proximityowner.origin;
 
     if(function_a794fcf9545f2062()) {
-      var_38f56723a5f07a13 = function_b1eef70090b5b7b5(proximityorigin, proximityradius, function_869ccb4e3451b8c6(["etype_player"]));
+      var_38f56723a5f07a13 = getentitiesinradiusfrompartitiongrid(proximityorigin, proximityradius, createentitytypemask(["etype_player"]));
     } else {
-      partition = function_21a6a1c613b50a28(level.players, proximityradius);
+      partition = create_partition(level.players, proximityradius);
       var_38f56723a5f07a13 = partition function_df633f460888a47(proximityorigin);
     }
 

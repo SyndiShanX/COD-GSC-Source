@@ -21,7 +21,7 @@ function setup_callbacks() {
 }
 
 function private function_a3ba36b8f9e1f910(mind_personality) {
-  var_577f45571c039a54 = namespace_823e1abd5161abb1::function_e65493518b3de050();
-  var_577f45571c039a54[var_577f45571c039a54.size] = "ControlFob";
-  return var_577f45571c039a54;
+  decisions = namespace_823e1abd5161abb1::function_e65493518b3de050();
+  decisions[decisions.size] = "ControlFob";
+  return decisions;
 }

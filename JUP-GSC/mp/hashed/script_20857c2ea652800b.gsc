@@ -104,13 +104,13 @@ function function_df47984aec8fdb53() {
     buddy thread function_c6a00df0d39f8c5c();
     buddy thread function_882be57ee5bdc7fd();
     buddy thread function_63db37a0448d2f5b(self);
-    buddy.var_526f1dcf41e8b261 = getdvarfloat(@ "hash_e280783df9276e5e", 32);
+    buddy.tozombiedamagemult = getdvarfloat(@ "hash_e280783df9276e5e", 32);
     buddy.var_e7b2da70a1256fb1 = getdvarfloat(@ "hash_3a2512a384255637", 14);
     buddy.var_fc8b605280dd80b0 = getdvarfloat(@ "hash_5d67719b2bb8adfd", 10);
     buddy.dontsyncmelee = 1;
     buddy.baseaccuracy = getdvarfloat(@ "hash_4348131663bf2724", 1.8);
     buddy.var_4268b42fc89d0be9 = 0.001;
-    buddy.var_8a783f4c73c2ae91 = 4e-06;
+    buddy.gameskillmisstimedistancefactoroverride = 4e-06;
     buddy.gameskillmisstimefrombehindoverride = 0.02;
     buddy.disablereload = 1;
     buddy.grenadeammo = 200;
@@ -118,7 +118,7 @@ function function_df47984aec8fdb53() {
     buddy.var_a32530404b862f7b = 1;
 
     if(namespace_4df2ab39b0e96ec7::function_4d8bb2d866771a10(self.origin) == "difficulty_darkaether") {
-      buddy.var_526f1dcf41e8b261 *= 1.5;
+      buddy.tozombiedamagemult *= 1.5;
       buddy.var_e7b2da70a1256fb1 *= 1.5;
       buddy.var_fc8b605280dd80b0 *= 1.5;
     }
@@ -276,7 +276,7 @@ function private function_fb7b619ca3bfb43a(player) {
   player endon("death_or_disconnect");
   self.reviving = 1;
   self.ignoreall = 1;
-  self.var_d28e54645050df58 = 0;
+  self.script_pushable_by_ai = 0;
   self.script_pushable = 0;
   startorigin = function_8023395e959b8113(player, 27);
 
@@ -288,7 +288,7 @@ function private function_fb7b619ca3bfb43a(player) {
     self setbtgoalpos(3, self.revivetargetpos);
     self.revivetargetangles = startangles;
     self.customarrivalangles = self.revivetargetangles;
-    self.var_c55c721292fdb08b = "crouch";
+    self.customarrivalstanceoverride = "crouch";
     self.var_26aa5cb1924a027 = 1;
     var_c70217358eddbeb2 = 4;
     result = waittill_any_timeout_1(var_c70217358eddbeb2, "bt_goal");
@@ -312,17 +312,17 @@ function private function_fb7b619ca3bfb43a(player) {
   }
 
   self.ignoreall = 0;
-  self.var_d28e54645050df58 = 1;
+  self.script_pushable_by_ai = 1;
   self.script_pushable = 1;
 }
 
-function private function_8023395e959b8113(player, var_2d58e8aae155cc83) {
+function private function_8023395e959b8113(player, distancefromplayer) {
   forward = anglesToForward(player.angles);
   forward = vectorNormalize(forward);
   var_b1b0c9608f1d6e22 = 150;
 
-  if(isDefined(var_2d58e8aae155cc83)) {
-    var_b1b0c9608f1d6e22 = var_2d58e8aae155cc83;
+  if(isDefined(distancefromplayer)) {
+    var_b1b0c9608f1d6e22 = distancefromplayer;
   }
 
   targetorigin = player.origin + (forward[0] * -1, forward[1] * -1, 0) * var_b1b0c9608f1d6e22;
@@ -369,9 +369,9 @@ function private function_23c5e586ede72b79() {
     if(isDefined(self.gasmaskhealth) && isDefined(self.gasmaskmaxhealth) && !istrue(self.gasmaskequipped)) {
       if(self.gasmaskhealth < self.gasmaskmaxhealth) {
         self.gasmaskhealth = clamp(self.gasmaskhealth + int(self.gasmaskmaxhealth / 12), 0, self.gasmaskmaxhealth);
-        var_b8b6fa3d6f2f0b8c = self.gasmaskhealth / self.gasmaskmaxhealth;
-        var_b8b6fa3d6f2f0b8c = clamp(var_b8b6fa3d6f2f0b8c, 0, 1);
-        self setclientomnvar("ui_gasmask_damage", var_b8b6fa3d6f2f0b8c);
+        gasmaskhealthpercentage = self.gasmaskhealth / self.gasmaskmaxhealth;
+        gasmaskhealthpercentage = clamp(gasmaskhealthpercentage, 0, 1);
+        self setclientomnvar("ui_gasmask_damage", gasmaskhealthpercentage);
       }
     }
 
@@ -471,7 +471,7 @@ function function_c528340bc6dfaa78(dmgstruct) {
     dmgstruct.eattacker.var_1b9bba89a566cb5f["deadwire"] = now;
     self thread[[level.ammo_mods["deadwire"].result_func]](death, dmgstruct.eattacker, dmgstruct.smeansofdeath, dmgstruct.sweapon, dmgstruct.vpoint, dmgstruct.shitloc, dmgstruct.modelindex);
     sparams = spawnStruct();
-    sparams.var_2632b2da60d34841 = "deadwire";
+    sparams.ammomod_name = "deadwire";
     sparams.var_19560ec564499c6c = 0;
     sparams.zombie = self;
 

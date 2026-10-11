@@ -1071,7 +1071,7 @@ function function_de0e81433eb4b20c(currentweapon) {
 }
 
 function function_84422a637aa542e2(weaponname) {
-  var_5a4002dd20a8c7b = 0;
+  giveback = 0;
 
   switch (weaponname) {
     case #"hash_22f1c67a16accbe":
@@ -1082,12 +1082,12 @@ function function_84422a637aa542e2(weaponname) {
   }
 }
 
-function shockstick_haywireagent(var_91beb5c3a5ab6910) {
+function shockstick_haywireagent(haywiredata) {
   level endon("game_ended");
-  victim = var_91beb5c3a5ab6910.victim;
-  inflictor = var_91beb5c3a5ab6910.inflictor;
-  attacker = var_91beb5c3a5ab6910.attacker;
-  objweapon = var_91beb5c3a5ab6910.objweapon;
+  victim = haywiredata.victim;
+  inflictor = haywiredata.inflictor;
+  attacker = haywiredata.attacker;
+  objweapon = haywiredata.objweapon;
 
   if(victim.health > 0 && !victim scripts\asm\asm_bb::bb_isanimScripted()) {
     firstshock = gettime() > victim._blackboard.var_dc51d4ea36da3ae1 + getdvarint(@ "hash_acf5b8fed3c019");

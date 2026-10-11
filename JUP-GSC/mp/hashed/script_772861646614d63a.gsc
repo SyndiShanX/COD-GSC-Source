@@ -77,9 +77,9 @@ function private function_7512e3d88c4083fa(heli, startingpos) {
     return undefined;
   }
 
-  var_b87e69df003b39f5 = heli scripts\common\vehicle_aianim::get_availablepositions();
+  availablepositionsstruct = heli scripts\common\vehicle_aianim::get_availablepositions();
   agent.script_startingposition = startingpos;
-  pos = heli scripts\common\vehicle_aianim::choose_vehicle_position(agent, var_b87e69df003b39f5, 0);
+  pos = heli scripts\common\vehicle_aianim::choose_vehicle_position(agent, availablepositionsstruct, 0);
   agent scripts\vehicle\vehicle_common::entervehicle(heli, 1, pos, scripts\common\vehicle_aianim::anim_pos(heli, pos.vehicle_position));
   agent.vehicle_position = pos.vehicle_position;
   agent.goalradius = 10000;

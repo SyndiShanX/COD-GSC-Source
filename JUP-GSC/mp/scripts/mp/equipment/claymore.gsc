@@ -707,7 +707,7 @@ function function_b3a55145aba7855e(data) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function function_773e48f8d031510e() {

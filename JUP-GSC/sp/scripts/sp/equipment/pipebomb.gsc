@@ -15,5 +15,5 @@ function pipebombfiremain(grenade, weapon) {
     return;
   }
 
-  function_216c67ab6749137a(self, undefined, "grenade_throw", "frag_grenade");
+  addbattlechatternotify(self, undefined, "grenade_throw", "frag_grenade");
 }

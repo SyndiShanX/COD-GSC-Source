@@ -13,9 +13,9 @@
 function getfunction(funcid) {
   switch (funcid) {
     case #"hash_dab0d83df51da4d":
-      return &function_3dbd361f74b442f9;
+      return &onuserinit;
     case #"hash_722d767fd6d40f56":
-      return &function_a157fbbc31d9eb1a;
+      return &onuserterminate;
     case #"hash_9f9e07224ff2a95a":
       return &calcstartorigin;
     case #"hash_88347dbc54e3c555":
@@ -35,7 +35,7 @@ function getfunction(funcid) {
     case #"hash_214ba25246813d79":
       return &function_8055622a418ebd4f;
     case #"hash_1ac92cc267a9ec26":
-      return &function_767fb54813708a82;
+      return &goalcheckcleanup;
     case #"hash_f81d03def0fb7e01":
       return &function_27937ccb1b1abef1;
     case #"hash_94e93145a62541a4":
@@ -47,7 +47,7 @@ function getfunction(funcid) {
   return namespace_f901a4f9d899be59::function_efcea5d26798e5b6(funcid);
 }
 
-function private function_3dbd361f74b442f9(interactionid) {
+function private onuserinit(interactionid) {
   setdvarifuninitialized(@ "hash_6bff7f7a44419fce", 0);
 
   if(!isDefined(function_60d6151af81a343(interactionid, "breachtype"))) {
@@ -66,37 +66,37 @@ function private function_3dbd361f74b442f9(interactionid) {
   self.doorcheck.priorgoalpos = self.pathgoalpos;
 }
 
-function private function_a157fbbc31d9eb1a(interactionid) {
+function private onuserterminate(interactionid) {
   if(isDefined(self.capdata) && isDefined(self.capdata.var_9c471c82abe76355)) {
     self.script_pushable = self.capdata.var_9c471c82abe76355;
-    self.var_d28e54645050df58 = self.capdata.var_512299ff86496ad6;
+    self.script_pushable_by_ai = self.capdata.var_512299ff86496ad6;
   }
 
   self.doorcheck = undefined;
   self clearbtgoal(3);
   self.capdata = undefined;
-  self.var_ddad29bbdecd1671 = undefined;
+  self.customarrivalhandler = undefined;
 
   if(self.defaultasm != self.asmname) {
     scripts\common\cap::cap_exit();
   }
 
-  users = function_adf0d34ff483c35a(interactionid);
+  users = getbsequsers(interactionid);
 
   if(users.size == 1) {
     doorid = function_60d6151af81a343(interactionid, "doorindex");
 
     if(isDefined(doorid)) {
-      function_e415e810d4e34ed(doorid, gettime() + 10000);
+      updateroomdoorclaim(doorid, gettime() + 10000);
     }
   }
 }
 
 function private calcstartorigin(statename, role) {
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
   assert(isDefined(id));
-  origin = function_bbfc94714c82788b(id);
-  angles = function_785f60047abcfa05(id);
+  origin = getinteractionorigin(id);
+  angles = getinteractionangles(id);
   doordir = anglesToForward(angles);
   var_5c6afc1001475042 = origin - self.origin;
   cross = vectorcross(var_5c6afc1001475042, doordir);
@@ -144,23 +144,23 @@ function private calcstartorigin(statename, role) {
 
   type = function_60d6151af81a343(id, "breachtype");
   rolestring = type;
-  capinfo = function_a0cccf0b4c466b2c(self, rolestring);
+  capinfo = getcapinfoforrole(self, rolestring);
   animset = capinfo.animation;
   animid = archetypegetrandomalias(animset, idlestate, idlealias, 0);
   assert(animid >= 0);
   xanim = animsetgetanimfromindex(animset, idlestate, animid);
   idleorigin = getstartorigin(origin, angles, xanim);
   idleangles = getstartangles(origin, angles, xanim);
-  var_6f0a02205dd25d2e = getclosestpointonnavmesh(idleorigin, self, 0, 1, 0);
+  snappedidleorigin = getclosestpointonnavmesh(idleorigin, self, 0, 1, 0);
 
-  if(isDefined(var_6f0a02205dd25d2e)) {
-    idleorigin = var_6f0a02205dd25d2e;
+  if(isDefined(snappedidleorigin)) {
+    idleorigin = snappedidleorigin;
   }
 
-  self.var_a57082fdf62bc898 = idlealias + "_door_arrival";
-  self.var_33b4c07d1f388776 = animset;
+  self.customarrivalstate = idlealias + "_door_arrival";
+  self.customarrivalanimset = animset;
   self.customarrivalangles = angles;
-  self.var_b7c243f293b096d2 = idleangles;
+  self.customarrivalanimangles = idleangles;
   self.var_171120e99df3e286 = 1;
   self.var_a2a6c6c46defe8c4 = 1;
   self.capdata = spawnStruct();
@@ -176,7 +176,7 @@ function private calcstartorigin(statename, role) {
     self.capdata.var_2b1676bab1ba8985 = "dual";
   }
 
-  self.var_ddad29bbdecd1671 = &function_ddad29bbdecd1671;
+  self.customarrivalhandler = &customarrivalhandler;
 
   if(getdvarint(@ "hash_6bff7f7a44419fce", 0) == 1) {
     thread function_64fca4864613393f(idleorigin, idleangles);
@@ -186,11 +186,11 @@ function private calcstartorigin(statename, role) {
 }
 
 function private function_17c9514d056f8b0c(statename, mindist, maxdist) {
-  id = self function_92435c7a6ae85c3c();
-  origin = function_bbfc94714c82788b(id);
-  var_9dfa31b22e1f2822 = vectorNormalize(self.origin - origin);
+  id = self getinteractionid();
+  origin = getinteractionorigin(id);
+  doortome = vectorNormalize(self.origin - origin);
   dist = randomintrange(mindist, maxdist);
-  endpoint = origin + var_9dfa31b22e1f2822 * dist;
+  endpoint = origin + doortome * dist;
 
   if(getdvarint(@ "hash_6bff7f7a44419fce", 0) == 1) {
     line(origin, endpoint, (0, 0, 1), 1, 0, 200);
@@ -221,7 +221,7 @@ function private function_17c9514d056f8b0c(statename, mindist, maxdist) {
   return point;
 }
 
-function private function_ddad29bbdecd1671() {
+function private customarrivalhandler() {
   assert(isDefined(self.capdata));
   self.capdata.var_74c9b1f78857273d = 1;
   scripts\common\cap::cap_start(self.capdata.asmname, self.capdata.animsetname);
@@ -230,10 +230,10 @@ function private function_ddad29bbdecd1671() {
 function private arrivalsetup(statename, params) {}
 
 function private arrivalcleanup(statename, params) {
-  self.var_a57082fdf62bc898 = undefined;
-  self.var_33b4c07d1f388776 = undefined;
+  self.customarrivalstate = undefined;
+  self.customarrivalanimset = undefined;
   self.customarrivalangles = undefined;
-  self.var_b7c243f293b096d2 = undefined;
+  self.customarrivalanimangles = undefined;
   self.var_171120e99df3e286 = 0;
   self.var_a2a6c6c46defe8c4 = 0;
 }
@@ -254,15 +254,15 @@ function private onarrival(statename, params) {
 
   self.doorcheck.arrived = 1;
   self.capdata.var_9c471c82abe76355 = self.script_pushable;
-  self.capdata.var_512299ff86496ad6 = self.var_d28e54645050df58;
+  self.capdata.var_512299ff86496ad6 = self.script_pushable_by_ai;
   self.script_pushable = 0;
-  self.var_d28e54645050df58 = 0;
+  self.script_pushable_by_ai = 0;
   sidetoken = self.capdata.dooralias;
   numbertoken = self.capdata.var_2b1676bab1ba8985;
   roletoken = self.capdata.role;
   self.capdata.var_c58c71ebc71f7728 = sidetoken + "_" + numbertoken + "_" + roletoken;
-  self function_fb02be5d663eca13();
-  id = self function_92435c7a6ae85c3c();
+  self interactioncleargoalpos();
+  id = self getinteractionid();
   breachtype = function_60d6151af81a343(id, "breachtype");
   var_48d356c204bf2b81 = isDefined(breachtype) && breachtype == "flashbang";
 
@@ -295,7 +295,7 @@ function private onenter(statename, params) {
   }
 }
 
-function function_27dc505064bcf45b(asmname, statename, tostatename, params) {
+function doorcheck_shoulddoarrival(asmname, statename, tostatename, params) {
   return istrue(self.capdata.var_74c9b1f78857273d);
 }
 
@@ -323,7 +323,7 @@ function function_cea2a40434f5918() {
 
 function function_ce30ac74cab64cfd(note) {
   if(note == "door_open") {
-    opendoor(self function_92435c7a6ae85c3c(), self.origin);
+    opendoor(self getinteractionid(), self.origin);
     return;
   }
 
@@ -358,14 +358,14 @@ function function_ce30ac74cab64cfd(note) {
 function function_184b5862455e8902() {
   self endon("death");
   self endon("bseq_user_deleted");
-  var_8d566e1f6d9b6381 = self gettagorigin(self.grenadeattachtag);
+  prevhandpos = self gettagorigin(self.grenadeattachtag);
   self.doorcheck.grenadedir = anglesToForward(self.angles);
   waitframe();
 
   while(isDefined(self.grenadeattachtag)) {
     handpos = self gettagorigin(self.grenadeattachtag);
-    self.doorcheck.grenadedir = handpos - var_8d566e1f6d9b6381;
-    var_8d566e1f6d9b6381 = handpos;
+    self.doorcheck.grenadedir = handpos - prevhandpos;
+    prevhandpos = handpos;
     waitframe();
   }
 }
@@ -414,10 +414,10 @@ function private function_21bcb65ded71229f(params) {
 }
 
 function private function_e62b12681729b218(asmname, statename, tostatename, params) {
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
   assert(isDefined(id));
-  origin = function_bbfc94714c82788b(id);
-  angles = function_785f60047abcfa05(id);
+  origin = getinteractionorigin(id);
+  angles = getinteractionangles(id);
   doordir = anglesToForward(angles);
   var_5c6afc1001475042 = origin - self.origin;
   cross = vectorcross(var_5c6afc1001475042, doordir);
@@ -451,7 +451,7 @@ function private function_e62b12681729b218(asmname, statename, tostatename, para
 }
 
 function private function_17557d7a61c7b24a(asmname, statename, tostatename, params) {
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
   hasdoor = function_60d6151af81a343(id, "path_has_door");
   return !istrue(hasdoor);
 }
@@ -461,9 +461,9 @@ function private function_27937ccb1b1abef1(asmname, statename, tostatename, para
     return false;
   }
 
-  id = self function_92435c7a6ae85c3c();
-  origin = function_bbfc94714c82788b(id);
-  angles = function_785f60047abcfa05(id);
+  id = self getinteractionid();
+  origin = getinteractionorigin(id);
+  angles = getinteractionangles(id);
   doordir = anglesToForward(angles);
   enemypos = self.enemy.origin;
   toenemy = vectornormalize2(enemypos - origin);
@@ -477,16 +477,16 @@ function private function_af686e8a0657ce57(interactionid) {
 
 function function_8055622a418ebd4f(interactionid) {}
 
-function function_767fb54813708a82(interactionid) {}
+function goalcheckcleanup(interactionid) {}
 
 function private function_64fca4864613393f(idleorigin, idleangles) {
   self endon("death");
   forward = anglesToForward(idleangles);
   end = idleorigin + forward * 32;
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
   breachtype = function_60d6151af81a343(id, "breachtype");
-  intorg = function_bbfc94714c82788b(id);
-  intfwd = anglesToForward(function_785f60047abcfa05(id));
+  intorg = getinteractionorigin(id);
+  intfwd = anglesToForward(getinteractionangles(id));
   intend = intorg + intfwd * 32;
   draw_arrow_time(intorg, intend, (150, 50, 150), 5);
   draw_arrow_time(idleorigin, end, (150, 50, 150), 5);
@@ -495,5 +495,5 @@ function private function_64fca4864613393f(idleorigin, idleangles) {
 
   print3d(idleorigin + (0, 0, 80), self.capdata.dooralias + "<dev string:x30>" + self.capdata.var_2b1676bab1ba8985 + "<dev string:x30>" + self.capdata.role, (255, 255, 255), 1, 0.6, 150);
 
-  print3d(idleorigin + (0, 0, 60), self.var_a57082fdf62bc898, (255, 255, 255), 1, 0.4, 150);
+  print3d(idleorigin + (0, 0, 60), self.customarrivalstate, (255, 255, 255), 1, 0.4, 150);
 }

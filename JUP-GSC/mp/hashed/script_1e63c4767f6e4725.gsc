@@ -47,8 +47,8 @@ function private on_player_death(params) {
 function private lc_expand(start_point, count_left, params) {
   var_ec235e528a1b6682 = int(min(params.var_232825c32e606ba4, count_left));
   filtered_targets = [];
-  targets = function_143526130b12b2b6(start_point, params.arc_radius);
-  targets = utility::array_exclude(targets, namespace_2b1145f62aa835b8::function_9563f2d4e690856d(params.player.team, "players"));
+  targets = getplayersandaiarrayinradius(start_point, params.arc_radius);
+  targets = utility::array_exclude(targets, namespace_2b1145f62aa835b8::getteamdatasharedfunc(params.player.team, "players"));
 
   foreach(target in targets) {
     if(target lightning_chain::function_9754219dda9b7840(params)) {
@@ -90,7 +90,7 @@ function private lc_expand(start_point, count_left, params) {
   }
 }
 
-function private lc_stun_and_damage(var_6344ee17398456ea, params) {
+function private lc_stun_and_damage(pin_to_ground, params) {
   self endon("death");
 
   if(istrue(self.lc_stunned) && !isPlayer(self)) {
@@ -118,14 +118,14 @@ function private lc_stun_and_damage(var_6344ee17398456ea, params) {
   params.duration = duration;
 
   if(isPlayer(self)) {
-    function_bc946a0508ac8d93(var_6344ee17398456ea, params);
+    function_bc946a0508ac8d93(pin_to_ground, params);
     return;
   }
 
   switch (self.type) {
     case #"hash_f695947f7a9ce23f":
       if(utility::issharedfuncdefined("zombie", "stunZombie")) {
-        utility::function_f3bb4f4911a1beb2("zombie", "stunZombie", duration);
+        utility::callsharedfunc("zombie", "stunZombie", duration);
       }
 
       break;
@@ -137,7 +137,7 @@ function private lc_stun_and_damage(var_6344ee17398456ea, params) {
   self.lc_stunned = 1;
   self.var_7cf353523b4c1663 = gettime() + function_a5b14435e3229bed(duration);
   self notify("zombie_lc_stunned");
-  lc_play_stun_fx(var_6344ee17398456ea, params);
+  lc_play_stun_fx(pin_to_ground, params);
 
   if(isDefined(params.var_cc8643dde5979643) && params.var_cc8643dde5979643 > 0) {
     utility::function_3ab9164ef76940fd("shocked_lightning_chain", "shocked_on_paped");
@@ -151,24 +151,24 @@ function private lc_stun_and_damage(var_6344ee17398456ea, params) {
   lightning_chain::lc_do_damage(params);
 }
 
-function private function_bc946a0508ac8d93(var_6344ee17398456ea, params) {
+function private function_bc946a0508ac8d93(pin_to_ground, params) {
   self endon("death_or_disconnect");
   self notify("lc_stun_and_damage");
   self endon("lc_stun_and_damage");
 
   if(!isalive(self)) {
-    lc_play_stun_fx(var_6344ee17398456ea, params);
+    lc_play_stun_fx(pin_to_ground, params);
     return;
   }
 
-  params.var_8de885f6fab113ba = 0;
+  params.tdot = 0;
 
   if(!istrue(self.lc_stunned)) {
     lightning_chain::lc_do_damage(params);
   }
 
   self.lc_stunned = 1;
-  lc_play_stun_fx(var_6344ee17398456ea, params);
+  lc_play_stun_fx(pin_to_ground, params);
 
   if(getdvarint(@ "hash_e46e93c9eb4606db", 1) && params.smeansofdeath == "MOD_PROJECTILE" && params.victim == self) {
     shockdata = params.player function_8d61b29d5f678432(params);
@@ -188,7 +188,7 @@ function private function_bc946a0508ac8d93(var_6344ee17398456ea, params) {
 
 function private lc_damage_calculation(params) {
   if(isPlayer(self)) {
-    if(params.var_8de885f6fab113ba) {
+    if(params.tdot) {
       return getdvarint(@ "hash_cb529ff640bba618", 25);
     }
 
@@ -210,12 +210,12 @@ function private lc_do_tick_damage(params, duration) {
     self endon("lc_do_tick_damage");
   }
 
-  params.var_8de885f6fab113ba = 1;
+  params.tdot = 1;
   total_ticks = getdvarint(@ "hash_59086b940de532cd", 5);
   tick_time = duration / total_ticks;
   total_damage = 0;
   lc_damage = lc_damage_calculation(params);
-  params.var_8de885f6fab113ba = 0;
+  params.tdot = 0;
   var_885efccb799e30cc = int(ceil(lc_damage / total_ticks));
 
   for(tick = 0; tick < total_ticks; tick++) {
@@ -229,7 +229,7 @@ function private lc_do_tick_damage(params, duration) {
   }
 }
 
-function private lc_play_stun_fx(var_6344ee17398456ea, params) {
+function private lc_play_stun_fx(pin_to_ground, params) {
   if(isDefined(params.var_cc8643dde5979643) && params.var_cc8643dde5979643 > 0) {
     paped = 1;
   } else {
@@ -260,7 +260,7 @@ function private lc_play_stun_fx(var_6344ee17398456ea, params) {
     return;
   }
 
-  if(istrue(var_6344ee17398456ea)) {
+  if(istrue(pin_to_ground)) {
     if(paped) {
       ground_fx = "tesla_shock_ground_pap";
     } else {

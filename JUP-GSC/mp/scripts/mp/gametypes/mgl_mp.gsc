@@ -76,9 +76,9 @@ function function_9acf99e8c077e74d() {
 }
 
 function private function_8bd0955f703e9104(mind_personality) {
-  var_577f45571c039a54 = namespace_823e1abd5161abb1::function_e65493518b3de050();
-  var_577f45571c039a54[var_577f45571c039a54.size] = "CaptureFlag";
-  return var_577f45571c039a54;
+  decisions = namespace_823e1abd5161abb1::function_e65493518b3de050();
+  decisions[decisions.size] = "CaptureFlag";
+  return decisions;
 }
 
 function function_4248416fffb4c5b3() {
@@ -137,9 +137,9 @@ function function_892db361940e142d() {
 }
 
 function private function_8aac6813797463e4(mind_personality) {
-  var_577f45571c039a54 = namespace_823e1abd5161abb1::function_e65493518b3de050();
-  var_577f45571c039a54[var_577f45571c039a54.size] = "CaptureHardpoint";
-  return var_577f45571c039a54;
+  decisions = namespace_823e1abd5161abb1::function_e65493518b3de050();
+  decisions[decisions.size] = "CaptureHardpoint";
+  return decisions;
 }
 
 function function_7b7c572755736c13() {

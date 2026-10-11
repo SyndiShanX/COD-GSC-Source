@@ -369,7 +369,7 @@ function empdrone_explodeemp() {
 
   playerweapon = makeweapon("emp_drone_player_mp");
   radiusdamage(self.origin, 64, 60, 1, self.owner, "MOD_EXPLOSIVE", playerweapon);
-  players = function_883458a342af3041(self.origin, 768);
+  players = getplayersinradiussharedfunc(self.origin, 768);
 
   foreach(player in players) {
     if(!player can_be_empd()) {

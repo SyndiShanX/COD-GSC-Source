@@ -121,7 +121,7 @@ function cleardamagemodifiers() {
   self.multiplicativedamagemodifierignorefuncs = [];
 }
 
-function packdamagedata(attacker, victim, damage, objweapon, meansofdeath, inflictor, point, direction_vec, modelname, attachtagname, partname, tagname, idflags, eventid, hitloc, var_1da1a66b5c6a06a7) {
+function packdamagedata(attacker, victim, damage, objweapon, meansofdeath, inflictor, point, direction_vec, modelname, attachtagname, partname, tagname, idflags, eventid, hitloc, lightarmordamage) {
   struct = spawnStruct();
   struct.attacker = attacker;
   struct.victim = victim;
@@ -139,7 +139,7 @@ function packdamagedata(attacker, victim, damage, objweapon, meansofdeath, infli
   struct.damageflags = idflags;
   struct.eventid = eventid;
   struct.hitloc = hitloc;
-  struct.var_1da1a66b5c6a06a7 = var_1da1a66b5c6a06a7;
+  struct.lightarmordamage = lightarmordamage;
 
   if(isDefined(struct.attacker)) {
     struct.attacker.assistedsuicide = 0;

@@ -5,7 +5,7 @@
 
 #using script_5a4a5d9ba343ff8f;
 #using scripts\engine\utility;
-#namespace namespace_eacada4b289f07a0;
+#namespace effect_charm;
 
 function charm(durations, attacker, end_callback) {
   if(!istrue(self.aisettings.var_d9f86989ad15047e)) {
@@ -17,15 +17,15 @@ function charm(durations, attacker, end_callback) {
   }
 
   assert(isDefined(attacker.team));
-  var_ff12966079a5dc0 = function_108973a907c11ca7("charm", durations, undefined, &function_c32337ecb8f9a0d7, &end_charm);
-  var_ff12966079a5dc0.original_team = self.team;
-  var_ff12966079a5dc0.attacker = attacker;
-  var_ff12966079a5dc0.new_team = attacker.team;
-  var_ff12966079a5dc0.end_callback = end_callback;
-  return start_effect(var_ff12966079a5dc0);
+  charm_effect = function_108973a907c11ca7("charm", durations, undefined, &start_charm, &end_charm);
+  charm_effect.original_team = self.team;
+  charm_effect.attacker = attacker;
+  charm_effect.new_team = attacker.team;
+  charm_effect.end_callback = end_callback;
+  return start_effect(charm_effect);
 }
 
-function private function_c32337ecb8f9a0d7(effect) {
+function private start_charm(effect) {
   self.health = self.maxhealth;
   self.allowpain = 0;
   self.team = effect.new_team;

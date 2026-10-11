@@ -11,7 +11,7 @@
 #using scripts\sp\utility;
 #namespace log_pile;
 
-function function_51b91752c24c4995() {
+function log_pile_init() {
   piles = getEntArray("dyn_log_pile", "targetname");
 
   if(piles.size <= 0) {

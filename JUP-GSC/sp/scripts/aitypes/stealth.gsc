@@ -20,7 +20,7 @@
 #namespace stealth;
 
 function initstealthfunctions() {
-  self.fnsetstealthstate = &scripts\aitypes\stealth::function_20bf793de5175709;
+  self.fnsetstealthstate = &scripts\aitypes\stealth::scrsetstealthstate;
   self.fnisinstealthidle = &scripts\aitypes\stealth::isidle;
   self.fnisinstealthinvestigate = &scripts\aitypes\stealth::isinvestigating;
   self.fnisinstealthhunt = &scripts\aitypes\stealth::ishunting;
@@ -33,23 +33,23 @@ function initstealthfunctions() {
 }
 
 function isidlescriptedanim() {
-  return isDefined(self.stealth) && self.var_fe5ebefa740c7106 == 0 && self._blackboard.var_6ff150891bb0c47;
+  return isDefined(self.stealth) && self.stealth_bsmstate == 0 && self._blackboard.idlenodeisvalid;
 }
 
 function isidle() {
-  return isDefined(self.stealth) && self.var_fe5ebefa740c7106 == 0;
+  return isDefined(self.stealth) && self.stealth_bsmstate == 0;
 }
 
 function isinvestigating() {
-  return isDefined(self.stealth) && self.var_fe5ebefa740c7106 == 1;
+  return isDefined(self.stealth) && self.stealth_bsmstate == 1;
 }
 
 function ishunting() {
-  return isDefined(self.stealth) && self.var_fe5ebefa740c7106 == 2;
+  return isDefined(self.stealth) && self.stealth_bsmstate == 2;
 }
 
 function iscombating() {
-  return isDefined(self.stealth) && self.var_fe5ebefa740c7106 == 3;
+  return isDefined(self.stealth) && self.stealth_bsmstate == 3;
 }
 
 function stealth_initfriendly(taskid) {
@@ -92,16 +92,16 @@ function forceflashlightplayercanseeifnecessary() {
 }
 
 function function_e75ff8b7f46a7761(taskid) {
-  var_cb489a1a37e61b8e = ent_flag_exist("react_to_dynolights") && ent_flag("react_to_dynolights");
+  shouldupdatelightmeter = ent_flag_exist("react_to_dynolights") && ent_flag("react_to_dynolights");
 
-  if(var_cb489a1a37e61b8e && !isDefined(self.lightmeter)) {
+  if(shouldupdatelightmeter && !isDefined(self.lightmeter)) {
     scripts\stealth\utility::update_light_meter();
-    var_cb489a1a37e61b8e = 0;
+    shouldupdatelightmeter = 0;
   }
 
-  updatelightbasedflashlight(self.var_fe5ebefa740c7106, 0.5);
+  updatelightbasedflashlight(self.stealth_bsmstate, 0.5);
 
-  if(var_cb489a1a37e61b8e) {
+  if(shouldupdatelightmeter) {
     entnum = self getentitynumber();
     frametime = level.frameduration;
     assert(isDefined(frametime));
@@ -168,7 +168,7 @@ function updatelightbasedflashlight(state, var_45af66a61bdb7b50) {
   }
 
   if(var_1a544a7e8d153ea != self._blackboard.bflashlight) {
-    if(asm_getdemeanor() != "patrol" && (!isDefined(self.var_1bab8712529eb3c2) || !self.var_1bab8712529eb3c2)) {
+    if(asm_getdemeanor() != "patrol" && (!isDefined(self.asmflashlight) || !self.asmflashlight)) {
       assert(isDefined(self.fnstealthflashlighton) && isDefined(self.fnstealthflashlightoff));
 
       if(self._blackboard.bflashlight) {
@@ -182,7 +182,7 @@ function updatelightbasedflashlight(state, var_45af66a61bdb7b50) {
 }
 
 function isidlecurious() {
-  return self.var_d17737f2fb2cea58;
+  return self.stealthidlecurious;
 }
 
 function idle_init(taskid) {
@@ -217,7 +217,7 @@ function idle_terminate(taskid) {
 }
 
 function stealth_shouldinvestigate(taskid) {
-  if(self.var_fe5ebefa740c7106 == 1) {
+  if(self.stealth_bsmstate == 1) {
     return anim.success;
   }
 
@@ -243,7 +243,7 @@ function investigate_setreaction(event) {
 }
 
 function stealth_shouldhunt(taskid) {
-  if(self.var_fe5ebefa740c7106 == 2) {
+  if(self.stealth_bsmstate == 2) {
     return anim.success;
   }
 
@@ -297,7 +297,7 @@ function hunt_custom_init(taskid) {
 }
 
 function hunt_custom_update(taskid) {
-  if(!self.var_f843fbbada4e59b2) {
+  if(!self.stealth_hunt_iscustom) {
     return anim.failure;
   }
 
@@ -708,7 +708,7 @@ function function_9499f9e2b35b85c8(event, podstate) {
   }
 }
 
-function function_20bf793de5175709(statename, e) {
+function scrsetstealthstate(statename, e) {
   if(!flag("stealth_enabled") || !isDefined(self.stealth) || !istrue(self.stealth_enabled)) {
     return;
   }

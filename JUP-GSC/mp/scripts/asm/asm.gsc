@@ -132,21 +132,21 @@ function asm_init_blackboard() {
   self._blackboard.bfire = 0;
 }
 
-function asm_terminateandreplace(var_f48b8938602f359b, newarchetype) {
+function asm_terminateandreplace(newasmname, newarchetype) {
   self asmterminate();
   self clearaiblackboard();
   self._blackboard = undefined;
   self notify("asm_terminated");
-  self.var_a709fbd9fea148f6 = undefined;
+  self.asmtrackasm = undefined;
 
   if(!isDefined(newarchetype)) {
     newarchetype = self.animsetname;
   }
 
-  var_2a6dba1cf4fb4026 = tolower(var_f48b8938602f359b);
+  lowerasmname = tolower(newasmname);
   asm_init_blackboard();
-  self[[self.fnasm_init]](var_2a6dba1cf4fb4026, newarchetype);
-  self.defaultasm = var_2a6dba1cf4fb4026;
+  self[[self.fnasm_init]](lowerasmname, newarchetype);
+  self.defaultasm = lowerasmname;
 }
 
 function asm_getnotehandler(asmname, statename) {
@@ -168,7 +168,7 @@ function asm_getnotehandler(asmname, statename) {
 }
 
 function asm_currentstatehasflag(asmname, flagname) {
-  if(istrue(self.var_15b9736ae2dde804)) {
+  if(istrue(self.asmforcetrackloop)) {
     return 1;
   }
 
@@ -250,7 +250,7 @@ function asm_eventfired(asmname, eventname) {
   return self asmeventfired(asmname, eventname);
 }
 
-function asm_checktransitions(asmname, currentstatename, var_7bb056e0e335a770) {
+function asm_checktransitions(asmname, currentstatename, inpassthrough) {
   self asmtick(1);
 }
 
@@ -386,7 +386,7 @@ function function_62d0bb5a77d09499(statename, alias) {
   arcname = self.basearchetype;
   assertex(isDefined(arcname), "<dev string:x162>");
   animresult = archetypegetrandomalias(arcname, statename, alias, asm_isfrantic());
-  assertex(isDefined(animresult), "<dev string:x18e>" + function_3c8848a3a11b2553(alias) + "<dev string:x1a8>" + arcname + "<dev string:x1bc>" + statename + "<dev string:x1c9>" + self.classname + "<dev string:x1d4>");
+  assertex(isDefined(animresult), "<dev string:x18e>" + getxhashsourcename(alias) + "<dev string:x1a8>" + arcname + "<dev string:x1bc>" + statename + "<dev string:x1c9>" + self.classname + "<dev string:x1d4>");
   return animresult;
 }
 
@@ -394,7 +394,7 @@ function asm_lookupanimfromalias(statename, alias) {
   arcname = function_2285421dfc79c4d5();
   assertex(isDefined(arcname), "<dev string:xbf>");
   animresult = archetypegetrandomalias(arcname, statename, alias, asm_isfrantic());
-  assertex(isDefined(animresult), "<dev string:x18e>" + function_3c8848a3a11b2553(alias) + "<dev string:x1a8>" + arcname + "<dev string:x1bc>" + statename + "<dev string:x1c9>" + self.classname + "<dev string:x1d4>");
+  assertex(isDefined(animresult), "<dev string:x18e>" + getxhashsourcename(alias) + "<dev string:x1a8>" + arcname + "<dev string:x1bc>" + statename + "<dev string:x1c9>" + self.classname + "<dev string:x1d4>");
   return animresult;
 }
 
@@ -530,7 +530,7 @@ function function_fb56c9527636713f(asmname, statename, playbackrate, ismovestate
     }
 
     lastnote = undefined;
-    var_136f34daf1a3c277 = playbackrate;
+    prevplaybackrate = playbackrate;
 
     while(!isDefined(lastnote)) {
       lastnote = asm_donotetrackswithtimeout(asmname, statename, timestep, notehandler);
@@ -538,7 +538,7 @@ function function_fb56c9527636713f(asmname, statename, playbackrate, ismovestate
       if(!isDefined(lastnote) && bmovestate) {
         playbackrate = asm_getmoveplaybackrate();
 
-        if(playbackrate != var_136f34daf1a3c277) {
+        if(playbackrate != prevplaybackrate) {
           self codemoveanimrate(playbackrate);
 
           if(isnumber(loopanim)) {
@@ -696,9 +696,9 @@ function asm_tryhandledeathstatechangenotetrack(notetrack) {
 }
 
 function asm_donotetracksfortime(asmname, statename, time, customfunction, customparams) {
-  var_24a91f52de25eb75 = statename + "_timeout";
-  self endon(var_24a91f52de25eb75);
-  childthread asm_donotetracksfortime_helper(var_24a91f52de25eb75, time);
+  sztimedout = statename + "_timeout";
+  self endon(sztimedout);
+  childthread asm_donotetracksfortime_helper(sztimedout, time);
 
   while(true) {
     asm_dosinglenotetrack(asmname, statename, customfunction, customparams);
@@ -712,10 +712,10 @@ function asm_donotetrackswithtimeout_helper(endonstring, notifystring, timeout) 
 }
 
 function asm_donotetrackswithtimeout(asmname, statename, timeout, customfunction, customparams) {
-  var_24a91f52de25eb75 = statename + "_timeout";
+  sztimedout = statename + "_timeout";
   var_7386724c9bd1d65c = statename + "_endHelper";
-  self endon(var_24a91f52de25eb75);
-  childthread asm_donotetrackswithtimeout_helper(var_7386724c9bd1d65c, var_24a91f52de25eb75, timeout);
+  self endon(sztimedout);
+  childthread asm_donotetrackswithtimeout_helper(var_7386724c9bd1d65c, sztimedout, timeout);
   retval = asm_donotetracks(asmname, statename, customfunction, customparams);
   self notify(var_7386724c9bd1d65c);
   return retval;
@@ -739,7 +739,7 @@ function asm_donotetracks(asmname, statename, customfunction, customparams, cust
   }
 }
 
-function asm_donotetrackswithinterceptor(asmname, statename, interceptfunction, var_314a4fbce09143e7, customflagname) {
+function asm_donotetrackswithinterceptor(asmname, statename, interceptfunction, interceptparams, customflagname) {
   assert(isDefined(interceptfunction));
   flagname = statename;
 
@@ -762,7 +762,7 @@ function asm_donotetrackswithinterceptor(asmname, statename, interceptfunction, 
 
     foreach(note in notes) {
       asm_fireevent(asmname, note);
-      intercepted = [[interceptfunction]](statename, note, var_314a4fbce09143e7);
+      intercepted = [[interceptfunction]](statename, note, interceptparams);
 
       if(isDefined(intercepted) && intercepted) {
         continue;
@@ -1117,15 +1117,15 @@ function yawdiffto2468(diff) {
   return "8";
 }
 
-function function_9de97eaaf31f9e35() {
-  if(isDefined(level.var_9197bd66f91ccd30) && level.var_9197bd66f91ccd30) {
+function asm_debugenabled() {
+  if(isDefined(level.asmdebugenabled) && level.asmdebugenabled) {
     return 1;
   }
 
   return 0;
 }
 
-function function_3271c00e44d9636b() {
+function debug_arrivals_on_actor() {
   dvar = getDvar(@ "debug_arrivals");
 
   if(dvar == "<dev string:x405>") {
@@ -1144,7 +1144,7 @@ function function_3271c00e44d9636b() {
 }
 
 function debug_arrival(msg) {
-  if(!function_3271c00e44d9636b()) {
+  if(!debug_arrivals_on_actor()) {
     return;
   }
 
@@ -1153,60 +1153,60 @@ function debug_arrival(msg) {
 
 function asm_setupgesture(asmname, statename) {
   demeanor = asm_getdemeanor();
-  var_59c51d94cf774c12 = asm_isfrantic();
+  bfrantic = asm_isfrantic();
   gestures = self.asm.gestures;
   arc = self.animsetname;
-  gestures.gesture_moveup_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_move_up", var_59c51d94cf774c12));
-  gestures.gesture_armup_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_armup", var_59c51d94cf774c12));
-  gestures.gesture_onme_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_on_me", var_59c51d94cf774c12));
-  gestures.gesture_hold_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_hold", var_59c51d94cf774c12));
-  gestures.gesture_fallback_up_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_fallback_up", var_59c51d94cf774c12));
-  gestures.gesture_fallback_down_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_fallback_down", var_59c51d94cf774c12));
+  gestures.gesture_moveup_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_move_up", bfrantic));
+  gestures.gesture_armup_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_armup", bfrantic));
+  gestures.gesture_onme_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_on_me", bfrantic));
+  gestures.gesture_hold_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_hold", bfrantic));
+  gestures.gesture_fallback_up_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_fallback_up", bfrantic));
+  gestures.gesture_fallback_down_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_fallback_down", bfrantic));
 
   if(demeanor == "casual") {
-    gestures.gesture_point_center = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_center", var_59c51d94cf774c12));
-    gestures.gesture_point_left = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_left", var_59c51d94cf774c12));
-    gestures.gesture_point_right = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_right", var_59c51d94cf774c12));
-    gestures.gesture_point_up = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_up", var_59c51d94cf774c12));
-    gestures.gesture_point_down = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_down", var_59c51d94cf774c12));
-    gestures.gesture_shrug_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_shrug_anim", var_59c51d94cf774c12));
-    gestures.gesture_cross_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_cross_anim", var_59c51d94cf774c12));
-    gestures.gesture_nod_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_nod_anim", var_59c51d94cf774c12));
-    gestures.gesture_shake_head_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_shake_head_anim", var_59c51d94cf774c12));
-    gestures.gesture_salute_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_salute_anim", var_59c51d94cf774c12));
-    gestures.gesture_wave_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_wave_anim", var_59c51d94cf774c12));
-    gestures.gesture_wait_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_wait_anim", var_59c51d94cf774c12));
+    gestures.gesture_point_center = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_center", bfrantic));
+    gestures.gesture_point_left = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_left", bfrantic));
+    gestures.gesture_point_right = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_right", bfrantic));
+    gestures.gesture_point_up = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_up", bfrantic));
+    gestures.gesture_point_down = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_point_down", bfrantic));
+    gestures.gesture_shrug_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_shrug_anim", bfrantic));
+    gestures.gesture_cross_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_cross_anim", bfrantic));
+    gestures.gesture_nod_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_nod_anim", bfrantic));
+    gestures.gesture_shake_head_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_shake_head_anim", bfrantic));
+    gestures.gesture_salute_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_salute_anim", bfrantic));
+    gestures.gesture_wave_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_wave_anim", bfrantic));
+    gestures.gesture_wait_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_wait_anim", bfrantic));
     return;
   }
 
   if(demeanor == "casual_gun") {
-    gestures.gesture_point_center = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_center", var_59c51d94cf774c12));
-    gestures.gesture_point_left = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_left", var_59c51d94cf774c12));
-    gestures.gesture_point_right = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_right", var_59c51d94cf774c12));
-    gestures.gesture_point_up = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_up", var_59c51d94cf774c12));
-    gestures.gesture_point_down = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_down", var_59c51d94cf774c12));
-    gestures.gesture_shrug_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_shrug_anim", var_59c51d94cf774c12));
-    gestures.gesture_cross_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_cross_anim", var_59c51d94cf774c12));
-    gestures.gesture_nod_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_nod_anim", var_59c51d94cf774c12));
-    gestures.gesture_shake_head_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_shake_head_anim", var_59c51d94cf774c12));
-    gestures.gesture_salute_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_salute_anim", var_59c51d94cf774c12));
-    gestures.gesture_wave_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_wave_anim", var_59c51d94cf774c12));
-    gestures.gesture_wait_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_wait_anim", var_59c51d94cf774c12));
+    gestures.gesture_point_center = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_center", bfrantic));
+    gestures.gesture_point_left = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_left", bfrantic));
+    gestures.gesture_point_right = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_right", bfrantic));
+    gestures.gesture_point_up = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_up", bfrantic));
+    gestures.gesture_point_down = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_casual_gun_point_down", bfrantic));
+    gestures.gesture_shrug_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_shrug_anim", bfrantic));
+    gestures.gesture_cross_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_cross_anim", bfrantic));
+    gestures.gesture_nod_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_nod_anim", bfrantic));
+    gestures.gesture_shake_head_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_shake_head_anim", bfrantic));
+    gestures.gesture_salute_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_salute_anim", bfrantic));
+    gestures.gesture_wave_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_wave_anim", bfrantic));
+    gestures.gesture_wait_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_wait_anim", bfrantic));
     return;
   }
 
-  gestures.gesture_point_center = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_center", var_59c51d94cf774c12));
-  gestures.gesture_point_left = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_left", var_59c51d94cf774c12));
-  gestures.gesture_point_right = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_right", var_59c51d94cf774c12));
-  gestures.gesture_point_up = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_up", var_59c51d94cf774c12));
-  gestures.gesture_point_down = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_down", var_59c51d94cf774c12));
-  gestures.gesture_shrug_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_shrug_anim", var_59c51d94cf774c12));
-  gestures.gesture_cross_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_cross_anim", var_59c51d94cf774c12));
-  gestures.gesture_nod_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_nod_anim", var_59c51d94cf774c12));
-  gestures.gesture_shake_head_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_shake_head_anim", var_59c51d94cf774c12));
-  gestures.gesture_salute_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_salute_anim", var_59c51d94cf774c12));
-  gestures.gesture_wave_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_wave_anim", var_59c51d94cf774c12));
-  gestures.gesture_wait_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_wait_anim", var_59c51d94cf774c12));
+  gestures.gesture_point_center = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_center", bfrantic));
+  gestures.gesture_point_left = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_left", bfrantic));
+  gestures.gesture_point_right = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_right", bfrantic));
+  gestures.gesture_point_up = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_up", bfrantic));
+  gestures.gesture_point_down = asm_getxanim("gesture_point", archetypegetrandomalias(arc, "gesture_point", "gesture_gun_point_down", bfrantic));
+  gestures.gesture_shrug_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_shrug_anim", bfrantic));
+  gestures.gesture_cross_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_cross_anim", bfrantic));
+  gestures.gesture_nod_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_nod_anim", bfrantic));
+  gestures.gesture_shake_head_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_shake_head_anim", bfrantic));
+  gestures.gesture_salute_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_salute_anim", bfrantic));
+  gestures.gesture_wave_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_wave_anim", bfrantic));
+  gestures.gesture_wait_anim = asm_getxanim("gesture_old", archetypegetrandomalias(arc, "gesture_old", "gesture_gun_wait_anim", bfrantic));
 }
 
 function setup_level_ents() {
@@ -1226,7 +1226,7 @@ function setup_level_ents() {
   callback::callback("setup_all_traversals");
 
   foreach(t in getnodearray("<dev string:x412>", "<dev string:x429>")) {
-    t thread function_f1e58f7103a22462();
+    t thread deprecatedtraversethink();
   }
 
   level thread drawtraversaldata();
@@ -1327,7 +1327,7 @@ function traversethink() {
 
       if(getdvarint(@ "hash_a838875af4383ca1", 0) != 0) {
         self.var_2ec927a0b0085925 = getnode(self.target, "<dev string:x429>").origin;
-        self.var_5d8aff9e6ac666b5 = ent.origin;
+        self.rail_hop_double_jump_down = ent.origin;
       }
 
       break;
@@ -1401,11 +1401,11 @@ function store_original_traverse_data() {
   }
 }
 
-function calculate_traverse_data(struct_pos, endnode_pos, var_83a69c989077feb7) {
+function calculate_traverse_data(struct_pos, endnode_pos, struct2_pos) {
   assert(self.type == "<dev string:x5e3>");
 
   if(self.animscript == "ladder_up" || self.animscript == "ladder_down") {
-    ladderend = isDefined(var_83a69c989077feb7) ? var_83a69c989077feb7 : isDefined(struct_pos) ? struct_pos : endnode_pos;
+    ladderend = isDefined(struct2_pos) ? struct2_pos : isDefined(struct_pos) ? struct_pos : endnode_pos;
     self.traverse_height = ladderend[2];
     self.traverse_height_delta = ladderend[2] - self.origin[2];
     self.traverse_drop_height_delta = ladderend[2] - endnode_pos[2];
@@ -1418,12 +1418,12 @@ function calculate_traverse_data(struct_pos, endnode_pos, var_83a69c989077feb7) 
   self.traverse_drop_height_delta = struct_pos[2] - endnode_pos[2];
   self.apex_delta = struct_pos - self.origin;
 
-  if(isDefined(var_83a69c989077feb7)) {
-    self.across_delta = var_83a69c989077feb7 - struct_pos;
+  if(isDefined(struct2_pos)) {
+    self.across_delta = struct2_pos - struct_pos;
   }
 }
 
-function re_calculate_traverse_data(ref_node, struct_pos, endnode_pos, var_83a69c989077feb7) {
+function re_calculate_traverse_data(ref_node, struct_pos, endnode_pos, struct2_pos) {
   if(!isDefined(struct_pos)) {
     struct_pos = self.origin + rotatevector(ref_node.original_data.apex_delta_local, self.angles);
   }
@@ -1432,12 +1432,12 @@ function re_calculate_traverse_data(ref_node, struct_pos, endnode_pos, var_83a69
     endnode_pos = ref_node.original_data.endnode_pos;
   }
 
-  if(!isDefined(var_83a69c989077feb7) && isDefined(ref_node.original_data.across_delta_local)) {
+  if(!isDefined(struct2_pos) && isDefined(ref_node.original_data.across_delta_local)) {
     var_f671cc4a667b804f = rotatevector(ref_node.original_data.across_delta_local, self.angles);
-    var_83a69c989077feb7 = struct_pos + var_f671cc4a667b804f;
+    struct2_pos = struct_pos + var_f671cc4a667b804f;
   }
 
-  calculate_traverse_data(struct_pos, endnode_pos, var_83a69c989077feb7);
+  calculate_traverse_data(struct_pos, endnode_pos, struct2_pos);
 }
 
 function processwallruntraversal(target) {
@@ -1482,10 +1482,10 @@ function processwallruntraversal(target) {
     }
 
     walldir = vectorNormalize(var_d258406ada10ec0a.origin - var_70d5f712a9e22e96.origin);
-    var_13654841eca9f761 = var_70d5f712a9e22e96.origin - self.origin;
-    var_13654841eca9f761 = (var_13654841eca9f761[0], var_13654841eca9f761[1], 0);
-    var_13654841eca9f761 = vectorNormalize(var_13654841eca9f761);
-    dotprod = vectordot(walldir, var_13654841eca9f761);
+    dirtowall = var_70d5f712a9e22e96.origin - self.origin;
+    dirtowall = (dirtowall[0], dirtowall[1], 0);
+    dirtowall = vectorNormalize(dirtowall);
+    dotprod = vectordot(walldir, dirtowall);
 
     if(dotprod < 0) {
       println("<dev string:x6e0>" + self.origin + "<dev string:x705>");
@@ -1510,10 +1510,10 @@ function processwallruntraversal(target) {
       traversalendnode = getnode(self.target, "<dev string:x429>");
       assert(isDefined(traversalendnode));
       assert(isDefined(walldir));
-      var_66a49caa0a5f70ba = traversalendnode.origin - var_d258406ada10ec0a.origin;
-      var_66a49caa0a5f70ba = (var_66a49caa0a5f70ba[0], var_66a49caa0a5f70ba[1], 0);
-      var_66a49caa0a5f70ba = vectorNormalize(var_66a49caa0a5f70ba);
-      dotprod = vectordot(var_66a49caa0a5f70ba, walldir);
+      dirtoendnode = traversalendnode.origin - var_d258406ada10ec0a.origin;
+      dirtoendnode = (dirtoendnode[0], dirtoendnode[1], 0);
+      dirtoendnode = vectorNormalize(dirtoendnode);
+      dotprod = vectordot(dirtoendnode, walldir);
 
       if(dotprod < 0) {
         println("<dev string:x6e0>" + self.origin + "<dev string:x72f>");
@@ -1709,7 +1709,7 @@ function function_e722e0c504ced0ee(asmname, statename, params) {
   self clearoverridearchetype("animscript");
 }
 
-function function_f1e58f7103a22462() {
+function deprecatedtraversethink() {
   wait 0.05;
   println("<dev string:x943>" + self.origin);
 
@@ -1725,7 +1725,7 @@ function validatetraverse(traverse) {
   return traverse == "<dev string:x9a0>" || traverse == "<dev string:x9b4>" || traverse == "<dev string:x9ca>" || traverse == "<dev string:x9e0>" || traverse == "<dev string:x9f8>" || traverse == "<dev string:xa12>" || traverse == "<dev string:xa25>";
 }
 
-function function_12534104fbe54e32() {
+function validatetraversenodes() {
   println("<dev string:xa36>");
 
   foreach(t in getnodearray("<dev string:xa55>", "<dev string:x429>")) {
@@ -1825,7 +1825,7 @@ function private function_2bbb4d05ad09c81e() {
   level childthread function_25f6ff1e2f38d5a(var_c22f0f91887e7488);
   iprintlnbold("<dev string:xb5c>");
   room_index = 0;
-  room_node = function_47ac2016d8dbf2c5(room_index);
+  room_node = getroomnodeforindex(room_index);
   room_node = {
     #origin: getclosestpointonnavmesh(room_node.origin)
   };
@@ -1876,7 +1876,7 @@ function private function_2bbb4d05ad09c81e() {
     }
 
     room_index++;
-    room_node = function_47ac2016d8dbf2c5(room_index);
+    room_node = getroomnodeforindex(room_index);
 
     if(isDefined(room_node)) {
       room_node = {

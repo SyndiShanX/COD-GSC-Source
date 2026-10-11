@@ -10,7 +10,7 @@
 #namespace namespace_fd9b98db526befab;
 
 function autoexec main() {
-  level.var_7bf42d565645a485 = 1;
+  level.shouldinitvehicles = 1;
   function_c0b3ddc9a6bdcc46("veh_jup_jltv", &function_d3890e30943d672c);
 }
 
@@ -33,7 +33,7 @@ function private function_770292fe92b71912(vehicle) {
 
 #using_animtree("mp_vehicles_always_loaded");
 
-function private function_f131c851f1c4e709(vehicle, var_7558f98f3236963d, player, data) {
+function private function_f131c851f1c4e709(vehicle, newseatid, player, data) {
   if(istrue(vehicle.door_open)) {
     vehicle vehicleplayanim(%reb_com_veh8_techo_fl_door_close);
     vehicle.door_open = undefined;
@@ -48,7 +48,7 @@ function private function_f131c851f1c4e709(vehicle, var_7558f98f3236963d, player
   }
 }
 
-function private function_7b4a4367ee409795(vehicle, var_7558f98f3236963d, player, data) {
+function private function_7b4a4367ee409795(vehicle, newseatid, player, data) {
   if(!istrue(data.playerdisconnect)) {
     player.isdrivingvehicle = undefined;
   }

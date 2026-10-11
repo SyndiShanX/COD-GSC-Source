@@ -23,7 +23,7 @@
 function function_495dec0762963abd() {
   waitframe();
 
-  if(!function_47d356083884f913()) {
+  if(!poi_issystemactive()) {
     return;
   }
 
@@ -194,7 +194,7 @@ function function_edb852b69ff7126(eventname) {
     case #"hash_5df1a64e881789c7":
       return 1;
     case #"hash_86f811bb481e7344":
-      return (self.var_fe5ebefa740c7106 != 3 && self.var_fe5ebefa740c7106 != 2);
+      return (self.stealth_bsmstate != 3 && self.stealth_bsmstate != 2);
     default:
       return 1;
   }
@@ -268,7 +268,7 @@ function function_251a5fbcd306ba20(origin, radius, var_646389193279e8ec, poiname
 }
 
 function function_63f2ed030151aa07(speakerorigin, cooldownname, cooldowntime, poiname) {
-  players = getplayersinradius(speakerorigin, level.var_587de0e7b537210a);
+  players = getplayersinradius(speakerorigin, level.bcs_maxdist);
 
   if(!isDefined(players)) {
     return;
@@ -308,7 +308,7 @@ function function_32226d6944572ebd(poiname) {
 }
 
 function function_b39e752ef737042b(poiname) {
-  return level.overseer.poi[poiname].agentstates.var_fe5ebefa740c7106;
+  return level.overseer.poi[poiname].agentstates.stealth_bsmstate;
 }
 
 function function_acaf43595c74730b(state, var_cb7d9ed4fde5cb25, agentspeaker, faraway) {
@@ -507,7 +507,7 @@ function function_c26b1e049db4d841(sequence) {
 
   foreach(index, item in sequence) {
     if(isDefined(currentalias)) {
-      self thread[[level.var_9a62261b5b534b06]](currentalias);
+      self thread[[level.vo_playsoundfunc]](currentalias);
       currentalias = undefined;
       waitframe();
       self waittill("dialogue_done");

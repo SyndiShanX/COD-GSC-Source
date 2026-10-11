@@ -329,13 +329,13 @@ function function_caab3d73a9d2b003() {
 
   while(true) {
     self.trigger waittill("trigger", triggeredent);
-    var_da8cec9bce12f9cb = triggeredent.team;
+    teamtocheck = triggeredent.team;
 
-    if(!isDefined(var_da8cec9bce12f9cb) && isagent(triggeredent) && isDefined(triggeredent.agentteam)) {
-      var_da8cec9bce12f9cb = triggeredent.agentteam;
+    if(!isDefined(teamtocheck) && isagent(triggeredent) && isDefined(triggeredent.agentteam)) {
+      teamtocheck = triggeredent.agentteam;
     }
 
-    if(istrue(level.teambased) && isDefined(var_da8cec9bce12f9cb) && var_da8cec9bce12f9cb == self.owner.team) {
+    if(istrue(level.teambased) && isDefined(teamtocheck) && teamtocheck == self.owner.team) {
       continue;
     }
 
@@ -496,13 +496,13 @@ function function_a5a768ec20759f3d(potentialtarget) {
     return false;
   }
 
-  var_da8cec9bce12f9cb = potentialtarget.team;
+  teamtocheck = potentialtarget.team;
 
-  if(!isDefined(var_da8cec9bce12f9cb) && isagent(potentialtarget) && isDefined(potentialtarget.agentteam)) {
-    var_da8cec9bce12f9cb = potentialtarget.agentteam;
+  if(!isDefined(teamtocheck) && isagent(potentialtarget) && isDefined(potentialtarget.agentteam)) {
+    teamtocheck = potentialtarget.agentteam;
   }
 
-  if(isDefined(var_da8cec9bce12f9cb) && potentialtarget.team == self.owner.team) {
+  if(isDefined(teamtocheck) && potentialtarget.team == self.owner.team) {
     return false;
   }
 
@@ -780,5 +780,5 @@ function function_77bbce9593e3b2cc() {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }

@@ -410,7 +410,7 @@ function getbestmissilespawnpoint(owner, remotemissilespawnpoints) {
   }
 
   remotemissilespawnpointsrandomized = array_randomize(remotemissilespawnpoints);
-  var_1a2450b2561e9908 = remotemissilespawnpointsrandomized[0];
+  bestmissilespawn = remotemissilespawnpointsrandomized[0];
 
   foreach(missilespawn in remotemissilespawnpointsrandomized) {
     missilespawn.sightedenemies = 0;
@@ -438,12 +438,12 @@ function getbestmissilespawnpoint(owner, remotemissilespawnpoints) {
       return missilespawn;
     }
 
-    if(missilespawn.sightedenemies > var_1a2450b2561e9908.sightedenemies) {
-      var_1a2450b2561e9908 = missilespawn;
+    if(missilespawn.sightedenemies > bestmissilespawn.sightedenemies) {
+      bestmissilespawn = missilespawn;
     }
   }
 
-  return var_1a2450b2561e9908;
+  return bestmissilespawn;
 }
 
 function missileeyes(player, rocket) {

@@ -18,7 +18,7 @@
 #namespace juggernaut_recon;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("juggernaut_recon"), &init);
+  registerkillstreakinitfunction(getxhash("juggernaut_recon"), &init);
 }
 
 function init() {
@@ -300,7 +300,7 @@ function function_8bac95417054dcbf(streakinfo) {
     level thread[[getsharedfunc("juggernaut_recon", "playOperatorUseLine")]](self);
   }
 
-  isjuggermoshgamemode = utility::function_f3bb4f4911a1beb2("game", "isJuggerMoshGameMode");
+  isjuggermoshgamemode = utility::callsharedfunc("game", "isJuggerMoshGameMode");
 
   if(issharedfuncdefined("hud", "teamPlayerCardSplash") && !isjuggermoshgamemode) {
     level thread[[getsharedfunc("hud", "teamPlayerCardSplash")]]("used_juggernaut_recon", self);
@@ -397,9 +397,9 @@ function function_44d4db462cec2873(bundle, radarradius, var_2ff0b7294cde30f8) {
 
       if(issharedfuncdefined("game", "getEnemyTeams")) {
         enemyteams = [[getsharedfunc("game", "getEnemyTeams")]](self.team);
-        var_782a999b1a24e0d8 = function_143526130b12b2b6(pingcenter, var_ad00034aa6fc55c9, enemyteams);
+        var_782a999b1a24e0d8 = getplayersandaiarrayinradius(pingcenter, var_ad00034aa6fc55c9, enemyteams);
       } else {
-        var_782a999b1a24e0d8 = function_143526130b12b2b6(pingcenter, var_ad00034aa6fc55c9);
+        var_782a999b1a24e0d8 = getplayersandaiarrayinradius(pingcenter, var_ad00034aa6fc55c9);
       }
 
       foreach(newcharacter in var_782a999b1a24e0d8) {
@@ -503,27 +503,27 @@ function function_68e45178659d4dfd(var_cbcc20cc563590c7) {
   if(isDefined(requestfunc)) {
     objid = [[requestfunc]](99);
     self.juggcontext.juggobjid = objid;
-    utility::function_f3bb4f4911a1beb2(#"objective", #"objective_add_objective", objid, "active", self.origin, "jup_hud_icon_minimap_killstreak_juggernaut_recon", "icon_medium");
-    utility::function_f3bb4f4911a1beb2(#"objective", #"objective_set_play_intro", objid, 0);
-    utility::function_f3bb4f4911a1beb2(#"objective", #"objective_set_play_outro", objid, 0);
+    utility::callsharedfunc(#"objective", #"objective_add_objective", objid, "active", self.origin, "jup_hud_icon_minimap_killstreak_juggernaut_recon", "icon_medium");
+    utility::callsharedfunc(#"objective", #"objective_set_play_intro", objid, 0);
+    utility::callsharedfunc(#"objective", #"objective_set_play_outro", objid, 0);
 
     foreach(player in level.players) {
       if(!isDefined(player) || isbot(player) || player == self) {
         continue;
       }
 
-      utility::function_f3bb4f4911a1beb2(#"objective", #"showtoplayer", objid, player);
+      utility::callsharedfunc(#"objective", #"showtoplayer", objid, player);
     }
 
-    utility::function_f3bb4f4911a1beb2(#"objective", #"update_objective_onentity", objid, self);
-    utility::function_f3bb4f4911a1beb2(#"objective", #"update_objective_setbackground", objid, 1);
+    utility::callsharedfunc(#"objective", #"update_objective_onentity", objid, self);
+    utility::callsharedfunc(#"objective", #"update_objective_setbackground", objid, 1);
 
     if(level.teambased) {
-      utility::function_f3bb4f4911a1beb2(#"objective", #"update_objective_ownerteam", objid, self.team);
+      utility::callsharedfunc(#"objective", #"update_objective_ownerteam", objid, self.team);
       return;
     }
 
-    utility::function_f3bb4f4911a1beb2(#"objective", #"update_objective_ownerclient", objid, self);
+    utility::callsharedfunc(#"objective", #"update_objective_ownerclient", objid, self);
   }
 }
 

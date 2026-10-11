@@ -66,7 +66,7 @@ function initelevators(prioritytable) {
     stop.waypointposition = getStruct(stop.target, "targetname");
   }
 
-  var_9c512bd31f6b92d0 = getStructArray("elevator_car", "script_noteworthy");
+  elevatorcars = getStructArray("elevator_car", "script_noteworthy");
 
   foreach(elevatorset in var_ab337e7f8a1fa44a) {
     elevator = spawnStruct();
@@ -74,17 +74,17 @@ function initelevators(prioritytable) {
     elevator.floors = [];
     group = "elevator_group_free";
     elevator.group = group;
-    var_d8acb6785f746668 = 0;
+    groundfloorindex = 0;
 
     foreach(stop in elevatorset) {
       stop.elevator = elevator;
     }
 
-    checkorigin = elevatorset[var_d8acb6785f746668].origin;
+    checkorigin = elevatorset[groundfloorindex].origin;
     mindist = undefined;
     targetcar = undefined;
 
-    foreach(car in var_9c512bd31f6b92d0) {
+    foreach(car in elevatorcars) {
       dist = distancesquared(car.origin, checkorigin);
 
       if(!isDefined(mindist) || mindist > dist) {
@@ -613,7 +613,7 @@ function elevatormove() {
   self.currentfloor = self.targetfloor;
 }
 
-function function_fea8a1d17e4d669f() {
+function elevatordooropen() {
   foreach(door in self.doors) {
     door setscriptablepartstate("door", "open", 0);
   }
@@ -627,7 +627,7 @@ function function_fea8a1d17e4d669f() {
   println("<dev string:x25e>" + self.elevator.id + "<dev string:x279>" + self.elevator.currentfloor + "<dev string:x28c>" + self.elevator.targetfloor + "<dev string:x29e>" + self.doors[0].state + "<dev string:x2aa>" + self.doors[1].state);
 }
 
-function function_7c2abb1b0d147a89() {
+function elevatordoorclose() {
   foreach(door in self.doors) {
     door setscriptablepartstate("door", "closed", 0);
   }

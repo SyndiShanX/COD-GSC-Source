@@ -72,12 +72,12 @@ function setupboardroomcode(codelength, codestruct) {
   if(false) {}
 }
 
-function codecomputerscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function codecomputerscriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x1c>");
-  level thread _codecomputerscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+  level thread _codecomputerscriptableused(instance, part, state, player, bautouse);
 }
 
-function _codecomputerscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _codecomputerscriptableused(instance, part, state, player, bautouse) {
   if(state == "on") {
     if(!scripts\mp\flags::gameflag("prematch_done")) {
       playsoundatpos(instance.origin, "br_computer_deny");
@@ -120,11 +120,11 @@ function _codecomputerscriptableused(instance, part, state, player, var_a5b2c541
   }
 }
 
-function accessreaderscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread _accessreaderscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+function accessreaderscriptableused(instance, part, state, player, bautouse, usestring) {
+  level thread _accessreaderscriptableused(instance, part, state, player, bautouse);
 }
 
-function _accessreaderscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _accessreaderscriptableused(instance, part, state, player, bautouse) {
   assert(part == "<dev string:x3d>");
   instance setscriptablepartstate("maphint_stadium_access_reader", "off");
 
@@ -180,29 +180,29 @@ function spawnuniqueboardroomloot() {
   var_4b38d0dfdae99bfb = getdvarint(@ "hash_5753ef97f2730d0b", 1);
   var_1b32ecd6577d3426 = getdvarint(@ "hash_caa47d318ede8a16", 1);
   total = 1 + var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31 + var_4b38d0dfdae99bfb + var_1b32ecd6577d3426;
-  var_8b591b0bc361ab3d = randomintrange(1, total);
+  diceroll = randomintrange(1, total);
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d) {
+  if(diceroll <= var_eb80fbb0bf8736d) {
     spawnboardroom_auav();
     return;
   }
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51) {
+  if(diceroll <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51) {
     spawnboardroom_specialist();
     return;
   }
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d) {
+  if(diceroll <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d) {
     spawnboardroom_loadoutdrop();
     return;
   }
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31) {
+  if(diceroll <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31) {
     spawnboardroom_gasmask();
     return;
   }
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31 + var_4b38d0dfdae99bfb) {
+  if(diceroll <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31 + var_4b38d0dfdae99bfb) {
     spawnboardroom_miniguns();
     return;
   }
@@ -626,29 +626,29 @@ function serverroomrewardroll() {
   var_1b32ecd6577d3426 = getdvarint(@ "hash_dfc4be00d82601f1", 18);
   var_80932ed77012b17d = getdvarint(@ "hash_fcba69702bf87b60", 50);
   total = var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31 + var_1b32ecd6577d3426 + var_80932ed77012b17d;
-  var_8b591b0bc361ab3d = randomintrange(1, total);
+  diceroll = randomintrange(1, total);
 
-  if(var_8b591b0bc361ab3d < var_eb80fbb0bf8736d) {
+  if(diceroll < var_eb80fbb0bf8736d) {
     serverroomrewardspawn("brloot_killstreak_auav");
     return;
   }
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51) {
+  if(diceroll <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51) {
     serverroomrewardspawn("brloot_specialist_bonus");
     return;
   }
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d) {
+  if(diceroll <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d) {
     serverroomrewardspawn("brloot_offhand_advancedsupplydrop");
     return;
   }
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31) {
+  if(diceroll <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31) {
     serverroomrewardspawn("brloot_equip_gasmask_durable");
     return;
   }
 
-  if(var_8b591b0bc361ab3d <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31 + var_1b32ecd6577d3426) {
+  if(diceroll <= var_eb80fbb0bf8736d + var_41d59b96cf4ecc51 + var_cc2b025d5d9d414d + var_94c29ef7c8696d31 + var_1b32ecd6577d3426) {
     serverroomrewardspawn("brloot_killstreak_juggernaut");
   }
 }

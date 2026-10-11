@@ -17,12 +17,12 @@ function function_70b0f5c75f974eff() {
   level.var_19f9544004bec048["<dev string:x1c>"] = &function_28d42a2b1f0b3eab;
 }
 
-function function_f18abd71e34586a2(broadcasttype, var_e4ab070d4073a115) {
+function function_f18abd71e34586a2(broadcasttype, handofffunction) {
   if(!isDefined(level.var_19f9544004bec048)) {
     level.var_19f9544004bec048 = [];
   }
 
-  level.var_19f9544004bec048[broadcasttype] = var_e4ab070d4073a115;
+  level.var_19f9544004bec048[broadcasttype] = handofffunction;
 }
 
 function broadcasttoplayer(player, broadcastinstance) {
@@ -52,14 +52,14 @@ function broadcasttoplayer(player, broadcastinstance) {
   function_747e8968c9de65cd(player, broadcastinstance, 0, "<dev string:x67>");
 }
 
-function function_4cd1243025855075(playerlist, broadcastinstance) {
+function broadcasttoplayers(playerlist, broadcastinstance) {
   foreach(player in playerlist) {
     broadcasttoplayer(player, broadcastinstance);
   }
 }
 
-function function_724d89e705c4c011(player, var_aa1d85c9afc2ce60) {
-  foreach(broadcastinstance in var_aa1d85c9afc2ce60) {
+function function_724d89e705c4c011(player, broadcastinstancearray) {
+  foreach(broadcastinstance in broadcastinstancearray) {
     broadcasttoplayer(player, broadcastinstance);
   }
 }
@@ -72,8 +72,8 @@ function updatebroadcast(broadcastinstance) {
   }
 }
 
-function function_cf562ba1189ef6d0(var_aa1d85c9afc2ce60) {
-  foreach(broadcastinstance in var_aa1d85c9afc2ce60) {
+function updatebroadcastarray(broadcastinstancearray) {
+  foreach(broadcastinstance in broadcastinstancearray) {
     updatebroadcast(broadcastinstance);
   }
 }
@@ -89,8 +89,8 @@ function function_8b7e04a0cc14a82e(player, broadcastinstance) {
   function_bb9bc4c538a84c97(player, broadcastinstance, 2);
 }
 
-function function_dc1c1d2f6e9de57d(player, var_aa1d85c9afc2ce60) {
-  foreach(broadcastinstance in var_aa1d85c9afc2ce60) {
+function function_dc1c1d2f6e9de57d(player, broadcastinstancearray) {
+  foreach(broadcastinstance in broadcastinstancearray) {
     function_8b7e04a0cc14a82e(player, broadcastinstance);
   }
 }
@@ -114,7 +114,7 @@ function function_790e679b0f2d121e(var_9c34764b7d5ac247, broadcastinstance) {
 
   if(istrue(var_23d6245ff51f1599)) {
     squad = getsquadmates(var_9c34764b7d5ac247.team, var_9c34764b7d5ac247.sessionsquadid, 0);
-    function_4cd1243025855075(squad, broadcastinstance);
+    broadcasttoplayers(squad, broadcastinstance);
     return;
   }
 
@@ -124,12 +124,12 @@ function function_790e679b0f2d121e(var_9c34764b7d5ac247, broadcastinstance) {
 }
 
 function function_9bce3b7a2f2ae1e(broadcastinstance) {
-  function_4cd1243025855075(level.players, broadcastinstance);
+  broadcasttoplayers(level.players, broadcastinstance);
 }
 
-function function_9d73d2cd3341c8e1(broadcastorigin, var_77caeaf9f9b13760, broadcastinstance) {
+function function_9d73d2cd3341c8e1(broadcastorigin, maxdistancefromorigin, broadcastinstance) {
   foreach(player in level.players) {
-    if(utility::function_44daa65837a12044(player, broadcastorigin, var_77caeaf9f9b13760)) {
+    if(utility::playerwithindistance(player, broadcastorigin, maxdistancefromorigin)) {
       broadcasttoplayer(player, broadcastinstance);
     }
   }
@@ -139,8 +139,8 @@ function function_3186d88f9311acf4(broadcasttype) {
   broadcastinstance = spawnStruct();
   broadcastinstance.var_57214832d7aad3b6 = 0;
   broadcastinstance.broadcasttype = broadcasttype;
-  broadcastinstance.var_82be66848b872db4 = [];
-  broadcastinstance.var_c113183796dfd41 = undefined;
+  broadcastinstance.broadcastdataobjects = [];
+  broadcastinstance.associateddatatracker = undefined;
   broadcastinstance.var_c6167efbc0cc9a86 = 1;
   broadcastinstance.var_8e09c79789611261 = 0;
 
@@ -171,15 +171,15 @@ function function_be70a75a57d524fe() {
 }
 
 function function_7437a8d48556e45e() {
-  return self.var_82be66848b872db4;
+  return self.broadcastdataobjects;
 }
 
-function function_54ad2295d6995862() {
+function getbroadcasttype() {
   assertex(isDefined(self.broadcasttype), "<dev string:xe4>");
   return self.broadcasttype;
 }
 
-function function_cf54c2c8650d9688() {
+function getbroadcastuniqueid() {
   return self.uniqueid;
 }
 
@@ -192,11 +192,11 @@ function function_9ece756d9ac04e6d() {
 }
 
 function function_8362248b8fb9637f() {
-  return self.var_c113183796dfd41;
+  return self.associateddatatracker;
 }
 
 function function_a2b3a19c012e474b(datatracker) {
-  self.var_c113183796dfd41 = datatracker;
+  self.associateddatatracker = datatracker;
 }
 
 function function_15c75941af255c67(var_15309dae6e19a117) {
@@ -242,11 +242,11 @@ function private function_c5de94ea3ad8f2e6(var_2bf0f676fdb4d9d9) {
 
 function private function_bb9bc4c538a84c97(player, broadcastinstance, broadcastcommand) {
   if(!isDefined(player)) {
-    assertmsg("<dev string:x152>" + broadcastinstance function_cf54c2c8650d9688() + "<dev string:x1b7>" + broadcastcommand);
+    assertmsg("<dev string:x152>" + broadcastinstance getbroadcastuniqueid() + "<dev string:x1b7>" + broadcastcommand);
     return;
   }
 
-  broadcasttype = broadcastinstance function_54ad2295d6995862();
+  broadcasttype = broadcastinstance getbroadcasttype();
 
   if(isDefined(broadcasttype)) {
     assertex(isDefined(level.var_19f9544004bec048[broadcasttype]), "<dev string:x1cb>");
@@ -257,8 +257,8 @@ function private function_bb9bc4c538a84c97(player, broadcastinstance, broadcastc
 }
 
 function function_b3bcffc014571bbd(broadcastinstance) {
-  var_be886913a2deb841 = "<dev string:x222>" + broadcastinstance function_54ad2295d6995862() + "<dev string:x238>" + broadcastinstance function_cf54c2c8650d9688();
-  return var_be886913a2deb841;
+  generalbroadcastinstance = "<dev string:x222>" + broadcastinstance getbroadcasttype() + "<dev string:x238>" + broadcastinstance getbroadcastuniqueid();
+  return generalbroadcastinstance;
 }
 
 function private function_7f891130ef74a0() {

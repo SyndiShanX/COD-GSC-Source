@@ -94,12 +94,12 @@ function get_gameskill() {
 }
 
 function gameskill_change_monitor() {
-  var_16e8d6cfc76e1f2a = level.gameskill;
+  current_gameskill = level.gameskill;
 
   while(true) {
-    if(!isDefined(var_16e8d6cfc76e1f2a)) {
+    if(!isDefined(current_gameskill)) {
       wait 1;
-      var_16e8d6cfc76e1f2a = level.gameskill;
+      current_gameskill = level.gameskill;
       continue;
     }
 
@@ -107,12 +107,12 @@ function gameskill_change_monitor() {
       level.lowestgameskill = level.gameskill;
     }
 
-    if(var_16e8d6cfc76e1f2a != getdvarint(@ "g_gameskill", 1)) {
+    if(current_gameskill != getdvarint(@ "g_gameskill", 1)) {
       level.player.gameskill = getdvarint(@ "g_gameskill", 1);
       level.gameskill = level.player.gameskill;
-      var_16e8d6cfc76e1f2a = level.gameskill;
-      level.lowestgameskill = ter_op(var_16e8d6cfc76e1f2a < level.lowestgameskill, var_16e8d6cfc76e1f2a, level.lowestgameskill);
-      level.player setprogressiondata("spData", "currentGameskill", var_16e8d6cfc76e1f2a + 1);
+      current_gameskill = level.gameskill;
+      level.lowestgameskill = ter_op(current_gameskill < level.lowestgameskill, current_gameskill, level.lowestgameskill);
+      level.player setprogressiondata("spData", "currentGameskill", current_gameskill + 1);
       level.player function_fd716ba463a7acc0();
       setglobaldifficulty();
       level.player set_difficulty_from_locked_settings();
@@ -437,8 +437,8 @@ function wave_difficulty_update(difficulty) {
     player.gs.playergrenadebasetime = int(level.difficultysettings["playerGrenadeBaseTime"][setting]);
     player.gs.playergrenaderangetime = int(level.difficultysettings["playerGrenadeRangeTime"][setting]);
     player.gs.playerdoublegrenadetime = int(level.difficultysettings["playerDoubleGrenadeTime"][setting]);
-    player.var_da4b6392c1bec6a1 = level.difficultysettings["missTimeConstant"][setting];
-    player.var_cef700ed012e8981 = level.difficultysettings["missTimeDistanceFactor"][setting];
+    player.gameskillmisstimeconstant = level.difficultysettings["missTimeConstant"][setting];
+    player.gameskillmisstimedistancefactor = level.difficultysettings["missTimeDistanceFactor"][setting];
   }
 
   function_38ae83992c7eb8a5(level.difficultysettings["double_grenades_allowed"][setting]);
@@ -721,9 +721,9 @@ function function_6c3415fc06b0db95(warning_message, gameover_message, timer_over
   setomnvar("cp_countdown_timer_alpha", 5);
   setomnvar("cp_countdown_timer", gettime() + var_2cdacd5098d286d3 * 1000);
   scripts\cp\cp_hud_message::teamhudtutorialmessage(warning_message, "allies", 10);
-  var_ea6ae587890f64dd = gettime() + var_2cdacd5098d286d3 * 1000;
+  endgametime = gettime() + var_2cdacd5098d286d3 * 1000;
 
-  while(gettime() < var_ea6ae587890f64dd) {
+  while(gettime() < endgametime) {
     wait 1;
   }
 
@@ -965,16 +965,16 @@ function function_e96291a58418af14(deathcount) {
   var_4c879478ceb0acf = auto_adjust_lerp_setting("sniperAccuDiffScale");
   function_90faf3f11984372a(var_4c879478ceb0acf, forced_sniper_misses, 1);
   self.damagemultiplier = self.gs.damagemultiplierhealth;
-  self.var_da4b6392c1bec6a1 = auto_adjust_lerp_setting("missTimeConstant");
-  self.var_cef700ed012e8981 = auto_adjust_lerp_setting("missTimeDistanceFactor");
-  function_a7f19b92c7f7a6a8();
+  self.gameskillmisstimeconstant = auto_adjust_lerp_setting("missTimeConstant");
+  self.gameskillmisstimedistancefactor = auto_adjust_lerp_setting("missTimeDistanceFactor");
+  updateplayersettings();
 }
 
-function function_a7f19b92c7f7a6a8() {}
+function updateplayersettings() {}
 
 function auto_adjust_lerp_setting(setting) {
-  var_b0e75118d3c9dde8 = self.gameskill - 1;
-  var_be6da4f53631a129 = get_difficultysetting(setting, var_b0e75118d3c9dde8);
+  easier_gameskill = self.gameskill - 1;
+  var_be6da4f53631a129 = get_difficultysetting(setting, easier_gameskill);
   var_d58d8bffb394c16b = get_difficultysetting(setting);
   var_eeb5fcd04f1822ec = math::lerp(var_d58d8bffb394c16b, var_be6da4f53631a129, level.var_4109d33f0329c17.currentfrac);
   return var_eeb5fcd04f1822ec;
@@ -1048,8 +1048,8 @@ function auto_adjust_debug() {
   function_c1c25d5aa7d1dde0("<dev string:x10b>", self.gs.deathsdoorduration, get_difficultysetting("<dev string:x123>"));
   function_c1c25d5aa7d1dde0("<dev string:x13d>", self.gs.damagemultiplierhealth, self.maxhealth / get_difficultysetting("<dev string:x155>"));
   function_c1c25d5aa7d1dde0("<dev string:x163>", self.gs.damagemultiplierexplosive, get_difficultysetting("<dev string:x17b>"));
-  function_c1c25d5aa7d1dde0("<dev string:x195>", self.var_da4b6392c1bec6a1, get_difficultysetting("<dev string:x1ad>"));
-  function_c1c25d5aa7d1dde0("<dev string:x1be>", self.var_cef700ed012e8981, get_difficultysetting("<dev string:x1d6>"));
+  function_c1c25d5aa7d1dde0("<dev string:x195>", self.gameskillmisstimeconstant, get_difficultysetting("<dev string:x1ad>"));
+  function_c1c25d5aa7d1dde0("<dev string:x1be>", self.gameskillmisstimedistancefactor, get_difficultysetting("<dev string:x1d6>"));
 }
 
 function function_c1c25d5aa7d1dde0(msg, val, val2) {
@@ -1089,17 +1089,17 @@ function auto_adjust_debuglite() {
     hud.color = (0, 1, 1);
     hud settext("HUD");
     level.var_4109d33f0329c17.var_a4b630c331b246a6[0] = hud;
-    var_fb1188ca74cb9f28 = newhudelem();
-    var_fb1188ca74cb9f28.alignx = "left";
-    var_fb1188ca74cb9f28.x = 138;
-    var_fb1188ca74cb9f28.y = 2;
-    var_fb1188ca74cb9f28.fontscale = 0.7;
-    var_fb1188ca74cb9f28.font = "default";
-    var_fb1188ca74cb9f28.horzalign = "fullscreen";
-    var_fb1188ca74cb9f28.vertalign = "fullscreen";
-    var_fb1188ca74cb9f28.color = (0, 1, 1);
-    var_fb1188ca74cb9f28.sort = 20;
-    level.var_4109d33f0329c17.var_a4b630c331b246a6[2] = var_fb1188ca74cb9f28;
+    hud2 = newhudelem();
+    hud2.alignx = "left";
+    hud2.x = 138;
+    hud2.y = 2;
+    hud2.fontscale = 0.7;
+    hud2.font = "default";
+    hud2.horzalign = "fullscreen";
+    hud2.vertalign = "fullscreen";
+    hud2.color = (0, 1, 1);
+    hud2.sort = 20;
+    level.var_4109d33f0329c17.var_a4b630c331b246a6[2] = hud2;
   }
 
   var_8e21e6f1f4ff85bd = level.var_4109d33f0329c17.var_a4b630c331b246a6[0];

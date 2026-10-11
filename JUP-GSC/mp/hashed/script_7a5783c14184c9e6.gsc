@@ -12,7 +12,7 @@
 #using scripts\mp\utility\teams;
 #namespace namespace_562c09f7cd8fb4f5;
 
-function function_78422799f477b8e6(spawndata, team, weaponname, modelname, aitype) {
+function spawnmgturret(spawndata, team, weaponname, modelname, aitype) {
   level endon("game_ended");
 
   if(!isDefined(weaponname)) {
@@ -67,7 +67,7 @@ function function_3cd75d5bf0fc9989(spawndata, team, aitype, weaponname, modelnam
     agent.var_b582b10663b5b2a9 = 0;
     agent.ignoreall = 1;
     agent clearbtgoal(4);
-    agent function_e64ea2b4e79c4b74(4);
+    agent setbtgoalstationary(4);
     agent.var_6384ebeaed4efe3e = 1;
   }
 

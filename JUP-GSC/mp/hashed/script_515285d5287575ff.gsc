@@ -33,7 +33,7 @@ function function_6c78c4cdcb9d493() {
 }
 
 function function_8159c23277f3afe0(params) {
-  scripts\cp_mp\weapon::function_f30b8f5ee8f3e7f8("zombie_mimic", self.grenadeweapon.basename);
+  scripts\cp_mp\weapon::registerkillstreakweaponmap("zombie_mimic", self.grenadeweapon.basename);
 }
 
 function function_6a4f7e54f18ede06(var_5af4453d13e66d3b) {

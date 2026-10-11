@@ -56,8 +56,8 @@ function register_perk_basic_info(str_perk, str_alias, n_perk_cost, str_hint_str
   level._custom_perks[str_perk].var_de61bccad0dcc303 = var_de61bccad0dcc303;
   level._custom_perks[str_perk].var_f209168e865e2517 = var_f209168e865e2517;
   level.var_a2e80fb79bc0de74 = array_add(level.var_a2e80fb79bc0de74, str_perk);
-  level.var_88699039491fddc2 = default_to(level.var_88699039491fddc2, []);
-  level.var_88699039491fddc2 = function_6d6af8144a5131f1(level.var_88699039491fddc2, str_perk);
+  level.a_str_vapors = default_to(level.a_str_vapors, []);
+  level.a_str_vapors = function_6d6af8144a5131f1(level.a_str_vapors, str_perk);
   level.var_c24be1403a243389 = default_to(level.var_c24be1403a243389, []);
 }
 
@@ -178,8 +178,8 @@ function perk_think(perk) {
     self thread[[level._custom_perks[perk].player_thread_take]](0, perk_str, result, -1);
   }
 
-  if(isDefined(level.var_a51d9b07af5d7d77)) {
-    self[[level.var_a51d9b07af5d7d77]](perk);
+  if(isDefined(level.perk_lost_func)) {
+    self[[level.perk_lost_func]](perk);
   }
 
   self notify("extra_perk_lost");
@@ -192,7 +192,7 @@ function give_perk_presentation(perk) {
   self endon("perk_abort_drinking");
   thread function_aca2962451f93f78(perk);
 
-  if(istrue(level.var_a1e71a5993ec79c8)) {}
+  if(istrue(level.remove_perk_vo_delay)) {}
 }
 
 function function_aca2962451f93f78(perk) {
@@ -215,8 +215,8 @@ function function_886e9c6f3a5ab9bb(perk) {
     self thread[[level._custom_perks[perk].player_thread_take]](0, perk_str, -1);
   }
 
-  if(isDefined(level.var_a51d9b07af5d7d77)) {
-    self[[level.var_a51d9b07af5d7d77]](perk);
+  if(isDefined(level.perk_lost_func)) {
+    self[[level.perk_lost_func]](perk);
   }
 
   self notify("extra_perk_lost");
@@ -471,7 +471,7 @@ function take_perk(str_perk) {
   self notify(str_notify);
 }
 
-function function_fd9a6fb7a67bcf3e(str_perk) {
+function grab_and_use_perk(str_perk) {
   if(has_perk(str_perk)) {
     return false;
   }

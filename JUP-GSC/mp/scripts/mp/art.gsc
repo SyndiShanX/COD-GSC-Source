@@ -54,9 +54,9 @@ function tweakart() {
 }
 
 function tess_init() {
-  var_75e889a96a1e1e5 = getDvar(@ "hash_3914a6109ddfa630");
+  using_tessellation = getDvar(@ "hash_3914a6109ddfa630");
 
-  if(var_75e889a96a1e1e5 == "<dev string:x3d>") {
+  if(using_tessellation == "<dev string:x3d>") {
     return;
   }
 
@@ -71,8 +71,8 @@ function tess_init() {
   thread tess_update();
 }
 
-function tess_set_goal(var_92ad28aede5bf05e, cutoff_falloff, blend_time) {
-  level.tess.cutoff_distance_goal = var_92ad28aede5bf05e;
+function tess_set_goal(cutoff_distance, cutoff_falloff, blend_time) {
+  level.tess.cutoff_distance_goal = cutoff_distance;
   level.tess.cutoff_falloff_goal = cutoff_falloff;
   level.tess.time_remaining = blend_time;
 }
@@ -86,9 +86,9 @@ function tess_update() {
     if(level.tess.time_remaining > 0) {
       frames = level.tess.time_remaining * 20;
       distance_increment = (level.tess.cutoff_distance_goal - level.tess.cutoff_distance_current) / frames;
-      var_f18ef0f6f6349b6b = (level.tess.cutoff_falloff_goal - level.tess.cutoff_falloff_current) / frames;
+      falloff_increment = (level.tess.cutoff_falloff_goal - level.tess.cutoff_falloff_current) / frames;
       level.tess.cutoff_distance_current += distance_increment;
-      level.tess.cutoff_falloff_current += var_f18ef0f6f6349b6b;
+      level.tess.cutoff_falloff_current += falloff_increment;
       level.tess.time_remaining -= level.framedurationseconds;
     } else {
       level.tess.cutoff_distance_current = level.tess.cutoff_distance_goal;
@@ -221,7 +221,7 @@ function dumpsettings() {
     level._clearalltextafterhudelem = 0;
   }
 
-  function function_67bc9d1f5c5c787c() {
+  function reset_cmds() {
     setdevdvar(@ "hash_de86d29dde73df", 0);
     setdevdvar(@ "hash_cc21f65bade3fb07", 0);
   }

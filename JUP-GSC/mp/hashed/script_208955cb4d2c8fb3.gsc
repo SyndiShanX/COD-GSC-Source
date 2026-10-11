@@ -130,7 +130,7 @@ function setup_data(warlordtype, var_6a9c4405c9014215) {
 
     if(var_2837ba0ad9d0ca86.warlordparameters.size > 0) {
       warlordparameters = var_2837ba0ad9d0ca86.warlordparameters[0].variant_object;
-      var_416e692d602bff30 = function_f159c10d5cf8f0b4(warlordparameters.goalvolumetargetname, "targetname");
+      var_416e692d602bff30 = getnoentvolumearray(warlordparameters.goalvolumetargetname, "targetname");
 
       if(isDefined(var_416e692d602bff30) && var_416e692d602bff30.size > 0) {
         warlordparameters.goalvolume = var_416e692d602bff30[0];
@@ -174,12 +174,12 @@ function function_621b23491ba1db4d() {
     level.var_870b859eb5d3ef5d = [];
 
     foreach(activewarlord in level.ob.var_7dd4780d4e4bff4d) {
-      var_d1c7613187e69022 = namespace_3485b020a23acaae::function_b9c4aa88ad97ee68(activewarlord);
+      activitycustomproperties = namespace_3485b020a23acaae::function_b9c4aa88ad97ee68(activewarlord);
 
-      if(isDefined(var_d1c7613187e69022) && activewarlord.state == "ActiveState") {
+      if(isDefined(activitycustomproperties) && activewarlord.state == "ActiveState") {
         struct = spawnStruct();
-        struct.key = var_d1c7613187e69022.var_9a002d7b10d97a7d;
-        struct.warlordintel = var_d1c7613187e69022.var_826c99bbea28d245;
+        struct.key = activitycustomproperties.var_9a002d7b10d97a7d;
+        struct.warlordintel = activitycustomproperties.var_826c99bbea28d245;
         level.var_870b859eb5d3ef5d = array_add(level.var_870b859eb5d3ef5d, struct);
       }
     }
@@ -187,9 +187,9 @@ function function_621b23491ba1db4d() {
     if(level.var_870b859eb5d3ef5d.size == 0) {
       var_54d38f1df370976a = spawnStruct();
       warlord = array_random(level.ob.var_7dd4780d4e4bff4d);
-      var_d1c7613187e69022 = namespace_3485b020a23acaae::function_b9c4aa88ad97ee68(warlord);
-      var_54d38f1df370976a.keyitemid = "ob_jup_item_key_" + var_d1c7613187e69022.var_9a002d7b10d97a7d;
-      var_54d38f1df370976a.intelstring = var_d1c7613187e69022.var_826c99bbea28d245;
+      activitycustomproperties = namespace_3485b020a23acaae::function_b9c4aa88ad97ee68(warlord);
+      var_54d38f1df370976a.keyitemid = "ob_jup_item_key_" + activitycustomproperties.var_9a002d7b10d97a7d;
+      var_54d38f1df370976a.intelstring = activitycustomproperties.var_826c99bbea28d245;
     }
 
     if(level.var_870b859eb5d3ef5d.size > 0) {
@@ -441,7 +441,7 @@ function private function_23ff99f593753aa2() {
   self.var_9aa77ab756fdca82 = 10000;
   self.var_43e2ad424676b8d4 = 500;
   self.var_cbd87a0bc497b778 = 1;
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
   self.baseaccuracy = 1.3;
   self.disablereload = 1;
   self.var_4ebe755e0a0a430e = 0;
@@ -450,7 +450,7 @@ function private function_23ff99f593753aa2() {
   self.disable_blindfire = 1;
   self.dontmelee = 1;
   self.var_4268b42fc89d0be9 = 0.03;
-  self.var_8a783f4c73c2ae91 = 4e-05;
+  self.gameskillmisstimedistancefactoroverride = 4e-05;
   self.spawned_timestamp = gettime();
   self disableexecutionvictim();
 }

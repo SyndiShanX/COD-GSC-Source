@@ -104,7 +104,7 @@ function init() {
       case 1:
         level.classtablename = "classtable:classtable_snipers_only";
 
-        if(function_3cb5da19764baa3() == "JUP") {
+        if(getprojectname() == "JUP") {
           level.classtablename += "_jup";
         }
 
@@ -183,9 +183,9 @@ function cac_getweapon(classindex, weaponindex) {
 }
 
 function cac_getweaponattachment(classindex, weaponindex, attachmentindex) {
-  var_10dc579c373a93dd = self getplayerdata(level.loadoutdata, "squadMembers", "loadouts", classindex, "weaponSetups", weaponindex, "attachmentSetup", attachmentindex, "attachment");
+  playerdatavalue = self getplayerdata(level.loadoutdata, "squadMembers", "loadouts", classindex, "weaponSetups", weaponindex, "attachmentSetup", attachmentindex, "attachment");
   weapon = cac_getweapon(classindex, weaponindex);
-  return scripts\cp_mp\weapon::function_6e7bc1b23afa0ea8(weapon, var_10dc579c373a93dd);
+  return scripts\cp_mp\weapon::function_6e7bc1b23afa0ea8(weapon, playerdatavalue);
 }
 
 function cac_getweaponattachmentid(classindex, weaponindex, attachmentindex) {
@@ -514,7 +514,7 @@ function cac_getloadoutarchetypeperk() {
 }
 
 function function_3bb637a8e8d0a7c8() {
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     bundlename = "perkpackagelist_mgl";
     var_162624fd9ac6a209 = 5;
   } else {
@@ -522,11 +522,11 @@ function function_3bb637a8e8d0a7c8() {
     var_162624fd9ac6a209 = 6;
   }
 
-  if(istrue(level.var_ec2fb549b15ad827)) {
+  if(istrue(level.leagueplaymatch)) {
     bundlename = "ranked_perkpackagelist_iw9";
     var_162624fd9ac6a209 = 3;
   } else if(scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       bundlename = "br_perkpackagelist_mgl";
       var_162624fd9ac6a209 = 5;
     } else {
@@ -569,11 +569,11 @@ function recipe_getkillstreak(classteam, classindex, streakindex) {
 }
 
 function function_de324c78ecdc7acd(player) {
-  return player getplayerdata(level.var_5d69837cf4db0407, "enableDefaultDMZLoadouts");
+  return player getplayerdata(level.progressiongroup, "enableDefaultDMZLoadouts");
 }
 
 function function_cfa0343e808b7421(player, enabled) {
-  player setplayerdata(level.var_5d69837cf4db0407, "enableDefaultDMZLoadouts", enabled);
+  player setplayerdata(level.progressiongroup, "enableDefaultDMZLoadouts", enabled);
 }
 
 function function_acad491093697c6c(tablename) {
@@ -667,12 +667,12 @@ function table_getweaponreticle(tablename, classindex, weaponindex) {
   return function_aacbcd2576b3af83(tablename, classindex, weaponindex).reticle;
 }
 
-function table_getweaponvariantid(tablename, classindex, weaponindex, rootweapon, var_1231ae351f638561) {
-  var_1092bc40c58c1c9a = function_aacbcd2576b3af83(tablename, classindex, weaponindex).variantid;
-  return table_parseweaponvariantidvalue(rootweapon, var_1092bc40c58c1c9a, var_1231ae351f638561);
+function table_getweaponvariantid(tablename, classindex, weaponindex, rootweapon, norandom) {
+  svariantid = function_aacbcd2576b3af83(tablename, classindex, weaponindex).variantid;
+  return table_parseweaponvariantidvalue(rootweapon, svariantid, norandom);
 }
 
-function table_parseweaponvariantidvalue(rootweapon, value, var_1231ae351f638561) {
+function table_parseweaponvariantidvalue(rootweapon, value, norandom) {
   if(rootweapon == "none") {
     return 0;
   }
@@ -721,7 +721,7 @@ function table_parseweaponvariantidvalue(rootweapon, value, var_1231ae351f638561
   }
 
   variantid = 0;
-  allowrandom = !istrue(var_1231ae351f638561);
+  allowrandom = !istrue(norandom);
   forcerandom = allowrandom && getdvarint(@ "hash_c895ae760d4177d4", 0);
 
   if(forcerandom == 1) {
@@ -963,8 +963,8 @@ function loadout_clearweapons(var_bea1f8064eda3de9) {
       _takeweapon(self.secondaryweaponobj);
     }
 
-    if(isDefined(self.var_36940c335e7cc50c) && self.var_36940c335e7cc50c.basename != "none") {
-      _takeweapon(self.var_36940c335e7cc50c);
+    if(isDefined(self.tertiaryweaponobj) && self.tertiaryweaponobj.basename != "none") {
+      _takeweapon(self.tertiaryweaponobj);
     }
   } else {
     self takeallweapons();
@@ -2390,7 +2390,7 @@ function loadout_getclasstype(classname) {
 }
 
 function function_72aa88e22948f6c5() {
-  if(istrue(level.var_ec2fb549b15ad827)) {
+  if(istrue(level.leagueplaymatch)) {
     if(level.var_bbcb5f6b1b0a78ae == 1 && getdvarint(@ "hash_ca2769e986904fa", 0) == 1 || level.var_bbcb5f6b1b0a78ae != 1) {
       return true;
     }
@@ -2438,7 +2438,7 @@ function loadout_updateclass(struct, class) {
     class = "default1";
   }
 
-  if(!(istrue(level.var_ec2fb549b15ad827) || istrue(level.var_77907d733abe8b63))) {
+  if(!(istrue(level.leagueplaymatch) || istrue(level.var_77907d733abe8b63))) {
     if(function_de324c78ecdc7acd(self) && (getsubgametype() == "dmz" || getsubgametype() == "ob")) {
       numloadouts = function_df2933f96d726d71(level.classtablename);
       loadoutindex = randomint(numloadouts);
@@ -2814,7 +2814,7 @@ function loadout_finalizeweapons() {
     var_e5c5201a787eeb87 = 1;
   }
 
-  if(isDefined(self.var_36940c335e7cc50c) && !self hasweapon(self.var_36940c335e7cc50c)) {
+  if(isDefined(self.tertiaryweaponobj) && !self hasweapon(self.tertiaryweaponobj)) {
     function_6927b3b638f60d97(self.classstruct);
     var_e5c5201a787eeb87 = 1;
   }
@@ -2866,7 +2866,7 @@ function function_6927b3b638f60d97(struct, respawnitems, var_b86cf5cef6838543) {
   self.loadouttertiaryvariantid = struct.loadouttertiaryvariantid;
   var_166a71f33928f623 = loadout_giveweaponobj("tertiary", struct.var_cc881f2bd3565d22, respawnitems, var_b86cf5cef6838543);
   self.tertiaryweapon = struct.var_e3f8e7ca9c87781f;
-  self.var_36940c335e7cc50c = struct.var_cc881f2bd3565d22;
+  self.tertiaryweaponobj = struct.var_cc881f2bd3565d22;
   self.pers["tertiaryWeapon"] = struct.var_e3f8e7ca9c87781f;
 
   if(!isundefinedweapon(var_166a71f33928f623) && getdvarint(@ "hash_547403d0bcc39f5") == 1) {
@@ -3027,11 +3027,11 @@ function loadout_updateammo(struct, var_3920d61392aec9d5, var_976a64288e459315, 
   if(!istrue(var_b86cf5cef6838543) && var_10b09490bb78e90e == 3) {
     foreach(weapon in loadoutweapons) {
       if(istrue(weapon.hasalternate)) {
-        var_6890a4ce965bba99 = weapon getaltweapon();
-        var_91093ef03654702c = weaponclass(var_6890a4ce965bba99);
+        weaponaltobj = weapon getaltweapon();
+        var_91093ef03654702c = weaponclass(weaponaltobj);
 
         if(var_91093ef03654702c == "grenade") {
-          self setweaponammostock(var_6890a4ce965bba99, 1);
+          self setweaponammostock(weaponaltobj, 1);
         }
 
         continue;
@@ -4117,7 +4117,7 @@ function giveloadout(team, class, setspawnweap, var_bea1f8064eda3de9, skipfirstr
   }
 
   if(getdvarint(@ "hash_f834da80397b0ab6", 0) == 1) {
-    thread function_dcea859f45fd42e4();
+    thread disablesprintingpronehackcomplex();
   }
 
   if(getdvarint(@ "hash_e0b56c606d3e4c3", 0) == 1) {
@@ -4127,7 +4127,7 @@ function giveloadout(team, class, setspawnweap, var_bea1f8064eda3de9, skipfirstr
   }
 
   if(ismutationgamemodezombie()) {
-    function_f3bb4f4911a1beb2("game", "mutationModeGiveEarnedPerks");
+    callsharedfunc("game", "mutationModeGiveEarnedPerks");
   }
 
   if(getdvarint(@ "hash_1988997dc2c8b83f", 0) == 1) {
@@ -4139,7 +4139,7 @@ function giveloadout(team, class, setspawnweap, var_bea1f8064eda3de9, skipfirstr
   }
 }
 
-function function_dcea859f45fd42e4() {
+function disablesprintingpronehackcomplex() {
   self endon("death_or_disconnect");
   level endon("game_ended");
 
@@ -4751,15 +4751,15 @@ function onplayerspawned() {
     }
 
     if(isDefined(player.operatorcustomization) && isDefined(player.operatorcustomization.clothtype) && player.operatorcustomization.clothtype != "") {
-      player setclothtype(function_1823ff50bb28148d(player.operatorcustomization.clothtype));
+      player setclothtype(getxhash(player.operatorcustomization.clothtype));
     } else {
       player setclothtype(#"vestlight");
     }
 
     if(isDefined(player.operatorcustomization) && isDefined(player.operatorcustomization.geartype) && player.operatorcustomization.geartype != "") {
-      player function_8abe5a968cc3c220(function_1823ff50bb28148d(player.operatorcustomization.geartype));
+      player setgeartype(getxhash(player.operatorcustomization.geartype));
     } else {
-      player function_8abe5a968cc3c220(#"millghtgr");
+      player setgeartype(#"millghtgr");
     }
 
     if(level.gametype == "dungeons") {
@@ -5030,7 +5030,7 @@ function findfirststreakdifferentcost(var_5feb6adfd05e27f1) {
   var_7b0a8d49f719a44e = [];
 
   foreach(streakref, bundle in level.streakglobals.streakbundles) {
-    if(!istrue(bundle.var_594af43597023062)) {
+    if(!istrue(bundle.showninmenu)) {
       continue;
     }
 
@@ -5128,15 +5128,15 @@ function getclassindex(classname) {
   return level.classmap[classname];
 }
 
-function preloadandqueueclass(class, var_1dce12d4eaf02799) {
+function preloadandqueueclass(class, highpriorityload) {
   struct = loadout_getorbuildclassstruct(class);
-  preloadandqueueclassstruct(struct, var_1dce12d4eaf02799);
+  preloadandqueueclassstruct(struct, highpriorityload);
   return struct;
 }
 
-function preloadandqueueclassstruct(classstruct, var_1dce12d4eaf02799, var_8c3977c9c8dc729b) {
+function preloadandqueueclassstruct(classstruct, highpriorityload, var_8c3977c9c8dc729b) {
   playerassets = scripts\mp\playerlogic::getplayerassets(classstruct);
-  scripts\mp\playerlogic::loadplayerassets([playerassets], var_1dce12d4eaf02799, var_8c3977c9c8dc729b);
+  scripts\mp\playerlogic::loadplayerassets([playerassets], highpriorityload, var_8c3977c9c8dc729b);
   self.preloadedclassstruct = classstruct;
 }
 
@@ -5473,9 +5473,9 @@ function respawnitems_saveweapon(weaponobj, weaponslot, respawnitems) {
   weaponinfo.stockammo = self getweaponammostock(weaponobj);
 
   if(weaponobj.hasalternate) {
-    var_6890a4ce965bba99 = weaponobj getaltweapon();
-    weaponinfo.altclipammo = self getweaponammoclip(var_6890a4ce965bba99);
-    weaponinfo.altstockammo = self getweaponammostock(var_6890a4ce965bba99);
+    weaponaltobj = weaponobj getaltweapon();
+    weaponinfo.altclipammo = self getweaponammoclip(weaponaltobj);
+    weaponinfo.altstockammo = self getweaponammostock(weaponaltobj);
   }
 }
 
@@ -5673,9 +5673,9 @@ function respawnitems_giveweaponammo(respawnitems, weaponslot) {
     self setweaponammostock(weaponinfo.weaponobj, weaponinfo.stockammo);
 
     if(weaponinfo.weaponobj.hasalternate) {
-      var_6890a4ce965bba99 = weaponinfo.weaponobj getaltweapon();
-      self setweaponammoclip(var_6890a4ce965bba99, weaponinfo.altclipammo);
-      self setweaponammostock(var_6890a4ce965bba99, weaponinfo.altstockammo);
+      weaponaltobj = weaponinfo.weaponobj getaltweapon();
+      self setweaponammoclip(weaponaltobj, weaponinfo.altclipammo);
+      self setweaponammostock(weaponaltobj, weaponinfo.altstockammo);
     }
   }
 }
@@ -5828,18 +5828,18 @@ function spawnammocountoverride_giveweaponammo(weaponobj, weaponslot, var_10b094
   self setweaponammostock(weaponinfo, reserveammo);
 
   if(weaponobj.hasalternate) {
-    var_6890a4ce965bba99 = weaponobj getaltweapon();
+    weaponaltobj = weaponobj getaltweapon();
 
     if(noammo) {
       altclipammo = 0;
       altstockammo = 0;
     } else {
-      altclipammo = self getweaponammoclip(var_6890a4ce965bba99);
-      altstockammo = self getweaponammostock(var_6890a4ce965bba99);
+      altclipammo = self getweaponammoclip(weaponaltobj);
+      altstockammo = self getweaponammostock(weaponaltobj);
     }
 
-    self setweaponammoclip(var_6890a4ce965bba99, altclipammo);
-    self setweaponammostock(var_6890a4ce965bba99, altstockammo);
+    self setweaponammoclip(weaponaltobj, altclipammo);
+    self setweaponammostock(weaponaltobj, altstockammo);
   }
 }
 
@@ -6135,21 +6135,21 @@ function function_286b27e21ed2cf0c() {
   while(true) {
     if(previousstance != self.laststance && self.laststance == "prone") {
       timer = 0;
-      var_e04b4ccb1dfc6b18 = 0;
-      var_a1620866eed6b2de = 0;
+      quakescale = 0;
+      quakeduration = 0;
       quakeradius = 25;
 
       if(previousstance == "stand") {
         timer = 0.68;
-        var_e04b4ccb1dfc6b18 = 0.4;
-        var_a1620866eed6b2de = 0.6;
+        quakescale = 0.4;
+        quakeduration = 0.6;
       } else if(previousstance == "crouch") {
         timer = 0.35;
-        var_e04b4ccb1dfc6b18 = 0.3;
-        var_a1620866eed6b2de = 0.5;
+        quakescale = 0.3;
+        quakeduration = 0.5;
       }
 
-      thread function_32397139046948fc(timer, var_e04b4ccb1dfc6b18, var_a1620866eed6b2de, quakeradius);
+      thread function_32397139046948fc(timer, quakescale, quakeduration, quakeradius);
       var_e9d7f01676217b00 = timer / 3;
       setrecoilscale(-15);
       wait var_e9d7f01676217b00;
@@ -6260,7 +6260,7 @@ function function_866622357ab7abae() {
   self endon("game_ended");
   var_b6113f673c358828 = 1100;
   currenttimer = 0;
-  var_5b040c05d821c54e = 0;
+  hasdodged = 0;
   sprintheld = 0;
 
   while(true) {
@@ -6269,13 +6269,13 @@ function function_866622357ab7abae() {
       ystick = self getleftsticky();
       xstick = self getleftstickx();
 
-      if(!var_5b040c05d821c54e && self sprintbuttonPressed() && self isonground() && ystick < 0.15 && !(ystick == 0 && xstick == 0)) {
-        var_5b040c05d821c54e = 1;
+      if(!hasdodged && self sprintbuttonPressed() && self isonground() && ystick < 0.15 && !(ystick == 0 && xstick == 0)) {
+        hasdodged = 1;
         self.dodgebar = function_c6071a6e72a4f025(308, 294, 100, 4);
         self.dodgebar updatebar(0, 0.909091);
         wait 1.2;
         self.dodgebar destroyelem();
-        var_5b040c05d821c54e = 0;
+        hasdodged = 0;
       }
     }
 

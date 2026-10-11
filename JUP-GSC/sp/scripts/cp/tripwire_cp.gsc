@@ -376,8 +376,8 @@ function tripwire_trackachievementboom(attacker, type) {
   }
 }
 
-function createlootdropinfo(baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, var_f71d4f78d508da69, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44) {
-  return scripts\cp\pickups::getitemdroporiginandangles(0, baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, var_f71d4f78d508da69, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44);
+function createlootdropinfo(baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, optionaloverridedist, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44) {
+  return scripts\cp\pickups::getitemdroporiginandangles(0, baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, optionaloverridedist, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44);
 }
 
 function function_7bda4e577b34a556() {
@@ -403,7 +403,7 @@ function function_7bda4e577b34a556() {
 function function_d9e4a4a56dd99ab3(player, object_origin, object_angles, dist_override) {
   nearby_ai = getaiarray("axis");
   dist = ter_op(isDefined(dist_override), dist_override, 512);
-  nearby_ai = scripts\anim\battlechatter::function_fd9e4cb348a5f283(object_origin, dist);
+  nearby_ai = scripts\anim\battlechatter::getaiinrange(object_origin, dist);
 
   if(isDefined(nearby_ai) && nearby_ai.size > 0) {
     nearby_ai = sortbydistance(nearby_ai, object_origin);

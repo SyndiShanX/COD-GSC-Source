@@ -10,11 +10,11 @@
 #using scripts\engine\utility;
 #namespace interaction_common;
 
-function function_72d72588305107b4(interactionid) {
+function onadduser(interactionid) {
   self notify("interaction_started");
 }
 
-function function_8add99cb1b82b964(interactionid) {
+function ondeleteuser(interactionid) {
   self.var_7916f201efb9963f = undefined;
   self._blackboard.idlenode = undefined;
   self._blackboard.var_c71a487341c700f3 = undefined;
@@ -33,9 +33,9 @@ function function_efcea5d26798e5b6(funcid) {
     case #"hash_b541f16499b1633d":
       return &processevent;
     case #"hash_c0639b15cea67610":
-      return &function_72d72588305107b4;
+      return &onadduser;
     case #"hash_96053be986d24f88":
-      return &function_8add99cb1b82b964;
+      return &ondeleteuser;
     case #"hash_cec0f8624eb06844":
       return &scripts\asm\cap::function_8439b78c94685919;
     case #"hash_af8904470869cfc3":
@@ -47,11 +47,11 @@ function function_efcea5d26798e5b6(funcid) {
     case #"hash_a56eca06864aaf61":
       return &inplace;
     case #"hash_8cc77e3e31358f72":
-      return &function_8f98221d71dafe6e;
+      return &usecustomreact;
     case #"hash_fd9154ff75bc4e6b":
       return &function_d8786f820807c4f;
     case #"hash_e8db290ca384380d":
-      return &function_688018e12db6e359;
+      return &isfrienddown;
   }
 
   assertmsg("Missing function pointer for " + funcid);
@@ -60,15 +60,15 @@ function function_efcea5d26798e5b6(funcid) {
 function function_606c28b248baddfd(statename, params) {
   assert(params.size == 1);
   phasename = params[0];
-  self._blackboard.var_7460b96395361857 = phasename;
+  self._blackboard.bseqphase = phasename;
 }
 
 function startcap(statename, params) {
-  if(istrue(self.var_3605e45b535f0536)) {
-    function_b76d8b8ad8e2c823(statename, params);
+  if(istrue(self.startinteractionimmediate)) {
+    startcap_immediate(statename, params);
   }
 
-  capinfo = function_a0cccf0b4c466b2c(self, params[0]);
+  capinfo = getcapinfoforrole(self, params[0]);
 
   if(!isDefined(capinfo)) {
     return;
@@ -76,7 +76,7 @@ function startcap(statename, params) {
 
   capname = capinfo.capname;
   animset = capinfo.animation;
-  var_bcf3c74b1d8b4883 = capinfo.var_bcf3c74b1d8b4883;
+  arrivalstateoverride = capinfo.arrivalstateoverride;
   introstatename = capinfo.initialstate;
   introaliasname = capinfo.initialalias;
   interaction = spawnStruct();
@@ -87,7 +87,7 @@ function startcap(statename, params) {
     var_51fb64c4bfcd847 = self findoverridearchetype("default") + "_cap_arrival";
 
     if(archetypehasstate(capname, var_51fb64c4bfcd847)) {
-      var_bcf3c74b1d8b4883 = var_51fb64c4bfcd847;
+      arrivalstateoverride = var_51fb64c4bfcd847;
     }
   }
 
@@ -107,14 +107,14 @@ function startcap(statename, params) {
 
   self.interaction_angles = interaction.angles;
   self.interaction_origin = getgroundposition(interaction.origin, 1);
-  scripts\common\cap::cap_reach_and_arrive(interaction, capname, animset, var_bcf3c74b1d8b4883);
+  scripts\common\cap::cap_reach_and_arrive(interaction, capname, animset, arrivalstateoverride);
 }
 
-function function_b76d8b8ad8e2c823(statename, params) {
-  capinfo = function_a0cccf0b4c466b2c(self, params[0]);
+function startcap_immediate(statename, params) {
+  capinfo = getcapinfoforrole(self, params[0]);
   capname = capinfo.capname;
   animset = capinfo.animation;
-  var_bcf3c74b1d8b4883 = capinfo.var_bcf3c74b1d8b4883;
+  arrivalstateoverride = capinfo.arrivalstateoverride;
   introstatename = capinfo.initialstate;
   introaliasname = capinfo.initialalias;
   interaction = spawnStruct();
@@ -125,7 +125,7 @@ function function_b76d8b8ad8e2c823(statename, params) {
     var_51fb64c4bfcd847 = self findoverridearchetype("default") + "_cap_arrival";
 
     if(archetypehasstate(capname, var_51fb64c4bfcd847)) {
-      var_bcf3c74b1d8b4883 = var_51fb64c4bfcd847;
+      arrivalstateoverride = var_51fb64c4bfcd847;
     }
   }
 
@@ -165,23 +165,23 @@ function processevent(receiver, info, origin) {
     return true;
   } else if(info == "panicked" || info == "cower" || info == "scared" || info == "flee") {
     scripts\asm\cap::prop_drop();
-    self._blackboard.var_7460b96395361857 = "exit";
+    self._blackboard.bseqphase = "exit";
   } else if(info == "curious") {
-    self._blackboard.var_c71a487341c700f3 = self._blackboard.var_7460b96395361857;
+    self._blackboard.var_c71a487341c700f3 = self._blackboard.bseqphase;
     var_2aa3f9382269a724 = self function_c0de39048eedde94();
 
-    if(scripts\asm\cap::function_f179ede0989e6734("curious", "curious_anim")) {
-      self._blackboard.var_7460b96395361857 = "curious";
+    if(scripts\asm\cap::cap_hasalias("curious", "curious_anim")) {
+      self._blackboard.bseqphase = "curious";
       return true;
     } else if(!var_2aa3f9382269a724) {
       return true;
     } else {
       scripts\asm\cap::prop_drop();
-      self._blackboard.var_7460b96395361857 = "exit";
+      self._blackboard.bseqphase = "exit";
       return false;
     }
-  } else if(!isDefined(self._blackboard.var_7460b96395361857) || isDefined(self._blackboard.var_7460b96395361857) && self._blackboard.var_7460b96395361857 != "end") {
-    self._blackboard.var_7460b96395361857 = "react";
+  } else if(!isDefined(self._blackboard.bseqphase) || isDefined(self._blackboard.bseqphase) && self._blackboard.bseqphase != "end") {
+    self._blackboard.bseqphase = "react";
     return true;
   }
 
@@ -189,8 +189,8 @@ function processevent(receiver, info, origin) {
 }
 
 function function_75bde4ab677d8c14(params) {
-  if(isDefined(self._blackboard.var_7460b96395361857) && isDefined(params) && params.size > 0) {
-    if(self._blackboard.var_7460b96395361857 == params[0]) {
+  if(isDefined(self._blackboard.bseqphase) && isDefined(params) && params.size > 0) {
+    if(self._blackboard.bseqphase == params[0]) {
       return true;
     }
   }
@@ -217,14 +217,14 @@ function isincombat(statename, params) {
 }
 
 function shouldreact(params) {
-  return self function_a4a9e73b2d25ff8b();
+  return self shouldpatrolreact();
 }
 
 function inplace(statename, params) {
-  self._blackboard.var_f725b0bb1f8d27ee = 1;
-  interactionid = self function_92435c7a6ae85c3c();
+  self._blackboard.bseqinplace = 1;
+  interactionid = self getinteractionid();
   assert(isDefined(interactionid));
-  function_c2a860252b030c52(interactionid);
+  createinteractionnavrepulsor(interactionid);
 }
 
 function function_25c933655d73066a(interactionid) {
@@ -236,17 +236,17 @@ function private function_d980c506b2f1a19b(interactionid) {
   return "civilian_interaction_" + interactionid;
 }
 
-function private function_c2a860252b030c52(interactionid) {
-  var_36b6c21725713470 = function_adf0d34ff483c35a(interactionid);
+function private createinteractionnavrepulsor(interactionid) {
+  bsequsers = getbsequsers(interactionid);
 
-  if(var_36b6c21725713470.size == 0) {
+  if(bsequsers.size == 0) {
     return;
   }
 
   var_97e5d2c62501499e = [];
 
-  foreach(bsequser in var_36b6c21725713470) {
-    if(bsequser._blackboard.var_f725b0bb1f8d27ee) {
+  foreach(bsequser in bsequsers) {
+    if(bsequser._blackboard.bseqinplace) {
       var_97e5d2c62501499e[var_97e5d2c62501499e.size] = bsequser;
     }
   }
@@ -268,21 +268,21 @@ function private function_c2a860252b030c52(interactionid) {
     maxy = var_97e5d2c62501499e[0].origin[1];
 
     for(i = 1; i < var_97e5d2c62501499e.size; i++) {
-      var_5d8d3f6a643b89ed = var_97e5d2c62501499e[i].origin;
+      bsequserorigin = var_97e5d2c62501499e[i].origin;
 
-      if(var_5d8d3f6a643b89ed[0] < minx) {
-        minx = var_5d8d3f6a643b89ed[0];
-      } else if(var_5d8d3f6a643b89ed[0] > maxx) {
-        maxx = var_5d8d3f6a643b89ed[0];
+      if(bsequserorigin[0] < minx) {
+        minx = bsequserorigin[0];
+      } else if(bsequserorigin[0] > maxx) {
+        maxx = bsequserorigin[0];
       }
 
-      if(var_5d8d3f6a643b89ed[1] < miny) {
-        miny = var_5d8d3f6a643b89ed[1];
+      if(bsequserorigin[1] < miny) {
+        miny = bsequserorigin[1];
         continue;
       }
 
-      if(var_5d8d3f6a643b89ed[1] > maxy) {
-        maxy = var_5d8d3f6a643b89ed[1];
+      if(bsequserorigin[1] > maxy) {
+        maxy = bsequserorigin[1];
       }
     }
 
@@ -309,7 +309,7 @@ function private function_c2a860252b030c52(interactionid) {
   createnavrepulsor(repulsorname, -1, circleorigin, circleradius, 0, "all");
 }
 
-function function_8f98221d71dafe6e(param) {
+function usecustomreact(param) {
   statename = "react";
   alias = "8";
   animresult = archetypegetrandomalias(self.animsetname, statename, alias, 0);
@@ -338,17 +338,17 @@ function function_d8786f820807c4f(statename, params) {
   }
 }
 
-function function_688018e12db6e359(param) {
+function isfrienddown(param) {
   statename = "friend_down";
   alias = "friend_down_anim";
 
-  if(!scripts\asm\cap::function_f179ede0989e6734(statename, alias)) {
+  if(!scripts\asm\cap::cap_hasalias(statename, alias)) {
     return false;
   }
 
-  if(!isDefined(self._blackboard.var_7460b96395361857)) {
+  if(!isDefined(self._blackboard.bseqphase)) {
     return false;
   }
 
-  return self._blackboard.var_7460b96395361857 == "friend_down";
+  return self._blackboard.bseqphase == "friend_down";
 }

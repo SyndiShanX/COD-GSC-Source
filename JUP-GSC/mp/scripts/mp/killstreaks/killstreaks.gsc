@@ -81,14 +81,14 @@ function initkillstreakdata() {
   globals.var_8bbe6dc152f1dae0[1] = "ui_score_streak_last_round_earned_1";
   globals.var_8bbe6dc152f1dae0[2] = "ui_score_streak_last_round_earned_2";
   globals.var_8bbe6dc152f1dae0[3] = "ui_score_streak_last_round_earned_3";
-  var_3c0a35811a241880 = scripts\cp_mp\utility\killstreak_utility::function_708853c5d755f72();
-  scripts\killstreaks\killstreak_shared::function_1f9e754f6b690e33(var_3c0a35811a241880);
+  killstreaklistbundlename = scripts\cp_mp\utility\killstreak_utility::function_708853c5d755f72();
+  scripts\killstreaks\killstreak_shared::parsestreakbundles(killstreaklistbundlename);
 
   if(!scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
     scripts\mp\utility\join_team_aggregator::registeronplayerjointeamcallback(&killstreakonteamchange);
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     level.var_fc8ea831d44aeff6 = ["assault_drone", "auto_drone", "chopper_gunner", "gunship"];
   }
 
@@ -316,9 +316,9 @@ function updatestreakcost(slotnumber) {
     }
 
     if(slotnumber <= 3) {
-      var_e9d476a3809cb3f1 = level.streakglobals.costomnvars[slotnumber];
-      assert(isDefined(var_e9d476a3809cb3f1));
-      self setclientomnvar(var_e9d476a3809cb3f1, currentcost);
+      omnvarname = level.streakglobals.costomnvars[slotnumber];
+      assert(isDefined(omnvarname));
+      self setclientomnvar(omnvarname, currentcost);
       function_b3fd3059338901d8(slotnumber, currentcost);
     }
   }
@@ -646,7 +646,7 @@ function cantriggerkillstreak(streakitem, slotnumber) {
     return false;
   }
 
-  if(self function_9cc921a57ff4deb5()) {
+  if(self isonascender()) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS/CANNOT_BE_USED");
     return false;
   }
@@ -721,9 +721,9 @@ function triggerkillstreak(streakitem, slotnumber) {
       #bundle: bundle, #streakinfo: streakinfo
     });
 
-    if(isDefined(streakinfo.mpstreaksysteminfo.blueprintindex) && streakinfo.mpstreaksysteminfo.blueprintindex > 0 && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].var_d96d3e6ceed581fd.blueprints) && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].var_d96d3e6ceed581fd.blueprints[streakinfo.mpstreaksysteminfo.blueprintindex - 1])) {
-      var_9b32d1936831f5aa = level.streakglobals.streakbundles[streakinfo.streakname].var_d96d3e6ceed581fd.blueprints[streakinfo.mpstreaksysteminfo.blueprintindex - 1].genericblueprint;
-      streakinfo.owner function_9bc014e7042e8339(var_9b32d1936831f5aa);
+    if(isDefined(streakinfo.mpstreaksysteminfo.blueprintindex) && streakinfo.mpstreaksysteminfo.blueprintindex > 0 && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].genericblueprintlist.blueprints) && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].genericblueprintlist.blueprints[streakinfo.mpstreaksysteminfo.blueprintindex - 1])) {
+      genericblueprintname = level.streakglobals.streakbundles[streakinfo.streakname].genericblueprintlist.blueprints[streakinfo.mpstreaksysteminfo.blueprintindex - 1].genericblueprint;
+      streakinfo.owner function_9bc014e7042e8339(genericblueprintname);
     }
 
     return false;
@@ -869,9 +869,9 @@ function awardkillstreak(streakname, source, overridelifeid, var_722764086bd2150
   streakitem = createstreakitemstruct(streakname, blueprintindex);
   awardkillstreakfromstruct(streakitem, source, overridelifeid, var_722764086bd2150d, overrideowner, var_546f4a2e8b131d3f);
 
-  if(isDefined(blueprintindex) && blueprintindex > 0 && isDefined(level.streakglobals.streakbundles[streakname].var_d96d3e6ceed581fd.blueprints) && isDefined(level.streakglobals.streakbundles[streakname].var_d96d3e6ceed581fd.blueprints[blueprintindex - 1])) {
-    var_9b32d1936831f5aa = level.streakglobals.streakbundles[streakname].var_d96d3e6ceed581fd.blueprints[blueprintindex - 1].genericblueprint;
-    self function_53c61cc39f6a3b11(var_9b32d1936831f5aa);
+  if(isDefined(blueprintindex) && blueprintindex > 0 && isDefined(level.streakglobals.streakbundles[streakname].genericblueprintlist.blueprints) && isDefined(level.streakglobals.streakbundles[streakname].genericblueprintlist.blueprints[blueprintindex - 1])) {
+    genericblueprintname = level.streakglobals.streakbundles[streakname].genericblueprintlist.blueprints[blueprintindex - 1].genericblueprint;
+    self function_53c61cc39f6a3b11(genericblueprintname);
   }
 
   params = spawnStruct();
@@ -1524,7 +1524,7 @@ function getallavailablekillstreakstructs() {
   return structs;
 }
 
-function registerkillstreak(streakname, triggeredfunc, availablefunc, var_b1469bcdaec75a9) {
+function registerkillstreak(streakname, triggeredfunc, availablefunc, directusefunc) {
   if(!isDefined(level.killstreaksetups)) {
     level.killstreaksetups = [];
   }
@@ -1534,11 +1534,11 @@ function registerkillstreak(streakname, triggeredfunc, availablefunc, var_b1469b
   level.killstreaksetups[streakname] = streaksetup;
   streaksetup.triggeredfunc = triggeredfunc;
   streaksetup.availablefunc = availablefunc;
-  streaksetup.var_b1469bcdaec75a9 = var_b1469bcdaec75a9;
+  streaksetup.directusefunc = directusefunc;
 }
 
 function registerkillstreakdamagedealingweapon(streakname, var_d8a64ed9bcdf7185, damagesize) {
-  scripts\cp_mp\weapon::function_f30b8f5ee8f3e7f8(streakname, var_d8a64ed9bcdf7185);
+  scripts\cp_mp\weapon::registerkillstreakweaponmap(streakname, var_d8a64ed9bcdf7185);
   scripts\mp\utility\killstreak::function_394de31762a977eb(var_d8a64ed9bcdf7185, damagesize);
 }
 
@@ -1745,13 +1745,13 @@ function streakglobals_onkillstreakfinishuse(params) {
     scripts\mp\utility\script::function_7bd154ad046984e2("undefined streakInfo.mpStreakSystemInfo for streakName: " + streakinfo.streakname);
   }
 
-  if(!isDefined(level.streakglobals.streakbundles[streakinfo.streakname].var_d96d3e6ceed581fd)) {
+  if(!isDefined(level.streakglobals.streakbundles[streakinfo.streakname].genericblueprintlist)) {
     scripts\mp\utility\script::function_7bd154ad046984e2("undefined genericBlueprintList for streakName: " + streakinfo.streakname);
   }
 
-  if(isDefined(owner) && isDefined(streakinfo.mpstreaksysteminfo) && !istrue(streakinfo.mpstreaksysteminfo.var_f019165513ce215a) && isDefined(streakinfo.mpstreaksysteminfo.blueprintindex) && streakinfo.mpstreaksysteminfo.blueprintindex > 0 && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].var_d96d3e6ceed581fd) && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].var_d96d3e6ceed581fd.blueprints) && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].var_d96d3e6ceed581fd.blueprints[streakinfo.mpstreaksysteminfo.blueprintindex - 1])) {
-    var_9b32d1936831f5aa = level.streakglobals.streakbundles[streakinfo.streakname].var_d96d3e6ceed581fd.blueprints[streakinfo.mpstreaksysteminfo.blueprintindex - 1].genericblueprint;
-    owner function_9bc014e7042e8339(var_9b32d1936831f5aa);
+  if(isDefined(owner) && isDefined(streakinfo.mpstreaksysteminfo) && !istrue(streakinfo.mpstreaksysteminfo.var_f019165513ce215a) && isDefined(streakinfo.mpstreaksysteminfo.blueprintindex) && streakinfo.mpstreaksysteminfo.blueprintindex > 0 && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].genericblueprintlist) && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].genericblueprintlist.blueprints) && isDefined(level.streakglobals.streakbundles[streakinfo.streakname].genericblueprintlist.blueprints[streakinfo.mpstreaksysteminfo.blueprintindex - 1])) {
+    genericblueprintname = level.streakglobals.streakbundles[streakinfo.streakname].genericblueprintlist.blueprints[streakinfo.mpstreaksysteminfo.blueprintindex - 1].genericblueprint;
+    owner function_9bc014e7042e8339(genericblueprintname);
   }
 }
 
@@ -2025,11 +2025,11 @@ function function_d932978680c33e26(value, attacker, dropinfoindex) {
   cashent setscriptablepartstate(drop_type, "dropped");
 }
 
-function function_e40eec61ee9d0889(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  lootused(instance, part, state, player, var_a5b2c541413aa895, usestring, 1);
+function function_e40eec61ee9d0889(instance, part, state, player, bautouse, usestring) {
+  lootused(instance, part, state, player, bautouse, usestring, 1);
 }
 
-function lootused(instance, part, state, player, var_a5b2c541413aa895, usestring, fromcallback) {
+function lootused(instance, part, state, player, bautouse, usestring, fromcallback) {
   if(!isDefined(instance) || !istrue(instance.var_ec13f3dccebf91fb)) {
     return;
   }
@@ -2190,7 +2190,7 @@ function deletecash(dropid, notifyopponent, collector) {
 
     scripts\cp_mp\entityheadicons::setheadicon_deleteicon(level.var_40248d89803c02ea[dropid].headicon);
     level.var_40248d89803c02ea[dropid].headicon = undefined;
-    level.var_40248d89803c02ea[dropid] namespace_37987c2865e1a627::function_2eff4cd94c3243e8();
+    level.var_40248d89803c02ea[dropid] namespace_37987c2865e1a627::clearminimapid();
     playFX(level.streak_fx["vanish"], level.var_40248d89803c02ea[dropid].curorigin);
     waitframe();
     level.var_40248d89803c02ea[dropid].visuals[0] delete();
@@ -2517,18 +2517,18 @@ function killstreakhit(attacker, objweapon, vehicle, meansofdeath, damage) {
         return;
       }
 
-      var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+      fullweaponstring = getcompleteweaponname(objweapon);
 
-      if(!isDefined(attacker.lasthittime[var_366b0ecc2f28aead])) {
-        attacker.lasthittime[var_366b0ecc2f28aead] = 0;
+      if(!isDefined(attacker.lasthittime[fullweaponstring])) {
+        attacker.lasthittime[fullweaponstring] = 0;
       }
 
-      if(attacker.lasthittime[var_366b0ecc2f28aead] == gettime()) {
+      if(attacker.lasthittime[fullweaponstring] == gettime()) {
         return;
       }
 
-      attacker.lasthittime[var_366b0ecc2f28aead] = gettime();
-      attacker thread scripts\mp\gamelogic::threadedsetweaponstatbyname(var_366b0ecc2f28aead, 1, "hits");
+      attacker.lasthittime[fullweaponstring] = gettime();
+      attacker thread scripts\mp\gamelogic::threadedsetweaponstatbyname(fullweaponstring, 1, "hits");
 
       if(onlinestatsenabled()) {
         totalshots = attacker getplayerstat("combatStats", "totalShots");
@@ -2834,7 +2834,7 @@ function clearrideintro(delay, fadeback) {
   self notify("intro_cleared");
 }
 
-function allowridekillstreakplayerexit(earlyendnotify, var_43b83976503b9e6d) {
+function allowridekillstreakplayerexit(earlyendnotify, overrideholdtime) {
   if(isDefined(earlyendnotify)) {
     self endon(earlyendnotify);
   }
@@ -2850,8 +2850,8 @@ function allowridekillstreakplayerexit(earlyendnotify, var_43b83976503b9e6d) {
   self endon("death");
   holdtime = 0.75;
 
-  if(isDefined(var_43b83976503b9e6d)) {
-    holdtime = var_43b83976503b9e6d;
+  if(isDefined(overrideholdtime)) {
+    holdtime = overrideholdtime;
   }
 
   updaterate = level.framedurationseconds;
@@ -2897,8 +2897,8 @@ function combatrecordkillstreakuse(streakname) {
     return;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", recordtype, streakname, "uses");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", recordtype, streakname, "uses", oldvalue + 1);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", recordtype, streakname, "uses");
+  self setplayerdata(level.progressiongroup, "playerStats", recordtype, streakname, "uses", oldvalue + 1);
 }
 
 function function_4e6ba9d5ec3ea26b() {
@@ -2971,8 +2971,8 @@ function combatrecordincrementkillstreakawardedstat(streakname) {
     return;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", recordtype, streakname, "awardedCount");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", recordtype, streakname, "awardedCount", oldvalue + 1);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", recordtype, streakname, "awardedCount");
+  self setplayerdata(level.progressiongroup, "playerStats", recordtype, streakname, "awardedCount", oldvalue + 1);
 }
 
 function combatrecordincrementkillstreakextrastat(streakname) {
@@ -2986,8 +2986,8 @@ function combatrecordincrementkillstreakextrastat(streakname) {
     return;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", recordtype, streakname, "extraStat1");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", recordtype, streakname, "extraStat1", oldvalue + 1);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", recordtype, streakname, "extraStat1");
+  self setplayerdata(level.progressiongroup, "playerStats", recordtype, streakname, "extraStat1", oldvalue + 1);
 }
 
 function function_29e99a60706e08b1() {

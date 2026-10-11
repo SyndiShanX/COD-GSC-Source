@@ -478,7 +478,7 @@ function private function_372a8c2173c66c11() {
 function function_f979eb22c4cee76d(player) {
   if(isDefined(player) && isDefined(player.objective_tracker) && isDefined(player.objective_tracker.widget_ref)) {
     if(player namespace_373fee410d5055ba::function_ada0825249682644(player.objective_tracker.widget_ref)) {
-      player namespace_373fee410d5055ba::function_fb3c9a259f146781(player.objective_tracker.widget_ref);
+      player namespace_373fee410d5055ba::scripted_widget_destroy(player.objective_tracker.widget_ref);
     }
 
     player clear_obj_queue();

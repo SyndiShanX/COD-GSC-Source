@@ -41,9 +41,9 @@ function getfirstprimaryweapon() {
   weaponslist = self getweaponslistprimaries();
 
   if(isDefined(self.pers["altStates"]) && weaponslist.size > 0) {
-    var_366b0ecc2f28aead = getcompleteweaponname(weaponslist[0]);
+    fullweaponstring = getcompleteweaponname(weaponslist[0]);
 
-    if(istrue(self.pers["altStates"][var_366b0ecc2f28aead])) {
+    if(istrue(self.pers["altStates"][fullweaponstring])) {
       return weaponslist[0] getaltweapon();
     }
   }

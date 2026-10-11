@@ -156,7 +156,7 @@ function function_b6da8bf3044d28d5() {
     }
 
     wait 3;
-    scene_0110 thread scene::function_bc521bee52fde214(0.05);
+    scene_0110 thread scene::set_anim_rate(0.05);
     scripts\sp\player_death::set_custom_death_quote(513, 0);
     scripts\sp\utility::missionfailedwrapper();
     level waittill("forever");
@@ -378,7 +378,7 @@ function function_90740a4b975511e1(var_c2a3aada8171e94d) {
 
 function function_fcf930eedc91f95() {
   animnode = getStruct("scene_jup_tun_0117_scuba_generic_search", "targetname");
-  animnode scene::function_bc521bee52fde214(1.2);
+  animnode scene::set_anim_rate(1.2);
   shotnames = ["swim", "loop"];
 
   if(scripts\sp\starts::is_after_start("lake_main")) {
@@ -652,7 +652,7 @@ function function_319c2f097ede51e0(targetname, entities, shot, playrate) {
   animnode = getStruct(targetname, "targetname");
 
   if(isDefined(playrate)) {
-    animnode scene::function_bc521bee52fde214(playrate);
+    animnode scene::set_anim_rate(playrate);
   }
 
   animnode scene::play(entities, shot);

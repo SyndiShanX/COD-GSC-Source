@@ -127,7 +127,7 @@ function unlock_door(allowopening) {
   self notify("door_unlock");
   self.locked = 0;
 
-  if(function_bb083055639abcf3()) {
+  if(door_is_open()) {
     return;
   }
 
@@ -406,15 +406,15 @@ function door_bash_open(opener, bashtime) {
 
   if(!isDefined(bashtime)) {
     if(openscale == 1) {
-      var_11b200101076bc6c = 0.25;
-      var_5e7a100369fafe1e = 0.5;
+      minbashtime = 0.25;
+      maxbashtime = 0.5;
     } else {
-      var_11b200101076bc6c = 0.4;
-      var_5e7a100369fafe1e = 0.75;
+      minbashtime = 0.4;
+      maxbashtime = 0.75;
     }
 
     timefactor = math::normalize_value(0, 170, abs(anglediff));
-    bashtime = math::factor_value(var_11b200101076bc6c, var_5e7a100369fafe1e, timefactor);
+    bashtime = math::factor_value(minbashtime, maxbashtime, timefactor);
   }
 
   self.bashtime = bashtime;
@@ -462,17 +462,17 @@ function door_bash_open(opener, bashtime) {
   if(openscale == 1 && abs(anglediff) > 100 && !istrue(self.disable_bounceback)) {
     self playSound("door_hit_wall");
     self.active = 0;
-    var_b492b99eb62e16f2 = randomfloatrange(3, 5);
-    var_6e09cabeb82b5356 = ter_op(self.open_left, -3, 3);
+    bounceback_time = randomfloatrange(3, 5);
+    bounceback_yaw = ter_op(self.open_left, -3, 3);
     alias = "scrpt_door_" + var_7da6017ed0aee8e + "_creak_lp";
 
     if(soundexists(alias)) {
       self playLoopSound(alias);
     }
 
-    self scalevolume(0, var_b492b99eb62e16f2);
-    self.pivot_ent rotateTo(open_angles + (0, var_6e09cabeb82b5356, 0), var_b492b99eb62e16f2, 0.5, var_b492b99eb62e16f2 - 0.5);
-    wait var_b492b99eb62e16f2;
+    self scalevolume(0, bounceback_time);
+    self.pivot_ent rotateTo(open_angles + (0, bounceback_yaw, 0), bounceback_time, 0.5, bounceback_time - 0.5);
+    wait bounceback_time;
     self stoploopsound();
     thread updatenavobstacle();
   } else {
@@ -978,7 +978,7 @@ function double_doors_init_thread(door_main, door_other) {
   return door_main.doubledoors;
 }
 
-function function_bb083055639abcf3() {
+function door_is_open() {
   angle_diff = scripts\sp\door::angle_diff(scripts\sp\door::get_door_angles()[1], self.true_start_angles[1]);
 
   if(abs(angle_diff) > 0) {

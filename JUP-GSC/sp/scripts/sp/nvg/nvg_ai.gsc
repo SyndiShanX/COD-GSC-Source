@@ -137,9 +137,9 @@ function updatelightmeter() {
     self.lightmeter_lastchecktime = -1000;
   }
 
-  var_4f65efcf21f5b553 = [];
-  var_4388be32bf8e8320 = [];
-  var_56d3f8333adbcbf1 = [];
+  lightstocheck = [];
+  distsqtocheck = [];
+  radiitocheck = [];
   var_ffa6a55a441d9138 = var_3db0657c6e27055b > 900;
   cmaxdistsq = 998001;
   numlights = mylights.size;
@@ -164,7 +164,7 @@ function updatelightmeter() {
       continue;
     }
 
-    var_397eb484dfddd2da = 650;
+    radiustocheck = 650;
 
     if(isDefined(dynolight.data)) {
       if(istrue(dynolight.data.script_ignoreme)) {
@@ -172,9 +172,9 @@ function updatelightmeter() {
       }
 
       if(istrue(dynolight.data.script_radius)) {
-        var_397eb484dfddd2da = dynolight.data.script_radius;
+        radiustocheck = dynolight.data.script_radius;
 
-        if(dist_sq > var_397eb484dfddd2da * var_397eb484dfddd2da) {
+        if(dist_sq > radiustocheck * radiustocheck) {
           continue;
         }
       }
@@ -198,10 +198,10 @@ function updatelightmeter() {
       continue;
     }
 
-    var_4d1fb8faeda31cd6 = var_4f65efcf21f5b553.size;
-    var_4f65efcf21f5b553[var_4d1fb8faeda31cd6] = dynolight;
-    var_56d3f8333adbcbf1[var_4d1fb8faeda31cd6] = var_397eb484dfddd2da;
-    var_4388be32bf8e8320[var_4d1fb8faeda31cd6] = dist_sq;
+    var_4d1fb8faeda31cd6 = lightstocheck.size;
+    lightstocheck[var_4d1fb8faeda31cd6] = dynolight;
+    radiitocheck[var_4d1fb8faeda31cd6] = radiustocheck;
+    distsqtocheck[var_4d1fb8faeda31cd6] = dist_sq;
   }
 
   if(var_ffa6a55a441d9138) {
@@ -222,12 +222,12 @@ function updatelightmeter() {
       }
     }
 
-    numlights = var_4f65efcf21f5b553.size;
+    numlights = lightstocheck.size;
 
     for(ilight = 0; ilight < numlights; ilight++) {
-      dynolight = var_4f65efcf21f5b553[ilight];
-      dist = sqrt(var_4388be32bf8e8320[ilight]);
-      var_397eb484dfddd2da = var_56d3f8333adbcbf1[ilight];
+      dynolight = lightstocheck[ilight];
+      dist = sqrt(distsqtocheck[ilight]);
+      radiustocheck = radiitocheck[ilight];
       falloff_dist = 0;
 
       if(isDefined(dynolight.data) && isDefined(dynolight.data.script_percent)) {
@@ -236,7 +236,7 @@ function updatelightmeter() {
         falloff_dist = level.dynolight_falloff_dist;
       }
 
-      light_factor = (1 - math::normalize_value(var_397eb484dfddd2da * falloff_dist, var_397eb484dfddd2da, dist)) * dynolight.intensity;
+      light_factor = (1 - math::normalize_value(radiustocheck * falloff_dist, radiustocheck, dist)) * dynolight.intensity;
 
       if(!dynolight_trace_passed(dynolight, tracedata)) {
         continue;
@@ -304,14 +304,14 @@ function draw_spotlight_fov() {
   color = (1, 0, 0);
   viewdist = self.data.script_radius;
   start = self.lightpos;
-  var_8b4c94ee530f045e = 10;
+  arc_segs = 10;
 
   if(abs(pitch - 90) < 1) {
     thread draw_circle(start, viewdist, (1, 0, 0), 1, 0, 4);
     return;
   }
 
-  scripts\stealth\debug::draw_arc(start, -1 * fov_yaw, fov_yaw, (pitch, eye_yaw, 0), viewdist, 1, var_8b4c94ee530f045e, color);
+  scripts\stealth\debug::draw_arc(start, -1 * fov_yaw, fov_yaw, (pitch, eye_yaw, 0), viewdist, 1, arc_segs, color);
 }
 
 function draw_flashlight_fov() {
@@ -321,9 +321,9 @@ function draw_flashlight_fov() {
   eye_yaw = self gettagangles("tag_flash")[1];
   viewdist = 500;
   start = self gettagorigin("tag_flash");
-  var_8b4c94ee530f045e = 10;
+  arc_segs = 10;
 
-  scripts\stealth\debug::draw_arc(start, -1 * fov_yaw, fov_yaw, self gettagangles("<dev string:x1c>"), viewdist, 1, var_8b4c94ee530f045e, color);
+  scripts\stealth\debug::draw_arc(start, -1 * fov_yaw, fov_yaw, self gettagangles("<dev string:x1c>"), viewdist, 1, arc_segs, color);
 }
 
 function disable_ai_dynolight_behavior() {
@@ -405,7 +405,7 @@ function function_d73f1b97acba6597() {
   foreach(attachment_name in attachments_names) {
     if(currweapon canuseattachment(attachment_name)) {
       newweapon = currweapon withattachment(attachment_name);
-      self.var_e0675e48962c6d55 = attachment_name;
+      self.flashlight_attachment = attachment_name;
       break;
     }
   }
@@ -426,7 +426,7 @@ function function_d73f1b97acba6597() {
 
   self.flashlightfxtag = "tag_laser";
   self.flashlightfxoverridetag = "tag_laser";
-  self.var_b5ce31099294cf74 = slot;
+  self.flashlight_slot = slot;
   scripts\anim\shared::detachweapon(currweapon);
   scripts\anim\shared::forceuseweapon(newweapon, slot);
 }

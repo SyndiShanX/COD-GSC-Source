@@ -552,9 +552,9 @@ function bot_cache_entrances_to_zones(zones) {
     zone.entrance_indices = [];
     zone.zone_bounds = calculate_zone_node_extents(zone);
     zone.center_node = zone_get_node_nearest_2d_bounds(zone, 0, 0);
-    var_3348f0ef95981795 = [(0, 0, 0), (1, 1, 0), (1, -1, 0), (-1, 1, 0), (-1, -1, 0)];
+    combinations = [(0, 0, 0), (1, 1, 0), (1, -1, 0), (-1, 1, 0), (-1, -1, 0)];
 
-    foreach(bound in var_3348f0ef95981795) {
+    foreach(bound in combinations) {
       node = zone_get_node_nearest_2d_bounds(zone, bound[0], bound[1]);
       entrance_origin_points[global_index] = node.origin;
       var_1d52185a4e4dee51 = zone.objectivekey + "_" + var_19cf496cab075bec;

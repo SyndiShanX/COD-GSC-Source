@@ -134,30 +134,30 @@ function hint_timeout(timeout) {
   self notify("hint_print_timeout");
 }
 
-function destroy_hint_on_endon(endonentities, var_f63c23b8ec55b127) {
+function destroy_hint_on_endon(endonentities, endonmessages) {
   self endon("removing_hint");
 
-  if(isarray(endonentities) || isarray(var_f63c23b8ec55b127)) {
-    destroy_hint_on_endon_proc(endonentities, var_f63c23b8ec55b127);
+  if(isarray(endonentities) || isarray(endonmessages)) {
+    destroy_hint_on_endon_proc(endonentities, endonmessages);
   } else {
-    endonentities[0] waittill(var_f63c23b8ec55b127[0]);
+    endonentities[0] waittill(endonmessages[0]);
   }
 
   self.fadeout = 1;
   self notify("hint_print_remove");
 }
 
-function destroy_hint_on_endon_proc(endonentities, var_f63c23b8ec55b127) {
+function destroy_hint_on_endon_proc(endonentities, endonmessages) {
   if(!isarray(endonentities)) {
     endonentities = [endonentities];
   }
 
-  if(!isarray(var_f63c23b8ec55b127)) {
-    var_f63c23b8ec55b127 = [var_f63c23b8ec55b127];
+  if(!isarray(endonmessages)) {
+    endonmessages = [endonmessages];
   }
 
   foreach(entity in endonentities) {
-    foreach(message in var_f63c23b8ec55b127) {
+    foreach(message in endonmessages) {
       entity endon(message);
     }
   }
@@ -199,9 +199,9 @@ function _hint_stick_update_breakfunc(config, base_hint) {
 
 function _hint_stick_update_string(config, base_hint) {
   var_69f0d90bf505b731 = base_hint + config;
-  var_3b770bc38388a03 = level.trigger_hint_string[var_69f0d90bf505b731];
+  locstrng = level.trigger_hint_string[var_69f0d90bf505b731];
   player = get_player_from_self();
-  player sethudtutorialmessage(var_3b770bc38388a03);
+  player sethudtutorialmessage(locstrng);
 }
 
 function hint_stick_update(base_hint, pc_suffix, gamepad_suffix, var_f7112f5fe7d7db66, var_5ddb198f4a48726f, var_bc849fb8c8b9c951, var_77f44ff27b22eafc) {
@@ -210,10 +210,10 @@ function hint_stick_update(base_hint, pc_suffix, gamepad_suffix, var_f7112f5fe7d
   config = _hint_stick_get_config_suffix(pc_suffix, gamepad_suffix, var_f7112f5fe7d7db66, var_5ddb198f4a48726f, var_bc849fb8c8b9c951, var_77f44ff27b22eafc);
 
   while(isDefined(level.current_hint_active) && level.current_hint_active) {
-    var_acda5263fc0969e0 = _hint_stick_get_config_suffix(pc_suffix, gamepad_suffix, var_f7112f5fe7d7db66, var_5ddb198f4a48726f, var_bc849fb8c8b9c951, var_77f44ff27b22eafc);
+    new_config = _hint_stick_get_config_suffix(pc_suffix, gamepad_suffix, var_f7112f5fe7d7db66, var_5ddb198f4a48726f, var_bc849fb8c8b9c951, var_77f44ff27b22eafc);
 
-    if(var_acda5263fc0969e0 != config) {
-      config = var_acda5263fc0969e0;
+    if(new_config != config) {
+      config = new_config;
       _hint_stick_update_breakfunc(config, base_hint);
       _hint_stick_update_string(config, base_hint);
     }
@@ -222,7 +222,7 @@ function hint_stick_update(base_hint, pc_suffix, gamepad_suffix, var_f7112f5fe7d
   }
 }
 
-function hintprint(string, breakfunc, timeout, mintime, hintstate, endonentities, var_f63c23b8ec55b127) {
+function hintprint(string, breakfunc, timeout, mintime, hintstate, endonentities, endonmessages) {
   self notify("new_hint");
 
   if(getdvarint(@ "hash_76af6bc866243118") > 0) {
@@ -274,8 +274,8 @@ function hintprint(string, breakfunc, timeout, mintime, hintstate, endonentities
   active_hint thread destroy_hint_on_friendlyfire();
   active_hint thread destroy_hint_on_player_death();
 
-  if(isDefined(endonentities) && isDefined(var_f63c23b8ec55b127)) {
-    active_hint thread destroy_hint_on_endon(endonentities, var_f63c23b8ec55b127);
+  if(isDefined(endonentities) && isDefined(endonmessages)) {
+    active_hint thread destroy_hint_on_endon(endonentities, endonmessages);
   }
 
   active_hint hintprintbreakout(string, self);
@@ -503,13 +503,13 @@ function do_abort(array) {
     return;
   }
 
-  var_ff009ed2debc01c4 = 0;
+  count_to_reach = 0;
   self.abort_count = array.size;
   endons = [];
   array_levelthread(array, &waittill_abort_func_ends, endons);
 
   for(;;) {
-    if(self.abort_count <= var_ff009ed2debc01c4) {
+    if(self.abort_count <= count_to_reach) {
       break;
     }
 
@@ -565,11 +565,11 @@ function dynamic_run_speed_thread(followent, minspeed, midspeed, maxspeed, front
         print3d(goalpos, "<dev string:x6d>", (0.9, 0.9, 0.9), 0.9, 0.4);
       }
 
-      var_fbbd821088eebc76 = flat_origin(goalpos);
+      goalpos2d = flat_origin(goalpos);
       origin2d = flat_origin(self.origin);
 
-      if(distancesquared(var_fbbd821088eebc76, origin2d) > 100) {
-        dir = vectorNormalize(var_fbbd821088eebc76 - origin2d);
+      if(distancesquared(goalpos2d, origin2d) > 100) {
+        dir = vectorNormalize(goalpos2d - origin2d);
       }
 
       midpos = self.origin + dir * middist;
@@ -968,7 +968,7 @@ function update_battlechatter_hud() {
     return;
   }
 
-  if(!isDefined(level.var_ce8915211d5a4041)) {
+  if(!isDefined(level.bcs_hud)) {
     x = -50;
     y = 460;
     x_offset = 22;
@@ -976,11 +976,11 @@ function update_battlechatter_hud() {
     hud.x = x;
     hud.y = y;
     hud.color = (0.4, 0.55, 0.9);
-    level.var_ce8915211d5a4041 = hud;
+    level.bcs_hud = hud;
   }
 
   if(getDvar(@ "debug_battlechatter") != "<dev string:xb3>") {
-    level.var_ce8915211d5a4041 settext("<dev string:xb2>");
+    level.bcs_hud settext("<dev string:xb2>");
     return;
   }
 
@@ -1007,7 +1007,7 @@ function update_battlechatter_hud() {
     msg += "<dev string:xfc>";
   }
 
-  level.var_ce8915211d5a4041 settext(msg);
+  level.bcs_hud settext(msg);
 }
 
 function comparesizesfx(org, array, dist, comparefunc) {

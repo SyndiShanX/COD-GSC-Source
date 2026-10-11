@@ -91,11 +91,11 @@ function function_f915120f9b1ad6e(loc) {
   }
 }
 
-function function_c4a730f3fc3d42f5(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  thread function_528ace3eb332dc64(instance, part, state, player, var_a5b2c541413aa895, usestring);
+function function_c4a730f3fc3d42f5(instance, part, state, player, bautouse, usestring) {
+  thread function_528ace3eb332dc64(instance, part, state, player, bautouse, usestring);
 }
 
-function private function_528ace3eb332dc64(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_528ace3eb332dc64(instance, part, state, player, bautouse, usestring) {
   level thread function_226b3d98df5eda63(instance);
 
   if(instance.type == "stationary_note_computer") {

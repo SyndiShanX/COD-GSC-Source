@@ -61,6 +61,6 @@ function chopper_gunner_assigntargetmarkers() {
 }
 
 function function_dacd2cee9c44366f(choppergunner) {
-  choppergunner function_5226227bce83ebe9(3, choppergunner.team);
+  choppergunner setentityhudoutlinedata(3, choppergunner.team);
   return choppergunner;
 }

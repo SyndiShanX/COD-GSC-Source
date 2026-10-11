@@ -327,7 +327,7 @@ function player_in_laststand(player) {
 }
 
 function function_1ea5d1ad97d72da5(point, targetpoint) {
-  var_63e2b577b3021861 = self.var_a9bbce143412f034 * self.var_a9bbce143412f034;
+  var_63e2b577b3021861 = self.meleeradiuswhentargetnotonnavmesh * self.meleeradiuswhentargetnotonnavmesh;
   return distancesquared(point, targetpoint) <= var_63e2b577b3021861;
 }
 
@@ -345,20 +345,20 @@ function function_859ce1caaf98db64() {
 }
 
 function function_e2c77ec2e423711() {
-  withinradius = distancesquared(self.origin, self.enemy.origin) <= self.var_f5bd7eeb8c658300;
+  withinradius = distancesquared(self.origin, self.enemy.origin) <= self.meleeradiusbasesq;
 
   if(!withinradius && (isPlayer(self.enemy) || isagent(self.enemy))) {
     enemygroundent = undefined;
     enemygroundent = self.enemy getgroundentity();
 
     if(isDefined(enemygroundent) && isDefined(enemygroundent.targetname) && enemygroundent.targetname == "care_package") {
-      withinradius = distancesquared(self.origin, self.enemy.origin) <= self.var_f5bd7eeb8c658300 * 4;
+      withinradius = distancesquared(self.origin, self.enemy.origin) <= self.meleeradiusbasesq * 4;
     }
   }
 
   if(!withinradius && isPlayer(self.enemy) && istrue(self.enemy.var_a51f5edf259acc29)) {
     if(length(self getvelocity()) < 5) {
-      withinradius = distancesquared(self.origin, self.enemy.origin) <= self.var_f5bd7eeb8c658300 * 4;
+      withinradius = distancesquared(self.origin, self.enemy.origin) <= self.meleeradiusbasesq * 4;
     }
   }
 
@@ -374,10 +374,10 @@ function function_6f1f2cf8495fb8f2() {
   return true;
 }
 
-function function_2d78d2cf5681691a() {
+function didpastmeleefail() {
   assert(isDefined(self.enemy));
 
-  if(isDefined(self.var_3071905d9ea1749c) && isDefined(self.var_c72136d828c5dba2) && distance2dsquared(self.enemy.origin, self.var_3071905d9ea1749c) < 4 && distancesquared(self.origin, self.var_c72136d828c5dba2) < 2500) {
+  if(isDefined(self.lastmeleefailedpos) && isDefined(self.lastmeleefailedmypos) && distance2dsquared(self.enemy.origin, self.lastmeleefailedpos) < 4 && distancesquared(self.origin, self.lastmeleefailedmypos) < 2500) {
     return true;
   }
 
@@ -389,18 +389,18 @@ function function_8c1ebabcc8737d7e(startpos, targetpos) {
   assert(isDefined(targetpos));
   withinheight = 0;
   zdiff = targetpos[2] - startpos[2];
-  withinheight = zdiff <= self.var_7a480deb4960d81e && zdiff >= self.var_a853a9004b90b766;
+  withinheight = zdiff <= self.attackzheight && zdiff >= self.attackzheightdown;
 
   if(!withinheight && isPlayer(self.enemy) && istrue(self.enemy.var_a51f5edf259acc29)) {
     if(length(self getvelocity()) < 5) {
-      withinheight = zdiff <= self.var_7a480deb4960d81e * 2 && zdiff >= self.var_a853a9004b90b766;
+      withinheight = zdiff <= self.attackzheight * 2 && zdiff >= self.attackzheightdown;
     }
   }
 
   return withinheight;
 }
 
-function function_79bba7d55bf175a9(targetpos) {
+function iswithinattackheight(targetpos) {
   return function_8c1ebabcc8737d7e(self.origin, targetpos);
 }
 
@@ -412,14 +412,14 @@ function function_533184b35acabfe8(targetpos) {
   return function_b5c47115061c80c9(self.origin, targetpos);
 }
 
-function function_3044ff47cea632ac() {
+function wanttoattacktargetbutcant() {
   assert(isDefined(self.enemy));
 
   if(function_254992a907ee42e9(self.enemy)) {
     return false;
   }
 
-  return !function_79bba7d55bf175a9(self.enemy.origin) && function_533184b35acabfe8(self.enemy.origin);
+  return !iswithinattackheight(self.enemy.origin) && function_533184b35acabfe8(self.enemy.origin);
 }
 
 function ismeleeblocked() {
@@ -447,7 +447,7 @@ function isreallyalive(player) {
   return false;
 }
 
-function function_6f13d6be163ad9a(var_a7a462c25f695db5, var_afe6d98f578d1615) {
+function readytomeleetarget(var_a7a462c25f695db5, var_afe6d98f578d1615) {
   if(!isDefined(var_afe6d98f578d1615)) {
     var_afe6d98f578d1615 = 1;
   }
@@ -465,7 +465,7 @@ function function_6f13d6be163ad9a(var_a7a462c25f695db5, var_afe6d98f578d1615) {
   }
 
   if(!function_254992a907ee42e9(self.enemy)) {
-    if(!function_79bba7d55bf175a9(self.enemy.origin)) {
+    if(!iswithinattackheight(self.enemy.origin)) {
       return false;
     }
 
@@ -556,15 +556,15 @@ function isplayerteleporting(player) {
   return isDefined(player.inteleport) && player.inteleport;
 }
 
-function function_d2272a70b9d7e404(hitloc) {
-  return level.var_f2ce94caf2fb708d.deathanims["hitLoc"][hitloc];
+function death_getcombinedhitloc(hitloc) {
+  return level.alienanimdata.deathanims["hitLoc"][hitloc];
 }
 
-function function_5c077abb4750bca3(direction) {
+function death_getincomingdirection(direction) {
   return false;
 }
 
-function function_546a879305abdc4a(state, damagedirection, hitloc, animarray) {
+function getpaindeathanimindex_internal(state, damagedirection, hitloc, animarray) {
   if(isDefined(hitloc)) {
     var_a54ab16bb0ef3c60 = animarray[state][damagedirection][hitloc];
   } else {
@@ -616,6 +616,6 @@ function function_e8f9a124778cc606(var_430d5c97ac6d7f48) {
     var_4f439c539cf632a1 = minscalar + (var_430d5c97ac6d7f48 - 1) * (maxscalar - minscalar);
   }
 
-  self.var_8d31c7eacb516468 = var_4f439c539cf632a1;
-  self.var_d2d25942e3b908e9 = var_4f439c539cf632a1;
+  self.moveratescale = var_4f439c539cf632a1;
+  self.traverseratescale = var_4f439c539cf632a1;
 }

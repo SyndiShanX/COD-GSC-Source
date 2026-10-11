@@ -519,14 +519,14 @@ function function_8cf7f8b74219ac94(spawnpoint, var_f716273270785091) {
 
     if(!isDefined(self.path_data)) {
       wait 0.1;
-      function_9d76b32cac3b3ec();
+      stop_at_node();
       continue;
     }
 
     if(!isDefined(self.path_data.path[node_index])) {
       if(node_index >= self.path_data.path.size) {
         self.cur_state = "path_done";
-        function_9d76b32cac3b3ec();
+        stop_at_node();
       }
 
       wait 0.1;
@@ -868,7 +868,7 @@ function drone_turret_canseetarget(target, offset, drone, radius_override, var_7
     }
 
     foreach(trace in tracepoints) {
-      var_73c481a20cb5f570 = trace - self.origin;
+      lookvec = trace - self.origin;
       line(self.origin, trace, (1, 1, 0.5), 1, 0, 60);
       print3d(trace, "<dev string:x5c>", (1, 1, 0.1), 1, 1, 60, 1);
     }
@@ -1236,7 +1236,7 @@ function function_f0794596985dcdb4() {
   self setturningability(self.turningability);
 }
 
-function function_9d76b32cac3b3ec() {
+function stop_at_node() {
   self.move_speed = 0;
   self vehicle_setspeed(0, 12, 12);
 }

@@ -154,7 +154,7 @@ function function_8a7784fe4a8d91b2(arena, aispawn, basetype, tiernum, nationalit
     agent.var_725248d464d15738 = 0;
     agent.ballowexecutions = 0;
     agent.var_214ec6c7283a65c6 = 0;
-    agent.var_e585c560d79f00f8 = 1;
+    agent.disablerunpain = 1;
     agent function_d493e7fe15e5eaf4("default");
     agent notify("endLootDropThread");
     agent attach("misc_wm_baton", "tag_accessory_right");
@@ -237,7 +237,7 @@ function function_7ae9ebb1a232528(arena) {
   }
 }
 
-function function_6b2a6e0fc1611a0b(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_6b2a6e0fc1611a0b(instance, part, state, player, bautouse, usestring) {
   level endon("game_ended");
   arena = player.arena;
 
@@ -539,14 +539,14 @@ function function_ec93ae254484ba9d(delay) {
   function_71240cfca27fc4dd(self);
 }
 
-function function_d92fbfd19f555324(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, var_1da1a66b5c6a06a7, var_986b2e0350629522, iskillstreakweapon) {
+function function_d92fbfd19f555324(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, lightarmordamage, heavyarmordamage, iskillstreakweapon) {
   if(isDefined(eattacker) && isDefined(eattacker.owner)) {
     damager = eattacker.owner;
   } else {
     damager = eattacker;
   }
 
-  if(isDefined(damager) && damager != victim && idamage + var_1da1a66b5c6a06a7 + var_986b2e0350629522 > 0 && (!isDefined(shitloc) || shitloc != "shield")) {
+  if(isDefined(damager) && damager != victim && idamage + lightarmordamage + heavyarmordamage > 0 && (!isDefined(shitloc) || shitloc != "shield")) {
     waskilled = !victim scripts\cp_mp\utility\player_utility::_isalive() || isagent(victim) && idamage >= victim.health;
     headshot = scripts\cp_mp\utility\damage_utility::isheadshot(shitloc, smeansofdeath, eattacker);
     suppressaudio = smeansofdeath == "MOD_MELEE";
@@ -683,12 +683,12 @@ function function_f107289c7060de31(player) {
   level endon("game_ended");
   self endon("death");
   capname = "cap_jailer_warnoff";
-  var_7a140ee03cfc699e = "caps/common/cap_jailer_warnoff";
+  capanimset = "caps/common/cap_jailer_warnoff";
   self function_1c339daaba3f71db(1);
   self setlookatentity(player);
   self.var_6ea17fd821a76b9f = player;
   self function_105c123cd778717a(player);
-  scripts\common\cap::cap_start(capname, var_7a140ee03cfc699e);
+  scripts\common\cap::cap_start(capname, capanimset);
   self waittill("cap_exit_completed");
   self function_105c123cd778717a();
   self setlookatentity();
@@ -836,13 +836,13 @@ function function_93b11e4da88bf536() {
 
             if(!self.var_725248d464d15738) {
               capname = "cap_jailer_warnoff";
-              var_7a140ee03cfc699e = "caps/common/cap_jailer_warnoff";
+              capanimset = "caps/common/cap_jailer_warnoff";
               self function_1c339daaba3f71db(1);
               self setlookatentity(player);
               self.var_6ea17fd821a76b9f = player;
               self function_105c123cd778717a(player);
               thread function_3032d7f191ce6b69();
-              scripts\common\cap::cap_start(capname, var_7a140ee03cfc699e);
+              scripts\common\cap::cap_start(capname, capanimset);
               self waittill("cap_exit_completed");
               self function_105c123cd778717a();
               self setlookatentity();

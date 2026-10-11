@@ -1012,8 +1012,8 @@ function function_4325018d2242ad19(stuckto) {
   data.validateaccuratetouching = 1;
 
   if(isDefined(stuckto) && train_utility::is_train_ent(stuckto)) {
-    data.var_49cb2c45d3230ed8 = 1;
-    self function_7e73001e97fe87b9(1);
+    data.plantedontrain = 1;
+    self setmissileantilagged(1);
   }
 
   if(utility::issharedfuncdefined("game", "handlemovingplatforms")) {

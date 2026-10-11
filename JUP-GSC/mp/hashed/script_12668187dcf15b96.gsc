@@ -277,8 +277,8 @@ function function_3a7f59bb4e72a37(var_21e742c4e7cb787c, zoneinfo) {
 function function_38e17064167fd68(var_21e742c4e7cb787c, point) {
   assert(isDefined(var_21e742c4e7cb787c) && isDefined(var_21e742c4e7cb787c.gridsize));
   assert(isDefined(point));
-  var_b322b4fce7d30aaf = function_eef1c9b05cde1be9(point, var_21e742c4e7cb787c.gridsize);
-  var_e60651194b75b010 = function_8c7a47a2aaa5555f(var_b322b4fce7d30aaf[0], var_b322b4fce7d30aaf[1], var_b322b4fce7d30aaf[2]);
+  gridcoords = function_eef1c9b05cde1be9(point, var_21e742c4e7cb787c.gridsize);
+  var_e60651194b75b010 = function_8c7a47a2aaa5555f(gridcoords[0], gridcoords[1], gridcoords[2]);
   var_f85646b72485b227 = [];
 
   if(isDefined(var_21e742c4e7cb787c.gridmap) && isDefined(var_21e742c4e7cb787c.gridmap[var_e60651194b75b010])) {

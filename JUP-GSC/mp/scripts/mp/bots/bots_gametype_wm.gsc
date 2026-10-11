@@ -24,7 +24,7 @@ function main() {
   function_96811b18496ea942(6, &function_b72835f420d36cab);
   function_96811b18496ea942(7, &function_d4299bd3cefff9f2);
   function_96811b18496ea942(8, &function_d4299bd3cefff9f2);
-  function_96811b18496ea942(9, &function_9ec814ba389bdf89);
+  function_96811b18496ea942(9, &bot_hack_think);
   function_96811b18496ea942(10, &function_a329958947b1be20);
   function_96811b18496ea942(11, &function_47f50aa0634c3b02);
   function_96811b18496ea942(12, &function_c62f2faf741f9a21);
@@ -344,7 +344,7 @@ function function_80669a2cc4016fb3() {
   return true;
 }
 
-function function_9ec814ba389bdf89() {
+function bot_hack_think() {
   if(!isDefined(level.zone.hackzones)) {
     return false;
   }
@@ -569,7 +569,7 @@ function function_a329958947b1be20() {
   }
 
   if(level.zone.currentphase == "hack") {
-    return function_9ec814ba389bdf89();
+    return bot_hack_think();
   } else if(level.zone.currentphase == "bomb") {
     if(!isDefined(level.zone.bombzones)) {
       return false;

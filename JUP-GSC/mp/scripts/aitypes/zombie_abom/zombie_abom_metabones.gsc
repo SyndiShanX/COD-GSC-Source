@@ -23,19 +23,19 @@ function autoexec main() {
 }
 
 function private function_b9f4b7206d76e7ce(params) {
-  function_ebb83c1efeaae2c7(params.var_c02b1f6c1721c844);
+  function_ebb83c1efeaae2c7(params.metabone_name);
 }
 
-function private function_ebb83c1efeaae2c7(var_c02b1f6c1721c844) {
-  if(self getscriptablehaspart(var_c02b1f6c1721c844)) {
-    self setscriptablepartstate(var_c02b1f6c1721c844, "destroyed");
-    function_3d2728c0e2252a1d(var_c02b1f6c1721c844, "destroyed");
-    function_7380ccd6f2c49392(var_c02b1f6c1721c844, 1);
+function private function_ebb83c1efeaae2c7(metabone_name) {
+  if(self getscriptablehaspart(metabone_name)) {
+    self setscriptablepartstate(metabone_name, "destroyed");
+    function_3d2728c0e2252a1d(metabone_name, "destroyed");
+    function_7380ccd6f2c49392(metabone_name, 1);
     function_ac90fa5cc0a80298("head_destroyed_in");
-    self notify("head_destroyed_" + level.var_586f05706c6d0cab[var_c02b1f6c1721c844]);
+    self notify("head_destroyed_" + level.var_586f05706c6d0cab[metabone_name]);
     heads_remaining = function_2789dbcb483fa601(self);
     params = spawnStruct();
-    params.var_c02b1f6c1721c844 = var_c02b1f6c1721c844;
+    params.metabone_name = metabone_name;
     params.heads_remaining = heads_remaining;
     callback::callback("head_destroyed", params);
 
@@ -54,7 +54,7 @@ function private function_ebb83c1efeaae2c7(var_c02b1f6c1721c844) {
     return;
   }
 
-  assertmsg("<dev string:x1c>" + var_c02b1f6c1721c844);
+  assertmsg("<dev string:x1c>" + metabone_name);
 }
 
 function function_2789dbcb483fa601(entity) {
@@ -99,9 +99,9 @@ function function_da059a185d59d999(entity, head_index, is_open) {
   entity function_3d2728c0e2252a1d(level.var_28e4ea2998e3439b[head_index], metabone_state);
 }
 
-function function_e5db29e6fd6f6a88(var_c02b1f6c1721c844) {
-  if(self getscriptablehaspart(var_c02b1f6c1721c844)) {
-    return level.var_586f05706c6d0cab[var_c02b1f6c1721c844];
+function function_e5db29e6fd6f6a88(metabone_name) {
+  if(self getscriptablehaspart(metabone_name)) {
+    return level.var_586f05706c6d0cab[metabone_name];
   }
 
   return undefined;

@@ -94,7 +94,7 @@ function init() {
   scripts\engine\utility::registersharedfunc("hover_jet", "init", &namespace_3f6c2ec2b6aeead8::init);
   scripts\engine\utility::registersharedfunc("auto_drone", "init", &scripts\mp\killstreaks\auto_drone_mp::init);
   scripts\engine\utility::registersharedfunc("cluster_spike", "init", &scripts\mp\killstreaks\cluster_spike_mp::init);
-  function_b4b623b6321cd521();
+  initkillstreakweaponmap();
 
   if(isDefined(level.mapcustomkillstreakfunc)) {
     [[level.mapcustomkillstreakfunc]]();

@@ -76,7 +76,7 @@ function private function_dea7cc77ad90ba55(exploder_id, zones) {
   level endon("vfx_zone_" + exploder_id + "_deactivating");
 
   for(;;) {
-    function_665d474ff040b446(zones);
+    flag_wait_any_array(zones);
 
     if(getdvarint(@ "hash_6db7cb3d747e8695", 0)) {
       iprintln("<dev string:x1c>" + exploder_id + "<dev string:x27>");
@@ -95,7 +95,7 @@ function private function_dea7cc77ad90ba55(exploder_id, zones) {
 
 function private function_6e68ec1667a60118(exploder_id, exclude_zones, zones) {
   for(;;) {
-    function_665d474ff040b446(exclude_zones);
+    flag_wait_any_array(exclude_zones);
     function_62691cef5a23cc3c(exploder_id);
     exploder_stop(exploder_id);
     flag_waitopen_all_array(exclude_zones);

@@ -49,14 +49,14 @@ function decidenumshotsforfull() {
   return numshots;
 }
 
-function decidenumshotsforburst(var_b22c497b24d57aca) {
+function decidenumshotsforburst(distancetoenemysquared) {
   maxburst = 5;
-  var_8ba699667e1a6d48 = weaponburstcount(self.weapon);
+  fixedburstcount = weaponburstcount(self.weapon);
 
-  if(var_8ba699667e1a6d48) {
-    numshots = var_8ba699667e1a6d48;
+  if(fixedburstcount) {
+    numshots = fixedburstcount;
   } else {
-    numshots = reduceshotcountbydistance(maxburst, var_b22c497b24d57aca);
+    numshots = reduceshotcountbydistance(maxburst, distancetoenemysquared);
     numshots += randomintrange(-2, 3);
     numshots = int(max(numshots, 1));
   }
@@ -74,16 +74,16 @@ function decidenumshotsforburst(var_b22c497b24d57aca) {
   return self.bulletsinclip;
 }
 
-function reduceshotcountbydistance(var_ed80adb830bc0010, var_b22c497b24d57aca) {
-  var_5e2b1cc3aba6d0ec = 62500;
+function reduceshotcountbydistance(var_ed80adb830bc0010, distancetoenemysquared) {
+  fullautorangesq = 62500;
   var_613a15adbe0efe37 = 810000;
   var_e9710b1cecb896f = 1562500;
-  var_5646233813d9b9e6 = 2560000;
-  alldistances = [var_5e2b1cc3aba6d0ec, var_613a15adbe0efe37, var_e9710b1cecb896f, var_5646233813d9b9e6];
+  singleshotrangesq = 2560000;
+  alldistances = [fullautorangesq, var_613a15adbe0efe37, var_e9710b1cecb896f, singleshotrangesq];
   assert(var_ed80adb830bc0010 > alldistances.size);
 
   foreach(currentdistance in alldistances) {
-    if(var_b22c497b24d57aca > currentdistance) {
+    if(distancetoenemysquared > currentdistance) {
       var_ed80adb830bc0010 -= 1;
     }
   }

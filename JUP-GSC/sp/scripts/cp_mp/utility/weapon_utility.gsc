@@ -172,7 +172,7 @@ function ismissilelauncherlockonallowed() {
   return 1;
 }
 
-function function_f18dbd353f3e1570(entity) {
+function hasbunkerbustersattached(entity) {
   return isDefined(entity.bunkerbustersattached) && entity.bunkerbustersattached.size > 0;
 }
 
@@ -201,7 +201,7 @@ function function_28e583bfecc38a25(entity, ownerteam) {
     return;
   }
 
-  assert(function_f18dbd353f3e1570(entity), "removeBunkerBusterAttached called on an entity that does not have bunkerbusters attached.");
+  assert(hasbunkerbustersattached(entity), "removeBunkerBusterAttached called on an entity that does not have bunkerbusters attached.");
   teams = entity.bunkerbustersattached;
   entity.bunkerbustersattached = [];
   removed = 0;
@@ -397,12 +397,12 @@ function dropweaponfordeathlaunch(item, weapongroup, damage, angles) {
     return;
   }
 
-  var_2e3a4c6faf317522 = item physics_getentitycenterofmass();
+  itemcenterofmass = item physics_getentitycenterofmass();
 
-  if(isDefined(var_2e3a4c6faf317522)) {
-    var_2e3a4c6faf317522 = var_2e3a4c6faf317522["unscaled"];
+  if(isDefined(itemcenterofmass)) {
+    itemcenterofmass = itemcenterofmass["unscaled"];
   } else {
-    var_2e3a4c6faf317522 = item.origin;
+    itemcenterofmass = item.origin;
   }
 
   launchvelocity = (0, 0, 0);
@@ -419,7 +419,7 @@ function dropweaponfordeathlaunch(item, weapongroup, damage, angles) {
     var_8282854ec42283a2 *= -1;
   }
 
-  launchorigin = var_2e3a4c6faf317522;
+  launchorigin = itemcenterofmass;
   launchorigin += anglesToForward(weaponangles) * var_eac2b0512d0b1c55;
   launchorigin += anglestoright(weaponangles) * var_8282854ec42283a2;
   logprint("PhysicsLaunchServerItem");
@@ -539,15 +539,15 @@ function isknifeonly(weapon) {
   return isknife || rootname == "iw9_me_knife";
 }
 
-function function_cfac6d60b7a14ab9(weapon) {
+function issharpmeleeweapon(weapon) {
   if(!isDefined(weapon) || !isDefined(weapon.basename)) {
     return false;
   }
 
   basename = weapon.basename;
   rootname = scripts\cp_mp\weapon::getweaponrootname(weapon);
-  var_727d88e47223b87d = scripts\cp_mp\weapon::function_b8811a0fc04e4b9d(rootname, #"hash_dde08416ce76e9f9", 0);
-  return var_727d88e47223b87d || basename == "iw9_me_knife_mp" || basename == "iw9_knifestab_mp" || basename == "iw9_me_sword01_mp";
+  issharpmelee = scripts\cp_mp\weapon::function_b8811a0fc04e4b9d(rootname, #"hash_dde08416ce76e9f9", 0);
+  return issharpmelee || basename == "iw9_me_knife_mp" || basename == "iw9_knifestab_mp" || basename == "iw9_me_sword01_mp";
 }
 
 function saveweaponstates() {
@@ -574,7 +574,7 @@ function restoreweaponstates(lastweaponobj) {
   return lastweaponobj;
 }
 
-function function_c9e5c511b923a42f(idamage, attacker, victim, smeansofdeath, shitloc, inflictor, vpoint, var_1da1a66b5c6a06a7, var_986b2e0350629522, helmetdamage) {
+function function_c9e5c511b923a42f(idamage, attacker, victim, smeansofdeath, shitloc, inflictor, vpoint, lightarmordamage, heavyarmordamage, helmetdamage) {
   if(isDefined(level.var_b39eda08d7912835)) {
     distmsg = "";
 
@@ -592,10 +592,10 @@ function function_c9e5c511b923a42f(idamage, attacker, victim, smeansofdeath, shi
 
     armormsg = "";
 
-    if(isDefined(var_1da1a66b5c6a06a7) && var_1da1a66b5c6a06a7 > 0) {
-      armormsg = " ArmorDmg: " + var_1da1a66b5c6a06a7;
-    } else if(isDefined(var_986b2e0350629522) && var_986b2e0350629522 > 0) {
-      armormsg = " ArmorDmg: " + var_986b2e0350629522;
+    if(isDefined(lightarmordamage) && lightarmordamage > 0) {
+      armormsg = " ArmorDmg: " + lightarmordamage;
+    } else if(isDefined(heavyarmordamage) && heavyarmordamage > 0) {
+      armormsg = " ArmorDmg: " + heavyarmordamage;
     }
 
     helmetmsg = "";
@@ -610,7 +610,7 @@ function function_c9e5c511b923a42f(idamage, attacker, victim, smeansofdeath, shi
 }
 
 function function_eeaa22f0cd1ff845(weaponstring) {
-  attachments = function_6527364c1ecca6c6(weaponstring);
+  attachments = getweapondefaultattachments(weaponstring);
   weaponobj = makeweapon(weaponstring, attachments);
   return weaponobj;
 }

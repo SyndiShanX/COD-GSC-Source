@@ -30,7 +30,7 @@
 #namespace lrad;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("lrad"), &init);
+  registerkillstreakinitfunction(getxhash("lrad"), &init);
 }
 
 function private init() {
@@ -41,7 +41,7 @@ function private init() {
   scripts\engine\utility::registersharedfunc("lrad", "tryUseKillstreak", &function_5dae574697e78d96);
   scripts\engine\utility::registersharedfunc("lrad", "LRAD_Hack", &lrad_hack);
   bundle = level.streakglobals.streakbundles["lrad"];
-  function_a41e3a211a9e37a4("lrad", bundle.deployweapon, #"hash_b76b2215370d2700");
+  registerkillstreakdamagedealingweaponsharedfunc("lrad", bundle.deployweapon, #"hash_b76b2215370d2700");
   function_1212a209876bcd8d();
   function_795e8013831a046a();
   level.var_2d9a7cb2b0831e1e = 0;
@@ -116,8 +116,8 @@ function function_5dae574697e78d96(streakinfo) {
   }
 
   var_6bec98cb2dcc2450.streakinfo = streakinfo;
-  var_9b32d1936831f5aa = function_71efed8bf57f1d39(streakinfo.bundle, var_6bec98cb2dcc2450.streakinfo.mpstreaksysteminfo.blueprintindex);
-  var_6bec98cb2dcc2450 function_b383c6eb771d7283(var_9b32d1936831f5aa);
+  genericblueprintname = function_71efed8bf57f1d39(streakinfo.bundle, var_6bec98cb2dcc2450.streakinfo.mpstreaksysteminfo.blueprintindex);
+  var_6bec98cb2dcc2450 function_b383c6eb771d7283(genericblueprintname);
 
   if(isDefined(level.killstreakbeginusefunc)) {
     if(!level[[level.killstreakbeginusefunc]](streakinfo)) {
@@ -138,7 +138,7 @@ function function_5dae574697e78d96(streakinfo) {
   var_6bec98cb2dcc2450 scripts\cp_mp\emp_debuff::set_start_emp_callback(&function_a054c2c62f34ac14);
   var_6bec98cb2dcc2450 scripts\cp_mp\equipment\haywire::function_aa823a31304ed981(&function_5e06c811fe28148a);
   var_6bec98cb2dcc2450 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&function_43197d230c4d9635);
-  var_6bec98cb2dcc2450.colmodel function_f3bb4f4911a1beb2("escort", "registerEscortCollisionCallback", &function_d4468bb2335b0542);
+  var_6bec98cb2dcc2450.colmodel callsharedfunc("escort", "registerEscortCollisionCallback", &function_d4468bb2335b0542);
 
   if(issharedfuncdefined("emp", "setEMP_Applied_Callback")) {
     var_6bec98cb2dcc2450[[getsharedfunc("emp", "setEMP_Applied_Callback")]](&function_a054c2c62f34ac14);
@@ -313,7 +313,7 @@ function lrad_place(streakinfo) {
       data.deathoverridecallback = &function_405ae182beea4b1c;
 
       if(isDefined(level.wztrain_info) && isDefined(var_6bec98cb2dcc2450.moving_platform) && scripts\cp_mp\utility\train_utility::is_train_ent(var_6bec98cb2dcc2450.moving_platform)) {
-        data.var_49cb2c45d3230ed8 = 1;
+        data.plantedontrain = 1;
       }
 
       var_6bec98cb2dcc2450 thread[[getsharedfunc("game", "handlemovingplatforms")]](data);
@@ -364,7 +364,7 @@ function function_cce8da1f44d40890(marker, var_6bec98cb2dcc2450) {
   var_6bec98cb2dcc2450.angles = self.angles;
   var_6bec98cb2dcc2450.team = self.team;
   var_6bec98cb2dcc2450.owner = self;
-  var_6bec98cb2dcc2450 function_5226227bce83ebe9(3, var_6bec98cb2dcc2450.team);
+  var_6bec98cb2dcc2450 setentityhudoutlinedata(3, var_6bec98cb2dcc2450.team);
   var_6bec98cb2dcc2450 show();
   var_6bec98cb2dcc2450.colmodel = spawn("script_model", var_6bec98cb2dcc2450.origin);
   var_6bec98cb2dcc2450.colmodel.team = var_6bec98cb2dcc2450.team;
@@ -526,7 +526,7 @@ function function_405ae182beea4b1c(data) {
   data.meansofdeath = "MOD_CRUSH";
   function_136ba4565fe17b8(data);
   lrad_destroy();
-  namespace_37987c2865e1a627::function_2eff4cd94c3243e8();
+  namespace_37987c2865e1a627::clearminimapid();
 }
 
 function lrad_timeout(params) {
@@ -667,7 +667,7 @@ function function_43adb6908f665a51(var_6bec98cb2dcc2450, streakinfo) {
   level endon("game_ended");
   function_c87fe068955bfe05(var_6bec98cb2dcc2450);
   function_484aa2a4c15a015c(var_6bec98cb2dcc2450);
-  var_6bec98cb2dcc2450 function_2eff4cd94c3243e8();
+  var_6bec98cb2dcc2450 clearminimapid();
   function_fa22ff0405c3d06e(var_6bec98cb2dcc2450);
   var_6bec98cb2dcc2450 function_f4e488f7d8918d26();
   self playSound("jup_kls_lrad_pickup");
@@ -868,7 +868,7 @@ function function_dd6257eba7b4a3b2() {
     lifetime = getdvarfloat(@ "hash_98efcf229168a436");
 
     for(i = 0; i < var_fa2a279646b5006b; i++) {
-      self.dangerzones[i] = function_f3bb4f4911a1beb2("spawn", "addSpawnDangerZone", currentorigin, bundle.dangerzoneradius, bundle.dangerzoneheight, self.ownerteam, lifetime, self.owner, 0, self, 1);
+      self.dangerzones[i] = callsharedfunc("spawn", "addSpawnDangerZone", currentorigin, bundle.dangerzoneradius, bundle.dangerzoneheight, self.ownerteam, lifetime, self.owner, 0, self, 1);
       currentorigin += var_27f3a8e03d3dc5e7 * forward;
     }
   }
@@ -880,7 +880,7 @@ function function_f4e488f7d8918d26() {
   }
 
   foreach(dangerzone in self.dangerzones) {
-    function_f3bb4f4911a1beb2("spawn", "removeSpawnDangerZone", dangerzone);
+    callsharedfunc("spawn", "removeSpawnDangerZone", dangerzone);
   }
 }
 
@@ -1061,7 +1061,7 @@ function function_bb2a979de475a65(stuntime, var_ef9733a4a88c2f67) {
     }
 
     if(istrue(player_utility::playersareenemies(attackerowner, victimowner))) {
-      namespace_53fc9ddbb516e6e1::function_cc76abced8a70f47("specialty_tac_resist");
+      namespace_53fc9ddbb516e6e1::activateperksharedfunc("specialty_tac_resist");
     }
   }
 
@@ -1116,7 +1116,7 @@ function function_c33bfcf6e1403531(var_ef9733a4a88c2f67) {
   self waittill("death", attacker);
 
   if(level.var_d11891ea093da336 && isDefined(var_ef9733a4a88c2f67) && isDefined(var_ef9733a4a88c2f67.owner) && attacker != var_ef9733a4a88c2f67.owner) {
-    var_ef9733a4a88c2f67.owner utility::function_f3bb4f4911a1beb2("killstreak", "rewardAssistPoints");
+    var_ef9733a4a88c2f67.owner utility::callsharedfunc("killstreak", "rewardAssistPoints");
   }
 }
 
@@ -1140,7 +1140,7 @@ function lrad_hack(newowner) {
 
   self.owner function_f74b0080a679742b(self);
   self.owner thread function_5189f677d1332852(self, self.streakinfo);
-  function_2eff4cd94c3243e8();
+  clearminimapid();
 
   if(issharedfuncdefined("game", "createObjective")) {
     self.minimapid = self[[getsharedfunc("game", "createObjective")]](self.streakinfo.bundle.minimapicon, self.team, 1, 1, 1);
@@ -1177,12 +1177,12 @@ function function_5733afc81f25372c(data) {
   return modifieddamage;
 }
 
-function function_1defeaf387d6e2a9(var_bb3f35f040f4f38b) {
+function function_1defeaf387d6e2a9(debugactivedvar) {
   level endon("<dev string:xda>");
   self endon("<dev string:xe8>");
   self.owner endon("<dev string:xf1>");
   self endon("<dev string:x101>");
-  debugactive = getdvarint(var_bb3f35f040f4f38b);
+  debugactive = getdvarint(debugactivedvar);
 
   while(true) {
     if(debugactive > 0) {

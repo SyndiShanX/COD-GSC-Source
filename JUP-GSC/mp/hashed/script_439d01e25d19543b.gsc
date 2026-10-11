@@ -78,7 +78,7 @@ function spawnpalfa() {
     fuel = spawnscriptable("brloot_gascan_palfa", chosen.origin, chosen.angles);
 
     if(isDefined(chosen.traincar)) {
-      fuel function_6e506f39f121ea8a(chosen.traincar, chosen.origin, chosen.angles);
+      fuel scriptable_setparententity(chosen.traincar, chosen.origin, chosen.angles);
     }
 
     fuel.count = 1;
@@ -180,7 +180,7 @@ function private function_4edcaac915edcd2e(heli) {
   heli.exfilpathstarted = 1;
   heli notify("exfil_path_started");
   info = namespace_e8fceb5cf6e8cdf8::function_730c660d9fc6808e(exfilplayers, 0, 0, 0, 1);
-  scripts\engine\utility::function_f3bb4f4911a1beb2("chopper_exfil", "exfil_players", exfilplayers, info);
+  scripts\engine\utility::callsharedfunc("chopper_exfil", "exfil_players", exfilplayers, info);
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_ejectalloccupants(heli);
   waitframe();
   struct = spawnStruct();

@@ -69,7 +69,7 @@ function function_440add0394f4a4a1(player) {
 
 #using_animtree("mp_vehicles_always_loaded");
 
-function function_c8ea1b99067c2fbc(vehicle, var_7558f98f3236963d, player, data) {
+function function_c8ea1b99067c2fbc(vehicle, newseatid, player, data) {
   if(istrue(vehicle.door_open)) {
     vehicle vehicleplayanim(%reb_com_veh8_techo_fl_door_close);
     vehicle.door_open = undefined;
@@ -86,7 +86,7 @@ function function_c8ea1b99067c2fbc(vehicle, var_7558f98f3236963d, player, data) 
   }
 }
 
-function function_46c7342379aa9bb6(vehicle, var_7558f98f3236963d, player, data) {
+function function_46c7342379aa9bb6(vehicle, newseatid, player, data) {
   if(!istrue(data.playerdisconnect)) {
     player.isdrivingvehicle = undefined;
   }

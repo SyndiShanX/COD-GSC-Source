@@ -364,7 +364,7 @@ function _contract_started(var_b6d035b4e3489246) {
   }
 }
 
-function _contract_complete(var_6f8af5eb76deac21) {}
+function _contract_complete(relevantinfostruct) {}
 
 function function_16dbd4fb39684d89() {
   self endon("activity_ended");
@@ -964,7 +964,7 @@ function function_3ca7c1eaca8ca4d() {
 
 function function_4f167fa913c22d5f() {
   level.var_aa61eff511d67c2e = getStruct("s5rr_escort_boss_encounter_spawn", "targetname");
-  var_d408500459e4e386 = function_f159c10d5cf8f0b4("s5rr_escort_boss_encounter_trigger", "targetname");
+  var_d408500459e4e386 = getnoentvolumearray("s5rr_escort_boss_encounter_trigger", "targetname");
 
   if(isarray(var_d408500459e4e386) && var_d408500459e4e386.size > 0) {
     foreach(var_4a822ab5e3f7c411 in var_d408500459e4e386) {
@@ -998,9 +998,9 @@ function function_94cd831ae1709ca8() {
   level.var_4afe965b997ab16f = getStruct("s5rr_outlast_encounter_spawn", "targetname");
   level.var_1309d4dcd226e8c9 = getStruct("s5rr_escort_encounter_spawn", "targetname");
   level.var_65a553350002cdb7 = getStruct("s5rr_sporecontrol_encounter_spawn", "targetname");
-  var_a37d05ccf09214fb = function_f159c10d5cf8f0b4("s5rr_outlast_encounter_trigger", "targetname");
-  var_c58f0171aee3aa3d = function_f159c10d5cf8f0b4("s5rr_escort_encounter_trigger", "targetname");
-  var_3c4319304269f8f3 = function_f159c10d5cf8f0b4("s5rr_sporecontrol_encounter_trigger", "targetname");
+  var_a37d05ccf09214fb = getnoentvolumearray("s5rr_outlast_encounter_trigger", "targetname");
+  var_c58f0171aee3aa3d = getnoentvolumearray("s5rr_escort_encounter_trigger", "targetname");
+  var_3c4319304269f8f3 = getnoentvolumearray("s5rr_sporecontrol_encounter_trigger", "targetname");
 
   if(isarray(var_a37d05ccf09214fb) && var_a37d05ccf09214fb.size > 0) {
     foreach(outlast_encounter_trigger in var_a37d05ccf09214fb) {
@@ -1215,7 +1215,7 @@ function function_b2082fcbe629a6f() {
   }
 
   flag_wait("ob_infil_completed");
-  filtered_volumes = function_f159c10d5cf8f0b4("s5rr_starting_platform_trigger", "targetname");
+  filtered_volumes = getnoentvolumearray("s5rr_starting_platform_trigger", "targetname");
 
   if(filtered_volumes.size > 0) {
     while(self istouching(filtered_volumes[0])) {

@@ -1092,7 +1092,7 @@ function function_daceac3b2fb6c12e() {
   return var_3772bbd994047cb6;
 }
 
-function function_fa0b69fcb7d0e9a4(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
+function function_fa0b69fcb7d0e9a4(pointtocheck, teamtocheck) {
   if(!istrue(level.var_b971bcaccc0cfef5)) {
     return 0;
   }
@@ -1101,13 +1101,13 @@ function function_fa0b69fcb7d0e9a4(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
   var_26d9c7e21efa1bdd = 0;
 
   foreach(volume in oob_volumes) {
-    if(!ispointinvolume(var_863c619037f3ac74, volume)) {
+    if(!ispointinvolume(pointtocheck, volume)) {
       continue;
     }
 
     volumeteam = game[volume.side];
 
-    if(!is_equal(volumeteam, var_da8cec9bce12f9cb)) {
+    if(!is_equal(volumeteam, teamtocheck)) {
       var_26d9c7e21efa1bdd = 1;
       break;
     }

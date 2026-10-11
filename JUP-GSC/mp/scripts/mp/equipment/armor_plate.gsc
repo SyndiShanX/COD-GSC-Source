@@ -141,8 +141,8 @@ function br_watch_armor_weapon() {
   self notify("br_try_armor_cancel");
 }
 
-function br_toggle_armor_allows(var_e12d78c11d85d9c2) {
-  if(var_e12d78c11d85d9c2) {
+function br_toggle_armor_allows(isusingarmor) {
+  if(isusingarmor) {
     val::set("using_armor", "melee", 0);
     val::set("using_armor", "killstreaks", 0);
     val::set("using_armor", "crate_use", 0);
@@ -154,7 +154,7 @@ function br_toggle_armor_allows(var_e12d78c11d85d9c2) {
     val::reset_all("using_armor");
   }
 
-  self.insertingarmorplate = var_e12d78c11d85d9c2;
+  self.insertingarmorplate = isusingarmor;
 }
 
 function br_insert_armor(streakinfo) {
@@ -236,9 +236,9 @@ function br_is_allowed_armor_insert() {
 }
 
 function br_should_continue_adding_armor() {
-  var_a5ea2300efaaa6a7 = is_player_gamepad_enabled() && self weaponswitchbuttonPressed();
+  isholdinggamepad = is_player_gamepad_enabled() && self weaponswitchbuttonPressed();
   hasarmorqueue = isDefined(self.armorqueued) && self.armorqueued > 0;
-  return var_a5ea2300efaaa6a7 || hasarmorqueue;
+  return isholdinggamepad || hasarmorqueue;
 }
 
 function br_add_player_commands() {

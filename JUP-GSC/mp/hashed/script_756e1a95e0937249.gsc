@@ -5,13 +5,13 @@
 
 #namespace playtest_logger;
 
-function function_223a972e008c4a09(var_2ea903451e753a5f, var_9dfaf49e38b7b10f, var_9113b547554386ba, var_e16ce54aa38571c0, var_1e9d08b8e40c246a, var_7eea86c60c0788e, var_b0b33580058b7f27, var_243ec5b0a130448e) {
-  if(!isDefined(var_243ec5b0a130448e)) {
-    var_243ec5b0a130448e = "PLAYTEST_LOGGER";
+function function_223a972e008c4a09(var_2ea903451e753a5f, var_9dfaf49e38b7b10f, var_9113b547554386ba, var_e16ce54aa38571c0, var_1e9d08b8e40c246a, var_7eea86c60c0788e, var_b0b33580058b7f27, logmsgprefix) {
+  if(!isDefined(logmsgprefix)) {
+    logmsgprefix = "PLAYTEST_LOGGER";
   }
 
   struct = spawnStruct();
-  struct.var_243ec5b0a130448e = var_243ec5b0a130448e;
+  struct.logmsgprefix = logmsgprefix;
   struct.var_2ea903451e753a5f = var_2ea903451e753a5f;
   struct.var_9dfaf49e38b7b10f = var_9dfaf49e38b7b10f;
   struct.var_9113b547554386ba = var_9113b547554386ba;
@@ -38,19 +38,19 @@ function loginfo(msg, var_c5dab79fa2079db9) {
   function_275c43d7dd5c74d6(msg, 1, var_c5dab79fa2079db9);
 }
 
-function function_275c43d7dd5c74d6(msg, loglevel, var_5808a2476b7bce9b) {
-  var_bf4eaca9064fa63f = function_d6a62191d9107d13(loglevel, var_5808a2476b7bce9b);
+function function_275c43d7dd5c74d6(msg, loglevel, loggerconfig) {
+  var_bf4eaca9064fa63f = function_d6a62191d9107d13(loglevel, loggerconfig);
 
   if(var_bf4eaca9064fa63f) {
-    logmsg = function_5c8554b7d485da82(msg, loglevel, var_5808a2476b7bce9b);
+    logmsg = function_5c8554b7d485da82(msg, loglevel, loggerconfig);
     logstring(logmsg);
   }
 
   if(!isDefined(logmsg)) {
-    logmsg = function_5c8554b7d485da82(msg, loglevel, var_5808a2476b7bce9b);
+    logmsg = function_5c8554b7d485da82(msg, loglevel, loggerconfig);
   }
 
-  if(loglevel == 3 || loglevel == 0 && istrue(getdvarint(var_5808a2476b7bce9b.var_b0b33580058b7f27, 0))) {
+  if(loglevel == 3 || loglevel == 0 && istrue(getdvarint(loggerconfig.var_b0b33580058b7f27, 0))) {
     assertmsg(logmsg);
     return;
   }
@@ -60,35 +60,35 @@ function function_275c43d7dd5c74d6(msg, loglevel, var_5808a2476b7bce9b) {
   }
 }
 
-function private function_5c8554b7d485da82(msg, loglevel, var_5808a2476b7bce9b) {
+function private function_5c8554b7d485da82(msg, loglevel, loggerconfig) {
   if(loglevel == 3) {
-    return (var_5808a2476b7bce9b.var_243ec5b0a130448e + "ASSERT: " + msg);
+    return (loggerconfig.logmsgprefix + "ASSERT: " + msg);
   } else if(loglevel == 1) {
-    return (var_5808a2476b7bce9b.var_243ec5b0a130448e + "INFO: " + msg);
+    return (loggerconfig.logmsgprefix + "INFO: " + msg);
   } else if(loglevel == 0) {
-    return (var_5808a2476b7bce9b.var_243ec5b0a130448e + "ERROR: " + msg);
+    return (loggerconfig.logmsgprefix + "ERROR: " + msg);
   } else if(loglevel == 2) {
-    return (var_5808a2476b7bce9b.var_243ec5b0a130448e + "WARNING: " + msg);
+    return (loggerconfig.logmsgprefix + "WARNING: " + msg);
   }
 
-  return var_5808a2476b7bce9b.var_243ec5b0a130448e + " [unknown log level]: ";
+  return loggerconfig.logmsgprefix + " [unknown log level]: ";
 }
 
-function private function_d6a62191d9107d13(loglevel, var_5808a2476b7bce9b) {
-  if(!istrue(getdvarint(var_5808a2476b7bce9b.var_2ea903451e753a5f, 0))) {
+function private function_d6a62191d9107d13(loglevel, loggerconfig) {
+  if(!istrue(getdvarint(loggerconfig.var_2ea903451e753a5f, 0))) {
     return false;
   }
 
-  if(istrue(getdvarint(var_5808a2476b7bce9b.var_7eea86c60c0788e, 0))) {
+  if(istrue(getdvarint(loggerconfig.var_7eea86c60c0788e, 0))) {
     return true;
   } else if(loglevel == 3) {
-    return istrue(getdvarint(var_5808a2476b7bce9b.var_1e9d08b8e40c246a));
+    return istrue(getdvarint(loggerconfig.var_1e9d08b8e40c246a));
   } else if(loglevel == 1) {
-    return istrue(getdvarint(var_5808a2476b7bce9b.var_9dfaf49e38b7b10f, 0));
+    return istrue(getdvarint(loggerconfig.var_9dfaf49e38b7b10f, 0));
   } else if(loglevel == 0) {
-    return istrue(getdvarint(var_5808a2476b7bce9b.var_e16ce54aa38571c0, 0));
+    return istrue(getdvarint(loggerconfig.var_e16ce54aa38571c0, 0));
   } else if(loglevel == 2) {
-    return istrue(getdvarint(var_5808a2476b7bce9b.var_9113b547554386ba, 0));
+    return istrue(getdvarint(loggerconfig.var_9113b547554386ba, 0));
   }
 
   return false;

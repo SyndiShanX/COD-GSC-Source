@@ -37,7 +37,7 @@ function function_18646af290fbfbb2() {
 
   if(isDefined(level.headgeardata) && utility::issharedfuncdefined("headgear", "registerHeadGear")) {
     headgeardata = spawnStruct();
-    headgeardata.var_4fe5d2ab2f7dbd0 = &hashelmet;
+    headgeardata.hasheadgearfunc = &hashelmet;
     headgeardata.var_8965dea27a03f00f = &function_a1207d6155a4cb21;
     headgeardata.var_10b068badc49b1ad = &function_820310353aa408e;
     headgeardata.var_d2148115f2c3c399 = &function_d036366985435d3;
@@ -48,8 +48,8 @@ function function_18646af290fbfbb2() {
     headgeardata.var_fe0fd9391666371 = &function_9ad6194c61c4bd34;
     headgeardata.var_a7d8d38f4018a344 = &function_da78138ef883afb9;
     headgeardata.var_4aeed0bec3628793 = &function_d01dc4dc9edc024;
-    headgeardata.var_2cb986fd5f1717f0 = &function_2a823033fec9c3a3;
-    headgeardata.var_573fe16545e70f6a = &function_47f53709b7a29a77;
+    headgeardata.preremovefunc = &function_2a823033fec9c3a3;
+    headgeardata.onremovefunc = &function_47f53709b7a29a77;
     headgeardata.var_bb61027a51ec1e05 = &function_99410e7ff54d683c;
     [[utility::getsharedfunc("headgear", "registerHeadGear")]]("helmet", headgeardata);
   }
@@ -133,12 +133,12 @@ function getscriptablename(var_b14a276853a7becd) {
 
 function modifydamage(damage, attacker, objweapon, smeansofdeath) {
   outdamage = damage;
-  var_e7ec701163e1b30c = level.helmetdata.var_692dbeea010dcd1;
+  clampeddamage = level.helmetdata.var_692dbeea010dcd1;
   damagethreshold = level.helmetdata.threshold;
 
   if(function_91b88df2883c5dd(objweapon) && function_d9824ece84e7fe6(smeansofdeath)) {
     if(damage >= damagethreshold) {
-      outdamage = var_e7ec701163e1b30c;
+      outdamage = clampeddamage;
       self.var_5698e367753e03ba -= 1;
     }
   }

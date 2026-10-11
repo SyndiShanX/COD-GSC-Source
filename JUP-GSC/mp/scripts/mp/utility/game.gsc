@@ -1029,7 +1029,7 @@ function doesmodesupportplayerteamchoice() {
     return (allowed > 0);
   }
 
-  return istrue(level.gametypebundle.var_71b14066991700ec);
+  return istrue(level.gametypebundle.allowteamchoice);
 }
 
 function allowclasschoice() {
@@ -1427,7 +1427,7 @@ function getmatchrulesdatawithteamandindex(category, team, index, field, arg1, a
 }
 
 function isspawnprotected() {
-  return !function_483cc81bff18273b(self) && isDefined(self.spawntime) && isDefined(level.killstreakspawnshielddelayms) && gettime() < self.spawntime + level.killstreakspawnshielddelayms && !istrue(self.clearspawnprotection);
+  return !issimulationplayer(self) && isDefined(self.spawntime) && isDefined(level.killstreakspawnshielddelayms) && gettime() < self.spawntime + level.killstreakspawnshielddelayms && !istrue(self.clearspawnprotection);
 }
 
 function clearspawnprotection() {
@@ -1447,7 +1447,7 @@ function getbasegametype() {
 }
 
 function function_f6bad1d33ad22078() {
-  if(level.var_ec2fb549b15ad827) {
+  if(level.leagueplaymatch) {
     return "mp_ranked";
   }
 

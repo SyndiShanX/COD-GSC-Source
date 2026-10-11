@@ -88,7 +88,7 @@ function function_b7d6db4ac5457a99() {
   fistsweapon = makeweapon("iw9_me_fists_mp");
   scripts\cp_mp\utility\inventory_utility::_takeweapon(fistsweapon);
 
-  if(function_f3bb4f4911a1beb2("escort", "isDogZombie")) {
+  if(callsharedfunc("escort", "isDogZombie")) {
     var_e3438b8cb9c2c515 = makeweapon("iw9_me_fists_mp_zmb_dog");
   } else {
     var_e3438b8cb9c2c515 = makeweapon("iw9_me_fists_mp_mutant");

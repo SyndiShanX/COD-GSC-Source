@@ -78,8 +78,8 @@ function main(model, type, classname) {
   }
 
   build_husk(model, huskmodel, husktype, 0);
-  function_2660787ca33cf457(classname, "tag_door_front_left", ["tag_window_front_left", "tag_mirror_left"]);
-  function_2660787ca33cf457(classname, "tag_door_front_right", ["tag_window_front_right", "tag_mirror_right"]);
+  build_dependentparts(classname, "tag_door_front_left", ["tag_window_front_left", "tag_mirror_left"]);
+  build_dependentparts(classname, "tag_door_front_right", ["tag_window_front_right", "tag_mirror_right"]);
   function_2cf37d073c6bde84(classname, "headlight_front_left", "tag_light_front_left", "headlights");
   function_2cf37d073c6bde84(classname, "headlight_front_right", "tag_light_front_right", "headlights");
   function_2cf37d073c6bde84(classname, "taillight_back_left", "tag_light_back_left", "headlights");
@@ -190,15 +190,15 @@ function setanims() {
   positions[7].var_70aa9eaf339ddb20 = 1;
   positions[8].var_70aa9eaf339ddb20 = 1;
   positions[8].do_not_unload = 1;
-  positions[0].var_a06d61eb83f02f4 = 0;
-  positions[1].var_a06d61eb83f02f4 = 0;
-  positions[2].var_a06d61eb83f02f4 = 1;
-  positions[3].var_a06d61eb83f02f4 = 1;
-  positions[4].var_a06d61eb83f02f4 = 1;
-  positions[5].var_a06d61eb83f02f4 = 1;
-  positions[6].var_a06d61eb83f02f4 = 1;
-  positions[7].var_a06d61eb83f02f4 = 1;
-  positions[8].var_a06d61eb83f02f4 = 0;
+  positions[0].canmeleeinvehicle = 0;
+  positions[1].canmeleeinvehicle = 0;
+  positions[2].canmeleeinvehicle = 1;
+  positions[3].canmeleeinvehicle = 1;
+  positions[4].canmeleeinvehicle = 1;
+  positions[5].canmeleeinvehicle = 1;
+  positions[6].canmeleeinvehicle = 1;
+  positions[7].canmeleeinvehicle = 1;
+  positions[8].canmeleeinvehicle = 0;
   return positions;
 }
 

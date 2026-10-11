@@ -29,6 +29,6 @@ function init() {
 }
 
 function function_76db348491610f8a(autodrone) {
-  autodrone function_5226227bce83ebe9(3, autodrone.team);
+  autodrone setentityhudoutlinedata(3, autodrone.team);
   return autodrone;
 }

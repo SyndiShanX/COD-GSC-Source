@@ -56,7 +56,7 @@ function private initteamdata() {
 }
 
 function private function_c43d309bae165772() {
-  function_3dcc6118a214a88d();
+  destroytargets();
   level.var_84bb9844c815fe9e = [];
   scripts\engine\scriptable::scriptable_adddamagedcallback(&function_bce9936c9ca7e10b);
 
@@ -186,8 +186,8 @@ function function_2a5c422870861dd9(player) {
     squadmembers = player getsquadmembers(undefined, 1);
     var_a6aa6ac57e10810c = scripts\mp\utility\player::getplayersinradius(player.origin, 500);
 
-    foreach(var_49be45f83be0135e in var_a6aa6ac57e10810c) {
-      var_49be45f83be0135e earthquakeforplayer(0.5, 1, player.origin, 500);
+    foreach(playernear in var_a6aa6ac57e10810c) {
+      playernear earthquakeforplayer(0.5, 1, player.origin, 500);
     }
 
     foreach(squadmember in squadmembers) {
@@ -223,7 +223,7 @@ function private function_26cb86e6977b1dd6() {
   }
 
   level.var_adff83a13b355d74 = var_adff83a13b355d74;
-  function_3dcc6118a214a88d();
+  destroytargets();
   level notify("stopTargetsDeathWatcher");
 
   if(isDefined(level.var_1ed07ecae329d02f) && isalive(level.var_1ed07ecae329d02f)) {
@@ -235,7 +235,7 @@ function private function_26cb86e6977b1dd6() {
   level.var_d4b1a97a578504fe = undefined;
 }
 
-function private function_3dcc6118a214a88d() {
+function private destroytargets() {
   if(isDefined(level.var_84bb9844c815fe9e)) {
     foreach(target in level.var_84bb9844c815fe9e) {
       if(isDefined(target)) {
@@ -390,7 +390,7 @@ function private function_6eca18484fcc4e39() {
     function_7ac8ae8bc8ac8afc(killer);
   }
 
-  function_3dcc6118a214a88d();
+  destroytargets();
   level.var_339cbb5b3ddcd140 = 0;
   level.var_1ed07ecae329d02f = undefined;
   level notify("targetComplete");

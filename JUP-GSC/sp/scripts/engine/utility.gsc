@@ -807,7 +807,7 @@ function waittill_any_return_no_endon_death(string1, string2, string3, string4, 
   return msg;
 }
 
-function function_5adca43f839a3cce(string_array) {
+function waittill_any_in_array(string_array) {
   assertex(string_array.size > 0, "Array must contain at least one string.");
 
   for(i = 0; i < string_array.size - 1; i++) {
@@ -1758,7 +1758,7 @@ function function_ef5098111fa4ae2c(flags) {
   }
 }
 
-function function_254e355bdfc30d6c(flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag8) {
+function flag_waitopen_any(flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag8) {
   array = [flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag8];
   function_ef5098111fa4ae2c(array);
 }
@@ -1935,18 +1935,18 @@ function getStruct(name, type) {
 
   if(array.size > 1) {
     if(isDefined(array[0]) && isDefined(array[0].origin)) {
-      var_f1cd96ee2e0d7471 = "" + array[0].origin;
+      originstr1 = "" + array[0].origin;
     } else {
-      var_f1cd96ee2e0d7471 = "<UNKNOWN>";
+      originstr1 = "<UNKNOWN>";
     }
 
     if(isDefined(array[1]) && isDefined(array[1].origin)) {
-      var_f1cd93ee2e0d6dd8 = "" + array[1].origin;
+      originstr2 = "" + array[1].origin;
     } else {
-      var_f1cd93ee2e0d6dd8 = "<UNKNOWN>";
+      originstr2 = "<UNKNOWN>";
     }
 
-    assertmsg("getstruct used for more than one struct of type '" + type + "' called '" + name + "'. Two of the conflicting structs can be found at " + var_f1cd96ee2e0d7471 + " and " + var_f1cd93ee2e0d6dd8);
+    assertmsg("getstruct used for more than one struct of type '" + type + "' called '" + name + "'. Two of the conflicting structs can be found at " + originstr1 + " and " + originstr2);
     return undefined;
   }
 
@@ -2079,11 +2079,11 @@ function init_struct_class() {
   level.struct_class_names["script_linkname"] = [];
   level.struct_class_names["variantname"] = [];
   level.struct_exploders = [];
-  level.var_d5043478289af856 = [];
-  level.var_f99b1d319e65854c = [];
+  level.struct_fakeactors = [];
+  level.a_scene_names = [];
   level.var_a0b4eb1703be349a = [];
   filterfunc = level.struct_filter;
-  var_c276b6aa8eb8993b = isDefined(filterfunc);
+  hasfilterfunc = isDefined(filterfunc);
 
   foreach(struct in level.struct) {
     if(istrue(struct.var_d63b146db6138e15)) {
@@ -2094,7 +2094,7 @@ function init_struct_class() {
       add_smartobject_point(struct);
     }
 
-    if(var_c276b6aa8eb8993b && ![[filterfunc]](struct)) {
+    if(hasfilterfunc && ![[filterfunc]](struct)) {
       continue;
     }
 
@@ -2107,11 +2107,11 @@ function init_struct_class() {
     }
 
     if(isDefined(struct.script_fakeactor_node)) {
-      level.var_d5043478289af856[level.var_d5043478289af856.size] = struct;
+      level.struct_fakeactors[level.struct_fakeactors.size] = struct;
     }
 
     if(isDefined(struct.script_scenescriptbundle)) {
-      level.var_f99b1d319e65854c[level.var_f99b1d319e65854c.size] = struct.script_scenescriptbundle;
+      level.a_scene_names[level.a_scene_names.size] = struct.script_scenescriptbundle;
       level.var_a0b4eb1703be349a[level.var_a0b4eb1703be349a.size] = struct;
     }
 
@@ -2331,20 +2331,20 @@ function thread_on_notify_no_endon_death(notifystring, function, param1, param2,
   childthread thread_on_notify_proc(notifystring, function, param1, param2, ent);
 }
 
-function thread_on_notify(notifystring, function, param1, param2, ent, endonentities, var_f63c23b8ec55b127) {
+function thread_on_notify(notifystring, function, param1, param2, ent, endonentities, endonmessages) {
   self endon("death");
 
-  if(isDefined(endonentities) && isDefined(var_f63c23b8ec55b127)) {
+  if(isDefined(endonentities) && isDefined(endonmessages)) {
     if(!isarray(endonentities)) {
       endonentities = [endonentities];
     }
 
-    if(!isarray(var_f63c23b8ec55b127)) {
-      var_f63c23b8ec55b127 = [var_f63c23b8ec55b127];
+    if(!isarray(endonmessages)) {
+      endonmessages = [endonmessages];
     }
 
     foreach(entity in endonentities) {
-      foreach(message in var_f63c23b8ec55b127) {
+      foreach(message in endonmessages) {
         entity endon(message);
       }
     }
@@ -2373,20 +2373,20 @@ function thread_on_notify_proc(notifystring, function, param1, param2, ent) {
   ent thread[[function]]();
 }
 
-function function_fb7b452e8dd1dddc(notifystring, function, params, ent, endonentities, var_f63c23b8ec55b127) {
+function function_fb7b452e8dd1dddc(notifystring, function, params, ent, endonentities, endonmessages) {
   self endon("death");
 
-  if(isDefined(endonentities) && isDefined(var_f63c23b8ec55b127)) {
+  if(isDefined(endonentities) && isDefined(endonmessages)) {
     if(!isarray(endonentities)) {
       endonentities = [endonentities];
     }
 
-    if(!isarray(var_f63c23b8ec55b127)) {
-      var_f63c23b8ec55b127 = [var_f63c23b8ec55b127];
+    if(!isarray(endonmessages)) {
+      endonmessages = [endonmessages];
     }
 
     foreach(entity in endonentities) {
-      foreach(message in var_f63c23b8ec55b127) {
+      foreach(message in endonmessages) {
         entity endon(message);
       }
     }
@@ -2441,7 +2441,7 @@ function delaycall(timer, func, param1, param2, param3, param4, param5, param6, 
   thread delaycall_proc(func, undefined, timer, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
 }
 
-function function_ad9433aab9fcdf04(timer, endonevent, func, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12) {
+function delaycallendon(timer, endonevent, func, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12) {
   thread delaycall_proc(func, endonevent, timer, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
 }
 
@@ -2893,13 +2893,13 @@ function array_slice(array, startindex, endindex) {
     return array;
   }
 
-  var_a8763f33264c3988 = [];
+  slicedarray = [];
 
   for(index = startindex; index < endindex; index++) {
-    var_a8763f33264c3988[var_a8763f33264c3988.size] = array[index];
+    slicedarray[slicedarray.size] = array[index];
   }
 
-  return var_a8763f33264c3988;
+  return slicedarray;
 }
 
 function array_contains(array, compare) {
@@ -3228,7 +3228,7 @@ function function_427c36d659d2f67(array, var_d1f4456463c5272d, shouldthread) {
   }
 }
 
-function function_ec65095e6f342856(array, var_d1f4456463c5272d, var_818871783e92735e, var_6fd8f67384dda4d0, var_8faa885b79ec7917, shouldthread) {
+function function_ec65095e6f342856(array, var_d1f4456463c5272d, var_818871783e92735e, var_6fd8f67384dda4d0, iterationtimeinseconds, shouldthread) {
   if(!isDefined(var_818871783e92735e)) {
     var_818871783e92735e = undefined;
   }
@@ -3237,8 +3237,8 @@ function function_ec65095e6f342856(array, var_d1f4456463c5272d, var_818871783e92
     var_6fd8f67384dda4d0 = undefined;
   }
 
-  if(!isDefined(var_8faa885b79ec7917)) {
-    var_8faa885b79ec7917 = 5;
+  if(!isDefined(iterationtimeinseconds)) {
+    iterationtimeinseconds = 5;
   }
 
   if(!isDefined(shouldthread)) {
@@ -3254,7 +3254,7 @@ function function_ec65095e6f342856(array, var_d1f4456463c5272d, var_818871783e92
   }
 
   var_344b31701913dda0 = array.size;
-  var_609bfd613f331f2b = max(var_8faa885b79ec7917 / level.framedurationseconds, 1);
+  var_609bfd613f331f2b = max(iterationtimeinseconds / level.framedurationseconds, 1);
   var_9e5988ae3851a115 = max(var_344b31701913dda0 / var_609bfd613f331f2b, 1);
   var_9e5988ae3851a115 = ceil(var_9e5988ae3851a115);
   var_dce766d46ccbf3d4 = 0;
@@ -3452,18 +3452,18 @@ function random_weighted(array, weights) {
   }
 
   weight = randomint(totalweight);
-  var_f193d5e311236e6c = undefined;
+  chosenvalue = undefined;
 
   foreach(i, value in array) {
     if(weight < weights[i]) {
-      var_f193d5e311236e6c = value;
+      chosenvalue = value;
       break;
     }
 
     weight -= weights[i];
   }
 
-  return var_f193d5e311236e6c;
+  return chosenvalue;
 }
 
 function random_weight_sorted(array) {
@@ -4463,7 +4463,7 @@ function fileprint_launcher_start_file()
           if(linknames.size == 1) {
             return getnodearray(linknames[0], "script_linkname");
           } else if(linknames.size > 1) {
-            return function_36ed24909dabb916(linknames, "script_linkname");
+            return getnodesfromvalues(linknames, "script_linkname");
           }
         }
 
@@ -4731,7 +4731,7 @@ function fileprint_launcher_start_file()
         }
       }
 
-      function function_b4b04de87729a6f3(delay) {
+      function delete_after_delay(delay) {
         wait delay;
 
         if(isDefined(self)) {
@@ -4775,8 +4775,8 @@ function fileprint_launcher_start_file()
         return scripts\common\exploder::get_exploder_array_proc(msg);
       }
 
-      function ter_op(var_9cb951de1a571d32, true_value, false_value) {
-        if(var_9cb951de1a571d32) {
+      function ter_op(statement, true_value, false_value) {
+        if(statement) {
           return true_value;
         }
 
@@ -4894,10 +4894,10 @@ function fileprint_launcher_start_file()
         player clearadditionalstreampos();
 
         if(isDefined(altposition)) {
-          player function_670863fc4008c3d8(altposition);
+          player setadditionalstreamposuntilcleared(altposition);
         }
 
-        player function_bc667001f9dd3808(position);
+        player predictstreamposuntilcleared(position);
 
         if(duration > 0) {
           wait duration;
@@ -5225,7 +5225,7 @@ function fileprint_launcher_start_file()
         thread delaythread_proc(func, undefined, timer, param1, param2, param3, param4, param5, param6, param7);
       }
 
-      function function_f9a207358d70923c(timer, endonevent, func, param1, param2, param3, param4, param5, param6, param7) {
+      function delaythreadendon(timer, endonevent, func, param1, param2, param3, param4, param5, param6, param7) {
         thread delaythread_proc(func, endonevent, timer, param1, param2, param3, param4, param5, param6, param7);
       }
 
@@ -5549,9 +5549,9 @@ function fileprint_launcher_start_file()
 
       function getbestcovermultinodetype(node) {
         assert(isai(self));
-        var_a4d325774cc3387d = node getvalidcovermultinodetypes();
+        nodetypelist = node getvalidcovermultinodetypes();
 
-        if(var_a4d325774cc3387d.size <= 0) {
+        if(nodetypelist.size <= 0) {
           return undefined;
         }
 
@@ -5568,12 +5568,12 @@ function fileprint_launcher_start_file()
           yaw_diff = angleclamp180(var_72c1ba1a734c19e6[1] - node.angles[1]);
         }
 
-        foreach(var_af80a5e00a28ca34 in var_a4d325774cc3387d) {
-          switch (var_af80a5e00a28ca34) {
+        foreach(nodetypeit in nodetypelist) {
+          switch (nodetypeit) {
             case #"hash_78b110033ccb68b0":
             case #"hash_c3b74422dec48736":
               if(abs(yaw_diff) < 30) {
-                return var_af80a5e00a28ca34;
+                return nodetypeit;
               }
 
               break;
@@ -5597,7 +5597,7 @@ function fileprint_launcher_start_file()
           }
         }
 
-        nodetype = var_a4d325774cc3387d[0];
+        nodetype = nodetypelist[0];
 
         switch (nodetype) {
           case #"hash_55ed607005f12d49":
@@ -5653,8 +5653,8 @@ function fileprint_launcher_start_file()
         dist = distance(self.origin, point);
 
         if(dist > 3) {
-          var_e062b0dfb1625d77 = asin(-3 / dist);
-          yaw -= var_e062b0dfb1625d77;
+          anglefudge = asin(-3 / dist);
+          yaw -= anglefudge;
         }
 
         yaw = angleclamp180(yaw);
@@ -5682,8 +5682,8 @@ function fileprint_launcher_start_file()
         dist = distance(self.origin, point);
 
         if(dist > 3) {
-          var_e062b0dfb1625d77 = asin(-3 / dist);
-          yaw -= var_e062b0dfb1625d77;
+          anglefudge = asin(-3 / dist);
+          yaw -= anglefudge;
         }
 
         yaw = angleclamp180(yaw);
@@ -5694,8 +5694,8 @@ function fileprint_launcher_start_file()
         var_2f2845d474ecddd0 = spot - self.origin;
         var_11f7d776431edc42 = rotatevectorinverted(var_2f2845d474ecddd0, self.angles);
         yaw = vectortoyaw(var_11f7d776431edc42);
-        var_bfb998964a6ca671 = angleclamp180(yaw);
-        return var_bfb998964a6ca671;
+        yaw_clamped = angleclamp180(yaw);
+        return yaw_clamped;
       }
 
       function getaimpitchtopoint3d(point) {
@@ -5703,8 +5703,8 @@ function fileprint_launcher_start_file()
         dist = distance(self.origin, point);
 
         if(dist > 3) {
-          var_e062b0dfb1625d77 = asin(-3 / dist);
-          pitch -= var_e062b0dfb1625d77;
+          anglefudge = asin(-3 / dist);
+          pitch -= anglefudge;
         }
 
         pitch = angleclamp180(pitch);
@@ -5900,7 +5900,7 @@ function fileprint_launcher_start_file()
         return msg;
       }
 
-      function function_665d474ff040b446(flags) {
+      function flag_wait_any_array(flags) {
         assertex(isarray(flags), "flag_wait_any_array needs an array of flag names passed in.");
         flags = array_removeundefined(flags);
 
@@ -5911,12 +5911,12 @@ function fileprint_launcher_start_file()
             }
           }
 
-          level function_5adca43f839a3cce(flags);
+          level waittill_any_in_array(flags);
         }
       }
 
       function function_51ffc85dd7ebde09(flags) {
-        return function_665d474ff040b446(flags);
+        return flag_wait_any_array(flags);
       }
 
       function flag_wait_any(flag1, flag2, flag3, flag4, flag5, flag6) {
@@ -6013,8 +6013,8 @@ function fileprint_launcher_start_file()
           }
 
           timeremaining = timerms - curr_time - start_time;
-          var_5c0d5bb3cb09262e = timeremaining / 1000;
-          internal_wait_for_any_flag_or_time_elapses(array, var_5c0d5bb3cb09262e);
+          timeremainingsecs = timeremaining / 1000;
+          internal_wait_for_any_flag_or_time_elapses(array, timeremainingsecs);
         }
       }
 
@@ -6138,8 +6138,8 @@ function fileprint_launcher_start_file()
           }
 
           timeremaining = timerms - gettime() - start_time;
-          var_5c0d5bb3cb09262e = timeremaining / 1000;
-          wait_for_flag_or_time_elapses(flagname, var_5c0d5bb3cb09262e);
+          timeremainingsecs = timeremaining / 1000;
+          wait_for_flag_or_time_elapses(flagname, timeremainingsecs);
         }
       }
 
@@ -6344,13 +6344,13 @@ function fileprint_launcher_start_file()
         return isDefined(level.scr_anim["generic"][anime]);
       }
 
-      function function_6d41ac1c3d718a62(anime, ent) {
+      function getanim_starts(anime, ent) {
         startpositions = [];
 
         if(scripts\common\anim::function_f1e7ee8ddeece062(anime)) {
           foreach(animation in level.scr_anim[ent.animname][anime]) {
-            var_4f51ef0bd97a4707 = scripts\common\anim::function_56bd620e57a834af(anime, ent.animname, animation);
-            scripts\common\anim::anim_first_frame_solo(ent, var_4f51ef0bd97a4707);
+            newanime = scripts\common\anim::function_56bd620e57a834af(anime, ent.animname, animation);
+            scripts\common\anim::anim_first_frame_solo(ent, newanime);
             startpositions[startpositions.size] = ent.origin;
           }
         } else {
@@ -6473,9 +6473,9 @@ function fileprint_launcher_start_file()
         }
 
         numer = d1343 * d4321 - d1321 * d4343;
-        var_360120041de2a656 = numer / denom;
-        mub = (d1343 + d4321 * var_360120041de2a656) / d4343;
-        pa = p1 + var_360120041de2a656 * p21;
+        mua = numer / denom;
+        mub = (d1343 + d4321 * mua) / d4343;
+        pa = p1 + mua * p21;
         pb = p3 + mub * p43;
         var_770e3bedd2b80d9b = [pa, pb, distance(pa, pb)];
         return var_770e3bedd2b80d9b;
@@ -6484,12 +6484,12 @@ function fileprint_launcher_start_file()
       function closestdistancebetweensegments(p1, p2, p3, p4) {
         pdir = p2 - p1;
         qdir = p4 - p3;
-        var_373e28595f2bdbcc = p1 - p3;
+        segdelta = p1 - p3;
         pdp = vectordot(pdir, pdir);
         pdq = vectordot(pdir, qdir);
         qdq = vectordot(qdir, qdir);
-        pdw = vectordot(pdir, var_373e28595f2bdbcc);
-        qdw = vectordot(qdir, var_373e28595f2bdbcc);
+        pdw = vectordot(pdir, segdelta);
+        qdw = vectordot(qdir, segdelta);
         commondenominator = pdp * qdq - pdq * pdq;
         denominatorp = commondenominator;
         denominatorq = commondenominator;
@@ -6664,42 +6664,42 @@ function fileprint_launcher_start_file()
         }
 
         if(isDefined(notetrackend)) {
-          var_47b4bdc915cff70d = getnotetracktimes(anime, notetrackend)[0];
+          animendfrac = getnotetracktimes(anime, notetrackend)[0];
 
-          if(!isDefined(var_47b4bdc915cff70d)) {
+          if(!isDefined(animendfrac)) {
             assertmsg("End note track, " + notetrackend + ", does not exist in the animation");
-            var_47b4bdc915cff70d = 1;
+            animendfrac = 1;
           }
         } else {
-          var_47b4bdc915cff70d = 1;
+          animendfrac = 1;
         }
 
-        motionwarpwithtimes(anime, targetpos, targetangles, animstartfrac, var_47b4bdc915cff70d, duration, updateanimrate);
+        motionwarpwithtimes(anime, targetpos, targetangles, animstartfrac, animendfrac, duration, updateanimrate);
       }
 
-      function motionwarpwithtimes(anime, targetpos, targetangles, animstartfrac, var_47b4bdc915cff70d, duration, updateanimrate) {
+      function motionwarpwithtimes(anime, targetpos, targetangles, animstartfrac, animendfrac, duration, updateanimrate) {
         if(!isDefined(updateanimrate)) {
           updateanimrate = 1;
         }
 
-        var_993a8f9635e274cf = getangledelta(anime, animstartfrac, var_47b4bdc915cff70d);
-        var_292f5d5519d832bf = getmovedelta(anime, animstartfrac, var_47b4bdc915cff70d);
-        var_292f5d5519d832bf = rotatevector(var_292f5d5519d832bf, (0, targetangles[1] - var_993a8f9635e274cf, 0));
-        animstartpos = targetpos - var_292f5d5519d832bf;
-        var_417bd54c6700695b = targetangles[1] - var_993a8f9635e274cf;
-        animstartangles = (targetangles[0], var_417bd54c6700695b, targetangles[2]);
+        animyawdelta = getangledelta(anime, animstartfrac, animendfrac);
+        animtranslationdelta = getmovedelta(anime, animstartfrac, animendfrac);
+        animtranslationdelta = rotatevector(animtranslationdelta, (0, targetangles[1] - animyawdelta, 0));
+        animstartpos = targetpos - animtranslationdelta;
+        animstartyaw = targetangles[1] - animyawdelta;
+        animstartangles = (targetangles[0], animstartyaw, targetangles[2]);
         animrate = 1;
         var_94fbe2a18e7f59b3 = length(targetpos - self.origin);
 
         if(updateanimrate && var_94fbe2a18e7f59b3 > 0) {
-          animrate = length(var_292f5d5519d832bf) / var_94fbe2a18e7f59b3;
+          animrate = length(animtranslationdelta) / var_94fbe2a18e7f59b3;
           animrate = clamp(animrate, 0.5, 2);
           self aisetanimrate(anime, animrate);
         }
 
         if(!isDefined(duration)) {
           animlength = getanimlength(anime) / animrate;
-          duration = int((var_47b4bdc915cff70d - animstartfrac) * animlength * 1000);
+          duration = int((animendfrac - animstartfrac) * animlength * 1000);
         }
 
         if(duration < 50) {
@@ -6710,10 +6710,10 @@ function fileprint_launcher_start_file()
         return animrate;
       }
 
-      function function_df956d52bae0b61d(anime, parentent, tag, localtargetpos, var_b6c5de4898b7f63b, animstartfrac, var_47b4bdc915cff70d, duration, updateanimrate) {
+      function function_df956d52bae0b61d(anime, parentent, tag, localtargetpos, var_b6c5de4898b7f63b, animstartfrac, animendfrac, duration, updateanimrate) {
         assert(isDefined(anime));
         assert(isDefined(animstartfrac) && animstartfrac >= 0);
-        assert(isDefined(var_47b4bdc915cff70d) && var_47b4bdc915cff70d <= 1);
+        assert(isDefined(animendfrac) && animendfrac <= 1);
         assert(isDefined(parentent));
         assert(isDefined(localtargetpos));
         assert(isDefined(var_b6c5de4898b7f63b));
@@ -6733,29 +6733,29 @@ function fileprint_launcher_start_file()
 
         worldtargetpos = linkpos + rotatevector(localtargetpos, linkang);
         var_8248003e7165c71e = combineangles(var_b6c5de4898b7f63b, linkang);
-        var_5201fba058886642 = getangledelta3d(anime, animstartfrac, var_47b4bdc915cff70d);
-        var_d782b8f3a2e29390 = getmovedelta(anime, animstartfrac, var_47b4bdc915cff70d);
+        var_5201fba058886642 = getangledelta3d(anime, animstartfrac, animendfrac);
+        animposdelta = getmovedelta(anime, animstartfrac, animendfrac);
         var_f7bd065066febebf = invertangles(var_5201fba058886642);
         var_f03bd42b04ee3dca = combineangles(var_8248003e7165c71e, var_f7bd065066febebf);
-        var_ca6be8926624acbf = rotatevector(-1 * var_d782b8f3a2e29390, var_f7bd065066febebf);
+        var_ca6be8926624acbf = rotatevector(-1 * animposdelta, var_f7bd065066febebf);
         var_ca86acbc27e4a31c = rotatevector(var_ca6be8926624acbf, var_8248003e7165c71e);
-        var_c9f74f2ba493d174 = worldtargetpos + var_ca86acbc27e4a31c;
+        worldanimstartpos = worldtargetpos + var_ca86acbc27e4a31c;
         var_7b1c8fcebb9c392d = self.origin - linkpos;
-        var_ed38213b0a9af604 = invertangles(linkang);
-        localtargetpos = rotatevector(var_7b1c8fcebb9c392d, var_ed38213b0a9af604);
-        var_b6c5de4898b7f63b = combineangles(self.angles, var_ed38213b0a9af604);
+        invlinkang = invertangles(linkang);
+        localtargetpos = rotatevector(var_7b1c8fcebb9c392d, invlinkang);
+        var_b6c5de4898b7f63b = combineangles(self.angles, invlinkang);
         animrate = 1;
         var_94fbe2a18e7f59b3 = length(worldtargetpos - self.origin);
 
         if(updateanimrate && var_94fbe2a18e7f59b3 > 0) {
-          animrate = length(var_d782b8f3a2e29390) / var_94fbe2a18e7f59b3;
+          animrate = length(animposdelta) / var_94fbe2a18e7f59b3;
           animrate = clamp(animrate, 0.5, 2);
           self aisetanimrate(anime, animrate);
         }
 
         if(!isDefined(duration)) {
           animlength = getanimlength(anime) / animrate;
-          duration = int((var_47b4bdc915cff70d - animstartfrac) * animlength * 1000);
+          duration = int((animendfrac - animstartfrac) * animlength * 1000);
         }
 
         if(duration < 50) {
@@ -6763,7 +6763,7 @@ function fileprint_launcher_start_file()
         }
 
         self linktomoveoffset(parentent, tag, localtargetpos, var_b6c5de4898b7f63b);
-        self motionwarpwithanim(var_c9f74f2ba493d174, var_f03bd42b04ee3dca, worldtargetpos, var_8248003e7165c71e, duration);
+        self motionwarpwithanim(worldanimstartpos, var_f03bd42b04ee3dca, worldtargetpos, var_8248003e7165c71e, duration);
       }
 
       function waittill_any_ents_or_timeout_return(timeout, ent1, string1, ent2, string2, ent3, string3, ent4, string4, ent5, string5, ent6, string6, ent7, string7) {
@@ -6852,7 +6852,7 @@ function fileprint_launcher_start_file()
         }
 
         content = ter_op(isDefined(contentoverride), contentoverride, scripts\engine\trace::create_default_contents());
-        return function_d291656cea83ed81(ai, start, ignoreentarray, content);
+        return cantracetoai(ai, start, ignoreentarray, content);
       }
 
       function array_removedead_or_dying(array, var_5c3b6418c0ad64ae) {
@@ -6907,8 +6907,8 @@ function fileprint_launcher_start_file()
       }
 
       function function_82581894f5a1c71c() {
-        self.var_8aa9efe6383c1d5a = "ai" + function_e777acc966fbd44d();
-        function_67a97472e5a6c64c();
+        self.var_8aa9efe6383c1d5a = "ai" + getpersistentainumber();
+        incrementpersistentainumber();
       }
 
       function ent_flag_wait(msg) {
@@ -7197,15 +7197,15 @@ function fileprint_launcher_start_file()
 
       function ismountconfigenabled() {
         var_6c9fe414d3f3d966 = 1;
-        var_cba848f4746412e0 = 0;
+        mountconfig = 0;
 
         if(is_player_gamepad_enabled()) {
-          var_cba848f4746412e0 = requestgamerprofile("mountButtonConfig");
+          mountconfig = requestgamerprofile("mountButtonConfig");
         } else {
-          var_cba848f4746412e0 = requestgamerprofile("mountButtonConfigKBM");
+          mountconfig = requestgamerprofile("mountButtonConfigKBM");
         }
 
-        return var_cba848f4746412e0 != var_6c9fe414d3f3d966;
+        return mountconfig != var_6c9fe414d3f3d966;
       }
 
       function function_4319aef954ddbee5() {
@@ -7321,7 +7321,7 @@ function fileprint_launcher_start_file()
         return queue.array.size;
       }
 
-      function function_45fad871d0bee0f2(queue) {
+      function queue_isempty(queue) {
         return queue.array.size == 0;
       }
 
@@ -7611,7 +7611,7 @@ function fileprint_launcher_start_file()
         return -1 * inputvalue;
       }
 
-      function function_21a6a1c613b50a28(array, cell_size) {
+      function create_partition(array, cell_size) {
         assert(isDefined(array), "create_partition: Passed an undefined array");
         assert(isarray(array), "create_partition: Passed something defined that wasn't an array");
         assert(isDefined(cell_size), "create_partition: Passed an undefined cell_size");
@@ -7619,7 +7619,7 @@ function fileprint_launcher_start_file()
         partition = spawnStruct();
         partition.array = [];
         partition.cell_size = cell_size;
-        partition.var_8a659781684b3b1b = int(150000 / 2 * cell_size);
+        partition.coordinate_add = int(150000 / 2 * cell_size);
 
         foreach(object in array) {
           partition function_24bbefb4beda630d(object);
@@ -7628,12 +7628,12 @@ function fileprint_launcher_start_file()
         return partition;
       }
 
-      function function_a291b92e71292628() {
-        return isDefined(self) && isDefined(self.array) && isDefined(self.cell_size) && isDefined(self.var_8a659781684b3b1b);
+      function is_partition() {
+        return isDefined(self) && isDefined(self.array) && isDefined(self.cell_size) && isDefined(self.coordinate_add);
       }
 
       function function_24bbefb4beda630d(object) {
-        assert(function_a291b92e71292628(), "add_to_partition: self wasn't a partition, is self a partition created by create_partition?");
+        assert(is_partition(), "add_to_partition: self wasn't a partition, is self a partition created by create_partition?");
         assert(isDefined(object), "add_to_partition: Passed an undefined object");
         assert(isDefined(object.origin), "add_to_partition: Passed an object with an undefined .origin");
         [x, y] = function_5b83b054e7f1c193(object.origin);
@@ -7657,18 +7657,18 @@ function fileprint_launcher_start_file()
       }
 
       function function_5b83b054e7f1c193(vector) {
-        assert(function_a291b92e71292628(), "get_partition_cell_coordinates: self wasn't a partition, is self a partition created by create_partition?");
+        assert(is_partition(), "get_partition_cell_coordinates: self wasn't a partition, is self a partition created by create_partition?");
         assert(isDefined(vector), "get_partition_cell_coordinates: Passed an undefined vector");
         assert(isvector(vector), "get_partition_cell_coordinates: Passed something defined that wasn't a vector");
         cell_size = self.cell_size;
-        var_8a659781684b3b1b = self.var_8a659781684b3b1b;
-        x = int(vector[0] / cell_size) + var_8a659781684b3b1b;
+        coordinate_add = self.coordinate_add;
+        x = int(vector[0] / cell_size) + coordinate_add;
 
         if(x < 0) {
           x = 0;
         }
 
-        y = int(vector[1] / cell_size) + var_8a659781684b3b1b;
+        y = int(vector[1] / cell_size) + coordinate_add;
 
         if(y < 0) {
           y = 0;
@@ -7678,7 +7678,7 @@ function fileprint_launcher_start_file()
       }
 
       function function_9cd3f5f067afea37(object) {
-        assert(function_a291b92e71292628(), "remove_from_partition: self wasn't a partition, is self a partition created by create_partition?");
+        assert(is_partition(), "remove_from_partition: self wasn't a partition, is self a partition created by create_partition?");
         assert(isDefined(object), "remove_from_partition: Passed an undefined object");
         assert(isDefined(object.origin), "remove_from_partition: Passed an object with an undefined .origin");
         [x, y] = function_5b83b054e7f1c193(object.origin);
@@ -7698,7 +7698,7 @@ function fileprint_launcher_start_file()
       }
 
       function function_99b7cb4906b8cb4f(vector) {
-        assert(function_a291b92e71292628(), "get_array_from_partition: self wasn't a partition, is self a partition created by create_partition?");
+        assert(is_partition(), "get_array_from_partition: self wasn't a partition, is self a partition created by create_partition?");
         assert(isDefined(vector), "get_array_from_partition: Passed an undefined vector.");
         assert(isvector(vector), "get_array_from_partition: Passed something defined that wasn't a vector");
         [x, y] = function_5b83b054e7f1c193(vector);
@@ -7716,7 +7716,7 @@ function fileprint_launcher_start_file()
       }
 
       function function_df633f460888a47(vector) {
-        assert(function_a291b92e71292628(), "get_adjacent_arrays_from_partition: self wasn't a partition, is self a partition created by create_partition?");
+        assert(is_partition(), "get_adjacent_arrays_from_partition: self wasn't a partition, is self a partition created by create_partition?");
         assert(isDefined(vector), "get_adjacent_arrays_from_partition: passed an undefined vector");
         assert(isvector(vector), "get_adjacent_arrays_from_partition: Passed something defined that wasn't a vector");
         [x, y] = function_5b83b054e7f1c193(vector);
@@ -7756,12 +7756,12 @@ function fileprint_launcher_start_file()
       }
 
       function function_60dbe20f8385f1b0(vector) {
-        assert(function_a291b92e71292628(), "get_closest_object_in_adjacent_partitions: self wasn't a partition, is self a partition created by create_partition?");
+        assert(is_partition(), "get_closest_object_in_adjacent_partitions: self wasn't a partition, is self a partition created by create_partition?");
         assert(isDefined(vector), "get_closest_object_in_adjacent_partitions: passed an undefined vector");
         assert(isvector(vector), "get_closest_object_in_adjacent_partitions: Passed something defined that wasn't a vector");
         [x, y] = function_5b83b054e7f1c193(vector);
         closest_object = undefined;
-        var_84d7de0b98e2e704 = undefined;
+        closest_distance_squared = undefined;
 
         for(x_offset = -1; x_offset <= 1; x_offset++) {
           x_test = x + x_offset;
@@ -7796,8 +7796,8 @@ function fileprint_launcher_start_file()
 
               distance_squared = distancesquared(object.origin, vector);
 
-              if(!isDefined(var_84d7de0b98e2e704) || distance_squared < var_84d7de0b98e2e704) {
-                var_84d7de0b98e2e704 = distance_squared;
+              if(!isDefined(closest_distance_squared) || distance_squared < closest_distance_squared) {
+                closest_distance_squared = distance_squared;
                 closest_object = object;
               }
             }
@@ -7867,7 +7867,7 @@ function fileprint_launcher_start_file()
         return level.sharedfuncs[category][funcname];
       }
 
-      function function_f3bb4f4911a1beb2(category, funcname, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
+      function callsharedfunc(category, funcname, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11) {
         return function_f6734d8246596c7f(category, funcname, 0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11);
       }
 
@@ -8471,7 +8471,7 @@ function fileprint_launcher_start_file()
 
       function function_5e9baece4185ee1e(bundlename) {
         if(!isxhashasset(bundlename)) {
-          bundlename = function_40fd49171fad19d3(tolower(bundlename));
+          bundlename = getxhashasset(tolower(bundlename));
         }
 
         if(!isDefined(level.globalbundles)) {

@@ -33,7 +33,7 @@ function main() {
 
 function function_6e3dcc779590b309() {
   var_1d9cf0af3b759b90 = [];
-  var_f16e4f894777c13f = -122;
+  zmod = -122;
   var_1d9cf0af3b759b90[var_1d9cf0af3b759b90.size] = spawnStruct();
   var_1d9cf0af3b759b90[var_1d9cf0af3b759b90.size - 1].script_noteworthy = "jackolantern";
   var_1d9cf0af3b759b90[var_1d9cf0af3b759b90.size - 1].origin = (-1529, 616, 172.025);
@@ -88,7 +88,7 @@ function function_6e3dcc779590b309() {
   var_1d9cf0af3b759b90[var_1d9cf0af3b759b90.size - 1].angles = (0, 90, 0);
 
   foreach(struct in var_1d9cf0af3b759b90) {
-    struct.origin = (struct.origin[0], struct.origin[1], struct.origin[2] + var_f16e4f894777c13f);
+    struct.origin = (struct.origin[0], struct.origin[1], struct.origin[2] + zmod);
     addstruct(struct);
   }
 
@@ -96,12 +96,12 @@ function function_6e3dcc779590b309() {
 }
 
 function function_476e26432f5d3edd() {
-  var_8b1c18e78b52638 = getStructArray("jackolantern", "script_noteworthy");
-  var_140e4695f31a730d = 1024;
+  pumpkins = getStructArray("jackolantern", "script_noteworthy");
+  testdist = 1024;
 
-  foreach(var_ac64400b9ee8389b in var_8b1c18e78b52638) {
-    if(distance2dsquared(var_ac64400b9ee8389b.origin, (-252.5, 189, 55.2987)) <= var_140e4695f31a730d) {
-      deletestruct_ref(var_ac64400b9ee8389b);
+  foreach(pumpkin in pumpkins) {
+    if(distance2dsquared(pumpkin.origin, (-252.5, 189, 55.2987)) <= testdist) {
+      deletestruct_ref(pumpkin);
     }
   }
 }

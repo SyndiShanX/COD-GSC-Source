@@ -12,8 +12,8 @@
 function main() {
   thread lighting_setup_dvars();
   thread function_9b9701887eb61641();
-  level.var_1550eea978f3c08 = getmapsuncolorandintensity();
-  level.var_6df7b39edec9ac5b = getmapsundirection();
+  level.defaultsunlight = getmapsuncolorandintensity();
+  level.defaultsundir = getmapsundirection();
 }
 
 function lighting_setup_dvars() {}

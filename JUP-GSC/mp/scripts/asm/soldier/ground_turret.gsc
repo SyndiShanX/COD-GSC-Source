@@ -17,7 +17,7 @@ function aigroundturret_shouldcompletedismount(asmname, statename, tostatename, 
   return true;
 }
 
-function private function_9808f5689a4a7b1a() {
+function private disablegroundturret() {
   turret = self._blackboard.aigroundturretref;
   assert(isDefined(turret));
   turret.inuse = 0;
@@ -59,7 +59,7 @@ function playanim_aioperateturret(asmname, statename, params) {
 }
 
 function playanim_aibegindismountturret(asmname, statename, params) {
-  function_9808f5689a4a7b1a();
+  disablegroundturret();
   asm_playanimstate(asmname, statename, params);
 }
 
@@ -84,7 +84,7 @@ function playdeathanim_groundturret(asmname, statename, params) {
   playdeathanim(asmname, statename, params);
 }
 
-function function_e41fea1df987324a(asmname, statename, params) {
-  function_9808f5689a4a7b1a();
+function playpainanim_groundturret(asmname, statename, params) {
+  disablegroundturret();
   scripts\asm\soldier\pain::playpainanim(asmname, statename, params);
 }

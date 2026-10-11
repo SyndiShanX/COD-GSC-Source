@@ -369,7 +369,7 @@ function trophy_handlefataldamage(data) {
 
 function trophy_givepointsfordeath(attacker) {
   attacker notify("destroyed_equipment");
-  attacker thread namespace_53fc9ddbb516e6e1::function_e800498086e36c29(#"destroyed_equipment");
+  attacker thread namespace_53fc9ddbb516e6e1::doscoreeventsharedfunc(#"destroyed_equipment");
 }
 
 function trophy_applyempcallback(data) {

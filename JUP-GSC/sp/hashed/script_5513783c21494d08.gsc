@@ -94,7 +94,7 @@ function init() {
   gamescore_init();
   stealth_init();
   gameskill_init();
-  function_c1199c7cd79918b3();
+  aggregator_init();
   function_1e223bbe18efd769();
   challenges_init();
   function_bbe0803dcadd7d18();
@@ -346,7 +346,7 @@ function supers_init() {
 
 function gamescore_init() {}
 
-function function_c1199c7cd79918b3() {
+function aggregator_init() {
   registersharedfunc("aggregator", "registerOnPlayerSpawnCallback", &scripts\cp\utility\spawn_event_aggregator::registeronplayerspawncallback);
 }
 

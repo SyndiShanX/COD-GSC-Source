@@ -15,23 +15,23 @@ function function_620aa345ac2f9963() {
     return;
   }
 
-  projectbundle = function_811510b694ddd963();
+  projectbundle = getprojectscriptbundle();
 
   if(isDefined(projectbundle)) {
-    var_eecca1d1275b620d = hashcat(%"hash_5c338ed91460dbe1", projectbundle.var_702b32c96429baee);
+    vehicletracklistname = hashcat(%"hash_5c338ed91460dbe1", projectbundle.vehicletracklist);
   } else {
     assertmsg("Undefined project bundle when initializing battle tracks");
     return;
   }
 
-  level.var_702b32c96429baee = getscriptbundle(var_eecca1d1275b620d).var_702b32c96429baee;
+  level.vehicletracklist = getscriptbundle(vehicletracklistname).vehicletracklist;
 
-  if(!isDefined(level.var_702b32c96429baee)) {
+  if(!isDefined(level.vehicletracklist)) {
     assertmsg("Didn't find a vehicle track list");
     return;
   }
 
-  foreach(trackinfo in level.var_702b32c96429baee) {
+  foreach(trackinfo in level.vehicletracklist) {
     if(index <= 1) {
       continue;
     }
@@ -41,11 +41,11 @@ function function_620aa345ac2f9963() {
     }
 
     trackname = hashcat(%"hash_8f87dca26d14f0d", trackinfo.vehicletrack);
-    var_2450b73ccbdae7d = function_50f8a8f765bad85e(trackname, [#"hash_7fcaf90080dbf68d", #"ingamemusicstate"]);
-    trackinfo.var_ebb583a772b21a39 = var_2450b73ccbdae7d.var_ebb583a772b21a39;
+    var_2450b73ccbdae7d = getscriptbundlefieldvalues(trackname, [#"hash_7fcaf90080dbf68d", #"ingamemusicstate"]);
+    trackinfo.ingamesfxalias = var_2450b73ccbdae7d.ingamesfxalias;
     trackinfo.ingamemusicstate = var_2450b73ccbdae7d.ingamemusicstate;
 
-    if(!isDefined(trackinfo.var_ebb583a772b21a39)) {
+    if(!isDefined(trackinfo.ingamesfxalias)) {
       assertmsg("Didn't find a SFX alias in track: " + trackinfo.vehicletrack);
     }
 
@@ -73,14 +73,14 @@ function battle_tracks_onentervehicle(vehicle, player) {
   }
 }
 
-function battle_tracks_vehicleoccupancyenter(vehicle, player, seatid, var_fc7c7a874b43a31a) {
+function battle_tracks_vehicleoccupancyenter(vehicle, player, seatid, oldseatid) {
   if(level.gametype == "dungeons") {
     return;
   }
 
   isdriverseat = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_isdriverseat(vehicle, seatid);
   isbattletracksowner = battle_tracks_isbattletracksowner(vehicle, player);
-  battle_tracks_trystopdrivertogglethink(vehicle, player, var_fc7c7a874b43a31a);
+  battle_tracks_trystopdrivertogglethink(vehicle, player, oldseatid);
   battle_tracks_hidetogglewidget(player);
 
   if(isdriverseat) {
@@ -187,8 +187,8 @@ function battle_tracks_setmusicstate(vehicle, trackindex) {
 
 function battle_tracks_playerselectrandomtracks(vehicle, player) {
   data = scripts\cp_mp\vehicles\vehicle::function_86f6f784630b11fb(vehicle scripts\cp_mp\vehicles\vehicle::function_d93ec4635290febd());
-  var_5cd83eed6cc7ed18 = battle_tracks_gettrackindex(vehicle, player, 0, data);
-  return isDefined(var_5cd83eed6cc7ed18) && var_5cd83eed6cc7ed18 == 1;
+  firsttrackindex = battle_tracks_gettrackindex(vehicle, player, 0, data);
+  return isDefined(firsttrackindex) && firsttrackindex == 1;
 }
 
 function battle_tracks_gettrackindex(vehicle, player, arrayindex, data) {
@@ -207,14 +207,14 @@ function battle_tracks_gettrackindex(vehicle, player, arrayindex, data) {
 }
 
 function battle_tracks_getsfxalias(trackindex) {
-  if(isDefined(level.var_702b32c96429baee) && isDefined(level.var_702b32c96429baee[trackindex])) {
-    return level.var_702b32c96429baee[trackindex].var_ebb583a772b21a39;
+  if(isDefined(level.vehicletracklist) && isDefined(level.vehicletracklist[trackindex])) {
+    return level.vehicletracklist[trackindex].ingamesfxalias;
   }
 }
 
 function battle_tracks_getmusicstate(trackindex) {
-  if(isDefined(level.var_702b32c96429baee) && isDefined(level.var_702b32c96429baee[trackindex])) {
-    return level.var_702b32c96429baee[trackindex].ingamemusicstate;
+  if(isDefined(level.vehicletracklist) && isDefined(level.vehicletracklist[trackindex])) {
+    return level.vehicletracklist[trackindex].ingamemusicstate;
   }
 }
 
@@ -233,7 +233,7 @@ function battle_tracks_playbattletrackstoalloccupants(vehicle) {
     return;
   }
 
-  vehicle function_6db07c8a8c0f9ae6(vehicle.battletracks);
+  vehicle setvehiclewartracksstate(vehicle.battletracks);
 }
 
 function battle_tracks_stopbattletrackstoalloccupants(vehicle) {
@@ -251,7 +251,7 @@ function battle_tracks_stopbattletrackstoalloccupants(vehicle) {
     return;
   }
 
-  vehicle function_3a119112e4018367();
+  vehicle stopvehiclewartracks();
 }
 
 function battle_tracks_playbattletrackstoplayer(vehicle, player, var_29172b8e5d02be98) {
@@ -263,13 +263,13 @@ function battle_tracks_playbattletrackstoplayer(vehicle, player, var_29172b8e5d0
 
   if(isDefined(vehicle.battletracksmusicstate) && isDefined(vehicle.battletracks) && isDefined(player)) {
     if(isDefined(vehicle.battletracksowner) && (isbattletracksowner || var_29172b8e5d02be98 || player getwartrackpassengerenabled())) {
-      var_a922e318ff7f4a24 = battle_tracks_getbattletracksid(vehicle);
+      vehiclebattletracksid = battle_tracks_getbattletracksid(vehicle);
 
-      if(!function_59720efc5c367af2(vehicle, player, var_a922e318ff7f4a24)) {
+      if(!function_59720efc5c367af2(vehicle, player, vehiclebattletracksid)) {
         function_3971973c87f8c8d(vehicle, player);
 
         player.battletracksmusicstate = vehicle.battletracksmusicstate;
-        player.battletracksid = var_a922e318ff7f4a24;
+        player.battletracksid = vehiclebattletracksid;
         player setplayermusicstate(vehicle.battletracksmusicstate, vehicle.battletracks, vehicle, (0, 0, 0));
       }
     }
@@ -280,7 +280,7 @@ function battle_tracks_playbattletrackstoplayer(vehicle, player, var_29172b8e5d0
   }
 }
 
-function function_59720efc5c367af2(vehicle, player, var_a922e318ff7f4a24) {
+function function_59720efc5c367af2(vehicle, player, vehiclebattletracksid) {
   if(!isDefined(player.battletracksmusicstate)) {
     return false;
   }
@@ -289,7 +289,7 @@ function function_59720efc5c367af2(vehicle, player, var_a922e318ff7f4a24) {
     return false;
   }
 
-  return player.battletracksmusicstate == vehicle.battletracksmusicstate && player.battletracksid == var_a922e318ff7f4a24;
+  return player.battletracksmusicstate == vehicle.battletracksmusicstate && player.battletracksid == vehiclebattletracksid;
 }
 
 function battle_tracks_stopbattletracksforplayer(battletracksmusicstate, player, var_29172b8e5d02be98) {
@@ -344,23 +344,23 @@ function battle_tracks_togglethink(player, vehicle) {
   player endon("death_or_disconnect");
   player endon("last_stand_start");
   battle_tracks_tryinittogglestate(player);
-  var_4844d16e0d10f08b = battle_tracks_gettogglestate(player);
-  battle_tracks_updatetogglestate(player, vehicle, var_4844d16e0d10f08b);
+  currenttogglestate = battle_tracks_gettogglestate(player);
+  battle_tracks_updatetogglestate(player, vehicle, currenttogglestate);
   requirehold = player is_player_gamepad_enabled();
 
   if(requirehold) {
     if(vehicle scripts\common\vehicle::ishelicopter()) {
       player notifyonplayercommand("update_battle_tracks_toggle_state", "+melee_zoom");
       player notifyonplayercommand("cancel_battle_tracks_toggle_state", "-melee_zoom");
-      player.var_23b06600e2a88b42 = "melee_zoom";
+      player.battletracktogglebutton = "melee_zoom";
     } else {
       player notifyonplayercommand("update_battle_tracks_toggle_state", "+frag");
       player notifyonplayercommand("cancel_battle_tracks_toggle_state", "-frag");
-      player.var_23b06600e2a88b42 = "frag";
+      player.battletracktogglebutton = "frag";
     }
   } else {
     player notifyonplayercommand("update_battle_tracks_toggle_state", "nightvision");
-    player.var_23b06600e2a88b42 = "nightvision";
+    player.battletracktogglebutton = "nightvision";
   }
 
   while(true) {
@@ -484,8 +484,8 @@ function battle_tracks_stoptogglethink(player) {
 
   player notify("stop_battle_tracks_toggle_think");
 
-  if(isDefined(player.var_23b06600e2a88b42)) {
-    switch (player.var_23b06600e2a88b42) {
+  if(isDefined(player.battletracktogglebutton)) {
+    switch (player.battletracktogglebutton) {
       case #"hash_10931e593d5bdf":
         player notifyonplayercommandremove("update_battle_tracks_toggle_state", "+melee_zoom");
         player notifyonplayercommandremove("cancel_battle_tracks_toggle_state", "-melee_zoom");
@@ -499,7 +499,7 @@ function battle_tracks_stoptogglethink(player) {
         break;
     }
 
-    player.var_23b06600e2a88b42 = undefined;
+    player.battletracktogglebutton = undefined;
   }
 }
 
@@ -644,8 +644,8 @@ function function_4c953e9e77258030(vehicle, player) {
 
 function battle_tracks_getbattletracksid(vehicle) {
   vehicleid = vehicle getentitynumber() + "";
-  var_d92a58c3390f0ff2 = vehicle.battletracksowner getentitynumber() + "";
-  return vehicleid + var_d92a58c3390f0ff2;
+  trackownerid = vehicle.battletracksowner getentitynumber() + "";
+  return vehicleid + trackownerid;
 }
 
 function battle_tracks_playerinlisteningzone(vehicle, player) {
@@ -681,8 +681,8 @@ function function_561f62b5ed736105() {
 function function_ea5ef1563045fe8c(vehicle) {
   vehicle.battletracksmusicstate = "<dev string:x69>";
   result = [];
-  var_44b9b57f1594cdf2 = getDvar(@ "hash_88960e36a4bc7a7d", "<dev string:x68>");
-  var_5587c2774459b359 = strtok(var_44b9b57f1594cdf2, "<dev string:x73>");
+  debugwartracks = getDvar(@ "hash_88960e36a4bc7a7d", "<dev string:x68>");
+  var_5587c2774459b359 = strtok(debugwartracks, "<dev string:x73>");
 
   foreach(var_ab66d57be4626030 in var_5587c2774459b359) {
     var_d60db1b8fa4a20ce = int(var_ab66d57be4626030);

@@ -500,25 +500,25 @@ function function_5f963b9b662284bc(var_c79a45c6dcb67386) {
 
 function function_31a13be1530a809b() {
   self endon("<dev string:x230>");
-  self.var_8f835e0ab1dfb567 = spawnStruct();
-  self.var_8f835e0ab1dfb567.var_946b001669de27fb = [];
-  self.var_8f835e0ab1dfb567.active = 0;
+  self.debughealthhud = spawnStruct();
+  self.debughealthhud.var_946b001669de27fb = [];
+  self.debughealthhud.active = 0;
 
   while(isDefined(self)) {
-    if(getdvarint(@ "player_debughealth") && !self.var_8f835e0ab1dfb567.active) {
+    if(getdvarint(@ "player_debughealth") && !self.debughealthhud.active) {
       thread function_cdac508141881a7c();
-      self.var_8f835e0ab1dfb567.active = 1;
+      self.debughealthhud.active = 1;
     }
 
-    if(!getdvarint(@ "player_debughealth") && self.var_8f835e0ab1dfb567.active) {
+    if(!getdvarint(@ "player_debughealth") && self.debughealthhud.active) {
       self notify("<dev string:x23b>");
 
-      foreach(var_bed6393fb2e34b6a in self.var_8f835e0ab1dfb567.var_946b001669de27fb) {
-        self.var_8f835e0ab1dfb567.var_946b001669de27fb = array_remove(self.var_8f835e0ab1dfb567.var_946b001669de27fb, var_bed6393fb2e34b6a);
-        var_bed6393fb2e34b6a destroy();
+      foreach(hudelm in self.debughealthhud.var_946b001669de27fb) {
+        self.debughealthhud.var_946b001669de27fb = array_remove(self.debughealthhud.var_946b001669de27fb, hudelm);
+        hudelm destroy();
       }
 
-      self.var_8f835e0ab1dfb567.active = 0;
+      self.debughealthhud.active = 0;
     }
 
     waitframe();
@@ -539,25 +539,25 @@ function function_cdac508141881a7c() {
       color = (0, 1, 0);
     }
 
-    self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x253>"] setvalue(self.health);
-    self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x253>"].color = color;
+    self.debughealthhud.var_946b001669de27fb["<dev string:x253>"] setvalue(self.health);
+    self.debughealthhud.var_946b001669de27fb["<dev string:x253>"].color = color;
 
     if(isalive(self)) {
       if(utility::damageflag(2)) {
         if(utility::damageflag(1)) {
-          var_61cf390635798c6d = getdeathsshieldduration();
-          self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x25a>"] setdevtext("<dev string:x265>" + string(var_61cf390635798c6d) + "<dev string:x286>");
-          self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x25a>"].color = (0, 1, 0);
+          deathshieldtime = getdeathsshieldduration();
+          self.debughealthhud.var_946b001669de27fb["<dev string:x25a>"] setdevtext("<dev string:x265>" + string(deathshieldtime) + "<dev string:x286>");
+          self.debughealthhud.var_946b001669de27fb["<dev string:x25a>"].color = (0, 1, 0);
         } else {
-          var_aceab7f4a1e5c8c3 = getdeathsdoorduration();
-          self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x25a>"] setdevtext("<dev string:x28f>" + string(var_aceab7f4a1e5c8c3) + "<dev string:x286>");
-          self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x25a>"].color = (1, 0, 0);
+          deathsdoortime = getdeathsdoorduration();
+          self.debughealthhud.var_946b001669de27fb["<dev string:x25a>"] setdevtext("<dev string:x28f>" + string(deathsdoortime) + "<dev string:x286>");
+          self.debughealthhud.var_946b001669de27fb["<dev string:x25a>"].color = (1, 0, 0);
         }
       } else {
-        self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x25a>"] setdevtext("<dev string:x2ac>");
+        self.debughealthhud.var_946b001669de27fb["<dev string:x25a>"] setdevtext("<dev string:x2ac>");
       }
     } else {
-      self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x25a>"] setdevtext("<dev string:x2ac>");
+      self.debughealthhud.var_946b001669de27fb["<dev string:x25a>"] setdevtext("<dev string:x2ac>");
     }
 
     waitframe();
@@ -567,18 +567,18 @@ function function_cdac508141881a7c() {
 function function_6840973f983f0bae(id) {
   ybase = 10;
   rowspacing = 15;
-  yoffset = self.var_8f835e0ab1dfb567.var_946b001669de27fb.size * rowspacing;
-  var_bed6393fb2e34b6a = newclienthudelem(self);
-  var_bed6393fb2e34b6a.sort = 10;
-  var_bed6393fb2e34b6a.x = 85;
-  var_bed6393fb2e34b6a.y = ybase + yoffset;
-  var_bed6393fb2e34b6a.fontscale = 1;
-  var_bed6393fb2e34b6a.alignx = "<dev string:x2ad>";
-  var_bed6393fb2e34b6a.aligny = "<dev string:x2b2>";
-  var_bed6393fb2e34b6a.horzalign = "<dev string:x2b6>";
-  var_bed6393fb2e34b6a.vertalign = "<dev string:x2b6>";
-  var_bed6393fb2e34b6a.sort = 1;
-  self.var_8f835e0ab1dfb567.var_946b001669de27fb[id] = var_bed6393fb2e34b6a;
+  yoffset = self.debughealthhud.var_946b001669de27fb.size * rowspacing;
+  hudelm = newclienthudelem(self);
+  hudelm.sort = 10;
+  hudelm.x = 85;
+  hudelm.y = ybase + yoffset;
+  hudelm.fontscale = 1;
+  hudelm.alignx = "<dev string:x2ad>";
+  hudelm.aligny = "<dev string:x2b2>";
+  hudelm.horzalign = "<dev string:x2b6>";
+  hudelm.vertalign = "<dev string:x2b6>";
+  hudelm.sort = 1;
+  self.debughealthhud.var_946b001669de27fb[id] = hudelm;
 }
 
 function getdeathsdoorduration() {

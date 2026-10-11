@@ -7,34 +7,34 @@
 #using scripts\engine\utility;
 #namespace namespace_6d2e67e0b5564054;
 
-function function_c789cc0bd60384c2(start_pos, end_pos, open_height, var_ce8be7b4cdc21296, skydive_time, var_8330be2d492dad2) {
+function function_c789cc0bd60384c2(start_pos, end_pos, open_height, land_variance, skydive_time, glide_time) {
   self endon("death");
   thread function_377a053e8962309();
-  function_dcd66ae47dd9c9fa(start_pos, end_pos, open_height, var_ce8be7b4cdc21296);
+  function_dcd66ae47dd9c9fa(start_pos, end_pos, open_height, land_variance);
   agentparachuteskydive(skydive_time);
   function_45348b6cef309ef2();
-  function_aa703fb26bb4f9fe(var_8330be2d492dad2);
+  function_aa703fb26bb4f9fe(glide_time);
   function_fb904ef821445698();
 }
 
-function function_dcd66ae47dd9c9fa(start_pos, end_pos, open_height, var_ce8be7b4cdc21296) {
+function function_dcd66ae47dd9c9fa(start_pos, end_pos, open_height, land_variance) {
   self allowedstances("stand");
   self.ignoreme = 1;
   self.ignoreall = 1;
   self.scripted_mode = 1;
   self.playing_skit = 1;
   self.do_immediate_ragdoll = 1;
-  self function_9f82c74eb1b7caf9(0);
-  var_21e35e707d4d8613 = default_to(var_ce8be7b4cdc21296, 50);
+  self setcanusecover(0);
+  landvariance = default_to(land_variance, 50);
   opendist = default_to(open_height, 1000);
   self asmsetstate(self.asmname, "parachute_freefall");
   self._blackboard.parachutestate = "freefall";
   self setOrigin(start_pos, 0);
 
-  if(var_21e35e707d4d8613 == 0) {
+  if(landvariance == 0) {
     self.landing_spot = end_pos;
   } else {
-    startorigin = end_pos + (randomfloatrange(var_21e35e707d4d8613 * -1, var_21e35e707d4d8613), randomfloatrange(var_21e35e707d4d8613 * -1, var_21e35e707d4d8613), 0);
+    startorigin = end_pos + (randomfloatrange(landvariance * -1, landvariance), randomfloatrange(landvariance * -1, landvariance), 0);
     self.landing_spot = getclosestpointonnavmesh(getgroundposition(startorigin, 64, 15000, 15000));
   }
 
@@ -82,9 +82,9 @@ function function_45348b6cef309ef2() {
   self asmfireevent(self.asmname, "finish");
 }
 
-function function_aa703fb26bb4f9fe(var_8330be2d492dad2) {
+function function_aa703fb26bb4f9fe(glide_time) {
   self endon("death");
-  move_time = default_to(var_8330be2d492dad2, 5);
+  move_time = default_to(glide_time, 5);
   move_time += randomfloatrange(-1, 1);
   decel_time = int(min(3, move_time * 0.5));
   accel_time = int(max(1, move_time - decel_time - 1));
@@ -129,7 +129,7 @@ function function_fb904ef821445698() {
   self.scripted_mode = 0;
   self.combatmode = "cover";
   self.script_combatmode = "cover";
-  self function_9f82c74eb1b7caf9(1);
+  self setcanusecover(1);
   self notify("delete_chute");
   wait 1;
   self.do_immediate_ragdoll = undefined;

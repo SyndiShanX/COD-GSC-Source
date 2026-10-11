@@ -215,7 +215,7 @@ function function_495ebe31c275c3c5(smokepoint, missileorientation, var_ecb39c9ee
   smokedrone setscriptablepartstate("smokeDeploy", "deployStart", 0);
   smokedrone scripts\cp_mp\equipment\haywire::function_172d848d58051fdf(&function_1d7362315a15c932);
   smokedrone scripts\cp_mp\emp_debuff::set_start_emp_callback(&function_14e878fafff171e9);
-  smokedrone function_5226227bce83ebe9(3, smokedrone.owner.team);
+  smokedrone setentityhudoutlinedata(3, smokedrone.owner.team);
   function_6ae953c4b9e1cd89(smokedrone);
 
   if(getdvarint(@ "hash_819d904fd33aad", bundle.var_3718be0adde01a9d)) {
@@ -307,7 +307,7 @@ function function_1ebb9b9e63a4df54(point, smokeforward) {
 
   if(getdvarint(@ "hash_abe45e35ef030a56") == 1) {
     if(getdvarint(@ "mgl", 0)) {
-      thread scripts\common\ai::function_f8903387ea945165(point, 3);
+      thread scripts\common\ai::mgladdactivesmoke(point, 3);
     } else {
       function_8a09c0e5fa78a48c(point, 18, 300, 250);
     }

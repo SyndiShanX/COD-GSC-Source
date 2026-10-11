@@ -196,7 +196,7 @@ function private function_38e2d21d6f6e393b(pos, prevstruct, triggername, speed, 
   return struct;
 }
 
-function function_d05f47d864f18196(owner, pos, angles, var_4fffc035c8679b98, var_7e6513b2ae0d5c1d, var_14cde247ac3313a4) {
+function function_d05f47d864f18196(owner, pos, angles, var_4fffc035c8679b98, var_7e6513b2ae0d5c1d, skinoverride) {
   if(!isDefined(var_4fffc035c8679b98)) {
     var_4fffc035c8679b98 = 1;
   }
@@ -210,10 +210,10 @@ function function_d05f47d864f18196(owner, pos, angles, var_4fffc035c8679b98, var
   spawndata.angles = angles;
   spawndata.spawntype = "GAME_MODE";
 
-  if(isDefined(var_14cde247ac3313a4)) {
-    spawndata.var_14cde247ac3313a4 = var_14cde247ac3313a4;
+  if(isDefined(skinoverride)) {
+    spawndata.skinoverride = skinoverride;
   } else if(!var_4fffc035c8679b98) {
-    spawndata.var_14cde247ac3313a4 = "dmzwhite";
+    spawndata.skinoverride = "dmzwhite";
   }
 
   if(istrue(level.var_291b51c7af8d1204)) {
@@ -259,7 +259,7 @@ function function_d05f47d864f18196(owner, pos, angles, var_4fffc035c8679b98, var
     [[scripts\engine\utility::getsharedfunc("chopper_exfil", "setup_gas_masks")]](heli);
   }
 
-  heli scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onSpawnExfilHeli", var_7e6513b2ae0d5c1d);
+  heli scripts\engine\utility::callsharedfunc("pmc_missions", "onSpawnExfilHeli", var_7e6513b2ae0d5c1d);
   return heli;
 }
 
@@ -506,7 +506,7 @@ function function_ed686fcbc5363b3() {
   scripts\cp_mp\vehicles\vehicle::vehicle_death(self);
 }
 
-function function_d1478474b036b87f(ent, part, state, player, waittime, var_4fffc035c8679b98, finalexfil, var_14cde247ac3313a4) {
+function function_d1478474b036b87f(ent, part, state, player, waittime, var_4fffc035c8679b98, finalexfil, skinoverride) {
   if(!isDefined(var_4fffc035c8679b98)) {
     var_4fffc035c8679b98 = 1;
   }
@@ -532,7 +532,7 @@ function function_d1478474b036b87f(ent, part, state, player, waittime, var_4fffc
     team = player.team;
     players = getteamdata(player.team, "players");
     exfilstruct = function_730c660d9fc6808e(players, finalexfil, 0, istrue(ent.info.personal), 0);
-    ent scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onSignalExfil", player);
+    ent scripts\engine\utility::callsharedfunc("pmc_missions", "onSignalExfil", player);
   }
 
   scripts\cp_mp\overlord::playevent("match_exfil_inbound", players);
@@ -552,7 +552,7 @@ function function_d1478474b036b87f(ent, part, state, player, waittime, var_4fffc
   waittimer = level.chopperexfil.timetoarrive;
 
   if(isDefined(player) && !istrue(finalexfil)) {
-    upgradecount = default_to(scripts\engine\utility::function_f3bb4f4911a1beb2("instanceInventory", "getUpgradeCount", player, 27), 0);
+    upgradecount = default_to(scripts\engine\utility::callsharedfunc("instanceInventory", "getUpgradeCount", player, 27), 0);
     waittimer -= upgradecount * getdvarfloat(@ "hash_32085370522fbf3f", 30);
     waittimer = max(0, waittimer);
   }
@@ -565,7 +565,7 @@ function function_d1478474b036b87f(ent, part, state, player, waittime, var_4fffc
     remainingtime = (level.var_6fc3398b5a13400 - gettime()) / 1000;
 
     if(remainingtime > waittimer * 2) {
-      thread scripts\engine\utility::function_f3bb4f4911a1beb2("chopper_exfil", "dialog_start_exfil", players, team, finalexfil, ent, waittimer);
+      thread scripts\engine\utility::callsharedfunc("chopper_exfil", "dialog_start_exfil", players, team, finalexfil, ent, waittimer);
       wait waittimer;
     }
   } else {
@@ -592,7 +592,7 @@ function function_d1478474b036b87f(ent, part, state, player, waittime, var_4fffc
     return;
   }
 
-  heli = function_d05f47d864f18196(ownerplayer, path.origin, ent.angles, var_4fffc035c8679b98, finalexfil, var_14cde247ac3313a4);
+  heli = function_d05f47d864f18196(ownerplayer, path.origin, ent.angles, var_4fffc035c8679b98, finalexfil, skinoverride);
   heli.finalexfil = finalexfil;
   thread function_a5fc6e8f9df1ccea(heli, groundorg, ent);
   ent thread function_72d275d574bd23dd(heli, groundorg);
@@ -668,7 +668,7 @@ function function_d1478474b036b87f(ent, part, state, player, waittime, var_4fffc
 
   info = namespace_e8fceb5cf6e8cdf8::function_730c660d9fc6808e(heli.playersexfil, finalexfil, 0, istrue(ent.info.personal), 0);
   info.var_394aebba88e4e8c2 = ent.var_394aebba88e4e8c2;
-  scripts\engine\utility::function_f3bb4f4911a1beb2("chopper_exfil", "exfil_players", heli.playersexfil, info);
+  scripts\engine\utility::callsharedfunc("chopper_exfil", "exfil_players", heli.playersexfil, info);
 
   if(scripts\engine\utility::issharedfuncdefined("chopper_exfil", "music_reset")) {
     [[scripts\engine\utility::getsharedfunc("chopper_exfil", "music_reset")]](players);
@@ -714,6 +714,6 @@ function private function_ad65ea51ce655f42(vehicle, ent, position, normal, norma
   }
 
   vehicle.var_496a5e00d32af675 = 1;
-  vehicle.var_a8f4bb03b366aa80 = 1;
+  vehicle.dontspawnhusk = 1;
   vehicle thread scripts\cp_mp\vehicles\vehicle::vehicle_explode();
 }

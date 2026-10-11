@@ -4,7 +4,7 @@
 *************************************************/
 
 #using scripts\engine\utility;
-#namespace namespace_c45ac99c4997e722;
+#namespace telemetry_utils;
 
 function function_1c355f42faf7f4bb() {
   deathmodifiers = [];

@@ -566,7 +566,7 @@ function waitforhvtonboard() {
   var_214da032eefdfe74.animname = "exfil_chopper";
   fwd = anglesToForward(var_214da032eefdfe74.angles);
   lft = anglestoleft(var_214da032eefdfe74.angles);
-  var_cbac2203146ae84a = anglestoright(var_214da032eefdfe74.angles);
+  rgt = anglestoright(var_214da032eefdfe74.angles);
   pos1 = var_214da032eefdfe74.origin + fwd * 10 + lft * 64 + (0, 0, -110);
   var_aa573402a27ca636 = spawn("trigger_radius", pos1 + (0, 0, -200), 0, 64, 500);
   var_214da032eefdfe74.hvtboardingside = "left";

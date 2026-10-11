@@ -158,7 +158,7 @@ function function_5a73691d0868ca47(attacker) {
     self detonate();
   }
 
-  function_1c1b9d33706c152d(attacker, "explosion");
+  broadcaststealthevent(attacker, "explosion");
 }
 
 function function_dc31ef5a2d33be25() {

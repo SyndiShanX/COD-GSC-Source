@@ -21,7 +21,7 @@
 
 function init() {
   init_voice();
-  function_ed24376a19a1b0fe();
+  init_dialogue();
   init_music();
   function_6ca37af6683e78ec();
 }
@@ -617,7 +617,7 @@ function function_291ab2db66d6ea2e(var_83adde1ef76f568a) {
   }
 }
 
-function function_ed24376a19a1b0fe() {
+function init_dialogue() {
   if(!isDefined(game["dialogue"])) {
     game["dialogue"]["axis_male_cough"] = [];
     game["dialogue"]["axis_male_cough"][game["dialogue"]["axis_male_cough"].size] = "generic_cough_3_enemy_1";
@@ -2296,8 +2296,8 @@ function plunder_thirtypercent_music() {
   }
 
   level notify("stop_suspense_music");
-  var_17c8d9e220164807 = game["music"]["plunder_tenpercent"].size;
-  tracknum = randomint(var_17c8d9e220164807);
+  numtracks = game["music"]["plunder_tenpercent"].size;
+  tracknum = randomint(numtracks);
   setmusicstate(game["music"]["plunder_tenpercent"][tracknum]);
   level.thirtypercent_music = 1;
 }
@@ -2313,8 +2313,8 @@ function plunder_fiftypercent_music(team) {
     return;
   }
 
-  var_17c8d9e220164807 = game["music"]["plunder_thirtypercent"].size;
-  tracknum = randomint(var_17c8d9e220164807);
+  numtracks = game["music"]["plunder_thirtypercent"].size;
+  tracknum = randomint(numtracks);
   setmusicstate(game["music"]["plunder_thirtypercent"][tracknum]);
   level.fiftypercent_music = 1;
   level notify("fiftypercent_music");
@@ -2331,8 +2331,8 @@ function plunder_seventyfivepercent_music(team) {
     return;
   }
 
-  var_17c8d9e220164807 = game["music"]["plunder_fiftypercent"].size;
-  tracknum = randomint(var_17c8d9e220164807);
+  numtracks = game["music"]["plunder_fiftypercent"].size;
+  tracknum = randomint(numtracks);
   setmusicstate(game["music"]["plunder_fiftypercent"][tracknum]);
   level.seventyfivepercent_music = 1;
   level notify("seventyfivepercent_music");
@@ -2347,8 +2347,8 @@ function plunder_ninetypercent_music(team) {
     return;
   }
 
-  var_17c8d9e220164807 = game["music"]["plunder_seventyfivepercent"].size;
-  tracknum = randomint(var_17c8d9e220164807);
+  numtracks = game["music"]["plunder_seventyfivepercent"].size;
+  tracknum = randomint(numtracks);
   setmusicstate(game["music"]["plunder_seventyfivepercent"][tracknum]);
   level.ninetypercent_music = 1;
   level notify("ninetypercent_music");
@@ -2363,8 +2363,8 @@ function plunder_overtime_music() {
     return;
   }
 
-  var_17c8d9e220164807 = game["music"]["plunder_ninetypercent"].size;
-  tracknum = randomint(var_17c8d9e220164807);
+  numtracks = game["music"]["plunder_ninetypercent"].size;
+  tracknum = randomint(numtracks);
   setmusicstate(game["music"]["plunder_ninetypercent"][tracknum]);
   level.overtime_music = 1;
 }

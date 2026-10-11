@@ -91,7 +91,7 @@ function build_fx(effect, tag, sound, beffectlooping, delay, bsoundlooping, wait
   return struct;
 }
 
-function build_deathfx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring, var_5b457edcff6fa295, remove_deathfx_entity_delay, attacker_velocity_lerp) {
+function build_deathfx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring, delete_vehicle_delay, remove_deathfx_entity_delay, attacker_velocity_lerp) {
   assertex(isDefined(effect), "<dev string:x1c>");
   classname = level.vtclassname;
 
@@ -99,10 +99,10 @@ function build_deathfx(effect, tag, sound, beffectlooping, delay, bsoundlooping,
     level.vehicle.templates.vehicle_death_fx[classname] = [];
   }
 
-  level.vehicle.templates.vehicle_death_fx[classname][level.vehicle.templates.vehicle_death_fx[classname].size] = build_fx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring, var_5b457edcff6fa295, remove_deathfx_entity_delay, attacker_velocity_lerp);
+  level.vehicle.templates.vehicle_death_fx[classname][level.vehicle.templates.vehicle_death_fx[classname].size] = build_fx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring, delete_vehicle_delay, remove_deathfx_entity_delay, attacker_velocity_lerp);
 }
 
-function build_rocket_deathfx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring, var_5b457edcff6fa295, remove_deathfx_entity_delay) {
+function build_rocket_deathfx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring, delete_vehicle_delay, remove_deathfx_entity_delay) {
   assertex(isDefined(effect), "<dev string:x1c>");
   classname = level.vtclassname;
 
@@ -110,7 +110,7 @@ function build_rocket_deathfx(effect, tag, sound, beffectlooping, delay, bsoundl
     level.vehicle.templates.vehicle_death_fx[classname] = [];
   }
 
-  level.vehicle.templates.vehicle_rocket_death_fx[classname][level.vehicle.templates.vehicle_death_fx[classname].size] = build_fx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring, var_5b457edcff6fa295, remove_deathfx_entity_delay);
+  level.vehicle.templates.vehicle_rocket_death_fx[classname][level.vehicle.templates.vehicle_death_fx[classname].size] = build_fx(effect, tag, sound, beffectlooping, delay, bsoundlooping, waitdelay, stayontag, notifystring, delete_vehicle_delay, remove_deathfx_entity_delay);
 }
 
 function build_deathanimations(forwardanimation, rightanimation, backwardanimation, leftanimation) {
@@ -495,17 +495,17 @@ function function_40778829123b7952(vehicleref, vehicleclass) {
       }
     }
 
-    foreach(var_7e219b890204c40d in bundle.unloadgroups) {
-      unload_groups[var_7e219b890204c40d.name] = [];
+    foreach(extraunloadgroup in bundle.unloadgroups) {
+      unload_groups[extraunloadgroup.name] = [];
 
-      foreach(index, seatdata in var_7e219b890204c40d.seats) {
-        unload_groups[var_7e219b890204c40d.name][unload_groups[var_7e219b890204c40d.name].size] = seatdata.seatindex;
+      foreach(index, seatdata in extraunloadgroup.seats) {
+        unload_groups[extraunloadgroup.name][unload_groups[extraunloadgroup.name].size] = seatdata.seatindex;
       }
     }
 
     bundle.unloadgroups = undefined;
     bundle.aianimations = undefined;
-    function_a82f8a25ad7e6b3f(bundle.aiseats, bundle.ai.vehicleanimalias);
+    assign_aianims(bundle.aiseats, bundle.ai.vehicleanimalias);
     function_ab7252da140c8fe7(unload_groups);
   }
 
@@ -638,9 +638,9 @@ function build_aianims(aithread, vehiclethread, vehicleanimalias) {
   }
 }
 
-function function_a82f8a25ad7e6b3f(var_fdd5ab14ab76741a, vehicleanimalias) {
+function assign_aianims(aithreadresult, vehicleanimalias) {
   classname = level.vtclassname;
-  level.vehicle.templates.aianims[classname] = var_fdd5ab14ab76741a;
+  level.vehicle.templates.aianims[classname] = aithreadresult;
 
   if(isDefined(vehicleanimalias) && isDefined(level.func) && isDefined(level.func["set_vehicle_anims_" + vehicleanimalias])) {
     level.vehicle.templates.aianims[classname] = [[level.func["set_vehicle_anims_" + vehicleanimalias]]](level.vehicle.templates.aianims[classname]);
@@ -675,7 +675,7 @@ function build_destructible(model, destructible) {
 }
 
 function build_localinit(init_thread) {
-  level.vehicleinitthread[function_40fd49171fad19d3(level.vttype)][level.vtclassname] = init_thread;
+  level.vehicleinitthread[getxhashasset(level.vttype)][level.vtclassname] = init_thread;
 }
 
 function build_atmo_types(atmo_type, space_type) {
@@ -687,8 +687,8 @@ function build_ace(is_ace) {
   level.vehicle.templates.aces[level.vtclassname] = is_ace;
 }
 
-function build_semiace(var_cdf39af1c6b4f363) {
-  level.vehicle.templates.semiaces[level.vtclassname] = var_cdf39af1c6b4f363;
+function build_semiace(is_semiace) {
+  level.vehicle.templates.semiaces[level.vtclassname] = is_semiace;
 }
 
 function build_playercontrolled_model(playercontrolledmodel, worldmodel) {
@@ -708,7 +708,7 @@ function build_is_helicopter(vehicle_type) {
     vehicle_type = level.vttype;
   }
 
-  level.vehicle.templates.helicopter_list[function_40fd49171fad19d3(vehicle_type)] = 1;
+  level.vehicle.templates.helicopter_list[getxhashasset(vehicle_type)] = 1;
 }
 
 function function_3a186b889337bd1b(vehicle_type) {
@@ -720,7 +720,7 @@ function function_3a186b889337bd1b(vehicle_type) {
     vehicle_type = level.vttype;
   }
 
-  level.vehicle.templates.boat_list[function_40fd49171fad19d3(vehicle_type)] = 1;
+  level.vehicle.templates.boat_list[getxhashasset(vehicle_type)] = 1;
 }
 
 function build_is_airplane(vehicle_type) {
@@ -732,7 +732,7 @@ function build_is_airplane(vehicle_type) {
     vehicle_type = level.vttype;
   }
 
-  level.vehicle.templates.airplane_list[function_40fd49171fad19d3(vehicle_type)] = 1;
+  level.vehicle.templates.airplane_list[getxhashasset(vehicle_type)] = 1;
 }
 
 function function_5a73d7723fce9849(vehicle_type) {
@@ -744,7 +744,7 @@ function function_5a73d7723fce9849(vehicle_type) {
     vehicle_type = level.vttype;
   }
 
-  level.vehicle.templates.tank_list[function_40fd49171fad19d3(vehicle_type)] = 1;
+  level.vehicle.templates.tank_list[getxhashasset(vehicle_type)] = 1;
 }
 
 function build_single_tread(vehicle_type) {
@@ -756,7 +756,7 @@ function build_single_tread(vehicle_type) {
     vehicle_type = level.vttype;
   }
 
-  level.vehicle.templates.single_tread_list[function_40fd49171fad19d3(vehicle_type)] = 1;
+  level.vehicle.templates.single_tread_list[getxhashasset(vehicle_type)] = 1;
 }
 
 function build_rider_death_func(func) {
@@ -767,16 +767,16 @@ function build_rider_death_func(func) {
   level.vehicle.templates.rider_death_func[level.vtclassname] = func;
 }
 
-function function_d97dafaf227ed144(classname, vehicletype, init_thread) {
+function build_iw9physics(classname, vehicletype, init_thread) {
   level.vehicle.templates.iw9physics[classname] = vehicletype;
-  level.vehicleinitthread[function_40fd49171fad19d3(vehicletype)][classname] = init_thread;
+  level.vehicleinitthread[getxhashasset(vehicletype)][classname] = init_thread;
 }
 
 function build_hud(classname, index) {
   level.vehicle.templates.hudindex[classname] = index;
 }
 
-function function_2660787ca33cf457(classname, parentbone, childbones) {
+function build_dependentparts(classname, parentbone, childbones) {
   if(!isDefined(level.vehicle.templates.dependentparts)) {
     level.vehicle.templates.dependentparts = [];
   }

@@ -23,7 +23,7 @@ function semtexfiremain(grenade, weapon, fuse) {
   }
 
   if(isai(self)) {
-    function_216c67ab6749137a(self, undefined, "grenade_throw", "frag_grenade");
+    addbattlechatternotify(self, undefined, "grenade_throw", "frag_grenade");
     grenade setentityowner(self);
     grenade setotherent(self);
   }
@@ -61,7 +61,7 @@ function semtex_watch_stuck() {
   self waittill("missile_stuck", stuckto);
 
   if(isai(stuckto) && isalive(stuckto)) {
-    function_216c67ab6749137a(stuckto, undefined, "semtex_stuck");
+    addbattlechatternotify(stuckto, undefined, "semtex_stuck");
     function_60daa23100a2b874(self, stuckto);
   }
 

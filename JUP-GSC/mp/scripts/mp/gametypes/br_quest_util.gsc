@@ -3622,10 +3622,10 @@ function function_5d895ce7d9060182() {
 
 function quest_devgui() {
   debughud = "<dev string:xa4e>" + "<dev string:xa6d>";
-  thread adddebugcommanddelayed(debughud + "<dev string:xa7d>" + function_f28fd66285fa2c9(@ "hash_d3c4b3e2a6204d64") + "<dev string:xa9c>");
-  thread adddebugcommanddelayed(debughud + "<dev string:xaa4>" + function_f28fd66285fa2c9(@ "hash_d3c4b3e2a6204d64") + "<dev string:xac0>");
-  thread adddebugcommanddelayed(debughud + "<dev string:xac8>" + function_f28fd66285fa2c9(@ "hash_d3c4b3e2a6204d64") + "<dev string:xae5>");
-  thread adddebugcommanddelayed(debughud + "<dev string:xaed>" + function_f28fd66285fa2c9(@ "hash_d3c4b3e2a6204d64") + "<dev string:xafd>");
+  thread adddebugcommanddelayed(debughud + "<dev string:xa7d>" + getxhashhexname(@ "hash_d3c4b3e2a6204d64") + "<dev string:xa9c>");
+  thread adddebugcommanddelayed(debughud + "<dev string:xaa4>" + getxhashhexname(@ "hash_d3c4b3e2a6204d64") + "<dev string:xac0>");
+  thread adddebugcommanddelayed(debughud + "<dev string:xac8>" + getxhashhexname(@ "hash_d3c4b3e2a6204d64") + "<dev string:xae5>");
+  thread adddebugcommanddelayed(debughud + "<dev string:xaed>" + getxhashhexname(@ "hash_d3c4b3e2a6204d64") + "<dev string:xafd>");
 
   foreach(type, info in level.questinfo.tabletinfo) {
     function_8f449f8c11c8ea84(type, "<dev string:xb05>" + type + "<dev string:xb10>", [0, 1], info.enabled);

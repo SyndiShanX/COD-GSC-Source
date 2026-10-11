@@ -286,8 +286,8 @@ function wave_difficulty_update(difficulty) {
     player.gs.playergrenadebasetime = int(level.difficultysettings["playerGrenadeBaseTime"][setting]);
     player.gs.playergrenaderangetime = int(level.difficultysettings["playerGrenadeRangeTime"][setting]);
     player.gs.playerdoublegrenadetime = int(level.difficultysettings["playerDoubleGrenadeTime"][setting]);
-    player.var_da4b6392c1bec6a1 = level.difficultysettings["missTimeConstant"][setting];
-    player.var_cef700ed012e8981 = level.difficultysettings["missTimeDistanceFactor"][setting];
+    player.gameskillmisstimeconstant = level.difficultysettings["missTimeConstant"][setting];
+    player.gameskillmisstimedistancefactor = level.difficultysettings["missTimeDistanceFactor"][setting];
   }
 
   function_38ae83992c7eb8a5(level.difficultysettings["double_grenades_allowed"][setting]);

@@ -208,15 +208,15 @@ function function_9ecb03c3e2b1a959() {
   return false;
 }
 
-function function_29955ef665e7793d(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
+function function_29955ef665e7793d(pointtocheck, teamtocheck) {
   var_85aa6256b13776ad = 0;
 
   if(!isDefined(level.var_f676be7150162ca7)) {
     return var_85aa6256b13776ad;
   } else {
     foreach(trigger in level.var_f676be7150162ca7) {
-      if(ispointinvolume(var_863c619037f3ac74, trigger)) {
-        if(isDefined(trigger.script_team) && isDefined(var_da8cec9bce12f9cb) && trigger.script_team != var_da8cec9bce12f9cb) {
+      if(ispointinvolume(pointtocheck, trigger)) {
+        if(isDefined(trigger.script_team) && isDefined(teamtocheck) && trigger.script_team != teamtocheck) {
           continue;
         }
 

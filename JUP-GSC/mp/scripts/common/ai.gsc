@@ -76,11 +76,11 @@ function enable_exits() {
 }
 
 function disable_turnanims() {
-  self.var_4cd89215083d17cd = 0;
+  self.turnanimsenabled = 0;
 }
 
 function enable_turnanims() {
-  self.var_4cd89215083d17cd = 1;
+  self.turnanimsenabled = 1;
 }
 
 function disable_arrivals() {
@@ -99,12 +99,12 @@ function set_rebel(var_5b0a55b4e162fee3) {
 
 function disable_long_death() {
   assertex(isalive(self), "<dev string:x1c>");
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
 }
 
 function enable_long_death() {
   assertex(isalive(self), "<dev string:x51>");
-  self.var_98add129a7ecb962 = 1;
+  self.allowlongdeath = 1;
 }
 
 function enable_danger_react(duration) {
@@ -252,9 +252,9 @@ function stop_use_turret() {
   self._blackboard.requestedturretpose = undefined;
 }
 
-function magic_bullet_shield(var_7a28bdd1351dcbfb) {
-  if(!isDefined(var_7a28bdd1351dcbfb)) {
-    var_7a28bdd1351dcbfb = 0;
+function magic_bullet_shield(no_death_detection) {
+  if(!isDefined(no_death_detection)) {
+    no_death_detection = 0;
   }
 
   if(isai(self)) {
@@ -271,7 +271,7 @@ function magic_bullet_shield(var_7a28bdd1351dcbfb) {
     val::set("magic_bullet_shield", "attackeraccuracy", 0.1);
   }
 
-  if(!var_7a28bdd1351dcbfb) {
+  if(!no_death_detection) {
     thread magic_bullet_death_detection();
   }
 
@@ -445,11 +445,11 @@ function ai_dismount_turret(turret_operator) {
 function function_e2368c53744b331c(minhide, maxhide, cooldown, usesuppression) {
   if(isai(self)) {
     if(isDefined(minhide)) {
-      self.var_55a29022cf7abdad = minhide;
+      self.vehicleminhide = minhide;
     }
 
     if(isDefined(maxhide)) {
-      self.var_39887ba979a993ab = maxhide;
+      self.vehiclemaxhide = maxhide;
     }
 
     if(isDefined(cooldown)) {
@@ -457,17 +457,17 @@ function function_e2368c53744b331c(minhide, maxhide, cooldown, usesuppression) {
     }
 
     if(isDefined(usesuppression)) {
-      self.var_edb88205b19560bd = usesuppression;
+      self.vehicleusesuppression = usesuppression;
     }
   }
 }
 
 function function_1123c27b444d9b1f() {
   if(isai(self)) {
-    self.var_55a29022cf7abdad = undefined;
-    self.var_39887ba979a993ab = undefined;
+    self.vehicleminhide = undefined;
+    self.vehiclemaxhide = undefined;
     self.var_fc9b05ff80c7a4d6 = undefined;
-    self.var_edb88205b19560bd = 0;
+    self.vehicleusesuppression = 0;
   }
 }
 
@@ -709,7 +709,7 @@ function function_8a09c0e5fa78a48c(smokeorigin, duration, lightsmokeradius, heav
   addactivesmoke(smokeorigin, duration, lightsmokeradius, heavysmokeradius);
 }
 
-function function_f8903387ea945165(smokeorigin, smoketype) {
+function mgladdactivesmoke(smokeorigin, smoketype) {
   delay = 0;
   duration = undefined;
   lightradius = undefined;
@@ -868,7 +868,7 @@ function function_3e5ce428974325fb(name, cooldown_ms) {
 }
 
 function function_5ad6396ef3963027(name) {
-  cooldown_timestamp = default_to(self function_11e2d4051ea44b35(name), 0);
+  cooldown_timestamp = default_to(self getaiblackboarddynamic(name), 0);
   cooldown = max(cooldown_timestamp - gettime(), 0);
   return cooldown;
 }
@@ -905,7 +905,7 @@ function function_8cb35add373dee8a(goto_func, node) {
 
   if(!istrue(node.var_97c8a15d77788e5a)) {
     if(isDefined(node.target)) {
-      node.interactionid = function_5d6132045b29baf5(node.target);
+      node.interactionid = getinteractionidfortargetname(node.target);
     }
 
     node.var_97c8a15d77788e5a = 1;
@@ -935,7 +935,7 @@ function function_8cb35add373dee8a(goto_func, node) {
       print3d(self.origin + (0, 0, randomintrange(40, 150)), "<dev string:x41f>" + node.interactionid, (1, 1, 1), 1, 1, 1000);
     }
 
-    interactionid = self function_92435c7a6ae85c3c();
+    interactionid = self getinteractionid();
 
     if(!isDefined(interactionid)) {
       self function_76b3cfb91ef40b3b(node.interactionid);

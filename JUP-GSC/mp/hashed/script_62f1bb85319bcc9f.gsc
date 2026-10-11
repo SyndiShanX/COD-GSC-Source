@@ -17,12 +17,12 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_enemy_specialist_captain");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_630e176a672235b5");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_630e176a672235b5");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 300;
   self.maxhealth = 300;
   self.behaviortreeasset = "soldier_jup_ob";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_aggressive";
+  self.aishootstyle = "ai_shoot_styles_aggressive";
   self.asmasset = "soldier";
   scripts\common\ai_settings::function_7b25d1c42e7f75be("aisettings_soldier_base_ob");
 
@@ -57,9 +57,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();

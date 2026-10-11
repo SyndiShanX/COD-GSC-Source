@@ -375,13 +375,13 @@ function _takeweapon(weapon) {
 
 function getcurrentreliableweaponswitchweapon() {
   scripts\cp_mp\utility\inventory_utility::validatehighpriorityflag();
-  var_d93faf2b91e9b072 = self gethighpriorityweapon();
+  currenthighpriorityweapon = self gethighpriorityweapon();
 
-  if(isnullweapon(var_d93faf2b91e9b072)) {
+  if(isnullweapon(currenthighpriorityweapon)) {
     return undefined;
   }
 
-  return var_d93faf2b91e9b072;
+  return currenthighpriorityweapon;
 }
 
 function isanyreliableweaponswitchinprogress() {
@@ -410,19 +410,19 @@ function canswitchtoweaponreliably(weapon) {
     return false;
   }
 
-  var_d93faf2b91e9b072 = getcurrentreliableweaponswitchweapon();
+  currenthighpriorityweapon = getcurrentreliableweaponswitchweapon();
 
-  if(isDefined(var_d93faf2b91e9b072)) {
+  if(isDefined(currenthighpriorityweapon)) {
     weaponbasename = getweaponbasename(weapon);
-    var_958b9a25c5911d97 = 0;
+    newweaponhaspriority = 0;
 
     if(weaponbasename == "ks_remote_map_cp" || weaponbasename == "briefcase_bomb_mp" || weaponbasename == "briefcase_bomb_defuse_mp" || weaponbasename == "iw7_uplinkball_mp" || weaponbasename == "iw7_tdefball_mp") {
-      var_958b9a25c5911d97 = 1;
-    } else if(weaponinventorytype(var_d93faf2b91e9b072) == "primary") {
-      var_958b9a25c5911d97 = 1;
+      newweaponhaspriority = 1;
+    } else if(weaponinventorytype(currenthighpriorityweapon) == "primary") {
+      newweaponhaspriority = 1;
     }
 
-    if(!var_958b9a25c5911d97) {
+    if(!newweaponhaspriority) {
       return false;
     }
   }
@@ -912,5 +912,5 @@ function function_e7dbbe9220d5e27b(surfacetype) {
     surfacetype = "user_terrain_" + user_number;
   }
 
-  self function_7d738013c1cfbc9d(surfacetype);
+  self playweapondropsound(surfacetype);
 }

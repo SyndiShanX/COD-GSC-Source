@@ -419,8 +419,8 @@ function light_tank_mp_waitandspawn() {
 
   oldspawndata = getvehiclespawndata(self);
 
-  if(isDefined(oldspawndata.var_6dc04302da1a9d03)) {
-    oldspawndata = oldspawndata.var_6dc04302da1a9d03;
+  if(isDefined(oldspawndata.basevehiclespawndata)) {
+    oldspawndata = oldspawndata.basevehiclespawndata;
   }
 
   spawndata = spawnStruct();

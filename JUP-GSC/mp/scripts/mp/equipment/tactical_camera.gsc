@@ -130,7 +130,7 @@ function function_dbeca4d95f44293d(grenade) {
   camera = function_c778dfbe6301129a(grenade, "super_tac_camera");
 
   if(isDefined(camera)) {
-    function_f3bb4f4911a1beb2("pmc_missions", "onPlaceTacCamera", camera);
+    callsharedfunc("pmc_missions", "onPlaceTacCamera", camera);
     camera.usedcount = 0;
     camera endon("death");
     camera thread function_a1c6dc676cf5aa86();
@@ -514,12 +514,12 @@ function private function_a3d6f92e2c44200f() {
     idx = array_find(cameragroup, camera);
 
     if(isDefined(idx)) {
-      var_e9d476a3809cb3f1 = "ui_tactical_camera_" + string(idx) + "_location";
+      omnvarname = "ui_tactical_camera_" + string(idx) + "_location";
 
       if(isDefined(camera.areaid) && camera.areaid >= 0) {
-        self setclientomnvar(var_e9d476a3809cb3f1, camera.areaid);
+        self setclientomnvar(omnvarname, camera.areaid);
       } else {
-        self setclientomnvar(var_e9d476a3809cb3f1, -1);
+        self setclientomnvar(omnvarname, -1);
       }
     }
 
@@ -538,8 +538,8 @@ function private function_b327b26a701cfa7a(player, index) {
 
     if(!isDefined(self.status) || isDefined(self.status) && newstatus != self.status) {
       self.status = newstatus;
-      var_e9d476a3809cb3f1 = "ui_tactical_camera_" + string(index) + "_status";
-      player setclientomnvar(var_e9d476a3809cb3f1, self.status);
+      omnvarname = "ui_tactical_camera_" + string(index) + "_status";
+      player setclientomnvar(omnvarname, self.status);
     }
 
     waitframe();
@@ -579,8 +579,8 @@ function private function_9f19db59e1560978(_camera, cameragroup) {
 function private function_8cfb97ae498ab61e(camera, index) {
   status = camera function_3ecfbd63a3e3bed3(self);
   camera.status = status;
-  var_e9d476a3809cb3f1 = "ui_tactical_camera_" + string(index) + "_status";
-  self setclientomnvar(var_e9d476a3809cb3f1, status);
+  omnvarname = "ui_tactical_camera_" + string(index) + "_status";
+  self setclientomnvar(omnvarname, status);
   camera thread function_b327b26a701cfa7a(self, index);
 }
 
@@ -1132,7 +1132,7 @@ function function_eb2ca6da697da5d() {
 }
 
 function function_2e7f831f8c6f4b38() {
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     return ("tac_camera_mp" + "_mgl");
   }
 
@@ -1140,7 +1140,7 @@ function function_2e7f831f8c6f4b38() {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function tacticalcamera_hack(hacker) {

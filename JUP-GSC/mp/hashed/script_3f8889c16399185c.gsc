@@ -4,9 +4,9 @@
 *************************************************/
 
 #using scripts\engine\utility;
-#namespace namespace_a131188218d8b5c3;
+#namespace progression_utility;
 
-function function_766b80da1f882fc3() {
+function getranktablebundle() {
   assert(isDefined(level.gamemodebundle) && isDefined(level.gamemodebundle.ranktable), "<dev string:x1c>");
   ranktablebundle = getscriptbundle(level.gamemodebundle.ranktable);
   assert(isDefined(ranktablebundle), "<dev string:x48>");
@@ -19,28 +19,28 @@ function getrankbundle(rankbundlename) {
   return rankbundle;
 }
 
-function function_f44d7988af879414(rankid) {
-  ranktablebundle = function_766b80da1f882fc3();
+function getrankinfostruct(rankid) {
+  ranktablebundle = getranktablebundle();
   assert(length(ranktablebundle.ranklist) > rankid);
   return getrankbundle(ranktablebundle.ranklist[rankid].rank);
 }
 
 function function_cd47cbfaa2de3623(rankid) {
-  return function_f44d7988af879414(rankid).var_7118a72fe332609d;
+  return getrankinfostruct(rankid).ingamerankname;
 }
 
 function getrankinfoicon(rankid, prestigeid) {
-  ranktablebundle = function_766b80da1f882fc3();
+  ranktablebundle = getranktablebundle();
 
-  if(isDefined(ranktablebundle.var_cdd7517c09cf8381) && length(ranktablebundle.var_cdd7517c09cf8381) > prestigeid) {
-    return ranktablebundle.var_cdd7517c09cf8381[prestigeid];
+  if(isDefined(ranktablebundle.prestigeiconlist) && length(ranktablebundle.prestigeiconlist) > prestigeid) {
+    return ranktablebundle.prestigeiconlist[prestigeid];
   }
 
-  return function_f44d7988af879414(rankid).icon;
+  return getrankinfostruct(rankid).icon;
 }
 
 function getrankinfolevel(rankid) {
-  return function_f44d7988af879414(rankid).ingamerank;
+  return getrankinfostruct(rankid).ingamerank;
 }
 
 function getrankinfominxp(rankid) {
@@ -55,13 +55,13 @@ function getrankinfomaxxp(rankid) {
   return int(level.ranktable[rankid][2]);
 }
 
-function function_997e0cd870844c1b(rankid) {
-  return function_f44d7988af879414(rankid).var_7118a72fe332609d;
+function getrankinfofullname(rankid) {
+  return getrankinfostruct(rankid).ingamerankname;
 }
 
 function getrank() {
-  rankxp = function_f3bb4f4911a1beb2("stats", "getPersStat", "rankxp");
-  rankid = function_f3bb4f4911a1beb2("stats", "getPersStat", "rank");
+  rankxp = callsharedfunc("stats", "getPersStat", "rankxp");
+  rankid = callsharedfunc("stats", "getPersStat", "rank");
 
   if(rankxp < getrankinfominxp(rankid) + getrankinfoxpamt(rankid)) {
     return rankid;
@@ -108,11 +108,11 @@ function getrankforxp(xpval) {
   return rankid;
 }
 
-function function_b1e11b17e1fbded3() {
+function getweaponranktablebundle() {
   assert(isDefined(level.gamemodebundle) && isDefined(level.gamemodebundle.weaponranktable), "<dev string:xe1>");
-  var_c6e3b34739982959 = getscriptbundle(level.gamemodebundle.weaponranktable);
-  assert(isDefined(var_c6e3b34739982959), "<dev string:x113>");
-  return var_c6e3b34739982959;
+  weaponranktablebundle = getscriptbundle(level.gamemodebundle.weaponranktable);
+  assert(isDefined(weaponranktablebundle), "<dev string:x113>");
+  return weaponranktablebundle;
 }
 
 function function_91ce54da71d1008d(rankbundlename) {
@@ -121,8 +121,8 @@ function function_91ce54da71d1008d(rankbundlename) {
   return weaponrankbundle;
 }
 
-function function_6bb67ea6b4f510ed(rankid) {
-  ranktablebundle = function_b1e11b17e1fbded3();
+function getweaponranktableentry(rankid) {
+  ranktablebundle = getweaponranktablebundle();
   assert(length(ranktablebundle.weaponranklist) > rankid);
   return getrankbundle(ranktablebundle.weaponranklist[rankid].rank);
 }

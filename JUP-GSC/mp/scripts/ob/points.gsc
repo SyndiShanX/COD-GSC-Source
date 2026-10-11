@@ -60,7 +60,7 @@ function on_safe_open(sparams) {
 
 function function_bd0c9022c796f049(eventstring, sweapon) {
   if(!isxhash(eventstring)) {
-    eventstring = function_1823ff50bb28148d(eventstring);
+    eventstring = getxhash(eventstring);
   }
 
   xp = scripts\mp\rank::getscoreinfoxp(eventstring);
@@ -72,7 +72,7 @@ function function_bd0c9022c796f049(eventstring, sweapon) {
 
 function function_ef5d482e9930a774(eventstring, sweapon, var_527bff0c92d4a0aa) {
   if(!isxhash(eventstring)) {
-    eventstring = function_1823ff50bb28148d(eventstring);
+    eventstring = getxhash(eventstring);
   }
 
   points = scripts\mp\rank::getscoreinfovalue(eventstring);
@@ -203,7 +203,7 @@ function function_818ac0c0b8f0b22(var_2267bb02be780ba4, string_add) {
     returnstring = var_2267bb02be780ba4;
   }
 
-  returnstring = function_1823ff50bb28148d(returnstring);
+  returnstring = getxhash(returnstring);
 
   if(!array_contains_key(level.scoreinfo, returnstring)) {
     returnstring = var_2267bb02be780ba4;
@@ -229,52 +229,52 @@ function function_191e620389d99b8e(weapon) {
   return undefined;
 }
 
-function function_cf6a439e1dd8049f(victim, eattacker, einflictor, smeansofdeath, sweapon, shitloc, typestring, var_aaf0465944b061ed) {
+function function_cf6a439e1dd8049f(victim, eattacker, einflictor, smeansofdeath, sweapon, shitloc, typestring, kiastring) {
   if(isDefined(self.var_d37b75616f7c2ee) && isPlayer(self.var_d37b75616f7c2ee.var_941802a0997e0c42) || isPlayer(self.var_941802a0997e0c42)) {
     return;
   }
 
-  basekillstring = var_aaf0465944b061ed;
+  basekillstring = kiastring;
   var_8c817724af28fb4d = function_191e620389d99b8e(sweapon);
 
   if(isDefined(var_8c817724af28fb4d)) {
-    var_aaf0465944b061ed = function_818ac0c0b8f0b22(var_aaf0465944b061ed, var_8c817724af28fb4d);
+    kiastring = function_818ac0c0b8f0b22(kiastring, var_8c817724af28fb4d);
   } else if(isDefined(einflictor.weapon_name) && isDefined(level.killstreakweaponmap[einflictor.weapon_name])) {
     end_string = "_" + level.killstreakweaponmap[einflictor.weapon_name];
-    var_aaf0465944b061ed = function_818ac0c0b8f0b22(var_aaf0465944b061ed, end_string);
+    kiastring = function_818ac0c0b8f0b22(kiastring, end_string);
   } else if(eattacker scripts\mp\utility\killstreak::isjuggernaut()) {
-    var_aaf0465944b061ed = function_818ac0c0b8f0b22(var_aaf0465944b061ed, "_juggernaut");
+    kiastring = function_818ac0c0b8f0b22(kiastring, "_juggernaut");
   } else if(scripts\cp_mp\weapon::iskillstreakweapon(sweapon)) {
     end_string = "_" + level.killstreakweaponmap[sweapon.basename];
-    var_aaf0465944b061ed = function_818ac0c0b8f0b22(var_aaf0465944b061ed, end_string);
+    kiastring = function_818ac0c0b8f0b22(kiastring, end_string);
   } else if(is_equal(einflictor.weapon_name, "hellhound_molotov")) {
     end_string = "_hellhound_flame";
-    var_aaf0465944b061ed = function_818ac0c0b8f0b22(var_aaf0465944b061ed, end_string);
+    kiastring = function_818ac0c0b8f0b22(kiastring, end_string);
   } else {
     binvehicle = 0;
 
     if(isDefined(einflictor.vehicletype)) {
-      var_aaf0465944b061ed = function_818ac0c0b8f0b22(var_aaf0465944b061ed, "_vehicle");
+      kiastring = function_818ac0c0b8f0b22(kiastring, "_vehicle");
     }
 
     if(smeansofdeath == "MOD_MELEE") {
-      var_aaf0465944b061ed = function_818ac0c0b8f0b22(var_aaf0465944b061ed, "_melee");
+      kiastring = function_818ac0c0b8f0b22(kiastring, "_melee");
     }
 
-    if(isDefined(self.var_d37b75616f7c2ee) && istrue(self.var_d37b75616f7c2ee.var_14edc6d1db3695bc)) {
-      var_aaf0465944b061ed = function_818ac0c0b8f0b22(var_aaf0465944b061ed, "_critical");
+    if(isDefined(self.var_d37b75616f7c2ee) && istrue(self.var_d37b75616f7c2ee.biscritical)) {
+      kiastring = function_818ac0c0b8f0b22(kiastring, "_critical");
     }
   }
 
   if(isDefined(self.var_5ede61272f442abd)) {
-    var_aaf0465944b061ed = self.var_5ede61272f442abd;
+    kiastring = self.var_5ede61272f442abd;
   }
 
   if(isDefined(smeansofdeath) && smeansofdeath == "MOD_EXECUTION" && self.unittype == "zombie") {
-    var_aaf0465944b061ed = #"zombie_kia_executed";
+    kiastring = #"zombie_kia_executed";
   }
 
-  eattacker thread function_97bd8649553541e9(var_aaf0465944b061ed, sweapon, self);
+  eattacker thread function_97bd8649553541e9(kiastring, sweapon, self);
 
   if(isDefined(self.var_21a8839dd03e31cd)) {
     if(self.var_21a8839dd03e31cd.size > 0) {
@@ -328,80 +328,80 @@ function function_b5679c2e3399669d(victim, smeansofdeath, sweapon) {
     scripts\ob\points::function_ddee59d6b1a2b9e(#"medal_jackrabbit");
   }
 
-  if(!isDefined(self.var_2d9a19517f7a4632)) {
+  if(!isDefined(self.rapidkill_data)) {
     return;
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["MOD_MELEE"]) && self.var_2d9a19517f7a4632["MOD_MELEE"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["MOD_MELEE"].var_b1be67b61f13e5c9 % 15 == 0) {
+  if(isDefined(self.rapidkill_data["MOD_MELEE"]) && self.rapidkill_data["MOD_MELEE"].rapidkill_count != 0) {
+    if(self.rapidkill_data["MOD_MELEE"].rapidkill_count % 15 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_934604e5ebee53a5");
-    } else if(self.var_2d9a19517f7a4632["MOD_MELEE"].var_b1be67b61f13e5c9 % 10 == 0) {
+    } else if(self.rapidkill_data["MOD_MELEE"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_9345ffe5ebee4b26");
-    } else if(self.var_2d9a19517f7a4632["MOD_MELEE"].var_b1be67b61f13e5c9 % 5 == 0) {
+    } else if(self.rapidkill_data["MOD_MELEE"].rapidkill_count % 5 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_d586c80f3dbf32a6");
     }
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["primary"]) && self.var_2d9a19517f7a4632["primary"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["primary"].var_b1be67b61f13e5c9 % 20 == 0) {
+  if(isDefined(self.rapidkill_data["primary"]) && self.rapidkill_data["primary"].rapidkill_count != 0) {
+    if(self.rapidkill_data["primary"].rapidkill_count % 20 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"medal_rapidkill_20");
-    } else if(self.var_2d9a19517f7a4632["primary"].var_b1be67b61f13e5c9 % 15 == 0) {
+    } else if(self.rapidkill_data["primary"].rapidkill_count % 15 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"medal_rapidkill_15");
-    } else if(self.var_2d9a19517f7a4632["primary"].var_b1be67b61f13e5c9 % 10 == 0) {
+    } else if(self.rapidkill_data["primary"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"medal_rapidkill_10");
     }
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["vehicle_crush_or_kill"]) && self.var_2d9a19517f7a4632["vehicle_crush_or_kill"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["vehicle_crush_or_kill"].var_b1be67b61f13e5c9 % 20 == 0) {
+  if(isDefined(self.rapidkill_data["vehicle_crush_or_kill"]) && self.rapidkill_data["vehicle_crush_or_kill"].rapidkill_count != 0) {
+    if(self.rapidkill_data["vehicle_crush_or_kill"].rapidkill_count % 20 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_2ff2bec46b4deb91");
-    } else if(self.var_2d9a19517f7a4632["vehicle_crush_or_kill"].var_b1be67b61f13e5c9 % 15 == 0) {
+    } else if(self.rapidkill_data["vehicle_crush_or_kill"].rapidkill_count % 15 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_2ff641c46b510001");
-    } else if(self.var_2d9a19517f7a4632["vehicle_crush_or_kill"].var_b1be67b61f13e5c9 % 10 == 0) {
+    } else if(self.rapidkill_data["vehicle_crush_or_kill"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_2ff644c46b51051a");
     }
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["single_explosive_kill"]) && self.var_2d9a19517f7a4632["single_explosive_kill"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["single_explosive_kill"].var_b1be67b61f13e5c9 % 20 == 0) {
+  if(isDefined(self.rapidkill_data["single_explosive_kill"]) && self.rapidkill_data["single_explosive_kill"].rapidkill_count != 0) {
+    if(self.rapidkill_data["single_explosive_kill"].rapidkill_count % 20 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_54f28fa9ddf9b769");
-    } else if(self.var_2d9a19517f7a4632["single_explosive_kill"].var_b1be67b61f13e5c9 % 15 == 0) {
+    } else if(self.rapidkill_data["single_explosive_kill"].rapidkill_count % 15 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_54f592a9ddfbf259");
-    } else if(self.var_2d9a19517f7a4632["single_explosive_kill"].var_b1be67b61f13e5c9 % 10 == 0) {
+    } else if(self.rapidkill_data["single_explosive_kill"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_54f595a9ddfbf772");
     }
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["killstreak_kill"]) && self.var_2d9a19517f7a4632["killstreak_kill"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["killstreak_kill"].var_b1be67b61f13e5c9 % 20 == 0) {
+  if(isDefined(self.rapidkill_data["killstreak_kill"]) && self.rapidkill_data["killstreak_kill"].rapidkill_count != 0) {
+    if(self.rapidkill_data["killstreak_kill"].rapidkill_count % 20 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_6ded9a614605c2b0");
-    } else if(self.var_2d9a19517f7a4632["killstreak_kill"].var_b1be67b61f13e5c9 % 15 == 0) {
+    } else if(self.rapidkill_data["killstreak_kill"].rapidkill_count % 15 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_6df7af61460e3ae4");
-    } else if(self.var_2d9a19517f7a4632["killstreak_kill"].var_b1be67b61f13e5c9 % 10 == 0) {
+    } else if(self.rapidkill_data["killstreak_kill"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_6df7ac61460e35cb");
     }
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["elemental_kill_fire"]) && self.var_2d9a19517f7a4632["elemental_kill_fire"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["elemental_kill_fire"].var_b1be67b61f13e5c9 % 10 == 0) {
+  if(isDefined(self.rapidkill_data["elemental_kill_fire"]) && self.rapidkill_data["elemental_kill_fire"].rapidkill_count != 0) {
+    if(self.rapidkill_data["elemental_kill_fire"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_1d16a90346898202");
     }
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["elemental_kill_cold"]) && self.var_2d9a19517f7a4632["elemental_kill_cold"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["elemental_kill_cold"].var_b1be67b61f13e5c9 % 10 == 0) {
+  if(isDefined(self.rapidkill_data["elemental_kill_cold"]) && self.rapidkill_data["elemental_kill_cold"].rapidkill_count != 0) {
+    if(self.rapidkill_data["elemental_kill_cold"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_a12b45eb4f1d0138");
     }
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["elemental_kill_electrical"]) && self.var_2d9a19517f7a4632["elemental_kill_electrical"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["elemental_kill_electrical"].var_b1be67b61f13e5c9 % 10 == 0) {
+  if(isDefined(self.rapidkill_data["elemental_kill_electrical"]) && self.rapidkill_data["elemental_kill_electrical"].rapidkill_count != 0) {
+    if(self.rapidkill_data["elemental_kill_electrical"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_deefad4fef3853c");
     }
   }
 
-  if(isDefined(self.var_2d9a19517f7a4632["elemental_kill_toxic"]) && self.var_2d9a19517f7a4632["elemental_kill_toxic"].var_b1be67b61f13e5c9 != 0) {
-    if(self.var_2d9a19517f7a4632["elemental_kill_toxic"].var_b1be67b61f13e5c9 % 10 == 0) {
+  if(isDefined(self.rapidkill_data["elemental_kill_toxic"]) && self.rapidkill_data["elemental_kill_toxic"].rapidkill_count != 0) {
+    if(self.rapidkill_data["elemental_kill_toxic"].rapidkill_count % 10 == 0) {
       scripts\ob\points::function_ddee59d6b1a2b9e(#"hash_2d04f4b7c3b707");
     }
   }
@@ -423,10 +423,10 @@ function function_591305dc9c07499b(objweapon, eattacker, smeansofdeath) {
     var_87acb5f0ae5e6d72 = level.sharedfuncs["zombie"]["get_ammo_mod_name"];
 
     if(isDefined(var_87acb5f0ae5e6d72)) {
-      var_2632b2da60d34841 = eattacker[[var_87acb5f0ae5e6d72]](objweapon);
+      ammomod_name = eattacker[[var_87acb5f0ae5e6d72]](objweapon);
 
-      if(isDefined(level.ammo_mods[var_2632b2da60d34841].element)) {
-        element = level.ammo_mods[var_2632b2da60d34841].element;
+      if(isDefined(level.ammo_mods[ammomod_name].element)) {
+        element = level.ammo_mods[ammomod_name].element;
       }
     }
   } else {
@@ -473,7 +473,7 @@ function function_591305dc9c07499b(objweapon, eattacker, smeansofdeath) {
 function function_269657aa69da2b38(sparams) {
   var_8a9445752cf5f1c9 = self.var_941802a0997e0c42;
   var_d8d142881fb224 = isDefined(sparams.eattacker) ? sparams.eattacker.var_941802a0997e0c42 : undefined;
-  var_691b16f55274b1c5 = self.var_691b16f55274b1c5;
+  elementalweakness = self.elementalweakness;
 
   if(!isDefined(level.ob_ai_killed_points_throttle)) {
     level.ob_ai_killed_points_throttle = throttle_initialize("ob_ai_killed_points_throttle", 1, level.framedurationseconds);
@@ -491,7 +491,7 @@ function function_269657aa69da2b38(sparams) {
   }
 
   if(isPlayer(sparams.eattacker)) {
-    sparams.eattacker.var_2d9a19517f7a4632 = isDefined(sparams.eattacker.var_2d9a19517f7a4632) ? sparams.eattacker.var_2d9a19517f7a4632 : [];
+    sparams.eattacker.rapidkill_data = isDefined(sparams.eattacker.rapidkill_data) ? sparams.eattacker.rapidkill_data : [];
 
     if(isDefined(sparams.smeansofdeath)) {
       sparams.eattacker function_54de0dcded063f2d(sparams.smeansofdeath);
@@ -521,7 +521,7 @@ function function_269657aa69da2b38(sparams) {
   }
 
   if(isDefined(sparams.eattacker) && isPlayer(sparams.eattacker.owner)) {
-    sparams.eattacker.owner.var_2d9a19517f7a4632 = isDefined(sparams.eattacker.owner.var_2d9a19517f7a4632) ? sparams.eattacker.owner.var_2d9a19517f7a4632 : [];
+    sparams.eattacker.owner.rapidkill_data = isDefined(sparams.eattacker.owner.rapidkill_data) ? sparams.eattacker.owner.rapidkill_data : [];
 
     if(isDefined(sparams.eattacker.streakname) && sparams.eattacker.streakname == "sentry_turret") {
       sparams.eattacker.owner function_54de0dcded063f2d("killstreak_kill");
@@ -533,26 +533,26 @@ function function_269657aa69da2b38(sparams) {
   }
 
   if(isDefined(sparams.sweapon) && isDefined(sparams.smeansofdeath) && isPlayer(sparams.eattacker)) {
-    var_2bd7283211fa61e7 = function_591305dc9c07499b(sparams.sweapon, sparams.eattacker, sparams.smeansofdeath);
+    weaponelementtype = function_591305dc9c07499b(sparams.sweapon, sparams.eattacker, sparams.smeansofdeath);
     var_4106d2021e226fcd = "none";
 
-    if(var_2bd7283211fa61e7 == "fire" || sparams.smeansofdeath == "MOD_ELEMENTAL_FIRE") {
+    if(weaponelementtype == "fire" || sparams.smeansofdeath == "MOD_ELEMENTAL_FIRE") {
       if(!isDefined(sparams.einflictor) || !is_equal(sparams.einflictor.weapon_name, "hellhound_molotov")) {
         sparams.eattacker function_54de0dcded063f2d("elemental_kill_fire");
         var_4106d2021e226fcd = #"hash_f09b4f756df11aa4";
       }
-    } else if(var_2bd7283211fa61e7 == "cold" || sparams.smeansofdeath == "MOD_ELEMENTAL_COLD") {
+    } else if(weaponelementtype == "cold" || sparams.smeansofdeath == "MOD_ELEMENTAL_COLD") {
       sparams.eattacker function_54de0dcded063f2d("elemental_kill_cold");
       var_4106d2021e226fcd = #"hash_a62035653525d27e";
-    } else if(var_2bd7283211fa61e7 == "electrical" || sparams.smeansofdeath == "MOD_ELEMENTAL_ELEC") {
+    } else if(weaponelementtype == "electrical" || sparams.smeansofdeath == "MOD_ELEMENTAL_ELEC") {
       sparams.eattacker function_54de0dcded063f2d("elemental_kill_electrical");
       var_4106d2021e226fcd = #"hash_f48e7e053c787be5";
-    } else if(var_2bd7283211fa61e7 == "toxic" || sparams.smeansofdeath == "MOD_ELEMENTAL_TOXIC") {
+    } else if(weaponelementtype == "toxic" || sparams.smeansofdeath == "MOD_ELEMENTAL_TOXIC") {
       sparams.eattacker function_54de0dcded063f2d("elemental_kill_toxic");
       var_4106d2021e226fcd = #"hash_e1c37b28b02f43bf";
     }
 
-    if(isDefined(var_691b16f55274b1c5) && isarray(var_691b16f55274b1c5) && istrue(var_691b16f55274b1c5[var_2bd7283211fa61e7]) && var_4106d2021e226fcd != "none") {
+    if(isDefined(elementalweakness) && isarray(elementalweakness) && istrue(elementalweakness[weaponelementtype]) && var_4106d2021e226fcd != "none") {
       sparams.eattacker scripts\ob\points::function_ddee59d6b1a2b9e(var_4106d2021e226fcd, undefined, 0, #"kill");
     }
   }
@@ -584,25 +584,25 @@ function function_de67925b7692fe3d(var_444cec370990f32) {
   level endon("game_ended");
   wait 2;
 
-  if(isPlayer(self) && isDefined(self.var_2d9a19517f7a4632) && isDefined(self.var_2d9a19517f7a4632[var_444cec370990f32])) {
-    self.var_2d9a19517f7a4632[var_444cec370990f32].var_b1be67b61f13e5c9 = 0;
+  if(isPlayer(self) && isDefined(self.rapidkill_data) && isDefined(self.rapidkill_data[var_444cec370990f32])) {
+    self.rapidkill_data[var_444cec370990f32].rapidkill_count = 0;
   }
 }
 
 function function_54de0dcded063f2d(var_444cec370990f32, sweapon) {
-  self.var_2d9a19517f7a4632[var_444cec370990f32] = default_to(self.var_2d9a19517f7a4632[var_444cec370990f32], spawnStruct());
-  self.var_2d9a19517f7a4632[var_444cec370990f32].var_b1be67b61f13e5c9 = default_to(self.var_2d9a19517f7a4632[var_444cec370990f32].var_b1be67b61f13e5c9, 0);
+  self.rapidkill_data[var_444cec370990f32] = default_to(self.rapidkill_data[var_444cec370990f32], spawnStruct());
+  self.rapidkill_data[var_444cec370990f32].rapidkill_count = default_to(self.rapidkill_data[var_444cec370990f32].rapidkill_count, 0);
 
   if(isDefined(sweapon)) {
-    if(!isDefined(self.var_2d9a19517f7a4632[var_444cec370990f32].weapon)) {
-      self.var_2d9a19517f7a4632[var_444cec370990f32].weapon = sweapon;
-    } else if(self.var_2d9a19517f7a4632[var_444cec370990f32].weapon != sweapon) {
-      self.var_2d9a19517f7a4632[var_444cec370990f32].var_b1be67b61f13e5c9 = 0;
+    if(!isDefined(self.rapidkill_data[var_444cec370990f32].weapon)) {
+      self.rapidkill_data[var_444cec370990f32].weapon = sweapon;
+    } else if(self.rapidkill_data[var_444cec370990f32].weapon != sweapon) {
+      self.rapidkill_data[var_444cec370990f32].rapidkill_count = 0;
       return;
     }
   }
 
-  self.var_2d9a19517f7a4632[var_444cec370990f32].var_b1be67b61f13e5c9++;
+  self.rapidkill_data[var_444cec370990f32].rapidkill_count++;
   thread function_de67925b7692fe3d(var_444cec370990f32);
 }
 

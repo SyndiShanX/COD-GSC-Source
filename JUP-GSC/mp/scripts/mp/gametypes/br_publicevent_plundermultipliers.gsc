@@ -17,20 +17,20 @@ function autoexec main() {
   scripts\mp\gametypes\br_publicevents::function_dbc8f6cb3760cd82(%"moneysiphon", &function_1cac290201dd47fc);
 }
 
-function function_9aa5ae7661a3a913(var_9cd269534ffd4dc9) {
+function function_9aa5ae7661a3a913(bloodmoney) {
   if(!isDefined(level.plundermultipliers)) {
     level.plundermultipliers = spawnStruct();
   }
 
-  var_9cd269534ffd4dc9.validatefunc = &function_e7a80b9a5971257a;
-  var_9cd269534ffd4dc9.activatefunc = &function_41b1afbe1c7af99;
-  var_9cd269534ffd4dc9.waitfunc = &function_aec5c0a5b73ae7c5;
-  var_9cd269534ffd4dc9.postinitfunc = &function_adc3e7f53e3456d0;
-  var_9cd269534ffd4dc9.timertype = 10;
-  var_9cd269534ffd4dc9.var_45620a2820463e6e = getdvarint(@ "hash_290bf19648dc8eb2", 2);
-  var_9cd269534ffd4dc9.var_ee5fb771f83add5e = getdvarfloat(@ "hash_8685285f3db98a1c", 2);
-  var_9cd269534ffd4dc9.duration = getdvarint(@ "hash_4e87bb76afe4eb45", 120);
-  var_9cd269534ffd4dc9.type = % "bloodmoney";
+  bloodmoney.validatefunc = &function_e7a80b9a5971257a;
+  bloodmoney.activatefunc = &function_41b1afbe1c7af99;
+  bloodmoney.waitfunc = &function_aec5c0a5b73ae7c5;
+  bloodmoney.postinitfunc = &function_adc3e7f53e3456d0;
+  bloodmoney.timertype = 10;
+  bloodmoney.var_45620a2820463e6e = getdvarint(@ "hash_290bf19648dc8eb2", 2);
+  bloodmoney.var_ee5fb771f83add5e = getdvarfloat(@ "hash_8685285f3db98a1c", 2);
+  bloodmoney.duration = getdvarint(@ "hash_4e87bb76afe4eb45", 120);
+  bloodmoney.type = % "bloodmoney";
 }
 
 function initcontractor(contractor) {
@@ -81,15 +81,15 @@ function function_ae81543a21ecadd3() {
   setomnvar("contractor_active", 0);
 }
 
-function function_1cac290201dd47fc(var_a5b707e79d910ef6) {
+function function_1cac290201dd47fc(moneysiphon) {
   if(!isDefined(level.plundermultipliers)) {
     level.plundermultipliers = spawnStruct();
   }
 
-  var_a5b707e79d910ef6.validatefunc = &function_98e0aab5f4a07947;
-  var_a5b707e79d910ef6.activatefunc = &function_8645e7ba0e3942c0;
-  var_a5b707e79d910ef6.waitfunc = &function_b44e7b12bcdc2c14;
-  var_a5b707e79d910ef6.postinitfunc = &function_ef3989dd64896a91;
+  moneysiphon.validatefunc = &function_98e0aab5f4a07947;
+  moneysiphon.activatefunc = &function_8645e7ba0e3942c0;
+  moneysiphon.waitfunc = &function_b44e7b12bcdc2c14;
+  moneysiphon.postinitfunc = &function_ef3989dd64896a91;
 }
 
 function function_ca6e399c0a8a91b6(eventstruct, eventname) {
@@ -185,17 +185,17 @@ function heat_activatefunc() {}
 
 function function_ef3989dd64896a91() {
   game["dialog"]["public_events_money_siphon_active"] = "csht_grav_boos";
-  var_a5b707e79d910ef6 = spawnStruct();
-  var_a5b707e79d910ef6.type = % "moneysiphon";
-  var_a5b707e79d910ef6.timertype = 13;
-  var_a5b707e79d910ef6.active = 0;
-  var_a5b707e79d910ef6.var_e8fb817a73e06aba = getdvarint(@ "hash_55d165f2f9e49694", 2);
-  var_a5b707e79d910ef6.var_9714ddda6a6df159 = getdvarint(@ "hash_1cc3febe5f5f8883", 100);
-  var_a5b707e79d910ef6.depositinterval = getdvarfloat(@ "hash_23750ae04694dc22", 3);
-  var_a5b707e79d910ef6.duration = getdvarint(@ "hash_1a720e1709ceabf0", 120);
-  var_a5b707e79d910ef6.var_f9b722c9edce3106 = getdvarint(@ "hash_74f7c2602fc10dd8", 120);
-  var_a5b707e79d910ef6.var_2f1ee623e7fc5c8c = getdvarint(@ "hash_2ac717f48aef9bd0", 1);
-  level.plundermultipliers.var_a5b707e79d910ef6 = var_a5b707e79d910ef6;
+  moneysiphon = spawnStruct();
+  moneysiphon.type = % "moneysiphon";
+  moneysiphon.timertype = 13;
+  moneysiphon.active = 0;
+  moneysiphon.var_e8fb817a73e06aba = getdvarint(@ "hash_55d165f2f9e49694", 2);
+  moneysiphon.var_9714ddda6a6df159 = getdvarint(@ "hash_1cc3febe5f5f8883", 100);
+  moneysiphon.depositinterval = getdvarfloat(@ "hash_23750ae04694dc22", 3);
+  moneysiphon.duration = getdvarint(@ "hash_1a720e1709ceabf0", 120);
+  moneysiphon.var_f9b722c9edce3106 = getdvarint(@ "hash_74f7c2602fc10dd8", 120);
+  moneysiphon.var_2f1ee623e7fc5c8c = getdvarint(@ "hash_2ac717f48aef9bd0", 1);
+  level.plundermultipliers.moneysiphon = moneysiphon;
 }
 
 function function_98e0aab5f4a07947() {
@@ -206,7 +206,7 @@ function function_b44e7b12bcdc2c14() {}
 
 function function_8645e7ba0e3942c0() {
   level endon("game_ended");
-  function_ca6e399c0a8a91b6(level.plundermultipliers.var_a5b707e79d910ef6, "money_siphon");
+  function_ca6e399c0a8a91b6(level.plundermultipliers.moneysiphon, "money_siphon");
 }
 
 function function_7ebdc9e059a1beaf() {}

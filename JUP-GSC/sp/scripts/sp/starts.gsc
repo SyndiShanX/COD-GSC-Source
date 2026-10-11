@@ -185,7 +185,7 @@ function display_starts() {
 
   start_list_settext(elems, strings, selected);
   old_selected = selected;
-  var_1a6f1e60b90fbe7c = 0;
+  last_presstime = 0;
 
   for(;;) {
     if(old_selected != selected) {
@@ -193,7 +193,7 @@ function display_starts() {
       old_selected = selected;
     }
 
-    if(gettime() - var_1a6f1e60b90fbe7c > 150) {
+    if(gettime() - last_presstime > 150) {
       up_pressed = 0;
       down_pressed = 0;
     }
@@ -201,7 +201,7 @@ function display_starts() {
     if(!up_pressed) {
       if(level.player buttonPressed("UPARROW") || level.player buttonPressed("DPAD_UP") || level.player buttonPressed("APAD_UP")) {
         up_pressed = 1;
-        var_1a6f1e60b90fbe7c = gettime();
+        last_presstime = gettime();
         selected--;
       }
     } else if(!level.player buttonPressed("UPARROW") && !level.player buttonPressed("DPAD_UP") && !level.player buttonPressed("APAD_UP")) {
@@ -211,7 +211,7 @@ function display_starts() {
     if(!down_pressed) {
       if(level.player buttonPressed("DOWNARROW") || level.player buttonPressed("DPAD_DOWN") || level.player buttonPressed("APAD_DOWN")) {
         down_pressed = 1;
-        var_1a6f1e60b90fbe7c = gettime();
+        last_presstime = gettime();
         selected++;
       }
     } else if(!level.player buttonPressed("DOWNARROW") && !level.player buttonPressed("DPAD_DOWN") && !level.player buttonPressed("APAD_DOWN")) {
@@ -303,7 +303,7 @@ function start_load_transients() {
             foreach(name in set_names) {
               if(var_f4322ce4ec225081 == name) {
                 set_match = var_f4322ce4ec225081;
-                level.var_d06c0df83859d1c3[var_f4322ce4ec225081] = 1;
+                level.transient_sets[var_f4322ce4ec225081] = 1;
                 break;
               }
             }
@@ -456,7 +456,7 @@ function handle_starts() {
     wait 0.1;
   }
 
-  var_8751813f2dae82ee = [];
+  previously_run_logic_functions = [];
 
   if(!is_default_start() && level.start_point != "no_game") {
     time = gettime();
@@ -489,7 +489,7 @@ function handle_starts() {
       continue;
     }
 
-    if(already_ran_function(start_array["logic_func"], var_8751813f2dae82ee)) {
+    if(already_ran_function(start_array["logic_func"], previously_run_logic_functions)) {
       continue;
     }
 
@@ -505,7 +505,7 @@ function handle_starts() {
     level notify("start_logic", start_array["name"]);
     level.start_struct[[start_array["logic_func"]]]();
     scripts\sp\analytics::start_point_check(start_array["name"]);
-    var_8751813f2dae82ee[var_8751813f2dae82ee.size] = start_array["logic_func"];
+    previously_run_logic_functions[previously_run_logic_functions.size] = start_array["logic_func"];
 
     if(getdvarint(@ "feedback")) {
       feedback_increase_index();
@@ -513,8 +513,8 @@ function handle_starts() {
   }
 }
 
-function already_ran_function(func, var_8751813f2dae82ee) {
-  foreach(logic_function in var_8751813f2dae82ee) {
+function already_ran_function(func, previously_run_logic_functions) {
+  foreach(logic_function in previously_run_logic_functions) {
     if(logic_function == func) {
       return true;
     }
@@ -644,15 +644,15 @@ function create_feedback_starts(sarray) {
   }
 
   setDvar(@ "hash_b9725e2c8d3c3df7", 0);
-  var_be775dd8cbb29af4 = [];
+  tolower_sarray = [];
 
   foreach(s in sarray) {
-    var_be775dd8cbb29af4[i] = tolower(s);
+    tolower_sarray[i] = tolower(s);
   }
 
-  thread check_feedback_starts_existance(var_be775dd8cbb29af4);
-  level.feedback_starts = var_be775dd8cbb29af4;
-  level.feedback_start_point = var_be775dd8cbb29af4[getdvarint(@ "feedback_index")];
+  thread check_feedback_starts_existance(tolower_sarray);
+  level.feedback_starts = tolower_sarray;
+  level.feedback_start_point = tolower_sarray[getdvarint(@ "feedback_index")];
 }
 
 function create_feedback_context(start_name, context) {
@@ -764,14 +764,14 @@ function feedback_increase_index() {
 
 function check_feedback_starts_existance(feedbackstarts) {
   level waittill("load_finished");
-  var_1050cac21606c5c5 = [];
+  startnamearray = [];
 
   foreach(startstruct in level.start_arrays) {
-    var_1050cac21606c5c5[var_1050cac21606c5c5.size] = startstruct["name"];
+    startnamearray[startnamearray.size] = startstruct["name"];
   }
 
   foreach(start in feedbackstarts) {
-    assertex(array_contains(var_1050cac21606c5c5, start), "FEEDBACK START : " + start + " DOES NOT EXIST IN LEVEL STARTS");
+    assertex(array_contains(startnamearray, start), "FEEDBACK START : " + start + " DOES NOT EXIST IN LEVEL STARTS");
   }
 }
 

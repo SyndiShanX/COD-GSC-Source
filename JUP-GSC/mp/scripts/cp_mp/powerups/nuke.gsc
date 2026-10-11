@@ -33,7 +33,7 @@ function private function_f23ad00303ba63e2() {
 }
 
 function grab_nuke(str_powerup, ent_powerup, var_e3f071c0be79ecce, var_1c0c489113c9d46a, var_8d1aa1efbf8b3c6e, var_2bb5673b997944c1, var_82bc4143d5c2c838, ai_override) {
-  if(!istrue(var_2bb5673b997944c1) && !isent(ent_powerup) && !ent_powerup function_73cc0f04c4c5001d()) {
+  if(!istrue(var_2bb5673b997944c1) && !isent(ent_powerup) && !ent_powerup isscriptableinstance()) {
     assertmsg("<dev string:x9f>");
   }
 
@@ -149,7 +149,7 @@ function private nuke_ais(v_location, a_ais, str_powerup, var_8d1aa1efbf8b3c6e) 
       var_3162896c2041ab88 = array_add(var_3162896c2041ab88, ai);
 
       if(issharedfuncdefined("zombie_utils", "setMoveSpeed")) {
-        ai utility::function_f3bb4f4911a1beb2("zombie_utils", "setMoveSpeed", "walk", "nuke", 26);
+        ai utility::callsharedfunc("zombie_utils", "setMoveSpeed", "walk", "nuke", 26);
       }
     }
   }
@@ -238,40 +238,40 @@ function private nuke_screen_flash() {
   self endon("death_or_disconnect");
   self endon("play_nuke_screen_flash");
 
-  if(!isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4 = newclienthudelem(self);
-    self.var_ad173ac833a970d4.x = 0;
-    self.var_ad173ac833a970d4.y = 0;
-    self.var_ad173ac833a970d4 setshader("white", 640, 480);
-    self.var_ad173ac833a970d4.alignx = "left";
-    self.var_ad173ac833a970d4.aligny = "top";
-    self.var_ad173ac833a970d4.sort = 1;
-    self.var_ad173ac833a970d4.horzalign = "fullscreen";
-    self.var_ad173ac833a970d4.vertalign = "fullscreen";
-    self.var_ad173ac833a970d4.alpha = 0;
-    self.var_ad173ac833a970d4.foreground = 1;
-    self.var_ad173ac833a970d4.archived = 0;
-    self.var_ad173ac833a970d4.scramblerdisabled = 1;
+  if(!isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay = newclienthudelem(self);
+    self.white_screen_overlay.x = 0;
+    self.white_screen_overlay.y = 0;
+    self.white_screen_overlay setshader("white", 640, 480);
+    self.white_screen_overlay.alignx = "left";
+    self.white_screen_overlay.aligny = "top";
+    self.white_screen_overlay.sort = 1;
+    self.white_screen_overlay.horzalign = "fullscreen";
+    self.white_screen_overlay.vertalign = "fullscreen";
+    self.white_screen_overlay.alpha = 0;
+    self.white_screen_overlay.foreground = 1;
+    self.white_screen_overlay.archived = 0;
+    self.white_screen_overlay.scramblerdisabled = 1;
   }
 
   var_52bee65a8171b558 = 0.2;
   n_target_alpha = 0.8;
-  self.var_ad173ac833a970d4 fadeovertime(var_52bee65a8171b558);
-  self.var_ad173ac833a970d4.alpha = n_target_alpha;
+  self.white_screen_overlay fadeovertime(var_52bee65a8171b558);
+  self.white_screen_overlay.alpha = n_target_alpha;
   wait 0.5;
   var_52bee65a8171b558 = 0.5;
-  self.var_ad173ac833a970d4 fadeovertime(var_52bee65a8171b558);
-  self.var_ad173ac833a970d4.alpha = 0;
+  self.white_screen_overlay fadeovertime(var_52bee65a8171b558);
+  self.white_screen_overlay.alpha = 0;
   wait var_52bee65a8171b558;
 
-  if(isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4 destroy();
+  if(isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay destroy();
   }
 }
 
 function private function_66f6f1eccfecf8b2(screen_alpha) {
-  if(isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4.alpha = clamp(screen_alpha, 0, 1);
+  if(isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay.alpha = clamp(screen_alpha, 0, 1);
   }
 }
 
@@ -289,7 +289,7 @@ function private function_32bcd3aa4ea61fef(var_cc3537297eff0ba9) {
 
 function private function_f6ac370ea1b13ec7(n_dur) {
   if(utility::issharedfuncdefined("zombie", "stunZombie")) {
-    utility::function_f3bb4f4911a1beb2("zombie", "stunZombie", n_dur);
+    utility::callsharedfunc("zombie", "stunZombie", n_dur);
   }
 }
 
@@ -303,7 +303,7 @@ function private function_b9fd0ad5dff0ced6(var_8c28aac0b76c1e2e) {
 
 function private function_d4e0b51ec4d153cd() {
   if(utility::issharedfuncdefined("zombie", "clearStunZombie")) {
-    utility::function_f3bb4f4911a1beb2("zombie", "clearStunZombie");
+    utility::callsharedfunc("zombie", "clearStunZombie");
   }
 
   params = spawnStruct();

@@ -480,13 +480,13 @@ function function_6a07ef2910dea0e5() {
   }
 }
 
-function function_697d593ebcb428dd(var_e9d476a3809cb3f1, flag) {
-  self setclientomnvar(var_e9d476a3809cb3f1, flag);
-  notifyname = var_e9d476a3809cb3f1 + "_notify";
+function function_697d593ebcb428dd(omnvarname, flag) {
+  self setclientomnvar(omnvarname, flag);
+  notifyname = omnvarname + "_notify";
   notifyvalue = self getclientomnvar(notifyname);
   self setclientomnvar(notifyname, !notifyvalue);
 
-  logstring("<dev string:x1c>" + var_e9d476a3809cb3f1 + "<dev string:x48>" + flag);
+  logstring("<dev string:x1c>" + omnvarname + "<dev string:x48>" + flag);
 }
 
 function function_25f98f1b652f57ec() {

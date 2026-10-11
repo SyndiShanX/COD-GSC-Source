@@ -59,7 +59,7 @@ function init_fx_thread() {
   }
 
   level.createfxexploders = [];
-  var_4c5056380ab96e2d = [];
+  flaggedexploders = [];
 
   remove_dupes();
   offset_fix();
@@ -89,19 +89,19 @@ function init_fx_thread() {
       add_exploder(ent.v["exploder"], ent);
 
       if(isDefined(ent.v["flag"]) && ent.v["flag"] != "nil") {
-        temp = var_4c5056380ab96e2d[ent.v["flag"]];
+        temp = flaggedexploders[ent.v["flag"]];
 
         if(!isDefined(temp)) {
           temp = [];
         }
 
         temp[temp.size] = ent.v["exploder"];
-        var_4c5056380ab96e2d[ent.v["flag"]] = temp;
+        flaggedexploders[ent.v["flag"]] = temp;
       }
     }
   }
 
-  foreach(exploderarray in var_4c5056380ab96e2d) {
+  foreach(exploderarray in flaggedexploders) {
     thread scripts\common\exploder::exploder_flag_wait(msg, exploderarray);
   }
 

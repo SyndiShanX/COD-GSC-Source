@@ -9,10 +9,10 @@ function main() {
   thread sfx_metal_det("sfx_metal_det", "amb_emt_delayed_metal_det", 3);
 }
 
-function sfx_metal_det(var_eaad182af1b91884, alias, timer) {
+function sfx_metal_det(trigname, alias, timer) {
   level endon("game_ended");
   level waittill("matchStartTimer_done");
-  metal_triggers = getEntArray(var_eaad182af1b91884, "targetname");
+  metal_triggers = getEntArray(trigname, "targetname");
 
   foreach(trig in metal_triggers) {
     thread function_a0912e6a103cc3a(trig, alias, timer);

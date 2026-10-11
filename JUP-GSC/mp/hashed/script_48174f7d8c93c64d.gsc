@@ -34,23 +34,23 @@ function precache(params) {
 function private function_f49a30f92555b827(params) {
   function_842e17022dab63c3();
   function_8e401d26d58bc32d();
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_turned", &function_e809d2e0583ea302);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("shocked", &function_c8bbb80c04cd9a37);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("shocked_end", &function_deadba29b36b687d);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("burned", &function_bf0fe7b30fa14180);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("burned_end", &function_788a3fa28ef17f52);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("napalm_burned", &function_dbb5710ec418627e);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("napalm_burned_end", &function_afa5ec2deb3f62a0);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("spawn_animscripted", &function_6b324dd53aa590da);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("zombie_melee", &function_619c067c56623b02);
+  callback::get_template(self.animsetname) callback::add("on_turned", &function_e809d2e0583ea302);
+  callback::get_template(self.animsetname) callback::add("shocked", &function_c8bbb80c04cd9a37);
+  callback::get_template(self.animsetname) callback::add("shocked_end", &function_deadba29b36b687d);
+  callback::get_template(self.animsetname) callback::add("burned", &function_bf0fe7b30fa14180);
+  callback::get_template(self.animsetname) callback::add("burned_end", &function_788a3fa28ef17f52);
+  callback::get_template(self.animsetname) callback::add("napalm_burned", &function_dbb5710ec418627e);
+  callback::get_template(self.animsetname) callback::add("napalm_burned_end", &function_afa5ec2deb3f62a0);
+  callback::get_template(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
+  callback::get_template(self.animsetname) callback::add("spawn_animscripted", &function_6b324dd53aa590da);
+  callback::get_template(self.animsetname) callback::add("zombie_melee", &function_619c067c56623b02);
 
   function_c9e001e49a9899b9();
 }
 
 function function_e62bc0179274066c(taskid) {
   assert(isDefined(self.zombieaisetting));
-  function_7415ae9399ba8e75(self.zombieaisetting);
+  zombie_init_ai(self.zombieaisetting);
   assert(isDefined(self.zombieaisettings.var_e58a65b7a8f5973c));
   callback::add("on_first_ai_init", &function_f49a30f92555b827);
   function_1fc0eb1eb90c8dd0("walk", 64);
@@ -318,7 +318,7 @@ function private function_78b13007be57d581(fire_position, duration, attacker, fi
   burnbundle.var_74fbf35a2265fa59 = 2;
   burnbundle.var_439885d26a2f9bf5 = 0.2;
   fire_ent.var_e569b726ededed94 = burnbundle;
-  fire_ent.var_810c15bb2f4abd89 = 0;
+  fire_ent.blueprintdefindex = 0;
 
   if(isDefined(level.equipment.table["equip_molotov"])) {
     equipment_molotov = level.equipment.table["equip_molotov"];
@@ -457,9 +457,9 @@ function hellhound_dig(item_count) {
 
     wait 0.75;
     head_pos = self gettagorigin("j_head");
-    item = function_aa6b52df8080cac7(self.zombieaisettings.var_e58a65b7a8f5973c.diggingitemspawnlist, item_count, head_pos);
+    item = spawnpickupfromlistsharedfunc(self.zombieaisettings.var_e58a65b7a8f5973c.diggingitemspawnlist, item_count, head_pos);
   } else {
-    item = function_aa6b52df8080cac7(self.zombieaisettings.var_e58a65b7a8f5973c.diggingitemspawnlist, item_count, self.origin);
+    item = spawnpickupfromlistsharedfunc(self.zombieaisettings.var_e58a65b7a8f5973c.diggingitemspawnlist, item_count, self.origin);
   }
 
   self.digging_object = 0;
@@ -547,7 +547,7 @@ function private function_b8e70cc126c2fd5c(kill_count) {
     points = scripts\mp\rank::getscoreinfovalue(#"hash_b937bf9fd26f15f1");
 
     if(isDefined(points)) {
-      attacker function_e800498086e36c29(#"hash_b937bf9fd26f15f1");
+      attacker doscoreeventsharedfunc(#"hash_b937bf9fd26f15f1");
     }
   }
 }
@@ -569,7 +569,7 @@ function private function_2400186ca86b8b7d(params) {
     }
 
     if(ai asmhasstate(ai.asmname, "<dev string:x7b>")) {
-      ai function_360874d9808f0724();
+      ai startliveragdoll();
       ai function_ac90fa5cc0a80298("<dev string:x7b>");
     }
   }

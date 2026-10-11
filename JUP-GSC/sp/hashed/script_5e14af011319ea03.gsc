@@ -68,7 +68,7 @@ function function_ab90de89573cace8() {
 
 function function_2521e4438a93290c() {}
 
-function function_6cd4bd962c8131c() {
+function tower_explode() {
   playsoundatpos((1636.57, -5587.66, 1514.74), "port_tower_explode_transient");
 }
 
@@ -115,8 +115,8 @@ function function_60d901c08b6e60c7() {
 }
 
 function function_9119785bb20bd522() {
-  if(isDefined(level.var_3d7d7275978f193d)) {
+  if(isDefined(level.alert_sound)) {
     level.var_e05fb44af318872e stopsounds();
-    level.var_3d7d7275978f193d = undefined;
+    level.alert_sound = undefined;
   }
 }

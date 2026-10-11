@@ -6,10 +6,10 @@
 #using scripts\common\callbacks;
 #using scripts\engine\utility;
 #using scripts\weapons\manglercannon_torpedo;
-#namespace namespace_bb5b034ef171157f;
+#namespace zombie_mangler_ranged_attack;
 
 function function_303a0a4b0a91563() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_7d71101059243aa7);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_7d71101059243aa7);
 }
 
 function function_76b312fdb8a57ebb() {
@@ -18,7 +18,7 @@ function function_76b312fdb8a57ebb() {
   self.var_14f3052ce66da740 = &function_14f3052ce66da740;
   self function_3e89eb3d8e3f1811("can_ranged_attack", 1);
   self.var_809957baadce26cf = 0;
-  self.var_a722c7954f95547b = self.zombieaisettings.var_e58a65b7a8f5973c.var_1a33f4dc52ab6ca4 * self.health;
+  self.var_a722c7954f95547b = self.zombieaisettings.var_e58a65b7a8f5973c.staggerdamagethreshold * self.health;
   self.var_48a12f8371457fbb = self.zombieaisettings.var_e58a65b7a8f5973c.var_845b3a14d1732111;
   self.torpedo_cooldown = self.zombieaisettings.var_e58a65b7a8f5973c.torpedocooldown;
   self.var_db7207afcf1c7e9a = self.zombieaisettings.var_e58a65b7a8f5973c.var_a74530f581b4ca46;
@@ -33,7 +33,7 @@ function function_76b312fdb8a57ebb() {
 }
 
 function private function_7d71101059243aa7(params) {
-  if(istrue(self function_11e2d4051ea44b35("can_interrupt_cannon"))) {
+  if(istrue(self getaiblackboarddynamic("can_interrupt_cannon"))) {
     if(isDefined(params.metabonename) && params.metabonename == "j_weapon_spin") {
       self.var_809957baadce26cf += params.idamage;
       self setscriptablepartstate("cannon_weakpoint", "hit");
@@ -55,7 +55,7 @@ function private function_81245ea5bddfa425() {
 
   while(true) {
     self waittill("enter_ranged_attack");
-    self function_e64ea2b4e79c4b74(2);
+    self setbtgoalstationary(2);
     self clearpath();
     self setscriptablepartstate("cannon_charge", "charge");
     self setscriptablepartstate("cannon_glow", "cannon_glow_on");
@@ -79,7 +79,7 @@ function private function_14f3052ce66da740() {
   self setscriptablepartstate("cannon_charge", "shoot");
   self setscriptablepartstate("cannon_glow", "cannon_glow_off");
 
-  if(self._blackboard.var_7e3081ff77305aa8) {
+  if(self._blackboard.zombieattractoristarget) {
     target = undefined;
     target_pos = self._blackboard.var_7e11be2629950382;
   } else if(isDefined(self.enemy)) {
@@ -87,10 +87,10 @@ function private function_14f3052ce66da740() {
     target_pos = self.enemy.origin;
   } else {
     target = undefined;
-    target_pos = function_e6b708f411a51705(self.zombieaisettings.var_e58a65b7a8f5973c.var_c8bc08de6520660f);
+    target_pos = function_e6b708f411a51705(self.zombieaisettings.var_e58a65b7a8f5973c.torpedomaxrange);
   }
 
-  var_bbfb261ebc534765 = self gettagorigin("j_weapon_spin");
+  torpedo_pos = self gettagorigin("j_weapon_spin");
   self function_3e89eb3d8e3f1811("torpedo_cooldown", int(self.torpedo_cooldown * 1000));
 
   if(self.var_db7207afcf1c7e9a) {
@@ -101,7 +101,7 @@ function private function_14f3052ce66da740() {
   }
 
   self function_3e89eb3d8e3f1811("can_interrupt_cannon", 0);
-  launch_direction = function_eb706844215e5c19(anglesToForward(self.angles), var_bbfb261ebc534765, target_pos, self.var_48cc0eda594ebc61);
+  launch_direction = function_eb706844215e5c19(anglesToForward(self.angles), torpedo_pos, target_pos, self.var_48cc0eda594ebc61);
   projectilemodel = "tag_origin_mangler_torpedo";
 
   if(isDefined(self.zombieaisettings.var_e58a65b7a8f5973c.projectilemodel)) {
@@ -110,15 +110,15 @@ function private function_14f3052ce66da740() {
     }
   }
 
-  function_abdaf24ee06fa15(var_bbfb261ebc534765, launch_direction, target, target_pos, self.zombieaisettings.var_e58a65b7a8f5973c.var_991a6aa3e96ee6dd, self.zombieaisettings.var_e58a65b7a8f5973c.var_28e41406c7dbf5ef, self.zombieaisettings.var_e58a65b7a8f5973c.var_7c12679a12eb3f6d, self.zombieaisettings.var_e58a65b7a8f5973c.var_c8bc08de6520660f, self.zombieaisettings.var_e58a65b7a8f5973c.var_9bc2d6464e5ea020, self.zombieaisettings.var_e58a65b7a8f5973c.var_9ef22227ba58594, self.zombieaisettings.var_e58a65b7a8f5973c.var_2bc6a3b41127dc16, self.zombieaisettings.var_e58a65b7a8f5973c.var_1b436d3a05c23d, self.zombieaisettings.var_e58a65b7a8f5973c.var_a2e607d2b48ccbeb, self.zombieaisettings.var_e58a65b7a8f5973c.var_a2c21dd2b4648195, 0, 0, 0, 1, "none", projectilemodel);
+  function_abdaf24ee06fa15(torpedo_pos, launch_direction, target, target_pos, self.zombieaisettings.var_e58a65b7a8f5973c.torpedodetonationdist, self.zombieaisettings.var_e58a65b7a8f5973c.torpedovelocity, self.zombieaisettings.var_e58a65b7a8f5973c.torpedomoveintervaltime, self.zombieaisettings.var_e58a65b7a8f5973c.torpedomaxrange, self.zombieaisettings.var_e58a65b7a8f5973c.var_9bc2d6464e5ea020, self.zombieaisettings.var_e58a65b7a8f5973c.torpedoblastradius, self.zombieaisettings.var_e58a65b7a8f5973c.var_2bc6a3b41127dc16, self.zombieaisettings.var_e58a65b7a8f5973c.var_1b436d3a05c23d, self.zombieaisettings.var_e58a65b7a8f5973c.var_a2e607d2b48ccbeb, self.zombieaisettings.var_e58a65b7a8f5973c.var_a2c21dd2b4648195, 0, 0, 0, 1, "none", projectilemodel);
 }
 
-function private function_eb706844215e5c19(forward_dir, var_bbfb261ebc534765, var_aa2fd664102522d5, max_angle) {
-  if(var_aa2fd664102522d5 == var_bbfb261ebc534765) {
+function private function_eb706844215e5c19(forward_dir, torpedo_pos, torpedo_target_pos, max_angle) {
+  if(torpedo_target_pos == torpedo_pos) {
     return (0, 0, 0);
   }
 
-  vec_to_enemy = var_aa2fd664102522d5 - var_bbfb261ebc534765;
+  vec_to_enemy = torpedo_target_pos - torpedo_pos;
   vec_to_enemy_normal = vectorNormalize(vec_to_enemy);
   angle_to_enemy = vectordot(forward_dir, vec_to_enemy_normal);
 
@@ -128,8 +128,8 @@ function private function_eb706844215e5c19(forward_dir, var_bbfb261ebc534765, va
 
   plane_normal = vectorcross(forward_dir, vec_to_enemy_normal);
   perpendicular_normal = vectorcross(plane_normal, forward_dir);
-  var_ddde511f90b98720 = forward_dir * cos(max_angle) + perpendicular_normal * sin(max_angle);
-  return var_ddde511f90b98720;
+  torpedo_dir = forward_dir * cos(max_angle) + perpendicular_normal * sin(max_angle);
+  return torpedo_dir;
 }
 
 function private function_db02e333586efd39() {

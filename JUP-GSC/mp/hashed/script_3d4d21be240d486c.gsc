@@ -7,7 +7,7 @@
 #using scripts\anim\dialogue;
 #using scripts\common\utility;
 #using scripts\engine\utility;
-#namespace namespace_fdb4a38f8da25aa4;
+#namespace clear_lkp_one_member;
 
 function getfunction(funcid) {
   switch (funcid) {
@@ -20,9 +20,9 @@ function getfunction(funcid) {
     case #"hash_4bc3c13aae411fc":
       return &function_1f0637e40c2a0dda;
     case #"hash_bf509799ad09e3fb":
-      return &function_72d72588305107b4;
+      return &onadduser;
     case #"hash_cfc7861edb6bdc95":
-      return &function_8add99cb1b82b964;
+      return &ondeleteuser;
     case #"hash_bb5cf3d8738e8519":
       return &playdialog;
     case #"hash_80804c8d4d60b774":
@@ -32,12 +32,12 @@ function getfunction(funcid) {
   assertmsg("<dev string:x1c>" + funcid);
 }
 
-function function_72d72588305107b4(interactionid) {
+function onadduser(interactionid) {
   self.battlechatterallowed = 0;
   self.var_a4709d00b598b7bf = 1;
 }
 
-function function_8add99cb1b82b964(interactionid) {
+function ondeleteuser(interactionid) {
   self.battlechatterallowed = 1;
   self.balwayscoverexposed = 1;
   self.var_a4709d00b598b7bf = 0;

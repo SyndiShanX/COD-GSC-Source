@@ -425,7 +425,7 @@ function function_544e73b4ae5d3735(instance) {
   instance.disabled_use_for[self getentitynumber()] = 1;
 }
 
-function function_6b01aba37e349764(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_6b01aba37e349764(instance, part, state, player, bautouse, usestring) {
   self endon("disconnect");
   level endon("game_ended");
 

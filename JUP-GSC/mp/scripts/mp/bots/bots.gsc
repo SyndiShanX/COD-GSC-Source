@@ -960,7 +960,7 @@ function bot_connect_monitor() {
         new_bots[i].bot.bot_team = new_bots[i].team;
       }
 
-      if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() || scripts\cp_mp\utility\game_utility::function_6910a4c65560c44b()) {
+      if(scripts\cp_mp\utility\game_utility::ismagellanmode() || scripts\cp_mp\utility\game_utility::function_6910a4c65560c44b()) {
         var_5be31bbf808e8d4c = new_bots[i].squad;
         new_bots[i].bot.bot_squad = var_5be31bbf808e8d4c;
       }
@@ -999,7 +999,7 @@ function function_81c6c4218188e7d8() {
     return;
   }
 
-  self.xuid = self function_7a32b0201993d7f7();
+  self.xuid = self getplayerunoid();
 }
 
 function bot_monitor_team_limits() {
@@ -1936,7 +1936,7 @@ function bot_random_ranks_for_difficulty(difficulty) {
     level.bot_rnd_rank["veteran"][1] = 54;
   }
 
-  assertex(level.bot_rnd_rank["<dev string:x49a>"][1] == level.var_e0e30c15f736bd96, "<dev string:x4a5>");
+  assertex(level.bot_rnd_rank["<dev string:x49a>"][1] == level.maxstandardrank, "<dev string:x4a5>");
 
   if(!isDefined(level.bot_rnd_prestige)) {
     level.bot_rnd_prestige = [];
@@ -2013,9 +2013,9 @@ function function_9ea1b3409311f518() {
   return human_spectators;
 }
 
-function bot_damage_callback(eattacker, idamage, smeansofdeath, sweapon, einflictor, shitloc, vpoint, var_1da1a66b5c6a06a7) {
-  if(!isDefined(var_1da1a66b5c6a06a7)) {
-    var_1da1a66b5c6a06a7 = 0;
+function bot_damage_callback(eattacker, idamage, smeansofdeath, sweapon, einflictor, shitloc, vpoint, lightarmordamage) {
+  if(!isDefined(lightarmordamage)) {
+    lightarmordamage = 0;
   }
 
   if(!isDefined(self) || !isalive(self)) {
@@ -2026,7 +2026,7 @@ function bot_damage_callback(eattacker, idamage, smeansofdeath, sweapon, einflic
     return;
   }
 
-  if(idamage <= 0 && var_1da1a66b5c6a06a7 <= 0) {
+  if(idamage <= 0 && lightarmordamage <= 0) {
     return;
   }
 
@@ -2040,7 +2040,7 @@ function bot_damage_callback(eattacker, idamage, smeansofdeath, sweapon, einflic
 
   if(isDefined(einflictor)) {
     if(isDefined(self.fnbotdamagecallback)) {
-      self[[self.fnbotdamagecallback]](eattacker, idamage, smeansofdeath, sweapon, einflictor, shitloc, vpoint, var_1da1a66b5c6a06a7);
+      self[[self.fnbotdamagecallback]](eattacker, idamage, smeansofdeath, sweapon, einflictor, shitloc, vpoint, lightarmordamage);
     }
 
     if(level.teambased) {
@@ -2140,10 +2140,10 @@ function bot_restart_think_threads() {
   thread bot_think_dynamic_doors();
   thread bot_think_nvg();
 
-  thread function_85449d9e699cd4cd();
+  thread bot_think_debug();
 }
 
-function function_85449d9e699cd4cd() {
+function bot_think_debug() {
   self notify("<dev string:x500>");
   self endon("<dev string:x500>");
   self endon("<dev string:x513>");
@@ -3853,9 +3853,9 @@ function function_5188aadb27d72a11() {
   thread function_51da8c98ef44eceb();
 }
 
-function function_b09b8c00320b91e(eattacker, idamage, smeansofdeath, objweapon, einflictor, shitloc, vpoint, var_1da1a66b5c6a06a7) {
-  if(!isDefined(var_1da1a66b5c6a06a7)) {
-    var_1da1a66b5c6a06a7 = 0;
+function function_b09b8c00320b91e(eattacker, idamage, smeansofdeath, objweapon, einflictor, shitloc, vpoint, lightarmordamage) {
+  if(!isDefined(lightarmordamage)) {
+    lightarmordamage = 0;
   }
 
   host = scripts\mp\dev::devfindhost();
@@ -3865,7 +3865,7 @@ function function_b09b8c00320b91e(eattacker, idamage, smeansofdeath, objweapon, 
   }
 
   self.var_2fc19f3a438f03a5++;
-  self.var_b0ab2dca24bfe60a += idamage + var_1da1a66b5c6a06a7;
+  self.var_b0ab2dca24bfe60a += idamage + lightarmordamage;
 
   if(!isDefined(self.firstdamagetime)) {
     self.firstdamagetime = gettime();
@@ -3885,7 +3885,7 @@ function function_b09b8c00320b91e(eattacker, idamage, smeansofdeath, objweapon, 
   }
 
   self.menu["<dev string:x6de>"] setvalue(self.health);
-  self.menu["<dev string:x6e8>"] setvalue(idamage + var_1da1a66b5c6a06a7);
+  self.menu["<dev string:x6e8>"] setvalue(idamage + lightarmordamage);
   self.menu["<dev string:x6f2>"] setvalue(self.var_b0ab2dca24bfe60a);
   self.menu["<dev string:x701>"] setvalue(self.var_2fc19f3a438f03a5);
   self.menu["<dev string:x709>"] setvalue(range);

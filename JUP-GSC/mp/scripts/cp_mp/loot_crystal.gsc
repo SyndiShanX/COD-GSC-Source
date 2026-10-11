@@ -269,7 +269,7 @@ function function_a120a3b57a6087c2(item, originpos) {
   itemlauncher delete();
 }
 
-function loot_crystal_destroyed(instance, note, param, var_535d9c3fdddab5a9) {
+function loot_crystal_destroyed(instance, note, param, instigator) {
   if(!istrue(instance.var_f6f86c3af9ca88a0)) {
     instance thread function_1be1c2a4c44b823c();
   }
@@ -278,7 +278,7 @@ function loot_crystal_destroyed(instance, note, param, var_535d9c3fdddab5a9) {
   sparams.instance = instance;
   sparams.note = note;
   sparams.param = param;
-  sparams.var_535d9c3fdddab5a9 = var_535d9c3fdddab5a9;
+  sparams.instigator = instigator;
   callback::callback("loot_crystal_destroyed", sparams);
 }
 

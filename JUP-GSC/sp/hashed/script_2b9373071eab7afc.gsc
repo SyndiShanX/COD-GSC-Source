@@ -25,8 +25,8 @@
 #namespace namespace_640e6f453fd3818f;
 
 function function_971bf83fc35c7d8d() {
-  function_24138ae8a99ee1ca();
-  function_f92c48d736aa932c();
+  init_generic_human_anims();
+  init_player_anims();
   contents = ["physicscontents_glass", "physicscontents_item", "physicscontents_itemclip", "physicscontents_clipshot", "physicscontents_vehicle"];
   level.var_2ebb956b048b8bb7 = physics_createcontents(contents);
   level.var_797d34a3d8c0545a = 0;
@@ -34,7 +34,7 @@ function function_971bf83fc35c7d8d() {
 
 #using_animtree("generic_human");
 
-function function_24138ae8a99ee1ca() {
+function init_generic_human_anims() {
   level.scr_anim["hvt"]["combat_2_ground_head"] = % jup_hostage_combat_2_ground_idle_head_shot;
   level.scr_anim["hvt"]["combat_2_ground_body"] = % jup_hostage_combat_2_ground_idle_body_shot;
   level.scr_anim["hvt"]["ground_idle_struggle"][0] = % jup_hostage_ground_idle_struggle;
@@ -48,7 +48,7 @@ function function_24138ae8a99ee1ca() {
 
 #using_animtree("player");
 
-function function_f92c48d736aa932c() {
+function init_player_anims() {
   var_7907568326d674ab = "player_rig";
   level.scr_anim[var_7907568326d674ab]["pickup_ground_4"] = % jup_hostage_pickedup_stand_4_vm;
   level.scr_anim[var_7907568326d674ab]["pickup_ground_6"] = % jup_hostage_pickedup_stand_6_vm;
@@ -128,8 +128,8 @@ function function_4e94a290b2aecd87(var_cb4dfc3c8138f8aa, var_6e3cca7456eaf23e) {
 
   if(!is_equal(var_cb4dfc3c8138f8aa, 1) && !is_equal(var_cb4dfc3c8138f8aa, 2)) {
     if(!function_26e853210b199ff2(72)) {
-      var_c12bfb1a1dfbb95 = function_d74b2fe7f6c2e20d();
-      thread function_2c6efd419713d16a(var_c12bfb1a1dfbb95);
+      span = function_d74b2fe7f6c2e20d();
+      thread function_2c6efd419713d16a(span);
     } else {
       flag_set("hostage_moved");
     }
@@ -160,20 +160,20 @@ function function_4e94a290b2aecd87(var_cb4dfc3c8138f8aa, var_6e3cca7456eaf23e) {
 }
 
 function function_d74b2fe7f6c2e20d() {
-  var_c12bfb1a1dfbb95 = 18;
+  span = 18;
 
-  while(!function_26e853210b199ff2(72 - var_c12bfb1a1dfbb95)) {
-    var_c12bfb1a1dfbb95 += 18;
+  while(!function_26e853210b199ff2(72 - span)) {
+    span += 18;
   }
 
-  return var_c12bfb1a1dfbb95;
+  return span;
 }
 
-function function_2c6efd419713d16a(var_c12bfb1a1dfbb95) {
+function function_2c6efd419713d16a(span) {
   self.mover = spawn_tag_origin();
   self linkTo(self.mover);
   waitframe();
-  self.mover moveTo(self.origin + anglesToForward(self.angles) * var_c12bfb1a1dfbb95, 1, 0.1, 0.1);
+  self.mover moveTo(self.origin + anglesToForward(self.angles) * span, 1, 0.1, 0.1);
   wait 1;
   self unlink();
   self.mover delete();
@@ -468,12 +468,12 @@ function hostage_confirm_good_angles(player) {
   }
 }
 
-function confirm_good_pickup_location(var_abbb4b8615510568, var_5539460d8e2f6a2b, player, radius) {
+function confirm_good_pickup_location(var_abbb4b8615510568, ref_angles, player, radius) {
   if(!isDefined(level.var_712a42cb53dc22c1)) {
     level.var_712a42cb53dc22c1 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 1);
   }
 
-  currentangles = var_5539460d8e2f6a2b;
+  currentangles = ref_angles;
   var_79b0da6daa286045 = var_abbb4b8615510568 + (0, 0, 24);
 
   if(!isDefined(radius)) {
@@ -706,8 +706,8 @@ function function_12cac240ccbc1e8d(pos) {
   return false;
 }
 
-function function_26e853210b199ff2(var_c12bfb1a1dfbb95) {
-  var_d652689d2a01d5d2 = self.origin + anglesToForward(self.angles) * var_c12bfb1a1dfbb95 * -1 + (0, 0, 12);
+function function_26e853210b199ff2(span) {
+  var_d652689d2a01d5d2 = self.origin + anglesToForward(self.angles) * span * -1 + (0, 0, 12);
   trace = ray_trace(self.origin + (0, 0, 12), var_d652689d2a01d5d2);
 
   if(trace["fraction"] >= 1) {
@@ -807,7 +807,7 @@ function function_98b73e796145b31c(player, first_pickup, var_18ca380c68fe756f) {
     }
 
     player.switchweapon = player getcurrentweapon();
-    player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+    player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
     player setstance("stand");
     level.player_rig = spawn_anim_model("player_rig");
     var_fb4e7aacfb225799 link_player_to_rig(anime, "stand", 1, 0.25, 0, 0, 0, 0, 0);
@@ -855,7 +855,7 @@ function function_98b73e796145b31c(player, first_pickup, var_18ca380c68fe756f) {
   player.ability_invulnerable = undefined;
 
   if(!var_18ca380c68fe756f) {
-    player scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    player scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 
   function_d759e2d814a8e38e();

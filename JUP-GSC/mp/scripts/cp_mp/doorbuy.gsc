@@ -80,7 +80,7 @@ function private doorbuy_init(instance, var_9c58267a9b1f2155) {
         door setscriptablepartstate("base", "closed");
       } else if(isDefined(self.target2)) {
         var_d264bcb6d4a095a4 = utility::getStruct(self.target2, "targetname");
-        door.var_a162751895346133 = var_d264bcb6d4a095a4.origin;
+        door.v_open_pos = var_d264bcb6d4a095a4.origin;
         door.var_a9b4e017df447bad = var_d264bcb6d4a095a4.angles;
       }
     }
@@ -122,7 +122,7 @@ function private doorbuy_init(instance, var_9c58267a9b1f2155) {
           door setscriptablepartstate("base", "closed");
         } else if(isDefined(door.target)) {
           var_d264bcb6d4a095a4 = utility::getStruct(door.target, "targetname");
-          door.var_a162751895346133 = var_d264bcb6d4a095a4.origin;
+          door.v_open_pos = var_d264bcb6d4a095a4.origin;
           door.var_a9b4e017df447bad = var_d264bcb6d4a095a4.angles;
 
           if(isDefined(var_d264bcb6d4a095a4.target)) {
@@ -135,7 +135,7 @@ function private doorbuy_init(instance, var_9c58267a9b1f2155) {
           }
         } else if(isDefined(door.target2)) {
           var_d264bcb6d4a095a4 = utility::getStruct(door.target2, "targetname");
-          door.var_a162751895346133 = var_d264bcb6d4a095a4.origin;
+          door.v_open_pos = var_d264bcb6d4a095a4.origin;
           door.var_a9b4e017df447bad = var_d264bcb6d4a095a4.angles;
         }
 
@@ -373,8 +373,8 @@ function open_doorbuy() {
   self notsolid();
 
   if(n_time > 0) {
-    if(isDefined(self.var_a162751895346133)) {
-      self moveTo(self.var_a162751895346133, n_time);
+    if(isDefined(self.v_open_pos)) {
+      self moveTo(self.v_open_pos, n_time);
 
       if(isDefined(self.var_a9b4e017df447bad)) {
         self rotateTo(self.var_a9b4e017df447bad, n_time);

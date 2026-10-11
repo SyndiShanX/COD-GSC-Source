@@ -23,7 +23,7 @@ function chopperhqexfil_init() {
   setdevdvarifuninitialized(@ "hash_70809e88d9881104", 0);
 
   namespace_ab7fb53f62c7ae2e::function_dd857d7c2bd2f1bd();
-  function_d32f459ab9f5e7af();
+  accolades_init();
   level.var_79c116f876dc27eb = &function_776f66e2e3d58aa7;
   level._effect["player_disconnect"] = loadfx("vfx/iw8_br/gameplay/vfx_br_disconnect_player.vfx");
   game["dialog"]["exfil_a_inbound_now"] = "xfil_grav_bsua";
@@ -44,7 +44,7 @@ function function_776f66e2e3d58aa7(winnerplayers, var_f7b694a4edf7dc9a) {
 }
 
 function private function_9ade01856c32e00c(winners, var_cbfc3ba10cefc8ce, movetime) {
-  function_f1aed36ab4598ea("mp_gamemode_br_exfils_jup");
+  snd_transient_load("mp_gamemode_br_exfils_jup");
   clearmusicstate();
   wait 1;
   function_4e8ba327eb12540c(level.players, "mute_ambience_elements_emitters", 12);
@@ -105,7 +105,7 @@ function function_c0c06942d2085413(var_cbfc3ba10cefc8ce) {
     loadinfiltransient(self.transientname);
     level thread function_3681a4700f5bb7c1(2, 1.2, "exfil_fadeEnd");
 
-    for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = function_2030cc4ad67d1634(self.transientname)) {
+    for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = isinfiltransientloaded(self.transientname)) {
       waitframe();
     }
   }
@@ -173,9 +173,9 @@ function function_78a0aed888196a36() {
 
 function private function_fd28a78c72cc942b() {
   sceneroot = self;
-  var_fb94e5adda302b97 = function_26beb46813cf3ccb(sceneroot);
+  harnesses = function_26beb46813cf3ccb(sceneroot);
 
-  foreach(harness in var_fb94e5adda302b97) {
+  foreach(harness in harnesses) {
     harness hide();
   }
 
@@ -186,8 +186,8 @@ function private function_fd28a78c72cc942b() {
   }
 
   for(playeridx = 0; playeridx < max(1, level.var_285f57f09913c9e6); playeridx++) {
-    if(isDefined(var_fb94e5adda302b97[playeridx])) {
-      var_fb94e5adda302b97[playeridx] show();
+    if(isDefined(harnesses[playeridx])) {
+      harnesses[playeridx] show();
     }
 
     if(isDefined(ropes[playeridx])) {
@@ -197,14 +197,14 @@ function private function_fd28a78c72cc942b() {
 }
 
 function private function_26beb46813cf3ccb(sceneroot) {
-  var_fb94e5adda302b97 = [];
+  harnesses = [];
 
   for(i = 1; i <= 6; i++) {
     var_76c1f43057b9102c = "Harness 0" + i;
-    var_fb94e5adda302b97[var_fb94e5adda302b97.size] = sceneroot scene::get_entity(var_76c1f43057b9102c);
+    harnesses[harnesses.size] = sceneroot scene::get_entity(var_76c1f43057b9102c);
   }
 
-  return var_fb94e5adda302b97;
+  return harnesses;
 }
 
 function private function_c3ceff8ef7715628(sceneroot) {
@@ -635,10 +635,10 @@ function function_c4ebe940e6d84d42() {
     soundbank = [[scripts\engine\utility::getsharedfunc("br_ending_chopper_to_hq", "getExfilSoundbank")]]();
   }
 
-  function_f4e0ff5cb899686d(soundbank);
+  snd_transient_unload(soundbank);
 }
 
-function function_d32f459ab9f5e7af() {
+function accolades_init() {
   function_5bd3dfcb7c6dcce3("assassin", &function_dfdae612c1b74e7d);
   function_5bd3dfcb7c6dcce3("assists", &function_5e896530bebc3e6e);
   function_5bd3dfcb7c6dcce3("bigguns", &function_a10a208251957df);

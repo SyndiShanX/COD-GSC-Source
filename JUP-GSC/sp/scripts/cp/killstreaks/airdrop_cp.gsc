@@ -1023,8 +1023,8 @@ function airdrop_makeweaponfromcrate() {}
 
 function airdrop_makeitemfromcrate() {}
 
-function airdrop_outlinedisable(id, var_420a996e67989dc4) {
-  scripts\cp\cp_outline_utility::outlinedisable(id, var_420a996e67989dc4);
+function airdrop_outlinedisable(id, entoutlined) {
+  scripts\cp\cp_outline_utility::outlinedisable(id, entoutlined);
 }
 
 function airdrop_br_forcegiveweapon(weaponname, player, completeweapon) {}

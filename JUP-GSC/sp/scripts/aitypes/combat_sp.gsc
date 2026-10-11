@@ -117,7 +117,7 @@ function updatefrantic() {
     }
 
     if(getdvarint(@ "hash_9bbeebe174825fd4", 0) == 1) {
-      thread function_5d2b29a5f8d0c582(self._blackboard.franticcooldowntime);
+      thread debug_frantic(self._blackboard.franticcooldowntime);
     }
   }
 
@@ -140,7 +140,7 @@ function soldier_damagesubparthandler(partdata) {
   }
 }
 
-function function_5d2b29a5f8d0c582(end_time) {
+function debug_frantic(end_time) {
   self notify("<dev string:x1c>");
   self endon("<dev string:x1c>");
   self endon("<dev string:x2f>");

@@ -50,13 +50,13 @@ function function_6897c2cb1d85fbce() {
   }
 
   if(getdvarint(@ "hash_2c16009ad16f1d64", 0)) {
-    foreach(train_name, var_75c95b8ce9f4b161 in level.wztrain_info.trains) {
+    foreach(train_name, train_cars in level.wztrain_info.trains) {
       if(!isDefined(level.wztrain_info.var_164f7d6ed6e374a9[train_name])) {
         continue;
       }
 
-      var_75c95b8ce9f4b161[0] thread function_3c251653418a4e3d();
-      var_75c95b8ce9f4b161[var_75c95b8ce9f4b161.size - 1] thread function_c3f6cedf4261e108();
+      train_cars[0] thread function_3c251653418a4e3d();
+      train_cars[train_cars.size - 1] thread function_c3f6cedf4261e108();
     }
   }
 
@@ -152,7 +152,7 @@ function function_7e9ea79eb0196f0d(train, state) {
   function_21d9e76c22c14c60(train);
 }
 
-function train_control_used(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function train_control_used(instance, part, state, player, bautouse, usestring) {
   if(!function_7bafeacef59f5c1(part)) {
     return;
   }
@@ -267,7 +267,7 @@ function function_21c30228852aebeb() {
   self endon("death_or_disconnect");
   weapobj = makeweapon("iw8_ges_plyr_loot_pickup");
   self giveandfireoffhand(weapobj);
-  nearbyplayers = function_143526130b12b2b6(self.origin, 40);
+  nearbyplayers = getplayersandaiarrayinradius(self.origin, 40);
 
   foreach(player in nearbyplayers) {
     vehicle_allowplayeruse(player, 0);

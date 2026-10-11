@@ -107,14 +107,14 @@ function function_df648211d66cd3dd(path, dvar, index) {
     path = level.var_d8852dd07270dbac.base_path + path;
   }
 
-  if(function_4af97817a4960676(dvar)) {
-    dvar = function_3c8848a3a11b2553(dvar);
+  if(isxhashdvar(dvar)) {
+    dvar = getxhashsourcename(dvar);
   }
 
   thread add_debug_command("<dev string:x98>" + path + "<dev string:x64>" + index + "<dev string:xa9>" + dvar + "<dev string:x4f>");
 }
 
-function function_b2159fbbd7ac094e(path, var_eab44bfaa256f64b, index) {
+function function_b2159fbbd7ac094e(path, dvar_xhash, index) {
   if(!isDefined(index)) {
     assert(isDefined(level.var_d8852dd07270dbac));
     index = level.var_d8852dd07270dbac.index;
@@ -125,8 +125,8 @@ function function_b2159fbbd7ac094e(path, var_eab44bfaa256f64b, index) {
     path = level.var_d8852dd07270dbac.base_path + path;
   }
 
-  setdevdvarifuninitialized(var_eab44bfaa256f64b, 0);
-  thread add_debug_command("<dev string:x54>" + path + "<dev string:x64>" + index + "<dev string:xaf>" + function_3c8848a3a11b2553(var_eab44bfaa256f64b) + "<dev string:xbe>");
+  setdevdvarifuninitialized(dvar_xhash, 0);
+  thread add_debug_command("<dev string:x54>" + path + "<dev string:x64>" + index + "<dev string:xaf>" + getxhashsourcename(dvar_xhash) + "<dev string:xbe>");
 }
 
 function function_b23a59dfb4ca49a1(path, var_9af94c1035c9530e, func, toggle, index) {

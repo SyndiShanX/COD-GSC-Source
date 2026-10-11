@@ -205,7 +205,7 @@ function playerthinkpath(infil, spot_index) {
 
   if(istrue(infil.allow_fire) && self islinked()) {
     self[[level.prematchallowfunc]](1);
-    self function_af4b9b0f0e7c6c42(1);
+    self playerunlinkblend(1);
   }
 
   self.is_doing_infil = undefined;
@@ -693,7 +693,7 @@ function vehicles_alpha_anims(subtype) {
   }
 }
 
-function commander_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function commander_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     self playsoundtoplayer(alias, player);
   }

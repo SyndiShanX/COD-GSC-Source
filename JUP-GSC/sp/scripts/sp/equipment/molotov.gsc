@@ -53,7 +53,7 @@ function molotovfiremain(grenade, weapon) {
     }
   }
 
-  function_216c67ab6749137a(owner, undefined, "grenade_throw", "molotov");
+  addbattlechatternotify(owner, undefined, "grenade_throw", "molotov");
   grenade endon("entitydeleted");
 
   if(!isDefined(grenade)) {
@@ -87,8 +87,8 @@ function getlaunchangles(origin, ownerorigin, ownerangles) {
     ownerangles = self.angles;
   }
 
-  var_d972b258956d09cd = vectorNormalize(origin - ownerorigin);
-  ang = vectortoangles(var_d972b258956d09cd);
+  dirtomolotov = vectorNormalize(origin - ownerorigin);
+  ang = vectortoangles(dirtomolotov);
   flatang = (0, ownerangles[1], 0);
   launchangles = flatang + (45, 0, 0);
   return launchangles;
@@ -113,12 +113,12 @@ function molotovexplode(origin, normal, velocity, entity, molotovowner) {
 }
 
 function pool_damage_scriptables(origin) {
-  var_d6456b3e618b3378 = self.pooldata.triggerradius * 3;
+  scriptableradiuscheck = self.pooldata.triggerradius * 3;
 
   foreach(ent in self.shareddata.scriptables) {
     dist = distance(ent.origin, origin);
 
-    if(dist <= var_d6456b3e618b3378) {
+    if(dist <= scriptableradiuscheck) {
       if(ent getscriptableparthasstate("base", "script_ignite")) {
         ent setscriptablepartstate("base", "script_ignite", 1);
 
@@ -506,14 +506,14 @@ function molotov_init_pool_mask() {
       orientbit = var_880b6bd9b71c4abc;
 
       while((orientbit &(64 | 128 | 256)) > 0) {
-        var_2c78adee3f228d08 = var_ec021596457d03c5;
+        incidencebit = var_ec021596457d03c5;
 
-        while((var_2c78adee3f228d08 &(512 | 1024)) > 0) {
-          mask = statebit | typebit | orientbit | var_2c78adee3f228d08;
-          scriptablestates[mask] = var_6f6efec7e89387e8[typebit] + var_6f6efec7e89387e8[orientbit] + var_6f6efec7e89387e8[var_2c78adee3f228d08];
-          mask = typebit | orientbit | var_2c78adee3f228d08;
+        while((incidencebit &(512 | 1024)) > 0) {
+          mask = statebit | typebit | orientbit | incidencebit;
+          scriptablestates[mask] = var_6f6efec7e89387e8[typebit] + var_6f6efec7e89387e8[orientbit] + var_6f6efec7e89387e8[incidencebit];
+          mask = typebit | orientbit | incidencebit;
           scriptablestates[mask] = "neutral";
-          var_2c78adee3f228d08 <<= 1;
+          incidencebit <<= 1;
         }
 
         orientbit <<= 1;
@@ -637,7 +637,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
   var_6f2b46872df538de = 25;
   var_df64badccf60fd69 = 65;
   var_144e6d19329167bd = 115;
-  var_911981ae29f681e9 = gettime() + pooldata.startdelayms;
+  sidepreventstarttime = gettime() + pooldata.startdelayms;
   id = 16;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -647,7 +647,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = &molotov_branch_create_forward_tendril_cone;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, impactangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, impactangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   forward = anglesToForward(impactangles);
   right = anglestoright(impactangles);
@@ -664,7 +664,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = undefined;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -678,7 +678,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = &molotov_branch_create_right_tendril_cone;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -692,7 +692,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = &molotov_branch_create_left_tendril_cone;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -706,7 +706,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = undefined;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -720,7 +720,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = undefined;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   shareddata molotov_shared_data_register_cast();
 
@@ -741,7 +741,7 @@ function moltovgetscriptables(impactorigin) {
   damageables[4] = "scriptable_equipment_propane_burner_stove_01_white";
   damageables[5] = "scriptable_equipment_propane_burner_stove_01_yellow";
   damageables[6] = "scriptable_decor_propane_tank_01_en";
-  var_1bb27f14710c304f = [];
+  validscriptables = [];
 
   foreach(ent in damageables) {
     scriptables = getscriptablearray(ent, "classname");
@@ -750,7 +750,7 @@ function moltovgetscriptables(impactorigin) {
       distancesq = distancesquared(ent.origin, impactorigin);
 
       if(distancesq <= 65536) {
-        var_1bb27f14710c304f = array_add(var_1bb27f14710c304f, ent);
+        validscriptables = array_add(validscriptables, ent);
 
         if(level.dbgmolodrawhits) {
           line(impactorigin, ent.origin, (1, 1, 1), 0.5, 0, 300);
@@ -759,7 +759,7 @@ function moltovgetscriptables(impactorigin) {
     }
   }
 
-  return var_1bb27f14710c304f;
+  return validscriptables;
 }
 
 function moltovgetvehicles(impactorigin) {
@@ -1004,9 +1004,9 @@ function molotov_start_branch() {
     self.castend = self.caststart + self.castdir * molotov_get_cast_dist(self.casttype, self.castdata, self.iswallcast);
     casthit = undefined;
     casthitpos = undefined;
-    var_a95d04f8f906e839 = undefined;
+    casthitnorm = undefined;
     casthitent = undefined;
-    var_d27f9a12a82f66e3 = undefined;
+    casthitangles = undefined;
 
     if(level.dbgmolodrawhits) {
       line(self.caststart, self.castend, (1, 1, 1), 1, 0, 100);
@@ -1017,7 +1017,7 @@ function molotov_start_branch() {
     if(isDefined(castresults) && castresults.size > 0) {
       casthit = 1;
       casthitpos = castresults[0]["position"];
-      var_a95d04f8f906e839 = castresults[0]["normal"];
+      casthitnorm = castresults[0]["normal"];
       casthitent = castresults[0]["entity"];
     }
 
@@ -1025,7 +1025,7 @@ function molotov_start_branch() {
       case 0:
         if(istrue(casthit)) {
           molotov_branch_register_cast(self.casttype, 0, casthitpos);
-          var_1ddc516959ef26a0 = 1;
+          shouldcreatepool = 1;
 
           if(isDefined(self.castdata.firstforwarddist)) {
             castvec = casthitpos - self.caststart;
@@ -1033,23 +1033,23 @@ function molotov_start_branch() {
             self.castdata.firstforwarddist -= castdist;
 
             if(self.castdata.firstforwarddist > self.castdata.firstforwardmindist) {
-              var_1ddc516959ef26a0 = 0;
+              shouldcreatepool = 0;
             } else {
               self.castdata.firstforwarddist = undefined;
             }
           }
 
-          var_d27f9a12a82f66e3 = molotov_rebuild_angles_up_right(var_a95d04f8f906e839, anglestoright(self.castangles));
+          casthitangles = molotov_rebuild_angles_up_right(casthitnorm, anglestoright(self.castangles));
 
-          if(var_1ddc516959ef26a0) {
-            ent = molotov_branch_create_pool(casthitpos, var_d27f9a12a82f66e3, self.shareddata.impactincidence, casthitent);
+          if(shouldcreatepool) {
+            ent = molotov_branch_create_pool(casthitpos, casthitangles, self.shareddata.impactincidence, casthitent);
             ent thread molotov_pool_start();
             pool_damage_ai(ent.origin, self.shareddata.owner);
           }
 
           self.casttype = 2;
-          self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
-          self.castangles = var_d27f9a12a82f66e3;
+          self.caststart = casthitpos + casthitnorm * 1;
+          self.castangles = casthitangles;
           self.iswallcast = undefined;
         } else {
           molotov_branch_register_cast(self.casttype, undefined, undefined);
@@ -1071,17 +1071,17 @@ function molotov_start_branch() {
         break;
       case 1:
         if(istrue(casthit)) {
-          var_d27f9a12a82f66e3 = molotov_rebuild_angles_up_right(var_a95d04f8f906e839, anglestoright(self.castangles));
-          ent = molotov_branch_create_pool(casthitpos, var_d27f9a12a82f66e3, self.shareddata.impactincidence, casthitent);
+          casthitangles = molotov_rebuild_angles_up_right(casthitnorm, anglestoright(self.castangles));
+          ent = molotov_branch_create_pool(casthitpos, casthitangles, self.shareddata.impactincidence, casthitent);
           ent thread molotov_pool_start();
           pool_damage_ai(ent.origin, self.shareddata.owner);
-          normdot = vectordot(anglestoup(self.castangles), var_a95d04f8f906e839);
+          normdot = vectordot(anglestoup(self.castangles), casthitnorm);
 
           if(normdot < 0.9848) {
             molotov_branch_register_cast(self.casttype, 2, casthitpos);
             self.casttype = 2;
-            self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
-            self.castangles = var_d27f9a12a82f66e3;
+            self.caststart = casthitpos + casthitnorm * 1;
+            self.castangles = casthitangles;
           } else {
             molotov_branch_register_cast(self.casttype, 1, casthitpos);
             self.casttype = 0;
@@ -1096,7 +1096,7 @@ function molotov_start_branch() {
         if(istrue(casthit)) {
           molotov_branch_register_cast(self.casttype, 3, casthitpos);
           self.casttype = 0;
-          self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
+          self.caststart = casthitpos + casthitnorm * 1;
         } else {
           molotov_branch_register_cast(self.casttype, undefined, undefined);
           self.casttype = 0;
@@ -1177,12 +1177,12 @@ function molotov_branch_is_complete(var_af8745e2185687a8, var_f7d3f0b0605b5824) 
   return iscomplete;
 }
 
-function molotov_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitposition) {
+function molotov_branch_register_cast(casttype, casthittype, hitposition) {
   self.shareddata molotov_shared_data_register_cast();
   self.casts++;
 
-  if(isDefined(var_8e87ebe279cdfcfb)) {
-    if(var_8e87ebe279cdfcfb == 0 || var_8e87ebe279cdfcfb == 1 || var_8e87ebe279cdfcfb == 2) {
+  if(isDefined(casthittype)) {
+    if(casthittype == 0 || casthittype == 1 || casthittype == 2) {
       self.castfails = 0;
     }
   } else if(casttype == 1) {
@@ -1191,10 +1191,10 @@ function molotov_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitpositio
 
   debugmsg = undefined;
 
-  if(isDefined(var_8e87ebe279cdfcfb)) {
+  if(isDefined(casthittype)) {
     debugmsg = undefined;
 
-    switch (var_8e87ebe279cdfcfb) {
+    switch (casthittype) {
       case 0:
         debugmsg = "<dev string:x34>";
         break;
@@ -1210,7 +1210,7 @@ function molotov_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitpositio
     }
 
     self.hitpositions[self.hitpositions.size] = hitposition;
-    self.hittypes[self.hittypes.size] = var_8e87ebe279cdfcfb;
+    self.hittypes[self.hittypes.size] = casthittype;
   } else {
     switch (casttype) {
       case 0:
@@ -1394,8 +1394,8 @@ function molotov_watch_pool() {
   }
 
   molotov_pool_update_scriptable();
-  var_8fc4600d9c0cbb6 = randomfloatrange(6, 6.25);
-  wait var_8fc4600d9c0cbb6;
+  burnloopduration = randomfloatrange(6, 6.25);
+  wait burnloopduration;
 }
 
 function molotov_pool_end(immediate) {
@@ -1476,15 +1476,15 @@ function molotov_create_pool_trigger(triggerradius, triggerheight, triggeroffset
 }
 
 function molotov_pool_update_scriptable() {
-  var_574dcc9e90f56b3 = level.molotovdata.pooldata;
+  pooldatalvl = level.molotovdata.pooldata;
   statemask = self.poolmask &(1 | 2 | 4);
   var_e42c4a59211c25aa = (1 | 2 | 4) ^ (1 | 2 | 4) &(1 | 2 | 4) - 1;
   statebit = var_e42c4a59211c25aa;
 
   while((statebit &(1 | 2 | 4)) > 0) {
     mask = ~((1 | 2 | 4) &~statebit) &self.poolmask;
-    part = var_574dcc9e90f56b3.scriptableparts[statebit];
-    state = var_574dcc9e90f56b3.scriptablestates[mask];
+    part = pooldatalvl.scriptableparts[statebit];
+    state = pooldatalvl.scriptablestates[mask];
     self setscriptablepartstate(part, state, 0);
     statebit <<= 1;
   }
@@ -1587,23 +1587,23 @@ function molotov_get_cast_data(castid) {
     molotov_init_cast_data();
   }
 
-  var_ce2236333119fea8 = level.molotovdata.castdata;
+  castdatalvl = level.molotovdata.castdata;
   castdata = spawnStruct();
-  castdata.distforward = var_ce2236333119fea8.distforward[castid];
-  castdata.distdown = var_ce2236333119fea8.distdown[castid];
-  castdata.distup = var_ce2236333119fea8.distup[castid];
-  castdata.maxcasts = var_ce2236333119fea8.maxcasts[castid];
-  castdata.maxfails = var_ce2236333119fea8.maxfails[castid];
-  castdata.maxents = var_ce2236333119fea8.maxents[castid];
-  castdata.distforwardwall = var_ce2236333119fea8.distforwardwall[castid];
+  castdata.distforward = castdatalvl.distforward[castid];
+  castdata.distdown = castdatalvl.distdown[castid];
+  castdata.distup = castdatalvl.distup[castid];
+  castdata.maxcasts = castdatalvl.maxcasts[castid];
+  castdata.maxfails = castdatalvl.maxfails[castid];
+  castdata.maxents = castdatalvl.maxents[castid];
+  castdata.distforwardwall = castdatalvl.distforwardwall[castid];
 
-  if(isDefined(var_ce2236333119fea8.firstforwarddist[castid])) {
-    castdata.firstforwarddist = var_ce2236333119fea8.firstforwarddist[castid];
-    castdata.firstforwardmindist = var_ce2236333119fea8.firstforwardmindist[castid];
-    castdata.firstforwardmodanglesfunc = var_ce2236333119fea8.firstforwardmodanglesfunc[castid];
+  if(isDefined(castdatalvl.firstforwarddist[castid])) {
+    castdata.firstforwarddist = castdatalvl.firstforwarddist[castid];
+    castdata.firstforwardmindist = castdatalvl.firstforwardmindist[castid];
+    castdata.firstforwardmodanglesfunc = castdatalvl.firstforwardmodanglesfunc[castid];
 
-    if(isDefined(var_ce2236333119fea8.firstforwarddistwall[castid])) {
-      castdata.firstforwarddistwall = var_ce2236333119fea8.firstforwarddistwall[castid];
+    if(isDefined(castdatalvl.firstforwarddistwall[castid])) {
+      castdata.firstforwarddistwall = castdatalvl.firstforwarddistwall[castid];
     }
   }
 
@@ -1615,17 +1615,17 @@ function molotov_get_pool_data(typeid) {
     molotov_init_pool_data();
   }
 
-  var_574dcc9e90f56b3 = level.molotovdata.pooldata;
+  pooldatalvl = level.molotovdata.pooldata;
   pooldata = spawnStruct();
   pooldata.typeid = typeid;
-  pooldata.triggerradius = var_574dcc9e90f56b3.triggerradius[typeid];
-  pooldata.triggerheight = var_574dcc9e90f56b3.triggerheight[typeid];
-  pooldata.aikillradius = var_574dcc9e90f56b3.aikillradius[typeid];
-  pooldata.aidamageradius = var_574dcc9e90f56b3.aidamageradius[typeid];
-  pooldata.triggeroffset = var_574dcc9e90f56b3.triggeroffset[typeid];
-  pooldata.startdelayms = var_574dcc9e90f56b3.startdelayms[typeid];
-  pooldata.dangerzoneradius = var_574dcc9e90f56b3.dangerzoneradius[typeid];
-  pooldata.dangerzoneheight = var_574dcc9e90f56b3.dangerzoneheight[typeid];
+  pooldata.triggerradius = pooldatalvl.triggerradius[typeid];
+  pooldata.triggerheight = pooldatalvl.triggerheight[typeid];
+  pooldata.aikillradius = pooldatalvl.aikillradius[typeid];
+  pooldata.aidamageradius = pooldatalvl.aidamageradius[typeid];
+  pooldata.triggeroffset = pooldatalvl.triggeroffset[typeid];
+  pooldata.startdelayms = pooldatalvl.startdelayms[typeid];
+  pooldata.dangerzoneradius = pooldatalvl.dangerzoneradius[typeid];
+  pooldata.dangerzoneheight = pooldatalvl.dangerzoneheight[typeid];
   return pooldata;
 }
 
@@ -1694,12 +1694,12 @@ function molotov_get_next_burning_id() {
 function molotov_watch_fx() {
   self notify("molotov_fx_race");
   self endon("molotov_fx_race");
-  var_fb0b2f8f6aa55804 = 0;
+  watchheldoffhandbreak = 0;
 
   while(true) {
     raceresult = spawnStruct();
 
-    if(var_fb0b2f8f6aa55804) {
+    if(watchheldoffhandbreak) {
       childthread molotov_fx_race_held_offhand_break(raceresult);
     } else {
       childthread molotov_fx_race_pullback(raceresult);
@@ -1709,7 +1709,7 @@ function molotov_watch_fx() {
     childthread molotov_fx_race_super_started(raceresult);
     childthread molotov_fx_race_death(raceresult);
     childthread molotov_fx_race_taken(raceresult);
-    var_fb0b2f8f6aa55804 = 0;
+    watchheldoffhandbreak = 0;
     self waittill("molotov_fx_race_start");
     waittillframeend();
     pullback = istrue(raceresult.pullback);
@@ -1735,7 +1735,7 @@ function molotov_watch_fx() {
       thread molotov_end_fx();
     } else if(pullback) {
       thread molotov_begin_fx();
-      var_fb0b2f8f6aa55804 = 1;
+      watchheldoffhandbreak = 1;
     }
 
     self notify("molotov_fx_race_end");

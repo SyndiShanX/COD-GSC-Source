@@ -3,7 +3,7 @@
  * Script: mp\hashed\script_2342b8aad723994e.gsc
 *************************************************/
 
-#namespace namespace_36820a34c6c5dfcc;
+#namespace join_squad_aggregator;
 
 function onplayerjoinsquad(player) {
   if(!isDefined(level.onjoinsquadcallbacks)) {

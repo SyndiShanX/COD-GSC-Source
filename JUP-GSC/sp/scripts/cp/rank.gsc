@@ -47,7 +47,7 @@ function init() {
     level.maxrank = 0;
     level.maxelderrank = 0;
   } else {
-    ranktablebundle = function_766b80da1f882fc3();
+    ranktablebundle = getranktablebundle();
     level.maxrank = ranktablebundle.var_3f2a88f2202def78;
     level.maxelderrank = ranktablebundle.maxelderrank;
   }
@@ -98,7 +98,7 @@ function function_377a94f711d96927(type) {
 function registerscoreinfomultiplier(type, multiplier) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   level.scoreinfo_multiplier[type] = multiplier;
@@ -107,7 +107,7 @@ function registerscoreinfomultiplier(type, multiplier) {
 function function_6d17f84162f0d8f0(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return default_to(level.scoreinfo_multiplier[type], 1);
@@ -116,12 +116,12 @@ function function_6d17f84162f0d8f0(type) {
 function registerscoreinfo(type, category, value) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   if(!isxhash(category)) {
     assertex(1, category);
-    category = function_1823ff50bb28148d(category);
+    category = getxhash(category);
   }
 
   if(category == #"value") {
@@ -164,7 +164,7 @@ function getscoreinfovalue(type) {
 
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return level.scoreinfo_value[type];
@@ -177,7 +177,7 @@ function getscoreinfoxp(type) {
 
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return level.scoreinfo_xp[type];
@@ -186,7 +186,7 @@ function getscoreinfoxp(type) {
 function function_34294184e90b96c(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return istrue(level.var_f749dda4bf7912b[type]);
@@ -195,7 +195,7 @@ function function_34294184e90b96c(type) {
 function function_e3dfd7e570749681(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return istrue(level.var_ac143fe8d620124e[type]);
@@ -204,7 +204,7 @@ function function_e3dfd7e570749681(type) {
 function function_1e00d01d19fde519(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return getscoreinfocategory(type, #"hash_9ef9bbcd1edc198b");
@@ -213,12 +213,12 @@ function function_1e00d01d19fde519(type) {
 function getscoreinfocategory(type, category) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   if(!isxhash(category)) {
     assertex(1, category);
-    category = function_1823ff50bb28148d(category);
+    category = getxhash(category);
   }
 
   if(istrue(level.removekilleventsplash) && !isDefined(level.scoreinfo[type])) {
@@ -412,7 +412,7 @@ function giverankxp(type, value, objweapon, suppresspopup, forceimmediate, var_3
   }
 
   if(!isDefined(value)) {
-    assertmsg(function_3c8848a3a11b2553(type) + " attempted to give an undefined value for rankXP.");
+    assertmsg(getxhashsourcename(type) + " attempted to give an undefined value for rankXP.");
     value = 0;
   }
 
@@ -568,7 +568,7 @@ function function_199d881c43179c3f(value, var_b01aca3236595958) {
 
 function function_b933d0652ec01b54(type, var_7c6b134e84356e37, bonusxp, eventinfo) {
   if(!isxhash(type)) {
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   xpcategory = undefined;
@@ -1239,7 +1239,7 @@ function function_f440a654d455343e(type, amount) {
     println("<dev string:x11e>" + self.name + "<dev string:x11e>");
 
     foreach(value in self.xpamountdebug) {
-      println("<dev string:x12e>" + function_3c8848a3a11b2553(key) + "<dev string:x132>" + value);
+      println("<dev string:x12e>" + getxhashsourcename(key) + "<dev string:x132>" + value);
     }
 
     println("<dev string:x134>");

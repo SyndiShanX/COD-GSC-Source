@@ -15,7 +15,7 @@ function function_306feec3952fc2ef() {
 
   if(isPlayer(self.var_c24f43a7d0d8d195)) {
     if(self.var_c24f43a7d0d8d195 function_4c108309dc0d7fd2() > self._blackboard.var_4a850e88a81da5f9) {
-      self._blackboard.var_6b0939cf3fd5d7a1 = 0;
+      self._blackboard.zombieunreachableisattacking = 0;
       return;
     }
   }

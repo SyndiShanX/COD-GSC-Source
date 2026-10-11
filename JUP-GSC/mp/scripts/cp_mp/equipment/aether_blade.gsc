@@ -83,7 +83,7 @@ function private function_cf74876710a7b4db(grenade) {
   }
 
   grenade hide();
-  grenade function_ad9433aab9fcdf04(3, "death", &delete);
+  grenade delaycallendon(3, "death", &delete);
   var_dc9f68978ae89177 = spawn("script_model", grenade.origin);
   var_dc9f68978ae89177 setModel("jup_2h_zmb_aether_knife");
   var_dc9f68978ae89177 show();
@@ -158,7 +158,7 @@ function private function_24766c1e016e99e7(target_num, last_target, player_team)
     self waittill("movedone");
     playFXOnTag(level._effect["aether_blade_impact"], self, "tag_origin");
     var_f5c2f3b667f81c15 = final_target function_a089a977a3191071(0);
-    final_target thread scripts\engine\utility::function_f3bb4f4911a1beb2("relics", "blade_throw_hit", self.owner);
+    final_target thread scripts\engine\utility::callsharedfunc("relics", "blade_throw_hit", self.owner);
     final_target dodamage(var_f5c2f3b667f81c15, self.origin, self.owner, self, "MOD_ELEMENTAL_ELEC", self.weaponobj, "none");
   } else {
     thread function_9e47843c258164df();
@@ -169,7 +169,7 @@ function private function_24766c1e016e99e7(target_num, last_target, player_team)
 }
 
 function private function_9e47843c258164df() {
-  thread scripts\engine\utility::function_f3bb4f4911a1beb2("relics", "blade_throw_end", self.owner);
+  thread scripts\engine\utility::callsharedfunc("relics", "blade_throw_end", self.owner);
   end_point = function_45040fcdfcd2c447();
 
   if(!isDefined(end_point)) {
@@ -239,7 +239,7 @@ function private function_1d982537b9dcb924(player) {
   }
 
   if(issharedfuncdefined("game", "isCommonItemEnabled")) {
-    if(!function_f3bb4f4911a1beb2("game", "isCommonItemEnabled")) {
+    if(!callsharedfunc("game", "isCommonItemEnabled")) {
       return false;
     }
 
@@ -259,7 +259,7 @@ function private function_d87312a81b75742d(equipmentref) {
   }
 
   if(function_1d982537b9dcb924(self)) {
-    itembundlename = function_f3bb4f4911a1beb2("game", "getItemBundleNameFromRef", equipmentref);
+    itembundlename = callsharedfunc("game", "getItemBundleNameFromRef", equipmentref);
 
     if(!isDefined(itembundlename)) {
       return;
@@ -270,7 +270,7 @@ function private function_d87312a81b75742d(equipmentref) {
     fakeitem.count = 1;
     fakeitem.type = itembundle.scriptable;
     self playsoundtoplayer("eqp_aether_blade_plr_cooldown_end", self);
-    function_f3bb4f4911a1beb2("game", "obtainItemEquip", fakeitem, 0, 1);
+    callsharedfunc("game", "obtainItemEquip", fakeitem, 0, 1);
   }
 }
 

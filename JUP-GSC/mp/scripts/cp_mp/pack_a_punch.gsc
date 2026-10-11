@@ -261,8 +261,8 @@ function function_4aa535a603fcb16a(var_74cdac95bea43e20) {
 
 function function_127acf3af63de42e() {
   assertex(isDefined(level.gamemodebundle.packapunchbundle), "<dev string:x1d5>");
-  var_d8f161c6e98cdfa1 = default_to(level.var_ae30f5b886731a98, level.gamemodebundle.packapunchbundle);
-  return getscriptbundle("packapunch:" + var_d8f161c6e98cdfa1);
+  str_bundle_name = default_to(level.var_ae30f5b886731a98, level.gamemodebundle.packapunchbundle);
+  return getscriptbundle("packapunch:" + str_bundle_name);
 }
 
 function function_4fc54a99a17b78cb() {
@@ -351,7 +351,7 @@ function private function_3b2684b76c1ab98e(usable, player) {
   }
 
   w_current = player getcurrentweapon();
-  var_29a8ba8c9dd43fd2 = player get_pap_level(w_current);
+  n_pap_level = player get_pap_level(w_current);
 
   if(!player can_pap(w_current)) {
     return {
@@ -362,7 +362,7 @@ function private function_3b2684b76c1ab98e(usable, player) {
   var_2fcb35d230365682 = function_8ffd6120b9e72251(usable.origin);
 
   if(isDefined(var_2fcb35d230365682)) {
-    item = purchasemenu::function_904f24ea774b8f6f(var_2fcb35d230365682.ref, var_29a8ba8c9dd43fd2);
+    item = purchasemenu::function_904f24ea774b8f6f(var_2fcb35d230365682.ref, n_pap_level);
 
     if(isDefined(item)) {
       cost = item.cost;
@@ -380,9 +380,9 @@ function private function_3b2684b76c1ab98e(usable, player) {
       #string: level.var_389f96815631487["hintstring_only"].var_e532cc181ecbb197, #type: "HINT_NOBUTTON"};
   }
 
-  switch (var_29a8ba8c9dd43fd2) {
+  switch (n_pap_level) {
     case 0:
-      if(player scripts\cp_mp\currency::function_bcc79745d547a99c(currency, cost)) {
+      if(player scripts\cp_mp\currency::can_afford(currency, cost)) {
         return {
           #params: [str_weapon, cost], #string: level.var_389f96815631487["hintstring_only"].var_f3201c9531e84083, #type: "HINT_BUTTON"};
       } else {
@@ -390,7 +390,7 @@ function private function_3b2684b76c1ab98e(usable, player) {
           #params: [str_weapon, cost], #string: level.var_389f96815631487["hintstring_only"].var_40c5fe63017a0028, #type: "HINT_BUTTON"};
       }
     case 1:
-      if(player scripts\cp_mp\currency::function_bcc79745d547a99c(currency, cost)) {
+      if(player scripts\cp_mp\currency::can_afford(currency, cost)) {
         return {
           #params: [str_weapon, cost], #string: level.var_389f96815631487["hintstring_only"].var_f3201d9531e842b6, #type: "HINT_BUTTON"};
       } else {
@@ -398,7 +398,7 @@ function private function_3b2684b76c1ab98e(usable, player) {
           #params: [str_weapon, cost], #string: level.var_389f96815631487["hintstring_only"].var_d9a16a76860e6fb5, #type: "HINT_BUTTON"};
       }
     case 2:
-      if(player scripts\cp_mp\currency::function_bcc79745d547a99c(currency, cost)) {
+      if(player scripts\cp_mp\currency::can_afford(currency, cost)) {
         return {
           #params: [str_weapon, cost], #string: level.var_389f96815631487["hintstring_only"].var_f3201e9531e844e9, #type: "HINT_BUTTON"};
       } else {
@@ -470,18 +470,18 @@ function enable_pap(b_immediate) {
   }
 }
 
-function function_666c0ed7301de9f3(e_linkto, str_tag, v_origin_offset, var_ef082039f7c502cc) {
+function function_666c0ed7301de9f3(e_linkto, str_tag, v_origin_offset, v_angles_offset) {
   if(!isDefined(v_origin_offset)) {
     v_origin_offset = (0, 0, 0);
   }
 
-  if(!isDefined(var_ef082039f7c502cc)) {
-    var_ef082039f7c502cc = (0, 0, 0);
+  if(!isDefined(v_angles_offset)) {
+    v_angles_offset = (0, 0, 0);
   }
 
   if(isent(self)) {
     if(isDefined(str_tag)) {
-      self linkTo(e_linkto, str_tag, v_origin_offset, var_ef082039f7c502cc);
+      self linkTo(e_linkto, str_tag, v_origin_offset, v_angles_offset);
     } else {
       self linkTo(e_linkto);
     }
@@ -489,7 +489,7 @@ function function_666c0ed7301de9f3(e_linkto, str_tag, v_origin_offset, var_ef082
     return;
   }
 
-  self scriptablesetparententity(e_linkto, v_origin_offset, var_ef082039f7c502cc);
+  self scriptablesetparententity(e_linkto, v_origin_offset, v_angles_offset);
 }
 
 function function_a90b4bc92d126cd1(player) {
@@ -651,8 +651,8 @@ function private function_9978ad7acc70bbd0(params) {
 
 function private function_2f370e45d49b5a9d(weapon) {
   weapon = default_to(weapon, self getcurrentweapon());
-  var_29a8ba8c9dd43fd2 = get_pap_level(weapon);
-  self setclientomnvar("ui_pap_current_level", var_29a8ba8c9dd43fd2);
+  n_pap_level = get_pap_level(weapon);
+  self setclientomnvar("ui_pap_current_level", n_pap_level);
 }
 
 function function_29fecb7dd1dd0df2(s_pap, currentweapon, item) {
@@ -671,7 +671,7 @@ function function_29fecb7dd1dd0df2(s_pap, currentweapon, item) {
     cost = [[level.var_cfd619492cf55b20]]();
   }
 
-  namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(currentweapon, item.itemref);
+  namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(currentweapon, item.itemref);
   self setclientomnvar("ui_pap_current_ammomod", item.itemid);
   scripts\cp_mp\currency::attempt_purchase(currency, cost, 1, undefined, #"ammomod", item.itemref);
   self setclientomnvar(var_2fcb35d230365682.var_8b8931f97eef184, 1);
@@ -786,7 +786,7 @@ function function_ac4575f20a9ea183(s_pap, var_5476695cf42091ed, currentweapon, i
   pap_weapon(currentweapon, var_5476695cf42091ed, cost);
   scripts\cp_mp\currency::attempt_purchase(currency, cost, 1, undefined, #"packapunch");
   params = {
-    #var_29a8ba8c9dd43fd2: var_5476695cf42091ed + 1, #cost: cost, #weapon: currentweapon
+    #n_pap_level: var_5476695cf42091ed + 1, #cost: cost, #weapon: currentweapon
   };
   callback::callback("on_pap_machine_purchase", params);
   self setclientomnvar(var_2fcb35d230365682.var_8b8931f97eef184, 1);
@@ -833,7 +833,7 @@ function function_5441576d06b2a361() {
 
   while(true) {
     throttle::function_f632348cbb773537(level.var_41b1ceff53cc7e4d, self);
-    var_727b1c6120940fca = function_143526130b12b2b6(self.origin, var_be315f6c9827b6da);
+    var_727b1c6120940fca = getplayersandaiarrayinradius(self.origin, var_be315f6c9827b6da);
 
     if(var_727b1c6120940fca.size == 0) {
       throttle::function_f632348cbb773537(level.var_41b1ceff53cc7e4d, self);
@@ -919,7 +919,7 @@ function pap_weapon(currentweapon, var_5476695cf42091ed, cost, var_4d10547837384
   params.w_new = w_new;
   params.w_take = w_take;
   params.var_7d014f270bcc9853 = var_7d014f270bcc9853;
-  params.var_29a8ba8c9dd43fd2 = var_5476695cf42091ed + 1;
+  params.n_pap_level = var_5476695cf42091ed + 1;
   params.cost = cost;
   callback::callback("zm_packed_weapon", params);
   self takeweapon(w_take);
@@ -965,7 +965,7 @@ function function_a0537467c5341047(currentweapon, var_5476695cf42091ed) {
   w_new = scripts\cp_mp\weapon::buildweapon(currentweapon.basename, newattachments, camo, reticle, variantid, var_e27c23a69f06105a, undefined, stickers);
 
   if(isDefined(ammo_mod_name) && ammo_mod_name != "") {
-    namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(w_new, ammo_mod_name);
+    namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(w_new, ammo_mod_name);
   }
 
   return w_new;
@@ -1085,7 +1085,7 @@ function function_6cea50c31fdfd0b9(menuitemindex) {
     }
   }
 
-  return scripts\cp_mp\currency::function_bcc79745d547a99c(currency, cost);
+  return scripts\cp_mp\currency::can_afford(currency, cost);
 }
 
 function function_e1fa842581ec1de5(s_pap) {

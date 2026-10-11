@@ -411,11 +411,11 @@ function setactivespawnlogic(logictype, criticalfactortype, var_7d25b12691ee7cc1
 
   if(newdata) {
     foreach(set in level.spawnglobals.var_8c5be78fb206a3a6) {
-      level.var_e9d31890c07ffffc += "<dev string:x1d6>" + function_3c8848a3a11b2553(set.alias) + "<dev string:x1dc>" + function_3c8848a3a11b2553(default_to(set.factorbundle, "<dev string:x1ef>")) + "<dev string:x1fc>" + function_3c8848a3a11b2553(default_to(set.criticalbundle, "<dev string:x1ef>")) + "<dev string:x214>";
+      level.var_e9d31890c07ffffc += "<dev string:x1d6>" + getxhashsourcename(set.alias) + "<dev string:x1dc>" + getxhashsourcename(default_to(set.factorbundle, "<dev string:x1ef>")) + "<dev string:x1fc>" + getxhashsourcename(default_to(set.criticalbundle, "<dev string:x1ef>")) + "<dev string:x214>";
     }
   }
 
-  level.var_e9d31890c07ffffc += "<dev string:x21a>" + function_3c8848a3a11b2553(logictype) + "<dev string:x232>" + default_to(criticalfactortype, "<dev string:x1ef>") + "<dev string:x24c>" + default_to(var_7d25b12691ee7cc1, "<dev string:x1ef>") + "<dev string:x214>";
+  level.var_e9d31890c07ffffc += "<dev string:x21a>" + getxhashsourcename(logictype) + "<dev string:x232>" + default_to(criticalfactortype, "<dev string:x1ef>") + "<dev string:x24c>" + default_to(var_7d25b12691ee7cc1, "<dev string:x1ef>") + "<dev string:x214>";
   level.var_e9d31890c07ffffc += "<dev string:x261>" + istrue(level.teambased) + "<dev string:x1d1>";
   function_6d8d81caf145f097(level.var_e9d31890c07ffffc);
 
@@ -526,7 +526,7 @@ function loadspawnlogicweights() {
       validset = 1;
 
       if(isDefined(set.alias)) {
-        alias = function_1823ff50bb28148d(set.alias);
+        alias = getxhash(set.alias);
       } else {
         assertmsg("<dev string:x37c>" + index);
         validset &= 0;
@@ -564,7 +564,7 @@ function loadspawnlogicweights() {
         assertex(isDefined(override.alias), "<dev string:x434>");
         assertex(isDefined(override.factorbundle), "<dev string:x477>");
         assertex(isDefined(override.criticalbundle), "<dev string:x4d6>");
-        alias = function_1823ff50bb28148d(override.alias);
+        alias = getxhash(override.alias);
 
         if(isDefined(level.spawnglobals.var_4c3494e7bacb24a[alias])) {
           if(isDefined(override.factorbundle) && override.factorbundle != % "") {
@@ -1875,10 +1875,10 @@ function checkttlosoverrides(viewer, spawnpoint) {
 
     if(isDefined(level.spawnglobals.ttlosoverrides[var_24ed8518f6fc6e6])) {
       foreach(spawnnode in spawnpoint.radiuspathnodes) {
-        var_7643b53b09bbf1d5 = spawnnode getnodenumber();
+        spawnnodeid = spawnnode getnodenumber();
 
-        if(isDefined(level.spawnglobals.ttlosoverrides[var_24ed8518f6fc6e6][var_7643b53b09bbf1d5])) {
-          return level.spawnglobals.ttlosoverrides[var_24ed8518f6fc6e6][var_7643b53b09bbf1d5];
+        if(isDefined(level.spawnglobals.ttlosoverrides[var_24ed8518f6fc6e6][spawnnodeid])) {
+          return level.spawnglobals.ttlosoverrides[var_24ed8518f6fc6e6][spawnnodeid];
         }
       }
     }
@@ -2412,7 +2412,7 @@ function function_50a59d95bac1964e() {
 
 function function_d344bbcacf5e4d96(factorref, factorstruct, spawncontext) {
   if(!isDefined(spawncontext.factorparams)) {
-    assertmsg("<dev string:xc18>" + function_3c8848a3a11b2553(factorref) + "<dev string:xc2a>");
+    assertmsg("<dev string:xc18>" + getxhashsourcename(factorref) + "<dev string:xc2a>");
   }
 
   outputparams = [];
@@ -2425,7 +2425,7 @@ function function_d344bbcacf5e4d96(factorref, factorstruct, spawncontext) {
       }
     }
 
-    assertex(isDefined(outputparams[paramref]), "<dev string:xc18>" + factorref + "<dev string:xc74>" + function_3c8848a3a11b2553(paramref) + "<dev string:xc95>");
+    assertex(isDefined(outputparams[paramref]), "<dev string:xc18>" + factorref + "<dev string:xc74>" + getxhashsourcename(paramref) + "<dev string:xc95>");
   }
 }
 

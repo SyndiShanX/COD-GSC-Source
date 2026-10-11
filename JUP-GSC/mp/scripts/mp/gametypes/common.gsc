@@ -151,7 +151,7 @@ function updatecommongametypedvars() {
     scripts\mp\gametypes\cache::init();
   }
 
-  if(!istrue(level.var_ec2fb549b15ad827) && !privatematch()) {
+  if(!istrue(level.leagueplaymatch) && !privatematch()) {
     level.var_998f1f31d478a7d5 = getdvarint(@ "scr_countdown");
 
     if(level.var_998f1f31d478a7d5) {

@@ -35,7 +35,7 @@ function private on_zombie_base_abom_crawler_spawned(params) {
   thread_on_notify("explode_death", &function_ec481db6f0a4e653);
   callback::add("on_zombie_ai_damaged", &function_13da6f593406ec4d);
   self.var_fe9174386ff8b1f = 1;
-  namespace_9e6ef02d993a7eba::function_dd8dcd65f2ebbb35(1);
+  namespace_9e6ef02d993a7eba::set_crawling(1);
   thread wander_listener();
 }
 
@@ -107,7 +107,7 @@ function private wander_listener() {
 
   while(true) {
     self waittill("wander_start");
-    self._blackboard.var_46621811c1024018 = self.origin;
+    self._blackboard.zombiewanderorigin = self.origin;
     thread function_3ef8c54a29b98522();
     self waittill("wander_end");
   }
@@ -119,15 +119,15 @@ function private function_3ef8c54a29b98522() {
   search_time = 10;
   wait search_time;
 
-  if(isDefined(self.var_c383683308e840a7)) {
-    var_15ac5500f542090d = distance2dsquared(self.var_c383683308e840a7.origin, self.origin);
+  if(isDefined(self.abom_parent)) {
+    var_15ac5500f542090d = distance2dsquared(self.abom_parent.origin, self.origin);
     var_62733f9f4971379d = 1500;
 
     if(var_15ac5500f542090d > var_62733f9f4971379d * var_62733f9f4971379d) {
       self kill();
     }
 
-    self._blackboard.var_46621811c1024018 = self.var_c383683308e840a7.origin;
+    self._blackboard.zombiewanderorigin = self.abom_parent.origin;
   }
 }
 
@@ -144,10 +144,10 @@ function private function_6e789d7df8701ad3() {
       continue;
     }
 
-    if(isDefined(level.var_3c408363d81b00e0)) {
-      level.var_3c408363d81b00e0++;
+    if(isDefined(level.zombie_ambient_count)) {
+      level.zombie_ambient_count++;
 
-      if(level.var_3c408363d81b00e0 < ambient_cap) {
+      if(level.zombie_ambient_count < ambient_cap) {
         played_vox = 1;
         level thread play_vox(self, "ambient_normal", "vox_ai_abom_crawl_ambient", 1);
       }

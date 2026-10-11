@@ -200,15 +200,15 @@ function function_7a59631f369cf28f() {
   return false;
 }
 
-function function_8c2ee7cb53f2d33f(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
+function function_8c2ee7cb53f2d33f(pointtocheck, teamtocheck) {
   var_3d03b5c55b1367af = 0;
 
   if(!isDefined(level.var_b4782a67e2e204d5)) {
     return var_3d03b5c55b1367af;
   } else {
     foreach(trigger in level.var_b4782a67e2e204d5) {
-      if(ispointinvolume(var_863c619037f3ac74, trigger)) {
-        if(isDefined(trigger.script_team) && isDefined(var_da8cec9bce12f9cb) && trigger.script_team != var_da8cec9bce12f9cb) {
+      if(ispointinvolume(pointtocheck, trigger)) {
+        if(isDefined(trigger.script_team) && isDefined(teamtocheck) && trigger.script_team != teamtocheck) {
           continue;
         }
 

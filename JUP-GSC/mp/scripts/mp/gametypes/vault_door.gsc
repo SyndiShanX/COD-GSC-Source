@@ -86,8 +86,8 @@ function function_702f682e2a3526df(door) {
     }
 
     accelerationtime = 4;
-    var_79b37dfd4bea6cb3 = 4;
-    door rotateYaw(-120, 8, accelerationtime, var_79b37dfd4bea6cb3);
+    decelerationtime = 4;
+    door rotateYaw(-120, 8, accelerationtime, decelerationtime);
     wait 4;
 
     if(isDefined(door.addedcollision)) {
@@ -111,11 +111,11 @@ function function_2fcaee708b41d832() {
   }
 }
 
-function keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread _keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+function keypadscriptableused(instance, part, state, player, bautouse, usestring) {
+  level thread _keypadscriptableused(instance, part, state, player, bautouse);
 }
 
-function _keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _keypadscriptableused(instance, part, state, player, bautouse) {
   assert(part == "<dev string:x72>");
   instance setscriptablepartstate(part, "off");
   player keypad_playerinteractwithkeypadloop(instance);

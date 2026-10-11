@@ -61,17 +61,17 @@ function function_8607f97cb7f96343() {
   var_9cce3514d979f535 thread function_57ac36ea7abb5af4(undefined, allies, ["shot_090_door_01_door_02_ally_01_breach"]);
   var_9cce3514d979f535 thread function_7e63b12a83899b7e();
   flag_wait_any("flag_level_g_riot_l_pair_01_damaged", "flag_level_g_riot_l_pair_02_damaged", "flag_level_g_riot_l_pair_03_damaged", "flag_level_g_riot_l_pair_04_damaged", "flag_level_g_riot_l_pair_05_damaged");
-  var_33fb3f54e3157316 = 0;
+  guysalive = 0;
 
   if(isDefined(level.var_622d18e0498316ce)) {
     foreach(guy in level.var_622d18e0498316ce) {
       if(!utility::is_dead_or_dying(guy)) {
-        var_33fb3f54e3157316++;
+        guysalive++;
       }
     }
   }
 
-  if(var_33fb3f54e3157316 > 0) {
+  if(guysalive > 0) {
     var_9cce3514d979f535 scene::stop();
     level.ally1 enable_ai_color();
     level.ally2 enable_ai_color();
@@ -110,24 +110,24 @@ function function_9eb46bb7aa26855c() {
 
   var_45db350f8858209a = [reachvip_cell_01_prisoner_01];
   var_112b953f384d9fb7 = ["shot_010_cell01_prisoner01"];
-  var_33d30a1a870ec56c = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_01", "targetname");
-  var_33d30a1a870ec56c thread scene::play(var_45db350f8858209a, var_112b953f384d9fb7);
+  animnode_1 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_01", "targetname");
+  animnode_1 thread scene::play(var_45db350f8858209a, var_112b953f384d9fb7);
   var_45db340f88581e67 = [reachvip_cell_01_prisoner_02];
   var_112b963f384da1ea = ["shot_020_cell01_prisoner02"];
-  var_33d30d1a870ecc05 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_02", "targetname");
-  var_33d30d1a870ecc05 thread scene::play(var_45db340f88581e67, var_112b963f384da1ea);
+  animnode_2 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_02", "targetname");
+  animnode_2 thread scene::play(var_45db340f88581e67, var_112b963f384da1ea);
   var_45db330f88581c34 = [reachvip_cell_01_prisoner_03];
   var_112b973f384da41d = ["shot_030_cell01_prisoner03"];
-  var_33d30c1a870ec9d2 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_03", "targetname");
-  var_33d30c1a870ec9d2 thread scene::play(var_45db330f88581c34, var_112b973f384da41d);
+  animnode_3 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_03", "targetname");
+  animnode_3 thread scene::play(var_45db330f88581c34, var_112b973f384da41d);
   var_45db320f88581a01 = [reachvip_cell_01_prisoner_04];
   var_112b903f384d94b8 = ["shot_010_prisoner_01_idle"];
-  var_33d3071a870ebed3 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_04", "targetname");
-  var_33d3071a870ebed3 thread scene::play(var_45db320f88581a01, var_112b903f384d94b8);
+  animnode_4 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_04", "targetname");
+  animnode_4 thread scene::play(var_45db320f88581a01, var_112b903f384d94b8);
   var_45db310f885817ce = [reachvip_cell_01_prisoner_05];
   var_112b913f384d96eb = ["shot_030_prisoner_02_idle"];
-  var_33d3061a870ebca0 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_05", "targetname");
-  var_33d3061a870ebca0 thread scene::play(var_45db310f885817ce, var_112b913f384d96eb);
+  animnode_5 = getStruct("vip_0740_reach_makarov_bedlam_cell_01_prisoner_05", "targetname");
+  animnode_5 thread scene::play(var_45db310f885817ce, var_112b913f384d96eb);
   reachvip_cell_01_prisoner_01 thread function_672fd16c1e8480a4();
   reachvip_cell_01_prisoner_02 thread function_672fd16c1e8480a4();
   reachvip_cell_01_prisoner_03 thread function_672fd16c1e8480a4();
@@ -161,8 +161,8 @@ function function_9eb46bb7aa26855c() {
 
   var_45db300f8858159b = [reachvip_cell_02_prisoner_01];
   var_112b923f384d991e = ["shot_010_prisoner_01_idle"];
-  var_33d3091a870ec339 = getStruct("vip_0740_reach_makarov_bedlam_cell_02_prisoner_01", "targetname");
-  var_33d3091a870ec339 thread scene::play(var_45db300f8858159b, var_112b923f384d991e);
+  animnode_6 = getStruct("vip_0740_reach_makarov_bedlam_cell_02_prisoner_01", "targetname");
+  animnode_6 thread scene::play(var_45db300f8858159b, var_112b923f384d991e);
   var_45db2f0f88581368 = [reachvip_cell_02_prisoner_02];
   var_112b933f384d9b51 = ["shot_050_cell02_prisoner02"];
   var_33d3081a870ec106 = getStruct("vip_0740_reach_makarov_bedlam_cell_02_prisoner_02", "targetname");
@@ -287,9 +287,9 @@ function function_9eb46bb7aa26855c() {
   reachvip_bg_cell_03_prisoner_03 utility::add_damage_function(&function_d799ec6e01836246);
   reachvip_bg_cell_03_prisoner_04 utility::add_damage_function(&function_d799ec6e01836246);
   var_b8790434d82eaf2c = [reachvip_cell_01_prisoner_01, reachvip_cell_01_prisoner_02, reachvip_cell_01_prisoner_03, reachvip_cell_01_prisoner_04, reachvip_cell_01_prisoner_05];
-  var_70c343d2de1d7baf = [var_33d30a1a870ec56c, var_33d30d1a870ecc05, var_33d30c1a870ec9d2, var_33d3071a870ebed3, var_33d3061a870ebca0];
+  var_70c343d2de1d7baf = [animnode_1, animnode_2, animnode_3, animnode_4, animnode_5];
   var_9d5f636c7cb2c555 = [reachvip_cell_02_prisoner_01, reachvip_cell_02_prisoner_02, reachvip_cell_02_prisoner_03, reachvip_cell_02_prisoner_04, reachvip_cell_02_prisoner_05];
-  var_92cdf8a0556107e0 = [var_33d3091a870ec339, var_33d3081a870ec106, var_33d3131a870ed937, var_33d3121a870ed704, var_7e49457057c0954];
+  var_92cdf8a0556107e0 = [animnode_6, var_33d3081a870ec106, var_33d3131a870ed937, var_33d3121a870ed704, var_7e49457057c0954];
   var_12b4c0dbcfc566ee = [reachvip_cell_03_prisoner_01, reachvip_cell_03_prisoner_02, reachvip_cell_03_prisoner_03, reachvip_cell_03_prisoner_04, reachvip_cell_03_prisoner_05];
   var_44adb1bd7d27a439 = [var_7e49557057c0b87, var_7e49657057c0dba, var_7e49757057c0fed, var_7e49057057c0088, var_7e49157057c02bb];
   var_956ccbe037ab28e9 = [reachvip_bg_cell_03_prisoner_01, reachvip_bg_cell_03_prisoner_02, reachvip_bg_cell_03_prisoner_03, reachvip_bg_cell_03_prisoner_04];
@@ -416,11 +416,11 @@ function function_7fa2997ddb2cdeb5(guy, react_offset, index, animnodes, var_1a5b
     function_60daa23100a2b874(var_1a5bc526adb58158, guy);
   } else {
     waitframe();
-    guy function_d5cda8a759cc36bc("flee");
+    guy setcivstate("flee");
     waitframe();
 
     if(guy.targetname != "reachvip_cell_01_prisoner_03" && guy.targetname != "reachvip_cell_03_prisoner_02") {
-      guy function_d5cda8a759cc36bc("cower");
+      guy setcivstate("cower");
     }
 
     guy.deathfunction = &function_ce450b9957138bd5;
@@ -1205,9 +1205,9 @@ function function_c7d685dd30c237ad() {
   var_10b1628188a6260 notsolid();
   var_10b1628188a6260 connectpaths();
   var_10b1628188a6260 hide();
-  var_5977cd2102a967c2 = getEnt("pcap_makarov_reveal_shadow_box", "targetname");
-  var_5977cd2102a967c2 notsolid();
-  var_5977cd2102a967c2 connectpaths();
+  shadowbox = getEnt("pcap_makarov_reveal_shadow_box", "targetname");
+  shadowbox notsolid();
+  shadowbox connectpaths();
 }
 
 function function_98e61d50b3de5278() {
@@ -1691,8 +1691,8 @@ function elevator_interact() {
   thread elevator_pcap();
   var_9325985c850ce307 = get_living_ai_array("riot_corridor_rusher_guard", "targetname");
   var_da7e70e22c9f55d = get_living_ai_array("riot_locker_guy", "targetname");
-  var_d9306d15766b500 = array_combine(var_9325985c850ce307, var_da7e70e22c9f55d);
-  array_kill(var_d9306d15766b500);
+  allguys = array_combine(var_9325985c850ce307, var_da7e70e22c9f55d);
+  array_kill(allguys);
   flag_set("flag_player_within_elevator");
   flag_set("flag_obj_escape_cells_complete");
   flag_wait("cine_elevator_end");
@@ -1711,14 +1711,14 @@ function function_29650ae8f8e7e71e(animnode) {
   animnode scene::function_8207074e79f22926(animnode, "elevator_up_2", "Player");
   animnode scene::function_8207074e79f22926(animnode, "elevator_default", "Makarov");
   animnode waittill("elevator_up_1");
-  var_f7b7c2569fb8c5ab = animnode scene::get_entity("elevator_geo");
-  var_f7b7c2569fb8c5ab setscriptablepartstate("elevator_buttons", "button_up");
+  elevator_scriptable = animnode scene::get_entity("elevator_geo");
+  elevator_scriptable setscriptablepartstate("elevator_buttons", "button_up");
   animnode waittill("elevator_stop");
-  var_f7b7c2569fb8c5ab setscriptablepartstate("elevator_buttons", "button_stop");
+  elevator_scriptable setscriptablepartstate("elevator_buttons", "button_stop");
   animnode waittill("elevator_up_2");
-  var_f7b7c2569fb8c5ab setscriptablepartstate("elevator_buttons", "button_up");
+  elevator_scriptable setscriptablepartstate("elevator_buttons", "button_up");
   animnode waittill("elevator_default");
-  var_f7b7c2569fb8c5ab setscriptablepartstate("elevator_buttons", "button_on");
+  elevator_scriptable setscriptablepartstate("elevator_buttons", "button_on");
 }
 
 function elevator_pcap() {
@@ -1743,9 +1743,9 @@ function elevator_pcap() {
   thread transient_load_array(["sp_jup_vip_rooftop_tr", "sp_jup_vip_infil_vista_tr", "sp_jup_vip_maintenance_tr", "sp_jup_vip_tower_tr"]);
   animnode thread scene::play(actors, "pcap_idle");
   var_1b8b2ec73f492162 = [ &"sp_jup_vip/dialog_elevator_option1", &"sp_jup_vip/dialog_elevator_option2", &"sp_jup_vip/dialog_elevator_option3"];
-  var_5c76167572fce9c1 = ["The guards.", "The prisoners.", "Neither."];
+  playerdialoguelines = ["The guards.", "The prisoners.", "Neither."];
 
-  switch (function_945718bb107da39e(var_5c76167572fce9c1, var_1b8b2ec73f492162, 9, 0)) {
+  switch (function_945718bb107da39e(playerdialoguelines, var_1b8b2ec73f492162, 9, 0)) {
     case 1:
       flag_set("flag_aud_makarov_answered");
       animnode scene::play(actors, "pcap_answer1");
@@ -1774,7 +1774,7 @@ function elevator_pcap() {
   setsaveddvar(@ "hash_fa84e9dc55b9d406", 1);
 }
 
-function function_945718bb107da39e(var_5c76167572fce9c1, var_71522087bc2056d3, timeout, var_120e91c43eab8002) {
+function function_945718bb107da39e(playerdialoguelines, var_71522087bc2056d3, timeout, var_120e91c43eab8002) {
   if(!isDefined(var_120e91c43eab8002)) {
     var_120e91c43eab8002 = 1;
   }
@@ -1785,7 +1785,7 @@ function function_945718bb107da39e(var_5c76167572fce9c1, var_71522087bc2056d3, t
 
   var_8c791b0ce2679fba = scripts\sp\dialogue_wheel::function_d92b8b076e34f82b(var_71522087bc2056d3, int(timeout));
 
-  if(!isDefined(var_5c76167572fce9c1)) {
+  if(!isDefined(playerdialoguelines)) {
     return var_8c791b0ce2679fba;
   }
 

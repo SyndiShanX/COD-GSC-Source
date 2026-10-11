@@ -165,7 +165,7 @@ function function_d590d31d431a15c1(region_name, region_difficulty) {
     level.var_f721fc7d0d2d0f47.difficulties[region_difficulty] = difficulty_struct;
   }
 
-  regions = function_f159c10d5cf8f0b4(region_name, "targetname");
+  regions = getnoentvolumearray(region_name, "targetname");
   var_9cc11a59dc9c726e = getEntArray(region_name, "targetname");
   regions = array_combine(regions, var_9cc11a59dc9c726e);
 
@@ -303,7 +303,7 @@ function function_4fd50faaf7767e65(ai, difficulty, round_number) {
   }
 
   if(isDefined(ai._blackboard.var_c406031fea1f3214)) {
-    ai._blackboard.var_c406031fea1f3214 = int(ceil(ai.zombieaisettings.var_3a54f74770e61046 * damage_increase));
+    ai._blackboard.var_c406031fea1f3214 = int(ceil(ai.zombieaisettings.leapattackdamage * damage_increase));
   }
 
   if(is_equal(ai.aicategory, "normal")) {
@@ -465,7 +465,7 @@ function function_161e408eddab0865(relevantparameters) {
 
   if(!var_bb42ecd2f09e86b1 && isDefined(newdifficulty) && !is_equal(newdifficulty, olddifficulty)) {
     splashreference = undefined;
-    var_42b1e877ab187c6 = "splash_list_jup_ob";
+    splashlistoverride = "splash_list_jup_ob";
 
     switch (newdifficulty) {
       case #"hash_7bb2cd766703d463":
@@ -483,7 +483,7 @@ function function_161e408eddab0865(relevantparameters) {
     }
 
     if(isDefined(splashreference)) {
-      player thread scripts\mp\hud_message::showsplash(splashreference, undefined, undefined, undefined, 1, var_42b1e877ab187c6);
+      player thread scripts\mp\hud_message::showsplash(splashreference, undefined, undefined, undefined, 1, splashlistoverride);
     }
   }
 

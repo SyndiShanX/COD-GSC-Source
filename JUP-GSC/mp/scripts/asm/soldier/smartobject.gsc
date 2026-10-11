@@ -87,7 +87,7 @@ function shouldsmartobjectreact(asmname, statename, tostatename, params) {
     return false;
   }
 
-  if(self function_a4a9e73b2d25ff8b()) {
+  if(self shouldpatrolreact()) {
     return true;
   }
 

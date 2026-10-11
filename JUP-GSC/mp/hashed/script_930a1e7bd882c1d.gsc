@@ -171,12 +171,12 @@ function function_2d4c340dd3908b2d(fov) {
   self.fov = fov;
 }
 
-function function_b8f86028bcc64f84(fstop, focusdist, focusspeed, aperturespeed, var_c06551440b16249c) {
+function function_b8f86028bcc64f84(fstop, focusdist, focusspeed, aperturespeed, focalpoint) {
   self.fstop = fstop;
   self.focusdist = focusdist;
   self.focusspeed = focusspeed;
   self.aperturespeed = aperturespeed;
-  self.var_c06551440b16249c = var_c06551440b16249c;
+  self.focalpoint = focalpoint;
 }
 
 function add_pack_startfunc(paramarray, func) {
@@ -356,7 +356,7 @@ function function_cf47ab3f9defe35b() {
   }
 }
 
-function allplayers_setphysicaldof(fstop, focusdist, focusspeed, aperturespeed, var_c06551440b16249c) {
+function allplayers_setphysicaldof(fstop, focusdist, focusspeed, aperturespeed, focalpoint) {
   if(!isDefined(focusspeed)) {
     focusspeed = 100;
   }
@@ -375,8 +375,8 @@ function allplayers_setphysicaldof(fstop, focusdist, focusspeed, aperturespeed, 
       player enablephysicaldepthoffieldscripting();
     }
 
-    if(isDefined(var_c06551440b16249c)) {
-      player setphysicaldepthoffield(fstop, focusdist, focusspeed, aperturespeed, var_c06551440b16249c);
+    if(isDefined(focalpoint)) {
+      player setphysicaldepthoffield(fstop, focusdist, focusspeed, aperturespeed, focalpoint);
       continue;
     }
 
@@ -862,14 +862,14 @@ function function_e66f664ad726f2e() {
 
 function function_d870904da7b1ff7d(lights, lightson) {
   if(lightson) {
-    var_c59c1d18b26c886e = [];
-    var_c59c1d18b26c886e["infil_light_01"] = 2000 * 7.95545e-05;
-    var_c59c1d18b26c886e["infil_light_02"] = 3000 * 7.95545e-05;
-    var_c59c1d18b26c886e["infil_light_03"] = 75 * 7.95545e-05;
+    intensities = [];
+    intensities["infil_light_01"] = 2000 * 7.95545e-05;
+    intensities["infil_light_02"] = 3000 * 7.95545e-05;
+    intensities["infil_light_03"] = 75 * 7.95545e-05;
 
     foreach(light in lights) {
-      if(isDefined(light.name) && isDefined(var_c59c1d18b26c886e[light.name])) {
-        light setlightintensity(var_c59c1d18b26c886e[light.name]);
+      if(isDefined(light.name) && isDefined(intensities[light.name])) {
+        light setlightintensity(intensities[light.name]);
       }
 
       light forcenetfieldhighlod(1);
@@ -886,12 +886,12 @@ function function_d870904da7b1ff7d(lights, lightson) {
 
 function function_d8f828d3c82061b7(lights, lightson) {
   if(lightson) {
-    var_c59c1d18b26c886e = [];
-    var_c59c1d18b26c886e["exfil_light_01"] = 500 * 7.95545e-05;
-    var_c59c1d18b26c886e["exfil_light_02"] = 1250 * 7.95545e-05;
+    intensities = [];
+    intensities["exfil_light_01"] = 500 * 7.95545e-05;
+    intensities["exfil_light_02"] = 1250 * 7.95545e-05;
 
     foreach(light in lights) {
-      light setlightintensity(var_c59c1d18b26c886e[light.name]);
+      light setlightintensity(intensities[light.name]);
     }
 
     return;
@@ -904,15 +904,15 @@ function function_d8f828d3c82061b7(lights, lightson) {
 
 function function_362cf2eeebce4c73(lights, lightson) {
   if(lightson) {
-    var_c59c1d18b26c886e = [];
-    var_c59c1d18b26c886e["cq_exfil_light_01"] = 1000 * 7.95545e-05;
-    var_c59c1d18b26c886e["cq_exfil_light_02"] = 1000 * 7.95545e-05;
-    var_c59c1d18b26c886e["cq_exfil_light_03"] = 1250 * 7.95545e-05;
-    var_c59c1d18b26c886e["cq_exfil_light_04"] = 500 * 7.95545e-05;
-    var_c59c1d18b26c886e["cq_exfil_light_05"] = 500 * 7.95545e-05;
+    intensities = [];
+    intensities["cq_exfil_light_01"] = 1000 * 7.95545e-05;
+    intensities["cq_exfil_light_02"] = 1000 * 7.95545e-05;
+    intensities["cq_exfil_light_03"] = 1250 * 7.95545e-05;
+    intensities["cq_exfil_light_04"] = 500 * 7.95545e-05;
+    intensities["cq_exfil_light_05"] = 500 * 7.95545e-05;
 
     foreach(light in lights) {
-      light setlightintensity(var_c59c1d18b26c886e[light.name]);
+      light setlightintensity(intensities[light.name]);
     }
 
     return;
@@ -925,13 +925,13 @@ function function_362cf2eeebce4c73(lights, lightson) {
 
 function function_4d5d7485513f045(lights, lightson) {
   if(lightson) {
-    var_c59c1d18b26c886e = [];
-    var_c59c1d18b26c886e["2ndry_light_01"] = 250 * 7.95545e-05;
-    var_c59c1d18b26c886e["2ndry_light_02"] = 1000 * 7.95545e-05;
-    var_c59c1d18b26c886e["2ndry_light_03"] = 500 * 7.95545e-05;
+    intensities = [];
+    intensities["2ndry_light_01"] = 250 * 7.95545e-05;
+    intensities["2ndry_light_02"] = 1000 * 7.95545e-05;
+    intensities["2ndry_light_03"] = 500 * 7.95545e-05;
 
     foreach(light in lights) {
-      light setlightintensity(var_c59c1d18b26c886e[light.name]);
+      light setlightintensity(intensities[light.name]);
     }
 
     return;
@@ -944,13 +944,13 @@ function function_4d5d7485513f045(lights, lightson) {
 
 function function_b281515d61bd0774(lights, lightson) {
   if(lightson) {
-    var_c59c1d18b26c886e = [];
-    var_c59c1d18b26c886e["accolade_light_01"] = 750 * 7.95545e-05;
-    var_c59c1d18b26c886e["accolade_light_02"] = 1000 * 7.95545e-05;
-    var_c59c1d18b26c886e["accolade_light_03"] = 1000 * 7.95545e-05;
+    intensities = [];
+    intensities["accolade_light_01"] = 750 * 7.95545e-05;
+    intensities["accolade_light_02"] = 1000 * 7.95545e-05;
+    intensities["accolade_light_03"] = 1000 * 7.95545e-05;
 
     foreach(light in lights) {
-      light setlightintensity(var_c59c1d18b26c886e[light.name]);
+      light setlightintensity(intensities[light.name]);
     }
 
     return;

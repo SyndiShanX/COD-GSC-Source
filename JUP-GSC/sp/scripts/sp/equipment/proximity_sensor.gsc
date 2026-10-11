@@ -317,12 +317,12 @@ function function_a8c7a844722dfe7(value, min1, max1, min2, max2, power) {
 }
 
 function simple_round(value) {
-  var_28f567f333abe158 = floor(value);
-  decimal = value - var_28f567f333abe158;
+  floored = floor(value);
+  decimal = value - floored;
 
   if(decimal < 0.5) {
-    return var_28f567f333abe158;
+    return floored;
   }
 
-  return var_28f567f333abe158 + 1;
+  return floored + 1;
 }

@@ -957,7 +957,7 @@ function bot_connect_monitor() {
         new_bots[i].bot.bot_team = new_bots[i].team;
       }
 
-      if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+      if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
         var_5be31bbf808e8d4c = new_bots[i].squad;
         new_bots[i].bot.bot_squad = var_5be31bbf808e8d4c;
       }
@@ -1900,7 +1900,7 @@ function bot_random_ranks_for_difficulty(difficulty) {
     level.bot_rnd_rank["veteran"][1] = 54;
   }
 
-  assertex(level.bot_rnd_rank["veteran"][1] == level.var_e0e30c15f736bd96, "Max level has changed, please adjust values in bot_random_ranks_for_difficulty()");
+  assertex(level.bot_rnd_rank["veteran"][1] == level.maxstandardrank, "Max level has changed, please adjust values in bot_random_ranks_for_difficulty()");
 
   if(!isDefined(level.bot_rnd_prestige)) {
     level.bot_rnd_prestige = [];
@@ -1977,9 +1977,9 @@ function function_9ea1b3409311f518() {
   return human_spectators;
 }
 
-function bot_damage_callback(eattacker, idamage, smeansofdeath, sweapon, einflictor, shitloc, vpoint, var_1da1a66b5c6a06a7) {
-  if(!isDefined(var_1da1a66b5c6a06a7)) {
-    var_1da1a66b5c6a06a7 = 0;
+function bot_damage_callback(eattacker, idamage, smeansofdeath, sweapon, einflictor, shitloc, vpoint, lightarmordamage) {
+  if(!isDefined(lightarmordamage)) {
+    lightarmordamage = 0;
   }
 
   if(!isDefined(self) || !isalive(self)) {
@@ -1990,7 +1990,7 @@ function bot_damage_callback(eattacker, idamage, smeansofdeath, sweapon, einflic
     return;
   }
 
-  if(idamage <= 0 && var_1da1a66b5c6a06a7 <= 0) {
+  if(idamage <= 0 && lightarmordamage <= 0) {
     return;
   }
 
@@ -2004,7 +2004,7 @@ function bot_damage_callback(eattacker, idamage, smeansofdeath, sweapon, einflic
 
   if(isDefined(einflictor)) {
     if(isDefined(self.fnbotdamagecallback)) {
-      self[[self.fnbotdamagecallback]](eattacker, idamage, smeansofdeath, sweapon, einflictor, shitloc, vpoint, var_1da1a66b5c6a06a7);
+      self[[self.fnbotdamagecallback]](eattacker, idamage, smeansofdeath, sweapon, einflictor, shitloc, vpoint, lightarmordamage);
     }
 
     if(level.teambased) {
@@ -2094,10 +2094,10 @@ function bot_restart_think_threads() {
   thread bot_think_dynamic_doors();
   thread bot_think_nvg();
 
-  thread function_85449d9e699cd4cd();
+  thread bot_think_debug();
 }
 
-function function_85449d9e699cd4cd() {
+function bot_think_debug() {
   self notify("<dev string:x3fb>");
   self endon("<dev string:x3fb>");
   self endon("<dev string:x40b>");
@@ -3806,9 +3806,9 @@ function function_5188aadb27d72a11() {
   thread function_51da8c98ef44eceb();
 }
 
-function function_b09b8c00320b91e(eattacker, idamage, smeansofdeath, objweapon, einflictor, shitloc, vpoint, var_1da1a66b5c6a06a7) {
-  if(!isDefined(var_1da1a66b5c6a06a7)) {
-    var_1da1a66b5c6a06a7 = 0;
+function function_b09b8c00320b91e(eattacker, idamage, smeansofdeath, objweapon, einflictor, shitloc, vpoint, lightarmordamage) {
+  if(!isDefined(lightarmordamage)) {
+    lightarmordamage = 0;
   }
 
   host = scripts\mp\dev::devfindhost();
@@ -3818,7 +3818,7 @@ function function_b09b8c00320b91e(eattacker, idamage, smeansofdeath, objweapon, 
   }
 
   self.var_2fc19f3a438f03a5++;
-  self.var_b0ab2dca24bfe60a += idamage + var_1da1a66b5c6a06a7;
+  self.var_b0ab2dca24bfe60a += idamage + lightarmordamage;
   source_pos = eattacker == einflictor ? eattacker getEye() : self.origin;
   range = distance(source_pos, vpoint);
   weap_token = strtok(getcompleteweaponname(objweapon), "<dev string:x474>");
@@ -3833,7 +3833,7 @@ function function_b09b8c00320b91e(eattacker, idamage, smeansofdeath, objweapon, 
   }
 
   self.menu["<dev string:x47e>"] setvalue(self.health);
-  self.menu["<dev string:x485>"] setvalue(idamage + var_1da1a66b5c6a06a7);
+  self.menu["<dev string:x485>"] setvalue(idamage + lightarmordamage);
   self.menu["<dev string:x48c>"] setvalue(self.var_b0ab2dca24bfe60a);
   self.menu["<dev string:x498>"] setvalue(self.var_2fc19f3a438f03a5);
   self.menu["<dev string:x49d>"] setvalue(range);

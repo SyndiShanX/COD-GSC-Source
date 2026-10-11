@@ -28,7 +28,7 @@ function threat_sight_set_enabled(enabled) {
 
   foreach(guy in allai) {
     if(isalive(guy) && isDefined(guy.threatsightstate)) {
-      guy function_24cb3b5e0d4216b1(guy.threatsightstate);
+      guy setthreatsightstate(guy.threatsightstate);
     }
   }
 
@@ -134,8 +134,8 @@ function threat_sight_force_visible_thread() {
       if(now < forcedvis.end && issentient(forcedvis.ent) && !self cansee(forcedvis.ent)) {
         if(isPlayer(forcedvis.ent)) {
           newthreat = self getthreatsight(forcedvis.ent);
-          var_3d4b09d94df0885a = function_910a912f327b8d34(forcedvis.ent);
-          forcedvis.ent thread threat_sight_player_sight_audio(1, max(var_3d4b09d94df0885a, newthreat));
+          stealthmaxthreat = function_910a912f327b8d34(forcedvis.ent);
+          forcedvis.ent thread threat_sight_player_sight_audio(1, max(stealthmaxthreat, newthreat));
         }
 
         continue;
@@ -216,25 +216,25 @@ function threat_sight_fake(origin, amount) {
   setsaveddvar(@ "ai_threatsightfakex", origin[0]);
   setsaveddvar(@ "ai_threatsightfakey", origin[1]);
   setsaveddvar(@ "ai_threatsightfakez", origin[2]);
-  var_3d4b09d94df0885a = function_910a912f327b8d34(self);
+  stealthmaxthreat = function_910a912f327b8d34(self);
 
   while(amount > 0) {
-    thread threat_sight_player_sight_audio(1, max(var_3d4b09d94df0885a, amount));
+    thread threat_sight_player_sight_audio(1, max(stealthmaxthreat, amount));
     wait 0.15;
   }
 
-  thread threat_sight_player_sight_audio(0, max(var_3d4b09d94df0885a, amount));
+  thread threat_sight_player_sight_audio(0, max(stealthmaxthreat, amount));
 }
 
-function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc690b) {
+function threat_sight_player_sight_audio(anycansee, maxthreat, willdebugprint) {
   if(isDefined(level.stealth) && isDefined(level.stealth.fnthreatsightplayersightaudio)) {
-    self thread[[level.stealth.fnthreatsightplayersightaudio]](anycansee, maxthreat, var_67e8151f4dfc690b);
+    self thread[[level.stealth.fnthreatsightplayersightaudio]](anycansee, maxthreat, willdebugprint);
   }
 }
 
 function function_9b25540da1b89219() {
-  if(isDefined(level.stealth) && isDefined(level.stealth.var_585390079b597cd6)) {
-    self thread[[level.stealth.var_585390079b597cd6]]();
+  if(isDefined(level.stealth) && isDefined(level.stealth.fnthreatsightplayersightaudiocleanup)) {
+    self thread[[level.stealth.fnthreatsightplayersightaudiocleanup]]();
   }
 }
 

@@ -85,9 +85,9 @@ function function_d42c23c4731aed7() {
   childthread function_7fdf3cf66304f3c5(self, 20);
 
   while(true) {
-    self waittill("looted_item", lootid, quantity, var_a5b2c541413aa895);
+    self waittill("looted_item", lootid, quantity, bautouse);
 
-    if(!istrue(var_a5b2c541413aa895)) {
+    if(!istrue(bautouse)) {
       break;
     }
   }
@@ -635,7 +635,7 @@ function function_9a20a7c14d389880() {
   self endon("contextual_tips_disable");
 
   while(true) {
-    self waittill("looted_item", lootid, quantity, var_a5b2c541413aa895);
+    self waittill("looted_item", lootid, quantity, bautouse);
 
     if(isDefined(lootid)) {
       scriptablename = loot::getscriptablefromlootid(lootid);

@@ -95,10 +95,10 @@ function function_e52c71c96d93174b(n_level) {
 }
 
 function function_4c8abc7b4eff6212(weapon) {
-  var_88260bb1ed608124 = weapon.var_9d7facbe889e667c;
+  weapon_root_name = weapon.var_9d7facbe889e667c;
 
-  if(isDefined(level.weaponmetadata[var_88260bb1ed608124])) {
-    if(istrue(level.weaponmetadata[var_88260bb1ed608124].var_2ae3eb7748601877)) {
+  if(isDefined(level.weaponmetadata[weapon_root_name])) {
+    if(istrue(level.weaponmetadata[weapon_root_name].var_2ae3eb7748601877)) {
       return true;
     }
   }

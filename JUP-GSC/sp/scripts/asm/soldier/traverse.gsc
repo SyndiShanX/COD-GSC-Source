@@ -34,21 +34,21 @@ function playtraverseanim_deprecated(asmname, statename, params) {
   thread teleportthread(realheight - params);
   blendtime = 0.15;
   self aisetanim(statename, traverseanim);
-  var_22943623b8e97c62 = 0.2;
+  gravitytoblendtime = 0.2;
   endblendtime = 0.2;
   thread traverse_donotetracks(asmname, statename);
 
   if(!animhasnotetrack(traversexanim, "gravity on")) {
-    var_cc694b7fbbf6503c = 1.23;
-    wait var_cc694b7fbbf6503c - var_22943623b8e97c62;
+    magicwhatevertime_wheretheheckdidwegetthisnumberanyway = 1.23;
+    wait magicwhatevertime_wheretheheckdidwegetthisnumberanyway - gravitytoblendtime;
     self animmode("gravity");
-    wait var_22943623b8e97c62;
+    wait gravitytoblendtime;
   } else {
     self waittillmatch("traverse", "gravity on");
     self animmode("gravity");
 
     if(!animhasnotetrack(traversexanim, "blend")) {
-      wait var_22943623b8e97c62;
+      wait gravitytoblendtime;
     } else {
       self waittillmatch("traverse", "blend");
     }
@@ -73,9 +73,9 @@ function playtraverseanim_doublejump(asmname, statename, params) {
   self endon("death");
   self endon("terminate_ai_threads");
   self endon(statename + "_finished");
-  var_3016b22139446579 = getdvarint(@ "hash_db3bdaface7c82ec", 0);
+  ai_debug_doublejump = getdvarint(@ "hash_db3bdaface7c82ec", 0);
 
-  if(var_3016b22139446579 != 3 && var_3016b22139446579 != 4) {
+  if(ai_debug_doublejump != 3 && ai_debug_doublejump != 4) {
     checktraverse(statename);
   }
 
@@ -90,7 +90,7 @@ function playtraverseanim_doublejump(asmname, statename, params) {
     halfway_y = (start_node.origin[1] + var_e14ac44f6f147496[1]) * 0.5;
     var_559df5f9875a294e[var_559df5f9875a294e.size] = (halfway_x, halfway_y, start_node.traverse_height);
 
-    if(var_3016b22139446579 != 0) {
+    if(ai_debug_doublejump != 0) {
       jump_over_position = var_559df5f9875a294e[0];
       function_52e0db833127ec95(self.origin, jump_over_position, (128, 0, 255), 100);
       function_52e0db833127ec95(self.origin, var_e14ac44f6f147496, (128, 0, 255), 100);
@@ -105,7 +105,7 @@ function playtraverseanim_doublejump(asmname, statename, params) {
   self orientmode("face angle", start_node.angles[1]);
   max_time = 1.63;
 
-  if(var_3016b22139446579 == 3) {
+  if(ai_debug_doublejump == 3) {
     max_time = 0.9;
   }
 
@@ -189,8 +189,8 @@ function getdoublejumpoffsetposition(asmname, var_223efa34c2b82dc8, endpos, enda
   assert(isDefined(aligntime) && aligntime.size > 0);
   time = aligntime[0];
   animdelta = getmovedelta(xanim, 0, time);
-  var_f73bea4534a3831f = getangledelta(xanim, 0, time);
-  return scripts\asm\soldier\cover::calcanimstartpos(endpos, endangles[1], animdelta, var_f73bea4534a3831f);
+  animangledelta = getangledelta(xanim, 0, time);
+  return scripts\asm\soldier\cover::calcanimstartpos(endpos, endangles[1], animdelta, animangledelta);
 }
 
 function doublejumpneedsfinishanim(asmname, nextstatename, startnode, endpos) {
@@ -339,9 +339,9 @@ function playdoublejumptraversal(asmname, statename, params) {
   }
 
   jump_over_position = undefined;
-  var_3016b22139446579 = getdvarint(@ "hash_db3bdaface7c82ec", 0);
+  ai_debug_doublejump = getdvarint(@ "hash_db3bdaface7c82ec", 0);
 
-  if(var_3016b22139446579 != 2) {
+  if(ai_debug_doublejump != 2) {
     if(isDefined(startnode.jump_over_offset)) {
       jump_over_offset = startnode.jump_over_offset;
 
@@ -393,10 +393,10 @@ function playdoublejumptraversal(asmname, statename, params) {
 
   if(delta[2] < 0) {
     var_4c4c6c6d3c2b086b = 1;
-    var_c4d9c443202bf996 = getnotetracktimes(asm_getxanim(statename, jumpanim), "gravity on");
+    touchgroundtime = getnotetracktimes(asm_getxanim(statename, jumpanim), "gravity on");
 
-    if(isDefined(var_c4d9c443202bf996) && var_c4d9c443202bf996.size > 0) {
-      animendtime = var_c4d9c443202bf996[0];
+    if(isDefined(touchgroundtime) && touchgroundtime.size > 0) {
+      animendtime = touchgroundtime[0];
     }
   }
 
@@ -510,8 +510,8 @@ function teleportdeltaovernumframes(statename, waittime, delta, numframes, animn
       pct = i / (numframes - 1);
       smoothstep = getsmoothstep(pct);
       newz = endpos * smoothstep + startpos * (1 - smoothstep);
-      var_bc77fc372e8358f9 = newz - lastz;
-      framedelta = (framedelta[0], framedelta[1], var_bc77fc372e8358f9);
+      newdeltaz = newz - lastz;
+      framedelta = (framedelta[0], framedelta[1], newdeltaz);
       lastz = newz;
     }
 
@@ -566,21 +566,21 @@ function handlejumpteleports(params, animtime, playbackrate) {
   }
 
   animtimepct = animtime / animlength;
-  var_cab4a622d5af2e97 = getnotetracktimes(animname, "end_jump");
+  endjumptime = getnotetracktimes(animname, "end_jump");
   var_930caef7352c0f86 = getnotetracktimes(animname, "end_double_jump");
 
   if(var_930caef7352c0f86.size > 0) {
     self.wall_run_double_jumping = 1;
-    var_cab4a622d5af2e97 = var_930caef7352c0f86;
+    endjumptime = var_930caef7352c0f86;
   } else {
     self.wall_run_double_jumping = 0;
   }
 
-  assert(var_cab4a622d5af2e97.size > 0);
+  assert(endjumptime.size > 0);
 
   if(isDefined(self.jump_over_position)) {
-    var_8c2c7ea3bd382df4 = (var_cab4a622d5af2e97[0] - animtimepct) / 2 + animtimepct;
-    var_cab4a622d5af2e97[0] = var_8c2c7ea3bd382df4;
+    var_8c2c7ea3bd382df4 = (endjumptime[0] - animtimepct) / 2 + animtimepct;
+    endjumptime[0] = var_8c2c7ea3bd382df4;
     desiredendpos = self.jump_over_position;
   }
 
@@ -588,13 +588,13 @@ function handlejumpteleports(params, animtime, playbackrate) {
   animendpos = self localtoworldcoords(movedelta);
 
   if(getdvarint(@ "hash_df899f2d04257001", 0) != 0 && isDefined(self.traversal_start_node)) {
-    var_44a93f09b80b3ae = distance(self.origin, animendpos);
-    var_3d5c613a9500564 = distance(self.origin, desiredendpos);
-    var_e37286be71cbc5cd = var_3d5c613a9500564 / var_44a93f09b80b3ae;
+    disttoanimend = distance(self.origin, animendpos);
+    disttodesiredpos = distance(self.origin, desiredendpos);
+    var_e37286be71cbc5cd = disttodesiredpos / disttoanimend;
 
     if(var_e37286be71cbc5cd < 0.8 || var_e37286be71cbc5cd > 1.2) {
       println("<dev string:x46>" + self.traversal_start_node.origin + "<dev string:x6f>" + animname + "<dev string:x84>" + var_e37286be71cbc5cd);
-      println("<dev string:x89>" + var_44a93f09b80b3ae + "<dev string:x97>" + var_3d5c613a9500564);
+      println("<dev string:x89>" + disttoanimend + "<dev string:x97>" + disttodesiredpos);
     }
   }
 
@@ -603,9 +603,9 @@ function handlejumpteleports(params, animtime, playbackrate) {
   }
 
   if(var_87ef9fdeb401c595) {
-    var_44a93f09b80b3ae = distance(self.origin, animendpos);
-    var_3d5c613a9500564 = distance(self.origin, desiredendpos);
-    playbackrate = var_44a93f09b80b3ae / var_3d5c613a9500564;
+    disttoanimend = distance(self.origin, animendpos);
+    disttodesiredpos = distance(self.origin, desiredendpos);
+    playbackrate = disttoanimend / disttodesiredpos;
 
     if(playbackrate < 0.7) {
       playbackrate = 0.7;
@@ -615,7 +615,7 @@ function handlejumpteleports(params, animtime, playbackrate) {
   }
 
   scaledelta = desiredendpos - animendpos;
-  var_e7f1395489e50fc7 = var_cab4a622d5af2e97[0] * animlength;
+  var_e7f1395489e50fc7 = endjumptime[0] * animlength;
   jumpduration = var_e7f1395489e50fc7 - animtimepct * animlength;
   jumpduration *= 1 / playbackrate;
   numframes = jumpduration * 20;
@@ -728,8 +728,8 @@ function getwallattachoffsetposition(asmname) {
   assert(isDefined(var_bf02a06228e2e48e) && var_bf02a06228e2e48e.size > 0);
   time = var_bf02a06228e2e48e[0];
   animdelta = getmovedelta(animname, 0, time);
-  var_f73bea4534a3831f = getangledelta(animname, 0, time);
-  return scripts\asm\soldier\cover::calcanimstartpos(getwallnodeposition(self.traversal_start_node, 0), self.wall_run_yaw, animdelta, var_f73bea4534a3831f);
+  animangledelta = getangledelta(animname, 0, time);
+  return scripts\asm\soldier\cover::calcanimstartpos(getwallnodeposition(self.traversal_start_node, 0), self.wall_run_yaw, animdelta, animangledelta);
 }
 
 function playwallrunenter(asmname, statename, params) {
@@ -741,8 +741,8 @@ function playwallrunenter(asmname, statename, params) {
   assert(isDefined(startnode.wall_info));
   assert(startnode.wall_info.nodeoffsets.size >= 2);
   self.wall_run_current_node_index = 0;
-  var_86fca619ba5c4a5 = getwallnodeposition(startnode, 0);
-  delta = var_86fca619ba5c4a5 - self.origin;
+  wallnodepos = getwallnodeposition(startnode, 0);
+  delta = wallnodepos - self.origin;
   delta = (delta[0], delta[1], 0);
   desiredangles = vectortoangles(delta);
   jumpdestination = getwallattachoffsetposition();
@@ -820,8 +820,8 @@ function choosewallrunenteranim(asmname, statename, params) {
   assert(isDefined(startnode));
   assert(isDefined(startnode.wall_info));
   assert(startnode.wall_info.nodeoffsets.size >= 2);
-  var_15e16054caefc232 = getwallnodeposition(startnode, 0);
-  zdelta = var_15e16054caefc232[2] - self.origin[2];
+  jumptopos = getwallnodeposition(startnode, 0);
+  zdelta = jumptopos[2] - self.origin[2];
   bdoublejump = 0;
 
   if(zdelta >= 0) {
@@ -833,7 +833,7 @@ function choosewallrunenteranim(asmname, statename, params) {
   }
 
   if(bdoublejump == 0) {
-    distsq = distancesquared(self.origin, var_15e16054caefc232);
+    distsq = distancesquared(self.origin, jumptopos);
 
     if(distsq > 40000) {
       bdoublejump = 1;
@@ -977,8 +977,8 @@ function playwallrunloop(asmname, statename, params) {
   assert(isDefined(loopanim));
   loopxanim = asm_getxanim(statename, loopanim);
   movedelta = getmovedelta(loopxanim);
-  var_c1c17849832b0c9d = length2d(movedelta);
-  assert(var_c1c17849832b0c9d > 0);
+  animmovedist = length2d(movedelta);
+  assert(animmovedist > 0);
 
   if(!isDefined(startnode.wall_info.mantleoffset) && self.wall_run_current_node_index == startnode.wall_info.nodeoffsets.size - 2) {
     exitanim = asm_getanim(asmname, "wall_run_exit");
@@ -988,21 +988,21 @@ function playwallrunloop(asmname, statename, params) {
     assert(isDefined(var_7a01b5ed5ca503cd) && var_7a01b5ed5ca503cd.size > 0);
     exitanimlength = getanimlength(exitxanim);
     exitmovedelta = getmovedelta(exitxanim, 0, var_7a01b5ed5ca503cd[0]);
-    var_d72c308d5da52d60 = length2d(exitmovedelta);
+    exitmovedist = length2d(exitmovedelta);
   } else {
-    var_d72c308d5da52d60 = 0;
+    exitmovedist = 0;
   }
 
   assert(startnode.wall_info.nodeoffsets.size > self.wall_run_current_node_index + 1);
   delta = getwallnodeposition(startnode, self.wall_run_current_node_index + 1) - self.origin;
-  var_bb633c459e7832b8 = length(delta);
-  var_bb633c459e7832b8 -= var_d72c308d5da52d60;
+  desiredmovedist = length(delta);
+  desiredmovedist -= exitmovedist;
 
-  if(var_bb633c459e7832b8 < 0) {
-    var_bb633c459e7832b8 = 0;
+  if(desiredmovedist < 0) {
+    desiredmovedist = 0;
   }
 
-  var_aeb58353cbdd1e6d = var_bb633c459e7832b8 / var_c1c17849832b0c9d;
+  var_aeb58353cbdd1e6d = desiredmovedist / animmovedist;
   animlength = getanimlength(loopxanim);
   animtimeneeded = animlength * var_aeb58353cbdd1e6d;
   thread senddelayedevent(asmname, statename, animtimeneeded, "wall_run_loop_done", 1);
@@ -1093,10 +1093,10 @@ function playwallrunexit(asmname, statename, params) {
     if(isDefined(var_930caef7352c0f86) && var_930caef7352c0f86.size > 0) {
       var_8c2c7ea3bd382df4 = var_930caef7352c0f86[0];
     } else {
-      var_cab4a622d5af2e97 = getnotetracktimes(animname, "end_jump");
+      endjumptime = getnotetracktimes(animname, "end_jump");
 
-      if(isDefined(var_cab4a622d5af2e97) && var_cab4a622d5af2e97.size > 0) {
-        var_8c2c7ea3bd382df4 = var_cab4a622d5af2e97[0];
+      if(isDefined(endjumptime) && endjumptime.size > 0) {
+        var_8c2c7ea3bd382df4 = endjumptime[0];
       }
     }
   }
@@ -1208,7 +1208,7 @@ function playtraversaltransition(asmname, statename, params) {
   }
 
   stopdelta = getmovedelta(xanim, 0, animendtime);
-  var_fd7c686cead623aa = getangledelta(xanim, 0, animendtime);
+  stopangledelta = getangledelta(xanim, 0, animendtime);
   negotiationnode = self.traversal_start_node;
   assert(isDefined(negotiationnode));
 
@@ -1232,8 +1232,8 @@ function playtraversaltransition(asmname, statename, params) {
     desiredyaw = desiredangles[1];
   }
 
-  stopstartpos = scripts\asm\soldier\cover::calcanimstartpos(negotiationnode.origin, desiredyaw, stopdelta, var_fd7c686cead623aa);
-  arrivalyaw = desiredyaw - var_fd7c686cead623aa;
+  stopstartpos = scripts\asm\soldier\cover::calcanimstartpos(negotiationnode.origin, desiredyaw, stopdelta, stopangledelta);
+  arrivalyaw = desiredyaw - stopangledelta;
   self.a.arrivalasmstatename = statename;
   self.useanimgoalweight = 1;
   self startcoverarrival(stopstartpos, arrivalyaw, var_64366dd6eea5221d);
@@ -1351,10 +1351,10 @@ function shoulddotraversaltransition(asmname, statename, tostatename, params) {
   }
 
   stopdelta = getmovedelta(stopanim, 0, animendtime);
-  var_fd7c686cead623aa = getangledelta(stopanim, 0, animendtime);
+  stopangledelta = getangledelta(stopanim, 0, animendtime);
   disttonode = distance2d(self.origin, self.traversal_start_node.origin);
-  var_4e851016ecec5294 = length(stopdelta);
-  delta = disttonode - var_4e851016ecec5294;
+  animstopdist = length(stopdelta);
+  delta = disttonode - animstopdist;
 
   if(delta < 0) {
     traversedir = anglesToForward(desiredangles);
@@ -1473,24 +1473,24 @@ function playtraverseanim_ladder(asmname, statename, params) {
   demeanor = asm_getdemeanor();
   climbanim = undefined;
   mountanim = undefined;
-  var_5af16561805a75b1 = undefined;
+  dismountanim = undefined;
   dropdownanim = 0;
 
   if(starttoend[2] > 0) {
     offalias = "off_" + demeanor;
-    var_5af16561805a75b1 = asm_lookupanimfromaliasifexists(statename, offalias);
+    dismountanim = asm_lookupanimfromaliasifexists(statename, offalias);
 
-    if(!isDefined(var_5af16561805a75b1)) {
+    if(!isDefined(dismountanim)) {
       if(!isDefined(startnode.traverse_drop_height_delta) || startnode.traverse_drop_height_delta < 6) {
-        var_5af16561805a75b1 = asm_lookupanimfromalias(statename, "off");
+        dismountanim = asm_lookupanimfromalias(statename, "off");
       } else if(startnode.traverse_drop_height_delta < 36) {
-        var_5af16561805a75b1 = asm_lookupanimfromalias(statename, "off_low");
+        dismountanim = asm_lookupanimfromalias(statename, "off_low");
         dropdownanim = 1;
       } else if(startnode.traverse_drop_height_delta < 60) {
-        var_5af16561805a75b1 = asm_lookupanimfromalias(statename, "off_mid");
+        dismountanim = asm_lookupanimfromalias(statename, "off_mid");
         dropdownanim = 1;
       } else {
-        var_5af16561805a75b1 = asm_lookupanimfromalias(statename, "off_high");
+        dismountanim = asm_lookupanimfromalias(statename, "off_high");
         dropdownanim = 1;
       }
     }
@@ -1498,9 +1498,9 @@ function playtraverseanim_ladder(asmname, statename, params) {
     climbanim = asm_lookupanimfromalias(statename, "up");
   } else {
     onalias = "on_" + demeanor;
-    var_5af16561805a75b1 = asm_lookupanimfromaliasifexists(statename, onalias);
+    dismountanim = asm_lookupanimfromaliasifexists(statename, onalias);
 
-    if(!isDefined(var_5af16561805a75b1)) {
+    if(!isDefined(dismountanim)) {
       mountanim = asm_lookupanimfromalias(statename, "on");
     }
 
@@ -1520,14 +1520,14 @@ function playtraverseanim_ladder(asmname, statename, params) {
 
   loopendpos = endpos;
 
-  if(isDefined(var_5af16561805a75b1)) {
-    var_ba9f413c71dc05c1 = asm_getxanim(statename, var_5af16561805a75b1);
-    var_7e1ef9266bfb4e87 = getmovedelta(var_ba9f413c71dc05c1);
+  if(isDefined(dismountanim)) {
+    dismountxanim = asm_getxanim(statename, dismountanim);
+    dismounttranslation = getmovedelta(dismountxanim);
 
     if(dropdownanim) {
       loopendpos = startnode.traverse_height - (0, 0, 48);
     } else {
-      loopendpos = endpos - var_7e1ef9266bfb4e87 + (0, 0, 1);
+      loopendpos = endpos - dismounttranslation + (0, 0, 1);
     }
   }
 
@@ -1536,29 +1536,29 @@ function playtraverseanim_ladder(asmname, statename, params) {
 
   if(var_29dc8002ce343a5d[2] * starttoend[2] > 0) {
     climbxanim = asm_getxanim(statename, climbanim);
-    var_4badba7b39f1758e = getmovedelta(climbxanim);
-    var_2f9556e4b32808e = var_4badba7b39f1758e[2] * rate / getanimlength(climbxanim);
+    climbanimtranslation = getmovedelta(climbxanim);
+    var_2f9556e4b32808e = climbanimtranslation[2] * rate / getanimlength(climbxanim);
     climbtime = var_29dc8002ce343a5d[2] / var_2f9556e4b32808e;
     assert(climbtime > 0);
 
-    if(!isDefined(climbxanim) || !isDefined(var_4badba7b39f1758e) || !isDefined(var_2f9556e4b32808e) || !isDefined(climbtime)) {
+    if(!isDefined(climbxanim) || !isDefined(climbanimtranslation) || !isDefined(var_2f9556e4b32808e) || !isDefined(climbtime)) {
       arcname = function_2285421dfc79c4d5();
-      var_6af018c22f5f179f = self.basearchetype;
-      println("<dev string:xf3>" + climbanim + "<dev string:x117>" + arcname + "<dev string:x128>" + statename + "<dev string:x133>" + var_6af018c22f5f179f + "<dev string:x153>");
+      basearcname = self.basearchetype;
+      println("<dev string:xf3>" + climbanim + "<dev string:x117>" + arcname + "<dev string:x128>" + statename + "<dev string:x133>" + basearcname + "<dev string:x153>");
     }
 
     self aisetanim(statename, climbanim, rate);
     asm_donotetracksfortime(asmname, statename, climbtime);
   }
 
-  if(isDefined(var_5af16561805a75b1)) {
-    self aisetanim(statename, var_5af16561805a75b1, rate);
+  if(isDefined(dismountanim)) {
+    self aisetanim(statename, dismountanim, rate);
     waitframe();
     notetrackhandle = &scripts\asm\traverse::handletraversewarpnotetracks;
     self.traversestartnode = startnode;
     self.traverseendnode = self getnegotiationendnode();
     self.var_70a168924eccff58 = endpos;
-    self.traversexanim = asm_getxanim(statename, var_5af16561805a75b1);
+    self.traversexanim = asm_getxanim(statename, dismountanim);
     asm_donotetracks(asmname, statename, notetrackhandle);
     self.var_70a168924eccff58 = undefined;
   }
@@ -1567,12 +1567,12 @@ function playtraverseanim_ladder(asmname, statename, params) {
 }
 
 function terminate_ladder(asmname, statename, params) {
-  var_b48e997e59346e83 = !isalive(self);
-  self.nogravityragdoll = var_b48e997e59346e83;
+  bisdead = !isalive(self);
+  self.nogravityragdoll = bisdead;
   self aisetisonladder(0);
   self.var_70a168924eccff58 = undefined;
 
-  if(var_b48e997e59346e83) {
+  if(bisdead) {
     self.forceragdollimmediate = 0;
   }
 }

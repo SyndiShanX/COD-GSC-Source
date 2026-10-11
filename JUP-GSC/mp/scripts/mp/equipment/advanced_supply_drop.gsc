@@ -20,7 +20,7 @@ function advanced_supply_drop_marker_used(grenade) {
   grenade endon("explode_end");
 
   if(scripts\mp\utility\game::function_d75b73c443421047()) {
-    if(!istrue(function_f3bb4f4911a1beb2("limbo", "checkCanTriggerSuper", self, "advanced_supply_drop"))) {
+    if(!istrue(callsharedfunc("limbo", "checkCanTriggerSuper", self, "advanced_supply_drop"))) {
       player scripts\mp\supers::superusefinished(1);
       grenade delete();
       return;

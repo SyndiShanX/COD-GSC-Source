@@ -175,15 +175,15 @@ function initoob() {
   thread watchoobtriggers();
 }
 
-function ispointinoutofbounds(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
+function ispointinoutofbounds(pointtocheck, teamtocheck) {
   pointinoutofbounds = 0;
 
   if(!isDefined(level.outofboundstriggers)) {
     return pointinoutofbounds;
   } else {
     foreach(trigger in level.outofboundstriggers) {
-      if(ispointinvolume(var_863c619037f3ac74, trigger)) {
-        if(isDefined(trigger.script_team) && isDefined(var_da8cec9bce12f9cb) && trigger.script_team != var_da8cec9bce12f9cb) {
+      if(ispointinvolume(pointtocheck, trigger)) {
+        if(isDefined(trigger.script_team) && isDefined(teamtocheck) && trigger.script_team != teamtocheck) {
           continue;
         }
 
@@ -359,7 +359,7 @@ function function_c61001f433dfd696() {
     wait 0.1;
   }
 
-  function_ea269c0ec2ba23cd();
+  kill_player_on_timeout();
 }
 
 function playerentercallback(exitnotify, clearnotify, triggertype) {
@@ -387,10 +387,10 @@ function playeroutoftimecallback(timeoutendnotify, clearnotify) {
     return;
   }
 
-  function_ea269c0ec2ba23cd();
+  kill_player_on_timeout();
 }
 
-function function_ea269c0ec2ba23cd() {
+function kill_player_on_timeout() {
   self.oob = 1;
   self.shouldskiplaststand = 1;
 

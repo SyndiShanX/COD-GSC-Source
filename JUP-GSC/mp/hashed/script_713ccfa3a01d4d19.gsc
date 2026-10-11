@@ -15,7 +15,7 @@ function function_15ec8dc28147b1b7(dvar, var_dc26843157970ecf, var_69a1727953025
   name = getDvar(dvar, dvardefault);
 
   if(name == "") {
-    iprintln("<dev string:x1c>" + function_3c8848a3a11b2553(dvar) + "<dev string:x41>");
+    iprintln("<dev string:x1c>" + getxhashsourcename(dvar) + "<dev string:x41>");
 
     return;
   }
@@ -24,7 +24,7 @@ function function_15ec8dc28147b1b7(dvar, var_dc26843157970ecf, var_69a1727953025
   bundle = getscriptbundle(bundlename);
 
   if(!isDefined(bundle)) {
-    iprintln("<dev string:x51>" + function_3c8848a3a11b2553(dvar) + "<dev string:x80>" + name + "<dev string:x87>");
+    iprintln("<dev string:x51>" + getxhashsourcename(dvar) + "<dev string:x80>" + name + "<dev string:x87>");
 
     return;
   }

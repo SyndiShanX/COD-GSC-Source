@@ -233,11 +233,11 @@ function function_c494284a52d7031c() {
   }
 }
 
-function function_82027d890fe922b2(var_56fd5b4d2f5525fb, var_78892c936fefb140) {
-  var_2cd783dd7f7d5943 = var_56fd5b4d2f5525fb.var_ed12f04bc4db520b;
+function function_82027d890fe922b2(drone_struct, var_78892c936fefb140) {
+  var_2cd783dd7f7d5943 = drone_struct.var_ed12f04bc4db520b;
 
   for(i = 0; i < var_2cd783dd7f7d5943; i++) {
-    drone = function_305ec846c77281f6(var_56fd5b4d2f5525fb);
+    drone = function_305ec846c77281f6(drone_struct);
     wait var_78892c936fefb140;
   }
 }
@@ -372,19 +372,19 @@ function init() {
   level thread function_f0eac5e558857c84();
 }
 
-function function_305ec846c77281f6(var_56fd5b4d2f5525fb) {
+function function_305ec846c77281f6(drone_struct) {
   if(level.drone_turrets.size >= 32) {
     announcement("<dev string:xeb>");
 
     return;
   }
 
-  spawnpoint = var_56fd5b4d2f5525fb.spawnpoint;
-  drone_team = var_56fd5b4d2f5525fb.drone_team;
-  var_f716273270785091 = var_56fd5b4d2f5525fb.var_f716273270785091;
-  swarm_id = var_56fd5b4d2f5525fb.swarm_id;
-  var_8dd45af7dacfe1f8 = var_56fd5b4d2f5525fb.var_8dd45af7dacfe1f8;
-  intro_func = var_56fd5b4d2f5525fb.intro_func;
+  spawnpoint = drone_struct.spawnpoint;
+  drone_team = drone_struct.drone_team;
+  var_f716273270785091 = drone_struct.var_f716273270785091;
+  swarm_id = drone_struct.swarm_id;
+  var_8dd45af7dacfe1f8 = drone_struct.var_8dd45af7dacfe1f8;
+  intro_func = drone_struct.intro_func;
   startpos = spawnpoint.origin;
   startang = spawnpoint.angles;
   vehicleinfo = "veh_radar_drone_recon_mp";
@@ -395,16 +395,16 @@ function function_305ec846c77281f6(var_56fd5b4d2f5525fb) {
   drone.spawntime = gettime();
   drone.swarm_id = swarm_id;
   drone.var_d5257e0c17926bd4 = var_8dd45af7dacfe1f8;
-  drone.var_aea7973ab15d030f = var_56fd5b4d2f5525fb.var_aea7973ab15d030f;
+  drone.var_aea7973ab15d030f = drone_struct.var_aea7973ab15d030f;
   drone function_98fbc01ff1e11fd8();
-  drone.var_f5bb9b66dbcd5e1f = var_56fd5b4d2f5525fb.var_f5bb9b66dbcd5e1f;
-  drone.starting_health = var_56fd5b4d2f5525fb.starting_health;
-  drone.var_ed12f04bc4db520b = var_56fd5b4d2f5525fb.var_ed12f04bc4db520b;
-  drone.var_e61fb1ba553fe9af = var_56fd5b4d2f5525fb.var_e61fb1ba553fe9af;
-  drone.var_3b56aef2a97b59a = var_56fd5b4d2f5525fb.var_3b56aef2a97b59a;
-  drone.var_22bae4a863898ca6 = var_56fd5b4d2f5525fb.var_22bae4a863898ca6;
-  drone.base_speed = var_56fd5b4d2f5525fb.base_speed;
-  drone.var_ce611145f76805cd = var_56fd5b4d2f5525fb.var_4a5d0bd902aae7cc * var_56fd5b4d2f5525fb.var_4a5d0bd902aae7cc;
+  drone.var_f5bb9b66dbcd5e1f = drone_struct.var_f5bb9b66dbcd5e1f;
+  drone.starting_health = drone_struct.starting_health;
+  drone.var_ed12f04bc4db520b = drone_struct.var_ed12f04bc4db520b;
+  drone.var_e61fb1ba553fe9af = drone_struct.var_e61fb1ba553fe9af;
+  drone.var_3b56aef2a97b59a = drone_struct.var_3b56aef2a97b59a;
+  drone.var_22bae4a863898ca6 = drone_struct.var_22bae4a863898ca6;
+  drone.base_speed = drone_struct.base_speed;
+  drone.var_ce611145f76805cd = drone_struct.var_4a5d0bd902aae7cc * drone_struct.var_4a5d0bd902aae7cc;
   drone.streakname = "switchblade_drone";
   drone.maxhealth = drone.starting_health;
   level.activekillstreaks = array_add(level.activekillstreaks, drone);
@@ -941,14 +941,14 @@ function function_8cf7f8b74219ac94(spawnpoint, var_f716273270785091) {
 
     if(!isDefined(self.path_data)) {
       wait 0.1;
-      function_9d76b32cac3b3ec();
+      stop_at_node();
       continue;
     }
 
     if(!isDefined(self.path_data.path[node_index])) {
       if(node_index >= self.path_data.path.size) {
         self.cur_state = "path_done";
-        function_9d76b32cac3b3ec();
+        stop_at_node();
       }
 
       wait 0.1;
@@ -1326,7 +1326,7 @@ function drone_turret_canseetarget(target, offset, drone, radius_override, var_7
     }
 
     foreach(trace in tracepoints) {
-      var_73c481a20cb5f570 = trace - self.origin;
+      lookvec = trace - self.origin;
       line(self.origin, trace, (1, 1, 0.5), 1, 0, 60);
       print3d(trace, "<dev string:x12b>", (1, 1, 0.1), 1, 1, 60, 1);
     }
@@ -1626,7 +1626,7 @@ function function_f0794596985dcdb4() {
   self setturningability(self.turningability);
 }
 
-function function_9d76b32cac3b3ec() {
+function stop_at_node() {
   self.move_speed = 0;
   self vehicle_setspeed(self.base_speed * 0.05, 12, 12);
 }

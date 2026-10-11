@@ -45,7 +45,7 @@ function function_e27c8ead6ab015fa(var_a45669cf75867ed7) {
 }
 
 function function_f74cacfd2004dc6d(scriptable, position, rotation) {
-  return spawnscriptable(level.ftuedata.wallsinfo.scriptables[function_1823ff50bb28148d(scriptable)], position, rotation);
+  return spawnscriptable(level.ftuedata.wallsinfo.scriptables[getxhash(scriptable)], position, rotation);
 }
 
 function function_8ec6ff395f428891(var_a45669cf75867ed7) {
@@ -66,14 +66,14 @@ function function_de1acb2ec7807e38() {
   }
 
   foreach(asset in level.ftuedata.var_e82a930c823a7b9c) {
-    spawnscriptable(level.ftuedata.var_a1c8c05e25923460.scriptables[function_1823ff50bb28148d(asset[0])], asset[1], asset[2]);
+    spawnscriptable(level.ftuedata.var_a1c8c05e25923460.scriptables[getxhash(asset[0])], asset[1], asset[2]);
   }
 }
 
 function function_fe4aefebd9992d47(var_ded14ae1ea8c4446, placemarks, objectivetext) {
   if(placemarks) {
     foreach(enemybot in var_ded14ae1ea8c4446) {
-      level.ftuedata.enemybots[function_1823ff50bb28148d(enemybot)].botentity function_4148171500445ead(objectivetext);
+      level.ftuedata.enemybots[getxhash(enemybot)].botentity function_4148171500445ead(objectivetext);
     }
   }
 
@@ -81,11 +81,11 @@ function function_fe4aefebd9992d47(var_ded14ae1ea8c4446, placemarks, objectivete
 
   while(var_b599e3f9981dec25 < var_ded14ae1ea8c4446.size) {
     foreach(enemybot in var_ded14ae1ea8c4446) {
-      if(isDefined(level.ftuedata.enemybots[function_1823ff50bb28148d(enemybot)].botentity) && level.ftuedata.enemybots[function_1823ff50bb28148d(enemybot)].botentity.health <= 0) {
+      if(isDefined(level.ftuedata.enemybots[getxhash(enemybot)].botentity) && level.ftuedata.enemybots[getxhash(enemybot)].botentity.health <= 0) {
         var_b599e3f9981dec25++;
-        function_b30874d13004d4c5(level.ftuedata.enemybots[function_1823ff50bb28148d(enemybot)].botentity);
-        level.ftuedata.enemybots[function_1823ff50bb28148d(enemybot)] notify("death_or_disconnect");
-        level.ftuedata.enemybots[function_1823ff50bb28148d(enemybot)].botentity = undefined;
+        function_b30874d13004d4c5(level.ftuedata.enemybots[getxhash(enemybot)].botentity);
+        level.ftuedata.enemybots[getxhash(enemybot)] notify("death_or_disconnect");
+        level.ftuedata.enemybots[getxhash(enemybot)].botentity = undefined;
       }
     }
 

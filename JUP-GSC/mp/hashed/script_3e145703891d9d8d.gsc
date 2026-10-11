@@ -26,7 +26,7 @@ function function_8613a680f1ec0b46(victim, attacker, bundle, startpos) {
   thread function_2b342229b06a657e(victim, attacker, bundle, startpos);
   attacker thread function_ddaa4f3fe17cf7c1(victim);
   result = victim waittill_any_timeout_1(0.25, "death_or_disconnect");
-  hashit = result == "timeout" && !istrue(function_f3bb4f4911a1beb2("player", "isInLastStand", victim));
+  hashit = result == "timeout" && !istrue(callsharedfunc("player", "isInLastStand", victim));
 
   if(hashit) {
     thread function_210d1e2e0a76f08(victim, attacker, bundle);
@@ -85,7 +85,7 @@ function function_210d1e2e0a76f08(victim, attacker, bundle) {
     return;
   }
 
-  if(isPlayer(victim) && istrue(function_f3bb4f4911a1beb2("player", "isReallyAlive", victim))) {
+  if(isPlayer(victim) && istrue(callsharedfunc("player", "isReallyAlive", victim))) {
     if(!istrue(victim.var_8d8b284dc948b939)) {
       victim scripts\common\values::set_array("tracker_grenade_tracked", ["weapon_pickup"], 0);
       victim function_628e71176fe11823(attacker);
@@ -127,7 +127,7 @@ function function_f6220a0018f6c8de(attacker, bundle) {
 function function_7a7f279e668a106a(text, time) {
   self notify("tracker_setting_hint_text");
   self endon("tracker_setting_hint_text");
-  childthread function_f3bb4f4911a1beb2("game", "tutorialPrint", text, time);
+  childthread callsharedfunc("game", "tutorialPrint", text, time);
 }
 
 function function_a86cffe7d22fd360(attacker, bundle) {
@@ -191,7 +191,7 @@ function function_bfc3ae90fa9569c9(attacker, bundle) {
   self waittill("stop_tracker_grenade_thirdparty", var_e2b6708ab0acbb38, weapon);
 
   if(isDefined(var_e2b6708ab0acbb38) && isPlayer(var_e2b6708ab0acbb38) && issharedfuncdefined("player", "doScoreEvent")) {
-    var_e2b6708ab0acbb38 thread function_f3bb4f4911a1beb2("player", "doScoreEvent", #"destroyed_equipment", weapon);
+    var_e2b6708ab0acbb38 thread callsharedfunc("player", "doScoreEvent", #"destroyed_equipment", weapon);
   }
 
   function_bf0dc21483385b04(attacker, bundle);
@@ -199,7 +199,7 @@ function function_bfc3ae90fa9569c9(attacker, bundle) {
 
 function function_d9a426f85d07e227(attacker, bundle) {
   self.tracker scripts\cp_mp\emp_debuff::set_apply_emp_callback(&function_5fc7c9ae178ffefb);
-  self.tracker function_f3bb4f4911a1beb2("emp", "setEMP_Applied_Callback", &function_5fc7c9ae178ffefb);
+  self.tracker callsharedfunc("emp", "setEMP_Applied_Callback", &function_5fc7c9ae178ffefb);
 }
 
 function function_5fc7c9ae178ffefb(data) {
@@ -255,7 +255,7 @@ function function_61e49f0e63f71c05() {
 
 function function_4121acb9b36b21fd(owner) {
   if(function_21322da268e71c19()) {
-    owner function_f3bb4f4911a1beb2("player", "showMiniMap");
+    owner callsharedfunc("player", "showMiniMap");
   }
 
   radartype = getdvarint(@ "hash_b34047f59b5f5b03", 6);
@@ -294,7 +294,7 @@ function function_be2d7b4d68f1d36a(owner) {
   self endon("death_or_disconnect");
 
   if(function_21322da268e71c19()) {
-    owner function_f3bb4f4911a1beb2("player", "hideMiniMap");
+    owner callsharedfunc("player", "hideMiniMap");
   }
 
   if(level.teambased) {
@@ -359,7 +359,7 @@ function function_ddaa4f3fe17cf7c1(victim) {
 function function_8f56afa7a5e897d0(victim) {
   level endon("game_ended");
 
-  if(istrue(function_f3bb4f4911a1beb2("player", "isReallyAlive", self))) {
+  if(istrue(callsharedfunc("player", "isReallyAlive", self))) {
     self setclientomnvar("ui_show_tracker_activated", 1);
   }
 

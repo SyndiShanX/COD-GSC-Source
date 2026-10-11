@@ -22,7 +22,7 @@ function movementinit() {
   level endon("game_ended");
   scripts\mp\flags::function_1240434f4201ac9d("prematch_fade_done");
   wait 1;
-  triggers = function_f159c10d5cf8f0b4("movementalarm", "script_noteworthy");
+  triggers = getnoentvolumearray("movementalarm", "script_noteworthy");
 
   foreach(trigger in triggers) {
     trigger.detectors = getentitylessscriptablearray(trigger.target, "targetname");

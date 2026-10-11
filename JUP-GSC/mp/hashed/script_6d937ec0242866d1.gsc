@@ -72,7 +72,7 @@ function function_d7e4ceb7a0efa76d(params) {
         str_choice = array_random(a_aat);
         attacker.var_73a10012ece4e6f5 = 1;
         w_aat = scripts\cp_mp\weapon::buildweapon(level.laststandweapon);
-        attacker namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(w_aat, str_choice, 0);
+        attacker namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(w_aat, str_choice, 0);
         meansofdeath = "MOD_PISTOL_BULLET";
         attacker callback::callback("zm_perk_elemental_pop_proc");
 

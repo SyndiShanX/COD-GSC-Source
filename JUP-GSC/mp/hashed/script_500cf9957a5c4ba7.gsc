@@ -69,8 +69,8 @@ function private function_5619f9fe170bd68d() {
 }
 
 function private function_ba0f9c7af596cb45() {
-  level.var_3ff432e08ce37965 = function_f159c10d5cf8f0b4("s5_relic_drum_race_trigger_start", "targetname");
-  level.var_d3454f09c2105564 = function_f159c10d5cf8f0b4("s5_relic_drum_race_trigger_end", "targetname");
+  level.var_3ff432e08ce37965 = getnoentvolumearray("s5_relic_drum_race_trigger_start", "targetname");
+  level.var_d3454f09c2105564 = getnoentvolumearray("s5_relic_drum_race_trigger_end", "targetname");
   var_179343b5981c3088 = getStruct("s5_relic_drum_race_struct_reward", "targetname");
   assert(isDefined(level.var_3ff432e08ce37965), "<dev string:x1c>");
   assert(isDefined(level.var_d3454f09c2105564), "<dev string:x78>");
@@ -89,7 +89,7 @@ function private function_ba0f9c7af596cb45() {
 
   for(structindex = 1; structindex < 20; structindex++) {
     searchid = "s5_relic_drum_race_trigger_checkpoint_" + string(structindex);
-    var_7aec4e1e3c52c64a = function_f159c10d5cf8f0b4(searchid, "script_noteworthy");
+    var_7aec4e1e3c52c64a = getnoentvolumearray(searchid, "script_noteworthy");
 
     if(!isDefined(var_7aec4e1e3c52c64a) || !isarray(var_7aec4e1e3c52c64a) || var_7aec4e1e3c52c64a.size == 0) {
       break;
@@ -125,10 +125,10 @@ function function_13676cfdd745bdce(volume) {
     }
 
     if(isDefined(enteringentity) && function_d4d5da367a00e379(enteringentity)) {
-      var_fe16f116477f0084 = namespace_c8baf39126f1ef99::function_579b200202dd2b1b(enteringentity);
+      playerstocheck = namespace_c8baf39126f1ef99::function_579b200202dd2b1b(enteringentity);
 
-      if(isDefined(var_fe16f116477f0084)) {
-        foreach(var_c4b81997f0120a97 in var_fe16f116477f0084) {
+      if(isDefined(playerstocheck)) {
+        foreach(var_c4b81997f0120a97 in playerstocheck) {
           if(function_24284b3062968df7(var_c4b81997f0120a97) && (!isDefined(var_c4b81997f0120a97.var_db7718c39d9b365a) || var_c4b81997f0120a97.var_db7718c39d9b365a <= 0)) {
             var_c4b81997f0120a97.var_db7718c39d9b365a = 40;
             var_c4b81997f0120a97.var_97e5ed43b6d536e0 = 0;
@@ -155,10 +155,10 @@ function function_d8a49cfff8654f34(volume, var_3d2d7853dbabbdac) {
     volume waittill("trigger", enteringentity);
 
     if(isDefined(enteringentity) && function_d4d5da367a00e379(enteringentity)) {
-      var_fe16f116477f0084 = namespace_c8baf39126f1ef99::function_579b200202dd2b1b(enteringentity);
+      playerstocheck = namespace_c8baf39126f1ef99::function_579b200202dd2b1b(enteringentity);
 
-      if(isDefined(var_fe16f116477f0084)) {
-        foreach(var_c4b81997f0120a97 in var_fe16f116477f0084) {
+      if(isDefined(playerstocheck)) {
+        foreach(var_c4b81997f0120a97 in playerstocheck) {
           if(isDefined(var_c4b81997f0120a97.var_db7718c39d9b365a) && isDefined(var_c4b81997f0120a97.var_97e5ed43b6d536e0) && var_c4b81997f0120a97.var_db7718c39d9b365a > 0 && var_c4b81997f0120a97.var_97e5ed43b6d536e0 == var_3d2d7853dbabbdac) {
             if(getdvarint(@ "hash_db6fa1fcc2e3f83c", 0)) {
               level thread scripts\mp\utility\debug::drawsphere(volume.origin, 15, var_c4b81997f0120a97.var_db7718c39d9b365a, (0, 1, 0));
@@ -182,10 +182,10 @@ function function_96722b987884943b(volume, var_179343b5981c3088) {
     volume waittill("trigger", enteringentity);
 
     if(isDefined(enteringentity) && function_d4d5da367a00e379(enteringentity)) {
-      var_fe16f116477f0084 = namespace_c8baf39126f1ef99::function_579b200202dd2b1b(enteringentity);
+      playerstocheck = namespace_c8baf39126f1ef99::function_579b200202dd2b1b(enteringentity);
 
-      if(isDefined(var_fe16f116477f0084)) {
-        foreach(var_c4b81997f0120a97 in var_fe16f116477f0084) {
+      if(isDefined(playerstocheck)) {
+        foreach(var_c4b81997f0120a97 in playerstocheck) {
           if(isDefined(var_c4b81997f0120a97.var_db7718c39d9b365a) && var_c4b81997f0120a97.var_db7718c39d9b365a > 0 && function_b8221e8a7feda5d3(var_c4b81997f0120a97) && !namespace_c8baf39126f1ef99::function_d737da36e4f0f6c2(var_c4b81997f0120a97, "ob_jup_item_reward_drum_s5")) {
             var_8232fe13bffb624 = isDefined(var_179343b5981c3088) ? var_179343b5981c3088.origin : volume.origin;
             var_c4b81997f0120a97 playsoundtoplayer("evt_ob_mrpeeks_stinger_speedway", var_c4b81997f0120a97);

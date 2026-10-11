@@ -301,26 +301,26 @@ function function_ed2a70219724da49(player) {
 }
 
 function function_cebc76b72364ee07(player, var_2451e51f412dae19) {
-  var_14729c28b4fc0857 = 0;
+  inarea = 0;
   var_7ecd7cf754bc8170 = distancesquared(player.origin, var_2451e51f412dae19);
 
   if(var_7ecd7cf754bc8170 < 4000000) {
-    var_14729c28b4fc0857 = 1;
+    inarea = 1;
   }
 
-  return var_14729c28b4fc0857;
+  return inarea;
 }
 
 function function_b7a4f7e593ce1b9a(player, var_2451e51f412dae19, var_4a5fec7197e7cc61) {
-  var_14729c28b4fc0857 = 0;
+  inarea = 0;
   var_7ecd7cf754bc8170 = vectorNormalize(player.origin - var_2451e51f412dae19);
   dotresult = vectordot(var_7ecd7cf754bc8170, var_4a5fec7197e7cc61);
 
   if(dotresult <= 0) {
-    var_14729c28b4fc0857 = 1;
+    inarea = 1;
   }
 
-  return var_14729c28b4fc0857;
+  return inarea;
 }
 
 function function_6bfaf3ac92ca133a() {
@@ -396,17 +396,17 @@ function light_meter_hud() {
   for(var_e7c9c132ee82ad4f = 0; true; var_e7c9c132ee82ad4f = 0) {
     self.nvg waittill("update_nvg_hud");
     noise needle_noise();
-    var_f665c97965854720 = self.nvg.lightmeter;
-    var_f665c97965854720 = clamp(var_f665c97965854720, noise.mag, 1 - noise.mag);
-    var_f665c97965854720 += noise.data["val"];
-    self setclientomnvar("ui_nvg_light_meter_needle", var_f665c97965854720);
+    needle_position = self.nvg.lightmeter;
+    needle_position = clamp(needle_position, noise.mag, 1 - noise.mag);
+    needle_position += noise.data["val"];
+    self setclientomnvar("ui_nvg_light_meter_needle", needle_position);
 
-    if(var_f665c97965854720 >= 0.9 && !var_e7c9c132ee82ad4f) {
+    if(needle_position >= 0.9 && !var_e7c9c132ee82ad4f) {
       var_e7c9c132ee82ad4f = 1;
       continue;
     }
 
-    if(var_f665c97965854720 < 0.9 && var_e7c9c132ee82ad4f) {}
+    if(needle_position < 0.9 && var_e7c9c132ee82ad4f) {}
   }
 }
 

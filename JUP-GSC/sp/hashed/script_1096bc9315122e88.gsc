@@ -11,11 +11,11 @@
 #namespace namespace_9d3605fe2ce73dd9;
 
 function init() {
-  thread function_cc460dedff0277f();
+  thread activities_init();
 }
 
-function function_cc460dedff0277f() {
-  if(function_8f7452209f2fa982()) {
+function activities_init() {
+  if(isplatformps5()) {
     while(!isDefined(level.script)) {
       waitframe();
     }
@@ -23,24 +23,24 @@ function function_cc460dedff0277f() {
     index = namespace_d6cca25f4b0ab62::getlevelindex(level.script);
 
     if(isDefined(index)) {
-      level.var_483eedd411ddb20e = level.missionsettings.levels[index].name;
+      level.ps5activity = level.missionsettings.levels[index].name;
     } else {
-      level.var_483eedd411ddb20e = level.script;
+      level.ps5activity = level.script;
     }
 
-    if(level.var_483eedd411ddb20e == "<dev string:x1c>") {
-      level.var_483eedd411ddb20e = "<dev string:x29>";
+    if(level.ps5activity == "<dev string:x1c>") {
+      level.ps5activity = "<dev string:x29>";
     }
 
     setdvarifuninitialized(@ "hash_f270b4040fc5585b", 0);
 
-    println("<dev string:x39>" + level.var_483eedd411ddb20e);
-    startactivity(level.var_483eedd411ddb20e);
+    println("<dev string:x39>" + level.ps5activity);
+    startactivity(level.ps5activity);
   }
 }
 
 function function_61cb8298cb7adf01(activityname, state, stopstate) {
-  if(!function_8f7452209f2fa982()) {
+  if(!isplatformps5()) {
     return;
   }
 
@@ -70,7 +70,7 @@ function function_61cb8298cb7adf01(activityname, state, stopstate) {
 }
 
 function function_d1a8270c167e8a4f(taskname, state, stopstate) {
-  if(!function_8f7452209f2fa982()) {
+  if(!isplatformps5()) {
     return;
   }
 
@@ -83,7 +83,7 @@ function function_d1a8270c167e8a4f(taskname, state, stopstate) {
   }
 
   if(state == "start") {
-    function_6c857f4c6b069db7(taskname);
+    startactivitytask(taskname);
     return;
   }
 
@@ -92,7 +92,7 @@ function function_d1a8270c167e8a4f(taskname, state, stopstate) {
       stopstate = "completed";
     }
 
-    function_90bb05ef944b5d05(taskname, stopstate);
+    stopactivitytask(taskname, stopstate);
     return;
   }
 
@@ -100,7 +100,7 @@ function function_d1a8270c167e8a4f(taskname, state, stopstate) {
 }
 
 function function_1c2bbc8867668ba3(first_task) {
-  if(!function_8f7452209f2fa982()) {
+  if(!isplatformps5()) {
     return;
   }
 
@@ -114,7 +114,7 @@ function function_1c2bbc8867668ba3(first_task) {
 }
 
 function function_e001fad729f058b0(last_task, next_task) {
-  if(!function_8f7452209f2fa982()) {
+  if(!isplatformps5()) {
     return;
   }
 
@@ -129,7 +129,7 @@ function function_e001fad729f058b0(last_task, next_task) {
 }
 
 function function_849e707497dfdd92(last_task) {
-  if(!function_8f7452209f2fa982()) {
+  if(!isplatformps5()) {
     return;
   }
 

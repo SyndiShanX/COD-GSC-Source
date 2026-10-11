@@ -75,7 +75,7 @@ function markplayeraseliminated(player, context) {
   scripts\mp\gametypes\br_gametypes::runbrgametypefunc("onMarkPlayerAsEliminated", player);
 
   if(getdvarint(@ "hash_82bde055b11e6698", 0) == 0) {
-    thread namespace_1eb3c4e0e28fac71::function_74e0aae435a09a51(self);
+    thread namespace_1eb3c4e0e28fac71::onplayereliminated(self);
   }
 
   if(scripts\cp_mp\utility\game_utility::function_6910a4c65560c44b() && isai(player)) {
@@ -274,7 +274,7 @@ function function_22a0e95dd4174c81() {
 }
 
 function function_fd357ca89e5e29d9() {
-  if(self function_9cc921a57ff4deb5() || isDefined(self.var_33cb9daa5bf01ec1)) {
+  if(self isonascender() || isDefined(self.var_33cb9daa5bf01ec1)) {
     self function_61195b9ee307ad14();
     self notify("ascender_cancel");
     self notify("ascender_solo_cancel");
@@ -295,7 +295,7 @@ function function_6fefb971fa5338b8() {
       ent delete();
     }
 
-    ents = function_f159c10d5cf8f0b4(cluster.target, "targetname");
+    ents = getnoentvolumearray(cluster.target, "targetname");
 
     foreach(ent in ents) {
       ent delete();

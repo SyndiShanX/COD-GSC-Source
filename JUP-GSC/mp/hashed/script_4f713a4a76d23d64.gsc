@@ -8,9 +8,9 @@
 #using scripts\common\callbacks;
 #using scripts\common\metabone;
 #using scripts\engine\utility;
-#namespace namespace_463c541c6afd19ee;
+#namespace zombie_abom_crawler_deploy;
 
-function function_bcfbb1093d28dce6(taskid, params) {
+function zombieabomshouldcrawlerdeploy(taskid, params) {
   if(self function_1fde453596ea559c() < 2000) {
     return anim.failure;
   }
@@ -59,7 +59,7 @@ function private function_7674186f5ca25b0c() {
 }
 
 function private abom_spawn_crawler() {
-  aitypes = get_aitype_by_subclass_sharedfunc(self.zombieaisettings.var_e58a65b7a8f5973c.var_a50ee2b67d1afeb9);
+  aitypes = get_aitype_by_subclass_sharedfunc(self.zombieaisettings.var_e58a65b7a8f5973c.crawlersubclass);
   assert(isDefined(aitypes) && aitypes.size > 0);
   base_aitype = undefined;
 
@@ -76,7 +76,7 @@ function private abom_spawn_crawler() {
 
   if(isDefined(crawler)) {
     crawler thread animscripted_sharedfunc("spawn_abom_crawler", "spawn_end", undefined, undefined, "spawn_animating");
-    crawler.var_c383683308e840a7 = self;
+    crawler.abom_parent = self;
     self.abom_crawlers = array_add(self.abom_crawlers, crawler);
 
     if(flag("level_stealth_initialized") && isDefined(self.enemy)) {

@@ -16,11 +16,11 @@
 #using scripts\mp\mp_agent;
 #namespace namespace_d273e883d01a4b27;
 
-function function_6c94dd363a86d105(var_1792ca970eb0f4e5, helient, var_81278c011ef98d00) {
-  var_a8f8fe6b253e8a30 = getStruct(var_1792ca970eb0f4e5, "targetname");
+function function_6c94dd363a86d105(teleport_struct_targetname, helient, var_81278c011ef98d00) {
+  var_a8f8fe6b253e8a30 = getStruct(teleport_struct_targetname, "targetname");
   tag_origin = helient gettagorigin("tag_flare");
-  var_538f57ec682de299 = var_a8f8fe6b253e8a30.origin - tag_origin;
-  var_e502f62c88d032a0 = (var_538f57ec682de299[0], var_538f57ec682de299[1] * -1, var_538f57ec682de299[2]);
+  link_offset = var_a8f8fe6b253e8a30.origin - tag_origin;
+  var_e502f62c88d032a0 = (link_offset[0], link_offset[1] * -1, link_offset[2]);
   var_81278c011ef98d00 linktomoveoffset(helient, "tag_flare", var_e502f62c88d032a0, (0, 180, 0));
   var_81278c011ef98d00 playerlinkedoffsetenable();
   var_81278c011ef98d00 fixlinktointerpolationbug(1);
@@ -28,9 +28,9 @@ function function_6c94dd363a86d105(var_1792ca970eb0f4e5, helient, var_81278c011e
   var_81278c011ef98d00 animmode("angle deltas");
 }
 
-function function_b93dc4966b6ac70d(var_1792ca970eb0f4e5) {
+function function_b93dc4966b6ac70d(teleport_struct_targetname) {
   flag_wait("player_spawned_with_loadout");
-  teleport_struct = getStruct(var_1792ca970eb0f4e5, "targetname");
+  teleport_struct = getStruct(teleport_struct_targetname, "targetname");
   ally = teleport_struct function_9e1d2e1df08f11ad();
 
   if(!isDefined(ally)) {
@@ -191,12 +191,12 @@ function function_b742d2da5a20db26() {
     thread[[func["function"]]]();
   }
 
-  self.var_5295f7f174b863a6 = self.spawn_funcs;
+  self.saved_spawn_functions = self.spawn_funcs;
 
   self.spawn_funcs = undefined;
 
-  self.spawn_funcs = self.var_5295f7f174b863a6;
-  self.var_5295f7f174b863a6 = undefined;
+  self.spawn_funcs = self.saved_spawn_functions;
+  self.saved_spawn_functions = undefined;
 
   if(!isDefined(self.script_suspend)) {
     self.spawner = undefined;

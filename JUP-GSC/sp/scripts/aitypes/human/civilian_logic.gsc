@@ -15,7 +15,7 @@ function initcivilian(taskid) {
     return anim.success;
   }
 
-  self function_9f82c74eb1b7caf9(0, "entity");
+  self setcanusecover(0, "entity");
   bb_civilianrequestspeed(170);
   self.ignoresuppression = 1;
   self.disableplayeradsloscheck = 1;
@@ -40,7 +40,7 @@ function setstealthstate_neutral(statename, e) {
     statename = "idle";
   }
 
-  return scripts\aitypes\stealth::function_20bf793de5175709(statename, e);
+  return scripts\aitypes\stealth::scrsetstealthstate(statename, e);
 }
 
 function function_216b6a27f343c39b(taskid) {
@@ -49,7 +49,7 @@ function function_216b6a27f343c39b(taskid) {
   return anim.success;
 }
 
-function function_f10a50a61d990568(taskid) {
+function civgetbsmstate(taskid) {
   state = bb_getcivilianstate();
 
   switch (state) {
@@ -68,7 +68,7 @@ function interactioncleanup(taskid) {
   iprintlnbold("Terminating Interaction");
 }
 
-function function_fa485278009f93a7(taskid) {
+function civilian_stoppatrol(taskid) {
   self notify("stop_going_to_node");
   return anim.success;
 }

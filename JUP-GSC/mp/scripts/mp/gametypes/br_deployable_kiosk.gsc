@@ -99,7 +99,7 @@ function function_41b95bcf009214f() {
   game["dialog"]["friendly_active"] = "dplb_grav_frnd";
 }
 
-function function_208501a7029ab500(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_208501a7029ab500(instance, part, state, player, bautouse, usestring) {
   if(!scripts\mp\gametypes\br_public::isdeployablekiosk(instance.type)) {
     return;
   }
@@ -250,21 +250,21 @@ function function_b8214cb8c9e75675(player, location) {
     spawnangles = player.angles;
   }
 
-  var_d77253c873d2b420 = anglesToForward(spawnangles);
+  ownerlookforward = anglesToForward(spawnangles);
   contents = scripts\engine\trace::create_default_contents(1);
-  trace = scripts\engine\trace::ray_trace(location - var_d77253c873d2b420 * 30, location + var_d77253c873d2b420 * 1000, undefined, contents);
+  trace = scripts\engine\trace::ray_trace(location - ownerlookforward * 30, location + ownerlookforward * 1000, undefined, contents);
   coord = trace["position"] + trace["normal"] * 20;
   targetpos = location;
   targetheightoffset = scripts\cp_mp\parachute::getc130height();
   ownerforward = anglesToForward(spawnangles);
   ownerright = anglestoright(spawnangles);
-  var_f74f18c717b149e2 = [targetpos + (-1 * ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos - ownerforward * 100, targetpos + ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100];
-  bestdirection = vectorNormalize(var_f74f18c717b149e2[2] - targetpos);
+  positionchecklist = [targetpos + (-1 * ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos - ownerforward * 100, targetpos + ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100];
+  bestdirection = vectorNormalize(positionchecklist[2] - targetpos);
   var_e3b1338d5bd4399f = 0;
   bestfraction = 0;
   var_a9df94497d7dbdaf = 0;
 
-  foreach(dirpos in var_f74f18c717b149e2) {
+  foreach(dirpos in positionchecklist) {
     var_7a7426e42e674e40 = vectorNormalize(dirpos - targetpos);
     var_c45bbeb56df09b5d = targetpos * (1, 1, 0) + (0, 0, targetheightoffset);
     var_32a961dac02545b0 = var_c45bbeb56df09b5d - var_7a7426e42e674e40 * 24000;
@@ -431,12 +431,12 @@ function function_4132402c7ec5947c(eattacker) {
   }
 }
 
-function function_dcf070d2485a90a4(goto, var_ceb89b7c7c66002a) {
+function function_dcf070d2485a90a4(goto, reversing) {
   drone = self;
   drone.var_3b4fee20d214bd9b = undefined;
   drone.var_f44262daab1a384a = undefined;
   drone.speed = 0;
-  drone thread function_6d9358d777958a1b(goto, var_ceb89b7c7c66002a);
+  drone thread function_6d9358d777958a1b(goto, reversing);
   drone thread namespace_2c2703f78fc59600::function_53a07930f4fc0e08(goto);
   drone thread function_19375ce96b24aff();
   drone waittill("redeploy_drone_arrive");
@@ -449,7 +449,7 @@ function function_dcf070d2485a90a4(goto, var_ceb89b7c7c66002a) {
   drone.var_f44262daab1a384a = undefined;
 }
 
-function function_6d9358d777958a1b(var_daad7d20d7a17c02, var_ceb89b7c7c66002a) {
+function function_6d9358d777958a1b(var_daad7d20d7a17c02, reversing) {
   level endon("game_ended");
   self endon("entitydeleted");
   self.v_destination = var_daad7d20d7a17c02.origin;
@@ -460,7 +460,7 @@ function function_6d9358d777958a1b(var_daad7d20d7a17c02, var_ceb89b7c7c66002a) {
 
   intervaltime = 0.05;
 
-  if(var_ceb89b7c7c66002a) {
+  if(reversing) {
     self.speed = 0;
 
     while(self.speed < var_f69a5288e749a523) {

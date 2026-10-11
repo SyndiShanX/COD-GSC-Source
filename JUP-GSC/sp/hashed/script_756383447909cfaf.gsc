@@ -151,7 +151,7 @@ function function_fb62bcef7fab15fb(agent) {
   agent scripts\cp_mp\agents\agent_utils::function_c37c4f9d687074ff("body_sp_opforce_al_qatala_boss_pyro", "head_sp_opforce_al_qatala_boss_pyro", weapon, grenade_type, grenadeammo, armor, helmet, 1);
   agent function_720c3b7abf4baac8("pyro", 0, weaponcase);
   agent thread scripts\cp_mp\agents\agent_utils::function_36613ffb5ebe56(agent);
-  agent function_8abe5a968cc3c220("scubagr");
+  agent setgeartype("scubagr");
   agent setclothtype("vestheavy");
 }
 

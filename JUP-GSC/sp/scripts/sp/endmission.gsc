@@ -16,19 +16,19 @@ function main() {
   level.missionsettings = missionsettings;
   level.lowestgameskill = getdvarint(@ "g_gameskill");
   nil = undefined;
-  var_e55705af85d11cb9 = function_91d6763e1921a524();
+  mapinfolist = function_91d6763e1921a524();
 
-  foreach(mapinfo in var_e55705af85d11cb9) {
-    var_f9e628cf36da6985 = undefined;
+  foreach(mapinfo in mapinfolist) {
+    preloadtransients = undefined;
 
-    if(isDefined(mapinfo.var_f9e628cf36da6985)) {
-      var_f9e628cf36da6985 = strtok(mapinfo.var_f9e628cf36da6985, ", ");
+    if(isDefined(mapinfo.preloadtransients)) {
+      preloadtransients = strtok(mapinfo.preloadtransients, ", ");
     }
 
     settletime = default_to(mapinfo.settletime, 10);
     clientsettletime = default_to(mapinfo.clientsettletime, 100);
-    loadbink = mapinfo.var_dd5f1ceda1154582;
-    addlevel(mapinfo.mapname, 0, nil, 1, nil, settletime, clientsettletime, nil, var_f9e628cf36da6985, 0, loadbink);
+    loadbink = mapinfo.loadingmoviename;
+    addlevel(mapinfo.mapname, 0, nil, 1, nil, settletime, clientsettletime, nil, preloadtransients, 0, loadbink);
   }
 
   if(isDefined(level.endmission_main_func)) {
@@ -36,7 +36,7 @@ function main() {
     level.endmission_main_func = undefined;
   }
 
-  thread function_b47ee5b0dae14294();
+  thread ui_debug_clearall();
 
   thread debug_test_next_mission();
 }
@@ -118,25 +118,25 @@ function nextmission_primeloadbink_internal() {
   }
 
   nextlevelindex = getlevelindex(level.script) + 1;
-  var_1b5061c6c41a4d30 = getlevelbink(nextlevelindex);
+  mission_bink = getlevelbink(nextlevelindex);
   setsaveddvar(@ "hash_d3ee5a6578fe61de", "0");
   setsaveddvar(@ "hash_b9ff37d084074df3", "1");
   stopcinematicingame();
   waitframe();
 
-  if(!isDefined(var_1b5061c6c41a4d30)) {
+  if(!isDefined(mission_bink)) {
     iprintlnbold("<dev string:x1c>");
 
-    var_1b5061c6c41a4d30 = "default";
+    mission_bink = "default";
   }
 
-  cinematicingame(var_1b5061c6c41a4d30, 1, 1, 1, 0, 0, 1);
+  cinematicingame(mission_bink, 1, 1, 1, 0, 0, 1);
 
   while(!iscinematicplaying()) {
     waitframe();
   }
 
-  println("<dev string:x84>" + var_1b5061c6c41a4d30);
+  println("<dev string:x84>" + mission_bink);
   flag_set("nextmission_transition_bink_primed");
 }
 
@@ -192,10 +192,10 @@ function level_settle_time_wait(levelname) {
     clientsettletime *= 0.02;
   }
 
-  var_814a0605452d6c7 = settletime + clientsettletime;
+  totalsettletime = settletime + clientsettletime;
 
-  if(isDefined(var_814a0605452d6c7)) {
-    wait var_814a0605452d6c7 * 0.05;
+  if(isDefined(totalsettletime)) {
+    wait totalsettletime * 0.05;
   }
 
   if(isDefined(clientsettletime) && clientsettletime <= 0) {
@@ -296,9 +296,9 @@ function nextmission_internal() {
 
   scripts\sp\analytics::start_point_update("mission_end", 1);
 
-  if(function_8f7452209f2fa982()) {
-    if(isDefined(level.var_483eedd411ddb20e) && level.script != "gunship_compound") {
-      stopactivity(level.var_483eedd411ddb20e, "completed");
+  if(isplatformps5()) {
+    if(isDefined(level.ps5activity) && level.script != "gunship_compound") {
+      stopactivity(level.ps5activity, "completed");
     }
   }
 
@@ -309,16 +309,16 @@ function nextmission_internal() {
 
   nextlevelindex = levelindex + 1;
   assert(nextlevelindex < level.missionsettings.levels.size);
-  var_1b5061c6c41a4d30 = getlevelbink(nextlevelindex);
+  mission_bink = getlevelbink(nextlevelindex);
   var_b02ce1c02cd503c9 = level.missionsettings getlevelname(nextlevelindex);
-  var_7291ff60dd218210 = function_b146e0d2e5d91eef(var_b02ce1c02cd503c9);
+  var_7291ff60dd218210 = getmapinfobundle(var_b02ce1c02cd503c9);
 
   println("<dev string:x1d6>" + var_b02ce1c02cd503c9 + "<dev string:x16d>");
   println("<dev string:x1ed>" + var_7291ff60dd218210.var_60699f6be12aea0d + "<dev string:x16d>");
 
-  if(isDefined(var_1b5061c6c41a4d30) && !istrue(level.endmission_bink_skip)) {
-    println("<dev string:x20a>" + var_1b5061c6c41a4d30 + "<dev string:x16d>");
-    setDvar(@ "hash_4967b5f5316f16af", var_1b5061c6c41a4d30);
+  if(isDefined(mission_bink) && !istrue(level.endmission_bink_skip)) {
+    println("<dev string:x20a>" + mission_bink + "<dev string:x16d>");
+    setDvar(@ "hash_4967b5f5316f16af", mission_bink);
 
     if(!flag_exist("nextmission_transition_bink_primed")) {
       flag_init("nextmission_transition_bink_primed");
@@ -350,7 +350,7 @@ function nextmission_internal() {
         flags |= 33554432;
       }
 
-      cinematicingame(var_1b5061c6c41a4d30, flags);
+      cinematicingame(mission_bink, flags);
     }
   }
 
@@ -403,8 +403,8 @@ function updatesppercent() {
 }
 
 function addprereq(missionindex) {
-  var_82b6d1fbefcc5fae = level.missionsettings.prereqs.size;
-  level.missionsettings.prereqs[var_82b6d1fbefcc5fae] = missionindex;
+  prereqindex = level.missionsettings.prereqs.size;
+  level.missionsettings.prereqs[prereqindex] = missionindex;
 }
 
 function getpostloadbink(levelname) {
@@ -602,9 +602,9 @@ function getlevelskill(levelindex) {
 function getlowestskill() {
   missionarray = level.player function_ff103db8e0d75209();
   lowestskill = 4;
-  var_5b5a922bcf1c5c9f = min(missionarray.size, self.levels.size);
+  completedmissioncount = min(missionarray.size, self.levels.size);
 
-  for(index = 0; index < var_5b5a922bcf1c5c9f; index++) {
+  for(index = 0; index < completedmissioncount; index++) {
     if(missionarray[index] < lowestskill) {
       lowestskill = missionarray[index];
     }
@@ -623,7 +623,7 @@ function getnextlevelindex() {
   return 0;
 }
 
-function function_b47ee5b0dae14294() {
+function ui_debug_clearall() {
   for(;;) {
     if(getdvarint(@ "hash_1adbe88f794c0245")) {
       clearall();

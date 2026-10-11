@@ -22,7 +22,7 @@ function main() {
   scripts\sp\lights::init();
   scripts\common\lighting::light_init();
   thread anim_sp::letterbox_enable(0, 0);
-  thread function_f29d0cd9dae6bab4();
+  thread setup_flickerlight_presets();
   thread play_lights();
   thread function_3f35a5c4023a3d66();
   thread function_94a9e2a3d2a56c56();
@@ -88,12 +88,12 @@ function milbase_roof_lgt_trig() {
   }
 }
 
-function function_f29d0cd9dae6bab4() {
-  function_dbec921ed499ee34("firelight_motion_medium", (1, 0.2246, 0), (1, 0.25, 0), 30, 0.05, 0.2, 20);
-  function_dbec921ed499ee34("electric_medium", (0, 0.2246, 1), (0, 0.4, 1), 1, 0.05, 0.2, 2);
-  function_dbec921ed499ee34("pulse_medium", (0, 1, 0), (0, 0, 1), 1, 0.5, 2, 2);
-  function_dbec921ed499ee34("pulse_red", (1, 0, 0), (0, 0, 0), 3, 1.5, 3, 2);
-  function_dbec921ed499ee34("pulse_red_dim", (1, 0, 0), (0, 0, 0), 300, 1.5, 3, 2);
+function setup_flickerlight_presets() {
+  create_flickerlight_preset("firelight_motion_medium", (1, 0.2246, 0), (1, 0.25, 0), 30, 0.05, 0.2, 20);
+  create_flickerlight_preset("electric_medium", (0, 0.2246, 1), (0, 0.4, 1), 1, 0.05, 0.2, 2);
+  create_flickerlight_preset("pulse_medium", (0, 1, 0), (0, 0, 1), 1, 0.5, 2, 2);
+  create_flickerlight_preset("pulse_red", (1, 0, 0), (0, 0, 0), 3, 1.5, 3, 2);
+  create_flickerlight_preset("pulse_red_dim", (1, 0, 0), (0, 0, 0), 300, 1.5, 3, 2);
   function_bf134e4c6c36436("flicker1", 5, 40, 0.05, 0.15, 3, 7, 0.1, 3);
   function_bf134e4c6c36436("flicker2", 0.05, 0.5, 0.05, 0.25, 3, 7, 0.1, 3);
   function_bf134e4c6c36436("flicker4", 850, 0.5, 0.05, 0.4, 3, 7, 0.1, 3);
@@ -124,35 +124,35 @@ function play_lights() {
 }
 
 function lights_flicker() {
-  thread function_238c2a0aae70e973("lobby_desk_Lamp_lgt_01", 0.025, 0);
-  thread function_238c2a0aae70e973("Lobby_lgt_main", 0.025, 0);
-  thread function_238c2a0aae70e973("lobby_downlights_lgt_01", 0.025, 0);
-  thread function_238c2a0aae70e973("Corridor_ceilings_lgt", 0.025, 0);
-  thread function_238c2a0aae70e973("red_wall_corridor_lgt_02", 0.5, 3.22);
-  thread function_238c2a0aae70e973("red_wall_corridor_lgt_01", 0.5, 71.62);
-  thread function_238c2a0aae70e973("green_gas_lgt_01", 0.5, 716.2);
-  thread function_238c2a0aae70e973("green_gas_lgt_02", 0.5, 143.24);
-  thread function_238c2a0aae70e973("green_gas_lgt_03", 0.05, 397.89);
-  thread function_238c2a0aae70e973("green_gas_lgt_04", 0.05, 477.46);
-  thread function_238c2a0aae70e973("elevator_yuri_lgt", 0.05, 59.68);
+  thread lerp_spot_intensity("lobby_desk_Lamp_lgt_01", 0.025, 0);
+  thread lerp_spot_intensity("Lobby_lgt_main", 0.025, 0);
+  thread lerp_spot_intensity("lobby_downlights_lgt_01", 0.025, 0);
+  thread lerp_spot_intensity("Corridor_ceilings_lgt", 0.025, 0);
+  thread lerp_spot_intensity("red_wall_corridor_lgt_02", 0.5, 3.22);
+  thread lerp_spot_intensity("red_wall_corridor_lgt_01", 0.5, 71.62);
+  thread lerp_spot_intensity("green_gas_lgt_01", 0.5, 716.2);
+  thread lerp_spot_intensity("green_gas_lgt_02", 0.5, 143.24);
+  thread lerp_spot_intensity("green_gas_lgt_03", 0.05, 397.89);
+  thread lerp_spot_intensity("green_gas_lgt_04", 0.05, 477.46);
+  thread lerp_spot_intensity("elevator_yuri_lgt", 0.05, 59.68);
   thread function_7461930061f9770f();
   thread function_d2072b05e3481e8d();
 }
 
 function cp_escape() {
   set_vision_naked("sp_jup_milbase", 0);
-  thread function_238c2a0aae70e973("lobby_desk_Lamp_lgt_01", 0.025, 0);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key", 0.05, 10);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key_monitor_rim", 0.05, 10);
-  thread function_238c2a0aae70e973("red_wall_corridor_lgt_02", 0.05, 3.22);
-  thread function_238c2a0aae70e973("red_wall_corridor_lgt_01", 0.05, 71.62);
-  thread function_238c2a0aae70e973("green_gas_lgt_01", 0.05, 716.2);
-  thread function_238c2a0aae70e973("green_gas_lgt_02", 0.05, 143.24);
-  thread function_238c2a0aae70e973("green_gas_lgt_03", 0.05, 397.89);
-  thread function_238c2a0aae70e973("green_gas_lgt_04", 0.05, 477.46);
-  thread function_238c2a0aae70e973("elevator_yuri_lgt", 0.05, 59.68);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_15_exit_fill", 0.05, 0);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_corridor_fill", 0.05, 0);
+  thread lerp_spot_intensity("lobby_desk_Lamp_lgt_01", 0.025, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key", 0.05, 10);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key_monitor_rim", 0.05, 10);
+  thread lerp_spot_intensity("red_wall_corridor_lgt_02", 0.05, 3.22);
+  thread lerp_spot_intensity("red_wall_corridor_lgt_01", 0.05, 71.62);
+  thread lerp_spot_intensity("green_gas_lgt_01", 0.05, 716.2);
+  thread lerp_spot_intensity("green_gas_lgt_02", 0.05, 143.24);
+  thread lerp_spot_intensity("green_gas_lgt_03", 0.05, 397.89);
+  thread lerp_spot_intensity("green_gas_lgt_04", 0.05, 477.46);
+  thread lerp_spot_intensity("elevator_yuri_lgt", 0.05, 59.68);
+  thread lerp_spot_intensity("lgt_cine_yuri_15_exit_fill", 0.05, 0);
+  thread lerp_spot_intensity("lgt_cine_laswell_corridor_fill", 0.05, 0);
 }
 
 function function_1be9145b47c4b31d() {
@@ -208,65 +208,65 @@ function function_b259a8f6deec57ea() {
   setsaveddvar(@ "hash_eca4b727b01fd254", 3);
   setsaveddvar(@ "hash_93b4b56b615317b9", 250);
   setsaveddvar(@ "hash_63eb1893f96ac98d", 8);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key", 0.5, 111.41);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key_monitor_rim", 0.5, 24.59);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_corridor_fill", 0.5, 10);
-  thread function_238c2a0aae70e973("lgt_cine_room_pc_fill_03", 0.5, 35.81);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_17_room_fill", 0.5, 3.18);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_close_door_pc_01", 0.5, 7.96);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_enter_rim_01", 0.5, 3.18);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key", 0.5, 111.41);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key_monitor_rim", 0.5, 24.59);
+  thread lerp_spot_intensity("lgt_cine_laswell_corridor_fill", 0.5, 10);
+  thread lerp_spot_intensity("lgt_cine_room_pc_fill_03", 0.5, 35.81);
+  thread lerp_spot_intensity("lgt_cine_yuri_17_room_fill", 0.5, 3.18);
+  thread lerp_spot_intensity("lgt_cine_laswell_close_door_pc_01", 0.5, 7.96);
+  thread lerp_spot_intensity("lgt_cine_laswell_enter_rim_01", 0.5, 3.18);
   flag_wait("lgt_cine_laswell_reach_door");
-  thread function_238c2a0aae70e973("lgt_cine_laswell_enter_rim_02", 0.5, 5.57);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_corridor_fill", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_enter_rim_01", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_enter_rim_02", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_laswell_enter_rim_02", 0.5, 5.57);
+  thread lerp_spot_intensity("lgt_cine_laswell_corridor_fill", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_laswell_enter_rim_01", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_laswell_enter_rim_02", 0.5, 0);
   flag_wait("lgt_cine_laswell_runs_to_yuri");
-  thread function_238c2a0aae70e973("lgt_cine_laswell_talking_headset_rim", 0, 1.2);
-  thread function_238c2a0aae70e973("lgt_cine_room_fill_back", 0, 0.4);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_rim_headset_01", 2.5, 48);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key_02", 3, 27.85);
+  thread lerp_spot_intensity("lgt_cine_laswell_talking_headset_rim", 0, 1.2);
+  thread lerp_spot_intensity("lgt_cine_room_fill_back", 0, 0.4);
+  thread lerp_spot_intensity("lgt_cine_laswell_rim_headset_01", 2.5, 48);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key_02", 3, 27.85);
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 20);
   flag_wait("lgt_cine_bomb_goess_off");
-  thread function_238c2a0aae70e973("lgt_cine_room_pc_fill_03", 3, 0);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_talking_headset_rim", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_fill_05", 0.05, 0);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key_02", 0.05, 0);
-  thread function_238c2a0aae70e973("lgt_cine_room_pc_fill", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_room_pc_fill_02", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_room_fill_back", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_17_room_fill", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_rim_headset_01", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_room_pc_fill_03", 3, 0);
+  thread lerp_spot_intensity("lgt_cine_laswell_talking_headset_rim", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_fill_05", 0.05, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key_02", 0.05, 0);
+  thread lerp_spot_intensity("lgt_cine_room_pc_fill", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_room_pc_fill_02", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_room_fill_back", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_17_room_fill", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_laswell_rim_headset_01", 0.5, 0);
   thread function_d2072b05e3481e8d();
   thread set_vision_naked("sp_jup_milbase_cine_yuri_dust", 0.5);
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 50);
   flag_wait("lgt_cine_lobby_lgt_off");
-  thread function_238c2a0aae70e973("Lobby_lgt_main", 0.05, 0);
-  thread function_238c2a0aae70e973("lobby_downlights_lgt_01", 0.05, 0);
-  thread function_238c2a0aae70e973("Corridor_ceilings_lgt", 0.05, 0);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key", 0.05, 0);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key_monitor_rim", 0.05, 0);
-  thread function_238c2a0aae70e973("green_gas_lgt_01", 0.05, 716.2);
-  thread function_238c2a0aae70e973("green_gas_lgt_02", 0.05, 143.24);
-  thread function_238c2a0aae70e973("green_gas_lgt_03", 0.05, 397.89);
-  thread function_238c2a0aae70e973("green_gas_lgt_04", 0.05, 477.46);
+  thread lerp_spot_intensity("Lobby_lgt_main", 0.05, 0);
+  thread lerp_spot_intensity("lobby_downlights_lgt_01", 0.05, 0);
+  thread lerp_spot_intensity("Corridor_ceilings_lgt", 0.05, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key", 0.05, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key_monitor_rim", 0.05, 0);
+  thread lerp_spot_intensity("green_gas_lgt_01", 0.05, 716.2);
+  thread lerp_spot_intensity("green_gas_lgt_02", 0.05, 143.24);
+  thread lerp_spot_intensity("green_gas_lgt_03", 0.05, 397.89);
+  thread lerp_spot_intensity("green_gas_lgt_04", 0.05, 477.46);
   flag_wait("lgt_cine_yuri_runs_to_door");
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_usb_key_fill", 0.05, 21.92);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_lightsoff_pc", 0.05, 5.57);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_lightsoff_table", 0.05, 5.57);
-  thread function_238c2a0aae70e973("elevator_yuri_lgt", 0.05, 59.68);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_usb_key_fill", 0.05, 21.92);
+  thread lerp_spot_intensity("lgt_cine_laswell_lightsoff_pc", 0.05, 5.57);
+  thread lerp_spot_intensity("lgt_cine_laswell_lightsoff_table", 0.05, 5.57);
+  thread lerp_spot_intensity("elevator_yuri_lgt", 0.05, 59.68);
   flag_wait("lgt_cine_yuri_opes_door");
-  thread function_238c2a0aae70e973("lgt_cine_yuri_15_exit_fill", 0.05, 0.95);
+  thread lerp_spot_intensity("lgt_cine_yuri_15_exit_fill", 0.05, 0.95);
   flag_wait("lgt_cine_looking_at_laswell");
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key_monitor_rim", 0.05, 24.59);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key_monitor_rim", 0.05, 24.59);
   flag_wait("lgt_cine_laswell_looking_at_usb");
-  thread function_238c2a0aae70e973("lgt_cine_yuri_15_exit_fill", 0.05, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_15_exit_fill", 0.05, 0);
   flag_wait("lgt_cine_laswell_face_close_up");
   scripts\sp\anim::letterbox_enable(0, 1.5);
   level waittill("lgt_cine_yuri_end");
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_usb_key_fill", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_yuri_01_pc_key_monitor_rim", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_lightsoff_pc", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_laswell_lightsoff_table", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_usb_key_fill", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_yuri_01_pc_key_monitor_rim", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_laswell_lightsoff_pc", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_laswell_lightsoff_table", 0.5, 0);
   thread function_26280fbed5700639();
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 0);
   wait 0.5;
@@ -289,24 +289,24 @@ function function_b0c69eb4c5c04de3(laswell, nikolai) {
   wait 1;
   flag_wait("lgt_cine_jumpinto_heli");
   level.player hideviewmodel();
-  thread function_238c2a0aae70e973("lgt_cine_exfil_rim_get_up_01", 0.5, 6.37);
+  thread lerp_spot_intensity("lgt_cine_exfil_rim_get_up_01", 0.5, 6.37);
   flag_wait("lgt_cine_landed_heli");
-  thread function_238c2a0aae70e973("lgt_cine_exfil_rim_look_outside_fill_02", 0.5, 15.92);
-  thread function_238c2a0aae70e973("lgt_cine_exfil_fake_sun_rim_02", 0.5, 15.92);
-  thread function_238c2a0aae70e973("lgt_cine_exfil_rim_look_outside_01", 0.5, 43.77);
-  thread function_238c2a0aae70e973("lgt_cine_exfil_sun_laswell_arm", 0.5, 23.87);
+  thread lerp_spot_intensity("lgt_cine_exfil_rim_look_outside_fill_02", 0.5, 15.92);
+  thread lerp_spot_intensity("lgt_cine_exfil_fake_sun_rim_02", 0.5, 15.92);
+  thread lerp_spot_intensity("lgt_cine_exfil_rim_look_outside_01", 0.5, 43.77);
+  thread lerp_spot_intensity("lgt_cine_exfil_sun_laswell_arm", 0.5, 23.87);
   flag_wait("lgt_cine_set_up");
-  thread function_238c2a0aae70e973("lgt_cine_exfil_polit_thumb_up_01", 0.5, 95.49);
+  thread lerp_spot_intensity("lgt_cine_exfil_polit_thumb_up_01", 0.5, 95.49);
   flag_wait("lgt_cine_look_outside");
   flag_wait("lgt_cine_looking_at_pilot");
   flag_wait("lgt_cine_gave_thumbup");
-  thread function_238c2a0aae70e973("lgt_cine_exfil_polit_thumb_up_01", 2, 0);
-  thread function_238c2a0aae70e973("lgt_cine_exfil_sun_laswell_arm", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_exfil_polit_thumb_up_01", 2, 0);
+  thread lerp_spot_intensity("lgt_cine_exfil_sun_laswell_arm", 0.5, 0);
   flag_wait("lgt_cine_heli_flysoff");
-  thread function_238c2a0aae70e973("lgt_cine_exfil_fake_sun_rim_02", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_exfil_rim_get_up_01", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_exfil_rim_look_outside_fill_02", 0.5, 0);
-  thread function_238c2a0aae70e973("lgt_cine_exfil_rim_look_outside_01", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_exfil_fake_sun_rim_02", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_exfil_rim_get_up_01", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_exfil_rim_look_outside_fill_02", 0.5, 0);
+  thread lerp_spot_intensity("lgt_cine_exfil_rim_look_outside_01", 0.5, 0);
   thread function_26280fbed5700639();
 }
 
@@ -407,11 +407,11 @@ function function_7461930061f9770f() {
 
   while(true) {
     thread function_35cadef737423263();
-    thread function_238c2a0aae70e973("white_wall_flicker_spots", 0, 925);
-    thread function_238c2a0aae70e973("white_wall_flicker_spots2", 0, 120);
+    thread lerp_spot_intensity("white_wall_flicker_spots", 0, 925);
+    thread lerp_spot_intensity("white_wall_flicker_spots2", 0, 120);
     wait 0.1;
-    thread function_238c2a0aae70e973("white_wall_flicker_spots", 0.15, 0);
-    thread function_238c2a0aae70e973("white_wall_flicker_spots2", 0.3, 0);
+    thread lerp_spot_intensity("white_wall_flicker_spots", 0.15, 0);
+    thread lerp_spot_intensity("white_wall_flicker_spots2", 0.3, 0);
     wait 0.85;
   }
 }
@@ -429,11 +429,11 @@ function function_d2072b05e3481e8d() {
 
   while(true) {
     thread function_105fa09032209fa5();
-    thread function_238c2a0aae70e973("red_wall_flicker_spots", 0, 200);
-    thread function_238c2a0aae70e973("red_wall_flicker_spots2", 0, 20);
+    thread lerp_spot_intensity("red_wall_flicker_spots", 0, 200);
+    thread lerp_spot_intensity("red_wall_flicker_spots2", 0, 20);
     wait 0.1;
-    thread function_238c2a0aae70e973("red_wall_flicker_spots", 0.3, 0);
-    thread function_238c2a0aae70e973("red_wall_flicker_spots2", 0.175, 0);
+    thread lerp_spot_intensity("red_wall_flicker_spots", 0.3, 0);
+    thread lerp_spot_intensity("red_wall_flicker_spots2", 0.175, 0);
     wait 0.75;
   }
 }

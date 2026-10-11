@@ -19,7 +19,7 @@ function private autoexec __init__system__() {
 
 function private post_main() {
   common_init();
-  utility::function_f3bb4f4911a1beb2("lightning_chain", "init");
+  utility::callsharedfunc("lightning_chain", "init");
 }
 
 function private common_init() {
@@ -61,14 +61,14 @@ function arc_damage(source_enemy, player, params) {
     return;
   }
 
-  thread utility::function_f3bb4f4911a1beb2("lightning_chain", "lc_stun_and_damage", 1, params);
+  thread utility::callsharedfunc("lightning_chain", "lc_stun_and_damage", 1, params);
 
   if(ai::function_f6347c9c410226d3()) {
     return;
   }
 
   var_e47555a8dc3f59cb = level function_ae21b7c8d9bf419c(source_enemy);
-  level utility::function_f3bb4f4911a1beb2("lightning_chain", "lc_expand", var_e47555a8dc3f59cb, params.max_enemies_killed - 1, params);
+  level utility::callsharedfunc("lightning_chain", "lc_expand", var_e47555a8dc3f59cb, params.max_enemies_killed - 1, params);
 }
 
 function function_9754219dda9b7840(params) {
@@ -122,7 +122,7 @@ function private lc_expand(start_point, count_left, params) {
 
 function function_36230b878a401091(waittime, start_point, count_left, params) {
   wait waittime;
-  level utility::function_f3bb4f4911a1beb2("lightning_chain", "lc_expand", start_point, count_left, params);
+  level utility::callsharedfunc("lightning_chain", "lc_expand", start_point, count_left, params);
 }
 
 function function_ae21b7c8d9bf419c(ai_target) {
@@ -157,7 +157,7 @@ function function_ba46a0d1e783a686(start_point, ai_target, params) {
   var_d1624c8004bcaa3b delete();
 
   if(isalive(ai_target)) {
-    ai_target thread utility::function_f3bb4f4911a1beb2("lightning_chain", "lc_stun_and_damage", 0, params);
+    ai_target thread utility::callsharedfunc("lightning_chain", "lc_stun_and_damage", 0, params);
   }
 }
 
@@ -188,7 +188,7 @@ function function_ca73f0d9e9cea887(duration) {
   }
 }
 
-function private lc_stun_and_damage(var_6344ee17398456ea, params) {
+function private lc_stun_and_damage(pin_to_ground, params) {
   self endon("death");
 
   if(istrue(self.lc_stunned)) {
@@ -200,7 +200,7 @@ function private lc_stun_and_damage(var_6344ee17398456ea, params) {
       return;
     }
   } else if(isDefined(self.var_795cf764ad7734f4)) {
-    if(!self[[self.var_795cf764ad7734f4]](var_6344ee17398456ea, params)) {
+    if(!self[[self.var_795cf764ad7734f4]](pin_to_ground, params)) {
       return;
     }
   }
@@ -222,7 +222,7 @@ function private lc_stun_and_damage(var_6344ee17398456ea, params) {
   switch (self.type) {
     case #"hash_f695947f7a9ce23f":
       if(utility::issharedfuncdefined("zombie", "stunZombie")) {
-        utility::function_f3bb4f4911a1beb2("zombie", "stunZombie", duration);
+        utility::callsharedfunc("zombie", "stunZombie", duration);
       }
 
       break;
@@ -234,7 +234,7 @@ function private lc_stun_and_damage(var_6344ee17398456ea, params) {
   self.lc_stunned = 1;
   self.var_7cf353523b4c1663 = gettime() + function_a5b14435e3229bed(duration);
   self notify("zombie_lc_stunned");
-  utility::function_f3bb4f4911a1beb2("lightning_chain", "lc_play_stun_fx", var_6344ee17398456ea, params);
+  utility::callsharedfunc("lightning_chain", "lc_play_stun_fx", pin_to_ground, params);
 
   if(isDefined(params.var_cc8643dde5979643) && params.var_cc8643dde5979643 > 0) {
     self.var_29a419c3cdeccf06 = 1;
@@ -252,7 +252,7 @@ function private lc_stun_and_damage(var_6344ee17398456ea, params) {
 }
 
 function lc_do_damage(params) {
-  lc_damage = utility::function_f3bb4f4911a1beb2("lightning_chain", "lc_damage_calculation", params);
+  lc_damage = utility::callsharedfunc("lightning_chain", "lc_damage_calculation", params);
   self dodamage(lc_damage, self.origin, params.player, params.player, "MOD_ELEMENTAL_ELEC", params.weapon, "torso_upper");
 }
 
@@ -277,7 +277,7 @@ function private lc_do_tick_damage(params, duration) {
   }
 }
 
-function private lc_play_stun_fx(var_6344ee17398456ea, params) {
+function private lc_play_stun_fx(pin_to_ground, params) {
   if(isDefined(params.var_cc8643dde5979643) && params.var_cc8643dde5979643 > 0) {
     paped = 1;
   } else {
@@ -292,7 +292,7 @@ function private lc_play_stun_fx(var_6344ee17398456ea, params) {
     fx = "tesla_shock";
   }
 
-  if(istrue(var_6344ee17398456ea)) {
+  if(istrue(pin_to_ground)) {
     if(paped) {
       ground_fx = "tesla_shock_ground_pap";
     } else {
@@ -349,7 +349,7 @@ function private lc_wait_till_stun_end() {
       self.var_6315c8282142db0a = 0;
 
       if(utility::issharedfuncdefined("zombie_dismemberment", "dismemberHead")) {
-        utility::function_f3bb4f4911a1beb2("zombie_dismemberment", "dismemberHead", 1);
+        utility::callsharedfunc("zombie_dismemberment", "dismemberHead", 1);
       }
     }
 

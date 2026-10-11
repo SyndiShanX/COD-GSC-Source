@@ -43,9 +43,9 @@ function init() {
   level function_9d6b4ec9f5809bc5();
   level function_b7fe23eb11f96086();
   level function_b7b736eb11aac7df();
-  function_a41e3a211a9e37a4("cluster_spike", bundle.deployweapon, #"medium");
-  function_a41e3a211a9e37a4("cluster_spike", bundle.spawnweapon, #"medium");
-  function_a41e3a211a9e37a4("cluster_spike", "cluster_spike_mp_v2063", #"medium");
+  registerkillstreakdamagedealingweaponsharedfunc("cluster_spike", bundle.deployweapon, #"medium");
+  registerkillstreakdamagedealingweaponsharedfunc("cluster_spike", bundle.spawnweapon, #"medium");
+  registerkillstreakdamagedealingweaponsharedfunc("cluster_spike", "cluster_spike_mp_v2063", #"medium");
 }
 
 function function_ddb866cc574674c0(bundle) {
@@ -133,8 +133,8 @@ function function_4d4dfa5c57455df0(streakinfo) {
     streakinfo.var_fb58a31c756db4cc = level.var_ff6ea90ecf04638b;
   }
 
-  var_9b32d1936831f5aa = function_71efed8bf57f1d39(bundle, streakinfo.mpstreaksysteminfo.blueprintindex);
-  deployweapon = function_dd2a4fb3522f314(var_9b32d1936831f5aa, #"deployweapon");
+  genericblueprintname = function_71efed8bf57f1d39(bundle, streakinfo.mpstreaksysteminfo.blueprintindex);
+  deployweapon = genericblueprint_makeweapon(genericblueprintname, #"deployweapon");
   deployresult = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponfireddeploy(streakinfo, deployweapon, "grenade_fire", undefined, &function_bde7fd6853600da4, &function_baff78978772ecec, undefined, &function_ee88b06e55dd9ca3);
 
   if(!istrue(deployresult)) {
@@ -303,7 +303,7 @@ function function_4d7b7570ddab816d(data) {
 
 function function_cae5c83763020435(data) {
   if(isDefined(self) && !istrue(self.isexploding) || getdvarint(@ "hash_58254c61de76bffe", 0)) {
-    data.attacker thread namespace_53fc9ddbb516e6e1::function_e800498086e36c29(#"hash_d6c7eae0f9540805");
+    data.attacker thread namespace_53fc9ddbb516e6e1::doscoreeventsharedfunc(#"hash_d6c7eae0f9540805");
   }
 }
 
@@ -665,8 +665,8 @@ function function_6360197cfe54c18e(immediaterelease, streakinfo) {
       lifetimeoverride = self.bundle.var_11bd502e73321e11;
     }
 
-    var_9b32d1936831f5aa = function_71efed8bf57f1d39(bundle, streakinfo.mpstreaksysteminfo.blueprintindex);
-    spawnweapon = function_dd2a4fb3522f314(var_9b32d1936831f5aa, #"spawnweapon");
+    genericblueprintname = function_71efed8bf57f1d39(bundle, streakinfo.mpstreaksysteminfo.blueprintindex);
+    spawnweapon = genericblueprint_makeweapon(genericblueprintname, #"spawnweapon");
     function_cc8b9ef243e90347(grenade, spawnweapon, self.streakinfo, bundle, self.owner, lifetimeoverride);
     grenade thread function_daff421c657d09ca(immediaterelease, bundle);
     break;
@@ -725,8 +725,8 @@ function function_e328684112fe03c5(immediaterelease, streakinfo) {
 
     if(isDefined(self) && isDefined(self.owner)) {
       thread function_6360197cfe54c18e(immediaterelease, streakinfo);
-      var_9b32d1936831f5aa = function_71efed8bf57f1d39(self.bundle, streakinfo.mpstreaksysteminfo.blueprintindex);
-      spawnweapon = function_dd2a4fb3522f314(var_9b32d1936831f5aa, #"spawnweapon");
+      genericblueprintname = function_71efed8bf57f1d39(self.bundle, streakinfo.mpstreaksysteminfo.blueprintindex);
+      spawnweapon = genericblueprint_makeweapon(genericblueprintname, #"spawnweapon");
 
       if(issharedfuncdefined("weapons", "_launchGrenade")) {
         self.owner[[getsharedfunc("weapons", "_launchGrenade")]](spawnweapon, launchstart, launchvelocity, fusetime);
@@ -792,7 +792,7 @@ function function_9537ab94dab9a1c0() {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function function_b6f9b15b3da67aa0() {

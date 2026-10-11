@@ -99,12 +99,12 @@ function private function_2fad0a26c2a1a703() {
       for(var_335247298b7df538 = 0; var_335247298b7df538 < var_89483b96b1585631; var_335247298b7df538++) {
         angle = var_e1975252fc1aa40d * var_335247298b7df538;
         offsetangle = randomintrange(0, 360);
-        var_eb86d0d8f22c74 = cos(angle) * var_973dfd1577d2e255 + var_2b0bb0a5c78456d3.startpoint[0] + 300 * cos(offsetangle);
-        var_eb87d0d8f22ea7 = sin(angle) * var_973dfd1577d2e255 + var_2b0bb0a5c78456d3.startpoint[1] + 300 * sin(offsetangle);
-        startx = var_eb86d0d8f22c74 - cos(angle) * var_d21ba183323ff90a;
-        starty = var_eb87d0d8f22ea7 - sin(angle) * var_d21ba183323ff90a;
+        targetx = cos(angle) * var_973dfd1577d2e255 + var_2b0bb0a5c78456d3.startpoint[0] + 300 * cos(offsetangle);
+        targety = sin(angle) * var_973dfd1577d2e255 + var_2b0bb0a5c78456d3.startpoint[1] + 300 * sin(offsetangle);
+        startx = targetx - cos(angle) * var_d21ba183323ff90a;
+        starty = targety - sin(angle) * var_d21ba183323ff90a;
         circleinfo = spawnStruct();
-        circleinfo.targetpoint = (var_eb86d0d8f22c74, var_eb87d0d8f22ea7, var_2b0bb0a5c78456d3.startpoint[2]);
+        circleinfo.targetpoint = (targetx, targety, var_2b0bb0a5c78456d3.startpoint[2]);
         circleinfo.startpoint = (startx, starty, var_2b0bb0a5c78456d3.startpoint[2]);
         circleinfo.origin = circleinfo.startpoint;
         circleinfo.movespeed = var_2b0bb0a5c78456d3.var_feda7490ccc8ceda.var_d68e45e062983e30 * randomfloatrange(0.98, 1.02);

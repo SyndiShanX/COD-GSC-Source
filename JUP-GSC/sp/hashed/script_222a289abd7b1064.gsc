@@ -79,7 +79,7 @@ function function_ed5e75134533a928() {
   attackheli waittill("death");
   sound_ent stopsounds();
   sound_ent stoploopsound();
-  sound_ent function_b4b04de87729a6f3(0.1);
+  sound_ent delete_after_delay(0.1);
 }
 
 function function_22162fa427f12df8() {

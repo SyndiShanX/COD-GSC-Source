@@ -52,7 +52,7 @@ function init() {
   fx_init();
   ai_init();
   bots_init();
-  function_550bcd278c30275e();
+  agents_init();
   outline_init();
   game_utility_init();
   rank_init();
@@ -65,8 +65,8 @@ function init() {
   stealth_init();
   gameskill_init();
   poi_init();
-  function_c1199c7cd79918b3();
-  function_1bc257700c3d014e();
+  aggregator_init();
+  cameras_init();
   function_a30b248a8fc67a00();
   battlechatter_init();
   host_migration_init();
@@ -182,7 +182,7 @@ function ai_init() {
 
 function bots_init() {}
 
-function function_550bcd278c30275e() {}
+function agents_init() {}
 
 function outline_init() {}
 
@@ -202,9 +202,9 @@ function challenges_init() {}
 
 function function_a92ed2f4c44e5ffa() {}
 
-function function_c1199c7cd79918b3() {}
+function aggregator_init() {}
 
-function function_1bc257700c3d014e() {
+function cameras_init() {
   registersharedfunc("cameras", "GetCameraThirdPerson", &function_d08336d8c0380c5e);
   registersharedfunc("cameras", "GetCameraThirdPersonOrigin", &function_85c5056c9011e1bc);
 }
@@ -216,7 +216,7 @@ function battlechatter_init() {
 }
 
 function function_38dd76fb84086a72(origin, maxdist) {
-  maxdist = default_to(maxdist, level.var_587de0e7b537210a);
+  maxdist = default_to(maxdist, level.bcs_maxdist);
   return function_e3b3f0128f632da5(origin, maxdist);
 }
 
@@ -244,8 +244,8 @@ function private function_c77ea258b33422b0(weapname) {
   self giveweapon(weapname);
 }
 
-function private function_3ecab25ce099b78e(animname, notifystring, var_d3a7686bdb2b1c76, blendtype) {
-  self scriptmodelplayanimdeltamotion(animname, notifystring, var_d3a7686bdb2b1c76, blendtype);
+function private function_3ecab25ce099b78e(animname, notifystring, animstarttimeseconds, blendtype) {
+  self scriptmodelplayanimdeltamotion(animname, notifystring, animstarttimeseconds, blendtype);
 }
 
 function private function_cee516993ce8a5f4(set) {

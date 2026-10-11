@@ -652,7 +652,7 @@ function logevent_awardgained(award_message) {
   }
 
   if(isxhash(award_message)) {
-    award_message = function_f28fd66285fa2c9(award_message);
+    award_message = getxhashhexname(award_message);
   }
 
   dlog_recordevent("analytics_mp_awards", ["award_message", award_message]);
@@ -1068,7 +1068,7 @@ function logevent_killstreakavailable(player, lifeid, killstreakname, pickedup, 
     streaktype = "Points";
   }
 
-  player dlog_recordplayerevent("dlog_event_kill_streak_available", ["lifeindex", lifeid, "killstreak_name", killstreakname, "killstreak_pickedup", pickedup, "time_msfrommatchstart", matchtime, "playerposx", playerpos[0], "playerposy", playerpos[1], "playerposz", playerpos[2], "streak_type", function_1823ff50bb28148d(streaktype)]);
+  player dlog_recordplayerevent("dlog_event_kill_streak_available", ["lifeindex", lifeid, "killstreak_name", killstreakname, "killstreak_pickedup", pickedup, "time_msfrommatchstart", matchtime, "playerposx", playerpos[0], "playerposy", playerpos[1], "playerposz", playerpos[2], "streak_type", getxhash(streaktype)]);
 }
 
 function logevent_killstreakactivated(player, lifeid, killstreakname, pickedup, matchtime, playerpos) {
@@ -1078,7 +1078,7 @@ function logevent_killstreakactivated(player, lifeid, killstreakname, pickedup, 
     streaktype = "Points";
   }
 
-  player dlog_recordplayerevent("dlog_event_kill_streak_activated", ["lifeindex", lifeid, "killstreak_name", killstreakname, "killstreak_pickedup", pickedup, "time_msfrommatchstart", matchtime, "playerposx", playerpos[0], "playerposy", playerpos[1], "playerposz", playerpos[2], "streak_type", function_1823ff50bb28148d(streaktype)]);
+  player dlog_recordplayerevent("dlog_event_kill_streak_activated", ["lifeindex", lifeid, "killstreak_name", killstreakname, "killstreak_pickedup", pickedup, "time_msfrommatchstart", matchtime, "playerposx", playerpos[0], "playerposy", playerpos[1], "playerposz", playerpos[2], "streak_type", getxhash(streaktype)]);
 }
 
 function logevent_killstreakexpired(player, lifeid, killstreakname, pickedup, var_6befa2534acb8df6, playerpos, expiredbydeath, shotsfired, var_8f52823e77aca0d3, var_f5ff9a2f5217b3ec, var_7e6dbb913989cf29) {
@@ -1093,7 +1093,7 @@ function logevent_killstreakexpired(player, lifeid, killstreakname, pickedup, va
     streaktype = "Points";
   }
 
-  var_d3cf11436c80a43e = player dlog_recordplayerevent("dlog_event_kill_streak_expired", ["lifeindex", lifeid, "killstreak_name", killstreakname, "killstreak_pickedup", pickedup, "expiration_thru_death", expiredbydeath, "shots", shotsfired, "hits", var_8f52823e77aca0d3, "kills", var_f5ff9a2f5217b3ec, "score", var_7e6dbb913989cf29, "time_msfrommatchstart", expiredtime, "playerposx", playerpos[0], "playerposy", playerpos[1], "playerposz", playerpos[2], "streak_type", function_1823ff50bb28148d(streaktype)]);
+  var_d3cf11436c80a43e = player dlog_recordplayerevent("dlog_event_kill_streak_expired", ["lifeindex", lifeid, "killstreak_name", killstreakname, "killstreak_pickedup", pickedup, "expiration_thru_death", expiredbydeath, "shots", shotsfired, "hits", var_8f52823e77aca0d3, "kills", var_f5ff9a2f5217b3ec, "score", var_7e6dbb913989cf29, "time_msfrommatchstart", expiredtime, "playerposx", playerpos[0], "playerposy", playerpos[1], "playerposz", playerpos[2], "streak_type", getxhash(streaktype)]);
 
   if(isDefined(player scripts\mp\utility\stats::getpersstat("telemetry")) && isDefined(player scripts\mp\utility\stats::getpersstat("telemetry").kill_streak_expired_count) && var_d3cf11436c80a43e) {
     player.pers["telemetry"].kill_streak_expired_count++;

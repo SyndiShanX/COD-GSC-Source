@@ -6,9 +6,9 @@
 #using script_4a8c20678bd6a83e;
 #using scripts\asm\asm;
 #using scripts\engine\utility;
-#namespace namespace_560e78dfaa3a1c81;
+#namespace zombie_liveragdoll;
 
-function function_92fcbb3c9780deb7(taskid, params) {
+function processliveragdoll(taskid, params) {
   if(!ent_flag("in_liveragdoll")) {
     return anim.failure;
   }
@@ -16,12 +16,12 @@ function function_92fcbb3c9780deb7(taskid, params) {
   return anim.running;
 }
 
-function function_3c1b4ff1cb5f468d(source_pos, intensity) {
+function liveragdoll_ai(source_pos, intensity) {
   if(!isDefined(source_pos)) {
     return;
   }
 
-  if(function_cc4b0ff1f1c7aa1b()) {
+  if(is_liveragdoll()) {
     return;
   }
 
@@ -33,13 +33,13 @@ function function_3c1b4ff1cb5f468d(source_pos, intensity) {
     var_4f3eec7aecbb41bf = vectorNormalize(self.origin - source_pos);
     self function_babd8af3054d8abe("head", var_4f3eec7aecbb41bf * intensity, 1, 0);
   } else {
-    self function_360874d9808f0724();
+    self startliveragdoll();
   }
 
   function_ac90fa5cc0a80298("liveragdoll_in");
   return 1;
 }
 
-function function_cc4b0ff1f1c7aa1b() {
+function is_liveragdoll() {
   return ent_flag("in_liveragdoll");
 }

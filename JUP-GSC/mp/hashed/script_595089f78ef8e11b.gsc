@@ -12,10 +12,10 @@
 #namespace zombie_vox;
 
 function function_afb445939fe4c1a4() {
-  self.var_82420c8df7f30a5b = &function_e423d82a410af5dc;
+  self.var_82420c8df7f30a5b = &zombie_audio_callback;
 }
 
-function play_vox(ai, var_c2aec59361d95878, alias, priority) {
+function play_vox(ai, scriptable_state, alias, priority) {
   ai endon("death");
 
   if(getdvarint(@ "hash_d01570d79c646246", 0) != 0) {
@@ -63,9 +63,9 @@ function play_vox(ai, var_c2aec59361d95878, alias, priority) {
     ai ent_flag_set("playing_vo");
     time = lookupsoundlength(alias, 1);
 
-    if(isDefined(var_c2aec59361d95878)) {
+    if(isDefined(scriptable_state)) {
       assert(ai isscriptable());
-      ai utility::function_3677f2be30fdd581("sound_vo", var_c2aec59361d95878);
+      ai utility::function_3677f2be30fdd581("sound_vo", scriptable_state);
     } else {
       ai playsoundonmovingent(alias);
     }
@@ -81,8 +81,8 @@ function play_vox(ai, var_c2aec59361d95878, alias, priority) {
     return;
   }
 
-  if(isDefined(var_c2aec59361d95878)) {
-    ai utility::function_3677f2be30fdd581("sound_vo", var_c2aec59361d95878);
+  if(isDefined(scriptable_state)) {
+    ai utility::function_3677f2be30fdd581("sound_vo", scriptable_state);
     return;
   }
 
@@ -112,27 +112,27 @@ function function_9c62fac1f9fdd26c() {
   self.var_c381a581e38c27e7 = 0;
 }
 
-function function_f11270bb42f7f080(notify_string, var_c2aec59361d95878, alias, priority) {
+function function_f11270bb42f7f080(notify_string, scriptable_state, alias, priority) {
   level.var_a4adf98f94c5fd84 = default_to(level.var_a4adf98f94c5fd84, []);
   level.var_a4adf98f94c5fd84[self.basearchetype] = default_to(level.var_a4adf98f94c5fd84[self.basearchetype], []);
   state = spawnStruct();
-  state.var_c2aec59361d95878 = var_c2aec59361d95878;
+  state.scriptable_state = scriptable_state;
   state.priority = priority;
   state.alias = alias;
   level.var_a4adf98f94c5fd84[self.basearchetype][notify_string] = state;
 }
 
-function function_ea9336bca9113548(var_a8a2867722a244ed, notify_string, var_c2aec59361d95878, alias, priority) {
+function function_ea9336bca9113548(subclass_string, notify_string, scriptable_state, alias, priority) {
   level.var_a4adf98f94c5fd84 = default_to(level.var_a4adf98f94c5fd84, []);
   level.var_a4adf98f94c5fd84[self.basearchetype] = default_to(level.var_a4adf98f94c5fd84[self.basearchetype], []);
   state = spawnStruct();
-  state.var_c2aec59361d95878 = var_c2aec59361d95878;
+  state.scriptable_state = scriptable_state;
   state.priority = priority;
   state.alias = alias;
-  level.var_a4adf98f94c5fd84[self.basearchetype][notify_string + var_a8a2867722a244ed] = state;
+  level.var_a4adf98f94c5fd84[self.basearchetype][notify_string + subclass_string] = state;
 }
 
-function private function_e423d82a410af5dc(state) {
+function private zombie_audio_callback(state) {
   function_f707c26d8f269f94(state);
 }
 
@@ -155,16 +155,16 @@ function function_f707c26d8f269f94(event) {
     return;
   }
 
-  var_c2aec59361d95878 = var_42db284ef44b45b.var_c2aec59361d95878;
+  scriptable_state = var_42db284ef44b45b.scriptable_state;
   alias = var_42db284ef44b45b.alias;
   priority = var_42db284ef44b45b.priority;
 
   if(isDefined(self.var_74e2482f0c021e12)) {
-    level thread[[self.var_74e2482f0c021e12]](event, self, var_c2aec59361d95878, alias, priority);
+    level thread[[self.var_74e2482f0c021e12]](event, self, scriptable_state, alias, priority);
     return;
   }
 
-  level thread play_vox(self, var_c2aec59361d95878, alias, priority);
+  level thread play_vox(self, scriptable_state, alias, priority);
 }
 
 function function_3b76e1d247d2f5a(var_74e2482f0c021e12) {

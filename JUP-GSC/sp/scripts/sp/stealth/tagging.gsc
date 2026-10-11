@@ -320,7 +320,7 @@ function tagging_think() {
 function tag_update_enemy_in_sights() {
   entitylist = tagging_entity_list();
   eye = self getEye();
-  var_87ea8542a557d603 = anglesToForward(self getplayerangles());
+  viewdir = anglesToForward(self getplayerangles());
   var_bffac07b1b82af17 = undefined;
   var_5c5bc7719e4b1c11 = max(0.01, getdvarfloat(@ "hash_f05c8f3735320c7c"));
   var_2cebd0c753447713 = cos(getdvarfloat(@ "hash_804a2291b4a8b92e"));
@@ -331,7 +331,7 @@ function tag_update_enemy_in_sights() {
     var_2cebd0c753447713 = cos(getdvarfloat(@ "cg_fov"));
   }
 
-  trace = scripts\engine\trace::_bullet_trace(eye, eye + var_87ea8542a557d603 * 32000, 1, self);
+  trace = scripts\engine\trace::_bullet_trace(eye, eye + viewdir * 32000, 1, self);
   var_bffac07b1b82af17 = trace["entity"];
 
   foreach(entity in entitylist) {
@@ -369,7 +369,7 @@ function tag_update_enemy_in_sights() {
           testpoint = vectorlerp(entity.origin, enemyeye, check);
           delta = testpoint - eye;
           dir = vectorNormalize(delta);
-          dot = vectordot(dir, var_87ea8542a557d603);
+          dot = vectordot(dir, viewdir);
 
           if(dot > var_f290de2119e68c76) {
             if(enemy_sight_trace_passed(entity)) {

@@ -42,7 +42,7 @@ function private function_41496c26b8d3660c(spawndata, faildata) {
     vehicle.vehiclesetuprope = 1;
     vehicle vehicle_setspeed(60, 20, 10);
     vehicle.preventrespawn = 1;
-    vehicle.var_a8f4bb03b366aa80 = 1;
+    vehicle.dontspawnhusk = 1;
     vehicle.deathfunc = &vehicle_death;
     vehicle scripts\cp_mp\vehicles\vehicle_occupancy::function_a91927df280e94e4();
   }

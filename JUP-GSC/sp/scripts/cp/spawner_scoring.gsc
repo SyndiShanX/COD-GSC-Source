@@ -1357,7 +1357,7 @@ function is_close_to_player_z(spawnpoint, player_index) {
   return 1000 / int(z_diff / 32);
 }
 
-function score_spawner_relative_to_objective(var_9832dde9afb5565c, objpos, var_1f810c7df46ffb0e, var_a299bae2b12aa472) {
+function score_spawner_relative_to_objective(refpos, objpos, var_1f810c7df46ffb0e, var_a299bae2b12aa472) {
   bestscore = 1000;
   bestdot = 0.707;
   var_935ba925e6fc497c = -0.5;
@@ -1365,7 +1365,7 @@ function score_spawner_relative_to_objective(var_9832dde9afb5565c, objpos, var_1
   var_244a6693d35086e1 = 0;
   var_528c2ba90b381005 = 1024;
   var_88a5204c5dee932e = 262144;
-  var_e1f1195815227fe0 = objpos - var_9832dde9afb5565c;
+  var_e1f1195815227fe0 = objpos - refpos;
   var_e1f1195815227fe0 = (var_e1f1195815227fe0[0], var_e1f1195815227fe0[1], 0);
   var_f0fd166c750fac7c = length(var_e1f1195815227fe0);
 

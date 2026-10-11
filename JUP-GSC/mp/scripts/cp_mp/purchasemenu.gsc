@@ -11,8 +11,8 @@
 function init() {
   level.purchasemenu = [];
 
-  if(isDefined(level.gamemodebundle.var_5f311b186975c63d)) {
-    var_cf4e196fe0e8f2aa = getscriptbundle(level.gamemodebundle.var_5f311b186975c63d);
+  if(isDefined(level.gamemodebundle.purchasemenulist)) {
+    var_cf4e196fe0e8f2aa = getscriptbundle(level.gamemodebundle.purchasemenulist);
 
     if(isDefined(level.var_b25a2c14d4e17e75)) {
       var_cf4e196fe0e8f2aa = getscriptbundle(level.var_b25a2c14d4e17e75);
@@ -49,7 +49,7 @@ function function_904f24ea774b8f6f(menuref, itemindex) {
   if(isDefined(item_bundle)) {
     item_struct = spawnStruct();
     item_struct.cost = item_bundle.cost;
-    item_struct.var_91839babd32261f4 = item_bundle.scriptablename;
+    item_struct.scriptable_name = item_bundle.scriptablename;
     item_struct.tier = item_bundle.tier;
     item_struct.itemref = item_bundle.itemref;
     item_struct.itemid = item_bundle.itemid;

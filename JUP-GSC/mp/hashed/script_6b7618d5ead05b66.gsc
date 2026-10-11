@@ -155,7 +155,7 @@ function private function_12f03b76f27611e3(teamname) {
     players = getteamdata(teamname, "players");
 
     foreach(ai in self.var_ffb8dd38bb2fcb3a) {
-      var_35d198c823443318 = undefined;
+      playertotarget = undefined;
       mindist = 1000000000;
 
       foreach(player in players) {
@@ -163,16 +163,16 @@ function private function_12f03b76f27611e3(teamname) {
 
         if(distancetoplayer < mindist) {
           mindist = distancetoplayer;
-          var_35d198c823443318 = player;
+          playertotarget = player;
         }
       }
 
-      if(!isDefined(var_35d198c823443318)) {
+      if(!isDefined(playertotarget)) {
         continue;
       }
 
-      if(!ai cansee(var_35d198c823443318) && mindist > 50 && mindist < 500) {
-        scripts\mp\ai_behavior::function_a5117518725da028(ai, var_35d198c823443318.origin);
+      if(!ai cansee(playertotarget) && mindist > 50 && mindist < 500) {
+        scripts\mp\ai_behavior::function_a5117518725da028(ai, playertotarget.origin);
       }
     }
 

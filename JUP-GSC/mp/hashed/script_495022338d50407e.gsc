@@ -141,7 +141,7 @@ function function_a22953d5c684962b(teamname) {
   task_ended(teamname);
 }
 
-function function_4071d82a4af35fc(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_4071d82a4af35fc(instance, part, state, player, bautouse, usestring) {
   if(state == "usable") {
     instance setscriptablepartstate(part, "unusable");
     var_58acad1090b81311 = array_contains(instance.task.teams, player.team);

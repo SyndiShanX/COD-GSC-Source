@@ -180,7 +180,7 @@ function player_interactive_think(infil) {
   thread combat_end();
 
   if(!isai(self)) {
-    scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+    scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   }
 
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
@@ -648,12 +648,12 @@ function spawnheli(scene_node, team, scene_name) {
   return blima;
 }
 
-function helifollowpath(var_ba4c16ad30a65991) {
-  if(!isDefined(var_ba4c16ad30a65991)) {
+function helifollowpath(pathname) {
+  if(!isDefined(pathname)) {
     return;
   }
 
-  currentnode = getStruct(var_ba4c16ad30a65991, "targetname");
+  currentnode = getStruct(pathname, "targetname");
 
   if(!isDefined(currentnode)) {
     return;
@@ -985,7 +985,7 @@ function combat_end() {
   setrecoilscale();
 }
 
-function blima_commander_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function blima_commander_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     player playsoundtoplayer(alias, player);
   }
@@ -1021,9 +1021,9 @@ function giveinteractiveinfilweapon() {
   return success;
 }
 
-function updatehighinfilscore(var_5936722eda95901a) {
-  level.highestinfilname = var_5936722eda95901a.name;
-  level.highestinfilscore = var_5936722eda95901a.infilscore;
+function updatehighinfilscore(highestplayer) {
+  level.highestinfilname = highestplayer.name;
+  level.highestinfilscore = highestplayer.infilscore;
 
   foreach(player in level.players) {
     if(player.team == "allies") {

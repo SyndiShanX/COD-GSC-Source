@@ -85,6 +85,6 @@ function function_7dbeff3d392879b3() {
 }
 
 function function_91be4c07add55c1a(uavmodel) {
-  uavmodel function_5226227bce83ebe9(3, uavmodel.team);
+  uavmodel setentityhudoutlinedata(3, uavmodel.team);
   return uavmodel;
 }

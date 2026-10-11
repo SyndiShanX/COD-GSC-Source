@@ -252,16 +252,16 @@ function get_weapon_with_most_kills(excluders) {
   highest = undefined;
 
   foreach(weapon in self.stats["weapon"]) {
-    var_d9d651e140802775 = 0;
+    isexcluder = 0;
 
     foreach(excluder in excluders) {
       if(weapon.name == excluder.name) {
-        var_d9d651e140802775 = 1;
+        isexcluder = 1;
         break;
       }
     }
 
-    if(var_d9d651e140802775) {
+    if(isexcluder) {
       continue;
     }
 

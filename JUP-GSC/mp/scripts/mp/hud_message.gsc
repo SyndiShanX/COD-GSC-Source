@@ -199,7 +199,7 @@ function onplayerconnect() {
   }
 }
 
-function showkillstreaksplash(splashref, streakval, fromcarepackage, var_42b1e877ab187c6) {
+function showkillstreaksplash(splashref, streakval, fromcarepackage, splashlistoverride) {
   if(!isPlayer(self)) {
     return;
   }
@@ -211,10 +211,10 @@ function showkillstreaksplash(splashref, streakval, fromcarepackage, var_42b1e87
   }
 
   splashref = getspecialistsplashfromkillstreak(splashref);
-  showsplash(splashref, streakval, undefined, altdisplayindex, undefined, var_42b1e877ab187c6);
+  showsplash(splashref, streakval, undefined, altdisplayindex, undefined, splashlistoverride);
 
   if(!scripts\cp_mp\utility\game_utility::function_b2c4b42f9236924()) {
-    scripts\cp_mp\utility\killstreak_utility::playkillstreakteamleaderdialog(splashref, function_1823ff50bb28148d(splashref));
+    scripts\cp_mp\utility\killstreak_utility::playkillstreakteamleaderdialog(splashref, getxhash(splashref));
   }
 }
 
@@ -229,7 +229,7 @@ function getspecialistsplashfromkillstreak(splashref) {
   return var_fec8b7a457ed3a4f;
 }
 
-function showsplashwithkillcheckhack(ref, optionalnumber, playerforplayercard, altdisplayindex, var_42b1e877ab187c6, forceshow) {
+function showsplashwithkillcheckhack(ref, optionalnumber, playerforplayercard, altdisplayindex, splashlistoverride, forceshow) {
   level endon("game_ended");
   self endon("disconnect");
   waitframe();
@@ -240,14 +240,14 @@ function showsplashwithkillcheckhack(ref, optionalnumber, playerforplayercard, a
     wait delaytime / 1000;
   }
 
-  showsplash(ref, optionalnumber, playerforplayercard, altdisplayindex, 1, var_42b1e877ab187c6, forceshow);
+  showsplash(ref, optionalnumber, playerforplayercard, altdisplayindex, 1, splashlistoverride, forceshow);
 }
 
-function function_51614e8fce37b07f(ref, var_42b1e877ab187c6) {
-  showsplash(ref, undefined, undefined, undefined, undefined, var_42b1e877ab187c6);
+function function_51614e8fce37b07f(ref, splashlistoverride) {
+  showsplash(ref, undefined, undefined, undefined, undefined, splashlistoverride);
 }
 
-function showsplash(ref, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, var_42b1e877ab187c6, forceshow) {
+function showsplash(ref, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, splashlistoverride, forceshow) {
   if(function_4e3eb46838440959() && !istrue(forceshow)) {
     return;
   }
@@ -255,7 +255,7 @@ function showsplash(ref, optionalnumber, playerforplayercard, altdisplayindex, v
   assert(isPlayer(self));
 
   if(!istrue(var_ef4849b4cb3ac7e2)) {
-    thread showsplashwithkillcheckhack(ref, optionalnumber, playerforplayercard, altdisplayindex, var_42b1e877ab187c6, forceshow);
+    thread showsplashwithkillcheckhack(ref, optionalnumber, playerforplayercard, altdisplayindex, splashlistoverride, forceshow);
     return;
   }
 
@@ -266,7 +266,7 @@ function showsplash(ref, optionalnumber, playerforplayercard, altdisplayindex, v
   }
 
   if(isDefined(self.recentsplashcount) && self.recentsplashcount >= 6) {
-    queuesplash(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, var_42b1e877ab187c6);
+    queuesplash(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, splashlistoverride);
     return;
   }
 
@@ -277,14 +277,14 @@ function showsplash(ref, optionalnumber, playerforplayercard, altdisplayindex, v
   }
 
   if(!isreallyalive(self) && isPlayer(self) && !self iscodcaster() && !var_44d582ed00c6eb0b) {
-    queuesplash(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, var_42b1e877ab187c6);
+    queuesplash(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, splashlistoverride);
     return;
   }
 
-  showsplashinternal(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, var_42b1e877ab187c6);
+  showsplashinternal(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, splashlistoverride);
 }
 
-function showsplashinternal(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, var_42b1e877ab187c6) {
+function showsplashinternal(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, splashlistoverride) {
   if(!isPlayer(self)) {
     return;
   }
@@ -297,7 +297,7 @@ function showsplashinternal(ref, optionalnumber, playerforplayercard, playernumf
 
   if(getdvarint(@ "hash_ef4f06e55f320347", 0) == 1) {
     isscriptbundlesplash = 1;
-    splashid = function_73baf095c3b9cce6(ref, var_42b1e877ab187c6);
+    splashid = function_73baf095c3b9cce6(ref, splashlistoverride);
 
     if(!isDefined(splashid) || splashid < 0) {
       isscriptbundlesplash = 0;
@@ -308,13 +308,13 @@ function showsplashinternal(ref, optionalnumber, playerforplayercard, playernumf
     splashid = getsplashid(ref);
 
     if(!isDefined(splashid) || splashid < 0) {
-      splashid = function_73baf095c3b9cce6(ref, var_42b1e877ab187c6);
+      splashid = function_73baf095c3b9cce6(ref, splashlistoverride);
       isscriptbundlesplash = 1;
     }
   }
 
   if(!isDefined(splashid) || splashid < 0) {
-    assertmsg("<dev string:x1c>" + function_3c8848a3a11b2553(ref) + "<dev string:x45>" + getsplashtablename() + "<dev string:x64>");
+    assertmsg("<dev string:x1c>" + getxhashsourcename(ref) + "<dev string:x45>" + getsplashtablename() + "<dev string:x64>");
     return;
   }
 
@@ -377,14 +377,14 @@ function showsplashinternal(ref, optionalnumber, playerforplayercard, playernumf
   }
 }
 
-function queuesplash(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, var_42b1e877ab187c6) {
+function queuesplash(ref, optionalnumber, playerforplayercard, playernumforplayercard, altdisplayindex, splashlistoverride) {
   struct = spawnStruct();
   struct.ref = ref;
   struct.optionalnumber = optionalnumber;
   struct.playerforplayercard = playerforplayercard;
   struct.playernumforplayercard = playernumforplayercard;
   struct.altdisplayindex = altdisplayindex;
-  struct.var_42b1e877ab187c6 = var_42b1e877ab187c6;
+  struct.splashlistoverride = splashlistoverride;
 
   if(!isDefined(self.splashqueuehead)) {
     self.splashqueuehead = struct;
@@ -412,7 +412,7 @@ function handlesplashqueue() {
 
     for(queueindex = 0; queueindex < 6; queueindex++) {
       struct = self.splashqueuehead;
-      showsplashinternal(struct.ref, struct.optionalnumber, struct.playerforplayercard, struct.playernumforplayercard, struct.altdisplayindex, struct.var_42b1e877ab187c6);
+      showsplashinternal(struct.ref, struct.optionalnumber, struct.playerforplayercard, struct.playernumforplayercard, struct.altdisplayindex, struct.splashlistoverride);
       self.splashqueuehead = struct.nextsplash;
 
       if(!isDefined(self.splashqueuehead)) {
@@ -449,7 +449,7 @@ function getsplashid(splashref) {
   return id;
 }
 
-function function_73baf095c3b9cce6(splashref, var_42b1e877ab187c6) {
+function function_73baf095c3b9cce6(splashref, splashlistoverride) {
   id = level.var_4cd98c0c1064cfc0[splashref];
 
   if(isDefined(id)) {
@@ -458,8 +458,8 @@ function function_73baf095c3b9cce6(splashref, var_42b1e877ab187c6) {
 
   var_c1c3e6a4f162ab45 = undefined;
 
-  if(isDefined(var_42b1e877ab187c6)) {
-    var_c1c3e6a4f162ab45 = var_42b1e877ab187c6;
+  if(isDefined(splashlistoverride)) {
+    var_c1c3e6a4f162ab45 = splashlistoverride;
   }
 
   if(!isDefined(var_c1c3e6a4f162ab45) && isDefined(level.gametypebundle)) {
@@ -489,13 +489,13 @@ function function_73baf095c3b9cce6(splashref, var_42b1e877ab187c6) {
       continue;
     }
 
-    assertex(isDefined(var_68cc4b3bf54adcfe.splashbundle), "<dev string:x108>" + function_f28fd66285fa2c9(splashref));
+    assertex(isDefined(var_68cc4b3bf54adcfe.splashbundle), "<dev string:x108>" + getxhashhexname(splashref));
     id = undefined;
 
     if(isDefined(var_68cc4b3bf54adcfe.splashbundle)) {
       id = function_2336488258354fbc(#"scriptbundle_splash", hashcat(%"hash_39857ea6520cf871", var_68cc4b3bf54adcfe.splashbundle));
     } else {
-      scripts\mp\utility\script::function_7bd154ad046984e2("Undefined splashListEntry.splashBundle for splashName: " + function_f28fd66285fa2c9(splashref));
+      scripts\mp\utility\script::function_7bd154ad046984e2("Undefined splashListEntry.splashBundle for splashName: " + getxhashhexname(splashref));
     }
 
     if(!isDefined(id)) {
@@ -554,12 +554,12 @@ function lowermessagethink() {
 
   messagey = level.lowertexty;
   var_4c254f3e1813b5ac = level.lowertextfontsize;
-  var_ed9168da0f317746 = 1.25;
+  timerfontsize = 1.25;
 
   if(level.splitscreen || self issplitscreenplayer() && !isai(self)) {
     messagey -= 40;
     var_4c254f3e1813b5ac = level.lowertextfontsize * 1.3;
-    var_ed9168da0f317746 *= 1.5;
+    timerfontsize *= 1.5;
   }
 
   self.lowermessage = createfontstring(lowermessagefont, var_4c254f3e1813b5ac);
@@ -568,7 +568,7 @@ function lowermessagethink() {
   self.lowermessage.sort = 10;
   self.lowermessage.showinkillcam = 0;
   self.lowermessage setpoint("CENTER", level.lowertextyalign, 0, messagey);
-  self.lowertimer = createfontstring("default", var_ed9168da0f317746);
+  self.lowertimer = createfontstring("default", timerfontsize);
   self.lowertimer setparent(self.lowermessage);
   self.lowertimer setpoint("TOP", "BOTTOM", 0, 0);
   self.lowertimer settext("");

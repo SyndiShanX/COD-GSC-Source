@@ -29,7 +29,7 @@ function main() {
   level.stealth.fnaddeventplaybcs = &scripts\anim\battlechatter::addeventplaybcs;
   level.stealth.fnanimgenericcustomanimmode = &scripts\sp\anim::anim_generic_custom_animmode;
   level.stealth.fnthreatsightplayersightaudio = &threat_sight_player_sight_audio;
-  level.stealth.var_585390079b597cd6 = &function_9b25540da1b89219;
+  level.stealth.fnthreatsightplayersightaudiocleanup = &function_9b25540da1b89219;
   level notify("threat_sight_audio_enabled");
   level.stealth.var_ed06a52046d9f7a1 = &function_82079fb63bda0995;
   level.stealth.var_45cffb1cb64f32c7 = &function_e4eaeef9e706471e;
@@ -60,15 +60,15 @@ function set_stealth_mode_sp(enabled, musichidden, musicspotted) {
   }
 }
 
-function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc690b) {
+function threat_sight_player_sight_audio(anycansee, maxthreat, willdebugprint) {
   self endon("disconnect");
   self endon("death");
   self notify("threat_sight_player_sight_audio");
   self endon("threat_sight_player_sight_audio");
   level endon("threat_sight_audio_disabled");
 
-  if(!isDefined(var_67e8151f4dfc690b)) {
-    var_67e8151f4dfc690b = 0;
+  if(!isDefined(willdebugprint)) {
+    willdebugprint = 0;
   }
 
   aliases = ["ui_stealth_threat_low_lp", "ui_stealth_threat_med_lp", "ui_stealth_threat_high_lp"];
@@ -97,7 +97,7 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
     }
   }
 
-  if(var_67e8151f4dfc690b) {
+  if(willdebugprint) {
     printtoscreen2d(32, 492, "<dev string:x1c>" + maxthreat + "<dev string:x2a>" + anycansee + "<dev string:x2d>", (1, 1, 1), 1.5);
   }
 
@@ -120,8 +120,8 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
       var_1cda86eccb821ec6 = function_8ba164c5a84fbb48(self);
 
       if(maxthreat < 0.05) {
-        var_2df1b1f3e5b6238c = clamp(maxthreat, 0, 0.05);
-        mu = var_2df1b1f3e5b6238c / 0.05;
+        threat_clamped = clamp(maxthreat, 0, 0.05);
+        mu = threat_clamped / 0.05;
         vol_delta = 0.99;
         vol_lerp = 0.01 + vol_delta * mu;
         self.stealth.threat_sight_snd_vol = vol_lerp;
@@ -135,11 +135,11 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
 
     self.stealth.threat_sight_snd_vol = clamp(self.stealth.threat_sight_snd_vol, 0, 1);
 
-    if(var_67e8151f4dfc690b) {
+    if(willdebugprint) {
       printtoscreen2d(32, 508, "<dev string:x2f>" + self.stealth.threat_sight_snd_threat, (1, 1, 1), 1.5);
     }
 
-    if(var_67e8151f4dfc690b) {
+    if(willdebugprint) {
       printtoscreen2d(32, 524, "<dev string:x3d>" + self.stealth.threat_sight_snd_vol, (1, 1, 1), 1.5);
     }
 
@@ -199,11 +199,11 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
         snd_ent.isplaying = 0;
       }
 
-      if(var_67e8151f4dfc690b) {
+      if(willdebugprint) {
         printtoscreen2d(32, 540 + index * 16, "<dev string:x4b>" + index + "<dev string:x52>" + vol, (1, 1, 1), 1.5);
       }
 
-      if(var_67e8151f4dfc690b) {
+      if(willdebugprint) {
         printtoscreen2d(384, 540 + index * 16, "<dev string:x59>" + coef, (1, 1, 1), 1.5);
       }
 
@@ -244,16 +244,16 @@ function function_9b25540da1b89219() {
 }
 
 function function_82079fb63bda0995(anycansee, maxthreat) {
-  if((!isDefined(level.stealth.var_a87c21e5a33857a6) || level.stealth.var_a87c21e5a33857a6 <= 0) && maxthreat > 0 && maxthreat < 1) {
+  if((!isDefined(level.stealth.previousmaxthreat) || level.stealth.previousmaxthreat <= 0) && maxthreat > 0 && maxthreat < 1) {
     self playrumblelooponentity("damage_light");
-  } else if(isDefined(level.stealth.var_a87c21e5a33857a6) && level.stealth.var_a87c21e5a33857a6 > 0 && maxthreat <= 0) {
+  } else if(isDefined(level.stealth.previousmaxthreat) && level.stealth.previousmaxthreat > 0 && maxthreat <= 0) {
     self stoprumble("damage_light");
-  } else if((!isDefined(level.stealth.var_a87c21e5a33857a6) || isDefined(level.stealth.var_a87c21e5a33857a6) && level.stealth.var_a87c21e5a33857a6 < 1) && maxthreat >= 1) {
+  } else if((!isDefined(level.stealth.previousmaxthreat) || isDefined(level.stealth.previousmaxthreat) && level.stealth.previousmaxthreat < 1) && maxthreat >= 1) {
     self stoprumble("damage_light");
     self playRumbleOnEntity("damage_heavy");
   }
 
-  level.stealth.var_a87c21e5a33857a6 = maxthreat;
+  level.stealth.previousmaxthreat = maxthreat;
 }
 
 function function_e4eaeef9e706471e() {

@@ -54,7 +54,7 @@ function private function_c9829b50da991aa7() {
   namespace_70aa82e7f409bc33::function_8b5b2a3392fc7e2a("ActivitySuccess", &function_e07daf5fb2a4ecd3);
   scripts\mp\team_assimilation::registerteamassimilatecallback(&function_6bdc6f56944dc3aa);
   level callback::add("player_death", &onplayerdeath);
-  level callback::add("player_bleedout", &function_c9df4b28bedf5ec1);
+  level callback::add("player_bleedout", &onplayerbleedout);
   level callback::add("player_item_pickup", &function_8f0a47e1cf524712);
   level callback::add("player_item_drop", &function_4f1adf081c36fa5e);
   level callback::add("ob_exfil_success", &function_ac298c756f30aea6);
@@ -69,7 +69,7 @@ function private function_8f0a47e1cf524712(params) {
   level.var_47836aaadb2f1a42 = self;
   level.lootcase = undefined;
   function_39b0f5685623cc2d();
-  thread function_5dba5727a1d524c2();
+  thread updateobjectiveicon();
   teammates = [];
   enemies = [];
 
@@ -106,7 +106,7 @@ function private function_8f0a47e1cf524712(params) {
   }
 }
 
-function private function_5dba5727a1d524c2() {
+function private updateobjectiveicon() {
   var_15ec0591e2caa999 = namespace_871f41e67db0bf7a::function_40062e64625f8b19("jup_ob_objectivemarker_lootcase");
   scripts\mp\objidpoolmanager::update_objective_onentity(var_15ec0591e2caa999, self);
   scripts\mp\objidpoolmanager::function_df6a3e032fa07d22(var_15ec0591e2caa999);
@@ -393,7 +393,7 @@ function function_51d188c6831d55e6() {
   return randomint(100) >= 50;
 }
 
-function function_c9df4b28bedf5ec1(params) {
+function onplayerbleedout(params) {
   if(isPlayer(self.laststandattacker) && function_51d188c6831d55e6()) {
     function_6ea1d9d856da2fd(self.laststandattacker.team);
   }

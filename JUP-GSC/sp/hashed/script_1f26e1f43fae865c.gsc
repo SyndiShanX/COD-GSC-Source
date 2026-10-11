@@ -148,7 +148,7 @@ function function_1a36b4303dafa62() {
     }
 
     shot_end = undefined;
-    var_98ccb7441919420b = 0;
+    shot_hit = 0;
     var_e014aa33281c00d8 = 0.7;
 
     if(flag("flag_dungeon_apt_player_low_health")) {
@@ -156,7 +156,7 @@ function function_1a36b4303dafa62() {
     }
 
     if(randomfloat(1) <= var_e014aa33281c00d8 && !var_57a6f36ed19b10a6) {
-      var_98ccb7441919420b = 1;
+      shot_hit = 1;
       thread function_37bd1c32c1e3741b(shoot_target);
       shot_end = shoot_target gettagorigin("j_head");
     } else {
@@ -167,7 +167,7 @@ function function_1a36b4303dafa62() {
 
     line(level.ally gettagorigin("<dev string:x1c>"), shot_end, (0.7, 0.7, 0.7), 1, 1, 30);
 
-    if(istrue(var_98ccb7441919420b)) {
+    if(istrue(shot_hit)) {
       shoot_target kill();
     }
   }

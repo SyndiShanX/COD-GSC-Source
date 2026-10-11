@@ -56,7 +56,7 @@ function choosebestweapon() {
 function getsidearmdist() {
   var_8465f7779f8a19a = isusingsidearm();
   sidearmdist = 409;
-  bsniper = self function_e8ca4080d02a0bb4(0);
+  bsniper = self aiissniper(0);
 
   if(bsniper) {
     sidearmdist = 512;
@@ -100,7 +100,7 @@ function evalweaponscore(weapclass, weapon) {
     }
 
     withindist = withinswitchtopistoldist();
-    bsniper = self function_e8ca4080d02a0bb4(0);
+    bsniper = self aiissniper(0);
 
     if(withindist) {
       assert(isDefined(self.enemy));
@@ -136,7 +136,7 @@ function evalweaponscore(weapclass, weapon) {
 }
 
 function issniper(task) {
-  if(self function_e8ca4080d02a0bb4()) {
+  if(self aiissniper()) {
     return anim.success;
   }
 

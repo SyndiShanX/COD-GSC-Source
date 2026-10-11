@@ -89,7 +89,7 @@ function on_player_connect(sparams) {
 }
 
 function on_player_spawn(sparams) {
-  function_f9a207358d70923c(6, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
+  delaythreadendon(6, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
 }
 
 function on_player_death(sparams) {
@@ -206,7 +206,7 @@ function function_115bd456be8e071d(players, var_9adc1bcdce9cf8b0, var_c342527a25
             n_delay_time = var_9a14baa9cc6e37a2;
           }
 
-          player utility::function_f9a207358d70923c(n_delay_time, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
+          player utility::delaythreadendon(n_delay_time, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
         }
       }
     }
@@ -338,7 +338,7 @@ function function_946170834c0bd1b8(var_b381b0883bcd4847) {
     return;
   }
 
-  if(namespace_68dc261109a9503f::function_73bd348a2ec322cf(activity) == "EndedState") {
+  if(namespace_68dc261109a9503f::getactivitystate(activity) == "EndedState") {
     return;
   }
 
@@ -347,7 +347,7 @@ function function_946170834c0bd1b8(var_b381b0883bcd4847) {
       if(isPlayer(player)) {
         if(!istrue(player.var_f52eb40ba99ffa4c)) {
           player setplayermusicstate("");
-          player function_f9a207358d70923c(10, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
+          player delaythreadendon(10, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
         }
       }
     }
@@ -362,14 +362,14 @@ function function_ea04142a3f9551e(var_b381b0883bcd4847) {
     return;
   }
 
-  if(namespace_68dc261109a9503f::function_73bd348a2ec322cf(activity) == "EndedState") {
+  if(namespace_68dc261109a9503f::getactivitystate(activity) == "EndedState") {
     return;
   }
 
   if(!istrue(activity.var_ba0897d3462d3c4a)) {
     foreach(player in player_list) {
       if(isPlayer(player)) {
-        player function_f9a207358d70923c(10, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
+        player delaythreadendon(10, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
       }
     }
   }
@@ -382,7 +382,7 @@ function function_f838009e5997e512(var_b381b0883bcd4847) {
     return;
   }
 
-  if(namespace_68dc261109a9503f::function_73bd348a2ec322cf(activity) != "ActiveState") {
+  if(namespace_68dc261109a9503f::getactivitystate(activity) != "ActiveState") {
     return;
   }
 
@@ -404,14 +404,14 @@ function function_b1008f8393393a(var_b381b0883bcd4847) {
     return;
   }
 
-  if(namespace_68dc261109a9503f::function_73bd348a2ec322cf(activity) != "ActiveState") {
+  if(namespace_68dc261109a9503f::getactivitystate(activity) != "ActiveState") {
     return;
   }
 
   if(!istrue(activity.var_ba0897d3462d3c4a)) {
     foreach(player in var_b381b0883bcd4847.playerlist) {
       if(istrue(function_4ab1cdfd84bbd3f2(activity, player))) {
-        player function_f9a207358d70923c(15, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
+        player delaythreadendon(15, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
       }
     }
 
@@ -421,7 +421,7 @@ function function_b1008f8393393a(var_b381b0883bcd4847) {
   foreach(player in var_b381b0883bcd4847.playerlist) {
     if(istrue(function_4ab1cdfd84bbd3f2(activity, player))) {
       player setplayermusicstate("");
-      player function_f9a207358d70923c(15, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
+      player delaythreadendon(15, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
     }
   }
 }
@@ -450,7 +450,7 @@ function function_64ad2696cde68985(params) {
       if(!isDefined(params.old_difficulty) || params.new_difficulty != params.old_difficulty) {
         params.player function_1b4c60d1baa7885f("outbreak_" + params.new_difficulty);
         params.player function_6c107904f41fa075(params.new_difficulty);
-        params.player function_f9a207358d70923c(10, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
+        params.player delaythreadendon(10, ["sndObMusicChanging", "sndObUnderscoreOff"], &function_be5acb731f2fef4a);
       }
 
       return;
@@ -463,8 +463,8 @@ function function_64ad2696cde68985(params) {
 function function_b25d8d2c8ab3cfb2(player) {
   var_9d0a2cc88b985e38 = function_553a690e1064cf0b(player);
 
-  foreach(instanceid, var_b71e9b133c89cc7b in var_9d0a2cc88b985e38) {
-    activityinstance = function_1f3e343912ae15c5(instanceid);
+  foreach(instanceid, instanceinfostruct in var_9d0a2cc88b985e38) {
+    activityinstance = getactivityinstance(instanceid);
 
     if(isDefined(activityinstance)) {
       if(function_1de0e40ac4e9356f(activityinstance) || function_6e345470b71653a4(activityinstance)) {

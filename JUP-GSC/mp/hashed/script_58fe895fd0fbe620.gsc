@@ -34,7 +34,7 @@ function function_80d68c9701e1aea5(data) {
   level.demoprops.explodetime = getdvarint(@ "hash_5243a49d736c276a", 45);
   level.demoprops.planttime = getdvarint(@ "hash_4bdb410d2186f5ee", 5);
   level.demoprops.defusetime = getdvarint(@ "hash_b41d9e16b59e4339", 5);
-  level.demoprops.var_7ade8fac6578b011 = getdvarint(@ "hash_a7d16b728a6465e6", 4);
+  level.demoprops.minagents = getdvarint(@ "hash_a7d16b728a6465e6", 4);
   level.demoprops.maxagents = getdvarint(@ "hash_2f3b4e80c7494134", 7);
   level.demoprops.reinforcesites = getdvarint(@ "hash_331ed4c738fc999d", 0);
   level._effect["samsite_bomb_explosion"] = loadfx("vfx/iw8_mp/gamemode/vfx_search_bombsite_destroy.vfx");
@@ -120,8 +120,8 @@ function function_129f1ef2e5686f84() {
   self.bombsexploded = 0;
   self.node function_402ebb691260e816();
   self.end function_402ebb691260e816();
-  self.node thread function_49c1da07d69b6895(randomintrange(level.demoprops.var_7ade8fac6578b011, level.demoprops.maxagents + 1));
-  self.end thread function_49c1da07d69b6895(randomintrange(level.demoprops.var_7ade8fac6578b011, level.demoprops.maxagents + 1));
+  self.node thread function_49c1da07d69b6895(randomintrange(level.demoprops.minagents, level.demoprops.maxagents + 1));
+  self.end thread function_49c1da07d69b6895(randomintrange(level.demoprops.minagents, level.demoprops.maxagents + 1));
   self.initialized = 1;
   self notify("task_initialized");
 }
@@ -242,7 +242,7 @@ function function_402ebb691260e816() {
 }
 
 function function_49c1da07d69b6895(numagents) {
-  basetier = function_9b6306b0cd33bd79(self.origin);
+  basetier = subarea_getsubareadifficultyfromorigin(self.origin);
   aitype = scripts\mp\ai_mp_controller::function_d5bc07eabf352abb(undefined, undefined, "short_range", undefined, basetier + 1);
   forwarddist = anglesToForward(self.angles) * 80;
   origin = getclosestpointonnavmesh(self.origin + forwarddist);
@@ -298,7 +298,7 @@ function function_accead05b2c47cb7() {
     effect = "samsite_bomb_explosion";
     explosionpos = self.plantedbomb.origin + (0, 0, 50);
     explosioneffect = spawnfx(level._effect[effect], explosionpos);
-    explosioneffect thread function_b4b04de87729a6f3(10);
+    explosioneffect thread delete_after_delay(10);
     triggerfx(explosioneffect);
     physicsexplosionsphere(explosionpos, 200, 100, 3);
     playrumbleonposition("grenade_rumble", self.plantedbomb.origin);
@@ -311,7 +311,7 @@ function function_accead05b2c47cb7() {
       effect = "bombsite_explosion";
       explosionpos = self.site.origin;
       explosioneffect = spawnfx(level._effect[effect], explosionpos);
-      explosioneffect thread function_b4b04de87729a6f3(10);
+      explosioneffect thread delete_after_delay(10);
       triggerfx(explosioneffect);
       physicsexplosionsphere(explosionpos, 200, 100, 3);
       playrumbleonposition("grenade_rumble", self.site.origin);
@@ -444,7 +444,7 @@ function function_d492de2e54f2fa53() {
   }
 }
 
-function function_4cadbb00ef649ee1(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_4cadbb00ef649ee1(instance, part, state, player, bautouse, usestring) {
   if(part != "dmz_supply_site_use") {
     return;
   }
@@ -572,7 +572,7 @@ function private function_1839a40e099bb63f() {
   thread scripts\cp_mp\overlord::function_9793a81bc3bc19e9("demolition_defused", planterteam, 1.5);
   self.task function_a1738a95d7aa8094("dmz_demo_defused_lose", "demo", 0, planterteam);
   function_c1fd3441ccfba6f8(planterteam, "dmz_activity_lose", 1, "dmz_activity_lose_classic");
-  scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onBombDefused", self.defuseplayer);
+  scripts\engine\utility::callsharedfunc("pmc_missions", "onBombDefused", self.defuseplayer);
   self.task function_cd4f277cf0d6a560(defuseteam);
   self.task thread function_930bc6dc39f516db(undefined);
   wait 10;

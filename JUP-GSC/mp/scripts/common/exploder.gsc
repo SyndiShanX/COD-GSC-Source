@@ -131,8 +131,8 @@ function setupexploders() {
     ent.v["type"] = "exploder";
     ent.v["dotraces"] = exploder.script_trace;
     ent.v["envonly"] = exploder.script_envonly;
-    ent.v["area_swap_index"] = exploder.var_70fc63ef46137e97;
-    ent.v["area_swap_state"] = exploder.var_6d7dc2bcfc863ad2;
+    ent.v["area_swap_index"] = exploder.script_area_swap_index;
+    ent.v["area_swap_state"] = exploder.script_area_swap_state;
 
     if(!isDefined(ent.v["angles"])) {
       ent.v["angles"] = (0, 0, 0);

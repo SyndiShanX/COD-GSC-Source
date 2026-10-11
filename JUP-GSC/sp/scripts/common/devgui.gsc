@@ -110,7 +110,7 @@ function function_df648211d66cd3dd(path, dvar, index) {
   thread add_debug_command("<dev string:x7a>" + path + "<dev string:x58>" + index + "<dev string:x88>" + dvar + "<dev string:x49>");
 }
 
-function function_b2159fbbd7ac094e(path, var_eab44bfaa256f64b, index) {
+function function_b2159fbbd7ac094e(path, dvar_xhash, index) {
   if(!isDefined(index)) {
     assert(isDefined(level.var_d8852dd07270dbac));
     index = level.var_d8852dd07270dbac.index;
@@ -121,8 +121,8 @@ function function_b2159fbbd7ac094e(path, var_eab44bfaa256f64b, index) {
     path = level.var_d8852dd07270dbac.base_path + path;
   }
 
-  setdevdvarifuninitialized(var_eab44bfaa256f64b, 0);
-  thread add_debug_command("<dev string:x4b>" + path + "<dev string:x58>" + index + "<dev string:x8b>" + function_3c8848a3a11b2553(var_eab44bfaa256f64b) + "<dev string:x97>");
+  setdevdvarifuninitialized(dvar_xhash, 0);
+  thread add_debug_command("<dev string:x4b>" + path + "<dev string:x58>" + index + "<dev string:x8b>" + getxhashsourcename(dvar_xhash) + "<dev string:x97>");
 }
 
 function function_b23a59dfb4ca49a1(path, var_9af94c1035c9530e, func, toggle, index) {

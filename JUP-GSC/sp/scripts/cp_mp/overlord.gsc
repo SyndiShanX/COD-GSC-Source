@@ -19,7 +19,7 @@ function init() {
   level.overlord = spawnStruct();
   level.overlord.events = [];
   level.overlord.conversations = [];
-  level.var_60fc087bc7deaadc = &function_60fc087bc7deaadc;
+  level.setoverlordlockedpriority = &setoverlordlockedpriority;
   level thread function_2b7b925f1037e020();
   level.overlord.var_f122d73bb796754c = getdvarint(@ "hash_99ee36f514cfdc16", 3);
 
@@ -73,7 +73,7 @@ function function_2b7b925f1037e020() {
       foreach(var_87fc95d97eb08ba9 in s_bundle.var_423f1766afe848b9) {
         if(isDefined(var_87fc95d97eb08ba9.alias)) {
           timeout = lookupsoundlength(var_87fc95d97eb08ba9.alias, 1) / 1000 + 2;
-          registerevent(var_87fc95d97eb08ba9.ref, var_87fc95d97eb08ba9.alias, var_87fc95d97eb08ba9.priority, var_87fc95d97eb08ba9.cooldown, timeout, var_87fc95d97eb08ba9.var_7ce636b3f644e502, var_87fc95d97eb08ba9.delaybefore, var_87fc95d97eb08ba9.delayafter);
+          registerevent(var_87fc95d97eb08ba9.ref, var_87fc95d97eb08ba9.alias, var_87fc95d97eb08ba9.priority, var_87fc95d97eb08ba9.cooldown, timeout, var_87fc95d97eb08ba9.speakerasset, var_87fc95d97eb08ba9.delaybefore, var_87fc95d97eb08ba9.delayafter);
         }
       }
 
@@ -85,7 +85,7 @@ function function_2b7b925f1037e020() {
             eventref = default_to(var_84e41716d3779c0e.ref, var_84e41716d3779c0e.alias);
 
             if(!isDefined(level.overlord.events[eventref])) {
-              registerevent(eventref, var_84e41716d3779c0e.alias, var_84e41716d3779c0e.priority, var_84e41716d3779c0e.cooldown, function_c89ed1840c8d0f0f(lookupsoundlength(var_84e41716d3779c0e.alias, 1)), var_84e41716d3779c0e.var_7ce636b3f644e502, var_84e41716d3779c0e.delaybefore, var_84e41716d3779c0e.delayafter);
+              registerevent(eventref, var_84e41716d3779c0e.alias, var_84e41716d3779c0e.priority, var_84e41716d3779c0e.cooldown, function_c89ed1840c8d0f0f(lookupsoundlength(var_84e41716d3779c0e.alias, 1)), var_84e41716d3779c0e.speakerasset, var_84e41716d3779c0e.delaybefore, var_84e41716d3779c0e.delayafter);
             }
           }
         }
@@ -128,14 +128,14 @@ function testqueue() {
   }
 }
 
-function registerevent(ref, alias, priority, cooldown, timeout, var_7ce636b3f644e502, delaybefore, delayafter) {
+function registerevent(ref, alias, priority, cooldown, timeout, speakerasset, delaybefore, delayafter) {
   event = spawnStruct();
   event.ref = ref;
   event.alias = alias;
   event.priority = isDefined(priority) ? priority : 75;
   event.cooldown = cooldown * 1000;
   event.timeout = timeout;
-  event.var_7ce636b3f644e502 = var_7ce636b3f644e502;
+  event.speakerasset = speakerasset;
   event.delaybefore = delaybefore;
   event.delayafter = delayafter;
   level.overlord.events[ref] = event;
@@ -217,9 +217,9 @@ function playevent(eventref, players, delay, includedeadplayers, var_fe8102d7751
     player queuedialogforplayer(event.alias, event.alias, var_6313cac4d3f01dab, "overlord", interruptcurrent, undefined, event.timeout);
     player.var_5a2916f745d4389a[eventref] = gettime();
 
-    if(isDefined(event.var_7ce636b3f644e502)) {
-      player val::set(event.alias, "overlord_speaker", event.var_7ce636b3f644e502);
-      player function_f9a207358d70923c(event.timeout, ["disconnect"], &val::reset, event.alias, "overlord_speaker");
+    if(isDefined(event.speakerasset)) {
+      player val::set(event.alias, "overlord_speaker", event.speakerasset);
+      player delaythreadendon(event.timeout, ["disconnect"], &val::reset, event.alias, "overlord_speaker");
     }
   }
 
@@ -251,7 +251,7 @@ function playconversation(conversationname, players, var_7b76e64b846c00d, var_8b
         eventref = default_to(var_84e41716d3779c0e.ref, var_84e41716d3779c0e.alias);
 
         if(!isDefined(level.overlord.events[eventref])) {
-          registerevent(eventref, var_84e41716d3779c0e.alias, var_84e41716d3779c0e.priority, var_84e41716d3779c0e.cooldown, function_c89ed1840c8d0f0f(lookupsoundlength(var_84e41716d3779c0e.alias, 1)), var_84e41716d3779c0e.var_7ce636b3f644e502, var_84e41716d3779c0e.delaybefore, var_84e41716d3779c0e.delayafter);
+          registerevent(eventref, var_84e41716d3779c0e.alias, var_84e41716d3779c0e.priority, var_84e41716d3779c0e.cooldown, function_c89ed1840c8d0f0f(lookupsoundlength(var_84e41716d3779c0e.alias, 1)), var_84e41716d3779c0e.speakerasset, var_84e41716d3779c0e.delaybefore, var_84e41716d3779c0e.delayafter);
         }
 
         if(isDefined(var_84e41716d3779c0e.delaybefore)) {
@@ -269,9 +269,9 @@ function playconversation(conversationname, players, var_7b76e64b846c00d, var_8b
                 continue;
               }
 
-              if(isDefined(var_84e41716d3779c0e.var_7ce636b3f644e502)) {
-                player val::set(level.overlord.events[eventref].alias, "overlord_speaker", level.overlord.events[eventref].var_7ce636b3f644e502);
-                player function_f9a207358d70923c(level.overlord.events[eventref].timeout, ["disconnect"], &val::reset, level.overlord.events[eventref].alias, "overlord_speaker");
+              if(isDefined(var_84e41716d3779c0e.speakerasset)) {
+                player val::set(level.overlord.events[eventref].alias, "overlord_speaker", level.overlord.events[eventref].speakerasset);
+                player delaythreadendon(level.overlord.events[eventref].timeout, ["disconnect"], &val::reset, level.overlord.events[eventref].alias, "overlord_speaker");
               }
 
               interruptcurrent = player shouldinterrupt(level.overlord.events[eventref]) || var_8b6798cc35c82e07;
@@ -397,7 +397,7 @@ function shouldinterrupt(event) {
 }
 
 function private function_4831c2aa1655ce23(player) {
-  var_d90809392748e640 = player namespace_2b1145f62aa835b8::function_87072b42853a9c58("specialty_pc_stealth");
+  var_d90809392748e640 = player namespace_2b1145f62aa835b8::hasperksharedfunc("specialty_pc_stealth");
   return !istrue(var_d90809392748e640);
 }
 
@@ -430,7 +430,7 @@ function function_b0c21eabffce3fd4() {
       }
     }
 
-    partition = function_21a6a1c613b50a28(validplayers, 2500);
+    partition = create_partition(validplayers, 2500);
 
     foreach(player in validplayers) {
       if(!isvalidplayer(player)) {
@@ -450,12 +450,12 @@ function function_b0c21eabffce3fd4() {
           var_ba24b605d8b9c100 = function_f240c299b9341e8f(player, testplayer, trackedteams, ignoretime);
 
           if(var_ba24b605d8b9c100) {
-            testplayers = namespace_2b1145f62aa835b8::function_9563f2d4e690856d(testplayer.team, "players");
-            eventplayers = namespace_2b1145f62aa835b8::function_9563f2d4e690856d(player.team, "players");
+            testplayers = namespace_2b1145f62aa835b8::getteamdatasharedfunc(testplayer.team, "players");
+            eventplayers = namespace_2b1145f62aa835b8::getteamdatasharedfunc(player.team, "players");
             var_571aeaf27dbb7e22 = [];
 
             foreach(player in eventplayers) {
-              if(getdvarint(@ "hash_c53afaea3f55391a", 0) && player namespace_2b1145f62aa835b8::function_87072b42853a9c58("specialty_pc_comms")) {
+              if(getdvarint(@ "hash_c53afaea3f55391a", 0) && player namespace_2b1145f62aa835b8::hasperksharedfunc("specialty_pc_comms")) {
                 continue;
               }
 
@@ -499,7 +499,7 @@ function function_aea00c3815b226da(player) {
       }
     }
 
-    partition = function_21a6a1c613b50a28(validplayers, 2500);
+    partition = create_partition(validplayers, 2500);
 
     foreach(playerarray in partition function_df633f460888a47(player.origin)) {
       foreach(testplayer in playerarray) {
@@ -514,7 +514,7 @@ function function_aea00c3815b226da(player) {
         var_ba24b605d8b9c100 = !isDefined(trackedteams[player.team][testplayer.team]) || (gettime() - trackedteams[player.team][testplayer.team]) / 1000 > ignoretime;
 
         if(var_ba24b605d8b9c100) {
-          testplayers = namespace_53fc9ddbb516e6e1::function_9563f2d4e690856d(testplayer.team, "players");
+          testplayers = namespace_53fc9ddbb516e6e1::getteamdatasharedfunc(testplayer.team, "players");
           playevent(ter_op(testplayers.size > level.overlord.var_f122d73bb796754c, "nearby_big_team", "player_enemy_player_nearby"), [player]);
           trackedteams[player.team][testplayer.team] = gettime();
         }
@@ -525,7 +525,7 @@ function function_aea00c3815b226da(player) {
   }
 }
 
-function function_60fc087bc7deaadc(val) {
+function setoverlordlockedpriority(val) {
   self.overlordlockedpriority = val;
 }
 
@@ -545,7 +545,7 @@ function function_f240c299b9341e8f(player, testplayer, trackedteams, ignoretime)
   var_ba24b605d8b9c100 = !isDefined(trackedteams[player.team][testplayer.team]) || (gettime() - trackedteams[player.team][testplayer.team]) / 1000 > ignoretime;
 
   if(getdvarint(@ "hash_c53afaea3f55391a", 0)) {
-    testplayers = namespace_2b1145f62aa835b8::function_9563f2d4e690856d(testplayer.team, "players");
+    testplayers = namespace_2b1145f62aa835b8::getteamdatasharedfunc(testplayer.team, "players");
     return (var_ba24b605d8b9c100 && testplayers.size > level.overlord.var_f122d73bb796754c);
   }
 

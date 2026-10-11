@@ -21,7 +21,7 @@
 function main() {
   level.var_e6628286205f2ea7 = 1;
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     scripts\mp\gametypes\mgl_mp::function_9acf99e8c077e74d();
     return;
   }

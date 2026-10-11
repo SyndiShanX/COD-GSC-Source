@@ -1019,7 +1019,7 @@ function setrecoilscale(scaler, scaleoverride) {
   self player_recoilscaleon(scale);
 }
 
-function _launchgrenade(weaponname, origin, velocity, var_c301d652d9a73075, notthrown, var_997a34f6ab5cb7fc, var_48a4928bab483049) {
+function _launchgrenade(weaponname, origin, velocity, var_c301d652d9a73075, notthrown, var_997a34f6ab5cb7fc, tickpercentoverride) {
   grenade = self launchgrenade(weaponname, origin, velocity, var_c301d652d9a73075, var_997a34f6ab5cb7fc);
 
   if(!isDefined(notthrown)) {
@@ -1028,8 +1028,8 @@ function _launchgrenade(weaponname, origin, velocity, var_c301d652d9a73075, nott
     grenade.notthrown = notthrown;
   }
 
-  if(isDefined(var_48a4928bab483049)) {
-    grenade.tickpercent = var_48a4928bab483049;
+  if(isDefined(tickpercentoverride)) {
+    grenade.tickpercent = tickpercentoverride;
   }
 
   grenade setotherent(self);

@@ -1962,7 +1962,7 @@ function spawnprotectionexception() {
 
 function function_658c8f668d2cd83c() {
   wait 5;
-  function_f1aed36ab4598ea("mp_gamemode_gw");
+  snd_transient_load("mp_gamemode_gw");
 }
 
 function function_aabaace9c798a2e1() {
@@ -2767,7 +2767,7 @@ function initai() {
   level thread function_b34021ca662a03bd();
 }
 
-function badpathhandler(agent, var_772edbdcfe906c73) {
+function badpathhandler(agent, badpathpos) {
   if(!isalive(agent)) {
     return;
   }
@@ -3737,7 +3737,7 @@ function function_8cc95623d93d70fb(agent) {
     return false;
   }
 
-  if(isDefined(agent function_92435c7a6ae85c3c())) {
+  if(isDefined(agent getinteractionid())) {
     return false;
   }
 
@@ -4265,8 +4265,8 @@ function function_1b39d0ac099f112f() {
 function function_52a967cc33e0f447() {
   spawndata = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
 
-  if(isDefined(spawndata.var_6dc04302da1a9d03)) {
-    spawndata = spawndata.var_6dc04302da1a9d03;
+  if(isDefined(spawndata.basevehiclespawndata)) {
+    spawndata = spawndata.basevehiclespawndata;
   }
 
   level.var_84c26a9fa39f7586[spawndata.var_b88b7b3c17715e3f]--;
@@ -4275,8 +4275,8 @@ function function_52a967cc33e0f447() {
 function function_77ca7d0aa1a51384() {
   spawndata = scripts\cp_mp\vehicles\vehicle_tracking::getvehiclespawndata(self);
 
-  if(isDefined(spawndata.var_6dc04302da1a9d03)) {
-    spawndata = spawndata.var_6dc04302da1a9d03;
+  if(isDefined(spawndata.basevehiclespawndata)) {
+    spawndata = spawndata.basevehiclespawndata;
   }
 
   level.var_fced0b6c61f6bb77[spawndata.var_b88b7b3c17715e3f]--;

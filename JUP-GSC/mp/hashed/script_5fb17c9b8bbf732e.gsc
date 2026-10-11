@@ -41,7 +41,7 @@ function function_92b7e5b324465b68(params) {
   if(getdvarint(@ "hash_9025e7af6f59575d", 1)) {
     level.var_e75d27acd726fe9c = 1;
   } else {
-    level.var_84956ead4b0ba962 = function_869ccb4e3451b8c6(["etype_ai", "etype_vehicle", "etype_turret", "etype_scriptmover"]);
+    level.var_84956ead4b0ba962 = createentitytypemask(["etype_ai", "etype_vehicle", "etype_turret", "etype_scriptmover"]);
   }
 
   setdvarifuninitialized(@ "hash_a98666aab2a20f50", 1);
@@ -63,7 +63,7 @@ function function_92b7e5b324465b68(params) {
 
   flag_wait("scriptables_ready");
   var_e405301bcb385ef5 = getStructArray("launch_pad", "script_noteworthy");
-  var_201462e035644875 = function_f159c10d5cf8f0b4("launch_pad", "script_noteworthy");
+  var_201462e035644875 = getnoentvolumearray("launch_pad", "script_noteworthy");
   var_a48e67061c191a79 = array_combine(var_e405301bcb385ef5, var_201462e035644875);
   var_762cb2950158b8be = getdvarint(@ "ob_rift_run", 0);
 
@@ -137,7 +137,7 @@ function function_ffb92f39c6c65fa3(pad, var_762cb2950158b8be) {
     destinations = getStructArray(pad.target, "targetname");
 
     if(destinations.size == 0) {
-      destinations = function_f159c10d5cf8f0b4(pad.target, "targetname");
+      destinations = getnoentvolumearray(pad.target, "targetname");
     }
 
     if(destinations.size > 0) {
@@ -460,7 +460,7 @@ function function_7071d8c4fc9f0c3e(pad) {
 
     pad.crystal.angles = pad.crystal_str.angles;
     pad.crystal.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_void_crystal_healthbar");
-    pad.crystal.var_534e788bc498be9f = getscriptbundle(%"hash_7dd4801342ba19c4");
+    pad.crystal.subclass_scriptbundle = getscriptbundle(%"hash_7dd4801342ba19c4");
     pad.crystal.var_1e0eb63ecb3f1e2 = 1;
     pad.crystal.var_4919d15787f01154 = 1;
     health = getdvarint(@ "hash_b4e52282f217c0ae");
@@ -502,7 +502,7 @@ function function_ed60b416bc63b926(pad) {
 
   if(getdvarint(@ "hash_9025e7af6f59575d")) {
     pad.crystal.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_void_crystal_healthbar");
-    pad.crystal.var_534e788bc498be9f = getscriptbundle(%"hash_7dd4801342ba19c4");
+    pad.crystal.subclass_scriptbundle = getscriptbundle(%"hash_7dd4801342ba19c4");
     pad.crystal.var_1e0eb63ecb3f1e2 = 1;
     pad.crystal.var_4919d15787f01154 = 1;
     pad.crystal.fake_health = health;
@@ -514,7 +514,7 @@ function function_ed60b416bc63b926(pad) {
   pad.crystal.invis setModel("jup_gate_crystal_jump_pad_crystal_01_gameplay_invis");
   pad.crystal.invis.angles = pad.crystal.angles;
   pad.crystal.invis.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_void_crystal_healthbar");
-  pad.crystal.invis.var_534e788bc498be9f = getscriptbundle(%"hash_7dd4801342ba19c4");
+  pad.crystal.invis.subclass_scriptbundle = getscriptbundle(%"hash_7dd4801342ba19c4");
   pad.crystal.invis.var_1e0eb63ecb3f1e2 = 1;
   pad.crystal.invis.var_4919d15787f01154 = 1;
   pad.crystal.invis.fake_health = health;
@@ -548,7 +548,7 @@ function function_feb0aac1dbef2f07(einflictor, eattacker, instance, idamage, idf
     if(weapon::iswonderweapon(objweapon)) {
       if(objweapon.basename == "jup_la_plasmagun_mp" || objweapon.basename == "jup_la_humangun_mp") {
         idamage = max_health;
-      } else if(is_equal(crystal.var_f3e89f9924fb5b0d, gettime())) {
+      } else if(is_equal(crystal.last_damage_time, gettime())) {
         idamage = 0;
       } else {
         idamage = int(max_health / 3) + 1;
@@ -596,7 +596,7 @@ function function_feb0aac1dbef2f07(einflictor, eattacker, instance, idamage, idf
         crystal.invis.fake_health = crystal.health;
       }
 
-      crystal.var_f3e89f9924fb5b0d = gettime();
+      crystal.last_damage_time = gettime();
     }
   }
 }
@@ -686,7 +686,7 @@ function private function_db1cce22f95a04fa() {}
 function function_bef665ddd5cdfb93(pad) {
   is_sliding = 0;
 
-  if(self function_9cc921a57ff4deb5()) {
+  if(self isonascender()) {
     return false;
   }
 

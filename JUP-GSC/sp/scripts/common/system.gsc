@@ -7,13 +7,13 @@
 #namespace system;
 
 function register(str_name, reqs, func_preinit, func_postinit) {
-  print("<dev string:x1c>" + (isxhash(str_name) ? function_3c8848a3a11b2553(str_name) : str_name));
+  print("<dev string:x1c>" + (isxhash(str_name) ? getxhashsourcename(str_name) : str_name));
 
   level.system_funcs = default_to(level.system_funcs, []);
 
   if(isDefined(level.system_funcs[str_name])) {
     if(!(level.system_funcs[str_name].flags & 1)) {
-      system_error("<dev string:x2f>" + (isxhash(str_name) ? function_3c8848a3a11b2553(str_name) : str_name) + "<dev string:x38>");
+      system_error("<dev string:x2f>" + (isxhash(str_name) ? getxhashsourcename(str_name) : str_name) + "<dev string:x38>");
     }
 
     return;
@@ -109,7 +109,7 @@ function private function_59d1eeac261314c4(func) {
     }
 
     if(!isDefined(level.system_funcs[func.reqs])) {
-      system_error("<dev string:x123>" + (isxhash(func.reqs) ? function_3c8848a3a11b2553(func.reqs) : func.reqs) + "<dev string:x149>");
+      system_error("<dev string:x123>" + (isxhash(func.reqs) ? getxhashsourcename(func.reqs) : func.reqs) + "<dev string:x149>");
       func.flags |= 8;
       return;
     }
@@ -150,7 +150,7 @@ function private function_5d3461c8ae875db7(func) {
     }
 
     if(!isDefined(level.system_funcs[func.reqs])) {
-      system_error("<dev string:x123>" + (isxhash(func.reqs) ? function_3c8848a3a11b2553(func.reqs) : func.reqs) + "<dev string:x149>");
+      system_error("<dev string:x123>" + (isxhash(func.reqs) ? getxhashsourcename(func.reqs) : func.reqs) + "<dev string:x149>");
       func.flags |= 8;
       return;
     }

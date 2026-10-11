@@ -127,8 +127,8 @@ function main() {
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-  level.projectbundle = function_811510b694ddd963();
-  level.gamemodebundle = function_1e231fc15fdab31d();
+  level.projectbundle = getprojectscriptbundle();
+  level.gamemodebundle = getgamemodescriptbundle();
   init_frontend_utils();
   level.transition_interrupted = 0;
   level.showseasonalcontent = getdvarint(@ "hash_ca079d844e54e73a");
@@ -853,8 +853,8 @@ function trial_target_requisites() {
   while(true) {
     var_ec8a7173e0c630fb = 1;
 
-    foreach(var_27ee92a77afe203e in requisites) {
-      if(var_27ee92a77afe203e.activated == 0) {
+    foreach(requisite in requisites) {
+      if(requisite.activated == 0) {
         var_ec8a7173e0c630fb = 0;
       }
     }

@@ -392,9 +392,9 @@ function hostage_confirm_good_angles(player) {
   }
 }
 
-function confirm_good_pickup_location(var_abbb4b8615510568, var_5539460d8e2f6a2b, player, radius) {
+function confirm_good_pickup_location(var_abbb4b8615510568, ref_angles, player, radius) {
   contents = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 1);
-  currentangles = var_5539460d8e2f6a2b;
+  currentangles = ref_angles;
   var_79b0da6daa286045 = var_abbb4b8615510568 + (0, 0, 24);
 
   if(!isDefined(radius)) {
@@ -591,15 +591,15 @@ function hostage_carrier_oob(player) {
 
 function watchfordelete() {
   level endon("game_ended");
-  var_cde32b78f52f8b86 = 0;
+  wp = 0;
 
   if(isDefined(self.waypoint)) {
-    var_cde32b78f52f8b86 = self.waypoint;
+    wp = self.waypoint;
   }
 
   waittill_any_2("deleted", "death");
   freeworldid("pickup_hostage");
-  objective_delete(var_cde32b78f52f8b86);
+  objective_delete(wp);
   self.waypoint = undefined;
 
   if(array_contains(level.hvtlist, self)) {

@@ -433,18 +433,18 @@ function function_1eaefd55b8e356c7() {
   level endon("game_ended");
   level._effect["open_roof_dust"] = loadfx("vfx/jup/level/mp_jup_launchfacility/vfx_jup_launchfacility_air_cliff_falling_dust_lrg_01.vfx");
   level waittill("prematch_done");
-  var_3481c88117495d50 = getEntArray("zone1_roof", "targetname");
+  roofs = getEntArray("zone1_roof", "targetname");
   var_797f676eac2f5f5d = getStructArray("roof_origin", "targetname");
   var_24e1eee4a6f213b7 = getentitylessscriptablearray("deployable_roof", "script_noteworthy");
   var_633452f052c3d4ba = getscriptablearray("roof_light", "script_noteworthy");
   var_24e1eee4a6f213b7[0] setscriptablepartstate("light", "off");
   level waittill("hack_zone_upload_complete");
-  level thread function_c8a59331ffa83829(var_3481c88117495d50, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 0.5, var_633452f052c3d4ba);
+  level thread function_c8a59331ffa83829(roofs, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 0.5, var_633452f052c3d4ba);
   level waittill("hack_zone_upload_full_complete");
-  level thread function_c8a59331ffa83829(var_3481c88117495d50, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 1, var_633452f052c3d4ba);
+  level thread function_c8a59331ffa83829(roofs, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 1, var_633452f052c3d4ba);
 }
 
-function function_c8a59331ffa83829(var_3481c88117495d50, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, ratio, var_633452f052c3d4ba) {
+function function_c8a59331ffa83829(roofs, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, ratio, var_633452f052c3d4ba) {
   if(isDefined(level.zone.objective.params["hackObjective"]["openRoofTime"])) {
     openrooftime = level.zone.objective.params["hackObjective"]["openRoofTime"];
   } else {
@@ -455,7 +455,7 @@ function function_c8a59331ffa83829(var_3481c88117495d50, var_797f676eac2f5f5d, v
     waitframe();
   }
 
-  foreach(roof in var_3481c88117495d50) {
+  foreach(roof in roofs) {
     foreach(movenode in var_797f676eac2f5f5d) {
       if(roof.script_noteworthy == movenode.script_noteworthy) {
         origin = movenode.origin;
@@ -491,7 +491,7 @@ function function_c8a59331ffa83829(var_3481c88117495d50, var_797f676eac2f5f5d, v
 
   wait 7.5;
 
-  foreach(roof in var_3481c88117495d50) {
+  foreach(roof in roofs) {
     playFX(getfx("open_roof_dust"), roof.origin);
   }
 
@@ -1341,9 +1341,9 @@ function function_7d25484659308d59() {
   }
 }
 
-function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8, zonename) {
+function setupminimap(material, var_11f306b80ae0c39e, numtiles, zonename) {
   requiredmapaspectratio = getdvarfloat(@ "scr_requiredmapaspectratio", 1);
-  mapinfo = function_79404c2fcca1c184();
+  mapinfo = getmapscriptbundle();
 
   if(isDefined(mapinfo) && isDefined(mapinfo.var_cea11b0bd8f76b2d)) {
     foreach(minimapversion in mapinfo.var_cea11b0bd8f76b2d) {
@@ -1400,16 +1400,16 @@ function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8, zonen
   }
 
   if(requiredmapaspectratio > 0) {
-    var_9f72e62e262287df = vectordot(northwest - southeast, north);
-    var_755d4c721ecb6165 = vectordot(northwest - southeast, west);
-    mapaspectratio = var_755d4c721ecb6165 / var_9f72e62e262287df;
+    northportion = vectordot(northwest - southeast, north);
+    westportion = vectordot(northwest - southeast, west);
+    mapaspectratio = westportion / northportion;
 
     if(mapaspectratio < requiredmapaspectratio) {
       incr = requiredmapaspectratio / mapaspectratio;
-      addvec = scripts\mp\compass::vecscale(west, var_755d4c721ecb6165 * (incr - 1) * 0.5);
+      addvec = scripts\mp\compass::vecscale(west, westportion * (incr - 1) * 0.5);
     } else {
       incr = mapaspectratio / requiredmapaspectratio;
-      addvec = scripts\mp\compass::vecscale(north, var_9f72e62e262287df * (incr - 1) * 0.5);
+      addvec = scripts\mp\compass::vecscale(north, northportion * (incr - 1) * 0.5);
     }
 
     northwest += addvec;
@@ -1425,13 +1425,13 @@ function setupminimap(material, var_11f306b80ae0c39e, var_3b70dd7d0d5b9a8, zonen
   level.mapcorners[1].angles = generateaxisanglesfromforwardvector(vectorNormalize(level.mapcorners[0].origin - level.mapcorners[1].origin), (0, 0, 1));
   level.mapcorners[1] addyaw(45);
 
-  if(!isDefined(var_3b70dd7d0d5b9a8) || var_3b70dd7d0d5b9a8 < 1) {
-    var_3b70dd7d0d5b9a8 = 1;
+  if(!isDefined(numtiles) || numtiles < 1) {
+    numtiles = 1;
   }
 
   level.minimapmaterial = material;
 
-  setminimap(material, northwest[0], northwest[1], southeast[0], southeast[1], var_3b70dd7d0d5b9a8, var_11f306b80ae0c39e);
+  setminimap(material, northwest[0], northwest[1], southeast[0], southeast[1], numtiles, var_11f306b80ae0c39e);
 }
 
 function function_fb7bad834ce4b28c(floornumber, zonename) {
@@ -1450,11 +1450,11 @@ function function_e393d662064dffce() {
     return;
   }
 
-  var_3481c88117495d50 = getEntArray("<dev string:xf0>", "<dev string:xfe>");
+  roofs = getEntArray("<dev string:xf0>", "<dev string:xfe>");
   var_797f676eac2f5f5d = getStructArray("<dev string:x10c>", "<dev string:xfe>");
   var_24e1eee4a6f213b7 = getentitylessscriptablearray("<dev string:x11b>", "<dev string:x12e>");
   var_633452f052c3d4ba = getscriptablearray("<dev string:x143>", "<dev string:x12e>");
-  function_c8a59331ffa83829(var_3481c88117495d50, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 1, var_633452f052c3d4ba);
+  function_c8a59331ffa83829(roofs, var_797f676eac2f5f5d, var_24e1eee4a6f213b7, 1, var_633452f052c3d4ba);
 }
 
 function function_1e57e0eff0416516() {

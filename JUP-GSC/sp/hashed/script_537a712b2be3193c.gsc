@@ -317,7 +317,7 @@ function function_3b02eebe0b11f734(shoulddrop) {
   }
 
   self.dropweapon = shoulddrop;
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
 }
 
 function function_578d89786b7eda1() {

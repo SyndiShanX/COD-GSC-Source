@@ -8,8 +8,8 @@
 #using scripts\engine\utility;
 #namespace trace;
 
-function ray_trace(start, end, ignore, contentoverride, getsurfacetype, ignoreclutter, var_b00c60a54d663ca2) {
-  trace = physics_raycast(start, end, isDefined(contentoverride) ? contentoverride : create_default_contents(), ignore, 0, "physicsquery_closest", istrue(ignoreclutter), var_b00c60a54d663ca2);
+function ray_trace(start, end, ignore, contentoverride, getsurfacetype, ignoreclutter, allowscriptables) {
+  trace = physics_raycast(start, end, isDefined(contentoverride) ? contentoverride : create_default_contents(), ignore, 0, "physicsquery_closest", istrue(ignoreclutter), allowscriptables);
 
   if(trace.size) {
     trace = trace[0];
@@ -28,8 +28,8 @@ function ray_trace(start, end, ignore, contentoverride, getsurfacetype, ignorecl
 
 function ray_trace_ents(start, end, ents, contentoverride, getsurfacetype, ignoreclutter) {
   content = ter_op(isDefined(contentoverride), contentoverride, create_default_contents());
-  var_f6dbad2cd5a99bb1 = ter_op(isDefined(ignoreclutter), ignoreclutter, 0);
-  trace = physics_raycastents(start, end, content, ents, 0, "physicsquery_closest", var_f6dbad2cd5a99bb1);
+  shouldignoreclutter = ter_op(isDefined(ignoreclutter), ignoreclutter, 0);
+  trace = physics_raycastents(start, end, content, ents, 0, "physicsquery_closest", shouldignoreclutter);
 
   if(trace.size) {
     trace = trace[0];
@@ -46,7 +46,7 @@ function ray_trace_ents(start, end, ents, contentoverride, getsurfacetype, ignor
   return trace;
 }
 
-function player_viewangles(collisioncontents, getsurfacetype, ignoreclutter, var_b00c60a54d663ca2) {
+function player_viewangles(collisioncontents, getsurfacetype, ignoreclutter, allowscriptables) {
   if(!isDefined(collisioncontents)) {
     collisioncontents = create_all_contents();
   }
@@ -59,15 +59,15 @@ function player_viewangles(collisioncontents, getsurfacetype, ignoreclutter, var
     ignoreclutter = 1;
   }
 
-  if(!isDefined(var_b00c60a54d663ca2)) {
-    var_b00c60a54d663ca2 = 1;
+  if(!isDefined(allowscriptables)) {
+    allowscriptables = 1;
   }
 
   assert(isPlayer(self));
-  return ray_trace(self getEye(), self getEye() + anglesToForward(self getplayerangles()) * 10000, self, collisioncontents, getsurfacetype, ignoreclutter, var_b00c60a54d663ca2);
+  return ray_trace(self getEye(), self getEye() + anglesToForward(self getplayerangles()) * 10000, self, collisioncontents, getsurfacetype, ignoreclutter, allowscriptables);
 }
 
-function _bullet_trace(start, end, hitcharacters, ignore, itemclip, var_45ab9428a87b2b9f, var_c368ea2402a6a1ad, var_8812897bd00bf028, testglass) {
+function _bullet_trace(start, end, hitcharacters, ignore, itemclip, var_45ab9428a87b2b9f, testvehicleclip, noshotclip, testglass) {
   content = ["physicscontents_clipshot", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"];
 
   if(hitcharacters) {
@@ -78,11 +78,11 @@ function _bullet_trace(start, end, hitcharacters, ignore, itemclip, var_45ab9428
     content[content.size] = "physicscontents_itemclip";
   }
 
-  if(isDefined(var_c368ea2402a6a1ad) && var_c368ea2402a6a1ad) {
+  if(isDefined(testvehicleclip) && testvehicleclip) {
     content[content.size] = "physicscontents_vehicleclip";
   }
 
-  if(!isDefined(var_8812897bd00bf028) || !var_8812897bd00bf028) {
+  if(!isDefined(noshotclip) || !noshotclip) {
     content[content.size] = "physicscontents_clipshot";
   }
 
@@ -101,14 +101,14 @@ function _bullet_trace_passed(start, end, hitcharacters, ignore) {
   return ray_trace_passed(start, end, ignore, create_default_contents(!hitcharacters));
 }
 
-function ray_trace_detail(start, end, ignore, contentoverride, getsurfacetype, ignoreclutter, var_b00c60a54d663ca2) {
+function ray_trace_detail(start, end, ignore, contentoverride, getsurfacetype, ignoreclutter, allowscriptables) {
   content = ter_op(isDefined(contentoverride), contentoverride, create_default_contents());
-  var_f6dbad2cd5a99bb1 = ter_op(isDefined(ignoreclutter), ignoreclutter, 0);
+  shouldignoreclutter = ter_op(isDefined(ignoreclutter), ignoreclutter, 0);
 
-  if(isDefined(var_b00c60a54d663ca2)) {
-    trace = physics_raycast(start, end, content, ignore, 1, "physicsquery_closest", var_f6dbad2cd5a99bb1, var_b00c60a54d663ca2);
+  if(isDefined(allowscriptables)) {
+    trace = physics_raycast(start, end, content, ignore, 1, "physicsquery_closest", shouldignoreclutter, allowscriptables);
   } else {
-    trace = physics_raycast(start, end, content, ignore, 1, "physicsquery_closest", var_f6dbad2cd5a99bb1);
+    trace = physics_raycast(start, end, content, ignore, 1, "physicsquery_closest", shouldignoreclutter);
   }
 
   if(trace.size) {
@@ -166,9 +166,9 @@ function can_see_origin(origin, test_characters) {
   return ray_trace_passed(self getEye(), origin, self, scripts\engine\trace::create_contents(test_characters, 1, 0, 1, 0, 1));
 }
 
-function sphere_trace(start, end, radius, ignore, contentoverride, getsurfacetype, var_b00c60a54d663ca2) {
+function sphere_trace(start, end, radius, ignore, contentoverride, getsurfacetype, allowscriptables) {
   content = ter_op(isDefined(contentoverride), contentoverride, create_default_contents());
-  trace = physics_spherecast(start, end, radius, content, ignore, "physicsquery_closest", undefined, var_b00c60a54d663ca2);
+  trace = physics_spherecast(start, end, radius, content, ignore, "physicsquery_closest", undefined, allowscriptables);
 
   if(trace.size) {
     trace = trace[0];
@@ -185,9 +185,9 @@ function sphere_trace(start, end, radius, ignore, contentoverride, getsurfacetyp
   return trace;
 }
 
-function sphere_trace_get_all_results(start, end, radius, ignore, contentoverride, getsurfacetype, var_b00c60a54d663ca2) {
+function sphere_trace_get_all_results(start, end, radius, ignore, contentoverride, getsurfacetype, allowscriptables) {
   content = ter_op(isDefined(contentoverride), contentoverride, create_default_contents());
-  trace = physics_spherecast(start, end, radius, content, ignore, "physicsquery_all", undefined, var_b00c60a54d663ca2);
+  trace = physics_spherecast(start, end, radius, content, ignore, "physicsquery_all", undefined, allowscriptables);
 
   if(isDefined(getsurfacetype) && getsurfacetype) {
     for(i = 0; i < trace.size; i++) {
@@ -302,7 +302,7 @@ function capsule_get_closest_point(position, radius, height, angles, search_dist
   return trace;
 }
 
-function player_trace(start, end, angles, ignore, contentoverride, getsurfacetype, var_e98b3969bbe145d3) {
+function player_trace(start, end, angles, ignore, contentoverride, getsurfacetype, ground_clearance) {
   if(!isPlayer(self)) {
     assertmsg("<dev string:xaf>");
     return;
@@ -314,11 +314,11 @@ function player_trace(start, end, angles, ignore, contentoverride, getsurfacetyp
 
   content = ter_op(isDefined(contentoverride), contentoverride, create_default_contents());
 
-  if(!isDefined(var_e98b3969bbe145d3)) {
-    var_e98b3969bbe145d3 = 0;
+  if(!isDefined(ground_clearance)) {
+    ground_clearance = 0;
   }
 
-  trace = physics_charactercast(start, end, self, var_e98b3969bbe145d3, angles, content, ignore, "physicsquery_closest");
+  trace = physics_charactercast(start, end, self, ground_clearance, angles, content, ignore, "physicsquery_closest");
 
   if(trace.size) {
     trace = trace[0];
@@ -335,7 +335,7 @@ function player_trace(start, end, angles, ignore, contentoverride, getsurfacetyp
   return trace;
 }
 
-function player_trace_get_all_results(start, end, angles, ignore, contentoverride, getsurfacetype, var_e98b3969bbe145d3) {
+function player_trace_get_all_results(start, end, angles, ignore, contentoverride, getsurfacetype, ground_clearance) {
   if(!isPlayer(self)) {
     assertmsg("<dev string:xec>");
     return;
@@ -347,11 +347,11 @@ function player_trace_get_all_results(start, end, angles, ignore, contentoverrid
 
   content = ter_op(isDefined(contentoverride), contentoverride, create_default_contents());
 
-  if(!isDefined(var_e98b3969bbe145d3)) {
-    var_e98b3969bbe145d3 = 0;
+  if(!isDefined(ground_clearance)) {
+    ground_clearance = 0;
   }
 
-  trace = physics_charactercast(start, end, self, var_e98b3969bbe145d3, angles, content, ignore, "physicsquery_all");
+  trace = physics_charactercast(start, end, self, ground_clearance, angles, content, ignore, "physicsquery_all");
 
   if(isDefined(getsurfacetype) && getsurfacetype) {
     foreach(t in trace) {
@@ -364,7 +364,7 @@ function player_trace_get_all_results(start, end, angles, ignore, contentoverrid
   return trace;
 }
 
-function player_trace_passed(start, end, angles, ignore, contentoverride, var_e98b3969bbe145d3) {
+function player_trace_passed(start, end, angles, ignore, contentoverride, ground_clearance) {
   if(!isPlayer(self)) {
     assertmsg("<dev string:x12c>");
     return;
@@ -376,11 +376,11 @@ function player_trace_passed(start, end, angles, ignore, contentoverride, var_e9
 
   content = ter_op(isDefined(contentoverride), contentoverride, create_default_contents());
 
-  if(!isDefined(var_e98b3969bbe145d3)) {
-    var_e98b3969bbe145d3 = 0;
+  if(!isDefined(ground_clearance)) {
+    ground_clearance = 0;
   }
 
-  return !physics_charactercast(start, end, self, var_e98b3969bbe145d3, angles, content, ignore, "physicsquery_any");
+  return !physics_charactercast(start, end, self, ground_clearance, angles, content, ignore, "physicsquery_any");
 }
 
 function player_get_closest_point_static(search_distance, ignore, contentoverride, getsurfacetype) {
@@ -425,7 +425,7 @@ function player_get_closest_point(position, angles, search_distance, ignore, con
   return trace;
 }
 
-function ai_trace(start, end, angles, ignore, contentoverride, getsurfacetype, var_e98b3969bbe145d3) {
+function ai_trace(start, end, angles, ignore, contentoverride, getsurfacetype, ground_clearance) {
   if(!isai(self)) {
     assertmsg("<dev string:x19f>");
     return;
@@ -437,11 +437,11 @@ function ai_trace(start, end, angles, ignore, contentoverride, getsurfacetype, v
 
   content = ter_op(isDefined(contentoverride), contentoverride, create_solid_ai_contents());
 
-  if(!isDefined(var_e98b3969bbe145d3)) {
-    var_e98b3969bbe145d3 = 0;
+  if(!isDefined(ground_clearance)) {
+    ground_clearance = 0;
   }
 
-  trace = physics_charactercast(start, end, self, var_e98b3969bbe145d3, angles, content, ignore, "physicsquery_closest");
+  trace = physics_charactercast(start, end, self, ground_clearance, angles, content, ignore, "physicsquery_closest");
 
   if(trace.size) {
     trace = trace[0];
@@ -458,7 +458,7 @@ function ai_trace(start, end, angles, ignore, contentoverride, getsurfacetype, v
   return trace;
 }
 
-function ai_trace_get_all_results(start, end, angles, ignore, contentoverride, getsurfacetype, var_e98b3969bbe145d3) {
+function ai_trace_get_all_results(start, end, angles, ignore, contentoverride, getsurfacetype, ground_clearance) {
   if(!isai(self)) {
     assertmsg("<dev string:x1c8>");
     return;
@@ -470,11 +470,11 @@ function ai_trace_get_all_results(start, end, angles, ignore, contentoverride, g
 
   content = ter_op(isDefined(contentoverride), contentoverride, create_solid_ai_contents());
 
-  if(!isDefined(var_e98b3969bbe145d3)) {
-    var_e98b3969bbe145d3 = 0;
+  if(!isDefined(ground_clearance)) {
+    ground_clearance = 0;
   }
 
-  trace = physics_charactercast(start, end, self, var_e98b3969bbe145d3, angles, content, ignore, "physicsquery_all");
+  trace = physics_charactercast(start, end, self, ground_clearance, angles, content, ignore, "physicsquery_all");
 
   if(isDefined(getsurfacetype) && getsurfacetype) {
     foreach(t in trace) {
@@ -487,7 +487,7 @@ function ai_trace_get_all_results(start, end, angles, ignore, contentoverride, g
   return trace;
 }
 
-function ai_trace_passed(start, end, angles, ignore, contentoverride, var_e98b3969bbe145d3) {
+function ai_trace_passed(start, end, angles, ignore, contentoverride, ground_clearance) {
   if(!isai(self)) {
     assertmsg("<dev string:x19f>");
     return;
@@ -499,11 +499,11 @@ function ai_trace_passed(start, end, angles, ignore, contentoverride, var_e98b39
 
   content = ter_op(isDefined(contentoverride), contentoverride, create_solid_ai_contents());
 
-  if(!isDefined(var_e98b3969bbe145d3)) {
-    var_e98b3969bbe145d3 = 0;
+  if(!isDefined(ground_clearance)) {
+    ground_clearance = 0;
   }
 
-  return !physics_charactercast(start, end, self, var_e98b3969bbe145d3, angles, content, ignore, "physicsquery_any");
+  return !physics_charactercast(start, end, self, ground_clearance, angles, content, ignore, "physicsquery_any");
 }
 
 function ai_get_closest_point(position, angles, search_distance, ignore, contentoverride, getsurfacetype) {

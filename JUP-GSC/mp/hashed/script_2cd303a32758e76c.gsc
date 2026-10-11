@@ -37,7 +37,7 @@ function init() {
 
   initvariables();
   scripts\engine\scriptable::scriptable_addusedcallbackbypart("redeploy_drone_interact", &function_f0567cda220a6f7d);
-  function_f1aed36ab4598ea("mp_jup_ob_redeploy_drone");
+  snd_transient_load("mp_jup_ob_redeploy_drone");
   level thread function_23f7acaab482446();
 }
 
@@ -371,7 +371,7 @@ function redeploy_drone_explosion() {
   vfx freescriptable();
 }
 
-function function_f0567cda220a6f7d(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_f0567cda220a6f7d(instance, part, state, player, bautouse, usestring) {
   player thread function_ea7ddf2defb7947a(instance);
   player thread function_1b9a6266f1942fac(instance);
 }

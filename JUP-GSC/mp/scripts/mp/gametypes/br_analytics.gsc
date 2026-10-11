@@ -302,7 +302,7 @@ function function_bb96ecd805545b2e(type, origin, state, time, data, entnum) {
         var_71ad68ab6268a451 = 1;
         var_f03d96d5e0ee0a4f = spawnStruct();
         var_f03d96d5e0ee0a4f.index = level.var_cbcec00eb49463dd.size;
-        var_f03d96d5e0ee0a4f.var_c51eba8dca8c32ee = [];
+        var_f03d96d5e0ee0a4f.datatypes = [];
         var_f03d96d5e0ee0a4f.var_969b413c42a23a1f = 0;
         level.var_cbcec00eb49463dd[type] = var_f03d96d5e0ee0a4f;
       }
@@ -311,13 +311,13 @@ function function_bb96ecd805545b2e(type, origin, state, time, data, entnum) {
       var_6b037d59e086f8ab = var_a3c4a415cd421cc5.index;
 
       if(data != "") {
-        if(!isDefined(var_a3c4a415cd421cc5.var_c51eba8dca8c32ee[data])) {
+        if(!isDefined(var_a3c4a415cd421cc5.datatypes[data])) {
           var_61bb6f79268382d9 = 1;
-          var_a3c4a415cd421cc5.var_c51eba8dca8c32ee[data] = var_a3c4a415cd421cc5.var_969b413c42a23a1f;
+          var_a3c4a415cd421cc5.datatypes[data] = var_a3c4a415cd421cc5.var_969b413c42a23a1f;
           var_a3c4a415cd421cc5.var_969b413c42a23a1f += 1;
         }
 
-        var_c0548534984469b3 = var_a3c4a415cd421cc5.var_c51eba8dca8c32ee[data];
+        var_c0548534984469b3 = var_a3c4a415cd421cc5.datatypes[data];
       }
     }
 
@@ -1418,7 +1418,7 @@ function branalytics_kiosk_purchaseitem(player, plunderspent, purchasetype, item
   }
 }
 
-function branalytics_kiosk_menu_event(player, menuevent, var_6c457c5f341beb23, kiosktype) {
+function branalytics_kiosk_menu_event(player, menuevent, menueventparam, kiosktype) {
   if(!branalytics_validation()) {
     return;
   }
@@ -1428,8 +1428,8 @@ function branalytics_kiosk_menu_event(player, menuevent, var_6c457c5f341beb23, k
   eventparams[eventparams.size] = menuevent;
   eventparams[eventparams.size] = "kiosk_menu_owner_event_param";
 
-  if(isDefined(var_6c457c5f341beb23)) {
-    eventparams[eventparams.size] = var_6c457c5f341beb23;
+  if(isDefined(menueventparam)) {
+    eventparams[eventparams.size] = menueventparam;
   } else {
     eventparams[eventparams.size] = "none";
   }
@@ -1590,14 +1590,14 @@ function function_ac421483c1da1cf7(player, var_5dc83c5ead95eaf1) {
   dlog_recordevent("dlog_event_br_bounty_royal_completed", eventparams);
 }
 
-function function_e77f36370162406c(player, var_bb19a0b11e79e6cb) {
+function function_e77f36370162406c(player, redeploydrone) {
   if(!branalytics_validation()) {
     return;
   }
 
   eventparams = _branalytics_header(player);
   eventparams[eventparams.size] = "deployed_from_beacon";
-  var_d77822da7628823 = isDefined(var_bb19a0b11e79e6cb) && istrue(var_bb19a0b11e79e6cb.var_d77822da7628823);
+  var_d77822da7628823 = isDefined(redeploydrone) && istrue(redeploydrone.var_d77822da7628823);
   eventparams[eventparams.size] = var_d77822da7628823;
   player dlog_recordplayerevent("dlog_event_br_redeploy_drone_used", eventparams);
 }
@@ -1949,7 +1949,7 @@ function function_cb3b3cbf2d1ac3f3(playerxp, weaponxp, lifeindex, weaponname, pl
 
   var_b4de36cb26159194 = "xp_event";
 
-  var_b4de36cb26159194 = var_b4de36cb26159194 + "<dev string:x1c>" + function_3c8848a3a11b2553(type);
+  var_b4de36cb26159194 = var_b4de36cb26159194 + "<dev string:x1c>" + getxhashsourcename(type);
 
   _branalytics_addevent(var_b4de36cb26159194, (playerxp, weaponxp, 0), lifeindex, weaponname, player);
 }
@@ -2798,7 +2798,7 @@ function private function_36fc8bc7e3143858(player, timestamp, reason) {
   }
 
   attemptevent = spawnStruct();
-  attemptevent.unoid = player function_7a32b0201993d7f7();
+  attemptevent.unoid = player getplayerunoid();
   attemptevent.type = "attempt_enter";
 
   if(isDefined(reason)) {
@@ -2840,7 +2840,7 @@ function private function_17f1328aa045b61d(player, reason, success, timestamp, t
   }
 
   attemptevent = spawnStruct();
-  attemptevent.unoid = player function_7a32b0201993d7f7();
+  attemptevent.unoid = player getplayerunoid();
   attemptevent.type = "attempt_exit";
   attemptevent.reason = reason;
 
@@ -2940,7 +2940,7 @@ function function_8ed813c1b731ca42() {
   maxteamsize = scripts\cp_mp\utility\game_utility::function_4fb37368ae3585bb();
 
   if(teamsize > maxteamsize) {
-    params = ["utc_connect_time_s", player.pers["telemetry"].utc_connect_time_s, "team", playerteam, "join_type", player getjointype(), "skill", player getskill(), "party_id", player getpartyid(), "is_party_host", istrue(level.onlinegame) ? player isfireteamleader() : 0, "was_keyboardmouse", player function_989faa3e2f2d8c47() != 1, "map", level.mapname, "playlist_id", getplaylistid(), "playlist_name", getplaylistname(), "game_type", getgametype(), "sub_game_type", scripts\cp_mp\utility\game_utility::function_6c1fce6f6b8779d5(), "connect_index", isDefined(player.pers["telemetry"].connect_index) ? player.pers["telemetry"].connect_index : 0, "lobby_id", isDefined(function_4f9373a1227db35c()) ? function_4f9373a1227db35c() : "", "is_ranked", istrue(level.var_ec2fb549b15ad827) || istrue(level.var_77907d733abe8b63) ? 1 : 0];
+    params = ["utc_connect_time_s", player.pers["telemetry"].utc_connect_time_s, "team", playerteam, "join_type", player getjointype(), "skill", player getskill(), "party_id", player getpartyid(), "is_party_host", istrue(level.onlinegame) ? player isfireteamleader() : 0, "was_keyboardmouse", player function_989faa3e2f2d8c47() != 1, "map", level.mapname, "playlist_id", getplaylistid(), "playlist_name", getplaylistname(), "game_type", getgametype(), "sub_game_type", scripts\cp_mp\utility\game_utility::function_6c1fce6f6b8779d5(), "connect_index", isDefined(player.pers["telemetry"].connect_index) ? player.pers["telemetry"].connect_index : 0, "lobby_id", isDefined(function_4f9373a1227db35c()) ? function_4f9373a1227db35c() : "", "is_ranked", istrue(level.leagueplaymatch) || istrue(level.var_77907d733abe8b63) ? 1 : 0];
     player dlog_recordplayerevent("dlog_event_br_player_oversize_team", params);
   }
 }
@@ -3168,7 +3168,7 @@ function _onmatchstartbr() {
     prematchendtime = -1;
   }
 
-  frame_duration = function_676cfe2ab64ea758();
+  frame_duration = getframeduration();
   dlog_recordevent("dlog_event_br_server_match_start", ["br_mission_type_info", missiontypeinfo, "map", level.script, "sub_game_type", subgametype, "max_team_size", maxteamsize, "player_count", playercount, "human_player_count", humanplayercount, "team_count", teamcount, "kiosk_respawn_cost", kioskrespawncost, "gulag_active", var_5ceaea1d11f6f7f5, "gulag_max_uses", gulagmaxuses, "gulag_starting_armor", gulagstartingarmor, "gulag_spawn_loot", gulagspawnloot, "prematch_end_time", prematchendtime, "playlist_id", playlistid, "frame_duration", frame_duration]);
 }
 

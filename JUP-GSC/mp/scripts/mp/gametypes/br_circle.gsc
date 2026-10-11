@@ -151,7 +151,7 @@ function function_488d5286d6e45d8b(dvarvalue) {
   return array;
 }
 
-function initcirclepoststarttocircleindex(origin, var_8f6402ad8e91da6a, startcircleindex, var_26189638809f7b88) {
+function initcirclepoststarttocircleindex(origin, startcircledelay, startcircleindex, startcircleclosetime) {
   if(isDefined(level.br_circle)) {
     return;
   }
@@ -170,21 +170,21 @@ function initcirclepoststarttocircleindex(origin, var_8f6402ad8e91da6a, startcir
   newsize = level.br_level.br_circleclosetimes.size - startcircleindex;
   var_7a29dcf228edd854 = level.br_level.br_circleradii[0];
 
-  if(!isDefined(var_26189638809f7b88) || var_26189638809f7b88 <= 0) {
-    var_26189638809f7b88 = level.br_level.br_circleclosetimes[0];
+  if(!isDefined(startcircleclosetime) || startcircleclosetime <= 0) {
+    startcircleclosetime = level.br_level.br_circleclosetimes[0];
   }
 
   level.br_circle.circleindex = -1;
   level.br_level.circle_defaults = undefined;
   level.br_circle.damagetick = copycirclearraystartingat(level.br_circle.damagetick, startcircleindex);
   level.br_level.br_circleclosetimes = copycirclearraystartingat(level.br_level.br_circleclosetimes, startcircleindex);
-  level.br_level.br_circledelaytimes = getzeroarray(newsize, var_8f6402ad8e91da6a);
-  level.br_level.br_circleshowdelaydanger = getzeroarray(newsize, var_8f6402ad8e91da6a);
+  level.br_level.br_circledelaytimes = getzeroarray(newsize, startcircledelay);
+  level.br_level.br_circleshowdelaydanger = getzeroarray(newsize, startcircledelay);
   level.br_level.br_circleshowdelaysafe = copycirclearraystartingat(level.br_level.br_circleshowdelaysafe, startcircleindex);
   level.br_level.br_circleminimapradii = copycirclearraystartingat(level.br_level.br_circleminimapradii, startcircleindex);
   level.br_level.br_circleradii = copycirclearraystartingat(level.br_level.br_circleradii, startcircleindex);
   level.br_level.br_circleradii[0] = var_7a29dcf228edd854;
-  level.br_level.br_circleclosetimes[0] = var_26189638809f7b88;
+  level.br_level.br_circleclosetimes[0] = startcircleclosetime;
   applycirclesettings();
   level thread _precalcsafecirclecenters(origin);
   level notify("CirclePeekCleanup");
@@ -698,7 +698,7 @@ function updateindangercirclestate(isincircle) {
     if(isincircle) {
       startchallengetimer("alive_in_gas");
       scripts\mp\gametypes\br_analytics::branalytics_circleenter(self, currenttime - self.lastcircleeventtime);
-      namespace_88bfae359020fdd3::function_1976438a8865ac27("br_ftue_gas");
+      namespace_88bfae359020fdd3::ftue_triggertip("br_ftue_gas");
 
       if(istrue(self.gasmaskequipped)) {
         self clearsoundsubmix("jup_wz_gasmask_nogas");
@@ -787,7 +787,7 @@ function startuiclosetimer(waittime, var_f007ce073dc3c519, var_6b890e6be7982efb,
   foreach(player in level.players) {
     if(!isbot(player) && !player scripts\mp\gametypes\br_public::isplayeringulag() && (!var_ae2ad6c65a8689f || circleindex > 0) && !istrue(skipsplash)) {
       player thread scripts\mp\hud_message::showsplash("br_circle_moving");
-      player namespace_88bfae359020fdd3::function_1976438a8865ac27("br_ftue_circle");
+      player namespace_88bfae359020fdd3::ftue_triggertip("br_ftue_circle");
       player playlocalsound("br_circle_closing");
     }
   }
@@ -999,12 +999,12 @@ function function_bf5f4d7a498988a8(player, var_498e4e279fb8ed85, timeoffset) {
   return undefined;
 }
 
-function isvalidpointinbounds(point, var_ae913f2dc0534b48, var_498e4e279fb8ed85) {
+function isvalidpointinbounds(point, checkbadcircleareas, var_498e4e279fb8ed85) {
   if(!scripts\mp\gametypes\br_c130::ispointinbounds(point, 1)) {
     return false;
   }
 
-  if(istrue(var_ae913f2dc0534b48) && _ispointinbadarea(point)) {
+  if(istrue(checkbadcircleareas) && _ispointinbadarea(point)) {
     return false;
   }
 
@@ -1171,7 +1171,7 @@ function function_177e9958fce17793(targetpos, radiuspercent, var_498e4e279fb8ed8
   return currentclosestpoint;
 }
 
-function getrandompointinboundscircle(origin, radius, percentmin, percentmax, droptoground, snaptonavmesh, var_ae913f2dc0534b48, var_498e4e279fb8ed85, anglemin, anglemax) {
+function getrandompointinboundscircle(origin, radius, percentmin, percentmax, droptoground, snaptonavmesh, checkbadcircleareas, var_498e4e279fb8ed85, anglemin, anglemax) {
   maxtests = 8;
   pointinbounds = origin;
   testcount = 0;
@@ -1187,13 +1187,13 @@ function getrandompointinboundscircle(origin, radius, percentmin, percentmax, dr
   while(testcount < maxtests) {
     randompoint = getrandompointincircle(origin, radius, percentmin, percentmax, 1, 0, anglemin, anglemax);
 
-    if(isvalidpointinbounds(randompoint, var_ae913f2dc0534b48, var_498e4e279fb8ed85)) {
+    if(isvalidpointinbounds(randompoint, checkbadcircleareas, var_498e4e279fb8ed85)) {
       var_16330882772f973f = randompoint;
 
       if(istrue(snaptonavmesh) && isnavmeshloaded()) {
         randompoint = getclosestpointonnavmesh(var_16330882772f973f);
 
-        if(isvalidpointinbounds(randompoint, var_ae913f2dc0534b48, var_498e4e279fb8ed85)) {
+        if(isvalidpointinbounds(randompoint, checkbadcircleareas, var_498e4e279fb8ed85)) {
           pointinbounds = randompoint;
           break;
         }

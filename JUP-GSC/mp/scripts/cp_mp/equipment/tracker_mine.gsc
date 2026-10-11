@@ -27,7 +27,7 @@ function autoexec main() {
 function tracker_mine_used(grenade) {
   grenade scripts\cp_mp\ent_manager::registerspawn(1, &function_94d121fb31a78605);
   grenade function_63d1a11f8b22244(undefined, &function_9fb09350ae81bbf5, &function_2f7f87f09716e22e);
-  thread function_f3bb4f4911a1beb2("weapons", "monitorDisownedGrenade", self, grenade);
+  thread callsharedfunc("weapons", "monitorDisownedGrenade", self, grenade);
   result = grenade waittill_any_timeout_1(20, "missile_stuck");
 
   if(!isDefined(result) || result == "timeout") {
@@ -49,11 +49,11 @@ function tracker_mine_used(grenade) {
     self[[getsharedfunc("weapons", "onEquipmentPlanted")]](grenade, "equip_tracker_mine", &function_2f7f87f09716e22e);
   }
 
-  grenade thread function_f3bb4f4911a1beb2("damage", "monitorDamage", grenade.bundle.maxhealth, "hitequip", &function_66a7440055d386c3, &function_7bdb3610d602438d, 0);
+  grenade thread callsharedfunc("damage", "monitorDamage", grenade.bundle.maxhealth, "hitequip", &function_66a7440055d386c3, &function_7bdb3610d602438d, 0);
   grenade.headiconid = grenade scripts\cp_mp\entityheadicons::setheadicon_factionimage(0, 2, undefined, undefined, undefined, undefined, 1);
   grenade function_21c1cf07d4287694();
   grenade function_8bdd230c4ff3a6cb();
-  grenade thread function_f3bb4f4911a1beb2("equipment", "makeExplosiveUsableTag", "tag_use", 1);
+  grenade thread callsharedfunc("equipment", "makeExplosiveUsableTag", "tag_use", 1);
 }
 
 function function_21c1cf07d4287694() {
@@ -97,7 +97,7 @@ function function_c7ab3c1622f5161() {
     self.trigger waittill("trigger", triggeredent);
 
     if(function_a3f22e9cffa1ee57(triggeredent, var_2dc0a299142b3d64)) {
-      if(isDefined(level.delayminetime) && istrue(triggeredent function_f3bb4f4911a1beb2("perk", "hasPerk", "specialty_delaymine"))) {
+      if(isDefined(level.delayminetime) && istrue(triggeredent callsharedfunc("perk", "hasPerk", "specialty_delaymine"))) {
         wait level.delayminetime;
       }
 
@@ -121,7 +121,7 @@ function function_c7ab3c1622f5161() {
 }
 
 function function_a3f22e9cffa1ee57(targetent, startpos) {
-  return (isPlayer(targetent) || isai(targetent)) && self.owner isenemy(targetent) && targetent function_c1d424f2639c370e(startpos) && !istrue(function_f3bb4f4911a1beb2("player", "isInLastStand", targetent));
+  return (isPlayer(targetent) || isai(targetent)) && self.owner isenemy(targetent) && targetent function_c1d424f2639c370e(startpos) && !istrue(callsharedfunc("player", "isInLastStand", targetent));
 }
 
 function function_f9310df4c660fa53(radius, startpos, endpos, color) {
@@ -139,9 +139,9 @@ function function_c8350e9ea22ae8e9(victim) {
   level endon("game_ended");
   victim waittill("tracker_projectile_result", result);
 
-  if(istrue(result) && isPlayer(victim) && istrue(function_f3bb4f4911a1beb2("player", "isReallyAlive", victim))) {
+  if(istrue(result) && isPlayer(victim) && istrue(callsharedfunc("player", "isReallyAlive", victim))) {
     scripts\cp_mp\challenges::function_b0f754c8a379154e("equip_tracker_mine", self.owner, undefined, function_e2ff8f4b4e94f723(#"hash_83a2d67994d7e295", #"hit"));
-    self.owner function_f3bb4f4911a1beb2("equipment", "combatRecordTacticalStat", "equip_tracker_mine");
+    self.owner callsharedfunc("equipment", "combatRecordTacticalStat", "equip_tracker_mine");
   }
 }
 
@@ -170,11 +170,11 @@ function function_2f7f87f09716e22e() {
   scripts\cp_mp\ent_manager::deregisterspawn();
 
   if(isDefined(self.owner)) {
-    self.owner function_f3bb4f4911a1beb2("weapons", "removeEquip", self);
+    self.owner callsharedfunc("weapons", "removeEquip", self);
   }
 
   if(isDefined(self.dangerzone)) {
-    function_f3bb4f4911a1beb2("spawn", "removeSpawnDangerZone", self.dangerzone);
+    callsharedfunc("spawn", "removeSpawnDangerZone", self.dangerzone);
   }
 
   if(isDefined(self)) {
@@ -195,7 +195,7 @@ function function_ab670147f0d58a96(grenade) {
     canplant = grenade[[level.var_ca4e08767cbdae12]]();
 
     if(!canplant) {
-      function_f3bb4f4911a1beb2("hud", "showErrorMessage", "EQUIPMENT/PLANT_FAILED");
+      callsharedfunc("hud", "showErrorMessage", "EQUIPMENT/PLANT_FAILED");
       scripts\cp_mp\equipment::incrementequipmentslotammo("secondary");
       grenade delete();
       return false;
@@ -213,8 +213,8 @@ function function_ab670147f0d58a96(grenade) {
   grenade function_84b0895c8cebc968();
   grenade set_apply_emp_callback(&function_21ca9d2c8fc54d2);
   grenade set_clear_emp_callback(&function_523562e8b7ff6a39);
-  grenade function_f3bb4f4911a1beb2("emp", "setEMP_Applied_Callback", &function_21ca9d2c8fc54d2);
-  grenade function_f3bb4f4911a1beb2("emp", "setEMP_Cleared_Callback", &function_523562e8b7ff6a39);
+  grenade callsharedfunc("emp", "setEMP_Applied_Callback", &function_21ca9d2c8fc54d2);
+  grenade callsharedfunc("emp", "setEMP_Cleared_Callback", &function_523562e8b7ff6a39);
   grenade scripts\cp_mp\equipment\haywire::function_172d848d58051fdf(&function_c1b85fa145e2a6d3);
   grenade scripts\common\elevators::function_49197cd063a740ea(&function_94d121fb31a78605);
 
@@ -233,26 +233,26 @@ function function_84b0895c8cebc968() {
   }
 
   if(isDefined(self.dangerzone)) {
-    function_f3bb4f4911a1beb2("spawn", "removeSpawnDangerZone", self.dangerzone);
+    callsharedfunc("spawn", "removeSpawnDangerZone", self.dangerzone);
   }
 
   if(issharedfuncdefined("spawn", "addSpawnDangerZone")) {
-    self.dangerzone = function_f3bb4f4911a1beb2("spawn", "addSpawnDangerZone", self.origin, 350, 70, self.owner.team, undefined, self.owner, 0, self, 1);
+    self.dangerzone = callsharedfunc("spawn", "addSpawnDangerZone", self.origin, 350, 70, self.owner.team, undefined, self.owner, 0, self, 1);
   }
 }
 
 function function_94c5d34d6f54f5fd() {
   if(isDefined(self.sentientpool)) {
-    function_f3bb4f4911a1beb2("game", "unregisterSentient", self.sentientpool, self.sentientpoolindex);
+    callsharedfunc("game", "unregisterSentient", self.sentientpool, self.sentientpoolindex);
   }
 
-  function_f3bb4f4911a1beb2("game", "registerSentient", "Tactical_Static", self.owner);
+  callsharedfunc("game", "registerSentient", "Tactical_Static", self.owner);
 }
 
 function function_21ca9d2c8fc54d2(data) {
   tracker_mine_disable();
   self setscriptablepartstate("empd", "active");
-  data.attacker namespace_53fc9ddbb516e6e1::function_e800498086e36c29("disabled_tracker_mine", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  data.attacker namespace_53fc9ddbb516e6e1::doscoreeventsharedfunc("disabled_tracker_mine", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
 }
 
 function function_523562e8b7ff6a39(data) {
@@ -264,7 +264,7 @@ function function_c1b85fa145e2a6d3(data) {
   function_94d121fb31a78605();
 
   if(issharedfuncdefined("equipment", "giveScoreForEquipment") && isDefined(self.owner) && isDefined(data.attacker) && self.owner isenemy(data.attacker)) {
-    data.attacker function_f3bb4f4911a1beb2("equipment", "giveScoreForEquipment", self, undefined);
+    data.attacker callsharedfunc("equipment", "giveScoreForEquipment", self, undefined);
   }
 }
 
@@ -272,6 +272,6 @@ function tracker_mine_onownerchanged(oldowner) {
   self setscriptablepartstate("hacked", "active");
   function_84b0895c8cebc968();
   function_94c5d34d6f54f5fd();
-  thread function_f3bb4f4911a1beb2("equipment", "makeExplosiveUnusuableTag");
-  self.owner thread function_f3bb4f4911a1beb2("weapons", "monitorDisownedGrenade", self.owner, self);
+  thread callsharedfunc("equipment", "makeExplosiveUnusuableTag");
+  self.owner thread callsharedfunc("weapons", "monitorDisownedGrenade", self.owner, self);
 }

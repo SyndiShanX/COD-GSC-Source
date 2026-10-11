@@ -12,7 +12,7 @@ function function_b8554b5efa2488b0() {
   var_b55fd7d854233d03 = getEnt(var_45e51f698992d648.target, "targetname");
   a_e_lights = getEntArray("security_light", "targetname");
   var_6a4f1cc271876221 = getEntArray("rollup_window_1", "targetname");
-  function_b56c65359567813a(a_e_lights, 0);
+  set_security_lights(a_e_lights, 0);
   function_15e73138168942f(var_6a4f1cc271876221);
 
   if(isDefined(var_45e51f698992d648) && isDefined(var_b55fd7d854233d03)) {
@@ -62,7 +62,7 @@ function function_a67b8af5f3b9e6c8(var_45e51f698992d648, var_b55fd7d854233d03, v
     var_b55fd7d854233d03 function_95e1d0440e05beae("rebooting");
     e_alarm = spawn("script_model", var_45e51f698992d648.origin);
     e_alarm playLoopSound("evt_pent_shutter_alarm_loop");
-    function_b56c65359567813a(a_e_lights, 1);
+    set_security_lights(a_e_lights, 1);
     function_1c486f0bbda89a7c(var_6a4f1cc271876221);
     wait max(2, -1);
     e_alarm stopsounds();
@@ -78,13 +78,13 @@ function function_a67b8af5f3b9e6c8(var_45e51f698992d648, var_b55fd7d854233d03, v
     var_45e51f698992d648 function_95e1d0440e05beae("rebooting");
     var_b55fd7d854233d03 remove_waypoint();
     var_b55fd7d854233d03 function_95e1d0440e05beae("rebooting");
-    function_b56c65359567813a(a_e_lights, 0);
+    set_security_lights(a_e_lights, 0);
     function_15e73138168942f(var_6a4f1cc271876221);
     wait max(2, 4);
   }
 }
 
-function function_b56c65359567813a(a_e_lights, b_turn_on) {
+function set_security_lights(a_e_lights, b_turn_on) {
   foreach(e_light in a_e_lights) {
     if(b_turn_on) {
       e_light setlightintensity(0.6);
@@ -207,7 +207,7 @@ function function_3e107c8da951fc4c(var_75b351416918d890) {
 }
 
 function function_a26f592a97bf14d0() {
-  var_39725c38968e8ea2 = function_f159c10d5cf8f0b4("no_prone_trigger", "script_noteworthy");
+  var_39725c38968e8ea2 = getnoentvolumearray("no_prone_trigger", "script_noteworthy");
 
   foreach(var_14746754a0f92b39 in var_39725c38968e8ea2) {
     scripts\mp\utility\trigger::makeenterexittrigger(var_14746754a0f92b39, &function_cb60cd4afb884862, &function_df2a2bf55e01b1f4);

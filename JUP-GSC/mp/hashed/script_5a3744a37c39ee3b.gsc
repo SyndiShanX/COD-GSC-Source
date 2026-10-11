@@ -532,7 +532,7 @@ function function_937c131dcec8e814(data) {
   player = data.player;
 
   if(!isDefined(player.pers["telemetry"].var_7f5d11228750d896)) {
-    if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+    if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
       return;
     }
 
@@ -561,21 +561,21 @@ function private function_a6db08193cf5c2dc(attacker, params) {
   }
 
   if(isDefined(params.sweapon) && isDefined(params.smeansofdeath) && isPlayer(params.eattacker)) {
-    var_2bd7283211fa61e7 = function_591305dc9c07499b(params.sweapon, params.eattacker, params.smeansofdeath);
+    weaponelementtype = function_591305dc9c07499b(params.sweapon, params.eattacker, params.smeansofdeath);
     var_4106d2021e226fcd = "none";
 
-    if(var_2bd7283211fa61e7 == "fire" || params.smeansofdeath == "MOD_ELEMENTAL_FIRE") {
+    if(weaponelementtype == "fire" || params.smeansofdeath == "MOD_ELEMENTAL_FIRE") {
       if(!isDefined(params.einflictor) || !is_equal(params.einflictor.weapon_name, "hellhound_molotov")) {
         var_4106d2021e226fcd = #"hash_f09b4f756df11aa4";
         player.pers["telemetry"].misc_combat++;
       }
-    } else if(var_2bd7283211fa61e7 == "cold" || params.smeansofdeath == "MOD_ELEMENTAL_COLD") {
+    } else if(weaponelementtype == "cold" || params.smeansofdeath == "MOD_ELEMENTAL_COLD") {
       var_4106d2021e226fcd = #"hash_a62035653525d27e";
       player.pers["telemetry"].misc_combat++;
-    } else if(var_2bd7283211fa61e7 == "electrical" || params.smeansofdeath == "MOD_ELEMENTAL_ELEC") {
+    } else if(weaponelementtype == "electrical" || params.smeansofdeath == "MOD_ELEMENTAL_ELEC") {
       var_4106d2021e226fcd = #"hash_f48e7e053c787be5";
       player.pers["telemetry"].misc_combat++;
-    } else if(var_2bd7283211fa61e7 == "toxic" || params.smeansofdeath == "MOD_ELEMENTAL_TOXIC") {
+    } else if(weaponelementtype == "toxic" || params.smeansofdeath == "MOD_ELEMENTAL_TOXIC") {
       var_4106d2021e226fcd = #"hash_e1c37b28b02f43bf";
       player.pers["telemetry"].misc_combat++;
     }
@@ -604,14 +604,14 @@ function on_ai_killed(params) {
     attacker = params.einflictor.owner;
   }
 
-  if(isDefined(self) && isDefined(self.var_aaf0465944b061ed) && self.var_aaf0465944b061ed == "warlord_kia" && !isPlayer(attacker)) {
+  if(isDefined(self) && isDefined(self.kiastring) && self.kiastring == "warlord_kia" && !isPlayer(attacker)) {
     attacker = namespace_64135de19550f047::function_3bd4148272ae66ee(params);
   }
 
   if(isPlayer(attacker)) {
     player = attacker;
 
-    if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+    if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
       return;
     }
 
@@ -622,13 +622,13 @@ function on_ai_killed(params) {
     num_hits = self.var_d37b75616f7c2ee.num_hits;
     sweapon = self.var_d37b75616f7c2ee.sweapon;
     aicategory = self.aicategory;
-    var_aaf0465944b061ed = self.var_aaf0465944b061ed;
-    var_14edc6d1db3695bc = self.var_d37b75616f7c2ee.var_14edc6d1db3695bc;
+    kiastring = self.kiastring;
+    biscritical = self.var_d37b75616f7c2ee.biscritical;
     unittype = self.unittype;
     type = self.type;
     subclass = self.subclass;
 
-    if(!isDefined(aicategory) && var_aaf0465944b061ed == "warlord_kia") {
+    if(!isDefined(aicategory) && kiastring == "warlord_kia") {
       aicategory = "boss";
     }
 
@@ -637,7 +637,7 @@ function on_ai_killed(params) {
     }
 
     if(vehicle_kill) {
-      var_aaf0465944b061ed = points::function_818ac0c0b8f0b22(var_aaf0465944b061ed, "_vehicle");
+      kiastring = points::function_818ac0c0b8f0b22(kiastring, "_vehicle");
     }
 
     if(isDefined(sweapon)) {
@@ -692,9 +692,9 @@ function on_ai_killed(params) {
         } else if(aicategory == "elite") {
           player.pers["telemetry"].elite_kills++;
           var_973199e4a96e0929.statname = "weapon_elite_zombie_kills";
-        } else if(aicategory == "boss" || var_aaf0465944b061ed == "deathworm_kia" || var_aaf0465944b061ed == "warlord_kia") {
+        } else if(aicategory == "boss" || kiastring == "deathworm_kia" || kiastring == "warlord_kia") {
           player.pers["telemetry"].boss_kills++;
-          player.pers["telemetry"].var_b0def0662a1a3bdb = player.pers["telemetry"].var_b0def0662a1a3bdb + (isDefined(rank::getscoreinfoxp(var_aaf0465944b061ed)) ? rank::getscoreinfoxp(var_aaf0465944b061ed) : 0);
+          player.pers["telemetry"].var_b0def0662a1a3bdb = player.pers["telemetry"].var_b0def0662a1a3bdb + (isDefined(rank::getscoreinfoxp(kiastring)) ? rank::getscoreinfoxp(kiastring) : 0);
           var_973199e4a96e0929.statname = "weapon_boss_zombie_kills";
         }
 
@@ -713,7 +713,7 @@ function on_ai_killed(params) {
         player namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_update_weapon_stats", var_2f6c0e8dface9b8c);
       }
 
-      if(istrue(var_14edc6d1db3695bc)) {
+      if(istrue(biscritical)) {
         var_9a1d6caefd24b9a7 = spawnStruct();
         var_9a1d6caefd24b9a7.weaponname = weaponname;
         var_9a1d6caefd24b9a7.fullweaponname = fullweaponname;
@@ -735,10 +735,10 @@ function on_ai_killed(params) {
         player.pers["telemetry"].soldier_kills++;
         var_afb46069ccac43c8.statname = "weapon_soldier_kills";
         player namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_update_weapon_stats", var_afb46069ccac43c8);
-        player.pers["telemetry"].var_af3f574708e215b8 = player.pers["telemetry"].var_af3f574708e215b8 + (isDefined(rank::getscoreinfoxp(var_aaf0465944b061ed)) ? rank::getscoreinfoxp(var_aaf0465944b061ed) : 0);
+        player.pers["telemetry"].var_af3f574708e215b8 = player.pers["telemetry"].var_af3f574708e215b8 + (isDefined(rank::getscoreinfoxp(kiastring)) ? rank::getscoreinfoxp(kiastring) : 0);
       } else if(type == "zombie") {
         player.pers["telemetry"].zombie_kills++;
-        player.pers["telemetry"].zombie_kills_xp = player.pers["telemetry"].zombie_kills_xp + (isDefined(rank::getscoreinfoxp(var_aaf0465944b061ed)) ? rank::getscoreinfoxp(var_aaf0465944b061ed) : 0);
+        player.pers["telemetry"].zombie_kills_xp = player.pers["telemetry"].zombie_kills_xp + (isDefined(rank::getscoreinfoxp(kiastring)) ? rank::getscoreinfoxp(kiastring) : 0);
       }
 
       var_3a0b9ff4afaae205 = spawnStruct();
@@ -748,7 +748,7 @@ function on_ai_killed(params) {
       var_3a0b9ff4afaae205.variantid = variantindex;
       var_3a0b9ff4afaae205.weaponobj = sweapon;
       var_3a0b9ff4afaae205.statname = "weapon_white_rarity_kills";
-      rarity_weapon = player function_ed7c10f78d0598f2(sweapon);
+      rarity_weapon = player getplayerweaponraritysharedfunc(sweapon);
 
       if(isDefined(rarity_weapon)) {
         switch (rarity_weapon) {
@@ -828,9 +828,9 @@ function on_player_death(params) {
 function function_4828fb386ec572ba() {
   activitystruct = namespace_cde84ab88f41f1a5::function_5cc2fd3d10cbab56(self);
 
-  if(isDefined(activitystruct.var_6346961d07f668fe)) {
-    var_2d25d18d189a363a = namespace_70aa82e7f409bc33::function_1f3e343912ae15c5(activitystruct.var_6346961d07f668fe);
-    activity_type = var_2d25d18d189a363a.type;
+  if(isDefined(activitystruct.focusedactivityid)) {
+    currentfocusedactivity = namespace_70aa82e7f409bc33::getactivityinstance(activitystruct.focusedactivityid);
+    activity_type = currentfocusedactivity.type;
   }
 
   dlog_recordevent("dlog_event_ob_team_eliminated", ["team", self.team, "survival_time", gettime() - level.starttime, "activity_type", isDefined(activity_type) ? activity_type : "none", "was_rift_run", istrue(self.rift_run)]);
@@ -944,17 +944,17 @@ function function_8f83b501bb98e017() {
   return self.difficulty_region;
 }
 
-function function_bf9ed28219b4e9b9(var_6f8af5eb76deac21) {
+function function_bf9ed28219b4e9b9(relevantinfostruct) {
   if(!istrue(self.var_bbbbbc7263f1c834)) {
     function_7abcee67f1c861eb();
   }
 }
 
-function function_90b2469c5d2c8332(var_6f8af5eb76deac21) {
-  if(isDefined(var_6f8af5eb76deac21.playerlist) && isarray(var_6f8af5eb76deac21.playerlist)) {
+function function_90b2469c5d2c8332(relevantinfostruct) {
+  if(isDefined(relevantinfostruct.playerlist) && isarray(relevantinfostruct.playerlist)) {
     self.difficulty_region = function_8f83b501bb98e017();
 
-    foreach(player in var_6f8af5eb76deac21.playerlist) {
+    foreach(player in relevantinfostruct.playerlist) {
       if(isPlayer(player)) {
         if(self.category == "Contract") {
           player.pers["telemetry"].contracts_completed++;
@@ -979,13 +979,13 @@ function function_90b2469c5d2c8332(var_6f8af5eb76deac21) {
   }
 }
 
-function function_ecc4c25753cd6d64(var_6f8af5eb76deac21) {
+function function_ecc4c25753cd6d64(relevantinfostruct) {
   if(!istrue(self.var_bbbbbc7263f1c834)) {
     function_a7a86fb367a570();
   }
 }
 
-function function_f1845574e88cb9ee(var_6f8af5eb76deac21) {
+function function_f1845574e88cb9ee(relevantinfostruct) {
   if(!istrue(self.var_bbbbbc7263f1c834)) {
     function_8d63eecaeee93b02();
   }

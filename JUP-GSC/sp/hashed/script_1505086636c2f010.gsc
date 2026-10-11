@@ -43,7 +43,7 @@ function createstructs(fe, us, cf) {
   f = &strike_additem;
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_wave_1_east_1";
   fe[[f]](s, us, cf, (-17799.5, 42731.2, -489.58), (0, 111.93, 0), "veh_wave_1", "wave_1_east_1_start");
   s = s();
@@ -74,7 +74,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-23675.7, 47674.2, 2236.98), (0, 299, 0), "default_player_start");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_wave_2_west_2";
   fe[[f]](s, us, cf, (-25334.4, 36330.2, 390.81), (0, 345.75, 0), "veh_wave_2", "wave_2_west_2_start");
   s = s();
@@ -223,7 +223,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-23558.7, 45331.5, 102.36), (0, 213.13, 0), "ai_wave_north", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 3072);
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "initial_bomb_rider";
   fe[[f]](s, us, cf, (-25578.2, 40467.8, -126.63), (0, 106.93, 0), "initial_bomb_truck");
   s = s();
@@ -979,7 +979,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-25265.7, 45502.9, 122), (0, 97.47, 0), "cspf_0_auto78", "cspf_0_auto79");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_wave_1_east_2";
   fe[[f]](s, us, cf, (-17210, 42738.2, -457.08), (0, 133.2, 0), "veh_wave_1", "wave_1_east_2_start");
   s = s();
@@ -1474,7 +1474,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-24380.3, 43185.5, 572), (0, 0, 0), undefined, undefined, "obj_exfil");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_rhib_2man";
+  s.script_vehicleref = "veh_jup_rhib_2man";
   fe[[f]](s, us, cf, (-19736.2, 41945.6, -622), (0, 25, 0), "veh_initial_boat");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
@@ -1637,7 +1637,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-22071.6, 44842.5, -132), (0, 344.99, 0), "cspf_0_auto361", "cspf_0_auto362");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "sentry_truck_rider";
   fe[[f]](s, us, cf, (-19906.6, 43555.4, -481.34), (0, 101.99, 0), "sentry_truck");
   s = s();
@@ -2038,7 +2038,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_rhib_2man";
+  s.script_vehicleref = "veh_jup_rhib_2man";
   fe[[f]](s, us, cf, (-18998.3, 44493.5, -622), (0, 175, 0), "patrol_boat_spawner_north", "cspf_0_auto446");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
@@ -2062,12 +2062,12 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-24379.8, 41751.8, -347.63), (0, 223.93, 0), "ai_wave_north", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 3072);
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_wave_inf_east_1";
   fe[[f]](s, us, cf, (-16785.2, 42084.9, -489.08), (0, 126.57, 0), "veh_wave_3", "wave_inf_east_1_start");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_wave_2_west_1";
   fe[[f]](s, us, cf, (-24910, 35995.1, 396.01), (0, 57.93, 0), "veh_wave_2", "west_2_start");
   s = s();
@@ -2083,7 +2083,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_rhib_2man";
+  s.script_vehicleref = "veh_jup_rhib_2man";
   fe[[f]](s, us, cf, (-20232.9, 40529.2, -622), (0, 135, 0), "patrol_boat_spawner_south", "cspf_0_auto456");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
@@ -2254,7 +2254,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-23853, 43897.5, 532.1), (0, 29.6, 0), "cspf_0_auto1968432612145477398", "cspf_0_auto14077399418844572956");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_wave_inf_west_1";
   fe[[f]](s, us, cf, (-24872.9, 36047.8, 396.01), (0, 55.93, 0), "veh_wave_3", "wave_inf_west_1_start");
   s = s();
@@ -3452,7 +3452,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-26327, 47816.8, 4406), (0, 294.9, 0), "cspf_0_auto12529780790383955790", "cspf_0_auto3722091472565726706");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_truck_reinf_truck";
   fe[[f]](s, us, cf, (-17480.5, 43123.2, -514.08), (0, 170.47, 0), "truck_reinf_truck", "truck_reinf_truck_start");
   s = s();
@@ -3525,7 +3525,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-24326.6, 40062.8, 1357.85), (0, 19.6, 0), "cspf_0_auto2300332099134084051", "exfil_heli_landing_alt", undefined, undefined, undefined, undefined, undefined, undefined, 10);
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_bridge_right_reinf_truck";
   fe[[f]](s, us, cf, (-16730, 42573.4, -514.08), (0, 117.47, 0), "bridge_right_reinf_truck", "bridge_right_reinf_truck_start");
   s = s();
@@ -3581,7 +3581,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-11248.3, 40029.7, 7033.43), (0, 27.6, 0), "cspf_0_auto1501020003907882729", "exfil_heli_exit_alt");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_bridge_left_reinf_truck";
   fe[[f]](s, us, cf, (-23744.3, 44316, 143.92), (0, 38.87, 0), "bridge_left_reinf_truck", "bridge_left_reinf_truck_start");
   s = s();
@@ -3632,7 +3632,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-22970, 42602, -416), (0, 0, 0), "cspf_0_auto17545805037750074428", "cspf_0_auto11191881761251794117");
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_bunker_reinf_truck";
   fe[[f]](s, us, cf, (-25574.9, 40840.9, -103.08), (0, 133.27, 0), "bunker_reinf_truck", "bunker_reinf_truck_start");
   s = s();
@@ -3697,7 +3697,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-16563.7, 42467.6, -537.63), (0, 125.53, 0), "ai_bridge_right_reinf_truck", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 3072);
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_catwalk_reinf_truck";
   fe[[f]](s, us, cf, (-24759.1, 36625.5, 359.92), (0, 40.77, 0), "catwalk_reinf_truck", "catwalk_reinf_truck_start");
   s = s();
@@ -4820,7 +4820,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-24967.6, 36525.3, 347.5), (0, 35.43, 0), "ai_exfil_reinf_truck_alt", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 3072);
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_exfil_reinf_truck_alt";
   fe[[f]](s, us, cf, (-24651.8, 36508, 359.92), (0, 40.77, 0), "exfil_reinf_truck_alt", "exfil_reinf_truck_start_alt");
   s = s();
@@ -5836,7 +5836,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-16641.7, 42409.1, -537.63), (0, 125.53, 0), "ai_right_truck_exfil_adds", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 3072);
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_right_truck_exfil_adds";
   fe[[f]](s, us, cf, (-16815.2, 42657.5, -514.08), (0, 117.47, 0), "exfil_right_truck", "exfil_right_truck_start");
   s = s();
@@ -5869,7 +5869,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (-24000, 44776, 56), (0, 0, 0), "trigger_execution", undefined, undefined, undefined, undefined, undefined, undefined, 1000);
   s = s();
   s.cs_flag = "cp_jup_dam_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   s.spawngroup = "ai_exfil_truck_adds";
   fe[[f]](s, us, cf, (-23736.3, 44597.8, 143.92), (0, 22.87, 0), "exfil_truck_add", "exfil_truck_add_start");
   s = s();

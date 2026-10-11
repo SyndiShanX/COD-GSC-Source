@@ -600,21 +600,21 @@ function function_eb31d2457d09576(var_e21fdc330521a449) {
 
   while(true) {
     if(istrue(var_e21fdc330521a449)) {
-      var_863c619037f3ac74 = tank.origin;
+      pointtocheck = tank.origin;
     } else {
-      var_863c619037f3ac74 = tank.origin + rotatevector((30, 0, -30), tank.angles);
+      pointtocheck = tank.origin + rotatevector((30, 0, -30), tank.angles);
     }
 
-    aabbmin = var_863c619037f3ac74 - radiusvector;
-    aabbmax = var_863c619037f3ac74 + radiusvector;
-    var_3c4b19abbdf0937c = var_863c619037f3ac74 - var_f8d57c6bc526da29;
-    var_2e1990d919dc0eb2 = var_863c619037f3ac74 + var_f8d57c6bc526da29;
+    aabbmin = pointtocheck - radiusvector;
+    aabbmax = pointtocheck + radiusvector;
+    var_3c4b19abbdf0937c = pointtocheck - var_f8d57c6bc526da29;
+    var_2e1990d919dc0eb2 = pointtocheck + var_f8d57c6bc526da29;
 
     if(getdvarint(@ "hash_955092b9791e3642", 0) == 1) {
       level thread draw_line_for_time(aabbmin, aabbmax, 1, 0, 0, 2);
-      level thread draw_circle(var_863c619037f3ac74, var_21412c22fd1045d7, (1, 0, 0), 1, 0, 2);
+      level thread draw_circle(pointtocheck, var_21412c22fd1045d7, (1, 0, 0), 1, 0, 2);
       level thread draw_line_for_time(var_3c4b19abbdf0937c, var_2e1990d919dc0eb2, 1, 0, 0, 2);
-      level thread draw_circle(var_863c619037f3ac74, var_dcb6304be0fe7b52, (1, 0, 0), 1, 0, 2);
+      level thread draw_circle(pointtocheck, var_dcb6304be0fe7b52, (1, 0, 0), 1, 0, 2);
     }
 
     var_3a3a8605cd6d3dfc = physics_aabbbroadphasequery(aabbmin, aabbmax, itemcontents, var_646389193279e8ec);
@@ -1117,7 +1117,7 @@ function function_9ace184d65c28ecd(vehicle, capturezone) {
   }
 }
 
-function function_4b18165476fd992a(vehicle, var_3452ca9608f63439) {
+function function_4b18165476fd992a(vehicle, zonenum) {
   var_95f2a51e7b487eb2 = vehicle function_50b1e7d653deac05(game["attackers"]);
 
   foreach(attacker in var_95f2a51e7b487eb2) {
@@ -1132,7 +1132,7 @@ function function_4b18165476fd992a(vehicle, var_3452ca9608f63439) {
       var_9cb84269bb4959b6 = 1;
     }
 
-    attacker function_8db3128fbc6e494(#"hash_68e3445a3babfc66", var_9cb84269bb4959b6, var_3452ca9608f63439);
+    attacker function_8db3128fbc6e494(#"hash_68e3445a3babfc66", var_9cb84269bb4959b6, zonenum);
   }
 }
 
@@ -1253,7 +1253,7 @@ function function_50b1e7d653deac05(team) {
   var_21c4f8a0ffd605ce = [];
 
   if(issharedfuncdefined("super_capture_bot", "captureBot_getAllCaptureBotsForTeam")) {
-    var_21c4f8a0ffd605ce = function_f3bb4f4911a1beb2("super_capture_bot", "captureBot_getAllCaptureBotsForTeam", team, 1);
+    var_21c4f8a0ffd605ce = callsharedfunc("super_capture_bot", "captureBot_getAllCaptureBotsForTeam", team, 1);
     var_21c4f8a0ffd605ce = sortbydistancecullbyradius(var_21c4f8a0ffd605ce, tankorigin, nearbyrange);
 
     foreach(capturebot in var_21c4f8a0ffd605ce) {
@@ -1521,7 +1521,7 @@ function function_3cd19573df126b43(objidnum, tank) {
 function function_e9ecbc39979febfd(objidnum, var_974cca039ded252e, text, var_d2f33cb2882e714d) {
   if(isDefined(self.var_974cca039ded252e) && self.var_974cca039ded252e != 0) {
     scripts\mp\objidpoolmanager::objective_unpin_player(objidnum, self);
-    function_8b71eb96e1636edc("", self);
+    objective_setpinnedprogressbartext("", self);
     waitframe();
   }
 
@@ -1591,17 +1591,17 @@ function tankscoreevent() {
 
   while(true) {
     wait 5;
-    var_e73e0f9742826fe7 = 0;
+    makingprogress = 0;
 
     if(istrue(self.contested) || self vehicle_getspeed() == 0) {
       continue;
     }
 
     if(istrue(self.veh_pathdir == "forward")) {
-      var_e73e0f9742826fe7 = 1;
+      makingprogress = 1;
     }
 
-    var_e1c948e35c619ee7 = var_e73e0f9742826fe7 ? game["attackers"] : game["defenders"];
+    var_e1c948e35c619ee7 = makingprogress ? game["attackers"] : game["defenders"];
     nearbyplayers = function_50b1e7d653deac05(var_e1c948e35c619ee7);
 
     foreach(player in nearbyplayers) {
@@ -2059,9 +2059,9 @@ function function_3f4db4dc27eadcb0(player) {
     pushgoal = self.models[0].origin - anglesToForward(self.models[0].angles) * 10;
   }
 
-  var_58c4969f9f12ba44 function_ad9433aab9fcdf04(0.2, "stop_building", &moveto, pushgoal, 0.2);
-  var_58c4969f9f12ba44 function_ad9433aab9fcdf04(0.4, "stop_building", &movez, 10, 0.1);
-  var_58c4969f9f12ba44 function_ad9433aab9fcdf04(0.5, "stop_building", &moveto, var_b7e0e91fb38920df, 0.2);
+  var_58c4969f9f12ba44 delaycallendon(0.2, "stop_building", &moveto, pushgoal, 0.2);
+  var_58c4969f9f12ba44 delaycallendon(0.4, "stop_building", &movez, 10, 0.1);
+  var_58c4969f9f12ba44 delaycallendon(0.5, "stop_building", &moveto, var_b7e0e91fb38920df, 0.2);
 }
 
 function function_736d94f76d0d49a(player, buildable) {

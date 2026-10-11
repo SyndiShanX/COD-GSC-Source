@@ -26,7 +26,7 @@ function main() {
   scripts\stealth\group::addtogroup(self.script_stealthgroup, self);
 
   if(!istrue(self.var_b19befc7a8bfc30f)) {
-    self function_4db6fc194702d153();
+    self setpatrolstylebase();
   }
 
   scripts\stealth\event::event_init_entity();
@@ -63,8 +63,8 @@ function main() {
     thread scripts\stealth\door::suspicious_door_thread();
   }
 
-  if(isDefined(level.stealth) && isDefined(level.stealth.var_b164de1a339a2b06) && !(isDefined(self.aisettings) && isDefined(self.aisettings.var_4975344f645984a6))) {
-    self function_d493e7fe15e5eaf4(level.stealth.var_b164de1a339a2b06);
+  if(isDefined(level.stealth) && isDefined(level.stealth.sightconfigtemplate) && !(isDefined(self.aisettings) && isDefined(self.aisettings.var_4975344f645984a6))) {
+    self function_d493e7fe15e5eaf4(level.stealth.sightconfigtemplate);
   }
 
   if(isDefined(level.var_4fa3c4eb77c24130)) {
@@ -105,7 +105,7 @@ function stealth_init_goal_radius() {
 function init_settings() {
   self.stealth = spawnStruct();
   self.stealth_enabled = 1;
-  self.var_fe5ebefa740c7106 = 4;
+  self.stealth_bsmstate = 4;
   self.stealth.funcs = [];
   self.stealth.max_warnings = 2;
 
@@ -113,7 +113,7 @@ function init_settings() {
   self.stealth.var_4fc268e229e1af6c = "<dev string:x1c>";
 
   var_8c591f1bde417eb4 = function_61b03c8c194a6733("hidden", "footstep_sprint");
-  self.newenemyreactiondistsq = ter_op(isDefined(var_8c591f1bde417eb4), var_8c591f1bde417eb4, squared(function_9d30fd63965bafa9("footstep_sprint", undefined)));
+  self.newenemyreactiondistsq = ter_op(isDefined(var_8c591f1bde417eb4), var_8c591f1bde417eb4, squared(geteventdefaultdistance("footstep_sprint", undefined)));
   scripts\stealth\corpse::corpse_init_entity();
   self.event_escalation_scalar = 0;
 
@@ -131,7 +131,7 @@ function init_settings() {
 
 function death_cleanup() {
   if(isDefined(self)) {
-    self function_24cb3b5e0d4216b1("death");
+    self setthreatsightstate("death");
   }
 
   if(isDefined(self.stealth_vo_ent)) {
@@ -170,18 +170,18 @@ function set_blind(blind, force) {
 
   if(blind && (!iscombat || istrue(force))) {
     self.stealthblind = 1;
-    self function_ea50442798fca4c1("blind");
+    self setsightstate("blind");
     return;
   }
 
   self.stealthblind = 0;
 
   if(iscombat) {
-    self function_ea50442798fca4c1("spotted");
+    self setsightstate("spotted");
     return;
   }
 
-  self function_ea50442798fca4c1("hidden");
+  self setsightstate("hidden");
 }
 
 function alertlevel_normal(param) {
@@ -266,11 +266,11 @@ function monitor_damage_thread(rangeauto, rangesight) {
     }
 
     if(isalive(self)) {
-      function_aad7a0ea8ac4ca23("ally_damaged", self, other, rangeauto, rangesight, type);
+      stealtheventbroadcast("ally_damaged", self, other, rangeauto, rangesight, type);
       continue;
     }
 
-    function_aad7a0ea8ac4ca23("ally_killed", self, other, rangeauto, rangesight, type);
+    stealtheventbroadcast("ally_killed", self, other, rangeauto, rangesight, type);
   }
 }
 
@@ -292,8 +292,8 @@ function check_kill_damage(damage, attacker, origin) {
 function shotisreasonablysafe(target) {
   guys = getaiunittypearray("bad_guys", "all");
   potentialguys = [];
-  var_61337b0b147086d7 = squared(level.stealth.damage_auto_range);
-  var_6b29dceda0f0afaf = squared(level.stealth.damage_sight_range);
+  autorangesq = squared(level.stealth.damage_auto_range);
+  sightrangesq = squared(level.stealth.damage_sight_range);
 
   foreach(guy in guys) {
     if(guy == target) {
@@ -302,11 +302,11 @@ function shotisreasonablysafe(target) {
 
     var_ec59b0d4c5cf7b28 = distancesquared(target.origin, guy.origin);
 
-    if(var_ec59b0d4c5cf7b28 < var_61337b0b147086d7) {
+    if(var_ec59b0d4c5cf7b28 < autorangesq) {
       return false;
     }
 
-    if(var_ec59b0d4c5cf7b28 < var_6b29dceda0f0afaf) {
+    if(var_ec59b0d4c5cf7b28 < sightrangesq) {
       if(guy getthreatsight(self) > 0) {
         return false;
       }
@@ -331,8 +331,8 @@ function shotisreasonablysafe(target) {
 function shotisbadidea(target) {
   guys = getaiunittypearray("bad_guys", "all");
   potentialguys = [];
-  var_61337b0b147086d7 = squared(level.stealth.damage_auto_range);
-  var_6b29dceda0f0afaf = squared(level.stealth.damage_sight_range);
+  autorangesq = squared(level.stealth.damage_auto_range);
+  sightrangesq = squared(level.stealth.damage_sight_range);
 
   foreach(guy in guys) {
     if(guy == target) {
@@ -341,11 +341,11 @@ function shotisbadidea(target) {
 
     var_ec59b0d4c5cf7b28 = distancesquared(target.origin, guy.origin);
 
-    if(var_ec59b0d4c5cf7b28 < var_61337b0b147086d7) {
+    if(var_ec59b0d4c5cf7b28 < autorangesq) {
       return true;
     }
 
-    if(var_ec59b0d4c5cf7b28 < var_6b29dceda0f0afaf) {
+    if(var_ec59b0d4c5cf7b28 < sightrangesq) {
       if(guy getthreatsight(self) > 0) {
         return true;
       }
@@ -591,13 +591,13 @@ function event_handler_translate_severity(event) {
       if(self.unittype == "dog") {
         event.type = "investigate";
       } else {
-        var_926a11e24ff33ab5 = undefined;
+        evententid = undefined;
 
         if(isDefined(event.entity) && issentient(event.entity)) {
-          var_926a11e24ff33ab5 = event.entity getentitynumber();
+          evententid = event.entity getentitynumber();
         }
 
-        if(isDefined(var_926a11e24ff33ab5) && self function_f4d54a90334a7dea(event.entity, 2)) {
+        if(isDefined(evententid) && self getthreatsightflag(event.entity, 2)) {
           var_24b0344b8d70d598 = event.entity;
 
           if(isPlayer(event.entity)) {
@@ -741,7 +741,7 @@ function go_to_node_post_wait(goto_func, node) {
 
   if(isDefined(self.stealth.idle) && isDefined(node.target)) {}
 
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
 
   if(isDefined(id)) {
     self leaveinteraction();
@@ -801,13 +801,13 @@ function bt_set_stealth_state(statename, event) {
 }
 
 function bt_event_handler_severity(event) {
-  var_a16e3d3c7cafcd0e = undefined;
+  eventtargetoverride = undefined;
 
   if(isPlayer(event.entity) && event.typeorig == "sight") {
     drone = event.entity scripts\stealth\utility::get_player_drone();
 
     if(isDefined(drone) && !self cansee(event.entity)) {
-      var_a16e3d3c7cafcd0e = drone;
+      eventtargetoverride = drone;
     }
   }
 
@@ -819,8 +819,8 @@ function bt_event_handler_severity(event) {
     event.investigate_pos = event.entity.origin;
   } else if(isDefined(event.entity) && issentient(event.entity) && self function_97bb81acbb14c09c(event.entity) && self cansee(event.entity)) {
     event.investigate_pos = event.entity.origin;
-  } else if(isDefined(var_a16e3d3c7cafcd0e)) {
-    event.investigate_pos = var_a16e3d3c7cafcd0e.origin;
+  } else if(isDefined(eventtargetoverride)) {
+    event.investigate_pos = eventtargetoverride.origin;
   }
 
   event_handler_translate_severity(event);
@@ -829,8 +829,8 @@ function bt_event_handler_severity(event) {
     return false;
   }
 
-  if(isDefined(var_a16e3d3c7cafcd0e)) {
-    event.entity = var_a16e3d3c7cafcd0e;
+  if(isDefined(eventtargetoverride)) {
+    event.entity = eventtargetoverride;
   }
 
   self.last_severity_time = gettime();
@@ -894,7 +894,7 @@ function bt_event_cover_blown(event) {
     self.grenadeawareness = 1;
     self.grenadereturnthrowchance = 0;
 
-    if(self.var_fe5ebefa740c7106 == 2) {
+    if(self.stealth_bsmstate == 2) {
       return;
     }
   }
@@ -933,7 +933,7 @@ function set_provide_cover_fire() {
   self.providecoveringfire = 0;
 }
 
-function onstatechange(fromstate, tostate, var_d24e406e7deefabc) {
+function onstatechange(fromstate, tostate, bnewpod) {
   switch (tostate) {
     case 0:
       thread scripts\stealth\utility::addeventplaybcs("stealth", "state_change", "idle", undefined, undefined);
@@ -945,7 +945,7 @@ function onstatechange(fromstate, tostate, var_d24e406e7deefabc) {
         self.script_forcegoal = 0;
         level thread scripts\stealth\group::function_92f7df07df367143(self);
 
-        if(var_d24e406e7deefabc) {}
+        if(bnewpod) {}
       }
 
       break;
@@ -954,7 +954,7 @@ function onstatechange(fromstate, tostate, var_d24e406e7deefabc) {
       self.last_set_goalent = undefined;
       level thread scripts\stealth\group::pod_hunt_vo();
 
-      if(var_d24e406e7deefabc) {
+      if(bnewpod) {
         squadid = function_8d0e1f40856173f4(self);
         thread scripts\stealth\group::pod_hunt_update(squadid);
       }
@@ -982,7 +982,7 @@ function onstatechange(fromstate, tostate, var_d24e406e7deefabc) {
 
       scripts\common\gameskill::grenadeawareness();
 
-      if(var_d24e406e7deefabc) {
+      if(bnewpod) {
         pod = function_bc5df124338cefea(self);
 
         if(isDefined(pod)) {
@@ -995,13 +995,13 @@ function onstatechange(fromstate, tostate, var_d24e406e7deefabc) {
       }
 
       if(combattype == "first_combat") {
-        function_216c67ab6749137a(self, undefined, "initial_combat", undefined, 2);
+        addbattlechatternotify(self, undefined, "initial_combat", undefined, 2);
       }
 
       if(combattype == "first_combat" && getdvarint(@ "hash_df03d7ac5b31599") == 1) {
         return;
       } else {
-        function_216c67ab6749137a(self, undefined, combattype, undefined, 2);
+        addbattlechatternotify(self, undefined, combattype, undefined, 2);
       }
 
       break;

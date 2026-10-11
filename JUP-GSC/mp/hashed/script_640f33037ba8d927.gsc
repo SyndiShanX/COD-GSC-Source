@@ -153,10 +153,10 @@ function function_49cfeec2947a199c(params) {
 
     vehicle function_1c952754074bd3a1(vehicle.origin, 0, 2, 0.7, 0.25, 0, 0.35);
     maxspeed = getdvarint(@ "hash_14ca9a67e7678f3a", 200);
-    vehicle function_77320e794d35465a("p2p", "manualSpeed", maxspeed);
-    vehicle function_77320e794d35465a("p2p", "goalPoint", level.space_shipment_radius_home.origin);
-    vehicle function_77320e794d35465a("p2p", "goalAngles", flat_angle(vectortoangles(level.space_shipment_radius_home.origin - vehicle.origin)));
-    vehicle function_77320e794d35465a("p2p", "goalThreshold", level.space_shipment_radius_home.radius);
+    vehicle setconfigvalue("p2p", "manualSpeed", maxspeed);
+    vehicle setconfigvalue("p2p", "goalPoint", level.space_shipment_radius_home.origin);
+    vehicle setconfigvalue("p2p", "goalAngles", flat_angle(vectortoangles(level.space_shipment_radius_home.origin - vehicle.origin)));
+    vehicle setconfigvalue("p2p", "goalThreshold", level.space_shipment_radius_home.radius);
     vehicle childthread scriptstablizeflyingshipment();
     vehicle waittill_any_2("goal", "near_goal");
     vehicle.returning = 0;
@@ -336,9 +336,9 @@ function function_2ac6faaebdc20e28() {
 
   while(true) {
     foreach(player in level.players) {
-      var_2d58e8aae155cc83 = distance2d(level.var_55f74552ec70e1.origin, player.origin);
+      distancefromplayer = distance2d(level.var_55f74552ec70e1.origin, player.origin);
 
-      if(var_2d58e8aae155cc83 < 1000 && !isDefined(player.var_dd38669292941f5)) {
+      if(distancefromplayer < 1000 && !isDefined(player.var_dd38669292941f5)) {
         level thread scripts\mp\gametypes\br_public::brleaderdialogplayer("limbo_shipmentNear", player, 1, 0);
         player.var_dd38669292941f5 = 1;
         player thread function_f29ea5f68b6f1af6();
@@ -446,7 +446,7 @@ function wander_map() {
   while(true) {
     vehicle setyawspeedbyname("slow");
     vehicle.var_d9ca4757da7a9a6 = 1;
-    vehicle function_77320e794d35465a("p2p", "manualSpeed", speed);
+    vehicle setconfigvalue("p2p", "manualSpeed", speed);
     vehicle childthread scriptstablizeflyingshipment();
     vehicle childthread scripts\common\vehicle_paths::vehicle_paths_helicopter(move_path.points[0]);
     vehicle waittill("reached_dynamic_path_end");

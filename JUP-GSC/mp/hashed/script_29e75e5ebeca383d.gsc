@@ -619,7 +619,7 @@ function function_2217437346021976() {
   return false;
 }
 
-function function_f156678b1297cfb2(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_f156678b1297cfb2(instance, part, state, player, bautouse, usestring) {
   if(istrue(player scripts\mp\gametypes\br_gametypes::runbrgametypefunc("playerSkipLootPickup", instance))) {
     return;
   }
@@ -730,8 +730,8 @@ function function_7dc98f165fe5f59d(player) {
   origin = self.origin + fwdoffset + (0, 0, 30);
   bomb = spawn("script_model", origin);
   bomb.angles = self.angles + (0, -90, 0);
-  var_db73ca20e2c2ffec = normforwardvec * 139;
-  navobstacle = createnavbadplacebybounds(self.origin + var_db73ca20e2c2ffec, (160, 280, 80), self.angles);
+  navobstacleoffset = normforwardvec * 139;
+  navobstacle = createnavbadplacebybounds(self.origin + navobstacleoffset, (160, 280, 80), self.angles);
   bomb setModel("offhand_wm_c4_br_safe");
   bomb setscriptablepartstate("effects", "plant");
   bomb thread function_2844b247ce15cfc2(dangericonent);

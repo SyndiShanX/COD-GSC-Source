@@ -159,7 +159,7 @@ function disablepersupdates() {
 }
 
 function function_785a9aed533e514c() {
-  if(level.var_ec2fb549b15ad827) {
+  if(level.leagueplaymatch) {
     return "leagueplayprogression";
   }
 
@@ -171,7 +171,7 @@ function function_785a9aed533e514c() {
 }
 
 function getplayerdataloadoutgroup() {
-  if(istrue(level.var_ec2fb549b15ad827)) {
+  if(istrue(level.leagueplaymatch)) {
     if(getdvarint(@ "hash_6299be121597b3c5", 0)) {
       return "leagueplayloadouts";
     } else {
@@ -253,7 +253,7 @@ function function_fbadc58163719d2b() {
 }
 
 function setplayerdatagroups() {
-  level.var_5d69837cf4db0407 = function_785a9aed533e514c();
+  level.progressiongroup = function_785a9aed533e514c();
   level.loadoutsgroup = getplayerdataloadoutgroup();
   level.loadoutdata = function_cd79d5c7c340b40e();
 }
@@ -271,11 +271,11 @@ function canrecordcombatrecordstats() {
 }
 
 function getstreakrecordtype(streakname) {
-  if(isenumvaluevalid(level.var_5d69837cf4db0407, "LethalScorestreakStatItems", streakname)) {
+  if(isenumvaluevalid(level.progressiongroup, "LethalScorestreakStatItems", streakname)) {
     return "lethalScorestreakStats";
   }
 
-  if(isenumvaluevalid(level.var_5d69837cf4db0407, "SupportScorestreakStatItems", streakname)) {
+  if(isenumvaluevalid(level.progressiongroup, "SupportScorestreakStatItems", streakname)) {
     return "supportScorestreakStats";
   }
 

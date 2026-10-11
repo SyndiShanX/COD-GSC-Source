@@ -1074,25 +1074,25 @@ function function_eb31d2457d09576(var_e21fdc330521a449) {
 
   while(true) {
     if(istrue(var_e21fdc330521a449)) {
-      var_863c619037f3ac74 = tank.origin;
+      pointtocheck = tank.origin;
     } else {
-      var_863c619037f3ac74 = tank.origin + rotatevector((30, 0, -30), tank.angles);
+      pointtocheck = tank.origin + rotatevector((30, 0, -30), tank.angles);
     }
 
-    aabbmin = var_863c619037f3ac74 - radiusvector;
-    aabbmax = var_863c619037f3ac74 + radiusvector;
+    aabbmin = pointtocheck - radiusvector;
+    aabbmax = pointtocheck + radiusvector;
 
     if(getdvarint(@ "hash_f4fab8835c5cae7a", 0)) {
       level thread draw_line_for_time(aabbmin, aabbmax, 1, 0, 0, 2);
-      level thread draw_circle(var_863c619037f3ac74, var_21412c22fd1045d7, (1, 0, 0), 1, 0, 2);
+      level thread draw_circle(pointtocheck, var_21412c22fd1045d7, (1, 0, 0), 1, 0, 2);
     }
 
-    var_3c4b19abbdf0937c = var_863c619037f3ac74 - var_f8d57c6bc526da29;
-    var_2e1990d919dc0eb2 = var_863c619037f3ac74 + var_f8d57c6bc526da29;
+    var_3c4b19abbdf0937c = pointtocheck - var_f8d57c6bc526da29;
+    var_2e1990d919dc0eb2 = pointtocheck + var_f8d57c6bc526da29;
 
     if(getdvarint(@ "hash_f4fab8835c5cae7a", 0)) {
       level thread draw_line_for_time(var_3c4b19abbdf0937c, var_2e1990d919dc0eb2, 1, 0, 0, 2);
-      level thread draw_circle(var_863c619037f3ac74, var_dcb6304be0fe7b52, (1, 0, 0), 1, 0, 2);
+      level thread draw_circle(pointtocheck, var_dcb6304be0fe7b52, (1, 0, 0), 1, 0, 2);
     }
 
     var_3a3a8605cd6d3dfc = physics_aabbbroadphasequery(aabbmin, aabbmax, itemcontents, var_646389193279e8ec);
@@ -1647,7 +1647,7 @@ function function_b707f54f7de4fd15(zone) {
     trigger.script_label = objectivekeys[i];
   }
 
-  zone.captureflags = namespace_16a6643951556450::function_a892b65a4cfef993(flagpoints);
+  zone.captureflags = namespace_16a6643951556450::createteamflags(flagpoints);
   zone.flagzone = namespace_16a6643951556450::createflagzone(flagzone);
   zone.var_dcecc1ffe9d55d6e = getStructArray("flag_checkpoint", "targetname");
   index = 0;
@@ -2058,7 +2058,7 @@ function function_684d385924b600cb(spawndata, marker, objectivekey) {
   agent thread function_ae789c283dba54c2(marker, spawndata);
 
   if(isDefined(spawndata.target)) {
-    volume = function_f159c10d5cf8f0b4(spawndata.target, "targetname")[0];
+    volume = getnoentvolumearray(spawndata.target, "targetname")[0];
     agent setgoalvolumeauto(volume);
   }
 
@@ -2376,7 +2376,7 @@ function function_3cd19573df126b43(objidnum, tank) {
 function function_e9ecbc39979febfd(objidnum, var_974cca039ded252e, text, var_d2f33cb2882e714d) {
   if(isDefined(self.var_974cca039ded252e) && self.var_974cca039ded252e != 0) {
     objective_unpin_player(objidnum, self);
-    function_8b71eb96e1636edc("", self);
+    objective_setpinnedprogressbartext("", self);
     waitframe();
   }
 
@@ -2892,7 +2892,7 @@ function function_4f1745dec2e39ab4(player, bool) {
   turret disablescriptablepartplayeruse("usable_right_defuse", player);
 }
 
-function function_cbd3979676d57efe(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_cbd3979676d57efe(instance, part, state, player, bautouse, usestring) {
   player thread scripts\mp\utility\points::doscoreevent(#"hash_fbc15faadfadee5d");
   objidnum = level.objectives[instance.entity.objectivekey].objidnum;
   objective_set_progress(objidnum, 1);
@@ -4216,9 +4216,9 @@ function function_436f588312714b4a(zone) {
   }
 
   foreach(bombzone in zone.bombzones) {
-    var_a39e4ed2521b0de4 = strtok(bombzone.model.script_noteworthy, "_");
-    bombzone.sequence = int(var_a39e4ed2521b0de4[var_a39e4ed2521b0de4.size - 2]);
-    bombzone.index = int(var_a39e4ed2521b0de4[var_a39e4ed2521b0de4.size - 1]);
+    indexarray = strtok(bombzone.model.script_noteworthy, "_");
+    bombzone.sequence = int(indexarray[indexarray.size - 2]);
+    bombzone.index = int(indexarray[indexarray.size - 1]);
   }
 }
 

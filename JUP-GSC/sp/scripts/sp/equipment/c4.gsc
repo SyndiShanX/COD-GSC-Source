@@ -41,7 +41,7 @@ function c4firemain(grenade, weapon) {
   grenade waittill("missile_stuck");
   thread function_6e5ce23490c6fea6(grenade, weapon, &"EQUIPMENT/IMPROVISED_MINE_PICKUP");
   grenade setscriptablepartstate("effects", "plant", 0);
-  grenade thread function_127a31c7d0c84559(256, "allies", 20);
+  grenade thread navrepulsorremoveondeath(256, "allies", 20);
 }
 
 function c4_watchfordetonation() {
@@ -220,9 +220,9 @@ function function_fe7bbb1bfcd13664() {
   }
 
   interactivedoors = scripts\sp\door::get_all_interactive_doors();
-  var_175138d237722678 = function_e31087776398ea53(self.origin, self.origin, 256, scripts\engine\trace::create_item_contents(), interactivedoors, "physicsquery_all");
+  spherecasts = function_e31087776398ea53(self.origin, self.origin, 256, scripts\engine\trace::create_item_contents(), interactivedoors, "physicsquery_all");
 
-  foreach(spherecast in var_175138d237722678) {
+  foreach(spherecast in spherecasts) {
     door = spherecast["entity"];
     opener = spawnStruct();
     opener.origin = self.origin;

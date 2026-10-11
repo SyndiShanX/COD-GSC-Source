@@ -55,11 +55,11 @@ function function_539f38f444d5b41a(grenade) {
   }
 
   launchangles = self getgunangles();
-  var_8011cffb839e8243 = gettime();
+  launchtimems = gettime();
   launchvelocity = anglesToForward(launchangles) * 500 + anglestoup(launchangles) * 0;
   grenade waittill("missile_stuck", stuckto);
   grenade setscriptablepartstate("plant", "active", 0);
-  traveltime = (gettime() - var_8011cffb839e8243) / 1000;
+  traveltime = (gettime() - launchtimems) / 1000;
   impactvelocity = launchvelocity + (0, 0, -800 * traveltime);
   onequipmentplanted(grenade, "equip_butterfly_mine", &function_f1ccd9eaaa39e87c);
   wait grenade.tableinfo.bundle.scatterdelay;

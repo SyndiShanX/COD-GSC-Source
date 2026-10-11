@@ -46,7 +46,7 @@ function initbunkervfx() {
 
 function function_69e8580b3055b335() {
   if(!isDefined(level.var_b3666d85b44f03af)) {
-    level.var_b3666d85b44f03af = array_combine(getEntArray("DenyBunkerSpawnZone", "script_noteworthy"), function_f159c10d5cf8f0b4("DenyBunkerSpawnZone", "script_noteworthy"));
+    level.var_b3666d85b44f03af = array_combine(getEntArray("DenyBunkerSpawnZone", "script_noteworthy"), getnoentvolumearray("DenyBunkerSpawnZone", "script_noteworthy"));
   }
 }
 
@@ -409,11 +409,11 @@ function initbunkerbackwallkeypads() {
   }
 }
 
-function keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread _keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+function keypadscriptableused(instance, part, state, player, bautouse, usestring) {
+  level thread _keypadscriptableused(instance, part, state, player, bautouse);
 }
 
-function _keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _keypadscriptableused(instance, part, state, player, bautouse) {
   assert(part == "<dev string:x1c>" || part == "<dev string:x3e>" || part == "<dev string:x58>");
   instance setscriptablepartstate(part, "off");
   player keypad_playerinteractwithkeypadloop(instance);

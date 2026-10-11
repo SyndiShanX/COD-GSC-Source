@@ -80,8 +80,8 @@ function general_notetrack_handler(guy, notetrack) {
   }
 }
 
-function sp_anim_handle_notetrack(scr_notetrack, guy, var_966821fc90c3ca9d, tag_owner) {
-  anim_handle_notetrack(scr_notetrack, guy, var_966821fc90c3ca9d, tag_owner);
+function sp_anim_handle_notetrack(scr_notetrack, guy, dialogue_array, tag_owner) {
+  anim_handle_notetrack(scr_notetrack, guy, dialogue_array, tag_owner);
 
   if(isDefined(scr_notetrack["flag"])) {
     flag_set(scr_notetrack["flag"]);

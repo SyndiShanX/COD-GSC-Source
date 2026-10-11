@@ -104,7 +104,7 @@ function initanimtree() {
   level.scr_eventanim["device"]["ascender_ext_down_out_wm"] = % "ascender_ext_down_out";
 }
 
-function ascendersoloscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function ascendersoloscriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x8a>");
 
   if(state == "on") {
@@ -170,7 +170,7 @@ function startascenderanim(player, dir, ascendermodelview, ascendermodelworld, v
   }
 
   var_cd9982adb17761a8 = gettime();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = 0.4 - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000;
   waittime = max(0, var_218f64cb035d54be);

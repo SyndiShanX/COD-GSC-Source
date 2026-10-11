@@ -172,7 +172,7 @@ function setuppingspecificvars(player) {
       return;
     }
 
-    var_55667d1b713c209d = var_a900ebd15fe91f5[0];
-    player setplayersquadindex(var_55667d1b713c209d);
+    myindex = var_a900ebd15fe91f5[0];
+    player setplayersquadindex(myindex);
   }
 }

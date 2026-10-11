@@ -107,7 +107,7 @@ function function_1c518ee0267d39a7() {
   self.lose_progress = default_to(self.variant_settings.var_99e94a285263be97, 1);
   self.encounter_bundle = default_to(self.variant_settings.safeencounter, "jup_ob_merc_stronghold_encounter_safe");
   scriptables = getentitylessscriptablearray(self.root_struct.target, "targetname");
-  other_structs = array_combine(getStructArray(self.root_struct.target, "targetname"), scriptables, function_f159c10d5cf8f0b4(self.root_struct.target, "targetname"));
+  other_structs = array_combine(getStructArray(self.root_struct.target, "targetname"), scriptables, getnoentvolumearray(self.root_struct.target, "targetname"));
   self.var_10f090a9e9488068 = [];
   self.lootcache_spawns = [];
   self.tripwires = [];
@@ -304,7 +304,7 @@ function function_c5770043463ad63() {
       if(!istrue(safe.reinforcementscalled)) {
         safe.reinforcementscalled = 1;
         function_a5311fb4a565a810();
-        thread function_dd78c34c770c2497(self.var_6c29f2fdb0054bbe);
+        thread function_dd78c34c770c2497(self.playerparticipants);
       }
 
       wait 0.1;
@@ -359,9 +359,9 @@ function function_10646a42a1856556(scriptables) {
   }
 }
 
-function function_aa43dfcdd8f03fe0(var_2d9552508615d396, tripwire) {
+function function_aa43dfcdd8f03fe0(triggeringent, tripwire) {
   if(isDefined(tripwire.activityinstance) && isDefined(tripwire.var_70587812595fd991)) {
-    namespace_75b9b66caa533c31::function_aed7a5e07b895fa(var_2d9552508615d396, tripwire);
+    namespace_75b9b66caa533c31::function_aed7a5e07b895fa(triggeringent, tripwire);
   }
 }
 
@@ -724,7 +724,7 @@ function private function_230e249807e20ca7(encounterid, agent) {
     self notify("merc_stronghold_cleared");
 
     if(isDefined(self.safe) && !istrue(self.safe.reinforcementscalled)) {
-      thread function_9dbc2d439e39df13(self.var_6c29f2fdb0054bbe);
+      thread function_9dbc2d439e39df13(self.playerparticipants);
     }
   }
 }
@@ -885,8 +885,8 @@ function private function_dd78c34c770c2497(players) {
 }
 
 function private function_7719e82ffdcda669(activityinstance) {
-  instid = function_f0f498aed6f8fa5d(activityinstance);
-  activitytype = namespace_4fda5d7358015a06::function_de53ed8e35d0ed7a(activityinstance);
+  instid = getinstanceid(activityinstance);
+  activitytype = namespace_4fda5d7358015a06::getactivitytype(activityinstance);
 
   if(isDefined(activitytype) && activitytype == "REV_OB_MERC_STRONGHOLD") {
     assert(!isDefined(level.activities.strongholdinstances) || !isDefined(level.activities.strongholdinstances[instid]));
@@ -895,8 +895,8 @@ function private function_7719e82ffdcda669(activityinstance) {
 }
 
 function private function_2ced1a9613bd11ab(activityinstance) {
-  uniqueid = function_f0f498aed6f8fa5d(activityinstance);
-  activitytype = namespace_4fda5d7358015a06::function_de53ed8e35d0ed7a(activityinstance);
+  uniqueid = getinstanceid(activityinstance);
+  activitytype = namespace_4fda5d7358015a06::getactivitytype(activityinstance);
 
   if(isDefined(activitytype) && activitytype == "REV_OB_MERC_STRONGHOLD") {
     level.activities.strongholdinstances[uniqueid] = undefined;
@@ -912,13 +912,13 @@ function private function_97724206a31d0a1a() {
         continue;
       }
 
-      activitystate = namespace_4fda5d7358015a06::function_73bd348a2ec322cf(instance);
+      activitystate = namespace_4fda5d7358015a06::getactivitystate(instance);
 
       if(!isDefined(activitystate) || !(activitystate == "IdleState" || activitystate == "ActiveState")) {
         continue;
       }
 
-      assert(namespace_4fda5d7358015a06::function_de53ed8e35d0ed7a(instance) == "<dev string:x684>");
+      assert(namespace_4fda5d7358015a06::getactivitytype(instance) == "<dev string:x684>");
       var_ed2a434bd0491fba[var_ed2a434bd0491fba.size] = instance;
     }
   }
@@ -969,13 +969,13 @@ function private function_99f612c991e568a0(player) {
 
 function private function_f390f4ebbe42c73c(var_d6bfa53c531546d6) {
   player = var_d6bfa53c531546d6.player;
-  var_a917328b0b1b2a19 = var_d6bfa53c531546d6.enteredzone;
+  playerinzone = var_d6bfa53c531546d6.enteredzone;
 
   if(!isDefined(player)) {
     return;
   }
 
-  if(istrue(var_a917328b0b1b2a19) && isDefined(self.locked_doors) && self.locked_doors.size > 0) {
+  if(istrue(playerinzone) && isDefined(self.locked_doors) && self.locked_doors.size > 0) {
     ob_humans::function_dd0ceeddc603cb3e(player, self, "<dev string:x70a>");
 
     function_bbdcd857d0c2a65e(self, player, "PlayerJoinedOther");
@@ -1112,7 +1112,7 @@ function private function_f927f5dd26f5e076() {
 
 function function_4cc130b05adeaae0() {
   foreach(player in level.players) {
-    function_38e113a4c30f6c0d("<dev string:x8f8>", player.origin, player.angles, 0, 1);
+    spawnnewitemfromscriptablesharedfunc("<dev string:x8f8>", player.origin, player.angles, 0, 1);
   }
 }
 

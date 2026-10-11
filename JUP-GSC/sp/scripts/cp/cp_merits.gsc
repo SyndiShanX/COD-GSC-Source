@@ -157,7 +157,7 @@ function process_agent_on_killed_merits(einflictor, eattacker, idamage, smeansof
   stance = eattacker getstance();
   species = self.species;
   iscrouched = stance == "crouch";
-  var_30c9316fab2dde21 = stance == "prone" && !islaststand;
+  isprone = stance == "prone" && !islaststand;
   isexplosive = isexplosivedamagemod(smeansofdeath);
   ismelee = smeansofdeath == "MOD_MELEE";
   var_a299bfe05dff1299 = (istrue(self.is_burning) || istrue(self.is_chem_burning)) && (!bulletdamage || sweapon.basename == "incendiary_ammo_mp");
@@ -374,7 +374,7 @@ function is_crafted_trap_damage(sweapon) {
   return false;
 }
 
-function processmerit(basename, var_5547e31d3c38b912, var_d1de6d2762880aa3) {
+function processmerit(basename, progressinc, var_d1de6d2762880aa3) {
   if(!mayprocessmerits()) {
     return;
   }
@@ -383,8 +383,8 @@ function processmerit(basename, var_5547e31d3c38b912, var_d1de6d2762880aa3) {
     return;
   }
 
-  if(!isDefined(var_5547e31d3c38b912)) {
-    var_5547e31d3c38b912 = 1;
+  if(!isDefined(progressinc)) {
+    progressinc = 1;
   }
 
   if(!havedataformerit(basename)) {
@@ -411,7 +411,7 @@ function processmerit(basename, var_5547e31d3c38b912, var_d1de6d2762880aa3) {
   }
 
   if(getdvarint(@ "hash_8e049fc95397bd80")) {
-    println("<dev string:x1c>" + basename + "<dev string:x2e>" + var_5547e31d3c38b912);
+    println("<dev string:x1c>" + basename + "<dev string:x2e>" + progressinc);
   }
 
   currentprogress = mt_getprogress(basename);
@@ -422,10 +422,10 @@ function processmerit(basename, var_5547e31d3c38b912, var_d1de6d2762880aa3) {
   }
 
   if(isDefined(var_d1de6d2762880aa3) && var_d1de6d2762880aa3) {
-    newprogress = var_5547e31d3c38b912;
+    newprogress = progressinc;
     assertex(newprogress >= currentprogress, "Attempted progress regression (forceSet) for merit '" + basename + "' - from " + currentprogress + " to " + newprogress + " for player " + self.name);
   } else {
-    newprogress = currentprogress + var_5547e31d3c38b912;
+    newprogress = currentprogress + progressinc;
     assertex(newprogress >= currentprogress, "Attempted progress regression (inc) for merit '" + basename + "' - from " + currentprogress + " to " + newprogress + " for player " + self.name);
   }
 
@@ -515,7 +515,7 @@ function giverankxpafterwait(basename, meritstatus) {
   event = basename;
 
   if(!isxhash(event)) {
-    event = function_1823ff50bb28148d(event);
+    event = getxhash(event);
   }
 
   scripts\cp\rank::giverankxp(event, level.meritinfo[basename]["reward"][meritstatus], undefined);
@@ -598,18 +598,18 @@ function isoperationmerit(var_6018f069f73d44ef) {
   return false;
 }
 
-function merit_targetval(tablename, refstring, var_f1d895eb26aebad0) {
-  value = tablelookup(tablename, 0, refstring, 10 + var_f1d895eb26aebad0 * 3);
+function merit_targetval(tablename, refstring, tierid) {
+  value = tablelookup(tablename, 0, refstring, 10 + tierid * 3);
   return int(value);
 }
 
-function merit_rewardval(tablename, refstring, var_f1d895eb26aebad0) {
-  value = tablelookup(tablename, 0, refstring, 11 + var_f1d895eb26aebad0 * 3);
+function merit_rewardval(tablename, refstring, tierid) {
+  value = tablelookup(tablename, 0, refstring, 11 + tierid * 3);
   return int(value);
 }
 
-function merit_scoreval(tablename, refstring, var_f1d895eb26aebad0) {
-  value = tablelookup(tablename, 0, refstring, 12 + var_f1d895eb26aebad0 * 3);
+function merit_scoreval(tablename, refstring, tierid) {
+  value = tablelookup(tablename, 0, refstring, 12 + tierid * 3);
   return int(value);
 }
 
@@ -648,18 +648,18 @@ function buildmerittableinfo(tablename, typeid) {
       }
     }
 
-    for(var_f1d895eb26aebad0 = 0; var_f1d895eb26aebad0 < 5; var_f1d895eb26aebad0++) {
-      targetval = merit_targetval(tablename, refstring, var_f1d895eb26aebad0);
-      rewardval = merit_rewardval(tablename, refstring, var_f1d895eb26aebad0);
-      scoreval = merit_scoreval(tablename, refstring, var_f1d895eb26aebad0);
+    for(tierid = 0; tierid < 5; tierid++) {
+      targetval = merit_targetval(tablename, refstring, tierid);
+      rewardval = merit_rewardval(tablename, refstring, tierid);
+      scoreval = merit_scoreval(tablename, refstring, tierid);
 
       if(targetval == 0) {
         break;
       }
 
-      level.meritinfo[refstring]["targetval"][var_f1d895eb26aebad0] = targetval;
-      level.meritinfo[refstring]["reward"][var_f1d895eb26aebad0] = rewardval;
-      level.meritinfo[refstring]["score"][var_f1d895eb26aebad0] = scoreval;
+      level.meritinfo[refstring]["targetval"][tierid] = targetval;
+      level.meritinfo[refstring]["reward"][tierid] = rewardval;
+      level.meritinfo[refstring]["score"][tierid] = scoreval;
       var_94cabb8b012f1dd6 += rewardval;
     }
 
@@ -718,9 +718,9 @@ function function_8f949f92c28ed2eb(percentage) {
     finaltarget = 0;
     var_3713c3f8a9d51303 = 0;
 
-    for(var_f1d895eb26aebad0 = 1; isDefined(meritdata["<dev string:x60>"][var_f1d895eb26aebad0]); var_f1d895eb26aebad0++) {
-      finaltarget = meritdata["<dev string:x60>"][var_f1d895eb26aebad0];
-      var_3713c3f8a9d51303 = var_f1d895eb26aebad0 + 1;
+    for(tierid = 1; isDefined(meritdata["<dev string:x60>"][tierid]); tierid++) {
+      finaltarget = meritdata["<dev string:x60>"][tierid];
+      var_3713c3f8a9d51303 = tierid + 1;
     }
 
     if(percentage != 1) {

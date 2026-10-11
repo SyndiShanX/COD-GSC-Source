@@ -50,7 +50,7 @@ function stealth_noteworthy_thread(enabled, callouts) {
     flag_wait("stealth_enabled");
     flag_waitopen("stealth_spotted");
     bestdot = -1;
-    var_5d2a2a8b837615b6 = undefined;
+    besttgt = undefined;
 
     if(self playerads() > level.stealth.noteworthy.stealth_noteworthy_min_ads) {
       eye = self getEye();
@@ -71,13 +71,13 @@ function stealth_noteworthy_thread(enabled, callouts) {
         if(dot > level.stealth.noteworthy.stealth_noteworthy_min_dot && dot > bestdot) {
           if(scripts\engine\trace::ray_trace_passed(tgteye, eye, undefined, contents)) {
             bestdot = dot;
-            var_5d2a2a8b837615b6 = tgt;
+            besttgt = tgt;
           }
         }
       }
 
-      if(isDefined(var_5d2a2a8b837615b6)) {
-        thread stealth_noteworthy_delayed("aim", var_5d2a2a8b837615b6);
+      if(isDefined(besttgt)) {
+        thread stealth_noteworthy_delayed("aim", besttgt);
       }
 
       foreach(entnum, ent in self.stealth.stealth_noted) {
@@ -226,10 +226,10 @@ function stealth_noteworthy_delayed(eventname, target, var_dc524d5756a28562, del
   self notify("stealth_noteworthy_delayed");
   self endon("stealth_noteworthy_delayed");
   self endon("disconnect");
-  var_47d2bd504a119e32 = function_725f1665c849c38(self);
+  stealthmaxalertlevel = function_725f1665c849c38(self);
 
   if(istrue(var_dc524d5756a28562)) {
-    self.stealth.stealth_note_start_alert = var_47d2bd504a119e32;
+    self.stealth.stealth_note_start_alert = stealthmaxalertlevel;
   }
 
   if(!isDefined(delay)) {
@@ -246,9 +246,9 @@ function stealth_noteworthy_delayed(eventname, target, var_dc524d5756a28562, del
     self.stealth.stealth_note_pending_targets = array_removedead_or_dying(self.stealth.stealth_note_pending_targets);
   }
 
-  var_47d2bd504a119e32 = function_725f1665c849c38(self);
+  stealthmaxalertlevel = function_725f1665c849c38(self);
 
-  if(istrue(var_dc524d5756a28562) && self.stealth.stealth_note_start_alert < var_47d2bd504a119e32) {
+  if(istrue(var_dc524d5756a28562) && self.stealth.stealth_note_start_alert < stealthmaxalertlevel) {
     self.stealth.stealth_note_pending = undefined;
     self.stealth.stealth_note_pending_targets = undefined;
     return;
@@ -666,7 +666,7 @@ function sixthsense_think() {
     waitframe();
 
     if(!level.player.sixthsense.active) {
-      function_21d44d6e55ff1ad2(0, 0);
+      sixthsense_updatehud(0, 0);
       continue;
     }
 
@@ -712,8 +712,8 @@ function sixthsense_think_internal() {
 
     process += 1;
 
-    if(isDefined(enemy.var_2bccfebe0b2b566)) {
-      if(!enemy[[enemy.var_2bccfebe0b2b566]]()) {
+    if(isDefined(enemy.fnsixthsensecansee)) {
+      if(!enemy[[enemy.fnsixthsensecansee]]()) {
         continue;
       }
     } else if(!enemy cansee(level.player)) {
@@ -736,10 +736,10 @@ function sixthsense_think_internal() {
     sightmask |= direction;
   }
 
-  level.player function_21d44d6e55ff1ad2(sightmask, spottedmask);
+  level.player sixthsense_updatehud(sightmask, spottedmask);
 }
 
-function function_21d44d6e55ff1ad2(sightmask, spottedmask) {
+function sixthsense_updatehud(sightmask, spottedmask) {
   if(!isDefined(level.player.sixthsense.hud)) {
     hudarray = [];
     hudarray["left"] = newhudelem();

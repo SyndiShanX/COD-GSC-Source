@@ -213,7 +213,7 @@ function starthoverjetairstrikepass(owner, streakinfo, mappointinfo) {
   planeflyheight = 3250;
   planehoverheight = 1000;
   heightoffset = (0, 0, 0);
-  var_361663d437db22f5 = 1500;
+  planebombexplodedistance = 1500;
   direction = owner.angles;
   var_505331ad630bbc6b = 1;
 
@@ -232,7 +232,7 @@ function starthoverjetairstrikepass(owner, streakinfo, mappointinfo) {
 
   maplocation = mappointinfo[0].location;
   direction = scripts\cp_mp\killstreaks\airstrike::callstrike_findoptimaldirection(owner, maplocation, planeflyheight, planehalfdistance);
-  flightpath = scripts\cp_mp\killstreaks\airstrike::getflightpath(maplocation, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, var_361663d437db22f5, streakinfo.streakname, var_505331ad630bbc6b);
+  flightpath = scripts\cp_mp\killstreaks\airstrike::getflightpath(maplocation, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, planebombexplodedistance, streakinfo.streakname, var_505331ad630bbc6b);
   pathstart = flightpath["startPoint"];
   pathgoal = flightpath["endPoint"];
   bundle = level.streakglobals.streakbundles["hover_jet"];
@@ -751,7 +751,7 @@ function hoverjet_startcombatlogic() {
   thread hoverjet_watchforreposition();
   thread hoverjet_engagegroundtargets();
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     self.owner setclientomnvar("ui_using_hover_jet", 1);
   }
 
@@ -805,13 +805,13 @@ function hoverjet_movetolocation(location) {
 }
 
 function hoverjet_getcorrectheight(x, y, rand) {
-  var_dc8bb6300463cf1e = self.hoverheight;
+  offgroundheight = self.hoverheight;
 
   var_8b2cb9f843e54ad0 = getdvarint(@ "hash_92fce2b3a811a13f", 0);
-  var_dc8bb6300463cf1e += var_8b2cb9f843e54ad0;
+  offgroundheight += var_8b2cb9f843e54ad0;
 
   groundheight = hoverjet_tracegroundpoint(x, y);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   trueheight += randomint(rand);
   return trueheight;
 }
@@ -941,12 +941,12 @@ function hoverjet_fireongroundtarget(targetvehicle) {
 }
 
 function hoverjet_turretlookingattarget() {
-  var_97f0985016aa48cb = 0.996;
+  maxviewangle = 0.996;
   turretforward = anglesToForward(self gettagangles("tag_flash"));
   targetdisplace = vectorNormalize(self.groundtargetent.origin - self.origin);
   var_ff53e400dd536b82 = vectordot(turretforward, targetdisplace);
 
-  if(isDefined(self gettargetentity(1)) && var_ff53e400dd536b82 >= var_97f0985016aa48cb) {
+  if(isDefined(self gettargetentity(1)) && var_ff53e400dd536b82 >= maxviewangle) {
     return true;
   }
 
@@ -1060,11 +1060,11 @@ function hoverjet_setmissileoffset(target) {
 }
 
 function hoverjet_airtargetiswithinview(airtarget) {
-  var_97f0985016aa48cb = 0.866;
+  maxviewangle = 0.866;
   jetforward = anglesToForward(self.angles);
   targetdisplace = vectorNormalize(airtarget.origin - self.origin);
   var_ff53e400dd536b82 = vectordot(jetforward, targetdisplace);
-  return ter_op(var_ff53e400dd536b82 >= var_97f0985016aa48cb, 1, 0);
+  return ter_op(var_ff53e400dd536b82 >= maxviewangle, 1, 0);
 }
 
 function hoverjet_airtargetistooclose(airtarget) {
@@ -1199,34 +1199,34 @@ function function_a7c9961508e4b099(streakname) {
 function function_8987ef697fe06da3(streakname) {
   weaponname = "thermite_bolt_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 24;
+  weaponhitstokill = 24;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "thermite_xmike109_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 50;
+  weaponhitstokill = 50;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "semtex_bolt_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 9;
+  weaponhitstokill = 9;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "semtex_xmike109_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 13;
+  weaponhitstokill = 13;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 }
 
@@ -1277,7 +1277,7 @@ function hoverjet_handledestroyed(attacker, killedbyweapon) {
     }
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     self.owner setclientomnvar("ui_using_hover_jet", 0);
   }
 
@@ -1431,7 +1431,7 @@ function hoverjet_leave() {
   self.isleaving = 1;
   self notify("leaving");
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     self.owner setclientomnvar("ui_using_hover_jet", 0);
   }
 

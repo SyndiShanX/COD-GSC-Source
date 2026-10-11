@@ -16,7 +16,7 @@ function function_714b93f3cd89e618() {
 
 function function_306feec3952fc2ef(targets) {
   if(isDefined(self.var_7fb7ab379bea66a5) && self.var_7fb7ab379bea66a5 > gettime()) {
-    self._blackboard.var_6b0939cf3fd5d7a1 = 0;
+    self._blackboard.zombieunreachableisattacking = 0;
     return;
   }
 
@@ -37,7 +37,7 @@ function function_306feec3952fc2ef(targets) {
   }
 
   if(final_targets.size == 0) {
-    self._blackboard.var_6b0939cf3fd5d7a1 = 0;
+    self._blackboard.zombieunreachableisattacking = 0;
     return;
   }
 

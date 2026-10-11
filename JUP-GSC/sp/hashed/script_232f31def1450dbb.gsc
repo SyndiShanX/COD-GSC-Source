@@ -94,13 +94,13 @@ function takeweaponwhensafe(weapon) {
 
 function getcurrentmonitoredweaponswitchweapon() {
   validatehighpriorityflag();
-  var_d93faf2b91e9b072 = self gethighpriorityweapon();
+  currenthighpriorityweapon = self gethighpriorityweapon();
 
-  if(isnullweapon(var_d93faf2b91e9b072)) {
+  if(isnullweapon(currenthighpriorityweapon)) {
     return undefined;
   }
 
-  return var_d93faf2b91e9b072;
+  return currenthighpriorityweapon;
 }
 
 function isanymonitoredweaponswitchinprogress() {
@@ -129,17 +129,17 @@ function candomonitoredswitchtoweapon(weapon, var_26ca36763fa5b82) {
     return false;
   }
 
-  var_d93faf2b91e9b072 = getcurrentmonitoredweaponswitchweapon();
+  currenthighpriorityweapon = getcurrentmonitoredweaponswitchweapon();
 
-  if(isDefined(var_d93faf2b91e9b072)) {
+  if(isDefined(currenthighpriorityweapon)) {
     weaponbasename = getweaponbasename(weapon);
-    var_958b9a25c5911d97 = 0;
+    newweaponhaspriority = 0;
 
-    if(weaponinventorytype(var_d93faf2b91e9b072) == "primary") {
-      var_958b9a25c5911d97 = 1;
+    if(weaponinventorytype(currenthighpriorityweapon) == "primary") {
+      newweaponhaspriority = 1;
     }
 
-    if(!var_958b9a25c5911d97) {
+    if(!newweaponhaspriority) {
       return false;
     }
   }
@@ -223,7 +223,7 @@ function function_3d5c51904fd25773() {
   return "iw9_gunless_quickdrop_mp";
 }
 
-function function_fc6a5b145563be33(switchimmediate) {
+function givegunlessweapon(switchimmediate) {
   return function_6d53276bd8e3c46d(switchimmediate, function_ed0dd95e839cd2a9());
 }
 
@@ -266,7 +266,7 @@ function function_6d53276bd8e3c46d(switchimmediate, weaponname) {
   return success;
 }
 
-function function_9897d143c3feee05() {
+function takegunlessweapon() {
   self endon("death_or_disconnect");
 
   if(!isDefined(self.gunnlessweapon) || !self hasweapon(self.gunnlessweapon)) {

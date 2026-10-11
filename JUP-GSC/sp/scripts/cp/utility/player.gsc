@@ -302,7 +302,7 @@ function getplayersinradiusview(origin, radius, desiredteam, excludeent) {
   return var_305f0639560a5707;
 }
 
-function isfriendly(var_da8cec9bce12f9cb, var_c4b81997f0120a97) {
+function isfriendly(teamtocheck, var_c4b81997f0120a97) {
   assertex(isDefined(var_c4b81997f0120a97), "isFriendlyTeam argument 2 is not defined");
 
   if(!level.teambased) {
@@ -313,7 +313,7 @@ function isfriendly(var_da8cec9bce12f9cb, var_c4b81997f0120a97) {
     return false;
   }
 
-  if(var_da8cec9bce12f9cb != var_c4b81997f0120a97.team) {
+  if(teamtocheck != var_c4b81997f0120a97.team) {
     return false;
   }
 
@@ -533,7 +533,7 @@ function getremotename() {
   return self.usingremote;
 }
 
-function clearusingremote(var_2c111f02d48e2671) {
+function clearusingremote(bypassweaponswitch) {
   val::reset_all("using_remote");
 
   if(isDefined(self.carryicon)) {
@@ -542,7 +542,7 @@ function clearusingremote(var_2c111f02d48e2671) {
 
   self.usingremote = undefined;
 
-  if(!isDefined(var_2c111f02d48e2671)) {
+  if(!isDefined(bypassweaponswitch)) {
     _freezecontrols(0);
   }
 
@@ -1276,8 +1276,8 @@ function teleport_player(object) {
   }
 }
 
-function function_678eed0af59b69eb(breath, var_ea8199f09c110522, var_21c40030c467a5f6, var_247ffbb0ea77edf7) {
-  if(var_ea8199f09c110522) {
+function function_678eed0af59b69eb(breath, isbreathcritical, var_21c40030c467a5f6, var_247ffbb0ea77edf7) {
+  if(isbreathcritical) {
     colormax = (0.15, 0.7, 0.7);
     colormin = (0.7, 0.4, 0.4);
     factor = math::normalize_value(0, var_21c40030c467a5f6, breath);

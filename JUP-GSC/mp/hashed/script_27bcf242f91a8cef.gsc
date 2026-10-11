@@ -77,7 +77,7 @@ function function_83f49b42abfbeddb(boss) {
   boss waittill("death", attacker);
   v_pos = getclosestpointonnavmesh(boss.origin);
   v_ground = getgroundposition(v_pos, 50);
-  item_keycard = function_38e113a4c30f6c0d("obloot_key_human_stronghold", v_ground, (0, 0, 0), 0, 1, 1, 1);
+  item_keycard = spawnnewitemfromscriptablesharedfunc("obloot_key_human_stronghold", v_ground, (0, 0, 0), 0, 1, 1, 1);
 
   if(isDefined(item_keycard)) {
     item_keycard.var_1018ba92f1186325 = 1;
@@ -126,7 +126,7 @@ function function_fa4fe5913824beba() {
   item_intel = undefined;
 
   while(!isDefined(item_intel)) {
-    item_intel = function_38e113a4c30f6c0d("obloot_ava_intel_merc_stronghold", v_pos, (0, 0, 0), 0, 1, 1, 1);
+    item_intel = spawnnewitemfromscriptablesharedfunc("obloot_ava_intel_merc_stronghold", v_pos, (0, 0, 0), 0, 1, 1, 1);
     waitframe();
   }
 
@@ -136,7 +136,7 @@ function function_fa4fe5913824beba() {
     itembundle = getscriptbundle("itemspawnentry:" + "ob_jup_item_act1_tier4_intel_tablet");
     lootid = function_6d15e119c2779a93(itembundle);
 
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       player scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(14, item_intel.origin, item_intel.index, lootid);
     }
   }
@@ -258,14 +258,14 @@ function function_bdfe768bd3eed7fc() {
 
 function function_ed260c1f4a6de9f8(activity_succeeded) {
   self endon("instance_destroyed");
-  namespace_40713433c91dd86c::function_c402ecda1e84ba27(self.var_6c29f2fdb0054bbe, 0, self.difficulty_region, self.origin);
+  namespace_40713433c91dd86c::function_c402ecda1e84ba27(self.playerparticipants, 0, self.difficulty_region, self.origin);
 }
 
 function function_f0f250986bb9d773() {
   self endon("instance_destroyed");
 }
 
-function function_4b374266cdca5335(safe, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_4b374266cdca5335(safe, part, state, player, bautouse, usestring) {
   if(isDefined(player) && istrue(player.var_859654e0445a36d9)) {
     player scripts\mp\hud_message::showerrormessage("MP/DENY_USE_CARRY");
     return;
@@ -280,10 +280,10 @@ function function_4b374266cdca5335(safe, part, state, player, var_a5b2c541413aa8
     if(!isDefined(safe.contents)) {
       safe notify("safe_looted");
       safe.containertype = 4;
-      common_cache::function_d71a41afca697376(safe, "ob_jup_items_contract_weaponstash", 5);
+      common_cache::fillcontentsfromlist(safe, "ob_jup_items_contract_weaponstash", 5);
     }
 
-    scripts\cp_mp\loot\common_cache::function_30f5ea60517f9e06(safe, player);
+    scripts\cp_mp\loot\common_cache::openlootablecontainer(safe, player);
   }
 }
 
@@ -357,7 +357,7 @@ function function_76d84b28702a71fb() {
 
 function function_dc8aff8faf2a6a3b() {
   v_pos = getclosestpointonnavmesh(self.origin);
-  item_keycard = function_38e113a4c30f6c0d("ob_jup_item_act1_tier4_intel_tablet", v_pos, (0, 0, 0), 0, 1, 1, 1);
+  item_keycard = spawnnewitemfromscriptablesharedfunc("ob_jup_item_act1_tier4_intel_tablet", v_pos, (0, 0, 0), 0, 1, 1, 1);
   item_keycard = undefined;
   wait 0.5;
 
@@ -558,7 +558,7 @@ function function_5317479fee3ffd7d(player) {
   player.linktoent rotateTo(goalangles, movetotime, 0.1, 0.1);
   player setstance("stand");
   var_cd9982adb17761a8 = gettime();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = movetotime - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000;
   waittime = max(0, var_218f64cb035d54be);
@@ -682,8 +682,8 @@ function function_da3f7ddab34651a2() {
     if(isarray(self.var_2d5b80c94b21ea0e) && self.var_2d5b80c94b21ea0e.size > 0) {
       rand_player = random(self.var_2d5b80c94b21ea0e);
       var_ee6145d714e45387 = rand_player.origin;
-    } else if(isarray(self.var_6c29f2fdb0054bbe) && self.var_6c29f2fdb0054bbe.size > 0) {
-      rand_player = random(self.var_6c29f2fdb0054bbe);
+    } else if(isarray(self.playerparticipants) && self.playerparticipants.size > 0) {
+      rand_player = random(self.playerparticipants);
       var_ee6145d714e45387 = rand_player.origin;
     } else {
       return;
@@ -697,15 +697,15 @@ function function_da3f7ddab34651a2() {
   self waittill("outlast_complete");
   on_mission = 0;
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     if(namespace_838b439602b3acc7::function_5acc35fc66331385(player, 16822) || getdvarint(@ "hash_7b8b09c504a0c9a0", 0)) {
       on_mission = 1;
     }
   }
 
   if(istrue(on_mission)) {
-    item_tablet = function_38e113a4c30f6c0d("obloot_intel_tablet", var_ee6145d714e45387, (0, 0, 0), 0, 1, undefined, 1);
-    item_tablet.playerlist = self.var_6c29f2fdb0054bbe;
+    item_tablet = spawnnewitemfromscriptablesharedfunc("obloot_intel_tablet", var_ee6145d714e45387, (0, 0, 0), 0, 1, undefined, 1);
+    item_tablet.playerlist = self.playerparticipants;
     wait 0.5;
 
     if(isDefined(item_tablet)) {
@@ -713,7 +713,7 @@ function function_da3f7ddab34651a2() {
       itembundle = getscriptbundle("itemspawnentry:" + "ob_jup_item_act1_tier6_avas_tablet");
       lootid = function_6d15e119c2779a93(itembundle);
 
-      foreach(player in self.var_6c29f2fdb0054bbe) {
+      foreach(player in self.playerparticipants) {
         player scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(14, item_tablet.origin, item_tablet.index, lootid);
       }
     }
@@ -734,7 +734,7 @@ function onsabotageextractordisabled(activity_instance, extractor) {
       v_pos = getclosestpointonnavmesh(extractor.origin);
 
       while(!isDefined(quest_item)) {
-        quest_item = function_38e113a4c30f6c0d("obloot_quest_a2t4_container", v_pos, undefined, undefined, undefined, undefined, 1);
+        quest_item = spawnnewitemfromscriptablesharedfunc("obloot_quest_a2t4_container", v_pos, undefined, undefined, undefined, undefined, 1);
         wait 0.5;
       }
 
@@ -742,7 +742,7 @@ function onsabotageextractordisabled(activity_instance, extractor) {
         itembundle = getscriptbundle("itemspawnentry:" + "ob_jup_item_act2_tier4_container");
         lootid = function_6d15e119c2779a93(itembundle);
 
-        foreach(player in activity_instance.var_6c29f2fdb0054bbe) {
+        foreach(player in activity_instance.playerparticipants) {
           player scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(14, quest_item.origin, quest_item.index, lootid);
         }
       }
@@ -754,7 +754,7 @@ function onsabotageextractordisabled(activity_instance, extractor) {
 
 function private function_bebd651e6464d232() {
   s_bazaar = getStruct("quest_a2t3_essence_bazaar", "targetname");
-  var_a4871cdc42d9531b = function_38e113a4c30f6c0d("obloot_quest_a2t3_bazaar_container", s_bazaar.origin, s_bazaar.angles, undefined, 1, 1, 1);
+  var_a4871cdc42d9531b = spawnnewitemfromscriptablesharedfunc("obloot_quest_a2t3_bazaar_container", s_bazaar.origin, s_bazaar.angles, undefined, 1, 1, 1);
   interact = scripts\cp_mp\interaction::function_32645103f7520635(var_a4871cdc42d9531b, &function_9dab7ca9c27dfb18);
   interact.str_poi = "bazaar";
   interact setscriptablepartstate("obloot_quest_a2t3_bazaar_container", "visible");
@@ -774,7 +774,7 @@ function private function_bebd651e6464d232() {
 
 function private function_66be43782ac9255e() {
   var_f23a4a1705f1a6dc = getStruct("quest_a2t3_essence_retail", "targetname");
-  var_d9c350b9933516d3 = function_38e113a4c30f6c0d("obloot_quest_a2t3_retail_container", var_f23a4a1705f1a6dc.origin, var_f23a4a1705f1a6dc.angles, undefined, 1, 1, 1);
+  var_d9c350b9933516d3 = spawnnewitemfromscriptablesharedfunc("obloot_quest_a2t3_retail_container", var_f23a4a1705f1a6dc.origin, var_f23a4a1705f1a6dc.angles, undefined, 1, 1, 1);
   interact = scripts\cp_mp\interaction::function_32645103f7520635(var_d9c350b9933516d3, &function_e81f6a73b0d66d0);
   interact.str_poi = "retail";
   interact setscriptablepartstate("obloot_quest_a2t3_retail_container", "visible");
@@ -794,7 +794,7 @@ function private function_66be43782ac9255e() {
 
 function private function_48f5535dced65762() {
   s_shops = getStruct("quest_a2t3_essence_shops", "targetname");
-  var_cbe0ad7315f99ee1 = function_38e113a4c30f6c0d("obloot_quest_a2t3_shops_container", s_shops.origin, s_shops.angles, undefined, 1, 1, 1);
+  var_cbe0ad7315f99ee1 = spawnnewitemfromscriptablesharedfunc("obloot_quest_a2t3_shops_container", s_shops.origin, s_shops.angles, undefined, 1, 1, 1);
   interact = scripts\cp_mp\interaction::function_32645103f7520635(var_cbe0ad7315f99ee1, &function_4224be92f5fc92be);
   interact.str_poi = "shops";
   interact setscriptablepartstate("obloot_quest_a2t3_shops_container", "visible");
@@ -885,7 +885,7 @@ function private function_e23b5eafc9d0c7bf(params) {
     item_tablet = undefined;
 
     while(!isDefined(item_tablet)) {
-      item_tablet = function_38e113a4c30f6c0d("obloot_strauss_research_tablet", v_pos, (0, 0, 0), 0, 1, 1, 1);
+      item_tablet = spawnnewitemfromscriptablesharedfunc("obloot_strauss_research_tablet", v_pos, (0, 0, 0), 0, 1, 1, 1);
       waitframe();
     }
 
@@ -916,8 +916,8 @@ function function_b978f5e2753317a4(challengeid) {
     return false;
   }
 
-  if(isDefined(self) && isDefined(self.var_6c29f2fdb0054bbe) && self.var_6c29f2fdb0054bbe.size) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+  if(isDefined(self) && isDefined(self.playerparticipants) && self.playerparticipants.size) {
+    foreach(player in self.playerparticipants) {
       if(scripts\mp\pmc_missions::function_c7d3c1cb4a3958cf(player, challengeid)) {
         return true;
       }

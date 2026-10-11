@@ -36,7 +36,7 @@ function init_when_ready() {
 
 function init() {
   scripts\mp\supers::function_53110a12409d01da("super_personal_redeploy_drone", undefined, undefined, &function_1798be0772912ae0, undefined, undefined);
-  function_f1aed36ab4598ea("eqp_personal_redeploy_drone");
+  snd_transient_load("eqp_personal_redeploy_drone");
   init_variables();
   init_dev_gui();
 }
@@ -81,7 +81,7 @@ function init_variables() {
   level.var_354cdd3be21c3816.frontcheck = getdvarint(@ "hash_4c317295490ab630", 144);
   level.var_354cdd3be21c3816.flighttime = getdvarfloat(@ "hash_1100bb3b49784382", 2.5);
   level.var_354cdd3be21c3816.var_6fcc6072244f528d = getdvarfloat(@ "hash_214076bbc50622b5", 1);
-  level.var_354cdd3be21c3816.var_699e6686ae987b76 = getdvarint(@ "hash_56251ca801089d58", 450);
+  level.var_354cdd3be21c3816.upthrust = getdvarint(@ "hash_56251ca801089d58", 450);
   level.var_354cdd3be21c3816.maxaltitude = getdvarint(@ "hash_87956834ba2c9da5", 6400);
   level.var_354cdd3be21c3816.var_4f1beac755fcbf5e = level.var_354cdd3be21c3816.flighttime * 0.15;
   level.var_354cdd3be21c3816.var_2d2810a5544c4810 = getdvarint(@ "hash_8ace69b15bc87e78", 350);
@@ -476,8 +476,8 @@ function function_3dd876c5ec4242e4(drone) {
     var_837b637cd1457b5e = self.var_8c1e2e3b4d920e07 * level.var_354cdd3be21c3816.var_2d2810a5544c4810;
   }
 
-  var_699e6686ae987b76 = (0, 0, level.var_354cdd3be21c3816.var_699e6686ae987b76);
-  ejectvelocity = var_837b637cd1457b5e + var_699e6686ae987b76;
+  upthrust = (0, 0, level.var_354cdd3be21c3816.upthrust);
+  ejectvelocity = var_837b637cd1457b5e + upthrust;
 
   if(istrue(self.var_76c6ee0982ddcdc) && !istrue(player.inlaststand) && player.health > 0) {
     player setvelocity(ejectvelocity);

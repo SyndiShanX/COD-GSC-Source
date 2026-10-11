@@ -285,11 +285,11 @@ function function_f3cafbcac7b5f838(weaponobj, attachmentname) {
   }
 
   hasnvg = istrue(level.nightmap);
-  attachment1slot = function_4add228b999c26aa(var_b8ca516f1a797a1f, attachmentname);
+  attachment1slot = getattachmentslot(var_b8ca516f1a797a1f, attachmentname);
   replaced = 0;
 
   foreach(idx, a in attachments) {
-    attachment2slot = function_4add228b999c26aa(var_b8ca516f1a797a1f, attachments[idx]);
+    attachment2slot = getattachmentslot(var_b8ca516f1a797a1f, attachments[idx]);
 
     if(attachment1slot == attachment2slot && attachment1slot != "<dev string:x25b>") {
       attachments[idx] = attachmentname;
@@ -479,7 +479,7 @@ function function_61f7f6b3f6c5c082(entnum) {
     path = weaponpath + "<dev string:x2f3>";
     scripts\common\devgui::add_devgui_command(path, "<dev string:x2ff>" + entnum + "<dev string:x33b>" + noaltweapon.basename);
 
-    foreach(slot in level.var_c7008cff883cd615) {
+    foreach(slot in level.attachmentslotarray) {
       if(slot == "<dev string:x356>") {
         continue;
       }
@@ -557,7 +557,7 @@ function function_416220a2493c9ec() {
     weaponasset = level.weaponmapdata[weapon].assetname;
   }
 
-  weaponblueprint = function_40fd49171fad19d3(blueprintname);
+  weaponblueprint = getxhashasset(blueprintname);
 
   if(isDefined(weaponasset)) {
     weaponvariants = getweaponblueprintnames(weaponasset);

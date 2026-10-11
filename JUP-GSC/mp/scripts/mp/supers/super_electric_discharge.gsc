@@ -122,7 +122,7 @@ function private function_b275e1f539394ae1(killstreakbundle) {
 }
 
 function private function_da1cc53c13568565() {
-  return isreallyalive(self) && !isinlaststand(self) && !self function_9cc921a57ff4deb5() && !self isonladder() && !self ismantling() && !self ishanging() && !self isinfreefall() && !self isparachuting() && !self isdiving() && !self ismeleeing() && !self isswitchingweapon() && !isusingremote();
+  return isreallyalive(self) && !isinlaststand(self) && !self isonascender() && !self isonladder() && !self ismantling() && !self ishanging() && !self isinfreefall() && !self isparachuting() && !self isdiving() && !self ismeleeing() && !self isswitchingweapon() && !isusingremote();
 }
 
 function private function_9abe408951f8cc02() {
@@ -357,7 +357,7 @@ function function_822a7fd2e23b8fb6(ent) {
       } else if(ent scripts\cp_mp\vehicles\vehicle::isvehiclekillstreak()) {
         ent dodamage(9999, ent.origin, self, self, "MOD_EXPLOSIVE", electricweapon);
       } else {
-        ent.var_a8f4bb03b366aa80 = 1;
+        ent.dontspawnhusk = 1;
         damagedata = spawnStruct();
         damagedata.attacker = self;
         damagedata.inflictor = ent;

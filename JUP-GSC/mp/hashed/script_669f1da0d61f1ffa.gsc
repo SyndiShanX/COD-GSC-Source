@@ -410,7 +410,7 @@ function private transform_into(new_type, attacker, health_override, is_upgraded
 
   agent_gender = self function_617d6e7d0b7859cc() ? "female" : "male";
   agent_aitype = self.agent_type;
-  var_e9ecac3bbe4fc333 = self.var_42e5c77b1d7fe6e7;
+  var_e9ecac3bbe4fc333 = self.characterlistname;
 
   if(string_starts_with(agent_aitype, "actor_")) {
     agent_aitype = getsubstr(agent_aitype, 6);
@@ -754,7 +754,7 @@ function private give_powerup(attacker) {
   }
 
   self.humangun_transformed = 1;
-  utility::function_f3bb4f4911a1beb2("player", "setIgnoredByZombies", "humangun", 1);
+  utility::callsharedfunc("player", "setIgnoredByZombies", "humangun", 1);
   powerup_vision = level.var_e01baa6e6a9eef5c.var_6de68dec41c3f263;
 
   if(isDefined(powerup_vision)) {
@@ -765,7 +765,7 @@ function private give_powerup(attacker) {
   wait 7;
 
   if(isDefined(self)) {
-    utility::function_f3bb4f4911a1beb2("player", "setIgnoredByZombies", "humangun", 0);
+    utility::callsharedfunc("player", "setIgnoredByZombies", "humangun", 0);
 
     if(isDefined(powerup_vision)) {
       vision_utility::function_9a92ae402e209ecc(powerup_vision);

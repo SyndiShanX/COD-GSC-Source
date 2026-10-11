@@ -25,12 +25,12 @@ function pre_main() {
   level.var_750a82cea28f2f13 = 1;
   register("breath_system", 1, 0, "$self", &function_ff6d5864f8680d5e, "$value");
   register("damage", 1, 0, "$self", &function_a49123f94edb0267, "$value");
-  register("death", 1, 0, "$self", &function_613f82ecdf9b56b8, "$value");
+  register("death", 1, 0, "$self", &set_allow_death, "$value");
   register("damageshield", 0, 1, "$self", &function_8aba0b6af3dcb0ef, "$value");
   register("ignoresuppression", 0, 1, "$self", &function_9e8589036c3fd37e, "$value");
   register("whizby", 1, 0);
   register("ignoreme", 0, 1, "$self", &function_2553e8f1e80d32a9, "$value");
-  register("ignoreall", 0, 1, "$self", &function_d3eeff01d5db508a, "$value");
+  register("ignoreall", 0, 1, "$self", &set_ignore_all, "$value");
   register("take_weapons", 0, 1, "$self", &set_takeweapons, "$value");
   register("weapon", 1, 0, "$self", &function_945a9012be94d89b, "$value");
   register("weapon_switch", 1, 0, "$self", &function_271781b97a830b8f, "$value");
@@ -66,26 +66,26 @@ function pre_main() {
   register("show_weapon_hud", 1, 0, "$self", &function_8b2fc23241e6448b, "$value");
   register("show_dpad_hud", 1, 0, "$self", &function_147fe8bda5949cf2, "$value");
   register("allow_jump", 1, 0, "$self", &set_allowjump, "$value");
-  register("allow_double_jump", 1, 0, "$self", &function_5d8c973a5b6b05d8, "$value");
+  register("allow_double_jump", 1, 0, "$self", &set_allowdoublejump, "$value");
   register("crouch", 1, 0, "$self", &set_allowcrouch, "$value");
   register("prone", 1, 0, "$self", &set_allowprone, "$value");
   register("stance_change", 1, 0, "$self", &function_c8e47b79550e4319, "$value");
   register("melee", 1, 0, "$self", &set_allowmelee, "$value");
-  register("lean", 1, 0, "$self", &function_1e949110ce628e51, "$value");
+  register("lean", 1, 0, "$self", &set_allowlean, "$value");
   register("allow_melee_victim", 1, 0, "$self", &allow_melee_victim, "$value");
-  register("mantle", 1, 0, "$self", &function_b3870b9ec763d70a, "$value");
+  register("mantle", 1, 0, "$self", &set_allowmantle, "$value");
   register("ledgehang", 1, 0, "$self", &function_97182ebc175cd93a, "$value");
-  register("mount_top", 1, 0, "$self", &function_9b5befbb13ad7651, "$value");
-  register("mount_side", 1, 0, "$self", &function_aac726af48296365, "$value");
+  register("mount_top", 1, 0, "$self", &set_allowmounttop, "$value");
+  register("mount_side", 1, 0, "$self", &set_allowmountside, "$value");
   register("sprint", 1, 0, "$self", &set_allowsprint, "$value");
-  register("jog", 1, 0, "$self", &function_2a827539b0ee61b7, "$value");
+  register("jog", 1, 0, "$self", &set_allowjog, "$value");
   register("ads", 1, 0, "$self", &set_allowads, "$value");
   register("stand", 1, 0, "$self", &set_allowstand, "$value");
   register("allow_movement", 1, 0, "$self", &set_allowmovement, "$value");
-  register("ladder", 1, 0, "$self", &function_f3b4bc17c87adba5, "$value");
+  register("ladder", 1, 0, "$self", &set_allowladder, "$value");
   register("swimming_underwater", 1, 0, "$self", &function_880120db350a6425, "$value");
   register("dtp", 1, 0, "$self", &function_d13b7a396eab0463, "$value");
-  register("move_speed_scale", 1, 1, "$self", &function_46eda303c0fa6322, "$value");
+  register("move_speed_scale", 1, 1, "$self", &set_movespeedscale, "$value");
   register("desired_speed", 0, 0, "$self", &set_desiredspeed, "$value");
   register("goalradius", 2048, 2048, "$self", &function_a93b95cf50f8c3c9, "$value");
   register("push_player", 0, 1, "$self", &set_pushplayer, "$value");
@@ -145,7 +145,7 @@ function pre_main() {
   register("spy_cam", 1, 0, "$self", &function_1bc52d1afc4d1b95, ["spy_cam", "$value"]);
   register("ammomod_immune", 0, 1, "$self", &function_d549cfeb2ed5d5e2, "$value");
   register("allow_dismember", 1, 0, "$self", &function_b010672d21d0fdb1, "$value");
-  register("cinematics_participant", 0, 1, "$self", &function_83f16f4f6bc886b2, "$value");
+  register("cinematics_participant", 0, 1, "$self", &set_participating_cinematics, "$value");
   register("overlord_speaker", "", "", "$self", &function_a93741c78d1d215b, "$value");
   register("ks_dont_forget", 0, 0, "$self", &function_13da7718a3ccfc98, "$value");
   register("ai_eventlist", "", "", "$self", &function_fd241a7be9d82fa5, "$value");
@@ -524,10 +524,10 @@ function private function_1d19c0b0f63836bf() {
     return !self isinvulnerable();
   }
 
-  return self function_89db472b36958666();
+  return self getcandamage();
 }
 
-function private function_613f82ecdf9b56b8(b_value) {
+function private set_allow_death(b_value) {
   if(!isDefined(b_value)) {
     b_value = 0;
   }
@@ -703,11 +703,11 @@ function private function_6a7974bc3033866f(b_value) {
 
     if(b_value != -1) {
       self cancelreload();
-      var_5814d27874b48e54 = spawnStruct();
-      var_5814d27874b48e54.player = self;
-      var_5814d27874b48e54.cancelreason = "ENTER_VEHICLE";
-      var_5814d27874b48e54.reloadcanceltime = getsystemtimeinmicroseconds();
-      namespace_c45ac99c4997e722::function_80820d6d364c1836("callback_on_reload_cancel", var_5814d27874b48e54);
+      telemetrydata = spawnStruct();
+      telemetrydata.player = self;
+      telemetrydata.cancelreason = "ENTER_VEHICLE";
+      telemetrydata.reloadcanceltime = getsystemtimeinmicroseconds();
+      telemetry_utils::function_80820d6d364c1836("callback_on_reload_cancel", telemetrydata);
     }
 
     return;
@@ -836,7 +836,7 @@ function private function_2553e8f1e80d32a9(b_value) {
   self.ignoreme = b_value;
 }
 
-function private function_d3eeff01d5db508a(b_value) {
+function private set_ignore_all(b_value) {
   if(!isDefined(b_value)) {
     b_value = 1;
   }
@@ -1026,7 +1026,7 @@ function private set_allowjump(b_value) {
   self allowjump(b_value);
 }
 
-function private function_5d8c973a5b6b05d8(b_value) {
+function private set_allowdoublejump(b_value) {
   if(!isDefined(b_value)) {
     b_value = 1;
   }
@@ -1088,7 +1088,7 @@ function private set_allowmelee(b_value) {
   self allowmelee(b_value);
 }
 
-function private function_1e949110ce628e51(b_value) {
+function private set_allowlean(b_value) {
   if(!isDefined(b_value)) {
     b_value = 0;
   }
@@ -1096,7 +1096,7 @@ function private function_1e949110ce628e51(b_value) {
   self allowlean(b_value);
 }
 
-function private function_b3870b9ec763d70a(b_value) {
+function private set_allowmantle(b_value) {
   if(!isDefined(b_value)) {
     b_value = 1;
   }
@@ -1112,7 +1112,7 @@ function private function_97182ebc175cd93a(b_value) {
   self function_217a2afa4a512d2b(b_value);
 }
 
-function private function_9b5befbb13ad7651(b_value) {
+function private set_allowmounttop(b_value) {
   if(!isDefined(b_value)) {
     b_value = 0;
   }
@@ -1120,7 +1120,7 @@ function private function_9b5befbb13ad7651(b_value) {
   self allowmounttop(b_value);
 }
 
-function private function_aac726af48296365(b_value) {
+function private set_allowmountside(b_value) {
   if(!isDefined(b_value)) {
     b_value = 0;
   }
@@ -1136,7 +1136,7 @@ function private set_allowsprint(b_value) {
   self allowsprint(b_value);
 }
 
-function private function_2a827539b0ee61b7(b_value) {
+function private set_allowjog(b_value) {
   if(!isDefined(b_value)) {
     b_value = 1;
   }
@@ -1160,7 +1160,7 @@ function private set_allowmovement(b_value) {
   self allowmovement(b_value);
 }
 
-function private function_f3b4bc17c87adba5(b_value) {
+function private set_allowladder(b_value) {
   if(!isDefined(b_value)) {
     b_value = 1;
   }
@@ -1173,7 +1173,7 @@ function private function_880120db350a6425(b_value) {
     b_value = 1;
   }
 
-  self function_f484b2c51e0d6f5e(b_value);
+  self allowswimmingunderwater(b_value);
 }
 
 function private function_d13b7a396eab0463(b_value) {
@@ -1184,7 +1184,7 @@ function private function_d13b7a396eab0463(b_value) {
   self allowdive(b_value);
 }
 
-function private function_46eda303c0fa6322(val) {
+function private set_movespeedscale(val) {
   if(!isDefined(val)) {
     val = 1;
   }
@@ -1366,11 +1366,11 @@ function private function_7edde3ba90d9a36(b_value) {
     return;
   }
 
-  var_c7b3c8374684b876 = 2;
+  nvgslot = 2;
 
   if(b_value) {
     if(!isai(self)) {
-      self setactionslot(var_c7b3c8374684b876, "nightvision");
+      self setactionslot(nvgslot, "nightvision");
 
       if(utility::iscp()) {
         self function_b1e64d364cf55b73(1);
@@ -1381,7 +1381,7 @@ function private function_7edde3ba90d9a36(b_value) {
   }
 
   if(!isai(self)) {
-    self setactionslot(var_c7b3c8374684b876, "");
+    self setactionslot(nvgslot, "");
 
     if(utility::iscp()) {
       self function_b1e64d364cf55b73(0);
@@ -1527,8 +1527,8 @@ function private enableslotinternal(slot) {
 
         if(isDefined(variantid) && variantid > 0) {
           weapon = makeweapon(equip.basename, [], undefined, undefined, variantid);
-          var_1092bc40c58c1c9a = equip.basename + "|" + string(variantid);
-          attachments = level.equipmentblueprints[var_1092bc40c58c1c9a];
+          svariantid = equip.basename + "|" + string(variantid);
+          attachments = level.equipmentblueprints[svariantid];
 
           foreach(attachment, variant in attachments) {
             weapon = weapon withattachment(attachment, variant);
@@ -1706,12 +1706,12 @@ function private function_15b077dbaf3b063f(b_value) {
     assertmsg("<dev string:x1ea>");
   }
 
-  self function_ae3021dcebd28be1(b_value);
+  self setinfiniteammo(b_value);
 }
 
 function private function_f8b197beec8e9945(val) {
-  if(isDefined(level.var_60fc087bc7deaadc)) {
-    self[[level.var_60fc087bc7deaadc]](val);
+  if(isDefined(level.setoverlordlockedpriority)) {
+    self[[level.setoverlordlockedpriority]](val);
   }
 }
 
@@ -1801,7 +1801,7 @@ function private function_db2848cc88d5a336(b_value) {
 function private function_b0146ba0c8f08192(b_value) {
   if(isai(self)) {
     self enableavoidance(!b_value);
-    self.var_3119604b74dfdbbd = !b_value;
+    self.collide_with_ai = !b_value;
   }
 }
 
@@ -1836,7 +1836,7 @@ function private function_b010672d21d0fdb1(b_value) {
   utility::ent_flag_clear("allow_dismember");
 }
 
-function private function_83f16f4f6bc886b2(b_value) {
+function private set_participating_cinematics(b_value) {
   self function_3671ec427c125cb(istrue(b_value));
 }
 
@@ -1878,23 +1878,23 @@ function function_fd241a7be9d82fa5(eventlist) {
 }
 
 function function_f185596cc8242d28(val) {
-  function_a1c249d52179826c(val);
+  stealthsettimetolosetargetatlkp(val);
 }
 
 function function_4ef8b4df5173b05a(val) {
-  function_e280f14a391474ef(val);
+  stealthsettimetolosetargetnotatlkp(val);
 }
 
 function function_f1e27a27436441b4(val) {
-  function_129c37cc2498c0d5(val);
+  stealthsetdefaulttimetodropthreatsight(val);
 }
 
 function function_48cd47326fc3f73b(val) {
-  function_412d0fae58ba3904(val);
+  setglobalescalationtotalcombattime(val);
 }
 
 function function_dbb2149dbfbea743(val) {
-  function_dde84eabe77d9e18(val);
+  setglobalescalationcombatpercentagethreshold(val);
 }
 
 function private validate(str_name, call_on, func) {

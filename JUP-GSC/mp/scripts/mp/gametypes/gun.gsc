@@ -1079,7 +1079,7 @@ function function_102741e35aa549ae() {
 
     data = [];
     data["weapon"] = ggweapondata.baseweapon;
-    data["min"] = ggweapondata.var_1aeea42b2243716f;
+    data["min"] = ggweapondata.minattachments;
     data["max"] = ggweapondata.maxattachments;
     data["perk"] = ggweapondata.bonusperk;
 

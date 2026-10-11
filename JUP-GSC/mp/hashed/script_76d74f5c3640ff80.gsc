@@ -180,9 +180,9 @@ function private function_1e6f737ee4a06ebd() {
 
   while(true) {
     waitframe();
-    var_cb791416725e9bc6 = isDefined(self.var_349af4466beb8322) && isalive(self.var_349af4466beb8322) && !istrue(self.var_349af4466beb8322.inlaststand) && !istrue(self.var_349af4466beb8322.var_f2f5db77ae69537f) && !isai(self.var_349af4466beb8322) && !function_d58d9fad4c55a9b8(self.var_349af4466beb8322);
+    hasvalidtarget = isDefined(self.var_349af4466beb8322) && isalive(self.var_349af4466beb8322) && !istrue(self.var_349af4466beb8322.inlaststand) && !istrue(self.var_349af4466beb8322.var_f2f5db77ae69537f) && !isai(self.var_349af4466beb8322) && !function_d58d9fad4c55a9b8(self.var_349af4466beb8322);
 
-    if(var_cb791416725e9bc6) {
+    if(hasvalidtarget) {
       continue;
     }
 

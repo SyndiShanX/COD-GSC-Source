@@ -842,10 +842,10 @@ function function_6c5efbac5017bfed() {
 
 function function_9445edd8b9c81009() {
   var_e22803049e8a74a8 = getStruct("story_b1_ravenov_path_bridge", "targetname");
-  var_32bee7a508f186c = getdvarint(@ "hash_e06f3741d186fe1c", 32) + 32;
+  disttocheck = getdvarint(@ "hash_e06f3741d186fe1c", 32) + 32;
 
   while(true) {
-    if(distancesquared(self.origin, var_e22803049e8a74a8.origin) < var_32bee7a508f186c * var_32bee7a508f186c) {
+    if(distancesquared(self.origin, var_e22803049e8a74a8.origin) < disttocheck * disttocheck) {
       break;
     }
 
@@ -861,13 +861,13 @@ function function_9445edd8b9c81009() {
 function function_73cab470b35094() {
   level endon("game_ended");
   var_5967e9e936f0d1c8 = getStruct("story_b1_ravenov_path_wait", "targetname");
-  var_5eeac69fb9196f66 = getStruct("story_b1_ravenov_path_end", "targetname");
+  s_end_goal = getStruct("story_b1_ravenov_path_end", "targetname");
   level waittill("ob_infil_animscripted_done");
   thread function_9445edd8b9c81009();
   function_603c0e4ccd02a98e(var_5967e9e936f0d1c8.origin, var_5967e9e936f0d1c8.radius);
   level flag_wait("follow_jansen_enter_storm");
   wait 3;
-  function_603c0e4ccd02a98e(var_5eeac69fb9196f66.origin);
+  function_603c0e4ccd02a98e(s_end_goal.origin);
   self waittill("goal");
   level flag_set("ravenov_storm_edge");
 }
@@ -1020,9 +1020,9 @@ function setup_orbs() {
     struct.orb.move_to_point setModel("tag_origin");
     struct.orb.move = spawn("script_model", struct.spawn_pos);
     struct.orb.move setModel("jup_zm_harvester_orb_invisible");
-    struct.orb utility::function_6e506f39f121ea8a(struct.orb.move);
-    var_ba4c16ad30a65991 = struct.name + "_path";
-    struct.orb.path_start = getStruct(var_ba4c16ad30a65991, "targetname");
+    struct.orb utility::scriptable_setparententity(struct.orb.move);
+    pathname = struct.name + "_path";
+    struct.orb.path_start = getStruct(pathname, "targetname");
     struct.orb.var_b36f416ea2901969 = 128;
     struct.orb.var_4b277984303eb7df = 96;
     struct.orb.movespeed = 256;
@@ -1213,7 +1213,7 @@ function setup_crystal(struct) {
   struct.crystal.invis setModel("jup_zm_phase_crystal_floor_invisible");
   struct.crystal.invis.angles = struct.crystal.angles;
   struct.crystal.invis.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_rift_crystal_healthbar");
-  struct.crystal.invis.var_534e788bc498be9f = getscriptbundle(%"hash_27607d0a0826b151");
+  struct.crystal.invis.subclass_scriptbundle = getscriptbundle(%"hash_27607d0a0826b151");
   struct.crystal.invis.var_1e0eb63ecb3f1e2 = 0;
   struct.crystal.invis.var_4919d15787f01154 = 1;
   struct.crystal.invis.fake_health = 1000;
@@ -1825,19 +1825,19 @@ function function_2ad9be8ccf6f1d13(beat) {
   }
 }
 
-function function_7f7f4b8d2f7ae5ce(var_f7c09e4d1c282b42, var_c30bf0ad52b35f12, dist) {
+function function_7f7f4b8d2f7ae5ce(targetai, var_c30bf0ad52b35f12, dist) {
   level endon("game_ended");
   level endon("champion_defeated");
 
-  while(isDefined(var_f7c09e4d1c282b42)) {
+  while(isDefined(targetai)) {
     var_98ee6ac7b44ffc2e = distance2dsquared(self.origin, var_c30bf0ad52b35f12);
-    var_5df22e60db2abaf0 = distance2dsquared(var_f7c09e4d1c282b42.origin, var_c30bf0ad52b35f12);
+    var_5df22e60db2abaf0 = distance2dsquared(targetai.origin, var_c30bf0ad52b35f12);
 
     if(var_98ee6ac7b44ffc2e >= squared(dist) || var_5df22e60db2abaf0 >= squared(dist)) {
       self cleargoalentity();
       self setgoalpos(var_c30bf0ad52b35f12, dist);
     } else {
-      self setgoalentity(var_f7c09e4d1c282b42);
+      self setgoalentity(targetai);
     }
 
     wait 0.5;
@@ -2409,18 +2409,18 @@ function private function_c43d5fd390a4b9c1() {
   debris = utility::spawn_model("tag_origin", (-12035, 12241, 500));
   vfx_tag = utility::spawn_model("tag_origin", (-12097, 12304, 1244));
   var_7c53cee6a9d820c7 = getStruct("s_entity_full_sequence", "targetname");
-  level.var_8d4f25dfdb2e4ec5 = utility::spawn_model("jup_zm_rift_entity", var_7c53cee6a9d820c7.origin, var_7c53cee6a9d820c7.angles);
+  level.fullsequence = utility::spawn_model("jup_zm_rift_entity", var_7c53cee6a9d820c7.origin, var_7c53cee6a9d820c7.angles);
   level waittill("the_entity_ground_vortex");
   playFXOnTag(getfx("entity_ground_vortex_debris"), debris, "tag_origin");
   level waittill("the_entity_full_sequence");
-  level.var_8d4f25dfdb2e4ec5 setscriptablepartstate("entity_reveal", "entity_full_sequence");
+  level.fullsequence setscriptablepartstate("entity_reveal", "entity_full_sequence");
   level waittill("the_entity_ground_vortex_off");
   killfxontag(getfx("entity_ground_vortex_debris"), debris, "tag_origin");
   level waittill("the_entity_vortex_out");
-  level.var_8d4f25dfdb2e4ec5 setscriptablepartstate("entity_off", "vortex_out");
+  level.fullsequence setscriptablepartstate("entity_off", "vortex_out");
   level.var_2ada333c838a2316 stoploopsound("ob_entity_idle_lp");
   level waittill("the_entity_full_sequence_off");
-  level.var_8d4f25dfdb2e4ec5 setscriptablepartstate("entity_reveal", "off");
+  level.fullsequence setscriptablepartstate("entity_reveal", "off");
   level waittill("jansen_paired_idle_vo");
   level thread scripts\cp_mp\overlord::playconversation("quest_s35_recovery", level.players);
 }

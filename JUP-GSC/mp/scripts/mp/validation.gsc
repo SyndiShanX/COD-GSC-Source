@@ -167,7 +167,7 @@ function function_503f87754be2d15c(weaponname, weaponvariantid, weaponlootitemid
   var_4a654bd9a395c1ff = [];
   var_a4146e4eaf636ef2 = getdvarint(@ "hash_c876f19dd06eb2cf", 0);
   var_989c8eafe834f9de = weaponvariantid != 0;
-  var_928c1cac31ea99e5 = weaponname + "|" + weaponvariantid;
+  weaponvariantkey = weaponname + "|" + weaponvariantid;
   var_fe506348d9341132 = 0;
 
   if(weaponlootitemid != 0) {
@@ -188,13 +188,13 @@ function function_503f87754be2d15c(weaponname, weaponvariantid, weaponlootitemid
   }
 
   if(isDefined(weaponclass) && weaponclass != "weapon_melee" && weaponclass != "weapon_melee2") {
-    var_ad61ffb38ec2a6b0 = function_6527364c1ecca6c6(getdefaultweaponbasename(weaponname));
+    var_ad61ffb38ec2a6b0 = getweapondefaultattachments(getdefaultweaponbasename(weaponname));
 
     foreach(attachmentindex, attachmentname in attachments) {
       if(attachmentname != "none") {
         var_763d626a0644c430 = 1;
 
-        if(var_a4146e4eaf636ef2 == 1 && function_975e31b63f01fbcc(attachmentname)) {
+        if(var_a4146e4eaf636ef2 == 1 && isattachmentironsdefault(attachmentname)) {
           continue;
         }
 
@@ -206,7 +206,7 @@ function function_503f87754be2d15c(weaponname, weaponvariantid, weaponlootitemid
             if(variantindex == attachmentsids[attachmentindex] && isDefined(attachmentdata)) {
               var_4a654bd9a395c1ff[var_4a654bd9a395c1ff.size] = attachmentdata.lootid;
 
-              if(var_989c8eafe834f9de && isDefined(level.weaponlootmapdata) && isDefined(level.weaponlootmapdata[var_928c1cac31ea99e5]) && isDefined(level.weaponlootmapdata[var_928c1cac31ea99e5].attachdefaulttoidmap[attachmentname]) && level.weaponlootmapdata[var_928c1cac31ea99e5].attachdefaulttoidmap[attachmentname] == variantindex) {
+              if(var_989c8eafe834f9de && isDefined(level.weaponlootmapdata) && isDefined(level.weaponlootmapdata[weaponvariantkey]) && isDefined(level.weaponlootmapdata[weaponvariantkey].attachdefaulttoidmap[attachmentname]) && level.weaponlootmapdata[weaponvariantkey].attachdefaulttoidmap[attachmentname] == variantindex) {
                 var_763d626a0644c430 = 0;
               }
 
@@ -267,7 +267,7 @@ function function_5a92673db4ece37f(classstruct) {
     return;
   }
 
-  if(utility::iscp() || scripts\cp_mp\utility\game_utility::isbrstylegametype() || level.var_ec2fb549b15ad827 || !level.rankedmatch || !level.matchmakingmatch || !level.onlinestatsenabled) {
+  if(utility::iscp() || scripts\cp_mp\utility\game_utility::isbrstylegametype() || level.leagueplaymatch || !level.rankedmatch || !level.matchmakingmatch || !level.onlinestatsenabled) {
     return;
   }
 
@@ -327,7 +327,7 @@ function validateloadout(loadout) {
   var_e1388376a5be9b75 = 0;
   primaryweaponclass = function_b8811a0fc04e4b9d(loadout.loadoutprimary, #"menuclass");
 
-  if(weaponisrestricted(loadout.loadoutprimary) || isDefined(primaryweaponclass) && function_dc0d4632189b623a(primaryweaponclass)) {
+  if(weaponisrestricted(loadout.loadoutprimary) || isDefined(primaryweaponclass) && weaponclassisrestricted(primaryweaponclass)) {
     replaceweapon = 1;
     var_bc72f32b1575d517 = 1;
   }
@@ -351,7 +351,7 @@ function validateloadout(loadout) {
         attachmentscriptbundle = getscriptbundle(hashcat(%"hash_3c2c9813bb16552f", attachment));
 
         if(attachmentisrestricted(attachment, loadout.loadoutprimary) || var_de6cf437be756ee1 && scripts\cp_mp\utility\loot::function_8c610908c0e9c6e4(attachment)) {
-          if(isDefined(attachmentscriptbundle) && attachmentscriptbundle.var_f0e7c0926c0962e5) {
+          if(isDefined(attachmentscriptbundle) && attachmentscriptbundle.isamp) {
             for(j = 0; j < loadout.loadoutprimaryattachments.size; j++) {
               loadout.loadoutprimaryattachments[j] = "none";
             }
@@ -412,7 +412,7 @@ function validateloadout(loadout) {
 
   secondaryweaponclass = function_b8811a0fc04e4b9d(loadout.loadoutsecondary, #"menuclass");
 
-  if(weaponisrestricted(loadout.loadoutsecondary) || isDefined(secondaryweaponclass) && function_dc0d4632189b623a(secondaryweaponclass)) {
+  if(weaponisrestricted(loadout.loadoutsecondary) || isDefined(secondaryweaponclass) && weaponclassisrestricted(secondaryweaponclass)) {
     replaceweapon = 1;
     var_bc72f32b1575d517 = 1;
   }
@@ -433,7 +433,7 @@ function validateloadout(loadout) {
         if(attachmentisrestricted(attachment, loadout.loadoutsecondary) || var_de6cf437be756ee1 && scripts\cp_mp\utility\loot::function_8c610908c0e9c6e4(attachment)) {
           attachmentscriptbundle = getscriptbundle(hashcat(%"hash_3c2c9813bb16552f", attachment));
 
-          if(isDefined(attachmentscriptbundle) && attachmentscriptbundle.var_f0e7c0926c0962e5) {
+          if(isDefined(attachmentscriptbundle) && attachmentscriptbundle.isamp) {
             for(j = 0; j < loadout.loadoutsecondaryattachments.size; j++) {
               loadout.loadoutsecondaryattachments[j] = "none";
             }
@@ -701,19 +701,19 @@ function validateloadout(loadout) {
   if(!replacekillstreaks) {
     bundle = level.streakglobals.streakbundles[loadout.loadoutkillstreak1];
 
-    if(!(isanymlgmatch() && loadout.loadoutkillstreak1 == "none") && (!isDefined(bundle) || !isDefined(bundle.var_594af43597023062) || !bundle.var_594af43597023062)) {
+    if(!(isanymlgmatch() && loadout.loadoutkillstreak1 == "none") && (!isDefined(bundle) || !isDefined(bundle.showninmenu) || !bundle.showninmenu)) {
       replacekillstreaks = 1;
     }
 
     bundle = level.streakglobals.streakbundles[loadout.loadoutkillstreak2];
 
-    if(!(isanymlgmatch() && loadout.loadoutkillstreak2 == "none") && (!isDefined(bundle) || !isDefined(bundle.var_594af43597023062) || !bundle.var_594af43597023062)) {
+    if(!(isanymlgmatch() && loadout.loadoutkillstreak2 == "none") && (!isDefined(bundle) || !isDefined(bundle.showninmenu) || !bundle.showninmenu)) {
       replacekillstreaks = 1;
     }
 
     bundle = level.streakglobals.streakbundles[loadout.loadoutkillstreak3];
 
-    if(!(isanymlgmatch() && loadout.loadoutkillstreak3 == "none") && (!isDefined(bundle) || !isDefined(bundle.var_594af43597023062) || !bundle.var_594af43597023062)) {
+    if(!(isanymlgmatch() && loadout.loadoutkillstreak3 == "none") && (!isDefined(bundle) || !isDefined(bundle.showninmenu) || !bundle.showninmenu)) {
       replacekillstreaks = 1;
     }
   }

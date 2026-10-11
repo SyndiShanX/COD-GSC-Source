@@ -358,15 +358,15 @@ function givedefaultloadout(var_86db2022c4f0f4bf, var_185ea69b2fe37360, var_7cb3
   self.changing_loadout = undefined;
 
   if(isDefined(self.operatorcustomization.clothtype) && self.operatorcustomization.clothtype != "") {
-    self setclothtype(function_1823ff50bb28148d(self.operatorcustomization.clothtype));
+    self setclothtype(getxhash(self.operatorcustomization.clothtype));
   } else {
     self setclothtype(#"vestlight");
   }
 
   if(isDefined(self.operatorcustomization.geartype) && self.operatorcustomization.geartype != "") {
-    self function_8abe5a968cc3c220(function_1823ff50bb28148d(self.operatorcustomization.geartype));
+    self setgeartype(getxhash(self.operatorcustomization.geartype));
   } else {
-    self function_8abe5a968cc3c220(#"millghtgr");
+    self setgeartype(#"millghtgr");
   }
 
   thread notify_when_loadout_given();
@@ -539,7 +539,7 @@ function function_c2ae0d2db0c581ea(var_9b02313fe7ff70da, var_185ea69b2fe37360) {
     var_e89fd4c2e2e797b9 = "vestlight";
   }
 
-  self setclothtype(function_1823ff50bb28148d(var_e89fd4c2e2e797b9));
+  self setclothtype(getxhash(var_e89fd4c2e2e797b9));
 }
 
 function function_777eaf15441a6bc6() {
@@ -1006,7 +1006,7 @@ function function_d650608c959c9675() {
     var_b96bb7cc6652f794 = scripts\engine\utility::array_combine(var_b96bb7cc6652f794, var_3f859a3d7af673e9);
   }
 
-  foreach(operatorref in scripts\cp_mp\operator::function_462ac94dd54da47d()) {
+  foreach(operatorref in scripts\cp_mp\operator::getoperatorrefs()) {
     if(!isDefined(operatorref) || operatorref == "") {
       break;
     }
@@ -1152,7 +1152,7 @@ function initoperatorcustomization() {
 
   level.operatorcustomization = [];
   setDvar(@ "hash_2b669ad6c3e1d864", 1);
-  operatorrefs = scripts\cp_mp\operator::function_462ac94dd54da47d();
+  operatorrefs = scripts\cp_mp\operator::getoperatorrefs();
 
   foreach(operatorref in operatorrefs) {
     if(!isDefined(operatorref) || operatorref == "") {
@@ -1311,9 +1311,9 @@ function getoperatorcustomization() {
 
     if(body == "" || head == "") {
       assertmsg("Body or Head came back empty, May need to resetstats. Head is " + head + " Body is " + body);
-      var_f91a44e31cde7d97 = scripts\cp_mp\operator::function_df7d12571397a2b5(self.operatorcustomization.operatorref);
-      body = scripts\cp_mp\operator::function_8eba78e65f4be793(var_f91a44e31cde7d97);
-      head = scripts\cp_mp\operator::function_223061772e2a61b9(var_f91a44e31cde7d97);
+      defaultskin = scripts\cp_mp\operator::function_df7d12571397a2b5(self.operatorcustomization.operatorref);
+      body = scripts\cp_mp\operator::function_8eba78e65f4be793(defaultskin);
+      head = scripts\cp_mp\operator::function_223061772e2a61b9(defaultskin);
     }
 
     self.bodymodelname = body;
@@ -1538,9 +1538,9 @@ function getplayerspeedbyweapon(player) {
     if(issuperweapon(weapon)) {
       weaponspeed = level.superweapons[getcompleteweaponname(weapon)].movespeed;
     } else {
-      var_a6852f8e66761e58 = weaponinventorytype(weapon);
+      weaponinvtype = weaponinventorytype(weapon);
 
-      if(var_a6852f8e66761e58 != "primary" && var_a6852f8e66761e58 != "altmode") {
+      if(weaponinvtype != "primary" && weaponinvtype != "altmode") {
         if(isDefined(self.saved_lastweapon)) {
           weapon = self.saved_lastweapon;
         } else {
@@ -2693,13 +2693,13 @@ function function_f505f60c194b2770(equipment_name) {
 }
 
 function give_weapon_alt_clip_ammo_hack(player, weaponobj) {
-  var_6890a4ce965bba99 = weaponobj getaltweapon();
+  weaponaltobj = weaponobj getaltweapon();
 
-  if(var_6890a4ce965bba99.basename != "none") {
-    var_91093ef03654702c = weaponclass(var_6890a4ce965bba99);
+  if(weaponaltobj.basename != "none") {
+    var_91093ef03654702c = weaponclass(weaponaltobj);
 
     if(var_91093ef03654702c == "spread") {
-      player setweaponammoclip(var_6890a4ce965bba99, weaponclipsize(var_6890a4ce965bba99));
+      player setweaponammoclip(weaponaltobj, weaponclipsize(weaponaltobj));
     }
   }
 

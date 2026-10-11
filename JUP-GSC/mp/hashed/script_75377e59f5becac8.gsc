@@ -203,7 +203,7 @@ function function_ab16b6a69b739179() {
     self setallstreamloaddist(0);
   }
 
-  self function_bc667001f9dd3808(level.infilstruct.var_6930961c8a8d33fc);
+  self predictstreamposuntilcleared(level.infilstruct.var_6930961c8a8d33fc);
 }
 
 function function_6d2764481349d838() {
@@ -219,7 +219,7 @@ function function_6d2764481349d838() {
         player setallstreamloaddist(0);
       }
 
-      player function_bc667001f9dd3808(level.infilstruct.var_6930961c8a8d33fc);
+      player predictstreamposuntilcleared(level.infilstruct.var_6930961c8a8d33fc);
     }
 
     wait 10;
@@ -280,11 +280,11 @@ function private function_38f6e236e493c28b() {
   }
 
   if(istrue(level.var_7647df14c1f116f7)) {
-    self function_bc667001f9dd3808(level.infilstruct.var_3a6128a99dc22eb2);
+    self predictstreamposuntilcleared(level.infilstruct.var_3a6128a99dc22eb2);
   } else if(function_7812117b17c4d21e() == "hq_ac130_v2") {
-    self function_bc667001f9dd3808(level.infilstruct.c130.animstruct.origin);
+    self predictstreamposuntilcleared(level.infilstruct.c130.animstruct.origin);
   } else {
-    self function_bc667001f9dd3808(level.infilstruct.c130.origin);
+    self predictstreamposuntilcleared(level.infilstruct.c130.origin);
   }
 
   function_179ad01817ae940b(level.infilstruct.c130);
@@ -462,7 +462,7 @@ function private forcespawnplayers(players, spawnorigin, var_f60347f29feec261) {
     player clearladderstate();
 
     if(isalive(player)) {
-      player function_d87e1768229d0e3e();
+      player stopliveragdoll();
     }
 
     if(!istrue(level.br_infils_disabled)) {
@@ -583,7 +583,7 @@ function state_cinematic() {
   playvideo();
   function_749c46213cdb834();
 
-  if(isDefined(level.infilstruct.var_477bd548940c3a78)) {
+  if(isDefined(level.infilstruct.binkname)) {
     function_7f3ad8fe6df1b8fe(0.3, level.infilstruct.players, "stateMachine");
   }
 }
@@ -596,7 +596,7 @@ function function_9215bf6c0287802c() {
 function function_6cc48d378966bc2f() {
   function_1696e6e3ac4a370a();
 
-  if(!isDefined(level.infilstruct.var_477bd548940c3a78)) {
+  if(!isDefined(level.infilstruct.binkname)) {
     function_7f3ad8fe6df1b8fe(1, level.infilstruct.players, "stateMachine");
   }
 
@@ -1062,7 +1062,7 @@ function private function_1696e6e3ac4a370a() {
 }
 
 function private function_1b7e57bfe648f609() {
-  videoname = level.infilstruct.var_477bd548940c3a78;
+  videoname = level.infilstruct.binkname;
 
   if(!isDefined(videoname)) {
     return;
@@ -1072,7 +1072,7 @@ function private function_1b7e57bfe648f609() {
 }
 
 function private playvideo() {
-  videoname = level.infilstruct.var_477bd548940c3a78;
+  videoname = level.infilstruct.binkname;
 
   if(!isDefined(videoname)) {
     return;
@@ -1091,7 +1091,7 @@ function private playvideo() {
 }
 
 function private function_12ccccd25dafe834() {
-  videoname = level.infilstruct.var_477bd548940c3a78;
+  videoname = level.infilstruct.binkname;
 
   if(!isDefined(videoname)) {
     return;
@@ -1116,14 +1116,14 @@ function infilvideocompletecallback(channel, val) {
 }
 
 function private function_749c46213cdb834() {
-  videoname = level.infilstruct.var_477bd548940c3a78;
+  videoname = level.infilstruct.binkname;
 
   if(!isDefined(videoname)) {
     return;
   }
 
-  assert(isDefined(level.infilstruct.var_10d27b439af13a2a));
-  wait level.infilstruct.var_10d27b439af13a2a;
+  assert(isDefined(level.infilstruct.binktime));
+  wait level.infilstruct.binktime;
 
   foreach(player in level.infilstruct.players) {
     player setclientomnvar("ui_br_bink_overlay_state", 0);
@@ -1141,7 +1141,7 @@ function private function_7f133e4caeb239a6() {
 }
 
 function private function_2de90f865b7ce99d(player) {
-  if(!isDefined(level.infilstruct.var_ee3961854e32111a) || isDefined(level.infilstruct.var_477bd548940c3a78)) {
+  if(!isDefined(level.infilstruct.var_ee3961854e32111a) || isDefined(level.infilstruct.binkname)) {
     return;
   }
 
@@ -1162,7 +1162,7 @@ function private function_f977de121342eeac(player) {
     return;
   }
 
-  if(isDefined(level.infilstruct.var_477bd548940c3a78) && randomfloatrange(0, 1) > level.infilstruct.var_8e9941b094b11142) {
+  if(isDefined(level.infilstruct.binkname) && randomfloatrange(0, 1) > level.infilstruct.var_8e9941b094b11142) {
     level.infilstruct.var_ee3961854e32111a = undefined;
     return;
   }
@@ -1229,12 +1229,12 @@ function private function_bda88f27a0337eaa(player, var_e45f1cd8436c9aa9) {
       }
 
       player cameraunlink();
-      animstarttime = ter_op(istrue(level.var_8cf2b3f6bd2bf0e6), function_676cfe2ab64ea758() * 0.001, undefined);
+      animstarttime = ter_op(istrue(level.var_8cf2b3f6bd2bf0e6), getframeduration() * 0.001, undefined);
 
       if(level.infilstruct.var_3772737101aa4af) {
-        player function_cebd47970f60e9b(xcamasset, 0, cameraent, cameratag, animstarttime, 1, 1, 1);
+        player playxcamontag(xcamasset, 0, cameraent, cameratag, animstarttime, 1, 1, 1);
       } else {
-        player function_cebd47970f60e9b(xcamasset, 0, cameraent, cameratag, animstarttime, 1);
+        player playxcamontag(xcamasset, 0, cameraent, cameratag, animstarttime, 1);
       }
     }
 
@@ -1345,7 +1345,7 @@ function private function_1c3d2f575360d8fa(var_df94e780c2b3c994) {
     }
 
     if(isDefined(pack.fstop) && isDefined(pack.focusdist)) {
-      allplayers_setphysicaldof(pack.fstop, pack.focusdist, pack.focusspeed, pack.aperturespeed, pack.var_c06551440b16249c);
+      allplayers_setphysicaldof(pack.fstop, pack.focusdist, pack.focusspeed, pack.aperturespeed, pack.focalpoint);
     }
 
     if(isDefined(pack.startfunc)) {
@@ -1375,7 +1375,7 @@ function private function_1c3d2f575360d8fa(var_df94e780c2b3c994) {
     pack.ents = array_removeundefined(pack.ents);
 
     foreach(ent in pack.ents) {
-      animstarttime = ter_op(istrue(level.var_8cf2b3f6bd2bf0e6), function_676cfe2ab64ea758() * 0.001, undefined);
+      animstarttime = ter_op(istrue(level.var_8cf2b3f6bd2bf0e6), getframeduration() * 0.001, undefined);
 
       if(level.infilstruct.var_3772737101aa4af) {
         ent val::set("br_infil", "cinematics_participant", 1);
@@ -1428,7 +1428,7 @@ function private function_1c3d2f575360d8fa(var_df94e780c2b3c994) {
     pack.var_3bd5282b118d27f8 = array_removeundefined(pack.var_3bd5282b118d27f8);
 
     foreach(proxy in pack.var_3bd5282b118d27f8) {
-      animstarttime = ter_op(istrue(level.var_8cf2b3f6bd2bf0e6), function_676cfe2ab64ea758() * 0.001, undefined);
+      animstarttime = ter_op(istrue(level.var_8cf2b3f6bd2bf0e6), getframeduration() * 0.001, undefined);
 
       if(level.infilstruct.var_3772737101aa4af) {
         proxy val::set("br_infil", "cinematics_participant", 1);
@@ -1673,7 +1673,7 @@ function private function_56d92ab945808b50(defaultstring) {
 
 function private function_fe85c23fc6fa8c2() {
   level.infilstruct.statecallbacks = [];
-  level.infilstruct.var_477bd548940c3a78 = undefined;
+  level.infilstruct.binkname = undefined;
   scenetype = function_7812117b17c4d21e();
 
   switch (scenetype) {
@@ -2098,7 +2098,7 @@ function function_faabc6943f92e6ac() {
     animstruct = function_55f2480b4b819aea(level.infilstruct.c130);
 
     if(istrue(level.var_7647df14c1f116f7)) {
-      hostplayer function_bc667001f9dd3808(level.infilstruct.var_3a6128a99dc22eb2);
+      hostplayer predictstreamposuntilcleared(level.infilstruct.var_3a6128a99dc22eb2);
 
       if(level.var_7647df14c1f116f7 && isDefined(level.infilstruct.var_6f0c032ec6e5d14)) {
         [[level.infilstruct.var_6f0c032ec6e5d14]](animstruct);

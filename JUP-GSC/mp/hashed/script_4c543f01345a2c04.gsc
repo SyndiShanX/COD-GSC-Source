@@ -257,7 +257,7 @@ function function_370e89cf65df0b01(var_b2d4c9b4db7ee54, var_490cf556fe18ff1) {
       }
     }
 
-    if(istrue(var_490cf556fe18ff1) && istrue(player.var_c764aba579deab63)) {
+    if(istrue(var_490cf556fe18ff1) && istrue(player.beamattacktarget)) {
       continue;
     }
 
@@ -295,7 +295,7 @@ function function_34f345873460798b(var_b2d4c9b4db7ee54, var_490cf556fe18ff1) {
       }
     }
 
-    if(istrue(var_490cf556fe18ff1) && istrue(player.var_c764aba579deab63)) {
+    if(istrue(var_490cf556fe18ff1) && istrue(player.beamattacktarget)) {
       continue;
     }
 
@@ -331,7 +331,7 @@ function function_f3a96ba65901316(var_b2d4c9b4db7ee54, var_490cf556fe18ff1) {
       }
     }
 
-    if(istrue(var_490cf556fe18ff1) && istrue(player.var_c764aba579deab63)) {
+    if(istrue(var_490cf556fe18ff1) && istrue(player.beamattacktarget)) {
       continue;
     }
 

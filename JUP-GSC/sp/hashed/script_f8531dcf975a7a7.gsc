@@ -129,12 +129,12 @@ function function_84746c3250d67674() {
 }
 
 function function_5fce20631feac9db() {
-  var_461d69757eeecfc2 = 0.2;
+  threshhold = 0.2;
 
   foreach(weapon in level.player.primaryweapons) {
     fract = level.player getfractionmaxammo(weapon);
 
-    if(fract < var_461d69757eeecfc2 && level.player.currentweapon == weapon) {
+    if(fract < threshhold && level.player.currentweapon == weapon) {
       return true;
     }
   }
@@ -198,16 +198,16 @@ function function_7ecaf0dfe8277c39() {
   }
 }
 
-function function_fbab3cc861e5f296(var_9eae206e3da3416f) {
+function function_fbab3cc861e5f296(flg_endon) {
   level.player endon("death");
   level endon("flag_finale_exfil_outro_begin");
 
-  if(isDefined(var_9eae206e3da3416f)) {
-    if(level utility::flag(var_9eae206e3da3416f)) {
+  if(isDefined(flg_endon)) {
+    if(level utility::flag(flg_endon)) {
       return;
     }
 
-    level endon(var_9eae206e3da3416f);
+    level endon(flg_endon);
   }
 
   while(level.player dialogue::function_d871f93553913276()) {
@@ -272,7 +272,7 @@ function function_3ccba704d29f93e4() {
   level thread function_ee6ccc91cf75e889();
   var_af36b904b56328b7 = getEntArray("trig_tundra_dynamic_oob", "script_noteworthy");
   utility::array_thread(var_af36b904b56328b7, &function_541d7d0035c0e6f8);
-  level function_c3a221031a1ff66c(0, 2, 0, "team");
+  level set_nagvars(0, 2, 0, "team");
 }
 
 function function_3485575a37b7e014() {
@@ -355,7 +355,7 @@ function function_1a381685fafc883d() {
   level thread function_61ddcc6c631c44bc();
   level thread function_117a7e7c74fc8e94();
   level thread function_8ff41fdf83c7d23e();
-  level function_c3a221031a1ff66c(0, 3, 0, "team");
+  level set_nagvars(0, 3, 0, "team");
   utility::flag_wait("lake_rescue_complete");
   level utility::flag_set("flag_lake_oob");
 }
@@ -528,7 +528,7 @@ function function_46a5b8f15ad943a0() {}
 function function_92796961c6647625() {
   level thread function_8945e857b602413f();
   level thread function_84746c3250d67674();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_8945e857b602413f() {
@@ -689,7 +689,7 @@ function function_14097a99fb04951c() {
   level thread function_af3973791657c8a7();
   level thread function_33513c0b3f7d0b1d();
   level thread function_cb9e1e84826db269();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_c2824b7599758f42() {
@@ -822,7 +822,7 @@ function function_cbae8968087844c2() {
   }
 
   while(true) {
-    id = self function_92435c7a6ae85c3c();
+    id = self getinteractionid();
 
     if(isDefined(id)) {
       break;
@@ -987,7 +987,7 @@ function function_f19c04049620116f() {
   level thread function_711f7b29f32e72ac();
   level thread function_657aa2c319769ae1();
   level thread function_c5202f1255aaa90e();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_1c647c1a523facb5() {
@@ -1285,11 +1285,11 @@ function function_366d4de216a8dfb0() {
   react_aliases[react_aliases.size] = "dx_sp_tund_fspr_pric_snipersclose";
   react_aliases[react_aliases.size] = "dx_sp_tund_fspr_pric_hescloseby";
   react_deck = utility::create_deck(react_aliases, 1, 1);
-  var_1e4c41a5dcdf5b1e = squared(3072);
+  n_near_dist_sq = squared(3072);
 
   while(true) {
     level.ai_forest_sniper_enemy waittill("weapon_fired");
-    var_d106ee7682f26f4b = function_73881ce0cf3cc035(level.ai_forest_sniper_enemy, var_1e4c41a5dcdf5b1e);
+    var_d106ee7682f26f4b = function_73881ce0cf3cc035(level.ai_forest_sniper_enemy, n_near_dist_sq);
 
     if(istrue(var_d106ee7682f26f4b) || dialogue::function_6c31b0b0edd184ed(level.var_7a299357d55b1167, 5)) {
       wait 1;
@@ -1371,7 +1371,7 @@ function function_cbdaead51c1114b6() {}
 function function_a3b894933a5fd560() {
   level thread function_7afae80bc724a9ae();
   level thread function_18ad128e96355c9();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_7afae80bc724a9ae() {
@@ -1694,7 +1694,7 @@ function function_5c0d51c72ee1d040() {
   player_aliases[player_aliases.size] = "dx_sp_tund_shpy_pric_sniperspotted";
   player_aliases[player_aliases.size] = "dx_sp_tund_shpy_pric_visualonasniper";
   player_deck = utility::create_deck(player_aliases, 1, 1);
-  var_fb3cefb948f2d980 = level.var_2f9f697bc727f253;
+  a_ai_snipers = level.var_2f9f697bc727f253;
   str_position = undefined;
   a_vols = getEntArray("vol_forest_field_enemy_sniper_position", "targetname");
   a_positions = ["field_tree_stump", "field_shack", "field_log_piles", "field_fallen_tree", "field_machinery", "field_frozen_stream", "field_far_side", "field_cliff", "field_trees", "field_prone"];
@@ -1713,7 +1713,7 @@ function function_5c0d51c72ee1d040() {
     a_vols = array_randomize(a_vols);
 
     if(!isDefined(sniper)) {
-      sniper = function_7bf58c5387d12e18(var_fb3cefb948f2d980, a_vols, var_ab1f993d05c3500e);
+      sniper = function_7bf58c5387d12e18(a_ai_snipers, a_vols, var_ab1f993d05c3500e);
     }
 
     if(!isDefined(sniper)) {
@@ -2073,18 +2073,18 @@ function function_d42e171768dd46ac() {
   stopmusicstate("mx_tundra_field");
 }
 
-function function_7bf58c5387d12e18(var_fb3cefb948f2d980, a_vols, var_ab1f993d05c3500e) {
-  var_fb3cefb948f2d980 = array_removedead_or_dying(var_fb3cefb948f2d980);
+function function_7bf58c5387d12e18(a_ai_snipers, a_vols, var_ab1f993d05c3500e) {
+  a_ai_snipers = array_removedead_or_dying(a_ai_snipers);
 
-  if(var_fb3cefb948f2d980.size == 0) {
+  if(a_ai_snipers.size == 0) {
     return;
-  } else if(var_fb3cefb948f2d980.size > 1) {
-    var_fb3cefb948f2d980 = array_sort_with_func(var_fb3cefb948f2d980, &function_ea0afb15893376f1);
+  } else if(a_ai_snipers.size > 1) {
+    a_ai_snipers = array_sort_with_func(a_ai_snipers, &function_ea0afb15893376f1);
   } else {
-    var_fb3cefb948f2d980 = array_sort_with_func(var_fb3cefb948f2d980, &function_6f9550218f9e01b0);
+    a_ai_snipers = array_sort_with_func(a_ai_snipers, &function_6f9550218f9e01b0);
   }
 
-  foreach(ai_sniper in var_fb3cefb948f2d980) {
+  foreach(ai_sniper in a_ai_snipers) {
     str_position = ai_sniper function_ed139ddd9225914a(a_vols);
 
     if(isDefined(str_position)) {
@@ -2130,7 +2130,7 @@ function function_25b0ab66b612ccea() {}
 function function_6cbbd1bad5361adb() {
   level thread function_a26d0652f55c7039();
   level thread function_d851993c9cc1131a();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_a26d0652f55c7039() {
@@ -2279,7 +2279,7 @@ function function_2d2ffb46cf33661e() {
   level thread function_f48299c91e352cbf();
   level thread function_eac13aafeb6037f7();
   level thread function_9d2a772b0c7980bd();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_28c8444a64c1ce48() {
@@ -2358,7 +2358,7 @@ function function_487706f7cc0d1f95() {
 
   while(true) {
     utility::flag_wait("flag_lumbermill_trailer_playerinside");
-    level dialogue::function_bace8af56ef0688b("flag_lumbermill_trailer_playerinside", nag_deck, dialogue::growing_delay(10, 20, 2), 5);
+    level dialogue::nag_waitopen("flag_lumbermill_trailer_playerinside", nag_deck, dialogue::growing_delay(10, 20, 2), 5);
     wait 1;
   }
 }
@@ -2386,16 +2386,16 @@ function function_35dd89577ff17a8a() {
   level thread function_f6a23036659ae65(var_5e531899936a10f9);
 }
 
-function function_f6a23036659ae65(var_9eae206e3da3416f) {
+function function_f6a23036659ae65(flg_endon) {
   level.player endon("death");
   level endon("flag_lumbermill_complete");
 
-  if(!isarray(var_9eae206e3da3416f)) {
-    str_flag = var_9eae206e3da3416f;
-    var_9eae206e3da3416f = [str_flag];
+  if(!isarray(flg_endon)) {
+    str_flag = flg_endon;
+    flg_endon = [str_flag];
   }
 
-  foreach(msg in var_9eae206e3da3416f) {
+  foreach(msg in flg_endon) {
     if(level utility::flag(msg)) {
       return;
     }
@@ -2412,7 +2412,7 @@ function function_f6a23036659ae65(var_9eae206e3da3416f) {
     level.var_6ebd9b2c3bc17115 = utility::create_deck(nag_aliases, 1, 1);
   }
 
-  level dialogue::function_91c23782840cf632(var_9eae206e3da3416f, level.var_6ebd9b2c3bc17115, dialogue::growing_delay(20, 50, 3), 20, 1);
+  level dialogue::function_91c23782840cf632(flg_endon, level.var_6ebd9b2c3bc17115, dialogue::growing_delay(20, 50, 3), 20, 1);
 }
 
 function function_24436f33189e0be4() {
@@ -2430,12 +2430,12 @@ function function_24436f33189e0be4() {
 
   while(true) {
     wait randomfloatrange(5, 10);
-    var_2a8e824d15b87aa4 = utility::get_closest_ai(level.player.origin, "axis");
+    ai_enemy_closest = utility::get_closest_ai(level.player.origin, "axis");
 
-    if(isDefined(var_2a8e824d15b87aa4) && isalive(var_2a8e824d15b87aa4)) {
-      if(!istrue(var_2a8e824d15b87aa4 ent_flag("flag_lumbermill_enemy_attacking_player"))) {
+    if(isDefined(ai_enemy_closest) && isalive(ai_enemy_closest)) {
+      if(!istrue(ai_enemy_closest ent_flag("flag_lumbermill_enemy_attacking_player"))) {
         react_vo = var_994c50ba4dd9df95 deck_draw();
-        var_2a8e824d15b87aa4 dialogue::say(react_vo, 0, 5);
+        ai_enemy_closest dialogue::say(react_vo, 0, 5);
       } else {
         break;
       }
@@ -2691,7 +2691,7 @@ function function_e11990259b9f9756() {
   level thread function_17345a322a7697d7();
   level thread function_48406d9eec7c7818();
   level thread function_d880a496e2d9b013();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_8900520dba6be4f2() {
@@ -2782,7 +2782,7 @@ function function_598e0fa2479604b0() {
   level thread function_e73740513fc54cea();
   level thread function_95e973cb199438b4();
   level thread function_d36065f282f4ef2b();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_4d13d32bee820d1e() {
@@ -3039,10 +3039,10 @@ function function_95e973cb199438b4() {
   ally = level utility::flag_wait("flag_shipyard_go_loud");
   level notify("stop_tundra_nags");
   wait 2;
-  var_2a8e824d15b87aa4 = get_closest_ai(level.player.origin, "axis");
+  ai_enemy_closest = get_closest_ai(level.player.origin, "axis");
 
-  if(isalive(var_2a8e824d15b87aa4)) {
-    var_2a8e824d15b87aa4 dialogue::say("dx_sp_tund_shpy_kon1_openfire", 2, 5);
+  if(isalive(ai_enemy_closest)) {
+    ai_enemy_closest dialogue::say("dx_sp_tund_shpy_kon1_openfire", 2, 5);
   }
 
   dialogue::function_cb329cf8896edeaa(level.player.team, 1, 1);
@@ -3317,20 +3317,20 @@ function function_e73740513fc54cea() {
       continue;
     }
 
-    var_2a8e824d15b87aa4 = get_closest_ai(level.player.origin, "axis");
+    ai_enemy_closest = get_closest_ai(level.player.origin, "axis");
     var_4caf35e9283006da = array_remove(var_4caf35e9283006da, var_70a3b0ab307a153e);
     var_dce8d1a7bd6241a0 = random(var_4caf35e9283006da);
     waitframe();
     var_4caf35e9283006da = array_add(var_4caf35e9283006da, var_70a3b0ab307a153e);
     var_70a3b0ab307a153e = var_dce8d1a7bd6241a0;
 
-    if(isDefined(var_2a8e824d15b87aa4) && cointoss()) {
+    if(isDefined(ai_enemy_closest) && cointoss()) {
       if(utility::cointoss()) {
         var_dce8d1a7bd6241a0 function_7d1e811a6492e59(struct);
         wait randomfloatrange(1, 3);
-        var_2a8e824d15b87aa4 function_288bc6a79ae2cf4d(struct);
+        ai_enemy_closest function_288bc6a79ae2cf4d(struct);
       } else {
-        var_2a8e824d15b87aa4 function_288bc6a79ae2cf4d(struct);
+        ai_enemy_closest function_288bc6a79ae2cf4d(struct);
         wait randomfloatrange(1, 3);
         var_dce8d1a7bd6241a0 function_7d1e811a6492e59(struct);
       }
@@ -3418,7 +3418,7 @@ function function_3ec4cb695ece5957() {
   level thread function_d23cfeaab5555a56();
   level thread function_f17ed5a52ae9ceb3();
   level thread function_ddbda0e54912d315();
-  level function_c3a221031a1ff66c(0, 5, 0, "team");
+  level set_nagvars(0, 5, 0, "team");
 }
 
 function function_9d56e644d304f4dd() {
@@ -3661,7 +3661,7 @@ function function_1bbbfa7ea42e346f() {}
 function function_b8d9607e1e2b1692() {
   level thread function_9ed9cd232d9905f4();
   level thread function_dcd4b4138cae1b7();
-  level function_c3a221031a1ff66c(0, 0, 0, "team");
+  level set_nagvars(0, 0, 0, "team");
 
   if(scripts\sp\starts::is_after_start("finale_holdout")) {
     thread signal_music();

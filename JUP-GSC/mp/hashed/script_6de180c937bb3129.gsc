@@ -16,7 +16,7 @@
 function function_d1b30a5bdb59508d() {
   setdvarifuninitialized(@ "hash_376a94d300184801", 0);
   setdvarifuninitialized(@ "hash_d5172208cbbbb77e", 0);
-  zombie_entity::function_fe9929b42e5a99e4();
+  zombie_entity::init_metabones();
   thread function_79ddb0c32a22eccd();
   thread function_579dee4d0f0eef08();
   self.var_795cf764ad7734f4 = &function_c549f1e04e77e820;
@@ -28,47 +28,47 @@ function function_7b56e113a19f4672() {
   self.entitydata.weakpoints = [];
 
   for(i = 0; i < 7; i++) {
-    var_c02b1f6c1721c844 = "";
+    metabone_name = "";
 
     switch (i) {
       case 0:
-        var_c02b1f6c1721c844 = "heart";
+        metabone_name = "heart";
         break;
       case 1:
-        var_c02b1f6c1721c844 = "l_hand";
+        metabone_name = "l_hand";
         break;
       case 2:
-        var_c02b1f6c1721c844 = "r_hand";
+        metabone_name = "r_hand";
         break;
       case 3:
-        var_c02b1f6c1721c844 = "l_hip";
+        metabone_name = "l_hip";
         break;
       case 4:
-        var_c02b1f6c1721c844 = "r_hip";
+        metabone_name = "r_hip";
         break;
       case 5:
-        var_c02b1f6c1721c844 = "l_shoulder";
+        metabone_name = "l_shoulder";
         break;
       case 6:
-        var_c02b1f6c1721c844 = "r_shoulder";
+        metabone_name = "r_shoulder";
         break;
       default:
         break;
     }
 
-    if(var_c02b1f6c1721c844 == "") {
+    if(metabone_name == "") {
       continue;
     }
 
     if(self.entitydata.phaseindex == 0) {
-      if(var_c02b1f6c1721c844 == "l_hand" || var_c02b1f6c1721c844 == "r_hand") {
-        scriptname = var_c02b1f6c1721c844 + "_weakpoint";
+      if(metabone_name == "l_hand" || metabone_name == "r_hand") {
+        scriptname = metabone_name + "_weakpoint";
         utility::function_3677f2be30fdd581(scriptname, "off");
         continue;
       }
     }
 
-    init_weakpoint(var_c02b1f6c1721c844);
+    init_weakpoint(metabone_name);
   }
 
   thread function_e6129386d662ac36();
@@ -82,7 +82,7 @@ function function_7a92abaf9289a974(params) {
     damage_taken = params.idamage;
   } else if(isDefined(params.metabonename) && !metabone::function_cec565632b7fc419(params.metabonename)) {
     if(function_6db512214e7e7009(params.metabonename)) {
-      index = function_f83b17b2b8d7a76d(params.metabonename);
+      index = get_weakpoint_index(params.metabonename);
       var_a36dac6bc1508662 = toggle_weakpoint(index, "impact");
       damage_taken = params.idamage;
       var_dd5d80e7f90dda09 = 0;
@@ -134,7 +134,7 @@ function private init_weakpoint(name) {
   self.entitydata.weakpoints[index].state = "off";
   self.entitydata.weakpoints[index].var_d7b9041a0f377b26 = 0;
   self.entitydata.weakpoints[index].name = name;
-  var_91839babd32261f4 = name + "_weakpoint";
+  scriptable_name = name + "_weakpoint";
   utility::function_3677f2be30fdd581(name, "off");
 }
 
@@ -195,7 +195,7 @@ function private function_ee11b6bc53cb7145() {
 }
 
 function private function_6db512214e7e7009(name) {
-  index = function_f83b17b2b8d7a76d(name);
+  index = get_weakpoint_index(name);
   return function_b88c0fec5b4cc4c8(index);
 }
 
@@ -211,7 +211,7 @@ function private function_b88c0fec5b4cc4c8(index) {
   return true;
 }
 
-function function_f83b17b2b8d7a76d(name) {
+function get_weakpoint_index(name) {
   if(!isDefined(self.entitydata.weakpoints)) {
     return -1;
   }
@@ -237,8 +237,8 @@ function toggle_weakpoint(index, state, set_health) {
       self.entitydata.weakpoints[index].var_d7b9041a0f377b26 = gettime() + self.phasedata[self.entitydata.phaseindex].var_9cfdfb806b41190c.var_72b6da1531fbd71d;
     }
 
-    var_91839babd32261f4 = self.entitydata.weakpoints[index].name + "_weakpoint";
-    utility::function_3677f2be30fdd581(var_91839babd32261f4, state);
+    scriptable_name = self.entitydata.weakpoints[index].name + "_weakpoint";
+    utility::function_3677f2be30fdd581(scriptable_name, state);
 
     if(state == "on" && isDefined(set_health) && set_health == 1) {
       max_health = metabone::function_58b8812944c3f7e8(self.entitydata.weakpoints[index].name, "active");
@@ -335,7 +335,7 @@ function private function_2a87c62a30af1ce() {
   return self.phasedata[self.entitydata.phaseindex].var_9cfdfb806b41190c;
 }
 
-function function_c549f1e04e77e820(var_6344ee17398456ea, params) {
+function function_c549f1e04e77e820(pin_to_ground, params) {
   if(getdvarint(@ "hash_376a94d300184801", 0)) {
     return true;
   } else if(isDefined(params.metabonename) && !metabone::function_cec565632b7fc419(params.metabonename)) {

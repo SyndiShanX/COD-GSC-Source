@@ -50,7 +50,7 @@ function function_90d19c9b48fdaac4() {
   sequence = ["dx_cp_reso_qiis_lasw_notimeforaboatridese", level.soap, 0.2, "dx_cp_reso_qiis_soap_notabadplacetogofish", level.ghost, 0.2, "dx_cp_reso_qiis_ghos_getofftheboatjohnny", level.soap, 0.3, "dx_cp_reso_qiis_soap_justsayin"];
   result = level thread function_c9a09b3ba9c68f8d(0.6, sequence);
   wait 1;
-  sequence = [level.ghost, "dx_cp_reso_gwu1_ghos_movingtosecuretheper", &function_16b3ab92dae9a32, level.soap, 0.3, "dx_cp_reso_gwu1_soap_goodlucklt", &function_16b3ab92dae9a32, level.ghost, 0.4, "dx_cp_reso_gwu1_ghos_yeahtheyregonnaneedi"];
+  sequence = [level.ghost, "dx_cp_reso_gwu1_ghos_movingtosecuretheper", &player_above_water, level.soap, 0.3, "dx_cp_reso_gwu1_soap_goodlucklt", &player_above_water, level.ghost, 0.4, "dx_cp_reso_gwu1_ghos_yeahtheyregonnaneedi"];
   result = level.ghost function_c9a09b3ba9c68f8d(0.3, sequence);
 }
 
@@ -288,13 +288,13 @@ function function_958b5465f37a2002() {
   }
 
   wait 30;
-  var_cb574097cf162b32 = [(-24.2368, 2942.61, 216), (925.636, 3184.95, 184), (-567.816, 2931.63, 204), (-1368.58, 3186.44, 184.5)];
+  cabanas = [(-24.2368, 2942.61, 216), (925.636, 3184.95, 184), (-567.816, 2931.63, 204), (-1368.58, 3186.44, 184.5)];
 
   for(i = 0; i < 2; i++) {
     result = 0;
 
     while(isDefined(result) && !result) {
-      function_ce1551245242a903(var_cb574097cf162b32, 0.7, 0.3, 200);
+      function_ce1551245242a903(cabanas, 0.7, 0.3, 200);
 
       while(flag("stealth_spotted")) {
         if(flag("stealth_spotted")) {
@@ -302,7 +302,7 @@ function function_958b5465f37a2002() {
           wait 5;
         }
 
-        function_ce1551245242a903(var_cb574097cf162b32, 0.7, 0.3, 200);
+        function_ce1551245242a903(cabanas, 0.7, 0.3, 200);
       }
 
       if(!isDefined(level.vo.var_ec86ce1f7a933a8d)) {
@@ -337,13 +337,13 @@ function function_fc439c82f0b44441() {
       flag_wait("player_on_boat");
     }
 
-    sequence = ["dx_cp_reso_qiis_lasw_notimeforaboatridese", level.soap, 0.2, "dx_cp_reso_qiis_soap_notabadplacetogofish", &function_eb00c848fc9f0dbf, level.ghost, 0.2, "dx_cp_reso_qiis_ghos_getofftheboatjohnny", level.soap, 0.3, "dx_cp_reso_qiis_soap_justsayin"];
+    sequence = ["dx_cp_reso_qiis_lasw_notimeforaboatridese", level.soap, 0.2, "dx_cp_reso_qiis_soap_notabadplacetogofish", &on_boat, level.ghost, 0.2, "dx_cp_reso_qiis_ghos_getofftheboatjohnny", level.soap, 0.3, "dx_cp_reso_qiis_soap_justsayin"];
     result = level function_c9a09b3ba9c68f8d(0.6, sequence, 0, [level, "player_on_boat"]);
     waitframe();
   }
 }
 
-function function_eb00c848fc9f0dbf() {
+function on_boat() {
   if(!flag("player_on_boat")) {
     return 0;
   }
@@ -521,18 +521,18 @@ function private function_8ef3b661c5cd49a7() {
 }
 
 function private function_f4068065104eeb75() {
-  var_a88f4c6d19699702 = getEnt("in_building_trigger", "script_noteworthy");
+  building_trigger = getEnt("in_building_trigger", "script_noteworthy");
   fountain = (-780.333, 5852.49, 642.565);
   var_1dae1d207ace2939 = squared(300);
   var_811ccfd729ba41af = squared(800);
 
   while(true) {
-    if(!istrue(level.var_6b6e1a1fc4997d79) && level.vip istouching(var_a88f4c6d19699702)) {
+    if(!istrue(level.var_6b6e1a1fc4997d79) && level.vip istouching(building_trigger)) {
       level.var_6b6e1a1fc4997d79 = 1;
       return level.vo.var_264499ce25b7bc7a deck_draw();
     }
 
-    if(istrue(level.var_6b6e1a1fc4997d79) && !level.vip istouching(var_a88f4c6d19699702)) {
+    if(istrue(level.var_6b6e1a1fc4997d79) && !level.vip istouching(building_trigger)) {
       level.var_6b6e1a1fc4997d79 = 0;
       return level.vo.var_1b8fe82e97a96300 deck_draw();
     }
@@ -615,7 +615,7 @@ function private function_6d8e09d597e95990() {
   }
 
   if(!flag("obj_laptop3_completed")) {
-    level thread function_a60fea4f51763a4f(["obj_laptop3_completed", "vo_spotted_security_building"], level.vo.var_2589c21dbf99c514, growing_delay(30, 50, 3));
+    level thread nagtill_any(["obj_laptop3_completed", "vo_spotted_security_building"], level.vo.var_2589c21dbf99c514, growing_delay(30, 50, 3));
     return;
   }
 
@@ -740,8 +740,8 @@ function private function_dbf0c71d9c0ef7ce() {
   level endon("game_ended");
   level endon("obj_laptop3_completed");
   wait 3;
-  var_db985fba3eb25058 = (-305.62, 6732.61, 651.812);
-  closestai = sortbydistance(getaiarrayinradius(var_db985fba3eb25058, 500), var_db985fba3eb25058);
+  securityroom = (-305.62, 6732.61, 651.812);
+  closestai = sortbydistance(getaiarrayinradius(securityroom, 500), securityroom);
   closestai = [closestai[0], closestai[1]];
   closestai[0] waittill("death");
 
@@ -880,7 +880,7 @@ function private function_a9419fdf6de00a17() {
       level.vo.var_2068ca955246b78f = create_deck(aliases);
     }
 
-    level function_bace8af56ef0688b("is_in_bunker", level.vo.var_2068ca955246b78f, growing_delay(0, 15, 3));
+    level nag_waitopen("is_in_bunker", level.vo.var_2068ca955246b78f, growing_delay(0, 15, 3));
     flag_wait("is_in_bunker");
   }
 
@@ -915,8 +915,8 @@ function private function_7dde69e6ecc7d784() {
   level endon("obj_hack_terminal_completed");
 
   if(!flag("vo_spotted_security_building")) {
-    var_ad451464907eb97f = ["dx_cp_reso_xyza_soap_attheterminalbunkerd", &function_e7ad302029b57aec, level.laswell, 0.2, "dx_cp_reso_xyza_lasw_mustopenfromsomewher", &function_e7ad302029b57aec, level.ghost, 0.4, "dx_cp_reso_xyza_ghos_securityhouseoracont", &player_spotted, &function_e7ad302029b57aec, level.soap, 0.4, "dx_cp_reso_xyza_soap_thatdbemybet", &function_e7ad302029b57aec, level.laswell, 0.3, "dx_cp_reso_xyza_lasw_goodcallbravolocatei"];
-    var_2e0fb9945519ab38 = ["dx_cp_reso_ojrx_soap_attheterminalbunkerd", &function_e7ad302029b57aec, level.laswell, 0.2, "dx_cp_reso_ojrx_lasw_mustopenfromsomewher", &function_e7ad302029b57aec, level.ghost, 0.4, "dx_cp_reso_ojrx_ghos_securityhouseoracont", &function_a4e4a9fc80e228fd, &function_e7ad302029b57aec, level.soap, 0.4, "dx_cp_reso_ojrx_soap_thatdbemybet", &function_e7ad302029b57aec, level.laswell, 0.3, "dx_cp_reso_ojrx_lasw_goodcallbravolocatei"];
+    var_ad451464907eb97f = ["dx_cp_reso_xyza_soap_attheterminalbunkerd", &at_bunker, level.laswell, 0.2, "dx_cp_reso_xyza_lasw_mustopenfromsomewher", &at_bunker, level.ghost, 0.4, "dx_cp_reso_xyza_ghos_securityhouseoracont", &player_spotted, &at_bunker, level.soap, 0.4, "dx_cp_reso_xyza_soap_thatdbemybet", &at_bunker, level.laswell, 0.3, "dx_cp_reso_xyza_lasw_goodcallbravolocatei"];
+    var_2e0fb9945519ab38 = ["dx_cp_reso_ojrx_soap_attheterminalbunkerd", &at_bunker, level.laswell, 0.2, "dx_cp_reso_ojrx_lasw_mustopenfromsomewher", &at_bunker, level.ghost, 0.4, "dx_cp_reso_ojrx_ghos_securityhouseoracont", &function_a4e4a9fc80e228fd, &at_bunker, level.soap, 0.4, "dx_cp_reso_ojrx_soap_thatdbemybet", &at_bunker, level.laswell, 0.3, "dx_cp_reso_ojrx_lasw_goodcallbravolocatei"];
     sequence = function_70386f0dbf01d6f4(var_ad451464907eb97f, var_2e0fb9945519ab38);
     level.player function_c9a09b3ba9c68f8d(0.3, sequence, 0, 10);
   }
@@ -943,7 +943,7 @@ function private function_7dde69e6ecc7d784() {
   level nag_wait("vo_found_door_controls", var_4943a5bbcbc231f7, growing_delay(30, 90, 4));
 }
 
-function function_e7ad302029b57aec() {
+function at_bunker() {
   bunker_door = (267.974, 5745.09, 525.375);
   distsq = squared(600);
 
@@ -1146,7 +1146,7 @@ function function_e7fc55aeb89aac65() {
   }
 
   flag_set("entered_mansion");
-  thread function_8615a6b7cd263577();
+  thread exfil_music();
   var_f6fb65b0d63b682b = ["dx_cp_reso_modc_soap_mainhousemovinginter", level.laswell, 0.3, "dx_cp_reso_modc_lasw_copybeadvisedilllose", level.soap, 0.2, "dx_cp_reso_modc_soap_checkwheresromanova"];
   var_20bb55124792b19b = ["dx_cp_reso_modc_soap_iminsidewheresromano"];
   var_f6fb66b0d63b6a5e = [level.laswell, 0.4, "dx_cp_reso_modc_lasw_holedupinherofficeth", level.soap, 0.3, "dx_cp_reso_modc_soap_howdowebreachit", level.laswell, 0.2, "dx_cp_reso_modc_lasw_ghostifyoucutpowerto", level.ghost, 0.2, &function_7fc6cf9163b1c819, &function_eb45bca194636705, level.laswell, 0.4, "dx_cp_reso_modc_lasw_evenifwedogettoroman", level.soap, 0.3, "dx_cp_reso_modc_soap_theyllstopwhentheyre", level.laswell, 0.4, "dx_cp_reso_modc_lasw_goodpointsoapyouknow", level.soap, 0.3, "dx_cp_reso_modc_soap_cleanandclearwatcher"];
@@ -1166,7 +1166,7 @@ function function_e7fc55aeb89aac65() {
   level nag_wait("obj_hack_door_completed", aliases, growing_delay(5, 15, 4));
 }
 
-function function_8615a6b7cd263577() {
+function exfil_music() {
   wait 1;
   setmusicstate("mx_resort_exfil_end");
 }
@@ -1436,9 +1436,9 @@ function function_fdc445c5ebb7f83e() {
 }
 
 function function_34fed8580660aeef() {
-  var_52b97f24a2ad6754 = (-3326.45, 4693.07, 155.466);
+  cave = (-3326.45, 4693.07, 155.466);
   distsq = squared(1000);
-  return distancesquared(var_52b97f24a2ad6754, level.player.origin) < distsq;
+  return distancesquared(cave, level.player.origin) < distsq;
 }
 
 function function_1a08ad97946816c2() {
@@ -1619,9 +1619,9 @@ function function_bf82f5bdcf9e9f41(mindist, var_cfaa5978cdc2007) {
     return true;
   }
 
-  var_52b97f24a2ad6754 = (-2937, 4000, 0);
+  cave = (-2937, 4000, 0);
 
-  if(!flag("vo_cleared_cave") && distancesquared(level.player.origin, var_52b97f24a2ad6754) < distsq) {
+  if(!flag("vo_cleared_cave") && distancesquared(level.player.origin, cave) < distsq) {
     return true;
   }
 
@@ -1647,7 +1647,7 @@ function function_6bf44e0bb0f1720a(secondstowait, var_cb95d4a98694f10, var_1097c
   return true;
 }
 
-function function_16b3ab92dae9a32() {
+function player_above_water() {
   if(level.player isswimunderwater()) {
     return 0;
   }
@@ -1664,7 +1664,7 @@ function function_5c5a589e629678a2() {
       wait 1;
     }
 
-    sequence = [level.ghost, "dx_cp_reso_gwu1_ghos_movingtosecuretheper", &function_16b3ab92dae9a32, level.soap, 0.3, "dx_cp_reso_gwu1_soap_goodlucklt", &function_16b3ab92dae9a32, level.ghost, 0.4, "dx_cp_reso_gwu1_ghos_yeahtheyregonnaneedi"];
+    sequence = [level.ghost, "dx_cp_reso_gwu1_ghos_movingtosecuretheper", &player_above_water, level.soap, 0.3, "dx_cp_reso_gwu1_soap_goodlucklt", &player_above_water, level.ghost, 0.4, "dx_cp_reso_gwu1_ghos_yeahtheyregonnaneedi"];
     result = level.ghost function_c9a09b3ba9c68f8d(0.5, sequence, 0, 3);
     waitframe();
   }

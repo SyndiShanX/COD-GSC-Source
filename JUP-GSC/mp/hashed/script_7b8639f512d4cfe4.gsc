@@ -112,7 +112,7 @@ function showc4(c4) {
   c4 show();
 }
 
-function function_e8e4bb2f83e5055a(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_e8e4bb2f83e5055a(instance, part, state, player, bautouse, usestring) {
   dir = "left";
 
   if(part == "usable_right") {

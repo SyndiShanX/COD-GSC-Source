@@ -184,7 +184,7 @@ function function_15fd33eb83ce9723() {
   scriptbundlename = "score_event_list_" + game_type;
 
   if(isanymlgmatch()) {
-    if(level.var_ec2fb549b15ad827) {
+    if(level.leagueplaymatch) {
       scriptbundlename = "score_event_list_leagueplay_" + game_type;
     } else {
       scriptbundlename = "score_event_list_cdl_" + game_type;
@@ -251,7 +251,7 @@ function function_51e853369bc3f0bf(entry) {
   var_e705ea298dacd4e2 = default_to(entry.var_e705ea298dacd4e2, 0);
   potgscore = default_to(entry.potgscore, 0);
 
-  if(istrue(entry.var_ea8529d33b9e81aa)) {
+  if(istrue(entry.isaward)) {
     scripts\mp\rank::registerscoreinfo(ref, #"hash_6dd3d93bbf03abc6", 1);
   }
 
@@ -294,7 +294,7 @@ function function_51e853369bc3f0bf(entry) {
 
   if(var_eef8a3f0dcf96328) {
     var_8cde9a095cf42d8f = function_2336488258354fbc(#"scriptbundle_splash", entry.splashbundle);
-    assertex(isDefined(var_8cde9a095cf42d8f), "<dev string:x5d>" + function_3c8848a3a11b2553(entry.splashbundle));
+    assertex(isDefined(var_8cde9a095cf42d8f), "<dev string:x5d>" + getxhashsourcename(entry.splashbundle));
 
     if(isDefined(var_8cde9a095cf42d8f)) {
       scripts\mp\rank::registerscoreinfo(ref, #"hash_9ef9bbcd1edc198b", var_8cde9a095cf42d8f);
@@ -573,7 +573,7 @@ function function_b7f154368abbe463(victim, objweapon, meansofdeath, inflictor, d
   self.modifiers["hit_loc"] = 0;
   curtime = gettime();
   weapongroup = getweapongroup(objweapon);
-  var_366b0ecc2f28aead = isweapon(objweapon) ? getcompleteweaponname(objweapon) : "";
+  fullweaponstring = isweapon(objweapon) ? getcompleteweaponname(objweapon) : "";
   victimguid = victim.guid;
 
   if(!iskillstreakweapon(objweapon) && !_hasperk("specialty_explosivebullets")) {
@@ -900,7 +900,7 @@ function function_b7f154368abbe463(victim, objweapon, meansofdeath, inflictor, d
         self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"enemystunned"));
       }
 
-      if(isDefined(self.tookweaponfrom) && isDefined(self.tookweaponfrom[var_366b0ecc2f28aead]) && self.tookweaponfrom[var_366b0ecc2f28aead] == victim) {
+      if(isDefined(self.tookweaponfrom) && isDefined(self.tookweaponfrom[fullweaponstring]) && self.tookweaponfrom[fullweaponstring] == victim) {
         self.modifiers["backfire"] = 1;
         self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"backfire"));
       }
@@ -930,7 +930,7 @@ function function_b7f154368abbe463(victim, objweapon, meansofdeath, inflictor, d
       }
     }
 
-    if(victim function_9cc921a57ff4deb5() || victim isonzipline()) {
+    if(victim isonascender() || victim isonzipline()) {
       self.modifiers["victim_on_zipline"] = 1;
       self.modifiers["mask3"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask3"], function_e2ff8f4b4e94f723(#"hash_7f94e61c1787fc14", #"victim_on_zipline"));
     }
@@ -1083,7 +1083,7 @@ function function_b7f154368abbe463(victim, objweapon, meansofdeath, inflictor, d
       self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"weaponswap"));
     }
 
-    if(isDefined(self.tookweaponfrom) && isDefined(self.tookweaponfrom[var_366b0ecc2f28aead]) && self.tookweaponfrom[var_366b0ecc2f28aead].team != self.team) {
+    if(isDefined(self.tookweaponfrom) && isDefined(self.tookweaponfrom[fullweaponstring]) && self.tookweaponfrom[fullweaponstring].team != self.team) {
       self.modifiers["weapon_pickup_kill"] = 1;
       self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"hash_30a2422996add07a"));
     }
@@ -1121,13 +1121,13 @@ function function_b7f154368abbe463(victim, objweapon, meansofdeath, inflictor, d
       self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"victimlaststand"));
     }
 
-    inradiation = istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("radiation", "radiation_isInRadiation", victim.origin)) || istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("biobunker_radiation", "isInBiobunkerRadiationVolume", victim.origin));
+    inradiation = istrue(scripts\engine\utility::callsharedfunc("radiation", "radiation_isInRadiation", victim.origin)) || istrue(scripts\engine\utility::callsharedfunc("biobunker_radiation", "isInBiobunkerRadiationVolume", victim.origin));
 
     if(istrue(inradiation)) {
       self.modifiers["mask2"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask2"], function_e2ff8f4b4e94f723(#"hash_7f94e71c1787fdc7", #"hash_bdb8870aac1e8299"));
     }
 
-    var_e27987bea6bad0d6 = istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("radiation", "radiation_isInRadiation", self.origin)) || istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("biobunker_radiation", "isInBiobunkerRadiationVolume", self.origin));
+    var_e27987bea6bad0d6 = istrue(scripts\engine\utility::callsharedfunc("radiation", "radiation_isInRadiation", self.origin)) || istrue(scripts\engine\utility::callsharedfunc("biobunker_radiation", "isInBiobunkerRadiationVolume", self.origin));
 
     if(istrue(var_e27987bea6bad0d6)) {
       self.modifiers["mask2"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask2"], function_e2ff8f4b4e94f723(#"hash_7f94e71c1787fdc7", #"in_radiation"));
@@ -1149,7 +1149,7 @@ function function_b7f154368abbe463(victim, objweapon, meansofdeath, inflictor, d
       self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"victiminvehicle"));
     }
 
-    if(self function_a7de57196f4b5d16()) {
+    if(self isinvehicleleanout()) {
       self.modifiers["vehiclelean"] = 1;
       self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"vehiclelean"));
 
@@ -1321,7 +1321,7 @@ function function_b7f154368abbe463(victim, objweapon, meansofdeath, inflictor, d
 
     if(isDefined(objweapon.scope)) {
       var_7a4444efa68407fa = objweapon.scope;
-      basetype = function_7c612ac92ba98dcb(objweapon, var_7a4444efa68407fa);
+      basetype = getattachmentbasetype(objweapon, var_7a4444efa68407fa);
 
       if(basetype == "ironsdefault") {
         self.modifiers["attachment_flags"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["attachment_flags"], function_e2ff8f4b4e94f723(#"hash_1ce058287dc8c73b", #"irons"));
@@ -1592,7 +1592,7 @@ function function_a7168c7ec3eb917a(objweapon) {
       attachmentscriptbundle = getscriptbundle(hashcat(%"hash_3c2c9813bb16552f", attachment));
 
       if(isDefined(attachmentscriptbundle)) {
-        if(attachmentscriptbundle.var_f0e7c0926c0962e5) {
+        if(attachmentscriptbundle.isamp) {
           self.modifiers["weapon_has_AMP"] = 1;
           self.modifiers["attachment_flags"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["attachment_flags"], function_e2ff8f4b4e94f723(#"hash_1ce058287dc8c73b", #"amp"));
         }
@@ -1664,10 +1664,10 @@ function killedplayer(killid, victim, objweapon, meansofdeath, inflictor, deathd
   thread checkfinalkillachievements(victim);
   victimguid = victim.guid;
   myguid = self.guid;
-  var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+  fullweaponstring = getcompleteweaponname(objweapon);
   iskillstreakweapon = istrue(deathdata.iskillstreakweapon) || scripts\mp\utility\killstreak::isjuggernaut();
   thread killedplayernotifysys(killid, victim, objweapon, meansofdeath);
-  thread updaterecentkills(killid, victim, objweapon, var_366b0ecc2f28aead, iskillstreakweapon);
+  thread updaterecentkills(killid, victim, objweapon, fullweaponstring, iskillstreakweapon);
   thread updatec4vehiclemultkill(meansofdeath, inflictor);
   thread updateghostridekills();
   thread updatequadfeedcounter(self, killid, iskillstreakweapon);
@@ -2047,7 +2047,7 @@ function killedplayer(killid, victim, objweapon, meansofdeath, inflictor, deathd
       }
     }
 
-    checksuperkillevents(victim, inflictor, objweapon, meansofdeath, var_366b0ecc2f28aead);
+    checksuperkillevents(victim, inflictor, objweapon, meansofdeath, fullweaponstring);
     checksupershutdownevents(victim, objweapon, meansofdeath);
   } else if(iskillstreakweapon(objweapon.basename) || issuperweapon(objweapon.basename)) {
     if(issubstr(objweapon.basename, "laser_charge")) {
@@ -2132,7 +2132,7 @@ function killedplayer(killid, victim, objweapon, meansofdeath, inflictor, deathd
   }
 
   victim scripts\mp\equipment\deployed_decoy::function_a22d831b624cccd2();
-  bufferednotify("kill_event_buffered", victim, var_366b0ecc2f28aead, meansofdeath, self.modifiers);
+  bufferednotify("kill_event_buffered", victim, fullweaponstring, meansofdeath, self.modifiers);
   thread scripts\mp\potg_events::onplayerkilled(self, inflictor, victim, meansofdeath, objweapon, deathdata.psoffsettime);
   thread function_f0c7425bd5a7050(victim, meansofdeath);
 }
@@ -2150,7 +2150,7 @@ function function_594be452ab6dd2d4(event) {
     self.var_2d8f8eb61d90e813[event] = [];
   }
 
-  poiname = scripts\mp\poi::function_6cc445c02b5effac(self.origin);
+  poiname = scripts\mp\poi::poi_findpoioriginisin(self.origin);
 
   if(!isDefined(poiname) || !isDefined(level.poi[poiname]) || !isDefined(level.poi[poiname]["calloutIndex"])) {
     return 0;
@@ -2390,7 +2390,7 @@ function function_3e2ff5954aacaa33(objweapon, meansofdeath, inflictor) {
   }
 }
 
-function checksuperkillevents(victim, inflictor, objweapon, meansofdeath, var_366b0ecc2f28aead) {
+function checksuperkillevents(victim, inflictor, objweapon, meansofdeath, fullweaponstring) {
   superinuse = scripts\mp\supers::issuperinuse();
   superref = scripts\mp\supers::getcurrentsuperref();
   super = scripts\mp\supers::getcurrentsuper();
@@ -2402,7 +2402,7 @@ function checksuperkillevents(victim, inflictor, objweapon, meansofdeath, var_36
   }
 
   if(superweapon) {
-    thread killedplayerwithsuperweapon(victim, inflictor, objweapon, meansofdeath, var_366b0ecc2f28aead);
+    thread killedplayerwithsuperweapon(victim, inflictor, objweapon, meansofdeath, fullweaponstring);
 
     if(meansofdeath != "MOD_MELEE") {
       bufferednotify("super_kill_buffered");
@@ -2439,9 +2439,9 @@ function checksupershutdownevents(victim, objweapon, meansofdeath) {
   }
 }
 
-function killedplayerwithsuperweapon(victim, inflictor, objweapon, meansofdeath, var_366b0ecc2f28aead) {
+function killedplayerwithsuperweapon(victim, inflictor, objweapon, meansofdeath, fullweaponstring) {
   superref = scripts\mp\supers::getsuperrefforsuperweapon(objweapon);
-  var_398a9d42af1d5e5f = self.recentkillsperweapon[var_366b0ecc2f28aead];
+  var_398a9d42af1d5e5f = self.recentkillsperweapon[fullweaponstring];
 
   if(isDefined(var_398a9d42af1d5e5f) && var_398a9d42af1d5e5f > 0 && var_398a9d42af1d5e5f % 2 == 0) {
     superkill(superref, meansofdeath);
@@ -3065,7 +3065,7 @@ function function_34d6519a0f923c94(startpos, lastpos) {
   scripts\cp_mp\challenges::function_8359cadd253f9604(self, "ascender_zipline_meter_distance", var_83e1b1883e461c6);
 }
 
-function updaterecentkills(killid, victim, objweapon, var_366b0ecc2f28aead, iskillstreakweapon) {
+function updaterecentkills(killid, victim, objweapon, fullweaponstring, iskillstreakweapon) {
   self endon("disconnect");
   level endon("game_ended");
   self notify("updateRecentKills");
@@ -3092,10 +3092,10 @@ function updaterecentkills(killid, victim, objweapon, var_366b0ecc2f28aead, iski
     self.recentkillsperweapon = [];
   }
 
-  if(!isDefined(self.recentkillsperweapon[var_366b0ecc2f28aead])) {
-    self.recentkillsperweapon[var_366b0ecc2f28aead] = 1;
+  if(!isDefined(self.recentkillsperweapon[fullweaponstring])) {
+    self.recentkillsperweapon[fullweaponstring] = 1;
   } else {
-    self.recentkillsperweapon[var_366b0ecc2f28aead]++;
+    self.recentkillsperweapon[fullweaponstring]++;
   }
 
   weaponinfo = getequipmenttype(objweapon);
@@ -3104,12 +3104,12 @@ function updaterecentkills(killid, victim, objweapon, var_366b0ecc2f28aead, iski
     level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_killfirm_grenade", undefined, 0.75);
     level thread scripts\mp\battlechatter_mp::saytoself(self, "plr_killfirm_amf", undefined, 0.75);
 
-    if(self.recentkillsperweapon[var_366b0ecc2f28aead] > 0 && self.recentkillsperweapon[var_366b0ecc2f28aead] % 2 == 0) {
+    if(self.recentkillsperweapon[fullweaponstring] > 0 && self.recentkillsperweapon[fullweaponstring] % 2 == 0) {
       thread scripts\mp\utility\points::doscoreevent(#"grenade_double");
     }
   }
 
-  bufferednotify("update_rapid_kill_buffered", self.recentkillcount, var_366b0ecc2f28aead);
+  bufferednotify("update_rapid_kill_buffered", self.recentkillcount, fullweaponstring);
 
   if(!isDefined(self.recentkillcount)) {
     self.recentkillcount = 0;
@@ -3829,10 +3829,10 @@ function processsplashpriorityqueue() {
 
   foreach(event in self.splashpriorityqueue) {
     if(splashallowed && istrue(event.showassplash) && event.alwaysshowsplash) {
-      println("<dev string:x152>" + function_3c8848a3a11b2553(event.scoreeventref));
+      println("<dev string:x152>" + getxhashsourcename(event.scoreeventref));
     }
 
-    println("<dev string:x15f>" + function_3c8848a3a11b2553(event.scoreeventref));
+    println("<dev string:x15f>" + getxhashsourcename(event.scoreeventref));
   }
 
   foreach(event in self.splashpriorityqueue) {
@@ -4131,7 +4131,7 @@ function function_2510f24c715782c3(killid, victim, objweapon, meansofdeath, infl
       thread scripts\mp\utility\points::doscoreevent(#"hash_86d8e037ec92167b");
     }
 
-    if(istrue(victim.var_a2906c0a3da2c192) || isDefined(victim.var_17c60a92aea65107) && victim.var_17c60a92aea65107 > 0) {
+    if(istrue(victim.shouting) || isDefined(victim.var_17c60a92aea65107) && victim.var_17c60a92aea65107 > 0) {
       thread scripts\mp\utility\points::doscoreevent(#"hash_ee98a5e91eb314b");
     }
   }
@@ -4179,15 +4179,15 @@ function on_ai_killed(sparams) {
   victim = self;
   typestring = "";
 
-  if(!isDefined(self.var_aaf0465944b061ed)) {
+  if(!isDefined(self.kiastring)) {
     return;
   }
 
-  var_813307117c9bea44 = self.var_aaf0465944b061ed;
+  var_813307117c9bea44 = self.kiastring;
 
   if(!isxhash(var_813307117c9bea44)) {
     assertex(1, var_813307117c9bea44);
-    var_813307117c9bea44 = function_1823ff50bb28148d(var_813307117c9bea44);
+    var_813307117c9bea44 = getxhash(var_813307117c9bea44);
   }
 
   if(isDefined(level.var_9871526022516e0b)) {

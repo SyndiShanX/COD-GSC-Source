@@ -52,7 +52,7 @@ function add_menuent(menu_name, ent) {
   level.menu_sys[menu_name].ent = ent;
 }
 
-function add_menu_child(parent_menu, child_menu, child_title, var_3403dde8c1f8f138, func) {
+function add_menu_child(parent_menu, child_menu, child_title, child_number_override, func) {
   if(!isDefined(level.menu_sys[child_menu])) {
     add_menu(child_menu, child_title);
   }
@@ -63,10 +63,10 @@ function add_menu_child(parent_menu, child_menu, child_title, var_3403dde8c1f8f1
     level.menu_sys[parent_menu].children_menu = [];
   }
 
-  if(!isDefined(var_3403dde8c1f8f138)) {
+  if(!isDefined(child_number_override)) {
     size = level.menu_sys[parent_menu].children_menu.size;
   } else {
-    size = var_3403dde8c1f8f138;
+    size = child_number_override;
   }
 
   level.menu_sys[parent_menu].children_menu[size] = child_menu;
@@ -840,7 +840,7 @@ function clear_universal_buttons(button_group) {
   level.u_buttons[button_group] = [];
 }
 
-function universal_input_loop(button_group, end_on, use_attackbutton, mod_button, var_b0b4000e275f51aa) {
+function universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_button) {
   while(!isDefined(level.player)) {
     waitframe();
   }
@@ -864,7 +864,7 @@ function universal_input_loop(button_group, end_on, use_attackbutton, mod_button
     if(isDefined(mod_button) && !level.player buttonPressed(mod_button)) {
       waitframe();
       continue;
-    } else if(isDefined(var_b0b4000e275f51aa) && level.player buttonPressed(var_b0b4000e275f51aa)) {
+    } else if(isDefined(no_mod_button) && level.player buttonPressed(no_mod_button)) {
       waitframe();
       continue;
     }
@@ -1071,8 +1071,8 @@ function cursor_highlight() {
   trace = ray_trace_detail(start, end);
   phys_trace = trace["position"];
   highlighted_ent = undefined;
-  var_cb575c750e30791f = undefined;
-  var_25631945de443058 = undefined;
+  highlighted_node = undefined;
+  highlighted_path = undefined;
   var_1f5225000f4be1f1 = undefined;
   highlighted_ent = get_selectable_ent(start, end, 40);
 

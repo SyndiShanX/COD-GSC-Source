@@ -45,12 +45,12 @@ function actionprocess(bot) {
   }
 
   bot botsetflag("ignore_script_weapon", 0);
-  bot scripts\cp_mp\armor::function_9f1608bd570dd94c(1);
+  bot scripts\cp_mp\armor::tryusearmor(1);
   bot waittill_any_in_array_or_timeout(["insertArmorComplete"], 5);
 }
 
 function function_fc5d9d6dc490ce2e() {
-  return istrue(level.allowarmor) && !istrue(self.insertingarmorplate) && scripts\cp_mp\armor::function_20b8437058079297() > 0 && scripts\cp_mp\armor::function_cf37789d18fbcc1b() && !self isswitchingweapon();
+  return istrue(level.allowarmor) && !istrue(self.insertingarmorplate) && scripts\cp_mp\armor::function_20b8437058079297() > 0 && scripts\cp_mp\armor::caninsertarmor() && !self isswitchingweapon();
 }
 
 function function_f4caae7e8af9d32c(action) {

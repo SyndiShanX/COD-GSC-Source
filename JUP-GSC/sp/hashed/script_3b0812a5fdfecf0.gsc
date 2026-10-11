@@ -116,8 +116,8 @@ function function_14a67b26aa91919(state) {
   count = 0;
 
   foreach(ai in ai_array) {
-    if(isDefined(ai.stealth) && isDefined(ai.var_fe5ebefa740c7106)) {
-      if(ai.var_fe5ebefa740c7106 == state) {
+    if(isDefined(ai.stealth) && isDefined(ai.stealth_bsmstate)) {
+      if(ai.stealth_bsmstate == state) {
         count++;
       }
     }

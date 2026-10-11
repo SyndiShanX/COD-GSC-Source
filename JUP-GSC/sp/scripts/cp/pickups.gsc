@@ -342,8 +342,8 @@ function initarrays() {
 
         }
 
-        level.br_pickups.br_itemtype[var_14004b68ddacb781] = function_1823ff50bb28148d(itemtype);
-        level.br_pickups.br_pickupsfx[var_14004b68ddacb781] = function_1823ff50bb28148d(pickupsound);
+        level.br_pickups.br_itemtype[var_14004b68ddacb781] = getxhash(itemtype);
+        level.br_pickups.br_pickupsfx[var_14004b68ddacb781] = getxhash(pickupsound);
         level.br_pickups.br_itemrarity[var_14004b68ddacb781] = int(raritystring);
         level.br_pickups.br_lootguns[level.br_pickups.br_lootguns.size] = var_14004b68ddacb781;
         level.br_lootiteminfo[var_14004b68ddacb781] = spawnStruct();
@@ -423,8 +423,8 @@ function initarrays() {
         level.br_pickups.counts[var_14004b68ddacb781] = var_51426ae160732e49;
         level.br_pickups.var_4138f9ddc1cd22d[var_14004b68ddacb781] = var_10a92702735eff08;
         itemtype = tolower(itemtype);
-        level.br_pickups.br_itemtype[var_14004b68ddacb781] = function_1823ff50bb28148d(itemtype);
-        level.br_pickups.br_pickupsfx[var_14004b68ddacb781] = function_1823ff50bb28148d(tablelookupbyrow(level.brloottablename, row, 14));
+        level.br_pickups.br_itemtype[var_14004b68ddacb781] = getxhash(itemtype);
+        level.br_pickups.br_pickupsfx[var_14004b68ddacb781] = getxhash(tablelookupbyrow(level.brloottablename, row, 14));
         raritynum = tablelookupbyrow(level.brloottablename, row, 3);
         level.br_pickups.br_itemrarity[var_14004b68ddacb781] = int(raritynum);
 
@@ -610,7 +610,7 @@ function takeweaponsdefaultfunc() {
   waitframe();
 }
 
-function getitemdroporiginandangles(index, baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, var_f71d4f78d508da69, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44, pickupent) {
+function getitemdroporiginandangles(index, baseorigin, baseangles, ignoreent, var_8a600b6102da9f9b, optionaloverridedist, var_6fe2ff802d5192d4, var_3ace5ac9c7d6fa44, pickupent) {
   assert(!isDefined(ignoreent) || isent(ignoreent));
   var_c5eed6e92f7c606d = 1;
   trace_active = 1;
@@ -649,8 +649,8 @@ function getitemdroporiginandangles(index, baseorigin, baseangles, ignoreent, va
     yaw = baseangles[1] + var_8a600b6102da9f9b;
   }
 
-  if(isDefined(var_f71d4f78d508da69)) {
-    dist = var_f71d4f78d508da69;
+  if(isDefined(optionaloverridedist)) {
+    dist = optionaloverridedist;
   }
 
   angles = (0, yaw, 0);
@@ -805,27 +805,27 @@ function lootusedignore(instance) {
   return false;
 }
 
-function lootused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function lootused(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(instance) || function_362d5a8d49b93721(instance.type)) {
     return;
   }
 
-  pickup = function_2e99748b7a8e1fe4(instance, var_a5b2c541413aa895);
-  return function_b5f5576a0017c089(pickup, state, player, var_a5b2c541413aa895, instance);
+  pickup = function_2e99748b7a8e1fe4(instance, bautouse);
+  return function_b5f5576a0017c089(pickup, state, player, bautouse, instance);
 }
 
-function function_5caa62275ce1a582(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_5caa62275ce1a582(instance, part, state, player, bautouse, usestring) {
   startlocation = instance.origin;
-  result = lootused(instance, part, state, player, var_a5b2c541413aa895, usestring);
+  result = lootused(instance, part, state, player, bautouse, usestring);
 
-  if(istrue(result) && function_240f7f4e57340e8f() && !var_a5b2c541413aa895 && !issubstr(part, "weapon") && !function_af07aad35b55fd73(part)) {
+  if(istrue(result) && function_240f7f4e57340e8f() && !bautouse && !issubstr(part, "weapon") && !function_af07aad35b55fd73(part)) {
     thread function_8a1c7c62c1a6f261(startlocation, part, state, player);
   }
 
   return result;
 }
 
-function function_2e99748b7a8e1fe4(instance, var_a5b2c541413aa895) {
+function function_2e99748b7a8e1fe4(instance, bautouse) {
   pickup = spawnStruct();
   pickup.scriptablename = instance.type;
   pickup.origin = instance.origin;
@@ -843,7 +843,7 @@ function function_2e99748b7a8e1fe4(instance, var_a5b2c541413aa895) {
   }
 
   pickup.isweaponfromcrate = instance.isweaponfromcrate;
-  pickup.isautouse = var_a5b2c541413aa895;
+  pickup.isautouse = bautouse;
 
   if(isDefined(instance.var_5c3c19452417fd1c)) {
     pickup.var_5c3c19452417fd1c = instance.var_5c3c19452417fd1c;
@@ -900,7 +900,7 @@ function function_ea3cee541617e9ce(pickup) {
   return false;
 }
 
-function function_b5f5576a0017c089(pickup, state, player, var_a5b2c541413aa895, instance) {
+function function_b5f5576a0017c089(pickup, state, player, bautouse, instance) {
   if(!isDefined(pickup)) {
     return 0;
   }
@@ -909,19 +909,19 @@ function function_b5f5576a0017c089(pickup, state, player, var_a5b2c541413aa895, 
     return 0;
   }
 
-  if(istrue(level.disableautolootpickup) && istrue(var_a5b2c541413aa895)) {
+  if(istrue(level.disableautolootpickup) && istrue(bautouse)) {
     return 0;
   }
 
-  if(getdvarint(@ "hash_15055cb805b43a20", 1) && istrue(var_a5b2c541413aa895) && !player function_e44c2d69db881894(pickup.scriptablename)) {
+  if(getdvarint(@ "hash_15055cb805b43a20", 1) && istrue(bautouse) && !player function_e44c2d69db881894(pickup.scriptablename)) {
     return 0;
   }
 
-  if(player usingtouch() && !player function_7b738b973a0b7f94() && istrue(var_a5b2c541413aa895) && player function_e44c2d69db881894(pickup.scriptablename)) {
+  if(player usingtouch() && !player function_7b738b973a0b7f94() && istrue(bautouse) && player function_e44c2d69db881894(pickup.scriptablename)) {
     return 0;
   }
 
-  if(function_b1dd9dcae2f63965() && istrue(var_a5b2c541413aa895) && player function_ac3ec31be7aad7a7(instance)) {
+  if(function_b1dd9dcae2f63965() && istrue(bautouse) && player function_ac3ec31be7aad7a7(instance)) {
     return 0;
   }
 
@@ -941,9 +941,9 @@ function function_b5f5576a0017c089(pickup, state, player, var_a5b2c541413aa895, 
         instance.var_4c89ae940ca43b23 = 1;
       }
 
-      return function_60234aa487445085(pickup, player, var_a5b2c541413aa895, instance);
+      return function_60234aa487445085(pickup, player, bautouse, instance);
     } else if(results == 20) {
-      return function_8f0bd51f5c6108b(pickup, player, var_a5b2c541413aa895, instance);
+      return function_8f0bd51f5c6108b(pickup, player, bautouse, instance);
     } else if(results == 5 || results == 27) {
       if(istrue(instance.var_ff45e00f9ed1e5c9)) {
         player scripts\cp\cp_hud_message::showerrormessage(level.br_pickups.br_pickupdenyalreadyhaveweapon);
@@ -973,8 +973,8 @@ function function_b5f5576a0017c089(pickup, state, player, var_a5b2c541413aa895, 
       var_8dde4ac0085463fc = 1;
       var_bb9e46e1d8130f2 = level.br_pickups.br_hasautopickup[pickup.scriptablename];
 
-      if(isDefined(var_a5b2c541413aa895) && isDefined(var_bb9e46e1d8130f2)) {
-        if(var_a5b2c541413aa895 && istrue(var_bb9e46e1d8130f2) && state == "visible") {
+      if(isDefined(bautouse) && isDefined(var_bb9e46e1d8130f2)) {
+        if(bautouse && istrue(var_bb9e46e1d8130f2) && state == "visible") {
           var_8dde4ac0085463fc = 0;
         }
       }
@@ -1251,7 +1251,7 @@ function deregisterscriptableinstance(instance) {
   instance.brpickupscriptableid = undefined;
 }
 
-function onusecompleted(pickupent, var_43fb3d97abb79854, var_a5b2c541413aa895, fromkiosk, var_db943473454f6ea6, instance, backpackequip) {
+function onusecompleted(pickupent, var_43fb3d97abb79854, bautouse, fromkiosk, var_db943473454f6ea6, instance, backpackequip) {
   level endon("game_ended");
   self endon("disconnect");
   pickupremains = 0;
@@ -1261,7 +1261,7 @@ function onusecompleted(pickupent, var_43fb3d97abb79854, var_a5b2c541413aa895, f
   }
 
   if(!istrue(var_43fb3d97abb79854)) {
-    playpickupfeedback(pickupent, var_a5b2c541413aa895);
+    playpickupfeedback(pickupent, bautouse);
   }
 
   if(isDefined(pickupent.origin)) {
@@ -1273,7 +1273,7 @@ function onusecompleted(pickupent, var_43fb3d97abb79854, var_a5b2c541413aa895, f
   if(isplunder(pickupent.scriptablename)) {
     self notify("self_pickedupitem_" + "plunder");
   } else if(isweaponpickupitem(pickupent)) {
-    var_8dd05205656e1dd4 = var_a5b2c541413aa895 && getdvarint(@ "hash_4fe68158dff053c", 0);
+    var_8dd05205656e1dd4 = bautouse && getdvarint(@ "hash_4fe68158dff053c", 0);
 
     if(!var_8dd05205656e1dd4) {
       self notify("self_pickedupitem_" + "weapon", pickupent.scriptablename);
@@ -1283,7 +1283,7 @@ function onusecompleted(pickupent, var_43fb3d97abb79854, var_a5b2c541413aa895, f
   }
 
   if(isweaponpickupitem(pickupent)) {
-    if(var_a5b2c541413aa895 && getdvarint(@ "hash_4fe68158dff053c", 0)) {
+    if(bautouse && getdvarint(@ "hash_4fe68158dff053c", 0)) {
       weaponbasename = pickupent.customweaponname;
       weaponrootname = getweaponrootname(weaponbasename);
       clipsize = weaponclipsize(weaponbasename);
@@ -1502,7 +1502,7 @@ function takeequipmentpickup(pickupent, fromkiosk, var_db943473454f6ea6, backpac
     }
 
     if(isDefined(var_db943473454f6ea6)) {
-      function_a0ccc23064473a05(var_db943473454f6ea6, 0, 0);
+      setbackpackitematindex(var_db943473454f6ea6, 0, 0);
     }
   } else if(isbackpackinventoryenabled() && !isDefined(var_db943473454f6ea6)) {
     count = 1;
@@ -1872,8 +1872,8 @@ function playerplunderevent(amount, type, entity, data, wasscoreevent) {
     self.lastplundereventtype = 0;
   }
 
-  var_26641d000f48954a = ter_op(type == 5, 3, type);
-  omnvar = level.playerplundereventomnvars[var_26641d000f48954a];
+  omnvartype = ter_op(type == 5, 3, type);
+  omnvar = level.playerplundereventomnvars[omnvartype];
   plundereventtotal = self.plundereventtotal[type];
   plundereventtime = self.plundereventtime[type];
 
@@ -2544,7 +2544,7 @@ function takeweaponpickup(pickupent, var_db943473454f6ea6) {
         }
 
         lootid = scripts\cp_mp\weapon::function_79d6e6c22245687a(rootname, variantid);
-        function_a0ccc23064473a05(var_db943473454f6ea6, lootid, 1);
+        setbackpackitematindex(var_db943473454f6ea6, lootid, 1);
         var_c02997b2deff6e69 = 0;
       } else {
         var_28aebe3dd6733ed3 = self getweaponammoclip(var_ec22a950f210e39);
@@ -2872,10 +2872,10 @@ function spawnpickup(pickupname, dropinfo, count, showtrail, weaponobj, allowaut
   var_ef809b0ee883bcc7 = 0;
   is_weapon = isDefined(weaponobj);
   assert(isDefined(pickupname));
-  var_c9c301a888170672 = undefined;
+  scriptabledefname = undefined;
 
   if(isDefined(level.br_pickups.br_weapontoscriptable[pickupname])) {
-    var_c9c301a888170672 = level.br_pickups.br_weapontoscriptable[pickupname];
+    scriptabledefname = level.br_pickups.br_weapontoscriptable[pickupname];
   } else if(isvalidcustomweapon(weaponobj)) {
     weaponclasstoken = scripts\cp_mp\weapon::getweaponclasstoken(weaponobj.basename);
 
@@ -2885,12 +2885,12 @@ function spawnpickup(pickupname, dropinfo, count, showtrail, weaponobj, allowaut
     }
 
     var_ef809b0ee883bcc7 = 1;
-    var_c9c301a888170672 = "brloot_weapon_generic_" + weaponclasstoken;
+    scriptabledefname = "brloot_weapon_generic_" + weaponclasstoken;
   } else if(isdroppablepickup(pickupname)) {
-    var_c9c301a888170672 = pickupname;
+    scriptabledefname = pickupname;
   }
 
-  if(!isDefined(var_c9c301a888170672)) {
+  if(!isDefined(scriptabledefname)) {
     assertex(!isdroppablepickup(pickupname), "No scriptable found for item " + pickupname);
     return;
   }
@@ -2898,21 +2898,21 @@ function spawnpickup(pickupname, dropinfo, count, showtrail, weaponobj, allowaut
   if(!istrue(dropinfo.var_97331585b4002aa7)) {
     dropinfo.angles = (0, dropinfo.angles[1], 0);
 
-    if(var_c9c301a888170672 == "brloot_weapon_me_riotshield_epic" || isvalidcustomweapon(weaponobj) && isriotshield(weaponobj)) {
+    if(scriptabledefname == "brloot_weapon_me_riotshield_epic" || isvalidcustomweapon(weaponobj) && isriotshield(weaponobj)) {
       dropinfo.angles = (dropinfo.angles[0] - 90, dropinfo.angles[1], dropinfo.angles[2]);
       dropinfo.origin = (dropinfo.origin[0], dropinfo.origin[1], dropinfo.origin[2] + 2);
     }
 
-    if(issubstr(var_c9c301a888170672, "la_juliet")) {
+    if(issubstr(scriptabledefname, "la_juliet")) {
       dropinfo.angles = (dropinfo.angles[0] - 4.2, dropinfo.angles[1], dropinfo.angles[2] - 90);
       dropinfo.origin = (dropinfo.origin[0], dropinfo.origin[1], dropinfo.origin[2] + 8.5);
     }
 
-    if(var_c9c301a888170672 == "brloot_offhand_gas") {
+    if(scriptabledefname == "brloot_offhand_gas") {
       dropinfo.angles = (dropinfo.angles[0], dropinfo.angles[1] - 90, dropinfo.angles[2]);
     }
 
-    if(var_c9c301a888170672 == "brloot_offhand_shockstick") {
+    if(scriptabledefname == "brloot_offhand_shockstick") {
       dropinfo.angles = (dropinfo.angles[0], dropinfo.angles[1] - 180, dropinfo.angles[2]);
     }
 
@@ -2925,13 +2925,13 @@ function spawnpickup(pickupname, dropinfo, count, showtrail, weaponobj, allowaut
   clearspaceforscriptableinstance();
 
   if(var_ef809b0ee883bcc7) {
-    item = spawncustomweaponscriptable(var_c9c301a888170672, dropinfo.origin, dropinfo.angles, dropinfo.payload, weaponobj);
+    item = spawncustomweaponscriptable(scriptabledefname, dropinfo.origin, dropinfo.angles, dropinfo.payload, weaponobj);
 
     if(isDefined(item)) {
       item.customweaponname = getcompleteweaponname(weaponobj);
     }
   } else {
-    item = spawnscriptable(var_c9c301a888170672, dropinfo.origin, dropinfo.angles, dropinfo.payload);
+    item = spawnscriptable(scriptabledefname, dropinfo.origin, dropinfo.angles, dropinfo.payload);
   }
 
   if(!isDefined(item)) {
@@ -2941,7 +2941,7 @@ function spawnpickup(pickupname, dropinfo, count, showtrail, weaponobj, allowaut
   if(isDefined(dropinfo.groundentity)) {
     localorigin = rotatevectorinverted(dropinfo.origin - dropinfo.groundentity.origin, dropinfo.groundentity.angles);
     localangles = combineangles(invertangles(dropinfo.groundentity.angles), dropinfo.angles);
-    item utility::function_6e506f39f121ea8a(dropinfo.groundentity, localorigin, localangles);
+    item utility::scriptable_setparententity(dropinfo.groundentity, localorigin, localangles);
   }
 
   registerscriptableinstance(item);
@@ -2956,12 +2956,12 @@ function spawnpickup(pickupname, dropinfo, count, showtrail, weaponobj, allowaut
     allowautopickup = 1;
   }
 
-  if(!istrue(level.br_pickups.br_hasautopickup[var_c9c301a888170672])) {
+  if(!istrue(level.br_pickups.br_hasautopickup[scriptabledefname])) {
     allowautopickup = 1;
   }
 
-  item function_828247536ca07ac1(var_c9c301a888170672, dropinfo, is_weapon, allowautopickup, showtrail);
-  createcallback = level.br_pickups.createcallbacks[var_c9c301a888170672];
+  item function_828247536ca07ac1(scriptabledefname, dropinfo, is_weapon, allowautopickup, showtrail);
+  createcallback = level.br_pickups.createcallbacks[scriptabledefname];
 
   if(isDefined(createcallback)) {
     item[[createcallback]]();
@@ -2970,19 +2970,19 @@ function spawnpickup(pickupname, dropinfo, count, showtrail, weaponobj, allowaut
   return item;
 }
 
-function function_828247536ca07ac1(var_c9c301a888170672, dropinfo, is_weapon, allowautopickup, showtrail) {
-  state = function_3646de62d5cf4d0d(var_c9c301a888170672, dropinfo, is_weapon, allowautopickup, showtrail);
+function function_828247536ca07ac1(scriptabledefname, dropinfo, is_weapon, allowautopickup, showtrail) {
+  state = function_3646de62d5cf4d0d(scriptabledefname, dropinfo, is_weapon, allowautopickup, showtrail);
 
   if(!isDefined(state)) {
     return;
   }
 
-  if(self getscriptableparthasstate(var_c9c301a888170672, state)) {
-    self setscriptablepartstate(var_c9c301a888170672, state);
+  if(self getscriptableparthasstate(scriptabledefname, state)) {
+    self setscriptablepartstate(scriptabledefname, state);
   }
 }
 
-function function_3646de62d5cf4d0d(var_c9c301a888170672, dropinfo, is_weapon, allowautopickup, showtrail) {
+function function_3646de62d5cf4d0d(scriptabledefname, dropinfo, is_weapon, allowautopickup, showtrail) {
   state = undefined;
 
   if(istrue(dropinfo.var_97331585b4002aa7)) {
@@ -3003,31 +3003,31 @@ function function_3646de62d5cf4d0d(var_c9c301a888170672, dropinfo, is_weapon, al
       if(allowautopickup) {
         state = "dropped";
       } else {
-        assert(istrue(level.br_pickups.br_hasautopickup[var_c9c301a888170672]));
+        assert(istrue(level.br_pickups.br_hasautopickup[scriptabledefname]));
         state = "droppedNoAuto";
 
-        if(var_d9a07b7746ada099 || !self getscriptableparthasstate(var_c9c301a888170672, state)) {
+        if(var_d9a07b7746ada099 || !self getscriptableparthasstate(scriptabledefname, state)) {
           state = "dropped";
         }
       }
     } else if(!allowautopickup) {
-      assert(istrue(level.br_pickups.br_hasautopickup[var_c9c301a888170672]));
+      assert(istrue(level.br_pickups.br_hasautopickup[scriptabledefname]));
       state = "noAuto";
 
-      if(var_d9a07b7746ada099 || !self getscriptableparthasstate(var_c9c301a888170672, state)) {
+      if(var_d9a07b7746ada099 || !self getscriptableparthasstate(scriptabledefname, state)) {
         state = "dropped";
       }
     }
   }
 
   if(function_240f7f4e57340e8f()) {
-    state = function_4160979a238b2cd5(var_c9c301a888170672, dropinfo, is_weapon, state, allowautopickup);
+    state = function_4160979a238b2cd5(scriptabledefname, dropinfo, is_weapon, state, allowautopickup);
   }
 
   return state;
 }
 
-function function_4160979a238b2cd5(var_c9c301a888170672, dropinfo, is_weapon, state, allowautopickup) {
+function function_4160979a238b2cd5(scriptabledefname, dropinfo, is_weapon, state, allowautopickup) {
   if(istrue(dropinfo.var_54ed99022c529d4a)) {
     return "visible_no_outline";
   }
@@ -3097,11 +3097,11 @@ function weaponspawn(weaponobj, droppingplayer, dropinfo, firstspawn, showtrail,
   }
 
   if(isDefined(pickupent) && isDefined(pickupent.instance)) {
-    var_daa197e6c4b920ee = function_3a5f7703319142dd(pickupent.instance);
+    altammo = function_3a5f7703319142dd(pickupent.instance);
   }
 
   completeweaponname = getcompleteweaponname(weaponobj);
-  weaponpickup = spawnpickup(completeweaponname, dropinfo, count, showtrail, weaponobj, undefined, undefined, var_daa197e6c4b920ee);
+  weaponpickup = spawnpickup(completeweaponname, dropinfo, count, showtrail, weaponobj, undefined, undefined, altammo);
   level.onweapondropcreated scripts\cp_mp\utility\callback_group::callback_trigger(weaponpickup, droppingplayer, weaponobj);
   return weaponpickup;
 }
@@ -4065,8 +4065,8 @@ function canholdammobox(scriptablename, weapon) {
   return !br_ammo_type_player_full(self, scriptablename);
 }
 
-function registerpickupcreatedcallback(var_c9c301a888170672, callback) {
-  level.br_pickups.createcallbacks[var_c9c301a888170672] = callback;
+function registerpickupcreatedcallback(scriptabledefname, callback) {
+  level.br_pickups.createcallbacks[scriptabledefname] = callback;
 }
 
 function isweaponpickupitem(item) {
@@ -4371,14 +4371,14 @@ function br_ammo_update_ammotype_weapons(player, ammotype, newweaponstock) {
 
         for(i = 0; i < getplayerbackpacksize(player); i++) {
           if(player getlootidatbackpackindex(i) == lootid) {
-            var_750fcc188317845a[i] = player function_897b29adb37f06a7(i);
+            var_750fcc188317845a[i] = player getquantityatbackpackindex(i);
           }
         }
 
         var_2c20ea06f37f490a = tablesort(var_750fcc188317845a, "up");
 
         foreach(index in var_2c20ea06f37f490a) {
-          slotquantity = player function_897b29adb37f06a7(index);
+          slotquantity = player getquantityatbackpackindex(index);
 
           if(var_efb882bf4f27ee85 <= slotquantity) {
             function_db1dd76061352e5b(index, var_efb882bf4f27ee85);
@@ -4893,7 +4893,7 @@ function function_c50d56273471bf54() {
   println("<dev string:x22f>");
 }
 
-function additemtobackpack(lootid, pickup, var_70e660487c2924ec, var_75f83bdffeda824b) {
+function additemtobackpack(lootid, pickup, dontdropleftover, var_75f83bdffeda824b) {
   assertex(isDefined(lootid) || isDefined(pickup), "lootID or pickup not defined in addItemToBackpack in br_dmz_inventory.gsc");
 
   if(!isDefined(lootid) || !isDefined(pickup)) {
@@ -4912,7 +4912,7 @@ function additemtobackpack(lootid, pickup, var_70e660487c2924ec, var_75f83bdffed
     }
 
     function_71e56bb092fd2574(lootid);
-    thread function_a0ccc23064473a05(index, lootid, pickup.count);
+    thread setbackpackitematindex(index, lootid, pickup.count);
     return 0;
   } else if(function_f6f8c1fc9549eaf6(lootid)) {}
 
@@ -4938,7 +4938,7 @@ function additemtobackpack(lootid, pickup, var_70e660487c2924ec, var_75f83bdffed
   quantity = setbackpackitem(lootid, pickup);
 
   if(quantity > 0) {
-    if(!istrue(var_70e660487c2924ec)) {
+    if(!istrue(dontdropleftover)) {
       dropinfo = getitemdroporiginandangles(0, self.origin, self.angles, self, undefined);
       item = spawnpickup(pickup.scriptablename, dropinfo, quantity, 1, undefined, 0);
       return 0;
@@ -4998,16 +4998,16 @@ function function_71e56bb092fd2574(lootid) {
 function function_9f3a7767f1c1bd9e(lootid, index, quantity) {
   total = quantity;
   total += self getplayerdata("cp", "dmzBackpack", index, "quantity");
-  thread function_a0ccc23064473a05(index, lootid, total);
+  thread setbackpackitematindex(index, lootid, total);
 }
 
 function function_91a0bab850d7db10(index, lootid, maxcount, pickupquantity, slotquantity) {
   leftover = slotquantity + pickupquantity - maxcount;
-  thread function_a0ccc23064473a05(index, lootid, maxcount);
+  thread setbackpackitematindex(index, lootid, maxcount);
   return leftover;
 }
 
-function function_a0ccc23064473a05(index, lootid, quantity) {
+function setbackpackitematindex(index, lootid, quantity) {
   ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(lootid);
 
   println(self.name + "<dev string:x2b2>" + index + "<dev string:x2cd>" + lootid + "<dev string:x2cd>" + quantity + "<dev string:x2d0>");
@@ -5094,7 +5094,7 @@ function function_1a13107253c400d(looter, backpack) {
   }
 
   looter playsoundtoplayer("cp_open_backpack", looter);
-  scripts\cp\loot_system::function_30f5ea60517f9e06(looter, backpack);
+  scripts\cp\loot_system::openlootablecontainer(looter, backpack);
 }
 
 function function_37be6e543436f3b3(lootid, origin) {
@@ -5104,14 +5104,14 @@ function function_37be6e543436f3b3(lootid, origin) {
   playpickupfeedback(pickup);
 }
 
-function playpickupfeedback(pickupent, var_a5b2c541413aa895) {
+function playpickupfeedback(pickupent, bautouse) {
   pickup_sfx = "br_pickup_generic";
   icontype = undefined;
 
   if(isDefined(pickupent.scriptablename)) {
     if(isplunder(pickupent.scriptablename)) {
       pickup_sfx = getcashsoundaliasforplayer(self, pickupent.scriptablename);
-    } else if(isDefined(level.br_pickups.br_pickupsfx[pickupent.scriptablename]) && level.br_pickups.br_pickupsfx[pickupent.scriptablename] != #"" && !(getdvarint(@ "scr_br_skiplegendarypickupsound", 0) != 0 && level.br_pickups.br_pickupsfx[pickupent.scriptablename] == function_1823ff50bb28148d("br_legendary_loot_pickup"))) {
+    } else if(isDefined(level.br_pickups.br_pickupsfx[pickupent.scriptablename]) && level.br_pickups.br_pickupsfx[pickupent.scriptablename] != #"" && !(getdvarint(@ "scr_br_skiplegendarypickupsound", 0) != 0 && level.br_pickups.br_pickupsfx[pickupent.scriptablename] == getxhash("br_legendary_loot_pickup"))) {
       pickup_sfx = level.br_pickups.br_pickupsfx[pickupent.scriptablename];
     } else if(isweaponpickupitem(pickupent)) {
       pickup_sfx = "br_pickup_weap";
@@ -5170,7 +5170,7 @@ function playpickupfeedback(pickupent, var_a5b2c541413aa895) {
     scripts\cp_mp\damagefeedback::hudicontype(icontype);
   }
 
-  if(!istrue(var_a5b2c541413aa895)) {
+  if(!istrue(bautouse)) {
     thread function_630bb1e4fdf27c6c(pickupent);
   }
 }
@@ -5329,12 +5329,12 @@ function function_8a160d9935d47f5e(ref, type, quantity) {
   return function_e01d9736b2d100ac(lootid, quantity);
 }
 
-function additemtobackpackbyref(ref, type, quantity, var_70e660487c2924ec) {
+function additemtobackpackbyref(ref, type, quantity, dontdropleftover) {
   lootid = scripts\cp_mp\utility\loot::getlootidfromref(ref);
   fakepickup = spawnStruct();
   fakepickup.scriptablename = scripts\cp_mp\utility\loot::getscriptablefromlootid(lootid);
   fakepickup.count = quantity;
-  return additemtobackpack(lootid, fakepickup, var_70e660487c2924ec);
+  return additemtobackpack(lootid, fakepickup, dontdropleftover);
 }
 
 function canitemfitinbackpack(lootid, quantity) {
@@ -5412,7 +5412,7 @@ function function_8107fe0feec27866(player, weapon) {
   }
 
   attachments = getweaponattachments(weapon);
-  defaulttoidmap = scripts\cp_mp\weapon::function_792bacb194f6f862(rootname);
+  defaulttoidmap = scripts\cp_mp\weapon::getbaseweaponattachdefaulttoidmap(rootname);
   var_428a6c7cd65625c0 = 0;
 
   for(attachmentindex = 0; attachmentindex < attachments.size && var_428a6c7cd65625c0 < 7; attachmentindex++) {
@@ -5548,7 +5548,7 @@ function removesmallestitemstackbackpack(scriptablename, amountremoved) {
 
   for(i = 0; i < getplayerbackpacksize(self); i++) {
     if(getlootidatbackpackindex(i) == lootid) {
-      var_750fcc188317845a[i] = function_897b29adb37f06a7(i);
+      var_750fcc188317845a[i] = getquantityatbackpackindex(i);
     }
   }
 
@@ -5559,7 +5559,7 @@ function removesmallestitemstackbackpack(scriptablename, amountremoved) {
   var_5581023a8fc8d56d = tablesort(var_750fcc188317845a, "up");
 
   foreach(index in var_5581023a8fc8d56d) {
-    slotquantity = function_897b29adb37f06a7(index);
+    slotquantity = getquantityatbackpackindex(index);
 
     if(amountremoved <= slotquantity) {
       function_db1dd76061352e5b(index, amountremoved);
@@ -5573,7 +5573,7 @@ function removesmallestitemstackbackpack(scriptablename, amountremoved) {
   return amountremoved;
 }
 
-function function_8863381bf5a8c162(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_8863381bf5a8c162(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance.invalid_players) && istrue(instance.invalid_players[player.name])) {
     player thread scripts\cp\utility::hint_prompt("cant_use_yet", 1, 3);
     return;
@@ -5622,10 +5622,10 @@ function function_8863381bf5a8c162(instance, part, state, player, var_a5b2c54141
   }
 
   var_1cd29382d1867470 = player scripts\cp_mp\armor::function_600f6cf462e983f();
-  var_a81adeb0e1f89320 = player scripts\cp_mp\armor::function_47320a25b8ee003();
+  maxplates = player scripts\cp_mp\armor::function_47320a25b8ee003();
 
-  if(var_1cd29382d1867470 < var_a81adeb0e1f89320) {
-    player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(var_a81adeb0e1f89320 - var_1cd29382d1867470);
+  if(var_1cd29382d1867470 < maxplates) {
+    player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(maxplates - var_1cd29382d1867470);
     used = 1;
   }
 
@@ -5638,7 +5638,7 @@ function function_8863381bf5a8c162(instance, part, state, player, var_a5b2c54141
   return used;
 }
 
-function ammorestock_used(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function ammorestock_used(instance, part, state, player, bautouse, usestring) {
   assert(part == "military_ammo_restock" || part == "military_ammo_restock_train");
 
   if(br_ammorestock_playeruse(player)) {
@@ -5675,16 +5675,16 @@ function br_ammorestock_playeruse(player) {
 
   if(istrue(level.var_cee48b761f8ca747)) {
     var_1cd29382d1867470 = player scripts\cp_mp\armor::function_600f6cf462e983f();
-    var_a81adeb0e1f89320 = player scripts\cp_mp\armor::function_47320a25b8ee003();
+    maxplates = player scripts\cp_mp\armor::function_47320a25b8ee003();
 
-    if(var_1cd29382d1867470 < var_a81adeb0e1f89320) {
+    if(var_1cd29382d1867470 < maxplates) {
       slot = "health";
 
       if(!isDefined(player.equipment[slot]) || player scripts\cp_mp\equipment::getequipmentslotammo(slot) == 0) {
         player scripts\cp_mp\equipment::giveequipment("equip_armorplate", slot);
       }
 
-      player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(var_a81adeb0e1f89320 - var_1cd29382d1867470);
+      player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(maxplates - var_1cd29382d1867470);
       var_535a3f9c599a0c5f = 1;
     }
   }
@@ -5840,10 +5840,10 @@ function ammorestock_playeruse(player, loc) {
 
   if(istrue(level.var_cee48b761f8ca747)) {
     var_1cd29382d1867470 = player scripts\cp_mp\armor::function_600f6cf462e983f();
-    var_a81adeb0e1f89320 = player scripts\cp_mp\armor::function_47320a25b8ee003();
+    maxplates = player scripts\cp_mp\armor::function_47320a25b8ee003();
 
-    if(var_1cd29382d1867470 < var_a81adeb0e1f89320) {
-      player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(var_a81adeb0e1f89320 - var_1cd29382d1867470);
+    if(var_1cd29382d1867470 < maxplates) {
+      player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(maxplates - var_1cd29382d1867470);
     }
   }
 

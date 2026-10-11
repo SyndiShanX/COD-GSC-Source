@@ -155,7 +155,7 @@ function startfreefall(falltime, popinstant, var_32dcb143b4eb723a, startingveloc
     self skydive_setforcethirdpersonstatus(1);
   }
 
-  var_19bf98acee238bc1 = namespace_53fc9ddbb516e6e1::function_9d18a22123e54d05("infilParachuteVfx");
+  var_19bf98acee238bc1 = namespace_53fc9ddbb516e6e1::isfeatureenabledsharedfunc("infilParachuteVfx");
 
   if(scripts\cp_mp\utility\game_utility::isbrstylegametype() && (!istrue(isgulagrespawn) || var_19bf98acee238bc1) && istrue(level.var_492c3dce9458c51e)) {
     thread infilparachutevfx(getdvarint(@ "hash_96e4167dd77b8cee", 1) == 1 && var_19bf98acee238bc1);
@@ -198,11 +198,11 @@ function infilparachutevfx(endonground) {
       var_aa4f5ea34dfe428b = istrue(player.inlaststand);
       bisland = player isonground() || player isswimming() || player ishanging();
       var_a2b5f51a86d266ad = player isonladder();
-      var_b48e997e59346e83 = !scripts\cp_mp\utility\player_utility::isreallyalive(player);
+      bisdead = !scripts\cp_mp\utility\player_utility::isreallyalive(player);
       binvehicle = player isvehicleactive();
-      var_15d3f6cdd6f19d4d = player function_9cc921a57ff4deb5();
+      var_15d3f6cdd6f19d4d = player isonascender();
 
-      if(var_aa4f5ea34dfe428b || bisland || var_a2b5f51a86d266ad || var_b48e997e59346e83 || binvehicle || var_15d3f6cdd6f19d4d) {
+      if(var_aa4f5ea34dfe428b || bisland || var_a2b5f51a86d266ad || bisdead || binvehicle || var_15d3f6cdd6f19d4d) {
         break;
       }
 
@@ -394,7 +394,7 @@ function steerparachutinginternal(controlentity, var_d051bb0593db1e4) {
   var_998fd4b607b8174e = 100;
   var_d86bcc969a419e41 = -200;
   var_d866fe3ebb06e803 = 600;
-  var_2eea432f6e468ab2 = 240;
+  forwardaccel = 240;
   var_388b5f929fee9772 = 120;
   var_b02d7a2abe83a9ef = 60;
   var_6ad7cb3f09b4c201 = 48;
@@ -414,7 +414,7 @@ function steerparachutinginternal(controlentity, var_d051bb0593db1e4) {
     var_998fd4b607b8174e *= var_d051bb0593db1e4;
     var_d86bcc969a419e41 *= var_d051bb0593db1e4;
     var_d866fe3ebb06e803 *= var_d051bb0593db1e4;
-    var_2eea432f6e468ab2 *= var_d051bb0593db1e4;
+    forwardaccel *= var_d051bb0593db1e4;
     var_388b5f929fee9772 *= var_d051bb0593db1e4;
     var_b02d7a2abe83a9ef *= var_d051bb0593db1e4;
     maxstrafe *= var_d051bb0593db1e4;
@@ -435,7 +435,7 @@ function steerparachutinginternal(controlentity, var_d051bb0593db1e4) {
     playerangles = self getplayerangles(1);
     playerforward = anglesToForward(playerangles);
     playerright = anglestoright(playerangles);
-    var_65678a4c23282859 = ter_op(var_58724d69ca657b30 > 0, var_2eea432f6e468ab2, var_388b5f929fee9772);
+    var_65678a4c23282859 = ter_op(var_58724d69ca657b30 > 0, forwardaccel, var_388b5f929fee9772);
     var_d7bd29ab98f4f1a2 += var_58724d69ca657b30 * var_65678a4c23282859 * level.framedurationseconds;
     var_d7bd29ab98f4f1a2 += var_b02d7a2abe83a9ef * level.framedurationseconds * sign(var_998fd4b607b8174e - var_d7bd29ab98f4f1a2);
     var_d7bd29ab98f4f1a2 = clamp(var_d7bd29ab98f4f1a2, var_d86bcc969a419e41, var_d866fe3ebb06e803);
@@ -474,7 +474,7 @@ function isskydivestatedisabled() {
 function enablemanualpullchute(waitsec) {
   self endon("death_or_disconnect");
 
-  if(function_f3bb4f4911a1beb2("game", "isManualPullChuteDisable", self)) {
+  if(callsharedfunc("game", "isManualPullChuteDisable", self)) {
     return;
   }
 
@@ -871,7 +871,7 @@ function updateparachutestreamhint() {
     viewmode = 2;
   }
 
-  player function_670863fc4008c3d8(player.origin + (var_cbc44aa5555239a3[0], var_cbc44aa5555239a3[1], zhint), viewmode);
+  player setadditionalstreamposuntilcleared(player.origin + (var_cbc44aa5555239a3[0], var_cbc44aa5555239a3[1], zhint), viewmode);
 }
 
 function freefallfromplanestatemachine(falltime, popinstant, var_32dcb143b4eb723a, startingvelocity, isgulagrespawn, takeweapons) {
@@ -925,11 +925,11 @@ function freefallfromplanestatemachine(falltime, popinstant, var_32dcb143b4eb723
     var_aa4f5ea34dfe428b = istrue(player.inlaststand);
     bisland = (player isonground() || player isswimming() || player ishanging()) && (player.ffsm_state == 3 || player isskydivestatedisabled());
     var_a2b5f51a86d266ad = player isonladder();
-    var_b48e997e59346e83 = !scripts\cp_mp\utility\player_utility::isreallyalive(player);
+    bisdead = !scripts\cp_mp\utility\player_utility::isreallyalive(player);
     binvehicle = player isvehicleactive();
-    var_15d3f6cdd6f19d4d = player function_9cc921a57ff4deb5();
+    var_15d3f6cdd6f19d4d = player isonascender();
 
-    if(var_aa4f5ea34dfe428b || bisland || var_a2b5f51a86d266ad || var_b48e997e59346e83 || binvehicle || var_15d3f6cdd6f19d4d) {
+    if(var_aa4f5ea34dfe428b || bisland || var_a2b5f51a86d266ad || bisdead || binvehicle || var_15d3f6cdd6f19d4d) {
       if(scripts\engine\utility::issharedfuncdefined("hud", "ftue_trigger_landed_hint")) {
         player[[scripts\engine\utility::getsharedfunc("hud", "ftue_trigger_landed_hint")]]();
       }
@@ -991,7 +991,7 @@ function ffsm_introsetup(falltime, popinstant, var_32dcb143b4eb723a, startingvel
     self skydive_setforcethirdpersonstatus(1);
   }
 
-  var_19bf98acee238bc1 = namespace_53fc9ddbb516e6e1::function_9d18a22123e54d05("infilParachuteVfx");
+  var_19bf98acee238bc1 = namespace_53fc9ddbb516e6e1::isfeatureenabledsharedfunc("infilParachuteVfx");
 
   if(scripts\cp_mp\utility\game_utility::isbrstylegametype() && (!istrue(self.ffsm_isgulagrespawn) || var_19bf98acee238bc1) && istrue(level.var_492c3dce9458c51e)) {
     thread infilparachutevfx(getdvarint(@ "hash_96e4167dd77b8cee", 1) == 1 && var_19bf98acee238bc1);

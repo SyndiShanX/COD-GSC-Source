@@ -46,7 +46,7 @@ function function_c3889abf5cd6abbf(pathdata, speed, var_5b69959df7b5f457, navmes
   self notify("newFollowPath");
   self endon("newFollowPath");
 
-  while(!isDefined(level.var_2814a8f25a392eaa)) {
+  while(!isDefined(level.vehiclenavmeshlayer)) {
     waitframe();
   }
 
@@ -56,7 +56,7 @@ function function_c3889abf5cd6abbf(pathdata, speed, var_5b69959df7b5f457, navmes
     adjustedspeed = function_1d917ec593f5d37(pathdata.path[pathdata.index], speed);
 
     if(adjustedspeed != speed) {
-      self function_77320e794d35465a("p2p", "goalThreshold", adjustedspeed * 4);
+      self setconfigvalue("p2p", "goalThreshold", adjustedspeed * 4);
     }
 
     result = function_8f40a2c8678f8304(self.origin, pathdata.path[pathdata.index].origin, adjustedspeed, undefined, undefined, navmeshlayer);
@@ -98,13 +98,13 @@ function function_e8730cc0c5eac096(pathdata) {
 }
 
 function function_26e9e22860c819ce(start_point, end_point, speed, var_91b19cfb0a78c588) {
-  assert(isDefined(level.var_2814a8f25a392eaa), "scriptscp_mpvehiclesvehicle::vehicle_findNavmeshLayer must find a navmesh layer before this function is called. Or maybe this level has no navmesh?");
+  assert(isDefined(level.vehiclenavmeshlayer), "scriptscp_mpvehiclesvehicle::vehicle_findNavmeshLayer must find a navmesh layer before this function is called. Or maybe this level has no navmesh?");
 
   if(isDefined(var_91b19cfb0a78c588)) {
-    newpath = findpathcustom(start_point, getclosestpointonnavmesh(var_91b19cfb0a78c588, level.var_2814a8f25a392eaa), 0, 1, level.var_2814a8f25a392eaa);
+    newpath = findpathcustom(start_point, getclosestpointonnavmesh(var_91b19cfb0a78c588, level.vehiclenavmeshlayer), 0, 1, level.vehiclenavmeshlayer);
     end_point = function_c06bd2ea8930eebf(end_point, newpath);
   } else {
-    newpath = findpathcustom(start_point, getclosestpointonnavmesh(end_point, level.var_2814a8f25a392eaa), 0, 1, level.var_2814a8f25a392eaa);
+    newpath = findpathcustom(start_point, getclosestpointonnavmesh(end_point, level.vehiclenavmeshlayer), 0, 1, level.vehiclenavmeshlayer);
   }
 
   if(getDvar(@ "hash_5932a654e8efe1fa") != "<dev string:x1c>") {
@@ -126,7 +126,7 @@ function function_26e9e22860c819ce(start_point, end_point, speed, var_91b19cfb0a
     return;
   }
 
-  self function_77320e794d35465a("p2p", "goalPoint", self.origin);
+  self setconfigvalue("p2p", "goalPoint", self.origin);
 }
 
 function function_69695f8c7ed9c3f6(newpath, speed) {
@@ -143,7 +143,7 @@ function function_69695f8c7ed9c3f6(newpath, speed) {
       point = point.origin;
     }
 
-    self function_77320e794d35465a("p2p", "goalPoint", point);
+    self setconfigvalue("p2p", "goalPoint", point);
     dist = distancesquared(self.origin, point);
     time = undefined;
 
@@ -154,9 +154,9 @@ function function_69695f8c7ed9c3f6(newpath, speed) {
     key = function_906e53c2fb9d3f9c("p2p", "targetTime");
 
     if(isDefined(time)) {
-      self function_77320e794d35465a(key, time);
+      self setconfigvalue(key, time);
     } else {
-      self function_77320e794d35465a(key, 0.2);
+      self setconfigvalue(key, 0.2);
     }
 
     while(distancesquared(self.origin, point) > squared(200)) {
@@ -181,7 +181,7 @@ function fn_damagefeedback(hittype) {
 
 function function_6a0b2a08499a9842() {
   if(isDefined(self.aidriver)) {
-    self.aidriver.var_71c1911e983f326d = undefined;
+    self.aidriver.fn_shoulddodamage = undefined;
   }
 
   origin = self.origin + (0, 0, 40);
@@ -200,8 +200,8 @@ function function_6a0b2a08499a9842() {
     }
 
     if(isDefined(rider._blackboard) && isDefined(rider._blackboard.chosenvehicleanimpos)) {
-      if(istrue(rider._blackboard.var_41c9f8c7891f19da)) {
-        rider._blackboard.var_80912ec8ade08716 = 1;
+      if(istrue(rider._blackboard.chosenvehicleanimpos_deathimpulse)) {
+        rider._blackboard.chosenvehicleanimpos_deathragdoll = 1;
       }
     }
 
@@ -347,8 +347,8 @@ function function_1da2c31423c2676a(veh_speed) {
 }
 
 function function_8f40a2c8678f8304(start_point, end_point, speed, setmaxspeed, var_a967646668185a6d, navmeshlayer) {
-  navmeshlayer = default_to(navmeshlayer, level.var_2814a8f25a392eaa);
-  assert(isDefined(level.var_2814a8f25a392eaa), "scriptscp_mpvehiclesvehicle::vehicle_findNavmeshLayer must find a navmesh layer before this function is called. Or maybe this level has no navmesh?");
+  navmeshlayer = default_to(navmeshlayer, level.vehiclenavmeshlayer);
+  assert(isDefined(level.vehiclenavmeshlayer), "scriptscp_mpvehiclesvehicle::vehicle_findNavmeshLayer must find a navmesh layer before this function is called. Or maybe this level has no navmesh?");
   var_acb8205b4eae2fa0 = undefined;
 
   if(!isDefined(setmaxspeed)) {
@@ -418,10 +418,10 @@ function function_aa85eb39828a4d80(var_acb8205b4eae2fa0, speed, setmaxspeed, var
       continue;
     }
 
-    self function_77320e794d35465a("p2p", "goalPoint", point);
+    self setconfigvalue("p2p", "goalPoint", point);
 
     if(istrue(var_a967646668185a6d) && point == last_point) {
-      self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
+      self setconfigvalue("p2p", "brakeAtGoal", 1);
     }
 
     self.goalpoint = point;
@@ -437,9 +437,9 @@ function function_aa85eb39828a4d80(var_acb8205b4eae2fa0, speed, setmaxspeed, var
       key = function_906e53c2fb9d3f9c("p2p", "targetTime");
 
       if(isDefined(time)) {
-        self function_77320e794d35465a(key, time);
+        self setconfigvalue(key, time);
       } else {
-        self function_77320e794d35465a(key, 0.2);
+        self setconfigvalue(key, 0.2);
       }
     }
 
@@ -455,7 +455,7 @@ function function_aa85eb39828a4d80(var_acb8205b4eae2fa0, speed, setmaxspeed, var
 
 function function_b3b7d0915dc445c7(speed) {
   manualspeed = function_906e53c2fb9d3f9c("p2p", "manualSpeed");
-  self function_77320e794d35465a(manualspeed, scripts\engine\utility::mph_to_ips(speed));
+  self setconfigvalue(manualspeed, scripts\engine\utility::mph_to_ips(speed));
 }
 
 function function_9804c82501de981b(newpath, speed) {
@@ -472,7 +472,7 @@ function function_9804c82501de981b(newpath, speed) {
       point = point.origin;
     }
 
-    self function_77320e794d35465a("p2p", "goalPoint", point);
+    self setconfigvalue("p2p", "goalPoint", point);
     dist = distancesquared(self.origin, point);
     time = undefined;
 
@@ -483,9 +483,9 @@ function function_9804c82501de981b(newpath, speed) {
     key = function_906e53c2fb9d3f9c("p2p", "targetTime");
 
     if(isDefined(time)) {
-      self function_77320e794d35465a(key, time);
+      self setconfigvalue(key, time);
     } else {
-      self function_77320e794d35465a(key, 0.2);
+      self setconfigvalue(key, 0.2);
     }
 
     while(distancesquared(self.origin, point) > squared(200)) {

@@ -417,8 +417,8 @@ function function_710597a48791417e(has_flares, health_override, team_override, h
       if(weapon_str.weapon_type == "turret") {
         turret_model = weapon_str.turret_model;
 
-        if(isDefined(heli_spawner) && isDefined(heli_spawner.var_14cde247ac3313a4)) {
-          turret_model = heli_spawner.var_14cde247ac3313a4 + "::" + turret_model;
+        if(isDefined(heli_spawner) && isDefined(heli_spawner.skinoverride)) {
+          turret_model = heli_spawner.skinoverride + "::" + turret_model;
         }
 
         scripts\cp\helicopter\cp_helicopter::heli_mg_create(turret_model, weapon_str.weapon_asset, weapon_str.weapon_tag);
@@ -1119,9 +1119,9 @@ function function_a92995c66be865a5() {
 function function_21642cdfcb5639b() {
   while(true) {
     level.player waittill("weapon_fired", objweapon);
-    var_135823c8d383ee64 = objweapon issilenced();
+    bissilenced = objweapon issilenced();
 
-    if(var_135823c8d383ee64) {
+    if(bissilenced) {
       continue;
     }
 
@@ -1720,20 +1720,20 @@ function function_849379c4b0af1608(miss) {
     }
 
     var_ff8a73939086ebaa = var_f595234b61d94e5c / samples;
-    var_a474c9c03df90f98 = mph_to_ips(var_ff8a73939086ebaa);
+    inchespersecond = mph_to_ips(var_ff8a73939086ebaa);
     angles = vectortoangles(point2 - point1);
   } else if(isPlayer(ent)) {
     var_2ef08d4cdf09ce9d = 0;
-    var_a474c9c03df90f98 = length(ent getvelocity());
+    inchespersecond = length(ent getvelocity());
     angles = vectortoangles(ent getvelocity());
   } else {
     var_2ef08d4cdf09ce9d = 0;
-    var_a474c9c03df90f98 = 0;
+    inchespersecond = 0;
     angles = ent.angles;
   }
 
   start = self.origin;
-  var_48bd8d850d8a3be6 = var_a474c9c03df90f98 * var_5ed51674a2a22028;
+  var_48bd8d850d8a3be6 = inchespersecond * var_5ed51674a2a22028;
 
   if(function_4c52a19676ca8338(self) && isDefined(self.var_ad4d944cdb8d2e4f) && !isDefined(level.player.vehicle)) {
     var_3215317754272c93 = gettime() - self.var_ad4d944cdb8d2e4f;
@@ -1795,12 +1795,12 @@ function function_68604961afad4a37() {
     }
 
     fwd = anglesToForward((0, self.angles[1], 0));
-    var_cbac2203146ae84a = anglestoright((0, self.angles[1], 0));
+    rgt = anglestoright((0, self.angles[1], 0));
     self.var_8c7951652ac9e489 = fwd * af;
-    self.var_7406a4b155ec4d92 = var_cbac2203146ae84a * 200 + fwd * af;
-    self.var_c7364cbcd79b0831 = var_cbac2203146ae84a * -200 + fwd * af;
-    self.var_7d880633d0e7301a = var_cbac2203146ae84a * 350 + fwd * 1000;
-    self.var_ddbfda638cec2af9 = var_cbac2203146ae84a * -350 + fwd * 1000;
+    self.var_7406a4b155ec4d92 = rgt * 200 + fwd * af;
+    self.var_c7364cbcd79b0831 = rgt * -200 + fwd * af;
+    self.var_7d880633d0e7301a = rgt * 350 + fwd * 1000;
+    self.var_ddbfda638cec2af9 = rgt * -350 + fwd * 1000;
     self.var_f7222efac2245ca3 = fwd * 3200;
     wait 0.15;
   }
@@ -2432,8 +2432,8 @@ function function_675c274a9e8d73da() {
     pos.origin = groundpos;
     pos.angles = (0, 0, 0);
     crash_loc = pos;
-  } else if(isDefined(self.var_e66cdf24a93f7fb0)) {
-    crash_loc = self.var_e66cdf24a93f7fb0;
+  } else if(isDefined(self.preferred_crash_location)) {
+    crash_loc = self.preferred_crash_location;
   } else if(isDefined(level.vehicle.var_4bd4e750e5a8e895)) {
     crash_loc = [[level.vehicle.var_4bd4e750e5a8e895]](self);
   } else {
@@ -3176,11 +3176,11 @@ function function_7220a872b217b087(heli_str) {
       string = "<dev string:x297>";
 
       if(isDefined(tagname)) {
-        string = "<dev string:x298>" + function_3c8848a3a11b2553(tagname);
+        string = "<dev string:x298>" + getxhashsourcename(tagname);
       }
 
       if(isDefined(partname)) {
-        string = "<dev string:x29e>" + function_3c8848a3a11b2553(partname);
+        string = "<dev string:x29e>" + getxhashsourcename(partname);
       }
 
       iprintlnbold(string);
@@ -3224,7 +3224,7 @@ function function_7220a872b217b087(heli_str) {
     var_7cd7a4a529eb8a1e = undefined;
     heli_str.var_4d6d89935511dd2e = weap_class;
     heli_str.var_71efe19bc16fd96d = weap_name;
-    heli_str.var_ce3dd8a12dd78250 = meansofdeath;
+    heli_str.last_damage_mod = meansofdeath;
     heli_str.var_331bfe7308f68830 = damage;
 
     if(is_equal(weap_name, "iw8_spotter_scope_mp") || is_equal(weap_name, "iw9_laser_large_ir_mp") || is_equal(meansofdeath, "MOD_MELEE") || is_equal(weap_name, "throwingknife_cp")) {
@@ -3548,7 +3548,7 @@ function function_d57aad904fc851d3() {
 
     var_c8378b32a5cf3e4f = isDefined(self.var_71efe19bc16fd96d) ? self.var_71efe19bc16fd96d : "<dev string:x303>";
     var_74674d2f6a77d6dc = isDefined(self.var_4d6d89935511dd2e) ? self.var_4d6d89935511dd2e : "<dev string:x303>";
-    var_a04df03a42806368 = isDefined(self.var_ce3dd8a12dd78250) ? self.var_ce3dd8a12dd78250 : "<dev string:x303>";
+    var_a04df03a42806368 = isDefined(self.last_damage_mod) ? self.last_damage_mod : "<dev string:x303>";
     var_331bfe7308f68830 = isDefined(self.var_331bfe7308f68830) ? self.var_331bfe7308f68830 : "<dev string:x303>";
     var_8e9290b337610aa = isDefined(self.var_8e9290b337610aa) ? self.var_8e9290b337610aa : "<dev string:x303>";
     print3d(self.mdl_pristine.origin + (0, 0, 96), "<dev string:x30d>" + var_c8378b32a5cf3e4f, (1, 1, 1), undefined, 1, 1);

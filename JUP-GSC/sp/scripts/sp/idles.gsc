@@ -404,7 +404,7 @@ function random_idle_scene_controller_simple(guy) {
       }
     }
 
-    var_d36c326e46c200a3 = level.scr_anim[guy.animname]["idle_anims"][var_36720fb597bdfd42];
+    anim_to_play = level.scr_anim[guy.animname]["idle_anims"][var_36720fb597bdfd42];
     start_pos = getstartorigin(self.origin, self.angles, var_1c2b4d83937ae3a);
     start_angle = getstartangles(self.origin, self.angles, var_1c2b4d83937ae3a);
 
@@ -427,10 +427,10 @@ function random_idle_scene_controller_simple(guy) {
     guy animScripted("single anim", self.origin, self.angles, var_1c2b4d83937ae3a, undefined, undefined, 0.2);
     wait wait_time;
     guy clearanim(var_1c2b4d83937ae3a, 0.1);
-    guy animScripted("single anim", self.origin, self.angles, var_d36c326e46c200a3, undefined, undefined, 0.2);
-    var_a01b20054e035ef2 = getanimlength(var_d36c326e46c200a3);
+    guy animScripted("single anim", self.origin, self.angles, anim_to_play, undefined, undefined, 0.2);
+    var_a01b20054e035ef2 = getanimlength(anim_to_play);
     wait var_a01b20054e035ef2;
-    guy clearanim(var_d36c326e46c200a3, 0.1);
+    guy clearanim(anim_to_play, 0.1);
     waitframe();
   }
 }
@@ -506,9 +506,9 @@ function random_idle_scene_controller_simple_single(guys) {
 
     foreach(guy in guys) {
       var_1c2b4d83937ae3a = level.scr_anim[guy.animname]["idle_base"];
-      var_d36c326e46c200a3 = level.scr_anim[guy.animname]["idle_anims"][var_36720fb597bdfd42];
-      start_pos = getstartorigin(self.origin, self.angles, var_d36c326e46c200a3);
-      start_angle = getstartangles(self.origin, self.angles, var_d36c326e46c200a3);
+      anim_to_play = level.scr_anim[guy.animname]["idle_anims"][var_36720fb597bdfd42];
+      start_pos = getstartorigin(self.origin, self.angles, anim_to_play);
+      start_angle = getstartangles(self.origin, self.angles, anim_to_play);
       guy.origin = start_pos;
       guy.angles = start_angle;
       root = undefined;
@@ -517,8 +517,8 @@ function random_idle_scene_controller_simple_single(guys) {
         root = [[guy.anim_getrootfunc]]();
       }
 
-      guy animScripted("single anim", self.origin, self.angles, var_d36c326e46c200a3, undefined, root, 0.2);
-      transition_time = getanimlength(var_d36c326e46c200a3);
+      guy animScripted("single anim", self.origin, self.angles, anim_to_play, undefined, root, 0.2);
+      transition_time = getanimlength(anim_to_play);
     }
 
     wait transition_time;
@@ -597,12 +597,12 @@ function wait_check_player_anim_interference_group(start_anim, var_20d2ff2688b34
   }
 }
 
-function play_random_idles(actor, var_958ac5039223ed70, var_72e7f473bbab5d91) {
+function play_random_idles(actor, var_958ac5039223ed70, anime_array) {
   self endon("stop_idles");
   self endon("death");
   actor endon("death");
   spent_array = [];
-  anim_array = var_72e7f473bbab5d91;
+  anim_array = anime_array;
   random_index = undefined;
   actor.random_idles = 1;
 

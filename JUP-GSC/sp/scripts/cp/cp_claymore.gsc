@@ -567,7 +567,7 @@ function defusethink() {
   }
 }
 
-function spawn_claymore_group(var_9ea7808f138295b7, var_f8f2ebf05b9af55a, floating, var_254c09e3a6421a39, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c) {
+function spawn_claymore_group(var_9ea7808f138295b7, var_f8f2ebf05b9af55a, floating, canbepickedup, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c) {
   if(getdvarint(@ "hash_e87416769abd9b7", 0) != 0) {
     return;
   }
@@ -576,14 +576,14 @@ function spawn_claymore_group(var_9ea7808f138295b7, var_f8f2ebf05b9af55a, floati
   spawned_claymores = [];
 
   foreach(spawner in claymores) {
-    claymore = spawn_enemy_claymore(spawner.origin, spawner.angles, var_f8f2ebf05b9af55a, floating, var_254c09e3a6421a39, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c);
+    claymore = spawn_enemy_claymore(spawner.origin, spawner.angles, var_f8f2ebf05b9af55a, floating, canbepickedup, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c);
     spawned_claymores = array_add(spawned_claymores, claymore);
   }
 
   return spawned_claymores;
 }
 
-function spawn_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, floating, var_254c09e3a6421a39, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c) {
+function spawn_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, floating, canbepickedup, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c) {
   parent = undefined;
   claymore = undefined;
   weap_name = ter_op(function_240f7f4e57340e8f(), "jup_claymore_cp", "claymore_mp");
@@ -595,11 +595,11 @@ function spawn_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, floating, va
     claymore = magicgrenademanual(weap_name, origin + (0, 0, 10), (0, 0, 10));
   }
 
-  claymore childthread plant_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, parent, var_254c09e3a6421a39, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c);
+  claymore childthread plant_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, parent, canbepickedup, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c);
   return claymore;
 }
 
-function plant_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, parent, var_254c09e3a6421a39, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c) {
+function plant_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, parent, canbepickedup, var_617112b94b09e784, var_5c53eb01a38766b8, var_ed96a661e85f5e5c) {
   self endon("mine_triggered");
   self endon("mine_destroyed");
   self endon("death");
@@ -608,8 +608,8 @@ function plant_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, parent, var_
     angles = (0, 0, 0);
   }
 
-  if(!isDefined(var_254c09e3a6421a39)) {
-    var_254c09e3a6421a39 = 0;
+  if(!isDefined(canbepickedup)) {
+    canbepickedup = 0;
   }
 
   if(!isDefined(var_617112b94b09e784)) {
@@ -647,7 +647,7 @@ function plant_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, parent, var_
     thread function_1e994dd89f124753();
   }
 
-  if(istrue(var_254c09e3a6421a39)) {
+  if(istrue(canbepickedup)) {
     thread function_a29e39b6de05a901("tag_use", 1);
     self setHintString(&"COOP_GAME_PLAY/DISABLE_TRAP");
   }
@@ -678,7 +678,7 @@ function plant_enemy_claymore(origin, angles, var_f8f2ebf05b9af55a, parent, var_
   self setscriptablepartstate("arm", "active", 0);
   self.equipmentref = "equip_claymore";
 
-  if(istrue(var_617112b94b09e784) && !istrue(var_254c09e3a6421a39)) {
+  if(istrue(var_617112b94b09e784) && !istrue(canbepickedup)) {
     scripts\cp_mp\equipment_interact::_hacksetup();
 
     if(istrue(var_ed96a661e85f5e5c)) {
@@ -891,15 +891,15 @@ function enemy_claymore_watchfortrigger(var_f8f2ebf05b9af55a, var_ed96a661e85f5e
       var_af3b9624c6ab60 = array_combine(var_af3b9624c6ab60, getaiarray("allies"));
     }
 
-    var_6e67552299fa6895 = [];
+    playervehicles = [];
 
     foreach(player in level.players) {
       if(isDefined(player.vehicle)) {
-        var_6e67552299fa6895[var_6e67552299fa6895.size] = player.vehicle;
+        playervehicles[playervehicles.size] = player.vehicle;
       }
     }
 
-    var_af3b9624c6ab60 = array_combine(var_6e67552299fa6895, var_af3b9624c6ab60);
+    var_af3b9624c6ab60 = array_combine(playervehicles, var_af3b9624c6ab60);
 
     foreach(var_548b9f6609ce3883 in var_af3b9624c6ab60) {
       if(!isDefined(var_548b9f6609ce3883) || !isDefined(var_548b9f6609ce3883.classname)) {

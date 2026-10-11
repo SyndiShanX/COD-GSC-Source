@@ -12,7 +12,7 @@ function precache(offhand) {
 
 function fragfiremain(grenade, weapon) {
   grenade endon("frag_deleted");
-  function_216c67ab6749137a(self, undefined, "grenade_throw", "frag_grenade");
+  addbattlechatternotify(self, undefined, "grenade_throw", "frag_grenade");
   grenade thread notifyondelete();
   grenade waittill("explode", origin);
   playrumbleonposition("grenade_rumble", origin);

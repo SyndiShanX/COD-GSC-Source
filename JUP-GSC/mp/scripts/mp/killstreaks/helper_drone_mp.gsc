@@ -30,6 +30,6 @@ function helper_drone_init() {
 function helperdrone_updateheadicononjointeam(player) {}
 
 function function_3e5187005523c45c(helperdrone) {
-  helperdrone function_5226227bce83ebe9(3, helperdrone.team);
+  helperdrone setentityhudoutlinedata(3, helperdrone.team);
   return helperdrone;
 }

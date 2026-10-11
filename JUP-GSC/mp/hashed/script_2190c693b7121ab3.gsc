@@ -185,7 +185,7 @@ function private agent_spawngroup(var_56ac4b49cc795bc0) {
   assertex(validspawnpoints.size == var_8357fb6a08a850d5, "<dev string:x282>" + validspawnpoints.size + "<dev string:x2bf>" + var_8357fb6a08a850d5);
   var_fcdc7f62624c71ff = "guard";
   groupname = scripts\mp\ai_mp_controller::function_78759441c259f58a();
-  poiname = scripts\mp\poi::function_6cc445c02b5effac(validspawnpoints[0]);
+  poiname = scripts\mp\poi::poi_findpoioriginisin(validspawnpoints[0]);
   self.agents = [];
   self.groupname = groupname;
 
@@ -463,7 +463,7 @@ function function_ac069e47f0ef3b9e(task, vehicle) {
 }
 
 function vehicle_damagecallback(inflictor, attacker, damage, dflags, meansofdeath, objweapon, point, dir, hitloc, timeoffset, modelindex, attachtagname, partname, eventid) {
-  if(istrue(attacker.var_c0aa24316813868f) && objweapon.basename == "toma_proj_mp") {
+  if(istrue(attacker.isfakestreakent) && objweapon.basename == "toma_proj_mp") {
     var_45c7a5781e6ced58 = ter_op(self.vehiclename == "veh9_suv_1996", 3, 5);
     damage = int(ceil(self.maxhealth / var_45c7a5781e6ced58));
     self.debugdamage = 1;
@@ -1263,10 +1263,10 @@ function function_be4861d33da1689f(target, owner) {
       thread scripts\mp\utility\debug::drawsphere(firepos, radius, drawtimeseconds, (1, 0, 0));
     }
 
-    var_a0edd3f59d938fb1 = 256;
-    var_fa378e997a33a137 = owner scripts\cp_mp\killstreaks\toma_strike::findunobstructedfiringinfo(firepos, var_a0edd3f59d938fb1, targetforward, targetforward, targetright);
+    bombingradius = 256;
+    bombinginfo = owner scripts\cp_mp\killstreaks\toma_strike::findunobstructedfiringinfo(firepos, bombingradius, targetforward, targetforward, targetright);
     excludeents = getteamdata(self.teams[0], "players");
-    enemiesnearby = scripts\mp\utility\entity::function_d9ce8fb00f0e5fa1(var_fa378e997a33a137.goalpos, var_a0edd3f59d938fb1 * 3, undefined, excludeents);
+    enemiesnearby = scripts\mp\utility\entity::function_d9ce8fb00f0e5fa1(bombinginfo.goalpos, bombingradius * 3, undefined, excludeents);
 
     if(isDefined(enemiesnearby) && enemiesnearby.size > 0) {
       iprintln("<dev string:x5cd>");
@@ -1278,18 +1278,18 @@ function function_be4861d33da1689f(target, owner) {
     fxent = undefined;
 
     if(level.var_4e85625f13c359ab.var_74de30492b65dedb) {
-      fxent = spawnfx(level._effect["vfx_dom_flare"], var_fa378e997a33a137.goalpos);
+      fxent = spawnfx(level._effect["vfx_dom_flare"], bombinginfo.goalpos);
     } else {
       foreach(player in getteamdata(self.teams[0], "players")) {
         if(isalive(player)) {
-          fxent = spawnfxforclient(level._effect["vfx_dom_flare"], var_fa378e997a33a137.goalpos, player);
+          fxent = spawnfxforclient(level._effect["vfx_dom_flare"], bombinginfo.goalpos, player);
         }
       }
     }
 
     triggerfx(fxent);
     self.var_66549ca9bc89058c = array_add(self.var_66549ca9bc89058c, fxent);
-    owner scripts\cp_mp\killstreaks\toma_strike::tomastrike_firestrike(1, var_fa378e997a33a137, streakinfo);
+    owner scripts\cp_mp\killstreaks\toma_strike::tomastrike_firestrike(1, bombinginfo, streakinfo);
     var_e5f2aefa61cc09dc--;
 
     if(self.var_66549ca9bc89058c.size == 2) {
@@ -1307,7 +1307,7 @@ function function_b66446c0c80398c2() {
   fakeent.pers["deaths"] = 0;
   fakeent.pers["nextKillstreakID"] = 0;
   fakeent.team = "team_hundred_ninety_five";
-  fakeent.var_c0aa24316813868f = 1;
+  fakeent.isfakestreakent = 1;
   return fakeent;
 }
 
@@ -1422,7 +1422,7 @@ function function_317eb7e23a9f9ae9() {
 
   foreach(node in nodes) {
     vehicle = function_4944e32d48208083(node.script_string, node.origin, node.angles);
-    vehicle.var_a8f4bb03b366aa80 = 1;
+    vehicle.dontspawnhusk = 1;
     scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_setteam(vehicle, "<dev string:x692>");
     vehicles = array_add(vehicles, vehicle);
   }
@@ -1536,8 +1536,8 @@ function function_8f4bec208d29321a() {
   streakinfo = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("<dev string:x963>", agent);
   targetforward = anglesToForward(agent.angles);
   targetright = anglestoright(agent.angles);
-  var_fa378e997a33a137 = agent scripts\cp_mp\killstreaks\toma_strike::findunobstructedfiringinfo(host.origin, 256, targetforward, targetforward, targetright);
-  agent scripts\cp_mp\killstreaks\toma_strike::tomastrike_firestrike(1, var_fa378e997a33a137, streakinfo);
+  bombinginfo = agent scripts\cp_mp\killstreaks\toma_strike::findunobstructedfiringinfo(host.origin, 256, targetforward, targetforward, targetright);
+  agent scripts\cp_mp\killstreaks\toma_strike::tomastrike_firestrike(1, bombinginfo, streakinfo);
 }
 
 function function_d34f28c4111fcc3() {

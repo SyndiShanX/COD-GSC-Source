@@ -56,7 +56,7 @@
 #namespace namespace_c133516bfc1d803c;
 
 function function_bf4fd0b5a7c2f528() {
-  var_aafa18af5febbc3d = utility::function_ee26a62ef3d1372d(@ "hash_56d4c1121bffcdf1", 1, istrue(level.gametypebundle.var_3f9b0fde4d94c4e1));
+  var_aafa18af5febbc3d = utility::function_ee26a62ef3d1372d(@ "hash_56d4c1121bffcdf1", 1, istrue(level.gametypebundle.enablecontracts));
 
   if(!var_aafa18af5febbc3d) {
     thread function_a469ee97eed72149();
@@ -149,7 +149,7 @@ function function_7630fa0c7b8a8999() {
     contractdata.var_17e740da24ef39aa = function_854eaac890bc7c17(contractdata.ref, 25, -1);
 
     if(issharedfuncdefined(contractdata.ref, "get_contract_data")) {
-      function_f3bb4f4911a1beb2(contractdata.ref, "get_contract_data", contractdata);
+      callsharedfunc(contractdata.ref, "get_contract_data", contractdata);
     } else {
       switch (contractdata.ref) {
         case #"hash_f4a9126c03d3385b":
@@ -332,7 +332,7 @@ function inittablets() {
 
     foreach(tablet in tablets) {
       if(var_18d89c513b75caf6.size > 0) {
-        poi = poi::function_6cc445c02b5effac(tablet.origin);
+        poi = poi::poi_findpoioriginisin(tablet.origin);
         poiname = scripts\mp\poi::function_150af7f3a2874667(poi);
 
         if(isDefined(poiname) && isDefined(var_18d89c513b75caf6[poiname])) {
@@ -363,7 +363,7 @@ function inittablets() {
 
     for(i = level.contractmanager.hiddentablets.size - 1; i >= 0; i--) {
       tablet = level.contractmanager.hiddentablets[i];
-      poi = poi::function_6cc445c02b5effac(tablet.origin);
+      poi = poi::poi_findpoioriginisin(tablet.origin);
       poiname = scripts\mp\poi::function_150af7f3a2874667(poi);
 
       if(isDefined(poiname) && isDefined(var_18d89c513b75caf6[poiname]) && function_d857e2fd8227f1bd(tablet.task.type, 1) == 1) {
@@ -1200,7 +1200,7 @@ function onplayerkilled(attacker, victim) {
   }
 }
 
-function function_74e0aae435a09a51(victim) {
+function onplayereliminated(victim) {
   if(!isDefined(level.contractmanager) || !isDefined(victim)) {
     return;
   }
@@ -1315,7 +1315,7 @@ function packsplashparambits(contractindex, rewardcash) {
   return value;
 }
 
-function function_878ebcc241b54505(splashref, contractindex, rewardcash, team, delay, var_42b1e877ab187c6) {
+function function_878ebcc241b54505(splashref, contractindex, rewardcash, team, delay, splashlistoverride) {
   if(isDefined(delay) && delay > 0) {
     wait delay;
   }
@@ -1324,17 +1324,17 @@ function function_878ebcc241b54505(splashref, contractindex, rewardcash, team, d
   players = teams::getteamdata(team, "players");
 
   foreach(player in players) {
-    player thread hud_message::showsplash(splashref, params, undefined, undefined, undefined, var_42b1e877ab187c6);
+    player thread hud_message::showsplash(splashref, params, undefined, undefined, undefined, splashlistoverride);
   }
 }
 
-function displayteamsplash(team, splash_key, params, var_42b1e877ab187c6) {
+function displayteamsplash(team, splash_key, params, splashlistoverride) {
   assertex(isDefined(splash_key), "<dev string:x187>" + team);
   players = teams::getteamdata(team, "players");
-  displaysplashtoplayers(players, splash_key, params, var_42b1e877ab187c6);
+  displaysplashtoplayers(players, splash_key, params, splashlistoverride);
 }
 
-function displaysplashtoplayers(players, splash_key, params, var_42b1e877ab187c6) {
+function displaysplashtoplayers(players, splash_key, params, splashlistoverride) {
   assertex(isDefined(splash_key), "<dev string:x1c1>");
 
   foreach(player in players) {
@@ -1354,24 +1354,24 @@ function displaysplashtoplayers(players, splash_key, params, var_42b1e877ab187c6
       }
     }
 
-    displayplayersplash(player, splash_key, params, var_42b1e877ab187c6);
+    displayplayersplash(player, splash_key, params, splashlistoverride);
   }
 }
 
-function displayplayersplash(player, splash_key, params, var_42b1e877ab187c6) {
+function displayplayersplash(player, splash_key, params, splashlistoverride) {
   assertex(isDefined(splash_key), "<dev string:x187>" + player.name);
 
   if(isDefined(params) && isDefined(params.packedbits)) {
-    player thread hud_message::showsplash(splash_key, params.packedbits, undefined, undefined, undefined, var_42b1e877ab187c6);
+    player thread hud_message::showsplash(splash_key, params.packedbits, undefined, undefined, undefined, splashlistoverride);
     return;
   }
 
   if(isDefined(params) && isDefined(params.intvar)) {
-    player thread hud_message::showsplash(splash_key, params.intvar, undefined, undefined, undefined, var_42b1e877ab187c6);
+    player thread hud_message::showsplash(splash_key, params.intvar, undefined, undefined, undefined, splashlistoverride);
     return;
   }
 
-  player thread hud_message::showsplash(splash_key, undefined, undefined, undefined, undefined, var_42b1e877ab187c6);
+  player thread hud_message::showsplash(splash_key, undefined, undefined, undefined, undefined, splashlistoverride);
 }
 
 function function_4bcd7c36b22b9bec(splash_key) {
@@ -2597,7 +2597,7 @@ function function_7871e27c25160f63(notification, value) {
 
 function private function_60094dbeee6e39b0(tabletorigin) {
   isunderwater = 0;
-  waterheightz = function_b81e710fd636efab(tabletorigin);
+  waterheightz = getwaterheightatlocation(tabletorigin);
 
   if(isDefined(waterheightz)) {
     diffz = tabletorigin[2] - waterheightz;

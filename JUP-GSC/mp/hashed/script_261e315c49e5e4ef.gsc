@@ -458,7 +458,7 @@ function function_3241afdfec957cb9(player) {
       break;
     case #"hash_2b25ed45dea9b003":
       if(utility::issharedfuncdefined("sidequest_cursed", "supplyDropUsed")) {
-        utility::function_f3bb4f4911a1beb2("sidequest_cursed", "supplyDropUsed", player);
+        utility::callsharedfunc("sidequest_cursed", "supplyDropUsed", player);
       }
 
       break;

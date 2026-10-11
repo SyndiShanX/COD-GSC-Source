@@ -257,7 +257,7 @@ function getautopickupquantity(opener, lootid, quantity) {
       currentlootid = opener namespace_aead94004cf4c147::getlootidatbackpackindex(i);
 
       if(currentlootid == lootid) {
-        slotquantity = opener namespace_aead94004cf4c147::function_897b29adb37f06a7(i);
+        slotquantity = opener namespace_aead94004cf4c147::getquantityatbackpackindex(i);
 
         if(slotquantity < maxcount) {
           return int(max(0, slotquantity + quantity - maxcount));
@@ -505,7 +505,7 @@ function function_c01727794cd72a1c(itema, itemb) {
   return prioritya < priorityb;
 }
 
-function function_30f5ea60517f9e06(opener, container) {
+function openlootablecontainer(opener, container) {
   parentcontainer = container;
 
   if(function_e3081772bbf7a51c(opener, container)) {
@@ -1185,17 +1185,17 @@ function function_62ad0c002d54cbcc(player, container, var_142ee196b1c70723, loot
 
   if(isDefined(lootid) && lootid != 0) {
     if(!isDefined(weapon)) {
-      var_c9c301a888170672 = scripts\cp_mp\utility\loot::getscriptablefromlootid(lootid);
-      assert(isDefined(var_c9c301a888170672));
-      var_8eb93a779d9df6f7 = function_51f396445baa7fa6(var_c9c301a888170672);
+      scriptabledefname = scripts\cp_mp\utility\loot::getscriptablefromlootid(lootid);
+      assert(isDefined(scriptabledefname));
+      var_8eb93a779d9df6f7 = function_51f396445baa7fa6(scriptabledefname);
     } else if(isweapon(weapon)) {
       weaponclasstoken = scripts\cp_mp\weapon::getweaponclasstoken(weapon.basename);
-      var_c9c301a888170672 = "brloot_weapon_generic_" + weaponclasstoken;
-      var_8eb93a779d9df6f7 = function_51f396445baa7fa6(var_c9c301a888170672, weapon);
+      scriptabledefname = "brloot_weapon_generic_" + weaponclasstoken;
+      var_8eb93a779d9df6f7 = function_51f396445baa7fa6(scriptabledefname, weapon);
     } else {
       assert(isstring(weapon));
-      var_c9c301a888170672 = weapon;
-      var_8eb93a779d9df6f7 = function_51f396445baa7fa6(var_c9c301a888170672);
+      scriptabledefname = weapon;
+      var_8eb93a779d9df6f7 = function_51f396445baa7fa6(scriptabledefname);
     }
   }
 
@@ -1213,7 +1213,7 @@ function function_62ad0c002d54cbcc(player, container, var_142ee196b1c70723, loot
   player setclientomnvar(var_142ee196b1c70723, var_453ae8156fbdc0de);
 }
 
-function function_446c7ad7bcc70992(player, container, index, lootid, quantity, var_c9c301a888170672) {
+function function_446c7ad7bcc70992(player, container, index, lootid, quantity, scriptabledefname) {
   if(function_c26e54ffd0c8be94(container, index)) {
     function_b1423adeced14528(player, index - 11, lootid, quantity);
     return;
@@ -1233,7 +1233,7 @@ function function_446c7ad7bcc70992(player, container, index, lootid, quantity, v
 
   if(isDefined(typedata)) {
     if(typedata.typename == "weapon") {
-      function_62ad0c002d54cbcc(player, container, "loot_container_item_" + index, lootid, var_c9c301a888170672);
+      function_62ad0c002d54cbcc(player, container, "loot_container_item_" + index, lootid, scriptabledefname);
     } else {
       player setclientomnvar("loot_container_item_" + index, lootid);
     }
@@ -1886,7 +1886,7 @@ function function_a92926d5b02cf6ed(player, container, itemtype, overridedist) {
     scripts\mp\gametypes\br_weapons::function_ae30366a2d519a57(player, weaponindex, pastteam);
   }
 
-  scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onPickupWeapon", player, weaponslotobj, metadata);
+  scripts\engine\utility::callsharedfunc("pmc_missions", "onPickupWeapon", player, weaponslotobj, metadata);
   function_505e8eb7e77704c5(player, container);
 
   if(function_f3557caf4562bff7(container)) {
@@ -2080,7 +2080,7 @@ function function_f0617ad70b7e7792(containerslot, backpackslot, container) {
   var_3c295612e84d714 = isDefined(var_2789584b4d4cb228) && scripts\mp\gametypes\br_pickups::function_e4b6260dbb04b43d(var_2789584b4d4cb228);
 
   if(function_f3557caf4562bff7(container) && scripts\engine\utility::issharedfuncdefined(backpacklootid, "canQuickDrop")) {
-    if(!scripts\engine\utility::function_f3bb4f4911a1beb2(backpacklootid, "canQuickDrop", self)) {
+    if(!scripts\engine\utility::callsharedfunc(backpacklootid, "canQuickDrop", self)) {
       self setclientomnvar("loot_container_open", 0);
       container notify("closed");
       scripts\mp\hud_message::showerrormessage(level.br_pickups.var_58d0559b458fd450);
@@ -2217,7 +2217,7 @@ function function_f0617ad70b7e7792(containerslot, backpackslot, container) {
           newent = scripts\mp\gametypes\br_pickups::spawnpickup(scriptablename, dropinfo, backpackquantity, 1, undefined, 0);
 
           if(isDefined(newent)) {
-            scripts\engine\utility::function_f3bb4f4911a1beb2(scriptablename, "dropped", newent, self, dropinfo.origin);
+            scripts\engine\utility::callsharedfunc(scriptablename, "dropped", newent, self, dropinfo.origin);
           }
         }
       }
@@ -2291,7 +2291,7 @@ function function_e183b2e94298bb75(loadoutindex, player, container, itemtype) {
       weaponslot = 1;
     }
 
-    scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onPickupWeapon", player, weaponslotobj, metadata);
+    scripts\engine\utility::callsharedfunc("pmc_missions", "onPickupWeapon", player, weaponslotobj, metadata);
     namespace_a38a2e1fe7519183::function_5d94b2dfabbc4cce(player, weaponslotobj, weaponslot, 1, metadata);
     function_505e8eb7e77704c5(player, container);
 
@@ -2790,7 +2790,7 @@ function function_f3c9e05d4767d037(lootid, player, container, index) {
   spawnedbackpack setscriptablepartstate("body", "partially_open_usable");
 
   if(isDefined(container.opener)) {
-    scripts\mp\loot::function_30f5ea60517f9e06(container.opener, spawnedbackpack);
+    scripts\mp\loot::openlootablecontainer(container.opener, spawnedbackpack);
   }
 
   scripts\mp\gametypes\br_pickups::loothide(container, "body");
@@ -2827,7 +2827,7 @@ function function_3883d0bb982156f3(container, backpack) {
   }
 
   foreach(item in backpack.contents) {
-    scripts\engine\utility::function_f3bb4f4911a1beb2(item["lootID"], "addedToContainer", backpack);
+    scripts\engine\utility::callsharedfunc(item["lootID"], "addedToContainer", backpack);
   }
 }
 

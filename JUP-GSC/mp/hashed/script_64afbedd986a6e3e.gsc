@@ -227,17 +227,17 @@ function function_fba03eb610498694() {
   level.var_4beddfdc7466d52a = undefined;
 }
 
-function function_956cfd575691a5d9(var_6e450c4f40b511ee, var_7a511a9369ed49e5, n_priority, var_aaa744342068977a) {
+function function_956cfd575691a5d9(str_music_state, var_7a511a9369ed49e5, n_priority, var_aaa744342068977a) {
   if(!isDefined(game["zombiemusic_bank"])) {
     game["zombiemusic_bank"] = [];
   }
 
   var_9e2dc14ec772ce23 = undefined;
-  tokens = strtok(var_6e450c4f40b511ee, "#");
+  tokens = strtok(str_music_state, "#");
 
   if(tokens.size > 1) {
     var_9e2dc14ec772ce23 = tokens[0];
-    var_6e450c4f40b511ee = tokens[1];
+    str_music_state = tokens[1];
   } else if(isDefined(level.var_4beddfdc7466d52a)) {
     var_9e2dc14ec772ce23 = level.var_4beddfdc7466d52a;
   }
@@ -250,13 +250,13 @@ function function_956cfd575691a5d9(var_6e450c4f40b511ee, var_7a511a9369ed49e5, n
     game["zombiemusic_bank"][var_9e2dc14ec772ce23] = [];
   }
 
-  game["zombiemusic_bank"][var_9e2dc14ec772ce23][var_6e450c4f40b511ee] = spawnStruct();
-  game["zombiemusic_bank"][var_9e2dc14ec772ce23][var_6e450c4f40b511ee].n_priority = n_priority;
-  game["zombiemusic_bank"][var_9e2dc14ec772ce23][var_6e450c4f40b511ee].array_musicstates = var_7a511a9369ed49e5;
-  game["zombiemusic_bank"][var_9e2dc14ec772ce23][var_6e450c4f40b511ee].var_aaa744342068977a = 0;
+  game["zombiemusic_bank"][var_9e2dc14ec772ce23][str_music_state] = spawnStruct();
+  game["zombiemusic_bank"][var_9e2dc14ec772ce23][str_music_state].n_priority = n_priority;
+  game["zombiemusic_bank"][var_9e2dc14ec772ce23][str_music_state].array_musicstates = var_7a511a9369ed49e5;
+  game["zombiemusic_bank"][var_9e2dc14ec772ce23][str_music_state].var_aaa744342068977a = 0;
 
   if(isDefined(var_aaa744342068977a)) {
-    game["zombiemusic_bank"][var_9e2dc14ec772ce23][var_6e450c4f40b511ee].var_aaa744342068977a = var_aaa744342068977a;
+    game["zombiemusic_bank"][var_9e2dc14ec772ce23][str_music_state].var_aaa744342068977a = var_aaa744342068977a;
   }
 }
 

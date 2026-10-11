@@ -61,12 +61,12 @@ function function_136bf6bcbf6c4cad() {
   }
 }
 
-function loot_pickup(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function loot_pickup(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance.type) && instance.type == "armor_plate_restock_cp") {
     var_1cd29382d1867470 = player scripts\cp_mp\armor::function_600f6cf462e983f();
-    var_a81adeb0e1f89320 = player scripts\cp_mp\armor::function_47320a25b8ee003();
+    maxplates = player scripts\cp_mp\armor::function_47320a25b8ee003();
 
-    if(var_1cd29382d1867470 >= var_a81adeb0e1f89320) {
+    if(var_1cd29382d1867470 >= maxplates) {
       player scripts\cp\cp_hud_message::showerrormessage("MP_INGAME_ONLY/ARMOR_RESTOCK_STOCK_FULL");
       return 0;
     }
@@ -81,7 +81,7 @@ function loot_pickup(instance, part, state, player, var_a5b2c541413aa895, usestr
       }
     }
 
-    var_6633986c5ebf1e8 = var_a81adeb0e1f89320 - var_1cd29382d1867470;
+    var_6633986c5ebf1e8 = maxplates - var_1cd29382d1867470;
 
     if(var_6633986c5ebf1e8 > 3) {
       var_6633986c5ebf1e8 = 3;
@@ -98,7 +98,7 @@ function loot_pickup(instance, part, state, player, var_a5b2c541413aa895, usestr
     var_e6ab079a55858647.count = 0;
     player scripts\cp\pickups::takeequipmentpickup(var_e6ab079a55858647, 0, undefined, undefined);
 
-    if(var_1cd29382d1867470 < var_a81adeb0e1f89320) {
+    if(var_1cd29382d1867470 < maxplates) {
       player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(var_6633986c5ebf1e8);
     }
 
@@ -258,18 +258,18 @@ function give_loot_based_on_pickup(part, player) {
       break;
     case #"hash_10174da3698669e3":
       if(isDefined(level.var_aa7bbd29dbf244d7)) {
-        var_a81adeb0e1f89320 = scripts\cp_mp\armor::function_47320a25b8ee003();
+        maxplates = scripts\cp_mp\armor::function_47320a25b8ee003();
         var_364d691b501cd27f = scripts\cp_mp\armor::function_600f6cf462e983f();
-        var_687d4b05cfa572cc = var_a81adeb0e1f89320 - var_364d691b501cd27f;
+        var_687d4b05cfa572cc = maxplates - var_364d691b501cd27f;
         player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(level.var_aa7bbd29dbf244d7);
       } else if(part == "brloot_plate_pouch") {
         if(!istrue(player.hasplatepouch)) {
           player.hasplatepouch = 1;
         }
 
-        var_a81adeb0e1f89320 = player scripts\cp_mp\armor::function_47320a25b8ee003();
+        maxplates = player scripts\cp_mp\armor::function_47320a25b8ee003();
         var_364d691b501cd27f = player scripts\cp_mp\armor::function_600f6cf462e983f();
-        var_2f7b6d2030d5b87a = int(var_a81adeb0e1f89320 - var_364d691b501cd27f);
+        var_2f7b6d2030d5b87a = int(maxplates - var_364d691b501cd27f);
 
         if(var_2f7b6d2030d5b87a <= 0) {
           return 0;
@@ -636,9 +636,9 @@ function function_46a2b7d2ad2bdc13(interaction, player) {
   player.hasplatepouch = 1;
   player setclientomnvar("ui_br_has_plate_pouch", 1);
   player thread scripts\cp\cp_hud_message::showsplash("br_plate_pouch_pickup");
-  var_a81adeb0e1f89320 = player scripts\cp_mp\armor::function_47320a25b8ee003();
+  maxplates = player scripts\cp_mp\armor::function_47320a25b8ee003();
   var_364d691b501cd27f = player scripts\cp_mp\armor::function_600f6cf462e983f();
-  player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(int(var_a81adeb0e1f89320 - var_364d691b501cd27f));
+  player scripts\cp_mp\armor::function_9c6e9a6643b6c9a6(int(maxplates - var_364d691b501cd27f));
 
   if(istrue(level.var_b17f3dc7c65b1860)) {
     if(isDefined(interaction.target)) {
@@ -693,7 +693,7 @@ function getlootweaponref(lootitemid) {
   return level.lootweaponrefs[lootitemid];
 }
 
-function function_30f5ea60517f9e06(opener, container) {
+function openlootablecontainer(opener, container) {
   [items, lastvalidindex] = function_438749eb7a7b738(container.contents, opener, container);
   container.contents = items;
   opener.var_2fa5b49969def47 = container;

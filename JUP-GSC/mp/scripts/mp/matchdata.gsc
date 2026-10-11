@@ -305,11 +305,11 @@ function recordrecentlyplayeddata() {
 
     foreach(player in level.players) {
       for(i = 4; i > 0; i--) {
-        map = player getplayerdata(level.var_5d69837cf4db0407, "mapsPlayed", i - 1);
-        player setplayerdata(level.var_5d69837cf4db0407, "mapsPlayed", i, map);
+        map = player getplayerdata(level.progressiongroup, "mapsPlayed", i - 1);
+        player setplayerdata(level.progressiongroup, "mapsPlayed", i, map);
       }
 
-      player setplayerdata(level.var_5d69837cf4db0407, "mapsPlayed", 0, currentmap);
+      player setplayerdata(level.progressiongroup, "mapsPlayed", 0, currentmap);
     }
   }
 }
@@ -366,7 +366,7 @@ function logaward(awardname) {
   time_ms = gettimefrommatchstart(gettime());
 
   if(isxhash(awardname)) {
-    awardname = function_f28fd66285fa2c9(awardname);
+    awardname = getxhashhexname(awardname);
   }
 
   self dlog_recordplayerevent("dlog_event_player_award", ["time_ms_from_match_start", time_ms, "award", awardname]);

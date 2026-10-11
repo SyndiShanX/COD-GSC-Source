@@ -59,7 +59,7 @@ function init() {
   level thread scripts\mp\killstreaks\throwback_marker::init();
   namespace_1fdb557af4bcd29e::function_d1f0b7aa511a0();
   scripts\cp\objective_trigger::function_eadc517453265031();
-  scripts\cp_mp\weapon::function_b4b623b6321cd521();
+  scripts\cp_mp\weapon::initkillstreakweaponmap();
   level.killstreakactivatedtime = [];
   level.non_detectable_killstreaks = ["iw8_spotter_scope_mp"];
 }

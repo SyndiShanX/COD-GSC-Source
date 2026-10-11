@@ -17,8 +17,8 @@ function init() {
   assert(isDefined(level.infilstruct));
   level.infilstruct.var_b381e33e977da440 = &function_55f2480b4b819aea;
   level.infilstruct.var_ae9e4023110acc6e = &function_ad4a7a73c7d7d9e0;
-  level.infilstruct.var_477bd548940c3a78 = "mp_donetsk_c130_intro";
-  level.infilstruct.var_10d27b439af13a2a = 3.2;
+  level.infilstruct.binkname = "mp_donetsk_c130_intro";
+  level.infilstruct.binktime = 3.2;
   var_1809e16510055e87 = ["cam_orbit_br_ac130_player1", "cam_orbit_br_ac130_player2", "cam_orbit_br_ac130_player3", "cam_orbit_br_ac130_player4"];
   function_226e337633a44059(var_1809e16510055e87);
   function_ad12d29d41483e8a("prematch", &function_cd7e1a37d5e2ca2b);
@@ -447,26 +447,26 @@ function function_ad4a7a73c7d7d9e0() {
     self.infilanimindex = 1;
   }
 
-  var_8e3afd40d3c95b46 = "j_prop_" + self.infilanimindex + 2;
+  player_link_tag = "j_prop_" + self.infilanimindex + 2;
   cos45 = cos(45);
 
   if(dotforward < -1 * cos45) {
-    return ["sdr_mp_infil_ac130_jump_genpropx10", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10"], "sdr_mp_infil_ac130_jump", var_8e3afd40d3c95b46];
+    return ["sdr_mp_infil_ac130_jump_genpropx10", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10"], "sdr_mp_infil_ac130_jump", player_link_tag];
   }
 
   if(dotright > cos45) {
-    return ["sdr_mp_infil_ac130_jump_genpropx10_90_l", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10_90_l"], "sdr_mp_infil_ac130_jump_90_l", var_8e3afd40d3c95b46];
+    return ["sdr_mp_infil_ac130_jump_genpropx10_90_l", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10_90_l"], "sdr_mp_infil_ac130_jump_90_l", player_link_tag];
   }
 
   if(dotright < -1 * cos45) {
-    return ["sdr_mp_infil_ac130_jump_genpropx10_90_r", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10_90_r"], "sdr_mp_infil_ac130_jump_90_r", var_8e3afd40d3c95b46];
+    return ["sdr_mp_infil_ac130_jump_genpropx10_90_r", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10_90_r"], "sdr_mp_infil_ac130_jump_90_r", player_link_tag];
   }
 
   if(dotright > 0) {
-    return ["sdr_mp_infil_ac130_jump_genpropx10_180_l", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10_180_l"], "sdr_mp_infil_ac130_jump_180_l", var_8e3afd40d3c95b46];
+    return ["sdr_mp_infil_ac130_jump_genpropx10_180_l", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10_180_l"], "sdr_mp_infil_ac130_jump_180_l", player_link_tag];
   }
 
-  return ["sdr_mp_infil_ac130_jump_genpropx10_180_r", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10_180_r"], "sdr_mp_infil_ac130_jump_180_r", var_8e3afd40d3c95b46];
+  return ["sdr_mp_infil_ac130_jump_genpropx10_180_r", level.br_anim["sdr_mp_infil_ac130_jump_genpropx10_180_r"], "sdr_mp_infil_ac130_jump_180_r", player_link_tag];
 }
 
 function function_52bedae2ced8e191() {

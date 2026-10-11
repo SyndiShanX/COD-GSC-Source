@@ -138,18 +138,18 @@ function init() {
   thread devgiveperks();
   thread devclearperks();
   thread function_2b05a1bb91e36782();
-  thread function_53a0f5e4d6bbc7a4();
-  thread function_179953844e4b32a3();
-  thread function_d274538e2f24b500();
+  thread devhurtplayer();
+  thread devhurtplayerreset();
+  thread devhurtplayerdirectional();
   thread function_575159fea0eac66b();
   thread function_5cc7bbf54f71fa3();
-  thread function_f4f9fc0c0543a738();
-  thread function_b35d4a9546104424();
-  thread function_b4a1b56a2c46ae2d();
+  thread devchangetimelimit();
+  thread devweaponxp();
+  thread devplayerxp();
   thread devhelipathdebugdraw();
-  thread function_c3c888333a91da1();
-  thread function_eb556484559de206();
-  thread function_cf49861d75a5ec29();
+  thread devlbguardpathdebugdraw();
+  thread devpredatormissiledebugdraw();
+  thread devprintdailyweeklychallenges();
   thread function_7dd78553c3cb9d38();
   thread function_9a0fa9b6ca2660ad();
   thread function_7ce9934f6628c684();
@@ -868,7 +868,7 @@ function function_9a0fa9b6ca2660ad() {
   left = (1, 0, 0);
   end = (0, 1, 0);
   hitpos = end;
-  var_ad791987651b3ba3 = start;
+  wingbasepos = start;
   ignorelist = undefined;
   runtrace = 1;
   waspressed = 0;
@@ -936,12 +936,12 @@ function function_9a0fa9b6ca2660ad() {
             hitpos = hits[0]["<dev string:x1ae>"];
           }
 
-          var_ad791987651b3ba3 = host.origin;
+          wingbasepos = host.origin;
         } else {
           line(start, hitpos, (0, 0, 1), 1, 0, 1);
         }
 
-        var_29f55613421c5159 = distance(start, hitpos);
+        disttohit = distance(start, hitpos);
         depthtest = 1;
 
         if(ignorelist.size > 1) {
@@ -953,10 +953,10 @@ function function_9a0fa9b6ca2660ad() {
         }
 
         sphere(hitpos, 10, (0, 1, 0), depthtest, 1);
-        print3d(hitpos + left * -20, "<dev string:xca>" + var_29f55613421c5159, (1, 1, 1), 1, 1, 1);
-        var_633eaa5f21008b6f = var_ad791987651b3ba3 + left * 50;
+        print3d(hitpos + left * -20, "<dev string:xca>" + disttohit, (1, 1, 1), 1, 1, 1);
+        var_633eaa5f21008b6f = wingbasepos + left * 50;
         line(var_633eaa5f21008b6f, hitpos, (0, 1, 0), 1, depthtest, 1);
-        var_3eacd3938ccd4b6c = var_ad791987651b3ba3 + left * -50;
+        var_3eacd3938ccd4b6c = wingbasepos + left * -50;
         line(var_3eacd3938ccd4b6c, hitpos, (0, 1, 0), 1, depthtest, 1);
         var_633eaa5f21008b6f += (0, 0, 100);
         line(var_633eaa5f21008b6f, hitpos, (0, 1, 0), 1, depthtest, 1);
@@ -2114,17 +2114,17 @@ function updatedevsettings() {
     splashtokens = strtok(splashref, "<dev string:x731>");
 
     if(splashtokens.size > 1) {
-      var_42b1e877ab187c6 = splashtokens[0];
+      splashlistoverride = splashtokens[0];
       splashref = splashtokens[1];
     } else {
-      var_42b1e877ab187c6 = undefined;
+      splashlistoverride = undefined;
     }
 
     if(getsubgametype() == "<dev string:x736>") {
       level thread scripts\mp\gametypes\br_gametype_dmz::showdmzsplash(splashref, level.players);
     } else {
       foreach(player in level.players) {
-        player thread scripts\mp\hud_message::showsplash(splashref, 1, undefined, undefined, undefined, var_42b1e877ab187c6);
+        player thread scripts\mp\hud_message::showsplash(splashref, 1, undefined, undefined, undefined, splashlistoverride);
       }
     }
 
@@ -2384,7 +2384,7 @@ function updatedevsettings() {
         event = eventstring;
 
         if(!isxhash(eventstring)) {
-          event = function_1823ff50bb28148d(eventstring);
+          event = getxhash(eventstring);
         }
 
         var_5cfb71d837b3eb36 = 1;
@@ -2781,7 +2781,7 @@ function updatedevsettings() {
         spawndata.spawntype = "<dev string:x975>";
         level.var_997cade62fad2069 = level thread scripts\cp_mp\vehicles\vehicle_airdrop::vehicle_airdrop(vehicleref, spawndata);
       } else {
-        level.var_997cade62fad2069 = player thread scripts\cp_mp\vehicles\vehicle::function_276beb60c7f60d1e(vehicleref);
+        level.var_997cade62fad2069 = player thread scripts\cp_mp\vehicles\vehicle::spawnplayerinvehicle(vehicleref);
       }
     }
 
@@ -3124,7 +3124,7 @@ function function_f4dcab3497d5fbd1(layout_name) {
 
     foreach(var_a712b718df4150fe, mod_set in level.mod_points[mod_point.var_a432aa2cd8d91c10].modsets) {
       if(isDefined(mod_set)) {
-        function_101e32b07ba7ff43(mod_set.ents, function_1823ff50bb28148d(var_a712b718df4150fe) == default_to(mod_point.var_77104470a1560df7, "<dev string:xca>"));
+        function_101e32b07ba7ff43(mod_set.ents, getxhash(var_a712b718df4150fe) == default_to(mod_point.var_77104470a1560df7, "<dev string:xca>"));
       }
     }
   }
@@ -5394,7 +5394,7 @@ function function_5bec6fc6eda8f898() {
     slot = level.equipment.table[equipment].defaultslot;
   }
 
-  equipblueprint = function_40fd49171fad19d3(blueprintname);
+  equipblueprint = getxhashasset(blueprintname);
 
   if(isDefined(var_2c513776ced53b01)) {
     equipvariants = getweaponblueprintnames(var_2c513776ced53b01);
@@ -5870,9 +5870,9 @@ function function_5d6535026d8a0ba8() {
 
 function function_a64aaa2a58a91089(player, reactive) {
   player _setsuit(player.operatorcustomization.suit);
-  player.operatorcustomization.var_3291e2cbec055766 = reactive;
-  player function_602b3de054f2a81(player.operatorcustomization.var_3291e2cbec055766);
-  println("<dev string:x1be1>" + player.operatorcustomization.var_3291e2cbec055766);
+  player.operatorcustomization.reactiveoperator = reactive;
+  player function_602b3de054f2a81(player.operatorcustomization.reactiveoperator);
+  println("<dev string:x1be1>" + player.operatorcustomization.reactiveoperator);
 }
 
 function function_96c18d9ffd1d401a() {
@@ -6012,8 +6012,8 @@ function function_c24ed5c1c6a1f2d3(player, skin) {
   var_8f23fe410ad2500e = scripts\cp_mp\operator::function_2dc6ef8b84dfec64(skin);
 
   if(isDefined(var_8f23fe410ad2500e)) {
-    player.operatorcustomization.var_3291e2cbec055766 = var_8f23fe410ad2500e;
-    player function_602b3de054f2a81(player.operatorcustomization.var_3291e2cbec055766);
+    player.operatorcustomization.reactiveoperator = var_8f23fe410ad2500e;
+    player function_602b3de054f2a81(player.operatorcustomization.reactiveoperator);
   }
 
   player scripts\mp\teams::setcharactermodels(bodymodelname, headmodelname, viewmodelname);
@@ -6057,7 +6057,7 @@ function function_c24ed5c1c6a1f2d3(player, skin) {
       player.operatorcustomization.clothtype = clothtype;
 
       foreach(player in level.players) {
-        player setclothtype(function_1823ff50bb28148d(clothtype));
+        player setclothtype(getxhash(clothtype));
       }
     }
   } else {
@@ -6081,7 +6081,7 @@ function function_c24ed5c1c6a1f2d3(player, skin) {
       player.operatorcustomization.geartype = geartype;
 
       foreach(player in level.players) {
-        player function_8abe5a968cc3c220(function_1823ff50bb28148d(geartype));
+        player setgeartype(getxhash(geartype));
       }
     }
 
@@ -6089,11 +6089,11 @@ function function_c24ed5c1c6a1f2d3(player, skin) {
   }
 
   foreach(player in level.players) {
-    player function_8abe5a968cc3c220(#"millghtgr");
+    player setgeartype(#"millghtgr");
   }
 }
 
-function function_5a137678f1239061() {
+function gui_setclothtype() {
   clothtype = getDvar(@ "hash_f0f5f0919b0e534f");
   setdevdvar(@ "hash_f0f5f0919b0e534f", "<dev string:xca>");
   player = level.player;
@@ -6113,7 +6113,7 @@ function function_5a137678f1239061() {
       player.operatorcustomization.clothtype = clothtype;
 
       foreach(player in level.players) {
-        player setclothtype(function_1823ff50bb28148d(clothtype));
+        player setclothtype(getxhash(clothtype));
       }
     }
   }
@@ -6139,7 +6139,7 @@ function function_c2b8b450a3cba9c0() {
       player.operatorcustomization.geartype = geartype;
 
       foreach(player in level.players) {
-        player function_8abe5a968cc3c220(function_1823ff50bb28148d(geartype));
+        player setgeartype(getxhash(geartype));
       }
     }
   }
@@ -6165,7 +6165,7 @@ function function_69716a0655c2632f() {
       player.operatorcustomization.bagtype = bagtype;
 
       foreach(player in level.players) {
-        player function_1863f51c1339d80f(function_1823ff50bb28148d(bagtype));
+        player setbagtype(getxhash(bagtype));
       }
     }
   }
@@ -7006,7 +7006,7 @@ function function_2b05a1bb91e36782() {
   thread function_2b05a1bb91e36782();
 }
 
-function function_53a0f5e4d6bbc7a4() {
+function devhurtplayer() {
   while(true) {
     if(getdvarint(@ "hash_93721f3cbd6d00c6") > 0) {
       break;
@@ -7029,10 +7029,10 @@ function function_53a0f5e4d6bbc7a4() {
   }
 
   setdevdvar(@ "hash_93721f3cbd6d00c6", 0);
-  thread function_53a0f5e4d6bbc7a4();
+  thread devhurtplayer();
 }
 
-function function_179953844e4b32a3() {
+function devhurtplayerreset() {
   while(true) {
     if(getdvarint(@ "hash_9e1de20ce2f61ca9") > 0) {
       break;
@@ -7044,10 +7044,10 @@ function function_179953844e4b32a3() {
   notbot = function_69dffe7a5cb1b4b9();
   notbot.health = 100;
   setdevdvar(@ "hash_9e1de20ce2f61ca9", 0);
-  thread function_179953844e4b32a3();
+  thread devhurtplayerreset();
 }
 
-function function_d274538e2f24b500() {
+function devhurtplayerdirectional() {
   while(true) {
     if(getDvar(@ "hash_58d027ad37e05b46") != "<dev string:xca>") {
       break;
@@ -7087,7 +7087,7 @@ function function_d274538e2f24b500() {
   }
 
   setdevdvar(@ "hash_58d027ad37e05b46", "<dev string:xca>");
-  thread function_d274538e2f24b500();
+  thread devhurtplayerdirectional();
 }
 
 function function_575159fea0eac66b() {
@@ -7213,7 +7213,7 @@ function function_5cc7bbf54f71fa3() {
   thread function_5cc7bbf54f71fa3();
 }
 
-function function_f4f9fc0c0543a738() {
+function devchangetimelimit() {
   timelimit_maprestart = getdvarfloat(@ "hash_9303077b6b67dda6", -1);
 
   if(timelimit_maprestart >= 0) {
@@ -7263,7 +7263,7 @@ function disableforfeit() {
   }
 }
 
-function function_b35d4a9546104424() {
+function devweaponxp() {
   prev = getdvarint(@ "hash_18cc90e3fd22526a");
 
   while(true) {
@@ -7298,7 +7298,7 @@ function function_b35d4a9546104424() {
       break;
   }
 
-  thread function_b35d4a9546104424();
+  thread devweaponxp();
 }
 
 function function_fd92cd457ce53d53() {
@@ -7306,7 +7306,7 @@ function function_fd92cd457ce53d53() {
   self endon("<dev string:x2261>");
 }
 
-function function_b4a1b56a2c46ae2d() {
+function devplayerxp() {
   prev = getdvarint(@ "hash_a468c3040709501b");
 
   while(true) {
@@ -7340,7 +7340,7 @@ function function_b4a1b56a2c46ae2d() {
       break;
   }
 
-  thread function_b4a1b56a2c46ae2d();
+  thread devplayerxp();
 }
 
 function function_c932c71bd99a784a() {
@@ -7445,7 +7445,7 @@ function devhelipathdebugdraw() {
   }
 }
 
-function function_c3c888333a91da1() {
+function devlbguardpathdebugdraw() {
   white = (1, 1, 1);
   red = (1, 0, 0);
   green = (0, 1, 0);
@@ -7549,7 +7549,7 @@ function drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, 
   }
 }
 
-function function_eb556484559de206() {
+function devpredatormissiledebugdraw() {
   white = (1, 1, 1);
   red = (1, 0, 0);
   green = (0, 1, 0);
@@ -7596,7 +7596,7 @@ function function_eb556484559de206() {
   }
 }
 
-function function_cf49861d75a5ec29() {
+function devprintdailyweeklychallenges() {
   while(true) {
     if(getDvar(@ "hash_f901de8bb079b09b") != "<dev string:xca>") {
       break;
@@ -7634,7 +7634,7 @@ function function_cf49861d75a5ec29() {
   }
 
   setdevdvar(@ "hash_f901de8bb079b09b", "<dev string:xca>");
-  thread function_cf49861d75a5ec29();
+  thread devprintdailyweeklychallenges();
 }
 
 function reflectionprobe_hide_hp() {
@@ -9434,7 +9434,7 @@ function function_ee00d21057357790() {
     if(getdvarint(@ "hash_d1415bb7a04b48f9") == 1 && isDefined(level.player)) {
       currentweapon = level.player getcurrentweapon();
       attachments = currentweapon.attachments;
-      default_attachments = function_6527364c1ecca6c6(currentweapon);
+      default_attachments = getweapondefaultattachments(currentweapon);
       printtoscreen2d(1000, 500, "<dev string:x29f6>", (1, 1, 1), 2);
       i = 0;
 
@@ -10215,14 +10215,14 @@ function outofboundsimmune() {
 }
 
 function private function_598312940d23c1fc() {
-  var_adbb5e703c3a3785 = undefined;
+  prevdebugactive = undefined;
 
   while(true) {
     waitframe();
     debugactive = getdvarint(@ "player_debugsprint") > 0;
 
-    if(!isDefined(var_adbb5e703c3a3785) || var_adbb5e703c3a3785 != debugactive) {
-      var_adbb5e703c3a3785 = debugactive;
+    if(!isDefined(prevdebugactive) || prevdebugactive != debugactive) {
+      prevdebugactive = debugactive;
 
       if(debugactive) {
         foreach(player in level.players) {
@@ -10496,7 +10496,7 @@ function function_19f8ce259f92c621() {
     }
 
     if(getDvar(@ "hash_f0f5f0919b0e534f") != "<dev string:xca>") {
-      thread function_5a137678f1239061();
+      thread gui_setclothtype();
     }
 
     if(getDvar(@ "hash_46a5925d26c9f0fa") != "<dev string:xca>") {
@@ -10733,7 +10733,7 @@ function explodevehicle() {
           vehicle function_b0af0dd0f9b4fddf(0);
         }
 
-        vehicle function_e4fe23e19f4bf900("<dev string:x3788>");
+        vehicle setdeffile("<dev string:x3788>");
       } else if(getdvarint(@ "hash_1fafe63a31eaf451", 0) != 0) {
         scripts\cp_mp\vehicles\vehicle_damage::function_ec4b6f058d183338(vehicle);
       } else if(getdvarint(@ "hash_f99c093ecda75788", 0) != 0) {
@@ -11207,12 +11207,12 @@ function function_4d6e7ec55fd3917d() {
     spawndata.spawntype = "<dev string:x975>";
     [vehicle, seatid] = scripts\cp_mp\vehicles\vehicle::function_84033ce50b8afce2(vehicleref, spawndata);
     vehicle addcomponent("<dev string:x3c57>");
-    vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3c5e>", 1);
-    vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3c6d>", 1);
-    vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3c84>", 300);
-    vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3c95>", 1);
-    vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3cab>", 0.5);
-    vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3cbf>", 4);
+    vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3c5e>", 1);
+    vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3c6d>", 1);
+    vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3c84>", 300);
+    vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3c95>", 1);
+    vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3cab>", 0.5);
+    vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3cbf>", 4);
     vehicle vehicle_turnengineon();
 
     if(!isDefined(level.devvehicles)) {
@@ -11249,9 +11249,9 @@ function function_4d6e7ec55fd3917d() {
           break;
         case 3:
           vehicle notify("<dev string:x3cf6>");
-          vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3d06>", 0);
-          vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3c5e>", 1);
-          vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3d15>", vehicle.origin);
+          vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3d06>", 0);
+          vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3c5e>", 1);
+          vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3d15>", vehicle.origin);
           vehicle stoppath();
           vehicle vehicle_setspeedimmediate(0, 1, 1);
           vehicle vehicle_cleardrivingstate();
@@ -11271,9 +11271,9 @@ function function_4d6e7ec55fd3917d() {
       if(vehicle.vehiclename == destroydvar) {
         level.devvehicles[index] = undefined;
         vehicle notify("<dev string:x3cf6>");
-        vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3d06>", 0);
-        vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3c5e>", 1);
-        vehicle function_77320e794d35465a("<dev string:x3c57>", "<dev string:x3d15>", vehicle.origin);
+        vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3d06>", 0);
+        vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3c5e>", 1);
+        vehicle setconfigvalue("<dev string:x3c57>", "<dev string:x3d15>", vehicle.origin);
         vehicle stoppath();
         vehicle vehicle_setspeedimmediate(0, 1, 1);
         vehicle vehicle_cleardrivingstate();

@@ -49,7 +49,7 @@ function autoexec main() {
 }
 
 function private function_11b424487e28934() {
-  if(!istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("warlords", "warlordIsDisabled", "WARLORD_CHEMIST"))) {
+  if(!istrue(scripts\engine\utility::callsharedfunc("warlords", "warlordIsDisabled", "WARLORD_CHEMIST"))) {
     namespace_609d2ee77dae3d8c::function_447c6ab4bea16b52("objective", "REV_OB_WARLORD", &namespace_75b9b66caa533c31::function_8abadf3d8f19384a, &namespace_d1d9f1596b655e40::function_fd69cf02ba4d90a2);
   }
 }
@@ -251,8 +251,8 @@ function function_5f43cd06008e387f() {
   }
 }
 
-function function_e06d209c6ac42e4c(var_2d9552508615d396, tripwire) {
-  var_2d9552508615d396 thread namespace_d3f3cf99d75d3345::function_abe80254fe179ec7(var_2d9552508615d396.origin, 1);
+function function_e06d209c6ac42e4c(triggeringent, tripwire) {
+  triggeringent thread namespace_d3f3cf99d75d3345::function_abe80254fe179ec7(triggeringent.origin, 1);
 }
 
 function function_b48154027e80e9c8(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset, modelindex, partname, objweapon) {
@@ -382,9 +382,9 @@ function private function_273365e63042c310(var_712a263a7ea760e, var_7128963a7ea3
   var_d06f14b85814a4c8 = var_debb750de57351e * 0.5;
   var_2100670c437cd4b0 = var_48f6987d66e459d6 * 0.5;
   var_3064cf7c293bbc6e = aabb["min"][0] + var_712a263a7ea760e * var_debb750de57351e + var_d06f14b85814a4c8;
-  var_3064d07c293bbea1 = aabb["min"][1] + var_7128963a7ea3f13 * var_48f6987d66e459d6 + var_2100670c437cd4b0;
+  cloudy = aabb["min"][1] + var_7128963a7ea3f13 * var_48f6987d66e459d6 + var_2100670c437cd4b0;
   var_3064cd7c293bb808 = aabb["min"][2];
-  return (var_3064cf7c293bbc6e, var_3064d07c293bbea1, var_3064cd7c293bb808);
+  return (var_3064cf7c293bbc6e, cloudy, var_3064cd7c293bb808);
 }
 
 function private function_dd653e96ed539114(var_5f1af3d2cf0d8d69, var_5b2481e83a7571ca) {
@@ -664,9 +664,9 @@ function private function_ab1752f09c7cf333() {
         toprightback = (aabb["<dev string:x39b>"][0], aabb["<dev string:x39b>"][1], aabb["<dev string:x39b>"][2]);
         bottomleftfront = (aabb["<dev string:x394>"][0], aabb["<dev string:x394>"][1], aabb["<dev string:x394>"][2]);
         bottomrightfront = (aabb["<dev string:x39b>"][0], aabb["<dev string:x394>"][1], aabb["<dev string:x394>"][2]);
-        var_2febbcb4c37b3b64 = (aabb["<dev string:x39b>"][0], aabb["<dev string:x394>"][1], aabb["<dev string:x394>"][2]);
-        var_3a64b6f876a6b09f = (aabb["<dev string:x39b>"][0], aabb["<dev string:x39b>"][1], aabb["<dev string:x394>"][2]);
-        scripts\cp_mp\utility\debug_utility::drawboxfrompoints(topleftfront, toprightfront, topleftback, toprightback, bottomleftfront, bottomrightfront, var_2febbcb4c37b3b64, var_3a64b6f876a6b09f, level.framedurationseconds, green);
+        bottomleftback = (aabb["<dev string:x39b>"][0], aabb["<dev string:x394>"][1], aabb["<dev string:x394>"][2]);
+        bottomrightback = (aabb["<dev string:x39b>"][0], aabb["<dev string:x39b>"][1], aabb["<dev string:x394>"][2]);
+        scripts\cp_mp\utility\debug_utility::drawboxfrompoints(topleftfront, toprightfront, topleftback, toprightback, bottomleftfront, bottomrightfront, bottomleftback, bottomrightback, level.framedurationseconds, green);
       }
 
       foreach(bodyguard in self.bodyguards) {
@@ -705,17 +705,17 @@ function function_5c459133d355fcd3() {
   }
 }
 
-function function_afa2965998bfa8cf(var_6f8af5eb76deac21) {
+function function_afa2965998bfa8cf(relevantinfostruct) {
   if(self.varianttag == "WARLORD_CHEMIST") {
-    foreach(player in var_6f8af5eb76deac21.playerlist) {
+    foreach(player in relevantinfostruct.playerlist) {
       player thread function_b85c41554955b2eb(self);
     }
   }
 }
 
-function function_9f559ae98d816f54(var_6f8af5eb76deac21) {
+function function_9f559ae98d816f54(relevantinfostruct) {
   if(self.varianttag == "WARLORD_CHEMIST") {
-    foreach(player in var_6f8af5eb76deac21.playerlist) {
+    foreach(player in relevantinfostruct.playerlist) {
       player notify("left_chemist_instance");
     }
   }

@@ -150,7 +150,7 @@ function function_2df0e672265f272f() {
     setDvar(@ "hash_503f548196f716a", 0.2);
   }
 
-  if(function_33d2520f3f4c794() || function_8f7452209f2fa982() || isplatformpc()) {
+  if(isplatformxb4() || isplatformps5() || isplatformpc()) {
     setDvar(@ "hash_6e3f8cef6be16b33", 1);
     setDvar(@ "hash_1ea8544d78048529", 1);
     setDvar(@ "hash_dacffbfd52c2fdc5", "32");
@@ -184,7 +184,7 @@ function infil() {
     setDvar(@ "hash_503f548196f716a", 0.2);
   }
 
-  if(function_33d2520f3f4c794() || function_8f7452209f2fa982() || isplatformpc()) {
+  if(isplatformxb4() || isplatformps5() || isplatformpc()) {
     setDvar(@ "hash_6e3f8cef6be16b33", 1);
     setDvar(@ "hash_1ea8544d78048529", 1);
     setDvar(@ "hash_dacffbfd52c2fdc5", "32");
@@ -216,7 +216,7 @@ function infil() {
     setDvar(@ "hash_503f548196f716a", 0);
   }
 
-  if(function_33d2520f3f4c794() || function_8f7452209f2fa982() || isplatformpc()) {
+  if(isplatformxb4() || isplatformps5() || isplatformpc()) {
     setDvar(@ "hash_6e3f8cef6be16b33", 1);
     setDvar(@ "hash_1ea8544d78048529", 1);
     setDvar(@ "hash_dacffbfd52c2fdc5", "32");

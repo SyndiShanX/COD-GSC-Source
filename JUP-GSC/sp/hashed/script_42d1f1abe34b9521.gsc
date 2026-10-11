@@ -13,10 +13,10 @@ function main(model, type, classname) {
   build_aianims(&setanims, &set_vehicle_anims, "techo");
   build_unload_groups(&unload_groups);
   build_husk(model, "veh9_civ_lnd_sedan_2009_vehphys_hsk_sp", "veh9_sedan_2009_physics_sp");
-  function_2660787ca33cf457(classname, "tag_door_front_left", ["tag_window_front_left", "tag_mirror_left"]);
-  function_2660787ca33cf457(classname, "tag_door_front_right", ["tag_window_front_right", "tag_mirror_right"]);
-  function_2660787ca33cf457(classname, "tag_door_back_left", ["tag_window_back_left"]);
-  function_2660787ca33cf457(classname, "tag_door_back_right", ["tag_window_back_right"]);
+  build_dependentparts(classname, "tag_door_front_left", ["tag_window_front_left", "tag_mirror_left"]);
+  build_dependentparts(classname, "tag_door_front_right", ["tag_window_front_right", "tag_mirror_right"]);
+  build_dependentparts(classname, "tag_door_back_left", ["tag_window_back_left"]);
+  build_dependentparts(classname, "tag_door_back_right", ["tag_window_back_right"]);
   function_2cf37d073c6bde84(classname, "headlight_front_left", "tag_light_front_left", "headlights");
   function_2cf37d073c6bde84(classname, "headlight_front_right", "tag_light_front_right", "headlights");
   function_2cf37d073c6bde84(classname, "taillight_back_left", "tag_light_back_left", "headlights");

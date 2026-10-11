@@ -37,7 +37,7 @@
 function init() {
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_match_start", &function_393baf20db478c0d);
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_match_end", &function_f5f91665fe4dba94);
-  namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_round_start", &function_8eeea3969df7e964);
+  namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_round_start", &on_round_start);
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_round_end", &on_round_end);
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_server_exit_level", &function_69ddf7a3e512a18a);
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_server_post_exit_level", &function_9b064138ff8c311b);
@@ -100,15 +100,15 @@ function function_393baf20db478c0d() {
 
   is_ranked = 0;
 
-  if(istrue(level.var_ec2fb549b15ad827) || istrue(level.var_77907d733abe8b63)) {
+  if(istrue(level.leagueplaymatch) || istrue(level.var_77907d733abe8b63)) {
     is_ranked = 1;
   }
 
   max_players_allowed = getdvarint(@ "party_maxplayers", -1);
-  frame_duration = function_676cfe2ab64ea758();
+  frame_duration = getframeduration();
   dlog_recordevent("dlog_event_mp_server_match_start", ["utc_start_time_s", utc_start_time_s, "map", level.script, "game_type", game_type, "is_playtest", getdvarint(@ "hash_2e58447fa1ca4f20") && getdvarint(@ "hash_51f11c2e135abc7"), "experiment_name", getDvar(@ "experiment_name"), "dedi_server_guid", getdediserverguid(), "sub_game_type", sub_game_type, "playlist_id", playlist_id, "playlist_name", playlist_name, "is_offline", !level.onlinegame, "max_players_allowed", max_players_allowed, "frame_duration", frame_duration, "is_ranked", is_ranked]);
   var_37aab353fe84a505 = "{\"game_type\":\"" + game_type + "\",\"sub_game_type\":\"" + sub_game_type + "\",\"map\":\"" + level.script + "\"}";
-  function_7bcd667fc073fc12("server_match_start", var_37aab353fe84a505);
+  recordeventforsreparser("server_match_start", var_37aab353fe84a505);
 
   if(scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
     utility::trycall(level.matchdata_br_onmatchstart);
@@ -168,7 +168,7 @@ function function_f5f91665fe4dba94(data) {
   max_players_allowed = getdvarint(@ "party_maxplayers", -1);
   is_ranked = 0;
 
-  if(istrue(level.var_ec2fb549b15ad827) || istrue(level.var_77907d733abe8b63)) {
+  if(istrue(level.leagueplaymatch) || istrue(level.var_77907d733abe8b63)) {
     is_ranked = 1;
   }
 
@@ -176,7 +176,7 @@ function function_f5f91665fe4dba94(data) {
   dlog_recordevent("dlog_event_mp_server_match_end", ["utc_start_time_s", utc_start_time_s, "utc_end_time_s", getsystemtime(), "total_player_connections", total_player_connections, "life_count", life_count, "playlist_id", playlist_id, "playlist_name", playlist_name, "game_type", game_type, "map", level.script, "is_offline", !level.onlinegame, "allies_score", allies_score, "axis_score", axis_score, "team_three_score", team_three_score, "game_event_count", game_event_count, "weapon_map_watermark", function_949690bfcbcdc8cf(), "max_players_allowed", max_players_allowed, "is_ranked", is_ranked, "is_archive_replay_recorded", var_d4687bb3ed2b03b3]);
 }
 
-function function_8eeea3969df7e964(data) {
+function on_round_start(data) {
   if(isDefined(game["telemetry"])) {
     game["telemetry"].round_start_time_ms = namespace_de6e6777b0937bd7::function_1b15450e092933cf(gettime());
   }
@@ -202,7 +202,7 @@ function on_round_end(data) {
 }
 
 function on_player_connect(player) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 
@@ -228,7 +228,7 @@ function on_player_connect(player) {
       xp_at_start = player getplayerdata("common", "mpProgression", "playerLevel", "xp");
       player.pers["telemetry"].xp_at_start = xp_at_start;
       player.pers["telemetry"].rank_at_start = player getrankforxp(xp_at_start);
-      player.pers["telemetry"].score_at_start = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "matchStats", "score");
+      player.pers["telemetry"].score_at_start = player getplayerdata(level.progressiongroup, "playerStats", "matchStats", "score");
       player.pers["telemetry"].prestige_at_start = player getplayerdata(level.loadoutsgroup, "squadMembers", "season_rank");
     } else {
       player.pers["telemetry"].xp_at_start = 0;
@@ -289,7 +289,7 @@ function on_player_connect(player) {
     is_ranked = 0;
     ranked_skill_rating = 0;
 
-    if(istrue(level.var_ec2fb549b15ad827)) {
+    if(istrue(level.leagueplaymatch)) {
       is_ranked = 1;
       xuid = player getxuid();
       ranked_skill_rating = function_904672268eb8e3fe(xuid);
@@ -299,7 +299,7 @@ function on_player_connect(player) {
 
     is_controller = player usinggamepad();
     player dlog_recordplayerevent("dlog_event_mp_player_match_start", ["utc_connect_time_s", player.pers["telemetry"].utc_connect_time_s, "team", current_team, "join_type", player getjointype(), "skill", player getskill(), "party_id", player getpartyid(), "is_party_host", is_party_host, "was_keyboardmouse", player function_989faa3e2f2d8c47() != 1, "operator_allies", operator_allies, "operator_axis", operator_axis, "operator_allies_skin", operator_allies_skin, "operator_axis_skin", operator_axis_skin, "operator_allies_execution_ref", operator_allies_execution_ref, "operator_axis_execution_ref", operator_axis_execution_ref, "map", level.script, "playlist_id", playlist_id, "playlist_name", playlist_name, "game_type", game_type, "sub_game_type", sub_game_type, "connect_index", connect_index, "lobby_id", lobby_id, "is_ranked", is_ranked, "ranked_skill_rating", ranked_skill_rating, "map_voting_options", player function_d5eb9e0d720451d2(), "map_voted_for", player function_2e4d79c3a2ff19f1(), "mode_voting_options", player function_c0efdb4dd083127f(), "mode_voted_for", player function_fd9ddaae72038754(), "is_controller", is_controller]);
-    function_7bcd667fc073fc12("player_match_start", "");
+    recordeventforsreparser("player_match_start", "");
 
     if(!isDefined(player.pers["telemetry"].player_score_event_count)) {
       player.pers["telemetry"].player_score_event_count = 0;
@@ -352,7 +352,7 @@ function on_player_connect(player) {
 }
 
 function on_player_spawned(player) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 
@@ -395,7 +395,7 @@ function function_6447f24addc0137e(data) {
   player = data.player;
 
   if(!isDefined(player.pers["telemetry"].var_d6caa636bc3fce32)) {
-    if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+    if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
       return;
     }
 
@@ -518,18 +518,18 @@ function function_6447f24addc0137e(data) {
     if(player rankingenabled() && player hasplayerdata()) {
       lifetimedata.xp_at_end = player getplayerdata("common", "mpProgression", "playerLevel", "xp");
       lifetimedata.rank_at_end = player getrankforxp(lifetimedata.xp_at_end);
-      lifetimedata.score_at_end = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "matchStats", "score");
+      lifetimedata.score_at_end = player getplayerdata(level.progressiongroup, "playerStats", "matchStats", "score");
       lifetimedata.prestige_at_end = player getplayerdata(level.loadoutsgroup, "squadMembers", "season_rank");
-      lifetimedata.lifetime_kills = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "combatStats", "kills");
-      lifetimedata.lifetime_deaths = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "combatStats", "deaths");
-      lifetimedata.lifetime_wins = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "matchStats", "wins");
-      lifetimedata.lifetime_losses = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "matchStats", "losses");
-      lifetimedata.lifetime_hits = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "combatStats", "hits");
-      lifetimedata.lifetime_misses = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "combatStats", "misses");
-      lifetimedata.lifetime_wall_bangs = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "combatStats", "wallbangs");
-      lifetimedata.lifetime_near_misses = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "combatStats", "nearMisses");
-      lifetimedata.lifetime_games_played = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "matchStats", "gamesPlayed");
-      lifetimedata.lifetime_time_played_total = player getplayerdata(level.var_5d69837cf4db0407, "playerStats", "matchStats", "timePlayedTotal");
+      lifetimedata.lifetime_kills = player getplayerdata(level.progressiongroup, "playerStats", "combatStats", "kills");
+      lifetimedata.lifetime_deaths = player getplayerdata(level.progressiongroup, "playerStats", "combatStats", "deaths");
+      lifetimedata.lifetime_wins = player getplayerdata(level.progressiongroup, "playerStats", "matchStats", "wins");
+      lifetimedata.lifetime_losses = player getplayerdata(level.progressiongroup, "playerStats", "matchStats", "losses");
+      lifetimedata.lifetime_hits = player getplayerdata(level.progressiongroup, "playerStats", "combatStats", "hits");
+      lifetimedata.lifetime_misses = player getplayerdata(level.progressiongroup, "playerStats", "combatStats", "misses");
+      lifetimedata.lifetime_wall_bangs = player getplayerdata(level.progressiongroup, "playerStats", "combatStats", "wallbangs");
+      lifetimedata.lifetime_near_misses = player getplayerdata(level.progressiongroup, "playerStats", "combatStats", "nearMisses");
+      lifetimedata.lifetime_games_played = player getplayerdata(level.progressiongroup, "playerStats", "matchStats", "gamesPlayed");
+      lifetimedata.lifetime_time_played_total = player getplayerdata(level.progressiongroup, "playerStats", "matchStats", "timePlayedTotal");
     } else {
       lifetimedata.xp_at_end = 0;
       lifetimedata.rank_at_end = 0;
@@ -727,7 +727,7 @@ function function_6447f24addc0137e(data) {
 
     is_ranked = 0;
 
-    if(istrue(level.var_ec2fb549b15ad827) || istrue(level.var_77907d733abe8b63)) {
+    if(istrue(level.leagueplaymatch) || istrue(level.var_77907d733abe8b63)) {
       is_ranked = 1;
     }
 
@@ -775,7 +775,7 @@ function function_6447f24addc0137e(data) {
 
     is_controller = player usinggamepad();
     secondary_victory = istrue(player.extracted);
-    holding_weapon_case = namespace_a8b2b88699fc40fb::function_5a7168b0b511bec3(player);
+    holding_weapon_case = namespace_a8b2b88699fc40fb::didextractwithweaponcase(player);
     best_squad_wipe_streak = 0;
 
     if(isDefined(player.team) && scripts\mp\utility\teams::function_ef7cf07ba921200e(player.team, "best_squad_wipes")) {
@@ -787,14 +787,14 @@ function function_6447f24addc0137e(data) {
 
     if(isDefined(data.disconnectreason)) {
       if(isxhash(data.disconnectreason) || isxhashasset(data.disconnectreason) || function_28eeffcb2337321e(data.disconnectreason)) {
-        var_d45168df05638abc = function_f28fd66285fa2c9(data.disconnectreason);
+        var_d45168df05638abc = getxhashhexname(data.disconnectreason);
       } else {
         var_d45168df05638abc = data.disconnectreason;
       }
     }
 
     var_37aab353fe84a505 = "{\"disconnect_reason\":\"" + var_d45168df05638abc + "\"}";
-    function_7bcd667fc073fc12("player_match_end", var_37aab353fe84a505);
+    recordeventforsreparser("player_match_end", var_37aab353fe84a505);
     player.pers["telemetry"].var_d6caa636bc3fce32 = 1;
   }
 }
@@ -807,7 +807,7 @@ function function_9b064138ff8c311b() {
 
 function function_e2db44d4086cdd23(player) {
   if(!isDefined(player.pers["telemetry"].var_3dd9e60f3eee6883)) {
-    if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+    if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
       return;
     }
 
@@ -837,7 +837,7 @@ function function_e2db44d4086cdd23(player) {
 
 function on_ai_killed(params) {
   if(!istrue(level.disablestattracking)) {
-    if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(params.eattacker)) {
+    if(!namespace_de6e6777b0937bd7::is_valid_client(params.eattacker)) {
       return;
     }
 
@@ -859,7 +859,7 @@ function on_ai_killed(params) {
     var_7e2c53b0bcf117d9.incvalue = 1;
     var_7e2c53b0bcf117d9.variantid = getweaponvariantindex(params.sweapon);
     var_7e2c53b0bcf117d9.weaponobj = params.sweapon;
-    assertex(level.var_ec2c9117bd4b336b["<dev string:x89>"].size == 1, "<dev string:xa9>");
+    assertex(level.telemetry_callbacks["<dev string:x89>"].size == 1, "<dev string:xa9>");
     params.eattacker update_weapon_stats(var_7e2c53b0bcf117d9);
   }
 }
@@ -868,7 +868,7 @@ function on_player_death(data) {
   attacker = data.attacker;
   victim = data.victim;
 
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(victim)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(victim)) {
     return;
   }
 
@@ -915,7 +915,7 @@ function on_player_death(data) {
   attacker_was_ai = 0;
   ai_tier = "";
 
-  if(namespace_de6e6777b0937bd7::function_892570944f6b6a2(attacker)) {
+  if(namespace_de6e6777b0937bd7::is_valid_client(attacker)) {
     attacker_weapon = getweaponbasename(weapon_string);
     var_41fb323b39c88db5 = attacker;
     attacker_weapon_picked_up = attacker ispickedupweapon(weapon_string);
@@ -1070,7 +1070,7 @@ function on_player_death(data) {
   }
 
   if(isstring(means_of_death)) {
-    var_20e794ee21ccc0c3 = function_1823ff50bb28148d(means_of_death);
+    var_20e794ee21ccc0c3 = getxhash(means_of_death);
   } else {
     var_20e794ee21ccc0c3 = means_of_death;
   }
@@ -1101,7 +1101,7 @@ function on_player_death(data) {
   victim dlog_recordplayerevent("dlog_event_mp_life", ["attacker", var_41fb323b39c88db5, "spawn_time_from_match_start_ms", spawn_time_from_match_start_ms, "life_index", life_index, "spawn_evaluation_id", spawn_evaluation_id, "spawn_pos_x", spawn_pos[0], "spawn_pos_y", spawn_pos[1], "spawn_pos_z", spawn_pos[2], "team", victim.team, "is_host", victim ishost(), "was_tactical_insertion", was_tactical_insertion, "death_time_from_match_start_ms", death_time_from_match_start_ms, "victim_weapon", victim_weapon, "victim_weapon_attachments", victim_weapon_attachments, "attacker_weapon", attacker_weapon, "attacker_weapon_attachments", attacker_weapon_attachments, "victim_death_modifiers", victim_death_modifiers, "attacker_death_modifiers", attacker_death_modifiers, "death_pos_x", victim.origin[0], "death_pos_y", victim.origin[1], "death_pos_z", victim.origin[2], "death_angle_x", victim.angles[0], "death_angle_y", victim.angles[1], "death_angle_z", victim.angles[2], "attacker_pos_x", attacker_pos[0], "attacker_pos_y", attacker_pos[1], "attacker_pos_z", attacker_pos[2], "attacker_angle_x", attacker_angles[0], "attacker_angle_y", attacker_angles[1], "attacker_angle_z", attacker_angles[2], "means_of_death", var_20e794ee21ccc0c3, "attacker_weapon_alt_mode", attacker_weapon_alt_mode, "attacker_weapon_picked_up", attacker_weapon_picked_up, "victim_weapon_alt_mode", victim_weapon_alt_mode, "victim_weapon_picked_up", victim_weapon_picked_up, "attacker_ads_value", attacker_ads_value, "victim_ads_value", victim_ads_value, "attacker_was_in_victim_fov", attacker_was_in_victim_fov, "victim_was_in_attacker_fov", victim_was_in_attacker_fov, "attacker_mount_type", attacker_mount_type, "victim_mount_type", victim_mount_type, "xp_earned", xp_earned, "score_earned", score_earned, "victim_loadout_index", victim_loadout_index, "attacker_life_index", attacker_life_index, "attacker_loadout_index", attacker_loadout_index, "victim_was_reloading", victim isreloading(), "victim_was_executing", victim isinexecutionattack(), "round", round, "is_hipfire", is_hipfire, "attacker_shooting_mode", attacker_shooting_mode, "victim_shooting_mode", victim_shooting_mode, "first_damage_delivered_time_ms", first_damage_delivered_time_ms, "first_damage_received_time_ms", first_damage_received_time_ms, "attacker_was_ai", attacker_was_ai, "lifetime_damage_dealt", float(var_51334e7082b98cbe), "lifetime_damage_received", float(incomingdamage), "ai_tier", ai_tier, "victim_in_tac_stance", var_b94cd1b61321122a, "attacker_in_tac_stance", var_99ec0e0e7687c243]);
   victim.pers["telemetry"].life.var_d8bae1f0e4d5e27e = life_index;
 
-  if(namespace_de6e6777b0937bd7::function_892570944f6b6a2(attacker)) {
+  if(namespace_de6e6777b0937bd7::is_valid_client(attacker)) {
     logtournamentdeath(victim getxuid(), attacker getxuid(), weapon_string, means_of_death == "MOD_HEAD_SHOT");
 
     if(isDefined(level.matchrecording_logevent)) {
@@ -1163,7 +1163,7 @@ function function_60912f12edbae676(data) {
     primaryattach = loadoutprimaryattachments[attachmentindex];
 
     if(isDefined(primaryattach)) {
-      var_c130cd8c126c9aad = function_1823ff50bb28148d(primaryattach);
+      var_c130cd8c126c9aad = getxhash(primaryattach);
     } else {
       var_c130cd8c126c9aad = #"";
     }
@@ -1190,7 +1190,7 @@ function function_60912f12edbae676(data) {
     secondaryattach = loadoutsecondaryattachments[attachmentindex];
 
     if(isDefined(secondaryattach)) {
-      var_3595c5a4bef8f5ed = function_1823ff50bb28148d(secondaryattach);
+      var_3595c5a4bef8f5ed = getxhash(secondaryattach);
     } else {
       var_3595c5a4bef8f5ed = #"";
     }
@@ -1369,7 +1369,7 @@ function function_60912f12edbae676(data) {
 
   primaryampdata = function_deef6a4f7fbec3b8(primaryweaponobj);
   secondaryampdata = function_deef6a4f7fbec3b8(secondaryweaponobj);
-  var_d3cf11436c80a43e = data.player dlog_recordplayerevent("dlog_event_mp_player_loadout", ["loadout_index", data.loadoutindex, "class_type", function_1823ff50bb28148d(data.classtype), "mid_match_edit_count", data.var_15bab3eaa5df4c14, "first_use_life_index", var_8f7e680ac270abc2, "time_from_match_start_ms", timemsfrommatchstart, "primary_weapon_setup_camo", function_1823ff50bb28148d(var_d4d89beaf7dcfa0a), "primary_weapon_setup_reticle", var_684a28861c742b36, "primary_weapon_setup_loot_item_id", var_267cee921deab64e, "primary_weapon_setup_variant_id", var_3a7820a8ca123ece, "secondary_weapon_setup_camo", function_1823ff50bb28148d(var_9b18f02999b23b4a), "secondary_weapon_setup_reticle", var_f3f8fd2658d0a576, "secondary_weapon_setup_loot_item_id", var_d063e05308a9da8e, "secondary_weapon_setup_variant_id", var_dd47d5b37f1b770e, "primary_grenade", function_1823ff50bb28148d(primarygrenade), "tactical_gear", function_1823ff50bb28148d(tacticalgear), "base_perk_1", function_1823ff50bb28148d(var_5e16b98fc67f9d0a), "base_perk_2", function_1823ff50bb28148d(var_1135208ed2c7cb70), "bonus_perk", function_1823ff50bb28148d(bonusperk), "ultimate_perk", function_1823ff50bb28148d(ultimateperk), "extra_loadout_perk_1", function_1823ff50bb28148d(extra_loadout_perk_1), "extra_loadout_perk_2", function_1823ff50bb28148d(extra_loadout_perk_2), "killstreak_0", function_1823ff50bb28148d(classstruct.loadoutkillstreak1), "killstreak_1", function_1823ff50bb28148d(classstruct.loadoutkillstreak2), "killstreak_2", function_1823ff50bb28148d(classstruct.loadoutkillstreak3), "field_upgrade_0", function_1823ff50bb28148d(var_8ecf289c70dd61eb), "field_upgrade_1", function_1823ff50bb28148d(var_f5bb419cbccebbe5), "shooting_mode", function_1823ff50bb28148d(shooting_mode), "primary_blueprint", function_1823ff50bb28148d(primary_blueprint), "secondary_blueprint", function_1823ff50bb28148d(secondary_blueprint), "primary_weapon_receiver", function_1823ff50bb28148d(primarytuning.weapon_receiver), "primary_weapon_front_piece", function_1823ff50bb28148d(primarytuning.weapon_front_piece), "primary_weapon_back_piece", function_1823ff50bb28148d(primarytuning.weapon_back_piece), "primary_weapon_magazine", function_1823ff50bb28148d(primarytuning.weapon_magazine), "primary_weapon_optic", function_1823ff50bb28148d(primarytuning.weapon_optic), "primary_weapon_underbarrel", function_1823ff50bb28148d(primarytuning.weapon_underbarrel), "primary_weapon_modifier", function_1823ff50bb28148d(primarytuning.weapon_modifier), "primary_weapon_muzzle", function_1823ff50bb28148d(primarytuning.weapon_muzzle), "primary_weapon_rear_grip", function_1823ff50bb28148d(primarytuning.weapon_rear_grip), "primary_weapon_trigger", function_1823ff50bb28148d(primarytuning.weapon_trigger), "primary_weapon_extra", function_1823ff50bb28148d(primarytuning.weapon_extra), "primary_lid_receiver", primarytuning.lid_receiver, "primary_lid_front_piece", primarytuning.lid_front_piece, "primary_lid_back_piece", primarytuning.lid_back_piece, "primary_lid_magazine", primarytuning.lid_magazine, "primary_lid_optic", primarytuning.lid_optic, "primary_lid_underbarrel", primarytuning.lid_underbarrel, "primary_lid_modifier", primarytuning.lid_modifier, "primary_lid_muzzle", primarytuning.lid_muzzle, "primary_lid_rear_grip", primarytuning.lid_rear_grip, "primary_lid_trigger", primarytuning.lid_trigger, "primary_lid_extra", primarytuning.lid_extra, "primary_tv_receiver", primarytuning.tv_receiver, "primary_tv_front_piece", primarytuning.tv_front_piece, "primary_tv_back_piece", primarytuning.tv_back_piece, "primary_tv_magazine", primarytuning.tv_magazine, "primary_tv_optic", primarytuning.tv_optic, "primary_tv_underbarrel", primarytuning.tv_underbarrel, "primary_tv_modifier", primarytuning.tv_modifier, "primary_tv_muzzle", primarytuning.tv_muzzle, "primary_tv_rear_grip", primarytuning.tv_rear_grip, "primary_tv_trigger", primarytuning.tv_trigger, "primary_tv_extra", primarytuning.tv_extra, "primary_is_bp_tuned", primarytuning.tuned, "secondary_weapon_receiver", function_1823ff50bb28148d(secondarytuning.weapon_receiver), "secondary_weapon_front_piece", function_1823ff50bb28148d(secondarytuning.weapon_front_piece), "secondary_weapon_back_piece", function_1823ff50bb28148d(secondarytuning.weapon_back_piece), "secondary_weapon_magazine", function_1823ff50bb28148d(secondarytuning.weapon_magazine), "secondary_weapon_optic", function_1823ff50bb28148d(secondarytuning.weapon_optic), "secondary_weapon_underbarrel", function_1823ff50bb28148d(secondarytuning.weapon_underbarrel), "secondary_weapon_modifier", function_1823ff50bb28148d(secondarytuning.weapon_modifier), "secondary_weapon_muzzle", function_1823ff50bb28148d(secondarytuning.weapon_muzzle), "secondary_weapon_rear_grip", function_1823ff50bb28148d(secondarytuning.weapon_rear_grip), "secondary_weapon_trigger", function_1823ff50bb28148d(secondarytuning.weapon_trigger), "secondary_weapon_extra", function_1823ff50bb28148d(secondarytuning.weapon_extra), "secondary_lid_receiver", secondarytuning.lid_receiver, "secondary_lid_front_piece", secondarytuning.lid_front_piece, "secondary_lid_back_piece", secondarytuning.lid_back_piece, "secondary_lid_magazine", secondarytuning.lid_magazine, "secondary_lid_optic", secondarytuning.lid_optic, "secondary_lid_underbarrel", secondarytuning.lid_underbarrel, "secondary_lid_modifier", secondarytuning.lid_modifier, "secondary_lid_muzzle", secondarytuning.lid_muzzle, "secondary_lid_rear_grip", secondarytuning.lid_rear_grip, "secondary_lid_trigger", secondarytuning.lid_trigger, "secondary_lid_extra", secondarytuning.lid_extra, "secondary_tv_receiver", secondarytuning.tv_receiver, "secondary_tv_front_piece", secondarytuning.tv_front_piece, "secondary_tv_back_piece", secondarytuning.tv_back_piece, "secondary_tv_magazine", secondarytuning.tv_magazine, "secondary_tv_optic", secondarytuning.tv_optic, "secondary_tv_underbarrel", secondarytuning.tv_underbarrel, "secondary_tv_modifier", secondarytuning.tv_modifier, "secondary_tv_muzzle", secondarytuning.tv_muzzle, "secondary_tv_rear_grip", secondarytuning.tv_rear_grip, "secondary_tv_trigger", secondarytuning.tv_trigger, "secondary_tv_extra", secondarytuning.tv_extra, "secondary_is_bp_tuned", secondarytuning.tuned, "is_default_loadout", isdefaultloadout, "primary_is_a_blueprint_weapon", var_7a6106e50e8ed5e7, "primary_blueprint_name", function_1823ff50bb28148d(primaryblueprintname), "primary_blueprint_id", primaryblueprintid, "primary_is_pro_tuned", var_6dfa4cce4ce056b6, "primary_is_player_tuned", var_8a4ffee432ca8d5e, "primary_weapon_setup_attachment_0", var_7da5c09e8cc677d1[0], "primary_weapon_setup_attachment_1", var_7da5c09e8cc677d1[1], "primary_weapon_setup_attachment_2", var_7da5c09e8cc677d1[2], "primary_weapon_setup_attachment_3", var_7da5c09e8cc677d1[3], "primary_weapon_setup_attachment_4", var_7da5c09e8cc677d1[4], "secondary_is_a_blueprint_weapon", var_35bc7057db6ba727, "secondary_blueprint_name", function_1823ff50bb28148d(secondaryblueprintname), "secondary_blueprint_id", secondaryblueprintid, "secondary_is_pro_tuned", var_d5539868aaef02f6, "secondary_is_player_tuned", var_dc067331d5eee29e, "secondary_weapon_setup_attachment_0", var_f67a501a2ba8c411[0], "secondary_weapon_setup_attachment_1", var_f67a501a2ba8c411[1], "secondary_weapon_setup_attachment_2", var_f67a501a2ba8c411[2], "secondary_weapon_setup_attachment_3", var_f67a501a2ba8c411[3], "secondary_weapon_setup_attachment_4", var_f67a501a2ba8c411[4], "streak_type", function_1823ff50bb28148d(streaktype), "vest_perk", function_1823ff50bb28148d(vest_perk), "glove_perk", function_1823ff50bb28148d(glove_perk), "boot_perk", function_1823ff50bb28148d(boot_perk), "gear_perk_1", function_1823ff50bb28148d(var_15434209a30e5984), "gear_perk_2", function_1823ff50bb28148d(var_5db02909d819dafa), "primary_amp_data", primaryampdata, "secondary_amp_data", secondaryampdata, "primary_weapon_name", var_b98a554f5fc058c2, "secondary_weapon_name", var_e86b5ff35057c02]);
+  var_d3cf11436c80a43e = data.player dlog_recordplayerevent("dlog_event_mp_player_loadout", ["loadout_index", data.loadoutindex, "class_type", getxhash(data.classtype), "mid_match_edit_count", data.var_15bab3eaa5df4c14, "first_use_life_index", var_8f7e680ac270abc2, "time_from_match_start_ms", timemsfrommatchstart, "primary_weapon_setup_camo", getxhash(var_d4d89beaf7dcfa0a), "primary_weapon_setup_reticle", var_684a28861c742b36, "primary_weapon_setup_loot_item_id", var_267cee921deab64e, "primary_weapon_setup_variant_id", var_3a7820a8ca123ece, "secondary_weapon_setup_camo", getxhash(var_9b18f02999b23b4a), "secondary_weapon_setup_reticle", var_f3f8fd2658d0a576, "secondary_weapon_setup_loot_item_id", var_d063e05308a9da8e, "secondary_weapon_setup_variant_id", var_dd47d5b37f1b770e, "primary_grenade", getxhash(primarygrenade), "tactical_gear", getxhash(tacticalgear), "base_perk_1", getxhash(var_5e16b98fc67f9d0a), "base_perk_2", getxhash(var_1135208ed2c7cb70), "bonus_perk", getxhash(bonusperk), "ultimate_perk", getxhash(ultimateperk), "extra_loadout_perk_1", getxhash(extra_loadout_perk_1), "extra_loadout_perk_2", getxhash(extra_loadout_perk_2), "killstreak_0", getxhash(classstruct.loadoutkillstreak1), "killstreak_1", getxhash(classstruct.loadoutkillstreak2), "killstreak_2", getxhash(classstruct.loadoutkillstreak3), "field_upgrade_0", getxhash(var_8ecf289c70dd61eb), "field_upgrade_1", getxhash(var_f5bb419cbccebbe5), "shooting_mode", getxhash(shooting_mode), "primary_blueprint", getxhash(primary_blueprint), "secondary_blueprint", getxhash(secondary_blueprint), "primary_weapon_receiver", getxhash(primarytuning.weapon_receiver), "primary_weapon_front_piece", getxhash(primarytuning.weapon_front_piece), "primary_weapon_back_piece", getxhash(primarytuning.weapon_back_piece), "primary_weapon_magazine", getxhash(primarytuning.weapon_magazine), "primary_weapon_optic", getxhash(primarytuning.weapon_optic), "primary_weapon_underbarrel", getxhash(primarytuning.weapon_underbarrel), "primary_weapon_modifier", getxhash(primarytuning.weapon_modifier), "primary_weapon_muzzle", getxhash(primarytuning.weapon_muzzle), "primary_weapon_rear_grip", getxhash(primarytuning.weapon_rear_grip), "primary_weapon_trigger", getxhash(primarytuning.weapon_trigger), "primary_weapon_extra", getxhash(primarytuning.weapon_extra), "primary_lid_receiver", primarytuning.lid_receiver, "primary_lid_front_piece", primarytuning.lid_front_piece, "primary_lid_back_piece", primarytuning.lid_back_piece, "primary_lid_magazine", primarytuning.lid_magazine, "primary_lid_optic", primarytuning.lid_optic, "primary_lid_underbarrel", primarytuning.lid_underbarrel, "primary_lid_modifier", primarytuning.lid_modifier, "primary_lid_muzzle", primarytuning.lid_muzzle, "primary_lid_rear_grip", primarytuning.lid_rear_grip, "primary_lid_trigger", primarytuning.lid_trigger, "primary_lid_extra", primarytuning.lid_extra, "primary_tv_receiver", primarytuning.tv_receiver, "primary_tv_front_piece", primarytuning.tv_front_piece, "primary_tv_back_piece", primarytuning.tv_back_piece, "primary_tv_magazine", primarytuning.tv_magazine, "primary_tv_optic", primarytuning.tv_optic, "primary_tv_underbarrel", primarytuning.tv_underbarrel, "primary_tv_modifier", primarytuning.tv_modifier, "primary_tv_muzzle", primarytuning.tv_muzzle, "primary_tv_rear_grip", primarytuning.tv_rear_grip, "primary_tv_trigger", primarytuning.tv_trigger, "primary_tv_extra", primarytuning.tv_extra, "primary_is_bp_tuned", primarytuning.tuned, "secondary_weapon_receiver", getxhash(secondarytuning.weapon_receiver), "secondary_weapon_front_piece", getxhash(secondarytuning.weapon_front_piece), "secondary_weapon_back_piece", getxhash(secondarytuning.weapon_back_piece), "secondary_weapon_magazine", getxhash(secondarytuning.weapon_magazine), "secondary_weapon_optic", getxhash(secondarytuning.weapon_optic), "secondary_weapon_underbarrel", getxhash(secondarytuning.weapon_underbarrel), "secondary_weapon_modifier", getxhash(secondarytuning.weapon_modifier), "secondary_weapon_muzzle", getxhash(secondarytuning.weapon_muzzle), "secondary_weapon_rear_grip", getxhash(secondarytuning.weapon_rear_grip), "secondary_weapon_trigger", getxhash(secondarytuning.weapon_trigger), "secondary_weapon_extra", getxhash(secondarytuning.weapon_extra), "secondary_lid_receiver", secondarytuning.lid_receiver, "secondary_lid_front_piece", secondarytuning.lid_front_piece, "secondary_lid_back_piece", secondarytuning.lid_back_piece, "secondary_lid_magazine", secondarytuning.lid_magazine, "secondary_lid_optic", secondarytuning.lid_optic, "secondary_lid_underbarrel", secondarytuning.lid_underbarrel, "secondary_lid_modifier", secondarytuning.lid_modifier, "secondary_lid_muzzle", secondarytuning.lid_muzzle, "secondary_lid_rear_grip", secondarytuning.lid_rear_grip, "secondary_lid_trigger", secondarytuning.lid_trigger, "secondary_lid_extra", secondarytuning.lid_extra, "secondary_tv_receiver", secondarytuning.tv_receiver, "secondary_tv_front_piece", secondarytuning.tv_front_piece, "secondary_tv_back_piece", secondarytuning.tv_back_piece, "secondary_tv_magazine", secondarytuning.tv_magazine, "secondary_tv_optic", secondarytuning.tv_optic, "secondary_tv_underbarrel", secondarytuning.tv_underbarrel, "secondary_tv_modifier", secondarytuning.tv_modifier, "secondary_tv_muzzle", secondarytuning.tv_muzzle, "secondary_tv_rear_grip", secondarytuning.tv_rear_grip, "secondary_tv_trigger", secondarytuning.tv_trigger, "secondary_tv_extra", secondarytuning.tv_extra, "secondary_is_bp_tuned", secondarytuning.tuned, "is_default_loadout", isdefaultloadout, "primary_is_a_blueprint_weapon", var_7a6106e50e8ed5e7, "primary_blueprint_name", getxhash(primaryblueprintname), "primary_blueprint_id", primaryblueprintid, "primary_is_pro_tuned", var_6dfa4cce4ce056b6, "primary_is_player_tuned", var_8a4ffee432ca8d5e, "primary_weapon_setup_attachment_0", var_7da5c09e8cc677d1[0], "primary_weapon_setup_attachment_1", var_7da5c09e8cc677d1[1], "primary_weapon_setup_attachment_2", var_7da5c09e8cc677d1[2], "primary_weapon_setup_attachment_3", var_7da5c09e8cc677d1[3], "primary_weapon_setup_attachment_4", var_7da5c09e8cc677d1[4], "secondary_is_a_blueprint_weapon", var_35bc7057db6ba727, "secondary_blueprint_name", getxhash(secondaryblueprintname), "secondary_blueprint_id", secondaryblueprintid, "secondary_is_pro_tuned", var_d5539868aaef02f6, "secondary_is_player_tuned", var_dc067331d5eee29e, "secondary_weapon_setup_attachment_0", var_f67a501a2ba8c411[0], "secondary_weapon_setup_attachment_1", var_f67a501a2ba8c411[1], "secondary_weapon_setup_attachment_2", var_f67a501a2ba8c411[2], "secondary_weapon_setup_attachment_3", var_f67a501a2ba8c411[3], "secondary_weapon_setup_attachment_4", var_f67a501a2ba8c411[4], "streak_type", getxhash(streaktype), "vest_perk", getxhash(vest_perk), "glove_perk", getxhash(glove_perk), "boot_perk", getxhash(boot_perk), "gear_perk_1", getxhash(var_15434209a30e5984), "gear_perk_2", getxhash(var_5db02909d819dafa), "primary_amp_data", primaryampdata, "secondary_amp_data", secondaryampdata, "primary_weapon_name", var_b98a554f5fc058c2, "secondary_weapon_name", var_e86b5ff35057c02]);
 
   if(isDefined(data.player.pers["telemetry"].player_loadout_count) && istrue(var_d3cf11436c80a43e)) {
     data.player.pers["telemetry"].player_loadout_count++;
@@ -1377,7 +1377,7 @@ function function_60912f12edbae676(data) {
 }
 
 function function_8076b5556f48a6cd(player) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 
@@ -1704,7 +1704,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(receiver)) {
     data.weapon_receiver = receiver;
-    data.lid_receiver = function_693e108cb61ceeb5(basename, receiver);
+    data.lid_receiver = getattachmentlootid(basename, receiver);
     var_91508dc8cd30163e = var_75a7008e426d90db[receiver];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1732,7 +1732,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(frontpiece)) {
     data.weapon_front_piece = frontpiece;
-    data.lid_front_piece = function_693e108cb61ceeb5(basename, frontpiece);
+    data.lid_front_piece = getattachmentlootid(basename, frontpiece);
     var_91508dc8cd30163e = var_75a7008e426d90db[frontpiece];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1760,7 +1760,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(backpiece)) {
     data.weapon_back_piece = backpiece;
-    data.lid_back_piece = function_693e108cb61ceeb5(basename, backpiece);
+    data.lid_back_piece = getattachmentlootid(basename, backpiece);
     var_91508dc8cd30163e = var_75a7008e426d90db[backpiece];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1788,7 +1788,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(magazine)) {
     data.weapon_magazine = magazine;
-    data.lid_magazine = function_693e108cb61ceeb5(basename, magazine);
+    data.lid_magazine = getattachmentlootid(basename, magazine);
     var_91508dc8cd30163e = var_75a7008e426d90db[magazine];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1816,7 +1816,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(scope)) {
     data.weapon_optic = scope;
-    data.lid_optic = function_693e108cb61ceeb5(basename, scope);
+    data.lid_optic = getattachmentlootid(basename, scope);
     var_91508dc8cd30163e = var_75a7008e426d90db[scope];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1844,7 +1844,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(underbarrel)) {
     data.weapon_underbarrel = underbarrel;
-    data.lid_underbarrel = function_693e108cb61ceeb5(basename, underbarrel);
+    data.lid_underbarrel = getattachmentlootid(basename, underbarrel);
     var_91508dc8cd30163e = var_75a7008e426d90db[underbarrel];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1872,7 +1872,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(modifier)) {
     data.weapon_modifier = modifier;
-    data.lid_modifier = function_693e108cb61ceeb5(basename, modifier);
+    data.lid_modifier = getattachmentlootid(basename, modifier);
     var_91508dc8cd30163e = var_75a7008e426d90db[modifier];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1900,7 +1900,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(muzzle)) {
     data.weapon_muzzle = muzzle;
-    data.lid_muzzle = function_693e108cb61ceeb5(basename, muzzle);
+    data.lid_muzzle = getattachmentlootid(basename, muzzle);
     var_91508dc8cd30163e = var_75a7008e426d90db[muzzle];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1928,7 +1928,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(reargrip)) {
     data.weapon_reargrip = reargrip;
-    data.lid_reargrip = function_693e108cb61ceeb5(basename, reargrip);
+    data.lid_reargrip = getattachmentlootid(basename, reargrip);
     var_91508dc8cd30163e = var_75a7008e426d90db[reargrip];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -1956,7 +1956,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(trigger)) {
     data.weapon_trigger = trigger;
-    data.lid_trigger = function_693e108cb61ceeb5(basename, trigger);
+    data.lid_trigger = getattachmentlootid(basename, trigger);
 
     if(isDefined(var_75a7008e426d90db[trigger])) {
       var_47681252dc0d55dd = var_91508dc8cd30163e[0];
@@ -1983,7 +1983,7 @@ function function_b4ed203552f83bca(weapon) {
 
   if(isDefined(extra)) {
     data.weapon_extra = extra;
-    data.lid_extra = function_693e108cb61ceeb5(basename, extra);
+    data.lid_extra = getattachmentlootid(basename, extra);
     var_91508dc8cd30163e = var_75a7008e426d90db[extra];
 
     if(isDefined(var_91508dc8cd30163e)) {
@@ -2044,7 +2044,7 @@ function update_weapon_stats(data) {
 
     ispickedup = -1;
 
-    if(namespace_de6e6777b0937bd7::function_892570944f6b6a2(self)) {
+    if(namespace_de6e6777b0937bd7::is_valid_client(self)) {
       ispickedup = ispickedupweapon(data.fullweaponname);
     }
 
@@ -2095,7 +2095,7 @@ function function_ac6b649326f4b17e(data) {
     return;
   }
 
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 
@@ -2107,7 +2107,7 @@ function function_ac6b649326f4b17e(data) {
   scoreevent = data.scoreevent;
 
   if(isxhash(scoreevent)) {
-    scoreevent = function_f28fd66285fa2c9(scoreevent);
+    scoreevent = getxhashhexname(scoreevent);
   }
 
   var_d3cf11436c80a43e = player dlog_recordplayerevent("dlog_event_mp_player_score_event", ["time_from_match_start_ms", timefrommatchstart, "score_event", scoreevent]);
@@ -2127,7 +2127,7 @@ function on_reload_cancel(data) {
     return;
   }
 
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 
@@ -2146,7 +2146,7 @@ function on_game_event(data) {
   player = undefined;
   lifeindex = -1;
 
-  if(isDefined(data.player) && namespace_de6e6777b0937bd7::function_892570944f6b6a2(data.player) && scripts\cp_mp\utility\game_utility::isgameparticipant(data.player)) {
+  if(isDefined(data.player) && namespace_de6e6777b0937bd7::is_valid_client(data.player) && scripts\cp_mp\utility\game_utility::isgameparticipant(data.player)) {
     player = data.player;
 
     if(isDefined(data.player scripts\mp\utility\stats::getpersstat("telemetry").life.life_index)) {
@@ -2199,7 +2199,7 @@ function private function_1a88d4daa0cb7e1f(mainreason, specificreason) {
 }
 
 function on_player_armor_auto_apply(data) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(data.player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(data.player)) {
     return;
   }
 

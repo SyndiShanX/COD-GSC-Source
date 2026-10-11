@@ -2752,7 +2752,7 @@ function function_2156c23e5afc6d06() {
   }
 }
 
-function function_a4fc9a04b674a389(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_a4fc9a04b674a389(instance, part, state, player, bautouse, usestring) {
   if(part != "arrow_bombsite_body") {
     return;
   }
@@ -3575,7 +3575,7 @@ function function_ba362ff77cb55d00() {
   transientname = namespace_91542927cd719085::function_aafaf24d80927b02();
   loadinfiltransient(transientname);
 
-  for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = function_2030cc4ad67d1634(transientname)) {
+  for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = isinfiltransientloaded(transientname)) {
     waitframe();
   }
 
@@ -6382,7 +6382,7 @@ function function_71ebb660b298af07() {
   return false;
 }
 
-function function_112636a06b12393b(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_112636a06b12393b(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(function_96a1620d901981d1(part, 8))) {
     return;
   }
@@ -8296,7 +8296,7 @@ function function_53fb5135d0684784(vehicle) {
   thread scripts\cp_mp\emp_debuff::function_662905d3b9455612(data, time, 0);
 
   if(istrue(level.arrow.dvars.var_1d37e435e474b707)) {
-    vehicle function_65aa053c077c003a(1);
+    vehicle vehphys_parkingbrake(1);
   }
 }
 
@@ -8311,7 +8311,7 @@ function function_cd8ebc4b7610bcfd(vehicle) {
   jament.vehicles[vehicle getentitynumber()] = undefined;
 
   if(istrue(level.arrow.dvars.var_1d37e435e474b707)) {
-    vehicle function_65aa053c077c003a(0);
+    vehicle vehphys_parkingbrake(0);
   }
 }
 
@@ -8785,7 +8785,7 @@ function function_ccb7898d9af41c88() {
     return false;
   }
 
-  if(player function_9cc921a57ff4deb5()) {
+  if(player isonascender()) {
     return false;
   }
 
@@ -9750,8 +9750,8 @@ function function_29e4ced10d235c31() {
     scripts\cp_mp\vehicles\vehicle_occupancy::function_ee4b8b879b1b120c();
     scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_allowmovement(vehicle, 0, 0);
   } else {
-    vehicle.var_70ec04f736523dd0 = vehicle vehicle_gettopspeedforward();
-    vehicle.var_abdfbc385c923e9f = vehicle vehicle_gettopspeedreverse();
+    vehicle.originalmaxspeedforward = vehicle vehicle_gettopspeedforward();
+    vehicle.originalmaxspeedreverse = vehicle vehicle_gettopspeedreverse();
     vehicle vehicle_settopspeedforward(level.arrow.dvars.var_ce691c052ceda566);
     vehicle vehicle_settopspeedreverse(level.arrow.dvars.var_ce691c052ceda566);
   }
@@ -9776,12 +9776,12 @@ function function_1699c07d73e1bac9() {
       scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_allowmovement(vehicle, 1, 0);
     }
   } else {
-    if(isDefined(vehicle.var_70ec04f736523dd0)) {
-      vehicle vehicle_settopspeedforward(vehicle.var_70ec04f736523dd0);
+    if(isDefined(vehicle.originalmaxspeedforward)) {
+      vehicle vehicle_settopspeedforward(vehicle.originalmaxspeedforward);
     }
 
-    if(isDefined(vehicle.var_abdfbc385c923e9f)) {
-      vehicle vehicle_settopspeedreverse(vehicle.var_abdfbc385c923e9f);
+    if(isDefined(vehicle.originalmaxspeedreverse)) {
+      vehicle vehicle_settopspeedreverse(vehicle.originalmaxspeedreverse);
     }
   }
 

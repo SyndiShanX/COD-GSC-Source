@@ -15,11 +15,11 @@
 function getfunction(funcid) {
   switch (funcid) {
     case #"hash_dab0d83df51da4d":
-      return &function_3dbd361f74b442f9;
+      return &onuserinit;
     case #"hash_722d767fd6d40f56":
-      return &function_a157fbbc31d9eb1a;
+      return &onuserterminate;
     case #"hash_99e614e786e54290":
-      return &function_bd30a256562f3cdc;
+      return &askforcoverfire;
     case #"hash_51e4cbdddb672391":
       return &function_b98f00d5db5e9c5d;
     case #"hash_48a1e8ac44615177":
@@ -29,11 +29,11 @@ function getfunction(funcid) {
     case #"hash_713dc5b1c250d91c":
       return &coveringfire;
     case #"hash_a3836dc7307ecb50":
-      return &function_ddf0d739daa1d97c;
+      return &coveringfirecleanup;
     case #"hash_99efb042f2d3bcd8":
       return &changecover;
     case #"hash_20885c126c27e8a5":
-      return &function_30b70873a0937989;
+      return &tempdialogue;
     case #"hash_c51876f65be2c3b3":
       return &dialogue;
     case #"hash_80804c8d4d60b774":
@@ -49,12 +49,12 @@ function getfunction(funcid) {
   assertmsg("<dev string:x1c>" + funcid);
 }
 
-function function_3dbd361f74b442f9(interactionid) {
+function onuserinit(interactionid) {
   self.keepclaimednode = 1;
   self.bulletsinclip = weaponclipsize(self.weapon);
 }
 
-function function_a157fbbc31d9eb1a(interactionid) {
+function onuserterminate(interactionid) {
   self clearbtgoal(1);
   self.maxfaceenemydist = 300;
   self aiclearscriptdesiredspeed();
@@ -69,11 +69,11 @@ function function_a157fbbc31d9eb1a(interactionid) {
 }
 
 function setstationary(statename, params) {
-  self function_e64ea2b4e79c4b74(1);
+  self setbtgoalstationary(1);
   self setbtgoalRadius(1, params[0]);
 }
 
-function function_bd30a256562f3cdc(statename, params) {
+function askforcoverfire(statename, params) {
   users = getaiarray(self.team);
   users = sortbydistance(users, self.origin);
   other = users[1];
@@ -86,7 +86,7 @@ function function_bd30a256562f3cdc(statename, params) {
 
   enablelookatentity(other, 1);
   scripts\common\cap::cap_start("cap_coverfire", "caps/interactions/cap_coverfire");
-  function_216c67ab6749137a(self, other, "moving");
+  addbattlechatternotify(self, other, "moving");
   wait 1;
 }
 
@@ -106,7 +106,7 @@ function function_b98f00d5db5e9c5d(statename, params) {
     return;
   }
 
-  function_216c67ab6749137a(self, other, "suppressing");
+  addbattlechatternotify(self, other, "suppressing");
   wait 1;
 
   if(!isDefined(other) || !isDefined(self)) {
@@ -123,7 +123,7 @@ function function_5ef09b6972c9fab(statename, params) {
   other endon("death");
   enablelookatentity(other, 1);
   scripts\common\cap::cap_start("cap_coverfire", "caps/interactions/cap_coverfire_volunteer");
-  function_216c67ab6749137a(self, other, "suppressing");
+  addbattlechatternotify(self, other, "suppressing");
   wait 1;
 }
 
@@ -140,7 +140,7 @@ function function_c753b2bac95c6bfe(statename, params) {
   }
 
   enablelookatentity(other, 1);
-  function_216c67ab6749137a(self, other, "moving");
+  addbattlechatternotify(self, other, "moving");
 }
 
 function coveringfire(statename, params) {
@@ -163,7 +163,7 @@ function coveringfire(statename, params) {
   self.shootstyleoverride = "full";
 }
 
-function function_ddf0d739daa1d97c(statename, params) {
+function coveringfirecleanup(statename, params) {
   self.balwayscoverexposed = 0;
   self.providecoveringfire = 0;
 }
@@ -176,7 +176,7 @@ function changecover(statename, params) {
   maxtime = 5000;
   starttime = gettime();
   self.keepclaimednode = 0;
-  function_216c67ab6749137a(self, undefined, "moving_up");
+  addbattlechatternotify(self, undefined, "moving_up");
 
   while(isDefined(self.covernode)) {
     waitframe();
@@ -220,13 +220,13 @@ function dodelay(interval, func, param, bool) {
   }
 }
 
-function function_30b70873a0937989(var_22e9090a351646e9) {
+function tempdialogue(var_22e9090a351646e9) {
   print3d(self.origin + (0, 0, 80), var_22e9090a351646e9, (1, 1, 1), 1, 0.8, 1, 1);
 }
 
 function function_cbe869548ea6baac(tag) {
-  id = self function_92435c7a6ae85c3c();
-  users = function_fce201c1f66b31b6(id, tag);
+  id = self getinteractionid();
+  users = getbsequserswithtag(id, tag);
   return users[0];
 }
 
@@ -258,7 +258,7 @@ function function_9867614bbd49f378(asmname, statename, params) {
     animindex = 4;
   }
 
-  turnanim = scripts\asm\cap::function_18e6c36c02a94dbd(statename, statename + "_" + animindex);
+  turnanim = scripts\asm\cap::cap_lookupanimfromalias(statename, statename + "_" + animindex);
   assertex(isDefined(turnanim), "<dev string:x3d>" + animindex + "<dev string:x5a>" + self.animsetname);
   return turnanim;
 }

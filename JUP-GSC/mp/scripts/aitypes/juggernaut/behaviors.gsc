@@ -26,7 +26,7 @@ function juggernaut_init(taskid) {
   self.aggressivemode = 1;
   self.ignoresuppression = 1;
   self.disablepistol = 1;
-  self.var_6ae27d6eff2fb98f = 1;
+  self.norunngun = 1;
   self.meleechargedistvsplayer = 120;
   self.meleechargedist = 120;
   self.meleestopattackdistsq = 14400;
@@ -38,24 +38,24 @@ function juggernaut_init(taskid) {
   self.meleeignoreplayerstance = 1;
   self.dontsyncmelee = 1;
   self.disablebulletwhizbyreaction = 1;
-  self function_9f82c74eb1b7caf9(0, "entity");
+  self setcanusecover(0, "entity");
   self.disablerunngun = 1;
   self.disabledodge = 1;
   self.pathenemyfightdist = 0;
   self.var_274d3a7704e351ef = 1;
-  self.var_98add129a7ecb962 = 0;
-  self.var_9440dc8a2aa90aed = 3000;
+  self.allowlongdeath = 0;
+  self.pursueruncooldown = 3000;
   self.var_7d606bec79308eb5 = 750;
-  self.var_85a0f6383a5dd784 = 300;
+  self.pursuestopdistance = 300;
   self.var_a67833fea11a521c = 750;
   self.var_427cbd3288a2f59 = 300;
-  self.var_5e7d402b7b6e5c12 = 25;
+  self.pursuegoalradius = 25;
   self.var_20833644cc82839f = 200;
   self.goalheight = 80;
   self.usechokepoints = 0;
   self.cautiousnavigation = 0;
-  self.var_b29c3655b12e292d = 0;
-  self.var_717eb05b8fb85cff = 40;
+  self.cornercheckenabled = 0;
+  self.pursueacceleration = 40;
   self.var_e2b553399f5ff8a3 = 1000;
   self.var_e2d849399f862a5d = 2000;
   self.var_7878ef8b36bc3525 = 1000;
@@ -64,7 +64,7 @@ function juggernaut_init(taskid) {
   self.combat_func_active = 1;
   self function_ae41fbf799ba43f(1, "entity");
   self function_8bbcaeb23a1512ef("all", 0, "bt");
-  self function_5847240c0f9900f2(0);
+  self allowvehiclepredictiveragdoll(0);
 
   if(!issp() && !is_equal(level.gametype, "trial")) {
     self giveweapon("iw9_lm_dblmg_execution_mp");
@@ -93,8 +93,8 @@ function juggernaut_shouldexecute(taskid) {
 
   if(istrue(self.onlyexecutefromthefront)) {
     assert(isDefined(self.enemy));
-    var_79b0b08b6461b1ff = self.origin - self.enemy.origin;
-    var_f38131fb9a95561a = vectortoyaw(var_79b0b08b6461b1ff);
+    targettome = self.origin - self.enemy.origin;
+    var_f38131fb9a95561a = vectortoyaw(targettome);
     angledelta = angleclamp180(var_f38131fb9a95561a - self.enemy.angles[1]);
 
     if(angledelta < -45 || angledelta > 45) {
@@ -108,10 +108,10 @@ function juggernaut_shouldexecute(taskid) {
 function juggernaut_setupexecute(taskid) {
   self.timeoflastexecute = gettime();
   assert(isDefined(self.enemy));
-  var_79b0b08b6461b1ff = self.origin - self.enemy.origin;
-  var_f38131fb9a95561a = vectortoyaw(var_79b0b08b6461b1ff);
+  targettome = self.origin - self.enemy.origin;
+  var_f38131fb9a95561a = vectortoyaw(targettome);
   angledelta = angleclamp180(var_f38131fb9a95561a - self.enemy.angles[1]);
-  var_4ea1b715cf150e33 = "jug_execution_";
+  execrootname = "jug_execution_";
   execstance = "_stand_";
   execnumber = "00";
   dir = "8";
@@ -138,25 +138,25 @@ function juggernaut_setupexecute(taskid) {
     execnumber = "<dev string:x1c>" + overridenumber;
   }
 
-  execname = var_4ea1b715cf150e33 + execnumber + execstance + dir;
+  execname = execrootname + execnumber + execstance + dir;
   self giveexecution(execname, "iw9_lm_dblmg_execution_mp");
   return anim.success;
 }
 
 function function_aad2563e98827b23(taskid) {
-  self.var_f8c080be8d680a2e = 1;
+  self.jailer_waiting = 1;
 
   if(self pathdisttogoal() > 256 && self aigetdesiredspeed() > 70) {
     self.var_8b54fc69d81b03cf = 1;
   }
 
-  self._blackboard.var_7460b96395361857 = undefined;
+  self._blackboard.bseqphase = undefined;
   thread scripts\common\cap::cap_start("cap_jugg_sweep", "caps/common/cap_jugg_sweep");
   thread function_9db78f7b52b4ad06();
 }
 
 function function_c082b9efbf242464(taskid) {
-  if(isDefined(self.var_f8c080be8d680a2e)) {
+  if(isDefined(self.jailer_waiting)) {
     return anim.running;
   }
 
@@ -164,11 +164,11 @@ function function_c082b9efbf242464(taskid) {
 }
 
 function function_e1138cce8b2f28d4(taskid) {
-  if(isDefined(self.var_f8c080be8d680a2e)) {
-    self.var_f8c080be8d680a2e = undefined;
+  if(isDefined(self.jailer_waiting)) {
+    self.jailer_waiting = undefined;
 
-    if(!isDefined(self._blackboard.var_7460b96395361857)) {
-      self._blackboard.var_7460b96395361857 = "abort";
+    if(!isDefined(self._blackboard.bseqphase)) {
+      self._blackboard.bseqphase = "abort";
     }
   }
 }
@@ -176,5 +176,5 @@ function function_e1138cce8b2f28d4(taskid) {
 function function_9db78f7b52b4ad06() {
   self endon("death");
   self waittill("cap_exit_completed");
-  self.var_f8c080be8d680a2e = undefined;
+  self.jailer_waiting = undefined;
 }

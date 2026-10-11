@@ -249,7 +249,7 @@ function onenter() {
   }
 
   if(getdvarint(@ "hash_7bb41608649743f4", 0) != 0) {
-    self function_187fb04ebd01baea();
+    self canceloffhands();
   } else if(getdvarint(@ "hash_112f10fcbe78647", 0) != 0) {
     self releaseoffhand();
   }
@@ -1078,7 +1078,7 @@ function revivesetup(owner) {
   reviveent thread removereviveentfromlevelarrayondeath();
   owner.var_b24e609023ce8208 = scripts\mp\supers\super_stimpistol::function_a35fff2ff233592a();
 
-  if(owner function_546201bb34cf36ce() > 0 || owner namespace_53fc9ddbb516e6e1::function_c8dfc3feceeb2896() || istrue(owner.var_b24e609023ce8208) || owner _hasperk("specialty_survivor")) {
+  if(owner function_546201bb34cf36ce() > 0 || owner namespace_53fc9ddbb516e6e1::hasselfrevivetokensharedfunc() || istrue(owner.var_b24e609023ce8208) || owner _hasperk("specialty_survivor")) {
     owner.laststandreviveent selfrevivethink();
   }
 }
@@ -1357,7 +1357,7 @@ function function_56e47961499ca06c(team) {
   self.owner endon("last_stand_finished");
   self.owner endon("disconnect");
   level endon("game_ended");
-  var_5bebd2013b0f01ec = self.owner;
+  interrogatee = self.owner;
 
   for(;;) {
     self waittill("trigger", interrogator);
@@ -1367,9 +1367,9 @@ function function_56e47961499ca06c(team) {
     }
 
     interrogator iprintlnbold("Interrogating...");
-    var_5bebd2013b0f01ec iprintlnbold("You are being interrogated...");
+    interrogatee iprintlnbold("You are being interrogated...");
     scripts\mp\gametypes\br_public::brleaderdialogteam("interrogation_start", interrogator.team);
-    scripts\mp\gametypes\br_public::brleaderdialogteam("interrogatted_start", var_5bebd2013b0f01ec.team);
+    scripts\mp\gametypes\br_public::brleaderdialogteam("interrogatted_start", interrogatee.team);
 
     while(!interrogator isonground() && !interrogator isswimming() && interrogator useButtonPressed()) {
       waitframe();
@@ -1394,10 +1394,10 @@ function function_56e47961499ca06c(team) {
       interrogator function_fc1c1e51058904a3(&"MP/LASTSTAND_INTERROGATE_USE");
     }
 
-    var_5bebd2013b0f01ec allowmovement(0);
+    interrogatee allowmovement(0);
     interrogator.var_93018d510a589832 = 1;
     thread useholdthink(interrogator, undefined, 1);
-    interrogator thread switchtoteammatereviveweapon(var_5bebd2013b0f01ec, 1);
+    interrogator thread switchtoteammatereviveweapon(interrogatee, 1);
     notif = waittill_any_return_no_endon_death_3("use_hold_interrogate_success", "use_hold_interrogate_fail", "death_or_disconnect");
 
     if(interrogator usingtouch()) {
@@ -1409,8 +1409,8 @@ function function_56e47961499ca06c(team) {
     }
 
     interrogator notify("finish_victim_interrogation");
-    var_5bebd2013b0f01ec setbeingrevivedinternal(0);
-    interrogated = var_5bebd2013b0f01ec function_70f1dbc7125939b8(notif, interrogator, team);
+    interrogatee setbeingrevivedinternal(0);
+    interrogated = interrogatee function_70f1dbc7125939b8(notif, interrogator, team);
 
     if(istrue(interrogated)) {
       return;
@@ -1645,10 +1645,10 @@ function private function_a3a340a5d9222a17() {
 }
 
 function function_70f1dbc7125939b8(notifymsg, interrogator, team) {
-  var_5bebd2013b0f01ec = self;
+  interrogatee = self;
   interrogated = 0;
 
-  if(!isDefined(var_5bebd2013b0f01ec) || !isalive(var_5bebd2013b0f01ec)) {
+  if(!isDefined(interrogatee) || !isalive(interrogatee)) {
     return 0;
   }
 
@@ -1659,19 +1659,19 @@ function function_70f1dbc7125939b8(notifymsg, interrogator, team) {
     interrogated = 1;
   }
 
-  var_5bebd2013b0f01ec.var_895c1aaac16f7256 = 0;
-  var_5bebd2013b0f01ec allowmovement(1);
+  interrogatee.var_895c1aaac16f7256 = 0;
+  interrogatee allowmovement(1);
 
   if(interrogated) {
-    var_5bebd2013b0f01ec setlowermessageomnvar("clear_lower_msg");
-    var_5bebd2013b0f01ec notify("last_stand_interrogated");
+    interrogatee setlowermessageomnvar("clear_lower_msg");
+    interrogatee notify("last_stand_interrogated");
 
     if(isDefined(self.laststandoutlineid)) {
       scripts\mp\utility\outline::outlinedisable(self.laststandoutlineid, self);
       self.laststandoutlineid = undefined;
     }
 
-    interrogator interrogationreward(var_5bebd2013b0f01ec);
+    interrogator interrogationreward(interrogatee);
   }
 
   return interrogated;
@@ -1907,9 +1907,9 @@ function useholdthinkcleanup(reviver, revivespot, interrogation) {
 
   if(notif == "use_hold_think_success") {
     if(istrue(interrogation)) {
-      reviver thread function_e800498086e36c29("interrogation");
+      reviver thread doscoreeventsharedfunc("interrogation");
     } else {
-      reviver thread function_e800498086e36c29("reviver");
+      reviver thread doscoreeventsharedfunc("reviver");
 
       if(istrue(level.var_e2758489154dafea)) {
         revivee thread scripts\mp\rank::scoreeventpopup(#"reviver");
@@ -2796,7 +2796,7 @@ function function_cb1f25df9191cd3c() {
 
       if(isDefined(host.reviver)) {
         host function_e4ccd01fb7ec7a6f(0);
-        host function_d87e1768229d0e3e();
+        host stopliveragdoll();
 
         if(isDefined(host.var_6627db08bfd4f903)) {
           host.var_6627db08bfd4f903 setdevtext("<dev string:x332>");

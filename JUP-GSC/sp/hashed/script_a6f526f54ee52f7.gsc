@@ -1263,7 +1263,7 @@ function scripted_fire(guy) {
 function function_8bccb5c6c5858c48(guy) {
   left_door = scripts\sp\door::get_interactive_door("penthouse_back_door_left");
 
-  if(left_door scripts\sp\door::function_bb083055639abcf3()) {
+  if(left_door scripts\sp\door::door_is_open()) {
     level.price stopanimScripted();
     level.penthouse.back_door_left stopanimScripted();
     flag_set("penthouse_bomb_scene_done");

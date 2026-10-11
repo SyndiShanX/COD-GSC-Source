@@ -319,12 +319,12 @@ function function_70946e24f54d3f1a(interact_device) {
   }
 }
 
-function function_a7ed9b756a764621(interaction_device, var_22e1dd3e25642d69, var_28f03cd0fca2c176, on_use_function, var_81adce70ad13cf33, var_f3bf6e6da951239b) {
+function function_a7ed9b756a764621(interaction_device, scriptable_origin, var_28f03cd0fca2c176, on_use_function, var_81adce70ad13cf33, var_f3bf6e6da951239b) {
   if(!isDefined(var_28f03cd0fca2c176)) {
     var_28f03cd0fca2c176 = "ob_anim_interact";
   }
 
-  var_621e019ea4ee3223 = spawnscriptable(var_28f03cd0fca2c176, var_22e1dd3e25642d69);
+  var_621e019ea4ee3223 = spawnscriptable(var_28f03cd0fca2c176, scriptable_origin);
 
   while(!isDefined(var_621e019ea4ee3223)) {
     waitframe();

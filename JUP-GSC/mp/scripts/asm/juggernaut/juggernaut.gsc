@@ -43,7 +43,7 @@ function enable_casual_killer() {
     self.ck_combatmode = self.combatmode;
   }
 
-  self function_9f82c74eb1b7caf9(0);
+  self setcanusecover(0);
   self allowedstances("stand");
   self.cautiousnavigation = 1;
   self.dontmeleeme = 1;
@@ -65,7 +65,7 @@ function enable_casual_killer() {
   self.dontgiveuponsuppression = 1;
   self.forcesuppressai = 1;
   self.pathenemyfightdist = 0;
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
   weapclass = weaponclass(self.weapon);
   scripts\asm\juggernaut\juggernaut::initanimspeedthresholds_juggernaut("juggernaut");
   self setbasearchetype("juggernaut");
@@ -156,9 +156,9 @@ function disable_casual_killer_internal() {
     self.ck_target delete();
   }
 
-  self.var_98add129a7ecb962 = 1;
+  self.allowlongdeath = 1;
   self allowedstances("stand", "crouch", "prone");
-  self function_9f82c74eb1b7caf9(1);
+  self setcanusecover(1);
 
   if(isDefined(self.ck_combatmode)) {
     self.combatmode = self.ck_combatmode;
@@ -207,9 +207,9 @@ function casual_killer_targeting() {
   self.ck_target = spawn("script_origin", self.origin);
   thread delete_on_death(self.ck_target);
   currentenemy = undefined;
-  var_47bccb924d51b014 = 0;
+  hascurrentenemy = 0;
   enemydeathtime = undefined;
-  var_d9f67b70125e4d15 = undefined;
+  targetchangetime = undefined;
 
   while(true) {
     waitframe();
@@ -222,13 +222,13 @@ function casual_killer_targeting() {
     forward = anglesToForward(self.angles);
     shootfrompos = self getshootfrompos();
 
-    if(var_47bccb924d51b014) {
+    if(hascurrentenemy) {
       if(!isalive(currentenemy)) {
         enemydeathtime = gettime();
         self setentitytarget(self.ck_target);
         self forcethreatupdate();
-        var_47bccb924d51b014 = 0;
-        var_d9f67b70125e4d15 = undefined;
+        hascurrentenemy = 0;
+        targetchangetime = undefined;
       } else {
         self.ck_target.origin = currentenemy.origin;
       }
@@ -242,13 +242,13 @@ function casual_killer_targeting() {
 
         if(length(totarget) > 100) {
           totarget = vectorNormalize(totarget);
-          var_b38f9f63c4ae4218 = abs(angleclamp180(acos(clamp(vectordot(forward, totarget), -1, 1))));
+          angletotarget = abs(angleclamp180(acos(clamp(vectordot(forward, totarget), -1, 1))));
 
-          if(var_b38f9f63c4ae4218 > 30 && gettime() < enemydeathtime + 1500) {
+          if(angletotarget > 30 && gettime() < enemydeathtime + 1500) {
             continue;
           }
 
-          if(var_b38f9f63c4ae4218 < 90) {
+          if(angletotarget < 90) {
             continue;
           }
         }
@@ -256,12 +256,12 @@ function casual_killer_targeting() {
 
       enemydeathtime = undefined;
 
-      if(!isDefined(var_d9f67b70125e4d15) || gettime() > var_d9f67b70125e4d15 + 3000) {
+      if(!isDefined(targetchangetime) || gettime() > targetchangetime + 3000) {
         self clearentitytarget();
         self forcethreatupdate();
 
         if(isalive(self.enemy)) {
-          if(var_47bccb924d51b014 && self.enemy == currentenemy) {
+          if(hascurrentenemy && self.enemy == currentenemy) {
             potentialtarget = self.enemy;
             toenemy = self.enemy.origin - self.origin;
             toenemy = vectorNormalize(toenemy);
@@ -275,10 +275,10 @@ function casual_killer_targeting() {
                 foreach(secondarytarget in secondarytargets) {
                   totarget = secondarytarget.origin - self.origin;
                   totarget = vectorNormalize(totarget);
-                  var_b38f9f63c4ae4218 = abs(angleclamp180(acos(clamp(vectordot(forward, totarget), -1, 1))));
+                  angletotarget = abs(angleclamp180(acos(clamp(vectordot(forward, totarget), -1, 1))));
 
-                  if(var_b38f9f63c4ae4218 < angletoenemy) {
-                    angletoenemy = var_b38f9f63c4ae4218;
+                  if(angletotarget < angletoenemy) {
+                    angletoenemy = angletotarget;
                     potentialtarget = secondarytarget;
                   }
                 }
@@ -288,16 +288,16 @@ function casual_killer_targeting() {
                     self.favoriteenemy = potentialtarget;
                     self forcethreatupdate();
                     self.favoriteenemy = undefined;
-                    var_d9f67b70125e4d15 = gettime();
+                    targetchangetime = gettime();
                   }
                 }
               }
             }
           }
 
-          var_47bccb924d51b014 = isalive(self.enemy);
+          hascurrentenemy = isalive(self.enemy);
 
-          if(var_47bccb924d51b014) {
+          if(hascurrentenemy) {
             currentenemy = self.enemy;
           } else {
             currentenemy = undefined;
@@ -324,21 +324,21 @@ function casual_killer_targeting() {
 function casual_killer_sweep() {
   self endon("leaveCasualKiller");
   self endon("death");
-  var_cc9867c158efea96 = 100;
+  sweepmindistance = 100;
   sweepmaxdistance = 1000;
   sweepangle = 20;
   sweepdirection = -1;
   sweepspeeds = [40, 50, 60];
-  var_6d41eacb164da117 = [20, 25, 30];
+  sweepmaxangles = [20, 25, 30];
   var_4ac58fb63979cc4 = 0;
   var_728f77917e6cf88f = 0;
   sweepspeed = random(sweepspeeds);
-  sweepmaxangle = random(var_6d41eacb164da117);
+  sweepmaxangle = random(sweepmaxangles);
   sweepstoptime = 0;
   shootatpos = undefined;
   lastaim = undefined;
 
-  foreach(maxangle in var_6d41eacb164da117) {
+  foreach(maxangle in sweepmaxangles) {
     if(maxangle > var_4ac58fb63979cc4) {
       var_4ac58fb63979cc4 = maxangle;
     }
@@ -358,7 +358,7 @@ function casual_killer_sweep() {
       }
     }
 
-    shouldaim = asm_currentstatehasflag(self.var_a709fbd9fea148f6, "aim") || asm_currentstatehasflag(self.var_a709fbd9fea148f6, "notetrackAim");
+    shouldaim = asm_currentstatehasflag(self.asmtrackasm, "aim") || asm_currentstatehasflag(self.asmtrackasm, "notetrackAim");
 
     if(shouldaim) {
       shouldaim = isDefined(shootatpos);
@@ -371,19 +371,19 @@ function casual_killer_sweep() {
     }
 
     if(shouldaim) {
-      var_f58d35ffffdf0e30 = self getposonpath(self aigetdesiredspeed());
-      var_778d002d5be90b60 = shootatpos - var_f58d35ffffdf0e30;
-      var_778d002d5be90b60 = (var_778d002d5be90b60[0], var_778d002d5be90b60[1], 0);
-      var_3c8323340d37bffd = vectorNormalize(var_778d002d5be90b60);
+      downpathpos = self getposonpath(self aigetdesiredspeed());
+      toshootatpos = shootatpos - downpathpos;
+      toshootatpos = (toshootatpos[0], toshootatpos[1], 0);
+      var_3c8323340d37bffd = vectorNormalize(toshootatpos);
       aimlimit = self.leftaimlimit;
 
       if(!istrue(lastaim)) {
         aimlimit = max(0, self.leftaimlimit - 20);
       }
 
-      var_9625b7f28569e37a = abs(angleclamp180(acos(clamp(vectordot(var_3c8323340d37bffd, forward), -1, 1))));
+      angletoshootpos = abs(angleclamp180(acos(clamp(vectordot(var_3c8323340d37bffd, forward), -1, 1))));
 
-      if(var_9625b7f28569e37a >= aimlimit) {
+      if(angletoshootpos >= aimlimit) {
         shootatpos = undefined;
         sweepstoptime = 0;
         shouldaim = 0;
@@ -417,12 +417,12 @@ function casual_killer_sweep() {
       utility::lookatpos(undefined);
     }
 
-    var_778d002d5be90b60 = shootatpos - shootfrompos;
-    var_10f0ce3cffed6abb = length(var_778d002d5be90b60);
-    var_3c8323340d37bffd = vectorNormalize(var_778d002d5be90b60);
-    var_9625b7f28569e37a = abs(angleclamp180(acos(clamp(vectordot(forward, var_3c8323340d37bffd), -1, 1))));
+    toshootatpos = shootatpos - shootfrompos;
+    var_10f0ce3cffed6abb = length(toshootatpos);
+    var_3c8323340d37bffd = vectorNormalize(toshootatpos);
+    angletoshootpos = abs(angleclamp180(acos(clamp(vectordot(forward, var_3c8323340d37bffd), -1, 1))));
     var_40577e9afa2538df = axistoangles(var_3c8323340d37bffd, anglestoright(self.angles), anglestoup(self.angles));
-    var_1d68d29c186725d1 = var_40577e9afa2538df[1];
+    sweeptargetangle = var_40577e9afa2538df[1];
 
     if(istrue(self.leavecasualkiller)) {
       if(sweepangle > 0) {
@@ -432,7 +432,7 @@ function casual_killer_sweep() {
         sweepangle += min(sweepangle * -1, sweepspeed * level.framedurationseconds);
         sweepdirection = 1;
       }
-    } else if(var_9625b7f28569e37a + var_4ac58fb63979cc4 < abs(self.leftaimlimit) && var_9625b7f28569e37a + var_4ac58fb63979cc4 < abs(self.rightaimlimit) && var_10f0ce3cffed6abb > var_cc9867c158efea96 && (var_10f0ce3cffed6abb < sweepmaxdistance || isDefined(self.enemy) && self.enemy == level.player)) {
+    } else if(angletoshootpos + var_4ac58fb63979cc4 < abs(self.leftaimlimit) && angletoshootpos + var_4ac58fb63979cc4 < abs(self.rightaimlimit) && var_10f0ce3cffed6abb > sweepmindistance && (var_10f0ce3cffed6abb < sweepmaxdistance || isDefined(self.enemy) && self.enemy == level.player)) {
       if(gettime() > var_728f77917e6cf88f) {
         sweepamount = level.framedurationseconds * sweepspeed * sweepdirection;
         sweepangle += sweepamount;
@@ -440,16 +440,16 @@ function casual_killer_sweep() {
         if(sign(sweepangle) == sign(sweepdirection) && abs(sweepangle) > sweepmaxangle) {
           sweepdirection *= -1;
           sweepspeed = random(sweepspeeds);
-          sweepmaxangle = random(var_6d41eacb164da117);
+          sweepmaxangle = random(sweepmaxangles);
           var_728f77917e6cf88f = gettime() + 350;
         }
       }
 
-      var_1d68d29c186725d1 += sweepangle;
+      sweeptargetangle += sweepangle;
     }
 
     shootangles = axistoangles(var_3c8323340d37bffd, anglestoright(self.angles), anglestoup(self.angles));
-    shootangles = (shootangles[0], var_1d68d29c186725d1, shootangles[2]);
+    shootangles = (shootangles[0], sweeptargetangle, shootangles[2]);
     var_3c8323340d37bffd = anglesToForward(shootangles);
     self.casualkillershootpos = var_3c8323340d37bffd * var_10f0ce3cffed6abb + shootfrompos;
 
@@ -462,7 +462,7 @@ function casual_killer_sweep() {
     }
 
     if(getdvarint(@ "hash_960706093ece3d0c", 0) == 1) {
-      sphere(self.origin, var_cc9867c158efea96, (1, 1, 1), 0, 1);
+      sphere(self.origin, sweepmindistance, (1, 1, 1), 0, 1);
       sphere(self.origin, sweepmaxdistance, (0, 0, 0), 0, 1);
     }
 

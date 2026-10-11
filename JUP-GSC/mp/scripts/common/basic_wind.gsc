@@ -128,8 +128,8 @@ function function_3bf9ed80166e5b45(dvar, min_value, max_value, pause_time, ramp_
 
 function function_a334760f5ed07966(name, value, time) {
   curr = getdvarfloat(name);
-  level notify(function_f28fd66285fa2c9(name) + "_lerp_savedDvar");
-  level endon(function_f28fd66285fa2c9(name) + "_lerp_savedDvar");
+  level notify(getxhashhexname(name) + "_lerp_savedDvar");
+  level endon(getxhashhexname(name) + "_lerp_savedDvar");
   range = value - curr;
   interval = 0.05;
   count = int(time / interval);

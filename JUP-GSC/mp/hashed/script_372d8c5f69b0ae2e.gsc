@@ -438,7 +438,7 @@ function private function_44fe9739a4d6d1db(attacker) {
   }
 
   if(isDefined(autorange) && isDefined(sightrange)) {
-    function_aad7a0ea8ac4ca23("combat", self, attacker, autorange, sightrange, "scripted_melee");
+    stealtheventbroadcast("combat", self, attacker, autorange, sightrange, "scripted_melee");
   }
 }
 
@@ -534,8 +534,8 @@ function private function_497214b31d3bc138(attacker, animscene) {
     usepistol = use_pistol(animscene, self);
     meleeweapon = spawn("script_model", attacker.origin);
 
-    if(isDefined(attacker.var_2cd5923c5934a055)) {
-      meleeweapon setModel(attacker.var_2cd5923c5934a055);
+    if(isDefined(attacker.scripted_melee_weapon)) {
+      meleeweapon setModel(attacker.scripted_melee_weapon);
     } else if(istrue(usepistol) && isDefined(attacker.var_ef760821473d9172)) {
       meleeweapon utility::make_weapon_model(attacker.var_ef760821473d9172.basename, attacker.var_ef760821473d9172.attachments);
       attacker.scripted_melee_player_rig.var_ef760821473d9172 = meleeweapon;
@@ -564,22 +564,22 @@ function private function_497214b31d3bc138(attacker, animscene) {
     attacker.scripted_melee_player_rig linkTo(anim_ent);
     attacker lerpfovscalefactor(0, 0.25);
     var_f4c85a3af01b0120 = getanimlength(getanim(animscene));
-    var_4120f65e56b5e799 = getanimlength(attacker.scripted_melee_player_rig getanim(animscene));
+    player_anim_length = getanimlength(attacker.scripted_melee_player_rig getanim(animscene));
 
-    if(var_f4c85a3af01b0120 > var_4120f65e56b5e799) {
+    if(var_f4c85a3af01b0120 > player_anim_length) {
       attacker thread notify_delay("scripted_melee_anim_ended_longest", var_f4c85a3af01b0120);
       level delaythread(var_f4c85a3af01b0120, &function_63f4a98a99979090, anim_ent);
       delaythread(var_f4c85a3af01b0120 / 4, &function_44fe9739a4d6d1db, attacker);
     } else {
-      attacker thread notify_delay("scripted_melee_anim_ended_longest", var_4120f65e56b5e799);
-      level delaythread(var_4120f65e56b5e799, &function_63f4a98a99979090, anim_ent);
-      delaythread(var_4120f65e56b5e799 / 4, &function_44fe9739a4d6d1db, attacker);
+      attacker thread notify_delay("scripted_melee_anim_ended_longest", player_anim_length);
+      level delaythread(player_anim_length, &function_63f4a98a99979090, anim_ent);
+      delaythread(player_anim_length / 4, &function_44fe9739a4d6d1db, attacker);
     }
 
     thread notify_delay("scripted_melee_anim_ended_victim", var_f4c85a3af01b0120);
-    attacker thread notify_delay("scripted_melee_anim_ended", var_4120f65e56b5e799);
+    attacker thread notify_delay("scripted_melee_anim_ended", player_anim_length);
     var_ac6d99d19393f2d3 = 1;
-    attacker delaycall(var_4120f65e56b5e799 - var_ac6d99d19393f2d3, &lerpfovscalefactor, 1, var_ac6d99d19393f2d3);
+    attacker delaycall(player_anim_length - var_ac6d99d19393f2d3, &lerpfovscalefactor, 1, var_ac6d99d19393f2d3);
     self notify("damage", 0, attacker, undefined, undefined, "MOD_MELEE");
     thread function_121362cf4a7ef895(parent, victimlives);
     attacker thread function_8cff6477a8994cc0(meleeweapon, startstance, endstance);
@@ -807,9 +807,9 @@ function function_5e854e2a4da4f3ff(player, victim) {
     return false;
   }
 
-  var_3d4b09d94df0885a = function_910a912f327b8d34(player);
+  stealthmaxthreat = function_910a912f327b8d34(player);
 
-  if(var_3d4b09d94df0885a < 1) {
+  if(stealthmaxthreat < 1) {
     return true;
   }
 
@@ -892,7 +892,7 @@ function function_dc5bfb7ce71c284(player, victim) {
 }
 
 function function_8205eef398b56d03(weapon) {
-  defaultattachments = function_6527364c1ecca6c6(weapon.basename);
+  defaultattachments = getweapondefaultattachments(weapon.basename);
   var_a90071fdf6c09431 = array_remove_array(weapon.attachments, defaultattachments);
 
   foreach(attachment in var_a90071fdf6c09431) {
@@ -1047,7 +1047,7 @@ function function_d8f48ab0dfd5ef51(guy) {
 
   guy scripts\anim\shared::dropallaiweapons();
 
-  if(isDefined(self.var_1bab8712529eb3c2) && isDefined(self.fnstealthflashlightdetach) && self.var_1bab8712529eb3c2) {
+  if(isDefined(self.asmflashlight) && isDefined(self.fnstealthflashlightdetach) && self.asmflashlight) {
     self[[self.fnstealthflashlightdetach]]();
   }
 
@@ -1087,7 +1087,7 @@ function function_ebea6b350af8fb8d(guy) {
 
 function private release_player_from_viewmodel_anim(endstance) {
   self[[level.scripted_melee.playerlinkeduselinkedvelocity]](0);
-  self function_af4b9b0f0e7c6c42(0.2);
+  self playerunlinkblend(0.2);
   self freezecontrols(0);
   self freezelookcontrols(0);
   val::reset_all("scripted_melee");

@@ -104,7 +104,7 @@ function _stopshellshock(fromdeath) {
 function enableshellshockfunc() {}
 
 function disableshellshockfunc() {
-  _stopshellshock(function_287a1854579369f5());
+  _stopshellshock(isalivesharedfunc());
 }
 
 function shellshock_interruptdelayfunc(name, duration) {
@@ -238,9 +238,9 @@ function activatemeleeblood(state) {
 
 function play_fx_with_entity(fx, string_array, timeout) {
   self endon("disconnect");
-  var_22f48fd7df6c56fb = function_1f9d1f30f6845dd(fx, self getEye(), self);
+  var_22f48fd7df6c56fb = spawnfxforclientsharedfunc(fx, self getEye(), self);
   triggerfx(var_22f48fd7df6c56fb);
-  var_22f48fd7df6c56fb function_e531ef189c6c5d1d();
+  var_22f48fd7df6c56fb setfxkilldefondeletesharedfunc();
   waittill_any_in_array_or_timeout(string_array, timeout);
   var_22f48fd7df6c56fb delete();
 }

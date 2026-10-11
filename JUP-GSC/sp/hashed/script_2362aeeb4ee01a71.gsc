@@ -177,22 +177,22 @@ function function_1949988230389477(var_c0965f05ffa3bad5, var_91ede80522850f1f, i
   level endon("game_ended");
   level endon("stop_patrol_interactions");
   wait initialwait;
-  var_71a90b280a164be5 = getEnt(var_c0965f05ffa3bad5, "targetname");
+  trigone = getEnt(var_c0965f05ffa3bad5, "targetname");
   var_13dcf42881f2776f = getEnt(var_91ede80522850f1f, "targetname");
 
-  if(isDefined(var_71a90b280a164be5) && isDefined(var_13dcf42881f2776f)) {
-    var_71a90b280a164be5 function_ad312e95dd8dc1da(var_c0965f05ffa3bad5);
+  if(isDefined(trigone) && isDefined(var_13dcf42881f2776f)) {
+    trigone function_ad312e95dd8dc1da(var_c0965f05ffa3bad5);
     var_13dcf42881f2776f function_ad312e95dd8dc1da(var_91ede80522850f1f);
     flag_wait_all(var_c0965f05ffa3bad5, var_91ede80522850f1f);
     flag_clear(var_c0965f05ffa3bad5);
     flag_clear(var_91ede80522850f1f);
     wait 5;
-    level thread function_b9cf8fee72096e4c(var_71a90b280a164be5, var_c0965f05ffa3bad5, var_91ede80522850f1f, var_10984f64ad49b573, cooldown, var_5c1cc379a9934f3b, var_6fedc01f09d1b9b9, var_4ad743aa302aa894);
+    level thread function_b9cf8fee72096e4c(trigone, var_c0965f05ffa3bad5, var_91ede80522850f1f, var_10984f64ad49b573, cooldown, var_5c1cc379a9934f3b, var_6fedc01f09d1b9b9, var_4ad743aa302aa894);
     level thread function_b9cf8fee72096e4c(var_13dcf42881f2776f, var_91ede80522850f1f, var_c0965f05ffa3bad5, var_10984f64ad49b573, cooldown, var_5c1cc379a9934f3b, var_6fedc01f09d1b9b9, var_4ad743aa302aa894);
     return;
   }
 
-  if(!isDefined(var_71a90b280a164be5)) {
+  if(!isDefined(trigone)) {
     println("<dev string:x1c>" + var_c0965f05ffa3bad5 + "<dev string:x42>");
   }
 
@@ -201,7 +201,7 @@ function function_1949988230389477(var_c0965f05ffa3bad5, var_91ede80522850f1f, i
   }
 }
 
-function function_b9cf8fee72096e4c(trigger, var_eaad182af1b91884, var_b1ddbc5ee06363f8, waitduration, cooldown, var_5c1cc379a9934f3b, var_6fedc01f09d1b9b9, var_6a106a344181672a) {
+function function_b9cf8fee72096e4c(trigger, trigname, var_b1ddbc5ee06363f8, waitduration, cooldown, var_5c1cc379a9934f3b, var_6fedc01f09d1b9b9, var_6a106a344181672a) {
   level endon("game_ended");
   level endon("stop_patrol_interactions");
 
@@ -218,35 +218,35 @@ function function_b9cf8fee72096e4c(trigger, var_eaad182af1b91884, var_b1ddbc5ee0
       flag_clear(var_b1ddbc5ee06363f8);
     }
 
-    if(flag(var_eaad182af1b91884)) {
+    if(flag(trigname)) {
       if(is_dead_or_dying(trigger.buddy)) {
-        flag_clear(var_eaad182af1b91884);
+        flag_clear(trigname);
         return;
       }
 
       continue;
     }
 
-    ai = trigger function_2d7702ac3e0cb499(var_eaad182af1b91884);
+    ai = trigger function_2d7702ac3e0cb499(trigname);
 
     if(!isDefined(ai)) {
-      flag_clear(var_eaad182af1b91884);
+      flag_clear(trigname);
       continue;
     }
 
     if(isDefined(ai.alertlevel)) {
       if(ai.alertlevel == "combat" || ai.alertlevel == "alert") {
-        flag_clear(var_eaad182af1b91884);
+        flag_clear(trigname);
         return;
       }
     }
 
     if(!isDefined(ai.trig)) {
-      flag_clear(var_eaad182af1b91884);
+      flag_clear(trigname);
       continue;
     }
 
-    if(ai.trig == var_eaad182af1b91884) {
+    if(ai.trig == trigname) {
       ai scripts\cp\coop_stealth::stop_patrol(1);
       waitflag = 0;
 
@@ -264,11 +264,11 @@ function function_b9cf8fee72096e4c(trigger, var_eaad182af1b91884, var_b1ddbc5ee0
       if(waitflag == 0) {
         while(true) {
           if(istrue(var_6a106a344181672a) && is_dead_or_dying(var_32006c42de6c319a.buddy)) {
-            flag_clear(var_eaad182af1b91884);
+            flag_clear(trigname);
             flag_clear(var_b1ddbc5ee06363f8);
             ai scripts\cp\spawning::start_patrol();
-            var_3ae17e43a32c5816 = getStruct(var_32006c42de6c319a.pathnode, "targetname");
-            ai scripts\cp\spawning::set_goal_pos(var_3ae17e43a32c5816.origin);
+            investigatepoint = getStruct(var_32006c42de6c319a.pathnode, "targetname");
+            ai scripts\cp\spawning::set_goal_pos(investigatepoint.origin);
             ai.target = var_32006c42de6c319a.pathnode;
             ai.var_7bd1c0edbaafb6e0 = "alert";
             ai investigate_vo();
@@ -281,7 +281,7 @@ function function_b9cf8fee72096e4c(trigger, var_eaad182af1b91884, var_b1ddbc5ee0
           }
 
           if(is_dead_or_dying(var_32006c42de6c319a.buddy)) {
-            flag_clear(var_eaad182af1b91884);
+            flag_clear(trigname);
             flag_clear(var_b1ddbc5ee06363f8);
             event = spawnStruct();
             event.type = "investigate";
@@ -371,13 +371,13 @@ function function_b9cf8fee72096e4c(trigger, var_eaad182af1b91884, var_b1ddbc5ee0
         }
 
         ai scripts\cp\spawning::start_patrol();
-        flag_clear(var_eaad182af1b91884);
+        flag_clear(trigname);
         flag_clear(var_b1ddbc5ee06363f8);
         wait cooldown;
         continue;
       }
 
-      flag_clear(var_eaad182af1b91884);
+      flag_clear(trigname);
       flag_clear(var_b1ddbc5ee06363f8);
       event = spawnStruct();
       event.type = "investigate";

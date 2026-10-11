@@ -87,8 +87,8 @@ function function_ea1f3e8ff1234996() {
     level.var_77aa416377054823 = getStructArray("heli_reinforceNode", "script_noteworthy");
   }
 
-  var_45c17c8bd7095cc4 = function_b9c4aa88ad97ee68(self);
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_b9c4aa88ad97ee68(self);
+  self.variant_definition = activityvariantdefinition;
   variant_structs = getStructArray(self.varianttag, "target");
 
   foreach(struct in variant_structs) {
@@ -225,8 +225,8 @@ function function_ea1f3e8ff1234996() {
   }
 
   self.vehicle = namespace_168c086126cfa488::function_cecaa2fcd2694301(self.start);
-  self.vehicle.var_70ec04f736523dd0 = self.vehicle vehicle_gettopspeedforward();
-  self.vehicle.var_abdfbc385c923e9f = self.vehicle vehicle_gettopspeedreverse();
+  self.vehicle.originalmaxspeedforward = self.vehicle vehicle_gettopspeedforward();
+  self.vehicle.originalmaxspeedreverse = self.vehicle vehicle_gettopspeedreverse();
   self.vehicle vehicleshowonminimap(0);
   self.vehicle.godmode = 1;
   scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_makeunusable(self.vehicle);
@@ -308,19 +308,19 @@ function function_e9f69242052c116f(start, end, min, max) {
 function function_142d4e0177a0ef1e() {
   self endon("activity_ended");
   self endon("instance_destroyed");
-  self.on_mission = namespace_838b439602b3acc7::function_f578373042c34e16(16625, "quest_s0a2t1_delivery_start", self.var_6c29f2fdb0054bbe);
+  self.on_mission = namespace_838b439602b3acc7::function_f578373042c34e16(16625, "quest_s0a2t1_delivery_start", self.playerparticipants);
 
   if(!self.on_mission) {
     namespace_277c27ef297ef569::function_1281c7fff9456e18("contract_vehicledrive_start_land");
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     params = spawnStruct();
     params.player = player;
     callback::callback("cargo_delivery_started", params);
   }
 
-  function_8abb1c0b2f4039fa(self.var_6c29f2fdb0054bbe[0], 1);
+  function_8abb1c0b2f4039fa(self.playerparticipants[0], 1);
 
   if(getdvarint(@ "hash_59e2ffb228fec3cd", 1)) {
     foreach(door in self.garagedoors) {
@@ -330,7 +330,7 @@ function function_142d4e0177a0ef1e() {
         door disablescriptableplayeruse(player);
       }
 
-      foreach(player in self.var_6c29f2fdb0054bbe) {
+      foreach(player in self.playerparticipants) {
         door enablescriptableplayeruse(player);
       }
     }
@@ -351,10 +351,10 @@ function function_142d4e0177a0ef1e() {
   areaorigin = self.vehicle.origin;
   var_29d8a3a92f9037d8 = undefined;
 
-  while(!isDefined(var_29d8a3a92f9037d8) || !array_contains(self.var_6c29f2fdb0054bbe, var_29d8a3a92f9037d8)) {
+  while(!isDefined(var_29d8a3a92f9037d8) || !array_contains(self.playerparticipants, var_29d8a3a92f9037d8)) {
     if(!(isDefined(self.vehicle) && isDefined(self.vehicle.vehiclename))) {
       if(self.on_mission) {
-        foreach(player in self.var_6c29f2fdb0054bbe) {
+        foreach(player in self.playerparticipants) {
           function_4a508fcbbea05afd(player);
         }
       }
@@ -377,7 +377,7 @@ function function_142d4e0177a0ef1e() {
     wait 0.1;
   }
 
-  self.teams = [self.var_6c29f2fdb0054bbe[0].team];
+  self.teams = [self.playerparticipants[0].team];
   self.enemyheli = self[[self.helidata.spawnheli]](self.vehicle);
   self.enemyheli.var_1e0eb63ecb3f1e2 = 1;
   self.vehicle.var_a21a9516d1dede9e = var_29d8a3a92f9037d8.team;
@@ -393,7 +393,7 @@ function function_142d4e0177a0ef1e() {
   }
 
   if(!self.payloaddelivered && self.on_mission) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       function_4a508fcbbea05afd(player);
     }
   }
@@ -415,9 +415,9 @@ function function_ce5af2f09a72177a(offsets, axes) {
 function function_48814026e195ab4a() {
   self endon("instance_destroyed");
 
-  if(isDefined(self.vehicle) && isDefined(self.vehicle.var_70ec04f736523dd0) && isDefined(self.vehicle.var_abdfbc385c923e9f)) {
-    self.vehicle vehicle_settopspeedforward(self.vehicle.var_70ec04f736523dd0);
-    self.vehicle vehicle_settopspeedreverse(self.vehicle.var_abdfbc385c923e9f);
+  if(isDefined(self.vehicle) && isDefined(self.vehicle.originalmaxspeedforward) && isDefined(self.vehicle.originalmaxspeedreverse)) {
+    self.vehicle vehicle_settopspeedforward(self.vehicle.originalmaxspeedforward);
+    self.vehicle vehicle_settopspeedreverse(self.vehicle.originalmaxspeedreverse);
   }
 
   scripts\mp\gametypes\dmz_task_utils::function_629ed367d1393020();
@@ -512,7 +512,7 @@ function private function_4a508fcbbea05afd(player) {
   }
 }
 
-function function_4df410d9f7d447b7(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_4df410d9f7d447b7(instance, part, state, player, bautouse, usestring) {
   instance setscriptablepartstate("door_metal_roller_01", "opening");
   destroynavobstacle(instance.navblocker);
   instance.open = 1;
@@ -525,7 +525,7 @@ function function_ef438efc54d8342c() {
   self endon("instance_destroyed");
 
   while(true) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       dist = distance2dsquared(player.origin, self.start.origin);
 
       if(dist < 6250000) {
@@ -550,7 +550,7 @@ function function_ef4391fc54d83ac5() {
   self endon("instance_destroyed");
 
   while(true) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       dist = distance2dsquared(player.origin, self.var_844b455ad4ce728d.origin);
 
       if(dist < 562500) {
@@ -569,7 +569,7 @@ function function_ef4390fc54d83892() {
   self endon("instance_destroyed");
 
   while(true) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       dist = distance2dsquared(player.origin, self.var_844b455ad4ce728d.origin);
 
       if(dist < 90000) {
@@ -767,10 +767,10 @@ function function_dc76880e71e194bd() {
     if(isDefined(self.vehicle) && isDefined(self.vehicle.occupants)) {
       driver = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getdriver(self.vehicle, 1);
 
-      if(isDefined(driver) && !array_contains(self.var_6c29f2fdb0054bbe, driver)) {
+      if(isDefined(driver) && !array_contains(self.playerparticipants, driver)) {
         self.payloaddelivered = 0;
         self notify("payload_stolen");
-        function_1281c7fff9456e18("vehicle_drive_stolen", self.var_6c29f2fdb0054bbe);
+        function_1281c7fff9456e18("vehicle_drive_stolen", self.playerparticipants);
         return;
       }
     }
@@ -879,12 +879,12 @@ function function_fcbb7fe348451251() {
   namespace_c669075cf56436f4::function_765b706dc170e214(self.var_b494362af9b72fd3);
 }
 
-function function_c37023c94938fcdb(var_1bd1cc823b281c6e, objectivemarkerid) {
-  generalsettings = var_1bd1cc823b281c6e.generalsettings;
-  minimapsettings = var_1bd1cc823b281c6e.minimapsettings;
-  var_4b16eeed74027f36 = var_1bd1cc823b281c6e.var_4b16eeed74027f36;
-  compasssettings = var_1bd1cc823b281c6e.compasssettings;
-  hudsettings = var_1bd1cc823b281c6e.hudsettings;
+function function_c37023c94938fcdb(objectivemarkerbundle, objectivemarkerid) {
+  generalsettings = objectivemarkerbundle.generalsettings;
+  minimapsettings = objectivemarkerbundle.minimapsettings;
+  var_4b16eeed74027f36 = objectivemarkerbundle.var_4b16eeed74027f36;
+  compasssettings = objectivemarkerbundle.compasssettings;
+  hudsettings = objectivemarkerbundle.hudsettings;
   objective_icon(objectivemarkerid, generalsettings.var_63d1b5b543ef6387);
   objective_state(objectivemarkerid, generalsettings.state);
   function_5fd2627c5ce186db(objectivemarkerid, generalsettings.isoptional);

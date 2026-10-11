@@ -322,7 +322,7 @@ function onenter(damage_data, dokillcam) {
   self.laststandoldweaponobj = scripts\cp\utility::getweapontoswitchbackto();
 
   if(getdvarint(@ "hash_7bb41608649743f4", 0) != 0) {
-    self function_187fb04ebd01baea();
+    self canceloffhands();
   } else if(getdvarint(@ "hash_112f10fcbe78647", 0) != 0) {
     self releaseoffhand();
   }
@@ -848,8 +848,8 @@ function updatesquadmemberlaststandreviveprogress(revivee, reviver, progress, va
 
     bitoffset = squadindex * 8;
     var_b27d0eff739466e0 = (progresspayload & 255) << bitoffset;
-    var_f8f977081d3da8b4 = ~(255 << bitoffset);
-    cleanedbase = var_70401238acb839bc &var_f8f977081d3da8b4;
+    invertedmask = ~(255 << bitoffset);
+    cleanedbase = var_70401238acb839bc &invertedmask;
     statuspayload = cleanedbase + var_b27d0eff739466e0;
     level.br_squadrevivestatus[revivee.team] = statuspayload;
 
@@ -1293,21 +1293,21 @@ function ondeath(deathdata) {
     }
   }
 
-  var_5814d27874b48e54 = spawnStruct();
-  var_5814d27874b48e54.victim = self;
-  var_5814d27874b48e54.attacker = undefined;
-  var_5814d27874b48e54.meansofdeath = self.laststandmeansofdeath;
-  var_5814d27874b48e54.weaponfullstring = deathdata.weaponfullstring;
+  telemetrydata = spawnStruct();
+  telemetrydata.victim = self;
+  telemetrydata.attacker = undefined;
+  telemetrydata.meansofdeath = self.laststandmeansofdeath;
+  telemetrydata.weaponfullstring = deathdata.weaponfullstring;
 
   if(isDefined(self.laststandattacker)) {
-    var_5814d27874b48e54.attacker = self.laststandattacker;
+    telemetrydata.attacker = self.laststandattacker;
   }
 
   if(isDefined(self.laststandweaponobj)) {
-    var_5814d27874b48e54.weaponfullstring = getcompleteweaponname(self.laststandweaponobj);
+    telemetrydata.weaponfullstring = getcompleteweaponname(self.laststandweaponobj);
   }
 
-  namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_player_death", var_5814d27874b48e54);
+  namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_player_death", telemetrydata);
 
   if(isDefined(deathdata) && isDefined(self.laststandattacker) && istrue(self.laststandattacker.inlaststand)) {
     self.laststandattacker thread onlaststandkillenemy(deathdata, self.laststandmeansofdeath, self.laststandweaponobj);
@@ -2722,7 +2722,7 @@ function function_cb1f25df9191cd3c() {
 
       if(isDefined(host.reviver)) {
         host function_e4ccd01fb7ec7a6f(0);
-        host function_d87e1768229d0e3e();
+        host stopliveragdoll();
 
         if(isDefined(host.var_6627db08bfd4f903)) {
           host.var_6627db08bfd4f903 setdevtext("<dev string:x28e>");
@@ -4353,7 +4353,7 @@ function is_killed_by_kill_trigger(var_318ade4970c8f647) {
   return isDefined(var_318ade4970c8f647) || istrue(self.oob) || istrue(self.shouldskiplaststand) || istrue(self isswimming());
 }
 
-function wait_to_be_revived(downedplayer, spawnloc, var_ae4fae9ba66e6aa3, var_da0143862335cb2a, var_960565c8383e5c83, revivetime, var_69bc42a14a8942a3, timelimit, var_3bc814fcff1670fd, gameshouldend, var_abd29c5af2a4d78a, var_ba651aff199a8cd4) {
+function wait_to_be_revived(downedplayer, spawnloc, var_ae4fae9ba66e6aa3, var_da0143862335cb2a, var_960565c8383e5c83, revivetime, iconcolor, timelimit, var_3bc814fcff1670fd, gameshouldend, var_abd29c5af2a4d78a, var_ba651aff199a8cd4) {
   if(isDefined(downedplayer.dogtag)) {
     reviveent = downedplayer.dogtag;
   } else if(istrue(downedplayer.var_a14c34f117daf30a)) {
@@ -4392,7 +4392,7 @@ function wait_to_be_revived(downedplayer, spawnloc, var_ae4fae9ba66e6aa3, var_da
   downedplayer.reviveiconent = reviveiconent;
 
   if(isDefined(level.give_up_func) && (!downedplayer isspectatingplayer() || !istrue(var_3bc814fcff1670fd))) {
-    downedplayer thread[[level.give_up_func]](downedplayer, spawnloc, var_ae4fae9ba66e6aa3, var_da0143862335cb2a, var_960565c8383e5c83, revivetime, var_69bc42a14a8942a3, timelimit, var_3bc814fcff1670fd, gameshouldend, var_abd29c5af2a4d78a, var_ba651aff199a8cd4);
+    downedplayer thread[[level.give_up_func]](downedplayer, spawnloc, var_ae4fae9ba66e6aa3, var_da0143862335cb2a, var_960565c8383e5c83, revivetime, iconcolor, timelimit, var_3bc814fcff1670fd, gameshouldend, var_abd29c5af2a4d78a, var_ba651aff199a8cd4);
   }
 
   if(!isDefined(reviveent)) {
@@ -4924,13 +4924,13 @@ function enable_on_world_progress_bar_for_other_players(downed_player, reviver) 
 }
 
 function should_revive_continue(reviver) {
-  var_d1f23c550e310ac = !level.gameended && reviver scripts\cp_mp\utility\player_utility::_isalive() && reviver useButtonPressed() && !player_in_laststand(reviver);
+  canrevive = !level.gameended && reviver scripts\cp_mp\utility\player_utility::_isalive() && reviver useButtonPressed() && !player_in_laststand(reviver);
 
   if(isDefined(reviver.can_revive) && reviver.can_revive == 0) {
     return 0;
   }
 
-  return var_d1f23c550e310ac;
+  return canrevive;
 }
 
 function update_players_revive_progress_bar(downed_player, reviver, progress_ratio) {
@@ -5281,12 +5281,12 @@ function function_79ddac0ef09b8d0f(var_ee13026b48e61129, var_440fa28f4fe729dd) {
     }
   }
 
-  var_64d1449ec4e9520 = undefined;
+  wait_for_notify = undefined;
 
   foreach(player in level.players) {
     if(!isalive(player) || player isspectatingplayer() || istrue(player.inlaststand)) {
       if(player scripts\cp\laststand::getbeingrevivedinternal()) {
-        var_64d1449ec4e9520 = "player_revived_while_resetting_revives_done";
+        wait_for_notify = "player_revived_while_resetting_revives_done";
         thread function_2c44cc8cedd35d79(player);
         continue;
       }
@@ -5295,8 +5295,8 @@ function function_79ddac0ef09b8d0f(var_ee13026b48e61129, var_440fa28f4fe729dd) {
     }
   }
 
-  if(isDefined(var_64d1449ec4e9520)) {
-    level waittill(var_64d1449ec4e9520);
+  if(isDefined(wait_for_notify)) {
+    level waittill(wait_for_notify);
   } else {
     waitframe();
   }

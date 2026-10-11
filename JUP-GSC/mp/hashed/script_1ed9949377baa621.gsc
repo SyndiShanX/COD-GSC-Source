@@ -162,7 +162,7 @@ function private function_72007910bbbe62bb(v_loc, str_type, a_players, lootid) {
 function private wait_for_trigger_or_timeout(n_timeout) {
   self endon("death");
   self endon("trigger_timeout");
-  thread function_b4b04de87729a6f3(n_timeout);
+  thread delete_after_delay(n_timeout);
   self waittill("trigger", player);
   return player;
 }
@@ -420,7 +420,7 @@ function function_19e866494b6bb2d8(params) {
 
   scripts\cp_mp\agents\ai_spawn_director::function_9950e6e485bf5261(encounterid);
 
-  if(isarray(instance.var_6c29f2fdb0054bbe)) {
-    thread scripts\cp_mp\overlord::playevent("quest_s1_rift_gate_unlock_contract_success", instance.var_6c29f2fdb0054bbe, 3.5);
+  if(isarray(instance.playerparticipants)) {
+    thread scripts\cp_mp\overlord::playevent("quest_s1_rift_gate_unlock_contract_success", instance.playerparticipants, 3.5);
   }
 }

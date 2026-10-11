@@ -187,7 +187,7 @@ function spawn_carriables_from_scriptables_individual_percentage() {
   }
 }
 
-function scriptable_carriable_use(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function scriptable_carriable_use(instance, part, state, player, bautouse, usestring) {
   assert(part == "br_carriable_pickup");
 
   if(istrue(level.gameended)) {
@@ -396,8 +396,8 @@ function carriable_lightfuse(player) {
 
 function carriable_fuse_ui(player) {
   usebar = player scripts\cp\utility::createprimaryprogressbar();
-  var_721e3650de671da6 = player scripts\cp\utility::createprimaryprogressbartext();
-  var_721e3650de671da6 settext("FUSE LIT");
+  usebartext = player scripts\cp\utility::createprimaryprogressbartext();
+  usebartext settext("FUSE LIT");
   fuse = getdvarfloat(@ "hash_7bba431554c05335", 5);
 
   if(fuse <= 0) {
@@ -407,7 +407,7 @@ function carriable_fuse_ui(player) {
   usebar scripts\cp\utility::updatebar(0, 1 / fuse);
   player waittill_any_3("death", "weapon_fired", "drop_object");
   usebar scripts\cp\utility::destroyelem();
-  var_721e3650de671da6 scripts\cp\utility::destroyelem();
+  usebartext scripts\cp\utility::destroyelem();
 }
 
 function carriable_explode() {
@@ -680,82 +680,82 @@ function carriable_throw_watch(carriable) {
   carriable thread carriable_physics_launch_drop(dir * force, self, spawnorigin);
 }
 
-function function_2678b24702a505c3(var_3b9b773130e28712, var_29bd1011187d1128, var_1da65e5d5920eadf, var_322921c75a5a928f, var_ebfe02bf1cb74c91) {
+function function_2678b24702a505c3(propanetank, var_29bd1011187d1128, var_1da65e5d5920eadf, var_322921c75a5a928f, var_ebfe02bf1cb74c91) {
   if(getdvarint(@ "hash_b619233b9022062d") < 1) {
     return;
   }
 
-  function_5ea494d70cf9e632(var_3b9b773130e28712, var_29bd1011187d1128, var_1da65e5d5920eadf, var_322921c75a5a928f, var_ebfe02bf1cb74c91);
+  function_5ea494d70cf9e632(propanetank, var_29bd1011187d1128, var_1da65e5d5920eadf, var_322921c75a5a928f, var_ebfe02bf1cb74c91);
 
-  if(isDefined(var_3b9b773130e28712)) {
-    var_3b9b773130e28712.var_debf5465826d6810 = 0;
+  if(isDefined(propanetank)) {
+    propanetank.var_debf5465826d6810 = 0;
   }
 }
 
-function private function_5ea494d70cf9e632(var_3b9b773130e28712, var_29bd1011187d1128, var_1da65e5d5920eadf, var_322921c75a5a928f, var_ebfe02bf1cb74c91) {
+function private function_5ea494d70cf9e632(propanetank, var_29bd1011187d1128, var_1da65e5d5920eadf, var_322921c75a5a928f, var_ebfe02bf1cb74c91) {
   assert(isDefined(var_29bd1011187d1128));
-  var_3b9b773130e28712 endon("pickup");
-  var_3b9b773130e28712 endon("death");
+  propanetank endon("pickup");
+  propanetank endon("death");
 
-  if(!isDefined(var_3b9b773130e28712.var_debf5465826d6810)) {
-    var_3b9b773130e28712.var_debf5465826d6810 = 0;
+  if(!isDefined(propanetank.var_debf5465826d6810)) {
+    propanetank.var_debf5465826d6810 = 0;
   }
 
-  if(var_3b9b773130e28712.var_debf5465826d6810) {
+  if(propanetank.var_debf5465826d6810) {
     return;
   }
 
-  var_3b9b773130e28712.var_debf5465826d6810 = 1;
+  propanetank.var_debf5465826d6810 = 1;
   var_1da65e5d5920eadf = default_to(var_1da65e5d5920eadf, 6);
   var_322921c75a5a928f = default_to(var_322921c75a5a928f, 400);
   var_ebfe02bf1cb74c91 = default_to(var_ebfe02bf1cb74c91, 20);
-  prevpos = var_3b9b773130e28712.origin;
+  prevpos = propanetank.origin;
   prevtime = gettime() - 0.01;
   trace = undefined;
   trace_contents = trace::create_contents(1, 0, 0, 0, 0, 0);
   var_9c3dda809e04c0 = gettime() + function_a5b14435e3229bed(var_ebfe02bf1cb74c91);
 
-  while(isDefined(var_3b9b773130e28712) && gettime() < var_9c3dda809e04c0) {
-    trace = sphere_trace(var_3b9b773130e28712.origin, var_3b9b773130e28712.origin, var_1da65e5d5920eadf, var_29bd1011187d1128, trace_contents);
+  while(isDefined(propanetank) && gettime() < var_9c3dda809e04c0) {
+    trace = sphere_trace(propanetank.origin, propanetank.origin, var_1da65e5d5920eadf, var_29bd1011187d1128, trace_contents);
 
     if(trace["hittype"] != "hittype_none") {
-      vel = prevpos - var_3b9b773130e28712.origin;
+      vel = prevpos - propanetank.origin;
       var_5bb0951c3e9db068 = length(vel) / (gettime() - prevtime);
 
       if(var_5bb0951c3e9db068 >= 0.1) {
         hitai = trace["entity"];
 
         if(isai(hitai)) {
-          var_3b9b773130e28712 playsoundonentity("eqp_flammable_cannister_phy_hit_enemy");
+          propanetank playsoundonentity("eqp_flammable_cannister_phy_hit_enemy");
           var_a509b8684614fc91 = default_to(var_29bd1011187d1128.team, "allies");
           enemyteam = get_enemy_team(var_a509b8684614fc91);
 
           if(!istrue(hitai.magic_bullet_shield) && hitai.team == enemyteam) {
-            thread function_3f2d69c30c824813(var_29bd1011187d1128, var_3b9b773130e28712, hitai);
-            hitai dodamage(1, var_3b9b773130e28712.origin, var_29bd1011187d1128, undefined, "MOD_IMPACT");
+            thread function_3f2d69c30c824813(var_29bd1011187d1128, propanetank, hitai);
+            hitai dodamage(1, propanetank.origin, var_29bd1011187d1128, undefined, "MOD_IMPACT");
           }
         }
 
-        var_3b9b773130e28712 physicsstopserver();
-        var_3b9b773130e28712 physicslaunchserver(var_3b9b773130e28712.origin, trace["normal"] * var_5bb0951c3e9db068 * var_322921c75a5a928f);
+        propanetank physicsstopserver();
+        propanetank physicslaunchserver(propanetank.origin, trace["normal"] * var_5bb0951c3e9db068 * var_322921c75a5a928f);
         wait 0.2;
       }
     }
 
-    prevpos = var_3b9b773130e28712.origin;
+    prevpos = propanetank.origin;
     prevtime = gettime();
     waitframe();
   }
 
-  var_3b9b773130e28712.var_debf5465826d6810 = 0;
+  propanetank.var_debf5465826d6810 = 0;
 }
 
-function function_3f2d69c30c824813(var_29bd1011187d1128, var_3b9b773130e28712, hitai) {
+function function_3f2d69c30c824813(var_29bd1011187d1128, propanetank, hitai) {
   assert(isDefined(var_29bd1011187d1128));
   var_29bd1011187d1128 endon("death_or_disconnect");
   hitai waittill("death", attacker_ent, means_of_death, weapon_name);
 
-  if(attacker_ent == var_3b9b773130e28712 && isDefined(hitai.damagemod) && hitai.damagemod == "MOD_EXPLOSIVE") {
+  if(attacker_ent == propanetank && isDefined(hitai.damagemod) && hitai.damagemod == "MOD_EXPLOSIVE") {
     var_29bd1011187d1128 function_6a369480dbaf1090("jup_sp_heycatch");
   }
 }
@@ -905,7 +905,7 @@ function carriable_watch_for_physics_collison() {
   self endon("death");
   self endon("explode");
   self endon("pickup");
-  var_b8ff169d31f201f = function_9d30fd63965bafa9("projectile_impact");
+  var_b8ff169d31f201f = geteventdefaultdistance("projectile_impact");
 
   while(true) {
     self waittill("collision", body0, body1, flag0, flag1, position, normal, impulse, ent);
@@ -1099,7 +1099,7 @@ function function_103854dfb2db4ae1(carriable) {
 }
 
 function carriable_detonate_propane() {
-  var_d1ae17964fa90b93 = 2;
+  phyexpmagnitude = 2;
   bottom = self.origin + (0, 0, -96);
   end_pos = physicstrace(self.origin, bottom);
   inairdetonation = end_pos == bottom;

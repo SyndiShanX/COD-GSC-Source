@@ -91,9 +91,9 @@ function init() {
   namespace_ed19ace3eeb2e4::init();
 }
 
-function commandwatcher(dvarname, var_d4bb121b87421c8) {
-  level notify("commandWatcher_" + function_f28fd66285fa2c9(dvarname));
-  level endon("commandWatcher_" + function_f28fd66285fa2c9(dvarname));
+function commandwatcher(dvarname, commandhandlerfunc) {
+  level notify("commandWatcher_" + getxhashhexname(dvarname));
+  level endon("commandWatcher_" + getxhashhexname(dvarname));
   setDvar(dvarname, "");
 
   while(true) {
@@ -113,7 +113,7 @@ function commandwatcher(dvarname, var_d4bb121b87421c8) {
 
     command = tokens[0];
     arglist = array_slice(tokens, 1);
-    [[var_d4bb121b87421c8]](command, arglist);
+    [[commandhandlerfunc]](command, arglist);
   }
 }
 
@@ -191,7 +191,7 @@ function function_c96d7535862e245c(command, args) {
       var_6cca86b6634aa67e = args[0];
       victimname = args[1];
       attackername = args[2];
-      function_53a0f5e4d6bbc7a4(victimname, attackername, var_6cca86b6634aa67e);
+      devhurtplayer(victimname, attackername, var_6cca86b6634aa67e);
       break;
     case #"hash_30b20a099c3735ec":
       if(args.size < 1) {
@@ -1015,14 +1015,14 @@ function function_c96d7535862e245c(command, args) {
       var_8a6d55b19a5a2a1c = args[1];
       var_c410829a7b9a79d6 = args[2];
 
-      if(!scripts\cp_mp\challenges::function_3a54cb391f6b8cf8(function_1823ff50bb28148d(var_8a6d55b19a5a2a1c))) {
+      if(!scripts\cp_mp\challenges::function_3a54cb391f6b8cf8(getxhash(var_8a6d55b19a5a2a1c))) {
         iprintlnbold("<dev string:xe59>" + var_8a6d55b19a5a2a1c);
       }
 
       if(command == "<dev string:x7c4>") {
-        player scripts\cp_mp\challenges::function_b7793133df5fb0df(function_1823ff50bb28148d(var_8a6d55b19a5a2a1c), function_1823ff50bb28148d(var_c410829a7b9a79d6));
+        player scripts\cp_mp\challenges::function_b7793133df5fb0df(getxhash(var_8a6d55b19a5a2a1c), getxhash(var_c410829a7b9a79d6));
       } else if(command == "<dev string:xe2c>") {
-        player scripts\cp_mp\challenges::function_5b58181f4c00ba56(function_1823ff50bb28148d(var_8a6d55b19a5a2a1c), function_1823ff50bb28148d(var_c410829a7b9a79d6));
+        player scripts\cp_mp\challenges::function_5b58181f4c00ba56(getxhash(var_8a6d55b19a5a2a1c), getxhash(var_c410829a7b9a79d6));
       }
 
       break;
@@ -1315,7 +1315,7 @@ function function_c96d7535862e245c(command, args) {
 
       break;
     case #"hash_70f3163baf120876":
-      var_477bd548940c3a78 = args[0];
+      binkname = args[0];
       omnvarvalue = undefined;
 
       if(args.size > 1) {
@@ -1326,8 +1326,8 @@ function function_c96d7535862e245c(command, args) {
         omnvarvalue = 1;
       }
 
-      firstplayer preloadcinematicforplayer(var_477bd548940c3a78);
-      firstplayer playcinematicforplayer(var_477bd548940c3a78);
+      firstplayer preloadcinematicforplayer(binkname);
+      firstplayer playcinematicforplayer(binkname);
       firstplayer setclientomnvar("<dev string:x12dd>", omnvarvalue);
       wait 5;
       firstplayer setclientomnvar("<dev string:x12dd>", 0);
@@ -1354,7 +1354,7 @@ function function_c96d7535862e245c(command, args) {
 
         if(isDefined(attacker) && isDefined(victim) && isDefined(level.var_d1df695cab85185c)) {
           victim thread[[level.var_d1df695cab85185c]](attacker);
-          attacker function_758ee105bdf0c62d();
+          attacker startwatchingforscavengercleanup();
         }
       }
 
@@ -1906,7 +1906,7 @@ function function_c96d7535862e245c(command, args) {
       break;
     case #"hash_2e720b32adac25d0":
       if(args.size > 0) {
-        var_4ac7b6bdde12a915 = function_1823ff50bb28148d(args[0]);
+        var_4ac7b6bdde12a915 = getxhash(args[0]);
         firstplayer.var_657f5a0d17435bc.completed[var_4ac7b6bdde12a915] = 0;
         firstplayer.var_657f5a0d17435bc.var_5eb1da668993b439[var_4ac7b6bdde12a915] = 0;
         firstplayer namespace_91fad7208d9cd856::function_28f32fc9e57814f6(var_4ac7b6bdde12a915);
@@ -2219,7 +2219,7 @@ function function_5b5ab8ab53c49d4d(victimname, attackername) {
   }
 }
 
-function function_53a0f5e4d6bbc7a4(victimname, attackername, damage) {
+function devhurtplayer(victimname, attackername, damage) {
   victim = undefined;
   attacker = undefined;
   victimname = tolower(victimname);
@@ -2949,8 +2949,8 @@ function function_9503654ca3380f8a(args) {
   newent function_dd6d30b9ec87c1b3(body, head, "<dev string:x1cbc>");
 }
 
-function showsplash(splash, var_42b1e877ab187c6) {
-  scripts\mp\hud_util::showsplashtoall(splash, undefined, undefined, undefined, undefined, var_42b1e877ab187c6);
+function showsplash(splash, splashlistoverride) {
+  scripts\mp\hud_util::showsplashtoall(splash, undefined, undefined, undefined, undefined, splashlistoverride);
 }
 
 function function_548e30d6072b85e9(player, amount) {
@@ -3073,10 +3073,10 @@ function function_533bda33b99fab22(victim, var_742e3b452c9bb9b0) {
   waitframe();
   waitframe();
   waitframe();
-  function_53a0f5e4d6bbc7a4(victim.name, undefined, 300);
+  devhurtplayer(victim.name, undefined, 300);
 }
 
-function function_af939b4dfd7f0769(var_90ac04838df7e429, var_d1bec1cd8223b6e4, var_81abad5fa1e318d5) {
+function function_af939b4dfd7f0769(var_90ac04838df7e429, var_d1bec1cd8223b6e4, framedelay) {
   player = self;
   player notify("<dev string:x1712>" + var_90ac04838df7e429);
   player endon("<dev string:x1712>" + var_90ac04838df7e429);
@@ -3092,7 +3092,7 @@ function function_af939b4dfd7f0769(var_90ac04838df7e429, var_d1bec1cd8223b6e4, v
       continue;
     }
 
-    var_28281bdcf431feb4 = var_81abad5fa1e318d5 * function_676cfe2ab64ea758() / 1000;
+    var_28281bdcf431feb4 = framedelay * getframeduration() / 1000;
 
     if(var_28281bdcf431feb4) {
       wait var_28281bdcf431feb4;

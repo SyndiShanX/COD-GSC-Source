@@ -188,8 +188,8 @@ function trophy_used(grenade) {
   }
 
   if(isDefined(superbundle) && level.allowsupers) {
-    var_9b32d1936831f5aa = function_71efed8bf57f1d39(superbundle, superinfo.blueprintindex);
-    grenade function_f88fb16414b87f60(var_9b32d1936831f5aa, #"projectilemodel");
+    genericblueprintname = function_71efed8bf57f1d39(superbundle, superinfo.blueprintindex);
+    grenade function_f88fb16414b87f60(genericblueprintname, #"projectilemodel");
   }
 
   thread scripts\mp\weapons::monitordisownedgrenade(self, grenade);
@@ -566,7 +566,7 @@ function function_6a0da54618dea55c(ents, trophy_castcontents, castorigin, protec
 function function_281b0f9d6b4c66ad(protectionoffset, protectiondist, var_b701d494f3ae184f, var_d0b9c256ce9d59f4, gridvalidation) {
   self endon("death");
   trophy_castcontents = trophy_castcontents();
-  typemask = function_869ccb4e3451b8c6(["etype_missile", "etype_vehicle"]);
+  typemask = createentitytypemask(["etype_missile", "etype_vehicle"]);
   protectiondistsqr = protectiondist * protectiondist;
 
   validationents = [];
@@ -582,7 +582,7 @@ function function_281b0f9d6b4c66ad(protectionoffset, protectiondist, var_b701d49
     }
 
     castorigin = trophy_castorigin(protectionoffset);
-    ents = function_b1eef70090b5b7b5(self.origin, 500, typemask, [self]);
+    ents = getentitiesinradiusfrompartitiongrid(self.origin, 500, typemask, [self]);
 
     foreach(trophytarget in ents) {
       if(!isDefined(trophytarget)) {
@@ -1202,7 +1202,7 @@ function logtrophysuccesful(trophytarget) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function function_fc792b373d83f8d4(weaponname) {

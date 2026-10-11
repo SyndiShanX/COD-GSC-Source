@@ -42,12 +42,12 @@ function main() {
 }
 
 function function_476e26432f5d3edd() {
-  var_8b1c18e78b52638 = getStructArray("jackolantern", "script_noteworthy");
-  var_140e4695f31a730d = 1024;
+  pumpkins = getStructArray("jackolantern", "script_noteworthy");
+  testdist = 1024;
 
-  foreach(var_ac64400b9ee8389b in var_8b1c18e78b52638) {
-    if(distance2dsquared(var_ac64400b9ee8389b.origin, (-252.5, 189, 55.2987)) <= var_140e4695f31a730d) {
-      deletestruct_ref(var_ac64400b9ee8389b);
+  foreach(pumpkin in pumpkins) {
+    if(distance2dsquared(pumpkin.origin, (-252.5, 189, 55.2987)) <= testdist) {
+      deletestruct_ref(pumpkin);
     }
   }
 }
@@ -65,10 +65,10 @@ function function_261c472c0f5a1633() {
     var_3994588df7681f2c = (16, 16, 60);
     var_b6272ee2a017d043 = (12, -448, 50);
     createnavbadplacebybounds(var_b6272ee2a017d043, var_3994588df7681f2c, (0, 0, 0));
-    var_449a0250bc0346c1 = spawn_model("p7_box_cardboard_d_closed", (18.902, 389.645, 17.066), (0, 90.1995, 0));
-    var_4499ff50bc034028 = spawn_model("us_decor_box_cash_02", (18.427, 392.164, 36.523), (0.0127182, 177.297, -0.0128985));
-    var_449a0050bc03425b = spawn_model("p7_box_cardboard_d_closed", (43.645, 390.098, 15.106), (0, 0.199495, 0));
-    var_449a0550bc034d5a = spawn_model("us_decor_box_cash_01", (44, 390, 34), (0, 180, 0));
+    box01 = spawn_model("p7_box_cardboard_d_closed", (18.902, 389.645, 17.066), (0, 90.1995, 0));
+    box02 = spawn_model("us_decor_box_cash_02", (18.427, 392.164, 36.523), (0.0127182, 177.297, -0.0128985));
+    box03 = spawn_model("p7_box_cardboard_d_closed", (43.645, 390.098, 15.106), (0, 0.199495, 0));
+    box04 = spawn_model("us_decor_box_cash_01", (44, 390, 34), (0, 180, 0));
     patch = getEnt("care_package_col", "targetname");
     var_45428b56ef07ea91 = spawn("script_model", (30, 398, 42));
     var_45428b56ef07ea91.angles = (0, 0, 0);

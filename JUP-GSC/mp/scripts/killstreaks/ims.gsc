@@ -23,23 +23,23 @@
 #namespace ims;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("ims"), &init);
+  registerkillstreakinitfunction(getxhash("ims"), &init);
 }
 
 function private init() {
   if(issharedfuncdefined("killstreak", "registerKillstreak")) {
-    [[getsharedfunc("killstreak", "registerKillstreak")]]("ims", &function_81c2d38662659380);
+    [[getsharedfunc("killstreak", "registerKillstreak")]]("ims", &tryuseims);
   }
 
-  scripts\engine\utility::registersharedfunc("ims", "tryUseKillstreak", &function_81c2d38662659380);
+  scripts\engine\utility::registersharedfunc("ims", "tryUseKillstreak", &tryuseims);
   scripts\engine\utility::registersharedfunc("ims", "ims_onHacked", &ims_onhacked);
   scripts\engine\utility::registersharedfunc("ims", "ims_getKillCamTime", &ims_getkillcamtime);
   bundle = level.streakglobals.streakbundles["ims"];
 
   if(isDefined(bundle) && isDefined(bundle.var_b081bae2811785e4)) {
-    function_a41e3a211a9e37a4("ims", bundle.deployweapon, #"hash_b76b2215370d2700");
-    function_a41e3a211a9e37a4("ims", bundle.var_b081bae2811785e4, #"hash_b76b2215370d2700");
-    function_a41e3a211a9e37a4("ims", bundle.var_d5103347b49b5137, #"large");
+    registerkillstreakdamagedealingweaponsharedfunc("ims", bundle.deployweapon, #"hash_b76b2215370d2700");
+    registerkillstreakdamagedealingweaponsharedfunc("ims", bundle.var_b081bae2811785e4, #"hash_b76b2215370d2700");
+    registerkillstreakdamagedealingweaponsharedfunc("ims", bundle.var_d5103347b49b5137, #"large");
   }
 
   val::group_register("ims_placement", ["sprint", "supersprint", "offhand_weapons", "melee", "execution_attack", "weapon_pickup", "supers", "ladder_placement", "mantle"]);
@@ -48,7 +48,7 @@ function private init() {
   game["dialog"]["ims_teamleader_enemy_inbound"] = "core_ims_active_hostile";
 }
 
-function function_81c2d38662659380(streakinfo) {
+function tryuseims(streakinfo) {
   if(!isDefined(streakinfo)) {
     streakinfo = createstreakinfo("ims", self);
   }
@@ -193,7 +193,7 @@ function function_23393407fcd8fed9(var_b21b330507802512, streakinfo, bundle) {
   var_b21b330507802512.owner = self;
   var_b21b330507802512.bundle = bundle;
   var_b21b330507802512.streakinfo = streakinfo;
-  var_b21b330507802512 function_5226227bce83ebe9(3, var_b21b330507802512.team);
+  var_b21b330507802512 setentityhudoutlinedata(3, var_b21b330507802512.team);
   var_b21b330507802512 setscriptablepartstate("main", "active");
   triggerheight = getdvarfloat(@ "hash_c9a02b1b4788fdad", bundle.var_cdbb10f266b1b353);
   triggerradius = getdvarfloat(@ "hash_80e13919a9eda3e4", bundle.var_453a3fbfc6c8bfde);
@@ -222,7 +222,7 @@ function function_23393407fcd8fed9(var_b21b330507802512, streakinfo, bundle) {
   }
 
   if(issharedfuncdefined("hud", "teamPlayerCardSplash")) {
-    thread function_f3bb4f4911a1beb2("hud", "teamPlayerCardSplash", "used_" + "ims", self);
+    thread callsharedfunc("hud", "teamPlayerCardSplash", "used_" + "ims", self);
   }
 
   level.mines[var_b21b330507802512 getentitynumber()] = var_b21b330507802512;
@@ -254,7 +254,7 @@ function function_5135b43ac04db778(streakinfo) {
 
   if(issharedfuncdefined("damage", "monitorDamage")) {
     maxhealth = getdvarfloat(@ "hash_b222a9d8ac2c3cca", self.bundle.maxhealth);
-    self thread[[getsharedfunc("damage", "monitorDamage")]](maxhealth, "hitequip", &function_66a7440055d386c3, &function_e8455a055dd3291e, 1);
+    self thread[[getsharedfunc("damage", "monitorDamage")]](maxhealth, "hitequip", &function_66a7440055d386c3, &ims_handledamage, 1);
   }
 
   thread function_8ea10054f46819ff();
@@ -277,7 +277,7 @@ function function_8ea10054f46819ff() {
   }
 }
 
-function function_e8455a055dd3291e(data) {
+function ims_handledamage(data) {
   if(isDefined(data.objweapon) && data.objweapon.basename == self.bundle.var_d5103347b49b5137) {
     return 0;
   }
@@ -455,7 +455,7 @@ function function_7301c72ad9f3a95b(grenade) {
 }
 
 function function_a139d7d429ed5794(ims) {
-  if(!isreallyalive(self) || !isenemy(ims.owner) || isDefined(self.vehicle) || istrue(function_f3bb4f4911a1beb2("perk", "hasPerk", "specialty_blindeye"))) {
+  if(!isreallyalive(self) || !isenemy(ims.owner) || isDefined(self.vehicle) || istrue(callsharedfunc("perk", "hasPerk", "specialty_blindeye"))) {
     return true;
   }
 
@@ -684,7 +684,7 @@ function ims_getkillcamtime() {
   return var_8dbdaa141f4b9787 + timetotarget;
 }
 
-function function_ee16e883a9e4d919(isactive, var_e817b0ad69ffec4c) {
+function ims_setactive(isactive, var_e817b0ad69ffec4c) {
   if(self.var_7b74576b3641cd0e == isactive) {
     return;
   }
@@ -705,24 +705,24 @@ function function_ee16e883a9e4d919(isactive, var_e817b0ad69ffec4c) {
 }
 
 function function_4eb4ab5799798bd(data) {
-  function_ee16e883a9e4d919(0, data.attacker);
+  ims_setactive(0, data.attacker);
   self.ishaywire = 1;
 }
 
 function function_fac556ff047c5d0c(data) {
-  function_ee16e883a9e4d919(1);
+  ims_setactive(1);
 }
 
 function function_f48d50b96e53d41e(data) {
-  function_ee16e883a9e4d919(0, data.attacker);
+  ims_setactive(0, data.attacker);
 }
 
 function function_5911b997c2c053cf(data) {
-  function_ee16e883a9e4d919(1);
+  ims_setactive(1);
 }
 
 function ims_onhacked(newowner, oldowner) {
-  function_2eff4cd94c3243e8();
+  clearminimapid();
 
   if(issharedfuncdefined("game", "createObjective")) {
     self.minimapid = self[[getsharedfunc("game", "createObjective")]]("jup_hud_icon_minimap_killstreak_ims", newowner.team, 1, 1, 1);

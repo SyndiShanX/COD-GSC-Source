@@ -273,7 +273,7 @@ function function_58daeffda334806b(agents) {
 }
 
 function function_e5eb00bff9a93501(var_36aab17d28116d3f) {
-  var_cb791416725e9bc6 = 1;
+  hasvalidtarget = 1;
   function_c1fd3441ccfba6f8(var_36aab17d28116d3f.huntedteam, "dmz_activity_tension", 1);
   players = level.teamdata[var_36aab17d28116d3f.huntedteam]["players"];
 
@@ -309,7 +309,7 @@ function function_e5eb00bff9a93501(var_36aab17d28116d3f) {
 
   level thread function_afb28615a07de8be(var_36aab17d28116d3f);
 
-  while(var_cb791416725e9bc6) {
+  while(hasvalidtarget) {
     if(istrue(var_36aab17d28116d3f.endhunt)) {
       return;
     }
@@ -332,7 +332,7 @@ function function_e5eb00bff9a93501(var_36aab17d28116d3f) {
 
     if(!isDefined(closeplayers) || closeplayers.size == 0) {
       function_dc92e2d675b5c228(var_36aab17d28116d3f);
-      var_cb791416725e9bc6 = 0;
+      hasvalidtarget = 0;
       continue;
     }
 
@@ -405,7 +405,7 @@ function function_969be422c531295a(agent, origin) {
 
   agent.nocorpse = 1;
   agent.noloot = 1;
-  agent.var_ad799295a6692b29 = 1;
+  agent.dontdroploot = 1;
   agent.dropweapon = 0;
   agent kill();
 }
@@ -487,7 +487,7 @@ function hsquad_overrideagent(agent) {
   agent.var_8e3405ac46c40e0f = 1;
   agent.var_d5e499e7fe2c490b = 1;
   agent.revive_bleedouttime = 12000;
-  agent.var_98add129a7ecb962 = 1;
+  agent.allowlongdeath = 1;
   agent.forcelongdeath = 1;
   agent setengagementmindist(1024, 256);
   agent setengagementmaxdist(6000, 9000);

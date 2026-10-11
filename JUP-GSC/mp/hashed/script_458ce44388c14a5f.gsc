@@ -71,7 +71,7 @@ function private function_13aee3d35bd71f6b(callback, itemtype) {
     }
 
     dropall = channel == "drop_all_items";
-    itemtypedropped = function_86081f65c04e8ebe(id);
+    itemtypedropped = getinventoryitemtype(id);
     itemindexdropped = function_ab41acc7ac2f6642(id);
 
     if(isDefined(itemtype)) {

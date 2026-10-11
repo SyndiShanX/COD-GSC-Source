@@ -1099,7 +1099,7 @@ function modifyblastshieldperk() {
   }
 }
 
-function onplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, var_fcdf19e3cdd29669, vpoint, vdir, shitloc, psoffsettime, modelindex, partname, var_1da1a66b5c6a06a7) {
+function onplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, var_fcdf19e3cdd29669, vpoint, vdir, shitloc, psoffsettime, modelindex, partname, lightarmordamage) {
   if(isDefined(eattacker) && eattacker != victim && isPlayer(eattacker)) {
     if(istrue(level.snowballfight) && (objweapon.basename == "snowball_mp" || objweapon.basename == "pball_mp")) {
       playfxontagforclients(level.snowfx["screen"], victim, "tag_eye", victim);
@@ -4695,7 +4695,7 @@ function function_b7c18ded2347456c() {
   }
 
   weaponcategories = scripts\mp\gametypes\arena::getweaponcategories();
-  projectname = tolower(function_3cb5da19764baa3()) + "_mp";
+  projectname = tolower(getprojectname()) + "_mp";
 
   foreach(weaponcategory in weaponcategories) {
     game["arenaWeaponCategories"][weaponcategory] = [];
@@ -4747,7 +4747,7 @@ function private function_de46980d57f0c37a() {
     weaponcategories[weaponcategories.size] = "dm";
   }
 
-  projectname = tolower(function_3cb5da19764baa3()) + "_mp";
+  projectname = tolower(getprojectname()) + "_mp";
 
   foreach(weaponcategory in weaponcategories) {
     classtablename = scripts\engine\utility::string_join(["arena_class_table", weaponcategory, projectname], "_");

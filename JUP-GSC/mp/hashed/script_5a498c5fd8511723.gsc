@@ -86,27 +86,27 @@ function function_28b732afbadec198(players, var_8c3a7a19c10ecf05, broadcast_comm
 }
 
 function function_ade09b145f54d395(players, broadcast_instance, var_8c3a7a19c10ecf05, broadcast_command) {
-  var_c10415b6394096cc = function_61d68ed67d014ce9(var_8c3a7a19c10ecf05);
-  var_951f3c1cbdaaf7f7 = function_35f7a3c169395432(var_8c3a7a19c10ecf05);
+  omnvar_name = function_61d68ed67d014ce9(var_8c3a7a19c10ecf05);
+  omnvar_type = function_35f7a3c169395432(var_8c3a7a19c10ecf05);
   var_ca55cf4e0ae3bd64 = function_2e71b566ccbca32a(var_8c3a7a19c10ecf05);
 
   if(broadcast_command == 0 || broadcast_command == 1) {
-    var_24db96216c5f6124 = undefined;
+    omnvar_value = undefined;
 
-    if(var_951f3c1cbdaaf7f7 == "dynamic") {
+    if(omnvar_type == "dynamic") {
       var_949db43ec6f96c1e = function_684411bce1d1c8bc(broadcast_instance, var_8c3a7a19c10ecf05, 0);
 
       if(isDefined(var_949db43ec6f96c1e)) {
         if(var_949db43ec6f96c1e.type == "ProgressTracker") {
           var_5414a0c8b564c288 = var_949db43ec6f96c1e.value;
-          progress_data = function_298a9e5ee57b3737(var_949db43ec6f96c1e.format, var_5414a0c8b564c288.var_cc3e7fbaface5a17, var_5414a0c8b564c288.var_621cb2c0d9b1cdae, var_5414a0c8b564c288.var_b76b3aee05993635);
-          var_24db96216c5f6124 = [0];
+          progress_data = function_298a9e5ee57b3737(var_949db43ec6f96c1e.format, var_5414a0c8b564c288.startingprogressvalue, var_5414a0c8b564c288.currentprogressvalue, var_5414a0c8b564c288.finalprogressvalue);
+          omnvar_value = [0];
         } else {
-          var_24db96216c5f6124 = var_949db43ec6f96c1e.value;
+          omnvar_value = var_949db43ec6f96c1e.value;
         }
       }
     } else {
-      var_24db96216c5f6124 = function_5a2dda4763cf5dcb(var_8c3a7a19c10ecf05);
+      omnvar_value = function_5a2dda4763cf5dcb(var_8c3a7a19c10ecf05);
     }
 
     if(istrue(var_ca55cf4e0ae3bd64)) {
@@ -115,18 +115,18 @@ function function_ade09b145f54d395(players, broadcast_instance, var_8c3a7a19c10e
       }
 
       foreach(player in players) {
-        player setclientomnvar(var_c10415b6394096cc, var_24db96216c5f6124);
+        player setclientomnvar(omnvar_name, omnvar_value);
       }
 
       return;
     }
 
-    setomnvar(var_c10415b6394096cc, var_24db96216c5f6124);
+    setomnvar(omnvar_name, omnvar_value);
   }
 }
 
 function function_cae24eff8bdddc4(players, broadcast_instance, broadcast_command) {
-  assert(broadcast_instance function_54ad2295d6995862() == "<dev string:x1c>");
+  assert(broadcast_instance getbroadcasttype() == "<dev string:x1c>");
   data_objects = broadcast_instance function_7437a8d48556e45e();
 
   if(data_objects.size == 0) {
@@ -146,7 +146,7 @@ function function_cae24eff8bdddc4(players, broadcast_instance, broadcast_command
 }
 
 function function_ef5f9ace0e2bad4e(players, broadcast, broadcast_command) {
-  assert(broadcast function_54ad2295d6995862() == "<dev string:x87>");
+  assert(broadcast getbroadcasttype() == "<dev string:x87>");
   data_objects = broadcast function_7437a8d48556e45e();
 
   if(data_objects.size == 0) {
@@ -160,7 +160,7 @@ function function_ef5f9ace0e2bad4e(players, broadcast, broadcast_command) {
 }
 
 function function_7a518dd08fe0d34e(players, broadcast, broadcast_command) {
-  assert(broadcast function_54ad2295d6995862() == "<dev string:x90>");
+  assert(broadcast getbroadcasttype() == "<dev string:x90>");
   data_objects = broadcast function_7437a8d48556e45e();
 
   if(data_objects.size == 0) {
@@ -174,7 +174,7 @@ function function_7a518dd08fe0d34e(players, broadcast, broadcast_command) {
 }
 
 function function_174054d9a5f63554(players, broadcast_instance, broadcast_command) {
-  assert(broadcast_instance function_54ad2295d6995862() == "<dev string:x9c>");
+  assert(broadcast_instance getbroadcasttype() == "<dev string:x9c>");
   data_objects = broadcast_instance function_7437a8d48556e45e();
 
   if(data_objects.size == 0) {

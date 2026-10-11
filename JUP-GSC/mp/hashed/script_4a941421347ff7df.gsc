@@ -180,7 +180,7 @@ function function_d34639184a627e9c() {
 }
 
 function function_3d84d2156c8e641a(mind_personality) {
-  decisionset = function_63cc4ce09c4659a1("GetDecisionSet", mind_personality);
+  decisionset = runcallback("GetDecisionSet", mind_personality);
 
   if(isDefined(decisionset)) {
     return decisionset;
@@ -209,19 +209,19 @@ function function_7820c266fca9bbae(mind_personality) {
 }
 
 function function_72e3dda65a3b89b3() {
-  var_577f45571c039a54 = ["Combat", "Wander", "EscapeGas", "Pickup", "KillstreakUAV", "KillstreakAirstrike", "EquipArmor", "ReviveTeammate", "BuyItem", "BuyBackTeammate", "LastStand", "UseFieldUpgradeBox", "EvadeCars", "Retreat"];
+  decisions = ["Combat", "Wander", "EscapeGas", "Pickup", "KillstreakUAV", "KillstreakAirstrike", "EquipArmor", "ReviveTeammate", "BuyItem", "BuyBackTeammate", "LastStand", "UseFieldUpgradeBox", "EvadeCars", "Retreat"];
 
   if(getdvarint(@ "hash_82bde055b11e6698", 0)) {
-    var_577f45571c039a54[var_577f45571c039a54.size] = "PerformReconContract";
+    decisions[decisions.size] = "PerformReconContract";
   }
 
   if(getdvarint(@ "hash_ea782447055712da", 1)) {
-    var_577f45571c039a54[var_577f45571c039a54.size] = "SearchThreatPlus";
+    decisions[decisions.size] = "SearchThreatPlus";
   } else {
-    var_577f45571c039a54[var_577f45571c039a54.size] = "SearchThreat";
+    decisions[decisions.size] = "SearchThreat";
   }
 
-  return var_577f45571c039a54;
+  return decisions;
 }
 
 function function_72c9dc29c073ef29() {

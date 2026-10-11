@@ -23,7 +23,7 @@
 function fulton_init() {
   fulton_initrepository();
 
-  if(!scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(!scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     game["dialog"]["plunder_extract_fail_fulton"] = "pxff_grav_plnd";
   } else {
     game["dialog"]["plunder_extract_fail_fulton"] = "plunder_plunder_extract_fail_fulton";

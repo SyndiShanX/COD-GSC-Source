@@ -791,9 +791,9 @@ function watch_for_player_trigger(ent, struct, player, hintobj) {
         hintobj disableplayeruse(guy);
       }
 
-      hintobj waittill("trigger", var_484ce98a6b8c62f3);
+      hintobj waittill("trigger", triggering_player);
 
-      if(isPlayer(var_484ce98a6b8c62f3)) {
+      if(isPlayer(triggering_player)) {
         level thread[[use_func]](struct, player);
       }
     }

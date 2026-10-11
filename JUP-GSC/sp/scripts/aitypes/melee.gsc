@@ -86,11 +86,11 @@ function canmeleeduringstealth() {
   return anim.success;
 }
 
-function iseitherofusalreadyinmelee(var_e37bb2c17a470a0) {
+function iseitherofusalreadyinmelee(optionaltargetoverride) {
   meleetarget = self.enemy;
 
-  if(isDefined(var_e37bb2c17a470a0)) {
-    meleetarget = var_e37bb2c17a470a0;
+  if(isDefined(optionaltargetoverride)) {
+    meleetarget = optionaltargetoverride;
   }
 
   if(self.in_melee) {
@@ -167,10 +167,10 @@ function ismeleevalid(target, var_92493ae5a92d3699) {
 
     if(isDefined(self.pathgoalpos) && self.facemotion && lengthsquared(self.velocity) > 1) {
       metotarget = target.origin - self.origin;
-      var_e69c9108f53988f3 = length(metotarget);
+      distmetotarget = length(metotarget);
 
-      if(var_e69c9108f53988f3 > 60) {
-        metotarget /= var_e69c9108f53988f3;
+      if(distmetotarget > 60) {
+        metotarget /= distmetotarget;
         lookaheadpos = self getposonpath(30);
         var_81c732b62ff30ed4 = vectorNormalize(lookaheadpos - self.origin);
 

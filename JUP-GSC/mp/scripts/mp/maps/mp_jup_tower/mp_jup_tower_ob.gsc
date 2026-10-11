@@ -168,7 +168,7 @@ function function_82b06dfd59cced40(player) {
   player val::reset_all("ob_infil");
   player playershow(1);
   player lerpfovbypreset("default");
-  player function_af4b9b0f0e7c6c42(0);
+  player playerunlinkblend(0);
   player notify("screen_completely_black");
   player lerpfovscalefactor(1, 1);
   logstring("OB INFIL: Player " + player.name + " status of participating in cinematics after infil: [" + player function_3e2c0f85fe7ca957() + "] at time " + gettime());
@@ -193,8 +193,8 @@ function function_219ccd13654aeca0() {
     println("<dev string:xfb>" + level.var_6cbb7e30776f280e);
   }
 
-  foreach(teamname, var_70643c8580524236 in level.squaddata) {
-    foreach(squad in var_70643c8580524236) {
+  foreach(teamname, squadarray in level.squaddata) {
+    foreach(squad in squadarray) {
       if(squad.players.size > 0) {
         players = function_b896c581d1a39b24(teamname, squad.index);
         level thread function_7cec19ffa37cd482(players);
@@ -314,26 +314,26 @@ function function_10c81ffffdb8d926(wait_time, fade_in_time, fade_out_time, start
   starting_alpha = default_to(starting_alpha, 1);
   fade_out_time = default_to(fade_out_time, 3);
 
-  if(!isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4 = newclienthudelem(self);
-    self.var_ad173ac833a970d4.x = 0;
-    self.var_ad173ac833a970d4.y = 0;
-    self.var_ad173ac833a970d4 setshader("white", 640, 480);
-    self.var_ad173ac833a970d4.alignx = "left";
-    self.var_ad173ac833a970d4.aligny = "top";
-    self.var_ad173ac833a970d4.sort = 1;
-    self.var_ad173ac833a970d4.horzalign = "fullscreen";
-    self.var_ad173ac833a970d4.vertalign = "fullscreen";
-    self.var_ad173ac833a970d4.alpha = 0;
-    self.var_ad173ac833a970d4.foreground = 1;
-    self.var_ad173ac833a970d4.archived = 0;
-    self.var_ad173ac833a970d4.scramblerdisabled = 1;
+  if(!isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay = newclienthudelem(self);
+    self.white_screen_overlay.x = 0;
+    self.white_screen_overlay.y = 0;
+    self.white_screen_overlay setshader("white", 640, 480);
+    self.white_screen_overlay.alignx = "left";
+    self.white_screen_overlay.aligny = "top";
+    self.white_screen_overlay.sort = 1;
+    self.white_screen_overlay.horzalign = "fullscreen";
+    self.white_screen_overlay.vertalign = "fullscreen";
+    self.white_screen_overlay.alpha = 0;
+    self.white_screen_overlay.foreground = 1;
+    self.white_screen_overlay.archived = 0;
+    self.white_screen_overlay.scramblerdisabled = 1;
   }
 
   var_52bee65a8171b558 = fade_in_time;
   n_target_alpha = starting_alpha;
-  self.var_ad173ac833a970d4 fadeovertime(var_52bee65a8171b558);
-  self.var_ad173ac833a970d4.alpha = n_target_alpha;
+  self.white_screen_overlay fadeovertime(var_52bee65a8171b558);
+  self.white_screen_overlay.alpha = n_target_alpha;
   wait wait_time;
 
   if(soundexists("evt_entity_arena_respawn_teleport_plr")) {
@@ -341,12 +341,12 @@ function function_10c81ffffdb8d926(wait_time, fade_in_time, fade_out_time, start
   }
 
   var_52bee65a8171b558 = fade_out_time;
-  self.var_ad173ac833a970d4 fadeovertime(var_52bee65a8171b558);
-  self.var_ad173ac833a970d4.alpha = 0;
+  self.white_screen_overlay fadeovertime(var_52bee65a8171b558);
+  self.white_screen_overlay.alpha = 0;
   wait var_52bee65a8171b558;
 
-  if(isDefined(self.var_ad173ac833a970d4)) {
-    self.var_ad173ac833a970d4 destroy();
+  if(isDefined(self.white_screen_overlay)) {
+    self.white_screen_overlay destroy();
   }
 }
 
@@ -498,18 +498,18 @@ function function_b60de1b748c7230f() {
 
   waitframe();
   fakeitem = spawnStruct();
-  var_d7732d0238eae9ff = 50;
+  max_stock_ammo = 50;
   item_entry = "ob_jup_item_weapon_ar_acharlie_blue";
   item_bundle = getscriptbundle("itemspawnentry:" + item_entry);
   item_scriptable = item_bundle.scriptable;
-  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(var_d7732d0238eae9ff);
+  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(max_stock_ammo);
   scripts\cp_mp\loot\common_item::function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
   fakeitem = spawnStruct();
-  var_d7732d0238eae9ff = 50;
+  max_stock_ammo = 50;
   item_entry = "ob_jup_item_weapon_sm_coscar635_blue";
   item_bundle = getscriptbundle("itemspawnentry:" + item_entry);
   item_scriptable = item_bundle.scriptable;
-  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(var_d7732d0238eae9ff);
+  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(max_stock_ammo);
   scripts\cp_mp\loot\common_item::function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
   wait 0.5;
   a_weapons = self getweaponslist("primary");
@@ -523,7 +523,7 @@ function function_b60de1b748c7230f() {
 
     waitframe();
     var_4bc27b790622bd85 = randomint(ammo_mods.size);
-    namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(a_weapons[i], ammo_mods[var_4bc27b790622bd85]);
+    namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(a_weapons[i], ammo_mods[var_4bc27b790622bd85]);
   }
 
   waitframe();

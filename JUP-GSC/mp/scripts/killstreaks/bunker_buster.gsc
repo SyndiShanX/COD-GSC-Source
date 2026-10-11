@@ -23,7 +23,7 @@
 #namespace bunker_buster;
 
 function autoexec main() {
-  killstreak_shared::function_df7ab5b0f898e8bc(function_1823ff50bb28148d("bunker_buster"), &init);
+  killstreak_shared::registerkillstreakinitfunction(getxhash("bunker_buster"), &init);
 }
 
 function private init() {
@@ -33,7 +33,7 @@ function private init() {
     [[utility::getsharedfunc("bunker_buster", "init")]]();
   }
 
-  namespace_2b1145f62aa835b8::function_62de81d97c7d9e49("bunker_buster", &function_4927316e0d7c0fde, undefined, undefined);
+  namespace_2b1145f62aa835b8::registerkillstreaksharedfunc("bunker_buster", &function_4927316e0d7c0fde, undefined, undefined);
   utility::registersharedfunc("bunker_buster", "tryUseKillstreak", &function_4927316e0d7c0fde);
   init_vars();
 }
@@ -54,8 +54,8 @@ function private init_vars() {
   level.bunker_buster.gas_radius = getdvarint(@ "hash_84afb79d4b21c60a", bundle.var_9f87e4c344f40cb8);
   level.bunker_buster.travel_distance = getdvarint(@ "hash_45fce07839c26931", bundle.bunker_buster_distance);
   level.bunker_buster.explosion_radius = getdvarint(@ "hash_e9222aff0b6e25e4", bundle.bunker_buster_explosionradius);
-  level.bunker_buster.var_daf4bed8de8f6195 = getdvarint(@ "hash_3dd9eddc725440b6", bundle.var_f650a0ecedab0825);
-  level.bunker_buster.var_fc268ff83cc63313 = getdvarint(@ "hash_c84afea8311a2900", bundle.var_1029beb459a7eeb3);
+  level.bunker_buster.explosion_min_damage = getdvarint(@ "hash_3dd9eddc725440b6", bundle.var_f650a0ecedab0825);
+  level.bunker_buster.explosion_max_damage = getdvarint(@ "hash_c84afea8311a2900", bundle.var_1029beb459a7eeb3);
   level.bunker_buster.drop_time = getdvarint(@ "hash_183522347c70eb09", bundle.bunker_buster_droptime);
   level.bunker_buster.projectile_weapon = bundle.projectileweapon;
 }
@@ -159,7 +159,7 @@ function private function_d0ae421563f27fe() {
   return true;
 }
 
-function private function_ae65fc01c45c017(streakinfo, var_a9dd4e8c5e5c7178, firedprojectile) {
+function private function_ae65fc01c45c017(streakinfo, firedweaponobj, firedprojectile) {
   if(!isDefined(streakinfo.targetoverride)) {
     mappoint = airstrike::airstrike_getownerlookatpos(self, 1);
 
@@ -258,10 +258,10 @@ function strike_fire(streakinfo) {
   marker setotherent(self);
   marker toma_strike::toma_strike_setmarkerobjective(marker.objidnum, marker.icon, self, 50);
   marker thread function_aad1a178bf665f2a();
-  utility::function_f3bb4f4911a1beb2("bunker_buster", "dialog_deploy", self);
+  utility::callsharedfunc("bunker_buster", "dialog_deploy", self);
   namespace_2b1145f62aa835b8::function_940b2080e171a9d3(self, self.team, 1024, "bunker_buster", marker_pos);
   notify_players = function_153d5add7253b500(self, self.team, 1024, marker_pos);
-  utility::function_f3bb4f4911a1beb2("bunker_buster", "dialog_warning", notify_players[0], notify_players[1]);
+  utility::callsharedfunc("bunker_buster", "dialog_warning", notify_players[0], notify_players[1]);
   namespace_2b1145f62aa835b8::function_2284137aa92dbd16(level.bunker_buster.drop_time);
   strike_logic(marker_pos, streakinfo);
   wait level.bunker_buster.cooldown;
@@ -351,10 +351,10 @@ function strike_logic(position, streakinfo) {
   level thread function_c6c97baa041205e(streakinfo, &game_utility::function_4584ad1c0e2c58ec, currentradius, deltaradius, 1.25);
   wait 0.75;
   missile delete();
-  utility::function_f3bb4f4911a1beb2("bunker_buster", "missile_gas_volume", streakinfo.impact_location + (0, 0, 128), streakinfo.impact_location - (0, 0, level.bunker_buster.travel_distance), level.bunker_buster.gas_radius, streakinfo);
+  utility::callsharedfunc("bunker_buster", "missile_gas_volume", streakinfo.impact_location + (0, 0, 128), streakinfo.impact_location - (0, 0, level.bunker_buster.travel_distance), level.bunker_buster.gas_radius, streakinfo);
   thread function_61ac63303c87acda(3, streakinfo);
   level thread function_4c86258acf5f82bf(streakinfo.impact_location, streakinfo.water_impact);
-  streakinfo.mapcircle thread utility::function_b4b04de87729a6f3(level.bunker_buster.gas_lifetime);
+  streakinfo.mapcircle thread utility::delete_after_delay(level.bunker_buster.gas_lifetime);
   level thread function_d86280932be7b254(level.bunker_buster.gas_lifetime, streakinfo);
 }
 
@@ -388,7 +388,7 @@ function private function_61ac63303c87acda(delay, streak_info) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   wait delay;
-  utility::function_f3bb4f4911a1beb2("bunker_buster", "dialog_hits", self, streak_info);
+  utility::callsharedfunc("bunker_buster", "dialog_hits", self, streak_info);
 }
 
 function missile_spawn(origin, offset, velocity, exp_time, prev_missile) {
@@ -488,7 +488,7 @@ function function_f71fc273e43f587b(player, travel_time) {
   }
 
   h_dist = distance2d(player.origin, self.origin);
-  damage = int(mapfloat(0, level.bunker_buster.explosion_radius, level.bunker_buster.var_fc268ff83cc63313, level.bunker_buster.var_daf4bed8de8f6195, h_dist));
+  damage = int(mapfloat(0, level.bunker_buster.explosion_radius, level.bunker_buster.explosion_max_damage, level.bunker_buster.explosion_min_damage, h_dist));
   player dodamage(damage, self.origin, self.owner, self, "MOD_EXPLOSIVE", level.bunker_buster.projectile_weapon, "none", undefined, 1);
 }
 
@@ -585,7 +585,7 @@ function function_f4b21fbcf97269e8(player) {
       }
     }
 
-    if(isDefined(stuck_to) && isDefined(stuck_to.classname) && stuck_to.classname == "script_vehicle" && stuck_to function_89db472b36958666()) {
+    if(isDefined(stuck_to) && isDefined(stuck_to.classname) && stuck_to.classname == "script_vehicle" && stuck_to getcandamage()) {
       data = spawnStruct();
       data.inflictor = self;
       data.objweapon = undefined;

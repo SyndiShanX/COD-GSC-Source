@@ -17,7 +17,7 @@
 #namespace leagueplay;
 
 function init() {
-  if(!level.var_ec2fb549b15ad827) {
+  if(!level.leagueplaymatch) {
     return;
   }
 
@@ -105,7 +105,7 @@ function function_adcdfd1b1a3efa51(player) {
       params = [function_d6f771aedba70ce7(aeeventname, #"hash_d708505d31d66ef6"), 0, function_d6f771aedba70ce7(aeeventname, #"hash_c9361150947eb728"), function_94c7ae7049488358(), function_d6f771aedba70ce7(aeeventname, #"hash_e03f5709c8cd8a03"), function_4f9373a1227db35c(), function_d6f771aedba70ce7(aeeventname, #"hash_23d400c5be24f34b"), var_bca6691d9622c899, function_d6f771aedba70ce7(aeeventname, #"hash_5fba2f25f07000f5"), level.var_cbbf84a8e78caeee, function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, function_d6f771aedba70ce7(aeeventname, #"hash_e8d0ec1cb1f306c4"), namespace_bf9ffd2b22c7d819::function_e3bd94413509bc25()];
 
       if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-        player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+        player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
       }
 
       return;
@@ -114,7 +114,7 @@ function function_adcdfd1b1a3efa51(player) {
     params = [function_d6f771aedba70ce7(aeeventname, #"hash_d708505d31d66ef6"), 0, function_d6f771aedba70ce7(aeeventname, #"hash_c9361150947eb728"), function_94c7ae7049488358(), function_d6f771aedba70ce7(aeeventname, #"hash_e03f5709c8cd8a03"), function_4f9373a1227db35c(), function_d6f771aedba70ce7(aeeventname, #"hash_5fba2f25f07000f5"), level.var_cbbf84a8e78caeee, function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, function_d6f771aedba70ce7(aeeventname, #"hash_e8d0ec1cb1f306c4"), namespace_bf9ffd2b22c7d819::function_e3bd94413509bc25()];
 
     if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-      player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+      player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
     }
   }
 }
@@ -286,9 +286,9 @@ function function_6c42f05b6c82b35e() {
   player.pers["leaguePlayDisconnected"] = 0;
 
   if(function_78fcc96be9d69371() > -1) {
-    var_59d49ab6b66aaf7c = player getplayerdata(level.var_5d69837cf4db0407, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "season", level.var_f67ee22da6041b9b, "pmatches") == getdvarint(@ "hash_fd4d1a68a9daff4d", 5) - 1;
-    var_8b918a9e28b6db8e = player getplayerdata(level.var_5d69837cf4db0407, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "season", level.var_f67ee22da6041b9b, "pmatches") >= getdvarint(@ "hash_fd4d1a68a9daff4d", 5);
-    player.pers["leaguePlayOnLadder"] = player getplayerdata(level.var_5d69837cf4db0407, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "league_id") == level.leagueid;
+    var_59d49ab6b66aaf7c = player getplayerdata(level.progressiongroup, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "season", level.var_f67ee22da6041b9b, "pmatches") == getdvarint(@ "hash_fd4d1a68a9daff4d", 5) - 1;
+    var_8b918a9e28b6db8e = player getplayerdata(level.progressiongroup, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "season", level.var_f67ee22da6041b9b, "pmatches") >= getdvarint(@ "hash_fd4d1a68a9daff4d", 5);
+    player.pers["leaguePlayOnLadder"] = player getplayerdata(level.progressiongroup, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "league_id") == level.leagueid;
 
     if(var_8b918a9e28b6db8e && !player.pers["leaguePlayOnLadder"]) {
       var_7fb9bcaaa8ebb115 = 1;
@@ -365,11 +365,11 @@ function function_883f3d0fdef74fbf(winner) {
 
 function function_5231a8b9bc35b470(ladderpointsbonuspoolstep) {
   player = self;
-  bonuspool = player getplayerdata(level.var_5d69837cf4db0407, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "bonuspool");
+  bonuspool = player getplayerdata(level.progressiongroup, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "bonuspool");
   var_282f09c3ac1a1052 = bonuspool - ladderpointsbonuspoolstep;
 
   if(var_282f09c3ac1a1052 >= 0) {
-    player getplayerdata(level.var_5d69837cf4db0407, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "bonuspool", var_282f09c3ac1a1052);
+    player getplayerdata(level.progressiongroup, "leaguePlayData", level.var_bbcb5f6b1b0a78ae, "bonuspool", var_282f09c3ac1a1052);
     return ladderpointsbonuspoolstep;
   }
 
@@ -438,13 +438,13 @@ function match_end(winner) {
         params = [function_d6f771aedba70ce7(aeeventname, #"hash_5c84471bbbd6a98e"), level.leagueid, function_d6f771aedba70ce7(aeeventname, #"hash_d555f3589ac28cc"), matchresult, function_d6f771aedba70ce7(aeeventname, #"leagueplay_skill_rating"), skillrating, function_d6f771aedba70ce7(aeeventname, #"hash_182a7ae142f3b128"), var_49bb51e761c847ff, function_d6f771aedba70ce7(aeeventname, #"hash_490204184a5f13e"), var_31ec327c47f15b5c, function_d6f771aedba70ce7(aeeventname, #"hash_9262d5cef5a7650f"), onladder, function_d6f771aedba70ce7(aeeventname, #"hash_23d400c5be24f34b"), var_bca6691d9622c899, function_d6f771aedba70ce7(aeeventname, #"hash_c9361150947eb728"), matchid, function_d6f771aedba70ce7(aeeventname, #"hash_e03f5709c8cd8a03"), lobbyid, function_d6f771aedba70ce7(aeeventname, #"hash_f1733e44a51e82be"), level.var_75b72a33aeab21d4, function_d6f771aedba70ce7(aeeventname, #"hash_cb5895c719e93d31"), var_abbf42875a7797ad, function_d6f771aedba70ce7(aeeventname, #"hash_d885ae7541734272"), 1, function_d6f771aedba70ce7(aeeventname, #"hash_5fba2f25f07000f5"), level.var_cbbf84a8e78caeee, function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, function_d6f771aedba70ce7(aeeventname, #"hash_e8d0ec1cb1f306c4"), function_e3bd94413509bc25()];
 
         if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-          player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+          player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
         }
       } else {
         params = [function_d6f771aedba70ce7(aeeventname, #"hash_5c84471bbbd6a98e"), level.leagueid, function_d6f771aedba70ce7(aeeventname, #"hash_d555f3589ac28cc"), matchresult, function_d6f771aedba70ce7(aeeventname, #"hash_182a7ae142f3b128"), var_49bb51e761c847ff, function_d6f771aedba70ce7(aeeventname, #"hash_490204184a5f13e"), var_31ec327c47f15b5c, function_d6f771aedba70ce7(aeeventname, #"hash_9262d5cef5a7650f"), onladder, function_d6f771aedba70ce7(aeeventname, #"hash_23d400c5be24f34b"), var_bca6691d9622c899, function_d6f771aedba70ce7(aeeventname, #"hash_c9361150947eb728"), matchid, function_d6f771aedba70ce7(aeeventname, #"hash_e03f5709c8cd8a03"), lobbyid, function_d6f771aedba70ce7(aeeventname, #"hash_f1733e44a51e82be"), level.var_75b72a33aeab21d4, function_d6f771aedba70ce7(aeeventname, #"hash_cb5895c719e93d31"), var_abbf42875a7797ad, function_d6f771aedba70ce7(aeeventname, #"hash_d885ae7541734272"), 1, function_d6f771aedba70ce7(aeeventname, #"hash_5fba2f25f07000f5"), level.var_cbbf84a8e78caeee, function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, function_d6f771aedba70ce7(aeeventname, #"hash_e8d0ec1cb1f306c4"), function_e3bd94413509bc25()];
 
         if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-          player function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+          player callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
         }
       }
     }

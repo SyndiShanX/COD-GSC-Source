@@ -12,6 +12,6 @@
 function main() {
   level.gunshipvisionset = "mp_jup_drivethru_killstreak_gunship";
   level.choppervisionset = "mp_jup_drivethru_killstreak_gunship";
-  level.var_49071332a2a99c1e = "mp_jup_drivethru_killstreak_thermal";
+  level.killstreakthermalvisionset = "mp_jup_drivethru_killstreak_thermal";
   level.var_638c653eda9d1cd3 = "mp_jup_drivethru_killstreak_cruise_color_mp";
 }

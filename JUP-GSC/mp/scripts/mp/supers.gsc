@@ -361,12 +361,12 @@ function function_9d0de1f8996c57f8(superref) {
   self setclientomnvar("ui_super_ref", superref);
 }
 
-function givesuper(superref, var_6c70bf5ad211f464, immediate, blueprintindex) {
+function givesuper(superref, savesuperpoints, immediate, blueprintindex) {
   if(getdvarint(@ "hash_64156ad0392158e4") != 0) {
     return;
   }
 
-  clearsuper(var_6c70bf5ad211f464, superref);
+  clearsuper(savesuperpoints, superref);
   assertex(!issuperinuse(), "<dev string:x163>");
 
   if(superref == "") {
@@ -638,7 +638,7 @@ function function_d8f9e4158e12de6b() {
   return self.var_35b042c5224a1646;
 }
 
-function clearsuper(var_6c70bf5ad211f464, var_d220971ffe40c601, playerkilled) {
+function clearsuper(savesuperpoints, var_d220971ffe40c601, playerkilled) {
   superinfo = getcurrentsuper();
   var_fa91721e4a69c230 = scripts\mp\perks\perkfunctions::function_66f0cbd5ff8458fe();
 
@@ -652,7 +652,7 @@ function clearsuper(var_6c70bf5ad211f464, var_d220971ffe40c601, playerkilled) {
     }
   }
 
-  if(istrue(var_6c70bf5ad211f464) && isDefined(superinfo)) {
+  if(istrue(savesuperpoints) && isDefined(superinfo)) {
     storesuperpoints();
   }
 
@@ -811,7 +811,7 @@ function superpointschanged(var_5e5d91e0ed56109e) {
   function_e20ab7a8971ee3f2();
 }
 
-function givesuperpoints(points, scoreevent, var_b4b593facaa83af7, pointsmultiplier, var_2569ec7d8016f67f, var_7601733fb3a9ae73) {
+function givesuperpoints(points, scoreevent, bypassdisable, pointsmultiplier, var_2569ec7d8016f67f, var_7601733fb3a9ae73) {
   var_74cc2858b7ac655f = function_868a75fd7c215c07();
   var_f2516e5f323caf9d = isDefined(self.var_678855513f5076ca) || var_74cc2858b7ac655f;
 
@@ -825,7 +825,7 @@ function givesuperpoints(points, scoreevent, var_b4b593facaa83af7, pointsmultipl
 
   assert(isDefined(points));
 
-  if(getdvarint(@ "hash_eba0ef12e9c9260b", 0) && !istrue(var_b4b593facaa83af7)) {
+  if(getdvarint(@ "hash_eba0ef12e9c9260b", 0) && !istrue(bypassdisable)) {
     return;
   }
 
@@ -843,8 +843,8 @@ function givesuperpoints(points, scoreevent, var_b4b593facaa83af7, pointsmultipl
   }
 
   if(scripts\mp\utility\perk::_hasperk("specialty_faster_field_upgrade") && !isDefined(var_2569ec7d8016f67f)) {
-    if(isDefined(self.perktunables) && isnumber(self.perktunables.var_d7d948c55db143ae)) {
-      points *= self.perktunables.var_d7d948c55db143ae;
+    if(isDefined(self.perktunables) && isnumber(self.perktunables.perk_faster_field_upgrade_rate)) {
+      points *= self.perktunables.perk_faster_field_upgrade_rate;
     } else {
       points *= getdvarfloat(@ "hash_28e84932a9fb43fd");
     }
@@ -1134,9 +1134,9 @@ function handlepointdecay() {
 function superearned() {
   superinfo = getcurrentsuper();
 
-  if(isDefined(superinfo) && isDefined(superinfo.blueprintindex) && istrue(superinfo.blueprintindex > 0) && isDefined(superinfo.staticdata) && isDefined(superinfo.staticdata.bundle) && isDefined(superinfo.staticdata.bundle.var_d96d3e6ceed581fd) && isDefined(superinfo.staticdata.bundle.var_d96d3e6ceed581fd.blueprints) && isDefined(superinfo.staticdata.bundle.var_d96d3e6ceed581fd.blueprints[superinfo.blueprintindex - 1])) {
-    var_9b32d1936831f5aa = superinfo.staticdata.bundle.var_d96d3e6ceed581fd.blueprints[superinfo.blueprintindex - 1].genericblueprint;
-    self function_53c61cc39f6a3b11(var_9b32d1936831f5aa);
+  if(isDefined(superinfo) && isDefined(superinfo.blueprintindex) && istrue(superinfo.blueprintindex > 0) && isDefined(superinfo.staticdata) && isDefined(superinfo.staticdata.bundle) && isDefined(superinfo.staticdata.bundle.genericblueprintlist) && isDefined(superinfo.staticdata.bundle.genericblueprintlist.blueprints) && isDefined(superinfo.staticdata.bundle.genericblueprintlist.blueprints[superinfo.blueprintindex - 1])) {
+    genericblueprintname = superinfo.staticdata.bundle.genericblueprintlist.blueprints[superinfo.blueprintindex - 1].genericblueprint;
+    self function_53c61cc39f6a3b11(genericblueprintname);
   }
 
   self setweaponammoclip(superinfo.weaponobj, 1);
@@ -2111,9 +2111,9 @@ function superusefinished(var_3179afaa208defa2, fromdeath, var_e68637fb8c1c346b,
       }
     }
 
-    if(isDefined(superinfo.blueprintindex) && superinfo.blueprintindex > 0 && isDefined(superinfo.staticdata.bundle.var_d96d3e6ceed581fd.blueprints) && isDefined(superinfo.staticdata.bundle.var_d96d3e6ceed581fd.blueprints[superinfo.blueprintindex - 1])) {
-      var_9b32d1936831f5aa = superinfo.staticdata.bundle.var_d96d3e6ceed581fd.blueprints[superinfo.blueprintindex - 1].genericblueprint;
-      self function_9bc014e7042e8339(var_9b32d1936831f5aa);
+    if(isDefined(superinfo.blueprintindex) && superinfo.blueprintindex > 0 && isDefined(superinfo.staticdata.bundle.genericblueprintlist.blueprints) && isDefined(superinfo.staticdata.bundle.genericblueprintlist.blueprints[superinfo.blueprintindex - 1])) {
+      genericblueprintname = superinfo.staticdata.bundle.genericblueprintlist.blueprints[superinfo.blueprintindex - 1].genericblueprint;
+      self function_9bc014e7042e8339(genericblueprintname);
     }
 
     if(isDefined(superinfo.usestarttime) && isDefined(superinfo.madeavailabletime)) {
@@ -2704,7 +2704,7 @@ function getrootsuperref(superref) {
   return getsubstr(superref, 6);
 }
 
-function function_eb25267ee439cabe(superref) {
+function getsuperweapon(superref) {
   if(isDefined(level.superglobals.staticsuperdata[superref])) {
     return level.superglobals.staticsuperdata[superref].weapon;
   }
@@ -2730,7 +2730,7 @@ function function_e7f40551b644fb00(superref) {
   level.var_ebf0955a0c675ff3[superref] = 1;
 }
 
-function function_83a68723acc3296d(weaponname) {
+function getsuperbundlefromoffhandweaponname(weaponname) {
   superref = getsuperrefforsuperoffhand(weaponname);
 
   if(isDefined(superref)) {
@@ -2793,7 +2793,7 @@ function unstowsuperweapon() {
 function getsuperpointsforevent(eventref) {
   if(!isxhash(eventref)) {
     assertex(1, eventref);
-    eventref = function_1823ff50bb28148d(eventref);
+    eventref = getxhash(eventref);
   }
 
   if(!isDefined(level.var_7de15b4c7f0a425)) {
@@ -2901,7 +2901,7 @@ function writesppmstats() {
   }
 
   if(isxhash(bestevent)) {
-    bestevent = function_f28fd66285fa2c9(bestevent);
+    bestevent = getxhashhexname(bestevent);
   }
 
   dlog_recordevent("mpscript_sppm", ["sppm", sppm, "sppm_applied", appliedsppm, "gamemode", getgametype(), "kills", self.kills, "time_played", totaltime, "best_event", bestevent, "script_version", getscriptdataversion()]);
@@ -3052,8 +3052,8 @@ function combatrecordsuperuse(super) {
     return;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", "superStats", super, "uses");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "superStats", super, "uses", oldvalue + 1);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", "superStats", super, "uses");
+  self setplayerdata(level.progressiongroup, "playerStats", "superStats", super, "uses", oldvalue + 1);
 }
 
 function combatrecordsuperkill(super) {
@@ -3061,8 +3061,8 @@ function combatrecordsuperkill(super) {
     return;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", "superStats", super, "kills");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "superStats", super, "kills", oldvalue + 1);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", "superStats", super, "kills");
+  self setplayerdata(level.progressiongroup, "playerStats", "superStats", super, "kills", oldvalue + 1);
 }
 
 function combatrecordsupermisc(super, increment) {
@@ -3075,11 +3075,11 @@ function combatrecordsupermisc(super, increment) {
   }
 
   oldvalue = getcombatrecordsupermisc(super);
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "superStats", super, "misc1", oldvalue + increment);
+  self setplayerdata(level.progressiongroup, "playerStats", "superStats", super, "misc1", oldvalue + increment);
 }
 
 function getcombatrecordsupermisc(super) {
-  return self getplayerdata(level.var_5d69837cf4db0407, "playerStats", "superStats", super, "misc1");
+  return self getplayerdata(level.progressiongroup, "playerStats", "superStats", super, "misc1");
 }
 
 function superdisabledinarbitraryup(superref) {
@@ -3197,7 +3197,7 @@ function function_25b1b1c8cae25c68(objweapon) {
 
 function function_96042b357c338ada(objweapon) {
   if(issharedfuncdefined("super_hb_sensor", "onSuperButtonHold")) {
-    return function_f3bb4f4911a1beb2("super_hb_sensor", "onSuperButtonHold", objweapon);
+    return callsharedfunc("super_hb_sensor", "onSuperButtonHold", objweapon);
   }
 
   return undefined;
@@ -3205,7 +3205,7 @@ function function_96042b357c338ada(objweapon) {
 
 function function_6129eaac0c283bb7(objweapon) {
   if(issharedfuncdefined("super_hb_sensor", "given")) {
-    return function_f3bb4f4911a1beb2("super_hb_sensor", "given", objweapon);
+    return callsharedfunc("super_hb_sensor", "given", objweapon);
   }
 
   return undefined;
@@ -3213,7 +3213,7 @@ function function_6129eaac0c283bb7(objweapon) {
 
 function function_971b383d95556418(objweapon) {
   if(issharedfuncdefined("super_evg", "onSuperButtonPressed")) {
-    return function_f3bb4f4911a1beb2("super_evg", "onSuperButtonPressed", objweapon);
+    return callsharedfunc("super_evg", "onSuperButtonPressed", objweapon);
   }
 
   return undefined;
@@ -3221,7 +3221,7 @@ function function_971b383d95556418(objweapon) {
 
 function function_63cb15591c54cb1(objweapon) {
   if(issharedfuncdefined("super_evg", "given")) {
-    return function_f3bb4f4911a1beb2("super_evg", "given", objweapon);
+    return callsharedfunc("super_evg", "given", objweapon);
   }
 
   return undefined;
@@ -3328,7 +3328,7 @@ function function_2e14b99891ecbbf4() {
 }
 
 function function_69e46ed9d65ec7e4() {
-  return function_f3bb4f4911a1beb2("super_evg", "taken");
+  return callsharedfunc("super_evg", "taken");
 }
 
 function blindingturretunset() {
@@ -3841,7 +3841,7 @@ function function_7203e7aa96ff0ba9(superid, var_86c4bb77bc9871cd, forceshow) {
     self setclientomnvar("ui_field_upgrade_use", superid);
 
     if(!istrue(var_86c4bb77bc9871cd)) {
-      self.var_57d85036ea10552d = undefined;
+      self.parkedwidgetid = undefined;
     }
 
     return;
@@ -3856,8 +3856,8 @@ function function_7203e7aa96ff0ba9(superid, var_86c4bb77bc9871cd, forceshow) {
   if(istrue(self.perkpackagedata.istwomode) && !istrue(forceshow)) {
     if(!isDefined(self.perkpackagedata.lastsuper)) {
       canshow = 1;
-    } else if(isDefined(self.var_57d85036ea10552d)) {
-      var_902970e912ecfbd5 = level.superglobals.supersbyid[self.var_57d85036ea10552d];
+    } else if(isDefined(self.parkedwidgetid)) {
+      var_902970e912ecfbd5 = level.superglobals.supersbyid[self.parkedwidgetid];
       var_6cfeb740aa80163a = level.superglobals.supersbyid[superid];
       var_fe1ca90a8e7694a0 = level.superglobals.staticsuperdata[var_902970e912ecfbd5].var_d835cd7abd661b88;
       var_857bc7a94ecf5791 = level.superglobals.staticsuperdata[var_6cfeb740aa80163a].var_d835cd7abd661b88;
@@ -3868,7 +3868,7 @@ function function_7203e7aa96ff0ba9(superid, var_86c4bb77bc9871cd, forceshow) {
         canshow = 1;
       } else {
         canshow = 1;
-        superid = self.var_57d85036ea10552d;
+        superid = self.parkedwidgetid;
       }
     } else {
       canshow = 1;
@@ -3879,7 +3879,7 @@ function function_7203e7aa96ff0ba9(superid, var_86c4bb77bc9871cd, forceshow) {
 
   if(canshow || istrue(forceshow)) {
     self setclientomnvar("ui_field_upgrade_use", superid);
-    self.var_57d85036ea10552d = superid;
+    self.parkedwidgetid = superid;
   }
 }
 
@@ -3980,7 +3980,7 @@ function function_c1c41a5273f29351(objweapon, isimmediate) {
   }
 }
 
-function private function_7fdcd12f0e769a07(player, objweapon, var_81ea6bd318c54254) {
+function private function_7fdcd12f0e769a07(player, objweapon, isspecial) {
   self endon("race_end");
   player waittillmatch("offhand_fired", objweapon);
   self.success = 1;

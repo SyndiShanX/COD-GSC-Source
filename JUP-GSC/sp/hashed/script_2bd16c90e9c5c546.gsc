@@ -91,7 +91,7 @@ function function_33a0071b309ada3a() {
   struct = spawnStruct();
   struct.stagename = "";
   struct.priority = 0;
-  struct.var_d86443bb4dc09f55 = 0;
+  struct.minai = 0;
   struct.maxai = 0;
   struct.priorityperplayer = 0;
   struct.var_b895bca3d7f637f8 = 1;
@@ -108,7 +108,7 @@ function function_33a0071b309ada3a() {
 }
 
 function private function_2a64555627bef58f(struct) {
-  if(!isDefined(struct.stagename) || !isDefined(struct.priority) || !isDefined(struct.var_d86443bb4dc09f55) || !isDefined(struct.maxai)) {
+  if(!isDefined(struct.stagename) || !isDefined(struct.priority) || !isDefined(struct.minai) || !isDefined(struct.maxai)) {
     assertmsg("Tried to add stage without required parameters: stageName, priority, minAI, maxAI.");
     return;
   }
@@ -160,7 +160,7 @@ function private function_2a64555627bef58f(struct) {
 
 function function_522de4e0b6e1fe88(volumetargetname, stagestruct) {
   function_2a64555627bef58f(stagestruct);
-  function_3766773616a64eac(volumetargetname, stagestruct.stagename, stagestruct.priority, stagestruct.var_d86443bb4dc09f55, stagestruct.maxai, stagestruct.priorityperplayer, stagestruct.var_b895bca3d7f637f8, stagestruct.var_8bd784bab1c5be5, stagestruct.stealthgroup, stagestruct.var_74d506aaf66c3d49, stagestruct.maxreinforcementcooldown, stagestruct.var_56e4a813e857bd7d, stagestruct.reinforcementlimit, stagestruct.var_bcda9a9f65039f12, stagestruct.var_bcb7a49f64dd6d58);
+  function_3766773616a64eac(volumetargetname, stagestruct.stagename, stagestruct.priority, stagestruct.minai, stagestruct.maxai, stagestruct.priorityperplayer, stagestruct.var_b895bca3d7f637f8, stagestruct.var_8bd784bab1c5be5, stagestruct.stealthgroup, stagestruct.var_74d506aaf66c3d49, stagestruct.maxreinforcementcooldown, stagestruct.var_56e4a813e857bd7d, stagestruct.reinforcementlimit, stagestruct.var_bcda9a9f65039f12, stagestruct.var_bcb7a49f64dd6d58);
 }
 
 function function_e1a2c1380886b277(volume) {
@@ -213,7 +213,7 @@ function function_c627f4f5ad3d65c1(type, function) {
 function private function_31e1b184571df76e(volumeent) {
   var_9452f76b176ae883 = spawnStruct();
   var_9452f76b176ae883.priority = [volumeent.var_bf0b0b944c5705c6, volumeent.var_40ab8ca5e6a9d851, volumeent.var_75c00ebf560f54c, volumeent.var_a6a83d4cfa022f1f, volumeent.var_5020aa3fd7320d52, volumeent.var_33a7b5d723c21d8d, volumeent.var_c6fe2f9f38346bb8, volumeent.var_5f1a066d7e6988db];
-  var_9452f76b176ae883.var_d86443bb4dc09f55 = [volumeent.var_4e4a50551dfcaac5, volumeent.var_63290ccd7022114e, volumeent.var_a2fe792e9d5f51ff, volumeent.var_5b3e7d7305586e68, volumeent.var_47b4360713236389, volumeent.var_355dae6742623592, volumeent.var_3d3973428284e3d3, volumeent.var_d55f46487357817c];
+  var_9452f76b176ae883.minai = [volumeent.var_4e4a50551dfcaac5, volumeent.var_63290ccd7022114e, volumeent.var_a2fe792e9d5f51ff, volumeent.var_5b3e7d7305586e68, volumeent.var_47b4360713236389, volumeent.var_355dae6742623592, volumeent.var_3d3973428284e3d3, volumeent.var_d55f46487357817c];
   var_9452f76b176ae883.maxai = [volumeent.var_a77b851ffa0c9ddb, volumeent.var_550a13855eddd608, volumeent.var_70565658b4aa9c51, volumeent.var_36eaa2488464694e, volumeent.var_7aa7972c3af51447, volumeent.var_230b08a771ed7dc4, volumeent.var_60735e6d0242685d, volumeent.var_2821aa5cd332d91a];
   var_9452f76b176ae883.priorityperplayer = [volumeent.var_7e1875b56b2b852e, volumeent.var_ee942922d642b4ab, volumeent.var_94d54bfa388e01e0, volumeent.var_3d1eb4c45872b33d, volumeent.var_f54f0f38204e215a, volumeent.var_f6db7ad7116f5a37, volumeent.var_c86a1fa37ed2e72c, volumeent.var_cb68129b13f2da89];
   var_9452f76b176ae883.var_b895bca3d7f637f8 = [volumeent.var_85c88f59d0341dd4, volumeent.var_c6d5f196255a8879, volumeent.var_ca86c14747c5571e, volumeent.var_f7cb3f71f87f5273, volumeent.var_f83717200be3c858, volumeent.var_7a51837db6bf6ead, volumeent.var_89619be125d04882, volumeent.var_59ad913053e66bd7];
@@ -233,7 +233,7 @@ function private function_a612e00addaa15c6(var_9452f76b176ae883, stageindex) {
   stagestruct = spawnStruct();
   stagestruct.index = stageindex + 1;
   stagestruct.priority = var_9452f76b176ae883.priority[stageindex];
-  stagestruct.var_d86443bb4dc09f55 = var_9452f76b176ae883.var_d86443bb4dc09f55[stageindex];
+  stagestruct.minai = var_9452f76b176ae883.minai[stageindex];
   stagestruct.maxai = var_9452f76b176ae883.maxai[stageindex];
   stagestruct.priorityperplayer = var_9452f76b176ae883.priorityperplayer[stageindex];
   stagestruct.var_b895bca3d7f637f8 = var_9452f76b176ae883.var_b895bca3d7f637f8[stageindex];
@@ -263,8 +263,8 @@ function private function_a612e00addaa15c6(var_9452f76b176ae883, stageindex) {
     stagestruct.var_36b40e475296ee24 = 0;
   }
 
-  stagestruct.var_582685fd005f7229 = isDefined(stagestruct.priority) && isDefined(stagestruct.var_d86443bb4dc09f55) && isDefined(stagestruct.maxai) && isDefined(stagestruct.priorityperplayer) && isDefined(stagestruct.var_b895bca3d7f637f8) && isDefined(stagestruct.var_8bd784bab1c5be5) && isDefined(stagestruct.var_74d506aaf66c3d49) && isDefined(stagestruct.maxreinforcementcooldown) && isDefined(stagestruct.var_56e4a813e857bd7d) && isDefined(stagestruct.reinforcementlimit);
-  stagestruct.var_9dc417101f3fb9f3 = stagestruct.var_d86443bb4dc09f55 > 0 || stagestruct.maxai > 0;
+  stagestruct.var_582685fd005f7229 = isDefined(stagestruct.priority) && isDefined(stagestruct.minai) && isDefined(stagestruct.maxai) && isDefined(stagestruct.priorityperplayer) && isDefined(stagestruct.var_b895bca3d7f637f8) && isDefined(stagestruct.var_8bd784bab1c5be5) && isDefined(stagestruct.var_74d506aaf66c3d49) && isDefined(stagestruct.maxreinforcementcooldown) && isDefined(stagestruct.var_56e4a813e857bd7d) && isDefined(stagestruct.reinforcementlimit);
+  stagestruct.var_9dc417101f3fb9f3 = stagestruct.minai > 0 || stagestruct.maxai > 0;
   stagestruct.isnamed = isDefined(stagestruct.name) && stagestruct.name.size > 0;
   return stagestruct;
 }
@@ -272,11 +272,11 @@ function private function_a612e00addaa15c6(var_9452f76b176ae883, stageindex) {
 function private add_stage(volumeent, stagestruct) {
   assertex(stagestruct.var_582685fd005f7229, "^1[AI Choreographer]: " + volumeent.targetname + "' contains invalid stage data for stage index '" + stagestruct.index + "'. Some values are undefined. Radiant should be providing default values for these - see coredev.def.json ('classname': 'info_volume_choreographer)");
   assertex(!(stagestruct.var_9dc417101f3fb9f3 && !stagestruct.isnamed), "^1[AI Choreographer]: " + volumeent.targetname + "' stage index '" + stagestruct.index + "' has non default data BUT does not have a stage name and will therefore not be added. Add a stage name if this stage is intended to be used.");
-  assertex(stagestruct.var_d86443bb4dc09f55 <= stagestruct.maxai, "^1[AI Choreographer]: " + volumeent.targetname + "' stage index '" + stagestruct.index + "'s MinAI value is larger than MaxAI");
+  assertex(stagestruct.minai <= stagestruct.maxai, "^1[AI Choreographer]: " + volumeent.targetname + "' stage index '" + stagestruct.index + "'s MinAI value is larger than MaxAI");
   assertex(stagestruct.var_74d506aaf66c3d49 <= stagestruct.maxreinforcementcooldown, "^1[AI Choreographer]: " + volumeent.targetname + "' stage index '" + stagestruct.index + "'s MinReinforcementCooldown value is larger than MaxReinforcementCooldown");
 
   if(stagestruct.isnamed) {
-    function_3766773616a64eac(volumeent.targetname, stagestruct.name, stagestruct.priority, stagestruct.var_d86443bb4dc09f55, stagestruct.maxai, stagestruct.priorityperplayer, stagestruct.var_b895bca3d7f637f8, stagestruct.var_8bd784bab1c5be5, stagestruct.stealthgroup, stagestruct.var_74d506aaf66c3d49, stagestruct.maxreinforcementcooldown, stagestruct.var_56e4a813e857bd7d, stagestruct.reinforcementlimit, stagestruct.var_36911c475270c536, stagestruct.var_36b40e475296ee24);
+    function_3766773616a64eac(volumeent.targetname, stagestruct.name, stagestruct.priority, stagestruct.minai, stagestruct.maxai, stagestruct.priorityperplayer, stagestruct.var_b895bca3d7f637f8, stagestruct.var_8bd784bab1c5be5, stagestruct.stealthgroup, stagestruct.var_74d506aaf66c3d49, stagestruct.maxreinforcementcooldown, stagestruct.var_56e4a813e857bd7d, stagestruct.reinforcementlimit, stagestruct.var_36911c475270c536, stagestruct.var_36b40e475296ee24);
   }
 }
 
@@ -393,7 +393,7 @@ function function_dadf0846a19b2d4b(flagname, oneoff, mode, value) {
   thread function_284da564a2225c39(flagname, oneoff, mode, value);
 }
 
-function private function_67bd9b51a7445ace() {
+function private get_ai_count() {
   assert(isDefined(self));
   var_e1f25aa8ee4db062 = isstruct(self);
 
@@ -422,7 +422,7 @@ function private function_284da564a2225c39(flagname, oneoff, mode, value) {
         assert(isfunction(value));
 
         while(true) {
-          aicount = function_67bd9b51a7445ace();
+          aicount = get_ai_count();
           ready = self[[value]](aicount);
 
           if(ready) {
@@ -453,7 +453,7 @@ function private function_284da564a2225c39(flagname, oneoff, mode, value) {
 function private function_46408ccc4843afe5(value) {
   while(true) {
     wait 0.5;
-    count = function_67bd9b51a7445ace();
+    count = get_ai_count();
 
     if(count <= value) {
       return;

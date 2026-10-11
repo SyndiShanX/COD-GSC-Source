@@ -93,7 +93,7 @@ function function_e3728e23c67c0893() {
 }
 
 function function_c17f70713e3b32e6() {
-  n_players = self.var_6c29f2fdb0054bbe.size;
+  n_players = self.playerparticipants.size;
   var_d54b8704cb9ea6bc = 0;
 
   switch (self.difficulty) {
@@ -188,7 +188,7 @@ function function_900b224f51e6952f() {
         continue;
       }
 
-      activitystate = function_73bd348a2ec322cf(activity);
+      activitystate = getactivitystate(activity);
 
       if(istrue(activity.var_177c4e4d4ae90d53)) {
         var_4aed760c6d068e13 = getdvarint(@ "hash_e7cee129b1a5b6f1", 0);
@@ -296,14 +296,14 @@ function function_4d566855e4ef8720() {
     spawnevent = validevents[randomindex];
     spawnpoints = [];
 
-    if(isDefined(self.var_f10d2bae0aa4fce7)) {
-      foreach(point in self.var_f10d2bae0aa4fce7) {
+    if(isDefined(self.a_s_spawnpts)) {
+      foreach(point in self.a_s_spawnpts) {
         spawnpoints[spawnpoints.size] = point.origin;
       }
     } else {
       spawnpoints[0] = namespace_68dc261109a9503f::function_8988a4c89289d7f4(self);
 
-      foreach(player in self.var_6c29f2fdb0054bbe) {
+      foreach(player in self.playerparticipants) {
         spawnpoints[spawnpoints.size] = player.origin;
       }
     }

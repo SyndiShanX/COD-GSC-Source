@@ -11,7 +11,7 @@
 #namespace namespace_b6acd36531d49c27;
 
 function main() {
-  function_e05aeec06b7b52aa(&function_4da231b2893604c, &function_de1545c98ed439f8, &function_a62d0f50f690359, &enterfunc, &exitfunc, &surfacefunc, &descendfunc, &playsoundfunc, &visionsetfunc, &drownfunc, &function_6fed0ef13f84a258, &function_673ece83b6eb66c4);
+  initcommonswim(&getbreathtime, &function_de1545c98ed439f8, &function_a62d0f50f690359, &enterfunc, &exitfunc, &surfacefunc, &descendfunc, &playsoundfunc, &visionsetfunc, &drownfunc, &function_6fed0ef13f84a258, &function_673ece83b6eb66c4);
   function_a76b0a124a6a8f46();
   function_3e689374a8c8c3a2();
 
@@ -45,7 +45,7 @@ function function_3e689374a8c8c3a2(breathnormal, breathsprint) {
   level.swim.breathtimes.sprint = 15;
 }
 
-function function_4da231b2893604c() {
+function getbreathtime() {
   if(self isswimsprinting()) {
     breathtime = level.swim.breathtimes.sprint;
   } else {
@@ -92,8 +92,8 @@ function surfacefunc() {
     self[[getsharedfunc("player", "surfaceFunc")]]();
   }
 
-  if(istrue(function_f3bb4f4911a1beb2("scubaGasMask", "hasScubaGasMask", self))) {
-    function_f3bb4f4911a1beb2("scubaGasMask", "updateScubaGasmask", self, 0);
+  if(istrue(callsharedfunc("scubaGasMask", "hasScubaGasMask", self))) {
+    callsharedfunc("scubaGasMask", "updateScubaGasmask", self, 0);
   }
 }
 
@@ -106,9 +106,9 @@ function descendfunc() {
     self[[getsharedfunc("stealth", "dropAiAccuracy")]]();
   }
 
-  if(istrue(function_f3bb4f4911a1beb2("scubaGasMask", "hasScubaGasMask", self))) {
-    function_f3bb4f4911a1beb2("scubaGasMask", "updateScubaGasmask", self, 1);
-    thread function_f3bb4f4911a1beb2("scubaGasMask", "monitorScubaGasMaskDamage");
+  if(istrue(callsharedfunc("scubaGasMask", "hasScubaGasMask", self))) {
+    callsharedfunc("scubaGasMask", "updateScubaGasmask", self, 1);
+    thread callsharedfunc("scubaGasMask", "monitorScubaGasMaskDamage");
   }
 }
 

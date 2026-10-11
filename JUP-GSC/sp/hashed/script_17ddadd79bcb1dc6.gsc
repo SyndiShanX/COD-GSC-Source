@@ -13,7 +13,7 @@
 
 function main() {
   scripts\common\lighting::light_init();
-  thread function_f29d0cd9dae6bab4();
+  thread setup_flickerlight_presets();
   thread function_f8fd68a59055821e();
   thread function_12a1c44985e8ba93();
   thread function_12a1c54985e8bcc6();
@@ -62,8 +62,8 @@ function function_26280fbed5700639() {
   setDvar(@ "hash_63eb1893f96ac98d", 6);
 }
 
-function function_f29d0cd9dae6bab4() {
-  function_dbec921ed499ee34("firelight_motion_medium", (0.7, 0.2246, 0), (0.7, 0.25, 0), 30, 0.05, 0.2, 20);
+function setup_flickerlight_presets() {
+  create_flickerlight_preset("firelight_motion_medium", (0.7, 0.2246, 0), (0.7, 0.25, 0), 30, 0.05, 0.2, 20);
   function_bf134e4c6c36436("flickerdim", 0.25, 10, 0.05, 0.15, 3, 7, 0.1, 3);
 }
 
@@ -78,15 +78,15 @@ function function_97fa450d44ef3a35(anim_org) {
   childthread function_a91a68d942ea5bcf(Farah_head);
   showcinematicletterboxing(0, 0);
   visionsetnaked("cp_jup_port_intro", 0);
-  childthread function_b01bc37bb97ec069("lgt_blink_intro", 1000, 50, 50, "fx_intro_blink", undefined, 0.5, 3, 0.2, 0.5, "lgt_blink_intro_off", undefined, 0);
-  childthread function_238c2a0aae70e973("intro_shot1_fill", 0, 4);
+  childthread model_flicker_preset("lgt_blink_intro", 1000, 50, 50, "fx_intro_blink", undefined, 0.5, 3, 0.2, 0.5, "lgt_blink_intro_off", undefined, 0);
+  childthread lerp_spot_intensity("intro_shot1_fill", 0, 4);
   wait 2;
   flag_wait("lgt_cine_intro_farah_up");
   exploder("intro_exp");
   flag_wait("look_at_gun");
-  childthread function_238c2a0aae70e973("intro_shot1_fill", 3, 1);
+  childthread lerp_spot_intensity("intro_shot1_fill", 3, 1);
   flag_wait("gun_grab");
-  childthread function_238c2a0aae70e973("intro_shot1_moon", 1, 40);
+  childthread lerp_spot_intensity("intro_shot1_moon", 1, 40);
   exploder("intro_single_shot");
   exploder("intro_strafe");
   flag_wait("camera_look");
@@ -95,20 +95,20 @@ function function_97fa450d44ef3a35(anim_org) {
   wait 1;
   level notify("lgt_blink_intro_off");
   wait 0.05;
-  childthread function_238c2a0aae70e973("intro_fire_light_flicker_bounce_off", 0, 0);
+  childthread lerp_spot_intensity("intro_fire_light_flicker_bounce_off", 0, 0);
   flag_wait("intro_cin_bars_end");
   hidecinematicletterboxing(2, 0);
   flag_wait("intro_cin_end");
-  childthread function_238c2a0aae70e973("intro_shot1_moon", 3, 0);
-  childthread function_238c2a0aae70e973("intro_shot1_fill", 3, 0);
-  childthread function_238c2a0aae70e973("lgt_blink_intro", 3, 0);
+  childthread lerp_spot_intensity("intro_shot1_moon", 3, 0);
+  childthread lerp_spot_intensity("intro_shot1_fill", 3, 0);
+  childthread lerp_spot_intensity("lgt_blink_intro", 3, 0);
   stop_exploder("fx_intro_blink");
   visionsetnaked("", 30);
-  childthread function_1d321dd7f8b825ce("flicker4", "intro_fire_light_flicker_omni", 0);
-  childthread function_1d321dd7f8b825ce("flicker4", "intro_fire_light_flicker_bounce", 0);
+  childthread stop_flickerlight("flicker4", "intro_fire_light_flicker_omni", 0);
+  childthread stop_flickerlight("flicker4", "intro_fire_light_flicker_bounce", 0);
   childthread function_26280fbed5700639();
-  childthread function_238c2a0aae70e973("ladder_light_1", 30, 8);
-  childthread function_238c2a0aae70e973("ladder_light_2", 30, 0.16);
+  childthread lerp_spot_intensity("ladder_light_1", 30, 8);
+  childthread lerp_spot_intensity("ladder_light_2", 30, 0.16);
   wait 2;
   level.var_f86dca03b4e10a79 = undefined;
   wait 1;
@@ -141,7 +141,7 @@ function function_3719cd7c0273cbe8() {
   wait 0.1;
   level notify("lgt_blink_intro_off");
   kill_exploder("fx_intro_blink");
-  childthread function_238c2a0aae70e973("lgt_blink_intro", 0, 0);
+  childthread lerp_spot_intensity("lgt_blink_intro", 0, 0);
 }
 
 function function_a91a68d942ea5bcf(Farah_head) {
@@ -175,19 +175,19 @@ function function_8ce600bd17823a90(anim_org) {
   setDvar(@ "hash_b345e52965c135b5", 0.2);
   setDvar(@ "hash_7c6e3f49a053cc4c", 0.2);
   setDvar(@ "hash_ea4c44a08cd23d5d", 2);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_key", 1, 23.9);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_rim", 1, 160);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_fill", 1, 1.6);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_key_2", 1, 23.9);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_rim_2", 1, 160);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_fill_2", 1, 1.6);
+  thread lerp_spot_intensity("lgt_exfil_tracker_key", 1, 23.9);
+  thread lerp_spot_intensity("lgt_exfil_tracker_rim", 1, 160);
+  thread lerp_spot_intensity("lgt_exfil_tracker_fill", 1, 1.6);
+  thread lerp_spot_intensity("lgt_exfil_tracker_key_2", 1, 23.9);
+  thread lerp_spot_intensity("lgt_exfil_tracker_rim_2", 1, 160);
+  thread lerp_spot_intensity("lgt_exfil_tracker_fill_2", 1, 1.6);
   level waittill("tracker_cin_end");
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_key", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_rim", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_fill", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_key_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_rim_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_tracker_fill_2", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_tracker_key", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_tracker_rim", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_tracker_fill", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_tracker_key_2", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_tracker_rim_2", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_tracker_fill_2", 0, 0);
 }
 
 function function_d583c7bd4cc404e3() {
@@ -237,87 +237,87 @@ function function_4047ec2c508ff8eb(anim_org) {
   setDvar(@ "hash_7c6e3f49a053cc4c", 0.2);
   setDvar(@ "hash_ea4c44a08cd23d5d", 2);
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 8000);
-  thread function_238c2a0aae70e973("street_lamp", 0, 0);
-  thread function_238c2a0aae70e973("ladder_light_1", 0, 0);
-  thread function_238c2a0aae70e973("ladder_light_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_streetlamp_main", 0, 400);
-  thread function_238c2a0aae70e973("lgt_exfil_crane_key", 0, 630);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_fill", 0, 0.8);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_rim_2", 0, 160);
+  thread lerp_spot_intensity("street_lamp", 0, 0);
+  thread lerp_spot_intensity("ladder_light_1", 0, 0);
+  thread lerp_spot_intensity("ladder_light_2", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_streetlamp_main", 0, 400);
+  thread lerp_spot_intensity("lgt_exfil_crane_key", 0, 630);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_fill", 0, 0.8);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_rim_2", 0, 160);
   flag_wait("lgt_exfil_farah_mcu");
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_rim_1", 0.5, 0.64);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_fill", 0.5, 2);
-  thread function_238c2a0aae70e973("crane_bg_lights", 0, 400);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_rim_1", 0.5, 0.64);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_fill", 0.5, 2);
+  thread lerp_spot_intensity("crane_bg_lights", 0, 400);
   flag_wait("lgt_exfil_farah_mcu_2");
-  thread function_238c2a0aae70e973("lgt_exfil_street_lamp_main", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_rim_1", 2, 3.98);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_fill", 2, 3.98);
+  thread lerp_spot_intensity("lgt_exfil_street_lamp_main", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_rim_1", 2, 3.98);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_fill", 2, 3.98);
   flag_wait("lgt_exfil_disable_street_lights");
   flag_wait("lgt_exfil_ally");
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_fill", 5, 7.96);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_ally_rim", 8, 40);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_ally_key", 1, 40);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_fill", 5, 7.96);
+  thread lerp_spot_intensity("lgt_exfil_s1_ally_rim", 8, 40);
+  thread lerp_spot_intensity("lgt_exfil_s1_ally_key", 1, 40);
   flag_wait("lgt_exfil_duo_mw");
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_rim_1", 1, 7.96);
-  thread function_238c2a0aae70e973("lgt_exfil_crane_key", 3, 160);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_rim_1", 1, 7.96);
+  thread lerp_spot_intensity("lgt_exfil_crane_key", 3, 160);
   flag_wait("lgt_exfil_farah_focus_m");
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_fill", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_ally_key", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_rim_1", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_farah_rim_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s2_farah_rim", 0, 240);
-  thread function_238c2a0aae70e973("lgt_exfil_s2_farah_fill", 0, 0.4);
-  thread function_238c2a0aae70e973("lgt_exfil_s2_farah_kick", 0, 6);
-  thread function_238c2a0aae70e973("lgt_exfil_streetlamp_main", 0, 400);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_ally_rim", 0, 15);
-  thread function_238c2a0aae70e973("lgt_exfil_crane_key", 0, 630);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_fill", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s1_ally_key", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_rim_1", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s1_farah_rim_2", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s2_farah_rim", 0, 240);
+  thread lerp_spot_intensity("lgt_exfil_s2_farah_fill", 0, 0.4);
+  thread lerp_spot_intensity("lgt_exfil_s2_farah_kick", 0, 6);
+  thread lerp_spot_intensity("lgt_exfil_streetlamp_main", 0, 400);
+  thread lerp_spot_intensity("lgt_exfil_s1_ally_rim", 0, 15);
+  thread lerp_spot_intensity("lgt_exfil_crane_key", 0, 630);
   flag_wait("lgt_exfil_farah_walk_mw");
-  thread function_238c2a0aae70e973("lgt_exfil_s2_farah_rim", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s2_farah_fill", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s2_farah_kick", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_streetlamp_main", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s1_ally_rim", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_key", 0, 800);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_duo_rim", 0, 80);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_duo_fill", 0, 40);
+  thread lerp_spot_intensity("lgt_exfil_s2_farah_rim", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s2_farah_fill", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s2_farah_kick", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_streetlamp_main", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s1_ally_rim", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_key", 0, 800);
+  thread lerp_spot_intensity("lgt_exfil_s3_duo_rim", 0, 80);
+  thread lerp_spot_intensity("lgt_exfil_s3_duo_fill", 0, 40);
   flag_wait("lgt_exfil_farah_turn_mcu");
-  thread function_238c2a0aae70e973("lgt_exfil_s3_duo_fill", 2, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_duo_rim", 1, 20);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_ally_fill", 1, 15);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_ally_rim", 1, 4);
+  thread lerp_spot_intensity("lgt_exfil_s3_duo_fill", 2, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_duo_rim", 1, 20);
+  thread lerp_spot_intensity("lgt_exfil_s3_ally_fill", 1, 15);
+  thread lerp_spot_intensity("lgt_exfil_s3_ally_rim", 1, 4);
   flag_wait("lgt_exfil_farah_focus_2_m");
-  thread function_238c2a0aae70e973("lgt_exfil_s3_ally_fill", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_duo_rim", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_ally_rim", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s4_farah_key", 0, 80);
-  thread function_238c2a0aae70e973("lgt_exfil_s4_farah_rim", 0, 3.98);
-  thread function_238c2a0aae70e973("lgt_exfil_s4_farah_fill", 0, 3.98);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_key", 0, 47);
+  thread lerp_spot_intensity("lgt_exfil_s3_ally_fill", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_duo_rim", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_ally_rim", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s4_farah_key", 0, 80);
+  thread lerp_spot_intensity("lgt_exfil_s4_farah_rim", 0, 3.98);
+  thread lerp_spot_intensity("lgt_exfil_s4_farah_fill", 0, 3.98);
+  thread lerp_spot_intensity("lgt_exfil_s3_key", 0, 47);
   flag_wait("lgt_exfil_farah_walk_m");
-  thread function_238c2a0aae70e973("lgt_exfil_s4_farah_key", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s4_farah_rim", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s4_farah_fill", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_key", 0, 800);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_ally_rim", 0, 4);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_ally_fill", 0, 15);
-  thread function_238c2a0aae70e973("lgt_exfil_s5_crane_spec", 0, 8);
+  thread lerp_spot_intensity("lgt_exfil_s4_farah_key", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s4_farah_rim", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s4_farah_fill", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_key", 0, 800);
+  thread lerp_spot_intensity("lgt_exfil_s3_ally_rim", 0, 4);
+  thread lerp_spot_intensity("lgt_exfil_s3_ally_fill", 0, 15);
+  thread lerp_spot_intensity("lgt_exfil_s5_crane_spec", 0, 8);
   flag_wait("lgt_exfil_ally_w");
-  thread function_238c2a0aae70e973("lgt_exfil_s3_ally_fill", 4, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_ally_rim", 4, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_duo_rim", 3, 30);
+  thread lerp_spot_intensity("lgt_exfil_s3_ally_fill", 4, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_ally_rim", 4, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_duo_rim", 3, 30);
   flag_wait("lgt_exfil_cine_end");
-  thread function_238c2a0aae70e973("lgt_exfil_s3_key", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s5_crane_spec", 0, 0);
-  thread function_238c2a0aae70e973("lgt_exfil_s3_duo_rim", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_key", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s5_crane_spec", 0, 0);
+  thread lerp_spot_intensity("lgt_exfil_s3_duo_rim", 0, 0);
   thread function_26280fbed5700639();
   hidecinematicletterboxing(0, 0);
   setDvar(@ "hash_b345e52965c135b5", 1);
   setDvar(@ "hash_7c6e3f49a053cc4c", 1);
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 1500);
-  thread function_238c2a0aae70e973("street_lamp", 0, 119);
-  thread function_238c2a0aae70e973("ladder_light_1", 30, 8);
-  thread function_238c2a0aae70e973("ladder_light_2", 30, 0.16);
-  thread function_238c2a0aae70e973("crane_bg_lights", 0, 636);
+  thread lerp_spot_intensity("street_lamp", 0, 119);
+  thread lerp_spot_intensity("ladder_light_1", 30, 8);
+  thread lerp_spot_intensity("ladder_light_2", 30, 0.16);
+  thread lerp_spot_intensity("crane_bg_lights", 0, 636);
   level.var_f86dca03b4e10a79 = undefined;
 }
 
@@ -370,15 +370,15 @@ function function_f8fd68a59055821e() {
   }
 
   crane2_spots = getEntArray("crane2_spots", "targetname");
-  var_53d1de2199c7c358 = getEnt("crane_base_2", "targetname");
+  crane2 = getEnt("crane_base_2", "targetname");
   var_af19125dbd1497f3 = getEntArray("crane_base_2_lgts", "targetname");
 
   foreach(var_ce795cf90751bd9d in crane2_spots) {
-    var_ce795cf90751bd9d linkTo(var_53d1de2199c7c358);
+    var_ce795cf90751bd9d linkTo(crane2);
   }
 
   foreach(var_bae37a3bbbacd332 in var_af19125dbd1497f3) {
-    var_bae37a3bbbacd332 linkTo(var_53d1de2199c7c358);
+    var_bae37a3bbbacd332 linkTo(crane2);
   }
 
   crane3_omnis = getEntArray("crane3_omnis", "targetname");
@@ -405,7 +405,7 @@ function function_f8fd68a59055821e() {
   playFXOnTag(getfx("lensflare_crane_set"), var_49592704f3ed538a, "tag_origin");
   var_3c6487e472ef1da8 = spawn_tag_origin();
   var_3c6487e472ef1da8 show();
-  var_3c6487e472ef1da8 linkTo(var_53d1de2199c7c358, "tag_origin", (-468, 0, -490), (0, 0, 0));
+  var_3c6487e472ef1da8 linkTo(crane2, "tag_origin", (-468, 0, -490), (0, 0, 0));
   playFXOnTag(getfx("lensflare_crane_set"), var_3c6487e472ef1da8, "tag_origin");
   var_3c6488e472ef1fdb = spawn_tag_origin();
   var_3c6488e472ef1fdb show();
@@ -425,14 +425,14 @@ function function_8ff6a8c36abc7ae() {
   while(true) {
     self waittill("trigger");
     crane_big_light_1 = getEnt("crane_big_light_1", "script_noteworthy");
-    crane_big_light_1 function_94e6538604ee3986("forceshadowon");
+    crane_big_light_1 setlightshadowstate("forceshadowon");
 
     while(level.player istouching(self)) {
       wait 0.1;
     }
 
     crane_big_light_1 = getEnt("crane_big_light_1", "script_noteworthy");
-    crane_big_light_1 function_94e6538604ee3986("normal");
+    crane_big_light_1 setlightshadowstate("normal");
   }
 }
 
@@ -448,14 +448,14 @@ function function_1c272abf620093e1() {
   while(true) {
     self waittill("trigger");
     crane_big_light_2 = getEnt("crane_big_light_2", "script_noteworthy");
-    crane_big_light_2 function_94e6538604ee3986("forceshadowon");
+    crane_big_light_2 setlightshadowstate("forceshadowon");
 
     while(level.player istouching(self)) {
       wait 0.1;
     }
 
     crane_big_light_2 = getEnt("crane_big_light_2", "script_noteworthy");
-    crane_big_light_2 function_94e6538604ee3986("normal");
+    crane_big_light_2 setlightshadowstate("normal");
   }
 }
 
@@ -471,33 +471,33 @@ function function_592bb2dce8115044() {
   while(true) {
     self waittill("trigger");
     crane_big_light_3 = getEnt("crane_big_light_3", "script_noteworthy");
-    crane_big_light_3 function_94e6538604ee3986("forceshadowon");
+    crane_big_light_3 setlightshadowstate("forceshadowon");
 
     while(level.player istouching(self)) {
       wait 0.1;
     }
 
     crane_big_light_3 = getEnt("crane_big_light_3", "script_noteworthy");
-    crane_big_light_3 function_94e6538604ee3986("normal");
+    crane_big_light_3 setlightshadowstate("normal");
   }
 }
 
 function function_95238bbeaa618750() {
-  var_762efe52c56d977 = getEntArray("lgt_exfil_streetlamp", "targetname");
+  streetlights = getEntArray("lgt_exfil_streetlamp", "targetname");
 
-  foreach(light in var_762efe52c56d977) {
+  foreach(light in streetlights) {
     light setlightintensity(0);
   }
 }
 
 function function_9b174ff6779fcf67() {
   wait 0.05;
-  thread function_238c2a0aae70e973("explosion_close_lights", 0, 0);
+  thread lerp_spot_intensity("explosion_close_lights", 0, 0);
 }
 
 function function_9b1750f6779fd19a() {
   wait 0.05;
-  thread function_238c2a0aae70e973("fire_explosion_lights_maintenance", 0, 0);
+  thread lerp_spot_intensity("fire_explosion_lights_maintenance", 0, 0);
 }
 
 function function_464c7dc390d8030d() {

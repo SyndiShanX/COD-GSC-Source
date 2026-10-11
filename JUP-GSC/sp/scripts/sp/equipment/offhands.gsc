@@ -47,12 +47,12 @@ function init() {
   level.offhands = spawnStruct();
   level.offhands.firefuncs = [];
   level.offhands.precached = [];
-  level.offhands.var_b57472ecae671752 = [];
+  level.offhands.getammooverridefunctions = [];
   level.player = getEntArray("player", "classname")[0];
   level.player.offhands = spawnStruct();
 }
 
-function function_9ed6302fa8a1e967(offhand, precachefunc) {
+function registerprecachefunc(offhand, precachefunc) {
   if(getdvarint(@ "hash_e6afce2cf5cf7515", 0) != 0) {
     return;
   }
@@ -158,9 +158,9 @@ function private function_4736c9a927e50c6e() {
   }
 }
 
-function playeroffhandthread(var_adb899c5ad0ec0ae) {
+function playeroffhandthread(offhandplayerthread) {
   level.player endon("death");
-  level.player childthread[[var_adb899c5ad0ec0ae]]();
+  level.player childthread[[offhandplayerthread]]();
 }
 
 function getweaponoffhandclass(weapon) {
@@ -173,7 +173,7 @@ function getweaponoffhandclass(weapon) {
   return weaponoffhandclass(weaponname);
 }
 
-function function_c7e46ad834e413f(weaponname, isprimarytype) {
+function overrideweaponoffhandtype(weaponname, isprimarytype) {
   assert(isDefined(weaponname));
   assert(isDefined(isprimarytype));
   assert(isDefined(level.offhands));
@@ -286,15 +286,15 @@ function function_16bdc6c2e41c72d1(grenadeorigin, visionset, radius) {
 
   while(!time_has_passed(starttime, duration)) {
     transitiontime = 0.05;
-    var_e679443f18f52622 = playerinradius;
+    wasplayerinradius = playerinradius;
     playerinradius = distancesquared(level.player.origin, grenadeorigin) <= radiussquared;
 
     if(playerinradius) {
-      if(!var_e679443f18f52622) {
+      if(!wasplayerinradius) {
         transitiontime = fadeintime;
         visionsetnaked(visionset, transitiontime);
       }
-    } else if(var_e679443f18f52622) {
+    } else if(wasplayerinradius) {
       transitiontime = fadeouttime;
       visionsetnaked("", transitiontime);
     }
@@ -325,13 +325,13 @@ function function_dd141ce8c0127f62() {
   }
 }
 
-function function_6e5ce23490c6fea6(throwngrenade, var_750c0edec8558bf1, pickupstring) {
+function function_6e5ce23490c6fea6(throwngrenade, ownerweaponobj, pickupstring) {
   self endon("death");
 
   while(true) {
-    throwngrenade scripts\sp\player\cursor_hint::create_cursor_hint(undefined, function_8e54bbb4c4af2b69(var_750c0edec8558bf1.basename), pickupstring, 55, 100, 70, 0);
+    throwngrenade scripts\sp\player\cursor_hint::create_cursor_hint(undefined, function_8e54bbb4c4af2b69(ownerweaponobj.basename), pickupstring, 55, 100, 70, 0);
     cursorhintent = throwngrenade.cursor_hint_ent;
-    throwngrenade childthread function_bb7d0fd0262d852d(pickupstring, var_750c0edec8558bf1);
+    throwngrenade childthread function_bb7d0fd0262d852d(pickupstring, ownerweaponobj);
     outcome = throwngrenade waittill_any_return_2("trigger", "death");
 
     if(outcome == "death") {
@@ -343,7 +343,7 @@ function function_6e5ce23490c6fea6(throwngrenade, var_750c0edec8558bf1, pickupst
       return;
     }
 
-    pickedup = function_e2c7f0ed80637008(var_750c0edec8558bf1);
+    pickedup = function_e2c7f0ed80637008(ownerweaponobj);
 
     if(!pickedup) {
       continue;
@@ -354,7 +354,7 @@ function function_6e5ce23490c6fea6(throwngrenade, var_750c0edec8558bf1, pickupst
         throwngrenade.trigger delete();
       }
 
-      scripts\sp\loot::createnotification(var_750c0edec8558bf1.basename);
+      scripts\sp\loot::createnotification(ownerweaponobj.basename);
       throwngrenade delete();
     }
 

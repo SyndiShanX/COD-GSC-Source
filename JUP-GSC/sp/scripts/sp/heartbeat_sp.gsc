@@ -7,7 +7,7 @@
 #namespace heartbeat_sp;
 
 function main() {
-  function_94461e6fd9196c6a(&playsoundfunc);
+  initcommonheartbeat(&playsoundfunc);
 }
 
 function function_767efe0110bfa73a() {

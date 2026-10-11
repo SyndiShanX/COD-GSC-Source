@@ -33,7 +33,7 @@ function init() {
   }
 }
 
-function function_302e021a6ff37aa6(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_302e021a6ff37aa6(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player)) {
     player = self;
   }
@@ -171,25 +171,25 @@ function private function_ec72aaffd5629e92(value) {
 }
 
 function function_373d9e3e41486ae1(player, var_85166da84e55de25) {
-  player setplayerdata(level.var_5d69837cf4db0407, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "blueprintTuned", 0);
+  player setplayerdata(level.progressiongroup, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "blueprintTuned", 0);
   oldattachments = [];
   var_6db9df5a6da9f3f7 = [];
 
   for(attachmentindex = 0; attachmentindex < 7; attachmentindex++) {
-    oldattachments[attachmentindex] = player getplayerdata(level.var_5d69837cf4db0407, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "attachment");
-    var_6db9df5a6da9f3f7[attachmentindex] = player getplayerdata(level.var_5d69837cf4db0407, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "variantID");
+    oldattachments[attachmentindex] = player getplayerdata(level.progressiongroup, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "attachment");
+    var_6db9df5a6da9f3f7[attachmentindex] = player getplayerdata(level.progressiongroup, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "variantID");
   }
 
   for(attachmentindex = 0; attachmentindex < 7; attachmentindex++) {
     var_460bd2a877684086 = player getplayerdata(level.loadoutsgroup, "upgradeWeapon", "attachmentSetup", attachmentindex, "attachment");
     var_f23b046d49b6fa9b = player getplayerdata(level.loadoutsgroup, "upgradeWeapon", "attachmentSetup", attachmentindex, "variantID");
-    player setplayerdata(level.var_5d69837cf4db0407, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "attachment", var_460bd2a877684086);
-    player setplayerdata(level.var_5d69837cf4db0407, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "variantID", var_f23b046d49b6fa9b);
+    player setplayerdata(level.progressiongroup, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "attachment", var_460bd2a877684086);
+    player setplayerdata(level.progressiongroup, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "variantID", var_f23b046d49b6fa9b);
     itemindex = array_find(oldattachments, var_460bd2a877684086);
     var_a5bfd04c143c5c3d = isDefined(itemindex) && var_6db9df5a6da9f3f7[itemindex] == var_f23b046d49b6fa9b;
 
     if(var_460bd2a877684086 == "none" || var_a5bfd04c143c5c3d) {
-      player setplayerdata(level.var_5d69837cf4db0407, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "hasBPTune", 0);
+      player setplayerdata(level.progressiongroup, "insuredWeapons", "weaponSetups", var_85166da84e55de25, "attachmentSetup", attachmentindex, "hasBPTune", 0);
     }
   }
 }
@@ -318,7 +318,7 @@ function upgradeweapon(player, value) {
       itemtype = "silencer_attached";
     }
 
-    lootid = scripts\cp_mp\weapon::function_693e108cb61ceeb5(scripts\cp_mp\weapon::getweaponrootname(upgradeweapon), var_effb4ae1788a8b10);
+    lootid = scripts\cp_mp\weapon::getattachmentlootid(scripts\cp_mp\weapon::getweaponrootname(upgradeweapon), var_effb4ae1788a8b10);
     scripts\cp_mp\challenges::function_c2c80007aff49924("attachment", itemtype, lootid, 1, attachmentcost);
     return;
   }

@@ -247,7 +247,7 @@ function private function_2f1ef432df69a29b(player, recipe) {
       var_8f0a45a0f5b42b90 = scripts\cp_mp\utility\loot::function_fae5e1d3de32d3f7(scriptablename);
     }
 
-    var_99ca2650c284f5c3 = player function_93f02514431a1f5d(var_8f0a45a0f5b42b90);
+    var_99ca2650c284f5c3 = player getbackpackitemcount(var_8f0a45a0f5b42b90);
     [var_b834cfed17d314a3, loadouttype, loadoutindex] = function_90e06d23e15ccc43(player, var_8f0a45a0f5b42b90);
     var_f53ae6184f353b7 = undefined;
 

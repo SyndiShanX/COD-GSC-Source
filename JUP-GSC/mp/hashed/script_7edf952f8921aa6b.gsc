@@ -617,14 +617,14 @@ function function_e8f6a314663565f(var_a1581cb0bffd878f) {
   player = self.var_66c1831357048c02;
   player endon("death_or_disconnect");
   self function_65cdab0fc78aba8f(player.origin, 700);
-  var_e82887f4e9e2c5ec = undefined;
+  player_last_pos = undefined;
 
   while(true) {
-    if(!isDefined(var_e82887f4e9e2c5ec)) {
-      var_e82887f4e9e2c5ec = player.origin;
-    } else if(distancesquared(var_e82887f4e9e2c5ec, player.origin) >= var_a1581cb0bffd878f) {
+    if(!isDefined(player_last_pos)) {
+      player_last_pos = player.origin;
+    } else if(distancesquared(player_last_pos, player.origin) >= var_a1581cb0bffd878f) {
       self function_65cdab0fc78aba8f(player.origin, 700);
-      var_e82887f4e9e2c5ec = player.origin;
+      player_last_pos = player.origin;
     }
 
     wait 1;

@@ -168,7 +168,7 @@ function private function_25c9189dc624f33() {
       }
 
       if(issharedfuncdefined("poi", "get_poi_name_from_origin")) {
-        poiname = function_f3bb4f4911a1beb2("poi", "get_poi_name_from_origin", self.origin);
+        poiname = callsharedfunc("poi", "get_poi_name_from_origin", self.origin);
       }
 
       if(isDefined(self.model)) {
@@ -188,7 +188,7 @@ function private function_25c9189dc624f33() {
   }
 }
 
-function private function_cb6e7c567d06f936(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_cb6e7c567d06f936(instance, part, state, player, bautouse, usestring) {
   e_container = undefined;
 
   if(isDefined(instance) && array_contains(level.interacts, instance)) {
@@ -210,7 +210,7 @@ function private function_cb6e7c567d06f936(instance, part, state, player, var_a5
     }
 
     if(issharedfuncdefined("poi", "get_poi_name_from_origin")) {
-      poiname = function_f3bb4f4911a1beb2("poi", "get_poi_name_from_origin", e_container.origin);
+      poiname = callsharedfunc("poi", "get_poi_name_from_origin", e_container.origin);
     }
 
     player dlog_recordplayerevent("dlog_event_player_interaction", ["interaction_x", e_container.origin[0], "interaction_y", e_container.origin[1], "interaction_z", e_container.origin[2], "interaction_poi", poiname, "threat_level", regiondifficulty, "type", usestring]);
@@ -223,7 +223,7 @@ function private function_cb6e7c567d06f936(instance, part, state, player, var_a5
   }
 }
 
-function private function_b13174d586e772a0(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_b13174d586e772a0(instance, part, state, player, bautouse, usestring) {
   e_container = undefined;
 
   if(isDefined(instance) && array_contains(level.interacts, instance)) {

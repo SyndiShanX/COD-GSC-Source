@@ -33,23 +33,23 @@ function function_d4355e5f7ead5aff(text, scale) {
     scale = 1;
   }
 
-  var_4abd463c3a5d6022 = function_d8bcdde57d13f7fc();
-  var_b835ae2157a354ac = var_4abd463c3a5d6022[0];
-  var_67a206c222c5563b = var_4abd463c3a5d6022[1];
+  vidresolution = function_d8bcdde57d13f7fc();
+  vidwidth = vidresolution[0];
+  vidheight = vidresolution[1];
   textlength = text.size;
   textwidth = textlength * 8 * scale;
-  centerx = var_b835ae2157a354ac * 0.5 - textwidth * 0.5;
-  centery = var_67a206c222c5563b * 0.5 - 8;
+  centerx = vidwidth * 0.5 - textwidth * 0.5;
+  centery = vidheight * 0.5 - 8;
   center = [centerx, centery];
   return center;
 }
 
 function function_9e5b1c32235027a1(text, scale) {
   centerpos = function_d4355e5f7ead5aff(text, scale);
-  var_c73310f7c3115ea0 = centerpos[0];
-  var_c73311f7c31160d3 = centerpos[1];
-  var_c73311f7c31160d3 = var_c73311f7c31160d3 * 0.5 + 8;
-  defaultpos = [var_c73310f7c3115ea0, var_c73311f7c31160d3];
+  defaultposx = centerpos[0];
+  defaultposy = centerpos[1];
+  defaultposy = defaultposy * 0.5 + 8;
+  defaultpos = [defaultposx, defaultposy];
   return defaultpos;
 }
 
@@ -141,11 +141,11 @@ function function_946a9bcdca68c4b0(var_77b899748c172731) {
   assertex(isstruct(level.snd), "<dev string:x29>");
 
   if(isDefined(var_77b899748c172731) && var_77b899748c172731 != 0) {
-    level.snd.var_e5679e17677f3e17 = 1;
+    level.snd.debughudactive = 1;
     return;
   }
 
-  level.snd.var_e5679e17677f3e17 = undefined;
+  level.snd.debughudactive = undefined;
 }
 
 function snd_print3d(origin, text, color, alpha, scale, duration, centered) {
@@ -156,16 +156,16 @@ function function_978f0bcacd3604af(origin, text, color, alpha, scale, duration, 
   print3d(origin, text, color, alpha, scale, duration, 1);
 }
 
-function function_136df9498dfe620e(text, x, y, scale, var_8c2efb8562e518db, color, alpha, shadowcolor, shadowalpha, lightcolor, lightalpha, duration) {
+function function_136df9498dfe620e(text, x, y, scale, justify, color, alpha, shadowcolor, shadowalpha, lightcolor, lightalpha, duration) {
   color = default_to(color, (1, 1, 1));
   alpha = default_to(alpha, 1);
   scale = default_to(scale, 1);
-  var_8c2efb8562e518db = default_to(var_8c2efb8562e518db, "<dev string:x4c>");
+  justify = default_to(justify, "<dev string:x4c>");
   duration = default_to(duration, 1);
   offset = (0, 0, 0);
   width = 8 * scale * text.size;
 
-  switch (var_8c2efb8562e518db) {
+  switch (justify) {
     case 0:
     case #"hash_311044bc01bd8beb":
     case #"hash_c9b3133a17a3b2d0":
@@ -210,11 +210,11 @@ function function_136df9498dfe620e(text, x, y, scale, var_8c2efb8562e518db, colo
   function_8c3a8f58cbd39dca(position[0], position[1], text, color, alpha, scale, duration);
 }
 
-function print3dplus(text, origin, scale, var_8c2efb8562e518db, color, alpha, shadowcolor, shadowalpha, lightcolor, lightalpha, duration) {
+function print3dplus(text, origin, scale, justify, color, alpha, shadowcolor, shadowalpha, lightcolor, lightalpha, duration) {
   color = default_to(color, (1, 1, 1));
   alpha = default_to(alpha, 1);
   scale = default_to(scale, 1);
-  var_8c2efb8562e518db = default_to(var_8c2efb8562e518db, "<dev string:x4c>");
+  justify = default_to(justify, "<dev string:x4c>");
   duration = int(default_to(duration, 1));
   contsize = scale < 0;
   scale = abs(scale);
@@ -249,8 +249,8 @@ function print3dplus(text, origin, scale, var_8c2efb8562e518db, color, alpha, sh
 
     if(contsize) {
       dist = distance(origin, vieworigin);
-      var_abeed90f073feea9 = dist * 0.00133333;
-      scale *= var_abeed90f073feea9;
+      fixeddistscalar = dist * 0.00133333;
+      scale *= fixeddistscalar;
     }
   }
 
@@ -260,7 +260,7 @@ function print3dplus(text, origin, scale, var_8c2efb8562e518db, color, alpha, sh
   offsetup = viewanglesup * offset[2];
   centered = 0;
 
-  switch (var_8c2efb8562e518db) {
+  switch (justify) {
     case 0:
     case #"hash_311044bc01bd8beb":
     case #"hash_c9b3133a17a3b2d0":
@@ -347,21 +347,21 @@ function private function_e58246b402adf0b1(color, depthtest, duration, offset) {
   self endon("<dev string:xc8>");
 
   while(drawpatharray.size > 0) {
-    var_7b8c6389c2a19ab1 = [];
+    temppatharray = [];
 
     if(framecount >= duration) {
       for(i = 1; i < drawpatharray.size; i++) {
-        var_7b8c6389c2a19ab1[i - 1] = drawpatharray[i];
+        temppatharray[i - 1] = drawpatharray[i];
       }
     } else {
-      var_7b8c6389c2a19ab1 = drawpatharray;
+      temppatharray = drawpatharray;
     }
 
     if(isDefined(self) && isDefined(self.origin) && function_5b8457b9d8edb521(self) == 0) {
-      var_7b8c6389c2a19ab1[var_7b8c6389c2a19ab1.size] = self.origin;
+      temppatharray[temppatharray.size] = self.origin;
     }
 
-    drawpatharray = var_7b8c6389c2a19ab1;
+    drawpatharray = temppatharray;
     function_fc51b1db9f1aa696(color, depthtest, drawpatharray, offset);
     framecount++;
     waitframe();
@@ -505,19 +505,19 @@ function function_1589f10b96600d0f(screenheight) {
   return var_c67e2413c92619a6;
 }
 
-function function_d6886acce6238019(var_b83b258fc6e7927c, screensize) {
+function function_d6886acce6238019(coordinates, screensize) {
   screensize = default_to(screensize, function_d8bcdde57d13f7fc());
   var_c67e2413c92619a6 = function_1589f10b96600d0f(screensize[1]);
-  hudwidth = var_b83b258fc6e7927c[0] * var_c67e2413c92619a6;
-  hudheight = var_b83b258fc6e7927c[1] * var_c67e2413c92619a6;
+  hudwidth = coordinates[0] * var_c67e2413c92619a6;
+  hudheight = coordinates[1] * var_c67e2413c92619a6;
   return [int(hudwidth), int(hudheight)];
 }
 
-function function_a540f05eecfe7e96(var_b83b258fc6e7927c, screensize) {
+function function_a540f05eecfe7e96(coordinates, screensize) {
   screensize = default_to(screensize, function_d8bcdde57d13f7fc());
   var_c67e2413c92619a6 = function_1589f10b96600d0f(screensize[1]);
-  hudx = var_b83b258fc6e7927c[0] * var_c67e2413c92619a6;
-  hudy = var_b83b258fc6e7927c[1] * var_c67e2413c92619a6;
+  hudx = coordinates[0] * var_c67e2413c92619a6;
+  hudy = coordinates[1] * var_c67e2413c92619a6;
   screenaspect = screensize[0] / screensize[1];
   var_766fc6b1f18eeeab = screenaspect * 480;
   hudxoffset = -0.5 * (var_766fc6b1f18eeeab - 640);
@@ -526,21 +526,21 @@ function function_a540f05eecfe7e96(var_b83b258fc6e7927c, screensize) {
 }
 
 function private function_55792e20398965bf() {
-  if(isDefined(level.snd.var_4893b4259503b919)) {
+  if(isDefined(level.snd.debughudthread)) {
     return;
   }
 
-  level.snd.var_4893b4259503b919 = getthread();
+  level.snd.debughudthread = getthread();
 
   while(isDefined(level.snd.debughuds)) {
     now = gettime();
-    var_d09fe962dd2b94c6 = [];
+    audiodebughuds = [];
 
     foreach(hud in level.snd.debughuds) {
       assert(function_5b8457b9d8edb521(hud) == 0);
 
       if(hud.duration > 0) {
-        var_d09fe962dd2b94c6[var_d09fe962dd2b94c6.size] = hud;
+        audiodebughuds[audiodebughuds.size] = hud;
 
         if(hud.time == now) {
           continue;
@@ -559,7 +559,7 @@ function private function_55792e20398965bf() {
       hud destroy();
     }
 
-    level.snd.debughuds = var_d09fe962dd2b94c6;
+    level.snd.debughuds = audiodebughuds;
     waitframe();
   }
 }
@@ -593,14 +593,14 @@ function private function_bc5b7015df7542d1(duration) {
 function private function_b712ac81c5cb013b(posx, posy, text, color, alpha, scale, duration) {
   hud_width = 640;
   hud_height = 480;
-  var_4445d2b30afaabdb = hud_width / hud_height;
-  var_4abd463c3a5d6022 = function_d8bcdde57d13f7fc();
-  var_b835ae2157a354ac = var_4abd463c3a5d6022[0];
-  var_67a206c222c5563b = var_4abd463c3a5d6022[1];
-  var_2d6e500898a10090 = var_b835ae2157a354ac / var_67a206c222c5563b;
-  widthoffset = -0.5 * (hud_height * var_2d6e500898a10090 - hud_width);
-  hudx = posx / var_b835ae2157a354ac * hud_width + (1 - posx / var_b835ae2157a354ac * 0.5) * widthoffset;
-  hudy = posy / var_67a206c222c5563b * hud_height;
+  hud_aspect = hud_width / hud_height;
+  vidresolution = function_d8bcdde57d13f7fc();
+  vidwidth = vidresolution[0];
+  vidheight = vidresolution[1];
+  vidaspect = vidwidth / vidheight;
+  widthoffset = -0.5 * (hud_height * vidaspect - hud_width);
+  hudx = posx / vidwidth * hud_width + (1 - posx / vidwidth * 0.5) * widthoffset;
+  hudy = posy / vidheight * hud_height;
   assertex(isstruct(level.snd), "snd was not initialized.");
 
   if(isDefined(level.snd.debughuds) == 0) {
@@ -618,7 +618,7 @@ function private function_b712ac81c5cb013b(posx, posy, text, color, alpha, scale
   hud.font = "smallfixed";
   hud.alignx = "left";
   hud.aligny = "bottom";
-  hud.var_406fd34934f7e3d2 = "fullscreen";
+  hud.horizalign = "fullscreen";
   hud.vertalign = "fullscreen";
   hud.xoffset = 0;
   hud.yoffset = 0;
@@ -661,53 +661,53 @@ function private function_9aaed43357848f20(framecount, fps, var_4e6d89fb533555bb
   minutesstring = function_7c3d0b968c966668(minutes);
   hoursstring = function_7c3d0b968c966668(hours);
   daysstring = function_7c3d0b968c966668(days);
-  var_85143a456ffcf2a0 = daysstring + "<dev string:x123>" + hoursstring + "<dev string:x123>" + minutesstring + "<dev string:x123>" + secondsstring;
+  timecodestring = daysstring + "<dev string:x123>" + hoursstring + "<dev string:x123>" + minutesstring + "<dev string:x123>" + secondsstring;
 
   if(var_4e6d89fb533555bb == 1) {
-    var_85143a456ffcf2a0 += "<dev string:x125>" + var_5a6ff3568f35765e;
+    timecodestring += "<dev string:x125>" + var_5a6ff3568f35765e;
   } else {
-    var_85143a456ffcf2a0 += "<dev string:x123>" + framesstring;
+    timecodestring += "<dev string:x123>" + framesstring;
   }
 
-  return var_85143a456ffcf2a0;
+  return timecodestring;
 }
 
-function private function_9313eda58ed29e3e(var_7cf09fa8c49859b, var_287879caa47775be, fps) {
-  if(isDefined(var_7cf09fa8c49859b) == 0) {
-    var_7cf09fa8c49859b = 0;
+function private function_9313eda58ed29e3e(initialframecount, serverframecount, fps) {
+  if(isDefined(initialframecount) == 0) {
+    initialframecount = 0;
   }
 
-  assertex(var_7cf09fa8c49859b >= 0, "<dev string:x127>");
+  assertex(initialframecount >= 0, "<dev string:x127>");
   framestep = fps / 20;
-  framecount = var_7cf09fa8c49859b;
-  framecount += var_287879caa47775be * framestep;
+  framecount = initialframecount;
+  framecount += serverframecount * framestep;
   framecount = floor(framecount);
   framecount = int(framecount);
   return framecount;
 }
 
-function private function_2b151de570c1d056(var_7cf09fa8c49859b) {
+function private function_2b151de570c1d056(initialframecount) {
   assert(isDefined(level.snd.timecode));
 
-  if(isDefined(var_7cf09fa8c49859b) == 0) {
-    var_7cf09fa8c49859b = 0;
+  if(isDefined(initialframecount) == 0) {
+    initialframecount = 0;
   }
 
-  assertex(var_7cf09fa8c49859b >= 0, "<dev string:x127>");
+  assertex(initialframecount >= 0, "<dev string:x127>");
   framestep = level.snd.timecode.fps / 20;
   level.snd.timecode endon("<dev string:x157>");
   level.snd.timecode.isactive = 1;
   level.snd.timecode.framecount = 0;
-  level.snd.timecode.var_7cf09fa8c49859b = var_7cf09fa8c49859b;
+  level.snd.timecode.initialframecount = initialframecount;
 
   while(isDefined(level.snd.timecode) && level.snd.timecode.isactive == 1) {
     posx = level.snd.timecode.posx;
     posy = level.snd.timecode.posy;
     alpha = 1;
     scale = level.snd.timecode.scale;
-    framecount = function_9313eda58ed29e3e(var_7cf09fa8c49859b, level.snd.timecode.framecount, level.snd.timecode.fps);
-    var_85143a456ffcf2a0 = function_9aaed43357848f20(framecount, level.snd.timecode.fps);
-    function_8c3a8f58cbd39dca(posx, posy, var_85143a456ffcf2a0, (1, 1, 1), alpha, scale, 1);
+    framecount = function_9313eda58ed29e3e(initialframecount, level.snd.timecode.framecount, level.snd.timecode.fps);
+    timecodestring = function_9aaed43357848f20(framecount, level.snd.timecode.fps);
+    function_8c3a8f58cbd39dca(posx, posy, timecodestring, (1, 1, 1), alpha, scale, 1);
 
     if(level.snd.timecode.marksarray.size > 0) {
       posy += scale * 12;
@@ -716,8 +716,8 @@ function private function_2b151de570c1d056(var_7cf09fa8c49859b) {
 
       foreach(mark in level.snd.timecode.marksarray) {
         markstring = mark[1];
-        var_66f170dfaea4c0f8 = function_9313eda58ed29e3e(var_7cf09fa8c49859b, mark[0], level.snd.timecode.fps);
-        timecode = function_9aaed43357848f20(var_66f170dfaea4c0f8, level.snd.timecode.fps);
+        markframecount = function_9313eda58ed29e3e(initialframecount, mark[0], level.snd.timecode.fps);
+        timecode = function_9aaed43357848f20(markframecount, level.snd.timecode.fps);
         marksstring = timecode + "<dev string:x178>" + markstring + "<dev string:x6b>";
         function_8c3a8f58cbd39dca(posx, posy, marksstring, (1, 1, 1), alpha, scale, 1);
         posy += scale * 12;
@@ -737,8 +737,8 @@ function function_b6bd12cc4f34415e() {
   level.snd.timecode notify("<dev string:x157>");
   level.snd.timecode.isactive = 0;
   level.snd.timecode.isvisible = 0;
-  var_66f170dfaea4c0f8 = function_9313eda58ed29e3e(level.snd.timecode.var_7cf09fa8c49859b, level.snd.timecode.framecount, level.snd.timecode.fps);
-  timecode = function_9aaed43357848f20(var_66f170dfaea4c0f8, level.snd.timecode.fps);
+  markframecount = function_9313eda58ed29e3e(level.snd.timecode.initialframecount, level.snd.timecode.framecount, level.snd.timecode.fps);
+  timecode = function_9aaed43357848f20(markframecount, level.snd.timecode.fps);
   markstring = timecode + "<dev string:x17c>";
   println(markstring);
   level.snd.timecode.marksarray = undefined;
@@ -750,10 +750,10 @@ function function_d24a92cfbc477ca7(text) {
     function_5177fa294d4fe5cd();
   }
 
-  var_e6d566083f4ec4ba = level.snd.timecode.marksarray.size;
-  level.snd.timecode.marksarray[var_e6d566083f4ec4ba] = [level.snd.timecode.framecount, text];
-  var_66f170dfaea4c0f8 = function_9313eda58ed29e3e(level.snd.timecode.var_7cf09fa8c49859b, level.snd.timecode.framecount, level.snd.timecode.fps);
-  timecode = function_9aaed43357848f20(var_66f170dfaea4c0f8, level.snd.timecode.fps);
+  marksarrayindex = level.snd.timecode.marksarray.size;
+  level.snd.timecode.marksarray[marksarrayindex] = [level.snd.timecode.framecount, text];
+  markframecount = function_9313eda58ed29e3e(level.snd.timecode.initialframecount, level.snd.timecode.framecount, level.snd.timecode.fps);
+  timecode = function_9aaed43357848f20(markframecount, level.snd.timecode.fps);
   markstring = timecode + "<dev string:x178>" + text;
   println(markstring);
 }
@@ -766,7 +766,7 @@ function function_4680808ae4ce7935() {
   }
 }
 
-function function_5177fa294d4fe5cd(var_ada09577e62e45ee, scale, posx, posy, var_4e6d89fb533555bb, var_7cf09fa8c49859b) {
+function function_5177fa294d4fe5cd(var_ada09577e62e45ee, scale, posx, posy, var_4e6d89fb533555bb, initialframecount) {
   isvisible = 1;
   assertex(isstruct(level.snd), "<dev string:x29>");
 
@@ -787,12 +787,12 @@ function function_5177fa294d4fe5cd(var_ada09577e62e45ee, scale, posx, posy, var_
   }
 
   scale /= 1;
-  var_4abd463c3a5d6022 = function_d8bcdde57d13f7fc();
-  var_b835ae2157a354ac = var_4abd463c3a5d6022[0];
-  var_67a206c222c5563b = var_4abd463c3a5d6022[1];
-  var_f46497512c0f2957 = 6 * 14 * scale;
-  centerx = var_b835ae2157a354ac * 0.5 - var_f46497512c0f2957 * 0.5;
-  centery = var_67a206c222c5563b * 0.5 - 12 * 0.5;
+  vidresolution = function_d8bcdde57d13f7fc();
+  vidwidth = vidresolution[0];
+  vidheight = vidresolution[1];
+  timecodewidth = 6 * 14 * scale;
+  centerx = vidwidth * 0.5 - timecodewidth * 0.5;
+  centery = vidheight * 0.5 - 12 * 0.5;
 
   if(isDefined(posx) == 0) {
     posx = centerx;
@@ -809,7 +809,7 @@ function function_5177fa294d4fe5cd(var_ada09577e62e45ee, scale, posx, posy, var_
   level.snd.timecode.fps = var_ada09577e62e45ee;
   level.snd.timecode.isvisible = isvisible;
   level.snd.timecode.var_4e6d89fb533555bb = var_4e6d89fb533555bb;
-  level.snd.timecode thread function_2b151de570c1d056(var_7cf09fa8c49859b);
+  level.snd.timecode thread function_2b151de570c1d056(initialframecount);
 }
 
 # /

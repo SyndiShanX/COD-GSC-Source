@@ -793,8 +793,8 @@ function function_7aa3cf0550137f02(player) {
   player endon("disconnect");
   player endon("death");
   self.hideammoindex = 1;
-  var_83fb464c27e79a0e = weaponfiretime("manual_turret_jup_mp");
-  assertex(isDefined(var_83fb464c27e79a0e) && var_83fb464c27e79a0e > 0, "<dev string:xac>");
+  turretfiredelay = weaponfiretime("manual_turret_jup_mp");
+  assertex(isDefined(turretfiredelay) && turretfiredelay > 0, "<dev string:xac>");
 
   while(player isusingturret()) {
     while(player attackButtonPressed()) {
@@ -811,7 +811,7 @@ function function_7aa3cf0550137f02(player) {
         break;
       }
 
-      wait var_83fb464c27e79a0e;
+      wait turretfiredelay;
     }
 
     waitframe();
@@ -1055,9 +1055,9 @@ function function_3f4db4dc27eadcb0(player) {
     pushgoal = self.models[0].origin - anglesToForward(self.models[0].angles) * 10;
   }
 
-  var_58c4969f9f12ba44 function_ad9433aab9fcdf04(0.2, "stop_building", &moveto, pushgoal, 0.2);
-  var_58c4969f9f12ba44 function_ad9433aab9fcdf04(0.4, "stop_building", &movez, 10, 0.1);
-  var_58c4969f9f12ba44 function_ad9433aab9fcdf04(0.5, "stop_building", &moveto, var_b7e0e91fb38920df, 0.2);
+  var_58c4969f9f12ba44 delaycallendon(0.2, "stop_building", &moveto, pushgoal, 0.2);
+  var_58c4969f9f12ba44 delaycallendon(0.4, "stop_building", &movez, 10, 0.1);
+  var_58c4969f9f12ba44 delaycallendon(0.5, "stop_building", &moveto, var_b7e0e91fb38920df, 0.2);
 }
 
 function function_736d94f76d0d49a(player, buildable) {
@@ -1301,7 +1301,7 @@ function function_1f4f0653f2db0e27(player) {
   player scripts\mp\gametypes\wm_buildable::function_2591bed1172e3c08(0);
 }
 
-function function_1e9f18ce193adc1b(instance, strnote, params, var_535d9c3fdddab5a9) {
+function function_1e9f18ce193adc1b(instance, strnote, params, instigator) {
   assertex(isDefined(instance.parent_struct), "<dev string:x118>");
   assertex(isDefined(instance.parent_struct.parentent), "<dev string:x12f>");
   c4struct = instance.parent_struct;

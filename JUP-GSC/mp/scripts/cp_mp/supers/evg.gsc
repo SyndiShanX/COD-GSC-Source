@@ -144,7 +144,7 @@ function function_65d533faebb8fd7d() {
     return;
   }
 
-  if(isDefined(self.usingremote) || istrue(self.var_6678ccff9684345e)) {
+  if(isDefined(self.usingremote) || istrue(self.deployingremoteturret)) {
     return;
   }
 
@@ -346,7 +346,7 @@ function function_268e214f18447610(animdelay) {
         continue;
       }
 
-      if(!istrue(function_f3bb4f4911a1beb2("player", "isReallyAlive", player))) {
+      if(!istrue(callsharedfunc("player", "isReallyAlive", player))) {
         continue;
       }
 

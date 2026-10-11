@@ -143,7 +143,7 @@ function function_5662b53af19eebe4(newhealth) {
   var_9793954ace7c0517 = namespace_e50e624d9af51c8c::function_5915bdbc5f6302b6([level.decon_station.loot_id]);
 
   foreach(index in var_9793954ace7c0517) {
-    namespace_e50e624d9af51c8c::function_e900e7e66383ad97(self, index, int(min(namespace_e50e624d9af51c8c::function_897b29adb37f06a7(index), newhealth)));
+    namespace_e50e624d9af51c8c::function_e900e7e66383ad97(self, index, int(min(namespace_e50e624d9af51c8c::getquantityatbackpackindex(index), newhealth)));
   }
 }
 
@@ -622,7 +622,7 @@ function function_f828f503fe8f1ac8(deletiondelay, wasdestroyed) {
   }
 
   scripts\cp_mp\ent_manager::deregisterspawn();
-  thread utility::function_b4b04de87729a6f3(2.5);
+  thread utility::delete_after_delay(2.5);
 }
 
 function function_aa96f22f194adefa(attacker) {

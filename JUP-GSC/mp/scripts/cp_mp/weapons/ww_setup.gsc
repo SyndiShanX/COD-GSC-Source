@@ -13,5 +13,5 @@ function private autoexec __init__system__() {
 }
 
 function private post_main() {
-  utility::function_f3bb4f4911a1beb2("ww_setup", "init");
+  utility::callsharedfunc("ww_setup", "init");
 }

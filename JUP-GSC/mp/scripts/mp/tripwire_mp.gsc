@@ -10,7 +10,7 @@
 #namespace tripwire_mp;
 
 function ontripwirecreate(tripwire) {
-  tripwire.poi = scripts\mp\poi::function_6cc445c02b5effac(tripwire.origin);
+  tripwire.poi = scripts\mp\poi::poi_findpoioriginisin(tripwire.origin);
 }
 
 function ontripwiretriggered(player, tripwire) {

@@ -177,13 +177,13 @@ function function_20d58c7fb1074fc6(teamname) {
   self.unlocked = 1;
 }
 
-function function_7c5eefd0cbce6520(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_7c5eefd0cbce6520(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player.team)) {
     return;
   }
 
   if(isDefined(instance.overrideusecallback)) {
-    self[[instance.overrideusecallback]](instance, part, state, player, var_a5b2c541413aa895, usestring);
+    self[[instance.overrideusecallback]](instance, part, state, player, bautouse, usestring);
     return;
   }
 
@@ -488,14 +488,14 @@ function function_7f10e8e120314f4b(player, part) {
     player.linktoent rotateTo(goalangles, movetotime, 0.1, 0.1);
     player setstance("stand");
     var_cd9982adb17761a8 = gettime();
-    player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+    player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
     var_698cc218e4ade75f = gettime();
     var_218f64cb035d54be = movetotime - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000;
     waittime = max(0, var_218f64cb035d54be);
     wait waittime;
   } else {
     player setstance("stand");
-    player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+    player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   }
 
   player setOrigin(goalpos);

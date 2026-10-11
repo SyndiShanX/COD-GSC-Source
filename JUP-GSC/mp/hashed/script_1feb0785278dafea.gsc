@@ -58,7 +58,7 @@ function function_e5fda42c3da4e793() {
 }
 
 function function_117332a41d3ff196() {
-  players = function_3451fc6440a9b8db();
+  players = get_valid_players();
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -147,7 +147,7 @@ function function_c750ffefbb8e1dab(var_976d79abcce342da) {
   if(istrue(var_976d79abcce342da)) {}
 }
 
-function function_3451fc6440a9b8db() {
+function get_valid_players() {
   bundle = namespace_e23f629a8349dfaf::function_ed72d0f08d00c1c0();
   affected_radius = bundle.var_d1ac061f0c3c0eeb;
   players = [];
@@ -178,7 +178,7 @@ function function_4eb285a61cf68dc6() {
 
 function function_b581a4659c1ed2fc() {
   level endon("game_ended");
-  players = function_3451fc6440a9b8db();
+  players = get_valid_players();
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -213,7 +213,7 @@ function function_69b2e6f4e33c0784(user_player) {
   beam_radius = settings.beam_radius;
 
   while(time <= duration) {
-    players = user_player function_3451fc6440a9b8db();
+    players = user_player get_valid_players();
 
     foreach(player in players) {
       if(!isalive(player)) {
@@ -235,7 +235,7 @@ function function_69b2e6f4e33c0784(user_player) {
 
 function set_regen() {
   level endon("game_ended");
-  players = function_3451fc6440a9b8db();
+  players = get_valid_players();
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -274,7 +274,7 @@ function function_a8e441b6bb8e5b3c(user_player) {
 function function_182ed32c1dbe94ed() {
   settings = namespace_e23f629a8349dfaf::function_ed72d0f08d00c1c0();
   knockdown_radius = settings.var_2e0d868cadea7953;
-  players = function_3451fc6440a9b8db();
+  players = get_valid_players();
 
   foreach(player in players) {
     if(!isalive(player)) {

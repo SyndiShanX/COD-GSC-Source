@@ -461,7 +461,7 @@ function private onfullhealth(starthealth, var_823ca369fafd4a36, var_7f86cf029be
     self playlocalsound(ter_op(isfemale(), "Fem_breathing_better", "breathing_better"));
   }
 
-  function_f3bb4f4911a1beb2("helmet", "updateProtectionState", self);
+  callsharedfunc("helmet", "updateProtectionState", self);
 
   var_4552ad49778498ee = getdvarint(@ "hash_9e41eb34980a2301", 0);
 
@@ -507,25 +507,25 @@ function function_5f963b9b662284bc(var_c79a45c6dcb67386) {
 
 function function_31a13be1530a809b() {
   self endon("<dev string:x2b7>");
-  self.var_8f835e0ab1dfb567 = spawnStruct();
-  self.var_8f835e0ab1dfb567.var_946b001669de27fb = [];
-  self.var_8f835e0ab1dfb567.active = 0;
+  self.debughealthhud = spawnStruct();
+  self.debughealthhud.var_946b001669de27fb = [];
+  self.debughealthhud.active = 0;
 
   while(isDefined(self)) {
-    if(getdvarint(@ "player_debughealth") && !self.var_8f835e0ab1dfb567.active) {
+    if(getdvarint(@ "player_debughealth") && !self.debughealthhud.active) {
       thread function_cdac508141881a7c();
-      self.var_8f835e0ab1dfb567.active = 1;
+      self.debughealthhud.active = 1;
     }
 
-    if(!getdvarint(@ "player_debughealth") && self.var_8f835e0ab1dfb567.active) {
+    if(!getdvarint(@ "player_debughealth") && self.debughealthhud.active) {
       self notify("<dev string:x2c5>");
 
-      foreach(var_bed6393fb2e34b6a in self.var_8f835e0ab1dfb567.var_946b001669de27fb) {
-        self.var_8f835e0ab1dfb567.var_946b001669de27fb = array_remove(self.var_8f835e0ab1dfb567.var_946b001669de27fb, var_bed6393fb2e34b6a);
-        var_bed6393fb2e34b6a destroy();
+      foreach(hudelm in self.debughealthhud.var_946b001669de27fb) {
+        self.debughealthhud.var_946b001669de27fb = array_remove(self.debughealthhud.var_946b001669de27fb, hudelm);
+        hudelm destroy();
       }
 
-      self.var_8f835e0ab1dfb567.active = 0;
+      self.debughealthhud.active = 0;
     }
 
     waitframe();
@@ -546,25 +546,25 @@ function function_cdac508141881a7c() {
       color = (0, 1, 0);
     }
 
-    self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x2e0>"] setvalue(self.health);
-    self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x2e0>"].color = color;
+    self.debughealthhud.var_946b001669de27fb["<dev string:x2e0>"] setvalue(self.health);
+    self.debughealthhud.var_946b001669de27fb["<dev string:x2e0>"].color = color;
 
     if(isalive(self)) {
       if(utility::damageflag(2)) {
         if(utility::damageflag(1)) {
-          var_61cf390635798c6d = getdeathsshieldduration();
-          self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x2ea>"] setdevtext("<dev string:x2f8>" + string(var_61cf390635798c6d) + "<dev string:x31c>");
-          self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x2ea>"].color = (0, 1, 0);
+          deathshieldtime = getdeathsshieldduration();
+          self.debughealthhud.var_946b001669de27fb["<dev string:x2ea>"] setdevtext("<dev string:x2f8>" + string(deathshieldtime) + "<dev string:x31c>");
+          self.debughealthhud.var_946b001669de27fb["<dev string:x2ea>"].color = (0, 1, 0);
         } else {
-          var_aceab7f4a1e5c8c3 = getdeathsdoorduration();
-          self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x2ea>"] setdevtext("<dev string:x328>" + string(var_aceab7f4a1e5c8c3) + "<dev string:x31c>");
-          self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x2ea>"].color = (1, 0, 0);
+          deathsdoortime = getdeathsdoorduration();
+          self.debughealthhud.var_946b001669de27fb["<dev string:x2ea>"] setdevtext("<dev string:x328>" + string(deathsdoortime) + "<dev string:x31c>");
+          self.debughealthhud.var_946b001669de27fb["<dev string:x2ea>"].color = (1, 0, 0);
         }
       } else {
-        self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x2ea>"] setdevtext("<dev string:x348>");
+        self.debughealthhud.var_946b001669de27fb["<dev string:x2ea>"] setdevtext("<dev string:x348>");
       }
     } else {
-      self.var_8f835e0ab1dfb567.var_946b001669de27fb["<dev string:x2ea>"] setdevtext("<dev string:x348>");
+      self.debughealthhud.var_946b001669de27fb["<dev string:x2ea>"] setdevtext("<dev string:x348>");
     }
 
     waitframe();
@@ -574,18 +574,18 @@ function function_cdac508141881a7c() {
 function function_6840973f983f0bae(id) {
   ybase = 10;
   rowspacing = 15;
-  yoffset = self.var_8f835e0ab1dfb567.var_946b001669de27fb.size * rowspacing;
-  var_bed6393fb2e34b6a = newclienthudelem(self);
-  var_bed6393fb2e34b6a.sort = 10;
-  var_bed6393fb2e34b6a.x = 85;
-  var_bed6393fb2e34b6a.y = ybase + yoffset;
-  var_bed6393fb2e34b6a.fontscale = 1;
-  var_bed6393fb2e34b6a.alignx = "<dev string:x34c>";
-  var_bed6393fb2e34b6a.aligny = "<dev string:x354>";
-  var_bed6393fb2e34b6a.horzalign = "<dev string:x35b>";
-  var_bed6393fb2e34b6a.vertalign = "<dev string:x35b>";
-  var_bed6393fb2e34b6a.sort = 1;
-  self.var_8f835e0ab1dfb567.var_946b001669de27fb[id] = var_bed6393fb2e34b6a;
+  yoffset = self.debughealthhud.var_946b001669de27fb.size * rowspacing;
+  hudelm = newclienthudelem(self);
+  hudelm.sort = 10;
+  hudelm.x = 85;
+  hudelm.y = ybase + yoffset;
+  hudelm.fontscale = 1;
+  hudelm.alignx = "<dev string:x34c>";
+  hudelm.aligny = "<dev string:x354>";
+  hudelm.horzalign = "<dev string:x35b>";
+  hudelm.vertalign = "<dev string:x35b>";
+  hudelm.sort = 1;
+  self.debughealthhud.var_946b001669de27fb[id] = hudelm;
 }
 
 function getdeathsdoorduration() {

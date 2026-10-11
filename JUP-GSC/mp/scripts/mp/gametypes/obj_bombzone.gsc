@@ -73,7 +73,7 @@ function setupobjective(trigger, skipobjid, var_5ddbc1faed2c56e6) {
     reservedobjid = undefined;
   }
 
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getgametype());
+  var_c8f4c582625f492d = getxhash(getgametype());
 
   if(var_c8f4c582625f492d == #"dd") {
     label = trigger.script_label;
@@ -345,36 +345,36 @@ function allowedwhileplanting(isallowed) {
 
 function setbombplantingomnvar(bombsite) {
   wait 0.35;
-  var_cabc886d846dd979 = 0;
+  omnvarval = 0;
 
   switch (bombsite) {
     case #"hash_fac2c5f6bddd49bd":
-      var_cabc886d846dd979 = 1;
+      omnvarval = 1;
       break;
     case #"hash_fac2c2f6bddd4504":
-      var_cabc886d846dd979 = 2;
+      omnvarval = 2;
       break;
     case #"hash_fac2c3f6bddd4697":
-      var_cabc886d846dd979 = 2;
+      omnvarval = 2;
       break;
     default:
-      var_cabc886d846dd979 = 2;
+      omnvarval = 2;
       break;
   }
 
-  setomnvar("ui_bomb_interacting", var_cabc886d846dd979);
+  setomnvar("ui_bomb_interacting", omnvarval);
 }
 
 function setbombdefusingomnvar(bombsite) {
   wait 0.35;
 
   if(bombsite == "_a") {
-    var_cabc886d846dd979 = 3;
+    omnvarval = 3;
   } else {
-    var_cabc886d846dd979 = 4;
+    omnvarval = 4;
   }
 
-  setomnvar("ui_bomb_interacting", var_cabc886d846dd979);
+  setomnvar("ui_bomb_interacting", omnvarval);
 
   if(level.codcasterenabled) {
     self setgametypevip(1);
@@ -726,7 +726,7 @@ function bombzone_onbombplanted(destroyedobj, player, var_d413e2f3a09e8a83) {
       level.sdbomb scripts\mp\gameobjects::releaseid(1, 1);
     }
 
-    level.sdbombmodel function_5226227bce83ebe9(1, plantteam);
+    level.sdbombmodel setentityhudoutlinedata(1, plantteam);
   } else if(getgametype() == "cmd" || getgametype() == "gwbomb") {} else if(getgametype() == "dd" || getgametype() == "btm") {
     level.ddbombmodel[destroyedobj.objectivekey] = spawn("script_model", player.origin);
     level.ddbombmodel[destroyedobj.objectivekey].angles = player.angles;
@@ -1279,7 +1279,7 @@ function bombzone_setupbombcase(bombname, overrideorigin) {
     level.bombrespawnpoint = level.sdbomb.visuals[0].origin;
     level.bombrespawnangles = level.sdbomb.visuals[0].angles;
     level.sdbomb.visualgroundoffset = (0, 0, 0);
-    level.sdbomb.visuals[0] function_5226227bce83ebe9(1, game["attackers"]);
+    level.sdbomb.visuals[0] setentityhudoutlinedata(1, game["attackers"]);
     return;
   }
 
@@ -1403,7 +1403,7 @@ function onpickup(player, playervo, defused) {
 
   if(getdvarint(@ "hash_9cf963b64e1223e7", 0) == 1) {
     level.sdbombmodel linkTo(player, "tag_origin", (0, 0, 0), (0, 0, 0));
-    level.sdbombmodel.scriptable utility::function_6e506f39f121ea8a(player);
+    level.sdbombmodel.scriptable utility::scriptable_setparententity(player);
 
     if(game["attackers"] == "allies") {
       level.sdbombmodel.scriptable setscriptablepartstate("bomb", "carriedAllies");
@@ -1876,13 +1876,13 @@ function function_f1ce924cd6279917(bombzone) {
   self endon("death");
   level endon("game_ended");
   bombzone endon("death");
-  self function_5226227bce83ebe9(1, game["defenders"]);
+  self setentityhudoutlinedata(1, game["defenders"]);
   level waittill("bomb_planted");
 
   if(bombzone.bombplanted) {
-    self function_5226227bce83ebe9(1, game["attackers"]);
+    self setentityhudoutlinedata(1, game["attackers"]);
     return;
   }
 
-  self function_5226227bce83ebe9(0);
+  self setentityhudoutlinedata(0);
 }

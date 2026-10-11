@@ -146,14 +146,14 @@ function rounddecimalplaces(value, places, style) {
   newvalue = value * modifier;
 
   if(style == "up") {
-    var_ce526f59e2a5ad3f = ceil(newvalue);
+    roundedvalue = ceil(newvalue);
   } else if(style == "down") {
-    var_ce526f59e2a5ad3f = floor(newvalue);
+    roundedvalue = floor(newvalue);
   } else {
-    var_ce526f59e2a5ad3f = newvalue + 0.5;
+    roundedvalue = newvalue + 0.5;
   }
 
-  newvalue = int(var_ce526f59e2a5ad3f);
+  newvalue = int(roundedvalue);
   newvalue /= modifier;
   return newvalue;
 }

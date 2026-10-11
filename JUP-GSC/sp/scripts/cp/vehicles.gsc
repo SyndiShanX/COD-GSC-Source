@@ -601,8 +601,8 @@ function init_vehicles_after_flags() {
 
 function vehicle_ai_spawn_funcs() {}
 
-function register_spawner_script_function(func_name, func, specs, var_64d1449ec4e9520) {
-  if(istrue(var_64d1449ec4e9520)) {
+function register_spawner_script_function(func_name, func, specs, wait_for_notify) {
+  if(istrue(wait_for_notify)) {
     level waittill(func_name);
   }
 
@@ -654,8 +654,8 @@ function register_vehicle_build(vehicle_type, model, type, classname, var_35c134
   level.vehicle_builds[vehicle_type] = struct;
 }
 
-function register_vehicle_as_ambient(vehicle_type, var_64d1449ec4e9520) {
-  if(istrue(var_64d1449ec4e9520)) {
+function register_vehicle_as_ambient(vehicle_type, wait_for_notify) {
+  if(istrue(wait_for_notify)) {
     level waittill(vehicle_type);
   }
 
@@ -678,8 +678,8 @@ function create_ambient_vehicle(vehicle_type, model, type, classname) {
   level thread register_vehicle_spawn_override(vehicle_type, undefined, undefined, undefined, undefined, undefined, undefined, 1, undefined, undefined);
 }
 
-function register_vehicle_max_ai(vehicle_type, model, type, classname, var_35c134fe54c9a072, override, var_64d1449ec4e9520) {
-  if(istrue(var_64d1449ec4e9520)) {
+function register_vehicle_max_ai(vehicle_type, model, type, classname, var_35c134fe54c9a072, override, wait_for_notify) {
+  if(istrue(wait_for_notify)) {
     level waittill(vehicle_type);
   }
 
@@ -871,8 +871,8 @@ function get_path_points(spawn_type, path_start_points) {
   level.path_points[spawn_type] = getStructArray(path_start_points, "targetname");
 }
 
-function register_vehicle_spawn_drivers(spawn_type, num_script_models, driver_models, var_64d1449ec4e9520) {
-  if(istrue(var_64d1449ec4e9520)) {
+function register_vehicle_spawn_drivers(spawn_type, num_script_models, driver_models, wait_for_notify) {
+  if(istrue(wait_for_notify)) {
     level waittill(spawn_type);
   }
 
@@ -3856,7 +3856,7 @@ function cp_vehicle_debug(itemref) {
   }
 
   if(isDefined(player)) {
-    player thread scripts\cp_mp\vehicles\vehicle::function_276beb60c7f60d1e(params[1]);
+    player thread scripts\cp_mp\vehicles\vehicle::spawnplayerinvehicle(params[1]);
   }
 }
 

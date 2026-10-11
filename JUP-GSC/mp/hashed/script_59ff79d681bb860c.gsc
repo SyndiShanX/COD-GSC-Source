@@ -416,9 +416,9 @@ function function_cf1a9e98122e3931(target) {
     }
 
     if(!var_962e254e583d9e3) {
-      var_6c304568af601dbe = vectorNormalize(target.origin - self.origin);
-      var_dcd388ddc7034fa8 = (var_6c304568af601dbe[1], var_6c304568af601dbe[0] * -1, 0);
-      var_95d7facdceab8bb7 = (var_6c304568af601dbe[1] * -1, var_6c304568af601dbe[0], 0);
+      directiontotarget = vectorNormalize(target.origin - self.origin);
+      var_dcd388ddc7034fa8 = (directiontotarget[1], directiontotarget[0] * -1, 0);
+      var_95d7facdceab8bb7 = (directiontotarget[1] * -1, directiontotarget[0], 0);
       var_7a645c4a72dfd237 = [];
       mainroot = target gettagorigin("j_mainroot");
       var_7a645c4a72dfd237[var_7a645c4a72dfd237.size] = target gettagorigin("j_head") + (0, 0, 50);
@@ -441,7 +441,7 @@ function getentityname(entity) {
   assert(isent(entity));
 
   if(isPlayer(entity) && !isbot(entity)) {
-    return ("#" + entity function_7a32b0201993d7f7());
+    return ("#" + entity getplayerunoid());
   } else if(isDefined(entity.name)) {
     return entity.name;
   } else if(isDefined(entity.var_8aa9efe6383c1d5a)) {
@@ -678,13 +678,13 @@ function function_d3d9d9ce8bb3754d() {
 
       if(isDefined(bot.mind)) {
         var_c7fdf89d998c52f1 = 3;
-        var_577f45571c039a54 = bot namespace_56b9cc3deb6e3f5e::function_e3becfc53745debe(var_c7fdf89d998c52f1);
+        decisions = bot namespace_56b9cc3deb6e3f5e::function_e3becfc53745debe(var_c7fdf89d998c52f1);
 
-        if(var_577f45571c039a54.size > 0) {
-          print3d(printlocation, "<dev string:x367>" + var_577f45571c039a54, var_de5a5558ba4d830a, 1, scale, 1);
+        if(decisions.size > 0) {
+          print3d(printlocation, "<dev string:x367>" + decisions, var_de5a5558ba4d830a, 1, scale, 1);
 
           if(var_89bee820769f600d) {
-            printtoscreen2d(screenx, screeny, "<dev string:x367>" + var_577f45571c039a54, var_c89cc0d4a5adb6d5, 1.5);
+            printtoscreen2d(screenx, screeny, "<dev string:x367>" + decisions, var_c89cc0d4a5adb6d5, 1.5);
           }
         }
 

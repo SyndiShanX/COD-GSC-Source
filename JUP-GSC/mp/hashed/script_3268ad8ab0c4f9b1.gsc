@@ -104,7 +104,7 @@ function function_4182e943a8ef2e47(constants) {
   constants.valuetable.typevalue[#"super"] = 26;
   constants.valuetable.typevalue[#"cache"] = 40;
   constants.valuetable.typevalue[#"weapon"] = 40;
-  constants.valuetable.typevalue[function_1823ff50bb28148d("ammo_restock")] = 30;
+  constants.valuetable.typevalue[getxhash("ammo_restock")] = 30;
   constants.valuetable.typevalue[#"plunder"] = 28;
   constants.valuetable.lootvalue = [];
   constants.valuetable.lootvalue["brloot_offhand_semtex"] = 29;

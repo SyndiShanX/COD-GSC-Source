@@ -1928,29 +1928,29 @@ function getownerteamplayer(ownerteam) {
 }
 
 function ui_updatecmdcapturestatus(status, contested) {
-  var_cabc886d846dd979 = -1;
+  omnvarval = -1;
 
   if(istrue(level.inobjectiveot)) {
     if(contested) {
-      var_cabc886d846dd979 = -4;
+      omnvarval = -4;
     } else {
-      var_cabc886d846dd979 = -5;
+      omnvarval = -5;
     }
   } else if(contested) {
-    var_cabc886d846dd979 = -2;
+    omnvarval = -2;
   } else {
     switch (status) {
       case #"hash_5f54b9bf7583687f":
-        var_cabc886d846dd979 = 2;
+        omnvarval = 2;
         break;
       case #"hash_7c2d091e6337bf54":
-        var_cabc886d846dd979 = 1;
+        omnvarval = 1;
         break;
       case #"hash_3bf8ec5fe1d42da8":
-        var_cabc886d846dd979 = -3;
+        omnvarval = -3;
         break;
       case #"hash_4a79ea9678ed059e":
-        var_cabc886d846dd979 = -4;
+        omnvarval = -4;
         break;
       case #"hash_c312107e6bce703c":
       default:
@@ -1958,28 +1958,28 @@ function ui_updatecmdcapturestatus(status, contested) {
     }
   }
 
-  setomnvar("ui_cmd_capture_team", var_cabc886d846dd979);
+  setomnvar("ui_cmd_capture_team", omnvarval);
 }
 
 function ui_updatecmdownerteam(ownerteam) {
-  var_cabc886d846dd979 = -1;
+  omnvarval = -1;
 
   switch (ownerteam) {
     case #"hash_5f54b9bf7583687f":
-      var_cabc886d846dd979 = 2;
+      omnvarval = 2;
       break;
     case #"hash_7c2d091e6337bf54":
-      var_cabc886d846dd979 = 1;
+      omnvarval = 1;
       break;
     case #"hash_3bf8ec5fe1d42da8":
-      var_cabc886d846dd979 = -3;
+      omnvarval = -3;
       break;
     case #"hash_c312107e6bce703c":
     default:
       break;
   }
 
-  setomnvar("ui_cmd_owner_team", var_cabc886d846dd979);
+  setomnvar("ui_cmd_owner_team", omnvarval);
 }
 
 function ui_updatecmdprogress() {

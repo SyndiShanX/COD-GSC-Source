@@ -80,10 +80,10 @@ function function_db3d241c0c7aad79() {
   self.vehicle namespace_9246f10206f50768::function_1da2c31423c2676a(level.convoyattack.speed);
   self.node.direction = 1;
   self.node.index = 0;
-  self.vehicle function_77320e794d35465a("p2p", "brakeAtGoal", 0);
-  self.vehicle function_77320e794d35465a("p2p", "goalThreshold", level.convoyattack.speed * 4);
-  self.vehicle function_77320e794d35465a("p2p", "steeringMultiplier", 2.5);
-  self.vehicle function_77320e794d35465a("p2p", "stuckTime", 4);
+  self.vehicle setconfigvalue("p2p", "brakeAtGoal", 0);
+  self.vehicle setconfigvalue("p2p", "goalThreshold", level.convoyattack.speed * 4);
+  self.vehicle setconfigvalue("p2p", "steeringMultiplier", 2.5);
+  self.vehicle setconfigvalue("p2p", "stuckTime", 4);
   self.vehicle.pathdata = self.node;
   self.vehicle thread namespace_9246f10206f50768::function_c3889abf5cd6abbf(self.node, level.convoyattack.speed);
 }
@@ -127,7 +127,7 @@ function function_5751a98afbcc56bd() {
   vehicle.var_7ee6203c5532a9e6 = 1;
   vehicle.task = self;
   vehicle.var_eb504fc7e1cfeb4c = 1;
-  poiname = scripts\mp\poi::function_6cc445c02b5effac(self.node.origin, 0, 1);
+  poiname = scripts\mp\poi::poi_findpoioriginisin(self.node.origin, 0, 1);
   agenttypes = namespace_43bf74a2ee9234c0::function_236a093e8a0ec040("veh9_jltv_mg");
   spawners = namespace_43bf74a2ee9234c0::function_f260b1cef943f1ab("veh9_jltv_mg", 4, agenttypes, self.node.origin, poiname, "absolute");
   riders = namespace_43bf74a2ee9234c0::function_4ad6c25d6754f697(spawners, 4, undefined, "absolute", "convoy_attack", "convoy_attack", "team_hundred_ninety_five", undefined, "veh9_jltv_mg");
@@ -159,7 +159,7 @@ function function_d54ed88824a6416e() {
   vehicle.var_7ee6203c5532a9e6 = 1;
   vehicle.task = self;
   vehicle.var_eb504fc7e1cfeb4c = 1;
-  poiname = scripts\mp\poi::function_6cc445c02b5effac(self.node.origin, 0, 1);
+  poiname = scripts\mp\poi::poi_findpoioriginisin(self.node.origin, 0, 1);
   agenttypes = namespace_43bf74a2ee9234c0::function_236a093e8a0ec040("veh9_mil_cargo_truck");
   spawners = namespace_43bf74a2ee9234c0::function_f260b1cef943f1ab("veh9_mil_cargo_truck", 7, agenttypes, self.node.origin, poiname, "absolute");
   riders = namespace_43bf74a2ee9234c0::function_4ad6c25d6754f697(spawners, 7, undefined, "absolute", "convoy_attack", "convoy_attack", "team_hundred_ninety_five", undefined, "veh9_mil_cargo_truck_convoy_attack");

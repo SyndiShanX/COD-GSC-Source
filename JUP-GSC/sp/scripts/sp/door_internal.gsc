@@ -375,13 +375,13 @@ function cursor_hint_thread(var_3443efedc8b77120) {
   self.var_f2507a3c1b546d7c = -1;
   self.var_6cd0321e55f60f8f = -1;
   self.cursorhintdir = (0, 0, 0);
-  var_53153eaf006f13a9 = isDefined(self.open_struct);
+  has_openstruct = isDefined(self.open_struct);
 
   while(true) {
     set_player_side();
 
-    if(!var_53153eaf006f13a9 && has_cursor_hint(self.open_struct) || cursor_refresh(self.open_struct)) {
-      var_53153eaf006f13a9 = 1;
+    if(!has_openstruct && has_cursor_hint(self.open_struct) || cursor_refresh(self.open_struct)) {
+      has_openstruct = 1;
       self.var_f2507a3c1b546d7c = -1;
     }
 
@@ -401,8 +401,8 @@ function cursor_hint_thread(var_3443efedc8b77120) {
       }
     }
 
-    if(var_53153eaf006f13a9) {
-      var_53153eaf006f13a9 = has_cursor_hint(self.open_struct);
+    if(has_openstruct) {
+      has_openstruct = has_cursor_hint(self.open_struct);
     }
 
     if(isDefined(var_3443efedc8b77120)) {
@@ -1190,14 +1190,14 @@ function player_window_gesture(duration) {
   level.player stopgestureviewmodel(gesture, 2);
 }
 
-function door_bashable_by_player(var_e6934380371d7dd3) {
+function door_bashable_by_player(forcursorhint) {
   if(istrue(self.no_bash) || istrue(self.was_opened_halfway) || istrue(self.open_completely) || istrue(self.bashed)) {
     self.debug_activity = "<dev string:x151>";
 
     return false;
   }
 
-  if(istrue(var_e6934380371d7dd3)) {
+  if(istrue(forcursorhint)) {
     return true;
   }
 
@@ -1314,7 +1314,7 @@ function bash_debug(duration) {
 }
 
 function stealth_broadcast(event, originator, radius) {
-  if(!isDefined(radius) && function_1c1b9d33706c152d(originator, event)) {
+  if(!isDefined(radius) && broadcaststealthevent(originator, event)) {
     return;
   }
 
@@ -1724,16 +1724,16 @@ function push_door_player_effects() {
     norminput = level.player getnormalizedmovement();
     norminput = (norminput[0], -1 * norminput[1], 0);
     localinput = rotatevector(norminput, level.player.angles);
-    var_e2df997a605bdbf = vectorNormalize(localinput);
-    var_e24f397a5fb91df = vectordot(var_e2df997a605bdbf, var_1a291042071ca88b);
-    var_a870f5975b6135e7 = clamp(length(localinput), 0, 1);
+    localinputdir = vectorNormalize(localinput);
+    localinputdot = vectordot(localinputdir, var_1a291042071ca88b);
+    localinputmag = clamp(length(localinput), 0, 1);
 
     if(cross[2] > 0) {
-      var_31fa3cf311e619d3 = (0, 4, 0);
-      var_5ba1a48ce1cfc9ad = (0, -5, 0);
+      lr_offset = (0, 4, 0);
+      lr_rot = (0, -5, 0);
     } else {
-      var_31fa3cf311e619d3 = (0, -2, 0);
-      var_5ba1a48ce1cfc9ad = (0, 2, 0);
+      lr_offset = (0, -2, 0);
+      lr_rot = (0, 2, 0);
     }
 
     if(dot > 0) {
@@ -1751,10 +1751,10 @@ function push_door_player_effects() {
 
     var_67a920a30da099a0 = math::normalize_value(0.6, 1, abs(dot));
     var_67a920a30da099a0 = math::normalized_float_smooth_in(var_67a920a30da099a0);
-    offset = math::factor_value(var_31fa3cf311e619d3, fb_offset, var_67a920a30da099a0);
-    rot = math::factor_value(var_5ba1a48ce1cfc9ad, fb_rot, var_67a920a30da099a0);
-    var_e36d7712ecd4be90 = math::normalize_value(0, 1, var_e24f397a5fb91df);
-    var_f84a6367da0e58c8 = math::normalize_value(0, 0.5, var_a870f5975b6135e7);
+    offset = math::factor_value(lr_offset, fb_offset, var_67a920a30da099a0);
+    rot = math::factor_value(lr_rot, fb_rot, var_67a920a30da099a0);
+    localinputdotfactor = math::normalize_value(0, 1, localinputdot);
+    var_f84a6367da0e58c8 = math::normalize_value(0, 0.5, localinputmag);
     distfactor = 1 - math::normalize_value(20, 50, var_271c6b91e677e543);
 
     if(level.player isfiring()) {
@@ -1764,7 +1764,7 @@ function push_door_player_effects() {
     }
 
     var_969f06899b0abb5c = 1;
-    var_969f06899b0abb5c *= var_e36d7712ecd4be90;
+    var_969f06899b0abb5c *= localinputdotfactor;
     var_969f06899b0abb5c *= var_f84a6367da0e58c8;
     var_969f06899b0abb5c *= distfactor;
     var_969f06899b0abb5c *= firingfactor;
@@ -1786,10 +1786,10 @@ function push_door_player_effects() {
     self.dooroffset = math::lerp(self.dooroffset, offset, lerp);
     self.doorrot = math::lerp(self.doorrot, rot, lerp);
     speedscalefactor = 1;
-    var_e36d7712ecd4be90 = math::normalize_value(0, 1, var_e24f397a5fb91df);
-    var_f84a6367da0e58c8 = math::normalize_value(0, 0.01, var_a870f5975b6135e7);
+    localinputdotfactor = math::normalize_value(0, 1, localinputdot);
+    var_f84a6367da0e58c8 = math::normalize_value(0, 0.01, localinputmag);
     distfactor = 1 - math::normalize_value(25, 70, var_271c6b91e677e543);
-    speedscalefactor *= var_e36d7712ecd4be90;
+    speedscalefactor *= localinputdotfactor;
     speedscalefactor *= var_f84a6367da0e58c8;
     speedscalefactor *= distfactor;
     speedscale = math::factor_value(1, 0.2, speedscalefactor);
@@ -1923,7 +1923,7 @@ function createinitialnavmodifier(linknameprefix) {
   }
 }
 
-function suspicious_door_stealth_check(var_b69422d8466298e6) {
+function suspicious_door_stealth_check(issuspicious) {
   if(!isDefined(level.stealth)) {
     return;
   }
@@ -1932,7 +1932,7 @@ function suspicious_door_stealth_check(var_b69422d8466298e6) {
     return;
   }
 
-  if(var_b69422d8466298e6) {
+  if(issuspicious) {
     level.stealth.suspicious_door.doors[level.stealth.suspicious_door.doors.size] = self;
     return;
   }
@@ -2088,10 +2088,10 @@ function get_door_audio_material() {
 
 function double_doors_init_auto() {
   foreach(door in level.interactive_doors.ents) {
-    var_1bd9abf0a34e2ab9 = getentarrayinradius("interactive_door", "script_noteworthy", door.origin, 150);
+    otherdoorlist = getentarrayinradius("interactive_door", "script_noteworthy", door.origin, 150);
     doorfwd = anglesToForward(door.angles);
 
-    foreach(otherdoor in var_1bd9abf0a34e2ab9) {
+    foreach(otherdoor in otherdoorlist) {
       if(otherdoor == door) {
         continue;
       }

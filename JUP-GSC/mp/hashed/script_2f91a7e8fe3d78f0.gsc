@@ -18,12 +18,12 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_spawner_zombie_mimic_s3_rr_quest");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_2086da9990a16962");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_2086da9990a16962");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 900;
   self.maxhealth = 900;
   self.behaviortreeasset = "zombie_mimic";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "zombie_mimic";
   self.ai_eventlist = % "hash_3664c8ba706ec788";
   self.zombieaisetting = "settings_zombie_mimic";
@@ -50,9 +50,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();

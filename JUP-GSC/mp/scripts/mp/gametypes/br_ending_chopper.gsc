@@ -26,7 +26,7 @@ function chopperexfil_pack(var_cbfc3ba10cefc8ce) {
     loadinfiltransient(self.transientname);
     setomnvarforallclients("ui_br_end_game_splash_type", 18);
 
-    for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = function_2030cc4ad67d1634(self.transientname)) {
+    for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = isinfiltransientloaded(self.transientname)) {
       waitframe();
     }
   }
@@ -271,31 +271,31 @@ function chopperexfil_music_start() {
     return;
   }
 
-  var_134aea3cdf65b674 = "mus_br_exfil_intro_3player_intro";
+  musicalias = "mus_br_exfil_intro_3player_intro";
   var_4de75e7f916838a0 = "br_exfil_part1_3person_lr";
 
   switch (level.br_ending.winners.size) {
     case 1:
-      var_134aea3cdf65b674 = "mus_br_exfil_intro_1player_intro";
+      musicalias = "mus_br_exfil_intro_1player_intro";
       var_4de75e7f916838a0 = "br_exfil_part1_1person_lr";
       break;
     case 2:
-      var_134aea3cdf65b674 = "mus_br_exfil_intro_2player_intro";
+      musicalias = "mus_br_exfil_intro_2player_intro";
       var_4de75e7f916838a0 = "br_exfil_part1_2person_lr";
       break;
     case 3:
-      var_134aea3cdf65b674 = "mus_br_exfil_intro_3player_intro";
+      musicalias = "mus_br_exfil_intro_3player_intro";
       var_4de75e7f916838a0 = "br_exfil_part1_3person_lr";
       break;
     case 4:
-      var_134aea3cdf65b674 = "mus_br_exfil_intro_4player_intro";
+      musicalias = "mus_br_exfil_intro_4player_intro";
       var_4de75e7f916838a0 = "br_exfil_part1_4person_lr";
       break;
   }
 
   foreach(player in level.players) {
     player playlocalsound(var_4de75e7f916838a0);
-    player playlocalsound(var_134aea3cdf65b674);
+    player playlocalsound(musicalias);
   }
 
   waitframe();

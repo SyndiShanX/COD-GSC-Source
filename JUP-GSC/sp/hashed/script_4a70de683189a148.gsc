@@ -32,7 +32,7 @@ function private function_79bc04af6da056bb(msg_str, is_completed, var_ab20541e48
   var_ab20541e485d5ba0 = default_to(var_ab20541e485d5ba0, 0);
   var_1b0922c37b1abf7 = default_to(var_1b0922c37b1abf7, -1);
   fields = [];
-  fields["title_index"] = function_8c14a8a658013e4e(msg_str);
+  fields["title_index"] = getlocstringindex(msg_str);
   fields["is_completed"] = is_completed;
   fields["count"] = var_ab20541e485d5ba0;
   fields["table_id"] = var_1b0922c37b1abf7;
@@ -78,5 +78,5 @@ function function_56854474e9410861(state_str) {
 
 function remove_splash(val) {
   level.objectives_splash.settings = undefined;
-  function_fb3c9a259f146781("objective_splash");
+  scripted_widget_destroy("objective_splash");
 }

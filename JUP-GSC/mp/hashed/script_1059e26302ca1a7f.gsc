@@ -337,7 +337,7 @@ function function_6e42339d9503b6b7(params) {
   self function_9322f3cb1cd4111a();
   function_3ab9164ef76940fd("obelisk_vfx", "off");
   var_3e5bef4b6dd3e32a = level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].origin;
-  var_2bd7283211fa61e7 = scripts\ob\points::function_591305dc9c07499b(params.sweapon, params.eattacker, params.smeansofdeath);
+  weaponelementtype = scripts\ob\points::function_591305dc9c07499b(params.sweapon, params.eattacker, params.smeansofdeath);
 
   if(distance2dsquared(self.origin, var_3e5bef4b6dd3e32a) < 122500) {
     if(params.shitloc == "head" && level.var_747eee71c41ccadc == "targets") {
@@ -358,7 +358,7 @@ function function_6e42339d9503b6b7(params) {
       }
     }
 
-    if(level.var_747eee71c41ccadc == "mirror" && isDefined(level.var_74755bce692986a4) && level.var_74755bce692986a4 == "mirror_fire" && (params.smeansofdeath == "MOD_ELEMENTAL_FIRE" || var_2bd7283211fa61e7 == "fire")) {
+    if(level.var_747eee71c41ccadc == "mirror" && isDefined(level.var_74755bce692986a4) && level.var_74755bce692986a4 == "mirror_fire" && (params.smeansofdeath == "MOD_ELEMENTAL_FIRE" || weaponelementtype == "fire")) {
       playFX(getfx("zombie_death"), self.origin);
 
       if(level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].killcount <= int(level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].var_3144cc2ba8121676 / 4 * 1)) {
@@ -367,7 +367,7 @@ function function_6e42339d9503b6b7(params) {
       }
     }
 
-    if(level.var_747eee71c41ccadc == "mirror" && isDefined(level.var_74755bce692986a4) && level.var_74755bce692986a4 == "mirror_ice" && (params.smeansofdeath == "MOD_ELEMENTAL_COLD" || var_2bd7283211fa61e7 == "cold")) {
+    if(level.var_747eee71c41ccadc == "mirror" && isDefined(level.var_74755bce692986a4) && level.var_74755bce692986a4 == "mirror_ice" && (params.smeansofdeath == "MOD_ELEMENTAL_COLD" || weaponelementtype == "cold")) {
       playFX(getfx("zombie_death"), self.origin);
 
       if(level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].killcount <= int(level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].var_3144cc2ba8121676 / 4 * 2)) {
@@ -376,7 +376,7 @@ function function_6e42339d9503b6b7(params) {
       }
     }
 
-    if(level.var_747eee71c41ccadc == "mirror" && isDefined(level.var_74755bce692986a4) && level.var_74755bce692986a4 == "mirror_electric" && (params.smeansofdeath == "MOD_ELEMENTAL_ELEC" || var_2bd7283211fa61e7 == "electrical")) {
+    if(level.var_747eee71c41ccadc == "mirror" && isDefined(level.var_74755bce692986a4) && level.var_74755bce692986a4 == "mirror_electric" && (params.smeansofdeath == "MOD_ELEMENTAL_ELEC" || weaponelementtype == "electrical")) {
       playFX(getfx("zombie_death"), self.origin);
 
       if(level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].killcount <= int(level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].var_3144cc2ba8121676 / 4 * 3)) {
@@ -385,7 +385,7 @@ function function_6e42339d9503b6b7(params) {
       }
     }
 
-    if(level.var_747eee71c41ccadc == "mirror" && isDefined(level.var_74755bce692986a4) && level.var_74755bce692986a4 == "mirror_toxic" && (params.smeansofdeath == "MOD_ELEMENTAL_TOXIC" || var_2bd7283211fa61e7 == "toxic")) {
+    if(level.var_747eee71c41ccadc == "mirror" && isDefined(level.var_74755bce692986a4) && level.var_74755bce692986a4 == "mirror_toxic" && (params.smeansofdeath == "MOD_ELEMENTAL_TOXIC" || weaponelementtype == "toxic")) {
       playFX(getfx("zombie_death"), self.origin);
 
       if(level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].killcount <= int(level.var_c3fbc3c2dd4e5240[level.var_747eee71c41ccadc].var_3144cc2ba8121676 / 4 * 4)) {

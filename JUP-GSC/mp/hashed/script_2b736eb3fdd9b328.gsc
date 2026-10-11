@@ -152,10 +152,10 @@ function private function_8263f9488230c012(pathdata, pathnum, vehicletype) {
 
   level.vehiclepatrolspawns[level.vehiclepatrolspawns.size] = reinforcenode;
   vehicle namespace_9246f10206f50768::function_1da2c31423c2676a(level.var_5731a15ecc971a53);
-  vehicle function_77320e794d35465a("p2p", "brakeAtGoal", 0);
-  vehicle function_77320e794d35465a("p2p", "goalThreshold", level.var_5731a15ecc971a53 * 4);
-  vehicle function_77320e794d35465a("p2p", "steeringMultiplier", 2.5);
-  vehicle function_77320e794d35465a("p2p", "stuckTime", 4);
+  vehicle setconfigvalue("p2p", "brakeAtGoal", 0);
+  vehicle setconfigvalue("p2p", "goalThreshold", level.var_5731a15ecc971a53 * 4);
+  vehicle setconfigvalue("p2p", "steeringMultiplier", 2.5);
+  vehicle setconfigvalue("p2p", "stuckTime", 4);
   vehicle.pathdata = pathdata;
   vehicle thread namespace_9246f10206f50768::function_c3889abf5cd6abbf(pathdata, level.var_5731a15ecc971a53, &function_8667ff5c61e579ed);
   vehicle thread function_205a864c4dddc0ea(pathdata);
@@ -166,7 +166,7 @@ function private function_8263f9488230c012(pathdata, pathnum, vehicletype) {
 }
 
 function private function_3bdd3d9028bada3f(origin, angles, direction, vehicletype, pathnum) {
-  poiname = scripts\mp\poi::function_6cc445c02b5effac(origin);
+  poiname = scripts\mp\poi::poi_findpoioriginisin(origin);
 
   if(!scripts\mp\poi::poi_ispoiactive(poiname)) {
     return;

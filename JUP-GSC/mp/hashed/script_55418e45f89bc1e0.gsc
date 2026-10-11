@@ -10,7 +10,7 @@
 #namespace namespace_ae9d35285f2a2d94;
 
 function function_a40873f83b05ce3c() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_crawling_changed", &function_a74672983ef7a645);
+  callback::get_template(self.animsetname) callback::add("on_is_crawling_changed", &function_a74672983ef7a645);
 }
 
 function private function_a74672983ef7a645(params) {

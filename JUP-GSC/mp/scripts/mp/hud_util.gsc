@@ -949,22 +949,22 @@ function canshowsplash(splash) {
   return var_2b6edac9af839814;
 }
 
-function showsplashtoall(splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, var_42b1e877ab187c6) {
+function showsplashtoall(splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, splashlistoverride) {
   foreach(player in level.players) {
-    player scripts\mp\hud_message::showsplash(splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, var_42b1e877ab187c6);
+    player scripts\mp\hud_message::showsplash(splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, splashlistoverride);
   }
 }
 
-function showsplashtoteam(team, splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, var_42b1e877ab187c6) {
+function showsplashtoteam(team, splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, splashlistoverride) {
   foreach(player in level.teamdata[team]["players"]) {
-    player scripts\mp\hud_message::showsplash(splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, var_42b1e877ab187c6);
+    player scripts\mp\hud_message::showsplash(splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, splashlistoverride);
   }
 }
 
-function showsplashtoallexceptteam(team, splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, var_42b1e877ab187c6) {
+function showsplashtoallexceptteam(team, splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, splashlistoverride) {
   foreach(player in level.players) {
     if(isDefined(player) && player.team != team) {
-      player scripts\mp\hud_message::showsplash(splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, var_42b1e877ab187c6);
+      player scripts\mp\hud_message::showsplash(splashname, optionalnumber, playerforplayercard, altdisplayindex, var_ef4849b4cb3ac7e2, splashlistoverride);
     }
   }
 }

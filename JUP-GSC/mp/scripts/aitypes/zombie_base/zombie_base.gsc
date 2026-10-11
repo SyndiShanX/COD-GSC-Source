@@ -32,15 +32,15 @@ function private function_f49a30f92555b827(params) {
   function_976734974e28596e();
   function_8e401d26d58bc32d();
   function_b718bd8a845dc9ab();
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_turned", &function_e809d2e0583ea302);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("shocked", &function_c8bbb80c04cd9a37);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("shocked_end", &function_deadba29b36b687d);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("burned", &function_bf0fe7b30fa14180);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("burned_end", &function_788a3fa28ef17f52);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("napalm_burned", &function_dbb5710ec418627e);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("napalm_burned_end", &function_afa5ec2deb3f62a0);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_crawling_changed", &function_d9b1a731573b17c6);
+  callback::get_template(self.animsetname) callback::add("on_turned", &function_e809d2e0583ea302);
+  callback::get_template(self.animsetname) callback::add("shocked", &function_c8bbb80c04cd9a37);
+  callback::get_template(self.animsetname) callback::add("shocked_end", &function_deadba29b36b687d);
+  callback::get_template(self.animsetname) callback::add("burned", &function_bf0fe7b30fa14180);
+  callback::get_template(self.animsetname) callback::add("burned_end", &function_788a3fa28ef17f52);
+  callback::get_template(self.animsetname) callback::add("napalm_burned", &function_dbb5710ec418627e);
+  callback::get_template(self.animsetname) callback::add("napalm_burned_end", &function_afa5ec2deb3f62a0);
+  callback::get_template(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
+  callback::get_template(self.animsetname) callback::add("on_is_crawling_changed", &function_d9b1a731573b17c6);
 
   namespace_fc8e35fbcefcfd94::function_a9bcc765070d0b08();
   namespace_d30035ccbf6888e3::function_71fb46ec2e0bf63();
@@ -49,7 +49,7 @@ function private function_f49a30f92555b827(params) {
 
 function zombieinit(taskid) {
   assert(isDefined(self.zombieaisetting));
-  function_7415ae9399ba8e75(self.zombieaisetting);
+  zombie_init_ai(self.zombieaisetting);
   callback::add("on_first_ai_init", &function_f49a30f92555b827);
   function_1fc0eb1eb90c8dd0("walk", 100);
   function_1fc0eb1eb90c8dd0("run", 120);

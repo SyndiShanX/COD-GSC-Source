@@ -35,7 +35,7 @@ function lookforinitialcover(taskid) {
   return anim.failure;
 }
 
-function lookforbettercover_internal(var_1fe63b952fe3ee08, var_30b84a9cb603754f, coverselector) {
+function lookforbettercover_internal(lastknownnode, var_30b84a9cb603754f, coverselector) {
   if(self.arriving) {
     return false;
   }
@@ -55,7 +55,7 @@ function lookforbettercover_internal(var_1fe63b952fe3ee08, var_30b84a9cb603754f,
   }
 
   if(isDefined(node)) {
-    if(!isDefined(self.node) || node != self.node || isDefined(var_1fe63b952fe3ee08) && node != var_1fe63b952fe3ee08) {
+    if(!isDefined(self.node) || node != self.node || isDefined(lastknownnode) && node != lastknownnode) {
       if(self usecovernodeifpossible(node)) {
         if(self.doingambush) {
           if(self ambushcheckpath(node)) {
@@ -156,13 +156,13 @@ function setcoverchangestanceforfuntime() {
 }
 
 function hasroomtofullexposecorner(node) {
-  var_16f58e6bcebc24ca = 36;
+  ccheckdist = 36;
   checkpos = node.origin;
 
   if(isnodecoverright(node)) {
-    checkpos += anglestoright(node.angles) * var_16f58e6bcebc24ca;
+    checkpos += anglestoright(node.angles) * ccheckdist;
   } else {
-    checkpos += anglestoleft(node.angles) * var_16f58e6bcebc24ca;
+    checkpos += anglestoleft(node.angles) * ccheckdist;
   }
 
   if(!self maymovecheckfriendlyfire(checkpos)) {

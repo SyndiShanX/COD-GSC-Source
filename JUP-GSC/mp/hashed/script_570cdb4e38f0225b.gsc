@@ -13,11 +13,11 @@
 #using scripts\common\utility;
 #using scripts\engine\math;
 #using scripts\engine\utility;
-#namespace namespace_a1a3f446f17c11e3;
+#namespace zombie_abom_heads;
 
 function function_581a1a8dcccb6a3e() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_1a05f0d3fdebfb7a);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("killed_body_cloned", &function_8642ecf50483ffa7);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_1a05f0d3fdebfb7a);
+  callback::get_template(self.animsetname) callback::add("killed_body_cloned", &function_8642ecf50483ffa7);
 }
 
 function function_2094af5938acc348() {
@@ -139,19 +139,19 @@ function private function_fea7ee078814bf2d() {
     return false;
   }
 
-  if(istrue(self function_11e2d4051ea44b35("in_bull_charge"))) {
+  if(istrue(self getaiblackboarddynamic("in_bull_charge"))) {
     heads_print("<dev string:x44>");
 
     return false;
   }
 
-  if(default_to(self function_11e2d4051ea44b35("recent_bull_charge_stun"), 0) > gettime() && !istrue(self function_11e2d4051ea44b35("in_roar_loop"))) {
+  if(default_to(self getaiblackboarddynamic("recent_bull_charge_stun"), 0) > gettime() && !istrue(self getaiblackboarddynamic("in_roar_loop"))) {
     heads_print("<dev string:x60>");
 
     return false;
   }
 
-  if(istrue(self function_11e2d4051ea44b35("in_react"))) {
+  if(istrue(self getaiblackboarddynamic("in_react"))) {
     heads_print("<dev string:x7b>");
 
     return false;
@@ -161,7 +161,7 @@ function private function_fea7ee078814bf2d() {
 }
 
 function private function_4fd20ee56e38d9c7() {
-  if(istrue(self function_11e2d4051ea44b35("in_roar_loop")) || istrue(self function_11e2d4051ea44b35("in_beam_attack"))) {
+  if(istrue(self getaiblackboarddynamic("in_roar_loop")) || istrue(self getaiblackboarddynamic("in_beam_attack"))) {
     heads_print("<dev string:x91>");
 
     return true;
@@ -216,8 +216,8 @@ function private function_4cf62c20536220fc(entity, head_index, state) {
   heads_print("<dev string:xfc>" + var_85301775392a5e3 + "<dev string:x103>" + state, self.origin + (0, 0, 100 + 20 * head_index));
 
   function_da059a185d59d999(entity, head_index, state == 2);
-  var_c2aec59361d95878 = "weakpoint_" + ter_op(state == 2 && !istrue(self function_11e2d4051ea44b35("in_beam_attack")), "on", "off");
-  utility::function_3ab9164ef76940fd(entity.var_183bb43a8d0e0829[head_index] + "_weakpoint", var_c2aec59361d95878);
+  scriptable_state = "weakpoint_" + ter_op(state == 2 && !istrue(self getaiblackboarddynamic("in_beam_attack")), "on", "off");
+  utility::function_3ab9164ef76940fd(entity.var_183bb43a8d0e0829[head_index] + "_weakpoint", scriptable_state);
 }
 
 function private function_1f7e551933baf853() {
@@ -228,7 +228,7 @@ function private function_1f7e551933baf853() {
 
 function private function_8642ecf50483ffa7(params) {
   if(isDefined(self.var_d37b75616f7c2ee)) {
-    if(istrue(self.var_d37b75616f7c2ee.var_14edc6d1db3695bc) && isDefined(self.var_d37b75616f7c2ee.metabonename)) {
+    if(istrue(self.var_d37b75616f7c2ee.biscritical) && isDefined(self.var_d37b75616f7c2ee.metabonename)) {
       params.body utility::function_3ab9164ef76940fd(self.var_d37b75616f7c2ee.metabonename, "destroyed");
 
       if(isPlayer(self.var_d37b75616f7c2ee.eattacker)) {
@@ -244,7 +244,7 @@ function private function_8642ecf50483ffa7(params) {
         }
 
         if(lastheaddestroyed) {
-          self.var_d37b75616f7c2ee.eattacker function_e800498086e36c29(#"abom_guillotined");
+          self.var_d37b75616f7c2ee.eattacker doscoreeventsharedfunc(#"abom_guillotined");
         }
       }
     }
@@ -252,13 +252,13 @@ function private function_8642ecf50483ffa7(params) {
 }
 
 function private function_1a05f0d3fdebfb7a(params) {
-  var_357455e188e9e3b8 = params.metabonename;
+  metabone_hit = params.metabonename;
 
-  if(!isDefined(var_357455e188e9e3b8)) {
+  if(!isDefined(metabone_hit)) {
     return;
   }
 
-  head_index = scripts\aitypes\zombie_abom\zombie_abom_metabones::function_e5db29e6fd6f6a88(var_357455e188e9e3b8);
+  head_index = scripts\aitypes\zombie_abom\zombie_abom_metabones::function_e5db29e6fd6f6a88(metabone_hit);
 
   if(!isDefined(head_index)) {
     return;

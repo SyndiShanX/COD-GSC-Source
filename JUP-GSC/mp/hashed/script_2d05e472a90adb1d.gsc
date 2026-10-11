@@ -105,7 +105,7 @@ function function_19139560550e356e(target_location) {
   self vehicle_setspeed(self.originalspeed, self.accel);
 }
 
-function function_5cf894c96d44c40b(target_location) {
+function ai_spawn_director_heli_land(target_location) {
   self notify("new_orders");
   self endon("new_orders");
   self endon("death");
@@ -259,9 +259,9 @@ function function_3c2a39b0d7da4e01(target, forcestopatgoal, forceheight, ignoreb
 }
 
 function function_7c904b96baa6d5fb(x, y, rand) {
-  var_dc8bb6300463cf1e = 1280;
+  offgroundheight = 1280;
   groundheight = function_aca7615e8bddce42(x, y);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   trueheight += randomint(rand);
   return trueheight;
 }

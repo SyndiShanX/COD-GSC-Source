@@ -16,7 +16,7 @@ function globalinitialize(var_f9320d3953360ca2) {
   level.mind.callbacks = [];
   registercallback("GetDecisionSet", var_f9320d3953360ca2);
   level.mind.events = spawnStruct();
-  level.mind.var_577f45571c039a54 = namespace_823e1abd5161abb1::function_6930ba7fa0669dba();
+  level.mind.decisions = namespace_823e1abd5161abb1::function_6930ba7fa0669dba();
 }
 
 function initialize() {
@@ -28,7 +28,7 @@ function initialize() {
 }
 
 function initializeupdate() {
-  foreach(decision in self.mind.var_f0a8822dcc782c9d.var_577f45571c039a54) {
+  foreach(decision in self.mind.var_f0a8822dcc782c9d.decisions) {
     decision.var_6b8af58a3f65c8f2 = 0;
   }
 
@@ -65,7 +65,7 @@ function update() {
 function function_edd1c69fa427f0e5() {
   needupdate = 0;
 
-  foreach(decision in self.mind.var_f0a8822dcc782c9d.var_577f45571c039a54) {
+  foreach(decision in self.mind.var_f0a8822dcc782c9d.decisions) {
     decision.var_10f0b5c52ece08ce = 0;
 
     if(!decision.enabled) {
@@ -102,7 +102,7 @@ function registercallback(callbackname, function) {
   level.mind.callbacks[callbackname] = function;
 }
 
-function function_63cc4ce09c4659a1(callbackname, param1, param2) {
+function runcallback(callbackname, param1, param2) {
   if(isDefined(level.mind.callbacks[callbackname])) {
     if(isDefined(param2)) {
       return [[level.mind.callbacks[callbackname]]](param1, param2);
@@ -136,11 +136,11 @@ function function_5bb78fd119f84548() {
 
 function function_e1aad2d0b9d1a56f() {
   var_f0a8822dcc782c9d = spawnStruct();
-  var_f0a8822dcc782c9d.var_577f45571c039a54 = [];
+  var_f0a8822dcc782c9d.decisions = [];
 
   var_f0a8822dcc782c9d.debuginfo = "<dev string:x50>";
 
-  descriptions = level.mind.var_577f45571c039a54;
+  descriptions = level.mind.decisions;
   var_141f7edd65e37a2d = namespace_823e1abd5161abb1::function_bfa5c0c232ced7eb();
 
   foreach(decisionname in var_141f7edd65e37a2d) {
@@ -150,7 +150,7 @@ function function_e1aad2d0b9d1a56f() {
     assertex(isDefined(var_87f71c8ba2104b76), "<dev string:x6f>" + decisionname);
     decision = [[var_87f71c8ba2104b76]]();
     decision.name = decisionname;
-    var_f0a8822dcc782c9d.var_577f45571c039a54[decisionname] = decision;
+    var_f0a8822dcc782c9d.decisions[decisionname] = decision;
   }
 
   self.mind.var_f0a8822dcc782c9d = var_f0a8822dcc782c9d;
@@ -189,7 +189,7 @@ function function_f7033a7afad12cdd(var_ed2441bc0e552f8d) {
 function function_bf27f58f5ee818da() {
   var_37f47315e6bcba99 = undefined;
 
-  foreach(decision in self.mind.var_f0a8822dcc782c9d.var_577f45571c039a54) {
+  foreach(decision in self.mind.var_f0a8822dcc782c9d.decisions) {
     decision.var_df9d35d9b4bee654 = undefined;
 
     if(!decision.var_10f0b5c52ece08ce) {
@@ -270,7 +270,7 @@ function function_7d9b2d9364b68c8e(bot) {
 }
 
 function function_5e44c9968544264(enabled, var_1e19818e63c57531) {
-  foreach(name, decision in self.mind.var_f0a8822dcc782c9d.var_577f45571c039a54) {
+  foreach(name, decision in self.mind.var_f0a8822dcc782c9d.decisions) {
     if(isDefined(var_1e19818e63c57531) && array_contains(var_1e19818e63c57531, name)) {
       continue;
     }
@@ -287,7 +287,7 @@ function function_e3becfc53745debe(var_ddd5b02aaf128173) {
     return var_f0a8822dcc782c9d.debuginfo;
   }
 
-  var_21b72418e16677fb = function_e60ece723e993125(var_f0a8822dcc782c9d.var_577f45571c039a54);
+  var_21b72418e16677fb = function_e60ece723e993125(var_f0a8822dcc782c9d.decisions);
   debuginfo = "<dev string:x50>";
   count = 0;
 
@@ -336,10 +336,10 @@ function getdescription() {
   return description;
 }
 
-function function_e60ece723e993125(var_577f45571c039a54) {
+function function_e60ece723e993125(decisions) {
   array = [];
 
-  foreach(decision in var_577f45571c039a54) {
+  foreach(decision in decisions) {
     array[array.size] = decision;
   }
 
@@ -421,10 +421,10 @@ function function_4e8e4b3605e73a33(createmethod, var_6beb626a7b315296) {
 function function_b4c45ed36fa851d5() {
   assert(isDefined(self.mind) && isDefined(self.mind.var_f0a8822dcc782c9d));
   var_f0a8822dcc782c9d = self.mind.var_f0a8822dcc782c9d;
-  descriptions = level.mind.var_577f45571c039a54;
+  descriptions = level.mind.decisions;
   matchlist = namespace_823e1abd5161abb1::function_dd6540682cd2ab87();
 
-  foreach(name, decision in var_f0a8822dcc782c9d.var_577f45571c039a54) {
+  foreach(name, decision in var_f0a8822dcc782c9d.decisions) {
     desc = descriptions[name];
     assert(isDefined(desc));
 
@@ -509,7 +509,7 @@ function function_3cf1fa93b66c0336(action, score) {
 
   action.score = score;
   action.decision.var_8ff05874bbb1ac7c = action;
-  action.var_7fdb8fdafb49730 = var_c38fcea73953365e;
+  action.executor = var_c38fcea73953365e;
   startaction(action);
 }
 
@@ -548,9 +548,9 @@ function actionthread(action) {
   }
 
   thread function_cfab1366832a49eb(endconditions, action);
-  function_63cc4ce09c4659a1("OnBotActionStart", self, action);
+  runcallback("OnBotActionStart", self, action);
   action.lasterror = action[[action.processmethod]](self);
-  function_63cc4ce09c4659a1("OnBotActionEnd", self, action);
+  runcallback("OnBotActionEnd", self, action);
 
   if(isDefined(action.lasterror)) {
     action.var_24323dd7256d2d04 = gettime();
@@ -605,7 +605,7 @@ function endaction(action) {
     return;
   }
 
-  function_63cc4ce09c4659a1("OnBotActionEnd", self, action);
+  runcallback("OnBotActionEnd", self, action);
   self notify(action.description);
   self waittill(action.description + "Ended");
 }
@@ -669,7 +669,7 @@ function function_f3cf203834e48c6d(status) {
   }
 
   self.var_55a389ca3c7d0111 = status;
-  self.var_7fdb8fdafb49730.debuginfo = "<dev string:x50>";
+  self.executor.debuginfo = "<dev string:x50>";
 }
 
 # /

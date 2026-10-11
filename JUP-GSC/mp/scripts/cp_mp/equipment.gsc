@@ -206,15 +206,15 @@ function loadequipmentbundles() {
             baseweapon = makeweapon(weaponname);
 
             if(!isnullweapon(baseweapon)) {
-              attachments = function_6527364c1ecca6c6(weaponname);
+              attachments = getweapondefaultattachments(weaponname);
             }
 
             struct.objweapon = makeweapon(weaponname, attachments);
             blueprints = getweaponblueprintnames(weaponname);
 
             foreach(blueprint, id in blueprints) {
-              var_1092bc40c58c1c9a = weaponname + "|" + string(id);
-              level.equipmentblueprints[var_1092bc40c58c1c9a] = function_3211981142ec5aee(weaponname, blueprint);
+              svariantid = weaponname + "|" + string(id);
+              level.equipmentblueprints[svariantid] = function_3211981142ec5aee(weaponname, blueprint);
             }
 
             if(!isDefined(level.var_415476758ec47760[weaponname])) {
@@ -298,8 +298,8 @@ function buildequipment(weaponname, variantid) {
 
   if(isDefined(variantid) && variantid > 0) {
     weapon = makeweapon(weaponname, [], undefined, undefined, variantid);
-    var_1092bc40c58c1c9a = weaponname + "|" + string(variantid);
-    attachments = level.equipmentblueprints[var_1092bc40c58c1c9a];
+    svariantid = weaponname + "|" + string(variantid);
+    attachments = level.equipmentblueprints[svariantid];
 
     foreach(attachment, variant in attachments) {
       weapon = weapon withattachment(attachment, variant);
@@ -343,10 +343,10 @@ function giveequipment(ref, slot, class, variantid) {
 
   if(isDefined(variantid)) {
     weapon = buildequipment(tableinfo.weaponname, variantid);
-    var_9b32d1936831f5aa = function_71efed8bf57f1d39(tableinfo.bundle, variantid);
+    genericblueprintname = function_71efed8bf57f1d39(tableinfo.bundle, variantid);
 
-    if(isDefined(var_9b32d1936831f5aa)) {
-      self function_53c61cc39f6a3b11(var_9b32d1936831f5aa);
+    if(isDefined(genericblueprintname)) {
+      self function_53c61cc39f6a3b11(genericblueprintname);
     }
   } else {
     weapon = tableinfo.objweapon;
@@ -883,7 +883,7 @@ function function_7f245729fcb6414d(weaponname) {
   return level.var_415476758ec47760[weaponname];
 }
 
-function function_2113b6f7cb462692(weaponname) {
+function getequipmentbundlefromweaponname(weaponname) {
   if(!isDefined(weaponname)) {
     return undefined;
   }

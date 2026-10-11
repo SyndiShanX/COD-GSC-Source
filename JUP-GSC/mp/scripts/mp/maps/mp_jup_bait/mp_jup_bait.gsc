@@ -58,11 +58,11 @@ function function_4b72f18862c4fa5c() {
   }
 
   for(i = 1; i <= 20; i++) {
-    var_531ba5580fd8e7b7 = getEnt("small_duck" + string(i), "targetname");
+    ducky = getEnt("small_duck" + string(i), "targetname");
 
-    if(isDefined(var_531ba5580fd8e7b7)) {
-      var_531ba5580fd8e7b7 hide();
-      var_531ba5580fd8e7b7.health = 10000000;
+    if(isDefined(ducky)) {
+      ducky hide();
+      ducky.health = 10000000;
     }
   }
 }
@@ -115,19 +115,19 @@ function function_18c9c22299cc517f(player, index) {
   if(isDefined(level.mounted_players[0]) && isDefined(level.mounted_players[1]) || false) {
     if(level.mounted_players.size >= 2 && !is_equal(level.mounted_players[0].team, level.mounted_players[1].team) || false) {
       if(!istrue(level.var_6973ff45d04ac633)) {
-        level.var_f29f62be2292a8af = [];
+        level.duckies = [];
         var_a1a05daa21d9018a = [];
 
         for(i = 0; i < 15; i++) {
           for(spawnernum = undefined; !isDefined(spawnernum) || array_contains(var_a1a05daa21d9018a, spawnernum); spawnernum = randomint(20) + 1) {}
 
           var_a1a05daa21d9018a = array_add(var_a1a05daa21d9018a, spawnernum);
-          var_531ba5580fd8e7b7 = getEnt("small_duck" + string(spawnernum), "targetname");
-          var_531ba5580fd8e7b7 show();
-          var_531ba5580fd8e7b7.visible = 1;
-          playFXOnTag(getfx("small_duck_spawn"), var_531ba5580fd8e7b7, "tag_origin");
-          var_531ba5580fd8e7b7 thread damage_watcher();
-          level.var_f29f62be2292a8af = array_add(level.var_f29f62be2292a8af, var_531ba5580fd8e7b7);
+          ducky = getEnt("small_duck" + string(spawnernum), "targetname");
+          ducky show();
+          ducky.visible = 1;
+          playFXOnTag(getfx("small_duck_spawn"), ducky, "tag_origin");
+          ducky thread damage_watcher();
+          level.duckies = array_add(level.duckies, ducky);
         }
 
         level.var_6973ff45d04ac633 = 1;
@@ -145,14 +145,14 @@ function function_19608f86dac72ab() {
   level notify("ducks_failed");
   level.var_7dbb0e2c5863a769 = 0;
 
-  foreach(var_531ba5580fd8e7b7 in level.var_f29f62be2292a8af) {
-    if(istrue(var_531ba5580fd8e7b7.visible)) {
+  foreach(ducky in level.duckies) {
+    if(istrue(ducky.visible)) {
       var_e990edb1d4c51682 = (-200, 1182, 344);
       playsoundatpos(var_e990edb1d4c51682, "mp_jup_bait_duck_game_fail");
-      stopFXOnTag(getfx("small_duck_spawn"), var_531ba5580fd8e7b7, "tag_origin");
-      playFX(getfx("small_duck_timeout"), var_531ba5580fd8e7b7.origin);
-      var_531ba5580fd8e7b7 hide();
-      var_531ba5580fd8e7b7.visible = 0;
+      stopFXOnTag(getfx("small_duck_spawn"), ducky, "tag_origin");
+      playFX(getfx("small_duck_timeout"), ducky.origin);
+      ducky hide();
+      ducky.visible = 0;
     }
   }
 

@@ -144,23 +144,23 @@ function function_cb0dffa5e243988f(params) {
   }
 
   if(isPlayer(self)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 0);
+    self setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 0);
     function_8ec2a2bfd11473be();
   }
 }
 
 function function_68a1dda7fd1c33f9(param) {
   if(istrue(self.var_addfab42810330a4)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 1);
+    self setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 1);
     return;
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 0);
+  self setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 0);
 }
 
 function function_daacf7d82f553a35(params) {
   if(isDefined(self.var_9b55e3337571adb4) && isDefined(self.var_9b55e3337571adb4.cache)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 0);
+    self setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 0);
     self.var_9b55e3337571adb4.cache cleanup_cache(self, 1);
     waitframe();
     self commitstats(1);
@@ -190,7 +190,7 @@ function function_5f07fd4885970a1d() {
 
   if(isDefined(self.var_9b55e3337571adb4) && isDefined(self.var_9b55e3337571adb4.cache)) {
     if(isPlayer(self)) {
-      self setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 0);
+      self setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 0);
       self.var_9b55e3337571adb4.cache cleanup_cache(self, 1);
       waitframe();
       self commitstats(1);
@@ -201,13 +201,13 @@ function function_5f07fd4885970a1d() {
 function function_72a8eb52f0be7b20(params) {
   if(istrue(self.var_addfab42810330a4)) {
     self.var_addfab42810330a4 = undefined;
-    self setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 0);
+    self setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 0);
     function_8ec2a2bfd11473be();
   }
 }
 
 function function_a96eb05bcccdae3d(params) {
-  var_76063bf99f55fa00 = self getplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack");
+  var_76063bf99f55fa00 = self getplayerdata(level.progressiongroup, "restoreTombstoneBackpack");
 
   if(istrue(var_76063bf99f55fa00)) {
     self.var_9cabc8bf28b5247f = 1;
@@ -253,22 +253,22 @@ function function_ea489c9a3e230419(params) {
     itembundle = getscriptbundle("itemspawnentry:" + itembundlename);
     scriptable = itembundle.scriptable;
     self.var_9b55e3337571adb4.a_backpack = array_add(self.var_9b55e3337571adb4.a_backpack, lootid);
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", i, "lootID", lootid);
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", i, "quantity", lootcount);
+    self setplayerdata(level.progressiongroup, "tombstoneBackpack", i, "lootID", lootid);
+    self setplayerdata(level.progressiongroup, "tombstoneBackpack", i, "quantity", lootcount);
     index_high = i;
   }
 
   var_7a83ce8a86de986 = self.scoreondeath;
   essence_total = isDefined(var_7a83ce8a86de986) ? var_7a83ce8a86de986 : currency::function_15975e20bbd2c824("essence");
   essence_total = int(essence_total * getdvarfloat(@ "hash_6d31f61a8b813a5a"));
-  self setplayerdata(level.var_5d69837cf4db0407, "tombstoneEssence", essence_total);
+  self setplayerdata(level.progressiongroup, "tombstoneEssence", essence_total);
 
   if(essence_total > 0) {
     lootid = function_6d15e119c2779a93(getscriptbundle("itemspawnentry:ob_jup_item_essence_tombstone"));
     self.var_9b55e3337571adb4.a_backpack = array_add(self.var_9b55e3337571adb4.a_backpack, lootid);
     index = isDefined(index_high) ? index_high + 1 : 0;
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", index, "lootID", lootid);
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", index, "quantity", 1);
+    self setplayerdata(level.progressiongroup, "tombstoneBackpack", index, "lootID", lootid);
+    self setplayerdata(level.progressiongroup, "tombstoneBackpack", index, "quantity", 1);
   }
 
   if(self.var_9b55e3337571adb4.a_backpack.size) {
@@ -277,15 +277,15 @@ function function_ea489c9a3e230419(params) {
 
     if(mapname != "mp_jup_bigmap" && !istrue(level.var_18a131403527449e) || scripts\mp\outofbounds::istouchingoobtrigger() || ispointinwater(self.origin)) {
       randomspawn = function_b2cd26ac28946ea7(level.var_d3bc04e8a1946502);
-      self setplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 0, randomspawn[0]);
-      self setplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 1, randomspawn[1]);
-      self setplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 2, randomspawn[2]);
+      self setplayerdata(level.progressiongroup, "tombstoneStashOrigin", 0, randomspawn[0]);
+      self setplayerdata(level.progressiongroup, "tombstoneStashOrigin", 1, randomspawn[1]);
+      self setplayerdata(level.progressiongroup, "tombstoneStashOrigin", 2, randomspawn[2]);
       return;
     }
 
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 0, self.origin[0]);
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 1, self.origin[1]);
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 2, self.origin[2]);
+    self setplayerdata(level.progressiongroup, "tombstoneStashOrigin", 0, self.origin[0]);
+    self setplayerdata(level.progressiongroup, "tombstoneStashOrigin", 1, self.origin[1]);
+    self setplayerdata(level.progressiongroup, "tombstoneStashOrigin", 2, self.origin[2]);
   }
 }
 
@@ -306,15 +306,15 @@ function function_388d12d30b04fbc1() {
   n_scriptable = var_f4991b19147602f9 + 1;
 
   if(n_scriptable < 10) {
-    var_e89a9a6a3475bd0a = function_40fd49171fad19d3("tombstone_stash_0" + n_scriptable);
+    var_e89a9a6a3475bd0a = getxhashasset("tombstone_stash_0" + n_scriptable);
   } else {
-    var_e89a9a6a3475bd0a = function_40fd49171fad19d3("tombstone_stash_" + n_scriptable);
+    var_e89a9a6a3475bd0a = getxhashasset("tombstone_stash_" + n_scriptable);
   }
 
-  x = self getplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 0);
-  y = self getplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 1);
-  z = self getplayerdata(level.var_5d69837cf4db0407, "tombstoneStashOrigin", 2);
-  essence = self getplayerdata(level.var_5d69837cf4db0407, "tombstoneEssence");
+  x = self getplayerdata(level.progressiongroup, "tombstoneStashOrigin", 0);
+  y = self getplayerdata(level.progressiongroup, "tombstoneStashOrigin", 1);
+  z = self getplayerdata(level.progressiongroup, "tombstoneStashOrigin", 2);
+  essence = self getplayerdata(level.progressiongroup, "tombstoneEssence");
   dropstruct = scripts\cp_mp\loot\common_item::function_59a2e61d79065dca();
   dropinfo = scripts\cp_mp\loot\common_item::function_49b86047c8a8b228(dropstruct, (x, y, z), (0, 0, 0), undefined, 1);
   icon = function_efda1ea04874e527(dropinfo.origin);
@@ -365,7 +365,7 @@ function function_388d12d30b04fbc1() {
   self.var_9b55e3337571adb4.cache = cache;
   level.var_2251a7fd416d962a = array_add(level.var_2251a7fd416d962a, cache);
   cache callback::add("on_cache_closed", &function_db8eb6248ea8a6df);
-  self setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 0);
+  self setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 0);
   waitframe();
   self commitstats(1);
 }
@@ -388,7 +388,7 @@ function cleanup_cache(player, is_immediate) {
   }
 
   self setscriptablepartstate("body", "shutdown");
-  player setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 0);
+  player setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 0);
   player function_8ec2a2bfd11473be();
 
   if(!is_immediate) {
@@ -419,7 +419,7 @@ function function_db8eb6248ea8a6df(params) {
   }
 }
 
-function function_53984676bfb1fe35(instance, note, param, var_535d9c3fdddab5a9) {
+function function_53984676bfb1fe35(instance, note, param, instigator) {
   waitframe();
   instance notify("stash_dead");
 }
@@ -455,7 +455,7 @@ function function_ebc56eeecea60302(weapon) {
 function function_58b9475ad345f0d3() {
   if(istrue(self.var_9cabc8bf28b5247f)) {
     self.var_9cabc8bf28b5247f = undefined;
-    self setplayerdata(level.var_5d69837cf4db0407, "restoreTombstoneBackpack", 0);
+    self setplayerdata(level.progressiongroup, "restoreTombstoneBackpack", 0);
     self.var_9b55e3337571adb4 = spawnStruct();
     self.var_9b55e3337571adb4.a_backpack = [];
     self.var_9b55e3337571adb4.var_af2cea418410a822 = [];
@@ -468,8 +468,8 @@ function function_58b9475ad345f0d3() {
         itembundlename = function_fc925a153c7fd55c(lootid);
 
         if(!isDefined(itembundlename)) {
-          self setplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", i, "lootID", 0);
-          self setplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", i, "quantity", 0);
+          self setplayerdata(level.progressiongroup, "tombstoneBackpack", i, "lootID", 0);
+          self setplayerdata(level.progressiongroup, "tombstoneBackpack", i, "quantity", 0);
           continue;
         }
 
@@ -486,8 +486,8 @@ function function_58b9475ad345f0d3() {
 }
 
 function function_eb02768c294d3e1c(index) {
-  lootid = self getplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", index, "lootID");
-  quantity = self getplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", index, "quantity");
+  lootid = self getplayerdata(level.progressiongroup, "tombstoneBackpack", index, "lootID");
+  quantity = self getplayerdata(level.progressiongroup, "tombstoneBackpack", index, "quantity");
   return [lootid, quantity];
 }
 
@@ -495,11 +495,11 @@ function function_8ec2a2bfd11473be() {
   self endon("disconnect");
 
   for(i = 0; i < 10; i++) {
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", i, "lootID", 0);
-    self setplayerdata(level.var_5d69837cf4db0407, "tombstoneBackpack", i, "quantity", 0);
+    self setplayerdata(level.progressiongroup, "tombstoneBackpack", i, "lootID", 0);
+    self setplayerdata(level.progressiongroup, "tombstoneBackpack", i, "quantity", 0);
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, "tombstoneEssence", 0);
+  self setplayerdata(level.progressiongroup, "tombstoneEssence", 0);
   waitframe();
   self commitstats(1);
 }
@@ -522,7 +522,7 @@ function private function_efda1ea04874e527(origin) {
 
 function on_item_pickup(params) {
   if(is_equal(params.itembundlename, "ob_jup_item_essence_tombstone")) {
-    essence = self getplayerdata(level.var_5d69837cf4db0407, "tombstoneEssence");
+    essence = self getplayerdata(level.progressiongroup, "tombstoneEssence");
     currency::function_3036cef61495210f("essence", essence - 1);
   }
 }
@@ -585,15 +585,15 @@ function function_39c1cce4c78f1e6c(params) {
     itembundle = getscriptbundle("<dev string:x7b3>" + itembundlename);
     scriptable = itembundle.scriptable;
     self.var_9b55e3337571adb4.a_backpack = array_add(self.var_9b55e3337571adb4.a_backpack, lootid);
-    self setplayerdata(level.var_5d69837cf4db0407, "<dev string:x7c6>", i, "<dev string:x7db>", lootid);
-    self setplayerdata(level.var_5d69837cf4db0407, "<dev string:x7c6>", i, "<dev string:x7e5>", lootcount);
+    self setplayerdata(level.progressiongroup, "<dev string:x7c6>", i, "<dev string:x7db>", lootid);
+    self setplayerdata(level.progressiongroup, "<dev string:x7c6>", i, "<dev string:x7e5>", lootcount);
   }
 
   if(self.var_9b55e3337571adb4.a_backpack.size) {
-    self setplayerdata(level.var_5d69837cf4db0407, "<dev string:x7f1>", 1);
-    self setplayerdata(level.var_5d69837cf4db0407, "<dev string:x80d>", 0, self.origin[0]);
-    self setplayerdata(level.var_5d69837cf4db0407, "<dev string:x80d>", 1, self.origin[1]);
-    self setplayerdata(level.var_5d69837cf4db0407, "<dev string:x80d>", 2, self.origin[2]);
+    self setplayerdata(level.progressiongroup, "<dev string:x7f1>", 1);
+    self setplayerdata(level.progressiongroup, "<dev string:x80d>", 0, self.origin[0]);
+    self setplayerdata(level.progressiongroup, "<dev string:x80d>", 1, self.origin[1]);
+    self setplayerdata(level.progressiongroup, "<dev string:x80d>", 2, self.origin[2]);
   }
 }
 

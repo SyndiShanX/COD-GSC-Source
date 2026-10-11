@@ -54,8 +54,8 @@ function function_923e85d3bf0ec24b() {
 }
 
 function function_ab08c03a615a0cb4() {
-  var_45c17c8bd7095cc4 = function_b9c4aa88ad97ee68(self);
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_b9c4aa88ad97ee68(self);
+  self.variant_definition = activityvariantdefinition;
   var_4c561dfa68aa0b08 = getStructArray(self.varianttag, "targetname");
 
   foreach(setup in var_4c561dfa68aa0b08) {
@@ -74,7 +74,7 @@ function function_ab08c03a615a0cb4() {
 function function_142dd8b75b609524() {
   level endon("game_ended");
   self notify("phone_used");
-  self.on_mission = zombie_challenges::function_f578373042c34e16(16445, "quest_s0a2t4_heist_extstart_conv", self.var_6c29f2fdb0054bbe);
+  self.on_mission = zombie_challenges::function_f578373042c34e16(16445, "quest_s0a2t4_heist_extstart_conv", self.playerparticipants);
   function_5c55a963e30c4568();
   function_3febd77882069bec();
   thread function_f469740a20ef8777();
@@ -93,7 +93,7 @@ function function_142dd8b75b609524() {
   if(istrue(self.on_mission)) {
     cannister_collected = 0;
 
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       if(istrue(player.var_8fb5cf84d3fec2ed)) {
         cannister_collected = 1;
       }
@@ -104,11 +104,11 @@ function function_142dd8b75b609524() {
     if(!self.on_mission) {
       thread function_1281c7fff9456e18("activity_sabotage_success");
     } else if(!cannister_collected) {
-      foreach(player in self.var_6c29f2fdb0054bbe) {
+      foreach(player in self.playerparticipants) {
         player callback::callback("on_sabotage_success_nocannister");
       }
     } else {
-      foreach(player in self.var_6c29f2fdb0054bbe) {
+      foreach(player in self.playerparticipants) {
         player callback::callback("on_sabotage_success_withcannister");
       }
     }
@@ -121,7 +121,7 @@ function function_142dd8b75b609524() {
     var_95f25c491d535550.extractor setscriptablepartstate("trigger", "unusable");
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player namespace_29b5250e9959ea::function_70946e24f54d3f1a("jup_hacking_device_ob");
 
     if(istrue(player.var_8fb5cf84d3fec2ed)) {
@@ -132,14 +132,14 @@ function function_142dd8b75b609524() {
   if(!self.on_mission) {
     thread function_1281c7fff9456e18("activity_sabotage_failure");
   } else if(!cannister_collected) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       player callback::callback("on_sabotage_failure_nocannister");
     }
   } else {
     thread function_1281c7fff9456e18("SABOTAGE_ACTIVITY_VO_FAILURE_FIRSTLINE");
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     function_4a508fcbbea05afd(player);
   }
 
@@ -254,7 +254,7 @@ function function_2a71141af11128b7() {
 }
 
 function function_12ab2881b64adb9b() {
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     params = spawnStruct();
     params.player = player;
     callback::callback("aether_extractor_destroyed", params);
@@ -266,7 +266,7 @@ function function_12ab2881b64adb9b() {
 
 function function_1531bbf5cff97dc0(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 
   if(isDefined(self.var_b9224694cb1be9) && self.var_b9224694cb1be9.size > 0) {
     foreach(s_root in self.var_b9224694cb1be9) {
@@ -416,7 +416,7 @@ function private function_fb460cc13d5fa06b(s_root) {
     s_root.extractor disablescriptableplayeruse(player);
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     s_root.extractor enablescriptableplayeruse(player);
   }
 
@@ -461,7 +461,7 @@ function private function_bded3d00bf53c249(pos, radius) {
       continue;
     }
 
-    vehicle.var_a8f4bb03b366aa80 = 1;
+    vehicle.dontspawnhusk = 1;
     vehicle function_9672da471530b44a();
   }
 
@@ -473,18 +473,18 @@ function private function_bded3d00bf53c249(pos, radius) {
   }
 }
 
-function private function_482dc13081f2f82(scriptable, notif, params, var_535d9c3fdddab5a9) {
+function private function_482dc13081f2f82(scriptable, notif, params, instigator) {
   self.active_ae setscriptablepartstate("aether_extractor", "active");
   wait 0.2;
   self delete();
 }
 
-function private function_d9f232af40634687(scriptable, notif, params, var_535d9c3fdddab5a9) {
+function private function_d9f232af40634687(scriptable, notif, params, instigator) {
   wait 0.2;
   self delete();
 }
 
-function private function_69f745961864f7a3(scriptable, notif, params, var_535d9c3fdddab5a9) {
+function private function_69f745961864f7a3(scriptable, notif, params, instigator) {
   if(!isDefined(scriptable.activity_instance)) {
     return;
   }
@@ -539,7 +539,7 @@ function function_7fc5185aadece0ad(player) {
   callback::callback("aether_extractor_destroyed", params);
 }
 
-function private function_5b9c0d50066b9799(scriptable, notif, params, var_535d9c3fdddab5a9) {
+function private function_5b9c0d50066b9799(scriptable, notif, params, instigator) {
   if(!isDefined(scriptable.activity_instance)) {
     return;
   }
@@ -613,7 +613,7 @@ function function_3f0019081ff6b7e1(explosion_source) {
     radiusdamage(explosion_source.origin, radius, 100, 50, self.dummy_attacker, undefined, undefined, 0, 0);
   }
 
-  foreach(ent in function_143526130b12b2b6(explosion_source.origin, radius)) {
+  foreach(ent in getplayersandaiarrayinradius(explosion_source.origin, radius)) {
     if(isPlayer(ent)) {
       ent knockback(ent.origin - explosion_source.origin, radius * 90 / length(ent.origin - explosion_source.origin));
       continue;
@@ -662,7 +662,7 @@ function private function_f469740a20ef8777() {
 }
 
 function function_ed899763b14cd13c(progress_tracker) {
-  if(progress_tracker.var_621cb2c0d9b1cdae / progress_tracker.var_cc3e7fbaface5a17 <= 0.15 && !self.var_141a4840cd4686d6) {
+  if(progress_tracker.currentprogressvalue / progress_tracker.startingprogressvalue <= 0.15 && !self.var_141a4840cd4686d6) {
     self notify("timer_low");
     self.var_141a4840cd4686d6 = 1;
 
@@ -704,8 +704,8 @@ function function_e312b0c0acaf6800(center, radius) {
 }
 
 function private function_134471b58eb3d915() {
-  if(isDefined(self.var_ad46aadd4e3290d7)) {
-    requestdata = function_9a39e23c3c52c2af(self.var_ad46aadd4e3290d7);
+  if(isDefined(self.directorrequestid)) {
+    requestdata = function_9a39e23c3c52c2af(self.directorrequestid);
 
     if(isDefined(requestdata)) {
       self setgoalpos(requestdata.origin, requestdata.radius);
@@ -737,7 +737,7 @@ function function_1ce44390c1941808() {
 function private function_31070f2e8c05719a(var_ccfaad18a5501c24, var_6603b68a91b98209) {
   self endon("activity_ended");
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player callback::callback("on_sabotage_start");
   }
 

@@ -16,35 +16,35 @@
 #namespace munitions_crate;
 
 function function_6444dd7186b01cfc() {
-  var_86280fefb94b6b28 = spawnStruct();
-  var_86280fefb94b6b28.id = "munitions_crate";
-  var_86280fefb94b6b28.weaponinfo = "iw8_armor_marker_cp";
-  var_86280fefb94b6b28.modelbase = "offhand_wm_supportbox_armor";
-  var_86280fefb94b6b28.hintstring = &"COOP_CRAFTING/AMMO_CRATE_TAKE";
-  var_86280fefb94b6b28.streakname = "munitions_crate";
-  var_86280fefb94b6b28.splashname = "used_support_box";
-  var_86280fefb94b6b28.shadername = "compass_objpoint_deploy_friendly";
-  var_86280fefb94b6b28.headicon = "hud_icon_equipment_support_box";
-  var_86280fefb94b6b28.headiconoffset = 20;
-  var_86280fefb94b6b28.lifespan = 90;
-  var_86280fefb94b6b28.usexp = 50;
-  var_86280fefb94b6b28.onusesfx = "ammo_crate_use";
-  var_86280fefb94b6b28.deployedsfx = "ammo_crate_use";
-  var_86280fefb94b6b28.deathvfx = loadfx("vfx/iw9/fieldupgrades/ammobox/vfx_ammobox_timeout.vfx");
-  var_86280fefb94b6b28.onusecallback = &function_b6c303e97d2afe72;
-  var_86280fefb94b6b28.canusecallback = &function_ff0eaf5506ddb339;
-  var_86280fefb94b6b28.deployfunc = &function_570566f845ec4461;
-  var_86280fefb94b6b28.onusethanksbc = #"ping_social_thanks";
-  var_86280fefb94b6b28.usetime = 1000;
-  var_86280fefb94b6b28.maxhealth = 100;
-  var_86280fefb94b6b28.maxuses = 4;
-  var_86280fefb94b6b28.canreusebox = 0;
-  var_86280fefb94b6b28.allowmeleedamage = 1;
-  var_86280fefb94b6b28.damagefeedback = "";
-  var_86280fefb94b6b28.grenadeusefunc = &supportbox_grenadelaunchfunc;
-  var_86280fefb94b6b28.ondeploycallback = &supportbox_ondeploy;
-  var_86280fefb94b6b28.deployanimduration = supportbox_getdeployanimduration();
-  level.boxsettings["munitions_crate"] = var_86280fefb94b6b28;
+  boxconfig = spawnStruct();
+  boxconfig.id = "munitions_crate";
+  boxconfig.weaponinfo = "iw8_armor_marker_cp";
+  boxconfig.modelbase = "offhand_wm_supportbox_armor";
+  boxconfig.hintstring = &"COOP_CRAFTING/AMMO_CRATE_TAKE";
+  boxconfig.streakname = "munitions_crate";
+  boxconfig.splashname = "used_support_box";
+  boxconfig.shadername = "compass_objpoint_deploy_friendly";
+  boxconfig.headicon = "hud_icon_equipment_support_box";
+  boxconfig.headiconoffset = 20;
+  boxconfig.lifespan = 90;
+  boxconfig.usexp = 50;
+  boxconfig.onusesfx = "ammo_crate_use";
+  boxconfig.deployedsfx = "ammo_crate_use";
+  boxconfig.deathvfx = loadfx("vfx/iw9/fieldupgrades/ammobox/vfx_ammobox_timeout.vfx");
+  boxconfig.onusecallback = &function_b6c303e97d2afe72;
+  boxconfig.canusecallback = &function_ff0eaf5506ddb339;
+  boxconfig.deployfunc = &function_570566f845ec4461;
+  boxconfig.onusethanksbc = #"ping_social_thanks";
+  boxconfig.usetime = 1000;
+  boxconfig.maxhealth = 100;
+  boxconfig.maxuses = 4;
+  boxconfig.canreusebox = 0;
+  boxconfig.allowmeleedamage = 1;
+  boxconfig.damagefeedback = "";
+  boxconfig.grenadeusefunc = &supportbox_grenadelaunchfunc;
+  boxconfig.ondeploycallback = &supportbox_ondeploy;
+  boxconfig.deployanimduration = supportbox_getdeployanimduration();
+  level.boxsettings["munitions_crate"] = boxconfig;
   level.deployable_box["munitions_crate"] = [];
 }
 
@@ -77,9 +77,9 @@ function supportbox_grenadelaunchfunc(boxent) {
 function function_b6c303e97d2afe72(boxent) {
   self endon("disconnect");
   var_a5aec2c7f44be2bf = function_3a119e0cfe090cba(self);
-  var_a5aec3c7f44be4f2 = function_1749db81c9375723(self);
+  success2 = function_1749db81c9375723(self);
 
-  if(var_a5aec2c7f44be2bf || var_a5aec3c7f44be4f2) {
+  if(var_a5aec2c7f44be2bf || success2) {
     return true;
   }
 
@@ -170,7 +170,7 @@ function supportbox_watchplayerweapon(streakinfo) {
 }
 
 function supportbox_handledamage() {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 }
 
 function supportbox_handledeathdamage(data) {
@@ -178,7 +178,7 @@ function supportbox_handledeathdamage(data) {
   objweapon = data.objweapon;
   type = data.meansofdeath;
   damage = data.damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   attacker notify("destroyed_equipment");
 }
 
@@ -189,7 +189,7 @@ function supportbox_modifydamage(data) {
   damage = data.damage;
   idflags = data.idflags;
   modifieddamage = damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   return modifieddamage;
 }
 

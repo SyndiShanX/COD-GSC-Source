@@ -140,7 +140,7 @@ function function_dc000c302e305ce0(str_conversation) {
 
   if(!function_74fec185b50d1b4a(str_conversation) || getdvarint(@ "hash_ac3a05ba7d5a924c", 0)) {
     self.var_6860664202c177f4[str_conversation] = 1;
-    self setplayerdata(level.var_5d69837cf4db0407, "conversation_" + str_conversation, 1);
+    self setplayerdata(level.progressiongroup, "conversation_" + str_conversation, 1);
     overlord::playconversation(str_conversation, [self], undefined, 0);
   }
 }
@@ -154,6 +154,6 @@ function function_74fec185b50d1b4a(str_conversation) {
     self.var_6860664202c177f4 = [];
   }
 
-  b_played_vo = self getplayerdata(level.var_5d69837cf4db0407, "conversation_" + str_conversation) || istrue(self.var_6860664202c177f4[str_conversation]);
+  b_played_vo = self getplayerdata(level.progressiongroup, "conversation_" + str_conversation) || istrue(self.var_6860664202c177f4[str_conversation]);
   return b_played_vo;
 }

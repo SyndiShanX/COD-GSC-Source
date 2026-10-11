@@ -60,12 +60,12 @@ function function_906e0becc84c065b(pos, patrolstruct, vehicle, model, patrolradi
   remotetank.spinuptime = 1;
   remotetank laseron();
   remotetank addcomponent("p2p");
-  remotetank function_77320e794d35465a("p2p", "reverseGasNormal", 1.5);
-  remotetank function_77320e794d35465a("p2p", "steeringMultiplier", 15);
-  remotetank function_77320e794d35465a("p2p", "manualSpeed", 10);
-  remotetank function_77320e794d35465a("p2p", "reverseForBehindGoal", 1);
-  remotetank function_77320e794d35465a("p2p", "stuckTime", 4);
-  remotetank function_77320e794d35465a("p2p", "goalThreshold", 10);
+  remotetank setconfigvalue("p2p", "reverseGasNormal", 1.5);
+  remotetank setconfigvalue("p2p", "steeringMultiplier", 15);
+  remotetank setconfigvalue("p2p", "manualSpeed", 10);
+  remotetank setconfigvalue("p2p", "reverseForBehindGoal", 1);
+  remotetank setconfigvalue("p2p", "stuckTime", 4);
+  remotetank setconfigvalue("p2p", "goalThreshold", 10);
   remotetank scripts\cp_mp\emp_debuff::set_start_emp_callback(&empstarted);
   remotetank scripts\cp_mp\emp_debuff::set_clear_emp_callback(&empcleared);
   remotetank.var_8ffa366ec68f0c8b = 10000;
@@ -87,58 +87,58 @@ function function_906e0becc84c065b(pos, patrolstruct, vehicle, model, patrolradi
 function function_45c8ebe59275b96e(streakname) {
   weaponname = "thermite_bolt_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 18;
+  weaponhitstokill = 18;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "thermite_xmike109_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 25;
+  weaponhitstokill = 25;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "semtex_bolt_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 7;
+  weaponhitstokill = 7;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "semtex_xmike109_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 8;
+  weaponhitstokill = 8;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "c4_mp";
   weaponhitsperattack = 5;
-  var_8b4500d6a881b7b2 = undefined;
+  weaponhitstokill = undefined;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "at_mine_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 4;
+  weaponhitstokill = 4;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 
   weaponname = "thermite_mp";
   weaponhitsperattack = 1;
-  var_8b4500d6a881b7b2 = 50;
+  weaponhitstokill = 50;
 
   if(issharedfuncdefined("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")) {
-    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, streakname);
+    [[getsharedfunc("vehicle_damage", "vehicle_setupHitDamageOverrideForWeapon")]](weaponname, weaponhitsperattack, weaponhitstokill, streakname);
   }
 }
 
@@ -339,7 +339,7 @@ function function_2325f7cc87d0684() {
   self endon("death");
   self endon("dmz_ai_vehicle_enterCombatState");
   self.currentstate = "patrol";
-  var_fbdad214ee6c3307 = 0;
+  scanangle = 0;
   direction = 1;
 
   while(true) {
@@ -352,13 +352,13 @@ function function_2325f7cc87d0684() {
       wait 0.2;
     }
 
-    var_fbdad214ee6c3307 += 90 * direction;
+    scanangle += 90 * direction;
 
-    if(var_fbdad214ee6c3307 >= 360 || var_fbdad214ee6c3307 <= 0) {
+    if(scanangle >= 360 || scanangle <= 0) {
       direction *= -1;
     }
 
-    targetangles = (0, var_fbdad214ee6c3307, 0);
+    targetangles = (0, scanangle, 0);
     targetvec = anglesToForward(targetangles);
     start = self.origin + (0, 0, 16);
     end = start + 6000 * targetvec;
@@ -847,7 +847,7 @@ function function_f149e9383f183cf0(data) {
 
   wheelson.ishaywire = 1;
   wheelson thread function_e6cbf8131b64e6db();
-  wheelson function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(wheelson.pathstruct.speed / 3));
+  wheelson setconfigvalue("p2p", "manualSpeed", mph_to_ips(wheelson.pathstruct.speed / 3));
 }
 
 function function_5c67fa91fe5b79(data) {
@@ -857,7 +857,7 @@ function function_5c67fa91fe5b79(data) {
     return;
   }
 
-  wheelson function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(wheelson.pathstruct.speed));
+  wheelson setconfigvalue("p2p", "manualSpeed", mph_to_ips(wheelson.pathstruct.speed));
   wheelson.ishaywire = 0;
 }
 

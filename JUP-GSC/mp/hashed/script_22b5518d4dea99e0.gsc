@@ -12,8 +12,8 @@
 #namespace namespace_f093628c456dc33;
 
 function function_453d52eb553e1047() {
-  var_9e373019b587e34 = getdvarfloat(@ "hash_341483558fb0f08f", 20);
-  addpowerbutton(self, "shout", "+frag", &function_7f013d8a91788fdf, 0, undefined, &playerzombiecleanup, undefined, &"MP_ZXP/SHOUT", undefined, var_9e373019b587e34, "shoutStatus", "shoutProgress");
+  cooldownduration = getdvarfloat(@ "hash_341483558fb0f08f", 20);
+  addpowerbutton(self, "shout", "+frag", &function_7f013d8a91788fdf, 0, undefined, &playerzombiecleanup, undefined, &"MP_ZXP/SHOUT", undefined, cooldownduration, "shoutStatus", "shoutProgress");
 }
 
 function function_7f013d8a91788fdf(powerstruct, powerref) {
@@ -33,7 +33,7 @@ function function_7f013d8a91788fdf(powerstruct, powerref) {
   }
 
   if(zombie scripts\mp\utility\weapon::grenadeinpullback()) {
-    zombie function_187fb04ebd01baea();
+    zombie canceloffhands();
   }
 
   zombie thread function_120695737abd78f4(powerstruct, powerref);
@@ -72,7 +72,7 @@ function function_502603b3a9bddbc4(powerstruct, powerref) {
   zombie endon("disconnect");
   zombie endon("zombie_unset");
   level endon("game_ended");
-  zombie.var_a2906c0a3da2c192 = 1;
+  zombie.shouting = 1;
 
   if(isDefined(powerstruct.powers[powerref].statusupdate)) {
     function_936f0ef6e203a7fc(powerstruct.powers[powerref].statusupdate, 4);
@@ -186,7 +186,7 @@ function function_2726f662b9cd30a8() {
     return;
   }
 
-  if(istrue(zombie.var_a2906c0a3da2c192)) {
+  if(istrue(zombie.shouting)) {
     stopFXOnTag(level._effect["zombie_shout"], zombie, "j_head");
     stopFXOnTag(level._effect["zombie_shout_shockwaves"], zombie, "tag_origin");
 
@@ -202,6 +202,6 @@ function function_2726f662b9cd30a8() {
     zombie setmovespeedscale(zombie.movespeedscaler);
   }
 
-  zombie.var_a2906c0a3da2c192 = 0;
+  zombie.shouting = 0;
   zombie.buffed = 0;
 }

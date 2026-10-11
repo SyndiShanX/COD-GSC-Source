@@ -28,7 +28,7 @@ function init_audio() {
   setsaveddvar(@ "hash_4e5b353bf84974a9", 1);
   setdvarifuninitialized(@ "hash_f133094f3b5288b6", 1);
 
-  if(function_3cb5da19764baa3() == "JUP") {
+  if(getprojectname() == "JUP") {
     setsaveddvar(@ "hash_8136ae00f7d4f22f", 0);
   }
 
@@ -120,7 +120,7 @@ function playerbreathingpainsound() {
   self endon("last_stand_revived");
   level endon("game_ended");
 
-  if(function_3cb5da19764baa3() == "JUP") {
+  if(getprojectname() == "JUP") {
     wait 0.5;
 
     while(true) {
@@ -161,8 +161,8 @@ function set_audio_level_fade_time(time) {
   level.audio.level_fade_time = time;
 }
 
-function audio_bink_transition_ambient(var_10d27b439af13a2a, ambient_out, fadeout, ambient_in, fadein, musicstate, musicstatetime) {
-  if(!isDefined(var_10d27b439af13a2a)) {
+function audio_bink_transition_ambient(binktime, ambient_out, fadeout, ambient_in, fadein, musicstate, musicstatetime) {
+  if(!isDefined(binktime)) {
     assertmsg("tried to fade audio for bink playback without specifying bink length");
     return;
   }
@@ -180,11 +180,11 @@ function audio_bink_transition_ambient(var_10d27b439af13a2a, ambient_out, fadeou
   }
 
   if(isDefined(musicstate)) {
-    thread bink_transition_music(var_10d27b439af13a2a, musicstate, musicstatetime);
+    thread bink_transition_music(binktime, musicstate, musicstatetime);
   }
 
   almostfadein = fadein + 0.05;
-  var_bf03ca5bceb3c0e9 = 1;
+  binkskipped = 1;
 
   if(isDefined(ambient_out)) {
     level.player setclienttriggeraudiozone(ambient_out);
@@ -198,17 +198,17 @@ function audio_bink_transition_ambient(var_10d27b439af13a2a, ambient_out, fadeou
 
   while(1 && iscinematicplaying()) {
     time = cinematicgettimeinmsec() / 1000;
-    var_626cae83e1c9cb97 = var_10d27b439af13a2a - time;
+    var_626cae83e1c9cb97 = binktime - time;
 
     if(var_626cae83e1c9cb97 <= almostfadein) {
-      var_bf03ca5bceb3c0e9 = 0;
+      binkskipped = 0;
       break;
     }
 
     wait 0.05;
   }
 
-  if(var_bf03ca5bceb3c0e9 == 0) {
+  if(binkskipped == 0) {
     if(isDefined(ambient_in)) {
       level.player setclienttriggeraudiozone(ambient_in, fadein);
       wait 2;
@@ -224,8 +224,8 @@ function audio_bink_transition_ambient(var_10d27b439af13a2a, ambient_out, fadeou
   level.player clearclienttriggeraudiozone();
 }
 
-function bink_transition_music(var_10d27b439af13a2a, musicstate, musicstatetime) {
-  var_bf03ca5bceb3c0e9 = 1;
+function bink_transition_music(binktime, musicstate, musicstatetime) {
+  binkskipped = 1;
   almostfadein = musicstatetime + 0.05;
 
   while(!iscinematicplaying()) {
@@ -234,17 +234,17 @@ function bink_transition_music(var_10d27b439af13a2a, musicstate, musicstatetime)
 
   while(1 && iscinematicplaying()) {
     time = cinematicgettimeinmsec() / 1000;
-    var_626cae83e1c9cb97 = var_10d27b439af13a2a - time;
+    var_626cae83e1c9cb97 = binktime - time;
 
     if(var_626cae83e1c9cb97 <= almostfadein) {
-      var_bf03ca5bceb3c0e9 = 0;
+      binkskipped = 0;
       break;
     }
 
     wait 0.05;
   }
 
-  if(var_bf03ca5bceb3c0e9 == 0) {
+  if(binkskipped == 0) {
     setmusicstate(musicstate);
   }
 }
@@ -265,8 +265,8 @@ function audio_bink_fadeout_ambient(ambient_out, fadeout) {
   level.player setclienttriggeraudiozone("fade_to_black_minus_music", fadeout);
 }
 
-function audio_bink_fadein_ambient(var_10d27b439af13a2a, ambient_in, fadein, musicstate, musicstatetime) {
-  if(!isDefined(var_10d27b439af13a2a)) {
+function audio_bink_fadein_ambient(binktime, ambient_in, fadein, musicstate, musicstatetime) {
+  if(!isDefined(binktime)) {
     assertmsg("tried to fade audio for bink playback without specifying bink length");
     return;
   }
@@ -282,10 +282,10 @@ function audio_bink_fadein_ambient(var_10d27b439af13a2a, ambient_in, fadein, mus
   }
 
   if(isDefined(musicstate)) {
-    thread bink_transition_music(var_10d27b439af13a2a, musicstate, musicstatetime);
+    thread bink_transition_music(binktime, musicstate, musicstatetime);
   }
 
-  var_bf03ca5bceb3c0e9 = 1;
+  binkskipped = 1;
 
   while(!iscinematicplaying()) {
     wait 0.05;
@@ -293,17 +293,17 @@ function audio_bink_fadein_ambient(var_10d27b439af13a2a, ambient_in, fadein, mus
 
   while(1 && iscinematicplaying()) {
     time = cinematicgettimeinmsec() / 1000;
-    var_626cae83e1c9cb97 = var_10d27b439af13a2a - time;
+    var_626cae83e1c9cb97 = binktime - time;
 
     if(var_626cae83e1c9cb97 <= almostfadein) {
-      var_bf03ca5bceb3c0e9 = 0;
+      binkskipped = 0;
       break;
     }
 
     wait 0.05;
   }
 
-  if(var_bf03ca5bceb3c0e9 == 0) {
+  if(binkskipped == 0) {
     if(isDefined(ambient_in)) {
       level.player setclienttriggeraudiozone(ambient_in, fadein);
       wait 2;
@@ -423,8 +423,8 @@ function set_slowmo_sniper_breath_end() {
 }
 
 function function_f31c23bedada2c6b() {
-  if(isDefined(level.audio.var_f056f7f1f5acff5d)) {
-    [[level.audio.var_f056f7f1f5acff5d]]();
+  if(isDefined(level.audio.fnsubmix)) {
+    [[level.audio.fnsubmix]]();
     return;
   }
 
@@ -433,7 +433,7 @@ function function_f31c23bedada2c6b() {
   if(isDefined(index)) {
     level.player setsoundsubmix("sp_mix_npc_fs_down_global", 0.05);
 
-    if(function_3cb5da19764baa3() == "JUP") {
+    if(getprojectname() == "JUP") {
       foreach(player in level.players) {
         player setsoundsubmix("jup_global_ingame", 0.05);
         player setsoundsubmix("jup_global_sp", 0.05);
@@ -445,16 +445,16 @@ function function_f31c23bedada2c6b() {
 
 function function_651db72b2f52cf76(func) {
   init_audio_struct();
-  level.audio.var_f056f7f1f5acff5d = func;
+  level.audio.fnsubmix = func;
 }
 
-function audio_helmet_transition_helmet_on_visor_down_w_lma(var_3abcf05da9d2dfed, var_6b79e55e60f9e0c9, filter_setting) {
+function audio_helmet_transition_helmet_on_visor_down_w_lma(var_3abcf05da9d2dfed, lma_speed, filter_setting) {
   if(!isDefined(var_3abcf05da9d2dfed)) {
     var_3abcf05da9d2dfed = 2.5;
   }
 
-  if(!isDefined(var_6b79e55e60f9e0c9)) {
-    var_6b79e55e60f9e0c9 = "normal";
+  if(!isDefined(lma_speed)) {
+    lma_speed = "normal";
   }
 
   if(!isDefined(filter_setting)) {
@@ -466,7 +466,7 @@ function audio_helmet_transition_helmet_on_visor_down_w_lma(var_3abcf05da9d2dfed
   if(var_3abcf05da9d2dfed != 0) {
     wait var_3abcf05da9d2dfed;
 
-    if(var_6b79e55e60f9e0c9 == "normal") {
+    if(lma_speed == "normal") {
       level.player delaycall(0.1, &playsound, "plr_helmet_short_boot_up_lr");
     } else {
       level.player delaycall(0.1, &playsound, "plr_helmet_boot_up_fast_lr");
@@ -483,13 +483,13 @@ function audio_helmet_transition_helmet_on_visor_down_w_lma(var_3abcf05da9d2dfed
 
 function audio_helmet_transition_helmet_on_visor_up_no_lma() {}
 
-function audio_helmet_transition_visor_down_w_lma(var_3abcf05da9d2dfed, var_6b79e55e60f9e0c9, filter_setting) {
+function audio_helmet_transition_visor_down_w_lma(var_3abcf05da9d2dfed, lma_speed, filter_setting) {
   if(!isDefined(var_3abcf05da9d2dfed)) {
     var_3abcf05da9d2dfed = 2.5;
   }
 
-  if(!isDefined(var_6b79e55e60f9e0c9)) {
-    var_6b79e55e60f9e0c9 = "normal";
+  if(!isDefined(lma_speed)) {
+    lma_speed = "normal";
   }
 
   if(!isDefined(filter_setting)) {
@@ -499,7 +499,7 @@ function audio_helmet_transition_visor_down_w_lma(var_3abcf05da9d2dfed, var_6b79
   level.player playSound("plr_helmet_visor_pull_down_w_air_lr");
   wait var_3abcf05da9d2dfed;
 
-  if(var_6b79e55e60f9e0c9 == "normal") {
+  if(lma_speed == "normal") {
     level.player delaycall(0.1, &playsound, "plr_helmet_short_boot_up_lr");
   } else {
     level.player delaycall(0.1, &playsound, "plr_helmet_boot_up_fast_lr");
@@ -565,7 +565,7 @@ function debug_enabled() {
 function function_f9400d838bd381d8() {
   for(;;) {
     if(getDvar(@ "hash_f0f5f0919b0e534f") != "<dev string:x52>") {
-      thread function_5a137678f1239061();
+      thread gui_setclothtype();
     }
 
     if(getDvar(@ "hash_46a5925d26c9f0fa") != "<dev string:x52>") {
@@ -576,7 +576,7 @@ function function_f9400d838bd381d8() {
   }
 }
 
-function function_5a137678f1239061() {
+function gui_setclothtype() {
   clothtype = getDvar(@ "hash_f0f5f0919b0e534f");
   setdevdvar(@ "hash_f0f5f0919b0e534f", "<dev string:x52>");
   player = level.player;
@@ -590,7 +590,7 @@ function function_5a137678f1239061() {
 
     if(isDefined(player.clothtype) && player.clothtype != clothtype) {
       player.clothtype = clothtype;
-      player setclothtype(function_1823ff50bb28148d(clothtype));
+      player setclothtype(getxhash(clothtype));
     }
   }
 }
@@ -609,7 +609,7 @@ function function_c2b8b450a3cba9c0() {
 
     if(isDefined(player.geartype) && player.geartype != geartype) {
       player.geartype = geartype;
-      player function_8abe5a968cc3c220(function_1823ff50bb28148d(geartype));
+      player setgeartype(getxhash(geartype));
     }
   }
 }
@@ -643,21 +643,21 @@ function function_54117659a8e5c5b4() {
 }
 
 function function_501be800abf11f33(fadetime, scale) {
-  var_c96095bb15c39d95 = default_to(self.var_dd452cc5c546120b, "deaths_door_sp");
+  str_submix = default_to(self.var_dd452cc5c546120b, "deaths_door_sp");
   n_fadetime = default_to(fadetime, -1);
   n_scale = default_to(scale, 1);
-  self setsoundsubmix(var_c96095bb15c39d95, n_fadetime, n_scale);
+  self setsoundsubmix(str_submix, n_fadetime, n_scale);
   level.player setentitysoundcontext("deaths_door", "active", 0.1);
 }
 
 function function_a2b4e6088394bade(fadetime) {
-  var_c96095bb15c39d95 = default_to(self.var_dd452cc5c546120b, "deaths_door_sp");
+  str_submix = default_to(self.var_dd452cc5c546120b, "deaths_door_sp");
   n_fadetime = default_to(fadetime, undefined);
 
   if(isDefined(n_fadetime)) {
-    self clearsoundsubmix(var_c96095bb15c39d95, n_fadetime);
+    self clearsoundsubmix(str_submix, n_fadetime);
   } else {
-    self clearsoundsubmix(var_c96095bb15c39d95);
+    self clearsoundsubmix(str_submix);
   }
 
   level.player setentitysoundcontext("deaths_door", "", 0.1);

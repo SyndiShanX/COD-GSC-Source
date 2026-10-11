@@ -847,7 +847,7 @@ function function_3bd485992b40ae54(obj) {
 
   while(capturebot_shouldcaptureobjective(obj)) {
     if(utility::issharedfuncdefined("game", "processTouchEnt")) {
-      obj utility::function_f3bb4f4911a1beb2("game", "processTouchEnt", self, obj.entnum);
+      obj utility::callsharedfunc("game", "processTouchEnt", self, obj.entnum);
     }
 
     waitframe();
@@ -1106,8 +1106,8 @@ function function_4325018d2242ad19(stuckto) {
   data.validateaccuratetouching = 1;
 
   if(isDefined(stuckto) && train_utility::is_train_ent(stuckto)) {
-    data.var_49cb2c45d3230ed8 = 1;
-    self function_7e73001e97fe87b9(1);
+    data.plantedontrain = 1;
+    self setmissileantilagged(1);
   }
 
   if(utility::issharedfuncdefined("game", "handlemovingplatforms")) {

@@ -17,7 +17,7 @@ function autoexec main() {
 }
 
 function init(eventinfo) {
-  eventinfo.var_b22310d8fb6c98fa = &function_b22310d8fb6c98fa;
+  eventinfo.canactivatefunc = &canactivatefunc;
   eventinfo.activatefunc = &activatefunc;
   eventinfo.waitfunc = &waitfunc;
   eventinfo.postinitfunc = &postinitfunc;
@@ -28,7 +28,7 @@ function postinitfunc() {
   game["dialog"]["public_events_firesale_end"] = "pblc_grav_frsn";
 }
 
-function function_b22310d8fb6c98fa() {
+function canactivatefunc() {
   if(isDefined(level.br_circle) && isDefined(level.br_circle.circleindex) && level.br_circle.circleindex <= 1) {
     return true;
   }

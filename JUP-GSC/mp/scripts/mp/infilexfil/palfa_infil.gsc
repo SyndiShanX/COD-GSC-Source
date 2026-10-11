@@ -20,7 +20,7 @@
 #namespace palfa_infil;
 
 function function_3ef5f926204cbd9e(subtype) {
-  function_f1aed36ab4598ea("palfa_infil");
+  snd_transient_load("palfa_infil");
   thread function_393cbd8435fcb5c0();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -676,7 +676,7 @@ function function_89a2405953b84136(var_addd3217bc59a7b8, override_og) {
 function function_393cbd8435fcb5c0() {
   level waittill("prematch_over");
   wait 61;
-  function_f4e0ff5cb899686d("palfa_infil");
+  snd_transient_unload("palfa_infil");
 }
 
 function function_6158ef142e9bd640() {

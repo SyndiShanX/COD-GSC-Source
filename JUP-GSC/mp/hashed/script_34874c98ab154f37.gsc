@@ -59,7 +59,7 @@ function function_d9a5084e1bcc12d9() {
     level.var_ab017d8436d7f265 = function_5d0c8ce44d66af45();
   }
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     function_44739fe1cf82e29a("civSpawnLocs");
 
     foreach(loc in level.var_2489811b7f5f3db3) {
@@ -136,7 +136,7 @@ function function_2dca426ba427ff57() {
     level.var_54ced3f63493d9de = [];
   }
 
-  if(!function_47d356083884f913()) {
+  if(!poi_issystemactive()) {
     foreach(spawnloc in level.var_ab017d8436d7f265) {
       ai = spawn_civilian(spawnloc, undefined, undefined, undefined, undefined, 1);
       level.var_54ced3f63493d9de[level.var_54ced3f63493d9de.size] = ai;
@@ -199,7 +199,7 @@ function spawn_civilian(struct, path, poiname, initialcap, var_9b2697384ed3425e,
   ai.ignoreme = 1;
   ai.health = 1;
   ai.maxhealth = 1;
-  ai function_9f82c74eb1b7caf9(0);
+  ai setcanusecover(0);
   ai.gender = ter_op(ismale, "male", "female");
 
   if(istrue(var_e195245abf56681b)) {
@@ -465,7 +465,7 @@ function fleefromplayerproximity() {
         playerdistsq = distancesquared(closestplayer.origin, self.origin);
 
         if(playerdistsq < var_b8c1899adc1a8760) {
-          self.var_dd25f55f775fa187 = closestplayer.origin;
+          self.fleefromorigin = closestplayer.origin;
           break;
         }
       }
@@ -698,7 +698,7 @@ function function_a5d597201278c71c(victim) {
 }
 
 function function_5e94057030ae86c4(isinterior, poiname) {
-  if(!function_47d356083884f913()) {
+  if(!poi_issystemactive()) {
     if(istrue(isinterior)) {
       return level.var_c0163a9efdc36902;
     } else {

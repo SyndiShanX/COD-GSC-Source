@@ -21,16 +21,16 @@
 #namespace swim_sp;
 
 function main() {
-  function_e05aeec06b7b52aa(&function_4da231b2893604c, &function_de1545c98ed439f8, &function_a62d0f50f690359, &enterfunc, &exitfunc, &surfacefunc, &descendfunc, &playsoundfunc, &visionsetfunc, &drownfunc, &function_6fed0ef13f84a258, &function_673ece83b6eb66c4);
+  initcommonswim(&getbreathtime, &function_de1545c98ed439f8, &function_a62d0f50f690359, &enterfunc, &exitfunc, &surfacefunc, &descendfunc, &playsoundfunc, &visionsetfunc, &drownfunc, &function_6fed0ef13f84a258, &function_673ece83b6eb66c4);
 }
 
 function function_9ac5625caf26591e() {
   thread function_fc7d07d4cc7ae9f1();
-  swimweapon = ter_op(isDefined(level.var_6eaa298d5870f13d), level.var_6eaa298d5870f13d, "iw9_me_diveknife_sp+iw9_me_knife");
+  swimweapon = ter_op(isDefined(level.swimweaponoverride), level.swimweaponoverride, "iw9_me_diveknife_sp+iw9_me_knife");
   self giveweapon(swimweapon);
 }
 
-function function_4da231b2893604c() {
+function getbreathtime() {
   if(self isswimsprinting()) {
     return self.gs.swimsprintbreathtime;
   }

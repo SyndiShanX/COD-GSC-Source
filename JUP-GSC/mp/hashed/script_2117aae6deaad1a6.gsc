@@ -567,8 +567,8 @@ function function_8c2d63c53a4dd06a(requestid, var_d1ae7b187bf453fb) {
 }
 
 function function_8aa9050c1c2dbbc1(params) {
-  if(isDefined(level.var_25a729512e633df2) && isDefined(self.var_ad46aadd4e3290d7)) {
-    encounter = level.var_25a729512e633df2[self.var_ad46aadd4e3290d7];
+  if(isDefined(level.var_25a729512e633df2) && isDefined(self.directorrequestid)) {
+    encounter = level.var_25a729512e633df2[self.directorrequestid];
 
     if(isDefined(encounter) && istrue(encounter.iselite)) {
       if(encounter.var_1f061a8830dd6c7b > 0) {
@@ -967,7 +967,7 @@ function private function_45b8b7da9ab11092() {
 
   if(isDefined(var_903fdc9e417d21f6)) {
     triggerfx(var_903fdc9e417d21f6);
-    var_903fdc9e417d21f6 function_cea710f9d017694a(1);
+    var_903fdc9e417d21f6 forcenetfieldhighlod_sharedfunc(1);
     thread function_5ee1730c2e122134(var_903fdc9e417d21f6, "lightbomb_beam_origin_end");
   }
 }
@@ -978,7 +978,7 @@ function private function_9a195e28df161379(scriptmodel) {
 
   if(isDefined(var_a308f283d2cf5c4c)) {
     triggerfx(var_a308f283d2cf5c4c);
-    var_a308f283d2cf5c4c function_cea710f9d017694a(1);
+    var_a308f283d2cf5c4c forcenetfieldhighlod_sharedfunc(1);
     thread function_5ee1730c2e122134(var_a308f283d2cf5c4c, "lightbomb_beam_end");
   }
 }
@@ -1003,7 +1003,7 @@ function function_6286d85f8a5d2858() {
   self.beamvfx = playfxontagsbetweenclients(getfx("lightbomb_beam_fx"), self.var_7fb15984f4f0a480, "tag_origin", self.targetent, "tag_origin");
 
   if(isDefined(self.beamvfx)) {
-    self.beamvfx function_cea710f9d017694a(1);
+    self.beamvfx forcenetfieldhighlod_sharedfunc(1);
     thread function_5ee1730c2e122134(self.beamvfx, "lightbomb_beam_end");
     starttime = gettime();
     timetohit = 750;
@@ -1059,7 +1059,7 @@ function setup_orbs() {
   self.orb.move_to_point setModel("tag_origin");
   self.orb.move = spawn("script_model", self.orb.origin);
   self.orb.move setModel("jup_zm_harvester_orb_invisible");
-  self.orb utility::function_6e506f39f121ea8a(self.orb.move);
+  self.orb utility::scriptable_setparententity(self.orb.move);
   self.orb.end_point = level.entity_boss.origin + (0, 0, 1024);
   self.orb.var_b36f416ea2901969 = 128;
   self.orb.var_4b277984303eb7df = 96;

@@ -62,9 +62,9 @@ function private function_247eed998b5b5c0b(spawndata, faildata) {
   return vehicle;
 }
 
-function private function_24dfb5aeadd19f3c(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_24dfb5aeadd19f3c(vehicle, seatid, oldseatid, player, data) {
   if(istrue(data.success)) {
-    thread function_d7d50e8f657a7c25(vehicle, seatid, var_fc7c7a874b43a31a, player, data);
+    thread function_d7d50e8f657a7c25(vehicle, seatid, oldseatid, player, data);
     return;
   }
 
@@ -75,23 +75,23 @@ function private function_24dfb5aeadd19f3c(vehicle, seatid, var_fc7c7a874b43a31a
   }
 }
 
-function private function_d7d50e8f657a7c25(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_d7d50e8f657a7c25(vehicle, seatid, oldseatid, player, data) {
   if(seatid == "gunner") {
-    level thread vehicle_occupancy_disablefirefortime(player, ter_op(istrue(vehicle.var_ecc491f42aaceaf4), 850, 2200));
+    level thread vehicle_occupancy_disablefirefortime(player, ter_op(istrue(vehicle.playedfirstraise), 850, 2200));
     player thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_giveturret(player, vehicle, function_ae5d72405e841a0a());
-    vehicle.var_ecc491f42aaceaf4 = 1;
+    vehicle.playedfirstraise = 1;
   }
 
-  vehomn_updateomnvarsonseatenter(vehicle, var_fc7c7a874b43a31a, seatid, player);
+  vehomn_updateomnvarsonseatenter(vehicle, oldseatid, seatid, player);
 }
 
-function private function_c9a25e0722ada0f8(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_c9a25e0722ada0f8(vehicle, seatid, newseatid, player, data) {
   if(istrue(data.success)) {
-    function_41e2ee710223cf99(vehicle, seatid, var_7558f98f3236963d, player, data);
+    function_41e2ee710223cf99(vehicle, seatid, newseatid, player, data);
   }
 }
 
-function private function_41e2ee710223cf99(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_41e2ee710223cf99(vehicle, seatid, newseatid, player, data) {
   if(seatid == "gunner") {
     turret = vehicle_getturretbyweapon(vehicle, function_ae5d72405e841a0a());
 
@@ -112,7 +112,7 @@ function private function_41e2ee710223cf99(vehicle, seatid, var_7558f98f3236963d
   }
 
   if(!istrue(data.playerdisconnect)) {
-    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, var_7558f98f3236963d, player, data);
+    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, newseatid, player, data);
 
     if(!success) {
       if(issharedfuncdefined("vehicle_occupancy", "handleSuicideFromVehicles")) {
@@ -123,10 +123,10 @@ function private function_41e2ee710223cf99(vehicle, seatid, var_7558f98f3236963d
     }
   }
 
-  vehomn_updateomnvarsonseatexit(vehicle, seatid, var_7558f98f3236963d, player);
+  vehomn_updateomnvarsonseatexit(vehicle, seatid, newseatid, player);
 }
 
-function private function_c9e01ef8817d753c(vehicle, var_9de41f2ee77c33ba, var_3f68c37bafd38606, player, data) {
+function private function_c9e01ef8817d753c(vehicle, reenterseatid, var_3f68c37bafd38606, player, data) {
   if(isDefined(var_3f68c37bafd38606) && var_3f68c37bafd38606 == "gunner") {
     thread vehicle_occupancy_taketurret(player, vehicle, function_ae5d72405e841a0a(), data, 1);
   }

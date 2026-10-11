@@ -440,9 +440,9 @@ function descend(location, zone) {
 }
 
 function tracegroundheight(x, y, rand, var_ffa2f7672c0c1531) {
-  var_dc8bb6300463cf1e = 30;
+  offgroundheight = 30;
   groundheight = tracegroundpoint(x, y, var_ffa2f7672c0c1531);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
 
   if(isDefined(rand)) {
     trueheight += randomint(rand);

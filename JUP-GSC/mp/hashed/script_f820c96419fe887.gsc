@@ -177,13 +177,13 @@ function modifyplayerdamage(data) {
     idamage = data.damage * getdvarfloat(@ "hash_bf750007ea105d69", 3);
   } else if(var_7bfcad6985f865ac && !var_8d6deeb9c425ce1b && data.meansofdeath == "MOD_MELEE") {
     maxhealth = data.victim.maxhealth;
-    var_676a5fd0436c01a9 = level.brgametype.zombienumhitshuman;
+    numhits = level.brgametype.zombienumhitshuman;
 
     if(!level.brgametype.var_df9ba21d322f48a0) {
       maxhealth += data.victim.br_maxarmorhealth;
     }
 
-    idamage = int(ceil(maxhealth / var_676a5fd0436c01a9));
+    idamage = int(ceil(maxhealth / numhits));
   } else if(var_8d6deeb9c425ce1b && var_eb938d26f29141aa && istrue(data.victim.vehicledamageimmunity)) {
     idamage = 0;
   } else if(var_7bfcad6985f865ac && !var_8d6deeb9c425ce1b && data.meansofdeath == "MOD_IMPACT" && weaponbasename == "rock_mp") {
@@ -1330,8 +1330,8 @@ function playerzombiehitground(var_e3438b8cb9c2c515, var_a2f406096e542298) {
   newangles = vectortoangles(groundnormal);
   pitch = angleclamp180(newangles[0] + 90);
   newangles = (0, newangles[1], 0);
-  var_65667e04420c7105 = anglesToForward(newangles);
-  dot = vectordot(var_65667e04420c7105, ovf);
+  nvf = anglesToForward(newangles);
+  dot = vectordot(nvf, ovf);
   newpitch = dot * pitch;
   var_20adb86449c4cc7 = getdvarint(@ "hash_f89852faf4700eb7", 20);
   var_a4ad9b2f0f9e5a70 = getdvarint(@ "hash_6b79ddef31557a12", -70);
@@ -1403,10 +1403,10 @@ function private function_16b62b803ccf6981(weapon) {
 
   errormessage += "CurrentWeapon: " + currentweaponname + " . ";
   var_f2445c74eef451f9 = "none";
-  var_d93faf2b91e9b072 = player scripts\cp_mp\utility\inventory_utility::getcurrentmonitoredweaponswitchweapon();
+  currenthighpriorityweapon = player scripts\cp_mp\utility\inventory_utility::getcurrentmonitoredweaponswitchweapon();
 
-  if(isDefined(var_d93faf2b91e9b072)) {
-    var_f2445c74eef451f9 = getweaponbasename(var_d93faf2b91e9b072);
+  if(isDefined(currenthighpriorityweapon)) {
+    var_f2445c74eef451f9 = getweaponbasename(currenthighpriorityweapon);
   }
 
   errormessage += "CurrentHighPriorityWeapon: " + var_f2445c74eef451f9 + " . ";
@@ -1436,9 +1436,9 @@ function oneliminatedteamsrespawn() {
 }
 
 function onplayerdamaged(data) {
-  var_f67c3d8d3e5e4c14 = isDefined(data.attacker) && isDefined(data.attacker.var_92ad976bcd196d41);
+  isattackervalid = isDefined(data.attacker) && isDefined(data.attacker.var_92ad976bcd196d41);
   var_e51a346ebc3d594b = data.victim getentitynumber();
-  var_e255f974b378c965 = var_f67c3d8d3e5e4c14 && isDefined(data.attacker.var_92ad976bcd196d41.targetdata) && isDefined(data.attacker.var_92ad976bcd196d41.targetdata[var_e51a346ebc3d594b]) && data.attacker.var_92ad976bcd196d41.targetdata[var_e51a346ebc3d594b] == data.victim;
+  var_e255f974b378c965 = isattackervalid && isDefined(data.attacker.var_92ad976bcd196d41.targetdata) && isDefined(data.attacker.var_92ad976bcd196d41.targetdata[var_e51a346ebc3d594b]) && data.attacker.var_92ad976bcd196d41.targetdata[var_e51a346ebc3d594b] == data.victim;
   var_7bfcad6985f865ac = isPlayer(data.attacker) && data.attacker playeriszombie();
 
   if(data.victim playeriszombie() && var_e255f974b378c965) {
@@ -1480,7 +1480,7 @@ function setupzombiepowers() {
   }
 }
 
-function addpowerbutton(powerstruct, powerref, keybindings, var_fb3a9f61fc511db4, var_91513a57aa89be6d, var_1a5269312d3a0b00, cleanupfunc, var_7939d347ade41da0, label, labelpc, cooldownsec, statusupdate, progressupdate) {
+function addpowerbutton(powerstruct, powerref, keybindings, powerfunc, var_91513a57aa89be6d, var_1a5269312d3a0b00, cleanupfunc, var_7939d347ade41da0, label, labelpc, cooldownsec, statusupdate, progressupdate) {
   var_2afd19924dad2b4f = hashcat(@ "hash_b75ff36b09040395", powerref);
 
   if(getdvarint(var_2afd19924dad2b4f, 1) == 0) {
@@ -1493,7 +1493,7 @@ function addpowerbutton(powerstruct, powerref, keybindings, var_fb3a9f61fc511db4
 
   powerstruct.powers[powerref] = spawnStruct();
   powerstruct.powers[powerref].bindings = keybindings;
-  powerstruct.powers[powerref].func = var_fb3a9f61fc511db4;
+  powerstruct.powers[powerref].func = powerfunc;
   powerstruct.powers[powerref].var_1a5269312d3a0b00 = var_1a5269312d3a0b00;
   powerstruct.powers[powerref].cleanupfunc = cleanupfunc;
   powerstruct.powers[powerref].var_7939d347ade41da0 = var_7939d347ade41da0;
@@ -1542,7 +1542,7 @@ function function_7f013d8a91788fdf(powerstruct, powerref) {
   }
 
   if(zombie scripts\mp\utility\weapon::grenadeinpullback()) {
-    zombie function_187fb04ebd01baea();
+    zombie canceloffhands();
   }
 
   zombie thread function_120695737abd78f4(powerstruct, powerref);
@@ -1593,7 +1593,7 @@ function function_2726f662b9cd30a8() {
     return;
   }
 
-  if(istrue(zombie.var_a2906c0a3da2c192)) {
+  if(istrue(zombie.shouting)) {
     stopFXOnTag(level._effect["zombie_shout"], zombie, "j_head");
     stopFXOnTag(level._effect["zombie_shout_shockwaves"], zombie, "tag_origin");
 
@@ -1609,7 +1609,7 @@ function function_2726f662b9cd30a8() {
     zombie setmovespeedscale(zombie.movespeedscaler);
   }
 
-  zombie.var_a2906c0a3da2c192 = 0;
+  zombie.shouting = 0;
   zombie.buffed = 0;
 }
 
@@ -1624,7 +1624,7 @@ function function_502603b3a9bddbc4(powerstruct, powerref) {
   zombie endon("disconnect");
   zombie endon("zombie_unset");
   level endon("game_ended");
-  zombie.var_a2906c0a3da2c192 = 1;
+  zombie.shouting = 1;
 
   if(isDefined(powerstruct.powers[powerref].statusupdate)) {
     function_936f0ef6e203a7fc(powerstruct.powers[powerref].statusupdate, 4);
@@ -1636,7 +1636,7 @@ function function_502603b3a9bddbc4(powerstruct, powerref) {
   self setscriptablepartstate("zombieRageVfx", "fx_start", 0);
   wait level.brgametype.var_52d26462081a2d41;
   zombie stopgestureviewmodel("ges_zombie_shout");
-  zombie.var_a2906c0a3da2c192 = 0;
+  zombie.shouting = 0;
   zombie notify("zombie_shouting_finished");
   zombie.buffed = 1;
   zombie thread function_74b142ac51e57492();
@@ -1999,7 +1999,7 @@ function function_539dc27334184e77(powerstruct) {
 }
 
 function playerpowersmonitorinput(powerstruct) {
-  if(!scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() && isbot(self)) {
+  if(!scripts\cp_mp\utility\game_utility::ismagellanmode() && isbot(self)) {
     return;
   }
 
@@ -2206,11 +2206,11 @@ function function_936f0ef6e203a7fc(dataref, value) {
 
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (int(value) &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
+  invertedmask = ~(mask << bitoffset);
   prevvalue = self getclientomnvar("ui_br_zombie_powers");
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
-  level.var_ce83fb46b0b7d8f3["ui_br_zombie_powers"] = var_82a90e56e416fa55;
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
+  level.var_ce83fb46b0b7d8f3["ui_br_zombie_powers"] = repackedvalue;
   self setclientomnvar("ui_br_zombie_powers", level.var_ce83fb46b0b7d8f3["ui_br_zombie_powers"]);
 }
 
@@ -2438,7 +2438,7 @@ function function_647ba9e9a0d700c7() {
   }
 
   if(scripts\mp\utility\weapon::grenadeinpullback()) {
-    self function_187fb04ebd01baea();
+    self canceloffhands();
   }
 
   while(self ismantling() || self ismeleeing()) {
@@ -2598,14 +2598,14 @@ function function_46bb895f743ddb94() {
   self endon("death_or_disconnect");
   self endon("zombie_unset");
   self endon("zombie_jump_complete");
-  var_70e2efb856b2eebf = getdvarfloat(@ "hash_407c08e67d1cb43b", 0.3);
+  cleartime = getdvarfloat(@ "hash_407c08e67d1cb43b", 0.3);
 
-  if(var_70e2efb856b2eebf < 0) {
+  if(cleartime < 0) {
     return;
   }
 
-  if(var_70e2efb856b2eebf > 0) {
-    wait var_70e2efb856b2eebf;
+  if(cleartime > 0) {
+    wait cleartime;
   }
 
   self function_aaa37279040dd667();
@@ -3010,7 +3010,7 @@ function sortbylastzombietime(left, right) {
 
 function function_e4cffb22a28408e2() {
   wait 5;
-  scripts\cp_mp\utility\audio_utility::function_f1aed36ab4598ea("br_zxp");
+  scripts\cp_mp\utility\audio_utility::snd_transient_load("br_zxp");
 }
 
 function playerupdatealivecounthuman() {

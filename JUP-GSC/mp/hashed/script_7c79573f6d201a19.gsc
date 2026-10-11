@@ -144,7 +144,7 @@ function function_dc1a77b6a8234cd(bot, loot, var_9073e5955eaebe2c) {
     return undefined;
   }
 
-  var_98ac27fd131b6faf = ter_op(isDefined(valuetable.lootvalue[loot.entity.type]), valuetable.lootvalue[loot.entity.type], valuetable.typevalue[function_1823ff50bb28148d(loot.type)]);
+  var_98ac27fd131b6faf = ter_op(isDefined(valuetable.lootvalue[loot.entity.type]), valuetable.lootvalue[loot.entity.type], valuetable.typevalue[getxhash(loot.type)]);
 
   if(bot function_bcb0778bb33e86de(loot.entity.origin) && var_98ac27fd131b6faf > 0) {
     if(loot.type == "cache" || loot.type == "ammo_restock") {

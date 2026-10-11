@@ -18,8 +18,8 @@ function get_skill_from_index(index) {
 
 function apply_difficulty_settings_shared(current_frac) {
   assert(isPlayer(self));
-  self.var_da4b6392c1bec6a1 = get_difficultysetting_frac("missTimeConstant", current_frac);
-  self.var_cef700ed012e8981 = get_difficultysetting_frac("missTimeDistanceFactor", current_frac);
+  self.gameskillmisstimeconstant = get_difficultysetting_frac("missTimeConstant", current_frac);
+  self.gameskillmisstimedistancefactor = get_difficultysetting_frac("missTimeDistanceFactor", current_frac);
   function_38ae83992c7eb8a5(get_difficultysetting("double_grenades_allowed"));
 }
 
@@ -78,7 +78,7 @@ function pain_protection_check() {
 }
 
 function set_accuracy_based_on_situation() {
-  if(self function_e8ca4080d02a0bb4() && isalive(self.enemy)) {
+  if(self aiissniper() && isalive(self.enemy)) {
     self function_73ef2fe03a776cd7();
     return;
   }

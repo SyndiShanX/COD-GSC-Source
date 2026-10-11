@@ -112,7 +112,7 @@ function function_59a853479ab33a5c() {
   }
 
   utility::flag_wait("flag_showers_riot_arrival");
-  var_f30f427ddd429bca = utility::getStruct("showers_riot_arrival_sound_org", "targetname");
+  sndorg = utility::getStruct("showers_riot_arrival_sound_org", "targetname");
   var_5f9218dbc9f75cb5 = snd::snd_play("temp_env_siren_alarm_on_fade", level.player);
   riot_node = utility::getStruct("jup_vip_riot_clash_3", "targetname");
   waitframe();

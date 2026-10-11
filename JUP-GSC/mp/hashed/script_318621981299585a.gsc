@@ -66,12 +66,12 @@ function function_fefd14a6940e2b99(activity, owner) {
     task.mission_index = 17;
     task.mission_complete = 18;
     task.mission_fail = 0;
-    task.var_bd764b17d3bf6325 = 0;
+    task.mission_fail_warning = 0;
   } else {
     task.mission_index = 17;
     task.mission_complete = 18;
     task.mission_fail = 0;
-    task.var_bd764b17d3bf6325 = 0;
+    task.mission_fail_warning = 0;
   }
 
   return task;
@@ -171,7 +171,7 @@ function function_7fef8fe4178f164f(teamname) {
   assert(1, "<dev string:x1c>");
 }
 
-function function_19809ae1667b5c7a(teamname, var_b677bbe2241c4e3f, detonated) {
+function function_19809ae1667b5c7a(teamname, omnvarstate, detonated) {
   task = self;
   teamplayers = task scripts\mp\gametypes\activity_manager::function_ad20469c1815a7c7(teamname, 0);
   var_5f8fc154303502fa = task scripts\mp\gametypes\activity_manager::function_ad20469c1815a7c7(teamname, 1);
@@ -187,9 +187,9 @@ function function_19809ae1667b5c7a(teamname, var_b677bbe2241c4e3f, detonated) {
       continue;
     }
 
-    player setclientomnvar("ui_br_stronghold_mission", var_b677bbe2241c4e3f);
+    player setclientomnvar("ui_br_stronghold_mission", omnvarstate);
 
-    if(var_b677bbe2241c4e3f == task.mission_complete) {
+    if(omnvarstate == task.mission_complete) {
       player thread scripts\mp\hud_message::showsplash("stronghold_operation_bomb_disposal_completed");
       continue;
     }
@@ -210,7 +210,7 @@ function function_6118e2119e160883(player) {
   var_aa128e29d7c10074 = scripts\cp_mp\utility\game_utility::isaigameparticipant(player);
 
   if(!var_aa128e29d7c10074) {
-    player setclientomnvar("ui_br_stronghold_mission", task.var_bd764b17d3bf6325);
+    player setclientomnvar("ui_br_stronghold_mission", task.mission_fail_warning);
   }
 
   exittimeout = gettime() + 9000;
@@ -260,14 +260,14 @@ function private function_2344407dc24ee69(teamname, detonated) {
       teamcompleted = team == teamname;
     }
 
-    var_b677bbe2241c4e3f = task.mission_fail;
+    omnvarstate = task.mission_fail;
 
     if(teamcompleted) {
       deletetask = 1;
-      var_b677bbe2241c4e3f = task.mission_complete;
+      omnvarstate = task.mission_complete;
     }
 
-    task function_19809ae1667b5c7a(team, var_b677bbe2241c4e3f, detonated);
+    task function_19809ae1667b5c7a(team, omnvarstate, detonated);
   }
 
   if(istrue(detonated)) {

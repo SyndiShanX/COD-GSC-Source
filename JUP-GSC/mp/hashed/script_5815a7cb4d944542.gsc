@@ -14,7 +14,7 @@
 #using scripts\engine\utility;
 #namespace activity_rewards;
 
-function function_49f447d3531edf7e(activityinstance, activitymoment, var_8436ec5bdd7c457d, var_e0a0dc78cd0e70f3, var_44fadde66021a763) {
+function function_49f447d3531edf7e(activityinstance, activitymoment, var_8436ec5bdd7c457d, rewardstructoverride, var_44fadde66021a763) {
   assert(isDefined(activitymoment));
   assert(isDefined(activityinstance));
 
@@ -30,49 +30,49 @@ function function_49f447d3531edf7e(activityinstance, activitymoment, var_8436ec5
     var_3c99a2a84c4b850f = spawnStruct();
     var_df8cbcdead13c58f[var_df8cbcdead13c58f.size] = var_3c99a2a84c4b850f;
     var_40bdc956443135c6 = namespace_55960efed51f8481::function_18a04da230bdecbb(var_7ff959e229d749c3);
-    function_efd24b6185b08515(activityinstance, var_40bdc956443135c6, var_e0a0dc78cd0e70f3, var_3c99a2a84c4b850f);
+    function_efd24b6185b08515(activityinstance, var_40bdc956443135c6, rewardstructoverride, var_3c99a2a84c4b850f);
   }
 
   function_b1a35db845047ecc(var_44fadde66021a763, var_df8cbcdead13c58f, activityinstance, activitymoment, var_8436ec5bdd7c457d);
 }
 
-function function_efd24b6185b08515(activityinstance, var_40bdc956443135c6, var_e0a0dc78cd0e70f3, var_3c99a2a84c4b850f) {
-  var_bae6a1d8f73bc001 = function_e7c2ecccbf00007e(var_40bdc956443135c6);
-  var_f07d96bc912b9e7b = function_9e1216d6f33a3c78(var_40bdc956443135c6);
-  var_5f30aa3845e26983 = function_ca5f5e4bcc7eeb6b(activityinstance, var_40bdc956443135c6);
-  rewardspawnlocation = default_to(var_e0a0dc78cd0e70f3, function_b62ec8e6a3683859(activityinstance, var_40bdc956443135c6));
-  var_78ffc9208217131a = &function_885b8eee6652a555;
+function function_efd24b6185b08515(activityinstance, var_40bdc956443135c6, rewardstructoverride, var_3c99a2a84c4b850f) {
+  rewardcachesettings = function_e7c2ecccbf00007e(var_40bdc956443135c6);
+  rewardcachebehaviorsettings = function_9e1216d6f33a3c78(var_40bdc956443135c6);
+  playerrewardgroups = function_ca5f5e4bcc7eeb6b(activityinstance, var_40bdc956443135c6);
+  rewardspawnlocation = default_to(rewardstructoverride, function_b62ec8e6a3683859(activityinstance, var_40bdc956443135c6));
+  openlootablecontainerfunction = &function_885b8eee6652a555;
   lootfunction = &function_bb5549431bc6e2db;
-  var_ed118e6dd8c246 = function_46cf871ea6373933(activityinstance);
-  var_89e6aa0dcb676de = undefined;
+  lootfunctionargs = function_46cf871ea6373933(activityinstance);
+  onitemtakenfunction = undefined;
   var_60cbd56e1b6ff1b7 = &function_a524fa56ca65ce48;
   var_859e0858a90cac79 = isDefined(var_3c99a2a84c4b850f) ? var_3c99a2a84c4b850f : spawnStruct();
   thread function_b2bfec0cbd353637(activityinstance, var_859e0858a90cac79);
-  namespace_6d633d94b557096d::function_75e180b08f394748(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b, var_5f30aa3845e26983, rewardspawnlocation, var_78ffc9208217131a, lootfunction, var_ed118e6dd8c246, var_89e6aa0dcb676de, var_60cbd56e1b6ff1b7, var_859e0858a90cac79);
+  managed_reward_cache::function_75e180b08f394748(rewardcachesettings, rewardcachebehaviorsettings, playerrewardgroups, rewardspawnlocation, openlootablecontainerfunction, lootfunction, lootfunctionargs, onitemtakenfunction, var_60cbd56e1b6ff1b7, var_859e0858a90cac79);
 }
 
 function function_8fdd18e047a23b6a(activityinstance, rewardgrouptype, perplayerloot) {
-  var_6f8af5eb76deac21 = spawnStruct();
-  var_6f8af5eb76deac21.rewardgrouptype = rewardgrouptype;
-  var_6f8af5eb76deac21.perplayerloot = perplayerloot;
-  return function_104adc18c0d699c3(activityinstance, 6, var_6f8af5eb76deac21);
+  relevantinfostruct = spawnStruct();
+  relevantinfostruct.rewardgrouptype = rewardgrouptype;
+  relevantinfostruct.perplayerloot = perplayerloot;
+  return runactivityfunction(activityinstance, 6, relevantinfostruct);
 }
 
 function function_ca5f5e4bcc7eeb6b(activityinstance, var_40bdc956443135c6) {
-  rewardgrouptype = namespace_55960efed51f8481::function_45864bd1ba317b7f(var_40bdc956443135c6);
-  perplayerloot = namespace_55960efed51f8481::function_d2ce6c5a4f9d52e5(var_40bdc956443135c6);
+  rewardgrouptype = namespace_55960efed51f8481::getrewardgrouptype(var_40bdc956443135c6);
+  perplayerloot = namespace_55960efed51f8481::getperplayerloot(var_40bdc956443135c6);
   return function_8fdd18e047a23b6a(activityinstance, rewardgrouptype, perplayerloot);
 }
 
-function function_7af151bd42e8132d(activityinstance, var_2b5aa40272b0bbce) {
-  var_6f8af5eb76deac21 = spawnStruct();
-  var_6f8af5eb76deac21.var_2b5aa40272b0bbce = var_2b5aa40272b0bbce;
-  activitytype = function_de53ed8e35d0ed7a(activityinstance);
+function function_7af151bd42e8132d(activityinstance, rewardspawnlocationtype) {
+  relevantinfostruct = spawnStruct();
+  relevantinfostruct.rewardspawnlocationtype = rewardspawnlocationtype;
+  activitytype = getactivitytype(activityinstance);
 
-  if(function_811a0fab09c793ce(activitytype, 5) == function_35c9943414b3e6ed(5)) {
-    var_35d3425cf6c2d4a7 = function_104adc18c0d699c3(activityinstance, 5, var_6f8af5eb76deac21);
+  if(getactivityfunction(activitytype, 5) == function_35c9943414b3e6ed(5)) {
+    var_35d3425cf6c2d4a7 = runactivityfunction(activityinstance, 5, relevantinfostruct);
   } else {
-    var_35d3425cf6c2d4a7 = function_104adc18c0d699c3(activityinstance, 5);
+    var_35d3425cf6c2d4a7 = runactivityfunction(activityinstance, 5);
   }
 
   if(isDefined(var_35d3425cf6c2d4a7)) {
@@ -90,8 +90,8 @@ function function_7af151bd42e8132d(activityinstance, var_2b5aa40272b0bbce) {
 }
 
 function function_b62ec8e6a3683859(activityinstance, var_40bdc956443135c6) {
-  var_2b5aa40272b0bbce = namespace_55960efed51f8481::function_fe7983e3293f0584(var_40bdc956443135c6);
-  return function_7af151bd42e8132d(activityinstance, var_2b5aa40272b0bbce);
+  rewardspawnlocationtype = namespace_55960efed51f8481::function_fe7983e3293f0584(var_40bdc956443135c6);
+  return function_7af151bd42e8132d(activityinstance, rewardspawnlocationtype);
 }
 
 function function_885b8eee6652a555(argstruct) {
@@ -139,8 +139,8 @@ function private function_91913c72212591e4(var_44fadde66021a763, var_2b3da9e0b7d
   }
 
   if(isDefined(activityinstance)) {
-    var_6f8af5eb76deac21 = function_488dc16c77130e3e(activitymoment, var_8436ec5bdd7c457d, var_2b3da9e0b7d7384d);
-    activityinstance namespace_4fda5d7358015a06::function_735ee8e9d0f1b00b(activityinstance, "RewardsSpawned", var_6f8af5eb76deac21);
+    relevantinfostruct = function_488dc16c77130e3e(activitymoment, var_8436ec5bdd7c457d, var_2b3da9e0b7d7384d);
+    activityinstance namespace_4fda5d7358015a06::announceactivitymoment(activityinstance, "RewardsSpawned", relevantinfostruct);
   }
 }
 
@@ -150,18 +150,18 @@ function function_488dc16c77130e3e(var_9ff035d5fc0b423c, var_695aa6b24855b76d, r
   };
 }
 
-function private function_bb5549431bc6e2db(var_ed118e6dd8c246) {
-  assert(isstruct(var_ed118e6dd8c246) && isDefined(var_ed118e6dd8c246.activity_instance));
-  activityinstance = var_ed118e6dd8c246.activity_instance;
-  var_6f8af5eb76deac21 = var_ed118e6dd8c246;
-  return function_104adc18c0d699c3(activityinstance, 7, var_6f8af5eb76deac21);
+function private function_bb5549431bc6e2db(lootfunctionargs) {
+  assert(isstruct(lootfunctionargs) && isDefined(lootfunctionargs.activity_instance));
+  activityinstance = lootfunctionargs.activity_instance;
+  relevantinfostruct = lootfunctionargs;
+  return runactivityfunction(activityinstance, 7, relevantinfostruct);
 }
 
-function function_d8812f59f918bbc(var_6f8af5eb76deac21) {
-  assertex(isDefined(var_6f8af5eb76deac21), "<dev string:x1a5>");
+function getrewardgroups(relevantinfostruct) {
+  assertex(isDefined(relevantinfostruct), "<dev string:x1a5>");
   activityinstance = self;
-  rewardgrouptype = var_6f8af5eb76deac21.rewardgrouptype;
-  perplayerloot = var_6f8af5eb76deac21.perplayerloot;
+  rewardgrouptype = relevantinfostruct.rewardgrouptype;
+  perplayerloot = relevantinfostruct.perplayerloot;
   assertex(isDefined(rewardgrouptype));
   assertex(isDefined(perplayerloot));
   rewardgroups = function_eb4ddda3cbeb99b1(activityinstance, rewardgrouptype);
@@ -174,25 +174,25 @@ function function_d8812f59f918bbc(var_6f8af5eb76deac21) {
 }
 
 function private function_f99ad6f0c1168f7a(rewardgroups) {
-  var_56d7bf81a933ef5a = [];
+  perplayerrewardgroups = [];
 
   foreach(rewardgroup in rewardgroups) {
     foreach(player in rewardgroup) {
-      var_56d7bf81a933ef5a[var_56d7bf81a933ef5a.size] = [player];
+      perplayerrewardgroups[perplayerrewardgroups.size] = [player];
     }
   }
 
-  return var_56d7bf81a933ef5a;
+  return perplayerrewardgroups;
 }
 
 function private function_eb4ddda3cbeb99b1(activityinstance, rewardgrouptype) {
   var_c083bd8353c655c1 = function_2dabe17056c2563f(activityinstance);
-  var_5f30aa3845e26983 = [];
+  playerrewardgroups = [];
 
   switch (rewardgrouptype) {
     case #"hash_172e3a33f45b462e":
       assert(isDefined(var_c083bd8353c655c1));
-      var_5f30aa3845e26983 = [var_c083bd8353c655c1];
+      playerrewardgroups = [var_c083bd8353c655c1];
       break;
     case #"hash_89ee46feec0f25b9":
       assertmsg("<dev string:x22f>");
@@ -202,7 +202,7 @@ function private function_eb4ddda3cbeb99b1(activityinstance, rewardgrouptype) {
       break;
   }
 
-  return var_5f30aa3845e26983;
+  return playerrewardgroups;
 }
 
 function function_1edea59f189f9a02(activityinstance, activitymoment, var_8436ec5bdd7c457d) {
@@ -232,9 +232,9 @@ function private function_dc46bdff60799db6(activityinstance) {
   var_1c9128c658f1342b = function_5456fc53cbe1f0c4(activityinstance);
 
   foreach(bundlestruct in var_1c9128c658f1342b) {
-    var_e4fd8733f4fb2b3c = function_f29715a4f86830ed(bundlestruct);
-    var_aa82ae2da7694b4a = function_5b87e83d21054cb(bundlestruct);
-    mapkey = function_8ad919f0ad9070e3(var_e4fd8733f4fb2b3c, var_aa82ae2da7694b4a);
+    cacheactivitymoment = function_f29715a4f86830ed(bundlestruct);
+    cacheactivationname = function_5b87e83d21054cb(bundlestruct);
+    mapkey = function_8ad919f0ad9070e3(cacheactivitymoment, cacheactivationname);
 
     if(!isDefined(activityinstance.var_ee0f178c1bd2728b[mapkey])) {
       activityinstance.var_ee0f178c1bd2728b[mapkey] = [];
@@ -248,7 +248,7 @@ function private function_dc46bdff60799db6(activityinstance) {
 function private function_5456fc53cbe1f0c4(activityinstance) {
   var_95a5b3673c07cc00 = activity_common::function_8e6b7fc389a5a9b3();
   var_6b09d28bcc287c57 = var_95a5b3673c07cc00.var_f86621f26a29c23;
-  activitycategory = function_511be8bcaede8b52(activityinstance);
+  activitycategory = getactivitycategory(activityinstance);
   var_739aff34015ae82c = var_95a5b3673c07cc00.var_c75eef4add685c33;
   var_173b30de30893f89 = var_739aff34015ae82c[activitycategory];
   var_c424dcba3462821c = function_d8acbff3d0b7dd1a(activityinstance);
@@ -257,10 +257,10 @@ function private function_5456fc53cbe1f0c4(activityinstance) {
 }
 
 function private function_46cf871ea6373933(activityinstance) {
-  var_ed118e6dd8c246 = spawnStruct();
-  var_ed118e6dd8c246.activity_instance = activityinstance;
-  var_ed118e6dd8c246.reward_group = undefined;
-  return var_ed118e6dd8c246;
+  lootfunctionargs = spawnStruct();
+  lootfunctionargs.activity_instance = activityinstance;
+  lootfunctionargs.reward_group = undefined;
+  return lootfunctionargs;
 }
 
 function private function_b2bfec0cbd353637(activityinstance, var_859e0858a90cac79) {

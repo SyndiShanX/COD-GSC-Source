@@ -6,22 +6,22 @@
 #using scripts\engine\utility;
 #namespace namespace_f13e1c376c4ed4d6;
 
-function function_efafec9a80234daa(var_fdf147e36d51ad1b) {
+function function_efafec9a80234daa(template_name) {
   if(!isDefined(level.var_2d50d527b0001797)) {
     level.var_2d50d527b0001797 = [];
   }
 
-  if(!isDefined(level.var_2d50d527b0001797[var_fdf147e36d51ad1b])) {
-    var_ae6302f7f057e26f = getscriptbundle("dtanimtemplate:" + var_fdf147e36d51ad1b);
-    assertex(isDefined(var_ae6302f7f057e26f), "ERROR: Attempting to use undefined dialog tree animation template: " + var_fdf147e36d51ad1b);
-    level.var_2d50d527b0001797[var_fdf147e36d51ad1b] = var_ae6302f7f057e26f;
-    level.var_2d50d527b0001797[var_fdf147e36d51ad1b].last_random = -1;
+  if(!isDefined(level.var_2d50d527b0001797[template_name])) {
+    anim_template = getscriptbundle("dtanimtemplate:" + template_name);
+    assertex(isDefined(anim_template), "ERROR: Attempting to use undefined dialog tree animation template: " + template_name);
+    level.var_2d50d527b0001797[template_name] = anim_template;
+    level.var_2d50d527b0001797[template_name].last_random = -1;
   }
 }
 
-function function_1d41e14159f8de35(var_fdf147e36d51ad1b, position_name) {
-  if(isDefined(var_fdf147e36d51ad1b)) {
-    template = level.var_2d50d527b0001797[var_fdf147e36d51ad1b];
+function function_1d41e14159f8de35(template_name, position_name) {
+  if(isDefined(template_name)) {
+    template = level.var_2d50d527b0001797[template_name];
 
     foreach(pos in template.player_positions) {
       if(pos.name == position_name) {
@@ -33,9 +33,9 @@ function function_1d41e14159f8de35(var_fdf147e36d51ad1b, position_name) {
   return undefined;
 }
 
-function function_7dc5dc6ca7fc72c4(var_fdf147e36d51ad1b, feature) {
-  if(isDefined(var_fdf147e36d51ad1b)) {
-    template = level.var_2d50d527b0001797[var_fdf147e36d51ad1b];
+function function_7dc5dc6ca7fc72c4(template_name, feature) {
+  if(isDefined(template_name)) {
+    template = level.var_2d50d527b0001797[template_name];
 
     if(isDefined(template)) {
       switch (feature) {
@@ -60,9 +60,9 @@ function function_7dc5dc6ca7fc72c4(var_fdf147e36d51ad1b, feature) {
   return undefined;
 }
 
-function function_d66c0bfe054fd887(var_fdf147e36d51ad1b) {
-  if(isDefined(var_fdf147e36d51ad1b)) {
-    template = level.var_2d50d527b0001797[var_fdf147e36d51ad1b];
+function function_d66c0bfe054fd887(template_name) {
+  if(isDefined(template_name)) {
+    template = level.var_2d50d527b0001797[template_name];
 
     if(isDefined(template)) {
       return template.scene;

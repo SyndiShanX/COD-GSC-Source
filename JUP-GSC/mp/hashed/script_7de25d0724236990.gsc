@@ -233,7 +233,7 @@ function function_35e60f57e0a1dcc0(player) {
   squadmembers = scripts\mp\utility\teams::getfriendlyplayers(player.team, 1);
 
   foreach(squadmember in squadmembers) {
-    if(!istrue(squadmember.var_fa9f4c933e6df36d)) {
+    if(!istrue(squadmember.isinsafezone)) {
       squadmember namespace_83b142ab0b1210c0::function_bddecd56f4b2d8b0(5);
       squadmember thread scripts\mp\hud_message::showsplash("br_limbo_mystery_package_five_stars", undefined, undefined, undefined, undefined, "splash_list_br_jup_limbo");
     }
@@ -293,9 +293,9 @@ function function_c892b9e4ee801e4d() {
 
   while(true) {
     foreach(player in level.players) {
-      var_2d58e8aae155cc83 = distancesquared(self.origin, player.origin);
+      distancefromplayer = distancesquared(self.origin, player.origin);
 
-      if(var_2d58e8aae155cc83 < 1000000 && !isDefined(player.var_5203028e03ab1e06)) {
+      if(distancefromplayer < 1000000 && !isDefined(player.var_5203028e03ab1e06)) {
         level thread scripts\mp\gametypes\br_public::brleaderdialogplayer("limbo_supplyNear", player, 1, 0);
         player.var_5203028e03ab1e06 = 1;
         player thread function_2a67445a01163a2f();

@@ -16,7 +16,7 @@
 #using scripts\mp\hud_message;
 #namespace namespace_e40ee8b394ce404;
 
-function function_cf1b1f86951a9209(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_cf1b1f86951a9209(instance, part, state, player, bautouse, usestring) {
   if(!istrue(instance.var_532eac3c428e5b9b)) {
     return;
   }
@@ -26,7 +26,7 @@ function function_cf1b1f86951a9209(instance, part, state, player, var_a5b2c54141
   instance.playeropen[player.guid] = player;
 
   if(isDefined(instance.usedcallback)) {
-    [[instance.usedcallback]](instance, part, state, player, var_a5b2c541413aa895, usestring);
+    [[instance.usedcallback]](instance, part, state, player, bautouse, usestring);
   }
 
   function_8f75065bda6ee24a(player, instance);

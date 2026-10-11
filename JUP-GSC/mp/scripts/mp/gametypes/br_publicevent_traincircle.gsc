@@ -21,7 +21,7 @@ function init(eventinfo) {
   eventinfo.validatefunc = &validatefunc;
   eventinfo.postinitfunc = &postinitfunc;
   eventinfo.waitfunc = &waitfunc;
-  eventinfo.var_b22310d8fb6c98fa = &function_b22310d8fb6c98fa;
+  eventinfo.canactivatefunc = &canactivatefunc;
   eventinfo.activatefunc = &activatefunc;
 }
 
@@ -54,7 +54,7 @@ function private function_208df6f2463fdebf() {
   level.var_b8d90d6d7fcd43bc.var_e6252826301d5e3c = 0;
 }
 
-function function_b22310d8fb6c98fa() {
+function canactivatefunc() {
   return level.var_b8d90d6d7fcd43bc.var_e6252826301d5e3c;
 }
 

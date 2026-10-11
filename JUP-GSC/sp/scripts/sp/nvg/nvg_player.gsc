@@ -20,11 +20,11 @@ function main(defaultnvgvision, viewmodeloverride) {
   create_func_ref("player_nvg_lightmodel_extras_watcher_entry", &player_nvg_lightmodel_extras_watcher_entry);
   create_func_ref("player_nvg_lightmodel_extras_watcher_trigger", &player_nvg_lightmodel_extras_watcher_trigger);
   create_func_ref("lerp_savedDvar", &lerp_saveddvar);
-  create_func_ref("LinkToPlayerView", &function_defb07fd9192a91b);
+  create_func_ref("LinkToPlayerView", &linktoplayerview_temp);
   create_func_ref("nvg_flir_on", &function_2db6d8e00bcac9ec);
   create_func_ref("nvg_flir_off", &function_c795b940a8014a);
   level.player nvg_init(defaultnvgvision, viewmodeloverride);
-  level.player thread scripts\common\nvg_player::function_296ee731835b1e4b();
+  level.player thread scripts\common\nvg_player::player_nvg_lightmodel_extras_watcher();
 }
 
 function nvg_init(defaultnvgvision, viewmodeloverride) {
@@ -51,7 +51,7 @@ function nvg_init(defaultnvgvision, viewmodeloverride) {
   thread scripts\common\nvg_player::function_c105076398ebbb59();
 }
 
-function function_defb07fd9192a91b(player, tag, posoffset) {
+function linktoplayerview_temp(player, tag, posoffset) {
   if(!isDefined(tag)) {
     tag = "tag_origin";
   }
@@ -60,8 +60,8 @@ function function_defb07fd9192a91b(player, tag, posoffset) {
     posoffset = (0, 0, 0);
   }
 
-  if(isDefined(level.var_ce78d0e4ea4e7d3b)) {
-    posoffset = level.var_ce78d0e4ea4e7d3b;
+  if(isDefined(level.nvgposoffset)) {
+    posoffset = level.nvgposoffset;
   }
 
   self linktoplayerview(player, tag, posoffset, (0, 0, 0), 1);
@@ -97,12 +97,12 @@ function is_nvg_off() {
   return !level.player isnightvisionon();
 }
 
-function nvg_on_hint(timeout, delay, endonentities, var_f63c23b8ec55b127) {
-  display_hint_forced("nvg_on", timeout, delay, endonentities, var_f63c23b8ec55b127);
+function nvg_on_hint(timeout, delay, endonentities, endonmessages) {
+  display_hint_forced("nvg_on", timeout, delay, endonentities, endonmessages);
 }
 
-function nvg_off_hint(timeout, delay, endonentities, var_f63c23b8ec55b127) {
-  display_hint_forced("nvg_off", timeout, delay, endonentities, var_f63c23b8ec55b127);
+function nvg_off_hint(timeout, delay, endonentities, endonmessages) {
+  display_hint_forced("nvg_off", timeout, delay, endonentities, endonmessages);
 }
 
 function disable_nvg_proc(disable, immediate) {
@@ -337,18 +337,18 @@ function light_meter_hud() {
   for(var_e7c9c132ee82ad4f = 0; true; var_e7c9c132ee82ad4f = 0) {
     self.nvg waittill("update_nvg_hud");
     noise needle_noise();
-    var_f665c97965854720 = self.nvg.lightmeter;
-    var_f665c97965854720 = clamp(var_f665c97965854720, noise.mag, 1 - noise.mag);
-    var_f665c97965854720 += noise.data["val"];
-    setomnvar("ui_nvg_light_meter_needle", var_f665c97965854720);
+    needle_position = self.nvg.lightmeter;
+    needle_position = clamp(needle_position, noise.mag, 1 - noise.mag);
+    needle_position += noise.data["val"];
+    setomnvar("ui_nvg_light_meter_needle", needle_position);
 
-    if(var_f665c97965854720 >= 0.9 && is_nvg_on() && !var_e7c9c132ee82ad4f) {
+    if(needle_position >= 0.9 && is_nvg_on() && !var_e7c9c132ee82ad4f) {
       self playSound("item_nightvision_lightmeter_warning");
       var_e7c9c132ee82ad4f = 1;
       continue;
     }
 
-    if(var_f665c97965854720 < 0.9 && is_nvg_on() && var_e7c9c132ee82ad4f) {}
+    if(needle_position < 0.9 && is_nvg_on() && var_e7c9c132ee82ad4f) {}
   }
 }
 

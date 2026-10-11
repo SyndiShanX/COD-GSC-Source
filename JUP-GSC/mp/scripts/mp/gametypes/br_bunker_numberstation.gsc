@@ -231,12 +231,12 @@ function awardbunker11blueprint(player) {
   return true;
 }
 
-function codephonescriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function codephonescriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x1c>");
-  level thread _codephonescriptableused(instance, part, state, player, var_a5b2c541413aa895);
+  level thread _codephonescriptableused(instance, part, state, player, bautouse);
 }
 
-function _codephonescriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _codephonescriptableused(instance, part, state, player, bautouse) {
   if(state == "on") {
     if((!scripts\mp\flags::gameflag("prematch_done") || !istrue(instance.startingcodephone)) && level.bunker_numberstation.successfulteams.size == 0) {
       playsoundatpos(instance.origin, "br_phone_deny");
@@ -310,7 +310,7 @@ function _codephonescriptableused(instance, part, state, player, var_a5b2c541413
   }
 }
 
-function phonemorsesinglescriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function phonemorsesinglescriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x32>" || part == "<dev string:x4b>" || part == "<dev string:x64>" || part == "<dev string:x7d>" || part == "<dev string:x96>" || part == "<dev string:xaf>" || part == "<dev string:xc8>" || part == "<dev string:xe1>" || part == "<dev string:xfa>" || part == "<dev string:x113>");
 
   switch (part) {
@@ -349,10 +349,10 @@ function phonemorsesinglescriptableused(instance, part, state, player, var_a5b2c
       break;
   }
 
-  level thread _phonemorsesinglescriptableused(instance, part, state, player, var_a5b2c541413aa895);
+  level thread _phonemorsesinglescriptableused(instance, part, state, player, bautouse);
 }
 
-function _phonemorsesinglescriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _phonemorsesinglescriptableused(instance, part, state, player, bautouse) {
   if(state == "on") {
     team = player.team;
 
@@ -409,11 +409,11 @@ function _phonemorsesinglescriptableused(instance, part, state, player, var_a5b2
   }
 }
 
-function keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread _keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+function keypadscriptableused(instance, part, state, player, bautouse, usestring) {
+  level thread _keypadscriptableused(instance, part, state, player, bautouse);
 }
 
-function _keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _keypadscriptableused(instance, part, state, player, bautouse) {
   assert(part == "<dev string:x17c>");
 
   if(level.bunker11puzzleactive && (getdvarint(@ "hash_2b47e76d55a2b0b2", 0) == 1 || array_contains(level.bunker_numberstation.successfulteams, player.team))) {
@@ -584,7 +584,7 @@ function computerrebootsequence_init() {
   }
 }
 
-function computerrebootused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function computerrebootused(instance, part, state, player, bautouse, usestring) {
   level thread _computerrebootsequence_start(instance, player);
 }
 
@@ -644,7 +644,7 @@ function redbutton_init() {
   }
 }
 
-function redbuttonused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function redbuttonused(instance, part, state, player, bautouse, usestring) {
   level thread _redbuttonused_internal(instance, player);
 }
 

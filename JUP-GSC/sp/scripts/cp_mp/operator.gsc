@@ -82,7 +82,7 @@ function private function_c1fb26911511dc66() {
   }
 
   foreach(operatorref in level.var_b4e3b6bdd3147659) {
-    operatorbundle = function_a185fde559db8123(operatorref);
+    operatorbundle = getoperatorbundle(operatorref);
 
     if(!isDefined(operatorbundle)) {
       continue;
@@ -106,9 +106,9 @@ function private function_c1fb26911511dc66() {
       level.var_c1a0b417f098e70c[operatorref] = [skinref];
     }
 
-    if(isDefined(operatorbundle.var_f91a44e31cde7d97)) {
-      var_ff73ed080233394c = getscriptbundle(hashcat(%"hash_600bc392d3fffb6f", operatorbundle.var_f91a44e31cde7d97));
-      skinref = operatorbundle.var_f91a44e31cde7d97;
+    if(isDefined(operatorbundle.defaultskin)) {
+      var_ff73ed080233394c = getscriptbundle(hashcat(%"hash_600bc392d3fffb6f", operatorbundle.defaultskin));
+      skinref = operatorbundle.defaultskin;
 
       if(isDefined(var_ff73ed080233394c)) {
         level.var_a9f4f3ca6a32942f[operatorref] = skinref;
@@ -181,7 +181,7 @@ function private function_53b243a75e43d0af() {
     return;
   }
 
-  executionlist = var_edd8be499278b105.var_f56937ae2076fd;
+  executionlist = var_edd8be499278b105.operatorexecutionlist;
 
   for(i = 0; i < executionlist.size; i++) {
     if(!isDefined(executionlist[i].operatorexecution)) {
@@ -201,7 +201,7 @@ function private function_53b243a75e43d0af() {
   }
 }
 
-function private function_a185fde559db8123(operatorref) {
+function private getoperatorbundle(operatorref) {
   function_a10148d5861bcad7();
   operatorbundle = getscriptbundle(hashcat(%"hash_7a53ff4b0b6730f0", operatorref));
   assertex(isDefined(operatorbundle), "Can't find operator bundle: " + operatorref);
@@ -213,7 +213,7 @@ function private function_a2f84a43b99f877a(skinref) {
 
   if(isDefined(level.var_6a1f54ff203845ec) && isxhashasset(skinref)) {
     foreach(var_75e4598cf524ee17 in level.var_6a1f54ff203845ec) {
-      if(function_40fd49171fad19d3(var_75e4598cf524ee17) == skinref) {
+      if(getxhashasset(var_75e4598cf524ee17) == skinref) {
         skinref = var_75e4598cf524ee17;
         break;
       }
@@ -232,16 +232,16 @@ function private function_23dac01799fd34a3(executionref) {
 }
 
 function function_54240a5fc41f6590(operatorref) {
-  return array_contains(function_462ac94dd54da47d(), operatorref);
+  return array_contains(getoperatorrefs(), operatorref);
 }
 
-function function_462ac94dd54da47d() {
+function getoperatorrefs() {
   function_a10148d5861bcad7();
   return level.var_b4e3b6bdd3147659;
 }
 
 function getoperatorsuperfaction(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.superfaction) && operatorbundle.superfaction == "EAST") {
     return true;
@@ -251,7 +251,7 @@ function getoperatorsuperfaction(operatorref) {
 }
 
 function getoperatorvoice(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.voice)) {
     return operatorbundle.voice;
@@ -261,7 +261,7 @@ function getoperatorvoice(operatorref) {
 }
 
 function getoperatorgender(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.gender) && operatorbundle.gender == "FEMALE") {
     return "female";
@@ -281,7 +281,7 @@ function function_df7d12571397a2b5(operatorref) {
 }
 
 function function_a9722d35258230d2(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.defaultexecution)) {
     return operatorbundle.defaultexecution;
@@ -291,7 +291,7 @@ function function_a9722d35258230d2(operatorref) {
 }
 
 function function_179d82270f3ce3bf(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.defaultquip)) {
     return operatorbundle.defaultquip;
@@ -301,7 +301,7 @@ function function_179d82270f3ce3bf(operatorref) {
 }
 
 function function_ada9a2308a4046e2(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.suit)) {
     return operatorbundle.suit;
@@ -311,7 +311,7 @@ function function_ada9a2308a4046e2(operatorref) {
 }
 
 function isoperatorunlocked(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.var_842b638c4baa9422)) {
     return operatorbundle.var_842b638c4baa9422;
@@ -321,7 +321,7 @@ function isoperatorunlocked(operatorref) {
 }
 
 function function_efe20cf7f3e2a003(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.botgroup)) {
     return operatorbundle.botgroup;
@@ -331,7 +331,7 @@ function function_efe20cf7f3e2a003(operatorref) {
 }
 
 function function_396b82c66e727528(operatorref) {
-  operatorbundle = function_a185fde559db8123(operatorref);
+  operatorbundle = getoperatorbundle(operatorref);
 
   if(isDefined(operatorbundle) && isDefined(operatorbundle.lootid)) {
     return operatorbundle.lootid;
@@ -695,9 +695,9 @@ function private function_1886c9c9213a60a2(operatorref, operatorbundle) {
     level.var_c1a0b417f098e70c[operatorref] = [skinref];
   }
 
-  if(isDefined(operatorbundle.var_f91a44e31cde7d97)) {
-    var_ff73ed080233394c = getscriptbundle(hashcat(%"hash_600bc392d3fffb6f", operatorbundle.var_f91a44e31cde7d97));
-    skinref = operatorbundle.var_f91a44e31cde7d97;
+  if(isDefined(operatorbundle.defaultskin)) {
+    var_ff73ed080233394c = getscriptbundle(hashcat(%"hash_600bc392d3fffb6f", operatorbundle.defaultskin));
+    skinref = operatorbundle.defaultskin;
 
     if(isDefined(var_ff73ed080233394c)) {
       level.var_a9f4f3ca6a32942f[operatorref] = skinref;
@@ -707,7 +707,7 @@ function private function_1886c9c9213a60a2(operatorref, operatorbundle) {
 
 function function_2dc6ef8b84dfec64(skinref) {
   var_ff73ed080233394c = function_a2f84a43b99f877a(skinref);
-  return isDefined(var_ff73ed080233394c) ? var_ff73ed080233394c.var_3291e2cbec055766 : undefined;
+  return isDefined(var_ff73ed080233394c) ? var_ff73ed080233394c.reactiveoperator : undefined;
 }
 
 function function_a317055d4d0a4605(skinref) {

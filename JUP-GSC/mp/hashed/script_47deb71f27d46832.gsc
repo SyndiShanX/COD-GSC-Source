@@ -822,7 +822,7 @@ function phoenix_spectator() {
     player.placementbonus = var_d6a23fdabd1d282c;
 
     if(issharedfuncdefined("seasonalevents", "getFeaturedLootEventActive")) {
-      if(function_f3bb4f4911a1beb2("seasonalevents", "getFeaturedLootEventActive")) {
+      if(callsharedfunc("seasonalevents", "getFeaturedLootEventActive")) {
         function_af5ab021b625cdf8(player);
       }
     }
@@ -921,7 +921,7 @@ function phoenix_spawnitem(var_5868b7d3b245cc07) {
       trainent = traceresult["entity"];
       localorigin = rotatevectorinverted(item.origin - trainent.origin, trainent.angles);
       localangles = combineangles(invertangles(trainent.angles), item.angles);
-      item scripts\common\utility::function_6e506f39f121ea8a(trainent, localorigin, localangles);
+      item scripts\common\utility::scriptable_setparententity(trainent, localorigin, localangles);
     }
   }
 

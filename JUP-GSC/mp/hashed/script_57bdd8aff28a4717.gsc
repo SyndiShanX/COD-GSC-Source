@@ -33,9 +33,9 @@ function function_65e52fad2bce952c(var_b8b25f4d3c3dab1d, var_18f698ac43092a07, v
   }
 
   reward_placement = namespace_71ca15b739deab72::function_3ae7f99339b96499(var_e779ac7e9e65683d);
-  var_ed118e6dd8c246 = spawnStruct();
-  var_ed118e6dd8c246.var_18f698ac43092a07 = var_18f698ac43092a07;
-  namespace_e8853d3344e33cf6::function_863be9e39e19fe2f(reward_groups, reward_placement, &function_de032cb8f1df5adc, var_ed118e6dd8c246);
+  lootfunctionargs = spawnStruct();
+  lootfunctionargs.var_18f698ac43092a07 = var_18f698ac43092a07;
+  namespace_e8853d3344e33cf6::function_863be9e39e19fe2f(reward_groups, reward_placement, &function_de032cb8f1df5adc, lootfunctionargs);
 }
 
 function function_d737da36e4f0f6c2(player, var_18f698ac43092a07) {
@@ -46,9 +46,9 @@ function function_d737da36e4f0f6c2(player, var_18f698ac43092a07) {
   return 0;
 }
 
-function function_de032cb8f1df5adc(var_ed118e6dd8c246) {
+function function_de032cb8f1df5adc(lootfunctionargs) {
   cache = spawnStruct();
-  items = function_bc2f4857c90f5344(var_ed118e6dd8c246.var_18f698ac43092a07, 1);
+  items = function_bc2f4857c90f5344(lootfunctionargs.var_18f698ac43092a07, 1);
   common_cache::function_fd95ef820bb2b980(items, cache);
   return cache.contents;
 }

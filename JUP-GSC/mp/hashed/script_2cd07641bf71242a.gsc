@@ -10,7 +10,7 @@
 #namespace namespace_4fecf90fd9e5c41a;
 
 function function_64d97cf652a4d385() {
-  self.var_acb02d417fdecc8f = &function_4fcd5f899c149076;
+  self.handletraversewarpnotetracksfn = &function_4fcd5f899c149076;
   self.var_bb9dc4a1372891c6 = &function_46b64b8f6d835b78;
 }
 
@@ -108,7 +108,7 @@ function function_46b64b8f6d835b78() {
   return warp_params;
 }
 
-function function_c4b3846ecfe9e4ec(asmname, statename, params) {
+function calctraversetypeunknown(asmname, statename, params) {
   self.var_371c13977bb78c59 = default_to(self.var_371c13977bb78c59, &function_486011c6564f32e5);
   self.var_12a6a7d538790f6e = default_to(self.var_12a6a7d538790f6e, &function_27277e151d315a62);
 
@@ -120,14 +120,14 @@ function function_c4b3846ecfe9e4ec(asmname, statename, params) {
 }
 
 function private function_486011c6564f32e5(currenttype, traverse_params) {
-  if(function_8f0f50119c5937bb(currenttype)) {
+  if(isvalidtraversetype(currenttype)) {
     return currenttype;
   }
 
-  if(isDefined(self.var_ad4d9f5a34656396)) {
-    if(self.var_ad4d9f5a34656396 == "traverse_wall") {
+  if(isDefined(self.traverse_traversetype)) {
+    if(self.traverse_traversetype == "traverse_wall") {
       return "traverse_wall";
-    } else if(self.var_ad4d9f5a34656396 == "traverse_ground") {
+    } else if(self.traverse_traversetype == "traverse_ground") {
       return "traverse_ground";
     }
   }
@@ -249,7 +249,7 @@ function private function_27277e151d315a62(featurearray, type) {
   return featurearray;
 }
 
-function private function_8f0f50119c5937bb(type) {
+function private isvalidtraversetype(type) {
   if(!isDefined(type)) {
     return false;
   }
@@ -491,14 +491,14 @@ function function_3131bcdd32390c23(asmname, statename, walk_nodes) {
   for(i = 0; i < walk_nodes.size - 1; i++) {
     startpos = walk_nodes[i];
     endpos = walk_nodes[i + 1];
-    var_93b71025e5032b3b = endpos - startpos;
-    yaw = vectortoyaw(var_93b71025e5032b3b);
+    starttoendpos = endpos - startpos;
+    yaw = vectortoyaw(starttoendpos);
     self orientmode("face angle", yaw);
 
     while(true) {
       var_14899d470e0ce373 = endpos - self.origin;
 
-      if(vectordot(var_93b71025e5032b3b, var_14899d470e0ce373) < 0) {
+      if(vectordot(starttoendpos, var_14899d470e0ce373) < 0) {
         break;
       }
 

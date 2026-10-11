@@ -28,26 +28,26 @@ function triggerenterthink(enterfunc, exitfunc, var_1fa4e076aba70ab9, var_768b04
   thread triggerexitthink(exitfunc, var_768b0479668f27b);
 
   while(true) {
-    self waittill("trigger", var_2d9552508615d396);
+    self waittill("trigger", triggeringent);
 
-    if(isDefined(filterfunc) && [[filterfunc]](var_2d9552508615d396, self)) {
+    if(isDefined(filterfunc) && [[filterfunc]](triggeringent, self)) {
       continue;
     }
 
-    var_6b6f0d5308b1ceab = var_2d9552508615d396 getentitynumber();
+    var_6b6f0d5308b1ceab = triggeringent getentitynumber();
 
     if(!isDefined(self.triggerenterents[var_6b6f0d5308b1ceab])) {
-      self notify("trigger_enter", var_2d9552508615d396);
+      self notify("trigger_enter", triggeringent);
 
       if(isDefined(enterfunc)) {
-        var_2d9552508615d396 thread[[enterfunc]](var_2d9552508615d396, self);
+        triggeringent thread[[enterfunc]](triggeringent, self);
       }
 
       if(isDefined(var_1fa4e076aba70ab9)) {
-        var_2d9552508615d396 notify(var_1fa4e076aba70ab9, self);
+        triggeringent notify(var_1fa4e076aba70ab9, self);
       }
 
-      self.triggerenterents[var_6b6f0d5308b1ceab] = var_2d9552508615d396;
+      self.triggerenterents[var_6b6f0d5308b1ceab] = triggeringent;
       self.triggerinsidetimes[var_6b6f0d5308b1ceab] = gettime();
     } else {
       self.triggerinsidetimes[var_6b6f0d5308b1ceab] = gettime();

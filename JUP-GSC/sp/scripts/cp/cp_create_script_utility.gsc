@@ -11,12 +11,12 @@ function initialize_create_script() {
   init_create_script_for_level();
 }
 
-function init_create_script_for_level(var_d118031db9b990aa) {
+function init_create_script_for_level(bshouldthread) {
   if(isDefined(level.scripted_spawner_func)) {
     return;
   }
 
-  level.threadedscriptspawners = istrue(var_d118031db9b990aa);
+  level.threadedscriptspawners = istrue(bshouldthread);
   level.create_script_file_ids = [];
   level.cs_scripted_spawners = [];
   level.scripted_spawners = [];
@@ -392,30 +392,30 @@ function translate_and_rotate_from_level_overrides(cs_file, struct) {
   }
 }
 
-function strike_add_to_cs_arrays(var_3215b787c2be06c8, struct, index) {
+function strike_add_to_cs_arrays(cs_type, struct, index) {
   if(!getdvarint(@ "hash_ad6e2fed4a549f49", 0)) {
     return;
   }
 
-  if(var_3215b787c2be06c8 == "struct") {
+  if(cs_type == "struct") {
     level.scripted_spawners[index][level.scripted_spawners[index].size] = struct;
-  } else if(var_3215b787c2be06c8 == "trigger") {
+  } else if(cs_type == "trigger") {
     level.scripted_spawners_triggers[index][level.scripted_spawners_triggers[index].size] = struct;
-  } else if(var_3215b787c2be06c8 == "model") {
+  } else if(cs_type == "model") {
     level.scripted_spawners_models[index][level.scripted_spawners_models[index].size] = struct;
   }
 
-  if(var_3215b787c2be06c8 == "<dev string:x1c>") {
+  if(cs_type == "<dev string:x1c>") {
     level.cs_scripted_spawners[index][level.cs_scripted_spawners[index].size] = struct;
     return;
   }
 
-  if(var_3215b787c2be06c8 == "<dev string:x23>") {
+  if(cs_type == "<dev string:x23>") {
     level.cs_scripted_spawners_triggers[index][level.cs_scripted_spawners_triggers[index].size] = struct;
     return;
   }
 
-  if(var_3215b787c2be06c8 == "<dev string:x2b>") {
+  if(cs_type == "<dev string:x2b>") {
     level.cs_scripted_spawners_models[index][level.cs_scripted_spawners_models[index].size] = struct;
   }
 }

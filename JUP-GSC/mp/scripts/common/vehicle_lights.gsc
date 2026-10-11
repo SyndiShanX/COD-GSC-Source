@@ -139,7 +139,7 @@ function lights_on_internal(group, model) {
 
   lights = level.vehicle.templates.vehicle_lights_group[model][group];
   count = 0;
-  var_ccbc0e3634b40c2a = [];
+  delayoffsetter = [];
 
   foreach(light in lights) {
     if(isDefined(self.lights[light])) {
@@ -156,11 +156,11 @@ function lights_on_internal(group, model) {
 
     delay += level.fxdelay;
 
-    while(isDefined(var_ccbc0e3634b40c2a["" + delay])) {
+    while(isDefined(delayoffsetter["" + delay])) {
       delay += 0.05;
     }
 
-    var_ccbc0e3634b40c2a["" + delay] = 1;
+    delayoffsetter["" + delay] = 1;
 
     if(istrue(template.isscriptable)) {
       if(scripts\common\vehicle::function_9b915d163f6d1d5a(template.part)) {

@@ -72,8 +72,8 @@ function thermobaric_grenade_used(grenade) {
 
   tableinfo = getequipmenttableinfo("equip_thermobaric_grenade");
   bundle = tableinfo.bundle;
-  var_9b32d1936831f5aa = function_71efed8bf57f1d39(bundle, blueprintindex);
-  grenade function_b383c6eb771d7283(var_9b32d1936831f5aa);
+  genericblueprintname = function_71efed8bf57f1d39(bundle, blueprintindex);
+  grenade function_b383c6eb771d7283(genericblueprintname);
 
   if(isDefined(grenade.ticks) && grenade.ticks >= 1) {
     grenade.iscooked = 1;
@@ -82,7 +82,7 @@ function thermobaric_grenade_used(grenade) {
   gunangle = grenade.owner getgunangles();
   gunforward = anglesToForward(gunangle);
   var_f901cb7707ef1b2c = grenade.weapon_name;
-  function_92580d8a2fdccb7b("equip_thermobaric_pool_mp_p", grenade.spawnpos, 5000);
+  hintscriptable("equip_thermobaric_pool_mp_p", grenade.spawnpos, 5000);
   grenade waittill("explode", position);
   function_90a9e9f5e4922a2a(position, gunforward, var_f901cb7707ef1b2c, undefined, bundle, blueprintindex, grenade.weapon_object);
 }
@@ -93,8 +93,8 @@ function function_90a9e9f5e4922a2a(position, gunforward, var_f901cb7707ef1b2c, f
   function_8bc975f46b0dca4(istouchingground, position, bundle, blueprintindex);
 
   if(function_74a4a69afb4bc82b(level.var_1310e63387ada26, #"do_fire") == 1 && istouchingground && issharedfuncdefined("molotov", "molotov_simulate_impact")) {
-    var_810c15bb2f4abd89 = function_696473ef4d75f1d3(bundle, blueprintindex);
-    thread thermobaric_fire(gunforward, groundposition, var_810c15bb2f4abd89, objweapon);
+    blueprintdefindex = function_696473ef4d75f1d3(bundle, blueprintindex);
+    thread thermobaric_fire(gunforward, groundposition, blueprintdefindex, objweapon);
   }
 
   explosionradius = getgrenadedamageradius(var_f901cb7707ef1b2c);
@@ -112,14 +112,14 @@ function function_90a9e9f5e4922a2a(position, gunforward, var_f901cb7707ef1b2c, f
 
 function function_8bc975f46b0dca4(istouchingground, position, bundle, blueprintindex) {
   if(istouchingground) {
-    function_1792d9f5ade0ae4a(bundle, blueprintindex, "ground_explosion", position);
+    genericblueprint_playfx(bundle, blueprintindex, "ground_explosion", position);
     return;
   }
 
-  function_1792d9f5ade0ae4a(bundle, blueprintindex, "air_explosion", position);
+  genericblueprint_playfx(bundle, blueprintindex, "air_explosion", position);
 }
 
-function thermobaric_fire(gunforward, groundposition, var_810c15bb2f4abd89, objweapon) {
+function thermobaric_fire(gunforward, groundposition, blueprintdefindex, objweapon) {
   wait 0.25;
   worldup = (0, 0, 1);
   right = vectorcross(gunforward, worldup);
@@ -127,18 +127,18 @@ function thermobaric_fire(gunforward, groundposition, var_810c15bb2f4abd89, objw
   angles = axistoangles(forward, right, worldup);
   angles = (angles[0], angles[1], 0);
   velocity = rotatepointaroundvector(right, forward, function_74a4a69afb4bc82b(level.var_1310e63387ada26, #"hash_b92a2351a80ffbe8")) * function_74a4a69afb4bc82b(level.var_1310e63387ada26, #"hash_c1623ae8f1fff702");
-  firesource = function_13665242ac5e0b29(angles, groundposition, var_810c15bb2f4abd89, objweapon);
+  firesource = thermobaric_make_fire_source(angles, groundposition, blueprintdefindex, objweapon);
   [[getsharedfunc("molotov", "molotov_simulate_impact")]](firesource, groundposition, angles, undefined, velocity, gettime(), "equip_thermobaric_pool_mp_p");
 }
 
-function function_13665242ac5e0b29(angles, position, var_810c15bb2f4abd89, objweapon) {
+function thermobaric_make_fire_source(angles, position, blueprintdefindex, objweapon) {
   firesource = spawn("script_origin", position);
   firesource.angles = angles;
   firesource.owner = self;
   firesource.team = self.team;
   firesource.script_noteworthy = "thermobaric_fire";
   firesource.weapon_name = level.var_1310e63387ada26;
-  firesource.var_810c15bb2f4abd89 = var_810c15bb2f4abd89;
+  firesource.blueprintdefindex = blueprintdefindex;
   firesource.var_e569b726ededed94 = spawnStruct();
   firesource.var_e569b726ededed94.var_e0cf068ccab49e34 = function_74a4a69afb4bc82b(level.var_1310e63387ada26, #"hash_d98d6e38f81f7c43");
   firesource.var_e569b726ededed94.var_74fbf35a2265fa59 = function_74a4a69afb4bc82b(level.var_1310e63387ada26, #"hash_d511323888718c");

@@ -1039,9 +1039,9 @@ function function_a9a57668997e3c85(ishaywire, islauncher) {
   scripts\mp\utility\player::codcastersetplayerstatuseffect("shock", 0);
 }
 
-function function_c927fd013fc6e502(var_91beb5c3a5ab6910, bundle) {
-  victim = var_91beb5c3a5ab6910.victim;
-  objweapon = var_91beb5c3a5ab6910.objweapon;
+function function_c927fd013fc6e502(haywiredata, bundle) {
+  victim = haywiredata.victim;
+  objweapon = haywiredata.objweapon;
 
   print("<dev string:x2e9>");
 
@@ -1076,8 +1076,8 @@ function function_c927fd013fc6e502(var_91beb5c3a5ab6910, bundle) {
     victim clearhanging();
   }
 
-  if(isDefined(var_91beb5c3a5ab6910.victim.var_aa6fe6af4cbbdd47)) {
-    var_91beb5c3a5ab6910.victim thread[[var_91beb5c3a5ab6910.victim.var_aa6fe6af4cbbdd47]](var_91beb5c3a5ab6910);
+  if(isDefined(haywiredata.victim.var_aa6fe6af4cbbdd47)) {
+    haywiredata.victim thread[[haywiredata.victim.var_aa6fe6af4cbbdd47]](haywiredata);
   }
 
   curweapon = victim getcurrentweapon();
@@ -1438,12 +1438,12 @@ function function_84422a637aa542e2(weaponname) {
   }
 }
 
-function shockstick_haywireagent(var_91beb5c3a5ab6910) {
+function shockstick_haywireagent(haywiredata) {
   level endon("game_ended");
-  victim = var_91beb5c3a5ab6910.victim;
-  attacker = var_91beb5c3a5ab6910.attacker;
-  objweapon = var_91beb5c3a5ab6910.objweapon;
-  inflictor = var_91beb5c3a5ab6910.inflictor;
+  victim = haywiredata.victim;
+  attacker = haywiredata.attacker;
+  objweapon = haywiredata.objweapon;
+  inflictor = haywiredata.inflictor;
 
   if(isstruct(inflictor)) {
     inflictor = attacker;
@@ -1452,7 +1452,7 @@ function shockstick_haywireagent(var_91beb5c3a5ab6910) {
   if(victim.health > 0 && !victim scripts\asm\asm_bb::bb_isanimScripted()) {
     firstshock = gettime() > victim._blackboard.var_dc51d4ea36da3ae1 + getdvarint(@ "hash_acf5b8fed3c019");
     victim._blackboard.var_dc51d4ea36da3ae1 = gettime();
-    var_4e1c44370f1101bb = 0;
+    newshockstick = 0;
 
     if(!isDefined(victim.shocksticks)) {
       victim.shocksticks = [];
@@ -1460,13 +1460,13 @@ function shockstick_haywireagent(var_91beb5c3a5ab6910) {
 
     if(!array_contains(victim.shocksticks, self)) {
       victim.shocksticks[victim.shocksticks.size] = self;
-      var_4e1c44370f1101bb = 1;
+      newshockstick = 1;
     }
 
     params = spawnStruct();
-    params.var_91beb5c3a5ab6910 = var_91beb5c3a5ab6910;
+    params.haywiredata = haywiredata;
     params.firstshock = firstshock;
-    params.var_4e1c44370f1101bb = var_4e1c44370f1101bb;
+    params.newshockstick = newshockstick;
     victim callback::callback("shockStick_agentApplyHaywire", params);
 
     if(istrue(victim.allowpain) && victim asmhaspainstate(victim.asmname) && firstshock) {
@@ -1511,7 +1511,7 @@ function function_46b866d198a76ddc(data, fromdeath) {
 
     if(isagent(data.victim)) {
       params = spawnStruct();
-      params.var_91beb5c3a5ab6910 = data;
+      params.haywiredata = data;
       params.fromdeath = fromdeath;
       data.victim callback::callback("shockStick_agentClearHaywire", params);
 

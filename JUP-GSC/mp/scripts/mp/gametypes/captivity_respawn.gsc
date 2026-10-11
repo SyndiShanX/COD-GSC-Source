@@ -42,10 +42,10 @@ function init() {
   level.gulag.streamtimeout = getdvarint(@ "hash_901c31aaa4eee907", 9);
   level.gulag.introcinematic = getdvarint(@ "hash_90dc58d81378e5b0", 1);
   level.gulag.var_d373eba3425dcc77 = getdvarint(@ "hash_7ea3ac91f30ce5a5", 41000);
-  level.captivity_respawn.var_477bd548940c3a78 = undefined;
+  level.captivity_respawn.binkname = undefined;
 
   if(isDefined(level.gamemodebundle) && isDefined(level.gamemodebundle.var_b36b2d9f357a3fd7)) {
-    level.captivity_respawn.var_477bd548940c3a78 = level.gamemodebundle.var_b36b2d9f357a3fd7;
+    level.captivity_respawn.binkname = level.gamemodebundle.var_b36b2d9f357a3fd7;
   } else {
     assertmsg("<dev string:x1c>");
     level.gulag.introcinematic = 0;
@@ -178,7 +178,7 @@ function private initplayerjail() {
   starttime = gettime();
   self.entergulagwait = 1;
   self.var_908f8ac4bbcdb65e = 1;
-  scripts\mp\gametypes\br_gulag::playerpreloadintrocinematic(level.captivity_respawn.var_477bd548940c3a78);
+  scripts\mp\gametypes\br_gulag::playerpreloadintrocinematic(level.captivity_respawn.binkname);
   namespace_6499f2212dc52bbd::function_8b39e363ca709341();
   self.var_57c207fde9b78089 = 1;
 
@@ -302,7 +302,7 @@ function private function_46cca89beee3a842() {
 function private function_178d579cd5f260b9() {
   level endon("game_ended");
 
-  while(!function_45fad871d0bee0f2(level.captivity_respawn.var_8c731182d88e8118)) {
+  while(!queue_isempty(level.captivity_respawn.var_8c731182d88e8118)) {
     queuedplayer = queue_peek(level.captivity_respawn.var_8c731182d88e8118);
 
     if(!isDefined(queuedplayer) || istrue(queuedplayer.isdisconnecting)) {
@@ -424,11 +424,11 @@ function private function_e32dc34d871dad4e() {
     var_44fa68b2f93418ac = scripts\cp_mp\agents\ai_spawn_director::function_1ceed24d075a0981(self.var_f9e06ac9a9bfd0b2.target);
 
     if(var_44fa68b2f93418ac.size > 0) {
-      var_ad46aadd4e3290d7 = var_44fa68b2f93418ac[0];
+      directorrequestid = var_44fa68b2f93418ac[0];
 
-      if(isDefined(var_ad46aadd4e3290d7)) {
-        scripts\cp_mp\agents\ai_spawn_director::function_e4a67fe4ddca7ed5(var_ad46aadd4e3290d7, &function_48e29eadb9a298b2, self.var_f9e06ac9a9bfd0b2);
-        function_fc38783a3da0bc71(var_ad46aadd4e3290d7, 1);
+      if(isDefined(directorrequestid)) {
+        scripts\cp_mp\agents\ai_spawn_director::function_e4a67fe4ddca7ed5(directorrequestid, &function_48e29eadb9a298b2, self.var_f9e06ac9a9bfd0b2);
+        function_fc38783a3da0bc71(directorrequestid, 1);
       }
     }
   }
@@ -625,7 +625,7 @@ function private function_22d44b07ad53078d() {
 
         namespace_9823ee6035594d67::function_eecb9fd7f5e8181b(respawnnode);
         setupprops(respawnnode);
-        var_55a8cd2462d707dc = array_combine(getStructArray(respawnnode.target, "targetname"), getEntArray(respawnnode.target, "targetname"), function_f159c10d5cf8f0b4(respawnnode.target, "targetname"));
+        var_55a8cd2462d707dc = array_combine(getStructArray(respawnnode.target, "targetname"), getEntArray(respawnnode.target, "targetname"), getnoentvolumearray(respawnnode.target, "targetname"));
 
         foreach(node in var_55a8cd2462d707dc) {
           if(!isDefined(node.script_noteworthy)) {

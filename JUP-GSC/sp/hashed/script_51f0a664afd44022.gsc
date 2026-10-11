@@ -165,13 +165,13 @@ function function_ea6067a2ca8fb1ff() {
 function function_706ab63d4d8f034b() {
   var_f2aa214cfc7d511c = (-9432, -14365, 1517);
   var_3565090736b4c4b5 = snd_play([5, "jup_vip_helicopter_static_lp", 3], var_f2aa214cfc7d511c);
-  function_74726126b3d8b0aa(var_3565090736b4c4b5, "flag_infil_chopper_land", 6);
+  snd_stop_on_level_notify(var_3565090736b4c4b5, "flag_infil_chopper_land", 6);
 }
 
 function function_3024fd1bd3bebfe() {
   level.heli playSound("jup_vip_helicopter_descend_start");
   var_7b04d77cb9dacb0d = snd_play([5.2, "jup_vip_helicopter_descend_hover_lp", 5.4], level.heli);
-  function_74726126b3d8b0aa(var_7b04d77cb9dacb0d, "flag_charlie_explosion", 4.5);
+  snd_stop_on_level_notify(var_7b04d77cb9dacb0d, "flag_charlie_explosion", 4.5);
 }
 
 function function_45f94918253b138a() {
@@ -181,7 +181,7 @@ function function_45f94918253b138a() {
 function function_f3657f158f212b7d() {
   level.heli playSound("jup_vip_helicopter_descend_lp_dist_start");
   var_1485b23140fefc63 = snd_play([7, "jup_vip_helicopter_descend_lp_dist", 4.5], level.heli);
-  function_74726126b3d8b0aa(var_1485b23140fefc63, "infil_heli_stop_targeting", 8);
+  snd_stop_on_level_notify(var_1485b23140fefc63, "infil_heli_stop_targeting", 8);
 }
 
 function function_1334612993990dfa() {}
@@ -363,10 +363,10 @@ function function_bb508ef505b312b2(bottom_left_riot_shield_guy_01, bottom_left_r
   var_3f307c332cffe3a7 = snd_play("jup_vip_descend_riot_shield_lp_02", bottom_left_riot_shield_guy_02);
   var_820c6650f38e6d26 = snd_play("jup_vip_descend_riot_shield_lp_03", bottom_left_riot_shield_guy_03);
   var_475f70641c9059e5 = snd_play("jup_vip_descend_riot_shield_lp_04", bottom_left_riot_shield_guy_04);
-  function_c5647295e3ac75df(var_d6e8221d58ac5340, bottom_left_riot_shield_guy_01, "aud_riot_guy_interuppted", 0.25);
-  function_c5647295e3ac75df(var_3f307c332cffe3a7, bottom_left_riot_shield_guy_02, "aud_riot_guy_interuppted", 0.25);
-  function_c5647295e3ac75df(var_820c6650f38e6d26, bottom_left_riot_shield_guy_03, "aud_riot_guy_interuppted", 0.25);
-  function_c5647295e3ac75df(var_475f70641c9059e5, bottom_left_riot_shield_guy_04, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_d6e8221d58ac5340, bottom_left_riot_shield_guy_01, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_3f307c332cffe3a7, bottom_left_riot_shield_guy_02, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_820c6650f38e6d26, bottom_left_riot_shield_guy_03, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_475f70641c9059e5, bottom_left_riot_shield_guy_04, "aud_riot_guy_interuppted", 0.25);
 }
 
 function function_6bf4417f8523d77f(bottom_right_riot_shield_guy_01, bottom_right_riot_shield_guy_02, bottom_right_riot_shield_guy_03, bottom_right_riot_shield_guy_04, bottom_right_riot_shield_guy_06) {
@@ -376,11 +376,11 @@ function function_6bf4417f8523d77f(bottom_right_riot_shield_guy_01, bottom_right
   var_cf6fb12e2ae43305 = snd_play("jup_vip_descend_riot_shield_lp_03", bottom_right_riot_shield_guy_03);
   var_e81a71b06b63c46 = snd_play("jup_vip_descend_riot_shield_lp_04", bottom_right_riot_shield_guy_04);
   var_c73fbcfd3b5189c7 = snd_play("jup_vip_descend_riot_shield_lp_05", bottom_right_riot_shield_guy_06);
-  function_c5647295e3ac75df(var_7b1ff561c65f6bcb, bottom_right_riot_shield_guy_01, "aud_riot_guy_interuppted", 0.25);
-  function_c5647295e3ac75df(var_33bafb43fad44e64, bottom_right_riot_shield_guy_02, "aud_riot_guy_interuppted", 0.25);
-  function_c5647295e3ac75df(var_cf6fb12e2ae43305, bottom_right_riot_shield_guy_03, "aud_riot_guy_interuppted", 0.25);
-  function_c5647295e3ac75df(var_e81a71b06b63c46, bottom_right_riot_shield_guy_04, "aud_riot_guy_interuppted", 0.25);
-  function_c5647295e3ac75df(var_c73fbcfd3b5189c7, bottom_right_riot_shield_guy_06, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_7b1ff561c65f6bcb, bottom_right_riot_shield_guy_01, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_33bafb43fad44e64, bottom_right_riot_shield_guy_02, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_cf6fb12e2ae43305, bottom_right_riot_shield_guy_03, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_e81a71b06b63c46, bottom_right_riot_shield_guy_04, "aud_riot_guy_interuppted", 0.25);
+  snd_stop_on_ent_notify(var_c73fbcfd3b5189c7, bottom_right_riot_shield_guy_06, "aud_riot_guy_interuppted", 0.25);
 }
 
 function mattress_drop() {
@@ -1396,7 +1396,7 @@ function function_c3a4d38367470b67() {
 function function_fdf48407f0c84ed1() {
   level.heli playsoundonmovingent("jup_vip_helicopter_courtyard2_start");
   var_7b04d77cb9dacb0d = snd_play([8, "jup_vip_helicopter_courtyard2_patrol_engine_lp", 6], level.heli);
-  function_74726126b3d8b0aa(var_7b04d77cb9dacb0d, "flag_courtyard_exit_passed_helipad", 8);
+  snd_stop_on_level_notify(var_7b04d77cb9dacb0d, "flag_courtyard_exit_passed_helipad", 8);
 }
 
 function function_d209a72b1029d79e() {
@@ -1408,7 +1408,7 @@ function function_d209a72b1029d79e() {
   var_bfe0482014f91c86 = snd_play([10, "jup_vip_helicopter_tunnel_hover_engine_lp", 4], level.var_8906fd70bcda7978);
   wait 8;
   level.player clearsoundsubmix("sp_jup_vip_helicopter_tunnel", 1);
-  function_74726126b3d8b0aa(var_bfe0482014f91c86, "flag_slide_scene_start", 8);
+  snd_stop_on_level_notify(var_bfe0482014f91c86, "flag_slide_scene_start", 8);
   thread function_b647e5bac9f2836e();
 }
 

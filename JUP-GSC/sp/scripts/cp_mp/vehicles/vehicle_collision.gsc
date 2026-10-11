@@ -220,10 +220,10 @@ function private function_10d733624bfda604(vehicle, otherent, body0, body1, flag
     otherdata = function_29b4292c92443328(otherent function_d93ec4635290febd()).damage;
     baseclass = default_to(basedata.class, "medium");
     otherclass = default_to(otherdata.class, "medium");
-    [var_392a5991268e9527, var_5df589527e694864] = function_1ab37f5b6734e44d(baseclass, otherclass);
-    [var_11e6db65a89a9642, var_aef2e55425c6c3e7] = function_dcbd541c875c2d66(length(var_8d948973eddceb98), length(var_dfc13ccee5420527));
-    basedamage = ter_op(isDefined(vehicle.maxhealth), vehicle.maxhealth, 1) * 2 * damagepercentage * var_11e6db65a89a9642 * var_392a5991268e9527 * function_53c04cefb8acf030(baseclass) * level.var_9d53e72e2ab97f5;
-    otherdamage = ter_op(isDefined(otherent.maxhealth), otherent.maxhealth, 1) * 2 * damagepercentage * var_aef2e55425c6c3e7 * var_5df589527e694864 * function_53c04cefb8acf030(otherclass) * level.var_9d53e72e2ab97f5;
+    [baseweightratio, otherweightratio] = function_1ab37f5b6734e44d(baseclass, otherclass);
+    [basespeedratio, otherspeedratio] = function_dcbd541c875c2d66(length(var_8d948973eddceb98), length(var_dfc13ccee5420527));
+    basedamage = ter_op(isDefined(vehicle.maxhealth), vehicle.maxhealth, 1) * 2 * damagepercentage * basespeedratio * baseweightratio * function_53c04cefb8acf030(baseclass) * level.var_9d53e72e2ab97f5;
+    otherdamage = ter_op(isDefined(otherent.maxhealth), otherent.maxhealth, 1) * 2 * damagepercentage * otherspeedratio * otherweightratio * function_53c04cefb8acf030(otherclass) * level.var_9d53e72e2ab97f5;
     vehicledriver = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getdriver(vehicle);
     otherdriver = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getdriver(otherent);
 
@@ -242,10 +242,10 @@ function private function_10d733624bfda604(vehicle, otherent, body0, body1, flag
     function_9c23735bf7534afa(vehicle, basedamage * 0.75, position, radius);
     function_9c23735bf7534afa(otherent, otherdamage * 0.75, position, radius);
 
-    if(var_aef2e55425c6c3e7 > 0.9 && isDefined(vehicle.owner) && scripts\cp_mp\vehicles\vehicle::vehicle_isenemytoplayer(otherent, vehicle.owner)) {
-      vehicle.owner scripts\cp_mp\challenges::function_5c3aa65db46763ff(vehicle, "high_speed_ram");
-    } else if(var_11e6db65a89a9642 > 0.9 && isDefined(otherent.owner) && scripts\cp_mp\vehicles\vehicle::vehicle_isenemytoplayer(vehicle, otherent.owner)) {
-      otherent.owner scripts\cp_mp\challenges::function_5c3aa65db46763ff(otherent, "high_speed_ram");
+    if(otherspeedratio > 0.9 && isDefined(vehicle.owner) && scripts\cp_mp\vehicles\vehicle::vehicle_isenemytoplayer(otherent, vehicle.owner)) {
+      vehicle.owner scripts\cp_mp\challenges::reportvehicleevent(vehicle, "high_speed_ram");
+    } else if(basespeedratio > 0.9 && isDefined(otherent.owner) && scripts\cp_mp\vehicles\vehicle::vehicle_isenemytoplayer(vehicle, otherent.owner)) {
+      otherent.owner scripts\cp_mp\challenges::reportvehicleevent(otherent, "high_speed_ram");
     }
 
     return;
@@ -336,39 +336,39 @@ function private function_74ce9dc0a18ac393(vehicle, position, normal, timeinair)
 
   damagepercentage = 1;
   wheeldamage = 50;
-  var_5d5f540ec81c82a9 = 0;
+  wheelstodamage = 0;
 
   switch (damagetier) {
     case 5:
       damagepercentage = 1;
       wheeldamage = 250;
-      var_5d5f540ec81c82a9 = 4;
+      wheelstodamage = 4;
       break;
     case 4:
       damagepercentage = 0.8;
       wheeldamage = 250;
-      var_5d5f540ec81c82a9 = 4;
+      wheelstodamage = 4;
       break;
     case 3:
       damagepercentage = 0.6;
       wheeldamage = 150;
-      var_5d5f540ec81c82a9 = 2;
+      wheelstodamage = 2;
       break;
     case 2:
       damagepercentage = 0.4;
       wheeldamage = 100;
-      var_5d5f540ec81c82a9 = 1;
+      wheelstodamage = 1;
       break;
     case 1:
       damagepercentage = 0.2;
       wheeldamage = 40;
-      var_5d5f540ec81c82a9 = 1;
+      wheelstodamage = 1;
       break;
     default:
       break;
   }
 
-  function_ecdf1217e332c7d7(vehicle, wheeldamage, position, var_5d5f540ec81c82a9);
+  function_ecdf1217e332c7d7(vehicle, wheeldamage, position, wheelstodamage);
   class = default_to(data.class, "medium");
   damage = function_a991a29602381df7(class) * damagepercentage * vehicle.maxhealth;
 
@@ -380,7 +380,7 @@ function private function_74ce9dc0a18ac393(vehicle, position, normal, timeinair)
   vehicle vehicle_damage_disablestatedamagefloor(0);
 
   if(timeinair > 5 && isDefined(vehicle.owner)) {
-    vehicle.owner scripts\cp_mp\challenges::function_5c3aa65db46763ff(vehicle, "vehicle_hang_time");
+    vehicle.owner scripts\cp_mp\challenges::reportvehicleevent(vehicle, "vehicle_hang_time");
   }
 }
 
@@ -391,8 +391,8 @@ function private function_593a829032a8c193(vehicle, ent) {
 
   ent = default_to(ent.cover, ent);
 
-  if(isDefined(ent.equipmentref) && ent.equipmentref == "equip_tac_cover" && isDefined(ent.deletefunc) && !istrue(ent.var_455a731f2701dd65)) {
-    ent.var_455a731f2701dd65 = 1;
+  if(isDefined(ent.equipmentref) && ent.equipmentref == "equip_tac_cover" && isDefined(ent.deletefunc) && !istrue(ent.ishitbyvehicle)) {
+    ent.ishitbyvehicle = 1;
     ent thread[[ent.deletefunc]](undefined, 0, 0);
     return;
   }
@@ -415,9 +415,9 @@ function private function_593a829032a8c193(vehicle, ent) {
       return;
     }
 
-    if(isDefined(turret.var_34d24162c014a897) && !istrue(turret.var_455a731f2701dd65)) {
-      turret.var_455a731f2701dd65 = 1;
-      turret thread[[turret.var_34d24162c014a897]](vehicle);
+    if(isDefined(turret.hitbyvehiclefunc) && !istrue(turret.ishitbyvehicle)) {
+      turret.ishitbyvehicle = 1;
+      turret thread[[turret.hitbyvehiclefunc]](vehicle);
     }
   }
 }
@@ -450,9 +450,9 @@ function private function_67d6d7481d8ac827(vehicle) {
   return vehicle function_c33dba6864d01d35();
 }
 
-function private function_1ab37f5b6734e44d(var_1a4e28225e61f02f, var_1a4e29225e61f262) {
-  weight1 = function_a46de67ab094e684(var_1a4e28225e61f02f);
-  weight2 = function_a46de67ab094e684(var_1a4e29225e61f262);
+function private function_1ab37f5b6734e44d(damageclass1, damageclass2) {
+  weight1 = function_a46de67ab094e684(damageclass1);
+  weight2 = function_a46de67ab094e684(damageclass2);
   sum = weight1 + weight2;
   return [weight2 / sum, weight1 / sum];
 }
@@ -590,12 +590,12 @@ function vehicle_collision_ignorefutureevent(vehicle, othervehicle, duration) {
     vehicle.vehcolignorelist = [];
   }
 
-  var_df5b18e61839e87e = othervehicle getentitynumber();
-  vehicle.vehcolignorelist[var_df5b18e61839e87e] = othervehicle;
+  othervehicleid = othervehicle getentitynumber();
+  vehicle.vehcolignorelist[othervehicleid] = othervehicle;
   wait duration;
 
   if(isDefined(vehicle) && isDefined(vehicle.vehcolignorelist)) {
-    vehicle.vehcolignorelist[var_df5b18e61839e87e] = undefined;
+    vehicle.vehcolignorelist[othervehicleid] = undefined;
   }
 
   if(isDefined(vehicle) && isDefined(vehicle.vehcolignorelist) && vehicle.vehcolignorelist.size == 0) {

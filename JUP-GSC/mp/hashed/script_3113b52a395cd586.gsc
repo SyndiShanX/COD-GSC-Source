@@ -72,7 +72,7 @@ function private function_69ac00aaca3df9d2() {
   }
 
   foreach(index, entry in var_48b94be65b2a158e.var_12c7b012c140fe7f) {
-    scriptablename = entry.var_5e40f85b57215816;
+    scriptablename = entry.scriptableasset;
 
     if(!isDefined(scriptablename)) {
       printlog("parseToolUseBundles: Invalid ingredient at scriptableToolUseList[" + index + "] in bundle " + ingredienttooluselistbundlename);
@@ -245,11 +245,11 @@ function function_9ea56c6edd53918(instance, part, state, player, useduration) {
     return;
   }
 
-  if(!isDefined(state) || function_1823ff50bb28148d(state) != toolsettings.usestatename) {
+  if(!isDefined(state) || getxhash(state) != toolsettings.usestatename) {
     return;
   }
 
-  if(!isDefined(part) || function_1823ff50bb28148d(part) != toolsettings.usepartname) {
+  if(!isDefined(part) || getxhash(part) != toolsettings.usepartname) {
     return;
   }
 
@@ -742,7 +742,7 @@ function private function_38e09559680e7d91(backpackstackindex, var_c94ffa886eb26
     return;
   }
 
-  remainingusecount = namespace_aead94004cf4c147::function_897b29adb37f06a7(backpackstackindex);
+  remainingusecount = namespace_aead94004cf4c147::getquantityatbackpackindex(backpackstackindex);
 
   if(!isDefined(remainingusecount)) {
     return;
@@ -828,17 +828,17 @@ function private function_7084e044e0ba070a() {
   debugposy = 500;
   debugtextcolor = (0, 1, 0);
   debugtextscale = 1;
-  var_9712576966b33c8b = 1;
+  debugdrawframeduration = 1;
   tabletitle = "<dev string:xaa>";
   var_cd8110645a9a2632 = ["<dev string:xb9>", "<dev string:xc9>", "<dev string:xd7>", "<dev string:xea>"];
   var_871bdbc7e5abb341 = [];
   var_871bdbc7e5abb341[0] = function_c1c6eddd67bf7457(player, player getcurrentweapon(), "<dev string:x10f>");
   var_871bdbc7e5abb341[1] = function_c1c6eddd67bf7457(player, player getcurrentmonitoredweaponswitchweapon(), "<dev string:x123>");
   var_871bdbc7e5abb341[2] = function_c1c6eddd67bf7457(player, player gethighpriorityweapon(), "<dev string:x14c>");
-  tablesize = namespace_36be7f9eab6ca7bc::function_b1ea22d278623807(debugposx, debugposy, tabletitle, var_cd8110645a9a2632, var_871bdbc7e5abb341, debugtextcolor, debugtextscale, var_9712576966b33c8b);
+  tablesize = namespace_36be7f9eab6ca7bc::function_b1ea22d278623807(debugposx, debugposy, tabletitle, var_cd8110645a9a2632, var_871bdbc7e5abb341, debugtextcolor, debugtextscale, debugdrawframeduration);
   debugposy += tablesize[1];
   debugtext = "<dev string:x165>" + player isanymonitoredweaponswitchinprogress();
-  printtoscreen2d(debugposx, debugposy, debugtext, debugtextcolor, debugtextscale, var_9712576966b33c8b);
+  printtoscreen2d(debugposx, debugposy, debugtext, debugtextcolor, debugtextscale, debugdrawframeduration);
   debugposy += offsety;
 }
 

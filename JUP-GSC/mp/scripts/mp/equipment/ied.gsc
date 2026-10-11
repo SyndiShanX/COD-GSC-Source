@@ -32,7 +32,7 @@ function ied_used(grenade) {
     grenade[[getsharedfunc(#"hash_d8976e21a6adafba", #"hash_ca0042e3cac99672")]](grenade);
   }
 
-  grenade.bundle = scripts\mp\equipment::function_2113b6f7cb462692(grenade.weapon_name);
+  grenade.bundle = scripts\mp\equipment::getequipmentbundlefromweaponname(grenade.weapon_name);
   printgameaction("IED thrown", grenade.owner);
   grenade scripts\cp_mp\ent_manager::registerspawn(1, &function_5481370bf1e83031);
 

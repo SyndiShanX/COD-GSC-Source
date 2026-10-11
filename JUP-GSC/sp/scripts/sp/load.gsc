@@ -141,7 +141,7 @@ function main() {
   scripts\sp\destructibles\red_barrel::red_barrel_init();
   scripts\sp\destructibles\water_barrel::water_barrel_init();
   scripts\sp\destructibles\oil_barrel::oil_barrel_init();
-  scripts\sp\destructibles\log_pile::function_51b91752c24c4995();
+  scripts\sp\destructibles\log_pile::log_pile_init();
   scripts\sp\destructibles\destructible_vehicle::destructible_vehicle_init();
   scripts\engine\sp\utility::init_manipulate_ent();
   scripts\sp\spawner::main();
@@ -190,10 +190,10 @@ function main() {
 }
 
 function function_39528e3544b58a6c() {
-  level.projectbundle = function_811510b694ddd963();
-  level.gamemodebundle = function_1e231fc15fdab31d();
-  level.gametypebundle = function_90b5b6e99aef29d6();
-  level.mapbundle = function_79404c2fcca1c184();
+  level.projectbundle = getprojectscriptbundle();
+  level.gamemodebundle = getgamemodescriptbundle();
+  level.gametypebundle = getgametypescriptbundle();
+  level.mapbundle = getmapscriptbundle();
 }
 
 function anim_earlyinit() {

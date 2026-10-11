@@ -52,10 +52,10 @@ function shouldstartarrival(asmname, statename, tostatename, params) {
     return false;
   }
 
-  var_6b923ad9da57b2cf = distance(self.origin, self.pathgoalpos);
+  dist_to_goal = distance(self.origin, self.pathgoalpos);
   var_1047326b5402e964 = getmaxarrivaldistfornodetype(nodetype);
 
-  if(var_6b923ad9da57b2cf > var_1047326b5402e964) {
+  if(dist_to_goal > var_1047326b5402e964) {
     return false;
   }
 
@@ -138,14 +138,14 @@ function chooseanim_arrival(asmname, statename, params) {
 function function_cf21d79464e005d2(node) {
   nodepos = node.origin;
 
-  if(shouldinitiallyattackfromexposed() && self._blackboard.var_4f2c03980416a4a9 != "none" && isDefined(node.type)) {
+  if(shouldinitiallyattackfromexposed() && self._blackboard.shouldarrivetocoverexposedstepouttype != "none" && isDefined(node.type)) {
     switch (node.type) {
       case #"hash_667bc7e605903a6c":
       case #"hash_cd3ffe799551db82":
-        if(self._blackboard.var_4f2c03980416a4a9 == "full_exposed") {
+        if(self._blackboard.shouldarrivetocoverexposedstepouttype == "full_exposed") {
           offset = (-15, -44, 0);
           nodepos += rotatevector(offset, node.angles);
-        } else if(self._blackboard.var_4f2c03980416a4a9 == "lean") {
+        } else if(self._blackboard.shouldarrivetocoverexposedstepouttype == "lean") {
           offset = (-6, -10, 0);
           nodepos += rotatevector(offset, node.angles);
         }
@@ -153,10 +153,10 @@ function function_cf21d79464e005d2(node) {
         break;
       case #"hash_55ed607005f12d49":
       case #"hash_e1d8e1adebed5a61":
-        if(self._blackboard.var_4f2c03980416a4a9 == "full_exposed") {
+        if(self._blackboard.shouldarrivetocoverexposedstepouttype == "full_exposed") {
           offset = (-15, 44, 0);
           nodepos += rotatevector(offset, node.angles);
-        } else if(self._blackboard.var_4f2c03980416a4a9 == "lean") {
+        } else if(self._blackboard.shouldarrivetocoverexposedstepouttype == "lean") {
           offset = (-6, 10, 0);
           nodepos += rotatevector(offset, node.angles);
         }
@@ -164,7 +164,7 @@ function function_cf21d79464e005d2(node) {
         break;
       case #"hash_78b110033ccb68b0":
       case #"hash_c3b74422dec48736":
-        assert(self._blackboard.var_4f2c03980416a4a9 == "full_exposed");
+        assert(self._blackboard.shouldarrivetocoverexposedstepouttype == "full_exposed");
         offset = (-8, 0, 0);
         nodepos += rotatevector(offset, node.angles);
         break;
@@ -179,9 +179,9 @@ function function_cf21d79464e005d2(node) {
   return nodepos;
 }
 
-function calculatestopdata(asmname, statename, tostatename, nodetype, var_5217df91f13c7c48, var_6164202739d4a0fb, optionalprefix, var_a9d2a260c9698ff4, var_4795faf7dae203d5, startnotetrack, endnotetrack, speedstring) {
+function calculatestopdata(asmname, statename, tostatename, nodetype, var_5217df91f13c7c48, codeapproachdir, optionalprefix, var_a9d2a260c9698ff4, overshootratio, startnotetrack, endnotetrack, speedstring) {
   node = getarrivalnode();
-  var_cd19c4c27c506f73 = undefined;
+  toanimset = undefined;
 
   if(isDefined(node) && !self btgoalvalid() && isDefined(self.scriptedarrivalent) && self.scriptedarrivalent == node) {
     if(distance2dsquared(self.scriptedarrivalent.origin, self.pathgoalpos) > 4096) {
@@ -212,10 +212,10 @@ function calculatestopdata(asmname, statename, tostatename, nodetype, var_5217df
   }
 
   if(nodetype == "Custom") {
-    tostatename = self.var_a57082fdf62bc898;
+    tostatename = self.customarrivalstate;
 
-    if(isDefined(self.var_33b4c07d1f388776)) {
-      var_cd19c4c27c506f73 = self.var_33b4c07d1f388776;
+    if(isDefined(self.customarrivalanimset)) {
+      toanimset = self.customarrivalanimset;
     }
 
     var_5217df91f13c7c48 = self.var_171120e99df3e286;
@@ -247,7 +247,7 @@ function calculatestopdata(asmname, statename, tostatename, nodetype, var_5217df
     prefixfoot = optionalprefix;
   }
 
-  var_eacf2fcf316960a0 = nodeshouldfaceangles(node);
+  nodefaceangles = nodeshouldfaceangles(node);
   yaw = undefined;
   angles = undefined;
 
@@ -256,25 +256,25 @@ function calculatestopdata(asmname, statename, tostatename, nodetype, var_5217df
       if(isDefined(node) && isDefined(node.angles)) {
         yaw = node.angles[1];
         angles = node.angles;
-        var_eacf2fcf316960a0 = 1;
+        nodefaceangles = 1;
       } else {
-        var_eacf2fcf316960a0 = 0;
+        nodefaceangles = 0;
       }
     } else {
       rotateamount = getturndesiredyaw();
       angles = (0, self.angles[1] + rotateamount, 0);
       yaw = angles[1];
-      var_eacf2fcf316960a0 = 1;
+      nodefaceangles = 1;
     }
-  } else if(var_eacf2fcf316960a0) {
+  } else if(nodefaceangles) {
     yaw = getnodeforwardyaw(node, undefined, 0);
     angles = node.angles;
   }
 
-  result = self actorcalcstopdata(goalpos, angles, getcustomarrivalangles(), var_6164202739d4a0fb, var_eacf2fcf316960a0, tostatename, yaw, prefixfoot, optionalprefix, var_a9d2a260c9698ff4, var_4795faf7dae203d5, nodetype, startnotetrack, endnotetrack, speedstring, var_cd19c4c27c506f73);
+  result = self actorcalcstopdata(goalpos, angles, getcustomarrivalangles(), codeapproachdir, nodefaceangles, tostatename, yaw, prefixfoot, optionalprefix, var_a9d2a260c9698ff4, overshootratio, nodetype, startnotetrack, endnotetrack, speedstring, toanimset);
 
   if(isDefined(result) && isDefined(node)) {
-    result.var_e411f4722cf5136a = self._blackboard.var_4f2c03980416a4a9 != "none";
+    result.var_e411f4722cf5136a = self._blackboard.shouldarrivetocoverexposedstepouttype != "none";
   }
 
   return result;
@@ -403,14 +403,14 @@ function playanim_arrival(asmname, statename, params) {
 
   arrivalstatename = statename;
 
-  if(isDefined(self.var_a57082fdf62bc898)) {
-    arrivalstatename = self.var_a57082fdf62bc898;
+  if(isDefined(self.customarrivalstate)) {
+    arrivalstatename = self.customarrivalstate;
   }
 
   stopanim = stopdata.stopanim;
 
-  if(isDefined(self.asm.customdata) && isDefined(self.var_33b4c07d1f388776)) {
-    self setoverridearchetype("animscript", self.var_33b4c07d1f388776, 1);
+  if(isDefined(self.asm.customdata) && isDefined(self.customarrivalanimset)) {
+    self setoverridearchetype("animscript", self.customarrivalanimset, 1);
   }
 
   stopxanim = asm_getxanim(arrivalstatename, stopanim);
@@ -425,7 +425,7 @@ function playanim_arrival(asmname, statename, params) {
       goalpos = self.pathgoalpos;
     }
 
-    self._blackboard.var_9f2e830204cce981 = istrue(stopdata.var_e411f4722cf5136a);
+    self._blackboard.arrivingtocoverexposed = istrue(stopdata.var_e411f4722cf5136a);
   }
 
   if(!istrue(stopdata.bskipstartcoverarrival)) {
@@ -442,8 +442,8 @@ function playanim_arrival(asmname, statename, params) {
     return;
   }
 
-  if(isDefined(self.var_18eb79d0deeb3b75)) {
-    anim_mode = self.var_18eb79d0deeb3b75;
+  if(isDefined(self.customarrivalanimmode)) {
+    anim_mode = self.customarrivalanimmode;
     self animmode(anim_mode);
   } else {
     self animmode("zonly_physics", 0);
@@ -557,19 +557,19 @@ function getstopanims(asmname, statename, approachtype, var_5217df91f13c7c48, op
   return stopanims;
 }
 
-function function_a6a36944d51a88a0(var_8e5cf88282523d3f, tracestartpos, finalpos, fraction, color, frames) {
-  if(!scripts\asm\asm::function_3271c00e44d9636b()) {
+function function_a6a36944d51a88a0(optimalstartpos, tracestartpos, finalpos, fraction, color, frames) {
+  if(!scripts\asm\asm::debug_arrivals_on_actor()) {
     return;
   }
 
-  line(var_8e5cf88282523d3f, var_8e5cf88282523d3f + (0, 0, 64), color, 1, 1, frames);
+  line(optimalstartpos, optimalstartpos + (0, 0, 64), color, 1, 1, frames);
   midpoint = vectorlerp(tracestartpos, finalpos, fraction);
   line(tracestartpos, midpoint, (0, 1, 0), 1, 1, frames);
   line(midpoint, finalpos, (1, 0, 0), 1, 1, frames);
 }
 
 function function_51eac561da90b300(goal_origin, arrival_angles) {
-  if(scripts\asm\asm::function_3271c00e44d9636b()) {
+  if(scripts\asm\asm::debug_arrivals_on_actor()) {
     forward = anglesToForward(arrival_angles);
     line(goal_origin, goal_origin + forward * 16, (1, 0.4, 0), 1, 0, 1);
     line(goal_origin, goal_origin + (0, 0, 64), (1, 0.4, 0), 1, 0, 1);

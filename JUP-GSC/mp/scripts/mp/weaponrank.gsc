@@ -21,7 +21,7 @@ function init() {
   }
 
   loadweaponranktable();
-  level.var_b883cc44c69244ca = getdvarint(@ "hash_53b03e37a92e4ce8", 1) == 1;
+  level.activearmoryenabled = getdvarint(@ "hash_53b03e37a92e4ce8", 1) == 1;
   level.var_4ea3e75e13f80da0 = getdvarfloat(@ "hash_ca4ce52ff089426", 0.2);
   level.var_b726ca5fbb4df39f = scripts\cp_mp\utility\game_utility::function_7d04fc91bee2ccd1();
   addglobalweaponrankxpmultiplier(level.var_b726ca5fbb4df39f, "online_mp_weapon_xpscale");
@@ -48,11 +48,11 @@ function onplayerconnect() {
 function loadweaponranktable() {
   level.weaponranktable = spawnStruct();
   level.weaponranktable.rankinfo = [];
-  var_c6e3b34739982959 = function_b1e11b17e1fbded3();
-  level.weaponranktable.maxrank = var_c6e3b34739982959.maxrank;
+  weaponranktablebundle = getweaponranktablebundle();
+  level.weaponranktable.maxrank = weaponranktablebundle.maxrank;
 
   for(rankid = 0; rankid <= level.weaponranktable.maxrank; rankid++) {
-    weaponranktableentry = function_91ce54da71d1008d(var_c6e3b34739982959.weaponranklist[rankid].rank);
+    weaponranktableentry = function_91ce54da71d1008d(weaponranktablebundle.weaponranklist[rankid].rank);
     rankinfo = spawnStruct();
     level.weaponranktable.rankinfo[rankid] = rankinfo;
     rankinfo.minxp = weaponranktableentry.minxp;
@@ -278,7 +278,7 @@ function getplatformweaponrankxpmultiplier() {
 }
 
 function function_9c989ce157528a7e(objweapon) {
-  if(!istrue(level.var_b883cc44c69244ca)) {
+  if(!istrue(level.activearmoryenabled)) {
     return 1;
   }
 
@@ -288,7 +288,7 @@ function function_9c989ce157528a7e(objweapon) {
 
   rootweapon = getweaponrootname(objweapon);
 
-  if(isDefined(rootweapon) && isDefined(level.weaponmapdata[rootweapon]) && istrue(level.weaponmapdata[rootweapon].var_b883cc44c69244ca)) {
+  if(isDefined(rootweapon) && isDefined(level.weaponmapdata[rootweapon]) && istrue(level.weaponmapdata[rootweapon].activearmoryenabled)) {
     return (1 + level.var_4ea3e75e13f80da0);
   }
 

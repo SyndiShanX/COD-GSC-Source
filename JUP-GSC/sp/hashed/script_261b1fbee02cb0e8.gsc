@@ -10,7 +10,7 @@
 #namespace namespace_243a54064fe38311;
 
 function autoexec main() {
-  level.var_7bf42d565645a485 = 1;
+  level.shouldinitvehicles = 1;
   function_c0b3ddc9a6bdcc46("veh_jup_mil_cargo_truck", &function_c9c6d4d13a396d8d);
 }
 

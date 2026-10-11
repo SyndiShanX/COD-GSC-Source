@@ -47,7 +47,7 @@ function saygenericdialogue(typestring) {
   voicenum = undefined;
   prefix = "generic_";
   voicestring = undefined;
-  var_46119ee4018a3e10 = undefined;
+  numvoices = undefined;
 
   if(isDefined(self.battlechatter) && isDefined(self.battlechatter.npcid)) {
     switch (self.battlechatter.npcid) {
@@ -60,14 +60,14 @@ function saygenericdialogue(typestring) {
       case #"hash_ed5cac6c000817dc":
         voicestring = self.battlechatter.npcid;
         prefix = "hero_";
-        var_46119ee4018a3e10 = 1;
+        numvoices = 1;
         break;
     }
   }
 
   if(self.unittype == "juggernaut") {
     voicestring = "juggernaut";
-    var_46119ee4018a3e10 = 8;
+    numvoices = 8;
   }
 
   if(!isDefined(voicestring)) {
@@ -78,7 +78,7 @@ function saygenericdialogue(typestring) {
       case #"unitednationshelmet":
       case #"fsa":
         voicestring = "friendly";
-        var_46119ee4018a3e10 = anim.numfriendlyvoices;
+        numvoices = anim.numfriendlyvoices;
         break;
       case #"sasfemale":
       case #"fsafemale":
@@ -88,22 +88,22 @@ function saygenericdialogue(typestring) {
       case #"russianfemale":
         voicestring = "friendly";
         prefix = "woman_";
-        var_46119ee4018a3e10 = anim.numfriendlyfemalevoices;
+        numvoices = anim.numfriendlyfemalevoices;
         break;
       case #"c6":
         voicestring = "c6";
-        var_46119ee4018a3e10 = 1;
+        numvoices = 1;
         break;
       default:
         voicestring = "enemy";
-        var_46119ee4018a3e10 = anim.numenemyvoices;
+        numvoices = anim.numenemyvoices;
         break;
     }
   }
 
   assert(isDefined(voicestring));
-  assert(isDefined(var_46119ee4018a3e10));
-  voicenum = 1 + self getentitynumber() % var_46119ee4018a3e10;
+  assert(isDefined(numvoices));
+  voicenum = 1 + self getentitynumber() % numvoices;
   assert(isDefined(voicenum));
   voicestring = voicestring + "_" + voicenum;
   soundalias = undefined;
@@ -144,14 +144,14 @@ function playfacethread(soundalias, notifystring) {
   playfacesound(soundalias);
 }
 
-function playfacesound(alias, notification, var_9a0afe8ff3d2508f) {
+function playfacesound(alias, notification, stoppable) {
   if(isai(self)) {
-    self[[anim.callbacks["PlaySoundAtViewHeight"]]](alias, notification, var_9a0afe8ff3d2508f);
+    self[[anim.callbacks["PlaySoundAtViewHeight"]]](alias, notification, stoppable);
     return;
   }
 
-  if(isDefined(notification) && isDefined(var_9a0afe8ff3d2508f)) {
-    self playSound(alias, notification, var_9a0afe8ff3d2508f);
+  if(isDefined(notification) && isDefined(stoppable)) {
+    self playSound(alias, notification, stoppable);
     return;
   }
 

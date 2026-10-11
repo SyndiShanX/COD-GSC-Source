@@ -187,7 +187,7 @@ function private function_fb5146a15cb434d2(oldstateref, data) {
 
 function private function_f58b3f0830ae1232(data, immediate) {}
 
-function private function_c92daf0d2d3b4c32(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_c92daf0d2d3b4c32(vehicle, seatid, oldseatid, player, data) {
   if(istrue(vehicle.israllypointvehicle)) {
     foreach(plr in level.players) {
       if(istrue(vehicle.revealed) || is_equal(plr.team, vehicle.team)) {
@@ -203,14 +203,14 @@ function private function_c92daf0d2d3b4c32(vehicle, seatid, var_fc7c7a874b43a31a
   }
 }
 
-function private function_1238715fb4ade17(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_1238715fb4ade17(vehicle, seatid, oldseatid, player, data) {
   if(istrue(data.success)) {
     player scripts\cp_mp\parachute::parachutecleanup();
-    function_cb229daefb97c2ee(vehicle, seatid, var_fc7c7a874b43a31a, player, data);
+    function_cb229daefb97c2ee(vehicle, seatid, oldseatid, player, data);
   }
 }
 
-function private function_cb229daefb97c2ee(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private function_cb229daefb97c2ee(vehicle, seatid, oldseatid, player, data) {
   if(seatid == "driver") {
     vehicle thread vehicle_handleflarefire(player);
     vehicle notify("palfa_driver_enter");
@@ -219,27 +219,27 @@ function private function_cb229daefb97c2ee(vehicle, seatid, var_fc7c7a874b43a31a
   }
 
   vehicle setscriptablepartstate("enterExit_audio", "enter_audio");
-  vehomn_updateomnvarsonseatenter(vehicle, var_fc7c7a874b43a31a, seatid, player);
+  vehomn_updateomnvarsonseatenter(vehicle, oldseatid, seatid, player);
 
   if(isDefined(level.var_9215e3a9dfe8a262)) {
-    [[level.var_9215e3a9dfe8a262]](vehicle, seatid, var_fc7c7a874b43a31a, player, data);
+    [[level.var_9215e3a9dfe8a262]](vehicle, seatid, oldseatid, player, data);
   }
 }
 
-function private function_b8efede8329d0df1(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_b8efede8329d0df1(vehicle, seatid, newseatid, player, data) {
   if(istrue(data.success)) {
-    function_d2053cec6126f014(vehicle, seatid, var_7558f98f3236963d, player, data);
+    function_d2053cec6126f014(vehicle, seatid, newseatid, player, data);
   }
 }
 
-function private function_d2053cec6126f014(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private function_d2053cec6126f014(vehicle, seatid, newseatid, player, data) {
   if(seatid == "driver") {
     vehicle notify("palfa_driver_exit");
     vehicle thread function_619d5050126cbfae(player);
   }
 
   if(!istrue(data.playerdisconnect)) {
-    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, var_7558f98f3236963d, player, data);
+    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, newseatid, player, data);
 
     if(!success) {
       if(issharedfuncdefined("vehicle_occupancy", "handleSuicideFromVehicles")) {
@@ -253,7 +253,7 @@ function private function_d2053cec6126f014(vehicle, seatid, var_7558f98f3236963d
   }
 
   vehicle setscriptablepartstate("enterExit_audio", "exit_audio");
-  vehomn_updateomnvarsonseatexit(vehicle, seatid, var_7558f98f3236963d, player);
+  vehomn_updateomnvarsonseatexit(vehicle, seatid, newseatid, player);
 }
 
 function private function_619d5050126cbfae(player) {
@@ -289,7 +289,7 @@ function private function_653b91b3edf76c93() {
   return pos;
 }
 
-function private function_90edb9e4cbf08215(vehicle, var_9de41f2ee77c33ba, var_3f68c37bafd38606, player, data) {}
+function private function_90edb9e4cbf08215(vehicle, reenterseatid, var_3f68c37bafd38606, player, data) {}
 
 function private vehicle_handleflarerecharge() {
   self endon("death");
@@ -375,7 +375,7 @@ function function_8c08b5b97a81fb61(vehicle1, vehicle2, position, normal, normals
   }
 
   if(isDefined(hitvehicle.targetname) && hitvehicle.targetname == "dmz_ai_chopper") {
-    function_f3bb4f4911a1beb2("veh9_mil_air_heli_hind_physics_limbo", "explode");
+    callsharedfunc("veh9_mil_air_heli_hind_physics_limbo", "explode");
     return;
   }
 
@@ -383,7 +383,7 @@ function function_8c08b5b97a81fb61(vehicle1, vehicle2, position, normal, normals
     hitvehicle dodamage(10000000, position);
 
     if(isDefined(hitvehicle.spawnernode)) {
-      function_f3bb4f4911a1beb2("ai_heli_reinforce", "release_path", hitvehicle.spawnernode);
+      callsharedfunc("ai_heli_reinforce", "release_path", hitvehicle.spawnernode);
     }
 
     return;
@@ -397,6 +397,6 @@ function function_8c08b5b97a81fb61(vehicle1, vehicle2, position, normal, normals
 
   impulsestrength = getdvarint(@ "hash_eaab71fc906a7125", 600);
   var_18733544e2015df = vectorNormalize(hitvehicle.origin - position);
-  hitvehicle function_e0201404a8b6f664(var_18733544e2015df, impulsestrength);
+  hitvehicle vehphys_impulse(var_18733544e2015df, impulsestrength);
   hitvehicle.var_3abb0e413fb97b63 = gettime();
 }

@@ -74,4 +74,4 @@ function vehicle() {
   level.scr_anim["heli"]["exfil_exit"] = % jup_dam_exfil_helicopter_exit_01;
 }
 
-function function_9d6a1fa3094d9e8() {}
+function mp_vehicles() {}

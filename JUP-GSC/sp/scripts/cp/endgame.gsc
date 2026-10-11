@@ -249,7 +249,7 @@ function endgame(winner, endreasontextindex) {
 
   if(endreasontextindex != 4 || level.gametype != "dungeons") {
     if(result == "SUCCESS" && !utility::is_demo()) {
-      map_names = function_a629869e3bbbe3c5("sp_jup");
+      map_names = getmapnamesforgamemode("sp_jup");
       var_e517a3162a907782 = -1;
 
       for(i = 0; i < map_names.size - 1; i++) {
@@ -261,13 +261,13 @@ function endgame(winner, endreasontextindex) {
 
       if(var_e517a3162a907782 > -1) {
         var_2d6a4ac260e40fea = map_names[var_e517a3162a907782];
-        var_abc09d1bef94f469 = function_b146e0d2e5d91eef(var_2d6a4ac260e40fea);
+        var_abc09d1bef94f469 = getmapinfobundle(var_2d6a4ac260e40fea);
         level.player setprogressiondata("spData", "currentMission", var_2d6a4ac260e40fea);
-        var_dd5f1ceda1154582 = var_abc09d1bef94f469.var_dd5f1ceda1154582;
+        loadingmoviename = var_abc09d1bef94f469.loadingmoviename;
 
-        if(isDefined(var_dd5f1ceda1154582)) {
-          println("<dev string:x1c>" + var_dd5f1ceda1154582);
-          level.player playcinematicforplayer(var_dd5f1ceda1154582, 1, 0, 128 | 8192 | 33554432);
+        if(isDefined(loadingmoviename)) {
+          println("<dev string:x1c>" + loadingmoviename);
+          level.player playcinematicforplayer(loadingmoviename, 1, 0, 128 | 8192 | 33554432);
           wait 3;
         }
 
@@ -363,9 +363,9 @@ function endgame(winner, endreasontextindex) {
   end_condition = get_end_condition(endreasontextindex);
   play_time = get_play_time();
   scripts\cp\cp_analytics::endgame(end_condition, play_time);
-  var_5814d27874b48e54 = spawnStruct();
-  var_5814d27874b48e54.result = result;
-  namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_match_end", var_5814d27874b48e54);
+  telemetrydata = spawnStruct();
+  telemetrydata.result = result;
+  namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_match_end", telemetrydata);
   reset_players_subparty_data();
   intermission_func = level.intermissionfunc;
 
@@ -1207,7 +1207,7 @@ function function_1a1f3c44edec248e() {
 function private function_166b4e48c8756c40(videoname, var_379d26c8ac032e3d, condition) {
   self endon("disconnect");
   scripts\cp\endgame::freezeplayerforroundend();
-  thread scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 1, 1);
+  thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 1, 1);
   scripts\cp\super::end_super_meter_progress_early();
 
   if(!isDefined(videoname)) {
@@ -1360,19 +1360,19 @@ function progression_init() {
   level.missionsettings = missionsettings;
   level.lowestgameskill = getdvarint(@ "g_gameskill");
   nil = undefined;
-  var_e55705af85d11cb9 = function_91d6763e1921a524();
+  mapinfolist = function_91d6763e1921a524();
 
-  foreach(mapinfo in var_e55705af85d11cb9) {
-    var_f9e628cf36da6985 = undefined;
+  foreach(mapinfo in mapinfolist) {
+    preloadtransients = undefined;
 
-    if(isDefined(mapinfo.var_f9e628cf36da6985)) {
-      var_f9e628cf36da6985 = strtok(mapinfo.var_f9e628cf36da6985, ", ");
+    if(isDefined(mapinfo.preloadtransients)) {
+      preloadtransients = strtok(mapinfo.preloadtransients, ", ");
     }
 
     settletime = scripts\engine\utility::default_to(mapinfo.settletime, 10);
     clientsettletime = scripts\engine\utility::default_to(mapinfo.clientsettletime, 100);
-    loadbink = mapinfo.var_dd5f1ceda1154582;
-    addlevel(mapinfo.mapname, 0, nil, 1, nil, settletime, clientsettletime, nil, var_f9e628cf36da6985, 0, loadbink);
+    loadbink = mapinfo.loadingmoviename;
+    addlevel(mapinfo.mapname, 0, nil, 1, nil, settletime, clientsettletime, nil, preloadtransients, 0, loadbink);
   }
 
   if(isDefined(level.endmission_main_func)) {

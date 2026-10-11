@@ -28,16 +28,16 @@ function initbufferedstats() {
   self.squadmemberbufferedstats = [];
 
   if(onlinestatsenabled()) {
-    self.bufferedstats["totalShots"] = self getplayerdata(level.var_5d69837cf4db0407, "totalShots");
-    self.bufferedstats["accuracy"] = self getplayerdata(level.var_5d69837cf4db0407, "accuracy");
-    self.bufferedstats["misses"] = self getplayerdata(level.var_5d69837cf4db0407, "misses");
-    self.bufferedstats["hits"] = self getplayerdata(level.var_5d69837cf4db0407, "hits");
+    self.bufferedstats["totalShots"] = self getplayerdata(level.progressiongroup, "totalShots");
+    self.bufferedstats["accuracy"] = self getplayerdata(level.progressiongroup, "accuracy");
+    self.bufferedstats["misses"] = self getplayerdata(level.progressiongroup, "misses");
+    self.bufferedstats["hits"] = self getplayerdata(level.progressiongroup, "hits");
   }
 
-  self.bufferedstats["timePlayedAllies"] = self getplayerdata(level.var_5d69837cf4db0407, "timePlayedAllies");
-  self.bufferedstats["timePlayedOpfor"] = self getplayerdata(level.var_5d69837cf4db0407, "timePlayedOpfor");
-  self.bufferedstats["timePlayedOther"] = self getplayerdata(level.var_5d69837cf4db0407, "timePlayedOther");
-  self.bufferedstats["timePlayedTotal"] = self getplayerdata(level.var_5d69837cf4db0407, "timePlayedTotal");
+  self.bufferedstats["timePlayedAllies"] = self getplayerdata(level.progressiongroup, "timePlayedAllies");
+  self.bufferedstats["timePlayedOpfor"] = self getplayerdata(level.progressiongroup, "timePlayedOpfor");
+  self.bufferedstats["timePlayedOther"] = self getplayerdata(level.progressiongroup, "timePlayedOther");
+  self.bufferedstats["timePlayedTotal"] = self getplayerdata(level.progressiongroup, "timePlayedTotal");
 
   println("<dev string:x38>" + self.bufferedstats["<dev string:x4d>"]);
   println("<dev string:x61>" + self.bufferedstats["<dev string:x75>"]);
@@ -50,24 +50,24 @@ function initbufferedstats() {
 
   if(onlinestatsenabled()) {
     self.bufferedchildstats["xpMultiplierTimePlayed"] = [];
-    self.bufferedchildstats["xpMultiplierTimePlayed"][0] = self getplayerdata(level.var_5d69837cf4db0407, "xpMultiplierTimePlayed", 0);
-    self.bufferedchildstats["xpMultiplierTimePlayed"][1] = self getplayerdata(level.var_5d69837cf4db0407, "xpMultiplierTimePlayed", 1);
-    self.bufferedchildstats["xpMultiplierTimePlayed"][2] = self getplayerdata(level.var_5d69837cf4db0407, "xpMultiplierTimePlayed", 2);
+    self.bufferedchildstats["xpMultiplierTimePlayed"][0] = self getplayerdata(level.progressiongroup, "xpMultiplierTimePlayed", 0);
+    self.bufferedchildstats["xpMultiplierTimePlayed"][1] = self getplayerdata(level.progressiongroup, "xpMultiplierTimePlayed", 1);
+    self.bufferedchildstats["xpMultiplierTimePlayed"][2] = self getplayerdata(level.progressiongroup, "xpMultiplierTimePlayed", 2);
     self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"] = [];
-    self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0] = self getplayerdata(level.var_5d69837cf4db0407, "xpMaxMultiplierTimePlayed", 0);
-    self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1] = self getplayerdata(level.var_5d69837cf4db0407, "xpMaxMultiplierTimePlayed", 1);
-    self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2] = self getplayerdata(level.var_5d69837cf4db0407, "xpMaxMultiplierTimePlayed", 2);
+    self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0] = self getplayerdata(level.progressiongroup, "xpMaxMultiplierTimePlayed", 0);
+    self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1] = self getplayerdata(level.progressiongroup, "xpMaxMultiplierTimePlayed", 1);
+    self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2] = self getplayerdata(level.progressiongroup, "xpMaxMultiplierTimePlayed", 2);
     self.bufferedchildstats["challengeXPMultiplierTimePlayed"] = [];
-    self.bufferedchildstats["challengeXPMultiplierTimePlayed"][0] = self getplayerdata(level.var_5d69837cf4db0407, "challengeXPMultiplierTimePlayed", 0);
+    self.bufferedchildstats["challengeXPMultiplierTimePlayed"][0] = self getplayerdata(level.progressiongroup, "challengeXPMultiplierTimePlayed", 0);
     self.bufferedchildstatsmax["challengeXPMaxMultiplierTimePlayed"] = [];
-    self.bufferedchildstatsmax["challengeXPMaxMultiplierTimePlayed"][0] = self getplayerdata(level.var_5d69837cf4db0407, "challengeXPMaxMultiplierTimePlayed", 0);
+    self.bufferedchildstatsmax["challengeXPMaxMultiplierTimePlayed"][0] = self getplayerdata(level.progressiongroup, "challengeXPMaxMultiplierTimePlayed", 0);
     self.bufferedchildstats["weaponXPMultiplierTimePlayed"] = [];
-    self.bufferedchildstats["weaponXPMultiplierTimePlayed"][0] = self getplayerdata(level.var_5d69837cf4db0407, "weaponXPMultiplierTimePlayed", 0);
+    self.bufferedchildstats["weaponXPMultiplierTimePlayed"][0] = self getplayerdata(level.progressiongroup, "weaponXPMultiplierTimePlayed", 0);
     self.bufferedchildstatsmax["weaponXPMaxMultiplierTimePlayed"] = [];
-    self.bufferedchildstatsmax["weaponXPMaxMultiplierTimePlayed"][0] = self getplayerdata(level.var_5d69837cf4db0407, "weaponXPMaxMultiplierTimePlayed", 0);
-    self.bufferedstats["prestigeDoubleWeaponXp"] = self getplayerdata(level.var_5d69837cf4db0407, "prestigeDoubleWeaponXp");
-    self.bufferedstats["prestigeDoubleWeaponXpTimePlayed"] = self getplayerdata(level.var_5d69837cf4db0407, "prestigeDoubleWeaponXpTimePlayed");
-    self.bufferedstatsmax["prestigeDoubleWeaponXpMaxTimePlayed"] = self getplayerdata(level.var_5d69837cf4db0407, "prestigeDoubleWeaponXpMaxTimePlayed");
+    self.bufferedchildstatsmax["weaponXPMaxMultiplierTimePlayed"][0] = self getplayerdata(level.progressiongroup, "weaponXPMaxMultiplierTimePlayed", 0);
+    self.bufferedstats["prestigeDoubleWeaponXp"] = self getplayerdata(level.progressiongroup, "prestigeDoubleWeaponXp");
+    self.bufferedstats["prestigeDoubleWeaponXpTimePlayed"] = self getplayerdata(level.progressiongroup, "prestigeDoubleWeaponXpTimePlayed");
+    self.bufferedstatsmax["prestigeDoubleWeaponXpMaxTimePlayed"] = self getplayerdata(level.progressiongroup, "prestigeDoubleWeaponXpMaxTimePlayed");
   }
 
   initbestscorestatstable();
@@ -85,7 +85,7 @@ function initbestscorestatstable() {
       break;
     }
 
-    self.bestscorestats[statname] = self getplayerdata(level.var_5d69837cf4db0407, "bestScores", statname);
+    self.bestscorestats[statname] = self getplayerdata(level.progressiongroup, "bestScores", statname);
   }
 }
 
@@ -94,7 +94,7 @@ function statgetchild(parent, child) {
     return self getplayerdata("common", parent, child);
   }
 
-  return self getplayerdata(level.var_5d69837cf4db0407, parent, child);
+  return self getplayerdata(level.progressiongroup, parent, child);
 }
 
 function statsetchild(parent, child, value, ignorekdrstats) {
@@ -116,7 +116,7 @@ function statsetchild(parent, child, value, ignorekdrstats) {
     return;
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, parent, child, value);
+  self setplayerdata(level.progressiongroup, parent, child, value);
 }
 
 function stataddchild(parent, child, value) {
@@ -125,8 +125,8 @@ function stataddchild(parent, child, value) {
   }
 
   assert(isDefined(self.bufferedchildstats[parent][child]));
-  curvalue = self getplayerdata(level.var_5d69837cf4db0407, parent, child);
-  self setplayerdata(level.var_5d69837cf4db0407, parent, child, curvalue + value);
+  curvalue = self getplayerdata(level.progressiongroup, parent, child);
+  self setplayerdata(level.progressiongroup, parent, child, curvalue + value);
 }
 
 function statgetchildbuffered(parent, child, force) {
@@ -226,7 +226,7 @@ function writebestscores() {
   foreach(player in level.players) {
     if(isDefined(player) && player onlinestatsenabled()) {
       foreach(statname, statval in player.bufferedbestscorestats) {
-        player setplayerdata(level.var_5d69837cf4db0407, "bestScores", statname, statval);
+        player setplayerdata(level.progressiongroup, "bestScores", statname, statval);
       }
     }
   }
@@ -237,7 +237,7 @@ function writebufferedstats() {
 
   if(rankingenabled) {
     foreach(statname, statval in self.bufferedstats) {
-      self setplayerdata(level.var_5d69837cf4db0407, statname, statval);
+      self setplayerdata(level.progressiongroup, statname, statval);
     }
 
     if(!isai(self)) {
@@ -256,7 +256,7 @@ function writebufferedstats() {
       }
 
       if(rankingenabled) {
-        self setplayerdata(level.var_5d69837cf4db0407, statname, childstatname, var_74224fe98d0679d2);
+        self setplayerdata(level.progressiongroup, statname, childstatname, var_74224fe98d0679d2);
       }
     }
   }
@@ -296,23 +296,23 @@ function incrementrankedreservedhistory(kills, deaths, headshots, accuracy, dama
   }
 
   for(i = 0; i < 4; i++) {
-    prev = self getplayerdata(level.var_5d69837cf4db0407, "kdHistoryK", i + 1);
-    self setplayerdata(level.var_5d69837cf4db0407, "kdHistoryK", i, prev);
-    prev = self getplayerdata(level.var_5d69837cf4db0407, "kdHistoryD", i + 1);
-    self setplayerdata(level.var_5d69837cf4db0407, "kdHistoryD", i, prev);
-    prev = self getplayerdata(level.var_5d69837cf4db0407, "headshotHistory", i + 1);
-    self setplayerdata(level.var_5d69837cf4db0407, "headshotHistory", i, prev);
-    prev = self getplayerdata(level.var_5d69837cf4db0407, "accuracyHistory", i + 1);
-    self setplayerdata(level.var_5d69837cf4db0407, "accuracyHistory", i, prev);
-    prev = self getplayerdata(level.var_5d69837cf4db0407, "damageHistory", i + 1);
-    self setplayerdata(level.var_5d69837cf4db0407, "damageHistory", i, prev);
+    prev = self getplayerdata(level.progressiongroup, "kdHistoryK", i + 1);
+    self setplayerdata(level.progressiongroup, "kdHistoryK", i, prev);
+    prev = self getplayerdata(level.progressiongroup, "kdHistoryD", i + 1);
+    self setplayerdata(level.progressiongroup, "kdHistoryD", i, prev);
+    prev = self getplayerdata(level.progressiongroup, "headshotHistory", i + 1);
+    self setplayerdata(level.progressiongroup, "headshotHistory", i, prev);
+    prev = self getplayerdata(level.progressiongroup, "accuracyHistory", i + 1);
+    self setplayerdata(level.progressiongroup, "accuracyHistory", i, prev);
+    prev = self getplayerdata(level.progressiongroup, "damageHistory", i + 1);
+    self setplayerdata(level.progressiongroup, "damageHistory", i, prev);
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, "kdHistoryK", 4, int(clamp(kills, 0, 255)));
-  self setplayerdata(level.var_5d69837cf4db0407, "kdHistoryD", 4, int(clamp(deaths, 0, 255)));
-  self setplayerdata(level.var_5d69837cf4db0407, "headshotHistory", 4, int(clamp(headshots, 0, 255)));
-  self setplayerdata(level.var_5d69837cf4db0407, "accuracyHistory", 4, int(accuracy));
-  self setplayerdata(level.var_5d69837cf4db0407, "damageHistory", 4, damage);
+  self setplayerdata(level.progressiongroup, "kdHistoryK", 4, int(clamp(kills, 0, 255)));
+  self setplayerdata(level.progressiongroup, "kdHistoryD", 4, int(clamp(deaths, 0, 255)));
+  self setplayerdata(level.progressiongroup, "headshotHistory", 4, int(clamp(headshots, 0, 255)));
+  self setplayerdata(level.progressiongroup, "accuracyHistory", 4, int(accuracy));
+  self setplayerdata(level.progressiongroup, "damageHistory", 4, damage);
 }
 
 function incrementweaponstat(weaponname, stat, incvalue) {
@@ -329,18 +329,18 @@ function incrementweaponstat(weaponname, stat, incvalue) {
   }
 
   if(onlinestatsenabled()) {
-    oldval = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", "weaponStats", weaponname, stat);
-    self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "weaponStats", weaponname, stat, oldval + incvalue);
+    oldval = self getplayerdata(level.progressiongroup, "playerStats", "weaponStats", weaponname, stat);
+    self setplayerdata(level.progressiongroup, "playerStats", "weaponStats", weaponname, stat, oldval + incvalue);
 
     if(stat == "kills") {
       foreach(scope in ["lifetimeStats", "seasonalStats"]) {
         oldval = 0;
 
-        if(self hasplayerdata(level.var_5d69837cf4db0407, "playerStats", scope, function_f6bad1d33ad22078(), "weaponStats", weaponname, "kills")) {
-          oldval = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", scope, function_f6bad1d33ad22078(), "weaponStats", weaponname, "kills");
+        if(self hasplayerdata(level.progressiongroup, "playerStats", scope, function_f6bad1d33ad22078(), "weaponStats", weaponname, "kills")) {
+          oldval = self getplayerdata(level.progressiongroup, "playerStats", scope, function_f6bad1d33ad22078(), "weaponStats", weaponname, "kills");
         }
 
-        self setplayerdata(level.var_5d69837cf4db0407, "playerStats", scope, function_f6bad1d33ad22078(), "weaponStats", weaponname, "kills", oldval + incvalue);
+        self setplayerdata(level.progressiongroup, "playerStats", scope, function_f6bad1d33ad22078(), "weaponStats", weaponname, "kills", oldval + incvalue);
       }
     }
   }
@@ -381,7 +381,7 @@ function updateweaponbufferedstats() {
   weapstat = undefined;
 
   if(weapon.isalternate) {
-    basetype = function_7c612ac92ba98dcb(weapon, weapon.underbarrel);
+    basetype = getattachmentbasetype(weapon, weapon.underbarrel);
 
     if(basetype == "altfire") {
       weapstat = weapon.underbarrel;
@@ -412,7 +412,7 @@ function updateweaponbufferedstats() {
       continue;
     }
 
-    basetype = function_7c612ac92ba98dcb(weapon, attachname);
+    basetype = getattachmentbasetype(weapon, attachname);
 
     if(basetype == "altfire") {
       continue;
@@ -668,7 +668,7 @@ function uploadglobalstatcounters() {
 
   totalkills = 0;
   totaldeaths = 0;
-  var_74ba9cc277cbe543 = 0;
+  totalassists = 0;
   totalheadshots = 0;
   totalsuicides = 0;
   totaltimeplayed = 0;
@@ -688,7 +688,7 @@ function uploadglobalstatcounters() {
   foreach(player in level.players) {
     totalkills += player.kills;
     totaldeaths += player.deaths;
-    var_74ba9cc277cbe543 += player.assists;
+    totalassists += player.assists;
     totalheadshots += player scripts\mp\utility\stats::getpersstat("headshots");
     totalsuicides += player scripts\mp\utility\stats::getpersstat("suicides");
   }
@@ -700,6 +700,6 @@ function uploadglobalstatcounters() {
   dlog_recordevent("dlog_event_global_games", ["increment", 1]);
 
   if(!isDefined(level.assists_disabled)) {
-    dlog_recordevent("dlog_event_global_assists", ["increment", var_74ba9cc277cbe543]);
+    dlog_recordevent("dlog_event_global_assists", ["increment", totalassists]);
   }
 }

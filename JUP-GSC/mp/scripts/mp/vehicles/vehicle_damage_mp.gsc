@@ -44,12 +44,12 @@ function vehicle_damage_giveaward(ref, objweapon, var_fc10bb0a0aa2990) {
   }
 }
 
-function vehicle_setuphitdamageoverrideforweapon(weaponname, weaponhitsperattack, var_8b4500d6a881b7b2, vehiclename) {
+function vehicle_setuphitdamageoverrideforweapon(weaponname, weaponhitsperattack, weaponhitstokill, vehiclename) {
   if(isDefined(weaponhitsperattack)) {
     set_weapon_hit_damage_data_for_vehicle(weaponname, weaponhitsperattack, vehiclename);
   }
 
-  if(isDefined(var_8b4500d6a881b7b2)) {
-    set_vehicle_hit_damage_data_for_weapon(vehiclename, var_8b4500d6a881b7b2, weaponname);
+  if(isDefined(weaponhitstokill)) {
+    set_vehicle_hit_damage_data_for_weapon(vehiclename, weaponhitstokill, weaponname);
   }
 }

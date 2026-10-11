@@ -263,7 +263,7 @@ function drop_grenade(nearest_player) {
   }
 
   nade = magicgrenademanual(self.type, self.origin - (0, 0, 2), velocity, var_18041d0638a909b7);
-  thread function_241a6f854e3af34d();
+  thread turn_on_light();
   wait var_18041d0638a909b7;
 
   if(self.type == "flash_grenade_mp") {
@@ -275,7 +275,7 @@ function drop_grenade(nearest_player) {
   }
 }
 
-function function_241a6f854e3af34d() {
+function turn_on_light() {
   level endon("game_ended");
   self endon("death");
 

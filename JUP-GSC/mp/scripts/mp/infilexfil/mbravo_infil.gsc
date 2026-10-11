@@ -30,7 +30,7 @@
 function function_a8bca89f5f67bf2b(subtype) {
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
 
-  function_f1aed36ab4598ea("mbravo_infil");
+  snd_transient_load("mbravo_infil");
   thread function_5ae55d7eb7946799();
   var_453e4fc2c649fea4 = [];
   var_453e4fc2c649fea4[0] = [0, 1];
@@ -702,7 +702,7 @@ function function_83d11c9ec4313021(subtype, team, originalsubtype) {
   }
 }
 
-function commander_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function commander_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     if(soundexists(alias)) {
       self playsoundtoplayer(alias, player);
@@ -746,7 +746,7 @@ function deleteoninfilcomplete() {
 function function_5ae55d7eb7946799() {
   level waittill("prematch_over");
   wait 55;
-  function_f4e0ff5cb899686d("mbravo_infil");
+  snd_transient_unload("mbravo_infil");
 }
 
 function cinematiccameratimeline(infil) {

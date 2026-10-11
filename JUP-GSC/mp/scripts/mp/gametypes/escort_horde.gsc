@@ -270,8 +270,8 @@ function function_4c09404e1f472457() {
     self.defaultsuit = self.suit;
   }
 
-  if(!isDefined(self.var_bd18a31e926a377f)) {
-    self.var_bd18a31e926a377f = self.model;
+  if(!isDefined(self.defaultmodel)) {
+    self.defaultmodel = self.model;
   }
 
   if(iszombie()) {
@@ -398,12 +398,12 @@ function spawn_zombies() {
         ai.goalradius = 16;
         ai.stealth_enabled = 0;
         ai.pathenemyfightdist = 0;
-        ai.var_b29c3655b12e292d = 0;
+        ai.cornercheckenabled = 0;
         ai.friendlyteam = game["attackers"];
         ai.maxhealth = var_b55db3b8e7ae1878;
         ai.health = ai.maxhealth;
         ai thread scripts\asm\shared\mp\utility::animscriptedagent("spawn", "spawn_end", undefined, undefined, "spawn_animating");
-        ai utility::function_f3bb4f4911a1beb2("zombie_utils", "setMoveSpeed", "sprint", "horde_spawn", 1);
+        ai utility::callsharedfunc("zombie_utils", "setMoveSpeed", "sprint", "horde_spawn", 1);
         ai setthreatbiasgroup("zombie");
       }
     }

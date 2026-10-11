@@ -375,12 +375,12 @@ function requestleaveteam(player) {
   scripts\cp_mp\overlord::playevent("assim_request_response_leaving_team", leavingteammembers);
 
   if(issharedfuncdefined("hud", "showBrDMZSplash")) {
-    [[getsharedfunc("hud", "showBrDMZSplash")]]("player_left_alone", [player], undefined, undefined, undefined, level.var_42b1e877ab187c6);
+    [[getsharedfunc("hud", "showBrDMZSplash")]]("player_left_alone", [player], undefined, undefined, undefined, level.splashlistoverride);
     players = oldteammembers;
 
     if(isDefined(players)) {
       players = array_remove(players, player);
-      [[getsharedfunc("hud", "showBrDMZSplash")]]("player_left_team", players, undefined, player getentitynumber(), undefined, level.var_42b1e877ab187c6);
+      [[getsharedfunc("hud", "showBrDMZSplash")]]("player_left_team", players, undefined, player getentitynumber(), undefined, level.splashlistoverride);
     }
   }
 
@@ -403,9 +403,9 @@ function requestnearbyteamchange(player, var_99bcf6bdf31a0e49) {
 
   if(issharedfuncdefined("hud", "showBrDMZSplash")) {
     if(var_99bcf6bdf31a0e49) {
-      [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_used_join_on_target", [player], undefined, undefined, undefined, level.var_42b1e877ab187c6);
+      [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_used_join_on_target", [player], undefined, undefined, undefined, level.splashlistoverride);
     } else {
-      [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_used", [player], undefined, undefined, undefined, level.var_42b1e877ab187c6);
+      [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_used", [player], undefined, undefined, undefined, level.splashlistoverride);
     }
   }
 
@@ -438,7 +438,7 @@ function requestnearbyteamchange(player, var_99bcf6bdf31a0e49) {
 
   if(var_3d290d914e1249a0.size > 0) {
     scripts\cp_mp\overlord::playevent("assim_request_nearby", var_3d290d914e1249a0);
-    function_f3bb4f4911a1beb2("pmc_missions", "onRequestTeamAssimilate", player, var_3d290d914e1249a0);
+    callsharedfunc("pmc_missions", "onRequestTeamAssimilate", player, var_3d290d914e1249a0);
   }
 }
 
@@ -459,11 +459,11 @@ function resolveassimrequest(player, var_e3f7965361b1e757) {
       scripts\mp\gametypes\br::updateplayerandteamcountui();
     }
   } else if(player.var_4f8afa3693e318d4) {
-    [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_request_denied_join_on_target", [player.var_7f1423df13bbb144], undefined, undefined, undefined, level.var_42b1e877ab187c6);
-    [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_request_you_denied_join_on_target", [player], undefined, undefined, undefined, level.var_42b1e877ab187c6);
+    [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_request_denied_join_on_target", [player.var_7f1423df13bbb144], undefined, undefined, undefined, level.splashlistoverride);
+    [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_request_you_denied_join_on_target", [player], undefined, undefined, undefined, level.splashlistoverride);
   } else {
-    [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_request_denied", [player.var_7f1423df13bbb144], undefined, player getentitynumber(), undefined, level.var_42b1e877ab187c6);
-    [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_request_you_denied", [player], undefined, undefined, undefined, level.var_42b1e877ab187c6);
+    [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_request_denied", [player.var_7f1423df13bbb144], undefined, player getentitynumber(), undefined, level.splashlistoverride);
+    [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_request_you_denied", [player], undefined, undefined, undefined, level.splashlistoverride);
   }
 
   function_a84bf6c8ff064511(player);
@@ -516,16 +516,16 @@ function assimilateplayer(playerswitching, var_784c8ada1184ff89, torespawn) {
 
   if(issharedfuncdefined("hud", "showBrDMZSplash")) {
     if(var_67d0631ad9027f83) {
-      [[getsharedfunc("hud", "showBrDMZSplash")]]("player_team_switched", [playerswitching], undefined, undefined, undefined, level.var_42b1e877ab187c6);
+      [[getsharedfunc("hud", "showBrDMZSplash")]]("player_team_switched", [playerswitching], undefined, undefined, undefined, level.splashlistoverride);
     }
 
     players = ter_op(usingsquad, level.squaddata[newteam][newsquadindex].players, scripts\mp\utility\teams::getteamdata(newteam, "players"));
-    [[getsharedfunc("hud", "showBrDMZSplash")]]("player_joined_team", players, undefined, playerswitching getentitynumber(), undefined, level.var_42b1e877ab187c6);
+    [[getsharedfunc("hud", "showBrDMZSplash")]]("player_joined_team", players, undefined, playerswitching getentitynumber(), undefined, level.splashlistoverride);
     players = ter_op(usingsquad, level.squaddata[oldteam][oldsquadindex].players, scripts\mp\utility\teams::getteamdata(oldteam, "players"));
 
     if(isDefined(players)) {
       players = array_remove(players, playerswitching);
-      [[getsharedfunc("hud", "showBrDMZSplash")]]("player_left_team", players, undefined, playerswitching getentitynumber(), undefined, level.var_42b1e877ab187c6);
+      [[getsharedfunc("hud", "showBrDMZSplash")]]("player_left_team", players, undefined, playerswitching getentitynumber(), undefined, level.splashlistoverride);
     }
   }
 
@@ -627,9 +627,9 @@ function senddirectassimrequest(var_e65d25126ef3331b, targetplayer, var_99bcf6bd
 
     if(!isDefined(targetplayer.var_312490cd130c9914) || targetplayer.var_312490cd130c9914 + splashcooldown > gettime() || targetplayer.var_4f8afa3693e318d4 != var_99bcf6bdf31a0e49) {
       if(var_99bcf6bdf31a0e49) {
-        [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_requested_join_on_target", [targetplayer], undefined, var_e65d25126ef3331b getentitynumber(), undefined, level.var_42b1e877ab187c6);
+        [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_requested_join_on_target", [targetplayer], undefined, var_e65d25126ef3331b getentitynumber(), undefined, level.splashlistoverride);
       } else {
-        [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_requested", [targetplayer], undefined, var_e65d25126ef3331b getentitynumber(), undefined, level.var_42b1e877ab187c6);
+        [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_team_assimilation_requested", [targetplayer], undefined, var_e65d25126ef3331b getentitynumber(), undefined, level.splashlistoverride);
       }
 
       targetplayer.var_312490cd130c9914 = gettime();
@@ -853,7 +853,7 @@ function private function_5a35520fca6b5b34(bot, player) {
 
   if(var_3d290d914e1249a0.size > 0) {
     scripts\cp_mp\overlord::playevent("<dev string:x143>", var_3d290d914e1249a0);
-    function_f3bb4f4911a1beb2("<dev string:x15b>", "<dev string:x16b>", bot, var_3d290d914e1249a0);
+    callsharedfunc("<dev string:x15b>", "<dev string:x16b>", bot, var_3d290d914e1249a0);
   }
 }
 

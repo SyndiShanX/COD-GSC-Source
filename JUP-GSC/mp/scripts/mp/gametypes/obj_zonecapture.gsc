@@ -41,7 +41,7 @@ function setupobjective(trigger, visuals, var_5ddbc1faed2c56e6, skipobjid) {
 
   zone = scripts\mp\gameobjects::createuseobject("neutral", zone, visuals, (0, 0, 0), reservedobjid, skipobjid);
   zone scripts\mp\gameobjects::disableobject();
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
 
   if(var_c8f4c582625f492d == #"gwai" || var_c8f4c582625f492d == #"wm" || var_c8f4c582625f492d == #"escort") {} else if(var_c8f4c582625f492d == #"koth" || var_c8f4c582625f492d == #"landgrab") {
     for(index = 0; index < zone.visuals.size; index++) {
@@ -116,7 +116,7 @@ function assignchevrons(target, label) {
 }
 
 function updatechevrons(state) {
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
 
   if(!(var_c8f4c582625f492d == #"koth" || var_c8f4c582625f492d == #"landgrab" || var_c8f4c582625f492d == #"wm" || var_c8f4c582625f492d == #"escort" || var_c8f4c582625f492d == #"hq")) {
     return;
@@ -153,7 +153,7 @@ function function_684d05448781a1f4() {
   }
 
   if(zone.ownerteam != "neutral") {
-    var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+    var_c8f4c582625f492d = getxhash(getbasegametype());
     relativeteam = ter_op(var_c8f4c582625f492d == #"escort", game["attackers"], zone.ownerteam);
     zone thread updatechevrons(relativeteam);
     return;
@@ -205,7 +205,7 @@ function activatezone(objid, skipobjid) {
   dangerzoneids[dangerzoneids.size] = scripts\mp\spawnlogic::addspawndangerzone(var_40db97c5db5e1e3e - (0, 0, 2048), dangerzoneradius, 4096, "allies", undefined, undefined, undefined, undefined, undefined, 1);
   dangerzoneids[dangerzoneids.size] = scripts\mp\spawnlogic::addspawndangerzone(var_40db97c5db5e1e3e - (0, 0, 2048), dangerzoneradius, 4096, "axis", undefined, undefined, undefined, undefined, undefined, 1);
   zone.dangerzoneids = dangerzoneids;
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
 
   if(var_c8f4c582625f492d == #"koth" || var_c8f4c582625f492d == #"grnd") {
     zone.ignorestomp = 1;
@@ -251,7 +251,7 @@ function deactivatezone() {
   zone.trigger scripts\engine\utility::trigger_off();
   zone thread waitthensetvisibleteam();
   zone scripts\mp\gameobjects::releaseid(1, 0);
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
 
   if(var_c8f4c582625f492d == #"hq") {
     zone.visuals[0] playSound("mp_hq_deactivate_sfx");
@@ -281,7 +281,7 @@ function hp_move_soon(timer) {
 
   level endon("<dev string:x1c>");
 
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
 
   if(var_c8f4c582625f492d == #"hq") {
     level endon("zone_destroyed");
@@ -385,7 +385,7 @@ function zone_onuse(credit_player) {
     touchlist[touchkeys[i]] = zone.touchlist[capture_team][touchkeys[i]];
   }
 
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
 
   if(var_c8f4c582625f492d == #"koth") {
     level notify("Objective_SetShowProgress", zone.objidnum);
@@ -511,7 +511,7 @@ function waitthensetvisibleteam() {
 function zone_onusebegin(player) {
   player.isonobjective = 1;
   zone = self;
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
   ownerteam = zone scripts\mp\gameobjects::getownerteam();
 
   if(var_c8f4c582625f492d == #"hq") {
@@ -553,7 +553,7 @@ function zone_onuseupdate(team, progress, change, capplayer) {
   zone = self;
   zone scripts\mp\objidpoolmanager::function_9b1a086f348520b0(zone.objidnum, team);
   ownerteam = zone scripts\mp\gameobjects::getownerteam();
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
 
   if(var_c8f4c582625f492d == #"hq" || var_c8f4c582625f492d == #"wm" || var_c8f4c582625f492d == #"escort") {
     if(!istrue(level.mapname == "mp_jup_skydiving" && (zone.objectivekey == "_e" || zone.objectivekey == "_f"))) {
@@ -626,7 +626,7 @@ function zone_onuseend(team, player, success) {
   level notify("stop_contested_stats_thread");
 
   if(!success) {
-    var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+    var_c8f4c582625f492d = getxhash(getbasegametype());
 
     if(var_c8f4c582625f492d == #"hq") {
       if(ownerteam != "neutral") {
@@ -662,7 +662,7 @@ function zone_onuseend(team, player, success) {
 
 function zone_onunoccupied() {
   zone = self;
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+  var_c8f4c582625f492d = getxhash(getbasegametype());
 
   if(var_c8f4c582625f492d == #"hq" && zone.ownerteam != "neutral") {
     zone scripts\mp\gameobjects::setobjectivestatusicons(level.icondefend, level.iconcapture);
@@ -732,7 +732,7 @@ function zone_oncontested() {
     notifyteam = ownerteam;
   }
 
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getgametype());
+  var_c8f4c582625f492d = getxhash(getgametype());
 
   if(var_c8f4c582625f492d != #"landgrab") {
     foreach(entry in level.teamnamelist) {
@@ -780,7 +780,7 @@ function zone_onuncontested(lastclaimteam) {
       playsoundatpos(zone.trigger.origin, "jup_shared_zone_neutral_ping");
     }
   } else {
-    var_c8f4c582625f492d = function_1823ff50bb28148d(getbasegametype());
+    var_c8f4c582625f492d = getxhash(getbasegametype());
 
     if(var_c8f4c582625f492d == #"koth") {
       scripts\mp\utility\sound::playsoundonplayers("mp_hardpoint_captured_positive", ownerteam);
@@ -823,7 +823,7 @@ function zone_stompprogressreward(player) {
 }
 
 function function_dcbc745e92f98a9f(friendlyicon, enemyicon) {
-  if(function_1823ff50bb28148d(getgametype()) == #"wm" && !self.stalemate) {
+  if(getxhash(getgametype()) == #"wm" && !self.stalemate) {
     if(self.numtouching[self.ownerteam]) {
       friendlyicon = level.icondefending;
     }
@@ -841,7 +841,7 @@ function zone_onpinnedstate(player) {
   zone = self;
 
   if(!zone.stalemate) {
-    if(zone.ownerteam != "neutral" && zone.numtouching[zone.ownerteam] || function_1823ff50bb28148d(getgametype()) == #"wm" && isDefined(player.team) && zone.numtouching[player.team]) {
+    if(zone.ownerteam != "neutral" && zone.numtouching[zone.ownerteam] || getxhash(getgametype()) == #"wm" && isDefined(player.team) && zone.numtouching[player.team]) {
       zone function_dcbc745e92f98a9f(level.icondefending, level.iconcapture);
     }
   }

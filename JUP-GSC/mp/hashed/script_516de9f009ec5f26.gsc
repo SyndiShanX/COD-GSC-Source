@@ -77,7 +77,7 @@ function function_e0f206e1fb21f1c7() {
     wait 0.2;
 
     if(ent_flag("optical_camouflage")) {
-      if(function_8ce7894f1a52fb77("burn") || is_stunned() || istrue(self function_11e2d4051ea44b35("in_grab_attack"))) {
+      if(function_8ce7894f1a52fb77("burn") || is_stunned() || istrue(self getaiblackboarddynamic("in_grab_attack"))) {
         function_25bb1e6120021962(0);
         continue;
       }
@@ -103,9 +103,9 @@ function function_e0f206e1fb21f1c7() {
     }
 
     if(self.var_f4eed917fd6bba9f > 0) {
-      var_4cf2a3442772b0e8 = gettime();
+      n_cur_time = gettime();
 
-      if(var_4cf2a3442772b0e8 > self.var_f5d340f5be4dd4c1) {
+      if(n_cur_time > self.var_f5d340f5be4dd4c1) {
         var_2356d8692d58de6f = 1;
 
         foreach(player in level.players) {
@@ -121,16 +121,16 @@ function function_e0f206e1fb21f1c7() {
         }
       }
 
-      if(var_4cf2a3442772b0e8 > self.var_f5d340f5be4dd4c1 - 5000) {}
+      if(n_cur_time > self.var_f5d340f5be4dd4c1 - 5000) {}
 
-      if(var_4cf2a3442772b0e8 >= self.var_e4976943db081dfe) {
+      if(n_cur_time >= self.var_e4976943db081dfe) {
         if(self.var_f4eed917fd6bba9f > self.var_3c14f359976ed2ab) {
           self.var_f4eed917fd6bba9f -= self.var_3c14f359976ed2ab;
         } else {
           self.var_f4eed917fd6bba9f = 0;
         }
 
-        self.var_e4976943db081dfe = var_4cf2a3442772b0e8 + 1000;
+        self.var_e4976943db081dfe = n_cur_time + 1000;
       }
     }
 
@@ -179,7 +179,7 @@ function private function_7f069f16ad59a75(params) {
 
     self.var_a0734722dbd53031 = 0;
     self.var_f4eed917fd6bba9f -= self.var_b7041a60af9367c1;
-    function_38e113a4c30f6c0d(self.var_c56217d83f172c6f, self.origin);
+    spawnnewitemfromscriptablesharedfunc(self.var_c56217d83f172c6f, self.origin);
   }
 }
 

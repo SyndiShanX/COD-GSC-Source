@@ -48,8 +48,8 @@ function init_vehicles_thread() {
   script_func("add_hint_string", "exit_vehicle", &"SCRIPT/EXIT_VEHICLE", &function_3e3d0013d3b2b92a);
 }
 
-function vehicle_paths(node, var_269fb0ec10b51524, var_cfa3aafb71b08d36) {
-  return _vehicle_paths(node, var_269fb0ec10b51524, var_cfa3aafb71b08d36);
+function vehicle_paths(node, bhelicopterwaitforstart, var_cfa3aafb71b08d36) {
+  return _vehicle_paths(node, bhelicopterwaitforstart, var_cfa3aafb71b08d36);
 }
 
 function vehicle_spawn(vspawner) {
@@ -360,7 +360,7 @@ function ishelicopter() {
     return false;
   }
 
-  return isDefined(level.vehicle.templates.helicopter_list[function_40fd49171fad19d3(self.vehicletype)]);
+  return isDefined(level.vehicle.templates.helicopter_list[getxhashasset(self.vehicletype)]);
 }
 
 function isboat() {
@@ -368,11 +368,11 @@ function isboat() {
     return false;
   }
 
-  return isDefined(level.vehicle.templates.boat_list[function_40fd49171fad19d3(self.vehicletype)]);
+  return isDefined(level.vehicle.templates.boat_list[getxhashasset(self.vehicletype)]);
 }
 
 function isairplane() {
-  return isDefined(level.vehicle.templates.airplane_list[function_40fd49171fad19d3(self.vehicletype)]);
+  return isDefined(level.vehicle.templates.airplane_list[getxhashasset(self.vehicletype)]);
 }
 
 function istank() {
@@ -380,7 +380,7 @@ function istank() {
     return false;
   }
 
-  return isDefined(level.vehicle.templates.tank_list[function_40fd49171fad19d3(self.vehicletype)]);
+  return isDefined(level.vehicle.templates.tank_list[getxhashasset(self.vehicletype)]);
 }
 
 function enable_global_vehicle_spawn_functions() {
@@ -508,11 +508,11 @@ function function_af11cc0c8dc23332(inflictor) {
     return;
   }
 
-  var_4c78918e17e67a6 = self.healthstarting * 0.3 - 1 + self.healthbuffer;
-  var_a1649adebbb57951 = self.health - var_4c78918e17e67a6;
+  burndownhealth = self.healthstarting * 0.3 - 1 + self.healthbuffer;
+  burndowndamage = self.health - burndownhealth;
 
-  if(var_a1649adebbb57951 > 1) {
-    self dodamage(var_a1649adebbb57951, self.origin, inflictor, undefined, "MOD_EXECUTION");
+  if(burndowndamage > 1) {
+    self dodamage(burndowndamage, self.origin, inflictor, undefined, "MOD_EXECUTION");
   }
 }
 
@@ -552,7 +552,7 @@ function vehicle_sethealth(amount, resetstarting) {
   }
 }
 
-function function_cacd62db1bbe8cb9(amount, resetstarting) {
+function vehicle_addhealth(amount, resetstarting) {
   amount = int(amount);
 
   if(!isDefined(self.healthbuffer)) {
@@ -675,11 +675,11 @@ function function_2f026409116444() {
 }
 
 function function_9fb6b2244163f2a1() {
-  if(!isDefined(self.var_c3db265fefdb8d4)) {
+  if(!isDefined(self.blowntires)) {
     return [];
   }
 
-  return self.var_c3db265fefdb8d4;
+  return self.blowntires;
 }
 
 function function_9b915d163f6d1d5a(part) {
@@ -707,42 +707,42 @@ function function_97cbee6be1660a84(animation, husk) {
 
   if(!vehicle hascomponent("animator")) {
     vehicle addcomponent("animator");
-    vehicle function_77320e794d35465a("animator", "keyframed", 0);
+    vehicle setconfigvalue("animator", "keyframed", 0);
   }
 
   vehicle animScripted("crash_anim_finished", vehicle.origin, vehicle.angles, animation, undefined, undefined, 0.2, 1);
   vehicle vehphys_crash();
 
   if(vehicle hascomponent("p2p")) {
-    vehicle function_77320e794d35465a("p2p", "pause", 1);
+    vehicle setconfigvalue("p2p", "pause", 1);
   }
 
   if(vehicle hascomponent("path")) {
-    vehicle function_77320e794d35465a("path", "pause", 1);
+    vehicle setconfigvalue("path", "pause", 1);
   }
 
   vehicle waittillmatch("crash_anim_finished", "end");
 }
 
 function function_a0f7306fc3c08ecf(vehicle, var_d5a3f788ef786063) {
-  var_5134a5777f340d56 = 0;
+  inoobtrigger = 0;
 
   if(isDefined(vehicle.oob)) {
-    var_5134a5777f340d56 = 1;
+    inoobtrigger = 1;
   }
 
-  if(!istrue(var_5134a5777f340d56) && istrue(var_d5a3f788ef786063)) {
+  if(!istrue(inoobtrigger) && istrue(var_d5a3f788ef786063)) {
     oobtriggers = level.outofboundstriggers;
 
     foreach(trigger in oobtriggers) {
       if(vehicle istouching(trigger)) {
-        var_5134a5777f340d56 = 1;
+        inoobtrigger = 1;
         break;
       }
     }
   }
 
-  return var_5134a5777f340d56;
+  return inoobtrigger;
 }
 
 function function_9039b650ffb212c8(str) {

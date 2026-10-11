@@ -78,15 +78,15 @@ function combatstate_thread(enabled) {
   self.stealth.combatstate.name = "stealth";
   self.stealth.combatstate.type = "idle";
   self.stealth.combatstate.updatefuncs = [];
-  var_c6edce1b02951aa2 = [];
-  var_20bb85d7bcd0392d = [];
+  oldcombatenemies = [];
+  oldhuntenemies = [];
 
   while(true) {
     ent_flag_wait("stealth_enabled");
-    var_c6edce1b02951aa2 = array_removeundefined(var_c6edce1b02951aa2);
-    var_c6edce1b02951aa2 = array_removedead(var_c6edce1b02951aa2);
-    var_20bb85d7bcd0392d = array_removeundefined(var_20bb85d7bcd0392d);
-    var_20bb85d7bcd0392d = array_removedead(var_20bb85d7bcd0392d);
+    oldcombatenemies = array_removeundefined(oldcombatenemies);
+    oldcombatenemies = array_removedead(oldcombatenemies);
+    oldhuntenemies = array_removeundefined(oldhuntenemies);
+    oldhuntenemies = array_removedead(oldhuntenemies);
     combatenemies = [];
     huntenemies = [];
     var_d357c65b8336aab = 0;
@@ -102,7 +102,7 @@ function combatstate_thread(enabled) {
         continue;
       }
 
-      if(!array_contains(var_c6edce1b02951aa2, enemy)) {
+      if(!array_contains(oldcombatenemies, enemy)) {
         if(enemy doinglongdeath()) {
           continue;
         }
@@ -157,7 +157,7 @@ function combatstate_thread(enabled) {
       if(combatenemies.size == 0) {
         name = "stealth";
 
-        if(array_intersection(var_c6edce1b02951aa2, huntenemies).size > 0) {
+        if(array_intersection(oldcombatenemies, huntenemies).size > 0) {
           type = "hunt";
         } else if(huntenemies.size == 0) {
           type = "all_clear";
@@ -189,8 +189,8 @@ function combatstate_thread(enabled) {
       self notify("player_combat_state_updated", name, type);
     }
 
-    var_c6edce1b02951aa2 = combatenemies;
-    var_20bb85d7bcd0392d = huntenemies;
+    oldcombatenemies = combatenemies;
+    oldhuntenemies = huntenemies;
     waitframe();
   }
 }

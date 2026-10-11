@@ -109,7 +109,7 @@ function function_a359d4a358c561f8() {
     var_27dec58d1d9b3319 = [];
 
     foreach(billboard in billboards) {
-      poi = scripts\mp\poi::function_6cc445c02b5effac(billboard.origin);
+      poi = scripts\mp\poi::poi_findpoioriginisin(billboard.origin);
 
       if(!isDefined(var_5b7c5ad771190c7c[poi])) {
         var_5b7c5ad771190c7c[poi] = [];
@@ -135,7 +135,7 @@ function function_a359d4a358c561f8() {
 }
 
 function function_1a8a54ed7eb5a2d8() {
-  mapinfo = function_79404c2fcca1c184();
+  mapinfo = getmapscriptbundle();
 
   if(!isDefined(mapinfo)) {
     return undefined;

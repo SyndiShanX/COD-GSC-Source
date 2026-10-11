@@ -34,7 +34,7 @@ function get_starting_health(scriptbundle_name, current_round) {
     if(current_round > 1 && isDefined(var_fe0aad7efc61fcae)) {
       for(i = 0; i < var_fe0aad7efc61fcae.size; i++) {
         if(current_round >= var_fe0aad7efc61fcae[i].startround) {
-          var_817124607074ae8c = var_fe0aad7efc61fcae[i].var_d9a25092bed9b107;
+          var_817124607074ae8c = var_fe0aad7efc61fcae[i].healthadded;
 
           if(isDefined(var_fe0aad7efc61fcae[i + 1]) && current_round >= var_fe0aad7efc61fcae[i + 1].startround) {
             health_rounds = var_fe0aad7efc61fcae[i + 1].startround - var_fe0aad7efc61fcae[i].startround;
@@ -88,8 +88,8 @@ function function_9102c548055a3813(scriptbundle_name, n_round) {
       n_index++;
     }
 
-    if(isDefined(var_fe0aad7efc61fcae[n_index].var_d9a25092bed9b107)) {
-      result_health += var_fe0aad7efc61fcae[n_index].var_d9a25092bed9b107;
+    if(isDefined(var_fe0aad7efc61fcae[n_index].healthadded)) {
+      result_health += var_fe0aad7efc61fcae[n_index].healthadded;
     }
 
     var_30d177f7b4f9f195++;

@@ -16,12 +16,12 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_warlord_maestro");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_48b9aea3f0fc9faa");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_48b9aea3f0fc9faa");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 2880;
   self.maxhealth = 2880;
   self.behaviortreeasset = "soldier_agent";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_single";
+  self.aishootstyle = "ai_shoot_styles_single";
   self.asmasset = "soldier";
   self.zombieaisetting = "settings_warlord_maestro";
   scripts\common\ai_settings::function_7b25d1c42e7f75be("aisettings_warlord_base");
@@ -33,8 +33,8 @@ function main() {
   self.primaryweapon = self.weapon;
   secondaryweaponhash = "jup_jp13_dm_svictork, [ none, none, none, none, none, none ], none, none";
   self.secondaryweapon = level.var_67b54180a55f70e1[secondaryweaponhash];
-  var_4f04b9c326eb7400 = "iw9_pi_papa220, [ none, none, none, none, none, none ], none, none";
-  self.sidearm = level.var_67b54180a55f70e1[var_4f04b9c326eb7400];
+  sidearmweaponhash = "iw9_pi_papa220, [ none, none, none, none, none, none ], none, none";
+  self.sidearm = level.var_67b54180a55f70e1[sidearmweaponhash];
   self.grenadeweapon = nullweapon();
   self.grenadeammo = 0;
   setup_model();
@@ -50,9 +50,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();
@@ -107,9 +107,9 @@ function setup_weapons() {
     level.var_67b54180a55f70e1[secondaryweaponhash] = scripts\mp\class::function_e83615f8a92e4378("jup_jp13_dm_svictork", ["none", "none", "none", "none", "none", "none"], "none", "none");
   }
 
-  var_4f04b9c326eb7400 = "iw9_pi_papa220, [ none, none, none, none, none, none ], none, none";
+  sidearmweaponhash = "iw9_pi_papa220, [ none, none, none, none, none, none ], none, none";
 
-  if(!isDefined(level.var_67b54180a55f70e1[var_4f04b9c326eb7400])) {
-    level.var_67b54180a55f70e1[var_4f04b9c326eb7400] = scripts\mp\class::function_e83615f8a92e4378("iw9_pi_papa220", ["none", "none", "none", "none", "none", "none"], "none", "none");
+  if(!isDefined(level.var_67b54180a55f70e1[sidearmweaponhash])) {
+    level.var_67b54180a55f70e1[sidearmweaponhash] = scripts\mp\class::function_e83615f8a92e4378("iw9_pi_papa220", ["none", "none", "none", "none", "none", "none"], "none", "none");
   }
 }

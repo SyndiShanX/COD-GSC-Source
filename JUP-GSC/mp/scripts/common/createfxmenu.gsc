@@ -255,13 +255,13 @@ function menu_fx_creation() {
 
   for(i = level.effect_list_offset; i < keys.size; i++) {
     count += 1;
-    var_7356ab609cfad76c = count;
+    button_to_check = count;
 
-    if(var_7356ab609cfad76c == 10) {
-      var_7356ab609cfad76c = 0;
+    if(button_to_check == 10) {
+      button_to_check = 0;
     }
 
-    if(button_is_clicked(var_7356ab609cfad76c + "")) {
+    if(button_is_clicked(button_to_check + "")) {
       picked_fx = keys[i];
       break;
     }
@@ -339,13 +339,13 @@ function menu_change_selected_fx() {
     }
 
     drawncount++;
-    var_7356ab609cfad76c = drawncount;
+    button_to_check = drawncount;
 
-    if(var_7356ab609cfad76c == 10) {
-      var_7356ab609cfad76c = 0;
+    if(button_to_check == 10) {
+      button_to_check = 0;
     }
 
-    if(button_is_clicked(var_7356ab609cfad76c + "")) {
+    if(button_is_clicked(button_to_check + "")) {
       prepare_option_for_change(option, drawncount);
       break;
     }
@@ -537,20 +537,20 @@ function display_fx_add_options(ent) {
     }
 
     drawncount++;
-    var_7356ab609cfad76c = drawncount;
+    button_to_check = drawncount;
 
-    if(var_7356ab609cfad76c == 10) {
-      var_7356ab609cfad76c = 0;
+    if(button_to_check == 10) {
+      button_to_check = 0;
     }
 
-    if(button_is_clicked(var_7356ab609cfad76c + "")) {
+    if(button_is_clicked(button_to_check + "")) {
       add_option_to_selected_entities(option);
       menunone();
       level.last_displayed_ent = undefined;
       return;
     }
 
-    set_fx_hudelement(var_7356ab609cfad76c + ". " + option["description"]);
+    set_fx_hudelement(button_to_check + ". " + option["description"]);
   }
 
   if(count > level.effect_list_offset_max) {
@@ -699,13 +699,13 @@ function select_by_name() {
 
   for(i = level.effect_list_offset; i < keys.size; i++) {
     count += 1;
-    var_7356ab609cfad76c = count;
+    button_to_check = count;
 
-    if(var_7356ab609cfad76c == 10) {
-      var_7356ab609cfad76c = 0;
+    if(button_to_check == 10) {
+      button_to_check = 0;
     }
 
-    if(button_is_clicked(var_7356ab609cfad76c + "")) {
+    if(button_is_clicked(button_to_check + "")) {
       picked_fx = keys[i];
       break;
     }

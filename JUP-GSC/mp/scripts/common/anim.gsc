@@ -179,12 +179,12 @@ function anim_single_internal(guys, anime, tag, var_9e8a16d47a03007a, animname_o
   pos = get_anim_position(tag);
   org = pos["origin"];
   angles = pos["angles"];
-  var_c89cf41205d8055d = undefined;
-  var_2afd32f7cad8af86 = 999999;
-  var_7d006c3a8c8ff60a = undefined;
-  var_a3d52619ed30853a = undefined;
+  scriptedanimationindex = undefined;
+  scriptedanimationtime = 999999;
+  scriptedsoundindex = undefined;
+  scriptedfaceindex = undefined;
   scriptedfaceanim = undefined;
-  var_910e49245fadfc70 = undefined;
+  scriptedheadanim = undefined;
   anim_string = "single anim";
   hasxcam = 0;
 
@@ -200,8 +200,8 @@ function anim_single_internal(guys, anime, tag, var_9e8a16d47a03007a, animname_o
     }
 
     dofacialanim = 0;
-    var_ae4f6e4d11bb5adb = 0;
-    var_9ac73a1996d2dae = 0;
+    doheadanim = 0;
+    dodialogue = 0;
     doanimation = 0;
     dotext = 0;
     dialogue = undefined;
@@ -222,7 +222,7 @@ function anim_single_internal(guys, anime, tag, var_9e8a16d47a03007a, animname_o
     }
 
     if(isDefined(level.scr_sound[animname]) && isDefined(level.scr_sound[animname][anime])) {
-      var_9ac73a1996d2dae = 1;
+      dodialogue = 1;
       dialogue = level.scr_sound[animname][anime];
     }
 
@@ -231,18 +231,18 @@ function anim_single_internal(guys, anime, tag, var_9e8a16d47a03007a, animname_o
       facialanim = level.scr_face[animname][anime];
       scriptedfaceanim = facialanim;
 
-      if(var_9ac73a1996d2dae) {
+      if(dodialogue) {
         if(animhasnotetrack(facialanim, "vo_" + dialogue)) {
-          var_9ac73a1996d2dae = 0;
+          dodialogue = 0;
           dialogue = undefined;
         }
       }
     }
 
     if(isDefined(level.scr_head[animname]) && isDefined(level.scr_head[animname][anime])) {
-      var_ae4f6e4d11bb5adb = 1;
+      doheadanim = 1;
       headanim = level.scr_head[animname][anime];
-      var_910e49245fadfc70 = headanim;
+      scriptedheadanim = headanim;
     }
 
     if(isDefined(level.scr_anim[animname]) && isDefined(level.scr_anim[animname][anime]) && self[[anim.callbacks["ShouldDoAnim"]]]()) {
@@ -268,31 +268,31 @@ function anim_single_internal(guys, anime, tag, var_9e8a16d47a03007a, animname_o
       guy scripts\common\visibility_mode::function_d5f76e611c78509a();
       animtime = guy[[anim.callbacks["DoAnimation"]]](org, angles, animname, anime, anim_string, undefined, scripted_node_ent);
 
-      if(animtime < var_2afd32f7cad8af86) {
-        var_2afd32f7cad8af86 = animtime;
-        var_c89cf41205d8055d = i;
+      if(animtime < scriptedanimationtime) {
+        scriptedanimationtime = animtime;
+        scriptedanimationindex = i;
       }
     }
 
-    if(dofacialanim || var_9ac73a1996d2dae) {
-      if(guy[[anim.callbacks["DoFacialAnim"]]](dofacialanim, var_9ac73a1996d2dae, doanimation, anime, animname, dialogue, 0)) {
-        var_a3d52619ed30853a = i;
+    if(dofacialanim || dodialogue) {
+      if(guy[[anim.callbacks["DoFacialAnim"]]](dofacialanim, dodialogue, doanimation, anime, animname, dialogue, 0)) {
+        scriptedfaceindex = i;
       }
 
-      var_7d006c3a8c8ff60a = i;
+      scriptedsoundindex = i;
     }
 
     if(isai(guy)) {
       assertex(!(doanimation && guy doinglongdeath()), "<dev string:x143>");
     }
 
-    assertex(doanimation || dofacialanim || var_9ac73a1996d2dae || dotext, "<dev string:x191>" + anime + "<dev string:x1ac>" + animname + "<dev string:x1c6>");
+    assertex(doanimation || dofacialanim || dodialogue || dotext, "<dev string:x191>" + anime + "<dev string:x1ac>" + animname + "<dev string:x1c6>");
 
-    if(var_ae4f6e4d11bb5adb) {
-      guy thread play_addtive_head_anim(guy, var_910e49245fadfc70);
+    if(doheadanim) {
+      guy thread play_addtive_head_anim(guy, scriptedheadanim);
     }
 
-    if(dotext && !var_9ac73a1996d2dae) {
+    if(dotext && !dodialogue) {
       guy thread[[anim.callbacks["<dev string:x1ef>"]]](level.scr_text[animname][anime]);
     }
 
@@ -309,26 +309,26 @@ function anim_single_internal(guys, anime, tag, var_9e8a16d47a03007a, animname_o
     }
 
     if(guy function_e42b762e098c8f9e()) {
-      guy function_4beb9f7715504995(guy.var_37b96012304143d7, guy.var_f1a075b476ca91f1, "tag_camera");
+      guy animscripted_blendin(guy.var_37b96012304143d7, guy.var_f1a075b476ca91f1, "tag_camera");
     }
   }
 
   if(hasxcam) {
     [[anim.callbacks["playXcam"]]](level.scr_xcam[anime], org, angles);
-  } else if(isDefined(var_c89cf41205d8055d)) {
+  } else if(isDefined(scriptedanimationindex)) {
     ent = spawnStruct();
-    ent thread anim_deathnotify(guys[var_c89cf41205d8055d], anime);
-    ent thread anim_animationendnotify(guys[var_c89cf41205d8055d], anime, var_2afd32f7cad8af86, var_9e8a16d47a03007a);
+    ent thread anim_deathnotify(guys[scriptedanimationindex], anime);
+    ent thread anim_animationendnotify(guys[scriptedanimationindex], anime, scriptedanimationtime, var_9e8a16d47a03007a);
     ent waittill(anime);
-  } else if(isDefined(var_a3d52619ed30853a)) {
+  } else if(isDefined(scriptedfaceindex)) {
     ent = spawnStruct();
-    ent thread anim_deathnotify(guys[var_a3d52619ed30853a], anime);
-    ent thread anim_facialendnotify(guys[var_a3d52619ed30853a], anime, scriptedfaceanim);
+    ent thread anim_deathnotify(guys[scriptedfaceindex], anime);
+    ent thread anim_facialendnotify(guys[scriptedfaceindex], anime, scriptedfaceanim);
     ent waittill(anime);
-  } else if(isDefined(var_7d006c3a8c8ff60a)) {
+  } else if(isDefined(scriptedsoundindex)) {
     ent = spawnStruct();
-    ent thread anim_deathnotify(guys[var_7d006c3a8c8ff60a], anime);
-    ent thread anim_dialogueendnotify(guys[var_7d006c3a8c8ff60a], anime);
+    ent thread anim_deathnotify(guys[scriptedsoundindex], anime);
+    ent thread anim_dialogueendnotify(guys[scriptedsoundindex], anime);
     ent waittill(anime);
   }
 
@@ -386,12 +386,12 @@ function anim_generic_loop(guy, anime, ender, tag) {
   packet["guy"] = guy;
   packet["entity"] = self;
   packet["tag"] = tag;
-  var_3d308e5cd595225d[0] = packet;
-  anim_loop_packet(var_3d308e5cd595225d, anime, ender, "generic");
+  guypackets[0] = packet;
+  anim_loop_packet(guypackets, anime, ender, "generic");
 }
 
 function anim_loop(guys, anime, ender, tag, var_656e3d548572faf6, animname_override) {
-  var_3d308e5cd595225d = [];
+  guypackets = [];
 
   foreach(guy in guys) {
     packet = [];
@@ -399,15 +399,15 @@ function anim_loop(guys, anime, ender, tag, var_656e3d548572faf6, animname_overr
     packet["entity"] = self;
     packet["tag"] = tag;
     packet["origin_offset"] = var_656e3d548572faf6;
-    var_3d308e5cd595225d[var_3d308e5cd595225d.size] = packet;
+    guypackets[guypackets.size] = packet;
   }
 
-  anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override);
+  anim_loop_packet(guypackets, anime, ender, animname_override);
 }
 
-function anim_loop_packet_solo(var_6fab270f71d41318, anime, ender, animname_override) {
+function anim_loop_packet_solo(singleguypacket, anime, ender, animname_override) {
   looppacket = [];
-  looppacket[0] = var_6fab270f71d41318;
+  looppacket[0] = singleguypacket;
   anim_loop_packet(looppacket, anime, ender, animname_override);
 }
 
@@ -428,11 +428,11 @@ function pick_nag_anim(datastruct) {
   return datastruct.currentnagindex;
 }
 
-function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override) {
+function anim_loop_packet(guypackets, anime, ender, animname_override) {
   assertex(!isDefined(level.scr_xcam[anime]), "<dev string:x231>");
 
-  foreach(var_f2811089f0eb595c in var_3d308e5cd595225d) {
-    guy = var_f2811089f0eb595c["guy"];
+  foreach(guypacket in guypackets) {
+    guy = guypacket["guy"];
 
     if(!isDefined(guy)) {
       continue;
@@ -446,7 +446,7 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
     guy._animactive++;
   }
 
-  baseguy = var_3d308e5cd595225d[0]["guy"];
+  baseguy = guypackets[0]["guy"];
 
   if(!isDefined(baseguy.loops)) {
     baseguy.loops = 0;
@@ -459,10 +459,10 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
     ender = "stop_loop";
   }
 
-  thread endonremoveanimactive(ender, var_3d308e5cd595225d);
+  thread endonremoveanimactive(ender, guypackets);
   self endon(ender);
 
-  thread function_1d3c30084bbec96a(baseguy, ender, anime);
+  thread looping_anim_ender(baseguy, ender, anime);
 
   anim_string = "looping anim";
   base_anime = anime;
@@ -482,8 +482,8 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
   if(hasnags && utility::issp()) {
     ai = 0;
 
-    foreach(i, var_f2811089f0eb595c in var_3d308e5cd595225d) {
-      if(isai(var_f2811089f0eb595c["guy"])) {
+    foreach(i, guypacket in guypackets) {
+      if(isai(guypacket["guy"])) {
         ai++;
       }
     }
@@ -499,7 +499,7 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
 
   donag = 0;
   nagdata = undefined;
-  var_405d3683254d21e8 = 0;
+  abandonloop = 0;
 
   if(hasnags) {
     setdvarifuninitialized(@ "hash_e35578a601bcd680", 0);
@@ -525,20 +525,20 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
     }
 
     lastidleanim = idleanim;
-    var_c89cf41205d8055d = undefined;
-    var_2afd32f7cad8af86 = 999999;
-    var_7d006c3a8c8ff60a = undefined;
+    scriptedanimationindex = undefined;
+    scriptedanimationtime = 999999;
+    scriptedsoundindex = undefined;
     guy = undefined;
 
-    foreach(i, var_f2811089f0eb595c in var_3d308e5cd595225d) {
-      entity = var_f2811089f0eb595c["entity"];
-      guy = var_f2811089f0eb595c["guy"];
-      pos = entity get_anim_position(var_f2811089f0eb595c["tag"]);
+    foreach(i, guypacket in guypackets) {
+      entity = guypacket["entity"];
+      guy = guypacket["guy"];
+      pos = entity get_anim_position(guypacket["tag"]);
       org = pos["origin"];
       angles = pos["angles"];
 
-      if(isDefined(var_f2811089f0eb595c["origin_offset"])) {
-        offset = var_f2811089f0eb595c["origin_offset"];
+      if(isDefined(guypacket["origin_offset"])) {
+        offset = guypacket["origin_offset"];
         forward = anglesToForward(angles);
         right = anglestoright(angles);
         up = anglestoup(angles);
@@ -549,12 +549,12 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
 
       if(isDefined(guy.remove_from_animloop)) {
         guy.remove_from_animloop = undefined;
-        var_3d308e5cd595225d[i] = undefined;
+        guypackets[i] = undefined;
         continue;
       }
 
       dofacialanim = 0;
-      var_9ac73a1996d2dae = 0;
+      dodialogue = 0;
       doanimation = 0;
       dotext = 0;
       facialanim = undefined;
@@ -573,7 +573,7 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
       }
 
       if(isDefined(level.scr_sound[animname]) && isDefined(level.scr_sound[animname][anime]) && isDefined(level.scr_sound[animname][anime][idleanim])) {
-        var_9ac73a1996d2dae = 1;
+        dodialogue = 1;
         dialogue = level.scr_sound[animname][anime][idleanim];
       }
 
@@ -591,9 +591,9 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
         dotext = 1;
       }
 
-      if(!dofacialanim && !var_9ac73a1996d2dae && !doanimation && !dotext) {
+      if(!dofacialanim && !dodialogue && !doanimation && !dotext) {
         assertmsg("<dev string:x29c>" + guy getentitynumber() + "<dev string:x2ab>" + anime + "<dev string:x2cc>");
-        var_405d3683254d21e8 = 1;
+        abandonloop = 1;
         break;
       }
 
@@ -601,9 +601,9 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
         guy scripts\common\visibility_mode::function_d5f76e611c78509a();
         animtime = guy[[anim.callbacks["DoAnimation"]]](org, angles, animname, anime, anim_string, idleanim, undefined);
 
-        if(animtime < var_2afd32f7cad8af86) {
-          var_2afd32f7cad8af86 = animtime;
-          var_c89cf41205d8055d = i;
+        if(animtime < scriptedanimationtime) {
+          scriptedanimationtime = animtime;
+          scriptedanimationindex = i;
         }
       }
 
@@ -613,12 +613,12 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
         }
       }
 
-      if(dofacialanim || var_9ac73a1996d2dae) {
-        guy[[anim.callbacks["DoFacialAnim"]]](dofacialanim, var_9ac73a1996d2dae, doanimation, anime, animname, dialogue, 1);
-        var_7d006c3a8c8ff60a = i;
+      if(dofacialanim || dodialogue) {
+        guy[[anim.callbacks["DoFacialAnim"]]](dofacialanim, dodialogue, doanimation, anime, animname, dialogue, 1);
+        scriptedsoundindex = i;
       }
 
-      if(dotext && !var_9ac73a1996d2dae) {
+      if(dotext && !dodialogue) {
         guy thread[[anim.callbacks["<dev string:x1ef>"]]](level.scr_text[animname][anime]);
       }
     }
@@ -627,8 +627,8 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
       break;
     }
 
-    if(isDefined(var_c89cf41205d8055d)) {
-      finishedanim = waittill_animend(var_3d308e5cd595225d[var_c89cf41205d8055d]["guy"], anim_string, hasnags);
+    if(isDefined(scriptedanimationindex)) {
+      finishedanim = waittill_animend(guypackets[scriptedanimationindex]["guy"], anim_string, hasnags);
 
       if(!isDefined(finishedanim) && hasnags) {
         donag = 1;
@@ -637,11 +637,11 @@ function anim_loop_packet(var_3d308e5cd595225d, anime, ender, animname_override)
           guy[[anim.callbacks["StopAnimscripted"]]]();
         }
       }
-    } else if(isDefined(var_7d006c3a8c8ff60a)) {
-      var_3d308e5cd595225d[var_7d006c3a8c8ff60a]["guy"] waittill(anim_string);
+    } else if(isDefined(scriptedsoundindex)) {
+      guypackets[scriptedsoundindex]["guy"] waittill(anim_string);
     }
 
-    if(var_405d3683254d21e8) {
+    if(abandonloop) {
       break;
     }
   }
@@ -709,7 +709,7 @@ function last_anim_time_check() {
   self.last_anim_time = time;
 }
 
-function anim_moveTo(guys, anime, tag, time, acceleration_time, var_efe93c754f5124e6) {
+function anim_moveTo(guys, anime, tag, time, acceleration_time, deceleration_time) {
   pos = get_anim_position(tag);
   org = pos["origin"];
   angles = pos["angles"];
@@ -723,8 +723,8 @@ function anim_moveTo(guys, anime, tag, time, acceleration_time, var_efe93c754f51
       continue;
     }
 
-    guy moveTo(startorg, time, acceleration_time, var_efe93c754f5124e6);
-    guy rotateTo(startang, time, acceleration_time, var_efe93c754f5124e6);
+    guy moveTo(startorg, time, acceleration_time, deceleration_time);
+    guy rotateTo(startang, time, acceleration_time, deceleration_time);
   }
 }
 
@@ -1069,7 +1069,7 @@ function addnotetrack_swapparttoefx(animname, notetrack, anime, effect_name, tag
   level.scr_notetrack[animname][anime][notetrack][index] = array;
 }
 
-function note_track_trace_to_efx(notetrack, canceltrack, tagname, effect_path, var_56aef90205769a90, delete_depth) {
+function note_track_trace_to_efx(notetrack, canceltrack, tagname, effect_path, waterfx_path, delete_depth) {
   scenedata = get_datascene();
 
   if(notetrack != "start" && !animhasnotetrack(scenedata getanim(scenedata.anim_sequence), notetrack)) {
@@ -1079,11 +1079,11 @@ function note_track_trace_to_efx(notetrack, canceltrack, tagname, effect_path, v
 
   add_fx(effect_path, effect_path);
 
-  if(isDefined(var_56aef90205769a90)) {
-    add_fx(var_56aef90205769a90, var_56aef90205769a90);
+  if(isDefined(waterfx_path)) {
+    add_fx(waterfx_path, waterfx_path);
   }
 
-  addnotetrack_tracepartforefx(scenedata.animname, notetrack, canceltrack, scenedata.anim_sequence, tagname, effect_path, var_56aef90205769a90, delete_depth);
+  addnotetrack_tracepartforefx(scenedata.animname, notetrack, canceltrack, scenedata.anim_sequence, tagname, effect_path, waterfx_path, delete_depth);
 }
 
 function note_track_start_fx_on_tag(notetrack, tagname, effect_path) {
@@ -1105,14 +1105,14 @@ function get_datascene() {
   return scenedata;
 }
 
-function addnotetrack_tracepartforefx(animname, notetrack, canceltrack, anime, tagname, effect_name, var_6c3cb0b533910c44, delete_depth) {
+function addnotetrack_tracepartforefx(animname, notetrack, canceltrack, anime, tagname, effect_name, waterfx_name, delete_depth) {
   getfx(effect_name);
   notetrack = tolower(notetrack);
   anime = get_generic_anime(anime);
   index = add_notetrack_and_get_index(animname, notetrack, anime);
   array = [];
   array["trace_part_for_efx"] = effect_name;
-  array["trace_part_for_efx_water"] = var_6c3cb0b533910c44;
+  array["trace_part_for_efx_water"] = waterfx_name;
   array["trace_part_for_efx_cancel"] = canceltrack;
   array["trace_part_for_efx_delete_depth"] = delete_depth;
   array["selftag"] = tagname;
@@ -1286,8 +1286,8 @@ function init_animsounds_for_animname(animname) {
 }
 
 function init_notetracks_for_animname(animname) {
-  foreach(anime, var_72e7f473bbab5d91 in level.scr_notetrack[animname]) {
-    foreach(notetrack, notetrack_array in var_72e7f473bbab5d91) {
+  foreach(anime, anime_array in level.scr_notetrack[animname]) {
+    foreach(notetrack, notetrack_array in anime_array) {
       foreach(scr_notetrack in notetrack_array) {
         soundalias = scr_notetrack["sound"];
 
@@ -1305,11 +1305,11 @@ function init_notetracks_for_animname(animname) {
   }
 }
 
-function endonremoveanimactive(endonstring, var_3d308e5cd595225d) {
+function endonremoveanimactive(endonstring, guypackets) {
   self waittill(endonstring);
 
-  foreach(var_f2811089f0eb595c in var_3d308e5cd595225d) {
-    guy = var_f2811089f0eb595c["guy"];
+  foreach(guypacket in guypackets) {
+    guy = guypacket["guy"];
 
     if(!isDefined(guy)) {
       continue;
@@ -1346,13 +1346,13 @@ function anim_dialogueendnotify(guy, anime) {
   self notify(anime);
 }
 
-function anim_animationendnotify(guy, anime, var_2afd32f7cad8af86, var_9e8a16d47a03007a) {
+function anim_animationendnotify(guy, anime, scriptedanimationtime, var_9e8a16d47a03007a) {
   self endon(anime);
   guy endon("death");
-  var_2afd32f7cad8af86 -= var_9e8a16d47a03007a;
+  scriptedanimationtime -= var_9e8a16d47a03007a;
 
-  if(var_9e8a16d47a03007a > 0 && var_2afd32f7cad8af86 > 0) {
-    guy waittill_match_or_timeout("single anim", "end", var_2afd32f7cad8af86);
+  if(var_9e8a16d47a03007a > 0 && scriptedanimationtime > 0) {
+    guy waittill_match_or_timeout("single anim", "end", scriptedanimationtime);
     guy stopanimScripted();
   } else {
     guy waittillmatch("single anim", "end");
@@ -1583,7 +1583,7 @@ function printloops(guy, anime) {
   }
 }
 
-function function_1d3c30084bbec96a(guy, ender, anime) {
+function looping_anim_ender(guy, ender, anime) {
   guy endon("<dev string:x5f5>");
   self waittill(ender);
   guy.loopanims = array_remove(guy.loopanims, anime);
@@ -1629,7 +1629,7 @@ function function_89b3eabd606fcda3(animation) {
 }
 
 function function_f1e7ee8ddeece062(anime) {
-  if(utility::issp() && isDefined(level.var_df7711b84d224bcf) && istrue(level.var_df7711b84d224bcf[anime])) {
+  if(utility::issp() && isDefined(level.scr_entrances) && istrue(level.scr_entrances[anime])) {
     return true;
   }
 
@@ -1650,9 +1650,9 @@ function function_1eba925251530689(guys, anime) {
 }
 
 function function_56bd620e57a834af(anime, animname, animation) {
-  var_4f51ef0bd97a4707 = anime + "_entrance";
-  level.scr_anim[animname][var_4f51ef0bd97a4707] = animation;
-  return var_4f51ef0bd97a4707;
+  newanime = anime + "_entrance";
+  level.scr_anim[animname][newanime] = animation;
+  return newanime;
 }
 
 function function_c099f6fd9c19f5a6(anime, org, angles, animname) {
@@ -2057,9 +2057,9 @@ function function_65e9f4b64110bb5c() {
   }
 }
 
-function function_dca1a3a29d2ee467(guys_with_anims, var_4bc185af207d5706) {
-  thread anim_reach_speed_control(guys_with_anims, var_4bc185af207d5706);
-  function_9dbe1a78b03782f2(guys_with_anims, &reach_with_standard_adjustments_begin, &reach_with_standard_adjustments_end);
+function function_dca1a3a29d2ee467(guys_with_anims, speed_baseline) {
+  thread anim_reach_speed_control(guys_with_anims, speed_baseline);
+  anim_reach_with_funcs_guys_with_anims(guys_with_anims, &reach_with_standard_adjustments_begin, &reach_with_standard_adjustments_end);
 }
 
 function anim_reach_with_funcs(guys, anime, tag, animname_override, start_func, end_func, arrival_type) {
@@ -2089,10 +2089,10 @@ function anim_reach_with_funcs(guys, anime, tag, animname_override, start_func, 
     guys_with_anims[guys_with_anims.size] = [guy, animation, alignmentinfo];
   }
 
-  function_9dbe1a78b03782f2(guys_with_anims, start_func, end_func, arrival_type);
+  anim_reach_with_funcs_guys_with_anims(guys_with_anims, start_func, end_func, arrival_type);
 }
 
-function function_9dbe1a78b03782f2(guys_with_anims, start_func, end_func, arrival_type) {
+function anim_reach_with_funcs_guys_with_anims(guys_with_anims, start_func, end_func, arrival_type) {
   ent = spawnStruct();
   debugstartpos = 0;
 
@@ -2214,9 +2214,9 @@ function private begin_anim_reach(ent, startorg, startangles, start_func, end_fu
   self notify("new_anim_reach");
 }
 
-function anim_reach_speed_control(guys_with_anims, var_4bc185af207d5706, var_ad86b98c8c9def3d) {
+function anim_reach_speed_control(guys_with_anims, speed_baseline, var_ad86b98c8c9def3d) {
   waittillframeend();
-  var_4bc185af207d5706 = default_to(var_4bc185af207d5706, 140);
+  speed_baseline = default_to(speed_baseline, 140);
   var_ad86b98c8c9def3d = default_to(var_ad86b98c8c9def3d, 4);
 
   foreach(index, guy_anim in guys_with_anims) {
@@ -2228,10 +2228,10 @@ function anim_reach_speed_control(guys_with_anims, var_4bc185af207d5706, var_ad8
     track_speed = track_speed || getdvarint(@ "scr_debug_reach");
 
     if(track_speed) {
-      guy childthread anim_reach_speed_control_avg(var_ad86b98c8c9def3d, var_4bc185af207d5706);
+      guy childthread anim_reach_speed_control_avg(var_ad86b98c8c9def3d, speed_baseline);
     }
 
-    guy aisetdesiredspeed(var_4bc185af207d5706);
+    guy aisetdesiredspeed(speed_baseline);
   }
 
   while(true) {
@@ -2309,7 +2309,7 @@ function anim_reach_speed_control(guys_with_anims, var_4bc185af207d5706, var_ad8
         }
       }
 
-      desiredspeed = speedscale * var_4bc185af207d5706;
+      desiredspeed = speedscale * speed_baseline;
 
       if(getdvarint(@ "scr_debug_reach")) {
         if(furthestguy == guy) {
@@ -2317,7 +2317,7 @@ function anim_reach_speed_control(guys_with_anims, var_4bc185af207d5706, var_ad8
         }
 
         line(guy.origin, guy.goalpos, (1, 1, 1), 1, 0, 1);
-        print3d(guy.origin, "<dev string:xd0>" + int(var_4bc185af207d5706), (0, 1, 0), 1, 0.3, 1, 1);
+        print3d(guy.origin, "<dev string:xd0>" + int(speed_baseline), (0, 1, 0), 1, 0.3, 1, 1);
         print3d(guy.origin + (0, 0, 10), "<dev string:xd0>" + int(desiredspeed), (1, 1, 1), 1, 0.3, 1, 1);
 
         if(isDefined(guy.reachspeed)) {
@@ -2346,13 +2346,13 @@ function anim_reach_speed_control(guys_with_anims, var_4bc185af207d5706, var_ad8
   }
 }
 
-function anim_reach_speed_control_avg(var_ad86b98c8c9def3d, var_4bc185af207d5706) {
+function anim_reach_speed_control_avg(var_ad86b98c8c9def3d, speed_baseline) {
   self endon("death");
   self notify("anim_reach_speed_control_avg");
   self endon("anim_reach_speed_control_avg");
   self.reachspeed = spawnStruct();
   reachspeed = self.reachspeed;
-  reachspeed.speed_avg = var_4bc185af207d5706;
+  reachspeed.speed_avg = speed_baseline;
   reachspeed.speed_samples = [];
   reachspeed.speed_total = 0;
   curr = 0;

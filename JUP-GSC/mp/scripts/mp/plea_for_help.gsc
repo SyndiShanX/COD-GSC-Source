@@ -213,7 +213,7 @@ function callforhelp(deathweapon) {
   function_5cccb32072a43854(1);
   var_6e9f9801408856f8 = isbot(self) && shouldautoacceptteamswitch();
   endons = ["spawned", "plea_deleted", "plea_created", "br_team_fully_eliminated", "plea_eliminated"];
-  self function_bc667001f9dd3808(self.origin);
+  self predictstreamposuntilcleared(self.origin);
   self.var_250a9483d4ca72cd = undefined;
   function_bbf44d52ca2820cd("request_plea_kbm", "activate", &function_d9ae2a812e5ee454, undefined, endons, 4, &function_52273a4095c18970, "kbm_only", var_6e9f9801408856f8);
   function_bbf44d52ca2820cd("request_plea_gamepad", "actionslot 2", &function_d9ae2a812e5ee454, undefined, endons, 4, &function_52273a4095c18970, "gamepad_only");
@@ -300,7 +300,7 @@ function private function_23c9a2a29579048d(origin) {
   offset = (0, 0, 20);
   spawnpos = origin + offset;
   self.useent = spawnscriptable("br_plea_request", spawnpos, (0, 0, 0));
-  self.useent utility::function_6e506f39f121ea8a(self.var_15ab90a8de6865aa, offset);
+  self.useent utility::scriptable_setparententity(self.var_15ab90a8de6865aa, offset);
   self.useent.id = "plea_for_help_looting";
   self.useent.usetime = level.pleaforhelp.var_7836c12f19dd2c3 * 1000;
   self.useent.curprogress = 0;
@@ -769,7 +769,7 @@ function private function_78d0ae2d6462054f(player, trigger) {
 
   if(isDefined(plearequest.var_3bf41bb7c12cdb4e) && !array_contains(plearequest.var_3bf41bb7c12cdb4e, player.guid)) {
     if(issharedfuncdefined("hud", "showBrDMZSplash")) {
-      [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_plea_for_help_requested", [player], undefined, undefined, undefined, level.var_42b1e877ab187c6);
+      [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_plea_for_help_requested", [player], undefined, undefined, undefined, level.splashlistoverride);
     }
 
     plearequest.var_3bf41bb7c12cdb4e[plearequest.var_3bf41bb7c12cdb4e.size] = player.guid;
@@ -923,7 +923,7 @@ function function_c9e6fcd7831f36af(origin) {
 
     if(isreallyalive(player) && function_f4468dd443922b9e(self.var_15ab90a8de6865aa, player, 1) && function_46eea9b19a5046cf(self.var_15ab90a8de6865aa, player)) {
       if(issharedfuncdefined("hud", "showBrDMZSplash")) {
-        [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_plea_for_help_requested", [player], undefined, undefined, undefined, level.var_42b1e877ab187c6);
+        [[getsharedfunc("hud", "showBrDMZSplash")]]("dmz_plea_for_help_requested", [player], undefined, undefined, undefined, level.splashlistoverride);
       }
 
       self.var_3bf41bb7c12cdb4e[self.var_3bf41bb7c12cdb4e.size] = player.guid;
@@ -944,7 +944,7 @@ function private function_6bdc6f56944dc3aa(player, oldteam, newteam) {
   function_631c07dea1296288(newteam);
 }
 
-function private function_4e60ea7d6c5ab305(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_4e60ea7d6c5ab305(instance, part, state, player, bautouse, usestring) {
   thread function_7bbc24bc9f4693bb(instance, part, state, player, instance.plearequest);
 }
 
@@ -1041,7 +1041,7 @@ function function_1714ffea633dcfed(team) {
 }
 
 function private function_9495edea61941f81(players) {
-  if(!isDefined(players) || !isDefined(level.var_74e0aae435a09a51)) {
+  if(!isDefined(players) || !isDefined(level.onplayereliminated)) {
     return false;
   }
 
@@ -1050,7 +1050,7 @@ function private function_9495edea61941f81(players) {
       player notify("check_for_plea");
 
       if(!function_bfdfd3c9ba0cc7cb(player)) {
-        thread[[level.var_74e0aae435a09a51]](player);
+        thread[[level.onplayereliminated]](player);
         player notify("plea_eliminated");
         continue;
       }
@@ -1134,7 +1134,7 @@ function function_5df318837f8d78a2(player, squadmembers) {
   player.var_6af52e47cbd09141 = endtime;
   player scripts\mp\utility\lower_message::setlowermessageomnvar("plea_time", endtime);
   function_d8b32f106816afc1(player);
-  thread[[level.var_74e0aae435a09a51]](player);
+  thread[[level.onplayereliminated]](player);
   player notify("plea_eliminated");
 
   if(ispleading(player)) {

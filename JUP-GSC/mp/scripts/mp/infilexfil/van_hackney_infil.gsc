@@ -231,7 +231,7 @@ function spawnactors(team, scene_name, extra_crew) {
   }
 }
 
-function blima_chief_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function blima_chief_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.blima.players) {
     player playsoundtoplayer(alias, player);
   }
@@ -606,13 +606,13 @@ function spawnvan(scene_node, team, scene_name) {
   return van;
 }
 
-function commander_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function commander_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     self playsoundtoplayer(alias, player);
   }
 }
 
-function driver_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function driver_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     self playsoundtoplayer(alias, player);
   }

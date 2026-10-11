@@ -26,7 +26,7 @@
 #namespace dna_nuke;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("dna_nuke"), &init);
+  registerkillstreakinitfunction(getxhash("dna_nuke"), &init);
 }
 
 function private init() {
@@ -87,7 +87,7 @@ function function_245ad11ce8c700da(streakinfo) {
   }
 
   result = function_3f5928ab9073266c(streakinfo);
-  function_f1aed36ab4598ea("kls_jup_emp");
+  snd_transient_load("kls_jup_emp");
   return true;
 }
 
@@ -329,7 +329,7 @@ function function_9d55bde0bcef1158(missile) {
   if(isDefined(missile)) {
     missile setscriptablepartstate("warhead_dna_nuke_thruster", "off", 0);
     missile notify("cruise_missile_explode");
-    scripts\engine\utility::function_f3bb4f4911a1beb2("game", "returnObjectiveID", missile.var_49be89641b10a107);
+    scripts\engine\utility::callsharedfunc("game", "returnObjectiveID", missile.var_49be89641b10a107);
   }
 
   if(isDefined(self)) {
@@ -343,8 +343,8 @@ function function_9d55bde0bcef1158(missile) {
 
     if(!isDefined(explodeinfo) || explodeinfo.msg != "emp_defused" && explodeinfo.msg != "trophy_blocked") {
       explosionradius = 600;
-      var_5d28f39073721e59 = "MOD_EXPLOSIVE";
-      var_23f8c678bd9d023e = "cruise_proj_mp";
+      cruisemeansofdeath = "MOD_EXPLOSIVE";
+      cruiseweapon = "cruise_proj_mp";
     }
 
     if(issharedfuncdefined("shellshock", "artillery_earthQuake")) {

@@ -127,13 +127,13 @@ function function_34e4b25a8ccb65d4(ai, impactposition) {
     magicbullet("iw8_sn_hdromeo_ballistics_impact", var_e84ad86715d85cc, var_6a862672391c9895);
   }
 
-  var_f1ac81f044138375 = "j_head";
+  headtag = "j_head";
   var_f9be8ce0e09d7c9c = 13;
 
-  if(distance(ai gettagorigin(var_f1ac81f044138375), impactposition) < var_f9be8ce0e09d7c9c) {
-    playFXOnTag(level.g_effect["vfx_gib_dismember"], ai, var_f1ac81f044138375);
-    var_1dcf690711aca094 = anglesToForward(ai gettagangles(var_f1ac81f044138375));
-    tagorigin = ai gettagorigin(var_f1ac81f044138375);
+  if(distance(ai gettagorigin(headtag), impactposition) < var_f9be8ce0e09d7c9c) {
+    playFXOnTag(level.g_effect["vfx_gib_dismember"], ai, headtag);
+    var_1dcf690711aca094 = anglesToForward(ai gettagangles(headtag));
+    tagorigin = ai gettagorigin(headtag);
     var_e84ad86715d85cc = tagorigin + var_1dcf690711aca094 * 5;
     var_6a862672391c9895 = tagorigin + var_1dcf690711aca094 * -50;
     magicbullet("iw8_sn_hdromeo_ballistics_impact", var_e84ad86715d85cc, var_6a862672391c9895);

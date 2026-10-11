@@ -481,7 +481,7 @@ function function_115aa986e2c13fea(arena) {
   }
 }
 
-function function_34c2ab381e6c17cb(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_34c2ab381e6c17cb(instance, part, state, player, bautouse, usestring) {
   if(!player scripts\mp\gametypes\br_public::isplayerinorgoingtogulag()) {
     return;
   }

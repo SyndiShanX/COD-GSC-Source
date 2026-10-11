@@ -160,7 +160,7 @@ function gas_createtrigger(position, owner, team, duration, scale, iscrossbow, c
   }
 
   if(getdvarint(@ "mgl", 0)) {
-    thread scripts\common\ai::function_f8903387ea945165(position, 0);
+    thread scripts\common\ai::mgladdactivesmoke(position, 0);
   }
 
   radius *= scale;
@@ -279,7 +279,7 @@ function gas_onentertrigger(trigger) {
 
   if(getdvarint(@ "hash_9ae216012f64affd") && isDefined(trigger.owner.chemist)) {
     if(issharedfuncdefined("warlord_chemist", "periodicdamage")) {
-      thread function_f3bb4f4911a1beb2("warlord_chemist", "periodicdamage", trigger.owner.chemist.gasdamage, trigger.owner.chemist.var_2278441f7203ae, trigger.owner);
+      thread callsharedfunc("warlord_chemist", "periodicdamage", trigger.owner.chemist.gasdamage, trigger.owner.chemist.var_2278441f7203ae, trigger.owner);
     }
 
     if(isDefined(self.gasmaskhealth)) {
@@ -293,7 +293,7 @@ function gas_onentertrigger(trigger) {
     }
 
     if(issharedfuncdefined("warlord_chemist", "gasmask_watcher") && !istrue(self.gasmaskequipped)) {
-      thread function_f3bb4f4911a1beb2("warlord_chemist", "gasmask_watcher");
+      thread callsharedfunc("warlord_chemist", "gasmask_watcher");
     }
   }
 
@@ -319,7 +319,7 @@ function gas_onentertrigger(trigger) {
 
   if(getdvarint(@ "hash_9ae216012f64affd") && !istrue(self.var_ce8d114cc1b073db) && issharedfuncdefined("warlord_chemist", "removegastriggers")) {
     self.var_ce8d114cc1b073db = 1;
-    thread function_f3bb4f4911a1beb2("warlord_chemist", "removegastriggers");
+    thread callsharedfunc("warlord_chemist", "removegastriggers");
   }
 
   return entnum;
@@ -390,7 +390,7 @@ function gas_watchtriggerenter() {
       continue;
     }
 
-    if(function_da8a31143b88e833(player)) {
+    if(ignoretriggerconditions(player)) {
       continue;
     }
 
@@ -436,7 +436,7 @@ function gas_watchtriggerexit() {
         continue;
       }
 
-      if(player istouching(self) && !function_da8a31143b88e833(player)) {
+      if(player istouching(self) && !ignoretriggerconditions(player)) {
         continue;
       }
 
@@ -453,7 +453,7 @@ function gas_watchtriggerexit() {
   }
 }
 
-function function_da8a31143b88e833(player) {
+function ignoretriggerconditions(player) {
   if(player function_7ee20cf3c0390e21()) {
     return true;
   }
@@ -603,14 +603,14 @@ function gas_clearcough(fromdeath) {
   }
 }
 
-function gas_monitorcoughweaponfired(var_33f644489e4f15ae) {
+function gas_monitorcoughweaponfired(coughweaponobj) {
   self endon("gas_coughWeaponTaken");
   self endon("gas_coughDuration");
 
   while(true) {
     self waittill("offhand_fired", weaponobj);
 
-    if(issameweapon(weaponobj, var_33f644489e4f15ae)) {
+    if(issameweapon(weaponobj, coughweaponobj)) {
       break;
     }
   }
@@ -618,11 +618,11 @@ function gas_monitorcoughweaponfired(var_33f644489e4f15ae) {
   self notify("gas_coughWeaponFired");
 }
 
-function gas_monitorcoughweapontaken(var_33f644489e4f15ae) {
+function gas_monitorcoughweapontaken(coughweaponobj) {
   self endon("gas_coughWeaponFired");
   self endon("gas_coughDuration");
 
-  while(self hasweapon(var_33f644489e4f15ae)) {
+  while(self hasweapon(coughweaponobj)) {
     waitframe();
   }
 
@@ -776,10 +776,10 @@ function gas_applyspeedredux() {
     self.gasspeedmod = 0;
   }
 
-  var_d255a8b6d0ef299d = -0.35;
+  targetspeedmod = -0.35;
 
   if(scripts\mp\utility\perk::_hasperk("specialty_gas_grenade_resist")) {
-    var_d255a8b6d0ef299d = -0.15;
+    targetspeedmod = -0.15;
   } else if(isDefined(self.gastriggerstouching)) {
     foreach(trigger in self.gastriggerstouching) {
       if(isDefined(trigger) && isDefined(trigger.owner) && trigger.owner == self) {
@@ -787,13 +787,13 @@ function gas_applyspeedredux() {
           break;
         }
 
-        var_d255a8b6d0ef299d = -0.15;
+        targetspeedmod = -0.15;
       }
     }
   }
 
-  gas_modifyspeed(var_d255a8b6d0ef299d);
-  self.gasspeedmod = var_d255a8b6d0ef299d;
+  gas_modifyspeed(targetspeedmod);
+  self.gasspeedmod = targetspeedmod;
   scripts\mp\weapons::updatemovespeedscale();
 }
 
@@ -811,12 +811,12 @@ function gas_removespeedredux() {
   scripts\mp\weapons::updatemovespeedscale();
 }
 
-function gas_modifyspeed(var_d255a8b6d0ef299d) {
+function gas_modifyspeed(targetspeedmod) {
   timeelapsed = 0;
 
   while(timeelapsed <= 0.65) {
     timeelapsed += 0.05;
-    self.gasspeedmod = math::lerp(self.gasspeedmod, var_d255a8b6d0ef299d, min(1, timeelapsed / 0.65));
+    self.gasspeedmod = math::lerp(self.gasspeedmod, targetspeedmod, min(1, timeelapsed / 0.65));
     scripts\mp\weapons::updatemovespeedscale();
     wait 0.05;
   }

@@ -67,7 +67,7 @@ function private wander_listener() {
 
   while(true) {
     self waittill("wander_start");
-    move_speed = self.zombieaisettings.var_96e932e5fc805af8[0].movetype;
+    move_speed = self.zombieaisettings.speedthreshold_list[0].movetype;
     function_f1e5805da192a1ef(move_speed, "wander", 22);
     thread function_931d5acb3377ff79("wander_end");
     self waittill("wander_end");

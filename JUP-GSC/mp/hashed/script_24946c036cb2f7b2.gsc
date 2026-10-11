@@ -103,15 +103,15 @@ function private function_a6dfaa6e79adbc09(activationname) {
     return undefined;
   }
 
-  var_4fb0bb8290e39fb3 = function_e38f1d6d5a208fe1(activationname);
-  assertex(var_4fb0bb8290e39fb3.size == 1, "<dev string:x1c>" + activationname + "<dev string:x70>");
-  broadcastdata = var_4fb0bb8290e39fb3[0] function_7437a8d48556e45e();
+  broadcastinstancestructs = function_e38f1d6d5a208fe1(activationname);
+  assertex(broadcastinstancestructs.size == 1, "<dev string:x1c>" + activationname + "<dev string:x70>");
+  broadcastdata = broadcastinstancestructs[0] function_7437a8d48556e45e();
   assertex(broadcastdata.size == 1, "<dev string:x81>" + activationname + "<dev string:x70>");
   var_a0df226025d98d74 = spawnStruct();
   var_a0df226025d98d74.ref = function_84ac089886facee5(broadcastdata[0]);
   var_a0df226025d98d74.delay = function_ffbb8d6b4076cfa7(broadcastdata[0]);
   var_a0df226025d98d74.isconversation = function_63b7c6f0e6f2a9f7(broadcastdata[0]);
-  var_a0df226025d98d74.var_a992c85bbf2c3bd6 = function_63b7c6f0e6f2a9f7(broadcastdata[0]);
+  var_a0df226025d98d74.shouldinterruptcurrent = function_63b7c6f0e6f2a9f7(broadcastdata[0]);
   return var_a0df226025d98d74;
 }
 
@@ -149,7 +149,7 @@ function function_d52f11eff492795d(player, var_45e792783f2a92ab, var_81c927dcd9c
   }
 
   if(isDefined(key) && istrue(var_81c927dcd9cba1f9) && isDefined(self)) {
-    activityid = namespace_4fda5d7358015a06::function_f0f498aed6f8fa5d(self);
+    activityid = namespace_4fda5d7358015a06::getinstanceid(self);
 
     if(isDefined(activityid)) {
       key = "activityid:" + activityid + key;

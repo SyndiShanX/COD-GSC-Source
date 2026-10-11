@@ -663,9 +663,9 @@ function overridedvars(dvars) {
         continue;
       }
 
-      dvarname = function_f28fd66285fa2c9(dvar.name);
+      dvarname = getxhashhexname(dvar.name);
 
-      dvarname = function_3c8848a3a11b2553(dvar.name);
+      dvarname = getxhashsourcename(dvar.name);
 
       scripts\mp\utility\script::demoforcesre("Trying to override an undefined dvar \"" + dvarname + "\". The dvar must either be defined in a playlist, .cfg file or through command line arguments.");
     }
@@ -673,7 +673,7 @@ function overridedvars(dvars) {
 }
 
 function isbr() {
-  gametypebundle = function_90b5b6e99aef29d6();
+  gametypebundle = getgametypescriptbundle();
 
   if(isDefined(gametypebundle) && istrue(gametypebundle.isbrstylegametype)) {
     return true;
@@ -683,7 +683,7 @@ function isbr() {
 }
 
 function function_3a1b9192a1f0b3c4() {
-  gametypebundle = function_90b5b6e99aef29d6();
+  gametypebundle = getgametypescriptbundle();
 
   if(isDefined(gametypebundle) && isDefined(gametypebundle.brsubgametype) && gametypebundle.brsubgametype == "dmz") {
     return true;

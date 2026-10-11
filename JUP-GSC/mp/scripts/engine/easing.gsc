@@ -10,15 +10,15 @@ function ease_init() {
   level.ease_funcs = [];
   level.ease_funcs["linear"] = &ease_linear;
   level.ease_funcs["power"] = &ease_power;
-  level.ease_funcs["quadratic"] = &function_5076f55422e87aca;
+  level.ease_funcs["quadratic"] = &ease_quadratic;
   level.ease_funcs["cubic"] = &ease_cubic;
-  level.ease_funcs["quartic"] = &function_651839ae5c237167;
-  level.ease_funcs["quintic"] = &function_8ed1dfbb99ebbffb;
-  level.ease_funcs["exponential"] = &function_7c81847ebfb3f5b3;
-  level.ease_funcs["logarithmic"] = &function_26eb6629640c404b;
+  level.ease_funcs["quartic"] = &ease_quartic;
+  level.ease_funcs["quintic"] = &ease_quintic;
+  level.ease_funcs["exponential"] = &ease_exponential;
+  level.ease_funcs["logarithmic"] = &ease_logarithmic;
   level.ease_funcs["sine"] = &ease_sine;
   level.ease_funcs["back"] = &ease_back;
-  level.ease_funcs["elastic"] = &function_d66c45282cb1cbcf;
+  level.ease_funcs["elastic"] = &ease_elastic;
   level.ease_funcs["bounce"] = &ease_bounce;
 }
 
@@ -31,7 +31,7 @@ function ease_power(start, end, pct, ease_in, ease_out, power) {
   return (1 - pct) * start + pct * end;
 }
 
-function function_5076f55422e87aca(start, end, pct, ease_in, ease_out) {
+function ease_quadratic(start, end, pct, ease_in, ease_out) {
   pct = easepower(pct, 2, ease_in, ease_out);
   return (1 - pct) * start + pct * end;
 }
@@ -41,22 +41,22 @@ function ease_cubic(start, end, pct, ease_in, ease_out) {
   return (1 - pct) * start + pct * end;
 }
 
-function function_651839ae5c237167(start, end, pct, ease_in, ease_out) {
+function ease_quartic(start, end, pct, ease_in, ease_out) {
   pct = easepower(pct, 4, ease_in, ease_out);
   return (1 - pct) * start + pct * end;
 }
 
-function function_8ed1dfbb99ebbffb(start, end, pct, ease_in, ease_out) {
+function ease_quintic(start, end, pct, ease_in, ease_out) {
   pct = easepower(pct, 5, ease_in, ease_out);
   return (1 - pct) * start + pct * end;
 }
 
-function function_7c81847ebfb3f5b3(start, end, pct, ease_in, ease_out, scale) {
+function ease_exponential(start, end, pct, ease_in, ease_out, scale) {
   pct = easeexponential(pct, scale, ease_in, ease_out);
   return (1 - pct) * start + pct * end;
 }
 
-function function_26eb6629640c404b(start, end, pct, ease_in, ease_out, log_base) {
+function ease_logarithmic(start, end, pct, ease_in, ease_out, log_base) {
   pct = easelogarithmic(pct, log_base, ease_in, ease_out);
   return (1 - pct) * start + pct * end;
 }
@@ -66,12 +66,12 @@ function ease_sine(start, end, pct, ease_in, ease_out) {
   return (1 - pct) * start + pct * end;
 }
 
-function ease_back(start, end, pct, ease_in, ease_out, var_210d57017070b86f, power) {
-  pct = easeback(pct, var_210d57017070b86f, power, ease_in, ease_out);
+function ease_back(start, end, pct, ease_in, ease_out, overshoot_scalar, power) {
+  pct = easeback(pct, overshoot_scalar, power, ease_in, ease_out);
   return (1 - pct) * start + pct * end;
 }
 
-function function_d66c45282cb1cbcf(start, end, pct, ease_in, ease_out, amplitude, frequency, fade_scalar) {
+function ease_elastic(start, end, pct, ease_in, ease_out, amplitude, frequency, fade_scalar) {
   pct = easeelastic(pct, amplitude, frequency, fade_scalar, ease_in, ease_out);
   return (1 - pct) * start + pct * end;
 }
@@ -85,14 +85,14 @@ function ease_dvar(dvar, value, time, ease_type, ease_in, ease_out, ease_param1,
   function_5a51a4e5eec18b00(&setdvar, dvar, value, time, ease_type, ease_in, ease_out, ease_param1, ease_param2, ease_param3);
 }
 
-function function_106f0697ee4d2c55(dvar, value, time, ease_type, ease_in, ease_out, ease_param1, ease_param2, ease_param3) {
+function ease_saved_dvar(dvar, value, time, ease_type, ease_in, ease_out, ease_param1, ease_param2, ease_param3) {
   function_5a51a4e5eec18b00(&setsaveddvar, dvar, value, time, ease_type, ease_in, ease_out, ease_param1, ease_param2, ease_param3);
 }
 
 function private function_5a51a4e5eec18b00(dvar_func, dvar, value, time, ease_type, ease_in, ease_out, ease_param1, ease_param2, ease_param3) {
   assert(isDefined(level.ease_funcs));
   assert(isDefined(level.ease_funcs[ease_type]));
-  dvar_name = function_f28fd66285fa2c9(dvar);
+  dvar_name = getxhashhexname(dvar);
   level notify("ease_dvar_" + dvar_name);
   level endon("ease_dvar_" + dvar_name);
   start_value = getdvarfloat(dvar);

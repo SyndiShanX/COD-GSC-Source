@@ -50,9 +50,9 @@ function setusingremote(remotename) {
   }
 }
 
-function clearusingremote(var_2c111f02d48e2671) {
+function clearusingremote(bypassweaponswitch) {
   if(issharedfuncdefined("player", "clearUsingRemote")) {
-    [[getsharedfunc("player", "clearUsingRemote")]](var_2c111f02d48e2671);
+    [[getsharedfunc("player", "clearUsingRemote")]](bypassweaponswitch);
   }
 }
 
@@ -853,7 +853,7 @@ function function_b7869f6d9d4242e3(reviver) {
   return istrue(reviver.revivingteammate) && !istrue(reviver.var_383e041e3e341315);
 }
 
-function isfriendly(var_da8cec9bce12f9cb, var_c4b81997f0120a97) {
+function isfriendly(teamtocheck, var_c4b81997f0120a97) {
   assertex(isDefined(var_c4b81997f0120a97), "<dev string:x28d>");
 
   if(!level.teambased) {
@@ -864,7 +864,7 @@ function isfriendly(var_da8cec9bce12f9cb, var_c4b81997f0120a97) {
     return false;
   }
 
-  if(var_da8cec9bce12f9cb != var_c4b81997f0120a97.team) {
+  if(teamtocheck != var_c4b81997f0120a97.team) {
     return false;
   }
 

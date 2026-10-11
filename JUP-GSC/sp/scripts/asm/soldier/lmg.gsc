@@ -105,8 +105,8 @@ function shoulddismountlmg(asmname, statename, tostatename, params) {
     turret = self getturret();
     requestedturret = scripts\asm\asm_bb::bb_getrequestedturret();
     usingturret = isDefined(turret) && turret getturretowner() == self;
-    var_2c3448ad0ddb878f = usingturret && isDefined(requestedturret) && requestedturret == turret;
-    return !var_2c3448ad0ddb878f;
+    usingrequestedturret = usingturret && isDefined(requestedturret) && requestedturret == turret;
+    return !usingrequestedturret;
   }
 
   moverequested = scripts\asm\asm_bb::bb_moverequested();

@@ -59,7 +59,7 @@ function function_cb4fdb2b85ea70b6(menu_name, option_text, amount, value) {
 
   num = level.menu_sys[menu_name].options.size;
   level.menu_sys[menu_name].options[num] = option_text;
-  level.menu_sys[menu_name].var_e1a48b5d64cc4acb[num] = amount;
+  level.menu_sys[menu_name].iterator[num] = amount;
 
   if(isDefined(value)) {
     level.menu_sys[menu_name].optionsvalue[num] = value;
@@ -70,7 +70,7 @@ function add_menuent(menu_name, ent) {
   level.menu_sys[menu_name].ent = ent;
 }
 
-function add_menu_child(parent_menu, child_menu, child_title, var_3403dde8c1f8f138, func) {
+function add_menu_child(parent_menu, child_menu, child_title, child_number_override, func) {
   if(!isDefined(level.menu_sys[child_menu])) {
     add_menu(child_menu, child_title);
   }
@@ -81,10 +81,10 @@ function add_menu_child(parent_menu, child_menu, child_title, var_3403dde8c1f8f1
     level.menu_sys[parent_menu].children_menu = [];
   }
 
-  if(!isDefined(var_3403dde8c1f8f138)) {
+  if(!isDefined(child_number_override)) {
     size = level.menu_sys[parent_menu].children_menu.size;
   } else {
-    size = var_3403dde8c1f8f138;
+    size = child_number_override;
   }
 
   level.menu_sys[parent_menu].children_menu[size] = child_menu;
@@ -473,11 +473,11 @@ function menu_input() {
           function_fab54f8bf1f33485(menu_key, msg);
         }
       }
-    } else if(isDefined(level.menu_sys[menu_name].var_e1a48b5d64cc4acb) && isDefined(level.menu_sys[menu_name].var_e1a48b5d64cc4acb[key])) {
+    } else if(isDefined(level.menu_sys[menu_name].iterator) && isDefined(level.menu_sys[menu_name].iterator[key])) {
       if(!modifiers["shift"]) {
-        value = level.menu_sys[menu_name].optionsvalue[key] + level.menu_sys[menu_name].var_e1a48b5d64cc4acb[key];
+        value = level.menu_sys[menu_name].optionsvalue[key] + level.menu_sys[menu_name].iterator[key];
       } else {
-        value = level.menu_sys[menu_name].optionsvalue[key] - level.menu_sys[menu_name].var_e1a48b5d64cc4acb[key];
+        value = level.menu_sys[menu_name].optionsvalue[key] - level.menu_sys[menu_name].iterator[key];
       }
 
       level.menu_sys[menu_name].optionsvalue[key].text = value;
@@ -831,7 +831,7 @@ function clear_universal_buttons(button_group) {
   level.u_buttons[button_group] = [];
 }
 
-function universal_input_loop(button_group, end_on, use_attackbutton, mod_button, var_b0b4000e275f51aa) {
+function universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_button) {
   while(!isDefined(level.player)) {
     waitframe();
   }
@@ -855,7 +855,7 @@ function universal_input_loop(button_group, end_on, use_attackbutton, mod_button
     if(isDefined(mod_button) && !level.player buttonPressed(mod_button)) {
       waitframe();
       continue;
-    } else if(isDefined(var_b0b4000e275f51aa) && level.player buttonPressed(var_b0b4000e275f51aa)) {
+    } else if(isDefined(no_mod_button) && level.player buttonPressed(no_mod_button)) {
       waitframe();
       continue;
     }

@@ -77,13 +77,13 @@ function function_9490ccb2177749a8(activity, owner) {
     task.mission_index = 49;
     task.mission_complete = 50;
     task.mission_fail = 0;
-    task.var_bd764b17d3bf6325 = 0;
+    task.mission_fail_warning = 0;
     task.var_3fa17a5a7af04803 = 65;
   } else {
     task.mission_index = 49;
     task.mission_complete = 50;
     task.mission_fail = 0;
-    task.var_bd764b17d3bf6325 = 0;
+    task.mission_fail_warning = 0;
     task.var_3fa17a5a7af04803 = 65;
   }
 
@@ -657,7 +657,7 @@ function function_b28dc157dbd35764(teamname) {
   assert(1, "<dev string:x40>");
 }
 
-function function_59a5a14bce811cdd(teamname, var_b677bbe2241c4e3f, detonated, teamcompleted, var_554291b6257ea5d0) {
+function function_59a5a14bce811cdd(teamname, omnvarstate, detonated, teamcompleted, var_554291b6257ea5d0) {
   if(!isDefined(var_554291b6257ea5d0)) {
     var_554291b6257ea5d0 = 0;
   }
@@ -684,7 +684,7 @@ function function_59a5a14bce811cdd(teamname, var_b677bbe2241c4e3f, detonated, te
     }
 
     if(!var_554291b6257ea5d0 || !istrue(detonated)) {
-      task function_aeb2d6fe1ee9d0f3(player, detonated, var_b677bbe2241c4e3f, var_e4ba0357793fd3c7);
+      task function_aeb2d6fe1ee9d0f3(player, detonated, omnvarstate, var_e4ba0357793fd3c7);
     }
   }
 }
@@ -695,7 +695,7 @@ function function_fc5cebaf6ff3bfd6(player) {
   var_aa128e29d7c10074 = scripts\cp_mp\utility\game_utility::isaigameparticipant(player);
 
   if(!var_aa128e29d7c10074) {
-    player setclientomnvar("ui_br_stronghold_mission", task.var_bd764b17d3bf6325);
+    player setclientomnvar("ui_br_stronghold_mission", task.mission_fail_warning);
   }
 }
 
@@ -727,14 +727,14 @@ function function_e09f977d133bac40(player) {
   }
 }
 
-function private function_aeb2d6fe1ee9d0f3(player, detonated, var_b677bbe2241c4e3f, var_e4ba0357793fd3c7) {
+function private function_aeb2d6fe1ee9d0f3(player, detonated, omnvarstate, var_e4ba0357793fd3c7) {
   task = self;
 
   if(istrue(var_e4ba0357793fd3c7)) {
-    player setclientomnvar("ui_br_stronghold_mission", var_b677bbe2241c4e3f);
+    player setclientomnvar("ui_br_stronghold_mission", omnvarstate);
   }
 
-  if(var_b677bbe2241c4e3f == task.mission_complete) {
+  if(omnvarstate == task.mission_complete) {
     player thread scripts\mp\hud_message::showsplash("stronghold_operation_hold_the_line_completed");
     return;
   }
@@ -777,10 +777,10 @@ function private function_addda96ba479db4e(teamname, detonated, loop, var_554291
         teamcompleted = team == teamname;
       }
 
-      var_b677bbe2241c4e3f = task.mission_fail;
+      omnvarstate = task.mission_fail;
 
       if(teamcompleted) {
-        var_b677bbe2241c4e3f = task.mission_complete;
+        omnvarstate = task.mission_complete;
       }
 
       var_5f8fc154303502fa = task scripts\mp\gametypes\activity_manager::function_ad20469c1815a7c7(team, 1);
@@ -796,7 +796,7 @@ function private function_addda96ba479db4e(teamname, detonated, loop, var_554291
           continue;
         }
 
-        task function_aeb2d6fe1ee9d0f3(player, detonated, var_b677bbe2241c4e3f, var_e4ba0357793fd3c7);
+        task function_aeb2d6fe1ee9d0f3(player, detonated, omnvarstate, var_e4ba0357793fd3c7);
       }
     }
 
@@ -817,14 +817,14 @@ function private function_addda96ba479db4e(teamname, detonated, loop, var_554291
       teamcompleted = team == teamname;
     }
 
-    var_b677bbe2241c4e3f = task.mission_fail;
+    omnvarstate = task.mission_fail;
 
     if(teamcompleted) {
       deletetask = 1;
-      var_b677bbe2241c4e3f = task.mission_complete;
+      omnvarstate = task.mission_complete;
     }
 
-    task function_59a5a14bce811cdd(team, var_b677bbe2241c4e3f, detonated, teamcompleted, var_554291b6257ea5d0);
+    task function_59a5a14bce811cdd(team, omnvarstate, detonated, teamcompleted, var_554291b6257ea5d0);
   }
 
   if(!var_554291b6257ea5d0) {

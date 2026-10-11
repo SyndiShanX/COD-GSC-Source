@@ -217,7 +217,7 @@ function function_9dd3d565e1ba2f03() {
       transientname = function_2845c7aff5b6d7b6(var_a6b3fae0395f75c3);
       loadinfiltransient(transientname);
 
-      for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = function_2030cc4ad67d1634(transientname)) {
+      for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = isinfiltransientloaded(transientname)) {
         waitframe();
       }
 
@@ -274,7 +274,7 @@ function function_facc80fe01aef30() {
   transientname = function_2845c7aff5b6d7b6(var_a6b3fae0395f75c3);
   loadinfiltransient(transientname);
 
-  for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = function_2030cc4ad67d1634(transientname)) {
+  for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = isinfiltransientloaded(transientname)) {
     waitframe();
   }
 
@@ -829,13 +829,13 @@ function cursor_think() {
   level.var_59d3ce664628caf4.cursor_pos = self.origin;
   level.var_59d3ce664628caf4.cursor_ang = self.angles;
   level.var_59d3ce664628caf4.cursor_highlight = undefined;
-  var_c5409ca7522182b3 = 500000;
-  var_5adc3ff44d7a1b85 = var_c5409ca7522182b3 * 0.8;
+  maxdrawdist = 500000;
+  var_5adc3ff44d7a1b85 = maxdrawdist * 0.8;
   var_57206f9835a87bc5 = var_5adc3ff44d7a1b85 * var_5adc3ff44d7a1b85;
-  var_b8de365ae15a4559 = var_c5409ca7522182b3 - var_5adc3ff44d7a1b85;
+  var_b8de365ae15a4559 = maxdrawdist - var_5adc3ff44d7a1b85;
   var_fdf5a004367563ac = 1000;
   var_785529d63cfd5142 = squared(var_fdf5a004367563ac);
-  var_25cf9efcc9b2800 = var_c5409ca7522182b3 - var_fdf5a004367563ac;
+  var_25cf9efcc9b2800 = maxdrawdist - var_fdf5a004367563ac;
 
   while(true) {
     waitframe();
@@ -847,7 +847,7 @@ function cursor_think() {
     foreach(index, struct in level.var_59d3ce664628caf4.var_1c589f8f06d81b70) {
       distsqrd = distance2dsquared(level.players[0].origin, struct.origin);
 
-      if(distsqrd < squared(var_c5409ca7522182b3)) {
+      if(distsqrd < squared(maxdrawdist)) {
         if(!isDefined(level.var_59d3ce664628caf4.cursor_highlight) && distance2dsquared(struct.origin, level.var_59d3ce664628caf4.cursor_pos) < 40000) {
           level.var_59d3ce664628caf4.cursor_highlight = struct;
           level.var_59d3ce664628caf4.cursor_pos = struct.origin;

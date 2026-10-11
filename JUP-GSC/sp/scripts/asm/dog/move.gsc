@@ -163,7 +163,7 @@ function playanim_headtrack(asmname, statename) {
   self endon(statename + "_finished");
 
   while(true) {
-    if(isDefined(self.stealth) && self.var_d17737f2fb2cea58) {
+    if(isDefined(self.stealth) && self.stealthidlecurious) {
       assert(isDefined(self.soundent));
 
       if(utility::issp()) {
@@ -264,8 +264,8 @@ function handleorientnotetracks(note, statename) {
       if(isDefined(self._blackboard.turnanim) && isDefined(self._blackboard.desiredturnyaw)) {
         turnxanim = asm_getxanim(statename, self._blackboard.turnanim);
         curanimtime = self aigetanimtime(turnxanim);
-        var_cd2871e9e4c4a2ac = getangledelta(turnxanim, curanimtime, 1);
-        self orientmode("face angle", self._blackboard.desiredturnyaw - var_cd2871e9e4c4a2ac);
+        animendangle = getangledelta(turnxanim, curanimtime, 1);
+        self orientmode("face angle", self._blackboard.desiredturnyaw - animendangle);
       }
 
       break;

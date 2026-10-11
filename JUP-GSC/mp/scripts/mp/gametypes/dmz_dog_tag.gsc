@@ -69,7 +69,7 @@ function private onteamchange(player, oldteam, newteam) {
         continue;
       }
 
-      quantity = teammember namespace_aead94004cf4c147::function_897b29adb37f06a7(i);
+      quantity = teammember namespace_aead94004cf4c147::getquantityatbackpackindex(i);
 
       if(!scripts\mp\gametypes\dmz_dog_tag::function_d9f5c5090de1241b(teammember, quantity)) {
         continue;
@@ -587,7 +587,7 @@ function private function_ad150ee445d765a6(player) {
   info.player = player;
 
   foreach(player in level.players) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dogTagInfo", level.dogtaginfo.size, "deadPlayerXuid", info.xuid);
+    player setplayerdata(level.progressiongroup, "dogTagInfo", level.dogtaginfo.size, "deadPlayerXuid", info.xuid);
   }
 
   level.dogtaginfo[level.dogtaginfo.size] = info;
@@ -667,7 +667,7 @@ function function_941fe2b16d6fff9d(player) {
       xuid = level.dogtaginfo[index].xuid;
     }
 
-    player setplayerdata(level.var_5d69837cf4db0407, "dogTagInfo", index, "deadPlayerXuid", xuid);
+    player setplayerdata(level.progressiongroup, "dogTagInfo", index, "deadPlayerXuid", xuid);
   }
 }
 

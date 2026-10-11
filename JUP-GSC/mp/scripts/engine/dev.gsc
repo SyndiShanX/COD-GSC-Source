@@ -6,7 +6,7 @@
 #using scripts\engine\utility;
 #namespace dev;
 
-function function_4da869df964b68db(dvarname, var_d4bb121b87421c8) {
+function devcommandwatcher(dvarname, commandhandlerfunc) {
   setdevdvar(dvarname, "<dev string:x1c>");
 
   while(true) {
@@ -26,7 +26,7 @@ function function_4da869df964b68db(dvarname, var_d4bb121b87421c8) {
 
     command = tokens[0];
     arglist = array_slice(tokens, 1);
-    [[var_d4bb121b87421c8]](command, arglist);
+    [[commandhandlerfunc]](command, arglist);
   }
 }
 

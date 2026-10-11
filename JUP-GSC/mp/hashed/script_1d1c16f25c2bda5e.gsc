@@ -81,16 +81,16 @@ function handletraversedeathnotetrack() {
 
 function handletraversealignment() {
   self animmode("noclip");
-  var_256ca46d1effdd41 = undefined;
+  targettraverseheight = undefined;
 
   if(self.var_32a34987ee1b3095 == "nodeless" || self.var_32a34987ee1b3095 == "linkless") {
-    var_256ca46d1effdd41 = self.var_64b933af90edc53c.traverse_height;
+    targettraverseheight = self.var_64b933af90edc53c.traverse_height;
   } else {
-    var_256ca46d1effdd41 = self.traversestartnode.traverse_height;
+    targettraverseheight = self.traversestartnode.traverse_height;
   }
 
-  if(isDefined(self.traverseheight) && isDefined(var_256ca46d1effdd41)) {
-    currentheight = var_256ca46d1effdd41 - self.traversestartz;
+  if(isDefined(self.traverseheight) && isDefined(targettraverseheight)) {
+    currentheight = targettraverseheight - self.traversestartz;
     thread teleportthread(currentheight - self.traverseheight);
   }
 }
@@ -99,26 +99,26 @@ function handletraversedrop() {
   startpos = self.origin + (0, 0, 32);
   endpos = physicstrace(startpos, self.origin + (0, 0, -512));
   dist = distance(startpos, endpos);
-  var_e365c44cbf1472ab = dist - 32 - 0.5;
-  var_9c41c6bce074794 = self getanimtime(self.traverseanim);
-  var_472176e97aa175c8 = getmovedelta(self.traverseanim, var_9c41c6bce074794, 1);
+  realdropheight = dist - 32 - 0.5;
+  traverseanimpos = self getanimtime(self.traverseanim);
+  traverseanimdelta = getmovedelta(self.traverseanim, traverseanimpos, 1);
   traverseanimlength = getanimlength(self.traverseanim);
-  var_fb6f770a5d1925e = 0 - var_472176e97aa175c8[2];
-  assertex(var_fb6f770a5d1925e >= 0, var_fb6f770a5d1925e);
-  dropoffset = var_fb6f770a5d1925e - var_e365c44cbf1472ab;
+  animdropheight = 0 - traverseanimdelta[2];
+  assertex(animdropheight >= 0, animdropheight);
+  dropoffset = animdropheight - realdropheight;
 
   if(getdvarint(@ "hash_60bc1b675216e3d")) {
     thread scripts\anim\utility::debugline(startpos, endpos, (1, 1, 1), 40);
     thread scripts\anim\utility::drawstringtime("<dev string:x62>" + dropoffset, endpos, (1, 1, 1), 2);
   }
 
-  if(var_fb6f770a5d1925e < var_e365c44cbf1472ab) {
-    animrate = var_fb6f770a5d1925e / var_e365c44cbf1472ab;
+  if(animdropheight < realdropheight) {
+    animrate = animdropheight / realdropheight;
   } else {
     animrate = 1;
   }
 
-  teleportlength = (traverseanimlength - var_9c41c6bce074794) / 3;
+  teleportlength = (traverseanimlength - traverseanimpos) / 3;
   numframes = ceil(teleportlength * 20);
   thread teleportthreadex(dropoffset, 0, numframes, animrate);
   thread finishtraversedrop(endpos[2]);

@@ -126,13 +126,13 @@ function function_e23f7699eb3f384e() {
 
 function function_8a76744810afe9be() {}
 
-function private function_aa84440f79224493(instance, notif, param, var_535d9c3fdddab5a9) {
+function private function_aa84440f79224493(instance, notif, param, instigator) {
   foreach(func in instance.var_aa599c358ec2ad3e) {
-    instance thread[[func]](instance, notif, param, var_535d9c3fdddab5a9);
+    instance thread[[func]](instance, notif, param, instigator);
   }
 }
 
-function private function_81edae2f148e254e(instance, notif, params, var_535d9c3fdddab5a9) {
+function private function_81edae2f148e254e(instance, notif, params, instigator) {
   if(!isDefined(instance.hammer)) {
     return;
   }

@@ -331,7 +331,7 @@ function createfxlogic() {
     lastplayerorigin = level.player.origin;
   }
 
-  var_fad54797e80b2073 = undefined;
+  lasthighlightedent = undefined;
   level.fx_rotating = 0;
   setmenu("none");
   level.createfx_selecting = 0;
@@ -346,20 +346,20 @@ function createfxlogic() {
   thread createfx_autosave();
 
   for(;;) {
-    var_c42084c511513568 = 0;
+    changedselectedents = 0;
     right = anglestoright(level.player getplayerangles());
     forward = anglesToForward(level.player getplayerangles());
     up = anglestoup(level.player getplayerangles());
     dot = 0.85;
-    var_fc03616d10f9d715 = forward * 750;
-    level.createfxcursor = scripts\engine\trace::_bullet_trace(level.player getEye(), level.player getEye() + var_fc03616d10f9d715, 0, undefined);
+    placeent_vector = forward * 750;
+    level.createfxcursor = scripts\engine\trace::_bullet_trace(level.player getEye(), level.player getEye() + placeent_vector, 0, undefined);
     highlightedent = undefined;
     level.buttonclick = [];
     level.button_is_kb = [];
     process_button_held_and_clicked();
     ctrlheld = button_is_held("lctrl", "rctrl", "BUTTON_LSHLDR");
     shiftheld = button_is_held("lshift", "rshift");
-    var_24762ec425490dd4 = button_is_clicked("mouse1", "BUTTON_A");
+    leftclick = button_is_clicked("mouse1", "BUTTON_A");
     leftheld = button_is_held("mouse1", "BUTTON_A");
     create_fx_menu();
     btn = "F5";
@@ -466,10 +466,10 @@ function createfxlogic() {
     level.fx_highlightedent = highlightedent;
 
     if(isDefined(highlightedent)) {
-      if(isDefined(var_fad54797e80b2073)) {
-        if(var_fad54797e80b2073 != highlightedent) {
-          if(!ent_is_selected(var_fad54797e80b2073)) {
-            var_fad54797e80b2073 thread entity_highlight_disable();
+      if(isDefined(lasthighlightedent)) {
+        if(lasthighlightedent != highlightedent) {
+          if(!ent_is_selected(lasthighlightedent)) {
+            lasthighlightedent thread entity_highlight_disable();
           }
 
           if(!ent_is_selected(highlightedent)) {
@@ -481,11 +481,11 @@ function createfxlogic() {
       }
     }
 
-    manipulate_createfx_ents(highlightedent, var_24762ec425490dd4, leftheld, ctrlheld, right);
-    var_c42084c511513568 = handle_selected_ents(var_c42084c511513568);
+    manipulate_createfx_ents(highlightedent, leftclick, leftheld, ctrlheld, right);
+    changedselectedents = handle_selected_ents(changedselectedents);
     waitframe();
 
-    if(var_c42084c511513568) {
+    if(changedselectedents) {
       update_selected_entities();
     }
 
@@ -493,7 +493,7 @@ function createfxlogic() {
       lastplayerorigin = [[level.func_position_player_get]](lastplayerorigin);
     }
 
-    var_fad54797e80b2073 = highlightedent;
+    lasthighlightedent = highlightedent;
 
     if(last_selected_entity_has_changed(lastselectentity)) {
       level.effect_list_offset = 0;
@@ -621,7 +621,7 @@ function is_ent_filtered_out(ent, filter) {
   return false;
 }
 
-function manipulate_createfx_ents(highlightedent, var_24762ec425490dd4, leftheld, ctrlheld, right) {
+function manipulate_createfx_ents(highlightedent, leftclick, leftheld, ctrlheld, right) {
   if(!level.createfx_draw_enabled) {
     return;
   }
@@ -651,15 +651,15 @@ function manipulate_createfx_ents(highlightedent, var_24762ec425490dd4, leftheld
         display_fx_info(ent);
       }
 
-      if(var_24762ec425490dd4) {
-        var_915bf244079e233e = index_is_selected(i);
-        level.createfx_selecting = !var_915bf244079e233e;
+      if(leftclick) {
+        entwasselected = index_is_selected(i);
+        level.createfx_selecting = !entwasselected;
 
         if(!ctrlheld) {
           selectedsize = level._createfx.selected_fx_ents.size;
           clear_entity_selection();
 
-          if(var_915bf244079e233e && selectedsize == 1) {
+          if(entwasselected && selectedsize == 1) {
             select_entity(i, ent);
           }
         }
@@ -786,9 +786,9 @@ function select_by_name_list() {
   draw_effects_list();
 }
 
-function handle_selected_ents(var_c42084c511513568) {
+function handle_selected_ents(changedselectedents) {
   if(level._createfx.selected_fx_ents.size > 0) {
-    var_c42084c511513568 = selected_ent_buttons(var_c42084c511513568);
+    changedselectedents = selected_ent_buttons(changedselectedents);
 
     if(!current_mode_hud("selected_ents")) {
       new_tool_hud("selected_ents");
@@ -816,11 +816,11 @@ function handle_selected_ents(var_c42084c511513568) {
       }
 
       if(level.selectedrotate_pitch != 0 || level.selectedrotate_yaw != 0 || level.selectedrotate_roll != 0) {
-        var_c42084c511513568 = 1;
+        changedselectedents = 1;
       }
     } else {
       set_tool_hudelem("Mode:", "move");
-      var_22f5978e35ba0e7d = get_selected_move_vector();
+      selectedmove_vector = get_selected_move_vector();
 
       for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
         ent = level._createfx.selected_fx_ents[i];
@@ -830,21 +830,21 @@ function handle_selected_ents(var_c42084c511513568) {
         }
 
         ent draw_cross();
-        ent.v["origin"] = ent.v["origin"] + var_22f5978e35ba0e7d;
+        ent.v["origin"] = ent.v["origin"] + selectedmove_vector;
       }
 
-      if(distance((0, 0, 0), var_22f5978e35ba0e7d) > 0) {
-        var_c42084c511513568 = 1;
+      if(distance((0, 0, 0), selectedmove_vector) > 0) {
+        changedselectedents = 1;
       }
     }
   } else {
     clear_tool_hud();
   }
 
-  return var_c42084c511513568;
+  return changedselectedents;
 }
 
-function selected_ent_buttons(var_c42084c511513568) {
+function selected_ent_buttons(changedselectedents) {
   if(button_is_clicked("lshift", "rshift", "BUTTON_X")) {
     toggle_axismode();
   }
@@ -861,20 +861,20 @@ function selected_ent_buttons(var_c42084c511513568) {
 
   if(button_is_clicked("end", "l")) {
     drop_selection_to_ground();
-    var_c42084c511513568 = 1;
+    changedselectedents = 1;
   }
 
   if(button_is_clicked("tab", "BUTTON_RSHLDR")) {
     move_selection_to_cursor();
-    var_c42084c511513568 = 1;
+    changedselectedents = 1;
   }
 
   if(button_is_clicked("e")) {
     convert_selection_to_exploder();
-    var_c42084c511513568 = 1;
+    changedselectedents = 1;
   }
 
-  return var_c42084c511513568;
+  return changedselectedents;
 }
 
 function modify_rate() {
@@ -2345,7 +2345,7 @@ function init_huds() {
   level.cleartextmarker setdevtext("<dev string:x404>");
 
   for(i = 0; i < level._createfx.hudelem_count; i++) {
-    var_9af634fe97c006f5 = [];
+    newstrarray = [];
 
     for(p = 0; p < 1; p++) {
       newstr = newhudelem();
@@ -2363,10 +2363,10 @@ function init_huds() {
         newstr.color = (0, 0, 0);
       }
 
-      var_9af634fe97c006f5[var_9af634fe97c006f5.size] = newstr;
+      newstrarray[newstrarray.size] = newstr;
     }
 
-    level._createfx.hudelems[i] = var_9af634fe97c006f5;
+    level._createfx.hudelems[i] = newstrarray;
   }
 
   hud = newhudelem();

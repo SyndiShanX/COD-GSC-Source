@@ -105,7 +105,7 @@ function init() {
   level thread function_7458093a3f00753();
   level thread function_81784a440079364d();
   level thread function_8a765b135be66467();
-  callback::add("on_ai_killed", &function_5a0ae8bc2b80c0c0);
+  callback::add("on_ai_killed", &onagentkilled);
 
   level thread function_fad186e07908db0c();
 }
@@ -199,7 +199,7 @@ function function_497ace892c40a30f(tank, var_c7207a5b46d13fba, spawnnode) {
   self.ignoreall = 1;
   self.ignoreme = 1;
   self clearbtgoal(4);
-  self function_e64ea2b4e79c4b74(4);
+  self setbtgoalstationary(4);
 
   while(!ispointinvolume(tank.origin, var_c7207a5b46d13fba)) {
     waitframe();
@@ -244,7 +244,7 @@ function agentlookatent(ent) {
   self.aiment = ent;
 
   while(true) {
-    self.var_130b2c98c9d80a1a = self.aiment.origin;
+    self.script_aimpos = self.aiment.origin;
     self.lastenemysightpos = self.aiment.origin;
     self.shootposoverride = self.aiment.origin;
 
@@ -256,7 +256,7 @@ function agentlookatent(ent) {
   }
 }
 
-function private function_5a0ae8bc2b80c0c0(params) {
+function private onagentkilled(params) {
   if(self.subcategory == "rpg" || istrue(self.var_6384ebeaed4efe3e)) {
     var_8fa1351877b04c45 = 1;
 
@@ -643,8 +643,8 @@ function function_52e33bb2006a1adc() {
   struct = getStruct("mp_jup_launch_facility_heli_spawn", "targetname");
   goal = getStruct(struct.target, "targetname");
   var_c1392b0434c69167 = getStruct("samsite_default_tareget", "targetname");
-  var_d30f7eac8b2eb23 = spawn("script_model", var_c1392b0434c69167.origin);
-  turret.target_entity = var_d30f7eac8b2eb23;
+  defaulttarget = spawn("script_model", var_c1392b0434c69167.origin);
+  turret.target_entity = defaulttarget;
   turret settargetentity(turret.target_entity);
   turret thread scripts\mp\gametypes\wm_objectives::function_3683331ec49168ba();
   flag_wait("scriptables_ready");
@@ -689,9 +689,9 @@ function function_52e33bb2006a1adc() {
     }
 
     if(var_dbfa63f38e0d7dc9[missileindex - 1] == var_eb407f7b45bbd5ad) {
-      turret function_8141c7ee58e8ad59(var_d30f7eac8b2eb23);
+      turret function_8141c7ee58e8ad59(defaulttarget);
     } else if(var_dbfa63f38e0d7dc9[missileindex - 1] == var_b347c9c771e0363b) {
-      turret function_4f603cae8184144f(var_d30f7eac8b2eb23);
+      turret function_4f603cae8184144f(defaulttarget);
     }
 
     damageorigin = (0, 0, 0);
@@ -732,7 +732,7 @@ function function_8141c7ee58e8ad59(var_bb5fa24f4a5c3b42) {
   self endon("death");
   var_81d84bb5b65f498e = function_92193bb27fce01fd();
   var_81d84bb5b65f498e.var_7d1a90814c8500ff = var_81d84bb5b65f498e scripts\mp\infilexfil\blima_infil::spawn_anim_model("rope_l", "origin_animate_jnt", "equipment_fast_rope_wm_01_infil_heli_l");
-  var_81d84bb5b65f498e.var_7d1aa6814c853161 = var_81d84bb5b65f498e scripts\mp\infilexfil\blima_infil::spawn_anim_model("rope_r", "origin_animate_jnt", "equipment_fast_rope_wm_01_infil_heli_l");
+  var_81d84bb5b65f498e.roper = var_81d84bb5b65f498e scripts\mp\infilexfil\blima_infil::spawn_anim_model("rope_r", "origin_animate_jnt", "equipment_fast_rope_wm_01_infil_heli_l");
   var_81d84bb5b65f498e waittill("reached_dynamic_path_end");
   var_81d84bb5b65f498e.actors = [];
   var_81d84bb5b65f498e.actors[var_81d84bb5b65f498e.actors.size] = var_81d84bb5b65f498e scripts\mp\infilexfil\blima_infil::spawn_anim_model("crew1", "body_animate_jnt", "fullbody_sp_ally_helicopter_crew_chief");
@@ -741,13 +741,13 @@ function function_8141c7ee58e8ad59(var_bb5fa24f4a5c3b42) {
   wait 1.6;
   var_81d84bb5b65f498e thread anim_single(var_81d84bb5b65f498e.actors, "blima_infil", "body_animate_jnt");
   var_81d84bb5b65f498e.var_7d1a90814c8500ff anim_first_frame_solo(var_81d84bb5b65f498e.var_7d1a90814c8500ff, "blima_infil");
-  var_81d84bb5b65f498e.var_7d1aa6814c853161 anim_first_frame_solo(var_81d84bb5b65f498e.var_7d1aa6814c853161, "blima_infil");
+  var_81d84bb5b65f498e.roper anim_first_frame_solo(var_81d84bb5b65f498e.roper, "blima_infil");
   var_81d84bb5b65f498e thread anim_single_solo(var_81d84bb5b65f498e.var_7d1a90814c8500ff, "blima_infil", "origin_animate_jnt");
-  var_81d84bb5b65f498e thread anim_single_solo(var_81d84bb5b65f498e.var_7d1aa6814c853161, "blima_infil", "origin_animate_jnt");
+  var_81d84bb5b65f498e thread anim_single_solo(var_81d84bb5b65f498e.roper, "blima_infil", "origin_animate_jnt");
   var_81d84bb5b65f498e.var_4df0c0e7ce492d0c = var_81d84bb5b65f498e scripts\mp\infilexfil\blima_infil::spawn_anim_model("slot_0", "body_animate_jnt", "fullbody_sp_ally_helicopter_crew_chief");
   var_81d84bb5b65f498e thread anim_single_solo(var_81d84bb5b65f498e.var_4df0c0e7ce492d0c, "blima_infil", "body_animate_jnt");
-  var_81d84bb5b65f498e.var_4df0c1e7ce492f3f = var_81d84bb5b65f498e scripts\mp\infilexfil\blima_infil::spawn_anim_model("slot_1", "body_animate_jnt", "fullbody_sp_ally_helicopter_crew_chief");
-  var_81d84bb5b65f498e thread anim_single_solo(var_81d84bb5b65f498e.var_4df0c1e7ce492f3f, "blima_infil", "body_animate_jnt");
+  var_81d84bb5b65f498e.seat1 = var_81d84bb5b65f498e scripts\mp\infilexfil\blima_infil::spawn_anim_model("slot_1", "body_animate_jnt", "fullbody_sp_ally_helicopter_crew_chief");
+  var_81d84bb5b65f498e thread anim_single_solo(var_81d84bb5b65f498e.seat1, "blima_infil", "body_animate_jnt");
   self.target_entity = var_81d84bb5b65f498e;
   self settargetentity(self.target_entity, (0, 0, -30));
   thread scripts\cp_mp\samsite::function_2add68d4c86e555b();
@@ -790,7 +790,7 @@ function function_4f603cae8184144f(var_bb5fa24f4a5c3b42) {
   self endon("death");
   var_f0c137dba73fc2eb = spawnStruct();
   var_f0c137dba73fc2eb.context = "heli_group_samsite_show";
-  var_f0c137dba73fc2eb.var_74ade4b4040cee5e = 1;
+  var_f0c137dba73fc2eb.dontremove = 1;
   var_f0c137dba73fc2eb thread namespace_f93036508852df50::function_8063e641963cd522();
   ahotel64 = level.heligroups["heli_group_samsite_show"][0];
   ahotel64 waittill("reached_dynamic_path_end");
@@ -1103,8 +1103,8 @@ function function_b8a462eb85f0f2b0(var_5064dc2a7a46a8df, var_3c483767dfd35827) {
 function function_7951c17b5988d67c() {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("zone_1" + "_objective_end");
-  var_958e8abe271e25a4 = getvehiclenode("wm_escort_tank_path", "targetname");
-  var_b78922004b1ccfcc = spawn_tag_origin(var_958e8abe271e25a4.origin, var_958e8abe271e25a4.angles);
+  dropnode = getvehiclenode("wm_escort_tank_path", "targetname");
+  var_b78922004b1ccfcc = spawn_tag_origin(dropnode.origin, dropnode.angles);
   var_b78922004b1ccfcc show();
   playFXOnTag(getfx("tank_drop_zone"), var_b78922004b1ccfcc, "tag_origin");
   wait 45;
@@ -1164,7 +1164,7 @@ function function_5413c7d723606928(tank) {
 
 function function_2f1fb04b4b9ee70d(tank) {
   level endon("game_ended");
-  tank.var_4be16de323d10e3a = 0;
+  tank.tankhit = 0;
 
   if(!isDefined(tank gettagorigin("tag_fix_fx"))) {
     assertmsg("<dev string:x1b3>");
@@ -1197,7 +1197,7 @@ function function_65e7481319080680(inflictor, attacker, damage, dflags, meansofd
     return;
   }
 
-  if(!isDefined(self.var_4be16de323d10e3a) || !isDefined(self.var_5fb0e90d5b2a8aae)) {
+  if(!isDefined(self.tankhit) || !isDefined(self.var_5fb0e90d5b2a8aae)) {
     scripts\mp\vehicles\damage::callback_vehicledamage(inflictor, attacker, damage, dflags, meansofdeath, objweapon, point, dir, hitloc, timeoffset, modelindex, attachtagname, partname, eventid);
     return;
   }
@@ -1206,7 +1206,7 @@ function function_65e7481319080680(inflictor, attacker, damage, dflags, meansofd
 
   if(objweapon.basename == "bomb_site_mp") {
     if(self.var_5fb0e90d5b2a8aae == 0) {
-      self.var_4be16de323d10e3a = tankmaxhealth;
+      self.tankhit = tankmaxhealth;
       scripts\mp\utility\points::function_2a66e9acc30896c(game["defenders"], #"hash_32da3aab2ac19f9e");
       function_b3b50e25bdbdc513();
     }
@@ -1224,14 +1224,14 @@ function function_65e7481319080680(inflictor, attacker, damage, dflags, meansofd
     }
   }
 
-  if(self.var_4be16de323d10e3a < tankmaxhealth) {
-    self.var_4be16de323d10e3a += 1;
+  if(self.tankhit < tankmaxhealth) {
+    self.tankhit += 1;
 
-    if(self.var_4be16de323d10e3a == 1) {
+    if(self.tankhit == 1) {
       scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_setstate("light", "pristine");
     }
 
-    if(self.var_4be16de323d10e3a >= tankmaxhealth && self.var_5fb0e90d5b2a8aae == 0) {
+    if(self.tankhit >= tankmaxhealth && self.var_5fb0e90d5b2a8aae == 0) {
       function_b3b50e25bdbdc513();
     }
   }
@@ -1395,7 +1395,7 @@ function function_c1f50d88c810fd3e(tank, covertrigger) {
         scripts\mp\objidpoolmanager::update_objective_setfriendlylabel(level.objectives[tank.objectivekey].objidnum, &"MP_INGAME_ONLY/OBJ_ESCORT_CAPS");
         scripts\mp\gametypes\wm_utility::function_c470fe81662c7d70(tank.repairguy);
         tank.var_5fb0e90d5b2a8aae = 0;
-        tank.var_4be16de323d10e3a = 0;
+        tank.tankhit = 0;
         tank.godmode = 0;
         self.progress = 0;
         var_4ad3bc39018314e8 = 0;
@@ -1906,7 +1906,7 @@ function function_30ebb63e4d42678() {
   scripts\mp\flags::gameflagwait("zone_2" + "_objective_start");
 
   foreach(point in var_5731a50da1307842) {
-    turret = function_78422799f477b8e6(point, undefined, undefined, undefined, team);
+    turret = spawnmgturret(point, undefined, undefined, undefined, team);
     turret thread function_3cd75d5bf0fc9989(point, undefined, undefined, undefined, team);
   }
 }
@@ -1919,7 +1919,7 @@ function function_f30ccc935e3c5af9(einflictor, eattacker, idamage, idflags, smea
   return undefined;
 }
 
-function function_78422799f477b8e6(spawndata, weaponname, modelname, aitype, team) {
+function spawnmgturret(spawndata, weaponname, modelname, aitype, team) {
   level endon("game_ended");
 
   if(!isDefined(weaponname)) {
@@ -1972,7 +1972,7 @@ function function_3cd75d5bf0fc9989(spawndata, weaponname, modelname, aitype, tea
   agent.var_b582b10663b5b2a9 = 0;
   agent.ignoreall = 1;
   agent clearbtgoal(4);
-  agent function_e64ea2b4e79c4b74(4);
+  agent setbtgoalstationary(4);
   agent.var_6384ebeaed4efe3e = 1;
 
   if(isDefined(spawndata.script_label)) {
@@ -2253,13 +2253,13 @@ function function_3e1d0330ae83c995() {
     veh scripts\common\anim::setanimtree();
     vehs[vehs.size] = veh;
     veh notsolid();
-    var_6131bd12545b477e = spawn("script_model", var_46dcf41326948afe.origin);
-    var_6131bd12545b477e setModel("jup_urz_veh9_civ_lnd_pickup_launchfacility_dst_air_static");
-    var_6131bd12545b477e.angles = veh.angles;
-    var_6131bd12545b477e notsolid();
-    var_6131bd12545b477e.origin -= (0, 0, 200);
+    staticveh = spawn("script_model", var_46dcf41326948afe.origin);
+    staticveh setModel("jup_urz_veh9_civ_lnd_pickup_launchfacility_dst_air_static");
+    staticveh.angles = veh.angles;
+    staticveh notsolid();
+    staticveh.origin -= (0, 0, 200);
     veh solid();
-    veh.static = var_6131bd12545b477e;
+    veh.static = staticveh;
   }
 
   while(!isDefined(level.escortvehicles[0])) {
@@ -2411,10 +2411,10 @@ function function_6a3f1832efc2f017() {
   scene_node = getStruct(infil.target, "targetname");
   gameflagwait("infil_started");
   var_3f9f823964d96e08 = scene_node.origin;
-  var_f4bcb24264e5a56c = "weapon_wm_la_juliet_missile";
+  missilemodel = "weapon_wm_la_juliet_missile";
   missile = spawn("script_model", var_3f9f823964d96e08);
   missile.angles = scene_node.angles;
-  missile setModel(var_f4bcb24264e5a56c);
+  missile setModel(missilemodel);
   missile.animname = "attacker_infil";
   missile scripts\common\anim::setanimtree();
 
@@ -2539,7 +2539,7 @@ function function_81784a440079364d() {
       continue;
     }
 
-    if(istrue(level.zone.var_a1b80bb6e75ac5b1)) {
+    if(istrue(level.zone.compelete)) {
       break;
     }
 
@@ -2557,16 +2557,16 @@ function function_81784a440079364d() {
     }
   }
 
-  foreach(var_477f763c183d5fae in var_7ab0e3294ef9d307) {
-    var_477f763c183d5fae setscriptablepartstate("Alert", "slow");
+  foreach(redalert in var_7ab0e3294ef9d307) {
+    redalert setscriptablepartstate("Alert", "slow");
   }
 
   thread function_68a6cb3769a5b5f0(var_7ab0e3294ef9d307[0]);
   msg = waittill_any_timeout_1(30, "obj_hack_zone_uploaded");
 
   if(msg != "obj_hack_zone_uploaded") {
-    foreach(var_477f763c183d5fae in var_7ab0e3294ef9d307) {
-      var_477f763c183d5fae setscriptablepartstate("Alert", "init");
+    foreach(redalert in var_7ab0e3294ef9d307) {
+      redalert setscriptablepartstate("Alert", "init");
     }
   }
 }
@@ -2576,14 +2576,14 @@ function function_b8d8557dbd75e3a7(var_7ab0e3294ef9d307) {
   level endon("alertFastStarted");
   level waittill("obj_hack_zone_uploaded");
 
-  foreach(var_477f763c183d5fae in var_7ab0e3294ef9d307) {
-    var_477f763c183d5fae setscriptablepartstate("Alert", "mid");
+  foreach(redalert in var_7ab0e3294ef9d307) {
+    redalert setscriptablepartstate("Alert", "mid");
   }
 
   wait 30;
 
-  foreach(var_477f763c183d5fae in var_7ab0e3294ef9d307) {
-    var_477f763c183d5fae setscriptablepartstate("Alert", "init");
+  foreach(redalert in var_7ab0e3294ef9d307) {
+    redalert setscriptablepartstate("Alert", "init");
   }
 }
 
@@ -2600,8 +2600,8 @@ function function_d0399482d4036ad4(var_7ab0e3294ef9d307) {
 
   level notify("alertFastStarted");
 
-  foreach(var_477f763c183d5fae in var_7ab0e3294ef9d307) {
-    var_477f763c183d5fae setscriptablepartstate("Alert", "fast");
+  foreach(redalert in var_7ab0e3294ef9d307) {
+    redalert setscriptablepartstate("Alert", "fast");
   }
 
   var_1a39b1bef756699c = getStruct("zone3_speaker", "script_noteworthy");
@@ -2614,11 +2614,11 @@ function function_d0399482d4036ad4(var_7ab0e3294ef9d307) {
   level thread function_685f21e11f3ea9a0(0.3, 10, "large");
 }
 
-function function_68a6cb3769a5b5f0(var_477f763c183d5fae) {
+function function_68a6cb3769a5b5f0(redalert) {
   level endon("game_ended");
 
   while(true) {
-    var_24de026211ede8e8 = var_477f763c183d5fae getscriptablepartstate("Alert");
+    var_24de026211ede8e8 = redalert getscriptablepartstate("Alert");
 
     if(var_24de026211ede8e8 == "fast") {
       playsoundatpos((39919.6, 32059.9, 1090.32), "jup_launchfacility_alarm_lvl_3_dry");

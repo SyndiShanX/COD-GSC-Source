@@ -161,7 +161,7 @@ function private function_efab80a73dfa8de4() {
 
     retries = 0;
 
-    for(var_b5db534c21869b12 = function_b81e710fd636efab(vehicle.safepos); isDefined(var_b5db534c21869b12) && var_b5db534c21869b12 + 10 >= vehicle.safepos[2]; var_b5db534c21869b12 = function_b81e710fd636efab(vehicle.safepos)) {
+    for(var_b5db534c21869b12 = getwaterheightatlocation(vehicle.safepos); isDefined(var_b5db534c21869b12) && var_b5db534c21869b12 + 10 >= vehicle.safepos[2]; var_b5db534c21869b12 = getwaterheightatlocation(vehicle.safepos)) {
       retries += 1;
 
       if(retries > 5) {
@@ -185,11 +185,11 @@ function private function_2a9a27964f2e0c7c() {
 
     if(scripts\engine\trace::ray_trace_passed(vehicle.origin + (0, 0, 2.5), targetposition, vehicle)) {
       vehicle addcomponent("p2p");
-      vehicle function_77320e794d35465a("p2p", "brakeAtGoal", 1);
-      vehicle function_77320e794d35465a("p2p", "checkStuck", 0);
-      vehicle function_77320e794d35465a("p2p", "goalPoint", targetposition);
-      vehicle function_77320e794d35465a("p2p", "manualSpeed", scripts\engine\utility::mph_to_ips(vehicle vehicle_gettopspeedforward() / 4));
-      vehicle function_77320e794d35465a("p2p", "goalThreshold", 10);
+      vehicle setconfigvalue("p2p", "brakeAtGoal", 1);
+      vehicle setconfigvalue("p2p", "checkStuck", 0);
+      vehicle setconfigvalue("p2p", "goalPoint", targetposition);
+      vehicle setconfigvalue("p2p", "manualSpeed", scripts\engine\utility::mph_to_ips(vehicle vehicle_gettopspeedforward() / 4));
+      vehicle setconfigvalue("p2p", "goalThreshold", 10);
     } else {
       var_fd0a84f1a43e0416 = 1;
     }
@@ -254,7 +254,7 @@ function function_cc9bdf08b7b35ecf(params) {
   vehicle = params.vehicle;
   function_b2468eef57806590(vehicle, "enterVeh");
 
-  if(isDefined(params.var_7558f98f3236963d) && params.var_7558f98f3236963d == "driver") {
+  if(isDefined(params.newseatid) && params.newseatid == "driver") {
     if(isDefined(params.player)) {
       params.player function_f687a213a19d3181(vehicle);
     }
@@ -263,9 +263,9 @@ function function_cc9bdf08b7b35ecf(params) {
   }
 }
 
-function function_5d401524a5903e6a(player, vehicle, var_fc7c7a874b43a31a, seatid) {
+function function_5d401524a5903e6a(player, vehicle, oldseatid, seatid) {
   if(isDefined(vehicle) && isDefined(vehicle.vehiclename) && vehicle.vehiclename == "veh9_motorcycle_blood_burner") {
-    if(isDefined(var_fc7c7a874b43a31a) && isDefined(seatid) && var_fc7c7a874b43a31a == "driver") {
+    if(isDefined(oldseatid) && isDefined(seatid) && oldseatid == "driver") {
       function_385464026db6da5e(vehicle);
     }
 
@@ -276,12 +276,12 @@ function function_5d401524a5903e6a(player, vehicle, var_fc7c7a874b43a31a, seatid
   }
 }
 
-function function_e0964d069df8d7e9(vehicle, seatid, var_7558f98f3236963d, player, data, specialexit) {
-  if(isDefined(function_b81e710fd636efab(vehicle.origin))) {
+function function_e0964d069df8d7e9(vehicle, seatid, newseatid, player, data, specialexit) {
+  if(isDefined(getwaterheightatlocation(vehicle.origin))) {
     data.allowairexit = 1;
   }
 
-  scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_exitstartcallback(vehicle, seatid, var_7558f98f3236963d, player, data, specialexit);
+  scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_exitstartcallback(vehicle, seatid, newseatid, player, data, specialexit);
 }
 
 function function_1e4734b2e10489eb(params) {
@@ -293,7 +293,7 @@ function function_1e4734b2e10489eb(params) {
   function_b2468eef57806590(vehicle, "exitVeh");
   function_5dc09d7396eb208a(vehicle, "all_idle");
 
-  if(isDefined(params.var_fc7c7a874b43a31a) && params.var_fc7c7a874b43a31a == "driver") {
+  if(isDefined(params.oldseatid) && params.oldseatid == "driver") {
     function_385464026db6da5e(vehicle);
   }
 }
@@ -868,7 +868,7 @@ function private function_ad28dbb2ec46a0d6() {
 
   while(true) {
     if(isDefined(vehicle.owner)) {
-      if(vehicle.safepos != vehicle.origin && !isDefined(function_b81e710fd636efab(vehicle.origin)) && vehicle vehicle_isonground()) {
+      if(vehicle.safepos != vehicle.origin && !isDefined(getwaterheightatlocation(vehicle.origin)) && vehicle vehicle_isonground()) {
         vehicle.safepos = vehicle.origin;
       }
     }
@@ -903,7 +903,7 @@ function private handle_underwater() {
   duration = 0;
 
   while(true) {
-    if(isDefined(function_b81e710fd636efab(vehicle.origin))) {
+    if(isDefined(getwaterheightatlocation(vehicle.origin))) {
       depth = self function_100d3bf35fca6a7f();
 
       if(depth > getdvarfloat(@ "hash_935e7fee96d0746d", 5)) {
@@ -923,14 +923,14 @@ function private handle_underwater() {
 
 function private function_9ca5e483debe8a9a() {
   vehicle = self;
-  var_b5db534c21869b12 = function_b81e710fd636efab(vehicle.origin);
+  var_b5db534c21869b12 = getwaterheightatlocation(vehicle.origin);
 
   if(isDefined(var_b5db534c21869b12) && var_b5db534c21869b12 + 10 >= vehicle.origin[2]) {
     wait 0.75;
     vehicle.respawninprogress = 1;
     function_5dc09d7396eb208a(vehicle, "water_despawn");
     vehicle utility::function_3677f2be30fdd581("single", "vehicle_unusable");
-    vehicle function_65aa053c077c003a(1);
+    vehicle vehphys_parkingbrake(1);
     wait 0.5;
 
     if(isnavmeshloaded()) {
@@ -947,7 +947,7 @@ function private function_9ca5e483debe8a9a() {
           continue;
         }
 
-        if(isDefined(function_b81e710fd636efab(loc))) {
+        if(isDefined(getwaterheightatlocation(loc))) {
           continue;
         }
 
@@ -965,7 +965,7 @@ function private function_9ca5e483debe8a9a() {
     }
 
     wait 0.5;
-    vehicle function_65aa053c077c003a(0);
+    vehicle vehphys_parkingbrake(0);
     vehicle utility::function_3677f2be30fdd581("single", "vehicle_use");
     vehicle.respawninprogress = 0;
     function_5dc09d7396eb208a(vehicle, "water_respawn");

@@ -364,7 +364,7 @@ function private function_cc11b02ab6d8e8a4() {
 function private runtest(name, testprocess, endhandler) {
   thread function_ff299aa9c1c02c3e(name, endhandler);
   thread function_b5eeb52ea9d620b2(name, testprocess);
-  function_5adca43f839a3cce([name, "death_or_disconnect"]);
+  waittill_any_in_array([name, "death_or_disconnect"]);
 }
 
 function private function_b5eeb52ea9d620b2(name, testprocess) {
@@ -376,7 +376,7 @@ function private function_b5eeb52ea9d620b2(name, testprocess) {
 }
 
 function private function_ff299aa9c1c02c3e(name, endhandler) {
-  function_5adca43f839a3cce([name, "death_or_disconnect"]);
+  waittill_any_in_array([name, "death_or_disconnect"]);
   self[[endhandler]]();
 }
 

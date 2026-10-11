@@ -106,7 +106,7 @@ function function_81c481082c5b5b33() {
 
 function function_1531bbf5cff97dc0(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_5c651df8cfad0810(var_b381b0883bcd4847) {

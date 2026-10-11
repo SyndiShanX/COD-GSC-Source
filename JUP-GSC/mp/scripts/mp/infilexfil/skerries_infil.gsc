@@ -18,7 +18,7 @@
 #namespace skerries_infil;
 
 function function_57334412d2328b04(subtype) {
-  function_f1aed36ab4598ea("skerries_infil");
+  snd_transient_load("skerries_infil");
   thread function_12a422489d86ce46();
 
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
@@ -183,7 +183,7 @@ function vehiclethink(team, scene_node, scene_name, extra_crew) {
 function function_12a422489d86ce46() {
   level waittill("prematch_over");
   wait 51;
-  function_f4e0ff5cb899686d("skerries_infil");
+  snd_transient_unload("skerries_infil");
 }
 
 function function_cd31140f6d535f7a() {

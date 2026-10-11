@@ -123,7 +123,7 @@ function main() {
   visionsetdeath(deathvision);
   function_af2d9a459ebd113d(isDefined(level.gamemodebundle.var_813a06af0c271672) ? level.gamemodebundle.var_813a06af0c271672 : "damage_radial");
   function_347f34cac350b5dd(isDefined(level.gamemodebundle.var_96467afb3300bf50) ? level.gamemodebundle.var_96467afb3300bf50 : "damage_severe");
-  function_c838f02b25da3712("whizby");
+  visionsetwhizby("whizby");
   lanterns = getEntArray("lantern_glowFX_origin", "targetname");
 
   for(i = 0; i < lanterns.size; i++) {
@@ -225,7 +225,7 @@ function main() {
   level.fauxvehiclecount = 0;
   level thread scripts\engine\scriptable_door::system_init();
 
-  level thread scripts\mp\utility\dvars::function_a972e013c8f2f2d4();
+  level thread scripts\mp\utility\dvars::reinitializedevdvarsonmigration();
 
   utility::spawncorpsehider();
   scripts\mp\rat_mp::init();

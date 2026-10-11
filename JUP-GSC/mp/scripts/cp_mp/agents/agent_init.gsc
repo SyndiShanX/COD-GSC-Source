@@ -34,8 +34,8 @@ function agent_init() {
 }
 
 function setupgrenades() {
-  function_b4ebe6632d7e8efe(undefined, "lethal", randomintrange(0, 20000));
-  function_b4ebe6632d7e8efe(undefined, "tactical", randomintrange(0, 20000));
+  aisetgrenadetimer(undefined, "lethal", randomintrange(0, 20000));
+  aisetgrenadetimer(undefined, "tactical", randomintrange(0, 20000));
 }
 
 function initanimcallbacks() {

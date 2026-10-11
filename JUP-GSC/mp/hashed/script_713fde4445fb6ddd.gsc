@@ -85,7 +85,7 @@ function get_contract_data(data) {
     data.basetime = namespace_1eb3c4e0e28fac71::function_ea591c2a379e3424("spy_drones");
   }
 
-  function_ed24376a19a1b0fe();
+  init_dialogue();
 
   level thread debug_init();
 
@@ -96,7 +96,7 @@ function on_init() {
   return true;
 }
 
-function function_ed24376a19a1b0fe() {
+function init_dialogue() {
   game["dialog"]["spyd_grav_msns"] = "spyd_grav_msns";
   game["dialog"]["spyd_grav_enac"] = "spyd_grav_enac";
   game["dialog"]["spyd_grav_enco"] = "spyd_grav_enco";
@@ -840,7 +840,7 @@ function start_timer(contract) {
 function function_65b4f543fd133009(position) {
   tracecontents = scripts\engine\trace::create_contents(0, 1, 1, 1, 0, 0);
   groundposition = scripts\engine\trace::sphere_trace(position + (0, 0, 5000), position + (0, 0, -20000), level.spydrones.var_3d741ef8d5214272 + 50 + level.spydrones.hoverradius, self.drones, tracecontents)["position"];
-  waterheight = function_b81e710fd636efab(groundposition);
+  waterheight = getwaterheightatlocation(groundposition);
 
   if(isDefined(waterheight) && groundposition[2] < waterheight) {
     groundposition = (groundposition[0], groundposition[1], waterheight);
@@ -849,13 +849,13 @@ function function_65b4f543fd133009(position) {
   return groundposition;
 }
 
-function function_b19606cac271f026(var_91beb5c3a5ab6910) {
+function function_b19606cac271f026(haywiredata) {
   level endon("game_ended");
   self endon("death");
-  victim = var_91beb5c3a5ab6910.victim;
-  attacker = var_91beb5c3a5ab6910.attacker;
-  objweapon = var_91beb5c3a5ab6910.objweapon;
-  inflictor = var_91beb5c3a5ab6910.inflictor;
+  victim = haywiredata.victim;
+  attacker = haywiredata.attacker;
+  objweapon = haywiredata.objweapon;
+  inflictor = haywiredata.inflictor;
   self dodamage(self.health, self.origin, attacker, inflictor, "MOD_ELEMENTAL_ELEC", objweapon);
 }
 

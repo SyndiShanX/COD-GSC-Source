@@ -40,7 +40,7 @@ function function_e85a33353200a325() {
 
   level.var_eb7998aaa13bd57 = getdvarint(@ "hash_33dc02542068fcd7", 0);
 
-  if(getdvarint(@ "hash_2fe0283b419ff08a", 0) == 1 || !function_2030cc4ad67d1634("mp_infil_ob_jup_blima_tr")) {
+  if(getdvarint(@ "hash_2fe0283b419ff08a", 0) == 1 || !isinfiltransientloaded("mp_infil_ob_jup_blima_tr")) {
     if(issharedfuncdefined("obInfil", "customInfilSkipFlow")) {
       level thread[[getsharedfunc("obInfil", "customInfilSkipFlow")]]();
       return;
@@ -73,7 +73,7 @@ function function_e85a33353200a325() {
   level.matchcountdowntime = infilduration + level.var_eb7998aaa13bd57 + getdvarint(@ "hash_7061556e5a6fcbc7", 1);
   level.prematchperiodend = infilduration + level.var_eb7998aaa13bd57 + getdvarint(@ "hash_7061556e5a6fcbc7", 1);
   thread scripts\mp\gamelogic::matchstarttimer("match_starting_in", level.prematchperiod + level.prematchperiodend);
-  function_f1aed36ab4598ea("blima_infil");
+  snd_transient_load("blima_infil");
   level.var_6bec823e343dacea = 1;
   level thread function_475b703f6d063a37();
 }
@@ -82,8 +82,8 @@ function function_6abfc74b7f83b7f8() {
   level waittill_any_2("match_start_real_countdown", "match_start_timer_skip");
   level thread function_9f45e0d90ddd909d();
 
-  foreach(teamname, var_70643c8580524236 in level.squaddata) {
-    foreach(squad in var_70643c8580524236) {
+  foreach(teamname, squadarray in level.squaddata) {
+    foreach(squad in squadarray) {
       if(squad.players.size > 0) {
         if(isDefined(squad.players[0].var_87a91b2a8231f4f8)) {
           spawnpoint = squad.players[0].var_87a91b2a8231f4f8;
@@ -114,7 +114,7 @@ function on_connect(params) {
     self.var_f4bb3d8522246fdc = 1;
     val::set("ob_infil", "show_hud", 0);
     val::set("ob_infil", "freezecontrols", 1);
-    scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 1, 0);
+    scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 1, 0);
     level flag_wait("ob_infil_completed");
     wait 1;
 
@@ -122,7 +122,7 @@ function on_connect(params) {
       self.var_f4bb3d8522246fdc = undefined;
       val::reset_all("ob_infil");
       self playershow(1);
-      scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0);
+      scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0);
       self setclientomnvar("ui_disable_inventory", 0);
     }
   }
@@ -220,8 +220,8 @@ function function_475b703f6d063a37() {
     println("<dev string:x66>" + level.var_6cbb7e30776f280e);
   }
 
-  foreach(teamname, var_70643c8580524236 in level.squaddata) {
-    foreach(squad in var_70643c8580524236) {
+  foreach(teamname, squadarray in level.squaddata) {
+    foreach(squad in squadarray) {
       if(squad.players.size > 0) {
         level thread function_2796212b16ece5a4(teamname, squad.index);
         waitframe();
@@ -246,7 +246,7 @@ function function_9f45e0d90ddd909d() {
   setomnvar("ui_in_infil", -1);
   level.infilcompleted = 1;
   level flag_set("ob_infil_completed");
-  level delaythread(50, &function_f4e0ff5cb899686d, "blima_infil");
+  level delaythread(50, &snd_transient_unload, "blima_infil");
   callback::callback("on_ob_infil_complete");
 }
 
@@ -510,7 +510,7 @@ function ob_infil_monitor_third_person() {
 function private function_76e1657e2f2df35c() {
   players = [];
 
-  foreach(s_object in self.scenedata.var_214d924f4e137244) {
+  foreach(s_object in self.scenedata.sceneobjectdata) {
     if(isPlayer(s_object.entity)) {
       players[players.size] = s_object.entity;
       thread function_29fc786decbf9a1f(s_object.entity);
@@ -532,7 +532,7 @@ function private function_76e1657e2f2df35c() {
     var_71fcea457c2df618 = ["tablet2", "tablet3"];
   }
 
-  foreach(s_object in self.scenedata.var_214d924f4e137244) {
+  foreach(s_object in self.scenedata.sceneobjectdata) {
     if(isDefined(s_object.entity) && isDefined(s_object.entity.animname) && utility::array_contains(var_71fcea457c2df618, s_object.entity.animname)) {
       s_object.entity delete();
     }
@@ -578,7 +578,7 @@ function private function_7db747abca8e8f0e() {
   players = [];
   helis = [];
 
-  foreach(s_object in self.scenedata.var_214d924f4e137244) {
+  foreach(s_object in self.scenedata.sceneobjectdata) {
     if(isDefined(s_object.entity)) {
       if(isPlayer(s_object.entity)) {
         players[players.size] = s_object.entity;
@@ -687,16 +687,16 @@ function function_7ac2ef359a625bc4(players) {
 
 function function_892644c616e3636d(waittime) {
   self endon("disconnect");
-  scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 1, 0);
+  scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 1, 0);
   wait waittime + getdvarfloat(@ "hash_45ce1e830caba62a", 0.75);
-  scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0);
+  scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0);
 }
 
 function function_ba66440ae6d60988(var_d410db11bd0cb8b5, var_d410d811bd0cb21c) {
   self endon("disconnect");
-  scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 1, 0);
+  scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 1, 0);
   level flag_wait_all(var_d410db11bd0cb8b5, var_d410d811bd0cb21c);
-  scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0);
+  scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0);
 }
 
 function function_fff3d0f8a5f042ad() {
@@ -796,8 +796,8 @@ function function_e7f0b651d2ebaf9d(params) {
     n_spawn = int(params[1]);
     spawnpoint = var_9091c4080e2751f2[n_spawn];
 
-    foreach(teamname, var_70643c8580524236 in level.squaddata) {
-      foreach(squad in var_70643c8580524236) {
+    foreach(teamname, squadarray in level.squaddata) {
+      foreach(squad in squadarray) {
         if(array_contains(squad.players, level.players[0])) {
           level thread function_2796212b16ece5a4(teamname, squad.index, spawnpoint, 2);
           return;
@@ -812,8 +812,8 @@ function function_e7f0b651d2ebaf9d(params) {
   n_spawn = int(params[1]);
   spawnpoint = level.var_7a8e039103b51e0f[var_44934ca35515c2c6][n_spawn];
 
-  foreach(teamname, var_70643c8580524236 in level.squaddata) {
-    foreach(squad in var_70643c8580524236) {
+  foreach(teamname, squadarray in level.squaddata) {
+    foreach(squad in squadarray) {
       if(array_contains(squad.players, level.players[0])) {
         level thread function_2796212b16ece5a4(teamname, squad.index, spawnpoint, 2);
         return;

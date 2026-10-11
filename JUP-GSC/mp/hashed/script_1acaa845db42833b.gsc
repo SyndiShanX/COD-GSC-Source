@@ -8,18 +8,18 @@
 #namespace namespace_fe2386b487039c1;
 
 function function_51ea7d22d150c2b4(asmname, statename, params) {
-  var_5443645c78427889 = undefined;
+  animaliasparam = undefined;
 
   if(isDefined(params) && isstring(params)) {
-    var_5443645c78427889 = params;
+    animaliasparam = params;
   }
 
   self endon(statename + "_finished");
   self orientmode("face current");
   self animmode("live_ragdoll");
 
-  if(isDefined(var_5443645c78427889)) {
-    animid = asm_getanim(asmname, statename, var_5443645c78427889);
+  if(isDefined(animaliasparam)) {
+    animid = asm_getanim(asmname, statename, animaliasparam);
   } else {
     animid = asm_getanim(asmname, statename);
   }
@@ -54,5 +54,5 @@ function function_bde90ceefebf39a9(asmname, statename, params) {
 function function_7f50ea7f54ae3bd2(asmname, statename, params) {
   ent_flag_clear("in_liveragdoll");
   self._blackboard.var_8f8de825579d7e05 = 0;
-  self function_d87e1768229d0e3e();
+  self stopliveragdoll();
 }

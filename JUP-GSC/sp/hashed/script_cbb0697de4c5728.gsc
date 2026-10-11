@@ -181,7 +181,7 @@ function function_3b59b4d385a202e6() {
   function_a180a5874c8cbe0b("crowFootCharm", &function_f8fc0821696182c, &function_163fccf48f86ac68);
   function_a180a5874c8cbe0b("pumpkinLanternCharm", &function_1c12797023d624e5, &function_3e50a64bbd61b969);
   function_a180a5874c8cbe0b("weedCreatureCharm", &function_ce28357936d127f1, &function_67b827411821d1b1);
-  function_a180a5874c8cbe0b("doomChainsaw", &function_55d5c766b382551e, &function_7f84cac49ac044c0);
+  function_a180a5874c8cbe0b("doomChainsaw", &isdoomchainsaw, &function_7f84cac49ac044c0);
   function_7d893cf076538f0d("reactive_kill_streak_2stage", &function_7e8329133ea16786);
   function_7d893cf076538f0d("reactive_match_kills_2stage", &function_882b5ea6e5345b31);
   function_7d893cf076538f0d("reactive_soul_collect_1stage", &function_d05f99b2455baa0a);
@@ -757,7 +757,7 @@ function private function_ce28357936d127f1(weapon) {
   return weapon hasattachment("cos_iw9_526");
 }
 
-function function_55d5c766b382551e(weapon) {
+function isdoomchainsaw(weapon) {
   if(isDefined(weapon) && isDefined(weapon.receiver)) {
     if(weapon.receiver == "rec_pickaxe" && weapon.receivervarindex == 2) {
       return true;

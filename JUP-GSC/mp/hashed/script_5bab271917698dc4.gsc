@@ -200,7 +200,7 @@ function br_respawn(spawnpoint, streamorigin, respawnstruct) {
   thread playercleanupentondisconnect(linker);
   waitframe();
 
-  if(getDvar(@ "hash_87485eca39b418a6") == "1" && !isbot(self) && scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() && !istrue(self.gulag)) {
+  if(getDvar(@ "hash_87485eca39b418a6") == "1" && !isbot(self) && scripts\cp_mp\utility\game_utility::ismagellanmode() && !istrue(self.gulag)) {
     scripts\mp\playerlogic::enableoutline();
   }
 
@@ -1128,7 +1128,7 @@ function playergetrespawnpoint(forcefallback, timeuntilspawn, overrideheight) {
       height *= scripts\mp\gametypes\br_gametypes::runbrgametypefunc("onRespawnScaleHeightOffset");
     }
 
-    if(isDefined(level.var_dc52a11d1ee2690e) && scripts\mp\utility\game::getsubgametype() != "dmz" && !scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(isDefined(level.var_dc52a11d1ee2690e) && scripts\mp\utility\game::getsubgametype() != "dmz" && !scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       height = level.var_dc52a11d1ee2690e;
     }
 
@@ -1136,11 +1136,11 @@ function playergetrespawnpoint(forcefallback, timeuntilspawn, overrideheight) {
       height = level.respawnheightoverride;
     }
 
-    if(istrue(level.var_5b5a1fcd1024eda5) && scripts\mp\utility\game::getsubgametype() != "dmz" && !scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(istrue(level.var_5b5a1fcd1024eda5) && scripts\mp\utility\game::getsubgametype() != "dmz" && !scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       height = function_d6bfa8a9e6d014db(height);
     }
 
-    if(istrue(level.var_5b5a1fcd1024eda5) && scripts\mp\utility\game::getsubgametype() != "dmz" && !scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(istrue(level.var_5b5a1fcd1024eda5) && scripts\mp\utility\game::getsubgametype() != "dmz" && !scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       height = function_d6bfa8a9e6d014db(height);
     }
 

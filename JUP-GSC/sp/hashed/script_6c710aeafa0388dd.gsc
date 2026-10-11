@@ -7,7 +7,7 @@
 #namespace namespace_5416028698cc19b4;
 
 function autoexec main() {
-  level.var_7bf42d565645a485 = 1;
+  level.shouldinitvehicles = 1;
   function_c0b3ddc9a6bdcc46("veh_jup_ahotel", &function_14b8fe3cf0847a29);
 }
 

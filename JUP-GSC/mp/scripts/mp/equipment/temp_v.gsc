@@ -28,7 +28,7 @@ function init() {
   game["dialog"]["supe_spotted"] = "game_ovld_spes";
   game["dialog"]["supe_lost"] = "game_ovld_spec";
   game["dialog"]["supe_killed"] = "game_ovld_sprk";
-  function_f1aed36ab4598ea("mp_gamemode_temp_v");
+  snd_transient_load("mp_gamemode_temp_v");
 }
 
 function function_d3f8e1c800b2e8c0() {
@@ -141,7 +141,7 @@ function function_11e36f0effe3e0a7() {
 function function_269b97f3d86eb172(shouldfinish, dontclear, waitons, iskillstreak) {
   if(isDefined(waitons)) {
     if(isarray(waitons)) {
-      function_5adca43f839a3cce(waitons);
+      waittill_any_in_array(waitons);
     } else {
       self waittill(waitons);
     }

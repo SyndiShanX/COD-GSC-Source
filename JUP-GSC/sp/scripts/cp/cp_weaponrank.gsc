@@ -51,11 +51,11 @@ function onplayerconnect() {
 
 function loadweaponranktable() {
   level.weaponranktable = spawnStruct();
-  var_c6e3b34739982959 = function_b1e11b17e1fbded3();
-  level.weaponranktable.maxrank = var_c6e3b34739982959.maxrank;
+  weaponranktablebundle = getweaponranktablebundle();
+  level.weaponranktable.maxrank = weaponranktablebundle.maxrank;
 
   for(rankid = 0; rankid <= level.weaponranktable.maxrank; rankid++) {
-    weaponranktableentry = function_91ce54da71d1008d(var_c6e3b34739982959.weaponranklist[rankid].rank);
+    weaponranktableentry = function_91ce54da71d1008d(weaponranktablebundle.weaponranklist[rankid].rank);
     rankinfo = spawnStruct();
     level.weaponranktable.rankinfo[rankid] = rankinfo;
     rankinfo.minxp = weaponranktableentry.minxp;

@@ -533,7 +533,7 @@ function onplayerkilled(inflictor, attacker, damage, damageflags, meansofdeath, 
   }
 }
 
-function function_5a0ae8bc2b80c0c0(inflictor, attacker, damage, meansofdeath, objweapon, hitloc, modifiers, var_1d68c79557cc54ea, victim_team, var_bafbdb422ea9eaae) {
+function onagentkilled(inflictor, attacker, damage, meansofdeath, objweapon, hitloc, modifiers, var_1d68c79557cc54ea, victim_team, var_bafbdb422ea9eaae) {
   if(!isDefined(inflictor)) {
     println("<dev string:x334>");
     return;
@@ -844,7 +844,7 @@ function function_8359cadd253f9604(player, type, quantity, var_afda85311c8ed272,
   function_8e81148472fb520a(player, aeeventname, [ae_utility::function_d6f771aedba70ce7(aeeventname, #"version"), 1, ae_utility::function_d6f771aedba70ce7(aeeventname, #"string_ref"), typeid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"value"), quantity, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gametype"), gametype, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_92939ab8dccb3d82"), location, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_dc0d981f2d59d210"), location2, ae_utility::function_d6f771aedba70ce7(aeeventname, #"loot_id"), lootid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"zm_rarity"), itemrarity], var_afda85311c8ed272);
 }
 
-function function_5c3aa65db46763ff(vehicle, type) {
+function reportvehicleevent(vehicle, type) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1659,12 +1659,12 @@ function function_597bc208d923a465(ref, totalkills) {
 
 function function_68ffb11dc4c6b979(value, aeeventname) {
   if(isDefined(value) && !isint(value) && !isstring(value)) {
-    println("<dev string:x520>" + value + "<dev string:x536>" + function_3c8848a3a11b2553(aeeventname));
+    println("<dev string:x520>" + value + "<dev string:x536>" + getxhashsourcename(aeeventname));
     return int(0);
   }
 
   if(!isDefined(value)) {
-    println("<dev string:x573>" + function_3c8848a3a11b2553(aeeventname));
+    println("<dev string:x573>" + getxhashsourcename(aeeventname));
     return int(0);
   }
 
@@ -1719,7 +1719,7 @@ function function_bd59aa7e8cece1ab(ref, value) {
 
 function oncapture(modifiers) {
   if(!isPlayer(self)) {
-    if(istrue(level.var_c48ab672d4fb36a) && isDefined(self.subclass) && self.subclass == "capture_bot" || !istrue(level.var_c48ab672d4fb36a) && issharedfuncdefined("super_capture_bot", "captureBot_isGrenadeEntity") && function_f3bb4f4911a1beb2("super_capture_bot", "captureBot_isGrenadeEntity")) {
+    if(istrue(level.var_c48ab672d4fb36a) && isDefined(self.subclass) && self.subclass == "capture_bot" || !istrue(level.var_c48ab672d4fb36a) && issharedfuncdefined("super_capture_bot", "captureBot_isGrenadeEntity") && callsharedfunc("super_capture_bot", "captureBot_isGrenadeEntity")) {
       owner = self.owner;
 
       if(utility::issharedfuncdefined("player", "getCurrentSuperRef")) {
@@ -2184,7 +2184,7 @@ function onpickupweapon(objweapon) {
   gametype = function_17c5d7feb226e256();
   var_349e390338192305 = findgunsmithattachments(objweapon);
   weaponlootid = weapon::function_89a83ae9a4c4142a(objweapon);
-  isloadoutweapon = utility::function_f3bb4f4911a1beb2("weapons", "isLoadoutWeapon", objweapon);
+  isloadoutweapon = utility::callsharedfunc("weapons", "isLoadoutWeapon", objweapon);
 
   if(!isDefined(weaponlootid)) {
     weaponlootid = 0;
@@ -2572,7 +2572,7 @@ function getchallengegamemode(player) {
     gamemode = function_6d40f12a09494350(gamemode, 5);
   }
 
-  if(istrue(level.var_ec2fb549b15ad827)) {
+  if(istrue(level.leagueplaymatch)) {
     gamemode = function_6d40f12a09494350(gamemode, 6);
     return gamemode;
   }
@@ -3343,8 +3343,8 @@ function function_b050ed1983293d8(player, eventtypebit, perkref, value) {
 
 function function_2aff99309a417c21(eventparamsstruct, aeeventname, aekeyname, value) {
   keyid = ae_utility::function_d6f771aedba70ce7(aeeventname, aekeyname);
-  assertex(isDefined(keyid), "<dev string:x5f5>" + function_3c8848a3a11b2553(aekeyname) + "<dev string:x61e>");
-  assertex(isDefined(value), "<dev string:x643>" + function_3c8848a3a11b2553(aekeyname) + "<dev string:x61e>");
+  assertex(isDefined(keyid), "<dev string:x5f5>" + getxhashsourcename(aekeyname) + "<dev string:x61e>");
+  assertex(isDefined(value), "<dev string:x643>" + getxhashsourcename(aekeyname) + "<dev string:x61e>");
 
   if(isDefined(keyid) && isDefined(value)) {
     eventparamsstruct.eventparams[eventparamsstruct.eventparams.size] = keyid;
@@ -3360,7 +3360,7 @@ function function_137b512700167b00(attacker, victim) {
   victimstruct = spawnStruct();
   victimstruct.var_e4738651e7e13c78 = function_9da07c7f4a49e349(victim);
   [victimstruct.enemytype, victimstruct.var_7b718ef6c64f049f] = findenemytype(victim);
-  victimstruct.var_14edc6d1db3695bc = isDefined(victim.var_d37b75616f7c2ee) && victim.var_d37b75616f7c2ee.var_14edc6d1db3695bc;
+  victimstruct.biscritical = isDefined(victim.var_d37b75616f7c2ee) && victim.var_d37b75616f7c2ee.biscritical;
   victimstruct.v_distance = int(distance(attacker.origin, victim.origin));
   victimstruct.origin = victim.origin;
   victimstruct.team = victim.team;
@@ -3396,7 +3396,7 @@ function reportkillchallengeevent(attacker, victimstruct, modifiers1, modifiers2
     attacker.criticalstreak = 0;
   }
 
-  if(istrue(victimstruct.var_14edc6d1db3695bc)) {
+  if(istrue(victimstruct.biscritical)) {
     attacker.criticalstreak++;
   } else {
     attacker.criticalstreak = 0;
@@ -3444,10 +3444,10 @@ function reportkillchallengeevent(attacker, victimstruct, modifiers1, modifiers2
     weaponcamoname = objweapon.camo;
 
     if(utility::issharedfuncdefined("zombie", "get_pap_level")) {
-      var_29a8ba8c9dd43fd2 = attacker utility::function_f3bb4f4911a1beb2("zombie", "get_pap_level", objweapon);
+      n_pap_level = attacker utility::callsharedfunc("zombie", "get_pap_level", objweapon);
       var_3a56a10345d2e89a = objweapon.var_9d7facbe889e667c;
 
-      if(isarray(attacker.var_c37e65eb7cc773eb) && isDefined(var_3a56a10345d2e89a) && isDefined(var_29a8ba8c9dd43fd2) && var_29a8ba8c9dd43fd2 != 0) {
+      if(isarray(attacker.var_c37e65eb7cc773eb) && isDefined(var_3a56a10345d2e89a) && isDefined(n_pap_level) && n_pap_level != 0) {
         overridecamo = attacker.var_c37e65eb7cc773eb[var_3a56a10345d2e89a];
 
         if(isDefined(overridecamo)) {
@@ -3659,7 +3659,7 @@ function reportkillchallengeevent(attacker, victimstruct, modifiers1, modifiers2
   eventparamssquad = [];
 
   if(isDefined(var_1d68c79557cc54ea)) {
-    if(isDefined(victimstruct) && isDefined(victimstruct.var_aaf0465944b061ed) && victimstruct.var_aaf0465944b061ed == "warlord_kia") {
+    if(isDefined(victimstruct) && isDefined(victimstruct.kiastring) && victimstruct.kiastring == "warlord_kia") {
       eventparamssquad = [paramcache[#"gamemode"], gamemode, paramcache[#"gametype"], gametype, paramcache[#"version"], 1];
     }
 
@@ -4108,13 +4108,13 @@ function findgunsmithattachments(objweapon) {
 
         if(utility::issharedfuncdefined("weapons", "attachmentIsSelectable")) {
           if([[utility::getsharedfunc("weapons", "attachmentIsSelectable")]](objweapon, attachment)) {
-            var_349e390338192305[var_349e390338192305.size] = weapon::function_693e108cb61ceeb5(weaponrootname, attachment);
+            var_349e390338192305[var_349e390338192305.size] = weapon::getattachmentlootid(weaponrootname, attachment);
           }
         }
       }
 
       if(var_7208e21ea18240fb) {
-        var_349e390338192305[var_349e390338192305.size] = weapon::function_693e108cb61ceeb5(weaponrootname, "default_sniper_scope");
+        var_349e390338192305[var_349e390338192305.size] = weapon::getattachmentlootid(weaponrootname, "default_sniper_scope");
       }
     }
   }
@@ -4195,7 +4195,7 @@ function findenemytype(victim) {
   }
 
   isground = 0;
-  var_ae8eb6d66c120397 = 0;
+  isaerial = 0;
   issupport = 0;
   var_24f040a6728b6dc4 = 0;
   var_b93834c5c289dcdc = 0;
@@ -4231,12 +4231,12 @@ function findenemytype(victim) {
       case #"hash_691f39dddd9116b8":
       case #"hash_a1031216158c7882":
       case #"hash_e6bea339d3cbd3e8":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         break;
       case #"hash_f64c697bfb4c6b54":
       case #"hash_27002778019fb447":
       case #"hash_e51f2e3d5cdd8ed8":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         issupport = 1;
         break;
       case #"hash_19dd9a3a4147e09e":
@@ -4252,13 +4252,13 @@ function findenemytype(victim) {
       case #"hash_bf2f9adbd2b41d5":
       case #"hash_7a687f6a4d685110":
       case #"hash_6362d6aae3e5a62e":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         var_24f040a6728b6dc4 = 1;
         break;
       case #"hash_e171e5b86ef0a4cc":
       case #"hash_887ad77192b9c4fb":
       case #"hash_634b246c3da5c56f":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         issupport = 1;
         var_24f040a6728b6dc4 = 1;
         break;
@@ -4268,7 +4268,7 @@ function findenemytype(victim) {
       enemytype = function_6d40f12a09494350(enemytype, ae_utility::function_e2ff8f4b4e94f723(#"hash_e2f5c601b57b3960", #"ground"));
     }
 
-    if(var_ae8eb6d66c120397) {
+    if(isaerial) {
       enemytype = function_6d40f12a09494350(enemytype, ae_utility::function_e2ff8f4b4e94f723(#"hash_e2f5c601b57b3960", #"aerial"));
     }
 
@@ -4290,7 +4290,7 @@ function findenemytype(victim) {
 
     if(isground && !canfly && !isboat) {
       enemytype = function_6d40f12a09494350(enemytype, ae_utility::function_e2ff8f4b4e94f723(#"hash_e2f5c601b57b3960", #"ground"));
-    } else if(var_ae8eb6d66c120397 || canfly) {
+    } else if(isaerial || canfly) {
       enemytype = function_6d40f12a09494350(enemytype, ae_utility::function_e2ff8f4b4e94f723(#"hash_e2f5c601b57b3960", #"aerial"));
     }
 
@@ -4895,7 +4895,7 @@ function function_4a14be27c7c571c4(var_5b3fe777f2d1c693) {
 
   aeeventname = #"armory_trader";
   aeeventid = ae_utility::function_6e2deb013c9ca85e(aeeventname);
-  var_7493c6798abb5b8 = utility::function_f3bb4f4911a1beb2("game", "getWeaponPickupRarity", var_5b3fe777f2d1c693);
+  var_7493c6798abb5b8 = utility::callsharedfunc("game", "getWeaponPickupRarity", var_5b3fe777f2d1c693);
   params = [ae_utility::function_d6f771aedba70ce7(aeeventname, #"version"), 1, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_bda2749e1ae2d4d6"), var_7493c6798abb5b8];
 
   function_7d97a2a745e514c4(aeeventid, params);
@@ -5147,8 +5147,8 @@ function function_c1945f26d99b0ed9(player) {
   squadmates = player getfireteammembers();
 
   for(index = 0; index < 5; index++) {
-    if(isDefined(var_a8af9a2935dd804f) && isDefined(squadmates[index]) && squadmates[index] function_7a32b0201993d7f7() != "") {
-      var_a8af9a2935dd804f[index] = squadmates[index] function_7a32b0201993d7f7();
+    if(isDefined(var_a8af9a2935dd804f) && isDefined(squadmates[index]) && squadmates[index] getplayerunoid() != "") {
+      var_a8af9a2935dd804f[index] = squadmates[index] getplayerunoid();
       continue;
     }
 

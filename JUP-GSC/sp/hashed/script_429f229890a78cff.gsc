@@ -13,33 +13,33 @@ function getfunction(funcid) {
     case #"hash_4d7ca12cb5ce1028":
       return &startcap;
     case #"hash_2265dc8309b4f346":
-      return &function_8190fffc19bdbc2a;
+      return &onusertermindated;
   }
 
   return namespace_f901a4f9d899be59::function_efcea5d26798e5b6(funcid);
 }
 
-function function_8190fffc19bdbc2a(interactionid) {
+function onusertermindated(interactionid) {
   if(!isalive(self)) {
-    users = function_adf0d34ff483c35a(interactionid);
+    users = getbsequsers(interactionid);
     statename = "friend_down";
     alias = "friend_down_anim";
 
     foreach(user in users) {
-      if(scripts\asm\cap::function_f179ede0989e6734(statename, alias)) {
-        user._blackboard.var_7460b96395361857 = "friend_down";
+      if(scripts\asm\cap::cap_hasalias(statename, alias)) {
+        user._blackboard.bseqphase = "friend_down";
       }
     }
 
     return;
   }
 
-  if(isDefined(self.stealth) && self.var_fe5ebefa740c7106 != 0 || isDefined(self.var_fd01ad49b4e38ae8)) {
-    self._blackboard.var_7460b96395361857 = "react";
+  if(isDefined(self.stealth) && self.stealth_bsmstate != 0 || isDefined(self.var_fd01ad49b4e38ae8)) {
+    self._blackboard.bseqphase = "react";
     return;
   }
 
-  self._blackboard.var_7460b96395361857 = "end";
+  self._blackboard.bseqphase = "end";
 }
 
 function startcap(statename, params) {

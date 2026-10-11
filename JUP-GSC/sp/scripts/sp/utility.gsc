@@ -92,9 +92,9 @@ function private function_89b1ee87a65f27c0() {
 }
 
 function delete_live_grenades() {
-  var_eba0cb3c0c7437f = getEntArray("grenade", "classname");
+  allnades = getEntArray("grenade", "classname");
 
-  foreach(nade in var_eba0cb3c0c7437f) {
+  foreach(nade in allnades) {
     if(!isDefined(nade.targetname) && nade.model != "projectile_molotov_v0") {
       nade delete();
     }
@@ -247,13 +247,13 @@ function riotshield_unlock_orientation() {
   self.lockorientation = 0;
 }
 
-function cqb_walk(var_41e0c82e9f7aeb42) {
-  if(var_41e0c82e9f7aeb42 == "on") {
+function cqb_walk(on_or_off) {
+  if(on_or_off == "on") {
     enable_cqbwalk();
     return;
   }
 
-  assert(var_41e0c82e9f7aeb42 == "off");
+  assert(on_or_off == "off");
   disable_cqbwalk();
 }
 
@@ -324,7 +324,7 @@ function waterfx(endflag, soundalias) {
   }
 }
 
-function player_is_near_live_offhand(var_9cf2a042bffb7637) {
+function player_is_near_live_offhand(isautosave) {
   grenades = getEntArray("grenade", "classname");
 
   foreach(grenade in grenades) {
@@ -336,7 +336,7 @@ function player_is_near_live_offhand(var_9cf2a042bffb7637) {
       player = level.players[playerindex];
 
       if(distancesquared(grenade.origin, player.origin) < 75625) {
-        if(istrue(var_9cf2a042bffb7637)) {
+        if(istrue(isautosave)) {
           scripts\sp\autosave::autosaveprint("live grenade is near the player", 0);
         }
 
@@ -421,7 +421,7 @@ function isprimaryweapon(weapon) {
   }
 }
 
-function enable_heat_behavior(var_fbebb3dec0554929) {
+function enable_heat_behavior(shoot_while_moving) {
   assertmsg("heat is no longer supported.talk to AI if there's something about heat that you need.");
 }
 
@@ -435,14 +435,14 @@ function interactivekeypairs() {
 
 function mask_interactives_in_volumes(volumes) {
   interactivekeypairs = interactivekeypairs();
-  var_be2a0ce5c21257cf = [];
+  combinedinteractives = [];
 
-  foreach(var_84b361c164fe3ed6 in interactivekeypairs) {
-    var_f1be64c809eda461 = getEntArray(var_84b361c164fe3ed6[0], var_84b361c164fe3ed6[1]);
-    var_be2a0ce5c21257cf = array_combine(var_be2a0ce5c21257cf, var_f1be64c809eda461);
+  foreach(interactivekeypair in interactivekeypairs) {
+    moreinteractives = getEntArray(interactivekeypair[0], interactivekeypair[1]);
+    combinedinteractives = array_combine(combinedinteractives, moreinteractives);
   }
 
-  foreach(ent in var_be2a0ce5c21257cf) {
+  foreach(ent in combinedinteractives) {
     if(isDefined(ent.script_noteworthy)) {
       ent_type = ent.script_noteworthy;
     } else {
@@ -476,8 +476,8 @@ function activate_interactives_in_volume() {
     return;
   }
 
-  foreach(var_28afba755c99fce0 in self.interactives) {
-    var_28afba755c99fce0[[level._interactive[var_28afba755c99fce0.interactive_type].loadfromstructfn]]();
+  foreach(stored_int in self.interactives) {
+    stored_int[[level._interactive[stored_int.interactive_type].loadfromstructfn]]();
   }
 
   self.interactives = undefined;
@@ -796,7 +796,7 @@ function in_zero_gravity() {
   return level.player ent_flag_exist("zero_gravity") && level.player ent_flag("zero_gravity");
 }
 
-function remove_equipment_immediately(seekers, emps, var_62e4a9a6936ce22c, frags, var_615acdf145578d94, var_864fe5df401ea798) {
+function remove_equipment_immediately(seekers, emps, antigravs, frags, drones_delete, drones_explode) {
   if(!isDefined(seekers)) {
     seekers = 1;
   }
@@ -805,20 +805,20 @@ function remove_equipment_immediately(seekers, emps, var_62e4a9a6936ce22c, frags
     emps = 1;
   }
 
-  if(!isDefined(var_62e4a9a6936ce22c)) {
-    var_62e4a9a6936ce22c = 1;
+  if(!isDefined(antigravs)) {
+    antigravs = 1;
   }
 
   if(!isDefined(frags)) {
     frags = 1;
   }
 
-  if(!isDefined(var_615acdf145578d94)) {
-    var_615acdf145578d94 = 1;
+  if(!isDefined(drones_delete)) {
+    drones_delete = 1;
   }
 
-  if(!isDefined(var_864fe5df401ea798)) {
-    var_864fe5df401ea798 = 0;
+  if(!isDefined(drones_explode)) {
+    drones_explode = 0;
   }
 }
 
@@ -1654,7 +1654,7 @@ function make_weapon(basename, attachments, reticle, camo, lootid, alt_mode, blu
     var_8b5443598fc587bf = &makeweapon;
   }
 
-  defaults = function_6527364c1ecca6c6(basename);
+  defaults = getweapondefaultattachments(basename);
   defaults = removeconflictingattachments(attachments, defaults, basename);
   attachments = array_combine(attachments, defaults);
   attachment_variants = [];
@@ -1914,7 +1914,7 @@ function aim_at(origin, laser_state, laser_tag, aim_time) {
   self setentitytarget(self.aim_target);
   self.aim_target moveTo(origin, aim_time, 0.01, 0.01);
 
-  thread function_d9c71e107b11de6();
+  thread debug_aiming();
 
   wait aim_time * 0.5;
 
@@ -1947,7 +1947,7 @@ function internal_aim_at_laser_tracker() {
   }
 }
 
-function function_e24293736e639dcf(team, org, ang, expendable) {
+function createaiment(team, org, ang, expendable) {
   ent = spawn_script_origin(org, ang);
   ent.health = 1;
   ent makeentitysentient(team, expendable);
@@ -1999,7 +1999,7 @@ function aim_at_laser_off() {
   }
 }
 
-function move_aim_to(origin, time, acceleration_time, var_efe93c754f5124e6) {
+function move_aim_to(origin, time, acceleration_time, deceleration_time) {
   self endon("death");
   self endon("stop_aiming");
 
@@ -2007,12 +2007,12 @@ function move_aim_to(origin, time, acceleration_time, var_efe93c754f5124e6) {
     acceleration_time = 0.05;
   }
 
-  if(!isDefined(var_efe93c754f5124e6)) {
-    var_efe93c754f5124e6 = 0.05;
+  if(!isDefined(deceleration_time)) {
+    deceleration_time = 0.05;
   }
 
   assertex(isDefined(self.aim_target), "Must enable aiming with aim_at() before moving aim");
-  self.aim_target moveTo(origin, time, acceleration_time, var_efe93c754f5124e6);
+  self.aim_target moveTo(origin, time, acceleration_time, deceleration_time);
   wait time;
 }
 
@@ -2166,19 +2166,19 @@ function aim_search_around(var_eb0c52046ed75b79, var_3dce490e575954cb, var_c1c64
     var_4af84bd7b4e025ca = clamp(var_4af84bd7b4e025ca, -90, 90);
   }
 
-  thread function_d9c71e107b11de6();
+  thread debug_aiming();
 
   while(true) {
     if(randomfloat(100) > 50) {
-      var_8360d787cd2d6eca = var_3dce490e575954cb;
+      vert_angle = var_3dce490e575954cb;
     } else {
-      var_8360d787cd2d6eca = var_eb0c52046ed75b79;
+      vert_angle = var_eb0c52046ed75b79;
     }
 
     if(randomfloat(100) > 50) {
-      var_dda88971030cb1e1 = var_4af84bd7b4e025ca;
+      horiz_angle = var_4af84bd7b4e025ca;
     } else {
-      var_dda88971030cb1e1 = var_c1c6436496d9b6e8;
+      horiz_angle = var_c1c6436496d9b6e8;
     }
 
     deltatime = 0.05;
@@ -2194,7 +2194,7 @@ function aim_search_around(var_eb0c52046ed75b79, var_3dce490e575954cb, var_c1c64
         check_angles = self.angles;
       }
 
-      search_angles = check_angles + (var_8360d787cd2d6eca, var_dda88971030cb1e1, 0);
+      search_angles = check_angles + (vert_angle, horiz_angle, 0);
       search_vector = anglesToForward(search_angles) * 75;
       search_start = (self.origin[0], self.origin[1], muzzle_height);
       search_target = search_start + search_vector;
@@ -2220,7 +2220,7 @@ function stop_aim_search_around() {
   self notify("stop_searching");
 }
 
-function function_d9c71e107b11de6() {
+function debug_aiming() {
   self endon("<dev string:x258>");
   setdvarifuninitialized(@ "hash_500912e607f2c429", 0);
 
@@ -2309,16 +2309,16 @@ function get_adjusted_difficulty() {
   return scripts\sp\gameskill::auto_adjust_difficult_get();
 }
 
-function civilianfailwrapper(var_35bc92cc3c2fc0a8, mindamage, playerdistance, ignoresplash) {
+function civilianfailwrapper(deathquotearray, mindamage, playerdistance, ignoresplash) {
   self notify("stop_civilian_fail_wrapper");
   self endon("stop_civilian_fail_wrapper");
   level endon("stop_all_civilian_fail_wrappers");
 
-  if(!isDefined(var_35bc92cc3c2fc0a8)) {
-    var_35bc92cc3c2fc0a8 = [9, 30];
+  if(!isDefined(deathquotearray)) {
+    deathquotearray = [9, 30];
   }
 
-  assertex(isarray(var_35bc92cc3c2fc0a8), "deathQuoteArray must be an array!");
+  assertex(isarray(deathquotearray), "deathQuoteArray must be an array!");
 
   if(!isDefined(mindamage)) {
     mindamage = 20;
@@ -2372,7 +2372,7 @@ function civilianfailwrapper(var_35bc92cc3c2fc0a8, mindamage, playerdistance, ig
   }
 
   level thread scripts\sp\hud_util::fade_out(0);
-  scripts\sp\player_death::set_custom_death_quote(array_randomize(var_35bc92cc3c2fc0a8)[0]);
+  scripts\sp\player_death::set_custom_death_quote(array_randomize(deathquotearray)[0]);
   missionfailedwrapper();
 }
 
@@ -2607,37 +2607,37 @@ function private function_3d10fd7b256e701e(armormodel) {
 
 function function_fef4d6151e091533() {
   setsaveddvar(@ "bg_piggybackarmoronnvg", 1);
-  var_45b5d412f51a1445 = player::function_e636201766496e1();
-  var_2a73beb869198eea = 1;
+  currentplatecount = player::function_e636201766496e1();
+  newplatecount = 1;
 
-  if(var_45b5d412f51a1445 >= 1) {
-    var_2a73beb869198eea = var_45b5d412f51a1445 + 1;
+  if(currentplatecount >= 1) {
+    newplatecount = currentplatecount + 1;
   }
 
-  self.armor.plates = var_2a73beb869198eea;
-  self.armor.var_a81adeb0e1f89320 = 3;
-  player::function_e9e42cffedaa98d5(var_2a73beb869198eea);
+  self.armor.plates = newplatecount;
+  self.armor.maxplates = 3;
+  player::function_e9e42cffedaa98d5(newplatecount);
   player::give_player_max_armor();
 }
 
 function function_eb4400096efae0a7(struct, var_bf15456a31fe0d35) {
-  var_eb519d6a088a126a = undefined;
+  armorplateinteract = undefined;
 
   if(isstring(struct)) {
-    var_eb519d6a088a126a = getStruct(struct, "targetname");
+    armorplateinteract = getStruct(struct, "targetname");
   } else if(isstruct(struct)) {
-    var_eb519d6a088a126a = struct;
+    armorplateinteract = struct;
   }
 
-  assertex(isDefined(var_eb519d6a088a126a), "Must pass in an existing struct or targetname");
-  model = spawn_model("lm_loot_wm_armor_plate_iw9_carbon_fiber", var_eb519d6a088a126a.origin, var_eb519d6a088a126a.angles);
+  assertex(isDefined(armorplateinteract), "Must pass in an existing struct or targetname");
+  model = spawn_model("lm_loot_wm_armor_plate_iw9_carbon_fiber", armorplateinteract.origin, armorplateinteract.angles);
 
   if(!isDefined(var_bf15456a31fe0d35)) {
     var_bf15456a31fe0d35 = &"SHARED_HINTSTRINGS/ARMOR_PLATE_PICKUP";
   }
 
-  var_eb519d6a088a126a cursor_hint::create_cursor_hint(undefined, (0, 0, 6), var_bf15456a31fe0d35, 180, 160, 110, undefined, undefined, undefined, undefined, "duration_short", undefined, undefined, 180);
-  var_eb519d6a088a126a thread function_8583464c18c2f63a(model, var_bf15456a31fe0d35);
+  armorplateinteract cursor_hint::create_cursor_hint(undefined, (0, 0, 6), var_bf15456a31fe0d35, 180, 160, 110, undefined, undefined, undefined, undefined, "duration_short", undefined, undefined, 180);
+  armorplateinteract thread function_8583464c18c2f63a(model, var_bf15456a31fe0d35);
 }
 
 function private function_8583464c18c2f63a(armormodel, var_bf15456a31fe0d35) {
@@ -2665,13 +2665,13 @@ function private function_8583464c18c2f63a(armormodel, var_bf15456a31fe0d35) {
 }
 
 function function_7315d3ac734d11f() {
-  var_45b5d412f51a1445 = player::function_e636201766496e1();
+  currentplatecount = player::function_e636201766496e1();
 
-  if(var_45b5d412f51a1445 >= 3) {
+  if(currentplatecount >= 3) {
     return false;
   }
 
-  player::function_e9e42cffedaa98d5(var_45b5d412f51a1445 + 1);
+  player::function_e9e42cffedaa98d5(currentplatecount + 1);
   return true;
 }
 
@@ -2684,14 +2684,14 @@ function function_e151438c44c81414() {
 
   var_f20970ea949bc843 = "sandboxInventoryData";
   sandboxloadoutdata = "sandboxLoadoutData";
-  var_c85bd7b3f6961d17 = ["cp_jup_port", "cp_jup_chemical", "cp_jup_ranch", "cp_jup_resort", "cp_jup_apt", "cp_jup_dam"];
+  sandboxmissions = ["cp_jup_port", "cp_jup_chemical", "cp_jup_ranch", "cp_jup_resort", "cp_jup_apt", "cp_jup_dam"];
   var_4b3db997f0b29c9 = [128, 350, 64, 128, 128, 128];
   level.player setprogressiondata("spProgData", "cp_jup_parachute_activated", 0);
   level.player setprogressiondata("sandboxLastCheckpointData", "last_checkpoint_map", "");
   level.player setprogressiondata("sandboxLastCheckpointData", "last_checkpoint", "");
 
-  for(j = 0; j < var_c85bd7b3f6961d17.size; j++) {
-    currentmission = var_c85bd7b3f6961d17[j];
+  for(j = 0; j < sandboxmissions.size; j++) {
+    currentmission = sandboxmissions[j];
 
     for(i = 0; i < 40; i++) {
       level.player setprogressiondata(var_f20970ea949bc843, currentmission, "SboxItems", i, "unlockState", 0);

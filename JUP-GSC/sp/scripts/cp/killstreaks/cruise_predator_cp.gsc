@@ -147,6 +147,6 @@ function cruisepredator_removeitemfromslot(rider) {
 function function_8a023375b0197bdc(missile) {
   self endon("death");
   missile endon("cruise_missile_force_eject");
-  missile scripts\killstreaks\killstreak_shared::function_51afe751c1e36723("collision", "explode", "death", "disowned", "emp_defused", "trophy_blocked");
+  missile scripts\killstreaks\killstreak_shared::killstreak_waittillexplode("collision", "explode", "death", "disowned", "emp_defused", "trophy_blocked");
   flag_clear("player_demigod");
 }

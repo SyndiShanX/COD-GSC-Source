@@ -22,7 +22,7 @@ function init() {
   level.loot = spawnStruct();
   level.loot.types = [];
   level.loot.notifications = [];
-  level.loot.var_abb7ac9930101675 = [];
+  level.loot.classexceptions = [];
   level.loot.var_8da39343ac7feaf3 = [];
   level.loot.var_d0d7b34e9765980a = [];
   level.loot.resourcepending = [];
@@ -38,11 +38,11 @@ function init() {
   level.loot.probability = [];
   level.loot.probability["Default"] = undefined;
   level.loot.probability["Offhand"] = &probabilityoffhand;
-  level.loot.probability["OffhandWheel"] = &function_6bc788ba92068527;
+  level.loot.probability["OffhandWheel"] = &probabilityoffhandwheel;
   level.loot.probability["Never"] = &probabilityzero;
 
   if(isDefined(level.gamemodebundle)) {
-    function_af421e4ae48662c7(level.gamemodebundle.var_fb1f49d1ec80148d);
+    function_af421e4ae48662c7(level.gamemodebundle.campaignlootlist);
   }
 
   if(utility::playerarmorenabled()) {
@@ -65,26 +65,26 @@ function init() {
   function_3c821aac4af727f3();
 }
 
-function function_af421e4ae48662c7(var_47ccbb601b4468ce) {
-  if(!isDefined(var_47ccbb601b4468ce)) {
+function function_af421e4ae48662c7(campaignlootlistname) {
+  if(!isDefined(campaignlootlistname)) {
     return;
   }
 
   level.loot.types = [];
-  level.loot.var_abb7ac9930101675 = [];
+  level.loot.classexceptions = [];
   level.loot.pickupgesture = undefined;
   level.loot.wheelweapons = undefined;
-  bundlelist = getscriptbundle("campaignlootlist:" + var_47ccbb601b4468ce);
+  bundlelist = getscriptbundle("campaignlootlist:" + campaignlootlistname);
 
   if(isDefined(bundlelist)) {
-    level.player.armor.var_a81adeb0e1f89320 = default_to(bundlelist.var_a81adeb0e1f89320, 3);
+    level.player.armor.maxplates = default_to(bundlelist.maxplates, 3);
     level.loot.pickupgesture = bundlelist.pickupgesture;
     level.loot.splashwidget = bundlelist.pickupwidget;
 
     if(isDefined(bundlelist.exceptions)) {
       foreach(exception in bundlelist.exceptions) {
         if(isDefined(exception.classname)) {
-          level.loot.var_abb7ac9930101675[exception.classname] = 1;
+          level.loot.classexceptions[exception.classname] = 1;
         }
       }
     }
@@ -94,8 +94,8 @@ function function_af421e4ae48662c7(var_47ccbb601b4468ce) {
       level.loot.maxweapons = default_to(bundlelist.maxweapons, 25);
       level.loot.var_307d8c71918f2204 = default_to(bundlelist.var_307d8c71918f2204, 0);
 
-      foreach(var_1e9517e712c2c45c in bundlelist.lootlist) {
-        loot = getscriptbundle("campaignloot:" + var_1e9517e712c2c45c.loot);
+      foreach(lootlistitem in bundlelist.lootlist) {
+        loot = getscriptbundle("campaignloot:" + lootlistitem.loot);
 
         if(!isDefined(loot)) {
           continue;
@@ -174,7 +174,7 @@ function cancarryloot() {
     return false;
   }
 
-  if(istrue(level.loot.var_abb7ac9930101675[self.classname])) {
+  if(istrue(level.loot.classexceptions[self.classname])) {
     return false;
   }
 
@@ -412,9 +412,9 @@ function private function_197355327a7bd01a(lootarray, droppedent, limit) {
     }
 
     worstitem = item;
-    var_de1d0d58aac7d656 = item getentitynumber();
-    worstitem function_2e32efd3d30633c3();
-    lootarray[var_de1d0d58aac7d656] = undefined;
+    worstitemkey = item getentitynumber();
+    worstitem cleanuplootorweaponitem();
+    lootarray[worstitemkey] = undefined;
     fallbackitem = undefined;
 
     if(lootarray.size <= limit) {
@@ -423,9 +423,9 @@ function private function_197355327a7bd01a(lootarray, droppedent, limit) {
   }
 
   if(isDefined(fallbackitem)) {
-    var_de1d0d58aac7d656 = fallbackitem getentitynumber();
-    fallbackitem function_2e32efd3d30633c3();
-    lootarray[var_de1d0d58aac7d656] = undefined;
+    worstitemkey = fallbackitem getentitynumber();
+    fallbackitem cleanuplootorweaponitem();
+    lootarray[worstitemkey] = undefined;
   }
 
   return lootarray;
@@ -448,7 +448,7 @@ function spawncorpseloot() {
     self.loot = [];
   }
 
-  spawnpool = function_bea35dd59e0df4ac();
+  spawnpool = getspawnpool();
 
   for(itemcount = self.loot.size; itemcount < 2 && spawnpool.size > 0; itemcount++) {
     name = spawnpool[randomintrange(0, spawnpool.size)];
@@ -460,7 +460,7 @@ function spawncorpseloot() {
   }
 }
 
-function function_bea35dd59e0df4ac(typefilter, var_d559b3e89af73e22) {
+function getspawnpool(typefilter, fallbacklootname) {
   if(isDefined(typefilter) && !isarray(typefilter)) {
     typefilter = [typefilter];
   }
@@ -483,30 +483,30 @@ function function_bea35dd59e0df4ac(typefilter, var_d559b3e89af73e22) {
     probabilityfunc = level.loot.types[name].probabilityfunc;
 
     if(isDefined(probabilityfunc)) {
-      var_e0902db164af1b76 = self[[probabilityfunc]](name, self.origin);
+      canspawnloot = self[[probabilityfunc]](name, self.origin);
 
-      if(var_e0902db164af1b76) {
+      if(canspawnloot) {
         spawnpool[spawnpool.size] = name;
       }
     }
   }
 
-  if(isDefined(var_d559b3e89af73e22) && spawnpool.size == 0) {
-    spawnpool = [var_d559b3e89af73e22];
+  if(isDefined(fallbacklootname) && spawnpool.size == 0) {
+    spawnpool = [fallbacklootname];
   }
 
   return spawnpool;
 }
 
 function spawnlootitem(name, origin, angles, force, worldplaced, shouldsuspend, usephysics) {
-  if((function_a6e152b655faae22(name) || function_468e6aa1f3ddb5c4(name)) && !playerarmorenabled()) {
+  if((islootarmor(name) || islootarmorvest(name)) && !playerarmorenabled()) {
     return;
   }
 
   if(!isDefined(angles)) {
     angles = randomvectorrange(0, 360);
 
-    if(function_a6e152b655faae22(name)) {
+    if(islootarmor(name)) {
       angles = (-90, angles[1], 0);
     }
   }
@@ -528,7 +528,7 @@ function spawnlootitem(name, origin, angles, force, worldplaced, shouldsuspend, 
   item.script_count_max = self.script_count_max;
 
   if(!istrue(worldplaced)) {
-    function_f3bb4f4911a1beb2("loot", "dropItem", item);
+    callsharedfunc("loot", "dropItem", item);
   }
 
   if(isDefined(item)) {
@@ -550,10 +550,10 @@ function itemworldplaced(item) {
 
 function cleanuplootitemondelete() {
   self waittill("death");
-  function_2e32efd3d30633c3();
+  cleanuplootorweaponitem();
 }
 
-function function_2e32efd3d30633c3() {
+function cleanuplootorweaponitem() {
   if(isDefined(self.cursor_hint_ent)) {
     self.cursor_hint_ent delete();
   }
@@ -619,7 +619,7 @@ function function_512014a40727de4(name) {
     weap = getoffhandweaponname(name);
 
     if(isDefined(weap)) {
-      attachments = function_6527364c1ecca6c6(weap);
+      attachments = getweapondefaultattachments(weap);
 
       if(istrue(attachments.size)) {
         weaponobj = makeweapon(weap, attachments);
@@ -646,28 +646,28 @@ function function_8b9cc449b9f5159d(name, displayname) {
   while(true) {
     previousammo = currentammo;
 
-    if(function_66d13e39b09c4901(name)) {
+    if(islootammo(name)) {
       currentammo = level.player scripts\sp\player::getammonameamount(name);
-    } else if(function_a6e152b655faae22(name) && !level.player scripts\sp\player::function_34895a6255f4587a()) {
+    } else if(islootarmor(name) && !level.player scripts\sp\player::function_34895a6255f4587a()) {
       currentammo = level.player scripts\sp\player::getarmoramount();
-    } else if(function_a6e152b655faae22(name)) {
+    } else if(islootarmor(name)) {
       currentammo = level.player scripts\sp\player::function_85e373bb15921966();
-    } else if(function_468e6aa1f3ddb5c4(name)) {
+    } else if(islootarmorvest(name)) {
       currentammo = level.player scripts\sp\player::getarmoramount();
-    } else if(function_f87039ba7ec40273(name)) {
+    } else if(islootweapon(name)) {
       currentammo = -1;
     } else {
       currentammo = getoffhandcurrentammo(name);
     }
 
     if(currentammo != previousammo) {
-      if(function_66d13e39b09c4901(name)) {
+      if(islootammo(name)) {
         maxammo = level.player scripts\sp\player::getammonamemaxamount(name);
-      } else if(function_a6e152b655faae22(name) && !level.player scripts\sp\player::function_34895a6255f4587a()) {
+      } else if(islootarmor(name) && !level.player scripts\sp\player::function_34895a6255f4587a()) {
         maxammo = level.player scripts\sp\player::getarmormaxamount();
-      } else if(function_a6e152b655faae22(name)) {
+      } else if(islootarmor(name)) {
         maxammo = level.player scripts\sp\player::function_c241aeec324282f0();
-      } else if(function_468e6aa1f3ddb5c4(name)) {
+      } else if(islootarmorvest(name)) {
         maxammo = level.player scripts\sp\player::getarmormaxamount();
       } else {
         maxammo = function_57888d406854dc7f(name);
@@ -696,7 +696,7 @@ function lootfuncandnotification(name) {
 
 function playermaxarmor(name) {
   if(level.player scripts\sp\player::function_34895a6255f4587a()) {
-    return level.player scripts\sp\player::function_83151236cdb3ce27();
+    return level.player scripts\sp\player::hasmaxarmorplates();
   }
 
   return level.player scripts\sp\player::getarmoramount() >= level.player scripts\sp\player::getarmormaxamount();
@@ -819,16 +819,16 @@ function lootammo(name) {
 
 function getammolootamount(ogammo, maxammo) {
   ammofrac = math::normalize_value(0, maxammo, ogammo);
-  var_4c92f7b0aac1631b = math::factor_value(0.5, 0.1, ammofrac);
-  return max(1, int(var_4c92f7b0aac1631b * maxammo));
+  ammomaxfrac = math::factor_value(0.5, 0.1, ammofrac);
+  return max(1, int(ammomaxfrac * maxammo));
 }
 
 function lootarmor(name) {
   itement = self;
 
   if(level.player scripts\sp\player::function_34895a6255f4587a()) {
-    var_2239cff6841032dc = level.player scripts\sp\player::function_85e373bb15921966();
-    level.player scripts\sp\player::function_e9e42cffedaa98d5(var_2239cff6841032dc + 1);
+    lastarmorplateamount = level.player scripts\sp\player::function_85e373bb15921966();
+    level.player scripts\sp\player::function_e9e42cffedaa98d5(lastarmorplateamount + 1);
   } else {
     level.player notify("armor_pressed");
   }
@@ -872,7 +872,7 @@ function lootoffhand(name) {
 
       if(isstring(weapon)) {
         if(weapon == weaponname) {
-          attachments = function_6527364c1ecca6c6(weapon);
+          attachments = getweapondefaultattachments(weapon);
 
           if(istrue(attachments.size)) {
             objweapon = makeweapon(weapon, attachments);
@@ -912,8 +912,8 @@ function function_1693de8f478a2d4a(loot, lootfunc, inactivefunc, probabilityfunc
 function lootresource(name) {
   itement = self;
 
-  if(isDefined(level.var_f6e4c42c27f2040f)) {
-    itement[[level.var_f6e4c42c27f2040f]](name);
+  if(isDefined(level.fnlootresource)) {
+    itement[[level.fnlootresource]](name);
     return;
   }
 
@@ -986,23 +986,23 @@ function probabilityarmor(name, origin) {
     return true;
   }
 
-  if(isDefined(level.player.var_123f331e1ab4995a)) {
+  if(isDefined(level.player.lootarmorchance)) {
     if(!isDefined(level.player.var_8add256b2e4988e5)) {
       level.player.var_8add256b2e4988e5 = 0;
     }
 
-    droparmor = randomfloat(1) < level.player.var_123f331e1ab4995a;
+    droparmor = randomfloat(1) < level.player.lootarmorchance;
 
     if(!droparmor) {
       level.player.var_8add256b2e4988e5++;
 
-      if(level.player.var_8add256b2e4988e5 >= 1 / level.player.var_123f331e1ab4995a) {
+      if(level.player.var_8add256b2e4988e5 >= 1 / level.player.lootarmorchance) {
         droparmor = 1;
       }
     }
 
     if(droparmor) {
-      function_3a93ae15cef29091("<dev string:x72>" + level.player.var_123f331e1ab4995a);
+      function_3a93ae15cef29091("<dev string:x72>" + level.player.lootarmorchance);
 
       level.player.var_8add256b2e4988e5 = 0;
       return true;
@@ -1110,7 +1110,7 @@ function probabilityoffhand(name, origin) {
   return false;
 }
 
-function function_6bc788ba92068527(name, origin) {
+function probabilityoffhandwheel(name, origin) {
   weaponname = getoffhandweaponname(name);
 
   if(!isDefined(weaponname)) {
@@ -1197,15 +1197,15 @@ function createnotification(name, showinrealism) {
     return;
   }
 
-  var_123e4d1200db4491 = istrue(level.loot.types[name].createnotification);
+  shouldcreatenotification = istrue(level.loot.types[name].createnotification);
 
-  if(!var_123e4d1200db4491) {
+  if(!shouldcreatenotification) {
     return;
   }
 
-  var_3e30fdc227f6e37c = !in_realism_mode() || istrue(showinrealism);
+  shouldcreatenotif = !in_realism_mode() || istrue(showinrealism);
 
-  if(var_3e30fdc227f6e37c) {
+  if(shouldcreatenotif) {
     if(isDefined(level.loot.splashwidget)) {
       if(!level.player namespace_373fee410d5055ba::function_ada0825249682644("loot_splash_display")) {
         level.player namespace_373fee410d5055ba::function_90de31b2cbef19f9("loot_splash_display", level.loot.splashwidget);
@@ -1291,7 +1291,7 @@ function private worldlootwaitproximity(radius) {
 
     foreach(player in level.players) {
       if(distancesquared(player.origin, self.origin) < radiussq) {
-        spawnpool = function_bea35dd59e0df4ac("Offhand", "frag");
+        spawnpool = getspawnpool("Offhand", "frag");
 
         if(spawnpool.size > 0) {
           self.script_noteworthy = spawnpool[randomintrange(0, spawnpool.size)];
@@ -1322,7 +1322,7 @@ function private function_cdd633dcd334b643() {
   foreach(lootstruct in level.loot.var_8da39343ac7feaf3) {
     if(isDefined(lootstruct.spawned_items) && lootstruct.spawned_items.size > 0) {
       foreach(itement in lootstruct.spawned_items) {
-        itement function_2e32efd3d30633c3();
+        itement cleanuplootorweaponitem();
       }
 
       lootstruct.spawned_items = undefined;
@@ -1346,19 +1346,19 @@ function isrefloot() {
   return 0;
 }
 
-function function_66d13e39b09c4901(name) {
+function islootammo(name) {
   return array_contains(level.loot.ammo_types, name);
 }
 
-function function_a6e152b655faae22(name) {
+function islootarmor(name) {
   return is_equal(tolower("armorplate"), tolower(name));
 }
 
-function function_468e6aa1f3ddb5c4(name) {
+function islootarmorvest(name) {
   return is_equal(tolower("armorvest"), tolower(name));
 }
 
-function function_f87039ba7ec40273(name) {
+function islootweapon(name) {
   return level.loot.types[name].type == "PrimaryWeapon";
 }
 
@@ -1388,10 +1388,10 @@ function updatepickupicon() {
 
   while(true) {
     distance = distance(level.player.origin, self.origin);
-    var_955695d3f4bc112 = gettime() < spawntime + 2150;
-    var_8161c1bf99ddcfc4 = isalive(level.player) && level.player scripts\engine\trace::can_see_origin(self.origin + (0, 0, 10), 0);
+    iconisnew = gettime() < spawntime + 2150;
+    playercanseeicon = isalive(level.player) && level.player scripts\engine\trace::can_see_origin(self.origin + (0, 0, 10), 0);
 
-    if(var_955695d3f4bc112 || var_8161c1bf99ddcfc4) {
+    if(iconisnew || playercanseeicon) {
       normalizedalpha = 1 - math::normalize_value(0, 1000, distance);
       goalalpha = normalizedalpha * 1.25;
     } else {
@@ -1469,7 +1469,7 @@ function force_armor_drop() {
 }
 
 function function_3a93ae15cef29091(string) {
-  if(function_a7b3dd243b231737()) {
+  if(lootdebugenabled()) {
     iprintln(string);
   }
 }
@@ -1480,7 +1480,7 @@ function function_3c821aac4af727f3() {
 
 function function_cd2e7283c864308a() {
   while(true) {
-    if(!function_a7b3dd243b231737()) {
+    if(!lootdebugenabled()) {
       waitframe();
       continue;
     }
@@ -1490,7 +1490,7 @@ function function_cd2e7283c864308a() {
         line(item.origin, item.origin + (0, 0, 120), (0, 0, 1), 1, 0, 1);
         print3d(item.origin, item.name, (0, 0, 1), 1, 0.5, 1);
 
-        if(function_a6e152b655faae22(item.name)) {
+        if(islootarmor(item.name)) {
           if(itemworldplaced(item)) {
             sphere(item.origin, 15, (0, 0, 1), 0, 1);
             continue;
@@ -1505,7 +1505,7 @@ function function_cd2e7283c864308a() {
   }
 }
 
-function function_a7b3dd243b231737() {
+function lootdebugenabled() {
   return getdvarint(@ "hash_7dfe19d75d304409");
 }
 

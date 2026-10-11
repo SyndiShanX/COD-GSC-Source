@@ -54,7 +54,7 @@ function function_9fcc9920ba3dbe3() {
 
 function function_33352cc5d4b4401(data) {
   tipindex = level.contextualtips.size;
-  keyhash = function_1823ff50bb28148d(data.key);
+  keyhash = getxhash(data.key);
   level.contextualtips[keyhash] = data;
   level.var_13036c7f57466667[tipindex] = keyhash;
   level.var_8205621341adedc4[keyhash] = tipindex;

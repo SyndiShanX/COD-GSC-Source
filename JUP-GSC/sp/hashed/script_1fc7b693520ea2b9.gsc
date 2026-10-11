@@ -51,8 +51,8 @@ function main(model, type, classname) {
   }
 
   build_husk(model, huskmodel, husktype);
-  function_2660787ca33cf457(classname, "tag_door_front_left", ["tag_window_front_left", "tag_mirror_left"]);
-  function_2660787ca33cf457(classname, "tag_door_front_right", ["tag_window_front_right", "tag_mirror_right"]);
+  build_dependentparts(classname, "tag_door_front_left", ["tag_window_front_left", "tag_mirror_left"]);
+  build_dependentparts(classname, "tag_door_front_right", ["tag_window_front_right", "tag_mirror_right"]);
   function_2cf37d073c6bde84(classname, "headlight_front_left", "tag_light_front_left", "headlights");
   function_2cf37d073c6bde84(classname, "headlight_front_right", "tag_light_front_right", "headlights");
   function_2cf37d073c6bde84(classname, "taillight_back_left", "tag_light_back_left", "headlights");

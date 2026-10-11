@@ -12,32 +12,32 @@
 #namespace cp_adrenaline_crate;
 
 function adrenaline_crate_init() {
-  var_86280fefb94b6b28 = spawnStruct();
-  var_86280fefb94b6b28.id = "adrenaline";
-  var_86280fefb94b6b28.modelbase = "offhand_wm_supportbox";
-  var_86280fefb94b6b28.hintstring = &"COOP_CRAFTING/ADRENALINE_TAKE";
-  var_86280fefb94b6b28.streakname = "adrenaline";
-  var_86280fefb94b6b28.splashname = "used_support_box";
-  var_86280fefb94b6b28.shadername = "compass_objpoint_deploy_friendly";
-  var_86280fefb94b6b28.headiconoffset = 20;
-  var_86280fefb94b6b28.lifespan = 90;
-  var_86280fefb94b6b28.usexp = 50;
-  var_86280fefb94b6b28.onusesfx = "ammo_crate_use";
-  var_86280fefb94b6b28.deployedsfx = "ammo_crate_use";
-  var_86280fefb94b6b28.deathvfx = loadfx("vfx/iw7/core/mp/killstreaks/vfx_dp_pickup_dust.vfx");
-  var_86280fefb94b6b28.onusecallback = &adrenalinebox_onusedeployable;
-  var_86280fefb94b6b28.canusecallback = &adrenalinebox_canusedeployable;
-  var_86280fefb94b6b28.deployfunc = &adrenalinebox_onusedeployable;
-  var_86280fefb94b6b28.usetime = 1000;
-  var_86280fefb94b6b28.maxhealth = 100;
-  var_86280fefb94b6b28.maxuses = 4;
-  var_86280fefb94b6b28.canreusebox = 0;
-  var_86280fefb94b6b28.allowmeleedamage = 1;
-  var_86280fefb94b6b28.damagefeedback = "";
-  var_86280fefb94b6b28.grenadeusefunc = &supportbox_grenadelaunchfunc;
-  var_86280fefb94b6b28.ondeploycallback = &supportbox_ondeploy;
-  var_86280fefb94b6b28.deployanimduration = supportbox_getdeployanimduration();
-  level.boxsettings["adrenaline"] = var_86280fefb94b6b28;
+  boxconfig = spawnStruct();
+  boxconfig.id = "adrenaline";
+  boxconfig.modelbase = "offhand_wm_supportbox";
+  boxconfig.hintstring = &"COOP_CRAFTING/ADRENALINE_TAKE";
+  boxconfig.streakname = "adrenaline";
+  boxconfig.splashname = "used_support_box";
+  boxconfig.shadername = "compass_objpoint_deploy_friendly";
+  boxconfig.headiconoffset = 20;
+  boxconfig.lifespan = 90;
+  boxconfig.usexp = 50;
+  boxconfig.onusesfx = "ammo_crate_use";
+  boxconfig.deployedsfx = "ammo_crate_use";
+  boxconfig.deathvfx = loadfx("vfx/iw7/core/mp/killstreaks/vfx_dp_pickup_dust.vfx");
+  boxconfig.onusecallback = &adrenalinebox_onusedeployable;
+  boxconfig.canusecallback = &adrenalinebox_canusedeployable;
+  boxconfig.deployfunc = &adrenalinebox_onusedeployable;
+  boxconfig.usetime = 1000;
+  boxconfig.maxhealth = 100;
+  boxconfig.maxuses = 4;
+  boxconfig.canreusebox = 0;
+  boxconfig.allowmeleedamage = 1;
+  boxconfig.damagefeedback = "";
+  boxconfig.grenadeusefunc = &supportbox_grenadelaunchfunc;
+  boxconfig.ondeploycallback = &supportbox_ondeploy;
+  boxconfig.deployanimduration = supportbox_getdeployanimduration();
+  level.boxsettings["adrenaline"] = boxconfig;
   level.deployable_box["adrenaline"] = [];
 }
 
@@ -145,7 +145,7 @@ function supportbox_watchplayerweapon(streakinfo) {
 }
 
 function supportbox_handledamage() {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 }
 
 function supportbox_handledeathdamage(data) {
@@ -153,7 +153,7 @@ function supportbox_handledeathdamage(data) {
   objweapon = data.objweapon;
   type = data.meansofdeath;
   damage = data.damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   attacker notify("destroyed_equipment");
 }
 
@@ -164,7 +164,7 @@ function supportbox_modifydamage(data) {
   damage = data.damage;
   idflags = data.idflags;
   modifieddamage = damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   return modifieddamage;
 }
 

@@ -200,8 +200,8 @@ function updatetotalgameplaytime() {
   time = var_7f901be676ffdc5a + var_bf30f615d3c9cc66;
   level.player setplayerprogression("sessionGameplayTime", time);
   var_8be67aa3c92c2c34 = level.player getplayerprogression("kleenexSessionGameplayTime");
-  var_620c25cef60dcba3 = int((gettime() - getdvarint(@ "hash_327cf97ac22238cf")) / 1000);
-  time2 = var_8be67aa3c92c2c34 + var_620c25cef60dcba3;
+  currentsessiontime = int((gettime() - getdvarint(@ "hash_327cf97ac22238cf")) / 1000);
+  time2 = var_8be67aa3c92c2c34 + currentsessiontime;
   level.player setplayerprogression("kleenexSessionGameplayTime", time2);
 
   if(var_bf30f615d3c9cc66 > 0) {
@@ -229,7 +229,7 @@ function analytics_event_upload(eventstring, num) {
   level.player dlog_recordplayerevent("dlog_event_analytics_sp_kleenex_event", ["levelname", level.script, "Event", eventstring, "Integer", num], 1);
 }
 
-function function_463ff5058321da86() {
+function get_spheader() {
   levelname = "none";
   startpoint = "none";
   origin = (0, 0, 0);
@@ -291,11 +291,11 @@ function function_62d66ac3e68e3942() {
   }
 }
 
-function function_9eb39cb364485a98(attacker, objweapon, damage, damagemod, partname) {
+function analytics_playerdamage(attacker, objweapon, damage, damagemod, partname) {
   function_f2a009b8402cd364("dlog_event_sp_damage", attacker, objweapon, damage, damagemod, partname);
 }
 
-function function_29ad13c8b56bc475(attacker, objweapon, damage, damagemod, partname) {
+function analytics_playerdeath(attacker, objweapon, damage, damagemod, partname) {
   function_f2a009b8402cd364("dlog_event_sp_death", attacker, objweapon, damage, damagemod, partname);
 }
 
@@ -304,7 +304,7 @@ function function_f2a009b8402cd364(event, attacker, objweapon, damage, damagemod
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
   attid = "unknown";
   atttype = "unknown";
   attclassname = "unknown";
@@ -315,7 +315,7 @@ function function_f2a009b8402cd364(event, attacker, objweapon, damage, damagemod
   attcombat = "unknown";
   attignoreme = 0;
   attignoreall = 0;
-  var_db19d7d1f5905612 = 0;
+  attfovcos = 0;
   var_d8b49b4111c2f083 = 0;
   attanimname = "unknown";
   attlaststand = 0;
@@ -453,7 +453,7 @@ function function_f2a009b8402cd364(event, attacker, objweapon, damage, damagemod
     }
   }
 
-  level.player dlog_recordplayerevent(event, ["sp_header", spheader, "attackerid", attid, "attackertype", atttype, "attackerclassname", attclassname, "attackerweapon", attweapon, "attackerx", attpos[0], "attackery", attpos[1], "attackerz", attpos[2], "attackeryaw", attyaw, "attackercombatmode", attcombat, "attackerignoreme", attignoreme, "attackerignoreall", attignoreall, "attackerfovcos", var_db19d7d1f5905612, "attackermaxsightdistsqrd", var_d8b49b4111c2f083, "attackeranimname", attanimname, "attackerlaststand", attlaststand, "damage", dmg, "damagetype", dmgtype, "damagelocation", dmgloc, "victimdied", victimdied, "current_gun", weapon, "current_gun_ammo_count", weaponammo, "current_gun_ammo_max", weaponmax, "current_backup", backupweapon, "current_backup_ammo_count", backupammo, "current_backup_ammo_max", backupmax, "current_lethal", lethal, "current_lethal_ammo_count", lethalammo, "current_lethal_ammo_max", lethalmax, "current_tactical", tact, "current_tactical_ammo_count", tactammo, "current_tactical_ammo_max", tactmax]);
+  level.player dlog_recordplayerevent(event, ["sp_header", spheader, "attackerid", attid, "attackertype", atttype, "attackerclassname", attclassname, "attackerweapon", attweapon, "attackerx", attpos[0], "attackery", attpos[1], "attackerz", attpos[2], "attackeryaw", attyaw, "attackercombatmode", attcombat, "attackerignoreme", attignoreme, "attackerignoreall", attignoreall, "attackerfovcos", attfovcos, "attackermaxsightdistsqrd", var_d8b49b4111c2f083, "attackeranimname", attanimname, "attackerlaststand", attlaststand, "damage", dmg, "damagetype", dmgtype, "damagelocation", dmgloc, "victimdied", victimdied, "current_gun", weapon, "current_gun_ammo_count", weaponammo, "current_gun_ammo_max", weaponmax, "current_backup", backupweapon, "current_backup_ammo_count", backupammo, "current_backup_ammo_max", backupmax, "current_lethal", lethal, "current_lethal_ammo_count", lethalammo, "current_lethal_ammo_max", lethalmax, "current_tactical", tact, "current_tactical_ammo_count", tactammo, "current_tactical_ammo_max", tactmax]);
 }
 
 function function_e1b9d15ec94cb4e() {
@@ -546,7 +546,7 @@ function function_620657ef3e312b63(subevent, weaponname, param0) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
 
   if(!isDefined(subevent)) {
     subevent = "none";
@@ -568,14 +568,14 @@ function function_7212c89168020e04(victim, attacker, objweapon) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
   vicid = "unknown";
   victype = "unknown";
   vicclassname = "unknown";
   viccombat = "unknown";
   vicignoreme = 0;
   vicignoreall = 0;
-  var_1a1932509937eaef = 0;
+  vicfovcos = 0;
   var_3deaf3d1300142a = 0;
   vicanimname = "unknown";
   viclaststand = 0;
@@ -614,7 +614,7 @@ function function_7212c89168020e04(victim, attacker, objweapon) {
     }
 
     if(isDefined(victim.fovcosine)) {
-      var_1a1932509937eaef = victim.fovcosine;
+      vicfovcos = victim.fovcosine;
     }
 
     if(isDefined(victim.animname)) {
@@ -652,7 +652,7 @@ function function_7212c89168020e04(victim, attacker, objweapon) {
   attcombat = "unknown";
   attignoreme = 0;
   attignoreall = 0;
-  var_db19d7d1f5905612 = 0;
+  attfovcos = 0;
   var_d8b49b4111c2f083 = 0;
   attanimname = "unknown";
   attlaststand = 0;
@@ -701,7 +701,7 @@ function function_7212c89168020e04(victim, attacker, objweapon) {
     }
 
     if(isDefined(attacker.fovcosine)) {
-      var_db19d7d1f5905612 = attacker.fovcosine;
+      attfovcos = attacker.fovcosine;
     }
 
     if(isDefined(attacker.animname)) {
@@ -717,15 +717,15 @@ function function_7212c89168020e04(victim, attacker, objweapon) {
     }
   }
 
-  level.player dlog_recordplayerevent("dlog_event_sp_aideath", ["sp_header", spheader, "victimid", vicid, "victimtype", victype, "victimclassname", vicclassname, "victimx", vicpos[0], "victimy", vicpos[1], "victimz", vicpos[2], "victimcombatmode", viccombat, "victimignoreme", vicignoreme, "victimignoreall", vicignoreall, "victimfovcos", var_1a1932509937eaef, "victimmaxsightdistsqrd", var_3deaf3d1300142a, "victimanimname", vicanimname, "victimlaststand", viclaststand, "attackerid", attid, "attackertype", atttype, "attackerclassname", attclassname, "attackerweapon", attweapon, "attackerx", attpos[0], "attackery", attpos[1], "attackerz", attpos[2], "attackeryaw", attyaw, "attackercombatmode", attcombat, "attackerignoreme", attignoreme, "attackerignoreall", attignoreall, "attackerfovcos", var_db19d7d1f5905612, "attackermaxsightdistsqrd", var_d8b49b4111c2f083, "attackeranimname", attanimname, "attackerlaststand", attlaststand, "damage", dmg, "damagetype", dmgtype, "damagelocation", dmgloc, "victimdied", victimdied]);
+  level.player dlog_recordplayerevent("dlog_event_sp_aideath", ["sp_header", spheader, "victimid", vicid, "victimtype", victype, "victimclassname", vicclassname, "victimx", vicpos[0], "victimy", vicpos[1], "victimz", vicpos[2], "victimcombatmode", viccombat, "victimignoreme", vicignoreme, "victimignoreall", vicignoreall, "victimfovcos", vicfovcos, "victimmaxsightdistsqrd", var_3deaf3d1300142a, "victimanimname", vicanimname, "victimlaststand", viclaststand, "attackerid", attid, "attackertype", atttype, "attackerclassname", attclassname, "attackerweapon", attweapon, "attackerx", attpos[0], "attackery", attpos[1], "attackerz", attpos[2], "attackeryaw", attyaw, "attackercombatmode", attcombat, "attackerignoreme", attignoreme, "attackerignoreall", attignoreall, "attackerfovcos", attfovcos, "attackermaxsightdistsqrd", var_d8b49b4111c2f083, "attackeranimname", attanimname, "attackerlaststand", attlaststand, "damage", dmg, "damagetype", dmgtype, "damagelocation", dmgloc, "victimdied", victimdied]);
 }
 
-function function_cd09440d6b558ed5(ai) {
+function analytics_aispawn(ai) {
   if(function_82971a8b14a8ad8a()) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
   actorid = "unknown";
   aitype = "unknown";
   aiclassname = "unknown";
@@ -796,9 +796,9 @@ function function_1d85814a1517480f(freq) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
   ads = 0;
-  var_f7775758ce7fa788 = 0;
+  seqnum = 0;
   motionstate = "unknown";
   stance = "unknown";
   speed = 0;
@@ -810,7 +810,7 @@ function function_1d85814a1517480f(freq) {
     }
 
     if(isDefined(freq)) {
-      var_f7775758ce7fa788 = freq;
+      seqnum = freq;
     }
 
     state = function_49cdf8f1128b54a4();
@@ -836,7 +836,7 @@ function function_1d85814a1517480f(freq) {
     }
   }
 
-  level.player dlog_recordplayerevent("dlog_event_sp_breadcrumbs", ["sp_header", spheader, "is_ads", ads, "sequence_num", var_f7775758ce7fa788, "motion_state", motionstate, "stance", stance, "speed", speed, "health", health]);
+  level.player dlog_recordplayerevent("dlog_event_sp_breadcrumbs", ["sp_header", spheader, "is_ads", ads, "sequence_num", seqnum, "motion_state", motionstate, "stance", stance, "speed", speed, "health", health]);
 }
 
 function function_49cdf8f1128b54a4() {
@@ -892,7 +892,7 @@ function function_3afc9084a564d28a(subevent) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
 
   if(!isDefined(subevent)) {
     subevent = "unknown";
@@ -970,7 +970,7 @@ function function_c307039c62aa3ec9(struct) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
   prompt = "unknown";
   promptclass = "unknown";
   promptmodel = "none";
@@ -1004,7 +1004,7 @@ function function_78ecf8f9be6b2e4d(subevent, param0, param1, param2) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
 
   if(!isDefined(subevent)) {
     subevent = "none";
@@ -1031,7 +1031,7 @@ function function_568756429ff7407(subevent, objname) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
 
   if(!isDefined(subevent)) {
     subevent = "unknown";
@@ -1113,7 +1113,7 @@ function function_54cc61a225fd48da(subevent, ai) {
     return;
   }
 
-  spheader = function_463ff5058321da86();
+  spheader = get_spheader();
   origin = (0, 0, 0);
   alertlevel = 0;
 

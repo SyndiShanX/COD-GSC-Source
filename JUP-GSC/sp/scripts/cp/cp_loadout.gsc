@@ -234,9 +234,9 @@ function getplayerspeedbyweapon(player) {
     if(issuperweapon(weapon)) {
       weaponspeed = level.superweapons[getcompleteweaponname(weapon)].movespeed;
     } else {
-      var_a6852f8e66761e58 = weaponinventorytype(weapon);
+      weaponinvtype = weaponinventorytype(weapon);
 
-      if(var_a6852f8e66761e58 != "primary" && var_a6852f8e66761e58 != "altmode") {
+      if(weaponinvtype != "primary" && weaponinvtype != "altmode") {
         if(isDefined(self.saved_lastweapon)) {
           weapon = self.saved_lastweapon;
         } else {
@@ -301,7 +301,7 @@ function clampweaponspeed(value) {
 }
 
 function getweaponheaviestvalue() {
-  var_8a6f4e6a2246d381 = 1000;
+  heaviestweaponvalue = 1000;
   self.weaponlist = self getweaponslistprimaries();
 
   if(self.weaponlist.size) {
@@ -312,12 +312,12 @@ function getweaponheaviestvalue() {
         continue;
       }
 
-      if(weaponweight < var_8a6f4e6a2246d381) {
-        var_8a6f4e6a2246d381 = weaponweight;
+      if(weaponweight < heaviestweaponvalue) {
+        heaviestweaponvalue = weaponweight;
       }
     }
 
-    if(var_8a6f4e6a2246d381 == 1000) {
+    if(heaviestweaponvalue == 1000) {
       assertmsg("<dev string:x23>");
 
       foreach(weapon in self.weaponlist) {
@@ -326,11 +326,11 @@ function getweaponheaviestvalue() {
     }
 
   } else {
-    var_8a6f4e6a2246d381 = 8;
+    heaviestweaponvalue = 8;
   }
 
-  var_8a6f4e6a2246d381 = clampweaponweightvalue(var_8a6f4e6a2246d381);
-  return var_8a6f4e6a2246d381;
+  heaviestweaponvalue = clampweaponweightvalue(heaviestweaponvalue);
+  return heaviestweaponvalue;
 }
 
 function getweaponweight(weapon) {
@@ -1197,16 +1197,16 @@ function cac_getweapon(classindex, weaponindex) {
 }
 
 function cac_getweaponattachment(classindex, weaponindex, attachmentindex) {
-  var_10dc579c373a93dd = undefined;
+  playerdatavalue = undefined;
   weapon = cac_getweapon(classindex, weaponindex);
 
   if(is_wave_gametype()) {
-    var_10dc579c373a93dd = self getplayerdata(level.loadoutsgroup, "squadMembers", "loadoutWaveMode", "weaponSetups", weaponindex, "attachmentSetup", attachmentindex, "attachment");
+    playerdatavalue = self getplayerdata(level.loadoutsgroup, "squadMembers", "loadoutWaveMode", "weaponSetups", weaponindex, "attachmentSetup", attachmentindex, "attachment");
   } else {
-    var_10dc579c373a93dd = self getplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", classindex, "weaponSetups", weaponindex, "attachmentSetup", attachmentindex, "attachment");
+    playerdatavalue = self getplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", classindex, "weaponSetups", weaponindex, "attachmentSetup", attachmentindex, "attachment");
   }
 
-  scripts\cp_mp\weapon::function_6e7bc1b23afa0ea8(weapon, var_10dc579c373a93dd);
+  scripts\cp_mp\weapon::function_6e7bc1b23afa0ea8(weapon, playerdatavalue);
 }
 
 function cac_getweaponattachmentid(classindex, weaponindex, attachmentindex) {
@@ -1327,13 +1327,13 @@ function give_secondary_weapon(player, struct) {
 }
 
 function give_weapon_alt_clip_ammo_hack(player, weaponobj) {
-  var_6890a4ce965bba99 = weaponobj getaltweapon();
+  weaponaltobj = weaponobj getaltweapon();
 
-  if(var_6890a4ce965bba99.basename != "none") {
-    var_91093ef03654702c = weaponclass(var_6890a4ce965bba99);
+  if(weaponaltobj.basename != "none") {
+    var_91093ef03654702c = weaponclass(weaponaltobj);
 
     if(var_91093ef03654702c == "spread") {
-      player setweaponammoclip(var_6890a4ce965bba99, weaponclipsize(var_6890a4ce965bba99));
+      player setweaponammoclip(weaponaltobj, weaponclipsize(weaponaltobj));
     }
   }
 

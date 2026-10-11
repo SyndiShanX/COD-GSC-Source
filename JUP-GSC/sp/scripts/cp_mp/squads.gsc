@@ -386,12 +386,12 @@ function debugprintsquads() {
       linecount = 1;
       printtoscreen2d(startx, starty, "<dev string:x1c>", (1, 1, 1), 1);
 
-      foreach(var_70643c8580524236 in level.squaddata) {
+      foreach(squadarray in level.squaddata) {
         linecount = 1;
         printtoscreen2d(startx, starty + stepy * linecount, "<dev string:x27>" + team, (1, 1, 1), 1);
         linecount++;
 
-        foreach(squad in var_70643c8580524236) {
+        foreach(squad in squadarray) {
           color = (1, 1, 1);
 
           if(isDefined(squad.activemission)) {

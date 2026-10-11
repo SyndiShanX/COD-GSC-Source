@@ -16,16 +16,16 @@
 function function_db1254dca5eaf211() {
   level.var_f26b4e7eb9af8155 = &function_cdf7f2f6bd3207;
   level.var_c57ee1e174e42601 = &function_8206bc54a1ed73cb;
-  level.var_f929c426097f1647 = &breakgasmask;
+  level.gasmaskbreakfunc = &breakgasmask;
   level.var_9e3e0db450eec0f7 = getdvarint(@ "hash_41e94c252e1d9247", 1);
   level.var_28231449ea8976a1 = getdvarint(@ "hash_e04e2774c39ed0d1", 1);
   level.gasmasklootid = function_2c836ad05e5f634c("gas_mask");
   level.var_479d8ef7f76a4df6 = function_2c836ad05e5f634c("gas_mask_durable");
   level.var_534e97d34ef9fa29 = [level.gasmasklootid, level.var_479d8ef7f76a4df6];
-  function_900f562c61c6a5d6("gasmask", &function_9726a41ef12198aa, &function_921a9118b4577d3e, undefined, &function_95271caae9eaad97, &function_22065872fdfd2315);
+  function_900f562c61c6a5d6("gasmask", &use_gasmask, &function_921a9118b4577d3e, undefined, &function_95271caae9eaad97, &function_22065872fdfd2315);
 }
 
-function function_9726a41ef12198aa(itembundle, item, autouse) {
+function use_gasmask(itembundle, item, autouse) {
   scripts\cp_mp\gasmask::init(item.count, itembundle.ref, itembundle.maxcount);
   return false;
 }
@@ -78,39 +78,39 @@ function function_febe5318d593116() {
     self[[level.var_c57ee1e174e42601]]("all");
   }
 
-  scripts\cp_mp\gasmask::function_58687e8e71126788();
+  scripts\cp_mp\gasmask::cleanupgasmask();
 }
 
 function function_cdf7f2f6bd3207(request) {
-  if(!isDefined(self.var_fe63300b318b76b0)) {
-    self.var_fe63300b318b76b0 = [];
+  if(!isDefined(self.gasmaskrequests)) {
+    self.gasmaskrequests = [];
   }
 
-  if(isDefined(self.var_fe63300b318b76b0[request])) {
+  if(isDefined(self.gasmaskrequests[request])) {
     return;
   }
 
-  self.var_fe63300b318b76b0[request] = 1;
+  self.gasmaskrequests[request] = 1;
   thread function_2202e74632488bac();
 }
 
 function function_8206bc54a1ed73cb(request) {
-  if(!isDefined(self.var_fe63300b318b76b0)) {
-    self.var_fe63300b318b76b0 = [];
+  if(!isDefined(self.gasmaskrequests)) {
+    self.gasmaskrequests = [];
   }
 
   if(request == "all") {
-    foreach(request, data in self.var_fe63300b318b76b0) {
-      self.var_fe63300b318b76b0[request] = undefined;
+    foreach(request, data in self.gasmaskrequests) {
+      self.gasmaskrequests[request] = undefined;
     }
 
     thread function_2202e74632488bac();
     return;
-  } else if(!isDefined(self.var_fe63300b318b76b0[request])) {
+  } else if(!isDefined(self.gasmaskrequests[request])) {
     return;
   }
 
-  self.var_fe63300b318b76b0[request] = undefined;
+  self.gasmaskrequests[request] = undefined;
   thread function_2202e74632488bac();
 }
 
@@ -131,12 +131,12 @@ function function_2202e74632488bac() {
   self endon("gasMaskUpdateOnOff");
   waittillframeend();
 
-  if(istrue(self.gasmaskequipped) && (!isDefined(self.var_fe63300b318b76b0) || !self.var_fe63300b318b76b0.size)) {
+  if(istrue(self.gasmaskequipped) && (!isDefined(self.gasmaskrequests) || !self.gasmaskrequests.size)) {
     thread removegasmask();
     return;
   }
 
-  if(!istrue(self.gasmaskequipped) && isDefined(self.var_fe63300b318b76b0) && self.var_fe63300b318b76b0.size) {
+  if(!istrue(self.gasmaskequipped) && isDefined(self.gasmaskrequests) && self.gasmaskrequests.size) {
     thread equipgasmask();
   }
 }
@@ -172,15 +172,15 @@ function equipgasmask() {
   self playsoundtoplayer("br_gas_mask_on_plr", self);
   self.gasmaskswapinprogress = 1;
   thread delayedattach(0.2);
-  var_9f955950f47f8532 = self getgestureanimlength("iw9_vm_ges_gasmask_on");
-  assert(0.2 < var_9f955950f47f8532);
+  equipgesturelength = self getgestureanimlength("iw9_vm_ges_gasmask_on");
+  assert(0.2 < equipgesturelength);
 
   if(function_28b827d98b0cc603()) {
-    thread scripts\mp\gametypes\br_public::playerplaygestureweaponanim("iw8_ges_plyr_gasmask_on", var_9f955950f47f8532);
+    thread scripts\mp\gametypes\br_public::playerplaygestureweaponanim("iw8_ges_plyr_gasmask_on", equipgesturelength);
   }
 
   self setclientomnvar("ui_gas_mask", 2);
-  wait var_9f955950f47f8532;
+  wait equipgesturelength;
   self.gasmaskswapinprogress = 0;
   self notify("gas_mask_swap_complete");
   self.gasmaskequipped = 1;
@@ -227,7 +227,7 @@ function removegasmask() {
   }
 
   if(isDefined(self.gasmaskhealth) && self.gasmaskhealth <= 0) {
-    function_58687e8e71126788();
+    cleanupgasmask();
   }
 }
 
@@ -246,7 +246,7 @@ function breakgasmask() {
   }
 
   self playsoundtoplayer("br_gas_mask_depleted_plr", self);
-  function_58687e8e71126788();
+  cleanupgasmask();
   fadeouttime = self getgestureanimlength("iw9_vm_ges_gasmask_break");
   thread scripts\mp\gametypes\br_public::playerplaygestureweaponanim("iw8_ges_plyr_gasmask_break", fadeouttime);
   self.gasmaskswapinprogress = 1;
@@ -338,10 +338,10 @@ function function_b27f0c7dafeadb3(targetlootid, var_6e3ef3bd8bb4967a) {
   return false;
 }
 
-function function_58687e8e71126788() {
+function cleanupgasmask() {
   self.gasmaskmaxhealth = undefined;
   self.gasmaskhealth = undefined;
-  self.var_fe63300b318b76b0 = undefined;
+  self.gasmaskrequests = undefined;
   self setclientomnvar("ui_gas_mask", 0);
   self setclientomnvar("ui_head_equip_class", 0);
   self setclientomnvar("ui_gasmask_damage", 0);

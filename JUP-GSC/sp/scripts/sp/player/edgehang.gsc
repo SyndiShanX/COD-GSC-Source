@@ -14,26 +14,26 @@
 
 function edgehang() {
   wait 0.5;
-  level.var_bcf48d028ad68990 = getEntArray("edgeHangGroup", "script_noteworthy");
+  level.edgehanggroups = getEntArray("edgeHangGroup", "script_noteworthy");
   level.player.edgehang = 0;
 
   if(getdvarint(@ "bg_enablehangpmove")) {
     return;
   }
 
-  foreach(edgehanggroup in level.var_bcf48d028ad68990) {
+  foreach(edgehanggroup in level.edgehanggroups) {
     if(!isDefined(edgehanggroup.angles)) {
       edgehanggroup.angles = (0, 0, 0);
     }
 
-    edgehanggroup function_3673da86c0d5186c();
+    edgehanggroup scrubangles();
     edgehanggroup thread function_a2a7ccb9802eaea6();
   }
 }
 
 function function_a2a7ccb9802eaea6() {
   self.playerhanging = 0;
-  function_8bad385bd4b1a869();
+  createsplines();
 
   thread function_1a805f35243118e5();
 
@@ -49,12 +49,12 @@ function function_a2a7ccb9802eaea6() {
       thread function_f74003dbdd58b159();
     }
 
-    self.var_3b4664a4415abaef waittill("trigger");
+    self.hanginteract waittill("trigger");
     function_2d4b15cc38d8bfa();
   }
 }
 
-function function_8bad385bd4b1a869() {
+function createsplines() {
   self.splines = [];
 
   for(startnode = getEnt(self.target, "targetname"); true; startnode = endnode) {
@@ -69,7 +69,7 @@ function function_8bad385bd4b1a869() {
       break;
     }
 
-    startnode function_3673da86c0d5186c();
+    startnode scrubangles();
     yawoffset = startnode.angles[1] - self.angles[1];
 
     if(yawoffset < 0) {
@@ -83,7 +83,7 @@ function function_8bad385bd4b1a869() {
   }
 }
 
-function function_3673da86c0d5186c() {
+function scrubangles() {
   f = anglesToForward(self.angles);
   r = anglestoright(self.angles);
   u = anglestoup(self.angles);
@@ -92,10 +92,10 @@ function function_3673da86c0d5186c() {
 
 function function_f74003dbdd58b159() {
   jumpon = 0;
-  self.var_3b4664a4415abaef endon("trigger");
+  self.hanginteract endon("trigger");
 
   while(true) {
-    if(function_63dd525072bcee9b(self.var_3b4664a4415abaef)) {
+    if(function_63dd525072bcee9b(self.hanginteract)) {
       if(!level.player isonground() && level.player useButtonPressed() && !level.player ismantling()) {
         dir = level.player getnormalizedmovement();
         dir = (dir[0], dir[1] * -1, 0);
@@ -103,17 +103,17 @@ function function_f74003dbdd58b159() {
         if(length(dir) > 0.5) {
           flatf = anglesToForward((0, level.player.angles[1], 0));
           dirpressed = rotatevector(vectorNormalize(dir), level.player.angles);
-          var_7bdfedb1a832a4d0 = (self.var_3b4664a4415abaef.origin[0], self.var_3b4664a4415abaef.origin[1], 0);
+          var_7bdfedb1a832a4d0 = (self.hanginteract.origin[0], self.hanginteract.origin[1], 0);
           flatplayerorigin = (level.player.origin[0], level.player.origin[1], 0);
           vecto = var_7bdfedb1a832a4d0 - flatplayerorigin;
           dirto = vectorNormalize(vecto);
-          distto = length(self.var_3b4664a4415abaef.origin - level.player.origin);
+          distto = length(self.hanginteract.origin - level.player.origin);
           dotto = vectordot(dirpressed, dirto);
           dotfacing = vectordot(flatf, dirto);
 
           if(distto < 100 && dotto > 0.2 && dotfacing > 0.2) {
             self.jumpon = 1;
-            self.var_3b4664a4415abaef notify("trigger");
+            self.hanginteract notify("trigger");
           }
         }
       }
@@ -124,23 +124,23 @@ function function_f74003dbdd58b159() {
 }
 
 function function_47ed763279653603() {
-  self.var_3b4664a4415abaef = spawn_tag_origin();
+  self.hanginteract = spawn_tag_origin();
   thread function_9bdcc8b5a0367faa();
 }
 
 function function_dd16ca35e3d5492b() {
   jumpon = 0;
-  self.var_3b4664a4415abaef endon("trigger");
+  self.hanginteract endon("trigger");
 
   while(true) {
-    if(function_63dd525072bcee9b(self.var_3b4664a4415abaef)) {
+    if(function_63dd525072bcee9b(self.hanginteract)) {
       if(level.player ismantling()) {
-        distto = length(self.var_3b4664a4415abaef.origin - level.player.origin);
-        dot = vectordot(anglesToForward(self.var_3b4664a4415abaef.angles), anglesToForward(level.player.angles));
+        distto = length(self.hanginteract.origin - level.player.origin);
+        dot = vectordot(anglesToForward(self.hanginteract.angles), anglesToForward(level.player.angles));
 
         if(distto < 64 && dot > 0.4) {
           self.jumpon = 1;
-          self.var_3b4664a4415abaef notify("trigger");
+          self.hanginteract notify("trigger");
         }
       }
     }
@@ -151,10 +151,10 @@ function function_dd16ca35e3d5492b() {
 
 function function_d915a76f0d1a7b56() {
   jumpon = 0;
-  self.var_3b4664a4415abaef endon("trigger");
+  self.hanginteract endon("trigger");
 
   while(true) {
-    if(function_63dd525072bcee9b(self.var_3b4664a4415abaef)) {
+    if(function_63dd525072bcee9b(self.hanginteract)) {
       if(!level.player.edgehang && !level.player isonground() && !level.player ismantling() && !level.player isonladder()) {
         dir = level.player getnormalizedmovement();
         dir = (dir[0], dir[1] * -1, 0);
@@ -162,18 +162,18 @@ function function_d915a76f0d1a7b56() {
         if(length(dir) > 0.5) {
           flatf = anglesToForward((0, level.player.angles[1], 0));
           dirpressed = rotatevector(vectorNormalize(dir), level.player.angles);
-          var_7bdfedb1a832a4d0 = (self.var_3b4664a4415abaef.origin[0], self.var_3b4664a4415abaef.origin[1], 0);
+          var_7bdfedb1a832a4d0 = (self.hanginteract.origin[0], self.hanginteract.origin[1], 0);
           flatplayerorigin = (level.player.origin[0], level.player.origin[1], 0);
           vecto = var_7bdfedb1a832a4d0 - flatplayerorigin;
           dirto = vectorNormalize(vecto);
-          distto = length(self.var_3b4664a4415abaef.origin - level.player.origin);
+          distto = length(self.hanginteract.origin - level.player.origin);
           dotto = vectordot(dirpressed, dirto);
-          dotside = vectordot(dirto, anglesToForward(self.var_3b4664a4415abaef.angles));
+          dotside = vectordot(dirto, anglesToForward(self.hanginteract.angles));
           dotfacing = vectordot(flatf, dirto);
 
           if(distto < 70 && dotto > 0.2 && dotfacing > 0.2 && dotside > -0.1) {
             self.jumpon = 1;
-            self.var_3b4664a4415abaef notify("trigger");
+            self.hanginteract notify("trigger");
           }
         }
       }
@@ -183,46 +183,46 @@ function function_d915a76f0d1a7b56() {
   }
 }
 
-function function_63dd525072bcee9b(var_3b4664a4415abaef) {
-  return isDefined(level.player.var_bd4c61f6575dfeb) && var_3b4664a4415abaef.origin == level.player.var_bd4c61f6575dfeb.origin;
+function function_63dd525072bcee9b(hanginteract) {
+  return isDefined(level.player.var_bd4c61f6575dfeb) && hanginteract.origin == level.player.var_bd4c61f6575dfeb.origin;
 }
 
 function function_7ac67646087b2344() {
   interact = 0;
-  self.var_3b4664a4415abaef endon("trigger");
+  self.hanginteract endon("trigger");
 
   while(true) {
-    if(function_63dd525072bcee9b(self.var_3b4664a4415abaef)) {
+    if(function_63dd525072bcee9b(self.hanginteract)) {
       if(!level.player.edgehang && level.player isonladder()) {
-        vecto = self.var_3b4664a4415abaef.origin - level.player.origin;
+        vecto = self.hanginteract.origin - level.player.origin;
         dist = length(vecto);
 
         if(dist < 70) {
-          flat_dir = (self.var_3b4664a4415abaef.origin[0], self.var_3b4664a4415abaef.origin[1], 0) - (level.player.origin[0], level.player.origin[1], 0);
+          flat_dir = (self.hanginteract.origin[0], self.hanginteract.origin[1], 0) - (level.player.origin[0], level.player.origin[1], 0);
           flat_dir = vectorNormalize(flat_dir);
-          var_1a99cb9861a3d271 = anglesToForward(self.var_3b4664a4415abaef.angles);
-          var_f7ee245b64475ff4 = vectordot(flat_dir, var_1a99cb9861a3d271);
+          hangnodef = anglesToForward(self.hanginteract.angles);
+          flatdotto = vectordot(flat_dir, hangnodef);
 
-          if(var_f7ee245b64475ff4 > 0.99) {
-            height = level.player.origin[2] - self.var_3b4664a4415abaef.origin[2] - -70;
+          if(flatdotto > 0.99) {
+            height = level.player.origin[2] - self.hanginteract.origin[2] - -70;
             dir = level.player getnormalizedmovement();
             dir = (dir[0], dir[1] * -1, 0);
 
             if(abs(height) < 15) {
               if(length(dir) > 0.5) {
                 dirpressed = rotatevector(vectorNormalize(dir), level.player.angles);
-                r = anglestoright(self.var_3b4664a4415abaef.angles);
+                r = anglestoright(self.hanginteract.angles);
                 dot = vectordot(r, dirpressed);
 
                 if(abs(dot) > 0.7) {
                   self.jumpon = 1;
-                  self.var_3b4664a4415abaef notify("trigger");
+                  self.hanginteract notify("trigger");
                 }
               }
 
               if(dir[0] > 0) {
                 self.jumpon = 1;
-                self.var_3b4664a4415abaef notify("trigger");
+                self.hanginteract notify("trigger");
               }
             } else if(height > 0) {}
           }
@@ -236,26 +236,26 @@ function function_7ac67646087b2344() {
 
 function function_365b82b00c240c03() {
   interact = 0;
-  self.var_3b4664a4415abaef endon("trigger");
+  self.hanginteract endon("trigger");
   usedist = 110;
   playercontent = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip"]);
 
   while(true) {
     shouldinteract = 0;
 
-    if(function_63dd525072bcee9b(self.var_3b4664a4415abaef)) {
-      if(!level.player.edgehang && distance(level.player.origin, self.var_3b4664a4415abaef.origin) < usedist) {
+    if(function_63dd525072bcee9b(self.hanginteract)) {
+      if(!level.player.edgehang && distance(level.player.origin, self.hanginteract.origin) < usedist) {
         flatf = anglesToForward((0, level.player.angles[1], 0));
-        var_7bdfedb1a832a4d0 = (self.var_3b4664a4415abaef.origin[0], self.var_3b4664a4415abaef.origin[1], 0);
+        var_7bdfedb1a832a4d0 = (self.hanginteract.origin[0], self.hanginteract.origin[1], 0);
         flatplayerorigin = (level.player.origin[0], level.player.origin[1], 0);
         vecto = var_7bdfedb1a832a4d0 - flatplayerorigin;
         dirto = vectorNormalize(vecto);
-        nodef = -1 * anglesToForward(self.var_3b4664a4415abaef.angles);
+        nodef = -1 * anglesToForward(self.hanginteract.angles);
         dotto = vectordot(nodef, dirto);
 
         if(dotto > 0.1) {
           trace_start = level.player getEye();
-          trace_end = (self.var_3b4664a4415abaef.origin[0], self.var_3b4664a4415abaef.origin[1], trace_start[2]);
+          trace_end = (self.hanginteract.origin[0], self.hanginteract.origin[1], trace_start[2]);
           trace = scripts\engine\trace::sphere_trace(trace_start, trace_end, 4, level.player, playercontent, 0);
 
           if(trace["fraction"] == 1) {
@@ -267,11 +267,11 @@ function function_365b82b00c240c03() {
 
     if(shouldinteract) {
       if(!interact) {
-        self.var_3b4664a4415abaef scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (-50, 0, 0), "Ledge Hang", 360, usedist, 100, 1, undefined, 1, undefined, "duration_none");
+        self.hanginteract scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (-50, 0, 0), "Ledge Hang", 360, usedist, 100, 1, undefined, 1, undefined, "duration_none");
         interact = 1;
       }
     } else if(interact) {
-      self.var_3b4664a4415abaef scripts\sp\player\cursor_hint::remove_cursor_hint();
+      self.hanginteract scripts\sp\player\cursor_hint::remove_cursor_hint();
       interact = 0;
     }
 
@@ -280,14 +280,14 @@ function function_365b82b00c240c03() {
 }
 
 function function_277cfb58f41abe() {
-  self.var_3b4664a4415abaef scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), "Ledge Hang", 110, 100, 75, 1, undefined, 1, undefined, "duration_none");
+  self.hanginteract scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), "Ledge Hang", 110, 100, 75, 1, undefined, 1, undefined, "duration_none");
 }
 
 function function_2d4b15cc38d8bfa() {
   function_415bec1b3c685780();
   function_762650c291d1ea28();
   thread function_fa05774957abaa95();
-  function_9436102ef8c4bdf9();
+  wait_for_player_jump();
   function_8b6ad68cf7c826fd();
   function_963305088b5e7892();
 
@@ -314,9 +314,9 @@ function function_1a805f35243118e5() {
           color = (0, 1, 0);
         }
 
-        line(function_68ed643ffe9132b6(spline[0]), function_68ed643ffe9132b6(spline[1]), color, 0.75, 0, 1);
-        angles = function_8849e6b79de3e43e(spline);
-        centerpoint = (function_68ed643ffe9132b6(spline[0]) + function_68ed643ffe9132b6(spline[1])) * 0.5;
+        line(getworldoffset(spline[0]), getworldoffset(spline[1]), color, 0.75, 0, 1);
+        angles = getsplineangles(spline);
+        centerpoint = (getworldoffset(spline[0]) + getworldoffset(spline[1])) * 0.5;
         line(centerpoint, centerpoint + anglesToForward(angles) * 30, color, 1, 0, 1);
       }
     }
@@ -327,7 +327,7 @@ function function_1a805f35243118e5() {
 
 function function_415bec1b3c685780() {
   self.playerhanging = 1;
-  self.var_1b5decc8636e0085 = -11111;
+  self.playerviewclamptarget = -11111;
   self.var_e8f535d69be1fc1b = 0;
   self.var_600696f7f8aae300 = spawn_tag_origin();
   self.var_a73e33c2079e9dc3 = spawn_tag_origin();
@@ -342,11 +342,11 @@ function function_415bec1b3c685780() {
   if(isDefined(self.jumpon) && self.jumpon) {
     var_dca9e6693cf03ea4 = level.player.origin;
   } else {
-    var_dca9e6693cf03ea4 = self.var_3b4664a4415abaef.origin;
+    var_dca9e6693cf03ea4 = self.hanginteract.origin;
   }
 
   function_75064dd60c073e81(var_dca9e6693cf03ea4, undefined);
-  self.var_3b4664a4415abaef delete();
+  self.hanginteract delete();
   level.player.edgehang = 1;
 }
 
@@ -374,18 +374,18 @@ function function_fa05774957abaa95() {
   var_82ffb19734953ccb = (0, 0, 0);
   var_95f02e893ab1d0bd = 3;
   var_16609489980fd80e = 0.5;
-  var_dd2fffe1815afe9e = spawnStruct();
-  var_dd2fffe1815afe9e.heartbeats = [];
-  var_dd2fffe1815afe9e.heartbeats["view"] = spawnStruct();
-  var_dd2fffe1815afe9e.heartbeats["view"].beat = 0.2;
-  var_dd2fffe1815afe9e.heartbeats["view"].dir = 1;
-  var_dd2fffe1815afe9e.heartbeats["gun"] = spawnStruct();
-  var_dd2fffe1815afe9e.heartbeats["gun"].beat = 0;
-  var_dd2fffe1815afe9e.heartbeats["gun"].dir = 1;
-  var_dd2fffe1815afe9e.var_e4d1597e80994e3f = 0;
+  shimmyoffsets = spawnStruct();
+  shimmyoffsets.heartbeats = [];
+  shimmyoffsets.heartbeats["view"] = spawnStruct();
+  shimmyoffsets.heartbeats["view"].beat = 0.2;
+  shimmyoffsets.heartbeats["view"].dir = 1;
+  shimmyoffsets.heartbeats["gun"] = spawnStruct();
+  shimmyoffsets.heartbeats["gun"].beat = 0;
+  shimmyoffsets.heartbeats["gun"].dir = 1;
+  shimmyoffsets.var_e4d1597e80994e3f = 0;
   leanoffset = 0;
   stance = spawnStruct();
-  stance.var_42c6f2be6b4e75e5 = 0;
+  stance.hangstance = 0;
   stance.var_b56ced6f4aa7ebc3 = 0;
   stance.var_a95ee0277142f98a = 0;
   stance thread function_b05d85944fa735c6(self);
@@ -451,7 +451,7 @@ function function_fa05774957abaa95() {
 
     if(leantype == 3) {
       var_b34df20a42cfcd02 = 0.2;
-      var_303c4361589814d3 = 0.15;
+      maxtiltacc = 0.15;
       oldlean = self.var_d42c7cfda9d5b381;
       self.var_d42c7cfda9d5b381 = math::lerp(self.var_d42c7cfda9d5b381, input[0], 0.2);
       leandelta = oldlean - self.var_d42c7cfda9d5b381;
@@ -468,11 +468,11 @@ function function_fa05774957abaa95() {
       var_cdcee5ecd566bab6 = math::lerp(var_cdcee5ecd566bab6, -1 * input[1], 0.13);
       tiltdelta = oldtilt - var_cdcee5ecd566bab6;
 
-      if(abs(tiltdelta) > var_303c4361589814d3) {
+      if(abs(tiltdelta) > maxtiltacc) {
         if(var_cdcee5ecd566bab6 > oldtilt) {
-          var_cdcee5ecd566bab6 = oldtilt + var_303c4361589814d3;
+          var_cdcee5ecd566bab6 = oldtilt + maxtiltacc;
         } else {
-          var_cdcee5ecd566bab6 = oldtilt - var_303c4361589814d3;
+          var_cdcee5ecd566bab6 = oldtilt - maxtiltacc;
         }
       }
 
@@ -486,45 +486,45 @@ function function_fa05774957abaa95() {
       leanoffset = amount * self.var_d42c7cfda9d5b381;
       tiltoffset = amount * var_cdcee5ecd566bab6;
     } else {
-      self.var_d42c7cfda9d5b381 = math::lerp(self.var_d42c7cfda9d5b381, stance.var_42c6f2be6b4e75e5, 0.2);
+      self.var_d42c7cfda9d5b381 = math::lerp(self.var_d42c7cfda9d5b381, stance.hangstance, 0.2);
       leanoffset = self.var_d42c7cfda9d5b381;
       tiltoffset = 0;
     }
 
     leanoffset = clamp(leanoffset, -1, 1);
-    var_9b7bde02dd2a0eb1 = normalize_value(-1, 1, leanoffset);
-    var_9b7bde02dd2a0eb1 = math::normalized_float_smooth_in(var_9b7bde02dd2a0eb1);
-    var_9b7bde02dd2a0eb1 = factor_value(-1, 1, var_9b7bde02dd2a0eb1);
+    horleanoffset = normalize_value(-1, 1, leanoffset);
+    horleanoffset = math::normalized_float_smooth_in(horleanoffset);
+    horleanoffset = factor_value(-1, 1, horleanoffset);
 
     if(leanoffset > 0) {
       var_254431638edda2f1 = 4;
 
       if(leantype == 2) {
-        var_a29a351fdcf1c055 = 12;
+        leanvertmag = 12;
       } else {
-        var_a29a351fdcf1c055 = 10;
+        leanvertmag = 10;
       }
     } else {
       var_254431638edda2f1 = 3;
-      var_a29a351fdcf1c055 = 8;
+      leanvertmag = 8;
     }
 
-    var_a3f876ebeecaa1a3 = anglestoup(var_1b95f4274c016e74) * leanoffset * var_a29a351fdcf1c055;
-    var_5a46ed4b7219a8d8 = anglesToForward(var_1b95f4274c016e74) * var_9b7bde02dd2a0eb1 * var_254431638edda2f1;
-    var_7fd1e7fe48ac60bb = var_a3f876ebeecaa1a3 + var_5a46ed4b7219a8d8;
+    leanoffsetup = anglestoup(var_1b95f4274c016e74) * leanoffset * leanvertmag;
+    leanoffsetf = anglesToForward(var_1b95f4274c016e74) * horleanoffset * var_254431638edda2f1;
+    var_7fd1e7fe48ac60bb = leanoffsetup + leanoffsetf;
     tiltdot = vectordot(anglesToForward(var_1b95f4274c016e74), anglesToForward(level.player.angles));
-    var_86f6ed576bd9f89a = math::factor_value(0.6, 1, abs(tiltdot));
-    var_86f6ed576bd9f89a = math::normalized_float_smooth_in(var_86f6ed576bd9f89a);
-    tiltmag = 20 * var_86f6ed576bd9f89a;
-    var_c551637b26505e2d = anglestoright(level.player.angles) * tiltoffset * tiltmag;
-    var_bea887654e79ccb2 = var_c551637b26505e2d;
-    function_75064dd60c073e81(function_68ed643ffe9132b6(self.var_fcc975aaa6f37054) + var_9b6c25107192ea61 * var_7b111bc0a53378e3 * var_fedea97fb7062b0e, var_7fd1e7fe48ac60bb + var_bea887654e79ccb2);
+    tiltdotfactor = math::factor_value(0.6, 1, abs(tiltdot));
+    tiltdotfactor = math::normalized_float_smooth_in(tiltdotfactor);
+    tiltmag = 20 * tiltdotfactor;
+    tiltoffsetr = anglestoright(level.player.angles) * tiltoffset * tiltmag;
+    var_bea887654e79ccb2 = tiltoffsetr;
+    function_75064dd60c073e81(getworldoffset(self.var_fcc975aaa6f37054) + var_9b6c25107192ea61 * var_7b111bc0a53378e3 * var_fedea97fb7062b0e, var_7fd1e7fe48ac60bb + var_bea887654e79ccb2);
 
-    if(self.var_1b5decc8636e0085 != self.currentspline[2]) {
-      self.var_1b5decc8636e0085 = self.currentspline[2];
+    if(self.playerviewclamptarget != self.currentspline[2]) {
+      self.playerviewclamptarget = self.currentspline[2];
     }
 
-    var_dd2fffe1815afe9e function_54538f8d17107bcc(function_77ebe8aa880204ed(), self.var_d42c7cfda9d5b381, tiltoffset);
+    shimmyoffsets function_54538f8d17107bcc(function_77ebe8aa880204ed(), self.var_d42c7cfda9d5b381, tiltoffset);
     function_16d771b4fe408da1(input, stance);
     wait 0.05;
   }
@@ -549,10 +549,10 @@ function function_b3b143f1eab0b16c(playerf, var_1b95f4274c016e74, var_6abb1d94c7
   while(true) {
     ang = level.player getplayerangles();
     testheight = testheights[i];
-    var_a51fa632b5decccb = anglestoup(ang) * testheights[i] * 10;
+    testoffsetup = anglestoup(ang) * testheights[i] * 10;
     playerf = anglesToForward(ang);
-    start = self.var_a73e33c2079e9dc3.origin + offsetup + var_6abb1d94c76adedc + var_a51fa632b5decccb;
-    end = self.var_a73e33c2079e9dc3.origin + playerf * testlength + offsetup + var_6abb1d94c76adedc + var_a51fa632b5decccb;
+    start = self.var_a73e33c2079e9dc3.origin + offsetup + var_6abb1d94c76adedc + testoffsetup;
+    end = self.var_a73e33c2079e9dc3.origin + playerf * testlength + offsetup + var_6abb1d94c76adedc + testoffsetup;
     trace = scripts\engine\trace::capsule_trace(start, end, 6, 12, ang, level.player, contents, 0);
 
     if(trace["fraction"] == 1) {
@@ -641,23 +641,23 @@ function function_c301a9b57c37cecf(edgestruct) {
 
 function function_e7b66cc533559d5f(var_d6db966f4160f816, var_7358cb8d282c1df0, adslean) {
   if(level.player adsButtonPressed()) {
-    self.var_42c6f2be6b4e75e5 = adslean;
+    self.hangstance = adslean;
     return;
   }
 
-  self.var_42c6f2be6b4e75e5 = 0;
+  self.hangstance = 0;
 }
 
 function function_77ebe8aa880204ed() {
   return math::normalize_value(0, 2, self.var_e8f535d69be1fc1b);
 }
 
-function function_54538f8d17107bcc(var_de913509b64d2f1d, leanmag, tiltmag) {
-  self.var_e4d1597e80994e3f = math::lerp(self.var_e4d1597e80994e3f, var_de913509b64d2f1d, 0.35);
-  var_a584ab6210c52a9d = math::factor_value(0.05, 0.19, self.var_e4d1597e80994e3f);
+function function_54538f8d17107bcc(shimmymag, leanmag, tiltmag) {
+  self.var_e4d1597e80994e3f = math::lerp(self.var_e4d1597e80994e3f, shimmymag, 0.35);
+  shimmyanimrate = math::factor_value(0.05, 0.19, self.var_e4d1597e80994e3f);
 
   foreach(heartbeat in self.heartbeats) {
-    heartbeat.beat += heartbeat.dir * var_a584ab6210c52a9d;
+    heartbeat.beat += heartbeat.dir * shimmyanimrate;
 
     if(abs(heartbeat.beat) > 1) {
       heartbeat.dir *= -1;
@@ -707,7 +707,7 @@ function function_54538f8d17107bcc(var_de913509b64d2f1d, leanmag, tiltmag) {
   level.player.viewblender["viewAng"].channels["edgeHangShimmy"] = var_fb3d7dff6195f54d;
 }
 
-function function_9436102ef8c4bdf9() {
+function wait_for_player_jump() {
   while(level.player useButtonPressed()) {
     wait 0.05;
   }
@@ -787,9 +787,9 @@ function function_762650c291d1ea28() {
   }
 
   earthquake(0.2, 0.4, level.player.origin, 1000);
-  level.player.var_c7d552a6b2f38e59 = function_aae1d303960f5ebe();
-  level.player giveweapon(level.player.var_c7d552a6b2f38e59);
-  level.player switchtoweaponimmediate(level.player.var_c7d552a6b2f38e59);
+  level.player.onehandpistol = function_aae1d303960f5ebe();
+  level.player giveweapon(level.player.onehandpistol);
+  level.player switchtoweaponimmediate(level.player.onehandpistol);
 
   if(level.player val::get("weapon")) {
     level.player val::set("tank_hang", "weapon", 0);
@@ -814,19 +814,19 @@ function function_762650c291d1ea28() {
 }
 
 function function_aae1d303960f5ebe() {
-  var_a81e9497ea14fb12 = scripts\sp\utility::make_weapon("iw9_gunless");
+  onehandweapon = scripts\sp\utility::make_weapon("iw9_gunless");
 
   foreach(weapon in level.player.primaryweapons) {
     if(function_c8e59ba9e32655e2(weapon)) {
       basename = weapon.basename;
       attachments = weapon.attachments;
-      var_84fe341cffbfdcf = function_1f13244536cf5f9(basename);
-      attachments = array_add(weapon.attachments, var_84fe341cffbfdcf);
-      var_a81e9497ea14fb12 = scripts\sp\utility::make_weapon(basename, attachments);
+      onehandattachment = function_1f13244536cf5f9(basename);
+      attachments = array_add(weapon.attachments, onehandattachment);
+      onehandweapon = scripts\sp\utility::make_weapon(basename, attachments);
     }
   }
 
-  return var_a81e9497ea14fb12;
+  return onehandweapon;
 }
 
 function function_1f13244536cf5f9(weaponname) {
@@ -889,7 +889,7 @@ function function_8b6ad68cf7c826fd() {
   level.player unlink();
   level.player val::set("tank_hang", "weapon_switch", 1);
   level.player val::set("tank_hang", "allow_jump", 1);
-  level.player takeweapon(level.player.var_c7d552a6b2f38e59);
+  level.player takeweapon(level.player.onehandpistol);
   var_6b1db7392882a62 = level.player getnormalizedmovement();
   var_6b1db7392882a62 = (var_6b1db7392882a62[0], -1 * var_6b1db7392882a62[1], 0);
   inputmag = clamp(length(var_6b1db7392882a62), 0, 1);
@@ -899,7 +899,7 @@ function function_8b6ad68cf7c826fd() {
   awaymag = math::factor_value(7, 0, inputmag * inputmag);
   jumpmag = math::factor_value(0, 13.5, inputmag);
   upvec = (0, 0, upmag);
-  vecaway = anglesToForward(function_8849e6b79de3e43e(self.currentspline)) * -1;
+  vecaway = anglesToForward(getsplineangles(self.currentspline)) * -1;
   awayvec = vecaway * awaymag;
   jumpvec = var_6b1db7392882a62 * jumpmag;
   jumpvec += upvec;
@@ -999,13 +999,13 @@ function function_75064dd60c073e81(var_82ce829d3ed2ec86, leanoffset) {
   closestspline = undefined;
 
   if(!isDefined(self.currentspline) || !level.player adsButtonPressed()) {
-    var_bae2edf1f75d40d0 = self.splines;
+    splinestocheck = self.splines;
   } else {
-    var_bae2edf1f75d40d0 = [self.currentspline];
+    splinestocheck = [self.currentspline];
   }
 
-  foreach(spline in var_bae2edf1f75d40d0) {
-    spot = pointonsegmentnearesttopoint(function_68ed643ffe9132b6(spline[0]), function_68ed643ffe9132b6(spline[1]), var_82ce829d3ed2ec86);
+  foreach(spline in splinestocheck) {
+    spot = pointonsegmentnearesttopoint(getworldoffset(spline[0]), getworldoffset(spline[1]), var_82ce829d3ed2ec86);
     dist = distance(spot, var_82ce829d3ed2ec86);
 
     if(dist < closestdist) {
@@ -1059,7 +1059,7 @@ function function_75064dd60c073e81(var_82ce829d3ed2ec86, leanoffset) {
     self.var_a73e33c2079e9dc3 unlink();
   }
 
-  var_211373c90db0859c = function_64b182b55c3f1cf5(closestspot);
+  var_211373c90db0859c = getlocaloffset(closestspot);
 
   if(!isDefined(self.var_fcc975aaa6f37054)) {
     self.var_e8f535d69be1fc1b = 0;
@@ -1091,7 +1091,7 @@ function setviewclamps(yawoffset) {
   level.player playerlinktodelta(self.var_600696f7f8aae300, "tag_origin", 0.8, rightyaw, leftyaw, 65, 65, 1);
 }
 
-function function_8849e6b79de3e43e(spline) {
+function getsplineangles(spline) {
   ang = function_efd8e218d6da99df(spline[2]);
   return ang;
 }
@@ -1156,10 +1156,10 @@ function function_45038569746c5388(node1, node2, yawoffset) {
     node1 linkTo(self);
   }
 
-  self.splines = array_add(self.splines, [function_64b182b55c3f1cf5(node1.origin), function_64b182b55c3f1cf5(node2.origin), yawoffset]);
+  self.splines = array_add(self.splines, [getlocaloffset(node1.origin), getlocaloffset(node2.origin), yawoffset]);
 }
 
-function function_64b182b55c3f1cf5(spot) {
+function getlocaloffset(spot) {
   org = self.origin;
   ang = self.angles;
   spot -= org;
@@ -1167,7 +1167,7 @@ function function_64b182b55c3f1cf5(spot) {
   return spot;
 }
 
-function function_68ed643ffe9132b6(spot) {
+function getworldoffset(spot) {
   org = self.origin;
   ang = self.angles;
   spot = rotatevector(spot, ang);
@@ -1176,7 +1176,7 @@ function function_68ed643ffe9132b6(spot) {
 }
 
 function function_9bdcc8b5a0367faa() {
-  self.var_3b4664a4415abaef endon("trigger");
+  self.hanginteract endon("trigger");
   wait 0.1;
 
   while(true) {
@@ -1192,7 +1192,7 @@ function function_9bdcc8b5a0367faa() {
     var_82ce829d3ed2ec86 = level.player.origin;
 
     foreach(spline in self.splines) {
-      spot = pointonsegmentnearesttopoint(function_68ed643ffe9132b6(spline[0]), function_68ed643ffe9132b6(spline[1]), var_82ce829d3ed2ec86);
+      spot = pointonsegmentnearesttopoint(getworldoffset(spline[0]), getworldoffset(spline[1]), var_82ce829d3ed2ec86);
       dist = distance(spot, var_82ce829d3ed2ec86);
 
       if(dist < closestdist) {
@@ -1203,15 +1203,15 @@ function function_9bdcc8b5a0367faa() {
     }
 
     interactspot = closestspot;
-    self.var_3b4664a4415abaef.distfromplayer = closestdist;
-    self.var_3b4664a4415abaef.timestamp = time;
+    self.hanginteract.distfromplayer = closestdist;
+    self.hanginteract.timestamp = time;
 
-    if(!isDefined(level.player.var_bd4c61f6575dfeb) || self.var_3b4664a4415abaef.distfromplayer < level.player.var_bd4c61f6575dfeb.distfromplayer) {
-      level.player.var_bd4c61f6575dfeb = self.var_3b4664a4415abaef;
+    if(!isDefined(level.player.var_bd4c61f6575dfeb) || self.hanginteract.distfromplayer < level.player.var_bd4c61f6575dfeb.distfromplayer) {
+      level.player.var_bd4c61f6575dfeb = self.hanginteract;
     }
 
-    self.var_3b4664a4415abaef.origin = interactspot;
-    self.var_3b4664a4415abaef.angles = function_8849e6b79de3e43e(closestspline);
+    self.hanginteract.origin = interactspot;
+    self.hanginteract.angles = getsplineangles(closestspline);
     wait 0.05;
   }
 }

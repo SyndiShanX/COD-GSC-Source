@@ -432,9 +432,9 @@ function function_c415744d393290cd(start_ent, end_ent) {
 function function_546bf7abf994cbf1(var_7fb15984f4f0a480, endent, tagorigin) {
   var_b9d548a9b237fc0a = distance(var_7fb15984f4f0a480.origin, endent.origin);
   var_c48d664db8b390ff = distance(var_7fb15984f4f0a480.origin, tagorigin);
-  var_517df4767f2986a = distance(endent.origin, tagorigin);
+  distend = distance(endent.origin, tagorigin);
 
-  if(var_c48d664db8b390ff > var_b9d548a9b237fc0a || var_517df4767f2986a > var_b9d548a9b237fc0a) {
+  if(var_c48d664db8b390ff > var_b9d548a9b237fc0a || distend > var_b9d548a9b237fc0a) {
     return false;
   }
 

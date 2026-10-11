@@ -56,7 +56,7 @@ function frontend_spawnplayer() {
   }
 
   self setclothtype(#"vestlight");
-  self function_8abe5a968cc3c220(#"millghtgr");
+  self setgeartype(#"millghtgr");
   level.playerviewowner.var_e7a9752e4f4c7d97 = undefined;
   level.playerviewowner namespace_46e942396566f2da::function_c72573fb42d0cdbc();
 }
@@ -113,10 +113,10 @@ function updateplayerweapon() {
   level.playerviewowner.operatorcustomization.skinref = loadoutdata.skinref;
 
   if(isDefined(loadoutdata.skinref) && loadoutdata.skinref != "") {
-    var_3291e2cbec055766 = scripts\cp_mp\operator::function_2dc6ef8b84dfec64(loadoutdata.skinref);
+    reactiveoperator = scripts\cp_mp\operator::function_2dc6ef8b84dfec64(loadoutdata.skinref);
 
-    if(isDefined(var_3291e2cbec055766) && var_3291e2cbec055766 != "") {
-      level.playerviewowner function_602b3de054f2a81(var_3291e2cbec055766);
+    if(isDefined(reactiveoperator) && reactiveoperator != "") {
+      level.playerviewowner function_602b3de054f2a81(reactiveoperator);
     }
   }
 
@@ -275,7 +275,7 @@ function function_cb993ebadda105c7() {
   level.bulletshitsecondary = 0;
   level.var_31b6d2832a330f45 = 0;
   level.var_4e5b1ceaad66b065 = 0;
-  level.gamemodebundle = function_1e231fc15fdab31d();
+  level.gamemodebundle = getgamemodescriptbundle();
   setomnvar("ui_firing_range_accuracy", 0);
   setomnvar("ui_firing_range_target_kill_count", 0);
 
@@ -289,7 +289,7 @@ function function_cb993ebadda105c7() {
   }
 
   println("<dev string:x52>");
-  suitname = default_to(level.gamemodebundle.var_576fc201a1d5b6dc, "jup_defaultsuit_mp");
+  suitname = default_to(level.gamemodebundle.playerdefaultsuit, "jup_defaultsuit_mp");
   self setsuit(suitname);
   println("<dev string:x2f>");
   self.sessionstate = "playing";
@@ -476,9 +476,9 @@ function function_1a2a24c0225bef64() {
   }
 }
 
-function function_7086103bdf1f2c05(var_10fd8ed3fed0e0ae) {
+function function_7086103bdf1f2c05(numplates) {
   var_9a4a482cac1b5c20 = level.var_37e9d3ecafdb61dc;
-  level.var_37e9d3ecafdb61dc = int(max(0, var_10fd8ed3fed0e0ae));
+  level.var_37e9d3ecafdb61dc = int(max(0, numplates));
   setomnvar("ui_firing_range_num_dummy_plates", level.var_37e9d3ecafdb61dc);
 
   foreach(ent in level.var_e0fd2fccbeadef41) {
@@ -561,7 +561,7 @@ function function_26f9a6ab8c0254ba() {
   self.var_f83a9d5c8d6b9a96 = defaultdir;
 
   while(true) {
-    self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, weapon, origin, angles, normal, var_13ea67fc910045ad);
+    self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, weapon, origin, angles, normal, inflector);
     defaultpos = self.origin + (0, 0, 40);
 
     if(distance(point, defaultpos) < 48) {
@@ -582,7 +582,7 @@ function function_66cdac98ac1a8a6a(ismodel) {
   data.damage = 0;
 
   while(true) {
-    self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, weapon, origin, angles, normal, var_13ea67fc910045ad);
+    self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, weapon, origin, angles, normal, inflector);
     attacker = level.playerviewowner;
     victim = self.owner;
 
@@ -628,7 +628,7 @@ function function_66cdac98ac1a8a6a(ismodel) {
       weapondamagetype = 0;
     }
 
-    scaleddamage = int(floor(damage * function_77011f86063f18b4(attacker getcurrentweapon(), hitloc, weapondamagetype)));
+    scaleddamage = int(floor(damage * getweaponhitlocdamagemultiplier(attacker getcurrentweapon(), hitloc, weapondamagetype)));
     data.damage = scaleddamage;
 
     if(isspreadweapon(data.weapon)) {
@@ -672,11 +672,11 @@ function processdamagethisframe(instance) {
     armorbroke = currentarmor - armordamage == 0;
   }
 
-  var_4a101e7f1377c05d = function_43702519a3dc0854(instance.meansofdeath) && armordamage >= 150;
+  shouldohkprotect = function_43702519a3dc0854(instance.meansofdeath) && armordamage >= 150;
   var_520f3f243189ca25 = function_ae24f0c0c8c6de2a(instance.weapon);
   var_84b2b2a1586de527 = var_c284c09ef7780e64.health >= var_eca68f675aa4abe5;
 
-  if(var_4a101e7f1377c05d && var_84b2b2a1586de527) {
+  if(shouldohkprotect && var_84b2b2a1586de527) {
     if(instance.damage >= var_c284c09ef7780e64.health && !istrue(var_520f3f243189ca25)) {
       instance.damage = int(clamp(instance.damage, 0, var_c284c09ef7780e64.health - 1));
     }

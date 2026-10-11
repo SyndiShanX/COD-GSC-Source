@@ -43,7 +43,7 @@ function main_thread() {
 }
 
 function level_has_chyron() {
-  mapinfo = function_f1e2d555fd823e99();
+  mapinfo = getactivemapinfobundle();
   return isDefined(mapinfo) && isDefined(mapinfo.var_589e062e2afaa7b8) && mapinfo.var_589e062e2afaa7b8 != &"";
 }
 

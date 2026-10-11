@@ -33,23 +33,23 @@ function playanim_patrolreact_internal(asmname, statename, arcstatename) {
   reactxanim = asm_getxanim(arcstatename, reactanim);
   animrate = 1;
 
-  if(isDefined(self.var_aebf462ec3f3362d)) {
+  if(isDefined(self.stealthreactendtime)) {
     endtime = 1;
-    var_1cf3cc2bfbd90835 = getnotetracktimes(reactxanim, "code_move");
+    codemovetimes = getnotetracktimes(reactxanim, "code_move");
 
-    if(var_1cf3cc2bfbd90835.size > 0) {
-      endtime = var_1cf3cc2bfbd90835[0];
+    if(codemovetimes.size > 0) {
+      endtime = codemovetimes[0];
     }
 
     animlength = getanimlength(reactxanim) * endtime;
-    desiredlength = 0.05 + (self.var_aebf462ec3f3362d - gettime()) / 1000;
+    desiredlength = 0.05 + (self.stealthreactendtime - gettime()) / 1000;
 
     if(desiredlength < 0.2) {
       desiredlength = 0.2;
     }
 
     animrate = clamp(animlength / desiredlength, 0.8, 1.3);
-    self.var_aebf462ec3f3362d = undefined;
+    self.stealthreactendtime = undefined;
   }
 
   self aisetanim(arcstatename, reactanim, animrate);
@@ -244,8 +244,8 @@ function handlefacegoalnotetrack(statename, note, params) {
       beyondyaw = getangledelta(xanim, endtime[0], finishtime[0]);
     }
 
-    var_63cc85541246c7b4 = self.var_1c9ed4a46d13edc9 - self.origin;
-    reactworldyaw = vectortoyaw(var_63cc85541246c7b4);
+    metopos = self.var_1c9ed4a46d13edc9 - self.origin;
+    reactworldyaw = vectortoyaw(metopos);
     turnyaw = function_7889a8a760c6e02(xanim, reactworldyaw, beyondyaw, endtime[0]);
     thread facegoalthread(statename, turnyaw, beyondyaw, self.var_1c9ed4a46d13edc9, reactworldyaw, turntime, xanim, endtime[0]);
     return true;
@@ -298,10 +298,10 @@ function facegoalthread(statename, turnyaw, beyondyaw, reactpos, reactworldyaw, 
       }
 
       if(var_522f11c665d62df) {
-        var_63cc85541246c7b4 = self.var_1c9ed4a46d13edc9 - self.origin;
-        var_b5c1dd0e7b0b043b = vectortoyaw(var_63cc85541246c7b4);
-        turnyaw = angleclamp180(var_b5c1dd0e7b0b043b - reactworldyaw - beyondyaw);
-        reactworldyaw = var_b5c1dd0e7b0b043b;
+        metopos = self.var_1c9ed4a46d13edc9 - self.origin;
+        newreactworldyaw = vectortoyaw(metopos);
+        turnyaw = angleclamp180(newreactworldyaw - reactworldyaw - beyondyaw);
+        reactworldyaw = newreactworldyaw;
         var_d00ab4a1a5f59a50 += turnyaw / frames;
       }
     }
@@ -326,8 +326,8 @@ function facegoalthread(statename, turnyaw, beyondyaw, reactpos, reactworldyaw, 
 }
 
 function patrol_playanim_idlecurious(asmname, statename, params) {
-  thread patrol_playanim_idlecurious_facelastknownhelper(statename, self.var_e0164bf8693e15e1);
-  function_216c67ab6749137a(self, undefined, "curious");
+  thread patrol_playanim_idlecurious_facelastknownhelper(statename, self.stealthidlecurioustarget);
+  addbattlechatternotify(self, undefined, "curious");
   asm_playanimstate(asmname, statename);
 }
 
@@ -343,11 +343,11 @@ function patrol_playanim_idlecurious_facelastknownhelper(statename, target) {
 }
 
 function patrol_magicflashlightdetach(asmname, statename, params) {
-  if(isDefined(self.var_1bab8712529eb3c2) && self.var_1bab8712529eb3c2) {
+  if(isDefined(self.asmflashlight) && self.asmflashlight) {
     detachflashlight();
   }
 
-  if(istrue(self._blackboard.bflashlight) && !istrue(self.var_1bab8712529eb3c2)) {
+  if(istrue(self._blackboard.bflashlight) && !istrue(self.asmflashlight)) {
     self[[self.fnstealthflashlighton]]();
   }
 }
@@ -362,7 +362,7 @@ function chooseanim_patrol_checkflashlight(asmname, statename, params) {
   assert(isDefined(params));
   alias = params;
 
-  if(isDefined(self.var_1bab8712529eb3c2) && self.var_1bab8712529eb3c2) {
+  if(isDefined(self.asmflashlight) && self.asmflashlight) {
     alias = "fl_" + alias;
   }
 
@@ -404,7 +404,7 @@ function setflashlightmodel(flashlightmodel) {
 
   self.flashlightmodeloverride = flashlightmodel;
 
-  if(isai(self) && istrue(self.var_1bab8712529eb3c2)) {
+  if(isai(self) && istrue(self.asmflashlight)) {
     attachflashlight(1);
   }
 }
@@ -423,12 +423,12 @@ function getflashlightmodel() {
 
 function attachflashlight(var_4d65db1b45602939) {
   assert(isDefined(self.fnstealthflashlightoff) && isDefined(self.fnstealthflashlighton));
-  assert(!isDefined(self.var_1bab8712529eb3c2) || self.var_1bab8712529eb3c2 == 0);
+  assert(!isDefined(self.asmflashlight) || self.asmflashlight == 0);
   self[[self.fnstealthflashlightoff]](0);
   modelname = getflashlightmodel();
   self attach(modelname, "tag_accessory_left", 1);
   self.flashlightmodel = modelname;
-  self.var_1bab8712529eb3c2 = 1;
+  self.asmflashlight = 1;
   self.flashlightfxoverridetag = "tag_light";
 
   if(var_4d65db1b45602939) {
@@ -439,7 +439,7 @@ function attachflashlight(var_4d65db1b45602939) {
 function detachflashlight() {
   assert(isDefined(self.fnstealthflashlightoff));
 
-  if(!istrue(self.var_1bab8712529eb3c2)) {
+  if(!istrue(self.asmflashlight)) {
     return;
   }
 
@@ -450,7 +450,7 @@ function detachflashlight() {
     self.flashlightmodel = undefined;
   }
 
-  self.var_1bab8712529eb3c2 = 0;
+  self.asmflashlight = 0;
   self.flashlightfxoverridetag = undefined;
 }
 
@@ -473,10 +473,10 @@ function function_70d280c57c0cfee9(asmname, statename, params) {
   return asm_lookupanimfromalias(statename, string(alias));
 }
 
-function function_8c0e27519be09045(note, params) {
+function bc_notehandler(note, params) {
   if(isstartstr(note, "bc_")) {
     event = getsubstr(note, 3);
 
-    function_216c67ab6749137a(self, undefined, event);
+    addbattlechatternotify(self, undefined, event);
   }
 }

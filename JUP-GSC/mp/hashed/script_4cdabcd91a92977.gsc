@@ -675,7 +675,7 @@ function function_13399aa20634edce(aeeventname, var_1e904d14a41d4385) {
   }
 
   if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-    function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", function_6e2deb013c9ca85e(aeeventname), var_1e904d14a41d4385);
+    callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", function_6e2deb013c9ca85e(aeeventname), var_1e904d14a41d4385);
   }
 }
 

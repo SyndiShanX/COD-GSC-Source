@@ -12,7 +12,7 @@
 #using scripts\engine\utility;
 #namespace cap_civ_react;
 
-function function_12889d5fe2ea906e(asmname, statename, params) {
+function initcivreact(asmname, statename, params) {
   self.fnasm_playfacialanim = utility::getsharedfunc("anim", "ASM_PlayFacialAnim");
   namespace_603b0d6e06be2dbe::initcivreactcommon(asmname, statename, params);
 
@@ -35,12 +35,12 @@ function function_d8ca3630d10c6e62(asmname, statename, params) {
   player = namespace_2b520709cc9e7442::getclosestplayer(self.origin);
 
   if(!isDefined(player)) {
-    randomalias = function_976d6ccb0a2807f3(statename);
-    return function_18e6c36c02a94dbd(statename, randomalias);
+    randomalias = cap_lookuprandomalias(statename);
+    return cap_lookupanimfromalias(statename, randomalias);
   }
 
-  if(isDefined(self.reactdata.var_39cbcdce57275c53)) {
-    self.reactdata.var_39cbcdce57275c53 = 0;
+  if(isDefined(self.reactdata.waspunched)) {
+    self.reactdata.waspunched = 0;
   }
 
   movedirnormalized = vectorNormalize(self.origin - player.origin);
@@ -48,7 +48,7 @@ function function_d8ca3630d10c6e62(asmname, statename, params) {
   targetyaw = angleclamp180(targetangles[1] - self.angles[1]);
   angleindex = scripts\asm\asm::yawdiffto2468(targetyaw);
   aliasname = "pushed_" + angleindex;
-  turnanim = function_18e6c36c02a94dbd(statename, aliasname);
+  turnanim = cap_lookupanimfromalias(statename, aliasname);
   return turnanim;
 }
 
@@ -60,12 +60,12 @@ function initcivreactcommon(asmname, statename, params) {
   self.reactdata = spawnStruct();
   self.reactdata.var_9d92febdac913986 = 0;
   self.reactdata.var_a2f98561afe346c6 = 0;
-  self.reactdata.var_1532b27e26d5db21 = "relaxed";
+  self.reactdata.triggeredreactiontype = "relaxed";
   self.reactdata.triggeredtime = 0;
   self.reactdata.var_af1d1102ede20fc2 = "relaxed";
   self.reactdata.var_ac13962f5c74201c = 0;
   self.reactdata.isglancing = 0;
-  self.reactdata.var_a576b24ef9af6865 = 0;
+  self.reactdata.runawaycooldown = 0;
   self.reactdata.var_44a0cae44b47f5ee = 1;
   self.reactdata.var_2141f7cb7ff397a6 = 0;
   self.sightdata = spawnStruct();
@@ -75,17 +75,17 @@ function initcivreactcommon(asmname, statename, params) {
   if(isai(self)) {
     self setanim(%lookat_procedural_node);
     self setanim(%lookat_eye_node);
-    var_7a140ee03cfc699e = self findoverridearchetype("animscript");
+    capanimset = self findoverridearchetype("animscript");
 
-    if(isDefined(var_7a140ee03cfc699e)) {
-      headanim = archetypegetalias(var_7a140ee03cfc699e, "knobs", "head", 0);
+    if(isDefined(capanimset)) {
+      headanim = archetypegetalias(capanimset, "knobs", "head", 0);
 
       if(isDefined(headanim)) {
         self setanim(headanim.anims, 1, 0.2);
       }
 
-      self.var_8effd09d2c6077d7 = var_7a140ee03cfc699e;
-      self.var_be5b4c59c12df3a8 = asmname;
+      self.var_8effd09d2c6077d7 = capanimset;
+      self.prevasmname = asmname;
     }
   } else {
     self.fakeactor_face_anim = 1;
@@ -93,7 +93,7 @@ function initcivreactcommon(asmname, statename, params) {
     self.var_5247d15da29e8539 = 1;
   }
 
-  self.var_d28e54645050df58 = 0;
+  self.script_pushable_by_ai = 0;
 
   if(istrue(self.var_6b1e93f4670936dc)) {}
 }
@@ -117,15 +117,15 @@ function proximity_bump() {
 
     if(isDefined(self.reactdata.var_988ce1f3de29ab7b)) {
       var_988ce1f3de29ab7b = self.reactdata.var_988ce1f3de29ab7b;
-    } else if(isDefined(level.var_f62b6e59c0e00d48.var_988ce1f3de29ab7b)) {
-      var_988ce1f3de29ab7b = level.var_f62b6e59c0e00d48.var_988ce1f3de29ab7b;
+    } else if(isDefined(level.civreactdata.var_988ce1f3de29ab7b)) {
+      var_988ce1f3de29ab7b = level.civreactdata.var_988ce1f3de29ab7b;
     }
 
     if(var_214d72ecaf4fe659 < var_988ce1f3de29ab7b * var_988ce1f3de29ab7b) {
       playervelocity = player getvelocity();
-      var_a7417a94cd44dd6f = length2dsquared(playervelocity);
+      playerspeedsqr = length2dsquared(playervelocity);
 
-      if(var_a7417a94cd44dd6f > 0) {
+      if(playerspeedsqr > 0) {
         normalizedvelocity = vectorNormalize(playervelocity);
         tome = vectorNormalize(tome);
         dot = vectordot(normalizedvelocity, tome);
@@ -144,7 +144,7 @@ function proximity_bump() {
   }
 }
 
-function function_8410016cf6ab1371() {
+function debugcapcivreact() {
   while(true) {
     if(getDvar(@ "hash_39375e00c2cad343") != "" && isDefined(self.attitude)) {
       level notify("civreact_terminate");
@@ -159,13 +159,13 @@ function function_8410016cf6ab1371() {
 }
 
 function capcivreact(asmname) {
-  thread function_8410016cf6ab1371();
-  thread function_d338069f6a281787();
+  thread debugcapcivreact();
+  thread capcivreact_eventhandler();
 }
 
 function capcivreact_handlebulletfired(originator) {
   var_c70400922bccce61 = distance(originator.origin, self.origin);
-  waittimems = var_c70400922bccce61 / level.var_f62b6e59c0e00d48.var_ffc29105fd388648 + randomfloat(0, 0.5) * 1000;
+  waittimems = var_c70400922bccce61 / level.civreactdata.var_ffc29105fd388648 + randomfloat(0, 0.5) * 1000;
   reacttime = waittimems + gettime();
 
   if(isDefined(self.var_22c53a5480553773) < reacttime) {
@@ -173,14 +173,14 @@ function capcivreact_handlebulletfired(originator) {
   }
 
   self.capeventdata.lastevent = "bulletfired";
-  self.capeventdata.var_650d1900b21e2bd1 = originator.origin;
+  self.capeventdata.lasteventorigin = originator.origin;
   self.capeventdata.var_27f5cd190b4a24c3 = gettime();
   self notify("CapCivReact_HandleBulletFired");
   self endon("CapCivReact_HandleBulletFired");
   wait waittimems;
 }
 
-function function_d338069f6a281787() {
+function capcivreact_eventhandler() {
   while(true) {
     self waittill("cap_event", eventname, originator);
 
@@ -236,12 +236,12 @@ function function_20efa2e633463448(asmname, statename, params) {
       animindex = "4";
     }
 
-    turnanim = scripts\asm\cap::function_18e6c36c02a94dbd(statename, animindex);
+    turnanim = scripts\asm\cap::cap_lookupanimfromalias(statename, animindex);
     assertex(isDefined(turnanim), "<dev string:x1c>" + animindex + "<dev string:x39>" + self.animsetname);
   } else {
     animmap = ["2", "3", "6", "9", "8", "7", "4", "1", "2"];
     animindex = getangleindex(anglediff, 22.5);
-    turnanim = scripts\asm\cap::function_18e6c36c02a94dbd(statename, animmap[animindex]);
+    turnanim = scripts\asm\cap::cap_lookupanimfromalias(statename, animmap[animindex]);
     assertex(isDefined(turnanim), "<dev string:x57>" + animmap[animindex] + "<dev string:x39>" + self.animsetname);
   }
 
@@ -252,8 +252,8 @@ function function_14d651e2254bb00d(asmname, fromstate, tostate, params) {
   if(isDefined(params) && params == "return") {
     angles = self.interaction_angles;
     anglediff = angleclamp180(angles[1] - self.angles[1]);
-    var_3ada4c6e49483364 = 22.5;
-    return (abs(anglediff) > var_3ada4c6e49483364);
+    angletouse = 22.5;
+    return (abs(anglediff) > angletouse);
   }
 
   target = function_b92973cdb6dc3f38();
@@ -261,17 +261,17 @@ function function_14d651e2254bb00d(asmname, fromstate, tostate, params) {
   if(isDefined(target)) {
     totarget = target.origin - self.origin;
     yawtotarget = vectortoyaw(totarget);
-    var_3ada4c6e49483364 = 45;
+    angletouse = 45;
 
     if(!isai(self)) {
-      var_b047d1b68e9701c9 = lengthsquared(totarget);
+      distsqrtotarget = lengthsquared(totarget);
       var_706fe99ce1efa2b7 = [[300, 23], [0, 45]];
 
       foreach(pair in var_706fe99ce1efa2b7) {
         distancesqr = pair[0] * pair[0];
 
-        if(var_b047d1b68e9701c9 > distancesqr) {
-          var_3ada4c6e49483364 = pair[1];
+        if(distsqrtotarget > distancesqr) {
+          angletouse = pair[1];
           break;
         }
       }
@@ -279,7 +279,7 @@ function function_14d651e2254bb00d(asmname, fromstate, tostate, params) {
 
     anglediff = angleclamp180(yawtotarget - self.angles[1]);
 
-    if(abs(anglediff) > var_3ada4c6e49483364) {
+    if(abs(anglediff) > angletouse) {
       return true;
     }
   }
@@ -287,12 +287,12 @@ function function_14d651e2254bb00d(asmname, fromstate, tostate, params) {
   return false;
 }
 
-function function_6e1cbd20dcaecf31(asmname, statename, params) {
+function curious_playanim(asmname, statename, params) {
   if(isDefined(params) && isstring(params) && params == "return") {
-    self._blackboard.var_7460b96395361857 = self._blackboard.var_c71a487341c700f3;
+    self._blackboard.bseqphase = self._blackboard.var_c71a487341c700f3;
   }
 
-  function_59308d53cabcdfdb(asmname, statename);
+  cap_playanim(asmname, statename);
 }
 
 function function_99f3112f53606865(asmname, statename, params) {
@@ -315,8 +315,8 @@ function function_99f3112f53606865(asmname, statename, params) {
 
     self aisetanim(statename, turnanim, rate);
   } else {
-    var_34ee65b16925d791 = asm_lookupanimfromalias("knobs", "body");
-    bodyxanim = asm_getxanim("knobs", var_34ee65b16925d791);
+    bodyanimid = asm_lookupanimfromalias("knobs", "body");
+    bodyxanim = asm_getxanim("knobs", bodyanimid);
     self setflaggedanimknoballrestart(statename, turnxanim, bodyxanim, 1, 0.2, 1);
   }
 
@@ -374,8 +374,8 @@ function function_737c17a2f5f59183(turnxanim, statename) {
       yawtoenemy = angleclamp180(vectortoyaw(enemy.origin - self.origin) - self.angles[1]);
       currentanimtime = undefined;
       currentanimtime = self aigetanimtime(turnxanim);
-      var_993a8f9635e274cf = getangledelta(turnxanim, currentanimtime, 1);
-      remainingyaw = angleclamp180(yawtoenemy - var_993a8f9635e274cf);
+      animyawdelta = getangledelta(turnxanim, currentanimtime, 1);
+      remainingyaw = angleclamp180(yawtoenemy - animyawdelta);
       self orientmode("face angle", angleclamp(self.angles[1] + remainingyaw * lerpfraction));
       remainingframes--;
       wait 0.05;
@@ -389,8 +389,8 @@ function function_737c17a2f5f59183(turnxanim, statename) {
     yawtoenemy = angleclamp180(vectortoyaw(enemy.origin - self.origin) - self.angles[1]);
     currentanimtime = undefined;
     currentanimtime = self getanimtime(turnxanim);
-    var_993a8f9635e274cf = getangledelta(turnxanim, currentanimtime, 1);
-    remainingyaw = angleclamp180(yawtoenemy - var_993a8f9635e274cf);
+    animyawdelta = getangledelta(turnxanim, currentanimtime, 1);
+    remainingyaw = angleclamp180(yawtoenemy - animyawdelta);
     yaw = angleclamp(self.angles[1] + remainingyaw * lerpfraction);
     self.angles = (0, yaw, 0);
     remainingframes--;
@@ -403,7 +403,7 @@ function playturnanim_cleanup(asmname, statename, params) {
 }
 
 function function_25d4ebb35db59893(asmname, statename, tostatename, params) {
-  if(istrue(self._blackboard.var_b9fe3860c557e5d6)) {
+  if(istrue(self._blackboard.blockcower)) {
     return false;
   }
 
@@ -411,7 +411,7 @@ function function_25d4ebb35db59893(asmname, statename, tostatename, params) {
     return true;
   }
 
-  if(isDefined(self._blackboard.var_41830459efdaf2aa) && gettime() >= self._blackboard.var_41830459efdaf2aa) {
+  if(isDefined(self._blackboard.cowertime) && gettime() >= self._blackboard.cowertime) {
     return true;
   }
 
@@ -420,14 +420,14 @@ function function_25d4ebb35db59893(asmname, statename, tostatename, params) {
 
 function function_94ea0ca02f4d957(asmname, statename, params) {
   if(randomint(100) < 30) {
-    self._blackboard.var_41830459efdaf2aa = gettime() + randomintrange(3000, 5000);
+    self._blackboard.cowertime = gettime() + randomintrange(3000, 5000);
   }
 
-  scripts\asm\cap::function_59308d53cabcdfdb(asmname, statename, params);
+  scripts\asm\cap::cap_playanim(asmname, statename, params);
 }
 
 function function_8c45fec62914f2e3(asmname, statename, params) {
-  self._blackboard.var_41830459efdaf2aa = undefined;
+  self._blackboard.cowertime = undefined;
 }
 
 function function_c8421bb477a45b8a(note) {
@@ -452,25 +452,25 @@ function function_15330ee53a46289d(asmname, fromstatename, tostatename, params) 
 }
 
 function function_fbbcd3a4d551644c(asmname, statename, params) {
-  assert(isDefined(self._blackboard.var_40a41c70824fa4c4));
+  assert(isDefined(self._blackboard.cowerstate));
 
-  if(self._blackboard.var_40a41c70824fa4c4 == "b") {
-    return function_a0dfeea159aa7f64(asmname, statename, "a_to_b");
+  if(self._blackboard.cowerstate == "b") {
+    return cap_chooseanim(asmname, statename, "a_to_b");
   }
 
-  return function_a0dfeea159aa7f64(asmname, statename, "b_to_a");
+  return cap_chooseanim(asmname, statename, "b_to_a");
 }
 
 function function_10e9a7601aef9c43(asmname, statename, params) {
-  if(function_f179ede0989e6734(statename, "a")) {
-    if(!isDefined(self._blackboard.var_40a41c70824fa4c4)) {
-      self._blackboard.var_40a41c70824fa4c4 = "a";
+  if(cap_hasalias(statename, "a")) {
+    if(!isDefined(self._blackboard.cowerstate)) {
+      self._blackboard.cowerstate = "a";
     }
 
-    return function_a0dfeea159aa7f64(asmname, statename, self._blackboard.var_40a41c70824fa4c4);
+    return cap_chooseanim(asmname, statename, self._blackboard.cowerstate);
   }
 
-  return function_a0dfeea159aa7f64(asmname, statename, params);
+  return cap_chooseanim(asmname, statename, params);
 }
 
 function function_f914d9aba63ded76(asmname, fromstatename, tostatename, params) {
@@ -478,15 +478,15 @@ function function_f914d9aba63ded76(asmname, fromstatename, tostatename, params) 
     return 0;
   }
 
-  shouldswitch = function_f179ede0989e6734(fromstatename, "a");
+  shouldswitch = cap_hasalias(fromstatename, "a");
 
   if(shouldswitch) {
-    assert(isDefined(self._blackboard.var_40a41c70824fa4c4));
+    assert(isDefined(self._blackboard.cowerstate));
 
-    if(self._blackboard.var_40a41c70824fa4c4 == "a") {
-      self._blackboard.var_40a41c70824fa4c4 = "b";
+    if(self._blackboard.cowerstate == "a") {
+      self._blackboard.cowerstate = "b";
     } else {
-      self._blackboard.var_40a41c70824fa4c4 = "a";
+      self._blackboard.cowerstate = "a";
     }
   }
 

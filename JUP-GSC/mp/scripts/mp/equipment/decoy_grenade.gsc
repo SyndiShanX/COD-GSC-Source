@@ -383,7 +383,7 @@ function decoy_debuffenemy(player) {
 
     if(player != owner) {
       if(scripts\mp\utility\game::function_d75b73c443421047()) {
-        if(!istrue(player.var_fa9f4c933e6df36d) && isDefined(self.owner) && !istrue(self.owner.var_fa9f4c933e6df36d)) {
+        if(!istrue(player.isinsafezone) && isDefined(self.owner) && !istrue(self.owner.isinsafezone)) {
           namespace_a850435086c88de3::doonactionscoreevent(0, "decoyDebuffed");
         }
       } else {

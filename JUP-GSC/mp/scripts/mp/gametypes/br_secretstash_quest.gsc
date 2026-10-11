@@ -244,7 +244,7 @@ function deletesecretstashhud() {
   function_af5604ce591768e1();
 }
 
-function secretstashlootcacheused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function secretstashlootcacheused(instance, part, state, player, bautouse, usestring) {
   if(istrue(player scripts\mp\gametypes\br_gametypes::runbrgametypefunc("playerSkipLootPickup", instance))) {
     return;
   }
@@ -261,7 +261,7 @@ function secretstashlootcacheused(instance, part, state, player, var_a5b2c541413
 
     instance setscriptablepartstate("body", "secretstash_opening");
     var_c0858aceea4bb7d9 = getdvarint(@ "hash_3b1ec176d14497ea", 30);
-    instance.entity scripts\engine\utility::function_ad9433aab9fcdf04(var_c0858aceea4bb7d9, "death_or_disconnect", &delete);
+    instance.entity scripts\engine\utility::delaycallendon(var_c0858aceea4bb7d9, "death_or_disconnect", &delete);
     givequestrewardgroup("secretstash", player.team, instance.origin, instance.angles, questinstance.rewardscriptable);
     questinstance.rewardorigin = instance.origin;
     questinstance.rewardangles = instance.angles;

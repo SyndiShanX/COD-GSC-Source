@@ -101,7 +101,7 @@ function init(waitprematch) {
     var_b2c90dc03f470a24 = function_e6c1c35181a2870f("uav_tower");
 
     foreach(tower in var_b2c90dc03f470a24) {
-      tower.poi = scripts\mp\poi::function_6cc445c02b5effac(tower.origin);
+      tower.poi = scripts\mp\poi::poi_findpoioriginisin(tower.origin);
     }
   }
 
@@ -178,7 +178,7 @@ function create_player_rig(animname, spawnpos, spawnang, uav_tower) {
       hackwaitframes -= 1;
     }
 
-    thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 
   if(isDefined(player_rig) && player_rig islinked()) {
@@ -198,7 +198,7 @@ function create_player_rig(animname, spawnpos, spawnang, uav_tower) {
       world_vel = coordtransform(local_vel, (0, 0, 0), parent.angles);
       horizontaloffset = getdvarfloat(@ "hash_70433558c51dfcfd", 5);
       var_5480d8da1dde6edf = anglesToForward(self.angles) * (horizontaloffset * -1, horizontaloffset * -1, 0);
-      test_origin = self.origin + world_vel * function_676cfe2ab64ea758() / 1000 * 0.25 + var_5480d8da1dde6edf;
+      test_origin = self.origin + world_vel * getframeduration() / 1000 * 0.25 + var_5480d8da1dde6edf;
       point_start = test_origin + (0, 0, 50);
       point_end = test_origin - (0, 0, 50);
       traceresult = scripts\engine\trace::capsule_trace(point_start, point_end, 10, 72, undefined, self);
@@ -520,7 +520,7 @@ function function_550deeac761ab7b9(scriptable) {
   scriptable.teamscooldown[playerteam] = 0;
 }
 
-function tower_used(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function tower_used(instance, part, state, player, bautouse, usestring) {
   if(!tower_canuse(player)) {
     return;
   }
@@ -582,7 +582,7 @@ function tower_used(instance, part, state, player, var_a5b2c541413aa895, usestri
 
       if(var_4c63764d12ed5def && istrue(instance.successfuluse)) {
         players = level.players;
-        instance thread function_a301051f63fbbff9(instance, part, state, player, var_a5b2c541413aa895, usestring, players, oldteam);
+        instance thread function_a301051f63fbbff9(instance, part, state, player, bautouse, usestring, players, oldteam);
       } else if(var_4c63764d12ed5def && !istrue(instance.successfuluse)) {} else {
         if(soundexists("ui_select_purchase_deny") && level.var_db9587440497015c) {
           player playlocalsound("ui_select_purchase_deny");
@@ -594,7 +594,7 @@ function tower_used(instance, part, state, player, var_a5b2c541413aa895, usestri
       }
     } else if(isDefined(instance.successfuluse) && instance.successfuluse) {
       players = level.players;
-      instance thread function_a301051f63fbbff9(instance, part, state, player, var_a5b2c541413aa895, usestring, players, oldteam);
+      instance thread function_a301051f63fbbff9(instance, part, state, player, bautouse, usestring, players, oldteam);
     }
 
     return;
@@ -663,7 +663,7 @@ function watchgunlessweapon() {
   waittill_any_3("death_or_disconnect", "enter_live_ragdoll", "interact_interrupt");
 
   if(isDefined(self)) {
-    thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 }
 
@@ -675,12 +675,12 @@ function typinganimstart(player) {
   player playerlinktodelta(player.linktoent, "tag_origin", 1, 0, 0, 0, 0, 1, 0);
   goalpos = function_a39eabffc4fe3719();
   var_bb4c5aaff39749f7 = (10, 0, 0);
-  var_de179dc7a706ad8f = combineangles((0, 90, 0), var_bb4c5aaff39749f7);
-  goalangles = combineangles(self.angles, var_de179dc7a706ad8f);
+  targetlocalangles = combineangles((0, 90, 0), var_bb4c5aaff39749f7);
+  goalangles = combineangles(self.angles, targetlocalangles);
   movetotime = 0.5;
 
   if(isDefined(self.linkedparent)) {
-    player.linktoent childthread function_1f6d35ecbf0ed006(self, (-1.279, -55.632, 0), var_de179dc7a706ad8f, movetotime);
+    player.linktoent childthread function_1f6d35ecbf0ed006(self, (-1.279, -55.632, 0), targetlocalangles, movetotime);
   } else {
     player.linktoent moveTo(goalpos, movetotime, 0.1, 0.1);
     player.linktoent rotateTo(goalangles, movetotime, 0.1, 0.1);
@@ -689,7 +689,7 @@ function typinganimstart(player) {
   player setstance("crouch");
   player thread watchgunlessweapon();
   var_cd9982adb17761a8 = gettime();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = max(0, movetotime - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000);
   wait var_218f64cb035d54be;
@@ -731,11 +731,11 @@ function private function_1f6d35ecbf0ed006(uav_tower, goaloffset, goalangles, mo
   start_time_ms = gettime();
   end_time_ms = gettime() + movetotime * 1000;
   startoffset = rotatevectorinverted(self.origin - uav_tower.origin, uav_tower.angles);
-  startangles = function_848155be2b7da2cb(uav_tower.angles, self.angles);
+  startangles = combineanglesinverted(uav_tower.angles, self.angles);
   var_2ae616b335d7e33d = uav_tower.origin;
 
   while(isDefined(self) && gettime() < end_time_ms) {
-    var_7aeab0bcca4b2d64 = gettime() + function_676cfe2ab64ea758();
+    var_7aeab0bcca4b2d64 = gettime() + getframeduration();
     t = (var_7aeab0bcca4b2d64 - start_time_ms) / movetotime * 1000;
     deltapos = uav_tower.origin - var_2ae616b335d7e33d;
     targetoffset = vectorlerp(startoffset, goaloffset, t);
@@ -844,7 +844,7 @@ function function_3c288bbdd4016fd4(isallowed) {
   self function_bb04491d50d9e43e();
 }
 
-function function_a301051f63fbbff9(instance, part, state, player, var_a5b2c541413aa895, usestring, players, oldteam) {
+function function_a301051f63fbbff9(instance, part, state, player, bautouse, usestring, players, oldteam) {
   player endon("death_or_disconnect");
   player endon("enter_live_ragdoll");
   level notify("uav_tower_activated", instance);
@@ -884,7 +884,7 @@ function function_a301051f63fbbff9(instance, part, state, player, var_a5b2c54141
 
   var_b608af6e8d86fe42 = 0;
 
-  if(player namespace_53fc9ddbb516e6e1::function_87072b42853a9c58("specialty_uav_buff")) {
+  if(player namespace_53fc9ddbb516e6e1::hasperksharedfunc("specialty_uav_buff")) {
     var_b608af6e8d86fe42 = 1;
   }
 
@@ -919,7 +919,7 @@ function function_a301051f63fbbff9(instance, part, state, player, var_a5b2c54141
         }
 
         if(bscore) {
-          ent namespace_53fc9ddbb516e6e1::function_e800498086e36c29(#"hash_541f0b57f321a27");
+          ent namespace_53fc9ddbb516e6e1::doscoreeventsharedfunc(#"hash_541f0b57f321a27");
         }
       }
     }
@@ -1455,7 +1455,7 @@ function private function_853901492bb15e03() {
 
         var_b608af6e8d86fe42 = 0;
 
-        if(player namespace_53fc9ddbb516e6e1::function_87072b42853a9c58("<dev string:x1aa>")) {
+        if(player namespace_53fc9ddbb516e6e1::hasperksharedfunc("<dev string:x1aa>")) {
           var_b608af6e8d86fe42 = 1;
         }
 
@@ -1472,7 +1472,7 @@ function private function_853901492bb15e03() {
           continue;
         }
 
-        player namespace_53fc9ddbb516e6e1::function_e800498086e36c29(#"hash_541f0b57f321a27");
+        player namespace_53fc9ddbb516e6e1::doscoreeventsharedfunc(#"hash_541f0b57f321a27");
       }
     }
 

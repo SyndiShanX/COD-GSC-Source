@@ -30,7 +30,7 @@ function function_93c8f90c3bd798c6(player, time_limit, success_callback) {
   var_3292a1fe7c25743d = 0;
 
   while(isDefined(player) && timer.progresscomplete != 1) {
-    n_time_remaining = int(timer.var_621cb2c0d9b1cdae);
+    n_time_remaining = int(timer.currentprogressvalue);
     var_26d5115774db834b = scripts\mp\utility\teams::getsquadmates(player.team, player.sessionsquadid, 1);
 
     if(function_ce41f145ddc5cf35(original_squad, var_26d5115774db834b)) {

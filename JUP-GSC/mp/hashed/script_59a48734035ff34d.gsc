@@ -50,7 +50,7 @@ function create_laser_trap() {
   return trap;
 }
 
-function function_836cdac4b1d38941(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_836cdac4b1d38941(instance, part, state, player, bautouse, usestring) {
   if(part == "entless_trap_defuse_object") {
     function_de1ff0b717ef1a19(instance);
   }

@@ -50,7 +50,7 @@ function main() {
     allowed[0] = scripts\mp\utility\game::getbasegametype();
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_eb455c18ac9d8ac5() || level.var_ec2fb549b15ad827) {
+  if(scripts\cp_mp\utility\game_utility::function_eb455c18ac9d8ac5() || level.leagueplaymatch) {
     allowed[0] = scripts\mp\utility\game::getbasegametype();
   }
 
@@ -297,7 +297,7 @@ function onstartgametype() {
 
   setclientnamemode("manual_change");
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     level._effect["bomb_explosion"] = loadfx("vfx/mgl/iw9/dmz/bombsite/vfx_dmz_bombsite_expl.vfx");
   } else {
     level._effect["bomb_explosion"] = loadfx("vfx/iw9/dmz/bombsite/vfx_dmz_bombsite_expl.vfx");
@@ -419,7 +419,7 @@ function onspawnplayer(revivespawn) {
   level notify("spawned_player");
   thread updatematchstatushintonspawn();
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     scripts\mp\gametypes\mgl_mp::function_afadc6882a95f376(revivespawn);
   }
 }

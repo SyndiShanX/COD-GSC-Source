@@ -180,7 +180,7 @@ function function_a4181028915c44fa(node, droptoground) {
   if(isDefined(node.poi)) {
     var_3064fa24dbbd5bbf.poi = node.poi;
   } else {
-    var_3064fa24dbbd5bbf.poi = scripts\mp\poi::function_6cc445c02b5effac(node.origin);
+    var_3064fa24dbbd5bbf.poi = scripts\mp\poi::poi_findpoioriginisin(node.origin);
   }
 
   var_3064fa24dbbd5bbf.angles = node.angles;
@@ -599,7 +599,7 @@ function private function_5086b40cfd533087() {
       if(isDefined(node.poi)) {
         var_3064fa24dbbd5bbf.poi = node.poi;
       } else {
-        var_3064fa24dbbd5bbf.poi = scripts\mp\poi::function_6cc445c02b5effac(node.origin);
+        var_3064fa24dbbd5bbf.poi = scripts\mp\poi::poi_findpoioriginisin(node.origin);
       }
 
       var_3064fa24dbbd5bbf.angles = node.angles;
@@ -652,7 +652,7 @@ function function_6613aeb065e36928(loc) {
   priority = "high";
   category = "reinforcements";
   subcategory = "exfil";
-  poiname = scripts\mp\poi::function_6cc445c02b5effac(reinforceorigin);
+  poiname = scripts\mp\poi::poi_findpoioriginisin(reinforceorigin);
   var_19b18e5335b6e88a = 256;
   var_2898710bec2562dc = 3500;
   summonradius = getdvarint(@ "hash_63d7f015b040d9c6", 5000);
@@ -814,7 +814,7 @@ function function_aee6fe083265e34c() {
     foreach(team in self.info.activatedteams) {
       foreach(player in getteamdata(team, "players")) {
         if(distancesquared(self.origin, player.origin) < reinforcedistsq) {
-          var_5aeb0c8e23ff1430 = scripts\mp\ai_mp_controller::function_77acc10c4823dd8a(numagents, self.origin, "medium", "reinforcements", "ExtractAmbush", undefined, undefined, 1, scripts\mp\poi::function_6cc445c02b5effac(player.origin));
+          var_5aeb0c8e23ff1430 = scripts\mp\ai_mp_controller::function_77acc10c4823dd8a(numagents, self.origin, "medium", "reinforcements", "ExtractAmbush", undefined, undefined, 1, scripts\mp\poi::poi_findpoioriginisin(player.origin));
           return;
         }
       }
@@ -880,7 +880,7 @@ function function_ac298c756f30aea6(var_3064fa24dbbd5bbf) {
       }
     }
 
-    scripts\engine\utility::function_f3bb4f4911a1beb2("scorpion_event", "player_win");
+    scripts\engine\utility::callsharedfunc("scorpion_event", "player_win");
     self.var_e7af56a2df18030d = 0;
     self.exfilpos = self.origin;
     self.spawnprotection = 1;
@@ -1097,30 +1097,30 @@ function function_eff2a482b361a6ed(player, fadetoblack, fadetime) {
   player endon("start_fade_to_black");
   player endon("disconnect");
   assertex(!isDefined(fadetime) || fadetime >= 0, "<dev string:x1a3>");
-  var_400fc540bbc48aa9 = 0;
+  fadealpha = 0;
 
   if(istrue(fadetoblack)) {
-    var_400fc540bbc48aa9 = 1;
+    fadealpha = 1;
   }
 
   if(!isDefined(fadetime) || fadetime == 0) {
-    player setclientomnvar("ui_total_fade", var_400fc540bbc48aa9);
+    player setclientomnvar("ui_total_fade", fadealpha);
     return;
   }
 
-  finalalpha = var_400fc540bbc48aa9;
-  var_400fc540bbc48aa9 = 0;
+  finalalpha = fadealpha;
+  fadealpha = 0;
   fadetimecounter = int(fadetime / level.framedurationseconds);
   fadechange = 1 / fadetimecounter;
 
   if(!istrue(fadetoblack)) {
     fadechange *= -1;
-    var_400fc540bbc48aa9 = 1;
+    fadealpha = 1;
   }
 
   while(fadetimecounter > 0) {
-    var_400fc540bbc48aa9 += fadechange;
-    player setclientomnvar("ui_total_fade", var_400fc540bbc48aa9);
+    fadealpha += fadechange;
+    player setclientomnvar("ui_total_fade", fadealpha);
     fadetimecounter--;
     waitframe();
   }
@@ -1646,7 +1646,7 @@ function function_52781be0b4e8a959(team, activity) {
       return;
     } else {
       players = scripts\mp\utility\teams::getfriendlyplayers(team, 1);
-      poi = ter_op(isDefined(activity.poi), activity.poi, scripts\mp\poi::function_6cc445c02b5effac(players[0].origin));
+      poi = ter_op(isDefined(activity.poi), activity.poi, scripts\mp\poi::poi_findpoioriginisin(players[0].origin));
       exfil = function_ffef19d55026b498(team, activity.poi);
 
       if(isDefined(exfil)) {
@@ -1816,7 +1816,7 @@ function function_aa3139c5fae701b8(heli) {
       relativeoffset = rotatevector(offset, heli.angles);
       dropinfo = scripts\mp\gametypes\br_pickups::getitemdropinfo(heli.origin + relativeoffset, var_bf80f581fdce86d2);
       gasmask = scripts\mp\gametypes\br_pickups::spawnpickup("brloot_equip_gasmask", dropinfo, 108);
-      gasmask utility::function_6e506f39f121ea8a(heli, offset);
+      gasmask utility::scriptable_setparententity(heli, offset);
     }
   }
 }
@@ -1953,7 +1953,7 @@ function function_1c2bd1696d29935b(teamname, dialog) {
   }
 }
 
-function function_c5f291acf1b44b69(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_c5f291acf1b44b69(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(instance) || !isDefined(player)) {
     return;
   }

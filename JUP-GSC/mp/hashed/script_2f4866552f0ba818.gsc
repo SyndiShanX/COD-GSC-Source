@@ -223,7 +223,7 @@ function function_2e6f8aa8306432ed(agent) {
   agent.baseaccuracy = getdvarfloat(@ "hash_949a1d9903e71c7a", 0.4);
 }
 
-function function_f83373ec853727e4(agent, var_772edbdcfe906c73) {
+function function_f83373ec853727e4(agent, badpathpos) {
   if(!isDefined(agent.objectivetarget)) {
     objectivetarget = function_b2b5de3c80ebceb4(agent);
   }

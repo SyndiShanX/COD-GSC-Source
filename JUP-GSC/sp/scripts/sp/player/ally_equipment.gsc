@@ -330,15 +330,15 @@ function ally_giveammo(weapons, gave_ammo) {
 function function_f9983dfe5cdfd0d2(weapons, gave_ammo) {
   foreach(weaponobj in weapons) {
     if(weaponobj.hasalternate) {
-      var_6890a4ce965bba99 = weaponobj getaltweapon();
-      current_ammo = level.player getammocount(var_6890a4ce965bba99);
-      max_ammo = weaponmaxammo(var_6890a4ce965bba99);
+      weaponaltobj = weaponobj getaltweapon();
+      current_ammo = level.player getammocount(weaponaltobj);
+      max_ammo = weaponmaxammo(weaponaltobj);
 
       if(current_ammo >= max_ammo) {
         continue;
       }
 
-      level.player givemaxammo(var_6890a4ce965bba99);
+      level.player givemaxammo(weaponaltobj);
       gave_ammo = 1;
     }
   }
@@ -365,13 +365,13 @@ function function_7dbb09ffa524d01c() {
 
   foreach(weapon in level.player.primaryweapons) {
     if(isDefined(weapon.hasalternate)) {
-      var_6890a4ce965bba99 = weapon getaltweapon();
-      var_3c60aef0715062b8 = weaponaltweaponname(weapon);
+      weaponaltobj = weapon getaltweapon();
+      grenadelauncherattachment = weaponaltweaponname(weapon);
 
-      if(var_6890a4ce965bba99.maxammo > 0 && !issubstr(var_3c60aef0715062b8, "select")) {
-        current_ammo = level.player getammocount(var_6890a4ce965bba99);
+      if(weaponaltobj.maxammo > 0 && !issubstr(grenadelauncherattachment, "select")) {
+        current_ammo = level.player getammocount(weaponaltobj);
 
-        if(current_ammo < var_6890a4ce965bba99.maxammo) {
+        if(current_ammo < weaponaltobj.maxammo) {
           return 0;
         }
       }

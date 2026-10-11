@@ -91,7 +91,7 @@ function function_b3212476aba49bc() {
   }
 }
 
-function function_d49b531543df8201(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_d49b531543df8201(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(instance) || !issubstr(instance.type, "ob_intel")) {
     return;
   }

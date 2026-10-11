@@ -15,11 +15,11 @@
 #namespace track;
 
 function track(asmname) {
-  assertex(!isDefined(self.var_a709fbd9fea148f6), "<dev string:x1c>");
-  self.var_a709fbd9fea148f6 = asmname;
-  var_a60d2ae5b60f0734 = asm_lookupanimfromaliasifexists("knobs", "aim_2");
+  assertex(!isDefined(self.asmtrackasm), "<dev string:x1c>");
+  self.asmtrackasm = asmname;
+  knobaim2 = asm_lookupanimfromaliasifexists("knobs", "aim_2");
 
-  if(!isDefined(var_a60d2ae5b60f0734)) {
+  if(!isDefined(knobaim2)) {
     return;
   }
 
@@ -244,8 +244,8 @@ function resetconvergence(bnewtarget, var_c5686a51213bf45e, bretarget) {
   }
 
   self.convergence.converge_missinnerradius = 12;
-  self.var_551a69e2205249c5 = 750;
-  self.var_1c2393f94226309c = -1;
+  self.convergencelockdurationbeforefiring = 750;
+  self.convergencelockedontime = -1;
 
   if(getdvarint(@ "hash_75e9120fb2fd5fc3", 0)) {
     self._blackboard.var_c2174cdb077d3c2 = 500;
@@ -257,17 +257,17 @@ function resetconvergence(bnewtarget, var_c5686a51213bf45e, bretarget) {
     self.convergencecurtime = 0;
   }
 
-  self.var_33e6ff2f7d46b8d8 = int(self.convergence.converge_time + 1000);
-  self.convergence.converge_laserofftime = self.var_33e6ff2f7d46b8d8 + 500;
+  self.convergenceshoottime = int(self.convergence.converge_time + 1000);
+  self.convergence.converge_laserofftime = self.convergenceshoottime + 500;
 
   if(isDefined(self._blackboard.shootparams_pos)) {
-    var_78f2b58603caf3ae = undefined;
+    convergestartpos = undefined;
     targetvel = undefined;
 
     if(isDefined(self.var_8629ddc52f25a54e)) {
-      var_78f2b58603caf3ae = self[[self.var_8629ddc52f25a54e]](self._blackboard.shootparams_ent, bretarget);
+      convergestartpos = self[[self.var_8629ddc52f25a54e]](self._blackboard.shootparams_ent, bretarget);
     } else if(isDefined(var_c5686a51213bf45e)) {
-      var_78f2b58603caf3ae = var_c5686a51213bf45e;
+      convergestartpos = var_c5686a51213bf45e;
     } else {
       if(isDefined(self._blackboard.shootparams_ent)) {
         targetpos = self._blackboard.shootparams_ent.origin;
@@ -288,10 +288,10 @@ function resetconvergence(bnewtarget, var_c5686a51213bf45e, bretarget) {
       targetdir = vectorNormalize(targetdelta);
 
       if(istrue(bretarget)) {
-        var_78f2b58603caf3ae = targetpos;
-        var_78f2b58603caf3ae += (0, 0, randomfloatrange(12, 36));
+        convergestartpos = targetpos;
+        convergestartpos += (0, 0, randomfloatrange(12, 36));
       } else {
-        var_78f2b58603caf3ae = targetpos - targetdir * randomfloatrange(120, 180);
+        convergestartpos = targetpos - targetdir * randomfloatrange(120, 180);
       }
 
       targetleft = vectorcross(targetdir, (0, 0, 1));
@@ -305,26 +305,26 @@ function resetconvergence(bnewtarget, var_c5686a51213bf45e, bretarget) {
         dot = vectordot(targetvel, targetleft);
 
         if(dot < 0) {
-          var_78f2b58603caf3ae += targetleft * var_456d0752ef337beb;
+          convergestartpos += targetleft * var_456d0752ef337beb;
         } else {
-          var_78f2b58603caf3ae -= targetleft * var_456d0752ef337beb;
+          convergestartpos -= targetleft * var_456d0752ef337beb;
         }
       } else if(randomintrange(0, 2)) {
-        var_78f2b58603caf3ae += targetleft * var_456d0752ef337beb;
+        convergestartpos += targetleft * var_456d0752ef337beb;
       } else {
-        var_78f2b58603caf3ae -= targetleft * var_456d0752ef337beb;
+        convergestartpos -= targetleft * var_456d0752ef337beb;
       }
     }
 
-    self.convergence.converge_offsetdir = vectorNormalize(var_78f2b58603caf3ae - self._blackboard.shootparams_pos);
-    self.convergence.converge_missouterradius = distance(var_78f2b58603caf3ae, self._blackboard.shootparams_pos);
+    self.convergence.converge_offsetdir = vectorNormalize(convergestartpos - self._blackboard.shootparams_pos);
+    self.convergence.converge_missouterradius = distance(convergestartpos, self._blackboard.shootparams_pos);
   }
 }
 
 function calcconvergencetarget() {
   assert(isDefined(self._blackboard.shootparams_pos));
 
-  if(self.var_1c2393f94226309c >= 0 && gettime() - self.var_1c2393f94226309c >= 100) {
+  if(self.convergencelockedontime >= 0 && gettime() - self.convergencelockedontime >= 100) {
     if(isDefined(self._blackboard.shootparams_ent) && isPlayer(self._blackboard.shootparams_ent)) {
       if(isDefined(self.fnsetlaserflag)) {
         self[[self.fnsetlaserflag]]("lock");
@@ -341,7 +341,7 @@ function calcconvergencetarget() {
   }
 
   metotarget = vectorNormalize(self._blackboard.shootparams_pos - self.origin);
-  var_9e61483c140a062b = vectortoangles(metotarget);
+  anglesmetotarget = vectortoangles(metotarget);
 
   if(self.convergencecurtime < 0) {
     if(isDefined(self.fnsetlaserflag)) {
@@ -478,13 +478,13 @@ function convergencetargettick() {
 
   if(self.convergencecurtime >= self.convergence.converge_time) {
     if(isDefined(self._blackboard.shootparams_ent)) {
-      if(self.var_1c2393f94226309c < 0) {
+      if(self.convergencelockedontime < 0) {
         if(bcansee) {
-          self.var_1c2393f94226309c = gettime();
+          self.convergencelockedontime = gettime();
         }
-      } else if(gettime() >= self.var_1c2393f94226309c + 200) {
+      } else if(gettime() >= self.convergencelockedontime + 200) {
         if(!bcansee) {
-          self.var_1c2393f94226309c = -1;
+          self.convergencelockedontime = -1;
         }
       }
     }
@@ -514,11 +514,11 @@ function isaiming() {
     return false;
   }
 
-  var_431678b1875f5b5c = 100;
-  var_431678b1875f5b5c *= 2;
+  aimblendtimems = 100;
+  aimblendtimems *= 2;
   time = gettime();
 
-  if(self.asm.aimstarttime + var_431678b1875f5b5c < time) {
+  if(self.asm.aimstarttime + aimblendtimems < time) {
     return true;
   }
 
@@ -533,27 +533,27 @@ function trackloop(asmname) {
   firstframe = 1;
   var_43892db64ebc1e45 = 0;
   var_3661adf95124e37d = 0;
-  var_8260e607ab328509 = 10;
+  deltachangeperframe = 10;
 
   while(true) {
     self waittill("activate_track_loop");
     self.var_b2ac51a99fd788e = 1;
 
     for(;;) {
-      if(!isDefined(self.var_a709fbd9fea148f6) || self asmcurrentstatehasaimset(self.var_a709fbd9fea148f6) && !self function_e8ca4080d02a0bb4()) {
+      if(!isDefined(self.asmtrackasm) || self asmcurrentstatehasaimset(self.asmtrackasm) && !self aiissniper()) {
         self.var_b2ac51a99fd788e = 0;
         break;
       }
 
       incranimaimweight();
-      shouldaim = asm_currentstatehasflag(self.var_a709fbd9fea148f6, "aim");
+      shouldaim = asm_currentstatehasflag(self.asmtrackasm, "aim");
 
       if(shouldaim && self function_53fb16fcb6043bbc()) {
         shouldaim = 0;
       }
 
-      if(!shouldaim && asm_currentstatehasflag(self.var_a709fbd9fea148f6, "notetrackAim")) {
-        shouldaim = asm_eventfired(self.var_a709fbd9fea148f6, "start_aim");
+      if(!shouldaim && asm_currentstatehasflag(self.asmtrackasm, "notetrackAim")) {
+        shouldaim = asm_eventfired(self.asmtrackasm, "start_aim");
       }
 
       if(!shouldaim || !istrue(self._blackboard.shootparams_valid)) {
@@ -573,7 +573,7 @@ function trackloop(asmname) {
 
       var_35c8db9fd47c4521 = 0;
       angledeltas = (0, 0, 0);
-      var_182a55f70ad78f5f = undefined;
+      shootposresult = undefined;
       shootfrompos = undefined;
 
       if(shouldaim) {
@@ -611,7 +611,7 @@ function trackloop(asmname) {
         self.asm.prevpitchdelta = angledeltas[0];
       }
 
-      if(self asmcurrentstatehasaimset(self.var_a709fbd9fea148f6)) {
+      if(self asmcurrentstatehasaimset(self.asmtrackasm)) {
         waitframe();
         continue;
       }
@@ -628,16 +628,16 @@ function trackloop(asmname) {
 
       if(var_3661adf95124e37d > 0) {
         var_3661adf95124e37d -= 1;
-        var_8260e607ab328509 = max(10, var_8260e607ab328509 - 5);
+        deltachangeperframe = max(10, deltachangeperframe - 5);
       } else if(self.relativedir && self.relativedir != var_43892db64ebc1e45) {
         var_3661adf95124e37d = 2;
-        var_8260e607ab328509 = 30;
-      } else if(self function_e8ca4080d02a0bb4()) {
-        var_8260e607ab328509 = 2;
+        deltachangeperframe = 30;
+      } else if(self aiissniper()) {
+        deltachangeperframe = 2;
       } else if(var_35c8db9fd47c4521) {
-        var_8260e607ab328509 = 5;
+        deltachangeperframe = 5;
       } else {
-        var_8260e607ab328509 = 10;
+        deltachangeperframe = 10;
       }
 
       var_cc6e3d91cfe6fd55 = 4;
@@ -645,19 +645,19 @@ function trackloop(asmname) {
       var_e50573772aedea37 = self.movemode != "stop" || !firstframe;
 
       if(var_e50573772aedea37) {
-        var_4142633c790d3ae6 = yawdelta - self.asm.prevyawdelta;
+        yawdeltachange = yawdelta - self.asm.prevyawdelta;
 
-        if(squared(var_4142633c790d3ae6) > var_cc6e3d91cfe6fd55) {
-          var_d209185381bff3db = var_4142633c790d3ae6 * 0.4;
-          yawdelta = self.asm.prevyawdelta + clamp(var_d209185381bff3db, -1 * var_8260e607ab328509, var_8260e607ab328509);
+        if(squared(yawdeltachange) > var_cc6e3d91cfe6fd55) {
+          var_d209185381bff3db = yawdeltachange * 0.4;
+          yawdelta = self.asm.prevyawdelta + clamp(var_d209185381bff3db, -1 * deltachangeperframe, deltachangeperframe);
           yawdelta = clamp(yawdelta, self.rightaimlimit, self.leftaimlimit);
         }
 
-        var_9dee51f9cc272c49 = pitchdelta - self.asm.prevpitchdelta;
+        pitchdeltachange = pitchdelta - self.asm.prevpitchdelta;
 
-        if(squared(var_9dee51f9cc272c49) > var_cc6e3d91cfe6fd55) {
-          var_dbab739e3612d18c = var_9dee51f9cc272c49 * 0.4;
-          pitchdelta = self.asm.prevpitchdelta + clamp(var_dbab739e3612d18c, -1 * var_8260e607ab328509, var_8260e607ab328509);
+        if(squared(pitchdeltachange) > var_cc6e3d91cfe6fd55) {
+          var_dbab739e3612d18c = pitchdeltachange * 0.4;
+          pitchdelta = self.asm.prevpitchdelta + clamp(var_dbab739e3612d18c, -1 * deltachangeperframe, deltachangeperframe);
           pitchdelta = clamp(pitchdelta, self.upaimlimit, self.downaimlimit);
         }
       }
@@ -694,13 +694,13 @@ function trackloop_restoreaim() {
 }
 
 function getcurrentpoi() {
-  if(self.var_f42c6628b5c02603) {
+  if(self.assigncurrentpoi) {
     if(isDefined(self.cqb_point_of_interest)) {
       self.cqb_point_of_interest.lastusedtime = self.poi_starttime;
     }
 
     self.currentpoi = self.cqb_point_of_interest;
-    self.var_f42c6628b5c02603 = 0;
+    self.assigncurrentpoi = 0;
   }
 
   return self.currentpoi;

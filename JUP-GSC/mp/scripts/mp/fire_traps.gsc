@@ -57,7 +57,7 @@ function function_86e572a7a586ff11() {
 }
 
 function function_468ebe30ca565ce4(traptype) {
-  var_1642f84b31faa340 = scripts\mp\poi::function_47d356083884f913();
+  var_1642f84b31faa340 = scripts\mp\poi::poi_issystemactive();
 
   if(var_1642f84b31faa340) {
     scripts\mp\poi::function_44739fe1cf82e29a(traptype);
@@ -77,7 +77,7 @@ function function_468ebe30ca565ce4(traptype) {
 
       if(var_1642f84b31faa340) {
         if(!isDefined(struct.poi)) {
-          struct.poi = scripts\mp\poi::function_6cc445c02b5effac(struct.origin, 1, 1);
+          struct.poi = scripts\mp\poi::poi_findpoioriginisin(struct.origin, 1, 1);
         }
 
         scripts\mp\poi::function_d0e7647e5538eb9d(struct.poi, traptype, struct);

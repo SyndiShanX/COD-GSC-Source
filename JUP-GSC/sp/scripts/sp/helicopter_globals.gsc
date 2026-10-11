@@ -25,10 +25,10 @@ function chopper_turret_off() {
 function chopper_turret_on() {
   self endon("death");
   self endon("mg_off");
-  var_7d1b1b765f5db6e4 = cos(55);
+  cosine55 = cos(55);
 
   while(self.health > 0) {
-    etarget = scripts\sp\helicopter_globals::getenemytarget(16000, var_7d1b1b765f5db6e4, 1, 1);
+    etarget = scripts\sp\helicopter_globals::getenemytarget(16000, cosine55, 1, 1);
 
     if(isDefined(etarget)) {
       thread scripts\sp\helicopter_globals::shootenemytarget_bullets(etarget);
@@ -164,7 +164,7 @@ function flares_think(vehicle) {
   }
 }
 
-function flares_fire_burst(vehicle, fxcount, flarecount, var_8e99a11a6eafd1a) {
+function flares_fire_burst(vehicle, fxcount, flarecount, flaretime) {
   assert(isDefined(level.flare_fx[vehicle.vehicletype]));
   assert(fxcount >= flarecount);
   var_7a203c9cb0bc1382 = 1;
@@ -184,7 +184,7 @@ function flares_fire_burst(vehicle, fxcount, flarecount, var_8e99a11a6eafd1a) {
     }
 
     if(i <= flarecount - 1) {
-      thread flares_redirect_missiles(vehicle, var_8e99a11a6eafd1a);
+      thread flares_redirect_missiles(vehicle, flaretime);
     }
 
     wait 0.1;
@@ -193,13 +193,13 @@ function flares_fire_burst(vehicle, fxcount, flarecount, var_8e99a11a6eafd1a) {
 
 function flares_fire(vehicle) {
   vehicle endon("death");
-  var_8e99a11a6eafd1a = 5;
+  flaretime = 5;
 
   if(isDefined(vehicle.flare_duration)) {
-    var_8e99a11a6eafd1a = vehicle.flare_duration;
+    flaretime = vehicle.flare_duration;
   }
 
-  flares_fire_burst(vehicle, 8, 1, var_8e99a11a6eafd1a);
+  flares_fire_burst(vehicle, 8, 1, flaretime);
 }
 
 function create_missileattractor_on_player_chopper() {
@@ -213,18 +213,18 @@ function create_missileattractor_on_player_chopper() {
   self.missileattractor = missile_createattractorent(self.centeraimpoint, 10000, 10000);
 }
 
-function flares_redirect_missiles(vehicle, var_8e99a11a6eafd1a) {
+function flares_redirect_missiles(vehicle, flaretime) {
   vehicle notify("flares_out");
   vehicle endon("death");
   vehicle endon("flares_out");
 
-  if(!isDefined(var_8e99a11a6eafd1a)) {
-    var_8e99a11a6eafd1a = 5;
+  if(!isDefined(flaretime)) {
+    flaretime = 5;
   }
 
   vec = flares_get_vehicle_velocity(vehicle);
   flare = spawn("script_origin", vehicle gettagorigin("tag_flare"));
-  flare movegravity(vec, var_8e99a11a6eafd1a);
+  flare movegravity(vec, flaretime);
   var_e7f1c1501040bde3 = undefined;
 
   if(isDefined(vehicle.playercontrolled)) {
@@ -241,7 +241,7 @@ function flares_redirect_missiles(vehicle, var_8e99a11a6eafd1a) {
     }
   }
 
-  wait var_8e99a11a6eafd1a;
+  wait flaretime;
 
   if(isDefined(vehicle.playercontrolled)) {
     if(isDefined(var_e7f1c1501040bde3)) {
@@ -284,29 +284,29 @@ function missile_deathwait(emissile, emissile_target) {
   emissile_target.incomming_missiles = array_remove(emissile_target.incomming_missiles, emissile);
 }
 
-function getenemytarget(fradius, var_803fde08d46aef72, var_70183020b339e69, dosighttrace, var_390b6d8b1c31fb95, var_1680cd837efb560a, var_a3658e5ee7a7dda1) {
-  if(!isDefined(var_70183020b339e69)) {
-    var_70183020b339e69 = 0;
+function getenemytarget(fradius, ifovcos, getaitargets, dosighttrace, getvehicletargets, randomizetargetarray, aexcluders) {
+  if(!isDefined(getaitargets)) {
+    getaitargets = 0;
   }
 
   if(!isDefined(dosighttrace)) {
     dosighttrace = 0;
   }
 
-  if(!isDefined(var_390b6d8b1c31fb95)) {
-    var_390b6d8b1c31fb95 = 1;
+  if(!isDefined(getvehicletargets)) {
+    getvehicletargets = 1;
   }
 
-  if(!isDefined(var_1680cd837efb560a)) {
-    var_1680cd837efb560a = 0;
+  if(!isDefined(randomizetargetarray)) {
+    randomizetargetarray = 0;
   }
 
   etargets = [];
-  var_fc25f80bd447ed26 = undefined;
+  eclosestvalidtarget = undefined;
   enemyteam = scripts\engine\utility::get_enemy_team(self.script_team);
   possibletargets = [];
 
-  if(var_390b6d8b1c31fb95) {
+  if(getvehicletargets) {
     foreach(vehicle in vehicle_getarray()) {
       if(!isDefined(vehicle.script_team)) {
         continue;
@@ -318,7 +318,7 @@ function getenemytarget(fradius, var_803fde08d46aef72, var_70183020b339e69, dosi
     }
   }
 
-  if(var_70183020b339e69) {
+  if(getaitargets) {
     enemyai = getaiarray(enemyteam);
 
     for(i = 0; i < enemyai.size; i++) {
@@ -336,11 +336,11 @@ function getenemytarget(fradius, var_803fde08d46aef72, var_70183020b339e69, dosi
     }
   }
 
-  if(isDefined(var_a3658e5ee7a7dda1)) {
-    possibletargets = array_exclude(possibletargets, var_a3658e5ee7a7dda1);
+  if(isDefined(aexcluders)) {
+    possibletargets = array_exclude(possibletargets, aexcluders);
   }
 
-  if(var_1680cd837efb560a) {
+  if(randomizetargetarray) {
     possibletargets = array_randomize(possibletargets);
   }
 
@@ -361,11 +361,11 @@ function getenemytarget(fradius, var_803fde08d46aef72, var_70183020b339e69, dosi
       }
     }
 
-    if(isDefined(var_803fde08d46aef72)) {
+    if(isDefined(ifovcos)) {
       normalvec = vectorNormalize(possibletargets[i].origin - self.origin);
-      var_fc1d9e9e820ad804 = vectordot(forwardvec, normalvec);
+      vecdot = vectordot(forwardvec, normalvec);
 
-      if(var_fc1d9e9e820ad804 <= var_803fde08d46aef72) {
+      if(vecdot <= ifovcos) {
         continue;
       }
     }
@@ -374,12 +374,12 @@ function getenemytarget(fradius, var_803fde08d46aef72, var_70183020b339e69, dosi
       sighttracepassed = 0;
 
       if(isai(possibletargets[i])) {
-        var_b882f8c78ca5813b = 48;
+        tracezoffset = 48;
       } else {
-        var_b882f8c78ca5813b = 150;
+        tracezoffset = 150;
       }
 
-      sighttracepassed = sighttracepassed(self.origin, possibletargets[i].origin + (0, 0, var_b882f8c78ca5813b), 0, self);
+      sighttracepassed = sighttracepassed(self.origin, possibletargets[i].origin + (0, 0, tracezoffset), 0, self);
 
       if(!sighttracepassed) {
         continue;
@@ -390,8 +390,8 @@ function getenemytarget(fradius, var_803fde08d46aef72, var_70183020b339e69, dosi
   }
 
   if(etargets.size == 0) {
-    self notify("gunner_new_target", var_fc25f80bd447ed26);
-    return var_fc25f80bd447ed26;
+    self notify("gunner_new_target", eclosestvalidtarget);
+    return eclosestvalidtarget;
   }
 
   if(etargets.size == 1) {
@@ -414,31 +414,31 @@ function shootenemytarget_bullets(etarget) {
     self endon("gunner_stop_firing");
   }
 
-  var_2dd2f3c5af25b2aa = (0, 0, 0);
+  etargetoffset = (0, 0, 0);
 
   if(isDefined(etarget.script_targetoffset_z)) {
-    var_2dd2f3c5af25b2aa += (0, 0, etarget.script_targetoffset_z);
+    etargetoffset += (0, 0, etarget.script_targetoffset_z);
   } else if(issentient(etarget)) {
-    var_2dd2f3c5af25b2aa = (0, 0, 32);
+    etargetoffset = (0, 0, 32);
   }
 
-  self setturrettargetEnt(etarget, var_2dd2f3c5af25b2aa);
+  self setturrettargetEnt(etarget, etargetoffset);
 
   while(self.health > 0) {
-    var_598a708c805940af = randomintrange(1, 25);
+    randomshots = randomintrange(1, 25);
 
     if(getDvar(@ "hash_c9ab8c9fc46c92cf") == "1") {
-      iprintln("randomShots = " + var_598a708c805940af);
+      iprintln("randomShots = " + randomshots);
     }
 
-    for(i = 0; i < var_598a708c805940af; i++) {
+    for(i = 0; i < randomshots; i++) {
       if(isDefined(self.playercontrolled)) {
         if(isDefined(level.cobraweapon) && level.cobraweapon.size > 0) {
           self setvehweapon(level.gunnerweapon);
         }
       }
 
-      thread shootenemytarget_bullets_debugline(self, "tag_turret", etarget, var_2dd2f3c5af25b2aa, (1, 1, 0), 0.05);
+      thread shootenemytarget_bullets_debugline(self, "tag_turret", etarget, etargetoffset, (1, 1, 0), 0.05);
       self fireweapon("tag_flash");
 
       if(isDefined(self.playercontrolled)) {
@@ -452,7 +452,7 @@ function shootenemytarget_bullets(etarget) {
   }
 }
 
-function shootenemytarget_bullets_debugline(var_55a77f95f61c8b65, var_1f0507f3189c1433, etarget, var_2dd2f3c5af25b2aa, color, timer) {
+function shootenemytarget_bullets_debugline(estartent, estartenttag, etarget, etargetoffset, color, timer) {
   if(getDvar(@ "hash_c9ab8c9fc46c92cf") != "<dev string:x1c>") {
     return;
   }
@@ -463,17 +463,17 @@ function shootenemytarget_bullets_debugline(var_55a77f95f61c8b65, var_1f0507f318
 
   etarget endon("<dev string:x1e>");
   self endon("<dev string:x24>");
-  assert(isDefined(var_1f0507f3189c1433));
+  assert(isDefined(estartenttag));
 
-  if(!isDefined(var_2dd2f3c5af25b2aa)) {
-    var_2dd2f3c5af25b2aa = (0, 0, 0);
+  if(!isDefined(etargetoffset)) {
+    etargetoffset = (0, 0, 0);
   }
 
   if(isDefined(timer)) {
     timer = gettime() + timer * 1000;
 
     while(gettime() < timer) {
-      line(var_55a77f95f61c8b65 gettagorigin(var_1f0507f3189c1433), etarget.origin + var_2dd2f3c5af25b2aa, color);
+      line(estartent gettagorigin(estartenttag), etarget.origin + etargetoffset, color);
       wait 0.05;
     }
 
@@ -481,7 +481,7 @@ function shootenemytarget_bullets_debugline(var_55a77f95f61c8b65, var_1f0507f318
   }
 
   for(;;) {
-    line(var_55a77f95f61c8b65 gettagorigin(var_1f0507f3189c1433), etarget.origin + var_2dd2f3c5af25b2aa, color);
+    line(estartent gettagorigin(estartenttag), etarget.origin + etargetoffset, color);
     wait 0.05;
   }
 }

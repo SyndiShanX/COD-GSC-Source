@@ -56,8 +56,8 @@ function shouldmodesetsquads() {
   }
 
   if(scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
-    if(istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("teamAssim", "isEnabled"))) {
-      maxassimilationteamsize = scripts\engine\utility::function_f3bb4f4911a1beb2("teamAssim", "getMaxAssimilationTeamSize");
+    if(istrue(scripts\engine\utility::callsharedfunc("teamAssim", "isEnabled"))) {
+      maxassimilationteamsize = scripts\engine\utility::callsharedfunc("teamAssim", "getMaxAssimilationTeamSize");
       return (isDefined(maxassimilationteamsize) && maxassimilationteamsize > 1);
     } else {
       return issquadmode();

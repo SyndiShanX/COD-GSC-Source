@@ -154,8 +154,8 @@ function function_e232a099eb1f3824(string, player) {
   bg setshader("black", width, height);
 
   if(isDefined(player.dialoguehud)) {
-    foreach(var_a42acacca10b911d in player.dialoguehud) {
-      foreach(hud in var_a42acacca10b911d) {
+    foreach(dialogueline in player.dialoguehud) {
+      foreach(hud in dialogueline) {
         hud moveovertime(0.3);
         hud.y -= height + 5;
       }
@@ -218,8 +218,8 @@ function function_e232a099eb1f3824(string, player) {
     }
   }
 
-  foreach(i, var_a42acacca10b911d in player.dialoguehud) {
-    if(var_a42acacca10b911d[0] == array[0]) {
+  foreach(i, dialogueline in player.dialoguehud) {
+    if(dialogueline[0] == array[0]) {
       player.dialoguehud = array_remove_index(player.dialoguehud, i, 0);
       break;
     }
@@ -269,8 +269,8 @@ function function_52f5db5262924a8e(player, immediate, maxlines) {
   player.dialoguehud = array_combine(player.dialoguehud);
 
   if(!istrue(immediate)) {
-    foreach(var_a42acacca10b911d in linestoclear) {
-      foreach(hud in var_a42acacca10b911d) {
+    foreach(dialogueline in linestoclear) {
+      foreach(hud in dialogueline) {
         if(hud.alpha > 0) {
           hud fadeovertime(2);
           hud.alpha = 0;
@@ -285,8 +285,8 @@ function function_52f5db5262924a8e(player, immediate, maxlines) {
     player.dialoguehud = undefined;
   }
 
-  foreach(var_a42acacca10b911d in linestoclear) {
-    foreach(hud in var_a42acacca10b911d) {
+  foreach(dialogueline in linestoclear) {
+    foreach(hud in dialogueline) {
       if(isDefined(hud)) {
         hud destroy();
       }

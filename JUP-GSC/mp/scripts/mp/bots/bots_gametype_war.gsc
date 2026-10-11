@@ -13,7 +13,7 @@
 #namespace bots_gametype_war;
 
 function main() {
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() || scripts\cp_mp\utility\game_utility::function_6493ec89ae923684()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode() || scripts\cp_mp\utility\game_utility::function_6493ec89ae923684()) {
     scripts\mp\gametypes\mgl_mp::function_53ae52a625b5c703();
     return;
   } else if(namespace_ef54497d29a56093::function_5a60778277d6ae4b()) {

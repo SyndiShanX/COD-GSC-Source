@@ -1000,20 +1000,20 @@ function do_context_melee(var_13365c1d4c5cd5f5, direction) {
     level.player.melee_arms linkTo(anim_ent);
     level.player lerpfovscalefactor(0, 0.25);
     var_337e38412a58641a = getanimlength(getanim(var_13365c1d4c5cd5f5));
-    var_4120f65e56b5e799 = getanimlength(level.player.melee_arms getanim(var_13365c1d4c5cd5f5));
+    player_anim_length = getanimlength(level.player.melee_arms getanim(var_13365c1d4c5cd5f5));
 
-    if(var_337e38412a58641a > var_4120f65e56b5e799) {
+    if(var_337e38412a58641a > player_anim_length) {
       level.player thread notify_delay("context_melee_longest_anim_ended", var_337e38412a58641a);
       level delaythread(var_337e38412a58641a, &function_63f4a98a99979090, anim_ent);
     } else {
-      level.player thread notify_delay("context_melee_longest_anim_ended", var_4120f65e56b5e799);
-      level delaythread(var_4120f65e56b5e799, &function_63f4a98a99979090, anim_ent);
+      level.player thread notify_delay("context_melee_longest_anim_ended", player_anim_length);
+      level delaythread(player_anim_length, &function_63f4a98a99979090, anim_ent);
     }
 
     thread notify_delay("context_melee_anim_ended_internal", var_337e38412a58641a);
-    level.player thread notify_delay("context_melee_anim_ended", var_4120f65e56b5e799);
+    level.player thread notify_delay("context_melee_anim_ended", player_anim_length);
     var_ac6d99d19393f2d3 = 0.5;
-    level.player delaycall(var_4120f65e56b5e799 - var_ac6d99d19393f2d3, &lerpfovscalefactor, 1, var_ac6d99d19393f2d3);
+    level.player delaycall(player_anim_length - var_ac6d99d19393f2d3, &lerpfovscalefactor, 1, var_ac6d99d19393f2d3);
     self notify("damage", 0, level.player, undefined, undefined, "MOD_MELEE");
     thread enemy_end_death_logic(var_13365c1d4c5cd5f5, parent);
     level.player thread player_end_death_logic(knife, anim_ent, originalorigin, var_c97575f9be02f7f2, direction);
@@ -1242,7 +1242,7 @@ function context_melee_death(guy) {
   guy pushplayer(0);
   guy scripts\anim\shared::dropallaiweapons();
 
-  if(isDefined(self.var_1bab8712529eb3c2) && isDefined(self.fnstealthflashlightdetach) && self.var_1bab8712529eb3c2) {
+  if(isDefined(self.asmflashlight) && isDefined(self.fnstealthflashlightdetach) && self.asmflashlight) {
     self[[self.fnstealthflashlightdetach]]();
   }
 
@@ -1356,7 +1356,7 @@ function check_player_can_stealth_kill_me(animation, direction) {
   }
 
   if(self.in_melee) {
-    if(self.var_8da037cbe81e4f8f) {
+    if(self.bmeleeinprogress) {
       println("<dev string:x1a7>");
       print3d_debug(self.origin, "no melee!, target is already meleeing player!", (1, 0, 0), 1, 0.1, 1, "line5");
       return false;

@@ -169,7 +169,7 @@ function function_4782ceab7eadd844(death_callback) {
 function function_a4db8fd7d61d6687() {}
 
 function function_4c9ef1ed5aef03c7(vehicle) {
-  function_3d8d8ad244283e65(#"hash_9aadbc16f4d5a77b");
+  profilebeginevent(#"hash_9aadbc16f4d5a77b");
   self endon("death");
   self endon("crashing");
   self endon("entitydeleted");
@@ -188,7 +188,7 @@ function function_4c9ef1ed5aef03c7(vehicle) {
 
     if(isPlayer(target_ent) && isalive(target_ent)) {
       if(istrue(function_618e0f50b9b8b310(target_ent))) {
-        function_7f3923ed3d66f8ad();
+        profileendevent();
         return target_ent;
       }
 
@@ -196,14 +196,14 @@ function function_4c9ef1ed5aef03c7(vehicle) {
     }
 
     if(isalive(target_ent) && istrue(function_b5a44a788ec704f(target_ent))) {
-      function_7f3923ed3d66f8ad();
+      profileendevent();
       return target_ent;
     }
 
     waitframe();
   }
 
-  function_7f3923ed3d66f8ad();
+  profileendevent();
   return undefined;
 }
 
@@ -294,10 +294,10 @@ function function_fbb9f19c8d061491(time) {
 }
 
 function function_cd5b61d2bbbf08ad(teams) {
-  function_3d8d8ad244283e65(#"hash_9868c1c7bf64e461");
+  profilebeginevent(#"hash_9868c1c7bf64e461");
 
   if(!isDefined(teams)) {
-    function_7f3923ed3d66f8ad();
+    profileendevent();
     return [];
   }
 
@@ -307,7 +307,7 @@ function function_cd5b61d2bbbf08ad(teams) {
     ai_array = array_combine(ai_array, getaiarrayinradius(self.origin, self.var_e309f77b84ade0d9, s_team));
   }
 
-  function_7f3923ed3d66f8ad();
+  profileendevent();
   return ai_array;
 }
 
@@ -637,7 +637,7 @@ function function_bc77383cc0c4d3b9(start_node, forceheight, speedoverride, isdro
 
     if(!path_end) {
       if(issharedfuncdefined("activity_chopper_util", "CustomPathNextTarget")) {
-        self.next_target = function_f3bb4f4911a1beb2("activity_chopper_util", "CustomPathNextTarget", self, self.next_target.target);
+        self.next_target = callsharedfunc("activity_chopper_util", "CustomPathNextTarget", self, self.next_target.target);
       } else if(isstruct(self.next_target)) {
         self.next_target = getStruct(self.next_target.target, "targetname");
       } else if(isent(self.next_target)) {
@@ -710,9 +710,9 @@ function function_21c899c9bbaf0adc(var_5eaa2d980f1cc4b4, var_4885ccb2d176409, va
   self delete();
 }
 
-function function_c726703023325c0a(var_d6dfead8a1d3957e, var_31759f0a1036d495, var_4aed5403298a4d7f, var_25b8738ccc2f5e33, var_aaa98411bc77fb1f, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_a22b586ea0f535ef, isdrone) {
-  self.circle_ent = var_d6dfead8a1d3957e;
-  internal_circle(var_d6dfead8a1d3957e.origin, var_31759f0a1036d495, var_4aed5403298a4d7f, var_25b8738ccc2f5e33, var_aaa98411bc77fb1f, &function_68fca835889ce704, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_a22b586ea0f535ef, 1, isdrone);
+function function_c726703023325c0a(e_target_ent, var_31759f0a1036d495, var_4aed5403298a4d7f, stop_at_goal, var_aaa98411bc77fb1f, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_a22b586ea0f535ef, isdrone) {
+  self.circle_ent = e_target_ent;
+  internal_circle(e_target_ent.origin, var_31759f0a1036d495, var_4aed5403298a4d7f, stop_at_goal, var_aaa98411bc77fb1f, &function_68fca835889ce704, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_a22b586ea0f535ef, 1, isdrone);
 }
 
 function function_68fca835889ce704(heli) {
@@ -725,11 +725,11 @@ function function_68fca835889ce704(heli) {
   return heli.circle_ent.origin;
 }
 
-function function_9bf8b74a65eaa76(var_ce5c8b45f5bf97e8, var_31759f0a1036d495, var_4aed5403298a4d7f, var_25b8738ccc2f5e33, var_aaa98411bc77fb1f, var_eb17d5c958e3fcda, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_a22b586ea0f535ef, isdrone) {
-  internal_circle(var_ce5c8b45f5bf97e8, var_31759f0a1036d495, var_4aed5403298a4d7f, var_25b8738ccc2f5e33, var_aaa98411bc77fb1f, var_eb17d5c958e3fcda, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_a22b586ea0f535ef, isdrone);
+function function_9bf8b74a65eaa76(var_ce5c8b45f5bf97e8, var_31759f0a1036d495, var_4aed5403298a4d7f, stop_at_goal, var_aaa98411bc77fb1f, var_eb17d5c958e3fcda, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_a22b586ea0f535ef, isdrone) {
+  internal_circle(var_ce5c8b45f5bf97e8, var_31759f0a1036d495, var_4aed5403298a4d7f, stop_at_goal, var_aaa98411bc77fb1f, var_eb17d5c958e3fcda, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_a22b586ea0f535ef, isdrone);
 }
 
-function private internal_circle(var_ce5c8b45f5bf97e8, var_31759f0a1036d495, var_4aed5403298a4d7f, var_25b8738ccc2f5e33, var_aaa98411bc77fb1f, var_eb17d5c958e3fcda, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_3a036abee5c890ba, is_entity, isdrone) {
+function private internal_circle(var_ce5c8b45f5bf97e8, var_31759f0a1036d495, var_4aed5403298a4d7f, stop_at_goal, var_aaa98411bc77fb1f, var_eb17d5c958e3fcda, var_29c1049cdd91eb32, var_64459132907ac449, var_41976210805f0afe, var_3a036abee5c890ba, is_entity, isdrone) {
   self notify("new_orders");
   self endon("death");
   self endon("leaving");
@@ -864,7 +864,7 @@ function private internal_circle(var_ce5c8b45f5bf97e8, var_31759f0a1036d495, var
       var_36f900747ad147e6 = self.var_36f900747ad147e6;
     }
 
-    function_d6eba8149fb949e9(newgoal, var_25b8738ccc2f5e33, self.circleheight, 1, undefined, undefined, var_36f900747ad147e6, undefined, undefined, isdrone);
+    function_d6eba8149fb949e9(newgoal, stop_at_goal, self.circleheight, 1, undefined, undefined, var_36f900747ad147e6, undefined, undefined, isdrone);
 
     while(istrue(self.circle_paused)) {
       self notify("circling_paused");
@@ -1190,7 +1190,7 @@ function private missiles_fire() {
 
 function function_3c82ba8af1c7ea09() {}
 
-function private function_56ebd2471f52c901(start, end, radius, ignore, contentoverride, getsurfacetype, var_b00c60a54d663ca2) {
+function private function_56ebd2471f52c901(start, end, radius, ignore, contentoverride, getsurfacetype, allowscriptables) {
   dist = distance(start, end);
   println("<dev string:x159>" + start + "<dev string:x177>" + end + "<dev string:x181>" + radius + "<dev string:x18e>" + dist);
 
@@ -1208,7 +1208,7 @@ function private function_56ebd2471f52c901(start, end, radius, ignore, contentov
     iprintln("<dev string:x19d>" + level.var_f40761825dce0d99 + "<dev string:x18e>" + dist);
   }
 
-  return trace::sphere_trace(start, end, radius, ignore, contentoverride, getsurfacetype, var_b00c60a54d663ca2);
+  return trace::sphere_trace(start, end, radius, ignore, contentoverride, getsurfacetype, allowscriptables);
 }
 
 function private function_e3a3b10fbf64512d(circleorigin, circleradius, interval) {
@@ -1279,7 +1279,7 @@ function private function_4dc385ff6dceb535(newpos, color) {
   }
 }
 
-function private function_1126bfe77ada7e75(var_f0a3055b7b71a641, var_9110a770bb630563) {
+function private function_1126bfe77ada7e75(var_f0a3055b7b71a641, v_target_offset) {
   self notify("<dev string:x254>");
   self endon("<dev string:x254>");
   self endon("<dev string:x20c>");
@@ -1289,7 +1289,7 @@ function private function_1126bfe77ada7e75(var_f0a3055b7b71a641, var_9110a770bb6
   self endon("<dev string:x239>");
 
   while(true) {
-    level thread draw_circle(var_9110a770bb630563, var_f0a3055b7b71a641, (1, 0, 0), 1, 0, 10);
+    level thread draw_circle(v_target_offset, var_f0a3055b7b71a641, (1, 0, 0), 1, 0, 10);
     wait 0.5;
   }
 }
@@ -1343,7 +1343,7 @@ function function_e3ab01a91dc64df0() {
   }
 
   if(issharedfuncdefined("killstreak", "isKillstreakWeapon")) {
-    if(!function_f3bb4f4911a1beb2("killstreak", "isKillStreakWeapon", self.killedbyweapon)) {
+    if(!callsharedfunc("killstreak", "isKillStreakWeapon", self.killedbyweapon)) {
       heli_crash(100);
     }
   }

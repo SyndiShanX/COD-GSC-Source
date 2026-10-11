@@ -436,7 +436,7 @@ function lb_player_update_stat(var_218835b4b69dbd26, amount, override_value) {
 }
 
 function rank_init() {
-  ranktablebundle = function_766b80da1f882fc3();
+  ranktablebundle = getranktablebundle();
   level.zombie_ranks = [];
   level.zombie_max_rank = ranktablebundle.maxrank;
   assertex(isDefined(level.zombie_max_rank) && level.zombie_max_rank);
@@ -455,7 +455,7 @@ function rank_init() {
       rank.name = [];
       rank.name["short"] = var_1a9b1fc7643483dc.var_f2837d47b0aa16e8;
       rank.name["full"] = var_1a9b1fc7643483dc.var_bc23bd04c0a75755;
-      rank.name["ingame"] = var_1a9b1fc7643483dc.var_7118a72fe332609d;
+      rank.name["ingame"] = var_1a9b1fc7643483dc.ingamerankname;
       rank.splash = var_1a9b1fc7643483dc.splash;
       level.zombie_ranks[i] = rank;
     }

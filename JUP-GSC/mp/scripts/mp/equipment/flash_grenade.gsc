@@ -36,11 +36,11 @@ function onplayerdamaged(data) {
     return 1;
   }
 
-  data.bundle = scripts\mp\equipment::function_2113b6f7cb462692(data.inflictor.weapon_name);
+  data.bundle = scripts\mp\equipment::getequipmentbundlefromweaponname(data.inflictor.weapon_name);
 
   if(!isDefined(data.bundle)) {
     weaponname = getcompleteweaponname(data.objweapon);
-    data.bundle = scripts\mp\equipment::function_2113b6f7cb462692(weaponname);
+    data.bundle = scripts\mp\equipment::getequipmentbundlefromweaponname(weaponname);
   }
 
   weight = 0;

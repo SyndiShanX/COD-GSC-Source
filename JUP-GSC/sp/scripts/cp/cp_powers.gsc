@@ -885,8 +885,8 @@ function power_docooldown(power, cooldowntime, var_1240c819518d164c) {
       var_bdfac2ddbd96a676.cooldownleft -= 0.1;
     }
 
-    var_88a6638c4d7144a2 = min(1, var_bdfac2ddbd96a676.cooldowncounter / cooldowntime);
-    self notify(updatenotify, var_88a6638c4d7144a2);
+    powerremaining = min(1, var_bdfac2ddbd96a676.cooldowncounter / cooldowntime);
+    self notify(updatenotify, powerremaining);
   }
 
   thread power_endcooldown(power, var_1240c819518d164c);
@@ -995,7 +995,7 @@ function waitonpowerbutton(slot) {
   }
 }
 
-function power_modifycooldownrate(var_971e656edbdb9fe7, slot) {
+function power_modifycooldownrate(ratechange, slot) {
   if(!isDefined(slot)) {
     slot = "all";
   }
@@ -1004,7 +1004,7 @@ function power_modifycooldownrate(var_971e656edbdb9fe7, slot) {
 
   foreach(key in array) {
     if(isDefined(self.powers[key].slot) && self.powers[key].slot == slot || slot == "all") {
-      self.powers[key].cooldownratemod = var_971e656edbdb9fe7;
+      self.powers[key].cooldownratemod = ratechange;
     }
   }
 }
@@ -1181,9 +1181,9 @@ function power_watchhuddrainmeter(power) {
   }
 
   while(true) {
-    self waittill(updatenotify, var_88a6638c4d7144a2);
-    var_88a6638c4d7144a2 = max(0, min(1, var_88a6638c4d7144a2));
-    powershud_updatepowerdrainprogress(slot, var_88a6638c4d7144a2);
+    self waittill(updatenotify, powerremaining);
+    powerremaining = max(0, min(1, powerremaining));
+    powershud_updatepowerdrainprogress(slot, powerremaining);
   }
 }
 
@@ -1197,8 +1197,8 @@ function power_watchhudcooldownmeter(power) {
   updatenotify = power + "_cooldown_update";
 
   while(true) {
-    self waittill(updatenotify, var_88a6638c4d7144a2);
-    powershud_updatepowercooldown(slot, var_88a6638c4d7144a2);
+    self waittill(updatenotify, powerremaining);
+    powershud_updatepowercooldown(slot, powerremaining);
   }
 }
 

@@ -183,9 +183,9 @@ function private apc_rus_damagecancriticalhit(data) {
   return false;
 }
 
-function private apc_rus_enterend(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private apc_rus_enterend(vehicle, seatid, oldseatid, player, data) {
   if(istrue(data.success)) {
-    apc_rus_enterendinternal(vehicle, seatid, var_fc7c7a874b43a31a, player, data);
+    apc_rus_enterendinternal(vehicle, seatid, oldseatid, player, data);
   }
 
   if(istrue(vehicle.israllypointvehicle)) {
@@ -203,29 +203,29 @@ function private apc_rus_enterend(vehicle, seatid, var_fc7c7a874b43a31a, player,
   }
 }
 
-function private apc_rus_enterendinternal(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function private apc_rus_enterendinternal(vehicle, seatid, oldseatid, player, data) {
   if(seatid == "driver") {
     player cameradefault();
     thread vehicle_occupancy_disablefirefortime(player, 100);
   }
 
-  vehomn_updateomnvarsonseatenter(vehicle, var_fc7c7a874b43a31a, seatid, player);
-  apc_rus_updateomnvarsonseatenter(vehicle, var_fc7c7a874b43a31a, seatid, player);
+  vehomn_updateomnvarsonseatenter(vehicle, oldseatid, seatid, player);
+  apc_rus_updateomnvarsonseatenter(vehicle, oldseatid, seatid, player);
 
   if(seatid == "driver") {
     vehicle thread apc_rus_monitordriverturretreload(player);
   }
 }
 
-function private apc_rus_exitend(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private apc_rus_exitend(vehicle, seatid, newseatid, player, data) {
   if(istrue(data.success)) {
-    apc_rus_exitendinternal(vehicle, seatid, var_7558f98f3236963d, player, data);
+    apc_rus_exitendinternal(vehicle, seatid, newseatid, player, data);
   }
 }
 
-function private apc_rus_exitendinternal(vehicle, seatid, var_7558f98f3236963d, player, data) {
+function private apc_rus_exitendinternal(vehicle, seatid, newseatid, player, data) {
   if(!istrue(data.playerdisconnect)) {
-    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, var_7558f98f3236963d, player, data);
+    success = vehicle_occupancy_moveplayertoexit(vehicle, seatid, newseatid, player, data);
 
     if(!success) {
       if(issharedfuncdefined("vehicle_occupancy", "handleSuicideFromVehicles")) {
@@ -238,7 +238,7 @@ function private apc_rus_exitendinternal(vehicle, seatid, var_7558f98f3236963d, 
     }
   }
 
-  vehomn_updateomnvarsonseatexit(vehicle, seatid, var_7558f98f3236963d, player);
+  vehomn_updateomnvarsonseatexit(vehicle, seatid, newseatid, player);
 }
 
 function private apc_rus_update(data) {
@@ -341,7 +341,7 @@ function private function_96cda9bdf4fd4440() {
   return leveldataforvehicle.var_528c63bf357fb963;
 }
 
-function private apc_rus_updateomnvarsonseatenter(vehicle, var_fc7c7a874b43a31a, seatid, player) {
+function private apc_rus_updateomnvarsonseatenter(vehicle, oldseatid, seatid, player) {
   if(seatid == "driver") {
     vehicle apc_rus_updatedriverturretammoui();
   }

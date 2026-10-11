@@ -262,7 +262,7 @@ function function_f47d8fbd1e16f89a(arena) {
 
 function function_d58fea226bf50a8d(arena) {
   foreach(player in arena.arenaplayers) {
-    if(player function_9cc921a57ff4deb5()) {
+    if(player isonascender()) {
       return true;
     }
   }

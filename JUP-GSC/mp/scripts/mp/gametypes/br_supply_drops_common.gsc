@@ -484,7 +484,7 @@ function function_3a64ec0c7632f6cc(point, dropstruct) {
   self.var_661d71d55253757d = undefined;
 }
 
-function function_94ff06d2db58e807(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_94ff06d2db58e807(instance, part, state, player, bautouse, usestring) {
   if(!istrue(instance.entity.open)) {
     if(istrue(instance.entity function_6b3bfd072d1faafb(player))) {
       instance.entity.open = 1;

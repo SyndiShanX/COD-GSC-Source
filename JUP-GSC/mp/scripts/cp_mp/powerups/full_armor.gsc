@@ -30,7 +30,7 @@ function function_d5fc5da2613d29dd() {
 
 function function_589539e3a6b1386f() {
   if(utility::issharedfuncdefined("powerup_full_armor", "should_drop")) {
-    return utility::function_f3bb4f4911a1beb2("powerup_full_armor", "should_drop");
+    return utility::callsharedfunc("powerup_full_armor", "should_drop");
   }
 
   foreach(player in level.players) {
@@ -44,7 +44,7 @@ function function_589539e3a6b1386f() {
 
 function function_58a4e1d475eb979b(chance, context) {
   if(utility::issharedfuncdefined("powerup_full_armor", "modify_drop_chance")) {
-    return utility::function_f3bb4f4911a1beb2("powerup_full_armor", "modify_drop_chance", chance, context);
+    return utility::callsharedfunc("powerup_full_armor", "modify_drop_chance", chance, context);
   }
 
   return chance;
@@ -60,6 +60,6 @@ function function_89fc1f6a39554ce9(str_powerup, ent_powerup) {
       player scripts\cp_mp\armor::repair_armor(player.maxarmorhealth);
     }
 
-    player thread namespace_2b1145f62aa835b8::function_a93fbc5ac33fc2f2(str_powerup);
+    player thread namespace_2b1145f62aa835b8::showpoweruphudsharedfunc(str_powerup);
   }
 }

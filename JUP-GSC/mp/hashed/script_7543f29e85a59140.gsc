@@ -53,17 +53,17 @@ function function_c6668bb917e966b2() {
 function function_74ef4a883340b273() {
   bundle = level.perkbundles["specialty_tac_sprint_boots"];
   speedmod = getdvarint(@ "hash_281481ccb17dbf14", 0.1);
-  self.var_7e94104134f2f40b = speedmod;
+  self.perkzombielegsspeedmod = speedmod;
 
   if(utility::issharedfuncdefined("player", "updateMoveSpeed")) {
-    utility::function_f3bb4f4911a1beb2("player", "updateMoveSpeed");
+    utility::callsharedfunc("player", "updateMoveSpeed");
   }
 }
 
 function function_b87b3a7ec17c52ba() {
-  self.var_7e94104134f2f40b = undefined;
+  self.perkzombielegsspeedmod = undefined;
 
   if(utility::issharedfuncdefined("player", "updateMoveSpeed")) {
-    utility::function_f3bb4f4911a1beb2("player", "updateMoveSpeed");
+    utility::callsharedfunc("player", "updateMoveSpeed");
   }
 }

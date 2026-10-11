@@ -155,12 +155,12 @@ function init_player() {
   level.player function_3f41cb77e2785636(0);
   setsaveddvar(@ "hash_d8837d8a14efe9a3", 0);
   level.player.animating = 0;
-  level.player.var_1cceba37d6aef908 = 0;
+  level.player.handsup = 0;
   level.player setentitysoundcontext("gender", "female", 0);
   level.player thread actionslotoverride(4, "none", undefined, &function_4e77ad3c291b5056);
   thread function_6bae8921a69255a3();
   thread scripts\sp\player::disable_player_weapon_info();
-  level.var_c16e3cf6644cfa61 = make_weapon("jup_me_tray_hijack");
+  level.tray = make_weapon("jup_me_tray_hijack");
 }
 
 function objective_flow() {
@@ -501,18 +501,18 @@ function hijackers_main() {
       animnode thread scene::play(undefined, "shot_endidle");
     }
   } else {
-    var_bbad503ff5ae6b6 = getEnt("_scene_global_hijacker_2", "targetname");
+    hj1 = getEnt("_scene_global_hijacker_2", "targetname");
 
-    if(isDefined(var_bbad503ff5ae6b6)) {
-      function_6984185a661c2887(string(var_bbad503ff5ae6b6 getentitynumber()));
-      var_bbad503ff5ae6b6 delete();
+    if(isDefined(hj1)) {
+      function_6984185a661c2887(string(hj1 getentitynumber()));
+      hj1 delete();
     }
 
-    var_bbad403ff5ae483 = getEnt("_scene_global_hijacker_3", "targetname");
+    hj2 = getEnt("_scene_global_hijacker_3", "targetname");
 
-    if(isDefined(var_bbad403ff5ae483)) {
-      function_6984185a661c2887(string(var_bbad403ff5ae483 getentitynumber()));
-      var_bbad403ff5ae483 delete();
+    if(isDefined(hj2)) {
+      function_6984185a661c2887(string(hj2 getentitynumber()));
+      hj2 delete();
     }
 
     var_bbad303ff5ae250 = getEnt("_scene_global_hijacker_4", "targetname");
@@ -546,22 +546,22 @@ function hijackers_main() {
   }
 
   level.var_79f585084e76199a = make_weapon("jup_cp24_pi_glima21_sp_3d");
-  var_bbad503ff5ae6b6 = getEnt("_scene_global_hijacker_2", "targetname");
+  hj1 = getEnt("_scene_global_hijacker_2", "targetname");
 
-  if(isDefined(var_bbad503ff5ae6b6)) {
-    var_eff5da43baf69164 = array_add(var_eff5da43baf69164, var_bbad503ff5ae6b6);
-    level.cleanup_crew = array_add(level.cleanup_crew, var_bbad503ff5ae6b6);
-    var_bbad503ff5ae6b6.var_a2039801f1f31873 = 1;
-    var_bbad503ff5ae6b6 scripts\anim\shared::forceuseweapon(level.var_79f585084e76199a, "primary");
+  if(isDefined(hj1)) {
+    var_eff5da43baf69164 = array_add(var_eff5da43baf69164, hj1);
+    level.cleanup_crew = array_add(level.cleanup_crew, hj1);
+    hj1.var_a2039801f1f31873 = 1;
+    hj1 scripts\anim\shared::forceuseweapon(level.var_79f585084e76199a, "primary");
   }
 
-  var_bbad403ff5ae483 = getEnt("_scene_global_hijacker_3", "targetname");
+  hj2 = getEnt("_scene_global_hijacker_3", "targetname");
 
-  if(isDefined(var_bbad403ff5ae483)) {
-    var_eff5da43baf69164 = array_add(var_eff5da43baf69164, var_bbad403ff5ae483);
-    level.cleanup_crew = array_add(level.cleanup_crew, var_bbad403ff5ae483);
-    var_bbad403ff5ae483.var_a2039801f1f31873 = 1;
-    var_bbad403ff5ae483 scripts\anim\shared::forceuseweapon(level.var_79f585084e76199a, "primary");
+  if(isDefined(hj2)) {
+    var_eff5da43baf69164 = array_add(var_eff5da43baf69164, hj2);
+    level.cleanup_crew = array_add(level.cleanup_crew, hj2);
+    hj2.var_a2039801f1f31873 = 1;
+    hj2 scripts\anim\shared::forceuseweapon(level.var_79f585084e76199a, "primary");
   }
 
   var_bbad303ff5ae250 = getEnt("_scene_global_hijacker_4", "targetname");
@@ -589,12 +589,12 @@ function hijackers_main() {
     am2 thread function_e47ba6fce6829dbd(var_eff5da43baf69164);
   }
 
-  if(isalive(var_bbad503ff5ae6b6)) {
-    var_bbad503ff5ae6b6 thread function_ad2aff0233216ab9(var_fd1609ea9c241b6f);
+  if(isalive(hj1)) {
+    hj1 thread function_ad2aff0233216ab9(var_fd1609ea9c241b6f);
   }
 
-  if(isalive(var_bbad403ff5ae483)) {
-    var_bbad403ff5ae483 thread function_ad2aff0233216ab9(var_fd1609ea9c241b6f);
+  if(isalive(hj2)) {
+    hj2 thread function_ad2aff0233216ab9(var_fd1609ea9c241b6f);
   }
 
   if(isalive(var_bbad303ff5ae250)) {
@@ -604,12 +604,12 @@ function hijackers_main() {
   var_f76c66840f6c5ed8 = getnode("seat_cover_right", "targetname");
   var_8d2ccf1434086627 = getnode("seat_cover_left", "targetname");
 
-  if(isDefined(var_bbad503ff5ae6b6)) {
-    var_bbad503ff5ae6b6.var_3056d8c9bd11f1f2 = 1;
+  if(isDefined(hj1)) {
+    hj1.var_3056d8c9bd11f1f2 = 1;
   }
 
-  if(isDefined(var_bbad403ff5ae483)) {
-    var_bbad403ff5ae483 thread function_4dd6bcfa285fa86e(var_f76c66840f6c5ed8);
+  if(isDefined(hj2)) {
+    hj2 thread function_4dd6bcfa285fa86e(var_f76c66840f6c5ed8);
   }
 
   if(isDefined(var_bbad303ff5ae250)) {
@@ -679,12 +679,12 @@ function function_ab40eac79468cd2f() {
   level.player.var_179ccec341f75747 = 1;
   thread namespace_2f067fefb7259496::function_47a0692123a119e6();
   stewardess = scene::get_entity("civ_to_shoot");
-  var_ce364378f58a6443 = scene::get_entity("hijacker_3");
+  hj = scene::get_entity("hijacker_3");
 
   if(!flag("last_hijacker_entered")) {
-    if(isDefined(var_ce364378f58a6443)) {
-      function_6984185a661c2887(string(var_ce364378f58a6443 getentitynumber()));
-      var_ce364378f58a6443 delete();
+    if(isDefined(hj)) {
+      function_6984185a661c2887(string(hj getentitynumber()));
+      hj delete();
     }
   }
 
@@ -703,12 +703,12 @@ function function_ab40eac79468cd2f() {
 function function_a886303a91d34356() {
   level endon("flag_mexican_standoff_end");
   flag_wait("neighbor_takedown");
-  var_ce364378f58a6443 = scene::get_entity("hijacker_3");
+  hj = scene::get_entity("hijacker_3");
 
   if(!flag("last_hijacker_entered")) {
-    if(isDefined(var_ce364378f58a6443)) {
-      function_6984185a661c2887(string(var_ce364378f58a6443 getentitynumber()));
-      var_ce364378f58a6443 delete();
+    if(isDefined(hj)) {
+      function_6984185a661c2887(string(hj getentitynumber()));
+      hj delete();
     }
   }
 
@@ -786,16 +786,16 @@ function function_f0fdc3f46c920579() {
     var_b425b51f51b7b0c = array_add(var_b425b51f51b7b0c, am2);
   }
 
-  var_bbad503ff5ae6b6 = getEnt("_scene_global_hijacker_2", "targetname");
+  hj1 = getEnt("_scene_global_hijacker_2", "targetname");
 
-  if(isDefined(var_bbad503ff5ae6b6)) {
-    var_b616051f53dd7ec = array_add(var_b616051f53dd7ec, var_bbad503ff5ae6b6);
+  if(isDefined(hj1)) {
+    var_b616051f53dd7ec = array_add(var_b616051f53dd7ec, hj1);
   }
 
-  var_bbad403ff5ae483 = getEnt("_scene_global_hijacker_3", "targetname");
+  hj2 = getEnt("_scene_global_hijacker_3", "targetname");
 
-  if(isDefined(var_bbad403ff5ae483)) {
-    var_b616051f53dd7ec = array_add(var_b616051f53dd7ec, var_bbad403ff5ae483);
+  if(isDefined(hj2)) {
+    var_b616051f53dd7ec = array_add(var_b616051f53dd7ec, hj2);
   }
 
   var_bbad303ff5ae250 = getEnt("_scene_global_hijacker_4", "targetname");
@@ -1109,23 +1109,23 @@ function function_5b97a4b7ffb4df0e() {
 function function_976065acc30cc33(animnode, var_cb47add00ce86d4f) {
   self endon("death");
   ads_check = 0;
-  var_43d480227da1cf91 = 0;
+  hugged = 0;
   flag_wait("makarov_exit_player_drag_end");
   flag_clear("flag_take_player_down");
 
   while(!ads_check) {
-    var_589c0eb9803a3415 = distance(self.origin, level.player.origin);
+    distance_from_player = distance(self.origin, level.player.origin);
     waitframe();
 
-    if(level.player isads() && var_589c0eb9803a3415 < 115) {
+    if(level.player isads() && distance_from_player < 115) {
       ads_check = 1;
       thread namespace_2f067fefb7259496::function_4b5cfeaa7e57162b();
       continue;
     }
 
-    if(var_589c0eb9803a3415 < 34) {
+    if(distance_from_player < 34) {
       ads_check = 1;
-      var_43d480227da1cf91 = 1;
+      hugged = 1;
       continue;
     }
 
@@ -1144,7 +1144,7 @@ function function_976065acc30cc33(animnode, var_cb47add00ce86d4f) {
   animnode thread function_57ac36ea7abb5af4(undefined, self, var_cb47add00ce86d4f);
   level waittill("civ_blocker_seated");
 
-  if(var_43d480227da1cf91) {
+  if(hugged) {
     flag_set("flag_take_player_down");
   }
 

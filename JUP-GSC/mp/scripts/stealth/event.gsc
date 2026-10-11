@@ -27,12 +27,12 @@ function event_init_level() {
   level scripts\stealth\utility::set_stealth_func("broadcast", &event_broadcast_generic);
 }
 
-function event_severity_compare(var_e1b6af8308ee295d, var_e1b6ac8308ee22c4) {
+function event_severity_compare(severitya, severityb) {
   assert(isDefined(level.stealth));
   assert(isDefined(level.stealth.event_priority));
-  assert(isDefined(level.stealth.event_priority[var_e1b6af8308ee295d]));
-  assert(isDefined(level.stealth.event_priority[var_e1b6ac8308ee22c4]));
-  result = level.stealth.event_priority[var_e1b6af8308ee295d] - level.stealth.event_priority[var_e1b6ac8308ee22c4];
+  assert(isDefined(level.stealth.event_priority[severitya]));
+  assert(isDefined(level.stealth.event_priority[severityb]));
+  result = level.stealth.event_priority[severitya] - level.stealth.event_priority[severityb];
   return result;
 }
 
@@ -177,8 +177,8 @@ function entity_is_approved(entity) {
 
 function event_broadcast_axis(eventtype, eventtypeperipheral, enemy, rangeauto, rangesight) {
   ais = getaiunittypearray("bad_guys", "all");
-  var_b2e38cd9c1e056a5 = squared(rangeauto);
-  var_6292d181cc8b8f1b = squared(rangesight);
+  rangeautosq = squared(rangeauto);
+  rangesightsq = squared(rangesight);
   myteam = self.team;
 
   if(!isDefined(myteam)) {
@@ -208,11 +208,11 @@ function event_broadcast_axis(eventtype, eventtypeperipheral, enemy, rangeauto, 
     broadcast = 0;
     distsq = distancesquared(ai.origin, self.origin);
 
-    if(distsq <= var_b2e38cd9c1e056a5) {
+    if(distsq <= rangeautosq) {
       broadcast = self hastacvis(ai);
     }
 
-    if(!broadcast && distsq <= var_6292d181cc8b8f1b) {
+    if(!broadcast && distsq <= rangesightsq) {
       if(ai scripts\stealth\utility::is_visible(self) || ai scripts\stealth\utility::is_visible(enemy)) {
         broadcast = 1;
       }
@@ -250,7 +250,7 @@ function event_broadcast_generic(eventtype, eventposition, eventradius, eventent
     evententity = level.player;
   }
 
-  var_b2e38cd9c1e056a5 = squared(eventradius);
+  rangeautosq = squared(eventradius);
 
   foreach(ai in ais) {
     if(!isalive(ai)) {
@@ -261,18 +261,18 @@ function event_broadcast_generic(eventtype, eventposition, eventradius, eventent
       continue;
     }
 
-    if(distancesquared(ai.origin, eventposition) <= var_b2e38cd9c1e056a5) {
+    if(distancesquared(ai.origin, eventposition) <= rangeautosq) {
       ai aieventlistenerevent(eventtype, evententity, eventposition);
     }
   }
 }
 
-function event_broadcast_axis_by_tacsight(eventtype, enemy, eventposition, eventradius, var_be714c91530ba6ca, tacposition, var_81a2fb4f638bbce8) {
+function event_broadcast_axis_by_tacsight(eventtype, enemy, eventposition, eventradius, bcheckfov, tacposition, var_81a2fb4f638bbce8) {
   ais = getaiunittypearray("bad_guys", "all");
   cradiussq = eventradius * eventradius;
 
-  if(!isDefined(var_be714c91530ba6ca)) {
-    var_be714c91530ba6ca = 1;
+  if(!isDefined(bcheckfov)) {
+    bcheckfov = 1;
   }
 
   var_8dfd9c1cb37614b0 = undefined;
@@ -300,9 +300,9 @@ function event_broadcast_axis_by_tacsight(eventtype, enemy, eventposition, event
       continue;
     }
 
-    var_771837493a52b2f7 = var_be714c91530ba6ca;
+    var_771837493a52b2f7 = bcheckfov;
 
-    if(var_be714c91530ba6ca && isDefined(var_8dfd9c1cb37614b0) && var_dbb6869e366c8aa4 <= var_8dfd9c1cb37614b0) {
+    if(bcheckfov && isDefined(var_8dfd9c1cb37614b0) && var_dbb6869e366c8aa4 <= var_8dfd9c1cb37614b0) {
       var_771837493a52b2f7 = 0;
     }
 
@@ -314,16 +314,16 @@ function event_broadcast_axis_by_tacsight(eventtype, enemy, eventposition, event
   }
 }
 
-function event_broadcast_axis_by_sight(eventtype, enemy, eventposition, eventradius, var_be714c91530ba6ca, tacposition, autorange) {
-  thread event_broadcast_axis_by_sight_thread(eventtype, enemy, eventposition, eventradius, var_be714c91530ba6ca, tacposition, autorange);
+function event_broadcast_axis_by_sight(eventtype, enemy, eventposition, eventradius, bcheckfov, tacposition, autorange) {
+  thread event_broadcast_axis_by_sight_thread(eventtype, enemy, eventposition, eventradius, bcheckfov, tacposition, autorange);
 }
 
-function event_broadcast_axis_by_sight_thread(eventtype, enemy, eventposition, eventradius, var_be714c91530ba6ca, tacposition, autorange) {
+function event_broadcast_axis_by_sight_thread(eventtype, enemy, eventposition, eventradius, bcheckfov, tacposition, autorange) {
   ais = getaiunittypearray("bad_guys", "all");
   cradiussq = eventradius * eventradius;
 
-  if(!isDefined(var_be714c91530ba6ca)) {
-    var_be714c91530ba6ca = 1;
+  if(!isDefined(bcheckfov)) {
+    bcheckfov = 1;
   }
 
   if(!isDefined(tacposition)) {
@@ -353,8 +353,8 @@ function event_broadcast_axis_by_sight_thread(eventtype, enemy, eventposition, e
       continue;
     }
 
-    if(!ai hastacvis(tacposition, var_be714c91530ba6ca)) {
-      if(var_be714c91530ba6ca && !ai aipointinfov(eventposition)) {
+    if(!ai hastacvis(tacposition, bcheckfov)) {
+      if(bcheckfov && !ai aipointinfov(eventposition)) {
         continue;
       }
 

@@ -127,10 +127,10 @@ function function_c15ef1bb5dd116a0(teamname) {
   scripts\common\create_script_utility::cleanup_cs_file_objects("mp_dmz_hydro_bads_create_script");
 }
 
-function function_5bc57c3a339eba95(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_5bc57c3a339eba95(instance, part, state, player, bautouse, usestring) {
   if((part == "dmz_radioactive_object_1" || part == "dmz_radioactive_object_2" || part == "dmz_radioactive_object_3") && state == "usable") {
     function_cf54f4de9e8d2608(instance, player);
-    function_bb50fb4b09b7f165(instance, part, state, player, var_a5b2c541413aa895, usestring);
+    function_bb50fb4b09b7f165(instance, part, state, player, bautouse, usestring);
     instance setscriptablepartstate(part, "unusable");
   }
 }
@@ -175,7 +175,7 @@ function function_3710f7eb08295551() {
   return self.itotalobjects == self.var_1ae1be9ca33b1a87;
 }
 
-function function_bb50fb4b09b7f165(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_bb50fb4b09b7f165(instance, part, state, player, bautouse, usestring) {
   function_60291dfce2923372();
 }
 
@@ -196,8 +196,8 @@ function function_67e00b8d4251c284(inorigin, var_5b9c864b21207ff6, teamname, tas
   cache = undefined;
   inorigin += anglestoright(var_5b9c864b21207ff6) * -10;
   var_5b9c864b21207ff6 = (var_5b9c864b21207ff6[0], var_5b9c864b21207ff6[1] + 180, var_5b9c864b21207ff6[2]);
-  var_91839babd32261f4 = function_b9beb2bb0e6b4941(location_string);
-  cache = spawnscriptable(var_91839babd32261f4, inorigin, var_5b9c864b21207ff6);
+  scriptable_name = function_b9beb2bb0e6b4941(location_string);
+  cache = spawnscriptable(scriptable_name, inorigin, var_5b9c864b21207ff6);
   scripts\cp_mp\equipment\geiger_counter::function_f0d61e14dfde9ccd(cache);
   playerlist = getteamdata(teamname, "players");
   assertex(isDefined(playerlist) || playerlist.size > 0, "<dev string:x6e>");

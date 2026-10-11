@@ -20,16 +20,16 @@ function function_9030ff462f3daa1a() {
   setdvarifuninitialized(dvarclientnum, 0);
   dvarenable = @ "hash_8ab43a47c4399064";
   setdvarifuninitialized(dvarenable, 0);
-  var_37728f5d1856d25e = @ "hash_d4c10f4069a2675f";
-  setdvarifuninitialized(var_37728f5d1856d25e, 1.2);
-  var_b8424bec9ba28117 = @ "hash_20eee357db89fae8";
-  setdvarifuninitialized(var_b8424bec9ba28117, 5);
-  var_f2d0ba32b887ffdf = @ "hash_39ab5edeb8210902";
-  setdvarifuninitialized(var_f2d0ba32b887ffdf, 5);
+  dvarfstop = @ "hash_d4c10f4069a2675f";
+  setdvarifuninitialized(dvarfstop, 1.2);
+  dvarfocusspeed = @ "hash_20eee357db89fae8";
+  setdvarifuninitialized(dvarfocusspeed, 5);
+  dvaraperturespeed = @ "hash_39ab5edeb8210902";
+  setdvarifuninitialized(dvaraperturespeed, 5);
   values = [];
-  values[var_37728f5d1856d25e] = -1;
-  values[var_b8424bec9ba28117] = -1;
-  values[var_f2d0ba32b887ffdf] = -1;
+  values[dvarfstop] = -1;
+  values[dvarfocusspeed] = -1;
+  values[dvaraperturespeed] = -1;
   clientnum = -1;
   var_18d25e8c9f508a2b = 0;
 
@@ -70,14 +70,14 @@ function function_9030ff462f3daa1a() {
     }
 
     if(dvarchanged || !var_18d25e8c9f508a2b) {
-      fstop = getdvarfloat(var_37728f5d1856d25e);
-      focusspeed = getdvarfloat(var_b8424bec9ba28117);
-      aperturespeed = getdvarfloat(var_f2d0ba32b887ffdf);
-      values[var_37728f5d1856d25e] = fstop;
-      values[var_b8424bec9ba28117] = focusspeed;
-      values[var_f2d0ba32b887ffdf] = aperturespeed;
+      fstop = getdvarfloat(dvarfstop);
+      focusspeed = getdvarfloat(dvarfocusspeed);
+      aperturespeed = getdvarfloat(dvaraperturespeed);
+      values[dvarfstop] = fstop;
+      values[dvarfocusspeed] = focusspeed;
+      values[dvaraperturespeed] = aperturespeed;
       var_18d25e8c9f508a2b = 1;
-      level thread function_c1f42ed707642a04(fstop, focusspeed, aperturespeed);
+      level thread dyndofexp_internal(fstop, focusspeed, aperturespeed);
     }
   }
 }
@@ -143,7 +143,7 @@ function function_c7a153413fa65e8d(fstop, focusspeed, aperturespeed) {
   level.dyndof.aperturespeed = aperturespeed;
 }
 
-function function_c1f42ed707642a04(fstop, focusspeed, aperturespeed) {
+function dyndofexp_internal(fstop, focusspeed, aperturespeed) {
   if(isDefined(level.dyndof)) {
     function_c7a153413fa65e8d(fstop, focusspeed, aperturespeed);
     return;
@@ -174,14 +174,14 @@ function function_c1f42ed707642a04(fstop, focusspeed, aperturespeed) {
 
   level.dyndof = function_4a2ce820849a53f7();
   function_c7a153413fa65e8d(fstop, focusspeed, aperturespeed);
-  level.dyndof.var_a94780cfbefad9ce = -1;
-  level.dyndof.var_a28a7e3e13fa8c7f = 3.5;
+  level.dyndof.nextcosfov = -1;
+  level.dyndof.fstopnear = 3.5;
   level.dyndof.var_e44cd1048efcca59 = 30;
   level.dyndof.var_e429e3048ed6aa37 = 72;
-  level.dyndof.var_21146c5c5d706cbe = focusspeed * 5;
-  level.dyndof.var_cfbd6dc46c776a0a = 30;
-  level.dyndof.var_cfe077c46c9dc7c0 = 72;
-  level.dyndof.var_d453b380dfd6161d = 0;
+  level.dyndof.focusspeedmin = focusspeed * 5;
+  level.dyndof.focusspeeddistmin = 30;
+  level.dyndof.focusspeeddistmax = 72;
+  level.dyndof.playerbasefovdvar = 0;
   level.dyndof.issp = utility::issp();
 
   if(level.dyndof.issp) {
@@ -194,13 +194,13 @@ function function_c1f42ed707642a04(fstop, focusspeed, aperturespeed) {
   level.dyndof.player enablephysicaldepthoffieldscripting();
   function_8ec129ee5a53f0bc();
   function_50c7801fc0abbd3a();
-  level thread function_91d67d689e8a5ac5();
+  level thread dyndofexp_thread();
 }
 
 function function_4a2ce820849a53f7() {
   struct = spawnStruct();
   struct.maxfocusdist = 50000;
-  struct.contents = function_121b9c1e3a5664af();
+  struct.contents = dyndofexp_contents();
   struct.var_e00802ad31e19ee4 = function_e7a3f680f309a5a();
   struct.traceangle = 3;
   struct.prevangles = (0, 0, 0);
@@ -208,7 +208,7 @@ function function_4a2ce820849a53f7() {
   return struct;
 }
 
-function function_121b9c1e3a5664af() {
+function dyndofexp_contents() {
   contents = ["physicscontents_ainoshoot", "physicscontents_clipshot", "physicscontents_item", "physicscontents_solid", "physicscontents_vehicle", "physicscontents_water", "physicscontents_characterproxy"];
   return physics_createcontents(contents);
 }
@@ -218,17 +218,17 @@ function function_e7a3f680f309a5a() {
   return physics_createcontents(contents);
 }
 
-function function_91d67d689e8a5ac5() {
+function dyndofexp_thread() {
   level endon("stop_dyndof");
   var_eb2609c9a7a036f = gettime() + 500;
-  currentplayerfov = level.dyndof.var_d453b380dfd6161d;
+  currentplayerfov = level.dyndof.playerbasefovdvar;
   setdvarifuninitialized(@ "hash_9f25a07838d65086", 1);
-  var_d6656715a63c5ac = 0;
+  dyndofexpdisabled = 0;
 
   while(true) {
     if(flag("dyndofexp_disable") || !getdvarint(@ "hash_9f25a07838d65086")) {
-      if(!var_d6656715a63c5ac) {
-        var_d6656715a63c5ac = 1;
+      if(!dyndofexpdisabled) {
+        dyndofexpdisabled = 1;
         level.dyndof.player disablephysicaldepthoffieldscripting();
       }
 
@@ -236,9 +236,9 @@ function function_91d67d689e8a5ac5() {
       continue;
     }
 
-    if(var_d6656715a63c5ac) {
+    if(dyndofexpdisabled) {
       level.dyndof.player enablephysicaldepthoffieldscripting();
-      var_d6656715a63c5ac = 0;
+      dyndofexpdisabled = 0;
     }
 
     if(!isDefined(level.dyndof.player)) {
@@ -249,7 +249,7 @@ function function_91d67d689e8a5ac5() {
     if(gettime() > var_eb2609c9a7a036f) {
       var_eb2609c9a7a036f = gettime() + 500;
       function_8ec129ee5a53f0bc();
-      currentplayerfov = level.dyndof.var_d453b380dfd6161d;
+      currentplayerfov = level.dyndof.playerbasefovdvar;
     }
 
     object = function_ddd1e6b7bd85c6d1();
@@ -260,14 +260,14 @@ function function_91d67d689e8a5ac5() {
 
     if(object.dofdist < level.dyndof.var_e429e3048ed6aa37) {
       frac = math::normalize_value(level.dyndof.var_e44cd1048efcca59, level.dyndof.var_e429e3048ed6aa37, object.dofdist);
-      fstop = math::lerp(level.dyndof.var_a28a7e3e13fa8c7f, level.dyndof.fstop, frac);
+      fstop = math::lerp(level.dyndof.fstopnear, level.dyndof.fstop, frac);
     } else {
       fstop = level.dyndof.fstop;
     }
 
-    if(object.dofdist < level.dyndof.var_cfe077c46c9dc7c0) {
-      frac = math::normalize_value(level.dyndof.var_cfbd6dc46c776a0a, level.dyndof.var_cfe077c46c9dc7c0, object.dofdist);
-      focusspeed = math::lerp(level.dyndof.var_21146c5c5d706cbe, level.dyndof.focusspeed, frac);
+    if(object.dofdist < level.dyndof.focusspeeddistmax) {
+      frac = math::normalize_value(level.dyndof.focusspeeddistmin, level.dyndof.focusspeeddistmax, object.dofdist);
+      focusspeed = math::lerp(level.dyndof.focusspeedmin, level.dyndof.focusspeed, frac);
     } else {
       focusspeed = level.dyndof.focusspeed;
     }
@@ -279,7 +279,7 @@ function function_91d67d689e8a5ac5() {
 
 function function_ddd1e6b7bd85c6d1() {
   self endon("death");
-  playereyeorigin = function_7641c664cf37b604();
+  playereyeorigin = dyndofexp_getplayerorigin();
   playerviewangles = level.dyndof.player getplayerangles();
   level.dyndof.prevorigin = playereyeorigin;
   level.dyndof.prevangles = playerviewangles;
@@ -289,20 +289,20 @@ function function_ddd1e6b7bd85c6d1() {
     var_cab8f864ac7d1b1.var_ca6d02ada0248c95 = 0;
   }
 
-  var_a3d92abc0bca4a49 = function_ac3ec9d38fd2434(playereyeorigin, playerviewangles);
+  bestentstruct = function_ac3ec9d38fd2434(playereyeorigin, playerviewangles);
 
   if(getdvarint(@ "hash_ad68aff4b57edc12") == 4) {
-    var_a3d92abc0bca4a49.dofscore = 0;
+    bestentstruct.dofscore = 0;
   }
 
-  if(isDefined(var_a3d92abc0bca4a49) && var_a3d92abc0bca4a49.dofscore > var_cab8f864ac7d1b1.var_ca6d02ada0248c95) {
+  if(isDefined(bestentstruct) && bestentstruct.dofscore > var_cab8f864ac7d1b1.var_ca6d02ada0248c95) {
     if(getdvarint(@ "hash_ad68aff4b57edc12")) {
       printtoscreen2d(10, 800 + 30, "<dev string:x1c>", (1, 1, 1), 1.5);
 
-      sphere(var_a3d92abc0bca4a49.origin, 4, (1, 1, 1));
+      sphere(bestentstruct.origin, 4, (1, 1, 1));
     }
 
-    return var_a3d92abc0bca4a49;
+    return bestentstruct;
   }
 
   if(getdvarint(@ "hash_ad68aff4b57edc12")) {
@@ -315,16 +315,16 @@ function function_ddd1e6b7bd85c6d1() {
 function function_8ec129ee5a53f0bc() {
   basefovdvar = getdvarint(@ "hash_b38fcf293d1e91a8");
 
-  if(getdvarint(@ "hash_b38fcf293d1e91a8") == level.dyndof.var_d453b380dfd6161d) {
+  if(getdvarint(@ "hash_b38fcf293d1e91a8") == level.dyndof.playerbasefovdvar) {
     return;
   }
 
   x_segments = 8;
   y_segments = 4;
   angle = basefovdvar * 0.6 / x_segments;
-  level.dyndof.var_d453b380dfd6161d = basefovdvar;
-  var_801c42d2e14b7c0c = angle * x_segments * -1;
-  var_6b84c5404b57e175 = angle * y_segments * -1;
+  level.dyndof.playerbasefovdvar = basefovdvar;
+  startxangle = angle * x_segments * -1;
+  startyangle = angle * y_segments * -1;
   var_c57c437404405a37 = x_segments * 2;
   var_4c1dec663db42f82 = y_segments * 2;
   anglesarray[0][0] = 0;
@@ -334,7 +334,7 @@ function function_8ec129ee5a53f0bc() {
   for(x = 0; x < var_c57c437404405a37 + 1; x++) {
     for(y = 0; y < var_4c1dec663db42f82 + 1; y++) {
       struct = spawnStruct();
-      struct.addangles = (y * angle + var_6b84c5404b57e175, x * angle + var_801c42d2e14b7c0c, 0);
+      struct.addangles = (y * angle + startyangle, x * angle + startxangle, 0);
       anglesarray[x][y] = struct;
       centerscore = x_segments - abs(x_segments - x) + y_segments - abs(y_segments - y);
       struct.centerscale = exp(centerscore * 1);
@@ -412,12 +412,12 @@ function function_b23eb6ebe631ccdc(playereyeorigin, playerviewangles) {
 
   keys = getarraykeys(groupscores);
   highestgroup = groupscores[keys[0]];
-  var_2f61b87587e59816 = keys[0];
+  highestgroupindex = keys[0];
 
   foreach(groupavg in groupscores) {
     if(highestgroup < groupavg) {
       highestgroup = groupavg;
-      var_2f61b87587e59816 = index;
+      highestgroupindex = index;
     }
   }
 
@@ -426,7 +426,7 @@ function function_b23eb6ebe631ccdc(playereyeorigin, playerviewangles) {
 
   foreach(array in level.dyndof.tracestructs) {
     foreach(struct in array) {
-      if(struct.groupnum != var_2f61b87587e59816) {
+      if(struct.groupnum != highestgroupindex) {
         continue;
       }
 
@@ -446,13 +446,13 @@ function function_b23eb6ebe631ccdc(playereyeorigin, playerviewangles) {
   }
 
   beststruct.var_ca6d02ada0248c95 = groupscores[beststruct.groupnum];
-  level thread function_abfbc195c3aac94c(playereyeorigin, var_2f61b87587e59816);
+  level thread dyndofexp_debug(playereyeorigin, highestgroupindex);
   return beststruct;
 }
 
 function function_50c7801fc0abbd3a() {
-  if(gettime() > level.dyndof.var_a94780cfbefad9ce) {
-    level.dyndof.var_a94780cfbefad9ce = gettime() + 1000;
+  if(gettime() > level.dyndof.nextcosfov) {
+    level.dyndof.nextcosfov = gettime() + 1000;
     level.dyndof.cosfov = cos(getdvarfloat(@ "hash_b38fcf293d1e91a8"));
     level.dyndof.var_4cc8f2b112cadde0 = level.dyndof.cosfov * 50;
   }
@@ -486,18 +486,18 @@ function function_ac3ec9d38fd2434(playereyepos, playerangles) {
       continue;
     }
 
-    if(isDefined(ent.var_5cb5bea2f8851b21)) {
+    if(isDefined(ent.dofischaracter)) {
       continue;
     }
 
     substr = getsubstr(ent.model, 0, 5);
 
     if(substr == "body_") {
-      ent.var_5cb5bea2f8851b21 = 1;
+      ent.dofischaracter = 1;
       continue;
     }
 
-    ent.var_5cb5bea2f8851b21 = 0;
+    ent.dofischaracter = 0;
   }
 
   function_50c7801fc0abbd3a();
@@ -506,7 +506,7 @@ function function_ac3ec9d38fd2434(playereyepos, playerangles) {
   foreach(ent in ents) {
     ischaracter = 0;
 
-    if(isai(ent) || isDefined(ent.var_5cb5bea2f8851b21) || isPlayer(ent)) {
+    if(isai(ent) || isDefined(ent.dofischaracter) || isPlayer(ent)) {
       ischaracter = 1;
     }
 
@@ -589,7 +589,7 @@ function function_ac3ec9d38fd2434(playereyepos, playerangles) {
 
   if(var_6e2b9d3e75679206) {
     foreach(ent in ents) {
-      if(!isPlayer(ent) && !isai(ent) && !isDefined(ent.var_5cb5bea2f8851b21)) {
+      if(!isPlayer(ent) && !isai(ent) && !isDefined(ent.dofischaracter)) {
         continue;
       }
 
@@ -613,7 +613,7 @@ function function_ac3ec9d38fd2434(playereyepos, playerangles) {
       continue;
     }
 
-    if(var_6e2b9d3e75679206 && (isai(ent) || isDefined(ent.var_5cb5bea2f8851b21)) && ent.dofscore > 0 && ent.dofdot > 0.99) {
+    if(var_6e2b9d3e75679206 && (isai(ent) || isDefined(ent.dofischaracter)) && ent.dofscore > 0 && ent.dofdot > 0.99) {
       foreach(directent in directents) {
         if(directent == ent) {
           continue;
@@ -699,7 +699,7 @@ function function_77d9a6389a3305ee(playereyeorigin, playerangles, addangles, pos
   return trace;
 }
 
-function function_7641c664cf37b604() {
+function dyndofexp_getplayerorigin() {
   if(level.dyndof.player islinked()) {
     linkedent = level.dyndof.player getlinkedparent();
 
@@ -721,7 +721,7 @@ function function_7641c664cf37b604() {
   return level.dyndof.player getvieworigin();
 }
 
-function function_abfbc195c3aac94c(playereyeorigin, highestgroup) {
+function dyndofexp_debug(playereyeorigin, highestgroup) {
   level notify("stop_dyndof_debug");
   level endon("stop_dyndof");
   level endon("stop_dyndof_debug");
@@ -786,13 +786,13 @@ function function_7d02f8d29555766e(start, end, actorpos) {
   radius = 8;
   actorpos2 = actorpos + (0, 0, 70);
   cline = actorpos2 - actorpos;
-  var_a4753fbd89ce084f = start - actorpos;
-  var_e3516dba67d45efb = vectorcross(var_a4753fbd89ce084f, cline);
+  ctoraystart = start - actorpos;
+  cross_cline = vectorcross(ctoraystart, cline);
   var_424283857447cee9 = vectorcross(raydir, cline);
-  var_9b2f6dd030cc1244 = vectordot(cline, cline);
+  dot_cline = vectordot(cline, cline);
   a = vectordot(var_424283857447cee9, var_424283857447cee9);
-  b = 2 * vectordot(var_424283857447cee9, var_e3516dba67d45efb);
-  c = vectordot(var_e3516dba67d45efb, var_e3516dba67d45efb) - radius * radius * var_9b2f6dd030cc1244;
+  b = 2 * vectordot(var_424283857447cee9, cross_cline);
+  c = vectordot(cross_cline, cross_cline) - radius * radius * dot_cline;
   dist = b * b - 4 * a * c;
 
   if(dist < 0) {

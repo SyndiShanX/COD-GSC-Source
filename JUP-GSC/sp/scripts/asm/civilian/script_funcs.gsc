@@ -13,10 +13,10 @@
 
 function civilian_init(asmname, statename, params) {
   if(asmname == "civilian") {
-    var_41f38bcfbf1fa589 = "Using an aitype with the old 'civilian.asm'. ";
-    var_41f388cfbf1f9ef0 = "All civilians should be using 'civilian_react' now. ";
-    var_41f389cfbf1fa123 = "AIType: '" + self.classname + "' Location: " + self.origin;
-    assertmsg(var_41f38bcfbf1fa589 + var_41f388cfbf1f9ef0 + var_41f389cfbf1fa123);
+    msgpt1 = "Using an aitype with the old 'civilian.asm'. ";
+    msgpt2 = "All civilians should be using 'civilian_react' now. ";
+    msgpt3 = "AIType: '" + self.classname + "' Location: " + self.origin;
+    assertmsg(msgpt1 + msgpt2 + msgpt3);
   }
 
   if(!isDefined(self.asm.customdata)) {
@@ -183,7 +183,7 @@ function function_f2343b622bbbac5c() {
   }
 }
 
-function function_d87b251f84ebc50d(asmname, statename, params) {
+function civilian_stumblechooseanim(asmname, statename, params) {
   archetype = self getbasearchetype();
   speed = length(self.velocity);
   alias = "stumble_jog";
@@ -303,12 +303,12 @@ function function_acfe95f0c8655298(note, params) {
 
     turnxanim = params;
     cornertimes = getnotetracktimes(turnxanim, "corner");
-    var_1cf3cc2bfbd90835 = getnotetracktimes(turnxanim, "code_move");
+    codemovetimes = getnotetracktimes(turnxanim, "code_move");
     assert(cornertimes.size > 0);
     endtime = 1;
 
-    if(var_1cf3cc2bfbd90835.size > 0) {
-      endtime = var_1cf3cc2bfbd90835[0];
+    if(codemovetimes.size > 0) {
+      endtime = codemovetimes[0];
     }
 
     duration = (endtime - cornertimes[0]) * getanimlength(turnxanim) * 1000;
@@ -448,8 +448,8 @@ function civilianfocusupdatecurrentfocus(targetvalue) {
   diff = targetvalue - currentvalue;
 
   if(abs(diff) > 0.01) {
-    var_fe828272ec411efc = sign(targetvalue - currentvalue);
-    newvalue = self._blackboard.civilianfocuscurvalue + timedelt / 1000 * var_128b23694d81a9b7 * var_fe828272ec411efc;
+    signtotarget = sign(targetvalue - currentvalue);
+    newvalue = self._blackboard.civilianfocuscurvalue + timedelt / 1000 * var_128b23694d81a9b7 * signtotarget;
     newvalue = clamp(newvalue, -1, 1);
     self._blackboard.civilianfocuscurvalue = newvalue;
     return false;
@@ -764,10 +764,10 @@ function function_c4d5a733f656507f(asmname, statename, params) {
 }
 
 function function_7490810d9786cc51(asmname, statename, tostatename, params) {
-  return isDefined(self.var_a57082fdf62bc898);
+  return isDefined(self.customarrivalstate);
 }
 
-function function_28d7e9d4c9615969(asmname, statename, tostatename, params) {
+function civplayturnanim(asmname, statename, tostatename, params) {
   self endon(statename + "_finished");
   turnanim = asm_getanim(asmname, statename);
   turnxanim = asm_getxanim(statename, turnanim);
@@ -783,8 +783,8 @@ function function_28d7e9d4c9615969(asmname, statename, tostatename, params) {
   if(isai(self)) {
     self aisetanim(statename, turnanim, rate);
   } else {
-    var_34ee65b16925d791 = asm_lookupanimfromalias("knobs", "body");
-    bodyxanim = asm_getxanim("knobs", var_34ee65b16925d791);
+    bodyanimid = asm_lookupanimfromalias("knobs", "body");
+    bodyxanim = asm_getxanim("knobs", bodyanimid);
     self setflaggedanimknoballrestart(statename, turnxanim, bodyxanim, 1, 0.2, 1);
   }
 
@@ -819,8 +819,8 @@ function function_44224a1150c6d2c9(turnxanim, statename) {
       lerpfraction = 1 / remainingframes;
       yawtoenemy = angleclamp180(vectortoyaw(lookpoint - self.origin) - self.angles[1]);
       currentanimtime = self aigetanimtime(turnxanim);
-      var_993a8f9635e274cf = getangledelta(turnxanim, currentanimtime, 1);
-      remainingyaw = angleclamp180(yawtoenemy - var_993a8f9635e274cf);
+      animyawdelta = getangledelta(turnxanim, currentanimtime, 1);
+      remainingyaw = angleclamp180(yawtoenemy - animyawdelta);
       self orientmode("face angle", angleclamp(self.angles[1] + remainingyaw * lerpfraction));
       remainingframes--;
       wait 0.05;
@@ -833,8 +833,8 @@ function function_44224a1150c6d2c9(turnxanim, statename) {
     lerpfraction = 1 / remainingframes;
     yawtoenemy = angleclamp180(vectortoyaw(lookpoint - self.origin) - self.angles[1]);
     currentanimtime = self getanimtime(turnxanim);
-    var_993a8f9635e274cf = getangledelta(turnxanim, currentanimtime, 1);
-    remainingyaw = angleclamp180(yawtoenemy - var_993a8f9635e274cf);
+    animyawdelta = getangledelta(turnxanim, currentanimtime, 1);
+    remainingyaw = angleclamp180(yawtoenemy - animyawdelta);
     yaw = angleclamp(self.angles[1] + remainingyaw * lerpfraction);
     self.angles = (0, yaw, 0);
     remainingframes--;
@@ -842,7 +842,7 @@ function function_44224a1150c6d2c9(turnxanim, statename) {
   }
 }
 
-function function_8582e56563261e62(asmname, statename, params) {
+function civchooseturnanim(asmname, statename, params) {
   target = function_75996a8dac6970f2(1024);
 
   if(isDefined(params) &isstring(params) && params == "return" && isDefined(self.interaction_origin)) {

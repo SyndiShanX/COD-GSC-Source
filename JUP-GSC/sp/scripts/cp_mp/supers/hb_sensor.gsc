@@ -99,7 +99,7 @@ function function_6e9e734982349368(objweapon) {
   wait 0.533;
   scripts\cp_mp\challenges::function_d997435895422ecc("super_hb_sensor", function_e2ff8f4b4e94f723(#"hash_83a2d67994d7e295", #"use"));
 
-  if(!scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(!scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     function_fc7e5d7d7f99703a();
   }
 }

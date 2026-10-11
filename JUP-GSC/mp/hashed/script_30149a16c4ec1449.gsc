@@ -309,7 +309,7 @@ function function_db159b649ea79356(var_31c5b182175253f5) {
 function function_72661518bf142546() {
   player = self;
   groundposition = getgroundposition(player.origin, 1);
-  waterheight = function_b81e710fd636efab(groundposition);
+  waterheight = getwaterheightatlocation(groundposition);
 
   if(isDefined(waterheight) && groundposition[2] < waterheight) {
     groundposition = (groundposition[0], groundposition[1], waterheight);

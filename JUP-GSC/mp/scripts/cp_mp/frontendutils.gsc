@@ -40,7 +40,7 @@ function private on_camera_section_change(params) {
       var_8014179938a618d3 = function_c6044b8ca41f9f54();
 
       if(isDefined(var_8014179938a618d3)) {
-        function_fb39412d7c61e5c7(var_8014179938a618d3);
+        deactivateworldevent(var_8014179938a618d3);
       }
 
       function_61bd6a757e62669d("war");
@@ -60,7 +60,7 @@ function private on_camera_section_change(params) {
 }
 
 function function_c6044b8ca41f9f54() {
-  level.gamemodebundle = function_1e231fc15fdab31d();
+  level.gamemodebundle = getgamemodescriptbundle();
   return level.gamemodebundle.frontendworldevent;
 }
 
@@ -85,7 +85,7 @@ function private function_e45789a4e87d849e(world_event) {
   total_attempts = var_1d4be4bd22a67641 / var_f9f5d82c075a9337;
 
   for(attempt = 0; attempt < total_attempts; attempt++) {
-    function_aa6da985e05e2780(world_event);
+    activateworldevent(world_event);
     wait var_f9f5d82c075a9337;
   }
 }
@@ -108,7 +108,7 @@ function private function_dd495345615b5918() {
       var_d395bbaee62a394d = function_c6044b8ca41f9f54();
 
       if(isDefined(world_event)) {
-        function_fb39412d7c61e5c7(world_event);
+        deactivateworldevent(world_event);
         world_event = undefined;
       }
 
@@ -375,7 +375,7 @@ function private execute_transition(requestedsection, sectionfrom) {
 }
 
 function private camera_move_helper(moveto, movetime, var_b73333faeb7580e8, accelscalar, decelscalar, use_bounce) {
-  level.playerviewowner function_bc667001f9dd3808(moveto.origin);
+  level.playerviewowner predictstreamposuntilcleared(moveto.origin);
 
   if(movetime < 0.05) {
     movetime = 0.05;
@@ -507,7 +507,7 @@ function private frontend_camera_teleport(camera, fov, cinematicname, fadeouttim
   self endon("disconnect");
   level notify("camera_teleport");
   level endon("camera_teleport");
-  level.playerviewowner function_bc667001f9dd3808(camera.origin);
+  level.playerviewowner predictstreamposuntilcleared(camera.origin);
   level.transition_interrupted = 1;
   frontendscenecamerafade(0, fadeouttime);
   wait fadeouttime + 0.05;
@@ -663,7 +663,7 @@ function private debug_frontend() {
     self waittill("<dev string:x168>", msg);
 
     if(msg == "<dev string:x17b>") {
-      function_ef21cf93f52dc79f(level);
+      dumpfrontenddata(level);
     }
   }
 }
@@ -721,7 +721,7 @@ function private update_entities_and_camera(previousscene) {
 
   if(isDefined(level.active_section)) {
     if(level.active_section.name == "loadout_showcase_p" || level.active_section.name == "loadout_showcase_s") {
-      function_d77872b5ce5f1b8d();
+      reset_preview_weapon_loc();
     }
   }
 
@@ -729,7 +729,7 @@ function private update_entities_and_camera(previousscene) {
   update_camera_depth_of_field();
   update_spot_limit();
 
-  if(function_85de0a6b8570b173() == "mp_frontend3") {
+  if(getcurrentfrontendfastfilename() == "mp_frontend3") {
     function_2898724f8cf4c78e();
   }
 }
@@ -1322,7 +1322,7 @@ function private function_e7571f41e1d6a427(scenename, flagmsg, previousscene) {
   }
 }
 
-function private function_e6b12e702bf34c5e(scenename, flagmsg, previousscene) {
+function private lua_triggered_xcam_mm(scenename, flagmsg, previousscene) {
   level endon("game_ended");
   self endon("disconnect");
   level notify("xcam_transition");
@@ -1344,7 +1344,7 @@ function private function_e6b12e702bf34c5e(scenename, flagmsg, previousscene) {
 
   while(true) {
     waitframe();
-    function_665d474ff040b446(flagmsg);
+    flag_wait_any_array(flagmsg);
 
     if(isarray(flagmsg)) {
       foreach(flagtoclear in flagmsg) {
@@ -1417,10 +1417,10 @@ function private function_701c8726c0b7fc47(scenename, flagmsg) {
   level endon("disconnect");
   level endon("xcam_transition");
   flag_wait("zoom_clear");
-  level thread function_77004a3ca8efdbbd(scenename, flagmsg);
+  level thread lua_triggered_attachment_zoom(scenename, flagmsg);
 }
 
-function private function_77004a3ca8efdbbd(scenename, flagmsg, previousscene) {
+function private lua_triggered_attachment_zoom(scenename, flagmsg, previousscene) {
   level endon("game_ended");
   self endon("disconnect");
   level notify("xcam_transition");
@@ -1632,7 +1632,7 @@ function private set_xcam() {
   }
 
   if(isDefined(scenename) && isDefined(level.var_d45fb3ee26047877[scenename])) {
-    if(function_85de0a6b8570b173() == "mp_frontend3") {
+    if(getcurrentfrontendfastfilename() == "mp_frontend3") {
       function_64ca1efa525c0bfa(scenename);
     }
 
@@ -1712,7 +1712,7 @@ function private function_e7f97d640f18b510() {
   if(!ismgl) {
     var_d45fb3ee26047877["squad_lobby"]["transitions"][1] = "jup_fe_lobby_plow_cam_01_idle_squad_01_xcam";
     var_d45fb3ee26047877["squad_lobby"]["transitions"][2] = "jup_fe_lobby_plow_cam_01_idle_squad_01_xcam";
-    var_d45fb3ee26047877["squad_lobby"]["callback"] = &function_e6b12e702bf34c5e;
+    var_d45fb3ee26047877["squad_lobby"]["callback"] = &lua_triggered_xcam_mm;
     var_d45fb3ee26047877["squad_lobby"]["flag_msg"] = ["lobby_member_increase", "started_mm"];
   }
 
@@ -1735,7 +1735,7 @@ function private function_e7f97d640f18b510() {
   if(!ismgl) {
     var_d45fb3ee26047877["squad_lobby_dmz"]["transitions"][1] = "fe_lobby_plow_cam_01_idle_squad_01_xcam";
     var_d45fb3ee26047877["squad_lobby_dmz"]["transitions"][2] = "fe_lobby_plow_cam_01_mm_01_xcam";
-    var_d45fb3ee26047877["squad_lobby_dmz"]["callback"] = &function_e6b12e702bf34c5e;
+    var_d45fb3ee26047877["squad_lobby_dmz"]["callback"] = &lua_triggered_xcam_mm;
     var_d45fb3ee26047877["squad_lobby_dmz"]["flag_msg"] = ["lobby_member_increase", "started_mm"];
   }
 
@@ -1758,7 +1758,7 @@ function private function_e7f97d640f18b510() {
   if(!ismgl) {
     var_d45fb3ee26047877["squad_lobby_br"]["transitions"][1] = "fe_lobby_plow_cam_01_idle_squad_01_xcam";
     var_d45fb3ee26047877["squad_lobby_br"]["transitions"][2] = "fe_lobby_plow_cam_01_mm_01_xcam";
-    var_d45fb3ee26047877["squad_lobby_br"]["callback"] = &function_e6b12e702bf34c5e;
+    var_d45fb3ee26047877["squad_lobby_br"]["callback"] = &lua_triggered_xcam_mm;
     var_d45fb3ee26047877["squad_lobby_br"]["flag_msg"] = ["lobby_member_increase", "started_mm"];
   }
 
@@ -1860,7 +1860,7 @@ function private function_e7f97d640f18b510() {
     var_d45fb3ee26047877["loadout_showcase_preview_small"]["transitions"][10] = "mgl_fe_op_crib_xcam_gunbench_01_topright_xcam";
   }
 
-  var_d45fb3ee26047877["loadout_showcase_preview_small"]["callback"] = &function_77004a3ca8efdbbd;
+  var_d45fb3ee26047877["loadout_showcase_preview_small"]["callback"] = &lua_triggered_attachment_zoom;
   var_d45fb3ee26047877["loadout_showcase_preview_small"]["flag_msg"] = "zoom_triggered";
   var_d45fb3ee26047877["loadout_showcase_preview"] = [];
   var_d45fb3ee26047877["loadout_showcase_preview"]["xcam_data"] = spawnStruct();
@@ -1882,7 +1882,7 @@ function private function_e7f97d640f18b510() {
     var_d45fb3ee26047877["loadout_showcase_preview"]["transitions"][10] = "mgl_fe_op_crib_xcam_gunbench_02_topright_xcam";
   }
 
-  var_d45fb3ee26047877["loadout_showcase_preview"]["callback"] = &function_77004a3ca8efdbbd;
+  var_d45fb3ee26047877["loadout_showcase_preview"]["callback"] = &lua_triggered_attachment_zoom;
   var_d45fb3ee26047877["loadout_showcase_preview"]["flag_msg"] = "zoom_triggered";
   var_d45fb3ee26047877["loadout_showcase_preview_large"] = [];
   var_d45fb3ee26047877["loadout_showcase_preview_large"]["xcam_data"] = spawnStruct();
@@ -1904,7 +1904,7 @@ function private function_e7f97d640f18b510() {
     var_d45fb3ee26047877["loadout_showcase_preview_large"]["transitions"][10] = "mgl_fe_op_crib_xcam_gunbench_03_topright_xcam";
   }
 
-  var_d45fb3ee26047877["loadout_showcase_preview_large"]["callback"] = &function_77004a3ca8efdbbd;
+  var_d45fb3ee26047877["loadout_showcase_preview_large"]["callback"] = &lua_triggered_attachment_zoom;
   var_d45fb3ee26047877["loadout_showcase_preview_large"]["flag_msg"] = "zoom_triggered";
   var_d45fb3ee26047877["loadout_showcase_perks"] = [];
   var_d45fb3ee26047877["loadout_showcase_perks"]["xcam_data"] = spawnStruct();
@@ -4478,7 +4478,7 @@ function private create_camera_position_list() {
   level.camera_loadout_showcase_specialist.weapon_locs[3] = function_70a855dd0c75561c("weapon_loc_watch");
   level.camera_loadout_showcase_specialist.spotlimit = 8;
 
-  if(function_85de0a6b8570b173() == "mp_frontend_jup_01") {
+  if(getcurrentfrontendfastfilename() == "mp_frontend_jup_01") {
     level.var_a8bb61626d7b233c = spawnStruct();
     level.var_a8bb61626d7b233c.basecam = function_70a855dd0c75561c("camera_mp_gunsmith_alt_perks_vest");
     level.var_a8bb61626d7b233c.basecam.depthoffieldvalues = [3.3, 27];
@@ -5384,7 +5384,7 @@ function private setup_initial_entities() {
     level.var_b0f545be973a4a13.originallocation = level.var_b0f545be973a4a13.origin;
   }
 
-  if(function_85de0a6b8570b173() == "mp_frontend3") {
+  if(getcurrentfrontendfastfilename() == "mp_frontend3") {
     thread function_7c7293562fd00957();
   }
 
@@ -5549,7 +5549,7 @@ function private function_4aaa584c581b532e(blima) {
   }
 }
 
-function private function_d77872b5ce5f1b8d() {
+function private reset_preview_weapon_loc() {
   weapontransform = function_70a855dd0c75561c("weapon_loc_preview");
   level.weapons[2].origin = weapontransform.origin;
   level.weapons[2].angles = weapontransform.angles;
@@ -5835,8 +5835,8 @@ function private luinotifylistener() {
     }
 
     if(msg == "entered_firing_range_after_target_settings") {
-      var_10fd8ed3fed0e0ae = int(arg);
-      thread function_7086103bdf1f2c05(var_10fd8ed3fed0e0ae);
+      numplates = int(arg);
+      thread function_7086103bdf1f2c05(numplates);
       end_current_xcam();
       thread function_ad45f79e3a9b4d2(1);
       continue;

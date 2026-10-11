@@ -163,29 +163,29 @@ function function_23f0145756ed19cb(bundle) {
 
 function function_d5974b5f58f14716(bundle, blueprintindex) {
   config = structcopy(level.var_e084c71df9ac20f1.config, 1);
-  var_9b32d1936831f5aa = undefined;
+  genericblueprintname = undefined;
 
-  if(isDefined(bundle.var_d96d3e6ceed581fd.blueprints) && bundle.var_d96d3e6ceed581fd.blueprints.size > 0 && blueprintindex > 0) {
-    var_9b32d1936831f5aa = bundle.var_d96d3e6ceed581fd.blueprints[blueprintindex - 1].genericblueprint;
-  } else if(isDefined(bundle.var_d96d3e6ceed581fd.blueprint_default)) {
-    var_9b32d1936831f5aa = bundle.var_d96d3e6ceed581fd.blueprint_default;
+  if(isDefined(bundle.genericblueprintlist.blueprints) && bundle.genericblueprintlist.blueprints.size > 0 && blueprintindex > 0) {
+    genericblueprintname = bundle.genericblueprintlist.blueprints[blueprintindex - 1].genericblueprint;
+  } else if(isDefined(bundle.genericblueprintlist.blueprint_default)) {
+    genericblueprintname = bundle.genericblueprintlist.blueprint_default;
   }
 
-  config.deployweapon = function_dd2a4fb3522f314(var_9b32d1936831f5aa, "deployWeapon");
-  primaryweaponname = function_8df651a1b2728b15(var_9b32d1936831f5aa, "primaryWeapon");
-  var_a1aa2d822e933d07 = function_b9ff4b6230995332(var_9b32d1936831f5aa, "primaryWeapon");
-  secondaryweaponname = function_8df651a1b2728b15(var_9b32d1936831f5aa, "secondaryWeapon");
-  var_e426ac0fd477f647 = function_b9ff4b6230995332(var_9b32d1936831f5aa, "secondaryWeapon");
-  lethalequipmentname = function_29e16a88682086b2(var_9b32d1936831f5aa, "string", "lethalEquipment");
-  tacticalequipmentname = function_29e16a88682086b2(var_9b32d1936831f5aa, "string", "tacticalEquipment");
-  lethalequipmentblueprintindex = function_29e16a88682086b2(var_9b32d1936831f5aa, "string", "lethalEquipmentBlueprintIndex");
-  tacticalequipmentblueprintindex = function_29e16a88682086b2(var_9b32d1936831f5aa, "string", "tacticalEquipmentBlueprintIndex");
-  suitname = function_29e16a88682086b2(var_9b32d1936831f5aa, "suit", "suit");
-  executionname = function_29e16a88682086b2(var_9b32d1936831f5aa, "execution", "execution");
-  bodymodel = function_29e16a88682086b2(var_9b32d1936831f5aa, "xmodel", "bodyModel");
-  headmodel = function_29e16a88682086b2(var_9b32d1936831f5aa, "xmodel", "headModel");
-  viewmodel = function_29e16a88682086b2(var_9b32d1936831f5aa, "xmodel", "viewModel");
-  cratemodel = function_29e16a88682086b2(var_9b32d1936831f5aa, "xmodel", "crateModel");
+  config.deployweapon = genericblueprint_makeweapon(genericblueprintname, "deployWeapon");
+  primaryweaponname = genericblueprint_getweaponname(genericblueprintname, "primaryWeapon");
+  var_a1aa2d822e933d07 = function_b9ff4b6230995332(genericblueprintname, "primaryWeapon");
+  secondaryweaponname = genericblueprint_getweaponname(genericblueprintname, "secondaryWeapon");
+  var_e426ac0fd477f647 = function_b9ff4b6230995332(genericblueprintname, "secondaryWeapon");
+  lethalequipmentname = function_29e16a88682086b2(genericblueprintname, "string", "lethalEquipment");
+  tacticalequipmentname = function_29e16a88682086b2(genericblueprintname, "string", "tacticalEquipment");
+  lethalequipmentblueprintindex = function_29e16a88682086b2(genericblueprintname, "string", "lethalEquipmentBlueprintIndex");
+  tacticalequipmentblueprintindex = function_29e16a88682086b2(genericblueprintname, "string", "tacticalEquipmentBlueprintIndex");
+  suitname = function_29e16a88682086b2(genericblueprintname, "suit", "suit");
+  executionname = function_29e16a88682086b2(genericblueprintname, "execution", "execution");
+  bodymodel = function_29e16a88682086b2(genericblueprintname, "xmodel", "bodyModel");
+  headmodel = function_29e16a88682086b2(genericblueprintname, "xmodel", "headModel");
+  viewmodel = function_29e16a88682086b2(genericblueprintname, "xmodel", "viewModel");
+  cratemodel = function_29e16a88682086b2(genericblueprintname, "xmodel", "crateModel");
   config.classstruct.loadoutprimary = "none";
 
   if(isDefined(primaryweaponname)) {
@@ -280,7 +280,7 @@ function initmarker() {
   leveldata.minimapicon = "ui_map_icon_jugg_drop";
   leveldata.headicon = "ui_map_icon_jugg_drop";
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     leveldata.capturestring = &"MP/BR_CRATE_LOADOUT";
   } else {
     leveldata.capturestring = &"KILLSTREAKS_HINTS/JUGG_CRATE_PICKUP";

@@ -34,7 +34,7 @@ function function_5771fc79979ccc58(itemdata, var_6dc0e605ecd21eee, var_7c3865dee
 
   if(itemdata.type == "killstreak") {
     if(!istrue(var_6dc0e605ecd21eee)) {
-      if(player function_77986db57958b676(itemdata.ref)) {
+      if(player haskillstreaksharedfunc(itemdata.ref)) {
         player scripts\cp\armory_kiosk::_closepurchasemenuwithresponse(4);
         return 0;
       }
@@ -61,13 +61,13 @@ function function_5771fc79979ccc58(itemdata, var_6dc0e605ecd21eee, var_7c3865dee
         break;
     }
   } else if(itemdata.type == "fieldupgrade" || itemdata.type == "super") {
-    if(player function_3f422a1c87bd2809()) {
+    if(player issuperinusesharedfunc()) {
       player scripts\cp\armory_kiosk::_closepurchasemenuwithresponse(6);
       return 0;
     }
 
     if(!istrue(var_6dc0e605ecd21eee)) {
-      currentsuperref = player function_97fac14206681b1f();
+      currentsuperref = player getcurrentsuperrefsharedfunc();
 
       if(isDefined(currentsuperref) && itemdata.ref == currentsuperref) {
         player scripts\cp\armory_kiosk::_closepurchasemenuwithresponse(5);
@@ -87,7 +87,7 @@ function function_5771fc79979ccc58(itemdata, var_6dc0e605ecd21eee, var_7c3865dee
         break;
     }
   } else if(itemdata.type == "perk") {
-    if(player function_87072b42853a9c58(itemdata.ref)) {
+    if(player hasperksharedfunc(itemdata.ref)) {
       player scripts\cp\armory_kiosk::_closepurchasemenuwithresponse(5);
       return 0;
     }
@@ -210,8 +210,8 @@ function function_8a3d726e5cf04cc0(itemdata, var_7dddac09987d559e, var_452130d9d
         purchasesuccess = function_e2db59d7677bfceb(player, "brloot_armor_plate", 1, undefined, 1, var_452130d9d126e506);
 
         if(!purchasesuccess) {
-          dropinfo = function_bb87cfae1e28e70b(0, kiosk.origin, kiosk.angles, player);
-          pickupent = function_9d6d4c76abc82cf("brloot_armor_plate", dropinfo, 1, 1, undefined, 0);
+          dropinfo = getitemdroporiginandanglessharedfunc(0, kiosk.origin, kiosk.angles, player);
+          pickupent = spawnpickupsharedfunc("brloot_armor_plate", dropinfo, 1, 1, undefined, 0);
           purchasesuccess = 1;
         }
 
@@ -267,14 +267,14 @@ function function_8a3d726e5cf04cc0(itemdata, var_7dddac09987d559e, var_452130d9d
     player scripts\cp\armory_kiosk::_makekioskpurchase(itemdata);
 
     if(var_b517df938986556f) {
-      player thread function_234f5394668ed388("br_item_purchased");
+      player thread showsplashsharedfunc("br_item_purchased");
     }
 
     if(istrue(var_a51e1e429c38ee87)) {
       player thread function_27ced223b0b31d99();
     }
 
-    scripts\engine\utility::function_f3bb4f4911a1beb2("defender_vo", "item_purchased", itemname);
+    scripts\engine\utility::callsharedfunc("defender_vo", "item_purchased", itemname);
     scripts\cp_mp\challenges::onkioskpurchaseitem("special", itemdata.ref, undefined, 1, itemdata.cost);
     namespace_53fc9ddbb516e6e1::function_98bd9179435d1557(self, itemdata.cost, "special", itemdata.ref);
   }
@@ -437,7 +437,7 @@ function function_dbf72a7c50f79f16(itemdata) {
     var_6a8b46e184e181cc.count = 1;
   }
 
-  canpickupresult = function_76ae39f27ed53321(var_6a8b46e184e181cc);
+  canpickupresult = cantakepickupsharedfunc(var_6a8b46e184e181cc);
 
   if(canpickupresult != 1 && canpickupresult != 20) {
     if(canpickupresult == 4) {

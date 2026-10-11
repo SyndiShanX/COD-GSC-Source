@@ -27,7 +27,7 @@ function function_fcbab070c240a397(params) {
 }
 
 function function_e763a1820edbfd28() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_4748556b6552da35);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_4748556b6552da35);
 
   function_4aa1128bb0cf132();
 }
@@ -144,7 +144,7 @@ function private function_403d98066db9adbd() {
   var_23ea96e3ee262480 = playfxontagsbetweenclients(getfx("disciple_lifedrain_beam_fx"), var_6198758dd896c717, "tag_origin", target_ent, "j_spine4");
 
   if(isDefined(var_23ea96e3ee262480)) {
-    var_23ea96e3ee262480 function_cea710f9d017694a(1);
+    var_23ea96e3ee262480 forcenetfieldhighlod_sharedfunc(1);
   }
 
   n_frames = 0;
@@ -170,7 +170,7 @@ function private function_403d98066db9adbd() {
       break;
     }
 
-    if(!istrue(self function_11e2d4051ea44b35("in_life_drain"))) {
+    if(!istrue(self getaiblackboarddynamic("in_life_drain"))) {
       break;
     }
 
@@ -186,13 +186,13 @@ function private function_403d98066db9adbd() {
 
     if(n_frames == 10) {
       var_7278dfba2b654bff = 1 - self.health / self.maxhealth;
-      var_bda5255252a8e4b6 = self.var_ae02110646a1f2a1 * self.maxhealth * (1 + var_7278dfba2b654bff * self.zombieaisettings.var_e58a65b7a8f5973c.var_c11f84610a177815);
-      var_bda5255252a8e4b6 += self.var_a39609c30eeab15b * self.zombieaisettings.var_e58a65b7a8f5973c.var_5f17af25ee7aca56;
+      health_gained = self.var_ae02110646a1f2a1 * self.maxhealth * (1 + var_7278dfba2b654bff * self.zombieaisettings.var_e58a65b7a8f5973c.var_c11f84610a177815);
+      health_gained += self.var_a39609c30eeab15b * self.zombieaisettings.var_e58a65b7a8f5973c.var_5f17af25ee7aca56;
       self.var_a39609c30eeab15b = 0;
       var_be9e2150d4979f71 = function_1499a812ecd5f3b6(self);
-      var_bda5255252a8e4b6 = int(min(var_bda5255252a8e4b6, max(var_be9e2150d4979f71 * self.maxhealth - self.health, 0)));
-      self.health += var_bda5255252a8e4b6;
-      self.var_e2b17292054656a1 += var_bda5255252a8e4b6;
+      health_gained = int(min(health_gained, max(var_be9e2150d4979f71 * self.maxhealth - self.health, 0)));
+      self.health += health_gained;
+      self.var_e2b17292054656a1 += health_gained;
 
       if(isagent(target_ent) && n_damage >= target_ent.health) {
         target_ent.do_immediate_ragdoll = 1;
@@ -213,7 +213,7 @@ function private function_403d98066db9adbd() {
     self.var_a39609c30eeab15b = undefined;
     self function_3e89eb3d8e3f1811("in_life_drain", 0);
 
-    if(!istrue(self function_11e2d4051ea44b35("in_life_drain_pain"))) {
+    if(!istrue(self getaiblackboarddynamic("in_life_drain_pain"))) {
       self function_3e89eb3d8e3f1811("life_drain_cooldown", self.var_c38b4e0e90ea1e91 + gettime());
     }
 
@@ -235,7 +235,7 @@ function private function_403d98066db9adbd() {
 }
 
 function function_860d329e4f5111ae(entity) {
-  return istrue(entity function_11e2d4051ea44b35("in_life_drain"));
+  return istrue(entity getaiblackboarddynamic("in_life_drain"));
 }
 
 function function_c91fafcbd1b5bd9e(params) {

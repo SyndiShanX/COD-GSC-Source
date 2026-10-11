@@ -53,15 +53,15 @@ function door_manage_openers() {
     }
 
     closestdist = distance2d(mycenter, opener.origin);
-    var_c540c5719cf990d5 = 110;
+    dooropendist = 110;
 
     if(opener aigettargetspeed() > 90) {
-      var_c540c5719cf990d5 = 230;
+      dooropendist = 230;
     }
 
-    if(closestdist <= var_c540c5719cf990d5 && abs(mycenter[2] - opener.origin[2]) < var_8994092a0cedf84a && !self.breached && length2dsquared(opener.velocity) > 0) {
+    if(closestdist <= dooropendist && abs(mycenter[2] - opener.origin[2]) < var_8994092a0cedf84a && !self.breached && length2dsquared(opener.velocity) > 0) {
       if(!isDefined(self.tryingopener) || self.opener == opener && !isDefined(opener._blackboard.doortoopen)) {
-        if(isDefined(opener getmodifierlocationonpath("door", var_c540c5719cf990d5 + 50))) {
+        if(isDefined(opener getmodifierlocationonpath("door", dooropendist + 50))) {
           thread door_manager_try_ai_opener(opener);
         }
       }
@@ -262,19 +262,19 @@ function function_9de18eb036b1e0c5() {
 function update_debug(newmsg, oldmsg) {
   self notify("<dev string:x55>");
   self endon("<dev string:x55>");
-  var_f45aced17c54e499 = 1;
+  oldmsgalpha = 1;
   displaytime = 5;
   steps = displaytime * 20;
-  var_5c636c807921441a = var_f45aced17c54e499 / steps;
+  var_5c636c807921441a = oldmsgalpha / steps;
   time = gettime();
 
   while(gettime() < time + displaytime * 1000) {
     if(getdvarint(@ "hash_e4715899ce74d8ee")) {
       print3d(self getEye() + (0, 0, 15), newmsg, (1, 1, 1), 1, 0.3, 1);
-      print3d(self getEye() + (0, 0, 10), oldmsg, (0.7, 0.7, 0.7), var_f45aced17c54e499, 0.3, 1);
+      print3d(self getEye() + (0, 0, 10), oldmsg, (0.7, 0.7, 0.7), oldmsgalpha, 0.3, 1);
     }
 
-    var_f45aced17c54e499 -= var_5c636c807921441a;
+    oldmsgalpha -= var_5c636c807921441a;
     wait 0.05;
   }
 }

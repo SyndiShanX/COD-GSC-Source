@@ -19,8 +19,8 @@ function function_29ba88e5ce21f3fd(var_8886a1f80d549ed) {
   level.var_be09cad9b5d91063 = var_8886a1f80d549ed;
 }
 
-function function_e37078f3d00ef312(var_90b8bda8e925efa2) {
-  level.var_d9a4b8ae6fa68979 = var_90b8bda8e925efa2;
+function function_e37078f3d00ef312(canunlockcallback) {
+  level.var_d9a4b8ae6fa68979 = canunlockcallback;
 }
 
 function function_87d7be37d61cbae3(unlockedcallback) {

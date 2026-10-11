@@ -18,9 +18,9 @@ function outlineenableforall(var_f20913fec7561c5f, hudoutlineassetname, priority
   return scripts\mp\outline::outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, "ALL");
 }
 
-function outlineenableforteam(var_f20913fec7561c5f, var_fa3b23d51c2dc7, hudoutlineassetname, prioritygroup, var_213fdd3689d4b33e) {
-  if(isgameplayteam(var_fa3b23d51c2dc7)) {
-    playersvisibleto = getteamdata(var_fa3b23d51c2dc7, "players");
+function outlineenableforteam(var_f20913fec7561c5f, teamvisibleto, hudoutlineassetname, prioritygroup, var_213fdd3689d4b33e) {
+  if(isgameplayteam(teamvisibleto)) {
+    playersvisibleto = getteamdata(teamvisibleto, "players");
   } else {
     playersvisibleto = [];
   }
@@ -34,22 +34,22 @@ function outlineenableforteam(var_f20913fec7561c5f, var_fa3b23d51c2dc7, hudoutli
       var_404eeafd8dc3f0f0 = [var_213fdd3689d4b33e];
     }
 
-    foreach(var_6b0ee97314aed333 in var_404eeafd8dc3f0f0) {
-      if(isDefined(var_6b0ee97314aed333.team) && var_6b0ee97314aed333.team == var_fa3b23d51c2dc7) {
-        playersvisibleto = scripts\engine\utility::array_remove(playersvisibleto, var_6b0ee97314aed333);
+    foreach(playertoignore in var_404eeafd8dc3f0f0) {
+      if(isDefined(playertoignore.team) && playertoignore.team == teamvisibleto) {
+        playersvisibleto = scripts\engine\utility::array_remove(playersvisibleto, playertoignore);
       }
     }
   }
 
-  return scripts\mp\outline::outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, "TEAM", var_fa3b23d51c2dc7);
+  return scripts\mp\outline::outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, "TEAM", teamvisibleto);
 }
 
-function outlineenableforsquad(var_f20913fec7561c5f, var_fa3b23d51c2dc7, squadindex, hudoutlineassetname, prioritygroup) {
+function outlineenableforsquad(var_f20913fec7561c5f, teamvisibleto, squadindex, hudoutlineassetname, prioritygroup) {
   assertex(scripts\cp_mp\utility\squad_utility::issquadmode(), "<dev string:x1c>");
-  assertex(isDefined(level.squaddata[var_fa3b23d51c2dc7]), "<dev string:x54>" + var_fa3b23d51c2dc7);
-  assertex(!isDefined(level.squaddata[var_fa3b23d51c2dc7]) || isDefined(level.squaddata[var_fa3b23d51c2dc7][squadindex]), "<dev string:x99>" + squadindex);
-  playersvisibleto = level.squaddata[var_fa3b23d51c2dc7][squadindex].players;
-  return scripts\mp\outline::outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, "SQUAD", var_fa3b23d51c2dc7, squadindex);
+  assertex(isDefined(level.squaddata[teamvisibleto]), "<dev string:x54>" + teamvisibleto);
+  assertex(!isDefined(level.squaddata[teamvisibleto]) || isDefined(level.squaddata[teamvisibleto][squadindex]), "<dev string:x99>" + squadindex);
+  playersvisibleto = level.squaddata[teamvisibleto][squadindex].players;
+  return scripts\mp\outline::outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, "SQUAD", teamvisibleto, squadindex);
 }
 
 function outlineenableforplayer(var_f20913fec7561c5f, var_18ebeb29bb7541e3, hudoutlineassetname, prioritygroup) {
@@ -60,14 +60,14 @@ function outlineenableforplayer(var_f20913fec7561c5f, var_18ebeb29bb7541e3, hudo
   return scripts\mp\outline::outlineenableinternal(var_f20913fec7561c5f, [var_18ebeb29bb7541e3], hudoutlineassetname, prioritygroup, "ENTITY");
 }
 
-function outlinedisable(id, var_420a996e67989dc4) {
+function outlinedisable(id, entoutlined) {
   assertex(isDefined(id) && int(id) == id, "<dev string:xed>");
-  scripts\mp\outline::outlinedisableinternal(id, var_420a996e67989dc4);
+  scripts\mp\outline::outlinedisableinternal(id, entoutlined);
 }
 
-function outlinerefresh(var_420a996e67989dc4) {
-  assertex(isDefined(var_420a996e67989dc4), "<dev string:x116>");
-  scripts\mp\outline::outlinerefreshinternal(var_420a996e67989dc4);
+function outlinerefresh(entoutlined) {
+  assertex(isDefined(entoutlined), "<dev string:x116>");
+  scripts\mp\outline::outlinerefreshinternal(entoutlined);
 }
 
 function initoutlineoccluders() {

@@ -443,16 +443,16 @@ function door_state_update(nosound) {
     foreach(door in button.doors) {
       if(button.statecurr == 0) {
         if(isDefined(button.ai_sight_brushes)) {
-          foreach(var_e7fe58b8bf035286 in button.ai_sight_brushes) {
-            var_e7fe58b8bf035286 show();
+          foreach(ai_sight_brush in button.ai_sight_brushes) {
+            ai_sight_brush show();
           }
         }
 
         if(door.spawnflags & 1) {}
       } else {
         if(isDefined(button.ai_sight_brushes)) {
-          foreach(var_e7fe58b8bf035286 in button.ai_sight_brushes) {
-            var_e7fe58b8bf035286 hide();
+          foreach(ai_sight_brush in button.ai_sight_brushes) {
+            ai_sight_brush hide();
           }
         }
 
@@ -1057,10 +1057,10 @@ function bashopen(player, pos) {
     bash_yaw += 360;
   }
 
-  var_5e7a100369fafe1e = 0.35;
-  var_11b200101076bc6c = 0.15;
+  maxbashtime = 0.35;
+  minbashtime = 0.15;
   timefactor = math::normalize_value(0, 170, bash_yaw);
-  bashtime = math::factor_value(var_5e7a100369fafe1e, var_11b200101076bc6c, timefactor);
+  bashtime = math::factor_value(maxbashtime, minbashtime, timefactor);
   current_angles = self.angles;
   current_yaw = current_angles[1];
 
@@ -1107,14 +1107,14 @@ function bashopen(player, pos) {
   }
 
   self.bashed = 0;
-  var_b492b99eb62e16f2 = randomfloatrange(3, 5);
-  var_6e09cabeb82b5356 = randomfloatrange(0.25, 2.5);
+  bounceback_time = randomfloatrange(3, 5);
+  bounceback_yaw = randomfloatrange(0.25, 2.5);
 
   if(openleft) {
-    var_6e09cabeb82b5356 *= -1;
+    bounceback_yaw *= -1;
   }
 
-  self rotateYaw(var_6e09cabeb82b5356, var_b492b99eb62e16f2, 0.5, var_b492b99eb62e16f2 - 0.5);
+  self rotateYaw(bounceback_yaw, bounceback_time, 0.5, bounceback_time - 0.5);
 }
 
 function bashpresentation(player) {

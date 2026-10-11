@@ -220,26 +220,26 @@ function function_ad4a7a73c7d7d9e0() {
     self.infilanimindex = 1;
   }
 
-  var_8e3afd40d3c95b46 = "j_prop_" + self.infilanimindex + 1;
+  player_link_tag = "j_prop_" + self.infilanimindex + 1;
   cos45 = cos(45);
 
   if(dotforward < -1 * cos45) {
-    return ["wz_infil_gprop_standard_sh010", level.br_anim["wz_infil_gprop_standard_sh010"], "wz_infil_standardforward_jump_sh010", var_8e3afd40d3c95b46];
+    return ["wz_infil_gprop_standard_sh010", level.br_anim["wz_infil_gprop_standard_sh010"], "wz_infil_standardforward_jump_sh010", player_link_tag];
   }
 
   if(dotright > cos45) {
-    return ["wz_infil_gprop_l90_sh010", level.br_anim["wz_infil_gprop_l90_sh010"], "wz_infil_l90_jump_sh010", var_8e3afd40d3c95b46];
+    return ["wz_infil_gprop_l90_sh010", level.br_anim["wz_infil_gprop_l90_sh010"], "wz_infil_l90_jump_sh010", player_link_tag];
   }
 
   if(dotright < -1 * cos45) {
-    return ["wz_infil_gprop_r90_sh010", level.br_anim["wz_infil_gprop_r90_sh010"], "wz_infil_r90_jump_sh010", var_8e3afd40d3c95b46];
+    return ["wz_infil_gprop_r90_sh010", level.br_anim["wz_infil_gprop_r90_sh010"], "wz_infil_r90_jump_sh010", player_link_tag];
   }
 
   if(dotright > 0) {
-    return ["wz_infil_gprop_l180_sh010", level.br_anim["wz_infil_gprop_l180_sh010"], "wz_infil_l180_jump_sh010", var_8e3afd40d3c95b46];
+    return ["wz_infil_gprop_l180_sh010", level.br_anim["wz_infil_gprop_l180_sh010"], "wz_infil_l180_jump_sh010", player_link_tag];
   }
 
-  return ["wz_infil_gprop_r180_sh010", level.br_anim["wz_infil_gprop_r180_sh010"], "wz_infil_r180_jump_sh010", var_8e3afd40d3c95b46];
+  return ["wz_infil_gprop_r180_sh010", level.br_anim["wz_infil_gprop_r180_sh010"], "wz_infil_r180_jump_sh010", player_link_tag];
 }
 
 function jumpfunc() {
@@ -271,7 +271,7 @@ function function_dc0bc83a31193177() {
 function private function_cd7e1a37d5e2ca2b() {
   level.nosuspensemusic = 1;
   thread scripts\mp\music_and_dialog::stopsuspensemusic();
-  function_f1aed36ab4598ea("mp_gamemode_br_infils");
+  snd_transient_load("mp_gamemode_br_infils");
 }
 
 function private function_26874fd7694aa29() {
@@ -286,7 +286,7 @@ function private function_8d050f78fe1d180f() {
 
 function infilcleanup() {
   function_e66f664ad726f2e();
-  function_f4e0ff5cb899686d("mp_gamemode_br_infils");
+  snd_transient_unload("mp_gamemode_br_infils");
   namespace_56a3588493afc984::cleanupents();
 }
 

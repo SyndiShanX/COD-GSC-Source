@@ -8,7 +8,7 @@
 #using scripts\engine\utility;
 #namespace heartbeat;
 
-function function_94461e6fd9196c6a(playsoundfunc) {
+function initcommonheartbeat(playsoundfunc) {
   level.heartbeat = spawnStruct();
   level.heartbeat.playsoundfunc = playsoundfunc;
 }
@@ -46,7 +46,7 @@ function heartbeattimer() {
         pulsestarttime = time;
 
         while(time < pulsestarttime + pulsedurationms) {
-          function_70dd1e8302bb7a82(time, pulsestarttime, pulsedurationms);
+          factorpulsetime(time, pulsestarttime, pulsedurationms);
           waitframe();
           time = gettime();
         }
@@ -61,14 +61,14 @@ function heartbeattimer() {
   }
 }
 
-function function_70dd1e8302bb7a82(time, pulsestarttime, pulsedurationms) {
+function factorpulsetime(time, pulsestarttime, pulsedurationms) {
   pulsenormalized = (time - pulsestarttime) / pulsedurationms;
   pulsenormalized = math::normalized_offset(pulsenormalized, 0.65);
   self.heartbeat.pulsetime = 1 - math::normalized_parabola(pulsenormalized);
 }
 
 function pulse_rumble(pulsedurationms) {
-  if(function_ea8199f09c110522() || !function_afb9ed6354e03dfa() || !function_7b09a3e02e70b0d2()) {
+  if(isbreathcritical() || !function_afb9ed6354e03dfa() || !isdeathsdoor()) {
     return;
   }
 
@@ -88,7 +88,7 @@ function function_b7c36a804415225b(heartbeat) {
 }
 
 function function_8c8ff6fc7b5b3d67() {
-  if(function_7b09a3e02e70b0d2()) {
+  if(isdeathsdoor()) {
     return function_1078275b178db870();
   }
 
@@ -125,7 +125,7 @@ function function_14f4cbd1901f7812() {
   }
 
   var_fe17e9129d4b4bfa = 2;
-  var_6b54ed3d32416e64 = 0;
+  pulselevelindex = 0;
   time = 0;
   beats = 0;
 
@@ -135,7 +135,7 @@ function function_14f4cbd1901f7812() {
 
   var_b10ff79982c0153b = function_fa062c79f577073c();
 
-  if(function_ea8199f09c110522()) {
+  if(isbreathcritical()) {
     var_b10ff79982c0153b = [var_b10ff79982c0153b[0], var_b10ff79982c0153b[1]];
     remainingtime = function_b1b34805f6f1b18f();
   } else {
@@ -145,7 +145,7 @@ function function_14f4cbd1901f7812() {
 
   while(true) {
     if(beats < var_fe17e9129d4b4bfa) {
-      time += var_b10ff79982c0153b[var_6b54ed3d32416e64][1];
+      time += var_b10ff79982c0153b[pulselevelindex][1];
       beats++;
 
       if(time > remainingtime) {
@@ -155,15 +155,15 @@ function function_14f4cbd1901f7812() {
       continue;
     }
 
-    var_6b54ed3d32416e64++;
+    pulselevelindex++;
     beats = 0;
 
-    if(var_6b54ed3d32416e64 >= var_b10ff79982c0153b.size - 1) {
+    if(pulselevelindex >= var_b10ff79982c0153b.size - 1) {
       break;
     }
   }
 
-  return var_b10ff79982c0153b[var_6b54ed3d32416e64];
+  return var_b10ff79982c0153b[pulselevelindex];
 }
 
 function function_2fb10e0f50e2d6c1() {
@@ -171,7 +171,7 @@ function function_2fb10e0f50e2d6c1() {
   return var_b10ff79982c0153b[5];
 }
 
-function function_7b09a3e02e70b0d2() {
+function isdeathsdoor() {
   return isDefined(self.deathsdoor) && self.deathsdoor;
 }
 

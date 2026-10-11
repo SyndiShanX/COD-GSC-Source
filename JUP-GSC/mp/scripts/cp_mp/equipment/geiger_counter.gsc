@@ -15,7 +15,7 @@ function function_58bf160252f94e21() {
 
   level.var_216a5e72460de468 = 1;
   level.var_bcb3e1f6f7cd3cb7 = spawnStruct();
-  level.var_bcb3e1f6f7cd3cb7.partition = function_21a6a1c613b50a28([], 4000);
+  level.var_bcb3e1f6f7cd3cb7.partition = create_partition([], 4000);
   level.var_bcb3e1f6f7cd3cb7.radiationmaxdist = getdvarint(@ "hash_e4a881a4b29b1041", 1000);
   level.var_bcb3e1f6f7cd3cb7.radiationradius = getdvarint(@ "hash_37124040df88eccb", 4000);
 }
@@ -275,8 +275,8 @@ function function_38c53210a5291d71(object) {
     return false;
   }
 
-  has_parts = isent(object) && object isscriptable() || !isent(object) && object function_73cc0f04c4c5001d();
-  return has_parts && object function_73cc0f04c4c5001d() && object getscriptablehaspart("brloot_valuable_fuelrods") && object getscriptablepartstate("brloot_valuable_fuelrods", 1) == "hidden";
+  has_parts = isent(object) && object isscriptable() || !isent(object) && object isscriptableinstance();
+  return has_parts && object isscriptableinstance() && object getscriptablehaspart("brloot_valuable_fuelrods") && object getscriptablepartstate("brloot_valuable_fuelrods", 1) == "hidden";
 }
 
 function function_eff6d6db587f143d() {

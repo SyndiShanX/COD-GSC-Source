@@ -24,7 +24,7 @@ function setupagent(taskid) {
   self.moveplaybackrate = 1;
   self.animplaybackrate = 1;
   self.movetransitionrate = 1;
-  self.var_79c2de8443d5f950 = 1;
+  self.lookfordoorsalongpath = 1;
   self.dont_cleanup = 1;
   self.bsoldier = 1;
   self.space = 0;
@@ -52,7 +52,7 @@ function setupagent(taskid) {
 function function_40150623eb9f4ea2(taskid) {
   self.disablepistol = 1;
   self.disablelmgmount = 1;
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
 }
 
 function handledeathcleanup() {

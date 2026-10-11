@@ -29,14 +29,14 @@ function init() {
   triangles[triangles.size] = var_94da0800e5d1a91;
 
   foreach(pos in level.mit.var_6fbb505de2f2b966) {
-    var_93fef0dca6a47f2 = [];
+    polygons = [];
 
     foreach(tri in triangles) {
       if(function_3c42e495fb530329(tri, pos)) {
         tri.isbad = 1;
-        var_93fef0dca6a47f2[var_93fef0dca6a47f2.size] = tri.e1;
-        var_93fef0dca6a47f2[var_93fef0dca6a47f2.size] = tri.e2;
-        var_93fef0dca6a47f2[var_93fef0dca6a47f2.size] = tri.e3;
+        polygons[polygons.size] = tri.e1;
+        polygons[polygons.size] = tri.e2;
+        polygons[polygons.size] = tri.e3;
       }
     }
 
@@ -52,16 +52,16 @@ function init() {
 
     triangles = var_db01c5bde88a365a;
 
-    for(i = 0; i < var_93fef0dca6a47f2.size - 1; i++) {
-      for(j = i + 1; j < var_93fef0dca6a47f2.size; j++) {
-        if(sameedge(var_93fef0dca6a47f2[i], var_93fef0dca6a47f2[j])) {
-          var_93fef0dca6a47f2[i].isbad = 1;
-          var_93fef0dca6a47f2[j].isbad = 1;
+    for(i = 0; i < polygons.size - 1; i++) {
+      for(j = i + 1; j < polygons.size; j++) {
+        if(sameedge(polygons[i], polygons[j])) {
+          polygons[i].isbad = 1;
+          polygons[j].isbad = 1;
         }
       }
     }
 
-    foreach(edge in var_93fef0dca6a47f2) {
+    foreach(edge in polygons) {
       if(istrue(edge.isbad)) {
         continue;
       }

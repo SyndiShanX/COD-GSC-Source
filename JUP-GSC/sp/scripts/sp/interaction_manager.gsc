@@ -265,23 +265,23 @@ function reminder_cooldown_timer(interval_time) {
   level.interaction_manager.can_remind = 1;
 }
 
-function queue_reminder(dialog_alias, var_96c8b0fb4e9c029e, var_649e0f981c46d2ef) {
-  if(!isDefined(dialog_alias) && isDefined(var_96c8b0fb4e9c029e)) {
+function queue_reminder(dialog_alias, optional_anime, optional_animnode) {
+  if(!isDefined(dialog_alias) && isDefined(optional_anime)) {
     dialog_alias = "none";
   }
 
-  if(isDefined(var_96c8b0fb4e9c029e)) {
-    dialog_alias = dialog_alias + "+" + var_96c8b0fb4e9c029e;
+  if(isDefined(optional_anime)) {
+    dialog_alias = dialog_alias + "+" + optional_anime;
   }
 
   level.interaction_manager.data["reminder_queue"][dialog_alias] = self;
 
-  if(isDefined(var_649e0f981c46d2ef)) {
-    self.reminder_animnode = var_649e0f981c46d2ef;
+  if(isDefined(optional_animnode)) {
+    self.reminder_animnode = optional_animnode;
   }
 }
 
-function queue_reminder_distance_anim(dialog_alias, anime, var_649e0f981c46d2ef, return_anime) {
+function queue_reminder_distance_anim(dialog_alias, anime, optional_animnode, return_anime) {
   if(isDefined(dialog_alias)) {
     dialog_alias = dialog_alias + "+" + anime;
   } else {
@@ -290,8 +290,8 @@ function queue_reminder_distance_anim(dialog_alias, anime, var_649e0f981c46d2ef,
 
   level.interaction_manager.data["reminder_queue"][dialog_alias] = self;
 
-  if(isDefined(var_649e0f981c46d2ef)) {
-    self.reminder_animnode = var_649e0f981c46d2ef;
+  if(isDefined(optional_animnode)) {
+    self.reminder_animnode = optional_animnode;
   }
 
   self.use_reminder_anim = 1;
@@ -744,7 +744,7 @@ function print_reaction_state() {
   }
 }
 
-function play_gesture_reaction(lookat_distance, reaction_distance, var_f0dd62735e42c1e2, var_42b1f24d780b1894, var_d6026ecfc2884700) {
+function play_gesture_reaction(lookat_distance, reaction_distance, var_f0dd62735e42c1e2, is_reminder, pointat_target) {
   self endon("death");
   self endon("stop_reaction");
   self endon("reaction_end");
@@ -756,8 +756,8 @@ function play_gesture_reaction(lookat_distance, reaction_distance, var_f0dd62735
     self.allow_gesture_reactions = 1;
   }
 
-  if(!isDefined(var_42b1f24d780b1894)) {
-    var_42b1f24d780b1894 = 0;
+  if(!isDefined(is_reminder)) {
+    is_reminder = 0;
   }
 
   if(!isDefined(lookat_distance)) {
@@ -773,8 +773,8 @@ function play_gesture_reaction(lookat_distance, reaction_distance, var_f0dd62735
   }
 
   waittill_gestureconditionsmet(reaction_distance);
-  play_gesture_reaction_anim(var_d6026ecfc2884700);
-  play_interaction_vo(var_f0dd62735e42c1e2, var_42b1f24d780b1894);
+  play_gesture_reaction_anim(pointat_target);
+  play_interaction_vo(var_f0dd62735e42c1e2, is_reminder);
 }
 
 function waittill_gestureconditionsmet(reaction_distance) {
@@ -841,12 +841,12 @@ function canplaygesture(check_range) {
 
 #using_animtree("generic_human");
 
-function play_gesture_reaction_anim(var_d6026ecfc2884700) {
+function play_gesture_reaction_anim(pointat_target) {
   self.playing_gesture = 1;
 
   if(!isDefined(self.is_cheap)) {
-    if(isDefined(var_d6026ecfc2884700)) {
-      thread gesture_point(var_d6026ecfc2884700);
+    if(isDefined(pointat_target)) {
+      thread gesture_point(pointat_target);
     } else {
       thread gesture_simple("salute");
     }
@@ -857,9 +857,9 @@ function play_gesture_reaction_anim(var_d6026ecfc2884700) {
   self.playing_gesture = undefined;
 }
 
-function play_interaction_vo(vo_line, var_42b1f24d780b1894) {
+function play_interaction_vo(vo_line, is_reminder) {
   if(isDefined(vo_line)) {
-    if(isDefined(var_42b1f24d780b1894) && var_42b1f24d780b1894) {
+    if(isDefined(is_reminder) && is_reminder) {
       force_reminder_delay(30);
       clear_reminder(vo_line);
     }
@@ -967,11 +967,11 @@ function force_reminder_delay(delay_time) {
   level thread reminder_cooldown_timer(delay_time);
 }
 
-function clear_reminder(var_ff9be5f705175100) {
+function clear_reminder(reminder_alias) {
   if(isDefined(level.interaction_manager)) {
     if(isDefined(level.interaction_manager.data["reminder_queue"])) {
       if(array_contains(level.interaction_manager.data["reminder_queue"], self)) {
-        level.interaction_manager.data["reminder_queue"][var_ff9be5f705175100] = undefined;
+        level.interaction_manager.data["reminder_queue"][reminder_alias] = undefined;
       }
     }
   }
@@ -1173,7 +1173,7 @@ function convertvar_toarray(var_e1fdb9e31a9005b0) {
   return var_e1fdb9e31a9005b0;
 }
 
-function play_gesture_reaction_loop(lookat_distance, reaction_distance, reaction_vo_array, var_42b1f24d780b1894, var_d6026ecfc2884700) {
+function play_gesture_reaction_loop(lookat_distance, reaction_distance, reaction_vo_array, is_reminder, pointat_target) {
   self endon("death");
   self endon("stop_reaction");
   self endon("reaction_end");
@@ -1186,7 +1186,7 @@ function play_gesture_reaction_loop(lookat_distance, reaction_distance, reaction
     }
 
     random_line = vo_array[randomint(vo_array.size)];
-    play_gesture_reaction(lookat_distance, reaction_distance, random_line, var_42b1f24d780b1894, var_d6026ecfc2884700);
+    play_gesture_reaction(lookat_distance, reaction_distance, random_line, is_reminder, pointat_target);
 
     while(true) {
       if(distance2d(self.origin, level.player.origin) >= lookat_distance) {
@@ -1346,7 +1346,7 @@ function main_cast_dialog_actor_check(dialog_line) {
   return undefined;
 }
 
-function play_reminder_anim_distance(actor, lookat_distance, reaction_distance, anime, var_f0dd62735e42c1e2, var_42b1f24d780b1894) {
+function play_reminder_anim_distance(actor, lookat_distance, reaction_distance, anime, var_f0dd62735e42c1e2, is_reminder) {
   actor endon("death");
 
   if(isDefined(actor.pre_reaction_func)) {
@@ -1365,8 +1365,8 @@ function play_reminder_anim_distance(actor, lookat_distance, reaction_distance, 
   level endon("reminders_done");
   actor thread add_actor_to_manager();
 
-  if(!isDefined(var_42b1f24d780b1894)) {
-    var_42b1f24d780b1894 = 0;
+  if(!isDefined(is_reminder)) {
+    is_reminder = 0;
   }
 
   if(!isDefined(lookat_distance)) {
@@ -1412,7 +1412,7 @@ function play_reminder_anim_distance(actor, lookat_distance, reaction_distance, 
   }
 
   if(isDefined(var_f0dd62735e42c1e2)) {
-    if(var_42b1f24d780b1894) {
+    if(is_reminder) {
       level notify("reboot_timer");
       waitframe();
       level thread reminder_cooldown_timer(90);

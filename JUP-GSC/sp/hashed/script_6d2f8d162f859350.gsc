@@ -205,7 +205,7 @@ function escort_civ(var_8f1b7542d7fdc179, runto, gender) {
 
   civ = spawn_aitype(classname, var_8f1b7542d7fdc179, (0, 0, 0), 1, 0, 0, "ambulance_crash_civ");
   civ function_b661b022700ba72f("script", 1);
-  civ function_d5cda8a759cc36bc("scared");
+  civ setcivstate("scared");
   civ function_fcb4c5a996517164();
   civ thread function_247c2418fde94da1(runto);
   return civ;
@@ -220,7 +220,7 @@ function function_247c2418fde94da1(runto) {
   speed = randomintrange(175, 186);
   set_movement_speed(speed);
   self.maystumble = 0;
-  self function_d5cda8a759cc36bc("flee");
+  self setcivstate("flee");
   self setgoalpos(runto);
   thread namespace_47819225b08b445d::function_e29483c00b1210fa();
   level delaythread(15, &utility::ai_delete_when_out_of_sight, [self], 800);
@@ -450,7 +450,7 @@ function prop_dangle() {
 function function_5e11b2ae0c4caefd() {
   model = getEnt("makarov_ambulance", "targetname");
   model assign_animtree("makarov_ambulance");
-  guy = fakeactor::function_d9469562fdbb08bc("actor_jup_enemy_paramedic_ar", (0, 0, 0), (0, 0, 0));
+  guy = fakeactor::spawndroneaitype("actor_jup_enemy_paramedic_ar", (0, 0, 0), (0, 0, 0));
   guy.animname = "driver";
   model.driver = guy;
   level.crash_ambulance = model;
@@ -478,11 +478,11 @@ function function_9ec45d407a48d59d() {
   level.makarov.name = "";
   var_f70033a707804f76 = array_combine(level.actors["group1"], [level.crash_ambulance, level.player_rig]);
   node.corpses = [];
-  guy = fakeactor::function_d9469562fdbb08bc("actor_jup_enemy_paramedic_ar", (0, 0, 0), (0, 0, 0));
+  guy = fakeactor::spawndroneaitype("actor_jup_enemy_paramedic_ar", (0, 0, 0), (0, 0, 0));
   guy.animname = "enemy01";
   node anim_first_frame_solo(guy, "ambulance_10_dead");
   node.corpses[node.corpses.size] = guy;
-  guy = fakeactor::function_d9469562fdbb08bc("actor_jup_enemy_paramedic_ar", (0, 0, 0), (0, 0, 0));
+  guy = fakeactor::spawndroneaitype("actor_jup_enemy_paramedic_ar", (0, 0, 0), (0, 0, 0));
   guy.animname = "enemy02";
   node anim_first_frame_solo(guy, "ambulance_10_dead");
   node.corpses[node.corpses.size] = guy;
@@ -497,12 +497,12 @@ function function_9ec45d407a48d59d() {
 
 function function_a2e7162f064dd3c7() {
   temp = [];
-  guy1 = fakeactor::function_d9469562fdbb08bc("actor_jup_ally_hero_price_bravo", (0, 0, 0), (0, 0, 0));
+  guy1 = fakeactor::spawndroneaitype("actor_jup_ally_hero_price_bravo", (0, 0, 0), (0, 0, 0));
   guy1.animname = "price";
   guy1.team = "Allies";
   guy1 utility::make_weapon_and_attach(level.price.weapon.basename, level.price.weapon.attachments, "tag_weapon_right");
   temp["price"] = guy1;
-  guy2 = fakeactor::function_d9469562fdbb08bc("jup_enemy_villain_makarov_bravo", (0, 0, 0), (0, 0, 0));
+  guy2 = fakeactor::spawndroneaitype("jup_enemy_villain_makarov_bravo", (0, 0, 0), (0, 0, 0));
   guy2.animname = "makarov";
   guy2 function_2ee5223e6183096();
   temp["makarov"] = guy2;
@@ -760,8 +760,8 @@ function pistol_take() {
 
 function function_cfc1a89ce6f81bd1() {
   script_func("anim_placeweaponon", self.sidearm, "none");
-  var_8a2ffa59e710efb8 = (25384.6, 2993.22, -919);
-  self setgoalpos(var_8a2ffa59e710efb8);
+  midway = (25384.6, 2993.22, -919);
+  self setgoalpos(midway);
   self.goalradius = 32;
   self waittillmatch("single anim", "end");
   wait 0.5;
@@ -965,8 +965,8 @@ function function_41c0e04a3082fcb1() {
 }
 
 function function_1207da732bc111d8() {
-  var_2a84582224bf3b7e = "vfxsiren::" + self.model;
-  self setModel(var_2a84582224bf3b7e);
+  newname = "vfxsiren::" + self.model;
+  self setModel(newname);
   ents = getEntArray(self.target, "targetname");
 
   foreach(ent in ents) {
@@ -1180,8 +1180,8 @@ function stairs_weapon() {
   muz = "flash_ar_04";
   rgrip = "jup_jp01_ar_golf36_pgrip_tac";
   trig = "grip_angled01";
-  var_7701542b2c200822 = "jup_laslight_box_01";
-  attachments = [rec, front, back, mag, scope, ub, muz, rgrip, trig, var_7701542b2c200822];
+  lase = "jup_laslight_box_01";
+  attachments = [rec, front, back, mag, scope, ub, muz, rgrip, trig, lase];
   gun = utility::function_ec8a443fe8165fe4(basename, origin, attachments, (0, randomint(270), 0));
 }
 
@@ -1264,7 +1264,7 @@ function function_eb172c13f9a341f9() {
   audioent delaycall(0.1, &delete);
   civ = spawn_aitype("actor_jup_civilian_rus_female_flashback", var_158f1ddda2c2ff64, (0, 0, 0), 1, 0, 0, "sevrer_room_civ");
   civ function_b661b022700ba72f("script", 1);
-  civ function_d5cda8a759cc36bc("flee");
+  civ setcivstate("flee");
   civ thread namespace_47819225b08b445d::injured_dmg_death_logic();
   civ set_movement_speed(160 + randomintrange(10, 20));
   civ.maystumble = 1;
@@ -1286,7 +1286,7 @@ function function_aaa856e19658a611() {
 }
 
 function function_ab81e56c1855d8bd(spot) {
-  var_9fc96f19e4a49199 = level.player;
+  lasertarget = level.player;
   lasertag = spawn("script_model", spot);
   lasertag setModel("tag_laser");
   lasertag notsolid();
@@ -1298,11 +1298,11 @@ function function_ab81e56c1855d8bd(spot) {
   lasertag laserforceon();
 
   for(i = 0; i < 80; i++) {
-    if(within_fov(var_9fc96f19e4a49199.origin, var_9fc96f19e4a49199.angles, lasertag.origin, cosfov)) {
-      to = var_9fc96f19e4a49199.origin + (0, 0, 40);
+    if(within_fov(lasertarget.origin, lasertarget.angles, lasertag.origin, cosfov)) {
+      to = lasertarget.origin + (0, 0, 40);
     } else {
       i--;
-      to = var_9fc96f19e4a49199 getEye() + anglestoleft(var_9fc96f19e4a49199.angles) * 25;
+      to = lasertarget getEye() + anglestoleft(lasertarget.angles) * 25;
     }
 
     to += randomvectorrange(1, 2);
@@ -1330,8 +1330,8 @@ function function_b173d63abff7f47e() {
   node = level.var_a37f75bc10a31a02;
   level.price enable_cqbwalk();
   level.price.goalradius = 32;
-  var_8a2ffa59e710efb8 = getclosestpointonnavmesh((25384.6, 2993.22, -919));
-  level.price setgoalpos(var_8a2ffa59e710efb8);
+  midway = getclosestpointonnavmesh((25384.6, 2993.22, -919));
+  level.price setgoalpos(midway);
   wait 3;
   node anim_sp::anim_reach_solo(level.price, "cover_arrive");
 
@@ -1362,8 +1362,8 @@ function function_84609d1094cd52ac() {
     waitframe();
   }
 
-  var_8a2ffa59e710efb8 = (25384.6, 2993.22, -919);
-  level.makarov setgoalpos(var_8a2ffa59e710efb8);
+  midway = (25384.6, 2993.22, -919);
+  level.makarov setgoalpos(midway);
   wait 5;
   node function_375622c1ffabbee4("cover_together");
   flag_set("mak_arrived_at_first_cover");
@@ -1762,16 +1762,16 @@ function function_77dc0ca600a05846() {
 
   while(true) {
     level.price waittill("nag_done_or_cancelled");
-    var_3f236c009dabea9f = 0;
+    doresponse = 0;
 
     if(firsttime) {
-      var_3f236c009dabea9f = 1;
+      doresponse = 1;
       firsttime = 0;
     } else if(randomint(100) < 65) {
-      var_3f236c009dabea9f = 1;
+      doresponse = 1;
     }
 
-    if(var_3f236c009dabea9f) {
+    if(doresponse) {
       wait 0.25;
       level.makarov say_global(var_7b0ef288e637af65 utility::deck_draw());
     }
@@ -1912,7 +1912,7 @@ function function_3aea264a5f522d1f() {
   veh = spawner utility::spawn_vehicle();
   veh scripts\common\vehicle::vehicle_lights_on();
   var_5a22d89fddb19d48 = 400;
-  veh function_77320e794d35465a("path", "radiusToStep", var_5a22d89fddb19d48);
+  veh setconfigvalue("path", "radiusToStep", var_5a22d89fddb19d48);
 }
 
 function should_spawn(spawner) {
@@ -2339,7 +2339,7 @@ function function_f60ad9dd45434e63() {
   civs = [];
 
   for(i = 1; i < 5; i++) {
-    guy = fakeactor::function_d9469562fdbb08bc("actor_jup_civilian_rus_male_flashback", (0, 0, 0), (0, 0, 0));
+    guy = fakeactor::spawndroneaitype("actor_jup_civilian_rus_male_flashback", (0, 0, 0), (0, 0, 0));
     guy.animname = "civ0" + i;
     temp anim_first_frame_solo(guy, "squeeze_through");
     civs[civs.size] = guy;
@@ -2622,7 +2622,7 @@ function function_c0a779c8daff18bd() {
     civ = spawn_aitype(classname, var_8f1b7542d7fdc179, (0, 0, 0), 1, 0, 0, "escort2_outside_civ");
     civ._blackboard.skiptransition = 1;
     civ function_b661b022700ba72f("script", 1);
-    civ function_d5cda8a759cc36bc("flee");
+    civ setcivstate("flee");
     civ.goalradius = 32;
     civ set_movement_speed(160 + randomint(20));
     civ setgoalpos(runto[randomint(runto.size)]);
@@ -3430,7 +3430,7 @@ function bus_enemy_wait(node) {
 function function_9cc49c07012d80ef() {
   self endon("death");
   self endon("stop_fake_stealth");
-  self function_9f82c74eb1b7caf9(0);
+  self setcanusecover(0);
   self.fake_enemy endon("death");
   z_value = self.origin[2] + 100;
 
@@ -3686,7 +3686,7 @@ function last_enemy(var_f9788b8e98c2aa1e) {
     waitframe();
   }
 
-  var_12bf53e8bd9f57d0 = undefined;
+  lastguy = undefined;
 
   foreach(guy in getaiarray("axis")) {
     if(guy == level.makarov) {
@@ -3694,7 +3694,7 @@ function last_enemy(var_f9788b8e98c2aa1e) {
     }
 
     if(isalive(guy)) {
-      var_12bf53e8bd9f57d0 = guy;
+      lastguy = guy;
     }
   }
 
@@ -3702,15 +3702,15 @@ function last_enemy(var_f9788b8e98c2aa1e) {
     flag_set(var_f9788b8e98c2aa1e);
   }
 
-  if(!isalive(var_12bf53e8bd9f57d0)) {
+  if(!isalive(lastguy)) {
     return;
   }
 
-  if(isendstr(var_12bf53e8bd9f57d0.classname, "shield")) {
+  if(isendstr(lastguy.classname, "shield")) {
     return;
   }
 
-  var_12bf53e8bd9f57d0 endon("death");
+  lastguy endon("death");
 
   while(true) {
     if(flag("last_bus_enemy")) {
@@ -3740,8 +3740,8 @@ function last_enemy(var_f9788b8e98c2aa1e) {
       }
     }
 
-    var_12bf53e8bd9f57d0.goalradius = 40;
-    var_12bf53e8bd9f57d0 setgoalpos(var_32d00b5d5e121172);
+    lastguy.goalradius = 40;
+    lastguy setgoalpos(var_32d00b5d5e121172);
     waittill_player_moves_or_timeout(3);
   }
 }
@@ -4045,7 +4045,7 @@ function function_7a7540d0d9745c7b() {
   level thread function_33a93d33f8b7fc5a();
 }
 
-function function_c3ae60ce78a6e109() {
+function exfil_setup() {
   namespace_47819225b08b445d::spawn_price();
   namespace_47819225b08b445d::function_dc2aa213aa5830aa();
   escort_globals();
@@ -4063,7 +4063,7 @@ function function_c3ae60ce78a6e109() {
   thread exfil_heli();
 }
 
-function function_c491ef4666deb499() {
+function exfil_main() {
   autosave_by_name();
   thread function_c9cc66db28acc040();
   thread function_2f96fcbbfb50889d();
@@ -4228,7 +4228,7 @@ function exfil_heli() {
   level.player setsoundsubmix("sp_jup_flashback_outro", 1);
   level.player clearsoundsubmix("sp_jup_flashback_pre_outro", 1.5);
   level.player clearsoundsubmix("sp_jup_flashback_exit_garage", 1.5);
-  thread function_8615a6b7cd263577();
+  thread exfil_music();
   flag_set("exfil_scene_started");
   function_fc13141d330a0ea0();
   flag_set("exfil_heli_entered");
@@ -4258,16 +4258,16 @@ function function_48de81aa8f550174() {
   level.exfil_heli function_488ba3c1dd47ae93();
   waitframe();
   level.exfil_heli clearlookatent();
-  var_f4047c091b96e51b = startpos + (0, 0, 150);
+  flyto = startpos + (0, 0, 150);
   level.exfil_heli setturningability(1);
-  level.exfil_heli setvehgoalpos(var_f4047c091b96e51b, 1);
+  level.exfil_heli setvehgoalpos(flyto, 1);
   level.exfil_heli vehicle_setspeed(30, 5, 5);
   level.exfil_heli sethoverparams(0, 0, 0);
   level.exfil_heli delaycall(2, &setgoalyaw, startangles[1]);
   level.exfil_heli delaycall(2, &settargetyaw, startangles[1]);
   var_1d652fb2ebe872f4 = 3600;
 
-  while(distancesquared(level.exfil_heli.origin, var_f4047c091b96e51b) > var_1d652fb2ebe872f4) {
+  while(distancesquared(level.exfil_heli.origin, flyto) > var_1d652fb2ebe872f4) {
     waitframe();
   }
 
@@ -4278,12 +4278,12 @@ function function_48de81aa8f550174() {
   flag_wait("lz_clear");
   level thread function_e5303500f4d98669();
   thread function_26dacc8f0e31a7ec();
-  var_f4047c091b96e51b = startpos;
-  level.exfil_heli setvehgoalpos(var_f4047c091b96e51b, 1);
+  flyto = startpos;
+  level.exfil_heli setvehgoalpos(flyto, 1);
   level.exfil_heli vehicle_setspeed(10, 8);
   var_1d652fb2ebe872f4 = 9;
 
-  while(distancesquared(level.exfil_heli.origin, var_f4047c091b96e51b) > var_1d652fb2ebe872f4) {
+  while(distancesquared(level.exfil_heli.origin, flyto) > var_1d652fb2ebe872f4) {
     waitframe();
   }
 
@@ -4402,14 +4402,14 @@ function heli_pilot() {
   level.pilot.script_friendname = undefined;
   level.pilot.name = undefined;
   level.pilot scripts\sp\names::get_name();
-  level.pilot utility::function_ab35ae296c8f8609("Bubba");
+  level.pilot utility::set_callsign("Bubba");
   animation::anim_first_frame_solo(level.pilot, "idle", "tag_seat_0");
   waitframe();
   level.pilot linkTo(self, "tag_seat_0");
   level.pilot setanim(level.pilot utility::getanim("idle"), 1, 0.05);
 }
 
-function function_8615a6b7cd263577() {
+function exfil_music() {
   setmusicstate("mx_flashback_exfil");
 }
 
@@ -4483,7 +4483,7 @@ function function_999503858b0cfd1() {
   self setgoalnode(newnode);
 }
 
-function function_6da48ae496824cd6() {}
+function exfil_catchup() {}
 
 function function_60c47ca07ab2292d() {
   if(isDefined(self.follow_ent)) {
@@ -4493,7 +4493,7 @@ function function_60c47ca07ab2292d() {
   disable_pain();
   self.ignoreme = 1;
   self.ignoreall = 1;
-  self function_9f82c74eb1b7caf9(0);
+  self setcanusecover(0);
   self.grenadeawareness = 0;
 
   if(scripts\sp\friendlyfire::iscivilian()) {
@@ -4519,8 +4519,8 @@ function function_2bbd12be32ea70f5(bool) {
 function function_b1853f791f900c4e(node) {
   level notify("new_makarov_node");
   level endon("new_makarov_node");
-  var_82474633ebdcb6e2 = getnode(node.target, "targetname");
-  level childthread function_3fc4342abeac0064(var_82474633ebdcb6e2);
+  pricenode = getnode(node.target, "targetname");
+  level childthread function_3fc4342abeac0064(pricenode);
 }
 
 function function_e553c53012cc2e1a() {
@@ -4684,15 +4684,15 @@ function escort_cover(bool) {
   ents = array_combine(ents, scriptables);
   gate = getEnt("escort_gate", "targetname");
   var_f2feac4ac119e9ed = getEnt("car_corpse", "targetname");
-  var_ae2cb8519d6ee23 = getEnt("escort_cover_ai_blocker", "targetname");
+  aiblocker = getEnt("escort_cover_ai_blocker", "targetname");
   ents[ents.size] = getEnt("police_road_block", "targetname");
   ents[ents.size] = getEnt("lights_car", "targetname");
 
-  if(isDefined(var_ae2cb8519d6ee23)) {
+  if(isDefined(aiblocker)) {
     if(istrue(bool)) {
-      var_ae2cb8519d6ee23 disconnectPaths();
+      aiblocker disconnectPaths();
     } else {
-      var_ae2cb8519d6ee23 connectpaths();
+      aiblocker connectpaths();
     }
   }
 
@@ -4809,11 +4809,11 @@ function player_gesture_melee() {
   level.player.allow_melee = 1;
 
   while(true) {
-    if(!function_afaaaca2c35aca6a()) {
+    if(!player_can_melee()) {
       level.player val::set("makarov_escort", "melee", 0);
       level.player.allow_melee = 0;
 
-      while(!function_afaaaca2c35aca6a()) {
+      while(!player_can_melee()) {
         waitframe();
       }
 
@@ -4928,8 +4928,8 @@ function function_f9a969e3f758caf7() {
   set_movement_speed(60);
 }
 
-function function_968a8fa9191dd675(var_c99a285cabf7ec7b, var_88daf353e30acf25, targetorigin) {
-  clock = function_41c948d469bde909(var_c99a285cabf7ec7b, var_88daf353e30acf25, targetorigin);
+function function_968a8fa9191dd675(viewerangles, viewerorigin, targetorigin) {
+  clock = function_41c948d469bde909(viewerangles, viewerorigin, targetorigin);
   dir = undefined;
 
   if(clock < 2 || clock > 10) {
@@ -4945,12 +4945,12 @@ function function_968a8fa9191dd675(var_c99a285cabf7ec7b, var_88daf353e30acf25, t
   return dir;
 }
 
-function function_41c948d469bde909(var_c99a285cabf7ec7b, var_88daf353e30acf25, targetorigin) {
-  forward = anglesToForward(var_c99a285cabf7ec7b);
+function function_41c948d469bde909(viewerangles, viewerorigin, targetorigin) {
+  forward = anglesToForward(viewerangles);
   vfacing = vectorNormalize(forward);
-  var_7004ba7d94d78df6 = vectortoangles(vfacing);
-  anglestopoint = vectortoangles(targetorigin - var_88daf353e30acf25);
-  angle = var_7004ba7d94d78df6[1] - anglestopoint[1];
+  anglestofacing = vectortoangles(vfacing);
+  anglestopoint = vectortoangles(targetorigin - viewerorigin);
+  angle = anglestofacing[1] - anglestopoint[1];
   angle += 360;
   angle = int(angle) % 360;
 
@@ -5015,7 +5015,7 @@ function function_c40e4448d7a73ff5() {
   return true;
 }
 
-function function_afaaaca2c35aca6a() {
+function player_can_melee() {
   if(level.player isgestureplaying("fbk_gesture_makarov_shove")) {
     return false;
   }

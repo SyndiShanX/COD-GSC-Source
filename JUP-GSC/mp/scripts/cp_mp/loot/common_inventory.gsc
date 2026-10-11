@@ -389,7 +389,7 @@ function function_f64964e50cc34c47(itembundlename, itembundle, item, autouse) {
     remainder = function_4b5b6b5953138fe7(itembundle, item.count);
 
     if(remainder <= 0) {
-      self notify("self_pickedupitem", function_40fd49171fad19d3(item.type));
+      self notify("self_pickedupitem", getxhashasset(item.type));
     }
 
     return remainder;
@@ -529,8 +529,8 @@ function function_dbd1a6ad7182a0da() {
   }
 
   for(index = 0; index < 50; index++) {
-    lootid = self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "lootID");
-    quantity = self getplayerdata(level.var_5d69837cf4db0407, "dmzInventory", index, "quantity");
+    lootid = self getplayerdata(level.progressiongroup, "dmzInventory", index, "lootID");
+    quantity = self getplayerdata(level.progressiongroup, "dmzInventory", index, "quantity");
     type = scripts\cp_mp\utility\loot::function_282cf83c9eeda744(lootid);
     ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(lootid);
 
@@ -936,7 +936,7 @@ function function_7ea0601f1375d4c7(stubcache) {
   self.var_2fa5b49969def47 = stubcache;
   self.var_f2aa9ae949179907 = self.origin;
 
-  if(stubcache.var_9c44eb334c225d45 == 1 && !isstruct(stubcache) && stubcache function_73cc0f04c4c5001d()) {
+  if(stubcache.var_9c44eb334c225d45 == 1 && !isstruct(stubcache) && stubcache isscriptableinstance()) {
     foreach(player in level.players) {
       stubcache disablescriptableplayeruse(player);
     }
@@ -962,7 +962,7 @@ function function_cc518f9c6e1d9543(stubcache) {
 
   self setclientomnvar("loot_container_open", 0);
 
-  if(stubcache.var_9c44eb334c225d45 == 1 && !isstruct(stubcache) && stubcache function_73cc0f04c4c5001d()) {
+  if(stubcache.var_9c44eb334c225d45 == 1 && !isstruct(stubcache) && stubcache isscriptableinstance()) {
     if(scripts\cp_mp\loot\common_cache::iscontainerempty(stubcache)) {
       function_c14962ea14e58968(stubcache);
     } else {
@@ -1055,7 +1055,7 @@ function function_2d05d3354917445b(backpackindex, lootid, quantity) {
   function_ca3bbb1070436540(backpackindex, lootid, quantity);
 
   if(isDefined(var_a8856d1c2cbf78f6)) {
-    newitembundle = function_50f8a8f765bad85e(var_a8856d1c2cbf78f6, [#"pickupsfx"]);
+    newitembundle = getscriptbundlefieldvalues(var_a8856d1c2cbf78f6, [#"pickupsfx"]);
     function_fbfd7096a2dbc7e7(newitembundle, 1);
   }
 }
@@ -1126,7 +1126,7 @@ function function_181a584e4a68d5d6(lootid, quantity) {
 }
 
 function function_1b35b10884bd8d67() {
-  result = self getplayerdata(level.var_5d69837cf4db0407, function_2205ef8e9a67e1be());
+  result = self getplayerdata(level.progressiongroup, function_2205ef8e9a67e1be());
 
   if(!isDefined(result)) {
     result = function_286713f0349afb22();
@@ -1142,9 +1142,9 @@ function function_32c79be2384f10fb(size, itembundle) {
   }
 
   if(isDefined(size)) {
-    self setplayerdata(level.var_5d69837cf4db0407, function_2205ef8e9a67e1be(), size);
+    self setplayerdata(level.progressiongroup, function_2205ef8e9a67e1be(), size);
   } else {
-    self setplayerdata(level.var_5d69837cf4db0407, function_2205ef8e9a67e1be(), function_286713f0349afb22());
+    self setplayerdata(level.progressiongroup, function_2205ef8e9a67e1be(), function_286713f0349afb22());
   }
 
   self setclientomnvar("ui_loot_backpack_type", function_afb28406eb20d361(itembundle));
@@ -1174,11 +1174,11 @@ function function_afb28406eb20d361(itembundle) {
 }
 
 function function_d870b2c45335bd88(index) {
-  return self getplayerdata(level.var_5d69837cf4db0407, function_9bb27db31cac473d(), index, "lootID");
+  return self getplayerdata(level.progressiongroup, function_9bb27db31cac473d(), index, "lootID");
 }
 
 function function_5ce7fe3dca9c1a22(index) {
-  return self getplayerdata(level.var_5d69837cf4db0407, function_9bb27db31cac473d(), index, "quantity");
+  return self getplayerdata(level.progressiongroup, function_9bb27db31cac473d(), index, "quantity");
 }
 
 function function_ca3bbb1070436540(index, lootid, quantity) {
@@ -1196,24 +1196,24 @@ function function_ca3bbb1070436540(index, lootid, quantity) {
   }
 
   backpackkey = function_9bb27db31cac473d();
-  self setplayerdata(level.var_5d69837cf4db0407, backpackkey, index, "lootID", lootid);
-  self setplayerdata(level.var_5d69837cf4db0407, backpackkey, index, "quantity", int(quantity));
+  self setplayerdata(level.progressiongroup, backpackkey, index, "lootID", lootid);
+  self setplayerdata(level.progressiongroup, backpackkey, index, "quantity", int(quantity));
 }
 
 function function_e2b4c63cab73c1f1() {
-  weapon = self getplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "weapon");
+  weapon = self getplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "weapon");
 
   if(weapon == "none") {
     return undefined;
   }
 
-  variantid = self getplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "variantID");
+  variantid = self getplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "variantID");
   attachments = [];
   attachmentids = [];
 
   for(attachmentindex = 0; attachmentindex < 7; attachmentindex++) {
-    attachments[attachmentindex] = self getplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "attachmentSetup", attachmentindex, "attachment");
-    attachmentids[attachmentindex] = self getplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "attachmentSetup", attachmentindex, "variantID");
+    attachments[attachmentindex] = self getplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "attachmentSetup", attachmentindex, "attachment");
+    attachmentids[attachmentindex] = self getplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "attachmentSetup", attachmentindex, "variantID");
   }
 
   return scripts\cp_mp\weapon::buildweapon(weapon, attachments, undefined, undefined, variantid, attachmentids);
@@ -1234,9 +1234,9 @@ function function_ad55c4cd0426138d(weapon) {
   }
 
   lootid = function_2c836ad05e5f634c(ref);
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "weapon", rootname);
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "variantID", variantid);
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "lootItemID", lootid);
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "weapon", rootname);
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "variantID", variantid);
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "lootItemID", lootid);
   self.var_8a265f7b950a8d5d = self getweaponammoclip(weapon) + self getweaponammostock(weapon);
 
   if(weapon.hasalternate) {
@@ -1245,42 +1245,42 @@ function function_ad55c4cd0426138d(weapon) {
   }
 
   attachments = getweaponattachments(weapon);
-  defaulttoidmap = scripts\cp_mp\weapon::function_792bacb194f6f862(rootname);
+  defaulttoidmap = scripts\cp_mp\weapon::getbaseweaponattachdefaulttoidmap(rootname);
   var_428a6c7cd65625c0 = 0;
 
   for(attachmentindex = 0; attachmentindex < attachments.size && var_428a6c7cd65625c0 < 7; attachmentindex++) {
     if(!isDefined(defaulttoidmap[attachments[attachmentindex]])) {
-      self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "attachmentSetup", var_428a6c7cd65625c0, "attachment", attachments[attachmentindex]);
-      self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "attachmentSetup", var_428a6c7cd65625c0, "variantID", 0);
+      self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "attachmentSetup", var_428a6c7cd65625c0, "attachment", attachments[attachmentindex]);
+      self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "attachmentSetup", var_428a6c7cd65625c0, "variantID", 0);
       var_428a6c7cd65625c0++;
     }
   }
 }
 
 function function_ced2abb96f1d86a5() {
-  return self getplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "weapon") != "none";
+  return self getplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "weapon") != "none";
 }
 
 function function_69df855efa3b5b9e() {
-  return self getplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "lootItemID");
+  return self getplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "lootItemID");
 }
 
 function function_bd059d6c2e0ece90() {
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "weapon", "none");
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "lootItemID", 0);
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "camo", "none");
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "reticle", "none");
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "cosmeticAttachment", "none");
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "variantID", 0);
-  self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "blueprintName", "");
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "weapon", "none");
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "lootItemID", 0);
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "camo", "none");
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "reticle", "none");
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "cosmeticAttachment", "none");
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "variantID", 0);
+  self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "blueprintName", "");
 
   for(attachindex = 0; attachindex < 5; attachindex++) {
-    self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "attachmentSetup", attachindex, "attachment", "none");
-    self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "attachmentSetup", attachindex, "variantID", 0);
+    self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "attachmentSetup", attachindex, "attachment", "none");
+    self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "attachmentSetup", attachindex, "variantID", 0);
   }
 
   for(var_36d2abbdcbcb186c = 0; var_36d2abbdcbcb186c < 4; var_36d2abbdcbcb186c++) {
-    self setplayerdata(level.var_5d69837cf4db0407, function_5f55af0d9c99908b(), "sticker", var_36d2abbdcbcb186c, "none");
+    self setplayerdata(level.progressiongroup, function_5f55af0d9c99908b(), "sticker", var_36d2abbdcbcb186c, "none");
   }
 }
 

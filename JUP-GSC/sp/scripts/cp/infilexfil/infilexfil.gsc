@@ -694,7 +694,7 @@ function infil_setup_ui() {
   level.infil_in_progress = 1;
   cg_drawcrosshair = getdvarint(@ "cg_drawcrosshair");
   cg_drawcrosshairnames = getdvarint(@ "cg_drawcrosshairnames");
-  var_c3f949f19ad560e2 = getdvarint(@ "hash_721a6fa1822b17d9");
+  cg_drawfriendlynamesalways = getdvarint(@ "hash_721a6fa1822b17d9");
   setDvar(@ "cg_drawcrosshair", 0);
   setDvar(@ "cg_drawcrosshairnames", 1);
   setDvar(@ "hash_721a6fa1822b17d9", 1);
@@ -708,7 +708,7 @@ function infil_setup_ui() {
   setomnvar("ui_always_show_nameplates", ui_always_show_nameplates);
   setDvar(@ "cg_drawcrosshair", cg_drawcrosshair);
   setDvar(@ "cg_drawcrosshairnames", cg_drawcrosshairnames);
-  setDvar(@ "hash_721a6fa1822b17d9", var_c3f949f19ad560e2);
+  setDvar(@ "hash_721a6fa1822b17d9", cg_drawfriendlynamesalways);
   level.infil_in_progress = undefined;
   wait 2;
   level.infil_in_progress_buffer = undefined;

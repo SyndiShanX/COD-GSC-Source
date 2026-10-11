@@ -62,7 +62,7 @@ function init() {
         continue;
       }
 
-      if(scripts\mp\poi::function_47d356083884f913() && !scripts\mp\poi::function_9c93e67f90980177(loc.origin)) {
+      if(scripts\mp\poi::poi_issystemactive() && !scripts\mp\poi::function_9c93e67f90980177(loc.origin)) {
         removelocation(loc);
         continue;
       }
@@ -478,7 +478,7 @@ function function_9b45d31903431d9b(loc) {
   return false;
 }
 
-function ammorestock_used(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function ammorestock_used(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:xfc>");
 
   if(scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
@@ -615,9 +615,9 @@ function ammorestock_playeruse(player, instance) {
     }
 
     if(weaponobj.hasalternate) {
-      var_6890a4ce965bba99 = weaponobj getaltweapon();
+      weaponaltobj = weaponobj getaltweapon();
 
-      if(player getweaponammostock(var_6890a4ce965bba99) < weaponmaxammo(var_6890a4ce965bba99)) {
+      if(player getweaponammostock(weaponaltobj) < weaponmaxammo(weaponaltobj)) {
         var_55efab49565e8545 = 1;
       }
     }
@@ -679,28 +679,28 @@ function ammorestock_playeruse(player, instance) {
       }
 
       if(istrue(weaponobj.hasalternate) && !isaxeweapon(weaponobj)) {
-        var_6890a4ce965bba99 = weaponobj getaltweapon();
-        var_91093ef03654702c = weaponclass(var_6890a4ce965bba99);
+        weaponaltobj = weaponobj getaltweapon();
+        var_91093ef03654702c = weaponclass(weaponaltobj);
 
         if(var_91093ef03654702c == "grenade") {
-          addammo = scripts\mp\weapons::getammooverride(var_6890a4ce965bba99);
-          stockammo = player getweaponammostock(var_6890a4ce965bba99);
+          addammo = scripts\mp\weapons::getammooverride(weaponaltobj);
+          stockammo = player getweaponammostock(weaponaltobj);
           newammo = int(stockammo + addammo);
-          player setweaponammostock(var_6890a4ce965bba99, newammo);
-        } else if(var_6890a4ce965bba99.type == "bullet") {
-          if(getdvarint(@ "hash_9ff8020dd5f23959", 0) && isDefined(var_6890a4ce965bba99.underbarrel) && var_6890a4ce965bba99.underbarrel == "jup_ub_flame_01") {
-            player setweaponammoclip(var_6890a4ce965bba99, var_6890a4ce965bba99.clipsize);
+          player setweaponammostock(weaponaltobj, newammo);
+        } else if(weaponaltobj.type == "bullet") {
+          if(getdvarint(@ "hash_9ff8020dd5f23959", 0) && isDefined(weaponaltobj.underbarrel) && weaponaltobj.underbarrel == "jup_ub_flame_01") {
+            player setweaponammoclip(weaponaltobj, weaponaltobj.clipsize);
           } else if(var_91093ef03654702c == "spread") {
-            addammo = scripts\mp\weapons::getammooverride(var_6890a4ce965bba99, forceclipsize);
-            stockammo = player getweaponammostock(var_6890a4ce965bba99);
+            addammo = scripts\mp\weapons::getammooverride(weaponaltobj, forceclipsize);
+            stockammo = player getweaponammostock(weaponaltobj);
             newammo = int(stockammo + addammo);
-            player setweaponammostock(var_6890a4ce965bba99, newammo);
+            player setweaponammostock(weaponaltobj, newammo);
           }
         } else {
-          addammo = scripts\mp\weapons::getammooverride(var_6890a4ce965bba99, forceclipsize);
-          stockammo = player getweaponammostock(var_6890a4ce965bba99);
+          addammo = scripts\mp\weapons::getammooverride(weaponaltobj, forceclipsize);
+          stockammo = player getweaponammostock(weaponaltobj);
           newammo = int(stockammo + addammo);
-          player setweaponammostock(var_6890a4ce965bba99, newammo);
+          player setweaponammostock(weaponaltobj, newammo);
         }
       }
 
@@ -715,7 +715,7 @@ function ammorestock_playeruse(player, instance) {
         player setweaponammoclip(weaponobj, weaponclipsize(weaponobj));
       } else if(istrue(level.var_93d3de5b393a5e89)) {
         max_clip_ammo = weaponclipsize(weaponobj);
-        var_d7732d0238eae9ff = weaponmaxammo(weaponobj);
+        max_stock_ammo = weaponmaxammo(weaponobj);
 
         if(scripts\mp\utility\weapon::isakimbo(weaponobj)) {
           player setweaponammoclip(weaponobj, max_clip_ammo, "left");
@@ -724,8 +724,8 @@ function ammorestock_playeruse(player, instance) {
           player setweaponammoclip(weaponobj, max_clip_ammo);
         }
 
-        player setweaponammostock(weaponobj, var_d7732d0238eae9ff);
-        addammo = var_d7732d0238eae9ff;
+        player setweaponammostock(weaponobj, max_stock_ammo);
+        addammo = max_stock_ammo;
       } else if(weaponobj.basename == "iw8_lm_dblmg_mp") {
         player setweaponammoclip(weaponobj, clipammo + singleclipammo);
       } else {
@@ -743,11 +743,11 @@ function ammorestock_playeruse(player, instance) {
 
   if(isDefined(primary) && function_f4204f5a6ca70972(primary)) {
     var_9c161cdc55bf9640 = player scripts\mp\equipment::getequipmentammo(primary);
-    var_93622e40b0ae3bdd = player scripts\mp\equipment::getequipmentmaxammo(primary, player.class);
+    maxequipmentammo = player scripts\mp\equipment::getequipmentmaxammo(primary, player.class);
 
-    if(var_9c161cdc55bf9640 < var_93622e40b0ae3bdd) {
+    if(var_9c161cdc55bf9640 < maxequipmentammo) {
       if(var_23c42b51b990e86e) {
-        player scripts\mp\equipment::setequipmentslotammo("primary", var_93622e40b0ae3bdd);
+        player scripts\mp\equipment::setequipmentslotammo("primary", maxequipmentammo);
       } else {
         player scripts\mp\equipment::incrementequipmentammo(primary);
       }
@@ -767,9 +767,9 @@ function ammorestock_playeruse(player, instance) {
 
   if(isDefined(secondary) && function_f4204f5a6ca70972(secondary)) {
     var_9c161cdc55bf9640 = player scripts\mp\equipment::getequipmentammo(secondary);
-    var_93622e40b0ae3bdd = player scripts\mp\equipment::getequipmentmaxammo(secondary, player.class);
+    maxequipmentammo = player scripts\mp\equipment::getequipmentmaxammo(secondary, player.class);
 
-    if(var_9c161cdc55bf9640 < var_93622e40b0ae3bdd) {
+    if(var_9c161cdc55bf9640 < maxequipmentammo) {
       if(var_23c42b51b990e86e) {
         player scripts\mp\equipment::setequipmentslotammo("secondary", scripts\mp\equipment::getequipmentmaxammo(secondary, player.class));
       } else {
@@ -878,9 +878,9 @@ function function_42f888e2e819cc64(player, instance) {
 
   foreach(equipment in var_c7a61b8cf2433e2a) {
     var_6088850c9e835589 = player scripts\mp\equipment::getequipmentammo(equipment);
-    var_93622e40b0ae3bdd = player scripts\mp\equipment::getequipmentmaxammo(equipment);
+    maxequipmentammo = player scripts\mp\equipment::getequipmentmaxammo(equipment);
 
-    if(var_6088850c9e835589 < var_93622e40b0ae3bdd) {
+    if(var_6088850c9e835589 < maxequipmentammo) {
       var_5f947642c6e09e85 = 0;
       break;
     }
@@ -929,11 +929,11 @@ function function_42f888e2e819cc64(player, instance) {
   }
 
   foreach(equipment in var_c7a61b8cf2433e2a) {
-    var_93622e40b0ae3bdd = player scripts\mp\equipment::getequipmentmaxammo(equipment);
+    maxequipmentammo = player scripts\mp\equipment::getequipmentmaxammo(equipment);
 
     if(isDefined(level.br_pickups.br_equipnametoscriptable[equipment]) && !isDefined(var_a0115a87500b34b[level.br_pickups.br_equipnametoscriptable[equipment]])) {
       currentammo = player scripts\mp\equipment::getequipmentammo(equipment);
-      ammogiven = var_93622e40b0ae3bdd - currentammo;
+      ammogiven = maxequipmentammo - currentammo;
       fakepickup = spawnStruct();
       fakepickup.count = ammogiven;
       fakepickup.scriptablename = level.br_pickups.br_equipnametoscriptable[equipment];
@@ -941,7 +941,7 @@ function function_42f888e2e819cc64(player, instance) {
       var_a0115a87500b34b[fakepickup.scriptablename] = fakepickup;
     }
 
-    player scripts\mp\equipment::incrementequipmentammo(equipment, var_93622e40b0ae3bdd);
+    player scripts\mp\equipment::incrementequipmentammo(equipment, maxequipmentammo);
   }
 
   player hudicontype("br_ammo");

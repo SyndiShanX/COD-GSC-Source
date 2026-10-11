@@ -9,13 +9,13 @@
 #using scripts\engine\utility;
 #namespace effect_burn;
 
-function burn(durations, damage_percent, damage_cooldowns, attacker, unique_id, var_aaf0465944b061ed, inflictor, incendiary_rounds, idamage) {
+function burn(durations, damage_percent, damage_cooldowns, attacker, unique_id, kiastring, inflictor, incendiary_rounds, idamage) {
   if(!istrue(self.aisettings.var_994ad2292fc29de6)) {
     return 0;
   }
 
   burn_effect = function_108973a907c11ca7("burn", durations, unique_id, &start_burn, &end_burn);
-  burn_effect.var_aaf0465944b061ed = var_aaf0465944b061ed;
+  burn_effect.kiastring = kiastring;
   burn_effect.damage_percent = damage_percent;
   burn_effect.damage_cooldowns = damage_cooldowns;
   burn_effect.attacker = attacker;
@@ -27,9 +27,9 @@ function burn(durations, damage_percent, damage_cooldowns, attacker, unique_id, 
 }
 
 function private start_burn(var_12c084a213d7ad2) {
-  thread function_8ca6d968f6bcfe21(var_12c084a213d7ad2);
+  thread tick_burns(var_12c084a213d7ad2);
 
-  if(isDefined(var_12c084a213d7ad2.var_aaf0465944b061ed) && var_12c084a213d7ad2.var_aaf0465944b061ed == "napalmburst_kill") {
+  if(isDefined(var_12c084a213d7ad2.kiastring) && var_12c084a213d7ad2.kiastring == "napalmburst_kill") {
     ent_flag_set("napalm_burned");
     callback::callback("napalm_burned", var_12c084a213d7ad2);
     return;
@@ -41,7 +41,7 @@ function private start_burn(var_12c084a213d7ad2) {
 
 function private end_burn(var_12c084a213d7ad2) {
   if(!function_8ce7894f1a52fb77("burn")) {
-    if(isDefined(var_12c084a213d7ad2.var_aaf0465944b061ed) && var_12c084a213d7ad2.var_aaf0465944b061ed == "napalmburst_kill") {
+    if(isDefined(var_12c084a213d7ad2.kiastring) && var_12c084a213d7ad2.kiastring == "napalmburst_kill") {
       ent_flag_clear("napalm_burned");
       callback::callback("napalm_burned_end", var_12c084a213d7ad2);
       return;
@@ -52,7 +52,7 @@ function private end_burn(var_12c084a213d7ad2) {
   }
 }
 
-function private function_8ca6d968f6bcfe21(effect) {
+function private tick_burns(effect) {
   self notify("start_status_effect_burn_tick");
   self endon("start_status_effect_burn_tick");
   self endon("death");
@@ -70,10 +70,10 @@ function private function_8ca6d968f6bcfe21(effect) {
           damage_amount = self.maxhealth * burn_effect.damage_percent;
         }
 
-        if(self.health - damage_amount < 1 && isDefined(effect.var_aaf0465944b061ed)) {
+        if(self.health - damage_amount < 1 && isDefined(effect.kiastring)) {
           if(isPlayer(burn_effect.attacker)) {
             scoreeventparams = spawnStruct();
-            scoreeventparams.scoreevent = effect.var_aaf0465944b061ed;
+            scoreeventparams.scoreevent = effect.kiastring;
             scoreeventparams.reason = #"kill";
             burn_effect.attacker callback::callback("zombie_score_event", scoreeventparams);
           }

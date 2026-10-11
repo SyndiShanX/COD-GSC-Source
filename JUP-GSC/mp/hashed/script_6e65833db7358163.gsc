@@ -222,11 +222,11 @@ function function_958362f296f71e8e() {
     return;
   }
 
-  if(!isDefined(level.superglobals.staticsuperdata["super_aether_shroud"].var_ac26a499fff83d59)) {
-    level.superglobals.staticsuperdata["super_aether_shroud"].var_ac26a499fff83d59 = namespace_e23f629a8349dfaf::function_e7b6474ebd683537("super_aether_shroud", "aetherShroudTeleportDistance");
+  if(!isDefined(level.superglobals.staticsuperdata["super_aether_shroud"].n_teleport_distance)) {
+    level.superglobals.staticsuperdata["super_aether_shroud"].n_teleport_distance = namespace_e23f629a8349dfaf::function_e7b6474ebd683537("super_aether_shroud", "aetherShroudTeleportDistance");
   }
 
-  var_937222b11d4389e5 = level.superglobals.staticsuperdata["super_aether_shroud"].var_ac26a499fff83d59;
+  var_937222b11d4389e5 = level.superglobals.staticsuperdata["super_aether_shroud"].n_teleport_distance;
   v_angles = self.angles;
   a_v_points = [];
   v_eye = self getEye();

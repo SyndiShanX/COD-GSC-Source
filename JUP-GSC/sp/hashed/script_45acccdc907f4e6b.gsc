@@ -126,29 +126,29 @@ function private function_af2ef99ebc503337(vign_struct) {
   }
 }
 
-function function_245bb82d6b4f9621(vo_lines, guys, var_db7e7ff4175feab2) {
-  if(!isDefined(var_db7e7ff4175feab2)) {
+function function_245bb82d6b4f9621(vo_lines, guys, distance_to_player) {
+  if(!isDefined(distance_to_player)) {
     distance_toplayer = 150;
   }
 
   for(i = 0; i < vo_lines.size; i++) {
     vo_line = vo_lines[i];
     guy = guys[i % guys.size];
-    function_f6e5be73709120c9(vo_line, guy, var_db7e7ff4175feab2);
+    function_f6e5be73709120c9(vo_line, guy, distance_to_player);
   }
 }
 
-function function_f6e5be73709120c9(vo_line, guy, var_db7e7ff4175feab2) {
-  if(!isDefined(var_db7e7ff4175feab2)) {
+function function_f6e5be73709120c9(vo_line, guy, distance_to_player) {
+  if(!isDefined(distance_to_player)) {
     distance_toplayer = 150;
   }
 
   if(isDefined(level.var_726ab598c8999175[guy])) {
     while(true) {
       if(isDefined(level.var_726ab598c8999175[guy])) {
-        var_589c0eb9803a3415 = distance(level.player.origin, level.var_726ab598c8999175[guy].origin);
+        distance_from_player = distance(level.player.origin, level.var_726ab598c8999175[guy].origin);
 
-        if(var_589c0eb9803a3415 < var_db7e7ff4175feab2) {
+        if(distance_from_player < distance_to_player) {
           level.var_726ab598c8999175[guy] function_31fcf0528e5d8d3f(vo_line);
           break;
         }
@@ -353,15 +353,15 @@ function private function_e39484d42f09b9c1(guy) {
   }
 
   if(isDefined(self.target)) {
-    var_3e3b7f7727a65dad = function_7a18da6e48b71c35(self.target);
-    var_3e3b7f7727a65dad function_916233af1855619c();
+    nextstruct = function_7a18da6e48b71c35(self.target);
+    nextstruct function_916233af1855619c();
 
-    if(isDefined(var_3e3b7f7727a65dad.script_flag_wait)) {
-      if(var_3e3b7f7727a65dad function_68f8b8bd65b54d3("ai_waittill_notify")) {
-        guy waittill(var_3e3b7f7727a65dad.script_flag_wait);
-        var_3e3b7f7727a65dad.var_bd44a8387495a3fd = 1;
+    if(isDefined(nextstruct.script_flag_wait)) {
+      if(nextstruct function_68f8b8bd65b54d3("ai_waittill_notify")) {
+        guy waittill(nextstruct.script_flag_wait);
+        nextstruct.var_bd44a8387495a3fd = 1;
       } else {
-        flag_wait(var_3e3b7f7727a65dad.script_flag_wait);
+        flag_wait(nextstruct.script_flag_wait);
       }
 
       self notify("stop_loop");
@@ -371,7 +371,7 @@ function private function_e39484d42f09b9c1(guy) {
       self waittill(anime);
     }
 
-    var_3e3b7f7727a65dad thread function_e39484d42f09b9c1(guy);
+    nextstruct thread function_e39484d42f09b9c1(guy);
     return;
   }
 

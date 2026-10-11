@@ -349,18 +349,18 @@ function private function_1208466b550e2cdd(player, lvl, wait_time) {
 
 function private function_80105532df7fb53f(player) {
   fakeitem = spawnStruct();
-  var_d7732d0238eae9ff = 50;
+  max_stock_ammo = 50;
   item_entry = "ob_jup_item_weapon_ar_acharlie_blue";
   item_bundle = getscriptbundle("itemspawnentry:" + item_entry);
   item_scriptable = item_bundle.scriptable;
-  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(var_d7732d0238eae9ff);
+  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(max_stock_ammo);
   player scripts\cp_mp\loot\common_item::function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
   fakeitem = spawnStruct();
-  var_d7732d0238eae9ff = 50;
+  max_stock_ammo = 50;
   item_entry = "ob_jup_item_weapon_sm_coscar635_blue";
   item_bundle = getscriptbundle("itemspawnentry:" + item_entry);
   item_scriptable = item_bundle.scriptable;
-  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(var_d7732d0238eae9ff);
+  fakeitem.count = scripts\cp_mp\loot\common_item::function_7209c8cd4b2e3afd(max_stock_ammo);
   player scripts\cp_mp\loot\common_item::function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
 }
 
@@ -508,10 +508,10 @@ function private cheat_giveperks(player, cached_lvl) {
 
 function private function_5db5161c26cbc7f5(player, weaponname, weaponref) {
   fakeitem = spawnStruct();
-  var_d7732d0238eae9ff = weaponmaxammo(weaponname);
+  max_stock_ammo = weaponmaxammo(weaponname);
   item_bundle = getscriptbundle("itemspawnentry:" + weaponref);
   item_scriptable = item_bundle.scriptable;
-  fakeitem.count = common_item::function_7209c8cd4b2e3afd(var_d7732d0238eae9ff);
+  fakeitem.count = common_item::function_7209c8cd4b2e3afd(max_stock_ammo);
   player common_item::function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
 }
 

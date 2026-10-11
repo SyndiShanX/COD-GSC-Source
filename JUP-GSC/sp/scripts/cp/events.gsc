@@ -171,7 +171,7 @@ function function_51e853369bc3f0bf(entry) {
     return;
   }
 
-  if(istrue(entry.var_ea8529d33b9e81aa)) {
+  if(istrue(entry.isaward)) {
     scripts\cp\rank::registerscoreinfo(ref, #"hash_6dd3d93bbf03abc6", 1);
   }
 
@@ -210,7 +210,7 @@ function function_51e853369bc3f0bf(entry) {
 
   if(isxhashasset(entry.splashbundle)) {
     var_8cde9a095cf42d8f = function_2336488258354fbc(#"scriptbundle_splash", entry.splashbundle);
-    assertex(isDefined(var_8cde9a095cf42d8f), "Net const string id is undefined for an existing splash bundle: " + function_3c8848a3a11b2553(entry.splashbundle));
+    assertex(isDefined(var_8cde9a095cf42d8f), "Net const string id is undefined for an existing splash bundle: " + getxhashsourcename(entry.splashbundle));
 
     if(isDefined(var_8cde9a095cf42d8f)) {
       scripts\cp\rank::registerscoreinfo(ref, #"hash_9ef9bbcd1edc198b", var_8cde9a095cf42d8f);
@@ -351,10 +351,10 @@ function killedplayernotifysys(killid, victim, objweapon, meansofdeath) {
 }
 
 function notifykilledplayer(killid, victim, objweapon, meansofdeath, numkills) {
-  var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+  fullweaponstring = getcompleteweaponname(objweapon);
 
   for(i = 0; i < numkills; i++) {
-    self notify("got_a_kill", victim, var_366b0ecc2f28aead, meansofdeath);
+    self notify("got_a_kill", victim, fullweaponstring, meansofdeath);
     waitframe();
   }
 }
@@ -383,9 +383,9 @@ function killedenemy(killid, victim, objweapon, meansofdeath, inflictor, psoffse
   victimguid = victim.guid;
   myguid = self.guid;
   curtime = gettime();
-  var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+  fullweaponstring = getcompleteweaponname(objweapon);
   thread killedplayernotifysys(killid, victim, objweapon, meansofdeath);
-  thread updaterecentkills(killid, victim, objweapon, var_366b0ecc2f28aead);
+  thread updaterecentkills(killid, victim, objweapon, fullweaponstring);
   thread updatequadfeedcounter(self, killid);
   self.prevlastkilltime = self.lastkilltime;
   self.lastkilltime = curtime;
@@ -822,7 +822,7 @@ function killedenemy(killid, victim, objweapon, meansofdeath, inflictor, psoffse
         thread scripts\cp\points::doscoreevent(#"mantle_kill");
       }
 
-      if(isDefined(self.tookweaponfrom[var_366b0ecc2f28aead]) && self.tookweaponfrom[var_366b0ecc2f28aead] == victim) {
+      if(isDefined(self.tookweaponfrom[fullweaponstring]) && self.tookweaponfrom[fullweaponstring] == victim) {
         thread scripts\cp\points::doscoreevent(#"backfire");
         self.modifiers["backfire"] = 1;
         self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"backfire"));
@@ -932,7 +932,7 @@ function killedenemy(killid, victim, objweapon, meansofdeath, inflictor, psoffse
       self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"victiminvehicle"));
     }
 
-    if(self function_a7de57196f4b5d16()) {
+    if(self isinvehicleleanout()) {
       self.modifiers["vehiclelean"] = 1;
       self.modifiers["mask"] = scripts\cp_mp\challenges::function_6d40f12a09494350(self.modifiers["mask"], function_e2ff8f4b4e94f723(#"hash_7f94e81c1787ff7a", #"vehiclelean"));
     }
@@ -1012,7 +1012,7 @@ function killedenemy(killid, victim, objweapon, meansofdeath, inflictor, psoffse
     }
   }
 
-  bufferednotify("kill_event_buffered", victim, var_366b0ecc2f28aead, meansofdeath, self.modifiers);
+  bufferednotify("kill_event_buffered", victim, fullweaponstring, meansofdeath, self.modifiers);
 }
 
 function iskillstreakvehicleinflictor(einflictor) {
@@ -1531,7 +1531,7 @@ function monitorhealed() {
   }
 }
 
-function updaterecentkills(killid, victim, objweapon, var_366b0ecc2f28aead) {
+function updaterecentkills(killid, victim, objweapon, fullweaponstring) {
   self endon("disconnect");
   level endon("game_ended");
   self notify("updateRecentKills");
@@ -1547,10 +1547,10 @@ function updaterecentkills(killid, victim, objweapon, var_366b0ecc2f28aead) {
     self.recentkillsperweapon = [];
   }
 
-  if(!isDefined(self.recentkillsperweapon[var_366b0ecc2f28aead])) {
-    self.recentkillsperweapon[var_366b0ecc2f28aead] = 1;
+  if(!isDefined(self.recentkillsperweapon[fullweaponstring])) {
+    self.recentkillsperweapon[fullweaponstring] = 1;
   } else {
-    self.recentkillsperweapon[var_366b0ecc2f28aead]++;
+    self.recentkillsperweapon[fullweaponstring]++;
   }
 
   weaponinfo = scripts\cp\utility::getequipmenttype(objweapon.basename);
@@ -1559,12 +1559,12 @@ function updaterecentkills(killid, victim, objweapon, var_366b0ecc2f28aead) {
     level thread scripts\cp\cp_player_battlechatter::saytoself(self, "plr_killfirm_grenade", undefined, 0.75);
     level thread scripts\cp\cp_player_battlechatter::saytoself(self, "plr_killfirm_amf", undefined, 0.75);
 
-    if(self.recentkillsperweapon[var_366b0ecc2f28aead] > 0 && self.recentkillsperweapon[var_366b0ecc2f28aead] % 2 == 0) {
+    if(self.recentkillsperweapon[fullweaponstring] > 0 && self.recentkillsperweapon[fullweaponstring] % 2 == 0) {
       thread scripts\cp\points::doscoreevent(#"grenade_double");
     }
   }
 
-  bufferednotify("update_rapid_kill_buffered", self.recentkillcount, var_366b0ecc2f28aead);
+  bufferednotify("update_rapid_kill_buffered", self.recentkillcount, fullweaponstring);
 
   if(self.recentkillcount > 1) {
     thread multikill(killid, self.recentkillcount, 0);
@@ -1829,11 +1829,11 @@ function bombdefused(defuser) {
   defuser incpersstat("defuses", 1);
 
   if(isPlayer(defuser)) {
-    var_5814d27874b48e54 = spawnStruct();
-    var_5814d27874b48e54.player = defuser;
-    var_5814d27874b48e54.eventname = "defuse";
-    var_5814d27874b48e54.position = defuser.origin;
-    namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_on_game_event", var_5814d27874b48e54);
+    telemetrydata = spawnStruct();
+    telemetrydata.player = defuser;
+    telemetrydata.eventname = "defuse";
+    telemetrydata.position = defuser.origin;
+    namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_on_game_event", telemetrydata);
   }
 }
 
@@ -1939,10 +1939,10 @@ function processsplashpriorityqueue() {
 
   foreach(event in self.splashpriorityqueue) {
     if(splashallowed && istrue(event.showassplash) && event.alwaysshowsplash) {
-      println("<dev string:x2b>" + function_3c8848a3a11b2553(event.scoreeventref));
+      println("<dev string:x2b>" + getxhashsourcename(event.scoreeventref));
     }
 
-    println("<dev string:x35>" + function_3c8848a3a11b2553(event.scoreeventref));
+    println("<dev string:x35>" + getxhashsourcename(event.scoreeventref));
   }
 
   foreach(event in self.splashpriorityqueue) {

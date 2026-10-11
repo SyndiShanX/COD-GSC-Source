@@ -75,22 +75,22 @@ function function_3d68d8ff8bafc637(dmg_struct) {
     return dmg_struct.idamage;
   }
 
-  var_29a8ba8c9dd43fd2 = undefined;
+  n_pap_level = undefined;
 
   if(issharedfuncdefined("zombie", "get_pap_level") && isDefined(dmg_struct.eattacker)) {
-    var_29a8ba8c9dd43fd2 = dmg_struct.eattacker function_af5127390d3221e9(dmg_struct.objweapon);
+    n_pap_level = dmg_struct.eattacker function_af5127390d3221e9(dmg_struct.objweapon);
   }
 
-  if(!isDefined(var_29a8ba8c9dd43fd2) || var_29a8ba8c9dd43fd2 == 0) {
+  if(!isDefined(n_pap_level) || n_pap_level == 0) {
     return dmg_struct.idamage;
   }
 
   if(is_equal(dmg_struct.smeansofdeath, "MOD_PROJECTILE")) {
-    splash_damage = dmg_struct.idamage - level.var_5287f18049ad084[var_29a8ba8c9dd43fd2].impact_damage;
-    var_a007b35451d483b0 = (splash_damage / level.var_5287f18049ad084[var_29a8ba8c9dd43fd2].damage_scalar - level.var_5287f18049ad084[0].var_22cd43fdb2005800) / level.var_5287f18049ad084[0].var_812a118beadac588 * level.var_5287f18049ad084[var_29a8ba8c9dd43fd2].var_812a118beadac588 + level.var_5287f18049ad084[var_29a8ba8c9dd43fd2].var_22cd43fdb2005800;
-    return (var_a007b35451d483b0 + level.var_5287f18049ad084[var_29a8ba8c9dd43fd2].impact_damage);
+    splash_damage = dmg_struct.idamage - level.var_5287f18049ad084[n_pap_level].impact_damage;
+    var_a007b35451d483b0 = (splash_damage / level.var_5287f18049ad084[n_pap_level].damage_scalar - level.var_5287f18049ad084[0].var_22cd43fdb2005800) / level.var_5287f18049ad084[0].var_812a118beadac588 * level.var_5287f18049ad084[n_pap_level].var_812a118beadac588 + level.var_5287f18049ad084[n_pap_level].var_22cd43fdb2005800;
+    return (var_a007b35451d483b0 + level.var_5287f18049ad084[n_pap_level].impact_damage);
   } else if(is_equal(dmg_struct.smeansofdeath, "MOD_PROJECTILE_SPLASH")) {
-    var_a007b35451d483b0 = (dmg_struct.idamage / level.var_5287f18049ad084[var_29a8ba8c9dd43fd2].damage_scalar - level.var_5287f18049ad084[0].var_22cd43fdb2005800) / level.var_5287f18049ad084[0].var_812a118beadac588 * level.var_5287f18049ad084[var_29a8ba8c9dd43fd2].var_812a118beadac588 + level.var_5287f18049ad084[var_29a8ba8c9dd43fd2].var_22cd43fdb2005800;
+    var_a007b35451d483b0 = (dmg_struct.idamage / level.var_5287f18049ad084[n_pap_level].damage_scalar - level.var_5287f18049ad084[0].var_22cd43fdb2005800) / level.var_5287f18049ad084[0].var_812a118beadac588 * level.var_5287f18049ad084[n_pap_level].var_812a118beadac588 + level.var_5287f18049ad084[n_pap_level].var_22cd43fdb2005800;
     return var_a007b35451d483b0;
   }
 

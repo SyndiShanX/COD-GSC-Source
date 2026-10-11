@@ -63,13 +63,13 @@ function init_dialog() {
 
 function function_2beebfae871aed04(player) {
   for(i = 0; i < level.var_6c42f1942be0314.size; i++) {
-    partfound = player getplayerdata(level.var_5d69837cf4db0407, "dronePartsFound", i);
+    partfound = player getplayerdata(level.progressiongroup, "dronePartsFound", i);
     player setclientomnvar(level.var_6c42f1942be0314[i], partfound);
   }
 
   if(function_cba9562cfa638fe8(player)) {
     if(getdvarint(@ "hash_c8bcd09200a0d6f2", 1)) {
-      if(level.var_654f718e0c7ead7c && !player getplayerdata(level.var_5d69837cf4db0407, "droneLaunched")) {
+      if(level.var_654f718e0c7ead7c && !player getplayerdata(level.progressiongroup, "droneLaunched")) {
         if(isDefined(level.var_780fff00a6a68686)) {
           level.var_780fff00a6a68686 enableplayeruse(player);
           return;
@@ -266,7 +266,7 @@ function function_f1d36faeb630ecea(var_5c5b88ce7ae1228e) {
   level.var_5c5b88ce7ae1228e = var_5c5b88ce7ae1228e;
 }
 
-function function_10a0469fe6e9e108(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_10a0469fe6e9e108(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player.droneparts)) {
     assertmsg("<dev string:x281>");
     return;
@@ -284,7 +284,7 @@ function function_10a0469fe6e9e108(instance, part, state, player, var_a5b2c54141
 
   foreach(index in partindexes) {
     player setclientomnvar(level.var_6c42f1942be0314[index], 1);
-    player setplayerdata(level.var_5d69837cf4db0407, "dronePartsFound", index, 1);
+    player setplayerdata(level.progressiongroup, "dronePartsFound", index, 1);
     player.droneparts = function_57091b2d67654a14(player.droneparts, level.var_6c42f1942be0314[index]);
   }
 
@@ -310,7 +310,7 @@ function private launchdrone(player) {
   player scripts\mp\killstreaks\killstreaks::streakglobals_onkillstreakbeginuse(streakinfo);
   function_9a8d68db097f6be8(player, level.var_5c5b88ce7ae1228e.origin, level.var_5c5b88ce7ae1228e.angles, "radar_drone_recon", streakinfo);
   player setclientomnvar(level.var_6c42f1942be0314[0], 2);
-  player setplayerdata(level.var_5d69837cf4db0407, "droneLaunched", 1);
+  player setplayerdata(level.progressiongroup, "droneLaunched", 1);
   scripts\cp_mp\challenges::function_8359cadd253f9604(player, "BR_EASTEREGG_DRONEASSEMBLE", 1);
 }
 
@@ -420,10 +420,10 @@ function private function_cba9562cfa638fe8(player) {
 function private function_3c73da53109dcc01(player) {
   for(i = 0; i < level.var_6c42f1942be0314.size; i++) {
     player setclientomnvar(level.var_6c42f1942be0314[i], 0);
-    player setplayerdata(level.var_5d69837cf4db0407, "dronePartsFound", i, 0);
+    player setplayerdata(level.progressiongroup, "dronePartsFound", i, 0);
   }
 
-  player setplayerdata(level.var_5d69837cf4db0407, "droneLaunched", 0);
+  player setplayerdata(level.progressiongroup, "droneLaunched", 0);
 }
 
 function private function_3d94d1b826172df3() {

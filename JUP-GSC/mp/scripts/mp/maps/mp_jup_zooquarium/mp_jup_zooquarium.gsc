@@ -57,8 +57,8 @@ function function_713f089988ee955e() {
 function function_79d4df95607e117() {
   trigger_1 = spawn("trigger_radius", (-3832, -7082, -4), 0, 512, 1024);
   trigger_1.targetname = "OutOfBounds";
-  var_b1a2a4451f616e1e = spawn("trigger_radius", (-4466, -8168, -4), 0, 512, 1024);
-  var_b1a2a4451f616e1e.targetname = "OutOfBounds";
+  trigger_2 = spawn("trigger_radius", (-4466, -8168, -4), 0, 512, 1024);
+  trigger_2.targetname = "OutOfBounds";
   level.outofboundstriggers[level.outofboundstriggers.size] = trigger_1;
-  level.outofboundstriggers[level.outofboundstriggers.size] = var_b1a2a4451f616e1e;
+  level.outofboundstriggers[level.outofboundstriggers.size] = trigger_2;
 }

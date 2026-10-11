@@ -11,7 +11,7 @@
 #namespace online_event;
 
 function init() {
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() && scripts\mp\utility\game::matchmakinggame()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode() && scripts\mp\utility\game::matchmakinggame()) {
     level.var_3392f98172a332d7 = 1;
   }
 }
@@ -92,7 +92,7 @@ function function_a23861c0f0635cf4(var_5ea5f0acd4fd6e5f) {
   params = [function_d6f771aedba70ce7(aeeventname, #"hash_311cc95400ed6a7f"), edgeitem, function_d6f771aedba70ce7(aeeventname, #"hash_81c8086c749c4bb9"), 1];
 
   if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-    function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+    callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
   }
 
   if(!isDefined(self.var_52e352f8923ed6f9)) {

@@ -90,7 +90,7 @@ function playtraversearrivalanim(asmname, statename, params) {
   }
 }
 
-function function_e9cc41df0c7dfd7b(asmname, statename, params) {
+function playtraversearrivalanim_external(asmname, statename, params) {
   playtraversearrivalanim(asmname, statename, params);
 }
 
@@ -107,14 +107,14 @@ function playtraverseanim_scaled(asmname, statename, params) {
   self endon("terminate_ai_threads");
   self endon(statename + "_finished");
   checktraverse(statename);
-  var_ddbf32a121351dd = 1;
+  bsetupsuccess = 1;
   var_a1567247b6c748b3 = 0;
 
   if(self.var_32a34987ee1b3095 == "not_set" || self.var_32a34987ee1b3095 == "node_based" && !isDefined(self getnegotiationstartnode())) {
-    var_ddbf32a121351dd = self setuptraversaltransitioncheck(120);
+    bsetupsuccess = self setuptraversaltransitioncheck(120);
   }
 
-  if(var_ddbf32a121351dd) {
+  if(bsetupsuccess) {
     if(self.var_32a34987ee1b3095 == "linkless") {
       startpos = self function_ad3c975cb94e4736();
 
@@ -299,11 +299,11 @@ function playtraverseanim_scaled(asmname, statename, params) {
     traversalattributes.across_delta = self.traversestartnode.across_delta;
   }
 
-  self function_742e699e544869c2(traversalattributes.startpos, traversalattributes.endpos, traversalattributes.angles, traversalattributes.apex_delta, traversalattributes.across_delta);
+  self settraversalattributes(traversalattributes.startpos, traversalattributes.endpos, traversalattributes.angles, traversalattributes.apex_delta, traversalattributes.across_delta);
   return_note = asm_donotetracks(asmname, statename, notetrackhandle, undefined, undefined, 0);
 
   if(return_note == "code_move") {
-    assertex(var_370a8c08be55a7a5.size > 0, "<dev string:x299>" + function_3c8848a3a11b2553(getanimname(traversexanim)));
+    assertex(var_370a8c08be55a7a5.size > 0, "<dev string:x299>" + getxhashsourcename(getanimname(traversexanim)));
 
     if(isDefined(self.pathgoalpos)) {
       self motionwarpcancel();
@@ -346,16 +346,16 @@ function terminatetraverse(asmname, statename) {
 
 function handletraversealignment() {
   self animmode("noclip");
-  var_256ca46d1effdd41 = undefined;
+  targettraverseheight = undefined;
 
   if(self.var_32a34987ee1b3095 == "nodeless" || self.var_32a34987ee1b3095 == "linkless") {
-    var_256ca46d1effdd41 = self.var_64b933af90edc53c.traverse_height;
+    targettraverseheight = self.var_64b933af90edc53c.traverse_height;
   } else {
-    var_256ca46d1effdd41 = self.traversestartnode.traverse_height;
+    targettraverseheight = self.traversestartnode.traverse_height;
   }
 
-  if(isDefined(self.traverseheight) && isDefined(var_256ca46d1effdd41)) {
-    currentheight = var_256ca46d1effdd41 - self.traversestartz;
+  if(isDefined(self.traverseheight) && isDefined(targettraverseheight)) {
+    currentheight = targettraverseheight - self.traversestartz;
     thread teleportthread(currentheight - self.traverseheight);
   }
 }
@@ -391,14 +391,14 @@ function handletraversedrop() {
     endnotetracks = getnotetracktimes(self.traversexanim, "footstep_right_large");
   }
 
-  var_47b4bdc915cff70d = 1;
+  animendfrac = 1;
 
   if(endnotetracks.size > 0) {
-    var_47b4bdc915cff70d = endnotetracks[0];
+    animendfrac = endnotetracks[0];
   }
 
   animstartfrac = getnotetracktimes(self.traversexanim, "traverse_drop")[0];
-  animdelta = getmovedelta(self.traversexanim, animstartfrac, var_47b4bdc915cff70d);
+  animdelta = getmovedelta(self.traversexanim, animstartfrac, animendfrac);
   animdelta = rotatevector(animdelta, endnode.angles);
   var_2ed406669fbe4377 = 512;
   tracestart = (self.origin[0] + animdelta[0], self.origin[1] + animdelta[1], self.origin[2]);
@@ -427,7 +427,7 @@ function handletraversedrop() {
     targetangles = (0, targetyaw, 0);
   }
 
-  motionwarpwithtimes(self.traversexanim, targetpos, targetangles, animstartfrac, var_47b4bdc915cff70d);
+  motionwarpwithtimes(self.traversexanim, targetpos, targetangles, animstartfrac, animendfrac);
   thread finishtraversedrop(targetpos[2]);
 }
 
@@ -699,11 +699,11 @@ function calctraversetype(asmname, statename, params) {
   }
 
   self.var_20a0e88052918576 = 1;
-  self.var_e2b4fc394eef5c0f = self.var_ad4d9f5a34656396;
+  self.var_e2b4fc394eef5c0f = self.traverse_traversetype;
 
   if(var_a8354f77f1ab9157) {
     self.var_e2b4fc394eef5c0f = self.var_64b933af90edc53c.traversetype;
-    self.var_ad4d9f5a34656396 = self.var_64b933af90edc53c.traversetype;
+    self.traverse_traversetype = self.var_64b933af90edc53c.traversetype;
     self.var_a836173c912579bd = self.var_64b933af90edc53c.origin;
   } else {
     if(isDefined(self.var_371c13977bb78c59)) {
@@ -718,7 +718,7 @@ function calctraversetype(asmname, statename, params) {
     return;
   } else if(self.var_e2b4fc394eef5c0f == "traverse_warp_external") {
     assertex(self.var_32a34987ee1b3095 == "<dev string:x4e5>", "<dev string:x4f3>");
-    assertex(isDefined(self.traversal_start_node), "<dev string:x521>" + self.var_32a34987ee1b3095 + "<dev string:x547>" + self.var_ad4d9f5a34656396 + "<dev string:x54d>");
+    assertex(isDefined(self.traversal_start_node), "<dev string:x521>" + self.var_32a34987ee1b3095 + "<dev string:x547>" + self.traverse_traversetype + "<dev string:x54d>");
     assert(isDefined(self.traversal_start_node.animscript));
     customname = self.traversal_start_node.animscript;
     assertex(isDefined(level.var_bb5f04e5a0a5c13), "<dev string:x55c>" + customname);
@@ -739,7 +739,7 @@ function calctraversetype(asmname, statename, params) {
   }
 
   if(var_a8354f77f1ab9157) {
-    assertex(isDefined(self.var_64b933af90edc53c), "<dev string:x656>" + self.var_32a34987ee1b3095 + "<dev string:x547>" + self.var_ad4d9f5a34656396 + "<dev string:x54d>");
+    assertex(isDefined(self.var_64b933af90edc53c), "<dev string:x656>" + self.var_32a34987ee1b3095 + "<dev string:x547>" + self.traverse_traversetype + "<dev string:x54d>");
     featurearray = [];
     featurearray["height"] = self.var_64b933af90edc53c.traverse_height_delta;
     featurearray["drop_height"] = self.var_64b933af90edc53c.traverse_drop_height_delta;
@@ -750,7 +750,7 @@ function calctraversetype(asmname, statename, params) {
       featurearray["length"] = length2d(self.var_64b933af90edc53c.across_delta);
     }
   } else if(self.var_32a34987ee1b3095 == "node_based") {
-    assertex(isDefined(self.traversal_start_node), "<dev string:x521>" + self.var_32a34987ee1b3095 + "<dev string:x547>" + self.var_ad4d9f5a34656396 + "<dev string:x54d>");
+    assertex(isDefined(self.traversal_start_node), "<dev string:x521>" + self.var_32a34987ee1b3095 + "<dev string:x547>" + self.traverse_traversetype + "<dev string:x54d>");
     assertex(isDefined(self.traversal_start_node.type), "<dev string:x67f>" + self.traversal_start_node.origin);
     assertex(self.traversal_start_node.type == "<dev string:x6c5>", "<dev string:x6ce>" + self.traversal_start_node.type + "<dev string:x6f6>" + self.traversal_start_node.origin);
 
@@ -758,7 +758,7 @@ function calctraversetype(asmname, statename, params) {
       self.traversal_start_node asm::traversethink();
     }
 
-    assertex(isDefined(self.traversal_start_node.traverse_height), "<dev string:x711>" + self.var_32a34987ee1b3095 + "<dev string:x547>" + self.var_ad4d9f5a34656396 + "<dev string:x73a>" + self.traversal_start_node.origin);
+    assertex(isDefined(self.traversal_start_node.traverse_height), "<dev string:x711>" + self.var_32a34987ee1b3095 + "<dev string:x547>" + self.traverse_traversetype + "<dev string:x73a>" + self.traversal_start_node.origin);
     featurearray = [];
     featurearray["height"] = self.traversal_start_node.traverse_height_delta;
     featurearray["drop_height"] = self.traversal_start_node.traverse_drop_height_delta;
@@ -769,7 +769,7 @@ function calctraversetype(asmname, statename, params) {
       featurearray["length"] = length2d(self.traversal_start_node.across_delta);
     }
   } else {
-    assertmsg("<dev string:x760>" + self.var_32a34987ee1b3095 + "<dev string:x77f>" + self.var_ad4d9f5a34656396);
+    assertmsg("<dev string:x760>" + self.var_32a34987ee1b3095 + "<dev string:x77f>" + self.traverse_traversetype);
     return;
   }
 
@@ -863,15 +863,15 @@ function calctraversetype(asmname, statename, params) {
       var_3f7d96abff6aba8f = (0, 0, 0);
     }
 
-    var_25e60fb59cc599b0 = length2d(apex_delta);
+    disttoapex = length2d(apex_delta);
 
-    if(var_25e60fb59cc599b0 >= 0) {
+    if(disttoapex >= 0) {
       var_7f49d8e116150fc4 = undefined;
       apexstartfrac = function_c60db10715908b8d(xanim);
 
       if(isDefined(apexstartfrac)) {
         var_f5d1f0df5f0f9b9f = getmovedelta(xanim, default_to(var_8407bdeaf8ce633, 0), apexstartfrac);
-        var_5c06589420922de2 = max(var_25e60fb59cc599b0 - var_9beb646264506c87, 0);
+        var_5c06589420922de2 = max(disttoapex - var_9beb646264506c87, 0);
         var_38372b31f3a04497 = length2d(var_f5d1f0df5f0f9b9f);
 
         if(var_5c06589420922de2 < var_38372b31f3a04497 && var_5c06589420922de2 >= 0) {
@@ -883,21 +883,21 @@ function calctraversetype(asmname, statename, params) {
           x = trace_dist * cos(start_angles[1]);
           y = trace_dist * sin(start_angles[1]);
           pos = (x, y, 0) + self.origin;
-          var_4526111c13164192 = 50;
+          capsule_height = 50;
           capsule_radius = 15;
 
-          if(self aiphysicstracepassed(self.origin + (0, 0, 10), pos + (0, 0, 10), capsule_radius, var_4526111c13164192, 1)) {
-            var_57d445b13e734d93 = math::remap(var_7f49d8e116150fc4, 0, 1, default_to(var_8407bdeaf8ce633, 0), apexstartfrac);
-            var_721088140522b32b = length2d(getmovedelta(xanim, var_57d445b13e734d93, apexstartfrac));
-            var_f3eb64c84d9ad6e = 2;
+          if(self aiphysicstracepassed(self.origin + (0, 0, 10), pos + (0, 0, 10), capsule_radius, capsule_height, 1)) {
+            currenttranslationstartfrac = math::remap(var_7f49d8e116150fc4, 0, 1, default_to(var_8407bdeaf8ce633, 0), apexstartfrac);
+            var_721088140522b32b = length2d(getmovedelta(xanim, currenttranslationstartfrac, apexstartfrac));
+            overshoot_threshold = 2;
 
-            if(var_721088140522b32b - var_5c06589420922de2 > var_f3eb64c84d9ad6e) {
+            if(var_721088140522b32b - var_5c06589420922de2 > overshoot_threshold) {
               var_7f49d8e116150fc4 *= var_721088140522b32b / var_5c06589420922de2;
               var_7f49d8e116150fc4 = clamp(var_7f49d8e116150fc4, 0, 1);
-              var_57d445b13e734d93 = math::remap(var_7f49d8e116150fc4, 0, 1, default_to(var_8407bdeaf8ce633, 0), apexstartfrac);
+              currenttranslationstartfrac = math::remap(var_7f49d8e116150fc4, 0, 1, default_to(var_8407bdeaf8ce633, 0), apexstartfrac);
             }
 
-            translationstartfrac = var_57d445b13e734d93;
+            translationstartfrac = currenttranslationstartfrac;
             self.var_c4ef68fe2a3931e5 = 0;
           }
         }
@@ -963,8 +963,8 @@ function handletraversearrivalwarpnotetracks(note) {
 }
 
 function handletraversewarpnotetracks(note) {
-  if(isDefined(self.var_acb02d417fdecc8f)) {
-    [[self.var_acb02d417fdecc8f]](note);
+  if(isDefined(self.handletraversewarpnotetracksfn)) {
+    [[self.handletraversewarpnotetracksfn]](note);
   }
 
   if(note == "traverse_death") {
@@ -1051,10 +1051,10 @@ function handlewarpupnotetrack() {
 
   if(animhasnotetrack(self.traversexanim, "warp_up_apex")) {
     animstartfrac = getnotetracktimes(self.traversexanim, "warp_up_start")[0];
-    var_47b4bdc915cff70d = getnotetracktimes(self.traversexanim, "warp_up_end")[0];
+    animendfrac = getnotetracktimes(self.traversexanim, "warp_up_end")[0];
     animlength = getanimlength(self.traversexanim);
-    assertex(var_47b4bdc915cff70d - animstartfrac >= 0, "<dev string:xb0f>");
-    duration = int((var_47b4bdc915cff70d - animstartfrac) * animlength * 1000);
+    assertex(animendfrac - animstartfrac >= 0, "<dev string:xb0f>");
+    duration = int((animendfrac - animstartfrac) * animlength * 1000);
     motionwarpwithnotetracks(self.traversexanim, targetpos, targetangles, "warp_up_start", "warp_up_apex", duration);
     return;
   }
@@ -1140,10 +1140,10 @@ function handlewarpdownstartnotetrack() {
   }
 
   animstartfrac = getnotetracktimes(self.traversexanim, "warp_down_start")[0];
-  var_47b4bdc915cff70d = getnotetracktimes(self.traversexanim, "warp_down_end")[0];
-  animdelta = getmovedelta(self.traversexanim, animstartfrac, var_47b4bdc915cff70d);
+  animendfrac = getnotetracktimes(self.traversexanim, "warp_down_end")[0];
+  animdelta = getmovedelta(self.traversexanim, animstartfrac, animendfrac);
   animdelta = rotatevector(animdelta, endnode.angles);
-  assertex(var_47b4bdc915cff70d - animstartfrac >= 0, "<dev string:xca6>");
+  assertex(animendfrac - animstartfrac >= 0, "<dev string:xca6>");
   var_2ed406669fbe4377 = 512;
   tracestart = (self.origin[0] + animdelta[0], self.origin[1] + animdelta[1], self.origin[2]);
   targetpos = undefined;

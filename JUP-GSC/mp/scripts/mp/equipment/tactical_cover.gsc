@@ -664,7 +664,7 @@ function tac_cover_spawn_with_door(door, doubledoor, issuper, contents) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function tac_cover_spawn(position, angles, stuckto, issuper, contents, door, doubledoor) {
@@ -782,7 +782,7 @@ function tac_cover_spawn(position, angles, stuckto, issuper, contents, door, dou
 
   if(isDefined(level.elevators)) {
     foreach(elevators in level.elevators) {
-      elevators thread scripts\common\elevators::function_a465aa01fa0187d8(cover);
+      elevators thread scripts\common\elevators::deployablecover_isentitytouchingdoortrigger(cover);
     }
   }
 
@@ -1121,7 +1121,7 @@ function tac_cover_ignore_list(player) {
   ignorelist = [player];
   scripts\cp_mp\utility\game_utility::function_9ed62e98a39d59eb();
 
-  foreach(array in level.var_e7e46e0e18411a5b function_df633f460888a47(player.origin)) {
+  foreach(array in level.smallprojectilepartition function_df633f460888a47(player.origin)) {
     foreach(projectile in array) {
       if(!isDefined(projectile)) {
         continue;
@@ -1362,15 +1362,15 @@ function function_d147e0986e29dd8d(org, rad, height) {
 }
 
 function function_9bd2d235e27d5068(bundle, blueprintindex) {
-  var_9b32d1936831f5aa = undefined;
+  genericblueprintname = undefined;
   model_name = undefined;
 
-  if(isDefined(bundle.var_d96d3e6ceed581fd.blueprints) && bundle.var_d96d3e6ceed581fd.blueprints.size > 0 && isDefined(blueprintindex) && blueprintindex > 0) {
-    var_9b32d1936831f5aa = bundle.var_d96d3e6ceed581fd.blueprints[blueprintindex - 1].genericblueprint;
-    model_name = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", #"worldmodel");
-  } else if(isDefined(bundle.var_d96d3e6ceed581fd.blueprint_default)) {
-    var_9b32d1936831f5aa = bundle.var_d96d3e6ceed581fd.blueprint_default;
-    model_name = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", #"worldmodel");
+  if(isDefined(bundle.genericblueprintlist.blueprints) && bundle.genericblueprintlist.blueprints.size > 0 && isDefined(blueprintindex) && blueprintindex > 0) {
+    genericblueprintname = bundle.genericblueprintlist.blueprints[blueprintindex - 1].genericblueprint;
+    model_name = function_29e16a88682086b2(genericblueprintname, #"xmodel", #"worldmodel");
+  } else if(isDefined(bundle.genericblueprintlist.blueprint_default)) {
+    genericblueprintname = bundle.genericblueprintlist.blueprint_default;
+    model_name = function_29e16a88682086b2(genericblueprintname, #"xmodel", #"worldmodel");
   }
 
   return model_name;

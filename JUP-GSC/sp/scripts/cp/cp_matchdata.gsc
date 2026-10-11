@@ -69,7 +69,7 @@ function onroundend() {
 }
 
 function logplayerdata(disconnectreason) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(self)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(self)) {
     return;
   }
 
@@ -186,7 +186,7 @@ function logchallenge(challengename, tier) {
 }
 
 function function_ff48d255c865806(client) {
-  if(namespace_de6e6777b0937bd7::function_892570944f6b6a2(client)) {
+  if(namespace_de6e6777b0937bd7::is_valid_client(client)) {
     return (client.clientid < level.maxlogclients);
   }
 

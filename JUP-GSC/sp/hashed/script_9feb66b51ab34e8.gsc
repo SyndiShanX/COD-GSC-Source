@@ -603,8 +603,8 @@ function function_b78f945ee84591f1(targetname, nodename) {
   truck childthread function_c4949dfad5a6fc3e();
   truck function_b61f675503083701();
   truck function_32b8c2252d5ec952(node, 20, 1);
-  truck function_77320e794d35465a("path", "radiusToStep", 400);
-  truck function_77320e794d35465a("p2p", "goalThreshold", 200);
+  truck setconfigvalue("path", "radiusToStep", 400);
+  truck setconfigvalue("p2p", "goalThreshold", 200);
   truck thread function_2a7ee806890043e2();
   truck thread function_448327211a86cf3e();
   distmax = squared(1000);
@@ -621,38 +621,38 @@ function function_b78f945ee84591f1(targetname, nodename) {
   }
 
   truck function_1399c3c8b823ef08(0);
-  truck function_77320e794d35465a("p2p", "brake", 0.2);
+  truck setconfigvalue("p2p", "brake", 0.2);
   wait 6;
-  truck function_77320e794d35465a(function_906e53c2fb9d3f9c("path", "pause"), 1);
+  truck setconfigvalue(function_906e53c2fb9d3f9c("path", "pause"), 1);
   waitframe();
-  truck function_65aa053c077c003a(1);
+  truck vehphys_parkingbrake(1);
   truck playLoopSound("scn_jup_silo_intro_truck_grnd_idle_lp");
   level notify("sfx_truck_at_gate");
   wait 0.3;
   utility::flag_wait("gate_driver_moveup");
-  truck function_77320e794d35465a("path", "radiusToStep", 400);
-  truck function_77320e794d35465a("p2p", "goalThreshold", 50);
-  truck function_77320e794d35465a(function_906e53c2fb9d3f9c("path", "pause"), 0);
+  truck setconfigvalue("path", "radiusToStep", 400);
+  truck setconfigvalue("p2p", "goalThreshold", 50);
+  truck setconfigvalue(function_906e53c2fb9d3f9c("path", "pause"), 0);
   waitframe();
-  truck function_65aa053c077c003a(0);
-  truck function_77320e794d35465a("p2p", "brake", 0);
+  truck vehphys_parkingbrake(0);
+  truck setconfigvalue("p2p", "brake", 0);
   node = getvehiclenode("truck_path_gate", "targetname");
   nodes = function_d556ef26b54e31ac(node);
   truck function_32b8c2252d5ec952(node, 8, 0);
-  truck function_77320e794d35465a("path", "radiusToStep", 150);
-  truck function_77320e794d35465a("p2p", "goalThreshold", 20);
+  truck setconfigvalue("path", "radiusToStep", 150);
+  truck setconfigvalue("p2p", "goalThreshold", 20);
   wait 0.1;
   truck waittill("reached_end_node");
   truck function_1399c3c8b823ef08(0);
-  truck function_77320e794d35465a("p2p", "brake", 0.8);
+  truck setconfigvalue("p2p", "brake", 0.8);
 
   while(truck vehicle_getspeed() > 1) {
     waitframe();
   }
 
-  truck function_77320e794d35465a(function_906e53c2fb9d3f9c("path", "pause"), 1);
+  truck setconfigvalue(function_906e53c2fb9d3f9c("path", "pause"), 1);
   waitframe();
-  truck function_65aa053c077c003a(1);
+  truck vehphys_parkingbrake(1);
   truck thread function_11449aa39e92d401();
   truck vehicle::vehicle_unload();
   level utility::notify_delay("truck_driver_unloaded", 3);
@@ -660,12 +660,12 @@ function function_b78f945ee84591f1(targetname, nodename) {
 
 function truck_setup() {
   clip = getEnt("intro_truck_clip", "targetname");
-  var_f9854eea8aed3a67 = getEnt("intro_truck_box_01", "targetname");
-  var_f9854fea8aed3c9a = getEnt("intro_truck_box_02", "targetname");
+  crate01 = getEnt("intro_truck_box_01", "targetname");
+  crate02 = getEnt("intro_truck_box_02", "targetname");
   var_f98550ea8aed3ecd = getEnt("intro_truck_box_03", "targetname");
   clip linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_f9854eea8aed3a67 linkTo(self, "tag_origin", (-20, -18, 10), (0, 0, 0));
-  var_f9854fea8aed3c9a linkTo(self, "tag_origin", (-70, 18, 10), (0, 0, 0));
+  crate01 linkTo(self, "tag_origin", (-20, -18, 10), (0, 0, 0));
+  crate02 linkTo(self, "tag_origin", (-70, 18, 10), (0, 0, 0));
   var_f98550ea8aed3ecd linkTo(self, "tag_origin", (-120, -10, 10), (0, 0, 0));
   self waittill("death");
 
@@ -673,12 +673,12 @@ function truck_setup() {
     clip delete();
   }
 
-  if(isDefined(var_f9854eea8aed3a67)) {
-    var_f9854eea8aed3a67 delete();
+  if(isDefined(crate01)) {
+    crate01 delete();
   }
 
-  if(isDefined(var_f9854fea8aed3c9a)) {
-    var_f9854fea8aed3c9a delete();
+  if(isDefined(crate02)) {
+    crate02 delete();
   }
 
   if(isDefined(var_f98550ea8aed3ecd)) {
@@ -693,15 +693,15 @@ function driver_watcher() {
   level notify("stop_current_truck");
   wait 0.1;
   function_1399c3c8b823ef08(0);
-  self function_77320e794d35465a("p2p", "brake", 0.8);
+  self setconfigvalue("p2p", "brake", 0.8);
 
   while(self vehicle_getspeed() > 1) {
     waitframe();
   }
 
-  self function_77320e794d35465a(function_906e53c2fb9d3f9c("path", "pause"), 1);
+  self setconfigvalue(function_906e53c2fb9d3f9c("path", "pause"), 1);
   waitframe();
-  self function_65aa053c077c003a(1);
+  self vehphys_parkingbrake(1);
 
   if(utility::is_equal(reason, "unload")) {
     vehicle::vehicle_unload();
@@ -730,15 +730,15 @@ function function_c4949dfad5a6fc3e() {
   level notify("truck_shot_at");
 }
 
-function function_d556ef26b54e31ac(var_987218b37ddff50d, using_structs) {
+function function_d556ef26b54e31ac(firstnode, using_structs) {
   apathnodes = [];
-  estartnode = var_987218b37ddff50d;
+  estartnode = firstnode;
 
-  if(!isDefined(var_987218b37ddff50d)) {
+  if(!isDefined(firstnode)) {
     return apathnodes;
   }
 
-  nextnode = var_987218b37ddff50d;
+  nextnode = firstnode;
 
   while(isDefined(nextnode)) {
     apathnodes = array_add(apathnodes, nextnode);
@@ -753,7 +753,7 @@ function function_d556ef26b54e31ac(var_987218b37ddff50d, using_structs) {
       nextnode = getvehiclenode(nextnode.target, "targetname");
     }
 
-    if(is_equal(nextnode, var_987218b37ddff50d)) {
+    if(is_equal(nextnode, firstnode)) {
       break;
     }
   }
@@ -774,19 +774,19 @@ function function_b61f675503083701() {
     self addcomponent("animator");
   }
 
-  self function_77320e794d35465a("p2p", "brakeAtGoal", 0);
-  self function_77320e794d35465a("p2p", "automaticFast", 1);
-  self function_77320e794d35465a("p2p", "brakeOnGoalGasbrake", 1);
-  self function_77320e794d35465a("p2p", "goalPoint", self.origin);
-  self function_77320e794d35465a("p2p", "goalThreshold", 200);
-  self function_77320e794d35465a("p2p", "throttleSpeedThreshold", 0.1);
-  self function_77320e794d35465a("p2p", "automaticFastTopspeedFraction", 1);
-  self function_77320e794d35465a("p2p", "throttleSpeedFarBelow", 7);
-  self function_77320e794d35465a("p2p", "throttleSpeedFarAbove", 7);
-  self function_77320e794d35465a("p2p", "throttleSpeedClose", 1);
-  self function_77320e794d35465a("p2p", "gasToStopMovement", 1);
-  self function_77320e794d35465a("p2p", "steeringMultiplier", 1);
-  self function_77320e794d35465a("path", "radiusToStep", 500);
+  self setconfigvalue("p2p", "brakeAtGoal", 0);
+  self setconfigvalue("p2p", "automaticFast", 1);
+  self setconfigvalue("p2p", "brakeOnGoalGasbrake", 1);
+  self setconfigvalue("p2p", "goalPoint", self.origin);
+  self setconfigvalue("p2p", "goalThreshold", 200);
+  self setconfigvalue("p2p", "throttleSpeedThreshold", 0.1);
+  self setconfigvalue("p2p", "automaticFastTopspeedFraction", 1);
+  self setconfigvalue("p2p", "throttleSpeedFarBelow", 7);
+  self setconfigvalue("p2p", "throttleSpeedFarAbove", 7);
+  self setconfigvalue("p2p", "throttleSpeedClose", 1);
+  self setconfigvalue("p2p", "gasToStopMovement", 1);
+  self setconfigvalue("p2p", "steeringMultiplier", 1);
+  self setconfigvalue("path", "radiusToStep", 500);
 }
 
 function function_32b8c2252d5ec952(node, mph, teleport_vehicle) {
@@ -798,7 +798,7 @@ function function_32b8c2252d5ec952(node, mph, teleport_vehicle) {
   }
 
   nodeindex = getvehiclenodeindex(node.targetname, "targetname");
-  self function_77320e794d35465a("path", "radiantId", nodeindex);
+  self setconfigvalue("path", "radiantId", nodeindex);
   function_1399c3c8b823ef08(mph);
   self.currentnode = node;
 }
@@ -806,7 +806,7 @@ function function_32b8c2252d5ec952(node, mph, teleport_vehicle) {
 function function_1399c3c8b823ef08(mph) {
   mph = default_to(mph, 0);
   var_76401ace2b3f590a = mph_to_ips(mph);
-  self function_77320e794d35465a("p2p", "manualSpeed", var_76401ace2b3f590a);
+  self setconfigvalue("p2p", "manualSpeed", var_76401ace2b3f590a);
   self.basespeed = var_76401ace2b3f590a;
 }
 
@@ -1113,8 +1113,8 @@ function function_c6856589af842ac1() {
 function function_f2910a2af259ff04() {
   level endon("player_in_elevator");
   var_66810fa4ff7c239c = utility::getStructArray("farah_logo", "script_noteworthy");
-  var_668112a4ff7c2a35 = utility::getStructArray("farah_flag", "script_noteworthy");
-  structs = array_combine(var_66810fa4ff7c239c, var_668112a4ff7c2a35);
+  structs2 = utility::getStructArray("farah_flag", "script_noteworthy");
+  structs = array_combine(var_66810fa4ff7c239c, structs2);
   distmax = squared(450);
   var_f1164c9278998e51 = squared(4000);
   var_586550f0f7336ea7 = squared(3000);
@@ -1746,7 +1746,7 @@ function function_82ebb1ca084fdd1b() {
   level.player_rig delaycall(0.2, &hide);
   level.fakeplayer delaythread(0.2, &enable_procedural_bones);
   thread silo_lighting::function_f3275439c2ea3a58("outro_1");
-  level.player function_bc667001f9dd3808(level.fakeplayer.origin);
+  level.player predictstreamposuntilcleared(level.fakeplayer.origin);
   level.fakeplayer function_af96f7c8819ae854(level.player, 2000);
   wait 2;
   level.player dof_enable_autofocus(3, level.fakeplayer, 10, 10);
@@ -1940,7 +1940,7 @@ function function_e02cc5b67169a004() {
     drone_notifies(0);
     thread namespace_318af18595992d06::function_c7c5c2ca61454c41("sp_jup_silo_topside_infil_scout_drone", 0.5, 0.5);
     level hud_util::fade_out(0, "black");
-    level.player function_bc667001f9dd3808(level.fakeplayer.origin);
+    level.player predictstreamposuntilcleared(level.fakeplayer.origin);
     level.fakeplayer function_af96f7c8819ae854(level.player, 1000);
     function_8b2ac8521c16b9e1();
     function_31cb6828ea116903(0);
@@ -1989,7 +1989,7 @@ function function_56ff3f4058660fd6() {
     return true;
   }
 
-  if(level.player isonladder() || level.player function_9cc921a57ff4deb5() || level.player isjumping() || level.player ismantling() || level.player ishanging() || level.player playermount() >= 0.1) {
+  if(level.player isonladder() || level.player isonascender() || level.player isjumping() || level.player ismantling() || level.player ishanging() || level.player playermount() >= 0.1) {
     return true;
   }
 
@@ -2136,8 +2136,8 @@ function function_c477de5775b6f437() {
   while(true) {
     waitframe();
     newangles = vectortoangles(level.drone.focusent.origin - level.player getvieworigin());
-    var_b5b3431a0126e171 = (level.drone.oldangles[0] - newangles[0], level.drone.oldangles[1] - newangles[1], 0);
-    var_47eb6724c1e4e7a4 = level.player getplayerangles() - var_b5b3431a0126e171;
+    deltaangles = (level.drone.oldangles[0] - newangles[0], level.drone.oldangles[1] - newangles[1], 0);
+    var_47eb6724c1e4e7a4 = level.player getplayerangles() - deltaangles;
     level.player setplayerangles(var_47eb6724c1e4e7a4);
     level.drone.focusent.origin = level.drone.ent function_6b7ff0cd994a7fe(level.player)["position"];
     level.drone.oldangles = vectortoangles(level.drone.focusent.origin - level.player getvieworigin());

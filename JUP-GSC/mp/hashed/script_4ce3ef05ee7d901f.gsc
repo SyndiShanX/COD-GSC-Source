@@ -16,12 +16,12 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_warlord_chemist");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_2cc227ea6e1cdf04");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_2cc227ea6e1cdf04");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 2880;
   self.maxhealth = 2880;
   self.behaviortreeasset = "soldier_agent";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "soldier";
   self.zombieaisetting = "settings_warlord_chemist";
   scripts\common\ai_settings::function_7b25d1c42e7f75be("aisettings_warlord_base");
@@ -31,8 +31,8 @@ function main() {
   self setspawnweapon(self.weapon);
   self.bulletsinclip = weaponclipsize(self.weapon);
   self.primaryweapon = self.weapon;
-  var_4f04b9c326eb7400 = "iw9_pi_papa220, [ none, none, none, none, none, none ], none, none";
-  self.sidearm = level.var_67b54180a55f70e1[var_4f04b9c326eb7400];
+  sidearmweaponhash = "iw9_pi_papa220, [ none, none, none, none, none, none ], none, none";
+  self.sidearm = level.var_67b54180a55f70e1[sidearmweaponhash];
   grenadeweaponhash = "gas_grenade_exgm_chemist";
   self.grenadeweapon = level.var_67b54180a55f70e1[grenadeweaponhash];
   self.grenadeammo = 5;
@@ -49,9 +49,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();
@@ -100,10 +100,10 @@ function setup_weapons() {
     level.var_67b54180a55f70e1[primaryweaponhash] = scripts\mp\class::function_e83615f8a92e4378("jup_jp19_ar_acharlie", ["jup_flash_ar_01", "holotherm01", "jup_acharlie_amp_300blk"], "none", "none");
   }
 
-  var_4f04b9c326eb7400 = "iw9_pi_papa220, [ none, none, none, none, none, none ], none, none";
+  sidearmweaponhash = "iw9_pi_papa220, [ none, none, none, none, none, none ], none, none";
 
-  if(!isDefined(level.var_67b54180a55f70e1[var_4f04b9c326eb7400])) {
-    level.var_67b54180a55f70e1[var_4f04b9c326eb7400] = scripts\mp\class::function_e83615f8a92e4378("iw9_pi_papa220", ["none", "none", "none", "none", "none", "none"], "none", "none");
+  if(!isDefined(level.var_67b54180a55f70e1[sidearmweaponhash])) {
+    level.var_67b54180a55f70e1[sidearmweaponhash] = scripts\mp\class::function_e83615f8a92e4378("iw9_pi_papa220", ["none", "none", "none", "none", "none", "none"], "none", "none");
   }
 
   grenadeweaponhash = "gas_grenade_exgm_chemist";

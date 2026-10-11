@@ -29,7 +29,7 @@ function init() {
 
   level.var_b19067b41fd5cfe8 = 1;
   level.var_bf269015710de2dd = getdvarint(@ "hash_a6b52f16f3853a9a", 0);
-  scripts\engine\utility::registersharedfunc("ftue", "player_action", &function_1976438a8865ac27);
+  scripts\engine\utility::registersharedfunc("ftue", "player_action", &ftue_triggertip);
   scripts\engine\utility::registersharedfunc("hud", "ftue_trigger_landed_hint", &ftue_trigger_landed_hint);
   function_c7c9735d7c22924d();
 
@@ -236,7 +236,7 @@ function function_8fdd864a86afe560(pingent) {
   }
 }
 
-function function_1976438a8865ac27(ref, pingent) {
+function ftue_triggertip(ref, pingent) {
   if(!isPlayer(self) || isbot(self)) {
     return;
   }
@@ -404,7 +404,7 @@ function function_da05e0125fa8bbf4() {
 
         if(dist2dsquared <= maxdistsquared) {
           locationindex = i + 1;
-          player function_1976438a8865ac27("br_ftue_suggested_landing", landingpoint);
+          player ftue_triggertip("br_ftue_suggested_landing", landingpoint);
         }
       }
     }
@@ -445,7 +445,7 @@ function function_598fb861f3171c2() {
       }
 
       if(isDefined(var_66df16d5eb83948)) {
-        function_1976438a8865ac27("br_ftue_supply_box", var_66df16d5eb83948.origin);
+        ftue_triggertip("br_ftue_supply_box", var_66df16d5eb83948.origin);
       }
     }
   }
@@ -462,11 +462,11 @@ function function_7287acec1d584b46() {
   }
 
   if(invertslide) {
-    function_1976438a8865ac27("br_ftue_sliding_invert");
+    ftue_triggertip("br_ftue_sliding_invert");
     return;
   }
 
-  function_1976438a8865ac27("br_ftue_sliding");
+  ftue_triggertip("br_ftue_sliding");
 }
 
 function function_46c63a68a41e27a1() {
@@ -482,7 +482,7 @@ function function_5a4b82ce1c8d94d6(victim) {
     wait 5;
 
     if(scripts\mp\utility\player::isinlaststand(victim)) {
-      function_1976438a8865ac27("br_ftue_enemy_down", victim);
+      ftue_triggertip("br_ftue_enemy_down", victim);
     }
 
     return;
@@ -492,7 +492,7 @@ function function_5a4b82ce1c8d94d6(victim) {
     wait 3;
 
     if(scripts\mp\utility\player::isinlaststand(victim) && isalive(victim)) {
-      function_1976438a8865ac27("br_ftue_interrogation", victim);
+      ftue_triggertip("br_ftue_interrogation", victim);
     }
   }
 }
@@ -502,7 +502,7 @@ function function_4e19e6bf429dda56(teammate) {
     distsq = distancesquared(self.origin, teammate.origin);
 
     if(distsq < 1000000) {
-      function_1976438a8865ac27("br_ftue_revive", teammate);
+      ftue_triggertip("br_ftue_revive", teammate);
     }
   }
 }
@@ -544,14 +544,14 @@ function function_88c626bafd6057bf(player) {
 
 function ftue_trigger_landed_hint() {
   if(function_2da74cf301f9faa5("br_ftue_controls")) {
-    function_1976438a8865ac27("br_ftue_controls");
+    ftue_triggertip("br_ftue_controls");
     return;
   }
 
   teamplayers = scripts\mp\utility\teams::getfriendlyplayers(self.team, 1);
 
   if(teamplayers.size > 0 && function_2f0ba374d69e645c("br_ftue_controls") && function_2da74cf301f9faa5("br_ftue_ping")) {
-    function_1976438a8865ac27("br_ftue_ping");
+    ftue_triggertip("br_ftue_ping");
   }
 }
 
@@ -564,7 +564,7 @@ function function_a381589f3fb2b34f(scriptablename, pickup) {
     var_9220ee8d6bf347ee = isDefined(level.br_pickups.br_itemtype[scriptablename]) && level.br_pickups.br_itemtype[scriptablename] == #"key" && issubstr(scriptablename, "loot_key_fortress");
 
     if(var_9220ee8d6bf347ee) {
-      function_1976438a8865ac27("br_ftue_stronghold");
+      ftue_triggertip("br_ftue_stronghold");
     }
   }
 }
@@ -579,7 +579,7 @@ function function_8247afd76f1b33e0(command, args) {
       }
 
       level.player function_bfd3ae5074922ca4(popupref);
-      level.player function_1976438a8865ac27(popupref);
+      level.player ftue_triggertip(popupref);
       break;
     case #"hash_6d4107298063ce5b":
       level.player function_bfd3ae5074922ca4();
@@ -610,7 +610,7 @@ function function_8247afd76f1b33e0(command, args) {
 
       foreach(player in squadmates) {
         if(player != level.player) {
-          level.player function_1976438a8865ac27(popupref, player);
+          level.player ftue_triggertip(popupref, player);
           return;
         }
       }
@@ -623,7 +623,7 @@ function function_8247afd76f1b33e0(command, args) {
 
       foreach(player in enemyplayers) {
         if(isDefined(player) && isalive(player)) {
-          level.player function_1976438a8865ac27(popupref, player);
+          level.player ftue_triggertip(popupref, player);
         }
 
         return;

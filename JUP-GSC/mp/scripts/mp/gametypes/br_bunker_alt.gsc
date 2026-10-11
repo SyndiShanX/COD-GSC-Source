@@ -181,17 +181,17 @@ function getbunkernamefromkeypadscriptableinstance(keypadscriptableinstance) {
   return 0;
 }
 
-function keypadscriptableused_altbunker(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function keypadscriptableused_altbunker(instance, part, state, player, bautouse, usestring) {
   if(!isbunkeraltenabled()) {
     return;
   }
 
   if(!istrue(instance.inuse)) {
-    player thread _keypadscriptableused_bunkeralt(instance, part, state, player, var_a5b2c541413aa895);
+    player thread _keypadscriptableused_bunkeralt(instance, part, state, player, bautouse);
   }
 }
 
-function _keypadscriptableused_bunkeralt(instance, part, state, player, var_a5b2c541413aa895) {
+function _keypadscriptableused_bunkeralt(instance, part, state, player, bautouse) {
   assert(part == "<dev string:x47>");
   var_b0bd841cacf6d96d = scripts\mp\gametypes\br_bunker_alt::isaltbunkerscriptable(instance);
   assertex(istrue(var_b0bd841cacf6d96d), "<dev string:x64>");

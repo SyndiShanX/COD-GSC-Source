@@ -75,7 +75,7 @@ function init() {
 
   function_e6df49dda3f9a00e();
   function_af0108718cddff00();
-  level.var_ab18903aa481fff2 = function_f159c10d5cf8f0b4("locked_space_volume", "script_noteworthy");
+  level.var_ab18903aa481fff2 = getnoentvolumearray("locked_space_volume", "script_noteworthy");
 
   level thread function_af458cfdaf8d86e4();
 }
@@ -387,7 +387,7 @@ function function_ed2cf116dda82611(player, numkeys, keyname, teamkeys) {
   if(istrue(teamkeys)) {
     keycount = player namespace_aead94004cf4c147::function_ef5c7ec55e0e20ee(keylootid);
   } else {
-    keycount = player namespace_aead94004cf4c147::function_93f02514431a1f5d(keylootid);
+    keycount = player namespace_aead94004cf4c147::getbackpackitemcount(keylootid);
   }
 
   if(!isDefined(keycount)) {
@@ -454,11 +454,11 @@ function function_4327a2c68eef5db9(struct) {
   }
 }
 
-function function_2166c547b0d38235(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread function_a95d35e420c6a968(instance, part, state, player, var_a5b2c541413aa895);
+function function_2166c547b0d38235(instance, part, state, player, bautouse, usestring) {
+  level thread function_a95d35e420c6a968(instance, part, state, player, bautouse);
 }
 
-function function_a95d35e420c6a968(instance, part, state, player, var_a5b2c541413aa895) {
+function function_a95d35e420c6a968(instance, part, state, player, bautouse) {
   instance setscriptablepartstate("maphint_lock", "off");
   playsoundatpos(instance.origin, "emt_bunk_red_button_press");
 
@@ -478,11 +478,11 @@ function function_a95d35e420c6a968(instance, part, state, player, var_a5b2c54141
   instance setscriptablepartstate("maphint_lock", instance.keyname);
 }
 
-function function_ee4e77bc15da5eae(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread function_44017cc8b84b87ad(instance, part, state, player, var_a5b2c541413aa895);
+function function_ee4e77bc15da5eae(instance, part, state, player, bautouse, usestring) {
+  level thread function_44017cc8b84b87ad(instance, part, state, player, bautouse);
 }
 
-function function_44017cc8b84b87ad(instance, part, state, player, var_a5b2c541413aa895) {
+function function_44017cc8b84b87ad(instance, part, state, player, bautouse) {
   instance setscriptablepartstate("maphint_lock_interior", "off");
   playsoundatpos(instance.origin, "emt_bunk_red_button_press");
   wait 1;
@@ -1251,7 +1251,7 @@ function function_a894d6041798cc06() {
   }
 }
 
-function function_38904bc3a49af40c(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_38904bc3a49af40c(instance, part, state, player, bautouse, usestring) {
   backpackkeyname = instance.keyname;
 
   if(instance.keyname == "firefightTestContainer") {

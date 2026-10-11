@@ -652,24 +652,24 @@ function get_available_players(downed_player) {
 function get_available_respawn_locs(var_28e11b47827da015) {
   available_respawn_locs = [];
 
-  foreach(var_c337fc4166b34662 in level.active_player_respawn_locs) {
-    if(!canspawn(var_c337fc4166b34662.origin)) {
+  foreach(player_respawn_loc in level.active_player_respawn_locs) {
+    if(!canspawn(player_respawn_loc.origin)) {
       continue;
     }
 
-    if(positionwouldtelefrag(var_c337fc4166b34662.origin)) {
+    if(positionwouldtelefrag(player_respawn_loc.origin)) {
       continue;
     }
 
-    if(is_respawn_loc_near_available_players(var_c337fc4166b34662, var_28e11b47827da015)) {
+    if(is_respawn_loc_near_available_players(player_respawn_loc, var_28e11b47827da015)) {
       continue;
     }
 
-    if(is_respawn_loc_near_alive_enemies(var_c337fc4166b34662)) {
+    if(is_respawn_loc_near_alive_enemies(player_respawn_loc)) {
       continue;
     }
 
-    available_respawn_locs[available_respawn_locs.size] = var_c337fc4166b34662;
+    available_respawn_locs[available_respawn_locs.size] = player_respawn_loc;
   }
 
   return available_respawn_locs;
@@ -928,8 +928,8 @@ function enter_laststand(player, attacker) {
   have_self_revive = player has_auto_revive();
 
   if(have_self_revive) {
-    var_f4a1f546fffcd5e4 = isplayingsolo() || level.only_one_player;
-    player notify("player_has_self_revive", var_f4a1f546fffcd5e4);
+    hasselfrevive = isplayingsolo() || level.only_one_player;
+    player notify("player_has_self_revive", hasselfrevive);
   }
 
   if(isDefined(player.mule_weapon) && !istrue(player.playing_ghosts_n_skulls)) {
@@ -1197,8 +1197,8 @@ function check_for_move_change() {
   var_e2ea1c206287e216 = forward;
 
   while(true) {
-    var_ddb1a7c10dd388cc = self getnormalizedmovement();
-    var_e35fe7e5dcde5f75 = get_move_direction_from_vectors(var_ddb1a7c10dd388cc);
+    player_movement = self getnormalizedmovement();
+    var_e35fe7e5dcde5f75 = get_move_direction_from_vectors(player_movement);
 
     if(var_e2ea1c206287e216 != var_e35fe7e5dcde5f75) {
       var_e2ea1c206287e216 = var_e35fe7e5dcde5f75;
@@ -1211,8 +1211,8 @@ function check_for_move_change() {
 
 function get_move_direction_from_vectors(var_eccbceb6c0eb084b) {
   forward = 1;
-  var_41ef0825d377e717 = 2;
-  var_a85f14c2589f9c2a = 3;
+  forward_right = 2;
+  forward_left = 3;
   back = 4;
   back_right = 5;
   back_left = 6;
@@ -1226,9 +1226,9 @@ function get_move_direction_from_vectors(var_eccbceb6c0eb084b) {
     }
 
     if(var_eccbceb6c0eb084b[0] > 0.5 && var_eccbceb6c0eb084b[1] > 0.7) {
-      var_33a31b037e06caaf = var_41ef0825d377e717;
+      var_33a31b037e06caaf = forward_right;
     } else if(var_eccbceb6c0eb084b[0] > 0.5 && var_eccbceb6c0eb084b[1] < -0.7) {
-      var_33a31b037e06caaf = var_a85f14c2589f9c2a;
+      var_33a31b037e06caaf = forward_left;
     }
   } else if(var_eccbceb6c0eb084b[0] < 0) {
     if(var_eccbceb6c0eb084b[1] < 0.4 && var_eccbceb6c0eb084b[1] > -0.4) {

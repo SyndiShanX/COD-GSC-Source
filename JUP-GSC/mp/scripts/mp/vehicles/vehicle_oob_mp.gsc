@@ -35,7 +35,7 @@ function vehicle_oob_mp_outoftimecallback(timeoutendnotify, clearnotify) {
   leveldata = vehicle_oob_mp_getleveldata();
   callback = leveldata.outoftimecallbacks[self.vehiclename];
   assertex(isDefined(callback), "<dev string:x10d>");
-  self.var_a8f4bb03b366aa80 = 1;
+  self.dontspawnhusk = 1;
   self[[callback]]();
 }
 

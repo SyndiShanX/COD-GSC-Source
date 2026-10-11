@@ -68,9 +68,9 @@ function function_4f634c9fb994a397() {
   setDvar(@ "hash_5d66c2ef5a9612e0", 1);
   level.player thread utility::dof_disable_autofocus();
   level.player disablephysicaldepthoffieldscripting();
-  thread function_238c2a0aae70e973("infil_farah_rim", 0, 0);
-  thread function_238c2a0aae70e973("infil_farah_lamp_post_rim", 0, 0);
-  thread function_238c2a0aae70e973("infil_farah_fill", 0, 0);
+  thread lerp_spot_intensity("infil_farah_rim", 0, 0);
+  thread lerp_spot_intensity("infil_farah_lamp_post_rim", 0, 0);
+  thread lerp_spot_intensity("infil_farah_fill", 0, 0);
 }
 
 function function_1d37f9a755d93118() {
@@ -82,9 +82,9 @@ function function_1d37f9a755d93118() {
   setDvar(@ "hash_5d66c2ef5a9612e0", 1);
   level.player thread utility::dof_disable_autofocus();
   level.player disablephysicaldepthoffieldscripting();
-  thread function_238c2a0aae70e973("infil_farah_rim", 0, 0);
-  thread function_238c2a0aae70e973("infil_farah_lamp_post_rim", 0, 0);
-  thread function_238c2a0aae70e973("infil_farah_fill", 0, 0);
+  thread lerp_spot_intensity("infil_farah_rim", 0, 0);
+  thread lerp_spot_intensity("infil_farah_lamp_post_rim", 0, 0);
+  thread lerp_spot_intensity("infil_farah_fill", 0, 0);
 }
 
 function function_a03a8a9f23f22041() {
@@ -96,9 +96,9 @@ function function_a03a8a9f23f22041() {
   setDvar(@ "hash_5d66c2ef5a9612e0", 1);
   level.player thread utility::dof_disable_autofocus();
   level.player disablephysicaldepthoffieldscripting();
-  thread function_238c2a0aae70e973("infil_farah_rim", 0, 0);
-  thread function_238c2a0aae70e973("infil_farah_lamp_post_rim", 0, 0);
-  thread function_238c2a0aae70e973("infil_farah_fill", 0, 0);
+  thread lerp_spot_intensity("infil_farah_rim", 0, 0);
+  thread lerp_spot_intensity("infil_farah_lamp_post_rim", 0, 0);
+  thread lerp_spot_intensity("infil_farah_fill", 0, 0);
 }
 
 function function_b4163285f6404555() {
@@ -120,14 +120,14 @@ function function_b4163285f6404555() {
   setDvar(@ "hash_cb82c01fec2d534b", 32);
   setDvar(@ "hash_eca4b727b01fd254", 2);
   flag_wait("lgt_infil_farah_turn");
-  thread function_238c2a0aae70e973("infil_farah_key", 2, 0);
-  thread function_238c2a0aae70e973("infil_farah_rim", 2, 0.4);
-  thread function_238c2a0aae70e973("infil_farah_lamp_post_rim", 2, 6);
+  thread lerp_spot_intensity("infil_farah_key", 2, 0);
+  thread lerp_spot_intensity("infil_farah_rim", 2, 0.4);
+  thread lerp_spot_intensity("infil_farah_lamp_post_rim", 2, 6);
   flag_wait("lgt_infil_farah_box");
   hidecinematicletterboxing(1.5, 0);
-  thread function_238c2a0aae70e973("infil_farah_rim", 2, 0);
-  thread function_238c2a0aae70e973("infil_farah_lamp_post_rim", 2, 0);
-  thread function_238c2a0aae70e973("infil_farah_fill", 2, 0);
+  thread lerp_spot_intensity("infil_farah_rim", 2, 0);
+  thread lerp_spot_intensity("infil_farah_lamp_post_rim", 2, 0);
+  thread lerp_spot_intensity("infil_farah_fill", 2, 0);
   level waittill("lgt_infil_end");
   thread function_9160006a3f10b2cd();
   setsaveddvar(@ "hash_e08232af8b8b695c", 4);
@@ -247,26 +247,26 @@ function function_12d204d855154905() {
   level.var_f86dca03b4e10a79 = 1;
   level.player utility::hidehudenable();
   showcinematicletterboxing(1.5, 0);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_key", 0, 0.02);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_key_2", 0, 0.02);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_fill_open_door", 0, 0.02);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_fill_seat_1", 0, 0.005);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_alex_rim_ext", 0, 0.05);
+  thread lerp_spot_intensity("vehicle_interior_lgt_key", 0, 0.02);
+  thread lerp_spot_intensity("vehicle_interior_lgt_key_2", 0, 0.02);
+  thread lerp_spot_intensity("vehicle_interior_lgt_fill_open_door", 0, 0.02);
+  thread lerp_spot_intensity("vehicle_interior_lgt_fill_seat_1", 0, 0.005);
+  thread lerp_spot_intensity("vehicle_interior_lgt_alex_rim_ext", 0, 0.05);
   wait 0.8;
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_fill_open_door", 0.3, 0);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_fill_door", 1.3, 1.6);
+  thread lerp_spot_intensity("vehicle_interior_lgt_fill_open_door", 0.3, 0);
+  thread lerp_spot_intensity("vehicle_interior_lgt_fill_door", 1.3, 1.6);
   wait 4.1;
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_key", 2.5, 0);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_key_2", 2.5, 0);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_truck_bounce", 2.5, 0.02);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_truck_bounce_2", 2.5, 0.06);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_lamp_incar", 6, 0.8);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_fill_seat_1", 2.5, 0);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_fill_seat_2", 2.5, 0);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_fill_door", 2.5, 0);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_fara_rim_int", 2.5, 0.01);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_alex_rim_int", 2.5, 0.02);
-  thread function_238c2a0aae70e973("vehicle_interior_lgt_alex_rim_ext", 2.5, 0);
+  thread lerp_spot_intensity("vehicle_interior_lgt_key", 2.5, 0);
+  thread lerp_spot_intensity("vehicle_interior_lgt_key_2", 2.5, 0);
+  thread lerp_spot_intensity("vehicle_interior_lgt_truck_bounce", 2.5, 0.02);
+  thread lerp_spot_intensity("vehicle_interior_lgt_truck_bounce_2", 2.5, 0.06);
+  thread lerp_spot_intensity("vehicle_interior_lgt_lamp_incar", 6, 0.8);
+  thread lerp_spot_intensity("vehicle_interior_lgt_fill_seat_1", 2.5, 0);
+  thread lerp_spot_intensity("vehicle_interior_lgt_fill_seat_2", 2.5, 0);
+  thread lerp_spot_intensity("vehicle_interior_lgt_fill_door", 2.5, 0);
+  thread lerp_spot_intensity("vehicle_interior_lgt_fara_rim_int", 2.5, 0.01);
+  thread lerp_spot_intensity("vehicle_interior_lgt_alex_rim_int", 2.5, 0.02);
+  thread lerp_spot_intensity("vehicle_interior_lgt_alex_rim_ext", 2.5, 0);
 }
 
 function function_f753e0176a8960ff() {

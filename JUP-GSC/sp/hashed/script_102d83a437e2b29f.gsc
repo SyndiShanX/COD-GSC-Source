@@ -83,10 +83,10 @@ function function_85f4cc4dd2c3a1cc() {
   }
 
   while(true) {
-    prev_state = self.var_fe5ebefa740c7106;
+    prev_state = self.stealth_bsmstate;
     waittill_any_return_3("stealth_investigate", "stealth_hunt", "stealth_combat");
 
-    if(isDefined(self.var_fe5ebefa740c7106) && self.var_fe5ebefa740c7106 != prev_state) {
+    if(isDefined(self.stealth_bsmstate) && self.stealth_bsmstate != prev_state) {
       self.var_97a0ba4272149777 = gettime();
     }
   }
@@ -314,7 +314,7 @@ function function_fac67371e80874db(group_name, func) {
 
   if(scripts\cp\spawning::is_specified_unittype("juggernaut")) {
     self function_b11b5190b03c861c("");
-    self function_9f82c74eb1b7caf9(0);
+    self setcanusecover(0);
     self.var_2626d6897d71b728 = 2000;
   }
 
@@ -517,17 +517,17 @@ function function_79587a7a06a99027(steam) {
   }
 
   ateam = getaiarray(steam);
-  var_3ecbf1096d1ba823 = [];
+  aguystouchingvolume = [];
 
   foreach(guy in ateam) {
     assertex(isalive(guy), "Got ai array yet got a dead guy!");
 
     if(guy istouching(self)) {
-      var_3ecbf1096d1ba823[var_3ecbf1096d1ba823.size] = guy;
+      aguystouchingvolume[aguystouchingvolume.size] = guy;
     }
   }
 
-  return var_3ecbf1096d1ba823;
+  return aguystouchingvolume;
 }
 
 function function_6a86ad418e0171d9(ai_array, trigger_targetname) {
@@ -569,7 +569,7 @@ function aim_at(origin, laser_state, laser_tag, aim_time) {
   self setentitytarget(self.aim_target);
   self.aim_target moveTo(origin, aim_time, 0.01, 0.01);
 
-  thread function_d9c71e107b11de6();
+  thread debug_aiming();
 
   wait aim_time * 0.5;
 
@@ -602,7 +602,7 @@ function private internal_aim_at_laser_tracker() {
   }
 }
 
-function function_e24293736e639dcf(team, org, ang, expendable) {
+function createaiment(team, org, ang, expendable) {
   ent = spawn_script_origin(org, ang);
   ent.health = 1;
   ent makeentitysentient(team, expendable);
@@ -658,7 +658,7 @@ function aim_at_laser_off() {
   }
 }
 
-function move_aim_to(origin, time, acceleration_time, var_efe93c754f5124e6) {
+function move_aim_to(origin, time, acceleration_time, deceleration_time) {
   self endon("death");
   self endon("stop_aiming");
 
@@ -666,12 +666,12 @@ function move_aim_to(origin, time, acceleration_time, var_efe93c754f5124e6) {
     acceleration_time = 0.05;
   }
 
-  if(!isDefined(var_efe93c754f5124e6)) {
-    var_efe93c754f5124e6 = 0.05;
+  if(!isDefined(deceleration_time)) {
+    deceleration_time = 0.05;
   }
 
   assertex(isDefined(self.aim_target), "Must enable aiming with aim_at() before moving aim");
-  self.aim_target moveTo(origin, time, acceleration_time, var_efe93c754f5124e6);
+  self.aim_target moveTo(origin, time, acceleration_time, deceleration_time);
   wait time;
 }
 
@@ -825,19 +825,19 @@ function aim_search_around(var_eb0c52046ed75b79, var_3dce490e575954cb, var_c1c64
     var_4af84bd7b4e025ca = clamp(var_4af84bd7b4e025ca, -90, 90);
   }
 
-  thread function_d9c71e107b11de6();
+  thread debug_aiming();
 
   while(true) {
     if(randomfloat(100) > 50) {
-      var_8360d787cd2d6eca = var_3dce490e575954cb;
+      vert_angle = var_3dce490e575954cb;
     } else {
-      var_8360d787cd2d6eca = var_eb0c52046ed75b79;
+      vert_angle = var_eb0c52046ed75b79;
     }
 
     if(randomfloat(100) > 50) {
-      var_dda88971030cb1e1 = var_4af84bd7b4e025ca;
+      horiz_angle = var_4af84bd7b4e025ca;
     } else {
-      var_dda88971030cb1e1 = var_c1c6436496d9b6e8;
+      horiz_angle = var_c1c6436496d9b6e8;
     }
 
     deltatime = 0.05;
@@ -853,7 +853,7 @@ function aim_search_around(var_eb0c52046ed75b79, var_3dce490e575954cb, var_c1c64
         check_angles = self.angles;
       }
 
-      search_angles = check_angles + (var_8360d787cd2d6eca, var_dda88971030cb1e1, 0);
+      search_angles = check_angles + (vert_angle, horiz_angle, 0);
       search_vector = anglesToForward(search_angles) * 75;
       search_start = (self.origin[0], self.origin[1], muzzle_height);
       search_target = search_start + search_vector;
@@ -879,7 +879,7 @@ function stop_aim_search_around() {
   self notify("stop_searching");
 }
 
-function function_d9c71e107b11de6() {
+function debug_aiming() {
   self endon("<dev string:x154>");
   setdvarifuninitialized(@ "hash_500912e607f2c429", 0);
 
@@ -898,7 +898,7 @@ function function_d9c71e107b11de6() {
   }
 }
 
-function function_64c20cb1068f5051(teleport_node, spawner_name) {
+function spawn_gaz(teleport_node, spawner_name) {
   spawner_name = default_to(spawner_name, "gaz");
 
   if(isDefined(level.gaz)) {

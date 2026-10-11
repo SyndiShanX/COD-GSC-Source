@@ -14,8 +14,8 @@ function scriptable_post_initialize() {
   scripts\engine\scriptable::scriptable_enginepostinitialize();
 }
 
-function scriptable_used(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  scripts\engine\scriptable::scriptable_engineused(instance, part, state, player, var_a5b2c541413aa895, usestring);
+function scriptable_used(instance, part, state, player, bautouse, usestring) {
+  scripts\engine\scriptable::scriptable_engineused(instance, part, state, player, bautouse, usestring);
 }
 
 function function_9ea56c6edd53918(instance, part, state, player, useduration) {
@@ -38,6 +38,6 @@ function scriptable_touched(instance, part, state, player) {
   scripts\engine\scriptable::scriptable_enginetouched(instance, part, state, player);
 }
 
-function scriptable_notify_callback(instance, note, param, ent, var_535d9c3fdddab5a9) {
-  scripts\engine\scriptable::scriptable_enginenotifycallback(instance, note, param, ent, var_535d9c3fdddab5a9);
+function scriptable_notify_callback(instance, note, param, ent, instigator) {
+  scripts\engine\scriptable::scriptable_enginenotifycallback(instance, note, param, ent, instigator);
 }

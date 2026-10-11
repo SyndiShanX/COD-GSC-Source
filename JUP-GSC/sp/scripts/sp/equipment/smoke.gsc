@@ -19,7 +19,7 @@ function precache(offhand) {
 
 function smokefiremain(grenade, weapon) {
   grenadeowner = self;
-  function_216c67ab6749137a(grenadeowner, undefined, "grenade_throw", "smoke_grenade");
+  addbattlechatternotify(grenadeowner, undefined, "grenade_throw", "smoke_grenade");
   grenade waittill("explode", grenadeorigin);
   earthquake(0.25, 0.35, grenadeorigin, 1000);
   playrumbleonposition("grenade_rumble", grenadeorigin);

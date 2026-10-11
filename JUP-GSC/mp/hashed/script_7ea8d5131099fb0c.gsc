@@ -46,7 +46,7 @@ function function_d603c7ff7a7d2841(powerstruct, powerref) {
   }
 
   if(zombie scripts\mp\utility\weapon::grenadeinpullback()) {
-    zombie function_187fb04ebd01baea();
+    zombie canceloffhands();
   }
 
   zombie thread function_120695737abd78f4(powerstruct, powerref);
@@ -65,7 +65,7 @@ function function_cb80241bc85a6d35(powerstruct, powerref) {
   zombie endon("disconnect");
   zombie endon("zombie_unset");
   level endon("game_ended");
-  zombie.var_a2906c0a3da2c192 = 1;
+  zombie.shouting = 1;
 
   if(isDefined(powerstruct.powers[powerref].statusupdate)) {
     function_936f0ef6e203a7fc(powerstruct.powers[powerref].statusupdate, 4);

@@ -98,7 +98,7 @@ function function_dffac413ed66bcd0(einflictor, eattacker, idamage, idflags, smea
     }
 
     if(idamage >= self.health) {
-      function_aad7a0ea8ac4ca23("ally_killed", self, eattacker.owner, rangeauto, rangesight);
+      stealtheventbroadcast("ally_killed", self, eattacker.owner, rangeauto, rangesight);
     }
 
     if(iscp() && soundexists("vehicle_body_hit")) {
@@ -160,8 +160,8 @@ function function_dffac413ed66bcd0(einflictor, eattacker, idamage, idflags, smea
   }
 
   if(!headshot && isDefined(self.armorhealth) && self.armorhealth > 0 && smeansofdeath != "MOD_CRUSH" && (!isDefined(self.var_f8ecc64162438d76) || !(isDefined(einflictor) && array_contains(self.var_f8ecc64162438d76, einflictor)))) {
-    [idamage, var_1da1a66b5c6a06a7] = scripts\cp_mp\armor::function_90ce8eb3ddaa4943(eattacker, einflictor, evictim, idamage, objweapon, smeansofdeath, shitloc, idflags, initial_damage, unmodifieddamage);
-    armordelta = var_1da1a66b5c6a06a7;
+    [idamage, lightarmordamage] = scripts\cp_mp\armor::function_90ce8eb3ddaa4943(eattacker, einflictor, evictim, idamage, objweapon, smeansofdeath, shitloc, idflags, initial_damage, unmodifieddamage);
+    armordelta = lightarmordamage;
 
     if(iscp() && damage_isexplosive(smeansofdeath) && idamage <= 0 && !istrue(self.var_c7b10080abf06d59)) {
       armordelta = self.armorhealth;
@@ -242,13 +242,13 @@ function function_dffac413ed66bcd0(einflictor, eattacker, idamage, idflags, smea
   }
 
   if(getdvarint(@ "scr_agent_hitmarkers", 1) == 1) {
-    var_1da1a66b5c6a06a7 = armordelta + helmetdelta;
-    var_986b2e0350629522 = 0;
+    lightarmordamage = armordelta + helmetdelta;
+    heavyarmordamage = 0;
     iskillstreakweapon = 0;
 
     if(scripts\engine\utility::issharedfuncdefined("ai_mp_controller", "handleDamageFeedback")) {
       var_974fefea31f1fabe = scripts\engine\utility::getsharedfunc("ai_mp_controller", "handleDamageFeedback");
-      [[var_974fefea31f1fabe]](einflictor, eattacker, self, idamage, smeansofdeath, objweapon, shitloc, idflags, var_1da1a66b5c6a06a7, var_986b2e0350629522, iskillstreakweapon);
+      [[var_974fefea31f1fabe]](einflictor, eattacker, self, idamage, smeansofdeath, objweapon, shitloc, idflags, lightarmordamage, heavyarmordamage, iskillstreakweapon);
     }
   }
 
@@ -288,11 +288,11 @@ function function_dffac413ed66bcd0(einflictor, eattacker, idamage, idflags, smea
       }
 
       if(isPlayer(attacker)) {
-        var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+        fullweaponstring = getcompleteweaponname(objweapon);
         var_ba9dc00e6d5896dc = int(min(idamage, self.health));
 
         if(scripts\engine\utility::issharedfuncdefined("weaponstats", "threadedSetWeaponStatByName")) {
-          attacker thread[[scripts\engine\utility::getsharedfunc("weaponstats", "threadedSetWeaponStatByName")]](var_366b0ecc2f28aead, var_ba9dc00e6d5896dc, "damage", self);
+          attacker thread[[scripts\engine\utility::getsharedfunc("weaponstats", "threadedSetWeaponStatByName")]](fullweaponstring, var_ba9dc00e6d5896dc, "damage", self);
         }
       }
     }
@@ -315,7 +315,7 @@ function function_dffac413ed66bcd0(einflictor, eattacker, idamage, idflags, smea
   }
 
   if(isbulletdamage(smeansofdeath) && isalive(evictim)) {
-    function_216c67ab6749137a(evictim, undefined, "wounded");
+    addbattlechatternotify(evictim, undefined, "wounded");
   }
 
   if(scripts\engine\utility::issharedfuncdefined("damage", "process_events_and_challenges_on_death")) {

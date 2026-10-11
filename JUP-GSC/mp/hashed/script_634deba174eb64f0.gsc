@@ -91,7 +91,7 @@ function function_8063e641963cd522() {
     heli.team = game["attackers"];
     heli.helitype = helitype;
 
-    if(!istrue(self.var_74ade4b4040cee5e)) {
+    if(!istrue(self.dontremove)) {
       heli.script_vehicle_selfremove = 1;
     }
 
@@ -263,11 +263,11 @@ function function_80f0ff7cef900921(var_7bce3f4d3fdb77d8) {
 
     foreach(var_a25049f295c6098b in var_5394f2dca8e333d1) {
       open_height = 300;
-      var_ce8be7b4cdc21296 = 1024;
+      land_variance = 1024;
       skydive_time = 5;
-      var_8330be2d492dad2 = undefined;
+      glide_time = undefined;
       var_a7af6b453c4623d = self gettagorigin("tag_door_rear");
-      var_a25049f295c6098b thread namespace_30bebe2c8fdd4f94::function_c789cc0bd60384c2(var_a7af6b453c4623d, var_bf027cb717ac1ca4.origin, open_height, var_ce8be7b4cdc21296, skydive_time, var_8330be2d492dad2);
+      var_a25049f295c6098b thread namespace_30bebe2c8fdd4f94::function_c789cc0bd60384c2(var_a7af6b453c4623d, var_bf027cb717ac1ca4.origin, open_height, land_variance, skydive_time, glide_time);
       var_a25049f295c6098b thread function_66e27cd1b46c5cd6();
       wait 2;
     }

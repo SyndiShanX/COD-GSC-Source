@@ -374,7 +374,7 @@ function function_69248052b7181e1a(tacinsert) {
   tacinsert setotherent(self);
 }
 
-function function_1f15609989e6bf6f(grenade, startpos, endpos, var_5a413baccf7593f7) {
+function function_1f15609989e6bf6f(grenade, startpos, endpos, iswatersurface) {
   ignoreents = [self, grenade];
   contentoverride = scripts\engine\trace::create_contents(0, 1, 1, 1, 0, 1, 0);
   traceresult = scripts\engine\trace::ray_trace_detail(startpos, endpos, ignoreents, contentoverride, 0);
@@ -402,7 +402,7 @@ function function_1f15609989e6bf6f(grenade, startpos, endpos, var_5a413baccf7593
   tacinsert = scripts\mp\utility\weapon::_launchgrenade(bundle.offhandweapon, tacinsertpos, (0, 0, 0), undefined, 1, grenade);
   tacinsert.angles = self.angles;
 
-  if(istrue(var_5a413baccf7593f7)) {
+  if(istrue(iswatersurface)) {
     thread function_c21a6baeeb5139be(grenade);
   }
 
@@ -1145,7 +1145,7 @@ function function_6aa9474826722600(grenade, starttracepos, endtracepos) {
           validsurface = 0;
         }
 
-        if(getdvarint(@ "hash_9b8b6a0216965e80", 1) == 1 && istrue(self.var_8e2d666b5b0f2bd3)) {
+        if(getdvarint(@ "hash_9b8b6a0216965e80", 1) == 1 && istrue(self.isinsideelevator)) {
           validsurface = 0;
         }
 
@@ -1195,7 +1195,7 @@ function function_3fd179c2e0859395() {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function spawnpoint_setspawnpoint(pos, angles, overrideent, isti, var_97f4d755d6790643) {

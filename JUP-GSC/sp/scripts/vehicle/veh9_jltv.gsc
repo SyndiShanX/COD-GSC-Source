@@ -31,7 +31,7 @@ function main(model, type, classname) {
     case #"hash_433bfdd62201f1e8":
     case #"hash_cdf4f197603a8c27":
       build_turrets();
-      build_aianims(&function_864a367053eaf622, &set_vehicle_anims, "veh9_jltv_turret");
+      build_aianims(&setanims_turret, &set_vehicle_anims, "veh9_jltv_turret");
       build_unload_groups(&function_1b5bc97e17d1f72e);
       break;
     case #"hash_3538a576aa03385e":
@@ -78,8 +78,8 @@ function main(model, type, classname) {
   level.vehicle.templates.husk["veh9_mil_lnd_jltv_turret_vehphys_sp"] = "veh9_mil_lnd_jltv_turret_x_vehphys_hsk_sp";
   level.vehicle.templates.husktype["veh9_mil_lnd_jltv_turret_vehphys_sp"] = "veh9_jltv_physics_sp";
   build_husk(model, huskmodel, husktype, 0);
-  function_2660787ca33cf457(classname, "tag_door_front_left", ["tag_mirror_left"]);
-  function_2660787ca33cf457(classname, "tag_door_front_right", ["tag_mirror_right"]);
+  build_dependentparts(classname, "tag_door_front_left", ["tag_mirror_left"]);
+  build_dependentparts(classname, "tag_door_front_right", ["tag_mirror_right"]);
 }
 
 #using_animtree("vehicles");
@@ -273,7 +273,7 @@ function function_a532deeab635da50() {
   return positions;
 }
 
-function function_864a367053eaf622() {
+function setanims_turret() {
   turretposition = function_6a27acd95f4c4c00();
   positions = setanims();
   positions[turretposition] = spawnStruct();

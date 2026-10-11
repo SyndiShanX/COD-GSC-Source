@@ -227,7 +227,7 @@ function private function_bb2c7a7d908691b3() {
       asm_state = "<dev string:x935>";
 
       if(ai asmhasstate(ai.asmname, asm_state)) {
-        if(istrue(ai function_3c1b4ff1cb5f468d(player.origin, getdvarfloat(@ "hash_dcef59d374174d79", 30000)))) {
+        if(istrue(ai liveragdoll_ai(player.origin, getdvarfloat(@ "hash_dcef59d374174d79", 30000)))) {
           return;
         }
 
@@ -237,7 +237,7 @@ function private function_bb2c7a7d908691b3() {
       asm_state = "<dev string:x947>";
 
       if(ai asmhasstate(ai.asmname, asm_state)) {
-        ai function_360874d9808f0724();
+        ai startliveragdoll();
         ai function_ac90fa5cc0a80298(asm_state);
         return;
       }
@@ -288,8 +288,8 @@ function private function_bf2edfaccb048554(hitloc, bone) {
   self startragdoll();
   waitframe();
 
-  if(!isDefined(level.var_c73bfa3a0535c023)) {
-    level.var_c73bfa3a0535c023 = [];
+  if(!isDefined(level.pin_constraints)) {
+    level.pin_constraints = [];
   }
 
   if(!isDefined(level.var_dd0a1e7ffd4586d5)) {
@@ -301,7 +301,7 @@ function private function_bf2edfaccb048554(hitloc, bone) {
   constraint.origin = mover.origin;
   constraint.angles = mover.angles;
   constraint linkTo(mover);
-  level.var_c73bfa3a0535c023[level.var_c73bfa3a0535c023.size] = constraint;
+  level.pin_constraints[level.pin_constraints.size] = constraint;
   level.var_dd0a1e7ffd4586d5[level.var_dd0a1e7ffd4586d5.size] = mover;
   mover moveTo(mover.origin + (0, 0, 16), 3);
 }
@@ -315,8 +315,8 @@ function private function_7d5de5e77bc3e95d() {
     }
   }
 
-  if(isDefined(level.var_c73bfa3a0535c023)) {
-    foreach(constraint in level.var_c73bfa3a0535c023) {
+  if(isDefined(level.pin_constraints)) {
+    foreach(constraint in level.pin_constraints) {
       if(isDefined(constraint)) {
         constraint delete();
       }
@@ -357,7 +357,7 @@ function private function_789810fa398850aa() {
     }
 
     if(isalive(zombie) && getdvarint(@ "hash_d95010ddcdec6c36", 0) <= 1) {
-      zombie._blackboard.var_2ad5368672cc47ba = zombie.zombieaisettings.var_106f0eccad94d9fa;
+      zombie._blackboard.var_2ad5368672cc47ba = zombie.zombieaisettings.maxwanderradius;
     }
   }
 }

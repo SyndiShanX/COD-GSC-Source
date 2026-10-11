@@ -33,7 +33,7 @@ function function_d3124a8270438a63() {
   level callback::add("on_agent_spawned", &function_edf4c2f3f7732c67);
   level callback::add("on_zombie_ai_killed", &on_zombie_ai_killed);
   level callback::add("on_ai_killed", &function_e5ea18b76842725f);
-  callback::function_e7fddda1f0b46b5e("zombie") callback::add("on_zombie_ai_damaged", &on_zombie_ai_damaged);
+  callback::get_template("zombie") callback::add("on_zombie_ai_damaged", &on_zombie_ai_damaged);
 
   level thread function_b904029d0acf2fd1();
 }
@@ -94,7 +94,7 @@ function function_d88acf085f34a24f(einflictor, eattacker, idamage, idflags, smea
     time = gettime();
     isshotgun = isDefined(sweapon) && isDefined(sweapon.classname) && sweapon.classname == "spread" && !sweapon.isalternate;
 
-    if(!isshotgun && isDefined(self.var_1dd7e0b72616a4e3) && isDefined(eattacker) && isDefined(self.var_656f66bef07b9ddf) && self.var_1dd7e0b72616a4e3 == time && self.var_656f66bef07b9ddf == eattacker) {
+    if(!isshotgun && isDefined(self.var_1dd7e0b72616a4e3) && isDefined(eattacker) && isDefined(self.last_damage_attacker) && self.var_1dd7e0b72616a4e3 == time && self.last_damage_attacker == eattacker) {
       self.var_c7bdf3bff391f1dd++;
 
       if(self.var_c7bdf3bff391f1dd > getdvarint(@ "hash_3ce8e17eda588850", 3)) {
@@ -103,7 +103,7 @@ function function_d88acf085f34a24f(einflictor, eattacker, idamage, idflags, smea
       }
     } else {
       self.var_1dd7e0b72616a4e3 = time;
-      self.var_656f66bef07b9ddf = eattacker;
+      self.last_damage_attacker = eattacker;
       self.var_c7bdf3bff391f1dd = 1;
     }
   }
@@ -121,7 +121,7 @@ function function_d88acf085f34a24f(einflictor, eattacker, idamage, idflags, smea
   }
 
   dmg_struct.num_hits++;
-  dmg_struct.var_2bd7283211fa61e7 = function_6a3d1a2884883a23(dmg_struct);
+  dmg_struct.weaponelementtype = function_6a3d1a2884883a23(dmg_struct);
   assert(isDefined(dmg_struct.idamage));
   var_bfbe28d9bcd4f274 = function_6a0b029f221e0ffe(dmg_struct) == 0;
 
@@ -192,19 +192,19 @@ function function_d88acf085f34a24f(einflictor, eattacker, idamage, idflags, smea
 
     eplayer.pers["participation"] = 1;
 
-    if(isarray(self.var_691b16f55274b1c5) && isDefined(dmg_struct.var_2bd7283211fa61e7)) {
-      var_cb5826a84ea1330c = self.var_691b16f55274b1c5[dmg_struct.var_2bd7283211fa61e7];
+    if(isarray(self.elementalweakness) && isDefined(dmg_struct.weaponelementtype)) {
+      var_cb5826a84ea1330c = self.elementalweakness[dmg_struct.weaponelementtype];
     }
 
     if(mp_agent_damage::function_73075c88c97d2d50() && mp_agent_damage::function_87c3b43d00319847()) {
-      mp_agent_damage::function_c54b2cc2e762c201(eplayer, self, shitloc, smeansofdeath, objweapon, int(dmg_struct.idamage), vpoint, 0, dmg_struct.var_2bd7283211fa61e7, dmg_struct.var_14edc6d1db3695bc, dmg_struct.var_feef4b237a6beb07);
+      mp_agent_damage::function_c54b2cc2e762c201(eplayer, self, shitloc, smeansofdeath, objweapon, int(dmg_struct.idamage), vpoint, 0, dmg_struct.weaponelementtype, dmg_struct.biscritical, dmg_struct.var_feef4b237a6beb07);
     } else if(dmg_struct.idamage > 0 && istrue(var_cb5826a84ea1330c) && (!isDefined(shitloc) || shitloc != "shield")) {
-      elementfeedback = level.var_294d0b1503a8ccb9[dmg_struct.var_2bd7283211fa61e7];
-      eattacker scripts\cp_mp\damagefeedback::updatedamagefeedback(elementfeedback, dmg_struct.idamage >= self.health, dmg_struct.var_14edc6d1db3695bc);
+      elementfeedback = level.var_294d0b1503a8ccb9[dmg_struct.weaponelementtype];
+      eattacker scripts\cp_mp\damagefeedback::updatedamagefeedback(elementfeedback, dmg_struct.idamage >= self.health, dmg_struct.biscritical);
     }
 
     if(isPlayer(eattacker) && dmg_struct.idamage > 0 && (!isDefined(shitloc) || shitloc != "shield") && !isDefined(elementfeedback)) {
-      eattacker scripts\cp_mp\damagefeedback::updatedamagefeedback("standard", dmg_struct.idamage >= self.health, dmg_struct.var_14edc6d1db3695bc);
+      eattacker scripts\cp_mp\damagefeedback::updatedamagefeedback("standard", dmg_struct.idamage >= self.health, dmg_struct.biscritical);
     }
   }
 
@@ -364,9 +364,9 @@ function function_743e37eebd6ba8e2(n_damage) {
   self.var_7fff3293eab0f7b8 = undefined;
 }
 
-function private function_3c80d46239ce0a0e(dmg_struct, shitloc, var_29a8ba8c9dd43fd2) {
+function private function_3c80d46239ce0a0e(dmg_struct, shitloc, n_pap_level) {
   if(shitloc == "head" || shitloc == "neck") {
-    dmg_struct.var_14edc6d1db3695bc = 1;
+    dmg_struct.biscritical = 1;
   }
 
   return dmg_struct.idamage;
@@ -391,7 +391,7 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
   dmg_struct.modelindex = modelindex;
   dmg_struct.partname = partname;
   dmg_struct.objweapon = objweapon;
-  dmg_struct.var_14edc6d1db3695bc = 0;
+  dmg_struct.biscritical = 0;
   dmg_struct.var_feef4b237a6beb07 = 0;
 
   if(isDefined(self.var_d37b75616f7c2ee)) {
@@ -401,15 +401,15 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
   }
 
   dmg_struct.num_hits++;
-  var_29a8ba8c9dd43fd2 = 0;
+  n_pap_level = 0;
 
   if(issharedfuncdefined("zombie", "get_pap_level") && isPlayer(dmg_struct.eattacker)) {
-    var_29a8ba8c9dd43fd2 = dmg_struct.eattacker function_f3bb4f4911a1beb2("zombie", "get_pap_level", dmg_struct.objweapon);
+    n_pap_level = dmg_struct.eattacker callsharedfunc("zombie", "get_pap_level", dmg_struct.objweapon);
   }
 
   dmg_struct.idamage = function_6a0b029f221e0ffe(dmg_struct);
 
-  if(var_29a8ba8c9dd43fd2 >= 1) {
+  if(n_pap_level >= 1) {
     dmg_struct.idamage /= 2;
   }
 
@@ -417,7 +417,7 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
     dmg_struct.idamage *= eattacker.var_4d7c50ad1d6ba348;
   }
 
-  dmg_struct.idamage = function_3c80d46239ce0a0e(dmg_struct, shitloc, var_29a8ba8c9dd43fd2);
+  dmg_struct.idamage = function_3c80d46239ce0a0e(dmg_struct, shitloc, n_pap_level);
 
   if(isPlayer(eattacker) && issharedfuncdefined("player", "onHumanGunPowerupDamage")) {
     adjusted_damage = eattacker[[getsharedfunc("player", "onHumanGunPowerupDamage")]](dmg_struct);
@@ -454,7 +454,7 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
 
   if(isDefined(eattacker) && (isPlayer(eattacker) || isPlayer(eattacker.owner)) && !is_equal(eattacker.team, self.team)) {
     eplayer = eattacker;
-    var_2bd7283211fa61e7 = get_element(sweapon);
+    weaponelementtype = get_element(sweapon);
 
     if(isPlayer(eattacker.owner)) {
       eplayer = eattacker.owner;
@@ -463,7 +463,7 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
     eplayer.pers["participation"] = 1;
 
     if(istrue(eplayer.disguised) || dmg_struct.smeansofdeath == "MOD_EXECUTION") {
-      scripts\engine\utility::function_f3bb4f4911a1beb2("relics", "check_ai_disguise_execution", eplayer);
+      scripts\engine\utility::callsharedfunc("relics", "check_ai_disguise_execution", eplayer);
     }
 
     if(!is_friendly_damage(self, eattacker)) {
@@ -471,7 +471,7 @@ function soldier_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
     }
 
     if(mp_agent_damage::function_9db5f6f105cde5da()) {
-      mp_agent_damage::function_c54b2cc2e762c201(eplayer, self, shitloc, smeansofdeath, sweapon, int(final_damage), vpoint, 0, var_2bd7283211fa61e7, dmg_struct.var_14edc6d1db3695bc, 0);
+      mp_agent_damage::function_c54b2cc2e762c201(eplayer, self, shitloc, smeansofdeath, sweapon, int(final_damage), vpoint, 0, weaponelementtype, dmg_struct.biscritical, 0);
     }
 
     if(isPlayer(eattacker) && final_damage > 0 && (!isDefined(shitloc) || shitloc != "shield")) {
@@ -561,17 +561,17 @@ function private function_e5ea18b76842725f(params) {
 function function_73cfe327bdf9d28f(inflictor, attacker, damage, dflags, meansofdeath, objweapon, point, dir, hitloc, timeoffset, modelindex, attachtagname, partname, eventid) {
   if(isPlayer(attacker)) {
     if(issharedfuncdefined("zombie", "get_pap_level")) {
-      var_29a8ba8c9dd43fd2 = attacker function_f3bb4f4911a1beb2("zombie", "get_pap_level", objweapon);
+      n_pap_level = attacker callsharedfunc("zombie", "get_pap_level", objweapon);
 
-      if(var_29a8ba8c9dd43fd2 > 0) {
+      if(n_pap_level > 0) {
         damage *= getdvarfloat(@ "hash_9cf7e7a1964e81cc", 0.65);
       }
     }
 
     if(isDefined(self.team) && self.team != "neutral" && isenemyteam(self.team, attacker.team)) {
-      var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+      fullweaponstring = getcompleteweaponname(objweapon);
 
-      if(issubstr(var_366b0ecc2f28aead, "jup_jp22_la_dromeo")) {
+      if(issubstr(fullweaponstring, "jup_jp22_la_dromeo")) {
         occupants = scripts\cp_mp\vehicles\vehicle_occupancy::function_efa75aa7f0a1289(self, 0);
 
         if(isDefined(occupants) && occupants.size > 0) {

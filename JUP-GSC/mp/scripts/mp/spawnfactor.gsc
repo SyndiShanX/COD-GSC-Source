@@ -173,8 +173,8 @@ function critical_factor(var_e2cadc5bf4175e47, spawnpoint) {
   scorefactor = [[var_e2cadc5bf4175e47]](spawnpoint);
   scorefactor = clamp(scorefactor, 0, 100);
 
-  if(isDefined(spawnpoint.var_b158a46400d7573d)) {
-    spawnpoint.var_b158a46400d7573d[spawnpoint.var_b158a46400d7573d.size] = scorefactor;
+  if(isDefined(spawnpoint.debugcriticaldata)) {
+    spawnpoint.debugcriticaldata[spawnpoint.debugcriticaldata.size] = scorefactor;
   }
 
   return scorefactor;
@@ -1073,8 +1073,8 @@ function function_75c03ed937b75b22(entitynum, var_38331ab92460d731, deadzonedist
 
 function prefershortestdisttozone(spawnpoint) {
   spawncontext = level.spawnglobals.activespawncontext;
-  var_653a7e504d42846a = spawncontext.factorparams[#"hash_80b230f7f3b6e958"];
-  distsq = spawnpoint.scriptdata.var_c7e3d9e2f0dd4e7[var_653a7e504d42846a];
+  activekothzonenumber = spawncontext.factorparams[#"hash_80b230f7f3b6e958"];
+  distsq = spawnpoint.scriptdata.var_c7e3d9e2f0dd4e7[activekothzonenumber];
   maxdistancesquared = spawncontext.factorparams[#"hash_ff12ea926c094dde"];
   percent = 1 - distsq / maxdistancesquared;
   return 100 * percent + 0;
@@ -1082,8 +1082,8 @@ function prefershortestdisttozone(spawnpoint) {
 
 function avoidclosetozone(spawnpoint) {
   spawncontext = level.spawnglobals.activespawncontext;
-  var_653a7e504d42846a = spawncontext.factorparams[#"hash_80b230f7f3b6e958"];
-  distsq = spawnpoint.scriptdata.var_c7e3d9e2f0dd4e7[var_653a7e504d42846a];
+  activekothzonenumber = spawncontext.factorparams[#"hash_80b230f7f3b6e958"];
+  distsq = spawnpoint.scriptdata.var_c7e3d9e2f0dd4e7[activekothzonenumber];
   deadzonedistsq = spawncontext.factorparams[#"hash_ccf425b826e8654b"];
   return ter_op(distsq < deadzonedistsq, 0, 100);
 }

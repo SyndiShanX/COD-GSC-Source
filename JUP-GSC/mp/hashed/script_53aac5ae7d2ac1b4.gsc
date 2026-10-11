@@ -20,11 +20,11 @@ function function_c31b39e6bb1bcd42() {
   prevonground = !self vehicle_isphysveh() || self vehicle_isonground();
 
   while(true) {
-    var_94f44a9bf5737c52 = [];
+    validridingplayers = [];
 
     foreach(player in utility::playersnear(self.origin, 550)) {
       if(isDefined(player) && player _isalive() && isDefined(player.guid) && !player isvehicleactive() && isDefined(player getmovingplatformparent()) && player getmovingplatformparent() == self) {
-        var_94f44a9bf5737c52[player.guid] = 1;
+        validridingplayers[player.guid] = 1;
 
         if(!isDefined(self.ridingplayers[player.guid])) {
           self.ridingplayers[player.guid] = player;
@@ -44,7 +44,7 @@ function function_c31b39e6bb1bcd42() {
     }
 
     foreach(guid, player in self.ridingplayers) {
-      if(!istrue(var_94f44a9bf5737c52[guid])) {
+      if(!istrue(validridingplayers[guid])) {
         self.ridingplayers[guid] = undefined;
         function_71adb8f84c3df6bb(player);
 

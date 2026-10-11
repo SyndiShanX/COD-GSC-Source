@@ -25,7 +25,7 @@
 #namespace emp;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("emp"), &init);
+  registerkillstreakinitfunction(getxhash("emp"), &init);
 }
 
 function private init() {
@@ -112,7 +112,7 @@ function tryuseempfromstruct(streakinfo) {
   }
 
   result = function_3f5928ab9073266c(streakinfo);
-  function_f1aed36ab4598ea("kls_jup_emp");
+  snd_transient_load("kls_jup_emp");
   return true;
 }
 
@@ -361,7 +361,7 @@ function function_9d55bde0bcef1158(missile) {
   if(isDefined(missile)) {
     missile setscriptablepartstate("warhead_emp_thruster", "off", 0);
     missile notify("cruise_missile_explode");
-    scripts\engine\utility::function_f3bb4f4911a1beb2("game", "returnObjectiveID", missile.var_49be89641b10a107);
+    scripts\engine\utility::callsharedfunc("game", "returnObjectiveID", missile.var_49be89641b10a107);
   }
 
   if(isDefined(self)) {
@@ -375,8 +375,8 @@ function function_9d55bde0bcef1158(missile) {
 
     if(!isDefined(explodeinfo) || explodeinfo.msg != "emp_defused" && explodeinfo.msg != "trophy_blocked") {
       explosionradius = 600;
-      var_5d28f39073721e59 = "MOD_EXPLOSIVE";
-      var_23f8c678bd9d023e = "cruise_proj_mp";
+      cruisemeansofdeath = "MOD_EXPLOSIVE";
+      cruiseweapon = "cruise_proj_mp";
     }
 
     if(issharedfuncdefined("shellshock", "artillery_earthQuake")) {
@@ -470,8 +470,8 @@ function function_d09b046309c9310(explodeinfo, owner, streakinfo) {
 }
 
 function function_ef236a24af5b02ee() {
-  var_da8cec9bce12f9cb = self.pers["team"];
-  characterref = function_d3c62d251d2af8e6(var_da8cec9bce12f9cb);
+  teamtocheck = self.pers["team"];
+  characterref = function_d3c62d251d2af8e6(teamtocheck);
   character = scripts\cp_mp\utility\dialog_utility::function_309f1876dda94360("Character", characterref);
   dialogalias = "dx_mp_core_anno_" + character + "_cege";
   self queuedialogforplayer(dialogalias, "emp_detonated", 1);
@@ -750,7 +750,7 @@ function function_a488516398cf6ae3(victimteam, attacker, explodelocation, empdur
           object thread[[object.var_3545410459b16762]](data);
           object notify("emp_started");
 
-          if(!isDefined(object.var_5d67315cdcf62026)) {
+          if(!isDefined(object.ksempapplycallback)) {
             if(isDefined(object.empcount)) {
               object.empcount++;
             } else {
@@ -761,10 +761,10 @@ function function_a488516398cf6ae3(victimteam, attacker, explodelocation, empdur
           }
         }
 
-        if(isDefined(object.var_5d67315cdcf62026)) {
+        if(isDefined(object.ksempapplycallback)) {
           data = packdamagedata(attacker, object, 1, objweapon, "MOD_EXPLOSIVE", attacker, explodelocation);
           data.ksemp = 1;
-          object thread[[object.var_5d67315cdcf62026]](data);
+          object thread[[object.ksempapplycallback]](data);
           object notify("emp_applied");
 
           if(isDefined(object.empcount)) {
@@ -833,9 +833,9 @@ function function_e0c2272bd4e5c0f(activeobjects, attacker, explodelocation, empd
 
     foreach(object in activeobjects) {
       if(object scripts\cp_mp\emp_debuff::is_empd() || istrue(object.ksempd)) {
-        if(isDefined(object.var_2ba749157b05bad7)) {
+        if(isDefined(object.ksempclearcallback)) {
           data = packdamagedata(attacker, object, 1, objweapon, "MOD_EXPLOSIVE", attacker, explodelocation);
-          object thread[[object.var_2ba749157b05bad7]](data);
+          object thread[[object.ksempclearcallback]](data);
         }
 
         object.empcount = undefined;
@@ -867,20 +867,20 @@ function applyempplayer(victimteam, attacker, explodelocation) {
   self notify("emp_applied");
   thread function_377c97bfdd963952();
   thread watch_checkforlauncherweapons();
-  thread function_9196f8b48901a902(attacker);
+  thread monitorplayerdeath(attacker);
 
-  if(isDefined(self.var_5d67315cdcf62026)) {
-    self thread[[self.var_5d67315cdcf62026]](empdata);
+  if(isDefined(self.ksempapplycallback)) {
+    self thread[[self.ksempapplycallback]](empdata);
   }
 }
 
-function function_9196f8b48901a902(owner) {
+function monitorplayerdeath(owner) {
   self endon("emp_cleared");
   level endon("game_ended");
   self waittill("death", attacker);
 
   if(level.var_d11891ea093da336 && attacker != owner) {
-    owner utility::function_f3bb4f4911a1beb2("killstreak", "rewardAssistPoints");
+    owner utility::callsharedfunc("killstreak", "rewardAssistPoints");
   }
 }
 
@@ -947,17 +947,17 @@ function function_33b7f0d067af5e39() {
   self allowfire(1);
   scripts\cp_mp\utility\weapon_utility::function_605b121f1fadd46c(1);
 
-  if(isDefined(self.var_2ba749157b05bad7)) {
-    self[[self.var_2ba749157b05bad7]]();
+  if(isDefined(self.ksempclearcallback)) {
+    self[[self.ksempclearcallback]]();
   }
 }
 
 function setemp_applied_callback(applycallback) {
-  self.var_5d67315cdcf62026 = applycallback;
+  self.ksempapplycallback = applycallback;
 }
 
 function setemp_cleared_callback(clearcallback) {
-  self.var_2ba749157b05bad7 = clearcallback;
+  self.ksempclearcallback = clearcallback;
 }
 
 function setemp_started_callback(startcallback) {
@@ -966,5 +966,5 @@ function setemp_started_callback(startcallback) {
 
 function function_56fe93fec9438968() {
   wait 5;
-  function_f4e0ff5cb899686d("kls_jup_emp");
+  snd_transient_unload("kls_jup_emp");
 }

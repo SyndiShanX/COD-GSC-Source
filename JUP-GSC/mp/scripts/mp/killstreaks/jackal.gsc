@@ -1148,9 +1148,9 @@ function callback_vehicledamage(inflictor, attacker, damage, dflags, meansofdeat
 }
 
 function getcorrectheight(x, y, rand) {
-  var_dc8bb6300463cf1e = 600;
+  offgroundheight = 600;
   groundheight = tracegroundpoint(x, y);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   trueheight += randomint(rand);
   return trueheight;
 }
@@ -1635,7 +1635,7 @@ function defendlocationescort(jackal, marker) {
   jackal vehicle_setspeed(int(jackal.speed / 14), int(jackal.accel / 16));
 }
 
-function guardpositionescort(position, lookat, var_dc8bb6300463cf1e) {
+function guardpositionescort(position, lookat, offgroundheight) {
   self endon("death");
   self endon("leaving");
   self endon("follow_player");
@@ -1659,10 +1659,10 @@ function guardpositionescort(position, lookat, var_dc8bb6300463cf1e) {
     if(istrue(self.evasivemaneuvers)) {
       newx = playerx + randomintrange(-500, 500);
       newy = playery + randomintrange(-500, 500);
-      properz = getcorrectheightescort(newx, newy, 350, var_dc8bb6300463cf1e);
+      properz = getcorrectheightescort(newx, newy, 350, offgroundheight);
       newpos = (newx, newy, properz);
     } else {
-      properz = getcorrectheightescort(playerx, playery, 20, var_dc8bb6300463cf1e);
+      properz = getcorrectheightescort(playerx, playery, 20, offgroundheight);
       newpos = (playerx, playery, properz);
     }
 
@@ -1674,14 +1674,14 @@ function guardpositionescort(position, lookat, var_dc8bb6300463cf1e) {
 }
 
 function getcorrectheightescort(x, y, rand, minheight) {
-  var_dc8bb6300463cf1e = 200;
+  offgroundheight = 200;
 
   if(isDefined(minheight)) {
-    var_dc8bb6300463cf1e = minheight;
+    offgroundheight = minheight;
   }
 
   groundheight = tracegroundpoint(x, y);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   trueheight += randomint(rand);
   return trueheight;
 }

@@ -107,7 +107,7 @@ function private function_459bbcf9eb27f689() {
   self.worm_beam = playfxontagsbetweenclients(getfx("deathworm_beam_vfx"), self, "tag_fx_beam_rotate", self.var_938e5141ee890ce6, "tag_origin");
 
   if(isDefined(self.worm_beam)) {
-    self.worm_beam function_cea710f9d017694a(1);
+    self.worm_beam forcenetfieldhighlod_sharedfunc(1);
     thread function_5ee1730c2e122134(self.worm_beam, "beam_attack_end");
   }
 
@@ -145,7 +145,7 @@ function private function_459bbcf9eb27f689() {
     }
 
     blast_radius = 80;
-    var_1021496814ce12f2 = function_143526130b12b2b6(hit_position, blast_radius);
+    var_1021496814ce12f2 = getplayersandaiarrayinradius(hit_position, blast_radius);
     hit_ents = utility::array_combine_unique(hit_ents, var_1021496814ce12f2);
 
     foreach(hit_ent in hit_ents) {

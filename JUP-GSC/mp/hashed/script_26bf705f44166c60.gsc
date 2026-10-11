@@ -8,7 +8,7 @@
 #namespace namespace_960978fc5a7ce390;
 
 function function_a8d762b7f47cf728() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_crawling_changed", &function_3ba2fe8330d232b5);
+  callback::get_template(self.animsetname) callback::add("on_is_crawling_changed", &function_3ba2fe8330d232b5);
 }
 
 function init_traverse() {

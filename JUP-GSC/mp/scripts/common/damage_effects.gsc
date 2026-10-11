@@ -339,11 +339,11 @@ function function_446043a04ae1bfe() {
   self.attackerdata = [];
 }
 
-function damageeffects(idamage, eattacker, smeansofdeath, vpoint, var_1da1a66b5c6a06a7, objweapon, shitloc) {
+function damageeffects(idamage, eattacker, smeansofdeath, vpoint, lightarmordamage, objweapon, shitloc) {
   self endon("death_or_disconnect");
   self notify("damageEffects");
 
-  if(!isPlayer(self) || isbot(self) || function_483cc81bff18273b(self)) {
+  if(!isPlayer(self) || isbot(self) || issimulationplayer(self)) {
     return;
   }
 
@@ -351,7 +351,7 @@ function damageeffects(idamage, eattacker, smeansofdeath, vpoint, var_1da1a66b5c
     return;
   }
 
-  factor = damageratio(idamage + var_1da1a66b5c6a06a7);
+  factor = damageratio(idamage + lightarmordamage);
 
   if(!isDefined(eattacker) && smeansofdeath == "MOD_FALLING") {
     eattacker = self;
@@ -360,7 +360,7 @@ function damageeffects(idamage, eattacker, smeansofdeath, vpoint, var_1da1a66b5c
   childthread damagepainvision(vpoint, factor, smeansofdeath, idamage, objweapon);
   childthread damagebloodoverlaydirectional(vpoint, factor, smeansofdeath, idamage, objweapon, shitloc);
   var_2809cfd0f803f738 = {
-    #objweapon: objweapon, #var_1da1a66b5c6a06a7: var_1da1a66b5c6a06a7, #vpoint: vpoint, #smeansofdeath: smeansofdeath, #eattacker: eattacker, #idamage: idamage
+    #objweapon: objweapon, #lightarmordamage: lightarmordamage, #vpoint: vpoint, #smeansofdeath: smeansofdeath, #eattacker: eattacker, #idamage: idamage
   };
   callback::callback("on_player_damage_effects", var_2809cfd0f803f738);
 }
@@ -681,8 +681,8 @@ function function_41a40f1e0a6aa78e() {
 
   while(function_2a9705c393c0e2c4()) {
     pulsefraction = self.heartbeat.pulsetime;
-    var_60027769b32b054 = math::factor_value(0.15, 0.45, pulsefraction);
-    var_5dd15769b0c4106 = math::factor_value(0.05, 0.28, pulsefraction);
+    pulsealphamax = math::factor_value(0.15, 0.45, pulsefraction);
+    pulsealphamin = math::factor_value(0.05, 0.28, pulsefraction);
     timepassed = gettime() - starttime;
 
     if(regendelaytime > 0) {
@@ -691,7 +691,7 @@ function function_41a40f1e0a6aa78e() {
       var_3b56fe29ad0cb0b5 = 0;
     }
 
-    pulsealpha = math::factor_value(var_60027769b32b054, var_5dd15769b0c4106, var_3b56fe29ad0cb0b5);
+    pulsealpha = math::factor_value(pulsealphamax, pulsealphamin, var_3b56fe29ad0cb0b5);
 
     if(isDefined(self.damage.deathsdooroverlaypulse)) {
       pulsealpha *= self.damage.deathsdooroverlaypulse.var_eeda4296ae80e949;
@@ -799,20 +799,20 @@ function function_54117659a8e5c5b4() {
 }
 
 function function_501be800abf11f33(fadetime, scale) {
-  var_c96095bb15c39d95 = default_to(self.var_dd452cc5c546120b, "deaths_door_mp");
+  str_submix = default_to(self.var_dd452cc5c546120b, "deaths_door_mp");
   n_fadetime = default_to(fadetime, -1);
   n_scale = default_to(scale, 1);
-  self setsoundsubmix(var_c96095bb15c39d95, n_fadetime, n_scale);
+  self setsoundsubmix(str_submix, n_fadetime, n_scale);
 }
 
 function function_a2b4e6088394bade(fadetime) {
-  var_c96095bb15c39d95 = default_to(self.var_dd452cc5c546120b, "deaths_door_mp");
+  str_submix = default_to(self.var_dd452cc5c546120b, "deaths_door_mp");
   n_fadetime = default_to(fadetime, undefined);
 
   if(isDefined(n_fadetime)) {
-    self clearsoundsubmix(var_c96095bb15c39d95, n_fadetime);
+    self clearsoundsubmix(str_submix, n_fadetime);
     return;
   }
 
-  self clearsoundsubmix(var_c96095bb15c39d95);
+  self clearsoundsubmix(str_submix);
 }

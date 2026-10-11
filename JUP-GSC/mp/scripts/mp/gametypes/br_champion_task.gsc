@@ -483,7 +483,7 @@ function getscore(taskinstance) {
   eventref = "champion_mission_" + taskinstance.info.ref + "_completed";
 
   foreach(player in level.teamdata[taskinstance.team]["players"]) {
-    player scripts\mp\utility\points::doscoreevent(function_1823ff50bb28148d(eventref));
+    player scripts\mp\utility\points::doscoreevent(getxhash(eventref));
   }
 }
 

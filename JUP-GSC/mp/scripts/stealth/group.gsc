@@ -29,7 +29,7 @@ function initgroup(groupname) {
   mygroup = groupdata.groups[groupname];
 
   if(!isDefined(mygroup)) {
-    mygroup = function_ff39fd6d3d8e4d65(groupname);
+    mygroup = stealthinitgroup(groupname);
     groupdata.groups[groupname] = mygroup;
   }
 
@@ -42,7 +42,7 @@ function addtogroup(groupname, guy) {
   }
 
   mygroup = level.stealth.groupdata.groups[groupname];
-  function_c30acbb55783d011(groupname, guy);
+  stealthaddtogroup(groupname, guy);
   mygroup thread group_waitfordeath(guy);
 }
 
@@ -281,9 +281,9 @@ function group_checkrequestbackupoutsideofvolume(e) {
 }
 
 function group_eventinvestigate(guy, e) {
-  var_d24e406e7deefabc = group_assigntoinvestigatepod(guy, e.investigate_pos);
+  bnewpod = group_assigntoinvestigatepod(guy, e.investigate_pos);
 
-  if(var_d24e406e7deefabc) {
+  if(bnewpod) {
     guy thread group_investigate_seekbackup(e);
   }
 }
@@ -313,7 +313,7 @@ function group_investigate_seekbackup(e) {
     for(imember = 0; imember < nummembers; imember++) {
       otherguy = group.members[imember];
 
-      if(otherguy.var_fe5ebefa740c7106 == 0 && distancesquared(otherguy.origin, self.origin) < 10000) {
+      if(otherguy.stealth_bsmstate == 0 && distancesquared(otherguy.origin, self.origin) < 10000) {
         otherguy glanceatentity(self);
       }
     }
@@ -347,9 +347,9 @@ function group_eventcoverblown(groupname, guy, e) {
   }
 
   groupdata thread group_delayedcoverblownpropagation(guy);
-  var_d24e406e7deefabc = group_assigntoinvestigatepod(guy, e.investigate_pos);
+  bnewpod = group_assigntoinvestigatepod(guy, e.investigate_pos);
 
-  if(var_d24e406e7deefabc) {
+  if(bnewpod) {
     thread group_coverblown_seekbackup(groupdata, e);
   }
 }
@@ -379,7 +379,7 @@ function group_coverblown_seekbackup(groupdata, e) {
     for(imember = 0; imember < nummembers; imember++) {
       otherguy = groupdata.members[imember];
 
-      if(otherguy != self && otherguy.var_fe5ebefa740c7106 == 0 && distancesquared(otherguy.origin, self.origin) < 10000) {
+      if(otherguy != self && otherguy.stealth_bsmstate == 0 && distancesquared(otherguy.origin, self.origin) < 10000) {
         otherguy glanceatentity(self);
       }
     }
@@ -413,7 +413,7 @@ function pod_hunt_update(squadid) {
 }
 
 function function_561073db8e56e510(guy) {
-  var_f68d091e4829568a = 48;
+  clookaheaddist = 48;
   var_fdc0268bd71773d8 = 5000;
 
   if(!isDefined(guy) || !isalive(guy)) {
@@ -424,7 +424,7 @@ function function_561073db8e56e510(guy) {
     return false;
   }
 
-  if(isDefined(guy.pathgoalpos) && guy pathdisttogoal(1) < var_f68d091e4829568a) {
+  if(isDefined(guy.pathgoalpos) && guy pathdisttogoal(1) < clookaheaddist) {
     return false;
   }
 
@@ -453,7 +453,7 @@ function function_9919694707b210df() {
       return;
     }
 
-    members = function_b9e807f454d30fe4(self.squadid);
+    members = aigetsquadmembers(self.squadid);
 
     if(!isDefined(members) || members.size == 0) {
       return;
@@ -487,16 +487,16 @@ function function_9919694707b210df() {
             continue;
           }
 
-          var_483427e5f1c2060b = otherguy.lookaheaddir;
+          otherguylookaheaddir = otherguy.lookaheaddir;
           var_21704ffa3438468f = vectorNormalize(otherguy.origin - guy.origin);
 
-          if(vectordot(guylookaheaddir, var_21704ffa3438468f) < 0 && vectordot(guylookaheaddir, var_483427e5f1c2060b) < 0) {
+          if(vectordot(guylookaheaddir, var_21704ffa3438468f) < 0 && vectordot(guylookaheaddir, otherguylookaheaddir) < 0) {
             continue;
           }
 
           guypos = guy.origin;
-          var_397b216df790894e = otherguy.origin;
-          midpoint = (guypos + var_397b216df790894e) / 2;
+          otherguypos = otherguy.origin;
+          midpoint = (guypos + otherguypos) / 2;
           var_cffc7c7f4795b067 = vectorNormalize(midpoint - guy.origin);
           var_2b410386a2207da7 = vectorNormalize(midpoint - otherguy.origin);
 
@@ -504,21 +504,21 @@ function function_9919694707b210df() {
             continue;
           }
 
-          if(vectordot(var_2b410386a2207da7, var_483427e5f1c2060b) < 0.5) {
+          if(vectordot(var_2b410386a2207da7, otherguylookaheaddir) < 0.5) {
             continue;
           }
 
           if(guy hastacvis(otherguy) || otherguy hastacvis(guy)) {
             midpoint = guy getclosestreachablepointonnavmesh(midpoint);
             guypos = guy getclosestreachablepointonnavmesh(midpoint + 30 * vectorNormalize(guypos - midpoint));
-            var_397b216df790894e = otherguy getclosestreachablepointonnavmesh(midpoint + 30 * vectorNormalize(var_397b216df790894e - midpoint));
+            otherguypos = otherguy getclosestreachablepointonnavmesh(midpoint + 30 * vectorNormalize(otherguypos - midpoint));
             job = spawnStruct();
             job.guys = [];
             job.guys[job.guys.size] = guy;
             job.guys[job.guys.size] = otherguy;
             job.requestedpos = [];
             job.requestedpos[entnum] = guypos;
-            job.requestedpos[otherentnum] = var_397b216df790894e;
+            job.requestedpos[otherentnum] = otherguypos;
             job.state[entnum] = "init";
             job.state[otherentnum] = "init";
             job.leader = guy;
@@ -602,7 +602,7 @@ function function_67386b112e199533(job) {
 
     if(status == "gesture") {
       job.state[leader getentitynumber()] = "gesture";
-      leader function_c5bfef99b23e74be("hunt_gesture");
+      leader hunt_waitforgesture("hunt_gesture");
 
       if(!isDefined(leader) || !isalive(leader)) {
         break;
@@ -610,7 +610,7 @@ function function_67386b112e199533(job) {
 
       job.state[leader getentitynumber()] = "wait";
       job.state[follower getentitynumber()] = "gesture";
-      follower function_c5bfef99b23e74be("hunt_gesture");
+      follower hunt_waitforgesture("hunt_gesture");
 
       if(!isDefined(follower) || !isalive(follower)) {
         break;
@@ -633,7 +633,7 @@ function function_67386b112e199533(job) {
   follower notify("pod_job_complete");
 }
 
-function function_c5bfef99b23e74be(flag) {
+function hunt_waitforgesture(flag) {
   self endon("death");
   self endon("smartobject_logic_finished");
   self endon("hunt_gesture_timeout");

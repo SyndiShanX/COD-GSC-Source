@@ -33,7 +33,7 @@ function function_450e4cf17da1bc5(weapon, itembundle, item, auto_use) {
     if(isDefined(itembundle.ammomodname)) {
       if(namespace_dc2e59577d3a271f::function_6a22621172a35366(weapon) && !namespace_dc2e59577d3a271f::function_60ade27585bef67(weapon, itembundle.ammomodname)) {
         self playsoundtoplayer("uin_ob_ammomod_used_" + itembundle.ammomodname, self);
-        namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(weapon, itembundle.ammomodname);
+        namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(weapon, itembundle.ammomodname);
 
         if(namespace_dc2e59577d3a271f::has_ammo_mod(weapon)) {
           return (item.count - 1);
@@ -145,13 +145,13 @@ function function_450e4cf17da1bc5(weapon, itembundle, item, auto_use) {
   } else if(upgradetype == "warlord_afo_beret" || upgradetype == "warlord_chemist_mask" || upgradetype == "warlord_maestro_mod") {
     if(issharedfuncdefined("ob_warlord_schematic_upgrade", "applyWarlordSchematicUpgrade")) {
       self playsoundevent("sndevent_classified_acquisition_used");
-      function_f3bb4f4911a1beb2("ob_warlord_schematic_upgrade", "applyWarlordSchematicUpgrade", upgradetype);
+      callsharedfunc("ob_warlord_schematic_upgrade", "applyWarlordSchematicUpgrade", upgradetype);
       return (item.count - 1);
     }
   } else if(upgradetype == "grenade_bandolier") {
     if(issharedfuncdefined("ob_grenade_bandolier", "grenade_bandolier_give")) {
       self playsoundevent("sndevent_classified_acquisition_used");
-      function_f3bb4f4911a1beb2("ob_grenade_bandolier", "grenade_bandolier_give");
+      callsharedfunc("ob_grenade_bandolier", "grenade_bandolier_give");
       return (item.count - 1);
     }
   } else if(upgradetype == "disciple_bottle") {
@@ -171,7 +171,7 @@ function function_450e4cf17da1bc5(weapon, itembundle, item, auto_use) {
 
 function function_d56493bc318d5c5a(itembundle, item) {
   if(issharedfuncdefined("killstreak", "can_upgrade")) {
-    return function_f3bb4f4911a1beb2("killstreak", "can_upgrade", itembundle, item);
+    return callsharedfunc("killstreak", "can_upgrade", itembundle, item);
   }
 
   return 0;

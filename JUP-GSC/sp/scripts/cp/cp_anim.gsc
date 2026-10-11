@@ -65,7 +65,7 @@ function teleport_entity(origin, angles) {
   self dontinterpolate();
 }
 
-function do_facial_anim(dofacialanim, var_9ac73a1996d2dae, doanimation, anime, animname, dialogue) {
+function do_facial_anim(dofacialanim, dodialogue, doanimation, anime, animname, dialogue) {
   return false;
 }
 
@@ -129,8 +129,8 @@ function do_animation(org, angles, animname, anime, anim_string, idleanim, scrip
   return getanimlength(animation);
 }
 
-function mp_anim_handle_notetrack(scr_notetrack, guy, var_966821fc90c3ca9d, tag_owner) {
-  anim_handle_notetrack(scr_notetrack, guy, var_966821fc90c3ca9d, tag_owner);
+function mp_anim_handle_notetrack(scr_notetrack, guy, dialogue_array, tag_owner) {
+  anim_handle_notetrack(scr_notetrack, guy, dialogue_array, tag_owner);
 
   if(isDefined(scr_notetrack["flag"])) {
     scripts\mp\flags::gameflagset(scr_notetrack["flag"]);
@@ -236,8 +236,8 @@ function function_f7abc6758c6fa304(startorg, startangles) {
   self.doavoidanceblocking = 0;
   self.fixednodewason = self.fixednode;
   self.fixednode = 0;
-  self.var_a4700673c6ef6c4 = self.var_b29c3655b12e292d;
-  self.var_b29c3655b12e292d = 0;
+  self.var_a4700673c6ef6c4 = self.cornercheckenabled;
+  self.cornercheckenabled = 0;
   self.ignoreall = 1;
 
   if(!isDefined(self.scriptedarrivalent)) {
@@ -258,7 +258,7 @@ function function_fa9f14f0cbd676f0() {
   self.doavoidanceblocking = 1;
   self.fixednode = self.fixednodewason;
   self.fixednodewason = undefined;
-  self.var_b29c3655b12e292d = self.var_a4700673c6ef6c4;
+  self.cornercheckenabled = self.var_a4700673c6ef6c4;
   self.var_a4700673c6ef6c4 = undefined;
   self.pathenemyfightdist = self.oldpathenemyfightdist;
   self.pathenemylookahead = self.oldpathenemylookahead;

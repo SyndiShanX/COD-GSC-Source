@@ -39,12 +39,12 @@ function gunship_findboxcenter(mins, maxs) {
   return scripts\cp\globallogic::findboxcenter(mins, maxs);
 }
 
-function gunship_getbombingpoints(centerpoint, numpoints, var_a0edd3f59d938fb1) {
+function gunship_getbombingpoints(centerpoint, numpoints, bombingradius) {
   bombingpoints = [];
   centerpoint -= anglesToForward(self.angles) * 100;
 
   for(i = 0; i < numpoints; i++) {
-    randdist = randomint(var_a0edd3f59d938fb1);
+    randdist = randomint(bombingradius);
     randangle = randomint(360);
     x = centerpoint[0] + randdist * cos(randangle);
     y = centerpoint[1] + randdist * sin(randangle);
@@ -115,13 +115,13 @@ function gunship_assigntargetmarkers(gunner) {
   level thread gunship_assignedtargetmarkers_onnewai(self.enemytargetmarkergroup, 0);
 }
 
-function gunship_assignedtargetmarkers_onnewai(var_4226c12910d867d4, var_262f4b55aa151de1) {
+function gunship_assignedtargetmarkers_onnewai(targetmarkergroupid, var_262f4b55aa151de1) {
   level endon("game_ended ");
-  level endon("removed_targetMarkerGroup_" + var_4226c12910d867d4);
+  level endon("removed_targetMarkerGroup_" + targetmarkergroupid);
 
   while(true) {
     level waittill("spawned_group_soldier", soldier);
-    scripts\cp_mp\targetmarkergroups::targetmarkergroup_markentity(soldier, var_4226c12910d867d4, var_262f4b55aa151de1);
+    scripts\cp_mp\targetmarkergroups::targetmarkergroup_markentity(soldier, targetmarkergroupid, var_262f4b55aa151de1);
   }
 }
 
@@ -230,9 +230,9 @@ function play_fake_vo_for_gunship() {
   var_c197335aad9f5e31 = soundexists(alias2d);
   var_c1934d5aad9ba188 = soundexists(alias3d);
   var_196ffc81c8206c2a = scripts\cp_mp\calloutmarkerping::calloutmarkerpingvo_getmaxsoundaliaslength(var_c197335aad9f5e31, alias2d, var_c1934d5aad9ba188, alias3d);
-  var_57d0946b275fea34 = 1;
+  canplayvo = 1;
 
-  if(istrue(var_57d0946b275fea34)) {
+  if(istrue(canplayvo)) {
     assert(issharedfuncdefined("game", "getFriendlyPlayers"));
     playersquad = [[getsharedfunc("game", "getFriendlyPlayers")]](self.team, 1);
 
@@ -538,7 +538,7 @@ function enemygunship_watchplanedistance() {
   }
 }
 
-function enemygunship_watchdebuglocation(tagname, var_22c53c353885fe59) {
+function enemygunship_watchdebuglocation(tagname, showaxis) {
   self endon("<dev string:x5c>");
 
   while(true) {
@@ -550,7 +550,7 @@ function enemygunship_watchdebuglocation(tagname, var_22c53c353885fe59) {
 
     sphere(debuglocation, 100, (1, 1, 1), 0, 1);
 
-    if(istrue(var_22c53c353885fe59)) {
+    if(istrue(showaxis)) {
       testforward = anglesToForward(self.angles);
       testright = anglestoright(self.angles);
       testup = anglestoup(self.angles);

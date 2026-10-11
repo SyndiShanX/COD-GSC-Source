@@ -20,7 +20,7 @@ function function_e04bd99e1bb6430b() {
   setdevdvarifuninitialized(@ "hash_70809e88d9881104", 0);
 
   delaythread(0.05, &function_c880edba9face762, "chopper2");
-  function_d32f459ab9f5e7af();
+  accolades_init();
   level.var_79c116f876dc27eb = &function_3d52f342af8a087a;
   level._effect["player_disconnect"] = loadfx("vfx/iw8_br/gameplay/vfx_br_disconnect_player.vfx");
 }
@@ -44,7 +44,7 @@ function private function_79304f320f2acf0f(winners, var_cbfc3ba10cefc8ce, moveti
     soundbank = [[scripts\engine\utility::getsharedfunc("br_ending_chopper2", "getExfilSoundbank")]]();
   }
 
-  function_f1aed36ab4598ea(soundbank);
+  snd_transient_load(soundbank);
   clearmusicstate();
   wait 1;
   winners = default_to(winners, []);
@@ -75,7 +75,7 @@ function chopperexfil_pack(var_cbfc3ba10cefc8ce) {
     loadinfiltransient(self.transientname);
     setomnvarforallclients("ui_br_end_game_splash_type", 18);
 
-    for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = function_2030cc4ad67d1634(self.transientname)) {
+    for(var_24b79087f3897e94 = 0; !var_24b79087f3897e94; var_24b79087f3897e94 = isinfiltransientloaded(self.transientname)) {
       waitframe();
     }
   }
@@ -419,7 +419,7 @@ function function_56d4e443a1c8a4b5(array) {
   if(getdvarint(@ "hash_b44ba42bba42b79e", 1)) {
     if(isDefined(self.var_43fa788e45fc7b1e)) {
       foreach(player in level.players) {
-        player function_bc667001f9dd3808(self.var_43fa788e45fc7b1e);
+        player predictstreamposuntilcleared(self.var_43fa788e45fc7b1e);
       }
     }
   }
@@ -862,7 +862,7 @@ function function_c4ebe940e6d84d42() {
     soundbank = [[scripts\engine\utility::getsharedfunc("br_ending_chopper2", "getExfilSoundbank")]]();
   }
 
-  function_f4e0ff5cb899686d(soundbank);
+  snd_transient_unload(soundbank);
 }
 
 function get_chopperexfil_transient() {
@@ -905,7 +905,7 @@ function get_chopperexfil_transient() {
   return "";
 }
 
-function function_d32f459ab9f5e7af() {
+function accolades_init() {
   function_eb5e590400f33c26("assists", &function_b3b9870beb16d86a);
   function_eb5e590400f33c26("bigguns", &function_7e54a96ea5e607d6);
   function_eb5e590400f33c26("interrogator", &function_12e989117d690d7);

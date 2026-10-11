@@ -215,7 +215,7 @@ function function_133892d59b149cce() {
   self setsolid(1);
   self function_6b4c8718bc36d1ef(0);
   self function_e4ccd01fb7ec7a6f(0);
-  self function_d87e1768229d0e3e();
+  self stopliveragdoll();
   _freezecontrols(0, undefined, "liveRagdoll");
   scripts\mp\class::setthirdpersonview();
   self.var_6c0f9f7e906a5ee6 = 1;
@@ -248,7 +248,7 @@ function on_player_bleedout(params) {
   self setsolid(0);
   self function_6b4c8718bc36d1ef(1);
   self function_e4ccd01fb7ec7a6f(1);
-  self function_360874d9808f0724();
+  self startliveragdoll();
   scripts\mp\class::setthirdpersonview();
   self.var_d82ef0f535aa42fb = self.origin;
 }
@@ -279,7 +279,7 @@ function function_be83ba972fd71c80(deathdata, finaldeath) {
   deathdata.victim val::set("ob_death", "ignoreme", 1);
 
   if(!istrue(level.gameended) && !istrue(deathdata.victim.liveragdoll)) {
-    deathdata.victim namespace_7177e11e3871c8f4::function_1b6b6e760a1bdd78();
+    deathdata.victim namespace_7177e11e3871c8f4::take_juggernaut_perk();
     deathdata.victim delaythread(0.1, &scripts\mp\playerlogic::spawnspectator);
     deathdata.victim scripts\mp\utility\lower_message::setlowermessageomnvar("br_standby_for_respawn");
   }
@@ -463,7 +463,7 @@ function private ob_laststand_alive_check(revived) {
   self endon("disconnect");
 
   if(issharedfuncdefined(#"ob_pvpve", #"hash_f383e3bc7a6b4400")) {
-    if(!istrue(function_f3bb4f4911a1beb2(#"ob_pvpve", #"hash_f383e3bc7a6b4400"))) {
+    if(!istrue(callsharedfunc(#"ob_pvpve", #"hash_f383e3bc7a6b4400"))) {
       return;
     }
   }
@@ -514,20 +514,20 @@ function private ob_laststand_alive_check(revived) {
     squad_leader = squad_utility::getsquadleader(self.team, self.sessionsquadid);
   }
 
-  var_15e7e7fcf56c7531 = squad_leader;
+  lastplayeralive = squad_leader;
 
   if(var_95d11513b9b53a0d) {
     var_3af19e982dfa3220 = -1;
 
     foreach(player in var_eb5a9091076e21e8) {
       if(isDefined(player.var_443a9d08da23b7dd) && player.var_443a9d08da23b7dd > var_3af19e982dfa3220) {
-        var_15e7e7fcf56c7531 = player;
+        lastplayeralive = player;
         var_3af19e982dfa3220 = player.var_443a9d08da23b7dd;
       }
     }
   }
 
-  if(var_95d11513b9b53a0d && !istrue(level.gameended) && is_equal(self, var_15e7e7fcf56c7531)) {
+  if(var_95d11513b9b53a0d && !istrue(level.gameended) && is_equal(self, lastplayeralive)) {
     thread scripts\mp\gametypes\ob::onsquadeliminated(var_eb5a9091076e21e8, var_192c781ad2c7d253);
   }
 }
@@ -613,7 +613,7 @@ function function_ef6adc9492d03ef(v_start) {
   }
 
   if(issharedfuncdefined(#"ob_pvpve", #"hash_c69889de57e82c49")) {
-    function_f3bb4f4911a1beb2(#"ob_pvpve", #"hash_c69889de57e82c49");
+    callsharedfunc(#"ob_pvpve", #"hash_c69889de57e82c49");
   }
 
   self setOrigin(spawnorigin);

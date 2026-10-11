@@ -15,15 +15,15 @@
 #using scripts\mp\utility\weapon;
 #namespace namespace_e40ee8b394ce404;
 
-function function_cf1b1f86951a9209(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_cf1b1f86951a9209(instance, part, state, player, bautouse, usestring) {
   function_9cd7df4997aea4bf(player, instance);
   instance.playeropen[player.guid] = player;
 
   if(isDefined(instance.usedcallback)) {
-    [[instance.usedcallback]](instance, part, state, player, var_a5b2c541413aa895, usestring);
+    [[instance.usedcallback]](instance, part, state, player, bautouse, usestring);
   }
 
-  function_30f5ea60517f9e06(player, instance);
+  openlootablecontainer(player, instance);
 }
 
 function function_6207d6f728cee51d(players, container, lootid, quantity, weaponobj, noextract, force) {
@@ -339,9 +339,9 @@ function function_4b1ea8143efb9dd(itemtype, itemindex, dropall) {
       if(scripts\mp\gametypes\dmz_dog_tag::function_3c17a26ce6a4668(lootid)) {
         [quantity, itemcountlefthand, var_dab81ead77442a10] = scripts\mp\gametypes\dmz_dog_tag::function_379463a84adb07b4(quantity);
       } else if(istrue(dropall) || scripts\mp\gametypes\br_pickups::function_d345eec68e01361f(lootid)) {
-        quantity = namespace_aead94004cf4c147::function_897b29adb37f06a7(itemindex);
+        quantity = namespace_aead94004cf4c147::getquantityatbackpackindex(itemindex);
       } else if(isDefined(scriptablename) && scripts\mp\gametypes\br_public::isammo(scriptablename)) {
-        quantity = int(min(namespace_aead94004cf4c147::function_897b29adb37f06a7(itemindex), level.br_pickups.counts[scriptablename]));
+        quantity = int(min(namespace_aead94004cf4c147::getquantityatbackpackindex(itemindex), level.br_pickups.counts[scriptablename]));
       } else {
         quantity = 1;
       }

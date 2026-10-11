@@ -38,7 +38,7 @@ function function_7dccce8c87ea644() {
   flag_wait("create_script_initialized");
   waitframe();
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     while(level.poi.size == 0) {
       waitframe();
     }
@@ -84,7 +84,7 @@ function function_55ab9c6da96226e7(numriders, reinforceorigin, var_3b496abb20475
   }
 
   if(!isDefined(poiname)) {
-    poiname = function_6cc445c02b5effac(reinforceorigin);
+    poiname = poi_findpoioriginisin(reinforceorigin);
   }
 
   if(!isDefined(var_4f200828059689db)) {
@@ -280,9 +280,9 @@ function function_984016d3b51024a2(numriders, origin, spawners, priority, catego
 function function_2673db74633ed911(origin, poiname) {
   potentiallocs = [];
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
-      poiname = function_6cc445c02b5effac(origin, 0, 1);
+      poiname = poi_findpoioriginisin(origin, 0, 1);
     }
 
     if(!isDefined(level.poi[poiname]["paraReinforceStruct"].landingspots) || level.poi[poiname]["paraReinforceStruct"].landingspots.size == 0) {
@@ -323,9 +323,9 @@ function function_2673db74633ed911(origin, poiname) {
 function function_9e7d8e0b07e473f0(origin, poiname) {
   potentiallocs = [];
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
-      poiname = function_6cc445c02b5effac(origin, 0, 1);
+      poiname = poi_findpoioriginisin(origin, 0, 1);
     }
 
     if(!isDefined(level.poi[poiname]["paraReinforceStruct"].var_e574839e9e50e6a7) || level.poi[poiname]["paraReinforceStruct"].var_e574839e9e50e6a7.size == 0) {
@@ -347,9 +347,9 @@ function function_9e7d8e0b07e473f0(origin, poiname) {
 function function_1cd198f23cffc84f(origin, poiname) {
   potentiallocs = [];
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
-      poiname = function_6cc445c02b5effac(origin, 0, 1);
+      poiname = poi_findpoioriginisin(origin, 0, 1);
     }
 
     if(!isDefined(level.poi[poiname]["paraReinforceStruct"].var_932a9b3d757d01e9) || level.poi[poiname]["paraReinforceStruct"].var_932a9b3d757d01e9.size == 0) {

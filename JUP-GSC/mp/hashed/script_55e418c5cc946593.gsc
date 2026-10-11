@@ -459,12 +459,12 @@ function function_bdd930eee0042052() {
   return getdvarint(@ "br_perk_package_inventory_items_enabled", 1);
 }
 
-function function_c3023358dc648bf1(scriptent, var_a24f1824f93081a8, var_a5b2c541413aa895, backpackindex, backpackequip) {
+function function_c3023358dc648bf1(scriptent, var_a24f1824f93081a8, bautouse, backpackindex, backpackequip) {
   lootname = undefined;
   perks = undefined;
 
   if(isDefined(backpackindex)) {
-    if(istrue(var_a5b2c541413aa895) && (!isDefined(backpackequip) || backpackequip == 0)) {
+    if(istrue(bautouse) && (!isDefined(backpackequip) || backpackequip == 0)) {
       [lootname, perks] = function_b28e5ac58e164cac(scriptent);
     } else {
       [lootname, perks] = function_3af287ce55291889(backpackindex);

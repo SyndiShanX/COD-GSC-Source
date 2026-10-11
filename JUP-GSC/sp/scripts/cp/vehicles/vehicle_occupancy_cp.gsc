@@ -26,9 +26,9 @@ function vehicle_occupancy_cp_init() {
   val::group_register("vehicle", ["gesture", "killstreaks", "supers", "cp_munitions"]);
 }
 
-function vehicle_occupancy_cp_onentervehicle(vehicle, var_7558f98f3236963d, player, data) {
+function vehicle_occupancy_cp_onentervehicle(vehicle, newseatid, player, data) {
   if(isDefined(vehicle.vehicle_specific_onentervehicle)) {
-    [[vehicle.vehicle_specific_onentervehicle]](vehicle, var_7558f98f3236963d, player, data);
+    [[vehicle.vehicle_specific_onentervehicle]](vehicle, newseatid, player, data);
   }
 
   player val::group_set("vehicle", 0);
@@ -56,9 +56,9 @@ function vehicle_occupancy_cp_onentervehicle(vehicle, var_7558f98f3236963d, play
   player notify("force_regeneration");
 }
 
-function vehicle_occupancy_cp_onexitvehicle(vehicle, var_fc7c7a874b43a31a, player, data) {
+function vehicle_occupancy_cp_onexitvehicle(vehicle, oldseatid, player, data) {
   if(isDefined(vehicle.vehicle_specific_onexitvehicle)) {
-    [[vehicle.vehicle_specific_onexitvehicle]](vehicle, var_fc7c7a874b43a31a, player, data);
+    [[vehicle.vehicle_specific_onexitvehicle]](vehicle, oldseatid, player, data);
   }
 
   if(!istrue(data.playerdisconnect)) {
@@ -98,7 +98,7 @@ function vehicle_occupancy_cp_handlesuicidefromvehicles(player) {
   player dodamage(player.health + 50, player.origin);
 }
 
-function vehicle_occupancy_cp_takeriotshield(player, vehicle, var_7558f98f3236963d) {
+function vehicle_occupancy_cp_takeriotshield(player, vehicle, newseatid) {
   riotshieldweapon = undefined;
   riotshieldiscurrentprimary = undefined;
   var_102d661b1caa8bc1 = undefined;
@@ -137,7 +137,7 @@ function vehicle_occupancy_cp_takeriotshield(player, vehicle, var_7558f98f323696
     player.riotshieldiscurrentprimary = riotshieldiscurrentprimary;
 
     if(istrue(riotshieldiscurrentprimary)) {
-      vehicle_occupancy_cp_updateriotshield(player, vehicle, var_7558f98f3236963d);
+      vehicle_occupancy_cp_updateriotshield(player, vehicle, newseatid);
     }
 
     assertex(isDefined(var_102d661b1caa8bc1), "vehicle_occupancy_cp_takeRiotShield took riot shield, but cannot find a weapon to switch to.");
@@ -169,21 +169,21 @@ function vehicle_occupancy_cp_giveriotshield(player, fromdeath, fromlaststand) {
   }
 }
 
-function vehicle_occupancy_cp_updateriotshield(player, vehicle, var_7558f98f3236963d) {
+function vehicle_occupancy_cp_updateriotshield(player, vehicle, newseatid) {
   if(isDefined(player.riotshieldtaken) && istrue(player.riotshieldiscurrentprimary)) {
-    if(!isDefined(var_7558f98f3236963d)) {
+    if(!isDefined(newseatid)) {
       return;
     }
 
-    if(vehicle_occupancy_isdriverseat(vehicle, var_7558f98f3236963d)) {
+    if(vehicle_occupancy_isdriverseat(vehicle, newseatid)) {
       return;
     }
 
-    if(vehicle_shouldhideoccupantforseat(vehicle, var_7558f98f3236963d)) {
+    if(vehicle_shouldhideoccupantforseat(vehicle, newseatid)) {
       return;
     }
 
-    leveldataforseat = vehicle_occupancy_getleveldataforseat(vehicle.vehiclename, var_7558f98f3236963d);
+    leveldataforseat = vehicle_occupancy_getleveldataforseat(vehicle.vehiclename, newseatid);
 
     if(isDefined(leveldataforseat.turretobjweapon)) {
       return;

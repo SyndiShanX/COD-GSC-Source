@@ -71,10 +71,10 @@ function function_80d68c9701e1aea5(data) {
       nodepoi = node.poi;
 
       if(!isDefined(nodepoi)) {
-        nodepoi = scripts\mp\poi::function_6cc445c02b5effac(node.origin);
+        nodepoi = scripts\mp\poi::poi_findpoioriginisin(node.origin);
       }
 
-      if(!scripts\mp\poi::function_47d356083884f913() || isDefined(nodepoi) && scripts\mp\poi::poi_ispoiactive(nodepoi) && !namespace_7789f919216d38a2::function_cdcab1374db7f007(node.origin) && !namespace_9823ee6035594d67::function_f59f68adc71d49b3(node.origin)) {
+      if(!scripts\mp\poi::poi_issystemactive() || isDefined(nodepoi) && scripts\mp\poi::poi_ispoiactive(nodepoi) && !namespace_7789f919216d38a2::function_cdcab1374db7f007(node.origin) && !namespace_9823ee6035594d67::function_f59f68adc71d49b3(node.origin)) {
         level.domnodes[level.domnodes.size] = node;
       }
     }
@@ -200,7 +200,7 @@ function function_443a192943945265(node, var_34ef5bf2eebf19eb) {
     self.domflag = spawnscriptable("dmz_upload_station", node.origin, node.angles);
   }
 
-  self.domflag.poi = scripts\mp\poi::function_6cc445c02b5effac(node.origin, 1);
+  self.domflag.poi = scripts\mp\poi::poi_findpoioriginisin(node.origin, 1);
 
   if(isDefined(self.activity)) {
     namespace_d1a9ca87d78d9813::function_9533653868e59fb6("<dev string:x70>", self.activity.name, undefined, "<dev string:x84>", undefined, undefined, self.activity.poi, node.origin);
@@ -506,7 +506,7 @@ function function_c63511286db73ab1() {
   }
 }
 
-function function_4e64a11d42d9b58a(instance, part, state, useplayer, var_a5b2c541413aa895, usestring) {
+function function_4e64a11d42d9b58a(instance, part, state, useplayer, bautouse, usestring) {
   if(isDefined(instance.animatingplayer) || !isDefined(useplayer.team) || isDefined(instance.teamsusing[useplayer.team])) {
     useplayer scripts\mp\hud_message::showerrormessage("MP/CANNOT_USE_GENERIC");
     return;
@@ -523,18 +523,18 @@ function function_4e64a11d42d9b58a(instance, part, state, useplayer, var_a5b2c54
   playertask = function_37416c14e9703fb6(useplayer);
 
   if(isDefined(playertask) && istrue(playertask.unlocked) && isDefined(instance.tasks) && array_contains(instance.tasks, playertask)) {
-    thread function_a22ac2645c342456(instance, part, state, useplayer, var_a5b2c541413aa895, usestring);
+    thread function_a22ac2645c342456(instance, part, state, useplayer, bautouse, usestring);
     return;
   }
 
-  pmcsuccess = istrue(instance scripts\engine\utility::function_f3bb4f4911a1beb2("pmc_missions", "onUseUploadStation", useplayer));
+  pmcsuccess = istrue(instance scripts\engine\utility::callsharedfunc("pmc_missions", "onUseUploadStation", useplayer));
 
   if(!pmcsuccess) {
     useplayer scripts\mp\hud_message::showerrormessage("DMZ/UPLOAD_STATION_USE_ERR");
   }
 }
 
-function function_a22ac2645c342456(instance, part, state, useplayer, var_a5b2c541413aa895, usestring) {
+function function_a22ac2645c342456(instance, part, state, useplayer, bautouse, usestring) {
   function_94f937f05d8740c8(instance, useplayer);
 
   if(istrue(instance.successfuluse)) {
@@ -645,7 +645,7 @@ function function_21bf34fdb6a27d05(player) {
   player.linktoent rotateTo(goalangles, movetotime, 0.1, 0.1);
   player setstance("stand");
   var_cd9982adb17761a8 = gettime();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = movetotime - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000;
   waittime = max(0, var_218f64cb035d54be);

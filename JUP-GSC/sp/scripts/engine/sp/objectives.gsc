@@ -9,23 +9,23 @@
 #using scripts\sp\utility;
 #namespace objectives;
 
-function objective_add(objectivename, objstate, objposition, objdescription, objlabel, var_c6caf52c65d084b8, objzoffset, var_780b9710a4c60f44, var_d54b9310847f6bf4, var_2f87f92eb31189cc, var_2431ebabbcc67a2c, var_c13020776c269a42, var_d85ab98698be6559) {
+function objective_add(objectivename, objstate, objposition, objdescription, objlabel, objiconname, objzoffset, objshowdistance, objshowprogress, objshowsplash, objscreenoffsety, objisoptional, var_d85ab98698be6559) {
   _objective_validatename(objectivename);
   _objective_initindexforname(objectivename);
-  objective_update(objectivename, objstate, objposition, objdescription, objlabel, var_c6caf52c65d084b8, objzoffset, var_780b9710a4c60f44, var_d54b9310847f6bf4, var_2431ebabbcc67a2c);
-  var_2f87f92eb31189cc = default_to(var_2f87f92eb31189cc, 1);
+  objective_update(objectivename, objstate, objposition, objdescription, objlabel, objiconname, objzoffset, objshowdistance, objshowprogress, objscreenoffsety);
+  objshowsplash = default_to(objshowsplash, 1);
 
-  if(istrue(var_2f87f92eb31189cc) && isDefined(objdescription) && isDefined(level.objectives_splash) && isDefined(level.objectives_splash.callback)) {
+  if(istrue(objshowsplash) && isDefined(objdescription) && isDefined(level.objectives_splash) && isDefined(level.objectives_splash.callback)) {
     objcomplete = 0;
     var_71bb4595bfba1caf = 0;
     level.player[[level.objectives_splash.callback]](objectivename, objdescription, objcomplete, var_71bb4595bfba1caf, var_d85ab98698be6559);
   }
 
-  var_c13020776c269a42 = default_to(var_c13020776c269a42, 0);
+  objisoptional = default_to(objisoptional, 0);
 
-  if(istrue(var_c13020776c269a42)) {
+  if(istrue(objisoptional)) {
     objectiveindex = _objective_getindexforname(objectivename);
-    function_5fd2627c5ce186db(objectiveindex, var_c13020776c269a42);
+    function_5fd2627c5ce186db(objectiveindex, objisoptional);
   }
 }
 
@@ -34,7 +34,7 @@ function function_1a7f32a7c56ad4e0(callback_func) {
   level.objectives_splash.callback = callback_func;
 }
 
-function objective_update(objectivename, objstate, objposition, objdescription, objlabel, var_c6caf52c65d084b8, objzoffset, var_780b9710a4c60f44, var_d54b9310847f6bf4, var_2431ebabbcc67a2c, entitytag) {
+function objective_update(objectivename, objstate, objposition, objdescription, objlabel, objiconname, objzoffset, objshowdistance, objshowprogress, objscreenoffsety, entitytag) {
   _objective_validatename(objectivename);
   assertex(objective_exists(objectivename), "Objective with name " + objectivename + " doesn't exist!");
 
@@ -62,24 +62,24 @@ function objective_update(objectivename, objstate, objposition, objdescription, 
     objective_set_label(objectivename, objlabel);
   }
 
-  if(isDefined(var_c6caf52c65d084b8)) {
-    objective_set_icon(objectivename, var_c6caf52c65d084b8);
+  if(isDefined(objiconname)) {
+    objective_set_icon(objectivename, objiconname);
   }
 
   if(isDefined(objzoffset)) {
     objective_set_z_offset(objectivename, objzoffset);
   }
 
-  if(isDefined(var_780b9710a4c60f44)) {
-    objective_set_show_distance(objectivename, var_780b9710a4c60f44);
+  if(isDefined(objshowdistance)) {
+    objective_set_show_distance(objectivename, objshowdistance);
   }
 
-  if(isDefined(var_d54b9310847f6bf4)) {
-    objective_set_show_progress(objectivename, var_d54b9310847f6bf4);
+  if(isDefined(objshowprogress)) {
+    objective_set_show_progress(objectivename, objshowprogress);
   }
 
-  if(isDefined(var_2431ebabbcc67a2c)) {
-    function_ff959ec1bd44c166(objectivename, var_2431ebabbcc67a2c);
+  if(isDefined(objscreenoffsety)) {
+    function_ff959ec1bd44c166(objectivename, objscreenoffsety);
   }
 
   level notify("objectives_updated");
@@ -107,12 +107,12 @@ function objective_exists(objectivename) {
   return false;
 }
 
-function objective_complete(objectivename, var_2f87f92eb31189cc, objdescription) {
+function objective_complete(objectivename, objshowsplash, objdescription) {
   assertex(objective_exists(objectivename), "Objective with name " + objectivename + " doesn't exist!");
   objective_set_state(objectivename, "done");
-  var_2f87f92eb31189cc = default_to(var_2f87f92eb31189cc, 0);
+  objshowsplash = default_to(objshowsplash, 0);
 
-  if(istrue(var_2f87f92eb31189cc) && isDefined(level.objectives_splash) && isDefined(level.objectives_splash.callback)) {
+  if(istrue(objshowsplash) && isDefined(level.objectives_splash) && isDefined(level.objectives_splash.callback)) {
     objcomplete = 1;
     var_71bb4595bfba1caf = 0;
     level.player[[level.objectives_splash.callback]](objectivename, objdescription, objcomplete, var_71bb4595bfba1caf);
@@ -166,11 +166,11 @@ function objective_set_label(objectivename, objlabel) {
   level notify("objectives_updated");
 }
 
-function objective_set_icon(objectivename, var_c6caf52c65d084b8) {
+function objective_set_icon(objectivename, objiconname) {
   _objective_validatename(objectivename);
-  assert(isstring(var_c6caf52c65d084b8));
+  assert(isstring(objiconname));
   objectiveindex = _objective_getindexforname(objectivename);
-  objective_icon(objectiveindex, var_c6caf52c65d084b8);
+  objective_icon(objectiveindex, objiconname);
   level notify("objectives_updated");
 }
 
@@ -182,11 +182,11 @@ function objective_set_z_offset(objectivename, objzoffset) {
   level notify("objectives_updated");
 }
 
-function function_ff959ec1bd44c166(objectivename, var_2431ebabbcc67a2c) {
+function function_ff959ec1bd44c166(objectivename, objscreenoffsety) {
   _objective_validatename(objectivename);
-  assert(isint(var_2431ebabbcc67a2c) || isfloat(var_2431ebabbcc67a2c));
+  assert(isint(objscreenoffsety) || isfloat(objscreenoffsety));
   objectiveindex = _objective_getindexforname(objectivename);
-  function_7d22acc637a98c43(objectiveindex, var_2431ebabbcc67a2c);
+  function_7d22acc637a98c43(objectiveindex, objscreenoffsety);
   level notify("objectives_updated");
 }
 
@@ -201,19 +201,19 @@ function function_54586a40e8a00778(objectivename) {
   objective_set_z_offset(objectivename, 25);
 }
 
-function objective_set_show_distance(objectivename, var_780b9710a4c60f44) {
+function objective_set_show_distance(objectivename, objshowdistance) {
   _objective_validatename(objectivename);
-  assert(isint(var_780b9710a4c60f44));
+  assert(isint(objshowdistance));
   objectiveindex = _objective_getindexforname(objectivename);
-  objective_setshowdistance(objectiveindex, var_780b9710a4c60f44);
+  objective_setshowdistance(objectiveindex, objshowdistance);
   level notify("objectives_updated");
 }
 
-function objective_set_show_progress(objectivename, var_d54b9310847f6bf4) {
+function objective_set_show_progress(objectivename, objshowprogress) {
   _objective_validatename(objectivename);
-  assert(isint(var_d54b9310847f6bf4));
+  assert(isint(objshowprogress));
   objectiveindex = _objective_getindexforname(objectivename);
-  objective_setshowprogress(objectiveindex, var_d54b9310847f6bf4);
+  objective_setshowprogress(objectiveindex, objshowprogress);
   level notify("objectives_updated");
 }
 
@@ -260,38 +260,38 @@ function objective_add_location_position(objectivename, locationname, locationpo
 function objective_remove_location(objectivename, locationname) {
   assert(objective_exists(objectivename));
   assert(isstring(locationname));
-  var_9be69c18c91160a9 = -1;
+  objectivelocationindex = -1;
   objectiveindex = _objective_getindexforname(objectivename);
   objectivelocations = level.objective_array[objectiveindex].locations;
 
   foreach(location in objectivelocations) {
     if(isDefined(location) && location == locationname) {
-      var_9be69c18c91160a9 = locationindex;
+      objectivelocationindex = locationindex;
       break;
     }
   }
 
-  assertex(var_9be69c18c91160a9 >= 0, "The location - " + locationname + " - was not defined for objective: " + objectivename);
-  level.objective_array[objectiveindex].locations[var_9be69c18c91160a9] = undefined;
-  objective_unsetlocation(objectiveindex, var_9be69c18c91160a9);
+  assertex(objectivelocationindex >= 0, "The location - " + locationname + " - was not defined for objective: " + objectivename);
+  level.objective_array[objectiveindex].locations[objectivelocationindex] = undefined;
+  objective_unsetlocation(objectiveindex, objectivelocationindex);
   level notify("objectives_updated", "location");
 }
 
 function function_9ecf0d4a951abebf(objectivename, locationname) {
   assert(objective_exists(objectivename));
   assert(isstring(locationname));
-  var_9be69c18c91160a9 = -1;
+  objectivelocationindex = -1;
   objectiveindex = _objective_getindexforname(objectivename);
   objectivelocations = level.objective_array[objectiveindex].locations;
 
   foreach(location in objectivelocations) {
     if(isDefined(location) && location == locationname) {
-      var_9be69c18c91160a9 = locationindex;
+      objectivelocationindex = locationindex;
       break;
     }
   }
 
-  return var_9be69c18c91160a9 >= 0;
+  return objectivelocationindex >= 0;
 }
 
 function objective_remove_all_locations(objectivename) {
@@ -327,10 +327,10 @@ function _objective_addlocation(objectivename, locationname, var_8c7c19c9172500f
   assert(isstring(locationname));
   objectiveindex = _objective_getindexforname(objectivename);
   assertex(!array_contains(level.objective_array[objectiveindex].locations, locationname), "The location - " + locationname + " - is already defined for objective: " + objectivename);
-  var_9be69c18c91160a9 = _objective_getnextfreelocationindex(objectiveindex);
-  assertex(var_9be69c18c91160a9 < 8, "This objective can only have a limited number of max locations. Can't add more!");
-  level.objective_array[objectiveindex].locations[var_9be69c18c91160a9] = locationname;
-  objective_setlocation(objectiveindex, var_9be69c18c91160a9, var_8c7c19c9172500f);
+  objectivelocationindex = _objective_getnextfreelocationindex(objectiveindex);
+  assertex(objectivelocationindex < 8, "This objective can only have a limited number of max locations. Can't add more!");
+  level.objective_array[objectiveindex].locations[objectivelocationindex] = locationname;
+  objective_setlocation(objectiveindex, objectivelocationindex, var_8c7c19c9172500f);
   level notify("objectives_updated");
 }
 
@@ -343,7 +343,7 @@ function _objective_initindexforname(objectivename) {
   _objective_getindexforname(objectivename, 1);
 }
 
-function _objective_getindexforname(objectivename, var_2e5a6b3339d8d1e0) {
+function _objective_getindexforname(objectivename, isnewobjective) {
   assert(isstring(objectivename));
 
   if(!isDefined(level.objective_array)) {
@@ -352,7 +352,7 @@ function _objective_getindexforname(objectivename, var_2e5a6b3339d8d1e0) {
 
   objectiveindex = -1;
 
-  if(istrue(var_2e5a6b3339d8d1e0)) {
+  if(istrue(isnewobjective)) {
     assertex(!objective_exists(objectivename), "An objective with this name was already added: " + objectivename);
     objectiveindex = _objective_getnextfreeobjectiveindex();
     level.objective_array[objectiveindex] = spawnStruct();
@@ -420,23 +420,23 @@ function _objective_getnextfreeobjectiveindex() {
 }
 
 function function_bb9ff75fdab01612(boolean) {
-  level.var_58d876adc5a3a383.enabled = boolean;
+  level.objective_reminder.enabled = boolean;
 
-  if(istrue(level.var_58d876adc5a3a383.enabled)) {
+  if(istrue(level.objective_reminder.enabled)) {
     function_51fa6750df4678ca();
   }
 }
 
 function function_51fa6750df4678ca(delay_time) {
-  if(!isDefined(level.var_58d876adc5a3a383.delay_time) || !isDefined(delay_time)) {
-    level.var_58d876adc5a3a383.delay_time = 180000;
+  if(!isDefined(level.objective_reminder.delay_time) || !isDefined(delay_time)) {
+    level.objective_reminder.delay_time = 180000;
   }
 
   if(isDefined(delay_time) && delay_time > 0) {
-    level.var_58d876adc5a3a383.delay_time = delay_time;
+    level.objective_reminder.delay_time = delay_time;
   }
 
-  level.var_58d876adc5a3a383.next_time = gettime() + level.var_58d876adc5a3a383.delay_time;
+  level.objective_reminder.next_time = gettime() + level.objective_reminder.delay_time;
 }
 
 function function_198bcf281b9c6e01(duration) {
@@ -446,29 +446,29 @@ function function_198bcf281b9c6e01(duration) {
     duration *= 1000;
   }
 
-  level.var_58d876adc5a3a383.delay_time = duration;
+  level.objective_reminder.delay_time = duration;
   function_51fa6750df4678ca(duration);
 }
 
-function function_6294c59db36291e6(var_9f34c2c1d6c74955) {
-  if(isDefined(var_9f34c2c1d6c74955)) {
-    if(var_9f34c2c1d6c74955 == 0) {
+function function_6294c59db36291e6(show_after_delay) {
+  if(isDefined(show_after_delay)) {
+    if(show_after_delay == 0) {
       thread function_78a5f36ae600540();
       function_51fa6750df4678ca();
       return;
     }
 
-    var_9f34c2c1d6c74955 = int(var_9f34c2c1d6c74955 * 1000);
-    function_51fa6750df4678ca(var_9f34c2c1d6c74955);
+    show_after_delay = int(show_after_delay * 1000);
+    function_51fa6750df4678ca(show_after_delay);
   }
 
-  function_51fa6750df4678ca(var_9f34c2c1d6c74955);
+  function_51fa6750df4678ca(show_after_delay);
 }
 
 function function_f420c7fbd15a416b() {
   level endon("game_ended");
   println("<dev string:x1c>");
-  level.var_58d876adc5a3a383 = spawnStruct();
+  level.objective_reminder = spawnStruct();
   function_bb9ff75fdab01612(0);
   function_51fa6750df4678ca();
   childthread function_17b90f3fe7fbd28f();
@@ -478,8 +478,8 @@ function function_f420c7fbd15a416b() {
 
     if(function_d0acca3f41921ad2()) {
       function_51fa6750df4678ca();
-    } else if(level.var_58d876adc5a3a383.next_time <= cur_time || istrue(level.var_58d876adc5a3a383.forced)) {
-      if(istrue(level.var_58d876adc5a3a383.enabled)) {
+    } else if(level.objective_reminder.next_time <= cur_time || istrue(level.objective_reminder.forced)) {
+      if(istrue(level.objective_reminder.enabled)) {
         thread function_78a5f36ae600540();
         self waittill("objective_reminder_end");
         function_51fa6750df4678ca();
@@ -499,7 +499,7 @@ function function_78a5f36ae600540() {
 
   end_time = gettime() + 10000;
 
-  while(gettime() < end_time || istrue(level.var_58d876adc5a3a383.forced)) {
+  while(gettime() < end_time || istrue(level.objective_reminder.forced)) {
     if(function_d0acca3f41921ad2()) {
       break;
     }

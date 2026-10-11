@@ -26,8 +26,8 @@ function function_e0cb0c471c8390dd() {
   vo_init();
   flag_wait_any("flag_dungeon_intro_complete", "flag_dungeon_start_vo");
   checkpoint = scripts\cp\cp_checkpoint::checkpoint_get();
-  var_56349eae90f1ebec = !isDefined(function_69fa4a2561ada985("introFinished")) && checkpoint == "";
-  childthread vo_intro(var_56349eae90f1ebec, checkpoint);
+  is_first_time = !isDefined(function_69fa4a2561ada985("introFinished")) && checkpoint == "";
+  childthread vo_intro(is_first_time, checkpoint);
   childthread function_e839281e26b3b853();
   childthread vo_red_alert();
   flag_wait("vo_intro_finished");
@@ -534,12 +534,12 @@ function function_4717a003070a5023() {
   function_fd637bed854b2ba8();
 }
 
-function function_86b50d50e22de606(instance, player, edgeindex, isinverted, isvertical, var_7bd9fd9d3e7c7aa) {
-  if(!isDefined(isinverted) || !isDefined(var_7bd9fd9d3e7c7aa)) {
+function function_86b50d50e22de606(instance, player, edgeindex, isinverted, isvertical, ascendervec) {
+  if(!isDefined(isinverted) || !isDefined(ascendervec)) {
     return;
   }
 
-  var_aebff5030f63a8b4 = var_7bd9fd9d3e7c7aa[2];
+  var_aebff5030f63a8b4 = ascendervec[2];
   going_up = var_aebff5030f63a8b4 > 0 && !isinverted || var_aebff5030f63a8b4 < 0 && isinverted;
 
   if(!going_up || level.vo.var_4202c8d1d8952b1e > gettime()) {
@@ -725,7 +725,7 @@ function function_933cb409cccfde6f() {
   say_sequence(sequence, 0, 3, 0, 0.5);
 }
 
-function function_eb7328ff9bae5a5d(var_cfce5406bdfee0cb, second, force) {
+function function_eb7328ff9bae5a5d(towards, second, force) {
   if(!isDefined(level.vo.var_bdfe69963396b6ed)) {
     aliases = ["dx_cp_port_mts1_fara_makingmywaytowardsth", "dx_cp_port_mts1_fara_headingtowardstheshi", "dx_cp_port_mts1_fara_movingtowardsthecarg", "dx_cp_port_mts1_fara_makingmywaytothefrei", "dx_cp_port_mts1_fara_enroutetotheship", "dx_cp_port_mts1_fara_makingmywaytowardsth_01", "dx_cp_port_mts1_fara_onmywaytotheship", "dx_cp_port_mts1_fara_headingtowardsthefre"];
     level.vo.var_bdfe69963396b6ed = create_deck(aliases, 1, 1, 1);
@@ -775,7 +775,7 @@ function function_eb7328ff9bae5a5d(var_cfce5406bdfee0cb, second, force) {
     }
   }
 
-  if(var_cfce5406bdfee0cb == "ship") {
+  if(towards == "ship") {
     var_9ed18883d5c763a1 = undefined;
     var_cb7fcc660aafd7bc = undefined;
 
@@ -795,7 +795,7 @@ function function_eb7328ff9bae5a5d(var_cfce5406bdfee0cb, second, force) {
     return;
   }
 
-  if(var_cfce5406bdfee0cb == "tower") {
+  if(towards == "tower") {
     var_9ed18883d5c763a1 = undefined;
     var_cb7fcc660aafd7bc = undefined;
 
@@ -889,7 +889,7 @@ function function_220c095ea04f61bc() {
   }
 }
 
-function function_747084c13512e761(var_cfce5406bdfee0cb) {
+function function_747084c13512e761(towards) {
   if(!isDefined(level.vo.var_29ed04521af1860d)) {
     aliases = ["dx_cp_port_cmts_fara_changeofplansimgoing", "dx_cp_port_cmts_fara_changingcourseheadin", "dx_cp_port_cmts_fara_newplangravesillgett", "dx_cp_port_cmts_fara_shadowillgetthetrack", "dx_cp_port_cmts_fara_goingforthetrackersc"];
     level.vo.var_29ed04521af1860d = create_deck(aliases, 1, 1, 1);
@@ -910,7 +910,7 @@ function function_747084c13512e761(var_cfce5406bdfee0cb) {
     level.vo.var_d6eca4db567f0e5 = create_deck(aliases, 1, 1, 1);
   }
 
-  if(var_cfce5406bdfee0cb == "ship") {
+  if(towards == "ship") {
     var_84c58846f5116744 = [level.player, 0.3, level.vo.var_29ed04521af1860d deck_draw(), level.graves, 0.4, "dx_cp_port_cmts_grav_goodcopydowhatyousee"];
     var_8afdac9ba3efccb5 = [level.player, 0.3, level.vo.var_c40634d30c9af07a deck_draw(), level.graves, 0.4, "dx_cp_port_aaaa_grav_copyyourcallcommande"];
     sequence = function_70386f0dbf01d6f4(var_8afdac9ba3efccb5, var_84c58846f5116744);
@@ -921,7 +921,7 @@ function function_747084c13512e761(var_cfce5406bdfee0cb) {
     return;
   }
 
-  if(var_cfce5406bdfee0cb == "tower") {
+  if(towards == "tower") {
     var_84c58846f5116744 = [level.player, 0.3, level.vo.var_c32afe06179aba94 deck_draw(), level.graves, 0.4, "dx_cp_port_cmtt_grav_dealerschoicekilosta"];
     var_8afdac9ba3efccb5 = [level.player, 0.3, level.vo.var_d6eca4db567f0e5 deck_draw()];
     sequence = function_70386f0dbf01d6f4(var_8afdac9ba3efccb5, var_84c58846f5116744);
@@ -2262,14 +2262,14 @@ function function_cd3ddd11020f508e(params) {
     return;
   }
 
-  if(!isDefined(level.vo.var_59e195d4d4f5533c)) {
+  if(!isDefined(level.vo.drive_vehicle)) {
     aliases = ["dx_cp_port_drve_fara_behindthewheel", "dx_cp_port_drve_fara_gettinginthedriverss", "dx_cp_port_drve_fara_hopethishandleswell", "dx_cp_port_drve_fara_letsride", "dx_cp_port_drve_fara_goingforadrive"];
-    level.vo.var_59e195d4d4f5533c = create_deck(aliases, 1, 1, 1);
+    level.vo.drive_vehicle = create_deck(aliases, 1, 1, 1);
     aliases = ["dx_cp_port_2222_fara_behindthewheel", "dx_cp_port_2222_fara_gettinginthedriverss", "dx_cp_port_2222_fara_hopethishandleswell", "dx_cp_port_2222_fara_letsride", "dx_cp_port_2222_fara_goingforadrive"];
     level.vo.var_bcc3368bca278dad = create_deck(aliases, 1, 1, 1);
   }
 
-  sequence = [level.player, 0, function_cd70fbc5ff85bc7d(level.vo.var_bcc3368bca278dad, level.vo.var_59e195d4d4f5533c)];
+  sequence = [level.player, 0, function_cd70fbc5ff85bc7d(level.vo.var_bcc3368bca278dad, level.vo.drive_vehicle)];
   played = say_sequence(sequence, 0.25, 3, 0, 1.25);
 
   if(istrue(played)) {

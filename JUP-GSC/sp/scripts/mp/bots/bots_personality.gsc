@@ -201,10 +201,10 @@ function update_personality_camper() {
       self.camper_time_started_hunting = 0;
     }
 
-    var_cdca96a984fdb85 = goaltype == "hunt";
+    is_hunting = goaltype == "hunt";
     var_a703a9e683f32f15 = gettime() > self.camper_time_started_hunting + 10000;
 
-    if((!var_cdca96a984fdb85 || var_a703a9e683f32f15) && !bot_out_of_ammo()) {
+    if((!is_hunting || var_a703a9e683f32f15) && !bot_out_of_ammo()) {
       if(!self bothasscriptgoal()) {
         bot_random_path();
       }

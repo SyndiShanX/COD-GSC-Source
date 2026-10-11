@@ -101,7 +101,7 @@ function private function_db697c35c5f45d87(pos, angles, var_1ec37f1e7a9e2ec9) {
 
 function private function_5eb3707c330f26a8() {
   array = [];
-  level.var_e16818aeb4b10beb = function_f159c10d5cf8f0b4("relic_crayon_footstep_bed_trigger", "targetname");
+  level.var_e16818aeb4b10beb = getnoentvolumearray("relic_crayon_footstep_bed_trigger", "targetname");
   interactionstruct = getStruct("relic_journal_bed_interact", "targetname");
   var_179343b5981c3088 = getStruct("relic_journal_bed_reward", "targetname");
 

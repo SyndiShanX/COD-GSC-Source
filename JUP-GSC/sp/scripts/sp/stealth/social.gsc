@@ -11,7 +11,7 @@
 #namespace social;
 
 function init() {
-  level.var_971169afd6488423 = &function_58e4fce14e5f5f87;
+  level.var_971169afd6488423 = &playersetsocial;
 }
 
 function private function_5cc158a4fe40668e() {
@@ -59,7 +59,7 @@ function private playersocialtrespasstriggermon(trigger, var_5dc414c9a5344405) {
   }
 }
 
-function function_58e4fce14e5f5f87(enabled, var_29c27e623f6aa366, var_ce9e9cf314621bf1, enemygroup) {
+function playersetsocial(enabled, var_29c27e623f6aa366, var_ce9e9cf314621bf1, enemygroup) {
   assert(isPlayer(self));
 
   if(istrue(enabled)) {

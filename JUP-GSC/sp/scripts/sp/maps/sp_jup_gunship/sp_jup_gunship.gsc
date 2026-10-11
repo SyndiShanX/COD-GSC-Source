@@ -249,7 +249,7 @@ function function_29092b5a44845a82() {
 
   level.price thread function_9529433d6844e3f0("price_located", 1);
   level.farah thread function_9529433d6844e3f0("farah_located", 2);
-  utility::function_665d474ff040b446(["price_located", "farah_located"]);
+  utility::flag_wait_any_array(["price_located", "farah_located"]);
   utility::flag_set("teams_located");
   utility::autosave_by_name("teams_located");
   animnode function_ac4418db8ff0afc2();
@@ -260,7 +260,7 @@ function function_29092b5a44845a82() {
     }
   }
 
-  foreach(hero in level.var_cfefc3b18d6488d2) {
+  foreach(hero in level.heros) {
     hero thread namespace_6393a86f2fcda776::function_91fff8ef1083babf((0, 0, 0), 1, 1, 0, "icon_waypoint_overlay_marker_friendly_small", 0, 1);
   }
 
@@ -967,7 +967,7 @@ function function_cf5ed05c525a5385() {
     thread function_103fc444c0543d31();
   }
 
-  level utility::function_f9a207358d70923c(2, "hangar_a_start", &namespace_6393a86f2fcda776::function_c2ace64053c30140);
+  level utility::delaythreadendon(2, "hangar_a_start", &namespace_6393a86f2fcda776::function_c2ace64053c30140);
   level.var_9e1ae3102c095174 = 1;
   namespace_6393a86f2fcda776::function_a44e35e2dc63be50("axis", 6, 180);
   namespace_6393a86f2fcda776::function_e57fc58ce189fa88(1);
@@ -1437,12 +1437,12 @@ function function_dd509c2a4f4d7f4f() {
   wait 0.1;
   namespace_6393a86f2fcda776::function_a44e35e2dc63be50("axis", 25, 90);
   utility::flag_set("vehicle_a_start");
-  thread namespace_6393a86f2fcda776::function_7f8d7c583d458e56([level.bunker_doors[4], level.bunker_doors[5]], 3, "vehicle_a_door_01_ready");
+  thread namespace_6393a86f2fcda776::opendoors([level.bunker_doors[4], level.bunker_doors[5]], 3, "vehicle_a_door_01_ready");
   vehicle_1 = vehicle::spawn_vehicle_from_targetname_and_drive("base_veh_01");
   vehicle_2 = vehicle::spawn_vehicle_from_targetname_and_drive("base_veh_02");
   wait 0.1;
   namespace_6393a86f2fcda776::function_a44e35e2dc63be50("axis", 25, 90);
-  thread namespace_6393a86f2fcda776::function_7f8d7c583d458e56([level.bunker_doors[6], level.bunker_doors[7]], 3, "vehicle_a_door_02_ready");
+  thread namespace_6393a86f2fcda776::opendoors([level.bunker_doors[6], level.bunker_doors[7]], 3, "vehicle_a_door_02_ready");
   vehicle_3 = vehicle::spawn_vehicle_from_targetname_and_drive("base_veh_03");
   vehicle_4 = vehicle::spawn_vehicle_from_targetname_and_drive("base_veh_04");
   wait 0.1;
@@ -1592,12 +1592,12 @@ function function_b2dda853004dd7c0() {
 function function_d2193a499376c47d() {
   wait 0.1;
 
-  if(!isDefined(level.var_cfefc3b18d6488d2)) {
+  if(!isDefined(level.heros)) {
     return;
   }
 
   allies = getaiarray("allies");
-  guys = utility::array_remove_array(allies, level.var_cfefc3b18d6488d2);
+  guys = utility::array_remove_array(allies, level.heros);
 
   foreach(guy in guys) {
     guy delete();
@@ -1620,7 +1620,7 @@ function function_26c8449412809784() {
   }
 
   thread function_aab539ade098a8a8();
-  thread namespace_6393a86f2fcda776::function_7f8d7c583d458e56([level.bunker_doors[14], level.bunker_doors[15]], 3, "tank_b_door_ready");
+  thread namespace_6393a86f2fcda776::opendoors([level.bunker_doors[14], level.bunker_doors[15]], 3, "tank_b_door_ready");
   tank = vehicle::spawn_vehicle_from_targetname_and_drive("bunker_tank");
   thread function_dc116d9569c8f46b(tank, "vehicles_b", "vehicle_b_end", 2, "bunker_tank_start_shooting");
   utility::flag_wait_any_timeout(20, "bunker_tank_intro_shots", "bunker_tank_dead");
@@ -1628,17 +1628,17 @@ function function_26c8449412809784() {
   utility::wait_for_flag_or_timeout("bunker_tank_dead", 7);
   namespace_6393a86f2fcda776::function_a44e35e2dc63be50("axis", 25, 90);
   utility::flag_set("vehicle_b_start");
-  thread namespace_6393a86f2fcda776::function_7f8d7c583d458e56([level.bunker_doors[8], level.bunker_doors[9]], 3, "vehicle_b_door_01_ready");
+  thread namespace_6393a86f2fcda776::opendoors([level.bunker_doors[8], level.bunker_doors[9]], 3, "vehicle_b_door_01_ready");
   vehicle_1 = vehicle::spawn_vehicle_from_targetname_and_drive("bunker_a_veh_01");
   vehicle_2 = vehicle::spawn_vehicle_from_targetname_and_drive("bunker_a_veh_02");
   wait 0.1;
   namespace_6393a86f2fcda776::function_a44e35e2dc63be50("axis", 25, 90);
-  thread namespace_6393a86f2fcda776::function_7f8d7c583d458e56([level.bunker_doors[10], level.bunker_doors[11]], 3, "vehicle_b_door_02_ready");
+  thread namespace_6393a86f2fcda776::opendoors([level.bunker_doors[10], level.bunker_doors[11]], 3, "vehicle_b_door_02_ready");
   vehicle_3 = vehicle::spawn_vehicle_from_targetname_and_drive("bunker_a_veh_03");
   vehicle_4 = vehicle::spawn_vehicle_from_targetname_and_drive("bunker_a_veh_04");
   wait 0.1;
   namespace_6393a86f2fcda776::function_a44e35e2dc63be50("axis", 23, 90);
-  thread namespace_6393a86f2fcda776::function_7f8d7c583d458e56([level.bunker_doors[12], level.bunker_doors[13]], 3, "vehicle_b_door_03_ready");
+  thread namespace_6393a86f2fcda776::opendoors([level.bunker_doors[12], level.bunker_doors[13]], 3, "vehicle_b_door_03_ready");
   vehicle_5 = vehicle::spawn_vehicle_from_targetname_and_drive("bunker_a_veh_05");
   vehicle_6 = vehicle::spawn_vehicle_from_targetname_and_drive("bunker_a_veh_06");
   wait 0.1;

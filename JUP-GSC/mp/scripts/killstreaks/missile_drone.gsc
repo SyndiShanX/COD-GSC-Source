@@ -26,7 +26,7 @@
 #namespace missile_drone;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("missile_drone"), &init);
+  registerkillstreakinitfunction(getxhash("missile_drone"), &init);
 }
 
 function init() {
@@ -1113,9 +1113,9 @@ function function_6d0704818ddf4f84(plane) {
 
 function missiledrone_rotaterig() {
   self endon("death");
-  var_25bb708a7d591131 = 10;
-  rotatetime = level.missiledrone_speed["rotate"] / 360 * var_25bb708a7d591131;
-  self rotateYaw(self.angles[2] + var_25bb708a7d591131, rotatetime, rotatetime, 0);
+  rampupdegrees = 10;
+  rotatetime = level.missiledrone_speed["rotate"] / 360 * rampupdegrees;
+  self rotateYaw(self.angles[2] + rampupdegrees, rotatetime, rotatetime, 0);
   degreespersecond = 360 / level.missiledrone_speed["rotate"];
   var_31fc5244269dae18 = degreespersecond * 0.0174533;
   level.missiledrone_magnitude = var_31fc5244269dae18 * 9000;
@@ -1169,8 +1169,8 @@ function function_9606c15566d61486(gunner) {
     gunner function_20836c46516ad037(self.missiledroneintro);
   }
 
-  var_c5f1da4a2dfcdcb0 = self gettagorigin("tag_player") - (0, 0, 5);
-  self.camera = spawn("script_model", var_c5f1da4a2dfcdcb0);
+  tagplayerorigin = self gettagorigin("tag_player") - (0, 0, 5);
+  self.camera = spawn("script_model", tagplayerorigin);
   self.camera setModel("tag_player");
   self.camera.angles = vectortoangles(self.var_5118005380cb1d91.origin - self.camera.origin);
   self.camera linkTo(self);
@@ -1891,7 +1891,7 @@ function function_c0266d473bad8324(intro, animent, var_465db5572e637fb7) {
 
 function function_bb02235216647beb() {
   var_4ac4b608421ecbbb = undefined;
-  var_4d571df5f3a8befc = undefined;
+  last_enemy_seen = undefined;
   target_loc = undefined;
   var_befbf47bff2227bd = 0;
   var_ea189b55de5c8fa7 = 0;
@@ -1904,13 +1904,13 @@ function function_bb02235216647beb() {
     var_d430bcda6275a38b = 0;
     var_4b05a8497817406a = 0;
 
-    if(isDefined(var_4d571df5f3a8befc) && var_4d571df5f3a8befc.health <= 0 && gettime() - var_4d571df5f3a8befc.deathtime < 2000) {
+    if(isDefined(last_enemy_seen) && last_enemy_seen.health <= 0 && gettime() - last_enemy_seen.deathtime < 2000) {
       var_d430bcda6275a38b = 1;
       var_4b05a8497817406a = 1;
     } else if(isalive(self.enemy) && (self botcanseeentity(self.enemy) || gettime() - self lastknowntime(self.enemy) <= 300)) {
       var_d430bcda6275a38b = 1;
-      var_4d571df5f3a8befc = self.enemy;
-      var_7f9803312b446879 = var_4d571df5f3a8befc.origin;
+      last_enemy_seen = self.enemy;
+      var_7f9803312b446879 = last_enemy_seen.origin;
       var_4ac4b608421ecbbb = self.enemy.origin;
 
       if(self botcanseeentity(self.enemy)) {
@@ -2450,7 +2450,7 @@ function function_86d2c07ecf9891c8(var_5118005380cb1d91) {
   }
 }
 
-function watchdebuglocation(tagname, var_22c53c353885fe59) {
+function watchdebuglocation(tagname, showaxis) {
   self endon("<dev string:xb7>");
 
   while(true) {
@@ -2462,7 +2462,7 @@ function watchdebuglocation(tagname, var_22c53c353885fe59) {
 
     sphere(debuglocation, 100, (1, 1, 1), 0, 1);
 
-    if(istrue(var_22c53c353885fe59)) {
+    if(istrue(showaxis)) {
       testforward = anglesToForward(self.angles);
       testright = anglestoright(self.angles);
       testup = anglestoup(self.angles);

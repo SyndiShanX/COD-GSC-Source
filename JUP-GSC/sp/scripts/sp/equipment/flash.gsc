@@ -18,7 +18,7 @@ function precache(offhand) {
 }
 
 function flashfiremain(grenade, weapon) {
-  function_216c67ab6749137a(self, undefined, "grenade_throw", "flash_grenade");
+  addbattlechatternotify(self, undefined, "grenade_throw", "flash_grenade");
 }
 
 function flashbangmonitor() {
@@ -27,11 +27,11 @@ function flashbangmonitor() {
 
   while(true) {
     self waittill("flashbang", origin, percentdistance, percentangle, attacker, team);
-    var_232b4f4d5ac19b58 = 0.8;
+    onscreenang = 0.8;
     offscreenang = 0.65;
-    var_1bd7bb5d30fe89cb = 0.3;
-    percentangle = math::normalize_value(offscreenang, var_232b4f4d5ac19b58, percentangle);
-    percentangle = factor_value(var_1bd7bb5d30fe89cb, 1, percentangle);
+    minanglepercent = 0.3;
+    percentangle = math::normalize_value(offscreenang, onscreenang, percentangle);
+    percentangle = factor_value(minanglepercent, 1, percentangle);
     factors = [percentdistance, percentangle];
     factor = percentangle * percentdistance;
     duration = factor * self.gs.maxflashbangtime;

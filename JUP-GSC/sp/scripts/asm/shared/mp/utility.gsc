@@ -128,15 +128,15 @@ function isaimedataimtarget() {
     return false;
   }
 
-  var_17ffbc15989cd7cb = vectortoangles(shootpos - shootfrompos);
-  absyawdiff = absangleclamp180(weaponangles[1] - var_17ffbc15989cd7cb[1]);
+  anglestoshootpos = vectortoangles(shootpos - shootfrompos);
+  absyawdiff = absangleclamp180(weaponangles[1] - anglestoshootpos[1]);
 
   if(absyawdiff > anim.aimyawdifffartolerance) {
     if(distancesquared(self getEye(), shootpos) > anim.aimyawdiffclosedistsq || absyawdiff > anim.aimyawdiffclosetolerance) {}
   }
 
   aimpitchdifftolerance = getaimpitchdifftolerance();
-  return absangleclamp180(weaponangles[0] - var_17ffbc15989cd7cb[0]) <= aimpitchdifftolerance;
+  return absangleclamp180(weaponangles[0] - anglestoshootpos[0]) <= aimpitchdifftolerance;
 }
 
 function getaimpitchdifftolerance() {

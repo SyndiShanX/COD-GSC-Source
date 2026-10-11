@@ -10,14 +10,14 @@
 #namespace dialogue;
 
 function init() {
-  level.var_9a62261b5b534b06 = &function_7bd4fbf21584d46e;
+  level.vo_playsoundfunc = &function_7bd4fbf21584d46e;
   setdvarifuninitialized(@ "hash_863010f158bacdd1", 0);
   setdvarifuninitialized(@ "hash_a1e2ee2c6fe41007", 0);
   level.var_621af16ef0684a11 = &function_168830b0663bc9f4;
 }
 
 function function_168830b0663bc9f4(maxdist) {
-  maxdist = default_to(maxdist, level.var_587de0e7b537210a);
+  maxdist = default_to(maxdist, level.bcs_maxdist);
   return getcorpsearrayinradius(level.player.origin, maxdist);
 }
 
@@ -109,7 +109,7 @@ function function_8ff454339557a41b() {
     return true;
   }
 
-  return istrue(self.var_41cde346af45ceca) || istrue(level.var_41cde346af45ceca) || getdvarint(@ "hash_a1e2ee2c6fe41007");
+  return istrue(self.vo_silenced) || istrue(level.vo_silenced) || getdvarint(@ "hash_a1e2ee2c6fe41007");
 }
 
 function get_intensity(alias) {
@@ -117,9 +117,9 @@ function get_intensity(alias) {
     return self.var_9af882a4ef5986c0;
   }
 
-  var_c59c1d18b26c886e = ["sm", "sm", "md", "lg"];
+  intensities = ["sm", "sm", "md", "lg"];
   intensity = default_to(function_d159656d2b07f8a5(alias), 0);
-  return var_c59c1d18b26c886e[intensity];
+  return intensities[intensity];
 }
 
 function function_14aeae4cd83bd734() {

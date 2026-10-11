@@ -36,11 +36,11 @@ function function_842e17022dab63c3() {
 
 function function_8f8cff4c91f6845b() {
   thread function_78c6b4fdf8524643();
-  function_3b76e1d247d2f5a(&function_cd12e4b6f6fa089c);
+  function_3b76e1d247d2f5a(&play_zombie_vo);
   callback::add("killed_body_cloned", &play_death_vo);
 }
 
-function private function_cd12e4b6f6fa089c(event, zombie, var_c2aec59361d95878, alias, priority) {
+function private play_zombie_vo(event, zombie, scriptable_state, alias, priority) {
   switch (event) {
     case #"hash_c29acedba2860c6d":
       zombie function_5420e83b135ec96f(function_a5b14435e3229bed(1.5), 1);
@@ -49,7 +49,7 @@ function private function_cd12e4b6f6fa089c(event, zombie, var_c2aec59361d95878, 
       break;
   }
 
-  play_vox(zombie, var_c2aec59361d95878, alias, priority);
+  play_vox(zombie, scriptable_state, alias, priority);
 }
 
 function private play_death_vo(params) {
@@ -59,7 +59,7 @@ function private play_death_vo(params) {
     self setscriptablepartstate("sound_vo", "off");
   }
 
-  level thread function_cd12e4b6f6fa089c("death", params.body, "death", "vox_ai_hellhound_death", 4);
+  level thread play_zombie_vo("death", params.body, "death", "vox_ai_hellhound_death", 4);
 }
 
 function function_78c6b4fdf8524643() {
@@ -87,10 +87,10 @@ function function_78c6b4fdf8524643() {
       var_36ac830085c37706 = 0;
     }
 
-    if(isDefined(level.var_3c408363d81b00e0)) {
-      level.var_3c408363d81b00e0++;
+    if(isDefined(level.zombie_ambient_count)) {
+      level.zombie_ambient_count++;
 
-      if(level.var_3c408363d81b00e0 < ambient_cap) {
+      if(level.zombie_ambient_count < ambient_cap) {
         played_vox = 1;
         function_f707c26d8f269f94(ambient_notify);
         waitframe();
@@ -125,10 +125,10 @@ function private function_4e5d15fb46a1875f() {
 
 function private function_1dc3dbebbb45158a() {
   level endon("game_ended");
-  level.var_3c408363d81b00e0 = 0;
+  level.zombie_ambient_count = 0;
 
   while(true) {
-    level.var_3c408363d81b00e0 = 0;
+    level.zombie_ambient_count = 0;
     wait 0.1;
   }
 }

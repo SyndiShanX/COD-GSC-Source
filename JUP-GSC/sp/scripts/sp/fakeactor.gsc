@@ -111,23 +111,23 @@ function fakeactor_spawner_init() {
 
 }
 
-function function_d9469562fdbb08bc(aitypename, spawnorigin, spawnangles) {
+function spawndroneaitype(aitypename, spawnorigin, spawnangles) {
   drone = function_222b1f15eb8b4c99(aitypename, spawnorigin, spawnangles);
   aitypestruct = drone function_2342f46a32ebb549(aitypename);
-  charactername = drone function_5b013e24038aeed0(aitypename, drone.script_char_index, drone.script_char_group, drone.var_42e5c77b1d7fe6e7);
+  charactername = drone function_5b013e24038aeed0(aitypename, drone.script_char_index, drone.script_char_group, drone.characterlistname);
   fakeactorstruct = drone function_1594d4be88eaa4aa(charactername);
   function_7da0d54cb9c485b6(drone, aitypestruct, fakeactorstruct, charactername);
-  drone function_efe3d5649098f969();
+  drone rundronepostspawn();
   return drone;
 }
 
 function spawndrone() {
-  drone = self function_c8e3ae195fd745ab();
+  drone = self spawndronecode();
   aitypestruct = self function_2342f46a32ebb549();
-  charactername = self function_5b013e24038aeed0(drone.classname, self.script_char_index, self.script_char_group, self.var_42e5c77b1d7fe6e7);
+  charactername = self function_5b013e24038aeed0(drone.classname, self.script_char_index, self.script_char_group, self.characterlistname);
   fakeactorstruct = self function_1594d4be88eaa4aa(charactername);
   function_7da0d54cb9c485b6(drone, aitypestruct, fakeactorstruct, charactername);
-  drone function_efe3d5649098f969();
+  drone rundronepostspawn();
   return drone;
 }
 
@@ -142,14 +142,14 @@ function function_7da0d54cb9c485b6(drone, aitypestruct, fakeactorstruct, charact
   if(isDefined(fakeactorstruct.bodymodel)) {
     drone setModel(fakeactorstruct.bodymodel);
   } else if(isDefined(fakeactorstruct.bodyalias)) {
-    drone function_6b0082dec4510b24(fakeactorstruct.bodyalias, [[level.var_44bf7e31237b3073[charactername]]](fakeactorstruct.bodyalias));
+    drone function_6b0082dec4510b24(fakeactorstruct.bodyalias, [[level.fncharacterxmodelalias[charactername]]](fakeactorstruct.bodyalias));
   }
 
   if(isDefined(fakeactorstruct.headmodel)) {
     drone attach(fakeactorstruct.headmodel, "", 1);
     drone.headmodel = fakeactorstruct.headmodel;
   } else if(isDefined(fakeactorstruct.headalias)) {
-    drone scripts\code\character::attachhead(fakeactorstruct.headalias, [[level.var_44bf7e31237b3073[charactername]]](fakeactorstruct.headalias));
+    drone scripts\code\character::attachhead(fakeactorstruct.headalias, [[level.fncharacterxmodelalias[charactername]]](fakeactorstruct.headalias));
   }
 
   if(isDefined(fakeactorstruct.hatmodel)) {
@@ -159,7 +159,7 @@ function function_7da0d54cb9c485b6(drone, aitypestruct, fakeactorstruct, charact
   }
 
   if(isDefined(fakeactorstruct.hatalias)) {
-    drone scripts\code\character::attachhat(fakeactorstruct.hatalias, [[level.var_44bf7e31237b3073[charactername]]](fakeactorstruct.hatalias));
+    drone scripts\code\character::attachhat(fakeactorstruct.hatalias, [[level.fncharacterxmodelalias[charactername]]](fakeactorstruct.hatalias));
   }
 }
 
@@ -620,10 +620,10 @@ function fight_think() {
     }
 
     if(cointoss()) {
-      var_8d7545dfe4e8a3ec = self.animset;
+      prev_animset = self.animset;
       pick_random_animset();
 
-      if(self.animset != var_8d7545dfe4e8a3ec) {
+      if(self.animset != prev_animset) {
         play_scripted_anim(get_stance_change_anim());
       }
     }
@@ -995,10 +995,10 @@ function fakeactor_rotate_to(target_angles, time) {
   start_forward = anglesToForward(self.angles);
   target_forward = anglesToForward(target_angles);
   progress = 0;
-  var_b240f32c4df1c320 = 1 / time;
+  inv_time = 1 / time;
 
   while(true) {
-    t = progress * var_b240f32c4df1c320;
+    t = progress * inv_time;
     new_forward = vectorlerp(start_forward, target_forward, t);
     self.angles = vectortoangles(new_forward);
     progress += 0.05;
@@ -1101,8 +1101,8 @@ function lock_to_ground(run_speed) {
   for(;;) {
     if(isDefined(self.look_ahead_point) && run_speed > 0) {
       z_delta = self.look_ahead_point[2] - self.origin[2];
-      var_59456b1eb55e45cb = distance2d(self.look_ahead_point, self.origin);
-      time_left = var_59456b1eb55e45cb / run_speed;
+      xy_delta = distance2d(self.look_ahead_point, self.origin);
+      time_left = xy_delta / run_speed;
 
       if(time_left > 0 && z_delta != 0) {
         var_b3f7146efd71904c = abs(z_delta) / time_left;
@@ -1195,11 +1195,11 @@ function fire_weapon(fire_anim) {
           accuracy = get_accuracy();
 
           if(randomfloat(1) > accuracy) {
-            var_81f4d36147be09ab = self.aim_target physics_getcharactercollisioncapsule();
+            target_coll = self.aim_target physics_getcharactercollisioncapsule();
             target_up = anglestoup(self.aim_target.angles);
-            up_miss = randomfloatrange(0, var_81f4d36147be09ab["half_height"] * 2);
+            up_miss = randomfloatrange(0, target_coll["half_height"] * 2);
             target_right = anglestoright(self.aim_target.angles);
-            right_miss = var_81f4d36147be09ab["radius"] * randomfloatrange(1, 2);
+            right_miss = target_coll["radius"] * randomfloatrange(1, 2);
 
             if(cointoss()) {
               right_miss *= -1;
@@ -1228,15 +1228,15 @@ function fire_weapon(fire_anim) {
 }
 
 function get_accuracy(debug) {
-  var_2d8083a1d979b57d = self.baseaccuracy;
-  var_37687e97857250ee = 1;
+  self_acc = self.baseaccuracy;
+  target_acc = 1;
 
   if(isDefined(self.aim_target) && isDefined(self.aim_target.attackeraccuracy)) {
-    var_37687e97857250ee = self.aim_target.attackeraccuracy;
+    target_acc = self.aim_target.attackeraccuracy;
   }
 
   dist_to_target = distance(self.origin, self.aim_target.origin);
-  var_9f021f44c97c9e13 = getaccuracyfraction(self.weapon, dist_to_target, isPlayer(self.aim_target));
+  weapon_acc = getaccuracyfraction(self.weapon, dist_to_target, isPlayer(self.aim_target));
   pose = "stand";
 
   if(isPlayer(self.aim_target)) {
@@ -1245,23 +1245,23 @@ function get_accuracy(debug) {
     pose = self.aim_target.currentpose;
   }
 
-  var_9ff65d621eb6d887 = 1;
+  stance_acc = 1;
 
   if(pose == "crouch") {
-    var_9ff65d621eb6d887 = 0.75;
+    stance_acc = 0.75;
   } else if(pose == "prone") {
-    var_9ff65d621eb6d887 = 0.5;
+    stance_acc = 0.5;
   }
 
-  var_397fbb1b4d409d6e = 1;
+  movement_acc = 1;
 
   if(isPlayer(self.aim_target)) {
     movement = level.player getnormalizedmovement();
-    var_397fbb1b4d409d6e = 1 - length(movement) * 0.3;
+    movement_acc = 1 - length(movement) * 0.3;
   } else if(isai(self.aim_target)) {}
 
-  var_2052de76926a0450 = 0.75;
-  var_e9eabe0a71de37bf = var_2d8083a1d979b57d * var_37687e97857250ee * var_9f021f44c97c9e13 * var_9ff65d621eb6d887 * var_397fbb1b4d409d6e * var_2052de76926a0450;
+  sight_acc = 0.75;
+  total_acc = self_acc * target_acc * weapon_acc * stance_acc * movement_acc * sight_acc;
 
   if(isDefined(debug) && debug) {
     text_scale = 0.5;
@@ -1269,16 +1269,16 @@ function get_accuracy(debug) {
     cam_angles = level.player getplayerangles();
     cam_up = anglestoup(cam_angles);
     text_pos = self.origin;
-    print3d(text_pos - cam_up * new_line * 0, "<dev string:xa5>" + var_2d8083a1d979b57d, (1, 1, 1), 1, text_scale);
-    print3d(text_pos - cam_up * new_line * 1, "<dev string:xb0>" + var_37687e97857250ee, (1, 1, 1), 1, text_scale);
-    print3d(text_pos - cam_up * new_line * 2, "<dev string:xbb>" + var_9f021f44c97c9e13, (1, 1, 1), 1, text_scale);
-    print3d(text_pos - cam_up * new_line * 3, "<dev string:xc6>" + var_9ff65d621eb6d887, (1, 1, 1), 1, text_scale);
-    print3d(text_pos - cam_up * new_line * 4, "<dev string:xd1>" + var_397fbb1b4d409d6e, (1, 1, 1), 1, text_scale);
-    print3d(text_pos - cam_up * new_line * 5, "<dev string:xdc>" + var_2052de76926a0450, (1, 1, 1), 1, text_scale);
-    print3d(text_pos - cam_up * new_line * 6, "<dev string:xe7>" + var_e9eabe0a71de37bf, (1, 0, 0), 1, text_scale);
+    print3d(text_pos - cam_up * new_line * 0, "<dev string:xa5>" + self_acc, (1, 1, 1), 1, text_scale);
+    print3d(text_pos - cam_up * new_line * 1, "<dev string:xb0>" + target_acc, (1, 1, 1), 1, text_scale);
+    print3d(text_pos - cam_up * new_line * 2, "<dev string:xbb>" + weapon_acc, (1, 1, 1), 1, text_scale);
+    print3d(text_pos - cam_up * new_line * 3, "<dev string:xc6>" + stance_acc, (1, 1, 1), 1, text_scale);
+    print3d(text_pos - cam_up * new_line * 4, "<dev string:xd1>" + movement_acc, (1, 1, 1), 1, text_scale);
+    print3d(text_pos - cam_up * new_line * 5, "<dev string:xdc>" + sight_acc, (1, 1, 1), 1, text_scale);
+    print3d(text_pos - cam_up * new_line * 6, "<dev string:xe7>" + total_acc, (1, 0, 0), 1, text_scale);
   }
 
-  return var_e9eabe0a71de37bf;
+  return total_acc;
 }
 
 function fake_bullet(weapon, start, end, no_sound) {
@@ -1355,16 +1355,16 @@ function aim_think() {
     }
 
     if(!firstframe) {
-      var_4142633c790d3ae6 = yawdelta - prevyawdelta;
+      yawdeltachange = yawdelta - prevyawdelta;
 
-      if(abs(var_4142633c790d3ae6) > var_aaf3547fcb39da5d) {
-        yawdelta = prevyawdelta + clamp(var_4142633c790d3ae6, -1 * var_aaf3547fcb39da5d, var_aaf3547fcb39da5d);
+      if(abs(yawdeltachange) > var_aaf3547fcb39da5d) {
+        yawdelta = prevyawdelta + clamp(yawdeltachange, -1 * var_aaf3547fcb39da5d, var_aaf3547fcb39da5d);
       }
 
-      var_9dee51f9cc272c49 = pitchdelta - prevpitchdelta;
+      pitchdeltachange = pitchdelta - prevpitchdelta;
 
-      if(abs(var_9dee51f9cc272c49) > var_aaf3547fcb39da5d) {
-        pitchdelta = prevpitchdelta + clamp(var_9dee51f9cc272c49, -1 * var_aaf3547fcb39da5d, var_aaf3547fcb39da5d);
+      if(abs(pitchdeltachange) > var_aaf3547fcb39da5d) {
+        pitchdelta = prevpitchdelta + clamp(pitchdeltachange, -1 * var_aaf3547fcb39da5d, var_aaf3547fcb39da5d);
       }
     }
 
@@ -1480,9 +1480,9 @@ function get_movement_anim() {
   return get_animation("stand_run_loop", alias);
 }
 
-function get_turn_anim(var_c99a285cabf7ec7b, var_88daf353e30acf25, targetorigin) {
-  anglestopoint = vectortoangles(targetorigin - var_88daf353e30acf25);
-  angle = var_c99a285cabf7ec7b[1] - anglestopoint[1];
+function get_turn_anim(viewerangles, viewerorigin, targetorigin) {
+  anglestopoint = vectortoangles(targetorigin - viewerorigin);
+  angle = viewerangles[1] - anglestopoint[1];
   angle += 360;
   angle = int(angle) % 360;
   direction = "";
@@ -1793,9 +1793,9 @@ function get_death_anim() {
     } else if(is_moving()) {
       if(cointoss()) {
         random_part = random(["head", "lowerbody_l", "lowerbody_r", "midbody"]);
-        var_fab004a53b365104 = "_md_";
+        random_severity = "_md_";
         random_dir = random(["2", "4", "6", "8"]);
-        random_anim = random_part + var_fab004a53b365104 + random_dir;
+        random_anim = random_part + random_severity + random_dir;
         return get_animation("death_exp_stand", random_anim);
       } else {
         random_dir = random(["running_forward_2", "running_forward_4", "running_forward_6", "running_forward_8"]);
@@ -1819,13 +1819,13 @@ function get_death_anim() {
           random_part = random(["head", "lowerbody", "midbody"]);
 
           if(random_part == "lowerbody") {
-            var_fab004a53b365104 = ter_op(cointoss(), "_r_md_", "_l_md_");
+            random_severity = ter_op(cointoss(), "_r_md_", "_l_md_");
           } else {
-            var_fab004a53b365104 = "_md_";
+            random_severity = "_md_";
           }
 
           random_dir = random(["2", "4", "6", "8"]);
-          random_anim = random_part + var_fab004a53b365104 + random_dir;
+          random_anim = random_part + random_severity + random_dir;
           return get_animation("death_exp_stand", random_anim);
       }
     }
@@ -1932,7 +1932,7 @@ function drop_weapon(limit) {
     gun_remove();
 
     if(!isDefined(self.nodrop)) {
-      attachments = function_6527364c1ecca6c6(weapon.basename);
+      attachments = getweapondefaultattachments(weapon.basename);
       attachmentstring = "";
 
       foreach(attachment in attachments) {
@@ -2314,24 +2314,24 @@ function take_control() {
 
 function release_control(next_node) {
   set_controlled(0);
-  var_8d5ecc2922695971 = undefined;
+  move_to_node = undefined;
 
   if(isDefined(next_node)) {
-    var_8d5ecc2922695971 = next_node;
+    move_to_node = next_node;
   } else if(isDefined(self.prev_node)) {
-    var_8d5ecc2922695971 = self.prev_node;
+    move_to_node = self.prev_node;
     self.prev_node = undefined;
   } else if(isDefined(self.target)) {
     fakeactor_target = getStructArray(self.target, "targetname");
     fakeactor_target = random(fakeactor_target);
 
     if(isDefined(fakeactor_target) && fakeactor_target is_fakeactor_node()) {
-      var_8d5ecc2922695971 = fakeactor_target;
+      move_to_node = fakeactor_target;
     }
   }
 
-  if(isDefined(var_8d5ecc2922695971)) {
-    set_current_node(var_8d5ecc2922695971);
+  if(isDefined(move_to_node)) {
+    set_current_node(move_to_node);
     set_wants_to_move(1);
   }
 

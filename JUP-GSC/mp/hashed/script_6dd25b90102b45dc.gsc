@@ -27,7 +27,7 @@ function init_cryofreeze() {
   var_746d800f9d085b2a = default_to(level.var_f1240a9ac4f65616.var_e79139a1d8a6db93, 0.25);
   var_ad5528a4132dc97d = default_to(level.var_f1240a9ac4f65616.var_aefab597e0d4ccaa, 0.1);
   cooldownentity = default_to(level.var_f1240a9ac4f65616.var_79586044f6dc1b7d, 0);
-  var_bcbfc6de4213b6af = default_to(level.var_f1240a9ac4f65616.var_51fca1cd08a8156d, 0);
+  cooldownattacker = default_to(level.var_f1240a9ac4f65616.var_51fca1cd08a8156d, 0);
   cooldownglobal = default_to(level.var_f1240a9ac4f65616.var_d53f3286e9d3529, 1);
   var_f27a8d5708fd9c4d = default_to(level.var_f1240a9ac4f65616.var_9a4c1c06b0d52447, 1);
   damagefeedbackicon = default_to(level.var_f1240a9ac4f65616.var_deb7e87f41e610cc, "");
@@ -191,7 +191,7 @@ function private on_ai_killed(params) {
 function function_493389d543d8fb87() {
   foreach(player in level.players) {
     currentweapon = player getcurrentweapon();
-    player function_6c40f58b29a952a9(currentweapon, "<dev string:x1c>");
+    player add_ammo_mod_to_weapon(currentweapon, "<dev string:x1c>");
     player iprintlnbold("<dev string:x2a>");
   }
 }

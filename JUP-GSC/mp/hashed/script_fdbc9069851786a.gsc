@@ -112,7 +112,7 @@ function shield_onuse(equipmentref, slot, objweapon) {
   if(data.var_685e45a9d6518e9) {
     waittill_any_in_array_or_timeout(["mutation_shield_broken", "mutation_shield_cancelled", "mutation_shield_unobtained", "mutation_shield_overridden", "mutation_shield_player_too_far", "last_stand_start", "death_or_disconnect"], data.var_42ad0fcbadd4178c);
   } else {
-    function_5adca43f839a3cce(["mutation_shield_broken", "mutation_shield_cancelled", "mutation_shield_unobtained", "mutation_shield_overridden", "mutation_shield_player_too_far", "last_stand_start", "death_or_disconnect"]);
+    waittill_any_in_array(["mutation_shield_broken", "mutation_shield_cancelled", "mutation_shield_unobtained", "mutation_shield_overridden", "mutation_shield_player_too_far", "last_stand_start", "death_or_disconnect"]);
   }
 
   function_e85be9e36f8d7074();
@@ -170,7 +170,7 @@ function function_d7cd3062f426a6a1(player) {
     return;
   }
 
-  function_5adca43f839a3cce(["mutation_shield_broken", "mutation_shield_cancelled", "mutation_shield_unobtained", "mutation_shield_overridden", "mutation_shield_player_too_far", "last_stand_start", "death_or_disconnect"]);
+  waittill_any_in_array(["mutation_shield_broken", "mutation_shield_cancelled", "mutation_shield_unobtained", "mutation_shield_overridden", "mutation_shield_player_too_far", "last_stand_start", "death_or_disconnect"]);
   player clearsoundsubmix("jup_br_mutation_shield", 0.5);
 }
 
@@ -193,10 +193,10 @@ function function_e85be9e36f8d7074() {
   thread function_6e455baeba9b0da5(self.var_c0520e995eb8892b.var_53c5195bccb1f90b);
 
   if(!scripts\cp_mp\utility\game_utility::isbrstylegametype() && getdvarint(@ "hash_4b664c074a868ac5", 0) == 1) {
-    var_4761aa3b265d25fd = function_f3bb4f4911a1beb2("perk", "hasPerk", "specialty_tac_mask");
+    var_4761aa3b265d25fd = callsharedfunc("perk", "hasPerk", "specialty_tac_mask");
 
     if(var_4761aa3b265d25fd && !istrue(self.var_c0520e995eb8892b.var_186108bccdd855ac)) {
-      function_f3bb4f4911a1beb2("perk", "removePerk", "specialty_tac_mask");
+      callsharedfunc("perk", "removePerk", "specialty_tac_mask");
     }
 
     self.var_c0520e995eb8892b.var_186108bccdd855ac = undefined;
@@ -291,8 +291,8 @@ function function_5c3aab6c7e7025c(shield_anchor) {
 
 function function_7fd5e025bde6cbe7() {
   data = self.var_c0520e995eb8892b;
-  var_33c62722d1a9c0fb = self.origin;
-  var_55fe158b04318983 = (var_33c62722d1a9c0fb[0], var_33c62722d1a9c0fb[1], var_33c62722d1a9c0fb[2] + data.var_5e72947c193e5954);
+  playerlocation = self.origin;
+  var_55fe158b04318983 = (playerlocation[0], playerlocation[1], playerlocation[2] + data.var_5e72947c193e5954);
 
   if(scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
     shield = spawnscriptable("mutation_shield_bubble", var_55fe158b04318983);
@@ -314,7 +314,7 @@ function function_7fd5e025bde6cbe7() {
 
   if(scripts\cp_mp\utility\game_utility::isbrstylegametype() && !istrue(var_4494812816cb38ce)) {
     data.touching = 1;
-    data.trigger = spawn("noent_volume_trigger_radius", var_33c62722d1a9c0fb + (0, 0, data.var_5e72947c193e5954), 0, 95, 95 + data.var_5e72947c193e5954);
+    data.trigger = spawn("noent_volume_trigger_radius", playerlocation + (0, 0, data.var_5e72947c193e5954), 0, 95, 95 + data.var_5e72947c193e5954);
     scripts\mp\utility\trigger::makeenterexittrigger(data.trigger);
     self setsoundsubmix("jup_br_mutation_shield", 1);
   }
@@ -324,13 +324,13 @@ function function_7fd5e025bde6cbe7() {
     shield_anchor.angles = self.angles;
     shield_anchor linkTo(self);
     localorigin = rotatevectorinverted(shield.origin - shield_anchor.origin, shield_anchor.angles);
-    shield utility::function_6e506f39f121ea8a(shield_anchor, localorigin, shield.angles);
+    shield utility::scriptable_setparententity(shield_anchor, localorigin, shield.angles);
     thread function_5c3aab6c7e7025c(shield_anchor);
 
-    if(function_f3bb4f4911a1beb2("perk", "hasPerk", "specialty_tac_mask")) {
+    if(callsharedfunc("perk", "hasPerk", "specialty_tac_mask")) {
       data.var_186108bccdd855ac = 1;
     } else {
-      function_f3bb4f4911a1beb2("perk", "givePerk", "specialty_tac_mask");
+      callsharedfunc("perk", "givePerk", "specialty_tac_mask");
     }
 
     return;
@@ -338,7 +338,7 @@ function function_7fd5e025bde6cbe7() {
 
   if(isDefined(movingplatforment) && !isDefined(shield.linkedparent)) {
     localorigin = rotatevectorinverted(shield.origin - movingplatforment.origin, movingplatforment.angles);
-    shield utility::function_6e506f39f121ea8a(movingplatforment, localorigin, shield.angles);
+    shield utility::scriptable_setparententity(movingplatforment, localorigin, shield.angles);
   }
 }
 

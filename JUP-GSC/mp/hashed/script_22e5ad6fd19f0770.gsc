@@ -9,11 +9,11 @@
 #using scripts\common\callbacks;
 #using scripts\common\values;
 #using scripts\engine\utility;
-#namespace namespace_4a108cfc226ec7d6;
+#namespace zombie_base_knockdown;
 
 function function_976734974e28596e() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &on_damaged);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_crawling_changed", &on_is_crawling_changed);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &on_damaged);
+  callback::get_template(self.animsetname) callback::add("on_is_crawling_changed", &on_is_crawling_changed);
 }
 
 function init_knockdown() {

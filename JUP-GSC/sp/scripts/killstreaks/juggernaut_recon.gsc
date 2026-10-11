@@ -19,7 +19,7 @@
 #namespace juggernaut_recon;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("juggernaut_recon"), &init);
+  registerkillstreakinitfunction(getxhash("juggernaut_recon"), &init);
 }
 
 function init() {
@@ -369,9 +369,9 @@ function function_44d4db462cec2873(bundle, radarradius, var_2ff0b7294cde30f8) {
 
       if(issharedfuncdefined("game", "getEnemyTeams")) {
         enemyteams = [[getsharedfunc("game", "getEnemyTeams")]](self.team);
-        var_782a999b1a24e0d8 = function_143526130b12b2b6(pingcenter, var_ad00034aa6fc55c9, enemyteams);
+        var_782a999b1a24e0d8 = getplayersandaiarrayinradius(pingcenter, var_ad00034aa6fc55c9, enemyteams);
       } else {
-        var_782a999b1a24e0d8 = function_143526130b12b2b6(pingcenter, var_ad00034aa6fc55c9);
+        var_782a999b1a24e0d8 = getplayersandaiarrayinradius(pingcenter, var_ad00034aa6fc55c9);
       }
 
       foreach(newcharacter in var_782a999b1a24e0d8) {

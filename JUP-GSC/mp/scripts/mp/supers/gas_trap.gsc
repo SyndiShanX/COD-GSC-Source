@@ -65,7 +65,7 @@ function function_9eb2b20f81d7c464(grenade) {
   }
 
   grenade.issuper = 1;
-  grenade.bundle = scripts\mp\supers::function_83a68723acc3296d(grenade.weapon_name);
+  grenade.bundle = scripts\mp\supers::getsuperbundlefromoffhandweaponname(grenade.weapon_name);
   grenade scripts\cp_mp\ent_manager::registerspawn(2, &function_ba58a20b3013d0e8);
   thread scripts\mp\weapons::monitordisownedgrenade(self, grenade);
   grenade thread function_c1abefb71b068a39();
@@ -134,7 +134,7 @@ function function_28f1150ddecc322e(grenade, surfacetype) {
 }
 
 function function_7250c5a8ae9c2d87(vehicle) {
-  var_9030149b0a44a43a = scripts\mp\supers::function_eb25267ee439cabe("super_gas_trap");
+  var_9030149b0a44a43a = scripts\mp\supers::getsuperweapon("super_gas_trap");
   gas_trap_weapon = makeweapon(var_9030149b0a44a43a);
   vehicle dodamage(25, self.origin, self.owner, self, "MOD_EXPLOSIVE", gas_trap_weapon);
   ignoredamageid = vehicle scripts\mp\utility\damage::non_player_add_ignore_damage_signature(self.owner, gas_trap_weapon, self, "MOD_EXPLOSIVE");
@@ -442,7 +442,7 @@ function function_24b91e463e75891f() {
       continue;
     }
 
-    if(function_da8a31143b88e833(player)) {
+    if(ignoretriggerconditions(player)) {
       continue;
     }
 
@@ -492,7 +492,7 @@ function function_cdf66f292a6d921b() {
         continue;
       }
 
-      if(player istouching(self) && !function_da8a31143b88e833(player)) {
+      if(player istouching(self) && !ignoretriggerconditions(player)) {
         continue;
       }
 
@@ -747,14 +747,14 @@ function function_cb203bea4d439b8b(fromdeath) {
   }
 }
 
-function function_7003ab18f0d40f9e(var_33f644489e4f15ae) {
+function function_7003ab18f0d40f9e(coughweaponobj) {
   self endon("gas_trap_coughWeaponTaken");
   self endon("gas_trap_coughDuration");
 
   while(true) {
     self waittill("offhand_fired", weaponobj);
 
-    if(issameweapon(weaponobj, var_33f644489e4f15ae)) {
+    if(issameweapon(weaponobj, coughweaponobj)) {
       break;
     }
   }
@@ -762,11 +762,11 @@ function function_7003ab18f0d40f9e(var_33f644489e4f15ae) {
   self notify("gas_trap_coughWeaponFired");
 }
 
-function function_cd8cb96396c7e7bd(var_33f644489e4f15ae) {
+function function_cd8cb96396c7e7bd(coughweaponobj) {
   self endon("gas_trap_coughWeaponFired");
   self endon("gas_trap_coughDuration");
 
-  while(self hasweapon(var_33f644489e4f15ae)) {
+  while(self hasweapon(coughweaponobj)) {
     waitframe();
   }
 
@@ -811,7 +811,7 @@ function function_3d115d834192a21f(fromdeath) {
   self.gastriggerstouching = undefined;
 }
 
-function function_da8a31143b88e833(player) {
+function ignoretriggerconditions(player) {
   if(player function_7ee20cf3c0390e21()) {
     return true;
   }

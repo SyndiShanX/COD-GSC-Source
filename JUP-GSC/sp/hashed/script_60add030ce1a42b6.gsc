@@ -347,25 +347,25 @@ function function_4e97b1a797add6f0() {
 }
 
 function function_9b9d6ffab72245fa() {
-  var_7b31cdde6dd7bf88 = spawn_script_origin((740, 7080, -264));
-  var_7b31d0de6dd7c621 = spawn_script_origin((-22, 6094, 304));
-  var_7b31cdde6dd7bf88 scalevolume(0, 0);
-  var_7b31cdde6dd7bf88 scalevolume(1, 2.5);
-  var_7b31cdde6dd7bf88 playLoopSound("amb_tun_snowdrift_tree_wind_lp");
-  var_7b31d0de6dd7c621 scalevolume(0, 0);
-  var_7b31d0de6dd7c621 scalevolume(1, 4.5);
-  var_7b31d0de6dd7c621 playLoopSound("amb_tun_snowdrift_tree_wind_lp");
+  tree1 = spawn_script_origin((740, 7080, -264));
+  tree2 = spawn_script_origin((-22, 6094, 304));
+  tree1 scalevolume(0, 0);
+  tree1 scalevolume(1, 2.5);
+  tree1 playLoopSound("amb_tun_snowdrift_tree_wind_lp");
+  tree2 scalevolume(0, 0);
+  tree2 scalevolume(1, 4.5);
+  tree2 playLoopSound("amb_tun_snowdrift_tree_wind_lp");
   level flag_wait("flag_cliff_snowdrift_off");
   wait 2;
-  var_7b31cdde6dd7bf88 scalevolume(0, 2.5);
+  tree1 scalevolume(0, 2.5);
   wait 2.5;
-  var_7b31cdde6dd7bf88 stoploopsound("amb_tun_snowdrift_tree_wind_lp");
-  var_7b31d0de6dd7c621 scalevolume(0, 2.5);
+  tree1 stoploopsound("amb_tun_snowdrift_tree_wind_lp");
+  tree2 scalevolume(0, 2.5);
   wait 2.5;
-  var_7b31d0de6dd7c621 stoploopsound("amb_tun_snowdrift_tree_wind_lp");
+  tree2 stoploopsound("amb_tun_snowdrift_tree_wind_lp");
   wait 2.5;
-  var_7b31cdde6dd7bf88 delete();
-  var_7b31d0de6dd7c621 delete();
+  tree1 delete();
+  tree2 delete();
 }
 
 function function_89261962aa444c35() {

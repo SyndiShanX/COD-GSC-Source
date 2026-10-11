@@ -174,9 +174,9 @@ function function_6f3fabd396506d70(pos, var_257b516e62ea1d2b, dur, max_dist, end
         continue;
       }
 
-      var_c591756c172fe4ce = distance(level.player.origin, pos);
+      dist_from_player = distance(level.player.origin, pos);
 
-      if(var_c591756c172fe4ce > max_dist) {
+      if(dist_from_player > max_dist) {
         continue;
       }
     }
@@ -303,7 +303,7 @@ function function_eed6250e31a849f0() {
   }
 }
 
-function function_eb263be9bd7f802b(var_257b516e62ea1d2b) {
+function print3d_on_ent(var_257b516e62ea1d2b) {
   self endon("death");
   self notify("print3d");
   self endon("print3d");
@@ -663,10 +663,10 @@ function transition_to_alert(instant) {
   }
 
   if(isDefined(civ.paired_partner)) {
-    thread function_caae90accdd1699c(civ.paired_partner, 2);
+    thread transitiontostate(civ.paired_partner, 2);
   }
 
-  function_caae90accdd1699c(civ, 2);
+  transitiontostate(civ, 2);
 
   if(!istrue(instant)) {
     wait 1;
@@ -689,12 +689,12 @@ function function_5619f5c41494dc0a(paired_partner, state) {
   if(isDefined(paired_partner)) {
     paired_partner stopanimScripted();
     paired_partner.animnode notify("stop_loop");
-    thread function_caae90accdd1699c(paired_partner, state);
+    thread transitiontostate(paired_partner, state);
   }
 
   self stopanimScripted();
   self.animnode notify("stop_loop");
-  function_caae90accdd1699c(self, state);
+  transitiontostate(self, state);
 }
 
 function function_cf1311a027d39d1b(flag_endon, paired_partner) {
@@ -703,8 +703,8 @@ function function_cf1311a027d39d1b(flag_endon, paired_partner) {
   true_panic = 0;
 
   while(!flag(flag_endon)) {
-    var_2d58e8aae155cc83 = distance(level.player.origin, self.origin);
-    var_80974f880973e4b6 = level.player isads() && function_7abafeddc8d99f46(45);
+    distancefromplayer = distance(level.player.origin, self.origin);
+    isaimedat = level.player isads() && function_7abafeddc8d99f46(45);
 
     if(level.var_35dc8163678b4227) {
       if(!in_panic) {
@@ -720,7 +720,7 @@ function function_cf1311a027d39d1b(flag_endon, paired_partner) {
           wait 1;
         }
       }
-    } else if(var_2d58e8aae155cc83 < 200 && var_80974f880973e4b6) {
+    } else if(distancefromplayer < 200 && isaimedat) {
       if(!in_panic) {
         function_5619f5c41494dc0a(paired_partner, 4);
         in_panic = 1;
@@ -779,16 +779,16 @@ function function_e3449985ee5fe6f2() {
   }
 }
 
-function function_6765f46c2f6e7249(p1, p2, var_cdcd2c78f5175a86) {
+function function_6765f46c2f6e7249(p1, p2, pq) {
   l2 = distancesquared(p1, p2);
 
   if(l2 == 0) {
-    return distance(p1, var_cdcd2c78f5175a86);
+    return distance(p1, pq);
   }
 
-  t = clamp(vectordot(var_cdcd2c78f5175a86 - p1, p2 - p1) / l2, 0, 1);
+  t = clamp(vectordot(pq - p1, p2 - p1) / l2, 0, 1);
   projection = p1 + t * (p2 - p1);
-  return distance(var_cdcd2c78f5175a86, projection);
+  return distance(pq, projection);
 }
 
 function function_e2ee6f531da3872c() {
@@ -822,7 +822,7 @@ function function_aabfd2fc04931c29(org, angles, animname, anime, anim_string, id
   return animlength;
 }
 
-function function_caae90accdd1699c(civ, state) {
+function transitiontostate(civ, state) {
   animnode = civ.animnode;
   starting_anim = civ.animnode.animation;
   animnode notify("stop_loop");
@@ -946,15 +946,15 @@ function private function_11461c82ae478f8a() {
   return level.player.origin;
 }
 
-function private function_d47d250d79b7975f(var_b9b0654d37d30f11, var_1c8d96beb843e7b1, var_792db042affa13d) {
-  function_aa40a6d42ee9dd39(var_b9b0654d37d30f11, var_1c8d96beb843e7b1, var_792db042affa13d, 0);
+function private function_d47d250d79b7975f(baseanim, var_1c8d96beb843e7b1, var_792db042affa13d) {
+  function_aa40a6d42ee9dd39(baseanim, var_1c8d96beb843e7b1, var_792db042affa13d, 0);
 }
 
-function private function_e42447fbc054d453(var_b9b0654d37d30f11, var_1c8d96beb843e7b1, var_792db042affa13d) {
-  function_aa40a6d42ee9dd39(var_b9b0654d37d30f11, var_1c8d96beb843e7b1, var_792db042affa13d, 360);
+function private function_e42447fbc054d453(baseanim, var_1c8d96beb843e7b1, var_792db042affa13d) {
+  function_aa40a6d42ee9dd39(baseanim, var_1c8d96beb843e7b1, var_792db042affa13d, 360);
 }
 
-function private function_aa40a6d42ee9dd39(var_b9b0654d37d30f11, var_1c8d96beb843e7b1, var_792db042affa13d, rotationoffset) {
+function private function_aa40a6d42ee9dd39(baseanim, var_1c8d96beb843e7b1, var_792db042affa13d, rotationoffset) {
   self.animnode endon("stop_loop");
   var_3057d921cdb189e8 = 0;
   var_aca99d6e23e8de95 = 0;
@@ -977,12 +977,12 @@ function private function_aa40a6d42ee9dd39(var_b9b0654d37d30f11, var_1c8d96beb84
     var_5189a13207464f7b = generateaxisanglesfromforwardvector(dirtotarget, (0, 0, 0));
 
     if(rotationoffset != 0) {
-      var_b38f9f63c4ae4218 = rotationoffset - var_5189a13207464f7b[1];
+      angletotarget = rotationoffset - var_5189a13207464f7b[1];
     } else {
-      var_b38f9f63c4ae4218 = var_5189a13207464f7b[1];
+      angletotarget = var_5189a13207464f7b[1];
     }
 
-    var_c1634c1b0c46570c = clamp(var_b38f9f63c4ae4218, 15, 345);
+    var_c1634c1b0c46570c = clamp(angletotarget, 15, 345);
     var_31625b97e5869e96 = (var_c1634c1b0c46570c - 15) / 330;
     angledifference = var_31625b97e5869e96 - self.var_f72317aa54b389c6;
 
@@ -1100,7 +1100,7 @@ function level_spawner(gender) {
 
 #using_animtree("generic_human");
 
-function function_9e780d1193746f9e() {
+function script_model_proc_node() {
   self setanim(%proc_node, 1, 0);
   self.anim_getrootfunc = &namespace_3123a12d1da4993::set_root;
 }
@@ -1140,7 +1140,7 @@ function function_aa07d9f9a1f53ec0(animnode, animname, spawner, index, gender) {
   civ endon("death");
   civ.spawner = spawner;
   civ.gender = spawner.script_noteworthy;
-  civ.var_e0676499119d450b = 1;
+  civ.scriptednodebypass = 1;
   civ.fakeactor_face_anim = 1;
 
   if(isDefined(animname)) {
@@ -1193,7 +1193,7 @@ function function_8702a3d357872ddf() {
   level.recent_deaths = array_remove_index(level.recent_deaths, 0);
 }
 
-function function_382c9c7dbf0a67e9(var_b8c7444c4543fe5f) {
+function function_382c9c7dbf0a67e9(stoploop) {
   level endon("flashbang_done");
   flag_wait("flag_intro_complete");
   self.health = 1000;
@@ -1208,7 +1208,7 @@ function function_382c9c7dbf0a67e9(var_b8c7444c4543fe5f) {
     if(attacker == level.player) {
       scripts\sp\friendlyfire::missionfail(1);
 
-      if(istrue(var_b8c7444c4543fe5f)) {
+      if(istrue(stoploop)) {
         animnode = self.animnode;
         animnode notify("stop_loop");
       }
@@ -1255,8 +1255,8 @@ function function_10eab2a711b5c320() {
       }
 
       self notify("passenger_shot");
-      var_bcf7d6e19b4b5f12 = ["jup_hij_death_pose_civ01", "jup_hij_death_pose_civ02", "jup_hij_death_pose_civ03", "jup_hij_death_pose_civ04", "jup_hij_death_pose_civ05", "jup_hij_death_pose_civ06", "jup_hij_death_pose_civ07", "jup_hij_death_pose_civ08", "jup_hij_death_pose_civ09"];
-      var_88178c3bf5845b1c = random(var_bcf7d6e19b4b5f12);
+      deatharray = ["jup_hij_death_pose_civ01", "jup_hij_death_pose_civ02", "jup_hij_death_pose_civ03", "jup_hij_death_pose_civ04", "jup_hij_death_pose_civ05", "jup_hij_death_pose_civ06", "jup_hij_death_pose_civ07", "jup_hij_death_pose_civ08", "jup_hij_death_pose_civ09"];
+      randomdeath = random(deatharray);
       animnode = self.animnode;
       animnode notify("stop_loop");
       self stopanimScripted();
@@ -1264,7 +1264,7 @@ function function_10eab2a711b5c320() {
       function_3da114b1569afef(self.origin);
       self notify("death");
       waitframe();
-      animnode anim_single_solo(self, var_88178c3bf5845b1c);
+      animnode anim_single_solo(self, randomdeath);
       waitframe();
       scripts\sp\anim::function_ce450b9957138bd5();
     }
@@ -1312,14 +1312,14 @@ function function_587b8e0d4e4090f4(npc, animnode, animname) {
 function function_1734e4f3a27d192f() {
   level endon("flashbang_done");
   flags = ["stewardess_sees_gun", "neighbor_takedown"];
-  function_5adca43f839a3cce(flags);
+  waittill_any_in_array(flags);
   flag_set("passenger_transition_to_alert");
 }
 
 function function_2b76b679c7d68922() {
   level endon("flashbang_done");
   flags = ["standoff_canceled", "standoff_first_shot_fired"];
-  function_5adca43f839a3cce(flags);
+  waittill_any_in_array(flags);
   level.var_35dc8163678b4227 = 1;
   waitframe();
   flag_set("passenger_transition_to_alert");
@@ -1353,7 +1353,7 @@ function stewardess_death() {
 
   if(isDefined(stewardess)) {
     stewardess.functable["shotObjectStopAnim"] = undefined;
-    stewardess.var_41dc93404af773a3 = undefined;
+    stewardess.activeanimationtype = undefined;
   }
 
   node anim_single_solo(level.stewardess, "jup_hij_0200_standoff_stewardess_01_death");
@@ -1370,7 +1370,7 @@ function function_46a7af93f6a23ac3() {
   }
 
   self function_b661b022700ba72f("script", 1);
-  self function_d5cda8a759cc36bc("cower");
+  self setcivstate("cower");
   self function_b661b022700ba72f("only_reactions", 1);
   self.health = 10;
 }
@@ -1850,9 +1850,9 @@ function function_c580a41a277e4291(position, time) {
   }
 }
 
-function function_6783bbaabfd68cd1(position, time, var_acba072b7e847a86) {
+function function_6783bbaabfd68cd1(position, time, flag_to_set) {
   function_c580a41a277e4291(position, time);
-  flag_set(var_acba072b7e847a86);
+  flag_set(flag_to_set);
 }
 
 function function_cf0d23ab6a54057e(position) {
@@ -1969,12 +1969,12 @@ function function_c8431cc67f0b0824(struct_name, flag_name, fov, occlude) {
   return function_6342ec57ac648f0e(look_struct.origin, flag_name, fov, occlude);
 }
 
-function function_e2ef62b3f4e104c(org, var_acba072b7e847a86) {
+function function_e2ef62b3f4e104c(org, flag_to_set) {
   while(true) {
     level.player waittill("weapon_fired");
 
     if(function_e7c30095a6cdc3ef(org.origin, 10, 0)) {
-      flag_set(var_acba072b7e847a86);
+      flag_set(flag_to_set);
     }
   }
 }
@@ -2156,10 +2156,10 @@ function function_e804c126791f1d54() {
     }
 
     shots = ["recoil_to_standing"];
-    animnode thread scene::function_bc521bee52fde214(3);
+    animnode thread scene::set_anim_rate(3);
     animnode scene::play(guy, shots);
     shots = ["standing_to_panic"];
-    animnode thread scene::function_bc521bee52fde214(1);
+    animnode thread scene::set_anim_rate(1);
     animnode scene::play(guy, shots);
   } else {
     shots = ["standing_to_panic"];
@@ -2216,36 +2216,36 @@ function temp_dialogue(speaker, text, duration, color_value) {
     duration = 4;
   }
 
-  if(isDefined(level.var_e1dec5807616ebbb)) {
-    level.var_e1dec5807616ebbb destroy();
-    level.var_e1dec5807616ebbb = undefined;
+  if(isDefined(level.tmp_subtitle)) {
+    level.tmp_subtitle destroy();
+    level.tmp_subtitle = undefined;
   }
 
-  level.var_e1dec5807616ebbb = newhudelem();
-  level.var_e1dec5807616ebbb.x = 0;
-  level.var_e1dec5807616ebbb.y = -64;
-  level.var_e1dec5807616ebbb settext("^" + color_value + speaker + ": ^7" + text);
-  level.var_e1dec5807616ebbb.fontscale = 1.46;
-  level.var_e1dec5807616ebbb.alignx = "center";
-  level.var_e1dec5807616ebbb.aligny = "middle";
-  level.var_e1dec5807616ebbb.horzalign = "center";
-  level.var_e1dec5807616ebbb.vertalign = "bottom";
-  level.var_e1dec5807616ebbb.sort = 1;
+  level.tmp_subtitle = newhudelem();
+  level.tmp_subtitle.x = 0;
+  level.tmp_subtitle.y = -64;
+  level.tmp_subtitle settext("^" + color_value + speaker + ": ^7" + text);
+  level.tmp_subtitle.fontscale = 1.46;
+  level.tmp_subtitle.alignx = "center";
+  level.tmp_subtitle.aligny = "middle";
+  level.tmp_subtitle.horzalign = "center";
+  level.tmp_subtitle.vertalign = "bottom";
+  level.tmp_subtitle.sort = 1;
   wait duration;
-  thread function_21bbf0b607eef131();
+  thread temp_dialogue_fade();
 }
 
-function function_21bbf0b607eef131() {
+function temp_dialogue_fade() {
   level endon("temp_dialogue");
   alpha = 1;
 
   while(alpha > 0) {
-    level.var_e1dec5807616ebbb.alpha = alpha;
+    level.tmp_subtitle.alpha = alpha;
     wait 0.05;
     alpha -= 0.1;
   }
 
-  level.var_e1dec5807616ebbb destroy();
+  level.tmp_subtitle destroy();
 }
 
 function function_8435dd9d3a6a867b(from_point) {
@@ -2350,7 +2350,7 @@ function function_c8583438e5aded0c() {
   hijacker_v2_neighbour.dontevershoot = 1;
   hijacker_v2_neighbour.goalradius = 16;
   hijacker_v2_neighbour.name = "Hijacker";
-  hijacker_v2_neighbour.var_3119604b74dfdbbd = 0;
+  hijacker_v2_neighbour.collide_with_ai = 0;
   hijacker_v2_neighbour enableavoidance(0, 0);
   hijacker_v2_neighbour.maxfaceenemydist = 1000;
   hijacker_v2_neighbour demeanor_override("casual");

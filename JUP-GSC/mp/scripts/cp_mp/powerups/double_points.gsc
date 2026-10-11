@@ -42,18 +42,18 @@ function function_44e15a446f4d00a9() {
   self endon("powerup doublepoints_active");
   root = function_ecdae672c660149e();
   self[[root.var_40708f9ae5a8070e]](2);
-  utility::function_f3bb4f4911a1beb2("powerup_double_points", "apply_effect");
+  utility::callsharedfunc("powerup_double_points", "apply_effect");
   n_lifetime = root.powerups["double_points"].var_f862e718db266e0a;
 
   if(isDefined(level.powerup_timeout_override)) {
     n_lifetime = self[[level.powerup_timeout_override]](n_lifetime);
   }
 
-  thread namespace_2b1145f62aa835b8::function_a93fbc5ac33fc2f2("double_points", n_lifetime);
+  thread namespace_2b1145f62aa835b8::showpoweruphudsharedfunc("double_points", n_lifetime);
   waittill_any_timeout_2(n_lifetime, "end_double_points", "death");
 
   if(isDefined(self)) {
     self[[root.var_40708f9ae5a8070e]](1);
-    utility::function_f3bb4f4911a1beb2("powerup_double_points", "remove_effect");
+    utility::callsharedfunc("powerup_double_points", "remove_effect");
   }
 }

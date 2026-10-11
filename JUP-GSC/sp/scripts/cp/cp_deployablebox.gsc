@@ -44,8 +44,8 @@ function init_box_interaction() {
 }
 
 function box_hint_func(interaction_struct, player) {
-  var_86280fefb94b6b28 = level.boxsettings[interaction_struct.box.boxtype];
-  return var_86280fefb94b6b28.hintstring;
+  boxconfig = level.boxsettings[interaction_struct.box.boxtype];
+  return boxconfig.hintstring;
 }
 
 function box_activate_func(interaction_struct, player) {
@@ -137,7 +137,7 @@ function markeractivate(lifeid, boxtype, usedcallback, damagecallback, deathcall
   result = waittill_any_return_3("missile_stuck", "explode", "death");
   owner = self.owner;
   position = self.origin;
-  var_86280fefb94b6b28 = level.boxsettings[boxtype];
+  boxconfig = level.boxsettings[boxtype];
   box = undefined;
 
   if(result == "explode") {
@@ -152,19 +152,19 @@ function markeractivate(lifeid, boxtype, usedcallback, damagecallback, deathcall
   box setscriptablepartstate("anims", "closedIdle", 0);
   box setscriptablepartstate("beacon", "active", 0);
   box.health = 999999;
-  box.maxhealth = var_86280fefb94b6b28.maxhealth;
+  box.maxhealth = boxconfig.maxhealth;
   box.angles = self.angles;
   box.boxtype = boxtype;
   box.owner = owner;
   box.team = owner.team;
-  box.id = var_86280fefb94b6b28.id;
+  box.id = boxconfig.id;
 
-  if(isDefined(var_86280fefb94b6b28.dpadname)) {
-    box.dpadname = var_86280fefb94b6b28.dpadname;
+  if(isDefined(boxconfig.dpadname)) {
+    box.dpadname = boxconfig.dpadname;
   }
 
-  if(isDefined(var_86280fefb94b6b28.maxuses)) {
-    box.usesremaining = var_86280fefb94b6b28.maxuses;
+  if(isDefined(boxconfig.maxuses)) {
+    box.usesremaining = boxconfig.maxuses;
   }
 
   box.owner.supportbox = box;
@@ -228,21 +228,21 @@ function supportbox_removeobjectiveicon() {
 
 function createboxforplayer(boxtype, position, owner) {
   assertex(isDefined(owner), "createBoxForPlayer() called without owner specified");
-  var_86280fefb94b6b28 = level.boxsettings[boxtype];
+  boxconfig = level.boxsettings[boxtype];
   box = spawn("script_model", position - (0, 0, 1));
-  box setModel(var_86280fefb94b6b28.modelbase);
+  box setModel(boxconfig.modelbase);
   box.health = 999999;
-  box.maxhealth = var_86280fefb94b6b28.maxhealth;
+  box.maxhealth = boxconfig.maxhealth;
   box.angles = self.angles;
   box.boxtype = boxtype;
   box.owner = owner;
   box.team = owner.team;
-  box.id = var_86280fefb94b6b28.id;
+  box.id = boxconfig.id;
   return box;
 }
 
 function box_setactive(box, damagecallback, deathcallback, timeoutcallback) {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   self.inuse = 0;
 
   if(isDefined(self.owner)) {
@@ -251,12 +251,12 @@ function box_setactive(box, damagecallback, deathcallback, timeoutcallback) {
     self.owner thread scripts\cp\cp_player_battlechatter::onmunitionboxused(self.boxtype);
   }
 
-  if(isDefined(var_86280fefb94b6b28.deployfunc)) {
-    self.owner thread[[var_86280fefb94b6b28.deployfunc]]();
+  if(isDefined(boxconfig.deployfunc)) {
+    self.owner thread[[boxconfig.deployfunc]]();
   }
 
-  if(!isDefined(var_86280fefb94b6b28.canusecallback) || self.owner[[var_86280fefb94b6b28.canusecallback]](self)) {
-    box_seticon(self.owner, var_86280fefb94b6b28.streakname, var_86280fefb94b6b28.headiconoffset);
+  if(!isDefined(boxconfig.canusecallback) || self.owner[[boxconfig.canusecallback]](self)) {
+    box_seticon(self.owner, boxconfig.streakname, boxconfig.headiconoffset);
   }
 
   box = box_createinteraction(box);
@@ -345,11 +345,11 @@ function box_addboxforplayer(player) {
 }
 
 function box_seticon(player, streakname, voffset) {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   headicon = undefined;
 
-  if(isDefined(var_86280fefb94b6b28.headicon)) {
-    headicon = var_86280fefb94b6b28.headicon;
+  if(isDefined(boxconfig.headicon)) {
+    headicon = boxconfig.headicon;
   }
 
   self.boxiconid = thread scripts\cp\utility::ent_createheadicon(self, voffset, self.team, headicon, 0);
@@ -366,7 +366,7 @@ function box_disableplayeruse(player) {
 function box_setinactive() {}
 
 function box_handledamage() {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 }
 
 function box_modifydamage(data) {
@@ -376,7 +376,7 @@ function box_modifydamage(data) {
   damage = data.damage;
   idflags = data.idflags;
   modifieddamage = damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   return modifieddamage;
 }
 
@@ -385,7 +385,7 @@ function box_handledeathdamage(data) {
   objweapon = data.objweapon;
   type = data.meansofdeath;
   damage = data.damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   attacker notify("destroyed_equipment");
 }
 
@@ -412,10 +412,10 @@ function box_handledeath() {
     thread scripts\cp\utility::ent_deleteheadicon(self, self.boxiconid);
   }
 
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   forward = anglesToForward(self.angles);
   up = anglestoup(self.angles);
-  playFX(var_86280fefb94b6b28.deathvfx, self.origin, forward, up);
+  playFX(boxconfig.deathvfx, self.origin, forward, up);
   self playSound("mp_equip_destroyed");
   self notify("deleting");
   self delete();
@@ -431,7 +431,7 @@ function box_handleownerdisconnect() {
 }
 
 function boxthink() {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 
   while(true) {
     self waittill("captured", capturer);
@@ -439,8 +439,8 @@ function boxthink() {
     if(isPlayer(capturer) && capturer.team == self.owner.team) {
       success = 1;
 
-      if(isDefined(var_86280fefb94b6b28.onusecallback)) {
-        success = capturer[[var_86280fefb94b6b28.onusecallback]](self);
+      if(isDefined(boxconfig.onusecallback)) {
+        success = capturer[[boxconfig.onusecallback]](self);
       }
 
       if(istrue(success)) {
@@ -450,8 +450,8 @@ function boxthink() {
         if(isDefined(self.owner) && capturer != self.owner) {
           self.owner thread scripts\cp\points::doscoreevent(#"hash_decd39d6aeca5c6c");
 
-          if(isDefined(var_86280fefb94b6b28.onusethanksbc)) {
-            level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(capturer, var_86280fefb94b6b28.onusethanksbc);
+          if(isDefined(boxconfig.onusethanksbc)) {
+            level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(capturer, boxconfig.onusethanksbc);
           }
         }
 
@@ -464,8 +464,8 @@ function boxthink() {
           }
         }
 
-        if(isDefined(var_86280fefb94b6b28.canuseotherboxes) && var_86280fefb94b6b28.canuseotherboxes) {
-          foreach(box in level.deployable_box[var_86280fefb94b6b28.streakname]) {
+        if(isDefined(boxconfig.canuseotherboxes) && boxconfig.canuseotherboxes) {
+          foreach(box in level.deployable_box[boxconfig.streakname]) {
             box box_disableplayeruse(self);
             box thread doubledip(self);
           }
@@ -473,7 +473,7 @@ function boxthink() {
           continue;
         }
 
-        if(istrue(var_86280fefb94b6b28.canreusebox)) {}
+        if(istrue(boxconfig.canreusebox)) {}
       }
     }
   }
@@ -529,8 +529,8 @@ function isfriendlytobox(box) {
 function box_timeout() {
   self endon("death");
   level endon("game_ended");
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
-  lifespan = var_86280fefb94b6b28.lifespan;
+  boxconfig = level.boxsettings[self.boxtype];
+  lifespan = boxconfig.lifespan;
   scripts\cp\cp_hostmigration::waitlongdurationwithhostmigrationpause(lifespan);
   box_leave();
 }
@@ -674,7 +674,7 @@ function isgrenadedeployable(boxtype) {
   return isgrenade;
 }
 
-function supportbox_ondeploy(var_86280fefb94b6b28) {
+function supportbox_ondeploy(boxconfig) {
   parent = self getlinkedparent();
   self unlink();
   self.angles = combineangles(self.angles, (0, 90, 0));
@@ -684,14 +684,14 @@ function supportbox_ondeploy(var_86280fefb94b6b28) {
     self linkTo(parent);
   }
 
-  thread supportbox_ondeployinternal(var_86280fefb94b6b28);
+  thread supportbox_ondeployinternal(boxconfig);
 }
 
-function supportbox_ondeployinternal(var_86280fefb94b6b28) {
+function supportbox_ondeployinternal(boxconfig) {
   self endon("death");
   self setscriptablepartstate("anims", "open", 0);
   self setscriptablepartstate("effects", "plant", 0);
-  wait var_86280fefb94b6b28.deployanimduration;
+  wait boxconfig.deployanimduration;
 }
 
 #using_animtree("scriptables");

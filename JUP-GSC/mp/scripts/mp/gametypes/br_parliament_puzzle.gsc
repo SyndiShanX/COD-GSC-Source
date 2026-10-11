@@ -25,7 +25,7 @@ function init() {
 
   if(level.var_4556e51a733145b4) {
     level.parliament_puzzle.hints = [];
-    level.parliament_puzzle.var_66647dab4ad2648b = [];
+    level.parliament_puzzle.placards = [];
     scripts\engine\scriptable::scriptable_addusedcallbackbypart("maphint_computer", &codecomputerscriptableused);
   }
 
@@ -48,17 +48,17 @@ function initpostmain() {
   }
 }
 
-function codecomputerscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function codecomputerscriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x1c>");
 
   if(!isDefined(instance.var_9c3bc381e6121293)) {
     return;
   }
 
-  level thread _codecomputerscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+  level thread _codecomputerscriptableused(instance, part, state, player, bautouse);
 }
 
-function _codecomputerscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _codecomputerscriptableused(instance, part, state, player, bautouse) {
   if(state == "on") {
     if(!scripts\mp\flags::gameflag("prematch_done") || !istrue(level.parliament_puzzle.var_2c1beb232def3373)) {
       playsoundatpos(instance.origin, "br_computer_deny");
@@ -105,21 +105,21 @@ function function_9fdadb62b1bdf018(instance) {
 
 function function_7a416269c3c3336() {
   locs = getStructArray("placard_holmes", "targetname");
-  level.parliament_puzzle.var_66647dab4ad2648b["holmes"] = locs;
+  level.parliament_puzzle.placards["holmes"] = locs;
   locs = getStructArray("placard_whitehouse", "targetname");
-  level.parliament_puzzle.var_66647dab4ad2648b["whitehouse"] = locs;
+  level.parliament_puzzle.placards["whitehouse"] = locs;
   locs = getStructArray("placard_blackhouse", "targetname");
-  level.parliament_puzzle.var_66647dab4ad2648b["blackhouse"] = locs;
+  level.parliament_puzzle.placards["blackhouse"] = locs;
   locs = getStructArray("placard_daryl", "targetname");
-  level.parliament_puzzle.var_66647dab4ad2648b["daryl"] = locs;
+  level.parliament_puzzle.placards["daryl"] = locs;
   locs = getStructArray("placard_horse", "targetname");
-  level.parliament_puzzle.var_66647dab4ad2648b["horse"] = locs;
+  level.parliament_puzzle.placards["horse"] = locs;
   locs = getStructArray("placard_tinyhouse", "targetname");
-  level.parliament_puzzle.var_66647dab4ad2648b["tinyhouse"] = locs;
+  level.parliament_puzzle.placards["tinyhouse"] = locs;
   locs = getStructArray("placard_franz", "targetname");
-  level.parliament_puzzle.var_66647dab4ad2648b["jolyon"] = locs;
+  level.parliament_puzzle.placards["jolyon"] = locs;
   locs = getStructArray("placard_missing", "targetname");
-  level.parliament_puzzle.var_66647dab4ad2648b["blank"] = locs;
+  level.parliament_puzzle.placards["blank"] = locs;
   level.parliament_puzzle.buildingtrigger = getEnt("parliament_interior_trigger", "targetname");
 }
 
@@ -225,7 +225,7 @@ function function_7df49f51f4834135(instance) {
 
 function function_eed67c3b87d257f1() {
   foreach(key, assignednumber in level.parliament_puzzle.var_e9b051b4a987405f) {
-    foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b[key]) {
+    foreach(loc in level.parliament_puzzle.placards[key]) {
       angles = undefined;
 
       if(key == "blank") {
@@ -243,11 +243,11 @@ function function_eed67c3b87d257f1() {
   }
 
   assignedkeys = getarraykeys(level.parliament_puzzle.var_e9b051b4a987405f);
-  var_6e634c3a5020c0a6 = getarraykeys(level.parliament_puzzle.var_66647dab4ad2648b);
+  var_6e634c3a5020c0a6 = getarraykeys(level.parliament_puzzle.placards);
 
   foreach(key in var_6e634c3a5020c0a6) {
     if(!array_contains(assignedkeys, key)) {
-      foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b[key]) {
+      foreach(loc in level.parliament_puzzle.placards[key]) {
         angles = undefined;
 
         if(key == "blank") {
@@ -267,7 +267,7 @@ function function_eed67c3b87d257f1() {
 }
 
 function function_a2afc477c3ec9c61() {
-  foreach(var_71f68a71a1c9346d in level.parliament_puzzle.var_66647dab4ad2648b) {
+  foreach(var_71f68a71a1c9346d in level.parliament_puzzle.placards) {
     foreach(loc in var_71f68a71a1c9346d) {
       loc.scriptable setscriptablepartstate("parliament_placard", "blank");
     }
@@ -332,7 +332,7 @@ function function_9fdce6fd13b04c1c() {
   terminalkeypad = level.parliament_puzzle.hints["escaperoom_terminal_keypad"].scriptable;
   level.parliament_puzzle.pattern = [];
   level.parliament_puzzle.var_e9b051b4a987405f = [];
-  remainingpaintings = array_randomize(getarraykeys(level.parliament_puzzle.var_66647dab4ad2648b));
+  remainingpaintings = array_randomize(getarraykeys(level.parliament_puzzle.placards));
 
   foreach(number in terminalkeypad.code["player_facing"]) {
     level.parliament_puzzle.pattern[level.parliament_puzzle.pattern.size] = remainingpaintings[0];
@@ -505,42 +505,42 @@ function debug_show2dvotext(text, time) {
 }
 
 function function_ecf6f13ab4edf73e() {
-  foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b["holmes"]) {
+  foreach(loc in level.parliament_puzzle.placards["holmes"]) {
     loc.scriptable = spawnscriptable("parliament_placard", loc.origin, loc.angles + (0, 180, 0));
     loc.scriptable setscriptablepartstate("parliament_placard", "num" + randomintrange(1, 10));
   }
 
-  foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b["whitehouse"]) {
+  foreach(loc in level.parliament_puzzle.placards["whitehouse"]) {
     loc.scriptable = spawnscriptable("parliament_placard", loc.origin, loc.angles + (0, 180, 0));
     loc.scriptable setscriptablepartstate("parliament_placard", "num" + randomintrange(1, 10));
   }
 
-  foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b["blackhouse"]) {
+  foreach(loc in level.parliament_puzzle.placards["blackhouse"]) {
     loc.scriptable = spawnscriptable("parliament_placard", loc.origin, loc.angles + (0, 180, 0));
     loc.scriptable setscriptablepartstate("parliament_placard", "num" + randomintrange(1, 10));
   }
 
-  foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b["daryl"]) {
+  foreach(loc in level.parliament_puzzle.placards["daryl"]) {
     loc.scriptable = spawnscriptable("parliament_placard", loc.origin, loc.angles);
     loc.scriptable setscriptablepartstate("parliament_placard", "num" + randomintrange(1, 10));
   }
 
-  foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b["horse"]) {
+  foreach(loc in level.parliament_puzzle.placards["horse"]) {
     loc.scriptable = spawnscriptable("parliament_placard", loc.origin, loc.angles + (0, 180, 0));
     loc.scriptable setscriptablepartstate("parliament_placard", "num" + randomintrange(1, 10));
   }
 
-  foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b["tinyhouse"]) {
+  foreach(loc in level.parliament_puzzle.placards["tinyhouse"]) {
     loc.scriptable = spawnscriptable("parliament_placard", loc.origin, loc.angles + (0, 180, 0));
     loc.scriptable setscriptablepartstate("parliament_placard", "num" + randomintrange(1, 10));
   }
 
-  foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b["jolyon"]) {
+  foreach(loc in level.parliament_puzzle.placards["jolyon"]) {
     loc.scriptable = spawnscriptable("parliament_placard", loc.origin, loc.angles + (0, 180, 0));
     loc.scriptable setscriptablepartstate("parliament_placard", "num" + randomintrange(1, 10));
   }
 
-  foreach(loc in level.parliament_puzzle.var_66647dab4ad2648b["blank"]) {
+  foreach(loc in level.parliament_puzzle.placards["blank"]) {
     loc.scriptable = spawnscriptable("parliament_placard", loc.origin, (360, 359.999, -8.79989));
     loc.scriptable setscriptablepartstate("parliament_placard", "num" + randomintrange(1, 10));
   }

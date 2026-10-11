@@ -1002,11 +1002,11 @@ function function_e532c2521845ce4a(var_8eca5bdf48ccf8e6, targets) {
 function function_4d63a162b2fb4275() {
   tripwire = self;
   tripwire endon("tripwire_defused");
-  tripwire.trigger waittill("trigger", var_2d9552508615d396);
-  function_fb4b4fa0cee578bd(var_2d9552508615d396, tripwire);
+  tripwire.trigger waittill("trigger", triggeringent);
+  function_fb4b4fa0cee578bd(triggeringent, tripwire);
 }
 
-function function_fb4b4fa0cee578bd(var_2d9552508615d396, tripwire) {
+function function_fb4b4fa0cee578bd(triggeringent, tripwire) {
   if(istrue(tripwire.triggered)) {
     return;
   }
@@ -1033,15 +1033,15 @@ function function_fb4b4fa0cee578bd(var_2d9552508615d396, tripwire) {
   frag waittill("explode");
 
   if(isDefined(tripwire.script_parameters) && scripts\engine\utility::issharedfuncdefined("tripwire", tripwire.script_parameters)) {
-    [[scripts\engine\utility::getsharedfunc("tripwire", tripwire.script_parameters)]](var_2d9552508615d396, tripwire);
+    [[scripts\engine\utility::getsharedfunc("tripwire", tripwire.script_parameters)]](triggeringent, tripwire);
   } else if(scripts\engine\utility::issharedfuncdefined("tripwire", "tripwire_override")) {
-    [[scripts\engine\utility::getsharedfunc("tripwire", "tripwire_override")]](var_2d9552508615d396, tripwire);
+    [[scripts\engine\utility::getsharedfunc("tripwire", "tripwire_override")]](triggeringent, tripwire);
   } else {
     function_5edfa6cc73a7922d(tripwire);
   }
 
   if(scripts\engine\utility::issharedfuncdefined("tripwire", "onTripwireTriggered")) {
-    [[scripts\engine\utility::getsharedfunc("tripwire", "onTripwireTriggered")]](var_2d9552508615d396, tripwire);
+    [[scripts\engine\utility::getsharedfunc("tripwire", "onTripwireTriggered")]](triggeringent, tripwire);
   }
 
   wait 0.1;
@@ -1055,7 +1055,7 @@ function function_5edfa6cc73a7922d(tripwire) {
   earthquake(0.45, 0.7, tripwire.trapdevice.origin, 800);
 }
 
-function function_6cae226462403bcc(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_6cae226462403bcc(instance, part, state, player, bautouse, usestring) {
   if(part == "trap_device") {
     instance setscriptablepartstate("trap_device", "off");
 

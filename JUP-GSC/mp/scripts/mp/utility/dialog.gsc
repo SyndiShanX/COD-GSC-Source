@@ -169,7 +169,7 @@ function leaderdialogonplayer_internal(dialog, group, groupoverride, location, t
       dialog = prefix + var_9ae55bedba1d14d6[2] + "_" + var_9ae55bedba1d14d6[3] + "_" + infix + "tl_" + var_9ae55bedba1d14d6[5];
       soundname = dialog;
     } else if(isslamannouncerline(game["dialog"][dialog])) {
-      dialog = function_f3bb4f4911a1beb2("slam", "getSoundName", game["dialog"][dialog]);
+      dialog = callsharedfunc("slam", "getSoundName", game["dialog"][dialog]);
       soundname = dialog;
     } else {
       prefix = "dx_mpa_";
@@ -220,7 +220,7 @@ function leaderdialogonplayer_internal(dialog, group, groupoverride, location, t
     soundname = tolower(soundname);
 
     if(isxhash(dialog)) {
-      dialog = function_f28fd66285fa2c9(dialog);
+      dialog = getxhashhexname(dialog);
     }
 
     self queuedialogforplayer(soundname, dialog, 2, group, groupoverride, location);
@@ -255,7 +255,7 @@ function function_1b7524a0e081ab71(dialog) {
 
 function isslamannouncerline(dialog) {
   if(scripts\mp\gametypes\war::function_2898a9c3d425a919() && issharedfuncdefined("slam", "isSlamAnnouncerLine")) {
-    return function_f3bb4f4911a1beb2("slam", "isSlamAnnouncerLine", dialog);
+    return callsharedfunc("slam", "isSlamAnnouncerLine", dialog);
   }
 
   return 0;

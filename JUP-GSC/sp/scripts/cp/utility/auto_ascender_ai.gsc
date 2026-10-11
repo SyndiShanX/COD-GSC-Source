@@ -87,8 +87,8 @@ function ai_ascender_animloop(loop_xanim, animnode) {
   self.anchor.angles = self.angles;
   self linkTo(self.anchor);
   self.ascender linkTo(self.anchor);
-  var_675510f88d731497 = getanimlength(loop_xanim);
-  self.anchor moveTo(animnode.end_node.origin, var_675510f88d731497 * 3);
+  movelen = getanimlength(loop_xanim);
+  self.anchor moveTo(animnode.end_node.origin, movelen * 3);
   self.anchor waittill("movedone");
 }
 

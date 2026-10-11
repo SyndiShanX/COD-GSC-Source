@@ -9,7 +9,7 @@
 #namespace namespace_ab4bb52668162033;
 
 function function_96f220b689167b22() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_ce8c7137ccfd571e);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_ce8c7137ccfd571e);
 }
 
 function function_ce8c7137ccfd571e(params) {
@@ -33,11 +33,11 @@ function function_ce8c7137ccfd571e(params) {
       function_ac90fa5cc0a80298("vehicle_impact_pass_in");
     }
 
-    thread function_f5e6c56d802dc975();
+    thread handle_vehicle_impact_anim();
   }
 }
 
-function function_f5e6c56d802dc975() {
+function handle_vehicle_impact_anim() {
   self notify("handle_vehicle_impact_anim_singleton");
   self endon("handle_vehicle_impact_anim_singleton");
 

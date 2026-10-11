@@ -81,7 +81,7 @@ function init() {
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_server_start", &function_ec68f43c79e586dc);
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_match_start", &function_393baf20db478c0d);
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_match_end", &function_f5f91665fe4dba94);
-  namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_round_start", &function_8eeea3969df7e964);
+  namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_round_start", &on_round_start);
   namespace_de6e6777b0937bd7::function_aacbbe63c26687ae("callback_round_end", &function_b610a0d728dfa59e);
 
   if(getdvarint(@ "hash_f405928d962ae17e", 0) < 2) {
@@ -404,8 +404,8 @@ function function_3fc5fd079e76a114(objective) {
 
 function is_interacting_objective() {
   var_96349e74c9078d79 = istrue(self.isbombcarrier) || istrue(self.isplanting) || istrue(self.isdefusing);
-  var_3fc17555cf838dd1 = isDefined(self.touchtriggers) && self.touchtriggers.size > 0;
-  return var_96349e74c9078d79 || var_3fc17555cf838dd1;
+  is_touching_triggers = isDefined(self.touchtriggers) && self.touchtriggers.size > 0;
+  return var_96349e74c9078d79 || is_touching_triggers;
 }
 
 function function_da50e02d9e2c31d2() {
@@ -631,7 +631,7 @@ function function_f5f91665fe4dba94(data) {
   }
 }
 
-function function_8eeea3969df7e964() {
+function on_round_start() {
   level thread function_d3c6179b65106833();
   level thread function_36fa9aa217c6858();
   function_ebacc818c229d2e3();
@@ -924,13 +924,13 @@ function function_e60b22a0532246a9(data) {
   var_934379620852e329 = player.var_934379620852e329;
   movement_data = function_c56d015e4cd2e47c(persistent_data);
   current_streak = persistent_data["cur_kill_streak"];
-  var_367dd5a8d820c25f = 0;
+  total_distance_traveled = 0;
 
   if(isDefined(persistent_data["totalDistTraveled"])) {
-    var_367dd5a8d820c25f = float(persistent_data["totalDistTraveled"]);
+    total_distance_traveled = float(persistent_data["totalDistTraveled"]);
   }
 
-  esports_event = ["player_name", function_1da7bfa6bc897e5e(player), "kills", persistent_data["kills"], "deaths", persistent_data["deaths"], "assists", persistent_data["assists"], "score", persistent_data["score"], "highest_streak", persistent_data["longestStreak"], "shots_fired", player function_e42724fbfacff469(0), "shots_hit", player function_e42724fbfacff469(1), "shots_head", persistent_data["shotsHitHead"], "untraded_kills", player function_815fee43d577e1b6(5), "untraded_deaths", persistent_data["untradedDeaths"], "traded_kills", persistent_data["tradedKills"], "traded_deaths", persistent_data["tradedDeaths"], "inapplicable_traded_kills", persistent_data["inapplicableTradedKills"], "inapplicable_traded_deaths", persistent_data["inapplicableTradedDeaths"], "damage_dealt", player function_815fee43d577e1b6(1), "damage_taken", ter_op(isDefined(persistent_data["damageTaken"]), persistent_data["damageTaken"], 0), "damage_healed", persistent_data["damageHealed"], "damage_friend", persistent_data["friendlyDamageDone"], "tacticals_used", persistent_data["tacticalsUsed"], "lethals_used", persistent_data["lethalsUsed"], "time_alive", ter_op(persistent_data["total_time_alive"] == 0, function_22de454b228d857c(), persistent_data["total_time_alive"]), "distance_traveled", var_367dd5a8d820c25f, "average_speed", movement_data.average_speed, "percent_time_moving", movement_data.percent_time_moving, "dead_silence_time", int(persistent_data["deadSilenceTime"] / 1000)];
+  esports_event = ["player_name", function_1da7bfa6bc897e5e(player), "kills", persistent_data["kills"], "deaths", persistent_data["deaths"], "assists", persistent_data["assists"], "score", persistent_data["score"], "highest_streak", persistent_data["longestStreak"], "shots_fired", player function_e42724fbfacff469(0), "shots_hit", player function_e42724fbfacff469(1), "shots_head", persistent_data["shotsHitHead"], "untraded_kills", player function_815fee43d577e1b6(5), "untraded_deaths", persistent_data["untradedDeaths"], "traded_kills", persistent_data["tradedKills"], "traded_deaths", persistent_data["tradedDeaths"], "inapplicable_traded_kills", persistent_data["inapplicableTradedKills"], "inapplicable_traded_deaths", persistent_data["inapplicableTradedDeaths"], "damage_dealt", player function_815fee43d577e1b6(1), "damage_taken", ter_op(isDefined(persistent_data["damageTaken"]), persistent_data["damageTaken"], 0), "damage_healed", persistent_data["damageHealed"], "damage_friend", persistent_data["friendlyDamageDone"], "tacticals_used", persistent_data["tacticalsUsed"], "lethals_used", persistent_data["lethalsUsed"], "time_alive", ter_op(persistent_data["total_time_alive"] == 0, function_22de454b228d857c(), persistent_data["total_time_alive"]), "distance_traveled", total_distance_traveled, "average_speed", movement_data.average_speed, "percent_time_moving", movement_data.percent_time_moving, "dead_silence_time", int(persistent_data["deadSilenceTime"] / 1000)];
   var_21e140b4aaaf4563 = "dlog_event_esports_player_match_end";
 
   if(isDefined(level.var_b290423f07c0fa3c)) {

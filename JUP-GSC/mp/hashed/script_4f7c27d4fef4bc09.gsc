@@ -48,7 +48,7 @@ function initrusher(taskid) {
   self.allowstrafe = 0;
   self setengagementmaxdist(0.1, 768);
   self enableavoidance(1);
-  self.var_b29c3655b12e292d = 0;
+  self.cornercheckenabled = 0;
   self.var_855f7991983b1210 = 1;
   self function_8bbcaeb23a1512ef("all", 0, "bt");
   self.var_4c2e21367dbf09d0 = &function_5213d881f2e26966;
@@ -70,18 +70,18 @@ function setupagent() {
   self.damagedradiussq = 2250000;
   self.ignoreclosefoliage = 1;
   self.guid = self getentitynumber();
-  self.var_8d31c7eacb516468 = 1;
+  self.moveratescale = 1;
   self.var_da951e8204605e7 = 1;
-  self.var_d2d25942e3b908e9 = 1;
-  self.var_5b1209ecd2c2de2 = 1;
-  self.var_16734f091bfebaa1 = 0;
-  self.var_a045430175c98788 = 0;
+  self.traverseratescale = 1;
+  self.generalspeedratescale = 1;
+  self.bhasbadpath = 0;
+  self.timeoflastdamage = 0;
   self.allowcrouch = 1;
   self.var_7c0157ec8b265f6e = 40;
   self.var_fa4cf34a0c3681b8 = 70;
   self.meleeradius = self.var_fa4cf34a0c3681b8;
-  self.var_a9bbce143412f034 = 80;
-  self.var_f5bd7eeb8c658300 = squared(self.var_fa4cf34a0c3681b8);
+  self.meleeradiuswhentargetnotonnavmesh = 80;
+  self.meleeradiusbasesq = squared(self.var_fa4cf34a0c3681b8);
   self.meleeradiussq = squared(self.meleeradius);
   self.meleechargedistvsplayer = 125;
   self.meleechargedist = 125;
@@ -92,17 +92,17 @@ function setupagent() {
   self.died_poorly = 0;
   self.damaged_by_player = 0;
   self.full_gib = 0;
-  self.var_805f8a6da772965 = [];
+  self.last_damage_time_on_player = [];
   self.highlyawareradius = 200;
   self.var_dc7052bbfe5c799 = 1;
   self.spawned_timestamp = gettime();
   self.lasthittime = [];
-  self function_9f82c74eb1b7caf9(0, "entity");
+  self setcanusecover(0, "entity");
   self.teamflashbangimmunity = 1;
   rad = 15;
 
-  if(isDefined(level.var_3dfcdea6efb8a124)) {
-    rad = level.var_3dfcdea6efb8a124;
+  if(isDefined(level.avoidance_radius)) {
+    rad = level.avoidance_radius;
   }
 
   self setavoidanceradius(rad);

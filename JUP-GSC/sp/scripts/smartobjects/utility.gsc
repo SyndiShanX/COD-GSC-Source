@@ -159,11 +159,11 @@ function getbestsmartobject(desiredpos, volume, var_f34327e65116baaa) {
   }
 
   var_b28bb506e83973be = var_f34327e65116baaa * var_f34327e65116baaa;
-  var_35a90566147afc1f = sortbydistance(anim.smartobjectpoints, desiredpos);
-  var_ff20fabd45ab91fc = var_35a90566147afc1f.size;
+  allsmartobjects = sortbydistance(anim.smartobjectpoints, desiredpos);
+  numsmartobjects = allsmartobjects.size;
 
-  for(iobj = 0; iobj < var_ff20fabd45ab91fc; iobj++) {
-    object = var_35a90566147afc1f[iobj];
+  for(iobj = 0; iobj < numsmartobjects; iobj++) {
+    object = allsmartobjects[iobj];
 
     if(distancesquared(object.origin, desiredpos) > var_b28bb506e83973be) {
       break;
@@ -197,9 +197,9 @@ function isplayernearsmartobject(obj) {
 
   foreach(player in level.players) {
     if(distance2dsquared(obj.origin, player.origin) < radiussq && squared(obj.origin[2] - player.origin[2]) < zdiffsq) {
-      var_2cf6a0823b4bab5d = vectortoyaw(player.origin - obj.origin);
+      objtoplayeryaw = vectortoyaw(player.origin - obj.origin);
 
-      if(abs(angleclamp180(var_2cf6a0823b4bab5d - obj.angles[1])) < 90) {
+      if(abs(angleclamp180(objtoplayeryaw - obj.angles[1])) < 90) {
         return true;
       }
     }
@@ -214,7 +214,7 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
   }
 
   var_1d73dedf4c253ef9 = 60;
-  var_7b5554090818485f = 60;
+  clineheight = 60;
   var_8b8967d098e7c16e = 5184;
   var_79fa165ae4fcd077 = 48;
 
@@ -230,15 +230,15 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
 
   starttoend = endpos - startpos;
   linelen = length(starttoend);
-  var_e5382b2564f4252a = starttoend / linelen;
-  var_3773b7fbba8ed834 = vectorNormalize((var_e5382b2564f4252a[1], -1 * var_e5382b2564f4252a[0], 0));
-  var_e4bb5ea6b1ad286 = 0;
+  starttoenddir = starttoend / linelen;
+  starttoendnormal = vectorNormalize((starttoenddir[1], -1 * starttoenddir[0], 0));
+  bdrawdebug = 0;
   drawtime = undefined;
 
   drawtime = 40;
-  var_e4bb5ea6b1ad286 = getdvarint(@ "hash_e24fb561372dfef1", -1) == self getentitynumber();
+  bdrawdebug = getdvarint(@ "hash_e24fb561372dfef1", -1) == self getentitynumber();
 
-  if(var_e4bb5ea6b1ad286) {
+  if(bdrawdebug) {
     line(startpos + (0, 0, 6), endpos + (0, 0, 6), (0, 0.5, 0.7), 1, 0, drawtime);
   }
 
@@ -249,11 +249,11 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
   var_321115db75019eda = 300000;
   var_c92fd93ef32888fd = 0.001;
   bestobj = undefined;
-  var_e964ab4b34f8d36a = -9999;
+  bestobjscore = -9999;
 
   foreach(obj in region.smart_objects) {
     if(distancesquared(obj.origin, self.origin) < var_8b8967d098e7c16e) {
-      if(var_e4bb5ea6b1ad286) {
+      if(bdrawdebug) {
         orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:x1c>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -262,7 +262,7 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
     }
 
     if(!canclaimsmartobject(obj)) {
-      if(var_e4bb5ea6b1ad286) {
+      if(bdrawdebug) {
         orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:x20>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -271,7 +271,7 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
     }
 
     if(!istrue(var_188936ff4f82c5c) && !canusesmartobject(obj)) {
-      if(var_e4bb5ea6b1ad286) {
+      if(bdrawdebug) {
         orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:x24>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -280,10 +280,10 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
     }
 
     var_9515fec383bd148b = obj.origin - startpos;
-    var_79850ce546522757 = vectordot(var_e5382b2564f4252a, var_9515fec383bd148b);
+    distdownline = vectordot(starttoenddir, var_9515fec383bd148b);
 
-    if(var_79850ce546522757 < var_a0c8823e405a381f) {
-      if(var_e4bb5ea6b1ad286) {
+    if(distdownline < var_a0c8823e405a381f) {
+      if(bdrawdebug) {
         orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:x29>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -291,8 +291,8 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
       continue;
     }
 
-    if(var_79850ce546522757 > linelen + var_1d73dedf4c253ef9) {
-      if(var_e4bb5ea6b1ad286) {
+    if(distdownline > linelen + var_1d73dedf4c253ef9) {
+      if(bdrawdebug) {
         orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:x2d>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -300,11 +300,11 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
       continue;
     }
 
-    var_fa8b7a4393c95bb7 = abs(vectordot(var_3773b7fbba8ed834, var_9515fec383bd148b));
+    distfromline = abs(vectordot(starttoendnormal, var_9515fec383bd148b));
     objradiussq = getsmartobjectradiussq(obj);
 
-    if(var_fa8b7a4393c95bb7 * var_fa8b7a4393c95bb7 > objradiussq) {
-      if(var_e4bb5ea6b1ad286) {
+    if(distfromline * distfromline > objradiussq) {
+      if(bdrawdebug) {
         orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:x31>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -314,12 +314,12 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
 
     var_6f4072292388afb1 = var_db6950e933ba5ea4;
 
-    if(linelen - var_fa8b7a4393c95bb7 < 60) {
+    if(linelen - distfromline < 60) {
       var_6f4072292388afb1 *= 0.5;
     }
 
-    if(var_fa8b7a4393c95bb7 > var_6f4072292388afb1) {
-      if(var_e4bb5ea6b1ad286) {
+    if(distfromline > var_6f4072292388afb1) {
+      if(bdrawdebug) {
         orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:x33>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -328,7 +328,7 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
     }
 
     if(isDefined(volume) && !ispointinvolume(obj.origin, volume)) {
-      if(var_e4bb5ea6b1ad286) {
+      if(bdrawdebug) {
         orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.9, 0.4, 0), 0, drawtime);
         print3d(obj.origin + (0, 0, 24), "<dev string:x37>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
@@ -337,27 +337,27 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
     }
 
     objbp = getsmartobjecttype(obj.script_smartobject);
-    var_c76f1c2b08872ea0 = linelen - var_a0c8823e405a381f;
-    var_18c156b57d0acfed = var_79850ce546522757 - var_a0c8823e405a381f;
+    adjustedlinelen = linelen - var_a0c8823e405a381f;
+    var_18c156b57d0acfed = distdownline - var_a0c8823e405a381f;
     var_3544e1d5d0bf7496 = var_7975c128a04cff8c - var_a0c8823e405a381f;
 
     if(var_18c156b57d0acfed < var_3544e1d5d0bf7496) {
       score = var_56aad2fdc4c529d9 + var_42737f8f4a46a4b4 * (1 - (var_3544e1d5d0bf7496 - var_18c156b57d0acfed) / var_3544e1d5d0bf7496);
     } else {
-      var_c76f1c2b08872ea0 = linelen - var_7975c128a04cff8c + var_1d73dedf4c253ef9;
-      var_18c156b57d0acfed = var_79850ce546522757 - var_7975c128a04cff8c;
-      score = var_56aad2fdc4c529d9 + var_42737f8f4a46a4b4 * (var_c76f1c2b08872ea0 - var_18c156b57d0acfed) / var_c76f1c2b08872ea0;
+      adjustedlinelen = linelen - var_7975c128a04cff8c + var_1d73dedf4c253ef9;
+      var_18c156b57d0acfed = distdownline - var_7975c128a04cff8c;
+      score = var_56aad2fdc4c529d9 + var_42737f8f4a46a4b4 * (adjustedlinelen - var_18c156b57d0acfed) / adjustedlinelen;
     }
 
-    if(var_fa8b7a4393c95bb7 > var_79fa165ae4fcd077) {
-      var_803ebb87020cad2e = var_fa8b7a4393c95bb7 - var_79fa165ae4fcd077;
-      score *= var_ff6725f929e35fcd + (1 - var_803ebb87020cad2e / (var_6f4072292388afb1 - var_79fa165ae4fcd077)) * (1 - var_ff6725f929e35fcd);
+    if(distfromline > var_79fa165ae4fcd077) {
+      distfrompreferred = distfromline - var_79fa165ae4fcd077;
+      score *= var_ff6725f929e35fcd + (1 - distfrompreferred / (var_6f4072292388afb1 - var_79fa165ae4fcd077)) * (1 - var_ff6725f929e35fcd);
     }
 
     if(isplayernearsmartobject(obj)) {
       score *= var_259bd6e47136a920;
 
-      if(var_e4bb5ea6b1ad286) {
+      if(bdrawdebug) {
         print3d(obj.origin + (0, 0, 20), "<dev string:x3c>", (0.5, 0.5, 0.5), 1, 0.2, drawtime);
       }
     }
@@ -376,12 +376,12 @@ function getbestsmartobjectalongline(startpos, endpos, region, volume, var_a0c88
       }
     }
 
-    if(score > var_e964ab4b34f8d36a) {
-      var_e964ab4b34f8d36a = score;
+    if(score > bestobjscore) {
+      bestobjscore = score;
       bestobj = obj;
     }
 
-    if(var_e4bb5ea6b1ad286) {
+    if(bdrawdebug) {
       orientedbox(obj.origin + (0, 0, 32), (12, 12, 12), obj.angles, (0.8, 0.8, 0), 0, drawtime);
       print3d(obj.origin + (0, 0, 24), "<dev string:x3e>" + score, (0.5, 0.5, 0.5), 1, 0.2, drawtime);
     }
@@ -444,16 +444,16 @@ function setcustomsmartobjectarrivaldata(obj) {
   }
 
   self.customarrivalangles = obj.angles;
-  self.var_a57082fdf62bc898 = info.animstatename;
+  self.customarrivalstate = info.animstatename;
   self.var_171120e99df3e286 = 1;
-  self.var_8c4d2d1d8377f643 = "arrival";
+  self.customarrivaloptionalprefix = "arrival";
 }
 
 function setsmartobject(smartobj) {
-  var_47b56f47cd0464ca = scripts\asm\asm_bb::bb_getrequestedsmartobject();
+  prevsmartobj = scripts\asm\asm_bb::bb_getrequestedsmartobject();
 
-  if(isDefined(var_47b56f47cd0464ca)) {
-    clearsmartobject(var_47b56f47cd0464ca);
+  if(isDefined(prevsmartobj)) {
+    clearsmartobject(prevsmartobj);
   }
 
   claimsmartobject(smartobj);

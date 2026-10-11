@@ -755,7 +755,7 @@ function getavailableperks() {
 
     bundle = level.perkbundles[perkref];
 
-    if(!istrue(bundle.var_594af43597023062)) {
+    if(!istrue(bundle.showninmenu)) {
       continue;
     }
 

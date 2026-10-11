@@ -20,7 +20,7 @@ function main() {
   scripts\common\lighting::light_init();
   thread function_95238bbeaa618750();
   thread auto_dof();
-  thread function_f29d0cd9dae6bab4();
+  thread setup_flickerlight_presets();
   thread anim_sp::letterbox_enable(0, 0);
   thread function_fe37660adcbfb21d();
   thread wind_manage();
@@ -33,22 +33,22 @@ function main() {
 function function_bf161307a213ad69() {}
 
 function function_95238bbeaa618750() {
-  thread function_238c2a0aae70e973("lgt_ending_flashing_up", 0, 0);
-  thread function_238c2a0aae70e973("lgt_ending_flashing_down", 0, 0);
-  thread function_238c2a0aae70e973("lgt_ending_flashing_side", 0, 0);
+  thread lerp_spot_intensity("lgt_ending_flashing_up", 0, 0);
+  thread lerp_spot_intensity("lgt_ending_flashing_down", 0, 0);
+  thread lerp_spot_intensity("lgt_ending_flashing_side", 0, 0);
 }
 
 function auto_dof() {
   level.player thread utility::dof_enable_autofocus(8, undefined, 5, 2);
 }
 
-function function_f29d0cd9dae6bab4() {
-  function_dbec921ed499ee34("firelight_motion_medium", (0.7, 0.2246, 0), (0.7, 0.25, 0), 30, 0.05, 0.2, 20);
+function setup_flickerlight_presets() {
+  create_flickerlight_preset("firelight_motion_medium", (0.7, 0.2246, 0), (0.7, 0.25, 0), 30, 0.05, 0.2, 20);
   function_bf134e4c6c36436("flashing_up", 0.05, 0.5, 0.05, 1, 3, 7, 0.1, 1.5);
 }
 
 function function_f8c846b71840b96d() {
-  thread function_238c2a0aae70e973("wall_top_fill", 0, 0);
+  thread lerp_spot_intensity("wall_top_fill", 0, 0);
   set_vision_naked("sp_jup_vip_ext", 0.8);
   setsuncolorandintensity(0);
   setsundirection(anglesToForward((-16, 41.27, 0)));
@@ -96,13 +96,13 @@ function function_26280fbed5700639() {
 }
 
 function function_bfddb1a3d19ec26c() {
-  thread function_238c2a0aae70e973("lgt_intro_kid_key", 0, 4);
+  thread lerp_spot_intensity("lgt_intro_kid_key", 0, 4);
   wait 12;
-  thread function_238c2a0aae70e973("lgt_intro_kid_key", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_kid_key", 0, 0);
 }
 
 function function_fe37660adcbfb21d() {
-  thread function_238c2a0aae70e973("cabin_tv_lights", 0, 0);
+  thread lerp_spot_intensity("cabin_tv_lights", 0, 0);
   flag_wait("lgt_intro_start");
   thread anim_sp::letterbox_enable(1, 0);
   animnode = getStruct("scene_hij_010_intro", "targetname");
@@ -118,9 +118,9 @@ function function_fe37660adcbfb21d() {
   level.player thread utility::dof_disable_autofocus();
   level.player disablephysicaldepthoffieldscripting();
   thread function_bfddb1a3d19ec26c();
-  thread function_238c2a0aae70e973("lgt_intro_phone_screen", 0, 0.3);
-  thread function_238c2a0aae70e973("lgt_intro_rim_1", 0, 0);
-  thread function_238c2a0aae70e973("lgt_intro_rim_1_intro", 0, 1);
+  thread lerp_spot_intensity("lgt_intro_phone_screen", 0, 0.3);
+  thread lerp_spot_intensity("lgt_intro_rim_1", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_rim_1_intro", 0, 1);
   wait 0.1;
   setsaveddvar(@ "hash_6e3f8cef6be16b33", 0);
   setsaveddvar(@ "hash_eca4b727b01fd254", 1);
@@ -128,30 +128,30 @@ function function_fe37660adcbfb21d() {
   setsaveddvar(@ "hash_6e3f8cef6be16b33", 1);
   setsaveddvar(@ "hash_eca4b727b01fd254", 8);
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 40);
-  thread function_238c2a0aae70e973("cabin_lights_intro_off", 2, 0);
-  thread function_238c2a0aae70e973("lgt_intro_phone_screen", 1, 0);
-  thread function_238c2a0aae70e973("lgt_intro_rim_1", 1, 3);
-  thread function_238c2a0aae70e973("lgt_intro_rim_1_intro", 1, 0);
-  thread function_238c2a0aae70e973("lgt_intro_phone_screen_2", 1, 0.15);
-  thread function_238c2a0aae70e973("lgt_intro_key_1", 3, 0.8);
+  thread lerp_spot_intensity("cabin_lights_intro_off", 2, 0);
+  thread lerp_spot_intensity("lgt_intro_phone_screen", 1, 0);
+  thread lerp_spot_intensity("lgt_intro_rim_1", 1, 3);
+  thread lerp_spot_intensity("lgt_intro_rim_1_intro", 1, 0);
+  thread lerp_spot_intensity("lgt_intro_phone_screen_2", 1, 0.15);
+  thread lerp_spot_intensity("lgt_intro_key_1", 3, 0.8);
   wait 2;
-  thread function_238c2a0aae70e973("cabin_lights_intro_on", 2, 31);
+  thread lerp_spot_intensity("cabin_lights_intro_on", 2, 31);
   level waittill("lgt_look_left");
   level waittill("lgt_look_right");
   level waittill("lgt_look_left");
   level waittill("lgt_phone_and_neighbour");
-  thread function_238c2a0aae70e973("lgt_intro_phone_screen_2", 1, 0.2);
+  thread lerp_spot_intensity("lgt_intro_phone_screen_2", 1, 0.2);
   level waittill("lgt_look_face");
-  thread function_238c2a0aae70e973("lgt_intro_phone_screen_2", 1, 0.1);
+  thread lerp_spot_intensity("lgt_intro_phone_screen_2", 1, 0.1);
   flag_wait("lgt_intro_stand");
-  thread function_238c2a0aae70e973("lgt_intro_rim_1", 1, 0);
-  thread function_238c2a0aae70e973("lgt_intro_rim_2", 1, 0);
-  thread function_238c2a0aae70e973("lgt_intro_phone_screen", 0, 0);
-  thread function_238c2a0aae70e973("lgt_intro_fill_2", 2, 2);
-  thread function_238c2a0aae70e973("lgt_intro_phone_screen_2", 1, 0);
-  thread function_238c2a0aae70e973("lgt_intro_fill_stand", 2.5, 1.5);
-  thread function_238c2a0aae70e973("cabin_lights_intro_on", 1, 0);
-  thread function_238c2a0aae70e973("cabin_lights_intro_off", 1, 15.92);
+  thread lerp_spot_intensity("lgt_intro_rim_1", 1, 0);
+  thread lerp_spot_intensity("lgt_intro_rim_2", 1, 0);
+  thread lerp_spot_intensity("lgt_intro_phone_screen", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_fill_2", 2, 2);
+  thread lerp_spot_intensity("lgt_intro_phone_screen_2", 1, 0);
+  thread lerp_spot_intensity("lgt_intro_fill_stand", 2.5, 1.5);
+  thread lerp_spot_intensity("cabin_lights_intro_on", 1, 0);
+  thread lerp_spot_intensity("cabin_lights_intro_off", 1, 15.92);
   level waittill("lgt_intro_stand_end");
   flag_wait("lgt_intro_end");
 
@@ -161,19 +161,19 @@ function function_fe37660adcbfb21d() {
   }
 
   setsaveddvar(@ "hash_63eb1893f96ac98d", 8);
-  thread function_238c2a0aae70e973("lgt_intro_rim_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_intro_fill_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_intro_fill_stand", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_rim_2", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_fill_2", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_fill_stand", 0, 0);
   setsaveddvar(@ "hash_ea4c44a08cd23d5d", 1);
   level.player disablephysicaldepthoffieldscripting();
   level.player thread utility::dof_enable_autofocus(8, undefined, 5, 2);
   thread function_26280fbed5700639();
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 1500);
-  thread function_238c2a0aae70e973("lgt_intro_rim_1", 0, 0);
-  thread function_238c2a0aae70e973("lgt_intro_screen_1", 0, 0);
-  thread function_238c2a0aae70e973("lgt_intro_key_1", 0, 0);
-  thread function_238c2a0aae70e973("lgt_intro_rim_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_intro_fill_2", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_rim_1", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_screen_1", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_key_1", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_rim_2", 0, 0);
+  thread lerp_spot_intensity("lgt_intro_fill_2", 0, 0);
 }
 
 function function_a44b977b4b9b4f37(animnode, neighbor, stewardess, samara_3p, player, child) {
@@ -284,17 +284,17 @@ function function_d20e92819af22401(animnode) {
   thread function_43b720da40f9db5d();
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 50);
   set_vision_naked("sp_jup_hijack_ending", 0.5);
-  thread function_238c2a0aae70e973("lgt_ending_flashing_down_center", 0, 100);
-  thread function_238c2a0aae70e973("lgt_ending_flashing_down", 0, 100);
-  thread function_238c2a0aae70e973("lgt_para_side_cabin", 0, 20);
-  thread function_238c2a0aae70e973("cine_enter_economy_orange", 0, 4);
-  thread function_238c2a0aae70e973("cine_enter_economy_orange_2", 0, 2);
-  thread function_238c2a0aae70e973("lgt_para_key_2", 0, 10);
-  thread function_238c2a0aae70e973("lgt_para_key_1", 0, 20);
-  thread function_238c2a0aae70e973("lgt_para_key_new", 0, 15);
-  thread function_238c2a0aae70e973("lgt_para_top_omni", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_fixture_down", 0, 0);
-  thread function_238c2a0aae70e973("cabin_tv_lights", 0, 0);
+  thread lerp_spot_intensity("lgt_ending_flashing_down_center", 0, 100);
+  thread lerp_spot_intensity("lgt_ending_flashing_down", 0, 100);
+  thread lerp_spot_intensity("lgt_para_side_cabin", 0, 20);
+  thread lerp_spot_intensity("cine_enter_economy_orange", 0, 4);
+  thread lerp_spot_intensity("cine_enter_economy_orange_2", 0, 2);
+  thread lerp_spot_intensity("lgt_para_key_2", 0, 10);
+  thread lerp_spot_intensity("lgt_para_key_1", 0, 20);
+  thread lerp_spot_intensity("lgt_para_key_new", 0, 15);
+  thread lerp_spot_intensity("lgt_para_top_omni", 0, 0);
+  thread lerp_spot_intensity("lgt_para_fixture_down", 0, 0);
+  thread lerp_spot_intensity("cabin_tv_lights", 0, 0);
   setsaveddvar(@ "hash_63eb1893f96ac98d", 8);
   wait 0.05;
   actor_1 = animnode scene::get_entity("Actor 1");
@@ -342,33 +342,33 @@ function function_c40e793c5a31c2f7(animnode) {
   main_hijacker = animnode scene::get_entity("main_hijacker");
   second_hijacker = animnode scene::get_entity("second_hijacker");
   thread function_f49c958270137c85(player_1, makarov, steward, main_hijacker, second_hijacker);
-  thread function_238c2a0aae70e973("lgt_para_key_new", 0, 15);
-  thread function_238c2a0aae70e973("lgt_para_fill_new", 0, 0.5);
-  thread function_238c2a0aae70e973("lgt_para_back_red", 0, 3);
-  thread function_238c2a0aae70e973("lgt_para_back_red_fill", 0, 0.5);
-  thread function_238c2a0aae70e973("lgt_para_back_red_kick", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_key_1", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_fill_hijacker", 0, 0);
-  thread function_238c2a0aae70e973("lgt_vest_door_open_off_lgt_01", 0, 0);
-  thread function_238c2a0aae70e973("lgt_vest_door_open_off_lgt", 0, 0);
-  thread function_238c2a0aae70e973("cine_para_top_cabin", 0, 0);
+  thread lerp_spot_intensity("lgt_para_key_new", 0, 15);
+  thread lerp_spot_intensity("lgt_para_fill_new", 0, 0.5);
+  thread lerp_spot_intensity("lgt_para_back_red", 0, 3);
+  thread lerp_spot_intensity("lgt_para_back_red_fill", 0, 0.5);
+  thread lerp_spot_intensity("lgt_para_back_red_kick", 0, 0);
+  thread lerp_spot_intensity("lgt_para_key_1", 0, 0);
+  thread lerp_spot_intensity("lgt_para_fill_hijacker", 0, 0);
+  thread lerp_spot_intensity("lgt_vest_door_open_off_lgt_01", 0, 0);
+  thread lerp_spot_intensity("lgt_vest_door_open_off_lgt", 0, 0);
+  thread lerp_spot_intensity("cine_para_top_cabin", 0, 0);
   wait 0.05;
-  thread function_238c2a0aae70e973("lgt_para_side_cabin", 0, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_orange", 0, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_orange_2", 0, 0);
+  thread lerp_spot_intensity("lgt_para_side_cabin", 0, 0);
+  thread lerp_spot_intensity("cine_enter_economy_orange", 0, 0);
+  thread lerp_spot_intensity("cine_enter_economy_orange_2", 0, 0);
   flag_wait("lgt_mak_para_stop");
-  thread function_238c2a0aae70e973("lgt_para_fill_left", 1, 3);
-  thread function_238c2a0aae70e973("lgt_ending_flashing_down_center", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_key_1", 0, 0);
+  thread lerp_spot_intensity("lgt_para_fill_left", 1, 3);
+  thread lerp_spot_intensity("lgt_ending_flashing_down_center", 0, 0);
+  thread lerp_spot_intensity("lgt_para_key_1", 0, 0);
   setsaveddvar(@ "hash_5d66c2ef5a9612e0", 1);
   flag_wait("lgt_mak_para_2nd_guy");
-  thread function_238c2a0aae70e973("lgt_para_fill_left", 1, 0);
-  thread function_238c2a0aae70e973("lgt_para_key_new", 2, 15);
+  thread lerp_spot_intensity("lgt_para_fill_left", 1, 0);
+  thread lerp_spot_intensity("lgt_para_key_new", 2, 15);
   level waittill("lgt_mak_look_down");
-  thread function_238c2a0aae70e973("lgt_para_key_2", 3, 3);
+  thread lerp_spot_intensity("lgt_para_key_2", 3, 3);
   level waittill("lgt_mak_look_up");
   flag_wait("lgt_mak_look_back");
-  thread function_238c2a0aae70e973("lgt_para_key_new", 2, 10);
+  thread lerp_spot_intensity("lgt_para_key_new", 2, 10);
   flag_wait("lgt_mak_para_pre_door_open");
   flag_wait("lgt_mak_para_door_open");
   steward setscriptablepartstate("wind", "80", 0);
@@ -376,25 +376,25 @@ function function_c40e793c5a31c2f7(animnode) {
   second_hijacker setscriptablepartstate("wind", "100", 0);
   makarov setscriptablepartstate("wind", "100", 0);
   wait 1;
-  thread function_238c2a0aae70e973("lgt_vest_door_open", 0, 50);
-  thread function_238c2a0aae70e973("lgt_vest_door_open_fill", 0, 7);
-  thread function_238c2a0aae70e973("lgt_vest_door_open_bounce", 0, 10);
-  thread function_238c2a0aae70e973("lgt_vest_door_open_off_lgt", 0, 0);
+  thread lerp_spot_intensity("lgt_vest_door_open", 0, 50);
+  thread lerp_spot_intensity("lgt_vest_door_open_fill", 0, 7);
+  thread lerp_spot_intensity("lgt_vest_door_open_bounce", 0, 10);
+  thread lerp_spot_intensity("lgt_vest_door_open_off_lgt", 0, 0);
   thread function_933efe1877b5e28e();
   flag_wait("lgt_para_turn");
-  thread function_238c2a0aae70e973("lgt_para_fill_new", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_fixture_down", 0, 0);
+  thread lerp_spot_intensity("lgt_para_fill_new", 0, 0);
+  thread lerp_spot_intensity("lgt_para_fixture_down", 0, 0);
   level waittill("lgt_mak_para_end");
-  thread function_238c2a0aae70e973("lgt_vest_door_open", 0, 0);
-  thread function_238c2a0aae70e973("cine_para_top_cabin", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_side_cabin", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_key_1", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_key_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_fill_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_rim_2", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_back_red", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_back_red_fill", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_back_red_kick", 0, 0);
+  thread lerp_spot_intensity("lgt_vest_door_open", 0, 0);
+  thread lerp_spot_intensity("cine_para_top_cabin", 0, 0);
+  thread lerp_spot_intensity("lgt_para_side_cabin", 0, 0);
+  thread lerp_spot_intensity("lgt_para_key_1", 0, 0);
+  thread lerp_spot_intensity("lgt_para_key_2", 0, 0);
+  thread lerp_spot_intensity("lgt_para_fill_2", 0, 0);
+  thread lerp_spot_intensity("lgt_para_rim_2", 0, 0);
+  thread lerp_spot_intensity("lgt_para_back_red", 0, 0);
+  thread lerp_spot_intensity("lgt_para_back_red_fill", 0, 0);
+  thread lerp_spot_intensity("lgt_para_back_red_kick", 0, 0);
 }
 
 function function_f49c958270137c85(player_1, makarov, var_5011329942afef99, main_hijacker, neighbor) {
@@ -462,16 +462,16 @@ function function_933efe1877b5e28e() {
     flag_set("door_open");
     thread function_5fb8b1c04076392d();
     wait 1;
-    thread function_238c2a0aae70e973("cabin_tv_lights", 0, 0);
-    thread function_238c2a0aae70e973("lgt_para_key_new", 1, 0);
-    thread function_238c2a0aae70e973("lgt_para_fill_new", 1, 0);
+    thread lerp_spot_intensity("cabin_tv_lights", 0, 0);
+    thread lerp_spot_intensity("lgt_para_key_new", 1, 0);
+    thread lerp_spot_intensity("lgt_para_fill_new", 1, 0);
     wait 0.05;
-    var_2156533b75d9fc3e = getEnt("lgt_para_fixture_down", "script_noteworthy");
-    thread function_238c2a0aae70e973("lgt_para_key_1", 0, 0);
-    var_2156573b75da050a = getEnt("lgt_para_key_2", "targetname");
-    var_2156553b75da00a4 = getEnt("lgt_para_fill_2", "targetname");
-    var_21564c3b75d9ecd9 = getEnt("lgt_para_rim_2", "targetname");
-    var_747e06c0b98abc58 = [var_2156533b75d9fc3e, var_2156573b75da050a, var_2156553b75da00a4, var_21564c3b75d9ecd9];
+    light1 = getEnt("lgt_para_fixture_down", "script_noteworthy");
+    thread lerp_spot_intensity("lgt_para_key_1", 0, 0);
+    light5 = getEnt("lgt_para_key_2", "targetname");
+    light7 = getEnt("lgt_para_fill_2", "targetname");
+    light8 = getEnt("lgt_para_rim_2", "targetname");
+    var_747e06c0b98abc58 = [light1, light5, light7, light8];
 
     if(isDefined(var_747e06c0b98abc58)) {
       foreach(light in var_747e06c0b98abc58) {
@@ -483,11 +483,11 @@ function function_933efe1877b5e28e() {
     }
 
     wait 1.5;
-    thread function_238c2a0aae70e973("lgt_para_key_3", 1, 5);
+    thread lerp_spot_intensity("lgt_para_key_3", 1, 5);
     flag_wait("lgt_para_turn");
-    thread function_238c2a0aae70e973("cabin_lights", 0, 0);
+    thread lerp_spot_intensity("cabin_lights", 0, 0);
     set_vision_naked("sp_jup_hijack_ending", 0.5);
-    thread function_238c2a0aae70e973("lgt_ending_flashing_down", 0, 15);
+    thread lerp_spot_intensity("lgt_ending_flashing_down", 0, 15);
     wait 0.05;
     lights = getEntArray("lgt_ending_flashing_down", "targetname");
 
@@ -541,21 +541,21 @@ function function_ea9880e4a1f28d26(animnode) {
   thread function_933efe1877b5e28e();
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 100);
   setsaveddvar(@ "hash_ea4c44a08cd23d5d", 1.5);
-  thread function_238c2a0aae70e973("seatbeltLight_01", 0, 1);
-  thread function_238c2a0aae70e973("lgt_para_key_new", 0, 5);
-  thread function_238c2a0aae70e973("lgt_para_key_3", 0, 1.5);
-  thread function_238c2a0aae70e973("lgt_economy_down_green", 0, 5);
-  thread function_238c2a0aae70e973("cine_enter_economy_orange", 0, 4);
+  thread lerp_spot_intensity("seatbeltLight_01", 0, 1);
+  thread lerp_spot_intensity("lgt_para_key_new", 0, 5);
+  thread lerp_spot_intensity("lgt_para_key_3", 0, 1.5);
+  thread lerp_spot_intensity("lgt_economy_down_green", 0, 5);
+  thread lerp_spot_intensity("cine_enter_economy_orange", 0, 4);
   flag_wait("lgt_wind_off");
   flag_wait("lgt_enter_economy_stop");
-  thread function_238c2a0aae70e973("lgt_economy_down_green", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_key_new", 0, 0);
-  thread function_238c2a0aae70e973("lgt_para_key_3", 0, 0);
-  thread function_238c2a0aae70e973("lgt_ending_flashing_down", 2, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_key", 1, 2);
-  thread function_238c2a0aae70e973("cine_enter_economy_fill", 1, 1);
+  thread lerp_spot_intensity("lgt_economy_down_green", 0, 0);
+  thread lerp_spot_intensity("lgt_para_key_new", 0, 0);
+  thread lerp_spot_intensity("lgt_para_key_3", 0, 0);
+  thread lerp_spot_intensity("lgt_ending_flashing_down", 2, 0);
+  thread lerp_spot_intensity("cine_enter_economy_key", 1, 2);
+  thread lerp_spot_intensity("cine_enter_economy_fill", 1, 1);
   flag_wait("lgt_enter_economy_curtain_open");
-  thread function_238c2a0aae70e973("cine_enter_economy_rim", 0.5, 10);
+  thread lerp_spot_intensity("cine_enter_economy_rim", 0.5, 10);
   flag_wait("lgt_enter_economy_curtain_push");
   setsaveddvar(@ "hash_e08232af8b8b695c", 7);
   setsaveddvar(@ "hash_63eb1893f96ac98d", 15);
@@ -566,21 +566,21 @@ function function_ea9880e4a1f28d26(animnode) {
     setsaveddvar(@ "hash_63eb1893f96ac98d", 6);
   }
 
-  if(function_8f7452209f2fa982() || function_33d2520f3f4c794()) {
+  if(isplatformps5() || isplatformxb4()) {
     setsaveddvar(@ "hash_63eb1893f96ac98d", 8);
   }
 
   setsaveddvar(@ "hash_8667c0bb90c5bfc3", 200);
   setsaveddvar(@ "hash_ea4c44a08cd23d5d", 3);
-  thread function_238c2a0aae70e973("cine_enter_economy_orange_2", 0, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_rim", 0.1, 0);
+  thread lerp_spot_intensity("cine_enter_economy_orange_2", 0, 0);
+  thread lerp_spot_intensity("cine_enter_economy_rim", 0.1, 0);
   wait 1;
-  thread function_238c2a0aae70e973("cine_para_top_cabin", 0, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_key", 0, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_rim", 0, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_orange", 0, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_fill", 0, 0);
-  thread function_238c2a0aae70e973("cine_enter_economy_orange_2", 0, 2);
+  thread lerp_spot_intensity("cine_para_top_cabin", 0, 0);
+  thread lerp_spot_intensity("cine_enter_economy_key", 0, 0);
+  thread lerp_spot_intensity("cine_enter_economy_rim", 0, 0);
+  thread lerp_spot_intensity("cine_enter_economy_orange", 0, 0);
+  thread lerp_spot_intensity("cine_enter_economy_fill", 0, 0);
+  thread lerp_spot_intensity("cine_enter_economy_orange_2", 0, 2);
   wait 2.5;
   setsaveddvar(@ "hash_ea4c44a08cd23d5d", 1);
   flag_wait_either("flag_weapon_fire_attempted", "flag_take_player_down");
@@ -611,7 +611,7 @@ function function_a3f6e3e178503e71(takedown_civ_phone, takedown_civ_r, countdown
 
 function function_fb683c4b79940399(player_1) {
   key2 = getEnt("lgt_tackled_key", "targetname");
-  thread function_238c2a0aae70e973("lgt_tackled_key", 0.25, 10);
+  thread lerp_spot_intensity("lgt_tackled_key", 0.25, 10);
   key = getEnt("lgt_tackled_ground_key", "targetname");
   fill = getEnt("lgt_tackled_ground_fill", "targetname");
   top = getEnt("lgt_tackled_top", "targetname");
@@ -633,15 +633,15 @@ function function_fb683c4b79940399(player_1) {
   key2 moveTo((player_1.origin[0], key2.origin[1], key2.origin[2]), 0.01);
   wait 0.05;
   wait 1;
-  thread function_238c2a0aae70e973("lgt_tackled_rim", 0.25, 5);
+  thread lerp_spot_intensity("lgt_tackled_rim", 0.25, 5);
   wait 0.5;
-  thread function_238c2a0aae70e973("lgt_tackled_ground_key", 0.5, 10);
-  thread function_238c2a0aae70e973("lgt_mak_exit_rims", 0.5, 0);
+  thread lerp_spot_intensity("lgt_tackled_ground_key", 0.5, 10);
+  thread lerp_spot_intensity("lgt_mak_exit_rims", 0.5, 0);
 
-  if(function_33d2520f3f4c794() || function_8f7452209f2fa982() || isplatformpc()) {
-    thread function_238c2a0aae70e973("lgt_tackled_rim", 0.25, 5);
-    thread function_238c2a0aae70e973("lgt_tackled_ground_fill", 0.5, 4);
-    thread function_238c2a0aae70e973("lgt_tackled_top", 0.5, 20);
+  if(isplatformxb4() || isplatformps5() || isplatformpc()) {
+    thread lerp_spot_intensity("lgt_tackled_rim", 0.25, 5);
+    thread lerp_spot_intensity("lgt_tackled_ground_fill", 0.5, 4);
+    thread lerp_spot_intensity("lgt_tackled_top", 0.5, 20);
   }
 
   wait 0.5;
@@ -651,10 +651,10 @@ function function_fb683c4b79940399(player_1) {
   fill movex(fill_new, 0.01);
   rim movex(rim_new, 0.01);
   wait 4;
-  thread function_238c2a0aae70e973("lgt_tackled_top_end", 0.25, 40);
+  thread lerp_spot_intensity("lgt_tackled_top_end", 0.25, 40);
   wait 0.5;
-  thread function_238c2a0aae70e973("lgt_tackled_key", 0.25, 0);
-  thread function_238c2a0aae70e973("lgt_tackled_rim", 0.25, 0);
+  thread lerp_spot_intensity("lgt_tackled_key", 0.25, 0);
+  thread lerp_spot_intensity("lgt_tackled_rim", 0.25, 0);
 }
 
 function function_fafc5205edb57e0(actor_1, civ_blocker_01, player_1, takedown_civ_phone) {
@@ -726,12 +726,12 @@ function wind_manage() {
 
 function function_a263e5861c5f3d28() {
   flag_wait("flag_mexican_standoff_begin");
-  thread function_238c2a0aae70e973("intro_curtain_lights", 3, 160);
+  thread lerp_spot_intensity("intro_curtain_lights", 3, 160);
 }
 
 function player_bomb_blinking(var_f2d1551733441221) {
   lgt_para_key_new = getEnt("lgt_player_bomb_blinking", "targetname");
-  childthread function_b01bc37bb97ec069("lgt_player_bomb_blinking", 1000, 2, 2, undefined, undefined, 0.25, 0.256, 2, 2.1, "lgt_player_bomb_blinking_off", undefined, 0, "jup_hijack_scn_makarov_reveal_bomb_beep");
+  childthread model_flicker_preset("lgt_player_bomb_blinking", 1000, 2, 2, undefined, undefined, 0.25, 0.256, 2, 2.1, "lgt_player_bomb_blinking_off", undefined, 0, "jup_hijack_scn_makarov_reveal_bomb_beep");
   player = level.player;
 
   if(isDefined(var_f2d1551733441221)) {

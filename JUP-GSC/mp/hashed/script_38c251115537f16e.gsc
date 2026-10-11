@@ -12,7 +12,7 @@
 #namespace zombie_melee;
 
 function function_8e401d26d58bc32d() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &function_2423853525ee87d7);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &function_2423853525ee87d7);
 }
 
 function function_265e0e58c950559() {
@@ -110,13 +110,13 @@ function private function_e87d981fe3e432d6() {
 
     if(isDefined(self._blackboard.meleerequestedtarget)) {
       var_eb9973984c6db0df = self._blackboard.meleerequestedtarget;
-    } else if(isDefined(self._blackboard.var_40609a14c75fbe3)) {
-      var_eb9973984c6db0df = self._blackboard.var_40609a14c75fbe3;
+    } else if(isDefined(self._blackboard.zombieattackpoint)) {
+      var_eb9973984c6db0df = self._blackboard.zombieattackpoint;
     } else {
       var_eb9973984c6db0df = self.enemy;
     }
 
-    request_melee(var_eb9973984c6db0df, self._blackboard.var_39f71a91ec96eac7);
+    request_melee(var_eb9973984c6db0df, self._blackboard.zombiemeleeismoving);
     thread function_b10cf3d9f8a0a94();
     self waittill("bmeleeended");
 

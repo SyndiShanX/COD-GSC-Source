@@ -10,7 +10,7 @@
 #namespace namespace_b7f38141c807bd27;
 
 function autoexec main() {
-  level.var_7bf42d565645a485 = 1;
+  level.shouldinitvehicles = 1;
   function_c0b3ddc9a6bdcc46("veh_jup_cougar_mg", &function_dd3b85e9ac503b84);
 }
 

@@ -80,15 +80,15 @@ function function_94a0587003a48cd9() {
 
 function markupascenderstruct(var_1f42160568508edc) {
   var_e8a7229daabe655a = [];
-  var_3e3b7f7727a65dad = var_1f42160568508edc;
+  nextstruct = var_1f42160568508edc;
 
   while(true) {
-    var_e8a7229daabe655a[var_e8a7229daabe655a.size] = var_3e3b7f7727a65dad;
-    var_3e3b7f7727a65dad.root = var_1f42160568508edc;
-    level.ascendstructs[var_3e3b7f7727a65dad.targetname] = var_3e3b7f7727a65dad;
+    var_e8a7229daabe655a[var_e8a7229daabe655a.size] = nextstruct;
+    nextstruct.root = var_1f42160568508edc;
+    level.ascendstructs[nextstruct.targetname] = nextstruct;
 
-    if(isDefined(var_3e3b7f7727a65dad.target)) {
-      var_3e3b7f7727a65dad = getStruct(var_3e3b7f7727a65dad.target, "targetname");
+    if(isDefined(nextstruct.target)) {
+      nextstruct = getStruct(nextstruct.target, "targetname");
       continue;
     }
 
@@ -99,7 +99,7 @@ function markupascenderstruct(var_1f42160568508edc) {
   var_1f42160568508edc.inuse = 0;
 }
 
-function ascenderscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function ascenderscriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "ascender");
 
   if(state == "on") {
@@ -300,7 +300,7 @@ function function_20ebcec362cdc1b5(var_79f79ba96697e040) {
   self endon("ascenderExit");
   acc = 0;
   speed = 0;
-  var_9d94899831baf362 = ascender.origin;
+  oldspot = ascender.origin;
   var_e8b094e1e93c4c3a = 5;
   var_7ab4c7c01d0bcc = gettime() - 250;
   var_d9ff216bc260fa15 = 0;
@@ -386,20 +386,20 @@ function function_20ebcec362cdc1b5(var_79f79ba96697e040) {
 
     speed += acc;
     speed = clamp(speed, var_edd29be725f83206 * -1, var_edd29be725f83206);
-    var_a87a6325de3dc80c = ascender.origin + (0, 0, speed);
+    targetspot = ascender.origin + (0, 0, speed);
 
-    if(var_a87a6325de3dc80c[2] > top.origin[2]) {
-      var_a87a6325de3dc80c = top.origin;
+    if(targetspot[2] > top.origin[2]) {
+      targetspot = top.origin;
       speed = 0;
     }
 
-    if(var_a87a6325de3dc80c[2] < bottom.origin[2]) {
-      var_a87a6325de3dc80c = bottom.origin;
+    if(targetspot[2] < bottom.origin[2]) {
+      targetspot = bottom.origin;
       speed = 0;
     }
 
-    if(var_9d94899831baf362 != var_a87a6325de3dc80c) {
-      ascender moveTo(var_a87a6325de3dc80c, 0.05, 0, 0);
+    if(oldspot != targetspot) {
+      ascender moveTo(targetspot, 0.05, 0, 0);
     }
 
     function_c845e707c39fa912(ascender, speed, targetspeed);
@@ -427,7 +427,7 @@ function function_20ebcec362cdc1b5(var_79f79ba96697e040) {
     }
 
     wait 0.05;
-    var_9d94899831baf362 = var_a87a6325de3dc80c;
+    oldspot = targetspot;
   }
 }
 
@@ -454,19 +454,19 @@ function function_3efc2c915a490855(var_79f79ba96697e040) {
 
   while(true) {
     close = undefined;
-    var_ad71ced54a608c69 = getclosest(var_79f79ba96697e040.ascender.origin, var_79f79ba96697e040.var_e8a7229daabe655a, 400);
+    nearestpoint = getclosest(var_79f79ba96697e040.ascender.origin, var_79f79ba96697e040.var_e8a7229daabe655a, 400);
 
-    if(isDefined(var_ad71ced54a608c69)) {
-      if(!isDefined(var_79f79ba96697e040.exitpoint) || var_79f79ba96697e040.exitpoint != var_ad71ced54a608c69) {
+    if(isDefined(nearestpoint)) {
+      if(!isDefined(var_79f79ba96697e040.exitpoint) || var_79f79ba96697e040.exitpoint != nearestpoint) {
         if(isDefined(var_79f79ba96697e040.exitpoint)) {
           var_79f79ba96697e040.exitpoint scripts\sp\player\cursor_hint::remove_cursor_hint();
         }
 
-        thread function_a1328f4d76431937(var_ad71ced54a608c69);
+        thread function_a1328f4d76431937(nearestpoint);
       }
 
-      var_79f79ba96697e040.exitpoint = var_ad71ced54a608c69;
-    } else if(!isDefined(var_ad71ced54a608c69) && isDefined(var_79f79ba96697e040.exitpoint)) {
+      var_79f79ba96697e040.exitpoint = nearestpoint;
+    } else if(!isDefined(nearestpoint) && isDefined(var_79f79ba96697e040.exitpoint)) {
       self notify("stopAscenderExitTrigger");
       var_79f79ba96697e040.exitpoint scripts\sp\player\cursor_hint::remove_cursor_hint();
       var_79f79ba96697e040.exitpoint = undefined;

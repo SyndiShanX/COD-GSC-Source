@@ -118,7 +118,7 @@ function function_d5612c9774f4ed30(player) {
   player.linktoent rotateTo(goalangles, movetotime, 0.1, 0.1);
   player setstance("stand");
   var_cd9982adb17761a8 = gettime();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = movetotime - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000;
   waittime = max(0, var_218f64cb035d54be);
@@ -170,7 +170,7 @@ function function_783f84b2aaf11d69(player) {
   player function_9b5fc1d0b7049fd3(1);
 }
 
-function private function_2d03c352afd1f1bf(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_2d03c352afd1f1bf(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(player.team)) {
     return;
   }
@@ -197,11 +197,11 @@ function private function_2d03c352afd1f1bf(instance, part, state, player, var_a5
       instance.contents = scripts\mp\gametypes\br_lootcache::function_ec87b214cd429e96(items, undefined);
       var_8bd50c7e994c7434 = int(instance.task.cashreward);
       instance.contents = scripts\mp\gametypes\br_lootcache::function_163d360c111caa16(instance.contents, var_8bd50c7e994c7434, 750);
-      scripts\mp\gametypes\br_lootcache::lootcacheused(instance, part, state, player, var_a5b2c541413aa895, usestring, 1);
+      scripts\mp\gametypes\br_lootcache::lootcacheused(instance, part, state, player, bautouse, usestring, 1);
       return;
     }
 
-    scripts\mp\gametypes\br_lootcache::lootcacheused(instance, part, state, player, var_a5b2c541413aa895, usestring, 1);
+    scripts\mp\gametypes\br_lootcache::lootcacheused(instance, part, state, player, bautouse, usestring, 1);
   }
 }
 

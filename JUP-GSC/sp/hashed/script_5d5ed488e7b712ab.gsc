@@ -89,8 +89,8 @@ function function_74e1219b55f0b644() {
 }
 
 function function_7670ef60f2fb60eb() {
-  var_ee32376b13801f98 = getEnt("concourse_stairs_top_door", "targetname");
-  var_ee32376b13801f98 assign_animtree("door");
+  doorleft = getEnt("concourse_stairs_top_door", "targetname");
+  doorleft assign_animtree("door");
   doorright = scripts\sp\door::get_interactive_door("door_concourse_stair_right");
   flag_init("constairs_player_interacted_on_door");
   thread function_75bb47009db73353();
@@ -104,7 +104,7 @@ function function_7670ef60f2fb60eb() {
   if(flag("constairs_player_animated_entrance")) {
     level.var_b24651c26f3bc640 anim_single_solo(level.price, "concourse_stairs_top_open");
   } else {
-    level.var_b24651c26f3bc640 anim_single([var_ee32376b13801f98, level.price], "concourse_stairs_top_open");
+    level.var_b24651c26f3bc640 anim_single([doorleft, level.price], "concourse_stairs_top_open");
   }
 
   namespace_47819225b08b445d::function_f1864fb398798ed6(1);
@@ -134,7 +134,7 @@ function function_9ce131bd89ed767a() {
 function function_75bb47009db73353() {
   level.price thread price_to_door();
   level.redshirt thread function_fe078253e8419160();
-  var_ee32376b13801f98 = getEnt("concourse_stairs_top_door", "targetname");
+  doorleft = getEnt("concourse_stairs_top_door", "targetname");
   doorright = scripts\sp\door::get_interactive_door("door_concourse_stair_right");
   doorright.no_bash = 1;
   doorright thread function_906345f2536d929e(0);
@@ -163,11 +163,11 @@ function function_75bb47009db73353() {
       level.player delaycall(animlength, &unlink);
       level.player delaycall(animlength, &enableweapons);
       level.player_rig delaycall(animlength, &delete);
-      level.var_b24651c26f3bc640 anim_first_frame_solo(var_ee32376b13801f98, "concourse_stairs_top_plr_open");
+      level.var_b24651c26f3bc640 anim_first_frame_solo(doorleft, "concourse_stairs_top_plr_open");
       level.var_b24651c26f3bc640 anim_first_frame_solo(level.player_rig, anim_str);
       waitframe();
       level.var_b24651c26f3bc640 thread anim_single_solo(level.player_rig, anim_str);
-      level.var_b24651c26f3bc640 thread anim_single_solo(var_ee32376b13801f98, "concourse_stairs_top_plr_open");
+      level.var_b24651c26f3bc640 thread anim_single_solo(doorleft, "concourse_stairs_top_plr_open");
 
       if(level.player getstance() != "stand") {
         level.player setstance("stand", 1, 0, 0);
@@ -312,8 +312,8 @@ function function_b09ce984fb9372d3() {
   level.penthouse.bomb_bag = spawn_anim_model("bomb_bag");
   assert(isDefined(level.penthouse.bomb_bag));
   animnode = getStruct("animnode_panthouse_conflict", "targetname");
-  var_c59a1bf410f24b79 = [level.penthouse.bomb_bag, level.penthouse.back_door_left];
-  animnode anim_first_frame(var_c59a1bf410f24b79, "penthouse_bomb");
+  animators = [level.penthouse.bomb_bag, level.penthouse.back_door_left];
+  animnode anim_first_frame(animators, "penthouse_bomb");
   level.player setOrigin((26149, 5011, -8), 1);
   level.player setplayerangles((0, 284, 0));
 }
@@ -774,7 +774,7 @@ function function_e23fa3095370783f() {
   level.penthouse.enemy05 thread function_902f710ec4728cf5();
   array_thread(level.penthouse.enemies, &function_431e36c3d6a95d81);
   level notify("visibilityTeamName", "neutral", level.penthouse.enemies, 1);
-  thread function_1c3cf12e079b48cc(var_2d7b5ccd309f3a6f);
+  thread player_intro_anims(var_2d7b5ccd309f3a6f);
   level.price thread function_8a4ba00f272a838f(var_2d7b5ccd309f3a6f);
   level.redshirt thread function_2b8e8d55bb12210d(var_2d7b5ccd309f3a6f);
   thread function_9db6e4648ce6b850();
@@ -845,8 +845,8 @@ function function_e23fa3095370783f() {
     animating_combatants = array_add(animating_combatants, level.redshirt);
     waitframe();
     level.player waittill("enter_blend_done");
-    level.penthouse.enemy01 thread namespace_47819225b08b445d::function_e0a9de6b0601ed23();
-    level.penthouse.enemy02 thread namespace_47819225b08b445d::function_e0a9de6b0601ed23();
+    level.penthouse.enemy01 thread namespace_47819225b08b445d::kill_on_anim_end();
+    level.penthouse.enemy02 thread namespace_47819225b08b445d::kill_on_anim_end();
     array_notify(animating_combatants, "stop_react_logic");
     level.penthouse.animnode thread anim_single(animating_combatants, "lure_ambush");
     level.player waittill("blended_anim_done");
@@ -888,7 +888,7 @@ function function_3fa59ff4da1f2db7() {
   }
 
   if(!isDefined(pistol_weapon)) {
-    var_41083de5095f82cf = self getcurrentweapon();
+    weapon_to_take = self getcurrentweapon();
     self disableweapons();
 
     while(true) {
@@ -899,8 +899,8 @@ function function_3fa59ff4da1f2db7() {
       waitframe();
     }
 
-    self takeweapon(var_41083de5095f82cf);
-    function_536aa7cbedb60aea(var_41083de5095f82cf, (26136, 5008, -8));
+    self takeweapon(weapon_to_take);
+    function_536aa7cbedb60aea(weapon_to_take, (26136, 5008, -8));
     pistol_weapon = make_weapon("iw9_pi_golf17_sp");
     give_weapon(pistol_weapon, 0, 0, 0, 1);
     self setweaponammoclip(pistol_weapon, weaponclipsize(pistol_weapon) - 1);
@@ -1012,7 +1012,7 @@ function function_e86b9ca948270886(blend_time) {
   wait blend_time;
 }
 
-function function_1c3cf12e079b48cc(var_2d7b5ccd309f3a6f) {
+function player_intro_anims(var_2d7b5ccd309f3a6f) {
   if(var_2d7b5ccd309f3a6f) {
     return;
   }
@@ -1212,8 +1212,8 @@ function function_b71a8bf8942d4201() {
 }
 
 function function_9db6e4648ce6b850() {
-  var_c59a1bf410f24b79 = array_merge(level.penthouse.civs, level.penthouse.var_1ddcee644bcf7b26);
-  level.penthouse.animnode anim_single(var_c59a1bf410f24b79, "fbk_0360_intro");
+  animators = array_merge(level.penthouse.civs, level.penthouse.stretchers);
+  level.penthouse.animnode anim_single(animators, "fbk_0360_intro");
 }
 
 function function_5883f56d225b4f89() {
@@ -1620,7 +1620,7 @@ function function_5a3fd2b18b03bed4() {
         break;
       case #"hash_b1814d65888b9da9":
         level.penthouse.enemy02 = enemy;
-        level.penthouse.var_f93e9d0d5db8bd1b = enemy;
+        level.penthouse.lurer = enemy;
         enemy detach(enemy.headmodel);
         enemy.headmodel = "head_c_jup_sc_m_sharipov_flashback";
         enemy attach(enemy.headmodel);
@@ -1637,12 +1637,12 @@ function function_5a3fd2b18b03bed4() {
     }
   }
 
-  level.penthouse.var_1ddcee644bcf7b26 = [];
+  level.penthouse.stretchers = [];
 
   for(i = 1; i < 4; i++) {
     animname = "stretcher_" + i;
     stretcher = spawn_anim_model(animname);
-    level.penthouse.var_1ddcee644bcf7b26[level.penthouse.var_1ddcee644bcf7b26.size] = stretcher;
+    level.penthouse.stretchers[level.penthouse.stretchers.size] = stretcher;
   }
 
   level.penthouse.civs = [];
@@ -1666,10 +1666,10 @@ function function_5a3fd2b18b03bed4() {
     level.penthouse.civs[level.penthouse.civs.size] = civ;
   }
 
-  level.penthouse.var_c59a1bf410f24b79 = array_merge(level.penthouse.civs, level.penthouse.front_doors);
-  level.penthouse.var_c59a1bf410f24b79 = array_merge(level.penthouse.var_c59a1bf410f24b79, level.penthouse.var_1ddcee644bcf7b26);
-  level.penthouse.var_c59a1bf410f24b79 = array_merge(level.penthouse.var_c59a1bf410f24b79, level.penthouse.enemies);
-  level.penthouse.animnode anim_first_frame(level.penthouse.var_c59a1bf410f24b79, "fbk_0360_intro");
+  level.penthouse.animators = array_merge(level.penthouse.civs, level.penthouse.front_doors);
+  level.penthouse.animators = array_merge(level.penthouse.animators, level.penthouse.stretchers);
+  level.penthouse.animators = array_merge(level.penthouse.animators, level.penthouse.enemies);
+  level.penthouse.animnode anim_first_frame(level.penthouse.animators, "fbk_0360_intro");
   flag_set("penthouse_scene_initialized");
 }
 

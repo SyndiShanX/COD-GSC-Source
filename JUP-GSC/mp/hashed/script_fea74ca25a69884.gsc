@@ -719,7 +719,7 @@ function function_53aa698b2205a4c3(player, scriptablename, spawnpos) {
       trainent = traceresult["entity"];
       localorigin = rotatevectorinverted(item.origin - trainent.origin, trainent.angles);
       localangles = combineangles(invertangles(trainent.angles), item.angles);
-      item utility::function_6e506f39f121ea8a(trainent, localorigin, localangles);
+      item utility::scriptable_setparententity(trainent, localorigin, localangles);
     }
   }
 

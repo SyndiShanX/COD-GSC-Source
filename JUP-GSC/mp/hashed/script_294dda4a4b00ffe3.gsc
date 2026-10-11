@@ -90,7 +90,7 @@ function private function_276be8b8ea7b9da7() {
         continue;
       }
 
-      var_d4622dbffcad86c.eventtypes[i][var_d4622dbffcad86c.eventtypes[i].size] = function_40fd49171fad19d3(event);
+      var_d4622dbffcad86c.eventtypes[i][var_d4622dbffcad86c.eventtypes[i].size] = getxhashasset(event);
     }
   }
 

@@ -69,7 +69,7 @@ function function_67d05c35d51c45a6() {
   level.player clearsoundsubmix("cp_jup_chemical_infil_dive_gameplay_build", 3);
 }
 
-function function_53b4c2188bcb1123(heli) {
+function attack_heli_death(heli) {
   heli waittill("crashing");
   heli playsoundonmovingent("jup_chemical_heli_boss_predestroy_explo_trans_swt");
   heli playsoundonmovingent("jup_chemical_heli_boss_predestroy_spiral");
@@ -369,21 +369,21 @@ function function_74453199c2d75d69() {
   level.player clearsoundsubmix("cp_jup_chemical_exfil_part2_bink", 0);
 }
 
-function function_588af84fad23df23(var_cd125f8e3536e4f1) {
-  if(function_1186ca4e2e51afea(var_cd125f8e3536e4f1)) {
+function function_588af84fad23df23(str_transient) {
+  if(function_1186ca4e2e51afea(str_transient)) {
     return;
   }
 
-  function_f1aed36ab4598ea(var_cd125f8e3536e4f1);
+  snd_transient_load(str_transient);
 }
 
-function function_afad8767dca9b688(var_cd125f8e3536e4f1, var_80d54b350039e2f7) {
-  if(function_1186ca4e2e51afea(var_cd125f8e3536e4f1)) {
+function function_afad8767dca9b688(str_transient, var_80d54b350039e2f7) {
+  if(function_1186ca4e2e51afea(str_transient)) {
     if(isDefined(var_80d54b350039e2f7)) {
       wait var_80d54b350039e2f7;
     }
 
-    function_f4e0ff5cb899686d(var_cd125f8e3536e4f1);
+    snd_transient_unload(str_transient);
     return;
   }
 

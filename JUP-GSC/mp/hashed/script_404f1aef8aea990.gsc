@@ -18,7 +18,7 @@
 #namespace namespace_36cfc486ea2fec3b;
 
 function init() {
-  if(!scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(!scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     return;
   }
 
@@ -42,7 +42,7 @@ function function_ce976ee0200475a2(data) {
   player = data.player;
 
   if(!isDefined(player.pers["telemetry"].var_c804fa67733b8ef5)) {
-    if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+    if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
       return;
     }
 
@@ -95,7 +95,7 @@ function on_player_disconnect(data) {
 }
 
 function on_player_spawned(player) {
-  if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+  if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
     return;
   }
 
@@ -184,7 +184,7 @@ function function_6b12cc412aa6ea91(data) {
   player = data.player;
 
   if(!isDefined(player.pers["telemetry"].var_c0e398db99db74ed)) {
-    if(!namespace_de6e6777b0937bd7::function_892570944f6b6a2(player)) {
+    if(!namespace_de6e6777b0937bd7::is_valid_client(player)) {
       return;
     }
 

@@ -43,7 +43,7 @@ function function_7bdb3610d602438d(data) {
   damage = data.damage;
   modifieddamage = damage;
 
-  if(!isDefined(self.weapon_object) || !function_f3bb4f4911a1beb2("killstreak", "isKillstreakWeapon", self.weapon_object)) {
+  if(!isDefined(self.weapon_object) || !callsharedfunc("killstreak", "isKillstreakWeapon", self.weapon_object)) {
     modifieddamage = utility::handlemeleedamage(objweapon, type, modifieddamage);
   }
 
@@ -54,7 +54,7 @@ function function_7bdb3610d602438d(data) {
   return modifieddamage;
 }
 
-function function_90663ca0d2564cb(data, var_b2c38c8cc8672f83, var_8097775071dc6820, meleehitcount) {
+function function_90663ca0d2564cb(data, hitstokillenemyteam, hitstokillownerteam, meleehitcount) {
   attacker = data.attacker;
   objweapon = data.objweapon;
   type = data.meansofdeath;
@@ -75,9 +75,9 @@ function function_90663ca0d2564cb(data, var_b2c38c8cc8672f83, var_8097775071dc68
   }
 
   if(isenemydamage) {
-    hitstokill = var_b2c38c8cc8672f83;
+    hitstokill = hitstokillenemyteam;
   } else {
-    hitstokill = var_8097775071dc6820;
+    hitstokill = hitstokillownerteam;
   }
 
   hits = undefined;
@@ -109,7 +109,7 @@ function function_90663ca0d2564cb(data, var_b2c38c8cc8672f83, var_8097775071dc68
 
 function function_79a97ee01dc267d3(data) {
   assertex(isDefined(self.bundle), "The super entity must have the .bundle variable defined.");
-  return function_90663ca0d2564cb(data, self.bundle.var_a59b12cf4b995b32, self.bundle.var_67246a26271ee81, self.bundle.meleehitcount);
+  return function_90663ca0d2564cb(data, self.bundle.hitstokillenemy, self.bundle.hitstokillowner, self.bundle.meleehitcount);
 }
 
 function private function_d2c1bb18b26d0a9c(data, isenemydamage) {
@@ -158,7 +158,7 @@ function function_62c1c6833c19817c(maxrolldegrees, maxyawdiff) {
   level endon("game_ended");
   self endon("stop_adjust_tilt_thread");
   var_cf4febe91831ea56 = (1, 0, 0);
-  var_773133c39e93a51d = (0, 1, 0);
+  unityvector = (0, 1, 0);
   var_d2f1914cf518b7e0 = (0, 0, -1);
   waitframe();
   self.previousorigin = self.origin;
@@ -172,7 +172,7 @@ function function_62c1c6833c19817c(maxrolldegrees, maxyawdiff) {
     stepunit = vectorNormalize(stepunit);
     yaw = acos(vectordot(stepunit, var_cf4febe91831ea56));
 
-    if(vectordot(stepunit, var_773133c39e93a51d) < 0) {
+    if(vectordot(stepunit, unityvector) < 0) {
       yaw = 360 - yaw;
     }
 
@@ -182,9 +182,9 @@ function function_62c1c6833c19817c(maxrolldegrees, maxyawdiff) {
       yawdiff -= 360;
     }
 
-    var_a0ce54bdf5ecefa3 = clamp(yawdiff, maxyawdiff * -1, maxyawdiff);
-    var_a747f74b413e1808 = var_a0ce54bdf5ecefa3 / maxyawdiff;
-    roll = maxrolldegrees * var_a747f74b413e1808 * -1;
+    yawdiffclamped = clamp(yawdiff, maxyawdiff * -1, maxyawdiff);
+    turnproportion = yawdiffclamped / maxyawdiff;
+    roll = maxrolldegrees * turnproportion * -1;
     self.previousorigin = self.origin;
     newangles = (pitch, yaw, roll);
     self.targetangles = newangles;
@@ -202,17 +202,17 @@ function function_74f5ba869b257143(var_38a541b4d6af30a9, var_9d60d851a7af2d4e, v
 
   while(true) {
     if(isDefined(self.targetangles)) {
-      var_fd4ec85a2030035e = angleclamp(self.targetangles[0]);
+      fixedtargetpitch = angleclamp(self.targetangles[0]);
       fixedcurrentpitch = angleclamp(self.angles[0]);
       fixedtargetyaw = angleclamp(self.targetangles[1]);
       fixedcurrentyaw = angleclamp(self.angles[1]);
       var_9f3eda8daa0eda03 = angleclamp(self.targetangles[2]);
       var_641a388819ce1d85 = angleclamp(self.angles[2]);
-      pitcherror = var_fd4ec85a2030035e - fixedcurrentpitch;
+      pitcherror = fixedtargetpitch - fixedcurrentpitch;
       yawerror = fixedtargetyaw - fixedcurrentyaw;
       rollerror = var_9f3eda8daa0eda03 - var_641a388819ce1d85;
-      var_a5a7ce89b43ee10c = var_fd4ec85a2030035e - fixedcurrentpitch + 360;
-      var_3ef2bd1018948fcc = var_fd4ec85a2030035e - fixedcurrentpitch - 360;
+      var_a5a7ce89b43ee10c = fixedtargetpitch - fixedcurrentpitch + 360;
+      var_3ef2bd1018948fcc = fixedtargetpitch - fixedcurrentpitch - 360;
 
       if(abs(var_a5a7ce89b43ee10c) < abs(pitcherror)) {
         pitcherror = var_a5a7ce89b43ee10c;
@@ -275,7 +275,7 @@ function onfunctionaldeath(callbackparams, initparams) {
     self[[var_c09f3239d7caa490]](callbackparams);
   }
 
-  function_2eff4cd94c3243e8();
+  clearminimapid();
   wait 0.2;
 
   if(isDefined(destroyfunc)) {
@@ -288,7 +288,7 @@ function onfunctionaldeath(callbackparams, initparams) {
   }
 }
 
-function function_2eff4cd94c3243e8() {
+function clearminimapid() {
   if(isDefined(self.minimapid)) {
     if(issharedfuncdefined("game", "returnObjectiveID")) {
       [[getsharedfunc("game", "returnObjectiveID")]](self.minimapid);
@@ -298,7 +298,7 @@ function function_2eff4cd94c3243e8() {
   }
 }
 
-function function_47b5394a301d8c5(maxlifetime, var_bb3f35f040f4f38b, var_70a1d6b89907db6b, var_b0dfff7cb4b7be34) {
+function function_47b5394a301d8c5(maxlifetime, debugactivedvar, var_70a1d6b89907db6b, var_b0dfff7cb4b7be34) {
   level endon("game_ended");
   self endon("death");
   self.owner endon("disconnected");
@@ -316,7 +316,7 @@ function function_47b5394a301d8c5(maxlifetime, var_bb3f35f040f4f38b, var_70a1d6b
     self.lifetime -= timeelapsed;
     previoustime = currenttime;
 
-    debugactive = getdvarint(var_bb3f35f040f4f38b);
+    debugactive = getdvarint(debugactivedvar);
 
     if(debugactive > 0) {
       var_f09362cfe2d75614 = ter_op(isDefined(self.weapon_name), self.weapon_name, "<dev string:x1c>");

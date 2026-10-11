@@ -28,7 +28,7 @@ function function_48b5faf91fc74726() {
 
 function function_81ff256686f12d6d(weaponname, preferredpersonality) {
   if(isDefined(weaponname) && weaponname != "none") {
-    var_6f94db6d48b3fd6d = scripts\cp_mp\weapon::function_309bcc0c19de2d18(weaponname);
+    var_6f94db6d48b3fd6d = scripts\cp_mp\weapon::getweaponbotpersonalities(weaponname);
 
     if(isDefined(var_6f94db6d48b3fd6d) && var_6f94db6d48b3fd6d.size > 0) {
       choice = undefined;

@@ -510,18 +510,18 @@ function function_3bbb7d783f45035e(train_name) {
   animent = level.wztrain_info.animent[train_name];
   animent notify("watch_nearby");
   animent endon("watch_nearby");
-  var_43dd126faa05f6be = level.wztrain_info.trains[train_name];
+  traincars = level.wztrain_info.trains[train_name];
 
   while(true) {
-    train_center = vectorlerp(var_43dd126faa05f6be[0].origin, var_43dd126faa05f6be[var_43dd126faa05f6be.size - 1].origin, 0.5);
-    var_4b15590cf2140316 = distance(var_43dd126faa05f6be[0].origin, train_center) + var_26f757527d21f859;
+    train_center = vectorlerp(traincars[0].origin, traincars[traincars.size - 1].origin, 0.5);
+    var_4b15590cf2140316 = distance(traincars[0].origin, train_center) + var_26f757527d21f859;
     nearby = sortbydistancecullbyradius(level.players, train_center, var_4b15590cf2140316);
 
     for(i = nearby.size - 1; i >= 0; i--) {
       player = nearby[i];
       is_near = 0;
 
-      foreach(traincar in [var_43dd126faa05f6be[0], var_43dd126faa05f6be[int((var_43dd126faa05f6be.size - 1) / 2)], var_43dd126faa05f6be[var_43dd126faa05f6be.size - 1]]) {
+      foreach(traincar in [traincars[0], traincars[int((traincars.size - 1) / 2)], traincars[traincars.size - 1]]) {
         if(isDefined(player.origin) && distancesquared(traincar.origin, player.origin) <= var_26f757527d21f859 * var_26f757527d21f859) {
           is_near = 1;
           break;
@@ -586,7 +586,7 @@ function train_handle_collide_mines() {
 
     if(all_mines.size > 0) {
       foreach(train_engine in var_513dd84d5f0143d5) {
-        var_863c619037f3ac74 = train_engine.origin + rotatevector((375, 0, -100), train_engine.angles);
+        pointtocheck = train_engine.origin + rotatevector((375, 0, -100), train_engine.angles);
 
         foreach(mine in all_mines) {
           if(!isDefined(mine)) {
@@ -597,11 +597,11 @@ function train_handle_collide_mines() {
             continue;
           }
 
-          if(distance2dsquared(mine.origin, var_863c619037f3ac74) > maxdistsq) {
+          if(distance2dsquared(mine.origin, pointtocheck) > maxdistsq) {
             continue;
           }
 
-          if(distancesquared(mine.origin, var_863c619037f3ac74) > maxdistsq) {
+          if(distancesquared(mine.origin, pointtocheck) > maxdistsq) {
             continue;
           }
 
@@ -700,7 +700,7 @@ function function_18c8df150f3cdc88(type, traincar) {
   initialstate = undefined;
 
   if(scriptable getscriptableisloot()) {
-    initialstate = function_6f817b71c98d6307(function_40fd49171fad19d3(type));
+    initialstate = function_6f817b71c98d6307(getxhashasset(type));
   }
 
   isinvisible = isDefined(initialstate) && initialstate == #"inactive_invisible";
@@ -894,14 +894,14 @@ function function_3ca2a4be197dfa5b(callback) {
   level.wztrain_info.var_2a581c73d9e11aa0[size] = callback;
 }
 
-function function_fa04a5bfe00504bc(traincar, spawn_type, var_91839babd32261f4, offset, angles) {
+function function_fa04a5bfe00504bc(traincar, spawn_type, scriptable_name, offset, angles) {
   noteworthy = traincar.script_noteworthy;
   spawn_names = noteworthy + "_" + spawn_type;
   var_6fb83f7279969479 = spawnStruct();
   var_6fb83f7279969479.script_noteworthy = spawn_names;
   var_6fb83f7279969479.origin = traincar localtoworldcoords(offset);
   var_6fb83f7279969479.angles = angles;
-  var_6fb83f7279969479.targetname = var_91839babd32261f4;
+  var_6fb83f7279969479.targetname = scriptable_name;
   addstruct(var_6fb83f7279969479);
   return var_6fb83f7279969479;
 }
@@ -1047,7 +1047,7 @@ function function_c1c6070579e999cb(train_array, spawn_type) {
       initialstate = undefined;
 
       if(scriptable getscriptableisloot()) {
-        initialstate = function_6f817b71c98d6307(function_40fd49171fad19d3(type));
+        initialstate = function_6f817b71c98d6307(getxhashasset(type));
       }
 
       isinvisible = isDefined(initialstate) && initialstate == #"inactive_invisible";
@@ -1065,7 +1065,7 @@ function function_c1c6070579e999cb(train_array, spawn_type) {
         traincar.ammo_restock = scriptable;
       }
 
-      if(scriptable function_73cc0f04c4c5001d()) {
+      if(scriptable isscriptableinstance()) {
         scriptable thread function_edcebaee73e9929(type, traincar, offset, angles, spawn_data.var_20792ee55e7cef4b);
       }
 
@@ -1083,7 +1083,7 @@ function function_edcebaee73e9929(type, traincar, offset, angles, var_20792ee55e
   wait 1;
 
   if(!isDefined(self.linkedparent)) {
-    utility::function_6e506f39f121ea8a(traincar, offset, angles);
+    utility::scriptable_setparententity(traincar, offset, angles);
   }
 
   if(isDefined(var_20792ee55e7cef4b) && isfunction(var_20792ee55e7cef4b)) {
@@ -2039,7 +2039,7 @@ function private function_9618cc73546d253d(container, player) {
   container setscriptablepartstate("train_safe", "open_usable");
 }
 
-function private function_7c5eefd0cbce6520(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_7c5eefd0cbce6520(instance, part, state, player, bautouse, usestring) {
   if(state == "usable_not_open") {
     instance setscriptablepartstate(part, "unusable");
     instance.successfuluse = 0;
@@ -2286,7 +2286,7 @@ function private callheli() {
   self.heli = heli;
   heli.var_6df468049c1f41dc = 1;
   scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_makeunusable(heli);
-  poi = scripts\mp\poi::function_6cc445c02b5effac(self.origin);
+  poi = scripts\mp\poi::poi_findpoioriginisin(self.origin);
   origin = ter_op(isDefined(level.var_f0872e42daf6d4d5), level.var_f0872e42daf6d4d5, spawndata.origin);
   riders = [];
 
@@ -2524,7 +2524,7 @@ function safe_setmusicstate(safe, statename, var_a663b5760127728d) {
   safe thread function_1533ffc339e9487f(musicdist);
 }
 
-function function_a93a6d7f562fdfcc(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_a93a6d7f562fdfcc(instance, part, state, player, bautouse, usestring) {
   if(istrue(instance.var_ce5c1024bca39998)) {
     if(isDefined(instance.type)) {
       switch (instance.type) {

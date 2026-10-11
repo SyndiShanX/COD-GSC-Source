@@ -41,7 +41,7 @@ function function_63c85ab9240382f7(dyingguy, helper) {
   }
 
   if(dyingguy scripts\engine\utility::doinglongdeath()) {
-    return dyingguy function_92435c7a6ae85c3c();
+    return dyingguy getinteractionid();
   }
 
   var_f4cd424dd91129f3 = dyingguy.var_d5e499e7fe2c490b;
@@ -85,11 +85,11 @@ function function_63c85ab9240382f7(dyingguy, helper) {
   dyingguy scripts\common\ai::function_b9307a16e291255e(skippingcrawl, skippingintro);
   timeout = gettime() + 2000;
 
-  while(!isDefined(dyingguy function_92435c7a6ae85c3c()) && timeout > gettime()) {
+  while(!isDefined(dyingguy getinteractionid()) && timeout > gettime()) {
     waitframe();
   }
 
-  intid = dyingguy function_92435c7a6ae85c3c();
+  intid = dyingguy getinteractionid();
 
   if(isDefined(intid)) {
     dyingguy thread function_4c0173cde37dfa4a(var_f4cd424dd91129f3);

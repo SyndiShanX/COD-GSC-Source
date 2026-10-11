@@ -13,8 +13,8 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_bombdrone_healthbar");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_781de85130f2625a");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_781de85130f2625a");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 100;
   self.maxhealth = 100;
   self.weapon = nullweapon();
@@ -33,9 +33,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();

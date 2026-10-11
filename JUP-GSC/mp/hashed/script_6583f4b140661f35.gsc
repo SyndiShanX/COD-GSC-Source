@@ -18,10 +18,10 @@ function autoexec main() {
   scripts\mp\gametypes\br_dev::registerhandlecommand(&function_3195d135ced85ef8);
 }
 
-function private init(scriptbundle, var_26a9ecbcb0d7e5e2, xpbonus) {
+function private init(scriptbundle, maxcash, xpbonus) {
   assert(scriptbundle.scriptid == "<dev string:x33>");
 
-  iprintln("<dev string:x51>" + var_26a9ecbcb0d7e5e2 + "<dev string:x88>" + xpbonus + "<dev string:x91>");
+  iprintln("<dev string:x51>" + maxcash + "<dev string:x88>" + xpbonus + "<dev string:x91>");
 
   level.secondaryvictory.var_f5eb9b1ad1613bca = &function_f5eb9b1ad1613bca;
   level.secondaryvictory.var_228bbb92952e5f9f = &function_228bbb92952e5f9f;
@@ -29,7 +29,7 @@ function private init(scriptbundle, var_26a9ecbcb0d7e5e2, xpbonus) {
   function_33bb17d027e6a631(level.secondaryvictory.var_5fc0bb331fcc1784);
   function_7d3329c47fbe47f1(1);
   function_906084f03cbe16da(1);
-  function_3b015b3d933c20ef(var_26a9ecbcb0d7e5e2);
+  function_3b015b3d933c20ef(maxcash);
   level thread function_426b2a60c569a757();
 }
 

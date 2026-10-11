@@ -12,35 +12,35 @@
 #namespace cp_grenade_crate;
 
 function grenade_crate_init() {
-  var_86280fefb94b6b28 = spawnStruct();
-  var_86280fefb94b6b28.id = "grenade_crate";
-  var_86280fefb94b6b28.weaponinfo = "iw8_health_marker_cp";
-  var_86280fefb94b6b28.modelbase = "offhand_wm_supportbox_explosives";
-  var_86280fefb94b6b28.hintstring = &"COOP_CRAFTING/GRENADE_TAKE";
-  var_86280fefb94b6b28.streakname = "grenade_crate";
-  var_86280fefb94b6b28.splashname = "used_support_box";
-  var_86280fefb94b6b28.shadername = "compass_objpoint_deploy_friendly";
-  var_86280fefb94b6b28.headicon = "cp_crate_icon_lethalrefill";
-  var_86280fefb94b6b28.headiconoffset = 20;
-  var_86280fefb94b6b28.lifespan = 90;
-  var_86280fefb94b6b28.usexp = 50;
-  var_86280fefb94b6b28.onusesfx = "ammo_crate_use";
-  var_86280fefb94b6b28.deployedsfx = "ammo_crate_use";
-  var_86280fefb94b6b28.deathvfx = loadfx("vfx/iw8/prop/scriptables/vfx_offhand_wm_supportbox_explosives_timeout.vfx");
-  var_86280fefb94b6b28.onusecallback = &healthbox_onusedeployable;
-  var_86280fefb94b6b28.canusecallback = &healthbox_canusedeployable;
-  var_86280fefb94b6b28.deployfunc = &healthbox_onusedeployable;
-  var_86280fefb94b6b28.onusethanksbc = #"ping_social_thanks";
-  var_86280fefb94b6b28.usetime = 1000;
-  var_86280fefb94b6b28.maxhealth = 100;
-  var_86280fefb94b6b28.maxuses = 4;
-  var_86280fefb94b6b28.canreusebox = 0;
-  var_86280fefb94b6b28.allowmeleedamage = 1;
-  var_86280fefb94b6b28.damagefeedback = "";
-  var_86280fefb94b6b28.grenadeusefunc = &healthbox_grenadelaunchfunc;
-  var_86280fefb94b6b28.ondeploycallback = &supportbox_ondeploy;
-  var_86280fefb94b6b28.deployanimduration = supportbox_getdeployanimduration();
-  level.boxsettings["grenade_crate"] = var_86280fefb94b6b28;
+  boxconfig = spawnStruct();
+  boxconfig.id = "grenade_crate";
+  boxconfig.weaponinfo = "iw8_health_marker_cp";
+  boxconfig.modelbase = "offhand_wm_supportbox_explosives";
+  boxconfig.hintstring = &"COOP_CRAFTING/GRENADE_TAKE";
+  boxconfig.streakname = "grenade_crate";
+  boxconfig.splashname = "used_support_box";
+  boxconfig.shadername = "compass_objpoint_deploy_friendly";
+  boxconfig.headicon = "cp_crate_icon_lethalrefill";
+  boxconfig.headiconoffset = 20;
+  boxconfig.lifespan = 90;
+  boxconfig.usexp = 50;
+  boxconfig.onusesfx = "ammo_crate_use";
+  boxconfig.deployedsfx = "ammo_crate_use";
+  boxconfig.deathvfx = loadfx("vfx/iw8/prop/scriptables/vfx_offhand_wm_supportbox_explosives_timeout.vfx");
+  boxconfig.onusecallback = &healthbox_onusedeployable;
+  boxconfig.canusecallback = &healthbox_canusedeployable;
+  boxconfig.deployfunc = &healthbox_onusedeployable;
+  boxconfig.onusethanksbc = #"ping_social_thanks";
+  boxconfig.usetime = 1000;
+  boxconfig.maxhealth = 100;
+  boxconfig.maxuses = 4;
+  boxconfig.canreusebox = 0;
+  boxconfig.allowmeleedamage = 1;
+  boxconfig.damagefeedback = "";
+  boxconfig.grenadeusefunc = &healthbox_grenadelaunchfunc;
+  boxconfig.ondeploycallback = &supportbox_ondeploy;
+  boxconfig.deployanimduration = supportbox_getdeployanimduration();
+  level.boxsettings["grenade_crate"] = boxconfig;
   level.deployable_box["grenade_crate"] = [];
 }
 
@@ -171,7 +171,7 @@ function supportbox_watchplayerweapon(streakinfo) {
 }
 
 function supportbox_handledamage() {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 }
 
 function supportbox_handledeathdamage(data) {
@@ -179,7 +179,7 @@ function supportbox_handledeathdamage(data) {
   objweapon = data.objweapon;
   type = data.meansofdeath;
   damage = data.damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   attacker notify("destroyed_equipment");
 }
 
@@ -190,7 +190,7 @@ function supportbox_modifydamage(data) {
   damage = data.damage;
   idflags = data.idflags;
   modifieddamage = damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   return modifieddamage;
 }
 

@@ -70,9 +70,9 @@ function function_1e6c26c524ac2fe0() {
 
 function function_7924cc8cc6bf34fb() {
   var_1aae636c7b2bc674 = self.zombieaisettings.var_e58a65b7a8f5973c.var_1aae636c7b2bc674;
-  self.var_c3cf0abdb853a4f9 = spawnStruct();
-  self.var_c3cf0abdb853a4f9.var_9540d52e669b0713 = var_1aae636c7b2bc674.var_9540d52e669b0713;
-  self.var_c3cf0abdb853a4f9.var_ea825821af5f56f1 = var_1aae636c7b2bc674.var_ea825821af5f56f1;
+  self.attackdata = spawnStruct();
+  self.attackdata.var_9540d52e669b0713 = var_1aae636c7b2bc674.var_9540d52e669b0713;
+  self.attackdata.var_ea825821af5f56f1 = var_1aae636c7b2bc674.var_ea825821af5f56f1;
 }
 
 function function_6e4961e4c0a38088(params) {
@@ -425,9 +425,9 @@ function private function_8241cc7dd8266f69() {
 }
 
 function function_2e560a9030f7c915(asmname, statename, tostatename, params) {
-  assert(isDefined(self.entitydata) && isDefined(self.entitydata.var_9adf21d0962a922b));
+  assert(isDefined(self.entitydata) && isDefined(self.entitydata.entitystate));
 
-  if(self.entitydata.var_9adf21d0962a922b != 0) {
+  if(self.entitydata.entitystate != 0) {
     return true;
   }
 

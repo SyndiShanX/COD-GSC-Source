@@ -15,5 +15,5 @@ function main() {
   level.choppervisionset = "mp_jup_shipment_xmas_chopper_color_mp";
   level.var_6d129920246627ba = "mp_jup_shipment_xmas_assault_drone_color_mp";
   level.var_61b254009a0951a6 = "mp_jup_shipment_xmas_assault_drone_color_dark_mp";
-  level.var_81d39c829ea8e68f = "mp_jup_shipment_xmas_cruise_color_mp";
+  level.hellstormmissilevisionset = "mp_jup_shipment_xmas_cruise_color_mp";
 }

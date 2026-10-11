@@ -297,7 +297,7 @@ function craft_support(item) {
     cost += self.var_8db644cf41dc3e3 * item.scalecost;
   }
 
-  if(!currency::function_bcc79745d547a99c(item.currency, cost)) {
+  if(!currency::can_afford(item.currency, cost)) {
     return 3;
   }
 

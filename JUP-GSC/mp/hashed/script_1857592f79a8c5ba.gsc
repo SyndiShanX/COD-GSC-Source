@@ -38,14 +38,14 @@ function function_6c3d4156dec73e1d(asmname, statename, params) {
     }
   }
 
-  armoranim = scripts\asm\cap::function_18e6c36c02a94dbd(statename, animname);
+  armoranim = scripts\asm\cap::cap_lookupanimfromalias(statename, animname);
   return armoranim;
 }
 
 function function_45dc5e082d9a020f(asmname, statename, params) {
   utility::issharedfuncdefined("<dev string:x1c>", "<dev string:x22>", 1);
 
-  utility::function_f3bb4f4911a1beb2("ai", "onUsedArmorPlate");
+  utility::callsharedfunc("ai", "onUsedArmorPlate");
 }
 
 function private isrighthand(note) {
@@ -59,7 +59,7 @@ function private isrighthand(note) {
   return res;
 }
 
-function private function_45dc0311bb854741(note, statename) {
+function private notehandler_armorplate(note, statename) {
   self endon("death");
   self endon(statename + "_finished");
   scriptablepart = "armor_plate";
@@ -79,11 +79,11 @@ function private function_45dc0311bb854741(note, statename) {
   }
 }
 
-function function_e05a85a79478670c(note, params) {
+function armorplatenotehandler(note, params) {
   scriptablepart = "armor_plate";
 
   if(self isscriptable() && self getscriptablehaspart(scriptablepart)) {
     statename = self asmgetcurrentstate(self.asmname);
-    function_45dc0311bb854741(note, statename);
+    notehandler_armorplate(note, statename);
   }
 }

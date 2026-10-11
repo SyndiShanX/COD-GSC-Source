@@ -56,7 +56,7 @@ function function_48c7a8ee781fbf56(player) {
   var_40155fb770719328 = 0;
 
   foreach(headgeardata in level.headgeardata.gear) {
-    var_40155fb770719328 = [[headgeardata.var_4fe5d2ab2f7dbd0]](player);
+    var_40155fb770719328 = [[headgeardata.hasheadgearfunc]](player);
 
     if(istrue(var_40155fb770719328)) {
       break;
@@ -74,7 +74,7 @@ function hasheadgear(headgeartype, player) {
   headgeardata = level.headgeardata.gear[headgeartype];
 
   if(isDefined(headgeardata)) {
-    return [[headgeardata.var_4fe5d2ab2f7dbd0]](player);
+    return [[headgeardata.hasheadgearfunc]](player);
   }
 
   return 0;
@@ -240,18 +240,18 @@ function removeheadgear(headgeartype) {
   self endon("death_or_disconnect");
   headgeardata = level.headgeardata.gear[headgeartype];
 
-  if(isDefined(headgeardata.var_2cb986fd5f1717f0)) {
-    self[[headgeardata.var_2cb986fd5f1717f0]]();
+  if(isDefined(headgeardata.preremovefunc)) {
+    self[[headgeardata.preremovefunc]]();
   }
 
   self notify("head_gear_swap_complete");
-  self[[headgeardata.var_573fe16545e70f6a]]();
+  self[[headgeardata.onremovefunc]]();
   self.var_46fa9025626f3183 = 0;
 }
 
 function function_46a4f41002ccc37d(player, headgeartype, request) {
   headgeardata = level.headgeardata.gear[headgeartype];
-  player[[headgeardata.var_573fe16545e70f6a]]();
+  player[[headgeardata.onremovefunc]]();
   player[[headgeardata.var_bb61027a51ec1e05]]();
 
   if(isDefined(self.var_d7a794d94a3269c6)) {

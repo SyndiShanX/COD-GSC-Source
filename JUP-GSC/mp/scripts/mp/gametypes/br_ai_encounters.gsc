@@ -1184,9 +1184,9 @@ function bank_ecounterstart() {
   vol_03 = getEnt("bank_vol_03", "targetname");
   var_ae7126de41cfdc3e = [];
   jug = getStruct("enemy_wave_03_boss", "targetname");
-  var_415021716f694843 = targetstart_spawner(jug);
-  var_415021716f694843 thread jug_behavior();
-  var_ae7126de41cfdc3e = array_add(var_ae7126de41cfdc3e, var_415021716f694843);
+  jug_boss = targetstart_spawner(jug);
+  jug_boss thread jug_behavior();
+  var_ae7126de41cfdc3e = array_add(var_ae7126de41cfdc3e, jug_boss);
   waittill_dead(var_ae7126de41cfdc3e, var_ae7126de41cfdc3e.size);
   encounter_end(1);
 }
@@ -2383,12 +2383,12 @@ function function_5443af46fa933222(state) {
 function encounter_devgui() {
   root = "<dev string:x608>";
   debughud = root + "<dev string:x629>";
-  thread adddebugcommanddelayed(debughud + "<dev string:x639>" + function_f28fd66285fa2c9(@ "hash_6f44f0cbecc66ade") + "<dev string:x648>");
-  thread adddebugcommanddelayed(debughud + "<dev string:x650>" + function_f28fd66285fa2c9(@ "hash_6f44f0cbecc66ade") + "<dev string:x660>");
+  thread adddebugcommanddelayed(debughud + "<dev string:x639>" + getxhashhexname(@ "hash_6f44f0cbecc66ade") + "<dev string:x648>");
+  thread adddebugcommanddelayed(debughud + "<dev string:x650>" + getxhashhexname(@ "hash_6f44f0cbecc66ade") + "<dev string:x660>");
   debugai = root + "<dev string:x668>";
-  thread adddebugcommanddelayed(debugai + "<dev string:x639>" + function_f28fd66285fa2c9(@ "hash_f14edbb0f6781ef7") + "<dev string:x648>");
-  thread adddebugcommanddelayed(debugai + "<dev string:x677>" + function_f28fd66285fa2c9(@ "hash_f14edbb0f6781ef7") + "<dev string:x68b>");
-  thread adddebugcommanddelayed(debugai + "<dev string:x693>" + function_f28fd66285fa2c9(@ "hash_f14edbb0f6781ef7") + "<dev string:x660>");
+  thread adddebugcommanddelayed(debugai + "<dev string:x639>" + getxhashhexname(@ "hash_f14edbb0f6781ef7") + "<dev string:x648>");
+  thread adddebugcommanddelayed(debugai + "<dev string:x677>" + getxhashhexname(@ "hash_f14edbb0f6781ef7") + "<dev string:x68b>");
+  thread adddebugcommanddelayed(debugai + "<dev string:x693>" + getxhashhexname(@ "hash_f14edbb0f6781ef7") + "<dev string:x660>");
   encounters = root + "<dev string:x6a3>";
   encountersname = encounters + "<dev string:x6b4>";
   _addlocation(encountersname, -1);
@@ -2400,9 +2400,9 @@ function encounter_devgui() {
 }
 
 function _addlocation(encountersname, index) {
-  thread adddebugcommanddelayed(encountersname + "<dev string:x6d3>" + function_f28fd66285fa2c9(@ "hash_9c7e1cd61023c008") + "<dev string:x6e5>" + index + "<dev string:x6ea>");
-  thread adddebugcommanddelayed(encountersname + "<dev string:x6f0>" + function_f28fd66285fa2c9(@ "hash_e4a17f4ad4db68f9") + "<dev string:x6e5>" + index + "<dev string:x6ea>");
-  thread adddebugcommanddelayed(encountersname + "<dev string:x70a>" + function_f28fd66285fa2c9(@ "hash_ce1c94bf929657cc") + "<dev string:x6e5>" + index + "<dev string:x6ea>");
+  thread adddebugcommanddelayed(encountersname + "<dev string:x6d3>" + getxhashhexname(@ "hash_9c7e1cd61023c008") + "<dev string:x6e5>" + index + "<dev string:x6ea>");
+  thread adddebugcommanddelayed(encountersname + "<dev string:x6f0>" + getxhashhexname(@ "hash_e4a17f4ad4db68f9") + "<dev string:x6e5>" + index + "<dev string:x6ea>");
+  thread adddebugcommanddelayed(encountersname + "<dev string:x70a>" + getxhashhexname(@ "hash_ce1c94bf929657cc") + "<dev string:x6e5>" + index + "<dev string:x6ea>");
 }
 
 function adddebugcommanddelayed(cmd) {

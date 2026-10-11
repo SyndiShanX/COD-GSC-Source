@@ -64,7 +64,7 @@ function function_51cef08d1c77da29(player, skin) {
     var_e89fd4c2e2e797b9 = "vestlight";
   }
 
-  player setclothtype(function_1823ff50bb28148d(var_e89fd4c2e2e797b9));
+  player setclothtype(getxhash(var_e89fd4c2e2e797b9));
 
   if(player.operatorcustomization.gender == "female") {
     player function_555e2d32e2756625("female");

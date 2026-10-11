@@ -23,7 +23,7 @@ function function_ad6fde6a4dc38d62() {
         var_4c561d08d8d8ace4 thread namespace_91faf49cc72f0b47::function_b8554b5efa2488b0();
         break;
       case #"hash_badd0faf7f7ec594":
-        var_4c561d08d8d8ace4 thread function_c68de1abc965cc8();
+        var_4c561d08d8d8ace4 thread firing_range_target();
         break;
       default:
         break;
@@ -82,8 +82,8 @@ function function_9b6351833e5d2963() {
   if(isDefined(s_dest)) {}
 }
 
-function private function_c68de1abc965cc8(s_dest, var_24ad452813ef0b6f) {
-  var_bb66384ea5dfaee3 = vectorNormalize(s_dest.origin - self.origin);
+function private firing_range_target(s_dest, var_24ad452813ef0b6f) {
+  v_move_dir = vectorNormalize(s_dest.origin - self.origin);
   var_7856bbc39a600358 = 0;
   n_move_time = 3;
 
@@ -98,9 +98,9 @@ function private function_c68de1abc965cc8(s_dest, var_24ad452813ef0b6f) {
   }
 
   for(var_6621a39da07e6c42 = var_24ad452813ef0b6f getscriptablepartstate("pelvis", 1); isDefined(var_6621a39da07e6c42) && var_6621a39da07e6c42 == "visible"; var_6621a39da07e6c42 = var_24ad452813ef0b6f getscriptablepartstate("pelvis", 1)) {
-    self moveTo(self.origin + var_bb66384ea5dfaee3 * var_7856bbc39a600358, n_move_time, 0, 0);
+    self moveTo(self.origin + v_move_dir * var_7856bbc39a600358, n_move_time, 0, 0);
     wait n_move_time;
-    self moveTo(self.origin + var_bb66384ea5dfaee3 * var_7856bbc39a600358 * -1, n_move_time, 0, 0);
+    self moveTo(self.origin + v_move_dir * var_7856bbc39a600358 * -1, n_move_time, 0, 0);
     wait n_move_time;
   }
 }

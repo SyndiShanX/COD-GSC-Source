@@ -538,7 +538,7 @@ function function_e71772de3d54144f(dialog, player, group, var_61acbeb6cccd6bd, f
   soundname = tolower(dialogalias);
 
   if(isxhash(dialog)) {
-    dialog = function_f28fd66285fa2c9(dialog);
+    dialog = getxhashhexname(dialog);
   }
 
   player queuedialogforplayer(soundname, dialog, 2, group);

@@ -41,11 +41,11 @@ function function_f4d3d0edd18649cb() {
   self endon("unloaded");
   self endon("driverdeath");
   self addcomponent("p2p");
-  self function_77320e794d35465a("p2p", "brakeAtGoal", 0);
-  self function_77320e794d35465a("p2p", "goalThreshold", 128);
-  self function_77320e794d35465a("p2p", "steeringMultiplier", 2.5);
-  self function_77320e794d35465a("p2p", "stuckTime", 4);
-  thread function_58c9bbddc21b16ca();
+  self setconfigvalue("p2p", "brakeAtGoal", 0);
+  self setconfigvalue("p2p", "goalThreshold", 128);
+  self setconfigvalue("p2p", "steeringMultiplier", 2.5);
+  self setconfigvalue("p2p", "stuckTime", 4);
+  thread vehicle_avoidance();
   level thread vehicle_watchflipped(self, &flippedstart);
 
   if(!isDefined(level.var_6e5ff6cae14c4081)) {
@@ -69,7 +69,7 @@ function function_f4d3d0edd18649cb() {
   var_f08a38441765c6f = 8;
   var_28b139524196455b = 15;
   prevpos = undefined;
-  self.var_393832bcec3afd03 = self.riders;
+  self.unloadedguys = self.riders;
 
   while(true) {
     wait 0.2;
@@ -239,7 +239,7 @@ function function_268d401afde15f5d() {
     wait 0.5;
   }
 
-  self.aidriver.var_71c1911e983f326d = &function_dc9b96be6aa3c3c0;
+  self.aidriver.fn_shoulddodamage = &function_dc9b96be6aa3c3c0;
 }
 
 function function_b67104292a9ddcf6() {
@@ -262,7 +262,7 @@ function function_2bf62999798d0b53() {
 
   while(true) {
     fwd = anglesToForward((0, self.angles[1], 0));
-    var_cbac2203146ae84a = anglestoright((0, self.angles[1], 0));
+    rgt = anglestoright((0, self.angles[1], 0));
     fwd_mag = 250;
     var_6d5e7baf4106d1dd = -250;
 
@@ -274,8 +274,8 @@ function function_2bf62999798d0b53() {
       var_6d5e7baf4106d1dd = self.var_b9428297abb94a7e;
     }
 
-    self.var_3749eb0f11873d37.origin = getclosestpointonnavmesh(self.origin + var_cbac2203146ae84a * 190 + fwd * fwd_mag, var_5b7feb61dd19201b);
-    self.var_5da685db7d347340.origin = getclosestpointonnavmesh(self.origin + var_cbac2203146ae84a * -190 + fwd * fwd_mag, var_5b7feb61dd19201b);
+    self.var_3749eb0f11873d37.origin = getclosestpointonnavmesh(self.origin + rgt * 190 + fwd * fwd_mag, var_5b7feb61dd19201b);
+    self.var_5da685db7d347340.origin = getclosestpointonnavmesh(self.origin + rgt * -190 + fwd * fwd_mag, var_5b7feb61dd19201b);
     self.var_4a35ce0251802293.origin = getclosestpointonnavmesh(self.origin + fwd * -500, var_5b7feb61dd19201b);
     wait 0.05;
   }
@@ -290,7 +290,7 @@ function function_f0a7e47a3ffdefb6() {
 
   while(true) {
     fwd = anglesToForward((0, self.angles[1], 0));
-    var_cbac2203146ae84a = anglestoright((0, self.angles[1], 0));
+    rgt = anglestoright((0, self.angles[1], 0));
     fwd_mag = 250;
     var_6d5e7baf4106d1dd = -250;
 
@@ -302,8 +302,8 @@ function function_f0a7e47a3ffdefb6() {
       var_6d5e7baf4106d1dd = self.var_b9428297abb94a7e;
     }
 
-    self.var_3749eb0f11873d37.origin = getclosestpointonnavmesh(self.origin + var_cbac2203146ae84a * 190 + fwd * fwd_mag, var_5b7feb61dd19201b);
-    self.var_5da685db7d347340.origin = getclosestpointonnavmesh(self.origin + var_cbac2203146ae84a * -190 + fwd * fwd_mag, var_5b7feb61dd19201b);
+    self.var_3749eb0f11873d37.origin = getclosestpointonnavmesh(self.origin + rgt * 190 + fwd * fwd_mag, var_5b7feb61dd19201b);
+    self.var_5da685db7d347340.origin = getclosestpointonnavmesh(self.origin + rgt * -190 + fwd * fwd_mag, var_5b7feb61dd19201b);
     self.var_4a35ce0251802293.origin = getclosestpointonnavmesh(self.origin, var_5b7feb61dd19201b);
     wait 1;
   }
@@ -385,7 +385,7 @@ function function_26e9e22860c819ce(start_point, end_point, speed, var_91b19cfb0a
   }
 
   if(distancesquared(self.origin, "goalPoint") > squared(512)) {
-    self function_77320e794d35465a("p2p", "goalPoint", self.origin);
+    self setconfigvalue("p2p", "goalPoint", self.origin);
   }
 }
 
@@ -406,7 +406,7 @@ function function_9804c82501de981b(newpath, speed) {
       point = point.origin;
     }
 
-    self function_77320e794d35465a("p2p", "goalPoint", point);
+    self setconfigvalue("p2p", "goalPoint", point);
 
     if(isDefined(speed)) {
       if(istrue(self.var_b7d9b54851a59550)) {
@@ -449,9 +449,9 @@ function function_9804c82501de981b(newpath, speed) {
       }
 
       if(isDefined(time)) {
-        self function_77320e794d35465a("p2p", "targetTime", time);
+        self setconfigvalue("p2p", "targetTime", time);
       } else {
-        self function_77320e794d35465a("p2p", "targetTime", 0.2);
+        self setconfigvalue("p2p", "targetTime", 0.2);
       }
     }
 
@@ -474,17 +474,17 @@ function function_f55c14f9168585a() {
     case #"hash_c8272f8e0a3654d2":
     case #"hash_c8472b8e0a4fe66c":
       ammo_box = spawnscriptable("cp_veh_cache", self.origin, self.angles);
-      ammo_box utility::function_6e506f39f121ea8a(self, (-51, -5, 42), (0, 90, 0));
+      ammo_box utility::scriptable_setparententity(self, (-51, -5, 42), (0, 90, 0));
       rpg = spawnscriptable("cp_pickup_mike32", self.origin, self.angles);
-      rpg utility::function_6e506f39f121ea8a(self, (-57, 23, 60), (-60, 0, 0));
+      rpg utility::scriptable_setparententity(self, (-57, 23, 60), (-60, 0, 0));
       thread function_ed8121366a308031(ammo_box);
       thread function_ed8121366a308031(rpg);
       break;
     case #"hash_af14d55fb75a3928":
       ammo_box = spawnscriptable("cp_veh_cache", self.origin, self.angles);
-      ammo_box utility::function_6e506f39f121ea8a(self, (-48, 0, 35), (0, 90, 0));
+      ammo_box utility::scriptable_setparententity(self, (-48, 0, 35), (0, 90, 0));
       rpg = spawnscriptable("cp_pickup_rpg", self.origin, self.angles);
-      rpg utility::function_6e506f39f121ea8a(self, (-65, 23, 43), (0, 180, 0));
+      rpg utility::scriptable_setparententity(self, (-65, 23, 43), (0, 180, 0));
       thread function_ed8121366a308031(ammo_box);
       thread function_ed8121366a308031(rpg);
       break;
@@ -509,7 +509,7 @@ function function_dc9b96be6aa3c3c0(idamage, smeansofdeath, sweapon, partname, da
 
 function function_6a0b2a08499a9842() {
   if(isDefined(self.aidriver)) {
-    self.aidriver.var_71c1911e983f326d = undefined;
+    self.aidriver.fn_shoulddodamage = undefined;
   }
 }
 
@@ -563,7 +563,7 @@ function vehicle_watchflipped(vehicle, var_7f2253bd1b8cfa5e, flippedendcallback,
   }
 }
 
-function function_58c9bbddc21b16ca() {
+function vehicle_avoidance() {
   self endon("death");
   self endon("stop_chasing");
   cos_25 = cos(25);
@@ -608,7 +608,7 @@ function function_58c9bbddc21b16ca() {
 
     if(var_1047a2d125e48b40) {
       self.pausing = 1;
-      self function_77320e794d35465a("p2p", "brake", 1);
+      self setconfigvalue("p2p", "brake", 1);
 
       if(getDvar(@ "hash_ec592c9ed8224d75") != "<dev string:x1c>") {
         print3d(self.origin + (0, 0, 40), "<dev string:x1d>", (1, 1, 1), 1, 1, 20, 1);
@@ -616,7 +616,7 @@ function function_58c9bbddc21b16ca() {
 
       wait 1;
       self.pausing = undefined;
-      self function_77320e794d35465a("p2p", "brake", -1);
+      self setconfigvalue("p2p", "brake", -1);
     }
   }
 }
@@ -714,7 +714,7 @@ function function_f32c4025f3271080(vehicle) {
 
 function function_de56a2b6b7fa16b0(file_str) {
   wait 1;
-  self function_e4fe23e19f4bf900(file_str);
+  self setdeffile(file_str);
 }
 
 function function_66b0113fe0bf4a88(vehicle) {

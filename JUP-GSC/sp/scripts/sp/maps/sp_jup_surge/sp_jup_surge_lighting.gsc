@@ -65,89 +65,89 @@ function function_b5f7fb0fd62c4ce() {
 }
 
 function lighting_setup() {
-  function_238c2a0aae70e973("horizon light 001", 0, 100000);
-  function_238c2a0aae70e973("horizon light 002", 0, 100000);
-  function_238c2a0aae70e973("horizon light 003", 0, 100000);
-  function_238c2a0aae70e973("horizon light 004", 0, 100000);
-  function_238c2a0aae70e973("horizon light 005", 0, 100000);
-  function_238c2a0aae70e973("horizon light 006", 0, 100000);
-  function_238c2a0aae70e973("horizon light 007", 0, 100000);
-  function_238c2a0aae70e973("horizon light 008", 0, 100000);
-  function_238c2a0aae70e973("horizon light 009", 0, 100000);
-  function_238c2a0aae70e973("horizon light 010", 0, 100000);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_001", 0, 0);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_002", 0, 0);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_003", 0, 0);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_004", 0, 0);
+  lerp_spot_intensity("horizon light 001", 0, 100000);
+  lerp_spot_intensity("horizon light 002", 0, 100000);
+  lerp_spot_intensity("horizon light 003", 0, 100000);
+  lerp_spot_intensity("horizon light 004", 0, 100000);
+  lerp_spot_intensity("horizon light 005", 0, 100000);
+  lerp_spot_intensity("horizon light 006", 0, 100000);
+  lerp_spot_intensity("horizon light 007", 0, 100000);
+  lerp_spot_intensity("horizon light 008", 0, 100000);
+  lerp_spot_intensity("horizon light 009", 0, 100000);
+  lerp_spot_intensity("horizon light 010", 0, 100000);
+  lerp_spot_intensity("light_000_intro_igc_cafe_001", 0, 0);
+  lerp_spot_intensity("light_000_intro_igc_cafe_002", 0, 0);
+  lerp_spot_intensity("light_000_intro_igc_cafe_003", 0, 0);
+  lerp_spot_intensity("light_000_intro_igc_cafe_004", 0, 0);
 }
 
 function function_95cf17c99337346c() {
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_001", 0, 8);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_002", 0, 50);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_003", 0, 15);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_004", 0, 10);
-  function_238c2a0aae70e973("soap_house_005", 0, 0.15);
-  function_238c2a0aae70e973("soap_house_006", 0, 0.15);
+  lerp_spot_intensity("light_000_intro_igc_cafe_001", 0, 8);
+  lerp_spot_intensity("light_000_intro_igc_cafe_002", 0, 50);
+  lerp_spot_intensity("light_000_intro_igc_cafe_003", 0, 15);
+  lerp_spot_intensity("light_000_intro_igc_cafe_004", 0, 10);
+  lerp_spot_intensity("soap_house_005", 0, 0.15);
+  lerp_spot_intensity("soap_house_006", 0, 0.15);
 }
 
 function function_3b4d555ff8ee0131() {
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_001", 2, 0);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_002", 2, 0);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_003", 2, 0);
-  function_238c2a0aae70e973("light_000_intro_igc_cafe_004", 2, 0);
+  lerp_spot_intensity("light_000_intro_igc_cafe_001", 2, 0);
+  lerp_spot_intensity("light_000_intro_igc_cafe_002", 2, 0);
+  lerp_spot_intensity("light_000_intro_igc_cafe_003", 2, 0);
+  lerp_spot_intensity("light_000_intro_igc_cafe_004", 2, 0);
 }
 
 function function_12890444d983f3b5() {
-  function_238c2a0aae70e973("light_IGC_park_target_001", 0, 5);
+  lerp_spot_intensity("light_IGC_park_target_001", 0, 5);
 }
 
 function function_a5c7dce5a458f75e() {
-  function_238c2a0aae70e973("light_IGC_park_target_001", 0, 0);
+  lerp_spot_intensity("light_IGC_park_target_001", 0, 0);
 }
 
 function function_476b266a5d575d91() {
-  function_238c2a0aae70e973("light_IGC_park_target_001", 6, 0);
+  lerp_spot_intensity("light_IGC_park_target_001", 6, 0);
 }
 
 function function_ddc443dca27ceeaa() {
-  function_238c2a0aae70e973("light_igc_storefront_001", 0, 10);
+  lerp_spot_intensity("light_igc_storefront_001", 0, 10);
 }
 
 function function_336d1a39589b061c() {
-  function_238c2a0aae70e973("light_igc_storefront_001", 2, 0);
+  lerp_spot_intensity("light_igc_storefront_001", 2, 0);
 }
 
 function function_272906e3119dd8e0() {
-  function_238c2a0aae70e973("soap_house_005", 0, 0.1);
-  function_238c2a0aae70e973("soap_house_006", 0, 0.05);
+  lerp_spot_intensity("soap_house_005", 0, 0.1);
+  lerp_spot_intensity("soap_house_006", 0, 0.05);
 }
 
 function function_5ccdc11fd0355883() {
   wait 3;
-  function_238c2a0aae70e973("light_igc_tunnel_005", 0, 30);
-  function_238c2a0aae70e973("light_igc_tunnel_004", 0, 40);
-  function_238c2a0aae70e973("light_igc_tunnel_003", 0, 15);
-  function_238c2a0aae70e973("light_igc_tunnel_002", 0, 8);
-  function_238c2a0aae70e973("light_igc_tunnel_001", 0, 200);
-  function_238c2a0aae70e973("tunnel_intro_IGC_fill_001", 0, 5);
-  function_238c2a0aae70e973("tunnel_intro_IGC_fill_002", 0, 0.5);
-  function_238c2a0aae70e973("tunnel_intro_IGC_fill_003", 0, 50);
-  function_238c2a0aae70e973("tunnel_intro_IGC_fill_004", 0, 8);
+  lerp_spot_intensity("light_igc_tunnel_005", 0, 30);
+  lerp_spot_intensity("light_igc_tunnel_004", 0, 40);
+  lerp_spot_intensity("light_igc_tunnel_003", 0, 15);
+  lerp_spot_intensity("light_igc_tunnel_002", 0, 8);
+  lerp_spot_intensity("light_igc_tunnel_001", 0, 200);
+  lerp_spot_intensity("tunnel_intro_IGC_fill_001", 0, 5);
+  lerp_spot_intensity("tunnel_intro_IGC_fill_002", 0, 0.5);
+  lerp_spot_intensity("tunnel_intro_IGC_fill_003", 0, 50);
+  lerp_spot_intensity("tunnel_intro_IGC_fill_004", 0, 8);
   setsaveddvar(@ "hash_e918bd4613339eeb", 0);
   wait 15;
   setsaveddvar(@ "hash_e918bd4613339eeb", 2);
 }
 
 function function_4dfbcdf6e57930e7() {
-  function_238c2a0aae70e973("light_igc_tunnel_005", 1, 0);
-  function_238c2a0aae70e973("light_igc_tunnel_004", 1, 0);
-  function_238c2a0aae70e973("light_igc_tunnel_003", 1, 0);
-  function_238c2a0aae70e973("light_igc_tunnel_002", 1, 0);
-  function_238c2a0aae70e973("light_igc_tunnel_001", 1, 0);
-  function_238c2a0aae70e973("tunnel_intro_IGC_fill_001", 1, 0);
-  function_238c2a0aae70e973("tunnel_intro_IGC_fill_002", 1, 0);
-  function_238c2a0aae70e973("tunnel_intro_IGC_fill_003", 1, 0);
-  function_238c2a0aae70e973("tunnel_intro_IGC_fill_004", 1, 0);
+  lerp_spot_intensity("light_igc_tunnel_005", 1, 0);
+  lerp_spot_intensity("light_igc_tunnel_004", 1, 0);
+  lerp_spot_intensity("light_igc_tunnel_003", 1, 0);
+  lerp_spot_intensity("light_igc_tunnel_002", 1, 0);
+  lerp_spot_intensity("light_igc_tunnel_001", 1, 0);
+  lerp_spot_intensity("tunnel_intro_IGC_fill_001", 1, 0);
+  lerp_spot_intensity("tunnel_intro_IGC_fill_002", 1, 0);
+  lerp_spot_intensity("tunnel_intro_IGC_fill_003", 1, 0);
+  lerp_spot_intensity("tunnel_intro_IGC_fill_004", 1, 0);
 }
 
 function function_e5983d2bf6e3dc1f() {}

@@ -510,14 +510,14 @@ function function_5038458e3ceeb5bd(arena, aispawn) {
   agent.maxsightdistsqrd = getdvarfloat(@ "hash_fa26f07d026720be", 12250000);
   agent.var_2626d6897d71b728 = getdvarfloat(@ "hash_57f1a5678a01b7eb", 12250000);
   agent.var_b4e73b5c37fe850f = getdvarint(@ "hash_8b0d1bd49a4054b5", 0);
-  agent function_9f82c74eb1b7caf9(0);
+  agent setcanusecover(0);
   agent.goalradius = getdvarint(@ "hash_d9a7939c74c23d34", 3200);
   agent.script_goalradius = agent.goalradius;
   agent.ballowexecutions = getdvarint(@ "hash_52d3883d39c08659", 1);
   agent.minpaindamage = getdvarint(@ "hash_289b813a732c2672", 450);
-  agent.var_9440dc8a2aa90aed = getdvarint(@ "hash_61ec5d7484718bc9", 500);
+  agent.pursueruncooldown = getdvarint(@ "hash_61ec5d7484718bc9", 500);
   agent.var_7d606bec79308eb5 = getdvarint(@ "hash_a0b1e91f87faf171", 768);
-  agent.var_85a0f6383a5dd784 = getdvarint(@ "hash_f2334aa4fa920550", 512);
+  agent.pursuestopdistance = getdvarint(@ "hash_f2334aa4fa920550", 512);
   agent.var_a67833fea11a521c = getdvarint(@ "hash_95a0623d74d35620", 128);
   agent.var_427cbd3288a2f59 = getdvarint(@ "hash_cb0a08edcac4931d", 128);
   agent.var_789bf98b36e292db = getdvarint(@ "hash_34a27361609efe2f", 1000);
@@ -551,7 +551,7 @@ function function_5038458e3ceeb5bd(arena, aispawn) {
     agent.ignoreall = 1;
     agent playLoopSound("mus_jugg_01_hp");
     agent setclothtype(#"nylon");
-    agent function_8abe5a968cc3c220(#"scubagr");
+    agent setgeartype(#"scubagr");
     agent function_3f32b2ac35f3ea96(arena);
     level thread function_dabf898f5f2a99e5(agent, arena);
     agent.ignoreall = 0;
@@ -800,7 +800,7 @@ function function_411c2b5ec5acd20a(agent, arena) {
       playerid = player getentitynumber();
       utilityscores[playerid] = 0;
 
-      if(!istrue(arena.var_5f525e1e05714bb5)) {
+      if(!istrue(arena.onevone)) {
         var_b47a8cc2e1180256 = array_contains(arena.var_801cdcfadc4d465c, player);
 
         if(var_b47a8cc2e1180256 && var_8980dd54afd4cd16 > 0) {

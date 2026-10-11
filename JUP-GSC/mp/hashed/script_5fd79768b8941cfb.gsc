@@ -96,7 +96,7 @@ function function_9d12545308a35fd2(loot, var_9b9f1075db564acd) {
 function function_c8f65416ce71277a(scriptmodel, offset, angles) {
   level endon("game_ended");
   waitframe();
-  utility::function_6e506f39f121ea8a(scriptmodel, offset, angles);
+  utility::scriptable_setparententity(scriptmodel, offset, angles);
   self.parent = scriptmodel;
 }
 
@@ -215,14 +215,14 @@ function function_84114acff04cfccb(vehicle1, vehicle2, vehicleref, collisioncool
   isvehicledestroyed = damage >= health;
 
   if(isvehicledestroyed) {
-    vehicle.var_a8f4bb03b366aa80 = 1;
+    vehicle.dontspawnhusk = 1;
   }
 
   vehicle dodamage(damage, movingplatform.origin, movingplatform, movingplatform, "MOD_CRUSH");
 
   if(vehicle vehicle_isphysveh()) {
     impulsestrength = ter_op(isDefined(var_c4e36a338fa34f19), var_c4e36a338fa34f19, 250);
-    vehicle function_e0201404a8b6f664(vehicle.origin - movingplatform.origin + (0, 0, 200), impulsestrength, 1);
+    vehicle vehphys_impulse(vehicle.origin - movingplatform.origin + (0, 0, 200), impulsestrength, 1);
   }
 
   if(vehicle.health < health) {

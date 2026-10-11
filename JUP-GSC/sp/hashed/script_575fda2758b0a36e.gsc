@@ -42,21 +42,21 @@ function startsavedprogression(levelname) {
   }
 
   if(scripts\common\utility::iscp() && getsubstr(levelname, 0, 3) == "cp_") {
-    levelname = function_f3bb4f4911a1beb2("game", "convertsbmissionnametoddl", levelname);
+    levelname = callsharedfunc("game", "convertsbmissionnametoddl", levelname);
   }
 
   if(isprogressionlevel(levelname)) {
     if(scripts\common\utility::iscp() && getsubstr(levelname, 0, 3) == "cp_") {
-      scripts\engine\utility::function_f3bb4f4911a1beb2("checkpoint", "timestamp");
+      scripts\engine\utility::callsharedfunc("checkpoint", "timestamp");
 
       if(!getdvarint(@ "hash_f004b2ccc04fdc8d", 0)) {
-        scripts\engine\utility::function_f3bb4f4911a1beb2("checkpoint", "reset");
+        scripts\engine\utility::callsharedfunc("checkpoint", "reset");
       }
 
-      checkpoint_map = level.player scripts\engine\utility::function_f3bb4f4911a1beb2("checkpoint", "get_checkpoint_map");
+      checkpoint_map = level.player scripts\engine\utility::callsharedfunc("checkpoint", "get_checkpoint_map");
 
       if(isDefined(checkpoint_map) && isstring(checkpoint_map) && checkpoint_map != levelname) {
-        scripts\engine\utility::function_f3bb4f4911a1beb2("checkpoint", "reset");
+        scripts\engine\utility::callsharedfunc("checkpoint", "reset");
       }
     }
 
@@ -67,24 +67,24 @@ function startsavedprogression(levelname) {
 
     if(getdvarint(@ "hash_b8b8e25bb75b206d") == 0) {
       if(scripts\common\utility::iscp()) {
-        level.player function_f3bb4f4911a1beb2("game", "setProgressionData", "spData", "currentMission", levelname);
+        level.player callsharedfunc("game", "setProgressionData", "spData", "currentMission", levelname);
       } else {
-        level.player function_f3bb4f4911a1beb2("game", "setPlayerProgression", "currentMission", levelname);
+        level.player callsharedfunc("game", "setPlayerProgression", "currentMission", levelname);
       }
 
       if(scripts\common\utility::iscp()) {
-        state = level.player function_f3bb4f4911a1beb2("game", "getProgressionData", "spData", "missionStateData", levelname);
+        state = level.player callsharedfunc("game", "getProgressionData", "spData", "missionStateData", levelname);
       } else {
-        state = level.player function_f3bb4f4911a1beb2("game", "getPlayerProgression", "missionStateData", levelname);
+        state = level.player callsharedfunc("game", "getPlayerProgression", "missionStateData", levelname);
       }
 
       if(state == "locked") {
         if(scripts\common\utility::iscp()) {
-          level.player function_f3bb4f4911a1beb2("game", "setProgressionData", "spData", "missionStateData", levelname, "incomplete");
+          level.player callsharedfunc("game", "setProgressionData", "spData", "missionStateData", levelname, "incomplete");
           return;
         }
 
-        level.player function_f3bb4f4911a1beb2("game", "setPlayerProgression", "missionStateData", levelname, "incomplete");
+        level.player callsharedfunc("game", "setPlayerProgression", "missionStateData", levelname, "incomplete");
       }
     }
   }
@@ -120,9 +120,9 @@ function previouslevelcompleted(levelindex) {
   var_dafc1e855ded43aa = level.missionsettings.levels[levelindex].name;
 
   if(scripts\common\utility::iscp()) {
-    var_15cfc62c61f4117f = level.player function_f3bb4f4911a1beb2("game", "getProgressionData", "spData", "missionStateData", var_dafc1e855ded43aa);
+    var_15cfc62c61f4117f = level.player callsharedfunc("game", "getProgressionData", "spData", "missionStateData", var_dafc1e855ded43aa);
   } else {
-    var_15cfc62c61f4117f = level.player function_f3bb4f4911a1beb2("game", "getPlayerProgression", "missionStateData", var_dafc1e855ded43aa);
+    var_15cfc62c61f4117f = level.player callsharedfunc("game", "getPlayerProgression", "missionStateData", var_dafc1e855ded43aa);
   }
 
   if(var_15cfc62c61f4117f != "complete") {
@@ -145,7 +145,7 @@ function isdevbuild() {
 
 function getlevelindex(levelname) {
   if(scripts\common\utility::iscp() && getsubstr(levelname, 0, 3) == "cp_") {
-    levelname = function_f3bb4f4911a1beb2("game", "convertsbmissionnametoddl", levelname);
+    levelname = callsharedfunc("game", "convertsbmissionnametoddl", levelname);
   }
 
   if(!isDefined(level.missionsettings) || !isDefined(level.missionsettings.levels)) {
@@ -175,11 +175,11 @@ function levelprogressioncomplete(levelindex) {
   var_6e0eeacbd0c484e7 = level.missionsettings.levels[levelindex].name;
 
   if(scripts\common\utility::iscp()) {
-    level.player function_f3bb4f4911a1beb2("game", "setProgressionData", "spData", "missionStateData", var_6e0eeacbd0c484e7, "complete");
-    level.player function_f3bb4f4911a1beb2("game", "setProgressionData", "spData", "currentGameskill", level.player.gameskill + 1);
+    level.player callsharedfunc("game", "setProgressionData", "spData", "missionStateData", var_6e0eeacbd0c484e7, "complete");
+    level.player callsharedfunc("game", "setProgressionData", "spData", "currentGameskill", level.player.gameskill + 1);
   } else {
-    level.player function_f3bb4f4911a1beb2("game", "setPlayerProgression", "missionStateData", var_6e0eeacbd0c484e7, "complete");
-    level.player function_f3bb4f4911a1beb2("game", "setPlayerProgression", "currentGameskill", level.player.gameskill + 1);
+    level.player callsharedfunc("game", "setPlayerProgression", "missionStateData", var_6e0eeacbd0c484e7, "complete");
+    level.player callsharedfunc("game", "setPlayerProgression", "currentGameskill", level.player.gameskill + 1);
   }
 
   level.player setprogressiondata("JupMissionDifficulties", "JupMissionDifficulty", levelindex, level.lowestgameskill + 1);

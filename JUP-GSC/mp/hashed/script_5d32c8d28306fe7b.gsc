@@ -55,18 +55,18 @@ function function_c575026994a655b1(einflictor, eattacker, idamage, idflags, smea
 
 function function_6928d17346bd05f1(attacker, n_height) {
   bundle = level.perkbundles["specialty_phd_flopper"];
-  var_e9520430205239af = default_to(bundle.var_ba47e4feaa48b320, 96);
+  n_base_height = default_to(bundle.var_ba47e4feaa48b320, 96);
   var_dc910819a8dc7c52 = default_to(bundle.var_e76b605905032f5d, 300);
   var_467d029427417a38 = default_to(bundle.var_a2a9a67545749a14, 150);
   var_e0b61a5b5bf83df2 = default_to(bundle.var_1277e5b099b3fd62, 32);
   var_d1f3779556d081a4 = default_to(bundle.var_60e612d2ef6a503c, 50);
 
-  if(n_height < var_e9520430205239af) {
+  if(n_height < n_base_height) {
     n_radius = var_dc910819a8dc7c52;
     n_min_damage = var_467d029427417a38;
     n_boost = 5000;
     fx = getfx("perk_phd_explode_sm");
-  } else if(n_height >= var_e9520430205239af && n_height < var_e9520430205239af * 3) {
+  } else if(n_height >= n_base_height && n_height < n_base_height * 3) {
     n_radius = var_dc910819a8dc7c52 * 2;
     n_min_damage = var_467d029427417a38 + var_d1f3779556d081a4;
     n_boost = 8000;

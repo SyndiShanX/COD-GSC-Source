@@ -188,7 +188,7 @@ function function_b3ff47edf02118d1(icon, deathiconlocation, team) {
   player = self;
   player endon("disconnect");
   level endon("game_ended");
-  var_fbf7a3d9a735ec16 = player br_public::isplayerinorgoingtogulag() || player br_public::function_8f0e6614368f64c2() || br_public::isrespawningfromtoken(player);
+  var_fbf7a3d9a735ec16 = player br_public::isplayerinorgoingtogulag() || player br_public::isplayerwaitingresurgencerespawn() || br_public::isrespawningfromtoken(player);
   var_c4e3fe6f0f6c591d = istrue(player.issolo) && isDefined(player.respawndelay) && player.respawndelay <= 0;
 
   if(!scripts\mp\utility\player::isreallyalive(player) && !br_public::isrespawningfromtoken(player) && !var_fbf7a3d9a735ec16 && !istrue(level.useautorespawn) && !var_c4e3fe6f0f6c591d && scripts\mp\flags::gameflag("prematch_done")) {
@@ -200,7 +200,7 @@ function function_b3ff47edf02118d1(icon, deathiconlocation, team) {
   } else {
     while(var_fbf7a3d9a735ec16) {
       wait 2;
-      var_fbf7a3d9a735ec16 = player br_public::isplayerinorgoingtogulag() || player br_public::function_8f0e6614368f64c2() || br_public::isrespawningfromtoken(player);
+      var_fbf7a3d9a735ec16 = player br_public::isplayerinorgoingtogulag() || player br_public::isplayerwaitingresurgencerespawn() || br_public::isrespawningfromtoken(player);
     }
   }
 
@@ -297,7 +297,7 @@ function addenemydeathicon(entity, dyingplayer, var_dd573edaa0c55862, var_5582b2
   if(scripts\cp_mp\utility\game_utility::function_b2c4b42f9236924()) {
     image = "hud_realism_head_death";
     drawthroughgeo = 0;
-    var_c5409ca7522182b3 = 768;
+    maxdrawdist = 768;
     naturaldist = 10;
 
     if(istrue(level.var_32fe21b3c5052471)) {
@@ -306,7 +306,7 @@ function addenemydeathicon(entity, dyingplayer, var_dd573edaa0c55862, var_5582b2
   } else {
     image = "hud_icon_death_hunter_spawn";
     drawthroughgeo = 1;
-    var_c5409ca7522182b3 = 768;
+    maxdrawdist = 768;
     naturaldist = 0;
 
     if(istrue(level.var_32fe21b3c5052471)) {
@@ -318,13 +318,13 @@ function addenemydeathicon(entity, dyingplayer, var_dd573edaa0c55862, var_5582b2
 
   if(var_5582b247a8570f9b.size > 0) {
     var_5e156d8393667bcf = "esports_codcaster_waypoint_skull";
-    head_icon = dyingplayer scripts\cp_mp\entityheadicons::setheadicon_singleimage(var_5582b247a8570f9b, var_5e156d8393667bcf, undefined, drawthroughgeo, var_c5409ca7522182b3, naturaldist, undefined, undefined, undefined, overrideorigin);
+    head_icon = dyingplayer scripts\cp_mp\entityheadicons::setheadicon_singleimage(var_5582b247a8570f9b, var_5e156d8393667bcf, undefined, drawthroughgeo, maxdrawdist, naturaldist, undefined, undefined, undefined, overrideorigin);
     setheadiconteam(head_icon, dyingplayer.team);
     dyingplayer.var_795ad0631cf24432 = scripts\engine\utility::array_add_safe(dyingplayer.var_795ad0631cf24432, head_icon);
   }
 
   if(var_dd573edaa0c55862.size > 0) {
-    head_icon = dyingplayer scripts\cp_mp\entityheadicons::setheadicon_singleimage(var_dd573edaa0c55862, image, undefined, drawthroughgeo, var_c5409ca7522182b3, naturaldist, undefined, undefined, undefined, overrideorigin);
+    head_icon = dyingplayer scripts\cp_mp\entityheadicons::setheadicon_singleimage(var_dd573edaa0c55862, image, undefined, drawthroughgeo, maxdrawdist, naturaldist, undefined, undefined, undefined, overrideorigin);
     dyingplayer.var_795ad0631cf24432 = scripts\engine\utility::array_add_safe(dyingplayer.var_795ad0631cf24432, head_icon);
   }
 

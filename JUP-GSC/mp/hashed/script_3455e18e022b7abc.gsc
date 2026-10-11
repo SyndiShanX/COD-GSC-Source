@@ -100,7 +100,7 @@ function function_d94f8bea6e21780d(instance) {
   instance.door namespace_b1453e6e8267c3ce::function_3edb9b978dca8642(instance, state);
 }
 
-function function_25da66b947454d11(instance, note, param, var_535d9c3fdddab5a9) {
+function function_25da66b947454d11(instance, note, param, instigator) {
   if(!isDefined(instance) || instance.type != "ob_combo_lock_flagstone" || !isDefined(instance.entity) || !isDefined(instance.entity.index)) {
     return;
   }
@@ -110,7 +110,7 @@ function function_25da66b947454d11(instance, note, param, var_535d9c3fdddab5a9) 
   instance.entity.scriptable setscriptablepartstate("health", "damageable");
 }
 
-function function_d44e5d38e3b8fb2c(instance, note, param, var_535d9c3fdddab5a9) {
+function function_d44e5d38e3b8fb2c(instance, note, param, instigator) {
   if(!isDefined(instance) || instance.type != "ob_combo_lock_flagstone" || !isDefined(instance.entity)) {
     return;
   }

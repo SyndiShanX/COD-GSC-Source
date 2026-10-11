@@ -1512,9 +1512,9 @@ function bot_add_to_bot_level_targets(var_ae802f9c07f6fdac) {
   assertmsg("<dev string:x249>");
 }
 
-function bot_remove_from_bot_level_targets(var_a7044cc8abac7165) {
-  var_a7044cc8abac7165.already_used = 1;
-  level.level_specific_bot_targets = array_remove(level.level_specific_bot_targets, var_a7044cc8abac7165);
+function bot_remove_from_bot_level_targets(target_to_remove) {
+  target_to_remove.already_used = 1;
+  level.level_specific_bot_targets = array_remove(level.level_specific_bot_targets, target_to_remove);
 }
 
 function bot_add_to_bot_use_targets(var_1fffa800ea7104b) {
@@ -1772,13 +1772,13 @@ function bot_monitor_enemy_camp_spots(validatefunc) {
           if(isDefined(level.enemy_camp_assassin_goal[participant.team])) {
             aiallies = [];
 
-            foreach(var_9d211f46b524698a in level.participants) {
-              if(!isDefined(var_9d211f46b524698a.team)) {
+            foreach(otherparticipant in level.participants) {
+              if(!isDefined(otherparticipant.team)) {
                 continue;
               }
 
-              if(var_9d211f46b524698a[[validatefunc]]() && var_9d211f46b524698a.team == participant.team) {
-                aiallies[aiallies.size] = var_9d211f46b524698a;
+              if(otherparticipant[[validatefunc]]() && otherparticipant.team == participant.team) {
+                aiallies[aiallies.size] = otherparticipant;
               }
             }
 

@@ -33,7 +33,7 @@ function throwingknifefiremain(grenade, weapon) {
   grenade waittill("missile_stuck", stuckto, stuckpart, null, null, position, normal);
 
   if(isDefined(stuckpart) && function_28eeffcb2337321e(stuckpart)) {
-    stuckpart = function_f28fd66285fa2c9(stuckpart);
+    stuckpart = getxhashhexname(stuckpart);
   }
 
   if(isDefined(stuckto) && isai(stuckto)) {
@@ -45,10 +45,10 @@ function throwingknifefiremain(grenade, weapon) {
   }
 
   grenade hide();
-  var_a2301015c1ab039e = grenade.origin;
-  var_a2301015c1ab039e += rotatevector((2, 0, 0), grenade.angles);
-  var_9770ec8f19981834 = vectortoangles(-1 * normal);
-  var_840da51fcf30ff7e = scripts\sp\loot::spawnlootitem("throwingknife", var_a2301015c1ab039e, var_9770ec8f19981834, 0, 1, !isDefined(stuckto), isDefined(stuckto));
+  offsetgrenadeorigin = grenade.origin;
+  offsetgrenadeorigin += rotatevector((2, 0, 0), grenade.angles);
+  offsetgrenadeangles = vectortoangles(-1 * normal);
+  var_840da51fcf30ff7e = scripts\sp\loot::spawnlootitem("throwingknife", offsetgrenadeorigin, offsetgrenadeangles, 0, 1, !isDefined(stuckto), isDefined(stuckto));
 
   if(isDefined(stuckto) && !isai(stuckto)) {
     var_840da51fcf30ff7e linkTo(stuckto);
@@ -115,13 +115,13 @@ function function_77f29d1ed8e5ad4c() {
 }
 
 function function_73b30a27a6d8f81c() {
-  var_375c5ff0a6f238ac = function_9d30fd63965bafa9("bullet", self);
+  whizbydist = geteventdefaultdistance("bullet", self);
 
   if(isDefined(level.stealth)) {
-    var_375c5ff0a6f238ac = function_61b03c8c194a6733(ter_op(flag("stealth_spotted"), "spotted", "hidden"), "bullet");
+    whizbydist = function_61b03c8c194a6733(ter_op(flag("stealth_spotted"), "spotted", "hidden"), "bullet");
   }
 
-  var_fbe5ade21bd0d394 = var_375c5ff0a6f238ac * var_375c5ff0a6f238ac;
+  whizbydistsq = whizbydist * whizbydist;
   self endon("missile_stuck");
   startpos = self.origin;
   endpos = startpos;
@@ -129,7 +129,7 @@ function function_73b30a27a6d8f81c() {
   minzoffset = 18;
   maxzoffset = 60;
   increment = (maxzoffset - minzoffset) / 2;
-  var_e36f4333eb9fdaf4 = [];
+  whizbyguys = [];
 
   if(getdvarint(@ "hash_a8d9e3f367c7effc")) {
     thread draw_line_for_time(startpos + anglestoright(throwangles) * 1000, startpos + anglestoleft(throwangles) * 1000, 1, 0, 1, 10);
@@ -141,14 +141,14 @@ function function_73b30a27a6d8f81c() {
     startpos = endpos;
     endpos = self.origin;
     throwangles = vectortoangles(endpos - startpos);
-    var_6df2b5e4b03e9ea = vectortoangles(startpos - endpos);
+    revthrowangles = vectortoangles(startpos - endpos);
 
     if(getdvarint(@ "hash_a8d9e3f367c7effc")) {
-      thread draw_line_for_time(endpos + anglestoright(var_6df2b5e4b03e9ea) * 1000, endpos + anglestoleft(var_6df2b5e4b03e9ea) * 1000, 1, 1, 0, 10);
+      thread draw_line_for_time(endpos + anglestoright(revthrowangles) * 1000, endpos + anglestoleft(revthrowangles) * 1000, 1, 1, 0, 10);
     }
 
     foreach(guy in getaiarray("axis", "team3")) {
-      if(array_contains(var_e36f4333eb9fdaf4, guy)) {
+      if(array_contains(whizbyguys, guy)) {
         continue;
       }
 
@@ -158,11 +158,11 @@ function function_73b30a27a6d8f81c() {
       while(origin[2] <= max_z) {
         success = 0;
 
-        if(distancesquared(origin, endpos) <= var_fbe5ade21bd0d394) {
+        if(distancesquared(origin, endpos) <= whizbydistsq) {
           success = 1;
 
           if(getdvarint(@ "hash_a8d9e3f367c7effc")) {
-            thread draw_circle(endpos, var_375c5ff0a6f238ac, (1, 1, 1), 1, 0, 200);
+            thread draw_circle(endpos, whizbydist, (1, 1, 1), 1, 0, 200);
           }
         }
 
@@ -171,11 +171,11 @@ function function_73b30a27a6d8f81c() {
             goto LOC_00000381;
           }
 
-          jumpiftrue(within_fov(endpos, var_6df2b5e4b03e9ea, origin, 0)) LOC_0000029c;
+          jumpiftrue(within_fov(endpos, revthrowangles, origin, 0)) LOC_0000029c;
         } else {
           LOC_0000029c: if(!success) {
             vector = vectorfromlinetopoint(startpos, endpos, origin);
-            success = lengthsquared(vector) <= var_fbe5ade21bd0d394;
+            success = lengthsquared(vector) <= whizbydistsq;
 
             if(success && getdvarint(@ "hash_a8d9e3f367c7effc")) {
               thread draw_line_for_time(startpos, endpos, 1, 1, 1, 10);
@@ -192,7 +192,7 @@ function function_73b30a27a6d8f81c() {
               guy aieventlistenerevent("bulletwhizby", level.player, endpos);
             }
 
-            var_e36f4333eb9fdaf4[var_e36f4333eb9fdaf4.size] = guy;
+            whizbyguys[whizbyguys.size] = guy;
             break;
           }
           LOC_00000381:
@@ -209,7 +209,7 @@ function function_73b30a27a6d8f81c() {
 
 function broadcastimpact() {
   ais = getaiunittypearray("bad_guys");
-  impactdist = function_9d30fd63965bafa9("silenced_shot_impact", self);
+  impactdist = geteventdefaultdistance("silenced_shot_impact", self);
   impactdistsq = squared(impactdist);
 
   foreach(ai in ais) {

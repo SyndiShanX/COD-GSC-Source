@@ -7,7 +7,7 @@
 #namespace br_anims;
 #using_animtree("mp_vehicles_always_loaded");
 
-function function_8d59ea17104ccc81() {
+function init_vehicle_anims() {
   level.br_anim["wz_iw9_exfil_intro_helicopter_sh010"] = % wz_iw9_exfil_intro_helicopter_sh010;
   level.br_anim["wz_iw9_exfil_intro_helicopter_sh030"] = % wz_iw9_exfil_intro_helicopter_sh030;
   level.br_anim["wz_iw9_exfil_intro_helicopter_sh040"] = % wz_iw9_exfil_intro_helicopter_sh040;
@@ -319,7 +319,7 @@ function function_9552697d50ec08e1() {
 }
 
 function init() {
-  function_8d59ea17104ccc81();
+  init_vehicle_anims();
   function_9552697d50ec08e1();
   level.br_anim["wz_infil_g_prop_sh000"] = % wz_infil_g_prop_sh000;
   level.br_anim["wz_infil_g_prop_sh020"] = % wz_infil_g_prop_sh020;

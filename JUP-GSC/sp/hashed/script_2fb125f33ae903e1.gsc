@@ -478,7 +478,7 @@ function private function_442854a0e08362fa(soldier, var_53db94485a61f025, var_2c
     var_c04ba734aa3b11ae = isalive(level.officer);
 
     if(var_c04ba734aa3b11ae == 0) {
-      function_1c1b9d33706c152d(soldier, "death");
+      broadcaststealthevent(soldier, "death");
     }
   }
 
@@ -486,7 +486,7 @@ function private function_442854a0e08362fa(soldier, var_53db94485a61f025, var_2c
     var_f15659fbd33f740a = isalive(soldier);
 
     if(var_f15659fbd33f740a == 0) {
-      function_1c1b9d33706c152d(level.officer, "death");
+      broadcaststealthevent(level.officer, "death");
     }
   }
 
@@ -510,7 +510,7 @@ function private function_810716cd17f8dabb(entarray) {
     foreach(ent in entarray) {
       if(isalive(ent) == 1) {
         ent stop_dialogue(1, 1);
-        function_1c1b9d33706c152d(ent, "death");
+        broadcaststealthevent(ent, "death");
       }
     }
 

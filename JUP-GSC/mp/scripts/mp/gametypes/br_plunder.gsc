@@ -124,8 +124,8 @@ function init() {
 
   scripts\mp\gametypes\br_circle::registercirclecallbacks(0, &dangercircletick, &function_1a1709943670772a);
 
-  if(!scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
-    function_f1aed36ab4598ea("eqp_extraction_balloon");
+  if(!scripts\cp_mp\utility\game_utility::ismagellanmode()) {
+    snd_transient_load("eqp_extraction_balloon");
   }
 
   thread function_d998045c08ec165d();
@@ -172,9 +172,9 @@ function plunder_infils_ready() {
   }
 }
 
-function modify_plunder_itemsinworld(itemname, var_bc23ce7464aa4861) {
+function modify_plunder_itemsinworld(itemname, modification) {
   if(level.br_plunder_enabled) {
-    level.br_plunder.itemsinworld[itemname] += var_bc23ce7464aa4861;
+    level.br_plunder.itemsinworld[itemname] += modification;
   }
 }
 
@@ -203,7 +203,7 @@ function setupquantities() {
 function initvo() {
   assert(isDefined(game["<dev string:x1c>"]));
 
-  if(!scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(!scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     game["dialog"]["plunder_extract_requested"] = "pxrq_grav_plnd";
     game["dialog"]["plunder_extract_chopper_arrive"] = "pxcr_grav_plnd";
     game["dialog"]["plunder_extract_chopper_leave"] = "pxcl_grav_plnd";
@@ -592,8 +592,8 @@ function playerplunderevent(amount, type, entity, data, wasscoreevent, var_b3a04
     self.lastplundereventtype = 0;
   }
 
-  var_26641d000f48954a = ter_op(type == 5, 3, type);
-  omnvar = level.playerplundereventomnvars[var_26641d000f48954a];
+  omnvartype = ter_op(type == 5, 3, type);
+  omnvar = level.playerplundereventomnvars[omnvartype];
   plundereventtotal = self.plundereventtotal[type];
   plundereventtime = self.plundereventtime[type];
 
@@ -1259,36 +1259,36 @@ function playersetplunderomnvar(value) {
 function getpackeddata(value, var_7009da06a8a620cb, bitoffset, bitwidth) {
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (value &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
-  cleanedbase = var_7009da06a8a620cb &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
-  return var_82a90e56e416fa55;
+  invertedmask = ~(mask << bitoffset);
+  cleanedbase = var_7009da06a8a620cb &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
+  return repackedvalue;
 }
 
 function playergetplunderomnvarbitpackinginfo() {
   bitoffset = 0;
   bitwidth = 0;
-  var_8e90fa6d5789ad63 = "";
+  omnvarref = "";
 
   switch (self.sessionuimemberindex) {
     case 1:
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [0, 17, "ui_br_plunder_count"];
+      [bitoffset, bitwidth, omnvarref] = [0, 17, "ui_br_plunder_count"];
       break;
     case 2:
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [17, 17, "ui_br_plunder_count"];
+      [bitoffset, bitwidth, omnvarref] = [17, 17, "ui_br_plunder_count"];
       break;
     case 3:
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [0, 17, "ui_br_plunder_count2"];
+      [bitoffset, bitwidth, omnvarref] = [0, 17, "ui_br_plunder_count2"];
       break;
     case 4:
-      [bitoffset, bitwidth, var_8e90fa6d5789ad63] = [17, 17, "ui_br_plunder_count2"];
+      [bitoffset, bitwidth, omnvarref] = [17, 17, "ui_br_plunder_count2"];
       break;
     default:
       assertmsg("<dev string:x17c>" + self.sessionuimemberindex + "<dev string:x195>");
       break;
   }
 
-  return [bitoffset, bitwidth, var_8e90fa6d5789ad63];
+  return [bitoffset, bitwidth, omnvarref];
 }
 
 function dangercircletick(dangercircleorigin, dangercircleradius, thresholdradius) {
@@ -1753,9 +1753,9 @@ function debugextractsite(site) {
   siteent setModel(modelname);
   locationx = site.origin[0];
   locationy = site.origin[1];
-  var_dc8bb6300463cf1e = 800;
+  offgroundheight = 800;
   groundheight = siteent tracegroundpoint(site.origin);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   newpos = (locationx, locationy, trueheight);
   siteent.origin = newpos;
 
@@ -1766,7 +1766,7 @@ function debugextractsite(site) {
   }
 }
 
-function plundersiteused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function plundersiteused(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(instance) || !isDefined(player)) {
     return;
   }
@@ -1823,7 +1823,7 @@ function plundersiteusedinternal(instance, part, state, player) {
   teamindex = scripts\engine\utility::array_find(level.allteamnamelist, player.team);
   instance.team = teamindex;
   instance function_fca5bdbe24070d20(instance.type, teamindex);
-  groundorg = getgroundposition(instance.origin, 1) + (0, 0, ter_op(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587(), 2, -9));
+  groundorg = getgroundposition(instance.origin, 1) + (0, 0, ter_op(scripts\cp_mp\utility\game_utility::ismagellanmode(), 2, -9));
   heli = player playerspawnextractchopper(groundorg, instance);
 
   if(isDefined(heli)) {
@@ -2542,9 +2542,9 @@ function helidestroyvehiclestouchtrace() {
 }
 
 function tracegroundheight(start) {
-  var_dc8bb6300463cf1e = 800;
+  offgroundheight = 800;
   groundheight = tracegroundpoint(start);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   return trueheight;
 }
 
@@ -3072,7 +3072,7 @@ function plunder_playerrepositoryuseshouldsucceed(entity, player, showerror) {
   return 1;
 }
 
-function plunder_repositoryusescriptablecallback(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function plunder_repositoryusescriptablecallback(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(instance)) {
     return;
   }

@@ -94,36 +94,36 @@ function function_6d402ea224e021c2(sparams) {
 }
 
 function private function_222b578c46e71445(player) {
-  var_ac0eafb387bd7c4 = undefined;
+  pedestals = undefined;
 
   if(isDefined(player)) {
     if(function_3e9b5fc322cb6c83()) {
-      var_ac0eafb387bd7c4 = namespace_af93597583d94051::function_b200e7001502a482(player.team, player.sessionsquadid, "s3");
+      pedestals = namespace_af93597583d94051::function_b200e7001502a482(player.team, player.sessionsquadid, "s3");
     } else {
-      var_ac0eafb387bd7c4 = player.var_f9fafd3d5230df68;
+      pedestals = player.var_f9fafd3d5230df68;
     }
   }
 
-  return var_ac0eafb387bd7c4;
+  return pedestals;
 }
 
-function private function_b200e7001502a482(team, sessionsquadid, var_6b0ee97314aed333) {
-  var_ac0eafb387bd7c4 = undefined;
+function private function_b200e7001502a482(team, sessionsquadid, playertoignore) {
+  pedestals = undefined;
 
   if(isDefined(team) && isDefined(sessionsquadid)) {
     if(function_3e9b5fc322cb6c83()) {
-      var_ac0eafb387bd7c4 = namespace_af93597583d94051::function_b200e7001502a482(team, sessionsquadid, "s3", var_6b0ee97314aed333);
+      pedestals = namespace_af93597583d94051::function_b200e7001502a482(team, sessionsquadid, "s3", playertoignore);
     } else {
       squaddata = level.squaddata[team][sessionsquadid];
 
       if(isDefined(squaddata.players) && isDefined(squaddata) && isDefined(squaddata.players.size) && squaddata.players.size > 0) {
         foreach(squaddie in squaddata.players) {
           if(isDefined(squaddie) && isDefined(squaddie.var_f9fafd3d5230df68)) {
-            if(isDefined(var_6b0ee97314aed333) && squaddie == var_6b0ee97314aed333) {
+            if(isDefined(playertoignore) && squaddie == playertoignore) {
               continue;
             }
 
-            var_ac0eafb387bd7c4 = squaddie.var_f9fafd3d5230df68;
+            pedestals = squaddie.var_f9fafd3d5230df68;
             break;
           }
         }
@@ -131,7 +131,7 @@ function private function_b200e7001502a482(team, sessionsquadid, var_6b0ee97314a
     }
   }
 
-  return var_ac0eafb387bd7c4;
+  return pedestals;
 }
 
 function private function_3e9b5fc322cb6c83() {
@@ -206,8 +206,8 @@ function function_1cc31f82c0a48ab(var_2e2a4163dba53609) {
 
 function function_46822b25a91c60bc(var_249fdd086dd5b361) {
   level endon("game_ended");
-  var_7cddb1a25ec9f269 = function_f159c10d5cf8f0b4("SM_VO_trigger_approach", "targetname");
-  var_6982c4a34de46ab0 = function_f159c10d5cf8f0b4("SM_VO_trigger_arrive", "targetname");
+  var_7cddb1a25ec9f269 = getnoentvolumearray("SM_VO_trigger_approach", "targetname");
+  var_6982c4a34de46ab0 = getnoentvolumearray("SM_VO_trigger_arrive", "targetname");
   assert(isDefined(var_7cddb1a25ec9f269) && isarray(var_7cddb1a25ec9f269));
   assert(isDefined(var_6982c4a34de46ab0) && isarray(var_6982c4a34de46ab0));
   assert(var_7cddb1a25ec9f269.size == 1);
@@ -527,9 +527,9 @@ function private function_1383a22b72211d91(player) {
   var_56f5775724510587 = [];
 
   foreach(s_pedestal in s_gate.var_39cfa415b2be8156) {
-    var_a3a5c8e4541d079f = anglesToForward(s_pedestal.angles) * -8;
+    v_base_offset = anglesToForward(s_pedestal.angles) * -8;
     v_offset = anglestoup(s_pedestal.angles) * (16 + level.var_63b5ad00d6be7ebd) + anglesToForward(s_pedestal.angles) * level.var_6f534773a462cc07;
-    v_spawn = s_pedestal.origin + v_offset + var_a3a5c8e4541d079f;
+    v_spawn = s_pedestal.origin + v_offset + v_base_offset;
     var_8986997b27e850da = spawnscriptable("ob_jup_rift_gate_s3_pedestal_container", v_spawn);
     var_8986997b27e850da.s_pedestal = s_pedestal;
     var_8986997b27e850da.s_gate = s_gate;
@@ -943,9 +943,9 @@ function function_6932962f514cd776(player) {
   var_32a6f9b3d487152d = activity_participation::function_553a690e1064cf0b(player);
 
   foreach(var_b2941d08f576eb6c in var_32a6f9b3d487152d) {
-    var_6965880b974574a6 = var_b2941d08f576eb6c.instanceid;
-    activityinstance = activity_common::function_1f3e343912ae15c5(var_6965880b974574a6);
-    activitycategory = namespace_4fda5d7358015a06::function_511be8bcaede8b52(activityinstance);
+    activityinstanceid = var_b2941d08f576eb6c.instanceid;
+    activityinstance = activity_common::getactivityinstance(activityinstanceid);
+    activitycategory = namespace_4fda5d7358015a06::getactivitycategory(activityinstance);
 
     if(activitycategory == "Contract") {
       return true;
@@ -1175,7 +1175,7 @@ function function_b83ca58b862b27e9(a_squad, var_f0467a62f52ac9d6) {
   waitframe();
 
   while(timer.progresscomplete != 1) {
-    n_time_remaining = int(timer.var_621cb2c0d9b1cdae);
+    n_time_remaining = int(timer.currentprogressvalue);
 
     foreach(squaddie in a_squad) {
       if(isalive(squaddie)) {

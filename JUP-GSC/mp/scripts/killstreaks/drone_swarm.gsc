@@ -16,7 +16,7 @@
 #namespace drone_swarm;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("drone_swarm"), &function_72d7a59680238265);
+  registerkillstreakinitfunction(getxhash("drone_swarm"), &function_72d7a59680238265);
   registersharedfunc("drone_swarm", "tryUseDroneSwarm", &tryusedroneswarm);
 }
 
@@ -141,8 +141,8 @@ function function_79f28198cedcecf6(streakinfo) {
 }
 
 function function_9b447df727cd449b() {
-  var_da8cec9bce12f9cb = self.pers["team"];
-  characterref = scripts\cp_mp\utility\dialog_utility::function_d3c62d251d2af8e6(var_da8cec9bce12f9cb);
+  teamtocheck = self.pers["team"];
+  characterref = scripts\cp_mp\utility\dialog_utility::function_d3c62d251d2af8e6(teamtocheck);
   character = scripts\cp_mp\utility\dialog_utility::function_309f1876dda94360("Character", characterref);
 
   if(!isDefined(character)) {
@@ -156,8 +156,8 @@ function function_9b447df727cd449b() {
 }
 
 function function_f288b429af4c56e6() {
-  var_da8cec9bce12f9cb = self.pers["team"];
-  characterref = scripts\cp_mp\utility\dialog_utility::function_d3c62d251d2af8e6(var_da8cec9bce12f9cb);
+  teamtocheck = self.pers["team"];
+  characterref = scripts\cp_mp\utility\dialog_utility::function_d3c62d251d2af8e6(teamtocheck);
   character = scripts\cp_mp\utility\dialog_utility::function_309f1876dda94360("Character", characterref);
 
   if(!isDefined(character)) {
@@ -482,7 +482,7 @@ function function_bbc8f1a45f899378(deploytime, deployvector, exitvector, exitloc
     level.var_3677e794eb53000f setscriptablepartstate("planeSfx", "disabled");
   }
 
-  function_2eff4cd94c3243e8();
+  clearminimapid();
   self delete();
 }
 
@@ -544,7 +544,7 @@ function function_9dd4990a96e47972(location, streakinfo) {
 
   if(!istrue(var_d06f735a85408be7)) {
     if(istrue(bundle.var_9b2586bfb4f3de46) || istrue(var_6fe905dae10291e)) {
-      spawneddrone function_2eff4cd94c3243e8();
+      spawneddrone clearminimapid();
     }
 
     spawneddrone thread switchblade_drone::function_a66b069993cf9abb();
@@ -604,7 +604,7 @@ function function_5de4ac1e8f7a7cc1(callbackparams, additionalparams) {
   var_6fe905dae10291e = getdvarint(@ "hash_dc292ed5d6a897a4", 0);
 
   if(istrue(bundle.var_9b2586bfb4f3de46) || istrue(var_6fe905dae10291e)) {
-    function_2eff4cd94c3243e8();
+    clearminimapid();
   }
 
   wait 1;
@@ -636,7 +636,7 @@ function function_7d2bf0fc063e5cdb() {
   bundle = level.streakglobals.streakbundles["drone_swarm"];
 
   if(istrue(bundle.var_9b2586bfb4f3de46)) {
-    function_2eff4cd94c3243e8();
+    clearminimapid();
   }
 }
 

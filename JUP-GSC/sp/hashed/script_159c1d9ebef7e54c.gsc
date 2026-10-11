@@ -474,7 +474,7 @@ function function_327e7751c8c605c4() {
   level thread namespace_8339f6377b6ba60e::function_7cf3b8f1b807889a(var_6cae31b0727ad0b4, "flag_lumbermill_warehouse_room1_enemies_cleared");
 
   foreach(ai in var_6cae31b0727ad0b4) {
-    ai.enemyselector = function_40fd49171fad19d3("enemyselector_sp_jup_tundra_lumbermill");
+    ai.enemyselector = getxhashasset("enemyselector_sp_jup_tundra_lumbermill");
   }
 
   level thread namespace_8339f6377b6ba60e::function_7cf3b8f1b807889a(var_6cae31b0727ad0b4, "flg_lumbermill_warehouse_room1_enemies_cleared");
@@ -516,7 +516,7 @@ function function_e5d86625057be5c3() {
   level.var_a1495556b1cb21a5 = array_combine(level.var_a1495556b1cb21a5, var_6cae34b0727ad74d);
 
   foreach(ai in var_6cae34b0727ad74d) {
-    ai.enemyselector = function_40fd49171fad19d3("enemyselector_sp_jup_tundra_lumbermill");
+    ai.enemyselector = getxhashasset("enemyselector_sp_jup_tundra_lumbermill");
   }
 
   waitframe();
@@ -574,7 +574,7 @@ function function_113a318e4855793c() {
     gun = utility::make_weapon("iw9_sn_alpha50_notherm_sp");
     guy scripts\anim\shared::forceuseweapon(gun, "primary");
     guy.dropweapon = 0;
-    guy.enemyselector = function_40fd49171fad19d3("enemyselector_sp_jup_tundra_lumbermill");
+    guy.enemyselector = getxhashasset("enemyselector_sp_jup_tundra_lumbermill");
   }
 
   level utility::flag_wait("flag_lumbermill_player_insnipersnest");
@@ -608,7 +608,7 @@ function function_915e35a8d3ed5cc0() {
   var_3a793156808ebdf3 endon("death");
   var_3a793156808ebdf3 set_favoriteenemy(level.player);
   var_3a793156808ebdf3 thread function_cd91d3cc5631a048();
-  var_3a793156808ebdf3.enemyselector = function_40fd49171fad19d3("enemyselector_sp_jup_tundra_lumbermill");
+  var_3a793156808ebdf3.enemyselector = getxhashasset("enemyselector_sp_jup_tundra_lumbermill");
   utility::flag_wait("flag_lumbermill_player_insnipersnest");
   var_3a793156808ebdf3 set_fixednode_false();
   var_3a793156808ebdf3 setgoalpos(var_3a793156808ebdf3.origin);
@@ -645,7 +645,7 @@ function function_44e2342f3f647da() {
   level thread namespace_8339f6377b6ba60e::function_7cf3b8f1b807889a(var_2babe6f72d801819, "flag_lumbermill_nomansland_enemies_cleared");
 
   foreach(ai in var_2babe6f72d801819) {
-    ai.enemyselector = function_40fd49171fad19d3("enemyselector_sp_jup_tundra_lumbermill");
+    ai.enemyselector = getxhashasset("enemyselector_sp_jup_tundra_lumbermill");
   }
 
   n_fallback = 1;
@@ -707,7 +707,7 @@ function function_cc8f6de92164bd04() {
   level thread namespace_8339f6377b6ba60e::function_7cf3b8f1b807889a(var_2e08003c3235a3c3, "flag_lumbermill_frontline_enemies_cleared");
 
   foreach(ai in var_2e08003c3235a3c3) {
-    ai.enemyselector = function_40fd49171fad19d3("enemyselector_sp_jup_tundra_lumbermill");
+    ai.enemyselector = getxhashasset("enemyselector_sp_jup_tundra_lumbermill");
   }
 
   n_fallback = 1;
@@ -733,7 +733,7 @@ function function_7848f624652a226a() {
   level thread namespace_8339f6377b6ba60e::function_7cf3b8f1b807889a(var_8c2c1a1be0803ebd, "flag_lumbermill_logsstorage_enemies_cleared");
 
   foreach(ai in var_8c2c1a1be0803ebd) {
-    ai.enemyselector = function_40fd49171fad19d3("enemyselector_sp_jup_tundra_lumbermill");
+    ai.enemyselector = getxhashasset("enemyselector_sp_jup_tundra_lumbermill");
   }
 
   n_fallback = 1;
@@ -758,7 +758,7 @@ function function_103682a8e71ae4a() {
     }
 
     ai.var_669866694e190a3d = 1;
-    ai.enemyselector = function_40fd49171fad19d3("enemyselector_sp_jup_tundra_lumbermill");
+    ai.enemyselector = getxhashasset("enemyselector_sp_jup_tundra_lumbermill");
   }
 
   level flag_wait("flag_lumbermill_running_enemies_alerted");
@@ -819,13 +819,13 @@ function function_f402dfd4e8814fe5() {
   level thread function_20975eb1e2767d08("flag_lumbermill_farah_rpg_shoot_warehouse", "s_lumber_mill_RPGtarget_warehouse");
 }
 
-function function_20975eb1e2767d08(var_4351daa719f72255, var_beb9ed0e4b7d655c) {
+function function_20975eb1e2767d08(str_flag_wait, str_target_struct) {
   level endon("flag_lumbermill_complete");
   level.player endon("death");
   level endon("flag_lumbermill_farah_shot_RPG");
   level endon("flag_lumbermill_all_enemies_cleared");
-  s_target = getStruct(var_beb9ed0e4b7d655c, "targetname");
-  level utility::flag_wait(var_4351daa719f72255);
+  s_target = getStruct(str_target_struct, "targetname");
+  level utility::flag_wait(str_flag_wait);
   var_fbb6852ca18bd530 = squared(256);
   var_1f859102b3b18244 = within_fov_of_players(level.farah getEye(), cos(45));
   var_4deafe6569c8eb89 = distance2dsquared(level.player.origin, s_target.origin) < var_fbb6852ca18bd530;
@@ -1242,12 +1242,12 @@ function function_6fe431ffa0b905bf() {
 
   utility::flag_set("flag_lumbermill_vehicle_spectacle_complete");
   level thread function_93d86e60f0a2c604();
-  var_f585b76d7f472cd9 = get_living_ai_array("ai_lumber_mill_JLTV1", "script_noteworthy");
-  var_f585b76d7f472cd9 = array_combine(var_f585b76d7f472cd9, var_916b92b027b9d883);
+  a_ai_riders = get_living_ai_array("ai_lumber_mill_JLTV1", "script_noteworthy");
+  a_ai_riders = array_combine(a_ai_riders, var_916b92b027b9d883);
   var_8bdfff48dfbbe712 = 3;
 
-  if(var_f585b76d7f472cd9.size >= var_8bdfff48dfbbe712) {
-    waittill_dead_or_dying(var_f585b76d7f472cd9, var_f585b76d7f472cd9.size - var_8bdfff48dfbbe712);
+  if(a_ai_riders.size >= var_8bdfff48dfbbe712) {
+    waittill_dead_or_dying(a_ai_riders, a_ai_riders.size - var_8bdfff48dfbbe712);
   }
 
   utility::flag_set("flag_lumbermill_force_vehicle_reinforcement");
@@ -1656,7 +1656,7 @@ function function_c62d43acd232b24d(str_flag, f_delay) {
   self endon("death");
 
   if(isarray(str_flag)) {
-    level utility::function_665d474ff040b446(str_flag);
+    level utility::flag_wait_any_array(str_flag);
   } else {
     level utility::flag_wait(str_flag);
   }
@@ -1717,7 +1717,7 @@ function function_7ff64df0137e89d3(struct) {
   self endon("death");
   level.player endon("death");
   struct endon("stop_ai_group_monitor");
-  var_914b47911f0d74fd = squared(192);
+  near_dist_sq = squared(192);
   far_dist_sq = squared(384);
   count = 0;
 
@@ -1728,7 +1728,7 @@ function function_7ff64df0137e89d3(struct) {
       var_b183161a9e5cab9a *= 0.25;
     }
 
-    if(var_b183161a9e5cab9a < var_914b47911f0d74fd) {
+    if(var_b183161a9e5cab9a < near_dist_sq) {
       count++;
     } else if(var_b183161a9e5cab9a < far_dist_sq && self cansee(level.player)) {
       count++;

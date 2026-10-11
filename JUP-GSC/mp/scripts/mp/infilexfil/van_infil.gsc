@@ -21,7 +21,7 @@
 function van_init(subtype) {
   setdevdvarifuninitialized(@ "hash_3dc902e1a71dd25d", 0);
 
-  function_f1aed36ab4598ea("van_infil");
+  snd_transient_load("van_infil");
   thread function_e85c746a9eaa79f3();
   initanims(subtype);
   var_453e4fc2c649fea4 = [];
@@ -320,7 +320,7 @@ function vehiclethink(team, scene_node, scene_name, extra_crew) {
 function function_e85c746a9eaa79f3() {
   level waittill("prematch_over");
   wait 51;
-  function_f4e0ff5cb899686d("van_infil");
+  snd_transient_unload("van_infil");
 }
 
 function function_e3e8566b27b746cb() {

@@ -17,8 +17,8 @@
 #using scripts\mp\utility\lui_game_event_aggregator;
 #namespace perk_machines;
 
-function function_c349718d60cc262b() {
-  if(function_5ec3518dfd1490af(1 | 64 | 2 | 4 | 8 | 16 | 32)) {
+function init_perk_machines() {
+  if(isofflinetoolrun(1 | 64 | 2 | 4 | 8 | 16 | 32)) {
     return;
   }
 
@@ -131,24 +131,24 @@ function function_c224859356dbfd3d() {
     }
   }
 
-  var_74dade39e02d8fee = [];
+  a_spawn_points = [];
   var_3c3122af5c02bd7 = getStructArray("content_struct", "variantname");
 
   foreach(struct in var_3c3122af5c02bd7) {
     if(isDefined(struct.content_key) && struct.content_key == "perk_machine_region_spawn") {
-      var_74dade39e02d8fee = array_add(var_74dade39e02d8fee, struct);
+      a_spawn_points = array_add(a_spawn_points, struct);
     }
   }
 
   if(isDefined(level.var_c383b967aa7e551b)) {
-    var_74dade39e02d8fee = [[level.var_c383b967aa7e551b]]("perk", var_74dade39e02d8fee);
+    a_spawn_points = [[level.var_c383b967aa7e551b]]("perk", a_spawn_points);
   } else {
-    var_74dade39e02d8fee = array_randomize(var_74dade39e02d8fee);
+    a_spawn_points = array_randomize(a_spawn_points);
   }
 
   var_aefc5436dfe3990 = [];
 
-  foreach(spawn_point in var_74dade39e02d8fee) {
+  foreach(spawn_point in a_spawn_points) {
     str_region = [[level.var_8241e0d86017df29]](spawn_point.origin);
 
     if(str_region == "difficulty_easy") {
@@ -156,7 +156,7 @@ function function_c224859356dbfd3d() {
     }
   }
 
-  foreach(spawn_point in var_74dade39e02d8fee) {
+  foreach(spawn_point in a_spawn_points) {
     str_region = [[level.var_8241e0d86017df29]](spawn_point.origin);
 
     if(str_region != "difficulty_easy") {
@@ -229,7 +229,7 @@ function private function_b92f7075e8fd3081(usable, player) {
         #string: &"", #type: "HINT_NOICON"};
     } else {
       perk_cost = player function_b1e24c0eaeadfac7();
-      hint_string = scripts\engine\utility::ter_op(player function_bcc79745d547a99c(function_bc4d94fa05ac7078(perk), perk_cost), level._custom_perks[str_key].hint_string, level._custom_perks[str_key].var_2e1ef6ec4d3bd5bb);
+      hint_string = scripts\engine\utility::ter_op(player can_afford(function_bc4d94fa05ac7078(perk), perk_cost), level._custom_perks[str_key].hint_string, level._custom_perks[str_key].var_2e1ef6ec4d3bd5bb);
       return {
         #params: [perk_cost], #string: hint_string, #type: "HINT_BUTTON"};
     }
@@ -426,7 +426,7 @@ function function_b9232d78e96ab157(var_8686b40485143989, var_95427d8098dd59a1) {
 
     if(self getscriptablehaspart("music")) {
       if(self getscriptablepartstate("music") == "off") {
-        players = namespace_2b1145f62aa835b8::function_883458a342af3041(self.origin, 1250);
+        players = namespace_2b1145f62aa835b8::getplayersinradiussharedfunc(self.origin, 1250);
 
         if(!isDefined(players) || players.size < 1) {
           continue;

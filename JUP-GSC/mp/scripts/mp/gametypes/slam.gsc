@@ -184,7 +184,7 @@ function function_4d4c9064d5060fa4(params) {
 function function_7bb83dadb9e6cd29() {
   offset = 25;
   drawthroughgeo = 1;
-  var_c5409ca7522182b3 = 1280;
+  maxdrawdist = 1280;
   naturaldist = 250;
   delaytime = undefined;
   var_fa4cf28a58192889 = undefined;
@@ -195,8 +195,8 @@ function function_7bb83dadb9e6cd29() {
   var_460a6f9561179887 = "hud_realism_head_revive";
   enemyteam = scripts\mp\utility\teams::getenemyteams(selfteam)[0];
   var_a03e6a46d16f28e3 = "icon_obit_execution_slam";
-  var_2b6cf74ebb0a149 = scripts\cp_mp\entityheadicons::setheadicon_singleimage(selfteam, var_460a6f9561179887, offset, drawthroughgeo, var_c5409ca7522182b3, naturaldist, delaytime, var_fa4cf28a58192889, var_b3ea37733a1577e5, overrideorigin, showonminimap);
-  var_3d4e7bbef551ad7b = scripts\cp_mp\entityheadicons::setheadicon_singleimage(enemyteam, var_a03e6a46d16f28e3, offset, drawthroughgeo, var_c5409ca7522182b3, naturaldist, delaytime, var_fa4cf28a58192889, var_b3ea37733a1577e5, overrideorigin, showonminimap);
+  var_2b6cf74ebb0a149 = scripts\cp_mp\entityheadicons::setheadicon_singleimage(selfteam, var_460a6f9561179887, offset, drawthroughgeo, maxdrawdist, naturaldist, delaytime, var_fa4cf28a58192889, var_b3ea37733a1577e5, overrideorigin, showonminimap);
+  var_3d4e7bbef551ad7b = scripts\cp_mp\entityheadicons::setheadicon_singleimage(enemyteam, var_a03e6a46d16f28e3, offset, drawthroughgeo, maxdrawdist, naturaldist, delaytime, var_fa4cf28a58192889, var_b3ea37733a1577e5, overrideorigin, showonminimap);
   thread function_832c04af9af32c16([var_2b6cf74ebb0a149, var_3d4e7bbef551ad7b]);
 }
 
@@ -213,7 +213,7 @@ function function_e2d256c7e33d7114() {
   level endon("game_ended");
   self endon("disconnect");
   self.var_d85e979ebce411d6 = [];
-  teammates = function_f3bb4f4911a1beb2("game", "getTeamData", self.team, "players");
+  teammates = callsharedfunc("game", "getTeamData", self.team, "players");
 
   foreach(teammate in teammates) {
     if(teammate != self && isDefined(teammate.laststandreviveent)) {
@@ -562,7 +562,7 @@ function function_aeacf0b2d606a94c() {
     waitframe();
   }
 
-  teammates = function_f3bb4f4911a1beb2("game", "getTeamData", self.team, "players");
+  teammates = callsharedfunc("game", "getTeamData", self.team, "players");
 
   foreach(teammate in teammates) {
     if(!isinlaststand(teammate)) {
@@ -880,7 +880,7 @@ function function_8405385af988a5ca(waitduration) {
   level endon("<dev string:xce>");
   wait waitduration;
   enemyteam = scripts\mp\utility\teams::getenemyteams(self.team)[0];
-  teammates = function_f3bb4f4911a1beb2("<dev string:xdc>", "<dev string:xe4>", enemyteam, "<dev string:xf3>");
+  teammates = callsharedfunc("<dev string:xdc>", "<dev string:xe4>", enemyteam, "<dev string:xf3>");
   var_e2dba606375aabe8 = undefined;
 
   foreach(teammate in teammates) {

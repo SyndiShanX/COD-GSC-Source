@@ -15,7 +15,7 @@ function riotshield_init_cp(taskid) {
     return anim.success;
   }
 
-  attachments = function_6527364c1ecca6c6("iw9_me_riotshield_mp");
+  attachments = getweapondefaultattachments("iw9_me_riotshield_mp");
   self.secondaryweapon = makeweapon("iw9_me_riotshield_mp", attachments);
   assertex(self.secondaryweapon.basename != "<dev string:x1c>", "<dev string:x24>");
 
@@ -26,7 +26,7 @@ function riotshield_init_cp(taskid) {
     self attachshieldmodel(self.riotshieldmodel, self.riotshieldmodeltag);
     self.bhasriotshieldattached = 1;
     self.briotshieldinitialized = 1;
-    self.deathfunction = &function_d4b82c6f5cae75ee;
+    self.deathfunction = &dropshieldondeath;
     self.isdeathfunctiondefined = 1;
     riotshield_common();
     self aisetriotshieldweapon(self.secondaryweapon);
@@ -41,7 +41,7 @@ function function_8cddb6d105408617(taskid) {
     return anim.success;
   }
 
-  attachments = function_6527364c1ecca6c6("iw9_me_riotshield_mp");
+  attachments = getweapondefaultattachments("iw9_me_riotshield_mp");
   self.secondaryweapon = makeweapon("iw9_me_riotshield_mp", attachments);
   assertex(self.secondaryweapon.basename != "<dev string:x1c>", "<dev string:x24>");
 
@@ -52,7 +52,7 @@ function function_8cddb6d105408617(taskid) {
     self attachshieldmodel(self.riotshieldmodel, self.riotshieldmodeltag);
     self.bhasriotshieldattached = 1;
     self.briotshieldinitialized = 1;
-    self.deathfunction = &function_d4b82c6f5cae75ee;
+    self.deathfunction = &dropshieldondeath;
     self.isdeathfunctiondefined = 1;
     self.var_52ab8a7c95757f64 = "soldier_jup_ob";
     riotshield_common();
@@ -69,7 +69,7 @@ function riotshield_init_sp(taskid) {
   }
 
   assertex(self.secondaryweapon.basename != "<dev string:x1c>", "<dev string:x5d>");
-  self function_9f82c74eb1b7caf9(0, "entity");
+  self setcanusecover(0, "entity");
   self.script_goalheight = 80;
 
   if(self.secondaryweapon.basename != "none") {
@@ -79,7 +79,7 @@ function riotshield_init_sp(taskid) {
     self attach(self.riotshieldmodel, self.riotshieldmodeltag);
     self.bhasriotshieldattached = 1;
     self.briotshieldinitialized = 1;
-    self.deathfunction = &function_d4b82c6f5cae75ee;
+    self.deathfunction = &dropshieldondeath;
     self.isdeathfunctiondefined = 1;
     riotshield_common();
     delaycall(0.05, &aisetriotshieldweapon, self.secondaryweapon);
@@ -89,7 +89,7 @@ function riotshield_init_sp(taskid) {
   return anim.failure;
 }
 
-function function_d4b82c6f5cae75ee() {
+function dropshieldondeath() {
   if(!istrue(self.dropweapon) || istrue(self.bdroppingshield) || istrue(self.script_noloot) || istrue(self.script_nodrop)) {
     return false;
   }
@@ -123,29 +123,29 @@ function riotshield_common() {
   self.dontsyncmelee = 1;
   self.dontmeleeme = 1;
   self.disablebulletwhizbyreaction = 1;
-  self function_9f82c74eb1b7caf9(0, "entity");
+  self setcanusecover(0, "entity");
   self.disablerunngun = 1;
   self.disabledodge = 1;
   self.pathenemyfightdist = 0;
   self.maxfaceenemydist = 1200;
   self.var_54294e8bb0d07cda = 0;
-  self.var_98add129a7ecb962 = 0;
+  self.allowlongdeath = 0;
   self function_ae41fbf799ba43f(1, "entity");
   self.ignoresuppression = 0;
   self.suppressionincrement = 0.03;
   self.suppressiondecrement = 0.005;
   self.suppressionthreshold = 0.5;
-  self.var_9440dc8a2aa90aed = 3000;
+  self.pursueruncooldown = 3000;
   self.var_7d606bec79308eb5 = 512;
-  self.var_85a0f6383a5dd784 = 360;
+  self.pursuestopdistance = 360;
   self.var_a67833fea11a521c = 360;
   self.var_427cbd3288a2f59 = 128;
-  self.var_5e7d402b7b6e5c12 = 25;
+  self.pursuegoalradius = 25;
   self.var_20833644cc82839f = 200;
   self.goalheight = 80;
   self.usechokepoints = 0;
   self.cautiousnavigation = 0;
-  self.var_717eb05b8fb85cff = 40;
+  self.pursueacceleration = 40;
   self.var_e2b553399f5ff8a3 = 1000;
   self.var_e2d849399f862a5d = 2000;
   self.var_7878ef8b36bc3525 = 1000;
@@ -193,13 +193,13 @@ function removeriotshield() {
   }
 }
 
-function function_a43626a85e6614f0(taskid) {
+function dropshield_init(taskid) {
   if(!self.bdroppingshield) {
     thread dropshield();
   }
 }
 
-function function_97dbc630c790bfb3(taskid) {
+function dropshield_update(taskid) {
   if(self.bdroppingshield) {
     assert(isDefined(self.weapon) && weaponclass(self.weapon) != "<dev string:xba>");
     self._blackboard.weaponrequest = "mg";
@@ -214,13 +214,13 @@ function dropshield() {
   self endon("death");
   self.bdroppingshield = 1;
   ctimeout = 10000;
-  var_47a17cb6c73a2a = gettime();
+  dropshieldstarttime = gettime();
 
-  while(!self asmeventfired(self.asmname, "drop_shield") && var_47a17cb6c73a2a + ctimeout > gettime()) {
+  while(!self asmeventfired(self.asmname, "drop_shield") && dropshieldstarttime + ctimeout > gettime()) {
     waitframe();
   }
 
-  btimedout = var_47a17cb6c73a2a + ctimeout <= gettime();
+  btimedout = dropshieldstarttime + ctimeout <= gettime();
 
   if(btimedout) {
     resetstuckthermite();
@@ -257,7 +257,7 @@ function dropshield() {
     }
   }
 
-  self.var_98add129a7ecb962 = 1;
+  self.allowlongdeath = 1;
   removeriotshield();
   resetstuckthermite();
   self.bdroppingshield = 0;

@@ -548,7 +548,7 @@ function function_360198969036bd2a(allspawninstances) {
   pois = [];
 
   foreach(instance in allspawninstances) {
-    poi_name = poi::function_6cc445c02b5effac(instance.origin);
+    poi_name = poi::poi_findpoioriginisin(instance.origin);
 
     if(!isDefined(pois[poi_name])) {
       pois[poi_name] = [];

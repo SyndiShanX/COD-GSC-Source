@@ -196,13 +196,13 @@ function gas_isenemyteam(entity) {
     return true;
   }
 
-  var_da8cec9bce12f9cb = entity.team;
+  teamtocheck = entity.team;
 
-  if(!isDefined(var_da8cec9bce12f9cb) && isDefined(entity.agentteam)) {
-    var_da8cec9bce12f9cb = entity.agentteam;
+  if(!isDefined(teamtocheck) && isDefined(entity.agentteam)) {
+    teamtocheck = entity.agentteam;
   }
 
-  if(isDefined(var_da8cec9bce12f9cb) && isenemyteam(self.team, var_da8cec9bce12f9cb)) {
+  if(isDefined(teamtocheck) && isenemyteam(self.team, teamtocheck)) {
     return true;
   }
 

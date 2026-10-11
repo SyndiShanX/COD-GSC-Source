@@ -103,49 +103,49 @@ function getplayerstatpathkey(path1, path2, path3, path4, path5) {
 
 function writeplayerstat(value, path1, path2, path3, path4, path5) {
   if(isDefined(path5)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, path2, path3, path4, path5, value);
+    self setplayerdata(level.progressiongroup, "playerStats", path1, path2, path3, path4, path5, value);
     return;
   }
 
   if(isDefined(path4)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, path2, path3, path4, value);
+    self setplayerdata(level.progressiongroup, "playerStats", path1, path2, path3, path4, value);
     return;
   }
 
   if(isDefined(path3)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, path2, path3, value);
+    self setplayerdata(level.progressiongroup, "playerStats", path1, path2, path3, value);
     return;
   }
 
   if(isDefined(path2)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, path2, value);
+    self setplayerdata(level.progressiongroup, "playerStats", path1, path2, value);
     return;
   }
 
   if(isDefined(path1)) {
-    self setplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, value);
+    self setplayerdata(level.progressiongroup, "playerStats", path1, value);
   }
 }
 
 function readplayerstat(path1, path2, path3, path4, path5) {
   if(isDefined(path5)) {
-    return self getplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, path2, path3, path4, path5);
+    return self getplayerdata(level.progressiongroup, "playerStats", path1, path2, path3, path4, path5);
   }
 
   if(isDefined(path4)) {
-    return self getplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, path2, path3, path4);
+    return self getplayerdata(level.progressiongroup, "playerStats", path1, path2, path3, path4);
   }
 
   if(isDefined(path3)) {
-    return self getplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, path2, path3);
+    return self getplayerdata(level.progressiongroup, "playerStats", path1, path2, path3);
   }
 
   if(isDefined(path2)) {
-    return self getplayerdata(level.var_5d69837cf4db0407, "playerStats", path1, path2);
+    return self getplayerdata(level.progressiongroup, "playerStats", path1, path2);
   }
 
   if(isDefined(path1)) {
-    return self getplayerdata(level.var_5d69837cf4db0407, "playerStats", path1);
+    return self getplayerdata(level.progressiongroup, "playerStats", path1);
   }
 }
 
@@ -180,8 +180,8 @@ function addtoplayerstat_internal(var_930290d7f474a0ae, pathkey, path1, path2, p
   patharray[patharray.size] = path5;
 
   if(!isDefined(self.playerstats.paths[pathkey])) {
-    var_10dc579c373a93dd = readplayerstat(path1, path2, path3, path4, path5);
-    self.playerstats.values[pathkey] = var_10dc579c373a93dd + var_930290d7f474a0ae;
+    playerdatavalue = readplayerstat(path1, path2, path3, path4, path5);
+    self.playerstats.values[pathkey] = playerdatavalue + var_930290d7f474a0ae;
     self.playerstats.paths[pathkey] = patharray;
     return;
   }

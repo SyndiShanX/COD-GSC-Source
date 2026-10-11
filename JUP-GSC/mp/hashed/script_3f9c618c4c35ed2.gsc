@@ -182,8 +182,8 @@ function circledamagetick() {
             }
 
             if(isDefined(player.gasmaskhealth) && player.gasmaskhealth <= 0) {
-              if(isDefined(level.var_f929c426097f1647)) {
-                self[[level.var_f929c426097f1647]]();
+              if(isDefined(level.gasmaskbreakfunc)) {
+                self[[level.gasmaskbreakfunc]]();
               } else {
                 player playsoundtoplayer("br_gas_mask_crack_plr", player);
                 player scripts\mp\gametypes\br_pickups::function_4d16b9c52efa3b8();

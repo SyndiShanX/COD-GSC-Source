@@ -53,7 +53,7 @@ function init() {
 function jugg_makejuggernaut(juggconfig, streakinfo, bundle) {
   assert(isreallyalive(self));
 
-  if(scripts\engine\utility::function_f3bb4f4911a1beb2("escort", "isZombie") || istrue(level.var_39faa7e60a6a717c)) {
+  if(scripts\engine\utility::callsharedfunc("escort", "isZombie") || istrue(level.var_39faa7e60a6a717c)) {
     bundle = level.streakglobals.streakbundles["juggernaut_mutant"];
 
     if(isDefined(level.var_3b500f50aa9520a4)) {
@@ -96,16 +96,16 @@ function jugg_makejuggernaut(juggconfig, streakinfo, bundle) {
     juggcontext.var_c18e401ced26383c = getcurrentsuperpoints();
   }
 
-  if(!isDefined(juggconfig.var_76a7d4252fc16303)) {
-    juggconfig.var_76a7d4252fc16303 = 1;
+  if(!isDefined(juggconfig.usearmorparts)) {
+    juggconfig.usearmorparts = 1;
   }
 
-  if(function_f3bb4f4911a1beb2("escort", "isZombie") || istrue(level.var_39faa7e60a6a717c)) {
-    juggconfig.var_76a7d4252fc16303 = 0;
+  if(callsharedfunc("escort", "isZombie") || istrue(level.var_39faa7e60a6a717c)) {
+    juggconfig.usearmorparts = 0;
     juggconfig.perks = [];
   }
 
-  if(juggconfig.var_76a7d4252fc16303) {
+  if(juggconfig.usearmorparts) {
     juggcontext.partshealth = [];
     juggcontext.partshealth["head_health"] = ter_op(isDefined(juggconfig.head_health), juggconfig.head_health, 100);
     juggcontext.partshealth["torso_upper_health"] = ter_op(isDefined(juggconfig.torso_upper_health), juggconfig.torso_upper_health, 100);
@@ -187,8 +187,8 @@ function jugg_makejuggernaut(juggconfig, streakinfo, bundle) {
   scripts\mp\weapons::updatemovespeedscale();
   self.juggcontext = juggcontext;
   _setsuit(juggconfig.suit);
-  self setclothtype(function_1823ff50bb28148d(juggconfig.clothtype));
-  self function_8abe5a968cc3c220(juggconfig.geartype);
+  self setclothtype(getxhash(juggconfig.clothtype));
+  self setgeartype(juggconfig.geartype);
   jugg_enableoverlay(juggcontext);
   function_3f55c1fb553a4775(self);
 
@@ -234,7 +234,7 @@ function jugg_makejuggernaut(juggconfig, streakinfo, bundle) {
   thread jugg_watchfordisconnect();
   thread jugg_watchforfire();
   thread jugg_watchherodrop();
-  thread function_5b7c34dbc50c3c4e(juggconfig.var_76a7d4252fc16303);
+  thread function_5b7c34dbc50c3c4e(juggconfig.usearmorparts);
   thread jugg_watchoverlaydamagestates(self.juggcontext);
   thread jugg_watchforoverlayexecutiontoggle();
   thread function_e7282c5ce62c103d();
@@ -325,8 +325,8 @@ function jugg_removejuggernaut(is_death) {
   }
 
   _setsuit(juggcontext.prevsuit);
-  self setclothtype(function_1823ff50bb28148d(juggcontext.prevclothtype));
-  self function_8abe5a968cc3c220(juggcontext.var_aaac4cd2da0aa927);
+  self setclothtype(getxhash(juggcontext.prevclothtype));
+  self setgeartype(juggcontext.var_aaac4cd2da0aa927);
   self setscriptablepartstate("juggernaut", "neutral", 0);
 
   if(isDefined(juggcontext.prevexecution)) {
@@ -372,7 +372,7 @@ function jugg_createconfig(skipallows, additionalallows) {
   config.geartype = "milhvygr";
   config.infiniteammo = 0;
   config.infiniteammoupdaterate = undefined;
-  config.var_76a7d4252fc16303 = 1;
+  config.usearmorparts = 1;
   config.classstruct = jugg_getdefaultclassstruct();
   config.allows = [];
   config.allows["stick_kill"] = 1;
@@ -466,7 +466,7 @@ function jugg_watchmusictoggle(streakname) {
     self setscriptablepartstate("juggernaut", "neutral", 0);
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     self setclientomnvar("ui_enable_juggernaut_music", istrue(self.musicplaying));
   }
 
@@ -505,7 +505,7 @@ function jugg_watchmusictoggle(streakname) {
       }
     }
 
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       self setclientomnvar("ui_enable_juggernaut_music", istrue(self.musicplaying));
     }
 
@@ -1202,14 +1202,14 @@ function private function_b47072bcd58c0c99(part, damage) {
   }
 }
 
-function private function_5b7c34dbc50c3c4e(var_76a7d4252fc16303) {
+function private function_5b7c34dbc50c3c4e(usearmorparts) {
   self endon("death_or_disconnect");
   self endon("juggernaut_end");
   level endon("game_ended");
-  state = var_76a7d4252fc16303 ? "pristine" : "off";
+  state = usearmorparts ? "pristine" : "off";
   function_8e6b2de818370baa(level.var_13819795c6ee9ff8, state);
 
-  if(var_76a7d4252fc16303) {
+  if(usearmorparts) {
     childthread function_5e9c6b97e4c3c059();
     childthread function_59469cc44ca7fa81();
   }

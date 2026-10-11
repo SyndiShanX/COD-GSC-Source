@@ -92,7 +92,7 @@ function init_dead_drop() {
   scripts\engine\utility::flag_set("dead_drops_init");
 }
 
-function function_be64875fae5bd1ce(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_be64875fae5bd1ce(instance, part, state, player, bautouse, usestring) {
   if(instance getscriptablepartstate("body_dead_drop") != "partially_opening_unusable") {
     instance setscriptablepartstate("body_dead_drop", "partially_opening_unusable");
   }
@@ -112,7 +112,7 @@ function function_2463f61a8c4d7772(container, player, lootid, quantity, itemtype
   backpackquantity = quantity;
 
   if(isDefined(itemtype) && itemtype == 10) {
-    backpackquantity = player namespace_aead94004cf4c147::function_897b29adb37f06a7(itemindex);
+    backpackquantity = player namespace_aead94004cf4c147::getquantityatbackpackindex(itemindex);
   }
 
   if(!isDefined(itemtype)) {
@@ -338,7 +338,7 @@ function function_160a29300ce1e14(totalcash, player, reductionmodifier) {
 
 function function_30b30561882a2477(container) {
   if(!isDefined(container.poi)) {
-    container.poi = scripts\mp\poi::function_6cc445c02b5effac(container.origin, 0, 1);
+    container.poi = scripts\mp\poi::poi_findpoioriginisin(container.origin, 0, 1);
   }
 
   return container.poi;

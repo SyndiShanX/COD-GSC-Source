@@ -1286,8 +1286,8 @@ function private function_400ac4c375b471a1(scriptindex) {
   return function_4e39e2d66e2d1948(indexes);
 }
 
-function private function_4e39e2d66e2d1948(var_d57a27cd0f4ec676) {
-  for(i = 1; isDefined(var_d57a27cd0f4ec676[i]); i++) {}
+function private function_4e39e2d66e2d1948(integers) {
+  for(i = 1; isDefined(integers[i]); i++) {}
 
   return i;
 }
@@ -1354,12 +1354,12 @@ function private function_9a62bf0437306755(listref, type) {
   bundlename = listref;
 
   if(!isxhashasset(listref)) {
-    bundlename = function_40fd49171fad19d3(default_to(type, "") + listref);
+    bundlename = getxhashasset(default_to(type, "") + listref);
   }
 
-  var_ced3d1299debab33 = getscriptbundle(bundlename);
-  assertex(isDefined(var_ced3d1299debab33), "<dev string:xbe>" + function_3c8848a3a11b2553(bundlename));
-  return var_ced3d1299debab33;
+  configbundle = getscriptbundle(bundlename);
+  assertex(isDefined(configbundle), "<dev string:xbe>" + getxhashsourcename(bundlename));
+  return configbundle;
 }
 
 function private function_d72b66a120f30bba(var_c7803e864d499dc0) {
@@ -1370,22 +1370,22 @@ function private function_d72b66a120f30bba(var_c7803e864d499dc0) {
 
   configlist = [];
 
-  foreach(var_ced3d1299debab33 in var_c7803e864d499dc0) {
-    configlist = function_219da70f303de5b(var_ced3d1299debab33, configlist);
+  foreach(configbundle in var_c7803e864d499dc0) {
+    configlist = function_219da70f303de5b(configbundle, configlist);
   }
 
   return configlist;
 }
 
-function private function_219da70f303de5b(var_ced3d1299debab33, configlist) {
-  if(!isDefined(var_ced3d1299debab33)) {
-    assertex(isDefined(var_ced3d1299debab33), "<dev string:xf3>");
+function private function_219da70f303de5b(configbundle, configlist) {
+  if(!isDefined(configbundle)) {
+    assertex(isDefined(configbundle), "<dev string:xf3>");
     return;
   }
 
   var_7913786b1f47a997 = default_to(configlist, []);
 
-  foreach(entry in var_ced3d1299debab33.config_list) {
+  foreach(entry in configbundle.config_list) {
     var_7913786b1f47a997 = function_7dbb2f79e1942e4d(var_7913786b1f47a997, entry.config);
   }
 
@@ -1639,7 +1639,7 @@ function private debug_watch(dvarstring, funcdebug) {
     }
 
     setDvar(dvarstring, "<dev string:x17c>");
-    debug_print("<dev string:x554>" + function_3c8848a3a11b2553(dvarstring) + "<dev string:x560>" + debugstate);
+    debug_print("<dev string:x554>" + getxhashsourcename(dvarstring) + "<dev string:x560>" + debugstate);
     [[funcdebug]](debugstate);
     waitframe();
   }

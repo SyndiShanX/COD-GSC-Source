@@ -73,7 +73,7 @@ function function_12c55fcbaa7c5346(array, targetname, deadcount, flagname, timeo
   level thread function_70c375ef912c3fc1(array, targetname, randomdelay);
 }
 
-function function_f2222194b84d7787(team, species, targetname, deadcount, flagname, timeout, randomdelay) {
+function team_set_goal(team, species, targetname, deadcount, flagname, timeout, randomdelay) {
   assertex(isDefined(team) || isDefined(species), "team_set_goal: team and species is undefined");
   assertex(isDefined(targetname), "team_set_goal: targetname is undefined");
 

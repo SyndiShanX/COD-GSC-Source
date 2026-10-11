@@ -158,23 +158,23 @@ function isholdingdeployablebox() {
 
 function createboxforplayer(boxtype, position, owner) {
   assertex(isDefined(owner), "<dev string:xfd>");
-  var_86280fefb94b6b28 = level.boxsettings[boxtype];
+  boxconfig = level.boxsettings[boxtype];
   box = spawn("script_model", position - (0, 0, 1));
-  box setModel(var_86280fefb94b6b28.modelbase);
+  box setModel(boxconfig.modelbase);
   box.health = 999999;
-  box.maxhealth = var_86280fefb94b6b28.maxhealth;
+  box.maxhealth = boxconfig.maxhealth;
   box.angles = owner.angles;
   box.boxtype = boxtype;
   box.owner = owner;
   box.team = owner.team;
-  box.id = var_86280fefb94b6b28.id;
+  box.id = boxconfig.id;
 
-  if(isDefined(var_86280fefb94b6b28.dpadname)) {
-    box.dpadname = var_86280fefb94b6b28.dpadname;
+  if(isDefined(boxconfig.dpadname)) {
+    box.dpadname = boxconfig.dpadname;
   }
 
-  if(isDefined(var_86280fefb94b6b28.maxuses)) {
-    box.usesremaining = var_86280fefb94b6b28.maxuses;
+  if(isDefined(boxconfig.maxuses)) {
+    box.usesremaining = boxconfig.maxuses;
   }
 
   box box_setinactive();
@@ -184,7 +184,7 @@ function createboxforplayer(boxtype, position, owner) {
 }
 
 function box_setactive(damagecallback, deathcallback, timeoutcallback) {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   self.inuse = 0;
   curobjid = scripts\mp\objidpoolmanager::requestobjectiveid(1);
 
@@ -201,7 +201,7 @@ function box_setactive(damagecallback, deathcallback, timeoutcallback) {
   }
 
   scripts\mp\objidpoolmanager::update_objective_state(curobjid, "active");
-  scripts\mp\objidpoolmanager::update_objective_icon(curobjid, var_86280fefb94b6b28.shadername);
+  scripts\mp\objidpoolmanager::update_objective_icon(curobjid, boxconfig.shadername);
   scripts\mp\objidpoolmanager::update_objective_setbackground(curobjid, 1);
   self.objidfriendly = curobjid;
 
@@ -210,14 +210,14 @@ function box_setactive(damagecallback, deathcallback, timeoutcallback) {
       scripts\mp\objidpoolmanager::objective_teammask_single(curobjid, self.team);
     }
 
-    box_seticon(self.team, var_86280fefb94b6b28.streakname, var_86280fefb94b6b28.headiconoffset);
+    box_seticon(self.team, boxconfig.streakname, boxconfig.headiconoffset);
 
     foreach(player in level.players) {
       if(self.team != player.team) {
         continue;
       }
 
-      if(isDefined(var_86280fefb94b6b28.canusecallback) && !player[[var_86280fefb94b6b28.canusecallback]](self)) {
+      if(isDefined(boxconfig.canusecallback) && !player[[boxconfig.canusecallback]](self)) {
         if(isDefined(self.boxiconid)) {
           scripts\cp_mp\entityheadicons::setheadicon_removeclientfrommask(self.boxiconid, player);
         }
@@ -228,14 +228,14 @@ function box_setactive(damagecallback, deathcallback, timeoutcallback) {
       scripts\mp\objidpoolmanager::objective_playermask_single(curobjid, self.owner);
     }
 
-    if(!isDefined(var_86280fefb94b6b28.canusecallback) || self.owner[[var_86280fefb94b6b28.canusecallback]](self)) {
-      box_seticon(self.owner, var_86280fefb94b6b28.streakname, var_86280fefb94b6b28.headiconoffset);
+    if(!isDefined(boxconfig.canusecallback) || self.owner[[boxconfig.canusecallback]](self)) {
+      box_seticon(self.owner, boxconfig.streakname, boxconfig.headiconoffset);
     }
   }
 
   self makeusable();
   self setCursorHint("HINT_NOICON");
-  self setHintString(var_86280fefb94b6b28.hintstring);
+  self setHintString(boxconfig.hintstring);
   self setusehideprogressbar(1);
   self.isusable = 1;
   self setCanDamage(1);
@@ -266,10 +266,10 @@ function box_setactive(damagecallback, deathcallback, timeoutcallback) {
 
   if(level.teambased) {
     foreach(player in level.participants) {
-      if(istrue(var_86280fefb94b6b28.isteamless)) {
-        _box_setactivehelper(player, 1, var_86280fefb94b6b28.canusecallback);
+      if(istrue(boxconfig.isteamless)) {
+        _box_setactivehelper(player, 1, boxconfig.canusecallback);
       } else {
-        _box_setactivehelper(player, self.team == player.team, var_86280fefb94b6b28.canusecallback);
+        _box_setactivehelper(player, self.team == player.team, boxconfig.canusecallback);
       }
 
       if(!isai(player)) {
@@ -278,15 +278,15 @@ function box_setactive(damagecallback, deathcallback, timeoutcallback) {
     }
   } else {
     foreach(player in level.participants) {
-      _box_setactivehelper(player, isDefined(self.owner) && self.owner == player, var_86280fefb94b6b28.canusecallback);
+      _box_setactivehelper(player, isDefined(self.owner) && self.owner == player, boxconfig.canusecallback);
     }
   }
 
   thread box_playerconnected();
   thread box_agentconnected();
 
-  if(isDefined(var_86280fefb94b6b28.ondeploycallback)) {
-    self[[var_86280fefb94b6b28.ondeploycallback]](var_86280fefb94b6b28);
+  if(isDefined(boxconfig.ondeploycallback)) {
+    self[[boxconfig.ondeploycallback]](boxconfig);
   }
 }
 
@@ -361,11 +361,11 @@ function box_addboxforplayer(player) {
 }
 
 function box_seticon(player, streakname, voffset) {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
   headicon = getkillstreakoverheadicon(streakname);
 
-  if(isDefined(var_86280fefb94b6b28.headicon)) {
-    headicon = var_86280fefb94b6b28.headicon;
+  if(isDefined(boxconfig.headicon)) {
+    headicon = boxconfig.headicon;
   }
 
   if(!scripts\cp_mp\utility\game_utility::function_b2c4b42f9236924()) {
@@ -399,8 +399,8 @@ function box_setinactive() {
 }
 
 function box_handledamage() {
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
-  scripts\mp\damage::monitordamage(var_86280fefb94b6b28.maxhealth, var_86280fefb94b6b28.damagefeedback, &box_handledeathdamage, &box_modifydamage, 1);
+  boxconfig = level.boxsettings[self.boxtype];
+  scripts\mp\damage::monitordamage(boxconfig.maxhealth, boxconfig.damagefeedback, &box_handledeathdamage, &box_modifydamage, 1);
 }
 
 function box_modifydamage(data) {
@@ -410,9 +410,9 @@ function box_modifydamage(data) {
   damage = data.damage;
   idflags = data.idflags;
   modifieddamage = damage;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 
-  if(var_86280fefb94b6b28.allowmeleedamage) {
+  if(boxconfig.allowmeleedamage) {
     modifieddamage = utility::handlemeleedamage(objweapon, type, modifieddamage);
   }
 
@@ -428,8 +428,8 @@ function box_handledeathdamage(data) {
   type = data.meansofdeath;
   damage = data.damage;
   self.destroyedbydamage = 1;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
-  notifyattacker = scripts\mp\damage::onkillstreakkilled("deployable_ammo", attacker, objweapon, type, damage, var_86280fefb94b6b28.scorepopup, var_86280fefb94b6b28.vodestroyed);
+  boxconfig = level.boxsettings[self.boxtype];
+  notifyattacker = scripts\mp\damage::onkillstreakkilled("deployable_ammo", attacker, objweapon, type, damage, boxconfig.scorepopup, boxconfig.vodestroyed);
 
   if(notifyattacker) {
     attacker notify("destroyed_equipment");
@@ -445,27 +445,27 @@ function box_handledeath() {
 
   box_setinactive();
   removeboxfromlevelarray();
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 
   if(!istrue(self.destroyedbydamage)) {
-    playFX(var_86280fefb94b6b28.deathvfx, self.origin);
+    playFX(boxconfig.deathvfx, self.origin);
     self playSound("mp_killstreak_disappear");
   } else {
-    damagespawnpos = self.origin + (0, 0, var_86280fefb94b6b28.headiconoffset);
+    damagespawnpos = self.origin + (0, 0, boxconfig.headiconoffset);
 
-    if(isDefined(var_86280fefb94b6b28.deathdamagemax)) {
+    if(isDefined(boxconfig.deathdamagemax)) {
       owner = undefined;
 
       if(isDefined(self.owner)) {
         owner = self.owner;
       }
 
-      if(isDefined(var_86280fefb94b6b28.explodevfx)) {
-        playFX(var_86280fefb94b6b28.explodevfx, self.origin);
+      if(isDefined(boxconfig.explodevfx)) {
+        playFX(boxconfig.explodevfx, self.origin);
         self playSound("c4_expl_trans");
       }
 
-      radiusdamage(damagespawnpos, var_86280fefb94b6b28.deathdamageradius, var_86280fefb94b6b28.deathdamagemax, var_86280fefb94b6b28.deathdamagemin, owner, "MOD_EXPLOSIVE", "support_box_mp");
+      radiusdamage(damagespawnpos, boxconfig.deathdamageradius, boxconfig.deathdamagemax, boxconfig.deathdamagemin, owner, "MOD_EXPLOSIVE", "support_box_mp");
       thread scripts\mp\shellshock::grenade_earthquakeatposition(self.origin, 1);
     }
   }
@@ -499,20 +499,20 @@ function boxthink(player) {
   }
 
   player.boxes[player.boxes.size] = self;
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
+  boxconfig = level.boxsettings[self.boxtype];
 
   for(;;) {
     self waittill("captured", capturer);
 
     if(capturer == player) {
-      player playlocalsound(var_86280fefb94b6b28.onusesfx);
+      player playlocalsound(boxconfig.onusesfx);
 
-      if(isDefined(var_86280fefb94b6b28.onusecallback)) {
-        player[[var_86280fefb94b6b28.onusecallback]](self);
+      if(isDefined(boxconfig.onusecallback)) {
+        player[[boxconfig.onusecallback]](self);
       }
 
       if(isDefined(self.owner) && player != self.owner && !scripts\cp_mp\utility\player_utility::playersareenemies(self.owner, player)) {
-        self.owner thread doscoreevent(#"support", undefined, var_86280fefb94b6b28.usexp);
+        self.owner thread doscoreevent(#"support", undefined, boxconfig.usexp);
       }
 
       if(isDefined(self.usesremaining)) {
@@ -524,8 +524,8 @@ function boxthink(player) {
         }
       }
 
-      if(isDefined(var_86280fefb94b6b28.canuseotherboxes) && var_86280fefb94b6b28.canuseotherboxes) {
-        foreach(box in level.deployable_box[var_86280fefb94b6b28.streakname]) {
+      if(isDefined(boxconfig.canuseotherboxes) && boxconfig.canuseotherboxes) {
+        foreach(box in level.deployable_box[boxconfig.streakname]) {
           box scripts\mp\killstreaks\deployablebox::box_disableplayeruse(player);
 
           if(isDefined(box.boxiconid)) {
@@ -538,7 +538,7 @@ function boxthink(player) {
         continue;
       }
 
-      if(istrue(var_86280fefb94b6b28.canreusebox)) {
+      if(istrue(boxconfig.canreusebox)) {
         continue;
       }
 
@@ -601,12 +601,12 @@ function isfriendlytobox(box) {
 function box_timeout() {
   self endon("death");
   level endon("game_ended");
-  var_86280fefb94b6b28 = level.boxsettings[self.boxtype];
-  lifespan = var_86280fefb94b6b28.lifespan;
+  boxconfig = level.boxsettings[self.boxtype];
+  lifespan = boxconfig.lifespan;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(lifespan);
 
-  if(isDefined(var_86280fefb94b6b28.vogone)) {
-    self.owner thread scripts\mp\utility\dialog::leaderdialogonplayer(var_86280fefb94b6b28.vogone);
+  if(isDefined(boxconfig.vogone)) {
+    self.owner thread scripts\mp\utility\dialog::leaderdialogonplayer(boxconfig.vogone);
   }
 
   box_leave();

@@ -17,7 +17,7 @@
 #namespace namespace_b78d657d6d9b410d;
 
 function main() {
-  level.var_33208cc9a89d1a0d = &function_61eee992c191dbd0;
+  level.var_33208cc9a89d1a0d = &spawn_chopper_boss;
   function_66ed22dfc3b03993();
 }
 
@@ -56,7 +56,7 @@ function function_8f5cde869b76b0e() {
   return random(var_4480a107283a6a21);
 }
 
-function function_61eee992c191dbd0() {
+function spawn_chopper_boss() {
   scripts\mp\flags::gameflagwait("prematch_done");
   choppermodel = "veh9_mil_air_heli_hind_limbo_weapons";
   var_44dd61e9bc4b4304 = "veh9_mil_air_heli_hind_physics_limbo";
@@ -121,19 +121,19 @@ function function_382f6d5ccce841f0(pos) {
       chopper.targetplayer = newtarget;
     }
 
-    var_a79a645a016aad25 = undefined;
+    newloc = undefined;
 
     if(isDefined(chopper.targetplayer)) {
       if(issharedfuncdefined("limbo", "find_closest_loc_to_player")) {
-        var_a79a645a016aad25 = [[getsharedfunc("limbo", "find_closest_loc_to_player")]](level.var_5656ad3e90854d58, chopper.targetplayer);
+        newloc = [[getsharedfunc("limbo", "find_closest_loc_to_player")]](level.var_5656ad3e90854d58, chopper.targetplayer);
       }
     } else {
       chopper function_24fee42d71078694();
       return;
     }
 
-    if(!isDefined(loc) || var_a79a645a016aad25 != loc) {
-      loc = var_a79a645a016aad25;
+    if(!isDefined(loc) || newloc != loc) {
+      loc = newloc;
       chopper setvehgoalpos(loc.origin, 1);
     }
 
@@ -192,7 +192,7 @@ function chopper_cleanup(wasdestroyed) {
   scripts\cp_mp\vehicles\vehicle_tracking::_deletevehicle(self);
 
   if(isDefined(function_8f5cde869b76b0e())) {
-    function_61eee992c191dbd0();
+    spawn_chopper_boss();
   }
 }
 

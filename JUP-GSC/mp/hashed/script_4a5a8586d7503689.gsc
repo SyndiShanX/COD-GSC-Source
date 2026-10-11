@@ -20,7 +20,7 @@
 function private function_f49a30f92555b827() {
   function_29b5fb70d7ea841();
   function_304c63cbb536c526();
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &on_move_speed_changed);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &on_move_speed_changed);
   level.scr_anim[self.animname]["spawn"] = "spawn";
   level.scr_anim[self.animname]["dig"] = "dig";
   level.scr_anim[self.animname]["drop"] = "drop";

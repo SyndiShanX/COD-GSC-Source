@@ -160,12 +160,12 @@ function private function_69b4026f881d6f0b() {
     var_8c3c81896e2e6f60[r]++;
   }
 
-  var_f3553b8c4c0a8747 = 0;
+  max_player_count = 0;
   region_label = "";
 
   foreach(region_name, rp in var_8c3c81896e2e6f60) {
-    if(rp > var_f3553b8c4c0a8747) {
-      var_f3553b8c4c0a8747 = rp;
+    if(rp > max_player_count) {
+      max_player_count = rp;
       region_label = region_name;
     }
   }

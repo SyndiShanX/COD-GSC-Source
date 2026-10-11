@@ -103,8 +103,8 @@ function suspicious_door_sighting() {
         continue;
       }
 
-      var_56f0be36cb2408c7 = self.stealth.suspicious_door.ent.origin;
-      dist2sq = distancesquared(self.origin, var_56f0be36cb2408c7);
+      doororiginnew = self.stealth.suspicious_door.ent.origin;
+      dist2sq = distancesquared(self.origin, doororiginnew);
 
       if(dist2sq <= distsq) {
         continue;
@@ -179,9 +179,9 @@ function private canseedoor(door, debounce) {
       }
 
       startorigin = self getEye();
-      var_cd386984671b320b = [door.origin, handleorigin];
+      originstocheck = [door.origin, handleorigin];
 
-      foreach(origin in var_cd386984671b320b) {
+      foreach(origin in originstocheck) {
         debugorigin = origin;
         trace = scripts\engine\trace::ray_trace(startorigin, origin, ignoreents);
 
@@ -236,7 +236,7 @@ function suspicious_door_found(event) {
     line(door.origin, event.investigate_pos, (0, 1, 0), 1, 0, 400);
   }
 
-  if(self.var_fe5ebefa740c7106 < 2) {
+  if(self.stealth_bsmstate < 2) {
     scripts\stealth\enemy::bt_set_stealth_state("investigate", event);
   }
 }

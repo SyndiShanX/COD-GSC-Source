@@ -1544,22 +1544,22 @@ function generic_double_strobe() {
   off = 0.05;
   linked_models = 0;
   lit_model = undefined;
-  var_776efbd89210c3b1 = undefined;
+  unlit_model = undefined;
   linked_lights = 0;
-  var_67c79fb91abcbe6e = [];
+  linked_light_ents = [];
 
   if(isDefined(self.script_noteworthy)) {
-    var_b9d12db72e0592f0 = getEntArray(self.script_noteworthy, "targetname");
+    linked_things = getEntArray(self.script_noteworthy, "targetname");
 
-    for(i = 0; i < var_b9d12db72e0592f0.size; i++) {
-      if(is_light_entity(var_b9d12db72e0592f0[i])) {
+    for(i = 0; i < linked_things.size; i++) {
+      if(is_light_entity(linked_things[i])) {
         linked_lights = 1;
-        var_67c79fb91abcbe6e[var_67c79fb91abcbe6e.size] = var_b9d12db72e0592f0[i];
+        linked_light_ents[linked_light_ents.size] = linked_things[i];
       }
 
-      if(var_b9d12db72e0592f0[i].classname == "script_model") {
-        lit_model = var_b9d12db72e0592f0[i];
-        var_776efbd89210c3b1 = getEnt(lit_model.target, "targetname");
+      if(linked_things[i].classname == "script_model") {
+        lit_model = linked_things[i];
+        unlit_model = getEnt(lit_model.target, "targetname");
         linked_models = 1;
       }
     }
@@ -1570,7 +1570,7 @@ function generic_double_strobe() {
 
     if(linked_models) {
       lit_model hide();
-      var_776efbd89210c3b1 show();
+      unlit_model show();
     }
 
     wait 0.8;
@@ -1578,7 +1578,7 @@ function generic_double_strobe() {
 
     if(linked_models) {
       lit_model show();
-      var_776efbd89210c3b1 hide();
+      unlit_model hide();
     }
 
     wait 0.1;
@@ -1586,7 +1586,7 @@ function generic_double_strobe() {
 
     if(linked_models) {
       lit_model hide();
-      var_776efbd89210c3b1 show();
+      unlit_model show();
     }
 
     wait 0.12;
@@ -1594,7 +1594,7 @@ function generic_double_strobe() {
 
     if(linked_models) {
       lit_model show();
-      var_776efbd89210c3b1 hide();
+      unlit_model hide();
     }
 
     wait 0.1;
@@ -1662,8 +1662,8 @@ function strobelight(intensity0, intensity1, period, kill_flag) {
   time = 0;
 
   while(true) {
-    var_12d4a3234a7f0591 = sin(time * frequency) * 0.5 + 0.5;
-    self setlightintensity(intensity0 + (intensity1 - intensity0) * var_12d4a3234a7f0591);
+    interpolation = sin(time * frequency) * 0.5 + 0.5;
+    self setlightintensity(intensity0 + (intensity1 - intensity0) * interpolation);
     wait 0.05;
     time += 0.05;
 
@@ -1791,9 +1791,9 @@ function set_sun_shadow_params(duration) {
     qualityspotshadow = self.script_qualityspotshadow;
   }
 
-  var_ce005b1cc11ac933 = getdvarint(@ "hash_531180c075033638", 1);
-  var_f75f0121b866fc52 = getdvarfloat(@ "hash_8d3379c8854f3c37", 1);
-  var_d1df8ca895b4a0af = getdvarint(@ "hash_485afd6362225fb0", 1);
+  curr_sunenable = getdvarint(@ "hash_531180c075033638", 1);
+  curr_sunshadowscale = getdvarfloat(@ "hash_8d3379c8854f3c37", 1);
+  curr_qualityspotshadow = getdvarint(@ "hash_485afd6362225fb0", 1);
   setsaveddvar(@ "hash_531180c075033638", sunenable);
   setsaveddvar(@ "hash_8d3379c8854f3c37", sunshadowscale);
   setsaveddvar(@ "hash_485afd6362225fb0", qualityspotshadow);

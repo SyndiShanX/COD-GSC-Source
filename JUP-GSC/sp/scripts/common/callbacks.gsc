@@ -18,8 +18,8 @@ function callback(event, params) {
     function_f3847410a67a3098(self, event, params);
 
     if(isDefined(self.var_8d44c0f367e8d9c0)) {
-      foreach(var_58ea2dd09081c395 in self.var_8d44c0f367e8d9c0) {
-        function_f3847410a67a3098(var_58ea2dd09081c395, event, params);
+      foreach(callback_template in self.var_8d44c0f367e8d9c0) {
+        function_f3847410a67a3098(callback_template, event, params);
       }
     }
   }
@@ -81,7 +81,7 @@ function private function_f3847410a67a3098(ent, event, params) {
 }
 
 function add(event, func, var_732ad454c46f92fd) {
-  assertex(isfunction(func), "Parameter for event '" + (isxhash(event) ? function_3c8848a3a11b2553(event) : event) + "' is not a function pointer.");
+  assertex(isfunction(func), "Parameter for event '" + (isxhash(event) ? getxhashsourcename(event) : event) + "' is not a function pointer.");
 
   if(!isfunction(func)) {
     return;
@@ -132,29 +132,29 @@ function remove(event, func, instant) {
   }
 }
 
-function function_e7fddda1f0b46b5e(var_fdf147e36d51ad1b) {
-  if(!isDefined(level.var_cc6a7adcd61d2d2)) {
-    level.var_cc6a7adcd61d2d2 = [];
+function get_template(template_name) {
+  if(!isDefined(level.callback_templates)) {
+    level.callback_templates = [];
   }
 
-  if(!isDefined(level.var_cc6a7adcd61d2d2[var_fdf147e36d51ad1b])) {
-    level.var_cc6a7adcd61d2d2[var_fdf147e36d51ad1b] = spawnStruct();
+  if(!isDefined(level.callback_templates[template_name])) {
+    level.callback_templates[template_name] = spawnStruct();
   }
 
-  return level.var_cc6a7adcd61d2d2[var_fdf147e36d51ad1b];
+  return level.callback_templates[template_name];
 }
 
-function function_d4f1fdfa332469ec(var_fdf147e36d51ad1b) {
+function function_d4f1fdfa332469ec(template_name) {
   assertex(self != level, "<dev string:x4a>");
-  var_78db940d2989f211 = function_e7fddda1f0b46b5e(var_fdf147e36d51ad1b);
+  template_struct = get_template(template_name);
 
-  if(!isDefined(self.var_8d44c0f367e8d9c0) || !isDefined(self.var_8d44c0f367e8d9c0[var_fdf147e36d51ad1b])) {
-    self.var_8d44c0f367e8d9c0[var_fdf147e36d51ad1b] = var_78db940d2989f211;
+  if(!isDefined(self.var_8d44c0f367e8d9c0) || !isDefined(self.var_8d44c0f367e8d9c0[template_name])) {
+    self.var_8d44c0f367e8d9c0[template_name] = template_struct;
   }
 }
 
-function function_75a459cce09d9f29(var_fdf147e36d51ad1b) {
-  return self != level && isDefined(var_fdf147e36d51ad1b) && isDefined(level.var_cc6a7adcd61d2d2) && isDefined(level.var_cc6a7adcd61d2d2[var_fdf147e36d51ad1b]) && isDefined(self.var_8d44c0f367e8d9c0) && isDefined(self.var_8d44c0f367e8d9c0[var_fdf147e36d51ad1b]) && self.var_8d44c0f367e8d9c0[var_fdf147e36d51ad1b] == level.var_cc6a7adcd61d2d2[var_fdf147e36d51ad1b];
+function function_75a459cce09d9f29(template_name) {
+  return self != level && isDefined(template_name) && isDefined(level.callback_templates) && isDefined(level.callback_templates[template_name]) && isDefined(self.var_8d44c0f367e8d9c0) && isDefined(self.var_8d44c0f367e8d9c0[template_name]) && self.var_8d44c0f367e8d9c0[template_name] == level.callback_templates[template_name];
 }
 
 function private function_816601f7d8ca5b92(callbacks) {

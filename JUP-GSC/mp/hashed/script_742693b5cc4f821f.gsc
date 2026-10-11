@@ -61,8 +61,8 @@ function on_start() {
 function on_prematch_end() {}
 
 function on_infil() {
-  foreach(var_e6e50c89ae141b0f in self.var_ddd60ec9d63871b4) {
-    var_e6e50c89ae141b0f setscriptablepartstate("base", "healthy");
+  foreach(plank in self.planks) {
+    plank setscriptablepartstate("base", "healthy");
   }
 }
 
@@ -77,10 +77,10 @@ function set_dvars() {
 }
 
 function function_47883c99846943d0() {
-  self.var_ddd60ec9d63871b4 = [];
+  self.planks = [];
   large = getentitylessscriptablearray("scriptable_fence_wood_planks_01_64_lm", "classname", (-11143.3, -3632.25, 1049.5), 500);
   small = getentitylessscriptablearray("scriptable_fence_wood_planks_01_32_lm", "classname", (-11143.3, -3632.25, 1049.5), 500);
-  self.var_ddd60ec9d63871b4 = utility::array_combine(large, small);
+  self.planks = utility::array_combine(large, small);
   self.quest_instances = [];
   self.var_2c8a1dfa6e4b5952 = utility::getStructArray("quest_cursed_spawn_loc", "targetname");
 
@@ -555,14 +555,14 @@ function function_28455d21c0029079() {
     }
   }
 
-  if(isDefined(quest.var_ddd60ec9d63871b4) && quest.var_ddd60ec9d63871b4.size > 0) {
-    quest.var_ddd60ec9d63871b4 = [];
+  if(isDefined(quest.planks) && quest.planks.size > 0) {
+    quest.planks = [];
     large = getentitylessscriptablearray("<dev string:x2d3>", "<dev string:x2fc>", (-11143.3, -3632.25, 1049.5), 500);
     small = getentitylessscriptablearray("<dev string:x309>", "<dev string:x2fc>", (-11143.3, -3632.25, 1049.5), 500);
-    quest.var_ddd60ec9d63871b4 = utility::array_combine(large, small);
+    quest.planks = utility::array_combine(large, small);
 
-    foreach(var_e6e50c89ae141b0f in quest.var_ddd60ec9d63871b4) {
-      var_e6e50c89ae141b0f setscriptablepartstate("<dev string:x332>", "<dev string:x33a>");
+    foreach(plank in quest.planks) {
+      plank setscriptablepartstate("<dev string:x332>", "<dev string:x33a>");
     }
   }
 

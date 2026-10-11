@@ -20,7 +20,7 @@ function throwgrenadeatplayerasap_combat_utility() {
 
   for(i = 0; i < level.players.size; i++) {
     if(level.players[i] function_4c108309dc0d7fd2() == 0) {
-      function_b4ebe6632d7e8efe(level.players[i], "lethal", 0);
+      aisetgrenadetimer(level.players[i], "lethal", 0);
     }
   }
 
@@ -32,7 +32,7 @@ function throwgrenadeatplayerasap_combat_utility() {
     return;
   }
 
-  var_20d57e479df6089c = 0;
+  numwithgrenades = 0;
 
   for(i = 0; i < enemies.size; i++) {
     if(enemies[i].grenadeammo > 0) {
@@ -57,7 +57,7 @@ function function_96d556dea441d1dc(grenadetimer) {
   return "<dev string:x80>" + grenadetimer.weapon.basename;
 }
 
-function trygrenadethrow(throwingat, destination, optionalanimation, armoffset, fastthrow, withbounce, var_973c51e9fd66d178) {}
+function trygrenadethrow(throwingat, destination, optionalanimation, armoffset, fastthrow, withbounce, throwinthread) {}
 
 function getgrenadedropvelocity() {
   yaw = randomfloat(360);
@@ -100,7 +100,7 @@ function watchreloading() {
     self waittill("reload_start");
     self.isreloading = 1;
     self.lastreloadstarttime = gettime();
-    function_216c67ab6749137a(self, undefined, "reload");
+    addbattlechatternotify(self, undefined, "reload");
     waittillreloadfinished();
     self.isreloading = 0;
   }
@@ -172,12 +172,12 @@ function monitorflash() {
       continue;
     }
 
-    var_fbc487faa5bf1ff = 0.2;
+    minamountdist = 0.2;
 
-    if(amount_distance > 1 - var_fbc487faa5bf1ff) {
+    if(amount_distance > 1 - minamountdist) {
       amount_distance = 1;
     } else {
-      amount_distance /= 1 - var_fbc487faa5bf1ff;
+      amount_distance /= 1 - minamountdist;
     }
 
     if(!isDefined(duration)) {

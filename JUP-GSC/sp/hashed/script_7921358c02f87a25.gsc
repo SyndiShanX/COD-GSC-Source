@@ -19,7 +19,7 @@ function init_countdown(timeout, var_61f0278fde0a9f65, cancel_notify) {
     thread function_6c96b4865151ccc7(cancel_notify);
   }
 
-  thread function_3e142abcacc03229(timeout);
+  thread start_countdown_timer(timeout);
 }
 
 function private function_6c96b4865151ccc7(cancel_notify) {
@@ -28,7 +28,7 @@ function private function_6c96b4865151ccc7(cancel_notify) {
   function_6a07800c221ecb09();
 }
 
-function private function_3e142abcacc03229(time) {
+function private start_countdown_timer(time) {
   self endon("countdown_end");
   self endon("death");
   function_ddc9d8c3b0ef6b87("coundown_display", 1, 0, time);
@@ -37,6 +37,6 @@ function private function_3e142abcacc03229(time) {
 }
 
 function function_6a07800c221ecb09() {
-  function_fb3c9a259f146781("coundown_display");
+  scripted_widget_destroy("coundown_display");
   self notify("countdown_end");
 }

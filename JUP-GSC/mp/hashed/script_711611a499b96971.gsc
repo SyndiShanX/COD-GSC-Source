@@ -250,11 +250,11 @@ function private function_12b7811b08b56d63() {
 
 function function_dba0cc251fb7cd02() {
   self.difficulty_region = function_415547ee4122c2ca();
-  self.on_mission = namespace_838b439602b3acc7::function_f578373042c34e16(17090, "quest_s0_a3t4_hold_start", self.var_6c29f2fdb0054bbe);
+  self.on_mission = namespace_838b439602b3acc7::function_f578373042c34e16(17090, "quest_s0_a3t4_hold_start", self.playerparticipants);
   self.var_c3d4e3f8e48b7d3e = 0;
 
   if(!self.on_mission) {
-    self.on_mission = namespace_838b439602b3acc7::function_f578373042c34e16(16822, "quest_s0a1t6_alab_outstart", self.var_6c29f2fdb0054bbe);
+    self.on_mission = namespace_838b439602b3acc7::function_f578373042c34e16(16822, "quest_s0a1t6_alab_outstart", self.playerparticipants);
 
     if(istrue(self.on_mission)) {
       self.var_c3d4e3f8e48b7d3e = 1;
@@ -265,7 +265,7 @@ function function_dba0cc251fb7cd02() {
     thread namespace_277c27ef297ef569::function_1281c7fff9456e18("contract_outlast_start");
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player scripts\common\callbacks::callback("on_outlast_start");
   }
 

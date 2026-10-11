@@ -304,7 +304,7 @@ function snapshot_grenade_applysnapshot(victim, attacker, outlinedata, duration,
     outlinedata.targets[entnum] = victim;
     outlinedata.endtimes[entnum] = gettime() + duration;
 
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       victim scripts\mp\outline::hudoutline_add_channel_internal("equipment", 3, bundle.outlineasset);
     }
 
@@ -339,7 +339,7 @@ function snapshot_grenade_applysnapshot(victim, attacker, outlinedata, duration,
   }
 
   if(istrue(bundle.var_25de9cd26a8f1e2a)) {
-    victim function_f3bb4f4911a1beb2("perk", "givePerk", "specialty_self_tracked");
+    victim callsharedfunc("perk", "givePerk", "specialty_self_tracked");
     victim thread function_69b06aec4f713f3c(attacker, duration / 1000);
   }
 
@@ -568,13 +568,13 @@ function snapshot_grenade_clear_outlines() {
   }
 }
 
-function function_6fd4060b24c5926c(var_f20913fec7561c5f, var_fa3b23d51c2dc7, hudoutlineassetname, prioritygroup) {
+function function_6fd4060b24c5926c(var_f20913fec7561c5f, teamvisibleto, hudoutlineassetname, prioritygroup) {
   ignorelist = [];
   var_49971b20aeea513f = getdvarint(@ "hash_10ea538e1c6ce567", 1);
 
   if(istrue(var_49971b20aeea513f)) {
-    if(scripts\mp\utility\teams::isgameplayteam(var_fa3b23d51c2dc7)) {
-      playersvisibleto = scripts\mp\utility\teams::getteamdata(var_fa3b23d51c2dc7, "players");
+    if(scripts\mp\utility\teams::isgameplayteam(teamvisibleto)) {
+      playersvisibleto = scripts\mp\utility\teams::getteamdata(teamvisibleto, "players");
 
       foreach(player in playersvisibleto) {
         if(isDefined(player) && player.sessionstate == "spectator") {
@@ -585,7 +585,7 @@ function function_6fd4060b24c5926c(var_f20913fec7561c5f, var_fa3b23d51c2dc7, hud
     }
   }
 
-  return scripts\mp\utility\outline::outlineenableforteam(var_f20913fec7561c5f, var_fa3b23d51c2dc7, hudoutlineassetname, prioritygroup, ignorelist);
+  return scripts\mp\utility\outline::outlineenableforteam(var_f20913fec7561c5f, teamvisibleto, hudoutlineassetname, prioritygroup, ignorelist);
 }
 
 function function_3c0efada1f34af5d(var_f20913fec7561c5f) {
@@ -602,7 +602,7 @@ function function_3c0efada1f34af5d(var_f20913fec7561c5f) {
   self endon("force_disable_outline_" + var_16877d5609439072);
   self waittill("spawned_player");
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     var_f20913fec7561c5f scripts\mp\outline::function_32dfa50c47325abe(self, "equipment", 1);
     return;
   }
@@ -672,5 +672,5 @@ function function_b18acb87cf98dfba(attacker, duration) {
 }
 
 function function_9adb54275e3a9197() {
-  function_f3bb4f4911a1beb2("perk", "removePerk", "specialty_self_tracked");
+  callsharedfunc("perk", "removePerk", "specialty_self_tracked");
 }

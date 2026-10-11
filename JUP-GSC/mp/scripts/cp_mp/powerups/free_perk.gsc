@@ -27,12 +27,12 @@ function grab_free_perk(str_powerup, ent_powerup) {
   a_players = function_a56a8b17eae57b09(str_powerup);
 
   foreach(player in a_players) {
-    player function_236b69ee9dd7d2d();
+    player give_player_perk();
     player thread function_676437737684783f(str_powerup);
   }
 }
 
-function function_236b69ee9dd7d2d() {
+function give_player_perk() {
   perk_str = zombie_perks::function_cdb669c56d86f5c4();
 
   if(isDefined(perk_str)) {

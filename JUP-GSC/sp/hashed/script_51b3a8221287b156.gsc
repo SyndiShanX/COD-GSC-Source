@@ -73,8 +73,8 @@ function function_a03a8a9f23f22041() {
   level flag_wait("flag_dungeon_intro_complete");
   wait 0.1;
   visionsetnaked("cp_jup_chemical_interior_gas_release_exfil", 0);
-  thread function_238c2a0aae70e973("lgt_work_light_before_gas", 0, 0);
-  thread function_238c2a0aae70e973("lgt_work_light_after_gas", 0, 40);
+  thread lerp_spot_intensity("lgt_work_light_before_gas", 0, 0);
+  thread lerp_spot_intensity("lgt_work_light_after_gas", 0, 40);
   setDvar(@ "hash_e08232af8b8b695c", 4);
   setDvar(@ "hash_63eb1893f96ac98d", 6);
   setDvar(@ "hash_5d66c2ef5a9612e0", 1);
@@ -82,18 +82,18 @@ function function_a03a8a9f23f22041() {
 }
 
 function function_d76646e31621fe70() {
-  thread function_238c2a0aae70e973("infil_hatch_exterior_bounce_static", 0, 0);
-  thread function_238c2a0aae70e973("reactor_sun_light", 0, 0);
-  thread function_238c2a0aae70e973("reactor_overhead_airlock_light", 0, 0);
-  thread function_238c2a0aae70e973("infil_blue_jump_master_rim", 0, 0.4);
-  thread function_238c2a0aae70e973("infil_blue_light_source", 0, 20);
-  thread function_238c2a0aae70e973("infil_blue_team_rim", 0, 1.2);
-  thread function_238c2a0aae70e973("infil_jump_master_rim", 0, 20);
-  thread function_238c2a0aae70e973("infil_jump_master_rim_fixture_light", 0, 1.6);
-  thread function_238c2a0aae70e973("infil_jump_master_rim_fixture_light_omni", 0, 0.2);
-  thread function_238c2a0aae70e973("infil_team_red_key_01", 0, 6.8);
-  thread function_238c2a0aae70e973("infil_team_red_key_02", 0, 6.8);
-  thread function_238c2a0aae70e973("infil_team_red_key_omni", 0, 6);
+  thread lerp_spot_intensity("infil_hatch_exterior_bounce_static", 0, 0);
+  thread lerp_spot_intensity("reactor_sun_light", 0, 0);
+  thread lerp_spot_intensity("reactor_overhead_airlock_light", 0, 0);
+  thread lerp_spot_intensity("infil_blue_jump_master_rim", 0, 0.4);
+  thread lerp_spot_intensity("infil_blue_light_source", 0, 20);
+  thread lerp_spot_intensity("infil_blue_team_rim", 0, 1.2);
+  thread lerp_spot_intensity("infil_jump_master_rim", 0, 20);
+  thread lerp_spot_intensity("infil_jump_master_rim_fixture_light", 0, 1.6);
+  thread lerp_spot_intensity("infil_jump_master_rim_fixture_light_omni", 0, 0.2);
+  thread lerp_spot_intensity("infil_team_red_key_01", 0, 6.8);
+  thread lerp_spot_intensity("infil_team_red_key_02", 0, 6.8);
+  thread lerp_spot_intensity("infil_team_red_key_omni", 0, 6);
 }
 
 function function_6e3df37ada02dc26() {
@@ -137,11 +137,11 @@ function function_8870942e8175774d() {
   }
 
   flag_wait("lgt_infil_team_stop");
-  thread function_238c2a0aae70e973("infil_team_red_rim", 1, 20);
+  thread lerp_spot_intensity("infil_team_red_rim", 1, 20);
   flag_wait("lgt_infil_jump_price_focus");
   setDvar(@ "hash_eca4b727b01fd254", 4);
-  thread function_238c2a0aae70e973("infil_blue_team_rim", 0, 20);
-  thread function_238c2a0aae70e973("infil_team_red_rim", 0, 0);
+  thread lerp_spot_intensity("infil_blue_team_rim", 0, 20);
+  thread lerp_spot_intensity("infil_team_red_rim", 0, 0);
   flag_wait("lgt_infil_button_pressed");
   var_cd66ba3f93f5aa27 = getEnt("infil_jump_master_rim_fixture_light_omni", "targetname");
   var_cd66ba3f93f5aa27 setlightcolor((0.8, 1, 0.612));
@@ -151,47 +151,47 @@ function function_8870942e8175774d() {
   var_fd8ac35c117e2d23 = getEnt("infil_jump_master_rim", "targetname");
   var_fd8ac35c117e2d23 setlightcolor((0.8, 1, 0.612));
   var_fd8ac35c117e2d23 setlightintensity(0.25);
-  thread function_238c2a0aae70e973("infil_plane_accent_lights", 0, 0.1);
-  thread function_238c2a0aae70e973("infil_plane_accent_lights_omni", 0, 0.04);
-  thread function_238c2a0aae70e973("infil_plane_back_accent_lights", 0, 0.16);
-  thread function_238c2a0aae70e973("infil_plane_back_accent_lights_omni", 0, 0.04);
-  thread function_238c2a0aae70e973("infil_team_red_key_01", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_red_key_02", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_red_key_omni", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_red_rim_after_hatch", 0, 0);
+  thread lerp_spot_intensity("infil_plane_accent_lights", 0, 0.1);
+  thread lerp_spot_intensity("infil_plane_accent_lights_omni", 0, 0.04);
+  thread lerp_spot_intensity("infil_plane_back_accent_lights", 0, 0.16);
+  thread lerp_spot_intensity("infil_plane_back_accent_lights_omni", 0, 0.04);
+  thread lerp_spot_intensity("infil_team_red_key_01", 0, 0);
+  thread lerp_spot_intensity("infil_team_red_key_02", 0, 0);
+  thread lerp_spot_intensity("infil_team_red_key_omni", 0, 0);
+  thread lerp_spot_intensity("infil_team_red_rim_after_hatch", 0, 0);
   flag_wait("lgt_infil_hatch_shot");
-  thread function_238c2a0aae70e973("infil_jump_master_rim_fixture_light_omni", 0, 0);
-  thread function_238c2a0aae70e973("infil_jump_master_rim_fixture_light", 0, 0);
-  thread function_238c2a0aae70e973("infil_jump_master_rim", 0, 0);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_light_01", 0, 80);
-  thread function_238c2a0aae70e973("infil_exterior_sun_1", 0, 40);
+  thread lerp_spot_intensity("infil_jump_master_rim_fixture_light_omni", 0, 0);
+  thread lerp_spot_intensity("infil_jump_master_rim_fixture_light", 0, 0);
+  thread lerp_spot_intensity("infil_jump_master_rim", 0, 0);
+  thread lerp_spot_intensity("infil_hatch_exterior_light_01", 0, 80);
+  thread lerp_spot_intensity("infil_exterior_sun_1", 0, 40);
   flag_wait("lgt_infil_hatch_open_start");
   visionsetnaked("cp_jup_chemical_infil_hatch_open", 1);
   wait 0.75;
-  thread function_238c2a0aae70e973("infil_blue_team_rim", 0.1, 0);
-  thread function_238c2a0aae70e973("infil_blue_jump_master_rim", 0.1, 0);
-  thread function_238c2a0aae70e973("infil_blue_light_source", 0.1, 0);
+  thread lerp_spot_intensity("infil_blue_team_rim", 0.1, 0);
+  thread lerp_spot_intensity("infil_blue_jump_master_rim", 0.1, 0);
+  thread lerp_spot_intensity("infil_blue_light_source", 0.1, 0);
   flag_wait("lgt_infil_hatch_open");
   visionsetnaked("cp_jup_chemical_infil_2_exterior", 2);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_bounce_static", 0.5, 60);
+  thread lerp_spot_intensity("infil_hatch_exterior_bounce_static", 0.5, 60);
   flag_wait("lgt_infil_face_team");
   visionsetnaked("cp_jup_chemical_infil_2_exposure", 0);
   setDvar(@ "hash_eca4b727b01fd254", 4);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_light_2", 0, 716);
-  thread function_238c2a0aae70e973("infil_exterior_sun_1", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_sun_key", 0, 477);
-  thread function_238c2a0aae70e973("infil_team_sun_key_2", 0, 477);
-  thread function_238c2a0aae70e973("infil_plane_back_accent_lights_omni", 0, 0);
-  thread function_238c2a0aae70e973("infil_plane_back_accent_lights", 0, 0);
-  thread function_238c2a0aae70e973("infil_plane_back_accent_lights_green_omni", 0, 0.04);
-  thread function_238c2a0aae70e973("infil_plane_back_accent_green_lights", 0, 6);
-  thread function_238c2a0aae70e973("infil_team_green_key_01", 0, 24);
-  thread function_238c2a0aae70e973("infil_team_green_key_02", 0, 24);
-  thread function_238c2a0aae70e973("infil_team_green_key_omni", 0, 60);
-  thread function_238c2a0aae70e973("infil_team_green_rim", 0, 40);
-  thread function_238c2a0aae70e973("infil_plane_accent_lights_green_omni", 0, 0.8);
-  thread function_238c2a0aae70e973("infil_plane_accent_lights", 0, 0);
-  thread function_238c2a0aae70e973("infil_plane_accent_lights_omni", 0, 0);
+  thread lerp_spot_intensity("infil_hatch_exterior_light_2", 0, 716);
+  thread lerp_spot_intensity("infil_exterior_sun_1", 0, 0);
+  thread lerp_spot_intensity("infil_team_sun_key", 0, 477);
+  thread lerp_spot_intensity("infil_team_sun_key_2", 0, 477);
+  thread lerp_spot_intensity("infil_plane_back_accent_lights_omni", 0, 0);
+  thread lerp_spot_intensity("infil_plane_back_accent_lights", 0, 0);
+  thread lerp_spot_intensity("infil_plane_back_accent_lights_green_omni", 0, 0.04);
+  thread lerp_spot_intensity("infil_plane_back_accent_green_lights", 0, 6);
+  thread lerp_spot_intensity("infil_team_green_key_01", 0, 24);
+  thread lerp_spot_intensity("infil_team_green_key_02", 0, 24);
+  thread lerp_spot_intensity("infil_team_green_key_omni", 0, 60);
+  thread lerp_spot_intensity("infil_team_green_rim", 0, 40);
+  thread lerp_spot_intensity("infil_plane_accent_lights_green_omni", 0, 0.8);
+  thread lerp_spot_intensity("infil_plane_accent_lights", 0, 0);
+  thread lerp_spot_intensity("infil_plane_accent_lights_omni", 0, 0);
   wait 0.5;
   visionsetnaked("cp_jup_chemical_infil_2", 0.5);
   flag_wait("lgt_infil_price_screen_space_switch");
@@ -199,64 +199,64 @@ function function_8870942e8175774d() {
   flag_wait("lgt_infil_prepare_crate");
   visionsetnaked("cp_jup_chemical_infil_2_exposure", 0);
   setDvar(@ "hash_eca4b727b01fd254", 16);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_light_2", 0, 398);
-  thread function_238c2a0aae70e973("infil_team_green_key_01", 0, 0.8);
-  thread function_238c2a0aae70e973("infil_team_green_key_02", 0, 0.8);
-  thread function_238c2a0aae70e973("infil_team_green_key_omni", 0, 1.2);
-  thread function_238c2a0aae70e973("infil_team_green_rim", 0, 8);
-  thread function_238c2a0aae70e973("infil_team_green_plane_spec", 0, 1);
-  thread function_238c2a0aae70e973("infil_team_sun_key", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_sun_key_2", 0, 0);
+  thread lerp_spot_intensity("infil_hatch_exterior_light_2", 0, 398);
+  thread lerp_spot_intensity("infil_team_green_key_01", 0, 0.8);
+  thread lerp_spot_intensity("infil_team_green_key_02", 0, 0.8);
+  thread lerp_spot_intensity("infil_team_green_key_omni", 0, 1.2);
+  thread lerp_spot_intensity("infil_team_green_rim", 0, 8);
+  thread lerp_spot_intensity("infil_team_green_plane_spec", 0, 1);
+  thread lerp_spot_intensity("infil_team_sun_key", 0, 0);
+  thread lerp_spot_intensity("infil_team_sun_key_2", 0, 0);
   wait 0.5;
   visionsetnaked("cp_jup_chemical_infil_2", 0.5);
   flag_wait("lgt_infil_parachute_focus");
   visionsetnaked("cp_jup_chemical_infil_2_exterior", 0);
   setDvar(@ "hash_eca4b727b01fd254", 16);
-  thread function_238c2a0aae70e973("infil_team_green_parachute_light", 0, 12);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_light_2", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_key_01", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_key_02", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_key_omni", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_rim", 0, 1.2);
-  thread function_238c2a0aae70e973("infil_team_green_plane_spec", 0, 4);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_light_01", 0, 40);
-  thread function_238c2a0aae70e973("infil_exterior_sun_2", 0, 80);
+  thread lerp_spot_intensity("infil_team_green_parachute_light", 0, 12);
+  thread lerp_spot_intensity("infil_hatch_exterior_light_2", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_key_01", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_key_02", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_key_omni", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_rim", 0, 1.2);
+  thread lerp_spot_intensity("infil_team_green_plane_spec", 0, 4);
+  thread lerp_spot_intensity("infil_hatch_exterior_light_01", 0, 40);
+  thread lerp_spot_intensity("infil_exterior_sun_2", 0, 80);
   wait 0.5;
-  thread function_238c2a0aae70e973("infil_hatch_exterior_light_01", 1, 0);
-  thread function_238c2a0aae70e973("infil_team_green_parachute_light", 1, 0);
+  thread lerp_spot_intensity("infil_hatch_exterior_light_01", 1, 0);
+  thread lerp_spot_intensity("infil_team_green_parachute_light", 1, 0);
   flag_wait("lgt_infil_plane_focus");
   visionsetnaked("cp_jup_chemical_infil_plane_exterior", 0);
   setDvar(@ "hash_eca4b727b01fd254", 10);
-  thread function_238c2a0aae70e973("infil_exterior_sun_2", 0, 0);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_bounce_static", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_key_01", 0, 0.4);
-  thread function_238c2a0aae70e973("infil_team_green_key_02", 0, 0.4);
-  thread function_238c2a0aae70e973("infil_team_green_key_omni", 0, 0.4);
-  thread function_238c2a0aae70e973("infil_team_green_rim", 0, 0.6);
-  thread function_238c2a0aae70e973("infil_team_green_plane_spec", 0, 0.06);
-  thread function_238c2a0aae70e973("infil_plane_exterior_sun", 0, 360);
-  thread function_238c2a0aae70e973("infil_plane_exterior_sky", 0, 6.4);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_plane_team_sun", 0, 80);
+  thread lerp_spot_intensity("infil_exterior_sun_2", 0, 0);
+  thread lerp_spot_intensity("infil_hatch_exterior_bounce_static", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_key_01", 0, 0.4);
+  thread lerp_spot_intensity("infil_team_green_key_02", 0, 0.4);
+  thread lerp_spot_intensity("infil_team_green_key_omni", 0, 0.4);
+  thread lerp_spot_intensity("infil_team_green_rim", 0, 0.6);
+  thread lerp_spot_intensity("infil_team_green_plane_spec", 0, 0.06);
+  thread lerp_spot_intensity("infil_plane_exterior_sun", 0, 360);
+  thread lerp_spot_intensity("infil_plane_exterior_sky", 0, 6.4);
+  thread lerp_spot_intensity("infil_hatch_exterior_plane_team_sun", 0, 80);
   level waittill("lgt_infil_back_inside_plane_test");
   visionsetnaked("cp_jup_chemical_infil_2_exterior", 0);
   setDvar(@ "hash_eca4b727b01fd254", 10);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_light_01", 0, 80);
-  thread function_238c2a0aae70e973("infil_exterior_sun_2", 0, 80);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_bounce_static", 0, 60);
-  thread function_238c2a0aae70e973("infil_final_stance_sky_rim", 0, 20);
-  thread function_238c2a0aae70e973("infil_team_green_rim", 0, 0.15);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_plane_team_sun", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_plane_spec", 0, 0);
-  thread function_238c2a0aae70e973("infil_plane_back_accent_lights_green_omni", 0, 0);
-  thread function_238c2a0aae70e973("infil_plane_back_accent_green_lights", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_key_01", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_key_02", 0, 0);
-  thread function_238c2a0aae70e973("infil_team_green_key_omni", 0, 0);
-  thread function_238c2a0aae70e973("infil_plane_exterior_sun", 0, 0);
-  thread function_238c2a0aae70e973("infil_plane_exterior_sky", 0, 0);
+  thread lerp_spot_intensity("infil_hatch_exterior_light_01", 0, 80);
+  thread lerp_spot_intensity("infil_exterior_sun_2", 0, 80);
+  thread lerp_spot_intensity("infil_hatch_exterior_bounce_static", 0, 60);
+  thread lerp_spot_intensity("infil_final_stance_sky_rim", 0, 20);
+  thread lerp_spot_intensity("infil_team_green_rim", 0, 0.15);
+  thread lerp_spot_intensity("infil_hatch_exterior_plane_team_sun", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_plane_spec", 0, 0);
+  thread lerp_spot_intensity("infil_plane_back_accent_lights_green_omni", 0, 0);
+  thread lerp_spot_intensity("infil_plane_back_accent_green_lights", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_key_01", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_key_02", 0, 0);
+  thread lerp_spot_intensity("infil_team_green_key_omni", 0, 0);
+  thread lerp_spot_intensity("infil_plane_exterior_sun", 0, 0);
+  thread lerp_spot_intensity("infil_plane_exterior_sky", 0, 0);
   level waittill("lgt_infil_jump_time_test");
-  thread function_238c2a0aae70e973("infil_final_stance_sky_rim", 1.5, 0);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_light_01", 2, 0);
+  thread lerp_spot_intensity("infil_final_stance_sky_rim", 1.5, 0);
+  thread lerp_spot_intensity("infil_hatch_exterior_light_01", 2, 0);
   flag_wait("lgt_infil_team_jump");
   visionsetnaked("cp_jup_chemical_infil_2_transition", 1.5);
   wait 1;
@@ -264,10 +264,10 @@ function function_8870942e8175774d() {
   setDvar(@ "hash_eca4b727b01fd254", 4);
   setDvar(@ "hash_6157be5fe5b7cd6e", 8);
   level waittill("lgt_infil_completely_off_plane");
-  thread function_238c2a0aae70e973("infil_exterior_sun_2", 1, 0);
-  thread function_238c2a0aae70e973("infil_plane_accent_lights_green_omni", 0, 0);
-  thread function_238c2a0aae70e973("infil_hatch_exterior_bounce_static", 1, 0);
-  thread function_238c2a0aae70e973("infil_team_green_rim", 0, 0);
+  thread lerp_spot_intensity("infil_exterior_sun_2", 1, 0);
+  thread lerp_spot_intensity("infil_plane_accent_lights_green_omni", 0, 0);
+  thread lerp_spot_intensity("infil_hatch_exterior_bounce_static", 1, 0);
+  thread lerp_spot_intensity("infil_team_green_rim", 0, 0);
   level waittill("lgt_infil_price_sky_floating");
   var_8f5ecd5725a46e24 = getEntArray("infil_light_fixtures", "targetname");
 
@@ -319,8 +319,8 @@ function function_8c304f6c47246a43(anim_org) {
   price_body = anim_org scene::get_entity("price_body_wind");
   var_7859aff8929d4de0 = getEnt("infil_price_sky_floating_light", "targetname");
   var_85831d915364f737 = getEnt("infil_price_sky_floating_light_02", "targetname");
-  thread function_238c2a0aae70e973("infil_price_sky_floating_light", 2, 5);
-  thread function_238c2a0aae70e973("infil_price_sky_floating_light_02", 2, 1.2);
+  thread lerp_spot_intensity("infil_price_sky_floating_light", 2, 5);
+  thread lerp_spot_intensity("infil_price_sky_floating_light_02", 2, 1.2);
 
   if(!isDefined(anim_org)) {
     return;
@@ -459,8 +459,8 @@ function function_7959e8d2e655d16() {
     var_3398c0dabca1148f = getEntArray("airlock_emergency_fixtures", "targetname");
     var_ef6933f866531138 = [];
 
-    foreach(var_ede74e03e931f704 in var_3398c0dabca1148f) {
-      var_15479b80d264b1e9 = spawnscriptable("jup_lighting_sov_plasticcase_yellow_fixture_01_noent", var_ede74e03e931f704.origin, var_ede74e03e931f704.angles);
+    foreach(fix in var_3398c0dabca1148f) {
+      var_15479b80d264b1e9 = spawnscriptable("jup_lighting_sov_plasticcase_yellow_fixture_01_noent", fix.origin, fix.angles);
 
       if(isDefined(var_15479b80d264b1e9)) {
         var_ef6933f866531138 = array_add(var_ef6933f866531138, var_15479b80d264b1e9);
@@ -479,12 +479,12 @@ function function_7959e8d2e655d16() {
   visionsetnaked("cp_jup_chemical_exfil_black", 0);
   wait 0.1;
   setDvar(@ "hash_d559c6b906603ff1", 0);
-  thread function_238c2a0aae70e973("airlock_initial_lights", 0, 0);
+  thread lerp_spot_intensity("airlock_initial_lights", 0, 0);
   thread namespace_11fae4a66a43bd3f::function_505b5d4f03fcfa5d();
   wait 2;
   visionsetnaked("cp_jup_chemical_interior", 0.5);
-  thread function_238c2a0aae70e973("reactor_sun_light", 0, 40);
-  thread function_238c2a0aae70e973("reactor_overhead_airlock_light", 0, 2);
+  thread lerp_spot_intensity("reactor_sun_light", 0, 40);
+  thread lerp_spot_intensity("reactor_overhead_airlock_light", 0, 2);
   thread namespace_11fae4a66a43bd3f::function_f0b25c48410693c3();
 
   foreach(fixture in var_3398c0dabca1148f) {
@@ -519,14 +519,14 @@ function function_7959e8d2e655d16() {
 
 function function_3e3876e39f105d48() {
   flag_wait("reactor_doors_force_closed");
-  thread function_238c2a0aae70e973("airlock_green_lights", 0, 0.001);
+  thread lerp_spot_intensity("airlock_green_lights", 0, 0.001);
 }
 
 function function_576a53015b7e0487() {
   flag_wait("flag_escape_start");
-  thread function_238c2a0aae70e973("palette_sunlight", 0.5, 0);
-  thread function_238c2a0aae70e973("palette_rim", 0.5, 0);
-  thread function_238c2a0aae70e973("reactor_small_emergency_lights_omni", 0, 1.6);
+  thread lerp_spot_intensity("palette_sunlight", 0.5, 0);
+  thread lerp_spot_intensity("palette_rim", 0.5, 0);
+  thread lerp_spot_intensity("reactor_small_emergency_lights_omni", 0, 1.6);
   var_63d69370dbfe7826 = getEntArray("reactor_small_emergency_lights_omni", "targetname");
 
   foreach(light in var_63d69370dbfe7826) {
@@ -560,13 +560,13 @@ function function_576a53015b7e0487() {
   wait 0.5;
   visionsetnaked("cp_jup_chemical_interior_gas_release", 20);
   wait 0.5;
-  thread function_238c2a0aae70e973("lgt_work_light_before_gas", 20, 0);
-  thread function_238c2a0aae70e973("lgt_work_light_after_gas", 20, 40);
+  thread lerp_spot_intensity("lgt_work_light_before_gas", 20, 0);
+  thread lerp_spot_intensity("lgt_work_light_after_gas", 20, 40);
 }
 
 function function_ed298a2ecae488fc() {
   flag_wait("flag_gas_at_floor3");
-  thread function_ee3c5a9a02050510("lgt_work_light_after_gas", 40, 250);
+  thread lerp_spot_radius("lgt_work_light_after_gas", 40, 250);
 }
 
 function function_9f9e4e08ba93c02f() {
@@ -588,70 +588,70 @@ function function_9f9e4e08ba93c02f() {
   setDvar(@ "hash_dacffbfd52c2fdc5", 32);
   setDvar(@ "hash_eca4b727b01fd254", 8);
   wait 0.1;
-  thread function_238c2a0aae70e973("1_exfil_begin_fixture", 1, 1.2);
-  thread function_238c2a0aae70e973("1_exfil_melty_run_rim", 1, 2);
-  thread function_238c2a0aae70e973("1_exfil_price_rappel_key", 0.5, 6);
-  thread function_238c2a0aae70e973("1_exfil_price_rappel_fill", 0.5, 1.6);
+  thread lerp_spot_intensity("1_exfil_begin_fixture", 1, 1.2);
+  thread lerp_spot_intensity("1_exfil_melty_run_rim", 1, 2);
+  thread lerp_spot_intensity("1_exfil_price_rappel_key", 0.5, 6);
+  thread lerp_spot_intensity("1_exfil_price_rappel_fill", 0.5, 1.6);
   flag_wait("lgt_exfil_face_exit");
-  thread function_238c2a0aae70e973("reactor_sun_light", 1, 0);
-  thread function_238c2a0aae70e973("1_exfil_melty_run_rim", 0.5, 0);
-  thread function_238c2a0aae70e973("1_exfil_price_rappel_key", 0.5, 0);
-  thread function_238c2a0aae70e973("1_exfil_price_rappel_fill", 0.5, 0);
-  thread function_238c2a0aae70e973("1_exfil_melty_face_key", 0.5, 3.2);
-  thread function_238c2a0aae70e973("1_exfil_melty_face_rim", 0.5, 4);
-  thread function_238c2a0aae70e973("1_exfil_melty_face_green_rim", 0.5, 2);
-  thread function_238c2a0aae70e973("1_exfil_melty_face_green_fill", 0.5, 12);
+  thread lerp_spot_intensity("reactor_sun_light", 1, 0);
+  thread lerp_spot_intensity("1_exfil_melty_run_rim", 0.5, 0);
+  thread lerp_spot_intensity("1_exfil_price_rappel_key", 0.5, 0);
+  thread lerp_spot_intensity("1_exfil_price_rappel_fill", 0.5, 0);
+  thread lerp_spot_intensity("1_exfil_melty_face_key", 0.5, 3.2);
+  thread lerp_spot_intensity("1_exfil_melty_face_rim", 0.5, 4);
+  thread lerp_spot_intensity("1_exfil_melty_face_green_rim", 0.5, 2);
+  thread lerp_spot_intensity("1_exfil_melty_face_green_fill", 0.5, 12);
   flag_wait("lgt_exfil_melty_end");
-  thread function_238c2a0aae70e973("1_exfil_top_rappel_rim", 1, 160);
-  thread function_238c2a0aae70e973("1_exfil_top_rappel_fill", 1, 60);
+  thread lerp_spot_intensity("1_exfil_top_rappel_rim", 1, 160);
+  thread lerp_spot_intensity("1_exfil_top_rappel_fill", 1, 60);
   flag_wait("lgt_exfil_rope_up");
-  thread function_238c2a0aae70e973("1_exfil_melty_face_key", 1, 0);
-  thread function_238c2a0aae70e973("1_exfil_melty_face_rim", 1, 0);
-  thread function_238c2a0aae70e973("1_exfil_melty_face_green_rim", 1, 0);
-  thread function_238c2a0aae70e973("1_exfil_melty_face_green_fill", 1, 0);
+  thread lerp_spot_intensity("1_exfil_melty_face_key", 1, 0);
+  thread lerp_spot_intensity("1_exfil_melty_face_rim", 1, 0);
+  thread lerp_spot_intensity("1_exfil_melty_face_green_rim", 1, 0);
+  thread lerp_spot_intensity("1_exfil_melty_face_green_fill", 1, 0);
   flag_wait("lgt_exfil_look_up");
   wait 0.1;
   thread function_fd6901fbd5afbe90();
   visionsetnaked("cp_jup_chemical_exfil_bright", 0.5);
   setDvar(@ "hash_d559c6b906603ff1", 1);
-  thread function_238c2a0aae70e973("1_exfil_top_rappel_rim", 0.5, 0);
-  thread function_238c2a0aae70e973("1_exfil_top_rappel_fill", 0.5, 0);
-  thread function_238c2a0aae70e973("1_exfil_reach_top_key", 1, 2);
-  thread function_238c2a0aae70e973("1_exfil_top_rim", 1, 1.2);
+  thread lerp_spot_intensity("1_exfil_top_rappel_rim", 0.5, 0);
+  thread lerp_spot_intensity("1_exfil_top_rappel_fill", 0.5, 0);
+  thread lerp_spot_intensity("1_exfil_reach_top_key", 1, 2);
+  thread lerp_spot_intensity("1_exfil_top_rim", 1, 1.2);
   flag_wait("lgt_exfil_vision_lerp");
   visionsetnaked("cp_jup_chemical_exfil", 1);
   flag_wait("lgt_exfil_letterbox_trigger");
   thread function_de10ba73d5b3559();
   flag_wait("lgt_exfil_pull_up");
-  thread function_238c2a0aae70e973("1_exfil_reach_top_rim", 1, 0.4);
-  thread function_238c2a0aae70e973("1_exfil_reach_top_key", 1, 0.2);
+  thread lerp_spot_intensity("1_exfil_reach_top_rim", 1, 0.4);
+  thread lerp_spot_intensity("1_exfil_reach_top_key", 1, 0.2);
   wait 4.2;
-  thread function_238c2a0aae70e973("1_exfil_reach_top_key", 1, 0);
-  thread function_238c2a0aae70e973("1_exfil_top_rim", 1, 0);
-  thread function_238c2a0aae70e973("1_exfil_reach_top_rim", 1, 0);
-  thread function_238c2a0aae70e973("1_exfil_top_price_key", 2, 2.4);
-  thread function_238c2a0aae70e973("1_exfil_top_price_blue_rim", 2, 0.08);
+  thread lerp_spot_intensity("1_exfil_reach_top_key", 1, 0);
+  thread lerp_spot_intensity("1_exfil_top_rim", 1, 0);
+  thread lerp_spot_intensity("1_exfil_reach_top_rim", 1, 0);
+  thread lerp_spot_intensity("1_exfil_top_price_key", 2, 2.4);
+  thread lerp_spot_intensity("1_exfil_top_price_blue_rim", 2, 0.08);
   flag_wait("lgt_exfil_soap_focus");
-  thread function_238c2a0aae70e973("1_exfil_top_price_key", 0, 0);
-  thread function_238c2a0aae70e973("1_exfil_top_price_blue_rim", 0, 0);
-  thread function_238c2a0aae70e973("1_exfil_top_team_key", 0, 0.2);
-  thread function_238c2a0aae70e973("1_exfil_top_team_rim", 0, 3.6);
-  thread function_238c2a0aae70e973("1_exfil_top_rim", 0, 0.8);
+  thread lerp_spot_intensity("1_exfil_top_price_key", 0, 0);
+  thread lerp_spot_intensity("1_exfil_top_price_blue_rim", 0, 0);
+  thread lerp_spot_intensity("1_exfil_top_team_key", 0, 0.2);
+  thread lerp_spot_intensity("1_exfil_top_team_rim", 0, 3.6);
+  thread lerp_spot_intensity("1_exfil_top_rim", 0, 0.8);
   flag_wait("lgt_exfil_price_passed_out");
-  thread function_238c2a0aae70e973("1_exfil_top_team_key", 0, 0);
-  thread function_238c2a0aae70e973("1_exfil_top_rim", 0, 0.8);
-  thread function_238c2a0aae70e973("1_exfil_top_price_rim", 0, 0.4);
+  thread lerp_spot_intensity("1_exfil_top_team_key", 0, 0);
+  thread lerp_spot_intensity("1_exfil_top_rim", 0, 0.8);
+  thread lerp_spot_intensity("1_exfil_top_price_rim", 0, 0.4);
   flag_wait("lgt_exfil_price_mid_fall");
-  thread function_238c2a0aae70e973("1_exfil_top_rim", 1, 0.4);
-  thread function_238c2a0aae70e973("1_exfil_top_price_rim", 1, 0.2);
-  thread function_238c2a0aae70e973("1_exfil_top_team_rim", 1, 3.6);
+  thread lerp_spot_intensity("1_exfil_top_rim", 1, 0.4);
+  thread lerp_spot_intensity("1_exfil_top_price_rim", 1, 0.2);
+  thread lerp_spot_intensity("1_exfil_top_team_rim", 1, 3.6);
   flag_wait("lgt_exfil_cut_to_black");
   visionsetnaked("cp_jup_chemical_exfil_black_fade", 0);
   level waittill("lgt_exfil_end");
   wait 0.5;
-  thread function_238c2a0aae70e973("1_exfil_top_rim", 0, 0);
-  thread function_238c2a0aae70e973("1_exfil_top_price_rim", 0, 0);
-  thread function_238c2a0aae70e973("1_exfil_top_team_rim", 0, 0);
+  thread lerp_spot_intensity("1_exfil_top_rim", 0, 0);
+  thread lerp_spot_intensity("1_exfil_top_price_rim", 0, 0);
+  thread lerp_spot_intensity("1_exfil_top_team_rim", 0, 0);
   setDvar(@ "hash_6157be5fe5b7cd6e", 4);
   setDvar(@ "hash_cb82c01fec2d534b", 8);
   level.var_f86dca03b4e10a79 = undefined;
@@ -788,11 +788,11 @@ function function_dea862127c0706ab(light, start_pos, end_pos) {
   end_pos = getStruct("lgt_end_pos", "targetname");
   thread function_bb9b60091de365cc(light, 0, start_pos.origin);
   waitframe();
-  thread function_238c2a0aae70e973("2_exfil_price_key_window", 0, 4);
+  thread lerp_spot_intensity("2_exfil_price_key_window", 0, 4);
   thread function_bb9b60091de365cc(light, 4, end_pos.origin);
   wait 4;
   thread function_bb9b60091de365cc(light, 0, start_pos.origin);
-  thread function_238c2a0aae70e973("2_exfil_price_key_window", 0, 0);
+  thread lerp_spot_intensity("2_exfil_price_key_window", 0, 0);
 }
 
 function function_bb9b60091de365cc(ent, time, target) {

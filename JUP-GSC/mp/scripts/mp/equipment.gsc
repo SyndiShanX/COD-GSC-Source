@@ -128,7 +128,7 @@ function inititems() {
   scripts\mp\equipment\combataxe::function_d80165ad0154bb7e();
 
   if(issharedfuncdefined("equip_butterfly_mine", "init")) {
-    function_f3bb4f4911a1beb2("equip_butterfly_mine", "init");
+    callsharedfunc("equip_butterfly_mine", "init");
   }
 
   globals.callbacks["equip_helmet"]["onGive"] = &scripts\mp\perks\headgear::runheadgear;
@@ -253,8 +253,8 @@ function loadequipmentbundles(equipmenttable) {
           blueprints = getweaponblueprintnames(weaponname);
 
           foreach(blueprint, id in blueprints) {
-            var_1092bc40c58c1c9a = weaponname + "|" + string(id);
-            level.equipmentblueprints[var_1092bc40c58c1c9a] = function_3211981142ec5aee(weaponname, blueprint);
+            svariantid = weaponname + "|" + string(id);
+            level.equipmentblueprints[svariantid] = function_3211981142ec5aee(weaponname, blueprint);
           }
 
           if(!isDefined(level.var_415476758ec47760[weaponname])) {
@@ -635,7 +635,7 @@ function getequipmentmaxammo(ref, class) {
     if(isDefined(level.br_pickups.br_equipnametoscriptable[tableinfo.ref])) {
       equipmentname = level.br_pickups.br_equipnametoscriptable[tableinfo.ref];
     } else {
-      equipmentname = level.br_pickups.br_equipnametoscriptable[function_1823ff50bb28148d(tableinfo.ref)];
+      equipmentname = level.br_pickups.br_equipnametoscriptable[getxhash(tableinfo.ref)];
     }
 
     assertex(isDefined(level.br_pickups.maxcounts[equipmentname]), "<dev string:x101>" + equipmentname + "<dev string:x10f>");
@@ -925,7 +925,7 @@ function getequipmentreffromweapon(objweapon) {
   return level.var_415476758ec47760[objweapon.basename];
 }
 
-function function_2113b6f7cb462692(weaponname) {
+function getequipmentbundlefromweaponname(weaponname) {
   if(!isDefined(weaponname)) {
     return undefined;
   }

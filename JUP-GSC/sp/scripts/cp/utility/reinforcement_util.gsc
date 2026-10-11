@@ -75,8 +75,8 @@ function private function_4263d0d23af617df() {
 
         var_25a0373bcaf45538 = 1;
 
-        foreach(var_6788e3106fcb4652 in spawner.predicates) {
-          if(![[var_6788e3106fcb4652]]()) {
+        foreach(predicate in spawner.predicates) {
+          if(![[predicate]]()) {
             var_25a0373bcaf45538 = 0;
             break;
           }

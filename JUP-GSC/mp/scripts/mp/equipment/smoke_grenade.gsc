@@ -108,7 +108,7 @@ function smokegrenadeexplode(position, owner, bundle) {
 
   if(getdvarint(@ "hash_abe45e35ef030a56") == 1) {
     if(getdvarint(@ "mgl", 0)) {
-      thread scripts\common\ai::function_f8903387ea945165(position, 1);
+      thread scripts\common\ai::mgladdactivesmoke(position, 1);
     } else {
       function_8a09c0e5fa78a48c(position, smokeduration, undefined, smokeradius);
     }

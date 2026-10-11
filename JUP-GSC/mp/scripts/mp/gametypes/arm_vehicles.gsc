@@ -443,7 +443,7 @@ function vehiclespawn_tank(loc, faildata) {
       return;
     }
 
-    spawndata.var_14cde247ac3313a4 = "east";
+    spawndata.skinoverride = "east";
     spawndata.team = "axis";
     level.numhqtanks_axis++;
   } else {
@@ -451,7 +451,7 @@ function vehiclespawn_tank(loc, faildata) {
       return;
     }
 
-    spawndata.var_14cde247ac3313a4 = "west";
+    spawndata.skinoverride = "west";
     spawndata.team = "allies";
     level.numhqtanks_allies++;
   }
@@ -584,7 +584,7 @@ function function_70199cf52bda53fa(loc, faildata) {
 
   spawndata = vehiclespawn_getspawndata(loc);
   spawndata.spawnmethod = "airdrop_at_position_unsafe";
-  spawndata.var_14cde247ac3313a4 = ter_op(spawndata.team == "axis", "east", "west");
+  spawndata.skinoverride = ter_op(spawndata.team == "axis", "east", "west");
   return scripts\cp_mp\vehicles\vehicle::vehicle_spawn("veh9_cougar", spawndata, faildata);
 }
 
@@ -595,7 +595,7 @@ function function_725c5ee265b286ce(loc, faildata) {
 
   spawndata = vehiclespawn_getspawndata(loc);
   spawndata.spawnmethod = "airdrop_at_position_unsafe";
-  spawndata.var_14cde247ac3313a4 = ter_op(spawndata.team == "axis", "east", "west");
+  spawndata.skinoverride = ter_op(spawndata.team == "axis", "east", "west");
   return scripts\cp_mp\vehicles\vehicle::vehicle_spawn("veh_jup_razorback", spawndata, faildata);
 }
 
@@ -799,7 +799,7 @@ function init_rallyvehicles() {
     spawndata = getrallyvehiclespawndata(loc, team, var_da3668523170ea04);
 
     if(loc.targetname == "apc_8x8_spawn") {
-      spawndata.var_14cde247ac3313a4 = ter_op(team == "axis", "east", "west");
+      spawndata.skinoverride = ter_op(team == "axis", "east", "west");
     }
 
     faildata = spawnStruct();
@@ -851,7 +851,7 @@ function init_rallyvehicles() {
     }
 
     spawndata = getrallyvehiclespawndata(loc, team, var_da3668523170ea04);
-    spawndata.var_14cde247ac3313a4 = ter_op(team == "axis", "east", "west");
+    spawndata.skinoverride = ter_op(team == "axis", "east", "west");
     faildata = spawnStruct();
     vehicle = scripts\cp_mp\vehicles\vehicle::vehicle_spawn("veh9_patrol_boat", spawndata, faildata);
 
@@ -898,7 +898,7 @@ function init_rallyvehicles() {
     }
 
     spawndata = getrallyvehiclespawndata(loc, team, var_da3668523170ea04);
-    spawndata.var_14cde247ac3313a4 = ter_op(team == "axis", "east", "west");
+    spawndata.skinoverride = ter_op(team == "axis", "east", "west");
     faildata = spawnStruct();
     vehicle = scripts\cp_mp\vehicles\vehicle::vehicle_spawn("veh9_palfa", spawndata, faildata);
 

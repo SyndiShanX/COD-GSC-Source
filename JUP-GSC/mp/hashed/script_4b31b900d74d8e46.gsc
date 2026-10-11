@@ -105,7 +105,7 @@ function private testbotvehicles_movetoposition(position, var_afb49cc35a7dbe58, 
     var_34bb55fbc59c2e1d = isnavmeshloaded("vehicle_large");
     var_a8c9b5fffa6387d = isnavmeshloaded("zombie_large");
     navmeshlayer = ter_op(var_34bb55fbc59c2e1d, "vehicle_large", ter_op(var_a8c9b5fffa6387d, "zombie_large", undefined));
-    splinepoints = self function_187aaba5fbba21d0(self.origin, position, 150, 250, 100, anglesToForward(self.angles), (0, 0, 0), 300, 0.8, 0, 1, undefined, 0, 1);
+    splinepoints = self findsplinepath(self.origin, position, 150, 250, 100, anglesToForward(self.angles), (0, 0, 0), 300, 0.8, 0, 1, undefined, 0, 1);
 
     if(isDefined(splinepoints) && istrue(debugdraw)) {
       thread scripts\common\vehicle_paths::function_68d5232181fec390(splinepoints, ter_op(isDefined(navmeshlayer), (1, 1, 1), (1, 0, 0)));
@@ -129,23 +129,23 @@ function private function_7f0c1e61a13ca16e(vehicle) {
     vehicle addcomponent("animator");
   }
 
-  vehicle function_77320e794d35465a("p2p", "checkStuck", 0);
-  vehicle function_77320e794d35465a("p2p", "brakeAtGoal", 1);
-  vehicle function_77320e794d35465a("p2p", "automaticNormal", 1);
-  vehicle function_77320e794d35465a("p2p", "brakeOnGoalGasbrake", 1);
-  vehicle function_77320e794d35465a("p2p", "goalPoint", vehicle.origin);
-  vehicle function_77320e794d35465a("p2p", "goalThreshold", 200);
-  vehicle function_77320e794d35465a("p2p", "throttleSpeedClose", 1);
-  vehicle function_77320e794d35465a("p2p", "throttleSpeedThreshold", 1);
-  vehicle function_77320e794d35465a("p2p", "automaticFastTopspeedFraction", 1);
-  vehicle function_77320e794d35465a("p2p", "throttleSpeedFarBelow", 1);
-  vehicle function_77320e794d35465a("p2p", "throttleSpeedFarAbove", 4);
-  vehicle function_77320e794d35465a("p2p", "throttleSpeedClose", 2);
-  vehicle function_77320e794d35465a("p2p", "gasToStopMovement", 0.9);
-  vehicle function_77320e794d35465a("p2p", "steeringMultiplier", 2);
-  vehicle function_77320e794d35465a("path", "radiusToStep", 300);
+  vehicle setconfigvalue("p2p", "checkStuck", 0);
+  vehicle setconfigvalue("p2p", "brakeAtGoal", 1);
+  vehicle setconfigvalue("p2p", "automaticNormal", 1);
+  vehicle setconfigvalue("p2p", "brakeOnGoalGasbrake", 1);
+  vehicle setconfigvalue("p2p", "goalPoint", vehicle.origin);
+  vehicle setconfigvalue("p2p", "goalThreshold", 200);
+  vehicle setconfigvalue("p2p", "throttleSpeedClose", 1);
+  vehicle setconfigvalue("p2p", "throttleSpeedThreshold", 1);
+  vehicle setconfigvalue("p2p", "automaticFastTopspeedFraction", 1);
+  vehicle setconfigvalue("p2p", "throttleSpeedFarBelow", 1);
+  vehicle setconfigvalue("p2p", "throttleSpeedFarAbove", 4);
+  vehicle setconfigvalue("p2p", "throttleSpeedClose", 2);
+  vehicle setconfigvalue("p2p", "gasToStopMovement", 0.9);
+  vehicle setconfigvalue("p2p", "steeringMultiplier", 2);
+  vehicle setconfigvalue("path", "radiusToStep", 300);
   vehicle.stopping = 0;
   vehicle scripts\common\vehicle_code::vehicle_disable_navobstacles();
-  var_bfe90410fad38aaa = mph_to_ips(vehicle vehicle_gettopspeedforward(1));
-  vehicle function_77320e794d35465a("p2p", "manualSpeed", var_bfe90410fad38aaa);
+  speedips = mph_to_ips(vehicle vehicle_gettopspeedforward(1));
+  vehicle setconfigvalue("p2p", "manualSpeed", speedips);
 }

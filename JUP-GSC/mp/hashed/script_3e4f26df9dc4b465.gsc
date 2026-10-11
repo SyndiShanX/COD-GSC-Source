@@ -46,7 +46,7 @@ function function_99484082dc3884de() {
   self.var_cb7aa972a6412c9a[0].count = self.var_7f35bbdd17571a22;
   self.var_cb7aa972a6412c9a[0].var_aed5f72cc5d12c0e = 0;
   self.var_cb7aa972a6412c9a[0].countmax = 0;
-  var_304dafdce0b18e69 = self.zombieaisettings.var_e58a65b7a8f5973c.var_f765675f1055f2eb;
+  var_304dafdce0b18e69 = self.zombieaisettings.var_e58a65b7a8f5973c.overridespawnaitypearray;
   var_ebfa09adb0093c74 = 0;
 
   if(isDefined(var_304dafdce0b18e69) && var_304dafdce0b18e69.size > 0) {
@@ -72,7 +72,7 @@ function function_e803d8fa2e7ce395() {
   self.var_78f6b2d381a73bf4 = 1;
 }
 
-function function_a6f183528ab5941(n_to_spawn) {
+function can_summon_zombies(n_to_spawn) {
   if(getdvarint(@ "hash_6489e49220d549c2", 0)) {
     return false;
   }
@@ -97,7 +97,7 @@ function function_a6f183528ab5941(n_to_spawn) {
 
   n_to_spawn = default_to(n_to_spawn, self.var_7f35bbdd17571a22);
 
-  if(function_c9eebf69d9a55148() < n_to_spawn) {
+  if(getfreeaicount_sharedfunc() < n_to_spawn) {
     return false;
   }
 
@@ -226,11 +226,11 @@ function function_2641b2abaa5b142e() {
         break;
       }
 
-      if(function_c9eebf69d9a55148() == 0) {
+      if(getfreeaicount_sharedfunc() == 0) {
         break;
       }
 
-      if(!istrue(self function_11e2d4051ea44b35("in_summon"))) {
+      if(!istrue(self getaiblackboarddynamic("in_summon"))) {
         break;
       }
 
@@ -244,7 +244,7 @@ function function_2641b2abaa5b142e() {
       if(istrue(struct.var_aed5f72cc5d12c0e) && struct.count < struct.maxcount) {
         struct.count++;
         self.var_7f35bbdd17571a22++;
-        self.var_8cd38ec42108e4c7++;
+        self.bind_max++;
       }
     }
   }

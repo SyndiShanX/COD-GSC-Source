@@ -166,7 +166,7 @@ function private function_a685587c650ff936(team) {
     }
   }
 
-  streakinfo = namespace_2b1145f62aa835b8::function_bc5bcad4a3bbd734("<dev string:x227>", player);
+  streakinfo = namespace_2b1145f62aa835b8::createstreakinfosharedfunc("<dev string:x227>", player);
   streakinfo.targetoverride = self.origin;
   streakinfo.uid = player bunker_buster::function_a9a0e979105b948d();
   player thread bunker_buster::strike_fire(streakinfo);
@@ -232,7 +232,7 @@ function private function_cf8e244be65c5a69(direction) {
   }
 
   if(isDefined(missile)) {
-    missile thread utility::function_b4b04de87729a6f3(level.framedurationseconds);
+    missile thread utility::delete_after_delay(level.framedurationseconds);
     missile function_f6ddf2accdb58432();
   }
 }
@@ -386,7 +386,7 @@ function private spawn_missile(origin, offset, velocity, prev_missile) {
   };
 
   if(!isDefined(prev_missile)) {
-    streakinfo = namespace_2b1145f62aa835b8::function_bc5bcad4a3bbd734("<dev string:x227>", self);
+    streakinfo = namespace_2b1145f62aa835b8::createstreakinfosharedfunc("<dev string:x227>", self);
   } else {
     streakinfo = prev_missile.streakinfo;
   }
@@ -420,7 +420,7 @@ function private spawn_missile(origin, offset, velocity, prev_missile) {
 
 function private function_f6ddf2accdb58432() {
   if(self.classname != "<dev string:x309>") {
-    namespace_2b1145f62aa835b8::function_6262c3a1ef0924d(0);
+    namespace_2b1145f62aa835b8::setmissileminimapvisiblesharedfunc(0);
   }
 
   if(isDefined(self.minimapid)) {
@@ -455,7 +455,7 @@ function private missile_explosion(missile, stuck_to) {
   explosion_ent = toma_strike::toma_strike_create_explosion(missile.origin, missile.angles, stuck_to, missile.owner, gettime(), missile.streakinfo);
   explode_part = istrue(missile.water_impact) ? "<dev string:x357>" : "<dev string:x36e>";
   explosion_ent setscriptablepartstate(explode_part, "<dev string:x2ad>", 0);
-  explosion_ent thread utility::function_b4b04de87729a6f3(0.1);
+  explosion_ent thread utility::delete_after_delay(0.1);
 }
 
 # /

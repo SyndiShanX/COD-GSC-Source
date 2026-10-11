@@ -60,11 +60,11 @@ function main() {
 
   level.var_b54542b9e76b8f10 = undefined;
 
-  level.var_4ee510072abc3181["enemy_group_0"] = &function_25154697d1706894;
-  level.var_4ee510072abc3181["enemy_group_1"] = &function_25154697d1706894;
-  level.var_4ee510072abc3181["enemy_group_2"] = &function_25154697d1706894;
-  level.var_4ee510072abc3181["enemy_group_3"] = &function_25154697d1706894;
-  level.var_4ee510072abc3181["enemy_group_4"] = &function_25154697d1706894;
+  level.var_4ee510072abc3181["enemy_group_0"] = &spawnenemies;
+  level.var_4ee510072abc3181["enemy_group_1"] = &spawnenemies;
+  level.var_4ee510072abc3181["enemy_group_2"] = &spawnenemies;
+  level.var_4ee510072abc3181["enemy_group_3"] = &spawnenemies;
+  level.var_4ee510072abc3181["enemy_group_4"] = &spawnenemies;
 
   if(!function_5dae57c13c89243()) {
     function_83b40bc68a15eb7c();
@@ -96,7 +96,7 @@ function private function_c5d8a30154282590() {
   return getdvarint(@ "hash_e8f28a4951421b29", 1) == 1;
 }
 
-function private function_98e949cba530ed81() {
+function private get_ai_health() {
   return true;
 }
 
@@ -242,7 +242,7 @@ function private onplayerconnect(player) {
   if(function_ed98c3ba3d253905()) {
     function_45d9f7f1ca6bd8dd(player);
   } else {
-    function_d62a26a4349ef7bf(player);
+    benchmark_start(player);
   }
 
   function_4a7af138eadf4bf7("<dev string:x67>", "<dev string:x7b>", &function_d702b9704d201780, ["<dev string:x8e>"]);
@@ -320,9 +320,9 @@ function private function_952dc7a0de119532(script_struct) {
 
 function private ai_basic(agentstruct) {
   agent = agentstruct scripts\mp\mp_agent::spawnnewagentaitype("enemy_mp_benchmark_base", agentstruct.origin, agentstruct.angles);
-  agent.health = function_98e949cba530ed81();
+  agent.health = get_ai_health();
   agent.disablebulletwhizbyreaction = 1;
-  agent function_9f82c74eb1b7caf9(0);
+  agent setcanusecover(0);
   agent.disablerunngun = 1;
   agent.disabledodge = 1;
   agent.aggressivemode = 0;
@@ -374,7 +374,7 @@ function private function_aad02f3462b8b878(player) {
   namespace_5d1a752b8be8c9e4::function_a75d7d6c3c181558();
 }
 
-function private function_d62a26a4349ef7bf(player) {
+function private benchmark_start(player) {
   setDvar(@ "mp_benchmark_mode", 1);
 
   if(isdevbuild() && getdvarint(@ "hash_a6580d9de6607747", 0) == 1) {
@@ -620,7 +620,7 @@ function private function_4f89e05a88128c9(player) {
 function private function_c52bbaa695829f71(zone_index, var_e8101fe99202d1ae, player) {
   player endon("death_or_disconnect");
 
-  if(!function_fe8f110892c02b38("benchmark_zone_change")) {
+  if(!hasomnvar("benchmark_zone_change")) {
     return;
   }
 
@@ -675,7 +675,7 @@ function private function_81c942a8f88e3aa5(weapon_model) {
     var_379cadd4c9b0cd35 = level.player.origin + (0, 0, 35);
 
     if(isDefined(weapon_model)) {
-      if(function_fed3925eb5331836(weapon_model.model, "tag_flash")) {
+      if(modelhastag(weapon_model.model, "tag_flash")) {
         playFXOnTag(getfx("vfx_muzzle_flash"), weapon_model, "tag_flash");
         var_379cadd4c9b0cd35 = weapon_model gettagorigin("tag_flash");
       } else {
@@ -683,10 +683,10 @@ function private function_81c942a8f88e3aa5(weapon_model) {
       }
     }
 
-    var_6c29d102a2fd448e = var_e18c728cf36651d1 gettagorigin("tag_eye");
-    magicbullet("iw9_ar_mike4_mp_benchmark", var_379cadd4c9b0cd35, var_6c29d102a2fd448e, level.player);
+    bullet_end_origin = var_e18c728cf36651d1 gettagorigin("tag_eye");
+    magicbullet("iw9_ar_mike4_mp_benchmark", var_379cadd4c9b0cd35, bullet_end_origin, level.player);
 
-    thread function_5c3bc447572e6477(var_379cadd4c9b0cd35, var_6c29d102a2fd448e);
+    thread function_5c3bc447572e6477(var_379cadd4c9b0cd35, bullet_end_origin);
 
     var_2b7e5208b7c62489 = 0;
 
@@ -846,7 +846,7 @@ function private function_c0117d5a90626fd(einflictor, eattacker, idamage, idflag
   return idamage;
 }
 
-function private function_25154697d1706894(var_e4358e56ced21c8c) {
+function private spawnenemies(var_e4358e56ced21c8c) {
   var_5cfbae3901f17a7 = undefined;
   var_5bdcc9c6ba0f7550 = -1;
   var_62071589605efe83 = [];
@@ -1159,7 +1159,7 @@ function private function_c0af2b7def50dcc7() {
   agent.ignoreme = 1;
   agent.ignoreall = 1;
   agent.disablebulletwhizbyreaction = 1;
-  agent function_9f82c74eb1b7caf9(0);
+  agent setcanusecover(0);
   agent.disablerunngun = 1;
   agent.disabledodge = 1;
   agent.scripted_mode = 1;

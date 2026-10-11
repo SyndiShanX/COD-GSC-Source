@@ -60,7 +60,7 @@ function init() {
   level.challengesallowed = level.playerxpenabled || getdvarint(@ "force_challenges");
   level.enforceantiboosting = level.playerxpenabled || level.weaponxpenabled || level.challengesallowed;
   level.onlinestatsenabled = level.rankedmatch;
-  level.var_ec2fb549b15ad827 = level.rankedmatch && getdvarint(@ "online_matchmaking_is_league_play");
+  level.leagueplaymatch = level.rankedmatch && getdvarint(@ "online_matchmaking_is_league_play");
   level.var_77907d733abe8b63 = level.rankedmatch && getdvarint(@ "online_matchmaking_is_league_play_br");
   level.var_5ac73e9eb9eea898 = level.var_77907d733abe8b63 && getsubgametype() == "resurgence";
   level.starttimeutcseconds = getsystemtime();
@@ -81,7 +81,7 @@ function init() {
   function_32e2d220ebf5a876();
 
   if(getdvarint(@ "hash_ff213c5a6a5e05e4", 0) == 1) {
-    thread function_6cea2a5189661c1e();
+    thread runlevelandquit();
   }
 
   level.tertiaryweaponslotenabled = getdvarint(@ "tertiaryweaponslotenabled", 0) > 0;
@@ -90,7 +90,7 @@ function init() {
   level thread namespace_5e6f7358ff645809::init();
 
   if(issharedfuncdefined("seasonalevents", "init")) {
-    level function_f3bb4f4911a1beb2("seasonalevents", "init");
+    level callsharedfunc("seasonalevents", "init");
   }
 
   level thread namespace_1676ee684fdab294::autotestcommandmonitor();
@@ -98,10 +98,10 @@ function init() {
 }
 
 function function_32bf85f7059300d9() {
-  level.projectbundle = function_811510b694ddd963();
-  level.gamemodebundle = function_1e231fc15fdab31d();
-  level.gametypebundle = function_90b5b6e99aef29d6();
-  level.mapbundle = function_79404c2fcca1c184();
+  level.projectbundle = getprojectscriptbundle();
+  level.gamemodebundle = getgamemodescriptbundle();
+  level.gametypebundle = getgametypescriptbundle();
+  level.mapbundle = getmapscriptbundle();
 }
 
 function endmatchonhostdisconnect() {
@@ -120,7 +120,7 @@ function endmatchonhostdisconnect() {
   thread scripts\mp\gamelogic::endgame("draw", game["end_reason"]["host_ended_game"]);
 }
 
-function function_6cea2a5189661c1e() {
+function runlevelandquit() {
   wait 1;
 
   while(level.players.size < 1) {

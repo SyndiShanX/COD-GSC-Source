@@ -10,7 +10,7 @@
 #namespace zombie_bite;
 
 function function_abeab68e34b24949() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &function_96046c875df0d6a3);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &function_96046c875df0d6a3);
 }
 
 function function_36acc07bbc238f35() {

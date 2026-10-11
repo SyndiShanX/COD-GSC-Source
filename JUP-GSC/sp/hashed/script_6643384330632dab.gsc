@@ -12,7 +12,7 @@
 #using scripts\asm\asm;
 #using scripts\asm\asm_sp;
 #using scripts\common\ai;
-#namespace namespace_8c31e12b39cf762;
+#namespace jup_civilian_uk_male_surge;
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"hash_78b70280ba5d3935");
@@ -21,7 +21,7 @@ function main() {
   self.secondaryweapon = nullweapon();
   self.sidearm = nullweapon();
   self.behaviortreeasset = "civilian_livingworld";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "civilian_react";
   self.usescriptedweapon = 0;
   self.scriptedweaponclassprimary = "none";
@@ -39,9 +39,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       return function_9ac26a51c94ccf52();

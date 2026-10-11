@@ -181,7 +181,7 @@ function main() {
   level.var_d23c7c1add9fb181 = &function_d23c7c1add9fb181;
   level.var_4de8052758f986f3 = &function_4de8052758f986f3;
   level.var_3ce1055115edcbbb = &function_3ce1055115edcbbb;
-  level.var_efbc646224fda4fa = &function_efbc646224fda4fa;
+  level.skydiveredeploy = &skydiveredeploy;
   level.dropbrloot = getdvarint(@ "hash_1d196605f8a290e3", 0);
   level.br_plunder_enabled = getdvarint(@ "scr_game_cash", 0);
 
@@ -1989,8 +1989,8 @@ function calculatedroplocationnearlocation(location, mindist, maxdist) {
   pos = location.origin;
   x = undefined;
   y = undefined;
-  var_8b591b0bc361ab3d = randomint(2);
-  direction = ter_op(var_8b591b0bc361ab3d, -1, 1);
+  diceroll = randomint(2);
+  direction = ter_op(diceroll, -1, 1);
 
   if(direction > 0) {
     x = randomfloatrange(pos[0] + mindist * direction, pos[0] + maxdist * direction);
@@ -2006,8 +2006,8 @@ function calculatedroplocationnearlocation(location, mindist, maxdist) {
     }
   }
 
-  var_8b591b0bc361ab3d = randomint(2);
-  direction = ter_op(var_8b591b0bc361ab3d, -1, 1);
+  diceroll = randomint(2);
+  direction = ter_op(diceroll, -1, 1);
 
   if(direction > 0) {
     y = randomfloatrange(pos[1] + mindist * direction, pos[1] + maxdist * direction);
@@ -2311,5 +2311,5 @@ function spawnprotectionexception() {
 
 function function_658c8f668d2cd83c() {
   wait 5;
-  function_f1aed36ab4598ea("mp_gamemode_gw");
+  snd_transient_load("mp_gamemode_gw");
 }

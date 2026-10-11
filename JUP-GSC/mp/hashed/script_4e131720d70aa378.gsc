@@ -34,7 +34,7 @@ function function_75a233b1c9abd8f() {
     thread delete_on_death(self.var_9a4d2d08feefac73[head_index]);
   }
 
-  self.var_2c320bc0dc4f6799 = [];
+  self.abom_beams = [];
   self.var_d3b24d5f093d5e28 = [];
   self.var_d3b24d5f093d5e28[0] = "tag_fx_head_le_throat";
   self.var_d3b24d5f093d5e28[1] = "tag_fx_head_center_throat";
@@ -138,7 +138,7 @@ function private function_930d5914e10d5346() {
   while(true) {
     self waittill("beam_attack_loop_start");
 
-    if(istrue(self function_11e2d4051ea44b35("in_beam_attack"))) {
+    if(istrue(self getaiblackboarddynamic("in_beam_attack"))) {
       self.var_854c33494a097e21 = gettime();
       self function_3e89eb3d8e3f1811("beam_attack_cooldown", 30000);
 
@@ -146,13 +146,13 @@ function private function_930d5914e10d5346() {
         self getenemyinfo(self.enemy);
       }
 
-      thread function_13f829a62eb5d21a();
+      thread beam_attack_loop();
       thread function_bb1b67da31c9b073();
     }
   }
 }
 
-function private function_13f829a62eb5d21a() {
+function private beam_attack_loop() {
   self endon("death");
   self endon("beam_attack_loop_finished");
   beams_created = 0;
@@ -169,15 +169,15 @@ function private function_13f829a62eb5d21a() {
     var_3aa70c7a997446b9 = self.enemy;
     clamp_pitch = ter_op(isai(var_3aa70c7a997446b9), 2, 1) * var_fc8cef22d2662288;
     round_number = function_2201d3f3d7ab07a7();
-    var_a7c8081f62161240 = math::remap(round_number, 20, 30, 0, 1);
+    aimyawspeedpercentage = math::remap(round_number, 20, 30, 0, 1);
     var_754a0ac8af18875d = gettime() - default_to(self.var_c84d64668e4e6d47, 0);
     var_ce47fa867b5efda9 = 5000;
 
     if(var_754a0ac8af18875d > var_ce47fa867b5efda9) {
-      var_a7c8081f62161240 = 1;
+      aimyawspeedpercentage = 1;
     }
 
-    self.aimyawspeed = 10 + clamp(var_a7c8081f62161240, 0, 1) * 50;
+    self.aimyawspeed = 10 + clamp(aimyawspeedpercentage, 0, 1) * 50;
     beam_length = self.zombieaisettings.var_e58a65b7a8f5973c.var_a9e8db47e0618b28;
     var_1fd01e8ed4e7ceb5 = self.var_d3b24d5f093d5e28[1];
     head_angles = self gettagangles(var_1fd01e8ed4e7ceb5);
@@ -253,9 +253,9 @@ function private function_13f829a62eb5d21a() {
         beam_trace = scripts\engine\trace::ray_trace(source_pos, var_607dd22e123cc194[var_a94f488377f3c78a]);
         end_pos = var_607dd22e123cc194[var_a94f488377f3c78a];
         var_4b5a75d5223543c8 = physics_getsurfacetypefromflags(beam_trace["surfaceflags"]);
-        var_2b9c39598d19ea34 = var_4b5a75d5223543c8["name"];
+        stringsurfacename = var_4b5a75d5223543c8["name"];
 
-        if(isstartstr(var_2b9c39598d19ea34, "surftype_water")) {
+        if(isstartstr(stringsurfacename, "surftype_water")) {
           beam_trace = scripts\engine\trace::ray_trace(beam_trace["position"], var_607dd22e123cc194[var_a94f488377f3c78a]);
         }
 
@@ -298,13 +298,13 @@ function private function_13f829a62eb5d21a() {
           target_ent dontinterpolate();
 
           if(issubstr(self.subclass, "mega")) {
-            self.var_2c320bc0dc4f6799[var_a94f488377f3c78a] = playfxontagsbetweenclients(getfx("abom_mega_beam_fx"), self, self.var_d3b24d5f093d5e28[var_a94f488377f3c78a], target_ent, "tag_origin");
+            self.abom_beams[var_a94f488377f3c78a] = playfxontagsbetweenclients(getfx("abom_mega_beam_fx"), self, self.var_d3b24d5f093d5e28[var_a94f488377f3c78a], target_ent, "tag_origin");
           } else {
-            self.var_2c320bc0dc4f6799[var_a94f488377f3c78a] = playfxontagsbetweenclients(getfx("abom_beam_fx"), self, self.var_d3b24d5f093d5e28[var_a94f488377f3c78a], target_ent, "tag_origin");
+            self.abom_beams[var_a94f488377f3c78a] = playfxontagsbetweenclients(getfx("abom_beam_fx"), self, self.var_d3b24d5f093d5e28[var_a94f488377f3c78a], target_ent, "tag_origin");
           }
 
-          if(isDefined(self.var_2c320bc0dc4f6799[var_a94f488377f3c78a])) {
-            self.var_2c320bc0dc4f6799[var_a94f488377f3c78a] function_cea710f9d017694a(1);
+          if(isDefined(self.abom_beams[var_a94f488377f3c78a])) {
+            self.abom_beams[var_a94f488377f3c78a] forcenetfieldhighlod_sharedfunc(1);
           }
 
           utility::function_3ab9164ef76940fd(self.var_183bb43a8d0e0829[var_a94f488377f3c78a] + "_weakpoint", "weakpoint_off");
@@ -419,13 +419,13 @@ function private function_2aac335c6c6cea96(var_f28f9901bee5219e, var_3aa70c7a997
     target_pos = var_3aa70c7a997446b9.origin + var_ac03b17fc9cbce8d;
 
     if(var_c786483f5e0eddbc) {
-      self.var_130b2c98c9d80a1a = target_pos;
+      self.script_aimpos = target_pos;
     }
 
     var_26fd5f1bb657d099 = vectortoangles(target_pos - head_pos);
     pitch_clamped = int(clamp(angleclamp180(var_26fd5f1bb657d099[0] - head_angles[0]), -1 * clamp_pitch, clamp_pitch));
-    var_bfb998964a6ca671 = int(clamp(angleclamp180(var_26fd5f1bb657d099[1] - head_angles[1]), -1 * clamp_yaw, clamp_yaw));
-    var_fce15ec651f5ca51 = (pitch_clamped, var_bfb998964a6ca671, 0);
+    yaw_clamped = int(clamp(angleclamp180(var_26fd5f1bb657d099[1] - head_angles[1]), -1 * clamp_yaw, clamp_yaw));
+    var_fce15ec651f5ca51 = (pitch_clamped, yaw_clamped, 0);
     return var_fce15ec651f5ca51;
   }
 
@@ -452,8 +452,8 @@ function private function_bb1b67da31c9b073() {
   self waittill("beam_attack_loop_finished");
 
   for(var_a94f488377f3c78a = 0; var_a94f488377f3c78a <= 2; var_a94f488377f3c78a++) {
-    if(isDefined(self.var_2c320bc0dc4f6799[var_a94f488377f3c78a])) {
-      self.var_2c320bc0dc4f6799[var_a94f488377f3c78a] delete();
+    if(isDefined(self.abom_beams[var_a94f488377f3c78a])) {
+      self.abom_beams[var_a94f488377f3c78a] delete();
     }
 
     if(isDefined(self.var_9a4d2d08feefac73[var_a94f488377f3c78a])) {
@@ -466,7 +466,7 @@ function private function_bb1b67da31c9b073() {
 
   self clearpath();
   self clearbtgoal(0);
-  self function_e64ea2b4e79c4b74(0);
+  self setbtgoalstationary(0);
 
   if(ent_flag("no_beam_attack_cooldown")) {
     self function_3e89eb3d8e3f1811("beam_attack_cooldown", 0);

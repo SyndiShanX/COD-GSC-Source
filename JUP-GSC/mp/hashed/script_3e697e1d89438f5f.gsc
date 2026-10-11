@@ -17,7 +17,7 @@
 #using scripts\asm\shared\variant_asm;
 #using scripts\common\callbacks;
 #using scripts\engine\utility;
-#namespace namespace_2ad7130c99350bc1;
+#namespace zombie_base_asm;
 
 function private function_f49a30f92555b827() {
   shouldstrip = self function_70eafce34621eaa2();
@@ -28,7 +28,7 @@ function private function_f49a30f92555b827() {
   function_d03eea41ff9cfe90();
   function_52b682d1bb0ddc02();
   function_a40873f83b05ce3c();
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &on_move_speed_changed);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &on_move_speed_changed);
   level.scr_anim[self.animname]["spawn"] = "spawn";
   level.scr_anim[self.animname]["spawn_hop"] = "spawn_hop";
   level.scr_anim[self.animname]["spawn_barrel_44"] = "spawn_barrel_44";

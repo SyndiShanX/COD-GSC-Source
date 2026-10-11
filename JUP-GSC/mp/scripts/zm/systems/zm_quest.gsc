@@ -533,15 +533,15 @@ function function_c3fbfc68d7fc5d85(quest_ref, phase_index, player) {
     totalbits += 3;
   }
 
-  var_e9d476a3809cb3f1 = "ui_zm_inventory_quest_" + quest_index + 1;
+  omnvarname = "ui_zm_inventory_quest_" + quest_index + 1;
 
   if(isDefined(player_id)) {
-    player setclientomnvar(var_e9d476a3809cb3f1, packedval);
+    player setclientomnvar(omnvarname, packedval);
     return;
   }
 
   foreach(player in level.players) {
-    player setclientomnvar(var_e9d476a3809cb3f1, packedval);
+    player setclientomnvar(omnvarname, packedval);
   }
 }
 

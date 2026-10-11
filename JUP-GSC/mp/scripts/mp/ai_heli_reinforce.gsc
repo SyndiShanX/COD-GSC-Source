@@ -69,7 +69,7 @@ function function_203ace42414afb23() {
   waitframe();
   level.var_3122f605f0e8e125 = getStructArray("heli_exit", "targetname");
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     while(level.poi.size == 0) {
       waitframe();
     }
@@ -181,9 +181,9 @@ function function_9be6618055ceb851(reinforceorigin, var_93390a6953905fef, team, 
     level thread scripts\mp\utility\debug::drawsphere(reinforceorigin, 32, 60, (0, 0, 1));
   }
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
-      poiname = function_6cc445c02b5effac(reinforceorigin);
+      poiname = poi_findpoioriginisin(reinforceorigin);
     }
 
     unloadlocs = sortbydistance(level.poi[poiname]["heliReinforceStruct"].unload_locs, reinforceorigin);
@@ -360,9 +360,9 @@ function function_321665dcdcbf401e(array, desired_origin, skiptoindex, poiname) 
 function function_42aa412d7e4d7c37(loc, desired_origin, poiname) {
   startnodearray = undefined;
 
-  if(function_47d356083884f913()) {
+  if(poi_issystemactive()) {
     if(!isDefined(poiname)) {
-      poiname = function_6cc445c02b5effac(desired_origin);
+      poiname = poi_findpoioriginisin(desired_origin);
     }
 
     startnodearray = sortbydistance(level.poi[poiname]["heliReinforceStruct"].pathstartnodes, desired_origin);
@@ -475,7 +475,7 @@ function function_3779deb97b61a65(numagents, reinforceorigin, priority, category
   reinforceorigin = getclosestpointonnavmesh(reinforceorigin);
 
   if(!isDefined(poiname)) {
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(reinforceorigin);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(reinforceorigin);
   }
 
   if(scripts\cp_mp\utility\game_utility::function_22cd3d64fdb05892() || is_equal(level.gametype, "wm")) {
@@ -612,7 +612,7 @@ function heli_spawnheli(var_a4e4a71852a83d8f, type_override, num_riders, priorit
         var_3a6b42ab825a103e = var_a4e4a71852a83d8f.origin;
       }
 
-      poiname = scripts\mp\poi::function_6cc445c02b5effac(var_3a6b42ab825a103e);
+      poiname = scripts\mp\poi::poi_findpoioriginisin(var_3a6b42ab825a103e);
       var_a4e4a71852a83d8f.poi = poiname;
     }
 
@@ -652,10 +652,10 @@ function heli_spawnheli(var_a4e4a71852a83d8f, type_override, num_riders, priorit
       spawndata.angles = var_a4e4a71852a83d8f.angles;
       spawndata.team = team;
       spawndata.initai = 1;
-      var_14cde247ac3313a4 = function_4a64c621dd8090ab(heli_type, riders, nationality);
+      skinoverride = function_4a64c621dd8090ab(heli_type, riders, nationality);
 
-      if(isDefined(var_14cde247ac3313a4)) {
-        spawndata.var_14cde247ac3313a4 = var_14cde247ac3313a4;
+      if(isDefined(skinoverride)) {
+        spawndata.skinoverride = skinoverride;
       }
 
       vehicle = vehicle_spawn(heli_type, spawndata);
@@ -749,8 +749,8 @@ function function_bbfeb6cfdbc102a1(vehicle, var_a4e4a71852a83d8f, heli_type, var
   unload_locs = undefined;
   poiname = undefined;
 
-  if(function_47d356083884f913()) {
-    poiname = function_6cc445c02b5effac(var_a4e4a71852a83d8f.unloadorigin);
+  if(poi_issystemactive()) {
+    poiname = poi_findpoioriginisin(var_a4e4a71852a83d8f.unloadorigin);
     unload_locs = sortbydistance(level.poi[poiname]["heliReinforceStruct"].unload_locs, var_a4e4a71852a83d8f.unloadorigin);
   } else {
     unload_locs = sortbydistance(level.helireinforcestruct.unload_locs, var_a4e4a71852a83d8f.unloadorigin);
@@ -929,8 +929,8 @@ function function_fc805ec1e7b08264(pathnode) {
   if(!isDefined(var_61bec49fd0ba66b6)) {
     var_61bec49fd0ba66b6 = undefined;
 
-    if(function_47d356083884f913()) {
-      poiname = function_6cc445c02b5effac(pathnode.origin);
+    if(poi_issystemactive()) {
+      poiname = poi_findpoioriginisin(pathnode.origin);
       var_61bec49fd0ba66b6 = random(level.poi[poiname]["heliReinforceStruct"].exitstructs);
     }
 
@@ -976,8 +976,8 @@ function function_757672b5f0cde59a(pathnode) {
   dotangles = pathnode.angles;
   var_2b008b868cc6c2f7 = undefined;
 
-  if(function_47d356083884f913()) {
-    poiname = function_6cc445c02b5effac(org);
+  if(poi_issystemactive()) {
+    poiname = poi_findpoioriginisin(org);
     var_2b008b868cc6c2f7 = level.poi[poiname]["heliReinforceStruct"].exitstructs;
   } else {
     var_2b008b868cc6c2f7 = level.var_3122f605f0e8e125;
@@ -1234,9 +1234,9 @@ function function_e42f5ec55b8546b() {
 function function_a130de01f9e62aa4(origin, toleranceoverride) {
   if(level.helireinforcestruct.postlandingdest.size == 0) {
     radius = 1000;
-    var_c154e6e386654a30 = 50;
-    min = radius - var_c154e6e386654a30;
-    max = radius + var_c154e6e386654a30;
+    radiusvariance = 50;
+    min = radius - radiusvariance;
+    max = radius + radiusvariance;
     random_x = randomfloatrange(min, max) * scripts\engine\utility::ter_op(randomint(100) > 50, 1, -1);
     random_y = randomfloatrange(min, max) * scripts\engine\utility::ter_op(randomint(100) > 50, 1, -1);
     var_28545e194202f384 = (origin[0] + random_x, origin[1] + random_y, origin[2]);
@@ -1319,7 +1319,7 @@ function function_cd8465a96bf94b14(var_a4e4a71852a83d8f, vehicle) {
 function function_d3d8ae54f1db925() {
   while(true) {
     if(getdvarint(@ "hash_44d7ef19e2c9454e", 0) == 1) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         foreach(poiname, poi in level.poi) {
           foreach(node in level.poi[poiname]["<dev string:x139>"].pathstartnodes) {
             thread scripts\mp\utility\debug::drawsphere(node.origin, 64, 1, (0, 1, 0));
@@ -1355,7 +1355,7 @@ function function_d3d8ae54f1db925() {
     }
 
     if(getdvarint(@ "hash_83158ef84a03a108", 0) == 1) {
-      if(function_47d356083884f913()) {
+      if(poi_issystemactive()) {
         foreach(poiname, poi in level.poi) {
           foreach(dest in level.poi[poiname]["<dev string:x139>"].postlandingdest) {
             thread scripts\mp\utility\debug::drawsphere(dest.origin, 64, 1, (1, 0, 1));

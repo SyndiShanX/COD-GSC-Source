@@ -2883,11 +2883,11 @@ function function_a245aa068aad0c25(slotindex) {
 function function_531e694c49fc6238(objstruct) {
   var_a646becc88132126 = isDefined(objstruct);
   var_760a4bb0f0886b6b = ter_op(var_a646becc88132126 && isDefined(objstruct.var_24852c22989ccfc5), objstruct.var_24852c22989ccfc5, "<dev string:xc6>");
-  var_53fceb19fef319fa = ter_op(var_a646becc88132126 && isDefined(objstruct.objicon), objstruct.objicon, "<dev string:xc6>");
+  eventicon = ter_op(var_a646becc88132126 && isDefined(objstruct.objicon), objstruct.objicon, "<dev string:xc6>");
 
   foreach(player in level.players) {
     player setclientdvar(@ "hash_bbe849b7a1de4c33", var_760a4bb0f0886b6b);
-    player setclientdvar(@ "hash_3d54612c6d4203df", var_53fceb19fef319fa);
+    player setclientdvar(@ "hash_3d54612c6d4203df", eventicon);
   }
 }
 

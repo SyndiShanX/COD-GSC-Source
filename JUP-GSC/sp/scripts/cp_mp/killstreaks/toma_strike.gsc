@@ -22,10 +22,10 @@ function function_7b9978e4325e037b(var_fd773ed7f8ab59de, dvar_str, bundle_val, d
 }
 
 function function_2ad245efb6cf07aa(var_fd773ed7f8ab59de, dvar_str, bundle_val, default_val, value_type) {
-  level.var_b51c54768ce5dc13[var_fd773ed7f8ab59de] = function_892aec72bcbbbc96(dvar_str, bundle_val, default_val);
+  level.toma_tunables[var_fd773ed7f8ab59de] = function_892aec72bcbbbc96(dvar_str, bundle_val, default_val);
 
   if(isDefined(value_type)) {
-    level.var_b51c54768ce5dc13[var_fd773ed7f8ab59de].type = value_type;
+    level.toma_tunables[var_fd773ed7f8ab59de].type = value_type;
   }
 }
 
@@ -50,7 +50,7 @@ function function_892aec72bcbbbc96(dvar_str, bundle_val, default_val) {
 }
 
 function function_2fbfcadcc628d1a9(var_fd773ed7f8ab59de) {
-  var_cc2712a8519a8fd1 = level.var_b51c54768ce5dc13[var_fd773ed7f8ab59de];
+  var_cc2712a8519a8fd1 = level.toma_tunables[var_fd773ed7f8ab59de];
 
   if(!isDefined(var_cc2712a8519a8fd1)) {
     return 0;
@@ -100,16 +100,16 @@ function function_f690e3ac50d71008() {
   val::group_register(level.var_d05191e44c57d2f7, ["offhand_weapons", "melee", "execution_attack", "weapon_pickup", "cp_munitions_pickup", "supers"]);
 }
 
-function function_75667e2fe77b75c5(var_db99a5290e2a0cd0) {
+function function_75667e2fe77b75c5(tomastriketype) {
   bundle = isDefined(level.streakglobals.streakbundles["toma_strike"]) ? level.streakglobals.streakbundles["toma_strike"] : {
     #var_d2a6e2899c72649b: undefined
   };
   level.var_d2a6e2899c72649b = isDefined(bundle.var_d2a6e2899c72649b) ? bundle.var_d2a6e2899c72649b : "toma_proj_mp";
 
-  if(var_db99a5290e2a0cd0 == 1) {
+  if(tomastriketype == 1) {
     function_1ad414b91ae3a040(#"selection_radius", @ "hash_ca710d92e3e6f796", bundle.var_ef6057a8dee4db1a, 900);
     function_1ad414b91ae3a040(#"launch_delay", @ "hash_fa567925d565ce1f", bundle.var_a20f464e59b5af88, 5);
-    function_1ad414b91ae3a040(#"num_waves", @ "hash_5f34f197c71def3c", bundle.var_f7545ca62e446f27, 4);
+    function_1ad414b91ae3a040(#"num_waves", @ "hash_5f34f197c71def3c", bundle.toma_waves, 4);
     function_1ad414b91ae3a040(#"hash_3082f1a04b68416a", @ "hash_9d9d004060864d1f", bundle.var_11743a7230976341, 4);
     function_7b9978e4325e037b(#"hash_6f7dfd81108ea213", @ "hash_791db5592ca32e41", bundle.var_977070ec24e2ee7d, 3.25);
     function_7b9978e4325e037b(#"hash_38f03def4a4b6115", @ "hash_6b6230528e92a697", bundle.var_80df958a7ebd91eb, 4);
@@ -118,10 +118,10 @@ function function_75667e2fe77b75c5(var_db99a5290e2a0cd0) {
     return;
   }
 
-  if(var_db99a5290e2a0cd0 == 2) {
+  if(tomastriketype == 2) {
     function_1ad414b91ae3a040(#"selection_radius", @ "hash_ca710d92e3e6f796", bundle.var_ef6057a8dee4db1a, 50);
     function_1ad414b91ae3a040(#"launch_delay", @ "hash_fa567925d565ce1f", bundle.var_a20f464e59b5af88, 0);
-    function_1ad414b91ae3a040(#"num_waves", @ "hash_5f34f197c71def3c", bundle.var_f7545ca62e446f27, 1);
+    function_1ad414b91ae3a040(#"num_waves", @ "hash_5f34f197c71def3c", bundle.toma_waves, 1);
     function_1ad414b91ae3a040(#"hash_3082f1a04b68416a", @ "hash_9d9d004060864d1f", bundle.var_11743a7230976341, 14);
     function_7b9978e4325e037b(#"hash_6f7dfd81108ea213", @ "hash_791db5592ca32e41", bundle.var_977070ec24e2ee7d, 3.25);
     function_7b9978e4325e037b(#"hash_38f03def4a4b6115", @ "hash_6b6230528e92a697", bundle.var_80df958a7ebd91eb, 4);
@@ -132,7 +132,7 @@ function function_75667e2fe77b75c5(var_db99a5290e2a0cd0) {
 
   function_1ad414b91ae3a040(#"selection_radius", @ "hash_ca710d92e3e6f796", bundle.var_ef6057a8dee4db1a, 450);
   function_1ad414b91ae3a040(#"launch_delay", @ "hash_fa567925d565ce1f", bundle.var_a20f464e59b5af88, 2);
-  function_1ad414b91ae3a040(#"num_waves", @ "hash_5f34f197c71def3c", bundle.var_f7545ca62e446f27, 4);
+  function_1ad414b91ae3a040(#"num_waves", @ "hash_5f34f197c71def3c", bundle.toma_waves, 4);
   function_1ad414b91ae3a040(#"hash_3082f1a04b68416a", @ "hash_9d9d004060864d1f", bundle.var_11743a7230976341, 4);
   function_7b9978e4325e037b(#"hash_6f7dfd81108ea213", @ "hash_791db5592ca32e41", bundle.var_977070ec24e2ee7d, 3.25);
   function_7b9978e4325e037b(#"hash_38f03def4a4b6115", @ "hash_6b6230528e92a697", bundle.var_80df958a7ebd91eb, 4);
@@ -155,9 +155,9 @@ function function_23d581c2a3bc96b3() {
 }
 
 function function_cad492faa20c3feb(var_f3f8aa78862a0804) {
-  var_db99a5290e2a0cd0 = getdvarint(@ "hash_1eb5365bdad13b78", 0);
+  tomastriketype = getdvarint(@ "hash_1eb5365bdad13b78", 0);
 
-  if(var_db99a5290e2a0cd0 == var_f3f8aa78862a0804) {
+  if(tomastriketype == var_f3f8aa78862a0804) {
     return;
   }
 
@@ -204,7 +204,7 @@ function function_cad492faa20c3feb(var_f3f8aa78862a0804) {
 
 function trytomastriketriggered(streakinfo) {
   streakname = streakinfo.streakname;
-  var_db99a5290e2a0cd0 = getdvarint(@ "hash_1eb5365bdad13b78", 0);
+  tomastriketype = getdvarint(@ "hash_1eb5365bdad13b78", 0);
   return true;
 }
 
@@ -245,7 +245,7 @@ function weapongiventomastrike(streakinfo) {
   return true;
 }
 
-function weaponfiredtomastrike(streakinfo, var_a9dd4e8c5e5c7178, firedprojectile) {
+function weaponfiredtomastrike(streakinfo, firedweaponobj, firedprojectile) {
   if(!isDefined(streakinfo.targetoverride)) {
     mappoint = tomastrike_getownerlookat(self);
 
@@ -287,7 +287,7 @@ function weaponfiredtomastrike(streakinfo, var_a9dd4e8c5e5c7178, firedprojectile
 }
 
 function tryusetomastrike() {
-  streakinfo = function_bc5bcad4a3bbd734("toma_strike", self);
+  streakinfo = createstreakinfosharedfunc("toma_strike", self);
   return tryusetomastrikefromstruct(streakinfo);
 }
 
@@ -301,10 +301,10 @@ function tryusetomastrikefromstruct(streakinfo) {
     }
   }
 
-  var_db99a5290e2a0cd0 = function_717a6e5e13464b20();
-  function_75667e2fe77b75c5(var_db99a5290e2a0cd0);
+  tomastriketype = function_717a6e5e13464b20();
+  function_75667e2fe77b75c5(tomastriketype);
 
-  if(var_db99a5290e2a0cd0 == 1 && isDefined(self.kstargetlocation)) {
+  if(tomastriketype == 1 && isDefined(self.kstargetlocation)) {
     streakinfo.targetoverride = self.kstargetlocation;
     self.kstargetlocation = undefined;
     firedresult = weaponfiredtomastrike(streakinfo, undefined, undefined);
@@ -344,63 +344,63 @@ function tryusetomastrikefromstruct(streakinfo) {
     self[[getsharedfunc("killstreak", "logKillstreakEvent")]](streakinfo.streakname, self.origin);
   }
 
-  starttomastrike(var_db99a5290e2a0cd0, streakinfo);
+  starttomastrike(tomastriketype, streakinfo);
   return true;
 }
 
 function function_717a6e5e13464b20() {
-  var_db99a5290e2a0cd0 = getdvarint(@ "hash_1eb5365bdad13b78", 0);
+  tomastriketype = getdvarint(@ "hash_1eb5365bdad13b78", 0);
   isbr = issharedfuncdefined("game", "isBRStyleGameType") && [[getsharedfunc("game", "isBRStyleGameType")]]();
 
   if(isbr && isPlayer(self)) {
-    var_db99a5290e2a0cd0 = 1;
-    function_cad492faa20c3feb(var_db99a5290e2a0cd0);
+    tomastriketype = 1;
+    function_cad492faa20c3feb(tomastriketype);
   } else if(isagent(self)) {
-    var_db99a5290e2a0cd0 = 2;
-    function_cad492faa20c3feb(var_db99a5290e2a0cd0);
+    tomastriketype = 2;
+    function_cad492faa20c3feb(tomastriketype);
   } else {
-    var_db99a5290e2a0cd0 = 0;
+    tomastriketype = 0;
   }
 
-  function_cad492faa20c3feb(var_db99a5290e2a0cd0);
-  return var_db99a5290e2a0cd0;
+  function_cad492faa20c3feb(tomastriketype);
+  return tomastriketype;
 }
 
-function function_5d38cccb518046f6(target, var_44b5105c6f71bc85, var_6530ac0c11cac0f8, var_fc2a5d82867fc3a1) {
-  var_db99a5290e2a0cd0 = function_717a6e5e13464b20();
-  function_75667e2fe77b75c5(var_db99a5290e2a0cd0);
+function function_5d38cccb518046f6(target, var_44b5105c6f71bc85, var_6530ac0c11cac0f8, traveltimeoverwrite) {
+  tomastriketype = function_717a6e5e13464b20();
+  function_75667e2fe77b75c5(tomastriketype);
 
-  if(var_db99a5290e2a0cd0 == 2) {
+  if(tomastriketype == 2) {
     if(isDefined(var_44b5105c6f71bc85)) {
       self.attackrange = var_44b5105c6f71bc85;
       self.var_6ac9ab8269fb85d1 = var_6530ac0c11cac0f8;
     }
 
-    if(isDefined(var_fc2a5d82867fc3a1)) {
+    if(isDefined(traveltimeoverwrite)) {
       if(isDefined(target) && isPlayer(target) && isDefined(target.vehicle) && isDefined(target.vehicle.vehiclename)) {
-        setDvar(@ "hash_a394734820792b88", var_fc2a5d82867fc3a1.vehiclesetting);
-        self.var_70b761d63979e102 = var_fc2a5d82867fc3a1.vehiclesetting - 0.075;
+        setDvar(@ "hash_a394734820792b88", traveltimeoverwrite.vehiclesetting);
+        self.var_70b761d63979e102 = traveltimeoverwrite.vehiclesetting - 0.075;
       } else {
-        setDvar(@ "hash_a394734820792b88", var_fc2a5d82867fc3a1.walksetting);
-        self.var_70b761d63979e102 = var_fc2a5d82867fc3a1.walksetting - 0.075;
+        setDvar(@ "hash_a394734820792b88", traveltimeoverwrite.walksetting);
+        self.var_70b761d63979e102 = traveltimeoverwrite.walksetting - 0.075;
       }
     }
   }
 
-  streakinfo = function_bc5bcad4a3bbd734("toma_strike", self);
-  tomaid = function_d46771d03c3e46fa();
+  streakinfo = createstreakinfosharedfunc("toma_strike", self);
+  tomaid = tomastrike_getid();
   level.toma_strikes[tomaid] = self;
-  function_e744d4edafed7523(tomaid, var_db99a5290e2a0cd0, target);
-  tomastrike_attacktarget(var_db99a5290e2a0cd0, undefined, target, streakinfo, tomaid);
+  function_e744d4edafed7523(tomaid, tomastriketype, target);
+  tomastrike_attacktarget(tomastriketype, undefined, target, streakinfo, tomaid);
   level.toma_strikes[tomaid] = undefined;
 }
 
 function starttomastrike(striketype, streakinfo) {
-  tomaid = function_d46771d03c3e46fa();
+  tomaid = tomastrike_getid();
   function_e744d4edafed7523(tomaid, striketype);
   thread tomastrike_watchgameend(tomaid, streakinfo);
   thread function_817d8b8f6d28b2b7(tomaid, streakinfo);
-  thread function_bb7e41c7f2afb421(tomaid);
+  thread tomastrike_watchkills(tomaid);
   thread tomastrike_attacktarget(striketype, undefined, undefined, streakinfo, tomaid);
   streakinfo notify("killstreak_finished_with_deploy_weapon");
   level callback::callback("killstreak_finish_use", {
@@ -426,7 +426,7 @@ function tomastrike_getownerlookat(owner) {
   }
 
   endtrace = starttrace + anglesToForward(owner getplayerangles()) * 50000;
-  ignoreents = owner function_b01aad7f0553d2c8();
+  ignoreents = owner playerkillstreakgetownerlookatignoreentssharedfunc();
   trace = scripts\engine\trace::ray_trace(starttrace, endtrace, ignoreents, contentoverride);
   endpos = undefined;
 
@@ -437,7 +437,7 @@ function tomastrike_getownerlookat(owner) {
   return endpos;
 }
 
-function function_d46771d03c3e46fa() {
+function tomastrike_getid() {
   level.var_2512ecdb67f24156++;
 
   if(getdvarint(@ "hash_1eb5365bdad13b78", 0) == 2) {
@@ -452,7 +452,7 @@ function tomastrike_watchgameend(tomaid, streakinfo) {
   level waittill("game_ended");
 
   if(isDefined(self)) {
-    function_fd8ddf2e23d31475(streakinfo);
+    recordkillstreakendstatssharedfunc(streakinfo);
   }
 }
 
@@ -463,7 +463,7 @@ function function_817d8b8f6d28b2b7(tomaid, streakinfo) {
   level waittill("toma_strike_clean_up_" + tomaid);
 
   if(isDefined(self)) {
-    function_fd8ddf2e23d31475(streakinfo);
+    recordkillstreakendstatssharedfunc(streakinfo);
   }
 
   level.toma_strikes[tomaid] = undefined;
@@ -481,17 +481,17 @@ function function_9bdb853be512d3ed(actionnotify, tomaid, player) {
   level notify("toma_strike_clean_up_" + tomaid);
 }
 
-function function_bb7e41c7f2afb421(tomaid) {
+function tomastrike_watchkills(tomaid) {
   level endon("game_ended");
   self notify("toma_strike_watch_kills");
   self endon("toma_strike_watch_kills");
-  self.var_effda3765a5caf17 = 0;
-  childthread function_44ffb652b0e5c138(tomaid);
+  self.tomastrikekillcount = 0;
+  childthread tomastrike_watchkillscount(tomaid);
   childthread function_9b8a16f9169ac8b2(tomaid);
   level waittill("toma_strike_finished_" + tomaid);
 
   if(isDefined(self)) {
-    if(self.var_effda3765a5caf17 >= 1) {
+    if(self.tomastrikekillcount >= 1) {
       function_d1b8339c6ab7b1fa("toma_strike", "toma_strike" + "_hit_target", 1);
       return;
     }
@@ -500,14 +500,14 @@ function function_bb7e41c7f2afb421(tomaid) {
   }
 }
 
-function function_44ffb652b0e5c138(tomaid) {
+function tomastrike_watchkillscount(tomaid) {
   level endon("toma_strike_finished_" + tomaid);
 
   while(isDefined(self)) {
-    self waittill("update_rapid_kill_buffered", recentkillcount, var_366b0ecc2f28aead);
+    self waittill("update_rapid_kill_buffered", recentkillcount, fullweaponstring);
 
-    if(isDefined(var_366b0ecc2f28aead) && var_366b0ecc2f28aead == level.var_d2a6e2899c72649b) {
-      self.var_effda3765a5caf17++;
+    if(isDefined(fullweaponstring) && fullweaponstring == level.var_d2a6e2899c72649b) {
+      self.tomastrikekillcount++;
     }
   }
 }
@@ -516,10 +516,10 @@ function function_9b8a16f9169ac8b2(tomaid) {
   level endon("toma_strike_finished_" + tomaid);
 
   while(isDefined(self)) {
-    self waittill("update_rapid_agent_kill_buffered", recentkillcount, var_366b0ecc2f28aead);
+    self waittill("update_rapid_agent_kill_buffered", recentkillcount, fullweaponstring);
 
-    if(isDefined(var_366b0ecc2f28aead) && var_366b0ecc2f28aead == level.var_d2a6e2899c72649b) {
-      self.var_effda3765a5caf17++;
+    if(isDefined(fullweaponstring) && fullweaponstring == level.var_d2a6e2899c72649b) {
+      self.tomastrikekillcount++;
     }
   }
 }
@@ -607,7 +607,7 @@ function tomastrike_attacktarget(striketype, vehicle, marker, streakinfo, tomaid
   level endon("game_ended");
   self notify("drone_target_placed");
   streakinfo.shots_fired++;
-  var_cb6109df81ef0dc = self.origin + (0, 0, 5000) - anglesToForward(self.angles) * 5000;
+  bombingsourcepos = self.origin + (0, 0, 5000) - anglesToForward(self.angles) * 5000;
   var_773a048a6c827187 = anglestoright(self.angles);
   markerorigin = undefined;
 
@@ -660,7 +660,7 @@ function tomastrike_attacktarget(striketype, vehicle, marker, streakinfo, tomaid
 
   function_940b2080e171a9d3(self, self.team, radius + 300, streakinfo.streakname, markerorigin);
   delaytime = function_2fbfcadcc628d1a9(#"launch_delay");
-  var_d77253c873d2b420 = anglesToForward(self getplayerangles());
+  ownerlookforward = anglesToForward(self getplayerangles());
   ownerforward = anglesToForward(self.angles);
   ownerright = anglestoright(self.angles);
   function_2284137aa92dbd16(delaytime);
@@ -677,7 +677,7 @@ function tomastrike_attacktarget(striketype, vehicle, marker, streakinfo, tomaid
     self.attackrange = 4000;
   }
 
-  var_5e81359581486a4a = self.attackrange * self.attackrange;
+  attackrangesq = self.attackrange * self.attackrange;
 
   if(!isDefined(self.var_6ac9ab8269fb85d1)) {
     self.var_6ac9ab8269fb85d1 = 0;
@@ -718,17 +718,17 @@ function tomastrike_attacktarget(striketype, vehicle, marker, streakinfo, tomaid
           enemyplayer = marker;
           targetposition = enemyplayer.origin;
 
-          if(isDefined(self.var_45f1d0774d6a1062)) {
-            targetposition = [[self.var_45f1d0774d6a1062]](j, function_d46771d03c3e46fa(), enemyplayer);
+          if(isDefined(self.strikelocationsetfunc)) {
+            targetposition = [[self.strikelocationsetfunc]](j, tomastrike_getid(), enemyplayer);
           }
 
           if(isDefined(targetposition)) {
-            var_fa378e997a33a137 = findunobstructedfiringinfo(targetposition, radius, var_d77253c873d2b420, ownerforward, ownerright);
-            thread tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo);
+            bombinginfo = findunobstructedfiringinfo(targetposition, radius, ownerlookforward, ownerforward, ownerright);
+            thread tomastrike_firestrike(striketype, bombinginfo, streakinfo);
           }
         } else {
-          var_fa378e997a33a137 = findunobstructedfiringinfo(markerorigin, radius, var_d77253c873d2b420, ownerforward, ownerright);
-          thread tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo);
+          bombinginfo = findunobstructedfiringinfo(markerorigin, radius, ownerlookforward, ownerforward, ownerright);
+          thread tomastrike_firestrike(striketype, bombinginfo, streakinfo);
         }
 
         if(isDefined(var_61ef97f2418800cb) && isDefined(var_55811e2f54b0b1)) {
@@ -753,12 +753,12 @@ function tomastrike_attacktarget(striketype, vehicle, marker, streakinfo, tomaid
   } else {
     for(i = 0; i < numstrikes; i++) {
       if(striketype == 2) {
-        var_fa378e997a33a137 = findunobstructedfiringinfo(marker.origin, radius, var_d77253c873d2b420, ownerforward, ownerright);
+        bombinginfo = findunobstructedfiringinfo(marker.origin, radius, ownerlookforward, ownerforward, ownerright);
       } else {
-        var_fa378e997a33a137 = findunobstructedfiringinfo(markerorigin, radius, var_d77253c873d2b420, ownerforward, ownerright);
+        bombinginfo = findunobstructedfiringinfo(markerorigin, radius, ownerlookforward, ownerforward, ownerright);
       }
 
-      thread tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo);
+      thread tomastrike_firestrike(striketype, bombinginfo, streakinfo);
       function_2284137aa92dbd16(randomfloatrange(1.35, 2.5));
     }
   }
@@ -794,40 +794,40 @@ function function_99347dc58ab12b57(center) {
   }
 }
 
-function findunobstructedfiringinfo(var_27c77d35f1de2019, var_a0edd3f59d938fb1, var_d77253c873d2b420, ownerforward, ownerright) {
+function findunobstructedfiringinfo(var_27c77d35f1de2019, bombingradius, ownerlookforward, ownerforward, ownerright) {
   gravity = getdvarint(@ "bg_gravity", 800);
 
   if(getdvarint(@ "hash_12ca000dd2976ebc", 0)) {
     gravity = getdvarfloat(@ "hash_2f4cf62df1af9a6", 125);
   }
 
-  var_fa378e997a33a137 = spawnStruct();
-  var_cb6109df81ef0dc = tomastrike_findoptimallaunchpos(var_27c77d35f1de2019, var_d77253c873d2b420, ownerforward, ownerright);
-  var_a78cd67f5364240c = vectorNormalize(var_27c77d35f1de2019 - (var_cb6109df81ef0dc[0], var_cb6109df81ef0dc[1], 0));
-  var_1f0ff6559c9092d0 = tomastrike_getrandombombingpoint(var_27c77d35f1de2019, var_a0edd3f59d938fb1, var_a78cd67f5364240c);
-  var_dea0d8baceebf59b = (0, 0, -1 * gravity);
+  bombinginfo = spawnStruct();
+  bombingsourcepos = tomastrike_findoptimallaunchpos(var_27c77d35f1de2019, ownerlookforward, ownerforward, ownerright);
+  bombingdirection = vectorNormalize(var_27c77d35f1de2019 - (bombingsourcepos[0], bombingsourcepos[1], 0));
+  bombinggoalinfo = tomastrike_getrandombombingpoint(var_27c77d35f1de2019, bombingradius, bombingdirection);
+  bombinggravity = (0, 0, -1 * gravity);
   traveltime = getdvarfloat(@ "hash_a394734820792b88", 4);
-  var_556b5972dbd50cf4 = (var_1f0ff6559c9092d0.point - 0.5 * var_dea0d8baceebf59b * squared(traveltime) - var_cb6109df81ef0dc) / traveltime;
+  bombingvelocity = (bombinggoalinfo.point - 0.5 * bombinggravity * squared(traveltime) - bombingsourcepos) / traveltime;
 
   clusterdebugon = getdvarint(@ "hash_920f0586653a26d4", 0);
 
   if(clusterdebugon) {
-    thread scripts\common\debug::debug_sphere(var_1f0ff6559c9092d0.point, 20, (1, 1, 0), 20);
-    thread scripts\common\debug::debug_line(var_cb6109df81ef0dc, var_1f0ff6559c9092d0.point, (1, 1, 0), 20);
+    thread scripts\common\debug::debug_sphere(bombinggoalinfo.point, 20, (1, 1, 0), 20);
+    thread scripts\common\debug::debug_line(bombingsourcepos, bombinggoalinfo.point, (1, 1, 0), 20);
   }
 
   if(!isDefined(self.var_70b761d63979e102)) {
     self.var_70b761d63979e102 = getdvarfloat(@ "hash_a394734820792b88", 4) - 0.075;
   }
 
-  var_f69efd87385e55 = var_cb6109df81ef0dc + var_556b5972dbd50cf4 * self.var_70b761d63979e102 + 0.5 * var_dea0d8baceebf59b * squared(self.var_70b761d63979e102);
-  var_fa378e997a33a137.sourcepos = var_cb6109df81ef0dc;
-  var_fa378e997a33a137.entityhit = var_1f0ff6559c9092d0.entityhit;
-  var_fa378e997a33a137.entityhittype = var_1f0ff6559c9092d0.entityhittype;
-  var_fa378e997a33a137.goalpos = var_1f0ff6559c9092d0.point;
-  var_fa378e997a33a137.preexplpos = var_f69efd87385e55;
-  var_fa378e997a33a137.initvelocity = var_556b5972dbd50cf4;
-  return var_fa378e997a33a137;
+  var_f69efd87385e55 = bombingsourcepos + bombingvelocity * self.var_70b761d63979e102 + 0.5 * bombinggravity * squared(self.var_70b761d63979e102);
+  bombinginfo.sourcepos = bombingsourcepos;
+  bombinginfo.entityhit = bombinggoalinfo.entityhit;
+  bombinginfo.entityhittype = bombinggoalinfo.entityhittype;
+  bombinginfo.goalpos = bombinggoalinfo.point;
+  bombinginfo.preexplpos = var_f69efd87385e55;
+  bombinginfo.initvelocity = bombingvelocity;
+  return bombinginfo;
 }
 
 function delayscriptablechangethread(delaytime) {
@@ -838,16 +838,16 @@ function delayscriptablechangethread(delaytime) {
   self delete();
 }
 
-function tomastrike_getrandombombingpoint(var_27c77d35f1de2019, var_a0edd3f59d938fb1, var_a78cd67f5364240c) {
-  randdist = randomint(var_a0edd3f59d938fb1);
+function tomastrike_getrandombombingpoint(var_27c77d35f1de2019, bombingradius, bombingdirection) {
+  randdist = randomint(bombingradius);
   randangle = randomint(360);
   x = var_27c77d35f1de2019[0] + randdist * cos(randangle);
   y = var_27c77d35f1de2019[1] + randdist * sin(randangle);
   z = var_27c77d35f1de2019[2];
   point = (x, y, z);
 
-  if(isDefined(var_a78cd67f5364240c)) {
-    point -= var_a78cd67f5364240c * 100;
+  if(isDefined(bombingdirection)) {
+    point -= bombingdirection * 100;
   }
 
   traceheightoffset = 10000;
@@ -885,7 +885,7 @@ function tomastrike_isflyingkillstreak(entity) {
   return isDefined(entity.streakinfo) && isDefined(entity.sentientpool) && entity.sentientpool == "Killstreak_Air";
 }
 
-function tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo, vehicle) {
+function tomastrike_firestrike(striketype, bombinginfo, streakinfo, vehicle) {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -894,12 +894,12 @@ function tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo, veh
     self playlocalsound("weap_cluster_fire");
   }
 
-  missile = magicgrenademanual(level.var_d2a6e2899c72649b, var_fa378e997a33a137.sourcepos, var_fa378e997a33a137.initvelocity, getdvarfloat(@ "hash_a394734820792b88", 4) + 2, self);
+  missile = magicgrenademanual(level.var_d2a6e2899c72649b, bombinginfo.sourcepos, bombinginfo.initvelocity, getdvarfloat(@ "hash_a394734820792b88", 4) + 2, self);
   missile forcenetfieldhighlod(1);
-  var_d9855d8e772a9061 = getdvarint(@ "hash_2cfbf02c634789ea", 1);
+  tomastrikeicontype = getdvarint(@ "hash_2cfbf02c634789ea", 1);
 
-  if(var_d9855d8e772a9061 == 0) {
-    missile function_6262c3a1ef0924d(1);
+  if(tomastrikeicontype == 0) {
+    missile setmissileminimapvisiblesharedfunc(1);
   } else {
     minimapid = undefined;
 
@@ -914,7 +914,7 @@ function tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo, veh
   missile setotherent(self);
   missile.owner = self;
   missile.streakinfo = streakinfo;
-  killcament = spawn("script_model", var_fa378e997a33a137.sourcepos);
+  killcament = spawn("script_model", bombinginfo.sourcepos);
   killcament linkTo(missile, "tag_origin", (10, 0, 10), (0, 0, 0));
   missile.killcament = killcament;
   bundle = isDefined(level.streakglobals.streakbundles["toma_strike"]) ? level.streakglobals.streakbundles["toma_strike"] : {
@@ -927,8 +927,8 @@ function tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo, veh
   missile.explodeent setentityowner(self);
   missile.explodeent.killcament = killcament;
 
-  if(!istrue(self.var_c0aa24316813868f) && issharedfuncdefined("spawn", "addSpawnDangerZone")) {
-    [[getsharedfunc("spawn", "addSpawnDangerZone")]](var_fa378e997a33a137.goalpos, 512, 300, self.team, 6, self, 1);
+  if(!istrue(self.isfakestreakent) && issharedfuncdefined("spawn", "addSpawnDangerZone")) {
+    [[getsharedfunc("spawn", "addSpawnDangerZone")]](bombinginfo.goalpos, 512, 300, self.team, 6, self, 1);
   }
 
   missile setscriptablepartstate("launch", "active", 0);
@@ -937,30 +937,30 @@ function tomastrike_firestrike(striketype, var_fa378e997a33a137, streakinfo, veh
   missile thread function_dd555baddc036858();
   explosiontype = getdvarint(@ "hash_604652367665c1e0", 1);
   var_63160bef0a2103d3 = getdvarfloat(@ "hash_a394734820792b88", 4) - 0.5;
-  killcamendpos = var_fa378e997a33a137.preexplpos;
+  killcamendpos = bombinginfo.preexplpos;
 
   if(explosiontype != 1) {
-    missile thread toma_strike_watch_airexplosion(var_fa378e997a33a137.preexplpos, var_fa378e997a33a137.entityhit, var_fa378e997a33a137.entityhittype, self.var_70b761d63979e102);
+    missile thread toma_strike_watch_airexplosion(bombinginfo.preexplpos, bombinginfo.entityhit, bombinginfo.entityhittype, self.var_70b761d63979e102);
   } else {
     missile thread toma_strike_watch_airexplosion(undefined, undefined, undefined, getdvarfloat(@ "hash_a394734820792b88", 4) + 1);
   }
 
-  missile thread toma_strike_watch_stuck(explosiontype, vectortoangles(var_fa378e997a33a137.initvelocity), gettime(), var_fa378e997a33a137.initvelocity);
+  missile thread toma_strike_watch_stuck(explosiontype, vectortoangles(bombinginfo.initvelocity), gettime(), bombinginfo.initvelocity);
   missile.killcament thread toma_strike_move_killcam(var_63160bef0a2103d3, killcamendpos);
 }
 
 function function_6153b8a392d10771(groundexplodepos, var_63d5339e498e6f77, stuckto, owner, starttime, streakinfo) {
   level endon("game_ended");
   self.exploding = 1;
-  var_dcc903d262b29994 = toma_strike_create_explosion(groundexplodepos, var_63d5339e498e6f77, stuckto, owner, starttime, streakinfo);
-  var_dcc903d262b29994.killcament = self.killcament;
+  groundexplodeent = toma_strike_create_explosion(groundexplodepos, var_63d5339e498e6f77, stuckto, owner, starttime, streakinfo);
+  groundexplodeent.killcament = self.killcament;
   explodepart = "explode_large";
 
   if(istrue(self.waterimpact)) {
     explodepart += "_water";
   }
 
-  var_dcc903d262b29994 setscriptablepartstate(explodepart, "active", 0);
+  groundexplodeent setscriptablepartstate(explodepart, "active", 0);
 
   if(isDefined(self.explodeent)) {
     self.explodeent delete();
@@ -969,20 +969,20 @@ function function_6153b8a392d10771(groundexplodepos, var_63d5339e498e6f77, stuck
   self delete();
   function_2284137aa92dbd16(3);
 
-  if(isDefined(var_dcc903d262b29994)) {
-    if(isDefined(var_dcc903d262b29994.killcament)) {
-      var_dcc903d262b29994.killcament delete();
+  if(isDefined(groundexplodeent)) {
+    if(isDefined(groundexplodeent.killcament)) {
+      groundexplodeent.killcament delete();
     }
 
-    var_dcc903d262b29994 delete();
+    groundexplodeent delete();
   }
 }
 
-function function_441a028592c3ca77(var_8e46de7d6785b0d8) {
+function function_441a028592c3ca77(airexplosionpos) {
   self endon("death");
   self.exploding = 1;
   self.explodeent unlink();
-  self.explodeent.origin = var_8e46de7d6785b0d8;
+  self.explodeent.origin = airexplosionpos;
   self.explodeent setscriptablepartstate("explode", "active", 0);
   thread toma_strike_delay_hide();
   function_2284137aa92dbd16(3);
@@ -1023,7 +1023,7 @@ function toma_strike_watch_owner() {
     self.killcament delete();
   }
 
-  function_6262c3a1ef0924d(0);
+  setmissileminimapvisiblesharedfunc(0);
   thread function_441a028592c3ca77(self.origin);
   self notify("missile_dest_failed");
 }
@@ -1039,7 +1039,7 @@ function function_dd555baddc036858() {
         self.killcament delete();
       }
 
-      function_6262c3a1ef0924d(0);
+      setmissileminimapvisiblesharedfunc(0);
       thread function_441a028592c3ca77(self.origin);
       self notify("missile_dest_failed");
       break;
@@ -1049,28 +1049,28 @@ function function_dd555baddc036858() {
   }
 }
 
-function toma_strike_watch_airexplosion(var_8e46de7d6785b0d8, entityhit, entityhittype, explosiondelay) {
+function toma_strike_watch_airexplosion(airexplosionpos, entityhit, entityhittype, explosiondelay) {
   self endon("death");
   self endon("missile_dest_failed");
   self endon("missile_dest_succeed");
   function_2284137aa92dbd16(explosiondelay);
-  function_6262c3a1ef0924d(0);
+  setmissileminimapvisiblesharedfunc(0);
 
-  if(!isDefined(var_8e46de7d6785b0d8)) {
-    var_8e46de7d6785b0d8 = self.origin;
+  if(!isDefined(airexplosionpos)) {
+    airexplosionpos = self.origin;
   }
 
-  thread function_441a028592c3ca77(var_8e46de7d6785b0d8);
+  thread function_441a028592c3ca77(airexplosionpos);
 
   if(isDefined(entityhit) && isDefined(entityhittype) && entityhittype == "flying") {
-    entityhit dodamage(500, var_8e46de7d6785b0d8, self.owner, self, "MOD_EXPLOSIVE", makeweapon(level.var_d2a6e2899c72649b));
+    entityhit dodamage(500, airexplosionpos, self.owner, self, "MOD_EXPLOSIVE", makeweapon(level.var_d2a6e2899c72649b));
   }
 }
 
-function toma_strike_move_killcam(var_b0ce2d9bbd8d8fae, endpos) {
+function toma_strike_move_killcam(timetounlink, endpos) {
   if(isDefined(self)) {
     self endon("death");
-    function_2284137aa92dbd16(var_b0ce2d9bbd8d8fae);
+    function_2284137aa92dbd16(timetounlink);
     self unlink();
     self moveTo(endpos, 5);
     function_2284137aa92dbd16(7);
@@ -1078,16 +1078,16 @@ function toma_strike_move_killcam(var_b0ce2d9bbd8d8fae, endpos) {
   }
 }
 
-function toma_strike_watch_stuck(explosiontype, launchangles, var_8011cffb839e8243, launchvelocity) {
+function toma_strike_watch_stuck(explosiontype, launchangles, launchtimems, launchvelocity) {
   self endon("death");
   self endon("missile_dest_failed");
   stuckto = function_7ef768a282337b03();
-  var_d9855d8e772a9061 = getdvarint(@ "hash_2cfbf02c634789ea", 1);
+  tomastrikeicontype = getdvarint(@ "hash_2cfbf02c634789ea", 1);
 
-  if(var_d9855d8e772a9061 == 0) {
-    function_6262c3a1ef0924d(0);
+  if(tomastrikeicontype == 0) {
+    setmissileminimapvisiblesharedfunc(0);
   } else {
-    function_6262c3a1ef0924d(1);
+    setmissileminimapvisiblesharedfunc(1);
   }
 
   if(isDefined(self.minimapid)) {
@@ -1098,7 +1098,7 @@ function toma_strike_watch_stuck(explosiontype, launchangles, var_8011cffb839e82
     self.minimapid = undefined;
   }
 
-  if(explosiontype != 1 && gettime() - var_8011cffb839e8243 < self.var_70b761d63979e102 * 1000) {
+  if(explosiontype != 1 && gettime() - launchtimems < self.var_70b761d63979e102 * 1000) {
     thread function_441a028592c3ca77(self.origin);
     self notify("missile_dest_failed");
     return;
@@ -1106,7 +1106,7 @@ function toma_strike_watch_stuck(explosiontype, launchangles, var_8011cffb839e82
 
   wait 0.05;
   gravityaccel = -1 * getdvarint(@ "bg_gravity", 800);
-  traveltime = (gettime() - var_8011cffb839e8243) / 1000;
+  traveltime = (gettime() - launchtimems) / 1000;
   impactvelocity = launchvelocity + (0, 0, gravityaccel * traveltime);
 
   if(isDefined(stuckto) && isPlayer(stuckto)) {
@@ -1121,7 +1121,7 @@ function toma_strike_watch_stuck(explosiontype, launchangles, var_8011cffb839e82
 function function_7ef768a282337b03() {
   self endon("death");
   self endon("missile_dest_failed");
-  impactinfo = function_51afe751c1e36723("missile_stuck", "missile_water_impact");
+  impactinfo = killstreak_waittillexplode("missile_stuck", "missile_water_impact");
 
   if(isDefined(level.var_ca1a76fbc0ba0bef)) {
     thread[[level.var_ca1a76fbc0ba0bef]](self.streakinfo, self.origin, 0);
@@ -1176,13 +1176,13 @@ function toma_strike_stuck_player(explosiontype, grenade, stuckto, launchangles,
 
   if(isDefined(castresults) && castresults.size > 0) {
     castend = castresults[0]["position"];
-    var_a95d04f8f906e839 = castresults[0]["normal"];
+    casthitnorm = castresults[0]["normal"];
     casthitent = castresults[0]["entity"];
-    castend -= var_a95d04f8f906e839 * 1;
+    castend -= casthitnorm * 1;
     gravityaccel = -1 * getdvarint(@ "bg_gravity", 800);
     d = vectordot(castend - caststart, castdir);
     t = sqrt(2 * d / -1 * gravityaccel);
-    up = var_a95d04f8f906e839;
+    up = casthitnorm;
     right = anglestoright(launchangles);
     impactangles = toma_strike_rebuild_angles_up_right(up, right);
 
@@ -1302,15 +1302,15 @@ function toma_strike_start_branch() {
     self.castend = self.caststart + self.castdir * toma_strike_get_cast_dist(self.casttype, self.castdata);
     casthit = undefined;
     casthitpos = undefined;
-    var_a95d04f8f906e839 = undefined;
+    casthitnorm = undefined;
     casthitent = undefined;
-    var_d27f9a12a82f66e3 = undefined;
+    casthitangles = undefined;
     castresults = physics_raycast(self.caststart, self.castend, self.shareddata.castcontents, undefined, 0, "physicsquery_closest", 1);
 
     if(isDefined(castresults) && castresults.size > 0) {
       casthit = 1;
       casthitpos = castresults[0]["position"];
-      var_a95d04f8f906e839 = castresults[0]["normal"];
+      casthitnorm = castresults[0]["normal"];
       casthitent = castresults[0]["entity"];
     }
 
@@ -1318,7 +1318,7 @@ function toma_strike_start_branch() {
       case 0:
         if(istrue(casthit)) {
           toma_strike_branch_register_cast(self.casttype, 0, casthitpos);
-          var_bb5cf2286a5c3135 = 1;
+          shouldcreateexplosion = 1;
 
           if(isDefined(self.castdata.firstforwarddist)) {
             castvec = casthitpos - self.caststart;
@@ -1326,23 +1326,23 @@ function toma_strike_start_branch() {
             self.castdata.firstforwarddist -= castdist;
 
             if(self.castdata.firstforwarddist > self.castdata.firstforwardmindist) {
-              var_bb5cf2286a5c3135 = 0;
+              shouldcreateexplosion = 0;
             } else {
               self.castdata.firstforwarddist = undefined;
             }
           }
 
-          var_d27f9a12a82f66e3 = toma_strike_rebuild_angles_up_right(var_a95d04f8f906e839, anglestoright(self.castangles));
+          casthitangles = toma_strike_rebuild_angles_up_right(casthitnorm, anglestoright(self.castangles));
 
-          if(var_bb5cf2286a5c3135) {
-            explent = toma_strike_branch_create_explosion(casthitpos, var_d27f9a12a82f66e3, casthitent, self.shareddata.streakinfo);
+          if(shouldcreateexplosion) {
+            explent = toma_strike_branch_create_explosion(casthitpos, casthitangles, casthitent, self.shareddata.streakinfo);
             explent.killcament = killcament;
             explent thread toma_strike_start_explosion();
           }
 
           self.casttype = 2;
-          self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
-          self.castangles = var_d27f9a12a82f66e3;
+          self.caststart = casthitpos + casthitnorm * 1;
+          self.castangles = casthitangles;
         } else {
           toma_strike_branch_register_cast(self.casttype, undefined, undefined);
 
@@ -1363,17 +1363,17 @@ function toma_strike_start_branch() {
         break;
       case 1:
         if(istrue(casthit)) {
-          var_d27f9a12a82f66e3 = toma_strike_rebuild_angles_up_right(var_a95d04f8f906e839, anglestoright(self.castangles));
-          explent = toma_strike_branch_create_explosion(casthitpos, var_d27f9a12a82f66e3, casthitent, self.shareddata.streakinfo);
+          casthitangles = toma_strike_rebuild_angles_up_right(casthitnorm, anglestoright(self.castangles));
+          explent = toma_strike_branch_create_explosion(casthitpos, casthitangles, casthitent, self.shareddata.streakinfo);
           explent.killcament = killcament;
           explent thread toma_strike_start_explosion();
-          normdot = vectordot(anglestoup(self.castangles), var_a95d04f8f906e839);
+          normdot = vectordot(anglestoup(self.castangles), casthitnorm);
 
           if(normdot < 0.9848) {
             toma_strike_branch_register_cast(self.casttype, 2, casthitpos);
             self.casttype = 2;
-            self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
-            self.castangles = var_d27f9a12a82f66e3;
+            self.caststart = casthitpos + casthitnorm * 1;
+            self.castangles = casthitangles;
           } else {
             toma_strike_branch_register_cast(self.casttype, 1, casthitpos);
             self.casttype = 0;
@@ -1388,7 +1388,7 @@ function toma_strike_start_branch() {
         if(istrue(casthit)) {
           toma_strike_branch_register_cast(self.casttype, 3, casthitpos);
           self.casttype = 0;
-          self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
+          self.caststart = casthitpos + casthitnorm * 1;
         } else {
           toma_strike_branch_register_cast(self.casttype, undefined, undefined);
           self.casttype = 0;
@@ -1511,12 +1511,12 @@ function toma_strike_shared_data_is_complete(var_af8745e2185687a8) {
   return iscomplete;
 }
 
-function toma_strike_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitposition) {
+function toma_strike_branch_register_cast(casttype, casthittype, hitposition) {
   self.shareddata toma_strike_shared_data_register_cast();
   self.casts++;
 
-  if(isDefined(var_8e87ebe279cdfcfb)) {
-    if(var_8e87ebe279cdfcfb == 0 || var_8e87ebe279cdfcfb == 1 || var_8e87ebe279cdfcfb == 2) {
+  if(isDefined(casthittype)) {
+    if(casthittype == 0 || casthittype == 1 || casthittype == 2) {
       self.castfails = 0;
     }
   } else if(casttype == 1) {
@@ -1525,10 +1525,10 @@ function toma_strike_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitpos
 
   debugmsg = undefined;
 
-  if(isDefined(var_8e87ebe279cdfcfb)) {
+  if(isDefined(casthittype)) {
     debugmsg = undefined;
 
-    switch (var_8e87ebe279cdfcfb) {
+    switch (casthittype) {
       case 0:
         debugmsg = "<dev string:x41>";
         break;
@@ -1544,7 +1544,7 @@ function toma_strike_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitpos
     }
 
     self.hitpositions[self.hitpositions.size] = hitposition;
-    self.hittypes[self.hittypes.size] = var_8e87ebe279cdfcfb;
+    self.hittypes[self.hittypes.size] = casthittype;
   } else {
     switch (casttype) {
       case 0:
@@ -1750,18 +1750,18 @@ function toma_strike_handlemarkerscriptable() {
   }
 }
 
-function tomastrike_findoptimallaunchpos(markerorigin, var_d77253c873d2b420, ownerforward, ownerright) {
+function tomastrike_findoptimallaunchpos(markerorigin, ownerlookforward, ownerforward, ownerright) {
   contents = scripts\engine\trace::create_default_contents(1);
-  trace = scripts\engine\trace::ray_trace(markerorigin - var_d77253c873d2b420 * 30, markerorigin + var_d77253c873d2b420 * 1000, undefined, contents);
+  trace = scripts\engine\trace::ray_trace(markerorigin - ownerlookforward * 30, markerorigin + ownerlookforward * 1000, undefined, contents);
   coord = trace["position"] + trace["normal"] * 20;
   targetpos = coord;
   targetheightoffset = 5000;
   targetforwardoffset = 5000;
-  var_f74f18c717b149e2 = [targetpos + ownerforward * 100, targetpos - ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos + (-1 * ownerforward - ownerright) * 100];
-  var_4b92da7c3f7930e4 = vectorNormalize(var_f74f18c717b149e2[0] - targetpos);
-  bestlaunchpos = targetpos + (0, 0, targetheightoffset) - var_4b92da7c3f7930e4 * targetforwardoffset;
+  positionchecklist = [targetpos + ownerforward * 100, targetpos - ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos + (-1 * ownerforward - ownerright) * 100];
+  defaultlaunchdir = vectorNormalize(positionchecklist[0] - targetpos);
+  bestlaunchpos = targetpos + (0, 0, targetheightoffset) - defaultlaunchdir * targetforwardoffset;
 
-  foreach(dirpos in var_f74f18c717b149e2) {
+  foreach(dirpos in positionchecklist) {
     direction = vectorNormalize(dirpos - targetpos);
     starttracepos = targetpos + (0, 0, targetheightoffset) - direction * targetforwardoffset;
     endtracepos = targetpos;

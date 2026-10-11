@@ -321,10 +321,10 @@ function playerlinktopositionent(animstruct) {
     self.infilanimindex = 1;
   }
 
-  var_8e3afd40d3c95b46 = "j_prop_" + self.infilanimindex;
+  player_link_tag = "j_prop_" + self.infilanimindex;
 
-  if(isent(animstruct.playerpositionents[var_8e3afd40d3c95b46])) {
-    self playerlinkTo(animstruct.playerpositionents[var_8e3afd40d3c95b46], "tag_player");
+  if(isent(animstruct.playerpositionents[player_link_tag])) {
+    self playerlinkTo(animstruct.playerpositionents[player_link_tag], "tag_player");
   }
 }
 
@@ -423,12 +423,12 @@ function watchinfiljumpanim(animstruct) {
           player.infilanimindex = 1;
         }
 
-        var_8e3afd40d3c95b46 = "j_prop_" + player.infilanimindex + 2;
-        var_9b145eb55513dbb5[var_8e3afd40d3c95b46] = spawn("script_model", var_9b145eb55513dbb5["parent"] gettagorigin(var_8e3afd40d3c95b46));
+        player_link_tag = "j_prop_" + player.infilanimindex + 2;
+        var_9b145eb55513dbb5[player_link_tag] = spawn("script_model", var_9b145eb55513dbb5["parent"] gettagorigin(player_link_tag));
         level.infiljumpentsspawned++;
-        var_9b145eb55513dbb5[var_8e3afd40d3c95b46] setModel("tag_player");
-        var_9b145eb55513dbb5[var_8e3afd40d3c95b46] linkTo(var_9b145eb55513dbb5["parent"], var_8e3afd40d3c95b46, (0, 0, 0), (0, 0, 0));
-        player playerlinkTo(var_9b145eb55513dbb5[var_8e3afd40d3c95b46], "tag_player");
+        var_9b145eb55513dbb5[player_link_tag] setModel("tag_player");
+        var_9b145eb55513dbb5[player_link_tag] linkTo(var_9b145eb55513dbb5["parent"], player_link_tag, (0, 0, 0), (0, 0, 0));
+        player playerlinkTo(var_9b145eb55513dbb5[player_link_tag], "tag_player");
         player scripts\cp_mp\utility\player_utility::function_6fb380927695ee76(1);
         player playanimscriptsceneevent("scripted_scene", var_66809387054fc02a);
         player.infilanimindex = undefined;
@@ -1076,7 +1076,7 @@ function transitionplayerstoac130cinematic(players, infil_anim_type, c130) {
       continue;
     }
 
-    player function_bc667001f9dd3808(c130.origin);
+    player predictstreamposuntilcleared(c130.origin);
   }
 
   level.infiltransistioning = 1;

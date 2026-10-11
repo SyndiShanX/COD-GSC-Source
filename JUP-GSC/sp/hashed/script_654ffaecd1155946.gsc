@@ -111,7 +111,7 @@ function function_ad8155e88c085aeb(var_c4ac1d963dccaf1c, var_c1978323e243becf, b
 }
 
 function function_a1d067908e206e63() {
-  scripts\sp\equipment\offhands::function_c7e46ad834e413f("iw9_gunless", 0);
+  scripts\sp\equipment\offhands::overrideweaponoffhandtype("iw9_gunless", 0);
   level.player forceplaygestureviewmodel("iw8_vm_ges_ks_radio_ear_mp");
   wait 2;
   level thread function_f0c06553aac70bd1();
@@ -470,28 +470,28 @@ function private function_cb434bd8c2a84c66() {
   function_344c564e0f6935e4();
 }
 
-function private function_d36af408e1a66d8c(time, var_b6b32ad0abab8814, var_bab2d71dccda7436) {
+function private function_d36af408e1a66d8c(time, var_b6b32ad0abab8814, flg_end) {
   level.player endon("death");
   level endon("cctv_face_scan_success");
   level endon("cctv_face_scan_fail");
-  var_fb118bca74cba5c1 = newhudelem();
-  var_fb118bca74cba5c1.alignx = "center";
-  var_fb118bca74cba5c1.aligny = "middle";
-  var_fb118bca74cba5c1.fontscale = 2.5;
-  var_fb118bca74cba5c1.x = 330;
-  var_fb118bca74cba5c1.y = 36;
-  var_fb118bca74cba5c1 settext("<<< SCAN FACE DATA >>>");
-  var_fb1188ca74cb9f28 = newhudelem();
-  var_fb1188ca74cb9f28.alignx = "left";
-  var_fb1188ca74cb9f28.aligny = "middle";
-  var_fb1188ca74cb9f28.fontscale = 3;
-  var_fb1188ca74cb9f28.x = 210;
-  var_fb1188ca74cb9f28.y = 58;
-  var_fb1188ca74cb9f28.color = (0, 1, 0);
+  hud1 = newhudelem();
+  hud1.alignx = "center";
+  hud1.aligny = "middle";
+  hud1.fontscale = 2.5;
+  hud1.x = 330;
+  hud1.y = 36;
+  hud1 settext("<<< SCAN FACE DATA >>>");
+  hud2 = newhudelem();
+  hud2.alignx = "left";
+  hud2.aligny = "middle";
+  hud2.fontscale = 3;
+  hud2.x = 210;
+  hud2.y = 58;
+  hud2.color = (0, 1, 0);
   var_3d3e99385c5f4a0f = 0;
   var_3e3fee18bb4afc95 = "";
 
-  while(!flag(var_bab2d71dccda7436)) {
+  while(!flag(flg_end)) {
     if(flag("cctv_look_at_scan_target")) {
       level waittill("cctv_scanning");
       var_3e3fee18bb4afc95 += "=";
@@ -500,7 +500,7 @@ function private function_d36af408e1a66d8c(time, var_b6b32ad0abab8814, var_bab2d
         flag_set("flg_face_scan_started");
       }
 
-      var_fb1188ca74cb9f28 settext(var_3e3fee18bb4afc95);
+      hud2 settext(var_3e3fee18bb4afc95);
       time -= 1;
     }
 
@@ -513,11 +513,11 @@ function private function_d36af408e1a66d8c(time, var_b6b32ad0abab8814, var_bab2d
   }
 
   if(var_3d3e99385c5f4a0f) {
-    var_fb118bca74cba5c1.color = (0, 1, 0);
-    var_fb118bca74cba5c1 settext("<<< SCAN COMPLETE >>>");
+    hud1.color = (0, 1, 0);
+    hud1 settext("<<< SCAN COMPLETE >>>");
     wait 1;
-    var_fb118bca74cba5c1 destroy();
-    var_fb1188ca74cb9f28 destroy();
+    hud1 destroy();
+    hud2 destroy();
 
     if(isDefined(var_b6b32ad0abab8814)) {
       flag_set(var_b6b32ad0abab8814);
@@ -527,30 +527,30 @@ function private function_d36af408e1a66d8c(time, var_b6b32ad0abab8814, var_bab2d
     return;
   }
 
-  var_fb118bca74cba5c1.color = (1, 0, 0);
-  var_fb118bca74cba5c1 settext("<<< SCAN FAILED >>>");
+  hud1.color = (1, 0, 0);
+  hud1 settext("<<< SCAN FAILED >>>");
   wait 1;
-  var_fb118bca74cba5c1 destroy();
-  var_fb1188ca74cb9f28 destroy();
+  hud1 destroy();
+  hud2 destroy();
   level notify("cctv_face_scan_fail");
 }
 
 function function_6d5a8f3839fbf885() {
   level.player endon("death");
-  var_fb118bca74cba5c1 = newhudelem();
-  var_fb118bca74cba5c1.alignx = "center";
-  var_fb118bca74cba5c1.aligny = "middle";
-  var_fb118bca74cba5c1.fontscale = 5;
-  var_fb118bca74cba5c1.x = 300;
-  var_fb118bca74cba5c1.y = 40;
-  var_fb118bca74cba5c1 settext("");
-  var_fb1188ca74cb9f28 = newhudelem();
-  var_fb1188ca74cb9f28.alignx = "left";
-  var_fb1188ca74cb9f28.aligny = "middle";
-  var_fb1188ca74cb9f28.fontscale = 5;
-  var_fb1188ca74cb9f28.x = 330;
-  var_fb1188ca74cb9f28.y = 40;
-  var_fb1188ca74cb9f28 settext("");
+  hud1 = newhudelem();
+  hud1.alignx = "center";
+  hud1.aligny = "middle";
+  hud1.fontscale = 5;
+  hud1.x = 300;
+  hud1.y = 40;
+  hud1 settext("");
+  hud2 = newhudelem();
+  hud2.alignx = "left";
+  hud2.aligny = "middle";
+  hud2.fontscale = 5;
+  hud2.x = 330;
+  hud2.y = 40;
+  hud2 settext("");
   var_3d3e99385c5f4a0f = 0;
   var_e11a4ce62f411dfe = 3;
   var_901108611d3c969a = 0;
@@ -558,19 +558,19 @@ function function_6d5a8f3839fbf885() {
   level.player playSound("surg_cctv_static_3sec");
 
   while(var_901108611d3c969a < var_e11a4ce62f411dfe) {
-    var_fb1188ca74cb9f28 settext("");
+    hud2 settext("");
     wait 1;
     var_901108611d3c969a += 1;
-    var_fb1188ca74cb9f28 settext("");
+    hud2 settext("");
     wait 1;
     var_901108611d3c969a += 1;
-    var_fb1188ca74cb9f28 settext("");
+    hud2 settext("");
     wait 1;
     var_901108611d3c969a += 1;
   }
 
-  var_fb118bca74cba5c1 destroy();
-  var_fb1188ca74cb9f28 destroy();
+  hud1 destroy();
+  hud2 destroy();
 }
 
 function private function_1420031998e0a6d1() {
@@ -999,7 +999,7 @@ function private function_3bca028b81b9315(var_b18cac93c61c669e) {
   level.player setOrigin(self.player_anchor.origin);
   level.player playerlinktodelta(self.player_anchor, "tag_origin", 1, self.view_arcs[0], self.view_arcs[1], self.view_arcs[2], self.view_arcs[3], 0);
 
-  if(isDefined(level.var_c900db68646b554e) && function_d291656cea83ed81(level.var_c900db68646b554e, level.player getEye(), [self], create_default_contents()) && distance(level.var_c900db68646b554e.origin, self.origin) <= 1800) {
+  if(isDefined(level.var_c900db68646b554e) && cantracetoai(level.var_c900db68646b554e, level.player getEye(), [self], create_default_contents()) && distance(level.var_c900db68646b554e.origin, self.origin) <= 1800) {
     function_9992b2755a08da84(0.98, 0.99);
   } else {
     level.player setplayerangles(self.player_anchor.angles);
@@ -1041,11 +1041,11 @@ function private function_f2cd217859497020(next_cam, previous_cam) {
   level.player clearadditionalstreampos();
 
   if(isDefined(next_cam)) {
-    level.player function_bc667001f9dd3808(next_cam.origin);
+    level.player predictstreamposuntilcleared(next_cam.origin);
   }
 
   if(isDefined(previous_cam)) {
-    level.player function_670863fc4008c3d8(previous_cam.origin);
+    level.player setadditionalstreamposuntilcleared(previous_cam.origin);
   }
 
   if(!isDefined(next_cam) && !isDefined(previous_cam)) {

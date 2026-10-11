@@ -129,7 +129,7 @@ function private function_c9de15b664d15414(triggerobject, vehicle, turretweapon,
     triggerobject function_dfb78b3e724ad620(0);
     vehicle vehicle_spawn_stopwatchingabandoned();
     scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_hidecashbag(vehicle, undefined, player);
-    player function_5847240c0f9900f2(0);
+    player allowvehiclepredictiveragdoll(0);
     weapon = undefined;
 
     if(turretweapon == "iw9_mg_patrol_boat_front_mp") {
@@ -142,8 +142,8 @@ function private function_c9de15b664d15414(triggerobject, vehicle, turretweapon,
     function_160ef1c877c69ab1(player, vehicle, self, turret_tag);
     scripts\cp_mp\utility\vehicle_omnvar_utility::function_d2d9c09551d91164(vehicle, player);
     turret = vehicle_getturretbyweapon(vehicle, weapon);
-    level thread vehicle_occupancy_disablefirefortime(player, ter_op(istrue(turret.var_ecc491f42aaceaf4), 850, 2200));
-    turret.var_ecc491f42aaceaf4 = 1;
+    level thread vehicle_occupancy_disablefirefortime(player, ter_op(istrue(turret.playedfirstraise), 850, 2200));
+    turret.playedfirstraise = 1;
     thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_giveturret(player, vehicle, weapon);
     scripts\cp_mp\vehicles\customization\battle_tracks::battle_tracks_onentervehicle(vehicle, player);
     turret thread function_3f2282eb0126c0c0(player);
@@ -233,7 +233,7 @@ function private function_9f3f1229cc69710e(player, vehicle) {
   if(isDefined(player)) {
     player notify("end_turret_use");
     scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_showcashbag(vehicle, undefined, player);
-    player function_5847240c0f9900f2(1);
+    player allowvehiclepredictiveragdoll(1);
   }
 
   scripts\cp_mp\vehicles\customization\battle_tracks::battle_tracks_onexitvehicle(vehicle, player);
@@ -285,8 +285,8 @@ function private function_c3aa4b60c1e04c3a(player) {
   thread vehicle_spawn_watchabandoned();
 }
 
-function private function_856261b9790625f4(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
-  scripts\cp_mp\vehicles\vehicle_occupancy::function_43c2c433b8b9b12d(vehicle, seatid, var_fc7c7a874b43a31a, player, data);
+function private function_856261b9790625f4(vehicle, seatid, oldseatid, player, data) {
+  scripts\cp_mp\vehicles\vehicle_occupancy::function_43c2c433b8b9b12d(vehicle, seatid, oldseatid, player, data);
 
   if(!istrue(data.success) || istrue(data.playerdisconnect) || !isDefined(player) || !istrue(vehicle.israllypointvehicle)) {
     return;
@@ -305,8 +305,8 @@ function private function_856261b9790625f4(vehicle, seatid, var_fc7c7a874b43a31a
   scripts\mp\objidpoolmanager::objective_playermask_hidefrom(vehicle.marker.objidnum, player);
 }
 
-function private function_2815d461ca70ad30(vehicle, seatid, var_7558f98f3236963d, player, data) {
-  function_857bf4201a249a99(vehicle, seatid, var_7558f98f3236963d, player, data);
+function private function_2815d461ca70ad30(vehicle, seatid, newseatid, player, data) {
+  function_857bf4201a249a99(vehicle, seatid, newseatid, player, data);
 
   if(!istrue(data.success) || istrue(data.playerdisconnect) || !isDefined(player) || !istrue(vehicle.israllypointvehicle)) {
     return;

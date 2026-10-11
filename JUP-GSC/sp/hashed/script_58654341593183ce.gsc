@@ -349,9 +349,9 @@ function function_b687445b2e08970c() {
   }
 }
 
-function function_20f62f1a0552371e(var_5a43b7a0c288f8da) {
+function function_20f62f1a0552371e(print_text) {
   if(getdvarint(@ "hash_604330adc1c5db54", 0) == 1) {
-    iprintln(var_5a43b7a0c288f8da);
+    iprintln(print_text);
   }
 }
 

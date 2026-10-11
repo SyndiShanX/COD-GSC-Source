@@ -51,7 +51,7 @@ function main() {
     allowed[0] = scripts\mp\utility\game::getbasegametype();
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_eb455c18ac9d8ac5() || level.var_ec2fb549b15ad827) {
+  if(scripts\cp_mp\utility\game_utility::function_eb455c18ac9d8ac5() || level.leagueplaymatch) {
     allowed[0] = scripts\mp\utility\game::getbasegametype();
   }
 

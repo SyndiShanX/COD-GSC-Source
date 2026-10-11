@@ -303,10 +303,10 @@ function hudoutline_enable_internal(channelname, hudoutlineassetname) {
       hudoutline_activate_channel(channelname);
     }
 
-    var_a948959983e82f10 = level.hudoutlinechannels[level.hudoutlinecurchannel].priority;
-    var_c8446d6318008d2c = level.hudoutlinechannels[channelname].priority;
+    curchannelpriority = level.hudoutlinechannels[level.hudoutlinecurchannel].priority;
+    thischannelpriority = level.hudoutlinechannels[channelname].priority;
 
-    if(level.hudoutlinecurchannel != channelname && var_a948959983e82f10 < var_c8446d6318008d2c) {
+    if(level.hudoutlinecurchannel != channelname && curchannelpriority < thischannelpriority) {
       hudoutline_activate_channel(channelname);
     } else if(level.hudoutlinecurchannel == channelname) {
       _enable_hudoutline_on_ent(self, hudoutlineassetname, channelname);
@@ -315,22 +315,22 @@ function hudoutline_enable_internal(channelname, hudoutlineassetname) {
     return;
   }
 
-  var_f264487ee10b8afb = level.hudoutlinechannels[channelname].parentchannel;
+  parentchannelname = level.hudoutlinechannels[channelname].parentchannel;
 
   if(!isDefined(level.hudoutlinecurchannel)) {
-    hudoutline_activate_channel(var_f264487ee10b8afb);
+    hudoutline_activate_channel(parentchannelname);
   }
 
-  var_a948959983e82f10 = level.hudoutlinechannels[level.hudoutlinecurchannel].priority;
-  var_6e14ef69641c92f0 = level.hudoutlinechannels[var_f264487ee10b8afb].priority;
+  curchannelpriority = level.hudoutlinechannels[level.hudoutlinecurchannel].priority;
+  parentchannelpriority = level.hudoutlinechannels[parentchannelname].priority;
 
-  if(level.hudoutlinecurchannel != var_f264487ee10b8afb && var_a948959983e82f10 < var_6e14ef69641c92f0) {
-    hudoutline_activate_channel(var_f264487ee10b8afb);
+  if(level.hudoutlinecurchannel != parentchannelname && curchannelpriority < parentchannelpriority) {
+    hudoutline_activate_channel(parentchannelname);
     return;
   }
 
-  if(level.hudoutlinecurchannel == var_f264487ee10b8afb) {
-    _enable_hudoutline_on_ent(self, hudoutlineassetname, var_f264487ee10b8afb);
+  if(level.hudoutlinecurchannel == parentchannelname) {
+    _enable_hudoutline_on_ent(self, hudoutlineassetname, parentchannelname);
   }
 }
 
@@ -387,8 +387,8 @@ function hudoutline_disable_internal(channelname) {
       foundents = 0;
 
       if(isDefined(level.hudoutlinechannels[channelname].childchannels) && level.hudoutlinechannels[channelname].childchannels.size > 0) {
-        foreach(var_60df37833e14382b in level.hudoutlinechannels[channelname].childchannels) {
-          if(level.hudoutlinechannels[var_60df37833e14382b].entinfos.size > 0) {
+        foreach(childchannelname in level.hudoutlinechannels[channelname].childchannels) {
+          if(level.hudoutlinechannels[childchannelname].entinfos.size > 0) {
             foundents = 1;
             break;
           }
@@ -404,10 +404,10 @@ function hudoutline_disable_internal(channelname) {
   }
 
   if(isDefined(level.hudoutlinechannels[channelname].parentchannel) && level.hudoutlinecurchannel == level.hudoutlinechannels[channelname].parentchannel) {
-    var_f264487ee10b8afb = level.hudoutlinechannels[channelname].parentchannel;
+    parentchannelname = level.hudoutlinechannels[channelname].parentchannel;
 
     if(isDefined(index)) {
-      _disable_hudoutline_on_ent(self, var_f264487ee10b8afb);
+      _disable_hudoutline_on_ent(self, parentchannelname);
     }
 
     if(level.hudoutlinechannels[channelname].entinfos.size == 0) {
@@ -444,8 +444,8 @@ function hudoutline_activate_best_channel() {
           foundents = 1;
         }
 
-        foreach(var_60df37833e14382b in channel.childchannels) {
-          if(level.hudoutlinechannels[var_60df37833e14382b].entinfos.size > 0) {
+        foreach(childchannelname in channel.childchannels) {
+          if(level.hudoutlinechannels[childchannelname].entinfos.size > 0) {
             foundents = 1;
           }
         }
@@ -512,13 +512,13 @@ function _enable_hudoutline_on_channel_ents(channelname) {
   }
 }
 
-function _enable_hudoutline_on_ent(ent, hudoutlineassetname, var_f264487ee10b8afb) {
-  if(!isDefined(level.hudoutlinechannels[var_f264487ee10b8afb].childchannels) || level.hudoutlinechannels[var_f264487ee10b8afb].childchannels.size == 0) {
+function _enable_hudoutline_on_ent(ent, hudoutlineassetname, parentchannelname) {
+  if(!isDefined(level.hudoutlinechannels[parentchannelname].childchannels) || level.hudoutlinechannels[parentchannelname].childchannels.size == 0) {
     ent hudoutlineenable(hudoutlineassetname);
     return;
   }
 
-  var_85db4751771acfdf = _get_sorted_list_of_channel_plus_child_channels(var_f264487ee10b8afb, 1);
+  var_85db4751771acfdf = _get_sorted_list_of_channel_plus_child_channels(parentchannelname, 1);
   outlinedent = 0;
 
   for(i = 0; i < var_85db4751771acfdf.size; i++) {
@@ -536,13 +536,13 @@ function _enable_hudoutline_on_ent(ent, hudoutlineassetname, var_f264487ee10b8af
   }
 }
 
-function _disable_hudoutline_on_ent(ent, var_f264487ee10b8afb) {
-  if(!isDefined(level.hudoutlinechannels[var_f264487ee10b8afb].childchannels) || level.hudoutlinechannels[var_f264487ee10b8afb].childchannels.size == 0) {
+function _disable_hudoutline_on_ent(ent, parentchannelname) {
+  if(!isDefined(level.hudoutlinechannels[parentchannelname].childchannels) || level.hudoutlinechannels[parentchannelname].childchannels.size == 0) {
     self hudoutlinedisable();
     return;
   }
 
-  var_85db4751771acfdf = _get_sorted_list_of_channel_plus_child_channels(var_f264487ee10b8afb, 1);
+  var_85db4751771acfdf = _get_sorted_list_of_channel_plus_child_channels(parentchannelname, 1);
   outlinedent = 0;
 
   for(i = 0; i < var_85db4751771acfdf.size; i++) {
@@ -611,9 +611,9 @@ function hudoutline_add_channel_internal(channelname, priority, settingsfunc) {
   }
 }
 
-function hudoutline_add_child_channel_internal(channelname, priority, var_f264487ee10b8afb) {
+function hudoutline_add_child_channel_internal(channelname, priority, parentchannelname) {
   assertex(isDefined(level.hudoutlinechannels), "Tried to create a child hudoutline channel before any other channels were created!");
-  assertex(isDefined(level.hudoutlinechannels[var_f264487ee10b8afb]), "Tried to create a child hudoutline channel of a parent channel that doesn't exist!");
+  assertex(isDefined(level.hudoutlinechannels[parentchannelname]), "Tried to create a child hudoutline channel of a parent channel that doesn't exist!");
   assertex(!isDefined(level.hudoutlinechannels[channelname]), "Tried to create a child hudoutline channel with a name that is already a channel!");
 
   if(!isDefined(level.hudoutlinechannels[channelname])) {
@@ -621,14 +621,14 @@ function hudoutline_add_child_channel_internal(channelname, priority, var_f26448
     level.hudoutlinechannels[channelname].channelname = channelname;
     level.hudoutlinechannels[channelname].priority = priority;
     level.hudoutlinechannels[channelname].entinfos = [];
-    level.hudoutlinechannels[channelname].parentchannel = var_f264487ee10b8afb;
+    level.hudoutlinechannels[channelname].parentchannel = parentchannelname;
   }
 
-  if(!isDefined(level.hudoutlinechannels[var_f264487ee10b8afb].childchannels)) {
-    level.hudoutlinechannels[var_f264487ee10b8afb].childchannels = [];
+  if(!isDefined(level.hudoutlinechannels[parentchannelname].childchannels)) {
+    level.hudoutlinechannels[parentchannelname].childchannels = [];
   }
 
-  level.hudoutlinechannels[var_f264487ee10b8afb].childchannels[level.hudoutlinechannels[var_f264487ee10b8afb].childchannels.size] = channelname;
+  level.hudoutlinechannels[parentchannelname].childchannels[level.hudoutlinechannels[parentchannelname].childchannels.size] = channelname;
 }
 
 function hudoutline_override_channel_settingsfunc(channelname, settingsfunc) {

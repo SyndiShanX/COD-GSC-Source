@@ -14,8 +14,8 @@
 #namespace namespace_23065dd8923d8d1e;
 
 function function_7dcdb0119cb801c6() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &on_damaged);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_crawling_changed", &function_16dad04a21a0f9cf);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &on_damaged);
+  callback::get_template(self.animsetname) callback::add("on_is_crawling_changed", &function_16dad04a21a0f9cf);
 }
 
 function init_pain() {
@@ -36,7 +36,7 @@ function private on_damaged(params) {
   if(function_adb7b3f940cde3b5(params.metabonename)) {
     self function_3e89eb3d8e3f1811("last_damage_hit_armor", 1);
   } else {
-    self function_4b733566e92d899e("last_damage_hit_armor");
+    self clearaiblackboarddynamic("last_damage_hit_armor");
   }
 
   if(isexplosivedamagemod(params.smeansofdeath)) {
@@ -47,7 +47,7 @@ function private on_damaged(params) {
     return;
   }
 
-  if(istrue(self._blackboard.var_250ed7a967617e7f)) {
+  if(istrue(self._blackboard.zombieinstagger)) {
     return;
   }
 
@@ -88,7 +88,7 @@ function private stagger() {
   self notify("stagger");
   self endon("stagger");
   self endon("death");
-  self._blackboard.var_250ed7a967617e7f = 1;
+  self._blackboard.zombieinstagger = 1;
   self.var_38f29f59521de99a = gettime() + 10000;
   self.var_2379db736392918f = 0;
   self.var_bb4ae283eb0dc296 = gettime() + 5000;
@@ -96,7 +96,7 @@ function private stagger() {
   self.var_38f29f59521de99a = gettime() + 10000;
   self.var_2379db736392918f = 0;
   self.var_bb4ae283eb0dc296 = gettime() + 5000;
-  self._blackboard.var_250ed7a967617e7f = 0;
+  self._blackboard.zombieinstagger = 0;
 }
 
 function private function_8153209a5ebfc684(location) {

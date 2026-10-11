@@ -53,26 +53,26 @@ function debug_reflection_probes() {
 }
 
 function create_reflection_object() {
-  self.var_93a1cb702f026ba7 = spawn("<dev string:x53>", self getEye() + anglesToForward(self.angles) * 100);
-  self.var_93a1cb702f026ba7 setModel("<dev string:x1c>");
-  self.var_93a1cb702f026ba7.origin = self getEye() + anglesToForward(self getplayerangles()) * 100;
-  object = self.var_93a1cb702f026ba7;
+  self.debug_reflectionobject = spawn("<dev string:x53>", self getEye() + anglesToForward(self.angles) * 100);
+  self.debug_reflectionobject setModel("<dev string:x1c>");
+  self.debug_reflectionobject.origin = self getEye() + anglesToForward(self getplayerangles()) * 100;
+  object = self.debug_reflectionobject;
   object.offset = 100;
   object.lastoffset = object.offset;
 }
 
 function function_da5718b2a8be7b0b() {
   if(level.debug.reflection == 1 || level.debug.reflection == 3) {
-    self.var_93a1cb702f026ba7 delete();
+    self.debug_reflectionobject delete();
   }
 }
 
 function debug_reflection_buttons() {
-  if(!isDefined(self.var_93a1cb702f026ba7)) {
+  if(!isDefined(self.debug_reflectionobject)) {
     return;
   }
 
-  object = self.var_93a1cb702f026ba7;
+  object = self.debug_reflectionobject;
 
   if(self buttonPressed("<dev string:x63>")) {
     object.offset += 50;

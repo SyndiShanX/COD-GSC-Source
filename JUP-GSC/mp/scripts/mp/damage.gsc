@@ -142,10 +142,10 @@ function callback_playerdamage_internal(einflictor, eattacker, victim, idamage, 
   if(getdvarint(@ "hash_c36efcba0f21f379", 0) == 1 && isDefined(objweapon)) {
     baseweaponref = weapon::getweaponrootname(objweapon.basename);
     weaponlootid = scripts\cp_mp\utility\loot::getlootidfromref(baseweaponref);
-    var_b2a4bce10dbbb085 = scripts\cp_mp\utility\loot::function_20be2251dd0a8076(weaponlootid);
+    isbanned = scripts\cp_mp\utility\loot::function_20be2251dd0a8076(weaponlootid);
     var_eaa882d1344e713 = weaponlootid == 39598 && level.gametype == "gold_gun" && istrue(eattacker.raygun);
 
-    if(var_b2a4bce10dbbb085 && !var_eaa882d1344e713) {
+    if(isbanned && !var_eaa882d1344e713) {
       victim = eattacker;
     }
   }
@@ -441,16 +441,16 @@ function callback_playerdamage_internal(einflictor, eattacker, victim, idamage, 
   }
 
   idamage = handleriotshieldhits(einflictor, victim, eattacker, idamage, smeansofdeath, objweapon, vpoint, vdir, shitloc, idflags, iskillstreakweapon);
-  [idamage, var_1da1a66b5c6a06a7] = modifydamagegeneral(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdir, shitloc, psoffsettime, var_be4285b26ed99ab1, partname);
-  [idamage, var_1da1a66b5c6a06a7] = function_694d74d8b5ac556f(eattacker, idamage, var_1da1a66b5c6a06a7, smeansofdeath, objweapon, victim);
+  [idamage, lightarmordamage] = modifydamagegeneral(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdir, shitloc, psoffsettime, var_be4285b26ed99ab1, partname);
+  [idamage, lightarmordamage] = function_694d74d8b5ac556f(eattacker, idamage, lightarmordamage, smeansofdeath, objweapon, victim);
 
-  if(idamage == 0 && var_1da1a66b5c6a06a7 == 0) {
+  if(idamage == 0 && lightarmordamage == 0) {
     function_403e958ecd04f255(victim, "iDamage == 0 && lightArmorDamage == 0");
     return;
   }
 
   if(dragonsbreath::isdragonsbreathweapon(objweapon) && !isspreadweapon(objweapon)) {
-    victim thread function_c206c109a26f598(idamage + var_1da1a66b5c6a06a7, eattacker, objweapon, shitloc);
+    victim thread function_c206c109a26f598(idamage + lightarmordamage, eattacker, objweapon, shitloc);
   } else if(crossbow::isthermitecrossbow(objweapon)) {
     victim thread function_5a05899bb304a6d4(shitloc, scripts\cp_mp\crossbow::function_42b0dfeb350f6ea5());
   }
@@ -458,11 +458,11 @@ function callback_playerdamage_internal(einflictor, eattacker, victim, idamage, 
   if(!istrue(victim.donotmodifydamage)) {
     modifieddamageresults = cac_modified_damage(victim, eattacker, idamage, smeansofdeath, objweapon, vpoint, vdir, shitloc, einflictor, 0, idflags, iskillstreakweapon, headshotmultiplier);
     idamage = modifieddamageresults[0];
-    var_986b2e0350629522 = modifieddamageresults[1];
-    armorhit = var_1da1a66b5c6a06a7 != 0 || var_986b2e0350629522 != 0;
+    heavyarmordamage = modifieddamageresults[1];
+    armorhit = lightarmordamage != 0 || heavyarmordamage != 0;
     shitloc = modifieddamageresults[2];
   } else {
-    var_986b2e0350629522 = 0;
+    heavyarmordamage = 0;
     armorhit = 0;
   }
 
@@ -541,7 +541,7 @@ function callback_playerdamage_internal(einflictor, eattacker, victim, idamage, 
 
   if(isDefined(objweapon)) {
     if(isDefined(eattacker) && isPlayer(eattacker)) {
-      if(eattacker function_f3bb4f4911a1beb2("escort", "isDogZombie") && is_equal(eattacker, victim) && smeansofdeath != "MOD_SUICIDE" && (!isDefined(objweapon.basename) || objweapon.basename != "jackolantern")) {
+      if(eattacker callsharedfunc("escort", "isDogZombie") && is_equal(eattacker, victim) && smeansofdeath != "MOD_SUICIDE" && (!isDefined(objweapon.basename) || objweapon.basename != "jackolantern")) {
         idamage = 0;
       }
 
@@ -550,7 +550,7 @@ function callback_playerdamage_internal(einflictor, eattacker, victim, idamage, 
         victim setscriptablepartstate("shockStickVfx", "vfx_start", 0);
       }
 
-      if(victim function_f3bb4f4911a1beb2("escort", "isDogZombie") && istrue(victim.var_286fe84c87d28222)) {
+      if(victim callsharedfunc("escort", "isDogZombie") && istrue(victim.var_286fe84c87d28222)) {
         idamage *= 0.5;
       }
     }
@@ -560,7 +560,7 @@ function callback_playerdamage_internal(einflictor, eattacker, victim, idamage, 
     eattacker.lifetimedamage += idamage;
   }
 
-  if(isDefined(victim) && isPlayer(victim) && !function_483cc81bff18273b(victim)) {
+  if(isDefined(victim) && isPlayer(victim) && !issimulationplayer(victim)) {
     victim.var_489f22c08f63bc0f += idamage;
   }
 
@@ -603,9 +603,9 @@ function callback_playerdamage_internal(einflictor, eattacker, victim, idamage, 
     }
   }
 
-  preplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdamagedir, shitloc, psoffsettime, modelindex, partname, var_1da1a66b5c6a06a7);
+  preplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdamagedir, shitloc, psoffsettime, modelindex, partname, lightarmordamage);
   victim finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smeansofdeath, fdistance, objweapon, vpoint, vdamagedir, shitloc, psoffsettime, modelindex, partname, armorhit);
-  postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdamagedir, shitloc, psoffsettime, modelindex, partname, var_1da1a66b5c6a06a7, var_986b2e0350629522, var_fcdf19e3cdd29669, iskillstreakweapon);
+  postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdamagedir, shitloc, psoffsettime, modelindex, partname, lightarmordamage, heavyarmordamage, var_fcdf19e3cdd29669, iskillstreakweapon);
 }
 
 function dragonsbreathhitloccollection(hitloc, eattacker, objweapon) {
@@ -642,8 +642,8 @@ function dragonsbreathhitloccollection(hitloc, eattacker, objweapon) {
   dragonsbreath::function_56a694363da738ac(objweapon);
 }
 
-function preplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdir, shitloc, psoffsettime, modelindex, partname, var_1da1a66b5c6a06a7) {
-  if(function_483cc81bff18273b(victim)) {
+function preplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdir, shitloc, psoffsettime, modelindex, partname, lightarmordamage) {
+  if(issimulationplayer(victim)) {
     return;
   }
 
@@ -663,7 +663,7 @@ function preplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smean
 
   if(isai(self)) {
     assert(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["<dev string:xaf>"]));
-    self[[level.bot_funcs["on_damaged"]]](eattacker, idamage, smeansofdeath, objweapon, einflictor, shitloc, vpoint, var_1da1a66b5c6a06a7);
+    self[[level.bot_funcs["on_damaged"]]](eattacker, idamage, smeansofdeath, objweapon, einflictor, shitloc, vpoint, lightarmordamage);
   }
 
   if(isDefined(einflictor) && isDefined(einflictor.streakinfo) && isDefined(einflictor.streakinfo.hits)) {
@@ -683,7 +683,7 @@ function preplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smean
     victim thread emitfalldamage(idamage);
   }
 
-  logattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, var_1da1a66b5c6a06a7);
+  logattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, lightarmordamage);
 
   if(isDefined(einflictor) && isDefined(einflictor.owner) && isDefined(einflictor.owner.team) && einflictor.owner.team != victim.team) {
     victim.lastdamagewasfromenemy = 1;
@@ -725,10 +725,10 @@ function preplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smean
 
 function function_2f5049bbe3c5e733(objweapon, meansofdeath) {
   var_f2c2804490dd2160 = isDefined(objweapon) && (weapontype(objweapon) == "bullet" || weapontype(objweapon) == "projectile");
-  return game_utility::function_ba5574c7f287c587() && (var_f2c2804490dd2160 || meansofdeath == "MOD_MELEE");
+  return game_utility::ismagellanmode() && (var_f2c2804490dd2160 || meansofdeath == "MOD_MELEE");
 }
 
-function postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdir, shitloc, psoffsettime, modelindex, partname, var_1da1a66b5c6a06a7, var_986b2e0350629522, var_fcdf19e3cdd29669, iskillstreakweapon) {
+function postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, vpoint, vdir, shitloc, psoffsettime, modelindex, partname, lightarmordamage, heavyarmordamage, var_fcdf19e3cdd29669, iskillstreakweapon) {
   originaldamage = idamage;
   bisbulletdamage = utility::isbulletdamage(smeansofdeath);
 
@@ -762,23 +762,23 @@ function postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smea
       if(idamage >= self.health) {
         idamage = self.health - 1;
       } else {
-        var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
-        self[[agent_utility::agentfunc("on_damaged_finished")]](einflictor, eattacker, idamage, idflags, smeansofdeath, var_366b0ecc2f28aead, vpoint, vdir, shitloc, psoffsettime);
+        fullweaponstring = getcompleteweaponname(objweapon);
+        self[[agent_utility::agentfunc("on_damaged_finished")]](einflictor, eattacker, idamage, idflags, smeansofdeath, fullweaponstring, vpoint, vdir, shitloc, psoffsettime);
       }
     } else {
-      var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
-      self[[agent_utility::agentfunc("on_damaged_finished")]](einflictor, eattacker, idamage, idflags, smeansofdeath, var_366b0ecc2f28aead, vpoint, vdir, shitloc, psoffsettime);
+      fullweaponstring = getcompleteweaponname(objweapon);
+      self[[agent_utility::agentfunc("on_damaged_finished")]](einflictor, eattacker, idamage, idflags, smeansofdeath, fullweaponstring, vpoint, vdir, shitloc, psoffsettime);
     }
   } else {
-    challenges::function_4ab6f9fba6bb9cc5(self, idamage, var_1da1a66b5c6a06a7);
+    challenges::function_4ab6f9fba6bb9cc5(self, idamage, lightarmordamage);
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() && isPlayer(eattacker)) {
-    scripts\cp_mp\challenges::function_f4d8c689aaf296e5(eattacker, objweapon, idamage, var_1da1a66b5c6a06a7);
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode() && isPlayer(eattacker)) {
+    scripts\cp_mp\challenges::function_f4d8c689aaf296e5(eattacker, objweapon, idamage, lightarmordamage);
   }
 
-  handledamagefeedback(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, var_1da1a66b5c6a06a7, var_986b2e0350629522, iskillstreakweapon, partname, vpoint);
-  handledamageeffects(idamage, eattacker, smeansofdeath, vpoint, var_1da1a66b5c6a06a7, objweapon);
+  handledamagefeedback(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, lightarmordamage, heavyarmordamage, iskillstreakweapon, partname, vpoint);
+  handledamageeffects(idamage, eattacker, smeansofdeath, vpoint, lightarmordamage, objweapon);
 
   if(bisbulletdamage) {
     victim thread battlechatter_mp::adddamagetaken(eattacker, objweapon, idamage);
@@ -815,7 +815,7 @@ function postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smea
     eattacker.pers["participation"] = 1;
   }
 
-  weapon_utility::function_c9e5c511b923a42f(idamage, eattacker, victim, smeansofdeath, shitloc, einflictor, vpoint, var_1da1a66b5c6a06a7, var_986b2e0350629522);
+  weapon_utility::function_c9e5c511b923a42f(idamage, eattacker, victim, smeansofdeath, shitloc, einflictor, vpoint, lightarmordamage, heavyarmordamage);
 
   if(isDefined(level.cinematic_replay_recording) && isPlayer(einflictor)) {
     recordstruct = spawnStruct();
@@ -873,7 +873,7 @@ function postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smea
   }
 
   if(isDefined(level.onplayerdamaged)) {
-    victim thread[[level.onplayerdamaged]](einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, var_fcdf19e3cdd29669, vpoint, vdir, shitloc, psoffsettime, modelindex, partname, var_1da1a66b5c6a06a7);
+    victim thread[[level.onplayerdamaged]](einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, var_fcdf19e3cdd29669, vpoint, vdir, shitloc, psoffsettime, modelindex, partname, lightarmordamage);
   }
 
   namespace_fd8ff6a1c9b4f3c7::function_d1e4826b0a4db6ee(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon, var_fcdf19e3cdd29669, vpoint, vdir, shitloc, psoffsettime, modelindex, partname);
@@ -929,7 +929,7 @@ function postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smea
 
   if(isPlayer(victim) && isPlayer(eattacker)) {
     if(bisbulletdamage && eattacker _hasperk("specialty_combat_scout")) {
-      attackerdamage = istrue(idamage > 0 || var_1da1a66b5c6a06a7 > 0 || var_986b2e0350629522 > 0);
+      attackerdamage = istrue(idamage > 0 || lightarmordamage > 0 || heavyarmordamage > 0);
       victim thread function_84c8fc967497800(eattacker, attackerdamage, objweapon);
     }
   }
@@ -944,7 +944,7 @@ function postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smea
 
   assertex(originaldamage == idamage, "<dev string:x11a>");
   sparams = {
-    #var_1da1a66b5c6a06a7: var_1da1a66b5c6a06a7, #partname: partname, #shitloc: shitloc, #vdir: vdir, #vpoint: vpoint, #objweapon: objweapon, #smeansofdeath: smeansofdeath, #idflags: idflags, #idamage: idamage, #einflictor: einflictor, #eattacker: eattacker, #victim: victim
+    #lightarmordamage: lightarmordamage, #partname: partname, #shitloc: shitloc, #vdir: vdir, #vpoint: vpoint, #objweapon: objweapon, #smeansofdeath: smeansofdeath, #idflags: idflags, #idamage: idamage, #einflictor: einflictor, #eattacker: eattacker, #victim: victim
   };
   callback::callback("player_damaged", sparams);
 }
@@ -998,12 +998,12 @@ function private function_bf56dbd2a1035901(knockdownintensity, isvehiclehit, vel
     self function_babd8af3054d8abe("torso_upper", velocity);
     wait 3;
   } else {
-    self function_360874d9808f0724();
+    self startliveragdoll();
     wait utility::ter_op(knockdownintensity == 2, 5, 3);
   }
 
   class::setthirdpersonview();
-  self function_d87e1768229d0e3e();
+  self stopliveragdoll();
 }
 
 function meleestagger_anglesviewattack(victim, attacker) {
@@ -1165,7 +1165,7 @@ function function_7b2f2a8a9aa41d44(weaponbasename) {
 
 function cac_modified_damage(victim, attacker, damage, smeansofdeath, objweapon, impactpoint, impactdir, shitloc, inflictor, query, idflags, iskillstreakweapon, headshotmultiplier) {
   assert(isPlayer(victim) || isagent(victim));
-  assert(function_483cc81bff18273b(victim) || isDefined(victim.team));
+  assert(issimulationplayer(victim) || isDefined(victim.team));
   victim notify("damage_begin", attacker);
 
   if(!isDefined(headshotmultiplier)) {
@@ -1173,7 +1173,7 @@ function cac_modified_damage(victim, attacker, damage, smeansofdeath, objweapon,
   }
 
   damageadd = 0;
-  var_986b2e0350629522 = 0;
+  heavyarmordamage = 0;
   var_7820f81ee1adf7b9 = victim armor::hasarmor();
   var_c258168e026adb0f = victim armor::hashelmet();
 
@@ -1292,14 +1292,14 @@ function cac_modified_damage(victim, attacker, damage, smeansofdeath, objweapon,
 
   if(victim heavyarmor::hasheavyarmor()) {
     var_d089499e6152ef2c = heavyarmor::heavyarmormodifydamage(victim, attacker, damage, damageadd, smeansofdeath, objweapon.basename, impactpoint, impactdir, shitloc, inflictor, query);
-    var_986b2e0350629522 = var_d089499e6152ef2c[0] > 0;
+    heavyarmordamage = var_d089499e6152ef2c[0] > 0;
     damage = var_d089499e6152ef2c[1];
     damageadd = var_d089499e6152ef2c[2];
   }
 
   if(lightarmor::haslightarmor(victim)) {
     var_d089499e6152ef2c = lightarmor::lightarmor_modifydamage(victim, attacker, damage, damageadd, smeansofdeath, objweapon.basename, impactpoint, impactdir, shitloc, inflictor, query);
-    var_1da1a66b5c6a06a7 = var_d089499e6152ef2c[0] > 0;
+    lightarmordamage = var_d089499e6152ef2c[0] > 0;
     damage = var_d089499e6152ef2c[1];
     damageadd = var_d089499e6152ef2c[2];
   }
@@ -1346,7 +1346,7 @@ function cac_modified_damage(victim, attacker, damage, smeansofdeath, objweapon,
     }
   }
 
-  return [damage, var_986b2e0350629522, shitloc];
+  return [damage, heavyarmordamage, shitloc];
 }
 
 function modify_blast_shield_damage(damage, attacker, victim, var_463424d8c7b063d4) {
@@ -2077,7 +2077,7 @@ function isfriendlyfireprotectedperiod(attacker) {
     return false;
   }
 
-  if(game_utility::isanymlgmatch() && !istrue(level.var_ec2fb549b15ad827)) {
+  if(game_utility::isanymlgmatch() && !istrue(level.leagueplaymatch)) {
     return false;
   }
 
@@ -2140,8 +2140,8 @@ function modifyfalldamage(victim, idamage, idflags, smeansofdeath) {
     } else if(idflags & 32768 && modifieddamage >= victim.health) {
       modifieddamage = victim.health - 1;
     } else if(victim ismutationgamemodezombie()) {
-      if(victim function_f3bb4f4911a1beb2("game", "hasMutationModePerk02")) {
-        victim function_f3bb4f4911a1beb2("game", "activateMutationModePerk02");
+      if(victim callsharedfunc("game", "hasMutationModePerk02")) {
+        victim callsharedfunc("game", "activateMutationModePerk02");
       }
 
       modifieddamage = 0;
@@ -2318,7 +2318,7 @@ function function_49f3d4de0e352093(inflictor, attacker, victim, objweapon, smean
     modifieddamage = at_mine::at_mine_modified_damage(victim, inflictor, objweapon, smeansofdeath, modifieddamage);
     modifieddamage = cluster_spike::function_723aa6329b751bc7(victim, inflictor, objweapon, smeansofdeath, modifieddamage);
 
-    if(ismutationgamemode() && attacker function_f3bb4f4911a1beb2("game", "hasMutationModePerk02") && isDefined(objweapon) && isDefined(objweapon.basename) && objweapon.basename == "jup_mutant_leap_emp_impact_mp" && istrue(objweapon.var_f08578daebccf4a2)) {
+    if(ismutationgamemode() && attacker callsharedfunc("game", "hasMutationModePerk02") && isDefined(objweapon) && isDefined(objweapon.basename) && objweapon.basename == "jup_mutant_leap_emp_impact_mp" && istrue(objweapon.var_f08578daebccf4a2)) {
       modifieddamage *= getdvarfloat(@ "hash_2c41f83a90ac7dcf", 1);
     }
 
@@ -2477,25 +2477,25 @@ function modifydamagegeneral(einflictor, eattacker, victim, idamage, idflags, sm
     idamage = int([[level.modifyplayerdamage]](einflictor, victim, eattacker, idamage, smeansofdeath, objweapon, vpoint, vdir, shitloc, idflags, var_be4285b26ed99ab1));
   }
 
-  [idamage, var_1da1a66b5c6a06a7] = armor::function_90ce8eb3ddaa4943(eattacker, einflictor, victim, idamage, objweapon, smeansofdeath, shitloc, idflags, var_be4285b26ed99ab1, unmodifieddamage, partname);
+  [idamage, lightarmordamage] = armor::function_90ce8eb3ddaa4943(eattacker, einflictor, victim, idamage, objweapon, smeansofdeath, shitloc, idflags, var_be4285b26ed99ab1, unmodifieddamage, partname);
 
   if(isPlayer(eattacker) && eattacker != self) {
     if(isbrstylegametype() && !isbot(self)) {
-      eattacker thread namespace_4925be476a433a59::function_e08012bdba393c79(objweapon, var_1da1a66b5c6a06a7);
-      eattacker thread namespace_4925be476a433a59::function_f9b01f503cdbfd7d(var_1da1a66b5c6a06a7);
+      eattacker thread namespace_4925be476a433a59::function_e08012bdba393c79(objweapon, lightarmordamage);
+      eattacker thread namespace_4925be476a433a59::function_f9b01f503cdbfd7d(lightarmordamage);
     }
   }
 
-  if(var_1da1a66b5c6a06a7 > 0 && isPlayer(eattacker)) {
+  if(lightarmordamage > 0 && isPlayer(eattacker)) {
     if(shouldrecorddamagestats(eattacker)) {
-      eattacker stats::incpersstat("damage", var_1da1a66b5c6a06a7);
-      eattacker codcasterclientmatchdata::function_d16498b27251da56(1, var_1da1a66b5c6a06a7);
+      eattacker stats::incpersstat("damage", lightarmordamage);
+      eattacker codcasterclientmatchdata::function_d16498b27251da56(1, lightarmordamage);
 
       if(isDefined(eattacker scripts\mp\utility\stats::getpersstat("friendlyDamageDone")) && victim.team == eattacker.team) {
-        eattacker stats::incpersstat("friendlyDamageDone", var_1da1a66b5c6a06a7);
+        eattacker stats::incpersstat("friendlyDamageDone", lightarmordamage);
       }
     } else if(isDefined(level.onattackerdamagenottracked)) {
-      eattacker[[level.onattackerdamagenottracked]](var_1da1a66b5c6a06a7);
+      eattacker[[level.onattackerdamagenottracked]](lightarmordamage);
     }
   }
 
@@ -2542,7 +2542,7 @@ function modifydamagegeneral(einflictor, eattacker, victim, idamage, idflags, sm
     }
   }
 
-  if(isDefined(eattacker) && eattacker ismutationgamemodezombie() && isDefined(objweapon) && isDefined(objweapon.basename) && objweapon.basename == "jup_mutant_leap_impact_mp" && istrue(eattacker.var_f56a71aaddbdd434) && !istrue(objweapon.var_f08578daebccf4a2)) {
+  if(isDefined(eattacker) && eattacker ismutationgamemodezombie() && isDefined(objweapon) && isDefined(objweapon.basename) && objweapon.basename == "jup_mutant_leap_impact_mp" && istrue(eattacker.smalljump) && !istrue(objweapon.var_f08578daebccf4a2)) {
     var_67e9622d1fd32306 = getdvarint(@ "hash_37ef7e0a0085a948", 100);
     idamage = int(clamp(idamage, 0, var_67e9622d1fd32306));
   }
@@ -2550,11 +2550,11 @@ function modifydamagegeneral(einflictor, eattacker, victim, idamage, idflags, sm
   var_1686068dab6149a3 = objweapon.basename == "jup_jp23_me_spear_mp" && !eattacker isalternatemode("jup_jp23_me_spear_mp", 0, 0);
 
   if((objweapon.basename == "throwingknife_mp" || var_1686068dab6149a3) && isbrstylegametype()) {
-    [idamage, var_1da1a66b5c6a06a7] = scripts\mp\equipment\throwing_knife_mp::function_4d6d6bc790611975(eattacker, einflictor, victim, idamage, objweapon, smeansofdeath, shitloc, idflags, var_be4285b26ed99ab1, unmodifieddamage, partname, var_1da1a66b5c6a06a7);
+    [idamage, lightarmordamage] = scripts\mp\equipment\throwing_knife_mp::function_4d6d6bc790611975(eattacker, einflictor, victim, idamage, objweapon, smeansofdeath, shitloc, idflags, var_be4285b26ed99ab1, unmodifieddamage, partname, lightarmordamage);
   }
 
   if(utility::issharedfuncdefined("helmet", "modifyHelmetDamage")) {
-    [idamage, var_1da1a66b5c6a06a7] = utility::function_f3bb4f4911a1beb2("helmet", "modifyHelmetDamage", eattacker, victim, idamage, var_1da1a66b5c6a06a7, objweapon, shitloc, partname, smeansofdeath);
+    [idamage, lightarmordamage] = utility::callsharedfunc("helmet", "modifyHelmetDamage", eattacker, victim, idamage, lightarmordamage, objweapon, shitloc, partname, smeansofdeath);
   }
 
   if(isDefined(objweapon.basename) && objweapon.basename == "jup_jp26_la_mike32_mp" && objweapon hasattachment("jup_ammo_44mm_slug")) {
@@ -2576,7 +2576,7 @@ function modifydamagegeneral(einflictor, eattacker, victim, idamage, idflags, sm
     }
   }
 
-  return [idamage, var_1da1a66b5c6a06a7];
+  return [idamage, lightarmordamage];
 }
 
 function handleriotshieldhits(einflictor, victim, eattacker, idamage, smeansofdeath, objweapon, vpoint, vdir, shitloc, idflags, iskillstreakweapon) {
@@ -2625,7 +2625,7 @@ function handleriotshieldhits(einflictor, victim, eattacker, idamage, smeansofde
     } else {
       modifieddamageresults = cac_modified_damage(victim, eattacker, idamage, smeansofdeath, objweapon, vpoint, vdir, shitloc, einflictor, 0, idflags);
       shielddamage = modifieddamageresults[0];
-      var_986b2e0350629522 = modifieddamageresults[1];
+      heavyarmordamage = modifieddamageresults[1];
       shitloc = modifieddamageresults[2];
     }
 
@@ -2740,7 +2740,7 @@ function filterdamage(einflictor, eattacker, victim, idamage, smeansofdeath, obj
     return "zombieFriendlyFire";
   }
 
-  if(function_d75b73c443421047() && (isDefined(eattacker) && istrue(eattacker.var_fa9f4c933e6df36d) || isDefined(victim) && istrue(victim.var_fa9f4c933e6df36d))) {
+  if(function_d75b73c443421047() && (isDefined(eattacker) && istrue(eattacker.isinsafezone) || isDefined(victim) && istrue(victim.isinsafezone))) {
     var_69f6b6b4f7e1e9cf = 1;
 
     if(istrue(victim.inlaststand) && is_equal(smeansofdeath, "MOD_TRIGGER_HURT")) {
@@ -2802,26 +2802,26 @@ function filterdamage(einflictor, eattacker, victim, idamage, smeansofdeath, obj
   }
 }
 
-function logattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, var_1da1a66b5c6a06a7) {
+function logattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, lightarmordamage) {
   if(isDefined(smeansofdeath) && smeansofdeath == "MOD_FALLING") {
     eattacker = victim;
   }
 
   if(isDefined(eattacker) && (isPlayer(eattacker) || isagent(eattacker))) {
-    addattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, var_1da1a66b5c6a06a7);
+    addattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, lightarmordamage);
   }
 
   if(isDefined(eattacker) && !isPlayer(eattacker) && isDefined(eattacker.owner) && (!isDefined(eattacker.scrambled) || !eattacker.scrambled)) {
-    addattacker(victim, eattacker.owner, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, var_1da1a66b5c6a06a7);
+    addattacker(victim, eattacker.owner, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, lightarmordamage);
   } else if(isDefined(eattacker) && !isPlayer(eattacker) && isDefined(eattacker.secondowner) && isDefined(eattacker.scrambled) && eattacker.scrambled) {
-    addattacker(victim, eattacker.secondowner, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, var_1da1a66b5c6a06a7);
+    addattacker(victim, eattacker.secondowner, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, lightarmordamage);
   }
 
   if(isDefined(einflictor) && isDefined(einflictor.owner)) {
     lethalteam = isDefined(einflictor.owner.team) && einflictor.owner.team != victim.team || level.friendlyfire == 1;
 
     if(lethalteam && isDefined(einflictor.owner.guid) && !isDefined(self.attackerdata[einflictor.owner.guid])) {
-      addattacker(victim, einflictor.owner, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, var_1da1a66b5c6a06a7);
+      addattacker(victim, einflictor.owner, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, lightarmordamage);
     }
   }
 
@@ -2858,7 +2858,7 @@ function logattackerkillstreak(victim, idamage, eattacker, vdir, vpoint, smeanso
 
 function loggrenadedata(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon) {
   if((issubstr(smeansofdeath, "MOD_EXPLOSIVE") || issubstr(smeansofdeath, "MOD_PROJECTILE")) && isDefined(einflictor) && isDefined(eattacker)) {
-    var_366b0ecc2f28aead = getcompleteweaponname(objweapon);
+    fullweaponstring = getcompleteweaponname(objweapon);
     victim.explosiveinfo = [];
     victim.explosiveinfo["damageTime"] = gettime();
     victim.explosiveinfo["damageId"] = einflictor getentitynumber();
@@ -2868,7 +2868,7 @@ function loggrenadedata(einflictor, eattacker, victim, idamage, smeansofdeath, o
     victim.explosiveinfo["cookedKill"] = 0;
     victim.explosiveinfo["throwbackKill"] = 0;
     victim.explosiveinfo["suicideGrenadeKill"] = 0;
-    victim.explosiveinfo["weapon"] = var_366b0ecc2f28aead;
+    victim.explosiveinfo["weapon"] = fullweaponstring;
     isfrag = issubstr(objweapon.basename, "frag_");
 
     if(eattacker != victim) {
@@ -2894,7 +2894,7 @@ function loggrenadedata(einflictor, eattacker, victim, idamage, smeansofdeath, o
     victim.explosiveinfo["stickFriendlyKill"] = isDefined(einflictor.isstuck) && einflictor.isstuck == "friendly";
 
     if(isPlayer(eattacker) && eattacker != self && game_utility::getgametype() != "aliens") {
-      updateinflictorstat(einflictor, eattacker, var_366b0ecc2f28aead);
+      updateinflictorstat(einflictor, eattacker, fullweaponstring);
     }
   }
 }
@@ -2951,13 +2951,13 @@ function function_c54b2cc2e762c201(eattacker, etargethit, idamage, vpoint, waski
   thread function_7a6bbb24289296e7(eattacker, var_254ce4e343d1f7de, var_a3732517126407b2, idamage, vpoint);
 }
 
-function handledamagefeedback(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, var_1da1a66b5c6a06a7, var_986b2e0350629522, iskillstreakweapon, partname, vpoint) {
-  if(function_483cc81bff18273b(eattacker) || function_483cc81bff18273b(victim)) {
+function handledamagefeedback(einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, lightarmordamage, heavyarmordamage, iskillstreakweapon, partname, vpoint) {
+  if(issimulationplayer(eattacker) || issimulationplayer(victim)) {
     return;
   }
 
   if(isDefined(victim.handledamagefeedback)) {
-    [[victim.handledamagefeedback]](einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, var_1da1a66b5c6a06a7, var_986b2e0350629522, iskillstreakweapon);
+    [[victim.handledamagefeedback]](einflictor, eattacker, victim, idamage, smeansofdeath, objweapon, shitloc, idflags, lightarmordamage, heavyarmordamage, iskillstreakweapon);
     return;
   }
 
@@ -2973,17 +2973,17 @@ function handledamagefeedback(einflictor, eattacker, victim, idamage, smeansofde
 
   typehit = "standard";
 
-  if(isDefined(damager) && damager != victim && idamage + var_1da1a66b5c6a06a7 + var_986b2e0350629522 > 0 && (!isDefined(shitloc) || shitloc != "shield")) {
+  if(isDefined(damager) && damager != victim && idamage + lightarmordamage + heavyarmordamage > 0 && (!isDefined(shitloc) || shitloc != "shield")) {
     waskilled = !victim player_utility::_isalive() || isagent(victim) && idamage >= victim.health;
     var_b44e627d6a911f55 = game_utility::function_fa7bfcc1d68b7b73();
     var_dc726e8cc0b003a3 = isDefined(victim.platecarrierlevel) && victim.platecarrierlevel > 2;
     var_a2ffd9894fd368c5 = isDefined(victim.var_4045f099f3da4bd) && victim.var_4045f099f3da4bd == "brloot_plate_carrier_tempered";
-    damagecaused = idamage + var_1da1a66b5c6a06a7 + var_986b2e0350629522;
+    damagecaused = idamage + lightarmordamage + heavyarmordamage;
     var_135003274a4cc703 = 0;
     var_9c2547405b5b2cbf = 0;
 
     if(utility::issharedfuncdefined("helmet", "helmet_wasBroke")) {
-      var_9c2547405b5b2cbf = utility::function_f3bb4f4911a1beb2("helmet", "helmet_wasBroke", damager);
+      var_9c2547405b5b2cbf = utility::callsharedfunc("helmet", "helmet_wasBroke", damager);
     }
 
     if(istrue(var_dc726e8cc0b003a3) && isDefined(victim.armorhealth)) {
@@ -3041,7 +3041,7 @@ function handledamagefeedback(einflictor, eattacker, victim, idamage, smeansofde
       }
     } else if(helmet_washit(damager)) {
       typehit = "hithelmetlight";
-    } else if(var_1da1a66b5c6a06a7 > 0) {
+    } else if(lightarmordamage > 0) {
       typehit = "hitarmorlight";
     } else if((smeansofdeath == "MOD_MELEE" || isthrowingknife(objweapon) || isthrowingstar(objweapon)) && victim perk::_hasperk("specialty_close_quarter")) {
       typehit = "hitcqc";
@@ -3214,7 +3214,7 @@ function handledamagefeedback(einflictor, eattacker, victim, idamage, smeansofde
         }
       }
 
-      armorplatecount = armor::function_77b7145c92102847(victim armor::function_ac266fc218266d08() + var_1da1a66b5c6a06a7);
+      armorplatecount = armor::function_77b7145c92102847(victim armor::function_ac266fc218266d08() + lightarmordamage);
       damager damagefeedback::updatedamagefeedback(typehit, waskilled, headshot, hitmarkertype, suppressaudio, undefined, var_249fca7089cd498f, armorplatecount, var_203066c6662e1f2d);
 
       if(getdvarint(@ "hash_8a8ff6ed00ccc7a", 0) && (isPlayer(victim) || isagent(victim))) {
@@ -3232,8 +3232,8 @@ function handledamagefeedback(einflictor, eattacker, victim, idamage, smeansofde
   }
 }
 
-function handledamageeffects(idamage, eattacker, smeansofdeath, vpoint, var_1da1a66b5c6a06a7, objweapon) {
-  damage_effects::damageeffects(idamage, eattacker, smeansofdeath, vpoint, var_1da1a66b5c6a06a7, objweapon);
+function handledamageeffects(idamage, eattacker, smeansofdeath, vpoint, lightarmordamage, objweapon) {
+  damage_effects::damageeffects(idamage, eattacker, smeansofdeath, vpoint, lightarmordamage, objweapon);
 }
 
 function lethalequipmentdamagemod(einflictor, eattacker, victim, idamage, idflags, smeansofdeath, objweapon) {
@@ -3276,7 +3276,7 @@ function lethalequipmentdamagemod(einflictor, eattacker, victim, idamage, idflag
     var_7e2c53b0bcf117d9.incvalue = min(victim.health, idamage);
     var_7e2c53b0bcf117d9.variantid = -1;
     var_7e2c53b0bcf117d9.weaponobj = objweapon;
-    eattacker namespace_c45ac99c4997e722::function_80820d6d364c1836("callback_update_weapon_stats", var_7e2c53b0bcf117d9);
+    eattacker telemetry_utils::function_80820d6d364c1836("callback_update_weapon_stats", var_7e2c53b0bcf117d9);
   }
 
   return idamage;
@@ -3533,7 +3533,7 @@ function playerkilled_fixupattacker(deathdata) {
     }
   }
 
-  if(isDefined(deathdata.inflictor) && isDefined(deathdata.inflictor.var_9328ded553f15d2b) && !istrue(player_utility::playersareenemies(deathdata.victim, deathdata.inflictor.var_9328ded553f15d2b))) {
+  if(isDefined(deathdata.inflictor) && isDefined(deathdata.inflictor.burndownattacker) && !istrue(player_utility::playersareenemies(deathdata.victim, deathdata.inflictor.burndownattacker))) {
     deathdata.attacker = self;
   }
 
@@ -3812,7 +3812,7 @@ function playerkilled_sharedlogic_early(deathdata) {
       obitplayers = level.var_c5877dbe60fddbf6;
     }
 
-    if(obitmeansofdeath == "MOD_TRIGGER_HURT" && isDefined(level.var_c8936f922b7d32a1) && level.var_c8936f922b7d32a1.size > 0 && isDefined(deathdata.inflictor) && function_f3bb4f4911a1beb2("limbo", "isDeathBall", deathdata.inflictor)) {
+    if(obitmeansofdeath == "MOD_TRIGGER_HURT" && isDefined(level.var_c8936f922b7d32a1) && level.var_c8936f922b7d32a1.size > 0 && isDefined(deathdata.inflictor) && callsharedfunc("limbo", "isDeathBall", deathdata.inflictor)) {
       obitmeansofdeath = "MOD_EXPLOSIVE";
       objweapon = makeweapon("deathball_limbo");
     }
@@ -3887,15 +3887,15 @@ function playerkilled_sharedlogic_early(deathdata) {
 
   function_af3ebb9d1ecd18e7(deathdata);
 
-  if(game_utility::function_ba5574c7f287c587()) {
+  if(game_utility::ismagellanmode()) {
     isplayerreloading = self isreloading();
 
     if(isplayerreloading) {
-      var_5814d27874b48e54 = spawnStruct();
-      var_5814d27874b48e54.player = self;
-      var_5814d27874b48e54.reloadcanceltime = getsystemtimeinmicroseconds();
-      var_5814d27874b48e54.cancelreason = "DEATH";
-      namespace_c45ac99c4997e722::function_80820d6d364c1836("callback_on_reload_cancel", var_5814d27874b48e54);
+      telemetrydata = spawnStruct();
+      telemetrydata.player = self;
+      telemetrydata.reloadcanceltime = getsystemtimeinmicroseconds();
+      telemetrydata.cancelreason = "DEATH";
+      telemetry_utils::function_80820d6d364c1836("callback_on_reload_cancel", telemetrydata);
     }
 
     if(isDefined(attacker) && isDefined(attacker.team)) {
@@ -3913,7 +3913,7 @@ function playerkilled_logkill(deathdata) {
   meansofdeath = deathdata.meansofdeath;
   lifeid = deathdata.lifeid;
   victim utility::trycall(level.clientmatchdata_logplayerdeath, attacker);
-  namespace_c45ac99c4997e722::function_80820d6d364c1836("callback_player_death", deathdata);
+  telemetry_utils::function_80820d6d364c1836("callback_player_death", deathdata);
   victim analyticslog::logevent_path();
   victim analyticslog::logevent_playerdeath(attacker, meansofdeath, weaponfullstring);
   attacker analyticslog::logevent_playerkill(victim, meansofdeath, weaponfullstring);
@@ -4129,7 +4129,7 @@ function playerkilled_handlecorpse(deathdata) {
   var_f5b166094dc876c1 = 0;
 
   if(isDefined(victim)) {
-    if(function_f3bb4f4911a1beb2("limbo", "isOnSpaceShipment", victim)) {
+    if(callsharedfunc("limbo", "isOnSpaceShipment", victim)) {
       victim.nocorpse = 1;
     }
   }
@@ -4281,12 +4281,12 @@ function _startragdoll(corpse, meansofdeath, inflictor) {
   noragdoll = animhasnotetrack(deathanim, "no_ragdoll");
   hasstartdelay = animhasnotetrack(deathanim, "start_ragdoll");
 
-  if(isDefined(vehicle) || isDefined(self.var_e9a71c27fef1b65a) && isDefined(self.externalvehicle)) {
+  if(isDefined(vehicle) || isDefined(self.externalvehicletag) && isDefined(self.externalvehicle)) {
     if(isDefined(vehicle)) {
       var_6126d8436c986baf = vehicle_occupancy::vehicle_occupancy_getoccupantseat(vehicle, self);
     } else {
       vehicle = self.externalvehicle;
-      var_6126d8436c986baf = self.var_e9a71c27fef1b65a;
+      var_6126d8436c986baf = self.externalvehicletag;
     }
 
     if(noragdoll || hasstartdelay) {
@@ -4852,7 +4852,7 @@ function handlefriendlyfiredeath(deathdata) {
   var_f03e984a6fb59137 = 0;
 
   if(meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH") {
-    var_da0825016d12704e = function_1823ff50bb28148d(game_utility::getbasegametype());
+    var_da0825016d12704e = getxhash(game_utility::getbasegametype());
 
     if(var_da0825016d12704e == #"control" || var_da0825016d12704e == #"koth") {
       if(isDefined(victim.isonobjective) && istrue(victim.isonobjective)) {
@@ -5533,7 +5533,7 @@ function handlenormaldeath(lifeid, attacker, einflictor, objweapon, smeansofdeat
 
       foreach(uav in level.uavmodels[attacker.team]) {
         if(isDefined(uav) && isDefined(uav.owner) && uav.owner != attacker && !utility::array_contains(uavtypes, uav.uavtype)) {
-          eventname = hashcat(function_1823ff50bb28148d(uav.uavtype), "_assist");
+          eventname = hashcat(getxhash(uav.uavtype), "_assist");
           pointsoverride = undefined;
 
           if(!isDefined(uav.assistsgiven)) {
@@ -5576,13 +5576,13 @@ function handlenormaldeath(lifeid, attacker, einflictor, objweapon, smeansofdeat
       foreach(drone in level.supportdrones) {
         if(level.teambased && drone.team == attacker.team && drone.owner != attacker) {
           if(isDefined(drone.enemiesmarked) && isDefined(self) && isDefined(drone.enemiesmarked[self getentitynumber()])) {
-            drone.owner thread points::doscoreevent(hashcat(function_1823ff50bb28148d(drone.streakinfo.streakname), "_assist"));
+            drone.owner thread points::doscoreevent(hashcat(getxhash(drone.streakinfo.streakname), "_assist"));
           }
         }
 
         if(drone.helperdronetype == "scrambler_drone_guard") {
           if(level.teambased && drone.team == attacker.team && drone.owner != attacker) {
-            eventname = hashcat(function_1823ff50bb28148d(drone.streakinfo.streakname), "_assist");
+            eventname = hashcat(getxhash(drone.streakinfo.streakname), "_assist");
 
             if(!isDefined(drone.assistsgiven)) {
               drone.assistsgiven = 0;
@@ -5650,11 +5650,11 @@ function private function_72a7592cd2fc0b9a(headsize) {
   bitoffset = 8;
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (int(clamp(headsize, 1, 3)) &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
+  invertedmask = ~(mask << bitoffset);
   prevvalue = self.game_extrainfo;
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
-  self.game_extrainfo = var_82a90e56e416fa55;
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
+  self.game_extrainfo = repackedvalue;
 }
 
 function adjustvoxelhead(var_a9351fa416d5d33f) {
@@ -5951,7 +5951,7 @@ function updateinflictorstat(einflictor, eattacker, sweapon, otherent) {
   }
 }
 
-function addattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, var_1da1a66b5c6a06a7) {
+function addattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, vdir, shitloc, psoffsettime, smeansofdeath, lightarmordamage) {
   if(!isDefined(eattacker.guid) && (isagent(eattacker) || isPlayer(eattacker))) {
     eattacker.guid = eattacker scripts\mp\utility\player::getuniqueid();
   }
@@ -6003,16 +6003,16 @@ function addattacker(victim, eattacker, einflictor, objweapon, idamage, vpoint, 
   }
 
   idamage = default_to(idamage, 0);
-  var_1da1a66b5c6a06a7 = default_to(var_1da1a66b5c6a06a7, 0);
+  lightarmordamage = default_to(lightarmordamage, 0);
   armorhealth = default_to(victim.armorhealth, 0);
 
   if(isDefined(smeansofdeath) && smeansofdeath == "MOD_SUICIDE") {
-    totalhealth = victim.maxhealth + max(0, armorhealth) + var_1da1a66b5c6a06a7;
+    totalhealth = victim.maxhealth + max(0, armorhealth) + lightarmordamage;
   } else {
-    totalhealth = victim.health + max(0, armorhealth) + var_1da1a66b5c6a06a7;
+    totalhealth = victim.health + max(0, armorhealth) + lightarmordamage;
   }
 
-  totaldamage = idamage + var_1da1a66b5c6a06a7;
+  totaldamage = idamage + lightarmordamage;
   var_d69d6cc16d8b71fb = ter_op(totaldamage > totalhealth, totalhealth, totaldamage);
   attackerdata scripts\common\damage_effects::updatefirsttimedamaged();
   attackerdata.hitcount++;
@@ -6139,7 +6139,7 @@ function finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smea
   idamage = int(idamage);
   var_ba9dc00e6d5896dc = int(min(idamage, self.health));
 
-  if(isDefined(eattacker) && isPlayer(eattacker) && !function_483cc81bff18273b(eattacker)) {
+  if(isDefined(eattacker) && isPlayer(eattacker) && !issimulationplayer(eattacker)) {
     if(eattacker != self) {
       if(!isbrstylegametype() || !isbot(self)) {
         eattacker thread namespace_4925be476a433a59::function_e08012bdba393c79(objweapon, var_ba9dc00e6d5896dc);
@@ -6160,7 +6160,7 @@ function finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smea
     thread namespace_4925be476a433a59::function_99b3339dca12abde(var_ba9dc00e6d5896dc);
   }
 
-  if(isPlayer(self) && shouldrecorddamagestats(self) && !function_483cc81bff18273b(self)) {
+  if(isPlayer(self) && shouldrecorddamagestats(self) && !issimulationplayer(self)) {
     weaponobj = self.lastdroppableweaponobj;
     weaponobj = weapon::mapweapon(weaponobj);
     sweapon = getcompleteweaponname(weaponobj);
@@ -6262,7 +6262,7 @@ function finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smea
         self.liveragdoll = 1;
         self function_6b4c8718bc36d1ef(1);
         self function_e4ccd01fb7ec7a6f(1);
-        self function_360874d9808f0724();
+        self startliveragdoll();
         class::setthirdpersonview();
 
         if(!isDefined(einflictor) && !isDefined(eattacker)) {
@@ -6276,15 +6276,15 @@ function finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smea
           self notify("death");
           self notify("death_or_disconnect");
 
-          if(game_utility::function_ba5574c7f287c587()) {
+          if(game_utility::ismagellanmode()) {
             isplayerreloading = self isreloading();
 
             if(isplayerreloading) {
-              var_5814d27874b48e54 = spawnStruct();
-              var_5814d27874b48e54.player = self;
-              var_5814d27874b48e54.reloadcanceltime = getsystemtimeinmicroseconds();
-              var_5814d27874b48e54.cancelreason = "DEATH";
-              namespace_c45ac99c4997e722::function_80820d6d364c1836("callback_on_reload_cancel", var_5814d27874b48e54);
+              telemetrydata = spawnStruct();
+              telemetrydata.player = self;
+              telemetrydata.reloadcanceltime = getsystemtimeinmicroseconds();
+              telemetrydata.cancelreason = "DEATH";
+              telemetry_utils::function_80820d6d364c1836("callback_on_reload_cancel", telemetrydata);
             }
           }
         }
@@ -6699,7 +6699,7 @@ function function_49d8cc008e5f6722(eattacker, victim, idflags) {
     outlinetype = "outline_nodepth_trans_white";
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     if(!isPlayer(eattacker) && isDefined(eattacker.owner)) {
       eattacker = eattacker.owner;
     }
@@ -6787,7 +6787,7 @@ function function_e42efe66fa95ca55() {
   return istrue(level.var_e42efe66fa95ca55);
 }
 
-function monitordamage(maxhealth, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak, rumble, resetdamagetaken) {
+function monitordamage(maxhealth, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak, rumble, resetdamagetaken) {
   self endon("death");
   level endon("game_ended");
   self endon("monitorDamageEnd");
@@ -6808,7 +6808,7 @@ function monitordamage(maxhealth, damagefeedback, ondeathfunc, var_d7b6456018542
     biskillstreak = 0;
   }
 
-  for(running = 1; running; running = monitordamageoneshot(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak)) {
+  for(running = 1; running; running = monitordamageoneshot(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak)) {
     self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, origin, angles, normal, inflictor);
     objweapon = weapon::mapweapon(objweapon, inflictor);
 
@@ -6838,7 +6838,7 @@ function monitordamageend() {
   self setCanDamage(0);
 }
 
-function monitordamageoneshot(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, var_d7b6456018542238, biskillstreak) {
+function monitordamageoneshot(damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, objweapon, inflictor, damagefeedback, ondeathfunc, modifydamagefunc, biskillstreak) {
   if(!isDefined(self)) {
     return false;
   }
@@ -6866,11 +6866,11 @@ function monitordamageoneshot(damage, attacker, direction_vec, point, meansofdea
   if(isDefined(objweapon)) {
     damagedata = damage_utility::packdamagedata(attacker, self, damage, objweapon, meansofdeath, inflictor, point, direction_vec, modelname, partname, tagname, idflags);
 
-    if(!isDefined(var_d7b6456018542238)) {
-      var_d7b6456018542238 = &modifydamage;
+    if(!isDefined(modifydamagefunc)) {
+      modifydamagefunc = &modifydamage;
     }
 
-    modifieddamage = self[[var_d7b6456018542238]](damagedata);
+    modifieddamage = self[[modifydamagefunc]](damagedata);
   }
 
   if(modifieddamage <= 0) {
@@ -7268,7 +7268,7 @@ function updatecombatrecordkillstats(attacker, victim, meansofdeath, objweapon) 
       killstreak = killstreak::getkillstreaknamefromweapon(objweapon);
 
       if(isDefined(killstreak)) {
-        if(isenumvaluevalid(level.var_5d69837cf4db0407, "LethalScorestreakStatItems", killstreak)) {
+        if(isenumvaluevalid(level.progressiongroup, "LethalScorestreakStatItems", killstreak)) {
           attacker combatrecordkillstreakstat(killstreak);
         }
       }
@@ -7304,13 +7304,13 @@ function combatrecordequipmentused(weapon) {
   }
 
   if(islethal) {
-    oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", "lethalStats", weapon, "uses");
-    self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "lethalStats", weapon, "uses", oldvalue + 1);
+    oldvalue = self getplayerdata(level.progressiongroup, "playerStats", "lethalStats", weapon, "uses");
+    self setplayerdata(level.progressiongroup, "playerStats", "lethalStats", weapon, "uses", oldvalue + 1);
     return;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", "tacticalStats", weapon, "uses");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "tacticalStats", weapon, "uses", oldvalue + 1);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", "tacticalStats", weapon, "uses");
+  self setplayerdata(level.progressiongroup, "playerStats", "tacticalStats", weapon, "uses", oldvalue + 1);
 }
 
 function combatrecordlethalkill(weapon) {
@@ -7318,8 +7318,8 @@ function combatrecordlethalkill(weapon) {
     return;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", "lethalStats", weapon, "kills");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "lethalStats", weapon, "kills", oldvalue + 1);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", "lethalStats", weapon, "kills");
+  self setplayerdata(level.progressiongroup, "playerStats", "lethalStats", weapon, "kills", oldvalue + 1);
 }
 
 function combatrecordtacticalstat(weapon, incrementvalue) {
@@ -7331,8 +7331,8 @@ function combatrecordtacticalstat(weapon, incrementvalue) {
     incrementvalue = 1;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", "tacticalStats", weapon, "extraStat1");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "tacticalStats", weapon, "extraStat1", oldvalue + incrementvalue);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", "tacticalStats", weapon, "extraStat1");
+  self setplayerdata(level.progressiongroup, "playerStats", "tacticalStats", weapon, "extraStat1", oldvalue + incrementvalue);
 }
 
 function combatrecordkillstreakstat(streakname) {
@@ -7346,8 +7346,8 @@ function combatrecordkillstreakstat(streakname) {
     return;
   }
 
-  oldvalue = self getplayerdata(level.var_5d69837cf4db0407, "playerStats", recordtype, streakname, "extraStat1");
-  self setplayerdata(level.var_5d69837cf4db0407, "playerStats", recordtype, streakname, "extraStat1", oldvalue + 1);
+  oldvalue = self getplayerdata(level.progressiongroup, "playerStats", recordtype, streakname, "extraStat1");
+  self setplayerdata(level.progressiongroup, "playerStats", recordtype, streakname, "extraStat1", oldvalue + 1);
 }
 
 function enqueuecorpsetablefunc(funcid, func) {
@@ -7442,7 +7442,7 @@ function isenvironmentalscriptableinflictor(einflictor) {
 function shouldrecorddamagestats(player) {
   assertex(isPlayer(player), "<dev string:x538>");
 
-  if(function_483cc81bff18273b(player)) {
+  if(issimulationplayer(player)) {
     return false;
   }
 
@@ -7470,17 +7470,17 @@ function logfriendlyfire(player, attacker, damage, method) {
   var_7e2c53b0bcf117d9.incvalue = int(min(damage, player.health));
   var_7e2c53b0bcf117d9.variantid = -1;
   var_7e2c53b0bcf117d9.weaponobj = attacker.currentweapon;
-  attacker namespace_c45ac99c4997e722::function_80820d6d364c1836("callback_update_weapon_stats", var_7e2c53b0bcf117d9);
+  attacker telemetry_utils::function_80820d6d364c1836("callback_update_weapon_stats", var_7e2c53b0bcf117d9);
   player dlog_recordplayerevent("dlog_event_friendly_fire", ["attacker", attacker, "damage", damage, "is_fatal_damage", willkill, "damage_method", method]);
 }
 
-function function_694d74d8b5ac556f(eattacker, idamage, var_1da1a66b5c6a06a7, smeansofdeath, objweapon, victim) {
+function function_694d74d8b5ac556f(eattacker, idamage, lightarmordamage, smeansofdeath, objweapon, victim) {
   if(!isscriptedagent(eattacker) || eattacker.unittype == "zombie") {
-    return [idamage, var_1da1a66b5c6a06a7];
+    return [idamage, lightarmordamage];
   }
 
   if(smeansofdeath == "MOD_EXECUTION" || smeansofdeath == "MOD_MELEE_TAKEDOWN" || smeansofdeath == "MOD_DOWN") {
-    return [idamage, var_1da1a66b5c6a06a7];
+    return [idamage, lightarmordamage];
   }
 
   maxdamage = undefined;
@@ -7521,11 +7521,11 @@ function function_694d74d8b5ac556f(eattacker, idamage, var_1da1a66b5c6a06a7, sme
       maxdamage = int(maxdamage * level.var_4899061e2e21dd13);
     }
 
-    if(var_1da1a66b5c6a06a7 >= maxdamage) {
-      var_1da1a66b5c6a06a7 = maxdamage;
+    if(lightarmordamage >= maxdamage) {
+      lightarmordamage = maxdamage;
       idamage = 0;
     } else {
-      maxdamage -= var_1da1a66b5c6a06a7;
+      maxdamage -= lightarmordamage;
 
       if(idamage > maxdamage) {
         idamage = maxdamage;
@@ -7533,7 +7533,7 @@ function function_694d74d8b5ac556f(eattacker, idamage, var_1da1a66b5c6a06a7, sme
     }
   }
 
-  return [idamage, var_1da1a66b5c6a06a7];
+  return [idamage, lightarmordamage];
 }
 
 function issuicide(einflictor, attacker, smeansofdeath, objweapon) {

@@ -137,7 +137,7 @@ function function_282cf83c9eeda744(lootid) {
     return undefined;
   }
 
-  lootinfo = function_3475769c002400f7(lootid);
+  lootinfo = getlootiteminfofromid(lootid);
 
   if(!isDefined(lootinfo) || !isDefined(lootinfo.category)) {
     return undefined;
@@ -167,9 +167,9 @@ function function_2f80e9272a2074d(lootid, weaponrootname) {
     }
   }
 
-  assert(isarray(level.var_c7008cff883cd615));
+  assert(isarray(level.attachmentslotarray));
 
-  foreach(slot in level.var_c7008cff883cd615) {
+  foreach(slot in level.attachmentslotarray) {
     var_e1ffc4455c6c4f8a = function_75b035199842693d(weaponrootname, slot);
 
     if(isDefined(var_e1ffc4455c6c4f8a)) {
@@ -205,7 +205,7 @@ function function_793e8a72cedb8ef3(lootid) {
   }
 
   itemref = undefined;
-  lootinfo = function_3475769c002400f7(lootid);
+  lootinfo = getlootiteminfofromid(lootid);
 
   if(isDefined(lootinfo) && isDefined(lootinfo.itemref)) {
     itemref = lootinfo.itemref;
@@ -243,7 +243,7 @@ function getlootidfromref(ref) {
     return level.var_782b4804d4e2d690[ref];
   }
 
-  lootinfo = function_e4f08713dc9c53b3(ref);
+  lootinfo = getlootiteminfofromref(ref);
 
   if(!isDefined(lootinfo) || !isDefined(lootinfo.itemid)) {
     return 0;
@@ -326,7 +326,7 @@ function function_b88cfb4893ceedac(ref) {
 }
 
 function getscriptablefromlootid(lootid) {
-  scriptable = function_e0a57e47b2947bc(lootid);
+  scriptable = getscriptablefromlootidsharedfunc(lootid);
 
   if(isDefined(scriptable)) {
     return scriptable;

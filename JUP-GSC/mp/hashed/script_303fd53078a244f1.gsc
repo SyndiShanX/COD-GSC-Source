@@ -229,13 +229,13 @@ function doscoreevent(event) {
   score = scripts\mp\rank::getscoreinfovalue(event);
 
   if(!isDefined(score)) {
-    logstring("brChampion_doScoreEvent() with event \"" + function_f28fd66285fa2c9(event) + "\", but that event doesn't exist in the gametype's scoreeventlist asset");
+    logstring("brChampion_doScoreEvent() with event \"" + getxhashhexname(event) + "\", but that event doesn't exist in the gametype's scoreeventlist asset");
     score = 0;
     return;
   }
 
   if(istrue(level.var_55e0b414e3671f70.var_a5b0c4131fba9805)) {
-    logstring("<dev string:x1c>" + score + "<dev string:x32>" + function_3c8848a3a11b2553(event));
+    logstring("<dev string:x1c>" + score + "<dev string:x32>" + getxhashsourcename(event));
   }
 
   if(istrue(level.overtimestarted)) {

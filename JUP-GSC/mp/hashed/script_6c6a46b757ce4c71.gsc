@@ -42,7 +42,7 @@ function function_45657962a8ad47e() {
   setDvar(@ "hash_f40118cb927a0802", 1);
   setDvar(@ "hash_877c52caf0f9aa8c", 40);
 
-  function_3a2ca530d33dbb7c();
+  _debug_init();
 }
 
 function private function_a4b670d860d7cf61() {
@@ -225,7 +225,7 @@ function private function_7e2e3e062b49f13b(params) {
 
 function private function_3043f74f8b90b7dd(agent) {
   agent.var_2d670e4d288c86fb = 1;
-  agent.var_526f1dcf41e8b261 = getdvarfloat(@ "hash_1adf88fd35fbac70", 5.8);
+  agent.tozombiedamagemult = getdvarfloat(@ "hash_1adf88fd35fbac70", 5.8);
   agent.var_46f376c7b944859b = getdvarfloat(@ "hash_10cacdc3eb0966e", 3.3);
 
   if(isDefined(agent.armorhealth) && agent.armorhealth > 0) {
@@ -234,7 +234,7 @@ function private function_3043f74f8b90b7dd(agent) {
 
   agent.baseaccuracy = getdvarfloat(@ "hash_a02664619d86b8c9", 0.85);
   agent.var_4268b42fc89d0be9 = 0.08;
-  agent.var_8a783f4c73c2ae91 = 0.0003;
+  agent.gameskillmisstimedistancefactoroverride = 0.0003;
   agent.gameskillmisstimefrombehindoverride = 0.7;
 }
 
@@ -243,9 +243,9 @@ function private function_65162bac204e8044(agent) {
   agent.var_43e2ad424676b8d4 = 60;
   agent.paincooldown = 3000;
   agent.baseaccuracy = getdvarfloat(@ "hash_a02664619d86b8c9", 0.85);
-  agent.var_526f1dcf41e8b261 = getdvarfloat(@ "hash_1adf88fd35fbac70", 5.8);
+  agent.tozombiedamagemult = getdvarfloat(@ "hash_1adf88fd35fbac70", 5.8);
   agent.var_4268b42fc89d0be9 = 0.04;
-  agent.var_8a783f4c73c2ae91 = 0.0001;
+  agent.gameskillmisstimedistancefactoroverride = 0.0001;
   agent.gameskillmisstimefrombehindoverride = 0.4;
 }
 
@@ -253,9 +253,9 @@ function private function_125032d40c0a1677(agent) {
   agent.var_9aa77ab756fdca82 = 10;
   agent.var_43e2ad424676b8d4 = 10;
   agent.baseaccuracy = getdvarfloat(@ "hash_a02661619d86b230", 0.55);
-  agent.var_526f1dcf41e8b261 = getdvarfloat(@ "hash_d402fcc65515a733", 3);
+  agent.tozombiedamagemult = getdvarfloat(@ "hash_d402fcc65515a733", 3);
   agent.var_4268b42fc89d0be9 = getdvarfloat(@ "hash_8dfb6d4ecad5411b", 0.12);
-  agent.var_8a783f4c73c2ae91 = 0.0006;
+  agent.gameskillmisstimedistancefactoroverride = 0.0006;
   agent.gameskillmisstimefrombehindoverride = 0.7;
   agent function_8bbcaeb23a1512ef("all", 1);
   agent function_859a90c664dba240(1);
@@ -276,7 +276,7 @@ function private function_125033d40c0a18aa(agent) {
   agent.var_9aa77ab756fdca82 = 150;
   agent.var_43e2ad424676b8d4 = 30;
   agent.baseaccuracy = getdvarfloat(@ "hash_a02664619d86b8c9", 0.85);
-  agent.var_526f1dcf41e8b261 = getdvarfloat(@ "hash_1adf88fd35fbac70", 5.8);
+  agent.tozombiedamagemult = getdvarfloat(@ "hash_1adf88fd35fbac70", 5.8);
   agent.suppressionthreshold = 0.4;
   agent.suppressiondecrement = 0.2;
   agent.var_2a4784c6cc07ca59 = 0.05;
@@ -289,7 +289,7 @@ function private function_125033d40c0a18aa(agent) {
   }
 
   agent.var_4268b42fc89d0be9 = getdvarfloat(@ "hash_29c7e9e562be2374", 0.04);
-  agent.var_8a783f4c73c2ae91 = 0.0001;
+  agent.gameskillmisstimedistancefactoroverride = 0.0001;
   agent.gameskillmisstimefrombehindoverride = 0.6;
   agent function_8bbcaeb23a1512ef("all", 1);
   agent function_859a90c664dba240(1);
@@ -312,14 +312,14 @@ function private function_125034d40c0a1add(agent) {
   agent.baseaccuracy = getdvarfloat(@ "hash_a02663619d86b696", 1.15);
   agent.aggressivemode = 1;
   agent.var_cbd87a0bc497b778 = 1;
-  agent.var_526f1dcf41e8b261 = getdvarfloat(@ "hash_9fb6065532820021", 8.6);
+  agent.tozombiedamagemult = getdvarfloat(@ "hash_9fb6065532820021", 8.6);
   agent.suppressionthreshold = 0.25;
   agent.suppressiondecrement = 0.25;
   agent.var_2a4784c6cc07ca59 = 0.05;
   agent.var_4268b42fc89d0be9 = getdvarfloat(@ "hash_28d87a7d205c119", 0.02);
-  agent.var_8a783f4c73c2ae91 = 8e-05;
+  agent.gameskillmisstimedistancefactoroverride = 8e-05;
   agent.gameskillmisstimefrombehindoverride = 0.4;
-  agent.var_98add129a7ecb962 = 0;
+  agent.allowlongdeath = 0;
 
   if(agent.subclass == "ob_tactician") {
     agent.disablelmgmount = 1;
@@ -421,12 +421,12 @@ function private function_d76746a809428932() {
 }
 
 function private function_5555a1ab2616c388() {
-  function_f3bb4f4911a1beb2("player", "setIgnoredByMercs", "disguise", 1);
+  callsharedfunc("player", "setIgnoredByMercs", "disguise", 1);
   function_f8b0de2db7cf5546(0.5, 0);
 }
 
 function private function_1aa05b7937a3b1a2() {
-  function_f3bb4f4911a1beb2("player", "setIgnoredByMercs", "disguise", 0);
+  callsharedfunc("player", "setIgnoredByMercs", "disguise", 0);
   function_235231abd6580e1e();
 }
 
@@ -496,7 +496,7 @@ function private function_235231abd6580e1e(fadeouttime, delaytime) {
   }
 }
 
-function private function_3a2ca530d33dbb7c() {
+function private _debug_init() {
   thread function_bc8f27e3d1eef91e();
   devgui::function_6e7290c8ee4f558b("<dev string:x1c>");
   devgui::function_b23a59dfb4ca49a1("<dev string:x33>", "<dev string:x48>", &function_ef3da4a8b1880c27);
@@ -566,7 +566,7 @@ function function_d170903981c617de(player) {
 
   if(var_557c51a81144b954 > 0) {
     foreach(var_85afed0f5a7270c4, var_3433cfdaabb0b969 in player.activities.var_6ff9941006fb29cd) {
-      var_e8b975085b1b28e3 = player.activities.var_6346961d07f668fe == var_85afed0f5a7270c4;
+      var_e8b975085b1b28e3 = player.activities.focusedactivityid == var_85afed0f5a7270c4;
       activityinstance = level.activities.instances[var_85afed0f5a7270c4];
 
       if(isDefined(activityinstance)) {

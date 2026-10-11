@@ -440,10 +440,10 @@ function function_ee7c6e89281ad07d(params) {
 }
 
 function private function_502f87fbb5e89c3b(inflictor, attacker, damage, dflags, meansofdeath, objweapon, point, dir, hitloc, timeoffset, modelindex, attachtagname, partname, eventid) {
-  var_2bd7283211fa61e7 = scripts\ob\points::function_591305dc9c07499b(inflictor.sweapon, inflictor.eattacker, inflictor.smeansofdeath);
+  weaponelementtype = scripts\ob\points::function_591305dc9c07499b(inflictor.sweapon, inflictor.eattacker, inflictor.smeansofdeath);
 
-  if(isDefined(var_2bd7283211fa61e7)) {
-    if(istrue(inflictor.smeansofdeath == "MOD_ELEMENTAL_ELEC") && istrue(var_2bd7283211fa61e7 == "electrical")) {
+  if(isDefined(weaponelementtype)) {
+    if(istrue(inflictor.smeansofdeath == "MOD_ELEMENTAL_ELEC") && istrue(weaponelementtype == "electrical")) {
       inflictor.idamage *= 0.6;
     }
   }

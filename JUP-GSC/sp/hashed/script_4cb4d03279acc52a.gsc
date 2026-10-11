@@ -23,12 +23,12 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_enemy_cp_pistol_tier3_rus_pmc");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_d4c1580d6bc10b4");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_d4c1580d6bc10b4");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 300;
   self.maxhealth = 300;
   self.behaviortreeasset = "soldier_agent";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "soldier";
   primaryweaponhash = "jup_cp24_pi_glima21_mp, [ jup_cp24_pi_glima21_bar_light, jup_cp24_pi_glima21_mag_18_45acp, iw9_minireddot01_pstl ], none, none";
   self.weapon = level.var_67b54180a55f70e1[primaryweaponhash];
@@ -52,9 +52,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();

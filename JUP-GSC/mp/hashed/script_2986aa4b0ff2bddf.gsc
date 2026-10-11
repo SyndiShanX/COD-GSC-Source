@@ -113,7 +113,7 @@ function testprocess(var_a998844686a7ae57) {
   childthread function_e6c8677b0fb79d74(destination);
   childthread function_898085e0edaf6334(destination);
   var_b61d2f13ca2d857f = ["custom_fall_check_finished", "custom_stuck_check_finished", "path_event_check_finished"];
-  function_5adca43f839a3cce(var_b61d2f13ca2d857f);
+  waittill_any_in_array(var_b61d2f13ca2d857f);
 
   if(self.mit.var_d1dcf59fc3a6fa1 == "try_reversed_path") {
     var_b784ef2f37ba6722 = [self.mit.botendpos, self.mit.botstartpos, self.mit.edgeindex];
@@ -508,9 +508,9 @@ function private function_5fc639be43086a50(position, path) {
     var_1a2dfa0e910c8a94 = var_11855ac71db6dc0d + anglesToForward(doorinfo.originangle) * var_1e35e50e4b93eab6;
 
     foreach(subpath in subpaths) {
-      var_96fa6fb431ddede3 = function_3c55380b5e177254(subpath[0], subpath[1], var_11855ac71db6dc0d, var_1a2dfa0e910c8a94);
+      intersected = function_3c55380b5e177254(subpath[0], subpath[1], var_11855ac71db6dc0d, var_1a2dfa0e910c8a94);
 
-      if(var_96fa6fb431ddede3) {
+      if(intersected) {
         return true;
       }
     }

@@ -76,10 +76,10 @@ function private registerpackagescriptbundle(packagetype, packagescriptbundle) {
   packagescriptbundle.packagetype = packagetype;
   packagescriptbundle.var_6c96508868e4b444 = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_min_packages"), packagescriptbundle.var_6c96508868e4b444);
   packagescriptbundle.var_93c857c1e2091c6 = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_max_packages"), packagescriptbundle.var_93c857c1e2091c6);
-  packagescriptbundle.var_f7c244d4042a1545 = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_planes_count"), packagescriptbundle.var_f7c244d4042a1545);
+  packagescriptbundle.planescount = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_planes_count"), packagescriptbundle.planescount);
   packagescriptbundle.var_fe88e6e7c8add110 = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_inside_plane_path_safe_circle"), packagescriptbundle.var_fe88e6e7c8add110);
   packagescriptbundle.var_c5994554ba7952fd = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_time_to_capture"), packagescriptbundle.var_c5994554ba7952fd);
-  packagescriptbundle.var_a7134948131c1153 = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_enable_parachute"), packagescriptbundle.var_a7134948131c1153);
+  packagescriptbundle.useparachute = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_enable_parachute"), packagescriptbundle.useparachute);
   packagescriptbundle.var_e2ebda8aedfdb4ee = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_icon_fading_distance"), packagescriptbundle.var_e2ebda8aedfdb4ee);
   packagescriptbundle.var_e9b6802b9c57d0f6 = getdvarint(hashcat(@ "hash_ede242fa12584aaa", packagetype, "_icon_fading_buffer"), packagescriptbundle.var_e9b6802b9c57d0f6);
   planespeed = isDefined(packagescriptbundle.planespeed) ? packagescriptbundle.planespeed : scripts\mp\gametypes\br_c130::getc130speed();
@@ -97,7 +97,7 @@ function private function_e78fdb57b9db9b1b(packagetype) {
   var_66e305edfafc3376 = level.package_airdrop.packagetypes[packagetype];
   leveldata = scripts\cp_mp\killstreaks\airdrop::getleveldata(packagetype);
   leveldata.capturestring = var_66e305edfafc3376.capturestring;
-  leveldata.basemodel = var_66e305edfafc3376.var_3aa58e359199c78c;
+  leveldata.basemodel = var_66e305edfafc3376.packagemodel;
   leveldata.mountmantlemodel = undefined;
   leveldata.headicon = undefined;
   leveldata.timeout = undefined;
@@ -238,7 +238,7 @@ function private function_2873b552d2573e1(packagetype, player, team, var_722bce9
   packagestruct = structcopy(var_ccfe9ae54c02e151, 1);
   packagestruct.var_dba2df4af15a314b = function_fb97028ef429affa(packagetype, var_722bce9390dff899);
   packagestruct.droptype = isDefined(var_722bce9390dff899.droptype) ? var_722bce9390dff899.droptype : packagestruct.droptype;
-  packagestruct.var_f7c244d4042a1545 = function_21d08a5b20cecd37(packagestruct, isDefined(var_722bce9390dff899.var_f7c244d4042a1545) ? var_722bce9390dff899.var_f7c244d4042a1545 : packagestruct.var_f7c244d4042a1545);
+  packagestruct.planescount = function_21d08a5b20cecd37(packagestruct, isDefined(var_722bce9390dff899.planescount) ? var_722bce9390dff899.planescount : packagestruct.planescount);
   packagestruct.planespeed = isDefined(var_722bce9390dff899.planespeed) ? var_722bce9390dff899.planespeed : packagestruct.planespeed;
   packagestruct.var_4ad76844f4a4ef50 = var_722bce9390dff899.droporigin;
   packagestruct.var_194a1b7e23d175c4 = var_722bce9390dff899.dropradius;
@@ -263,7 +263,7 @@ function private function_fb97028ef429affa(packagetype, var_722bce9390dff899) {
 }
 
 function private function_66ba30a1e828a295(packagestruct) {
-  if(packagestruct.var_f7c244d4042a1545 <= 0) {
+  if(packagestruct.planescount <= 0) {
     return [];
   }
 
@@ -329,13 +329,13 @@ function private function_b291e0ff46acfb0e(packagestruct) {
 }
 
 function private function_82e708bd8bcc57df(packagestruct) {
-  var_6a89a8b0f8e10993 = int(ceil(360 / packagestruct.var_f7c244d4042a1545));
+  var_6a89a8b0f8e10993 = int(ceil(360 / packagestruct.planescount));
   var_728bcf13c224ddd = 250;
   planeheight = scripts\cp_mp\parachute::getc130airdropheight();
   flightangles = (0, randomfloat(360), 0);
   planes = [];
 
-  for(i = 0; i < packagestruct.var_f7c244d4042a1545; i++) {
+  for(i = 0; i < packagestruct.planescount; i++) {
     plane = function_e7e58d93d3d79caa(packagestruct, packagestruct.var_96e9e80322851e31, flightangles, planeheight);
     plane.dropdelay = randomfloatrange(0, plane.var_96e9e80322851e31.radius / plane.speed);
     planes[planes.size] = plane;
@@ -347,18 +347,18 @@ function private function_82e708bd8bcc57df(packagestruct) {
 }
 
 function private function_21d08a5b20cecd37(packagestruct, var_168340652c332ae4) {
-  var_f7c244d4042a1545 = var_168340652c332ae4;
+  planescount = var_168340652c332ae4;
 
   switch (packagestruct.droptype) {
     case #"hash_2ddf727834fd3c24":
-      var_f7c244d4042a1545 = 1;
+      planescount = 1;
       break;
     case #"hash_179b3173a873fee":
-      var_f7c244d4042a1545 = 0;
+      planescount = 0;
       break;
   }
 
-  return min(var_f7c244d4042a1545, packagestruct.var_dba2df4af15a314b);
+  return min(planescount, packagestruct.var_dba2df4af15a314b);
 }
 
 function private function_91ae6777b25988fb(packagestruct) {
@@ -443,7 +443,7 @@ function private function_c57fe57efd284588(packagestruct, origin, angles) {
     return undefined;
   }
 
-  package = scripts\cp_mp\killstreaks\airdrop::function_dab97789e02a5320(droplocation + (0, 0, level.c130airdrop_heightoverride - 100), droplocation, angles, packagestruct.packagetype, packagestruct.ownerteam, !packagestruct.var_a7134948131c1153);
+  package = scripts\cp_mp\killstreaks\airdrop::function_dab97789e02a5320(droplocation + (0, 0, level.c130airdrop_heightoverride - 100), droplocation, angles, packagestruct.packagetype, packagestruct.ownerteam, !packagestruct.useparachute);
 
   if(!isDefined(package)) {
     return undefined;
@@ -542,7 +542,7 @@ function private function_71c88a4c8a0a869f(packagestruct) {
   } else {
     var_add352c5f28c902a = function_10353e2ca468d363();
 
-    switch (packagestruct.var_2733d6d0e5320b17) {
+    switch (packagestruct.droplocationtype) {
       case #"hash_87d1443ef2805760":
         if(isDefined(packagestruct.ownerplayer)) {
           var_96e9e80322851e31.origin = packagestruct.ownerplayer.origin;
@@ -603,7 +603,7 @@ function private function_c1920a80da64cb98(packagestruct, var_96e9e80322851e31) 
     return var_96e9e80322851e31;
   }
 
-  if(packagestruct.var_2733d6d0e5320b17 != "center" && packagestruct.var_2733d6d0e5320b17 != "random") {
+  if(packagestruct.droplocationtype != "center" && packagestruct.droplocationtype != "random") {
     return var_96e9e80322851e31;
   }
 
@@ -652,8 +652,8 @@ function function_b56e024a85b1ba22(params) {
   var_722bce9390dff899.droptype = airdroptype;
 
   if(isdvardefined(@ "hash_9783c1c17e0b4fd0")) {
-    var_722bce9390dff899.var_f7c244d4042a1545 = getdvarint(@ "hash_9783c1c17e0b4fd0", packagestruct.var_f7c244d4042a1545);
-    var_722bce9390dff899.var_6c96508868e4b444 = int(max(var_722bce9390dff899.var_f7c244d4042a1545, packagestruct.var_6c96508868e4b444));
+    var_722bce9390dff899.planescount = getdvarint(@ "hash_9783c1c17e0b4fd0", packagestruct.planescount);
+    var_722bce9390dff899.var_6c96508868e4b444 = int(max(var_722bce9390dff899.planescount, packagestruct.var_6c96508868e4b444));
     var_722bce9390dff899.var_93c857c1e2091c6 = int(max(var_722bce9390dff899.var_6c96508868e4b444, packagestruct.var_93c857c1e2091c6));
   }
 

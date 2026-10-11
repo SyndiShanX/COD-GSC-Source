@@ -39,7 +39,7 @@ function function_8639626f9311efca() {
   }
 
   level._effect["vfx/iw9_br/haunted_box/vfx_haunted_box_dest.vfx"] = loadfx("vfx/iw9_br/haunted_box/vfx_haunted_box_dest.vfx");
-  scripts\cp_mp\utility\audio_utility::function_f1aed36ab4598ea("eqp_haunted_box");
+  scripts\cp_mp\utility\audio_utility::snd_transient_load("eqp_haunted_box");
 }
 
 function function_2f61e64b72dcb65f() {

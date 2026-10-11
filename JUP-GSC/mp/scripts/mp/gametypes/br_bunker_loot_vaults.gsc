@@ -79,11 +79,11 @@ function initlootvaultkeypad(var_a0636bd2191a4bbc, bunkerindex, var_2d0e7ac083ad
   level.bunker_loot_vaults.hints[bunkerindex].door = door;
 }
 
-function keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread _keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895);
+function keypadscriptableused(instance, part, state, player, bautouse, usestring) {
+  level thread _keypadscriptableused(instance, part, state, player, bautouse);
 }
 
-function _keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895) {
+function _keypadscriptableused(instance, part, state, player, bautouse) {
   assert(part == "<dev string:x1c>");
   var_b0bd841cacf6d96d = scripts\mp\gametypes\br_bunker_alt::isaltbunkerscriptable(instance);
   assert(!var_b0bd841cacf6d96d);

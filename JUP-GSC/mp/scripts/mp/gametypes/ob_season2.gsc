@@ -40,7 +40,7 @@ function function_426e2d5e82b19fb() {
   level.skulls = [];
   callback::add("player_laststand", &function_1fd107db3ec3ec54);
   callback::add("on_zombie_ai_killed", &function_7d05d2bf4fbde466);
-  namespace_c45ac99c4997e722::function_aacbbe63c26687ae("callback_on_player_disconnect", &function_e13c1c48f9ef635);
+  telemetry_utils::function_aacbbe63c26687ae("callback_on_player_disconnect", &function_e13c1c48f9ef635);
 }
 
 function register_activities(params) {
@@ -160,8 +160,8 @@ function spawn_bone(spawn_location) {
   bone thread function_637a0270d3f077d3();
 }
 
-function spawn_skull(spawn_location, var_73a0f3ed96803f36) {
-  switch (var_73a0f3ed96803f36) {
+function spawn_skull(spawn_location, zombie_subclass) {
+  switch (zombie_subclass) {
     case #"hash_99a38be9e88b5244":
       var_80199c685105ede4 = "ob_hunt_armored_skull";
       break;
@@ -177,7 +177,7 @@ function spawn_skull(spawn_location, var_73a0f3ed96803f36) {
   }
 
   skull = spawnscriptable(var_80199c685105ede4, spawn_location);
-  skull.var_12a8270096fdd301 = var_73a0f3ed96803f36;
+  skull.var_12a8270096fdd301 = zombie_subclass;
   scripts\cp_mp\interaction::function_32645103f7520635(skull, undefined, &function_5ef509a71c51c2a0);
   level.skulls = array_add(level.skulls, skull);
   skull thread function_637a0270d3f077d3();

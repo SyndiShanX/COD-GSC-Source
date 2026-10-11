@@ -254,7 +254,7 @@ function zombie_control_start_interact() {
   self.inhibitor_toolbox = spawnscriptable("ob_cache_inhibitor_toolbox", self.content_structs["zombie_control_start_interact_inhibitor_model"][0].origin, self.content_structs["zombie_control_start_interact_inhibitor_model"][0].angles);
   self.inhibitor_toolbox setscriptablepartstate("body", "closed_usable");
   self.inhibitor_toolbox.objective_instance = self;
-  common_cache::function_d71a41afca697376(self.inhibitor_toolbox, "ob_jup_items_cache_inhibitor_toolbox", 4);
+  common_cache::fillcontentsfromlist(self.inhibitor_toolbox, "ob_jup_items_cache_inhibitor_toolbox", 4);
   self.inhibitor_toolbox callback::add("on_cache_closed", &function_55a1a39cc1a3bc4e);
   scriptable::scriptable_addusedcallback(&function_ba99ee1ab267e97f);
   thread function_965043913bb0310d();
@@ -278,7 +278,7 @@ function function_965043913bb0310d() {
     self.inhibitor_toolbox disablescriptableplayeruse(player);
   }
 
-  self.var_1e3d862c39b84a24 = self.var_6c29f2fdb0054bbe;
+  self.var_1e3d862c39b84a24 = self.playerparticipants;
 
   foreach(player in self.var_1e3d862c39b84a24) {
     self.inhibitor_toolbox enablescriptableplayeruse(player);
@@ -290,14 +290,14 @@ function function_965043913bb0310d() {
     }
 
     foreach(player in self.var_1e3d862c39b84a24) {
-      if(isPlayer(player) && !utility::array_contains(self.var_6c29f2fdb0054bbe, player)) {
+      if(isPlayer(player) && !utility::array_contains(self.playerparticipants, player)) {
         self.inhibitor_toolbox disablescriptableplayeruse(player);
         self.var_1e3d862c39b84a24 utility::array_remove(self.var_1e3d862c39b84a24, player);
       }
     }
 
-    foreach(player in self.var_6c29f2fdb0054bbe) {
-      if(isPlayer(player) && !utility::array_contains(self.var_6c29f2fdb0054bbe, player)) {
+    foreach(player in self.playerparticipants) {
+      if(isPlayer(player) && !utility::array_contains(self.playerparticipants, player)) {
         self.inhibitor_toolbox enablescriptableplayeruse(player);
         self.var_1e3d862c39b84a24 utility::array_add(self.var_1e3d862c39b84a24, player);
       }
@@ -307,7 +307,7 @@ function function_965043913bb0310d() {
   }
 }
 
-function function_ba99ee1ab267e97f(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_ba99ee1ab267e97f(instance, part, state, player, bautouse, usestring) {
   if(!function_458c1f5cd882144(instance.type)) {
     return;
   }
@@ -362,8 +362,8 @@ function function_9f2ef86e9bc669ee() {
     wait 1;
     players = [];
 
-    if(self.var_6c29f2fdb0054bbe.size > 0) {
-      players = scripts\mp\utility\player::getplayersinradius(self.inhibitor_toolbox.origin, 2000, self.var_6c29f2fdb0054bbe[0].team);
+    if(self.playerparticipants.size > 0) {
+      players = scripts\mp\utility\player::getplayersinradius(self.inhibitor_toolbox.origin, 2000, self.playerparticipants[0].team);
     }
 
     if(players.size > 0) {
@@ -386,7 +386,7 @@ function function_fc8b36f6f52a356d() {
   namespace_262d6474998a2356::function_61cd287166c3f695("REV_OB_ZOMBIE_CONTROL_SPORE_PHASE");
   namespace_262d6474998a2356::function_c661dba3e304266b(0);
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player setclientomnvar("ui_br_objective_index", 9);
     player setclientomnvar("ui_br_objective_param", 0);
   }
@@ -417,13 +417,13 @@ function function_5db678d359c61a6f() {
 function function_757a0db88492fac3() {
   self endon("activity_ended");
   self endon("instance_destroyed");
-  self.on_mission = zombie_challenges::function_f578373042c34e16(16640, "quest_s0a2t5_extr_start", self.var_6c29f2fdb0054bbe);
+  self.on_mission = zombie_challenges::function_f578373042c34e16(16640, "quest_s0a2t5_extr_start", self.playerparticipants);
 
   if(!self.on_mission) {
     thread namespace_277c27ef297ef569::function_1281c7fff9456e18("spore_control_start");
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player callback::callback("spore_control_started");
   }
 
@@ -567,8 +567,8 @@ function spawn_control_point(var_85bff92bec5e44d7) {
     control_point.shield = utility::spawn_model("jup_zm_spores_shell", ground_pos - (0, 0, 1), raynormal);
     control_point.shield solid();
     control_point.shield.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_spore_healthbar");
-    control_point.shield.var_534e788bc498be9f = getscriptbundle(%"hash_6bab55d6fc0d95fc");
-    control_point.shield.subclass = control_point.shield.var_534e788bc498be9f.name;
+    control_point.shield.subclass_scriptbundle = getscriptbundle(%"hash_6bab55d6fc0d95fc");
+    control_point.shield.subclass = control_point.shield.subclass_scriptbundle.name;
     control_point.shield setCanDamage(1);
     control_point.shield.health = 2000000;
     control_point.shield.navobstacleid = createnavobstaclebyent(control_point.shield);
@@ -606,7 +606,7 @@ function spawn_control_point(var_85bff92bec5e44d7) {
 
 function function_5d901f142e0e3a40(instance) {
   game_utility::function_6b6b6273f8180522("ZombieControl_Ob", self.origin, 300);
-  self.var_206ffeac182f7114 = instance.var_6c29f2fdb0054bbe;
+  self.var_206ffeac182f7114 = instance.playerparticipants;
 
   foreach(player in self.var_206ffeac182f7114) {
     game_utility::function_cfd53c8f6878014f(player);
@@ -1303,7 +1303,7 @@ function function_1e2b64e8e860a307() {
 }
 
 function function_b584f143ed0ec5d0(struct_origin, num_spots, n_outer_radius, n_inner_radius) {
-  var_f10d2bae0aa4fce7 = [];
+  a_s_spawnpts = [];
   valid_points = [];
   var_5ac1024b00cecc71 = (0, 0, 48);
   i = 0;
@@ -1356,18 +1356,18 @@ function function_b584f143ed0ec5d0(struct_origin, num_spots, n_outer_radius, n_i
     s_spot = spawnStruct();
     s_spot.origin = valid_points[i];
     s_spot.angles = (0, 0, 0);
-    var_f10d2bae0aa4fce7[var_f10d2bae0aa4fce7.size] = s_spot;
+    a_s_spawnpts[a_s_spawnpts.size] = s_spot;
   }
 
-  return var_f10d2bae0aa4fce7;
+  return a_s_spawnpts;
 }
 
 function function_17409c55b9259362() {
   bundlexhash = hashcat(%"hash_334a4b8da1c7fd3f", "ob_zombie_control_marker");
-  var_1bd1cc823b281c6e = getscriptbundle(bundlexhash);
+  objectivemarkerbundle = getscriptbundle(bundlexhash);
   self.var_3d20f8f7d66c4778 = function_36a95c9de2ace25a("ob_zombie_control_marker", 0, 1);
   waitframe();
-  function_c37023c94938fcdb(var_1bd1cc823b281c6e, self.var_3d20f8f7d66c4778, "active");
+  function_c37023c94938fcdb(objectivemarkerbundle, self.var_3d20f8f7d66c4778, "active");
   scripts\mp\objidpoolmanager::update_objective_position(self.var_3d20f8f7d66c4778, self.var_b5abb73ae8ee13c4.origin + (0, 0, 24));
   namespace_c669075cf56436f4::function_6f02ac608d44fdbf(self.var_3d20f8f7d66c4778, 0, 1);
   self waittill("activity_ended");
@@ -1376,10 +1376,10 @@ function function_17409c55b9259362() {
 
 function function_c059aea4f30a95e1() {
   bundlexhash = hashcat(%"hash_334a4b8da1c7fd3f", "ob_zombie_control_marker");
-  var_1bd1cc823b281c6e = getscriptbundle(bundlexhash);
+  objectivemarkerbundle = getscriptbundle(bundlexhash);
   self.var_dbecfcc0c094d1b1 = objidpoolmanager::requestobjectiveid(0);
   waitframe();
-  function_c37023c94938fcdb(var_1bd1cc823b281c6e, self.var_dbecfcc0c094d1b1);
+  function_c37023c94938fcdb(objectivemarkerbundle, self.var_dbecfcc0c094d1b1);
   objidpoolmanager::update_objective_state(self.var_dbecfcc0c094d1b1, "current");
   objidpoolmanager::update_objective_position(self.var_dbecfcc0c094d1b1, self.var_b5abb73ae8ee13c4.origin + (0, 0, 24));
   objidpoolmanager::objective_playermask_showtoall(self.var_dbecfcc0c094d1b1);
@@ -1392,16 +1392,16 @@ function function_c059aea4f30a95e1() {
 function function_6fcbe1beca7b3e87() {
   self endon("activity_ended");
   wait 2;
-  self.ping_owner = self.var_6c29f2fdb0054bbe[0];
+  self.ping_owner = self.playerparticipants[0];
   self.ping_index = self.ping_owner scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(11, self.var_b5abb73ae8ee13c4.origin + (0, 0, 24), self.var_dbecfcc0c094d1b1);
 }
 
-function function_c37023c94938fcdb(var_1bd1cc823b281c6e, objectivemarkerid, override_state) {
-  generalsettings = var_1bd1cc823b281c6e.generalsettings;
-  minimapsettings = var_1bd1cc823b281c6e.minimapsettings;
-  var_4b16eeed74027f36 = var_1bd1cc823b281c6e.var_4b16eeed74027f36;
-  compasssettings = var_1bd1cc823b281c6e.compasssettings;
-  hudsettings = var_1bd1cc823b281c6e.hudsettings;
+function function_c37023c94938fcdb(objectivemarkerbundle, objectivemarkerid, override_state) {
+  generalsettings = objectivemarkerbundle.generalsettings;
+  minimapsettings = objectivemarkerbundle.minimapsettings;
+  var_4b16eeed74027f36 = objectivemarkerbundle.var_4b16eeed74027f36;
+  compasssettings = objectivemarkerbundle.compasssettings;
+  hudsettings = objectivemarkerbundle.hudsettings;
   objective_icon(objectivemarkerid, generalsettings.var_63d1b5b543ef6387);
   objective_state(objectivemarkerid, default_to(override_state, generalsettings.state));
   function_5fd2627c5ce186db(objectivemarkerid, generalsettings.isoptional);
@@ -1436,7 +1436,7 @@ function function_bece45249110d92e() {
 
   waitframe();
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     objidpoolmanager::objective_playermask_addshowplayer(self.var_3d20f8f7d66c4778, player);
   }
 }
@@ -1454,7 +1454,7 @@ function function_703285e65f44f9d3() {
   self.contract_complete = 1;
   thread function_dbdbea19c234b48c();
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     function_4a508fcbbea05afd(player);
   }
 
@@ -1469,7 +1469,7 @@ function function_66629e64959d95e5() {
   function_1bb538077d615194();
   self.contract_complete = 1;
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player.var_e23ddb97da39365 = undefined;
     player.nearby_spore = undefined;
     player setscriptablepartstate("ob_spore_fx", "spore_fx_stop");
@@ -1483,7 +1483,7 @@ function function_544acb4d7f48c28f() {
     control_point function_54c46311ea3c60be();
   }
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     player.var_e23ddb97da39365 = undefined;
     player.nearby_spore = undefined;
     player setscriptablepartstate("ob_spore_fx", "spore_fx_stop");
@@ -1597,7 +1597,7 @@ function function_c9ce2ea582e3e3c7(activity_instance) {
 
 function function_1531bbf5cff97dc0(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_5c651df8cfad0810(var_b381b0883bcd4847) {
@@ -1605,7 +1605,7 @@ function function_5c651df8cfad0810(var_b381b0883bcd4847) {
 }
 
 function function_540f9b357f3b5419(var_b381b0883bcd4847) {
-  var_c606519b03a24916 = self.var_6c29f2fdb0054bbe.size == 0;
+  var_c606519b03a24916 = self.playerparticipants.size == 0;
 
   if(var_c606519b03a24916) {
     namespace_c669075cf56436f4::function_765b706dc170e214(self.var_3d20f8f7d66c4778);
@@ -1646,7 +1646,7 @@ function function_12b5e47689dd56e9(params) {
 
   switch (params[0]) {
     case #"hash_108e564bd5f431c1":
-      function_38e113a4c30f6c0d("<dev string:x8d>", level.players[0].origin);
+      spawnnewitemfromscriptablesharedfunc("<dev string:x8d>", level.players[0].origin);
       return;
   }
 }

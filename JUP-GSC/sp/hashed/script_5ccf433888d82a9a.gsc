@@ -73,7 +73,7 @@ function function_f0010a76794e4fa7() {
   }
 }
 
-function function_de1149fa62dbfe47(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_de1149fa62dbfe47(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(level.var_f4a36f82e38789b5)) {
     return;
   }

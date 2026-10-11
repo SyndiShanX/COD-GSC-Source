@@ -8,7 +8,7 @@
 #using scripts\common\callbacks;
 #using scripts\engine\math;
 #using scripts\engine\utility;
-#namespace namespace_b556fcabc41ef8fa;
+#namespace zombie_abom_audio;
 
 function function_4880ef9ac634c6e5() {
   if(flag("abom_audio")) {
@@ -31,11 +31,11 @@ function function_4880ef9ac634c6e5() {
 
 function function_64bb14058709dfa1() {
   thread function_ff4bd4c9a8c14004();
-  function_3b76e1d247d2f5a(&function_cd12e4b6f6fa089c);
+  function_3b76e1d247d2f5a(&play_zombie_vo);
   callback::add("killed_body_cloned", &play_death_vo);
 }
 
-function private function_cd12e4b6f6fa089c(event, zombie, var_c2aec59361d95878, alias, priority) {
+function private play_zombie_vo(event, zombie, scriptable_state, alias, priority) {
   switch (event) {
     case #"hash_a6ff7cd9f24bf577":
       if(zombie isscriptable()) {
@@ -52,7 +52,7 @@ function private function_cd12e4b6f6fa089c(event, zombie, var_c2aec59361d95878, 
       break;
   }
 
-  play_vox(zombie, var_c2aec59361d95878, alias, priority);
+  play_vox(zombie, scriptable_state, alias, priority);
 }
 
 function private play_death_vo(params) {
@@ -63,11 +63,11 @@ function private play_death_vo(params) {
   }
 
   if(issubstr(self.subclass, "mega")) {
-    level thread function_cd12e4b6f6fa089c("death", params.body, "death", "vox_ai_abom_mega_death", 4);
+    level thread play_zombie_vo("death", params.body, "death", "vox_ai_abom_mega_death", 4);
     return;
   }
 
-  level thread function_cd12e4b6f6fa089c("death", params.body, "death", "vox_ai_abom_death", 4);
+  level thread play_zombie_vo("death", params.body, "death", "vox_ai_abom_death", 4);
 }
 
 function function_ff4bd4c9a8c14004() {
@@ -100,10 +100,10 @@ function function_78c6b4fdf8524643() {
       ambient_notify = undefined;
     }
 
-    if(isDefined(level.var_3c408363d81b00e0) && isDefined(ambient_notify)) {
-      level.var_3c408363d81b00e0++;
+    if(isDefined(level.zombie_ambient_count) && isDefined(ambient_notify)) {
+      level.zombie_ambient_count++;
 
-      if(level.var_3c408363d81b00e0 < ambient_cap) {
+      if(level.zombie_ambient_count < ambient_cap) {
         played_vox = 1;
         function_f707c26d8f269f94(ambient_notify);
         waitframe();
@@ -149,10 +149,10 @@ function function_b22414d725f85412() {
       var_36ac830085c37706 = 0;
     }
 
-    if(isDefined(level.var_3c408363d81b00e0)) {
-      level.var_3c408363d81b00e0++;
+    if(isDefined(level.zombie_ambient_count)) {
+      level.zombie_ambient_count++;
 
-      if(level.var_3c408363d81b00e0 < ambient_cap) {
+      if(level.zombie_ambient_count < ambient_cap) {
         played_vox = 1;
         function_f707c26d8f269f94(ambient_notify);
         waitframe();
@@ -207,10 +207,10 @@ function private function_56f857cb70c424b6() {
 
 function private function_1dc3dbebbb45158a() {
   level endon("game_ended");
-  level.var_3c408363d81b00e0 = 0;
+  level.zombie_ambient_count = 0;
 
   while(true) {
-    level.var_3c408363d81b00e0 = 0;
+    level.zombie_ambient_count = 0;
     wait 0.1;
   }
 }

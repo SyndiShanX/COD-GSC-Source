@@ -137,14 +137,14 @@ function function_28bb7459a1fec3ef() {
   wait 4;
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 1, 1);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 1, 1);
   }
 
   wait 1;
   setomnvarforallclients("post_game_state", 12);
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 0, 1);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 0, 1);
   }
 
   wait 5;
@@ -230,7 +230,7 @@ function function_64dd96614abf2d2(animstruct) {
   setDvar(@ "scr_starsystem", 0);
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 1, 0);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 1, 0);
   }
 
   while(!isDefined(level.agentarray) || level.agentarray.size == 0) {
@@ -261,7 +261,7 @@ function function_64dd96614abf2d2(animstruct) {
   }
 
   foreach(player in level.players) {
-    thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 0, 1);
+    thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 0, 1);
   }
 
   vehicle = var_b58631347b6ab04[0].vehicle;

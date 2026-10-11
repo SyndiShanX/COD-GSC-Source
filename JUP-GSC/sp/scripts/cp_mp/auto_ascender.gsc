@@ -132,7 +132,7 @@ function markupascenderstruct(struct, dir) {
   }
 }
 
-function ascenderscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function ascenderscriptableused(instance, part, state, player, bautouse, usestring) {
   assert(part == "ascender");
 
   if(state == "on") {
@@ -249,7 +249,7 @@ function startascenderanim(player, dir, ascendermodelview, ascendermodelworld) {
   goalangles = vectortoanglessafe(fwd, (0, 0, 1));
   player.player_rig rotateTo(goalangles, 0.4, 0.1, 0.1);
   var_cd9982adb17761a8 = gettime();
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   var_698cc218e4ade75f = gettime();
   var_218f64cb035d54be = 0.4 - (var_698cc218e4ade75f - var_cd9982adb17761a8) / 1000;
   waittime = max(0, var_218f64cb035d54be);
@@ -487,7 +487,7 @@ function cleanupascenduse(player) {
   waitframe();
 
   if(isDefined(player)) {
-    player thread scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    player thread scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
     player notify("remove_rig");
   }
 }

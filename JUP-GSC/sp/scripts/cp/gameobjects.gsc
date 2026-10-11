@@ -3453,7 +3453,7 @@ function hasdomflags() {
     return true;
   }
 
-  var_c8f4c582625f492d = function_1823ff50bb28148d(scripts\cp\utility::getgametype());
+  var_c8f4c582625f492d = getxhash(scripts\cp\utility::getgametype());
 
   if(var_c8f4c582625f492d == #"landgrab") {
     return true;
@@ -3529,14 +3529,14 @@ function updateuisecuring(progress, securing, idx, object, usetime, progressobje
         self setclientomnvar("ui_securing", 16);
       }
     } else if(scripts\cp_mp\utility\game_utility::isbrstylegametype() && object.id == "laststand_interrogator") {
-      var_5bebd2013b0f01ec = undefined;
+      interrogatee = undefined;
 
       if(isDefined(object) && object function_ab8d64fe065bf6f7()) {
-        var_5bebd2013b0f01ec = object.owner;
+        interrogatee = object.owner;
       }
 
-      if(isDefined(var_5bebd2013b0f01ec) && self != var_5bebd2013b0f01ec) {
-        var_5bebd2013b0f01ec setclientomnvar("ui_securing", 19);
+      if(isDefined(interrogatee) && self != interrogatee) {
+        interrogatee setclientomnvar("ui_securing", 19);
       }
     }
   } else {

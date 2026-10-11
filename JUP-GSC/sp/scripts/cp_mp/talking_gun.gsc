@@ -595,7 +595,7 @@ function function_556866c3c047a8b8(victim) {
 }
 
 function function_f0b105c339fb3e1(objweapon) {
-  weapongroup = function_f3bb4f4911a1beb2("weapons", "getWeaponGroup", objweapon);
+  weapongroup = callsharedfunc("weapons", "getWeaponGroup", objweapon);
   return isDefined(weapongroup) && (weapongroup == "weapon_sniper" || weapongroup == "weapon_dmr");
 }
 
@@ -871,7 +871,7 @@ function function_572b61079927196b() {
 }
 
 function function_ef6885141252869(player, grenade) {
-  issuper = function_f3bb4f4911a1beb2("weapons", "isSuperWeapon", grenade.weapon_object);
+  issuper = callsharedfunc("weapons", "isSuperWeapon", grenade.weapon_object);
 
   if(issuper) {
     function_55b08d6d71b41402(player, "equipment_deployed");

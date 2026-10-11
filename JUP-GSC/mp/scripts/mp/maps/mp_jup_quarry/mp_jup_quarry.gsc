@@ -46,7 +46,7 @@ function function_8d4dae6254d91044() {
 
   objectsarray = [];
   objectsarray["weapon"] = getStruct("tut_ak", "script_noteworthy");
-  objectsarray["triggers"] = function_f159c10d5cf8f0b4("ActionTrigger", "targetname");
+  objectsarray["triggers"] = getnoentvolumearray("ActionTrigger", "targetname");
   objectsarray["care_package"] = getStruct("tut_carepackage", "script_noteworthy");
   scripts\mp\gametypes\training_course::init_gameobjects(getEntArray("tut_target", "targetname"), objectsarray);
   thread init_audio();

@@ -51,7 +51,7 @@ function function_34e78cbd2dfff6df(einflictor, eattacker, idamage, idflags, smea
   dmg_struct.modelindex = modelindex;
   dmg_struct.partname = partname;
   dmg_struct.objweapon = objweapon;
-  dmg_struct.var_14edc6d1db3695bc = 0;
+  dmg_struct.biscritical = 0;
   dmg_struct.var_feef4b237a6beb07 = 0;
   dmg_struct.damagemaxhealthcap = 1;
 
@@ -101,13 +101,13 @@ function function_b8fd1823ea584538(eattacker, objweapon, smeansofdeath) {
 }
 
 function function_6a3d1a2884883a23(dmg_struct) {
-  var_2bd7283211fa61e7 = get_element(dmg_struct.objweapon, dmg_struct.eattacker, dmg_struct.smeansofdeath);
+  weaponelementtype = get_element(dmg_struct.objweapon, dmg_struct.eattacker, dmg_struct.smeansofdeath);
   statuseffecttype = function_81366c086142dab6(dmg_struct.objweapon);
-  var_ebc23f622ee9bf55 = function_f05759f95f2503d1(dmg_struct.objweapon);
+  statuseffectonimpact = function_f05759f95f2503d1(dmg_struct.objweapon);
   meansofdeath = dmg_struct.smeansofdeath;
 
-  if(meansofdeath == "MOD_IMPACT" && !var_ebc23f622ee9bf55) {
-    return var_2bd7283211fa61e7;
+  if(meansofdeath == "MOD_IMPACT" && !statuseffectonimpact) {
+    return weaponelementtype;
   }
 
   if(isDefined(statuseffecttype) && statuseffecttype != "none") {
@@ -134,10 +134,10 @@ function function_6a3d1a2884883a23(dmg_struct) {
           if(isPlayer(dmg_struct.eattacker)) {
             incendiary_rounds = 1;
             rarity = dmg_struct.eattacker get_rarity(dmg_struct.objweapon);
-            var_3d400a1d02a80981 = function_d64f648b8a57d3d8(dmg_struct.objweapon, dmg_struct.smeansofdeath, rarity);
-            idamage = dmg_struct.idamage * var_3d400a1d02a80981;
-            var_4361f85b93d6dfc3 = function_b64d15c2d1631d7d(dmg_struct.objweapon, dmg_struct.smeansofdeath, dmg_struct.eattacker);
-            idamage *= var_4361f85b93d6dfc3;
+            weaponraritydamagemult = function_d64f648b8a57d3d8(dmg_struct.objweapon, dmg_struct.smeansofdeath, rarity);
+            idamage = dmg_struct.idamage * weaponraritydamagemult;
+            weaponpackdamagemult = function_b64d15c2d1631d7d(dmg_struct.objweapon, dmg_struct.smeansofdeath, dmg_struct.eattacker);
+            idamage *= weaponpackdamagemult;
           }
         }
 
@@ -146,7 +146,7 @@ function function_6a3d1a2884883a23(dmg_struct) {
     }
   }
 
-  return var_2bd7283211fa61e7;
+  return weaponelementtype;
 }
 
 function get_element(objweapon, eattacker, smeansofdeath) {
@@ -154,10 +154,10 @@ function get_element(objweapon, eattacker, smeansofdeath) {
   var_225a577cbeda65c2 = objweapon.var_9d7facbe889e667c;
 
   if(isPlayer(eattacker) && istrue(level.var_bfa98c9dd6edb929) && eattacker function_2e380dedfcfc7972(objweapon)) {
-    var_2632b2da60d34841 = eattacker function_87b7af080857567f(objweapon);
+    ammomod_name = eattacker function_87b7af080857567f(objweapon);
 
-    if(isDefined(level.ammo_mods[var_2632b2da60d34841].element)) {
-      element = level.ammo_mods[var_2632b2da60d34841].element;
+    if(isDefined(level.ammo_mods[ammomod_name].element)) {
+      element = level.ammo_mods[ammomod_name].element;
     }
   } else {
     weaponbundle = undefined;
@@ -212,7 +212,7 @@ function function_f05759f95f2503d1(objweapon) {
     weaponbundle = level.weaponmetadata[var_225a577cbeda65c2];
   }
 
-  if(isDefined(weaponbundle) && istrue(weaponbundle.var_ebc23f622ee9bf55)) {
+  if(isDefined(weaponbundle) && istrue(weaponbundle.statuseffectonimpact)) {
     return true;
   }
 
@@ -285,7 +285,7 @@ function function_b5af5dd435f7f00a(dmg_struct) {
 }
 
 function function_73d296636c5ca3c6(dmg_struct) {
-  if(isDefined(self.var_691b16f55274b1c5) && isarray(self.var_691b16f55274b1c5) && istrue(self.var_691b16f55274b1c5[dmg_struct.var_2bd7283211fa61e7])) {
+  if(isDefined(self.elementalweakness) && isarray(self.elementalweakness) && istrue(self.elementalweakness[dmg_struct.weaponelementtype])) {
     return (dmg_struct.idamage * 1.5);
   }
 
@@ -299,8 +299,8 @@ function function_f9c444fcf6bb992b(dmg_struct) {
   if(isDefined(agent) && isagent(agent) && agent.type == "human") {
     if(isheadshot && isDefined(agent.var_e7b2da70a1256fb1)) {
       dmg_struct.idamage *= agent.var_e7b2da70a1256fb1;
-    } else if(!isheadshot && isDefined(agent.var_526f1dcf41e8b261)) {
-      dmg_struct.idamage *= agent.var_526f1dcf41e8b261;
+    } else if(!isheadshot && isDefined(agent.tozombiedamagemult)) {
+      dmg_struct.idamage *= agent.tozombiedamagemult;
     }
 
     if(isDefined(agent.var_46f376c7b944859b) && dmg_struct.smeansofdeath == "MOD_MELEE" && issubstr(agent.agent_type, "shielded")) {
@@ -382,7 +382,7 @@ function function_4948d7eacb9f12be(dmg_struct) {
 
 function function_71a411d4b5466318(dmg_struct) {
   if(isDefined(dmg_struct.metabonename)) {
-    b_destroyed = function_4ef84a18efbb779a(dmg_struct.metabonename, dmg_struct.idamage, dmg_struct.eattacker, dmg_struct.einflictor);
+    b_destroyed = damage_metabone(dmg_struct.metabonename, dmg_struct.idamage, dmg_struct.eattacker, dmg_struct.einflictor);
 
     if(istrue(dmg_struct.var_feef4b237a6beb07) && isDefined(self.modifiedidflags)) {
       self.modifiedidflags |= 512;
@@ -398,12 +398,12 @@ function function_89cc24cfc33e2693(dmg_struct) {
   if(dmg_struct.idflags != 65536) {
     if(isPlayer(dmg_struct.eattacker)) {
       rarity = dmg_struct.eattacker get_rarity(dmg_struct.objweapon);
-      var_3d400a1d02a80981 = function_d64f648b8a57d3d8(dmg_struct.objweapon, dmg_struct.smeansofdeath, rarity);
-      dmg_struct.idamage *= var_3d400a1d02a80981;
+      weaponraritydamagemult = function_d64f648b8a57d3d8(dmg_struct.objweapon, dmg_struct.smeansofdeath, rarity);
+      dmg_struct.idamage *= weaponraritydamagemult;
     }
 
-    var_4361f85b93d6dfc3 = function_b64d15c2d1631d7d(dmg_struct.objweapon, dmg_struct.smeansofdeath, dmg_struct.eattacker);
-    dmg_struct.idamage *= var_4361f85b93d6dfc3;
+    weaponpackdamagemult = function_b64d15c2d1631d7d(dmg_struct.objweapon, dmg_struct.smeansofdeath, dmg_struct.eattacker);
+    dmg_struct.idamage *= weaponpackdamagemult;
     dmg_struct.idamage = function_afc5ebe1299256f5(dmg_struct);
   }
 
@@ -412,7 +412,7 @@ function function_89cc24cfc33e2693(dmg_struct) {
 
 function get_rarity(objweapon) {
   returnrarity = "white";
-  rarity_weapon = function_ed7c10f78d0598f2(objweapon);
+  rarity_weapon = getplayerweaponraritysharedfunc(objweapon);
 
   if(isDefined(rarity_weapon)) {
     switch (rarity_weapon) {
@@ -468,11 +468,11 @@ function function_d64f648b8a57d3d8(objweapon, smeansofdeath, rarity) {
   return damagemult;
 }
 
-function function_171e93b007d03bb(var_29a8ba8c9dd43fd2) {
+function function_171e93b007d03bb(n_pap_level) {
   var_92e4946901e59d8b = 1;
 
-  if(isDefined(var_29a8ba8c9dd43fd2)) {
-    switch (var_29a8ba8c9dd43fd2) {
+  if(isDefined(n_pap_level)) {
+    switch (n_pap_level) {
       case 1:
         var_92e4946901e59d8b = default_to(level.weaponmetadata["pap_settings"].var_e007ac5715f424ab, 2);
         break;
@@ -488,12 +488,12 @@ function function_171e93b007d03bb(var_29a8ba8c9dd43fd2) {
   return var_92e4946901e59d8b;
 }
 
-function function_677bbb1eccf8453e(objweapon, var_29a8ba8c9dd43fd2) {
+function function_677bbb1eccf8453e(objweapon, n_pap_level) {
   str_weapon_name = objweapon.var_9d7facbe889e667c;
   var_23c59677f17fdaee = undefined;
 
   if(isDefined(level.weaponmetadata) && isDefined(level.weaponmetadata[str_weapon_name])) {
-    switch (var_29a8ba8c9dd43fd2) {
+    switch (n_pap_level) {
       case 1:
         var_23c59677f17fdaee = level.weaponmetadata[str_weapon_name].var_f963f9dc56b73e5f;
         break;
@@ -519,16 +519,16 @@ function function_b64d15c2d1631d7d(objweapon, smeansofdeath, player) {
   }
 
   var_882887bafd21e4e = 1;
-  var_29a8ba8c9dd43fd2 = undefined;
+  n_pap_level = undefined;
 
   if(issharedfuncdefined("zombie", "get_pap_level")) {
-    var_29a8ba8c9dd43fd2 = player function_af5127390d3221e9(objweapon);
+    n_pap_level = player function_af5127390d3221e9(objweapon);
   }
 
-  var_c54733cd1868d127 = function_677bbb1eccf8453e(objweapon, var_29a8ba8c9dd43fd2);
-  var_d202cc37087c21f2 = function_171e93b007d03bb(var_29a8ba8c9dd43fd2);
+  var_c54733cd1868d127 = function_677bbb1eccf8453e(objweapon, n_pap_level);
+  var_d202cc37087c21f2 = function_171e93b007d03bb(n_pap_level);
 
-  if(isDefined(var_29a8ba8c9dd43fd2)) {
+  if(isDefined(n_pap_level)) {
     if(isDefined(var_c54733cd1868d127)) {
       var_882887bafd21e4e = var_c54733cd1868d127;
     } else {
@@ -574,7 +574,7 @@ function private function_afc5ebe1299256f5(dmg_struct) {
         iprintln("<dev string:x1c>" + dmg_struct.metabonename);
       }
 
-      dmg_struct.var_14edc6d1db3695bc = 1;
+      dmg_struct.biscritical = 1;
       additional_dmg = 0;
       var_4017a57c0bba213e = function_59957d924fbc58e0(dmg_struct.objweapon, "head", 0);
 
@@ -602,7 +602,7 @@ function function_6b8e5b333b2b3e43(dmg_struct) {
 
     if(isDefined(armor_data)) {
       dmg_struct.var_feef4b237a6beb07 = 1;
-      dmg_struct.var_eb9031281d703c09 = armor_data.damagemod;
+      dmg_struct.damagearmormod = armor_data.damagemod;
     }
   }
 
@@ -611,7 +611,7 @@ function function_6b8e5b333b2b3e43(dmg_struct) {
 
 function function_10a52a9d2dcaf262(dmg_struct) {
   if(istrue(dmg_struct.var_feef4b237a6beb07)) {
-    dmg_struct.idamage *= dmg_struct.var_eb9031281d703c09;
+    dmg_struct.idamage *= dmg_struct.damagearmormod;
     dmgmodifier = function_59957d924fbc58e0(dmg_struct.objweapon, dmg_struct.shitloc, 0);
 
     if(isDefined(dmgmodifier) && dmgmodifier != 0) {
@@ -652,9 +652,9 @@ function function_5c8a92a87ae9751b(eattacker, var_feef4b237a6beb07, metabonename
   }
 }
 
-function function_45500125495e46a6(eattacker, var_feef4b237a6beb07, metabonename, var_e629a8e925c6d0af) {
-  if(!isDefined(var_e629a8e925c6d0af)) {
-    var_e629a8e925c6d0af = "hitarmorbreak";
+function function_45500125495e46a6(eattacker, var_feef4b237a6beb07, metabonename, armorbreak_hitmarker) {
+  if(!isDefined(armorbreak_hitmarker)) {
+    armorbreak_hitmarker = "hitarmorbreak";
   }
 
   self endon("death");
@@ -665,7 +665,7 @@ function function_45500125495e46a6(eattacker, var_feef4b237a6beb07, metabonename
   }
 
   if(isPlayer(eattacker) && istrue(var_feef4b237a6beb07) && isDefined(metabonename)) {
-    eattacker updatedamagefeedback_sharedfunc(var_e629a8e925c6d0af);
+    eattacker updatedamagefeedback_sharedfunc(armorbreak_hitmarker);
   }
 }
 

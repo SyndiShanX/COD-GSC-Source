@@ -55,12 +55,12 @@ function escort_idle() {
     self.var_e726c726c6fb7dec = 1;
   }
 
-  var_45c17c8bd7095cc4 = function_b9c4aa88ad97ee68(self);
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_b9c4aa88ad97ee68(self);
+  self.variant_definition = activityvariantdefinition;
   self.var_1be7d142b0b72909 = getStruct(self.varianttag, "targetname");
   self.script_noteworthy = self.var_1be7d142b0b72909.script_noteworthy;
-  self.var_d9a91303aea799de = function_a833053c48e37c08();
-  self.routedifficulty = function_dac4378812650312(self.var_d9a91303aea799de.origin);
+  self.nd_spline_start = function_a833053c48e37c08();
+  self.routedifficulty = function_dac4378812650312(self.nd_spline_start.origin);
   [self.interact_struct] = getStructArray(self.varianttag, "script_noteworthy");
   self.rocketlaunched = 0;
   thread function_97e82918ce08c384();
@@ -86,7 +86,7 @@ function escort_init() {
 
   if(!isDefined(self.vh_escort)) {
     namespace_a1fa5fb7614c23b6::activitynexuslog("Attempted to Spawn Escort Vehicle but it returned undefined. Ending Contract.", @ "hash_4a93c7546965668", self);
-    activity_participation::function_ad54e18b503363a0(self, self.var_6c29f2fdb0054bbe);
+    activity_participation::function_ad54e18b503363a0(self, self.playerparticipants);
     return;
   }
 
@@ -186,7 +186,7 @@ function private function_cd87cff6a50ddde(n_delay) {
 
 function function_1531bbf5cff97dc0(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_5c651df8cfad0810(var_b381b0883bcd4847) {
@@ -216,10 +216,10 @@ function escort_begin() {
 function spawn_escort_vehicle() {
   wait 1;
   spawndata = spawnStruct();
-  spawndata.angles = self.var_d9a91303aea799de.angles;
-  spawndata.team = self.var_6c29f2fdb0054bbe[0].team;
+  spawndata.angles = self.nd_spline_start.angles;
+  spawndata.team = self.playerparticipants[0].team;
   spawndata.initai = 0;
-  spawndata.origin = self.var_d9a91303aea799de.origin;
+  spawndata.origin = self.nd_spline_start.origin;
   spawndata.preventrespawn = 1;
   spawndata.str_payload = "rocket";
   spawndata.activity_instance = self;
@@ -230,9 +230,9 @@ function spawn_escort_vehicle() {
   if(isDefined(self.script_noteworthy) && self.var_1be7d142b0b72909.script_noteworthy == self.script_noteworthy) {
     vh_escort = scripts\cp_mp\vehicles\vehicle_airdrop::vehicle_airdrop("veh_jup_ob_tank_escort", spawndata);
     vh_escort.script_noteworthy = self.script_noteworthy;
-    vh_escort function_65aa053c077c003a(1);
+    vh_escort vehphys_parkingbrake(1);
     vh_escort vehicleshowonminimap(0);
-    vh_escort function_1cd1ee312fd03bb4(1);
+    vh_escort vehicleunpingable(1);
     self notify("vehicle_spawned");
     return vh_escort;
   }
@@ -414,7 +414,7 @@ function function_a46548c342e333f7() {
 
 function function_a1bfca674edbfb4d(success) {
   if(!success) {
-    foreach(player in self.var_6c29f2fdb0054bbe) {
+    foreach(player in self.playerparticipants) {
       function_4a508fcbbea05afd(player);
     }
   }
@@ -434,7 +434,7 @@ function function_baab7cceb29552a5() {
     self.vh_escort.var_1cb92917037d8996 = 1;
     thread function_e4d01e8e0a294fc8(self.variant_definition.floodencounters);
     self.vh_escort function_c3682430b317ca26();
-    self.vh_escort function_65aa053c077c003a(1);
+    self.vh_escort vehphys_parkingbrake(1);
     self.vh_escort vehicle_setspeedimmediate(0, self.vh_escort.accel, self.vh_escort.decel);
     self.vh_escort pausepath(0);
     self.vh_escort function_251b4856d66f56eb();
@@ -720,7 +720,7 @@ function private function_c1de7c2624911246(explosion_source) {
   magnitude = 120;
   radiusdamage(explosion_source.origin, 250, 400, 300, self.vh_escort);
 
-  foreach(ent in function_143526130b12b2b6(explosion_source.origin, radius)) {
+  foreach(ent in getplayersandaiarrayinradius(explosion_source.origin, radius)) {
     if(isPlayer(ent)) {
       ent knockback(ent.origin - explosion_source.origin, radius * magnitude / length(ent.origin - explosion_source.origin));
       continue;
@@ -799,7 +799,7 @@ function escort_setup(activity_instance) {
   }
 
   self setCanDamage(1);
-  self function_65aa053c077c003a(0);
+  self vehphys_parkingbrake(0);
   self.attractor = add_attractor(self, 1, self.attractradi, 1, undefined, &function_1282eec91da30219);
   function_24879cc9b7867fa9(self.attractor, 90);
 }
@@ -813,7 +813,7 @@ function escort_think(activity_instance) {
   while(true) {
     self.b_proximity = 0;
     self.n_players = 0;
-    a_players = activity_instance.var_6c29f2fdb0054bbe;
+    a_players = activity_instance.playerparticipants;
 
     foreach(player in a_players) {
       if(isDefined(player) && isDefined(self) && distancesquared(self.origin, player.origin) <= n_proximity) {
@@ -831,7 +831,7 @@ function escort_think(activity_instance) {
 
     if(!self.b_proximity || istrue(self.var_1cb92917037d8996) || istrue(self.final_stop)) {
       self vehicle_setspeedimmediate(0, self.accel, self.decel);
-      self function_65aa053c077c003a(1);
+      self vehphys_parkingbrake(1);
       waitframe();
       self pausepath(0);
       function_c3682430b317ca26();
@@ -845,7 +845,7 @@ function escort_think(activity_instance) {
         self notify("no_escorts");
       }
     } else {
-      self function_65aa053c077c003a(0);
+      self vehphys_parkingbrake(0);
       self resumepath();
       waitframe();
       function_315198e9ce4cd18c();
@@ -891,18 +891,18 @@ function function_a52670a99736f59d() {
   var_c38db2e51d5f66a2 = anglesToForward(self.angles);
   var_e560aa662258c25d = anglestoright(self.angles);
   var_40fc788beae80d60 = [];
-  var_1f46821b0fd03c67 = function_fc784a7d07e0449a(36, -90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
-  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, var_1f46821b0fd03c67);
-  var_1f46821b0fd03c67 = function_fc784a7d07e0449a(36, 90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
-  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, var_1f46821b0fd03c67);
-  var_1f46821b0fd03c67 = function_fc784a7d07e0449a(-24, -90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
-  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, var_1f46821b0fd03c67);
-  var_1f46821b0fd03c67 = function_fc784a7d07e0449a(-24, 90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
-  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, var_1f46821b0fd03c67);
-  var_1f46821b0fd03c67 = function_fc784a7d07e0449a(-72, -90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
-  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, var_1f46821b0fd03c67);
-  var_1f46821b0fd03c67 = function_fc784a7d07e0449a(-72, 90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
-  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, var_1f46821b0fd03c67);
+  s_attackpt = function_fc784a7d07e0449a(36, -90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
+  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, s_attackpt);
+  s_attackpt = function_fc784a7d07e0449a(36, 90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
+  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, s_attackpt);
+  s_attackpt = function_fc784a7d07e0449a(-24, -90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
+  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, s_attackpt);
+  s_attackpt = function_fc784a7d07e0449a(-24, 90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
+  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, s_attackpt);
+  s_attackpt = function_fc784a7d07e0449a(-72, -90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
+  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, s_attackpt);
+  s_attackpt = function_fc784a7d07e0449a(-72, 90, var_c38db2e51d5f66a2, var_e560aa662258c25d);
+  var_40fc788beae80d60 = function_6d6af8144a5131f1(var_40fc788beae80d60, s_attackpt);
   function_357609ca7ca5486e(self.attractor, var_40fc788beae80d60);
   self.generateslots = 0;
 }
@@ -963,7 +963,7 @@ function private function_5a233915821c0ea6(activity_instance) {
   while(isDefined(self.e_start)) {
     vehicle_forward = anglesToForward(self.angles);
 
-    foreach(player in activity_instance.var_6c29f2fdb0054bbe) {
+    foreach(player in activity_instance.playerparticipants) {
       dot = vectordot(vehicle_forward, anglesToForward(player.angles));
 
       if(dot >= 0.6) {
@@ -1053,7 +1053,7 @@ function function_908ef63da5570348(activity_instance) {
     return;
   }
 
-  v_ground = function_a6441613846cbe1b();
+  v_ground = get_spawn_location();
 
   if(!isDefined(v_ground)) {
     return;
@@ -1235,7 +1235,7 @@ function function_48e697a59457ec45() {
   level._effect["escort_laser_glow_energy_point"] = loadfx("vfx/jup/ob/gameplay/zm/vfx_escort_laser_glow_energy_point.vfx");
 }
 
-function function_a6441613846cbe1b() {
+function get_spawn_location() {
   self endon("death");
   nd_current = self.currentnode;
   v_ground = undefined;
@@ -1278,8 +1278,8 @@ function function_97e82918ce08c384() {
 
   scripts\mp\objidpoolmanager::update_objective_onentity(self.activity_id, self.vh_escort.markerattach);
   scripts\mp\objidpoolmanager::objective_set_play_intro(self.activity_id, 0);
-  self.ping_index = self.var_6c29f2fdb0054bbe[0] scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(11, self.vh_escort.markerattach.origin, self.activity_id);
-  self.vh_escort.e_start thread scripts\cp_mp\calloutmarkerping::function_9a7200f5142066ba(self.var_6c29f2fdb0054bbe[0], self.ping_index, undefined, ["escort_started"]);
+  self.ping_index = self.playerparticipants[0] scripts\cp_mp\calloutmarkerping::calloutmarkerping_createcallout(11, self.vh_escort.markerattach.origin, self.activity_id);
+  self.vh_escort.e_start thread scripts\cp_mp\calloutmarkerping::function_9a7200f5142066ba(self.playerparticipants[0], self.ping_index, undefined, ["escort_started"]);
   self.vh_escort.e_start waittill("escort_started");
   self.vh_escort.markerattach unlink();
   self.vh_escort.markerattach linkTo(self.vh_escort, "tag_attach_rocket", (0, 0, 110), (0, 0, 0));

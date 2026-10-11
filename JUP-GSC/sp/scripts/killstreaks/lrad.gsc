@@ -24,7 +24,7 @@
 #namespace lrad;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("lrad"), &init);
+  registerkillstreakinitfunction(getxhash("lrad"), &init);
 }
 
 function private init() {
@@ -35,7 +35,7 @@ function private init() {
   scripts\engine\utility::registersharedfunc("lrad", "tryUseKillstreak", &function_5dae574697e78d96);
   scripts\engine\utility::registersharedfunc("lrad", "LRAD_Hack", &lrad_hack);
   bundle = level.streakglobals.streakbundles["lrad"];
-  function_a41e3a211a9e37a4("lrad", bundle.deployweapon, #"hash_b76b2215370d2700");
+  registerkillstreakdamagedealingweaponsharedfunc("lrad", bundle.deployweapon, #"hash_b76b2215370d2700");
   function_1212a209876bcd8d();
   function_795e8013831a046a();
   level.var_2d9a7cb2b0831e1e = 0;
@@ -311,7 +311,7 @@ function function_cce8da1f44d40890(marker, var_6bec98cb2dcc2450) {
   var_6bec98cb2dcc2450.angles = self.angles;
   var_6bec98cb2dcc2450.team = self.team;
   var_6bec98cb2dcc2450.owner = self;
-  var_6bec98cb2dcc2450 function_5226227bce83ebe9(3, var_6bec98cb2dcc2450.team);
+  var_6bec98cb2dcc2450 setentityhudoutlinedata(3, var_6bec98cb2dcc2450.team);
   var_6bec98cb2dcc2450 show();
   var_6bec98cb2dcc2450.colmodel = spawn("script_model", var_6bec98cb2dcc2450.origin);
   var_6bec98cb2dcc2450.colmodel.team = var_6bec98cb2dcc2450.team;
@@ -577,7 +577,7 @@ function function_43adb6908f665a51(var_6bec98cb2dcc2450, streakinfo) {
   level endon("game_ended");
   function_c87fe068955bfe05(var_6bec98cb2dcc2450);
   function_484aa2a4c15a015c(var_6bec98cb2dcc2450);
-  var_6bec98cb2dcc2450 function_2eff4cd94c3243e8();
+  var_6bec98cb2dcc2450 clearminimapid();
   function_fa22ff0405c3d06e(var_6bec98cb2dcc2450);
   self playSound("jup_kls_lrad_pickup");
   saveweaponstates();
@@ -945,7 +945,7 @@ function lrad_hack(newowner) {
 
   self.owner function_f74b0080a679742b(self);
   self.owner thread function_5189f677d1332852(self, self.streakinfo);
-  function_2eff4cd94c3243e8();
+  clearminimapid();
 
   if(issharedfuncdefined("game", "createObjective")) {
     self.minimapid = self[[getsharedfunc("game", "createObjective")]](self.streakinfo.bundle.minimapicon, self.team, 1, 1, 1);
@@ -969,12 +969,12 @@ function function_5733afc81f25372c(data) {
   return modifieddamage;
 }
 
-function function_1defeaf387d6e2a9(var_bb3f35f040f4f38b) {
+function function_1defeaf387d6e2a9(debugactivedvar) {
   level endon("<dev string:xc5>");
   self endon("<dev string:xd0>");
   self.owner endon("<dev string:xd6>");
   self endon("<dev string:xe3>");
-  debugactive = getdvarint(var_bb3f35f040f4f38b);
+  debugactive = getdvarint(debugactivedvar);
 
   while(true) {
     if(debugactive > 0) {

@@ -21,7 +21,7 @@ function metalinit() {
   level endon("game_ended");
   scripts\mp\flags::function_1240434f4201ac9d("prematch_fade_done");
   wait 1;
-  triggers = function_f159c10d5cf8f0b4("metalalarm", "script_noteworthy");
+  triggers = getnoentvolumearray("metalalarm", "script_noteworthy");
 
   foreach(trigger in triggers) {
     trigger.detector = function_ab3653d48df5ed28(trigger.target);

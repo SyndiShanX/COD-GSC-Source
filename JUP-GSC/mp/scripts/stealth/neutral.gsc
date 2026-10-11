@@ -25,7 +25,7 @@ function main() {
   self.stealth_groupname = self.script_stealthgroup;
   scripts\stealth\enemy::init_flags();
   scripts\stealth\group::addtogroup(self.script_stealthgroup, self);
-  self function_4db6fc194702d153();
+  self setpatrolstylebase();
   scripts\stealth\event::event_init_entity();
   thread scripts\stealth\enemy::monitor_damage_thread(level.stealth.damage_auto_range, level.stealth.damage_sight_range);
 

@@ -320,7 +320,7 @@ function playernumlivesvo() {
   }
 }
 
-function modifyplayerdamage(einflictor, victim, eattacker, idamage, smeansofdeath, objweapon, vpoint, vdir, shitloc, idflags, var_be4285b26ed99ab1, var_1da1a66b5c6a06a7) {
+function modifyplayerdamage(einflictor, victim, eattacker, idamage, smeansofdeath, objweapon, vpoint, vdir, shitloc, idflags, var_be4285b26ed99ab1, lightarmordamage) {
   if(isDefined(level.var_52e8799c139f7b89)) {
     idamage = int([[level.var_52e8799c139f7b89]](einflictor, victim, eattacker, idamage, smeansofdeath, objweapon, vpoint, vdir, shitloc, idflags, var_be4285b26ed99ab1));
   }

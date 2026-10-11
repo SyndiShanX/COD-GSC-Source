@@ -23,12 +23,12 @@ function function_36a95c9de2ace25a(bundlename, shouldpin, var_777b269d7a4d5633) 
 function function_f7680f0db96cad7b(bundlexhash, shouldpin, var_777b269d7a4d5633) {
   var_777b269d7a4d5633 = default_to(var_777b269d7a4d5633, 1);
   shouldpin = default_to(shouldpin, 0);
-  var_e18422fb39577bb4 = namespace_871f41e67db0bf7a::function_594acad17d5c9722(bundlexhash);
+  var_e18422fb39577bb4 = namespace_871f41e67db0bf7a::createobjectivemarkerfrombundlexhash(bundlexhash);
 
   if(isDefined(var_e18422fb39577bb4) && var_e18422fb39577bb4 != -1) {
     function_6f02ac608d44fdbf(var_e18422fb39577bb4, shouldpin, var_777b269d7a4d5633);
   } else {
-    assertmsg("<dev string:x1c>" + function_3c8848a3a11b2553(bundlexhash) + "<dev string:x50>" + namespace_68dc261109a9503f::function_a4748b32a824c79c(self));
+    assertmsg("<dev string:x1c>" + getxhashsourcename(bundlexhash) + "<dev string:x50>" + namespace_68dc261109a9503f::function_a4748b32a824c79c(self));
   }
 
   return var_e18422fb39577bb4;
@@ -44,7 +44,7 @@ function function_6f02ac608d44fdbf(markerid, shouldpin, var_777b269d7a4d5633) {
 
   if(var_777b269d7a4d5633) {
     objective_removeallfrommask(markerid);
-    function_c32880b1943fa8ba(self.var_6c29f2fdb0054bbe, markerid);
+    function_c32880b1943fa8ba(self.playerparticipants, markerid);
   }
 
   return markerid;
@@ -72,22 +72,22 @@ function function_765b706dc170e214(markerid) {
 function function_2a691f6f7cceb283(markerid) {
   assertex(isDefined(self.objectivemarkers[markerid]), "<dev string:x6f>");
   self.objectivemarkers[markerid].shouldpin = 1;
-  function_8e26a7c882870c4(self.var_6c29f2fdb0054bbe, markerid);
+  function_8e26a7c882870c4(self.playerparticipants, markerid);
 }
 
 function function_48f5297a819ff2e(markerid) {
   assertex(isDefined(self.objectivemarkers[markerid]), "<dev string:x6f>");
   self.objectivemarkers[markerid].shouldpin = 0;
-  function_5aade87a12c96e0d(self.var_6c29f2fdb0054bbe, markerid);
+  function_5aade87a12c96e0d(self.playerparticipants, markerid);
 }
 
 function function_47a5129abc55bd53(activityinstance, activitymoment) {
   if(function_cdea2ef0bf179c63(activityinstance)) {
     type = function_c3f893aeddade548(activityinstance);
-    var_cdd4cb94d85d0f38 = function_ec3073136fa5be4f(activityinstance);
-    var_276eec611efa4f11 = function_77041690eb55db6e(activityinstance);
+    spawnmoment = function_ec3073136fa5be4f(activityinstance);
+    destroymoment = function_77041690eb55db6e(activityinstance);
 
-    if(var_cdd4cb94d85d0f38 == activitymoment) {
+    if(spawnmoment == activitymoment) {
       if(type == "Scriptable") {
         function_9dd7c4ff55eca947(activityinstance);
       } else {
@@ -97,7 +97,7 @@ function function_47a5129abc55bd53(activityinstance, activitymoment) {
       return;
     }
 
-    if(var_276eec611efa4f11 == activitymoment) {
+    if(destroymoment == activitymoment) {
       if(type == "GSCScript") {
         function_dd2abd81ef1b965d(activityinstance);
       }
@@ -171,8 +171,8 @@ function private function_5aade87a12c96e0d(players, markerid) {
 function private function_9dd7c4ff55eca947(activityinstance) {
   var_4619ceba115b296 = function_aa0f1a318b382e70(activityinstance);
   origin = namespace_68dc261109a9503f::function_8988a4c89289d7f4(activityinstance);
-  var_276eec611efa4f11 = function_77041690eb55db6e(activityinstance);
-  scriptable = namespace_779ebc650a9ef856::function_cb2e672e5fb4f3(activityinstance, var_4619ceba115b296, origin, var_276eec611efa4f11);
+  destroymoment = function_77041690eb55db6e(activityinstance);
+  scriptable = namespace_779ebc650a9ef856::function_cb2e672e5fb4f3(activityinstance, var_4619ceba115b296, origin, destroymoment);
   var_d953047f1b4c7c9 = function_b75091dec6ad315a("Scriptable", scriptable);
   activityinstance.var_d953047f1b4c7c9 = var_d953047f1b4c7c9;
 }
@@ -198,7 +198,7 @@ function private function_dd2abd81ef1b965d(activityinstance) {
 
 function private function_b75091dec6ad315a(var_9062a4b6d1047da9, var_d2471cfb79096bfe) {
   var_d953047f1b4c7c9 = spawnStruct();
-  var_d953047f1b4c7c9.var_1cc67d9c5314c74e = var_9062a4b6d1047da9;
+  var_d953047f1b4c7c9.objectivemarkertype = var_9062a4b6d1047da9;
 
   if(var_9062a4b6d1047da9 == "Scriptable") {
     var_d953047f1b4c7c9.scriptable = var_d2471cfb79096bfe;

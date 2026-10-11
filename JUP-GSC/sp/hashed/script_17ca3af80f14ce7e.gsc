@@ -218,15 +218,15 @@ function function_7e9f0258159a7bd6() {
   return false;
 }
 
-function function_528bcc710bb30998(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
+function function_528bcc710bb30998(pointtocheck, teamtocheck) {
   var_4b9d6f93b356408 = 0;
 
   if(!isDefined(level.var_ceb9d44b40906c4a)) {
     return var_4b9d6f93b356408;
   } else {
     foreach(trigger in level.var_ceb9d44b40906c4a) {
-      if(ispointinvolume(var_863c619037f3ac74, trigger)) {
-        if(isDefined(trigger.script_team) && isDefined(var_da8cec9bce12f9cb) && trigger.script_team != var_da8cec9bce12f9cb) {
+      if(ispointinvolume(pointtocheck, trigger)) {
+        if(isDefined(trigger.script_team) && isDefined(teamtocheck) && trigger.script_team != teamtocheck) {
           continue;
         }
 
@@ -240,12 +240,12 @@ function function_528bcc710bb30998(var_863c619037f3ac74, var_da8cec9bce12f9cb) {
 }
 
 function function_8370af6cf6e65620(spawner, trigger) {
-  var_863c619037f3ac74 = spawner.origin;
+  pointtocheck = spawner.origin;
   var_4b9d6f93b356408 = 0;
 
   if(!isDefined(level.var_ceb9d44b40906c4a)) {
     return undefined;
-  } else if(namespace_1fdb557af4bcd29e::function_44a315340c86e09(var_863c619037f3ac74, trigger.origin, trigger.struct.radius)) {
+  } else if(namespace_1fdb557af4bcd29e::function_44a315340c86e09(pointtocheck, trigger.origin, trigger.struct.radius)) {
     var_4b9d6f93b356408 = 1;
     trigger = namespace_1fdb557af4bcd29e::function_bac68a34c968c639(spawner, trigger);
   }
@@ -1175,7 +1175,7 @@ function function_5f974f12d8b7cb29(var_fd11088f77720495, var_fedb346f9b68ce66) {
       continue;
     }
 
-    if(function_a002c4413d571f(ai.origin)) {
+    if(check_player_proximity(ai.origin)) {
       if(function_34be418b2813a498()) {
         iprintlnbold("<dev string:x325>");
         print3d(ai.origin + (0, 0, 50), "<dev string:x325>", (0, 1, 1), 1, 1, 666);
@@ -1260,7 +1260,7 @@ function function_98d19cc13a08f9e1(airegiontrigger, var_cc45c3ac6ec69fec) {
       var_a9237f88bd342861 = var_5e8b303608f19b8c;
     }
 
-    if(function_a002c4413d571f(var_a9237f88bd342861)) {
+    if(check_player_proximity(var_a9237f88bd342861)) {
       if(function_34be418b2813a498()) {
         iprintlnbold("<dev string:x59c>");
         print3d(var_a9237f88bd342861 + (0, 0, 50), "<dev string:x5f2>", (0, 1, 1), 1, 1, 666);
@@ -1346,7 +1346,7 @@ function function_fee22980f1be9191(airegiontrigger, var_fedb346f9b68ce66) {
 
     var_a9237f88bd342861 = function_4b44dce2ffdbcc48(spawner_struct);
 
-    if(function_a002c4413d571f(var_a9237f88bd342861)) {
+    if(check_player_proximity(var_a9237f88bd342861)) {
       if(function_34be418b2813a498()) {
         iprintlnbold("<dev string:x59c>");
         print3d(var_a9237f88bd342861 + (0, 0, 50), "<dev string:x5f2>", (0, 1, 1), 1, 1, 666);
@@ -1433,7 +1433,7 @@ function function_14f781e51502cc47() {
   return false;
 }
 
-function function_a002c4413d571f(spawner_origin) {
+function check_player_proximity(spawner_origin) {
   foreach(player in level.players) {
     if(distancesquared(player.origin, spawner_origin) < 2250000) {
       if(namespace_1fdb557af4bcd29e::function_70328e9769b9750f(spawner_origin)) {
@@ -1630,7 +1630,7 @@ function free_expendable(deleted_ai) {
   if(isDefined(self.stealth)) {
     struct.stealth = spawnStruct();
     struct.stealth_enabled = 1;
-    struct.stealth.bsmstate = self.var_fe5ebefa740c7106;
+    struct.stealth.bsmstate = self.stealth_bsmstate;
     struct.stealth.investigateevent = scripts\aitypes\stealth::function_9c4a08f7dcd2796b();
   }
 
@@ -1762,10 +1762,10 @@ function stealth_event_propagator() {
   level endon("stealth_event_propagator");
   flag_wait("stealth_enabled");
   level endon("stealth_enabled");
-  event_dists["gunshot"] = function_9d30fd63965bafa9("gunshot");
-  event_dists["gunshot_teammate"] = function_9d30fd63965bafa9("gunshot_teammate");
-  event_dists["explosion"] = function_9d30fd63965bafa9("explosion");
-  event_dists["glass_destroyed"] = function_9d30fd63965bafa9("glass_destroyed");
+  event_dists["gunshot"] = geteventdefaultdistance("gunshot");
+  event_dists["gunshot_teammate"] = geteventdefaultdistance("gunshot_teammate");
+  event_dists["explosion"] = geteventdefaultdistance("explosion");
+  event_dists["glass_destroyed"] = geteventdefaultdistance("glass_destroyed");
   event_dists["light_killed"] = 800;
   event_dists["bulletwhizby"] = 3000;
   spawners = [];

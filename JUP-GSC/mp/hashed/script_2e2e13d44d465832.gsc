@@ -444,8 +444,8 @@ function private function_f2b5581eaab77646() {
     foreach(player in var_7408ed52662703d3) {
       objective_addclienttomask(self.task.objidnum, player);
       objective_showprogressforclient(self.task.objidnum, player);
-      function_8b71eb96e1636edc("MP_DMZ_MISSIONS/DMZ_DESTROY_SAM_PROGRESS_TEXT", player);
-      function_d1b64c3d055ceeb0(2, player);
+      objective_setpinnedprogressbartext("MP_DMZ_MISSIONS/DMZ_DESTROY_SAM_PROGRESS_TEXT", player);
+      objective_setshowpinnedprogressbar(2, player);
 
       if(!var_f225c15dca10fd0d) {
         if(player.team != self.plantplayer.team) {

@@ -547,13 +547,13 @@ function resetreticlemarkingprogressstate(delaytime) {
 
 function helperdrone_istargetinreticle(scantarget, scanfov, var_5e43b44751d01b1a) {
   inreticle = 0;
-  var_20c094516733ffb1 = [scantarget.origin];
+  pointstocheck = [scantarget.origin];
 
   if(isPlayer(scantarget) || isagent(scantarget)) {
-    var_20c094516733ffb1 = [scantarget.origin, scantarget gettagorigin("j_mainroot"), scantarget gettagorigin("tag_eye")];
+    pointstocheck = [scantarget.origin, scantarget gettagorigin("j_mainroot"), scantarget gettagorigin("tag_eye")];
   }
 
-  foreach(point in var_20c094516733ffb1) {
+  foreach(point in pointstocheck) {
     if(self worldpointinreticle_circle(point, scanfov, var_5e43b44751d01b1a)) {
       inreticle = 1;
       break;
@@ -577,7 +577,7 @@ function markent(target, drone, timeout, notifytoendmark) {
 }
 
 function markent_getclassperkicon(defaulticon, target) {
-  var_5c6b6249312f5aea = defaulticon;
+  classicon = defaulticon;
   var_235f68a2f521dff3 = undefined;
 
   if(isDefined(target.loadoutperks)) {
@@ -589,11 +589,11 @@ function markent_getclassperkicon(defaulticon, target) {
     }
 
     if(isDefined(var_235f68a2f521dff3)) {
-      var_5c6b6249312f5aea = level.perkbundles[var_235f68a2f521dff3].npicon;
+      classicon = level.perkbundles[var_235f68a2f521dff3].npicon;
     }
   }
 
-  return var_5c6b6249312f5aea;
+  return classicon;
 }
 
 function markent_getweaponicon(defaulticon, defaultoffset, target) {

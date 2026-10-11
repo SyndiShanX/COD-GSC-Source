@@ -598,7 +598,7 @@ function disableuavping() {
   self notify("disableUAVPing");
 }
 
-function function_efbc646224fda4fa() {
+function skydiveredeploy() {
   level thread namespace_1eb3c4e0e28fac71::utilflare_shootflare(self.origin, "revive");
   spawnheight = getdvarfloat(@ "hash_3db53fbbad853ffc", 8000);
   spawnorigin = self.origin;
@@ -703,7 +703,7 @@ function getowneddomflags() {
 
 function function_8529632b1fdb55a6(player) {
   armorvalue = undefined;
-  var_10fd8ed3fed0e0ae = undefined;
+  numplates = undefined;
 
   if(istrue(level.var_f2afbe97539d175d[player.team]["global"].upgrades["defense_spawn_armor_tier_2"].purchased)) {
     armorvalue = player.maxarmorhealth;
@@ -712,12 +712,12 @@ function function_8529632b1fdb55a6(player) {
   }
 
   if(istrue(level.var_f2afbe97539d175d[player.team]["global"].upgrades["defense_spawn_plate_tier_2"].purchased)) {
-    var_10fd8ed3fed0e0ae = scripts\cp_mp\armor::function_47320a25b8ee003();
+    numplates = scripts\cp_mp\armor::function_47320a25b8ee003();
   } else if(istrue(level.var_f2afbe97539d175d[player.team]["global"].upgrades["defense_spawn_plate_tier_1"].purchased)) {
-    var_10fd8ed3fed0e0ae = level.spawnarmorplates + 1;
+    numplates = level.spawnarmorplates + 1;
   }
 
-  return [armorvalue, var_10fd8ed3fed0e0ae];
+  return [armorvalue, numplates];
 }
 
 function modifyvehicledamage(data) {

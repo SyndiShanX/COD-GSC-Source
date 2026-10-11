@@ -88,13 +88,13 @@ function chopper_gunner_assigntargetmarkers() {
   level thread chopper_gunner_assignedtargetmarkers_onnewai(self.enemytargetmarkergroup, 0);
 }
 
-function chopper_gunner_assignedtargetmarkers_onnewai(var_4226c12910d867d4, var_262f4b55aa151de1) {
+function chopper_gunner_assignedtargetmarkers_onnewai(targetmarkergroupid, var_262f4b55aa151de1) {
   level endon("game_ended ");
-  level endon("removed_targetMarkerGroup_" + var_4226c12910d867d4);
+  level endon("removed_targetMarkerGroup_" + targetmarkergroupid);
 
   while(true) {
     level waittill("spawned_group_soldier", soldier);
-    scripts\cp_mp\targetmarkergroups::targetmarkergroup_markentity(soldier, var_4226c12910d867d4, var_262f4b55aa151de1);
+    scripts\cp_mp\targetmarkergroups::targetmarkergroup_markentity(soldier, targetmarkergroupid, var_262f4b55aa151de1);
   }
 }
 

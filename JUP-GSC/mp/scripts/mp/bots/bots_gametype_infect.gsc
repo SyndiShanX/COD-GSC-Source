@@ -79,7 +79,7 @@ function bot_infect_ai_director_update() {
 
   while(true) {
     infected_players = [];
-    var_4de221da8f9b25c8 = [];
+    non_infected_players = [];
 
     foreach(player in level.players) {
       if(!isDefined(player.initial_spawn_time) && player.health > 0 && isDefined(player.team) && (player.team == "allies" || player.team == "axis")) {
@@ -97,22 +97,22 @@ function bot_infect_ai_director_update() {
         }
 
         if(player.team == "allies") {
-          var_4de221da8f9b25c8[var_4de221da8f9b25c8.size] = player;
+          non_infected_players[non_infected_players.size] = player;
         }
       }
     }
 
-    if(infected_players.size > 0 && var_4de221da8f9b25c8.size > 0) {
+    if(infected_players.size > 0 && non_infected_players.size > 0) {
       var_b284217fe817ca2f = 1;
 
-      foreach(var_a58ff4a65b324b6b in var_4de221da8f9b25c8) {
+      foreach(var_a58ff4a65b324b6b in non_infected_players) {
         if(isbot(var_a58ff4a65b324b6b)) {
           var_b284217fe817ca2f = 0;
         }
       }
 
       if(var_b284217fe817ca2f) {
-        foreach(player in var_4de221da8f9b25c8) {
+        foreach(player in non_infected_players) {
           if(!isDefined(player.last_infected_hiding_time)) {
             player.last_infected_hiding_time = gettime();
             player.last_infected_hiding_loc = player.origin;

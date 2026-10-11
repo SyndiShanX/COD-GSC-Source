@@ -61,4 +61,4 @@ function script_models() {
   level.scr_anim["usable_shipping_container_door"]["open_door"] = % jup_port_shipping_container_open_door;
 }
 
-function function_9d6a1fa3094d9e8() {}
+function mp_vehicles() {}

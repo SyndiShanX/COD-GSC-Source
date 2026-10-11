@@ -12,9 +12,9 @@
 function getfunction(funcid) {
   switch (funcid) {
     case #"hash_dab0d83df51da4d":
-      return &function_3dbd361f74b442f9;
+      return &onuserinit;
     case #"hash_722d767fd6d40f56":
-      return &function_a157fbbc31d9eb1a;
+      return &onuserterminate;
     case #"hash_256644959193a6c7":
       return &callreinforcements;
   }
@@ -22,9 +22,9 @@ function getfunction(funcid) {
   assertmsg("Missing function pointer for " + funcid);
 }
 
-function function_3dbd361f74b442f9(interactionid) {}
+function onuserinit(interactionid) {}
 
-function function_a157fbbc31d9eb1a(interactionid) {
+function onuserterminate(interactionid) {
   self clearbtgoal(1);
   self notify("endcallreinforcements");
 }
@@ -32,14 +32,14 @@ function function_a157fbbc31d9eb1a(interactionid) {
 function callreinforcements(statename, params) {
   self endon("death");
   self endon("endcallreinforcements");
-  var_2f67a016c007b82b = getscriptbundle("ai_behavior_call_reinforcements:ai_behavior_call_reinforcements_default");
+  callreinforcementsbundle = getscriptbundle("ai_behavior_call_reinforcements:ai_behavior_call_reinforcements_default");
 
-  if(!isDefined(var_2f67a016c007b82b)) {
+  if(!isDefined(callreinforcementsbundle)) {
     assertmsg("An AI is using the call reinforcements behavior but can't find the ai_behavior_call_reinforcements script bundle!");
     return;
   }
 
-  self function_e64ea2b4e79c4b74(1);
+  self setbtgoalstationary(1);
   self setbtgoalRadius(1, 12);
   capname = "cap_call_reinforcements";
 
@@ -48,7 +48,7 @@ function callreinforcements(statename, params) {
   }
 
   self playSound("dx_br_dbos_dbli_dbtp_bitr");
-  thread function_6cdcfd04e3704a8a(var_2f67a016c007b82b.var_1f76883e524b41a5);
+  thread function_6cdcfd04e3704a8a(callreinforcementsbundle.var_1f76883e524b41a5);
   self waittill("cap_exit_completed");
 }
 
@@ -58,17 +58,17 @@ function function_6cdcfd04e3704a8a(calllength) {
   wait calllength;
 
   if(isDefined(level.agent_funcs)) {
-    var_65752f70ab196d34 = level.agent_funcs["spawn_reinforcements"];
+    spawnreinforcementsfunc = level.agent_funcs["spawn_reinforcements"];
 
-    if(isDefined(var_65752f70ab196d34)) {
-      [[var_65752f70ab196d34]](self.origin, 0, 1);
+    if(isDefined(spawnreinforcementsfunc)) {
+      [[spawnreinforcementsfunc]](self.origin, 0, 1);
     }
   }
 
   asm_fireevent(self.asmname, "call_reinforcements_loop_end");
 }
 
-function function_73c90b8dc4dbc607(asmname, statename, params) {
+function callreinforcementschooseanim(asmname, statename, params) {
   sectionname = params;
 
   if(!isDefined(sectionname)) {
@@ -104,6 +104,6 @@ function function_73c90b8dc4dbc607(asmname, statename, params) {
   }
 
   animname += "_" + sectionname;
-  var_a2f6d22ed12031bf = scripts\asm\cap::function_18e6c36c02a94dbd(statename, animname);
-  return var_a2f6d22ed12031bf;
+  alternativename = scripts\asm\cap::cap_lookupanimfromalias(statename, animname);
+  return alternativename;
 }

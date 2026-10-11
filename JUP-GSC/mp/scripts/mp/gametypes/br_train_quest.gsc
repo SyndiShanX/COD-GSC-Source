@@ -93,7 +93,7 @@ function function_ace8423d837f14d1(carriage, offset, angles) {
   }
 
   self.train = carriage.train_name;
-  function_6e506f39f121ea8a(carriage, offset, angles);
+  scriptable_setparententity(carriage, offset, angles);
   safe_marker = spawn("script_model", coordtransform((0, 0, 15), self.origin, self.angles));
   safe_marker setModel("tag_origin");
   safe_marker linkTo(carriage);
@@ -279,7 +279,7 @@ function private function_1762caac04a1a01f(player) {
   return &"MP_BR_INGAME/OPENING_TRAIN_SAFE_ENEMY";
 }
 
-function private function_26e694eaafebe73c(safe, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_26e694eaafebe73c(safe, part, state, player, bautouse, usestring) {
   switch (safe get_state()) {
     case #"hash_b19019dbf5761ea8":
       if(safe function_f5f0a46e1e8517f2(player)) {
@@ -496,7 +496,7 @@ function private function_cec9c3105b644a92(player) {
 
   if(isDefined(player)) {
     thread wait_for_death(player);
-    thread function_857dfc800d57bf4(player);
+    thread wait_for_damage(player);
 
     if(function_45cac7fd4cb39f5b() == "unusable") {
       thread function_a51704dc689a141f(player);
@@ -536,7 +536,7 @@ function private wait_for_death(player) {
   }
 }
 
-function private function_857dfc800d57bf4(player) {
+function private wait_for_damage(player) {
   level endon("game_ended");
   self endon("changed_player_using");
 
@@ -613,13 +613,13 @@ function private function_640f73216599d215() {
     return;
   }
 
-  player scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  player scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
 
   if(istrue(player.var_8d9814f7e620f450)) {
     player waittill("train_quest_gunless_off");
   }
 
-  player scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+  player scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
 }
 
 function private function_58bb10638760ba9e() {

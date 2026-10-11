@@ -27,17 +27,17 @@ function precache(params) {
 }
 
 function private function_b0fc1ad0235df745(params) {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_51534f263388ce5a);
+  callback::get_template(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_51534f263388ce5a);
   function_70332948ed09c6b1();
 }
 
 function function_5a38039db1b92712(taskid) {
   assert(isDefined(self.zombieaisetting));
-  function_7415ae9399ba8e75(self.zombieaisetting);
+  zombie_init_ai(self.zombieaisetting);
   assert(isDefined(self.zombieaisettings.var_e58a65b7a8f5973c));
   callback::add("on_first_ai_init", &function_b0fc1ad0235df745);
-  function_fe9929b42e5a99e4();
+  init_metabones();
   init_arena();
   function_b5e57408c7878df7(&function_9978cd595b421511);
   self.var_c3554a26521188a8 = &function_a8c9248308033e4e;
@@ -116,7 +116,7 @@ function private function_51534f263388ce5a(sparams) {
     val::reset_all("deathworm_no_instakill");
   }
 
-  if(istrue(sparams.var_14edc6d1db3695bc)) {
+  if(istrue(sparams.biscritical)) {
     function_3677f2be30fdd581(sparams.metabonename + "_impact", "weakpoint_impact");
   }
 }
@@ -186,9 +186,9 @@ function private function_9978cd595b421511(params) {
 
   if(istrue(self.zombieaisettings.var_e58a65b7a8f5973c.var_11f14b975b25629e) && self.var_f8adf1aaec88d636 > 1) {
     if(issharedfuncdefined("zombie", "get_pap_level") && isDefined(params.sweapon) && isPlayer(params.eattacker)) {
-      var_29a8ba8c9dd43fd2 = params.eattacker function_af5127390d3221e9(params.sweapon);
+      n_pap_level = params.eattacker function_af5127390d3221e9(params.sweapon);
 
-      if(var_29a8ba8c9dd43fd2 >= 3) {
+      if(n_pap_level >= 3) {
         damage *= 0.6;
       }
     }
@@ -238,7 +238,7 @@ function function_a5c6032799e412cd() {
     return getdvarint(@ "hash_e7da760b9a7ca2c1", -1);
   }
 
-  nearby_players = function_883458a342af3041(self.origin, 3000);
+  nearby_players = getplayersinradiussharedfunc(self.origin, 3000);
   var_de7821bc51ab43a0 = nearby_players.size;
   return var_de7821bc51ab43a0;
 }
@@ -248,7 +248,7 @@ function function_54c2056eaaf773b7() {
     return getdvarint(@ "hash_4ed7ea900c346cdb", -1);
   }
 
-  nearby_players = function_883458a342af3041(self.origin, 3000);
+  nearby_players = getplayersinradiussharedfunc(self.origin, 3000);
 
   if(nearby_players.size <= 0) {
     return 1;
@@ -270,9 +270,9 @@ function function_ad0a791562fc8bfd() {
     objweapon = player getcurrentprimaryweapon();
 
     if(issharedfuncdefined("zombie", "get_pap_level")) {
-      var_29a8ba8c9dd43fd2 = player function_af5127390d3221e9(objweapon);
+      n_pap_level = player function_af5127390d3221e9(objweapon);
 
-      if(var_29a8ba8c9dd43fd2 >= 3) {
+      if(n_pap_level >= 3) {
         return true;
       }
     }

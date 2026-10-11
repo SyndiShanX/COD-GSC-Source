@@ -161,7 +161,7 @@ function molotov_on_take(equipmentref, slot) {
 function molotov_used(grenade) {
   grenade endon("death");
   launchangles = self getgunangles();
-  var_8011cffb839e8243 = gettime();
+  launchtimems = gettime();
   launchvelocity = anglesToForward(launchangles) * 940 + anglestoup(launchangles) * 120;
 
   if(isDefined(self.offhands)) {
@@ -172,7 +172,7 @@ function molotov_used(grenade) {
   grenade_owner_name = self.name;
   grenade waittill("missile_stuck", stuckto);
   level notify("grenade_exploded_during_stealth", grenade, "molotov_mp", grenade_owner_name);
-  traveltime = (gettime() - var_8011cffb839e8243) / 1000;
+  traveltime = (gettime() - launchtimems) / 1000;
   impactvelocity = launchvelocity + (0, 0, -800 * traveltime);
 
   if(isPlayer(self)) {
@@ -189,13 +189,13 @@ function molotov_used(grenade) {
 }
 
 function ai_molotov_used(guy, grenade) {
-  var_8011cffb839e8243 = gettime();
+  launchtimems = gettime();
   selforigin = guy.origin;
   var_e02ff3e74216854b = guy.angles;
   grenade waittill("missile_stuck", stuckto, hitentpart, surfacetype, velocity, position, hitnormal);
   launchangles = getlaunchangles(selforigin, var_e02ff3e74216854b, position);
   launchvelocity = velocity;
-  traveltime = (gettime() - var_8011cffb839e8243) / 1000;
+  traveltime = (gettime() - launchtimems) / 1000;
   impactvelocity = launchvelocity + (0, 0, -800 * traveltime);
 
   if(isDefined(guy)) {
@@ -211,8 +211,8 @@ function ai_molotov_used(guy, grenade) {
 }
 
 function getlaunchangles(startorigin, startangles, origin) {
-  var_d972b258956d09cd = vectorNormalize(origin - startorigin);
-  ang = vectortoangles(var_d972b258956d09cd);
+  dirtomolotov = vectorNormalize(origin - startorigin);
+  ang = vectortoangles(dirtomolotov);
   flatang = (0, startangles[1], 0);
   launchangles = flatang + (45, 0, 0);
   return launchangles;
@@ -301,12 +301,12 @@ function molotov_stuck_player(grenade, stuckto, launchangles, impactvelocity) {
 
   if(isDefined(castresults) && castresults.size > 0) {
     castend = castresults[0]["position"];
-    var_a95d04f8f906e839 = castresults[0]["normal"];
+    casthitnorm = castresults[0]["normal"];
     casthitent = castresults[0]["entity"];
-    castend -= var_a95d04f8f906e839 * 1;
+    castend -= casthitnorm * 1;
     d = vectordot(castend - caststart, castdir);
     t = sqrt(2 * d / -1 * -800);
-    up = var_a95d04f8f906e839;
+    up = casthitnorm;
     right = anglestoright(launchangles);
     impactangles = molotov_rebuild_angles_up_right(up, right);
     thread molotov_simulate_impact(grenade, castend, impactangles, casthitent, impactvelocity, gettime() + t * 1000);
@@ -361,7 +361,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
   var_6f2b46872df538de = 25;
   var_df64badccf60fd69 = 65;
   var_144e6d19329167bd = 115;
-  var_911981ae29f681e9 = gettime() + pooldata.startdelayms;
+  sidepreventstarttime = gettime() + pooldata.startdelayms;
   id = 8;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -371,7 +371,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = &molotov_branch_create_forward_tendril_cone;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, impactangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, impactangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   forward = anglesToForward(impactangles);
   right = anglestoright(impactangles);
@@ -388,7 +388,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = undefined;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -402,7 +402,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = &molotov_branch_create_right_tendril_cone;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -416,7 +416,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = &molotov_branch_create_left_tendril_cone;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -430,7 +430,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = undefined;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   castdata = molotov_get_cast_data(id);
   pooldata = molotov_get_pool_data(id);
@@ -444,7 +444,7 @@ function molotov_simulate_impact(grenade, impactorigin, impactangles, impactent,
     oncompletedfunc = undefined;
   }
 
-  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, var_911981ae29f681e9, oncompletedfunc);
+  branch = molotov_create_branch(shareddata, castdata, pooldata, undefined, borigin, bangles, impactent, 0, sidepreventstarttime, oncompletedfunc);
   shareddata.branches[shareddata.branches.size] = branch;
   molotov_register_cast(shareddata);
 
@@ -786,15 +786,15 @@ function molotov_start_branch() {
     self.castend = self.caststart + self.castdir * molotov_get_cast_dist(self.casttype, self.castdata, self.iswallcast);
     casthit = undefined;
     casthitpos = undefined;
-    var_a95d04f8f906e839 = undefined;
+    casthitnorm = undefined;
     casthitent = undefined;
-    var_d27f9a12a82f66e3 = undefined;
+    casthitangles = undefined;
     castresults = physics_raycast(self.caststart, self.castend, self.shareddata.castcontents, undefined, 0, "physicsquery_closest", 1);
 
     if(isDefined(castresults) && castresults.size > 0) {
       casthit = 1;
       casthitpos = castresults[0]["position"];
-      var_a95d04f8f906e839 = castresults[0]["normal"];
+      casthitnorm = castresults[0]["normal"];
       casthitent = castresults[0]["entity"];
     }
 
@@ -802,7 +802,7 @@ function molotov_start_branch() {
       case 0:
         if(istrue(casthit)) {
           molotov_branch_register_cast(self.casttype, 0, casthitpos);
-          var_1ddc516959ef26a0 = 1;
+          shouldcreatepool = 1;
 
           if(isDefined(self.castdata.firstforwarddist)) {
             castvec = casthitpos - self.caststart;
@@ -810,22 +810,22 @@ function molotov_start_branch() {
             self.castdata.firstforwarddist -= castdist;
 
             if(self.castdata.firstforwarddist > self.castdata.firstforwardmindist) {
-              var_1ddc516959ef26a0 = 0;
+              shouldcreatepool = 0;
             } else {
               self.castdata.firstforwarddist = undefined;
             }
           }
 
-          var_d27f9a12a82f66e3 = molotov_rebuild_angles_up_right(var_a95d04f8f906e839, anglestoright(self.castangles));
+          casthitangles = molotov_rebuild_angles_up_right(casthitnorm, anglestoright(self.castangles));
 
-          if(var_1ddc516959ef26a0) {
-            ent = molotov_branch_create_pool(casthitpos, var_d27f9a12a82f66e3, casthitent);
+          if(shouldcreatepool) {
+            ent = molotov_branch_create_pool(casthitpos, casthitangles, casthitent);
             ent thread molotov_pool_start();
           }
 
           self.casttype = 2;
-          self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
-          self.castangles = var_d27f9a12a82f66e3;
+          self.caststart = casthitpos + casthitnorm * 1;
+          self.castangles = casthitangles;
           self.iswallcast = undefined;
         } else {
           molotov_branch_register_cast(self.casttype, undefined, undefined);
@@ -847,16 +847,16 @@ function molotov_start_branch() {
         break;
       case 1:
         if(istrue(casthit)) {
-          var_d27f9a12a82f66e3 = molotov_rebuild_angles_up_right(var_a95d04f8f906e839, anglestoright(self.castangles));
-          ent = molotov_branch_create_pool(casthitpos, var_d27f9a12a82f66e3, casthitent);
+          casthitangles = molotov_rebuild_angles_up_right(casthitnorm, anglestoright(self.castangles));
+          ent = molotov_branch_create_pool(casthitpos, casthitangles, casthitent);
           ent thread molotov_pool_start();
-          normdot = vectordot(anglestoup(self.castangles), var_a95d04f8f906e839);
+          normdot = vectordot(anglestoup(self.castangles), casthitnorm);
 
           if(normdot < 0.9848) {
             molotov_branch_register_cast(self.casttype, 2, casthitpos);
             self.casttype = 2;
-            self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
-            self.castangles = var_d27f9a12a82f66e3;
+            self.caststart = casthitpos + casthitnorm * 1;
+            self.castangles = casthitangles;
           } else {
             molotov_branch_register_cast(self.casttype, 1, casthitpos);
             self.casttype = 0;
@@ -871,7 +871,7 @@ function molotov_start_branch() {
         if(istrue(casthit)) {
           molotov_branch_register_cast(self.casttype, 3, casthitpos);
           self.casttype = 0;
-          self.caststart = casthitpos + var_a95d04f8f906e839 * 1;
+          self.caststart = casthitpos + casthitnorm * 1;
         } else {
           molotov_branch_register_cast(self.casttype, undefined, undefined);
           self.casttype = 0;
@@ -951,12 +951,12 @@ function molotov_branch_is_complete(var_af8745e2185687a8, var_f7d3f0b0605b5824) 
   return iscomplete;
 }
 
-function molotov_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitposition) {
+function molotov_branch_register_cast(casttype, casthittype, hitposition) {
   molotov_register_cast(self.shareddata);
   self.casts++;
 
-  if(isDefined(var_8e87ebe279cdfcfb)) {
-    if(var_8e87ebe279cdfcfb == 0 || var_8e87ebe279cdfcfb == 1 || var_8e87ebe279cdfcfb == 2) {
+  if(isDefined(casthittype)) {
+    if(casthittype == 0 || casthittype == 1 || casthittype == 2) {
       self.castfails = 0;
     }
   } else if(casttype == 1) {
@@ -965,10 +965,10 @@ function molotov_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitpositio
 
   debugmsg = undefined;
 
-  if(isDefined(var_8e87ebe279cdfcfb)) {
+  if(isDefined(casthittype)) {
     debugmsg = undefined;
 
-    switch (var_8e87ebe279cdfcfb) {
+    switch (casthittype) {
       case 0:
         debugmsg = "<dev string:x30>";
         break;
@@ -984,7 +984,7 @@ function molotov_branch_register_cast(casttype, var_8e87ebe279cdfcfb, hitpositio
     }
 
     self.hitpositions[self.hitpositions.size] = hitposition;
-    self.hittypes[self.hittypes.size] = var_8e87ebe279cdfcfb;
+    self.hittypes[self.hittypes.size] = casthittype;
   } else {
     switch (casttype) {
       case 0:
@@ -1021,7 +1021,7 @@ function molotov_create_pool(origin, angles, stuckto, owner, burnsource, burnid,
   if(isDefined(stuckto)) {
     offset = rotatevectorinverted(origin - stuckto.origin, stuckto.angles);
     angleoffset = combineangles(invertangles(stuckto.angles), angles);
-    scriptable utility::function_6e506f39f121ea8a(stuckto, offset, angleoffset);
+    scriptable utility::scriptable_setparententity(stuckto, offset, angleoffset);
   }
 
   return scriptable;
@@ -1079,8 +1079,8 @@ function molotov_watch_pool() {
   self.trigger = molotov_create_pool_trigger(self.pooldata.triggerradius, self.pooldata.triggerheight, self.pooldata.triggeroffset);
   self.poolmask |= 1;
   molotov_pool_update_scriptable();
-  var_8fc4600d9c0cbb6 = randomfloatrange(6.5, 6.75);
-  wait var_8fc4600d9c0cbb6;
+  burnloopduration = randomfloatrange(6.5, 6.75);
+  wait burnloopduration;
 }
 
 function molotov_pool_end() {

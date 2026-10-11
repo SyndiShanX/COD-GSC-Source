@@ -1035,7 +1035,7 @@ function recordbreadcrumbdata() {
       }
 
       var_de1e71241aae57ed = scripts\cp\utility\player::isreallyalive(player) && !isai(player);
-      var_d4ce6b875d4f5cf8 = isDefined(player.pers["telemetry"]) && isDefined(player.pers["telemetry"].life) && isDefined(player.pers["telemetry"].life.life_index) && namespace_de6e6777b0937bd7::function_892570944f6b6a2(player);
+      var_d4ce6b875d4f5cf8 = isDefined(player.pers["telemetry"]) && isDefined(player.pers["telemetry"].life) && isDefined(player.pers["telemetry"].life.life_index) && namespace_de6e6777b0937bd7::is_valid_client(player);
       var_7b3a43a2c9353902 = isDefined(player.team) && player.team != "spectator" && player.sessionstate == "playing" && player.sessionstate != "dead";
 
       if(var_de1e71241aae57ed && var_d4ce6b875d4f5cf8 && var_7b3a43a2c9353902) {
@@ -1464,7 +1464,7 @@ function logevent_xpearned(player, playerxp, weaponname, weaponxp, source) {
   }
 
   if(isxhash(source)) {
-    source = function_f28fd66285fa2c9(source);
+    source = getxhashhexname(source);
   }
 
   current_beat = player function_32900c5a73179b4();

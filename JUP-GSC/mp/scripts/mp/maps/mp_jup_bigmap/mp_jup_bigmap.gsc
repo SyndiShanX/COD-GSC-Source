@@ -173,9 +173,9 @@ function main() {
       mdl_clip delete();
     }
 
-    var_607fd6c265fe2a0 = getEntArray("clip_zombie_breach", "targetname");
+    a_mdl_clips = getEntArray("clip_zombie_breach", "targetname");
 
-    foreach(mdl_clip in var_607fd6c265fe2a0) {
+    foreach(mdl_clip in a_mdl_clips) {
       if(isDefined(mdl_clip)) {
         mdl_clip connectpaths();
       }

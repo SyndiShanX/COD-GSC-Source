@@ -17,12 +17,12 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_enemy_specialist_sniper");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_76c13a964f5f670");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_76c13a964f5f670");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 350;
   self.maxhealth = 350;
   self.behaviortreeasset = "soldier_jup_ob";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "soldier";
   scripts\common\ai_settings::function_7b25d1c42e7f75be("aisettings_soldier_base_ob");
 
@@ -41,8 +41,8 @@ function main() {
   self setspawnweapon(self.weapon);
   self.bulletsinclip = weaponclipsize(self.weapon);
   self.primaryweapon = self.weapon;
-  var_4f04b9c326eb7400 = "iw9_pi_swhiskey, [ none, none, none, none, none, none ], none, none";
-  self.sidearm = level.var_67b54180a55f70e1[var_4f04b9c326eb7400];
+  sidearmweaponhash = "iw9_pi_swhiskey, [ none, none, none, none, none, none ], none, none";
+  self.sidearm = level.var_67b54180a55f70e1[sidearmweaponhash];
   self.grenadeweapon = nullweapon();
   self.grenadeammo = 0;
   setup_model();
@@ -58,9 +58,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       function_9ac26a51c94ccf52();
@@ -115,9 +115,9 @@ function setup_weapons() {
     level.var_67b54180a55f70e1[var_5576d6be590aa0fd] = scripts\mp\class::function_e83615f8a92e4378("iw9_dm_xmike2010", ["bar_sn_heavy_p20_xmike2010", "comp_dm_01"], "none", "none");
   }
 
-  var_4f04b9c326eb7400 = "iw9_pi_swhiskey, [ none, none, none, none, none, none ], none, none";
+  sidearmweaponhash = "iw9_pi_swhiskey, [ none, none, none, none, none, none ], none, none";
 
-  if(!isDefined(level.var_67b54180a55f70e1[var_4f04b9c326eb7400])) {
-    level.var_67b54180a55f70e1[var_4f04b9c326eb7400] = scripts\mp\class::function_e83615f8a92e4378("iw9_pi_swhiskey", ["none", "none", "none", "none", "none", "none"], "none", "none");
+  if(!isDefined(level.var_67b54180a55f70e1[sidearmweaponhash])) {
+    level.var_67b54180a55f70e1[sidearmweaponhash] = scripts\mp\class::function_e83615f8a92e4378("iw9_pi_swhiskey", ["none", "none", "none", "none", "none", "none"], "none", "none");
   }
 }

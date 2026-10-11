@@ -30,8 +30,8 @@ function function_c3d429c05cfee6bf(player) {
   player endon("death");
   self endon("death");
 
-  if(isDefined(level.var_ce78d0e4ea4e7d3b)) {
-    posoffset = level.var_ce78d0e4ea4e7d3b;
+  if(isDefined(level.nvgposoffset)) {
+    posoffset = level.nvgposoffset;
   } else {
     posoffset = (1, 6, 0.1);
   }
@@ -44,7 +44,7 @@ function function_c3d429c05cfee6bf(player) {
   }
 }
 
-function function_296ee731835b1e4b() {
+function player_nvg_lightmodel_extras_watcher() {
   self endon("death");
   thread script_func("player_nvg_lightmodel_extras_watcher_entry");
 

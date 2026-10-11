@@ -15,14 +15,14 @@ function private function_51af81c1aecc2e12() {
     return 0;
   }
 
-  if(self.entitydata.var_9adf21d0962a922b == 1) {
+  if(self.entitydata.entitystate == 1) {
     return;
   }
 
   var_42c1062a451756ef = function_6f62bd82b9687bc0();
 
   if(isDefined(var_42c1062a451756ef)) {
-    self.entitydata.var_9adf21d0962a922b = 1;
+    self.entitydata.entitystate = 1;
     self.var_e198ad98b4845f29.var_42c1062a451756ef = var_42c1062a451756ef;
     ent_flag_set("weakpoints_deactivate");
     return;
@@ -59,7 +59,7 @@ function function_5c5ec13b69fc89d9(taskid, params) {
 }
 
 function private function_7f6dd8821551a274(state) {
-  if(self function_11e2d4051ea44b35("in_teleport") == state) {
+  if(self getaiblackboarddynamic("in_teleport") == state) {
     return true;
   }
 
@@ -78,7 +78,7 @@ function private function_6ead0d3f38711d70() {
     return false;
   }
 
-  if(self.entitydata.var_9adf21d0962a922b == 1) {
+  if(self.entitydata.entitystate == 1) {
     return false;
   }
 
@@ -138,7 +138,7 @@ function private function_6b2e9906966d1148() {
     return false;
   }
 
-  if(self.entitydata.var_9adf21d0962a922b == 1) {
+  if(self.entitydata.entitystate == 1) {
     return false;
   }
 
@@ -185,7 +185,7 @@ function private function_1017131041e2a7b() {
     return false;
   }
 
-  if(self.entitydata.var_9adf21d0962a922b == 1) {
+  if(self.entitydata.entitystate == 1) {
     return false;
   }
 
@@ -290,14 +290,14 @@ function private function_25ef28554af7c94b() {
   var_5875aebc3992449e = -1 * vectorNormalize(anglestoup(location.angles));
   leftvector = vectorNormalize(anglestoleft(location.angles));
   var_646666a33716a682 = animdelta[0] * reverse + animdelta[1] * leftvector + animdelta[2] * var_5875aebc3992449e;
-  var_cda09895ee15020c = location.origin + var_646666a33716a682;
+  teleportorigin = location.origin + var_646666a33716a682;
 
   if(getdvarint(@ "hash_b5024b31d9ec2722", 0)) {
     sphere(location.origin, 100, (0, 1, 0), undefined, 500);
-    sphere(var_cda09895ee15020c, 100, (1, 0, 0), undefined, 500);
+    sphere(teleportorigin, 100, (1, 0, 0), undefined, 500);
   }
 
-  self forceteleport(var_cda09895ee15020c, location.angles);
+  self forceteleport(teleportorigin, location.angles);
 
   if(isDefined(self.entitydata.spawnlocation)) {
     self.entitydata.var_9e9d541733c8afa4 = self.entitydata.spawnlocation;
@@ -315,7 +315,7 @@ function private function_a497421f5acb0816() {
   self.var_e198ad98b4845f29.reason = undefined;
   self.var_e198ad98b4845f29.var_c9a5e91aaf4191d5 = self.health;
   self.var_e198ad98b4845f29.var_42c1062a451756ef = undefined;
-  self.entitydata.var_9adf21d0962a922b = 0;
+  self.entitydata.entitystate = 0;
   self function_3e89eb3d8e3f1811("in_teleport", 0);
   utility::function_3ab9164ef76940fd("reactive_miscellaneous", "off");
 }

@@ -54,7 +54,7 @@ function function_7bd275ed660d3b32(params) {
     self.var_1b497a63cfb737b2 = 0;
   }
 
-  if(function_fe8f110892c02b38("ui_plasma_launcher_charge_time")) {
+  if(hasomnvar("ui_plasma_launcher_charge_time")) {
     ispap = function_d379e4f28a5e64b7();
     charge_time = ter_op(ispap, 2, 3);
     self setclientomnvar("ui_plasma_launcher_charge_time", charge_time);
@@ -121,7 +121,7 @@ function private function_d4e2072a078a7a16() {
 
   thread plasmagun_watch_charge_overtime(state_name, paped);
 
-  if(function_fe8f110892c02b38("ui_plasma_launcher_light_color")) {
+  if(hasomnvar("ui_plasma_launcher_light_color")) {
     self setclientomnvar("ui_plasma_launcher_light_color", 0);
   }
 
@@ -150,7 +150,7 @@ function private function_2fe43dabafffe097() {
 
   thread plasmagun_watch_charge_overtime(state_name, paped);
 
-  if(function_fe8f110892c02b38("ui_plasma_launcher_light_color")) {
+  if(hasomnvar("ui_plasma_launcher_light_color")) {
     self setclientomnvar("ui_plasma_launcher_light_color", 1);
   }
 
@@ -196,7 +196,7 @@ function private function_1a8cf1d0a5a6b560() {
     return;
   }
 
-  if(function_fe8f110892c02b38("ui_plasma_launcher_light_color")) {
+  if(hasomnvar("ui_plasma_launcher_light_color")) {
     self setclientomnvar("ui_plasma_launcher_light_color", 0);
   }
 
@@ -300,7 +300,7 @@ function private function_3f54cae9f655ea24(var_3032a1d2003305a6, charge_time, ob
   var_da49a6c35dc8e259 = 0;
   var_d389b0c90dbea55d = ter_op(var_3032a1d2003305a6, 2, 3);
 
-  if(function_fe8f110892c02b38("ui_plasma_launcher_charge_time")) {
+  if(hasomnvar("ui_plasma_launcher_charge_time")) {
     self setclientomnvar("ui_plasma_launcher_charge_time", var_d389b0c90dbea55d);
   }
 
@@ -540,13 +540,13 @@ function private function_4de5fbb5a8d10590() {
 
 function private function_acff8f7424c6a789(params) {
   if(isDefined(params.objweapon) && isDefined(params.objweapon.basename) && params.objweapon.basename == "jup_la_plasmagun_mp") {
-    var_29a8ba8c9dd43fd2 = 0;
+    n_pap_level = 0;
 
     if(issharedfuncdefined("zombie", "get_pap_level") && isDefined(params.eattacker)) {
-      var_29a8ba8c9dd43fd2 = params.eattacker function_af5127390d3221e9(params.objweapon);
+      n_pap_level = params.eattacker function_af5127390d3221e9(params.objweapon);
     }
 
-    if(var_29a8ba8c9dd43fd2 > 0) {
+    if(n_pap_level > 0) {
       ent_flag_set("plasma_death_pap");
       return;
     }

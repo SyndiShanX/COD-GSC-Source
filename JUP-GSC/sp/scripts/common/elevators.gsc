@@ -20,14 +20,14 @@ function initelevators() {
   level.var_b3c54f58528f476 = 1;
   level waittill("prematch_done");
   scripts\engine\scriptable::scriptable_addusedcallbackbypart("button", &elevatorbuttonpressed);
-  scripts\engine\scriptable::scriptable_addusedcallbackbypart("elevator_ext_button", &function_52b0636366efd3e4);
+  scripts\engine\scriptable::scriptable_addusedcallbackbypart("elevator_ext_button", &elevatorextbuttonpressed);
   scripts\engine\scriptable::scriptable_addusedcallbackbypart("elevator_int_button", &function_d99e32e6787622fe);
   scripts\engine\scriptable::scriptable_addusedcallbackbypart("elevator_int_button_double", &function_d99e32e6787622fe);
   level.elevatorsfuncs = [];
   level.elevatorsfuncs["waiting"] = &function_4497ec9c55f12123;
   level.elevatorsfuncs["doors_open"] = &function_ec009a967d1d5eb9;
   level.elevatorsfuncs["doors_closing"] = &function_8b680b3ef155fc34;
-  level.elevatorsfuncs["moving"] = &function_82893c609a46609;
+  level.elevatorsfuncs["moving"] = &fsm_elevatormove;
   level.elevators = [];
   level.elevatorstops = [];
   level.elevatoronspawnplayer = &elevatoronspawnplayer;
@@ -35,26 +35,26 @@ function initelevators() {
   elevatorstops = getentitylessscriptablearray("elevator_stop", "script_noteworthy");
 
   foreach(stop in elevatorstops) {
-    function_b0811deba3748e9d(stop);
+    initelevatorstop(stop);
   }
 
-  var_9c512bd31f6b92d0 = scripts\engine\utility::getStructArray("elevator_car", "script_noteworthy");
+  elevatorcars = scripts\engine\utility::getStructArray("elevator_car", "script_noteworthy");
 
   foreach(elevatorset in level.elevatorstops) {
     if(elevatorset.size != 2) {
       continue;
     }
 
-    elevator = function_c0032a2e585d337b(elevatorset, var_9c512bd31f6b92d0);
+    elevator = initelevatorset(elevatorset, elevatorcars);
     elevator thread function_12e75ac514f84d03();
   }
 }
 
-function function_b0811deba3748e9d(stop) {
+function initelevatorstop(stop) {
   stop.open = 0;
   [stop.indicator] = getentitylessscriptablearray(stop.target, "targetname");
   stop.doors = getentitylessscriptablearray(stop.indicator.target, "targetname");
-  stop.var_f6104aeade1a9e68 = [];
+  stop.entsblocking = [];
   s_anchor = undefined;
 
   if(isDefined(stop.doors[0].target)) {
@@ -88,43 +88,43 @@ function function_b0811deba3748e9d(stop) {
 
   if(isDefined(stop.doors[0].target)) {
     if(isDefined(s_anchor)) {
-      noenttrigger = function_f159c10d5cf8f0b4(s_anchor.target, "targetname");
+      noenttrigger = getnoentvolumearray(s_anchor.target, "targetname");
     } else {
-      noenttrigger = function_f159c10d5cf8f0b4(stop.doors[0].target, "targetname");
+      noenttrigger = getnoentvolumearray(stop.doors[0].target, "targetname");
     }
 
     stop.trigger = noenttrigger[0];
 
     if(isDefined(stop.trigger)) {
-      stop thread function_e7dd97852a7b0baf();
+      stop thread elevatortriggerfunc();
     }
   }
 
   return posstring;
 }
 
-function function_c0032a2e585d337b(elevatorset, var_9c512bd31f6b92d0, overridemodel) {
+function initelevatorset(elevatorset, elevatorcars, overridemodel) {
   elevator = spawnStruct();
   elevator.parts = [];
   elevator.floors = [];
   elevator.state = "doors_open";
 
   if(elevatorset.size > 1) {
-    var_d8acb6785f746668 = ter_op(elevatorset[0].origin[2] < elevatorset[1].origin[2], 0, 1);
+    groundfloorindex = ter_op(elevatorset[0].origin[2] < elevatorset[1].origin[2], 0, 1);
   } else {
-    var_d8acb6785f746668 = 0;
+    groundfloorindex = 0;
   }
 
   foreach(stop in elevatorset) {
     stop.elevator = elevator;
   }
 
-  checkorigin = elevatorset[var_d8acb6785f746668].origin;
+  checkorigin = elevatorset[groundfloorindex].origin;
   mindist = undefined;
   targetcar = undefined;
   var_d4a1fd41d06b194 = undefined;
 
-  foreach(car in var_9c512bd31f6b92d0) {
+  foreach(car in elevatorcars) {
     if(!isDefined(mindist)) {
       mindist = distancesquared(car.origin, checkorigin);
       targetcar = car;
@@ -156,20 +156,20 @@ function function_c0032a2e585d337b(elevatorset, var_9c512bd31f6b92d0, overridemo
     car.n_travel_time = float(var_6b72ca36ef52aa27[0]);
 
     if(var_6b72ca36ef52aa27.size >= 3) {
-      car.var_acb6874b16adac5e = float(var_6b72ca36ef52aa27[1]);
+      car.n_accel_time = float(var_6b72ca36ef52aa27[1]);
       car.var_23e93511918b6091 = float(var_6b72ca36ef52aa27[2]);
     } else if(var_6b72ca36ef52aa27.size == 2) {
-      car.var_acb6874b16adac5e = float(var_6b72ca36ef52aa27[1]);
-      car.var_23e93511918b6091 = car.var_acb6874b16adac5e;
+      car.n_accel_time = float(var_6b72ca36ef52aa27[1]);
+      car.var_23e93511918b6091 = car.n_accel_time;
     } else if(car.n_travel_time >= 4) {
-      car.var_acb6874b16adac5e = 2;
+      car.n_accel_time = 2;
       car.var_23e93511918b6091 = 2;
     } else {
-      car.var_acb6874b16adac5e = 0;
+      car.n_accel_time = 0;
       car.var_23e93511918b6091 = 0;
     }
   } else {
-    car.var_acb6874b16adac5e = 2;
+    car.n_accel_time = 2;
     car.var_23e93511918b6091 = 2;
   }
 
@@ -250,7 +250,7 @@ function function_c0032a2e585d337b(elevatorset, var_9c512bd31f6b92d0, overridemo
     car.var_27abfc12040d5908 = 1;
   }
 
-  var_61f15908243423cc = function_f159c10d5cf8f0b4("elevator_occupancy_trig", "targetname");
+  var_61f15908243423cc = getnoentvolumearray("elevator_occupancy_trig", "targetname");
 
   if(isDefined(var_61f15908243423cc) && var_61f15908243423cc.size > 0) {
     var_bf33d00c58d36fb9 = sortbydistance(var_61f15908243423cc, car.origin);
@@ -275,12 +275,12 @@ function function_c0032a2e585d337b(elevatorset, var_9c512bd31f6b92d0, overridemo
   car setmoverantilagged(1);
   car markkeyframedmover();
   elevator.car = car;
-  elevator.floors[0] = elevatorset[var_d8acb6785f746668];
+  elevator.floors[0] = elevatorset[groundfloorindex];
   elevator.floors[0].floornum = 0;
   elevator.floors[0].targetheight = elevator.car.origin[2];
 
   if(elevatorset.size > 1) {
-    elevator.floors[1] = elevatorset[ter_op(var_d8acb6785f746668 == 0, 1, 0)];
+    elevator.floors[1] = elevatorset[ter_op(groundfloorindex == 0, 1, 0)];
     elevator.floors[1].floornum = 1;
     elevator.floors[1].targetheight = elevator.car.origin[2] + elevator.floors[1].doormidpoint[2] - elevator.floors[0].doormidpoint[2];
   }
@@ -300,7 +300,7 @@ function onspawnfinished() {
   self waittill("giveLoadout");
 
   if(self.ti_spawn) {
-    scripts\common\elevators::function_8e2d666b5b0f2bd3();
+    scripts\common\elevators::isinsideelevator();
   }
 }
 
@@ -331,12 +331,12 @@ function isentitytouchingdoortrigger(ent) {
 
         if(self.state == "moving") {
           if(ispointinvolume(ent.origin, self.floors[self.targetfloor].trigger)) {
-            ent thread[[ent.var_d1659ed0a33bf98f]]();
+            ent thread[[ent.elevatordoorsclosecallback]]();
           }
         }
 
         if(ispointinvolume(ent.origin, self.floors[self.currentfloor].trigger)) {
-          ent thread[[ent.var_d1659ed0a33bf98f]]();
+          ent thread[[ent.elevatordoorsclosecallback]]();
         }
       } else {
         return;
@@ -406,14 +406,14 @@ function function_29de8f099a0a63df(ent) {
   }
 }
 
-function function_a465aa01fa0187d8(ent) {
+function deployablecover_isentitytouchingdoortrigger(ent) {
   if(!isent(ent)) {
     return;
   }
 
   if(isarray(self)) {
     foreach(elevator in self) {
-      elevator thread function_a465aa01fa0187d8(ent);
+      elevator thread deployablecover_isentitytouchingdoortrigger(ent);
     }
 
     return;
@@ -433,12 +433,12 @@ function function_a465aa01fa0187d8(ent) {
 
         if(self.state == "moving") {
           if(ent.collision istouching(self.floors[self.targetfloor].trigger)) {
-            ent thread[[ent.var_d1659ed0a33bf98f]]();
+            ent thread[[ent.elevatordoorsclosecallback]]();
           }
         }
 
         if(ent.collision istouching(self.floors[self.currentfloor].trigger)) {
-          ent thread[[ent.var_d1659ed0a33bf98f]]();
+          ent thread[[ent.elevatordoorsclosecallback]]();
         }
       } else {
         return;
@@ -451,7 +451,7 @@ function function_a465aa01fa0187d8(ent) {
   }
 }
 
-function function_e7dd97852a7b0baf() {
+function elevatortriggerfunc() {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -487,7 +487,7 @@ function function_12e75ac514f84d03() {
   thread function_580e82173ae3940c();
 }
 
-function function_52b0636366efd3e4(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function elevatorextbuttonpressed(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance.floornum)) {
     if(instance.elevator.currentfloor == instance.floornum) {
       instance.elevator.state = "doors_open";
@@ -507,7 +507,7 @@ function function_52b0636366efd3e4(instance, part, state, player, var_a5b2c54141
   }
 }
 
-function function_d99e32e6787622fe(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_d99e32e6787622fe(instance, part, state, player, bautouse, usestring) {
   if(isDefined(player)) {
     player playSound("mp_elevator_button_press");
   }
@@ -525,7 +525,7 @@ function function_c327c9e30f9df682() {
   }
 }
 
-function elevatorbuttonPressed(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function elevatorbuttonPressed(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance.floornum)) {
     if(instance.floornum == 0) {
       instance.owner.targetfloor = ter_op(instance.owner.currentfloor == 1, 2, 1);
@@ -539,7 +539,7 @@ function elevatorbuttonPressed(instance, part, state, player, var_a5b2c541413aa8
   }
 }
 
-function function_fea8a1d17e4d669f() {
+function elevatordooropen() {
   foreach(door in self.doors) {
     self.open = 1;
     door.open = 1;
@@ -551,7 +551,7 @@ function function_fea8a1d17e4d669f() {
   }
 }
 
-function function_7c2abb1b0d147a89() {
+function elevatordoorclose() {
   self.elevator endon("emergency_block");
 
   foreach(door in self.doors) {
@@ -585,7 +585,7 @@ function function_ec009a967d1d5eb9() {
   self.floors[self.currentfloor] setscriptablepartstate("elevator_ext_button", "disabled");
   self.floors[self.currentfloor] setscriptablepartstate("elevator_button_lights", "off");
   self notify("elevator_doors_unblocking");
-  self.floors[self.currentfloor] thread function_fea8a1d17e4d669f();
+  self.floors[self.currentfloor] thread elevatordooropen();
 
   if(self.car.var_ef04438af292c145 && self.currentfloor != 0) {
     self.car thread anim_single_solo(self.car, "open_back");
@@ -610,7 +610,7 @@ function function_8b680b3ef155fc34() {
   self notify("elevator_doors_unblocking");
   thread function_f99e0077b2350e7();
   wait 0.01;
-  self.floors[self.currentfloor] thread function_7c2abb1b0d147a89();
+  self.floors[self.currentfloor] thread elevatordoorclose();
 
   if(self.car.var_ef04438af292c145 && self.currentfloor != 0) {
     str_anim = "close_back";
@@ -630,7 +630,7 @@ function function_8b680b3ef155fc34() {
   self.floors[self.currentfloor] setscriptablepartstate("elevator_ext_button", "usable");
 }
 
-function function_82893c609a46609() {
+function fsm_elevatormove() {
   for(i = 0; i < self.floors.size; i++) {
     if(isDefined(self.floors[i].indicator)) {
       if(self.floors[i].floornum == self.targetfloor) {
@@ -655,9 +655,9 @@ function function_82893c609a46609() {
   totalheight = abs(self.floors[self.targetfloor].targetheight - self.floors[self.currentfloor].targetheight);
 
   if(isDefined(self.car.n_travel_time)) {
-    assertex(self.car.n_travel_time >= self.car.var_acb6874b16adac5e + self.car.var_23e93511918b6091, "Elevator travel time must be at least " + self.car.var_acb6874b16adac5e + self.car.var_acb6874b16adac5e + ".\n");
+    assertex(self.car.n_travel_time >= self.car.n_accel_time + self.car.var_23e93511918b6091, "Elevator travel time must be at least " + self.car.n_accel_time + self.car.n_accel_time + ".\n");
 
-    if(self.car.n_travel_time >= self.car.var_acb6874b16adac5e + self.car.var_23e93511918b6091) {
+    if(self.car.n_travel_time >= self.car.n_accel_time + self.car.var_23e93511918b6091) {
       duration = self.car.n_travel_time;
     }
   }
@@ -673,7 +673,7 @@ function function_82893c609a46609() {
   }
 
   targetpos = (self.car.origin[0], self.car.origin[1], self.floors[self.targetfloor].targetheight);
-  self.car moveTo(targetpos, duration, self.car.var_acb6874b16adac5e, self.car.var_23e93511918b6091);
+  self.car moveTo(targetpos, duration, self.car.n_accel_time, self.car.var_23e93511918b6091);
   self.car setscriptablepartstate("elevator_sounds", "on");
   wait duration;
   self.car setscriptablepartstate("elevator_sounds", "off");
@@ -797,7 +797,7 @@ function elevatoroccupancytracking(enttriggered, car) {
   while(isDefined(enttriggered)) {
     car function_e7de8f7b4f13cd26(enttriggered, 1);
 
-    while(!enttriggered function_8e2d666b5b0f2bd3(car)) {
+    while(!enttriggered isinsideelevator(car)) {
       wait short_interval;
       var_91ccf825cd08c4fa -= short_interval;
 
@@ -812,13 +812,13 @@ function elevatoroccupancytracking(enttriggered, car) {
 
     car function_e7de8f7b4f13cd26(enttriggered);
 
-    while(enttriggered function_8e2d666b5b0f2bd3(car)) {
+    while(enttriggered isinsideelevator(car)) {
       wait short_interval;
     }
   }
 }
 
-function function_8e2d666b5b0f2bd3(car) {
+function isinsideelevator(car) {
   if(!isDefined(self) || !isalive(self)) {
     return 0;
   }
@@ -828,13 +828,13 @@ function function_8e2d666b5b0f2bd3(car) {
   }
 
   if(!isDefined(car)) {
-    var_9c512bd31f6b92d0 = [];
+    elevatorcars = [];
 
     foreach(elevator in level.elevators) {
-      var_9c512bd31f6b92d0[var_9c512bd31f6b92d0.size] = elevator.car;
+      elevatorcars[elevatorcars.size] = elevator.car;
     }
 
-    car = getclosest(self.origin, var_9c512bd31f6b92d0);
+    car = getclosest(self.origin, elevatorcars);
 
     if(!isDefined(car)) {
       return 0;
@@ -847,7 +847,7 @@ function function_8e2d666b5b0f2bd3(car) {
 
   if(getdvarint(@ "hash_24b1d20863cdd66a", 0) == 1) {
     if(isDefined(car.occupancytrig) && ispointinvolume(self.origin, car.occupancytrig)) {
-      if(!istrue(self.var_8e2d666b5b0f2bd3)) {
+      if(!istrue(self.isinsideelevator)) {
         car function_e7de8f7b4f13cd26(self);
       }
 
@@ -855,14 +855,14 @@ function function_8e2d666b5b0f2bd3(car) {
     }
 
     if(isDefined(car.corner_a)) {
-      var_a1582b9803fb64b3 = 16;
+      z_padding = 16;
 
-      if(self.origin[2] < car.origin[2] - var_a1582b9803fb64b3 && self.origin[2] > car.origin[2] + car.carheight + var_a1582b9803fb64b3) {
+      if(self.origin[2] < car.origin[2] - z_padding && self.origin[2] > car.origin[2] + car.carheight + z_padding) {
         return 0;
       }
 
       if(function_cba565314ac6a79e(self.origin, car.corner_a, car.corner_b, car.corner_c, car.corner_d)) {
-        if(!istrue(self.var_8e2d666b5b0f2bd3)) {
+        if(!istrue(self.isinsideelevator)) {
           car function_e7de8f7b4f13cd26(self);
         }
 
@@ -881,36 +881,36 @@ function function_8e2d666b5b0f2bd3(car) {
     return 0;
   }
 
-  var_8e2633c8a746ba9a = 16;
-  var_fcf847baec7225bb = car.elevator.floors[0].targetheight - var_8e2633c8a746ba9a;
+  zpadding = 16;
+  var_fcf847baec7225bb = car.elevator.floors[0].targetheight - zpadding;
   var_700c97bb40709445 = car.elevator.floors[1].targetheight + car.carheight + 5;
 
-  if(self.origin[2] <= car.origin[2] - var_8e2633c8a746ba9a || self.origin[2] >= car.origin[2] + car.carheight) {
+  if(self.origin[2] <= car.origin[2] - zpadding || self.origin[2] >= car.origin[2] + car.carheight) {
     if(self.origin[2] >= var_fcf847baec7225bb && self.origin[2] <= var_700c97bb40709445) {
-      var_9d2ccfd4406c98b7 = self.origin;
-      var_65a66f89bc16ea1 = (self.origin[0], self.origin[1], car.origin[2]);
-      var_65a66f89bc16ea1 = vectorlerp(car.origin, var_65a66f89bc16ea1, 0.85) + (0, 0, var_8e2633c8a746ba9a);
+      glitchedorigin = self.origin;
+      teleporttoorigin = (self.origin[0], self.origin[1], car.origin[2]);
+      teleporttoorigin = vectorlerp(car.origin, teleporttoorigin, 0.85) + (0, 0, zpadding);
 
       if(isDefined(car.occupancytrig) && !ispointinvolume(self.origin, car.occupancytrig) || isDefined(car.corner_a) && !function_cba565314ac6a79e(self.origin, car.corner_a, car.corner_b, car.corner_c, car.corner_d)) {
-        var_65a66f89bc16ea1 = car.origin + (randomintrange(-48, 48), randomintrange(-48, 48), var_8e2633c8a746ba9a);
+        teleporttoorigin = car.origin + (randomintrange(-48, 48), randomintrange(-48, 48), zpadding);
       }
 
-      print3d(var_9d2ccfd4406c98b7, "<dev string:x1c>", (1, 0.25, 0), 1, 0.25, 1000);
-      line(var_9d2ccfd4406c98b7 + (-4, -4, 0), var_9d2ccfd4406c98b7 + (4, 4, 0), (1, 0.25, 0), 1, 0, 1000);
-      line(var_9d2ccfd4406c98b7 + (-4, 4, 0), var_9d2ccfd4406c98b7 + (4, -4, 0), (1, 0.25, 0), 1, 0, 1000);
-      line(var_65a66f89bc16ea1, var_9d2ccfd4406c98b7, (1, 1, 0), 1, 0, 1000);
-      line(var_65a66f89bc16ea1 + (-4, -4, 0), var_65a66f89bc16ea1 + (4, 4, 0), (0, 1, 1), 1, 0, 1000);
-      line(var_65a66f89bc16ea1 + (-4, 4, 0), var_65a66f89bc16ea1 + (4, -4, 0), (0, 1, 1), 1, 0, 1000);
-      print3d(var_65a66f89bc16ea1, "<dev string:x25>", (0, 1, 1), 1, 0.25, 1000);
+      print3d(glitchedorigin, "<dev string:x1c>", (1, 0.25, 0), 1, 0.25, 1000);
+      line(glitchedorigin + (-4, -4, 0), glitchedorigin + (4, 4, 0), (1, 0.25, 0), 1, 0, 1000);
+      line(glitchedorigin + (-4, 4, 0), glitchedorigin + (4, -4, 0), (1, 0.25, 0), 1, 0, 1000);
+      line(teleporttoorigin, glitchedorigin, (1, 1, 0), 1, 0, 1000);
+      line(teleporttoorigin + (-4, -4, 0), teleporttoorigin + (4, 4, 0), (0, 1, 1), 1, 0, 1000);
+      line(teleporttoorigin + (-4, 4, 0), teleporttoorigin + (4, -4, 0), (0, 1, 1), 1, 0, 1000);
+      print3d(teleporttoorigin, "<dev string:x25>", (0, 1, 1), 1, 0.25, 1000);
 
-      self setOrigin(var_65a66f89bc16ea1);
+      self setOrigin(teleporttoorigin);
       return 1;
     }
 
     return 0;
   }
 
-  if(!istrue(self.var_8e2d666b5b0f2bd3)) {
+  if(!istrue(self.isinsideelevator)) {
     car function_e7de8f7b4f13cd26(self);
   }
 
@@ -925,14 +925,14 @@ function function_e7de8f7b4f13cd26(occupant, remove_occupant) {
   }
 
   if(istrue(remove_occupant)) {
-    occupant.var_8e2d666b5b0f2bd3 = 0;
+    occupant.isinsideelevator = 0;
     occupant.var_a9f709a20b6aa136 = undefined;
     self.occupants = array_remove(self.occupants, occupant);
     return;
   }
 
   thread removeoccupantondeath(occupant);
-  occupant.var_8e2d666b5b0f2bd3 = 1;
+  occupant.isinsideelevator = 1;
   occupant.var_a9f709a20b6aa136 = self;
 
   if(!array_contains(self.occupants, occupant)) {
@@ -946,7 +946,7 @@ function removeoccupantondeath(occupant) {
   occupant waittill("death_or_disconnect");
 
   if(isDefined(occupant)) {
-    occupant.var_8e2d666b5b0f2bd3 = 0;
+    occupant.isinsideelevator = 0;
     occupant.var_a9f709a20b6aa136 = undefined;
     self.occupants = array_remove(self.occupants, occupant);
     return;

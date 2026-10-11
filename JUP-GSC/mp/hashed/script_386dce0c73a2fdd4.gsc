@@ -24,9 +24,9 @@ function function_29b5fb70d7ea841() {
 }
 
 function function_52b682d1bb0ddc02() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &function_b06e7f5eb1e44850);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_moving_melee_changed", &function_830afe26e7e7e559);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_is_crawling_changed", &function_6221279973a1af55);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &function_b06e7f5eb1e44850);
+  callback::get_template(self.animsetname) callback::add("on_is_moving_melee_changed", &function_830afe26e7e7e559);
+  callback::get_template(self.animsetname) callback::add("on_is_crawling_changed", &function_6221279973a1af55);
 }
 
 function init_melee() {

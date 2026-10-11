@@ -150,8 +150,8 @@ function function_64f6fe11a0db2eef(x, y, scale) {
       keys = getarraykeys(level.var_44bacfb643ca44f);
 
       if(keys.size > 0) {
-        var_aaaa8a8df8f5c537 = getdvarint(@ "hash_b7c9a158890bce5a");
-        var_ab5696f7e031e1ba = getdvarint(@ "hash_9139b4ad2f235c95");
+        vid_width = getdvarint(@ "hash_b7c9a158890bce5a");
+        vid_height = getdvarint(@ "hash_9139b4ad2f235c95");
         var_39c991ead8822d9b = getdvarint(@ "hash_b7c9a158890bce5a") / 1920;
         var_3f109f5aaf427a = getdvarint(@ "hash_9139b4ad2f235c95") / 1080;
         base_x = x * var_39c991ead8822d9b;

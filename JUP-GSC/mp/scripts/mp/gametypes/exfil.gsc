@@ -768,7 +768,7 @@ function votimeendingsoon() {
   playannouncerbattlechatter(game["attackers"], "extract_littlebird_leaving_soon_a_friendly", 10);
 }
 
-function commander_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function commander_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     self playsoundtoplayer(alias, player);
   }

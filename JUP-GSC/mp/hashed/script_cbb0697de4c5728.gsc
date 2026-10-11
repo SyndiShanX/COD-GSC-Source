@@ -224,7 +224,7 @@ function function_3b59b4d385a202e6() {
   function_503e263494654df9("mahou", &function_8a2f3038f9212159, &function_e8aa098e64325e7d);
   function_503e263494654df9("hlander", &function_66bd08d233abc229, &function_487ad6a4de40bcf5);
 
-  if(utility::function_f3bb4f4911a1beb2("game", "isBRStyleGameType")) {
+  if(utility::callsharedfunc("game", "isBRStyleGameType")) {
     function_503e263494654df9("ww_dg2", &isdg2death, &function_2c8b06094bd3a868);
     function_503e263494654df9("ww_raygun", &israygundeath, &function_b0dff649bba1366f);
   }
@@ -246,7 +246,7 @@ function function_3b59b4d385a202e6() {
   function_a180a5874c8cbe0b("crowFootCharm", &function_f8fc0821696182c, &function_163fccf48f86ac68);
   function_a180a5874c8cbe0b("pumpkinLanternCharm", &function_1c12797023d624e5, &function_3e50a64bbd61b969);
   function_a180a5874c8cbe0b("weedCreatureCharm", &function_ce28357936d127f1, &function_67b827411821d1b1);
-  function_a180a5874c8cbe0b("doomChainsaw", &function_55d5c766b382551e, &function_7f84cac49ac044c0);
+  function_a180a5874c8cbe0b("doomChainsaw", &isdoomchainsaw, &function_7f84cac49ac044c0);
   function_a180a5874c8cbe0b("chainsword", &ischainsword, &function_c4e6dc7009af3d67);
   function_a180a5874c8cbe0b("toothFairy", &function_bbf72e8bc3d1dfb2, &function_5132f333e5bbe24);
   function_a180a5874c8cbe0b("wonton_swhiskey", &function_a672596fca729e59, &function_aab1efb0d73d2f65);
@@ -284,7 +284,7 @@ function function_503e263494654df9(sname, conditionfunc, var_7b85d041fe0490b6) {
 function function_308f735a299221e3(var_c3730d8bae621a97, var_7b85d041fe0490b6) {
   fxfuncs = spawnStruct();
   fxfuncs.deatheffect = var_7b85d041fe0490b6;
-  assertex(!isDefined(level.var_f075b3a145f1c730[var_c3730d8bae621a97]), "<dev string:x57>" + function_3c8848a3a11b2553(var_c3730d8bae621a97) + "<dev string:x52>");
+  assertex(!isDefined(level.var_f075b3a145f1c730[var_c3730d8bae621a97]), "<dev string:x57>" + getxhashsourcename(var_c3730d8bae621a97) + "<dev string:x52>");
   level.var_f075b3a145f1c730[var_c3730d8bae621a97] = fxfuncs;
 }
 
@@ -648,7 +648,7 @@ function private function_a952714a4c2f5c6f(attacker, objweapon, meansofdeath, hi
   }
 
   if(isDefined(blueprintdeathfx)) {
-    assertex(isDefined(level.var_f075b3a145f1c730[blueprintdeathfx]), "<dev string:xc6>" + function_3c8848a3a11b2553(blueprintdeathfx) + "<dev string:xd3>");
+    assertex(isDefined(level.var_f075b3a145f1c730[blueprintdeathfx]), "<dev string:xc6>" + getxhashsourcename(blueprintdeathfx) + "<dev string:xd3>");
   }
 
   if(isbulletdeath(meansofdeath) || iscrushdeath(meansofdeath)) {
@@ -1271,7 +1271,7 @@ function private function_ce28357936d127f1(weapon) {
   return weapon hasattachment("cos_iw9_526");
 }
 
-function function_55d5c766b382551e(weapon) {
+function isdoomchainsaw(weapon) {
   if(isDefined(weapon) && isDefined(weapon.receiver)) {
     if(weapon.receiver == "rec_pickaxe" && weapon.receivervarindex == 2) {
       return true;
@@ -3166,7 +3166,7 @@ function private function_84690613abc67792(params) {
     }
   }
 
-  if(function_f3bb4f4911a1beb2("escort", "isZombie") || function_f3bb4f4911a1beb2("zxp", "isZombieRoyaleZombie")) {
+  if(callsharedfunc("escort", "isZombie") || callsharedfunc("zxp", "isZombieRoyaleZombie")) {
     return;
   }
 
@@ -3209,7 +3209,7 @@ function function_709ab519033049c0(models, vm, reactive) {
   self[[var_6283af671ce0aeae]](models[0], models[1], vm);
 
   if(isDefined(self.operatorcustomization)) {
-    self.operatorcustomization.var_3291e2cbec055766 = reactive;
+    self.operatorcustomization.reactiveoperator = reactive;
   }
 
   if(isDefined(reactive)) {

@@ -22,7 +22,7 @@
 #namespace namespace_d09b27d6534a97c;
 
 function setupcallbacks() {
-  if(getdvarint(@ "scr_scorpiontrophyevent", 0) == 0 || istrue(level.var_ec2fb549b15ad827) || istrue(level.var_77907d733abe8b63)) {
+  if(getdvarint(@ "scr_scorpiontrophyevent", 0) == 0 || istrue(level.leagueplaymatch) || istrue(level.var_77907d733abe8b63)) {
     scripts\common\callbacks::add("player_connect", &function_66d05c31053f7c8f);
     return;
   }
@@ -154,7 +154,7 @@ function private spawnbanks() {
   level.var_6aa304e25520289f = undefined;
 }
 
-function private function_340f4f4118dcf7c3(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_340f4f4118dcf7c3(instance, part, state, player, bautouse, usestring) {
   if(!isvalidplayer(player)) {
     return;
   }
@@ -375,15 +375,15 @@ function private function_735a4fd352102f67(opener, dropstruct) {
   return trophies;
 }
 
-function private function_76c38f4af5d006ea(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_76c38f4af5d006ea(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(instance) || !isDefined(instance.type) || instance.type != "brloot_scorpion_trophy") {
     return;
   }
 
-  function_199f02943420e747(instance, part, state, player, var_a5b2c541413aa895, usestring, 1);
+  function_199f02943420e747(instance, part, state, player, bautouse, usestring, 1);
 }
 
-function private function_199f02943420e747(instance, part, state, player, var_a5b2c541413aa895, usestring, var_71b664f5ab636333) {
+function private function_199f02943420e747(instance, part, state, player, bautouse, usestring, var_71b664f5ab636333) {
   if(!isDefined(instance) || !isDefined(instance.type) || instance.type != "brloot_scorpion_trophy") {
     return;
   }
@@ -495,7 +495,7 @@ function private function_cfb0bd180308a4ba(count, from, fromplayercount, origin,
       mover = dropinfo.groundentity;
 
       if(isDefined(mover)) {
-        trophy function_6e506f39f121ea8a(mover, rotatevectorinverted(trophy.origin - mover.origin, mover.angles));
+        trophy scriptable_setparententity(mover, rotatevectorinverted(trophy.origin - mover.origin, mover.angles));
         trophy setscriptablepartstate("brloot_scorpion_trophy", "dropped_linked");
       } else {
         trophy setscriptablepartstate("brloot_scorpion_trophy", "dropped");
@@ -718,7 +718,7 @@ function private function_4c65595e68db285c() {
   params = [ae_utility::function_d6f771aedba70ce7(aeeventname, #"version"), 1, ae_utility::function_d6f771aedba70ce7(aeeventname, #"value"), num];
 
   if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-    function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
+    callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", aeeventid, params);
   }
 
   thread scripts\mp\utility\points::doscoreevent(#"hash_d7637699e926cbc6");

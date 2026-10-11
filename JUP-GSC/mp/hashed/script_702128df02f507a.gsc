@@ -37,7 +37,7 @@ function init() {
 }
 
 function function_7e930b64aa35ffee() {
-  mapinfo = function_79404c2fcca1c184();
+  mapinfo = getmapscriptbundle();
 
   if(!isDefined(mapinfo)) {
     return undefined;
@@ -111,7 +111,7 @@ function function_3c118c933f1f96b4(var_e3ecf1db05fcac6b) {
       continue;
     }
 
-    assertmsg("<dev string:x49>" + function_3c8848a3a11b2553(@ "hash_d8db6ac022cc3906") + "<dev string:x55>" + pair + "<dev string:x67>");
+    assertmsg("<dev string:x49>" + getxhashsourcename(@ "hash_d8db6ac022cc3906") + "<dev string:x55>" + pair + "<dev string:x67>");
   }
 
   return validoverrides;
@@ -124,14 +124,14 @@ function function_fd2c2c40201aed7e(scenarios) {
     totalweight += scenario.weight;
   }
 
-  var_afb27532ad1515a6 = randomfloat(totalweight);
+  choosenweight = randomfloat(totalweight);
   cumulativeweight = 0;
   var_6a5dccee5fd220aa = undefined;
 
   foreach(scenario in scenarios) {
     cumulativeweight += scenario.weight;
 
-    if(cumulativeweight > var_afb27532ad1515a6) {
+    if(cumulativeweight > choosenweight) {
       var_6a5dccee5fd220aa = scenario;
       break;
     }
@@ -163,7 +163,7 @@ function function_bf0a1510baea47c5(scenario) {
 function initscene(scenename) {
   scene = spawnStruct();
   scene scene::set_scriptbundle(scenename);
-  scene scene::function_bc521bee52fde214(1);
+  scene scene::set_anim_rate(1);
   return scene;
 }
 
@@ -175,7 +175,7 @@ function function_1109bf32b4f881b8(scenario) {
   }
 
   if(isDefined(scenario.flyinstate)) {
-    function_4cf525a6ef2c0d20(scenario.name, scenario.flyinstate);
+    setareaswaphint(scenario.name, scenario.flyinstate);
   }
 
   if(isDefined(scenario.var_56e04d3d0e7663ca)) {
@@ -205,7 +205,7 @@ function function_1109bf32b4f881b8(scenario) {
   }
 
   if(isDefined(scenario.destructionstate.state)) {
-    function_4cf525a6ef2c0d20(scenario.name, scenario.destructionstate.state);
+    setareaswaphint(scenario.name, scenario.destructionstate.state);
   }
 }
 
@@ -267,7 +267,7 @@ function function_9977d85412dfb260(scenario) {
             continue;
           }
 
-          scripts\engine\utility::function_f9a207358d70923c(exploder.delay, "game_ended", &scripts\engine\utility::exploder, exploder.name, level.players);
+          scripts\engine\utility::delaythreadendon(exploder.delay, "game_ended", &scripts\engine\utility::exploder, exploder.name, level.players);
         }
       }
     }

@@ -42,19 +42,19 @@ function drawcylinder(origin, radius, height, drawtimeseconds, color) {
   }
 }
 
-function drawboxfrompoints(topleftfront, toprightfront, topleftback, toprightback, bottomleftfront, bottomrightfront, var_2febbcb4c37b3b64, var_3a64b6f876a6b09f, drawtimeseconds, color) {
+function drawboxfrompoints(topleftfront, toprightfront, topleftback, toprightback, bottomleftfront, bottomrightfront, bottomleftback, bottomrightback, drawtimeseconds, color) {
   thread drawline(topleftfront, toprightfront, drawtimeseconds, color);
   thread drawline(topleftfront, bottomleftfront, drawtimeseconds, color);
   thread drawline(topleftfront, topleftback, drawtimeseconds, color);
   thread drawline(toprightfront, toprightback, drawtimeseconds, color);
   thread drawline(toprightfront, bottomrightfront, drawtimeseconds, color);
-  thread drawline(topleftback, var_2febbcb4c37b3b64, drawtimeseconds, color);
+  thread drawline(topleftback, bottomleftback, drawtimeseconds, color);
   thread drawline(topleftback, toprightback, drawtimeseconds, color);
-  thread drawline(toprightback, var_3a64b6f876a6b09f, drawtimeseconds, color);
+  thread drawline(toprightback, bottomrightback, drawtimeseconds, color);
   thread drawline(bottomleftfront, bottomrightfront, drawtimeseconds, color);
-  thread drawline(bottomleftfront, var_2febbcb4c37b3b64, drawtimeseconds, color);
-  thread drawline(bottomrightfront, var_3a64b6f876a6b09f, drawtimeseconds, color);
-  thread drawline(var_3a64b6f876a6b09f, var_2febbcb4c37b3b64, drawtimeseconds, color);
+  thread drawline(bottomleftfront, bottomleftback, drawtimeseconds, color);
+  thread drawline(bottomrightfront, bottomrightback, drawtimeseconds, color);
+  thread drawline(bottomrightback, bottomleftback, drawtimeseconds, color);
 }
 
 function drawangles(origin, angles, var_3e6845817408f87e, scalar) {
@@ -109,8 +109,8 @@ function function_7111207db5db2175(midpoint, halfsize, drawtimeseconds, color) {
 }
 
 function waitfordvar(dvar, dvar_type, input_func) {
-  level notify("<dev string:x2e>" + function_f28fd66285fa2c9(dvar));
-  level endon("<dev string:x2e>" + function_f28fd66285fa2c9(dvar));
+  level notify("<dev string:x2e>" + getxhashhexname(dvar));
+  level endon("<dev string:x2e>" + getxhashhexname(dvar));
   setdvarifuninitialized(dvar, "<dev string:x3b>");
 
   while(true) {

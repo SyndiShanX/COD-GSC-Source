@@ -128,7 +128,7 @@ function player_music_loop(music_state) {
   }
 }
 
-function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc690b) {
+function threat_sight_player_sight_audio(anycansee, maxthreat, willdebugprint) {
   var_1d73b1caa088a858 = 180;
   var_732bd773132e7010 = 0.01;
   var_37b64319146d2f02 = 0.05;
@@ -139,8 +139,8 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
   self endon("threat_sight_player_sight_audio");
   level endon("threat_sight_audio_disabled");
 
-  if(!isDefined(var_67e8151f4dfc690b)) {
-    var_67e8151f4dfc690b = 0;
+  if(!isDefined(willdebugprint)) {
+    willdebugprint = 0;
   }
 
   aliases = ["cp_stealth_threat_low", "cp_stealth_threat_med", "cp_stealth_threat_high"];
@@ -175,7 +175,7 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
     }
   }
 
-  if(var_67e8151f4dfc690b) {
+  if(willdebugprint) {
     printtoscreen2d(32, 492, "<dev string:x1c>" + maxthreat + "<dev string:x2a>" + anycansee + "<dev string:x2d>", (1, 1, 1), 1.5);
   }
 
@@ -198,8 +198,8 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
       var_1cda86eccb821ec6 = function_8ba164c5a84fbb48(self);
 
       if(maxthreat < var_37b64319146d2f02) {
-        var_2df1b1f3e5b6238c = clamp(maxthreat, 0, var_37b64319146d2f02);
-        mu = var_2df1b1f3e5b6238c / var_37b64319146d2f02;
+        threat_clamped = clamp(maxthreat, 0, var_37b64319146d2f02);
+        mu = threat_clamped / var_37b64319146d2f02;
         vol_delta = 1 - var_732bd773132e7010;
         vol_lerp = var_732bd773132e7010 + vol_delta * mu;
         self.stealth.threat_sight_snd_vol = vol_lerp;
@@ -213,11 +213,11 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
 
     self.stealth.threat_sight_snd_vol = clamp(self.stealth.threat_sight_snd_vol, 0, 1);
 
-    if(var_67e8151f4dfc690b) {
+    if(willdebugprint) {
       printtoscreen2d(32, 508, "<dev string:x2f>" + self.stealth.threat_sight_snd_threat, (1, 1, 1), 1.5);
     }
 
-    if(var_67e8151f4dfc690b) {
+    if(willdebugprint) {
       printtoscreen2d(32, 524, "<dev string:x3d>" + self.stealth.threat_sight_snd_vol, (1, 1, 1), 1.5);
     }
 
@@ -283,11 +283,11 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_67e8151f4dfc6
         self stoprumble(rumble);
       }
 
-      if(var_67e8151f4dfc690b) {
+      if(willdebugprint) {
         printtoscreen2d(32, 540 + index * 16, "<dev string:x4b>" + index + "<dev string:x52>" + vol, (1, 1, 1), 1.5);
       }
 
-      if(var_67e8151f4dfc690b) {
+      if(willdebugprint) {
         printtoscreen2d(384, 540 + index * 16, "<dev string:x59>" + coef, (1, 1, 1), 1.5);
       }
 

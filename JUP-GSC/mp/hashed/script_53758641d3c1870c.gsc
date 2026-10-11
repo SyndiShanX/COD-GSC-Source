@@ -160,7 +160,7 @@ function function_7b6c0f635aecfc39() {
   var_4d26ac1fec964e34 = 0;
 
   if(issharedfuncdefined("game", "removeFirstFromBackpack")) {
-    var_4d26ac1fec964e34 = function_f3bb4f4911a1beb2("game", "removeFirstFromBackpack", var_5bcc259db5e0bc53);
+    var_4d26ac1fec964e34 = callsharedfunc("game", "removeFirstFromBackpack", var_5bcc259db5e0bc53);
   }
 
   if(var_4d26ac1fec964e34) {

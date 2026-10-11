@@ -39,7 +39,7 @@
 function function_d173c46fc772d2cb() {
   namespace_80f13d3402b78c5d::main();
   namespace_966712bc5b6ec1aa::main();
-  function_85698930b45b8e74();
+  _init_flags();
   thread function_8c01b83c3500a2ea();
   thread function_845220b0418d3bbd();
   function_ebac917822c850d7();
@@ -73,7 +73,7 @@ function function_d173c46fc772d2cb() {
   level.cratedropdata.heliheight = 2000;
 }
 
-function function_85698930b45b8e74() {
+function _init_flags() {
   level flag_init("egg_spawned");
   level flag_init("egg_destroyed");
   level flag_init("path_init");
@@ -211,8 +211,8 @@ function function_97284cbc5061ce5() {
     ee_egg.shield = utility::spawn_model("jup_zm_spores_shell", ground_pos - (0, 0, 1), raynormal);
     ee_egg.shield solid();
     ee_egg.shield.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_spore_healthbar");
-    ee_egg.shield.var_534e788bc498be9f = getscriptbundle(%"hash_6bab55d6fc0d95fc");
-    ee_egg.shield.subclass = ee_egg.shield.var_534e788bc498be9f.name;
+    ee_egg.shield.subclass_scriptbundle = getscriptbundle(%"hash_6bab55d6fc0d95fc");
+    ee_egg.shield.subclass = ee_egg.shield.subclass_scriptbundle.name;
     ee_egg.shield setCanDamage(1);
     ee_egg.shield.health = 2000000;
     ee_egg.shield.navobstacleid = createnavobstaclebyent(ee_egg.shield);
@@ -525,7 +525,7 @@ function function_f132cc93bd8529d3(instance) {
 function function_1d9c2eac50fbd87f() {
   level endon("game_ended");
   level endon("path_completed");
-  level.var_7036a0e42b79efac = function_f159c10d5cf8f0b4("ee_path_trigger", "script_noteworthy");
+  level.var_7036a0e42b79efac = getnoentvolumearray("ee_path_trigger", "script_noteworthy");
 
   foreach(player in level.players) {
     player thread function_bb9c095e9cc62727(level.var_7036a0e42b79efac);
@@ -589,7 +589,7 @@ function function_cd1152f887e06c8f(touching) {
       arrow.ee_active = 1;
     }
 
-    if(isDefined(self.var_ba545986b929dbce) && self.var_ba545986b929dbce) {
+    if(isDefined(self.usingthermal) && self.usingthermal) {
       arrow showtoplayer(self);
     }
   }
@@ -621,7 +621,7 @@ function function_a2830c773787e6bc() {
 }
 
 function function_c5401fe9642e7274(player) {
-  player.var_ba545986b929dbce = 1;
+  player.usingthermal = 1;
 
   if(isDefined(level.var_aa416bbe41548f1)) {
     foreach(arrow in level.var_aa416bbe41548f1) {
@@ -633,7 +633,7 @@ function function_c5401fe9642e7274(player) {
 }
 
 function function_37c77650df94d0cb(player) {
-  player.var_ba545986b929dbce = 0;
+  player.usingthermal = 0;
 
   if(isDefined(level.var_aa416bbe41548f1)) {
     foreach(arrow in level.var_aa416bbe41548f1) {
@@ -964,23 +964,23 @@ function private function_b7d9a5de8b7cbdcd() {
         break;
     }
 
-    scripts\engine\utility::function_f3bb4f4911a1beb2("zombie_entity", "AddIslandLocationsFromStructString", var_49231a100a994ca9);
+    scripts\engine\utility::callsharedfunc("zombie_entity", "AddIslandLocationsFromStructString", var_49231a100a994ca9);
   }
 }
 
 function private function_e06c1d2f2d469475() {
   for(var_65c64854f86704de = 1; var_65c64854f86704de <= 4; var_65c64854f86704de++) {
-    scripts\engine\utility::function_f3bb4f4911a1beb2("zombie_entity", "AddTeleportLocationsFromStructString", 0, "beat_04_entityloc_phase_01_0" + var_65c64854f86704de);
+    scripts\engine\utility::callsharedfunc("zombie_entity", "AddTeleportLocationsFromStructString", 0, "beat_04_entityloc_phase_01_0" + var_65c64854f86704de);
   }
 
   spawnloc = level.boss_struct;
 
   if(isDefined(spawnloc)) {
-    scripts\engine\utility::function_f3bb4f4911a1beb2("zombie_entity", "AddTeleportLocationsFromStruct", 0, spawnloc);
+    scripts\engine\utility::callsharedfunc("zombie_entity", "AddTeleportLocationsFromStruct", 0, spawnloc);
   }
 
   for(var_65c64854f86704de = 1; var_65c64854f86704de <= 4; var_65c64854f86704de++) {
-    scripts\engine\utility::function_f3bb4f4911a1beb2("zombie_entity", "AddTeleportLocationsFromStructString", 1, "beat_04_entityloc_phase_02_0" + var_65c64854f86704de);
+    scripts\engine\utility::callsharedfunc("zombie_entity", "AddTeleportLocationsFromStructString", 1, "beat_04_entityloc_phase_02_0" + var_65c64854f86704de);
   }
 }
 
@@ -1013,7 +1013,7 @@ function private function_1b0c9b733beed84e(agent) {
   }
 
   wait 3;
-  level scripts\engine\utility::function_f3bb4f4911a1beb2("zombie_entity", "KillAllZombies", agent);
+  level scripts\engine\utility::callsharedfunc("zombie_entity", "KillAllZombies", agent);
   function_f18f39783c8cedc4(0, 0, 0);
 
   if(!istrue(level.var_e1ee0c91c12c017b) && isDefined(level.boss_phase) && level.boss_phase == 99) {
@@ -1116,7 +1116,7 @@ function function_f6a767139db74ac6() {
       if(isDefined(level.var_7036a0e42b79efac) && level.var_7036a0e42b79efac.size > 0 && !flag("<dev string:x187>")) {
         foreach(vol in level.var_7036a0e42b79efac) {
           if(isDefined(vol.target)) {
-            next = function_f159c10d5cf8f0b4(vol.target, "<dev string:x199>");
+            next = getnoentvolumearray(vol.target, "<dev string:x199>");
           }
 
           if(isDefined(next) && next.size > 0) {

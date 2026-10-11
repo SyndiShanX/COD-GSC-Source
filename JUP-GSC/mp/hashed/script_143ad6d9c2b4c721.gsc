@@ -54,8 +54,8 @@ function function_3eaefae8531c0d78() {
   activity_instance = self;
   activity_instance endon("activity_ended");
   activity_instance endon("instance_destroyed");
-  var_45c17c8bd7095cc4 = function_b9c4aa88ad97ee68(self);
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_b9c4aa88ad97ee68(self);
+  self.variant_definition = activityvariantdefinition;
   self.difficulty_region = function_415547ee4122c2ca();
   thread function_9d55e01561016ec0();
 }
@@ -87,7 +87,7 @@ function function_9d55e01561016ec0() {
   self.orb.move setModel("jup_zm_harvester_orb_invisible");
   self.orb.move setCanDamage(1);
   thread function_6fb66f1f4b4a14d9(self.orb, self.orb.move);
-  self.orb utility::function_6e506f39f121ea8a(self.orb.move);
+  self.orb utility::scriptable_setparententity(self.orb.move);
   self.orb.var_d1a02e38ae1d8e0d = 0;
   self.orb.pingtimeout = self.settings.setup_settings.var_b8f0d942d2079d0a;
 
@@ -212,7 +212,7 @@ function function_6fb66f1f4b4a14d9(orb, invisible_model) {
   while(true) {
     waitframe();
     invisible_model waittill("damage", damage, attacker, direction_vec, point, smeansofdeath, modelname, tagname, partname, idflags, weapon, sorigin, angles, normal, einflictor, eventid);
-    function_3d8d8ad244283e65(#"hash_92a983bb07cb53e1");
+    profilebeginevent(#"hash_92a983bb07cb53e1");
 
     if(isPlayer(attacker)) {
       if(isDefined(weapon) && isDefined(weapon.basename) && weapon.basename == "iw9_spotter_scope_mp") {
@@ -312,7 +312,7 @@ function function_6fb66f1f4b4a14d9(orb, invisible_model) {
       activity_instance thread function_f181b4693ae4b926(orb);
     }
 
-    function_7f3923ed3d66f8ad();
+    profileendevent();
   }
 }
 
@@ -757,7 +757,7 @@ function function_b5e927260d1186f1(orb) {
 }
 
 function lightning_strike(orb) {
-  function_3d8d8ad244283e65(#"hash_e153db85b889e5ce");
+  profilebeginevent(#"hash_e153db85b889e5ce");
   activity_instance = self;
   activity_instance endon("activity_ended");
   activity_instance endon("instance_destroyed");
@@ -774,7 +774,7 @@ function lightning_strike(orb) {
   radiusdamage(orb.lightningpos, orb.var_2af30c7f48dca93a, orb.lightningdamagemax, orb.lightningdamagemin);
 
   foreach(player in level.players) {
-    if(utility::function_44daa65837a12044(player, orb.lightningpos, orb.var_2af30c7f48dca93a)) {
+    if(utility::playerwithindistance(player, orb.lightningpos, orb.var_2af30c7f48dca93a)) {
       thread function_747de98d3fc3ca35(player);
     }
   }
@@ -791,7 +791,7 @@ function lightning_strike(orb) {
     thread function_31f4489d7f9865e2(soldier);
   }
 
-  function_7f3923ed3d66f8ad();
+  profileendevent();
 }
 
 function function_c6f6d1db0ba45c61() {
@@ -889,10 +889,10 @@ function function_32a80b4c4a3e1f04(orb) {
 
   while(true) {
     if(orb.scramble) {
-      var_34e898a0030156bf = randomintrange(orb.var_a32a75e36742a8c5 * -1, orb.var_a32a75e36742a8c5);
-      var_34e897a00301548c = randomintrange(orb.var_a32a75e36742a8c5 * -1, orb.var_a32a75e36742a8c5);
-      var_34e89aa003015b25 = randomintrange(orb.var_a32a75e36742a8c5 * -1, orb.var_a32a75e36742a8c5);
-      var_54550963e04c7fc2 = (orb.move_to_point.origin[0] + var_34e898a0030156bf, orb.move_to_point.origin[1] + var_34e897a00301548c, orb.move_to_point.origin[2] + var_34e89aa003015b25);
+      random_offset_x = randomintrange(orb.var_a32a75e36742a8c5 * -1, orb.var_a32a75e36742a8c5);
+      random_offset_y = randomintrange(orb.var_a32a75e36742a8c5 * -1, orb.var_a32a75e36742a8c5);
+      random_offset_z = randomintrange(orb.var_a32a75e36742a8c5 * -1, orb.var_a32a75e36742a8c5);
+      var_54550963e04c7fc2 = (orb.move_to_point.origin[0] + random_offset_x, orb.move_to_point.origin[1] + random_offset_y, orb.move_to_point.origin[2] + random_offset_z);
       orb.move moveTo(var_54550963e04c7fc2, orb.var_543328e452a8d714);
     }
 
@@ -1005,7 +1005,7 @@ function function_9a5f1f25ade6119d(point) {
 
 function function_9d2e90c11ee0841a(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_b1ccd99edb6b6d42(var_b381b0883bcd4847) {

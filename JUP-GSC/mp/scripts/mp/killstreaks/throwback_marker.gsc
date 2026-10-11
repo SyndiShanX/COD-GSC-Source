@@ -14,17 +14,17 @@ function init() {
   val::group_register("throwback_marker", ["usability", "gesture"]);
 }
 
-function throwbackmarker_trythrowbackmarker(streakinfo, weapondetonatefunc, weaponoverride, weapongivenfunc, weaponswitchendedfunc, weaponfiredfunc, var_91f739c2c51347d4, weapontakenfunc) {
+function throwbackmarker_trythrowbackmarker(streakinfo, weapondetonatefunc, weaponoverride, weapongivenfunc, weaponswitchendedfunc, weaponfiredfunc, weaponcleanupcallback, weapontakenfunc) {
   weapongivencallback = &throwbackmarker_weapongiven;
-  var_8fd4d93dd619da88 = &throwbackmarker_weaponswitchended;
+  weaponswitchendedcallback = &throwbackmarker_weaponswitchended;
   weaponfiredcallback = &throwbackmarker_weaponfired;
-  var_d55d8445518099b = &throwbackmarker_weapontaken;
+  weapontakencallback = &throwbackmarker_weapontaken;
   streakinfo.throwbackmarker_weapondetonatefunc = weapondetonatefunc;
   streakinfo.throwbackmarker_weapongivenfunc = weapongivenfunc;
   streakinfo.throwbackmarker_weaponswitchendedfunc = weaponswitchendedfunc;
   streakinfo.throwbackmarker_weaponfiredfunc = weaponfiredfunc;
   streakinfo.throwbackmarker_weapontakenfunc = weapontakenfunc;
-  deployresult = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_dothrowbackmarkerdeploy(streakinfo, weaponoverride, weapongivencallback, var_8fd4d93dd619da88, weaponfiredcallback, var_91f739c2c51347d4, var_d55d8445518099b);
+  deployresult = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_dothrowbackmarkerdeploy(streakinfo, weaponoverride, weapongivencallback, weaponswitchendedcallback, weaponfiredcallback, weaponcleanupcallback, weapontakencallback);
 
   if(!istrue(deployresult)) {
     return false;
@@ -68,13 +68,13 @@ function throwbackmarker_watchplayerweapon(streakinfo) {
   streakinfo notify("killstreak_finished_with_deploy_weapon");
 }
 
-function throwbackmarker_weaponfired(streakinfo, var_a9dd4e8c5e5c7178, firedprojectile) {
+function throwbackmarker_weaponfired(streakinfo, firedweaponobj, firedprojectile) {
   firedresult = "success";
   level thread throwbackmarker_watchdetonate(streakinfo, firedprojectile, self);
   level thread throwbackmarker_watchthrowback(streakinfo, firedprojectile);
 
   if(isDefined(streakinfo.throwbackmarker_weaponfiredfunc)) {
-    firedresult = [[streakinfo.throwbackmarker_weaponfiredfunc]](streakinfo, var_a9dd4e8c5e5c7178, firedprojectile);
+    firedresult = [[streakinfo.throwbackmarker_weaponfiredfunc]](streakinfo, firedweaponobj, firedprojectile);
   }
 
   return firedresult;

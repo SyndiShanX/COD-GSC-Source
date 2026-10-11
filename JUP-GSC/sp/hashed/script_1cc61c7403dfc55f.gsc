@@ -178,9 +178,9 @@ function function_f65d0e2e1166a17c() {
   level.var_dffb3cd38cb1accf scene::function_8207074e79f22926(level.soap, "end", "soap");
   level.var_dffb3cd38cb1accf scene::function_8207074e79f22926(level.gaz, "end", "gaz");
   level.var_dffb3cd38cb1accf scene::function_8207074e79f22926(level.farah, "end", "farah");
-  level.soap function_9f82c74eb1b7caf9(0);
-  level.gaz function_9f82c74eb1b7caf9(0);
-  level.farah function_9f82c74eb1b7caf9(0);
+  level.soap setcanusecover(0);
+  level.gaz setcanusecover(0);
+  level.farah setcanusecover(0);
   level.var_dffb3cd38cb1accf thread scene::play(undefined, "interact");
   level.player waittill("spotter_scope_raised");
   level function_d379f06b6658f81d(1);
@@ -190,7 +190,7 @@ function function_f65d0e2e1166a17c() {
   scope delete();
   level.player waittill("end");
   flag_set("flg_finale_signal_player_released");
-  function_fb39412d7c61e5c7("shep_boat", 1);
+  deactivateworldevent("shep_boat", 1);
 }
 
 function function_43b27a4ee8fb5fac() {
@@ -227,7 +227,7 @@ function function_10c00af5cb056955(var_cb073298c9145a1b, var_2c4e646d778632df, v
 
   if(isDefined(var_2c4e646d778632df)) {
     if(isarray(var_2c4e646d778632df)) {
-      function_665d474ff040b446(var_2c4e646d778632df);
+      flag_wait_any_array(var_2c4e646d778632df);
     } else {
       flag_wait(var_2c4e646d778632df);
     }
@@ -364,7 +364,7 @@ function function_319c2f097ede51e0(targetname, entities, shot, playrate) {
   animnode = getStruct(targetname, "targetname");
 
   if(isDefined(playrate)) {
-    animnode scene::function_bc521bee52fde214(playrate);
+    animnode scene::set_anim_rate(playrate);
   }
 
   animnode scene::play(entities, shot);

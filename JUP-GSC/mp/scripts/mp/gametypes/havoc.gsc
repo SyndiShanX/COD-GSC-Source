@@ -244,7 +244,7 @@ function function_6149c1c60fce42b3() {
 
 function function_eee04ff98ccc9115() {
   function_5bda1250fea48e36("havoc_ammo_feeder", &function_66ecf48cd956ac04);
-  function_5bda1250fea48e36("havoc_cranked", &function_a0e75971d087c74c);
+  function_5bda1250fea48e36("havoc_cranked", &havoc_mod_cranked);
   function_5bda1250fea48e36("havoc_equip_mayhem", &function_b90124cf1cea34ab);
   function_5bda1250fea48e36("havoc_kill_snap", &function_9c2e0f5f612d29b6);
   function_5bda1250fea48e36("havoc_lucky_killstreak", &function_f28a76fafba3e83c);
@@ -589,7 +589,7 @@ function function_bcfdc9507307ce2d(victim, attacker, lifeid, meansofdeath, objwe
 
 function function_68e97386dad8427d(victim, attacker, lifeid, meansofdeath, objweapon, iskillstreakweapon) {}
 
-function function_a0e75971d087c74c(victim, attacker, lifeid, meansofdeath, objweapon, iskillstreakweapon) {
+function havoc_mod_cranked(victim, attacker, lifeid, meansofdeath, objweapon, iskillstreakweapon) {
   if(!isDefined(attacker) || !isPlayer(attacker)) {
     return;
   }
@@ -628,7 +628,7 @@ function function_9c2e0f5f612d29b6(victim, attacker, lifeid, meansofdeath, objwe
     return;
   }
 
-  bundle = scripts\mp\equipment::function_2113b6f7cb462692("snapshot_grenade_mp");
+  bundle = scripts\mp\equipment::getequipmentbundlefromweaponname("snapshot_grenade_mp");
   attacker thread scripts\mp\equipment\snapshot_grenade::snapshot_grenade_watch_flight(victim.origin, undefined, undefined, undefined, bundle);
 }
 
@@ -689,7 +689,7 @@ function function_494c5c17d43e7e5b(attacker) {
     z = grenadeorigin[2];
     grenadegoal = (x, y, z);
     launchvelocity = grenadegoal - grenadeorigin;
-    attacker function_f3bb4f4911a1beb2("weapons", "_launchGrenade", "semtex_mp", grenadeorigin, launchvelocity, randomfloatrange(2, 2.25));
+    attacker callsharedfunc("weapons", "_launchGrenade", "semtex_mp", grenadeorigin, launchvelocity, randomfloatrange(2, 2.25));
     wait 0.05;
   }
 }

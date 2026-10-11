@@ -51,8 +51,8 @@ function init() {
 
   level.ranktable = [];
   level.weaponranktable = [];
-  ranktablebundle = function_766b80da1f882fc3();
-  level.var_e0e30c15f736bd96 = ranktablebundle.var_e0e30c15f736bd96;
+  ranktablebundle = getranktablebundle();
+  level.maxstandardrank = ranktablebundle.maxstandardrank;
   level.maxrank = ranktablebundle.var_3f2a88f2202def78;
   level.maxelderrank = ranktablebundle.maxelderrank;
 
@@ -93,7 +93,7 @@ function function_377a94f711d96927(type) {
 function registerscoreinfomultiplier(type, multiplier) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   level.scoreinfo_multiplier[type] = multiplier;
@@ -102,7 +102,7 @@ function registerscoreinfomultiplier(type, multiplier) {
 function function_6d17f84162f0d8f0(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return default_to(level.scoreinfo_multiplier[type], 1);
@@ -111,16 +111,16 @@ function function_6d17f84162f0d8f0(type) {
 function registerscoreinfo(type, category, value) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   if(!isxhash(category)) {
     assertex(1, category);
-    category = function_1823ff50bb28148d(category);
+    category = getxhash(category);
   }
 
   if(category == #"value") {
-    valueoverride = getdvarint(hashcat(@ "hash_655cd9f8aa8e671a", function_f28fd66285fa2c9(type), "_score_override"), -1);
+    valueoverride = getdvarint(hashcat(@ "hash_655cd9f8aa8e671a", getxhashhexname(type), "_score_override"), -1);
 
     if(valueoverride >= 0) {
       value = valueoverride;
@@ -136,7 +136,7 @@ function registerscoreinfo(type, category, value) {
   }
 
   if(category == #"xp") {
-    valueoverride = getdvarint(hashcat(@ "hash_655cd9f8aa8e671a", function_f28fd66285fa2c9(type), "_xp_override"), -1);
+    valueoverride = getdvarint(hashcat(@ "hash_655cd9f8aa8e671a", getxhashhexname(type), "_xp_override"), -1);
 
     if(valueoverride >= 0) {
       value = valueoverride;
@@ -172,7 +172,7 @@ function registerscoreinfo(type, category, value) {
 function getscoreinfovalue(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return level.scoreinfo_value[type];
@@ -181,7 +181,7 @@ function getscoreinfovalue(type) {
 function getscoreinfoxp(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   if(isPlayer(self)) {
@@ -198,7 +198,7 @@ function getscoreinfoxp(type) {
 function function_34294184e90b96c(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return istrue(level.var_f749dda4bf7912b[type]);
@@ -207,7 +207,7 @@ function function_34294184e90b96c(type) {
 function function_e3dfd7e570749681(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return istrue(level.var_ac143fe8d620124e[type]);
@@ -216,7 +216,7 @@ function function_e3dfd7e570749681(type) {
 function function_b2425a8c88e4a460(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return level.var_8511c09177d02b1[type];
@@ -225,7 +225,7 @@ function function_b2425a8c88e4a460(type) {
 function function_1e00d01d19fde519(type) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   return getscoreinfocategory(type, #"hash_9ef9bbcd1edc198b");
@@ -234,12 +234,12 @@ function function_1e00d01d19fde519(type) {
 function getscoreinfocategory(type, category) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   if(!isxhash(category)) {
     assertex(1, category);
-    category = function_1823ff50bb28148d(category);
+    category = getxhash(category);
   }
 
   if(istrue(level.removekilleventsplash) && !isDefined(level.scoreinfo[type])) {
@@ -338,7 +338,7 @@ function onplayerconnect() {
         player addrankxpmultiplier(partyxpscale, "online_mp_party_xpscale");
       }
 
-      if(player getplayerdata(level.var_5d69837cf4db0407, "prestigeDoubleWeaponXp")) {
+      if(player getplayerdata(level.progressiongroup, "prestigeDoubleWeaponXp")) {
         player.prestigedoubleweaponxp = 1;
       } else {
         player.prestigedoubleweaponxp = 0;
@@ -410,7 +410,7 @@ function giverankxp(type, value, objweapon, suppresspopup, forceimmediate, var_3
   self endon("disconnect");
 
   if(isDefined(level.var_55e0b414e3671f70) && istrue(level.var_55e0b414e3671f70.var_a5b0c4131fba9805)) {
-    logstring("<dev string:xe9>" + value + "<dev string:xfc>" + function_3c8848a3a11b2553(type));
+    logstring("<dev string:xe9>" + value + "<dev string:xfc>" + getxhashsourcename(type));
   }
 
   if(isDefined(self.owner) && !isbot(self) && self != self.owner) {
@@ -423,7 +423,7 @@ function giverankxp(type, value, objweapon, suppresspopup, forceimmediate, var_3
   }
 
   if(!isDefined(value)) {
-    assertmsg(function_3c8848a3a11b2553(type) + "<dev string:x10d>");
+    assertmsg(getxhashsourcename(type) + "<dev string:x10d>");
     value = 0;
   }
 
@@ -553,11 +553,11 @@ function waitandapplyxp(type, originalvalue, modifiedvalue, bonusxp, objweapon, 
   }
 
   if(!suppresspopup && level.var_27dcaf9644646944 == #"display_xp") {
-    if(!level.playerxpenabled || level.var_ec2fb549b15ad827 || scripts\mp\utility\game::isanymlgmatch() && !getdvarint(@ "hash_93109b9d6f2bf2")) {
+    if(!level.playerxpenabled || level.leagueplaymatch || scripts\mp\utility\game::isanymlgmatch() && !getdvarint(@ "hash_93109b9d6f2bf2")) {
       var_b3a25cc5438cd047 = scripts\mp\rank::getscoreinfovalue(type);
 
       if(level.mapname != "mp_firingrange") {
-        assertex(isDefined(var_b3a25cc5438cd047), "<dev string:x142>" + function_3c8848a3a11b2553(type) + "<dev string:x166>");
+        assertex(isDefined(var_b3a25cc5438cd047), "<dev string:x142>" + getxhashsourcename(type) + "<dev string:x166>");
       }
 
       if(!isDefined(var_b3a25cc5438cd047)) {
@@ -588,7 +588,7 @@ function waitandapplyxp(type, originalvalue, modifiedvalue, bonusxp, objweapon, 
   recordxpgains(type, originalvalue, bonusxp);
 
   if(issharedfuncdefined("seasonalevents", "featuredLootEventIsFieldRep")) {
-    if(function_f3bb4f4911a1beb2("seasonalevents", "featuredLootEventIsFieldRep")) {
+    if(callsharedfunc("seasonalevents", "featuredLootEventIsFieldRep")) {
       function_76ed21eb2a456e77(type, originalvalue, bonusxp, eventinfo);
     }
   }
@@ -789,7 +789,7 @@ function function_752af98b96c243e0(var_f1efa0a209029c86) {
 function function_76ed21eb2a456e77(type, var_7c6b134e84356e37, bonusxp, eventinfo) {
   if(!isxhash(type)) {
     assertex(1, type);
-    type = function_1823ff50bb28148d(type);
+    type = getxhash(type);
   }
 
   groupname = getscoreinfocategory(type, #"group");
@@ -799,7 +799,7 @@ function function_76ed21eb2a456e77(type, var_7c6b134e84356e37, bonusxp, eventinf
   }
 
   if(!isxhash(groupname)) {
-    groupname = function_1823ff50bb28148d(groupname);
+    groupname = getxhash(groupname);
   }
 
   xpcategory = undefined;
@@ -1426,7 +1426,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
       xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
       xpeventparams[xpeventparams.size] = int(amount);
     } else {
-      println("<dev string:x50e>" + function_3c8848a3a11b2553(#"value") + "<dev string:x52a>" + amount + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+      println("<dev string:x50e>" + getxhashsourcename(#"value") + "<dev string:x52a>" + amount + "<dev string:x530>" + getxhashsourcename(eventname));
     }
 
     self.logplayerxp += amount;
@@ -1451,7 +1451,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
           xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
           xpeventparams[xpeventparams.size] = int(var_eae0bcbf8e33e5);
         } else {
-          println("<dev string:x50e>" + function_3c8848a3a11b2553(#"bonus_xp") + "<dev string:x52a>" + var_eae0bcbf8e33e5 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+          println("<dev string:x50e>" + getxhashsourcename(#"bonus_xp") + "<dev string:x52a>" + var_eae0bcbf8e33e5 + "<dev string:x530>" + getxhashsourcename(eventname));
         }
 
         assert(isxhash(eventname));
@@ -1462,7 +1462,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
           xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
           xpeventparams[xpeventparams.size] = int(2);
         } else {
-          println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_73824491bffbc66a") + "<dev string:x52a>" + 2 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+          println("<dev string:x50e>" + getxhashsourcename(#"hash_73824491bffbc66a") + "<dev string:x52a>" + 2 + "<dev string:x530>" + getxhashsourcename(eventname));
         }
 
         self.var_5f7f0514bd751748 += var_eae0bcbf8e33e5;
@@ -1478,7 +1478,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
             xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
             xpeventparams[xpeventparams.size] = int(var_6cf32c59a6c7c2d9);
           } else {
-            println("<dev string:x50e>" + function_3c8848a3a11b2553(#"bonus_xp") + "<dev string:x52a>" + var_6cf32c59a6c7c2d9 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+            println("<dev string:x50e>" + getxhashsourcename(#"bonus_xp") + "<dev string:x52a>" + var_6cf32c59a6c7c2d9 + "<dev string:x530>" + getxhashsourcename(eventname));
           }
 
           assert(isxhash(eventname));
@@ -1489,7 +1489,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
             xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
             xpeventparams[xpeventparams.size] = int(1);
           } else {
-            println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_73824491bffbc66a") + "<dev string:x52a>" + 1 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+            println("<dev string:x50e>" + getxhashsourcename(#"hash_73824491bffbc66a") + "<dev string:x52a>" + 1 + "<dev string:x530>" + getxhashsourcename(eventname));
           }
 
           self.var_6839d4c49d4311cc += var_6cf32c59a6c7c2d9;
@@ -1516,7 +1516,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
       xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
       xpeventparams[xpeventparams.size] = int(weapon_xp);
     } else {
-      println("<dev string:x50e>" + function_3c8848a3a11b2553(#"weapon_xp") + "<dev string:x52a>" + weapon_xp + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+      println("<dev string:x50e>" + getxhashsourcename(#"weapon_xp") + "<dev string:x52a>" + weapon_xp + "<dev string:x530>" + getxhashsourcename(eventname));
     }
 
     assert(isxhash(eventname));
@@ -1527,7 +1527,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
       xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
       xpeventparams[xpeventparams.size] = int(weaponlootid);
     } else {
-      println("<dev string:x50e>" + function_3c8848a3a11b2553(#"weapon_loot_id") + "<dev string:x52a>" + weaponlootid + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+      println("<dev string:x50e>" + getxhashsourcename(#"weapon_loot_id") + "<dev string:x52a>" + weaponlootid + "<dev string:x530>" + getxhashsourcename(eventname));
     }
 
     self.var_ec2db7afa79d6329 += weapon_xp;
@@ -1552,7 +1552,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
           xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
           xpeventparams[xpeventparams.size] = int(var_eae0bcbf8e33e5);
         } else {
-          println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_48ad44d6a3d7d22a") + "<dev string:x52a>" + var_eae0bcbf8e33e5 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+          println("<dev string:x50e>" + getxhashsourcename(#"hash_48ad44d6a3d7d22a") + "<dev string:x52a>" + var_eae0bcbf8e33e5 + "<dev string:x530>" + getxhashsourcename(eventname));
         }
 
         assert(isxhash(eventname));
@@ -1563,7 +1563,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
           xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
           xpeventparams[xpeventparams.size] = int(2);
         } else {
-          println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_e16477c0e4e66937") + "<dev string:x52a>" + 2 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+          println("<dev string:x50e>" + getxhashsourcename(#"hash_e16477c0e4e66937") + "<dev string:x52a>" + 2 + "<dev string:x530>" + getxhashsourcename(eventname));
         }
 
         self.var_946e67a854e36f91 += var_eae0bcbf8e33e5;
@@ -1579,7 +1579,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
             xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
             xpeventparams[xpeventparams.size] = int(var_6cf32c59a6c7c2d9);
           } else {
-            println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_48ad44d6a3d7d22a") + "<dev string:x52a>" + var_6cf32c59a6c7c2d9 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+            println("<dev string:x50e>" + getxhashsourcename(#"hash_48ad44d6a3d7d22a") + "<dev string:x52a>" + var_6cf32c59a6c7c2d9 + "<dev string:x530>" + getxhashsourcename(eventname));
           }
 
           assert(isxhash(eventname));
@@ -1590,7 +1590,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
             xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
             xpeventparams[xpeventparams.size] = int(1);
           } else {
-            println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_e16477c0e4e66937") + "<dev string:x52a>" + 1 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+            println("<dev string:x50e>" + getxhashsourcename(#"hash_e16477c0e4e66937") + "<dev string:x52a>" + 1 + "<dev string:x530>" + getxhashsourcename(eventname));
           }
 
           self.var_87cced5af3fe8585 += var_6cf32c59a6c7c2d9;
@@ -1612,7 +1612,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
       xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
       xpeventparams[xpeventparams.size] = int(var_158745de00c72d3e);
     } else {
-      println("<dev string:x50e>" + function_3c8848a3a11b2553(#"battlepass_xp") + "<dev string:x52a>" + var_158745de00c72d3e + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+      println("<dev string:x50e>" + getxhashsourcename(#"battlepass_xp") + "<dev string:x52a>" + var_158745de00c72d3e + "<dev string:x530>" + getxhashsourcename(eventname));
     }
 
     self.var_f28d6120a5ec7857 += var_158745de00c72d3e;
@@ -1637,7 +1637,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
           xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
           xpeventparams[xpeventparams.size] = int(var_eae0bcbf8e33e5);
         } else {
-          println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_f0b251f180942558") + "<dev string:x52a>" + var_eae0bcbf8e33e5 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+          println("<dev string:x50e>" + getxhashsourcename(#"hash_f0b251f180942558") + "<dev string:x52a>" + var_eae0bcbf8e33e5 + "<dev string:x530>" + getxhashsourcename(eventname));
         }
 
         assert(isxhash(eventname));
@@ -1648,7 +1648,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
           xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
           xpeventparams[xpeventparams.size] = int(2);
         } else {
-          println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_1e26bad639898fed") + "<dev string:x52a>" + 2 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+          println("<dev string:x50e>" + getxhashsourcename(#"hash_1e26bad639898fed") + "<dev string:x52a>" + 2 + "<dev string:x530>" + getxhashsourcename(eventname));
         }
 
         self.var_5a7aef9c8dd06cdf += var_eae0bcbf8e33e5;
@@ -1664,7 +1664,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
             xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
             xpeventparams[xpeventparams.size] = int(var_6cf32c59a6c7c2d9);
           } else {
-            println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_f0b251f180942558") + "<dev string:x52a>" + var_6cf32c59a6c7c2d9 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+            println("<dev string:x50e>" + getxhashsourcename(#"hash_f0b251f180942558") + "<dev string:x52a>" + var_6cf32c59a6c7c2d9 + "<dev string:x530>" + getxhashsourcename(eventname));
           }
 
           assert(isxhash(eventname));
@@ -1675,7 +1675,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
             xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
             xpeventparams[xpeventparams.size] = int(1);
           } else {
-            println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_1e26bad639898fed") + "<dev string:x52a>" + 1 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+            println("<dev string:x50e>" + getxhashsourcename(#"hash_1e26bad639898fed") + "<dev string:x52a>" + 1 + "<dev string:x530>" + getxhashsourcename(eventname));
           }
 
           self.var_34337227f7ad5ac3 += var_6cf32c59a6c7c2d9;
@@ -1695,7 +1695,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
       xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
       xpeventparams[xpeventparams.size] = int(operatorxp);
     } else {
-      println("<dev string:x50e>" + function_3c8848a3a11b2553(#"operator_xp") + "<dev string:x52a>" + operatorxp + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+      println("<dev string:x50e>" + getxhashsourcename(#"operator_xp") + "<dev string:x52a>" + operatorxp + "<dev string:x530>" + getxhashsourcename(eventname));
     }
 
     assert(isxhash(eventname));
@@ -1706,7 +1706,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
       xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
       xpeventparams[xpeventparams.size] = int(operatorid);
     } else {
-      println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_8fba2fc976d0515e") + "<dev string:x52a>" + operatorid + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+      println("<dev string:x50e>" + getxhashsourcename(#"hash_8fba2fc976d0515e") + "<dev string:x52a>" + operatorid + "<dev string:x530>" + getxhashsourcename(eventname));
     }
   }
 
@@ -1719,7 +1719,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
       xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
       xpeventparams[xpeventparams.size] = int(clanxp);
     } else {
-      println("<dev string:x50e>" + function_3c8848a3a11b2553(#"clan_xp") + "<dev string:x52a>" + clanxp + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+      println("<dev string:x50e>" + getxhashsourcename(#"clan_xp") + "<dev string:x52a>" + clanxp + "<dev string:x530>" + getxhashsourcename(eventname));
     }
   }
 
@@ -1731,7 +1731,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
     xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
     xpeventparams[xpeventparams.size] = int(1);
   } else {
-    println("<dev string:x50e>" + function_3c8848a3a11b2553(#"version") + "<dev string:x52a>" + 1 + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+    println("<dev string:x50e>" + getxhashsourcename(#"version") + "<dev string:x52a>" + 1 + "<dev string:x530>" + getxhashsourcename(eventname));
   }
 
   assert(isxhash(eventname));
@@ -1742,7 +1742,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
     xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
     xpeventparams[xpeventparams.size] = int(var_22d9ebf9658572ca);
   } else {
-    println("<dev string:x50e>" + function_3c8848a3a11b2553(#"hash_e1ad0562d81a9efa") + "<dev string:x52a>" + var_22d9ebf9658572ca + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+    println("<dev string:x50e>" + getxhashsourcename(#"hash_e1ad0562d81a9efa") + "<dev string:x52a>" + var_22d9ebf9658572ca + "<dev string:x530>" + getxhashsourcename(eventname));
   }
 
   gamemode = scripts\cp_mp\challenges::getchallengegamemode(self);
@@ -1754,7 +1754,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
     xpeventparams[xpeventparams.size] = var_cf27bc26b98940ab;
     xpeventparams[xpeventparams.size] = int(gamemode);
   } else {
-    println("<dev string:x50e>" + function_3c8848a3a11b2553(#"gamemode") + "<dev string:x52a>" + gamemode + "<dev string:x530>" + function_3c8848a3a11b2553(eventname));
+    println("<dev string:x50e>" + getxhashsourcename(#"gamemode") + "<dev string:x52a>" + gamemode + "<dev string:x530>" + getxhashsourcename(eventname));
   }
 
   self.pers["summary"]["weaponXP"] = self.pers["summary"]["weaponXP"] + weapon_xp;
@@ -1763,7 +1763,7 @@ function incrankxp(amount, objweapon, weapon_xp, type, var_158745de00c72d3e, var
   self.pers["summary"]["battlepassXP"] = self.pers["summary"]["battlepassXP"] + var_158745de00c72d3e;
 
   if(issharedfuncdefined("challenges", "reportChallengeUserSerializedEventWrapper")) {
-    function_f3bb4f4911a1beb2("challenges", "reportChallengeUserSerializedEventWrapper", eventid, xpeventparams);
+    callsharedfunc("challenges", "reportChallengeUserSerializedEventWrapper", eventid, xpeventparams);
   }
 
   scripts\mp\analyticslog::logevent_xpearned(self, amount, weapon, weapon_xp, type);
@@ -2096,13 +2096,13 @@ function function_f440a654d455343e(type, amount) {
     self.xpamountdebug[type] += amount;
     println("<dev string:x6d1>" + self.name + "<dev string:x6d1>");
     println("<dev string:x6e4>");
-    println("<dev string:x6f4>" + function_3c8848a3a11b2553(type) + "<dev string:x6fb>" + amount);
+    println("<dev string:x6f4>" + getxhashsourcename(type) + "<dev string:x6fb>" + amount);
     println("<dev string:x700>" + getrankxpmultipliertotal());
     println("<dev string:x713>");
     println("<dev string:x737>");
 
     foreach(key, value in self.xpamountdebug) {
-      println("<dev string:x6f4>" + function_3c8848a3a11b2553(key) + "<dev string:x6fb>" + value);
+      println("<dev string:x6f4>" + getxhashsourcename(key) + "<dev string:x6fb>" + value);
     }
 
     println("<dev string:x713>");

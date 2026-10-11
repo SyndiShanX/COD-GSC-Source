@@ -195,45 +195,45 @@ function killstreak_setsubvision(visionsetinfo) {
   self visionsetfadetoblackforplayer("", fadeouttime);
 }
 
-function registervisibilityomnvarforkillstreak(streakname, var_3e99c59055b3de67, omnvarvalue) {
+function registervisibilityomnvarforkillstreak(streakname, omnvarid, omnvarvalue) {
   if(!isDefined(level.killstreak_visbilityomnvarlist)) {
     level.killstreak_visbilityomnvarlist = [];
   }
 
-  assertex(isDefined(var_3e99c59055b3de67) && var_3e99c59055b3de67 != "<dev string:xb5>", "<dev string:xbc>");
+  assertex(isDefined(omnvarid) && omnvarid != "<dev string:xb5>", "<dev string:xbc>");
 
-  if(isDefined(level.killstreak_visbilityomnvarlist[streakname]) && isDefined(level.killstreak_visbilityomnvarlist[streakname][var_3e99c59055b3de67])) {
+  if(isDefined(level.killstreak_visbilityomnvarlist[streakname]) && isDefined(level.killstreak_visbilityomnvarlist[streakname][omnvarid])) {
     assertmsg("<dev string:x11e>");
     return;
   }
 
-  var_e5636e6c071107e3 = 0;
+  omnvarvalueexists = 0;
 
   foreach(var_6aa208d035887bb8 in level.killstreak_visbilityomnvarlist) {
     foreach(existingvalue in var_6aa208d035887bb8) {
       if(omnvarvalue == existingvalue) {
-        var_e5636e6c071107e3 = 1;
+        omnvarvalueexists = 1;
         break;
       }
     }
 
-    if(istrue(var_e5636e6c071107e3)) {
+    if(istrue(omnvarvalueexists)) {
       assertmsg("<dev string:x174>");
       return;
     }
   }
 
-  level.killstreak_visbilityomnvarlist[streakname][var_3e99c59055b3de67] = omnvarvalue;
+  level.killstreak_visbilityomnvarlist[streakname][omnvarid] = omnvarvalue;
 }
 
-function _setvisibiilityomnvarforkillstreak(streakname, var_b677bbe2241c4e3f) {
+function _setvisibiilityomnvarforkillstreak(streakname, omnvarstate) {
   omnvarvalue = undefined;
 
-  if(var_b677bbe2241c4e3f == "off") {
+  if(omnvarstate == "off") {
     omnvarvalue = 0;
   } else {
-    assertex(isDefined(level.killstreak_visbilityomnvarlist[streakname][var_b677bbe2241c4e3f]), "<dev string:x216>");
-    omnvarvalue = level.killstreak_visbilityomnvarlist[streakname][var_b677bbe2241c4e3f];
+    assertex(isDefined(level.killstreak_visbilityomnvarlist[streakname][omnvarstate]), "<dev string:x216>");
+    omnvarvalue = level.killstreak_visbilityomnvarlist[streakname][omnvarstate];
   }
 
   self setclientomnvar("ui_killstreak_controls", omnvarvalue);
@@ -367,17 +367,17 @@ function private function_79e77793fa726dd8() {
 }
 
 function isremotekillstreaktabletweapon(weaponname) {
-  var_cd5c5ac9105ab0d7 = 0;
+  remotetabletweapon = 0;
 
   switch (weaponname) {
     case #"hash_70c33644073da94f":
     case #"hash_a5ecbf4077755d5e":
     case #"hash_b43c2e4c05fafc4b":
-      var_cd5c5ac9105ab0d7 = 1;
+      remotetabletweapon = 1;
       break;
   }
 
-  return var_cd5c5ac9105ab0d7;
+  return remotetabletweapon;
 }
 
 function starttabletscreen(streakname, dofstartdelay, var_a6b5eeb69fa71f8d) {
@@ -409,16 +409,16 @@ function stoptabletscreen(streakname, var_375181444841ad, var_bfd205538a66591a) 
   thread tabletdofset(var_375181444841ad, 1);
 }
 
-function tabletomnvarset(omnvar, var_cabc886d846dd979, var_cd42af66561fad0d) {
+function tabletomnvarset(omnvar, omnvarval, omnvardelay) {
   self endon("disconnect");
   self notify("omnvar_set_tablet");
   self endon("omnvar_set_tablet");
 
-  if(isDefined(var_cd42af66561fad0d) && var_cd42af66561fad0d > 0) {
-    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_cd42af66561fad0d);
+  if(isDefined(omnvardelay) && omnvardelay > 0) {
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(omnvardelay);
   }
 
-  self setclientomnvar(omnvar, var_cabc886d846dd979);
+  self setclientomnvar(omnvar, omnvarval);
 }
 
 function function_b6fda02e36d883d8(streakname) {
@@ -434,11 +434,11 @@ function function_b6fda02e36d883d8(streakname) {
     screenindex = 0;
   }
 
-  var_66acf4d59df5fe5e = "ui_remote_control_sequence";
+  screenomnvar = "ui_remote_control_sequence";
 
   if(!isDefined(screenindex)) {
     screenindex = level.superglobals.staticsuperdata[streakname].id;
-    var_66acf4d59df5fe5e = "ui_super_tablet_sequence";
+    screenomnvar = "ui_super_tablet_sequence";
 
     if(!isDefined(screenindex)) {
       iprintlnbold("<dev string:x35b>" + streakname);
@@ -449,7 +449,7 @@ function function_b6fda02e36d883d8(streakname) {
 
   tabletinfo = spawnStruct();
   tabletinfo.index = screenindex;
-  tabletinfo.omnvar = var_66acf4d59df5fe5e;
+  tabletinfo.omnvar = screenomnvar;
   return tabletinfo;
 }
 
@@ -560,8 +560,8 @@ function function_a91ebb0263d086f3() {
 function function_44e0bd95b98288ab() {
   thermalvisionset = "killstreak_thermal";
 
-  if(isDefined(level.var_49071332a2a99c1e)) {
-    thermalvisionset = level.var_49071332a2a99c1e;
+  if(isDefined(level.killstreakthermalvisionset)) {
+    thermalvisionset = level.killstreakthermalvisionset;
   }
 
   if(isDefined(level.mapname) && (issubstr(level.mapname, "_shipment") || issubstr(level.mapname, "mp_skerries"))) {
@@ -587,11 +587,11 @@ function function_5a9772411551e56e(streakname, charactersuffix) {
   }
 
   if(isPlayer(ent)) {
-    var_da8cec9bce12f9cb = ent.pers["team"];
+    teamtocheck = ent.pers["team"];
 
     if(scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
       if(scripts\engine\utility::issharedfuncdefined("game", "brGetOperatorTeam")) {
-        var_da8cec9bce12f9cb = [[scripts\engine\utility::getsharedfunc("game", "brGetOperatorTeam")]](ent);
+        teamtocheck = [[scripts\engine\utility::getsharedfunc("game", "brGetOperatorTeam")]](ent);
       }
     }
 
@@ -612,7 +612,7 @@ function function_5a9772411551e56e(streakname, charactersuffix) {
       charactertype = streakname + "_" + charactersuffix;
     }
 
-    characterref = function_c1309ee7d6ecc444(charactertype, var_da8cec9bce12f9cb);
+    characterref = function_c1309ee7d6ecc444(charactertype, teamtocheck);
 
     if(!isDefined(characterref)) {
       iprintln("<dev string:x3a4>");
@@ -626,7 +626,7 @@ function function_5a9772411551e56e(streakname, charactersuffix) {
   }
 }
 
-function playkillstreakoperatordialog(streakname, dialog, var_db68eeda63af9504, delaytime, charactersuffix) {
+function playkillstreakoperatordialog(streakname, dialog, bypasscooldown, delaytime, charactersuffix) {
   if(istrue(level.disableannouncer)) {
     return;
   }
@@ -655,12 +655,12 @@ function playkillstreakoperatordialog(streakname, dialog, var_db68eeda63af9504, 
       return;
     }
 
-    if(!isDefined(killstreakowner.currentkillstreakopvo) || istrue(var_db68eeda63af9504)) {
-      var_da8cec9bce12f9cb = killstreakowner.pers["team"];
+    if(!isDefined(killstreakowner.currentkillstreakopvo) || istrue(bypasscooldown)) {
+      teamtocheck = killstreakowner.pers["team"];
 
       if(scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
         if(scripts\engine\utility::issharedfuncdefined("game", "brGetOperatorTeam")) {
-          var_da8cec9bce12f9cb = [[scripts\engine\utility::getsharedfunc("game", "brGetOperatorTeam")]](killstreakowner);
+          teamtocheck = [[scripts\engine\utility::getsharedfunc("game", "brGetOperatorTeam")]](killstreakowner);
         }
       }
 
@@ -678,7 +678,7 @@ function playkillstreakoperatordialog(streakname, dialog, var_db68eeda63af9504, 
         characterref = streakname + "_" + charactersuffix;
       }
 
-      characterref = function_c1309ee7d6ecc444(characterref, var_da8cec9bce12f9cb);
+      characterref = function_c1309ee7d6ecc444(characterref, teamtocheck);
 
       if(!isDefined(characterref)) {
         iprintln("<dev string:x3a4>");
@@ -718,8 +718,8 @@ function private function_b700e27df756bafb(team) {
   return teamoperator;
 }
 
-function private function_c1309ee7d6ecc444(charactertype, var_da8cec9bce12f9cb) {
-  teamref = function_b700e27df756bafb(var_da8cec9bce12f9cb);
+function private function_c1309ee7d6ecc444(charactertype, teamtocheck) {
+  teamref = function_b700e27df756bafb(teamtocheck);
 
   if(!isDefined(teamref)) {
     return;
@@ -824,11 +824,11 @@ function playkillstreakteamleaderdialog(streakname, dialog) {
       return;
     }
 
-    var_da8cec9bce12f9cb = listenplayer.pers["team"];
+    teamtocheck = listenplayer.pers["team"];
 
     if(scripts\cp_mp\utility\game_utility::isbrstylegametype()) {
       if(scripts\engine\utility::issharedfuncdefined("game", "brGetOperatorTeam")) {
-        var_da8cec9bce12f9cb = [[scripts\engine\utility::getsharedfunc("game", "brGetOperatorTeam")]](listenplayer);
+        teamtocheck = [[scripts\engine\utility::getsharedfunc("game", "brGetOperatorTeam")]](listenplayer);
       }
     }
 
@@ -836,7 +836,7 @@ function playkillstreakteamleaderdialog(streakname, dialog) {
     mapref = function_bbb77dc4e14dcfcc(streakname);
     sceneref = function_120539907d31d246(streakname);
     eventref = game["dialog"][dialog];
-    characterref = function_d3c62d251d2af8e6(var_da8cec9bce12f9cb);
+    characterref = function_d3c62d251d2af8e6(teamtocheck);
 
     if(!isDefined(characterref) || !function_3f64deb57a4966b2(characterref)) {
       iprintln("<dev string:x48f>");
@@ -874,7 +874,7 @@ function playkillstreakteamleaderdialog(streakname, dialog) {
 
     if(isxhash(dialog)) {
       group = "killstreak_earned";
-      dialog = function_f28fd66285fa2c9(dialog);
+      dialog = getxhashhexname(dialog);
     }
 
     listenplayer queuedialogforplayer(dialogalias, dialog, 2, group);
@@ -1399,7 +1399,7 @@ function function_a5a593f3ab4f7077(bundle, owner, team, timeout, overrideorigin,
       var_13e99f551c059c66 = self;
     }
 
-    codehandle = function_f3bb4f4911a1beb2("spawn", "getCodeHandleFromScriptHandle", self.dangerzoneid);
+    codehandle = callsharedfunc("spawn", "getCodeHandleFromScriptHandle", self.dangerzoneid);
     spawninfluencepointlinkTo(codehandle, var_13e99f551c059c66);
     return self.dangerzoneid;
   }
@@ -1535,7 +1535,7 @@ function function_999fe3838d6b6f8c(startingpos, startingangles, var_4d5392d9a617
     flightdistance = 15000;
   }
 
-  var_f74f18c717b149e2 = [startingpos - entforward * flightdistance, startingpos + entforward * flightdistance, startingpos + entright * flightdistance, startingpos - entright * flightdistance, startingpos + (entforward + entright) * flightdistance, startingpos + (entforward - entright) * flightdistance, startingpos + (entright - entforward) * flightdistance, startingpos + (-1 * entforward - entright) * flightdistance];
+  positionchecklist = [startingpos - entforward * flightdistance, startingpos + entforward * flightdistance, startingpos + entright * flightdistance, startingpos - entright * flightdistance, startingpos + (entforward + entright) * flightdistance, startingpos + (entforward - entright) * flightdistance, startingpos + (entright - entforward) * flightdistance, startingpos + (-1 * entforward - entright) * flightdistance];
 
   if(!isDefined(var_4d5392d9a61722c2)) {
     var_4d5392d9a61722c2 = 512;
@@ -1547,7 +1547,7 @@ function function_999fe3838d6b6f8c(startingpos, startingangles, var_4d5392d9a617
   flightpath.angles = undefined;
   debugdrawpath = getdvarint(@ "hash_313823a110b35022", 0);
 
-  foreach(dirpos in var_f74f18c717b149e2) {
+  foreach(dirpos in positionchecklist) {
     var_7a7426e42e674e40 = vectorNormalize(dirpos - startingpos);
     endingpos = startingpos + var_7a7426e42e674e40 * flightdistance;
     traceresult = scripts\engine\trace::sphere_trace(startingpos, endingpos, var_4d5392d9a61722c2, undefined, contents);
@@ -1627,7 +1627,7 @@ function function_e68434bdb941ed1e(streakname, streakowner, hintstring, var_13c7
     streakowner.var_c112b4aeaf6ce9ae[streakname] = useobj;
 
     if(streakname == "hover_jet") {
-      if(!istrue(streakowner.var_3b28db27cbdbc523)) {
+      if(!istrue(streakowner.remoteturretactive)) {
         function_6ada614d8209afb0(useobj);
       }
     } else {
@@ -1693,7 +1693,7 @@ function private function_6ada614d8209afb0(useobj, highlight) {
     if(isDefined(owner)) {
       function_8119afac7789ef49(owner);
 
-      if(owner namespace_53fc9ddbb516e6e1::function_c4d8558fc1592cd6()) {
+      if(owner namespace_53fc9ddbb516e6e1::isjuggernautsharedfunc()) {
         var_ad1bd6904a1e2ee6 = function_e36773e138b55c8d(owner);
 
         if(isDefined(var_ad1bd6904a1e2ee6)) {
@@ -1768,7 +1768,7 @@ function private function_e01c5830af200d33(owner, useobjoverride, var_f477bcb90b
   }
 
   if(isDefined(activestreakobj)) {
-    if(istrue(activestreakobj.var_89530ba56809ec76) && owner namespace_53fc9ddbb516e6e1::function_c4d8558fc1592cd6() && !istrue(var_f477bcb90bae1d5)) {
+    if(istrue(activestreakobj.var_89530ba56809ec76) && owner namespace_53fc9ddbb516e6e1::isjuggernautsharedfunc() && !istrue(var_f477bcb90bae1d5)) {
       return;
     }
 
@@ -2043,8 +2043,8 @@ function function_ee93617532d8a679(vehicle, owner, cleanupfunc, teleportvehicle,
     var_dafb327821fab8f = getdvarint(@ "hash_873b7ff40bb2a37e", 0);
 
     if(var_dafb327821fab8f > 0) {
-      var_44f1c37d516c2acb = [vehicle];
-      level notify("<dev string:x693>", var_44f1c37d516c2acb);
+      unstablevehiclelist = [vehicle];
+      level notify("<dev string:x693>", unstablevehiclelist);
 
       if(var_dafb327821fab8f == 1) {
         setDvar(@ "hash_873b7ff40bb2a37e", 0);
@@ -2070,14 +2070,14 @@ function private function_37ba16da99bc142a(reason) {
   }
 
   self.var_54db093819e08a57 = 1;
-  var_b1e2dc0593d7ca82 = self.var_3098bbcd22d0e052;
+  killstreakintegrity = self.var_3098bbcd22d0e052;
 
   if(istrue(self.iscrashing) || istrue(self.isleaving)) {
-    self thread[[var_b1e2dc0593d7ca82.cleanupfunc]]();
+    self thread[[killstreakintegrity.cleanupfunc]]();
     return;
   }
 
-  if(!istrue(var_b1e2dc0593d7ca82.tryteleport)) {
+  if(!istrue(killstreakintegrity.tryteleport)) {
     return;
   }
 
@@ -2086,7 +2086,7 @@ function private function_37ba16da99bc142a(reason) {
   if(!istrue(result)) {
     iprintln("<dev string:x6b0>");
 
-    self thread[[var_b1e2dc0593d7ca82.cleanupfunc]]();
+    self thread[[killstreakintegrity.cleanupfunc]]();
   }
 }
 

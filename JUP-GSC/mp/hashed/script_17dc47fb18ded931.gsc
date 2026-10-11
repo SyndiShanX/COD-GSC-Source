@@ -8,9 +8,9 @@
 function function_956d43b7266a97d9(var_f193360d1953ae9d) {
   if(isDefined(var_f193360d1953ae9d)) {
     if(isDefined(var_f193360d1953ae9d.variant_object)) {
-      return var_f193360d1953ae9d.variant_object.var_e8443ba1ff6aa438;
+      return var_f193360d1953ae9d.variant_object.activityrewardcaches;
     } else {
-      return var_f193360d1953ae9d.var_e8443ba1ff6aa438;
+      return var_f193360d1953ae9d.activityrewardcaches;
     }
   }
 
@@ -63,9 +63,9 @@ function function_35f874585c5fcfe6(var_7ff959e229d749c3) {
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_de1f9176204264cf;
+      return parent.variant_object.rewardcacheassetname;
     } else {
-      return parent.var_de1f9176204264cf;
+      return parent.rewardcacheassetname;
     }
   }
 
@@ -119,9 +119,9 @@ function function_2dff7e1a10633ee1(var_7ff959e229d749c3) {
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_2b5aa40272b0bbce;
+      return parent.variant_object.rewardspawnlocationtype;
     } else {
-      return parent.var_2b5aa40272b0bbce;
+      return parent.rewardspawnlocationtype;
     }
   }
 
@@ -165,9 +165,9 @@ function private function_ecc5c444bdd53f44(var_7ff959e229d749c3) {
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_cc7c0b1b93e90b29;
+      return parent.variant_object.rewardgroupoptions;
     } else {
-      return parent.var_cc7c0b1b93e90b29;
+      return parent.rewardgroupoptions;
     }
   }
 
@@ -179,9 +179,9 @@ function private function_60b0bbe7909381cc(var_7ff959e229d749c3) {
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_569a37ea2ae95769;
+      return parent.variant_object.rewardgroupselection;
     } else {
-      return parent.var_569a37ea2ae95769;
+      return parent.rewardgroupselection;
     }
   }
 
@@ -235,9 +235,9 @@ function private function_348abcb1eafd2676(var_7ff959e229d749c3) {
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_3c90b4a5ec990a09;
+      return parent.variant_object.spawnactivitymoment;
     } else {
-      return parent.var_3c90b4a5ec990a09;
+      return parent.spawnactivitymoment;
     }
   }
 

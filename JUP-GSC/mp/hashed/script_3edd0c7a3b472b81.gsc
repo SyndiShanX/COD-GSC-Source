@@ -3,24 +3,24 @@
  * Script: mp\hashed\script_3edd0c7a3b472b81.gsc
 *************************************************/
 
-#namespace namespace_d6fcbd6e48fac7ad;
+#namespace bundle_rewardcache;
 
-function function_5390d04c91335fd1(var_20f6c4cf48181094) {
-  parent = function_3a33f2ddc873def8(var_20f6c4cf48181094);
+function function_5390d04c91335fd1(bundlestruct_rewardcache) {
+  parent = function_3a33f2ddc873def8(bundlestruct_rewardcache);
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_1bd1cc823b281c6e;
+      return parent.variant_object.objectivemarkerbundle;
     } else {
-      return parent.var_1bd1cc823b281c6e;
+      return parent.objectivemarkerbundle;
     }
   }
 
   return undefined;
 }
 
-function function_b26772b7ec0e7091(var_20f6c4cf48181094) {
-  parent = function_3a33f2ddc873def8(var_20f6c4cf48181094);
+function function_b26772b7ec0e7091(bundlestruct_rewardcache) {
+  parent = function_3a33f2ddc873def8(bundlestruct_rewardcache);
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
@@ -33,8 +33,8 @@ function function_b26772b7ec0e7091(var_20f6c4cf48181094) {
   return undefined;
 }
 
-function function_80e85ac92007c6a0(var_20f6c4cf48181094) {
-  parent = function_eb85190cd674b6e8(var_20f6c4cf48181094);
+function function_80e85ac92007c6a0(bundlestruct_rewardcache) {
+  parent = function_eb85190cd674b6e8(bundlestruct_rewardcache);
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
@@ -47,54 +47,54 @@ function function_80e85ac92007c6a0(var_20f6c4cf48181094) {
   return undefined;
 }
 
-function function_c97c6b2daa70a875(var_20f6c4cf48181094) {
-  parent = function_eb85190cd674b6e8(var_20f6c4cf48181094);
+function function_c97c6b2daa70a875(bundlestruct_rewardcache) {
+  parent = function_eb85190cd674b6e8(bundlestruct_rewardcache);
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_27d28d73d3648ad8;
+      return parent.variant_object.interactionpointscriptable;
     } else {
-      return parent.var_27d28d73d3648ad8;
+      return parent.interactionpointscriptable;
     }
   }
 
   return undefined;
 }
 
-function function_5eb71fb76e2f0f3f(var_20f6c4cf48181094) {
-  parent = function_eb85190cd674b6e8(var_20f6c4cf48181094);
+function function_5eb71fb76e2f0f3f(bundlestruct_rewardcache) {
+  parent = function_eb85190cd674b6e8(bundlestruct_rewardcache);
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_6a7372ad33ab44c8;
+      return parent.variant_object.lootcachescriptable;
     } else {
-      return parent.var_6a7372ad33ab44c8;
+      return parent.lootcachescriptable;
     }
   }
 
   return undefined;
 }
 
-function private function_8498d448a405d127(var_20f6c4cf48181094) {
-  return var_20f6c4cf48181094;
+function private function_8498d448a405d127(bundlestruct_rewardcache) {
+  return bundlestruct_rewardcache;
 }
 
-function private function_3a33f2ddc873def8(var_20f6c4cf48181094) {
-  parent = function_8498d448a405d127(var_20f6c4cf48181094);
+function private function_3a33f2ddc873def8(bundlestruct_rewardcache) {
+  parent = function_8498d448a405d127(bundlestruct_rewardcache);
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_22b59a63b1593dfb;
+      return parent.variant_object.objectivemarkersettings;
     } else {
-      return parent.var_22b59a63b1593dfb;
+      return parent.objectivemarkersettings;
     }
   }
 
   return undefined;
 }
 
-function private function_eb85190cd674b6e8(var_20f6c4cf48181094) {
-  parent = function_8498d448a405d127(var_20f6c4cf48181094);
+function private function_eb85190cd674b6e8(bundlestruct_rewardcache) {
+  parent = function_8498d448a405d127(bundlestruct_rewardcache);
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
@@ -128,9 +128,9 @@ function function_750a38717f7e6e94(var_3eff889a24d68fb6) {
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_d9c7c84351cf42df;
+      return parent.variant_object.despawntimerseconds;
     } else {
-      return parent.var_d9c7c84351cf42df;
+      return parent.despawntimerseconds;
     }
   }
 
@@ -170,9 +170,9 @@ function function_f67c8d5225e081fe(var_3eff889a24d68fb6) {
 
   if(isDefined(parent)) {
     if(isDefined(parent.variant_object)) {
-      return parent.variant_object.var_228c0115e2e06985;
+      return parent.variant_object.objectivemarkervisibilitydistance;
     } else {
-      return parent.var_228c0115e2e06985;
+      return parent.objectivemarkervisibilitydistance;
     }
   }
 

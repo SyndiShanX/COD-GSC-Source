@@ -22,7 +22,7 @@
 #namespace switchblade_drone;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("switchblade_drone"), &init);
+  registerkillstreakinitfunction(getxhash("switchblade_drone"), &init);
 }
 
 function private init() {
@@ -39,7 +39,7 @@ function private init() {
   function_167cc15cd8218528();
   val::group_register("switchbladeDrone_deploy", ["melee", "offhand_weapons", "sprint", "weapon_switch", "cp_munitions_pickup"]);
   bundle = level.streakglobals.streakbundles["switchblade_drone"];
-  function_a41e3a211a9e37a4("switchblade_drone", bundle.var_cd5b1623cbc6478e, #"hash_b76b2215370d2700");
+  registerkillstreakdamagedealingweaponsharedfunc("switchblade_drone", bundle.var_cd5b1623cbc6478e, #"hash_b76b2215370d2700");
   level.var_e1aa3bddc7b228e9 = 0;
   level.var_e5731fb152792de1 = [];
   level.var_cde4ae1afb90a57a = [];
@@ -265,7 +265,7 @@ function function_7f27487dffce9217(streakinfo, weaponobj, projectile) {
     function_44b0c510768ad13e(weaponobj);
 
     if(istrue(bundle.var_9b2586bfb4f3de46)) {
-      switchblade_drone function_2eff4cd94c3243e8();
+      switchblade_drone clearminimapid();
     }
 
     switchblade_drone thread function_a66b069993cf9abb(1);
@@ -512,7 +512,7 @@ function function_e2cf8a8b93a4a86f() {
   maxrolldegrees = getdvarint(@ "hash_7bd25800dfc29105");
   maxyawdiff = getdvarint(@ "hash_832a4160ba33c74b");
   var_cf4febe91831ea56 = (1, 0, 0);
-  var_773133c39e93a51d = (0, 1, 0);
+  unityvector = (0, 1, 0);
   var_d2f1914cf518b7e0 = (0, 0, -1);
   waitframe();
   self.previousorigin = self.origin;
@@ -526,7 +526,7 @@ function function_e2cf8a8b93a4a86f() {
     stepunit = vectorNormalize(stepunit);
     yaw = acos(vectordot(stepunit, var_cf4febe91831ea56));
 
-    if(vectordot(stepunit, var_773133c39e93a51d) < 0) {
+    if(vectordot(stepunit, unityvector) < 0) {
       yaw = 360 - yaw;
     }
 
@@ -536,9 +536,9 @@ function function_e2cf8a8b93a4a86f() {
       yawdiff -= 360;
     }
 
-    var_a0ce54bdf5ecefa3 = clamp(yawdiff, maxyawdiff * -1, maxyawdiff);
-    var_a747f74b413e1808 = var_a0ce54bdf5ecefa3 / maxyawdiff;
-    roll = maxrolldegrees * var_a747f74b413e1808 * -1;
+    yawdiffclamped = clamp(yawdiff, maxyawdiff * -1, maxyawdiff);
+    turnproportion = yawdiffclamped / maxyawdiff;
+    roll = maxrolldegrees * turnproportion * -1;
     self.previousorigin = self.origin;
     newangles = (pitch, yaw, roll);
     self.targetangles = newangles;
@@ -559,17 +559,17 @@ function function_f57f532b8644012a() {
 
   while(true) {
     if(isDefined(self.targetangles)) {
-      var_fd4ec85a2030035e = angleclamp(self.targetangles[0]);
+      fixedtargetpitch = angleclamp(self.targetangles[0]);
       fixedcurrentpitch = angleclamp(self.angles[0]);
       fixedtargetyaw = angleclamp(self.targetangles[1]);
       fixedcurrentyaw = angleclamp(self.angles[1]);
       var_9f3eda8daa0eda03 = angleclamp(self.targetangles[2]);
       var_641a388819ce1d85 = angleclamp(self.angles[2]);
-      pitcherror = var_fd4ec85a2030035e - fixedcurrentpitch;
+      pitcherror = fixedtargetpitch - fixedcurrentpitch;
       yawerror = fixedtargetyaw - fixedcurrentyaw;
       rollerror = var_9f3eda8daa0eda03 - var_641a388819ce1d85;
-      var_a5a7ce89b43ee10c = var_fd4ec85a2030035e - fixedcurrentpitch + 360;
-      var_3ef2bd1018948fcc = var_fd4ec85a2030035e - fixedcurrentpitch - 360;
+      var_a5a7ce89b43ee10c = fixedtargetpitch - fixedcurrentpitch + 360;
+      var_3ef2bd1018948fcc = fixedtargetpitch - fixedcurrentpitch - 360;
 
       if(abs(var_a5a7ce89b43ee10c) < abs(pitcherror)) {
         pitcherror = var_a5a7ce89b43ee10c;
@@ -730,11 +730,11 @@ function function_171c9b525186dfee(streakname, centerposzoffset) {
 
     foreach(hit in hits) {
       if(isPlayer(hit) || isagent(hit)) {
-        if(hit function_87072b42853a9c58("specialty_blindeye")) {
+        if(hit hasperksharedfunc("specialty_blindeye")) {
           continue;
         }
 
-        if(!istrue(function_f3bb4f4911a1beb2("player", "isReallyAlive", hit))) {
+        if(!istrue(callsharedfunc("player", "isReallyAlive", hit))) {
           continue;
         }
       }
@@ -1082,24 +1082,24 @@ function switchblade_drone_explode(params, var_f543b7749f9023af) {
   self notify("notify_switchblade_drone_explode");
 }
 
-function function_8e41e9774021d4f0(msg, timer, radius, targetlength, var_781e7fd99e3f80a0) {
+function function_8e41e9774021d4f0(msg, timer, radius, targetlength, targetwidth) {
   level endon("game_ended");
   drone = self;
-  var_4b60537d15df5108 = [];
-  var_4b60537d15df5108 = utility::function_f3bb4f4911a1beb2("game", "getTeamData", drone.owner.team, "players");
-  circleradius = int(int(min(targetlength, var_781e7fd99e3f80a0) / 2) + radius);
+  alliedplayers = [];
+  alliedplayers = utility::callsharedfunc("game", "getTeamData", drone.owner.team, "players");
+  circleradius = int(int(min(targetlength, targetwidth) / 2) + radius);
   drone.enemycircle = spawnStruct();
   drone.var_8014ebffbb88822b = spawnStruct();
   drone.enemycircle scripts\cp_mp\utility\game_utility::function_6b6b6273f8180522("switchblade_drone_danger_radius", drone.origin, circleradius);
   drone.enemycircle scripts\cp_mp\utility\game_utility::function_6988310081de7b45();
 
-  foreach(player in var_4b60537d15df5108) {
+  foreach(player in alliedplayers) {
     drone.enemycircle scripts\cp_mp\utility\game_utility::function_d7d113d56ef0ef5b(player);
   }
 
   drone.var_8014ebffbb88822b scripts\cp_mp\utility\game_utility::function_6b6b6273f8180522("switchblade_drone_ally_radius", drone.origin, circleradius);
 
-  foreach(player in var_4b60537d15df5108) {
+  foreach(player in alliedplayers) {
     drone.var_8014ebffbb88822b scripts\cp_mp\utility\game_utility::function_cfd53c8f6878014f(player);
   }
 

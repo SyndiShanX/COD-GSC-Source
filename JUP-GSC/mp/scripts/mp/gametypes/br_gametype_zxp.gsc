@@ -263,7 +263,7 @@ function playershouldrespawn(data) {
   return playeriszombie();
 }
 
-function playerskiplootpickup(instance, var_a5b2c541413aa895) {
+function playerskiplootpickup(instance, bautouse) {
   if(istrue(level.brgametype.var_9dd997ced889b541) && isDefined(instance)) {
     if(isDefined(instance.type) && instance.type == "brloot_zmb_stim") {
       return !playeriszombie();
@@ -792,7 +792,7 @@ function onplayerkilled(deathdata) {
       if(!namespace_c711384b1335919::function_989d407ad1798eb0()) {
         thread scripts\mp\gametypes\br_public::brleaderdialogplayer("dead_reminder", victim, 0, 1, 1);
       }
-    } else if(!victim playeriszombie() && (attacker playeriszombie() || isagent(attacker) && isDefined(attacker.var_521fac03e5f3a11b))) {
+    } else if(!victim playeriszombie() && (attacker playeriszombie() || isagent(attacker) && isDefined(attacker.zombietype))) {
       namespace_c711384b1335919::function_d24f2dd28d26377e(-1 * level.brgametype.var_219163d4522e75c9);
     }
   }
@@ -1802,12 +1802,12 @@ function function_bfe726b5e0b35c27() {
   return player;
 }
 
-function function_c8f3d5a97c5a34d6(var_589c0eb9803a3415) {
-  if(!isDefined(var_589c0eb9803a3415)) {
-    var_589c0eb9803a3415 = 200;
+function function_c8f3d5a97c5a34d6(distance_from_player) {
+  if(!isDefined(distance_from_player)) {
+    distance_from_player = 200;
   }
 
-  return level.player.origin + anglesToForward(level.player.angles) * var_589c0eb9803a3415;
+  return level.player.origin + anglesToForward(level.player.angles) * distance_from_player;
 }
 
 function runcommand(args) {

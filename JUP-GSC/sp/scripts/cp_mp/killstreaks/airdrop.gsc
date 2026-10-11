@@ -1420,7 +1420,7 @@ function makecrateusable() {
 
     if(!isDefined(useobject)) {
       if(isDefined(self.model)) {
-        usetag = function_fed3925eb5331836(self.model, leveldata.usetag) ? leveldata.usetag : "tag_origin";
+        usetag = modelhastag(self.model, leveldata.usetag) ? leveldata.usetag : "tag_origin";
       } else {
         usetag = leveldata.usetag;
       }
@@ -1479,7 +1479,7 @@ function watchcrateuse(usetype, useobject) {
 
     if(getdvarint(@ "hash_618b9c003b5b3883", 0) == 0) {
       if(isDefined(self.disabled_use_for) && istrue(self.disabled_use_for[player getentitynumber()])) {
-        player scripts\engine\utility::function_f3bb4f4911a1beb2("airdrop", "airdrop_cannotUseLoadoutCrateHint");
+        player scripts\engine\utility::callsharedfunc("airdrop", "airdrop_cannotUseLoadoutCrateHint");
         continue;
       }
     }
@@ -2293,7 +2293,7 @@ function monitorimpactinternal(delay) {
             isbossvehicle = ent scripts\cp_mp\vehicles\vehicle::isbossvehicle();
 
             if(!isbossvehicle && !istrue(ent.exfilhelicopter)) {
-              ent.var_a8f4bb03b366aa80 = 1;
+              ent.dontspawnhusk = 1;
               ent scripts\cp_mp\vehicles\vehicle::vehicle_explode();
             }
           }
@@ -3705,9 +3705,9 @@ function airdropmarkeractivate(droptype, lifeid, streakinfo, gestureactivation) 
   ownerforward = anglesToForward(owner.angles);
   ownerright = anglestoright(owner.angles);
   contents = scripts\engine\trace::create_default_contents(1);
-  var_f74f18c717b149e2 = [targetpos - ownerforward * 100, targetpos + ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos + (-1 * ownerforward - ownerright) * 100];
+  positionchecklist = [targetpos - ownerforward * 100, targetpos + ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos + (-1 * ownerforward - ownerright) * 100];
 
-  foreach(dirpos in var_f74f18c717b149e2) {
+  foreach(dirpos in positionchecklist) {
     var_7a7426e42e674e40 = vectorNormalize(dirpos - targetpos);
     var_c45bbeb56df09b5d = targetpos * (1, 1, 0) + (0, 0, targetheightoffset);
     var_32a961dac02545b0 = var_c45bbeb56df09b5d - var_7a7426e42e674e40 * 25000;

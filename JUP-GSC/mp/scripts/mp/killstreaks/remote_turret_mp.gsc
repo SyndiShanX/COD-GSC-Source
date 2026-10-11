@@ -72,16 +72,16 @@ function sentryturret_handledeathdamage(data) {
     explosivedamage = 1;
   }
 
-  if(istrue(self.var_e42f0fcd6e0c1153)) {
+  if(istrue(self.isbarrelspinning)) {
     self stopbarrelspin();
-    self.var_e42f0fcd6e0c1153 = undefined;
+    self.isbarrelspinning = undefined;
   }
 
   self notify("kill_turret", explosivedamage, 1);
 }
 
 function sentryturret_modifydamage(data) {
-  var_3a8030d138e837c8 = level.sentrysettings["remote_turret"];
+  sentryconfig = level.sentrysettings["remote_turret"];
   attacker = data.attacker;
   objweapon = data.objweapon;
   type = data.meansofdeath;
@@ -106,7 +106,7 @@ function sentryturret_modifydamage(data) {
 
   var_8ed0a351aa70ec7 = self.damagetaken + modifieddamage;
 
-  if(var_8ed0a351aa70ec7 >= var_3a8030d138e837c8.maxhealth * 0.5 && !istrue(self.damagedstate)) {
+  if(var_8ed0a351aa70ec7 >= sentryconfig.maxhealth * 0.5 && !istrue(self.damagedstate)) {
     self.damagedstate = 1;
     self setscriptablepartstate("turret_damage", "on", 0);
   }
@@ -143,8 +143,8 @@ function sentryturret_initsentrysettings() {
   level.sentrysettings["remote_turret"].streakname = "remote_turret";
   level.sentrysettings["remote_turret"].weaponinfo = "remote_turret_mp";
   level.sentrysettings["remote_turret"].playerweaponinfo = "remote_turret_mp";
-  level.sentrysettings["remote_turret"].modelbaseground = default_to(bundle.var_5fa14c2e0b04da9, "wm_jup_2h_remote_turret_00");
-  level.sentrysettings["remote_turret"].modeldestroyedground = default_to(bundle.var_68bcc71e755cf4b2, "wm_jup_2h_remote_turret_00");
+  level.sentrysettings["remote_turret"].modelbaseground = default_to(bundle.sentrymodelbaseground, "wm_jup_2h_remote_turret_00");
+  level.sentrysettings["remote_turret"].modeldestroyedground = default_to(bundle.sentrymodeldestroyed, "wm_jup_2h_remote_turret_00");
   level.sentrysettings["remote_turret"].placementhintstring = &"KILLSTREAKS_HINTS/SENTRY_GUN_PLACE";
   level.sentrysettings["remote_turret"].ownerusehintstring = &"KILLSTREAKS_HINTS/REMOTE_TURRET_PICKUP";
   level.sentrysettings["remote_turret"].otherusehintstring = &"KILLSTREAKS_HINTS/SENTRY_OTHER_USE";
@@ -192,6 +192,6 @@ function sentryturret_empcleared() {
 }
 
 function function_21ed6c77fb27d039(turret) {
-  turret function_5226227bce83ebe9(3, turret.team);
+  turret setentityhudoutlinedata(3, turret.team);
   return turret;
 }

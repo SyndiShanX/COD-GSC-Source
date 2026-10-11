@@ -39,9 +39,9 @@ function gopath(vehicle) {
   vehicle startpath();
 }
 
-function _vehicle_paths(node, var_269fb0ec10b51524, var_cfa3aafb71b08d36) {
+function _vehicle_paths(node, bhelicopterwaitforstart, var_cfa3aafb71b08d36) {
   if(ishelicopter()) {
-    vehicle_paths_helicopter(node, var_269fb0ec10b51524, var_cfa3aafb71b08d36);
+    vehicle_paths_helicopter(node, bhelicopterwaitforstart, var_cfa3aafb71b08d36);
     return;
   }
 
@@ -405,7 +405,7 @@ function vehicle_paths_non_heli(node) {
       self.veh_brake = nextpoint.script_brake;
 
       if(self vehicle_isphysveh()) {
-        self function_65aa053c077c003a(1);
+        self vehphys_parkingbrake(1);
       }
     }
 
@@ -626,7 +626,7 @@ function add_z(vec, zplus) {
   return (vec[0], vec[1], vec[2] + zplus);
 }
 
-function vehicle_paths_helicopter(node, var_269fb0ec10b51524, var_cfa3aafb71b08d36) {
+function vehicle_paths_helicopter(node, bhelicopterwaitforstart, var_cfa3aafb71b08d36) {
   if(self vehicle_isphysveh()) {
     if(self hascomponent("p2p")) {
       function_fabc06bb049f87ee(node);
@@ -642,8 +642,8 @@ function vehicle_paths_helicopter(node, var_269fb0ec10b51524, var_cfa3aafb71b08d
   self endon("newpath");
   self endon("death");
 
-  if(!isDefined(var_269fb0ec10b51524)) {
-    var_269fb0ec10b51524 = 0;
+  if(!isDefined(bhelicopterwaitforstart)) {
+    bhelicopterwaitforstart = 0;
   }
 
   if(isDefined(node)) {
@@ -657,7 +657,7 @@ function vehicle_paths_helicopter(node, var_269fb0ec10b51524, var_cfa3aafb71b08d
     return;
   }
 
-  if(var_269fb0ec10b51524) {
+  if(bhelicopterwaitforstart) {
     self waittill("start_dynamicpath");
   }
 
@@ -1084,15 +1084,15 @@ function function_2936413eac5d78b1(nextpoint, lastpoint, var_b1f8b992bf79f2d3) {
 
   if(isDefined(nextpoint.radius)) {
     assertex(nextpoint.radius > 0, "radius: " + nextpoint.radius);
-    self function_77320e794d35465a("p2p", "goalThreshold", nextpoint.radius);
+    self setconfigvalue("p2p", "goalThreshold", nextpoint.radius);
   }
 
   if(isDefined(var_b1f8b992bf79f2d3)) {
     origin = add_z(origin, var_b1f8b992bf79f2d3);
   }
 
-  self function_77320e794d35465a("p2p", "goalPoint", origin);
-  self function_77320e794d35465a("p2p", "goalAngles", (0, yaw, 0));
+  self setconfigvalue("p2p", "goalPoint", origin);
+  self setconfigvalue("p2p", "goalAngles", (0, yaw, 0));
   self waittill("near_goal");
 
   if(!isDefined(self)) {
@@ -1159,7 +1159,7 @@ function getonpath(skip_attach) {
 
     if(ishelicopter() && isDefined(path_start)) {
       println("<dev string:x223>" + path_start.targetname);
-      println("<dev string:x240>" + function_3c8848a3a11b2553(self.vehicletype));
+      println("<dev string:x240>" + getxhashsourcename(self.vehicletype));
       assertmsg("<dev string:x24e>");
     }
 
@@ -1220,7 +1220,7 @@ function _vehicle_resume_named(stop_name) {
   }
 
   if(self hascomponent("p2p")) {
-    self function_77320e794d35465a("p2p", "manualSpeed", resume_speed * 17.6);
+    self setconfigvalue("p2p", "manualSpeed", resume_speed * 17.6);
     return;
   }
 
@@ -1236,7 +1236,7 @@ function _vehicle_stop_named(stop_name, acceleration, deceleration) {
 
   if(self hascomponent("p2p")) {
     self.vehicle_stop_named[stop_name] = self vehicle_getspeed();
-    self function_77320e794d35465a("p2p", "manualSpeed", 0);
+    self setconfigvalue("p2p", "manualSpeed", 0);
     return;
   }
 
@@ -1303,29 +1303,29 @@ function checkvehiclenavsplinestuck() {
   self notify("checkVehicleNavSplineStuck");
   self endon("checkVehicleNavSplineStuck");
   self endon("death");
-  var_8300c346ebae9c82 = undefined;
-  var_418c6d7f26c0e128 = undefined;
-  var_8b3d6f9a07d25e9b = 100;
+  laststucktime = undefined;
+  laststuckposition = undefined;
+  stuckdistancethreshold = 100;
   var_196855bdf0b6d359 = 5;
 
   while(true) {
     self waittill("path_blocked");
 
-    if(!isDefined(var_8300c346ebae9c82) || !isDefined(var_418c6d7f26c0e128)) {
-      var_8300c346ebae9c82 = gettime();
-      var_418c6d7f26c0e128 = self.origin;
+    if(!isDefined(laststucktime) || !isDefined(laststuckposition)) {
+      laststucktime = gettime();
+      laststuckposition = self.origin;
       continue;
     }
 
-    stuckdistance = length2d(self.origin - var_418c6d7f26c0e128);
+    stuckdistance = length2d(self.origin - laststuckposition);
 
-    if(stuckdistance > var_8b3d6f9a07d25e9b) {
-      var_8300c346ebae9c82 = gettime();
-      var_418c6d7f26c0e128 = self.origin;
+    if(stuckdistance > stuckdistancethreshold) {
+      laststucktime = gettime();
+      laststuckposition = self.origin;
       continue;
     }
 
-    timeelapsed = gettime() - var_8300c346ebae9c82;
+    timeelapsed = gettime() - laststucktime;
     timeelapsedseconds = timeelapsed / 1000;
 
     if(timeelapsedseconds > var_196855bdf0b6d359) {
@@ -1358,9 +1358,9 @@ function checkvehiclenavsplineinterrupted() {
 function function_b5e5b1755c705053(goallocation, speedmph, var_56c51d0b8c3270ca, debugdraw) {
   startlocation = self.origin;
   vehicleforward = anglesToForward(self.angles);
-  splinepoints = self function_187aaba5fbba21d0(startlocation, goallocation, 50, 200, 100, vehicleforward, (0, 0, 0), 300, 0.4, 0, 1, var_56c51d0b8c3270ca, 0, 1);
-  var_bfe90410fad38aaa = mph_to_ips(speedmph);
-  self function_77320e794d35465a("p2p", "manualSpeed", var_bfe90410fad38aaa);
+  splinepoints = self findsplinepath(startlocation, goallocation, 50, 200, 100, vehicleforward, (0, 0, 0), 300, 0.4, 0, 1, var_56c51d0b8c3270ca, 0, 1);
+  speedips = mph_to_ips(speedmph);
+  self setconfigvalue("p2p", "manualSpeed", speedips);
 
   if(isDefined(splinepoints) && istrue(debugdraw)) {
     thread function_68d5232181fec390(splinepoints, ter_op(isDefined(var_56c51d0b8c3270ca), (1, 1, 1), (1, 0, 0)));
@@ -1390,7 +1390,7 @@ function vehiclenavsplinesimplefollowbehavior(speedmph, var_56c51d0b8c3270ca, de
     }
 
     if(!isDefined(self.attackpoint)) {
-      tacpoint = function_8b25cd640ab423ba(enemy.origin, enemy.origin, minradius, maxradius, var_888ed72045a81b60);
+      tacpoint = getexposedtacpointwithvisinradius(enemy.origin, enemy.origin, minradius, maxradius, var_888ed72045a81b60);
 
       if(!isDefined(tacpoint)) {
         wait 1;
@@ -1409,13 +1409,13 @@ function vehiclenavsplinesimplefollowbehavior(speedmph, var_56c51d0b8c3270ca, de
     }
 
     waittill_any_3("near_goal", "vehicleNavSplineInterrupted", "vehicleStuckNavSpline");
-    self.var_457f4c9ca3bc7eaa = gettime();
+    self.enemyvisibletime = gettime();
 
     while(true) {
       waitframe();
-      var_86033ffa1b086ec2 = distance2d(enemy.origin, self.attackpoint);
+      attackpointdistance = distance2d(enemy.origin, self.attackpoint);
 
-      if(var_86033ffa1b086ec2 > var_3a23d1f807ed0162) {
+      if(attackpointdistance > var_3a23d1f807ed0162) {
         self.attackpoint = undefined;
         break;
       }
@@ -1426,15 +1426,15 @@ function vehiclenavsplinesimplefollowbehavior(speedmph, var_56c51d0b8c3270ca, de
         visible = isDefined(trace) && trace["<dev string:x2b7>"] == "<dev string:x2bf>" && trace["<dev string:x2ce>"] == enemy;
         color = ter_op(visible, (1, 1, 0), (1, 0, 0));
         line(enemy getcentroid(), self.origin, color, 1, 0, 1);
-        print3d(self.origin, "<dev string:x2d5>" + var_86033ffa1b086ec2, color, 1, 1, 1);
+        print3d(self.origin, "<dev string:x2d5>" + attackpointdistance, color, 1, 1, 1);
       }
 
       if(isDefined(trace) && trace["hittype"] == "hittype_entity" && trace["entity"] == enemy) {
-        self.var_457f4c9ca3bc7eaa = gettime();
+        self.enemyvisibletime = gettime();
         continue;
       }
 
-      if(gettime() - self.var_457f4c9ca3bc7eaa > var_c71a100d3bdf9202) {
+      if(gettime() - self.enemyvisibletime > var_c71a100d3bdf9202) {
         self.attackpoint = undefined;
         break;
       }
@@ -1454,10 +1454,10 @@ function function_2a708e9755fc798b(var_56c51d0b8c3270ca, speed) {
   navmeshlayer = ter_op(isDefined(var_56c51d0b8c3270ca), var_56c51d0b8c3270ca, "<dev string:x2f2>");
   var_620e3a366fb95fcf = istrue(level.var_620e3a366fb95fcf);
   script_disconnectpaths = !isDefined(self.script_disconnectpaths) || istrue(self.script_disconnectpaths);
-  var_30c993377fdf47dd = getDvar(@ "hash_b0706332ae0689bc", 1);
+  bg_vehcheckp2pgoalinturningcircle = getDvar(@ "hash_b0706332ae0689bc", 1);
   print3d(self.origin + (0, 0, textverticaloffset * 3), "<dev string:x2fa>" + navmeshlayer + "<dev string:x308>" + speed, (1, 1, 1), 1, 1, duration);
   print3d(self.origin + (0, 0, textverticaloffset * 2), "<dev string:x310>" + var_620e3a366fb95fcf + "<dev string:x32b>" + script_disconnectpaths, (1, 1, 1), 1, 1, duration);
-  print3d(self.origin + (0, 0, textverticaloffset), "<dev string:x344>" + var_30c993377fdf47dd, (1, 1, 1), 1, 1, duration);
+  print3d(self.origin + (0, 0, textverticaloffset), "<dev string:x344>" + bg_vehcheckp2pgoalinturningcircle, (1, 1, 1), 1, 1, duration);
 }
 
 function function_68d5232181fec390(splinepoints, pathcolor) {

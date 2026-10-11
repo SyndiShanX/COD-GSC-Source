@@ -24,7 +24,7 @@
 #namespace loitering_munition;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("loitering_munition"), &init);
+  registerkillstreakinitfunction(getxhash("loitering_munition"), &init);
 }
 
 function private init() {
@@ -351,7 +351,7 @@ function function_a6e6d62bd87beaae() {
         params = level.exgm.bossparameters["Maestro"].warlordparameters;
       }
 
-      thread function_f3bb4f4911a1beb2("warlord_maestro", "loiteringDeathMonitor", self);
+      thread callsharedfunc("warlord_maestro", "loiteringDeathMonitor", self);
     }
 
     thread function_9b0f13da4e5d2aa2(params);
@@ -518,7 +518,7 @@ function function_e603f6eeea780ef2() {
   }
 
   foreach(location in self.targetlocations) {
-    targetlist = function_143526130b12b2b6(location.location, missileradius, enemyteam);
+    targetlist = getplayersandaiarrayinradius(location.location, missileradius, enemyteam);
     index = var_a993d59bb6e4abd2.size;
     var_a993d59bb6e4abd2[index] = 0;
 

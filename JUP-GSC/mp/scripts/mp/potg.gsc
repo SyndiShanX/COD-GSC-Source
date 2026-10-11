@@ -420,7 +420,7 @@ function processevent(eventref, starttime, endtime, psoffsettime, scoreoverride,
 
   if(function_acab8b716476b589()) {
     if(!isxhash(eventref)) {
-      eventref = function_1823ff50bb28148d(eventref);
+      eventref = getxhash(eventref);
     }
 
     if(!eventtable_isevent(eventref)) {
@@ -704,7 +704,7 @@ function getcurwindowstarttime() {
 function eventtable_getscore(eventref, player) {
   if(function_acab8b716476b589()) {
     if(!isxhash(eventref)) {
-      eventref = function_1823ff50bb28148d(eventref);
+      eventref = getxhash(eventref);
     }
 
     if(!isDefined(level.scoreinfo[eventref])) {
@@ -783,7 +783,7 @@ function function_4ed25b1ffc14d7a8(player) {
     return 1;
   }
 
-  var_b04380ede90495aa = player getplayerdata(level.var_5d69837cf4db0407, "roundsSinceLastPOTG");
+  var_b04380ede90495aa = player getplayerdata(level.progressiongroup, "roundsSinceLastPOTG");
   var_1498673d1311049b = game["potg"].var_2ec58fa823337cd8;
 
   if(var_b04380ede90495aa < var_1498673d1311049b[0].roundssincelastpotg) {
@@ -802,7 +802,7 @@ function function_4ed25b1ffc14d7a8(player) {
 function function_fa47d8c13e83a98c() {
   var_a520dc4735b5b315 = game["potg"].recipients[level.currentround];
   var_a16a87f3dde73d18 = level.potgglobals.entities[var_a520dc4735b5b315].entity;
-  var_a16a87f3dde73d18 setplayerdata(level.var_5d69837cf4db0407, "roundsSinceLastPOTG", 0);
+  var_a16a87f3dde73d18 setplayerdata(level.progressiongroup, "roundsSinceLastPOTG", 0);
 
   foreach(player in level.players) {
     if(!isPlayer(player)) {
@@ -813,8 +813,8 @@ function function_fa47d8c13e83a98c() {
       continue;
     }
 
-    roundssincelastpotg = player getplayerdata(level.var_5d69837cf4db0407, "roundsSinceLastPOTG");
-    player setplayerdata(level.var_5d69837cf4db0407, "roundsSinceLastPOTG", roundssincelastpotg + 1);
+    roundssincelastpotg = player getplayerdata(level.progressiongroup, "roundsSinceLastPOTG");
+    player setplayerdata(level.progressiongroup, "roundsSinceLastPOTG", roundssincelastpotg + 1);
   }
 }
 
@@ -833,7 +833,7 @@ function eventtable_isaddonevent(eventref) {
 function eventtable_isevent(eventref) {
   if(function_acab8b716476b589()) {
     if(!isxhash(eventref)) {
-      eventref = function_1823ff50bb28148d(eventref);
+      eventref = getxhash(eventref);
     }
 
     if(!isDefined(level.scoreinfo[eventref])) {
@@ -1240,7 +1240,7 @@ function function_89e809869ae732cc(entity, eventref, eventscore, starttime, endt
   }
 
   if(isxhash(eventref)) {
-    eventref = function_3c8848a3a11b2553(eventref);
+    eventref = getxhashsourcename(eventref);
   }
 
   debug_print("<dev string:x50f>" + eventref + "<dev string:x51e>" + eventscore + "<dev string:x524>" + starttime + "<dev string:x531>" + endtime + "<dev string:x1b8>", entity);
@@ -1338,7 +1338,7 @@ function function_14c0539b7a4ff13a(scene) {
     return;
   }
 
-  debug_print("<dev string:x6ce>" + function_3c8848a3a11b2553(array_get_first_item(scene.events).eventref));
+  debug_print("<dev string:x6ce>" + getxhashsourcename(array_get_first_item(scene.events).eventref));
   debug_print("<dev string:x6e3>" + function_c488370b61042846(scene.primaryentity));
   debug_print("<dev string:x713>" + function_4ed25b1ffc14d7a8(scene.primaryentity));
 }
@@ -1351,9 +1351,9 @@ function function_b4ccc30f6252a635(events) {
 
     if(function_acab8b716476b589()) {
       if(function_f6c9a415f86697af(eventref) == 1) {
-        debug_print("<dev string:x752>" + function_3c8848a3a11b2553(eventref) + "<dev string:x758>" + event.score + "<dev string:x760>");
+        debug_print("<dev string:x752>" + getxhashsourcename(eventref) + "<dev string:x758>" + event.score + "<dev string:x760>");
       } else {
-        debug_print("<dev string:x752>" + function_3c8848a3a11b2553(eventref) + "<dev string:x758>" + event.score + "<dev string:x760>" + "<dev string:x768>" + function_f6c9a415f86697af(eventref) + "<dev string:x1b8>");
+        debug_print("<dev string:x752>" + getxhashsourcename(eventref) + "<dev string:x758>" + event.score + "<dev string:x760>" + "<dev string:x768>" + function_f6c9a415f86697af(eventref) + "<dev string:x1b8>");
       }
 
       continue;
@@ -1421,7 +1421,7 @@ function function_7fe17c62b2ba41a2(eventref) {
   dvarvalue = getdvarint(@ "hash_c2407250e6c4bbbc");
 
   if(isxhash(eventref)) {
-    eventref = function_3c8848a3a11b2553(eventref);
+    eventref = getxhashsourcename(eventref);
   }
 
   if(dvarvalue == 1) {

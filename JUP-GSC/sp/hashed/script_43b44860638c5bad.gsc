@@ -27,7 +27,7 @@ function main() {
   self.secondaryweapon = scripts\code\ai::create_weapon_in_script("");
   self.sidearm = scripts\code\ai::create_weapon_in_script("", "sidearm");
   self.behaviortreeasset = "enemy_combatant";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "soldier";
   self.usescriptedweapon = 1;
   self.scriptedweaponclassprimary = "pistol";
@@ -45,9 +45,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_7038dec66d8275be":
     default:
       return function_9ac26a51c94ccf52();

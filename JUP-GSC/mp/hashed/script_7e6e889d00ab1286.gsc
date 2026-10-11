@@ -259,7 +259,7 @@ function private function_dd12ed75d4820d7b(enemyentity, stance) {
   enemyentity.ignoreme = 1;
   enemyentity.ignoreall = 1;
   enemyentity.disablebulletwhizbyreaction = 1;
-  enemyentity function_9f82c74eb1b7caf9(0);
+  enemyentity setcanusecover(0);
   enemyentity.disablerunngun = 1;
   enemyentity.disabledodge = 1;
   enemyentity.scripted_mode = 1;

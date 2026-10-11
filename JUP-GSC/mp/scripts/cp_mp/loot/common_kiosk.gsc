@@ -33,7 +33,7 @@ function init_kiosk() {
     level.var_e7cee4fbb5b46ef2 = scripts\cp_mp\utility\loot::function_54b046aa3ba2678a(level.var_11a3973390a71e8);
     scripts\engine\scriptable::scriptable_addusedcallback(&armorykioskused);
     scripts\engine\scriptable::scriptable_addautousecallback(&armorykioskused);
-    function_9bc69c26770d9533(&onarmorykioskpurchase);
+    registeronluieventcallbacksharedfunc(&onarmorykioskpurchase);
     level.var_d03e6ba38b56b4ab = getdvarint(@ "hash_e77ab3a32453ae92", 1);
     level.var_e9f7702d839b262c = getdvarint(@ "hash_624b1f6964c696d", 180);
     level.randomanglemax = getdvarint(@ "hash_69c62cae4d7929c9", 10);
@@ -114,19 +114,19 @@ function function_3058b3e95a1bf984(instance, player) {
   }
 
   if(istrue(player.iscarrying)) {
-    player function_ced51005e26102fa("MP/FIELD_UPGRADE_CANNOT_USE");
+    player showerrormessagesharedfunc("MP/FIELD_UPGRADE_CANNOT_USE");
     return false;
   }
 
   return true;
 }
 
-function armorykioskused(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function armorykioskused(instance, part, state, player, bautouse, usestring) {
   if(!function_1414925deba056bc(instance.type, "kiosk")) {
     return;
   }
 
-  if(istrue(var_a5b2c541413aa895) && !function_7e0281196d6407c8()) {
+  if(istrue(bautouse) && !function_7e0281196d6407c8()) {
     return;
   }
 
@@ -134,19 +134,19 @@ function armorykioskused(instance, part, state, player, var_a5b2c541413aa895, us
     player = self;
   }
 
-  if(istrue(var_a5b2c541413aa895) && !isDefined(player.armorykioskpurchaseallowed)) {
+  if(istrue(bautouse) && !isDefined(player.armorykioskpurchaseallowed)) {
     player.armorykioskpurchaseallowed = 0;
   }
 
   if(!function_3058b3e95a1bf984(instance, player)) {
-    if(istrue(var_a5b2c541413aa895)) {
+    if(istrue(bautouse)) {
       player.armorykioskpurchaseallowed = 0;
     }
 
     return;
   }
 
-  if(istrue(var_a5b2c541413aa895)) {
+  if(istrue(bautouse)) {
     if(!player.armorykioskpurchaseallowed) {
       function_28d837f720b03bfa(instance, player);
     }
@@ -243,9 +243,9 @@ function _parsepurchaseitemtables() {
     var_97642cc850f90ca0.firesalediscount = int(tablelookupbyrow("mp/buyStation/buyStationItems.csv", row, 10));
     var_97642cc850f90ca0.firesalediscount = default_to(function_57e6c79279b89596(var_97642cc850f90ca0.entryref), var_97642cc850f90ca0.firesalediscount);
     var_97642cc850f90ca0.perkdiscount = int(tablelookupbyrow("mp/buyStation/buyStationItems.csv", row, 11));
-    var_97642cc850f90ca0.var_144769f518d71226 = int(tablelookupbyrow("mp/buyStation/buyStationItems.csv", row, 12));
+    var_97642cc850f90ca0.itemamount = int(tablelookupbyrow("mp/buyStation/buyStationItems.csv", row, 12));
 
-    if(isDefined(var_97642cc850f90ca0.var_144769f518d71226) && var_97642cc850f90ca0.var_144769f518d71226 > 0) {}
+    if(isDefined(var_97642cc850f90ca0.itemamount) && var_97642cc850f90ca0.itemamount > 0) {}
 
     level.var_989093b9a969783.items[itemindex] = var_97642cc850f90ca0;
   }
@@ -291,7 +291,7 @@ function _runpurchasemenu(kiosk) {
     [[level.var_6beff7b631ab7e18]](kiosk, player);
   }
 
-  var_25fa7366933d59f2 = player function_87072b42853a9c58("specialty_br_cheaper_kiosk");
+  var_25fa7366933d59f2 = player hasperksharedfunc("specialty_br_cheaper_kiosk");
   var_19f9a8eac6699ca9 = getdvarint(@ "hash_b0634929cd39973b", 1);
 
   if(!isint(kiosk) && isDefined(kiosk.overrideindex)) {
@@ -430,7 +430,7 @@ function _getactualcost(player, itemdata) {
     isfiresale = iskioskfiresaleactiveforplayer(player.common_kiosk, player);
   }
 
-  var_25fa7366933d59f2 = player function_87072b42853a9c58("specialty_br_cheaper_kiosk");
+  var_25fa7366933d59f2 = player hasperksharedfunc("specialty_br_cheaper_kiosk");
   finalcost = itemdata.cost;
   var_bbd3ced9f1e6acbf = function_65b2a9d69f873524(itemdata.entryref, player);
 
@@ -494,7 +494,7 @@ function onarmorykioskpurchase(channel, purchaseindex) {
     var_fbe1c496c49a42bc = default_to(function_98aedb8cf660c612(itemdata.entryref), "essence");
     var_7dc72c180df9143b = undefined;
 
-    if(player function_bcc79745d547a99c(var_fbe1c496c49a42bc, cost)) {
+    if(player can_afford(var_fbe1c496c49a42bc, cost)) {
       itemtype = itemdata.type;
 
       if(itemtype == "fieldupgrade") {
@@ -529,9 +529,9 @@ function onarmorykioskpurchase(channel, purchaseindex) {
       itembundlename = scripts\cp_mp\loot\common_item::function_61d960957fcf3ca0(var_3719061529ddd848);
       assertex(isDefined(itembundlename), "<dev string:x1c>" + var_3719061529ddd848 + "<dev string:x42>");
       itembundle = getscriptbundle("itemspawnentry:" + itembundlename);
-      var_91839babd32261f4 = itembundle.scriptable;
+      scriptable_name = itembundle.scriptable;
       fakeitem = spawnStruct();
-      fakeitem.type = var_91839babd32261f4;
+      fakeitem.type = scriptable_name;
       fakeitem.count = 1;
       fakeitem.fromcache = 1;
 
@@ -623,7 +623,7 @@ function function_8e857ffadd6d1af2(player, itemslotindex, sellall) {
   var_b1f734ded9a2721a = function_38859e49d1ac69a0(itemref);
 
   if(isDefined(itemref) && isDefined(var_b1f734ded9a2721a) && isDefined(var_b1f734ded9a2721a.var_af40863a32d7792b)) {
-    gametypebundle = function_90b5b6e99aef29d6();
+    gametypebundle = getgametypescriptbundle();
     cashmultiplier = isDefined(gametypebundle.var_dc7ab0a22b829f8b) ? gametypebundle.var_dc7ab0a22b829f8b : 1;
     cashvalue = var_9fb3b576439ee3d * var_b1f734ded9a2721a.var_af40863a32d7792b * cashmultiplier;
     var_74806f0c4caa7e55 = var_9fb3b576439ee3d;

@@ -3288,7 +3288,7 @@ function function_f9e021b5763236b(object, team) {
       return false;
     }
 
-    if(!function_f3bb4f4911a1beb2("super_capture_bot", "captureBot_shouldCaptureObjective", object)) {
+    if(!callsharedfunc("super_capture_bot", "captureBot_shouldCaptureObjective", object)) {
       return false;
     }
   } else if(!(self istouching(object.trigger) || isDefined(self.vehicle) && self.vehicle istouching(object.trigger))) {
@@ -3925,7 +3925,7 @@ function hasdomflags() {
     return true;
   }
 
-  var_c8f4c582625f492d = function_1823ff50bb28148d(getgametype());
+  var_c8f4c582625f492d = getxhash(getgametype());
 
   if(var_c8f4c582625f492d == #"landgrab") {
     return true;
@@ -4025,14 +4025,14 @@ function updateuisecuring(progress, securing, idx, object, usetime, progressobje
         scripts\mp\gametypes\br::updatesquadmemberlaststandreviveprogress(revivee, self, progress);
       }
     } else if(scripts\cp_mp\utility\game_utility::isbrstylegametype() && object.id == "laststand_interrogator") {
-      var_5bebd2013b0f01ec = undefined;
+      interrogatee = undefined;
 
       if(isDefined(object) && object function_ab8d64fe065bf6f7()) {
-        var_5bebd2013b0f01ec = object.owner;
+        interrogatee = object.owner;
       }
 
-      if(isDefined(var_5bebd2013b0f01ec) && self != var_5bebd2013b0f01ec) {
-        var_5bebd2013b0f01ec setclientomnvar("ui_securing", 19);
+      if(isDefined(interrogatee) && self != interrogatee) {
+        interrogatee setclientomnvar("ui_securing", 19);
       }
     }
   } else {
@@ -6260,7 +6260,7 @@ function function_21f4c6f630b17fc4(entity) {
 
 function function_781844c0c05b5ac7() {
   if(issharedfuncdefined("super_capture_bot", "captureBot_isGrenadeEntity")) {
-    return function_f3bb4f4911a1beb2("super_capture_bot", "captureBot_isGrenadeEntity");
+    return callsharedfunc("super_capture_bot", "captureBot_isGrenadeEntity");
   }
 
   return 0;

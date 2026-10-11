@@ -201,7 +201,7 @@ function function_36fd7e50e2a25847(member, defvalue) {
   return getDvar(dvar, defvalue);
 }
 
-function function_a972e013c8f2f2d4() {
+function reinitializedevdvarsonmigration() {
   level notify("<dev string:x1c>");
   level endon("<dev string:x1c>");
 

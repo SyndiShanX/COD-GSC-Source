@@ -221,13 +221,13 @@ function hideout_cqc_enemy_stagger() {
   self.animname = "generic";
   set_pacifist(1);
   level thread function_678ee05eb44c1fb9(self, "flg_hideout_intro_stagger_enemy_visible", "flg_hideout_cqc_hallway_advance_3");
-  var_3c1fba7fc11e4977 = getStruct(self.target, "targetname");
-  var_3c1fba7fc11e4977 scripts\common\anim::anim_first_frame_solo(self, "run_reaction_180");
+  s_anim_node = getStruct(self.target, "targetname");
+  s_anim_node scripts\common\anim::anim_first_frame_solo(self, "run_reaction_180");
   utility::flag_wait("flg_hideout_cqc_enemy_stagger");
   level thread function_3025ee051d28ec46([self], "flg_hideout_intro_stagger_enemy_dead");
   flag_set("flg_hideout_cqc_bathroom_enemy_anim_start");
   set_allowdeath(1);
-  var_3c1fba7fc11e4977 anim_single_solo_run(self, "run_reaction_180");
+  s_anim_node anim_single_solo_run(self, "run_reaction_180");
   demeanor_override("sprint");
   s_retreat = getStruct("s_bathroom_stagger_retreat_path", "targetname");
   thread scripts\sp\spawner::go_to_node(s_retreat);
@@ -245,19 +245,19 @@ function function_8595438a6e47852f() {
   self endon("death");
   self.animname = "generic";
   set_pacifist(1);
-  var_3c1fba7fc11e4977 = getStruct(self.target, "targetname");
-  var_3c1fba7fc11e4977 scripts\common\anim::anim_first_frame_solo(self, "jup_interaction_alert_doorcode_loop_01");
+  s_anim_node = getStruct(self.target, "targetname");
+  s_anim_node scripts\common\anim::anim_first_frame_solo(self, "jup_interaction_alert_doorcode_loop_01");
   utility::flag_wait("flg_hideout_cqc_hallway_advance_3");
   level function_87a70036926b2c90("hideout_cqc_player_progress");
   set_allowdeath(1);
 
   while(!flag("flg_hideout_ab_turret_safety")) {
-    var_3c1fba7fc11e4977 anim_single_solo_run(self, "jup_interaction_alert_doorcode_loop_01");
+    s_anim_node anim_single_solo_run(self, "jup_interaction_alert_doorcode_loop_01");
   }
 
-  var_3c1fba7fc11e4977 anim_single_solo_run(self, "jup_interaction_alert_doorcode_loop_01");
+  s_anim_node anim_single_solo_run(self, "jup_interaction_alert_doorcode_loop_01");
   level notify("cqc_turret_active");
-  var_3c1fba7fc11e4977 anim_single_solo_run(self, "jup_interaction_alert_doorcode_end");
+  s_anim_node anim_single_solo_run(self, "jup_interaction_alert_doorcode_end");
   vol_hideout_bathroom_back = getEnt("vol_hideout_bathroom_back", "targetname");
   self setgoalvolumeauto(vol_hideout_bathroom_back);
   wait 3;
@@ -522,9 +522,9 @@ function function_f62c678f2d6a2380() {
   utility::flag_wait("flg_bathroom_stall_arrived");
 
   if(!flag("flg_hideout_bathroom_allies_enter")) {
-    var_3c1fba7fc11e4977 = getStruct(self.target, "targetname");
+    s_anim_node = getStruct(self.target, "targetname");
     set_allowdeath(1);
-    var_3c1fba7fc11e4977 anim_single_solo(self, "corner_standl_blindfire_v2");
+    s_anim_node anim_single_solo(self, "corner_standl_blindfire_v2");
     scripts\sp\spawner::go_to_node(var_ea72a4128c3104c8);
   }
 
@@ -1047,8 +1047,8 @@ function hideout_finale_start() {
   level.var_2b34463b2129b4a3 = array_combine(level.var_443c4e804ddb50fe, level.ai_hideout_sfo_interior_1);
   level.ai_soap function_11f1be76c3f89960();
   level.var_d18d63c6d75cd1e function_11f1be76c3f89960();
-  level.ai_soap function_9f82c74eb1b7caf9(1);
-  level.var_d18d63c6d75cd1e function_9f82c74eb1b7caf9(1);
+  level.ai_soap setcanusecover(1);
+  level.var_d18d63c6d75cd1e setcanusecover(1);
 
   while(!isDefined(level.sentrysettings)) {
     wait 0.1;
@@ -1710,10 +1710,10 @@ function function_b0db0a57aa02a37e() {
   level.player endon("death");
   level endon("hideout_interact_evidence_start");
   var_53d38520a274620d = self getEye();
-  var_eeb8a35f24071b66 = squared(576);
+  n_max_dist_sq = squared(576);
   self waittill("death");
   var_865048328835e385 = utility::within_fov(level.player getEye(), level.player getplayerangles(), var_53d38520a274620d, cos(15));
-  var_8386785268b60d5e = distance2dsquared(level.player.origin, var_53d38520a274620d) < var_eeb8a35f24071b66;
+  var_8386785268b60d5e = distance2dsquared(level.player.origin, var_53d38520a274620d) < n_max_dist_sq;
 
   if(var_865048328835e385 && var_8386785268b60d5e) {
     var_d795bfe4371a3f23 = trace::create_world_contents();
@@ -1738,9 +1738,9 @@ function function_96aa4213b2b53934(var_5ef8efbbee012729) {
   if(var_5ef8efbbee012729 == 1) {
     var_53d38520a274620d = self.origin;
     corpse = undefined;
-    var_14b9c26fb1bbb890 = 10;
+    n_count_max = 10;
 
-    for(i = 0; i < var_14b9c26fb1bbb890; i++) {
+    for(i = 0; i < n_count_max; i++) {
       a_corpses = getcorpsearrayinradius(var_53d38520a274620d, 128);
 
       if(a_corpses.size > 0) {
@@ -1765,13 +1765,13 @@ function function_96aa4213b2b53934(var_5ef8efbbee012729) {
 
     var_f04850fc36886138 = 0;
     var_d1d1fcfc1fac5c9c = 0.5;
-    var_eeb8a35f24071b66 = squared(234);
+    n_max_dist_sq = squared(234);
     var_d795bfe4371a3f23 = trace::create_world_contents();
     utility::flag_wait_all("flg_hideout_office_enemies_dead", "flg_hideout_office_intro_vo_complete");
 
     while(true) {
       var_865048328835e385 = utility::within_fov(level.player getEye(), level.player getplayerangles(), corpseorigin, cos(30));
-      var_8386785268b60d5e = distance2dsquared(level.player.origin, corpseorigin) < var_eeb8a35f24071b66;
+      var_8386785268b60d5e = distance2dsquared(level.player.origin, corpseorigin) < n_max_dist_sq;
 
       if(var_865048328835e385 && var_8386785268b60d5e) {
         hits = physics_raycast(level.player getEye(), corpseorigin, var_d795bfe4371a3f23, undefined, 0, "physicsquery_closest");
@@ -2220,7 +2220,7 @@ function function_ddde7369b63b3113() {
   info = level.var_65008a2b14e076b8[level.var_888219acc4d50c4d];
   a_info = strtok(info, "+");
   utility::set_name(a_info[0]);
-  utility::function_ab35ae296c8f8609(a_info[1]);
+  utility::set_callsign(a_info[1]);
   level.var_888219acc4d50c4d++;
 
   if(level.var_888219acc4d50c4d >= 64) {

@@ -257,10 +257,10 @@ function callback_vehicledamage_internal(data) {
   }
 
   if(isDefined(self.occupants)) {
-    var_52616aae7b55d981 = int(clamp((self.health - data.damage) / self.maxhealth * 100, 0, 100));
+    healthpercentvalue = int(clamp((self.health - data.damage) / self.maxhealth * 100, 0, 100));
 
     foreach(occupant in self.occupants) {
-      occupant setclientomnvar("ui_veh_health_percent", int(var_52616aae7b55d981));
+      occupant setclientomnvar("ui_veh_health_percent", int(healthpercentvalue));
       occupant setclientomnvar("ui_veh_show_health", 1);
     }
   }
@@ -777,12 +777,12 @@ function maxspreadshotsperframe(victim, eattacker, objweapon) {
     }
 
     time = "" + gettime();
-    var_2d7ba1a9567917a0 = undefined;
+    pellets = undefined;
 
     if(eattacker isdualwielding()) {
-      var_2d7ba1a9567917a0 = 8;
+      pellets = 8;
     } else {
-      var_2d7ba1a9567917a0 = 4;
+      pellets = 4;
     }
 
     if(!isDefined(eattacker.pelletdmg) || !isDefined(eattacker.pelletdmg[time])) {
@@ -792,7 +792,7 @@ function maxspreadshotsperframe(victim, eattacker, objweapon) {
 
     if(!isDefined(eattacker.pelletdmg[time][victimid])) {
       eattacker.pelletdmg[time][victimid] = 1;
-    } else if(eattacker.pelletdmg[time][victimid] + 1 > var_2d7ba1a9567917a0) {
+    } else if(eattacker.pelletdmg[time][victimid] + 1 > pellets) {
       result = 1;
     } else {
       eattacker.pelletdmg[time][victimid]++;

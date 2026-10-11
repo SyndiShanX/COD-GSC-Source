@@ -2116,7 +2116,7 @@ function function_bbc2d6967287dc7(lootitemname, valuetable) {
   loottype = level.br_pickups.br_itemtype[lootitemname];
 
   if(lootitemname == "military_ammo_restock") {
-    loottype = function_1823ff50bb28148d("ammo_restock");
+    loottype = getxhash("ammo_restock");
   }
 
   assertex(isDefined(loottype), "<dev string:x5fd>" + lootitemname);

@@ -28,7 +28,7 @@ function autoexec init() {
   level.var_cdc0b4ad36375763 = getentitylessscriptablearray("bunker_exterior_door", "script_noteworthy");
   level.var_b8e3a1a7470e8e9d = getentitylessscriptablearray("bunker_interior_door", "script_noteworthy");
   level.var_d6551492e20f6902 = getentitylessscriptablearray("bunker_treasury_door", "script_noteworthy");
-  level.var_84a9ffacd501b871 = function_f159c10d5cf8f0b4("bunker_interior_trigger", "script_noteworthy");
+  level.var_84a9ffacd501b871 = getnoentvolumearray("bunker_interior_trigger", "script_noteworthy");
   level.var_cf5c5baf6a57f293 = getentitylessscriptablearray("bunker_escape_hatch", "script_noteworthy");
   level.var_770b15c8cf662749 = getentitylessscriptablearray("bunker_redeploy_struct", "script_noteworthy");
   level.var_290c4e649c2ae935 = getentitylessscriptablearray("bunker_keypad", "script_noteworthy");
@@ -393,7 +393,7 @@ function function_226d75fce239ea20(interiordoor) {
   interiordoor setscriptablepartstate("bunker_door", "opening");
 }
 
-function function_ca99372711c88ea8(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_ca99372711c88ea8(instance, part, state, player, bautouse, usestring) {
   if(player namespace_aead94004cf4c147::function_36b1968bfe78916b(level.var_d432f6b3d679c326)) {
     player namespace_aead94004cf4c147::function_6f39f9916649ac48(level.var_d432f6b3d679c326, 1);
     instance setscriptablepartstate("bunker_door", "opening");
@@ -446,7 +446,7 @@ function function_ca99372711c88ea8(instance, part, state, player, var_a5b2c54141
   }
 }
 
-function function_57dcf788fec9fd2f(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_57dcf788fec9fd2f(instance, part, state, player, bautouse, usestring) {
   level notify("bunker_pc_used");
 
   if(!isDefined(level.var_e9198597ca44a070)) {
@@ -547,9 +547,9 @@ function function_a754e1ff09435068(instance) {
   }
 }
 
-function function_27322f324a65f978(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_27322f324a65f978(instance, part, state, player, bautouse, usestring) {
   instance.player = player;
-  scripts\mp\gametypes\br_bunker_utility::keypadscriptableused(instance, part, state, player, var_a5b2c541413aa895, usestring);
+  scripts\mp\gametypes\br_bunker_utility::keypadscriptableused(instance, part, state, player, bautouse, usestring);
 }
 
 function function_824219d6af679a49(instance) {
@@ -593,7 +593,7 @@ function function_6ff32ae26d76be30(instance) {
   }
 }
 
-function function_e33b4d4ab4129418(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_e33b4d4ab4129418(instance, part, state, player, bautouse, usestring) {
   player setclientomnvar("ui_br_bunker_map_overlay_active", 1);
 }
 
@@ -765,14 +765,14 @@ function watchplayerdeath(player) {
   player scripts\mp\utility\lower_message::clearlowermessages();
 }
 
-function function_c49de466dc9bd0a8(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_c49de466dc9bd0a8(instance, part, state, player, bautouse, usestring) {
   level endon("game_ended");
   player endon("disconnect");
   player endon("death");
   player scripts\mp\utility\lower_message::setlowermessageomnvar("br_bunker_graffiti_message", undefined, 3);
 }
 
-function function_fc14fcc137d9fc2d(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_fc14fcc137d9fc2d(instance, part, state, player, bautouse, usestring) {
   level endon("game_ended");
   player endon("disconnect");
   player endon("death");

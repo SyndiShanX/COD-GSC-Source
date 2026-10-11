@@ -297,15 +297,15 @@ function function_29e181f3b6d3f79b(car) {
       var_dfe13dccd8f66a73++;
       var_a6afea87679e66d7 = (-12223, -2985, 58);
 
-      if(!isDefined(car.var_cc286ab0b719069b)) {
-        car.var_cc286ab0b719069b = spawn("script_model", var_a6afea87679e66d7);
-        car.var_cc286bb0b71908ce = spawn("script_model", var_a6afea87679e66d7);
+      if(!isDefined(car.sfx1)) {
+        car.sfx1 = spawn("script_model", var_a6afea87679e66d7);
+        car.sfx2 = spawn("script_model", var_a6afea87679e66d7);
       }
 
       if(var_dfe13dccd8f66a73 > 0) {
-        car.var_93fe105a9275bd0f = car.var_cc286ab0b719069b;
+        car.var_93fe105a9275bd0f = car.sfx1;
       } else {
-        car.var_93fe105a9275bd0f = car.var_cc286bb0b71908ce;
+        car.var_93fe105a9275bd0f = car.sfx2;
       }
 
       car.var_93fe105a9275bd0f moveTo(var_a6afea87679e66d7, 0.1);
@@ -389,9 +389,9 @@ function function_79148c48a2ad61c1() {
   var_646389193279e8ec = [racecar];
 
   while(true) {
-    var_863c619037f3ac74 = racecar.origin + rotatevector((25, 0, -25), racecar.angles);
-    aabbmin = var_863c619037f3ac74 - radiusvector;
-    aabbmax = var_863c619037f3ac74 + radiusvector;
+    pointtocheck = racecar.origin + rotatevector((25, 0, -25), racecar.angles);
+    aabbmin = pointtocheck - radiusvector;
+    aabbmax = pointtocheck + radiusvector;
     var_c857eed1363ba9d = physics_aabbbroadphasequery(aabbmin, aabbmax, itemcontents, var_646389193279e8ec);
 
     foreach(ent in var_c857eed1363ba9d) {
@@ -435,7 +435,7 @@ function function_79148c48a2ad61c1() {
       }
 
       if(isDefined(var_424a9176df4df0f4.cratetype) && (var_424a9176df4df0f4.cratetype == "killstreak" || var_424a9176df4df0f4.cratetype == "juggernaut")) {
-        function_7c32ec07e4129be9(var_424a9176df4df0f4, racecar, var_863c619037f3ac74);
+        function_7c32ec07e4129be9(var_424a9176df4df0f4, racecar, pointtocheck);
         continue;
       }
 
@@ -493,7 +493,7 @@ function item_collision_ignorefutureevent(itement, racecar, duration) {
   }
 }
 
-function function_7c32ec07e4129be9(var_424a9176df4df0f4, racecar, var_863c619037f3ac74) {
+function function_7c32ec07e4129be9(var_424a9176df4df0f4, racecar, pointtocheck) {
   var_424a9176df4df0f4 scripts\cp_mp\killstreaks\airdrop::destroycrate();
   var_424a9176df4df0f4.markedfordelete = 1;
 }
@@ -520,7 +520,7 @@ function function_ff213d6711860e73() {
     all_mines = level.mines;
 
     if(all_mines.size > 0) {
-      var_863c619037f3ac74 = racecar.origin + rotatevector((375, 0, -100), racecar.angles);
+      pointtocheck = racecar.origin + rotatevector((375, 0, -100), racecar.angles);
 
       foreach(mine in all_mines) {
         if(!isDefined(mine)) {
@@ -531,11 +531,11 @@ function function_ff213d6711860e73() {
           continue;
         }
 
-        if(distance2dsquared(mine.origin, var_863c619037f3ac74) > maxdistsq) {
+        if(distance2dsquared(mine.origin, pointtocheck) > maxdistsq) {
           continue;
         }
 
-        if(distancesquared(mine.origin, var_863c619037f3ac74) > maxdistsq) {
+        if(distancesquared(mine.origin, pointtocheck) > maxdistsq) {
           continue;
         }
 

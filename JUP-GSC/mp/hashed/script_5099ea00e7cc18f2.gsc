@@ -76,7 +76,7 @@ function function_8063e641963cd522() {
     heli.team = game["attackers"];
     heli.helitype = helitype;
 
-    if(!istrue(self.var_74ade4b4040cee5e)) {
+    if(!istrue(self.dontremove)) {
       heli.script_vehicle_selfremove = 1;
     }
 

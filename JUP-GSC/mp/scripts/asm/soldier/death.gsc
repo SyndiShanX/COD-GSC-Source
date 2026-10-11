@@ -168,8 +168,8 @@ function playdeathanim(asmname, statename, params) {
   assertex(isDefined(self.deathalias) && isDefined(self.deathstate) || !isDefined(self.deathalias) && !isDefined(self.deathstate), "<dev string:x1c>");
   var_4d3cebad4e3e8617 = isDefined(self.deathalias) && isDefined(self.deathstate);
 
-  if(!isDefined(self.skipdeathanim) || istrue(self.var_aa0214e1292a7b3)) {
-    deathanimdata = function_ea379d7359bd10ae(asmname, statename, params);
+  if(!isDefined(self.skipdeathanim) || istrue(self.diedintransition)) {
+    deathanimdata = getdeathanimdata(asmname, statename, params);
     assert(isDefined(deathanimdata) && deathanimdata.size == 2);
     deathanim = deathanimdata[0];
     deathxanim = deathanimdata[1];
@@ -186,7 +186,7 @@ function playdeathanim(asmname, statename, params) {
       detachriotshield();
     }
 
-    if(isDefined(self.var_1bab8712529eb3c2) && self.var_1bab8712529eb3c2) {
+    if(isDefined(self.asmflashlight) && self.asmflashlight) {
       scripts\asm\soldier\patrol::detachflashlight();
     }
 
@@ -264,7 +264,7 @@ function playdeathanim(asmname, statename, params) {
     thread startragdollwithoutwait();
   } else {
     if(!isDefined(deathanimdata)) {
-      deathanimdata = function_ea379d7359bd10ae(asmname, statename, params);
+      deathanimdata = getdeathanimdata(asmname, statename, params);
     }
 
     assert(isDefined(deathanimdata) && deathanimdata.size == 2);
@@ -304,7 +304,7 @@ function playdeathanim(asmname, statename, params) {
   self endon("terminate_death_thread");
 
   if(!isagent(self)) {
-    if(isDefined(self.skipdeathanim) && !istrue(self.var_aa0214e1292a7b3)) {
+    if(isDefined(self.skipdeathanim) && !istrue(self.diedintransition)) {
       wait 0.05;
     } else {
       notestatename = statename;
@@ -421,18 +421,18 @@ function handleburndeathmodelswap() {
 function handleburndeathvfx() {
   self endon("stop_burn_VFX");
   self endon("entitydeleted");
-  var_32561454d6dff5f7 = 1;
+  useontag = 1;
 
   if(self isscriptable()) {
     currentstate = self getscriptablepartstate("burn_to_death_by_molotov", 1);
 
     if(isDefined(currentstate)) {
       self setscriptablepartstate("burn_to_death_by_molotov", "active");
-      var_32561454d6dff5f7 = 0;
+      useontag = 0;
     }
   }
 
-  if(var_32561454d6dff5f7) {
+  if(useontag) {
     burnvfxtagpackets = getburnvfxtagpackets();
 
     foreach(burnvfxpacket in burnvfxtagpackets) {
@@ -642,7 +642,7 @@ function function_a9ab7e592a976b98(asmname, statename, tostatename, params) {
   }
 
   if(isDefined(self.damagemod) && self.damagemod == "MOD_IMPACT") {
-    if(isDefined(self.attacker) && istrue(self.attacker.var_128e748fcc0a6687)) {
+    if(isDefined(self.attacker) && istrue(self.attacker.istrainvehicle)) {
       return true;
     }
   }
@@ -1296,12 +1296,12 @@ function cross2d(a, b) {
   return a[0] * b[1] - b[0] * a[1];
 }
 
-function meleegetattackercardinaldirection(var_e508c1784ebedbc6, var_d9c3b6b9654ffd8e) {
-  dot = vectordot(var_d9c3b6b9654ffd8e, var_e508c1784ebedbc6);
+function meleegetattackercardinaldirection(vector2dtargetforward, var_d9c3b6b9654ffd8e) {
+  dot = vectordot(var_d9c3b6b9654ffd8e, vector2dtargetforward);
   var_f90d3cb356bc0e24 = cos(60);
 
   if(squared(dot) < squared(var_f90d3cb356bc0e24)) {
-    if(cross2d(var_e508c1784ebedbc6, var_d9c3b6b9654ffd8e) > 0) {
+    if(cross2d(vector2dtargetforward, var_d9c3b6b9654ffd8e) > 0) {
       return 1;
     } else {
       return 3;
@@ -1319,13 +1319,13 @@ function meleegetattackercardinaldirection(var_e508c1784ebedbc6, var_d9c3b6b9654
 
 function orientmeleevictim(directional_orient) {
   knifeweapon = makeweapon("iw7_knife_upgrade1");
-  var_af2a51355e17e303 = makeweapon("iw7_sonic");
+  sonicweapon = makeweapon("iw7_sonic");
 
-  if(utility::isdamageweapon(knifeweapon) || utility::isdamageweapon(var_af2a51355e17e303)) {
+  if(utility::isdamageweapon(knifeweapon) || utility::isdamageweapon(sonicweapon)) {
     return;
   }
 
-  if(directional_orient || self.damagemod == "MOD_MELEE" && isDefined(self.attacker) && !utility::wasdamagedbyoffhandshield() && !utility::isdamageweapon(var_af2a51355e17e303)) {
+  if(directional_orient || self.damagemod == "MOD_MELEE" && isDefined(self.attacker) && !utility::wasdamagedbyoffhandshield() && !utility::isdamageweapon(sonicweapon)) {
     if(actor_is3d()) {
       var_65ed85ed588949ac = self.attacker.origin - self.origin;
       var_910c18a863e61b73 = generateaxisanglesfromforwardvector(var_65ed85ed588949ac, self.angles);
@@ -1360,9 +1360,9 @@ function function_2ae52d0a5e94265a() {
 
   if(isPlayer(self.attacker) && isbullet && !function_b84fca76682933d4()) {
     if(damagelocationisany("head", "helmet")) {
-      function_2ad34da25e5bdd45("bullet_impact_headshot", level.player);
+      playsoundtoplayersharedfunc("bullet_impact_headshot", level.player);
     } else {
-      function_2ad34da25e5bdd45("mp_kill_alert", level.player);
+      playsoundtoplayersharedfunc("mp_kill_alert", level.player);
     }
 
     self.attacker.lastkillalertsoundtime = gettime();
@@ -1380,7 +1380,7 @@ function playdeathsound(bexplosivedamage) {
 
   if(isDefined(self.diequietly) && self.diequietly) {
     if(isDefined(self.attacker) && isPlayer(self.attacker) || isDefined(self.lastattacker) && isPlayer(self.lastattacker)) {
-      var_635e760983edc107 = "death_quiet";
+      dialoguetype = "death_quiet";
     } else {
       return;
     }
@@ -1391,9 +1391,9 @@ function playdeathsound(bexplosivedamage) {
   }
 
   if(isDefined(self.diequietly) && self.diequietly) {
-    var_635e760983edc107 = "death_quiet";
+    dialoguetype = "death_quiet";
   } else {
-    var_635e760983edc107 = "death";
+    dialoguetype = "death";
   }
 
   dmgammo = undefined;
@@ -1401,9 +1401,9 @@ function playdeathsound(bexplosivedamage) {
 
   if(isDefined(self.damagemod) && self.damagemod == "MOD_MELEE") {
     if(isDefined(self.diequietly) && self.diequietly) {
-      var_635e760983edc107 = "death_quiet";
+      dialoguetype = "death_quiet";
     } else {
-      var_635e760983edc107 = "death";
+      dialoguetype = "death";
     }
   } else {
     if(isDefined(self.damageweapon) && !isnullweapon(self.damageweapon)) {
@@ -1413,22 +1413,22 @@ function playdeathsound(bexplosivedamage) {
 
     if(bexplosivedamage) {
       if(isDefined(rootname) && rootname == "molotov") {
-        var_635e760983edc107 = "flamedeath";
+        dialoguetype = "flamedeath";
       } else {
-        var_635e760983edc107 = "explodeath";
+        dialoguetype = "explodeath";
       }
     } else {
       if(isDefined(self._blackboard.balconydeathnode)) {
-        var_635e760983edc107 = "falldeath";
+        dialoguetype = "falldeath";
       }
 
       if(isDefined(dmgammo) && dmgammo == % "incendiary") {
-        var_635e760983edc107 = "incendeath";
+        dialoguetype = "incendeath";
       }
     }
   }
 
-  scripts\anim\face::saygenericdialogue(var_635e760983edc107);
+  scripts\anim\face::saygenericdialogue(dialoguetype);
 }
 
 function shouldskipdeathsound() {

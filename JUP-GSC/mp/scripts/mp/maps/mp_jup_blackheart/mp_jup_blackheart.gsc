@@ -35,38 +35,38 @@ function main() {
 function crusher() {
   level endon("game_ended");
   button = getEnt("crusher_button", "targetname");
-  var_303a18afe9c2c7b = getEnt("crusher_kill", "targetname");
+  killtrig = getEnt("crusher_kill", "targetname");
 
-  if(!isDefined(var_303a18afe9c2c7b)) {
+  if(!isDefined(killtrig)) {
     return;
   }
 
-  var_303a18afe9c2c7b trigger_off();
+  killtrig trigger_off();
   msg = "crusher";
   thread show_label(button, msg);
 
   while(true) {
     button waittill("trigger", player);
-    crush(var_303a18afe9c2c7b);
+    crush(killtrig);
   }
 }
 
 function shredder() {
   level endon("game_ended");
   button = getEnt("shredder_button", "targetname");
-  var_303a18afe9c2c7b = getEnt("shredder_kill", "targetname");
+  killtrig = getEnt("shredder_kill", "targetname");
 
-  if(!isDefined(var_303a18afe9c2c7b)) {
+  if(!isDefined(killtrig)) {
     return;
   }
 
-  var_303a18afe9c2c7b trigger_off();
+  killtrig trigger_off();
   msg = "shredder";
   thread show_label(button, msg);
 
   while(true) {
     button waittill("trigger", player);
-    function_6e1c2cef124d8489(var_303a18afe9c2c7b);
+    shred(killtrig);
   }
 }
 
@@ -93,7 +93,7 @@ function crush(trig) {
   wait 7;
 }
 
-function function_6e1c2cef124d8489(trig) {
+function shred(trig) {
   var_7105bdb05a2247b0 = getEnt("shredder_one", "targetname");
   var_a45b04b13c657546 = getEnt("shredder_two", "targetname");
   var_d1030d895bd655a = getEnt("shredder_one_col", "targetname");

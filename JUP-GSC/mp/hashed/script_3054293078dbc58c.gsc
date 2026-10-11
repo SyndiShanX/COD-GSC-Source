@@ -78,27 +78,27 @@ function private function_1038bfc87beec575() {
       }
     }
 
-    var_7f4a6be39f5c9522 = isalive(self.var_349af4466beb8322) && !istrue(self.var_349af4466beb8322.ignoreme) && !istrue(self.var_349af4466beb8322.notarget) && !istrue(self.var_349af4466beb8322.var_f2f5db77ae69537f);
+    has_valid_target = isalive(self.var_349af4466beb8322) && !istrue(self.var_349af4466beb8322.ignoreme) && !istrue(self.var_349af4466beb8322.notarget) && !istrue(self.var_349af4466beb8322.var_f2f5db77ae69537f);
 
     if(self.state == 4) {
-      if(!var_7f4a6be39f5c9522) {
+      if(!has_valid_target) {
         var_6a75892a622e0cb7 = 3000;
-        potential_targets = function_143526130b12b2b6(self.origin, var_6a75892a622e0cb7);
+        potential_targets = getplayersandaiarrayinradius(self.origin, var_6a75892a622e0cb7);
 
         foreach(target in potential_targets) {
           if(isalive(target) && !is_equal(target.team, self.team) && !istrue(target.ignoreme) && !istrue(target.notarget)) {
             self.var_349af4466beb8322 = target;
-            var_7f4a6be39f5c9522 = 1;
+            has_valid_target = 1;
             break;
           }
         }
       }
 
-      if(var_7f4a6be39f5c9522) {
+      if(has_valid_target) {
         function_4f4004b3bbfaf766(self, 3);
       }
     } else if(self.state == 3) {
-      if(!var_7f4a6be39f5c9522) {
+      if(!has_valid_target) {
         function_4f4004b3bbfaf766(self, 4);
       }
     }
@@ -147,7 +147,7 @@ function private function_e61b88b7b91e2427() {
     }
 
     if(self.prev_position != self.origin && distancesquared(self.prev_position, self.origin) > 1) {
-      var_a074c763266c6245 = function_143526130b12b2b6(averagepoint([self.prev_position, self.origin]), distance(self.prev_position, self.origin) + 64);
+      var_a074c763266c6245 = getplayersandaiarrayinradius(averagepoint([self.prev_position, self.origin]), distance(self.prev_position, self.origin) + 64);
 
       foreach(character in var_a074c763266c6245) {
         var_cfb227596c65259f = pointonsegmentnearesttopoint(self.prev_position, self.origin, character getcentroid());

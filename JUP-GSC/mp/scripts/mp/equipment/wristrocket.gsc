@@ -96,12 +96,12 @@ function wristrocket_watcheffects() {
   self endon("disconnect");
   self notify("wristRocket_watchEffects");
   self endon("wristRocket_watchEffects");
-  var_fb0b2f8f6aa55804 = 0;
+  watchheldoffhandbreak = 0;
 
   while(true) {
     raceresult = spawnStruct();
 
-    if(var_fb0b2f8f6aa55804) {
+    if(watchheldoffhandbreak) {
       childthread wristrocket_watcheffectsraceheldoffhandbreak(raceresult);
     } else {
       childthread wristrocket_watcheffectsracegrenadepullback(raceresult);
@@ -111,7 +111,7 @@ function wristrocket_watcheffects() {
     childthread wristrocket_watcheffectsracesuperstarted(raceresult);
     childthread wristrocket_watcheffectsracedeath(raceresult);
     childthread wristrocket_watcheffectsraceunset(raceresult);
-    var_fb0b2f8f6aa55804 = 0;
+    watchheldoffhandbreak = 0;
     self waittill("wristRocket_watchEffectsRaceStart");
     waittillframeend();
     grenadepullback = istrue(raceresult.grenadepullback);
@@ -137,7 +137,7 @@ function wristrocket_watcheffects() {
       thread wristrocket_endeffects();
     } else if(grenadepullback) {
       thread wristrocket_begineffects();
-      var_fb0b2f8f6aa55804 = 1;
+      watchheldoffhandbreak = 1;
     }
 
     self notify("wristRocket_watchEffectsRaceEnd");

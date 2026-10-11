@@ -41,7 +41,7 @@ function init() {
 
 function function_4318321c0172ec43(var_580db0023b1afd04, var_d7f5721cea7df9c5, var_16093b68c8441bb3, difficulty_region, region_name) {
   reward_instance = spawnStruct();
-  reward_instance.var_6c29f2fdb0054bbe = var_16093b68c8441bb3;
+  reward_instance.playerparticipants = var_16093b68c8441bb3;
   reward_instance.difficulty_region = difficulty_region;
 
   if(istrue(var_d7f5721cea7df9c5)) {
@@ -50,14 +50,14 @@ function function_4318321c0172ec43(var_580db0023b1afd04, var_d7f5721cea7df9c5, v
 
   if(istrue(var_580db0023b1afd04)) {
     var_db1036d6c298e796 = spawnStruct();
-    spawn_contract_reward_rift(self, self.var_e0a0dc78cd0e70f3, var_db1036d6c298e796);
+    spawn_contract_reward_rift(self, self.rewardstructoverride, var_db1036d6c298e796);
     level thread function_f4ca5678b389bda1(var_db1036d6c298e796, self);
     placement_struct = namespace_3dd7203b843229f9::function_7af151bd42e8132d(self, "UseGameModeSetting");
     reward_instance.placement_struct = placement_struct;
     reward_instance thread reward_explosion();
   }
 
-  if(isDefined(self.var_6c29f2fdb0054bbe) && isDefined(self.var_b90c26f642e9b96e)) {
+  if(isDefined(self.playerparticipants) && isDefined(self.var_b90c26f642e9b96e)) {
     scoreeventparams = spawnStruct();
     scoreeventparams.scoreevent = self.var_b90c26f642e9b96e;
     scoreeventparams.reason = #"activity_reward";
@@ -68,7 +68,7 @@ function function_4318321c0172ec43(var_580db0023b1afd04, var_d7f5721cea7df9c5, v
   }
 }
 
-function spawn_contract_reward_rift(activityinstance, var_e0a0dc78cd0e70f3, var_5edef452e5fc2cd7) {
+function spawn_contract_reward_rift(activityinstance, rewardstructoverride, var_5edef452e5fc2cd7) {
   reward_cache::function_1c972fc13937297c("ob_objective_rewards.gsc: Attempting to spawn a contract reward rift for activity instance with variant tag: " + namespace_4fda5d7358015a06::function_a4748b32a824c79c(activityinstance));
 
   var_88a08b25571f4a24 = activity_rewards::function_1edea59f189f9a02(activityinstance, "<dev string:x2e>", "<dev string:x40>");
@@ -77,29 +77,29 @@ function spawn_contract_reward_rift(activityinstance, var_e0a0dc78cd0e70f3, var_
     reward_cache::function_1c5f030d48fdff4c("<dev string:x5e>" + namespace_4fda5d7358015a06::function_a4748b32a824c79c(activityinstance) + "<dev string:xc9>" + "<dev string:x40>" + "<dev string:x100>" + "<dev string:x125>" + "<dev string:x191>" + "<dev string:x201>");
   }
 
-  var_6f8af5eb76deac21 = spawnStruct();
+  relevantinfostruct = spawnStruct();
 
-  if(isDefined(var_e0a0dc78cd0e70f3)) {
-    var_6f8af5eb76deac21.var_e0a0dc78cd0e70f3 = var_e0a0dc78cd0e70f3;
+  if(isDefined(rewardstructoverride)) {
+    relevantinfostruct.rewardstructoverride = rewardstructoverride;
   }
 
   if(isDefined(var_5edef452e5fc2cd7)) {
     var_be39a270e44a0361 = spawnStruct();
-    var_6f8af5eb76deac21.var_44fadde66021a763 = var_be39a270e44a0361;
+    relevantinfostruct.var_44fadde66021a763 = var_be39a270e44a0361;
   }
 
-  namespace_68dc261109a9503f::function_ce906635a152d2d0(self, "spawn_contract_reward_rift", var_6f8af5eb76deac21);
+  namespace_68dc261109a9503f::function_ce906635a152d2d0(self, "spawn_contract_reward_rift", relevantinfostruct);
 
   if(isDefined(var_5edef452e5fc2cd7)) {
-    thread function_a57eb235aa288f81(var_6f8af5eb76deac21.var_44fadde66021a763, var_5edef452e5fc2cd7, activityinstance);
+    thread function_a57eb235aa288f81(relevantinfostruct.var_44fadde66021a763, var_5edef452e5fc2cd7, activityinstance);
   }
 }
 
 function function_863be9e39e19fe2f(reward_groups, placement_struct, lootfunc, var_5812163a4b6704c8, var_3c99a2a84c4b850f) {
-  var_bae6a1d8f73bc001 = reward_cache_settings::function_ec54b8019f59c0ef("reward_rift_default");
-  var_f07d96bc912b9e7b = namespace_81b7e1672a7e54da::function_4d6ae01e1e47320c("reward_rift_default_behavior");
-  var_ce0e8fe5ee941ba9 = &namespace_3dd7203b843229f9::function_885b8eee6652a555;
-  namespace_6d633d94b557096d::function_75e180b08f394748(var_bae6a1d8f73bc001, var_f07d96bc912b9e7b, reward_groups, placement_struct, var_ce0e8fe5ee941ba9, lootfunc, var_5812163a4b6704c8, undefined, undefined, var_3c99a2a84c4b850f);
+  rewardcachesettings = reward_cache_settings::function_ec54b8019f59c0ef("reward_rift_default");
+  rewardcachebehaviorsettings = namespace_81b7e1672a7e54da::function_4d6ae01e1e47320c("reward_rift_default_behavior");
+  func_openlootablecontainer = &namespace_3dd7203b843229f9::function_885b8eee6652a555;
+  managed_reward_cache::function_75e180b08f394748(rewardcachesettings, rewardcachebehaviorsettings, reward_groups, placement_struct, func_openlootablecontainer, lootfunc, var_5812163a4b6704c8, undefined, undefined, var_3c99a2a84c4b850f);
 }
 
 function private function_a57eb235aa288f81(var_be39a270e44a0361, var_5edef452e5fc2cd7, activityinstance) {
@@ -166,7 +166,7 @@ function function_d7f5721cea7df9c5(reward_instance) {
 
   var_7b60c91792761e4f = function_9d71b982e1eb2f81(reward_instance.difficulty_region);
 
-  foreach(player in reward_instance.var_6c29f2fdb0054bbe) {
+  foreach(player in reward_instance.playerparticipants) {
     player scripts\ob\points::function_ddee59d6b1a2b9e(var_7b60c91792761e4f, undefined, 1, #"activity_reward");
 
     if(player scripts\mp\utility\perk::_hasperk("specialty_exfil_contract_percent_reward")) {
@@ -180,7 +180,7 @@ function reward_explosion() {
   a_ai = getaiarrayinradius(self.placement_struct.origin, 575);
   var_6bfbb345d937798e = [];
 
-  foreach(player in self.var_6c29f2fdb0054bbe) {
+  foreach(player in self.playerparticipants) {
     foreach(ai in a_ai) {
       if(ai.team == player.team || ai.team == "neutral" || array_contains(var_6bfbb345d937798e, ai)) {
         continue;
@@ -499,11 +499,11 @@ function function_b3fbe14081c02a2c(var_db1036d6c298e796, reward_instance, var_6e
   }
 
   var_e10194ca6271ac0a = var_6eee8785d833d021;
-  namespace_6d633d94b557096d::function_a52e804f95d8ef78(var_e10194ca6271ac0a);
+  managed_reward_cache::function_a52e804f95d8ef78(var_e10194ca6271ac0a);
 
   foreach(player in reward_instance.var_cc4e306d6425c182) {
     if(isPlayer(player)) {
-      reward_instance.var_33e96096a10a0f25[player getentitynumber()] = namespace_6d633d94b557096d::function_805de4f236be02cc(var_e10194ca6271ac0a, player);
+      reward_instance.var_33e96096a10a0f25[player getentitynumber()] = managed_reward_cache::function_805de4f236be02cc(var_e10194ca6271ac0a, player);
     }
   }
 
@@ -569,7 +569,7 @@ function function_f006e75899cdd353(var_e10194ca6271ac0a, player, reward_instance
 
   var_69281e57808f26f6 = cache.contents[0];
   var_789b03a07b72284c = reward_instance.var_33e96096a10a0f25[player getentitynumber()];
-  namespace_6d633d94b557096d::function_8b4f7ed65818ac99(var_e10194ca6271ac0a, player, var_789b03a07b72284c, var_69281e57808f26f6);
+  managed_reward_cache::function_8b4f7ed65818ac99(var_e10194ca6271ac0a, player, var_789b03a07b72284c, var_69281e57808f26f6);
 }
 
 function function_de8f5de2296c5596(callback_params, var_cd68c23920cc227f) {
@@ -751,7 +751,7 @@ function function_d97cb9fd43673c44(player, challengeid, var_919ba53f6defbc64) {
 }
 
 function function_1b907bcbe2da5ad7() {
-  gamemodebundle = function_1e231fc15fdab31d();
+  gamemodebundle = getgamemodescriptbundle();
 
   if(isDefined(gamemodebundle) && isDefined(self.difficulty_region)) {
     if(getdvarint(@ "hash_dd47e07605565dd8", -1) >= 0) {
@@ -893,7 +893,7 @@ function function_d55d0e38986d17f3(cache) {
 }
 
 function function_b3c1e8c1d1b05b20(center_origin, n_radius, var_cd00b21daa6ae0b4) {
-  var_f10d2bae0aa4fce7 = [];
+  a_s_spawnpts = [];
   valid_points = [];
   var_5ac1024b00cecc71 = (0, 0, 48);
   i = 0;
@@ -905,7 +905,7 @@ function function_b3c1e8c1d1b05b20(center_origin, n_radius, var_cd00b21daa6ae0b4
     pos_on_navmesh = getclosestpointonnavmesh(check_pt);
 
     if(isDefined(pos_on_navmesh)) {
-      bsight = scripts\engine\trace::ray_trace_passed(center_origin + var_5ac1024b00cecc71, pos_on_navmesh + var_5ac1024b00cecc71, self.var_6c29f2fdb0054bbe);
+      bsight = scripts\engine\trace::ray_trace_passed(center_origin + var_5ac1024b00cecc71, pos_on_navmesh + var_5ac1024b00cecc71, self.playerparticipants);
 
       if(istrue(bsight)) {
         valid_points[valid_points.size] = pos_on_navmesh;
@@ -924,15 +924,15 @@ function function_b3c1e8c1d1b05b20(center_origin, n_radius, var_cd00b21daa6ae0b4
     s_spot = spawnStruct();
     s_spot.origin = valid_points[i];
     s_spot.angles = (0, 0, 0);
-    var_f10d2bae0aa4fce7[var_f10d2bae0aa4fce7.size] = s_spot;
+    a_s_spawnpts[a_s_spawnpts.size] = s_spot;
   }
 
   if(istrue(var_cd00b21daa6ae0b4)) {
-    return var_f10d2bae0aa4fce7;
+    return a_s_spawnpts;
   }
 
-  rand_index = randomintrange(0, var_f10d2bae0aa4fce7.size);
-  return var_f10d2bae0aa4fce7[rand_index];
+  rand_index = randomintrange(0, a_s_spawnpts.size);
+  return a_s_spawnpts[rand_index];
 }
 
 function private function_23b66008ea86e35c(var_b381b0883bcd4847) {
@@ -1060,7 +1060,7 @@ function function_35a0497a05c5f84(a_players, difficulty_region, reward_region, s
   };
   reward_instance = spawnStruct();
   reward_instance.placement_struct = placement_struct;
-  reward_instance.var_6c29f2fdb0054bbe = level.players;
+  reward_instance.playerparticipants = level.players;
   reward_instance thread reward_explosion();
   function_863be9e39e19fe2f(reward_groups, placement_struct, lootfunc, var_5812163a4b6704c8);
 }
@@ -1074,7 +1074,7 @@ function function_7ca191e9301a4a83(var_5812163a4b6704c8) {
   reward_instance.reward_region = reward_region;
   reward_instance.reward_group = reward_group;
   reward_instance.activity_instance = spawnStruct();
-  reward_instance.activity_instance.var_6c29f2fdb0054bbe = level.players;
+  reward_instance.activity_instance.playerparticipants = level.players;
   cache = spawnStruct();
   reward_instance namespace_e8853d3344e33cf6::function_d67ffd8ae22bf637(cache);
   return cache.contents;

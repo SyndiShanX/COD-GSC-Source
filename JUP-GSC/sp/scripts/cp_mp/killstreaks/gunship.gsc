@@ -1248,9 +1248,9 @@ function gunship_updateaimingcoords(plane) {
 
 function gunship_rotaterig() {
   self endon("death");
-  var_25bb708a7d591131 = 10;
-  rotatetime = level.gunship_speed["rotate"] / 360 * var_25bb708a7d591131;
-  self rotateYaw(self.angles[2] + var_25bb708a7d591131, rotatetime, rotatetime, 0);
+  rampupdegrees = 10;
+  rotatetime = level.gunship_speed["rotate"] / 360 * rampupdegrees;
+  self rotateYaw(self.angles[2] + rampupdegrees, rotatetime, rotatetime, 0);
   degreespersecond = 360 / level.gunship_speed["rotate"];
   var_31fc5244269dae18 = degreespersecond * 0.0174533;
   level.gunship_magnitude = var_31fc5244269dae18 * 9000;
@@ -2511,7 +2511,7 @@ function function_eb2299f7c29ac70c(gunshipintro, animent, var_465db5572e637fb7) 
 
 function gunship_control_bot_aiming() {
   var_4ac4b608421ecbbb = undefined;
-  var_4d571df5f3a8befc = undefined;
+  last_enemy_seen = undefined;
   target_loc = undefined;
   var_befbf47bff2227bd = 0;
   var_ea189b55de5c8fa7 = 0;
@@ -2524,13 +2524,13 @@ function gunship_control_bot_aiming() {
     var_d430bcda6275a38b = 0;
     var_4b05a8497817406a = 0;
 
-    if(isDefined(var_4d571df5f3a8befc) && var_4d571df5f3a8befc.health <= 0 && gettime() - var_4d571df5f3a8befc.deathtime < 2000) {
+    if(isDefined(last_enemy_seen) && last_enemy_seen.health <= 0 && gettime() - last_enemy_seen.deathtime < 2000) {
       var_d430bcda6275a38b = 1;
       var_4b05a8497817406a = 1;
     } else if(isalive(self.enemy) && (self botcanseeentity(self.enemy) || gettime() - self lastknowntime(self.enemy) <= 300)) {
       var_d430bcda6275a38b = 1;
-      var_4d571df5f3a8befc = self.enemy;
-      var_7f9803312b446879 = var_4d571df5f3a8befc.origin;
+      last_enemy_seen = self.enemy;
+      var_7f9803312b446879 = last_enemy_seen.origin;
       var_4ac4b608421ecbbb = self.enemy.origin;
 
       if(self botcanseeentity(self.enemy)) {
@@ -3074,7 +3074,7 @@ function gunship_watchplanedistance(var_2136b63785ee0579) {
   }
 }
 
-function watchdebuglocation(tagname, var_22c53c353885fe59) {
+function watchdebuglocation(tagname, showaxis) {
   self endon("<dev string:xab>");
 
   while(true) {
@@ -3086,7 +3086,7 @@ function watchdebuglocation(tagname, var_22c53c353885fe59) {
 
     sphere(debuglocation, 100, (1, 1, 1), 0, 1);
 
-    if(istrue(var_22c53c353885fe59)) {
+    if(istrue(showaxis)) {
       testforward = anglesToForward(self.angles);
       testright = anglestoright(self.angles);
       testup = anglestoup(self.angles);

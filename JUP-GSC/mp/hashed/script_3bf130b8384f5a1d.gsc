@@ -66,7 +66,7 @@ function function_144097189064ffad() {
   level callback::add("player_connect", &onplayerconnected);
   level callback::add("player_disconnect", &onplayerdisconnected);
   level callback::add("spectating_target_death_or_disconnect", &function_96357a61d1fdb3f6);
-  level callback::add("player_bleedout", &function_c9df4b28bedf5ec1);
+  level callback::add("player_bleedout", &onplayerbleedout);
   level callback::add("player_death", &onplayerdeath);
 
   if(istrue(level.var_1764c13968c16a53)) {
@@ -112,7 +112,7 @@ function private function_96357a61d1fdb3f6(params) {
     return;
   }
 
-  level thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 0, 0.25);
+  level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 0, 0.25);
 }
 
 function private function_1516111d965f0f5(val) {
@@ -171,8 +171,8 @@ function private function_220efee7b4271691(team) {
     }
   }
 
-  var_c74157caaaf53945 = "player_use_hold_respawned_" + team;
-  reason = level waittill_any_timeout_1(level.var_8af7200f711796c7, var_c74157caaaf53945);
+  strnotify = "player_use_hold_respawned_" + team;
+  reason = level waittill_any_timeout_1(level.var_8af7200f711796c7, strnotify);
   teammates = getteamdata(team, "players");
   var_3f9eb2eca674eeed = 1;
 
@@ -188,7 +188,7 @@ function private function_220efee7b4271691(team) {
     return;
   }
 
-  if(!is_equal(reason, var_c74157caaaf53945)) {
+  if(!is_equal(reason, strnotify)) {
     foreach(player in teammates) {
       var_7bf7b14acaf96c1d = player function_33a21b2ea282d115();
       player function_14debcad04282fbf(var_7bf7b14acaf96c1d * -1);
@@ -302,7 +302,7 @@ function private function_e07daf5fb2a4ecd3(params) {
   }
 }
 
-function private function_c9df4b28bedf5ec1(params) {
+function private onplayerbleedout(params) {
   if(isDefined(level.var_867a2a58a53c66f2) && isPlayer(self.laststandattacker) && self != self.laststandattacker) {
     self.laststandattacker[[level.var_867a2a58a53c66f2]](#"enemy_killed");
   }
@@ -475,7 +475,7 @@ function private function_777650b23d69e74e(event, params) {
       return function_5e077dbd13c9817f();
     default:
 
-      logstring("<dev string:x1c>" + function_3c8848a3a11b2553(event));
+      logstring("<dev string:x1c>" + getxhashsourcename(event));
 
       break;
   }

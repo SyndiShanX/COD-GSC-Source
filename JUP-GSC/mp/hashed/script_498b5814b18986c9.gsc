@@ -27,7 +27,7 @@ function hasscubagasmask(player) {
 }
 
 function isscubagasmaskequipped(player) {
-  return hasscubagasmask(player) && scripts\cp_mp\gasmask::function_260708c89a11f0c3(player);
+  return hasscubagasmask(player) && scripts\cp_mp\gasmask::isgasmaskequipped(player);
 }
 
 function removescubagasmaskfromplayer(player) {

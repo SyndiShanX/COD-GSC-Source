@@ -46,18 +46,18 @@ function stun_ai(duration) {
     return;
   }
 
-  self._blackboard.var_e42e5f8ee06d791d = end_time;
-  self._blackboard.var_8b915e6d74944598 = 1;
+  self._blackboard.zombiestunendtime = end_time;
+  self._blackboard.zombieinstun = 1;
   function_ac90fa5cc0a80298("stun_in");
 }
 
 function is_stunned() {
-  return isDefined(self._blackboard.var_e42e5f8ee06d791d) && gettime() < self._blackboard.var_e42e5f8ee06d791d;
+  return isDefined(self._blackboard.zombiestunendtime) && gettime() < self._blackboard.zombiestunendtime;
 }
 
 function clear_stun() {
   if(isDefined(self._blackboard)) {
-    self._blackboard.var_e42e5f8ee06d791d = 0;
-    self._blackboard.var_8b915e6d74944598 = 0;
+    self._blackboard.zombiestunendtime = 0;
+    self._blackboard.zombieinstun = 0;
   }
 }

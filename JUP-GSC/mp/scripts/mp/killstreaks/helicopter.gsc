@@ -498,17 +498,17 @@ function modifydamage(data) {
   damage = data.damage;
   idflags = data.idflags;
   modifieddamage = damage;
-  var_cb15fa5174e71840 = 2;
-  var_be7c04516c5d9ccd = 3;
-  var_ca960a517459fe15 = 4;
+  divisorlrg = 2;
+  divisormed = 3;
+  divisorlow = 4;
 
   if(isDefined(self.helitype) && self.helitype == "dronedrop") {
-    var_cb15fa5174e71840 = 1;
-    var_be7c04516c5d9ccd = 1;
-    var_ca960a517459fe15 = 2;
+    divisorlrg = 1;
+    divisormed = 1;
+    divisorlow = 2;
   }
 
-  modifieddamage = scripts\mp\utility\killstreak::getmodifiedantikillstreakdamage(attacker, objweapon, type, modifieddamage, self.maxhealth, var_cb15fa5174e71840, var_be7c04516c5d9ccd, var_ca960a517459fe15);
+  modifieddamage = scripts\mp\utility\killstreak::getmodifiedantikillstreakdamage(attacker, objweapon, type, modifieddamage, self.maxhealth, divisorlrg, divisormed, divisorlow);
   thread addrecentdamage(modifieddamage);
   self notify("heli_damage_fx");
   return modifieddamage;
@@ -794,20 +794,20 @@ function fireontarget(targetplayer) {
 
   var_4a05b5b6307a4629 = anglesToForward(currenttarget.angles);
   var_4a05b5b6307a4629 *= (1, 1, 0);
-  var_3f662d6595827e55 = var_2a530280d4341a8a + var_f8819918db5085ef * var_4a05b5b6307a4629;
-  attackvector = var_3f662d6595827e55 - var_2a530280d4341a8a;
+  moveintoposition = var_2a530280d4341a8a + var_f8819918db5085ef * var_4a05b5b6307a4629;
+  attackvector = moveintoposition - var_2a530280d4341a8a;
   attackangle = vectortoangles(attackvector);
   attackangle *= (1, 1, 0);
   thread attackgroundtarget(currenttarget);
   self vehicle_setspeed(80);
 
-  if(distance2d(self.origin, var_3f662d6595827e55) < 1000) {
-    var_3f662d6595827e55 *= 1.5;
+  if(distance2d(self.origin, moveintoposition) < 1000) {
+    moveintoposition *= 1.5;
   }
 
-  var_3f662d6595827e55 *= (1, 1, 0);
-  var_3f662d6595827e55 += (0, 0, var_9b53fc8fa63d4127);
-  _setvehgoalpos(var_3f662d6595827e55, 1, 1);
+  moveintoposition *= (1, 1, 0);
+  moveintoposition += (0, 0, var_9b53fc8fa63d4127);
+  _setvehgoalpos(moveintoposition, 1, 1);
   self waittill("near_goal");
 
   if(!isDefined(currenttarget) || !isalive(currenttarget)) {

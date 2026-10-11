@@ -102,11 +102,11 @@ function function_705889b7586cf34e(player, weapon, weaponslot) {
 
 function function_ee4ccdff22e510fd(player, var_72e90f48e0fd0e1c, sticker) {
   if(sticker == "none") {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "sticker", var_72e90f48e0fd0e1c, sticker);
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "sticker", var_72e90f48e0fd0e1c, sticker);
     return;
   }
 
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "sticker", var_72e90f48e0fd0e1c, getsubstr(sticker, 2));
+  player setplayerdata(level.progressiongroup, "dmzWeapon", "sticker", var_72e90f48e0fd0e1c, getsubstr(sticker, 2));
 }
 
 function function_8107fe0feec27866(player, weapon, var_223785486725cd51) {
@@ -118,9 +118,9 @@ function function_8107fe0feec27866(player, weapon, var_223785486725cd51) {
   }
 
   lootid = scripts\cp_mp\weapon::function_79d6e6c22245687a(rootname, variantid);
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "weapon", rootname);
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "variantID", variantid);
-  player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "lootItemID", lootid);
+  player setplayerdata(level.progressiongroup, "dmzWeapon", "weapon", rootname);
+  player setplayerdata(level.progressiongroup, "dmzWeapon", "variantID", variantid);
+  player setplayerdata(level.progressiongroup, "dmzWeapon", "lootItemID", lootid);
 
   if(!istrue(var_223785486725cd51)) {
     player.weaponslotclip = player getweaponammoclip(weapon);
@@ -133,34 +133,34 @@ function function_8107fe0feec27866(player, weapon, var_223785486725cd51) {
   }
 
   attachments = getweaponattachments(weapon);
-  defaulttoidmap = scripts\cp_mp\weapon::function_792bacb194f6f862(rootname);
+  defaulttoidmap = scripts\cp_mp\weapon::getbaseweaponattachdefaulttoidmap(rootname);
   var_428a6c7cd65625c0 = 0;
   attachmenttoidmap = weapon.attachmentvarindices;
 
   for(attachmentindex = 0; attachmentindex < attachments.size && var_428a6c7cd65625c0 < 7; attachmentindex++) {
     if(scripts\mp\utility\weapon::attachmentisselectable(weapon, attachments[attachmentindex])) {
-      player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "attachment", attachments[attachmentindex]);
-      player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "variantID", attachmenttoidmap[attachments[attachmentindex]]);
+      player setplayerdata(level.progressiongroup, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "attachment", attachments[attachmentindex]);
+      player setplayerdata(level.progressiongroup, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "variantID", attachmenttoidmap[attachments[attachmentindex]]);
       var_428a6c7cd65625c0++;
     }
   }
 
   for(attachmentindex = var_428a6c7cd65625c0; var_428a6c7cd65625c0 < 7; attachmentindex++) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "attachment", "none");
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "variantID", 0);
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "attachment", "none");
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "attachmentSetup", var_428a6c7cd65625c0, "variantID", 0);
     var_428a6c7cd65625c0++;
   }
 
   if(isDefined(weapon.camo)) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "camo", weapon.camo);
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "camo", weapon.camo);
   }
 
   if(isDefined(weapon.reticle)) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "reticle", weapon.reticle);
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "reticle", weapon.reticle);
   }
 
   if(isDefined(weapon.visual)) {
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "cosmeticAttachment", weapon.visual);
+    player setplayerdata(level.progressiongroup, "dmzWeapon", "cosmeticAttachment", weapon.visual);
   }
 
   stickers = [];
@@ -207,7 +207,7 @@ function function_f2849dae62f7444e(player, statsgroup, weaponkey) {
   }
 
   if(!isDefined(statsgroup)) {
-    statsgroup = level.var_5d69837cf4db0407;
+    statsgroup = level.progressiongroup;
   }
 
   weapon = player getplayerdata(statsgroup, weaponkey, "weapon");
@@ -244,7 +244,7 @@ function function_efab78b72d131d76(player) {
   ret = isDefined(player.var_9ac5e72784815708) && player.var_9ac5e72784815708.basename != "none";
 
   if(istrue(level.var_f478c1f94caa7e9)) {
-    data = player getplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "weapon");
+    data = player getplayerdata(level.progressiongroup, "dmzWeapon", "weapon");
     assertex(data != "<dev string:x7a>" == ret, "<dev string:x82>" + data + "<dev string:xd0>" + ret);
   }
 
@@ -252,7 +252,7 @@ function function_efab78b72d131d76(player) {
 }
 
 function function_d9b1550011525161(player) {
-  return player getplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "lootItemID");
+  return player getplayerdata(level.progressiongroup, "dmzWeapon", "lootItemID");
 }
 
 function function_f5a1a13f0181bb66(player, weaponstowed, backpackequip) {
@@ -294,7 +294,7 @@ function function_6a77670d14b0d08c(player, statsgroup, weaponkey) {
   }
 
   if(!isDefined(statsgroup)) {
-    statsgroup = level.var_5d69837cf4db0407;
+    statsgroup = level.progressiongroup;
   }
 
   player setplayerdata(statsgroup, weaponkey, "weapon", "none");
@@ -355,7 +355,7 @@ function function_aeb6f176059d98f5(lootid) {
     currentlootid = getlootidatbackpackindex(i);
 
     if(lootid == currentlootid) {
-      indexes[i] = function_897b29adb37f06a7(i);
+      indexes[i] = getquantityatbackpackindex(i);
     }
   }
 
@@ -440,7 +440,7 @@ function snapshotbackpack() {
 
 function function_6738846da50730f1(index) {
   lootid = getlootidatbackpackindex(index);
-  quantity = function_897b29adb37f06a7(index);
+  quantity = getquantityatbackpackindex(index);
   lootedquantity = function_eee597a59b37c10e(index);
   return [lootid, quantity, lootedquantity];
 }
@@ -450,15 +450,15 @@ function function_84772ebf836af5db(index, amount) {
     return;
   }
 
-  var_e8db6afbf2180f7e = function_897b29adb37f06a7(index);
+  var_e8db6afbf2180f7e = getquantityatbackpackindex(index);
   newamount = int(max(0, var_e8db6afbf2180f7e + amount));
   lootid = getlootidatbackpackindex(index);
   function_d87a9518235b9682(index, lootid, newamount);
 }
 
 function function_3b2bf3060f2efdf3(player, index, lootid, quantity, loadoutslot) {
-  oldlootid = player getplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootID");
-  oldquantity = player getplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "quantity");
+  oldlootid = player getplayerdata(level.progressiongroup, level.backpackdata, index, "lootID");
+  oldquantity = player getplayerdata(level.progressiongroup, level.backpackdata, index, "quantity");
 
   if(oldlootid != lootid && quantity > 0) {
     namespace_a38a2e1fe7519183::function_22c2d36f9a723c2f(player, index, loadoutslot);
@@ -475,8 +475,8 @@ function function_3c3ee4c5700e0e32(player, index, lootid, quantity, loadoutlocat
 
 function function_11f48ae5b87b4525(player, index, lootid, quantity, lootedquantity, var_ca04d98d53412adf) {
   lootedquantity = default_to(lootedquantity, 0);
-  oldlootid = player getplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootID");
-  oldquantity = player getplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "quantity");
+  oldlootid = player getplayerdata(level.progressiongroup, level.backpackdata, index, "lootID");
+  oldquantity = player getplayerdata(level.progressiongroup, level.backpackdata, index, "quantity");
 
   if(oldlootid != lootid && (quantity > 0 || lootedquantity > 0)) {
     namespace_a38a2e1fe7519183::function_233512489717381(player, index, lootid);
@@ -503,7 +503,7 @@ function function_e900e7e66383ad97(player, index, quantity, var_f3990d8529de3a54
   player function_d87a9518235b9682(index, oldlootid, quantity, var_f3990d8529de3a54);
 }
 
-function function_a0ccc23064473a05(player, index, lootid, quantity, lootedquantity) {
+function setbackpackitematindex(player, index, lootid, quantity, lootedquantity) {
   player function_d87a9518235b9682(index, lootid, quantity, 0, lootedquantity);
 }
 
@@ -527,18 +527,18 @@ function private function_d87a9518235b9682(index, lootid, quantity, var_f3990d85
   }
 
   if(level.var_1833d54921da2cc6) {
-    self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootID", 1);
-    self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "quantity", 1);
+    self setplayerdata(level.progressiongroup, level.backpackdata, index, "lootID", 1);
+    self setplayerdata(level.progressiongroup, level.backpackdata, index, "quantity", 1);
   }
 
-  self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootID", lootid);
-  self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "quantity", quantity);
-  self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootedQuantity", lootedquantity);
+  self setplayerdata(level.progressiongroup, level.backpackdata, index, "lootID", lootid);
+  self setplayerdata(level.progressiongroup, level.backpackdata, index, "quantity", quantity);
+  self setplayerdata(level.progressiongroup, level.backpackdata, index, "lootedQuantity", lootedquantity);
 
   if(quantity == 0 && lootedquantity == 0 && !istrue(var_ca04d98d53412adf) || lootid == 0) {
-    self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootID", 0);
-    self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "quantity", 0);
-    self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootedQuantity", 0);
+    self setplayerdata(level.progressiongroup, level.backpackdata, index, "lootID", 0);
+    self setplayerdata(level.progressiongroup, level.backpackdata, index, "quantity", 0);
+    self setplayerdata(level.progressiongroup, level.backpackdata, index, "lootedQuantity", 0);
 
     if(!istrue(var_f3990d8529de3a54)) {
       function_ad05407157b7d86d(self, index);
@@ -582,12 +582,12 @@ function clearbackpack(var_f3990d8529de3a54) {
 function function_bab1a10b3fdaae51() {
   for(packitemindex = 0; packitemindex < getplayerbackpacksize(self); packitemindex++) {
     if(level.var_1833d54921da2cc6) {
-      self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, packitemindex, "lootID", 1);
-      self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, packitemindex, "quantity", 1);
+      self setplayerdata(level.progressiongroup, level.backpackdata, packitemindex, "lootID", 1);
+      self setplayerdata(level.progressiongroup, level.backpackdata, packitemindex, "quantity", 1);
     }
 
-    self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, packitemindex, "lootID", 0);
-    self setplayerdata(level.var_5d69837cf4db0407, level.backpackdata, packitemindex, "quantity", 0);
+    self setplayerdata(level.progressiongroup, level.backpackdata, packitemindex, "lootID", 0);
+    self setplayerdata(level.progressiongroup, level.backpackdata, packitemindex, "quantity", 0);
   }
 }
 
@@ -621,7 +621,7 @@ function canitemfitinbackpack(lootid, quantity) {
     }
 
     if(currentlootid == lootid) {
-      currentquantity = function_897b29adb37f06a7(i);
+      currentquantity = getquantityatbackpackindex(i);
 
       if(currentquantity + quantity <= maxcount) {
         return 1;
@@ -663,7 +663,7 @@ function function_e05897f5d860188e(lootid, quantity, drop) {
         return i;
       }
 
-      currentquantity = function_897b29adb37f06a7(i);
+      currentquantity = getquantityatbackpackindex(i);
 
       if(currentquantity < maxcount) {
         return i;
@@ -675,15 +675,15 @@ function function_e05897f5d860188e(lootid, quantity, drop) {
 }
 
 function getlootidatbackpackindex(index) {
-  return self getplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootID");
+  return self getplayerdata(level.progressiongroup, level.backpackdata, index, "lootID");
 }
 
-function function_897b29adb37f06a7(index) {
-  return self getplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "quantity");
+function getquantityatbackpackindex(index) {
+  return self getplayerdata(level.progressiongroup, level.backpackdata, index, "quantity");
 }
 
 function function_eee597a59b37c10e(index) {
-  return self getplayerdata(level.var_5d69837cf4db0407, level.backpackdata, index, "lootedQuantity");
+  return self getplayerdata(level.progressiongroup, level.backpackdata, index, "lootedQuantity");
 }
 
 function getavailabledmzbackpackindex() {
@@ -716,7 +716,7 @@ function function_9e76c59021bbf021(ammotype) {
     currentlootid = getlootidatbackpackindex(i);
 
     if(currentlootid == lootid) {
-      currentquantity = function_897b29adb37f06a7(i);
+      currentquantity = getquantityatbackpackindex(i);
       var_a29ff2ee96b284c1 = int(max(0, maxcount - currentquantity));
       var_40f97ad475793851 += var_a29ff2ee96b284c1;
     }
@@ -776,7 +776,7 @@ function gettotalitemcountinbag(lootid) {
     slotlootid = getlootidatbackpackindex(i);
 
     if(slotlootid == lootid) {
-      total += function_897b29adb37f06a7(i);
+      total += getquantityatbackpackindex(i);
     }
   }
 
@@ -888,7 +888,7 @@ function private setbackpackitem(lootid, pickup) {
       currentlootid = getlootidatbackpackindex(i);
 
       if(currentlootid == lootid) {
-        slotquantity = function_897b29adb37f06a7(i);
+        slotquantity = getquantityatbackpackindex(i);
 
         if(slotquantity + quantity <= maxcount) {
           function_11f48ae5b87b4525(self, i, lootid, slotquantity + quantity);
@@ -933,7 +933,7 @@ function additemtobackpackbyref(ref, type, quantity) {
   return additemtobackpack(lootid, fakepickup);
 }
 
-function additemtobackpack(lootid, pickup, var_70e660487c2924ec, var_c751296a033cdb3c, fromkiosk) {
+function additemtobackpack(lootid, pickup, dontdropleftover, var_c751296a033cdb3c, fromkiosk) {
   assertex(isDefined(lootid) || isDefined(pickup), "<dev string:x1ad>");
 
   if(!isDefined(lootid) || !isDefined(pickup)) {
@@ -941,7 +941,7 @@ function additemtobackpack(lootid, pickup, var_70e660487c2924ec, var_c751296a033
   }
 
   if(scripts\engine\utility::issharedfuncdefined(lootid, "pickedUp")) {
-    result = scripts\engine\utility::function_f3bb4f4911a1beb2(lootid, "pickedUp", pickup.instance, self);
+    result = scripts\engine\utility::callsharedfunc(lootid, "pickedUp", pickup.instance, self);
 
     if(isDefined(result)) {
       return;
@@ -1034,7 +1034,7 @@ function additemtobackpack(lootid, pickup, var_70e660487c2924ec, var_c751296a033
   }
 
   if(quantity > 0) {
-    if(!istrue(var_70e660487c2924ec)) {
+    if(!istrue(dontdropleftover)) {
       baseorigin = self.origin;
       baseangles = self.angles;
       dropstruct = scripts\mp\gametypes\br_pickups::function_7b9f3966a7a42003();
@@ -1075,7 +1075,7 @@ function function_db1dd76061352e5b(index, var_74806f0c4caa7e55, var_f3990d8529de
   }
 
   [lootid, _, _] = function_6738846da50730f1(index);
-  currentquantity = function_897b29adb37f06a7(index);
+  currentquantity = getquantityatbackpackindex(index);
 
   if(!isDefined(var_74806f0c4caa7e55)) {
     var_74806f0c4caa7e55 = currentquantity;
@@ -1140,7 +1140,7 @@ function function_43f9da47b5084ce0(scriptablename) {
 
   for(i = 0; i < getplayerbackpacksize(self); i++) {
     if(getlootidatbackpackindex(i) == lootid) {
-      removedcount += function_897b29adb37f06a7(i);
+      removedcount += getquantityatbackpackindex(i);
       function_db1dd76061352e5b(i);
     }
   }
@@ -1160,7 +1160,7 @@ function removesmallestitemstackbackpack(scriptablename, amountremoved) {
 
   for(i = 0; i < getplayerbackpacksize(self); i++) {
     if(getlootidatbackpackindex(i) == lootid) {
-      var_750fcc188317845a[i] = function_897b29adb37f06a7(i);
+      var_750fcc188317845a[i] = getquantityatbackpackindex(i);
     }
   }
 
@@ -1171,7 +1171,7 @@ function removesmallestitemstackbackpack(scriptablename, amountremoved) {
   var_5581023a8fc8d56d = tablesort(var_750fcc188317845a, "up");
 
   foreach(index in var_5581023a8fc8d56d) {
-    slotquantity = function_897b29adb37f06a7(index);
+    slotquantity = getquantityatbackpackindex(index);
 
     if(amountremoved <= slotquantity) {
       function_db1dd76061352e5b(index, amountremoved);
@@ -1256,7 +1256,7 @@ function function_d9749a7ab0c838d3(scriptablename) {
 
   for(i = 0; i < getplayerbackpacksize(self); i++) {
     if(getlootidatbackpackindex(i) == lootid) {
-      quantity = function_897b29adb37f06a7(i);
+      quantity = getquantityatbackpackindex(i);
       assert(isDefined(quantity));
 
       if(!isDefined(var_50dcba8ba0e8511e) || var_50dcba8ba0e8511e > quantity) {
@@ -1269,7 +1269,7 @@ function function_d9749a7ab0c838d3(scriptablename) {
   return [var_8fc76cf32bb0e10d, var_50dcba8ba0e8511e];
 }
 
-function function_93f02514431a1f5d(lootid) {
+function getbackpackitemcount(lootid) {
   currentquantity = 0;
   index = function_106b52ed8f680043(lootid);
 
@@ -1288,7 +1288,7 @@ function function_93f02514431a1f5d(lootid) {
         continue;
       }
 
-      currentquantity = function_897b29adb37f06a7(i) + currentquantity;
+      currentquantity = getquantityatbackpackindex(i) + currentquantity;
     }
   }
 
@@ -1303,14 +1303,14 @@ function function_ef5c7ec55e0e20ee(lootid) {
   }
 
   if(!isDefined(self.team)) {
-    return function_93f02514431a1f5d(index);
+    return getbackpackitemcount(index);
   }
 
   teamplayers = scripts\mp\utility\teams::getteamdata(self.team, "players");
   teamquantity = 0;
 
   foreach(player in teamplayers) {
-    playerquantity = player function_93f02514431a1f5d(lootid);
+    playerquantity = player getbackpackitemcount(lootid);
     teamquantity += playerquantity;
   }
 
@@ -1438,7 +1438,7 @@ function function_8237b4eeab275f08(player, slot, oldequipment) {
   var_28d82fb085befa70 = 0;
 
   for(packitemindex = 0; packitemindex < getplayerbackpacksize(player); packitemindex++) {
-    quantity = player function_897b29adb37f06a7(packitemindex);
+    quantity = player getquantityatbackpackindex(packitemindex);
     lootid = player getlootidatbackpackindex(packitemindex);
 
     if(quantity > 0 && lootid > 0) {
@@ -1479,7 +1479,7 @@ function function_8237b4eeab275f08(player, slot, oldequipment) {
     } else {
       equipmax = player scripts\mp\equipment::getequipmentmaxammo(var_54697b28405e2f94);
       newamount = min(equipmax, var_3b04a55bcba2273a);
-      var_e8db6afbf2180f7e = function_897b29adb37f06a7(var_32ad03c5b4a0887d);
+      var_e8db6afbf2180f7e = getquantityatbackpackindex(var_32ad03c5b4a0887d);
       player function_84772ebf836af5db(var_32ad03c5b4a0887d, -1 * newamount);
       namespace_a38a2e1fe7519183::function_f5b2810055f85ead(player, slot, var_28d82fb085befa70);
     }
@@ -1493,7 +1493,7 @@ function function_8237b4eeab275f08(player, slot, oldequipment) {
 
 function function_2c226f050114f4b2(dropstruct, victim) {
   for(packitemindex = 0; packitemindex < getplayerbackpacksize(victim); packitemindex++) {
-    quantity = victim function_897b29adb37f06a7(packitemindex);
+    quantity = victim getquantityatbackpackindex(packitemindex);
     lootid = victim getlootidatbackpackindex(packitemindex);
 
     if(quantity > 0 && lootid > 0) {
@@ -1531,7 +1531,7 @@ function function_2c226f050114f4b2(dropstruct, victim) {
       var_bb9e46e1d8130f2 = istrue(level.br_pickups.br_hasautopickup[var_dd070161709fa76]);
       item = scripts\mp\gametypes\br_pickups::spawnpickup(var_dd070161709fa76, dropinfo, quantity, 1, undefined, var_bb9e46e1d8130f2);
       victim scripts\mp\gametypes\br_pickups::function_2f4e0022c686dbe6(item);
-      utility::function_f3bb4f4911a1beb2(lootid, "dropOnDeath", item, victim, dropinfo.origin);
+      utility::callsharedfunc(lootid, "dropOnDeath", item, victim, dropinfo.origin);
     }
   }
 }
@@ -1542,7 +1542,7 @@ function function_5814f4f8710e57f7(victim, dropstruct) {
   hasweaponcase = 0;
 
   for(packitemindex = 0; packitemindex < getplayerbackpacksize(victim); packitemindex++) {
-    quantity = victim function_897b29adb37f06a7(packitemindex);
+    quantity = victim getquantityatbackpackindex(packitemindex);
     lootid = victim getlootidatbackpackindex(packitemindex);
 
     if(quantity > 0 && lootid > 0) {
@@ -1783,7 +1783,7 @@ function function_c6b3799b231916bb(victim, dropstruct) {
         }
 
         foreach(item in spawnedbackpack.contents) {
-          scripts\engine\utility::function_f3bb4f4911a1beb2(item["lootID"], "addedToContainer", spawnedbackpack, victim);
+          scripts\engine\utility::callsharedfunc(item["lootID"], "addedToContainer", spawnedbackpack, victim);
         }
       }
     }
@@ -1843,7 +1843,7 @@ function function_8121cbee12383790(victim, dropstruct) {
   hasweaponcase = 0;
 
   for(packitemindex = 0; packitemindex < getplayerbackpacksize(victim); packitemindex++) {
-    quantity = victim function_897b29adb37f06a7(packitemindex);
+    quantity = victim getquantityatbackpackindex(packitemindex);
     lootid = victim getlootidatbackpackindex(packitemindex);
 
     if(quantity > 0 && lootid > 0) {
@@ -1975,7 +1975,7 @@ function function_8121cbee12383790(victim, dropstruct) {
         victim.var_6a4360dcf2a8f3d4 = spawnedbackpack;
 
         foreach(item in spawnedbackpack.contents) {
-          scripts\engine\utility::function_f3bb4f4911a1beb2(item["lootID"], "addedToContainer", spawnedbackpack, victim);
+          scripts\engine\utility::callsharedfunc(item["lootID"], "addedToContainer", spawnedbackpack, victim);
         }
       }
     }
@@ -2383,7 +2383,7 @@ function function_cf1bef64e94f2d1a(itemtype, itemindex, var_a548a6c15ceb9e8c, va
           return [0, 0, undefined];
         }
 
-        lootid = self getplayerdata(level.var_5d69837cf4db0407, "dmzWeapon", "lootItemID");
+        lootid = self getplayerdata(level.progressiongroup, "dmzWeapon", "lootItemID");
         var_ec22a950f210e39 = namespace_aead94004cf4c147::function_2985254128b1c262(self);
         return [lootid, self getweaponammoclip(var_ec22a950f210e39), var_ec22a950f210e39];
       }
@@ -2535,11 +2535,11 @@ function function_684ef6e1c75b5518(player) {
     return level.var_e247454ac2869696;
   }
 
-  if(!isDefined(level.var_5d69837cf4db0407) || !isDefined(level.backpacksize)) {
+  if(!isDefined(level.progressiongroup) || !isDefined(level.backpacksize)) {
     return undefined;
   }
 
-  return player getplayerdata(level.var_5d69837cf4db0407, level.backpacksize);
+  return player getplayerdata(level.progressiongroup, level.backpacksize);
 }
 
 function function_d28f52da6ede0191(player, size, var_cb6cd39e3733b463, backpackid) {
@@ -2551,8 +2551,8 @@ function function_d28f52da6ede0191(player, size, var_cb6cd39e3733b463, backpacki
 
   backpacktype = function_2c4cee072c4426c4(player.backpackid);
   player setclientomnvar("ui_loot_backpack_type", backpacktype);
-  player setplayerdata(level.var_5d69837cf4db0407, level.backpacksize, size);
-  player setplayerdata(level.var_5d69837cf4db0407, "backpackSize", size);
+  player setplayerdata(level.progressiongroup, level.backpacksize, size);
+  player setplayerdata(level.progressiongroup, "backpackSize", size);
 
   if(istrue(var_cb6cd39e3733b463)) {
     return;
@@ -2672,15 +2672,15 @@ function function_b4f4561fdb86fa25(player) {
     player function_bab1a10b3fdaae51();
     function_590202daf6a1d4d7(player);
     function_d28f52da6ede0191(player, 5, 1);
-    player setplayerdata(level.var_5d69837cf4db0407, "dmzPlateCarrierLevel", 1);
+    player setplayerdata(level.progressiongroup, "dmzPlateCarrierLevel", 1);
     function_590202daf6a1d4d7(player);
   }
 }
 
 function printinventory() {
   for(i = 0; i < 50; i++) {
-    lootid = self getplayerdata(level.var_5d69837cf4db0407, "<dev string:x290>", i, "<dev string:x2a0>");
-    quantity = self getplayerdata(level.var_5d69837cf4db0407, "<dev string:x290>", i, "<dev string:x2aa>");
+    lootid = self getplayerdata(level.progressiongroup, "<dev string:x290>", i, "<dev string:x2a0>");
+    quantity = self getplayerdata(level.progressiongroup, "<dev string:x290>", i, "<dev string:x2aa>");
     ref = scripts\cp_mp\utility\loot::function_793e8a72cedb8ef3(lootid);
     println("<dev string:x13c>" + i + "<dev string:x141>" + lootid + "<dev string:x14a>" + ref + "<dev string:x150>" + quantity);
   }
@@ -2699,7 +2699,7 @@ function function_5323bef1ad6244b9(damagetick) {
   var_e32ed31bf12217d2 = function_5915bdbc5f6302b6(level.var_534e97d34ef9fa29);
 
   foreach(var_a58c1fca5d8a5b2 in var_e32ed31bf12217d2) {
-    function_e900e7e66383ad97(self, var_a58c1fca5d8a5b2, int(function_897b29adb37f06a7(var_a58c1fca5d8a5b2) - damagetick));
+    function_e900e7e66383ad97(self, var_a58c1fca5d8a5b2, int(getquantityatbackpackindex(var_a58c1fca5d8a5b2) - damagetick));
   }
 }
 
@@ -2708,7 +2708,7 @@ function function_e25e584cac984a5d(itemtype) {
     return false;
   }
 
-  itemtype = function_1823ff50bb28148d(itemtype);
+  itemtype = getxhash(itemtype);
   return itemtype == #"plunder" || itemtype == #"valuable" || itemtype == #"personal" || itemtype == #"dogtag";
 }
 
@@ -2760,8 +2760,8 @@ function function_68bca2c2e9f0a1d3(firstindex, secondindex) {
   [var_41dcbc4d3302f6dc, var_4819afa0c5073b0e, var_6448cb914c5afd45] = function_6738846da50730f1(secondindex);
 
   if(isDefined(var_26e51dc5f1cc490) && isDefined(var_c1500f171aeb561a) && isDefined(var_41dcbc4d3302f6dc) && isDefined(var_4819afa0c5073b0e)) {
-    function_a0ccc23064473a05(self, secondindex, var_26e51dc5f1cc490, var_c1500f171aeb561a, var_ed4dabc339a6141);
-    function_a0ccc23064473a05(self, firstindex, var_41dcbc4d3302f6dc, var_4819afa0c5073b0e, var_6448cb914c5afd45);
+    setbackpackitematindex(self, secondindex, var_26e51dc5f1cc490, var_c1500f171aeb561a, var_ed4dabc339a6141);
+    setbackpackitematindex(self, firstindex, var_41dcbc4d3302f6dc, var_4819afa0c5073b0e, var_6448cb914c5afd45);
 
     if(scripts\mp\gametypes\br_pickups::function_9b77601837f66e32(var_26e51dc5f1cc490) || scripts\mp\gametypes\br_pickups::function_9b77601837f66e32(var_41dcbc4d3302f6dc)) {
       namespace_6c622b52017c6808::function_6d070b6ad87fc4a2(self, var_26e51dc5f1cc490, var_41dcbc4d3302f6dc, firstindex, secondindex);
@@ -2797,7 +2797,7 @@ function function_ce92a41b8f3b666f(backpackindex, containerindex) {
       scripts\mp\loot::function_f0617ad70b7e7792(containerindex, backpackindex, container);
       return;
     } else {
-      function_a0ccc23064473a05(self, backpackindex, containerlootid, containerquantity);
+      setbackpackitematindex(self, backpackindex, containerlootid, containerquantity);
     }
 
     if(backpacklootid == 0 || function_5b7e9a4c946f3a13(container.containertype, [13, 15])) {
@@ -2807,7 +2807,7 @@ function function_ce92a41b8f3b666f(backpackindex, containerindex) {
       dropstruct = scripts\mp\gametypes\br_pickups::function_7b9f3966a7a42003();
       dropinfo = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(dropstruct, self.origin, self.angles, self);
       item = scripts\mp\gametypes\br_pickups::spawnpickup(scriptablename, dropinfo, backpackquantity, 1);
-      scripts\engine\utility::function_f3bb4f4911a1beb2(scriptablename, "dropped", item, self, dropinfo.origin);
+      scripts\engine\utility::callsharedfunc(scriptablename, "dropped", item, self, dropinfo.origin);
     }
 
     var_2789584b4d4cb228 = scripts\cp_mp\utility\loot::getscriptablefromlootid(backpacklootid);
@@ -2925,7 +2925,7 @@ function function_9f1f9042105e4240(itemtype, itemindex, backpackindex) {
     return;
   }
 
-  function_a0ccc23064473a05(self, backpackindex, loadoutlootid, loadoutquantity);
+  setbackpackitematindex(self, backpackindex, loadoutlootid, loadoutquantity);
   thread scripts\mp\gametypes\br_pickups::quickdropall(itemtype, itemindex, 1);
 
   if(!var_b3fccfb5ca1d6ea8 && !scripts\mp\gametypes\br_pickups::br_forcegivecustompickupitem(self, var_fe868233e98e9d8b, 1, backpackquantity)) {

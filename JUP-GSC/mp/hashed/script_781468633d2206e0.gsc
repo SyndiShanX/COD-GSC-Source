@@ -7,7 +7,7 @@
 #namespace namespace_a8bb5c49b9f32539;
 
 function autoexec main() {
-  level.var_7bf42d565645a485 = 1;
+  level.shouldinitvehicles = 1;
   function_c0b3ddc9a6bdcc46("veh_jup_ru_heli_transport", &function_1836611c4ec791a2);
 }
 
@@ -27,7 +27,7 @@ function private function_7c332db718c995af(spawndata, faildata) {
   if(istrue(spawndata.initai)) {
     vehicle vehicle_setspeed(60, 20, 10);
     vehicle.preventrespawn = 1;
-    vehicle.var_a8f4bb03b366aa80 = 1;
+    vehicle.dontspawnhusk = 1;
     vehicle.deathfunc = &vehicle_death;
   }
 

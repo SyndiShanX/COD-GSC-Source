@@ -42,8 +42,8 @@ function init() {
   level function_9d6b4ec9f5809bc5();
   level function_b7fe23eb11f96086();
   level function_b7b736eb11aac7df();
-  function_a41e3a211a9e37a4("cluster_spike", bundle.deployweapon, #"medium");
-  function_a41e3a211a9e37a4("cluster_spike", bundle.spawnweapon, #"medium");
+  registerkillstreakdamagedealingweaponsharedfunc("cluster_spike", bundle.deployweapon, #"medium");
+  registerkillstreakdamagedealingweaponsharedfunc("cluster_spike", bundle.spawnweapon, #"medium");
 }
 
 function function_ddb866cc574674c0(bundle) {
@@ -297,7 +297,7 @@ function function_4d7b7570ddab816d(data) {
 
 function function_cae5c83763020435(data) {
   if(isDefined(self) && !istrue(self.isexploding) || getdvarint(@ "hash_58254c61de76bffe", 0)) {
-    data.attacker thread namespace_53fc9ddbb516e6e1::function_e800498086e36c29(#"hash_d6c7eae0f9540805");
+    data.attacker thread namespace_53fc9ddbb516e6e1::doscoreeventsharedfunc(#"hash_d6c7eae0f9540805");
   }
 }
 
@@ -773,7 +773,7 @@ function function_9537ab94dab9a1c0() {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function function_b6f9b15b3da67aa0() {

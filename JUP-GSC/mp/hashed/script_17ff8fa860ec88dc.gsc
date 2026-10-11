@@ -13,17 +13,17 @@
 
 function function_764239e6a246c46a() {
   funcarray = [];
-  funcarray["shouldRun"] = &function_dcbff0f91b68341d;
-  funcarray["enableForClient"] = &function_4999a7fd384d2fb4;
-  funcarray["disable"] = &function_11f7a27364a8b75d;
+  funcarray["shouldRun"] = &visibilitymode_shouldrun;
+  funcarray["enableForClient"] = &visibilitymode_enable;
+  funcarray["disable"] = &visibilitymode_disable;
   funcarray["checkForDataUpdates"] = &function_5d19d3f8062e4bee;
   funcarray["getADSWeaponDist"] = &function_553772f1f998aa41;
-  funcarray["getTargetArray"] = &function_6be4502bdbd97c85;
+  funcarray["getTargetArray"] = &visibilitymode_gettargetarray;
   funcarray["outlineOccluded"] = &function_e392446751b714f6;
   return funcarray;
 }
 
-function function_dcbff0f91b68341d() {
+function visibilitymode_shouldrun() {
   level endon("game_ended");
 
   if(scripts\mp\utility\game::ismlgmatch()) {
@@ -69,11 +69,11 @@ function function_2e2a6c022b5ed8db() {
   return hostenabled;
 }
 
-function function_4999a7fd384d2fb4(client, assetname, prioritygroup) {
+function visibilitymode_enable(client, assetname, prioritygroup) {
   return scripts\mp\utility\outline::outlineenableforplayer(self, client, assetname, prioritygroup);
 }
 
-function function_11f7a27364a8b75d(id) {
+function visibilitymode_disable(id) {
   scripts\mp\utility\outline::outlinedisable(id, self);
 }
 
@@ -87,7 +87,7 @@ function function_553772f1f998aa41() {
   return 2048;
 }
 
-function function_6be4502bdbd97c85(client) {
+function visibilitymode_gettargetarray(client) {
   friendlyplayers = scripts\mp\utility\teams::getfriendlyplayers(client.team);
   enemyplayers = scripts\mp\utility\teams::getenemyplayers(client.team);
   aiarray = getaiarray();
@@ -112,13 +112,13 @@ function function_5d19d3f8062e4bee() {
       if(isDefined(datavalue)) {
         if(isDefined(player.visibilitymodeval)) {
           if(datavalue != player.visibilitymodeval) {
-            player scripts\common\visibility_mode::function_8c2e8285c9915b12(datavalue);
+            player scripts\common\visibility_mode::visibilitymode_unpackvalue(datavalue);
           }
 
           continue;
         }
 
-        player scripts\common\visibility_mode::function_8c2e8285c9915b12(datavalue);
+        player scripts\common\visibility_mode::visibilitymode_unpackvalue(datavalue);
       }
     }
   }

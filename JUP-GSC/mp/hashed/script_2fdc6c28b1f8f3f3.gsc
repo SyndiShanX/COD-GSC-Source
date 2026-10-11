@@ -23,7 +23,7 @@ function init_brainrot() {
   var_746d800f9d085b2a = getdvarfloat(@ "hash_e5d9831d19a49874", isDefined(level.var_f1240a9ac4f65616.brainrotpercentage) ? level.var_f1240a9ac4f65616.brainrotpercentage : 0.15);
   var_ad5528a4132dc97d = getdvarfloat(@ "hash_7a0b932dc704d890", isDefined(level.var_f1240a9ac4f65616.var_ef4776d7c7a5e1b7) ? level.var_f1240a9ac4f65616.var_ef4776d7c7a5e1b7 : 0.03);
   cooldownentity = getdvarfloat(@ "hash_48bb866e33cc0a98", isDefined(level.var_f1240a9ac4f65616.var_6902494309ecdf82) ? level.var_f1240a9ac4f65616.var_6902494309ecdf82 : 0);
-  var_bcbfc6de4213b6af = getdvarfloat(@ "hash_b274fefae7b30b9c", isDefined(level.var_f1240a9ac4f65616.var_77f6495a5efa75b6) ? level.var_f1240a9ac4f65616.var_77f6495a5efa75b6 : 40);
+  cooldownattacker = getdvarfloat(@ "hash_b274fefae7b30b9c", isDefined(level.var_f1240a9ac4f65616.var_77f6495a5efa75b6) ? level.var_f1240a9ac4f65616.var_77f6495a5efa75b6 : 40);
   cooldownglobal = getdvarfloat(@ "hash_73abd79b8e6537b4", isDefined(level.var_f1240a9ac4f65616.var_d79991c2a1c06c16) ? level.var_f1240a9ac4f65616.var_d79991c2a1c06c16 : 5);
   var_f27a8d5708fd9c4d = getdvarint(@ "hash_98bef196ad6233f7", isDefined(level.var_f1240a9ac4f65616.var_d337dfeb11be1d02) ? level.var_f1240a9ac4f65616.var_d337dfeb11be1d02 : 1);
   damagefeedbackicon = isDefined(level.var_f1240a9ac4f65616.var_609b1a97084eeeef) ? level.var_f1240a9ac4f65616.var_609b1a97084eeeef : "";
@@ -32,7 +32,7 @@ function init_brainrot() {
   level.var_37f448fda9dfdd24 = [];
   level.var_fda3ff4feb6c4546 = [];
   level callback::add("on_ai_killed", &function_266be48a55c0cdc5);
-  function_7f759db5de1b44b0("brainrot", 1, var_746d800f9d085b2a, var_ad5528a4132dc97d, cooldownentity, var_bcbfc6de4213b6af, cooldownglobal, var_f27a8d5708fd9c4d, &function_52575fe8c8a247f8, damagefeedbackicon, damagefeedbacksound, &function_e77373dffa58f4fe, element);
+  function_7f759db5de1b44b0("brainrot", 1, var_746d800f9d085b2a, var_ad5528a4132dc97d, cooldownentity, cooldownattacker, cooldownglobal, var_f27a8d5708fd9c4d, &function_52575fe8c8a247f8, damagefeedbackicon, damagefeedbacksound, &function_e77373dffa58f4fe, element);
   registersharedfunc("zombie_utils", "set_brainrot", &set_brainrot);
   flag_set("brainrot_ready");
 
@@ -155,7 +155,7 @@ function function_266be48a55c0cdc5(sparams) {
 function function_4eca2aaa68c96aa0() {
   foreach(player in level.players) {
     currentweapon = player getcurrentweapon();
-    player function_6c40f58b29a952a9(currentweapon, "<dev string:x1c>");
+    player add_ammo_mod_to_weapon(currentweapon, "<dev string:x1c>");
     player iprintlnbold("<dev string:x28>");
   }
 }

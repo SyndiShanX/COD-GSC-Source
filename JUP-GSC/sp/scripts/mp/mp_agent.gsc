@@ -31,7 +31,7 @@ function setupweapon(primaryweaponobject) {
   self.grenadeammo = 0;
 }
 
-function spawnnewagentaitype(aitype, position, angles, team, var_42e5c77b1d7fe6e7) {
+function spawnnewagentaitype(aitype, position, angles, team, characterlistname) {
   if(!string_starts_with(aitype, "actor_")) {
     aitype = "actor_" + aitype;
   }
@@ -42,13 +42,13 @@ function spawnnewagentaitype(aitype, position, angles, team, var_42e5c77b1d7fe6e
     return undefined;
   }
 
-  agent = spawnnewagent(aitype, team, position, angles, undefined, var_42e5c77b1d7fe6e7);
+  agent = spawnnewagent(aitype, team, position, angles, undefined, characterlistname);
 
   return agent;
 }
 
-function spawnnewagent(agent_type, spawn_team, spawn_position, spawn_angles, var_f9e7dc261e07162e, var_42e5c77b1d7fe6e7) {
-  agent = dospawnaitype(agent_type, spawn_position, spawn_angles, 0, 0, 1, 0, spawn_team, var_42e5c77b1d7fe6e7);
+function spawnnewagent(agent_type, spawn_team, spawn_position, spawn_angles, var_f9e7dc261e07162e, characterlistname) {
+  agent = dospawnaitype(agent_type, spawn_position, spawn_angles, 0, 0, 1, 0, spawn_team, characterlistname);
 
   return agent;
 }
@@ -463,7 +463,7 @@ function on_humanoid_agent_killed_common(einflictor, eattacker, idamage, smeanso
       }
     }
 
-    if(!self._blackboard.invehicle || istrue(self._blackboard.var_80912ec8ade08716)) {
+    if(!self._blackboard.invehicle || istrue(self._blackboard.chosenvehicleanimpos_deathragdoll)) {
       if(var_37a99e672a1ecc0e) {
         assert(isDefined(self.lastattacker));
         self.body startragdollfromvehicleimpact(einflictor);
@@ -482,10 +482,10 @@ function on_humanoid_agent_killed_common(einflictor, eattacker, idamage, smeanso
       ragdollnotetracks = getnotetracktimes(deathanim, "start_ragdoll");
       shouldragdoll = isDefined(ragdollnotetracks) && ragdollnotetracks.size > 0;
 
-      if(istrue(self._blackboard.var_f6d06d1e68f4f4e5)) {
-        self.body linktoblendtotag(self._blackboard.currentvehicle, self._blackboard.var_1745d2b69c72c627, 0);
+      if(istrue(self._blackboard.chosenvehicleanimpos_linktoblend)) {
+        self.body linktoblendtotag(self._blackboard.currentvehicle, self._blackboard.chosenvehicleanimpos_sittag, 0);
       } else {
-        self.body linktomoveoffset(self._blackboard.currentvehicle, self._blackboard.var_1745d2b69c72c627);
+        self.body linktomoveoffset(self._blackboard.currentvehicle, self._blackboard.chosenvehicleanimpos_sittag);
       }
 
       if(isDefined(self._blackboard.vehicledeathwait) || shouldragdoll) {
@@ -592,7 +592,7 @@ function should_do_immediate_ragdoll(agent) {
     return true;
   }
 
-  if(istrue(self.var_aa0214e1292a7b3) && !isDefined(self.vehicledeathwait)) {
+  if(istrue(self.diedintransition) && !isDefined(self.vehicledeathwait)) {
     return true;
   }
 
@@ -685,10 +685,10 @@ function delaystartragdoll(ent, shitloc, vdir, objweapon, einflictor, smeansofde
     }
   }
 
-  var_f0b2847d70267f37 = undefined;
+  vehicledeathwaittime = undefined;
 
   if(isDefined(self._blackboard.vehicledeathwait)) {
-    var_f0b2847d70267f37 = self._blackboard.vehicledeathwait;
+    vehicledeathwaittime = self._blackboard.vehicledeathwait;
   }
 
   waitframe();
@@ -707,8 +707,8 @@ function delaystartragdoll(ent, shitloc, vdir, objweapon, einflictor, smeansofde
     startfrac = 0.35;
     waittime = 0;
 
-    if(isDefined(var_f0b2847d70267f37)) {
-      waittime = var_f0b2847d70267f37;
+    if(isDefined(vehicledeathwaittime)) {
+      waittime = vehicledeathwaittime;
     } else {
       times = getnotetracktimes(deathanim, "start_ragdoll");
 

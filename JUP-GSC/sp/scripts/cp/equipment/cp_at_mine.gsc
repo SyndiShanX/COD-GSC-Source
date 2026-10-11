@@ -521,19 +521,19 @@ function at_mine_watch_game_end() {
   thread at_mine_destroy();
 }
 
-function at_mine_damage_manually(attacker, var_1de3e0ea1c8b2aba) {
-  var_1de3e0ea1c8b2aba endon("death");
+function at_mine_damage_manually(attacker, enttodamage) {
+  enttodamage endon("death");
   weapon = makeweapon("at_mine_mp");
   waitframe();
   var_fbff02c9c978437f = 200;
 
-  if(isDefined(var_1de3e0ea1c8b2aba.mine_damage_override)) {
-    var_fbff02c9c978437f = var_1de3e0ea1c8b2aba.mine_damage_override;
+  if(isDefined(enttodamage.mine_damage_override)) {
+    var_fbff02c9c978437f = enttodamage.mine_damage_override;
   }
 
   if(isDefined(attacker) && isDefined(self)) {
-    var_1de3e0ea1c8b2aba dodamage(var_fbff02c9c978437f, self.origin, attacker, self, "MOD_EXPLOSIVE", weapon);
-    var_1de3e0ea1c8b2aba notify("damage", var_fbff02c9c978437f, self.origin, attacker, self, "MOD_EXPLOSIVE", weapon);
+    enttodamage dodamage(var_fbff02c9c978437f, self.origin, attacker, self, "MOD_EXPLOSIVE", weapon);
+    enttodamage notify("damage", var_fbff02c9c978437f, self.origin, attacker, self, "MOD_EXPLOSIVE", weapon);
   }
 }
 

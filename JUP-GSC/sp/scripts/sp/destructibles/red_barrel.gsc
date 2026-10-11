@@ -36,7 +36,7 @@ function red_barrel() {
   self endon("barrel_delete");
   barrel_setup("red", 450, 250, 9100, 15000, 80, 28);
   thread red_barrel_death();
-  var_db7ee9acb96d930d = 999999999;
+  fusesettime = 999999999;
   timer = 4;
   firetimer = 0;
   self.health = 9450;
@@ -77,12 +77,12 @@ function red_barrel() {
       }
 
       timerpercentage = self.barrel_health / 449;
-      timepassed = (gettime() - var_db7ee9acb96d930d) / 1000;
+      timepassed = (gettime() - fusesettime) / 1000;
 
       if(4 * timerpercentage < timer - timepassed) {
         timer = 4 * timerpercentage;
         thread barrel_fusetimer(timer);
-        var_db7ee9acb96d930d = gettime();
+        fusesettime = gettime();
       }
     }
 
@@ -173,22 +173,22 @@ function red_barrel_death() {
       continue;
     }
 
-    var_d062fa74a20c4a2 = distance(self.origin, barrel.origin);
+    distancefrombarrel = distance(self.origin, barrel.origin);
 
-    if(var_d062fa74a20c4a2 > self.phys_barrel_radius) {
+    if(distancefrombarrel > self.phys_barrel_radius) {
       continue;
     }
 
-    distcheck = self.phys_barrel_radius - var_d062fa74a20c4a2;
+    distcheck = self.phys_barrel_radius - distancefrombarrel;
     distpercentage = distcheck / self.phys_barrel_radius;
     timer = maxtimer * distpercentage;
 
-    if(var_d062fa74a20c4a2 <= self.phys_barrel_radius) {
-      barrel thread barrel_launch(self.origin, var_d062fa74a20c4a2, timer);
+    if(distancefrombarrel <= self.phys_barrel_radius) {
+      barrel thread barrel_launch(self.origin, distancefrombarrel, timer);
     }
 
-    if(var_d062fa74a20c4a2 <= 200) {
-      barrel thread red_barrel_hit(self.origin, var_d062fa74a20c4a2, timer);
+    if(distancefrombarrel <= 200) {
+      barrel thread red_barrel_hit(self.origin, distancefrombarrel, timer);
     }
   }
 
@@ -202,11 +202,11 @@ function red_barrel_death() {
       continue;
     }
 
-    var_3a18862e89749191 = distance(self.origin, veh.origin);
-    var_3a18862e89749191 = 0;
+    distancefromveh = distance(self.origin, veh.origin);
+    distancefromveh = 0;
 
-    if(var_3a18862e89749191 <= 19000) {
-      distpercentage = var_3a18862e89749191 / 190 * 100;
+    if(distancefromveh <= 19000) {
+      distpercentage = distancefromveh / 190 * 100;
       damage -= distpercentage * var_f5d54f342fb4a774;
 
       if(getdvarint(@ "barrel_debug")) {
@@ -217,15 +217,15 @@ function red_barrel_death() {
     }
   }
 
-  var_e5cff7e645b201da = getaiarray();
+  aiignorearray = getaiarray();
 
-  foreach(ai in var_e5cff7e645b201da) {
+  foreach(ai in aiignorearray) {
     if(!istrue(ai.magic_bullet_shield)) {
-      var_e5cff7e645b201da = array_remove(var_e5cff7e645b201da, ai);
+      aiignorearray = array_remove(aiignorearray, ai);
     }
   }
 
-  spheretraces = sphere_trace_get_all_results(self.origin, self.origin, 190, var_e5cff7e645b201da, create_character_contents(), 0);
+  spheretraces = sphere_trace_get_all_results(self.origin, self.origin, 190, aiignorearray, create_character_contents(), 0);
   var_88e03175e378817 = 0;
 
   foreach(spheretrace in spheretraces) {
@@ -236,15 +236,15 @@ function red_barrel_death() {
 
       if(isai(sphereentity)) {
         var_88e03175e378817++;
-        var_c1e36d012dad1782 = is_equal(sphereentity.subclass, "juggernaut");
-        dmgamount = ter_op(var_c1e36d012dad1782 == 1, 1000, sphereentity.health + 999999);
+        isjugg = is_equal(sphereentity.subclass, "juggernaut");
+        dmgamount = ter_op(isjugg == 1, 1000, sphereentity.health + 999999);
 
-        if(!var_c1e36d012dad1782 && randomint(100) < 0) {
+        if(!isjugg && randomint(100) < 0) {
           thread scripts\sp\equipment\molotov::molotovburnenemy(sphereentity, 1, self.origin);
           continue;
         }
 
-        if(!var_c1e36d012dad1782 && isDefined(level.aigibfunction)) {
+        if(!isjugg && isDefined(level.aigibfunction)) {
           if(isDefined(damageattacker)) {
             damageattacker delaythread(0.15, level.aigibfunction, sphereentity, self.origin, "MOD_EXPLOSIVE");
           } else {
@@ -259,10 +259,10 @@ function red_barrel_death() {
     }
   }
 
-  var_2d58e8aae155cc83 = distance(self.origin, level.player.origin);
+  distancefromplayer = distance(self.origin, level.player.origin);
 
-  if(var_2d58e8aae155cc83 <= 200) {
-    distpercentage = var_2d58e8aae155cc83 / 200;
+  if(distancefromplayer <= 200) {
+    distpercentage = distancefromplayer / 200;
     var_f5d54f342fb4a774 = 420;
     damage = 420 - distpercentage * var_f5d54f342fb4a774;
 
@@ -321,7 +321,7 @@ function delay_delete(time) {
   }
 }
 
-function red_barrel_hit(explodeorigin, var_d062fa74a20c4a2, timer) {
+function red_barrel_hit(explodeorigin, distancefrombarrel, timer) {
   self endon("barrel_death");
   self endon("barrel_delete");
   wait timer;
@@ -337,12 +337,12 @@ function red_barrel_hit(explodeorigin, var_d062fa74a20c4a2, timer) {
   maxdamage = 95;
   maxrange = 200;
 
-  if(var_d062fa74a20c4a2 <= 90) {
-    var_2b308f611603de0 = -878;
-    damagemodifier = (90 - var_d062fa74a20c4a2) / maxrange;
-    damage = 1 + damagemodifier * var_2b308f611603de0;
+  if(distancefrombarrel <= 90) {
+    minmaxdiff = -878;
+    damagemodifier = (90 - distancefrombarrel) / maxrange;
+    damage = 1 + damagemodifier * minmaxdiff;
   } else {
-    damagemodifier = (maxrange - var_d062fa74a20c4a2) / maxrange;
+    damagemodifier = (maxrange - distancefrombarrel) / maxrange;
     damage = damagemodifier * maxdamage;
   }
 

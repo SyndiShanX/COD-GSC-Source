@@ -250,7 +250,7 @@ function function_cc9c6d5832692006() {
         dict["name"] = formatstring(player.name);
       }
     } else {
-      unoid = player function_7a32b0201993d7f7();
+      unoid = player getplayerunoid();
       assert(unoid != "<dev string:x54>");
 
       if(function_3226093417bd3363(cachedplayer, "unoId", unoid)) {
@@ -505,7 +505,7 @@ function onbotactionstart(bot, action) {
     }
   }
 
-  var_21b72418e16677fb = namespace_56b9cc3deb6e3f5e::function_e60ece723e993125(bot.mind.var_f0a8822dcc782c9d.var_577f45571c039a54);
+  var_21b72418e16677fb = namespace_56b9cc3deb6e3f5e::function_e60ece723e993125(bot.mind.var_f0a8822dcc782c9d.decisions);
   var_b2056d26cc9eaa76 = min(var_21b72418e16677fb.size, 3);
 
   for(i = 0; i < var_b2056d26cc9eaa76; i++) {
@@ -773,7 +773,7 @@ function function_8303a56b1ee268b2(status, reason, deploycount) {
   logdictionary("DebugDeployUIBotStatus", dict);
 }
 
-function function_873c0be4897bd6c8(method) {
+function debuglogforceendgame(method) {
   if(!isenabled() || !function_27a7d2350b94908b()) {
     return;
   }

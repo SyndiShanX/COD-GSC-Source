@@ -54,7 +54,7 @@ function init() {
   anim.callbacks["EntityHandleNotetrackAnimEnd"] = &scripts\anim\notetracks::function_8b5c774e7238fec5;
   anim.callbacks["AIAnimFirstFrame"] = &ai_anim_first_frame;
   anim.callbacks["CheckPlayerAnimtree"] = &function_6b36e63fb918cd04;
-  anim.callbacks["PrintText"] = &function_77bcf02459f2ba7;
+  anim.callbacks["PrintText"] = &dialogue_print;
   anim.callbacks["playXcam"] = &play_xcam;
   registersharedfunc("ai", "Animscripted_SharedFunc", &scripts\asm\shared\sp\utility::animscriptedactor);
   asm_globalinit();
@@ -62,7 +62,7 @@ function init() {
   scripts\asm\asm::setup_level_ents();
 
   if(getdvarint(@ "hash_2f8a3b3aa1e31fe5", 0) != 0) {
-    thread function_12534104fbe54e32();
+    thread validatetraversenodes();
   }
 
   setdvarifuninitialized(@ "scr_debug_reach", 0);
@@ -82,7 +82,7 @@ function function_3a81a3f984fc4a09(anime) {
   assertex(names.size > 1, "Only 1 animname is registered for scene " + anime);
   prevtime = undefined;
   time = undefined;
-  var_eaf05d29b3fd082c = 1;
+  identical = 1;
   prevtime = getanimlength(level.scr_anim[names[0]][anime]);
 
   for(i = 1; i < names.size; i++) {
@@ -90,7 +90,7 @@ function function_3a81a3f984fc4a09(anime) {
     time = getanimlength(level.scr_anim[names[i]][anime]);
 
     if(prevtime != time) {
-      var_eaf05d29b3fd082c = 0;
+      identical = 0;
       prefix = "^3WARNING: ";
     }
 
@@ -98,7 +98,7 @@ function function_3a81a3f984fc4a09(anime) {
     prevtime = time;
   }
 
-  return var_eaf05d29b3fd082c;
+  return identical;
 }
 
 function function_cf49d3451c08681c(vo_alias) {
@@ -332,14 +332,14 @@ function anim_single_run(guys, anime, tag, animname_override) {
   anim_single_internal(guys, anime, tag, 0.25, animname_override);
 }
 
-function anim_reach_and_idle(guys, anime, var_e4201394bcceef66, ender, tag) {
+function anim_reach_and_idle(guys, anime, anime_idle, ender, tag) {
   thread anim_reach(guys, anime, tag);
   ent = spawnStruct();
   ent.reachers = 0;
 
   foreach(guy in guys) {
     ent.reachers++;
-    thread idle_on_reach(guy, var_e4201394bcceef66, ender, tag, ent);
+    thread idle_on_reach(guy, anime_idle, ender, tag, ent);
   }
 
   for(;;) {
@@ -356,13 +356,13 @@ function wait_for_guy_to_die_or_get_in_position() {
   self waittill("anim_reach_complete");
 }
 
-function idle_on_reach(guy, var_e4201394bcceef66, ender, tag, ent) {
+function idle_on_reach(guy, anime_idle, ender, tag, ent) {
   guy wait_for_guy_to_die_or_get_in_position();
   ent.reachers--;
   ent notify("reached_position");
 
   if(isalive(guy)) {
-    anim_loop_solo(guy, var_e4201394bcceef66, ender, tag);
+    anim_loop_solo(guy, anime_idle, ender, tag);
   }
 }
 
@@ -451,8 +451,8 @@ function reach_to_interact_begin(startorg, startangles) {
   self.doavoidanceblocking = 0;
   self.fixednodewason = self.fixednode;
   self.fixednode = 0;
-  self.var_a4700673c6ef6c4 = self.var_b29c3655b12e292d;
-  self.var_b29c3655b12e292d = 0;
+  self.var_a4700673c6ef6c4 = self.cornercheckenabled;
+  self.cornercheckenabled = 0;
   self.old_disablearrivals = self.disablearrivals;
   self.disablearrivals = 0;
   self.reach_goal_pos = undefined;
@@ -463,13 +463,13 @@ function reach_to_interact_begin(startorg, startangles) {
     interaction = get_state_interaction(self.asm.customdata.interaction);
   }
 
-  self.var_a57082fdf62bc898 = get_arrivalstate_from_interaction(interaction);
+  self.customarrivalstate = get_arrivalstate_from_interaction(interaction);
   self.customarrivalangles = startangles;
   self.var_85ecbbe4fae7c0ae = get_idlestate_from_interaction(interaction);
   self.var_171120e99df3e286 = 1;
 
   if(isDefined(interaction.arrival_animmode)) {
-    self.var_18eb79d0deeb3b75 = interaction.arrival_animmode;
+    self.customarrivalanimmode = interaction.arrival_animmode;
   }
 
   return startorg;
@@ -487,8 +487,8 @@ function function_8ab3eaeab1010bd4(startorg, startangles) {
   self.doavoidanceblocking = 0;
   self.fixednodewason = self.fixednode;
   self.fixednode = 0;
-  self.var_a4700673c6ef6c4 = self.var_b29c3655b12e292d;
-  self.var_b29c3655b12e292d = 0;
+  self.var_a4700673c6ef6c4 = self.cornercheckenabled;
+  self.cornercheckenabled = 0;
 
   if(!isDefined(self.scriptedarrivalent)) {
     self.old_disablearrivals = self.disablearrivals;
@@ -508,7 +508,7 @@ function reach_to_interact_end() {
   self.doavoidanceblocking = 1;
   self.fixednode = self.fixednodewason;
   self.fixednodewason = undefined;
-  self.var_b29c3655b12e292d = self.var_a4700673c6ef6c4;
+  self.cornercheckenabled = self.var_a4700673c6ef6c4;
   self.var_a4700673c6ef6c4 = undefined;
   self.pathenemyfightdist = self.oldpathenemyfightdist;
   self.pathenemylookahead = self.oldpathenemylookahead;
@@ -522,7 +522,7 @@ function reach_to_interact_end() {
 
   self.var_57e1b0c4ad45db70 = get_exitstate_from_interaction(interaction);
   self.asm.customdata.interaction = undefined;
-  self.var_a57082fdf62bc898 = undefined;
+  self.customarrivalstate = undefined;
   self.customarrivalangles = undefined;
 }
 
@@ -532,7 +532,7 @@ function function_ac52eeb7b35a4600() {
   self.doavoidanceblocking = 1;
   self.fixednode = self.fixednodewason;
   self.fixednodewason = undefined;
-  self.var_b29c3655b12e292d = self.var_a4700673c6ef6c4;
+  self.cornercheckenabled = self.var_a4700673c6ef6c4;
   self.var_a4700673c6ef6c4 = undefined;
   self.pathenemyfightdist = self.oldpathenemyfightdist;
   self.pathenemylookahead = self.oldpathenemylookahead;
@@ -575,10 +575,10 @@ function reach_with_planting_and_arrivals(startorg, startangles) {
   return startorg;
 }
 
-function anim_reach_and_idle_solo(guy, anime, var_e4201394bcceef66, ender, tag) {
+function anim_reach_and_idle_solo(guy, anime, anime_idle, ender, tag) {
   self endon("death");
   newguy[0] = guy;
-  anim_reach_and_idle(newguy, anime, var_e4201394bcceef66, ender, tag);
+  anim_reach_and_idle(newguy, anime, anime_idle, ender, tag);
 }
 
 function anim_reach_solo(guy, anime, tag) {
@@ -867,7 +867,7 @@ function anim_facialfiller(msg, looktarget, force, msg_ent, intensity) {
   }
 
   archetype = scripts\asm\shared\utility::function_2285421dfc79c4d5();
-  var_6b7315aedc52f8e2 = self.defaulttalk;
+  talkanim = self.defaulttalk;
   headknob = self.scriptedtalkingknob;
   assert(isalive(self));
   scripts\asm\shared\utility::setfacialstate("filler");
@@ -881,7 +881,7 @@ function anim_facialfiller(msg, looktarget, force, msg_ent, intensity) {
       scripts\asm\shared\utility::setfacialindexfornonai("talk_" + intensity);
     }
   } else {
-    self setanimknoblimitedrestart(var_6b7315aedc52f8e2, 1, 0, 1);
+    self setanimknoblimitedrestart(talkanim, 1, 0, 1);
     self setanim(headknob, 5, 0.267);
   }
 
@@ -889,7 +889,7 @@ function anim_facialfiller(msg, looktarget, force, msg_ent, intensity) {
 
   if(archetype != "" && isai(self)) {
     self setfacialindex("none");
-  } else if(istrue(self.var_5247d15da29e8539) && isDefined(self.var_7a140ee03cfc699e)) {
+  } else if(istrue(self.var_5247d15da29e8539) && isDefined(self.capanimset)) {
     scripts\asm\shared\utility::function_ee3e5d584e317d35("none");
   }
 
@@ -898,8 +898,8 @@ function anim_facialfiller(msg, looktarget, force, msg_ent, intensity) {
 
 function talk_for_time(timer) {
   self endon("death");
-  var_6b7315aedc52f8e2 = self.defaulttalk;
-  self setanimknoblimitedrestart(var_6b7315aedc52f8e2, 1, 0, 1);
+  talkanim = self.defaulttalk;
+  self setanimknoblimitedrestart(talkanim, 1, 0, 1);
   self setanim(self.scriptedtalkingknob, 5, 0.4);
   scripts\asm\shared\utility::disabledefaultfacialanims();
   wait timer;
@@ -1189,13 +1189,13 @@ function bcs_scripted_dialog_clear(aliasname, notification_string) {
   self.scripteddialoguenonotify = undefined;
 }
 
-function do_facial_anim(dofacialanim, var_9ac73a1996d2dae, doanimation, anime, animname, dialogue, looping) {
+function do_facial_anim(dofacialanim, dodialogue, doanimation, anime, animname, dialogue, looping) {
   if(dofacialanim && looping) {
     println("<dev string:xf8>");
   }
 
   if(dofacialanim && !looping) {
-    if(var_9ac73a1996d2dae) {
+    if(dodialogue) {
       thread sayspecificdialogue(dialogue);
     }
 
@@ -1329,16 +1329,16 @@ function anim_react_data(data) {
   anime = data.anime;
 
   foreach(guy in data.guys) {
-    var_336c378e595973fa = anime + "_death";
+    death_anime = anime + "_death";
 
-    if(isDefined(level.scr_anim[guy.animname][var_336c378e595973fa])) {
-      guy set_deathanim(var_336c378e595973fa);
+    if(isDefined(level.scr_anim[guy.animname][death_anime])) {
+      guy set_deathanim(death_anime);
     }
 
     if(isDefined(guy.animents)) {
       foreach(animent in guy.animents) {
-        if(isDefined(level.scr_anim[animent.animname][var_336c378e595973fa])) {
-          animent.deathanime = var_336c378e595973fa;
+        if(isDefined(level.scr_anim[animent.animname][death_anime])) {
+          animent.deathanime = death_anime;
         }
       }
     }
@@ -1346,14 +1346,14 @@ function anim_react_data(data) {
     level thread anim_react_death(data.node, guy, data.fnreact);
   }
 
-  var_e37654271f1284e = anime + "_intro";
+  intro_anime = anime + "_intro";
 
-  if(isDefined(level.scr_anim[data.guys[0].animname][var_e37654271f1284e])) {
-    data.node anim_single_with_props(data.guys, var_e37654271f1284e);
+  if(isDefined(level.scr_anim[data.guys[0].animname][intro_anime])) {
+    data.node anim_single_with_props(data.guys, intro_anime);
   }
 
-  var_ae35b765a1677580 = anime + "_loop";
-  var_d8d4ad804645fc13 = anime + "_outro";
+  loop_anime = anime + "_loop";
+  outro_anime = anime + "_outro";
 
   foreach(guy in data.guys) {
     if(!isalive(guy)) {
@@ -1364,13 +1364,13 @@ function anim_react_data(data) {
       continue;
     }
 
-    if(isDefined(level.scr_anim[guy.animname][var_ae35b765a1677580])) {
-      data.node thread anim_loop_with_props(guy, var_ae35b765a1677580, "stop_anim_loop_" + guy.animname);
+    if(isDefined(level.scr_anim[guy.animname][loop_anime])) {
+      data.node thread anim_loop_with_props(guy, loop_anime, "stop_anim_loop_" + guy.animname);
       continue;
     }
 
-    if(isDefined(level.scr_anim[guy.animname][var_d8d4ad804645fc13])) {
-      data.node thread anim_single_with_props(guy, var_d8d4ad804645fc13);
+    if(isDefined(level.scr_anim[guy.animname][outro_anime])) {
+      data.node thread anim_single_with_props(guy, outro_anime);
       guy thread waittillmatch_notify("single anim", "end", "outro_anim_end");
       guy thread_on_notify("outro_anim_end", &send_notify, "stop_anim_react", undefined, undefined, guy, "anim_react");
       continue;

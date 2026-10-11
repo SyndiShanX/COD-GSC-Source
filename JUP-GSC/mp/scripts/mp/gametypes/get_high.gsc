@@ -287,7 +287,7 @@ function height_manager() {
     if(var_d78624b2f5a6698c > nextheight) {
       self.var_9a946262deaa8914 = nextheight;
 
-      if(!istrue(self.var_660b700bd32206d4) && !istrue(self.var_458f6ef3818b11dc)) {
+      if(!istrue(self.completedgame) && !istrue(self.var_458f6ef3818b11dc)) {
         level scripts\mp\gamescore::_setplayerscore(self, self.var_9a946262deaa8914);
       }
 
@@ -414,7 +414,7 @@ function function_4a4297c755f57569(var_392af30b501461af) {
 
     player thread height_manager();
     player.var_c4a7316b1d2c930e = gettime();
-    player.var_660b700bd32206d4 = 0;
+    player.completedgame = 0;
     player.var_458f6ef3818b11dc = 1;
     player function_ad91532168dbf0be();
   }
@@ -446,8 +446,8 @@ function function_cc72ca834f01c961() {
   while(true) {
     self waittill("trigger", player);
 
-    if(!istrue(player.var_660b700bd32206d4)) {
-      player.var_660b700bd32206d4 = 1;
+    if(!istrue(player.completedgame)) {
+      player.completedgame = 1;
       var_d09e0821a88feb42 = gettime() - player.var_c4a7316b1d2c930e;
       var_b6384cd3ddabadb7 = int((1200000 - var_d09e0821a88feb42) / 1000);
       var_b6384cd3ddabadb7 = max(var_b6384cd3ddabadb7, 0);
@@ -594,7 +594,7 @@ function function_1ca18f8f2c81e020() {
   self endon("disconnect");
   level waittill("game_ended");
 
-  if(!isDefined(self.var_660b700bd32206d4)) {
+  if(!isDefined(self.completedgame)) {
     self playlocalsound("jup_gethigh_score_timeout");
   }
 }
@@ -611,11 +611,11 @@ function rock_pickups() {
     rock = spawn("script_model", struct.origin);
     rock setModel("lm_loot_offhand_wm_rock");
     rock hudoutlineenable("outline_depth_white");
-    rock thread function_9839e892f48728cb();
+    rock thread watchforpickup();
   }
 }
 
-function function_9839e892f48728cb() {
+function watchforpickup() {
   level endon("game_ended");
   rock = self;
   rock.trigger = spawn("trigger_radius", rock.origin, 0, 32, 32);

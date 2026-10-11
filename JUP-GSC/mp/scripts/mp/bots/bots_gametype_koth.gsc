@@ -17,7 +17,7 @@
 function main() {
   level.var_e6628286205f2ea7 = 1;
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() && !getdvarint(@ "hash_131a7029db1ed456", 0)) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode() && !getdvarint(@ "hash_131a7029db1ed456", 0)) {
     scripts\mp\gametypes\mgl_mp::function_892db361940e142d();
     return;
   }
@@ -32,7 +32,7 @@ function setup_callbacks() {
   level.bot_funcs["gametype_think"] = &bot_koth_think;
   level.bot_funcs["should_start_cautious_approach"] = &should_start_cautious_approach_koth;
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() && getdvarint(@ "hash_131a7029db1ed456", 0)) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode() && getdvarint(@ "hash_131a7029db1ed456", 0)) {
     level.bot_funcs["player_spawned_gamemode"] = &namespace_da125b44c190d236::function_5f51c5c13fd2911b;
     level.modifyplayerdamage = &namespace_da125b44c190d236::modifyplayerdamage;
   }

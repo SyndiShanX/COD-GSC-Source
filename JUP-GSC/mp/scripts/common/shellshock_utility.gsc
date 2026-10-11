@@ -70,7 +70,7 @@ function _shellshock(name, category, duration, animationresponse, interruptdelay
   self.shockinterrupttime = var_e1b45ec24abdbe91;
   var_5cd5209e58a2b1c8 = 0;
 
-  if(function_f3bb4f4911a1beb2("perk", "hasPerk", "specialty_dauntless") || function_f3bb4f4911a1beb2("game", "isSpawnProtected")) {
+  if(callsharedfunc("perk", "hasPerk", "specialty_dauntless") || callsharedfunc("game", "isSpawnProtected")) {
     var_5cd5209e58a2b1c8 = 1;
   }
 
@@ -109,7 +109,7 @@ function _stopshellshock(fromdeath) {
 function enableshellshockfunc() {}
 
 function disableshellshockfunc() {
-  _stopshellshock(function_287a1854579369f5());
+  _stopshellshock(isalivesharedfunc());
 }
 
 function shellshock_interruptdelayfunc(name, duration) {
@@ -232,7 +232,7 @@ function usescriptablemeleeblood(objweapon) {
     return "bloodFXNova";
   }
 
-  if(function_55d5c766b382551e(objweapon)) {
+  if(isdoomchainsaw(objweapon)) {
     return "bloodFXDoom";
   }
 
@@ -259,7 +259,7 @@ function function_bb839bb513295f10(weapon) {
   return false;
 }
 
-function function_55d5c766b382551e(weapon) {
+function isdoomchainsaw(weapon) {
   if(isDefined(weapon) && isDefined(weapon.receiver)) {
     if(weapon.receiver == "rec_pickaxe" && weapon.receivervarindex == 2) {
       return true;
@@ -279,9 +279,9 @@ function activatemeleeblood(state) {
 
 function play_fx_with_entity(fx, string_array, timeout) {
   self endon("disconnect");
-  var_22f48fd7df6c56fb = function_1f9d1f30f6845dd(fx, self getEye(), self);
+  var_22f48fd7df6c56fb = spawnfxforclientsharedfunc(fx, self getEye(), self);
   triggerfx(var_22f48fd7df6c56fb);
-  var_22f48fd7df6c56fb function_e531ef189c6c5d1d();
+  var_22f48fd7df6c56fb setfxkilldefondeletesharedfunc();
   waittill_any_in_array_or_timeout(string_array, timeout);
   var_22f48fd7df6c56fb delete();
 }

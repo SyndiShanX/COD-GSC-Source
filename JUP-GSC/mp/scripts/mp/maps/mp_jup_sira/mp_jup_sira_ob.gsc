@@ -184,7 +184,7 @@ function function_f3e573baf0974858() {
   }
 }
 
-function function_f19f21e5a0b646dc(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_f19f21e5a0b646dc(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance)) {
     player playSound("evt_ob_rr_meteor_affirm");
     level.var_fd811442ea11f020++;

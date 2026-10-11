@@ -142,7 +142,7 @@ function private function_fbaa37f0a39a0d07() {
     return false;
   }
 
-  utility::function_cefc758e6b25a243();
+  utility::scriptable_clearparententity();
   self.origin = trace["position"];
   return true;
 }
@@ -250,7 +250,7 @@ function private function_803a95e4e6cd2538(scriptable, player) {
           players = array_remove(level.players, player);
         }
 
-        showdmzsplash(splash, players, scripts\mp\poi::function_6cc445c02b5effac(player.origin, undefined, undefined, 1));
+        showdmzsplash(splash, players, scripts\mp\poi::poi_findpoioriginisin(player.origin, undefined, undefined, 1));
       }
 
       level thread function_31a079a1fe9caa2(player);
@@ -368,7 +368,7 @@ function function_5704ab2a9381630f(player) {
   }
 }
 
-function function_5a7168b0b511bec3(player) {
+function didextractwithweaponcase(player) {
   return isDefined(level.var_8fc589b1edff1fb2) && istrue(level.var_8fc589b1edff1fb2[player.guid]);
 }
 

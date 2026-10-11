@@ -310,8 +310,8 @@ function function_a9ff1672fcc0b3f8() {
 
 function function_1d929b8e8487c576(camera) {
   leveldata = function_f0698aee89c18210("reconDart");
-  entmask = function_869ccb4e3451b8c6(["etype_player", "etype_ai"]);
-  targetarray = function_b1eef70090b5b7b5(camera.origin, 1575, entmask);
+  entmask = createentitytypemask(["etype_player", "etype_ai"]);
+  targetarray = getentitiesinradiusfrompartitiongrid(camera.origin, 1575, entmask);
 
   foreach(victim in targetarray) {
     if(!isDefined(victim)) {
@@ -474,8 +474,8 @@ function function_f0d575a0a800d2b8(triggerpilot) {
 
 function function_b36c71c670b33b4(triggerpilot) {
   leveldata = function_f0698aee89c18210("reconDart");
-  entmask = function_869ccb4e3451b8c6(["etype_player", "etype_ai"]);
-  targetarray = function_b1eef70090b5b7b5(self.origin, 1575, entmask);
+  entmask = createentitytypemask(["etype_player", "etype_ai"]);
+  targetarray = getentitiesinradiusfrompartitiongrid(self.origin, 1575, entmask);
 
   foreach(character in targetarray) {
     if(isPlayer(character) && !character scripts\cp_mp\utility\player_utility::_isalive()) {
@@ -600,8 +600,8 @@ function private function_a3d6f92e2c44200f() {
     idx = array_find(cameragroup, camera);
 
     if(isDefined(idx)) {
-      var_e9d476a3809cb3f1 = "ui_tactical_camera_" + string(idx) + "_location";
-      self setclientomnvar(var_e9d476a3809cb3f1, camera.areaid);
+      omnvarname = "ui_tactical_camera_" + string(idx) + "_location";
+      self setclientomnvar(omnvarname, camera.areaid);
     }
 
     waitframe();
@@ -619,8 +619,8 @@ function private function_b327b26a701cfa7a(player, index) {
 
     if(!isDefined(self.status) || isDefined(self.status) && newstatus != self.status) {
       self.status = newstatus;
-      var_e9d476a3809cb3f1 = "ui_tactical_camera_" + string(index) + "_status";
-      player setclientomnvar(var_e9d476a3809cb3f1, self.status);
+      omnvarname = "ui_tactical_camera_" + string(index) + "_status";
+      player setclientomnvar(omnvarname, self.status);
     }
 
     waitframe();
@@ -660,8 +660,8 @@ function private function_9f19db59e1560978(_camera, cameragroup) {
 function private function_8cfb97ae498ab61e(camera, index) {
   status = camera function_3ecfbd63a3e3bed3(self);
   camera.status = status;
-  var_e9d476a3809cb3f1 = "ui_tactical_camera_" + string(index) + "_status";
-  self setclientomnvar(var_e9d476a3809cb3f1, status);
+  omnvarname = "ui_tactical_camera_" + string(index) + "_status";
+  self setclientomnvar(omnvarname, status);
   camera thread function_b327b26a701cfa7a(self, index);
 }
 

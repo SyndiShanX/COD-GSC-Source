@@ -9,7 +9,7 @@
 #using scripts\engine\utility;
 #namespace battlechatter_wrapper;
 
-function evaluatemoveevent(var_76af5757c71b312c) {}
+function evaluatemoveevent(wasincover) {}
 
 function evaluatereloadevent() {}
 

@@ -17,9 +17,9 @@ function autoexec main() {
   function_d6736c5ef5ac2990(var_601bcee5d276f46d, &function_b9f4b7206d76e7ce);
 }
 
-function function_fe9929b42e5a99e4() {
+function init_metabones() {
   function_691c50069ed7c2f7(&function_a826442ad2416fe0);
-  var_46a3e181e35f46ab = function_97fd256a244527b4(self.metabones.bundle_name);
+  metabones_def = function_97fd256a244527b4(self.metabones.bundle_name);
   function_3d2728c0e2252a1d("gill_bottom_le", "open");
   function_3d2728c0e2252a1d("gill_middle_le", "open");
   function_3d2728c0e2252a1d("gill_top_le", "open");
@@ -28,9 +28,9 @@ function function_fe9929b42e5a99e4() {
   function_3d2728c0e2252a1d("gill_top_ri", "open");
   self.var_90cec1dffd2daa94 = metabone::function_58b8812944c3f7e8("gill_bottom_le", "open");
   self.var_d661c3818c8896d7 = [];
-  self.var_d661c3818c8896d7[0] = var_46a3e181e35f46ab.var_5840b90f4e873441["gill_bottom_le"].tags[0].tagname;
-  self.var_d661c3818c8896d7[1] = var_46a3e181e35f46ab.var_5840b90f4e873441["gill_middle_le"].tags[0].tagname;
-  self.var_d661c3818c8896d7[2] = var_46a3e181e35f46ab.var_5840b90f4e873441["gill_top_le"].tags[0].tagname;
+  self.var_d661c3818c8896d7[0] = metabones_def.var_5840b90f4e873441["gill_bottom_le"].tags[0].tagname;
+  self.var_d661c3818c8896d7[1] = metabones_def.var_5840b90f4e873441["gill_middle_le"].tags[0].tagname;
+  self.var_d661c3818c8896d7[2] = metabones_def.var_5840b90f4e873441["gill_top_le"].tags[0].tagname;
   self.var_68e442281a31d4a2 = ["bottom", "middle", "top"];
   self function_3e89eb3d8e3f1811("can_gill_destroyed_end_time", 0);
 
@@ -145,12 +145,12 @@ function private function_a826442ad2416fe0(dmgstruct) {
 }
 
 function private function_b9f4b7206d76e7ce(params) {
-  function_ebb83c1efeaae2c7(params.var_c02b1f6c1721c844);
+  function_ebb83c1efeaae2c7(params.metabone_name);
 }
 
-function private function_ebb83c1efeaae2c7(var_c02b1f6c1721c844) {
-  if(self getscriptablehaspart(var_c02b1f6c1721c844)) {
-    self setscriptablepartstate(var_c02b1f6c1721c844, "off");
+function private function_ebb83c1efeaae2c7(metabone_name) {
+  if(self getscriptablehaspart(metabone_name)) {
+    self setscriptablepartstate(metabone_name, "off");
     self function_3e89eb3d8e3f1811("can_gill_destroyed_end_time", gettime() + 2000);
   }
 }
@@ -183,9 +183,9 @@ function private function_1dbaaec5b9b3ec48() {
   self endon("<dev string:xbc>");
 
   while(true) {
-    var_46a3e181e35f46ab = function_97fd256a244527b4(self.metabones.bundle_name);
+    metabones_def = function_97fd256a244527b4(self.metabones.bundle_name);
 
-    foreach(metabone in var_46a3e181e35f46ab.metabones) {
+    foreach(metabone in metabones_def.metabones) {
       if(!array_contains(["<dev string:xc5>", "<dev string:xd7>", "<dev string:xe9>"], metabone.name)) {
         continue;
       }

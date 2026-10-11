@@ -93,7 +93,7 @@ function function_88d1cace9dd87631() {
 function get_perk_machines() {
   level flag::flag_wait("ob_infil_completed");
   var_3c3122af5c02bd7 = getStructArray("content_struct", "variantname");
-  var_74dade39e02d8fee = [];
+  a_spawn_points = [];
 
   if(!isDefined(level.var_b49b509b2d9ca1b6)) {
     level.var_b49b509b2d9ca1b6 = [];
@@ -105,18 +105,18 @@ function get_perk_machines() {
 
   foreach(struct in var_3c3122af5c02bd7) {
     if(isDefined(struct.content_key) && struct.content_key == "perk_machine_region_spawn") {
-      var_74dade39e02d8fee = array_add(var_74dade39e02d8fee, struct);
+      a_spawn_points = array_add(a_spawn_points, struct);
     }
   }
 
-  foreach(machine in var_74dade39e02d8fee) {
+  foreach(machine in a_spawn_points) {
     if(isDefined(machine.script_currency)) {
       level.var_b49b509b2d9ca1b6[level.var_b49b509b2d9ca1b6.size] = machine;
-      var_74dade39e02d8fee = array_remove(var_74dade39e02d8fee, machine);
+      a_spawn_points = array_remove(a_spawn_points, machine);
     }
   }
 
-  level.var_9ec1877bce168538 = var_74dade39e02d8fee;
+  level.var_9ec1877bce168538 = a_spawn_points;
 }
 
 function function_61aea37385c298a9(params) {
@@ -124,7 +124,7 @@ function function_61aea37385c298a9(params) {
   scripts\cp_mp\overlord::playevent("s2_rr_portal_exit", [self], 0.5);
 }
 
-function function_83d43ec21f04f972(var_6f8af5eb76deac21) {
+function function_83d43ec21f04f972(relevantinfostruct) {
   if(isDefined(level.var_e345b15591192b73)) {
     level.var_e345b15591192b73++;
   }

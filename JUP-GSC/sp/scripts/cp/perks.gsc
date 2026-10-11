@@ -1185,7 +1185,7 @@ function run_track_enemy_patrollers() {
   var_820e590cb5620371 = 0;
   self.view_list = [];
   self.outlineids = [];
-  var_2ab4eb5f9bf4dd77 = 5000;
+  last_seen_time = 5000;
 
   while(true) {
     enemy_list = level.agentarray;
@@ -1202,9 +1202,9 @@ function run_track_enemy_patrollers() {
 
       var_820e590cb5620371++;
       entnum = guy getentitynumber();
-      var_25ab57d46f5f99f9 = within_fov(self getEye(), self getplayerangles(), guy.origin, tracker_fov);
+      is_in_fov = within_fov(self getEye(), self getplayerangles(), guy.origin, tracker_fov);
 
-      if(!var_25ab57d46f5f99f9) {
+      if(!is_in_fov) {
         continue;
       }
 
@@ -1213,7 +1213,7 @@ function run_track_enemy_patrollers() {
       if(!passed) {
         if(isDefined(self.view_list[entnum])) {
           cur_time = gettime();
-          var_77c5b5dd30fc2909 = cur_time - var_2ab4eb5f9bf4dd77;
+          var_77c5b5dd30fc2909 = cur_time - last_seen_time;
 
           if(self.view_list[entnum] < var_77c5b5dd30fc2909) {} else {
             guy add_outline(entnum, self);
@@ -1242,7 +1242,7 @@ function function_d0eb3583cf0cdf66(var_b76712bde7c371e4) {
   var_820e590cb5620371 = 0;
   self.view_list = [];
   self.outlineids = [];
-  var_2ab4eb5f9bf4dd77 = 5000;
+  last_seen_time = 5000;
 
   while(true) {
     enemy_list = level.agentarray;
@@ -1265,9 +1265,9 @@ function function_d0eb3583cf0cdf66(var_b76712bde7c371e4) {
         target = guy.origin;
       }
 
-      var_25ab57d46f5f99f9 = within_fov(self getEye(), self getplayerangles(), target, tracker_fov);
+      is_in_fov = within_fov(self getEye(), self getplayerangles(), target, tracker_fov);
 
-      if(!var_25ab57d46f5f99f9) {
+      if(!is_in_fov) {
         continue;
       }
 
@@ -1378,9 +1378,9 @@ function recharge_lethals_over_time(timer) {
       return;
     }
 
-    var_d690ef8fdb341e60 = scripts\cp_mp\equipment::getcurrentequipment("primary");
+    lethal_grenade_name = scripts\cp_mp\equipment::getcurrentequipment("primary");
 
-    if(grenade.equipmentref == var_d690ef8fdb341e60) {
+    if(grenade.equipmentref == lethal_grenade_name) {
       thread function_b705cd6e9764d5b5(timer, "primary");
       thread function_b732b7db9744396e("primary");
     }

@@ -215,8 +215,8 @@ function function_502812469b62f7e9(structspawn, forcedrarity) {
   }
 
   weapon = makeweapon(weapon_name);
-  var_88260bb1ed608124 = weapon.var_9d7facbe889e667c;
-  scriptablename = function_5075f6a4731236e6(var_88260bb1ed608124);
+  weapon_root_name = weapon.var_9d7facbe889e667c;
+  scriptablename = function_5075f6a4731236e6(weapon_root_name);
 
   if(isDefined(scriptablename)) {
     rarity = structspawn function_832a1fa43c4f3c7a();
@@ -225,9 +225,9 @@ function function_502812469b62f7e9(structspawn, forcedrarity) {
       rarity = forcedrarity;
     }
 
-    wallbuy_cost = function_86989ab07942c980(var_88260bb1ed608124, rarity);
-    wallbuy_weapon = function_ad4352ac1dfd7c59(var_88260bb1ed608124);
-    wallbuy_item = function_3683d3c5ee60fb1e(var_88260bb1ed608124);
+    wallbuy_cost = function_86989ab07942c980(weapon_root_name, rarity);
+    wallbuy_weapon = function_ad4352ac1dfd7c59(weapon_root_name);
+    wallbuy_item = function_3683d3c5ee60fb1e(weapon_root_name);
     var_2dda78d4f81fa52f = spawnscriptable(scriptablename, structspawn.origin, structspawn.angles);
 
     switch (rarity) {
@@ -255,9 +255,9 @@ function function_502812469b62f7e9(structspawn, forcedrarity) {
     var_2dda78d4f81fa52f.weapon = wallbuy_weapon;
     var_2dda78d4f81fa52f.weapon_name = weapon_name;
     var_2dda78d4f81fa52f.rarity = rarity;
-    var_2dda78d4f81fa52f.var_91839babd32261f4 = scriptablename;
+    var_2dda78d4f81fa52f.scriptable_name = scriptablename;
     var_2dda78d4f81fa52f.itementry = wallbuy_item;
-    var_2dda78d4f81fa52f.var_88260bb1ed608124 = var_88260bb1ed608124;
+    var_2dda78d4f81fa52f.weapon_root_name = weapon_root_name;
     structspawn.var_2dda78d4f81fa52f = var_2dda78d4f81fa52f;
     return structspawn;
   }
@@ -274,7 +274,7 @@ function function_46baa6f0b88523d2(usable, player) {
       #string: &"", #type: "HINT_NOBUTTON"};
   }
 
-  if(isweapon(player.var_36940c335e7cc50c) && player getcurrentweapon() == player.var_36940c335e7cc50c) {
+  if(isweapon(player.tertiaryweaponobj) && player getcurrentweapon() == player.tertiaryweaponobj) {
     return {
       #string: &"SHARED_HINTSTRINGS/WALLBUY_HINT_TERTIARY_DISABLED", #type: "HINT_NOBUTTON"};
   }
@@ -351,7 +351,7 @@ function function_ad4352ac1dfd7c59(weapon_name) {
 
 function function_5075f6a4731236e6(weapon_name) {
   if(isDefined(weapon_name) && !isDefined(level.var_9280820d730cbb33[weapon_name])) {
-    println("<dev string:x125>" + function_3c8848a3a11b2553(weapon_name) + "<dev string:x13a>");
+    println("<dev string:x125>" + getxhashsourcename(weapon_name) + "<dev string:x13a>");
   }
 
   if(isDefined(weapon_name) && isDefined(level.var_9280820d730cbb33[weapon_name]) && isDefined(level.var_9280820d730cbb33[weapon_name].var_3f8c2b14fee7c570)) {
@@ -359,50 +359,50 @@ function function_5075f6a4731236e6(weapon_name) {
   }
 }
 
-function function_86989ab07942c980(var_88260bb1ed608124, rarity) {
+function function_86989ab07942c980(weapon_root_name, rarity) {
   cost = level.wallbuy_cost;
 
-  if(isDefined(level.var_9280820d730cbb33) && isDefined(level.var_9280820d730cbb33[var_88260bb1ed608124])) {
-    if(isDefined(level.var_9280820d730cbb33[var_88260bb1ed608124].var_814d114cd3786973)) {
-      cost = level.var_9280820d730cbb33[var_88260bb1ed608124].var_814d114cd3786973;
+  if(isDefined(level.var_9280820d730cbb33) && isDefined(level.var_9280820d730cbb33[weapon_root_name])) {
+    if(isDefined(level.var_9280820d730cbb33[weapon_root_name].var_814d114cd3786973)) {
+      cost = level.var_9280820d730cbb33[weapon_root_name].var_814d114cd3786973;
     }
 
     switch (rarity) {
       case #"hash_883ff07272b4f9c":
-        if(isDefined(level.var_9280820d730cbb33[var_88260bb1ed608124].var_32c129d7629dfd37)) {
-          cost = level.var_9280820d730cbb33[var_88260bb1ed608124].var_32c129d7629dfd37;
+        if(isDefined(level.var_9280820d730cbb33[weapon_root_name].var_32c129d7629dfd37)) {
+          cost = level.var_9280820d730cbb33[weapon_root_name].var_32c129d7629dfd37;
         } else {
           cost += 500;
         }
 
         break;
       case #"hash_778bb52ecd08072d":
-        if(isDefined(level.var_9280820d730cbb33[var_88260bb1ed608124].var_2ad1686ad07dbc22)) {
-          cost = level.var_9280820d730cbb33[var_88260bb1ed608124].var_2ad1686ad07dbc22;
+        if(isDefined(level.var_9280820d730cbb33[weapon_root_name].var_2ad1686ad07dbc22)) {
+          cost = level.var_9280820d730cbb33[weapon_root_name].var_2ad1686ad07dbc22;
         } else {
           cost += 1500;
         }
 
         break;
       case #"hash_598a30e44f53045f":
-        if(isDefined(level.var_9280820d730cbb33[var_88260bb1ed608124].var_bc634e28ac5febd8)) {
-          cost = level.var_9280820d730cbb33[var_88260bb1ed608124].var_bc634e28ac5febd8;
+        if(isDefined(level.var_9280820d730cbb33[weapon_root_name].var_bc634e28ac5febd8)) {
+          cost = level.var_9280820d730cbb33[weapon_root_name].var_bc634e28ac5febd8;
         } else {
           cost += 2500;
         }
 
         break;
       case #"hash_35bb3bd014c77f4b":
-        if(isDefined(level.var_9280820d730cbb33[var_88260bb1ed608124].var_422e0abbedb57cc8)) {
-          cost = level.var_9280820d730cbb33[var_88260bb1ed608124].var_422e0abbedb57cc8;
+        if(isDefined(level.var_9280820d730cbb33[weapon_root_name].var_422e0abbedb57cc8)) {
+          cost = level.var_9280820d730cbb33[weapon_root_name].var_422e0abbedb57cc8;
         } else {
           cost += 3500;
         }
 
         break;
       default:
-        if(isDefined(level.var_9280820d730cbb33[var_88260bb1ed608124].var_814d114cd3786973)) {
-          cost = level.var_9280820d730cbb33[var_88260bb1ed608124].var_814d114cd3786973;
+        if(isDefined(level.var_9280820d730cbb33[weapon_root_name].var_814d114cd3786973)) {
+          cost = level.var_9280820d730cbb33[weapon_root_name].var_814d114cd3786973;
         } else {
           cost = 1000;
         }
@@ -446,7 +446,7 @@ function function_6a2e5e2579f83b94(player) {
     return;
   }
 
-  if(isweapon(player.var_36940c335e7cc50c) && player getcurrentweapon() == player.var_36940c335e7cc50c) {
+  if(isweapon(player.tertiaryweaponobj) && player getcurrentweapon() == player.tertiaryweaponobj) {
     return;
   }
 
@@ -488,31 +488,31 @@ function function_6a2e5e2579f83b94(player) {
 
       fakeitem.count = function_7209c8cd4b2e3afd(clipammo);
       fakeitem.weaponstockammo = stockammo;
-      var_72672cd81ec1093d = player function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
+      weapontogive = player function_7f6f62ba8dfd0da0(item_bundle, fakeitem);
 
-      if(isarray(var_72672cd81ec1093d) && isDefined(var_72672cd81ec1093d[1]) && isweapon(var_72672cd81ec1093d[1])) {
-        var_72672cd81ec1093d = var_72672cd81ec1093d[1];
+      if(isarray(weapontogive) && isDefined(weapontogive[1]) && isweapon(weapontogive[1])) {
+        weapontogive = weapontogive[1];
       }
     } else {
       if(getdvarint(@ "hash_b56cc9f1a82d6fd1")) {
         num_attachments = function_7fa5860a8e414317(self.rarity);
-        var_72672cd81ec1093d = scripts\mp\weapons::function_71dc088dc384ef8d(self.weapon_name, num_attachments, 1);
+        weapontogive = scripts\mp\weapons::function_71dc088dc384ef8d(self.weapon_name, num_attachments, 1);
       } else {
-        var_72672cd81ec1093d = scripts\cp_mp\weapon::buildweapon(self.weapon_name);
+        weapontogive = scripts\cp_mp\weapon::buildweapon(self.weapon_name);
       }
 
       player.droppeddeathweapon = undefined;
       player scripts\mp\weapons::dropweaponfordeath(undefined, "");
       player.droppeddeathweapon = undefined;
-      player giveweapon(var_72672cd81ec1093d);
-      player setweaponammoclip(var_72672cd81ec1093d, weaponclipsize(var_72672cd81ec1093d));
-      player setweaponammostock(var_72672cd81ec1093d, weaponmaxammo(var_72672cd81ec1093d));
-      player switchtoweaponimmediate(var_72672cd81ec1093d);
+      player giveweapon(weapontogive);
+      player setweaponammoclip(weapontogive, weaponclipsize(weapontogive));
+      player setweaponammostock(weapontogive, weaponmaxammo(weapontogive));
+      player switchtoweaponimmediate(weapontogive);
     }
 
     playsoundatpos(self.origin, "evt_zm_core_wallbuy_purchase");
     params = spawnStruct();
-    params.objweapon = var_72672cd81ec1093d;
+    params.objweapon = weapontogive;
     params.cost = self.cost;
     params.rarity = self.rarity;
     params.lootid = function_2c836ad05e5f634c(item_bundle.ref);
@@ -583,31 +583,31 @@ function function_e898734a6a951c57(structspawn, rarity) {
 
   switch (rarity) {
     case #"hash_883ff07272b4f9c":
-      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.var_88260bb1ed608124, "green");
+      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.weapon_root_name, "green");
       structspawn.var_2dda78d4f81fa52f.cost = cost;
       structspawn.var_2dda78d4f81fa52f.rarity = "green";
       structspawn.var_2dda78d4f81fa52f setscriptablepartstate("wallbuy", "green");
       break;
     case #"hash_778bb52ecd08072d":
-      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.var_88260bb1ed608124, "blue");
+      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.weapon_root_name, "blue");
       structspawn.var_2dda78d4f81fa52f.cost = cost;
       structspawn.var_2dda78d4f81fa52f.rarity = "blue";
       structspawn.var_2dda78d4f81fa52f setscriptablepartstate("wallbuy", "blue");
       break;
     case #"hash_598a30e44f53045f":
-      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.var_88260bb1ed608124, "purple");
+      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.weapon_root_name, "purple");
       structspawn.var_2dda78d4f81fa52f.cost = cost;
       structspawn.var_2dda78d4f81fa52f.rarity = "purple";
       structspawn.var_2dda78d4f81fa52f setscriptablepartstate("wallbuy", "purple");
       break;
     case #"hash_35bb3bd014c77f4b":
-      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.var_88260bb1ed608124, "orange");
+      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.weapon_root_name, "orange");
       structspawn.var_2dda78d4f81fa52f.cost = cost;
       structspawn.var_2dda78d4f81fa52f.rarity = "orange";
       structspawn.var_2dda78d4f81fa52f setscriptablepartstate("wallbuy", "orange");
       break;
     default:
-      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.var_88260bb1ed608124, "white");
+      cost = function_86989ab07942c980(structspawn.var_2dda78d4f81fa52f.weapon_root_name, "white");
       structspawn.var_2dda78d4f81fa52f.cost = cost;
       structspawn.var_2dda78d4f81fa52f setscriptablepartstate("wallbuy", "base");
       break;

@@ -44,8 +44,8 @@ function function_a4b356741a6dc247() {
   activity_instance = self;
   activity_instance endon("activity_ended");
   activity_instance endon("instance_destroyed");
-  var_45c17c8bd7095cc4 = function_b9c4aa88ad97ee68(self);
-  self.variant_definition = var_45c17c8bd7095cc4;
+  activityvariantdefinition = function_b9c4aa88ad97ee68(self);
+  self.variant_definition = activityvariantdefinition;
   self.var_ed227a1f2b382bbc = self.variant_definition.var_1235584cb7528cff;
   self.difficulty_region = function_415547ee4122c2ca();
   self.var_1f0f8351395d38ff = 1;
@@ -505,7 +505,7 @@ function function_db162e424573ba18() {
 
 function function_a154bc41f62b9a41(var_b381b0883bcd4847) {
   player_list = var_b381b0883bcd4847.playerlist;
-  var_a83ac3549acc2da2 = var_b381b0883bcd4847.var_b494ea8c4b70490;
+  var_a83ac3549acc2da2 = var_b381b0883bcd4847.playerjoinreason;
 }
 
 function function_5f08e5ac1feea611(var_b381b0883bcd4847) {

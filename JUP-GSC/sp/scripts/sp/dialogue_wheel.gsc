@@ -8,7 +8,7 @@
 #using scripts\engine\utility;
 #namespace dialogue_wheel;
 
-function function_306c305b8c51b11c(options, duration, active, positions, var_6b9a984d61c9ff12) {
+function function_306c305b8c51b11c(options, duration, active, positions, inputholdduration) {
   assert(options.size > 0, "Need at least one dialogue wheel option");
   assert(options.size <= 4, "Cannot have more than 4 dialogue wheel options");
 
@@ -22,7 +22,7 @@ function function_306c305b8c51b11c(options, duration, active, positions, var_6b9
   setomnvar("ui_dialogue_prompts_option_b", "none");
   setomnvar("ui_dialogue_prompts_option_c", "none");
   setomnvar("ui_dialogue_prompts_option_d", "none");
-  function_544db35a3301834f();
+  bypass_enabled();
 
   if(isDefined(positions)) {
     foreach(position in positions) {
@@ -42,11 +42,11 @@ function function_306c305b8c51b11c(options, duration, active, positions, var_6b9
 
   level.dialogue_wheel.duration = duration;
 
-  if(!isDefined(var_6b9a984d61c9ff12)) {
-    var_6b9a984d61c9ff12 = 0;
+  if(!isDefined(inputholdduration)) {
+    inputholdduration = 0;
   }
 
-  level.dialogue_wheel.var_6b9a984d61c9ff12 = var_6b9a984d61c9ff12;
+  level.dialogue_wheel.inputholdduration = inputholdduration;
   setomnvar("ui_dialogue_prompts_duration", duration);
 
   if(!isDefined(active)) {
@@ -92,7 +92,7 @@ function function_27cb1968e9f31a97(position) {
   return omnvar;
 }
 
-function function_544db35a3301834f() {
+function bypass_enabled() {
   foreach(input in level.dialogue_wheel.inputs) {
     input.bypass = 1;
   }
@@ -262,7 +262,7 @@ function function_3d548a32743df49b(duration) {
 }
 
 function function_64c637dd115ff678(duration) {
-  level.dialogue_wheel.var_6b9a984d61c9ff12 = duration;
+  level.dialogue_wheel.inputholdduration = duration;
 }
 
 function function_d92b8b076e34f82b(options, duration, positions) {
@@ -314,15 +314,15 @@ function function_e6acdf1a7626587e(options, nodes, duration) {
 
     switch (response) {
       case 0:
-        if(isDefined(level.var_1b2599094f1aa7a3.nodes["silence"])) {
-          return level.var_1b2599094f1aa7a3.nodes["silence"];
+        if(isDefined(level.dialoguetree.nodes["silence"])) {
+          return level.dialoguetree.nodes["silence"];
         }
 
         response = undefined;
         break;
       case 5:
-        if(isDefined(level.var_1b2599094f1aa7a3.nodes["attack"])) {
-          return level.var_1b2599094f1aa7a3.nodes["attack"];
+        if(isDefined(level.dialoguetree.nodes["attack"])) {
+          return level.dialoguetree.nodes["attack"];
         }
 
         response = undefined;
@@ -480,9 +480,9 @@ function function_afeae0424199f820() {
     foreach(button in self.buttons) {
       if(level.player buttonPressed(button) && !self.bypass) {
         if(is_gamepad && !istrue(level.var_a8f8b0c2350371b)) {
-          if(level.dialogue_wheel.var_6b9a984d61c9ff12 > 0) {
+          if(level.dialogue_wheel.inputholdduration > 0) {
             if(!isDefined(level.var_db68d53730879e4b) || level.var_db68d53730879e4b == button) {
-              self.progress += level.framedurationseconds / level.dialogue_wheel.var_6b9a984d61c9ff12;
+              self.progress += level.framedurationseconds / level.dialogue_wheel.inputholdduration;
               setomnvar("ui_dialogue_prompts_choice", self.result);
             } else {
               self.progress = 0;

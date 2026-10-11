@@ -44,17 +44,17 @@ function function_ec7209ab67c18011(veh_spawner, ai_spawners, patrol_start, var_a
   flag_wait("level_ready_for_script");
   boat = self;
   function_c72ff775cd61b11(@ "hash_42a7dc5bbe9d261e", 1, 0);
-  var_6bc03688e829aec1 = undefined;
+  patrol_start_node = undefined;
   patrol_start = default_to(patrol_start, "boat_patrol_path_radiant");
 
   if(isstring(patrol_start)) {
-    var_6bc03688e829aec1 = getvehiclenode(patrol_start, "targetname");
+    patrol_start_node = getvehiclenode(patrol_start, "targetname");
   } else {
-    var_6bc03688e829aec1 = patrol_start;
+    patrol_start_node = patrol_start;
   }
 
-  boat.var_6bc03688e829aec1 = var_6bc03688e829aec1;
-  boat.var_bf7bf8c7f826a84e = getvehiclenodeindex(var_6bc03688e829aec1.targetname, "targetname");
+  boat.patrol_start_node = patrol_start_node;
+  boat.var_bf7bf8c7f826a84e = getvehiclenodeindex(patrol_start_node.targetname, "targetname");
 
   if(isDefined(veh_spawner.var_a74a9efb6f5625bd)) {
     boat.var_a74a9efb6f5625bd = veh_spawner.var_a74a9efb6f5625bd;
@@ -78,7 +78,7 @@ function function_ec7209ab67c18011(veh_spawner, ai_spawners, patrol_start, var_a
   veh_spawner.var_b4f37280e21bb388 = 1;
   boat function_8cc8823e44e405c2(ai_spawners, var_aca8515371f9cc5e);
   boat function_e0f6bd3e9722d395(var_4572269ac9c3d9a4, var_8dea32f301dcccc2);
-  boat function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(boat.patrol_speed));
+  boat setconfigvalue("p2p", "manualSpeed", mph_to_ips(boat.patrol_speed));
   boat function_2b986086827eceac();
 }
 
@@ -136,23 +136,23 @@ function function_2cc3ca6a47e4797e() {
     self addcomponent("path");
   }
 
-  self function_77320e794d35465a("p2p", "brakeAtGoal", 0);
-  self function_77320e794d35465a("p2p", "automaticFast", 1);
-  self function_77320e794d35465a("p2p", "brakeOnGoalGasbrake", 1);
-  self function_77320e794d35465a("p2p", "goalPoint", self.origin);
-  self function_77320e794d35465a("p2p", "goalThreshold", 100);
-  self function_77320e794d35465a("p2p", "throttleSpeedClose", 1);
-  self function_77320e794d35465a("p2p", "throttleSpeedThreshold", 1);
-  self function_77320e794d35465a("p2p", "automaticFastTopspeedFraction", 1);
-  self function_77320e794d35465a("p2p", "throttleSpeedFarBelow", 10);
-  self function_77320e794d35465a("p2p", "throttleSpeedFarAbove", 1);
-  self function_77320e794d35465a("p2p", "throttleSpeedClose", 1);
-  self function_77320e794d35465a("p2p", "gasToStopMovement", 1);
-  self function_77320e794d35465a("p2p", "steeringMultiplier", 0.5);
-  self function_77320e794d35465a("p2p", "reverseGasNormal", 0.1);
-  self function_77320e794d35465a("path", "radiusToStep", 300);
-  self function_77320e794d35465a("path", "stepSpeedFactor", 2);
-  self function_77320e794d35465a("path", "yawHelper", 0);
+  self setconfigvalue("p2p", "brakeAtGoal", 0);
+  self setconfigvalue("p2p", "automaticFast", 1);
+  self setconfigvalue("p2p", "brakeOnGoalGasbrake", 1);
+  self setconfigvalue("p2p", "goalPoint", self.origin);
+  self setconfigvalue("p2p", "goalThreshold", 100);
+  self setconfigvalue("p2p", "throttleSpeedClose", 1);
+  self setconfigvalue("p2p", "throttleSpeedThreshold", 1);
+  self setconfigvalue("p2p", "automaticFastTopspeedFraction", 1);
+  self setconfigvalue("p2p", "throttleSpeedFarBelow", 10);
+  self setconfigvalue("p2p", "throttleSpeedFarAbove", 1);
+  self setconfigvalue("p2p", "throttleSpeedClose", 1);
+  self setconfigvalue("p2p", "gasToStopMovement", 1);
+  self setconfigvalue("p2p", "steeringMultiplier", 0.5);
+  self setconfigvalue("p2p", "reverseGasNormal", 0.1);
+  self setconfigvalue("path", "radiusToStep", 300);
+  self setconfigvalue("path", "stepSpeedFactor", 2);
+  self setconfigvalue("path", "yawHelper", 0);
   self.dontunloadonend = 1;
   self.donotunloadondriverdeath = 1;
   self.dontunloadondeath = 1;
@@ -203,16 +203,16 @@ function function_8cc8823e44e405c2(ai_spawners, var_aca8515371f9cc5e) {
 
 function function_88172ff6785f9adb() {
   self endon("death");
-  var_d7d725e032facbe5 = 0;
+  wasincombat = 0;
 
   while(true) {
-    isincombat = self.var_fe5ebefa740c7106 == 3;
+    isincombat = self.stealth_bsmstate == 3;
 
-    if(isincombat && !var_d7d725e032facbe5) {
+    if(isincombat && !wasincombat) {
       scripts\common\ai::gun_recall();
     }
 
-    var_d7d725e032facbe5 = isincombat;
+    wasincombat = isincombat;
     waitframe();
   }
 }
@@ -271,17 +271,17 @@ function function_2b986086827eceac() {
 }
 
 function function_4679fedb96354bdc() {
-  if(!isDefined(self.var_6bc03688e829aec1) && !isDefined(self.var_bf7bf8c7f826a84e)) {
+  if(!isDefined(self.patrol_start_node) && !isDefined(self.var_bf7bf8c7f826a84e)) {
     return;
   }
 
-  self function_77320e794d35465a("p2p", "goalPoint", self.var_6bc03688e829aec1.origin);
-  duration = namespace_9246f10206f50768::get_duration_between_points(self.origin, self.var_6bc03688e829aec1.origin, mph_to_ips(10));
+  self setconfigvalue("p2p", "goalPoint", self.patrol_start_node.origin);
+  duration = namespace_9246f10206f50768::get_duration_between_points(self.origin, self.patrol_start_node.origin, mph_to_ips(10));
   waittill_any_timeout_1(duration, "near_goal");
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
-  self function_77320e794d35465a("p2p", "goalPoint", self.var_6bc03688e829aec1.origin);
-  self function_77320e794d35465a("path", "radiantId", self.var_bf7bf8c7f826a84e);
-  self function_77320e794d35465a("path", "radiusToStep", 275);
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
+  self setconfigvalue("p2p", "goalPoint", self.patrol_start_node.origin);
+  self setconfigvalue("path", "radiantId", self.var_bf7bf8c7f826a84e);
+  self setconfigvalue("path", "radiusToStep", 275);
 }
 
 function function_1980ef7169b522f0() {
@@ -331,8 +331,8 @@ function boat_watchforboatlosagainsttheplayer() {
           }
 
           self notify("boat_p2pNodeMovementThread");
-          self function_77320e794d35465a("p2p", "pause", 1);
-          self function_77320e794d35465a("path", "pause", 1);
+          self setconfigvalue("p2p", "pause", 1);
+          self setconfigvalue("path", "pause", 1);
           thread boat_watchforlostsightofplayer();
           function_a227131b4c519fc6();
 
@@ -430,12 +430,12 @@ function boat_watchforallpassengerdeath() {
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_setteam(self, "neutral");
   self notify("path_updated");
   self notify("newpath");
-  self function_77320e794d35465a("p2p", "brakeAtGoal", 1);
+  self setconfigvalue("p2p", "brakeAtGoal", 1);
   self stoppath();
   self vehicle_cleardrivingstate();
-  self function_77320e794d35465a("p2p", "goalPoint", self.origin + anglesToForward(self.angles) * 500);
+  self setconfigvalue("p2p", "goalPoint", self.origin + anglesToForward(self.angles) * 500);
   self vehicle_turnengineoff();
-  self function_77320e794d35465a("p2p", "pause", 1);
+  self setconfigvalue("p2p", "pause", 1);
   thread namespace_ba155a12c323dc5a::function_4a037e62a51e9372();
 }
 
@@ -445,7 +445,7 @@ function function_d481de7db8db9597(enemy) {
   }
 
   canshootandsee = undefined;
-  shotrecently = enemy._blackboard.var_60dcaa3d3be97ab > gettime() - 1500;
+  shotrecently = enemy._blackboard.shootparams_lastshoottime > gettime() - 1500;
 
   if(shotrecently) {
     canseetarget = enemy scripts\anim\utility_common::canseeenemy(0);
@@ -465,7 +465,7 @@ function function_d481de7db8db9597(enemy) {
     canshootandsee = canseetarget && enemy canshootenemy(0);
   }
 
-  if(isDefined(enemy.var_a709fbd9fea148f6) && enemy scripts\asm\asm::asm_currentstatehasflag(enemy.var_a709fbd9fea148f6, "aim") && canshootandsee) {
+  if(isDefined(enemy.asmtrackasm) && enemy scripts\asm\asm::asm_currentstatehasflag(enemy.asmtrackasm, "aim") && canshootandsee) {
     if(getdvarint(@ "hash_323c5dc40c71123b")) {
       enemy thread function_e31e954e5ae9ad1d("<dev string:xed>", (0, 0, 70), 0.8, (1, 0, 0));
     }
@@ -546,8 +546,8 @@ function function_a227131b4c519fc6(var_c941e222ce71fcec) {
   }
 
   function_da0f909e75429e74();
-  self function_77320e794d35465a("p2p", "pause", 1);
-  self function_77320e794d35465a("path", "pause", 1);
+  self setconfigvalue("p2p", "pause", 1);
+  self setconfigvalue("path", "pause", 1);
 
   while(self vehicle_getspeed() != 0) {
     waitframe();
@@ -581,7 +581,7 @@ function function_77b376403b188dcf(var_4117f5e06f35e9fb) {
               continue;
             }
 
-            self.driver.var_fe5ebefa740c7106 = 3;
+            self.driver.stealth_bsmstate = 3;
           }
         }
       }
@@ -690,7 +690,7 @@ function function_e870a3cd2688d180() {
   }
 
   childthread function_38ae9bf031879aa3(closest_point);
-  self function_77320e794d35465a("p2p", "goalPoint", closest_point.origin);
+  self setconfigvalue("p2p", "goalPoint", closest_point.origin);
   duration = namespace_9246f10206f50768::get_duration_between_points(self.origin, closest_point.origin, mph_to_ips(self.patrol_speed));
   waittill_any_timeout_1(duration, "near_goal");
 }
@@ -714,7 +714,7 @@ function function_13a0b18a212ac196() {
   }
 
   if(function_e447eac8f4eb6b8()) {
-    self.driver.var_fe5ebefa740c7106 = 2;
+    self.driver.stealth_bsmstate = 2;
 
     if(isDefined(level.player)) {
       self.driver setthreatsight(level.player, 0);
@@ -802,7 +802,7 @@ function function_fc360dcb38689a0f(last_position) {
     assertmsg("Dungeon Boat - Some how couldn't find a start node; Info: " + self.var_5defc868d3cf1117 + ", self.node_grid_starts.size: " + self.var_7695abc527a21c02.size);
   }
 
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
   function_2cc3ca6a47e4797e();
   thread boat_gotosearchpathp2p(startnode);
 }
@@ -820,12 +820,12 @@ function boat_gotosearchpathp2p(startnode) {
   self.var_c4ebc27445338878 = [];
   self.var_c4ebc27445338878 = array_add(self.var_c4ebc27445338878, startnode);
   nextnode = function_f0144da019d3204e(self.currentnode.target);
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
 
   while(true) {
     waitframe();
     function_23bfa180991fa189();
-    self function_77320e794d35465a("p2p", "goalPoint", nextnode.origin);
+    self setconfigvalue("p2p", "goalPoint", nextnode.origin);
     duration = namespace_9246f10206f50768::get_duration_between_points(self.origin, nextnode.origin, mph_to_ips(self.patrol_speed));
     waittill_any_timeout_1(duration, "near_goal");
 
@@ -890,9 +890,9 @@ function boat_playerproximitywatcher() {
 
 function function_4675d9e479f8f8d9(enemy) {
   directiontoenemy = vectorNormalize(enemy.origin - self.origin);
-  var_8e68e964194ca81c = anglesToForward(self.angles);
+  enemyforward = anglesToForward(self.angles);
   var_67970c5e958526c6 = anglestoleft(self.angles);
-  var_2b313da38fff8013 = vectordot(var_8e68e964194ca81c, directiontoenemy);
+  var_2b313da38fff8013 = vectordot(enemyforward, directiontoenemy);
   leftdot = vectordot(var_67970c5e958526c6, directiontoenemy);
   direction = "front";
 
@@ -968,7 +968,7 @@ function function_270763f0236fea20(startnode, var_bee4565a93db8564) {
   self.node_grid = self.var_9b068f7f14971da.node_grid;
   self.var_7695abc527a21c02 = self.var_9b068f7f14971da.var_7695abc527a21c02;
   move_speed = ter_op(istrue(var_bee4565a93db8564), mph_to_ips(self.combat_speed), mph_to_ips(self.patrol_speed));
-  self function_77320e794d35465a("p2p", "manualSpeed", move_speed);
+  self setconfigvalue("p2p", "manualSpeed", move_speed);
 
   if(istrue(var_bee4565a93db8564)) {
     function_d9e3bc55827b77e6(1, startnode, move_speed);
@@ -1032,7 +1032,7 @@ function function_d9e3bc55827b77e6(var_bee4565a93db8564, startnode, move_speed) 
 
   self.currentnode = startnode;
   self.attachedpath = startnode;
-  self function_77320e794d35465a("p2p", "manualSpeed", move_speed);
+  self setconfigvalue("p2p", "manualSpeed", move_speed);
 
   for(i = 0; i < full_path.size; i++) {
     if(distancesquared(full_path[i].origin, self.origin) < squared(64)) {
@@ -1043,7 +1043,7 @@ function function_d9e3bc55827b77e6(var_bee4565a93db8564, startnode, move_speed) 
       sphere(full_path[i].origin, 50, (1, 0, 0), 0, 333);
     }
 
-    self function_77320e794d35465a("p2p", "goalPoint", full_path[i].origin);
+    self setconfigvalue("p2p", "goalPoint", full_path[i].origin);
     duration = boat_duration[i];
 
     if(getdvarint(@ "hash_323c5dc40c71123b")) {
@@ -1099,7 +1099,7 @@ function function_8675ad097bb3809d(startnode) {
   function_2cc3ca6a47e4797e();
   self.node_grid = self.var_9b068f7f14971da.node_grid;
   self.var_7695abc527a21c02 = self.var_9b068f7f14971da.var_7695abc527a21c02;
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(self.combat_speed));
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(self.combat_speed));
   function_23bfa180991fa189();
   start_pos = getclosest(self.origin, self.node_grid).origin;
   end_pos = getclosest(startnode, self.node_grid).origin;
@@ -1138,14 +1138,14 @@ function function_8675ad097bb3809d(startnode) {
 
   self.currentnode = startnode;
   self.attachedpath = startnode;
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(self.combat_speed));
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(self.combat_speed));
 
   for(i = 0; i < full_path.size; i++) {
     if(distancesquared(full_path[i].origin, self.origin) < squared(64)) {
       continue;
     }
 
-    self function_77320e794d35465a("p2p", "goalPoint", full_path[i].origin);
+    self setconfigvalue("p2p", "goalPoint", full_path[i].origin);
     duration = boat_duration[i];
     waittill_any_timeout_1(duration, "near_goal");
 
@@ -1179,7 +1179,7 @@ function function_38ae9bf031879aa3(startnode) {
   function_2cc3ca6a47e4797e();
   self.node_grid = self.var_9b068f7f14971da.node_grid;
   self.var_7695abc527a21c02 = self.var_9b068f7f14971da.var_7695abc527a21c02;
-  self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
+  self setconfigvalue("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
 
   while(true) {
     start_pos = self.origin;
@@ -1220,14 +1220,14 @@ function function_38ae9bf031879aa3(startnode) {
 
     self.currentnode = startnode;
     self.attachedpath = startnode;
-    self function_77320e794d35465a("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
+    self setconfigvalue("p2p", "manualSpeed", mph_to_ips(self.patrol_speed));
 
     for(i = 0; i < full_path.size; i++) {
       if(distancesquared(full_path[i].origin, self.origin) < squared(64)) {
         continue;
       }
 
-      self function_77320e794d35465a("p2p", "goalPoint", full_path[i].origin);
+      self setconfigvalue("p2p", "goalPoint", full_path[i].origin);
       duration = boat_duration[i];
       waittill_any_timeout_1(duration, "near_goal");
 

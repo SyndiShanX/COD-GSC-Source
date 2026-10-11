@@ -231,7 +231,7 @@ function private on_ai_killed(params) {
     player = player.owner;
   }
 
-  if(isDefined(self) && isDefined(self.var_aaf0465944b061ed) && self.var_aaf0465944b061ed == "warlord_kia" && !isPlayer(player)) {
+  if(isDefined(self) && isDefined(self.kiastring) && self.kiastring == "warlord_kia" && !isPlayer(player)) {
     player = namespace_64135de19550f047::function_3bd4148272ae66ee(params);
   }
 
@@ -304,11 +304,11 @@ function private function_cd2135758f3d9f79(var_45191fa57864b212, var_f9da27eee32
     throttle::function_f632348cbb773537(level.var_9e70fbe6be476d54, self);
 
     if(var_f9da27eee32186cd) {
-      var_27bcd76455d26c2b = self getplayerdata(level.var_5d69837cf4db0407, var_45191fa57864b212);
-      var_29afdcc23a1e855f = var_27bcd76455d26c2b + n_increment;
-      self setplayerdata(level.var_5d69837cf4db0407, var_45191fa57864b212, var_29afdcc23a1e855f);
-      self function_6a369480dbaf1090(var_45191fa57864b212, var_29afdcc23a1e855f);
-      var_5724a7d91348b937 = "==OB UpdateAchievementProgress " + var_45191fa57864b212 + ": " + var_29afdcc23a1e855f + " of " + n_required + " Required, by " + self.name;
+      var_27bcd76455d26c2b = self getplayerdata(level.progressiongroup, var_45191fa57864b212);
+      n_current_count = var_27bcd76455d26c2b + n_increment;
+      self setplayerdata(level.progressiongroup, var_45191fa57864b212, n_current_count);
+      self function_6a369480dbaf1090(var_45191fa57864b212, n_current_count);
+      var_5724a7d91348b937 = "==OB UpdateAchievementProgress " + var_45191fa57864b212 + ": " + n_current_count + " of " + n_required + " Required, by " + self.name;
       logstring(var_5724a7d91348b937);
     } else {
       self giveachievement(var_45191fa57864b212);

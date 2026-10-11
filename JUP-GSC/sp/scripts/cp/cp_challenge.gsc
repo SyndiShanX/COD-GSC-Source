@@ -219,7 +219,7 @@ function onplayerkilled(inflictor, attacker, damage, damageflags, meansofdeath, 
     }
 
     isground = 0;
-    var_ae8eb6d66c120397 = 0;
+    isaerial = 0;
     issupport = 0;
     var_b93834c5c289dcdc = 0;
 
@@ -245,13 +245,13 @@ function onplayerkilled(inflictor, attacker, damage, damageflags, meansofdeath, 
         case #"hash_8c766d6477287bb6":
         case #"hash_b4ac3581c343a029":
         case #"hash_e6bea339d3cbd3e8":
-          var_ae8eb6d66c120397 = 1;
+          isaerial = 1;
           break;
         case #"hash_27002778019fb447":
         case #"hash_634b246c3da5c56f":
         case #"hash_e171e5b86ef0a4cc":
         case #"hash_f64c697bfb4c6b54":
-          var_ae8eb6d66c120397 = 1;
+          isaerial = 1;
           issupport = 1;
           break;
         case #"hash_2289ec11d77bce8f":
@@ -264,7 +264,7 @@ function onplayerkilled(inflictor, attacker, damage, damageflags, meansofdeath, 
         enemytype |= 8;
       }
 
-      if(var_ae8eb6d66c120397) {
+      if(isaerial) {
         enemytype |= 4;
       }
 
@@ -756,7 +756,7 @@ function killstreakkilled(killstreakname, owner, streakent, attacker, damage, da
     }
 
     isground = 0;
-    var_ae8eb6d66c120397 = 0;
+    isaerial = 0;
     issupport = 0;
     var_b93834c5c289dcdc = 0;
 
@@ -782,13 +782,13 @@ function killstreakkilled(killstreakname, owner, streakent, attacker, damage, da
         case #"hash_8c766d6477287bb6":
         case #"hash_b4ac3581c343a029":
         case #"hash_e6bea339d3cbd3e8":
-          var_ae8eb6d66c120397 = 1;
+          isaerial = 1;
           break;
         case #"hash_27002778019fb447":
         case #"hash_634b246c3da5c56f":
         case #"hash_e171e5b86ef0a4cc":
         case #"hash_f64c697bfb4c6b54":
-          var_ae8eb6d66c120397 = 1;
+          isaerial = 1;
           issupport = 1;
           break;
         case #"hash_2289ec11d77bce8f":
@@ -801,7 +801,7 @@ function killstreakkilled(killstreakname, owner, streakent, attacker, damage, da
         enemytype |= 8;
       }
 
-      if(var_ae8eb6d66c120397) {
+      if(isaerial) {
         enemytype |= 4;
       }
 
@@ -950,7 +950,7 @@ function equipmentdestroyed(inflictor, attacker, damage, damageflags, meansofdea
     }
 
     isground = 0;
-    var_ae8eb6d66c120397 = 0;
+    isaerial = 0;
     issupport = 0;
     var_b93834c5c289dcdc = 0;
 
@@ -976,13 +976,13 @@ function equipmentdestroyed(inflictor, attacker, damage, damageflags, meansofdea
         case #"hash_8c766d6477287bb6":
         case #"hash_b4ac3581c343a029":
         case #"hash_e6bea339d3cbd3e8":
-          var_ae8eb6d66c120397 = 1;
+          isaerial = 1;
           break;
         case #"hash_27002778019fb447":
         case #"hash_634b246c3da5c56f":
         case #"hash_e171e5b86ef0a4cc":
         case #"hash_f64c697bfb4c6b54":
-          var_ae8eb6d66c120397 = 1;
+          isaerial = 1;
           issupport = 1;
           break;
         case #"hash_2289ec11d77bce8f":
@@ -995,7 +995,7 @@ function equipmentdestroyed(inflictor, attacker, damage, damageflags, meansofdea
         enemytype |= 8;
       }
 
-      if(var_ae8eb6d66c120397) {
+      if(isaerial) {
         enemytype |= 4;
       }
 
@@ -1122,7 +1122,7 @@ function vehiclekilled(vehicle, attacker, damage, objweapon) {
   }
 
   isground = 0;
-  var_ae8eb6d66c120397 = 0;
+  isaerial = 0;
   issupport = 0;
   var_b93834c5c289dcdc = 0;
 
@@ -1148,13 +1148,13 @@ function vehiclekilled(vehicle, attacker, damage, objweapon) {
       case #"hash_8c766d6477287bb6":
       case #"hash_b4ac3581c343a029":
       case #"hash_e6bea339d3cbd3e8":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         break;
       case #"hash_27002778019fb447":
       case #"hash_634b246c3da5c56f":
       case #"hash_e171e5b86ef0a4cc":
       case #"hash_f64c697bfb4c6b54":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         issupport = 1;
         break;
       case #"hash_2289ec11d77bce8f":
@@ -1167,7 +1167,7 @@ function vehiclekilled(vehicle, attacker, damage, objweapon) {
       enemytype |= 8;
     }
 
-    if(var_ae8eb6d66c120397) {
+    if(isaerial) {
       enemytype |= 4;
     }
 
@@ -1312,7 +1312,7 @@ function onplayerkillednew(inflictor, attacker, damage, damageflags, meansofdeat
     }
 
     isground = 0;
-    var_ae8eb6d66c120397 = 0;
+    isaerial = 0;
     issupport = 0;
     var_b93834c5c289dcdc = 0;
 
@@ -1338,13 +1338,13 @@ function onplayerkillednew(inflictor, attacker, damage, damageflags, meansofdeat
         case #"hash_8c766d6477287bb6":
         case #"hash_b4ac3581c343a029":
         case #"hash_e6bea339d3cbd3e8":
-          var_ae8eb6d66c120397 = 1;
+          isaerial = 1;
           break;
         case #"hash_27002778019fb447":
         case #"hash_634b246c3da5c56f":
         case #"hash_e171e5b86ef0a4cc":
         case #"hash_f64c697bfb4c6b54":
-          var_ae8eb6d66c120397 = 1;
+          isaerial = 1;
           issupport = 1;
           break;
         case #"hash_2289ec11d77bce8f":
@@ -1357,7 +1357,7 @@ function onplayerkillednew(inflictor, attacker, damage, damageflags, meansofdeat
         enemytype |= 8;
       }
 
-      if(var_ae8eb6d66c120397) {
+      if(isaerial) {
         enemytype |= 4;
       }
 

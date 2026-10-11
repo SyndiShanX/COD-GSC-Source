@@ -43,9 +43,9 @@ function function_f13d5e60313341a2(notification, value) {
   }
 }
 
-function function_83d789bbe0f2a395(var_6f8af5eb76deac21) {
-  assertex(isDefined(var_6f8af5eb76deac21), "<dev string:x1c>");
-  return int(floor(var_6f8af5eb76deac21.var_6128c35fcd588a91 / 2)) + 1;
+function function_83d789bbe0f2a395(relevantinfostruct) {
+  assertex(isDefined(relevantinfostruct), "<dev string:x1c>");
+  return int(floor(relevantinfostruct.votingpoolsize / 2)) + 1;
 }
 
 function function_eb603ecd0264ebff(var_119d717380769cab) {
@@ -53,7 +53,7 @@ function function_eb603ecd0264ebff(var_119d717380769cab) {
   activityinstance = var_119d717380769cab.activityinstance;
 
   if(votename == "ActivityVoteName_SquadAbandonVote") {
-    activitycategory = namespace_68dc261109a9503f::function_511be8bcaede8b52(activityinstance);
+    activitycategory = namespace_68dc261109a9503f::getactivitycategory(activityinstance);
 
     if(activitycategory == "Contract") {
       function_cfe3ee6afa35b1ed(var_119d717380769cab);
@@ -71,7 +71,7 @@ function function_67cfb9f49c173a55(var_e3debb20afae825d) {
   votename = var_e3debb20afae825d.votename;
   activityinstance = var_e3debb20afae825d.activityinstance;
   println("<dev string:x100>" + votename);
-  activitycategory = namespace_68dc261109a9503f::function_511be8bcaede8b52(activityinstance);
+  activitycategory = namespace_68dc261109a9503f::getactivitycategory(activityinstance);
 
   if(votename == "ActivityVoteName_SquadAbandonVote") {
     if(activitycategory == "Contract") {
@@ -89,7 +89,7 @@ function function_67cfb9f49c173a55(var_e3debb20afae825d) {
 function function_fc0c08e86e69f523(var_ddfe971f6eba42f7) {
   votename = var_ddfe971f6eba42f7.votename;
   activityinstance = var_ddfe971f6eba42f7.activityinstance;
-  activitycategory = namespace_68dc261109a9503f::function_511be8bcaede8b52(activityinstance);
+  activitycategory = namespace_68dc261109a9503f::getactivitycategory(activityinstance);
 
   if(votename == "ActivityVoteName_SquadAbandonVote") {
     if(activitycategory == "Contract") {
@@ -107,7 +107,7 @@ function function_fc0c08e86e69f523(var_ddfe971f6eba42f7) {
 function function_a04e24f1e02f64a3(var_d07fa562a0968e77) {
   votename = var_d07fa562a0968e77.votename;
   activityinstance = var_d07fa562a0968e77.activityinstance;
-  activitycategory = namespace_68dc261109a9503f::function_511be8bcaede8b52(activityinstance);
+  activitycategory = namespace_68dc261109a9503f::getactivitycategory(activityinstance);
 
   if(votename == "ActivityVoteName_SquadAbandonVote") {
     if(activitycategory == "Contract") {
@@ -123,8 +123,8 @@ function function_a04e24f1e02f64a3(var_d07fa562a0968e77) {
 }
 
 function function_cfe3ee6afa35b1ed(var_119d717380769cab) {
-  var_a106a7879b77cf82 = var_119d717380769cab.votes;
-  squadmates = var_119d717380769cab.var_9cc718b114d4f1f;
+  squadvotes = var_119d717380769cab.votes;
+  squadmates = var_119d717380769cab.voterpool;
   var_606f34fc1ead5c7a = var_119d717380769cab.var_606f34fc1ead5c7a;
   activityinstance = var_119d717380769cab.activityinstance;
 
@@ -133,15 +133,15 @@ function function_cfe3ee6afa35b1ed(var_119d717380769cab) {
   }
 
   var_ebbf760b3a1c31c8 = function_6cd86b4ad51f706f(squadmates);
-  var_981d063c4d4f4efd = array_difference(var_ebbf760b3a1c31c8, var_a106a7879b77cf82);
+  var_981d063c4d4f4efd = array_difference(var_ebbf760b3a1c31c8, squadvotes);
   var_be9b3cf0ecae71c3 = function_5a840337aed72780(activityinstance, squadmates.size);
   function_bc0f3d487294cad5(var_981d063c4d4f4efd, activityinstance);
-  function_c31a48687806ff04(var_ebbf760b3a1c31c8, activityinstance, var_a106a7879b77cf82.size, var_be9b3cf0ecae71c3);
-  function_b80a437fe56905e(var_ebbf760b3a1c31c8, var_a106a7879b77cf82, var_be9b3cf0ecae71c3);
+  function_c31a48687806ff04(var_ebbf760b3a1c31c8, activityinstance, squadvotes.size, var_be9b3cf0ecae71c3);
+  function_b80a437fe56905e(var_ebbf760b3a1c31c8, squadvotes, var_be9b3cf0ecae71c3);
 }
 
 function function_35b527a921bdf073(var_e3debb20afae825d) {
-  squadmates = var_e3debb20afae825d.var_9cc718b114d4f1f;
+  squadmates = var_e3debb20afae825d.voterpool;
   voteresult = var_e3debb20afae825d.voteresult;
   var_ebbf760b3a1c31c8 = function_6cd86b4ad51f706f(squadmates);
   function_dfbfdbfaf2d22009(var_ebbf760b3a1c31c8);
@@ -156,10 +156,10 @@ function function_35b527a921bdf073(var_e3debb20afae825d) {
 }
 
 function function_eb665b5004d1fee1(var_ddfe971f6eba42f7) {
-  var_a106a7879b77cf82 = var_ddfe971f6eba42f7.votes;
-  squadmates = var_ddfe971f6eba42f7.var_9cc718b114d4f1f;
+  squadvotes = var_ddfe971f6eba42f7.votes;
+  squadmates = var_ddfe971f6eba42f7.voterpool;
   var_221836e6a7cb1ba2 = var_ddfe971f6eba42f7.var_221836e6a7cb1ba2;
-  var_f1a1a53b821f7add = array_remove(var_a106a7879b77cf82, var_221836e6a7cb1ba2);
+  var_f1a1a53b821f7add = array_remove(squadvotes, var_221836e6a7cb1ba2);
   var_8dd686fbe6c35ee8 = array_remove(squadmates, var_221836e6a7cb1ba2);
   var_21a979337d190aff = function_6cd86b4ad51f706f(var_8dd686fbe6c35ee8);
   var_be9b3cf0ecae71c3 = function_5a840337aed72780(var_ddfe971f6eba42f7.activityinstance, var_8dd686fbe6c35ee8.size);
@@ -167,13 +167,13 @@ function function_eb665b5004d1fee1(var_ddfe971f6eba42f7) {
 }
 
 function function_ac52181dfb097d61(var_d07fa562a0968e77) {
-  var_a106a7879b77cf82 = var_d07fa562a0968e77.votes;
-  squadmates = var_d07fa562a0968e77.var_9cc718b114d4f1f;
+  squadvotes = var_d07fa562a0968e77.votes;
+  squadmates = var_d07fa562a0968e77.voterpool;
   var_335006ae8b51467a = var_d07fa562a0968e77.var_335006ae8b51467a;
   var_5016114507a764ee = function_6d6af8144a5131f1(squadmates, var_335006ae8b51467a);
   var_e012c70db5c8944b = function_6cd86b4ad51f706f(var_5016114507a764ee);
   var_be9b3cf0ecae71c3 = function_5a840337aed72780(var_d07fa562a0968e77.activityinstance, var_5016114507a764ee.size);
-  function_b80a437fe56905e(var_e012c70db5c8944b, var_a106a7879b77cf82, var_be9b3cf0ecae71c3);
+  function_b80a437fe56905e(var_e012c70db5c8944b, squadvotes, var_be9b3cf0ecae71c3);
 }
 
 function function_c31a48687806ff04(players, activityinstance, votecount, var_3cfd3771899bec37) {
@@ -214,14 +214,14 @@ function private function_c6c8135d5098c8bd(player) {
   function_c9afc8e2fd64917(focusedactivity, player);
 }
 
-function private function_74463513226ae6d8(var_6f8af5eb76deac21) {
-  foreach(player in var_6f8af5eb76deac21.playerlist) {
+function private function_74463513226ae6d8(relevantinfostruct) {
+  foreach(player in relevantinfostruct.playerlist) {
     function_c9afc8e2fd64917(self, player);
   }
 }
 
-function private function_364921384956c883(var_6f8af5eb76deac21) {
-  foreach(player in var_6f8af5eb76deac21.playerlist) {
+function private function_364921384956c883(relevantinfostruct) {
+  foreach(player in relevantinfostruct.playerlist) {
     function_df7f1a29325af528(self, player);
   }
 }
@@ -232,7 +232,7 @@ function private function_9e5dd3840e95f4a3(activityinstance, var_6c8dd7ef593a9ec
     return;
   }
 
-  activityinstance data_tracker::function_b584ae8dddb33821(var_6c8dd7ef593a9ecc, dataint);
+  activityinstance data_tracker::adddataint(var_6c8dd7ef593a9ecc, dataint);
 }
 
 function private function_6cd86b4ad51f706f(squadmates) {

@@ -113,7 +113,7 @@ function givedefaultloadout(var_86db2022c4f0f4bf, var_185ea69b2fe37360, var_7cb3
       var_e89fd4c2e2e797b9 = "vestlight";
     }
 
-    player setclothtype(function_1823ff50bb28148d(var_e89fd4c2e2e797b9));
+    player setclothtype(getxhash(var_e89fd4c2e2e797b9));
   }
 
   if(istestclient(player)) {
@@ -665,7 +665,7 @@ function initoperatorcustomization() {
 
   level.operatorcustomization = [];
   setDvar(@ "hash_2b669ad6c3e1d864", 1);
-  operatorrefs = scripts\cp_mp\operator::function_462ac94dd54da47d();
+  operatorrefs = scripts\cp_mp\operator::getoperatorrefs();
 
   foreach(operatorref in operatorrefs) {
     superfaction = scripts\cp_mp\operator::getoperatorsuperfaction(operatorref);
@@ -1099,9 +1099,9 @@ function getplayerspeedbyweapon(player) {
     if(issuperweapon(weapon)) {
       weaponspeed = level.superweapons[getcompleteweaponname(weapon)].movespeed;
     } else {
-      var_a6852f8e66761e58 = weaponinventorytype(weapon);
+      weaponinvtype = weaponinventorytype(weapon);
 
-      if(var_a6852f8e66761e58 != "primary" && var_a6852f8e66761e58 != "altmode") {
+      if(weaponinvtype != "primary" && weaponinvtype != "altmode") {
         if(isDefined(self.saved_lastweapon)) {
           weapon = self.saved_lastweapon;
         } else {
@@ -1166,7 +1166,7 @@ function clampweaponspeed(value) {
 }
 
 function getweaponheaviestvalue() {
-  var_8a6f4e6a2246d381 = 1000;
+  heaviestweaponvalue = 1000;
   self.weaponlist = self getweaponslistprimaries();
 
   if(self.weaponlist.size) {
@@ -1177,12 +1177,12 @@ function getweaponheaviestvalue() {
         continue;
       }
 
-      if(weaponweight < var_8a6f4e6a2246d381) {
-        var_8a6f4e6a2246d381 = weaponweight;
+      if(weaponweight < heaviestweaponvalue) {
+        heaviestweaponvalue = weaponweight;
       }
     }
 
-    if(var_8a6f4e6a2246d381 == 1000) {
+    if(heaviestweaponvalue == 1000) {
       assertmsg("<dev string:x1c>");
 
       foreach(weapon in self.weaponlist) {
@@ -1191,11 +1191,11 @@ function getweaponheaviestvalue() {
     }
 
   } else {
-    var_8a6f4e6a2246d381 = 8;
+    heaviestweaponvalue = 8;
   }
 
-  var_8a6f4e6a2246d381 = clampweaponweightvalue(var_8a6f4e6a2246d381);
-  return var_8a6f4e6a2246d381;
+  heaviestweaponvalue = clampweaponweightvalue(heaviestweaponvalue);
+  return heaviestweaponvalue;
 }
 
 function getweaponweight(weapon) {

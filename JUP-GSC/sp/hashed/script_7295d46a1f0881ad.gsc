@@ -68,7 +68,7 @@ function function_783509975b12f6d5() {
 function function_ae5aac89cb5073ea() {
   level.player clearadditionalstreampos();
   hint_position = (7882, -18861, -1);
-  level.player function_670863fc4008c3d8(hint_position);
+  level.player setadditionalstreamposuntilcleared(hint_position);
   wait 10;
   level.player clearadditionalstreampos();
 }
@@ -167,7 +167,7 @@ function function_85944f527a37d31() {
   level utility::flag_wait("flag_forest_walk_heli_approaching");
   s_heli_aim_at_start = getStruct("s_heli_aim_at_start", "targetname");
   s_heli_aim_at_end = getStruct("s_heli_aim_at_end", "targetname");
-  var_5cd6b2c7ce5b397b = scripts\sp\utility::function_e24293736e639dcf("axis", s_heli_aim_at_start.origin, (0, 0, 0));
+  var_5cd6b2c7ce5b397b = scripts\sp\utility::createaiment("axis", s_heli_aim_at_start.origin, (0, 0, 0));
   var_5cd6b2c7ce5b397b notsolid();
   var_5cd6b2c7ce5b397b moveTo(s_heli_aim_at_end.origin, 5, 2, 2);
   level utility::flag_wait("flag_forest_walk_heli_passed");
@@ -678,7 +678,7 @@ function function_978b9838e46a676a(a_ai_enemies) {
   level endon("flag_forest_patrol_combat");
   self endon("flag_forest_patrol_enemy_passed");
   level endon("flag_forest_sniper_complete");
-  var_1e4c41a5dcdf5b1e = squared(512);
+  n_near_dist_sq = squared(512);
   self waittill("death");
   event = spawnStruct();
   event.type = "investigate";
@@ -713,7 +713,7 @@ function function_978b9838e46a676a(a_ai_enemies) {
     if(isDefined(a_ai_enemies[i]) && isalive(a_ai_enemies[i])) {
       n_dist_sq = distance2dsquared(a_ai_enemies[i].origin, event.origin);
 
-      if(n_dist_sq < var_1e4c41a5dcdf5b1e) {
+      if(n_dist_sq < n_near_dist_sq) {
         if(a_ai_enemies[i] ent_flag("flag_forest_patrol_enemy_passed")) {
           a_ai_enemies[i] ent_flag_set("flag_forest_patrol_enemy_force_alert");
         } else {
@@ -832,30 +832,30 @@ function function_78e3814fa6a8d154(a_ai_enemies, var_7537a1c8763c74ab, var_ef2ce
   level utility::flag_set(var_ef2ce443bff9166c);
 }
 
-function function_ed997e7ce2ee5fa7(var_94d08343de33ee25, str_flag) {
+function function_ed997e7ce2ee5fa7(a_ai_array, str_flag) {
   level endon("flag_forest_sniper_complete");
   level endon("flag_forest_patrol_combat");
   level endon("flag_forest_patrol_enemies_passed");
-  var_94d08343de33ee25 = utility::array_removedead_or_dying(var_94d08343de33ee25);
+  a_ai_array = utility::array_removedead_or_dying(a_ai_array);
 
-  if(var_94d08343de33ee25.size == 0) {
+  if(a_ai_array.size == 0) {
     return;
   }
 
-  foreach(ai in var_94d08343de33ee25) {
+  foreach(ai in a_ai_array) {
     if(ai ent_flag(str_flag)) {
-      var_94d08343de33ee25 = utility::array_remove(var_94d08343de33ee25, ai);
+      a_ai_array = utility::array_remove(a_ai_array, ai);
     }
   }
 
-  if(var_94d08343de33ee25.size == 0) {
+  if(a_ai_array.size == 0) {
     return;
   }
 
   countstruct = spawnStruct();
   countstruct.n_count = 0;
-  var_c3c0a870325fe9dd = var_94d08343de33ee25.size;
-  array_thread(var_94d08343de33ee25, &function_6ce5770876ed78f6, countstruct, str_flag);
+  var_c3c0a870325fe9dd = a_ai_array.size;
+  array_thread(a_ai_array, &function_6ce5770876ed78f6, countstruct, str_flag);
 
   while(true) {
     if(countstruct.n_count >= var_c3c0a870325fe9dd) {
@@ -883,7 +883,7 @@ function function_5812af1fe9fc448f() {
   level endon("flag_forest_patrol_combat");
   level endon("flag_forest_sniper_complete");
   ai_ally = undefined;
-  var_1e4c41a5dcdf5b1e = squared(192);
+  n_near_dist_sq = squared(192);
 
   while(true) {
     ai_ally = utility::getclosest(self.origin, level.tundra_allies, 320);
@@ -894,7 +894,7 @@ function function_5812af1fe9fc448f() {
       var_409dd0e83c88da2b = ai_ally utility::ent_flag("flag_forest_patrol_ally_crossing_left");
       var_6a7f0e8ae27c7d67 = istrue(ent_flag_exist("flag_forest_patrol_enemy_passed") && ent_flag("flag_forest_patrol_enemy_passed"));
 
-      if(n_dist_sq < var_1e4c41a5dcdf5b1e) {
+      if(n_dist_sq < n_near_dist_sq) {
         if(istrue(var_6a7f0e8ae27c7d67)) {
           namespace_8339f6377b6ba60e::function_2f27432f2f94a830([self], ai_ally.origin);
           wait randomfloatrange(4, 6);
@@ -1035,7 +1035,7 @@ function function_ea79d7ed7869b0e() {
 
   foreach(ally in level.tundra_allies) {
     ally namespace_8339f6377b6ba60e::function_c9317b6d58796509(1, "cqb");
-    ally.var_51642e27c7e7d224 = 0;
+    ally.disablesuppressingfire = 0;
   }
 
   level utility::flag_wait("flag_forest_sniper_complete");
@@ -1104,7 +1104,7 @@ function function_80e5e897d6704fa9() {
         break;
     }
 
-    ally.var_51642e27c7e7d224 = 1;
+    ally.disablesuppressingfire = 1;
   }
 
   namespace_8339f6377b6ba60e::function_c43c63bffb8327b2();
@@ -1463,21 +1463,21 @@ function function_54d6d4bc4e15ef0c() {
       continue;
     }
 
-    var_fb3cefb948f2d980 = array_removedead_or_dying(level.var_2f9f697bc727f253);
-    var_fb3cefb948f2d980 = sortbydistance(var_fb3cefb948f2d980, level.player.origin);
-    var_fb3cefb948f2d980 = array_reverse(var_fb3cefb948f2d980);
+    a_ai_snipers = array_removedead_or_dying(level.var_2f9f697bc727f253);
+    a_ai_snipers = sortbydistance(a_ai_snipers, level.player.origin);
+    a_ai_snipers = array_reverse(a_ai_snipers);
     targeting_sniper = undefined;
 
-    for(i = 0; i < var_fb3cefb948f2d980.size; i++) {
-      var_865048328835e385 = within_fov(level.player getEye(), level.player getplayerangles(), var_fb3cefb948f2d980[i] getEye(), cos(45));
+    for(i = 0; i < a_ai_snipers.size; i++) {
+      var_865048328835e385 = within_fov(level.player getEye(), level.player getplayerangles(), a_ai_snipers[i] getEye(), cos(45));
       var_f19384f5166912ab = 0;
 
-      if(isDefined(var_fb3cefb948f2d980[i].var_fa8c6ee684b9e0ff)) {
-        var_f19384f5166912ab = function_c89ed1840c8d0f0f(gettime() - var_fb3cefb948f2d980[i].var_fa8c6ee684b9e0ff) < var_b8967a4e53f38b20;
+      if(isDefined(a_ai_snipers[i].var_fa8c6ee684b9e0ff)) {
+        var_f19384f5166912ab = function_c89ed1840c8d0f0f(gettime() - a_ai_snipers[i].var_fa8c6ee684b9e0ff) < var_b8967a4e53f38b20;
       }
 
       if(!istrue(var_865048328835e385) && !istrue(var_f19384f5166912ab)) {
-        targeting_sniper = var_fb3cefb948f2d980[i];
+        targeting_sniper = a_ai_snipers[i];
         break;
       }
     }
@@ -1543,7 +1543,7 @@ function function_7859d4bc99bbd134() {
     level utility::flag_wait_any_timeout(30, "flag_forest_field_shack_transport_destroyed", "flag_forest_field_05");
   }
 
-  var_fb3cefb948f2d980 = level.var_2f9f697bc727f253;
+  a_ai_snipers = level.var_2f9f697bc727f253;
   a_ai_allies = [level.soap, level.gaz];
   var_257420aff01d4700 = 2560;
   var_e8f248df0cdc6a4e = 45;
@@ -1553,9 +1553,9 @@ function function_7859d4bc99bbd134() {
   var_731f86ed8b389da5 = squared(384);
 
   while(true) {
-    var_fb3cefb948f2d980 = array_removedead_or_dying(var_fb3cefb948f2d980);
+    a_ai_snipers = array_removedead_or_dying(a_ai_snipers);
 
-    if(var_fb3cefb948f2d980.size == 0) {
+    if(a_ai_snipers.size == 0) {
       return;
     }
 
@@ -1571,19 +1571,19 @@ function function_7859d4bc99bbd134() {
         continue;
       }
 
-      var_fb3cefb948f2d980 = sortbydistancecullbyradius(var_fb3cefb948f2d980, ai_ally.origin, var_257420aff01d4700);
+      a_ai_snipers = sortbydistancecullbyradius(a_ai_snipers, ai_ally.origin, var_257420aff01d4700);
 
-      if(var_fb3cefb948f2d980.size == 0) {
+      if(a_ai_snipers.size == 0) {
         continue;
-      } else if(var_fb3cefb948f2d980.size > 1) {
-        var_fb3cefb948f2d980 = array_sort_with_func(var_fb3cefb948f2d980, &function_6f9550218f9e01b0);
+      } else if(a_ai_snipers.size > 1) {
+        a_ai_snipers = array_sort_with_func(a_ai_snipers, &function_6f9550218f9e01b0);
       }
 
-      if(distance2dsquared(level.player.origin, var_fb3cefb948f2d980[0].origin) < var_731f86ed8b389da5) {
+      if(distance2dsquared(level.player.origin, a_ai_snipers[0].origin) < var_731f86ed8b389da5) {
         continue;
       }
 
-      ai_target = var_fb3cefb948f2d980[0];
+      ai_target = a_ai_snipers[0];
       var_26d94b37e19113b9 = ai_ally;
       break;
     }
@@ -1701,11 +1701,11 @@ function function_e952252229c7c33b() {
     wait 1;
   }
 
-  var_fb3cefb948f2d980 = utility::array_removedead_or_dying(level.var_2f9f697bc727f253);
+  a_ai_snipers = utility::array_removedead_or_dying(level.var_2f9f697bc727f253);
 
-  if(var_fb3cefb948f2d980.size > 0) {
-    var_fb3cefb948f2d980 = sortbydistance(var_fb3cefb948f2d980, level.player.origin);
-    var_42370bdc56e6fef0 = var_fb3cefb948f2d980[0] getEye() + (0, 0, 256);
+  if(a_ai_snipers.size > 0) {
+    a_ai_snipers = sortbydistance(a_ai_snipers, level.player.origin);
+    var_42370bdc56e6fef0 = a_ai_snipers[0] getEye() + (0, 0, 256);
     level utility::flag_set("flag_forest_field_shack_enemies_grenade_transport", var_42370bdc56e6fef0);
   }
 }
@@ -2071,19 +2071,19 @@ function function_b7425eb6761956a1() {
 }
 
 function function_d048cb3d1c89ce27() {
-  var_fb3cefb948f2d980 = array_removedead_or_dying(level.var_2f9f697bc727f253);
+  a_ai_snipers = array_removedead_or_dying(level.var_2f9f697bc727f253);
 
-  if(var_fb3cefb948f2d980.size == 0) {
+  if(a_ai_snipers.size == 0) {
     return true;
   }
 
-  ai_sniper = utility::getclosest(level.player.origin, var_fb3cefb948f2d980, 384);
+  ai_sniper = utility::getclosest(level.player.origin, a_ai_snipers, 384);
 
   if(isDefined(ai_sniper)) {
     return false;
   }
 
-  foreach(ai_sniper in var_fb3cefb948f2d980) {
+  foreach(ai_sniper in a_ai_snipers) {
     if(ai_sniper utility::ent_flag_exist("flag_sniper_grenade_fire") && ai_sniper utility::ent_flag("flag_sniper_grenade_fire")) {
       return false;
     }
@@ -2112,7 +2112,7 @@ function function_df82d24badfb5bb3(b_sniper) {
 
   b_sniper = default_to(b_sniper, 0);
   level utility::flag_wait("flag_forest_field_shack_enemies_destroy_transport");
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
 
   if(isDefined(id)) {
     self leaveinteraction();
@@ -2159,13 +2159,13 @@ function function_3e2975cd27d9313() {
   }
 
   ai_ally = undefined;
-  var_1e4c41a5dcdf5b1e = squared(256);
+  n_near_dist_sq = squared(256);
 
   while(true) {
     ai_ally = utility::getclosest(self.origin, level.tundra_allies, 512);
 
     if(isDefined(ai_ally)) {
-      if(distance2dsquared(self.origin, ai_ally.origin) < var_1e4c41a5dcdf5b1e || self cansee(ai_ally)) {
+      if(distance2dsquared(self.origin, ai_ally.origin) < n_near_dist_sq || self cansee(ai_ally)) {
         level utility::flag_set("flag_forest_field_shack_enemies_combat");
       }
     }
@@ -2199,7 +2199,7 @@ function function_2f57e8bce902b12d(a_ai_enemies) {
     ai_enemy = a_ai_enemies[i];
 
     if(isDefined(ai_enemy) && isalive(ai_enemy)) {
-      id = ai_enemy function_92435c7a6ae85c3c();
+      id = ai_enemy getinteractionid();
 
       if(isDefined(id)) {
         ai_enemy leaveinteraction();
@@ -2460,9 +2460,9 @@ function function_ce94f0b91016c999() {
       break;
   }
 
-  level utility::function_665d474ff040b446(var_14f77b4a43805365);
+  level utility::flag_wait_any_array(var_14f77b4a43805365);
   namespace_8339f6377b6ba60e::function_6123dca297db2375("med", "decrease");
-  level utility::function_665d474ff040b446(var_90d906bd78716998);
+  level utility::flag_wait_any_array(var_90d906bd78716998);
   namespace_8339f6377b6ba60e::function_6123dca297db2375("hard", "decrease");
 }
 
@@ -2534,19 +2534,19 @@ function function_bfd8c2fa66c2e3fc() {
   level utility::flag_wait("flag_forest_field_shack_enemies_combat");
 
   while(true) {
-    var_fb3cefb948f2d980 = utility::array_removedead_or_dying(level.var_2f9f697bc727f253);
+    a_ai_snipers = utility::array_removedead_or_dying(level.var_2f9f697bc727f253);
     var_1ad4e7ee7a7063bf = [];
 
-    if(var_fb3cefb948f2d980.size == 0) {
+    if(a_ai_snipers.size == 0) {
       return;
-    } else if(var_fb3cefb948f2d980.size == 1) {
-      var_fb3cefb948f2d980[0] getenemyinfo(level.player);
+    } else if(a_ai_snipers.size == 1) {
+      a_ai_snipers[0] getenemyinfo(level.player);
       return;
     }
 
     var_d9045fe8464a2ce6 = 0;
 
-    foreach(ai_sniper in var_fb3cefb948f2d980) {
+    foreach(ai_sniper in a_ai_snipers) {
       if(isDefined(ai_sniper) && isalive(ai_sniper)) {
         if(isDefined(ai_sniper.enemy) && isPlayer(ai_sniper.enemy)) {
           var_d9045fe8464a2ce6++;
@@ -2632,7 +2632,7 @@ function function_32a4aea6d981aa6e(sniper_left, sniper_right) {
 
 function function_5a6ddd6265d935cf(var_7c572f708cdf5ef5) {
   self endon("death");
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
 
   if(isDefined(id)) {
     self leaveinteraction();

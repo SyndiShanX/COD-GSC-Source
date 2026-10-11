@@ -666,7 +666,7 @@ function createstructs(fe, us, cf) {
   fe[[f]](s, us, cf, (6300.76, 48193.6, 1028), (0, 0, 0), "cspf_0_auto6581342520576504727", "cspf_0_auto16012634282653631203");
   s = s();
   s.cs_flag = "sp_jup_milbase_create_script";
-  s.var_1e33f32152f60866 = "veh_jup_mil_cargo_truck";
+  s.script_vehicleref = "veh_jup_mil_cargo_truck";
   fe[[f]](s, us, cf, (7429, 46246.8, 1084), (0, 220.15, 0), "truck_patrol", "cspf_0_auto11385322069253517725");
   s = s();
   s.cs_flag = "sp_jup_milbase_create_script";
@@ -904,7 +904,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "sp_jup_milbase_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv_mg";
+  s.script_vehicleref = "veh_jup_jltv_mg";
   fe[[f]](s, us, cf, (1293, 44207.2, 1491.94), (0, 136.34, 0), "jltvmg_patrol2", "cspf_0_auto15583979218070162531");
   s = s();
   s.cs_flag = "sp_jup_milbase_create_script";
@@ -959,7 +959,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "sp_jup_milbase_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv";
+  s.script_vehicleref = "veh_jup_jltv";
   fe[[f]](s, us, cf, (6009, 46267.8, 1092.25), (359.9, 132.98, 8), "ParkedVehicle");
   s = s();
   s.cs_flag = "sp_jup_milbase_create_script";
@@ -1216,7 +1216,7 @@ function createstructs(fe, us, cf) {
   s = s();
   s.cs_flag = "sp_jup_milbase_create_script";
   s.compositemodel = "1";
-  s.var_1e33f32152f60866 = "veh_jup_jltv_mg";
+  s.script_vehicleref = "veh_jup_jltv_mg";
   fe[[f]](s, us, cf, (802.75, 44686.2, 1499.94), (0, 129.77, 0), "jltvmg_patrol", "cspf_0_auto9736805266065445808");
   s = s();
   s.cs_flag = "sp_jup_milbase_create_script";

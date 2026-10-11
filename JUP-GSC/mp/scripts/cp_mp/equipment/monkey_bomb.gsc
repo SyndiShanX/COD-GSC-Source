@@ -118,7 +118,7 @@ function private function_1d982537b9dcb924(player) {
   }
 
   if(issharedfuncdefined("game", "isCommonItemEnabled")) {
-    if(!function_f3bb4f4911a1beb2("game", "isCommonItemEnabled")) {
+    if(!callsharedfunc("game", "isCommonItemEnabled")) {
       return false;
     }
 
@@ -183,7 +183,7 @@ function grenade_stolen_by_sam(grenade, e_actor) {
   if(isDefined(level.var_38f3f357808bd969) && isDefined(grenade.equipmentref) && isDefined(grenade.owner)) {
     grenade.owner[[level.var_38f3f357808bd969]](grenade.equipmentref, "secondary");
   } else if(function_1d982537b9dcb924(grenade.owner)) {
-    itembundlename = function_f3bb4f4911a1beb2("game", "getItemBundleNameFromRef", grenade.equipmentref);
+    itembundlename = callsharedfunc("game", "getItemBundleNameFromRef", grenade.equipmentref);
 
     if(!isDefined(itembundlename)) {
       return;
@@ -193,7 +193,7 @@ function grenade_stolen_by_sam(grenade, e_actor) {
     fakeitem = spawnStruct();
     fakeitem.count = 1;
     fakeitem.type = itembundle.scriptable;
-    grenade.owner function_f3bb4f4911a1beb2("game", "obtainItemEquip", fakeitem, 0);
+    grenade.owner callsharedfunc("game", "obtainItemEquip", fakeitem, 0);
   }
 
   if(isDefined(e_actor)) {

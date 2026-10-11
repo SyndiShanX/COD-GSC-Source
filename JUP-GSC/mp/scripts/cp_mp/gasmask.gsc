@@ -10,24 +10,24 @@
 #namespace gasmask;
 
 function init(gasmaskhealth, gasmasktype, gasmaskmaxhealth) {
-  var_e7cdf2f6d8feb3 = 2;
+  gasmaskid = 2;
 
   if(isDefined(gasmasktype)) {
     if(gasmasktype == "brloot_equip_gasmask_scuba") {
-      var_e7cdf2f6d8feb3 = 4;
+      gasmaskid = 4;
       self.usingscubagasmask = 1;
 
       if(self isswimunderwater()) {
-        function_f3bb4f4911a1beb2("scubaGasMask", "updateScubaGasmask", self, 1);
+        callsharedfunc("scubaGasMask", "updateScubaGasmask", self, 1);
       }
     } else {
       if(istrue(self.usingscubagasmask)) {
         self.usingscubagasmask = undefined;
-        function_f3bb4f4911a1beb2("scubaGasMask", "updateScubaGasmask", self, 0);
+        callsharedfunc("scubaGasMask", "updateScubaGasmask", self, 0);
       }
 
       if(gasmasktype == "brloot_equip_gasmask_durable" || gasmasktype == "gas_mask_durable") {
-        var_e7cdf2f6d8feb3 = 3;
+        gasmaskid = 3;
       }
     }
   } else {
@@ -37,8 +37,8 @@ function init(gasmaskhealth, gasmasktype, gasmaskmaxhealth) {
   isbr = issharedfuncdefined("game", "isBRStyleGameType") && [[getsharedfunc("game", "isBRStyleGameType")]]();
 
   if(!isDefined(level.gasmask_resist)) {
-    if(isDefined(level.gametypebundle.var_1609c0ff0b876e9f)) {
-      level.gasmask_resist = level.gametypebundle.var_1609c0ff0b876e9f;
+    if(isDefined(level.gametypebundle.gasmaskresistance)) {
+      level.gasmask_resist = level.gametypebundle.gasmaskresistance;
     } else if(isbr) {
       level.gasmask_resist = getdvarfloat(@ "hash_3ddd1d0a30b7b07c", 0);
     } else {
@@ -53,7 +53,7 @@ function init(gasmaskhealth, gasmasktype, gasmaskmaxhealth) {
   self.headgeartype = "gas_mask";
 
   if(istrue(self.usingscubagasmask)) {
-    thread function_f3bb4f4911a1beb2("scubaGasMask", "monitorScubaGasMaskDamage");
+    thread callsharedfunc("scubaGasMask", "monitorScubaGasMaskDamage");
   }
 
   if(isDefined(gasmaskhealth)) {
@@ -65,7 +65,7 @@ function init(gasmaskhealth, gasmasktype, gasmaskmaxhealth) {
   }
 
   level.gasmaskmaxhealth = maxhealth;
-  self setclientomnvar("ui_head_equip_class", var_e7cdf2f6d8feb3);
+  self setclientomnvar("ui_head_equip_class", gasmaskid);
   self setclientomnvar("ui_gasmask_damage", self.gasmaskhealth / maxhealth);
 }
 
@@ -88,18 +88,18 @@ function function_c9d4cf3c20195afa(mask) {
   }
 }
 
-function getmaxhealth(var_1680a35fe50dc05e) {
+function getmaxhealth(gasmaskscriptablename) {
   maxhealth = undefined;
   isbr = issharedfuncdefined("game", "isBRStyleGameType") && [[getsharedfunc("game", "isBRStyleGameType")]]();
 
-  if(isDefined(var_1680a35fe50dc05e)) {
+  if(isDefined(gasmaskscriptablename)) {
     if(isbr) {
-      var_d7254484f0bd62f = level.br_pickups.counts[var_1680a35fe50dc05e];
+      loottablehealthoverride = level.br_pickups.counts[gasmaskscriptablename];
 
-      if(isDefined(var_d7254484f0bd62f)) {
-        maxhealth = var_d7254484f0bd62f;
+      if(isDefined(loottablehealthoverride)) {
+        maxhealth = loottablehealthoverride;
       } else {
-        switch (var_1680a35fe50dc05e) {
+        switch (gasmaskscriptablename) {
           case #"hash_d01e387e6d238502":
             maxhealth = 200;
             break;
@@ -108,7 +108,7 @@ function getmaxhealth(var_1680a35fe50dc05e) {
         }
       }
     } else {
-      switch (var_1680a35fe50dc05e) {
+      switch (gasmaskscriptablename) {
         case #"hash_d01e387e6d238502":
           maxhealth = 200;
           break;
@@ -130,22 +130,22 @@ function getmaxhealth(var_1680a35fe50dc05e) {
 }
 
 function getscriptablename(var_d5f96a53f7f4002e) {
-  var_1680a35fe50dc05e = undefined;
+  gasmaskscriptablename = undefined;
 
   switch (var_d5f96a53f7f4002e) {
     case #"hash_2d1a1b811aed6b26":
     case #"hash_4808e1f340e11163":
     case #"hash_dcf82d1f65a6b16e":
-      var_1680a35fe50dc05e = "brloot_equip_gasmask";
+      gasmaskscriptablename = "brloot_equip_gasmask";
       break;
     case #"hash_d01e387e6d238502":
-      var_1680a35fe50dc05e = "brloot_equip_gasmask_durable";
+      gasmaskscriptablename = "brloot_equip_gasmask_durable";
       break;
     default:
       break;
   }
 
-  return var_1680a35fe50dc05e;
+  return gasmaskscriptablename;
 }
 
 function processdamage(damage) {
@@ -163,51 +163,51 @@ function processdamage(damage) {
   self.gasmaskhealth = int(max(0, self.gasmaskhealth));
 
   if(isbr) {
-    var_b8b6fa3d6f2f0b8c = (self.gasmaskhealth + 1) / self.gasmaskmaxhealth;
+    gasmaskhealthpercentage = (self.gasmaskhealth + 1) / self.gasmaskmaxhealth;
   } else {
-    var_b8b6fa3d6f2f0b8c = self.gasmaskhealth / self.gasmaskmaxhealth;
+    gasmaskhealthpercentage = self.gasmaskhealth / self.gasmaskmaxhealth;
   }
 
-  var_b8b6fa3d6f2f0b8c = clamp(var_b8b6fa3d6f2f0b8c, 0, 1);
-  self setclientomnvar("ui_gasmask_damage", var_b8b6fa3d6f2f0b8c);
+  gasmaskhealthpercentage = clamp(gasmaskhealthpercentage, 0, 1);
+  self setclientomnvar("ui_gasmask_damage", gasmaskhealthpercentage);
 
   if(istrue(self.var_ca27f3fd3dad0c1f)) {
     self setclientomnvar("loot_container_quantity_0", self.gasmaskhealth);
   }
 
   if(istrue(level.gametypebundle.var_c837fd49542eec31)) {
-    if(self.gasmaskhealth <= self.gasmaskmaxhealth * level.gametypebundle.var_664628601763fe81 && self.gasmaskhealth + damage >= self.gasmaskmaxhealth * level.gametypebundle.var_664628601763fe81) {
+    if(self.gasmaskhealth <= self.gasmaskmaxhealth * level.gametypebundle.gasmaskcrackthresholdone && self.gasmaskhealth + damage >= self.gasmaskmaxhealth * level.gametypebundle.gasmaskcrackthresholdone) {
       setbrokenoverlaymaterial("gasmask_overlay_delta2_crack_stage1");
-    } else if(self.gasmaskhealth <= self.gasmaskmaxhealth * level.gametypebundle.var_459c1608ab5e08b && self.gasmaskhealth + damage >= self.gasmaskmaxhealth * level.gametypebundle.var_459c1608ab5e08b) {
+    } else if(self.gasmaskhealth <= self.gasmaskmaxhealth * level.gametypebundle.gasmaskcrackthresholdtwo && self.gasmaskhealth + damage >= self.gasmaskmaxhealth * level.gametypebundle.gasmaskcrackthresholdtwo) {
       setbrokenoverlaymaterial("gasmask_overlay_delta2_crack_stage2");
     }
   }
 
   if(self.gasmaskhealth <= 0) {
     if(isDefined(level.headgeardata) && isDefined(level.headgeardata.gear["gas_mask"])) {
-      utility::function_f3bb4f4911a1beb2("headgear", "breakHeadGear", "gas_mask");
+      utility::callsharedfunc("headgear", "breakHeadGear", "gas_mask");
     } else if(isbr && issharedfuncdefined("gasmask", "breakGasMaskBR")) {
       self[[getsharedfunc("gasmask", "breakGasMaskBR")]]();
-    } else if(isDefined(level.var_f929c426097f1647)) {
-      self[[level.var_f929c426097f1647]]();
+    } else if(isDefined(level.gasmaskbreakfunc)) {
+      self[[level.gasmaskbreakfunc]]();
     } else {
       breakgasmask();
     }
 
     if(istrue(self.var_ca27f3fd3dad0c1f)) {
-      utility::function_f3bb4f4911a1beb2("headgear", "resetGasMaskRemovalDelay");
+      utility::callsharedfunc("headgear", "resetGasMaskRemovalDelay");
 
       if(isDefined(self.var_2fa5b49969def47) && self.var_2fa5b49969def47.contents.size > 0) {
         self.var_2fa5b49969def47.contents[0]["quantity"] = 0;
       }
 
-      utility::function_f3bb4f4911a1beb2("game", "closeLootableContainer", self.var_2fa5b49969def47, self);
+      utility::callsharedfunc("game", "closeLootableContainer", self.var_2fa5b49969def47, self);
     }
   } else if(isbr) {
-    var_d89463b5f4f6be0c = floor(var_c8898166ad0dccc9 * 6 + 0.5);
-    var_14642d90cc419ff7 = floor(var_b8b6fa3d6f2f0b8c * 6 + 0.5);
+    oldpips = floor(var_c8898166ad0dccc9 * 6 + 0.5);
+    newpips = floor(gasmaskhealthpercentage * 6 + 0.5);
 
-    if(var_d89463b5f4f6be0c > var_14642d90cc419ff7) {
+    if(oldpips > newpips) {
       self playsoundtoplayer("br_gas_mask_crack_plr", self);
     }
   }
@@ -226,7 +226,7 @@ function processdamage(damage) {
   }
 }
 
-function function_4262ecea32819701(damage) {
+function aiprocessdamage(damage) {
   self.gasmaskhealth -= damage;
   self.gasmaskhealth = max(0, self.gasmaskhealth);
 
@@ -252,9 +252,9 @@ function didgasmaskpipschange(oldhealth, newhealth) {
 
   oldhealthpercentage = oldhealth / self.gasmaskmaxhealth;
   newhealthpercentage = newhealth / self.gasmaskmaxhealth;
-  var_d89463b5f4f6be0c = floor(oldhealthpercentage * 6 + 0.5);
-  var_14642d90cc419ff7 = floor(newhealthpercentage * 6 + 0.5);
-  return var_d89463b5f4f6be0c != var_14642d90cc419ff7;
+  oldpips = floor(oldhealthpercentage * 6 + 0.5);
+  newpips = floor(newhealthpercentage * 6 + 0.5);
+  return oldpips != newpips;
 }
 
 function equipgasmask() {
@@ -399,9 +399,9 @@ function createoverlay(fadeintime, delaytime) {
   }
 
   if(istrue(level.gametypebundle.var_c837fd49542eec31)) {
-    if(self.gasmaskhealth <= self.gasmaskmaxhealth * level.gametypebundle.var_459c1608ab5e08b) {
+    if(self.gasmaskhealth <= self.gasmaskmaxhealth * level.gametypebundle.gasmaskcrackthresholdtwo) {
       setbrokenoverlaymaterial("gasmask_overlay_delta2_crack_stage2");
-    } else if(self.gasmaskhealth <= self.gasmaskmaxhealth * level.gametypebundle.var_664628601763fe81) {
+    } else if(self.gasmaskhealth <= self.gasmaskmaxhealth * level.gametypebundle.gasmaskcrackthresholdone) {
       setbrokenoverlaymaterial("gasmask_overlay_delta2_crack_stage1");
     }
   }
@@ -458,7 +458,7 @@ function hasgasmask(player) {
   return isDefined(player.gasmaskhealth);
 }
 
-function function_260708c89a11f0c3(player) {
+function isgasmaskequipped(player) {
   return istrue(player.gasmaskequipped);
 }
 
@@ -474,7 +474,7 @@ function function_385d397d3fab6715(player) {
   return undefined;
 }
 
-function function_2bcab76045fdd1fa(player) {
+function getgasmaskhealth(player) {
   if(function_27e68abe09612a13(player)) {
     return player.gasmaskhealth;
   }
@@ -490,17 +490,17 @@ function function_d036366985435d3(player, pickupent) {
   return pickupent.count > self.gasmaskhealth;
 }
 
-function function_58687e8e71126788() {
+function cleanupgasmask() {
   self.gasmaskmaxhealth = undefined;
   self.gasmaskhealth = undefined;
-  self.var_fe63300b318b76b0 = undefined;
+  self.gasmaskrequests = undefined;
   self setclientomnvar("ui_gas_mask", 0);
   self setclientomnvar("ui_head_equip_class", 0);
   self setclientomnvar("ui_gasmask_damage", 0);
 }
 
 function private function_5cca4d88774d105c() {
-  if(self isthrowinggrenade() || self ismeleeing() || self isdiving() || self function_9cc921a57ff4deb5() || self isonladder() || self[[scripts\engine\utility::getsharedfunc("player", "isPlayerADS")]]()) {
+  if(self isthrowinggrenade() || self ismeleeing() || self isdiving() || self isonascender() || self isonladder() || self[[scripts\engine\utility::getsharedfunc("player", "isPlayerADS")]]()) {
     return false;
   }
 
@@ -516,11 +516,11 @@ function private function_68d0674be04effcf() {
     return false;
   }
 
-  if(!utility::function_f3bb4f4911a1beb2("player", "isAliveAndNotInLastStand", self)) {
+  if(!utility::callsharedfunc("player", "isAliveAndNotInLastStand", self)) {
     return false;
   }
 
-  if(!utility::function_f3bb4f4911a1beb2("game", "isBackpackInventoryEnabled")) {
+  if(!utility::callsharedfunc("game", "isBackpackInventoryEnabled")) {
     return false;
   }
 
@@ -528,7 +528,7 @@ function private function_68d0674be04effcf() {
     return false;
   }
 
-  if(utility::function_f3bb4f4911a1beb2("game", "isContainerOpen", self)) {
+  if(utility::callsharedfunc("game", "isContainerOpen", self)) {
     return false;
   }
 
@@ -544,17 +544,17 @@ function private function_68d0674be04effcf() {
 }
 
 function private function_960e55afc8644ee5() {
-  backpacksize = utility::function_f3bb4f4911a1beb2("game", "getPlayerBackpackSize", self);
+  backpacksize = utility::callsharedfunc("game", "getPlayerBackpackSize", self);
   var_f4d1d255166d0b8a = 0;
   var_a58c1fca5d8a5b2 = undefined;
 
   for(index = 0; index < backpacksize; index++) {
-    lootid = utility::function_f3bb4f4911a1beb2("game", "getLootIDAtBackpackIndex", index);
+    lootid = utility::callsharedfunc("game", "getLootIDAtBackpackIndex", index);
 
     if(lootid != 0) {
       scriptablename = scripts\cp_mp\utility\loot::getscriptablefromlootid(lootid);
 
-      if(utility::function_f3bb4f4911a1beb2("game", "isGasMask", scriptablename) && !issubstr(scriptablename, "scuba")) {
+      if(utility::callsharedfunc("game", "isGasMask", scriptablename) && !issubstr(scriptablename, "scuba")) {
         var_f4d1d255166d0b8a = 1;
         var_a58c1fca5d8a5b2 = index;
 
@@ -566,7 +566,7 @@ function private function_960e55afc8644ee5() {
   }
 
   if(var_f4d1d255166d0b8a) {
-    thread utility::function_f3bb4f4911a1beb2("game", "equipBackpackItem", var_a58c1fca5d8a5b2);
+    thread utility::callsharedfunc("game", "equipBackpackItem", var_a58c1fca5d8a5b2);
     self.var_f7ff6a8d6c6a2804 = gettime() + 1660;
     return true;
   }
@@ -575,15 +575,15 @@ function private function_960e55afc8644ee5() {
 }
 
 function private function_d143d66d458e4cab() {
-  lootid = self.gasmasktype == "brloot_equip_gasmask_durable" ? utility::function_f3bb4f4911a1beb2("game", "getGasMaskLootID", "brloot_equip_gasmask_durable") : utility::function_f3bb4f4911a1beb2("game", "getGasMaskLootID", "brloot_equip_gasmask");
+  lootid = self.gasmasktype == "brloot_equip_gasmask_durable" ? utility::callsharedfunc("game", "getGasMaskLootID", "brloot_equip_gasmask_durable") : utility::callsharedfunc("game", "getGasMaskLootID", "brloot_equip_gasmask");
   quantity = int(self.gasmaskhealth);
 
-  if(utility::function_f3bb4f4911a1beb2("game", "getBagTypeForPlayer", self) != "bgfull") {
+  if(utility::callsharedfunc("game", "getBagTypeForPlayer", self) != "bgfull") {
     if(function_27e68abe09612a13(self)) {
-      utility::function_f3bb4f4911a1beb2("game", "lootItem", lootid, quantity, undefined, 1, 1, 1);
+      utility::callsharedfunc("game", "lootItem", lootid, quantity, undefined, 1, 1, 1);
     }
 
-    thread utility::function_f3bb4f4911a1beb2("game", "quickDropGasMaskItem", self, 1);
+    thread utility::callsharedfunc("game", "quickDropGasMaskItem", self, 1);
     self.var_f7ff6a8d6c6a2804 = gettime() + 1660;
     return true;
   }

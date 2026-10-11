@@ -14,9 +14,9 @@ function evaluatesyncedmeleebyxanim(meleexanim, var_63cac41d4942d388) {
   target = self.meleetarget;
   targetangles = target.angles;
   metotarget = target.origin - self.origin;
-  var_51da48562495c03a = vectortoyaw(metotarget);
+  metotargetyaw = vectortoyaw(metotarget);
   var_5e7f52c1693e8f30 = 30;
-  yawdelta = angleclamp180(var_51da48562495c03a - self.angles[1]);
+  yawdelta = angleclamp180(metotargetyaw - self.angles[1]);
 
   if(abs(yawdelta) > var_5e7f52c1693e8f30) {
     return false;
@@ -30,9 +30,9 @@ function evaluatesyncedmeleebyxanim(meleexanim, var_63cac41d4942d388) {
     startpos = getstartorigin(target.origin, targetangles, meleexanim);
   }
 
-  var_6786a467900943c4 = self.origin - startpos;
+  startpostome = self.origin - startpos;
   var_e0e7d3c1e330d5d4 = vectorNormalize(target.origin - startpos);
-  dot = vectordot(var_e0e7d3c1e330d5d4, var_6786a467900943c4);
+  dot = vectordot(var_e0e7d3c1e330d5d4, startpostome);
 
   if(dot > 12 || dot < -12) {
     return false;
@@ -53,14 +53,14 @@ function evaluatesyncedmeleebyxanim(meleexanim, var_63cac41d4942d388) {
 function function_732d599999bac851(meleexanim, zombiemeleexanim) {
   soldieranimlength = getanimlength(meleexanim);
   zombieanimlength = getanimlength(zombiemeleexanim);
-  var_eaa98b7065ecbf95 = getnotetracktimes(zombiemeleexanim, "sync");
-  var_a535f2be6d0c1a53 = var_eaa98b7065ecbf95[0] * zombieanimlength / soldieranimlength;
+  zombiesynctime = getnotetracktimes(zombiemeleexanim, "sync");
+  fracsynctime = zombiesynctime[0] * zombieanimlength / soldieranimlength;
   soldiermovedelta = getmovedelta(meleexanim);
-  var_31e9b15b38d2a9ed = self localtoworldcoords(soldiermovedelta);
-  var_5a674586a93c8a08 = scripts\common\anim::function_d2e8597ff01310ed(meleexanim, "tag_sync", 0, self.origin, self.angles);
-  var_8fcc6747b3d1ffc3 = scripts\common\anim::function_d2e8597ff01310ed(meleexanim, "tag_sync", var_a535f2be6d0c1a53, self.origin, self.angles);
+  soldieranimendpos = self localtoworldcoords(soldiermovedelta);
+  zombieanimstartposang = scripts\common\anim::function_d2e8597ff01310ed(meleexanim, "tag_sync", 0, self.origin, self.angles);
+  var_8fcc6747b3d1ffc3 = scripts\common\anim::function_d2e8597ff01310ed(meleexanim, "tag_sync", fracsynctime, self.origin, self.angles);
   zombiemovedelta = getmovedelta(zombiemeleexanim);
-  endpos = coordtransform(soldiermovedelta, var_5a674586a93c8a08["origin"], var_5a674586a93c8a08["angles"]);
+  endpos = coordtransform(soldiermovedelta, zombieanimstartposang["origin"], zombieanimstartposang["angles"]);
   target = self.meleetarget;
   dist = distance(target.origin, var_8fcc6747b3d1ffc3["origin"]);
 
@@ -68,17 +68,17 @@ function function_732d599999bac851(meleexanim, zombiemeleexanim) {
     return false;
   }
 
-  if(!ispointonnavmesh(var_31e9b15b38d2a9ed) || !ispointonnavmesh(var_8fcc6747b3d1ffc3["origin"])) {
+  if(!ispointonnavmesh(soldieranimendpos) || !ispointonnavmesh(var_8fcc6747b3d1ffc3["origin"])) {
     return false;
   }
 
-  navtraceresult = navtrace(var_5a674586a93c8a08["origin"], self.origin, target, 0);
+  navtraceresult = navtrace(zombieanimstartposang["origin"], self.origin, target, 0);
 
   if(navtraceresult) {
     return false;
   }
 
-  navtraceresult = navtrace(self.origin, var_31e9b15b38d2a9ed, self, 0);
+  navtraceresult = navtrace(self.origin, soldieranimendpos, self, 0);
 
   if(navtraceresult) {
     return false;
@@ -157,14 +157,14 @@ function evaluatesyncedmelee(asmname, statename, tostatename, params) {
     meleexanim = asm_getxanim(tostatename, meleeanim);
 
     if(target.type == "zombie") {
-      var_b6ec8037545199f8 = tostatename + "_victim";
-      zombiemeleeanim = target asm_lookupanimfromalias(var_b6ec8037545199f8, aliasname);
-      zombiemeleexanim = target asm_getxanim(var_b6ec8037545199f8, zombiemeleeanim);
+      zombietostatename = tostatename + "_victim";
+      zombiemeleeanim = target asm_lookupanimfromalias(zombietostatename, aliasname);
+      zombiemeleexanim = target asm_getxanim(zombietostatename, zombiemeleeanim);
 
       if(function_732d599999bac851(meleexanim, zombiemeleexanim)) {
         self.meleeanimalias = aliasname;
         target.meleeanimalias = aliasname;
-        target.var_57ec55bda59c3915 = self;
+        target.syncedmeleepartner = self;
         return 1;
       }
 
@@ -174,7 +174,7 @@ function evaluatesyncedmelee(asmname, statename, tostatename, params) {
     if(evaluatesyncedmeleebyxanim(meleexanim, var_63cac41d4942d388)) {
       self.meleeanimalias = aliasname;
       target.meleeanimalias = aliasname;
-      target.var_57ec55bda59c3915 = self;
+      target.syncedmeleepartner = self;
       return 1;
     }
   }
@@ -213,8 +213,8 @@ function melee_calcsyncdirection() {
   assert(self.in_melee);
   target = self.meleetarget;
   assert(isDefined(target));
-  var_79b0b08b6461b1ff = self.origin - target.origin;
-  var_f38131fb9a95561a = vectortoyaw(var_79b0b08b6461b1ff);
+  targettome = self.origin - target.origin;
+  var_f38131fb9a95561a = vectortoyaw(targettome);
   anglediff = angleclamp180(var_f38131fb9a95561a - target.angles[1]);
 
   if(-45 < anglediff && anglediff < 45) {
@@ -240,7 +240,7 @@ function melee_waitfordroppedweapon(statename) {
 
 function melee_synced_setup(statename, battacker) {
   self.meleestatename = statename;
-  self.var_8da037cbe81e4f8f = 1;
+  self.bmeleeinprogress = 1;
   self.meleeweapon = self.weapon;
   self.meleeweaponslot = scripts\anim\utility::getcurrentweaponslotname();
   self.var_a54042b7b10263be = 1;
@@ -310,7 +310,7 @@ function melee_decide_winner() {
   target.var_74666f91f95a6ef8 = !self.var_74666f91f95a6ef8;
 }
 
-function function_41377dafffee3185(asmname, statename, params) {
+function melee_instantkill(asmname, statename, params) {
   self kill(self.origin + anglesToForward(self.angles));
 }
 
@@ -339,7 +339,7 @@ function playmeleeanim_synced(asmname, statename, params) {
     thread melee_waitfordroppedweapon(statename);
   }
 
-  if(isDefined(target function_92435c7a6ae85c3c())) {
+  if(isDefined(target getinteractionid())) {
     target leaveinteraction();
   }
 
@@ -391,9 +391,9 @@ function playmeleeanim_synced_cleanup(asmname, statename, params) {
   assert(self.in_melee);
 
   if(self.in_melee) {
-    if(isDefined(self.var_57ec55bda59c3915)) {
-      self.var_57ec55bda59c3915 notify("melee_exit");
-      self.var_57ec55bda59c3915 = undefined;
+    if(isDefined(self.syncedmeleepartner)) {
+      self.syncedmeleepartner notify("melee_exit");
+      self.syncedmeleepartner = undefined;
     } else if(isDefined(self.meleepartner)) {
       self.meleepartner notify("melee_exit");
     }
@@ -481,8 +481,8 @@ function waitforpartnerdelete(statename, partner) {
 function playmeleeanim_synced_waitforpartnerexit(asmname, statename) {
   self endon(statename + "_finished");
 
-  if(isDefined(self.var_57ec55bda59c3915)) {
-    childthread waitforpartnerdelete(statename, self.var_57ec55bda59c3915);
+  if(isDefined(self.syncedmeleepartner)) {
+    childthread waitforpartnerdelete(statename, self.syncedmeleepartner);
   } else {
     childthread waitforpartnerdelete(statename, self.meleepartner);
   }
@@ -504,7 +504,7 @@ function playmeleeanim_synced_waitforpartnerexit(asmname, statename) {
   if(!self.var_74666f91f95a6ef8) {
     if(self.var_d8a098b0872bb2cb) {
       if(asm_eventfired(asmname, "death_ragdoll_delayed")) {
-        function_41377dafffee3185();
+        melee_instantkill();
       } else {
         self.var_4ecd594ae357f55b = 1;
         self.var_9ea242cb88e6301e = 0;
@@ -602,8 +602,8 @@ function melee_handlenotetracks(note) {
       break;
     case #"hash_6d20b46c4370528e":
       used_prefix = 1;
-      var_31fbb83644449c1c = getsubstr(note, 3);
-      params = strtok(var_31fbb83644449c1c, ",");
+      truncatednotetrack = getsubstr(note, 3);
+      params = strtok(truncatednotetrack, ",");
 
       if(params.size >= 2) {
         function_4f145058cbb5099e(params[0], params[1]);
@@ -623,9 +623,9 @@ function melee_handlenotetracks(note) {
           if(isalive(self.meleetarget)) {
             self linktoblendtotag(self.meleetarget, "tag_sync", 1, 1);
           }
-        } else if(self.var_3a185a212fdfebca && isDefined(self.var_57ec55bda59c3915)) {
-          if(isalive(self.var_57ec55bda59c3915)) {
-            self linktoblendtotag(self.var_57ec55bda59c3915, "tag_sync", 1, 1);
+        } else if(self.var_3a185a212fdfebca && isDefined(self.syncedmeleepartner)) {
+          if(isalive(self.syncedmeleepartner)) {
+            self linktoblendtotag(self.syncedmeleepartner, "tag_sync", 1, 1);
           }
         }
       }

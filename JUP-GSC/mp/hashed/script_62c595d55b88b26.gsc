@@ -11,7 +11,7 @@
 #using scripts\mp\utility\teams;
 #namespace namespace_8c2e78a6b4c1c6fd;
 
-function function_d32f459ab9f5e7af() {
+function accolades_init() {
   setdevdvarifuninitialized(@ "hash_cf55e0f95935f5af", 1);
   setdevdvarifuninitialized(@ "hash_ad33abd04b38d2fa", "<dev string:x1c>");
   setdevdvarifuninitialized(@ "hash_ad33aad04b38d0c7", "<dev string:x1c>");
@@ -836,8 +836,8 @@ function private function_cab1aa0020df0892(ref, scorevalue, overridename, textva
 
 function private function_e1271ea633c42ecc(ref, params) {
   totalkills = scripts\mp\utility\stats::getpersstat("kills");
-  var_74ba9cc277cbe543 = scripts\mp\utility\stats::getpersstat("assists");
-  totalval = 100 - 100 * totalkills + 3 * var_74ba9cc277cbe543;
+  totalassists = scripts\mp\utility\stats::getpersstat("assists");
+  totalval = 100 - 100 * totalkills + 3 * totalassists;
   self.var_fb37db009207fe1a[ref] = totalval;
   self.var_769c9edd0782e95d[ref] = function_9bbbefe6a0debd2b(ref, totalval);
 }
@@ -1653,8 +1653,8 @@ function private function_f9cb44b2fa2cb71(ref, params) {
 function private function_176d8f69d69ec84d(ref, params) {
   var_cb865f93adb30293 = [];
   totalkills = scripts\mp\utility\stats::getpersstat("<dev string:x13b>");
-  var_74ba9cc277cbe543 = scripts\mp\utility\stats::getpersstat("<dev string:x144>");
-  totalval = 30 - 2 * totalkills + 30 - var_74ba9cc277cbe543;
+  totalassists = scripts\mp\utility\stats::getpersstat("<dev string:x144>");
+  totalval = 30 - 2 * totalkills + 30 - totalassists;
   var_cb865f93adb30293["<dev string:x112>"] = totalval;
   var_cb865f93adb30293["<dev string:x11b>"] = function_9bbbefe6a0debd2b(totalval);
   function_7a384e4d0599485c(ref, var_cb865f93adb30293);

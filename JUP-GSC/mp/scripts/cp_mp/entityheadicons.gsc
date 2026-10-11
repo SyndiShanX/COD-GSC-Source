@@ -25,7 +25,7 @@ function init() {
   level.var_b516ed3abe09ea = ["hud_icon_death_spawn", "hud_icon_head_friendly_sm", "hud_icon_head_enemy_sm", "hud_icon_new_marked"];
 }
 
-function setheadicon_singleimage(showto, image, offset, drawthroughgeo, var_c5409ca7522182b3, naturaldist, delaytime, var_fa4cf28a58192889, var_b3ea37733a1577e5, overrideorigin, showonminimap, iconsize) {
+function setheadicon_singleimage(showto, image, offset, drawthroughgeo, maxdrawdist, naturaldist, delaytime, var_fa4cf28a58192889, var_b3ea37733a1577e5, overrideorigin, showonminimap, iconsize) {
   level endon("game_ended");
 
   if(isDefined(delaytime)) {
@@ -51,11 +51,11 @@ function setheadicon_singleimage(showto, image, offset, drawthroughgeo, var_c540
 
   setheadicondrawthroughgeo(icon, drawthroughgeo);
 
-  if(!isDefined(var_c5409ca7522182b3)) {
-    var_c5409ca7522182b3 = 0;
+  if(!isDefined(maxdrawdist)) {
+    maxdrawdist = 0;
   }
 
-  setheadiconmaxdistance(icon, var_c5409ca7522182b3);
+  setheadiconmaxdistance(icon, maxdrawdist);
 
   if(!isDefined(naturaldist)) {
     naturaldist = 0;
@@ -64,14 +64,14 @@ function setheadicon_singleimage(showto, image, offset, drawthroughgeo, var_c540
   setheadiconnaturaldistance(icon, naturaldist);
 
   if(isarray(showto)) {
-    foreach(var_ebcded206506e726 in showto) {
-      if(isPlayer(var_ebcded206506e726)) {
-        addclienttoheadiconmask(icon, var_ebcded206506e726);
+    foreach(showtoent in showto) {
+      if(isPlayer(showtoent)) {
+        addclienttoheadiconmask(icon, showtoent);
         continue;
       }
 
-      if(isDefined(var_ebcded206506e726) && isteam(var_ebcded206506e726)) {
-        addteamtoheadiconmask(icon, var_ebcded206506e726);
+      if(isDefined(showtoent) && isteam(showtoent)) {
+        addteamtoheadiconmask(icon, showtoent);
       }
     }
   } else if(isPlayer(showto)) {
@@ -104,7 +104,7 @@ function setheadicon_singleimage(showto, image, offset, drawthroughgeo, var_c540
   return icon;
 }
 
-function setheadicon_multiimage(showto, friendlyimage, neutralimage, enemyimage, offset, drawthroughgeo, var_c5409ca7522182b3, naturaldist, delaytime, var_fa4cf28a58192889, var_b3ea37733a1577e5, overrideorigin, showonminimap) {
+function setheadicon_multiimage(showto, friendlyimage, neutralimage, enemyimage, offset, drawthroughgeo, maxdrawdist, naturaldist, delaytime, var_fa4cf28a58192889, var_b3ea37733a1577e5, overrideorigin, showonminimap) {
   level endon("game_ended");
 
   if(isDefined(delaytime)) {
@@ -157,11 +157,11 @@ function setheadicon_multiimage(showto, friendlyimage, neutralimage, enemyimage,
 
   setheadicondrawthroughgeo(icon, drawthroughgeo);
 
-  if(!isDefined(var_c5409ca7522182b3)) {
-    var_c5409ca7522182b3 = 0;
+  if(!isDefined(maxdrawdist)) {
+    maxdrawdist = 0;
   }
 
-  setheadiconmaxdistance(icon, var_c5409ca7522182b3);
+  setheadiconmaxdistance(icon, maxdrawdist);
 
   if(!isDefined(naturaldist)) {
     naturaldist = 0;
@@ -170,14 +170,14 @@ function setheadicon_multiimage(showto, friendlyimage, neutralimage, enemyimage,
   setheadiconnaturaldistance(icon, naturaldist);
 
   if(isarray(showto)) {
-    foreach(var_ebcded206506e726 in showto) {
-      if(isPlayer(var_ebcded206506e726)) {
-        addclienttoheadiconmask(icon, var_ebcded206506e726);
+    foreach(showtoent in showto) {
+      if(isPlayer(showtoent)) {
+        addclienttoheadiconmask(icon, showtoent);
         continue;
       }
 
-      if(isDefined(var_ebcded206506e726) && isteam(var_ebcded206506e726)) {
-        addteamtoheadiconmask(icon, var_ebcded206506e726);
+      if(isDefined(showtoent) && isteam(showtoent)) {
+        addteamtoheadiconmask(icon, showtoent);
       }
     }
   } else if(isPlayer(showto)) {
@@ -201,7 +201,7 @@ function setheadicon_multiimage(showto, friendlyimage, neutralimage, enemyimage,
   return icon;
 }
 
-function setheadicon_factionimage(showtoallfactions, offset, drawthroughgeo, var_c5409ca7522182b3, naturaldist, delaytime, var_fa4cf28a58192889, ownerinvisible, overrideorigin, showonminimap) {
+function setheadicon_factionimage(showtoallfactions, offset, drawthroughgeo, maxdrawdist, naturaldist, delaytime, var_fa4cf28a58192889, ownerinvisible, overrideorigin, showonminimap) {
   if(scripts\cp_mp\utility\game_utility::function_b2c4b42f9236924()) {
     return;
   }
@@ -235,11 +235,11 @@ function setheadicon_factionimage(showtoallfactions, offset, drawthroughgeo, var
 
   setheadicondrawthroughgeo(icondata.icon, drawthroughgeo);
 
-  if(!isDefined(var_c5409ca7522182b3)) {
-    var_c5409ca7522182b3 = 768;
+  if(!isDefined(maxdrawdist)) {
+    maxdrawdist = 768;
   }
 
-  setheadiconmaxdistance(icondata.icon, var_c5409ca7522182b3);
+  setheadiconmaxdistance(icondata.icon, maxdrawdist);
 
   if(!isDefined(naturaldist)) {
     naturaldist = 0;
@@ -467,13 +467,13 @@ function setheadicon_createnewicon(prioritygroup, overrideorigin) {
   }
 
   if(!isDefined(newicon) || newicon < 0) {
-    var_a41b5f8513836136 = self;
+    enttonotify = self;
 
     if(isDefined(self.owner)) {
-      var_a41b5f8513836136 = self.owner;
+      enttonotify = self.owner;
     }
 
-    var_a41b5f8513836136 iprintlnbold("<dev string:x1a1>");
+    enttonotify iprintlnbold("<dev string:x1a1>");
 
     return;
   }

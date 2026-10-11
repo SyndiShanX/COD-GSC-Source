@@ -149,8 +149,8 @@ function getlengthofconversation(var_2463023b7a8fd31c) {
   time = 0;
 
   for(i = 0; i < var_2463023b7a8fd31c.size; i++) {
-    var_a2306fc3519e2472 = level.vo_dialogue_prefix[var_2463023b7a8fd31c[i]];
-    time += scripts\cp\vo::get_sound_length(var_a2306fc3519e2472 + var_2463023b7a8fd31c[i]);
+    voprefix = level.vo_dialogue_prefix[var_2463023b7a8fd31c[i]];
+    time += scripts\cp\vo::get_sound_length(voprefix + var_2463023b7a8fd31c[i]);
   }
 
   return time;
@@ -214,7 +214,7 @@ function playvoforrevived(player, alias_string) {
   player thread play_vo_on_player(line);
 }
 
-function playvoforscriptable(var_91839babd32261f4) {
+function playvoforscriptable(scriptable_name) {
   var_e3c20a88291cf3af = 45000;
   current_time = gettime();
 
@@ -233,7 +233,7 @@ function playvoforscriptable(var_91839babd32261f4) {
       return;
     }
 
-    switch (var_91839babd32261f4) {
+    switch (scriptable_name) {
       case #"hash_14d8cee9efde6d97":
       case #"hash_2b9bfba8d9b531a5":
         line = player.vo_prefix + "alien_approach_truck";
@@ -248,8 +248,8 @@ function scriptable_vo_handler() {
   level.scriptable_vo_played = [];
 
   while(true) {
-    level waittill("scriptable", var_91839babd32261f4);
-    level thread playvoforscriptable(var_91839babd32261f4);
+    level waittill("scriptable", scriptable_name);
+    level thread playvoforscriptable(scriptable_name);
   }
 }
 
@@ -373,9 +373,9 @@ function player_casualty_vo(alias_string, vo_type, priority, timeout, interrupt,
   player play_vo_on_player(line, undefined, 1);
 }
 
-function is_in_array(var_fd434d3dfd963ecf, var_a9782c100e40da81) {
-  for(i = 0; i < var_fd434d3dfd963ecf.size; i++) {
-    if(var_fd434d3dfd963ecf[i] == var_a9782c100e40da81) {
+function is_in_array(aecollection, efindee) {
+  for(i = 0; i < aecollection.size; i++) {
+    if(aecollection[i] == efindee) {
       return true;
     }
   }

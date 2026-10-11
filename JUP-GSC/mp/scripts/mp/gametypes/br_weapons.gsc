@@ -1538,14 +1538,14 @@ function br_ammo_update_ammotype_weapons(player, ammotype, newweaponstock) {
 
     for(i = 0; i < player namespace_e50e624d9af51c8c::getplayerbackpacksize(player); i++) {
       if(player namespace_e50e624d9af51c8c::getlootidatbackpackindex(i) == lootid) {
-        var_750fcc188317845a[i] = player namespace_e50e624d9af51c8c::function_897b29adb37f06a7(i);
+        var_750fcc188317845a[i] = player namespace_e50e624d9af51c8c::getquantityatbackpackindex(i);
       }
     }
 
     var_2c20ea06f37f490a = tablesort(var_750fcc188317845a, "up");
 
     foreach(index in var_2c20ea06f37f490a) {
-      slotquantity = player namespace_e50e624d9af51c8c::function_897b29adb37f06a7(index);
+      slotquantity = player namespace_e50e624d9af51c8c::getquantityatbackpackindex(index);
 
       if(var_efb882bf4f27ee85 <= slotquantity) {
         player namespace_e50e624d9af51c8c::function_db1dd76061352e5b(index, var_efb882bf4f27ee85);

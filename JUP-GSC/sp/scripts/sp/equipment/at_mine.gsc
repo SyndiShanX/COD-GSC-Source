@@ -23,10 +23,10 @@ function function_6ff21d428c0f908a(grenade, weapon) {
   }
 
   self notify("player_ATMinePlaced");
-  thread function_8ca9a700b45814e2(grenade, self, self.team, weapon);
+  thread atminewatchstuck(grenade, self, self.team, weapon);
 }
 
-function function_8ca9a700b45814e2(grenade, mineowner, team, var_750c0edec8558bf1) {
+function atminewatchstuck(grenade, mineowner, team, ownerweaponobj) {
   grenade endon("entitydeleted");
   grenade endon("death");
   flag_wait("scriptables_ready");
@@ -62,7 +62,7 @@ function function_8ca9a700b45814e2(grenade, mineowner, team, var_750c0edec8558bf
       grenade notify("missile_stuck_land");
 
       if(isPlayer(mineowner)) {
-        mineowner thread function_6e5ce23490c6fea6(grenade, var_750c0edec8558bf1, &"EQUIPMENT/IMPROVISED_MINE_PICKUP");
+        mineowner thread function_6e5ce23490c6fea6(grenade, ownerweaponobj, &"EQUIPMENT/IMPROVISED_MINE_PICKUP");
       }
 
       grenade thread function_285754702166e469(mineowner);

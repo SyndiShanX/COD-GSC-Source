@@ -65,10 +65,10 @@ function function_c089b1c94e960517(patrolpath) {
   self.vehicle = function_96b8ab6bf1035b06();
   thread function_3878e6cb9cf4e33f();
   self.vehicle namespace_9246f10206f50768::function_1da2c31423c2676a(level.convoyattack.speed);
-  self.vehicle function_77320e794d35465a("p2p", "brakeAtGoal", 0);
-  self.vehicle function_77320e794d35465a("p2p", "goalThreshold", level.convoyattack.speed * 4);
-  self.vehicle function_77320e794d35465a("p2p", "steeringMultiplier", 2.5);
-  self.vehicle function_77320e794d35465a("p2p", "stuckTime", 4);
+  self.vehicle setconfigvalue("p2p", "brakeAtGoal", 0);
+  self.vehicle setconfigvalue("p2p", "goalThreshold", level.convoyattack.speed * 4);
+  self.vehicle setconfigvalue("p2p", "steeringMultiplier", 2.5);
+  self.vehicle setconfigvalue("p2p", "stuckTime", 4);
   self.vehicle.pathdata = self.node;
   self.vehicle thread namespace_9246f10206f50768::function_c3889abf5cd6abbf(self.node, level.convoyattack.speed);
 }
@@ -107,7 +107,7 @@ function function_7f20e60880a9bfdd(cache) {
 }
 
 function function_96b8ab6bf1035b06() {
-  poiname = scripts\mp\poi::function_6cc445c02b5effac(self.node.origin, 0, 1);
+  poiname = scripts\mp\poi::poi_findpoioriginisin(self.node.origin, 0, 1);
   agenttypes = namespace_43bf74a2ee9234c0::function_236a093e8a0ec040("veh9_mil_cargo_truck");
   spawners = namespace_43bf74a2ee9234c0::function_f260b1cef943f1ab("veh9_mil_cargo_truck", 7, agenttypes, self.node.origin, poiname, "absolute");
   riders = namespace_43bf74a2ee9234c0::function_4ad6c25d6754f697(spawners, 7, undefined, "high", "convoy_attack", "convoy_attack", "team_hundred_ninety_five", undefined, "veh9_mil_cargo_truck_convoy_attack");

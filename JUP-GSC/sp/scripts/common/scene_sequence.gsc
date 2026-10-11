@@ -10,22 +10,22 @@
 function function_e514286a93d143da() {}
 
 function function_7227ec8ef6d85118(existingentities, sequencename, defaultscenename) {
-  var_3fb4893405249050 = self;
+  seqroot = self;
 
   var_6fb1514b3fe5c721 = [];
   sequencebundle = getscriptbundle("sequencescriptbundle:" + sequencename);
-  var_3fb4893405249050.scenesequence = spawnStruct();
-  var_3fb4893405249050.scenesequence.sequencename = sequencename;
-  var_3fb4893405249050.scenesequence.sequencebundle = sequencebundle;
-  var_3fb4893405249050.existingentities = existingentities;
-  var_3fb4893405249050.scenesequence.nodes = [];
-  var_3fb4893405249050.scenesequence.scenestructs = [];
-  var_3fb4893405249050.scenesequence.running = [];
+  seqroot.scenesequence = spawnStruct();
+  seqroot.scenesequence.sequencename = sequencename;
+  seqroot.scenesequence.sequencebundle = sequencebundle;
+  seqroot.existingentities = existingentities;
+  seqroot.scenesequence.nodes = [];
+  seqroot.scenesequence.scenestructs = [];
+  seqroot.scenesequence.running = [];
   startnode = undefined;
-  var_a2f0efa133d35b66 = undefined;
+  defaultshotnames = undefined;
 
   foreach(scenenode in sequencebundle.sequencenodes) {
-    var_3fb4893405249050.scenesequence.nodes[scenenode.name] = scenenode;
+    seqroot.scenesequence.nodes[scenenode.name] = scenenode;
 
     if(istrue(scenenode.var_3f62c90b71689589) && !isDefined(startnode)) {
       startnode = scenenode;
@@ -35,12 +35,12 @@ function function_7227ec8ef6d85118(existingentities, sequencename, defaultscenen
       if(isDefined(defaultscenename)) {
         scenenode.scene = defaultscenename;
 
-        if(!isDefined(var_a2f0efa133d35b66)) {
-          var_bf0ed7802686aa = getscriptbundle("scenescriptbundle:" + scenenode.scene);
-          var_a2f0efa133d35b66 = var_bf0ed7802686aa scene::function_8a37fe423de2b9db();
+        if(!isDefined(defaultshotnames)) {
+          defaultscenebundle = getscriptbundle("scenescriptbundle:" + scenenode.scene);
+          defaultshotnames = defaultscenebundle scene::function_8a37fe423de2b9db();
         }
 
-        if(!isDefined(var_6fb1514b3fe5c721[scenenode.scene]) && array_contains(var_a2f0efa133d35b66, scenenode.shot)) {
+        if(!isDefined(var_6fb1514b3fe5c721[scenenode.scene]) && array_contains(defaultshotnames, scenenode.shot)) {
           var_6fb1514b3fe5c721[scenenode.scene] = scenenode.scene;
         }
       }
@@ -54,38 +54,38 @@ function function_7227ec8ef6d85118(existingentities, sequencename, defaultscenen
   }
 
   foreach(scenename in var_6fb1514b3fe5c721) {
-    var_bc084584b46923e7 = -1;
+    existingstructindex = -1;
 
-    if(isDefined(level.var_f99b1d319e65854c)) {
-      for(i = 0; i < level.var_f99b1d319e65854c.size; i++) {
-        if(level.var_f99b1d319e65854c[i] == scenename) {
-          var_bc084584b46923e7 = i;
+    if(isDefined(level.a_scene_names)) {
+      for(i = 0; i < level.a_scene_names.size; i++) {
+        if(level.a_scene_names[i] == scenename) {
+          existingstructindex = i;
           break;
         }
       }
     }
 
-    if(var_bc084584b46923e7 >= 0) {
-      var_3fb4893405249050.scenesequence.scenestructs[scenename] = level.var_a0b4eb1703be349a[var_bc084584b46923e7];
+    if(existingstructindex >= 0) {
+      seqroot.scenesequence.scenestructs[scenename] = level.var_a0b4eb1703be349a[existingstructindex];
       continue;
     }
 
-    var_3fb4893405249050.scenesequence.scenestructs[scenename] = spawnStruct();
-    var_3fb4893405249050.scenesequence.scenestructs[scenename].origin = var_3fb4893405249050.origin;
-    var_3fb4893405249050.scenesequence.scenestructs[scenename].angles = var_3fb4893405249050.angles;
+    seqroot.scenesequence.scenestructs[scenename] = spawnStruct();
+    seqroot.scenesequence.scenestructs[scenename].origin = seqroot.origin;
+    seqroot.scenesequence.scenestructs[scenename].angles = seqroot.angles;
   }
 
   thread start_sequence(startnode);
 }
 
 function private start_sequence(startnode) {
-  var_3fb4893405249050 = self;
-  var_3fb4893405249050 thread function_fcafbb83f84886ce(startnode);
-  var_3fb4893405249050 waittill("sequence_finished");
+  seqroot = self;
+  seqroot thread function_fcafbb83f84886ce(startnode);
+  seqroot waittill("sequence_finished");
 }
 
-function private play_node(scenestruct, shot, scene, existingentities, var_8ae676fd0285f8c2) {
-  foreach(conditionname in var_8ae676fd0285f8c2) {
+function private play_node(scenestruct, shot, scene, existingentities, earlyexitconditions) {
+  foreach(conditionname in earlyexitconditions) {
     self endon(conditionname);
   }
 
@@ -94,16 +94,16 @@ function private play_node(scenestruct, shot, scene, existingentities, var_8ae67
 }
 
 function private function_fcafbb83f84886ce(currentnode) {
-  var_3fb4893405249050 = self;
-  scenestruct = var_3fb4893405249050.scenesequence.scenestructs[currentnode.scene];
-  var_3fb4893405249050.scenesequence.running[currentnode.scene + "-" + currentnode.shot] = scenestruct;
+  seqroot = self;
+  scenestruct = seqroot.scenesequence.scenestructs[currentnode.scene];
+  seqroot.scenesequence.running[currentnode.scene + "-" + currentnode.shot] = scenestruct;
   var_926d6911427d0585 = [];
   var_3f8a8c5b87e149b1 = [];
   var_e06c9ea172ad5900 = [];
   var_90773fd2e792f06c = undefined;
 
-  foreach(condition in currentnode.var_50f41da7fed36214) {
-    if(condition.var_a3a06df92bada64e.size > 0) {
+  foreach(condition in currentnode.sequenceconnectors) {
+    if(condition.nextsequencenodes.size > 0) {
       if(condition.outputcondition == "ConditionAndActive") {
         var_e06c9ea172ad5900[var_e06c9ea172ad5900.size] = condition;
         var_926d6911427d0585[var_926d6911427d0585.size] = condition;
@@ -120,19 +120,19 @@ function private function_fcafbb83f84886ce(currentnode) {
     }
   }
 
-  var_3fb4893405249050 thread play_node(scenestruct, currentnode.shot, currentnode.scene, var_3fb4893405249050.existingentities, var_3f8a8c5b87e149b1);
+  seqroot thread play_node(scenestruct, currentnode.shot, currentnode.scene, seqroot.existingentities, var_3f8a8c5b87e149b1);
 
   foreach(condition in var_926d6911427d0585) {
-    if(var_3fb4893405249050 ent_flag_exist(condition.name)) {
-      var_3fb4893405249050 thread finish_node(currentnode, condition);
+    if(seqroot ent_flag_exist(condition.name)) {
+      seqroot thread finish_node(currentnode, condition);
       return;
     }
   }
 
   var_3f8a8c5b87e149b1[var_3f8a8c5b87e149b1.size] = "Complete" + currentnode.shot;
-  var_498eb82cbce10930 = scenestruct waittill_any_in_array_return(var_3f8a8c5b87e149b1);
+  completedconditionname = scenestruct waittill_any_in_array_return(var_3f8a8c5b87e149b1);
 
-  if(var_498eb82cbce10930 == "Complete" + currentnode.shot) {
+  if(completedconditionname == "Complete" + currentnode.shot) {
     if(!isDefined(var_90773fd2e792f06c) && var_e06c9ea172ad5900.size > 0) {
       var_b6b8a3e9e4f5d9f2 = [];
 
@@ -140,64 +140,64 @@ function private function_fcafbb83f84886ce(currentnode) {
         var_b6b8a3e9e4f5d9f2[var_b6b8a3e9e4f5d9f2.size] = condition.name;
       }
 
-      var_498eb82cbce10930 = scenestruct waittill_any_in_array_return(var_b6b8a3e9e4f5d9f2);
+      completedconditionname = scenestruct waittill_any_in_array_return(var_b6b8a3e9e4f5d9f2);
     }
 
     foreach(condition in var_e06c9ea172ad5900) {
-      if(var_498eb82cbce10930 == condition.name || var_3fb4893405249050 ent_flag_exist(condition.name)) {
-        var_3fb4893405249050 thread finish_node(currentnode, condition);
+      if(completedconditionname == condition.name || seqroot ent_flag_exist(condition.name)) {
+        seqroot thread finish_node(currentnode, condition);
         return;
       }
     }
 
-    var_3fb4893405249050 thread finish_node(currentnode, var_90773fd2e792f06c);
+    seqroot thread finish_node(currentnode, var_90773fd2e792f06c);
     return;
   }
 
   foreach(condition in var_926d6911427d0585) {
-    if(var_498eb82cbce10930 == condition.name || var_3fb4893405249050 ent_flag_exist(condition.name)) {
-      var_3fb4893405249050 thread finish_node(currentnode, condition);
+    if(completedconditionname == condition.name || seqroot ent_flag_exist(condition.name)) {
+      seqroot thread finish_node(currentnode, condition);
       return;
     }
   }
 }
 
 function private finish_node(currentnode, exitcondition) {
-  var_3fb4893405249050 = self;
-  var_3fb4893405249050.scenesequence.running[currentnode.scene + "-" + currentnode.shot] = undefined;
-  scenestruct = var_3fb4893405249050.scenesequence.scenestructs[currentnode.scene];
+  seqroot = self;
+  seqroot.scenesequence.running[currentnode.scene + "-" + currentnode.shot] = undefined;
+  scenestruct = seqroot.scenesequence.scenestructs[currentnode.scene];
   scenestruct function_5e4d2ddddbc6b48b(currentnode.shot);
 
   if(isDefined(exitcondition)) {
-    foreach(nextnodename in exitcondition.var_a3a06df92bada64e) {
-      nextnode = var_3fb4893405249050.scenesequence.nodes[nextnodename.var_dfd206830b573422];
-      var_3fb4893405249050 thread function_fcafbb83f84886ce(nextnode);
+    foreach(nextnodename in exitcondition.nextsequencenodes) {
+      nextnode = seqroot.scenesequence.nodes[nextnodename.var_dfd206830b573422];
+      seqroot thread function_fcafbb83f84886ce(nextnode);
     }
   }
 
   waitframe();
 
-  if(var_3fb4893405249050.scenesequence.running.size == 0) {
-    var_3fb4893405249050 notify("sequence_finished");
+  if(seqroot.scenesequence.running.size == 0) {
+    seqroot notify("sequence_finished");
   }
 }
 
 function function_d2345fa03215e539(note) {
-  var_3fb4893405249050 = self;
-  var_3fb4893405249050 notify(note);
+  seqroot = self;
+  seqroot notify(note);
 
-  if(isDefined(var_3fb4893405249050.scenesequence) && isDefined(var_3fb4893405249050.scenesequence.scenestructs)) {
-    foreach(scenestruct in var_3fb4893405249050.scenesequence.scenestructs) {
+  if(isDefined(seqroot.scenesequence) && isDefined(seqroot.scenesequence.scenestructs)) {
+    foreach(scenestruct in seqroot.scenesequence.scenestructs) {
       scenestruct notify(note);
     }
   }
 }
 
 function function_2af98a24e1bf3199(notifytarget, note, objectname, repeat) {
-  var_3fb4893405249050 = self;
+  seqroot = self;
 
-  if(isDefined(var_3fb4893405249050.scenesequence) && isDefined(var_3fb4893405249050.scenesequence.scenestructs)) {
-    foreach(scenestruct in var_3fb4893405249050.scenesequence.scenestructs) {
+  if(isDefined(seqroot.scenesequence) && isDefined(seqroot.scenesequence.scenestructs)) {
+    foreach(scenestruct in seqroot.scenesequence.scenestructs) {
       scenestruct scene::function_8207074e79f22926(notifytarget, note, objectname, repeat);
     }
   }
@@ -216,19 +216,19 @@ function function_919ec256b1627543(conditionname) {
 }
 
 function function_d57898e86f3bb52f(scene, shotname, func, param1, param2, param3, param4) {
-  var_3fb4893405249050 = self;
+  seqroot = self;
   scenestruct = undefined;
 
   if(isstruct(scene)) {
-    foreach(st in var_3fb4893405249050.scenesequence.scenestructs) {
+    foreach(st in seqroot.scenesequence.scenestructs) {
       if(st == scene) {
         scenestruct = scene;
         break;
       }
     }
   } else if(isstring(scene)) {
-    if(isDefined(var_3fb4893405249050.scenesequence.scenestructs[scene])) {
-      scenestruct = var_3fb4893405249050.scenesequence.scenestructs[scene];
+    if(isDefined(seqroot.scenesequence.scenestructs[scene])) {
+      scenestruct = seqroot.scenesequence.scenestructs[scene];
     }
   }
 

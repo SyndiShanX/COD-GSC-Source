@@ -170,8 +170,8 @@ function update_stealth_spotted_thread() {
               player[[level.var_c5e87dfa7679b0a5]](1);
             }
 
-            var_f950051ecb0cd613 = player scripts\stealth\utility::get_group_flagname("stealth_spotted");
-            flag_set(var_f950051ecb0cd613);
+            mygroupflagname = player scripts\stealth\utility::get_group_flagname("stealth_spotted");
+            flag_set(mygroupflagname);
           }
         }
       }
@@ -184,8 +184,8 @@ function update_stealth_spotted_thread() {
             player[[level.var_c5e87dfa7679b0a5]](0);
           }
 
-          var_f950051ecb0cd613 = player scripts\stealth\utility::get_group_flagname("stealth_spotted");
-          flag_clear(var_f950051ecb0cd613);
+          mygroupflagname = player scripts\stealth\utility::get_group_flagname("stealth_spotted");
+          flag_clear(mygroupflagname);
         }
       }
     }
@@ -251,7 +251,7 @@ function monitor_death_thread(rangeauto, rangesight) {
   }
 
   if(function_f0aa68306165f368(self.damagemod)) {
-    function_aad7a0ea8ac4ca23("ally_killed", self, other, rangeauto, rangesight);
+    stealtheventbroadcast("ally_killed", self, other, rangeauto, rangesight);
   }
 }
 

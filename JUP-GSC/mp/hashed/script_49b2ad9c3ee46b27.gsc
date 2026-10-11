@@ -26,7 +26,7 @@ function init() {
   level.brgametype.funcs["gametype_playerSkipLootPickup"] = function_66547e66a2b08887();
   br_gametypes::registerbrgametypefunc("playerSkipLootPickup", &function_f63e1b41fa5a17c2);
   scripts\common\callbacks::add("player_laststand", &function_58d9289c9acdaeea);
-  namespace_c45ac99c4997e722::function_aacbbe63c26687ae("callback_on_player_disconnect", &function_4db3546069329f65);
+  telemetry_utils::function_aacbbe63c26687ae("callback_on_player_disconnect", &function_4db3546069329f65);
   data = {
     #item_lifetime: getdvarfloat(@ "hash_37a735f07dd52591", 30), #var_7f690041736d1745: getdvarint(@ "hash_2a96a526539660d9", 1), #var_7f68ff41736d1512: getdvarint(@ "hash_2a96a42653965ea6", 1), #var_7f68fe41736d12df: getdvarint(@ "hash_2a96a32653965c73", 1), #var_418ff618f3c6dc2b: getdvarint(@ "hash_386426fc418b587", 70), #var_be7622c02935a66a: getdvarint(@ "hash_d9c75527a8a3b196", 35), #var_16630219f522fbfd: getdvarint(@ "hash_16e59a25821b3959", 18), #var_e8edf587848c8dc8: getdvarfloat(@ "hash_578a68f695a05de1", 1), #cache_chance: getdvarfloat(@ "hash_2c8d0365dcf561b9", 1)
   };
@@ -53,7 +53,7 @@ function function_66547e66a2b08887() {
   return func;
 }
 
-function function_f63e1b41fa5a17c2(instance, var_a5b2c541413aa895) {
+function function_f63e1b41fa5a17c2(instance, bautouse) {
   if(function_62ce99100d3b18d7(instance)) {
     pickup_ent = {
       #stackable: 1, #instance: instance, #var_858c2336404e0adb: instance.var_139a5104ce9ea08, #scriptablename: instance.type
@@ -62,7 +62,7 @@ function function_f63e1b41fa5a17c2(instance, var_a5b2c541413aa895) {
     return true;
   }
 
-  if(function_942c15c40dfc67c5(instance, var_a5b2c541413aa895)) {
+  if(function_942c15c40dfc67c5(instance, bautouse)) {
     return true;
   }
 
@@ -81,14 +81,14 @@ function function_62ce99100d3b18d7(instance) {
   return instance.type == "brloot_jup_trickrtreat_loot_br";
 }
 
-function function_942c15c40dfc67c5(instance, var_a5b2c541413aa895) {
+function function_942c15c40dfc67c5(instance, bautouse) {
   var_3813ae19f235166e = level.brgametype.funcs["gametype_playerSkipLootPickup"];
 
   if(!isDefined(var_3813ae19f235166e)) {
     return 0;
   }
 
-  return [[var_3813ae19f235166e]](instance, var_a5b2c541413aa895);
+  return [[var_3813ae19f235166e]](instance, bautouse);
 }
 
 function function_1811cb2925fd547f(pickupent, player) {

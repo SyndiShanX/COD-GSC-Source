@@ -112,7 +112,7 @@ function function_ad4172a44f169cb6() {
 
     foreach(location in locations) {
       if(!isDefined(location.poi)) {
-        location.poi = scripts\mp\poi::function_6cc445c02b5effac(location.origin);
+        location.poi = scripts\mp\poi::poi_findpoioriginisin(location.origin);
       }
 
       poi = location.poi;
@@ -263,7 +263,7 @@ function function_4bcdaa72e4fe9480(location) {
   if(isDefined(location.poi)) {
     samsite.poi = location.poi;
   } else {
-    samsite.poi = scripts\mp\poi::function_6cc445c02b5effac(location.origin);
+    samsite.poi = scripts\mp\poi::poi_findpoioriginisin(location.origin);
   }
 
   level.samsites[level.samsites.size] = samsite;
@@ -693,7 +693,7 @@ function function_920e785cfdd82b86(numagents) {
   self.numagents = self.agents.size;
 }
 
-function function_5e0b45946652eeb3(instance, part, state, useplayer, var_a5b2c541413aa895, usestring) {
+function function_5e0b45946652eeb3(instance, part, state, useplayer, bautouse, usestring) {
   if(!function_c076a54f4bdf7bce(useplayer)) {
     useplayer scripts\mp\hud_message::showerrormessage(level.br_pickups.var_355cddb773cb000d);
     return;
@@ -707,7 +707,7 @@ function function_5e0b45946652eeb3(instance, part, state, useplayer, var_a5b2c54
     foreach(player in var_f6ce5fbae9847fb9) {
       if(isDefined(player)) {
         objective_hideprogressforclient(samsite.objidnum, player);
-        function_d1b64c3d055ceeb0(0, player);
+        objective_setshowpinnedprogressbar(0, player);
       }
     }
   }
@@ -876,7 +876,7 @@ function function_43f27b5852d28616() {
   var_aafba8d70563022b = level.var_d57c61fe001f1707.var_aafba8d70563022b;
 
   if(isDefined(self.capturingplayer)) {
-    upgradecount = default_to(function_f3bb4f4911a1beb2("instanceInventory", "getUpgradeCount", self.capturingplayer, 26), 0);
+    upgradecount = default_to(callsharedfunc("instanceInventory", "getUpgradeCount", self.capturingplayer, 26), 0);
     var_aafba8d70563022b += upgradecount * getdvarfloat(@ "hash_fe5eb9987b622e18", 30);
   }
 
@@ -924,7 +924,7 @@ function function_4210f9b65c3db5b9(samsite, ent) {
   return false;
 }
 
-function function_2ccf2416263812e2(vehicle, seatid, var_fc7c7a874b43a31a, player, data) {
+function function_2ccf2416263812e2(vehicle, seatid, oldseatid, player, data) {
   vehicle thread function_c0f043e80f479c20();
 }
 
@@ -1234,7 +1234,7 @@ function function_40a9dfd673b1177b(delaytime, origin) {
   radius = 30000;
 
   if(function_a794fcf9545f2062()) {
-    players = function_b1eef70090b5b7b5(origin, radius, function_869ccb4e3451b8c6(["etype_player"]));
+    players = getentitiesinradiusfrompartitiongrid(origin, radius, createentitytypemask(["etype_player"]));
 
     foreach(player in players) {
       frac = distance(player.origin, origin) / radius;

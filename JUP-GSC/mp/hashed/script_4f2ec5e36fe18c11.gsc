@@ -156,7 +156,7 @@ function function_390c90207bac8552() {
   self.var_95ee53cadeb45990 = 0;
   self botsetflag("ignore_nodes", 1);
 
-  foreach(decision in self.mind.var_f0a8822dcc782c9d.var_577f45571c039a54) {
+  foreach(decision in self.mind.var_f0a8822dcc782c9d.decisions) {
     decision.enabled = 0;
     decision.var_10f0b5c52ece08ce = 0;
   }
@@ -533,7 +533,7 @@ function private function_e6311310bbaaa193(enemies) {
     targetenemy = undefined;
 
     foreach(enemy in enemies) {
-      enemybot = level.ftuedata.enemybots[function_1823ff50bb28148d(enemy)].botentity;
+      enemybot = level.ftuedata.enemybots[getxhash(enemy)].botentity;
 
       if(!isDefined(enemybot) || !isalive(enemybot)) {
         continue;

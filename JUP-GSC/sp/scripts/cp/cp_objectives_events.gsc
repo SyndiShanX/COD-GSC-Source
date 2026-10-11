@@ -207,10 +207,10 @@ function try_start_event(event, event_table, row_index) {
 
   mark_event_active(event, 1);
   try_run_init_of_event(event);
-  var_ad0353179fefbe5c = tablelookup(event_table, 0, row_index + "", 4);
+  prerequisites = tablelookup(event_table, 0, row_index + "", 4);
 
-  if(var_ad0353179fefbe5c != "") {
-    level thread check_prerequisites_then_start_event(event, var_ad0353179fefbe5c, repeat);
+  if(prerequisites != "") {
+    level thread check_prerequisites_then_start_event(event, prerequisites, repeat);
     return;
   }
 
@@ -285,9 +285,9 @@ function disable_repeating_event(event) {
   level notify("stop_repeating_event_" + event);
 }
 
-function check_prerequisites_then_start_event(event, var_ad0353179fefbe5c, repeat) {
+function check_prerequisites_then_start_event(event, prerequisites, repeat) {
   level endon("game_ended");
-  wait_for_prerequisites_complete(var_ad0353179fefbe5c);
+  wait_for_prerequisites_complete(prerequisites);
   start_event(event, repeat);
 }
 
@@ -411,9 +411,9 @@ function get_event_location(event) {
 
 function waittill_reaching_time_stamp(time_passed, time_stamp) {
   var_3a4f16db447a1938 = convert_time_stamp_to_sec(time_stamp);
-  var_2842477f729e001a = var_3a4f16db447a1938 - time_passed;
-  wait var_2842477f729e001a;
-  return time_passed + var_2842477f729e001a;
+  sec_to_wait = var_3a4f16db447a1938 - time_passed;
+  wait sec_to_wait;
+  return time_passed + sec_to_wait;
 }
 
 function convert_time_stamp_to_sec(time_stamp) {
@@ -423,8 +423,8 @@ function convert_time_stamp_to_sec(time_stamp) {
   return 60 * minute + second;
 }
 
-function wait_for_prerequisites_complete(var_ad0353179fefbe5c) {
-  var_e836c4f0dd6c3b14 = strtok(var_ad0353179fefbe5c, ",");
+function wait_for_prerequisites_complete(prerequisites) {
+  var_e836c4f0dd6c3b14 = strtok(prerequisites, ",");
   var_3f758aa7af64a72f = undefined;
   var_3f758ba7af64a962 = undefined;
   var_3f758ca7af64ab95 = undefined;

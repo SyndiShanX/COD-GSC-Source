@@ -151,17 +151,17 @@ function private function_9542f1c554b69ccd(var_11b102a1d8f20eb3, var_4c4f4e47848
 }
 
 function private setplayercurrentstreak(newstreak) {
-  self setplayerdata(level.var_5d69837cf4db0407, "brSquadPlayBonus", "streak", newstreak);
+  self setplayerdata(level.progressiongroup, "brSquadPlayBonus", "streak", newstreak);
 }
 
 function private function_621d9fe4d9c20992() {
-  self setplayerdata(level.var_5d69837cf4db0407, "brSquadPlayBonus", "lastSeen", getsystemtime());
+  self setplayerdata(level.progressiongroup, "brSquadPlayBonus", "lastSeen", getsystemtime());
 }
 
 function private function_bbc11dae1ae97f4d() {
-  return default_to(self getplayerdata(level.var_5d69837cf4db0407, "brSquadPlayBonus", "streak"), 0);
+  return default_to(self getplayerdata(level.progressiongroup, "brSquadPlayBonus", "streak"), 0);
 }
 
 function private function_8d7209d88535ae16() {
-  return default_to(self getplayerdata(level.var_5d69837cf4db0407, "brSquadPlayBonus", "lastSeen"), 0);
+  return default_to(self getplayerdata(level.progressiongroup, "brSquadPlayBonus", "lastSeen"), 0);
 }

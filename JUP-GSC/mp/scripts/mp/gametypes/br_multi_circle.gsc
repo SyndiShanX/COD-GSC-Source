@@ -290,7 +290,7 @@ function function_1b21de2360beaff(circleindex) {
 }
 
 function function_16f6a495317c109d() {
-  return function_676cfe2ab64ea758() / 1000;
+  return getframeduration() / 1000;
 }
 
 function function_fea1e6f98afb74f4(var_7b6d5db8cb3c5782) {
@@ -862,7 +862,7 @@ function function_d835881b2d4842d3() {
                   player scripts\cp_mp\gasmask::processdamage(gasmaskdamage);
                 }
               } else {
-                if(!istrue(player.var_e79884673ac9666e) && !function_260708c89a11f0c3(player)) {
+                if(!istrue(player.var_e79884673ac9666e) && !isgasmaskequipped(player)) {
                   player scripts\mp\gametypes\br_pickups::function_8e9b00a1d2b23d72();
                 }
 

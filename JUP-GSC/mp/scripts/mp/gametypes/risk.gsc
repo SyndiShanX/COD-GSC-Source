@@ -268,7 +268,7 @@ function main() {
   level.var_7f5be0207e7457b1 = getdvarint(@ "hash_c56057fd4bbaf32c", 1) == 1;
   level.var_4de8052758f986f3 = &function_4de8052758f986f3;
   level.var_3ce1055115edcbbb = &function_3ce1055115edcbbb;
-  level.var_efbc646224fda4fa = &function_efbc646224fda4fa;
+  level.skydiveredeploy = &skydiveredeploy;
 
   if(level.useobjectives || level.userallypointvehicles || level.usesquadspawnselection) {
     setDvar(@ "scr_game_usespawnselection", 1);
@@ -3884,7 +3884,7 @@ function disableuavping() {
   self notify("disableUAVPing");
 }
 
-function function_efbc646224fda4fa() {
+function skydiveredeploy() {
   level thread namespace_1eb3c4e0e28fac71::utilflare_shootflare(self.origin, "revive");
   spawnheight = getdvarfloat(@ "hash_50f18343f33b6153", 8000);
   spawnorigin = self.origin;

@@ -79,7 +79,7 @@ function init() {
     scripts\engine\utility::registersharedfunc("veh_jup_space_shipment_transport", "handleWorldCollision", &function_19e2fe45e130973f);
   }
 
-  function_f1aed36ab4598ea("eqp_redeploy_drone");
+  snd_transient_load("eqp_redeploy_drone");
   level thread function_23f7acaab482446();
 }
 
@@ -748,7 +748,7 @@ function function_cf65fbc1c077fadb(attacker, v_pos) {
   }
 }
 
-function function_f0567cda220a6f7d(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_f0567cda220a6f7d(instance, part, state, player, bautouse, usestring) {
   canusecallback = utility::function_6a11999c562cf4ab("redeploy_drone", "can_use_callback");
 
   if(isDefined(canusecallback) && [[canusecallback]](instance, player) == 0) {
@@ -801,11 +801,11 @@ function function_b4d6206c99452cac() {
     var_d4ba664e8cdd1e0a = isDefined(self.ffsm_state) && (self.ffsm_state == 5 || self.ffsm_state == 6 || self.ffsm_state == 3);
     bisland = self isonground() || self isswimming() || self ishanging();
     var_a2b5f51a86d266ad = self isonladder();
-    var_d6442d18b46a7a10 = self function_9cc921a57ff4deb5();
-    var_b48e997e59346e83 = !scripts\cp_mp\utility\player_utility::isreallyalive(self);
+    var_d6442d18b46a7a10 = self isonascender();
+    bisdead = !scripts\cp_mp\utility\player_utility::isreallyalive(self);
     binvehicle = self isvehicleactive();
 
-    if(var_aa4f5ea34dfe428b || var_d4ba664e8cdd1e0a || bisland || var_a2b5f51a86d266ad || var_d6442d18b46a7a10 || var_b48e997e59346e83 || binvehicle) {
+    if(var_aa4f5ea34dfe428b || var_d4ba664e8cdd1e0a || bisland || var_a2b5f51a86d266ad || var_d6442d18b46a7a10 || bisdead || binvehicle) {
       break;
     }
 
@@ -963,9 +963,9 @@ function redeploy_drone_repopulation_watcher(redeploy_drone) {
   }
 
   var_9602b340166dcdd7 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
-  var_a4233c478eba62a0 = v_origin + vectorNormalize(v_origin - (var_9602b340166dcdd7[0], var_9602b340166dcdd7[1], v_origin[2])) * 20000;
+  v_spawn_origin = v_origin + vectorNormalize(v_origin - (var_9602b340166dcdd7[0], var_9602b340166dcdd7[1], v_origin[2])) * 20000;
   v_spawn_angles = vectortoangles(v_origin - (var_9602b340166dcdd7[0], var_9602b340166dcdd7[1], v_origin[2]));
-  drone = spawn("script_model", var_a4233c478eba62a0);
+  drone = spawn("script_model", v_spawn_origin);
   drone setModel("veh9_mil_air_drone_redeploy_relocate");
   drone.angles = v_spawn_angles;
   drone.speed = 0;

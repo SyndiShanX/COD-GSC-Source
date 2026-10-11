@@ -23,8 +23,8 @@ function function_ed62d4f89b19c4f7() {
   level.var_40c0670d21517637 = function_55637fdcab8e697a();
 
   if(scripts\cp\utility::function_240f7f4e57340e8f() && isDefined(level.var_1b908bf18691b097) && isDefined(level.var_40c0670d21517637)) {
-    var_a81adeb0e1f89320 = level.var_1b908bf18691b097.plate_carriers.size;
-    assertex(level.var_40c0670d21517637.size <= var_a81adeb0e1f89320, "There can only be a maximum of " + var_a81adeb0e1f89320 + " in the level");
+    maxplates = level.var_1b908bf18691b097.plate_carriers.size;
+    assertex(level.var_40c0670d21517637.size <= maxplates, "There can only be a maximum of " + maxplates + " in the level");
   }
 
   function_1623793645979b39();
@@ -120,12 +120,12 @@ function function_5ce5226e2af5abf0(player) {
 
 function function_6f16016c53d6cf63() {
   if(scripts\cp\utility::function_240f7f4e57340e8f()) {
-    var_a81adeb0e1f89320 = namespace_1170726b2799ea65::function_c9e9a9b526daf36a();
+    maxplates = namespace_1170726b2799ea65::function_c9e9a9b526daf36a();
   } else {
-    var_a81adeb0e1f89320 = 3;
+    maxplates = 3;
   }
 
-  return var_a81adeb0e1f89320;
+  return maxplates;
 }
 
 function private function_2f72e447279d8fe5() {

@@ -1089,10 +1089,10 @@ function helperdrone_watchscramblereffectdist(owner) {
   scramblerradius = getdvarfloat(@ "hash_97a2272a19ad3843", 1000);
   var_f3b7cc3138382dfb = scramblerradius * scramblerradius;
   playercontents = physics_createcontents(["physicscontents_characterproxy"]);
-  var_863c619037f3ac74 = self.origin - (0, 0, 3000);
+  pointtocheck = self.origin - (0, 0, 3000);
   radiusvector = (scramblerradius, scramblerradius, 3000);
-  aabbmin = var_863c619037f3ac74 - radiusvector;
-  aabbmax = var_863c619037f3ac74 + radiusvector;
+  aabbmin = pointtocheck - radiusvector;
+  aabbmax = pointtocheck + radiusvector;
 
   while(true) {
     var_e5b984fc3e961023 = physics_aabbbroadphasequery(aabbmin, aabbmax, playercontents, []);
@@ -1538,13 +1538,13 @@ function helperdrone_overwatchplayer() {
 }
 
 function getcorrectheight(x, y, rand) {
-  var_dc8bb6300463cf1e = 1500;
+  offgroundheight = 1500;
 
   var_13c46a6715142436 = getdvarint(@ "hash_166b0ad3d56b43f", 0);
-  var_dc8bb6300463cf1e += var_13c46a6715142436;
+  offgroundheight += var_13c46a6715142436;
 
   groundheight = tracegroundpoint(x, y);
-  trueheight = groundheight + var_dc8bb6300463cf1e;
+  trueheight = groundheight + offgroundheight;
   trueheight += randomint(rand);
   return trueheight;
 }
@@ -3113,18 +3113,18 @@ function function_289ddd64ec5b3010(streakinfo, owner) {
   return false;
 }
 
-function helperdrone_getnumdrones(dronetype, var_ee9e55b40b28d806, var_bace6387b1d799ad) {
+function helperdrone_getnumdrones(dronetype, dronearray, affiliation) {
   numdrones = 0;
 
-  foreach(drone in var_ee9e55b40b28d806) {
+  foreach(drone in dronearray) {
     if(isDefined(drone.type) && drone.type == dronetype || isDefined(drone.helperdronetype) && drone.helperdronetype == dronetype) {
-      if(isDefined(var_bace6387b1d799ad)) {
-        if(isPlayer(var_bace6387b1d799ad)) {
-          if(drone.owner != var_bace6387b1d799ad) {
+      if(isDefined(affiliation)) {
+        if(isPlayer(affiliation)) {
+          if(drone.owner != affiliation) {
             continue;
           }
-        } else if(issharedfuncdefined("game", "isGameplayTeam") && [[getsharedfunc("game", "isGameplayTeam")]](var_bace6387b1d799ad)) {
-          if(drone.team != var_bace6387b1d799ad) {
+        } else if(issharedfuncdefined("game", "isGameplayTeam") && [[getsharedfunc("game", "isGameplayTeam")]](affiliation)) {
+          if(drone.team != affiliation) {
             continue;
           }
         }
@@ -3546,7 +3546,7 @@ function function_8c4ab0a7799e7ab8(weapon) {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function helperdrone_empapplied(data) {
@@ -3555,7 +3555,7 @@ function helperdrone_empapplied(data) {
   }
 }
 
-function function_5fbdbc50f271cfdf() {
+function debugdrawdronepath() {
   self endon("<dev string:x69>");
   self endon("<dev string:x170>");
   self notify("<dev string:x17c>");

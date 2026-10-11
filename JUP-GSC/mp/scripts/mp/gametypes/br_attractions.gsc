@@ -37,8 +37,8 @@ function onplayerdisconnect(player) {
   }
 }
 
-function createattractionicontrigger(typeref, locindex, groundorigin, iconzoffset, iconshader, var_ba52080c594353fc, triggerenterfunc, triggerexitfunc, var_c9c301a888170672) {
-  scriptable = spawnscriptable(var_c9c301a888170672, groundorigin);
+function createattractionicontrigger(typeref, locindex, groundorigin, iconzoffset, iconshader, var_ba52080c594353fc, triggerenterfunc, triggerexitfunc, scriptabledefname) {
+  scriptable = spawnscriptable(scriptabledefname, groundorigin);
   closeobjectiveiconid = scripts\mp\objidpoolmanager::requestobjectiveid(1);
 
   if(closeobjectiveiconid != -1) {
@@ -256,41 +256,41 @@ function playersetattractiontime(timems) {
 
 function playersetomnvarattraction(dataref, value) {
   assert(isPlayer(self));
-  [bitoffset, bitwidth, var_8e90fa6d5789ad63, value] = getattractionomnvarbitpackinginfo(dataref, value);
+  [bitoffset, bitwidth, omnvarref, value] = getattractionomnvarbitpackinginfo(dataref, value);
 
-  if(var_8e90fa6d5789ad63 == "") {
+  if(omnvarref == "") {
     return;
   }
 
-  playerpackdataintoomnvar(var_8e90fa6d5789ad63, value, bitoffset, bitwidth);
+  playerpackdataintoomnvar(omnvarref, value, bitoffset, bitwidth);
 }
 
 function getattractionomnvarbitpackinginfo(dataref, value) {
   bitoffset = 0;
   bitwidth = 0;
-  var_8e90fa6d5789ad63 = "";
+  omnvarref = "";
 
   switch (dataref) {
     case 0:
       bitoffset = 0;
       bitwidth = 8;
-      var_8e90fa6d5789ad63 = "ui_br_attraction_data";
+      omnvarref = "ui_br_attraction_data";
       break;
     case 1:
       [bitoffset, bitwidth] = [8, 8];
-      var_8e90fa6d5789ad63 = "ui_br_attraction_data";
+      omnvarref = "ui_br_attraction_data";
       break;
     case 2:
       [bitoffset, bitwidth] = [16, 8];
-      var_8e90fa6d5789ad63 = "ui_br_attraction_data";
+      omnvarref = "ui_br_attraction_data";
       break;
     case 3:
       [bitoffset, bitwidth] = [24, 2];
-      var_8e90fa6d5789ad63 = "ui_br_attraction_data";
+      omnvarref = "ui_br_attraction_data";
       break;
     case 4:
       [bitoffset, bitwidth] = [0, 8];
-      var_8e90fa6d5789ad63 = "ui_br_attraction_best_data";
+      omnvarref = "ui_br_attraction_best_data";
       value++;
       break;
     default:
@@ -298,18 +298,18 @@ function getattractionomnvarbitpackinginfo(dataref, value) {
       break;
   }
 
-  return [bitoffset, bitwidth, var_8e90fa6d5789ad63, value];
+  return [bitoffset, bitwidth, omnvarref, value];
 }
 
-function playerpackdataintoomnvar(var_8e90fa6d5789ad63, value, bitoffset, bitwidth) {
+function playerpackdataintoomnvar(omnvarref, value, bitoffset, bitwidth) {
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (value &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
-  prevvalue = self getclientomnvar(var_8e90fa6d5789ad63);
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
+  invertedmask = ~(mask << bitoffset);
+  prevvalue = self getclientomnvar(omnvarref);
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
 
-  if(var_82a90e56e416fa55 != prevvalue) {
-    self setclientomnvar(var_8e90fa6d5789ad63, var_82a90e56e416fa55);
+  if(repackedvalue != prevvalue) {
+    self setclientomnvar(omnvarref, repackedvalue);
   }
 }

@@ -94,10 +94,10 @@ function function_7184b43950d947ea(perk_pack, slot, pack_level) {
 
   if(perk_pack != "none") {
     if(isDefined(omnvar)) {
-      var_24db96216c5f6124 = int(tablelookup("cp/perk_pack_table.csv", 1, perk_pack, 0));
+      omnvar_value = int(tablelookup("cp/perk_pack_table.csv", 1, perk_pack, 0));
 
-      if(isDefined(var_24db96216c5f6124)) {
-        self setclientomnvar(omnvar, var_24db96216c5f6124);
+      if(isDefined(omnvar_value)) {
+        self setclientomnvar(omnvar, omnvar_value);
       }
     }
 

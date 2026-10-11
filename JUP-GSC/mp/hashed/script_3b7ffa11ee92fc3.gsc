@@ -23,9 +23,9 @@ function function_304c63cbb536c526() {
 }
 
 function function_e666bc1f7f826ea2() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_move_speed_changed", &function_36985b9cd291d92);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("head_destroyed", &function_fd1cffcbaac9dd4f);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("zombie_melee", &function_385b704af023d89a);
+  callback::get_template(self.animsetname) callback::add("on_move_speed_changed", &function_36985b9cd291d92);
+  callback::get_template(self.animsetname) callback::add("head_destroyed", &function_fd1cffcbaac9dd4f);
+  callback::get_template(self.animsetname) callback::add("zombie_melee", &function_385b704af023d89a);
 }
 
 function function_ac7db7e26eb6926c() {
@@ -109,8 +109,8 @@ function private function_138dc2e6ae3e968b() {
   function_f1e5805da192a1ef("sprint", "abom_rage_mode", 30);
   round_number = function_2201d3f3d7ab07a7();
   var_7b2050dc73de2280 = clamp(math::remap(round_number, 20, 50, 0, 20), 0, 20);
-  var_27ac9072133fb974 = 10 + var_7b2050dc73de2280;
-  var_76ef1958db146de = gettime() + var_27ac9072133fb974 * 1000;
+  rage_time = 10 + var_7b2050dc73de2280;
+  var_76ef1958db146de = gettime() + rage_time * 1000;
   var_45b42d8d38a439e1 = function_7df646d888a5ca2d();
   var_fa6a5e0ea277e5a6 = 0;
 
@@ -121,7 +121,7 @@ function private function_138dc2e6ae3e968b() {
       break;
     }
 
-    wait_result = waittill_any_timeout_1(var_27ac9072133fb974, "melee_hit_ent");
+    wait_result = waittill_any_timeout_1(rage_time, "melee_hit_ent");
 
     if(wait_result == "melee_hit_ent") {
       var_fa6a5e0ea277e5a6 += 1;
@@ -173,25 +173,25 @@ function private function_3cb62239fb4bdf95() {
 
 function private function_25ddc7410cd116ca() {
   self endon("death");
-  var_c717f64420bcaf54 = self.zombieaisettings.var_96e932e5fc805af8;
-  var_8554138e15240e9c = self.zombieaisettings.var_e58a65b7a8f5973c.var_ee56d9f6c8b43f30;
+  speedthresholds = self.zombieaisettings.speedthreshold_list;
+  knockdowndatas = self.zombieaisettings.var_e58a65b7a8f5973c.knockdowndata_list;
 
-  if(var_c717f64420bcaf54.size == 0 || var_8554138e15240e9c.size == 0) {
+  if(speedthresholds.size == 0 || knockdowndatas.size == 0) {
     return;
   }
 
-  minmovespeed = var_c717f64420bcaf54[0].speedthreshold;
+  minmovespeed = speedthresholds[0].speedthreshold;
 
-  for(i = 1; i < var_c717f64420bcaf54.size; i++) {
-    minmovespeed = min(minmovespeed, var_c717f64420bcaf54[i].speedthreshold);
+  for(i = 1; i < speedthresholds.size; i++) {
+    minmovespeed = min(minmovespeed, speedthresholds[i].speedthreshold);
   }
 
-  var_d982f1610183c2e1 = squared(minmovespeed * 0.75);
+  minmovespeedsqr = squared(minmovespeed * 0.75);
 
   while(isDefined(self)) {
-    knockdowndata = var_8554138e15240e9c[0];
+    knockdowndata = knockdowndatas[0];
 
-    foreach(entry in var_8554138e15240e9c) {
+    foreach(entry in knockdowndatas) {
       if(entry.movetype == self._blackboard.movetype) {
         knockdowndata = entry;
         break;
@@ -201,7 +201,7 @@ function private function_25ddc7410cd116ca() {
     velocity = self.velocity;
     speedsqr = lengthsquared(velocity);
 
-    if(speedsqr > var_d982f1610183c2e1) {
+    if(speedsqr > minmovespeedsqr) {
       knockdown_pos = self.origin;
 
       if(knockdowndata.velocityoffset > 0) {

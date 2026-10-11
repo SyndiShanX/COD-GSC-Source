@@ -535,11 +535,11 @@ function screens_debug_counter() {
 
   while(true) {
     active_screens = 0;
-    var_ec0e4105bdc56e33 = 0;
+    flagged_screens = 0;
     keys = getarraykeys(level.screens.screens_flagged);
 
     foreach(key in keys) {
-      var_ec0e4105bdc56e33 += level.screens.screens_flagged[key].size;
+      flagged_screens += level.screens.screens_flagged[key].size;
 
       foreach(screen in level.screens.screens_flagged[key]) {
         if(isDefined(screen.state) && screen.state == "on") {
@@ -554,7 +554,7 @@ function screens_debug_counter() {
       }
     }
 
-    total_count = level.screens.screens.size + var_ec0e4105bdc56e33;
+    total_count = level.screens.screens.size + flagged_screens;
 
     printtoscreen2d(1000, 70, "<dev string:xcb>" + total_count, (1, 1, 1), 2);
 

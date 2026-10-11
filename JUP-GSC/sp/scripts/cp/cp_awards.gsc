@@ -103,7 +103,7 @@ function giveaward(ref, objweapon, pointsoverride, xpoverride, immediate, victim
     return;
   }
 
-  if(isenumvaluevalid("mp", "Awards", function_f28fd66285fa2c9(ref))) {
+  if(isenumvaluevalid("mp", "Awards", getxhashhexname(ref))) {
     addawardtoaarlist(ref);
   }
 
@@ -228,7 +228,7 @@ function givemidmatchaward(ref, objweapon, pointsoverride, xpoverride, var_51bda
 
   if(!isxhash(ref)) {
     assertex(1, ref);
-    ref = function_1823ff50bb28148d(ref);
+    ref = getxhash(ref);
   }
 
   if(self ispcplayer() && scripts\cp\utility::gameflag("prematch_done")) {
@@ -316,7 +316,7 @@ function addawardtoaarlist(ref) {
     awardinfo = self.aarawards[newindex];
 
     if(isDefined(awardinfo.ref) && isxhash(awardinfo.ref)) {
-      awardinfo.ref = function_3c8848a3a11b2553(awardinfo.ref);
+      awardinfo.ref = getxhashsourcename(awardinfo.ref);
     }
 
     if(awardinfo.ref != "none") {
@@ -331,7 +331,7 @@ function addawardtoaarlist(ref) {
   awardinfo.count = 1;
 
   if(isDefined(awardinfo.ref) && isxhash(awardinfo.ref)) {
-    awardinfo.ref = function_3c8848a3a11b2553(awardinfo.ref);
+    awardinfo.ref = getxhashsourcename(awardinfo.ref);
   }
 
   self setplayerdata("common", "round", "awards", insertindex, "award", awardinfo.ref);

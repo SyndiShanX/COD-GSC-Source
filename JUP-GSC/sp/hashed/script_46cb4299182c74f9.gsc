@@ -79,7 +79,7 @@ function function_b1c91c65e339db66(player) {
 
 #using_animtree("mp_vehicles_always_loaded");
 
-function function_8603fb4f33894a3d(vehicle, var_7558f98f3236963d, player, data) {
+function function_8603fb4f33894a3d(vehicle, newseatid, player, data) {
   vehicle notify("player_entered_enemy_vehicle");
 
   if(istrue(vehicle.door_open)) {
@@ -98,7 +98,7 @@ function function_8603fb4f33894a3d(vehicle, var_7558f98f3236963d, player, data) 
   }
 }
 
-function function_42cff90ec61377e1(vehicle, var_7558f98f3236963d, player, data) {
+function function_42cff90ec61377e1(vehicle, newseatid, player, data) {
   if(!istrue(data.playerdisconnect)) {
     player.isdrivingvehicle = undefined;
   }

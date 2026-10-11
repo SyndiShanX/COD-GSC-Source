@@ -148,7 +148,7 @@ function _fire(lifeid, player) {
   missileeyes(player, rocket);
 }
 
-function function_7ffa02c6592145d(lifeid, player) {
+function _fire_noplayer(lifeid, player) {
   upvector = (0, 0, level.missileremotelaunchvert);
   backdist = level.missileremotelaunchhorz;
   targetdist = level.missileremotelaunchtargetdist;

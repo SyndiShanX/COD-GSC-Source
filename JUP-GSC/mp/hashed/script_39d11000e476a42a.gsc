@@ -17,10 +17,10 @@
 #namespace namespace_bd7428f3122be80f;
 
 function function_69406b22706f2162(relevantparameters) {
-  var_c359824d10b7dbd3 = relevantparameters.cache;
+  grouprewardcache = relevantparameters.cache;
   player = relevantparameters.player;
 
-  if(!isDefined(var_c359824d10b7dbd3)) {
+  if(!isDefined(grouprewardcache)) {
     reward_cache::function_e02e37e34dec2042("Could not open undefined group reward cache (lootable container).");
     return;
   }
@@ -30,32 +30,32 @@ function function_69406b22706f2162(relevantparameters) {
     return;
   }
 
-  var_c359824d10b7dbd3.minimumslots = function_349ba59b91101535(var_c359824d10b7dbd3);
-  common_cache::function_30f5ea60517f9e06(var_c359824d10b7dbd3, player);
+  grouprewardcache.minimumslots = function_349ba59b91101535(grouprewardcache);
+  common_cache::openlootablecontainer(grouprewardcache, player);
 }
 
-function function_aae7d234bf6eaaa9(var_6f8af5eb76deac21) {
-  var_ac1eb7f0cf25e439 = var_6f8af5eb76deac21.var_ac1eb7f0cf25e439;
+function function_aae7d234bf6eaaa9(relevantinfostruct) {
+  currentopener = relevantinfostruct.currentopener;
 
-  if(!isPlayer(var_ac1eb7f0cf25e439)) {
+  if(!isPlayer(currentopener)) {
     return;
   }
 
-  lootid = var_6f8af5eb76deac21.lootid;
-  quantity = var_6f8af5eb76deac21.quantity;
-  containerindex = var_6f8af5eb76deac21.containerindex;
-  common_cache::function_eff2aed88a59ccfd(var_ac1eb7f0cf25e439, containerindex, lootid, quantity);
+  lootid = relevantinfostruct.lootid;
+  quantity = relevantinfostruct.quantity;
+  containerindex = relevantinfostruct.containerindex;
+  common_cache::function_eff2aed88a59ccfd(currentopener, containerindex, lootid, quantity);
 }
 
-function function_9302d6fba4ac736a(var_6f8af5eb76deac21) {
+function function_9302d6fba4ac736a(relevantinfostruct) {
   activityinstance = self;
-  category = namespace_68dc261109a9503f::function_511be8bcaede8b52(activityinstance);
+  category = namespace_68dc261109a9503f::getactivitycategory(activityinstance);
 
   if(category == "Contract") {
     reward_instance = spawnStruct();
     reward_instance.difficulty_region = activityinstance namespace_e8853d3344e33cf6::function_208c5a28152e1218();
     reward_instance.activity_instance = activityinstance;
-    reward_instance.reward_group = var_6f8af5eb76deac21.reward_group;
+    reward_instance.reward_group = relevantinfostruct.reward_group;
     cache = spawnStruct();
     reward_instance namespace_e8853d3344e33cf6::function_d67ffd8ae22bf637(cache);
     return cache.contents;
@@ -65,23 +65,23 @@ function function_9302d6fba4ac736a(var_6f8af5eb76deac21) {
   return [];
 }
 
-function function_b64c78402ddc2359(var_6f8af5eb76deac21) {
+function function_b64c78402ddc2359(relevantinfostruct) {
   activityinstance = self;
-  var_2b5aa40272b0bbce = var_6f8af5eb76deac21.var_2b5aa40272b0bbce;
+  rewardspawnlocationtype = relevantinfostruct.rewardspawnlocationtype;
   assert(isDefined(activityinstance));
 
-  if(!isDefined(var_2b5aa40272b0bbce)) {
+  if(!isDefined(rewardspawnlocationtype)) {
     reward_cache::function_469b7ea0b94baae6("GetRewardSpawnLocation called without a relevantInfoStruct.rewardSpawnLocationType property. Did you pass one into RunActivityFunction?");
   }
 
-  switch (var_2b5aa40272b0bbce) {
+  switch (rewardspawnlocationtype) {
     case #"hash_c7c061e869305a0b":
       return function_279caa69a00248fc(activityinstance);
     case #"hash_89ee46feec0f25b9":
       reward_cache::function_469b7ea0b94baae6("Unable to find a location to spawn the reward. Reason: \"Function Override\" was specified as the reward spawn location in the reward scriptbundle, but no such override has been set.");
       break;
     default:
-      reward_cache::function_469b7ea0b94baae6("Unable to find a location to spawn the reward. Reason: rewardSpawnLocationType " + var_2b5aa40272b0bbce + " is not recognized by the Nexus. Please check that your rewards bundle is configured correctly");
+      reward_cache::function_469b7ea0b94baae6("Unable to find a location to spawn the reward. Reason: rewardSpawnLocationType " + rewardspawnlocationtype + " is not recognized by the Nexus. Please check that your rewards bundle is configured correctly");
       break;
   }
 
@@ -92,8 +92,8 @@ function function_3ae7f99339b96499(origin, var_6c1956fd6ce84917, var_89bf5d05261
   return namespace_6257bf0db64cb539::function_facc1b52ce8080fb(origin, (0, 0, 0), default_to(var_6c1956fd6ce84917, 0), default_to(var_89bf5d052616cfb, 100), 22, 36);
 }
 
-function private function_349ba59b91101535(var_c359824d10b7dbd3) {
-  return int(max(var_c359824d10b7dbd3.contents.size, 4));
+function private function_349ba59b91101535(grouprewardcache) {
+  return int(max(grouprewardcache.contents.size, 4));
 }
 
 function private function_279caa69a00248fc(activityinstance) {

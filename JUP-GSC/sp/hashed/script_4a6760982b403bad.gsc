@@ -3,26 +3,26 @@
  * Script: sp\hashed\script_4a6760982b403bad.gsc
 *************************************************/
 
-#namespace namespace_c45ac99c4997e722;
+#namespace telemetry_utils;
 
 function function_aacbbe63c26687ae(callback, func) {
-  if(!isDefined(level.var_ec2c9117bd4b336b)) {
-    level.var_ec2c9117bd4b336b = [];
+  if(!isDefined(level.telemetry_callbacks)) {
+    level.telemetry_callbacks = [];
   }
 
-  if(!isDefined(level.var_ec2c9117bd4b336b[callback])) {
-    level.var_ec2c9117bd4b336b[callback] = [];
+  if(!isDefined(level.telemetry_callbacks[callback])) {
+    level.telemetry_callbacks[callback] = [];
   }
 
-  level.var_ec2c9117bd4b336b[callback][level.var_ec2c9117bd4b336b[callback].size] = func;
+  level.telemetry_callbacks[callback][level.telemetry_callbacks[callback].size] = func;
 }
 
 function function_9ce94b15ee6758ee(callback) {
-  if(!isDefined(level.var_ec2c9117bd4b336b)) {
+  if(!isDefined(level.telemetry_callbacks)) {
     return false;
   }
 
-  if(!isDefined(level.var_ec2c9117bd4b336b[callback])) {
+  if(!isDefined(level.telemetry_callbacks[callback])) {
     return false;
   }
 
@@ -35,15 +35,15 @@ function function_80820d6d364c1836(callback, data) {
   }
 
   if(isDefined(data)) {
-    for(i = 0; i < level.var_ec2c9117bd4b336b[callback].size; i++) {
-      thread[[level.var_ec2c9117bd4b336b[callback][i]]](data);
+    for(i = 0; i < level.telemetry_callbacks[callback].size; i++) {
+      thread[[level.telemetry_callbacks[callback][i]]](data);
     }
 
     return;
   }
 
-  for(i = 0; i < level.var_ec2c9117bd4b336b[callback].size; i++) {
-    thread[[level.var_ec2c9117bd4b336b[callback][i]]]();
+  for(i = 0; i < level.telemetry_callbacks[callback].size; i++) {
+    thread[[level.telemetry_callbacks[callback][i]]]();
   }
 }
 
@@ -80,7 +80,7 @@ function function_50989a55805a440b() {
   return "MOUNT_NONE";
 }
 
-function function_892570944f6b6a2(client) {
+function is_valid_client(client) {
   if(istrue(game["isLaunchChunk"])) {
     return false;
   }
@@ -136,14 +136,14 @@ function get_objective_type() {
 }
 
 function function_ff48d255c865806(client) {
-  if(function_892570944f6b6a2(client)) {
+  if(is_valid_client(client)) {
     return (client.clientid < level.maxlogclients);
   }
 
   return 0;
 }
 
-function function_86d327084eebf87a(value) {
+function validatetuningdata(value) {
   if(!isDefined(value) || !isfloat(value)) {
     assert("value is not a \"Float\". Defaulting to -1000000.0, since it is currently outside the scope of tuning values.");
     value = -1e+06;

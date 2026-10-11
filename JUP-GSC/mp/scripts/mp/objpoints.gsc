@@ -60,26 +60,26 @@ function createteamobjpoint(index, origin, team, shader, alpha, scale) {
   return objpoint;
 }
 
-function deleteobjpoint(var_2f8b2ff7e0389b27) {
+function deleteobjpoint(oldobjpoint) {
   assert(level.objpoints.size == level.objpointnames.size);
 
   if(level.objpoints.size == 1) {
-    assert(level.objpointnames[0] == var_2f8b2ff7e0389b27.name);
-    assert(isDefined(level.objpoints[var_2f8b2ff7e0389b27.name]));
+    assert(level.objpointnames[0] == oldobjpoint.name);
+    assert(isDefined(level.objpoints[oldobjpoint.name]));
     level.objpoints = [];
     level.objpointnames = [];
-    var_2f8b2ff7e0389b27 destroy();
+    oldobjpoint destroy();
     return;
   }
 
-  newindex = var_2f8b2ff7e0389b27.index;
+  newindex = oldobjpoint.index;
   oldindex = level.objpointnames.size - 1;
   objpoint = getobjpointbyindex(oldindex);
   level.objpointnames[newindex] = objpoint.name;
   objpoint.index = newindex;
   level.objpointnames[oldindex] = undefined;
-  level.objpoints[var_2f8b2ff7e0389b27.name] = undefined;
-  var_2f8b2ff7e0389b27 destroy();
+  level.objpoints[oldobjpoint.name] = undefined;
+  oldobjpoint destroy();
 }
 
 function updateorigin(origin) {

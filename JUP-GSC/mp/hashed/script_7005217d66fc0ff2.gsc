@@ -65,7 +65,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "1";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -214,7 +214,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -291,7 +291,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -347,7 +347,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0.15";
-  s.var_acaed5eee748b3f = "0.15";
+  s.min_wait_time = "0.15";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -424,7 +424,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -436,7 +436,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -448,7 +448,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0.15";
-  s.var_acaed5eee748b3f = "0.15";
+  s.min_wait_time = "0.15";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -491,7 +491,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0.15";
-  s.var_acaed5eee748b3f = "0.15";
+  s.min_wait_time = "0.15";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -503,7 +503,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -548,7 +548,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -559,7 +559,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -570,7 +570,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -582,7 +582,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0.15";
-  s.var_acaed5eee748b3f = "0.15";
+  s.min_wait_time = "0.15";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -594,7 +594,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0.15";
-  s.var_acaed5eee748b3f = "0.15";
+  s.min_wait_time = "0.15";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -605,7 +605,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -616,7 +616,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -628,7 +628,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0.15";
-  s.var_acaed5eee748b3f = "0.15";
+  s.min_wait_time = "0.15";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -640,7 +640,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -651,7 +651,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -662,7 +662,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -674,7 +674,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -691,7 +691,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0.15";
-  s.var_acaed5eee748b3f = "0.15";
+  s.min_wait_time = "0.15";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -753,7 +753,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0.15";
-  s.var_acaed5eee748b3f = "0.15";
+  s.min_wait_time = "0.15";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -802,7 +802,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -840,7 +840,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -878,7 +878,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -890,7 +890,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -902,7 +902,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -914,7 +914,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -926,7 +926,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -957,7 +957,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -969,7 +969,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "20";
-  s.var_acaed5eee748b3f = "20";
+  s.min_wait_time = "20";
   s.move_speed = "1";
   s.reverse_route = "1";
   s.spawn_filter = "none";
@@ -980,7 +980,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -992,7 +992,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.name = "ai_encounter_patrol_point";
   s.reverse_route = "0";
@@ -1004,7 +1004,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1015,7 +1015,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1038,7 +1038,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.name = "ai_encounter_patrol_point";
   s.reverse_route = "1";
@@ -1098,7 +1098,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1110,7 +1110,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "1";
-  s.var_acaed5eee748b3f = "1";
+  s.min_wait_time = "1";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1169,7 +1169,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "4";
-  s.var_acaed5eee748b3f = "3";
+  s.min_wait_time = "3";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1180,7 +1180,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1191,7 +1191,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1202,7 +1202,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1220,7 +1220,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1232,7 +1232,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "2";
-  s.var_acaed5eee748b3f = "2";
+  s.min_wait_time = "2";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1250,7 +1250,7 @@ function createstructs(fe, us, cf) {
   s.loop_route = "0";
   s.var_912df596f9f4417f = "1";
   s.max_wait_time = "0";
-  s.var_acaed5eee748b3f = "0";
+  s.min_wait_time = "0";
   s.move_speed = "1";
   s.reverse_route = "0";
   s.spawn_filter = "none";
@@ -1327,13 +1327,13 @@ function cleanup() {
 }
 
 function function_fd69cf02ba4d90a2() {
-  var_d13c18af4084bdfd = spawnStruct();
-  var_d13c18af4084bdfd.name = "REV_OB_WARLORD";
-  var_d13c18af4084bdfd.scriptbundle = "jup_ob_activitydefinition_warlord_all_for_one";
-  var_d13c18af4084bdfd.mainfunction = &main;
-  var_d13c18af4084bdfd.var_6e7eb28b2997b5b4 = &function_82613e20fba2deb9;
-  var_d13c18af4084bdfd.var_ad1dcd56d202e9ac = &function_6da2952367672ac0;
-  return var_d13c18af4084bdfd;
+  activityinfostruct = spawnStruct();
+  activityinfostruct.name = "REV_OB_WARLORD";
+  activityinfostruct.scriptbundle = "jup_ob_activitydefinition_warlord_all_for_one";
+  activityinfostruct.mainfunction = &main;
+  activityinfostruct.var_6e7eb28b2997b5b4 = &function_82613e20fba2deb9;
+  activityinfostruct.metadatafunction = &function_6da2952367672ac0;
+  return activityinfostruct;
 }
 
 function function_82613e20fba2deb9(instancename, fe, us, cf) {

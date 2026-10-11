@@ -170,14 +170,14 @@ function rounddecimalplaces(value, places, style) {
   newvalue = value * modifier;
 
   if(style == "up") {
-    var_ce526f59e2a5ad3f = ceil(newvalue);
+    roundedvalue = ceil(newvalue);
   } else if(style == "down") {
-    var_ce526f59e2a5ad3f = floor(newvalue);
+    roundedvalue = floor(newvalue);
   } else {
-    var_ce526f59e2a5ad3f = newvalue + 0.5;
+    roundedvalue = newvalue + 0.5;
   }
 
-  newvalue = int(var_ce526f59e2a5ad3f);
+  newvalue = int(roundedvalue);
   newvalue /= modifier;
   return newvalue;
 }
@@ -459,5 +459,5 @@ function demoforcesre(message) {
 }
 
 function function_7bd154ad046984e2(message) {
-  function_7bcd667fc073fc12("sre_error_event", "SRE LOGGING", message);
+  recordeventforsreparser("sre_error_event", "SRE LOGGING", message);
 }

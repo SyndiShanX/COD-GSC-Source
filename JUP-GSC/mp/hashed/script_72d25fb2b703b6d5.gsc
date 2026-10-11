@@ -248,7 +248,7 @@ function private function_7df370db6f5c2769() {
   var_2e17aeee87c04fae = 4;
   var_1af552d7a8743a80 = 9.5;
   var_507f54f784d0918 = var_2e17aeee87c04fae + var_1af552d7a8743a80;
-  function_f1aed36ab4598ea("mp_gamemode_br_exfils_jup");
+  snd_transient_load("mp_gamemode_br_exfils_jup");
   self.var_3ac645baaf9e0cb thread scene::pre_stream(self.winners, undefined, var_507f54f784d0918);
   wait var_2e17aeee87c04fae;
   function_92cf6571a49606b9();
@@ -481,7 +481,7 @@ function function_c4ebe940e6d84d42() {
     soundbank = [[scripts\engine\utility::getsharedfunc("br_ending_chopper_to_hq", "getExfilSoundbank")]]();
   }
 
-  function_f4e0ff5cb899686d(soundbank);
+  snd_transient_unload(soundbank);
 }
 
 function function_aafaf24d80927b02() {

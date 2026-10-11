@@ -161,7 +161,7 @@ function function_1ebfa39eec539a06(var_23c71a9282a816b8) {
 }
 
 function function_a9b5d13fe5f689e9() {
-  return function_5175ee2a98016ca8(self) ? function_b7755ccb57f05b94(level.player.origin) : function_44daa65837a12044(level.player, self.origin, self.var_3d33ce746b270d75.objective_radius);
+  return function_5175ee2a98016ca8(self) ? function_b7755ccb57f05b94(level.player.origin) : playerwithindistance(level.player, self.origin, self.discoveries.objective_radius);
 }
 
 function function_33f65e70afe93566() {
@@ -199,14 +199,14 @@ function function_b7755ccb57f05b94(position, offset) {
 
 function function_98e2681984d4b574(objective, offset) {
   assertex(function_409b4b9bee1fbe1c(objective), "Not a valid objective");
-  var_99c51aeb29995c6e = default_to(offset, objective.var_3d33ce746b270d75.los_distance);
+  var_99c51aeb29995c6e = default_to(offset, objective.discoveries.los_distance);
 
   if(!isDefined(var_99c51aeb29995c6e)) {
     var_99c51aeb29995c6e = 1000;
   }
 
-  if(!function_5175ee2a98016ca8(objective) && isDefined(objective.var_3d33ce746b270d75.objective_radius)) {
-    var_c0eb8d67683fc1bc = function_327238912108e244(self.origin, objective.origin, objective.var_3d33ce746b270d75.objective_radius + var_99c51aeb29995c6e);
+  if(!function_5175ee2a98016ca8(objective) && isDefined(objective.discoveries.objective_radius)) {
+    var_c0eb8d67683fc1bc = function_327238912108e244(self.origin, objective.origin, objective.discoveries.objective_radius + var_99c51aeb29995c6e);
   } else {
     var_c0eb8d67683fc1bc = objective function_b7755ccb57f05b94(self.origin, var_99c51aeb29995c6e);
   }
@@ -216,7 +216,7 @@ function function_98e2681984d4b574(objective, offset) {
 
 function function_32d239d0cac2dbdc(objective) {
   assertex(function_409b4b9bee1fbe1c(objective), "Not a valid objective");
-  var_99c51aeb29995c6e = default_to(objective.var_3d33ce746b270d75.los_distance, 1000);
+  var_99c51aeb29995c6e = default_to(objective.discoveries.los_distance, 1000);
   playereye = self getEye();
   var_edfa8657164b3919 = playereye + anglesToForward(self getplayerangles()) * var_99c51aeb29995c6e;
   trace = scripts\engine\trace::ray_trace(playereye, var_edfa8657164b3919);
@@ -227,8 +227,8 @@ function function_32d239d0cac2dbdc(objective) {
 
   var_84aeba1f9b16720b = 0;
 
-  if(!function_5175ee2a98016ca8(objective) && isDefined(objective.var_3d33ce746b270d75.objective_radius)) {
-    var_84aeba1f9b16720b = function_327238912108e244(closestpoint, objective.origin, objective.var_3d33ce746b270d75.objective_radius);
+  if(!function_5175ee2a98016ca8(objective) && isDefined(objective.discoveries.objective_radius)) {
+    var_84aeba1f9b16720b = function_327238912108e244(closestpoint, objective.origin, objective.discoveries.objective_radius);
   } else {
     var_84aeba1f9b16720b = objective function_b7755ccb57f05b94(closestpoint);
   }

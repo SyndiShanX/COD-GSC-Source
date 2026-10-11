@@ -15,7 +15,7 @@ function init() {
     scripts\common\devgui::function_6e7290c8ee4f558b("<dev string:x1c>");
 
     foreach(splash in splashlist.splash_list) {
-      splashname = function_3c8848a3a11b2553(splash.ref);
+      splashname = getxhashsourcename(splash.ref);
 
       if(string_starts_with(splashname, "<dev string:x33>") || string_starts_with(splashname, "<dev string:x3a>")) {
         scripts\common\devgui::function_b23a59dfb4ca49a1(splashname, "<dev string:x44>" + splashname + "<dev string:x4f>" + level.gamemodebundle.splashlist, &function_652ce4b2c3591175);
@@ -29,7 +29,7 @@ function init() {
   scripts\common\devgui::function_6e7290c8ee4f558b("<dev string:x6a>");
 
   foreach(splash in splashlist.splash_list) {
-    splashname = function_3c8848a3a11b2553(splash.ref);
+    splashname = getxhashsourcename(splash.ref);
     scripts\common\devgui::function_b23a59dfb4ca49a1(splashname, "<dev string:x44>" + splashname + "<dev string:x4f>" + "<dev string:x54>", &function_652ce4b2c3591175);
   }
 

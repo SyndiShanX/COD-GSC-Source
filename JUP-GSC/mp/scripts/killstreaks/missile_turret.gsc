@@ -26,7 +26,7 @@
 #namespace missile_turret;
 
 function autoexec main() {
-  function_df7ab5b0f898e8bc(function_1823ff50bb28148d("missile_turret"), &init);
+  registerkillstreakinitfunction(getxhash("missile_turret"), &init);
 }
 
 function private init() {
@@ -816,7 +816,7 @@ function function_ad3bcd8ec77ba7a0(turret) {
     self.var_9c4245f683e3e800--;
     turret delete();
     self.var_35cb2404e29573ce = 0;
-    function_f3bb4f4911a1beb2("killstreak", "refundKillstreak", "missile_turret", 1, 0, 0, 1);
+    callsharedfunc("killstreak", "refundKillstreak", "missile_turret", 1, 0, 0, 1);
     return 0;
   }
 
@@ -829,7 +829,7 @@ function function_ad3bcd8ec77ba7a0(turret) {
     self.var_9c4245f683e3e800--;
     turret delete();
     self.var_35cb2404e29573ce = 0;
-    function_f3bb4f4911a1beb2("killstreak", "refundKillstreak", "missile_turret", 1, 0, 0, 1);
+    callsharedfunc("killstreak", "refundKillstreak", "missile_turret", 1, 0, 0, 1);
     return 0;
   }
 
@@ -992,7 +992,7 @@ function private function_eb7530e3d6daf2d(data) {
 
 function function_bfdcec13005413a5(data) {
   if(isDefined(data.attacker)) {
-    data.attacker thread function_f3bb4f4911a1beb2("player", "doScoreEvent", #"emp_disable");
+    data.attacker thread callsharedfunc("player", "doScoreEvent", #"emp_disable");
   }
 
   self turretfiredisable();
@@ -1104,7 +1104,7 @@ function missileturret_hack(newowner, oldowner) {
     }
 
     newowner thread function_d02d69714fbaffc1(self);
-    namespace_37987c2865e1a627::function_2eff4cd94c3243e8();
+    namespace_37987c2865e1a627::clearminimapid();
 
     if(issharedfuncdefined("game", "createObjective")) {
       self.minimapid = self[[getsharedfunc("game", "createObjective")]](bundle.minimapicon, newowner.team, undefined, 1, 1);
@@ -1236,7 +1236,7 @@ function function_70c8684c2c29bf59(type) {
   self setModel(turretmodel);
 }
 
-function function_973e8bbeddc12392(var_630af5192659dd3b, player) {
+function function_973e8bbeddc12392(configoverride, player) {
   self.owner endon("<dev string:x76>");
 
   self endon("kill_turret");
@@ -1249,7 +1249,7 @@ function function_973e8bbeddc12392(var_630af5192659dd3b, player) {
 
     if(self isfiringturret()) {
       self laseron();
-      thread function_d335a0d787014372(var_630af5192659dd3b, player);
+      thread function_d335a0d787014372(configoverride, player);
       continue;
     }
 
@@ -1259,7 +1259,7 @@ function function_973e8bbeddc12392(var_630af5192659dd3b, player) {
   }
 }
 
-function function_9ca3664d52343397(var_630af5192659dd3b) {
+function function_9ca3664d52343397(configoverride) {
   self endon("<dev string:x90>");
   self endon("<dev string:x9f>");
   level endon("<dev string:xaa>");
@@ -1268,15 +1268,15 @@ function function_9ca3664d52343397(var_630af5192659dd3b) {
   self.turrettarget dontinterpolate();
   self.turrettarget thread function_f77183de0101e64(self);
   self.turrettarget thread function_150429e3a1a34f4c(self);
-  var_50651df7c1ef6241 = undefined;
+  turretconfig = undefined;
 
-  if(isDefined(var_630af5192659dd3b)) {
-    var_50651df7c1ef6241 = var_630af5192659dd3b;
+  if(isDefined(configoverride)) {
+    turretconfig = configoverride;
   } else {
-    var_50651df7c1ef6241 = level.missilesettings[self.turrettype];
+    turretconfig = level.missilesettings[self.turrettype];
   }
 
-  sentrymode = var_50651df7c1ef6241.sentrymodeon;
+  sentrymode = turretconfig.sentrymodeon;
   manualmode = "<dev string:xd5>";
   turretmode = sentrymode;
   notifyon = 0;
@@ -1356,9 +1356,9 @@ function function_295d25dc7b9680be(firepos) {
     thread drawsphere(var_30c9c9336ef2caaf, 2, 1, (0, 1, 1));
     thread drawline(var_30c9c9336ef2caaf, var_30c9c9336ef2caaf + anglesToForward(var_831cc1b8f4225351) * 1800, 1, (0, 1, 1));
     flashtagorigin = self gettagorigin(endtag);
-    var_e0416d7c3c03c91b = self gettagangles(endtag);
+    flashtagangles = self gettagangles(endtag);
     thread drawsphere(flashtagorigin, 2, 1, (1, 1, 0));
-    thread drawline(flashtagorigin, flashtagorigin + anglesToForward(var_e0416d7c3c03c91b) * 1800, 1, (1, 1, 0));
+    thread drawline(flashtagorigin, flashtagorigin + anglesToForward(flashtagangles) * 1800, 1, (1, 1, 0));
     wait 1;
   }
 }
@@ -1400,10 +1400,10 @@ function function_d60ffc368c740a5() {
   self setscriptablepartstate("turret_target_found", "target_found");
 }
 
-function missile_spinup(var_630af5192659dd3b) {
+function missile_spinup(configoverride) {
   thread function_d60ffc368c740a5();
 
-  while(self.momentum < var_630af5192659dd3b.spinuptime) {
+  while(self.momentum < configoverride.spinuptime) {
     self.momentum += 0.1;
     wait 0.1;
   }
@@ -1414,24 +1414,24 @@ function function_bb2747086c8be5e4() {
   self setscriptablepartstate("turret_target_found", "off");
 }
 
-function function_d335a0d787014372(var_630af5192659dd3b, player) {
+function function_d335a0d787014372(configoverride, player) {
   self endon("death");
   self endon("stop_shooting");
   level endon("game_ended");
-  var_50651df7c1ef6241 = undefined;
+  turretconfig = undefined;
 
-  if(isDefined(var_630af5192659dd3b)) {
-    var_50651df7c1ef6241 = var_630af5192659dd3b;
+  if(isDefined(configoverride)) {
+    turretconfig = configoverride;
   } else {
-    var_50651df7c1ef6241 = level.missilesettings[self.turrettype];
+    turretconfig = level.missilesettings[self.turrettype];
   }
 
-  missile_spinup(var_50651df7c1ef6241);
-  firetime = weaponfiretime(var_50651df7c1ef6241.weaponinfo);
+  missile_spinup(turretconfig);
+  firetime = weaponfiretime(turretconfig.weaponinfo);
 
   while(true) {
-    if(self.var_8f7ba18bc776be33 == var_50651df7c1ef6241.nummissiles) {
-      wait var_50651df7c1ef6241.lockontime;
+    if(self.var_8f7ba18bc776be33 == turretconfig.nummissiles) {
+      wait turretconfig.lockontime;
     }
 
     if(self.var_8f7ba18bc776be33 > 0 && isDefined(self.targetentityref)) {
@@ -1439,7 +1439,7 @@ function function_d335a0d787014372(var_630af5192659dd3b, player) {
 
       if(diffhealth < self.targetentityref.maxhealth) {
         if(self.var_ab491918db8f34a || self.var_5da08662e2b1cff6 <= 0) {
-          wait var_50651df7c1ef6241.lockontime;
+          wait turretconfig.lockontime;
         }
 
         if(self.var_5da08662e2b1cff6 <= 0) {
@@ -1451,7 +1451,7 @@ function function_d335a0d787014372(var_630af5192659dd3b, player) {
       }
     }
 
-    wait var_50651df7c1ef6241.cooldowntime;
+    wait turretconfig.cooldowntime;
   }
 }
 

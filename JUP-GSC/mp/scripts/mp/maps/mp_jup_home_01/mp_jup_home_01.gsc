@@ -49,10 +49,10 @@ function function_261c472c0f5a1633() {
     var_3994588df7681f2c = (16, 16, 60);
     var_b6272ee2a017d043 = (12, -448, 50);
     createnavbadplacebybounds(var_b6272ee2a017d043, var_3994588df7681f2c, (0, 0, 0));
-    var_449a0250bc0346c1 = spawn_model("p7_box_cardboard_d_closed", (18.902, 389.645, 17.066), (0, 90.1995, 0));
-    var_4499ff50bc034028 = spawn_model("us_decor_box_cash_02", (18.427, 392.164, 36.523), (0.0127182, 177.297, -0.0128985));
-    var_449a0050bc03425b = spawn_model("p7_box_cardboard_d_closed", (43.645, 390.098, 15.106), (0, 0.199495, 0));
-    var_449a0550bc034d5a = spawn_model("us_decor_box_cash_01", (44, 390, 34), (0, 180, 0));
+    box01 = spawn_model("p7_box_cardboard_d_closed", (18.902, 389.645, 17.066), (0, 90.1995, 0));
+    box02 = spawn_model("us_decor_box_cash_02", (18.427, 392.164, 36.523), (0.0127182, 177.297, -0.0128985));
+    box03 = spawn_model("p7_box_cardboard_d_closed", (43.645, 390.098, 15.106), (0, 0.199495, 0));
+    box04 = spawn_model("us_decor_box_cash_01", (44, 390, 34), (0, 180, 0));
     patch = getEnt("care_package_col", "targetname");
     var_45428b56ef07ea91 = spawn("script_model", (30, 398, 42));
     var_45428b56ef07ea91.angles = (0, 0, 0);

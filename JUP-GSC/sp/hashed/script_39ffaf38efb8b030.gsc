@@ -35,9 +35,9 @@ function function_e5fa9c74eac6670b() {
   level.player clearsoundsubmix("cp_jup_ranch_global");
 }
 
-function function_d3fbaef4d5cdea71(var_eaad182af1b91884) {
+function function_d3fbaef4d5cdea71(trigname) {
   flag_wait("dungeon_load_finished");
-  var_bbba576a25b49793 = getEntArray(var_eaad182af1b91884, "targetname");
+  var_bbba576a25b49793 = getEntArray(trigname, "targetname");
 
   foreach(trig in var_bbba576a25b49793) {
     thread function_39a1ac4197ec37d9(trig);
@@ -71,9 +71,9 @@ function function_39a1ac4197ec37d9(trig) {
   }
 }
 
-function function_13b2c0cc738ee137(var_eaad182af1b91884) {
+function function_13b2c0cc738ee137(trigname) {
   flag_wait("dungeon_load_finished");
-  var_5a1df9a6287a20c5 = getEntArray(var_eaad182af1b91884, "targetname");
+  var_5a1df9a6287a20c5 = getEntArray(trigname, "targetname");
 
   foreach(trig in var_5a1df9a6287a20c5) {
     thread function_981cf4a78abbb4db(trig);

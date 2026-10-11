@@ -136,7 +136,7 @@ function function_d7cf952e6f352615(player) {
   waitframe();
 
   while(timer.progresscomplete != 1) {
-    n_time_remaining = int(timer.var_621cb2c0d9b1cdae);
+    n_time_remaining = int(timer.currentprogressvalue);
 
     foreach(squaddie in a_squad) {
       squaddie setclientomnvar("ui_is_exfil_countdown", 1);

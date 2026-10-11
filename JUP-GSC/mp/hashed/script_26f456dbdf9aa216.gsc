@@ -10,7 +10,7 @@
 #namespace namespace_cbce62193111f79;
 
 function function_5ad32ab5f21ddf93(statename, params) {
-  id = self function_92435c7a6ae85c3c();
+  id = self getinteractionid();
 
   if(params.size == 1) {
     thread scripts\asm\gesture::ai_request_gesture(params[0], undefined, undefined, "gesture");

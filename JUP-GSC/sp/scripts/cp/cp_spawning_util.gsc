@@ -40,18 +40,18 @@ function disable_juggernaut_move_behavior(group) {
 
 function enable_cover_node_behavior(group) {
   self.combatmode = "cover";
-  self function_9f82c74eb1b7caf9(1);
+  self setcanusecover(1);
 }
 
 function disable_cover_node_behavior(group) {
-  self function_9f82c74eb1b7caf9(0);
+  self setcanusecover(0);
 }
 
-function end_objective_when_all_dead(group, objective, var_ff5ccede2521cb13, var_d7d8ec6f46377734) {
-  group thread end_objective_when_all_dead_interal(group, objective, var_ff5ccede2521cb13, var_d7d8ec6f46377734);
+function end_objective_when_all_dead(group, objective, var_ff5ccede2521cb13, unused3) {
+  group thread end_objective_when_all_dead_interal(group, objective, var_ff5ccede2521cb13, unused3);
 }
 
-function end_objective_when_all_dead_interal(group, objective_name, var_ff5ccede2521cb13, var_d7d8ec6f46377734) {
+function end_objective_when_all_dead_interal(group, objective_name, var_ff5ccede2521cb13, unused3) {
   level endon("game_ended");
   group waittill("all_group_spawns_dead");
 
@@ -784,12 +784,12 @@ function vehicle_spawngroup(veh_spawner, ai_spawners) {
 }
 
 function function_30c929b6490aaa38(veh_spawner) {
-  if(!isDefined(veh_spawner.vehicletype) && !isDefined(veh_spawner.var_1e33f32152f60866)) {
+  if(!isDefined(veh_spawner.vehicletype) && !isDefined(veh_spawner.script_vehicleref)) {
     return undefined;
   }
 
-  if(isDefined(veh_spawner.var_1e33f32152f60866)) {
-    return veh_spawner.var_1e33f32152f60866;
+  if(isDefined(veh_spawner.script_vehicleref)) {
+    return veh_spawner.script_vehicleref;
   }
 
   switch (veh_spawner.vehicletype) {
@@ -971,7 +971,7 @@ function function_823f69bc9733f183() {
 }
 
 function function_e7fc2021e96eb2f9() {
-  self function_9f82c74eb1b7caf9(0);
+  self setcanusecover(0);
   utility::demeanor_override("sprint");
   self.og_ignoreall = self.ignoreall;
   self.og_radius = self.goalradius;
@@ -985,7 +985,7 @@ function function_c83e8b49e55a092() {
   self.ignoreall = self.og_ignoreall;
   self.goalradius = self.og_radius;
   self allowedstances("stand", "crouch", "prone");
-  self function_9f82c74eb1b7caf9(1);
+  self setcanusecover(1);
 }
 
 function function_c0f7c5e411992612(dodge_type, closest_vehicle) {
@@ -1194,7 +1194,7 @@ function private update_turret_pointer(pos) {
 function private turret_aim_think() {
   self.gunner endon("stealth_hunt");
   self.gunner endon("death");
-  var_72bb599075a82534 = undefined;
+  last_known_pos = undefined;
   self.var_f9374a64ef9c64ec = undefined;
   var_2d1996a1afa79192 = 0;
   aim_offset = (0, 0, 0);
@@ -1222,28 +1222,28 @@ function private turret_aim_think() {
       continue;
     }
 
-    if(is_equal(self.gunner lastknownpos(self.mgturret[0].var_f9374a64ef9c64ec), var_72bb599075a82534)) {
+    if(is_equal(self.gunner lastknownpos(self.mgturret[0].var_f9374a64ef9c64ec), last_known_pos)) {
       continue;
     }
 
-    var_72bb599075a82534 = self.gunner lastknownpos(self.mgturret[0].var_f9374a64ef9c64ec);
+    last_known_pos = self.gunner lastknownpos(self.mgturret[0].var_f9374a64ef9c64ec);
 
     if(gettime() > var_2d1996a1afa79192) {
       start_origin = self.mgturret[0] gettagorigin("tag_aim");
       eye_offset = self.mgturret[0].var_f9374a64ef9c64ec getEye() - self.mgturret[0].var_f9374a64ef9c64ec.origin - (0, 0, 10);
 
-      if(scripts\engine\trace::ray_trace_passed(start_origin, var_72bb599075a82534, ignore_array)) {
+      if(scripts\engine\trace::ray_trace_passed(start_origin, last_known_pos, ignore_array)) {
         aim_offset = (0, 0, 0);
-      } else if(scripts\engine\trace::ray_trace_passed(start_origin, var_72bb599075a82534 + eye_offset, ignore_array)) {
+      } else if(scripts\engine\trace::ray_trace_passed(start_origin, last_known_pos + eye_offset, ignore_array)) {
         aim_offset = eye_offset;
-      } else if(scripts\engine\trace::ray_trace_passed(start_origin, var_72bb599075a82534 + eye_offset / 2, ignore_array)) {
+      } else if(scripts\engine\trace::ray_trace_passed(start_origin, last_known_pos + eye_offset / 2, ignore_array)) {
         aim_offset = eye_offset / 2;
       }
 
       var_2d1996a1afa79192 = gettime() + 1000;
     }
 
-    aim_pos = var_72bb599075a82534 + aim_offset;
+    aim_pos = last_known_pos + aim_offset;
 
     if(distancesquared(aim_pos, self.origin) < 40000 && !self.mgturret[0] turretcantarget(aim_pos)) {
       aim_origin = self.origin;
@@ -1327,27 +1327,27 @@ function private gunner_can_shoot_player(gunner) {
     return true;
   }
 
-  var_ee752f5a6b0f9807 = gunner lastknowntime(self.var_f9374a64ef9c64ec);
+  last_known_time = gunner lastknowntime(self.var_f9374a64ef9c64ec);
 
-  if(!isDefined(var_ee752f5a6b0f9807)) {
+  if(!isDefined(last_known_time)) {
     return false;
   }
 
-  if(gettime() - var_ee752f5a6b0f9807 > 10000) {
+  if(gettime() - last_known_time > 10000) {
     return false;
   }
 
-  var_72bb599075a82534 = gunner lastknownpos(self.var_f9374a64ef9c64ec);
+  last_known_pos = gunner lastknownpos(self.var_f9374a64ef9c64ec);
 
-  if(!isDefined(var_72bb599075a82534)) {
+  if(!isDefined(last_known_pos)) {
     return false;
   }
 
-  if(!turret_aimed_at_last_known(self gettagorigin("tag_flash"), self gettagangles("tag_flash"), var_72bb599075a82534)) {
+  if(!turret_aimed_at_last_known(self gettagorigin("tag_flash"), self gettagangles("tag_flash"), last_known_pos)) {
     return false;
   }
 
-  if(distancesquared(var_72bb599075a82534, self.var_f9374a64ef9c64ec.origin) > 16384) {
+  if(distancesquared(last_known_pos, self.var_f9374a64ef9c64ec.origin) > 16384) {
     return false;
   }
 

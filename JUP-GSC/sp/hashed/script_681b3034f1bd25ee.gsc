@@ -72,13 +72,13 @@ function function_b248bf57abb8eb43() {
   level.player setsoundsubmix("jup_cp_apt_price_sniper_scene_mix");
 }
 
-function function_87fa20426a85dd01(var_aa530e82ac4b938b) {
+function function_87fa20426a85dd01(baddy) {
   level waittill("price_fire");
-  var_aa530e82ac4b938b playSound("cp_apt_scn_price_zipline_shot_whizby");
+  baddy playSound("cp_apt_scn_price_zipline_shot_whizby");
 }
 
-function function_62e0ae6e1529d894(var_aa530e82ac4b938b) {
-  var_aa530e82ac4b938b playSound("cp_apt_scn_price_zipline_bullet_impact");
+function function_62e0ae6e1529d894(baddy) {
+  baddy playSound("cp_apt_scn_price_zipline_bullet_impact");
 }
 
 function function_a60e7c732b5440e2(var_a2e02bc146e6ebfd) {
@@ -110,22 +110,22 @@ function function_c1aee80b88bad254() {
   level.player setsoundsubmix("jup_cp_apt_rooftop_helicopter_scene_mix");
 }
 
-function function_d1b66b48341bf2ea(var_9c6043b223bcc972, var_9c6042b223bcc73f) {
-  var_9c6043b223bcc972 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_1b");
-  var_9c6042b223bcc73f playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_1a");
+function function_d1b66b48341bf2ea(helo1, helo2) {
+  helo1 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_1b");
+  helo2 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_1a");
 }
 
-function function_8681483e6d3d3522(var_9c6043b223bcc972) {
-  var_9c6043b223bcc972 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_2a");
+function function_8681483e6d3d3522(helo1) {
+  helo1 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_2a");
 }
 
-function function_573981212498b10b(var_9c6042b223bcc73f) {
-  var_9c6042b223bcc73f playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_2b");
+function function_573981212498b10b(helo2) {
+  helo2 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_2b");
 }
 
-function function_9e0d228709e80dbc(var_9c6043b223bcc972, var_9c6042b223bcc73f) {
-  var_9c6043b223bcc972 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_3a");
-  var_9c6042b223bcc73f playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_3b");
+function function_9e0d228709e80dbc(helo1, helo2) {
+  helo1 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_3a");
+  helo2 playsoundonmovingent("veh_jup_apt_enemy_heli_fly_in_3b");
 }
 
 function function_6c22b1feac90c495() {

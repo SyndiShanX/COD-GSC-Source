@@ -116,7 +116,7 @@ function stop_dialogue(cancel_queued_vo, cancel_delayed_vo) {
   thread function_3e5d12eb11d543a2(emitter);
 }
 
-function function_bb9f95455e7b6dfe(include_chatter) {
+function disable_dialogue(include_chatter) {
   speaker = self;
 
   if(level == self) {
@@ -133,7 +133,7 @@ function function_bb9f95455e7b6dfe(include_chatter) {
   speaker notify("cancel_delayed_vo");
 }
 
-function function_49ce27ac35596e2d(include_chatter) {
+function enable_dialogue(include_chatter) {
   speaker = self;
 
   if(level == self) {
@@ -238,7 +238,7 @@ function is_speaking() {
   }
 
   if(isDefined(speaker.var_800206351d64e3f4)) {
-    duration_ms = function_f9e725c7fd059300(speaker.var_800206351d64e3f4) * 1000;
+    duration_ms = get_holdtime(speaker.var_800206351d64e3f4) * 1000;
   } else {
     duration_ms = lookupsoundlength(speaker.var_88502eb1e08dfc4d);
   }
@@ -253,7 +253,7 @@ function function_8951f1a8a6f683c9() {
     speaker = function_f5eb5b4d0e6714aa();
   }
 
-  return speaker is_speaking() || isDefined(speaker.var_8329bfd06cbb047a);
+  return speaker is_speaking() || isDefined(speaker.vo_delaystart);
 }
 
 function function_754c9897f3b89964() {
@@ -273,7 +273,7 @@ function function_ed8a0ba27b9104c5() {
     speaker = function_f5eb5b4d0e6714aa();
   }
 
-  return speaker is_speaking() || istrue(speaker.var_3968de209a1c2b97) || isDefined(speaker.var_8329bfd06cbb047a);
+  return speaker is_speaking() || istrue(speaker.var_3968de209a1c2b97) || isDefined(speaker.vo_delaystart);
 }
 
 function function_d871f93553913276(team) {
@@ -342,7 +342,7 @@ function function_5731e26b3ff6304d(timeout) {
     if(isDefined(speaker.var_88502eb1e08dfc4d)) {
       duration_ms = lookupsoundlength(speaker.var_88502eb1e08dfc4d);
     } else {
-      duration_ms = function_f9e725c7fd059300(speaker.var_800206351d64e3f4) * 1000;
+      duration_ms = get_holdtime(speaker.var_800206351d64e3f4) * 1000;
     }
 
     time_remaining = (duration_ms - var_83e3baae738687f4) / 1000;
@@ -400,14 +400,14 @@ function function_2e6c500b83dc82f5() {
     speaker = function_f5eb5b4d0e6714aa();
   }
 
-  var_3a006b25cf6977aa = isDefined(speaker.var_8329bfd06cbb047a) && isnumber(speaker.var_c037496486cc9d4b);
+  var_3a006b25cf6977aa = isDefined(speaker.vo_delaystart) && isnumber(speaker.vo_delayvalue);
 
   if(!var_3a006b25cf6977aa && !isDefined(speaker.var_e5cf232129f9ec01) || !isDefined(speaker.var_88502eb1e08dfc4d)) {
     return undefined;
   }
 
   if(var_3a006b25cf6977aa) {
-    var_1189f67cda3a6ec6 = speaker.var_8329bfd06cbb047a + speaker.var_c037496486cc9d4b * 1000 + lookupsoundlength(speaker.var_88502eb1e08dfc4d);
+    var_1189f67cda3a6ec6 = speaker.vo_delaystart + speaker.vo_delayvalue * 1000 + lookupsoundlength(speaker.var_88502eb1e08dfc4d);
   } else {
     var_1189f67cda3a6ec6 = self.var_e5cf232129f9ec01 + lookupsoundlength(self.var_88502eb1e08dfc4d);
   }
@@ -420,35 +420,35 @@ function function_2e6c500b83dc82f5() {
 }
 
 function function_53037a6cae32fb97(var, value) {
-  if(!isDefined(self.var_a36de4031e866ce5)) {
+  if(!isDefined(self.vo_nagvars)) {
     function_746d94ac5ed3ee5c();
   }
 
   assertex(isDefined(var) && isDefined(self.nagvars[var]), "Invalid nagvar");
-  self.var_a36de4031e866ce5[var] = value;
+  self.vo_nagvars[var] = value;
 }
 
-function function_c3a221031a1ff66c(priority, timeout, overlap, scope) {
-  if(!isDefined(self.var_a36de4031e866ce5)) {
+function set_nagvars(priority, timeout, overlap, scope) {
+  if(!isDefined(self.vo_nagvars)) {
     function_746d94ac5ed3ee5c();
   }
 
-  self.var_a36de4031e866ce5.priority = default_to(priority, self.var_a36de4031e866ce5.priority);
-  self.var_a36de4031e866ce5.timeout = default_to(timeout, self.var_a36de4031e866ce5.timeout);
-  self.var_a36de4031e866ce5.overlap = default_to(overlap, self.var_a36de4031e866ce5.overlap);
-  self.var_a36de4031e866ce5.scope = default_to(scope, self.var_a36de4031e866ce5.scope);
+  self.vo_nagvars.priority = default_to(priority, self.vo_nagvars.priority);
+  self.vo_nagvars.timeout = default_to(timeout, self.vo_nagvars.timeout);
+  self.vo_nagvars.overlap = default_to(overlap, self.vo_nagvars.overlap);
+  self.vo_nagvars.scope = default_to(scope, self.vo_nagvars.scope);
 }
 
 function function_746d94ac5ed3ee5c() {
-  if(self != level && !isDefined(level.var_a36de4031e866ce5)) {
+  if(self != level && !isDefined(level.vo_nagvars)) {
     level function_746d94ac5ed3ee5c();
   }
 
-  self.var_a36de4031e866ce5 = spawnStruct();
-  self.var_a36de4031e866ce5.priority = default_to(level.var_a36de4031e866ce5.priority, 0);
-  self.var_a36de4031e866ce5.timeout = default_to(level.var_a36de4031e866ce5.timeout, 1);
-  self.var_a36de4031e866ce5.overlap = default_to(level.var_a36de4031e866ce5.overlap, 0);
-  self.var_a36de4031e866ce5.scope = default_to(level.var_a36de4031e866ce5.scope, "team");
+  self.vo_nagvars = spawnStruct();
+  self.vo_nagvars.priority = default_to(level.vo_nagvars.priority, 0);
+  self.vo_nagvars.timeout = default_to(level.vo_nagvars.timeout, 1);
+  self.vo_nagvars.overlap = default_to(level.vo_nagvars.overlap, 0);
+  self.vo_nagvars.scope = default_to(level.vo_nagvars.scope, "team");
 }
 
 function nag_wait(flag_msg, nags, repeat_delay, initial_delay, loop_limit, invert_flag) {
@@ -470,7 +470,7 @@ function nag_wait(flag_msg, nags, repeat_delay, initial_delay, loop_limit, inver
   endon_ent notify("stop");
 }
 
-function function_bace8af56ef0688b(flag_msg, nags, repeat_delay, initial_delay, loop_limit) {
+function nag_waitopen(flag_msg, nags, repeat_delay, initial_delay, loop_limit) {
   nag_wait(flag_msg, nags, repeat_delay, initial_delay, loop_limit, 1);
 }
 
@@ -487,7 +487,7 @@ function function_91c23782840cf632(var_eb053d490b6594d2, nags, repeat_delay, ini
   childthread nagtill([endon_ent, "stop"], nags, repeat_delay, initial_delay, loop_limit);
 
   while(true) {
-    function_5adca43f839a3cce(var_eb053d490b6594d2);
+    waittill_any_in_array(var_eb053d490b6594d2);
 
     foreach(flag_msg in var_eb053d490b6594d2) {
       if(ter_op(istrue(invert_flag), !flag(flag_msg), flag(flag_msg))) {
@@ -514,7 +514,7 @@ function function_91cb20828416e24b(var_eb053d490b6594d2, nags, repeat_delay, ini
   exit = 0;
 
   while(exit == 0) {
-    level function_5adca43f839a3cce(var_eb053d490b6594d2);
+    level waittill_any_in_array(var_eb053d490b6594d2);
     exit = 1;
 
     foreach(flag_msg in var_eb053d490b6594d2) {
@@ -544,7 +544,7 @@ function nagtill(endon_data, nags, repeat_delay, initial_delay, loop_limit) {
   nag_loop(nags, repeat_delay, initial_delay, loop_limit);
 }
 
-function function_a60fea4f51763a4f(endon_data, nags, repeat_delay, initial_delay, loop_limit) {
+function nagtill_any(endon_data, nags, repeat_delay, initial_delay, loop_limit) {
   endon_ent = self;
 
   foreach(endon_item in endon_data) {
@@ -878,14 +878,14 @@ function queue_say(speaker, alias, priority, timeout, overlap, delay) {
     }
 
     self notify("proceeded");
-    cancelled = speaker function_19e262da812ccbef(delay, alias);
-    speaker.var_8329bfd06cbb047a = undefined;
-    speaker.var_c037496486cc9d4b = undefined;
+    cancelled = speaker delay_dialogue(delay, alias);
+    speaker.vo_delaystart = undefined;
+    speaker.vo_delayvalue = undefined;
     speaker notify("stop_bcs_sequence");
 
     if(isDefined(cancelled) && !cancelled) {
       check_interrupt(overlap, self.scope_ents[self.scope]);
-      self.said_vo = speaker function_7b52f05da542c2ff(alias, overlap, self.scope_ents[self.scope], self.receivers);
+      self.said_vo = speaker say_dialogue(alias, overlap, self.scope_ents[self.scope], self.receivers);
     }
 
     if(is_dead_or_dying(speaker)) {
@@ -967,9 +967,9 @@ function execute_sequence() {
   }
 
   self notify("proceeded");
-  cancelled = self.speaker function_19e262da812ccbef(self.delay, self.alias);
-  self.speaker.var_8329bfd06cbb047a = undefined;
-  self.speaker.var_c037496486cc9d4b = undefined;
+  cancelled = self.speaker delay_dialogue(self.delay, self.alias);
+  self.speaker.vo_delaystart = undefined;
+  self.speaker.vo_delayvalue = undefined;
 
   if(isDefined(cancelled) && !cancelled) {
     if(getdvarint(@ "hash_62a9dffcf730f69")) {
@@ -1047,7 +1047,7 @@ function function_2f5f29da6f0f73e6() {
       return function_139ccec48e7e3539("MISSING ALIAS");
     }
 
-    finished = self.speaker function_7b52f05da542c2ff(self.alias, self.overlap, self.scope_ents[self.scope], self.receivers);
+    finished = self.speaker say_dialogue(self.alias, self.overlap, self.scope_ents[self.scope], self.receivers);
 
     if(!istrue(finished)) {
       return function_139ccec48e7e3539("SAY INTERRUPTED");
@@ -1180,7 +1180,7 @@ function switch_speaker(new_speaker) {
   }
 }
 
-function function_19e262da812ccbef(delay, var_30356ee6394ecf19) {
+function delay_dialogue(delay, var_30356ee6394ecf19) {
   if(!isDefined(delay)) {
     return false;
   }
@@ -1189,8 +1189,8 @@ function function_19e262da812ccbef(delay, var_30356ee6394ecf19) {
   self endon("cancel_delayed_vo");
   self.var_88502eb1e08dfc4d = undefined;
   self.var_800206351d64e3f4 = undefined;
-  self.var_8329bfd06cbb047a = gettime();
-  self.var_c037496486cc9d4b = delay;
+  self.vo_delaystart = gettime();
+  self.vo_delayvalue = delay;
 
   if(isDefined(var_30356ee6394ecf19) && function_c0af485270de3fbf(var_30356ee6394ecf19)) {
     self.var_800206351d64e3f4 = var_30356ee6394ecf19;
@@ -1202,15 +1202,15 @@ function function_19e262da812ccbef(delay, var_30356ee6394ecf19) {
   return isint(result) && result == 0;
 }
 
-function function_7b52f05da542c2ff(alias, overlap, scope_ent, receivers) {
+function say_dialogue(alias, overlap, scope_ent, receivers) {
   if(is_dead_or_dying(self)) {
     return 0;
   }
 
   self notify("started_saying", alias);
 
-  if(isDefined(self.var_aed624967395163b)) {
-    self thread[[self.var_aed624967395163b]](alias);
+  if(isDefined(self.vo_startfunc)) {
+    self thread[[self.vo_startfunc]](alias);
   }
 
   if(function_c0af485270de3fbf(alias)) {
@@ -1232,10 +1232,10 @@ function function_e7c1c9dee13137aa(alias, receivers) {
   self.var_800206351d64e3f4 = undefined;
 
   if(isDefined(receivers) && utility::issp()) {
-    thread function_5baebd9837531e1f(alias, receivers);
+    thread playsound_receivers(alias, receivers);
   }
 
-  return self[[level.var_9a62261b5b534b06]](alias);
+  return self[[level.vo_playsoundfunc]](alias);
 }
 
 function function_f2a79001721945a(vo_data, timeout, endons) {
@@ -1462,7 +1462,7 @@ function private function_a940efae252424c5() {
   return self;
 }
 
-function function_4fba9e11ee207d7c(alias) {
+function dialogue_length(alias) {
   return lookupsoundlength(alias, 1) / 1000;
 }
 
@@ -1478,7 +1478,7 @@ function function_6d4c7d2bd5969057(dialogue) {
   }
 }
 
-function function_5baebd9837531e1f(alias, receivers) {
+function playsound_receivers(alias, receivers) {
   if(!isarray(receivers)) {
     receivers = [receivers];
   }
@@ -1496,13 +1496,13 @@ function function_5baebd9837531e1f(alias, receivers) {
 
 function function_f5eb5b4d0e6714aa(tag, originoffset, anglesoffset, istemp) {
   if(!isDefined(self.vo_emitter)) {
-    self.vo_emitter = function_3a8815118a9b0d69(tag, originoffset, anglesoffset, istemp);
+    self.vo_emitter = get_new_vo_emitter(tag, originoffset, anglesoffset, istemp);
   }
 
   return self.vo_emitter;
 }
 
-function function_3a8815118a9b0d69(tag, originoffset, anglesoffset, istemp) {
+function get_new_vo_emitter(tag, originoffset, anglesoffset, istemp) {
   if(isent(self)) {
     if(self tagexists("j_head")) {
       tag = default_to(tag, "j_head");
@@ -1527,12 +1527,12 @@ function function_3a8815118a9b0d69(tag, originoffset, anglesoffset, istemp) {
   emitter.team = default_to(self.team, "allies");
   emitter.istempemitter = istemp;
 
-  if(!isDefined(level.var_a5a7ad116f37f360)) {
-    level.var_a5a7ad116f37f360 = [];
+  if(!isDefined(level.vo_emitters)) {
+    level.vo_emitters = [];
   }
 
-  level.var_a5a7ad116f37f360[level.var_a5a7ad116f37f360.size] = emitter;
-  level.var_a5a7ad116f37f360 = array_removeundefined(level.var_a5a7ad116f37f360);
+  level.vo_emitters[level.vo_emitters.size] = emitter;
+  level.vo_emitters = array_removeundefined(level.vo_emitters);
 
   emitter thread function_d45390dc3a16d16(self);
   return emitter;
@@ -1546,7 +1546,7 @@ function function_d45390dc3a16d16(parent) {
   self delete();
 }
 
-function function_52846cd9b5efeafe(tag, originoffset, anglesoffset, istemp) {
+function get_radio_emitter(tag, originoffset, anglesoffset, istemp) {
   if(!isDefined(self.var_4413114d1d17278b)) {
     origin = default_to(self.origin, originoffset);
     self.var_4413114d1d17278b = spawn("script_origin", origin);
@@ -1674,7 +1674,7 @@ function function_1b22b2d53ba5b092(text, duration) {
   }
 }
 
-function function_f9e725c7fd059300(text) {
+function get_holdtime(text) {
   word_count = strtok(text, " ").size;
   return max(1.5, word_count * 0.4);
 }
@@ -1698,7 +1698,7 @@ function function_932c63c904570806(text) {
   self.var_e5cf232129f9ec01 = gettime();
   self.var_800206351d64e3f4 = text;
   self.var_88502eb1e08dfc4d = undefined;
-  holdtime = function_f9e725c7fd059300(text);
+  holdtime = get_holdtime(text);
   color = get_team_color();
   name = get_name();
 
@@ -1720,11 +1720,11 @@ function function_932c63c904570806(text) {
   var_b54520c420443a7c = int(6.96);
   lineheight = int(17.4);
   var_7794fdd4649e6d7f = int(5.075);
-  var_ddfeff0efa1cd0c4 = 0;
+  is_istring = 0;
 
   if(isDefined(level.var_ace32b0108a3e1f1) && isDefined(level.var_ace32b0108a3e1f1[text])) {
     lines = [level.var_ace32b0108a3e1f1[text]];
-    var_ddfeff0efa1cd0c4 = 1;
+    is_istring = 1;
   } else {
     text = color + name + ": ^7" + text;
     lines = wrap_text(text, int(500 / var_b54520c420443a7c));
@@ -1750,7 +1750,7 @@ function function_932c63c904570806(text) {
     text_elem.speaker = self;
     text_elem.alpha = 0;
 
-    if(var_ddfeff0efa1cd0c4) {
+    if(is_istring) {
       text_elem.label = text_line;
 
       if(isDefined(self.var_8284c960ab37a90d) && isistring(self.var_8284c960ab37a90d)) {
@@ -1898,7 +1898,7 @@ function nag_loop(nags, repeat_delay, initial_delay, loop_limit) {
   self endon("stop_nag_loop");
   initial_delay = default_to(initial_delay, repeat_delay);
 
-  if(!isDefined(level.var_a36de4031e866ce5)) {
+  if(!isDefined(level.vo_nagvars)) {
     level function_746d94ac5ed3ee5c();
   }
 
@@ -1955,7 +1955,7 @@ function do_nag(nags, delay) {
   result = speaker waitfor(delay);
 
   if(!isDefined(result) || result) {
-    nagvars = default_to(self.var_a36de4031e866ce5, level.var_a36de4031e866ce5);
+    nagvars = default_to(self.vo_nagvars, level.vo_nagvars);
     did_nag = speaker say(nag, nagvars.priority, nagvars.timeout, nagvars.overlap, &started_nag, nagvars.scope);
   }
 

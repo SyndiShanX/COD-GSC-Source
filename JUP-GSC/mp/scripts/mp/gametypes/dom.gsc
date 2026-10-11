@@ -137,7 +137,7 @@ function main() {
   game["dialog"]["enemy_scoring"] = "iw9_mpgm_anno_uktl_hoes";
   function_2776ced2d74c6681();
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     scripts\mp\gametypes\mgl_mp::function_8c9c24a50231b1f9();
   }
 }
@@ -554,7 +554,7 @@ function domflags() {
     level waittill_any_2("prematch_done", "start_mode_setup");
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     iconsize = "icon_medium";
   } else {
     iconsize = undefined;
@@ -1130,7 +1130,7 @@ function domdebug() {
 function onspawnplayer(revivespawn) {
   thread updatematchstatushintonspawn();
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     thread scripts\mp\gametypes\mgl_mp::function_f9ae07213a0af3de();
   }
 }
@@ -1159,7 +1159,7 @@ function getcapxpscale() {
 }
 
 function onplayerconnect(player) {
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     player thread scripts\mp\gametypes\mgl_mp::function_8bb13aa2a5d32576(player, "mp_gametype_domination_match_introduction");
   }
 

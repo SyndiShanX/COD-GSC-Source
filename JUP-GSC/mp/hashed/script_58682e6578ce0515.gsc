@@ -9,7 +9,7 @@
 #using scripts\engine\utility;
 #namespace effect_slow;
 
-function slow(var_3f84102752151e7c, var_561c4006f65fb505, n_durations, var_d4739501723a457c, endcallback, var_9142743ed938c8bb) {
+function slow(var_3f84102752151e7c, var_561c4006f65fb505, n_durations, applier, endcallback, var_9142743ed938c8bb) {
   assertex(isstring(var_3f84102752151e7c), "<dev string:x1c>");
   assertex(isnumber(var_561c4006f65fb505), "<dev string:x40>");
   assertex(isnumber(n_durations), "<dev string:x62>");
@@ -25,11 +25,11 @@ function slow(var_3f84102752151e7c, var_561c4006f65fb505, n_durations, var_d4739
   }
 
   if(!function_8ce7894f1a52fb77("slow")) {
-    self.var_8ad91e7d5175af88 = scripts\asm\asm::asm_getmoveplaybackrate();
+    self.cachedplaybackrate = scripts\asm\asm::asm_getmoveplaybackrate();
   }
 
   effect = function_108973a907c11ca7("slow", n_durations, var_3f84102752151e7c, &start_slow, &end_slow);
-  effect.var_d4739501723a457c = var_d4739501723a457c;
+  effect.applier = applier;
   effect.rate = var_561c4006f65fb505;
   effect.end_callback = endcallback;
   return start_effect(effect);
@@ -57,7 +57,7 @@ function private start_slow(effect) {
 
 function private end_slow(effect) {
   current_time = gettime();
-  return_rate = default_to(self.var_8ad91e7d5175af88, 1);
+  return_rate = default_to(self.cachedplaybackrate, 1);
 
   foreach(active_effect in self.status_effects["slow"]) {
     if(isDefined(active_effect.unique_id) && effect.unique_id == active_effect.unique_id) {
@@ -136,8 +136,8 @@ function function_47062c0baf4e14bf(player, var_3f84102752151e7c) {
   }
 
   foreach(active_effect in self.status_effects["slow"]) {
-    if(isDefined(active_effect.unique_id) && var_3f84102752151e7c == active_effect.unique_id && isDefined(player) && isDefined(self.var_d76f87abeca1eaa3[var_3f84102752151e7c].var_d4739501723a457c)) {
-      return (active_effect.var_d4739501723a457c == player);
+    if(isDefined(active_effect.unique_id) && var_3f84102752151e7c == active_effect.unique_id && isDefined(player) && isDefined(self.var_d76f87abeca1eaa3[var_3f84102752151e7c].applier)) {
+      return (active_effect.applier == player);
     }
   }
 

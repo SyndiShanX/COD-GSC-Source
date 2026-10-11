@@ -74,7 +74,7 @@ function main() {
   add_global_spawn_function("axis", &function_cde6164f0802468f);
   add_global_spawn_function("allies", &function_cde6164f0802468f);
   scripts\sp\maps\sp_jup_vip\sp_jup_vip_lighting::main();
-  function_ac2e42c678489275();
+  set_completed_flags();
   setup_player();
   level.loot.maxweapons = 50;
   namespace_13d705da8b3c65b4::init();
@@ -129,7 +129,7 @@ function init_flags() {
   flag_init("flag_remove_player_scuba_gear");
 }
 
-function function_ac2e42c678489275() {
+function set_completed_flags() {
   level endon("return_completed_flags");
 
   if(is_default_start()) {
@@ -247,13 +247,13 @@ function function_ff5d9827b7a048eb() {
   add_start("courtyard_retreat", &courtyard_retreat_start, &courtyard_retreat_main, ["sp_jup_vip_rooftop_tr", "sp_jup_vip_infil_vista_tr", "sp_jup_vip_maintenance_tr", "sp_jup_vip_tower_tr"], &courtyard_retreat_catchup);
   add_start("escape_start", &escape_start, &escape_main, ["sp_jup_vip_rooftop_tr", "sp_jup_vip_infil_vista_tr", "sp_jup_vip_maintenance_tr", "sp_jup_vip_tower_tr"], &escape_catchup);
   add_start("cliff_start", &cliff_start, &cliff_main, ["sp_jup_vip_rooftop_tr", "sp_jup_vip_gulag_exterior_tr", "sp_jup_vip_exfil_tr", "sp_jup_vip_exfil_hallway_tr", "sp_jup_vip_infil_vista_tr", "sp_jup_vip_tower_tr"], &function_45ec82c0014d1b4c);
-  add_start("slide_start", &slide_start, &slide_main, ["sp_jup_vip_rooftop_tr", "sp_jup_vip_gulag_exterior_tr", "sp_jup_vip_exfil_tr", "sp_jup_vip_exfil_hallway_tr", "sp_jup_vip_infil_vista_tr", "sp_jup_vip_tower_tr"], &function_b3737ce225248a9f);
+  add_start("slide_start", &slide_start, &slide_main, ["sp_jup_vip_rooftop_tr", "sp_jup_vip_gulag_exterior_tr", "sp_jup_vip_exfil_tr", "sp_jup_vip_exfil_hallway_tr", "sp_jup_vip_infil_vista_tr", "sp_jup_vip_tower_tr"], &slide_catchup);
   set_default_start("scuba");
 }
 
 function function_cde6164f0802468f() {
   self.laserenabled = 0;
-  self.var_ac586f2e112c08cf = 1;
+  self.disableupdatelaserstatus = 1;
   self laserforceoff();
 }
 
@@ -261,11 +261,11 @@ function music_flow() {
   flag_wait("flag_begin_explosions");
   explosion = snd_play("temp_explo_distant", level.player);
   function_e70d88e85d5fb19a(explosion, 1, 0);
-  var_8248e8af5fd4ed8a = snd_play("temp_explo_low", level.player);
-  function_e70d88e85d5fb19a(var_8248e8af5fd4ed8a, 1, 0);
+  explosion2 = snd_play("temp_explo_low", level.player);
+  function_e70d88e85d5fb19a(explosion2, 1, 0);
   wait 2;
   snd_stop(explosion, 0);
-  snd_stop(var_8248e8af5fd4ed8a, 0);
+  snd_stop(explosion2, 0);
   flag_wait("flag_turn_spotlights_towards_explosion");
   walla = snd_play("temp_walla_foreign_alert_lp", level.player);
   function_e70d88e85d5fb19a(walla, 1, 0);

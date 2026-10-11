@@ -66,7 +66,7 @@ function activate_activity_starter(activity_instance, var_b189a678c1c3489a) {
     var_b189a678c1c3489a.activity_instance = activity_instance;
     activity_instance.var_b189a678c1c3489a = var_b189a678c1c3489a;
     var_b189a678c1c3489a function_80cb315b3807f968();
-    activitytype = function_de53ed8e35d0ed7a(activity_instance);
+    activitytype = getactivitytype(activity_instance);
     var_b189a678c1c3489a.poiindex = scripts\mp\poi::function_80cdaea4bd3ecf70(scripts\mp\poi::function_55cf921efa4cbd09(activity_origin, 0, 0));
     var_84fe3185d80d053b = [[level.var_fac39a693f085779]](namespace_68dc261109a9503f::function_8988a4c89289d7f4(activity_instance));
     scoreevent = namespace_e8853d3344e33cf6::function_9d71b982e1eb2f81(var_84fe3185d80d053b);
@@ -120,7 +120,7 @@ function function_b4c8d27633108d43(suffix, activity_origin, var_8310af2bd45efa3,
     activity_starter.activity_instance = activity_instance;
     activity_instance.activity_starter = activity_starter;
     activity_starter function_80cb315b3807f968();
-    activitytype = function_de53ed8e35d0ed7a(activity_instance);
+    activitytype = getactivitytype(activity_instance);
     var_84fe3185d80d053b = [[level.var_fac39a693f085779]](namespace_68dc261109a9503f::function_8988a4c89289d7f4(activity_instance));
     scoreevent = namespace_e8853d3344e33cf6::function_9d71b982e1eb2f81(var_84fe3185d80d053b);
     activity_starter.currencyreward = scripts\mp\rank::getscoreinfovalue(scoreevent);
@@ -204,7 +204,7 @@ function function_c2bc2321e8cb9c49() {
     foreach(player in level.players) {
       var_3900d8bea91376b4 = function_5cc2fd3d10cbab56(player);
 
-      if(isDefined(player) && isDefined(player.origin) && isDefined(player.team) && isalive(player) && function_6152021549f1836b(player) && !isDefined(var_3900d8bea91376b4.var_6346961d07f668fe)) {
+      if(isDefined(player) && isDefined(player.origin) && isDefined(player.team) && isalive(player) && function_6152021549f1836b(player) && !isDefined(var_3900d8bea91376b4.focusedactivityid)) {
         closest = sortbydistance(level.var_5b7c4eafd38d35c.var_915f0d3c3a61e38, player.origin)[0];
         player scripts\cp_mp\utility\omnvar_utility::setcachedclientomnvar("ui_dmz_activity_starter_poi_name", closest.poiindex);
       }
@@ -227,7 +227,7 @@ function function_f1df6aa7601a5411(locations) {
   return validlocations;
 }
 
-function function_1936902486bfb1a1(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_1936902486bfb1a1(instance, part, state, player, bautouse, usestring) {
   level thread function_32b0fe545794719a(instance, player);
 }
 
@@ -265,7 +265,7 @@ function function_32b0fe545794719a(instance, player) {
   function_bbdcd857d0c2a65e(instance.activity_instance, player, "PlayerJoinedInteract");
 }
 
-function private function_6a5979dbe84a584a(var_6f8af5eb76deac21) {
+function private function_6a5979dbe84a584a(relevantinfostruct) {
   activity_instance = self;
 
   if(isDefined(activity_instance.var_b189a678c1c3489a)) {
@@ -291,14 +291,14 @@ function private function_5123ce2f281ba0da() {
 
 function private function_3e3b22a6655663b2() {
   timer = 0;
-  var_fd5a08e385a75f6c = 360;
+  drawframeduration = 360;
 
   while(true) {
     if(getdvarint(@ "hash_d0316f72a21f836e", 0) && timer == 0) {
       foreach(starter in level.var_5b7c4eafd38d35c.var_915f0d3c3a61e38) {
-        print3d(starter.origin + (0, 0, 300), "<dev string:xfc>" + function_de53ed8e35d0ed7a(starter.activity_instance) + "<dev string:x106>" + function_a4748b32a824c79c(starter.activity_instance) + "<dev string:x114>" + function_f0f498aed6f8fa5d(starter.activity_instance), (1, 1, 1), 1, 2, var_fd5a08e385a75f6c, 1);
-        line(starter.origin, starter.activity_origin, (0, 0, 1), 1, 0, var_fd5a08e385a75f6c);
-        line(starter.origin, starter.origin + (0, 0, 3000), (1, 0, 1), 1, 0, var_fd5a08e385a75f6c);
+        print3d(starter.origin + (0, 0, 300), "<dev string:xfc>" + getactivitytype(starter.activity_instance) + "<dev string:x106>" + function_a4748b32a824c79c(starter.activity_instance) + "<dev string:x114>" + getinstanceid(starter.activity_instance), (1, 1, 1), 1, 2, drawframeduration, 1);
+        line(starter.origin, starter.activity_origin, (0, 0, 1), 1, 0, drawframeduration);
+        line(starter.origin, starter.origin + (0, 0, 3000), (1, 0, 1), 1, 0, drawframeduration);
       }
     }
 
@@ -322,7 +322,7 @@ function private function_3e3b22a6655663b2() {
     waitframe();
     timer++;
 
-    if(timer >= var_fd5a08e385a75f6c) {
+    if(timer >= drawframeduration) {
       timer = 0;
     }
   }

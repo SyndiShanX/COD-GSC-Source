@@ -155,7 +155,7 @@ function weaponswitchendednuke(streakinfo, switchresult) {
   }
 }
 
-function weaponfirednuke(streakinfo, var_a9dd4e8c5e5c7178, firedprojectile) {
+function weaponfirednuke(streakinfo, firedweaponobj, firedprojectile) {
   mappoint = scripts\cp_mp\killstreaks\airstrike::airstrike_getownerlookatpos(self);
 
   if(!isDefined(mappoint)) {
@@ -620,7 +620,7 @@ function function_44b8d70a3d3ca307(owner, position, killradius) {
     }
 
     if(object scripts\cp_mp\vehicles\vehicle::isvehicle() && !isDefined(object.streakinfo)) {
-      object.var_a8f4bb03b366aa80 = 1;
+      object.dontspawnhusk = 1;
       object scripts\cp_mp\vehicles\vehicle::vehicle_explode();
       continue;
     }
@@ -1068,7 +1068,7 @@ function function_54a492aef8fd981f(delaytime) {
         continue;
       }
 
-      level thread scripts\cp_mp\utility\game_utility::function_852712268d005332(player, 0, 1);
+      level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(player, 0, 1);
     }
   }
 }

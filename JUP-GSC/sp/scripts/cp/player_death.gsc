@@ -437,7 +437,7 @@ function gesture_death_anim(death) {
 
 function setdeathangles(attacker, stance, gesturedeath, movingplatform) {
   freeze_player_controls(stance);
-  var_65593bc02a8e8177 = 0;
+  abovemovingplatform = 0;
 
   if(isDefined(movingplatform)) {
     var_6db2d5a220eeab39 = scripts\engine\trace::create_playerclip_contents();
@@ -449,13 +449,13 @@ function setdeathangles(attacker, stance, gesturedeath, movingplatform) {
     }
 
     if(isDefined(hitent) && hitent == movingplatform) {
-      var_65593bc02a8e8177 = 1;
+      abovemovingplatform = 1;
     } else {
-      var_65593bc02a8e8177 = 0;
+      abovemovingplatform = 0;
     }
   }
 
-  if(!isDefined(movingplatform) || !var_65593bc02a8e8177) {
+  if(!isDefined(movingplatform) || !abovemovingplatform) {
     while(!self isonground()) {
       wait 0.05;
     }
@@ -470,7 +470,7 @@ function setdeathangles(attacker, stance, gesturedeath, movingplatform) {
   playerangles = level.player getplayerangles();
 
   if(isDefined(gesturedeath)) {
-    var_f99415e5c0a810a9 = 0.75;
+    rotatetoattackertime = 0.75;
     var_ca59f0c3b6b71635 = 0;
     extraroll = 0;
   } else {
@@ -478,7 +478,7 @@ function setdeathangles(attacker, stance, gesturedeath, movingplatform) {
     attackerf = anglesToForward(var_e2064085ef59a3a9);
     dot = vectordot(attackerf, playerf);
     dotfactor = math::normalize_value(-1, 1, dot);
-    var_f99415e5c0a810a9 = math::factor_value(0.4, 0.2, dotfactor);
+    rotatetoattackertime = math::factor_value(0.4, 0.2, dotfactor);
     var_f1fd8e00747372e5 = geteyeheightfromstance(stance);
     var_ca59f0c3b6b71635 = 13 - var_f1fd8e00747372e5;
     extraroll = randomfloatrange(20, 40);
@@ -491,9 +491,9 @@ function setdeathangles(attacker, stance, gesturedeath, movingplatform) {
   anchor = level.players[0] spawn_tag_origin();
   anchor.angles = playerangles;
   goalangles = (var_e2064085ef59a3a9[0], var_e2064085ef59a3a9[1], var_e2064085ef59a3a9[2] + extraroll);
-  var_fd12f85561be6354 = anglestoup(goalangles) * var_ca59f0c3b6b71635;
-  goalpos = self.origin + var_fd12f85561be6354;
-  thread function_75d6b697583ffbb7(anchor, var_f99415e5c0a810a9 * 0.5);
+  downwardoffset = anglestoup(goalangles) * var_ca59f0c3b6b71635;
+  goalpos = self.origin + downwardoffset;
+  thread function_75d6b697583ffbb7(anchor, rotatetoattackertime * 0.5);
 
   if(getdvarint(@ "debug_player_death")) {
     linelength = 30;
@@ -507,30 +507,30 @@ function setdeathangles(attacker, stance, gesturedeath, movingplatform) {
     line(self.origin + upoffset, attacker.origin + upoffset, (1, 1, 1), 1, 0, 1000);
   }
 
-  if(isDefined(movingplatform) && var_65593bc02a8e8177) {
+  if(isDefined(movingplatform) && abovemovingplatform) {
     anchor linkTo(movingplatform);
-    anchor thread updatelinkedoriginandangles(goalpos, goalangles, var_f99415e5c0a810a9, movingplatform);
+    anchor thread updatelinkedoriginandangles(goalpos, goalangles, rotatetoattackertime, movingplatform);
     return;
   }
 
-  anchor rotateTo(goalangles, var_f99415e5c0a810a9, var_f99415e5c0a810a9 * 0.25, var_f99415e5c0a810a9 * 0.75);
-  anchor moveTo(goalpos, var_f99415e5c0a810a9, var_f99415e5c0a810a9 * 0.9, var_f99415e5c0a810a9 * 0.1);
+  anchor rotateTo(goalangles, rotatetoattackertime, rotatetoattackertime * 0.25, rotatetoattackertime * 0.75);
+  anchor moveTo(goalpos, rotatetoattackertime, rotatetoattackertime * 0.9, rotatetoattackertime * 0.1);
 }
 
 function function_75d6b697583ffbb7(anchor, time) {
   self playerlinkTo(anchor, "tag_origin", 1, 0, 0, 0, 0);
 }
 
-function updatelinkedoriginandangles(targetorigin, targetangles, var_f99415e5c0a810a9, parent) {
-  timer = var_f99415e5c0a810a9;
+function updatelinkedoriginandangles(targetorigin, targetangles, rotatetoattackertime, parent) {
+  timer = rotatetoattackertime;
   targetoriginrelative = rotatevectorinverted(targetorigin - parent.origin, parent.angles);
-  var_1e3897c5722a530f = rotatevectorinverted(self.origin - parent.origin, parent.angles);
-  var_d5fc9b0f7eef775e = rotatevectorinverted(anglesToForward(targetangles), parent.angles);
-  var_6d67fdcda3e54a92 = rotatevectorinverted(anglestoright(targetangles), parent.angles);
-  var_ba70f257ada1104b = rotatevectorinverted(anglestoup(targetangles), parent.angles);
-  var_ce8789aaa1120289 = rotatevectorinverted(anglesToForward(self.angles), parent.angles);
-  var_541017ef3a16b43d = rotatevectorinverted(anglestoright(self.angles), parent.angles);
-  var_7c1b63ee932cdc68 = rotatevectorinverted(anglestoup(self.angles), parent.angles);
+  startingoriginrelative = rotatevectorinverted(self.origin - parent.origin, parent.angles);
+  targetfrelative = rotatevectorinverted(anglesToForward(targetangles), parent.angles);
+  targetrrelative = rotatevectorinverted(anglestoright(targetangles), parent.angles);
+  targeturelative = rotatevectorinverted(anglestoup(targetangles), parent.angles);
+  startingfrelative = rotatevectorinverted(anglesToForward(self.angles), parent.angles);
+  startingrrelative = rotatevectorinverted(anglestoright(self.angles), parent.angles);
+  startingurelative = rotatevectorinverted(anglestoup(self.angles), parent.angles);
   safeorigin = parent.origin;
   safeangles = parent.angles;
 
@@ -544,20 +544,20 @@ function updatelinkedoriginandangles(targetorigin, targetangles, var_f99415e5c0a
       safeangles = parent.angles;
     }
 
-    timefactor = math::normalize_value(0, var_f99415e5c0a810a9, timer);
+    timefactor = math::normalize_value(0, rotatetoattackertime, timer);
 
     if(self islinked()) {
       self unlink();
     }
 
     targetorigin = rotatevector(targetoriginrelative, safeangles) + safeorigin;
-    startingorigin = rotatevector(var_1e3897c5722a530f, safeangles) + safeorigin;
-    targetf = rotatevector(var_d5fc9b0f7eef775e, safeangles);
-    targetr = rotatevector(var_6d67fdcda3e54a92, safeangles);
-    targetu = rotatevector(var_ba70f257ada1104b, safeangles);
-    startingf = rotatevector(var_ce8789aaa1120289, safeangles);
-    startingr = rotatevector(var_541017ef3a16b43d, safeangles);
-    startingu = rotatevector(var_7c1b63ee932cdc68, safeangles);
+    startingorigin = rotatevector(startingoriginrelative, safeangles) + safeorigin;
+    targetf = rotatevector(targetfrelative, safeangles);
+    targetr = rotatevector(targetrrelative, safeangles);
+    targetu = rotatevector(targeturelative, safeangles);
+    startingf = rotatevector(startingfrelative, safeangles);
+    startingr = rotatevector(startingrrelative, safeangles);
+    startingu = rotatevector(startingurelative, safeangles);
     f = vectorNormalize(math::factor_value(targetf, startingf, timefactor));
     r = vectorNormalize(math::factor_value(targetr, startingr, timefactor));
     u = vectorNormalize(math::factor_value(targetu, startingu, timefactor));
@@ -581,9 +581,9 @@ function updatelinkedoriginandangles(targetorigin, targetangles, var_f99415e5c0a
     safeangles = parent.angles;
   }
 
-  f = rotatevector(var_d5fc9b0f7eef775e, safeangles);
-  r = rotatevector(var_6d67fdcda3e54a92, safeangles);
-  u = rotatevector(var_ba70f257ada1104b, safeangles);
+  f = rotatevector(targetfrelative, safeangles);
+  r = rotatevector(targetrrelative, safeangles);
+  u = rotatevector(targeturelative, safeangles);
   self.origin = rotatevector(targetoriginrelative, safeangles) + safeorigin;
   self.angles = axistoangles(f, r, u);
 
@@ -892,17 +892,17 @@ function set_death_hint_standard() {
   }
 
   while(true) {
-    var_c343e32c88e60dd3 = randomintrange(100, var_52069547004fbedb);
+    deadquoteindex = randomintrange(100, var_52069547004fbedb);
 
-    if(!function_46f8b8c2648b7356(var_c343e32c88e60dd3)) {
+    if(!function_46f8b8c2648b7356(deadquoteindex)) {
       break;
     }
 
     waitframe();
   }
 
-  function_e3fc2e2cf55641cd(var_c343e32c88e60dd3);
-  setomnvar("ui_death_hint", var_c343e32c88e60dd3);
+  function_e3fc2e2cf55641cd(deadquoteindex);
+  setomnvar("ui_death_hint", deadquoteindex);
 }
 
 function set_death_hint(attacker, cause, weaponname, inflictor) {

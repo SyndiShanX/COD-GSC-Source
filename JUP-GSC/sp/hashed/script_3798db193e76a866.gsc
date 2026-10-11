@@ -18,9 +18,9 @@ function init() {
 
   level.streakglobals = spawnStruct();
   level.streakglobals.nextid = 1;
-  var_3c0a35811a241880 = hashcat(%"killstreaklist:", "killstreak_list_t10_sp");
+  killstreaklistbundlename = hashcat(%"killstreaklist:", "killstreak_list_t10_sp");
 
-  if(killstreak_shared::function_1f9e754f6b690e33(var_3c0a35811a241880)) {
+  if(killstreak_shared::parsestreakbundles(killstreaklistbundlename)) {
     killstreak_shared::function_aa5200593ca327d2();
   }
 }
@@ -61,7 +61,7 @@ function getkillstreakairstrikeheightent() {
   return level.player;
 }
 
-function function_8eafa4c9894723a3(streakinfo, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b, var_f6a32dcc4b19aad9, var_67a06b4ea269058e, var_afe464c242489272, var_818a18147626dfbf, var_c2a00d4f077ebd87) {
+function function_8eafa4c9894723a3(streakinfo, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback, var_f6a32dcc4b19aad9, var_67a06b4ea269058e, var_afe464c242489272, var_818a18147626dfbf, var_c2a00d4f077ebd87) {
   level.player notify("killstreak_deploy");
   wait 1.75;
   return true;
@@ -104,7 +104,7 @@ function restorekillstreakplayerangles(player) {
   player.restoreangles = undefined;
 }
 
-function function_ceb8da3185ad3803(user) {
+function killstreak_assigntargetmarkers(user) {
   enemies = getaiarray("axis", "team3");
   friendlies = getaiarray("allies", "civilian");
   friendlies[friendlies.size] = level.player;
@@ -145,25 +145,25 @@ function killstreak_setupvehicledamagefunctionality(streakname, killstreakvehicl
 }
 
 function function_4631ece86c93520(damagefunc) {
-  if(isDefined(self.var_fb4b1c31a5e79d48)) {
+  if(isDefined(self.lastdamagedata)) {
     return;
   }
 
   self endon("death");
-  self.var_fb4b1c31a5e79d48 = spawnStruct();
+  self.lastdamagedata = spawnStruct();
 
   while(true) {
     self waittill("damage", idamage, eattacker, vdir, vpoint, smeansofdeath, smodelname, stagname, spartname, idflags, objweapon, origin, angles, normal, einflictor, eventid);
-    self.var_fb4b1c31a5e79d48.attacker = eattacker;
-    self.var_fb4b1c31a5e79d48.objweapon = objweapon;
-    self.var_fb4b1c31a5e79d48.meansofdeath = smeansofdeath;
-    self.var_fb4b1c31a5e79d48.damage = idamage;
-    self.var_fb4b1c31a5e79d48.idflags = idflags;
-    self.var_fb4b1c31a5e79d48.origin = origin;
-    self.var_fb4b1c31a5e79d48.angles = angles;
+    self.lastdamagedata.attacker = eattacker;
+    self.lastdamagedata.objweapon = objweapon;
+    self.lastdamagedata.meansofdeath = smeansofdeath;
+    self.lastdamagedata.damage = idamage;
+    self.lastdamagedata.idflags = idflags;
+    self.lastdamagedata.origin = origin;
+    self.lastdamagedata.angles = angles;
 
     if(isDefined(damagefunc)) {
-      self[[damagefunc]](self.var_fb4b1c31a5e79d48);
+      self[[damagefunc]](self.lastdamagedata);
     }
   }
 }
@@ -171,16 +171,16 @@ function function_4631ece86c93520(damagefunc) {
 function function_3a8380a61a37e123(deathfunc) {
   thread function_4631ece86c93520(undefined);
   self waittill("death");
-  self[[deathfunc]](self.var_fb4b1c31a5e79d48);
+  self[[deathfunc]](self.lastdamagedata);
 }
 
-function function_edd13bb02e6204e4(streakinfo, weaponobj, firednotify, weapongivencallback, var_8fd4d93dd619da88, weaponfiredcallback, var_91f739c2c51347d4, var_d55d8445518099b) {
+function function_edd13bb02e6204e4(streakinfo, weaponobj, firednotify, weapongivencallback, weaponswitchendedcallback, weaponfiredcallback, weaponcleanupcallback, weapontakencallback) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
   firedresult = 1;
   self.lastdroppableweaponobj = self getcurrentweapon();
-  switchresult = switchtodeployweapon(weaponobj, streakinfo, &waituntilfinishedwithdeployweapon, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b);
+  switchresult = switchtodeployweapon(weaponobj, streakinfo, &waituntilfinishedwithdeployweapon, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback);
 
   if(!istrue(switchresult)) {
     return false;
@@ -199,7 +199,7 @@ function function_edd13bb02e6204e4(streakinfo, weaponobj, firednotify, weapongiv
   return istrue(firedresult);
 }
 
-function switchtodeployweapon(deployweaponobj, streakinfo, cleanupwaitfunc, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b, skipfirstraise) {
+function switchtodeployweapon(deployweaponobj, streakinfo, cleanupwaitfunc, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback, skipfirstraise) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
@@ -214,9 +214,9 @@ function switchtodeployweapon(deployweaponobj, streakinfo, cleanupwaitfunc, weap
 
   self giveweapon(deployweaponobj, 0, 0, 0, skipfirstraise);
   switchresult = 1;
-  var_137e8ca1e47954dc = callweapongivencallback(streakinfo, weapongivencallback);
+  givencallbackresult = callweapongivencallback(streakinfo, weapongivencallback);
 
-  if(!istrue(var_137e8ca1e47954dc)) {
+  if(!istrue(givencallbackresult)) {
     level.player takeweapon(deployweaponobj);
     return 0;
   }
@@ -226,8 +226,8 @@ function switchtodeployweapon(deployweaponobj, streakinfo, cleanupwaitfunc, weap
   switchresult = namespace_dc526c68c9ba2b83::domonitoredweaponswitch(deployweaponobj, isbot(self), streakinfo.var_9d7c6ee83f507a26);
   streakinfo notify("deploy_weapon_switch_ended");
 
-  if(isDefined(var_8fd4d93dd619da88)) {
-    self thread[[var_8fd4d93dd619da88]](streakinfo, switchresult);
+  if(isDefined(weaponswitchendedcallback)) {
+    self thread[[weaponswitchendedcallback]](streakinfo, switchresult);
   }
 
   waitframe();
@@ -240,7 +240,7 @@ function switchtodeployweapon(deployweaponobj, streakinfo, cleanupwaitfunc, weap
     return 0;
   }
 
-  thread cleanupdeployweapon(switchresult, streakinfo, deployweaponobj, cleanupwaitfunc, var_91f739c2c51347d4, var_d55d8445518099b);
+  thread cleanupdeployweapon(switchresult, streakinfo, deployweaponobj, cleanupwaitfunc, weaponcleanupcallback, weapontakencallback);
   return switchresult;
 }
 
@@ -321,27 +321,27 @@ function watchdeployweaponfired(streakinfo, firednotify, var_4ef1099365450bae, w
   self endon("cancel_all_killstreak_deployments");
 
   while(true) {
-    var_a9dd4e8c5e5c7178 = undefined;
+    firedweaponobj = undefined;
     firedprojectile = undefined;
 
     switch (firednotify) {
       case #"hash_21a23ad4b32e4f8e":
-        self waittill(firednotify, var_a9dd4e8c5e5c7178);
+        self waittill(firednotify, firedweaponobj);
         break;
       case #"hash_77f5cb8818a754f0":
-        self waittill(firednotify, var_a9dd4e8c5e5c7178);
+        self waittill(firednotify, firedweaponobj);
         break;
       case #"hash_3989359e2b52d1ba":
-        self waittill(firednotify, firedprojectile, var_a9dd4e8c5e5c7178);
+        self waittill(firednotify, firedprojectile, firedweaponobj);
         break;
       default:
         self waittill(firednotify);
         break;
     }
 
-    if(var_a9dd4e8c5e5c7178 == var_4ef1099365450bae) {
+    if(firedweaponobj == var_4ef1099365450bae) {
       if(isDefined(weaponfiredcallback)) {
-        firedresult = [[weaponfiredcallback]](streakinfo, var_a9dd4e8c5e5c7178, firedprojectile);
+        firedresult = [[weaponfiredcallback]](streakinfo, firedweaponobj, firedprojectile);
 
         if(!isDefined(firedresult)) {
           assertex(isDefined(firedresult), "weaponFiredCallback returned undefined, please make sure it returns success || failure || continue");
@@ -369,7 +369,7 @@ function watchdeployweaponfired(streakinfo, firednotify, var_4ef1099365450bae, w
   return false;
 }
 
-function private cleanupdeployweapon(switchresult, streakinfo, weaponobj, cleanupwaitfunc, var_91f739c2c51347d4, var_d55d8445518099b) {
+function private cleanupdeployweapon(switchresult, streakinfo, weaponobj, cleanupwaitfunc, weaponcleanupcallback, weapontakencallback) {
   level endon("game_ended");
   self endon("death_or_disconnect");
 
@@ -378,14 +378,14 @@ function private cleanupdeployweapon(switchresult, streakinfo, weaponobj, cleanu
   }
 
   if(self hasweapon(weaponobj)) {
-    var_cd5c5ac9105ab0d7 = 0;
+    remotetabletweapon = 0;
     mapselectkillstreak = 0;
-    var_d110628a2924ac08 = 0;
+    isnukeweapon = 0;
     val::set("deployCleanup", "melee", 0);
     val::set("deployCleanup", "offhand_weapons", 0);
 
-    if(isDefined(var_91f739c2c51347d4)) {
-      self[[var_91f739c2c51347d4]](streakinfo, switchresult, weaponobj);
+    if(isDefined(weaponcleanupcallback)) {
+      self[[weaponcleanupcallback]](streakinfo, switchresult, weaponobj);
     } else {
       getridofkillstreakdeployweapon(weaponobj);
     }
@@ -393,8 +393,8 @@ function private cleanupdeployweapon(switchresult, streakinfo, weaponobj, cleanu
     val::reset_all("deployCleanup");
   }
 
-  if(isDefined(var_d55d8445518099b)) {
-    self[[var_d55d8445518099b]](streakinfo);
+  if(isDefined(weapontakencallback)) {
+    self[[weapontakencallback]](streakinfo);
   }
 }
 

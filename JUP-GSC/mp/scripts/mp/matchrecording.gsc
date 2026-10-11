@@ -79,9 +79,9 @@ function matchrecording_validaterecordingtype(typeval) {
       result = 0;
     }
   } else if(typeval == 1 || typeval == 2) {
-    var_accdc2233ab9770 = getdvarint(@ "hash_b328f87e7c1ded21", 0);
+    g_logenable = getdvarint(@ "hash_b328f87e7c1ded21", 0);
     var_5ae8370351e1a4a1 = analyticsstreamerislogfilestreamingenabled();
-    result = var_accdc2233ab9770 == 1 || var_5ae8370351e1a4a1 == 1;
+    result = g_logenable == 1 || var_5ae8370351e1a4a1 == 1;
     assertex(result == 1, "<dev string:x12c>");
   }
 

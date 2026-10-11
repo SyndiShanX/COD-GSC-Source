@@ -166,8 +166,8 @@ function function_2a5c422870861dd9(player) {
   if(player function_b2081e55f0ba302d()) {
     level.var_a913297a5f21573e hidefromplayer(player);
 
-    foreach(var_49be45f83be0135e in var_a6aa6ac57e10810c) {
-      var_49be45f83be0135e earthquakeforplayer(0.5, 1, var_49be45f83be0135e.origin, 500);
+    foreach(playernear in var_a6aa6ac57e10810c) {
+      playernear earthquakeforplayer(0.5, 1, playernear.origin, 500);
     }
 
     foreach(squadmember in squadmembers) {
@@ -412,10 +412,10 @@ function private function_14d9017001c6253c(player) {
 }
 
 function private function_ac5e6c507067e422(dmgstruct) {
-  var_2bd7283211fa61e7 = scripts\ob\points::function_591305dc9c07499b(dmgstruct.sweapon, dmgstruct.eattacker, dmgstruct.smeansofdeath);
+  weaponelementtype = scripts\ob\points::function_591305dc9c07499b(dmgstruct.sweapon, dmgstruct.eattacker, dmgstruct.smeansofdeath);
 
-  if(isDefined(var_2bd7283211fa61e7)) {
-    if(self.element == "fire" && dmgstruct.smeansofdeath != "MOD_ELEMENTAL_FIRE" && var_2bd7283211fa61e7 != "fire") {
+  if(isDefined(weaponelementtype)) {
+    if(self.element == "fire" && dmgstruct.smeansofdeath != "MOD_ELEMENTAL_FIRE" && weaponelementtype != "fire") {
       dmgstruct.idamage = 0;
       self.health = self.fullhealth;
       self.maxhealth = self.fullhealth;
@@ -426,10 +426,10 @@ function private function_ac5e6c507067e422(dmgstruct) {
 }
 
 function private function_25eca9d018e592fd(dmgstruct) {
-  var_2bd7283211fa61e7 = scripts\ob\points::function_591305dc9c07499b(dmgstruct.sweapon, dmgstruct.eattacker, dmgstruct.smeansofdeath);
+  weaponelementtype = scripts\ob\points::function_591305dc9c07499b(dmgstruct.sweapon, dmgstruct.eattacker, dmgstruct.smeansofdeath);
 
-  if(isDefined(var_2bd7283211fa61e7)) {
-    if(self.element == "ice" && dmgstruct.smeansofdeath != "MOD_ELEMENTAL_COLD" && var_2bd7283211fa61e7 != "cold") {
+  if(isDefined(weaponelementtype)) {
+    if(self.element == "ice" && dmgstruct.smeansofdeath != "MOD_ELEMENTAL_COLD" && weaponelementtype != "cold") {
       dmgstruct.idamage = 0;
       self.health = self.fullhealth;
     }
@@ -439,10 +439,10 @@ function private function_25eca9d018e592fd(dmgstruct) {
 }
 
 function private function_502f87fbb5e89c3b(dmgstruct) {
-  var_2bd7283211fa61e7 = scripts\ob\points::function_591305dc9c07499b(dmgstruct.sweapon, dmgstruct.eattacker, dmgstruct.smeansofdeath);
+  weaponelementtype = scripts\ob\points::function_591305dc9c07499b(dmgstruct.sweapon, dmgstruct.eattacker, dmgstruct.smeansofdeath);
 
-  if(isDefined(var_2bd7283211fa61e7)) {
-    if(self.element == "electric" && dmgstruct.smeansofdeath != "MOD_ELEMENTAL_ELEC" && var_2bd7283211fa61e7 != "electrical") {
+  if(isDefined(weaponelementtype)) {
+    if(self.element == "electric" && dmgstruct.smeansofdeath != "MOD_ELEMENTAL_ELEC" && weaponelementtype != "electrical") {
       dmgstruct.idamage = 0;
       self.health = self.fullhealth;
     }
@@ -452,10 +452,10 @@ function private function_502f87fbb5e89c3b(dmgstruct) {
 }
 
 function private function_1fbd59170154f399(dmgstruct) {
-  var_2bd7283211fa61e7 = scripts\ob\points::function_591305dc9c07499b(dmgstruct.sweapon, dmgstruct.eattacker, dmgstruct.smeansofdeath);
+  weaponelementtype = scripts\ob\points::function_591305dc9c07499b(dmgstruct.sweapon, dmgstruct.eattacker, dmgstruct.smeansofdeath);
 
-  if(isDefined(var_2bd7283211fa61e7)) {
-    if(self.element == "toxic" && (dmgstruct.smeansofdeath != "MOD_ELEMENTAL_TOXIC" || var_2bd7283211fa61e7 != "toxic")) {
+  if(isDefined(weaponelementtype)) {
+    if(self.element == "toxic" && (dmgstruct.smeansofdeath != "MOD_ELEMENTAL_TOXIC" || weaponelementtype != "toxic")) {
       dmgstruct.idamage = 0;
       self.health = self.fullhealth;
     }
@@ -772,7 +772,7 @@ function function_3dcc79a1e03c4ed6(player) {
 
 function private function_864c36a119b9932(ammomod, player) {
   currentweapon = player getcurrentweapon();
-  player namespace_dc2e59577d3a271f::function_6c40f58b29a952a9(currentweapon, ammomod);
+  player namespace_dc2e59577d3a271f::add_ammo_mod_to_weapon(currentweapon, ammomod);
 }
 
 function private function_6861e62c77ac0239(player) {

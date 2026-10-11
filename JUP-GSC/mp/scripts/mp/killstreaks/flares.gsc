@@ -38,12 +38,12 @@ function flares_deploy() {
   return flare;
 }
 
-function flares_deleteaftertime(delaydelete, var_66f0721fc5bc2eb5, vehicle) {
-  assertex(!isDefined(var_66f0721fc5bc2eb5) || var_66f0721fc5bc2eb5 < delaydelete, "<dev string:x1c>");
+function flares_deleteaftertime(delaydelete, delaystoptracking, vehicle) {
+  assertex(!isDefined(delaystoptracking) || delaystoptracking < delaydelete, "<dev string:x1c>");
 
-  if(isDefined(var_66f0721fc5bc2eb5) && isDefined(vehicle)) {
-    delaydelete -= var_66f0721fc5bc2eb5;
-    wait var_66f0721fc5bc2eb5;
+  if(isDefined(delaystoptracking) && isDefined(vehicle)) {
+    delaydelete -= delaystoptracking;
+    wait delaystoptracking;
 
     if(isDefined(vehicle)) {
       vehicle.flareslive = array_remove(vehicle.flareslive, self);
@@ -274,7 +274,7 @@ function ks_setup_manual_flares(num_flares, button_action, var_b1b8f942e50d3620,
   thread ks_manualflares_handleincoming(var_1ec886f1b7540ead);
 }
 
-function ks_manualflares_watchuse(button_action, var_c10415b6394096cc) {
+function ks_manualflares_watchuse(button_action, omnvar_name) {
   level endon("game_ended");
   self endon("death");
   self endon("crashing");
@@ -292,14 +292,14 @@ function ks_manualflares_watchuse(button_action, var_c10415b6394096cc) {
     if(isDefined(flare) && isDefined(self.owner) && !isai(self.owner)) {
       self.owner playlocalsound("ks_ac130_flares");
 
-      if(isDefined(var_c10415b6394096cc)) {
-        self.owner setclientomnvar(var_c10415b6394096cc, flares_getnumleft(self));
+      if(isDefined(omnvar_name)) {
+        self.owner setclientomnvar(omnvar_name, flares_getnumleft(self));
       }
     }
   }
 }
 
-function ks_manualflares_handleincoming(var_c10415b6394096cc) {
+function ks_manualflares_handleincoming(omnvar_name) {
   level endon("game_ended");
   self endon("death");
   self endon("crashing");
@@ -315,10 +315,10 @@ function ks_manualflares_handleincoming(var_c10415b6394096cc) {
 
     self.owner thread ks_watch_death_stop_sound(self, "missile_incoming");
 
-    if(isDefined(var_c10415b6394096cc)) {
-      var_53b34aadf7b8e731 = vectorNormalize(missiles[0].origin - self.origin);
+    if(isDefined(omnvar_name)) {
+      vec_to_target = vectorNormalize(missiles[0].origin - self.origin);
       var_f2fd2ff92f5325ba = vectorNormalize(anglestoright(self.angles));
-      vec_dot = vectordot(var_53b34aadf7b8e731, var_f2fd2ff92f5325ba);
+      vec_dot = vectordot(vec_to_target, var_f2fd2ff92f5325ba);
       dir_index = 1;
 
       if(vec_dot > 0) {
@@ -327,7 +327,7 @@ function ks_manualflares_handleincoming(var_c10415b6394096cc) {
         dir_index = 3;
       }
 
-      self.owner setclientomnvar(var_c10415b6394096cc, dir_index);
+      self.owner setclientomnvar(omnvar_name, dir_index);
     }
 
     foreach(missile in missiles) {

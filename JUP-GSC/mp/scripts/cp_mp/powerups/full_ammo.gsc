@@ -35,7 +35,7 @@ function grab_full_ammo(str_powerup, ent_powerup) {
 
   foreach(player in a_players) {
     player give_ammo();
-    player thread namespace_2b1145f62aa835b8::function_a93fbc5ac33fc2f2(str_powerup);
+    player thread namespace_2b1145f62aa835b8::showpoweruphudsharedfunc(str_powerup);
   }
 
   level notify("zmb_max_ammo_level");
@@ -43,7 +43,7 @@ function grab_full_ammo(str_powerup, ent_powerup) {
 
 function function_c826b28f14f58267() {
   if(utility::issharedfuncdefined("powerup_full_ammo", "should_drop")) {
-    return utility::function_f3bb4f4911a1beb2("powerup_full_ammo", "should_drop");
+    return utility::callsharedfunc("powerup_full_ammo", "should_drop");
   }
 
   root = function_ecdae672c660149e();
@@ -52,7 +52,7 @@ function function_c826b28f14f58267() {
 
 function modify_drop_chance(chance, context) {
   if(utility::issharedfuncdefined("powerup_full_ammo", "modify_drop_chance")) {
-    return utility::function_f3bb4f4911a1beb2("powerup_full_ammo", "modify_drop_chance", chance, context);
+    return utility::callsharedfunc("powerup_full_ammo", "modify_drop_chance", chance, context);
   }
 
   return chance;
@@ -60,7 +60,7 @@ function modify_drop_chance(chance, context) {
 
 function give_ammo() {
   if(utility::issharedfuncdefined("powerup_full_ammo", "give_ammo")) {
-    utility::function_f3bb4f4911a1beb2("powerup_full_ammo", "give_ammo");
+    utility::callsharedfunc("powerup_full_ammo", "give_ammo");
     return;
   }
 
@@ -81,13 +81,13 @@ function give_ammo() {
     }
 
     if(istrue(weapon.hasalternate) && !isaxeweapon(weapon)) {
-      var_6890a4ce965bba99 = weapon getaltweapon();
-      self givemaxammo(var_6890a4ce965bba99);
-      n_clip_current = self getweaponammoclip(var_6890a4ce965bba99);
-      n_clip_max = weaponclipsize(var_6890a4ce965bba99);
+      weaponaltobj = weapon getaltweapon();
+      self givemaxammo(weaponaltobj);
+      n_clip_current = self getweaponammoclip(weaponaltobj);
+      n_clip_max = weaponclipsize(weaponaltobj);
 
       if(n_clip_current < n_clip_max) {
-        self setweaponammoclip(var_6890a4ce965bba99, weaponclipsize(var_6890a4ce965bba99));
+        self setweaponammoclip(weaponaltobj, weaponclipsize(weaponaltobj));
       }
     }
   }

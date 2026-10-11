@@ -8,7 +8,7 @@
 #namespace namespace_f388b4b671470a7d;
 
 function main() {
-  function_94461e6fd9196c6a(&playsoundfunc);
+  initcommonheartbeat(&playsoundfunc);
 
   while(!issharedfuncdefined("aggregator", "registerOnPlayerSpawnCallback")) {
     waitframe();

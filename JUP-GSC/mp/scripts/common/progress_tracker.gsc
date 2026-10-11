@@ -7,15 +7,15 @@
 #using scripts\engine\utility;
 #namespace progress_tracker;
 
-function function_b58813f6489727f2(var_cc3e7fbaface5a17, var_b76b3aee05993635) {
+function createprogresstracker(startingprogressvalue, finalprogressvalue) {
   progresstracker = spawnStruct();
   progresstracker.progresscomplete = 0;
   progresstracker.callbacks = [];
-  progresstracker.var_cc3e7fbaface5a17 = var_cc3e7fbaface5a17;
-  progresstracker.var_621cb2c0d9b1cdae = var_cc3e7fbaface5a17;
-  progresstracker.var_b76b3aee05993635 = var_b76b3aee05993635;
+  progresstracker.startingprogressvalue = startingprogressvalue;
+  progresstracker.currentprogressvalue = startingprogressvalue;
+  progresstracker.finalprogressvalue = finalprogressvalue;
 
-  if(isDefined(var_b76b3aee05993635) && var_cc3e7fbaface5a17 == var_b76b3aee05993635) {
+  if(isDefined(finalprogressvalue) && startingprogressvalue == finalprogressvalue) {
     assertmsg("<dev string:x1c>");
   }
 
@@ -23,15 +23,15 @@ function function_b58813f6489727f2(var_cc3e7fbaface5a17, var_b76b3aee05993635) {
 }
 
 function function_cfeb21bf93c30dae() {
-  assertex(isDefined(self.var_b76b3aee05993635), "<dev string:x8c>");
-  return abs(self.var_b76b3aee05993635 - self.var_621cb2c0d9b1cdae);
+  assertex(isDefined(self.finalprogressvalue), "<dev string:x8c>");
+  return abs(self.finalprogressvalue - self.currentprogressvalue);
 }
 
-function function_5cd1865af5a5edcf(uniquename) {
+function setuniquename(uniquename) {
   self.uniquename = uniquename;
 }
 
-function function_4f3f1f9cedf2d883() {
+function getuniquename() {
   if(!isDefined(self.uniquename) || self.uniquename == "<dev string:xd3>") {
     assertmsg("<dev string:xd7>");
   }
@@ -43,9 +43,9 @@ function iscomplete() {
   return self.progresscomplete;
 }
 
-function addcallback(var_1fd2df2315da3137, callbackfunction) {
+function addcallback(callonobject, callbackfunction) {
   newcallback = spawnStruct();
-  newcallback.callon = var_1fd2df2315da3137;
+  newcallback.callon = callonobject;
   newcallback.callbackfunction = callbackfunction;
   self.callbacks[self.callbacks.size] = newcallback;
 }
@@ -67,7 +67,7 @@ function function_e619a5f97879fa4a() {
   }
 }
 
-function function_a370b85e4225923c(incrementvalue) {
+function incrementcurrentprogress(incrementvalue) {
   if(iscomplete()) {
     return;
   }
@@ -76,11 +76,11 @@ function function_a370b85e4225923c(incrementvalue) {
     incrementvalue = 1;
   }
 
-  var_8ccf1248fb22534c = self.var_621cb2c0d9b1cdae + incrementvalue;
+  var_8ccf1248fb22534c = self.currentprogressvalue + incrementvalue;
   function_c664e1d4584b1dcd(var_8ccf1248fb22534c);
 }
 
-function function_1e9e5153831d8c68(decrementvalue) {
+function decrementcurrentprogress(decrementvalue) {
   if(iscomplete()) {
     return;
   }
@@ -89,51 +89,51 @@ function function_1e9e5153831d8c68(decrementvalue) {
     decrementvalue = 1;
   }
 
-  var_7b277612b5f42940 = self.var_621cb2c0d9b1cdae - decrementvalue;
-  var_7b277612b5f42940 = max(var_7b277612b5f42940, 0);
-  function_c664e1d4584b1dcd(var_7b277612b5f42940);
+  decrementedprogress = self.currentprogressvalue - decrementvalue;
+  decrementedprogress = max(decrementedprogress, 0);
+  function_c664e1d4584b1dcd(decrementedprogress);
 }
 
-function function_7681e7890758b69b(progressvalue) {
-  if(progressvalue < self.var_621cb2c0d9b1cdae) {
-    function_1e9e5153831d8c68(self.var_621cb2c0d9b1cdae - progressvalue);
+function setcurrentprogress(progressvalue) {
+  if(progressvalue < self.currentprogressvalue) {
+    decrementcurrentprogress(self.currentprogressvalue - progressvalue);
     return;
   }
 
-  function_a370b85e4225923c(progressvalue - self.var_621cb2c0d9b1cdae);
+  incrementcurrentprogress(progressvalue - self.currentprogressvalue);
 }
 
-function function_ea45d380408d2922(finalvalue) {
+function setfinalvalue(finalvalue) {
   if(iscomplete()) {
     return;
   }
 
   assertex(isDefined(finalvalue), "<dev string:x112>");
-  self.var_b76b3aee05993635 = finalvalue;
-  function_c664e1d4584b1dcd(self.var_621cb2c0d9b1cdae);
+  self.finalprogressvalue = finalvalue;
+  function_c664e1d4584b1dcd(self.currentprogressvalue);
 }
 
-function private function_c664e1d4584b1dcd(var_6f4eb8a505d5c52f) {
-  self.progresscomplete = function_c076b6b5c85274d8(var_6f4eb8a505d5c52f);
+function private function_c664e1d4584b1dcd(newprogressvalue) {
+  self.progresscomplete = function_c076b6b5c85274d8(newprogressvalue);
 
   if(self.progresscomplete) {
-    self.var_621cb2c0d9b1cdae = self.var_b76b3aee05993635;
+    self.currentprogressvalue = self.finalprogressvalue;
   } else {
-    self.var_621cb2c0d9b1cdae = var_6f4eb8a505d5c52f;
+    self.currentprogressvalue = newprogressvalue;
   }
 
   function_e619a5f97879fa4a();
 }
 
-function private function_c076b6b5c85274d8(var_6f4eb8a505d5c52f) {
-  if(!isDefined(self.var_b76b3aee05993635)) {
+function private function_c076b6b5c85274d8(newprogressvalue) {
+  if(!isDefined(self.finalprogressvalue)) {
     return false;
   }
 
-  var_47378a790f40bbe2 = self.var_cc3e7fbaface5a17 < self.var_b76b3aee05993635 && var_6f4eb8a505d5c52f >= self.var_b76b3aee05993635;
-  var_e1836bac44cbf54a = self.var_cc3e7fbaface5a17 > self.var_b76b3aee05993635 && var_6f4eb8a505d5c52f <= self.var_b76b3aee05993635;
-  var_feef1209b8b0a9ea = self.var_cc3e7fbaface5a17 == self.var_b76b3aee05993635 || iscomplete();
-  var_d49232a821579d29 = isfloat(var_6f4eb8a505d5c52f) && abs(var_6f4eb8a505d5c52f - self.var_b76b3aee05993635) <= 0.25;
+  var_47378a790f40bbe2 = self.startingprogressvalue < self.finalprogressvalue && newprogressvalue >= self.finalprogressvalue;
+  var_e1836bac44cbf54a = self.startingprogressvalue > self.finalprogressvalue && newprogressvalue <= self.finalprogressvalue;
+  var_feef1209b8b0a9ea = self.startingprogressvalue == self.finalprogressvalue || iscomplete();
+  var_d49232a821579d29 = isfloat(newprogressvalue) && abs(newprogressvalue - self.finalprogressvalue) <= 0.25;
 
   if(var_47378a790f40bbe2 || var_e1836bac44cbf54a || var_feef1209b8b0a9ea || var_d49232a821579d29) {
     return true;

@@ -441,7 +441,7 @@ function function_764cf6b0bca0fe0a() {
   return var_4ebf4fdb24b6df5c;
 }
 
-function function_f63baad2f7765f34(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_f63baad2f7765f34(instance, part, state, player, bautouse, usestring) {
   if(!player scripts\mp\gametypes\br_public::isplayerinorgoingtogulag()) {
     return;
   }
@@ -502,7 +502,7 @@ function function_1aa190da562f8db3() {
   instance.cargoprogress = 0;
 }
 
-function function_6c9ae1f39f71f7e1(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_6c9ae1f39f71f7e1(instance, part, state, player, bautouse, usestring) {
   if(!player scripts\mp\gametypes\br_public::isplayerinorgoingtogulag()) {
     return;
   }
@@ -608,7 +608,7 @@ function function_5322b4a5ec08d2c9(camera, cameratwo, camerathree) {
   return false;
 }
 
-function function_875f67700e4d2769(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_875f67700e4d2769(instance, part, state, player, bautouse, usestring) {
   if(!player scripts\mp\gametypes\br_public::isplayerinorgoingtogulag()) {
     return;
   }
@@ -621,7 +621,7 @@ function function_875f67700e4d2769(instance, part, state, player, var_a5b2c54141
   player thread function_f229c4ce80428ffe("briefcase_bomb_mp", 3);
 }
 
-function function_b0f86be8e080101(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_b0f86be8e080101(instance, part, state, player, bautouse, usestring) {
   if(!player scripts\mp\gametypes\br_public::isplayerinorgoingtogulag()) {
     return;
   }
@@ -638,7 +638,7 @@ function function_b0f86be8e080101(instance, part, state, player, var_a5b2c541413
   player thread scripts\mp\hud_message::showsplash("br_ai_gulag_vent_success");
 }
 
-function function_3bc6f653f16663aa(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_3bc6f653f16663aa(instance, part, state, player, bautouse, usestring) {
   arena = namespace_ad49798629176e96::function_2f4344abdc200e43(player);
 
   if(!isDefined(arena)) {
@@ -658,7 +658,7 @@ function function_3bc6f653f16663aa(instance, part, state, player, var_a5b2c54141
   player playsoundonmovingent("mine_betty_click");
 }
 
-function function_e40faa26da957604(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_e40faa26da957604(instance, part, state, player, bautouse, usestring) {
   if(!player scripts\mp\gametypes\br_public::isplayerinorgoingtogulag()) {
     return;
   }
@@ -692,7 +692,7 @@ function function_e40faa26da957604(instance, part, state, player, var_a5b2c54141
   player.var_2ac81a7104e85b68 = 1;
 }
 
-function function_b7e4cbd2a1618bdc(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_b7e4cbd2a1618bdc(instance, part, state, player, bautouse, usestring) {
   arena = namespace_ad49798629176e96::function_2f4344abdc200e43(player);
 
   if(!isDefined(arena)) {
@@ -752,7 +752,7 @@ function function_bfb05639e6a851c0(weaponref) {
   player.var_e9343fd6e229b035 = undefined;
 }
 
-function function_ed3b3a2040c051a6(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_ed3b3a2040c051a6(instance, part, state, player, bautouse, usestring) {
   arena = namespace_ad49798629176e96::function_2f4344abdc200e43(player);
 
   if(!isDefined(arena)) {

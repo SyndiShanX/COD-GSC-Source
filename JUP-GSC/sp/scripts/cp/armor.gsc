@@ -411,14 +411,14 @@ function function_9a26bfc3788f86dc() {
 }
 
 function function_71bfaff2d0aa4165() {
-  var_a5ea2300efaaa6a7 = is_player_gamepad_enabled() && self weaponswitchbuttonPressed();
+  isholdinggamepad = is_player_gamepad_enabled() && self weaponswitchbuttonPressed();
   hasarmorqueue = isDefined(self.armorqueued) && self.armorqueued > 0;
-  return var_a5ea2300efaaa6a7 && hasarmorqueue;
+  return isholdinggamepad && hasarmorqueue;
 }
 
-function function_44069cec1ce1f09c(var_e12d78c11d85d9c2) {
-  self allowmelee(!var_e12d78c11d85d9c2);
-  self.insertingarmorplate = var_e12d78c11d85d9c2;
+function function_44069cec1ce1f09c(isusingarmor) {
+  self allowmelee(!isusingarmor);
+  self.insertingarmorplate = isusingarmor;
 }
 
 function function_5428674b81737a6f(streakinfo, switchresult) {

@@ -12,23 +12,23 @@
 
 function function_764239e6a246c46a() {
   funcarray = [];
-  funcarray["init"] = &function_db991b1ec8386695;
-  funcarray["shouldRun"] = &function_dcbff0f91b68341d;
-  funcarray["enableForClient"] = &function_4999a7fd384d2fb4;
-  funcarray["disable"] = &function_11f7a27364a8b75d;
+  funcarray["init"] = &visibilitymode_init;
+  funcarray["shouldRun"] = &visibilitymode_shouldrun;
+  funcarray["enableForClient"] = &visibilitymode_enable;
+  funcarray["disable"] = &visibilitymode_disable;
   funcarray["checkForDataUpdates"] = &function_5d19d3f8062e4bee;
   funcarray["getADSWeaponDist"] = &function_553772f1f998aa41;
-  funcarray["getTargetArray"] = &function_6be4502bdbd97c85;
+  funcarray["getTargetArray"] = &visibilitymode_gettargetarray;
   funcarray["optionalADSFuncs"] = &function_6bcbb2f848cd60ef;
   return funcarray;
 }
 
-function function_db991b1ec8386695() {
+function visibilitymode_init() {
   flag_wait("load_finished");
   scripts\engine\sp\utility::hudoutline_add_channel("highContrastMode", -10);
 }
 
-function function_dcbff0f91b68341d() {
+function visibilitymode_shouldrun() {
   return true;
 }
 
@@ -38,14 +38,14 @@ function function_f0094b64651988aa() {
   }
 }
 
-function function_4999a7fd384d2fb4(client, assetname, prioritygroup) {
+function visibilitymode_enable(client, assetname, prioritygroup) {
   soldiernum = self getentitynumber();
   self.var_5d5996d4b95f80f0 = prioritygroup;
   scripts\engine\sp\utility::hudoutline_enable_new(assetname, "highContrastMode");
   return soldiernum;
 }
 
-function function_11f7a27364a8b75d(id) {
+function visibilitymode_disable(id) {
   scripts\engine\sp\utility::hudoutline_disable("highContrastMode");
 }
 
@@ -59,7 +59,7 @@ function function_553772f1f998aa41() {
   return 1500;
 }
 
-function function_6be4502bdbd97c85(client) {
+function visibilitymode_gettargetarray(client) {
   aiarray = getaiarray();
   fakearray = getfakeaiarray();
   drones = [];
@@ -91,13 +91,13 @@ function function_5d19d3f8062e4bee() {
     if(isDefined(datavalue)) {
       if(isDefined(level.player.visibilitymodeval) && isDefined(level.player.var_5615f87228f360c8)) {
         if(datavalue != level.player.visibilitymodeval || outlinevalue != level.player.var_5615f87228f360c8) {
-          level.player scripts\common\visibility_mode::function_8c2e8285c9915b12(datavalue, outlinevalue);
+          level.player scripts\common\visibility_mode::visibilitymode_unpackvalue(datavalue, outlinevalue);
         }
 
         continue;
       }
 
-      level.player scripts\common\visibility_mode::function_8c2e8285c9915b12(datavalue, outlinevalue);
+      level.player scripts\common\visibility_mode::visibilitymode_unpackvalue(datavalue, outlinevalue);
     }
   }
 }
@@ -128,7 +128,7 @@ function function_b0ca2ca41e304f16() {
 
 function function_6bcbb2f848cd60ef() {
   self endon("disconnect");
-  self.var_ff7a6caa0a544d30 = 0;
+  self.visibilitymodeads = 0;
   self.var_44446bd6d8fd6ed0 = 0;
   self notifyonplayercommand("vis_melee_pressed", "+melee");
   self notifyonplayercommand("vis_melee_pressed", "+melee_zoom");
@@ -154,8 +154,8 @@ function function_6bcbb2f848cd60ef() {
     playerads = self playerads();
 
     if(playerads == 1) {
-      if(self.var_ff7a6caa0a544d30 == 0) {
-        self.var_ff7a6caa0a544d30 = 1;
+      if(self.visibilitymodeads == 0) {
+        self.visibilitymodeads = 1;
         thread function_dc7453c8550c512c();
         thread function_eec104c84dc70618("vis_melee_pressed");
         thread function_eec104c84dc70618("vis_use_pressed");
@@ -166,7 +166,7 @@ function function_6bcbb2f848cd60ef() {
     }
 
     if(playerads < 1) {
-      self.var_ff7a6caa0a544d30 = 0;
+      self.visibilitymodeads = 0;
       self.var_44446bd6d8fd6ed0 = 0;
       self notify("visibilityMode_stopads");
     }
@@ -207,25 +207,25 @@ function private function_5c04dcd5e95fbb53() {
 }
 
 function private function_1f6b32e8c25bc863() {
-  var_70290afa764aaaf7 = getscriptablearray();
+  all_scriptables = getscriptablearray();
 
-  if(isDefined(var_70290afa764aaaf7)) {
-    var_70290afa764aaaf7 = sortbydistance(var_70290afa764aaaf7, self.origin);
+  if(isDefined(all_scriptables)) {
+    all_scriptables = sortbydistance(all_scriptables, self.origin);
 
-    for(i = 0; i < var_70290afa764aaaf7.size; i++) {
-      if(distancesquared(var_70290afa764aaaf7[i].origin, self.origin) > 22500) {
+    for(i = 0; i < all_scriptables.size; i++) {
+      if(distancesquared(all_scriptables[i].origin, self.origin) > 22500) {
         continue;
       }
 
-      if(var_70290afa764aaaf7[i] getscriptableisusableonanypart()) {
-        if(var_70290afa764aaaf7[i] scriptableisdoor()) {
-          if(var_70290afa764aaaf7[i] scriptabledoorisclosed()) {
-            var_70290afa764aaaf7[i] playSound("door_locked");
+      if(all_scriptables[i] getscriptableisusableonanypart()) {
+        if(all_scriptables[i] scriptableisdoor()) {
+          if(all_scriptables[i] scriptabledoorisclosed()) {
+            all_scriptables[i] playSound("door_locked");
           } else {
-            var_70290afa764aaaf7[i] playSound("door_locked_bashed");
+            all_scriptables[i] playSound("door_locked_bashed");
           }
         } else {
-          var_70290afa764aaaf7[i] playSound("bunkerbuster_bounce");
+          all_scriptables[i] playSound("bunkerbuster_bounce");
         }
 
         wait 0.25;

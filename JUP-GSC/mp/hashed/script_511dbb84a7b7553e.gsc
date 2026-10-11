@@ -165,7 +165,7 @@ function function_738844ba18b42814() {
   foreach(struct in var_3669a68d20aea8d3) {
     if(is_equal(struct.script_noteworthy, "heli_unload")) {
       level.var_9594323b73b00c94[level.var_9594323b73b00c94.size] = struct;
-      struct.poi = scripts\mp\poi::function_6cc445c02b5effac(struct.origin, 1);
+      struct.poi = scripts\mp\poi::poi_findpoioriginisin(struct.origin, 1);
       struct.path_start_node = getclosest(struct.origin, startlocs);
     }
   }
@@ -298,7 +298,7 @@ function function_a2c124bb568b415f(var_5e725114084f1e04, targetplayer) {
 function function_83caf57029d465e3(origin) {
   zombie_type = "jup_spawner_zombie_base_mutation_mode_mp";
   ai = scripts\mp\mp_agent::spawnnewagentaitype(zombie_type, origin, (0, randomint(360), 0), "team_two_hundred");
-  ai utility::function_f3bb4f4911a1beb2("zombie_utils", "setMoveSpeed", "sprint", "horde_spawn", 1);
+  ai utility::callsharedfunc("zombie_utils", "setMoveSpeed", "sprint", "horde_spawn", 1);
   ai.maxhealth = 325;
   ai.health = ai.maxhealth;
   ai.dontsyncmelee = 1;

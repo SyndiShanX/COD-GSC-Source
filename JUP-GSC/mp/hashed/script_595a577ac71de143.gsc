@@ -409,7 +409,7 @@ function private function_e6965cda6f8ff5d(var_8acbdb03885a9d78) {
   }
 
   if(isDefined(self.var_1a56b3933b0e630c)) {
-    function_fb39412d7c61e5c7(self.var_1a56b3933b0e630c, 1, self);
+    deactivateworldevent(self.var_1a56b3933b0e630c, 1, self);
     self.var_1a56b3933b0e630c = undefined;
   }
 
@@ -417,7 +417,7 @@ function private function_e6965cda6f8ff5d(var_8acbdb03885a9d78) {
     return;
   }
 
-  function_aa6da985e05e2780(var_8acbdb03885a9d78, 1, self);
+  activateworldevent(var_8acbdb03885a9d78, 1, self);
   self.var_1a56b3933b0e630c = var_8acbdb03885a9d78;
 }
 

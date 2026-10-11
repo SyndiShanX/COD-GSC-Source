@@ -17,7 +17,7 @@ function snd_init() {
     level.snd.var_78f5f86726c0fdb5 = 1;
     level.snd.callbacks = [];
     level.snd.objects = [];
-    level.snd.var_a79bb46c42ffe2fd = [];
+    level.snd.unlinkedobjects = [];
     level.snd.var_6bb7b2b49f3454a1 = "gentity";
     level.snd.var_c5b5d16976d4a8ef = 0;
     level.snd.callbacks["player_view"] = &function_cfd6fc964dca520a;
@@ -27,7 +27,7 @@ function snd_init() {
 
   function_301f98e25e20c1ab();
 
-  level thread function_28988b4602b0b747();
+  level thread snd_debug_init();
 }
 
 function function_b3e5599c9f6a8895(obj) {
@@ -40,10 +40,10 @@ function function_b3e5599c9f6a8895(obj) {
   assertex(isstruct(obj.snd), "snd_init_obj obj.snd is not a struct");
 }
 
-function function_4677a3d91779f0e() {
+function snd_is_first_frame() {
   now = gettime();
-  var_62b0f3e6017d4cee = function_f0b5522ee5ce0cb1() == 0 || now <= 300;
-  return var_62b0f3e6017d4cee;
+  is_first_frame = function_f0b5522ee5ce0cb1() == 0 || now <= 300;
+  return is_first_frame;
 }
 
 function function_f0b5522ee5ce0cb1() {
@@ -95,7 +95,7 @@ function snd_stop_alias(soundalias, targets, fadeoutseconds) {
   return var_cadaa7a8d37a5adc;
 }
 
-function function_c5647295e3ac75df(soundobject, notifyentity, notifystring, fadeoutseconds) {
+function snd_stop_on_ent_notify(soundobject, notifyentity, notifystring, fadeoutseconds) {
   if(function_110d3ab280057f5b(!function_f0a31c88dbf01c1(soundobject), "snd_stop_on_ent_notify soundObject is not a snd object")) {
     return;
   }
@@ -113,7 +113,7 @@ function function_c5647295e3ac75df(soundobject, notifyentity, notifystring, fade
   }
 }
 
-function function_a9bcfafb96e69580(soundobject, deathentity, fadeoutseconds) {
+function snd_stop_on_ent_death(soundobject, deathentity, fadeoutseconds) {
   if(function_110d3ab280057f5b(!function_f0a31c88dbf01c1(soundobject), "stop_on_ent_death soundObject is not a snd object")) {
     return;
   }
@@ -127,7 +127,7 @@ function function_a9bcfafb96e69580(soundobject, deathentity, fadeoutseconds) {
   }
 }
 
-function function_74726126b3d8b0aa(soundobject, levelnotifystring, fadeoutseconds) {
+function snd_stop_on_level_notify(soundobject, levelnotifystring, fadeoutseconds) {
   if(function_110d3ab280057f5b(!function_f0a31c88dbf01c1(soundobject), "stop_on_level_notify soundObject is not a snd object")) {
     return;
   }
@@ -200,7 +200,7 @@ function function_a922099e0d89c828(targets) {
     }
 
     if(target == level) {
-      sndobjs = array_combine(sndobjs, level.snd.var_a79bb46c42ffe2fd);
+      sndobjs = array_combine(sndobjs, level.snd.unlinkedobjects);
       continue;
     }
 
@@ -212,7 +212,7 @@ function function_a922099e0d89c828(targets) {
   return sndobjs;
 }
 
-function function_40970b59b11f71d3(soundalias, targets) {
+function snd_get_alias_objects(soundalias, targets) {
   if(function_110d3ab280057f5b(!isDefined(soundalias), "snd_get_alias_objects with undefined soundalias")) {
     return 0;
   }
@@ -388,7 +388,7 @@ function private function_2743b5d65cb4aa61(ent, var_b042ad1a3b3400e8, linkedenti
   assertex(isDefined(ent.soundkey), "snd: undefined soundkey");
 
   if(isDefined(linkedentity)) {
-    linkedbonetag = linkedentity function_1437d15fc0a0a804(linkedbonetag);
+    linkedbonetag = linkedentity gettagsafe(linkedbonetag);
     linkedoffset = (0, 0, 0);
     linkedangles = (0, 0, 0);
 
@@ -408,7 +408,7 @@ function private function_2743b5d65cb4aa61(ent, var_b042ad1a3b3400e8, linkedenti
     return;
   }
 
-  level.snd.var_a79bb46c42ffe2fd[ent.soundkey] = ent;
+  level.snd.unlinkedobjects[ent.soundkey] = ent;
 }
 
 function private function_32231133ccc402ee(soundalias, var_b042ad1a3b3400e8, linkedentity, linkedbonetag) {
@@ -445,7 +445,7 @@ function private function_32231133ccc402ee(soundalias, var_b042ad1a3b3400e8, lin
   assertex(isDefined(ent), "snd: could not spawn/allocate entity");
 
   if(isent(ent)) {
-    ent.var_c55912d11e27cbee = linkedentity;
+    ent.soundlinkedentity = linkedentity;
     ent.soundtype = "gentity";
     ent.soundkey = ent getentitynumber();
     ent.targetname = "snd " + soundalias;
@@ -463,8 +463,8 @@ function private function_3faaafc0bfa48453(ent) {
     return;
   }
 
-  if(isDefined(ent.var_c55912d11e27cbee) && isarray(ent.var_c55912d11e27cbee.snd.objects)) {
-    linkedentity = ent.var_c55912d11e27cbee;
+  if(isDefined(ent.soundlinkedentity) && isarray(ent.soundlinkedentity.snd.objects)) {
+    linkedentity = ent.soundlinkedentity;
     var_25fdd8d118c2da05 = isDefined(linkedentity.snd.objects[ent.soundkey]);
 
     if(var_25fdd8d118c2da05 == 1) {
@@ -475,7 +475,7 @@ function private function_3faaafc0bfa48453(ent) {
       }
     }
   } else {
-    level.snd.var_a79bb46c42ffe2fd[ent.soundkey] = undefined;
+    level.snd.unlinkedobjects[ent.soundkey] = undefined;
   }
 
   waittillframeend();
@@ -494,7 +494,7 @@ function private function_2a7a90760153d57b(soundobject, soundalias, initialvolum
     initialvolume = currentvolume;
   }
 
-  if(function_4677a3d91779f0e()) {
+  if(snd_is_first_frame()) {
     var_14cbdbf60f75e20b = !isDefined(delaytime) || isnumber(delaytime) && delaytime == 0;
 
     if(function_110d3ab280057f5b(var_14cbdbf60f75e20b, "snd: delayed due to first frame!")) {
@@ -523,9 +523,9 @@ function private function_2a7a90760153d57b(soundobject, soundalias, initialvolum
         ent thread function_f5abe4d9a18d99c7(donenotifystr);
       }
     } else {
-      if(isDefined(ent.var_c55912d11e27cbee) && isDefined(level.snd.var_5ee4aba82383469e)) {
+      if(isDefined(ent.soundlinkedentity) && isDefined(level.snd.fnplaysoundonmovingent)) {
         waitframe();
-        ent[[level.snd.var_5ee4aba82383469e]](soundalias);
+        ent[[level.snd.fnplaysoundonmovingent]](soundalias);
       } else {
         ent playSound(soundalias);
       }
@@ -668,7 +668,7 @@ function private function_d3655eaed7181b30(targ) {
 
   if(!isDefined(targ)) {
     foreach(player in getplayerssafe()) {
-      tagname = player function_1437d15fc0a0a804("j_head");
+      tagname = player gettagsafe("j_head");
 
       if(player.model != "" && tagname != "") {
         targets[targets.size] = [player, tagname];
@@ -896,7 +896,7 @@ function private function_114485fecd709d37(soundobject, fadeoutseconds) {
     soundobject notify("snd_emitter_stop");
     soundobject.soundtype = undefined;
     soundobject.soundalias = undefined;
-    soundobject.var_c55912d11e27cbee = undefined;
+    soundobject.soundlinkedentity = undefined;
     soundobject.origin = undefined;
     soundobject.angles = undefined;
     return;
@@ -983,7 +983,7 @@ function function_7670acb4b00bb0ac(target) {
 }
 
 function private function_2e4ee66733c986ee(rotationrange) {
-  var_57338c9e11b3e93 = randomfloatrange(-180, 180);
+  azimuth = randomfloatrange(-180, 180);
   rotation = 0;
 
   if(isarray(rotationrange)) {
@@ -992,15 +992,15 @@ function private function_2e4ee66733c986ee(rotationrange) {
     } else if(rotationrange.size == 2) {
       rotation = rangehelper(rotationrange);
     } else if(rotationrange.size == 3) {
-      var_57338c9e11b3e93 = rotationrange[0];
+      azimuth = rotationrange[0];
       rotation = rangehelper(rotationrange);
-      var_cd04a8e443a298ea = [rotationrange[1], rotationrange[2]];
-      rotation = rangehelper(var_cd04a8e443a298ea);
+      adjustedrotationrange = [rotationrange[1], rotationrange[2]];
+      rotation = rangehelper(adjustedrotationrange);
     } else if(rotationrange.size >= 4) {
       var_1c6878741047dda8 = [rotationrange[0], rotationrange[1]];
-      var_57338c9e11b3e93 = rangehelper(var_1c6878741047dda8);
-      var_cd04a8e443a298ea = [rotationrange[2], rotationrange[3]];
-      rotation = rangehelper(var_cd04a8e443a298ea);
+      azimuth = rangehelper(var_1c6878741047dda8);
+      adjustedrotationrange = [rotationrange[2], rotationrange[3]];
+      rotation = rangehelper(adjustedrotationrange);
     }
   }
 
@@ -1011,10 +1011,10 @@ function private function_2e4ee66733c986ee(rotationrange) {
     rotation = randomfloatrange(min, max);
   }
 
-  return [var_57338c9e11b3e93, rotation];
+  return [azimuth, rotation];
 }
 
-function private function_fe69ae3b76d26efa(target, dist, var_57338c9e11b3e93, elevation, rotation) {
+function private function_fe69ae3b76d26efa(target, dist, azimuth, elevation, rotation) {
   self endon("death");
   self endon("sounddone");
 
@@ -1024,7 +1024,7 @@ function private function_fe69ae3b76d26efa(target, dist, var_57338c9e11b3e93, el
 
   assertex(isent(target) || isstruct(target) && isDefined(target.origin) || isvector(target), "");
   assertex(isnumber(dist), "");
-  assertex(isnumber(var_57338c9e11b3e93), "");
+  assertex(isnumber(azimuth), "");
   assertex(isnumber(rotation), "");
 
   if(function_ec24f13736bfc421() > 2) {
@@ -1046,9 +1046,9 @@ function private function_fe69ae3b76d26efa(target, dist, var_57338c9e11b3e93, el
       break;
     }
 
-    position = function_3ad9433c6a61f479(centerorigin, dist, var_57338c9e11b3e93, elevation);
+    position = orbitalposition(centerorigin, dist, azimuth, elevation);
     self moveTo(position, movetime, 0, 0);
-    var_57338c9e11b3e93 += rotationstep;
+    azimuth += rotationstep;
     wait movetime;
 
     if(function_ec24f13736bfc421() <= 2) {
@@ -1074,13 +1074,13 @@ function private function_71b899d04c402bb5(emitter) {
   emitter notify("snd_emitter_stop");
   emitter.soundtype = undefined;
   emitter.soundalias = undefined;
-  emitter.var_c55912d11e27cbee = undefined;
+  emitter.soundlinkedentity = undefined;
   emitter.origin = undefined;
   emitter.angles = undefined;
   emitter = undefined;
 }
 
-function private function_5a53ef7be394d4a8(soundalias, target, spawntimerange, distancerange, rotationrange, var_c1acbb1d24b6efc5) {
+function private function_5a53ef7be394d4a8(soundalias, target, spawntimerange, distancerange, rotationrange, elevationrange) {
   self endon("snd_emitter_stop");
   level endon("snd_emitter_stop");
   assertex(isDefined(target) && isarray(target) == 0, "snd_emitter target must be entity or vector");
@@ -1094,9 +1094,9 @@ function private function_5a53ef7be394d4a8(soundalias, target, spawntimerange, d
   dist = rangehelper(default_to(distancerange, 0));
   var_ee2e91a46457edcd = function_2e4ee66733c986ee(rotationrange);
   assert(isarray(var_ee2e91a46457edcd) && var_ee2e91a46457edcd.size != 0);
-  var_57338c9e11b3e93 = var_ee2e91a46457edcd[0];
+  azimuth = var_ee2e91a46457edcd[0];
   rotation = var_ee2e91a46457edcd[1];
-  elevation = rangehelper(default_to(var_c1acbb1d24b6efc5, 0));
+  elevation = rangehelper(default_to(elevationrange, 0));
 
   if(isarray(spawntimerange) && spawntimerange.size >= 4) {
     assertex(spawntimerange.size == 4, "snd_emitter spawnTimeRange array size must be exactly 2 or 4 in size.");
@@ -1104,11 +1104,11 @@ function private function_5a53ef7be394d4a8(soundalias, target, spawntimerange, d
     spawntime = rangehelper(var_e500e5a50841701e, 0.05);
     wait spawntime;
     targetposition = function_7670acb4b00bb0ac(target);
-    position = function_3ad9433c6a61f479(targetposition, dist, var_57338c9e11b3e93, elevation);
+    position = orbitalposition(targetposition, dist, azimuth, elevation);
     sndobj = snd_play(soundalias, position);
 
     if(isDefined(sndobj) && isDefined(dist) && dist > 0 && isDefined(rotation) && rotation != 0) {
-      sndobj thread function_fe69ae3b76d26efa(target, dist, var_57338c9e11b3e93, rotation);
+      sndobj thread function_fe69ae3b76d26efa(target, dist, azimuth, rotation);
       spawntimerange = [spawntimerange[2], spawntimerange[3]];
     }
   }
@@ -1124,15 +1124,15 @@ function private function_5a53ef7be394d4a8(soundalias, target, spawntimerange, d
     dist = rangehelper(default_to(distancerange, 0));
     var_ee2e91a46457edcd = function_2e4ee66733c986ee(rotationrange);
     assert(isarray(var_ee2e91a46457edcd) && var_ee2e91a46457edcd.size != 0);
-    var_57338c9e11b3e93 = var_ee2e91a46457edcd[0];
+    azimuth = var_ee2e91a46457edcd[0];
     rotation = var_ee2e91a46457edcd[1];
-    elevation = rangehelper(default_to(var_c1acbb1d24b6efc5, 0));
+    elevation = rangehelper(default_to(elevationrange, 0));
     targetposition = function_7670acb4b00bb0ac(target);
-    position = function_3ad9433c6a61f479(targetposition, dist, var_57338c9e11b3e93, elevation);
+    position = orbitalposition(targetposition, dist, azimuth, elevation);
     sndobj = snd_play(soundalias, position);
 
     if(isDefined(sndobj) && isDefined(dist) && dist > 0 && isDefined(rotation) && rotation != 0) {
-      sndobj thread function_fe69ae3b76d26efa(target, dist, var_57338c9e11b3e93, elevation, rotation);
+      sndobj thread function_fe69ae3b76d26efa(target, dist, azimuth, elevation, rotation);
     }
   }
 }
@@ -1182,7 +1182,7 @@ function snd_emitter(soundalias, target, spawntime, distancerange, rotation, ele
       level.snd.emitters[emitter.soundkey] = emitter;
 
       if(ise) {
-        emitter.var_c55912d11e27cbee = t;
+        emitter.soundlinkedentity = t;
       }
 
       if(isv) {
@@ -1216,7 +1216,7 @@ function private function_ee1f9b08b748b2bf(alias, tag, ends_on_death, var_b426f3
 
   if(isDefined(ends_on_death)) {
     assertex(ends_on_death, "ends_on_death must be true or undefined");
-    namespace_53c50dd747d66443::function_a9bcfafb96e69580(snd, self);
+    namespace_53c50dd747d66443::snd_stop_on_ent_death(snd, self);
   }
 
   namespace_53c50dd747d66443::snd_wait(snd);
@@ -1242,7 +1242,7 @@ function private function_4df9eee6e5769696(soundalias, notifystring, var_fe0cdb1
   snd = function_88c8b4d475d4cfd(level.snd.var_6bb7b2b49f3454a1, soundalias, target);
 
   if(var_fe0cdb15e0d3c83f) {
-    namespace_53c50dd747d66443::function_a9bcfafb96e69580(snd, self);
+    namespace_53c50dd747d66443::snd_stop_on_ent_death(snd, self);
   }
 
   if(isDefined(notifystring)) {
@@ -1577,8 +1577,8 @@ function function_775073c6517ceb5e(name, outputcallback, userdata) {
   assertex(isDefined(self.snd.params[name]), "snd_param input '" + name + "' not initialized on entity");
   assertex(isDefined(self.snd.params[name].outputcallbacks), "snd_param not initialized on entity");
   assertex(isarray(self.snd.params[name].outputcallbacks), "snd_param not initialized on entity");
-  var_91920809a5e8e2b9 = self.snd.params[name].outputcallbacks.size;
-  self.snd.params[name].outputcallbacks[var_91920809a5e8e2b9] = outputcallback;
+  outputcallbackindex = self.snd.params[name].outputcallbacks.size;
+  self.snd.params[name].outputcallbacks[outputcallbackindex] = outputcallback;
 
   if(isDefined(self.snd.params[name].userdata) == 0) {
     self.snd.params[name].userdata = [];
@@ -1676,7 +1676,7 @@ function private function_f2d694165b0e0e17(userdata) {
   assert(isDefined(self.snd.origin_speed));
   velocity = function_95848ecd26935b4b();
   speed = length(velocity);
-  self.snd.origin_speed = function_eb651502ea5a7ea8(speed, self.snd.origin_speed, 0.05);
+  self.snd.origin_speed = smoothvalue(speed, self.snd.origin_speed, 0.05);
 
   if(function_ec24f13736bfc421() >= 2) {
     debugspeed = self.snd.origin_speed;
@@ -1685,16 +1685,16 @@ function private function_f2d694165b0e0e17(userdata) {
       debugspeed = 0;
     }
 
-    var_750a2993c537e7b0 = function_692101820901e01a(debugspeed * function_9f6e6c09d0cac253() * 0.0568182, 1) + "<dev string:x4d>" + function_692101820901e01a(debugspeed, 1) + "<dev string:x55>";
+    debugspeedtext = printdecimalcount(debugspeed * function_9f6e6c09d0cac253() * 0.0568182, 1) + "<dev string:x4d>" + printdecimalcount(debugspeed, 1) + "<dev string:x55>";
     debugcolor = level.snd.debug.color_3d;
     debugalpha = 0.9;
-    var_de81b175de6cc8a8 = debugalpha * debugalpha;
+    debugalphasq = debugalpha * debugalpha;
     debugscale = level.snd.debug.scale_3d;
     colorscale = level.snd.debug.color_scale;
     debugcolor = function_1f9e5d44e92014a5(debugcolor, colorscale * 10);
     debugframes = 1;
     debugoffset = (0, 0, 4 * debugscale * 16);
-    print3dplus(var_750a2993c537e7b0, self.origin + debugoffset, -1 * debugscale, "<dev string:x5a>", debugcolor, debugalpha, (0, 0, 0), var_de81b175de6cc8a8, (1, 1, 1), var_de81b175de6cc8a8, debugframes);
+    print3dplus(debugspeedtext, self.origin + debugoffset, -1 * debugscale, "<dev string:x5a>", debugcolor, debugalpha, (0, 0, 0), debugalphasq, (1, 1, 1), debugalphasq, debugframes);
   }
 
   return self.snd.origin_speed;
@@ -1771,18 +1771,18 @@ function private function_653bedee3bcc58bd(inputvalue, userdata) {
     speed = 0;
   }
 
-  var_640a3fbfe37f7312 = v.var_270c723c3b5f910b["speed"][0];
-  var_63e749bfe3594158 = v.var_270c723c3b5f910b["speed"][1];
-  var_7f89dca4fd0c82e5 = v.var_270c723c3b5f910b["scale"][0];
-  var_7fade6a4fd35139b = v.var_270c723c3b5f910b["scale"][1];
-  volumecurve = v.var_270c723c3b5f910b["curve"][0];
-  var_57dd5bc37ee77d94 = v.var_bb71b5efdeeee611["speed"][0];
-  var_580149c37f0fd0b6 = v.var_bb71b5efdeeee611["speed"][1];
-  var_df0dce5971287c53 = v.var_bb71b5efdeeee611["scale"][0];
-  var_df30e459714ef46d = v.var_bb71b5efdeeee611["scale"][1];
-  pitchcurve = v.var_bb71b5efdeeee611["curve"][0];
-  volume = scalerp(speed, var_640a3fbfe37f7312, var_63e749bfe3594158, var_7f89dca4fd0c82e5, var_7fade6a4fd35139b);
-  pitch = scalerp(speed, var_57dd5bc37ee77d94, var_580149c37f0fd0b6, var_df0dce5971287c53, var_df30e459714ef46d);
+  volumespeedmin = v.volumedict["speed"][0];
+  volumespeedmax = v.volumedict["speed"][1];
+  volumescalemin = v.volumedict["scale"][0];
+  volumescalemax = v.volumedict["scale"][1];
+  volumecurve = v.volumedict["curve"][0];
+  pitchspeedmin = v.pitchdict["speed"][0];
+  pitchspeedmax = v.pitchdict["speed"][1];
+  pitchscalemin = v.pitchdict["scale"][0];
+  pitchscalemax = v.pitchdict["scale"][1];
+  pitchcurve = v.pitchdict["curve"][0];
+  volume = scalerp(speed, volumespeedmin, volumespeedmax, volumescalemin, volumescalemax);
+  pitch = scalerp(speed, pitchspeedmin, pitchspeedmax, pitchscalemin, pitchscalemax);
 
   if(isDefined(self.snd.doppler) && isDefined(self.snd.doppler.value)) {
     pitch *= self.snd.doppler.value;
@@ -1810,7 +1810,7 @@ function private function_653bedee3bcc58bd(inputvalue, userdata) {
 
 function private function_28a90b1ade70dc5c(userdata) {
   fadeout = self.snd.speedsfadeout;
-  fadeoutcurve = self.snd.var_82f743323a519d6c;
+  fadeoutcurve = self.snd.speedsfadeoutcurve;
 
   if(isDefined(userdata)) {
     foreach(v in userdata) {
@@ -1820,11 +1820,11 @@ function private function_28a90b1ade70dc5c(userdata) {
 
   self.snd.var_bdb184b54e906021 = undefined;
   self.snd.speedsfadeout = undefined;
-  self.snd.var_82f743323a519d6c = undefined;
+  self.snd.speedsfadeoutcurve = undefined;
   self.snd.speeds = undefined;
 }
 
-function private function_d80f1d438bdc691f(target, soundalias, var_bb71b5efdeeee611, var_270c723c3b5f910b) {
+function private function_d80f1d438bdc691f(target, soundalias, pitchdict, volumedict) {
   ent = undefined;
   islooping = soundislooping(soundalias);
 
@@ -1846,11 +1846,11 @@ function private function_d80f1d438bdc691f(target, soundalias, var_bb71b5efdeeee
     return;
   }
 
-  if(function_110d3ab280057f5b(!isarray(var_bb71b5efdeeee611), "snd_speed: pitchDict is not an array!")) {
+  if(function_110d3ab280057f5b(!isarray(pitchdict), "snd_speed: pitchDict is not an array!")) {
     return;
   }
 
-  if(function_110d3ab280057f5b(!isarray(var_270c723c3b5f910b), "snd_speed: volumeDict is not an array!")) {
+  if(function_110d3ab280057f5b(!isarray(volumedict), "snd_speed: volumeDict is not an array!")) {
     return;
   }
 
@@ -1859,10 +1859,10 @@ function private function_d80f1d438bdc691f(target, soundalias, var_bb71b5efdeeee
   speedlayer = spawnStruct();
   speedlayer.soundalias = soundalias;
   speedlayer.target = target;
-  speedlayer.var_bb71b5efdeeee611 = var_bb71b5efdeeee611;
-  speedlayer.var_270c723c3b5f910b = var_270c723c3b5f910b;
-  speedlayer.var_bb71b5efdeeee611["curve"] = default_to(speedlayer.var_bb71b5efdeeee611["curve"], ["linear"]);
-  speedlayer.var_270c723c3b5f910b["curve"] = default_to(speedlayer.var_270c723c3b5f910b["curve"], ["xfade"]);
+  speedlayer.pitchdict = pitchdict;
+  speedlayer.volumedict = volumedict;
+  speedlayer.pitchdict["curve"] = default_to(speedlayer.pitchdict["curve"], ["linear"]);
+  speedlayer.volumedict["curve"] = default_to(speedlayer.volumedict["curve"], ["xfade"]);
   ent.snd.speeds = default_to(ent.snd.speeds, []);
   ent.snd.speeds[ent.snd.speeds.size] = speedlayer;
   ent.snd.origin_speed = 0;
@@ -1886,12 +1886,12 @@ function function_fd77ba9b1a318099(target, fadeout, fadeoutcurve) {
 
   ent.snd.var_bdb184b54e906021 = 1;
   ent.snd.speedsfadeout = fadeout;
-  ent.snd.var_82f743323a519d6c = fadeoutcurve;
+  ent.snd.speedsfadeoutcurve = fadeoutcurve;
   ent function_96d11f9981c0fe4b("speed");
 }
 
-function snd_speed(target, alias, var_bb71b5efdeeee611, var_270c723c3b5f910b) {
-  level thread function_d80f1d438bdc691f(target, alias, var_bb71b5efdeeee611, var_270c723c3b5f910b);
+function snd_speed(target, alias, pitchdict, volumedict) {
+  level thread function_d80f1d438bdc691f(target, alias, pitchdict, volumedict);
 }
 
 function function_ad44dad83d5fa19e(src_origin, src_velocity, src_scale, dst_origin, dst_velocity, dst_scale, var_83c847736bed906) {
@@ -1934,22 +1934,22 @@ function private function_73239e48c1f6929b() {}
 
 function private function_c69efdf57402f1c3(userdata) {
   var_52017d9bfee9e3a4 = arraycopy(level.snd.param_ents);
-  var_9a197a3837525172 = 0;
-  var_dfc140baf957db23 = [];
+  dopplercount = 0;
+  dopplerplayers = [];
   var_52017d9bfee9e3a4 = array_remove(var_52017d9bfee9e3a4, self);
 
   foreach(var_8d9574b86ef251bf in var_52017d9bfee9e3a4) {
     if(var_8d9574b86ef251bf function_db43aa8b88926353("doppler")) {
-      var_9a197a3837525172 += 1;
+      dopplercount += 1;
 
       if(isplayersafe(var_8d9574b86ef251bf)) {
-        var_dfc140baf957db23[var_dfc140baf957db23.size] = var_8d9574b86ef251bf;
+        dopplerplayers[dopplerplayers.size] = var_8d9574b86ef251bf;
       }
     }
   }
 
-  if(var_9a197a3837525172 == var_dfc140baf957db23.size) {
-    foreach(player in var_dfc140baf957db23) {
+  if(dopplercount == dopplerplayers.size) {
+    foreach(player in dopplerplayers) {
       player function_96d11f9981c0fe4b("doppler");
     }
   }
@@ -1985,8 +1985,8 @@ function private function_3e1c8ad0ace0b40a(inputvalue, userdata) {
   assert(isvector(dst_origin));
   assert(isvector(dst_velocity));
   assert(isnumber(dst_scale));
-  var_b6e775fcff80d699 = function_ad44dad83d5fa19e(src_origin, src_velocity, src_scale, dst_origin, dst_velocity, dst_scale);
-  dopplerscale = var_b6e775fcff80d699[0];
+  dopplervalues = function_ad44dad83d5fa19e(src_origin, src_velocity, src_scale, dst_origin, dst_velocity, dst_scale);
+  dopplerscale = dopplervalues[0];
 
   if(isDefined(self.snd.doppler.pitchscale)) {
     dopplerscale *= self.snd.doppler.pitchscale;
@@ -2004,10 +2004,10 @@ function private function_3e1c8ad0ace0b40a(inputvalue, userdata) {
     audiocolor = level.snd.debug.color_3d;
     colorscale = level.snd.debug.color_scale;
     selectioncolor = function_1f9e5d44e92014a5(audiocolor, colorscale * 10);
-    var_313ae10332ea71c8 = var_b6e775fcff80d699[1];
+    var_313ae10332ea71c8 = dopplervalues[1];
     dist = distance(src_origin, dst_origin);
-    var_abeed90f073feea9 = dist * 0.002;
-    scale = debugscale * 0.666 * var_abeed90f073feea9;
+    fixeddistscalar = dist * 0.002;
+    scale = debugscale * 0.666 * fixeddistscalar;
     alpha = 1;
     alphasq = alpha * alpha;
     var_aca821760f2f4441 = "<dev string:x61>";
@@ -2017,14 +2017,14 @@ function private function_3e1c8ad0ace0b40a(inputvalue, userdata) {
   }
 }
 
-function private _snd_doppler_main(player, dopplerscale, pitchscale, var_aa54cc5521fdb017) {
+function private _snd_doppler_main(player, dopplerscale, pitchscale, playervelocityscale) {
   assert(isplayersafe(player));
   dopplerscale = default_to(dopplerscale, 1);
   pitchscale = default_to(pitchscale, 1);
-  var_aa54cc5521fdb017 = default_to(var_aa54cc5521fdb017, 1);
+  playervelocityscale = default_to(playervelocityscale, 1);
   assert(isDefined(player));
 
-  if(var_aa54cc5521fdb017 > 0) {
+  if(playervelocityscale > 0) {
     player snd_param("doppler", undefined, &function_95848ecd26935b4b);
   }
 
@@ -2036,17 +2036,17 @@ function private _snd_doppler_main(player, dopplerscale, pitchscale, var_aa54cc5
   self.snd.doppler = spawnStruct();
   self.snd.doppler.scale = dopplerscale;
   self.snd.doppler.pitchscale = pitchscale;
-  self.snd.doppler.playerscale = var_aa54cc5521fdb017;
+  self.snd.doppler.playerscale = playervelocityscale;
   snd_param("doppler", undefined, &function_95848ecd26935b4b, &function_3e1c8ad0ace0b40a, &function_c69efdf57402f1c3, player);
 }
 
-function snd_doppler(soundobject, player, dopplerscale, pitchscale, var_aa54cc5521fdb017) {
+function snd_doppler(soundobject, player, dopplerscale, pitchscale, playervelocityscale) {
   if(function_110d3ab280057f5b(isDefined(soundobject) == 0, "snd_doppler with undefined soundObject")) {
     return;
   }
 
   foreach(soundobj in function_5762e7cb509e83c0(soundobject)) {
-    soundobj thread _snd_doppler_main(player, dopplerscale, pitchscale, var_aa54cc5521fdb017);
+    soundobj thread _snd_doppler_main(player, dopplerscale, pitchscale, playervelocityscale);
   }
 }
 
@@ -2142,9 +2142,9 @@ function private function_ce7cbb5aae13431e(callback) {
       }
 
       haspriority = isDefined(player.snd.trigger.script_ambientpriority) && isDefined(trigger.script_ambientpriority);
-      var_cb7cb2b095f4a00 = haspriority && int(player.snd.trigger.script_ambientpriority) <= int(trigger.script_ambientpriority);
+      hashigherpriority = haspriority && int(player.snd.trigger.script_ambientpriority) <= int(trigger.script_ambientpriority);
 
-      if(!isDefined(player.snd.trigger) || haspriority && var_cb7cb2b095f4a00 || !haspriority) {
+      if(!isDefined(player.snd.trigger) || haspriority && hashigherpriority || !haspriority) {
         player.snd.trigger = trigger;
         trigger thread[[callback]](player, trigger, 1);
       }
@@ -2226,11 +2226,11 @@ function function_37a9b1e456beb42a(callback, name, key) {
 
 function function_54c3fa447687f86(name, elements) {
   assert(function_f0b5522ee5ce0cb1());
-  var_28b2ea06db7db7d3 = isstring(name);
+  isnamestring = isstring(name);
   var_c59b3d0a5b387b2d = isarray(elements) && elements.size > 0 && isarray(elements[0]);
-  var_f468c22613f33b97 = isarray(elements) && elements.size >= 3 && isstring(elements[0]);
-  var_ce692c7a46788fa6 = isstring(elements);
-  var_3561ce9cbee3e19f = var_28b2ea06db7db7d3 && (var_c59b3d0a5b387b2d || var_f468c22613f33b97 || var_ce692c7a46788fa6);
+  issingleelement = isarray(elements) && elements.size >= 3 && isstring(elements[0]);
+  iselementstring = isstring(elements);
+  var_3561ce9cbee3e19f = isnamestring && (var_c59b3d0a5b387b2d || issingleelement || iselementstring);
 
   if(function_110d3ab280057f5b(!var_3561ce9cbee3e19f, "snd: element_init invalid")) {
     if(function_6fa24a43c981460a()) {
@@ -2238,13 +2238,13 @@ function function_54c3fa447687f86(name, elements) {
     }
   }
 
-  if(var_ce692c7a46788fa6 && !isDefined(level.snd.elements[elements])) {
+  if(iselementstring && !isDefined(level.snd.elements[elements])) {
     if(function_6fa24a43c981460a()) {
       DevOp(0x94);
     }
   }
 
-  if(var_f468c22613f33b97) {
+  if(issingleelement) {
     elements = [elements];
   }
 
@@ -2296,9 +2296,9 @@ function function_54b7b0779da7f0c0(player, element) {
 
   function_b3e5599c9f6a8895(player);
   var_a9cc843c3422bd78 = isarray(element);
-  var_ce692c7a46788fa6 = isstring(element);
+  iselementstring = isstring(element);
   var_2a5c31386af49af6 = !isDefined(element);
-  var_3561ce9cbee3e19f = var_a9cc843c3422bd78 || var_ce692c7a46788fa6 || var_2a5c31386af49af6;
+  var_3561ce9cbee3e19f = var_a9cc843c3422bd78 || iselementstring || var_2a5c31386af49af6;
 
   if(function_110d3ab280057f5b(!var_3561ce9cbee3e19f, "snd: set_element invalid element")) {
     return;
@@ -2306,7 +2306,7 @@ function function_54b7b0779da7f0c0(player, element) {
 
   if(var_a9cc843c3422bd78) {
     player.snd.element = "**** custom****";
-  } else if(var_ce692c7a46788fa6) {
+  } else if(iselementstring) {
     current = function_a694f301951b340(player.snd.element);
     remapped = function_a694f301951b340(element);
     isequal = isstring(current) && isstring(remapped) && current == remapped;
@@ -2391,7 +2391,7 @@ function private function_b73221aba7ab22bc(soundobject, player, org_start, org_e
   }
 }
 
-function function_f4103b35bbe765f1(soundobject, player, org_start, org_end) {
+function snd_line_attach(soundobject, player, org_start, org_end) {
   if(function_110d3ab280057f5b(!function_f0a31c88dbf01c1(soundobject), "snd_line_attach with invalid soundObject")) {
     return;
   }
@@ -2422,8 +2422,8 @@ function snd_line_detach(soundobject) {
 function private function_5b159f140bd186df() {
   function_40a17693396019a7();
 
-  if(!isarray(level.snd.var_828ab610e771905)) {
-    level.snd.var_828ab610e771905 = [];
+  if(!isarray(level.snd.transient_banks)) {
+    level.snd.transient_banks = [];
   }
 
   if(!isent(level.snd.var_4388174fd6467686)) {
@@ -2432,18 +2432,18 @@ function private function_5b159f140bd186df() {
 }
 
 function function_1186ca4e2e51afea(name) {
-  if(isstruct(level.snd) && isDefined(level.snd.var_828ab610e771905) && isDefined(level.snd.var_828ab610e771905[name])) {
+  if(isstruct(level.snd) && isDefined(level.snd.transient_banks) && isDefined(level.snd.transient_banks[name])) {
     return true;
   }
 
   return false;
 }
 
-function function_f1aed36ab4598ea(name) {
+function snd_transient_load(name) {
   function_5b159f140bd186df();
   assert(function_f0b5522ee5ce0cb1());
   assert(isent(level.snd.var_4388174fd6467686));
-  assert(isarray(level.snd.var_828ab610e771905));
+  assert(isarray(level.snd.transient_banks));
   assertex(isstring(name), "snd_transient_load requires a name argument");
   isloaded = function_1186ca4e2e51afea(name);
 
@@ -2452,14 +2452,14 @@ function function_f1aed36ab4598ea(name) {
   }
 
   level.snd.var_4388174fd6467686 settransientsoundbank(name + ".all", 1);
-  level.snd.var_828ab610e771905[name] = level.snd.var_828ab610e771905.size;
+  level.snd.transient_banks[name] = level.snd.transient_banks.size;
 }
 
-function function_f4e0ff5cb899686d(name) {
+function snd_transient_unload(name) {
   function_5b159f140bd186df();
   assert(function_f0b5522ee5ce0cb1());
   assert(isent(level.snd.var_4388174fd6467686));
-  assert(isarray(level.snd.var_828ab610e771905));
+  assert(isarray(level.snd.transient_banks));
   assertex(isstring(name), "snd_transient_unload requires a name argument");
   isloaded = function_1186ca4e2e51afea(name);
 
@@ -2468,5 +2468,5 @@ function function_f4e0ff5cb899686d(name) {
   }
 
   level.snd.var_4388174fd6467686 settransientsoundbank(name + ".all", 0);
-  level.snd.var_828ab610e771905[name] = undefined;
+  level.snd.transient_banks[name] = undefined;
 }

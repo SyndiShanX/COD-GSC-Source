@@ -15,11 +15,11 @@ function function_524af1d56cb60f38() {
 
   while(true) {
     self waittill("float_move_loop_start");
-    thread function_43bd4a976c1ed3de();
+    thread float_move_loop();
   }
 }
 
-function function_43bd4a976c1ed3de() {
+function float_move_loop() {
   self endon("death");
   self.var_7177dd881b296d3 = undefined;
   self.var_37ca4842bca3031c = gettime();
@@ -101,7 +101,7 @@ function function_9eaaa0a5c40b2c19(goal, speed) {
 function clear_float_move() {
   self.var_17e48b8b7457c = undefined;
   self.var_37ca4842bca3031c = undefined;
-  self function_4b733566e92d899e("in_float_move");
+  self clearaiblackboarddynamic("in_float_move");
   self notify("clear_float_move");
 }
 

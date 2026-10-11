@@ -52,17 +52,17 @@ function doonactionscoreevent(eventtype, eventname, cooldown) {
 }
 
 function function_a56759f3dec70990(eventname) {
-  var_c7cba7d0db108110 = function_1823ff50bb28148d("altScore_equipment_" + eventname);
+  var_c7cba7d0db108110 = getxhash("altScore_equipment_" + eventname);
   function_558e5516ee7925aa(var_c7cba7d0db108110);
 }
 
 function function_e4278547ad0ee8c8(eventname) {
-  var_c7cba7d0db108110 = function_1823ff50bb28148d("altScore_fieldUp_" + eventname);
+  var_c7cba7d0db108110 = getxhash("altScore_fieldUp_" + eventname);
   function_558e5516ee7925aa(var_c7cba7d0db108110);
 }
 
 function function_d25feb1da4499bae(eventname) {
-  var_c7cba7d0db108110 = function_1823ff50bb28148d("altScore_killstreak_" + eventname);
+  var_c7cba7d0db108110 = getxhash("altScore_killstreak_" + eventname);
   function_558e5516ee7925aa(var_c7cba7d0db108110);
 }
 

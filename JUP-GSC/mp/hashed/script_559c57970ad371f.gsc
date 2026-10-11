@@ -334,8 +334,8 @@ function function_b9d60dcb9d82b507() {
   var_6e5f901a7b46c1e8 = istrue(var_b78030b29a1c9dae) && bossdebug != "<dev string:x15f>" && bossdebug != "<dev string:x164>" && bossdebug != "<dev string:x16b>";
 
   if(isarray(level.bosses) && istrue(var_b78030b29a1c9dae)) {
-    var_aaaa8a8df8f5c537 = getdvarint(@ "hash_b7c9a158890bce5a", 1920);
-    var_ab5696f7e031e1ba = getdvarint(@ "hash_9139b4ad2f235c95", 1080);
+    vid_width = getdvarint(@ "hash_b7c9a158890bce5a", 1920);
+    vid_height = getdvarint(@ "hash_9139b4ad2f235c95", 1080);
     x = 360;
     y = 60;
     index = 0;

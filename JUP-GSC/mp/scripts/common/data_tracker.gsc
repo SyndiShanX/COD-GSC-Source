@@ -7,7 +7,7 @@
 #using scripts\engine\utility;
 #namespace data_tracker;
 
-function function_b205b5926c02717f() {
+function createstruct_datatracker() {
   return function_9c7053f2799c3238();
 }
 
@@ -19,7 +19,7 @@ function function_4d1de11b1a5630ec(var_fc27cf5aa6482417) {
   function_9c7053f2799c3238(var_fc27cf5aa6482417);
 }
 
-function function_3234a152a64387c7(dataobject) {
+function adddataobject(dataobject) {
   if(!isDefined(dataobject.uniquename)) {
     assertmsg("<dev string:x5f>");
     return;
@@ -28,105 +28,105 @@ function function_3234a152a64387c7(dataobject) {
   self.dataobjects[dataobject.uniquename] = dataobject;
 }
 
-function adddata(var_f22b51105fa16a29, datatype, value, callbackfunction) {
-  if(isDefined(self.dataobjects[var_f22b51105fa16a29])) {
-    assertmsg("<dev string:xc2>" + var_f22b51105fa16a29 + "<dev string:xee>");
+function adddata(datauniquename, datatype, value, callbackfunction) {
+  if(isDefined(self.dataobjects[datauniquename])) {
+    assertmsg("<dev string:xc2>" + datauniquename + "<dev string:xee>");
     return;
   }
 
-  dataobject = function_29564ce8dc854f53(var_f22b51105fa16a29, datatype, value, callbackfunction);
-  function_3234a152a64387c7(dataobject);
+  dataobject = function_29564ce8dc854f53(datauniquename, datatype, value, callbackfunction);
+  adddataobject(dataobject);
 }
 
-function function_b584ae8dddb33821(var_f22b51105fa16a29, value, callbackfunction) {
+function adddataint(datauniquename, value, callbackfunction) {
   if(!isint(value)) {
-    assertmsg("<dev string:x11d>" + var_f22b51105fa16a29 + "<dev string:x150>");
+    assertmsg("<dev string:x11d>" + datauniquename + "<dev string:x150>");
     return;
   }
 
-  adddata(var_f22b51105fa16a29, "Integer", value, callbackfunction);
+  adddata(datauniquename, "Integer", value, callbackfunction);
 }
 
-function function_a5bdec253a251d2a(var_f22b51105fa16a29, value, callbackfunction) {
+function adddatafloat(datauniquename, value, callbackfunction) {
   if(!isfloat(value)) {
-    assertmsg("<dev string:x189>" + var_f22b51105fa16a29 + "<dev string:x1be>");
+    assertmsg("<dev string:x189>" + datauniquename + "<dev string:x1be>");
     return;
   }
 
-  adddata(var_f22b51105fa16a29, "Float", value, callbackfunction);
+  adddata(datauniquename, "Float", value, callbackfunction);
 }
 
-function function_e39de66971de6959(var_f22b51105fa16a29, value, callbackfunction) {
+function adddatastring(datauniquename, value, callbackfunction) {
   if(!isstring(value)) {
-    assertmsg("<dev string:x1f4>" + var_f22b51105fa16a29 + "<dev string:x22a>");
+    assertmsg("<dev string:x1f4>" + datauniquename + "<dev string:x22a>");
     return;
   }
 
-  adddata(var_f22b51105fa16a29, "String", value, callbackfunction);
+  adddata(datauniquename, "String", value, callbackfunction);
 }
 
-function function_e4b4be816ed43365(var_f22b51105fa16a29, value, callbackfunction) {
-  adddata(var_f22b51105fa16a29, "ProgressTracker", value, callbackfunction);
+function adddataprogresstracker(datauniquename, value, callbackfunction) {
+  adddata(datauniquename, "ProgressTracker", value, callbackfunction);
 }
 
-function removedata(var_f22b51105fa16a29) {
-  self.dataobjects[var_f22b51105fa16a29] = undefined;
+function removedata(datauniquename) {
+  self.dataobjects[datauniquename] = undefined;
 }
 
-function updatedata(var_9e5a064a346c5b42, updatedvalue) {
-  dataobject = self.dataobjects[var_9e5a064a346c5b42];
+function updatedata(dataobjectuniquename, updatedvalue) {
+  dataobject = self.dataobjects[dataobjectuniquename];
 
   if(!isDefined(dataobject)) {
-    assertmsg("<dev string:x261>" + var_9e5a064a346c5b42 + "<dev string:x290>");
+    assertmsg("<dev string:x261>" + dataobjectuniquename + "<dev string:x290>");
     return;
   }
 
   dataobject.value = updatedvalue;
-  function_5aa098a0e2a91e3e(var_9e5a064a346c5b42);
+  function_5aa098a0e2a91e3e(dataobjectuniquename);
 }
 
-function function_5aa098a0e2a91e3e(var_9e5a064a346c5b42) {
-  dataobject = self.dataobjects[var_9e5a064a346c5b42];
+function function_5aa098a0e2a91e3e(dataobjectuniquename) {
+  dataobject = self.dataobjects[dataobjectuniquename];
 
   if(!isDefined(dataobject)) {
-    assertmsg("<dev string:x2ba>" + var_9e5a064a346c5b42 + "<dev string:x290>");
+    assertmsg("<dev string:x2ba>" + dataobjectuniquename + "<dev string:x290>");
     return;
   }
 
-  function_755936e0aeeb43f6(var_9e5a064a346c5b42);
+  function_755936e0aeeb43f6(dataobjectuniquename);
 }
 
-function addcallback(callbackfunction, var_1fd2df2315da3137) {
-  newcallback = function_72504163d8901997(callbackfunction, var_1fd2df2315da3137);
-  self.var_6b6f2974d8fc8810[self.var_6b6f2974d8fc8810.size] = newcallback;
+function addcallback(callbackfunction, callonobject) {
+  newcallback = function_72504163d8901997(callbackfunction, callonobject);
+  self.shareddatacallbacks[self.shareddatacallbacks.size] = newcallback;
 }
 
-function function_c0a81a4aa88ede55(callbackfunction, var_9e5a064a346c5b42, var_1fd2df2315da3137) {
-  dataobject = self.dataobjects[var_9e5a064a346c5b42];
+function function_c0a81a4aa88ede55(callbackfunction, dataobjectuniquename, callonobject) {
+  dataobject = self.dataobjects[dataobjectuniquename];
 
   if(!isDefined(dataobject)) {
-    assertmsg("<dev string:x2f7>" + var_9e5a064a346c5b42 + "<dev string:x290>");
+    assertmsg("<dev string:x2f7>" + dataobjectuniquename + "<dev string:x290>");
     return;
   }
 
-  function_18c71d7e16a8c68c(dataobject, callbackfunction, var_1fd2df2315da3137);
+  function_18c71d7e16a8c68c(dataobject, callbackfunction, callonobject);
 }
 
 function removecallback(callbackfunction) {
-  for(callbackid = 0; callbackid < self.var_6b6f2974d8fc8810.size; callbackid++) {
-    if(self.var_6b6f2974d8fc8810[callbackid].callbackfunction == callbackfunction) {
-      self.var_6b6f2974d8fc8810[callbackid] = undefined;
+  for(callbackid = 0; callbackid < self.shareddatacallbacks.size; callbackid++) {
+    if(self.shareddatacallbacks[callbackid].callbackfunction == callbackfunction) {
+      self.shareddatacallbacks[callbackid] = undefined;
     }
   }
 
-  self.var_6b6f2974d8fc8810 = array_removeundefined(self.callbacks);
+  self.shareddatacallbacks = array_removeundefined(self.callbacks);
 }
 
-function function_d6f2becdeb4c29be(callbackfunction, var_9e5a064a346c5b42) {
-  dataobject = self.dataobjects[var_9e5a064a346c5b42];
+function function_d6f2becdeb4c29be(callbackfunction, dataobjectuniquename) {
+  dataobject = self.dataobjects[dataobjectuniquename];
 
   if(!isDefined(dataobject)) {
-    assertmsg("<dev string:x332>" + var_9e5a064a346c5b42 + "<dev string:x290>");
+    assertmsg("<dev string:x332>" + dataobjectuniquename + "<dev string:x290>");
     return;
   }
 
@@ -139,37 +139,37 @@ function function_d6f2becdeb4c29be(callbackfunction, var_9e5a064a346c5b42) {
   dataobject.callbacks = array_removeundefined(dataobject.callbacks);
 }
 
-function function_e989e3f023f50368(var_9e5a064a346c5b42) {
-  dataobject = self.dataobjects[var_9e5a064a346c5b42];
+function getdatavalue(dataobjectuniquename) {
+  dataobject = self.dataobjects[dataobjectuniquename];
 
   if(!isDefined(dataobject)) {
-    assertmsg("<dev string:x370>" + var_9e5a064a346c5b42 + "<dev string:x290>");
+    assertmsg("<dev string:x370>" + dataobjectuniquename + "<dev string:x290>");
     return;
   }
 
   return dataobject.value;
 }
 
-function function_f709e958aa6900(var_9e5a064a346c5b42) {
-  dataobject = self.dataobjects[var_9e5a064a346c5b42];
+function getdataobject(dataobjectuniquename) {
+  dataobject = self.dataobjects[dataobjectuniquename];
 
   if(!isDefined(dataobject)) {
-    assertmsg("<dev string:x370>" + var_9e5a064a346c5b42 + "<dev string:x290>");
+    assertmsg("<dev string:x370>" + dataobjectuniquename + "<dev string:x290>");
     return;
   }
 
   return dataobject;
 }
 
-function function_6a26856f16c6a207(var_9e5a064a346c5b42) {
-  return isDefined(self.dataobjects[var_9e5a064a346c5b42]);
+function function_6a26856f16c6a207(dataobjectuniquename) {
+  return isDefined(self.dataobjects[dataobjectuniquename]);
 }
 
-function function_755936e0aeeb43f6(var_9e5a064a346c5b42) {
-  dataobject = self.dataobjects[var_9e5a064a346c5b42];
+function function_755936e0aeeb43f6(dataobjectuniquename) {
+  dataobject = self.dataobjects[dataobjectuniquename];
 
   if(!isDefined(dataobject)) {
-    assertmsg("<dev string:x3a0>" + var_9e5a064a346c5b42 + "<dev string:x290>");
+    assertmsg("<dev string:x3a0>" + dataobjectuniquename + "<dev string:x290>");
     return;
   }
 
@@ -179,7 +179,7 @@ function function_755936e0aeeb43f6(var_9e5a064a346c5b42) {
     }
   }
 
-  foreach(callback in self.var_6b6f2974d8fc8810) {
+  foreach(callback in self.shareddatacallbacks) {
     if(isDefined(callback)) {
       callback.callon thread[[callback.callbackfunction]](self, dataobject);
     }
@@ -190,11 +190,11 @@ function function_71667164a3e75714(dataobject) {
   return dataobject.uniquename;
 }
 
-function private function_9c7053f2799c3238(var_9bc4f97e08bcc10e) {
-  var_9bc4f97e08bcc10e = default_to(var_9bc4f97e08bcc10e, spawnStruct());
-  var_9bc4f97e08bcc10e.dataobjects = [];
-  var_9bc4f97e08bcc10e.var_6b6f2974d8fc8810 = [];
-  return var_9bc4f97e08bcc10e;
+function private function_9c7053f2799c3238(datatrackerstruct) {
+  datatrackerstruct = default_to(datatrackerstruct, spawnStruct());
+  datatrackerstruct.dataobjects = [];
+  datatrackerstruct.shareddatacallbacks = [];
+  return datatrackerstruct;
 }
 
 function private function_29564ce8dc854f53(uniquename, datatype, value, callbackfunction) {
@@ -211,14 +211,14 @@ function private function_29564ce8dc854f53(uniquename, datatype, value, callback
   return dataobject;
 }
 
-function private function_72504163d8901997(callbackfunction, var_1fd2df2315da3137) {
+function private function_72504163d8901997(callbackfunction, callonobject) {
   newcallback = spawnStruct();
-  newcallback.callon = default_to(var_1fd2df2315da3137, level);
+  newcallback.callon = default_to(callonobject, level);
   newcallback.callbackfunction = callbackfunction;
   return newcallback;
 }
 
-function private function_18c71d7e16a8c68c(dataobject, callbackfunction, var_1fd2df2315da3137) {
-  newcallback = function_72504163d8901997(callbackfunction, var_1fd2df2315da3137);
+function private function_18c71d7e16a8c68c(dataobject, callbackfunction, callonobject) {
+  newcallback = function_72504163d8901997(callbackfunction, callonobject);
   dataobject.callbacks[dataobject.callbacks.size] = newcallback;
 }

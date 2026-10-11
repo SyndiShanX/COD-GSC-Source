@@ -205,7 +205,7 @@ function function_2ea2aacc5d66ae03() {
 
 function function_c0ee40f76dcd495c(origin, type) {
   marker_type = function_13176caa696f06e2(type);
-  marker = scripts\mp\gameobjects::createobjidobject(function_e8399bd2acaae52(origin), "neutral", (0, 0, 0), undefined, "all", 0);
+  marker = scripts\mp\gameobjects::createobjidobject(get_offset_origin(origin), "neutral", (0, 0, 0), undefined, "all", 0);
   marker.iconname = "";
   scripts\mp\objidpoolmanager::update_objective_setbackground(marker.objidnum, 0);
 
@@ -218,7 +218,7 @@ function function_c0ee40f76dcd495c(origin, type) {
 
 function function_ef9c5d31f2fbc04f(origin, type) {
   marker = function_1d7859d68b494958(type);
-  scripts\mp\objidpoolmanager::update_objective_position(marker.objidnum, function_e8399bd2acaae52(origin));
+  scripts\mp\objidpoolmanager::update_objective_position(marker.objidnum, get_offset_origin(origin));
 }
 
 function function_6a2c1dff398cfc38(type, optionalobjective) {
@@ -229,7 +229,7 @@ function function_6a2c1dff398cfc38(type, optionalobjective) {
     objective = optionalobjective;
   }
 
-  scripts\mp\objidpoolmanager::update_objective_position(marker.objidnum, function_e8399bd2acaae52(objective.curorigin));
+  scripts\mp\objidpoolmanager::update_objective_position(marker.objidnum, get_offset_origin(objective.curorigin));
 }
 
 function function_3d58ef9f07a4e2e9(player) {
@@ -332,7 +332,7 @@ function function_9a750347647b35c4(type, bgtype) {
   scripts\mp\objidpoolmanager::update_objective_setbackground(marker.objidnum, bgtype);
 }
 
-function function_e8399bd2acaae52(origin) {
+function get_offset_origin(origin) {
   return origin + (0, 0, 80);
 }
 

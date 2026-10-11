@@ -35,7 +35,7 @@ function function_729f6e368df801f4() {
 }
 
 function parseparams(var_28af8e747331e08d) {
-  self.routedifficulty = namespace_4df2ab39b0e96ec7::function_4d8bb2d866771a10(self.var_d9a91303aea799de.origin);
+  self.routedifficulty = namespace_4df2ab39b0e96ec7::function_4d8bb2d866771a10(self.nd_spline_start.origin);
 
   if(self.routedifficulty == "difficulty_undefined") {
     self.routedifficulty = getDvar(@ "hash_600f124219762287", "difficulty_easy");
@@ -81,7 +81,7 @@ function function_7c279c038503812f(vehicle) {
       break;
   }
 
-  var_b67c5086cfc7b5ef scripts\common\utility::function_6e506f39f121ea8a(vehicle, v_loot, (0, 90, 0));
+  var_b67c5086cfc7b5ef scripts\common\utility::scriptable_setparententity(vehicle, v_loot, (0, 90, 0));
   var_b67c5086cfc7b5ef setscriptablepartstate("body", "closed_usable_no_collision");
 
   if(istrue(self.regiondifficulty)) {
@@ -97,7 +97,7 @@ function function_7c279c038503812f(vehicle) {
     loot_list = self.defaultloot;
   }
 
-  common_cache::function_d71a41afca697376(var_b67c5086cfc7b5ef, loot_list, n_items);
+  common_cache::fillcontentsfromlist(var_b67c5086cfc7b5ef, loot_list, n_items);
   thread function_96f15b75346c0661(vehicle);
   vehicle.loot_crate = var_b67c5086cfc7b5ef;
   self.var_9009411bf4edf20b = array_add(self.var_9009411bf4edf20b, var_b67c5086cfc7b5ef);
@@ -117,7 +117,7 @@ function playapproachconvoyvo(activity_instance, player_list) {
 }
 
 function playengagevo(activity_instance, var_2a7b538f984af574) {
-  foreach(player in activity_instance.var_6c29f2fdb0054bbe) {
+  foreach(player in activity_instance.playerparticipants) {
     squadmembers = player scripts\cp_mp\utility\squad_utility::getsquadmembers();
     var_8c4ed29f8594fb86 = zombie_challenges::function_f578373042c34e16(16095, "quest_s0a1t2_cnvy_engage", squadmembers);
 
@@ -132,7 +132,7 @@ function playengagevo(activity_instance, var_2a7b538f984af574) {
 }
 
 function playvehdestroyedvo(activity_instance, var_7a4fd332f67e105e) {
-  foreach(player in activity_instance.var_6c29f2fdb0054bbe) {
+  foreach(player in activity_instance.playerparticipants) {
     squadmembers = player scripts\cp_mp\utility\squad_utility::getsquadmembers();
     var_8c4ed29f8594fb86 = zombie_challenges::function_f578373042c34e16(16095, "quest_s0a1t2_cnvy_vehicledestroyed", squadmembers);
 
@@ -173,7 +173,7 @@ function private function_96f15b75346c0661(vehicle) {
 
   if(isDefined(vehicle.loot_crate)) {
     n_movetime = 1;
-    vehicle.loot_crate scripts\common\utility::function_cefc758e6b25a243();
+    vehicle.loot_crate scripts\common\utility::scriptable_clearparententity();
     v_angles = vehicle.angles;
     v_pos = vehicle.origin;
     loot_yaw = ter_op(cointoss(), -90, 90);

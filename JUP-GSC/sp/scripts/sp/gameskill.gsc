@@ -26,7 +26,7 @@ function init_gameskill() {
   auto_adjust_init();
   scripts\sp\player::init();
   level.player.gameskill = level.player function_1f031ab8afbe2335();
-  function_4170d039e7278e9e(level.player.gameskill);
+  setgameskill(level.player.gameskill);
   set_early_level();
   setskill();
 }
@@ -145,7 +145,7 @@ function setskill(reset) {
   level.difficultysettings["invulTime_deathShieldDuration"]["veteran"] = 0.25;
   level.difficultysettings["invulTime_deathShieldDuration"]["realism"] = 0.25;
 
-  if(function_3cb5da19764baa3() == "T10") {
+  if(getprojectname() == "T10") {
     level.difficultysettings["invulTime_deathShieldDuration"]["normal"] = 3.4;
   }
 
@@ -277,16 +277,16 @@ function setskill(reset) {
   updatealldifficulty();
 }
 
-function setdifficultysetting(var_9e60a636d252ed98, difficulty, value) {
+function setdifficultysetting(skillvaluename, difficulty, value) {
   if(!isDefined(difficulty)) {
     foreach(difficulty in level.difficultytype) {
-      level.difficultysettings[var_9e60a636d252ed98][difficulty] = value;
+      level.difficultysettings[skillvaluename][difficulty] = value;
     }
 
     return;
   }
 
-  level.difficultysettings[var_9e60a636d252ed98][difficulty] = value;
+  level.difficultysettings[skillvaluename][difficulty] = value;
 }
 
 function updatealldifficulty() {
@@ -344,12 +344,12 @@ function updategameskill() {
 }
 
 function gameskill_change_monitor() {
-  var_16e8d6cfc76e1f2a = level.gameskill;
+  current_gameskill = level.gameskill;
 
   while(true) {
-    if(!isDefined(var_16e8d6cfc76e1f2a)) {
+    if(!isDefined(current_gameskill)) {
       wait 1;
-      var_16e8d6cfc76e1f2a = level.gameskill;
+      current_gameskill = level.gameskill;
       continue;
     }
 
@@ -357,10 +357,10 @@ function gameskill_change_monitor() {
       level.lowestgameskill = level.gameskill;
     }
 
-    if(var_16e8d6cfc76e1f2a != updategameskill()) {
-      var_16e8d6cfc76e1f2a = level.gameskill;
-      level.lowestgameskill = ter_op(var_16e8d6cfc76e1f2a < level.lowestgameskill, var_16e8d6cfc76e1f2a, level.lowestgameskill);
-      level.player setplayerprogression("currentGameskill", var_16e8d6cfc76e1f2a + 1);
+    if(current_gameskill != updategameskill()) {
+      current_gameskill = level.gameskill;
+      level.lowestgameskill = ter_op(current_gameskill < level.lowestgameskill, current_gameskill, level.lowestgameskill);
+      level.player setplayerprogression("currentGameskill", current_gameskill + 1);
       updatealldifficulty();
     }
 
@@ -408,7 +408,7 @@ function apply_difficulty_settings(current_frac) {
   }
 
   function_90faf3f11984372a(get_difficultysetting_frac("sniperAccuDiffScale", current_frac), var_4cc77ae3c5e8921, 1);
-  self.gs.var_d92ad7538613e0c0 = get_difficultysetting_frac("player_flinch", current_frac);
+  self.gs.flinchmultiplier = get_difficultysetting_frac("player_flinch", current_frac);
   self.gs.damagemultiplierhealth = self.maxhealth / get_difficultysetting_frac("player_health", current_frac);
   self.gs.damagemultiplierexplosive = get_difficultysetting_frac("explosiveDamageMultiplier", current_frac);
 
@@ -428,7 +428,7 @@ function apply_difficulty_settings(current_frac) {
     ai function_416820d41ec6fff8();
   }
 
-  function_a7f19b92c7f7a6a8();
+  updateplayersettings();
 }
 
 function function_e5c95805c0d22077() {
@@ -471,7 +471,7 @@ function update_player_attacker_accuracy() {
 function auto_adjust_init() {
   setdvarifuninitialized(@ "hash_ea3e0064074fd39b", 1);
 
-  if(function_3cb5da19764baa3() == "T10") {
+  if(getprojectname() == "T10") {
     setdvarifuninitialized(@ "hash_84003ec62f06a169", 0);
   } else {
     setdvarifuninitialized(@ "hash_84003ec62f06a169", 1);
@@ -590,23 +590,23 @@ function auto_adjust_difficulty(deathcount) {
   self.gs.swimbreathtimecritsprint = auto_adjust_lerp_setting("player_swimBreathTimeCritSprint");
   self.gs.swimsprintbreathtime = auto_adjust_lerp_setting("player_swimSprintBreathTime");
   self.gs.swimbreathfilltime = auto_adjust_lerp_setting("player_swimBreathFillTime");
-  self.gs.var_d92ad7538613e0c0 = auto_adjust_lerp_setting("player_flinch");
+  self.gs.flinchmultiplier = auto_adjust_lerp_setting("player_flinch");
   self.gs.damagemultiplierhealth = self.maxhealth / auto_adjust_lerp_setting("player_health");
   self.gs.damagemultiplierexplosive = auto_adjust_lerp_setting("explosiveDamageMultiplier");
-  self.var_da4b6392c1bec6a1 = auto_adjust_lerp_setting("missTimeConstant");
-  self.var_cef700ed012e8981 = auto_adjust_lerp_setting("missTimeDistanceFactor");
-  function_a7f19b92c7f7a6a8();
+  self.gameskillmisstimeconstant = auto_adjust_lerp_setting("missTimeConstant");
+  self.gameskillmisstimedistancefactor = auto_adjust_lerp_setting("missTimeDistanceFactor");
+  updateplayersettings();
 }
 
-function function_a7f19b92c7f7a6a8() {
+function updateplayersettings() {
   scripts\sp\player::updateviewkickscale();
   scripts\sp\player::updatedamagemultiplier();
-  scripts\common\swim_common::function_aa183ca1083d279();
+  scripts\common\swim_common::clearbreathcritical();
 }
 
 function auto_adjust_lerp_setting(setting) {
-  var_b0e75118d3c9dde8 = self.gameskill - 1;
-  var_be6da4f53631a129 = get_difficultysetting(setting, var_b0e75118d3c9dde8);
+  easier_gameskill = self.gameskill - 1;
+  var_be6da4f53631a129 = get_difficultysetting(setting, easier_gameskill);
   var_d58d8bffb394c16b = get_difficultysetting(setting);
   return math::lerp(var_d58d8bffb394c16b, var_be6da4f53631a129, level.auto_adjust.currentfrac);
 }
@@ -693,8 +693,8 @@ function auto_adjust_debug() {
   auto_adjust_debug_update("<dev string:x22f>", level.player.gs.deathsdoorduration, level.player get_difficultysetting("<dev string:x247>"));
   auto_adjust_debug_update("<dev string:x261>", level.player.gs.damagemultiplierhealth, level.player.maxhealth / level.player get_difficultysetting("<dev string:x279>"));
   auto_adjust_debug_update("<dev string:x287>", level.player.gs.damagemultiplierexplosive, level.player get_difficultysetting("<dev string:x29f>"));
-  auto_adjust_debug_update("<dev string:x2b9>", level.player.var_da4b6392c1bec6a1, level.player get_difficultysetting("<dev string:x2d1>"));
-  auto_adjust_debug_update("<dev string:x2e2>", level.player.var_cef700ed012e8981, level.player get_difficultysetting("<dev string:x2fa>"));
+  auto_adjust_debug_update("<dev string:x2b9>", level.player.gameskillmisstimeconstant, level.player get_difficultysetting("<dev string:x2d1>"));
+  auto_adjust_debug_update("<dev string:x2e2>", level.player.gameskillmisstimedistancefactor, level.player get_difficultysetting("<dev string:x2fa>"));
 }
 
 function auto_adjust_debug_update(msg, val, val2) {

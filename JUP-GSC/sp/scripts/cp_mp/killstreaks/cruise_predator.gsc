@@ -620,7 +620,7 @@ function cruisepredator_watchmissileexplosion(missile, rider, killcament, thirdp
   explodeinfo = undefined;
 
   while(true) {
-    explodeinfo = missile function_51afe751c1e36723("collision", "explode", "death", "disowned", "emp_defused", "trophy_blocked");
+    explodeinfo = missile killstreak_waittillexplode("collision", "explode", "death", "disowned", "emp_defused", "trophy_blocked");
 
     if(isDefined(explodeinfo.msg) && explodeinfo.msg == "collision") {
       surface = physics_getsurfacetypefromflags(explodeinfo.param4);
@@ -675,14 +675,14 @@ function cruisepredator_watchmissileexplosion(missile, rider, killcament, thirdp
 
     if(!isDefined(explodeinfo) || explodeinfo.msg != "emp_defused" && explodeinfo.msg != "trophy_blocked") {
       explosionradius = bundle.var_b62ab6436ce0bb7a;
-      var_5d28f39073721e59 = "MOD_EXPLOSIVE";
-      var_23f8c678bd9d023e = bundle.projectileweapon;
+      cruisemeansofdeath = "MOD_EXPLOSIVE";
+      cruiseweapon = bundle.projectileweapon;
 
       if(isDefined(rider)) {
         skipdamage = isDefined(explodeinfo) && explodeinfo.msg == "disowned";
 
         if(!istrue(skipdamage)) {
-          self radiusdamage(explodepos, explosionradius, bundle.var_560307d157b4b4f2, bundle.var_55dff1d1578e3cd8, rider, var_5d28f39073721e59, var_23f8c678bd9d023e);
+          self radiusdamage(explodepos, explosionradius, bundle.var_560307d157b4b4f2, bundle.var_55dff1d1578e3cd8, rider, cruisemeansofdeath, cruiseweapon);
         }
 
         players = utility::playersinsphere(explodepos, explosionradius);
@@ -823,7 +823,7 @@ function cruisepredator_startexplodecamtransition() {
   killstreak_setmainvision("");
 }
 
-function cruisepredator_startfadecamtransition(fadeintime, fadedelay, fadeouttime, var_2007ede6118d6b9f) {
+function cruisepredator_startfadecamtransition(fadeintime, fadedelay, fadeouttime, fadetypeoverride) {
   self endon("disconnect");
 
   if(!isDefined(fadeintime)) {
@@ -838,8 +838,8 @@ function cruisepredator_startfadecamtransition(fadeintime, fadedelay, fadeouttim
     fadeouttime = 0.05;
   }
 
-  if(isDefined(var_2007ede6118d6b9f)) {
-    killstreak_setmainvision(var_2007ede6118d6b9f);
+  if(isDefined(fadetypeoverride)) {
+    killstreak_setmainvision(fadetypeoverride);
     wait fadedelay;
     killstreak_setmainvision("");
     return;

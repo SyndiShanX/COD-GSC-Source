@@ -185,7 +185,7 @@ function private function_c1ce555e3408ec71() {
     thread utility::thread_on_notify("swallow_in_air", &function_ce14c9b1ee64525f, undefined, undefined, self, self, "leave_underground");
   }
 
-  players = function_883458a342af3041(self.origin, 500);
+  players = getplayersinradiussharedfunc(self.origin, 500);
 
   foreach(player in players) {
     if(distance2dsquared(player.origin, self.origin) > squared(200)) {
@@ -239,7 +239,7 @@ function function_814d919be8390cd3() {
       var_9ec3101004a66e6c utility::function_3ab9164ef76940fd("deathwormVFX", "spitout");
       var_9ec3101004a66e6c vision_utility::function_9a92ae402e209ecc("zm_jup_death_worm", 0.05);
       var_9ec3101004a66e6c val::reset("ai_worm_grab", "freezecontrols");
-      var_9ec3101004a66e6c function_af4b9b0f0e7c6c42(0.2, 1, 1, 1, 1);
+      var_9ec3101004a66e6c playerunlinkblend(0.2, 1, 1, 1, 1);
       var_9ec3101004a66e6c knockback(var_99e2ea797619de3, var_672f4d16501914f3);
       var_9ec3101004a66e6c showlegs();
       var_9ec3101004a66e6c.var_bdeecf4a8259041c = undefined;
@@ -297,7 +297,7 @@ function private function_a6371e9770dd7912() {
   self endon("leave_underground");
   var_9c6db806dd3ca34e = 0.75;
   head_pos = self gettagorigin("tag_fx_mouth");
-  grenades = function_b1eef70090b5b7b5(head_pos, 400, function_869ccb4e3451b8c6(["etype_missile"]), []);
+  grenades = getentitiesinradiusfrompartitiongrid(head_pos, 400, createentitytypemask(["etype_missile"]), []);
 
   if(isDefined(grenades)) {
     foreach(grenade in grenades) {
@@ -309,7 +309,7 @@ function private function_a6371e9770dd7912() {
 
   while(true) {
     head_pos = self gettagorigin("tag_fx_mouth");
-    potential_targets = function_143526130b12b2b6(head_pos, 200);
+    potential_targets = getplayersandaiarrayinradius(head_pos, 200);
 
     foreach(target in potential_targets) {
       if(target == self) {
@@ -498,11 +498,11 @@ function function_bea202648c100e56(target, head_pos, damage) {
     function_3ab9164ef76940fd("mouth_gibbed", "mouth_gibbed_on");
 
     if(isPlayer(target)) {
-      player_vehicle = target function_f3bb4f4911a1beb2("vehicle", "getVehicle");
+      player_vehicle = target callsharedfunc("vehicle", "getVehicle");
 
       if(isDefined(player_vehicle)) {
-        seatid = target function_f3bb4f4911a1beb2("vehicle", "vehicle_occupancy_getOccupantSeat", player_vehicle, target);
-        target thread function_f3bb4f4911a1beb2("vehicle", "vehicle_occupancy_exit", player_vehicle, seatid, target, undefined, 1);
+        seatid = target callsharedfunc("vehicle", "vehicle_occupancy_getOccupantSeat", player_vehicle, target);
+        target thread callsharedfunc("vehicle", "vehicle_occupancy_exit", player_vehicle, seatid, target, undefined, 1);
       }
 
       target skydive_interrupt();
@@ -1107,7 +1107,7 @@ function private function_4b0fbbaee39f7489(underground_ent) {
   var_4dd212342f29af57 = 0.5;
 
   while(utility::ent_flag("is_underground")) {
-    players = namespace_2b1145f62aa835b8::function_883458a342af3041(underground_ent.origin, 3000);
+    players = namespace_2b1145f62aa835b8::getplayersinradiussharedfunc(underground_ent.origin, 3000);
 
     if(utility::ent_flag("healing")) {
       underground_ent utility::function_3ab9164ef76940fd("dust_kickup", "healing");
@@ -1180,8 +1180,8 @@ function private heal_update() {
     var_9de837d50c0d4071 = function_2af099045fef3cc9();
     var_76a7d2aa9f5a35d0 = var_9de837d50c0d4071.size;
     health_cap = self.maxhealth / 6 * var_76a7d2aa9f5a35d0;
-    var_bda5255252a8e4b6 = min(health_cap - self.health, var_ecb9a1ffec52e528);
-    self.health += int(var_bda5255252a8e4b6);
+    health_gained = min(health_cap - self.health, var_ecb9a1ffec52e528);
+    self.health += int(health_gained);
     var_893df864e876028c = undefined;
     var_49ee16ffaf45b38b = undefined;
 
@@ -1196,7 +1196,7 @@ function private heal_update() {
 
     var_608a36194d4662a1 = self.var_90cec1dffd2daa94 - var_49ee16ffaf45b38b;
     assert(var_608a36194d4662a1 >= 0);
-    metabone::function_3d2875316eed616d(var_893df864e876028c, min(var_608a36194d4662a1, int(var_bda5255252a8e4b6)), "open");
+    metabone::function_3d2875316eed616d(var_893df864e876028c, min(var_608a36194d4662a1, int(health_gained)), "open");
     wait 1;
   }
 }

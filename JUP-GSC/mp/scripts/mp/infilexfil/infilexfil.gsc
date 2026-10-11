@@ -939,7 +939,7 @@ function infil_setup_ui() {
   level thread infil_show_countdown();
   cg_drawcrosshair = getdvarint(@ "cg_drawcrosshair");
   cg_drawcrosshairnames = getdvarint(@ "cg_drawcrosshairnames");
-  var_c3f949f19ad560e2 = getdvarint(@ "hash_721a6fa1822b17d9");
+  cg_drawfriendlynamesalways = getdvarint(@ "hash_721a6fa1822b17d9");
   setDvar(@ "cg_drawcrosshair", 0);
   setDvar(@ "cg_drawcrosshairnames", 1);
   setDvar(@ "hash_721a6fa1822b17d9", 1);
@@ -964,7 +964,7 @@ function infil_setup_ui() {
   setomnvar("ui_always_show_nameplates", ui_always_show_nameplates);
   setDvar(@ "cg_drawcrosshair", cg_drawcrosshair);
   setDvar(@ "cg_drawcrosshairnames", cg_drawcrosshairnames);
-  setDvar(@ "hash_721a6fa1822b17d9", var_c3f949f19ad560e2);
+  setDvar(@ "hash_721a6fa1822b17d9", cg_drawfriendlynamesalways);
 }
 
 function infil_show_countdown() {
@@ -1037,7 +1037,7 @@ function infil_player_rig(animname, rig_model, var_40a4287d8d2e7ef9) {
   }
 }
 
-function infil_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function infil_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.players) {
     player playsoundtoplayer(alias, player);
   }
@@ -1083,14 +1083,14 @@ function heli_path(vehicle) {
   vehicle notify("start_dynamicpath");
 }
 
-function vehicle_paths_helicopter(node, var_269fb0ec10b51524, var_cfa3aafb71b08d36) {
+function vehicle_paths_helicopter(node, bhelicopterwaitforstart, var_cfa3aafb71b08d36) {
   assertex(isDefined(node) || isDefined(self.attachedpath), "<dev string:x2ef>");
   self notify("newpath");
   self endon("newpath");
   self endon("death");
 
-  if(!isDefined(var_269fb0ec10b51524)) {
-    var_269fb0ec10b51524 = 0;
+  if(!isDefined(bhelicopterwaitforstart)) {
+    bhelicopterwaitforstart = 0;
   }
 
   if(isDefined(node)) {
@@ -1106,7 +1106,7 @@ function vehicle_paths_helicopter(node, var_269fb0ec10b51524, var_cfa3aafb71b08d
 
   pathpoint = pathstart;
 
-  if(var_269fb0ec10b51524) {
+  if(bhelicopterwaitforstart) {
     self waittill("start_dynamicpath");
   }
 

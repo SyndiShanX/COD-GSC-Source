@@ -148,7 +148,7 @@ function function_1868486da804412a() {
   }
 
   wait 1;
-  self.var_e1dc1cf1714986c9 = getStruct(self.target, "targetname");
+  self.movestruct = getStruct(self.target, "targetname");
 
   if(isDefined(self.var_b6f557908076aa35)) {
     self.trigger_switch = getEnt(self.target, "targetname");
@@ -159,7 +159,7 @@ function function_1868486da804412a() {
     }
   }
 
-  if(isDefined(self.var_e1dc1cf1714986c9)) {
+  if(isDefined(self.movestruct)) {
     while(true) {
       if(isDefined(self.trigger_switch)) {
         if(self.active == 0) {
@@ -170,21 +170,21 @@ function function_1868486da804412a() {
       }
 
       if(self.status == "starting") {
-        self.var_e1dc1cf1714986c9 = getStruct(self.target, "targetname");
+        self.movestruct = getStruct(self.target, "targetname");
         thread scripts\mp\maps\mp_jup_vertigo\mp_jup_vertigo_audio::function_c8f303cb5ce4d4f1(self);
-        self moveTo(self.var_e1dc1cf1714986c9.origin, self.movespeed);
+        self moveTo(self.movestruct.origin, self.movespeed);
         self waittill("movedone");
         self.status = "forward";
       }
 
       if(self.status == "forward") {
-        if(isDefined(self.var_e1dc1cf1714986c9.target)) {
-          self.var_e1dc1cf1714986c9 = getStruct(self.var_e1dc1cf1714986c9.target, "targetname");
+        if(isDefined(self.movestruct.target)) {
+          self.movestruct = getStruct(self.movestruct.target, "targetname");
           thread scripts\mp\maps\mp_jup_vertigo\mp_jup_vertigo_audio::function_a98ceea0b676d81a(self);
-          self moveTo(self.var_e1dc1cf1714986c9.origin, self.movespeed);
+          self moveTo(self.movestruct.origin, self.movespeed);
           self waittill("movedone");
 
-          if(!isDefined(self.var_e1dc1cf1714986c9.target)) {
+          if(!isDefined(self.movestruct.target)) {
             self.status = "backwards";
 
             if(isDefined(self.var_3a7a17146e4d3d04)) {
@@ -209,11 +209,11 @@ function function_1868486da804412a() {
       }
 
       if(self.status == "backwards") {
-        self.var_e1dc1cf1714986c9 = getStruct(self.var_e1dc1cf1714986c9.targetname, "target");
+        self.movestruct = getStruct(self.movestruct.targetname, "target");
 
-        if(isDefined(self.var_e1dc1cf1714986c9)) {
+        if(isDefined(self.movestruct)) {
           thread scripts\mp\maps\mp_jup_vertigo\mp_jup_vertigo_audio::function_15f3cb16ea85459b(self);
-          self moveTo(self.var_e1dc1cf1714986c9.origin, self.movespeed);
+          self moveTo(self.movestruct.origin, self.movespeed);
           self waittill("movedone");
           continue;
         }

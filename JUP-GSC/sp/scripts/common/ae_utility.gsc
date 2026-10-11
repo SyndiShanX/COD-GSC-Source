@@ -25,14 +25,14 @@ function private function_28026771d64f5484() {
     return;
   }
 
-  projectscriptbundle = function_811510b694ddd963();
-  var_eb8b55369eb4fd41 = getscriptbundle(hashcat(%"hash_1fa266a862bf9762", projectscriptbundle.var_3844c09d81d3c3a9));
+  projectscriptbundle = getprojectscriptbundle();
+  var_eb8b55369eb4fd41 = getscriptbundle(hashcat(%"hash_1fa266a862bf9762", projectscriptbundle.aeeventlist));
   var_7b9e1c88d69bf5ba = getscriptbundle(hashcat(%"hash_65c0e77ca29a053d", projectscriptbundle.var_97801c7bd0f4b8e2));
 
   assetmissing = 0;
 
   if(!isDefined(var_eb8b55369eb4fd41)) {
-    println("<dev string:x1e>" + projectscriptbundle.var_3844c09d81d3c3a9);
+    println("<dev string:x1e>" + projectscriptbundle.aeeventlist);
     assetmissing = 1;
   }
 
@@ -52,7 +52,7 @@ function private function_28026771d64f5484() {
     var_87db3db683ff41b3 = getscriptbundle(hashcat(%"hash_6dd4e4d4a6505f3a", eventlist[i].event));
 
     if(!isDefined(var_87db3db683ff41b3)) {
-      println("<dev string:x71>" + projectscriptbundle.var_3844c09d81d3c3a9 + "<dev string:xa5>" + eventlist[i].event);
+      println("<dev string:x71>" + projectscriptbundle.aeeventlist + "<dev string:xa5>" + eventlist[i].event);
       continue;
     }
 
@@ -109,7 +109,7 @@ function private function_67fcbab00c357ee5(eventname) {
     return level.var_5d0e3c105d8df7e6[eventname];
   }
 
-  println("<dev string:xdb>" + function_3c8848a3a11b2553(eventname));
+  println("<dev string:xdb>" + getxhashsourcename(eventname));
   return undefined;
 }
 
@@ -121,7 +121,7 @@ function private function_c74d16ca04067f7e(keyname) {
     return level.var_7157035465a73c2d[keyname];
   }
 
-  println("<dev string:x100>" + function_3c8848a3a11b2553(keyname));
+  println("<dev string:x100>" + getxhashsourcename(keyname));
   return undefined;
 }
 
@@ -132,7 +132,7 @@ function private function_39022444273d9666(eventname) {
     return level.var_7003d55e99a01f70[eventname];
   }
 
-  println("<dev string:xdb>" + function_3c8848a3a11b2553(eventname));
+  println("<dev string:xdb>" + getxhashsourcename(eventname));
   return undefined;
 }
 
@@ -173,7 +173,7 @@ function function_d6f771aedba70ce7(eventname, keyname) {
       keyid = var_4de8dd33e1da2178.id;
     }
   } else {
-    println("<dev string:x123>" + function_3c8848a3a11b2553(keyname) + "<dev string:x135>" + function_3c8848a3a11b2553(eventname));
+    println("<dev string:x123>" + getxhashsourcename(keyname) + "<dev string:x135>" + getxhashsourcename(eventname));
   }
 
   return keyid;
@@ -189,10 +189,10 @@ function function_e2ff8f4b4e94f723(keyname, bitname) {
     if(array_contains_key(level.var_dee8cd959aa57e26[keyname], bitname)) {
       bitid = level.var_dee8cd959aa57e26[keyname][bitname];
     } else {
-      println("<dev string:x14d>" + function_3c8848a3a11b2553(bitname) + "<dev string:x15f>" + function_3c8848a3a11b2553(keyname));
+      println("<dev string:x14d>" + getxhashsourcename(bitname) + "<dev string:x15f>" + getxhashsourcename(keyname));
     }
   } else {
-    println("<dev string:x123>" + function_3c8848a3a11b2553(keyname) + "<dev string:x175>");
+    println("<dev string:x123>" + getxhashsourcename(keyname) + "<dev string:x175>");
   }
 
   return bitid;
@@ -207,7 +207,7 @@ function function_ec8877db4e73e4e8(eventparams, eventname, keyname, value) {
     eventparams[eventparams.size] = keyid;
     eventparams[eventparams.size] = int(value);
   } else {
-    println("<dev string:x188>" + function_3c8848a3a11b2553(keyname) + "<dev string:x1a1>" + value + "<dev string:x1a4>" + function_3c8848a3a11b2553(eventname));
+    println("<dev string:x188>" + getxhashsourcename(keyname) + "<dev string:x1a1>" + value + "<dev string:x1a4>" + getxhashsourcename(eventname));
   }
 
   return eventparams;
@@ -223,17 +223,17 @@ function function_b40278e5e468c6c1(var_5d4647843a66d457, elementname) {
     if(array_contains_key(level.var_d0ef8c79b6e23661[var_5d4647843a66d457], elementname)) {
       elementid = level.var_d0ef8c79b6e23661[var_5d4647843a66d457][elementname];
     } else {
-      println("<dev string:x1b3>" + function_3c8848a3a11b2553(elementname) + "<dev string:x1c6>" + function_3c8848a3a11b2553(var_5d4647843a66d457));
+      println("<dev string:x1b3>" + getxhashsourcename(elementname) + "<dev string:x1c6>" + getxhashsourcename(var_5d4647843a66d457));
     }
   } else {
-    println("<dev string:x1e4>" + function_3c8848a3a11b2553(var_5d4647843a66d457));
+    println("<dev string:x1e4>" + getxhashsourcename(var_5d4647843a66d457));
   }
 
   return elementid;
 }
 
 function function_7042dad035dc176c(stringref) {
-  stringhash = function_1823ff50bb28148d("ae_stringref_" + stringref);
+  stringhash = getxhash("ae_stringref_" + stringref);
   var_947b262137165984 = function_b40278e5e468c6c1(#"stringref", stringhash);
 
   if(!isDefined(var_947b262137165984)) {

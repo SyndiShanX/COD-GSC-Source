@@ -70,7 +70,7 @@ function function_3ded3136b512013c() {
 }
 
 function function_1a529ef6a18ffe76() {
-  trigger = function_f159c10d5cf8f0b4("enc_toc_rescue_inside_trigger", "targetname");
+  trigger = getnoentvolumearray("enc_toc_rescue_inside_trigger", "targetname");
 
   if(!isarray(trigger) || trigger.size <= 0 || trigger.size > 1) {
     assert(isarray(trigger), "<dev string:xa4>");
@@ -95,7 +95,7 @@ function function_c05065e628cbd604(requestid, userdata) {
 }
 
 function function_4edc29577f7e3d27() {
-  triggervolumes = function_f159c10d5cf8f0b4("enc_toc_rescue_begin_defend_trigger", "targetname");
+  triggervolumes = getnoentvolumearray("enc_toc_rescue_begin_defend_trigger", "targetname");
 
   if(!isDefined(triggervolumes) || !isarray(triggervolumes) || triggervolumes.size <= 0) {
     assert(0, "<dev string:x1a6>");
@@ -154,22 +154,22 @@ function function_51268e6989b69634() {
   var_7deea9939acda793 = 0;
   var_3261caffadadb678 = var_e4d1678cede76da0 / 100;
   totaltime = var_e4d1678cede76da0;
-  var_c94020ad2f1227be = 0;
+  curpercent = 0;
 
-  while(var_c94020ad2f1227be <= 100) {
+  while(curpercent <= 100) {
     wait var_3261caffadadb678;
-    var_c94020ad2f1227be++;
+    curpercent++;
 
     foreach(player in level.players) {
-      player setclientomnvar("ui_br_objective_param", var_c94020ad2f1227be);
+      player setclientomnvar("ui_br_objective_param", curpercent);
     }
 
-    if(var_c94020ad2f1227be >= 80 && !istrue(var_7deea9939acda793)) {
+    if(curpercent >= 80 && !istrue(var_7deea9939acda793)) {
       function_18790a3cb3f88db7(level.var_93b887bd4bbdf9e3);
       var_7deea9939acda793 = 1;
     }
 
-    if(var_c94020ad2f1227be >= 95 && !istrue(var_54c33b5d87aa331b)) {
+    if(curpercent >= 95 && !istrue(var_54c33b5d87aa331b)) {
       level thread update_soldier_goals();
       var_54c33b5d87aa331b = 1;
     }

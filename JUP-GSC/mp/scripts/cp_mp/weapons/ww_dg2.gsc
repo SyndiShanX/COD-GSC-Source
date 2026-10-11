@@ -22,7 +22,7 @@ function private pre_main() {
 
 function private post_main() {
   common_init();
-  utility::function_f3bb4f4911a1beb2("ww_dg2", "init");
+  utility::callsharedfunc("ww_dg2", "init");
 }
 
 function private init() {
@@ -37,7 +37,7 @@ function private common_init() {
   level callback::add("on_player_damage_effects", &function_a8217ec145971b7e);
 
   if(utility::issharedfuncdefined("zombie_utils", "registerDamageCallback")) {
-    utility::function_f3bb4f4911a1beb2("zombie_utils", "registerDamageCallback", &function_9eb3bd76e4d989d0);
+    utility::callsharedfunc("zombie_utils", "registerDamageCallback", &function_9eb3bd76e4d989d0);
   }
 
   function_9a024cd909d6e0a3(&function_9eb3bd76e4d989d0);

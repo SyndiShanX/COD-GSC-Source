@@ -35,7 +35,7 @@ function function_8dbb468af531b648() {
     return;
   }
 
-  val::register("cg_drawcrosshair", 1, 0, "$self", &function_c88206dcf93476a2, "$value");
+  val::register("cg_drawcrosshair", 1, 0, "$self", &set_allow_crosshair, "$value");
   val::register("weapon_scanning", 1, 0, "$self", &function_f372a21bcb8fc73b, "$value");
   val::register("antigrav_float", 0, 1, "$self", &function_493c39f4df2e5b50, "$value");
   val::register("hands", 1, 0, "$self", &function_9a83d95d2b6bd514, "$value");
@@ -157,7 +157,7 @@ function init_funcs() {
   level.fnbuildweaponspecial = &make_weapon_special;
   level.fnscriptedweaponassignment = &scripts\sp\scripted_weapon_assignment::getscriptedweapon;
 
-  if(function_3cb5da19764baa3() != "T10") {
+  if(getprojectname() != "T10") {
     namespace_689de5b2bc60d21a::function_2fce2f81588a2462();
   }
 }
@@ -181,11 +181,11 @@ function init_global_variables() {
 function init_objective_colors() {
   my_textbrightness_default = "1.0 1.0 1.0";
   my_textbrightness_90 = "0.9 0.9 0.9";
-  var_2e56954df5eab66a = "0.85 0.85 0.85";
+  my_textbrightness_85 = "0.85 0.85 0.85";
   setsaveddvar(@ "con_typewritercolorbase", my_textbrightness_default);
 }
 
-function private function_c88206dcf93476a2(b_value) {
+function private set_allow_crosshair(b_value) {
   if(!isDefined(b_value)) {
     b_value = 0;
   }
@@ -285,13 +285,13 @@ function post_load_functions() {
 function function_b265d5c7cc69cb92() {
   function_851b7e474a5af3e7();
   createprintchannel("<dev string:x2b>");
-  scripts\sp\debug::function_90f1dceaf8276e36();
+  scripts\sp\debug::weapon_list_debug();
   scripts\sp\debug::maindebug();
   scripts\sp\dev::init();
 }
 
 function function_165238c37df21055() {
-  scripts\sp\debug::function_af795827294b88b9();
+  scripts\sp\debug::maindebugpostload();
 }
 
 function load_binks() {

@@ -20,8 +20,8 @@ function init() {
   level thread outlineidswatchpending();
 }
 
-function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, type, var_fa3b23d51c2dc7) {
-  assertex(type != "TEAM" || isDefined(var_fa3b23d51c2dc7), "outlineEnableInternal() passed type \"TEAM\" without teamVisibleTo being defined.");
+function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, type, teamvisibleto) {
+  assertex(type != "TEAM" || isDefined(teamvisibleto), "outlineEnableInternal() passed type \"TEAM\" without teamVisibleTo being defined.");
 
   if(!isDefined(var_f20913fec7561c5f.outlines)) {
     var_f20913fec7561c5f.outlines = [];
@@ -36,7 +36,7 @@ function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlin
   oinfo.type = type;
 
   if(type == "TEAM") {
-    oinfo.team = var_fa3b23d51c2dc7;
+    oinfo.team = teamvisibleto;
   }
 
   id = outlinegenerateuniqueid();
@@ -65,16 +65,16 @@ function outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlin
   return id;
 }
 
-function outlinedisableinternal(id, var_420a996e67989dc4) {
-  if(!isDefined(var_420a996e67989dc4)) {
+function outlinedisableinternal(id, entoutlined) {
+  if(!isDefined(entoutlined)) {
     level.outlineents = array_removeundefined(level.outlineents);
     return;
-  } else if(!isDefined(var_420a996e67989dc4.outlines)) {
-    outlineremovefromgloballist(var_420a996e67989dc4);
+  } else if(!isDefined(entoutlined.outlines)) {
+    outlineremovefromgloballist(entoutlined);
     return;
   }
 
-  var_77c349ecef6fb0d9 = var_420a996e67989dc4.outlines[id];
+  var_77c349ecef6fb0d9 = entoutlined.outlines[id];
 
   if(!isDefined(var_77c349ecef6fb0d9) || var_77c349ecef6fb0d9.isdisabled) {
     return;
@@ -89,38 +89,38 @@ function outlinedisableinternal(id, var_420a996e67989dc4) {
 
     if(!canoutlineforplayer(player)) {
       var_77c349ecef6fb0d9.playersvisibletopending[var_77c349ecef6fb0d9.playersvisibletopending.size] = player;
-      level.outlineidspending[id] = var_420a996e67989dc4;
+      level.outlineidspending[id] = entoutlined;
       continue;
     }
 
-    var_25a840a406e8542a = outlinegethighestinfoforplayer(var_420a996e67989dc4, player);
+    var_25a840a406e8542a = outlinegethighestinfoforplayer(entoutlined, player);
 
     if(isDefined(var_25a840a406e8542a)) {
       if(var_25a840a406e8542a.priority <= var_77c349ecef6fb0d9.priority) {
-        var_420a996e67989dc4 _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+        entoutlined _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
       }
 
       continue;
     }
 
-    var_420a996e67989dc4 hudoutlinedisableforclient(player);
+    entoutlined hudoutlinedisableforclient(player);
   }
 
   if(var_77c349ecef6fb0d9.playersvisibletopending.size == 0) {
-    var_420a996e67989dc4.outlines[id] = undefined;
+    entoutlined.outlines[id] = undefined;
 
-    if(var_420a996e67989dc4.outlines.size == 0) {
-      outlineremovefromgloballist(var_420a996e67989dc4);
+    if(entoutlined.outlines.size == 0) {
+      outlineremovefromgloballist(entoutlined);
     }
   }
 }
 
-function outlinerefreshinternal(var_420a996e67989dc4) {
-  if(!isDefined(var_420a996e67989dc4.outlines) || var_420a996e67989dc4.outlines.size == 0) {
+function outlinerefreshinternal(entoutlined) {
+  if(!isDefined(entoutlined.outlines) || entoutlined.outlines.size == 0) {
     return;
   }
 
-  foreach(oinfo in var_420a996e67989dc4.outlines) {
+  foreach(oinfo in entoutlined.outlines) {
     if(!isDefined(oinfo) || oinfo.isdisabled) {
       continue;
     }
@@ -130,10 +130,10 @@ function outlinerefreshinternal(var_420a996e67989dc4) {
         continue;
       }
 
-      var_25a840a406e8542a = outlinegethighestinfoforplayer(var_420a996e67989dc4, player);
+      var_25a840a406e8542a = outlinegethighestinfoforplayer(entoutlined, player);
 
       if(isDefined(var_25a840a406e8542a)) {
-        var_420a996e67989dc4 _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+        entoutlined _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
       }
     }
   }
@@ -178,10 +178,10 @@ function outlineonplayerjoinedteam_onfirstspawn(player) {
 function outlineremoveplayerfromvisibletoarrays(player) {
   level.outlineents = array_removeundefined(level.outlineents);
 
-  foreach(var_420a996e67989dc4 in level.outlineents) {
+  foreach(entoutlined in level.outlineents) {
     var_8408cba753aba3e3 = 0;
 
-    foreach(oinfo in var_420a996e67989dc4.outlines) {
+    foreach(oinfo in entoutlined.outlines) {
       oinfo.playersvisibleto = array_removeundefined(oinfo.playersvisibleto);
 
       if(isDefined(player) && array_contains(oinfo.playersvisibleto, player)) {
@@ -190,21 +190,21 @@ function outlineremoveplayerfromvisibletoarrays(player) {
       }
     }
 
-    if(var_8408cba753aba3e3 && isDefined(var_420a996e67989dc4) && isDefined(player)) {
-      var_420a996e67989dc4 hudoutlinedisableforclient(player);
+    if(var_8408cba753aba3e3 && isDefined(entoutlined) && isDefined(player)) {
+      entoutlined hudoutlinedisableforclient(player);
     }
   }
 }
 
 function outlineaddplayertoexistingteamoutlines(player) {
-  foreach(var_420a996e67989dc4 in level.outlineents) {
-    if(!isDefined(var_420a996e67989dc4)) {
+  foreach(entoutlined in level.outlineents) {
+    if(!isDefined(entoutlined)) {
       continue;
     }
 
     var_25a840a406e8542a = undefined;
 
-    foreach(oinfo in var_420a996e67989dc4.outlines) {
+    foreach(oinfo in entoutlined.outlines) {
       if(oinfo.type == "ALL" || oinfo.type == "TEAM" && oinfo.team == player.team) {
         if(!array_contains(oinfo.playersvisibleto, player)) {
           oinfo.playersvisibleto[oinfo.playersvisibleto.size] = player;
@@ -219,41 +219,41 @@ function outlineaddplayertoexistingteamoutlines(player) {
     }
 
     if(isDefined(var_25a840a406e8542a)) {
-      var_420a996e67989dc4 _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+      entoutlined _hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
     }
   }
 }
 
-function outlinedisableinternalall(var_420a996e67989dc4) {
-  if(!isDefined(var_420a996e67989dc4) || !isDefined(var_420a996e67989dc4.outlines) || var_420a996e67989dc4.outlines.size == 0) {
+function outlinedisableinternalall(entoutlined) {
+  if(!isDefined(entoutlined) || !isDefined(entoutlined.outlines) || entoutlined.outlines.size == 0) {
     return;
   }
 
-  foreach(_ in var_420a996e67989dc4.outlines) {
-    outlinedisableinternal(id, var_420a996e67989dc4);
+  foreach(_ in entoutlined.outlines) {
+    outlinedisableinternal(id, entoutlined);
   }
 }
 
-function outlineaddtogloballist(var_420a996e67989dc4) {
-  if(!array_contains(level.outlineents, var_420a996e67989dc4)) {
-    level.outlineents[level.outlineents.size] = var_420a996e67989dc4;
+function outlineaddtogloballist(entoutlined) {
+  if(!array_contains(level.outlineents, entoutlined)) {
+    level.outlineents[level.outlineents.size] = entoutlined;
   }
 }
 
-function outlineremovefromgloballist(var_420a996e67989dc4) {
-  level.outlineents = array_remove(level.outlineents, var_420a996e67989dc4);
+function outlineremovefromgloballist(entoutlined) {
+  level.outlineents = array_remove(level.outlineents, entoutlined);
 }
 
-function outlinegethighestpriorityid(var_420a996e67989dc4) {
+function outlinegethighestpriorityid(entoutlined) {
   result = -1;
 
-  if(!isDefined(var_420a996e67989dc4.outlines) || var_420a996e67989dc4.size == 0) {
+  if(!isDefined(entoutlined.outlines) || entoutlined.size == 0) {
     return result;
   }
 
   var_25a840a406e8542a = undefined;
 
-  foreach(oinfo in var_420a996e67989dc4.outlines) {
+  foreach(oinfo in entoutlined.outlines) {
     if(!isDefined(oinfo) || oinfo.isdisabled) {
       continue;
     }
@@ -267,14 +267,14 @@ function outlinegethighestpriorityid(var_420a996e67989dc4) {
   return result;
 }
 
-function outlinegethighestinfoforplayer(var_420a996e67989dc4, player) {
+function outlinegethighestinfoforplayer(entoutlined, player) {
   var_25a840a406e8542a = undefined;
 
-  if(!isDefined(var_420a996e67989dc4.outlines) || var_420a996e67989dc4.size == 0) {
+  if(!isDefined(entoutlined.outlines) || entoutlined.size == 0) {
     return var_25a840a406e8542a;
   }
 
-  foreach(oinfo in var_420a996e67989dc4.outlines) {
+  foreach(oinfo in entoutlined.outlines) {
     if(!isDefined(oinfo) || oinfo.isdisabled) {
       continue;
     }
@@ -363,8 +363,8 @@ function outlineidswatchpending() {
   }
 }
 
-function outlinerefreshpending(var_420a996e67989dc4, id) {
-  oinfo = var_420a996e67989dc4.outlines[id];
+function outlinerefreshpending(entoutlined, id) {
+  oinfo = entoutlined.outlines[id];
 
   foreach(player in oinfo.playersvisibletopending) {
     if(!isDefined(player)) {
@@ -372,12 +372,12 @@ function outlinerefreshpending(var_420a996e67989dc4, id) {
     }
 
     if(canoutlineforplayer(player)) {
-      var_25a840a406e8542a = outlinegethighestinfoforplayer(var_420a996e67989dc4, player);
+      var_25a840a406e8542a = outlinegethighestinfoforplayer(entoutlined, player);
 
       if(isDefined(var_25a840a406e8542a)) {
-        var_420a996e67989dc4 hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
+        entoutlined hudoutlineenableforclient(player, var_25a840a406e8542a.hudoutlineassetname);
       } else {
-        var_420a996e67989dc4 hudoutlinedisableforclient(player);
+        entoutlined hudoutlinedisableforclient(player);
       }
 
       oinfo.playersvisibletopending[index] = undefined;
@@ -388,11 +388,11 @@ function outlinerefreshpending(var_420a996e67989dc4, id) {
 
   if(oinfo.playersvisibletopending.size == 0) {
     if(oinfo.isdisabled) {
-      var_420a996e67989dc4.outlines[id] = undefined;
+      entoutlined.outlines[id] = undefined;
     }
 
-    if(var_420a996e67989dc4.outlines.size == 0) {
-      outlineremovefromgloballist(var_420a996e67989dc4);
+    if(entoutlined.outlines.size == 0) {
+      outlineremovefromgloballist(entoutlined);
     }
 
     return true;
@@ -418,9 +418,9 @@ function outlineenableforall(var_f20913fec7561c5f, hudoutlineassetname, priority
   return scripts\cp\cp_outline_utility::outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, "ALL");
 }
 
-function outlineenableforteam(var_f20913fec7561c5f, var_fa3b23d51c2dc7, hudoutlineassetname, prioritygroup) {
-  playersvisibleto = getteamdata(var_fa3b23d51c2dc7, "players");
-  return scripts\cp\cp_outline_utility::outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, "TEAM", var_fa3b23d51c2dc7);
+function outlineenableforteam(var_f20913fec7561c5f, teamvisibleto, hudoutlineassetname, prioritygroup) {
+  playersvisibleto = getteamdata(teamvisibleto, "players");
+  return scripts\cp\cp_outline_utility::outlineenableinternal(var_f20913fec7561c5f, playersvisibleto, hudoutlineassetname, prioritygroup, "TEAM", teamvisibleto);
 }
 
 function outlineenableforplayer(var_f20913fec7561c5f, var_18ebeb29bb7541e3, hudoutlineassetname, prioritygroup) {
@@ -431,14 +431,14 @@ function outlineenableforplayer(var_f20913fec7561c5f, var_18ebeb29bb7541e3, hudo
   return scripts\cp\cp_outline_utility::outlineenableinternal(var_f20913fec7561c5f, [var_18ebeb29bb7541e3], hudoutlineassetname, prioritygroup, "ENTITY");
 }
 
-function outlinedisable(id, var_420a996e67989dc4) {
+function outlinedisable(id, entoutlined) {
   assertex(isDefined(id) && int(id) == id, "Invalid ID passed to outlineDisable()");
-  scripts\cp\cp_outline_utility::outlinedisableinternal(id, var_420a996e67989dc4);
+  scripts\cp\cp_outline_utility::outlinedisableinternal(id, entoutlined);
 }
 
-function outlinerefresh(var_420a996e67989dc4) {
-  assertex(isDefined(var_420a996e67989dc4), "Undefined entOutlined passed to outlineRefresh()");
-  scripts\cp\cp_outline_utility::outlinerefreshinternal(var_420a996e67989dc4);
+function outlinerefresh(entoutlined) {
+  assertex(isDefined(entoutlined), "Undefined entOutlined passed to outlineRefresh()");
+  scripts\cp\cp_outline_utility::outlinerefreshinternal(entoutlined);
 }
 
 function initoutlineoccluders() {

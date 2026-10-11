@@ -105,11 +105,11 @@ function function_352dbffd61878ee8(params) {
   }
 }
 
-function private function_73792ac28beea75c(playerteam, var_4b814e821394cbbb) {
+function private function_73792ac28beea75c(playerteam, playersquadid) {
   var_27961239d204205c = undefined;
 
-  if(scripts\cp_mp\squads::function_be6ce63a202791c5(playerteam, var_4b814e821394cbbb, "unstableRiftPortal")) {
-    var_27961239d204205c = scripts\cp_mp\squads::getsquaddata(playerteam, var_4b814e821394cbbb, "unstableRiftPortal");
+  if(scripts\cp_mp\squads::function_be6ce63a202791c5(playerteam, playersquadid, "unstableRiftPortal")) {
+    var_27961239d204205c = scripts\cp_mp\squads::getsquaddata(playerteam, playersquadid, "unstableRiftPortal");
   }
 
   return var_27961239d204205c;
@@ -119,10 +119,10 @@ function function_63907ede6a32277b() {
   level endon("game_ended");
   level utility::flag_wait("ob_infil_completed");
 
-  foreach(var_70643c8580524236 in level.squaddata) {
+  foreach(squadarray in level.squaddata) {
     var_e89a9a6a3475bd0a = undefined;
 
-    foreach(squad in var_70643c8580524236) {
+    foreach(squad in squadarray) {
       function_807f302767132a69(squad);
     }
   }
@@ -132,9 +132,9 @@ function function_63907ede6a32277b() {
 
 function function_807f302767132a69(squaddata) {
   if(squaddata.index < 10) {
-    var_e89a9a6a3475bd0a = function_40fd49171fad19d3("jup_ob_unstable_rift_squad_portal_" + "0" + squaddata.index);
+    var_e89a9a6a3475bd0a = getxhashasset("jup_ob_unstable_rift_squad_portal_" + "0" + squaddata.index);
   } else {
-    var_e89a9a6a3475bd0a = function_40fd49171fad19d3("jup_ob_unstable_rift_squad_portal_" + squaddata.index);
+    var_e89a9a6a3475bd0a = getxhashasset("jup_ob_unstable_rift_squad_portal_" + squaddata.index);
   }
 
   squaddata.properties["unstableRiftPortal"] = spawnStruct();
@@ -158,11 +158,11 @@ function function_dd77015bf987370f(params) {
   if(getdvarint(@ "hash_4755982af79a423", 0)) {
     var_65da4599fb7e7834 = [];
 
-    if(!isDefined(params.var_7c5e1244d0e9acfa)) {
-      params.var_7c5e1244d0e9acfa = [];
+    if(!isDefined(params.a_active_players)) {
+      params.a_active_players = [];
     }
 
-    foreach(player in params.var_7c5e1244d0e9acfa) {
+    foreach(player in params.a_active_players) {
       playersquad = level.squaddata[player.team][player.sessionsquadid];
       var_65da4599fb7e7834 = function_6d6af8144a5131f1(var_65da4599fb7e7834, playersquad);
     }
@@ -193,7 +193,7 @@ function function_dd77015bf987370f(params) {
 
   if(level.var_cf55125362980498 >= level.var_47d7af4af68768cc) {
     level.var_cf55125362980498 = 0;
-    function_de6cae07e4e01728(params.obelisk, params.var_7c5e1244d0e9acfa);
+    function_de6cae07e4e01728(params.obelisk, params.a_active_players);
   }
 }
 
@@ -313,7 +313,7 @@ function function_7c68612d9cd9a45(portal, var_f2880b91b6f59a) {
   }
 }
 
-function function_de6cae07e4e01728(last_obelisk, var_7c5e1244d0e9acfa) {
+function function_de6cae07e4e01728(last_obelisk, a_active_players) {
   s_portal = function_d96703e7edd5c880(last_obelisk);
 
   if(!isDefined(s_portal)) {
@@ -328,11 +328,11 @@ function function_de6cae07e4e01728(last_obelisk, var_7c5e1244d0e9acfa) {
   portal setscriptablepartstate("entrance_vfx", "on");
   a_valid_players = [];
 
-  if(!isDefined(var_7c5e1244d0e9acfa)) {
-    var_7c5e1244d0e9acfa = [];
+  if(!isDefined(a_active_players)) {
+    a_active_players = [];
   }
 
-  foreach(player in var_7c5e1244d0e9acfa) {
+  foreach(player in a_active_players) {
     a_squad = player getsquadmembers(undefined, 0);
 
     foreach(squad_player in a_squad) {
@@ -485,7 +485,7 @@ function function_a629ae912e5ea368(var_9ca4ec4b55d55b88, var_19cd1c635198bd2b) {
   waitframe();
 
   while(timer.progresscomplete != 1) {
-    n_time_remaining = int(timer.var_621cb2c0d9b1cdae);
+    n_time_remaining = int(timer.currentprogressvalue);
 
     foreach(squaddie in a_squad) {
       squaddie setclientomnvar("ui_is_exfil_countdown", 1);

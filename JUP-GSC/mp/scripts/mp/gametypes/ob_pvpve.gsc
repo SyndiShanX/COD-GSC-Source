@@ -208,13 +208,13 @@ function private function_aa8a954d66bf39b4(classindex, table) {
 
 function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, fdistance, objweapon, vpoint, vdir, shitloc, timeoffset, modelindex, partname, var_b0fc59ff15058522, var_be4285b26ed99ab1) {
   if(istrue(level.ob_pvpve)) {
-    var_29a8ba8c9dd43fd2 = 0;
+    n_pap_level = 0;
 
     if(issharedfuncdefined("zombie", "get_pap_level") && isPlayer(eattacker)) {
-      var_29a8ba8c9dd43fd2 = eattacker function_f3bb4f4911a1beb2("zombie", "get_pap_level", objweapon);
+      n_pap_level = eattacker callsharedfunc("zombie", "get_pap_level", objweapon);
 
-      if(var_29a8ba8c9dd43fd2 >= 1) {
-        var_87c56f9e23a55ac3 = getdvarfloat(hashcat(@ "hash_cfa00926baa9b9a6", var_29a8ba8c9dd43fd2), 0.5);
+      if(n_pap_level >= 1) {
+        var_87c56f9e23a55ac3 = getdvarfloat(hashcat(@ "hash_cfa00926baa9b9a6", n_pap_level), 0.5);
         idamage *= var_87c56f9e23a55ac3;
       }
     }
@@ -610,7 +610,7 @@ function respawnplayer() {
     self setsolid(1);
     self function_6b4c8718bc36d1ef(0);
     self function_e4ccd01fb7ec7a6f(0);
-    self function_d87e1768229d0e3e();
+    self stopliveragdoll();
   }
 
   spawnpoint = setspawnpoint();
@@ -1043,7 +1043,7 @@ function function_3bbb149b603a44f9(player) {
 
       if(validplayers.size > 0) {
         var_1dfdd816709afb30 = 0;
-        partition = function_21a6a1c613b50a28(validplayers, proximitydistance);
+        partition = create_partition(validplayers, proximitydistance);
 
         foreach(playerarray in partition function_df633f460888a47(player.origin)) {
           if(var_1dfdd816709afb30) {
@@ -1217,7 +1217,7 @@ function function_68556cab1f415279() {
       foreach(var_87fc95d97eb08ba9 in s_bundle.var_423f1766afe848b9) {
         if(isDefined(var_87fc95d97eb08ba9.alias)) {
           timeout = lookupsoundlength(var_87fc95d97eb08ba9.alias, 1) / 1000 + 0.25;
-          registerevent(var_87fc95d97eb08ba9.ref, var_87fc95d97eb08ba9.alias, var_87fc95d97eb08ba9.priority, var_87fc95d97eb08ba9.cooldown, timeout, var_87fc95d97eb08ba9.var_7ce636b3f644e502, var_87fc95d97eb08ba9.delaybefore, var_87fc95d97eb08ba9.delayafter);
+          registerevent(var_87fc95d97eb08ba9.ref, var_87fc95d97eb08ba9.alias, var_87fc95d97eb08ba9.priority, var_87fc95d97eb08ba9.cooldown, timeout, var_87fc95d97eb08ba9.speakerasset, var_87fc95d97eb08ba9.delaybefore, var_87fc95d97eb08ba9.delayafter);
         }
       }
 
@@ -1229,7 +1229,7 @@ function function_68556cab1f415279() {
             eventref = var_84e41716d3779c0e.alias;
 
             if(!isDefined(level.overlord.events[eventref])) {
-              registerevent(eventref, var_84e41716d3779c0e.alias, var_84e41716d3779c0e.priority, var_84e41716d3779c0e.cooldown, function_c89ed1840c8d0f0f(lookupsoundlength(var_84e41716d3779c0e.alias, 1)) + 0.25, var_84e41716d3779c0e.var_7ce636b3f644e502, var_84e41716d3779c0e.delaybefore, var_84e41716d3779c0e.delayafter);
+              registerevent(eventref, var_84e41716d3779c0e.alias, var_84e41716d3779c0e.priority, var_84e41716d3779c0e.cooldown, function_c89ed1840c8d0f0f(lookupsoundlength(var_84e41716d3779c0e.alias, 1)) + 0.25, var_84e41716d3779c0e.speakerasset, var_84e41716d3779c0e.delaybefore, var_84e41716d3779c0e.delayafter);
             }
           }
         }

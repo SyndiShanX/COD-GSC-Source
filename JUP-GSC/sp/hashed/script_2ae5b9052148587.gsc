@@ -32,7 +32,7 @@ function function_ffc7dd3a5adfd5cf() {
     thread vo_infil();
   }
 
-  thread function_53bd1379af902a01();
+  thread watch_for_jump();
   thread function_62cf2295b42a5159();
   thread function_5994eb14c59dd582();
   thread function_d2d87cd7d32a2066();
@@ -176,7 +176,7 @@ function vo_infil() {
   utility::flag_set("vo_infil_complete");
 }
 
-function function_53bd1379af902a01() {
+function watch_for_jump() {
   utility::flag_wait("flag_dungeon_intro_complete");
   start_trigger = namespace_96731f4d002634f6::function_1c4d592029f2b0d3("dam_start_trigger");
 
@@ -644,7 +644,7 @@ function function_b040f21595f033c(origin, radius) {
   var_9cc05aa827880781 = 0;
 
   foreach(bot in ai) {
-    state = bot.var_fe5ebefa740c7106;
+    state = bot.stealth_bsmstate;
 
     if(state > var_9cc05aa827880781) {
       var_9cc05aa827880781 = state;
@@ -683,7 +683,7 @@ function function_16b772b16d97af4b() {
 function function_54202f70c1d70acd() {
   while(true) {
     ai = scripts\common\ai::function_30dd4f3ef5f328ea(level.player.origin, "axis");
-    iprintln(ai.var_fe5ebefa740c7106);
+    iprintln(ai.stealth_bsmstate);
     wait 0.5;
   }
 }
@@ -1159,10 +1159,10 @@ function function_dfe0c631668e2e18() {
   }
 
   if(level.player isswimunderwater()) {
-    var_e66d58584d354e64 = function_9913ea09a554891a(10);
+    surfaced = function_9913ea09a554891a(10);
   }
 
-  if(istrue(var_e66d58584d354e64)) {
+  if(istrue(surfaced)) {
     said = level.player say(var_1efd42c6fce5ec3e deck_draw(), 0.8, 4);
   }
 
@@ -1962,7 +1962,7 @@ function function_5a8578b192c64d43() {
   aliases = [];
   aliases[aliases.size] = "dx_cp_cdam_xfil_ghos_watcher1spillwayiscl";
   aliases[aliases.size] = "dx_cp_cdam_xfil_soap_weregooduptopreservo";
-  var_6d00b03402d761d = aliases;
+  vo1 = aliases;
 
   if(getdvarint(@ "hash_28f8434dbc4fa9dd", 0)) {
     utility::flag_wait("flag_obj_all_bombs_defused");
@@ -1972,22 +1972,22 @@ function function_5a8578b192c64d43() {
 
   level notify("defend_transition_vo_started");
   wait 5;
-  level.player namespace_e36cb7ca6117d2cc::function_31fcf0528e5d8d3f(var_6d00b03402d761d);
+  level.player namespace_e36cb7ca6117d2cc::function_31fcf0528e5d8d3f(vo1);
   aliases = [];
   aliases[aliases.size] = "dx_cp_cdam_xfil_lasw_solidcopystandby";
   aliases[aliases.size] = "dx_cp_cdam_xfil_lasw_yankeethisiswatcher1";
   aliases[aliases.size] = "dx_cp_cdam_xfil_niko_copywatcher1inboundn";
   aliases[aliases.size] = "dx_cp_cdam_xfil_soap_moveyourasslt";
   aliases[aliases.size] = "dx_cp_cdam_xfil_niko_rogeronemikeout";
-  var_6d00803402d6f84 = aliases;
+  vo2 = aliases;
   wait 1;
-  level.player namespace_e36cb7ca6117d2cc::function_31fcf0528e5d8d3f(var_6d00803402d6f84);
-  thread function_8615a6b7cd263577();
+  level.player namespace_e36cb7ca6117d2cc::function_31fcf0528e5d8d3f(vo2);
+  thread exfil_music();
   wait 2;
   level notify("defend_transition_vo_complete");
 }
 
-function function_8615a6b7cd263577() {
+function exfil_music() {
   wait 1.5;
   setmusicstate("mx_dam_exfil");
 }

@@ -19,7 +19,7 @@ function init() {
   }
 
   level.scripted_melee.var_1fc4fd3ef975e8c8 = &function_78748799de25da5f;
-  level.scripted_melee.var_2ec260ca66f2378 = &function_65bbb083561fa648;
+  level.scripted_melee.var_2ec260ca66f2378 = &set_player_rig;
   level.scripted_melee.var_efaa5d51e08521eb = &enable_victims;
   level.scripted_melee.var_3522908002cc5af = &function_b3cab4bbbd2f27bf;
   level.scripted_melee.var_16a2ad3bccc62bb5 = &function_53bc249de0d47b05;
@@ -109,7 +109,7 @@ function spawn_anim_model(animname, origin, angles) {
   return model;
 }
 
-function function_65bbb083561fa648() {
+function set_player_rig() {
   self.scripted_melee_player_rig = spawn_anim_model("scripted_melee_player_rig", self.origin, self.angles);
   self.scripted_melee_player_rig scripts\common\anim::function_1cb661b457551a3(1, self, 0.35);
 }

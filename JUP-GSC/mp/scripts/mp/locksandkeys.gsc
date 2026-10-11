@@ -267,7 +267,7 @@ function init() {
 
 function function_5d0e6d83fdc95800() {
   if(!isDefined(level.var_ab18903aa481fff2)) {
-    level.var_ab18903aa481fff2 = function_f159c10d5cf8f0b4("locked_space_volume", "script_noteworthy");
+    level.var_ab18903aa481fff2 = getnoentvolumearray("locked_space_volume", "script_noteworthy");
   }
 }
 
@@ -702,7 +702,7 @@ function function_ed2cf116dda82611(player, numkeys, keyname, teamkeys) {
   if(istrue(teamkeys)) {
     keycount = player namespace_aead94004cf4c147::function_ef5c7ec55e0e20ee(keylootid);
   } else {
-    keycount = player namespace_aead94004cf4c147::function_93f02514431a1f5d(keylootid);
+    keycount = player namespace_aead94004cf4c147::getbackpackitemcount(keylootid);
   }
 
   if(!isDefined(keycount)) {
@@ -769,11 +769,11 @@ function function_4327a2c68eef5db9(struct) {
   }
 }
 
-function function_2166c547b0d38235(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread function_a95d35e420c6a968(instance, part, state, player, var_a5b2c541413aa895);
+function function_2166c547b0d38235(instance, part, state, player, bautouse, usestring) {
+  level thread function_a95d35e420c6a968(instance, part, state, player, bautouse);
 }
 
-function function_a95d35e420c6a968(instance, part, state, player, var_a5b2c541413aa895) {
+function function_a95d35e420c6a968(instance, part, state, player, bautouse) {
   instance setscriptablepartstate("maphint_lock", "off");
   playsoundatpos(instance.origin, "emt_bunk_red_button_press");
 
@@ -793,11 +793,11 @@ function function_a95d35e420c6a968(instance, part, state, player, var_a5b2c54141
   instance setscriptablepartstate("maphint_lock", instance.keyname);
 }
 
-function function_ee4e77bc15da5eae(instance, part, state, player, var_a5b2c541413aa895, usestring) {
-  level thread function_44017cc8b84b87ad(instance, part, state, player, var_a5b2c541413aa895);
+function function_ee4e77bc15da5eae(instance, part, state, player, bautouse, usestring) {
+  level thread function_44017cc8b84b87ad(instance, part, state, player, bautouse);
 }
 
-function function_44017cc8b84b87ad(instance, part, state, player, var_a5b2c541413aa895) {
+function function_44017cc8b84b87ad(instance, part, state, player, bautouse) {
   instance setscriptablepartstate("maphint_lock_interior", "off");
   playsoundatpos(instance.origin, "emt_bunk_red_button_press");
   wait 1;
@@ -1592,7 +1592,7 @@ function function_f3b1f1d41c65b340() {
   self freescriptable();
 }
 
-function function_38904bc3a49af40c(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_38904bc3a49af40c(instance, part, state, player, bautouse, usestring) {
   backpackkeyname = instance.keyname;
 
   if(instance.keyname == "firefightTestContainer") {
@@ -2203,7 +2203,7 @@ function function_a60e40071d04db92(player, keyused) {
     matchtime = default_to(namespace_de6e6777b0937bd7::function_1b15450e092933cf(gettime()), 0);
     lpconlevel = namespace_500325c20d920621::function_c43f9411e4146fbd();
     teamid = default_to(namespace_e77194a0203f683::function_260df5ddbfebac5f(player), #"undefined");
-    player dlog_recordplayerevent("dlog_event_dmz_keycard_used", ["key_type", function_1823ff50bb28148d(keytype), "player_position_x", playerpositionx, "player_position_y", playerpositiony, "player_position_z", playerpositionz, "player_rotation_pitch", playerrotationpitch, "player_rotation_yaw", playerrotationyaw, "player_rotation_roll", playerrotationroll, "lpcon_level", function_1823ff50bb28148d(lpconlevel), "team_id", function_1823ff50bb28148d(teamid), "match_time_elapsed", matchtime]);
+    player dlog_recordplayerevent("dlog_event_dmz_keycard_used", ["key_type", getxhash(keytype), "player_position_x", playerpositionx, "player_position_y", playerpositiony, "player_position_z", playerpositionz, "player_rotation_pitch", playerrotationpitch, "player_rotation_yaw", playerrotationyaw, "player_rotation_roll", playerrotationroll, "lpcon_level", getxhash(lpconlevel), "team_id", getxhash(teamid), "match_time_elapsed", matchtime]);
   }
 }
 

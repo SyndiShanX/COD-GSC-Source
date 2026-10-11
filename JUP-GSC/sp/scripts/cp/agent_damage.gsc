@@ -318,9 +318,9 @@ function should_drop_scavenger_bag(player) {
   }
 
   time_needed = 10000;
-  var_ffa1faa3c8a198aa = gettime() - player.last_bag_drop_time;
+  time_lapse = gettime() - player.last_bag_drop_time;
 
-  if(var_ffa1faa3c8a198aa > time_needed) {
+  if(time_lapse > time_needed) {
     player.last_bag_drop_time = gettime();
     return true;
   }
@@ -546,9 +546,9 @@ function should_drop_grenade_pickup(player) {
   }
 
   time_needed = 10000;
-  var_ffa1faa3c8a198aa = gettime() - player.last_gren_drop_time;
+  time_lapse = gettime() - player.last_gren_drop_time;
 
-  if(var_ffa1faa3c8a198aa > time_needed) {
+  if(time_lapse > time_needed) {
     player.last_gren_drop_time = gettime();
     return true;
   }
@@ -630,8 +630,8 @@ function should_do_damage_checks(eattacker, idamage, smeansofdeath, sweapon, shi
     return 0;
   } else if(isDefined(level.should_do_damage_check_func) && ![[level.should_do_damage_check_func]](eattacker, idamage, smeansofdeath, sweapon, shitloc, victim)) {
     return 0;
-  } else if(isDefined(self.var_71c1911e983f326d)) {
-    return [[self.var_71c1911e983f326d]](idamage, smeansofdeath, sweapon, partname, damageloc);
+  } else if(isDefined(self.fn_shoulddodamage)) {
+    return [[self.fn_shoulddodamage]](idamage, smeansofdeath, sweapon, partname, damageloc);
   }
 
   if(isDefined(level.should_do_damage_check_func_relics)) {
@@ -758,12 +758,12 @@ function callbacksoldieragentgametypekilled(einflictor, eattacker, idamage, smea
   }
 
   if(isheadshot(sweapon, shitloc, smeansofdeath, eattacker)) {
-    if(istrue(self.var_ad799295a6692b29)) {}
+    if(istrue(self.dontdroploot)) {}
   }
 
   namespace_1fdb557af4bcd29e::function_3b55a5779a740df1();
 
-  if(!istrue(self.var_ad799295a6692b29) && !istrue(level.var_ad799295a6692b29)) {
+  if(!istrue(self.dontdroploot) && !istrue(level.dontdroploot)) {
     thread scripts\cp\agent_drops::function_c568b761a7f0b678(einflictor, eattacker, idamage, smeansofdeath, sweapon, vdir, shitloc, timeoffset, deathanimduration);
   }
 
@@ -808,7 +808,7 @@ function callbacksoldieragentgametypekilled(einflictor, eattacker, idamage, smea
 
     if(!function_240f7f4e57340e8f()) {
       var_bafbdb422ea9eaae = function_137b512700167b00(eattacker, self);
-      level thread scripts\cp_mp\challenges::function_5a0ae8bc2b80c0c0(einflictor, eattacker, idamage, smeansofdeath, sweapon, shitloc, eattacker.modifiers, self.team, var_bafbdb422ea9eaae);
+      level thread scripts\cp_mp\challenges::onagentkilled(einflictor, eattacker, idamage, smeansofdeath, sweapon, shitloc, eattacker.modifiers, self.team, var_bafbdb422ea9eaae);
     }
 
     if(isDefined(eattacker.perk_data) && eattacker _hasperk("specialty_chain_killstreaks")) {

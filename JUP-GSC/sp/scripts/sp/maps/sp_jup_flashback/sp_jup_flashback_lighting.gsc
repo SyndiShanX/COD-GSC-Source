@@ -96,10 +96,10 @@ function function_230ecfc530cd108a() {
 
 function function_5a765152015c6681() {
   function_9985ab0a5b897efb(level.infilvehicle, "infil_veh");
-  level.unique_lights["infil_veh_01"] function_f5600319797ffa1e(level.unique_lights["infil_veh_01"].og_intensity);
-  level.unique_lights["infil_veh_02"] function_f5600319797ffa1e(level.unique_lights["infil_veh_02"].og_intensity);
-  level.unique_lights["infil_veh_03"] function_f5600319797ffa1e(level.unique_lights["infil_veh_03"].og_intensity);
-  level.unique_lights["infil_veh_04"] function_f5600319797ffa1e(level.unique_lights["infil_veh_04"].og_intensity);
+  level.unique_lights["infil_veh_01"] set_light_intensity(level.unique_lights["infil_veh_01"].og_intensity);
+  level.unique_lights["infil_veh_02"] set_light_intensity(level.unique_lights["infil_veh_02"].og_intensity);
+  level.unique_lights["infil_veh_03"] set_light_intensity(level.unique_lights["infil_veh_03"].og_intensity);
+  level.unique_lights["infil_veh_04"] set_light_intensity(level.unique_lights["infil_veh_04"].og_intensity);
 }
 
 function function_46eb014f0b3ba202() {
@@ -326,7 +326,7 @@ function function_d2f026db9170974b(light_list, scene_shot) {
   }
 }
 
-function function_f5600319797ffa1e(intensity) {
+function set_light_intensity(intensity) {
   if(isDefined(self)) {
     self setlightintensity(intensity);
   }

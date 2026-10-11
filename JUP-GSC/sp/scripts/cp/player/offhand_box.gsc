@@ -380,7 +380,7 @@ function update_offhand_box_item_models(player) {
         scriptable = spawnscriptable(var_dd53030b256aa23b, var_8acc266afda40d29.origin, var_8acc266afda40d29.angles);
         scriptable setscriptablepartstate(var_dd53030b256aa23b, "visible_no_use");
         scriptable disablescriptableplayeruse(player);
-        scriptable.var_be6b0f71bd991349 = 1;
+        scriptable.undiscoverable = 1;
         var_8acc266afda40d29.item = scriptable;
         self.item_models[self.item_models.size] = scriptable;
       } else if(isDefined(self.item_models[0])) {

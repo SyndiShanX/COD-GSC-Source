@@ -45,7 +45,7 @@ function init(event_info) {
   event_info.activatefunc = &event_activate;
   event_info.postinitfunc = &function_de40a46baab733f5;
   event_info.deactivatefunc = &event_deactivate;
-  function_f1aed36ab4598ea("wz_pe_dataheist");
+  snd_transient_load("wz_pe_dataheist");
 }
 
 function function_de40a46baab733f5() {
@@ -554,7 +554,7 @@ function function_e86f6c7b0f5447e2() {
 
   foreach(player in level.players) {
     if(isalive(player) && !player scripts\mp\gametypes\br_public::isplayeringulag()) {
-      player namespace_88bfae359020fdd3::function_1976438a8865ac27("br_ftue_dataheist");
+      player namespace_88bfae359020fdd3::ftue_triggertip("br_ftue_dataheist");
     }
   }
 }
@@ -1019,7 +1019,7 @@ function function_e232769e6ea189ca(player) {
   player setclientomnvar("ui_publicevent_dataheist_state", 0);
 }
 
-function function_533c18ee02139b7e(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_533c18ee02139b7e(instance, part, state, player, bautouse, usestring) {
   if(istrue(instance.var_180f4d931981e33e)) {
     if(getdvarint(@ "hash_ed4efe8df2b29df0", 1)) {
       namespace_981ad73f8047222f::function_647a8c40104e4866(player.team);

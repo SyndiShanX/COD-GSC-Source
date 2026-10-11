@@ -40,29 +40,29 @@ function private function_51470bb89e9a816(params) {
   function_62acb9a556ab5175();
   function_8e401d26d58bc32d();
   function_dfad208433b79ddf();
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_d18ca757733c1f7f);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_ai_killed", &function_a295306038aa1d4e);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_entity_revealed", &function_88950ad5e3ce8e13);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_turned", &function_84a9a40f78a814cd);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("shocked", &function_c8bbb80c04cd9a37);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("shocked_end", &function_deadba29b36b687d);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("burned", &function_bf0fe7b30fa14180);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("burned_end", &function_788a3fa28ef17f52);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("napalm_burned", &function_dbb5710ec418627e);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("napalm_burned_end", &function_afa5ec2deb3f62a0);
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("zombie_melee_pre", &function_b5764abaf3c1c8de);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_d18ca757733c1f7f);
+  callback::get_template(self.animsetname) callback::add("killed_body_cloned", &function_c8c10b313b3fcf09);
+  callback::get_template(self.animsetname) callback::add("on_ai_killed", &function_a295306038aa1d4e);
+  callback::get_template(self.animsetname) callback::add("on_entity_revealed", &function_88950ad5e3ce8e13);
+  callback::get_template(self.animsetname) callback::add("on_turned", &function_84a9a40f78a814cd);
+  callback::get_template(self.animsetname) callback::add("shocked", &function_c8bbb80c04cd9a37);
+  callback::get_template(self.animsetname) callback::add("shocked_end", &function_deadba29b36b687d);
+  callback::get_template(self.animsetname) callback::add("burned", &function_bf0fe7b30fa14180);
+  callback::get_template(self.animsetname) callback::add("burned_end", &function_788a3fa28ef17f52);
+  callback::get_template(self.animsetname) callback::add("napalm_burned", &function_dbb5710ec418627e);
+  callback::get_template(self.animsetname) callback::add("napalm_burned_end", &function_afa5ec2deb3f62a0);
+  callback::get_template(self.animsetname) callback::add("zombie_melee_pre", &function_b5764abaf3c1c8de);
 }
 
 function function_25dabcda59af1c66(taskid) {
   assert(isDefined(self.zombieaisetting));
-  function_7415ae9399ba8e75(self.zombieaisetting);
+  zombie_init_ai(self.zombieaisetting);
   assert(isDefined(self.zombieaisettings.var_e58a65b7a8f5973c));
   callback::add("on_first_ai_init", &function_51470bb89e9a816);
   self.allowpain = 0;
   self.var_b0c83727eacd1810 = 0;
-  self.var_51adc6933a819c35 = squared(self.zombieaisettings.var_e58a65b7a8f5973c.var_794007c941e2df04);
-  self.grab_damage = self.zombieaisettings.var_e58a65b7a8f5973c.var_e6dd522afdc1fd2a;
+  self.var_51adc6933a819c35 = squared(self.zombieaisettings.var_e58a65b7a8f5973c.grabattackdistance);
+  self.grab_damage = self.zombieaisettings.var_e58a65b7a8f5973c.grabattackdamage;
   self.var_7286eb804434f596 = self.zombieaisettings.var_e58a65b7a8f5973c.var_94b56832fc7f394e * 1000;
   self.var_858ebdfa6952957a = self.zombieaisettings.var_e58a65b7a8f5973c.var_e0d6ba528eaf90b2;
   self.var_57f944bef3fa055f = tan(self.zombieaisettings.var_e58a65b7a8f5973c.var_267f8518b498347a);
@@ -89,7 +89,7 @@ function private initscriptable() {
 
 function private function_a295306038aa1d4e(params) {
   if(isPlayer(params.eattacker) && !istrue(self.var_5a242d06b1ccb893)) {
-    params.eattacker function_e800498086e36c29(#"hash_9c49bcb8084d6327");
+    params.eattacker doscoreeventsharedfunc(#"hash_9c49bcb8084d6327");
   }
 }
 
@@ -348,7 +348,7 @@ function private function_88950ad5e3ce8e13(params) {
 }
 
 function function_6bdfe7a8ca9c56ba() {
-  players = function_883458a342af3041(self.origin, 200);
+  players = getplayersinradiussharedfunc(self.origin, 200);
 
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -625,7 +625,7 @@ function function_e9e7acaf7ce05aba(taskid, params) {
 }
 
 function function_17b5cbf9f7aba1fb(taskid, params) {
-  if(self function_11e2d4051ea44b35("in_grab_attack") <= 0) {
+  if(self getaiblackboarddynamic("in_grab_attack") <= 0) {
     return anim.success;
   }
 

@@ -32,7 +32,7 @@ function stayahead_thread(followent) {
   prevpos = "";
   goalpos = get_goalpos();
   prevgoalpos = [self.origin];
-  var_7ccaea7a1fc7de36 = undefined;
+  lastframeinfo = undefined;
   scriptedanim = undefined;
   self.stayahead.lookat_last = gettime();
   self.stayahead.exit_speed = undefined;
@@ -60,7 +60,7 @@ function stayahead_thread(followent) {
     if(isDefined(self.stayahead.turbo)) {
       p1speed = self.stayahead.turbo;
       p2speed = self.stayahead.turbo;
-      var_8067d7e2d70301eb = self.stayahead.turbo;
+      p3speed = self.stayahead.turbo;
       p4speed = self.stayahead.turbo;
       p1var = 0;
       p2var = 0;
@@ -69,7 +69,7 @@ function stayahead_thread(followent) {
     } else {
       p1speed = self.stayahead.p1["speed"];
       p2speed = self.stayahead.p2["speed"];
-      var_8067d7e2d70301eb = self.stayahead.p3["speed"];
+      p3speed = self.stayahead.p3["speed"];
       p4speed = self.stayahead.p4["speed"];
       p1var = ter_op(isDefined(self.stayahead.p1["variance"]), self.stayahead.p1["variance"], 0.2);
       p2var = ter_op(isDefined(self.stayahead.p2["variance"]), self.stayahead.p2["variance"], 0.2);
@@ -79,17 +79,17 @@ function stayahead_thread(followent) {
 
     p1dist = self.stayahead.p1["distance"];
     p2dist = self.stayahead.p2["distance"];
-    var_8b8721b280e290 = self.stayahead.p3["distance"];
+    p3dist = self.stayahead.p3["distance"];
     p4dist = self.stayahead.p4["distance"];
-    var_67b98cac565e94ac = undefined;
-    var_a123517d91404d87 = undefined;
-    var_758352390ecd5826 = undefined;
+    pwdist = undefined;
+    pwspeed = undefined;
+    pwbuffer = undefined;
 
     if(isDefined(self.stayahead.pw)) {
-      var_67b98cac565e94ac = self.stayahead.pw["distance"];
-      var_a123517d91404d87 = self.stayahead.pw["speed"];
-      var_758352390ecd5826 = ter_op(isDefined(self.stayahead.pw["buffer"]), self.stayahead.pw["buffer"], 1.5);
-      var_758352390ecd5826 *= 20;
+      pwdist = self.stayahead.pw["distance"];
+      pwspeed = self.stayahead.pw["speed"];
+      pwbuffer = ter_op(isDefined(self.stayahead.pw["buffer"]), self.stayahead.pw["buffer"], 1.5);
+      pwbuffer *= 20;
     }
 
     if(getdvarint(@ "hash_3d6aec1e7192648b")) {
@@ -131,8 +131,8 @@ function stayahead_thread(followent) {
     }
 
     fwdpos = flat_origin(self getposonpath(32));
-    var_fbbd821088eebc76 = flat_origin(goalpos[0]);
-    var_c64b9437370844d1 = flat_origin(prevgoalpos[0]);
+    goalpos2d = flat_origin(goalpos[0]);
+    prevgoalpos2d = flat_origin(prevgoalpos[0]);
     origin2d = flat_origin(self.origin);
 
     if(self isinscriptedstate()) {
@@ -145,7 +145,7 @@ function stayahead_thread(followent) {
       }
 
       print2d3d_debug(self.origin + (0, 0, 30), "dir: SCRIPTED ANIM: " + gettime(), (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 4);
-    } else if(self.arriving || distancesquared(var_fbbd821088eebc76, origin2d) < 1024) {
+    } else if(self.arriving || distancesquared(goalpos2d, origin2d) < 1024) {
       if(isDefined(self.stayahead.exit_speed) && !isDefined(self.stayahead.exit_finish_time)) {
         self.stayahead.exit_finish_time = gettime();
         self.stayahead.exit_last_finish_time = self.stayahead.exit_finish_time;
@@ -159,25 +159,25 @@ function stayahead_thread(followent) {
         dir = lerp_plane_vector(dir, anglesToForward(self.goalnode.angles));
       } else if(isDefined(goalpos[1])) {
         print2d3d_debug(self.origin + (0, 0, 30), "dir: arriving/close GOAL vector: " + gettime(), (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 4);
-        var_fbbd821088eebc76 = flat_origin(goalpos[1]);
-        dir = lerp_plane_vector(dir, vectorNormalize(var_fbbd821088eebc76 - origin2d));
+        goalpos2d = flat_origin(goalpos[1]);
+        dir = lerp_plane_vector(dir, vectorNormalize(goalpos2d - origin2d));
       } else {
         print2d3d_debug(self.origin + (0, 0, 30), "dir: arriving/close FWD vector: " + gettime(), (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 4);
         dir = lerp_plane_vector(dir, anglesToForward(self.angles));
       }
-    } else if(istrue(self._blackboard.var_9fbdce5fa10f8964) || distancesquared(var_c64b9437370844d1, origin2d) < 1024) {
+    } else if(istrue(self._blackboard.var_9fbdce5fa10f8964) || distancesquared(prevgoalpos2d, origin2d) < 1024) {
       if(istrue(self._blackboard.var_9fbdce5fa10f8964) && !isDefined(self.stayahead.exit_speed)) {
         self.stayahead.exit_speed = -1;
       }
 
       if(isDefined(self.using_goto_node)) {
         print2d3d_debug(self.origin + (0, 0, 30), "dir: exiting GOTO vector: " + gettime(), (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 4);
-        var_fbbd821088eebc76 = flat_origin(goalpos[0]);
-        dir = lerp_plane_vector(dir, vectorNormalize(var_fbbd821088eebc76 - var_c64b9437370844d1));
+        goalpos2d = flat_origin(goalpos[0]);
+        dir = lerp_plane_vector(dir, vectorNormalize(goalpos2d - prevgoalpos2d));
       } else if(isDefined(goalpos[1])) {
         print2d3d_debug(self.origin + (0, 0, 30), "dir: exiting GOAL vector: " + gettime(), (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 4);
-        var_fbbd821088eebc76 = flat_origin(goalpos[1]);
-        dir = lerp_plane_vector(dir, vectorNormalize(var_fbbd821088eebc76 - var_c64b9437370844d1));
+        goalpos2d = flat_origin(goalpos[1]);
+        dir = lerp_plane_vector(dir, vectorNormalize(goalpos2d - prevgoalpos2d));
       } else {
         print2d3d_debug(self.origin + (0, 0, 30), "dir: exiting FWD vector: " + gettime(), (0.9, 0.9, 0.9), 0.9, 0.3, 1, 0, "right", 4);
         dir = lerp_plane_vector(dir, anglesToForward(self.angles));
@@ -195,14 +195,14 @@ function stayahead_thread(followent) {
 
       if(distance(fwdpos, origin2d) < 1) {
         print_debug("STAYAHEAD: segments are colliding! " + gettime());
-        dir = lerp_plane_vector(dir, vectorNormalize(var_fbbd821088eebc76 - fwdpos));
+        dir = lerp_plane_vector(dir, vectorNormalize(goalpos2d - fwdpos));
       } else {
         dir = lerp_plane_vector(dir, vectorNormalize(fwdpos - origin2d));
       }
     }
 
     p2pos = self.origin + dir * p2dist;
-    p3pos = self.origin + dir * var_8b8721b280e290;
+    p3pos = self.origin + dir * p3dist;
     p4pos = self.origin + dir * p4dist;
     var_3400cdbff0926f4e = distance(p2pos, p3pos) * 0.25;
     var_b8b793c95b3a1c2d = distance(p2pos, p3pos) * 0.6;
@@ -229,8 +229,8 @@ function stayahead_thread(followent) {
     pwpos = undefined;
     dotpw = undefined;
 
-    if(isDefined(var_67b98cac565e94ac)) {
-      pwpos = self.origin + dir * var_67b98cac565e94ac;
+    if(isDefined(pwdist)) {
+      pwpos = self.origin + dir * pwdist;
       dotpw = vectordot(vectorNormalize(followent.origin - pwpos), dir);
     }
 
@@ -264,7 +264,7 @@ function stayahead_thread(followent) {
       line_debug(var_190991af9a87fe39 + debugright * 300, var_190991af9a87fe39 + debugleft * 300, (0.8, 0.8, 1));
       line_debug(var_ef9b0d1945b01397 + debugright * 300, var_ef9b0d1945b01397 + debugleft * 300, (0.8, 0.8, 1));
       print3d_debug(p2pos, p2speed, (1, 0.25, 0.25), 0.9, 0.3);
-      print3d_debug(p3pos, var_8067d7e2d70301eb, (0.5, 1, 0.5), 0.9, 0.3);
+      print3d_debug(p3pos, p3speed, (0.5, 1, 0.5), 0.9, 0.3);
       print3d_debug(p4pos, p4speed, (0.25, 0.25, 1), 0.9, 0.3);
       print3d_debug(p2pos + (0, 0, -4), p2var, (1, 0.25, 0.25), 0.9, 0.3);
       print3d_debug(p3pos + (0, 0, -4), p3var, (0.5, 1, 0.5), 0.9, 0.3);
@@ -322,7 +322,7 @@ function stayahead_thread(followent) {
           }
         }
 
-        if(isDefined(self.stayahead.goalnode) && !isDefined(self.stayahead.goalnode_pw) && self.stayahead.pw_behind_buffer > var_758352390ecd5826) {
+        if(isDefined(self.stayahead.goalnode) && !isDefined(self.stayahead.goalnode_pw) && self.stayahead.pw_behind_buffer > pwbuffer) {
           var_6ec7ad100ba120aa = get_wait_node();
 
           if(isDefined(var_6ec7ad100ba120aa) && distance(self.origin, var_6ec7ad100ba120aa.origin) <= self.stayahead.wait_node_radius && distance(self.origin, var_6ec7ad100ba120aa.origin) > 32 && stayahead_goal_is_far_enough(var_6ec7ad100ba120aa)) {
@@ -345,7 +345,7 @@ function stayahead_thread(followent) {
           print2d3d_debug(self.origin + (0, 0, 16), "pW fail no goalnode or goto", (1, 0, 0), 1, 0.3, 1, 0, "right", 6);
         } else if(isDefined(self.stayahead.goalnode_pw)) {
           print2d3d_debug(self.origin + (0, 0, 16), "pW fail already have wait node", (1, 0, 0), 1, 0.3, 1, 0, "right", 6);
-        } else if(self.stayahead.pw_behind_buffer < var_758352390ecd5826) {
+        } else if(self.stayahead.pw_behind_buffer < pwbuffer) {
           print2d3d_debug(self.origin + (0, 0, 16), "pW fail buffer too small", (1, 0, 0), 1, 0.3, 1, 0, "right", 6);
         } else {
           print2d3d_debug(self.origin + (0, 0, 16), "pW fail uh oh!", (1, 0, 0), 1, 0.3, 1, 0, "right", 6);
@@ -353,7 +353,7 @@ function stayahead_thread(followent) {
 
         self.stayahead.pw_behind_buffer += 1;
 
-        if(self.stayahead.pw_behind_buffer > var_758352390ecd5826) {
+        if(self.stayahead.pw_behind_buffer > pwbuffer) {
           print2d3d_debug(self.origin + (0, 0, 12), "pW behind buffer: " + self.stayahead.pw_behind_buffer, (1, 0, 0), 1, 0.3, 1, 0, "right", 7);
         } else {
           print2d3d_debug(self.origin + (0, 0, 12), "pW behind buffer: " + self.stayahead.pw_behind_buffer, (0, 0, 1), 1, 0.3, 1, 0, "right", 7);
@@ -361,7 +361,7 @@ function stayahead_thread(followent) {
       } else if(isDefined(self.stayahead.goalnode) && isDefined(self.stayahead.goalnode_pw)) {
         self.stayahead.pw_behind_buffer = 0;
 
-        if(dotp4 > 0 && self.stayahead.pw_infront_buffer > var_758352390ecd5826 * 0.4 || dotp3 > 0) {
+        if(dotp4 > 0 && self.stayahead.pw_infront_buffer > pwbuffer * 0.4 || dotp3 > 0) {
           print3d_debug(self.origin, "going to OG goal: " + distance(self.origin, self.stayahead.goalnode.origin), (0, 1, 0), 1, 0.3, 500, 1);
           self.stayahead.goalnode_pw = undefined;
           childthread stayahead_set_goalnode(self.stayahead.goalnode, 0);
@@ -405,7 +405,7 @@ function stayahead_thread(followent) {
       }
 
       if(prevpos == "p4Front" || prevpos == "") {
-        stayahead_set_speed(3, followent, var_8b8721b280e290 + var_9150f3b2e4bd88fd, var_8b8721b280e290, dir, var_8067d7e2d70301eb, var_8067d7e2d70301eb + var_8067d7e2d70301eb * p3var);
+        stayahead_set_speed(3, followent, p3dist + var_9150f3b2e4bd88fd, p3dist, dir, p3speed, p3speed + p3speed * p3var);
       } else {
         stayahead_set_speed(2, followent, p2dist, p2dist - var_b8b793c95b3a1c2d, dir, p2speed + p2speed * p2var * -1, p2speed);
       }
@@ -419,7 +419,7 @@ function stayahead_thread(followent) {
       if(prevpos == "p4Back" || prevpos == "") {
         stayahead_set_speed(4, followent, p4dist + var_43d709d52baf035c, p4dist, dir, p4speed, p4speed + p4speed * p4var);
       } else {
-        stayahead_set_speed(3, followent, var_8b8721b280e290, var_8b8721b280e290 - var_80104df680745372, dir, var_8067d7e2d70301eb + var_8067d7e2d70301eb * p3var * -1, var_8067d7e2d70301eb);
+        stayahead_set_speed(3, followent, p3dist, p3dist - var_80104df680745372, dir, p3speed + p3speed * p3var * -1, p3speed);
       }
     } else if(dotp4 < 0) {
       if(isDefined(dotpw) && dotpw < 0) {}
@@ -547,12 +547,12 @@ function stayahead_set_speed(plane, followent, forwarddist, backdist, dir, minsp
   print3d_debug(self.origin + (0, 0, 8), "IsExiting, not setting speed: " + gettime(), (0.9, 0, 0), 0.9, 0.3, 1);
 }
 
-function get_best_goto_node(path, var_1ca496d6095a0025) {
+function get_best_goto_node(path, nodestocheck) {
   dots = [];
   largestindex = 0;
   goodenough = undefined;
 
-  for(i = 0; i < var_1ca496d6095a0025; i++) {
+  for(i = 0; i < nodestocheck; i++) {
     if(!isDefined(path[i])) {
       break;
     }
@@ -560,7 +560,7 @@ function get_best_goto_node(path, var_1ca496d6095a0025) {
     dots[i] = vectordot(vectorNormalize(path[i].origin - self.origin), self.stayahead.dir);
 
     if(dots[i] < 0) {
-      var_1ca496d6095a0025 += 1;
+      nodestocheck += 1;
       continue;
     }
 
@@ -968,11 +968,11 @@ function stayahead_team_think() {
   speedscale = 0.8;
   p1speed = self.stayahead.p1["speed"];
   p2speed = self.stayahead.p2["speed"];
-  var_8067d7e2d70301eb = self.stayahead.p3["speed"];
+  p3speed = self.stayahead.p3["speed"];
   p4speed = self.stayahead.p4["speed"];
   p1dist = self.stayahead.p1["distance"];
   p2dist = self.stayahead.p2["distance"];
-  var_8b8721b280e290 = self.stayahead.p3["distance"];
+  p3dist = self.stayahead.p3["distance"];
   p4dist = self.stayahead.p4["distance"];
   childthread stayahead_team_debug();
 
@@ -990,7 +990,7 @@ function stayahead_team_think() {
         guy.stayahead.dynamic_backdist = 50;
       }
 
-      guy childthread enable_dynamic_run_speed(self, p4speed * speedscale, var_8067d7e2d70301eb * speedscale, p2speed * speedscale, guy.stayahead.dynamic_frontdist, guy.stayahead.dynamic_middist, guy.stayahead.dynamic_backdist);
+      guy childthread enable_dynamic_run_speed(self, p4speed * speedscale, p3speed * speedscale, p2speed * speedscale, guy.stayahead.dynamic_frontdist, guy.stayahead.dynamic_middist, guy.stayahead.dynamic_backdist);
 
       if(!isDefined(guy.stayahead.dir)) {
         guy.stayahead.dir = anglesToForward(self.angles);

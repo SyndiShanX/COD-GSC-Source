@@ -145,7 +145,7 @@ function function_8af47a1c024d7116(endon_arr) {
 }
 
 function isattachmentselectfire(weapon, attachment) {
-  basetype = function_7c612ac92ba98dcb(weapon, attachment);
+  basetype = getattachmentbasetype(weapon, attachment);
   return basetype == "selectfire";
 }
 
@@ -202,7 +202,7 @@ function function_4a4895a4576a8fa9() {
   self.headmodel = var_245e9d48c680af8b;
 }
 
-function function_127a31c7d0c84559(radius, team, timeout) {
+function navrepulsorremoveondeath(radius, team, timeout) {
   if(!isDefined(team)) {
     team = "all";
   }
@@ -228,17 +228,17 @@ function function_127a31c7d0c84559(radius, team, timeout) {
 
 function function_447207547d20ae92() {
   assert(isai(self));
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_full";
+  self.aishootstyle = "ai_shoot_styles_full";
 }
 
 function function_e59f66b2ecf3471f() {
   assert(isai(self));
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_single";
+  self.aishootstyle = "ai_shoot_styles_single";
 }
 
 function function_363c08ddb86b8493() {
   assert(isai(self));
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
 }
 
 function function_698286637b54cd38() {
@@ -536,7 +536,7 @@ function function_9246165d7c3054cc(targetfov) {
   level notify("new_fov_lerp");
   level endon("new_fov_lerp");
   startfov = getdvarint(@ "hash_b38fcf293d1e91a8");
-  var_75ecaca4a0b72ac6 = targetfov < startfov;
+  decreasing = targetfov < startfov;
   var_8d514a16217594f0 = startfov;
   increment = 0.1;
   var_34d19d2ddce7fdad = 0;
@@ -548,13 +548,13 @@ function function_9246165d7c3054cc(targetfov) {
       var_34d19d2ddce7fdad++;
 
       if(var_34d19d2ddce7fdad >= 1) {
-        if(var_75ecaca4a0b72ac6) {
+        if(decreasing) {
           var_8d514a16217594f0 -= increment;
         } else {
           var_8d514a16217594f0 += increment;
         }
 
-        var_8d514a16217594f0 = math::round_float(var_8d514a16217594f0, 1, var_75ecaca4a0b72ac6);
+        var_8d514a16217594f0 = math::round_float(var_8d514a16217594f0, 1, decreasing);
         level.player modifybasefov(var_8d514a16217594f0, 0.1);
 
         if(abs(targetfov - var_8d514a16217594f0) <= increment) {
@@ -731,8 +731,8 @@ function function_fbca877c7dca5b38(node, xanim_array) {
   best_anim = undefined;
 
   foreach(xanim in xanim_array) {
-    var_8d531170abaf62f3 = getstartorigin(node.origin, node.angles, xanim);
-    new_dist = distance(level.player.origin, var_8d531170abaf62f3);
+    player_anim_start = getstartorigin(node.origin, node.angles, xanim);
+    new_dist = distance(level.player.origin, player_anim_start);
 
     if(!isDefined(shortest_dist)) {
       shortest_dist = new_dist;
@@ -910,18 +910,18 @@ function function_76bb2b4d7fbca9f8(var_f2e1cc2b69e69745) {
   }
 
   self function_b661b022700ba72f("script", 1);
-  self function_d5cda8a759cc36bc("cower");
+  self setcivstate("cower");
   self waittillmatch("single anim", "end");
 
   if(is_dead_or_dying(self)) {
     return;
   }
 
-  self._blackboard.var_60b33cf695f1d6ed = var_f2e1cc2b69e69745;
+  self._blackboard.coweralias = var_f2e1cc2b69e69745;
   self asmsetstate(self.asmname, "cower");
 }
 
-function function_e0a9de6b0601ed23(attacker, inflictor, meansofdeath, weaponobj, var_16267440af2bca68) {
+function kill_on_anim_end(attacker, inflictor, meansofdeath, weaponobj, var_16267440af2bca68) {
   if(!isDefined(var_16267440af2bca68)) {
     var_16267440af2bca68 = 1;
   }
@@ -1057,7 +1057,7 @@ function function_6d3328a601ec7b66() {
   level.shepherd.script_friendname = "Gen. Shepherd";
   level.shepherd.name = level.shepherd.script_friendname;
   level.shepherd.script_noteworthy = "shepherd";
-  level.shepherd utility::function_ab35ae296c8f8609("Gold Eagle Actual");
+  level.shepherd utility::set_callsign("Gold Eagle Actual");
   level.shepherd.animname = "shepherd";
   level.shepherd magic_bullet_shield(1);
   level.shepherd utility::gun_remove();
@@ -1079,7 +1079,7 @@ function spawn_price(var_c28854ded28e9b4d) {
   level.price = spawn_aitype("actor_jup_ally_hero_price_bravo", origin, angles, 1, undefined, undefined, "price");
   level.price.script_friendname = "Captain Price";
   level.price.name = level.price.script_friendname;
-  level.price utility::function_ab35ae296c8f8609("Bravo 0-6");
+  level.price utility::set_callsign("Bravo 0-6");
   level.price.script_noteworthy = "price";
   level.price set_force_color("b");
   level.price.baseaccuracy = 10;
@@ -1134,12 +1134,12 @@ function function_f1864fb398798ed6(bool) {
 }
 
 function function_4ed62766b5bf01b5() {
-  var_461d69757eeecfc2 = 0.2;
+  threshhold = 0.2;
 
   foreach(weapon in level.player.primaryweapons) {
     fact = level.player getfractionmaxammo(weapon);
 
-    if(fact < var_461d69757eeecfc2) {
+    if(fact < threshhold) {
       return false;
     }
   }
@@ -1157,7 +1157,7 @@ function spawn_ghost() {
   level.ghost = spawn_aitype("actor_jup_ally_hero_ghost_bravo", origin, angles, 1, undefined, undefined, "ghost");
   level.ghost.script_friendname = "Ghost";
   level.ghost.name = level.ghost.script_friendname;
-  level.ghost utility::function_ab35ae296c8f8609("Bravo 0-7");
+  level.ghost utility::set_callsign("Bravo 0-7");
   level.ghost.script_noteworthy = "ghost";
 
   if(!isDefined(level.allies)) {
@@ -1205,7 +1205,7 @@ function function_dc2aa213aa5830aa() {
   level.makarov.ignoreall = 1;
   level.makarov.ignoreme = 1;
   level.makarov.dontevershoot = 1;
-  level.makarov.var_b29c3655b12e292d = 0;
+  level.makarov.cornercheckenabled = 0;
   level.makarov.allowstrafe = 0;
 
   if(starts::is_after_start("ambulance_cinematic")) {
@@ -1234,7 +1234,7 @@ function function_350377b71c3dfd2e() {
   redshirt.name = redshirt.script_friendname;
   redshirt.baseaccuracy = 10;
   redshirt.nogrenadereturnthrow = 1;
-  redshirt utility::function_ab35ae296c8f8609("Bravo 6-3");
+  redshirt utility::set_callsign("Bravo 6-3");
   redshirt set_grenadeammo(0);
   redshirt set_force_color("r");
   redshirt magic_bullet_shield();
@@ -1323,8 +1323,8 @@ function function_eaf6c8fb8d77a3f8() {
   models[models.size] = "head_sc_m_george_bg_civ";
   models[models.size] = "head_sc_m_johnson_var_1";
   models[models.size] = "head_sc_m_vozhyuk_bg_civ";
-  var_cb8e2103144ac736 = randomintrange(0, models.size - 1);
-  return models[var_cb8e2103144ac736];
+  rng = randomintrange(0, models.size - 1);
+  return models[rng];
 }
 
 function function_34def08ffb57e4d2() {
@@ -1332,8 +1332,8 @@ function function_34def08ffb57e4d2() {
   models[models.size] = "civ_amsterdam_male_1_1";
   models[models.size] = "civ_amsterdam_male_2_1";
   models[models.size] = "civ_amsterdam_male_4_1";
-  var_cb8e2103144ac736 = randomintrange(0, models.size - 1);
-  return models[var_cb8e2103144ac736];
+  rng = randomintrange(0, models.size - 1);
+  return models[rng];
 }
 
 function function_5ded78372fface1e() {
@@ -1701,15 +1701,15 @@ function player_pov_animated(val) {
 
   level.player val::reset_all("player_pov_animated");
   utility::function_1ae8f046dee579e0(val);
-  level.player function_af4b9b0f0e7c6c42(0.5);
+  level.player playerunlinkblend(0.5);
   level.player enableweapons();
   level.player enableweaponswitch();
   level.player lerpfovscalefactor(1, 1);
 }
 
-function function_f466456cb68bebec(var_a4facbdb28a053df) {
+function function_f466456cb68bebec(newflag) {
   setomnvar("ui_show_objectives", 1);
-  flag_wait(var_a4facbdb28a053df);
+  flag_wait(newflag);
   setomnvar("ui_show_objectives", 0);
 }
 
@@ -2045,7 +2045,7 @@ function function_66d93860c587390b(gender) {
     classname = var_fa15d01b439ee739;
   }
 
-  actor = fakeactor::function_d9469562fdbb08bc(classname, self.origin, self.angles);
+  actor = fakeactor::spawndroneaitype(classname, self.origin, self.angles);
   actor.origin = scripts\engine\utility::drop_to_ground(self.origin, 10);
   actor.angles = (0, randomint(270), 0);
   waitframe();
@@ -2093,7 +2093,7 @@ function kill_civs_til_player_sees_me() {
   }
 
   self setthreatbiasgroup("kill_civs");
-  var_2edc046f1bfd7d8b = 1;
+  doreaction = 1;
   scripts\asm\juggernaut\juggernaut::enable_casual_killer();
   minspeed = getdvarfloat("ai_enemySpeedScaleMultMin", 0.91);
   maxspeed = getdvarfloat("ai_enemySpeedScaleMultMax", 1.06);
@@ -2374,14 +2374,14 @@ function attack_player() {
 
   self.var_6a5c7ed86ee99c0f = undefined;
   self.dontevershoot = 0;
-  self.var_2bccfebe0b2b566 = undefined;
+  self.fnsixthsensecansee = undefined;
   self.forcesixthsense = undefined;
   self.dontattackme = 0;
   self.ignoreall = 0;
   remove_damage_function(&on_damage);
   self notify("stop_fake_shooting");
   function_2fe3222810af45f4(self, level.player);
-  self function_9f82c74eb1b7caf9(1);
+  self setcanusecover(1);
 
   if(isDefined(self.fake_enemy)) {
     self.fake_enemy delete();
@@ -2435,7 +2435,7 @@ function function_eaa76231b90b51cc() {
 
   self.var_6a5c7ed86ee99c0f = undefined;
   self.dontevershoot = 0;
-  self.var_2bccfebe0b2b566 = undefined;
+  self.fnsixthsensecansee = undefined;
   self.forcesixthsense = undefined;
   self.dontattackme = 0;
   self.ignoreall = 0;
@@ -2624,7 +2624,7 @@ function function_ecf2a28d41191c8f() {
   guys = getaiarrayinradius(self.origin, 1000, "axis");
 
   foreach(guy in guys) {
-    if(isDefined(guy.stealth) && isDefined(guy.var_fe5ebefa740c7106) && guy.var_fe5ebefa740c7106 == 3 && self cansee(guy, 0)) {
+    if(isDefined(guy.stealth) && isDefined(guy.stealth_bsmstate) && guy.stealth_bsmstate == 3 && self cansee(guy, 0)) {
       self aieventlistenerevent("gunshot", level.player, level.player.origin);
     }
   }
@@ -2736,8 +2736,8 @@ function function_6b612dc73d8da5e9(fov, viewdist) {
   fov_yaw = acos(dot);
   eye_yaw = self gettagangles("<dev string:x16c>")[1];
   start = self gettagorigin("<dev string:x16c>");
-  var_8b4c94ee530f045e = 10;
-  scripts\stealth\debug::draw_arc(start, -1 * fov_yaw, fov_yaw, (0, eye_yaw, 0), viewdist, 1, var_8b4c94ee530f045e, color);
+  arc_segs = 10;
+  scripts\stealth\debug::draw_arc(start, -1 * fov_yaw, fov_yaw, (0, eye_yaw, 0), viewdist, 1, arc_segs, color);
 }
 
 function function_6499ce579643b0e5() {

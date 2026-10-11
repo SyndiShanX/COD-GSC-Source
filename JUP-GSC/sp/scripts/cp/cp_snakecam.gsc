@@ -78,7 +78,7 @@ function poke_the_player_after_faux_death() {
   }
 }
 
-function function_216a48e2dbec763f(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_216a48e2dbec763f(instance, part, state, player, bautouse, usestring) {
   if(isDefined(instance)) {
     if(instance.type == "snakecam_interaction") {
       if(!istrue(instance.isinuse)) {
@@ -496,7 +496,7 @@ function restoreweaponsdefaultfunc() {
   }
 
   if(isDefined(self.gunnlessweapon)) {
-    scripts\cp_mp\utility\inventory_utility::function_9897d143c3feee05();
+    scripts\cp_mp\utility\inventory_utility::takegunlessweapon();
   }
 }
 
@@ -707,12 +707,12 @@ function snake_cam_control(cam_struct, var_f55fe461499f0e19) {
   og_angles = cam_struct.angles;
   minpitch = -24;
   maxpitch = 0;
-  var_cb6680317be1e374 = 55;
-  minyaw = og_angles[1] - var_cb6680317be1e374;
-  maxyaw = og_angles[1] + var_cb6680317be1e374;
+  yawdeltamax = 55;
+  minyaw = og_angles[1] - yawdeltamax;
+  maxyaw = og_angles[1] + yawdeltamax;
   minroll = og_angles[2] - 15;
   maxroll = og_angles[2] + 15;
-  var_827abacd5ca8f6b3 = 20;
+  ddeadzone = 20;
   dmaxroll = 10;
   var_440ebeeb83bd05a8 = 0.6;
   var_75eb1524afeb7f2b = 0.8;
@@ -726,7 +726,7 @@ function snake_cam_control(cam_struct, var_f55fe461499f0e19) {
   currentangles = self.angles;
 
   while(istrue(self.isusingcamera)) {
-    var_b4f55166f66361e9 = cam_struct.angles + (0, -90, 0);
+    currentcamangles = cam_struct.angles + (0, -90, 0);
     input = self getplayerangles();
     multiplier = 0;
     var_fed6e82d22bb75e = length(currentangles - input);
@@ -975,7 +975,7 @@ function disable_nearby_snake_cam_after_open() {
   self notify("single_disable_nearby_snake_cam_after_open");
   self endon("single_disable_nearby_snake_cam_after_open");
   var_6905e1cf687a2fd9 = 0;
-  var_2c2ce74038f7c6cc = undefined;
+  openeddoor = undefined;
 
   while(!istrue(var_6905e1cf687a2fd9)) {
     var_6905e1cf687a2fd9 = 0;
@@ -983,26 +983,26 @@ function disable_nearby_snake_cam_after_open() {
     foreach(door in self.var_8c73c4add30bb4b2) {
       if(!door scriptabledoorisclosed()) {
         var_6905e1cf687a2fd9 = 1;
-        var_2c2ce74038f7c6cc = door;
+        openeddoor = door;
       }
     }
 
     waitframe();
   }
 
-  if(!isDefined(var_2c2ce74038f7c6cc)) {
-    var_2c2ce74038f7c6cc = self.var_8c73c4add30bb4b2[0];
+  if(!isDefined(openeddoor)) {
+    openeddoor = self.var_8c73c4add30bb4b2[0];
   }
 
-  nearbyplayer = give_closest_player_nearby(var_2c2ce74038f7c6cc.origin, 14400);
+  nearbyplayer = give_closest_player_nearby(openeddoor.origin, 14400);
 
   if(isDefined(nearbyplayer)) {
-    level notify("door_event", var_2c2ce74038f7c6cc.origin, nearbyplayer);
+    level notify("door_event", openeddoor.origin, nearbyplayer);
   } else {
-    level notify("door_event", var_2c2ce74038f7c6cc.origin);
+    level notify("door_event", openeddoor.origin);
   }
 
-  var_be00c97a9ae50349 = scripts\engine\utility::get_array_of_closest(var_2c2ce74038f7c6cc.origin, scripts\engine\utility::getStructArray("snakecam_interaction", "script_noteworthy"), [], 8, 256);
+  var_be00c97a9ae50349 = scripts\engine\utility::get_array_of_closest(openeddoor.origin, scripts\engine\utility::getStructArray("snakecam_interaction", "script_noteworthy"), [], 8, 256);
 
   if(isDefined(var_be00c97a9ae50349)) {
     foreach(var_1d4d2fd74b4d40e0 in var_be00c97a9ae50349) {
@@ -1139,7 +1139,7 @@ function function_8cbc97ce93bb87f8(snakecam) {
   }
 }
 
-function function_45da058b481f8049(streakinfo, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b, var_f6a32dcc4b19aad9, var_67a06b4ea269058e, waittime) {
+function function_45da058b481f8049(streakinfo, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback, var_f6a32dcc4b19aad9, var_67a06b4ea269058e, waittime) {
   level endon("game_ended");
   self endon("disconnect");
   weaponbasename = "ks_remote_device_mp";
@@ -1163,7 +1163,7 @@ function function_45da058b481f8049(streakinfo, weapongivencallback, var_8fd4d93d
   val::set("snakecam", "melee", 0);
   val::set("snakecam", "offhand_weapons", 0);
   val::set("snakecam", "killstreaks", 0);
-  switchresult = switchtodeployweapon(weaponobj, streakinfo, &function_67f13db1409ec06d, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b);
+  switchresult = switchtodeployweapon(weaponobj, streakinfo, &function_67f13db1409ec06d, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback);
 
   if(isDefined(self) && scripts\cp_mp\utility\player_utility::_isalive()) {
     val::reset_all("snakecam");

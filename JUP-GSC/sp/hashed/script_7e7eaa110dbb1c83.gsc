@@ -153,13 +153,13 @@ function function_95374dd0e3f02eee(debug_ref) {
       }
 
       level.player scripts\cp_mp\utility\game_utility::function_20cb4a5f727abe6e(0);
-      thread scripts\cp_mp\utility\game_utility::function_852712268d005332(level.player, level.world_fade, 0);
+      thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(level.player, level.world_fade, 0);
       announcement("<dev string:x1a5>" + level.world_fade);
       break;
     case #"hash_e5264cb1def599e3":
       level.player scripts\cp_mp\utility\game_utility::function_20cb4a5f727abe6e(0);
       thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(level.player, 0, 0);
-      thread scripts\cp_mp\utility\game_utility::function_852712268d005332(level.player, 0, 0);
+      thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(level.player, 0, 0);
       break;
   }
 }
@@ -604,7 +604,7 @@ function function_e73f88105b0ed543() {
   setDvar(@ "hash_2a9a0878901a614e", -20);
   setDvar(@ "hash_c9cc12c56dbb4a01", 10);
 
-  if(function_3cb5da19764baa3() == "JUP") {
+  if(getprojectname() == "JUP") {
     setDvar(@ "hash_8136ae00f7d4f22f", 0);
   }
 }
@@ -734,7 +734,7 @@ function parachute_monitor() {
     level waittill("player_spawned");
   }
 
-  level thread function_572d32ce5c136049();
+  level thread watch_player_jump();
 
   for(;;) {
     level.player waittill("skydive_deployparachute");
@@ -745,7 +745,7 @@ function parachute_monitor() {
   }
 }
 
-function function_572d32ce5c136049() {
+function watch_player_jump() {
   while(true) {
     var_b6a57549a0ce42f1 = spawnStruct();
 
@@ -1097,10 +1097,10 @@ function function_316420283a77f32b(equipments, var_c8d0de3b7f57bd7d) {
   }
 
   foreach(equipment in equipments) {
-    var_cabc886d846dd979 = default_to(var_c8d0de3b7f57bd7d, function_c52192a1d946af6e(equipment));
+    omnvarval = default_to(var_c8d0de3b7f57bd7d, function_c52192a1d946af6e(equipment));
 
-    if(isDefined(var_cabc886d846dd979)) {
-      self setclientomnvar("ui_special_equipment_" + equipment, var_cabc886d846dd979);
+    if(isDefined(omnvarval)) {
+      self setclientomnvar("ui_special_equipment_" + equipment, omnvarval);
     }
   }
 }
@@ -1327,8 +1327,8 @@ function dungeons_common_exfil_reduceaiaggression(ai_array, var_e7973285a767ead9
   foreach(ai in ai_array) {
     if(isalive(ai)) {
       playerpos = level.player.origin;
-      var_a5bd93f48868752b = ai.origin;
-      var_cedbb1f41f5e3294 = distance(var_a5bd93f48868752b, playerpos);
+      aipos = ai.origin;
+      var_cedbb1f41f5e3294 = distance(aipos, playerpos);
 
       if(var_cedbb1f41f5e3294 <= var_fa1ab29bf6705c71) {
         ai scripts\cp_mp\agents\agent_utils::despawnagent();
@@ -1985,20 +1985,20 @@ function getplayerrespawnloc(downed_player) {
 function get_available_respawn_locs() {
   available_respawn_locs = [];
 
-  foreach(var_c337fc4166b34662 in level.active_player_respawn_locs) {
-    if(!canspawn(var_c337fc4166b34662.origin)) {
+  foreach(player_respawn_loc in level.active_player_respawn_locs) {
+    if(!canspawn(player_respawn_loc.origin)) {
       continue;
     }
 
-    if(positionwouldtelefrag(var_c337fc4166b34662.origin)) {
+    if(positionwouldtelefrag(player_respawn_loc.origin)) {
       continue;
     }
 
-    if(is_respawn_loc_near_alive_enemies(var_c337fc4166b34662)) {
+    if(is_respawn_loc_near_alive_enemies(player_respawn_loc)) {
       continue;
     }
 
-    available_respawn_locs[available_respawn_locs.size] = var_c337fc4166b34662;
+    available_respawn_locs[available_respawn_locs.size] = player_respawn_loc;
   }
 
   return available_respawn_locs;
@@ -2260,8 +2260,8 @@ function enter_laststand(player, attacker) {
   have_self_revive = player has_auto_revive();
 
   if(have_self_revive) {
-    var_f4a1f546fffcd5e4 = isplayingsolo() || level.only_one_player;
-    player notify("player_has_self_revive", var_f4a1f546fffcd5e4);
+    hasselfrevive = isplayingsolo() || level.only_one_player;
+    player notify("player_has_self_revive", hasselfrevive);
   }
 
   if(isDefined(player.mule_weapon) && !istrue(player.playing_ghosts_n_skulls)) {

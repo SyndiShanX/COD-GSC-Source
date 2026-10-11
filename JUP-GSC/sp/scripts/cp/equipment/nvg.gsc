@@ -47,7 +47,7 @@ function runnvg(var_24ad61b67a4e13e7) {
   }
 
   if(scripts\common\nvg_player::function_8d3da9226f5c8c0e()) {
-    thread scripts\common\nvg_player::function_296ee731835b1e4b();
+    thread scripts\common\nvg_player::player_nvg_lightmodel_extras_watcher();
   }
 
   thread function_78104edc6ce30c69();
@@ -137,18 +137,18 @@ function light_meter_hud() {
   for(var_e7c9c132ee82ad4f = 0; true; var_e7c9c132ee82ad4f = 0) {
     self.nvg waittill("update_nvg_hud");
     noise needle_noise();
-    var_f665c97965854720 = self.nvg.lightmeter;
-    var_f665c97965854720 = clamp(var_f665c97965854720, noise.mag, 1 - noise.mag);
-    var_f665c97965854720 += noise.data["val"];
-    self setclientomnvar("ui_nvg_light_meter_needle", var_f665c97965854720);
+    needle_position = self.nvg.lightmeter;
+    needle_position = clamp(needle_position, noise.mag, 1 - noise.mag);
+    needle_position += noise.data["val"];
+    self setclientomnvar("ui_nvg_light_meter_needle", needle_position);
 
-    if(var_f665c97965854720 >= 0.9 && is_nvg_on() && !var_e7c9c132ee82ad4f) {
+    if(needle_position >= 0.9 && is_nvg_on() && !var_e7c9c132ee82ad4f) {
       self playSound("item_nightvision_lightmeter_warning");
       var_e7c9c132ee82ad4f = 1;
       continue;
     }
 
-    if(var_f665c97965854720 < 0.9 && is_nvg_on() && var_e7c9c132ee82ad4f) {}
+    if(needle_position < 0.9 && is_nvg_on() && var_e7c9c132ee82ad4f) {}
   }
 }
 

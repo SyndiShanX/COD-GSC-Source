@@ -415,34 +415,34 @@ function add_emp_ent(ent) {
   return id;
 }
 
-function play_scramble(var_fa88f8af6b2f44d0, isjammer) {
+function play_scramble(scramblelevel, isjammer) {
   if(istrue(isjammer)) {
-    function_1e2a945f433a4672(var_fa88f8af6b2f44d0);
+    function_1e2a945f433a4672(scramblelevel);
     return;
   }
 
-  play_emp_scramble(var_fa88f8af6b2f44d0);
+  play_emp_scramble(scramblelevel);
 }
 
-function stop_scramble(var_fa88f8af6b2f44d0, isjammer) {
+function stop_scramble(scramblelevel, isjammer) {
   if(istrue(isjammer)) {
-    function_f9646d0da61017ec(var_fa88f8af6b2f44d0);
+    function_f9646d0da61017ec(scramblelevel);
     return;
   }
 
-  stop_emp_scramble(var_fa88f8af6b2f44d0);
+  stop_emp_scramble(scramblelevel);
 }
 
-function function_396e8b70241f9f10(var_fa88f8af6b2f44d0, var_699323575339379a) {
+function function_396e8b70241f9f10(scramblelevel, var_699323575339379a) {
   if(istrue(var_699323575339379a)) {
-    return (isDefined(self.var_a0d8d8b22da8ec61) && isDefined(self.var_a0d8d8b22da8ec61[var_fa88f8af6b2f44d0]));
+    return (isDefined(self.var_a0d8d8b22da8ec61) && isDefined(self.var_a0d8d8b22da8ec61[scramblelevel]));
   }
 
-  return isDefined(self.empscramblelevels) && isDefined(self.empscramblelevels[var_fa88f8af6b2f44d0]);
+  return isDefined(self.empscramblelevels) && isDefined(self.empscramblelevels[scramblelevel]);
 }
 
-function play_emp_scramble(var_fa88f8af6b2f44d0) {
-  if(var_fa88f8af6b2f44d0 == 0) {
+function play_emp_scramble(scramblelevel) {
+  if(scramblelevel == 0) {
     return;
   }
 
@@ -450,27 +450,27 @@ function play_emp_scramble(var_fa88f8af6b2f44d0) {
     self.empscramblelevels = [];
   }
 
-  var_4fdc563c6178bcbf = self.empscramblelevels[var_fa88f8af6b2f44d0];
+  var_4fdc563c6178bcbf = self.empscramblelevels[scramblelevel];
 
   if(!isDefined(var_4fdc563c6178bcbf)) {
     var_4fdc563c6178bcbf = 0;
   }
 
-  self.empscramblelevels[var_fa88f8af6b2f44d0] = var_4fdc563c6178bcbf + 1;
+  self.empscramblelevels[scramblelevel] = var_4fdc563c6178bcbf + 1;
   _update_emp_scramble();
 }
 
-function stop_emp_scramble(var_fa88f8af6b2f44d0) {
-  if(var_fa88f8af6b2f44d0 == 0) {
+function stop_emp_scramble(scramblelevel) {
+  if(scramblelevel == 0) {
     return;
   }
 
   assert(isDefined(self.empscramblelevels), "stopped scramble effect without playing it");
-  assert(isDefined(self.empscramblelevels[var_fa88f8af6b2f44d0]), "need to play scramble effect level before stopping it");
-  self.empscramblelevels[var_fa88f8af6b2f44d0] -= 1;
+  assert(isDefined(self.empscramblelevels[scramblelevel]), "need to play scramble effect level before stopping it");
+  self.empscramblelevels[scramblelevel] -= 1;
 
-  if(self.empscramblelevels[var_fa88f8af6b2f44d0] == 0) {
-    self.empscramblelevels[var_fa88f8af6b2f44d0] = undefined;
+  if(self.empscramblelevels[scramblelevel] == 0) {
+    self.empscramblelevels[scramblelevel] = undefined;
   }
 
   _update_emp_scramble();
@@ -485,9 +485,9 @@ function function_f7c6d776d032122f() {
 function private _update_emp_scramble() {
   highestlevel = 0;
 
-  foreach(var_fa88f8af6b2f44d0, _ in self.empscramblelevels) {
-    if(var_fa88f8af6b2f44d0 > highestlevel) {
-      highestlevel = var_fa88f8af6b2f44d0;
+  foreach(scramblelevel, _ in self.empscramblelevels) {
+    if(scramblelevel > highestlevel) {
+      highestlevel = scramblelevel;
     }
   }
 
@@ -497,17 +497,17 @@ function private _update_emp_scramble() {
 function private function_9884b1bc85070e0e() {
   highestlevel = 0;
 
-  foreach(var_fa88f8af6b2f44d0, _ in self.var_a0d8d8b22da8ec61) {
-    if(var_fa88f8af6b2f44d0 > highestlevel) {
-      highestlevel = var_fa88f8af6b2f44d0;
+  foreach(scramblelevel, _ in self.var_a0d8d8b22da8ec61) {
+    if(scramblelevel > highestlevel) {
+      highestlevel = scramblelevel;
     }
   }
 
   self setclientomnvar("ui_jammer_strength", highestlevel);
 }
 
-function function_1e2a945f433a4672(var_fa88f8af6b2f44d0) {
-  if(var_fa88f8af6b2f44d0 == 0) {
+function function_1e2a945f433a4672(scramblelevel) {
+  if(scramblelevel == 0) {
     return;
   }
 
@@ -515,47 +515,47 @@ function function_1e2a945f433a4672(var_fa88f8af6b2f44d0) {
     self.var_a0d8d8b22da8ec61 = [];
   }
 
-  var_8d59c19c765106e8 = self.var_a0d8d8b22da8ec61[var_fa88f8af6b2f44d0];
+  var_8d59c19c765106e8 = self.var_a0d8d8b22da8ec61[scramblelevel];
 
   if(!isDefined(var_8d59c19c765106e8)) {
     var_8d59c19c765106e8 = 0;
   }
 
-  self.var_a0d8d8b22da8ec61[var_fa88f8af6b2f44d0] = var_8d59c19c765106e8 + 1;
+  self.var_a0d8d8b22da8ec61[scramblelevel] = var_8d59c19c765106e8 + 1;
   function_9884b1bc85070e0e();
 }
 
-function function_f9646d0da61017ec(var_fa88f8af6b2f44d0) {
-  if(var_fa88f8af6b2f44d0 == 0) {
+function function_f9646d0da61017ec(scramblelevel) {
+  if(scramblelevel == 0) {
     return;
   }
 
   assert(isDefined(self.var_a0d8d8b22da8ec61), "stopped jammer scramble effect without playing it");
-  assert(isDefined(self.var_a0d8d8b22da8ec61[var_fa88f8af6b2f44d0]), "need to play jammer scramble effect level before stopping it");
-  self.var_a0d8d8b22da8ec61[var_fa88f8af6b2f44d0] -= 1;
+  assert(isDefined(self.var_a0d8d8b22da8ec61[scramblelevel]), "need to play jammer scramble effect level before stopping it");
+  self.var_a0d8d8b22da8ec61[scramblelevel] -= 1;
 
-  if(self.var_a0d8d8b22da8ec61[var_fa88f8af6b2f44d0] == 0) {
-    self.var_a0d8d8b22da8ec61[var_fa88f8af6b2f44d0] = undefined;
+  if(self.var_a0d8d8b22da8ec61[scramblelevel] == 0) {
+    self.var_a0d8d8b22da8ec61[scramblelevel] = undefined;
   }
 
   function_9884b1bc85070e0e();
 }
 
-function play_scramble_for_player_until_cleared(player, var_fa88f8af6b2f44d0) {
-  player scripts\cp_mp\emp_debuff::play_emp_scramble(var_fa88f8af6b2f44d0);
+function play_scramble_for_player_until_cleared(player, scramblelevel) {
+  player scripts\cp_mp\emp_debuff::play_emp_scramble(scramblelevel);
   waittill_any_2("emp_cleared", "death");
 
   if(isDefined(player)) {
-    player scripts\cp_mp\emp_debuff::stop_emp_scramble(var_fa88f8af6b2f44d0);
+    player scripts\cp_mp\emp_debuff::stop_emp_scramble(scramblelevel);
   }
 }
 
-function function_9d31a370d60f86da(player, var_fa88f8af6b2f44d0) {
-  player scripts\cp_mp\emp_debuff::play_emp_scramble(var_fa88f8af6b2f44d0);
+function function_9d31a370d60f86da(player, scramblelevel) {
+  player scripts\cp_mp\emp_debuff::play_emp_scramble(scramblelevel);
   waittill_any_2("dronegun_emp_cleared", "death");
 
   if(isDefined(player)) {
-    player scripts\cp_mp\emp_debuff::stop_emp_scramble(var_fa88f8af6b2f44d0);
+    player scripts\cp_mp\emp_debuff::stop_emp_scramble(scramblelevel);
   }
 }
 

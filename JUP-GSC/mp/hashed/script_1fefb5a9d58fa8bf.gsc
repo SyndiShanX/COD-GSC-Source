@@ -266,9 +266,9 @@ function function_a2415c12f0dccc7b(player, var_2b465f51da1e8fcf, var_2b465e51da1
   var_871bdbc7e5abb341 = [];
 
   for(i = 0; i < 50; i++) {
-    lootid = player getplayerdata(level.var_5d69837cf4db0407, "<dev string:x268>", i, "<dev string:x278>");
-    quantity = player getplayerdata(level.var_5d69837cf4db0407, "<dev string:x268>", i, "<dev string:x282>");
-    lootedquantity = player getplayerdata(level.var_5d69837cf4db0407, "<dev string:x268>", i, "<dev string:x28e>");
+    lootid = player getplayerdata(level.progressiongroup, "<dev string:x268>", i, "<dev string:x278>");
+    quantity = player getplayerdata(level.progressiongroup, "<dev string:x268>", i, "<dev string:x282>");
+    lootedquantity = player getplayerdata(level.progressiongroup, "<dev string:x268>", i, "<dev string:x28e>");
     scriptablename = scripts\cp_mp\utility\loot::getscriptablefromlootid(lootid);
     value = function_10440574d3361667(lootid);
     var_871bdbc7e5abb341[var_871bdbc7e5abb341.size] = [i, lootid, scriptablename, quantity, lootedquantity, value];

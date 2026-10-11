@@ -153,7 +153,7 @@ function private race_start(race, player) {
   thread checkpoint_increment(race);
   player playlocalsound("wz_parkour_race_start");
 
-  while(player namespace_53fc9ddbb516e6e1::function_87072b42853a9c58("specialty_zombie_legs")) {
+  while(player namespace_53fc9ddbb516e6e1::hasperksharedfunc("specialty_zombie_legs")) {
     if(race.checkpoint_duration <= 3 && race.checkpoint_duration != 0) {
       player playlocalsound("wz_parkour_race_time_ticking_0" + race.checkpoint_duration);
     }
@@ -198,12 +198,12 @@ function private race_completed(race) {
   race notify("sidequest_race_end");
 }
 
-function private function_cd537c18037efbe(race, var_5552fd240a86b1ae) {
+function private function_cd537c18037efbe(race, v_drop_origin) {
   level endon("game_ended");
   race.rewards = array_randomize(race.rewards);
 
-  if(!isDefined(var_5552fd240a86b1ae)) {
-    var_5552fd240a86b1ae = race.reward_origin;
+  if(!isDefined(v_drop_origin)) {
+    v_drop_origin = race.reward_origin;
   }
 
   reward_size = race.rewards.size;
@@ -219,9 +219,9 @@ function private function_cd537c18037efbe(race, var_5552fd240a86b1ae) {
     angle = angle_frac * i;
     xadd = cos(angle) * radius;
     yadd = sin(angle) * radius;
-    x = var_5552fd240a86b1ae[0] + xadd;
-    y = var_5552fd240a86b1ae[1] + yadd;
-    z = var_5552fd240a86b1ae[2];
+    x = v_drop_origin[0] + xadd;
+    y = v_drop_origin[1] + yadd;
+    z = v_drop_origin[2];
     spawn_location = (x, y, z + 20);
 
     if(utility::string_starts_with(race.rewards[i], "brloot")) {
@@ -359,7 +359,7 @@ function private function_8c441f0c99924b47(race, player) {
   objidpoolmanager::objective_playermask_addshowplayer(objid, player);
 }
 
-function private function_2e04081059796fa1(scriptable, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_2e04081059796fa1(scriptable, part, state, player, bautouse, usestring) {
   quest = br_map_quest::get_quest("race");
   race = scriptable.race;
   quest thread race_start(race, player);

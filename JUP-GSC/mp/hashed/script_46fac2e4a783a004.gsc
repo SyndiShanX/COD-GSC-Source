@@ -22,23 +22,23 @@ function function_b7281bfb9645666(h, s, v) {
   }
 
   h = mod(h, 360);
-  var_1315e257cd87d760 = floor(h / 60);
-  var_8367d2ae5b6edba2 = h / 60 - var_1315e257cd87d760;
+  hue_sector = floor(h / 60);
+  var_8367d2ae5b6edba2 = h / 60 - hue_sector;
   p = v * (1 - s);
   q = v * (1 - s * var_8367d2ae5b6edba2);
   t = v * (1 - s * (1 - var_8367d2ae5b6edba2));
 
-  if(var_1315e257cd87d760 == 0) {
+  if(hue_sector == 0) {
     return (v, t, p);
-  } else if(var_1315e257cd87d760 == 1) {
+  } else if(hue_sector == 1) {
     return (q, v, p);
-  } else if(var_1315e257cd87d760 == 2) {
+  } else if(hue_sector == 2) {
     return (p, v, t);
-  } else if(var_1315e257cd87d760 == 3) {
+  } else if(hue_sector == 3) {
     return (p, q, v);
-  } else if(var_1315e257cd87d760 == 4) {
+  } else if(hue_sector == 4) {
     return (t, p, v);
-  } else if(var_1315e257cd87d760 == 5) {
+  } else if(hue_sector == 5) {
     return (v, p, q);
   }
 
@@ -201,7 +201,7 @@ function pulse_function(x) {
   return clamp((y + 2) / 4, 0, 1);
 }
 
-function lerp_rgb_wheel(duration, var_7c6637a253602501, var_46be16725eefeedd) {
+function lerp_rgb_wheel(duration, var_7c6637a253602501, saturation) {
   self notify("lerp_rgb_wheel");
   self endon("lerp_rgb_wheel");
 
@@ -209,20 +209,20 @@ function lerp_rgb_wheel(duration, var_7c6637a253602501, var_46be16725eefeedd) {
     var_7c6637a253602501 = 0;
   }
 
-  if(!isDefined(var_46be16725eefeedd)) {
-    var_46be16725eefeedd = 1;
+  if(!isDefined(saturation)) {
+    saturation = 1;
   }
 
-  self setlightcolor(function_b7281bfb9645666(var_7c6637a253602501, var_46be16725eefeedd, 1));
+  self setlightcolor(function_b7281bfb9645666(var_7c6637a253602501, saturation, 1));
   steps = floor(duration * 20);
 
   for(i = 0; i < steps; i++) {
     t = float(i / steps);
-    self setlightcolor(function_b7281bfb9645666(360 * t + var_7c6637a253602501, var_46be16725eefeedd, 1));
+    self setlightcolor(function_b7281bfb9645666(360 * t + var_7c6637a253602501, saturation, 1));
     wait 0.05;
   }
 
-  self setlightcolor(function_b7281bfb9645666(360 + var_7c6637a253602501, var_46be16725eefeedd, 1));
+  self setlightcolor(function_b7281bfb9645666(360 + var_7c6637a253602501, saturation, 1));
 }
 
 function function_569aec3f2378f201() {

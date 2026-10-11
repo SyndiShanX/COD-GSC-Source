@@ -107,10 +107,10 @@ function function_95bb73feb4a138ab() {
 function assassination_begin() {
   self endon("activity_ended");
   self endon("instance_destroyed");
-  self.targetteam = function_84f35f18bc171c4b(self.var_6c29f2fdb0054bbe[0]);
+  self.targetteam = function_84f35f18bc171c4b(self.playerparticipants[0]);
 
   if(isDefined(self.targetteam)) {
-    self.hunterteam = self.var_6c29f2fdb0054bbe[0].team;
+    self.hunterteam = self.playerparticipants[0].team;
     function_c7e3cd9f45114cc6(1);
     self.targetplayer = function_7509965d9b7b0783(self.targetteam);
 
@@ -445,7 +445,7 @@ function function_e730864bccf684a8(issuccess, reason) {
 function function_4068fa9a397f767() {
   self endon("instance_destroyed");
   var_6c1956fd6ce84917 = 1;
-  var_cc7aa96a854fd8ee = namespace_71ca15b739deab72::function_3ae7f99339b96499(self.var_6c29f2fdb0054bbe[0].origin, var_6c1956fd6ce84917);
+  var_cc7aa96a854fd8ee = namespace_71ca15b739deab72::function_3ae7f99339b96499(self.playerparticipants[0].origin, var_6c1956fd6ce84917);
   return var_cc7aa96a854fd8ee;
 }
 

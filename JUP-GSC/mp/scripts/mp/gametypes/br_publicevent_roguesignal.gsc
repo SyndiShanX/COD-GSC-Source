@@ -491,7 +491,7 @@ function function_9c876f98fad72467() {
 function function_1e66b4ffb3e558c(items, instance) {
   if(istrue(instance.var_ee75ebf2a3dc9eb0)) {
     if(utility::issharedfuncdefined("roguesignal", "cache_reward")) {
-      items = instance utility::function_f3bb4f4911a1beb2("roguesignal", "cache_reward", items);
+      items = instance utility::callsharedfunc("roguesignal", "cache_reward", items);
       assertex(isarray(items) && items.size > 0, "<dev string:x1c>" + "<dev string:x55>");
     } else {
       weapon_str = "jup_pi_raygun_mp";
@@ -615,7 +615,7 @@ function on_player_killed(deathdata) {
 
 function on_player_damaged(damagedata) {
   if(function_2536f6802979033b(damagedata)) {
-    total_damage = damagedata.idamage + damagedata.var_1da1a66b5c6a06a7;
+    total_damage = damagedata.idamage + damagedata.lightarmordamage;
 
     if(isDefined(damagedata.smeansofdeath) && (damagedata.smeansofdeath == "MOD_EXECUTION" || damagedata.smeansofdeath == "MOD_MELEE_TAKEDOWN")) {
       victim = damagedata.victim;
@@ -757,7 +757,7 @@ function function_2536f6802979033b(data) {
     }
   }
 
-  if(level.var_7576c890644a91ad.currenteventtype == 3 && data.idamage + data.var_1da1a66b5c6a06a7 == 0) {
+  if(level.var_7576c890644a91ad.currenteventtype == 3 && data.idamage + data.lightarmordamage == 0) {
     return false;
   }
 

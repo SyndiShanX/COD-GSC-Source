@@ -11,7 +11,7 @@
 #using scripts\sp\utility;
 #namespace barrel_common;
 
-function barrel_setup(subtype, barrel_health, barrel_radius, amp_normal, amp_max, min_range_max_amp, var_3f07f189631aa7b6) {
+function barrel_setup(subtype, barrel_health, barrel_radius, amp_normal, amp_max, min_range_max_amp, repulsor_radius) {
   if(!isDefined(level.phys_barrels)) {
     level.phys_barrels = [];
   }
@@ -33,7 +33,7 @@ function barrel_setup(subtype, barrel_health, barrel_radius, amp_normal, amp_max
 
 function barrel_nav_obstruction() {
   navobstruction = createnavobstaclebybounds(self.origin, (12, 12, 50), (0, 0, 0));
-  var_8edeba7f896c4553 = undefined;
+  repulsor_name = undefined;
 
   while(isDefined(self) && self.spewtags.size <= 0) {
     wait 0.05;
@@ -45,8 +45,8 @@ function barrel_nav_obstruction() {
   }
 
   var_90d8a00109786d78 = self.phys_barrel_radius / 4.5;
-  var_8edeba7f896c4553 = "barrel" + self getentitynumber();
-  createnavrepulsor(var_8edeba7f896c4553, -1, self, var_90d8a00109786d78, 1);
+  repulsor_name = "barrel" + self getentitynumber();
+  createnavrepulsor(repulsor_name, -1, self, var_90d8a00109786d78, 1);
   waittill_either("barrel_death", "entitydeleted");
   destroynavobstacle(navobstruction);
 }
@@ -193,7 +193,7 @@ function isvalidbarreldamage(attacker, type) {
   return true;
 }
 
-function barrel_launch(explodeorigin, var_d062fa74a20c4a2, timer) {
+function barrel_launch(explodeorigin, distancefrombarrel, timer) {
   self endon("barrel_death");
   wait timer;
 
@@ -202,16 +202,16 @@ function barrel_launch(explodeorigin, var_d062fa74a20c4a2, timer) {
   }
 
   throwvec = vectorNormalize(self.origin - explodeorigin);
-  var_ca8f37e9d92bb48 = self.phys_amp_normal;
+  physamplifier = self.phys_amp_normal;
 
-  if(var_d062fa74a20c4a2 <= self.min_range_max_amp) {
-    var_ca8f37e9d92bb48 = self.phys_amp_max;
+  if(distancefrombarrel <= self.min_range_max_amp) {
+    physamplifier = self.phys_amp_max;
   }
 
-  distcheck = self.phys_barrel_radius - var_d062fa74a20c4a2;
-  var_7e47bfbb162bf7fe = distcheck / self.phys_barrel_radius;
-  var_7e47bfbb162bf7fe *= var_ca8f37e9d92bb48;
-  self physicslaunchserver(self.origin, throwvec * var_7e47bfbb162bf7fe);
+  distcheck = self.phys_barrel_radius - distancefrombarrel;
+  throwamplifier = distcheck / self.phys_barrel_radius;
+  throwamplifier *= physamplifier;
+  self physicslaunchserver(self.origin, throwvec * throwamplifier);
 }
 
 function barrel_one_hit_kill() {

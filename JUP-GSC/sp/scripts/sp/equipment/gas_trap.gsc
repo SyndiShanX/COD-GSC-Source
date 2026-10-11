@@ -15,8 +15,8 @@
 #namespace gas_trap;
 
 function precache(offhand) {
-  level.offhands.var_85514a13c82068fd = spawnStruct();
-  level.offhands.var_85514a13c82068fd.placedentities = [];
+  level.offhands.gastrap = spawnStruct();
+  level.offhands.gastrap.placedentities = [];
   registeroffhandfirefunc(offhand, &function_6d77cb0b51cbbb04);
 }
 
@@ -29,7 +29,7 @@ function function_6d77cb0b51cbbb04(grenade, weapon) {
   thread function_d66e2c658314e5ac(grenade, self, self.team, weapon);
 }
 
-function function_d66e2c658314e5ac(grenade, mineowner, team, var_750c0edec8558bf1) {
+function function_d66e2c658314e5ac(grenade, mineowner, team, ownerweaponobj) {
   grenade endon("entitydeleted");
   grenade endon("death");
   grenade setentityowner(mineowner);
@@ -38,10 +38,10 @@ function function_d66e2c658314e5ac(grenade, mineowner, team, var_750c0edec8558bf
   grenade.targetname = "offhand_car_grenade";
   var_ce3e248b427582f1 = grenade.model;
   grenade waittill("missile_stuck", stuckto, var_75ac1fbce3945650, surfacetype, velocity, position, hitnormal);
-  thread function_6e5ce23490c6fea6(grenade, var_750c0edec8558bf1, &"EQUIPMENT/IMPROVISED_MINE_PICKUP");
+  thread function_6e5ce23490c6fea6(grenade, ownerweaponobj, &"EQUIPMENT/IMPROVISED_MINE_PICKUP");
   childthread function_c79a9033e727667f(grenade, mineowner, team);
   childthread function_1e004fb8a230e0b(grenade);
-  level.offhands.var_85514a13c82068fd.placedentities = array_add(level.offhands.var_85514a13c82068fd.placedentities, grenade);
+  level.offhands.gastrap.placedentities = array_add(level.offhands.gastrap.placedentities, grenade);
 }
 
 function function_601bfa752385fed2(grenade, mineowner) {
@@ -67,8 +67,8 @@ function function_5f0f344f30a1f4b(grenade, mineowner, var_ff882f75755f7367) {
     event = function_7b9e0e7ca4b3b940(grenade, "entitydeleted", interact, "trigger");
 
     if(event == "trigger") {
-      if(isDefined(level.offhands.var_b57472ecae671752["gas_trap"])) {
-        currentammo = [[level.offhands.var_b57472ecae671752["gas_trap"]]]("gas_trap");
+      if(isDefined(level.offhands.getammooverridefunctions["gas_trap"])) {
+        currentammo = [[level.offhands.getammooverridefunctions["gas_trap"]]]("gas_trap");
       } else {
         currentammo = level.player getweaponammoclip(var_ff882f75755f7367);
       }
@@ -94,8 +94,8 @@ function function_922f5f6ae49a1314(grenade, interact) {
   grenade endon("entitydeleted");
   interact endon("trigger");
 
-  if(isDefined(level.offhands.var_b57472ecae671752["gas_trap"])) {
-    currentammo = [[level.offhands.var_b57472ecae671752["gas_trap"]]]("gas_trap");
+  if(isDefined(level.offhands.getammooverridefunctions["gas_trap"])) {
+    currentammo = [[level.offhands.getammooverridefunctions["gas_trap"]]]("gas_trap");
   } else {
     currentammo = level.player getweaponammoclip("gas_trap");
   }
@@ -109,8 +109,8 @@ function function_922f5f6ae49a1314(grenade, interact) {
   }
 
   while(true) {
-    if(isDefined(level.offhands.var_b57472ecae671752["gas_trap"])) {
-      currentammo = [[level.offhands.var_b57472ecae671752["gas_trap"]]]("gas_trap");
+    if(isDefined(level.offhands.getammooverridefunctions["gas_trap"])) {
+      currentammo = [[level.offhands.getammooverridefunctions["gas_trap"]]]("gas_trap");
     } else {
       currentammo = level.player getweaponammoclip("gas_trap");
     }
@@ -209,8 +209,8 @@ function function_d27019e6b9fd97be(grenade, mineowner) {
   grenade detonate();
 }
 
-function function_d05d967e8630a32a(var_85514a13c82068fd) {
-  level.offhands.var_85514a13c82068fd.placedentities = array_remove(level.offhands.var_85514a13c82068fd.placedentities, var_85514a13c82068fd);
+function function_d05d967e8630a32a(gastrap) {
+  level.offhands.gastrap.placedentities = array_remove(level.offhands.gastrap.placedentities, gastrap);
 }
 
 function function_955e0e9b64ac2b2f(mineowner) {

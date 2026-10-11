@@ -168,7 +168,7 @@ function setup_fakeactor_nodes() {
   level.fakeactor_node_group = [];
   level.var_213ef198a84b4bba = &random;
 
-  foreach(fakeactor_node in level.var_d5043478289af856) {
+  foreach(fakeactor_node in level.struct_fakeactors) {
     fakeactor_node thread fakeactor_node_setup();
   }
 }
@@ -570,7 +570,7 @@ function fakeactor_node_allow_arrivals() {
 
 function fakeactor_node_debug() {
   setdvarifuninitialized(@ "hash_4d695f34fb13688a", 0);
-  fakeactor_nodes = level.var_d5043478289af856;
+  fakeactor_nodes = level.struct_fakeactors;
   waitframe();
   text_scale = 0.5;
   new_line = 11 * text_scale;

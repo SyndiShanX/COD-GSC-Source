@@ -157,7 +157,7 @@ function player_lbravo_infil_think(infil, spot_index) {
   spawnang = infil.linktoent gettagangles("origin_animate_jnt");
   thread infil_player_rig_updated("slot_" + spot_index, spawnpos, spawnang);
   self.player_rig linkTo(infil.linktoent, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
-  self function_670863fc4008c3d8(function_198048f0cd4924b3(infil));
+  self setadditionalstreamposuntilcleared(function_198048f0cd4924b3(infil));
   self lerpfovbypreset("80_instant");
   self lerpfovscalefactor(0, 0);
   self.manualoverridewindmaterial = 1;
@@ -1112,7 +1112,7 @@ function vehicles_alpha_anims(subtype, team, originalsubtype) {
   }
 }
 
-function commander_play_sound_func(alias, notification, var_9a0afe8ff3d2508f) {
+function commander_play_sound_func(alias, notification, stoppable) {
   foreach(player in self.infil.players) {
     if(soundexists(alias)) {
       self playsoundtoplayer(alias, player);

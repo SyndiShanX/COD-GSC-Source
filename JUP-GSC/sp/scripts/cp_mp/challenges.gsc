@@ -524,7 +524,7 @@ function onplayerkilled(inflictor, attacker, damage, damageflags, meansofdeath, 
   }
 }
 
-function function_5a0ae8bc2b80c0c0(inflictor, attacker, damage, meansofdeath, objweapon, hitloc, modifiers, var_1d68c79557cc54ea, victim_team, var_bafbdb422ea9eaae) {
+function onagentkilled(inflictor, attacker, damage, meansofdeath, objweapon, hitloc, modifiers, var_1d68c79557cc54ea, victim_team, var_bafbdb422ea9eaae) {
   if(!isDefined(inflictor)) {
     assertmsg("Challenges.gsc - onAgentKilled was passed an undefined inflictor entity");
     return;
@@ -760,7 +760,7 @@ function function_8359cadd253f9604(player, type, quantity, var_afda85311c8ed272)
   println("<dev string:x2a7>" + type);
 }
 
-function function_5c3aa65db46763ff(vehicle, type) {
+function reportvehicleevent(vehicle, type) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -2022,7 +2022,7 @@ function getchallengegamemode(player) {
     gamemode = function_6d40f12a09494350(gamemode, 5);
   }
 
-  if(istrue(level.var_ec2fb549b15ad827)) {
+  if(istrue(level.leagueplaymatch)) {
     gamemode = function_6d40f12a09494350(gamemode, 6);
     return gamemode;
   }
@@ -2691,8 +2691,8 @@ function function_b050ed1983293d8(player, eventtypebit, perkref, value) {
 
 function function_2aff99309a417c21(eventparamsstruct, aeeventname, aekeyname, value) {
   keyid = ae_utility::function_d6f771aedba70ce7(aeeventname, aekeyname);
-  assertex(isDefined(keyid), "Undefined keyID for kill event param " + function_3c8848a3a11b2553(aekeyname) + " will break the eventParams array");
-  assertex(isDefined(value), "Undefined value for kill event param " + function_3c8848a3a11b2553(aekeyname) + " will break the eventParams array");
+  assertex(isDefined(keyid), "Undefined keyID for kill event param " + getxhashsourcename(aekeyname) + " will break the eventParams array");
+  assertex(isDefined(value), "Undefined value for kill event param " + getxhashsourcename(aekeyname) + " will break the eventParams array");
 
   if(isDefined(keyid) && isDefined(value)) {
     eventparamsstruct.eventparams[eventparamsstruct.eventparams.size] = keyid;
@@ -2704,7 +2704,7 @@ function function_137b512700167b00(attacker, victim) {
   victimstruct = spawnStruct();
   victimstruct.var_e4738651e7e13c78 = function_9da07c7f4a49e349(victim);
   [victimstruct.enemytype, victimstruct.var_7b718ef6c64f049f] = findenemytype(victim);
-  victimstruct.var_14edc6d1db3695bc = isDefined(victim.var_d37b75616f7c2ee) && victim.var_d37b75616f7c2ee.var_14edc6d1db3695bc;
+  victimstruct.biscritical = isDefined(victim.var_d37b75616f7c2ee) && victim.var_d37b75616f7c2ee.biscritical;
   victimstruct.v_distance = int(distance(attacker.origin, victim.origin));
   return victimstruct;
 }
@@ -2735,7 +2735,7 @@ function reportkillchallengeevent(attacker, victimstruct, modifiers1, modifiers2
     attacker.criticalstreak = 0;
   }
 
-  if(istrue(victimstruct.var_14edc6d1db3695bc)) {
+  if(istrue(victimstruct.biscritical)) {
     attacker.criticalstreak++;
   } else {
     attacker.criticalstreak = 0;
@@ -3286,13 +3286,13 @@ function findgunsmithattachments(objweapon) {
 
         if(utility::issharedfuncdefined("weapons", "attachmentIsSelectable")) {
           if([[utility::getsharedfunc("weapons", "attachmentIsSelectable")]](objweapon, attachment)) {
-            var_349e390338192305[var_349e390338192305.size] = weapon::function_693e108cb61ceeb5(weaponrootname, attachment);
+            var_349e390338192305[var_349e390338192305.size] = weapon::getattachmentlootid(weaponrootname, attachment);
           }
         }
       }
 
       if(var_7208e21ea18240fb) {
-        var_349e390338192305[var_349e390338192305.size] = weapon::function_693e108cb61ceeb5(weaponrootname, "default_sniper_scope");
+        var_349e390338192305[var_349e390338192305.size] = weapon::getattachmentlootid(weaponrootname, "default_sniper_scope");
       }
     }
   }
@@ -3373,7 +3373,7 @@ function findenemytype(victim) {
   }
 
   isground = 0;
-  var_ae8eb6d66c120397 = 0;
+  isaerial = 0;
   issupport = 0;
   var_24f040a6728b6dc4 = 0;
   var_b93834c5c289dcdc = 0;
@@ -3408,12 +3408,12 @@ function findenemytype(victim) {
       case #"hash_691f39dddd9116b8":
       case #"hash_a1031216158c7882":
       case #"hash_e6bea339d3cbd3e8":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         break;
       case #"hash_f64c697bfb4c6b54":
       case #"hash_27002778019fb447":
       case #"hash_e51f2e3d5cdd8ed8":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         issupport = 1;
         break;
       case #"hash_19dd9a3a4147e09e":
@@ -3430,12 +3430,12 @@ function findenemytype(victim) {
       case #"hash_7a687f6a4d685110":
       case #"hash_bf2f9adbd2b41d5":
       case #"hash_6362d6aae3e5a62e":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         var_24f040a6728b6dc4 = 1;
         break;
       case #"hash_e171e5b86ef0a4cc":
       case #"hash_634b246c3da5c56f":
-        var_ae8eb6d66c120397 = 1;
+        isaerial = 1;
         issupport = 1;
         var_24f040a6728b6dc4 = 1;
         break;
@@ -3445,7 +3445,7 @@ function findenemytype(victim) {
       enemytype = function_6d40f12a09494350(enemytype, ae_utility::function_e2ff8f4b4e94f723(#"hash_e2f5c601b57b3960", #"ground"));
     }
 
-    if(var_ae8eb6d66c120397) {
+    if(isaerial) {
       enemytype = function_6d40f12a09494350(enemytype, ae_utility::function_e2ff8f4b4e94f723(#"hash_e2f5c601b57b3960", #"aerial"));
     }
 
@@ -3467,7 +3467,7 @@ function findenemytype(victim) {
 
     if(isground && !canfly && !isboat) {
       enemytype = function_6d40f12a09494350(enemytype, ae_utility::function_e2ff8f4b4e94f723(#"hash_e2f5c601b57b3960", #"ground"));
-    } else if(var_ae8eb6d66c120397 || canfly) {
+    } else if(isaerial || canfly) {
       enemytype = function_6d40f12a09494350(enemytype, ae_utility::function_e2ff8f4b4e94f723(#"hash_e2f5c601b57b3960", #"aerial"));
     }
 
@@ -3822,7 +3822,7 @@ function function_8935e658d461fc50() {
   }
 }
 
-function private function_8feb2dc462cfc7f4(command, bitfield1, var_9c46b5c2597d7d36) {
+function private function_8feb2dc462cfc7f4(command, bitfield1, bitfield2) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -3840,7 +3840,7 @@ function private function_8feb2dc462cfc7f4(command, bitfield1, var_9c46b5c2597d7
 
   aeeventname = #"game_flag";
   aeeventid = ae_utility::function_6e2deb013c9ca85e(aeeventname);
-  params = [ae_utility::function_d6f771aedba70ce7(aeeventname, #"version"), 1, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gametype"), gametype, ae_utility::function_d6f771aedba70ce7(aeeventname, #"operator_id"), operatorlootid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_92939ab8dccb3d82"), location, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_dc0d981f2d59d210"), location2 ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_7164db7c4d5bdb1c"), command, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_4a7f024e87253788"), bitfield1, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_4a7f054e87253ca1"), var_9c46b5c2597d7d36];
+  params = [ae_utility::function_d6f771aedba70ce7(aeeventname, #"version"), 1, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gamemode"), gamemode, ae_utility::function_d6f771aedba70ce7(aeeventname, #"gametype"), gametype, ae_utility::function_d6f771aedba70ce7(aeeventname, #"operator_id"), operatorlootid, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_92939ab8dccb3d82"), location, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_dc0d981f2d59d210"), location2 ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_7164db7c4d5bdb1c"), command, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_4a7f024e87253788"), bitfield1, ae_utility::function_d6f771aedba70ce7(aeeventname, #"hash_4a7f054e87253ca1"), bitfield2];
   self function_db073176839d77fb(aeeventid, params);
 }
 
@@ -4130,8 +4130,8 @@ function function_c1945f26d99b0ed9(player) {
   squadmates = player getfireteammembers();
 
   for(index = 0; index < 5; index++) {
-    if(isDefined(var_a8af9a2935dd804f) && isDefined(squadmates[index]) && squadmates[index] function_7a32b0201993d7f7() != "") {
-      var_a8af9a2935dd804f[index] = squadmates[index] function_7a32b0201993d7f7();
+    if(isDefined(var_a8af9a2935dd804f) && isDefined(squadmates[index]) && squadmates[index] getplayerunoid() != "") {
+      var_a8af9a2935dd804f[index] = squadmates[index] getplayerunoid();
       continue;
     }
 

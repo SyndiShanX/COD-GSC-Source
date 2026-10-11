@@ -14,7 +14,7 @@
 #namespace superdeploy;
 #using_animtree("script_model");
 
-function function_cfec51cac79ca4e6(superinfo, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b, var_f6a32dcc4b19aad9, var_67a06b4ea269058e, waittime, skipfirstraise, isimmediate) {
+function function_cfec51cac79ca4e6(superinfo, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback, var_f6a32dcc4b19aad9, var_67a06b4ea269058e, waittime, skipfirstraise, isimmediate) {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -52,7 +52,7 @@ function function_cfec51cac79ca4e6(superinfo, weapongivencallback, var_8fd4d93dd
   val::set("superDeploy", "offhand_weapons", 0);
   val::set("superDeploy", "supers", 0);
   val::set("superDeploy", "killstreaks", 0);
-  switchresult = function_323489241ce4764a(weaponobj, superinfo, &function_f3e423ce0923187e, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b, skipfirstraise, isimmediate);
+  switchresult = function_323489241ce4764a(weaponobj, superinfo, &function_f3e423ce0923187e, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback, skipfirstraise, isimmediate);
 
   if(isDefined(self) && _isalive()) {
     val::reset_all("superDeploy");
@@ -73,7 +73,7 @@ function function_cfec51cac79ca4e6(superinfo, weapongivencallback, var_8fd4d93dd
   return istrue(animresult);
 }
 
-function function_f3a5a94b1d50ed38(superinfo, weaponobj, firednotify, weapongivencallback, var_8fd4d93dd619da88, weaponfiredcallback, var_91f739c2c51347d4, var_d55d8445518099b) {
+function function_f3a5a94b1d50ed38(superinfo, weaponobj, firednotify, weapongivencallback, weaponswitchendedcallback, weaponfiredcallback, weaponcleanupcallback, weapontakencallback) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
@@ -92,7 +92,7 @@ function function_f3a5a94b1d50ed38(superinfo, weaponobj, firednotify, weapongive
 
   function_4f203f286301b4ae(superinfo);
   assertex(isDefined(weaponobj) && weaponobj.basename != "<dev string:x1c>", "<dev string:x24>" + superinfo.staticdata.ref + "<dev string:x37>");
-  switchresult = function_323489241ce4764a(weaponobj, superinfo, &function_f3e423ce0923187e, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b);
+  switchresult = function_323489241ce4764a(weaponobj, superinfo, &function_f3e423ce0923187e, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback);
 
   if(!istrue(switchresult)) {
     function_7cc79842967d7ae0(superinfo);
@@ -113,11 +113,11 @@ function function_f3a5a94b1d50ed38(superinfo, weaponobj, firednotify, weapongive
   return istrue(firedresult);
 }
 
-function function_8300ec48c43363d6(superinfo, weaponobj, keepweapon, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b) {
+function function_8300ec48c43363d6(superinfo, weaponobj, keepweapon, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback) {
   assertex(isDefined(weaponobj) && weaponobj.basename != "<dev string:x1c>", "<dev string:x24>" + superinfo.staticdata.ref + "<dev string:x37>");
   function_4f203f286301b4ae(superinfo);
   cleanupwaitfunc = ter_op(istrue(keepweapon), &function_f3e423ce0923187e, undefined);
-  switchresult = function_323489241ce4764a(weaponobj, superinfo, cleanupwaitfunc, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b);
+  switchresult = function_323489241ce4764a(weaponobj, superinfo, cleanupwaitfunc, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback);
 
   if(!istrue(switchresult)) {
     function_7cc79842967d7ae0(superinfo);
@@ -235,7 +235,7 @@ function private function_c46ce93718743bf6() {
   _freezecontrols(0, undefined, "superDeploy");
 }
 
-function function_323489241ce4764a(deployweaponobj, superinfo, cleanupwaitfunc, weapongivencallback, var_8fd4d93dd619da88, var_91f739c2c51347d4, var_d55d8445518099b, skipfirstraise, isimmediate) {
+function function_323489241ce4764a(deployweaponobj, superinfo, cleanupwaitfunc, weapongivencallback, weaponswitchendedcallback, weaponcleanupcallback, weapontakencallback, skipfirstraise, isimmediate) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
@@ -259,9 +259,9 @@ function function_323489241ce4764a(deployweaponobj, superinfo, cleanupwaitfunc, 
   }
 
   _giveweapon(deployweaponobj, 0, 0, skipfirstraise);
-  var_137e8ca1e47954dc = function_dfc98a2de8e662a6(superinfo, weapongivencallback);
+  givencallbackresult = function_dfc98a2de8e662a6(superinfo, weapongivencallback);
 
-  if(!istrue(var_137e8ca1e47954dc)) {
+  if(!istrue(givencallbackresult)) {
     _takeweapon(deployweaponobj);
     return 0;
   }
@@ -271,8 +271,8 @@ function function_323489241ce4764a(deployweaponobj, superinfo, cleanupwaitfunc, 
   switchresult = domonitoredweaponswitch(deployweaponobj, istrue(isimmediate));
   superinfo notify("deploy_weapon_switch_ended");
 
-  if(isDefined(var_8fd4d93dd619da88)) {
-    self thread[[var_8fd4d93dd619da88]](superinfo, switchresult);
+  if(isDefined(weaponswitchendedcallback)) {
+    self thread[[weaponswitchendedcallback]](superinfo, switchresult);
   }
 
   waitframe();
@@ -285,11 +285,11 @@ function function_323489241ce4764a(deployweaponobj, superinfo, cleanupwaitfunc, 
     return 0;
   }
 
-  thread function_e65b31e6948c503(switchresult, superinfo, deployweaponobj, cleanupwaitfunc, var_91f739c2c51347d4, var_d55d8445518099b);
+  thread function_e65b31e6948c503(switchresult, superinfo, deployweaponobj, cleanupwaitfunc, weaponcleanupcallback, weapontakencallback);
   return switchresult;
 }
 
-function private function_e65b31e6948c503(switchresult, superinfo, deployweaponobj, cleanupwaitfunc, var_91f739c2c51347d4, var_d55d8445518099b) {
+function private function_e65b31e6948c503(switchresult, superinfo, deployweaponobj, cleanupwaitfunc, weaponcleanupcallback, weapontakencallback) {
   level endon("game_ended");
   self endon("death_or_disconnect");
 
@@ -298,11 +298,11 @@ function private function_e65b31e6948c503(switchresult, superinfo, deployweapono
   }
 
   if(self hasweapon(deployweaponobj)) {
-    var_cd5c5ac9105ab0d7 = function_b04cbd5db8951229(deployweaponobj.basename);
+    remotetabletweapon = function_b04cbd5db8951229(deployweaponobj.basename);
     val::set("cleanupDeployWeapon", "melee", 0);
     val::set("cleanupDeployWeapon", "offhand_weapons", 0);
 
-    if(var_cd5c5ac9105ab0d7) {
+    if(remotetabletweapon) {
       val::set("cleanupDeployWeapon", "mantle", 0);
       val::set("cleanupDeployWeapon", "allow_movement", 0);
       dofdelay = 0.5;
@@ -315,21 +315,21 @@ function private function_e65b31e6948c503(switchresult, superinfo, deployweapono
       _freezelookcontrols(1);
     }
 
-    if(isDefined(var_91f739c2c51347d4)) {
-      self[[var_91f739c2c51347d4]](superinfo, switchresult, deployweaponobj);
+    if(isDefined(weaponcleanupcallback)) {
+      self[[weaponcleanupcallback]](superinfo, switchresult, deployweaponobj);
     } else {
       function_b22d2e6d02d50b21(deployweaponobj);
     }
 
     val::reset_all("cleanupDeployWeapon");
 
-    if(var_cd5c5ac9105ab0d7) {
+    if(remotetabletweapon) {
       _freezelookcontrols(0);
     }
   }
 
-  if(isDefined(var_d55d8445518099b)) {
-    self[[var_d55d8445518099b]](superinfo);
+  if(isDefined(weapontakencallback)) {
+    self[[weapontakencallback]](superinfo);
   }
 }
 
@@ -356,15 +356,15 @@ function private function_12bd106b0dd9b11d(superinfo, deployweaponobj) {
 }
 
 function function_b04cbd5db8951229(weaponname) {
-  var_cd5c5ac9105ab0d7 = 0;
+  remotetabletweapon = 0;
 
   switch (weaponname) {
     case #"hash_288bc6291d670eaa":
-      var_cd5c5ac9105ab0d7 = 1;
+      remotetabletweapon = 1;
       break;
   }
 
-  return var_cd5c5ac9105ab0d7;
+  return remotetabletweapon;
 }
 
 function private function_6ce6b67d4d0ff91b(superinfo, deployweaponobj) {
@@ -549,27 +549,27 @@ function function_e92aaca7f2fd7e8(superinfo, firednotify, var_4ef1099365450bae, 
   self endon("cancel_all_super_deployments");
 
   while(true) {
-    var_a9dd4e8c5e5c7178 = undefined;
+    firedweaponobj = undefined;
     firedprojectile = undefined;
 
     switch (firednotify) {
       case #"hash_21a23ad4b32e4f8e":
-        self waittill(firednotify, var_a9dd4e8c5e5c7178);
+        self waittill(firednotify, firedweaponobj);
         break;
       case #"hash_77f5cb8818a754f0":
-        self waittill(firednotify, var_a9dd4e8c5e5c7178);
+        self waittill(firednotify, firedweaponobj);
         break;
       case #"hash_3989359e2b52d1ba":
-        self waittill(firednotify, firedprojectile, var_a9dd4e8c5e5c7178);
+        self waittill(firednotify, firedprojectile, firedweaponobj);
         break;
       default:
         self waittill(firednotify);
         break;
     }
 
-    if(var_a9dd4e8c5e5c7178 == var_4ef1099365450bae) {
+    if(firedweaponobj == var_4ef1099365450bae) {
       if(isDefined(weaponfiredcallback)) {
-        firedresult = [[weaponfiredcallback]](superinfo, var_a9dd4e8c5e5c7178, firedprojectile);
+        firedresult = [[weaponfiredcallback]](superinfo, firedweaponobj, firedprojectile);
 
         if(!isDefined(firedresult)) {
           assertex(isDefined(firedresult), "<dev string:x130>");

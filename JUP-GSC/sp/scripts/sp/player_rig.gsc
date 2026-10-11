@@ -13,7 +13,7 @@
 #namespace player_rig;
 #using_animtree("player");
 
-function init_player_rig(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, var_5e666ed18b1e0d1f, doprecache) {
+function init_player_rig(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, player_body_model, doprecache) {
   setdvarifuninitialized(@ "hash_36a6e170933fe94b", 0);
 
   doprecache = default_to(doprecache, 1);
@@ -27,8 +27,8 @@ function init_player_rig(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, var_5e666ed
       precachemodel(var_2ae369ca3c8d94ba);
     }
 
-    if(isDefined(var_5e666ed18b1e0d1f)) {
-      precachemodel(var_5e666ed18b1e0d1f);
+    if(isDefined(player_body_model)) {
+      precachemodel(player_body_model);
     }
   }
 
@@ -48,8 +48,8 @@ function init_player_rig(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, var_5e666ed
     level.scr_model["player_legs"] = undefined;
   }
 
-  if(isDefined(var_5e666ed18b1e0d1f)) {
-    init_player_body(var_5e666ed18b1e0d1f);
+  if(isDefined(player_body_model)) {
+    init_player_body(player_body_model);
     return;
   }
 
@@ -57,26 +57,26 @@ function init_player_rig(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, var_5e666ed
   level.scr_model["player_body"] = undefined;
 }
 
-function init_player_rig_no_precache(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, var_5e666ed18b1e0d1f) {
-  init_player_rig(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, var_5e666ed18b1e0d1f, 0);
+function init_player_rig_no_precache(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, player_body_model) {
+  init_player_rig(var_6aaf40d85156ec33, var_2ae369ca3c8d94ba, player_body_model, 0);
 }
 
 #using_animtree("generic_human");
 
-function init_player_body(var_5e666ed18b1e0d1f) {
-  level.scr_model["player_body"] = var_5e666ed18b1e0d1f;
+function init_player_body(player_body_model) {
+  level.scr_model["player_body"] = player_body_model;
   level.scr_animtree["player_body"] = #animtree;
 }
 
 function private function_e92e6ad1059c8eec() {
-  var_554cb117b3f17b8a = self;
+  rigentity = self;
 
-  if(!isDefined(var_554cb117b3f17b8a) || !isDefined(var_554cb117b3f17b8a.animname)) {
+  if(!isDefined(rigentity) || !isDefined(rigentity.animname)) {
     return;
   }
 
-  if(!is_equal(var_554cb117b3f17b8a.model, level.scr_model[var_554cb117b3f17b8a.animname])) {
-    var_554cb117b3f17b8a setModel(level.scr_model[var_554cb117b3f17b8a.animname]);
+  if(!is_equal(rigentity.model, level.scr_model[rigentity.animname])) {
+    rigentity setModel(level.scr_model[rigentity.animname]);
   }
 }
 
@@ -228,10 +228,10 @@ function function_73341653f76b4e43(allows) {
   level.player val::set_array("player_rig", level.player_rig.allows, 0);
 }
 
-function function_3a20b806b3b70617(stance, var_1c5d1595dab3ef39, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous) {
+function function_3a20b806b3b70617(stance, animblending, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous) {
   rig = self;
 
-  if(istrue(var_1c5d1595dab3ef39)) {
+  if(istrue(animblending)) {
     stance = default_to(stance, "stand");
     curstance = level.player getstance();
     var_c9da1b495d3ed8f = 0;
@@ -273,19 +273,19 @@ function function_3a20b806b3b70617(stance, var_1c5d1595dab3ef39, var_ec165a067af
   rig show();
 }
 
-function function_6feda95d063a745e(anime, restrictcamera, rightarc, leftarc, toparc, bottomarc, var_562ff78798cbfcc8, var_984ba707a4ae718e, var_26967d556f885965, linktag) {
-  return link_player_to_rig(anime, undefined, 1, 0.5, restrictcamera, rightarc, leftarc, toparc, bottomarc, var_562ff78798cbfcc8, var_984ba707a4ae718e, var_26967d556f885965, 1, undefined, undefined, undefined, undefined, linktag);
+function function_6feda95d063a745e(anime, restrictcamera, rightarc, leftarc, toparc, bottomarc, usetagangles, rigspawnfunc, var_26967d556f885965, linktag) {
+  return link_player_to_rig(anime, undefined, 1, 0.5, restrictcamera, rightarc, leftarc, toparc, bottomarc, usetagangles, rigspawnfunc, var_26967d556f885965, 1, undefined, undefined, undefined, undefined, linktag);
 }
 
-function link_player_to_rig(anime, stance, var_e773bead7741b3b3, blendtime, restrictcamera, rightarc, leftarc, toparc, bottomarc, var_562ff78798cbfcc8, var_984ba707a4ae718e, var_26967d556f885965, smart, var_1c5d1595dab3ef39, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous, linktag, var_765a3c961826133b) {
+function link_player_to_rig(anime, stance, var_e773bead7741b3b3, blendtime, restrictcamera, rightarc, leftarc, toparc, bottomarc, usetagangles, rigspawnfunc, var_26967d556f885965, smart, animblending, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous, linktag, var_765a3c961826133b) {
   linktag = default_to(linktag, "tag_player");
   rig = scripts\sp\player_rig::get_player_rig(1);
   rig endon("unlink_player");
   rig.linktag = linktag;
   playerstartpos = level.player.origin;
 
-  if(isDefined(var_984ba707a4ae718e)) {
-    rig[[var_984ba707a4ae718e]]();
+  if(isDefined(rigspawnfunc)) {
+    rig[[rigspawnfunc]]();
   }
 
   if(!isDefined(rig.allows)) {
@@ -296,13 +296,13 @@ function link_player_to_rig(anime, stance, var_e773bead7741b3b3, blendtime, rest
     }
   }
 
-  var_99d6396b75b98227 = [rig];
+  hideshowrigs = [rig];
 
   if(isDefined(var_765a3c961826133b)) {
-    var_99d6396b75b98227 = array_combine(var_99d6396b75b98227, var_765a3c961826133b);
+    hideshowrigs = array_combine(hideshowrigs, var_765a3c961826133b);
   }
 
-  foreach(hsrig in var_99d6396b75b98227) {
+  foreach(hsrig in hideshowrigs) {
     hsrig.origin = level.player.origin;
     hsrig.angles = level.player.angles;
     hsrig hide();
@@ -314,11 +314,11 @@ function link_player_to_rig(anime, stance, var_e773bead7741b3b3, blendtime, rest
 
   level.player setcinematicmotionoverride("disabled");
 
-  if(isDefined(anime) && !istrue(var_1c5d1595dab3ef39)) {
+  if(isDefined(anime) && !istrue(animblending)) {
     thread scripts\common\anim::anim_first_frame_solo(rig, anime);
   }
 
-  if(isDefined(anime) && (istrue(smart) || istrue(var_1c5d1595dab3ef39))) {
+  if(isDefined(anime) && (istrue(smart) || istrue(animblending))) {
     function_dba8ec1939d3f1a(anime, rig.animname, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous);
     blendtime = level.blendinfo["blendTime"];
 
@@ -405,12 +405,12 @@ function link_player_to_rig(anime, stance, var_e773bead7741b3b3, blendtime, rest
   if(istrue(restrictcamera)) {
     level.player playerlinktoabsolute(rig, linktag);
   } else {
-    if(!isDefined(var_562ff78798cbfcc8)) {
-      var_562ff78798cbfcc8 = 0;
+    if(!isDefined(usetagangles)) {
+      usetagangles = 0;
     }
 
-    if(blendtime > 0 || istrue(var_1c5d1595dab3ef39)) {
-      level.player playerlinktodelta(rig, linktag, 1, 170, 170, 170, 170, var_562ff78798cbfcc8);
+    if(blendtime > 0 || istrue(animblending)) {
+      level.player playerlinktodelta(rig, linktag, 1, 170, 170, 170, 170, usetagangles);
       level.player lerpviewangleclamp(blendtime, blendtime * 0.5, blendtime * 0.25, 0, 0, 0, 0, 1);
 
       if(rightarc || leftarc || toparc || bottomarc) {
@@ -418,12 +418,12 @@ function link_player_to_rig(anime, stance, var_e773bead7741b3b3, blendtime, rest
       }
     } else {
       level.player playerlinktoabsolute(rig, linktag);
-      level.player delaycall(0.05, &playerlinktodelta, rig, linktag, 1, rightarc, leftarc, toparc, bottomarc, var_562ff78798cbfcc8);
+      level.player delaycall(0.05, &playerlinktodelta, rig, linktag, 1, rightarc, leftarc, toparc, bottomarc, usetagangles);
     }
   }
 
-  foreach(hsrig in var_99d6396b75b98227) {
-    hsrig thread function_3a20b806b3b70617(stance, var_1c5d1595dab3ef39, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous);
+  foreach(hsrig in hideshowrigs) {
+    hsrig thread function_3a20b806b3b70617(stance, animblending, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous);
   }
 
   level.player delaythread(blendtime, &val::reset_all, "link_player_to_rig_blend");
@@ -442,7 +442,7 @@ function link_player_to_rig(anime, stance, var_e773bead7741b3b3, blendtime, rest
   return rig;
 }
 
-function unlink_player_from_rig(resetstance, exitstance, setstanceimmediate, var_dfb81d6b53106f39, instantunlink, cinematicmotionoverride) {
+function unlink_player_from_rig(resetstance, exitstance, setstanceimmediate, retainplayerrig, instantunlink, cinematicmotionoverride) {
   rig = level.player_rig;
   rig notify("unlink_player");
 
@@ -482,14 +482,14 @@ function unlink_player_from_rig(resetstance, exitstance, setstanceimmediate, var
   if(istrue(instantunlink)) {
     level.player unlink();
   } else {
-    level.player function_af4b9b0f0e7c6c42(0.2);
+    level.player playerunlinkblend(0.2);
   }
 
   level.player enablequickweaponswitch(0);
   cinematicmotionoverride = default_to(cinematicmotionoverride, "iw9_playermotion");
   level.player setcinematicmotionoverride(cinematicmotionoverride);
 
-  if(!istrue(var_dfb81d6b53106f39)) {
+  if(!istrue(retainplayerrig)) {
     rig delete();
   }
 
@@ -585,7 +585,7 @@ function player_rig_allow_internal(rig, allow_name) {
   level.player thread val::set("player_rig", allow_name, 1);
 }
 
-function function_98fabc06359d4d0c(anime, stance, arcs, var_e2140d070bb088bd, linkedents, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous, var_26967d556f885965) {
+function function_98fabc06359d4d0c(anime, stance, arcs, unlinkedents, linkedents, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous, var_26967d556f885965) {
   if(!isDefined(level.player_rig)) {
     get_player_rig();
   }
@@ -602,12 +602,12 @@ function function_98fabc06359d4d0c(anime, stance, arcs, var_e2140d070bb088bd, li
     restrictcamera = 0;
   }
 
-  if(!isDefined(var_e2140d070bb088bd)) {
-    var_e2140d070bb088bd = [];
+  if(!isDefined(unlinkedents)) {
+    unlinkedents = [];
   }
 
-  if(!isarray(var_e2140d070bb088bd)) {
-    var_e2140d070bb088bd = [var_e2140d070bb088bd];
+  if(!isarray(unlinkedents)) {
+    unlinkedents = [unlinkedents];
   }
 
   if(!isDefined(linkedents)) {
@@ -621,21 +621,21 @@ function function_98fabc06359d4d0c(anime, stance, arcs, var_e2140d070bb088bd, li
   var_ec165a067af34f8f = ter_op(isDefined(var_ec165a067af34f8f), var_ec165a067af34f8f, 1);
   var_8831fc7320076829 = ter_op(isDefined(var_8831fc7320076829), var_8831fc7320076829, 0);
   simultaneous = ter_op(isDefined(simultaneous), simultaneous, 0);
-  var_4f51ef0bd97a4707 = anime;
+  newanime = anime;
 
   if(function_f1e7ee8ddeece062(anime)) {
     animation = function_c099f6fd9c19f5a6(anime, self.origin, self.angles, "player_rig");
-    var_4f51ef0bd97a4707 = function_56bd620e57a834af(anime, "player_rig", animation);
+    newanime = function_56bd620e57a834af(anime, "player_rig", animation);
   }
 
-  anim_first_frame_solo(level.player_rig, var_4f51ef0bd97a4707);
-  link_player_to_rig(var_4f51ef0bd97a4707, stance, 0, 0, restrictcamera, arcs[0], arcs[1], arcs[2], arcs[3], 1, undefined, var_26967d556f885965, undefined, 1, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous);
-  thread anim_lerp_from_player_pos(var_4f51ef0bd97a4707, level.blendinfo["blendTime"], level.blendinfo["blendTime"], 0.8, level.blendinfo["weaponDropTime"]);
+  anim_first_frame_solo(level.player_rig, newanime);
+  link_player_to_rig(newanime, stance, 0, 0, restrictcamera, arcs[0], arcs[1], arcs[2], arcs[3], 1, undefined, var_26967d556f885965, undefined, 1, var_ec165a067af34f8f, var_8831fc7320076829, simultaneous);
+  thread anim_lerp_from_player_pos(newanime, level.blendinfo["blendTime"], level.blendinfo["blendTime"], 0.8, level.blendinfo["weaponDropTime"]);
 
-  if(isDefined(var_e2140d070bb088bd)) {
-    foreach(model in var_e2140d070bb088bd) {
+  if(isDefined(unlinkedents)) {
+    foreach(model in unlinkedents) {
       if(level.player_rig == model) {
-        var_e2140d070bb088bd = array_remove(var_e2140d070bb088bd, model);
+        unlinkedents = array_remove(unlinkedents, model);
       }
     }
   }
@@ -651,8 +651,8 @@ function function_98fabc06359d4d0c(anime, stance, arcs, var_e2140d070bb088bd, li
     }
   }
 
-  anim_first_frame(var_e2140d070bb088bd, anime);
-  delaythread(level.blendinfo["weaponDropTime"], &anim_single, var_e2140d070bb088bd, anime);
+  anim_first_frame(unlinkedents, anime);
+  delaythread(level.blendinfo["weaponDropTime"], &anim_single, unlinkedents, anime);
   level.lerp_node anim_first_frame(linkedents, anime);
   level.lerp_node delaythread(level.blendinfo["weaponDropTime"], &anim_single, linkedents, anime);
   wait level.blendinfo["weaponDropTime"];

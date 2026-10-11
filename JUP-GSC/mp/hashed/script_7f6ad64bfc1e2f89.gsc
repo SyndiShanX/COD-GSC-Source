@@ -37,7 +37,7 @@ function function_483ba6f36672443d(powerstruct, powerref) {
   }
 
   if(zombie scripts\mp\utility\weapon::grenadeinpullback()) {
-    zombie function_187fb04ebd01baea();
+    zombie canceloffhands();
   }
 
   zombie thread function_120695737abd78f4(powerstruct, powerref);
@@ -57,7 +57,7 @@ function function_afd0248aff5dc21(powerstruct, powerref) {
   zombie endon("disconnect");
   zombie endon("zombie_unset");
   level endon("game_ended");
-  zombie.var_a2906c0a3da2c192 = 1;
+  zombie.shouting = 1;
 
   if(isDefined(powerstruct.powers[powerref].statusupdate)) {
     function_936f0ef6e203a7fc(powerstruct.powers[powerref].statusupdate, 4);
@@ -81,10 +81,10 @@ function function_afd0248aff5dc21(powerstruct, powerref) {
   }
 
   velocity = 1500;
-  var_4f8bb17d0fad6744 = vectorNormalize(anglesToForward(zombie getplayerangles() + (0, 7, 0)));
+  forward2 = vectorNormalize(anglesToForward(zombie getplayerangles() + (0, 7, 0)));
   var_4f8bb27d0fad6977 = vectorNormalize(anglesToForward(zombie getplayerangles() + (0, -7, 0)));
   orb1 = magicgrenademanual("jup_mutant_sludge_ball", fireorigin, velocity * forward);
-  orb2 = magicgrenademanual("jup_mutant_sludge_ball", fireorigin - 8 * right, velocity * var_4f8bb17d0fad6744);
+  orb2 = magicgrenademanual("jup_mutant_sludge_ball", fireorigin - 8 * right, velocity * forward2);
   var_6bfc733f335a43c7 = magicgrenademanual("jup_mutant_sludge_ball", fireorigin + 8 * right, velocity * var_4f8bb27d0fad6977);
   array_thread([orb1, orb2, var_6bfc733f335a43c7], &function_e1c46f218ae01158, zombie);
   zombie thread function_2d4d1e5adf4110f5(orb1, orb2, var_6bfc733f335a43c7);

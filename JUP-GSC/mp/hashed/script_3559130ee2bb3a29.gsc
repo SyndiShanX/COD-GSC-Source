@@ -108,9 +108,9 @@ function function_6932962f514cd776(player) {
   var_32a6f9b3d487152d = activity_participation::function_553a690e1064cf0b(player);
 
   foreach(var_b2941d08f576eb6c in var_32a6f9b3d487152d) {
-    var_6965880b974574a6 = var_b2941d08f576eb6c.instanceid;
-    activityinstance = activity_common::function_1f3e343912ae15c5(var_6965880b974574a6);
-    activitycategory = namespace_4fda5d7358015a06::function_511be8bcaede8b52(activityinstance);
+    activityinstanceid = var_b2941d08f576eb6c.instanceid;
+    activityinstance = activity_common::getactivityinstance(activityinstanceid);
+    activitycategory = namespace_4fda5d7358015a06::getactivitycategory(activityinstance);
 
     if(activitycategory == "Contract") {
       return true;
@@ -451,20 +451,20 @@ function private function_ed033cc3e7f647a2(team, sessionsquadid, var_419535d2312
   }
 }
 
-function private function_b200e7001502a482(team, sessionsquadid, var_419535d231262698, var_6b0ee97314aed333) {
-  var_ac0eafb387bd7c4 = undefined;
+function private function_b200e7001502a482(team, sessionsquadid, var_419535d231262698, playertoignore) {
+  pedestals = undefined;
 
   if(isDefined(sessionsquadid) && isDefined(team) && isDefined(var_419535d231262698)) {
     var_5cb02e311220e539 = function_8dae31f3453c535c(var_419535d231262698);
 
     if(isDefined(var_5cb02e311220e539.var_70826f0845ce7402) && isDefined(var_5cb02e311220e539) && isDefined(var_5cb02e311220e539.var_26e51088c6471824)) {
       if(isDefined(team) && isDefined(sessionsquadid) && scripts\cp_mp\squads::function_be6ce63a202791c5(team, sessionsquadid, var_5cb02e311220e539.var_70826f0845ce7402)) {
-        var_ac0eafb387bd7c4 = scripts\cp_mp\squads::getsquaddata(team, sessionsquadid, var_5cb02e311220e539.var_70826f0845ce7402);
+        pedestals = scripts\cp_mp\squads::getsquaddata(team, sessionsquadid, var_5cb02e311220e539.var_70826f0845ce7402);
       }
     }
   }
 
-  return var_ac0eafb387bd7c4;
+  return pedestals;
 }
 
 function private function_2ba47d2b2d7cadf3(var_8986997b27e850da) {
@@ -1112,23 +1112,23 @@ function private function_bdf0c15c84f8200e(player, var_8986997b27e850da, var_419
   return undefined;
 }
 
-function function_2eb31b437fe134f7(playerteam, var_4b814e821394cbbb) {
-  if(isDefined(playerteam) && isDefined(var_4b814e821394cbbb) && !scripts\cp_mp\squads::function_be6ce63a202791c5(playerteam, var_4b814e821394cbbb, "SquadRiftGateVotingInProgress")) {
-    level.squaddata[playerteam][var_4b814e821394cbbb].properties["SquadRiftGateVotingInProgress"] = 0;
+function function_2eb31b437fe134f7(playerteam, playersquadid) {
+  if(isDefined(playerteam) && isDefined(playersquadid) && !scripts\cp_mp\squads::function_be6ce63a202791c5(playerteam, playersquadid, "SquadRiftGateVotingInProgress")) {
+    level.squaddata[playerteam][playersquadid].properties["SquadRiftGateVotingInProgress"] = 0;
   }
 }
 
-function function_fd5211de155982af(playerteam, var_4b814e821394cbbb, value) {
-  if(isDefined(playerteam) && isDefined(var_4b814e821394cbbb)) {
-    function_2eb31b437fe134f7(playerteam, var_4b814e821394cbbb);
-    votinginprogress = scripts\cp_mp\squads::function_a20a10ce593f692b(playerteam, var_4b814e821394cbbb, "SquadRiftGateVotingInProgress", value);
+function function_fd5211de155982af(playerteam, playersquadid, value) {
+  if(isDefined(playerteam) && isDefined(playersquadid)) {
+    function_2eb31b437fe134f7(playerteam, playersquadid);
+    votinginprogress = scripts\cp_mp\squads::function_a20a10ce593f692b(playerteam, playersquadid, "SquadRiftGateVotingInProgress", value);
   }
 }
 
-function function_755c94f4a8509b03(playerteam, var_4b814e821394cbbb) {
-  if(isDefined(playerteam) && isDefined(var_4b814e821394cbbb)) {
-    function_2eb31b437fe134f7(playerteam, var_4b814e821394cbbb);
-    return scripts\cp_mp\squads::getsquaddata(playerteam, var_4b814e821394cbbb, "SquadRiftGateVotingInProgress");
+function function_755c94f4a8509b03(playerteam, playersquadid) {
+  if(isDefined(playerteam) && isDefined(playersquadid)) {
+    function_2eb31b437fe134f7(playerteam, playersquadid);
+    return scripts\cp_mp\squads::getsquaddata(playerteam, playersquadid, "SquadRiftGateVotingInProgress");
   }
 
   return 0;

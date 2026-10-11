@@ -5,7 +5,7 @@
 
 #using scripts\common\utility;
 #using scripts\engine\utility;
-#namespace namespace_2ad63d7d28d317d7;
+#namespace conditional_container;
 
 function function_a1f71337a6844055() {
   self.conditions = [];
@@ -16,7 +16,7 @@ function function_cb7d9fafcbb7a3da() {
   return istrue(self.var_cb7d9fafcbb7a3da);
 }
 
-function addcondition(var_21a51c1826b9a6aa, var_92e7ff758311df4f, var_a5bcfea80579d73d, uniquename, description) {
+function addcondition(conditionalcontainer, conditionalfunction, var_a5bcfea80579d73d, uniquename, description) {
   if(!isDefined(uniquename)) {
     uniquename = undefined;
   }
@@ -25,37 +25,37 @@ function addcondition(var_21a51c1826b9a6aa, var_92e7ff758311df4f, var_a5bcfea805
     description = "No Description Given.";
   }
 
-  assertex(var_21a51c1826b9a6aa function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
+  assertex(conditionalcontainer function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
   conditioninfo = spawnStruct();
-  conditioninfo.function = var_92e7ff758311df4f;
+  conditioninfo.function = conditionalfunction;
   conditioninfo.params = var_a5bcfea80579d73d;
   conditioninfo.uniquename = uniquename;
   conditioninfo.description = description;
-  var_21a51c1826b9a6aa.conditions[var_21a51c1826b9a6aa.conditions.size] = conditioninfo;
+  conditionalcontainer.conditions[conditionalcontainer.conditions.size] = conditioninfo;
 }
 
-function removecondition(var_21a51c1826b9a6aa, uniquename) {
-  assertex(var_21a51c1826b9a6aa function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
+function removecondition(conditionalcontainer, uniquename) {
+  assertex(conditionalcontainer function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
 
-  for(index = 0; index < var_21a51c1826b9a6aa.conditions.size; index++) {
-    conditioninfo = var_21a51c1826b9a6aa.conditions[index];
+  for(index = 0; index < conditionalcontainer.conditions.size; index++) {
+    conditioninfo = conditionalcontainer.conditions[index];
 
     if(isDefined(conditioninfo.uniquename) && conditioninfo.uniquename == uniquename) {
-      var_21a51c1826b9a6aa.conditions = array_remove_index(var_21a51c1826b9a6aa.conditions, index);
+      conditionalcontainer.conditions = array_remove_index(conditionalcontainer.conditions, index);
       break;
     }
   }
 }
 
-function function_ff70694fdb2c244a(var_21a51c1826b9a6aa) {
-  assertex(var_21a51c1826b9a6aa function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
-  var_21a51c1826b9a6aa.conditions = [];
+function removeallconditions(conditionalcontainer) {
+  assertex(conditionalcontainer function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
+  conditionalcontainer.conditions = [];
 }
 
-function function_93587d5ba6247f36(var_21a51c1826b9a6aa, object) {
-  assertex(var_21a51c1826b9a6aa function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
+function function_93587d5ba6247f36(conditionalcontainer, object) {
+  assertex(conditionalcontainer function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
 
-  foreach(condition in var_21a51c1826b9a6aa.conditions) {
+  foreach(condition in conditionalcontainer.conditions) {
     result = [[condition.function]](object, condition.params);
 
     if(!result) {
@@ -66,10 +66,10 @@ function function_93587d5ba6247f36(var_21a51c1826b9a6aa, object) {
   return true;
 }
 
-function function_ff013f3a89dabca4(var_21a51c1826b9a6aa, object) {
-  assertex(var_21a51c1826b9a6aa function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
+function function_ff013f3a89dabca4(conditionalcontainer, object) {
+  assertex(conditionalcontainer function_cb7d9fafcbb7a3da(), "<dev string:x1c>");
 
-  foreach(condition in var_21a51c1826b9a6aa.conditions) {
+  foreach(condition in conditionalcontainer.conditions) {
     result = [[condition.function]](object, condition.params);
 
     if(!result) {
@@ -80,8 +80,8 @@ function function_ff013f3a89dabca4(var_21a51c1826b9a6aa, object) {
   return function_8a34819737ceea8f(1);
 }
 
-function function_21987527fd4733ad(var_21a51c1826b9a6aa, object, var_ef09bb69811327d1, var_5288a299caa0504e, var_717b087350a6df2f, var_3b7ed38c07818629) {
-  var_cb7d9fafcbb7a3da = var_21a51c1826b9a6aa function_cb7d9fafcbb7a3da();
+function function_21987527fd4733ad(conditionalcontainer, object, var_ef09bb69811327d1, var_5288a299caa0504e, var_717b087350a6df2f, var_3b7ed38c07818629) {
+  var_cb7d9fafcbb7a3da = conditionalcontainer function_cb7d9fafcbb7a3da();
   objectisdefined = isDefined(object);
   var_3938d5f50103e0fa = isfunction(var_ef09bb69811327d1);
   var_8105433f3dcf58a = !isDefined(var_5288a299caa0504e) || isstruct(var_5288a299caa0504e);
@@ -112,27 +112,27 @@ function function_21987527fd4733ad(var_21a51c1826b9a6aa, object, var_ef09bb69811
     return;
   }
 
-  level thread function_1b7df7adf29a85c6(var_21a51c1826b9a6aa, object, var_ef09bb69811327d1, var_5288a299caa0504e, var_717b087350a6df2f, var_3b7ed38c07818629);
+  level thread function_1b7df7adf29a85c6(conditionalcontainer, object, var_ef09bb69811327d1, var_5288a299caa0504e, var_717b087350a6df2f, var_3b7ed38c07818629);
 }
 
-function private function_1b7df7adf29a85c6(var_21a51c1826b9a6aa, object, var_ef09bb69811327d1, var_5288a299caa0504e, var_717b087350a6df2f, var_3b7ed38c07818629) {
+function private function_1b7df7adf29a85c6(conditionalcontainer, object, var_ef09bb69811327d1, var_5288a299caa0504e, var_717b087350a6df2f, var_3b7ed38c07818629) {
   var_3b7ed38c07818629 = default_to(var_3b7ed38c07818629, 0.5);
   var_717b087350a6df2f = default_to(var_717b087350a6df2f, 5);
   var_be685114ee68c2f3 = gettime();
-  var_3e0486861622f2e1 = 1;
+  shouldcontinuecheckingconditions = 1;
 
-  while(var_3e0486861622f2e1) {
+  while(shouldcontinuecheckingconditions) {
     var_b7d39a4661f3460 = gettime();
     timepassedinseconds = (var_b7d39a4661f3460 - var_be685114ee68c2f3) / 1000;
 
-    if(isDefined(object) && function_93587d5ba6247f36(var_21a51c1826b9a6aa, object)) {
+    if(isDefined(object) && function_93587d5ba6247f36(conditionalcontainer, object)) {
       object thread[[var_ef09bb69811327d1]](var_5288a299caa0504e);
-      var_3e0486861622f2e1 = 0;
+      shouldcontinuecheckingconditions = 0;
       return;
     }
 
     if(timepassedinseconds >= var_717b087350a6df2f) {
-      var_3e0486861622f2e1 = 0;
+      shouldcontinuecheckingconditions = 0;
       break;
     }
 

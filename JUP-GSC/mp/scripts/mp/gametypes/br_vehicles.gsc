@@ -314,7 +314,7 @@ function deleteextantvehicles() {
   foreach(var_e5cd5ce5ee8dc6c9 in level.vehicle.instances) {
     foreach(vehicle in var_e5cd5ce5ee8dc6c9) {
       scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_preventrespawn(vehicle);
-      vehicle.var_a8f4bb03b366aa80 = 1;
+      vehicle.dontspawnhusk = 1;
       level thread scripts\cp_mp\vehicles\vehicle::vehicle_death(vehicle);
     }
   }
@@ -594,7 +594,7 @@ function spawninitialvehicles() {
     }
   }
 
-  if(level.br_totalvehiclesspawned < level.br_totalvehiclesmax && scripts\mp\poi::function_47d356083884f913()) {
+  if(level.br_totalvehiclesspawned < level.br_totalvehiclesmax && scripts\mp\poi::poi_issystemactive()) {
     function_9856ad860555f8b9();
     unusedspawns = array_remove_array(unusedspawns, usedspawns);
 
@@ -648,8 +648,8 @@ function spawninitialvehicles() {
     unusedspawns = array_remove_array(unusedspawns, usedspawns);
 
     foreach(spawn in unusedspawns) {
-      poi = scripts\mp\poi::function_6cc445c02b5effac(spawn.origin);
-      subarea = scripts\mp\ai_mp_controller::function_a44e168e8cced18(spawn.origin, poi);
+      poi = scripts\mp\poi::poi_findpoioriginisin(spawn.origin);
+      subarea = scripts\mp\ai_mp_controller::subarea_findfromorigin(spawn.origin, poi);
 
       if(isDefined(subarea)) {
         if(!isDefined(subarea.vehiclespawnpoints)) {
@@ -964,7 +964,7 @@ function brvehicleonprematchstarted() {
 
   wait 1.5;
 
-  if(!istrue(level.var_7bf42d565645a485)) {
+  if(!istrue(level.shouldinitvehicles)) {
     return;
   }
 

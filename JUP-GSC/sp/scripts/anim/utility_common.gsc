@@ -129,7 +129,7 @@ function isshotgunai() {
 }
 
 function islongrangeai() {
-  return self function_e8ca4080d02a0bb4() || usingrocketlauncher();
+  return self aiissniper() || usingrocketlauncher();
 }
 
 function usingpistol() {
@@ -187,9 +187,9 @@ function repeater_headshot_ammo_passive(objweapon, attacker, victim) {
   }
 
   maxclipammo = weaponclipsize(objweapon);
-  var_d7724e7657d45522 = maxclipammo * 1;
+  refundcount = maxclipammo * 1;
   currammo = attacker getweaponammoclip(objweapon);
-  newammo = min(currammo + var_d7724e7657d45522, maxclipammo);
+  newammo = min(currammo + refundcount, maxclipammo);
   attacker setweaponammoclip(objweapon, int(newammo));
 }
 
@@ -583,13 +583,13 @@ function canseeenemyfromexposed() {
   now = gettime();
   node = self.node;
   enemy = self.enemy;
-  var_a53e0a65b825db1d = !isDefined(self.var_c98e9008b1b17f09) || now >= self.var_c98e9008b1b17f09;
+  rechecktime = !isDefined(self.canseeenemyfromexposednext) || now >= self.canseeenemyfromexposednext;
 
-  if(var_a53e0a65b825db1d || !is_equal(self.var_c07e2ed36098c414, enemy) || !is_equal(self.var_1f088108efc5d0c4, node)) {
-    self.canseeenemyfromexposed = function_e28d706f2d3f4c65(enemy, node);
-    self.var_c98e9008b1b17f09 = now + 1000;
-    self.var_1f088108efc5d0c4 = node;
-    self.var_c07e2ed36098c414 = enemy;
+  if(rechecktime || !is_equal(self.canseeenemyfromexposedenemy, enemy) || !is_equal(self.canseeenemyfromexposednode, node)) {
+    self.canseeenemyfromexposed = canseeenemyfromexposedatnode(enemy, node);
+    self.canseeenemyfromexposednext = now + 1000;
+    self.canseeenemyfromexposednode = node;
+    self.canseeenemyfromexposedenemy = enemy;
   }
 
   result = self.canseeenemyfromexposed;
@@ -603,7 +603,7 @@ function canseeenemyfromexposed() {
   return result;
 }
 
-function function_e28d706f2d3f4c65(enemy, node) {
+function canseeenemyfromexposedatnode(enemy, node) {
   if(!isDefined(enemy)) {
     return 0;
   }
@@ -704,7 +704,7 @@ function cansuppressenemy() {
     return 0;
   }
 
-  suppressiondisabled = istrue(self.var_51642e27c7e7d224);
+  suppressiondisabled = istrue(self.disablesuppressingfire);
 
   if(!isPlayer(self.enemy)) {
     if(!suppressiondisabled || self.forcesuppressai) {
@@ -889,27 +889,27 @@ function shouldshootenemyent() {
 }
 
 function sortandcullanimstructarray(animstructarray) {
-  var_28656d665cf2b0fa = [];
+  newanimstructarray = [];
 
   foreach(animstruct in animstructarray) {
     if(animstruct.weight <= 0) {
       continue;
     }
 
-    for(i = 0; i < var_28656d665cf2b0fa.size; i++) {
-      if(animstruct.weight < var_28656d665cf2b0fa[i].weight) {
-        for(j = var_28656d665cf2b0fa.size; j > i; j--) {
-          var_28656d665cf2b0fa[j] = var_28656d665cf2b0fa[j - 1];
+    for(i = 0; i < newanimstructarray.size; i++) {
+      if(animstruct.weight < newanimstructarray[i].weight) {
+        for(j = newanimstructarray.size; j > i; j--) {
+          newanimstructarray[j] = newanimstructarray[j - 1];
         }
 
         break;
       }
     }
 
-    var_28656d665cf2b0fa[i] = animstruct;
+    newanimstructarray[i] = animstruct;
   }
 
-  return var_28656d665cf2b0fa;
+  return newanimstructarray;
 }
 
 function player_can_see_ai(player, ai, latency) {

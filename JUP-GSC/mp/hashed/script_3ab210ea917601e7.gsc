@@ -47,22 +47,22 @@ function function_caf8f45b7e3b78a2(activityinstance) {
   }
 }
 
-function function_85f01c1d56e32f7c(activityinstance, var_a84449a9bd492279) {
+function function_85f01c1d56e32f7c(activityinstance, activationmoment) {
   var_ee373e1060f9863f = function_dd58016ab8a9a3e0(activityinstance);
 
   if(!isDefined(var_ee373e1060f9863f.var_bf8dc9b4e4603f8d)) {
     return undefined;
   }
 
-  return istrue(var_ee373e1060f9863f.var_bf8dc9b4e4603f8d[var_a84449a9bd492279]);
+  return istrue(var_ee373e1060f9863f.var_bf8dc9b4e4603f8d[activationmoment]);
 }
 
 function function_6fe8aa8dfb9111eb(activityinstance, dataobject) {
   uniquename = function_71667164a3e75714(dataobject);
 
-  foreach(var_cecb6f8a13d4084d in activityinstance.var_40b691c0a6852f73) {
-    if(function_d20c7983c54fc98a(var_cecb6f8a13d4084d, uniquename)) {
-      updatebroadcast(var_cecb6f8a13d4084d);
+  foreach(activebroadcastinstance in activityinstance.activebroadcasts) {
+    if(function_d20c7983c54fc98a(activebroadcastinstance, uniquename)) {
+      updatebroadcast(activebroadcastinstance);
     }
   }
 }
@@ -70,15 +70,15 @@ function function_6fe8aa8dfb9111eb(activityinstance, dataobject) {
 function function_947973be56e0dbb2(playerlist) {
   activitynexuslog("Persistent and Tracker broadcasts reactivated for players.", @ "hash_3b38e79d9ffe7e9f", self, playerlist);
 
-  foreach(broadcast in self.var_40b691c0a6852f73) {
+  foreach(broadcast in self.activebroadcasts) {
     if(function_75002b8400884f8(broadcast)) {
-      function_4cd1243025855075(playerlist, broadcast);
+      broadcasttoplayers(playerlist, broadcast);
     }
   }
 }
 
 function function_2e44f2eaf470e806(broadcastinstance) {
-  function_4cd1243025855075(self.var_6c29f2fdb0054bbe, broadcastinstance);
+  broadcasttoplayers(self.playerparticipants, broadcastinstance);
 }
 
 function function_3f3bc21a4bec7c33(broadcastinstance) {
@@ -88,7 +88,7 @@ function function_3f3bc21a4bec7c33(broadcastinstance) {
 function broadcast(broadcastinstance, playerlist) {
   activitynexuslog("Broadcast Activated for Activity: " + function_872fb49b377327fe(broadcastinstance), @ "hash_3b38e79d9ffe7e9f", self, playerlist);
 
-  switch (broadcastinstance function_c9dd0ad4f024db96()) {
+  switch (broadcastinstance getbroadcastdestination()) {
     case #"hash_f29608411835dbd2":
       function_2e44f2eaf470e806(broadcastinstance);
       break;
@@ -98,7 +98,7 @@ function broadcast(broadcastinstance, playerlist) {
     case #"hash_f81f6f6ee4ce49a2":
       centerpoint = namespace_68dc261109a9503f::function_8988a4c89289d7f4(self);
       var_ab5375b03260c7 = function_45575393a3d8e399(broadcastinstance);
-      function_4cd1243025855075(var_ab5375b03260c7, broadcastinstance);
+      broadcasttoplayers(var_ab5375b03260c7, broadcastinstance);
       break;
     case #"hash_81b1b8581bbc387":
       function_3f3bc21a4bec7c33(broadcastinstance);
@@ -108,7 +108,7 @@ function broadcast(broadcastinstance, playerlist) {
       break;
     case #"hash_129fc9ef498f13cc":
     default:
-      function_4cd1243025855075(playerlist, broadcastinstance);
+      broadcasttoplayers(playerlist, broadcastinstance);
       break;
   }
 
@@ -117,19 +117,19 @@ function broadcast(broadcastinstance, playerlist) {
   }
 }
 
-function function_484f9658b565df53(var_a84449a9bd492279, playerlist) {
-  activitynexuslog("Activated all broadcasts with Activation Moment: " + var_a84449a9bd492279, @ "hash_3b38e79d9ffe7e9f", self, playerlist);
+function function_484f9658b565df53(activationmoment, playerlist) {
+  activitynexuslog("Activated all broadcasts with Activation Moment: " + activationmoment, @ "hash_3b38e79d9ffe7e9f", self, playerlist);
 
-  if(var_a84449a9bd492279 == "ActivationName") {
+  if(activationmoment == "ActivationName") {
     assertmsg("<dev string:x64>");
     return;
   }
 
-  var_4fb0bb8290e39fb3 = function_b4f81cd2bdc5602e(var_a84449a9bd492279);
+  broadcastinstancestructs = function_b4f81cd2bdc5602e(activationmoment);
 
-  foreach(broadcastinstance in var_4fb0bb8290e39fb3) {
+  foreach(broadcastinstance in broadcastinstancestructs) {
     if(!isDefined(playerlist)) {
-      playerlist = self.var_6c29f2fdb0054bbe;
+      playerlist = self.playerparticipants;
     }
 
     broadcast(broadcastinstance, playerlist);
@@ -139,52 +139,52 @@ function function_484f9658b565df53(var_a84449a9bd492279, playerlist) {
 function function_9d4772170bc34a3c(uniquename, playerlist) {
   activitynexuslog("Activated all broadcasts with Unique Name: " + uniquename, @ "hash_3b38e79d9ffe7e9f", self, playerlist);
   activityinstance = self;
-  var_4fb0bb8290e39fb3 = [];
-  var_c1bf8d848d376cf2 = function_709eb291cbeeb02(activityinstance, uniquename);
+  broadcastinstancestructs = [];
+  broadcastinstancestruct = function_709eb291cbeeb02(activityinstance, uniquename);
 
-  if(isDefined(var_c1bf8d848d376cf2)) {
-    var_4fb0bb8290e39fb3 = [var_c1bf8d848d376cf2];
+  if(isDefined(broadcastinstancestruct)) {
+    broadcastinstancestructs = [broadcastinstancestruct];
   }
 
-  function_58c9b87625671005(var_4fb0bb8290e39fb3, uniquename, undefined, 0);
+  function_58c9b87625671005(broadcastinstancestructs, uniquename, undefined, 0);
 }
 
 function function_bcdc9fefc04fa6a(uniquename, playerlist) {
   activitynexuslog("Hide all broadcasts with Unique Name: " + uniquename, @ "hash_3b38e79d9ffe7e9f", self, playerlist);
   activityinstance = self;
-  var_4fb0bb8290e39fb3 = [];
-  var_c1bf8d848d376cf2 = function_709eb291cbeeb02(activityinstance, uniquename);
+  broadcastinstancestructs = [];
+  broadcastinstancestruct = function_709eb291cbeeb02(activityinstance, uniquename);
 
-  if(isDefined(var_c1bf8d848d376cf2)) {
-    var_4fb0bb8290e39fb3 = [var_c1bf8d848d376cf2];
+  if(isDefined(broadcastinstancestruct)) {
+    broadcastinstancestructs = [broadcastinstancestruct];
   }
 
-  function_58c9b87625671005(var_4fb0bb8290e39fb3, uniquename, undefined, 1);
+  function_58c9b87625671005(broadcastinstancestructs, uniquename, undefined, 1);
 }
 
 function function_cdd79617f81a46d2(uniquename) {
   activitynexuslog("Removed all broadcasts with Unique Name: " + uniquename + uniquename, @ "hash_3b38e79d9ffe7e9f", self);
   activityinstance = self;
-  var_4fb0bb8290e39fb3 = [];
-  var_c1bf8d848d376cf2 = function_709eb291cbeeb02(activityinstance, uniquename);
+  broadcastinstancestructs = [];
+  broadcastinstancestruct = function_709eb291cbeeb02(activityinstance, uniquename);
 
-  if(isDefined(var_c1bf8d848d376cf2)) {
-    var_4fb0bb8290e39fb3 = [var_c1bf8d848d376cf2];
+  if(isDefined(broadcastinstancestruct)) {
+    broadcastinstancestructs = [broadcastinstancestruct];
   }
 
-  function_58c9b87625671005(var_4fb0bb8290e39fb3, uniquename, undefined, 2);
+  function_58c9b87625671005(broadcastinstancestructs, uniquename, undefined, 2);
 }
 
 function function_1281c7fff9456e18(activationname, playerlist) {
   activitynexuslog("Activated all broadcasts with Activation Name: " + activationname, @ "hash_3b38e79d9ffe7e9f", self, playerlist);
-  var_4fb0bb8290e39fb3 = function_e38f1d6d5a208fe1(activationname);
-  function_58c9b87625671005(var_4fb0bb8290e39fb3, activationname, playerlist, 0);
+  broadcastinstancestructs = function_e38f1d6d5a208fe1(activationname);
+  function_58c9b87625671005(broadcastinstancestructs, activationname, playerlist, 0);
 }
 
 function function_f2a618a7ad2f558d(activationname, playerlist) {
   activitynexuslog("Hide all broadcasts with Activation Name: " + activationname, @ "hash_3b38e79d9ffe7e9f", self, playerlist);
-  var_4fb0bb8290e39fb3 = function_e38f1d6d5a208fe1(activationname);
-  function_58c9b87625671005(var_4fb0bb8290e39fb3, activationname, playerlist, 1);
+  broadcastinstancestructs = function_e38f1d6d5a208fe1(activationname);
+  function_58c9b87625671005(broadcastinstancestructs, activationname, playerlist, 1);
 }
 
 function function_8350a7df2508a779(activitymoment) {
@@ -195,10 +195,10 @@ function function_8350a7df2508a779(activitymoment) {
     return;
   }
 
-  foreach(broadcastinstance in self.var_40b691c0a6852f73) {
-    var_7c0025e4cf44b11a = broadcastinstance function_6a312795248d0f1c();
+  foreach(broadcastinstance in self.activebroadcasts) {
+    deactivationmoment = broadcastinstance function_6a312795248d0f1c();
 
-    if(isDefined(var_7c0025e4cf44b11a) && var_7c0025e4cf44b11a == activitymoment) {
+    if(isDefined(deactivationmoment) && deactivationmoment == activitymoment) {
       function_13fbc3d3854d009a(broadcastinstance);
       function_91f301cdf6b88253(broadcastinstance);
     }
@@ -208,13 +208,13 @@ function function_8350a7df2508a779(activitymoment) {
 function function_ca585715158d49fa(deactivationname) {
   activitynexuslog("Deactivated Active Broadcasts with Deactivation name: " + deactivationname, @ "hash_3b38e79d9ffe7e9f", self);
 
-  foreach(broadcastinstance in self.var_40b691c0a6852f73) {
-    var_7c0025e4cf44b11a = broadcastinstance function_6a312795248d0f1c();
-    name = broadcastinstance function_a3b4a80d61094f63();
-    var_32b29279371d24a2 = isDefined(var_7c0025e4cf44b11a) && var_7c0025e4cf44b11a == "ActivationName";
-    var_3c7b34c332071a5e = isDefined(name) && name == deactivationname;
+  foreach(broadcastinstance in self.activebroadcasts) {
+    deactivationmoment = broadcastinstance function_6a312795248d0f1c();
+    name = broadcastinstance getdeactivationname();
+    var_32b29279371d24a2 = isDefined(deactivationmoment) && deactivationmoment == "ActivationName";
+    deactivationnamematches = isDefined(name) && name == deactivationname;
 
-    if(var_32b29279371d24a2 && var_3c7b34c332071a5e) {
+    if(var_32b29279371d24a2 && deactivationnamematches) {
       function_13fbc3d3854d009a(broadcastinstance);
       function_91f301cdf6b88253(broadcastinstance);
     }
@@ -224,16 +224,16 @@ function function_ca585715158d49fa(deactivationname) {
 function function_94050b71cb4ef1ca(playerlist) {
   activitynexuslog("Hide all active persistent and tracker broadcasts.", @ "hash_3b38e79d9ffe7e9f", self, playerlist);
 
-  foreach(var_c1bf8d848d376cf2 in self.var_40b691c0a6852f73) {
-    function_dacc8aa0d16e4487(playerlist, var_c1bf8d848d376cf2);
+  foreach(broadcastinstancestruct in self.activebroadcasts) {
+    function_dacc8aa0d16e4487(playerlist, broadcastinstancestruct);
   }
 }
 
-function function_a558693f33df78c7(broadcastuniqueid) {
+function getactivebroadcastinstance(broadcastuniqueid) {
   activebroadcast = undefined;
 
-  if(isDefined(self.var_40b691c0a6852f73[broadcastuniqueid])) {
-    activebroadcast = self.var_40b691c0a6852f73[broadcastuniqueid];
+  if(isDefined(self.activebroadcasts[broadcastuniqueid])) {
+    activebroadcast = self.activebroadcasts[broadcastuniqueid];
   }
 
   return activebroadcast;
@@ -284,49 +284,49 @@ function function_fd7a0d7af53408c9(var_d9915f8020fff325, activityinstance, var_b
   }
 }
 
-function private function_58c9b87625671005(var_4fb0bb8290e39fb3, activationname, playerlist, var_35498449056da93d) {
+function private function_58c9b87625671005(broadcastinstancestructs, activationname, playerlist, var_35498449056da93d) {
   if(!isDefined(playerlist)) {
-    playerlist = self.var_6c29f2fdb0054bbe;
+    playerlist = self.playerparticipants;
   }
 
-  foreach(var_c1bf8d848d376cf2 in var_4fb0bb8290e39fb3) {
+  foreach(broadcastinstancestruct in broadcastinstancestructs) {
     if(var_35498449056da93d == 0) {
-      broadcast(var_c1bf8d848d376cf2, playerlist);
+      broadcast(broadcastinstancestruct, playerlist);
       continue;
     }
 
     if(var_35498449056da93d == 1) {
-      function_dacc8aa0d16e4487(playerlist, var_c1bf8d848d376cf2);
+      function_dacc8aa0d16e4487(playerlist, broadcastinstancestruct);
       continue;
     }
 
     if(var_35498449056da93d == 2) {
-      function_dacc8aa0d16e4487(playerlist, var_c1bf8d848d376cf2);
-      function_91f301cdf6b88253(var_c1bf8d848d376cf2);
+      function_dacc8aa0d16e4487(playerlist, broadcastinstancestruct);
+      function_91f301cdf6b88253(broadcastinstancestruct);
     }
   }
 }
 
 function private function_bec053dce018ba34(broadcastinstance) {
   activitynexuslog("Persistent broadcast is active and stored in activity instance data." + function_872fb49b377327fe(broadcastinstance), @ "hash_3b38e79d9ffe7e9f", self);
-  uniqueid = broadcastinstance function_cf54c2c8650d9688();
-  self.var_40b691c0a6852f73[uniqueid] = broadcastinstance;
+  uniqueid = broadcastinstance getbroadcastuniqueid();
+  self.activebroadcasts[uniqueid] = broadcastinstance;
 }
 
 function private function_91f301cdf6b88253(broadcastinstance) {
   activitynexuslog("Persistent broadcast is inactive and removed from activity instance data." + function_872fb49b377327fe(broadcastinstance), @ "hash_3b38e79d9ffe7e9f", self);
-  uniqueid = broadcastinstance function_cf54c2c8650d9688();
-  self.var_40b691c0a6852f73[uniqueid] = undefined;
+  uniqueid = broadcastinstance getbroadcastuniqueid();
+  self.activebroadcasts[uniqueid] = undefined;
 }
 
 function private function_1bb667dce8ec20d2(activationname) {
   var_c9f561285d1c4859 = [];
 
-  foreach(var_cecb6f8a13d4084d in self.var_40b691c0a6852f73) {
-    var_f3c55aafff2be133 = var_cecb6f8a13d4084d function_27486f42d37da990();
+  foreach(activebroadcastinstance in self.activebroadcasts) {
+    broadcastactivationname = activebroadcastinstance getactivationname();
 
-    if(isDefined(var_f3c55aafff2be133) && var_f3c55aafff2be133 == activationname) {
-      var_c9f561285d1c4859[var_c9f561285d1c4859.size] = var_cecb6f8a13d4084d;
+    if(isDefined(broadcastactivationname) && broadcastactivationname == activationname) {
+      var_c9f561285d1c4859[var_c9f561285d1c4859.size] = activebroadcastinstance;
     }
   }
 
@@ -334,8 +334,8 @@ function private function_1bb667dce8ec20d2(activationname) {
 }
 
 function private function_872fb49b377327fe(broadcastinstance) {
-  var_b110b538c0af62cd = " broadcast: type: " + broadcastinstance function_54ad2295d6995862() + " unique id: " + broadcastinstance function_cf54c2c8650d9688() + " destination: " + broadcastinstance function_c9dd0ad4f024db96();
-  return var_b110b538c0af62cd;
+  broadcastinfostring = " broadcast: type: " + broadcastinstance getbroadcasttype() + " unique id: " + broadcastinstance getbroadcastuniqueid() + " destination: " + broadcastinstance getbroadcastdestination();
+  return broadcastinfostring;
 }
 
 function function_ff72cf17a0a5fac() {
@@ -355,9 +355,9 @@ function function_ff72cf17a0a5fac() {
 function private function_7ee522f2b2a96bbc(params) {
   hostplayer = gethostplayer();
 
-  if(isDefined(hostplayer) && isPlayer(hostplayer) && isDefined(hostplayer.activities.var_6346961d07f668fe)) {
-    id = hostplayer.activities.var_6346961d07f668fe;
-    instance = function_1f3e343912ae15c5(id);
+  if(isDefined(hostplayer) && isPlayer(hostplayer) && isDefined(hostplayer.activities.focusedactivityid)) {
+    id = hostplayer.activities.focusedactivityid;
+    instance = getactivityinstance(id);
     moment = params[0];
 
     if(moment == "<dev string:x2fb>" || moment == "<dev string:x33c>" || moment == "<dev string:x38e>") {
@@ -365,7 +365,7 @@ function private function_7ee522f2b2a96bbc(params) {
       return;
     }
 
-    instance function_484f9658b565df53(moment, instance.var_6c29f2fdb0054bbe);
+    instance function_484f9658b565df53(moment, instance.playerparticipants);
   }
 }
 

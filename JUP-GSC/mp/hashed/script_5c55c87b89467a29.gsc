@@ -572,7 +572,7 @@ function function_67ad64ccfb9082a8(animstruct, animref, camerastructstart) {
   self notify("dmz_playInfil");
   self endon("disconnect");
   thread function_4a22eef220bff896();
-  thread scripts\cp_mp\utility\inventory_utility::function_fc6a5b145563be33();
+  thread scripts\cp_mp\utility\inventory_utility::givegunlessweapon();
   thread scripts\mp\utility\infilexfil::infil_player_rig_updated(self.var_1cd92a64c5b20fa0, self.origin, self.angles);
   self cameraunlink();
   animstruct scripts\common\anim::anim_first_frame_solo(self.player_rig, animref + "intro");
@@ -663,7 +663,7 @@ function function_4a22eef220bff896() {
   wait 5;
 
   if(self getclientomnvar("ui_world_fade") > 0) {
-    scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0.5);
+    scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0.5);
   }
 
   if(self getclientomnvar("ui_total_fade") > 0) {
@@ -757,7 +757,7 @@ function function_f58b70c3d35c2f5() {
 
 function function_f687b7ea0da59a4c(animstruct) {
   self endon("disconnect");
-  scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 1, 0.5);
+  scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 1, 0.5);
   self lerpfovbypreset("default");
   self cameraunlink();
 
@@ -780,7 +780,7 @@ function function_f687b7ea0da59a4c(animstruct) {
   self setplayerangles(animstruct.angles);
   self notify("remove_rig");
   self notify("screen_completely_black");
-  scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0.5);
+  scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0.5);
 }
 
 function function_f43a907c9b43b440(cam) {

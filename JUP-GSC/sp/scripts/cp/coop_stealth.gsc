@@ -903,12 +903,12 @@ function delete_headicon(reinforcement_icon_objective_id, reinforcement_headicon
   enemy_ai notify("exit_stealth_think");
 }
 
-function did_anyone_see_this(enemy, eventposition, eventradius, var_be714c91530ba6ca, tacposition, autorange) {
+function did_anyone_see_this(enemy, eventposition, eventradius, bcheckfov, tacposition, autorange) {
   ais = getaiarray("axis");
   cradiussq = eventradius * eventradius;
 
-  if(!isDefined(var_be714c91530ba6ca)) {
-    var_be714c91530ba6ca = 1;
+  if(!isDefined(bcheckfov)) {
+    bcheckfov = 1;
   }
 
   if(!isDefined(tacposition)) {
@@ -947,8 +947,8 @@ function did_anyone_see_this(enemy, eventposition, eventradius, var_be714c91530b
       continue;
     }
 
-    if(!ai hastacvis(tacposition, var_be714c91530ba6ca)) {
-      if(var_be714c91530ba6ca && !ai aipointinfov(eventposition)) {
+    if(!ai hastacvis(tacposition, bcheckfov)) {
+      if(bcheckfov && !ai aipointinfov(eventposition)) {
         continue;
       }
 
@@ -1400,27 +1400,27 @@ function set_maxvisibledist(value) {
 }
 
 function init_event_distances() {
-  array["spotted"]["death"] = function_9d30fd63965bafa9("death");
+  array["spotted"]["death"] = geteventdefaultdistance("death");
   array["hidden"]["death"] = 512;
-  array["spotted"]["pain"] = function_9d30fd63965bafa9("pain");
+  array["spotted"]["pain"] = geteventdefaultdistance("pain");
   array["hidden"]["pain"] = 256;
-  array["spotted"]["explosion"] = function_9d30fd63965bafa9("explosion");
+  array["spotted"]["explosion"] = geteventdefaultdistance("explosion");
   array["hidden"]["explosion"] = 2048;
-  array["spotted"]["bullet"] = function_9d30fd63965bafa9("bullet");
+  array["spotted"]["bullet"] = geteventdefaultdistance("bullet");
   array["hidden"]["bullet"] = 64;
-  array["spotted"]["footstep_walk"] = function_9d30fd63965bafa9("footstep_walk");
+  array["spotted"]["footstep_walk"] = geteventdefaultdistance("footstep_walk");
   array["hidden"]["footstep_walk"] = 50;
-  array["spotted"]["footstep"] = function_9d30fd63965bafa9("footstep");
+  array["spotted"]["footstep"] = geteventdefaultdistance("footstep");
   array["hidden"]["footstep"] = 100;
-  array["spotted"]["footstep_sprint"] = function_9d30fd63965bafa9("footstep_sprint");
+  array["spotted"]["footstep_sprint"] = geteventdefaultdistance("footstep_sprint");
   array["hidden"]["footstep_sprint"] = 400;
-  array["spotted"]["gunshot"] = function_9d30fd63965bafa9("gunshot");
+  array["spotted"]["gunshot"] = geteventdefaultdistance("gunshot");
   array["hidden"]["gunshot"] = 1500;
-  array["spotted"]["silenced_shot"] = function_9d30fd63965bafa9("silenced_shot");
+  array["spotted"]["silenced_shot"] = geteventdefaultdistance("silenced_shot");
   array["hidden"]["silenced_shot"] = 180;
-  array["spotted"]["glass_destroyed"] = function_9d30fd63965bafa9("glass_destroyed");
+  array["spotted"]["glass_destroyed"] = geteventdefaultdistance("glass_destroyed");
   array["hidden"]["glass_destroyed"] = 384;
-  array["spotted"]["gunshot_teammate"] = function_9d30fd63965bafa9("gunshot_teammate");
+  array["spotted"]["gunshot_teammate"] = geteventdefaultdistance("gunshot_teammate");
   array["hidden"]["gunshot_teammate"] = 1500;
   array["spotted"]["new_enemy"] = 128;
   array["hidden"]["new_enemy"] = 128;
@@ -1864,7 +1864,7 @@ function function_1b1663a65690a44a(region, delay, var_1d6462b67c5ed471) {
   }
 
   wait delay;
-  var_2a54763b46ecd8d7 = function_9d30fd63965bafa9("gunshot", self);
+  var_2a54763b46ecd8d7 = geteventdefaultdistance("gunshot", self);
 
   if(isDefined(var_1d6462b67c5ed471) && isvector(var_1d6462b67c5ed471)) {
     if(distance2d(var_1d6462b67c5ed471.origin, self.origin) < var_2a54763b46ecd8d7) {

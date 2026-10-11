@@ -154,7 +154,7 @@ function private function_7afe055995edf844() {
 
   if(getdvarint(@ "hash_1b1ec093041f3814", 1) != 0) {
     var_760480dc8b6f2623 = [];
-    ismaptomapinfil = istrue(utility::function_f3bb4f4911a1beb2("instanceInventory", "isMapToMapInfil"));
+    ismaptomapinfil = istrue(utility::callsharedfunc("instanceInventory", "isMapToMapInfil"));
 
     for(backpackindex = 0; backpackindex < 10; backpackindex++) {
       iteminstance = self function_644ed519cac9722b(2, 1 + backpackindex);
@@ -233,7 +233,7 @@ function private function_7afe055995edf844() {
 
     if(isDefined(var_3cd9588dc8609a1.weaponindex)) {
       self.var_c59a9ab288f6a9bf[var_3cd9588dc8609a1.weaponindex] = {
-        #var_cb06779b5d45f25f: function_2c7fe4b882b6d63e(var_3cd9588dc8609a1.instance.var_d3c548c09bb62da2), #secure: function_2c7fe4b882b6d63e(var_3cd9588dc8609a1.instance.metadata)
+        #insecure: function_2c7fe4b882b6d63e(var_3cd9588dc8609a1.instance.var_d3c548c09bb62da2), #secure: function_2c7fe4b882b6d63e(var_3cd9588dc8609a1.instance.metadata)
       };
     }
 
@@ -342,7 +342,7 @@ function private function_451eefc39146b820() {
 }
 
 function private function_1100308907e5eb6a() {
-  ismaptomapinfil = istrue(utility::function_f3bb4f4911a1beb2("instanceInventory", "isMapToMapInfil"));
+  ismaptomapinfil = istrue(utility::callsharedfunc("instanceInventory", "isMapToMapInfil"));
 
   for(backpackindex = 0; backpackindex < 10; backpackindex++) {
     lootinstance = self function_644ed519cac9722b(2, 1 + backpackindex);
@@ -385,7 +385,7 @@ function private function_1100308907e5eb6a() {
         var_edd8960f9ec52b5f = getscriptbundle(var_1c791d7dca27482a);
 
         if(!isDefined(var_edd8960f9ec52b5f)) {
-          assertmsg("<dev string:x528>" + function_3c8848a3a11b2553(var_1c791d7dca27482a) + "<dev string:x576>" + "<dev string:x5c6>");
+          assertmsg("<dev string:x528>" + getxhashsourcename(var_1c791d7dca27482a) + "<dev string:x576>" + "<dev string:x5c6>");
           function_ca3bbb1070436540(backpackindex, 0, 1);
           continue;
         }
@@ -458,9 +458,9 @@ function function_80c587026fbc6e0d() {
   }
 
   if(function_c82e8cdc726067e()) {
-    utility::function_f3bb4f4911a1beb2("instanceInventory", "preExtractItems", self);
+    utility::callsharedfunc("instanceInventory", "preExtractItems", self);
     function_ab1ee99079e4c5a0();
-    utility::function_f3bb4f4911a1beb2("instanceInventory", "postExtractItems", self);
+    utility::callsharedfunc("instanceInventory", "postExtractItems", self);
     function_340f746f0eb455d9();
   } else if(function_f9dea9ba0820dc12(self)) {
     function_dd9df8b3dd285733();
@@ -503,7 +503,7 @@ function private function_ab1ee99079e4c5a0() {
     function_e26d5c543a147a8d("gasmask", 13, 1, 10);
   }
 
-  ismaptomapexfil = istrue(utility::function_f3bb4f4911a1beb2("instanceInventory", "isMapToMapExfil", self));
+  ismaptomapexfil = istrue(utility::callsharedfunc("instanceInventory", "isMapToMapExfil", self));
 
   for(backpackindex = 0; backpackindex < 10; backpackindex++) {
     sublocation = 1 + backpackindex;
@@ -577,7 +577,7 @@ function private function_dbaac60172658dcf(weaponindex, location, sublocation) {
     }
   }
 
-  if(isDefined(itembundle) && !istrue(utility::function_f3bb4f4911a1beb2("instanceInventory", "isMapToMapExfil", self))) {
+  if(isDefined(itembundle) && !istrue(utility::callsharedfunc("instanceInventory", "isMapToMapExfil", self))) {
     if(weaponindex == 2 && !istrue(itembundle.var_72340ceb276c0f64) || weaponindex != 2 && !istrue(itembundle.var_8464122fb6575536)) {
       return;
     }
@@ -588,7 +588,7 @@ function private function_dbaac60172658dcf(weaponindex, location, sublocation) {
 
   if(isDefined(self.var_c59a9ab288f6a9bf[weaponindex])) {
     self function_e70c1fc3c2e5e05f(instance.instanceid, 0, self.var_c59a9ab288f6a9bf[weaponindex].secure);
-    self function_e70c1fc3c2e5e05f(instance.instanceid, 1, self.var_c59a9ab288f6a9bf[weaponindex].var_cb06779b5d45f25f);
+    self function_e70c1fc3c2e5e05f(instance.instanceid, 1, self.var_c59a9ab288f6a9bf[weaponindex].insecure);
   }
 
   var_ae326d1d2b95b12c = 0;
@@ -642,7 +642,7 @@ function private function_e26d5c543a147a8d(itemtype, kind, location, sublocation
     }
   }
 
-  if(!istrue(itembundle.var_8464122fb6575536) && !istrue(utility::function_f3bb4f4911a1beb2("instanceInventory", "isMapToMapExfil", self))) {
+  if(!istrue(itembundle.var_8464122fb6575536) && !istrue(utility::callsharedfunc("instanceInventory", "isMapToMapExfil", self))) {
     return;
   }
 
@@ -658,7 +658,7 @@ function private function_340f746f0eb455d9() {
     return;
   }
 
-  if(istrue(utility::function_f3bb4f4911a1beb2("instanceInventory", "isMapToMapExfil", self))) {
+  if(istrue(utility::callsharedfunc("instanceInventory", "isMapToMapExfil", self))) {
     return;
   }
 
@@ -738,7 +738,7 @@ function private function_e85d625960aadaaa(instance, paramoffset, unlockeventpar
 
     if(isDefined(baseweapon)) {
       baseweaponref = weapon::getweaponrootname(baseweapon);
-      iteminfo = function_e4f08713dc9c53b3(baseweaponref);
+      iteminfo = getlootiteminfofromref(baseweaponref);
 
       if(isDefined(iteminfo)) {
         weaponlootid = iteminfo.itemid;
@@ -750,7 +750,7 @@ function private function_e85d625960aadaaa(instance, paramoffset, unlockeventpar
   unlockeventparams[unlockeventparams.size] = weaponlootid;
   paramoffset += 1;
   baseweapon = function_1cc3fd00b6ccc3ba(instance.lootid);
-  attachments = function_6527364c1ecca6c6(baseweapon);
+  attachments = getweapondefaultattachments(baseweapon);
 
   foreach(attachment in attachments) {
     attachmentscriptbundle = getscriptbundle(hashcat(%"hash_3c2c9813bb16552f", attachment));
@@ -871,7 +871,7 @@ function private function_f9d6e71a677be0bf(player, struct, class) {
     return;
   }
 
-  ismaptomapinfil = istrue(utility::function_f3bb4f4911a1beb2("instanceInventory", "isMapToMapInfil"));
+  ismaptomapinfil = istrue(utility::callsharedfunc("instanceInventory", "isMapToMapInfil"));
   iteminstance = player function_644ed519cac9722b(1, 0);
 
   if(function_3f8c62126708afe6(iteminstance)) {
@@ -926,7 +926,7 @@ function private function_f9d6e71a677be0bf(player, struct, class) {
       }
 
       player.var_c59a9ab288f6a9bf[0] = {
-        #var_cb06779b5d45f25f: function_2c7fe4b882b6d63e(iteminstance.var_d3c548c09bb62da2), #secure: function_2c7fe4b882b6d63e(iteminstance.metadata)
+        #insecure: function_2c7fe4b882b6d63e(iteminstance.var_d3c548c09bb62da2), #secure: function_2c7fe4b882b6d63e(iteminstance.metadata)
       };
     }
   }
@@ -985,7 +985,7 @@ function private function_f9d6e71a677be0bf(player, struct, class) {
       }
 
       player.var_c59a9ab288f6a9bf[1] = {
-        #var_cb06779b5d45f25f: function_2c7fe4b882b6d63e(iteminstance.var_d3c548c09bb62da2), #secure: function_2c7fe4b882b6d63e(iteminstance.metadata)
+        #insecure: function_2c7fe4b882b6d63e(iteminstance.var_d3c548c09bb62da2), #secure: function_2c7fe4b882b6d63e(iteminstance.metadata)
       };
     }
   }
@@ -1086,7 +1086,7 @@ function private function_77046e6abbff19e5(instance, blueprintindex) {
   struct.weaponreticle = "none";
   struct.var_67dfd35699ba2d3e = "none";
   struct.weaponstickers = [];
-  lootinfo = function_3475769c002400f7(instance.lootid);
+  lootinfo = getlootiteminfofromid(instance.lootid);
   weaponassetname = function_1cc3fd00b6ccc3ba(instance.lootid);
 
   if(isDefined(blueprintindex) && isDefined(lootinfo.itemref)) {
@@ -1146,7 +1146,7 @@ function private function_77046e6abbff19e5(instance, blueprintindex) {
                   break;
                 }
 
-                attachmentslot = function_4add228b999c26aa(weaponassetname, attachmentref);
+                attachmentslot = getattachmentslot(weaponassetname, attachmentref);
 
                 if(attachmentslot == "") {
                   assertmsg("<dev string:xac4>" + attachmentref + "<dev string:xa5b>" + weaponassetname + "<dev string:x9d4>" + instance.instanceid + "<dev string:x4a6>");
@@ -1167,7 +1167,7 @@ function private function_77046e6abbff19e5(instance, blueprintindex) {
                   break;
                 }
 
-                bundledata = function_50f8a8f765bad85e(hashcat(%"hash_1345cc24140e89b8", var_d2682c57da143e9c), [#"ref"]);
+                bundledata = getscriptbundlefieldvalues(hashcat(%"hash_1345cc24140e89b8", var_d2682c57da143e9c), [#"ref"]);
 
                 if(!isDefined(bundledata) || !isDefined(bundledata.ref)) {
                   assertmsg("<dev string:xbaa>" + childlootid + "<dev string:x9d4>" + instance.instanceid + "<dev string:x4a6>");
@@ -1265,7 +1265,7 @@ function private function_1c6803f36c2ea0a6(weaponassetname, attachment, varianti
 }
 
 function private function_5bee5ced081d48c0(player) {
-  if(!player getplayerdata(level.var_5d69837cf4db0407, "enableDefaultDMZLoadouts")) {
+  if(!player getplayerdata(level.progressiongroup, "enableDefaultDMZLoadouts")) {
     return;
   }
 
@@ -1289,12 +1289,12 @@ function private function_5bee5ced081d48c0(player) {
     player function_4f1027e74d5073c4(var_351274b426e46e37, 13, 1, 3, []);
   }
 
-  player setplayerdata(level.var_5d69837cf4db0407, "enableDefaultDMZLoadouts", 0);
+  player setplayerdata(level.progressiongroup, "enableDefaultDMZLoadouts", 0);
 }
 
 function function_d1df77dc341aa4e5() {
   if(!isDefined(level.var_fb27023dc5eaa1c0)) {
-    gametypescriptbundle = function_90b5b6e99aef29d6();
+    gametypescriptbundle = getgametypescriptbundle();
     level.var_fb27023dc5eaa1c0 = isDefined(gametypescriptbundle.var_bd6d1a66d695958f) ? gametypescriptbundle.var_bd6d1a66d695958f : 1;
   }
 
@@ -1484,10 +1484,10 @@ function function_8715433c6e64940b(keys, values, instance, var_469244507bbe1b12)
   self function_e70c1fc3c2e5e05f(instance.instanceid, var_aa532d60c3f3d00c, var_5170a7c15b09f348);
 }
 
-function function_2c7fe4b882b6d63e(var_eda1e1681182223b) {
+function function_2c7fe4b882b6d63e(instancemetadata) {
   var_61395e7c9194e412 = [];
 
-  foreach(data in var_eda1e1681182223b) {
+  foreach(data in instancemetadata) {
     offset = var_61395e7c9194e412.size;
     var_61395e7c9194e412[offset] = [];
     var_61395e7c9194e412[offset][0] = data.key;
@@ -1706,7 +1706,7 @@ function function_7cce337c4902cbb6(weaponslotindex) {
     }
 
     if(var_b474ce3041e2eb66) {
-      foreach(data in weaponmetadata.var_cb06779b5d45f25f) {
+      foreach(data in weaponmetadata.insecure) {
         if(data[0] == 15) {
           return data[1];
         }
@@ -1781,19 +1781,19 @@ function function_dec054b294d48a5c(weaponobj) {
         continue;
       }
 
-      if(utility::function_f3bb4f4911a1beb2("weapons", "attachmentIsSelectable", weaponobj, attachment)) {
+      if(utility::callsharedfunc("weapons", "attachmentIsSelectable", weaponobj, attachment)) {
         if(isDefined(weaponobj.attachmentvarindices) && isDefined(weaponobj.attachmentvarindices[attachment])) {
           attachmentlootid = function_1c6803f36c2ea0a6(weaponobj.basename, attachment, weaponobj.attachmentvarindices[attachment]);
 
           if(!isDefined(attachmentlootid)) {
-            attachmentlootid = weapon::function_693e108cb61ceeb5(weaponrootname, attachment);
+            attachmentlootid = weapon::getattachmentlootid(weaponrootname, attachment);
           }
 
           subcomponents[subcomponents.size] = attachmentlootid;
           continue;
         }
 
-        subcomponents[subcomponents.size] = weapon::function_693e108cb61ceeb5(weaponrootname, attachment);
+        subcomponents[subcomponents.size] = weapon::getattachmentlootid(weaponrootname, attachment);
       }
     }
   }

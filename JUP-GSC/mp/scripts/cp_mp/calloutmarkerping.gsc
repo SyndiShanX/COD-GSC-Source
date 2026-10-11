@@ -680,7 +680,7 @@ function function_3087d1219984f7f1(lootid) {
 
   var_39f686831584c7e6 = getscriptbundle(%"hash_4074433960d5a78c");
   assert(isDefined(var_39f686831584c7e6));
-  lootinfo = function_3475769c002400f7(lootid);
+  lootinfo = getlootiteminfofromid(lootid);
   itemsb = "calloutmarkerpingitem:" + lootinfo.itemref;
   calloutmarkerpingitem = getscriptbundle(itemsb);
 
@@ -703,7 +703,7 @@ function function_442948452e540d3e(lootid) {
     var_30e078555972e3b8 = level.br_pickups.var_832ad168567520f7[lootid];
 
     if(isDefined(var_30e078555972e3b8) && var_30e078555972e3b8 != "") {
-      return function_1823ff50bb28148d(var_30e078555972e3b8);
+      return getxhash(var_30e078555972e3b8);
     } else if(lootidtype == #"weapon") {
       weaponname = level.br_pickups.var_b13dc7e63676bbe7[lootid];
       return function_8d17e607a79fd65f(weaponname);
@@ -817,7 +817,7 @@ function function_40a8426c1f049004(lootid) {
       itembundle = getscriptbundle("itemspawnentry:" + itembundlename);
 
       if(isDefined(itembundle) && isDefined(itembundle.type)) {
-        itemdeftype = function_1823ff50bb28148d(itembundle.type);
+        itemdeftype = getxhash(itembundle.type);
       }
     }
   } else if(istrue(level.var_a9350d89a2e4d752)) {
@@ -875,7 +875,7 @@ function function_f4293e5a97e51d76(lootid) {
       itembundle = getscriptbundle("itemspawnentry:" + itembundlename);
 
       if(isDefined(itembundle) && isDefined(itembundle.type)) {
-        itemdeftype = function_1823ff50bb28148d(itembundle.type);
+        itemdeftype = getxhash(itembundle.type);
       }
     }
   } else if(istrue(level.var_a9350d89a2e4d752)) {
@@ -888,7 +888,7 @@ function function_f4293e5a97e51d76(lootid) {
     }
   } else {
     assert(isDefined(level.brloottablename));
-    itemdeftype = function_1823ff50bb28148d(tablelookup(level.brloottablename, 5, lootid, 2));
+    itemdeftype = getxhash(tablelookup(level.brloottablename, 5, lootid, 2));
   }
 
   switch (itemdeftype) {
@@ -1293,7 +1293,7 @@ function calloutmarkerpingvo_createcalloutbattlechatter(pingindex) {
 function _calloutmarkerping_onpingchallenge(pingindex) {
   player = self;
   pingtype = player calloutmarkerping_gettype(pingindex);
-  player function_f3bb4f4911a1beb2("pmc_missions", "onPing", pingindex, pingtype);
+  player callsharedfunc("pmc_missions", "onPing", pingindex, pingtype);
 
   if(!issharedfuncdefined("challenges", "onPing")) {
     return;
@@ -1456,7 +1456,7 @@ function calloutmarkerpingvo_getcalloutaliasstringentity(var_7a5b847ea66815f) {
       calloutalias = calloutalias + "_" + var_9d38ff79b3a86204;
     }
 
-    return function_1823ff50bb28148d(calloutalias);
+    return getxhash(calloutalias);
   } else if(function_a1b34a5b82e7a92e(ent)) {
     if(istrue(ent.iscustomweapon)) {
       return #"ping_loot_weapon_custom";
@@ -2176,7 +2176,7 @@ function calloutmarkerpingvo_getcalloutaliasstringloot(pingindex, var_3943825289
       type = #"";
     }
   } else {
-    type = function_1823ff50bb28148d(tablelookupbyrow(level.brloottablename, row, 2));
+    type = getxhash(tablelookupbyrow(level.brloottablename, row, 2));
   }
 
   if(type == #"weapon") {
@@ -2213,7 +2213,7 @@ function calloutmarkerpingvo_getcalloutaliasstringloot(pingindex, var_3943825289
       }
     }
 
-    return function_1823ff50bb28148d(var_832ad168567520f7);
+    return getxhash(var_832ad168567520f7);
   }
 
   return var_832ad168567520f7;
@@ -2463,7 +2463,7 @@ function calloutmarkerpingvo_getaffirmaliasstringloot(pingindex, var_39438252891
       type = #"";
     }
   } else {
-    type = function_1823ff50bb28148d(tablelookupbyrow(level.brloottablename, row, 2));
+    type = getxhash(tablelookupbyrow(level.brloottablename, row, 2));
   }
 
   if(type == #"weapon") {
@@ -2564,7 +2564,7 @@ function function_9a7200f5142066ba(player, pingindex, endonnotifies, waittillnot
   } else if(isDefined(waittilltimeout)) {
     wait waittilltimeout;
   } else if(isDefined(waittillnotifies)) {
-    entity function_5adca43f839a3cce(waittillnotifies);
+    entity waittill_any_in_array(waittillnotifies);
   }
 
   player calloutmarkerping_removecallout(pingindex);
@@ -3079,11 +3079,11 @@ function calloutmarkerpingvo_play(voalias, pingtype, targetent) {
     return;
   }
 
-  var_4f632c1568af9fc0 = level.bcinfo["asset"][function_1823ff50bb28148d(voalias)];
+  var_4f632c1568af9fc0 = level.bcinfo["asset"][getxhash(voalias)];
   var_196ffc81c8206c2a = 2000;
-  var_57d0946b275fea34 = voowner calloutmarkerpingvo_canplaywithspamavoidance(pingtype, voalias, var_196ffc81c8206c2a);
+  canplayvo = voowner calloutmarkerpingvo_canplaywithspamavoidance(pingtype, voalias, var_196ffc81c8206c2a);
 
-  if(istrue(var_57d0946b275fea34)) {
+  if(istrue(canplayvo)) {
     logprint("calloutmarkerping::calloutMarkerPingVO_play - PlaySoundEvent()");
     logprint("self = " + voowner.name);
     logprint("sessionstate = " + voowner.sessionstate);

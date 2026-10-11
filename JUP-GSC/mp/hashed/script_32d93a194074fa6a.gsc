@@ -258,27 +258,27 @@ function private function_60994558e6d2f494(newid) {
 function private function_3a1f121991c200e3(ref, finished, result) {
   tipid = function_7052cffee37e6327(ref);
   var_1656b06379e3e9d8 = [#"stepname", #"stepnumber", #"issingle", #"hash_a8be9518a2a9868", #"hash_80f6033e24a2bf4"];
-  var_5814d27874b48e54 = function_50f8a8f765bad85e(hashcat(%"hash_6b016976aff9ae9f", tipid), var_1656b06379e3e9d8);
-  assertex(isDefined(var_5814d27874b48e54), "<dev string:xc9>" + tipid);
+  telemetrydata = getscriptbundlefieldvalues(hashcat(%"hash_6b016976aff9ae9f", tipid), var_1656b06379e3e9d8);
+  assertex(isDefined(telemetrydata), "<dev string:xc9>" + tipid);
 
-  if(!function_acbac8f30b95d690(var_5814d27874b48e54)) {
+  if(!function_acbac8f30b95d690(telemetrydata)) {
     return;
   }
 
-  var_5814d27874b48e54.player = self;
+  telemetrydata.player = self;
   callback = "mobile_ftue_step_start";
 
-  if(istrue(var_5814d27874b48e54.issingle)) {
-    var_5814d27874b48e54.result = "SUCCESS";
+  if(istrue(telemetrydata.issingle)) {
+    telemetrydata.result = "SUCCESS";
     callback = "mobile_ftue_step_single";
   } else if(finished) {
-    var_5814d27874b48e54.result = result;
+    telemetrydata.result = result;
     callback = "mobile_ftue_step_finished";
   }
 
-  namespace_de6e6777b0937bd7::function_80820d6d364c1836(callback, var_5814d27874b48e54);
+  namespace_de6e6777b0937bd7::function_80820d6d364c1836(callback, telemetrydata);
 }
 
-function private function_acbac8f30b95d690(var_5814d27874b48e54) {
-  return isDefined(var_5814d27874b48e54.stepname) && var_5814d27874b48e54.stepname != "";
+function private function_acbac8f30b95d690(telemetrydata) {
+  return isDefined(telemetrydata.stepname) && telemetrydata.stepname != "";
 }

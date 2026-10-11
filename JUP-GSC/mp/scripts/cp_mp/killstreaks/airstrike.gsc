@@ -163,7 +163,7 @@ function weaponswitchendedairstrike(streakinfo, switchresult) {
   }
 }
 
-function weaponfiredairstrike(streakinfo, var_a9dd4e8c5e5c7178, firedprojectile) {
+function weaponfiredairstrike(streakinfo, firedweaponobj, firedprojectile) {
   self setclientomnvar("ui_using_airstrike", 0);
 
   if(!isDefined(streakinfo.targetoverride)) {
@@ -503,12 +503,12 @@ function watchairstrikeowner(airstrikeid) {
 }
 
 function callstrike(owner, coord, yaw, targetmarker, streakinfo, animname, airstrikeid) {
-  var_361663d437db22f5 = 0;
+  planebombexplodedistance = 0;
   heightent = scripts\cp_mp\utility\killstreak_utility::getkillstreakairstrikeheightent();
   planehalfdistance = 24000;
   planeflyspeed = 6500;
   planeflyheight = 2500;
-  var_361663d437db22f5 = 1500;
+  planebombexplodedistance = 1500;
 
   if(isDefined(heightent)) {
     planeflyheight = heightent.origin[2];
@@ -547,7 +547,7 @@ function callstrike(owner, coord, yaw, targetmarker, streakinfo, animname, airst
     planeflyheight += var_5ceb15b939485b52;
   }
 
-  var_361663d437db22f5 = getexplodedistance(planeflyheight);
+  planebombexplodedistance = getexplodedistance(planeflyheight);
   direction = undefined;
   var_505331ad630bbc6b = undefined;
 
@@ -558,7 +558,7 @@ function callstrike(owner, coord, yaw, targetmarker, streakinfo, animname, airst
     var_505331ad630bbc6b = 1;
   }
 
-  flightpath = getflightpath(coord, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, var_361663d437db22f5, streakinfo.streakname, var_505331ad630bbc6b);
+  flightpath = getflightpath(coord, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, planebombexplodedistance, streakinfo.streakname, var_505331ad630bbc6b);
 
   if(streakinfo.streakname == "precision_airstrike") {
     if(!owner scripts\cp_mp\emp_debuff::is_empd()) {
@@ -639,16 +639,16 @@ function function_8f8818bc20bd6ffa(streakinfo) {
 }
 
 function callstrike_findoptimaldirection(owner, coord, planeflyheight, planehalfdistance, loopcount) {
-  var_d77253c873d2b420 = anglesToForward(owner getplayerangles());
+  ownerlookforward = anglesToForward(owner getplayerangles());
   contents = scripts\engine\trace::create_default_contents(1);
-  trace = scripts\engine\trace::ray_trace(coord - var_d77253c873d2b420 * 30, coord + var_d77253c873d2b420 * 1000, undefined, contents);
+  trace = scripts\engine\trace::ray_trace(coord - ownerlookforward * 30, coord + ownerlookforward * 1000, undefined, contents);
   coord = trace["position"] + trace["normal"] * 20;
   targetpos = coord;
   targetheightoffset = planeflyheight;
   ownerforward = anglesToForward(owner.angles);
   ownerright = anglestoright(owner.angles);
   var_3ae184241dc44588 = 0;
-  var_f74f18c717b149e2 = [targetpos + ownerforward * 100, targetpos - ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos + (-1 * ownerforward - ownerright) * 100];
+  positionchecklist = [targetpos + ownerforward * 100, targetpos - ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos + (-1 * ownerforward - ownerright) * 100];
 
   if(coord[2] > planeflyheight) {
     targetheightoffset = coord[2] + planeflyheight - owner.origin[2];
@@ -659,9 +659,9 @@ function callstrike_findoptimaldirection(owner, coord, planeflyheight, planehalf
   }
 
   if(level.var_4c913e393222c2e1) {
-    bestdirection = vectorNormalize(var_f74f18c717b149e2[2] - targetpos);
+    bestdirection = vectorNormalize(positionchecklist[2] - targetpos);
   } else {
-    bestdirection = vectorNormalize(var_f74f18c717b149e2[0] - targetpos);
+    bestdirection = vectorNormalize(positionchecklist[0] - targetpos);
   }
 
   var_e3b1338d5bd4399f = 0;
@@ -669,7 +669,7 @@ function callstrike_findoptimaldirection(owner, coord, planeflyheight, planehalf
   airstrikedebugon = getdvarint(@ "hash_b44b9052042186a2", 0);
   tracepassed = 0;
 
-  foreach(dirpos in var_f74f18c717b149e2) {
+  foreach(dirpos in positionchecklist) {
     var_7a7426e42e674e40 = vectorNormalize(dirpos - targetpos);
     var_c45bbeb56df09b5d = targetpos * (1, 1, 0) + (0, 0, targetheightoffset);
     var_32a961dac02545b0 = var_c45bbeb56df09b5d - var_7a7426e42e674e40 * planehalfdistance;
@@ -844,7 +844,7 @@ function doplanestrike(targetsite, var_6d29e82378e59e76, var_98255165b50d8173, p
   if(streakinfo.streakname == "precision_airstrike" || streakinfo.streakname == "multi_airstrike") {
     level thread callstrike_precisionbulleteffect(plane, var_fafbda0eba9c0aab, strikeanimlength, targetsite, owner, streakinfo);
   } else if(streakinfo.streakname == "fuel_airstrike") {
-    level thread function_c592aab59a13cf01(plane, var_fafbda0eba9c0aab, strikeanimlength, targetsite, owner, streakinfo);
+    level thread callstrike_bombeffect(plane, var_fafbda0eba9c0aab, strikeanimlength, targetsite, owner, streakinfo);
   }
 
   plane.scenenode scripts\common\anim::anim_single_solo(plane, "airstrike_flyby");
@@ -980,9 +980,9 @@ function airstrike_watchkillscount(endonnotify) {
   self endon(endonnotify);
 
   while(true) {
-    self waittill("update_rapid_kill_buffered", recentkillcount, var_366b0ecc2f28aead);
+    self waittill("update_rapid_kill_buffered", recentkillcount, fullweaponstring);
 
-    if(isDefined(var_366b0ecc2f28aead) && (var_366b0ecc2f28aead == "artillery_mp" || var_366b0ecc2f28aead == "fuelstrike_proj_mp")) {
+    if(isDefined(fullweaponstring) && (fullweaponstring == "artillery_mp" || fullweaponstring == "fuelstrike_proj_mp")) {
       self.airstrikekillcount++;
     }
   }
@@ -992,9 +992,9 @@ function function_9fc9871a8c03a9de(endonnotify) {
   self endon(endonnotify);
 
   while(true) {
-    self waittill("update_rapid_agent_kill_buffered", recentkillcount, var_366b0ecc2f28aead);
+    self waittill("update_rapid_agent_kill_buffered", recentkillcount, fullweaponstring);
 
-    if(isDefined(var_366b0ecc2f28aead) && (var_366b0ecc2f28aead == "artillery_mp" || var_366b0ecc2f28aead == "fuelstrike_proj_mp")) {
+    if(isDefined(fullweaponstring) && (fullweaponstring == "artillery_mp" || fullweaponstring == "fuelstrike_proj_mp")) {
       self.airstrikekillcount++;
     }
   }
@@ -1185,7 +1185,7 @@ function strafes(index, hitpos) {
   self setscriptablepartstate("strafe" + index, "off", 0);
 }
 
-function function_c592aab59a13cf01(plane, launchtime, strikelength, damagepos, owner, streakinfo) {
+function callstrike_bombeffect(plane, launchtime, strikelength, damagepos, owner, streakinfo) {
   plane endon("death");
   planedir = plane.flightdir;
   camdamagepos = damagepos + (0, 0, plane.flightheight + 750);
@@ -1292,7 +1292,7 @@ function delaydeletefxents(var_19e3c5251a5f46fa, var_837d24b1c8e8ef79) {
   }
 }
 
-function getflightpath(coord, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, var_361663d437db22f5, streakname, var_505331ad630bbc6b) {
+function getflightpath(coord, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, planebombexplodedistance, streakname, var_505331ad630bbc6b) {
   directionangles = undefined;
 
   if(istrue(var_505331ad630bbc6b)) {
@@ -1317,7 +1317,7 @@ function getflightpath(coord, direction, planehalfdistance, heightent, planeflyh
   endpoint += (0, 0, planeflyheight);
   d = length(startpoint - endpoint);
   flytime = d / planeflyspeed;
-  d = abs(d / 2 + var_361663d437db22f5);
+  d = abs(d / 2 + planebombexplodedistance);
   bombtime = d / planeflyspeed;
   assert(flytime > bombtime);
   flightpath["startPoint"] = startpoint;

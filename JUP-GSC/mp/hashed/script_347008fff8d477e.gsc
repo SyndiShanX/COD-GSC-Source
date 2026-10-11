@@ -87,7 +87,7 @@ function function_603c965c6981af93() {
 function setplayerinsafezone(insafezone) {
   self notify("SetPlayerInSafeZone");
   self endon("SetPlayerInSafeZone");
-  self.var_fa9f4c933e6df36d = insafezone;
+  self.isinsafezone = insafezone;
   self setcamerathirdperson(insafezone);
   function_83dd64a37cf4be10(insafezone);
 
@@ -142,8 +142,8 @@ function function_473e6a5239bf4434() {
       continue;
     }
 
-    if(!isDefined(self.var_bf70ab8d723fc903)) {
-      self.var_bf70ab8d723fc903 = 0;
+    if(!isDefined(self.commends)) {
+      self.commends = 0;
     }
 
     var_d476ba1390748ee2 = function_c1ac85f526f2b937(array_remove(level.players, self), self.origin, 128);
@@ -157,7 +157,7 @@ function function_473e6a5239bf4434() {
       var_d476ba1390748ee2 function_b6c9a22dc916543d();
       namespace_edc49135aaf885cb::function_14808f27c3db4d53(var_d476ba1390748ee2);
 
-      if(self.var_bf70ab8d723fc903 <= 5) {
+      if(self.commends <= 5) {
         scripts\cp_mp\challenges::function_9dd45fb7c1b7de56("event_limbo_commend_triggered");
       }
 
@@ -173,12 +173,12 @@ function function_473e6a5239bf4434() {
 function function_b6c9a22dc916543d() {
   var_d476ba1390748ee2 = self;
 
-  if(!isDefined(var_d476ba1390748ee2.var_bf70ab8d723fc903)) {
-    var_d476ba1390748ee2.var_bf70ab8d723fc903 = 0;
+  if(!isDefined(var_d476ba1390748ee2.commends)) {
+    var_d476ba1390748ee2.commends = 0;
   }
 
-  var_d476ba1390748ee2.var_bf70ab8d723fc903++;
-  var_d476ba1390748ee2 setclientomnvar("ui_br_player_commend_count", var_d476ba1390748ee2.var_bf70ab8d723fc903);
+  var_d476ba1390748ee2.commends++;
+  var_d476ba1390748ee2 setclientomnvar("ui_br_player_commend_count", var_d476ba1390748ee2.commends);
 }
 
 function function_567662cf9c1ccebb() {

@@ -33,12 +33,12 @@
 
 function main() {
   self.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_enemy_basic_grunt_long");
-  self.var_534e788bc498be9f = getscriptbundle(%"hash_579d39f2f40c41bf");
-  self.subclass = self.var_534e788bc498be9f.name;
+  self.subclass_scriptbundle = getscriptbundle(%"hash_579d39f2f40c41bf");
+  self.subclass = self.subclass_scriptbundle.name;
   self.health = 180;
   self.maxhealth = 180;
   self.behaviortreeasset = "soldier_jup_ob";
-  self.var_6cb8f78a7c37e43b = "ai_shoot_styles_default";
+  self.aishootstyle = "ai_shoot_styles_default";
   self.asmasset = "soldier";
   scripts\common\ai_settings::function_7b25d1c42e7f75be("aisettings_soldier_base_ob");
 
@@ -76,9 +76,9 @@ function main() {
 }
 
 function setup_model() {
-  var_42e5c77b1d7fe6e7 = isDefined(self.var_42e5c77b1d7fe6e7) ? self.var_42e5c77b1d7fe6e7 : "default";
+  characterlistname = isDefined(self.characterlistname) ? self.characterlistname : "default";
 
-  switch (var_42e5c77b1d7fe6e7) {
+  switch (characterlistname) {
     case #"hash_f19a3ecfe8b35af9":
       function_efa2a2a09745fbd();
       break;

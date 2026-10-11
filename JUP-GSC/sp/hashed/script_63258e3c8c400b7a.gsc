@@ -3,22 +3,22 @@
  * Script: sp\hashed\script_63258e3c8c400b7a.gsc
 *************************************************/
 
-#namespace namespace_e32cfb70bef6259e;
+#namespace lui_elems;
 
 function function_f245f059d32d19d1(luielemname, assethash) {
   luielem = spawnStruct();
   luielem.menuname = luielemname;
 
-  if(!isDefined(level.var_eae5a4af1df80588)) {
-    level.var_eae5a4af1df80588 = [];
+  if(!isDefined(level.luielemregistrations)) {
+    level.luielemregistrations = [];
   }
 
-  if(!isDefined(level.var_eae5a4af1df80588[assethash])) {
-    level.var_eae5a4af1df80588[assethash] = 1;
+  if(!isDefined(level.luielemregistrations[assethash])) {
+    level.luielemregistrations[assethash] = 1;
   }
 
-  luielem.regid = level.var_eae5a4af1df80588[assethash];
-  level.var_eae5a4af1df80588[assethash]++;
+  luielem.regid = level.luielemregistrations[assethash];
+  level.luielemregistrations[assethash]++;
   luielem.var_b6017d7dcc83fdb6 = 0;
   return luielem;
 }
@@ -46,5 +46,5 @@ function function_23de77f715d51c8b(player) {
 
 function function_2c7278ea5ca893e5(player, data, value) {
   luielem = self;
-  player function_6cdcaf34ab57e074(luielem.menuname, luielem.regid, data, value);
+  player setluielemdata(luielem.menuname, luielem.regid, data, value);
 }

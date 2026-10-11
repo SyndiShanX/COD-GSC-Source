@@ -343,7 +343,7 @@ function bb_requestgrenadereturnthrow(bthrow) {
 }
 
 function bb_iswhizbyrequested() {
-  return isDefined(self._blackboard.var_9f7c458052d2c805);
+  return isDefined(self._blackboard.whizbyeventtime);
 }
 
 function bb_isfrantic() {
@@ -600,8 +600,8 @@ function bb_requestsmartobject(value) {
   self._blackboard.smartobject = value;
 
   if(isDefined(self._blackboard.smartobject) && isDefined(self._blackboard.smartobject.angles)) {
-    self._blackboard.var_69005b71b6433121 = 1;
-    self._blackboard.var_b9eb5585d7a64ec1 = self._blackboard.smartobject.angles;
+    self._blackboard.smartobjectvalid = 1;
+    self._blackboard.smartobjectangles = self._blackboard.smartobject.angles;
   }
 }
 
@@ -611,7 +611,7 @@ function bb_getrequestedsmartobject() {
 
 function bb_clearsmartobject() {
   self._blackboard.smartobject = undefined;
-  self._blackboard.var_69005b71b6433121 = 0;
+  self._blackboard.smartobjectvalid = 0;
   bb_clearplaysmartobject();
 }
 

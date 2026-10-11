@@ -508,8 +508,8 @@ function function_f8c7f0b26960df68() {
     function_848d98522b5e2243("me_riotshield_model", "iw9_me_riotshield_mp+", "me_riotshield_give_button", &"CP_HARRIER_BOSS/TAKE_ME_RIOTSHIELD");
   }
 
-  var_441f289555e2ccf = getEntArray("silencer_interaction", "targetname");
-  array_thread(var_441f289555e2ccf, &silencer_interaction);
+  silencers = getEntArray("silencer_interaction", "targetname");
+  array_thread(silencers, &silencer_interaction);
   var_d5ecf70a4d407b43 = getStructArray("start_offhand_struct", "targetname");
   level_offhand_spawn(var_d5ecf70a4d407b43);
 }
@@ -1158,7 +1158,7 @@ function support_box_update_hint_logic(var_b1ad25ad91b2627d, hintstring, headico
   setheadiconmaxdistance(var_b1ad25ad91b2627d.headiconid, 1500);
   setheadiconnaturaldistance(var_b1ad25ad91b2627d.headiconid, 15);
   var_ec5983a2c8991a18 = var_b1ad25ad91b2627d getentitynumber();
-  var_b291fa39ef7c3a62 = 0.1;
+  refreshrate = 0.1;
 
   while(true) {
     foreach(player in level.players) {
@@ -1194,7 +1194,7 @@ function support_box_update_hint_logic(var_b1ad25ad91b2627d, hintstring, headico
       }
     }
 
-    wait var_b291fa39ef7c3a62;
+    wait refreshrate;
   }
 }
 
@@ -1381,11 +1381,11 @@ function function_8091a29ab763e925(toggle, locationorigin, radius) {
 
   var_5c93411d5e143956 = getentitylessscriptablearray("elevator_ascend_start", "targetname");
   var_dd156ff0eebd118e = getentitylessscriptablearray("elevator_descend_start", "targetname");
-  var_b82724cdd7191c5c = array_merge(var_5c93411d5e143956, var_dd156ff0eebd118e);
+  allscriptables = array_merge(var_5c93411d5e143956, var_dd156ff0eebd118e);
 
-  for(i = 0; i < var_b82724cdd7191c5c.size; i++) {
-    if(distance2d(var_b82724cdd7191c5c[i].origin, locationorigin) <= radius) {
-      function_f1bb8a269d750f18(toggle, var_b82724cdd7191c5c[i]);
+  for(i = 0; i < allscriptables.size; i++) {
+    if(distance2d(allscriptables[i].origin, locationorigin) <= radius) {
+      function_f1bb8a269d750f18(toggle, allscriptables[i]);
     }
   }
 }
@@ -1461,20 +1461,20 @@ function function_42d99448adf8163a() {
 
 function function_560360ba45cb3607() {
   self endon("death");
-  var_9a194154f62d1bdc = self;
+  interactionent = self;
   hintstring = &"EQUIPMENT_HINTS/SUPPORT_BOX_USE";
-  var_9a194154f62d1bdc sethintobject(undefined, "HINT_BUTTON", undefined, hintstring, 25, "duration_short", "show", 256, 256, 128, 256);
-  var_9a194154f62d1bdc function_dfb78b3e724ad620(1);
+  interactionent sethintobject(undefined, "HINT_BUTTON", undefined, hintstring, 25, "duration_short", "show", 256, 256, 128, 256);
+  interactionent function_dfb78b3e724ad620(1);
 
   while(true) {
-    var_9a194154f62d1bdc function_dfb78b3e724ad620(1);
-    var_9a194154f62d1bdc waittill("trigger", player);
+    interactionent function_dfb78b3e724ad620(1);
+    interactionent waittill("trigger", player);
 
     if(!isPlayer(player) || !isalive(player)) {
       continue;
     }
 
-    var_9a194154f62d1bdc function_dfb78b3e724ad620(0);
+    interactionent function_dfb78b3e724ad620(0);
     weapon_list = player getweaponslistprimaries();
     var_1cd29382d1867470 = player scripts\cp_mp\armor::function_600f6cf462e983f();
 

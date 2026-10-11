@@ -92,7 +92,7 @@ function initializematchrules() {
   setDvar(@ "hash_e94e38873c94b670", 1);
   level.disablescoreevents = 1;
   level.var_92b187a00d3dd091 = 1;
-  level.var_f20fe98bf14887b6 = 1;
+  level.istrainingcourse = 1;
   level.forcedend = 1;
   level.var_10a1699461d4ad08 = 1;
   level.var_c94add55a8ad5938 = 1;
@@ -1361,7 +1361,7 @@ function function_2e8e7982711d50f2() {
   data.damage = 0;
 
   while(true) {
-    self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, weapon, origin, angles, normal, var_13ea67fc910045ad);
+    self waittill("damage", damage, attacker, direction_vec, point, meansofdeath, modelname, tagname, partname, idflags, weapon, origin, angles, normal, inflector);
     hitloc = "torso_upper";
     data.attacker = attacker;
     data.victim = self;
@@ -1378,7 +1378,7 @@ function function_2e8e7982711d50f2() {
       weapondamagetype = 0;
     }
 
-    scaleddamage = int(floor(damage * function_77011f86063f18b4(data.weapon, hitloc, weapondamagetype)));
+    scaleddamage = int(floor(damage * getweaponhitlocdamagemultiplier(data.weapon, hitloc, weapondamagetype)));
     data.damage = scaleddamage;
     function_396516aef4db32c0(data);
   }

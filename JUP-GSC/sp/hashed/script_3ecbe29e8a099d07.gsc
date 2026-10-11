@@ -200,7 +200,7 @@ function function_3e6f9d87c692ab36(args) {
 function function_c857f9a4ec4b18ea() {
   truck = getEnt("<dev string:x150>", "<dev string:x15f>");
   container = getEnt("<dev string:x197>", "<dev string:x15f>");
-  var_903344103f8edf9d = getEnt("<dev string:x1ad>", "<dev string:x15f>");
+  spreader = getEnt("<dev string:x1ad>", "<dev string:x15f>");
 
   if(!isDefined(truck) || !isDefined(container)) {
     iprintln("<dev string:x1c2>");
@@ -212,7 +212,7 @@ function function_c857f9a4ec4b18ea() {
   facing = truck.angles;
   var_fd2645e4cbcaa406 = container.origin;
   var_385d2c3804c73488 = container.angles;
-  var_fcdb07958cada8f6 = var_903344103f8edf9d.origin;
+  var_fcdb07958cada8f6 = spreader.origin;
   flag_clear("<dev string:x1db>");
   function_c1cadb469d19553c();
   utility::flag_wait("<dev string:x1db>");
@@ -224,11 +224,11 @@ function function_c857f9a4ec4b18ea() {
   truck.angles = facing;
   container.origin = var_fd2645e4cbcaa406;
   container.angles = var_385d2c3804c73488;
-  var_903344103f8edf9d.origin = var_fcdb07958cada8f6;
+  spreader.origin = var_fcdb07958cada8f6;
 }
 
 function function_303aaef49bfc3f73(args) {
-  var_eae0fadb0abd54d2 = "<dev string:x150>";
+  truck_name = "<dev string:x150>";
   truck = getEnt("<dev string:x203>", "<dev string:x15f>");
 
   if(isDefined(truck)) {
@@ -298,8 +298,8 @@ function function_433477a58b907e72(var_86c320d267e05dbf, turn_rate, accel_time) 
         continue;
       }
 
-      var_3d9e474e17bdec4e = loc.origin - var_862c223c63ea7699;
-      var_1584a380d2a73443 = vectorNormalize(var_3d9e474e17bdec4e);
+      path_dir = loc.origin - var_862c223c63ea7699;
+      var_1584a380d2a73443 = vectorNormalize(path_dir);
       new_right = vectorcross(var_1584a380d2a73443, (0, 0, 1));
       new_up = vectorcross(new_right, var_1584a380d2a73443);
       loc.facing = axistoangles(var_1584a380d2a73443, new_right, (0, 0, 1));

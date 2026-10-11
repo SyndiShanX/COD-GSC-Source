@@ -65,7 +65,7 @@ function main() {
     allowed[2] = "tdm";
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_21322da268e71c19() || level.var_ec2fb549b15ad827) {
+  if(scripts\cp_mp\utility\game_utility::function_21322da268e71c19() || level.leagueplaymatch) {
     allowed[0] = scripts\mp\utility\game::getbasegametype();
   }
 
@@ -132,7 +132,7 @@ function main() {
   level.nosuspensemusic = 1;
   thread writeplayerrotationscoretomatchdataongameend();
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     scripts\mp\gametypes\mgl_mp::function_29020e26e20049d9();
   }
 
@@ -300,7 +300,7 @@ function hardpointmainloop() {
     var_570ba02607c0425c = 1;
     level.zoneendtime = int(gettime() + level.firstzoneactivationdelay * 1000);
 
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       level.var_a18063a06c258143 = int(gettime() + (level.firstzoneactivationdelay + level.zoneduration) * 1000);
     }
 
@@ -612,7 +612,7 @@ function function_79cef04e7bd8c4c7(var_570ba02607c0425c, firstzone) {
     level.zoneendtime = int(gettime() + 1000 * level.zoneduration);
     setomnvar("ui_hardpoint_timer", level.zoneendtime);
 
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       level.var_a18063a06c258143 = int(gettime() + (level.zoneactivationdelay + level.zoneduration) * 1000);
     }
 
@@ -775,7 +775,7 @@ function setupzones() {
   foreach(trigger in triggers) {
     zone = scripts\mp\gametypes\obj_zonecapture::setupobjective(trigger, undefined, undefined, 1);
 
-    if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+    if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
       zone.var_b8cc16dcaf5a0746 = scripts\mp\gametypes\mgl_mp::function_d91924619ae46b1f();
     }
 
@@ -786,7 +786,7 @@ function setupzones() {
   scripts\mp\objidpoolmanager::objective_set_play_intro(objid, 0);
   scripts\mp\objidpoolmanager::objective_set_play_outro(objid, 0);
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     scripts\mp\objidpoolmanager::objective_add_objective(objid, "done", (0, 0, 0), undefined, "icon_medium");
   } else {
     scripts\mp\objidpoolmanager::objective_add_objective(objid, "done", (0, 0, 0));
@@ -874,7 +874,7 @@ function onspawnplayer(revivespawn) {
   self.forcespawnnearteammates = undefined;
   thread updatematchstatushintonspawn();
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     thread scripts\mp\gametypes\mgl_mp::function_f9ae07213a0af3de();
   }
 }
@@ -1259,7 +1259,7 @@ function onplayerconnect(player) {
     player setextrascore1(player.pers["defends"]);
   }
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     player thread scripts\mp\gametypes\mgl_mp::function_8bb13aa2a5d32576(player, "mp_gametype_koth_mgl_match_introduction");
   }
 
@@ -1292,20 +1292,20 @@ function onplayerspawned(player) {
 }
 
 function updateservericons(state, contested) {
-  var_cabc886d846dd979 = -1;
+  omnvarval = -1;
 
   if(contested) {
-    var_cabc886d846dd979 = -2;
+    omnvarval = -2;
   } else if(isgameplayteam(state)) {
     player = thread getownerteamplayer(state);
 
     if(isDefined(player)) {
-      var_cabc886d846dd979 = player getentitynumber();
+      omnvarval = player getentitynumber();
     }
   } else {
     switch (state) {
       case #"hash_3bf8ec5fe1d42da8":
-        var_cabc886d846dd979 = -3;
+        omnvarval = -3;
         break;
       case #"hash_c312107e6bce703c":
       default:
@@ -1313,7 +1313,7 @@ function updateservericons(state, contested) {
     }
   }
 
-  setomnvar("ui_hardpoint", var_cabc886d846dd979);
+  setomnvar("ui_hardpoint", omnvarval);
 }
 
 function getownerteamplayer(ownerteam) {

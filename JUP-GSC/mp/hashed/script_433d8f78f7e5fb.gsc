@@ -11,37 +11,37 @@
 
 function init_flavorbursts() {
   anim.flavorbursts["unitedstates"] = [];
-  var_1f9d1f8654f966b8 = 41;
+  numbursts = 41;
 
-  for(i = 0; i < var_1f9d1f8654f966b8; i++) {
+  for(i = 0; i < numbursts; i++) {
     anim.flavorbursts["unitedstates"][i] = string(i + 1);
   }
 
   anim.flavorbursts["unitedstatesfemale"] = [];
-  var_1f9d1f8654f966b8 = 41;
+  numbursts = 41;
 
-  for(i = 0; i < var_1f9d1f8654f966b8; i++) {
+  for(i = 0; i < numbursts; i++) {
     anim.flavorbursts["unitedstatesfemale"][i] = string(i + 1);
   }
 
   anim.flavorbursts["sas"] = [];
-  var_1f9d1f8654f966b8 = 41;
+  numbursts = 41;
 
-  for(i = 0; i < var_1f9d1f8654f966b8; i++) {
+  for(i = 0; i < numbursts; i++) {
     anim.flavorbursts["sas"][i] = string(i + 1);
   }
 
   anim.flavorbursts["fsa"] = [];
-  var_1f9d1f8654f966b8 = 41;
+  numbursts = 41;
 
-  for(i = 0; i < var_1f9d1f8654f966b8; i++) {
+  for(i = 0; i < numbursts; i++) {
     anim.flavorbursts["fsa"][i] = string(i + 1);
   }
 
   anim.flavorbursts["fsafemale"] = [];
-  var_1f9d1f8654f966b8 = 41;
+  numbursts = 41;
 
-  for(i = 0; i < var_1f9d1f8654f966b8; i++) {
+  for(i = 0; i < numbursts; i++) {
     anim.flavorbursts["fsafemale"][i] = string(i + 1);
   }
 

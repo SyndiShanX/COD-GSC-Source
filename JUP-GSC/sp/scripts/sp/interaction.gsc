@@ -301,7 +301,7 @@ function play_interaction(interaction_name, optional_scripted_struct, var_4ec512
   self waittill("reaction_end");
 }
 
-function play_smart_interaction(interaction_name, reaction_vo, post_reaction_vo, var_42b1f24d780b1894, var_4f86d94cda7ccfed, optional_scripted_struct, var_ae60636acdfadd47, var_a8b8d69bb3f6e8a9) {
+function play_smart_interaction(interaction_name, reaction_vo, post_reaction_vo, is_reminder, optional_pointat, optional_scripted_struct, var_ae60636acdfadd47, var_a8b8d69bb3f6e8a9) {
   assert(is_interaction(interaction_name));
   self endon("death");
   self endon("stop_smart_reaction");
@@ -344,7 +344,7 @@ function queue_interaction_vo(reaction_vo, var_a8b8d69bb3f6e8a9) {
   delaythread(var_a8b8d69bb3f6e8a9, &scripts\sp\interaction_manager::play_smart_dialog_if_exists, reaction_vo);
 }
 
-function play_smart_simple_interaction(interaction_name, reaction_vo, post_reaction_vo, var_42b1f24d780b1894, var_4f86d94cda7ccfed, optional_scripted_struct, var_ae60636acdfadd47) {
+function play_smart_simple_interaction(interaction_name, reaction_vo, post_reaction_vo, is_reminder, optional_pointat, optional_scripted_struct, var_ae60636acdfadd47) {
   self endon("death");
   self endon("stop_smart_reaction");
   assert(is_interaction(interaction_name));
@@ -352,19 +352,19 @@ function play_smart_simple_interaction(interaction_name, reaction_vo, post_react
   self.scriptedtalkingknob = % scripted_talking;
   self.defaulttalk = % generic_talker_allies;
   thread play_interaction_simple(interaction_name, optional_scripted_struct);
-  scripts\sp\interaction_manager::play_gesture_reaction(85, 50, reaction_vo, var_42b1f24d780b1894, var_4f86d94cda7ccfed);
+  scripts\sp\interaction_manager::play_gesture_reaction(85, 50, reaction_vo, is_reminder, optional_pointat);
   self notify("first_acknowledgement_done");
   waittill_playeroutsideradius(var_ae60636acdfadd47);
   linebook = create_interaction_linebook(post_reaction_vo);
 
   while(true) {
     random_line = linebook get_interaction_vo_line();
-    scripts\sp\interaction_manager::play_gesture_reaction(85, 50, random_line, var_42b1f24d780b1894, var_4f86d94cda7ccfed);
+    scripts\sp\interaction_manager::play_gesture_reaction(85, 50, random_line, is_reminder, optional_pointat);
     waittill_playeroutsideradius(var_ae60636acdfadd47);
   }
 }
 
-function play_smart_basic_interaction(var_bff752982ed3d584, post_reaction_vo, var_42b1f24d780b1894, var_4f86d94cda7ccfed, var_ae60636acdfadd47) {
+function play_smart_basic_interaction(var_bff752982ed3d584, post_reaction_vo, is_reminder, optional_pointat, var_ae60636acdfadd47) {
   self endon("death");
   self endon("stop_smart_reaction");
   self.headknob = % head;
@@ -508,10 +508,10 @@ function play_smart_basic_group_interaction(actor_array, var_7551dea02427d9cd, v
   play_group_looping_acknowledgements(actor_array, var_eee89e98a7ce9526, var_ae60636acdfadd47);
 }
 
-function play_group_acknowledgement(actor_array, var_41bdbc2d3ac2baba) {
+function play_group_acknowledgement(actor_array, voline_array) {
   lookat_distance = 110;
   reaction_distance = 85;
-  scripts\sp\interaction_manager::play_group_gesture_reaction(actor_array, lookat_distance, reaction_distance, var_41bdbc2d3ac2baba);
+  scripts\sp\interaction_manager::play_group_gesture_reaction(actor_array, lookat_distance, reaction_distance, voline_array);
 }
 
 function play_group_looping_acknowledgements(actor_array, vo_arrays, var_ae60636acdfadd47) {
@@ -520,11 +520,11 @@ function play_group_looping_acknowledgements(actor_array, vo_arrays, var_ae60636
     actor endon("stop_smart_reaction");
   }
 
-  var_3204046e85aab8c2 = create_group_interaction_linebook(vo_arrays);
+  group_linebook = create_group_interaction_linebook(vo_arrays);
   mid_ent = scripts\sp\interaction_manager::create_middle_ent(actor_array);
 
   while(true) {
-    var_e73000eabf1cd643 = get_interaction_vo_line_array(var_3204046e85aab8c2);
+    var_e73000eabf1cd643 = get_interaction_vo_line_array(group_linebook);
     play_group_acknowledgement(actor_array, var_e73000eabf1cd643);
     mid_ent waittill_playeroutsideradius(var_ae60636acdfadd47);
   }
@@ -532,20 +532,20 @@ function play_group_looping_acknowledgements(actor_array, vo_arrays, var_ae60636
 
 function create_group_interaction_linebook(vo_arrays) {
   assertex(isDefined(vo_arrays), "vo_arrays must be defined to perform a smart_group_interaction.");
-  var_3204046e85aab8c2 = [];
+  group_linebook = [];
 
   for(i = 0; i < vo_arrays.size; i++) {
-    var_3204046e85aab8c2[i] = create_interaction_linebook(vo_arrays[i]);
+    group_linebook[i] = create_interaction_linebook(vo_arrays[i]);
   }
 
-  return var_3204046e85aab8c2;
+  return group_linebook;
 }
 
-function get_interaction_vo_line_array(var_3204046e85aab8c2) {
+function get_interaction_vo_line_array(group_linebook) {
   vo_line_array = [];
 
-  for(i = 0; i < var_3204046e85aab8c2.size; i++) {
-    vo_line_array[i] = var_3204046e85aab8c2[i] get_interaction_vo_line();
+  for(i = 0; i < group_linebook.size; i++) {
+    vo_line_array[i] = group_linebook[i] get_interaction_vo_line();
   }
 
   return vo_line_array;
@@ -804,7 +804,7 @@ function get_interaction_actor_optionalstruct(optional_scripted_struct) {
 
 function move_actor_tointeractionposition(optional_scripted_struct) {
   if(isDefined(optional_scripted_struct)) {
-    var_44c623f0eb82b128 = get_interaction_actor_lookatidle();
+    idle_anime = get_interaction_actor_lookatidle();
     optional_struct = get_interaction_actor_optionalstruct(optional_scripted_struct);
 
     if(!isDefined(optional_struct)) {
@@ -812,8 +812,8 @@ function move_actor_tointeractionposition(optional_scripted_struct) {
     }
 
     self.optional_scripted_struct = optional_scripted_struct;
-    start_origin = getstartorigin(optional_struct.origin, optional_struct.angles, var_44c623f0eb82b128);
-    start_angles = getstartangles(optional_struct.origin, optional_struct.angles, var_44c623f0eb82b128);
+    start_origin = getstartorigin(optional_struct.origin, optional_struct.angles, idle_anime);
+    start_angles = getstartangles(optional_struct.origin, optional_struct.angles, idle_anime);
     teleport_interaction_actor(start_origin, start_angles);
 
     if(!isDefined(self.is_cheap)) {
@@ -1840,31 +1840,31 @@ function interaction_process_for_states() {
 
     angle = abs(angleclamp((var_837c12743ab916fe - self.angles)[1]) - 360);
     println("<dev string:x1c>" + angle);
-    var_fce383bddc1e68db = "lastanim";
+    chosen_angle = "lastanim";
 
     if(isDefined(interaction["angles"])) {
       foreach(reaction_angle in interaction["angles"]) {
         if(angle <= reaction_angle) {
-          var_fce383bddc1e68db = reaction_angle;
+          chosen_angle = reaction_angle;
           break;
         }
       }
     }
 
-    if(level.state_interactions[self.interaction_name].scene[var_fce383bddc1e68db].size < 1) {
-      level.state_interactions[self.interaction_name].scene[var_fce383bddc1e68db] = level.state_interactions[self.interaction_name].scene["angle_" + string(var_fce383bddc1e68db) + "_spent"];
-      level.state_interactions[self.interaction_name].scene["angle_" + var_fce383bddc1e68db + "_spent"] = [];
+    if(level.state_interactions[self.interaction_name].scene[chosen_angle].size < 1) {
+      level.state_interactions[self.interaction_name].scene[chosen_angle] = level.state_interactions[self.interaction_name].scene["angle_" + string(chosen_angle) + "_spent"];
+      level.state_interactions[self.interaction_name].scene["angle_" + chosen_angle + "_spent"] = [];
     }
 
-    random_index = randomint(level.state_interactions[self.interaction_name].scene[var_fce383bddc1e68db].size);
-    var_e88ef0694a45c625 = level.state_interactions[self.interaction_name].scene[var_fce383bddc1e68db][random_index];
+    random_index = randomint(level.state_interactions[self.interaction_name].scene[chosen_angle].size);
+    var_e88ef0694a45c625 = level.state_interactions[self.interaction_name].scene[chosen_angle][random_index];
     start_fakeactor_notetracks(var_e88ef0694a45c625);
     self setflaggedanimknob(anim_string, var_e88ef0694a45c625, 1, initial_reaction_blendtime, 1);
     self.is_playing_reaction = 1;
     thread scripts\sp\interaction_manager::interaction_reboot_timer();
     wait getanimlength(var_e88ef0694a45c625);
-    level.state_interactions[self.interaction_name].scene["angle_" + var_fce383bddc1e68db + "_spent"] = array_add(level.state_interactions[self.interaction_name].scene["angle_" + var_fce383bddc1e68db + "_spent"], var_e88ef0694a45c625);
-    level.state_interactions[self.interaction_name].scene[var_fce383bddc1e68db] = array_remove(level.state_interactions[self.interaction_name].scene[var_fce383bddc1e68db], var_e88ef0694a45c625);
+    level.state_interactions[self.interaction_name].scene["angle_" + chosen_angle + "_spent"] = array_add(level.state_interactions[self.interaction_name].scene["angle_" + chosen_angle + "_spent"], var_e88ef0694a45c625);
+    level.state_interactions[self.interaction_name].scene[chosen_angle] = array_remove(level.state_interactions[self.interaction_name].scene[chosen_angle], var_e88ef0694a45c625);
 
     if(isDefined(interaction["exitangles"])) {
       if(isDefined(interaction["interaction_position"])) {
@@ -2740,7 +2740,7 @@ function random_idle_controller_stateful() {
   }
 }
 
-function random_idle_group_controller(actors, frequency, var_a1cf7f5ad1c9b75f) {
+function random_idle_group_controller(actors, frequency, group_anime) {
   self endon("reaction_end");
   self endon("stop_idle_controller");
   level endon("stop_idle_controller");
@@ -2753,7 +2753,7 @@ function random_idle_group_controller(actors, frequency, var_a1cf7f5ad1c9b75f) {
   }
 
   spent_array = [];
-  anim_array = var_a1cf7f5ad1c9b75f;
+  anim_array = group_anime;
 
   while(true) {
     wait randomfloatrange(frequency * 0.5, frequency);
@@ -2791,15 +2791,15 @@ function random_idle_group_controller(actors, frequency, var_a1cf7f5ad1c9b75f) {
 
     var_b92972e6e87ed559 = undefined;
 
-    if(isarray(var_a1cf7f5ad1c9b75f)) {
+    if(isarray(group_anime)) {
       if(anim_array.size <= 0) {
-        anim_array = var_a1cf7f5ad1c9b75f;
+        anim_array = group_anime;
         spent_array = [];
       }
 
       var_b92972e6e87ed559 = anim_array[randomint(anim_array.size)];
     } else {
-      var_b92972e6e87ed559 = var_a1cf7f5ad1c9b75f;
+      var_b92972e6e87ed559 = group_anime;
     }
 
     wait_time = 0;
@@ -2831,7 +2831,7 @@ function random_idle_group_controller(actors, frequency, var_a1cf7f5ad1c9b75f) {
 
       wait wait_time;
 
-      if(isarray(var_a1cf7f5ad1c9b75f)) {
+      if(isarray(group_anime)) {
         spent_array = array_add(spent_array, var_b92972e6e87ed559);
         anim_array = array_remove(anim_array, var_b92972e6e87ed559);
       }

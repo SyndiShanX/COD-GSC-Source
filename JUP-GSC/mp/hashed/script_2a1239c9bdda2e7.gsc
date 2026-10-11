@@ -43,9 +43,9 @@ function function_564b73bb9fd91ef6() {
 
   while(true) {
     foreach(player in level.players) {
-      var_2d58e8aae155cc83 = distancesquared(self.origin, player.origin);
+      distancefromplayer = distancesquared(self.origin, player.origin);
 
-      if(var_2d58e8aae155cc83 < 1000000 && !isDefined(player.var_544cf16eac472605)) {
+      if(distancefromplayer < 1000000 && !isDefined(player.var_544cf16eac472605)) {
         level thread scripts\mp\gametypes\br_public::brleaderdialogplayer("limbo_portalNear", player, 1, 0);
         player.var_544cf16eac472605 = 1;
         player thread function_855d3cc5689d1cd4();

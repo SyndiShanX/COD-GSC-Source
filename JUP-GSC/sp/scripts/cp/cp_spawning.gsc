@@ -10,7 +10,7 @@
 #namespace cp_spawning;
 
 function coopspawning_init() {
-  level thread function_2ce180d5e0b2d807();
+  level thread debug_pause_spawning();
   level thread function_e561db13f856a182();
 }
 
@@ -89,28 +89,28 @@ function function_e561db13f856a182() {
   hud.y = 40;
   hud setdevtext("<dev string:x21>");
   level.var_878cfe1d9afda4ca[level.var_878cfe1d9afda4ca.size] = hud;
-  var_fb118bca74cba5c1 = newhudelem();
-  var_fb118bca74cba5c1.alignx = "<dev string:x1c>";
-  var_fb118bca74cba5c1.location = 0;
-  var_fb118bca74cba5c1.foreground = 1;
-  var_fb118bca74cba5c1.fontscale = 0.8;
-  var_fb118bca74cba5c1.sort = 20;
-  var_fb118bca74cba5c1.alpha = 0;
-  var_fb118bca74cba5c1.x = 10;
-  var_fb118bca74cba5c1.y = 50;
-  var_fb118bca74cba5c1 setvalue(level.current_enemy_deaths);
-  level.var_878cfe1d9afda4ca[level.var_878cfe1d9afda4ca.size] = var_fb118bca74cba5c1;
-  var_fb1188ca74cb9f28 = newhudelem();
-  var_fb1188ca74cb9f28.alignx = "<dev string:x1c>";
-  var_fb1188ca74cb9f28.location = 0;
-  var_fb1188ca74cb9f28.foreground = 1;
-  var_fb1188ca74cb9f28.fontscale = 0.8;
-  var_fb1188ca74cb9f28.sort = 20;
-  var_fb1188ca74cb9f28.alpha = 0;
-  var_fb1188ca74cb9f28.x = 77;
-  var_fb1188ca74cb9f28.y = 50;
-  var_fb1188ca74cb9f28 setvalue(level.spawned_enemies.size);
-  level.var_878cfe1d9afda4ca[level.var_878cfe1d9afda4ca.size] = var_fb1188ca74cb9f28;
+  hud1 = newhudelem();
+  hud1.alignx = "<dev string:x1c>";
+  hud1.location = 0;
+  hud1.foreground = 1;
+  hud1.fontscale = 0.8;
+  hud1.sort = 20;
+  hud1.alpha = 0;
+  hud1.x = 10;
+  hud1.y = 50;
+  hud1 setvalue(level.current_enemy_deaths);
+  level.var_878cfe1d9afda4ca[level.var_878cfe1d9afda4ca.size] = hud1;
+  hud2 = newhudelem();
+  hud2.alignx = "<dev string:x1c>";
+  hud2.location = 0;
+  hud2.foreground = 1;
+  hud2.fontscale = 0.8;
+  hud2.sort = 20;
+  hud2.alpha = 0;
+  hud2.x = 77;
+  hud2.y = 50;
+  hud2 setvalue(level.spawned_enemies.size);
+  level.var_878cfe1d9afda4ca[level.var_878cfe1d9afda4ca.size] = hud2;
   var_fb1189ca74cba15b = newhudelem();
   var_fb1189ca74cba15b.alignx = "<dev string:x1c>";
   var_fb1189ca74cba15b.location = 0;
@@ -152,8 +152,8 @@ function function_e561db13f856a182() {
         update_running = 1;
         level thread function_f7093fb955a64b81();
         hud.alpha = 1;
-        var_fb118bca74cba5c1.alpha = 1;
-        var_fb1188ca74cb9f28.alpha = 1;
+        hud1.alpha = 1;
+        hud2.alpha = 1;
         var_fb1189ca74cba15b.alpha = 1;
         var_fb118eca74cbac5a.alpha = 1;
         var_fb118fca74cbae8d.alpha = 1;
@@ -161,8 +161,8 @@ function function_e561db13f856a182() {
         update_running = 0;
         level notify("<dev string:x73>");
         hud.alpha = 0;
-        var_fb118bca74cba5c1.alpha = 0;
-        var_fb1188ca74cb9f28.alpha = 0;
+        hud1.alpha = 0;
+        hud2.alpha = 0;
         var_fb1189ca74cba15b.alpha = 0;
         var_fb118eca74cbac5a.alpha = 0;
         var_fb118fca74cbae8d.alpha = 0;
@@ -199,7 +199,7 @@ function function_ca8f35e7110c9a0e(stext) {
   self setdevtext(stext);
 }
 
-function function_2ce180d5e0b2d807() {
+function debug_pause_spawning() {
   level endon("<dev string:x8b>");
 
   while(true) {

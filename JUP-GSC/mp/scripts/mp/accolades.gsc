@@ -208,7 +208,7 @@ function applyaccoladestructtoplayerpers() {
   }
 
   foreach(ref, accolade in level.accolades) {
-    self setplayerdata(level.var_5d69837cf4db0407, "playerStats", "matchAccolades", ref, 0);
+    self setplayerdata(level.progressiongroup, "playerStats", "matchAccolades", ref, 0);
 
     if(!isDefined(accolade.datapoints)) {
       continue;
@@ -247,9 +247,9 @@ function evaluateallaccolades() {
         continue;
       }
 
-      oldval = winner getplayerdata(level.var_5d69837cf4db0407, "playerStats", "accoladeStats", ref);
-      winner setplayerdata(level.var_5d69837cf4db0407, "playerStats", "accoladeStats", ref, oldval + 1);
-      winner setplayerdata(level.var_5d69837cf4db0407, "playerStats", "matchAccolades", ref, 1);
+      oldval = winner getplayerdata(level.progressiongroup, "playerStats", "accoladeStats", ref);
+      winner setplayerdata(level.progressiongroup, "playerStats", "accoladeStats", ref, oldval + 1);
+      winner setplayerdata(level.progressiongroup, "playerStats", "matchAccolades", ref, 1);
     }
   }
 

@@ -285,7 +285,7 @@ function setearlyfinishtime() {
     self.asm.longdeathanims = spawnStruct();
   }
 
-  self.var_4ad177ab3ddde8fd = gettime() + 2000;
+  self.longdeathanims_earlyfinishtime = gettime() + 2000;
 }
 
 function playdyingbackshoot(asmname, statename, params) {
@@ -351,8 +351,8 @@ function playstumblingwander(asmname, statename, params) {
   self endon(statename + "_finished");
   animid = asm_getanim(asmname, statename);
   collapsestatename = "stumbling_pain_collapse_death";
-  var_91bebedd6b5e41fe = asm_getanim(asmname, collapsestatename);
-  collapsexanim = asm_getxanim(collapsestatename, var_91bebedd6b5e41fe);
+  collapseanimid = asm_getanim(asmname, collapsestatename);
+  collapsexanim = asm_getxanim(collapsestatename, collapseanimid);
   assert(isDefined(animid));
   xanim = asm_getxanim(statename, animid);
 
@@ -444,7 +444,7 @@ function playlongdeathintro(asmname, statename, params) {
   playlongdeathanim(asmname, statename, 1);
 }
 
-function function_c19267f99ab2ffe4(asmname, statename, params) {
+function playlongdeathintroterminate(asmname, statename, params) {
   if(istrue(self.var_f4cd424dd91129f3)) {
     self.var_d5e499e7fe2c490b = self.var_f4cd424dd91129f3;
     self.var_f4cd424dd91129f3 = undefined;
@@ -465,9 +465,9 @@ function playlongdeathidle(asmname, statename, params) {
     self.var_af13941e84bb5b2e = gettime() + self.var_a4988b7f91bf1ac1;
   }
 
-  var_e5e43f791ae4dcae = longdeathidlesingleloop(asmname, statename, params);
+  canplayanim = longdeathidlesingleloop(asmname, statename, params);
 
-  if(!var_e5e43f791ae4dcae) {
+  if(!canplayanim) {
     self.var_af13941e84bb5b2e = gettime();
 
     if(!asm_eventfired(asmname, "end")) {
@@ -484,9 +484,9 @@ function playshootinglongdeathidle(asmname, statename, params) {
   self.nextlongdeathshoottime = gettime() + randomintrange(500, 1000);
   self.timestartwaitingtoshoot = gettime();
   setupaiming(statename);
-  var_e5e43f791ae4dcae = longdeathidlesingleloop(asmname, statename, params);
+  canplayanim = longdeathidlesingleloop(asmname, statename, params);
 
-  if(!var_e5e43f791ae4dcae) {
+  if(!canplayanim) {
     self.var_af13941e84bb5b2e = gettime();
 
     if(!asm_eventfired(asmname, "end")) {
@@ -556,20 +556,20 @@ function playlongdeathfinaldeath(asmname, statename, params) {
 }
 
 function onfinaldeathdropgrenade() {
-  if(!isDefined(self.var_c17bc31f4ef0a002)) {
+  if(!isDefined(self.longdeathanims_grenadetag)) {
     return;
   }
 
   velocity = (0, 0, 30) - anglestoright(self.angles) * 70;
 
-  if(self.var_c17bc31f4ef0a002 == "tag_accessory_left") {
+  if(self.longdeathanims_grenadetag == "tag_accessory_left") {
     velocity *= -1;
   }
 
-  releasepoint = self gettagorigin(self.var_c17bc31f4ef0a002);
-  var_67136a08e22e5888 = releasepoint + (0, 0, 20);
-  var_3c9a8dda8c5b252 = releasepoint - (0, 0, 20);
-  trace = scripts\engine\trace::ray_trace(var_67136a08e22e5888, var_3c9a8dda8c5b252, self, undefined, 1);
+  releasepoint = self gettagorigin(self.longdeathanims_grenadetag);
+  releasepointlifted = releasepoint + (0, 0, 20);
+  releasepointdropped = releasepoint - (0, 0, 20);
+  trace = scripts\engine\trace::ray_trace(releasepointlifted, releasepointdropped, self, undefined, 1);
 
   if(trace["fraction"] < 0.5) {
     releasepoint = trace["position"];
@@ -582,19 +582,19 @@ function onfinaldeathdropgrenade() {
   }
 
   playsoundatpos(releasepoint, "grenade_bounce_heavy");
-  self detach(getweaponmodel(self.grenadeweapon.basename), self.var_c17bc31f4ef0a002);
+  self detach(getweaponmodel(self.grenadeweapon.basename), self.longdeathanims_grenadetag);
   self magicgrenademanual(releasepoint, velocity, randomfloatrange(2, 3));
 }
 
 function longdeathgrenadepullnotetrackhandler(note) {
   if(note == "grenade_left") {
-    self.var_c17bc31f4ef0a002 = "tag_accessory_left";
+    self.longdeathanims_grenadetag = "tag_accessory_left";
   } else if(note == "grenade_right") {
-    self.var_c17bc31f4ef0a002 = "tag_accessory_right";
+    self.longdeathanims_grenadetag = "tag_accessory_right";
   }
 
-  assert(isDefined(self.var_c17bc31f4ef0a002));
-  self attach(getweaponmodel(self.grenadeweapon.basename), self.var_c17bc31f4ef0a002);
+  assert(isDefined(self.longdeathanims_grenadetag));
+  self attach(getweaponmodel(self.grenadeweapon.basename), self.longdeathanims_grenadetag);
 }
 
 function function_633f7da4f34bba83(asmname, statename, tostatename, params) {

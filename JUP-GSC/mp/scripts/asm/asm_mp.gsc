@@ -12,8 +12,8 @@
 #using scripts\engine\utility;
 #namespace asm_mp;
 
-function asm_init(var_b5da6777bfe1ace8, archetypename) {
-  self.asmname = var_b5da6777bfe1ace8;
+function asm_init(baseasmname, archetypename) {
+  self.asmname = baseasmname;
   first_init = 0;
 
   if(!isDefined(self.asm)) {
@@ -41,7 +41,7 @@ function asm_init(var_b5da6777bfe1ace8, archetypename) {
   self.fndoorneedstoclose = &doorneedstoclose;
   self.fngetdoorcenter = &getdoorcenter;
   self.fndooralreadyopen = &dooralreadyopen;
-  self function_131f6fb305015d0(&scripts\asm\shared\utility::function_b6a072e9e59fb82e);
+  self function_131f6fb305015d0(&scripts\asm\shared\utility::tryopendoor);
   hack_setup_a_struct();
   function_c051a94f99bd65f1(self.asmname);
 }
@@ -55,7 +55,7 @@ function hack_setup_a_struct() {
   self.currentpose = "stand";
   self.a.movement = "stop";
   self.a.lastenemytime = gettime();
-  self.var_98add129a7ecb962 = self isbadguy();
+  self.allowlongdeath = self isbadguy();
   self.a.paintime = 0;
   self.a.lastshoottime = 0;
   self.reacttobulletchance = 0.8;
@@ -247,8 +247,8 @@ function dooropen(door, t) {
   var_82b30cecb236888f = getdvarint(@ "hash_fddf57e578106aab", 0);
 
   if(var_82b30cecb236888f) {
-    var_18de4d7536809ac9 = door function_bacd2d0acdf8559e();
-    doorforward = anglesToForward(var_18de4d7536809ac9);
+    doorclosedangles = door function_bacd2d0acdf8559e();
+    doorforward = anglesToForward(doorclosedangles);
     originshift = doorforward * 108;
 
     thread draw_circle(door.origin + originshift, 12, (1, 0, 0), 1, 0, 120000);
@@ -282,11 +282,11 @@ function doorneedstoclose(door) {
     return false;
   }
 
-  var_9dfa31b22e1f2822 = self.origin - door.origin;
-  var_aba22f9f83213675 = vectortoyaw(var_9dfa31b22e1f2822);
-  var_18de4d7536809ac9 = door function_bacd2d0acdf8559e();
-  anglediff = angleclamp180(var_aba22f9f83213675 - var_18de4d7536809ac9[1]);
-  openangle = angleclamp180(door.angles[1] - var_18de4d7536809ac9[1]);
+  doortome = self.origin - door.origin;
+  var_aba22f9f83213675 = vectortoyaw(doortome);
+  doorclosedangles = door function_bacd2d0acdf8559e();
+  anglediff = angleclamp180(var_aba22f9f83213675 - doorclosedangles[1]);
+  openangle = angleclamp180(door.angles[1] - doorclosedangles[1]);
   return anglediff * openangle > 0;
 }
 

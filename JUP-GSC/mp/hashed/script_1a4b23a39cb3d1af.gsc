@@ -13,10 +13,10 @@
 #using scripts\common\utility;
 #using scripts\engine\math;
 #using scripts\engine\utility;
-#namespace namespace_207a1269d42456e7;
+#namespace zombie_abom_swallow;
 
 function function_e21b71f0f396bb06() {
-  callback::function_e7fddda1f0b46b5e(self.animsetname) callback::add("on_zombie_ai_damaged", &function_3b8499d83d52380e);
+  callback::get_template(self.animsetname) callback::add("on_zombie_ai_damaged", &function_3b8499d83d52380e);
 }
 
 function function_688e6bf6742914c0() {
@@ -29,9 +29,9 @@ function function_688e6bf6742914c0() {
 function function_f042d86bacba063b() {
   if(isDefined(self.var_ebd8439d96ec5a19)) {
     var_179bf7d9d8c893b1 = gettime() - self.var_ebd8439d96ec5a19;
-    var_f1f1c1b020be2bec = 5000;
+    swallow_cooldown = 5000;
 
-    if(var_179bf7d9d8c893b1 < var_f1f1c1b020be2bec) {
+    if(var_179bf7d9d8c893b1 < swallow_cooldown) {
       return true;
     }
   }
@@ -53,23 +53,23 @@ function private function_f9f0c202070afb63(dmg_struct) {
   weapon_obj = dmg_struct.sweapon;
 
   if(!isDefined(weapon_obj) || weapon_obj.classname != "grenade") {
-    function_2cb1324178d89dec("<dev string:x1c>");
+    swallow_print("<dev string:x1c>");
 
     return;
   }
 
-  var_357455e188e9e3b8 = dmg_struct.metabonename;
+  metabone_hit = dmg_struct.metabonename;
 
-  if(!isDefined(var_357455e188e9e3b8)) {
-    function_2cb1324178d89dec("<dev string:x2d>");
+  if(!isDefined(metabone_hit)) {
+    swallow_print("<dev string:x2d>");
 
     return;
   }
 
-  head_index = scripts\aitypes\zombie_abom\zombie_abom_metabones::function_e5db29e6fd6f6a88(var_357455e188e9e3b8);
+  head_index = scripts\aitypes\zombie_abom\zombie_abom_metabones::function_e5db29e6fd6f6a88(metabone_hit);
 
   if(!isDefined(head_index)) {
-    function_2cb1324178d89dec("<dev string:x40>" + var_357455e188e9e3b8);
+    swallow_print("<dev string:x40>" + metabone_hit);
 
     return;
   }
@@ -77,13 +77,13 @@ function private function_f9f0c202070afb63(dmg_struct) {
   head_state = namespace_560a8871429928df::function_2945ff43fceb0fc8(self, head_index);
 
   if(head_state != 2) {
-    function_2cb1324178d89dec("<dev string:x5b>" + head_state);
+    swallow_print("<dev string:x5b>" + head_state);
 
     return;
   }
 
   if(function_f042d86bacba063b()) {
-    function_2cb1324178d89dec("<dev string:x78>");
+    swallow_print("<dev string:x78>");
 
     return;
   }
@@ -95,7 +95,7 @@ function private abom_swallow(dmg_struct, head_index) {
   grenade = dmg_struct.einflictor;
 
   if(!isDefined(grenade)) {
-    function_2cb1324178d89dec("<dev string:x9a>");
+    swallow_print("<dev string:x9a>");
 
     return;
   }
@@ -128,16 +128,16 @@ function private abom_swallow(dmg_struct, head_index) {
 }
 
 function private function_fc8dd3d00ebca77b(dmg_struct) {
-  var_c02b1f6c1721c844 = undefined;
+  metabone_name = undefined;
 
   if(isDefined(dmg_struct.einflictor)) {
     if(!isDefined(dmg_struct.einflictor.var_59d004d14d13b52b) || !dmg_struct.einflictor ent_flag("abom_swallowed")) {
       return -1;
     }
 
-    function_2cb1324178d89dec("<dev string:xbf>");
+    swallow_print("<dev string:xbf>");
 
-    var_c02b1f6c1721c844 = level.var_28e4ea2998e3439b[dmg_struct.einflictor.var_59d004d14d13b52b];
+    metabone_name = level.var_28e4ea2998e3439b[dmg_struct.einflictor.var_59d004d14d13b52b];
   } else {
     if(!isDefined(self.var_739e0470ae2ed359)) {
       return -1;
@@ -146,7 +146,7 @@ function private function_fc8dd3d00ebca77b(dmg_struct) {
     var_179bf7d9d8c893b1 = gettime() - self.var_739e0470ae2ed359.time;
 
     if(var_179bf7d9d8c893b1 > 3500) {
-      function_2cb1324178d89dec("<dev string:xe8>" + var_179bf7d9d8c893b1);
+      swallow_print("<dev string:xe8>" + var_179bf7d9d8c893b1);
 
       self.var_739e0470ae2ed359 = undefined;
       return -1;
@@ -154,23 +154,23 @@ function private function_fc8dd3d00ebca77b(dmg_struct) {
 
     if(self.var_739e0470ae2ed359.eattacker != dmg_struct.eattacker || dmg_struct.sweapon.classname != "grenade" || dmg_struct.smeansofdeath != "MOD_GRENADE_SPLASH" && dmg_struct.smeansofdeath != "MOD_EXPLOSIVE") {
       if(self.var_739e0470ae2ed359.eattacker != dmg_struct.eattacker) {
-        function_2cb1324178d89dec("<dev string:x101>");
+        swallow_print("<dev string:x101>");
       } else {
-        function_2cb1324178d89dec("<dev string:x12f>" + dmg_struct.sweapon.classname + "<dev string:x150>" + dmg_struct.smeansofdeath);
+        swallow_print("<dev string:x12f>" + dmg_struct.sweapon.classname + "<dev string:x150>" + dmg_struct.smeansofdeath);
       }
 
       return -1;
     }
 
-    var_c02b1f6c1721c844 = level.var_28e4ea2998e3439b[self.var_739e0470ae2ed359.head_index];
+    metabone_name = level.var_28e4ea2998e3439b[self.var_739e0470ae2ed359.head_index];
 
-    if(!isDefined(dmg_struct.metabonename) || dmg_struct.metabonename != var_c02b1f6c1721c844) {
-      tag = "j_" + var_c02b1f6c1721c844;
+    if(!isDefined(dmg_struct.metabonename) || dmg_struct.metabonename != metabone_name) {
+      tag = "j_" + metabone_name;
       tag_origin = self gettagorigin(tag);
       var_35391e999d5450b1 = lengthsquared(tag_origin - dmg_struct.vpoint);
 
       if(var_35391e999d5450b1 > 100) {
-        function_2cb1324178d89dec("<dev string:x15a>" + var_c02b1f6c1721c844 + "<dev string:x187>" + sqrt(var_35391e999d5450b1));
+        swallow_print("<dev string:x15a>" + metabone_name + "<dev string:x187>" + sqrt(var_35391e999d5450b1));
 
         return -1;
       }
@@ -179,12 +179,12 @@ function private function_fc8dd3d00ebca77b(dmg_struct) {
 
   self.var_739e0470ae2ed359 = undefined;
 
-  if(!isDefined(var_c02b1f6c1721c844)) {
+  if(!isDefined(metabone_name)) {
     return -1;
   }
 
   increased_damage = dmg_struct.idamage * 20;
-  head_health = function_8c1f2f897dfe5982(var_c02b1f6c1721c844, "open");
+  head_health = function_8c1f2f897dfe5982(metabone_name, "open");
 
   if(head_health <= 0) {
     return -1;
@@ -193,8 +193,8 @@ function private function_fc8dd3d00ebca77b(dmg_struct) {
   new_damage = max(increased_damage, dmg_struct.idamage);
   new_damage = min(new_damage, head_health);
   dmg_struct.damagemaxhealthcap = max(dmg_struct.damagemaxhealthcap, 1);
-  dmg_struct.var_14edc6d1db3695bc = 1;
-  function_dfd6d030978a7650(var_c02b1f6c1721c844, new_damage, "open", dmg_struct.eattacker, dmg_struct.einflictor);
+  dmg_struct.biscritical = 1;
+  function_dfd6d030978a7650(metabone_name, new_damage, "open", dmg_struct.eattacker, dmg_struct.einflictor);
   params = spawnStruct();
   params.incomingdamage = new_damage;
   callback::callback("abomination_swallow_grenade");
@@ -211,12 +211,12 @@ function private function_dce8d747fc906ca1() {
   function_2fb888667001fc39("<dev string:x1c3>", @ "hash_e6612e812211addd");
 }
 
-function private function_502e2f61c14586cc() {
+function private debug_swallow() {
   return getdvarint(@ "hash_e6612e812211addd", 0) > 0;
 }
 
-function private function_2cb1324178d89dec(text, pos) {
-  if(function_502e2f61c14586cc()) {
+function private swallow_print(text, pos) {
+  if(debug_swallow()) {
     pos = default_to(pos, self.origin + (0, 0, 70));
     print3d(pos, "<dev string:x1d9>" + text, (1, 0, 0));
   }

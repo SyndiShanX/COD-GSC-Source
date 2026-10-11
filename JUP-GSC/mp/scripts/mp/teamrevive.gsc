@@ -427,7 +427,7 @@ function spawnrevivetrigger(victim, attacker, victimnotification, meansofdeath) 
   icon.var_b9abe6bdf97e9a79 = 14400;
 
   if(istrue(level.var_b961dd6c88e9a008)) {
-    icon utility::function_6e506f39f121ea8a(victim, (0, 0, level.var_5ecf502dc8c87bbb));
+    icon utility::scriptable_setparententity(victim, (0, 0, level.var_5ecf502dc8c87bbb));
   }
 
   icon scripts\mp\gameobjects::setusetime(usetime);
@@ -856,7 +856,7 @@ function revivetriggerholdonuse(player) {
       self.victim.body delete();
     }
 
-    if(function_1823ff50bb28148d(getgametype()) == #"ko") {
+    if(getxhash(getgametype()) == #"ko") {
       self.victim playsoundtoteam("jup_shared_team_revived", player.team);
     }
 
@@ -879,7 +879,7 @@ function revivetriggerholdonuse(player) {
   self.victim thread removetrigger(self.victim.guid);
 }
 
-function function_301c4ec489f9bd39(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_301c4ec489f9bd39(instance, part, state, player, bautouse, usestring) {
   if(!isDefined(instance) || !isDefined(instance.deadplayer) || !isDefined(player) || part != "cyber_revive_icon") {
     return;
   }
@@ -1018,7 +1018,7 @@ function function_c86cf00d5859ce10(target) {
   }
 
   if(self isragdoll()) {
-    self function_d87e1768229d0e3e();
+    self stopliveragdoll();
   }
 
   self playerlinktodelta(var_88f59c89f67e4385, "", 1, 30, 30, -1 * var_ef1f66cebc32a99 + 30, var_ef1f66cebc32a99 + 30, 0, 0, 0, 1, 0, 0.3, 0.3);
@@ -1680,7 +1680,7 @@ function function_bb57ed6218a82d1c() {
 
 function function_9341574d596e9d36(player, contents, containertype, deadplayerindex, weaponslotcontents, weaponslotobj, weaponslotclip, var_86b32aff94b5714e, var_275f4441ab7920c8, hasweaponcase, loadoutcontents, var_c299c08e4b8a8e56, var_a0e9fef038504bd0, var_fd8a9b46f4a1e27c, var_9d09471027604346, var_c31356a794d8cb46, var_ad7897ecdbcb63) {
   corpse = spawnscriptable("cyber_revive_pillage", player.origin + (0, 0, level.var_5ecf502dc8c87bbb));
-  corpse utility::function_6e506f39f121ea8a(player, (0, 0, level.var_5ecf502dc8c87bbb));
+  corpse utility::scriptable_setparententity(player, (0, 0, level.var_5ecf502dc8c87bbb));
   scripts\mp\gametypes\br_pickups::registerscriptableinstance(corpse);
   corpse.contents = contents;
   corpse.containertype = containertype;
@@ -1708,7 +1708,7 @@ function function_9341574d596e9d36(player, contents, containertype, deadplayerin
   }
 
   foreach(item in corpse.contents) {
-    scripts\engine\utility::function_f3bb4f4911a1beb2(item["lootID"], "addedToContainer", corpse, player);
+    scripts\engine\utility::callsharedfunc(item["lootID"], "addedToContainer", corpse, player);
   }
 
   foreach(teammember in getteamdata(player.team, "players")) {
@@ -1752,7 +1752,7 @@ function function_d5c44af2144b00b3(deadplayer, model, corpse) {
       corpse.opener.var_f2aa9ae949179907 = corpse.opener.origin;
     }
 
-    scripts\mp\loot::function_30f5ea60517f9e06(corpse.opener, spawnedbackpack);
+    scripts\mp\loot::openlootablecontainer(corpse.opener, spawnedbackpack);
   } else {
     spawnedbackpack setscriptablepartstate("body", "closed_usable");
   }
@@ -1791,7 +1791,7 @@ function function_85b5becfebdc7b62(corpse, backpack) {
   }
 
   foreach(item in backpack.contents) {
-    scripts\engine\utility::function_f3bb4f4911a1beb2(item["lootID"], "addedToContainer", backpack);
+    scripts\engine\utility::callsharedfunc(item["lootID"], "addedToContainer", backpack);
   }
 }
 

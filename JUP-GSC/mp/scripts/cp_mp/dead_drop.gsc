@@ -91,7 +91,7 @@ function function_a1cbb02f01a33768(params) {
     }
 
     if(!isDefined(container.poi)) {
-      container.poi = scripts\mp\poi::function_6cc445c02b5effac(container.origin, 0, 1);
+      container.poi = scripts\mp\poi::poi_findpoioriginisin(container.origin, 0, 1);
     }
 
     foreach(index, item in container.contents) {

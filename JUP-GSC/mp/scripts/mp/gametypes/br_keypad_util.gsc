@@ -84,64 +84,64 @@ function function_b751dd55c6c31d6d(var_6f6d810585c7349b, var_fa0f2d5aeb7a3af9, o
 
 function playersetomnvarkeypad(dataref, value) {
   assert(isPlayer(self));
-  [bitoffset, bitwidth, var_8e90fa6d5789ad63, value] = getkeypadomnvarbitpackinginfo(dataref, value);
+  [bitoffset, bitwidth, omnvarref, value] = getkeypadomnvarbitpackinginfo(dataref, value);
 
-  if(var_8e90fa6d5789ad63 == "") {
+  if(omnvarref == "") {
     return;
   }
 
-  playerpackdataintoomnvar(var_8e90fa6d5789ad63, value, bitoffset, bitwidth);
+  playerpackdataintoomnvar(omnvarref, value, bitoffset, bitwidth);
 }
 
 function getkeypadomnvarbitpackinginfo(dataref, value) {
   bitoffset = 0;
   bitwidth = 0;
-  var_8e90fa6d5789ad63 = "";
+  omnvarref = "";
 
   switch (dataref) {
     case 0:
       [bitoffset, bitwidth] = [0, 2];
-      var_8e90fa6d5789ad63 = "ui_keypad_data";
+      omnvarref = "ui_keypad_data";
       break;
     case 1:
       [bitoffset, bitwidth] = [2, 4];
-      var_8e90fa6d5789ad63 = "ui_keypad_data";
+      omnvarref = "ui_keypad_data";
       break;
     case 2:
       [bitoffset, bitwidth] = [6, 4];
-      var_8e90fa6d5789ad63 = "ui_keypad_data";
+      omnvarref = "ui_keypad_data";
       break;
     case 3:
       [bitoffset, bitwidth] = [10, 8];
-      var_8e90fa6d5789ad63 = "ui_keypad_data";
+      omnvarref = "ui_keypad_data";
       break;
     case 4:
       [bitoffset, bitwidth] = [18, 4];
-      var_8e90fa6d5789ad63 = "ui_keypad_data";
+      omnvarref = "ui_keypad_data";
       break;
     default:
       assertmsg("<dev string:x185>" + dataref + "<dev string:x19e>");
       break;
   }
 
-  return [bitoffset, bitwidth, var_8e90fa6d5789ad63, value];
+  return [bitoffset, bitwidth, omnvarref, value];
 }
 
-function playerpackdataintoomnvar(var_8e90fa6d5789ad63, value, bitoffset, bitwidth) {
+function playerpackdataintoomnvar(omnvarref, value, bitoffset, bitwidth) {
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (value &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
-  prevvalue = self getclientomnvar(var_8e90fa6d5789ad63);
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
+  invertedmask = ~(mask << bitoffset);
+  prevvalue = self getclientomnvar(omnvarref);
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
 
-  if(var_82a90e56e416fa55 != prevvalue) {
-    self setclientomnvar(var_8e90fa6d5789ad63, var_82a90e56e416fa55);
+  if(repackedvalue != prevvalue) {
+    self setclientomnvar(omnvarref, repackedvalue);
   }
 }
 
-function playerunpackdatafromomnvar(var_8e90fa6d5789ad63, var_c20319aa0598dc14, var_7214adeafee0fc1b) {
-  prevvalue = self getclientomnvar(var_8e90fa6d5789ad63);
+function playerunpackdatafromomnvar(omnvarref, var_c20319aa0598dc14, var_7214adeafee0fc1b) {
+  prevvalue = self getclientomnvar(omnvarref);
   var_81829a47d6020a = (1 << var_7214adeafee0fc1b) - 1;
   bitarray = prevvalue >> var_c20319aa0598dc14;
   var_f94e3b11a17a0398 = var_81829a47d6020a &bitarray;

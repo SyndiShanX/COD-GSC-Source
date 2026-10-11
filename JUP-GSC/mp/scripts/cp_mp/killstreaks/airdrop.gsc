@@ -127,7 +127,7 @@ function initcratedata() {
       function_56e93fd2282a71ce();
 
       if(scripts\mp\utility\game::function_d75b73c443421047()) {
-        function_f3bb4f4911a1beb2("mystery_package", "initLevelData");
+        callsharedfunc("mystery_package", "initLevelData");
       }
 
       break;
@@ -421,7 +421,7 @@ function createcrate(owner, team, cratetype, position, angles, destination, hasn
     crate cratephysicson();
   }
 
-  crate function_f3bb4f4911a1beb2("escort", "registerEscortCollisionCallback", &function_c62f80d2f5717d4a);
+  crate callsharedfunc("escort", "registerEscortCollisionCallback", &function_c62f80d2f5717d4a);
   return crate;
 }
 
@@ -1506,7 +1506,7 @@ function makecrateusable() {
 
     if(!isDefined(useobject)) {
       if(isDefined(self.model)) {
-        usetag = function_fed3925eb5331836(self.model, leveldata.usetag) ? leveldata.usetag : "tag_origin";
+        usetag = modelhastag(self.model, leveldata.usetag) ? leveldata.usetag : "tag_origin";
       } else {
         usetag = leveldata.usetag;
       }
@@ -1569,7 +1569,7 @@ function watchcrateuse(usetype, useobject) {
 
     if(getdvarint(@ "hash_618b9c003b5b3883", 0) == 0) {
       if(isDefined(self.disabled_use_for) && istrue(self.disabled_use_for[player getentitynumber()])) {
-        player scripts\engine\utility::function_f3bb4f4911a1beb2("airdrop", "airdrop_cannotUseLoadoutCrateHint");
+        player scripts\engine\utility::callsharedfunc("airdrop", "airdrop_cannotUseLoadoutCrateHint");
         continue;
       }
     }
@@ -2389,7 +2389,7 @@ function monitorimpactinternal(delay) {
             var_bbdfa26a1db6eb7b = ent scripts\cp_mp\vehicles\vehicle_utility::function_bbdfa26a1db6eb7b();
 
             if(!isbossvehicle && !var_bbdfa26a1db6eb7b && !istrue(ent.exfilhelicopter)) {
-              ent.var_a8f4bb03b366aa80 = 1;
+              ent.dontspawnhusk = 1;
               ent scripts\cp_mp\vehicles\vehicle::vehicle_explode();
             }
           }
@@ -3092,7 +3092,7 @@ function trackcratemantlingexploit() {
 }
 
 function function_b6469ac2ab6f3dc6() {
-  entmask = function_869ccb4e3451b8c6(["etype_player"]);
+  entmask = createentitytypemask(["etype_player"]);
   radius = getdvarint(@ "hash_e9b16488fdec1843", 100);
 
   while(true) {
@@ -3101,7 +3101,7 @@ function function_b6469ac2ab6f3dc6() {
         continue;
       }
 
-      nearplayers = function_b1eef70090b5b7b5(crate.origin, radius, entmask);
+      nearplayers = getentitiesinradiusfrompartitiongrid(crate.origin, radius, entmask);
 
       foreach(p in nearplayers) {
         if(p ismantling()) {
@@ -3843,9 +3843,9 @@ function airdropmarkeractivate(droptype, lifeid, streakinfo, gestureactivation) 
   ownerforward = anglesToForward(owner.angles);
   ownerright = anglestoright(owner.angles);
   contents = scripts\engine\trace::create_default_contents(1);
-  var_f74f18c717b149e2 = [targetpos - ownerforward * 100, targetpos + ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos + (-1 * ownerforward - ownerright) * 100];
+  positionchecklist = [targetpos - ownerforward * 100, targetpos + ownerforward * 100, targetpos + ownerright * 100, targetpos - ownerright * 100, targetpos + (ownerforward + ownerright) * 100, targetpos + (ownerforward - ownerright) * 100, targetpos + (ownerright - ownerforward) * 100, targetpos + (-1 * ownerforward - ownerright) * 100];
 
-  foreach(dirpos in var_f74f18c717b149e2) {
+  foreach(dirpos in positionchecklist) {
     var_7a7426e42e674e40 = vectorNormalize(dirpos - targetpos);
     var_c45bbeb56df09b5d = targetpos * (1, 1, 0) + (0, 0, targetheightoffset);
     var_32a961dac02545b0 = var_c45bbeb56df09b5d - var_7a7426e42e674e40 * 25000;
@@ -5021,7 +5021,7 @@ function private function_526de5ef02fdb154(team) {
     return false;
   }
 
-  if(!isDefined(self) || istrue(self.isdestroyed) || !self function_73cc0f04c4c5001d()) {
+  if(!isDefined(self) || istrue(self.isdestroyed) || !self isscriptableinstance()) {
     return false;
   }
 
@@ -5034,7 +5034,7 @@ function private function_526de5ef02fdb154(team) {
   }
 
   if(issharedfuncdefined("game", "isGameplayTeam")) {
-    if(!function_f3bb4f4911a1beb2("game", "isGameplayTeam", team)) {
+    if(!callsharedfunc("game", "isGameplayTeam", team)) {
       return false;
     }
   }
@@ -5049,7 +5049,7 @@ function private function_526de5ef02fdb154(team) {
 }
 
 function private function_889644f4a21bb5b9() {
-  if(!isDefined(self) || istrue(self.isdestroyed) || !self function_73cc0f04c4c5001d()) {
+  if(!isDefined(self) || istrue(self.isdestroyed) || !self isscriptableinstance()) {
     return false;
   }
 

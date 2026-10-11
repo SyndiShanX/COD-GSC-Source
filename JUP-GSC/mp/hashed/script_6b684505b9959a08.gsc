@@ -12,31 +12,31 @@
 #using scripts\mp\objidpoolmanager;
 #namespace reward_cache;
 
-function function_3efd8c5e5178e70f(var_bae6a1d8f73bc001, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f) {
+function spawnrewardcache(rewardcachesettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f) {
   if(getdvarint(@ "hash_f5047643143a3941", 0) == 1) {
-    thread function_30fd5c2bb4199790(var_bae6a1d8f73bc001, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f);
+    thread function_30fd5c2bb4199790(rewardcachesettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f);
     return;
   }
 
-  var_4d8d2468e56303c1 = function_2f9979bc854d735d(var_bae6a1d8f73bc001, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f);
+  var_4d8d2468e56303c1 = function_2f9979bc854d735d(rewardcachesettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f);
 
   if(!var_4d8d2468e56303c1.success) {
     function_f269427c9e37c270(var_3c99a2a84c4b850f, 1);
     return;
   }
 
-  var_ed118e6dd8c246 = var_4d8d2468e56303c1.var_ed118e6dd8c246;
-  var_15fc8e507acc4b19 = var_4d8d2468e56303c1.var_15fc8e507acc4b19;
-  var_a1bdf2e1fd12ffc = var_4d8d2468e56303c1.var_a1bdf2e1fd12ffc;
-  thread function_d5efc18924db80b1(var_bae6a1d8f73bc001, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f);
+  lootfunctionargs = var_4d8d2468e56303c1.lootfunctionargs;
+  func_oncacheitemtaken = var_4d8d2468e56303c1.func_oncacheitemtaken;
+  func_onitemadded = var_4d8d2468e56303c1.func_onitemadded;
+  thread function_d5efc18924db80b1(rewardcachesettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f);
 }
 
-function function_2260bfc08cd754ea(rewardcache) {
+function cleanuprewardcache(rewardcache) {
   function_e39ee5e9730a31a3(rewardcache);
 }
 
 function function_fb4fb51dbc0ad916(rewardcache, player, lootcontents) {
-  if(!function_b8039209fb3f728c(rewardcache)) {
+  if(!isrewardcache(rewardcache)) {
     function_e02e37e34dec2042("Could not add loot to player's group reward. Invalid rewardCache!", undefined, player);
     return;
   }
@@ -51,16 +51,16 @@ function function_fb4fb51dbc0ad916(rewardcache, player, lootcontents) {
     return;
   }
 
-  var_c359824d10b7dbd3 = function_f0c9a03489275ce5(rewardcache, player);
+  grouprewardcache = function_f0c9a03489275ce5(rewardcache, player);
 
-  if(isDefined(var_c359824d10b7dbd3)) {
-    function_c848c150de4f73b3(var_c359824d10b7dbd3, lootcontents);
+  if(isDefined(grouprewardcache)) {
+    function_c848c150de4f73b3(grouprewardcache, lootcontents);
     return;
   }
 }
 
 function function_1f4c33cae718bc25(rewardcache, player) {
-  if(!function_b8039209fb3f728c(rewardcache)) {
+  if(!isrewardcache(rewardcache)) {
     function_e02e37e34dec2042("Could not add reserved item slot. Invalid rewardCache!", rewardcache, player);
     return -1;
   }
@@ -70,18 +70,18 @@ function function_1f4c33cae718bc25(rewardcache, player) {
     return -1;
   }
 
-  var_c359824d10b7dbd3 = function_f0c9a03489275ce5(rewardcache, player);
+  grouprewardcache = function_f0c9a03489275ce5(rewardcache, player);
 
-  if(!isDefined(var_c359824d10b7dbd3)) {
+  if(!isDefined(grouprewardcache)) {
     function_1c5f030d48fdff4c("Could not add reserved item slot. No group reward exists for the player in this reward cache.");
     return -1;
   }
 
-  return function_f64bcd74450424eb(var_c359824d10b7dbd3);
+  return function_f64bcd74450424eb(grouprewardcache);
 }
 
-function function_77eb3b9f9e4993c6(rewardcache, player, var_f71227aeabe614eb, item) {
-  if(!function_b8039209fb3f728c(rewardcache)) {
+function function_77eb3b9f9e4993c6(rewardcache, player, reservedslotindex, item) {
+  if(!isrewardcache(rewardcache)) {
     function_e02e37e34dec2042("Could not add item to player group's reserved slot. Invalid rewardCache!", rewardcache, player);
     return;
   }
@@ -91,7 +91,7 @@ function function_77eb3b9f9e4993c6(rewardcache, player, var_f71227aeabe614eb, it
     return;
   }
 
-  if(!isint(var_f71227aeabe614eb)) {
+  if(!isint(reservedslotindex)) {
     function_e02e37e34dec2042("Could not add item to player group's reserved slot. Reserved slot index is not an integer!", rewardcache, player);
     return;
   }
@@ -101,38 +101,38 @@ function function_77eb3b9f9e4993c6(rewardcache, player, var_f71227aeabe614eb, it
     return;
   }
 
-  var_c359824d10b7dbd3 = function_f0c9a03489275ce5(rewardcache, player);
+  grouprewardcache = function_f0c9a03489275ce5(rewardcache, player);
 
-  if(!isDefined(var_c359824d10b7dbd3)) {
+  if(!isDefined(grouprewardcache)) {
     function_1c5f030d48fdff4c("Could not add item to player group's reserved slot. No group reward exists for the player in this reward cache.", rewardcache, player);
     return;
   }
 
-  if(var_f71227aeabe614eb >= var_c359824d10b7dbd3.contents.size) {
-    function_e02e37e34dec2042("Could not add item to player group's reserved slot. Reserved slot index " + var_f71227aeabe614eb + " is larger than the cache's contents size!", rewardcache, player);
+  if(reservedslotindex >= grouprewardcache.contents.size) {
+    function_e02e37e34dec2042("Could not add item to player group's reserved slot. Reserved slot index " + reservedslotindex + " is larger than the cache's contents size!", rewardcache, player);
     return;
   }
 
-  var_f72137acbb1910da = var_c359824d10b7dbd3.contents[var_f71227aeabe614eb];
+  reserveditem = grouprewardcache.contents[reservedslotindex];
 
-  if(!istrue(var_f72137acbb1910da.var_a265da1ac2aef0d5)) {
-    function_e02e37e34dec2042("Could not add item to player group's reserved slot. Slot " + var_f71227aeabe614eb + " is not reserved!", rewardcache, player);
+  if(!istrue(reserveditem.var_a265da1ac2aef0d5)) {
+    function_e02e37e34dec2042("Could not add item to player group's reserved slot. Slot " + reservedslotindex + " is not reserved!", rewardcache, player);
     return;
   }
 
   item.var_a265da1ac2aef0d5 = 1;
-  function_505cfc0b2a049ae3(var_c359824d10b7dbd3, item, var_f71227aeabe614eb);
+  function_505cfc0b2a049ae3(grouprewardcache, item, reservedslotindex);
 }
 
-function function_b8039209fb3f728c(rewardcache) {
-  return isstruct(rewardcache) && istrue(rewardcache.var_b8039209fb3f728c);
+function isrewardcache(rewardcache) {
+  return isstruct(rewardcache) && istrue(rewardcache.isrewardcache);
 }
 
-function function_2f75f3a22eb7b56f(var_c359824d10b7dbd3) {
-  rewardcache = var_c359824d10b7dbd3.var_81d4f50295d743eb;
+function function_2f75f3a22eb7b56f(grouprewardcache) {
+  rewardcache = grouprewardcache.rewardcacheowner;
   nonplayerfound = 0;
 
-  foreach(player in var_c359824d10b7dbd3.playerowners) {
+  foreach(player in grouprewardcache.playerowners) {
     if(isPlayer(player)) {
       function_baa579f9e5c2a023(rewardcache, player, 2);
       function_dcdfc8710385e1a8(rewardcache, player);
@@ -148,18 +148,18 @@ function function_2f75f3a22eb7b56f(var_c359824d10b7dbd3) {
 }
 
 function function_49baf487775e6ddb(rewardcache) {
-  foreach(var_c359824d10b7dbd3 in rewardcache.var_55b52f7bc45800e0) {
-    function_2f75f3a22eb7b56f(var_c359824d10b7dbd3);
+  foreach(grouprewardcache in rewardcache.grouprewardcaches) {
+    function_2f75f3a22eb7b56f(grouprewardcache);
   }
 }
 
-function function_706b9cce1dad33e3(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_706b9cce1dad33e3(instance, part, state, player, bautouse, usestring) {
   if(!istrue(instance.var_e377da4c0a8ddb62)) {
     return;
   }
 
   interactionpoint = instance;
-  rewardcache = interactionpoint.var_81d4f50295d743eb;
+  rewardcache = interactionpoint.rewardcacheowner;
   assert(isDefined(rewardcache));
   function_b4fee1d258d4b097(rewardcache, player);
 }
@@ -176,9 +176,9 @@ function function_511d55926d101fd1(rewardcache, disconnectedplayer) {
   function_9a1e525ce976a312(rewardcache, disconnectedplayer);
   function_8b3827772a6bad4b(rewardcache, disconnectedplayer);
 
-  foreach(var_c359824d10b7dbd3 in rewardcache.var_55b52f7bc45800e0) {
-    if(array_contains(var_c359824d10b7dbd3.playerowners, disconnectedplayer)) {
-      var_c359824d10b7dbd3.playerowners = array_remove(var_c359824d10b7dbd3.playerowners, disconnectedplayer);
+  foreach(grouprewardcache in rewardcache.grouprewardcaches) {
+    if(array_contains(grouprewardcache.playerowners, disconnectedplayer)) {
+      grouprewardcache.playerowners = array_remove(grouprewardcache.playerowners, disconnectedplayer);
     }
   }
 
@@ -216,9 +216,9 @@ function function_e882ec9e31af5ae1(rewardcache) {
 }
 
 function function_f0c9a03489275ce5(rewardcache, player) {
-  foreach(var_c359824d10b7dbd3 in rewardcache.var_55b52f7bc45800e0) {
-    if(array_contains(var_c359824d10b7dbd3.playerowners, player)) {
-      return var_c359824d10b7dbd3;
+  foreach(grouprewardcache in rewardcache.grouprewardcaches) {
+    if(array_contains(grouprewardcache.playerowners, player)) {
+      return grouprewardcache;
     }
   }
 
@@ -226,8 +226,8 @@ function function_f0c9a03489275ce5(rewardcache, player) {
 }
 
 function isempty(rewardcache) {
-  foreach(var_c359824d10b7dbd3 in rewardcache.var_55b52f7bc45800e0) {
-    if(!function_baba3a8fbc912f3d(var_c359824d10b7dbd3)) {
+  foreach(grouprewardcache in rewardcache.grouprewardcaches) {
+    if(!function_baba3a8fbc912f3d(grouprewardcache)) {
       return false;
     }
   }
@@ -235,8 +235,8 @@ function isempty(rewardcache) {
   return true;
 }
 
-function function_baba3a8fbc912f3d(var_c359824d10b7dbd3) {
-  contents = default_to(var_c359824d10b7dbd3.contents, []);
+function function_baba3a8fbc912f3d(grouprewardcache) {
+  contents = default_to(grouprewardcache.contents, []);
   items_remaining = 0;
 
   foreach(item in contents) {
@@ -270,7 +270,7 @@ function function_f8a89d731386bd1e(rewardcache) {
   return rewardcache.var_aea068c0e66dab61;
 }
 
-function private function_30fd5c2bb4199790(var_bae6a1d8f73bc001, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f) {
+function private function_30fd5c2bb4199790(rewardcachesettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f) {
   var_26faaa31d0b8f90 = 0;
 
   if(!isDefined(playergroups) || !isarray(playergroups)) {
@@ -285,7 +285,7 @@ function private function_30fd5c2bb4199790(var_bae6a1d8f73bc001, playergroups, p
     return;
   }
 
-  if(!isDefined(var_ce0e8fe5ee941ba9) || !isfunction(var_ce0e8fe5ee941ba9)) {
+  if(!isDefined(func_openlootablecontainer) || !isfunction(func_openlootablecontainer)) {
     function_f269427c9e37c270(var_3c99a2a84c4b850f, !var_26faaa31d0b8f90);
     function_e02e37e34dec2042("Reward cache could not be spawned. Reason: openLootableContainer function is undefined or not a function.");
     return;
@@ -297,26 +297,26 @@ function private function_30fd5c2bb4199790(var_bae6a1d8f73bc001, playergroups, p
     return;
   }
 
-  if(!isDefined(var_ed118e6dd8c246)) {
-    var_ed118e6dd8c246 = spawnStruct();
-  } else if(!isstruct(var_ed118e6dd8c246)) {
+  if(!isDefined(lootfunctionargs)) {
+    lootfunctionargs = spawnStruct();
+  } else if(!isstruct(lootfunctionargs)) {
     function_f269427c9e37c270(var_3c99a2a84c4b850f, !var_26faaa31d0b8f90);
     function_e02e37e34dec2042("reward cache could not be spawned. Reason: lootFunctionArgs must be a struct");
     return;
   }
 
-  if(isDefined(var_15fc8e507acc4b19) && !isfunction(var_15fc8e507acc4b19)) {
+  if(isDefined(func_oncacheitemtaken) && !isfunction(func_oncacheitemtaken)) {
     function_469b7ea0b94baae6("func_onCacheItemTaken is defined but is not a function! The reward cache will still spawn but without any onItemTaken functionality.");
-    var_15fc8e507acc4b19 = undefined;
+    func_oncacheitemtaken = undefined;
   }
 
-  if(isDefined(var_a1bdf2e1fd12ffc) && !isfunction(var_a1bdf2e1fd12ffc)) {
+  if(isDefined(func_onitemadded) && !isfunction(func_onitemadded)) {
     function_469b7ea0b94baae6("func_onItemAdded is defined but is not a function! The reward cache will still spawn but without any onItemAdded functionality.");
-    var_a1bdf2e1fd12ffc = undefined;
+    func_onitemadded = undefined;
   }
 
-  var_cbf8cb005343dd9d = [];
-  spawnorigin = namespace_6257bf0db64cb539::function_1ebb61ed81f6e62c(placementstruct);
+  playergrouplootstructs = [];
+  spawnorigin = namespace_6257bf0db64cb539::getplacementorigin(placementstruct);
   spawnangles = namespace_6257bf0db64cb539::function_5b2e856ac722692e(placementstruct);
 
   foreach(playergroup in playergroups) {
@@ -329,14 +329,14 @@ function private function_30fd5c2bb4199790(var_bae6a1d8f73bc001, playergroups, p
       continue;
     }
 
-    var_ed118e6dd8c246.reward_group = playergroup;
-    lootcontents = [[var_5110040e4247ddb8]](var_ed118e6dd8c246);
-    var_cbf8cb005343dd9d[var_cbf8cb005343dd9d.size] = {
+    lootfunctionargs.reward_group = playergroup;
+    lootcontents = [[var_5110040e4247ddb8]](lootfunctionargs);
+    playergrouplootstructs[playergrouplootstructs.size] = {
       #lootcontents: lootcontents, #playergroup: playergroup
     };
   }
 
-  if(var_cbf8cb005343dd9d.size == 0) {
+  if(playergrouplootstructs.size == 0) {
     function_f269427c9e37c270(var_3c99a2a84c4b850f, !var_26faaa31d0b8f90);
     function_469b7ea0b94baae6("Reward cache will not be spawned. Reason: playerGroups must contain at least one player");
     return;
@@ -347,17 +347,17 @@ function private function_30fd5c2bb4199790(var_bae6a1d8f73bc001, playergroups, p
   if(istrue(var_6c1956fd6ce84917)) {
     function_4eb1ac313bc7d586(playergroups, placementstruct, placementstruct);
     placementstruct waittill("FindNearbySpawnPointGuaranteed_DONE", spawnorigin);
-    var_cbf8cb005343dd9d = function_f434d12840148e1b(var_cbf8cb005343dd9d);
+    playergrouplootstructs = function_f434d12840148e1b(playergrouplootstructs);
     var_26faaa31d0b8f90 = 1;
   }
 
-  if(var_cbf8cb005343dd9d.size == 0) {
+  if(playergrouplootstructs.size == 0) {
     function_f269427c9e37c270(var_3c99a2a84c4b850f, !var_26faaa31d0b8f90);
     function_469b7ea0b94baae6("Reward cache could not be spawned. Reason: No players to spawn the reward cache for. All players in the reward cache's playerGroups were invalid by the time the Reward was spawned (rewards can take 1-8 frames to spawn once the request is made).");
     return;
   }
 
-  rewardcache = function_a5bf382439c269ff(var_bae6a1d8f73bc001, spawnorigin, spawnangles, var_ce0e8fe5ee941ba9, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc);
+  rewardcache = function_a5bf382439c269ff(rewardcachesettings, spawnorigin, spawnangles, func_openlootablecontainer, func_oncacheitemtaken, func_onitemadded);
 
   if(!isDefined(rewardcache)) {
     function_f269427c9e37c270(var_3c99a2a84c4b850f, !var_26faaa31d0b8f90);
@@ -365,10 +365,10 @@ function private function_30fd5c2bb4199790(var_bae6a1d8f73bc001, playergroups, p
     return;
   }
 
-  success = function_aab44fb14323f306(rewardcache, var_cbf8cb005343dd9d);
+  success = function_aab44fb14323f306(rewardcache, playergrouplootstructs);
 
   if(!success) {
-    function_2260bfc08cd754ea(rewardcache);
+    cleanuprewardcache(rewardcache);
     function_e02e37e34dec2042("Reward cache could not be spawned. Reason: unable to add reward groups. This could be a problem with the reward group or the loot function for this reward cache returning malformed loot for the group. See log for details.");
     return;
   }
@@ -386,14 +386,14 @@ function private function_30fd5c2bb4199790(var_bae6a1d8f73bc001, playergroups, p
   function_5769976c6051f91b(rewardcache);
 }
 
-function private function_d5efc18924db80b1(var_bae6a1d8f73bc001, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f) {
+function private function_d5efc18924db80b1(rewardcachesettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f) {
   var_26faaa31d0b8f90 = 0;
   spawnangles = namespace_6257bf0db64cb539::function_5b2e856ac722692e(placementstruct);
-  var_820b8aac8d9caad2 = function_4a71c5cd075ec3d3();
+  spawnoriginworkresult = function_4a71c5cd075ec3d3();
   var_48924e1f05b1e588 = function_4a71c5cd075ec3d3();
-  thread function_8f0ea7b45a92fe4c(var_820b8aac8d9caad2, playergroups, placementstruct);
-  thread function_4d1ed1e796e9b5fb(var_48924e1f05b1e588, playergroups, var_5110040e4247ddb8, var_ed118e6dd8c246);
-  workresults = [var_820b8aac8d9caad2, var_48924e1f05b1e588];
+  thread function_8f0ea7b45a92fe4c(spawnoriginworkresult, playergroups, placementstruct);
+  thread function_4d1ed1e796e9b5fb(var_48924e1f05b1e588, playergroups, var_5110040e4247ddb8, lootfunctionargs);
+  workresults = [spawnoriginworkresult, var_48924e1f05b1e588];
   frameswaited = 0;
 
   while(!function_9b4ae88527b27180(workresults)) {
@@ -413,17 +413,17 @@ function private function_d5efc18924db80b1(var_bae6a1d8f73bc001, playergroups, p
     return;
   }
 
-  var_cbf8cb005343dd9d = var_48924e1f05b1e588.resultobject;
-  spawnorigin = var_820b8aac8d9caad2.resultobject;
-  var_cbf8cb005343dd9d = function_f434d12840148e1b(var_cbf8cb005343dd9d);
+  playergrouplootstructs = var_48924e1f05b1e588.resultobject;
+  spawnorigin = spawnoriginworkresult.resultobject;
+  playergrouplootstructs = function_f434d12840148e1b(playergrouplootstructs);
 
-  if(var_cbf8cb005343dd9d.size == 0) {
+  if(playergrouplootstructs.size == 0) {
     function_f269427c9e37c270(var_3c99a2a84c4b850f, !var_26faaa31d0b8f90);
     function_469b7ea0b94baae6("Reward cache could not be spawned. Reason: No players to spawn the reward cache for. All players in the reward cache's playerGroups were invalid by the time the Reward was ready to spawn (rewards can take 1-8 frames to spawn once the request is made).");
     return;
   }
 
-  rewardcache = function_a5bf382439c269ff(var_bae6a1d8f73bc001, spawnorigin, spawnangles, var_ce0e8fe5ee941ba9, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc);
+  rewardcache = function_a5bf382439c269ff(rewardcachesettings, spawnorigin, spawnangles, func_openlootablecontainer, func_oncacheitemtaken, func_onitemadded);
 
   if(!isDefined(rewardcache)) {
     function_f269427c9e37c270(var_3c99a2a84c4b850f, !var_26faaa31d0b8f90);
@@ -431,10 +431,10 @@ function private function_d5efc18924db80b1(var_bae6a1d8f73bc001, playergroups, p
     return;
   }
 
-  success = function_aab44fb14323f306(rewardcache, var_cbf8cb005343dd9d);
+  success = function_aab44fb14323f306(rewardcache, playergrouplootstructs);
 
   if(!success) {
-    function_2260bfc08cd754ea(rewardcache);
+    cleanuprewardcache(rewardcache);
     function_e02e37e34dec2042("Reward cache could not be spawned. Reason: unable to add reward groups. This could be a problem with the reward group or the loot function for this reward cache returning malformed loot for the group. See log for details.");
     return;
   }
@@ -475,10 +475,10 @@ function private function_eccb22c0a7e7f691(rewardcache, players, contents) {
     return 0;
   }
 
-  var_c359824d10b7dbd3 = function_98e8ea9283c5db42(rewardcache, players, contents);
+  grouprewardcache = function_98e8ea9283c5db42(rewardcache, players, contents);
 
-  if(isDefined(var_c359824d10b7dbd3)) {
-    rewardcache.var_55b52f7bc45800e0[rewardcache.var_55b52f7bc45800e0.size] = var_c359824d10b7dbd3;
+  if(isDefined(grouprewardcache)) {
+    rewardcache.grouprewardcaches[rewardcache.grouprewardcaches.size] = grouprewardcache;
   } else {
     function_469b7ea0b94baae6(" Reward group could not be added to the reward cache. Reason: unable to spawn groupRewardCache struct (also referred to as the lootCache). See log for details.");
     return 0;
@@ -486,7 +486,7 @@ function private function_eccb22c0a7e7f691(rewardcache, players, contents) {
 
   var_e40e14559fdd8f71 = 1;
 
-  foreach(player in var_c359824d10b7dbd3.playerowners) {
+  foreach(player in grouprewardcache.playerowners) {
     function_deeda1af884e33ab(rewardcache, player);
     success = function_4269532b2cd3272e(rewardcache, player);
 
@@ -499,10 +499,10 @@ function private function_eccb22c0a7e7f691(rewardcache, players, contents) {
   return var_e40e14559fdd8f71;
 }
 
-function private function_aab44fb14323f306(rewardcache, var_cbf8cb005343dd9d) {
-  foreach(var_8e37f162ac06f09c in var_cbf8cb005343dd9d) {
-    playergroup = var_8e37f162ac06f09c.playergroup;
-    lootcontents = var_8e37f162ac06f09c.lootcontents;
+function private function_aab44fb14323f306(rewardcache, playergrouplootstructs) {
+  foreach(playergrouplootstruct in playergrouplootstructs) {
+    playergroup = playergrouplootstruct.playergroup;
+    lootcontents = playergrouplootstruct.lootcontents;
     success = function_eccb22c0a7e7f691(rewardcache, playergroup, lootcontents);
 
     if(!success) {
@@ -514,7 +514,7 @@ function private function_aab44fb14323f306(rewardcache, var_cbf8cb005343dd9d) {
 }
 
 function private function_4eb1ac313bc7d586(playergroups, placementstruct, var_8dd4051dae605f66) {
-  spawnposition = namespace_6257bf0db64cb539::function_1ebb61ed81f6e62c(placementstruct);
+  spawnposition = namespace_6257bf0db64cb539::getplacementorigin(placementstruct);
   searchradius = namespace_6257bf0db64cb539::function_c9f7a7753d62589(placementstruct);
   var_8542b7103ded25cc = namespace_6257bf0db64cb539::function_3a34f98d9ca6c35e(placementstruct);
   var_5f32f9c3f5685477 = namespace_6257bf0db64cb539::function_79fe8de70e58b32(placementstruct);
@@ -535,18 +535,18 @@ function private function_905acacd2e23179d(rewardcache, parent, offset, angles, 
     thread function_33f66492eeb1f475(rewardcache);
   }
 
-  var_b82724cdd7191c5c = function_5575eec2f593d3eb(rewardcache);
+  allscriptables = function_5575eec2f593d3eb(rewardcache);
 
-  foreach(scriptable in var_b82724cdd7191c5c) {
-    scriptable function_6e506f39f121ea8a(parent, offset, angles);
+  foreach(scriptable in allscriptables) {
+    scriptable scriptable_setparententity(parent, offset, angles);
   }
 }
 
 function private function_5575eec2f593d3eb(rewardcache) {
   scriptables = [rewardcache.interactionpoint];
 
-  foreach(var_c359824d10b7dbd3 in rewardcache.var_55b52f7bc45800e0) {
-    scriptables[scriptables.size] = var_c359824d10b7dbd3;
+  foreach(grouprewardcache in rewardcache.grouprewardcaches) {
+    scriptables[scriptables.size] = grouprewardcache;
   }
 
   foreach(var_dc1cdeb65fa05ec4 in rewardcache.var_b3dc82144db04c75) {
@@ -577,14 +577,14 @@ function private function_8b3827772a6bad4b(rewardcache, player) {
   rewardcache.var_aea068c0e66dab61 = array_remove(rewardcache.var_aea068c0e66dab61, player);
 }
 
-function private function_a5bf382439c269ff(var_bae6a1d8f73bc001, origin, angles, var_ce0e8fe5ee941ba9, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc) {
+function private function_a5bf382439c269ff(rewardcachesettings, origin, angles, func_openlootablecontainer, func_oncacheitemtaken, func_onitemadded) {
   rewardcache = spawnStruct();
-  rewardcache.var_b8039209fb3f728c = 1;
-  rewardcache.settings = var_bae6a1d8f73bc001;
-  rewardcache.var_ce0e8fe5ee941ba9 = var_ce0e8fe5ee941ba9;
-  rewardcache.var_15fc8e507acc4b19 = var_15fc8e507acc4b19;
-  rewardcache.var_a1bdf2e1fd12ffc = var_a1bdf2e1fd12ffc;
-  rewardcache.objectivemarkerid = function_7a33191e3c13b5ce(var_bae6a1d8f73bc001, origin);
+  rewardcache.isrewardcache = 1;
+  rewardcache.settings = rewardcachesettings;
+  rewardcache.func_openlootablecontainer = func_openlootablecontainer;
+  rewardcache.func_oncacheitemtaken = func_oncacheitemtaken;
+  rewardcache.func_onitemadded = func_onitemadded;
+  rewardcache.objectivemarkerid = function_7a33191e3c13b5ce(rewardcachesettings, origin);
   rewardcache.interactionpoint = function_eb0c6a46ce634c52(rewardcache, origin, angles);
 
   if(!isDefined(rewardcache.interactionpoint)) {
@@ -592,7 +592,7 @@ function private function_a5bf382439c269ff(var_bae6a1d8f73bc001, origin, angles,
     return undefined;
   }
 
-  rewardcache.var_55b52f7bc45800e0 = [];
+  rewardcache.grouprewardcaches = [];
   rewardcache.var_b3dc82144db04c75 = [];
   rewardcache.playerowners = [];
   rewardcache.var_aea068c0e66dab61 = [];
@@ -603,8 +603,8 @@ function private function_e39ee5e9730a31a3(rewardcache) {
   rewardcache notify("cleanup");
   rewardcache endon("cleanup");
 
-  foreach(var_c359824d10b7dbd3 in rewardcache.var_55b52f7bc45800e0) {
-    function_b44cac31aed153a6(var_c359824d10b7dbd3);
+  foreach(grouprewardcache in rewardcache.grouprewardcaches) {
+    function_b44cac31aed153a6(grouprewardcache);
   }
 
   foreach(var_dc1cdeb65fa05ec4 in rewardcache.var_b3dc82144db04c75) {
@@ -615,10 +615,10 @@ function private function_e39ee5e9730a31a3(rewardcache) {
   function_5e776c4debd7a058(rewardcache.objectivemarkerid);
 }
 
-function private function_98e8ea9283c5db42(var_81d4f50295d743eb, players, cachecontents) {
-  var_a8d556aca6e954c9 = reward_cache_settings::function_c2eace8af0fb7923(var_81d4f50295d743eb.settings);
-  origin = function_4952f5234b065969(var_81d4f50295d743eb);
-  angles = function_607b0b2d4d1fadf7(var_81d4f50295d743eb);
+function private function_98e8ea9283c5db42(rewardcacheowner, players, cachecontents) {
+  var_a8d556aca6e954c9 = reward_cache_settings::function_c2eace8af0fb7923(rewardcacheowner.settings);
+  origin = function_4952f5234b065969(rewardcacheowner);
+  angles = function_607b0b2d4d1fadf7(rewardcacheowner);
   var_a8d556aca6e954c9 = function_e050b08db44e0d63(var_a8d556aca6e954c9, origin, angles);
 
   if(!function_8e8b8d36cec59a9f(var_a8d556aca6e954c9, 2, 1)) {
@@ -627,84 +627,84 @@ function private function_98e8ea9283c5db42(var_81d4f50295d743eb, players, cachec
     return undefined;
   }
 
-  var_c359824d10b7dbd3 = var_a8d556aca6e954c9;
-  var_c359824d10b7dbd3.var_4fb72376c6665823 = 1;
-  var_c359824d10b7dbd3.var_81d4f50295d743eb = var_81d4f50295d743eb;
-  var_c359824d10b7dbd3.contents = [];
-  var_c359824d10b7dbd3.var_15fc8e507acc4b19 = var_81d4f50295d743eb.var_15fc8e507acc4b19;
-  var_c359824d10b7dbd3.onitemtaken = &function_6edbc34f275777ce;
-  var_c359824d10b7dbd3.var_a1bdf2e1fd12ffc = var_81d4f50295d743eb.var_a1bdf2e1fd12ffc;
-  var_c359824d10b7dbd3.playerowners = players;
-  var_c359824d10b7dbd3.var_ac1eb7f0cf25e439 = undefined;
-  function_c848c150de4f73b3(var_c359824d10b7dbd3, cachecontents, 1);
-  thread function_db0a8fab5ff7bd4d(var_c359824d10b7dbd3);
-  return var_c359824d10b7dbd3;
+  grouprewardcache = var_a8d556aca6e954c9;
+  grouprewardcache.var_4fb72376c6665823 = 1;
+  grouprewardcache.rewardcacheowner = rewardcacheowner;
+  grouprewardcache.contents = [];
+  grouprewardcache.func_oncacheitemtaken = rewardcacheowner.func_oncacheitemtaken;
+  grouprewardcache.onitemtaken = &function_6edbc34f275777ce;
+  grouprewardcache.func_onitemadded = rewardcacheowner.func_onitemadded;
+  grouprewardcache.playerowners = players;
+  grouprewardcache.currentopener = undefined;
+  function_c848c150de4f73b3(grouprewardcache, cachecontents, 1);
+  thread function_db0a8fab5ff7bd4d(grouprewardcache);
+  return grouprewardcache;
 }
 
-function private function_b44cac31aed153a6(var_c359824d10b7dbd3) {
-  var_c359824d10b7dbd3 notify("cleanup");
-  function_1d23a5c9faafcf44(var_c359824d10b7dbd3);
+function private function_b44cac31aed153a6(grouprewardcache) {
+  grouprewardcache notify("cleanup");
+  function_1d23a5c9faafcf44(grouprewardcache);
 }
 
 function private function_b4fee1d258d4b097(rewardcache, player) {
-  var_c359824d10b7dbd3 = function_f0c9a03489275ce5(rewardcache, player);
+  grouprewardcache = function_f0c9a03489275ce5(rewardcache, player);
 
-  if(isDefined(var_c359824d10b7dbd3)) {
-    function_a1537ccc9badee51(var_c359824d10b7dbd3, player);
+  if(isDefined(grouprewardcache)) {
+    function_a1537ccc9badee51(grouprewardcache, player);
     argsstruct = spawnStruct();
-    argsstruct.cache = var_c359824d10b7dbd3;
+    argsstruct.cache = grouprewardcache;
     argsstruct.player = player;
-    [[rewardcache.var_ce0e8fe5ee941ba9]](argsstruct);
+    [[rewardcache.func_openlootablecontainer]](argsstruct);
   }
 }
 
-function private function_c848c150de4f73b3(var_c359824d10b7dbd3, newcontents, var_511ac4f652abd05) {
+function private function_c848c150de4f73b3(grouprewardcache, newcontents, var_511ac4f652abd05) {
   if(!isDefined(var_511ac4f652abd05)) {
     var_511ac4f652abd05 = 0;
   }
 
   if(isDefined(newcontents) && isarray(newcontents)) {
     foreach(item in newcontents) {
-      containerindex = var_c359824d10b7dbd3.contents.size;
-      function_505cfc0b2a049ae3(var_c359824d10b7dbd3, item, containerindex, var_511ac4f652abd05);
+      containerindex = grouprewardcache.contents.size;
+      function_505cfc0b2a049ae3(grouprewardcache, item, containerindex, var_511ac4f652abd05);
     }
   }
 }
 
-function private function_f64bcd74450424eb(var_c359824d10b7dbd3) {
+function private function_f64bcd74450424eb(grouprewardcache) {
   newcontents = [];
-  var_f72137acbb1910da = spawnStruct();
-  var_f72137acbb1910da.var_a265da1ac2aef0d5 = 1;
-  var_f72137acbb1910da.lootid = 0;
-  var_f72137acbb1910da.quantity = 0;
-  var_a52f80b73fc2a002 = var_c359824d10b7dbd3.contents.size;
-  var_c359824d10b7dbd3.contents[var_a52f80b73fc2a002] = var_f72137acbb1910da;
-  return var_a52f80b73fc2a002;
+  reserveditem = spawnStruct();
+  reserveditem.var_a265da1ac2aef0d5 = 1;
+  reserveditem.lootid = 0;
+  reserveditem.quantity = 0;
+  reserveditemslotindex = grouprewardcache.contents.size;
+  grouprewardcache.contents[reserveditemslotindex] = reserveditem;
+  return reserveditemslotindex;
 }
 
-function private function_505cfc0b2a049ae3(var_c359824d10b7dbd3, item, index, var_511ac4f652abd05) {
+function private function_505cfc0b2a049ae3(grouprewardcache, item, index, var_511ac4f652abd05) {
   if(!isDefined(var_511ac4f652abd05)) {
     var_511ac4f652abd05 = 0;
   }
 
-  var_c359824d10b7dbd3.contents[index] = item;
+  grouprewardcache.contents[index] = item;
 
-  if(!var_511ac4f652abd05 && isDefined(var_c359824d10b7dbd3.var_a1bdf2e1fd12ffc)) {
-    argsstruct = function_1302487d62106118(var_c359824d10b7dbd3, item.lootid, item.quantity, index, var_c359824d10b7dbd3.var_ac1eb7f0cf25e439);
-    [[var_c359824d10b7dbd3.var_a1bdf2e1fd12ffc]](argsstruct);
+  if(!var_511ac4f652abd05 && isDefined(grouprewardcache.func_onitemadded)) {
+    argsstruct = function_1302487d62106118(grouprewardcache, item.lootid, item.quantity, index, grouprewardcache.currentopener);
+    [[grouprewardcache.func_onitemadded]](argsstruct);
   }
 }
 
-function private function_1302487d62106118(var_c359824d10b7dbd3, lootid, quantity, containerindex, var_ac1eb7f0cf25e439) {
+function private function_1302487d62106118(grouprewardcache, lootid, quantity, containerindex, currentopener) {
   return {
-    #var_ac1eb7f0cf25e439: var_ac1eb7f0cf25e439, #containerindex: containerindex, #quantity: quantity, #lootid: lootid, #var_c359824d10b7dbd3: var_c359824d10b7dbd3
+    #currentopener: currentopener, #containerindex: containerindex, #quantity: quantity, #lootid: lootid, #grouprewardcache: grouprewardcache
   };
 }
 
-function private function_d1b4513090f45cdc(var_c359824d10b7dbd3) {
+function private function_d1b4513090f45cdc(grouprewardcache) {
   newcontents = [];
 
-  foreach(item in var_c359824d10b7dbd3.contents) {
+  foreach(item in grouprewardcache.contents) {
     var_e34b60eaffd24b88 = isDefined(item) && item.lootid != 0;
     var_1642a4d4e85cd1e2 = isDefined(item.quantity) && item.quantity != 0;
 
@@ -713,66 +713,66 @@ function private function_d1b4513090f45cdc(var_c359824d10b7dbd3) {
     }
   }
 
-  var_c359824d10b7dbd3.contents = newcontents;
+  grouprewardcache.contents = newcontents;
 }
 
-function private function_db0a8fab5ff7bd4d(var_c359824d10b7dbd3) {
-  var_c359824d10b7dbd3 endon("cleanup");
+function private function_db0a8fab5ff7bd4d(grouprewardcache) {
+  grouprewardcache endon("cleanup");
 
   while(true) {
-    var_c359824d10b7dbd3 waittill("closed");
-    function_5fb98fd5d29f8228(var_c359824d10b7dbd3);
+    grouprewardcache waittill("closed");
+    function_5fb98fd5d29f8228(grouprewardcache);
   }
 }
 
-function private function_a1537ccc9badee51(var_c359824d10b7dbd3, player) {
-  function_4311ace6b3e80b79(var_c359824d10b7dbd3);
-  rewardcache = var_c359824d10b7dbd3.var_81d4f50295d743eb;
+function private function_a1537ccc9badee51(grouprewardcache, player) {
+  function_4311ace6b3e80b79(grouprewardcache);
+  rewardcache = grouprewardcache.rewardcacheowner;
   var_9ae49f75af0eca8e = function_8839eccded74a214(rewardcache, player);
   function_fa331a2fee762f38(var_9ae49f75af0eca8e);
-  var_c359824d10b7dbd3.var_ac1eb7f0cf25e439 = player;
+  grouprewardcache.currentopener = player;
 }
 
-function private function_5fb98fd5d29f8228(var_c359824d10b7dbd3) {
-  function_e4e096fea63298b7(var_c359824d10b7dbd3);
-  function_a39a190621095d86(var_c359824d10b7dbd3);
-  var_c359824d10b7dbd3.var_ac1eb7f0cf25e439 = undefined;
+function private function_5fb98fd5d29f8228(grouprewardcache) {
+  function_e4e096fea63298b7(grouprewardcache);
+  function_a39a190621095d86(grouprewardcache);
+  grouprewardcache.currentopener = undefined;
 }
 
-function private function_6edbc34f275777ce(var_c359824d10b7dbd3, player) {
-  rewardcache = var_c359824d10b7dbd3.var_81d4f50295d743eb;
+function private function_6edbc34f275777ce(grouprewardcache, player) {
+  rewardcache = grouprewardcache.rewardcacheowner;
 
-  foreach(player in var_c359824d10b7dbd3.playerowners) {
+  foreach(player in grouprewardcache.playerowners) {
     var_9ae49f75af0eca8e = function_8839eccded74a214(rewardcache, player);
     function_c6d16a48482b75c1(var_9ae49f75af0eca8e);
   }
 
-  if(isDefined(var_c359824d10b7dbd3.var_15fc8e507acc4b19)) {
-    [[var_c359824d10b7dbd3.var_15fc8e507acc4b19]](var_c359824d10b7dbd3, player);
+  if(isDefined(grouprewardcache.func_oncacheitemtaken)) {
+    [[grouprewardcache.func_oncacheitemtaken]](grouprewardcache, player);
   }
 }
 
-function private function_a39a190621095d86(var_c359824d10b7dbd3) {
-  if(function_61e37af5c53d40e3(var_c359824d10b7dbd3)) {
-    var_ac1eb7f0cf25e439 = var_c359824d10b7dbd3.var_ac1eb7f0cf25e439;
-    rewardcache = var_c359824d10b7dbd3.var_81d4f50295d743eb;
-    var_9ae49f75af0eca8e = function_8839eccded74a214(rewardcache, var_ac1eb7f0cf25e439);
+function private function_a39a190621095d86(grouprewardcache) {
+  if(function_61e37af5c53d40e3(grouprewardcache)) {
+    currentopener = grouprewardcache.currentopener;
+    rewardcache = grouprewardcache.rewardcacheowner;
+    var_9ae49f75af0eca8e = function_8839eccded74a214(rewardcache, currentopener);
     function_81010148cb67c61d(var_9ae49f75af0eca8e);
   }
 }
 
-function private function_61e37af5c53d40e3(var_c359824d10b7dbd3) {
-  var_ac1eb7f0cf25e439 = var_c359824d10b7dbd3.var_ac1eb7f0cf25e439;
+function private function_61e37af5c53d40e3(grouprewardcache) {
+  currentopener = grouprewardcache.currentopener;
 
-  if(!isPlayer(var_ac1eb7f0cf25e439)) {
+  if(!isPlayer(currentopener)) {
     return false;
   }
 
-  rewardcache = var_c359824d10b7dbd3.var_81d4f50295d743eb;
+  rewardcache = grouprewardcache.rewardcacheowner;
   var_9f2beef71cb8b388 = reward_cache_settings::function_8d8cf89aaa1f6541(rewardcache.settings);
 
   if(!istrue(var_9f2beef71cb8b388)) {
-    if(function_baba3a8fbc912f3d(var_c359824d10b7dbd3)) {
+    if(function_baba3a8fbc912f3d(grouprewardcache)) {
       return false;
     }
   }
@@ -780,39 +780,39 @@ function private function_61e37af5c53d40e3(var_c359824d10b7dbd3) {
   return true;
 }
 
-function private function_4311ace6b3e80b79(var_c359824d10b7dbd3) {
-  rewardcache = var_c359824d10b7dbd3.var_81d4f50295d743eb;
+function private function_4311ace6b3e80b79(grouprewardcache) {
+  rewardcache = grouprewardcache.rewardcacheowner;
 
-  foreach(player in var_c359824d10b7dbd3.playerowners) {
+  foreach(player in grouprewardcache.playerowners) {
     if(function_4797f19e0b2e0547(rewardcache, player) == 0) {
       function_b4dbfe49ef9b3109(rewardcache, player);
     }
   }
 }
 
-function private function_e4e096fea63298b7(var_c359824d10b7dbd3) {
-  rewardcache = var_c359824d10b7dbd3.var_81d4f50295d743eb;
+function private function_e4e096fea63298b7(grouprewardcache) {
+  rewardcache = grouprewardcache.rewardcacheowner;
 
-  foreach(player in var_c359824d10b7dbd3.playerowners) {
+  foreach(player in grouprewardcache.playerowners) {
     if(function_4797f19e0b2e0547(rewardcache, player) == 0) {
       function_1399f8c48b16a218(rewardcache, player);
     }
   }
 }
 
-function private function_eb0c6a46ce634c52(var_81d4f50295d743eb, origin, angles) {
-  var_c474f92d8773c359 = reward_cache_settings::function_ce8227d6345431bb(var_81d4f50295d743eb.settings);
-  var_9e266079545313c1 = function_e050b08db44e0d63(var_c474f92d8773c359, origin, angles);
+function private function_eb0c6a46ce634c52(rewardcacheowner, origin, angles) {
+  var_c474f92d8773c359 = reward_cache_settings::function_ce8227d6345431bb(rewardcacheowner.settings);
+  scriptable_interactionpoint = function_e050b08db44e0d63(var_c474f92d8773c359, origin, angles);
 
-  if(!function_8e8b8d36cec59a9f(var_9e266079545313c1, 1, 1)) {
-    function_1d23a5c9faafcf44(var_9e266079545313c1);
+  if(!function_8e8b8d36cec59a9f(scriptable_interactionpoint, 1, 1)) {
+    function_1d23a5c9faafcf44(scriptable_interactionpoint);
     function_469b7ea0b94baae6("<dev string:x7d>");
     return undefined;
   }
 
-  interactionpoint = var_9e266079545313c1;
+  interactionpoint = scriptable_interactionpoint;
   interactionpoint.var_e377da4c0a8ddb62 = 1;
-  interactionpoint.var_81d4f50295d743eb = var_81d4f50295d743eb;
+  interactionpoint.rewardcacheowner = rewardcacheowner;
   return interactionpoint;
 }
 
@@ -820,10 +820,10 @@ function private function_bce8631f36bc1cd6(interactionpoint) {
   function_1d23a5c9faafcf44(interactionpoint);
 }
 
-function private function_d50b9d11c2d587eb(var_81d4f50295d743eb, playerowner) {
-  var_ca7c93a8aa8ae096 = reward_cache_settings::function_ed764cfb3d7fa4b8(var_81d4f50295d743eb.settings);
-  origin = function_4952f5234b065969(var_81d4f50295d743eb);
-  angles = function_607b0b2d4d1fadf7(var_81d4f50295d743eb);
+function private function_d50b9d11c2d587eb(rewardcacheowner, playerowner) {
+  var_ca7c93a8aa8ae096 = reward_cache_settings::function_ed764cfb3d7fa4b8(rewardcacheowner.settings);
+  origin = function_4952f5234b065969(rewardcacheowner);
+  angles = function_607b0b2d4d1fadf7(rewardcacheowner);
   var_9ae49f75af0eca8e = function_e050b08db44e0d63(var_ca7c93a8aa8ae096, origin, angles, playerowner);
 
   if(!function_8e8b8d36cec59a9f(var_9ae49f75af0eca8e, 0, 1)) {
@@ -833,7 +833,7 @@ function private function_d50b9d11c2d587eb(var_81d4f50295d743eb, playerowner) {
   }
 
   var_dc1cdeb65fa05ec4 = var_9ae49f75af0eca8e;
-  var_dc1cdeb65fa05ec4.var_81d4f50295d743eb = var_81d4f50295d743eb;
+  var_dc1cdeb65fa05ec4.rewardcacheowner = rewardcacheowner;
   var_dc1cdeb65fa05ec4.playerowner = playerowner;
   return var_dc1cdeb65fa05ec4;
 }
@@ -888,8 +888,8 @@ function private function_33f66492eeb1f475(rewardcache) {
   }
 }
 
-function private function_7a33191e3c13b5ce(var_bae6a1d8f73bc001, origin) {
-  markerbundlename = reward_cache_settings::function_ea5ac365e0f8886f(var_bae6a1d8f73bc001);
+function private function_7a33191e3c13b5ce(rewardcachesettings, origin) {
+  markerbundlename = reward_cache_settings::getobjectivemarkerbundlename(rewardcachesettings);
 
   if(!isDefined(markerbundlename)) {
     function_1c5f030d48fdff4c("A marker bundle name was not found in the reward cache's settings. The reward cache will be spawned without an objective marker.");
@@ -903,7 +903,7 @@ function private function_7a33191e3c13b5ce(var_bae6a1d8f73bc001, origin) {
     return;
   }
 
-  zoffset = reward_cache_settings::function_ced4245a2bfd6ced(var_bae6a1d8f73bc001);
+  zoffset = reward_cache_settings::function_ced4245a2bfd6ced(rewardcachesettings);
 
   if(!isDefined(zoffset)) {
     function_1c5f030d48fdff4c("An objective marker is specified for this reward cache, but no zOffset was specified. The marker will likely not be placed above the cache.");
@@ -982,67 +982,67 @@ function private function_baa579f9e5c2a023(rewardcache, player, rewardcachestate
   function_4b272a839a0ee8e8(rewardcache, player, rewardcachestate);
 }
 
-function function_3ee75bc4270d9687(var_b7517d56ffa9e235, var_be17e9d6ceb06a5b) {
-  if(!isDefined(var_b7517d56ffa9e235)) {
+function function_3ee75bc4270d9687(scriptableassetname, var_be17e9d6ceb06a5b) {
+  if(!isDefined(scriptableassetname)) {
     function_469b7ea0b94baae6(" could not create scriptable info from undefined scriptableAssetName (hint: rewardCacheScriptableType is " + default_to(var_be17e9d6ceb06a5b, "undefined"));
     return;
   }
 
-  var_f10f3c786358734a = function_c138936a3dfcb83c(var_b7517d56ffa9e235);
-  function_8a7225f2532a420c(var_f10f3c786358734a, var_be17e9d6ceb06a5b);
-  return var_f10f3c786358734a;
+  scriptableinfo = function_c138936a3dfcb83c(scriptableassetname);
+  function_8a7225f2532a420c(scriptableinfo, var_be17e9d6ceb06a5b);
+  return scriptableinfo;
 }
 
-function function_c138936a3dfcb83c(var_bdfcebdc9267241a, scriptablepartname, var_809b1db77e03ff7f, var_9f783320f97e2fa5, var_b36fb5e0718142bd) {
-  var_f10f3c786358734a = spawnStruct();
-  var_f10f3c786358734a.assetname = var_bdfcebdc9267241a;
-  var_f10f3c786358734a.scriptablepartname = scriptablepartname;
-  var_f10f3c786358734a.var_809b1db77e03ff7f = var_809b1db77e03ff7f;
-  var_f10f3c786358734a.var_9f783320f97e2fa5 = var_9f783320f97e2fa5;
-  var_f10f3c786358734a.var_b36fb5e0718142bd = var_b36fb5e0718142bd;
-  return var_f10f3c786358734a;
+function function_c138936a3dfcb83c(scriptable_assetname, scriptablepartname, var_809b1db77e03ff7f, var_9f783320f97e2fa5, var_b36fb5e0718142bd) {
+  scriptableinfo = spawnStruct();
+  scriptableinfo.assetname = scriptable_assetname;
+  scriptableinfo.scriptablepartname = scriptablepartname;
+  scriptableinfo.var_809b1db77e03ff7f = var_809b1db77e03ff7f;
+  scriptableinfo.var_9f783320f97e2fa5 = var_9f783320f97e2fa5;
+  scriptableinfo.var_b36fb5e0718142bd = var_b36fb5e0718142bd;
+  return scriptableinfo;
 }
 
-function private function_8a7225f2532a420c(var_f10f3c786358734a, var_be17e9d6ceb06a5b) {
+function private function_8a7225f2532a420c(scriptableinfo, var_be17e9d6ceb06a5b) {
   switch (var_be17e9d6ceb06a5b) {
     case 0:
-      function_a1ba6dc6fe85af2f(var_f10f3c786358734a);
+      function_a1ba6dc6fe85af2f(scriptableinfo);
       break;
     case 1:
-      function_debcf9b3cdb7de4e(var_f10f3c786358734a);
+      function_debcf9b3cdb7de4e(scriptableinfo);
       break;
     case 2:
-      function_b4c40fbad4ff6b08(var_f10f3c786358734a);
+      function_b4c40fbad4ff6b08(scriptableinfo);
       break;
     default:
-      function_469b7ea0b94baae6("Could not set scriptable info for scriptableAssetName " + default_to(var_f10f3c786358734a.var_b7517d56ffa9e235, "undefined") + ". Reason: rewardCacheScriptableType " + var_be17e9d6ceb06a5b + " not recognized.");
+      function_469b7ea0b94baae6("Could not set scriptable info for scriptableAssetName " + default_to(scriptableinfo.scriptableassetname, "undefined") + ". Reason: rewardCacheScriptableType " + var_be17e9d6ceb06a5b + " not recognized.");
       return undefined;
   }
 }
 
-function private function_debcf9b3cdb7de4e(var_f10f3c786358734a) {
-  var_f10f3c786358734a.scriptablepartname = "body";
-  var_f10f3c786358734a.var_809b1db77e03ff7f = "rewardcache_interactionpoint";
-  var_f10f3c786358734a.var_9f783320f97e2fa5 = undefined;
-  var_f10f3c786358734a.var_b36fb5e0718142bd = undefined;
+function private function_debcf9b3cdb7de4e(scriptableinfo) {
+  scriptableinfo.scriptablepartname = "body";
+  scriptableinfo.var_809b1db77e03ff7f = "rewardcache_interactionpoint";
+  scriptableinfo.var_9f783320f97e2fa5 = undefined;
+  scriptableinfo.var_b36fb5e0718142bd = undefined;
 }
 
-function private function_b4c40fbad4ff6b08(var_f10f3c786358734a) {
-  var_f10f3c786358734a.scriptablepartname = "body";
-  var_f10f3c786358734a.var_809b1db77e03ff7f = "rewardcache_lootcache";
-  var_f10f3c786358734a.var_9f783320f97e2fa5 = undefined;
-  var_f10f3c786358734a.var_b36fb5e0718142bd = undefined;
+function private function_b4c40fbad4ff6b08(scriptableinfo) {
+  scriptableinfo.scriptablepartname = "body";
+  scriptableinfo.var_809b1db77e03ff7f = "rewardcache_lootcache";
+  scriptableinfo.var_9f783320f97e2fa5 = undefined;
+  scriptableinfo.var_b36fb5e0718142bd = undefined;
 }
 
-function private function_a1ba6dc6fe85af2f(var_f10f3c786358734a) {
-  var_f10f3c786358734a.scriptablepartname = "body";
-  var_f10f3c786358734a.var_809b1db77e03ff7f = "rewardcache_active";
-  var_f10f3c786358734a.var_9f783320f97e2fa5 = "rewardcache_inactive";
-  var_f10f3c786358734a.var_b36fb5e0718142bd = "rewardcache_despawn";
+function private function_a1ba6dc6fe85af2f(scriptableinfo) {
+  scriptableinfo.scriptablepartname = "body";
+  scriptableinfo.var_809b1db77e03ff7f = "rewardcache_active";
+  scriptableinfo.var_9f783320f97e2fa5 = "rewardcache_inactive";
+  scriptableinfo.var_b36fb5e0718142bd = "rewardcache_despawn";
 }
 
-function private function_e050b08db44e0d63(var_f10f3c786358734a, origin, angles, playerowner) {
-  assetname = var_f10f3c786358734a.assetname;
+function private function_e050b08db44e0d63(scriptableinfo, origin, angles, playerowner) {
+  assetname = scriptableinfo.assetname;
   scriptable = undefined;
 
   if(isDefined(playerowner)) {
@@ -1057,52 +1057,52 @@ function private function_e050b08db44e0d63(var_f10f3c786358734a, origin, angles,
     return undefined;
   }
 
-  function_909ecf326f14f2e3(scriptable, var_f10f3c786358734a, 0);
+  function_909ecf326f14f2e3(scriptable, scriptableinfo, 0);
   return scriptable;
 }
 
-function private function_1d23a5c9faafcf44(var_7cf1b39520cf95a3) {
-  if(!isDefined(var_7cf1b39520cf95a3)) {
+function private function_1d23a5c9faafcf44(rewardcachescriptable) {
+  if(!isDefined(rewardcachescriptable)) {
     return;
   }
 
-  if(isent(var_7cf1b39520cf95a3)) {
-    var_7cf1b39520cf95a3 delete();
+  if(isent(rewardcachescriptable)) {
+    rewardcachescriptable delete();
     return;
   }
 
-  var_7cf1b39520cf95a3 freescriptable();
+  rewardcachescriptable freescriptable();
 }
 
-function private function_909ecf326f14f2e3(scriptable, var_f10f3c786358734a, rewardcachestate) {
-  scriptablepartname = var_f10f3c786358734a.scriptablepartname;
-  var_6291166121190194 = undefined;
+function private function_909ecf326f14f2e3(scriptable, scriptableinfo, rewardcachestate) {
+  scriptablepartname = scriptableinfo.scriptablepartname;
+  scriptablestatename = undefined;
 
   switch (rewardcachestate) {
     case 0:
-      var_6291166121190194 = var_f10f3c786358734a.var_809b1db77e03ff7f;
+      scriptablestatename = scriptableinfo.var_809b1db77e03ff7f;
       break;
     case 1:
-      var_6291166121190194 = var_f10f3c786358734a.var_271cc40d01b6b6d4;
+      scriptablestatename = scriptableinfo.var_271cc40d01b6b6d4;
       break;
     case 2:
-      var_6291166121190194 = var_f10f3c786358734a.var_b36fb5e0718142bd;
+      scriptablestatename = scriptableinfo.var_b36fb5e0718142bd;
       break;
     default:
       assertmsg("<dev string:x13e>" + rewardcachestate + "<dev string:x155>");
       return;
   }
 
-  function_f58f5f77adef707d(scriptable, scriptablepartname, var_6291166121190194);
+  function_f58f5f77adef707d(scriptable, scriptablepartname, scriptablestatename);
 }
 
-function private function_f58f5f77adef707d(scriptable, scriptablepartname, var_6291166121190194) {
-  if(scriptable getscriptableparthasstate(scriptablepartname, var_6291166121190194)) {
-    scriptable setscriptablepartstate(scriptablepartname, var_6291166121190194);
+function private function_f58f5f77adef707d(scriptable, scriptablepartname, scriptablestatename) {
+  if(scriptable getscriptableparthasstate(scriptablepartname, scriptablestatename)) {
+    scriptable setscriptablepartstate(scriptablepartname, scriptablestatename);
     return;
   }
 
-  function_e02e37e34dec2042("Could not initialize part " + scriptablepartname + " and state " + var_6291166121190194 + " on reward cache scriptable.");
+  function_e02e37e34dec2042("Could not initialize part " + scriptablepartname + " and state " + scriptablestatename + " on reward cache scriptable.");
 }
 
 function private function_ee13dfd43acfc3b0(scriptable, scriptablepartname, var_3a999b065b9e34bc, var_cddf574098957e21) {
@@ -1170,7 +1170,7 @@ function function_1c972fc13937297c(msg, rewardcache, relevantplayers) {
 function private function_984edb8383cfe272(msg, rewardcache, relevantplayers) {
   var_41148872a4288ef8 = msg;
 
-  if(function_b8039209fb3f728c(rewardcache)) {
+  if(isrewardcache(rewardcache)) {
     var_41148872a4288ef8 += " ( Reward Cache: " + function_1a020d38f2327a5c(rewardcache) + " ) ";
   }
 
@@ -1191,8 +1191,8 @@ function private function_5769976c6051f91b(rewardcache) {
   function_1c972fc13937297c("Spawned " + infostring);
 }
 
-function private function_3a91397317ef6ceb(var_b7517d56ffa9e235, missingstates, var_84582a7af8ad2d63) {
-  return "Scriptable created from asset " + var_b7517d56ffa9e235 + " is missing these required states [" + string_join(missingstates, ",") + "] on the part " + default_to(var_84582a7af8ad2d63, "undefined") + ". You may see undefined behavior when looking at the cache.";
+function private function_3a91397317ef6ceb(scriptableassetname, missingstates, var_84582a7af8ad2d63) {
+  return "Scriptable created from asset " + scriptableassetname + " is missing these required states [" + string_join(missingstates, ",") + "] on the part " + default_to(var_84582a7af8ad2d63, "undefined") + ". You may see undefined behavior when looking at the cache.";
 }
 
 function function_1a020d38f2327a5c(rewardcache, var_f1126f87cbfb3910) {
@@ -1200,19 +1200,19 @@ function function_1a020d38f2327a5c(rewardcache, var_f1126f87cbfb3910) {
     var_f1126f87cbfb3910 = 1;
   }
 
-  var_55b52f7bc45800e0 = rewardcache.var_55b52f7bc45800e0;
+  grouprewardcaches = rewardcache.grouprewardcaches;
 
   if(!var_f1126f87cbfb3910) {
-    return ("reward cache at origin " + function_4952f5234b065969(rewardcache) + " with " + var_55b52f7bc45800e0.size + " reward groups.");
+    return ("reward cache at origin " + function_4952f5234b065969(rewardcache) + " with " + grouprewardcaches.size + " reward groups.");
   }
 
   i = 0;
   var_5a43a48574104984 = "";
 
-  foreach(var_c359824d10b7dbd3 in rewardcache.var_55b52f7bc45800e0) {
+  foreach(grouprewardcache in rewardcache.grouprewardcaches) {
     i++;
-    playergroup = var_c359824d10b7dbd3.playerowners;
-    lootcontents = var_c359824d10b7dbd3.contents;
+    playergroup = grouprewardcache.playerowners;
+    lootcontents = grouprewardcache.contents;
     playernamesstring = function_f27f6ec22daf7fe9(playergroup);
 
     if(lootcontents.size > 0) {
@@ -1222,15 +1222,15 @@ function function_1a020d38f2327a5c(rewardcache, var_f1126f87cbfb3910) {
         var_e2d293b640f64920[var_e2d293b640f64920.size] = lootstruct.lootid + ":" + lootstruct.quantity;
       }
 
-      var_d00b2dd49a306db2 = utility::string_join(var_e2d293b640f64920, ", ");
+      lootinfostring = utility::string_join(var_e2d293b640f64920, ", ");
     } else {
-      var_d00b2dd49a306db2 = "";
+      lootinfostring = "";
     }
 
-    var_5a43a48574104984 += " GROUP " + i + ": (players: [" + playernamesstring + "], loot: " + lootcontents.size + " items with lootId:quantity [" + var_d00b2dd49a306db2 + "])";
+    var_5a43a48574104984 += " GROUP " + i + ": (players: [" + playernamesstring + "], loot: " + lootcontents.size + " items with lootId:quantity [" + lootinfostring + "])";
   }
 
-  infostring = "Reward cache at origin " + function_4952f5234b065969(rewardcache) + " with " + var_55b52f7bc45800e0.size + " reward groups.";
+  infostring = "Reward cache at origin " + function_4952f5234b065969(rewardcache) + " with " + grouprewardcaches.size + " reward groups.";
   infostring += var_5a43a48574104984;
   return infostring;
 }
@@ -1252,9 +1252,9 @@ function function_f27f6ec22daf7fe9(playerarray) {
   return playernamesstring;
 }
 
-function private function_2f9979bc854d735d(var_bae6a1d8f73bc001, playergroups, placementstruct, var_ce0e8fe5ee941ba9, var_5110040e4247ddb8, var_ed118e6dd8c246, var_15fc8e507acc4b19, var_a1bdf2e1fd12ffc, var_3c99a2a84c4b850f) {
+function private function_2f9979bc854d735d(rewardcachesettings, playergroups, placementstruct, func_openlootablecontainer, var_5110040e4247ddb8, lootfunctionargs, func_oncacheitemtaken, func_onitemadded, var_3c99a2a84c4b850f) {
   result = {
-    #var_a1bdf2e1fd12ffc: var_a1bdf2e1fd12ffc, #var_15fc8e507acc4b19: var_15fc8e507acc4b19, #var_ed118e6dd8c246: var_ed118e6dd8c246, #success: 1
+    #func_onitemadded: func_onitemadded, #func_oncacheitemtaken: func_oncacheitemtaken, #lootfunctionargs: lootfunctionargs, #success: 1
   };
 
   if(!isDefined(playergroups) || !isarray(playergroups)) {
@@ -1270,7 +1270,7 @@ function private function_2f9979bc854d735d(var_bae6a1d8f73bc001, playergroups, p
     result.success = 0;
   }
 
-  if(!isDefined(var_ce0e8fe5ee941ba9) || !isfunction(var_ce0e8fe5ee941ba9)) {
+  if(!isDefined(func_openlootablecontainer) || !isfunction(func_openlootablecontainer)) {
     function_e02e37e34dec2042("Reward cache could not be spawned. Reason: openLootableContainer function is undefined or not a function.");
     result.success = 0;
   }
@@ -1280,21 +1280,21 @@ function private function_2f9979bc854d735d(var_bae6a1d8f73bc001, playergroups, p
     result.success = 0;
   }
 
-  if(!isDefined(var_ed118e6dd8c246)) {
-    result.var_ed118e6dd8c246 = spawnStruct();
-  } else if(!isstruct(var_ed118e6dd8c246)) {
+  if(!isDefined(lootfunctionargs)) {
+    result.lootfunctionargs = spawnStruct();
+  } else if(!isstruct(lootfunctionargs)) {
     function_e02e37e34dec2042("reward cache could not be spawned. Reason: lootFunctionArgs must be a struct");
     result.success = 0;
   }
 
-  if(isDefined(var_15fc8e507acc4b19) && !isfunction(var_15fc8e507acc4b19)) {
+  if(isDefined(func_oncacheitemtaken) && !isfunction(func_oncacheitemtaken)) {
     function_469b7ea0b94baae6("func_onCacheItemTaken is defined but is not a function! The reward cache will still spawn but without any onItemTaken functionality.");
-    result.var_15fc8e507acc4b19 = undefined;
+    result.func_oncacheitemtaken = undefined;
   }
 
-  if(isDefined(var_a1bdf2e1fd12ffc) && !isfunction(var_a1bdf2e1fd12ffc)) {
+  if(isDefined(func_onitemadded) && !isfunction(func_onitemadded)) {
     function_469b7ea0b94baae6("func_onItemAdded is defined but is not a function! The reward cache will still spawn but without any onItemAdded functionality.");
-    result.var_a1bdf2e1fd12ffc = undefined;
+    result.func_onitemadded = undefined;
   }
 
   return result;
@@ -1332,15 +1332,15 @@ function function_ae3199d790b1588a(rewardgroup) {
   return true;
 }
 
-function private function_f434d12840148e1b(var_cbf8cb005343dd9d) {
+function private function_f434d12840148e1b(playergrouplootstructs) {
   var_f3d4b024c55661e9 = [];
 
-  foreach(var_dcff20e24e93b927 in var_cbf8cb005343dd9d) {
-    validplayers = function_7b3e0989d6429532(var_dcff20e24e93b927.playergroup);
+  foreach(grouplootstruct in playergrouplootstructs) {
+    validplayers = function_7b3e0989d6429532(grouplootstruct.playergroup);
 
     if(validplayers.size > 0) {
-      var_dcff20e24e93b927.playergroup = validplayers;
-      var_f3d4b024c55661e9[var_f3d4b024c55661e9.size] = var_dcff20e24e93b927;
+      grouplootstruct.playergroup = validplayers;
+      var_f3d4b024c55661e9[var_f3d4b024c55661e9.size] = grouplootstruct;
     }
   }
 
@@ -1366,13 +1366,13 @@ function private function_8e8b8d36cec59a9f(scriptableinstance, var_be17e9d6ceb06
     return false;
   }
 
-  var_f10f3c786358734a = spawnStruct();
+  scriptableinfo = spawnStruct();
   function_8a7225f2532a420c(scriptableinstance, var_be17e9d6ceb06a5b);
-  missingstates = function_5ca2928b25457e69(scriptableinstance, var_f10f3c786358734a);
+  missingstates = function_5ca2928b25457e69(scriptableinstance, scriptableinfo);
 
   if(missingstates.size != 0) {
     if(logerrors) {
-      errormsg = function_3a91397317ef6ceb(var_f10f3c786358734a.assetname, missingstates, var_f10f3c786358734a.scriptablepartname);
+      errormsg = function_3a91397317ef6ceb(scriptableinfo.assetname, missingstates, scriptableinfo.scriptablepartname);
       function_469b7ea0b94baae6(errormsg);
     }
 
@@ -1382,17 +1382,17 @@ function private function_8e8b8d36cec59a9f(scriptableinstance, var_be17e9d6ceb06
   return true;
 }
 
-function private function_5ca2928b25457e69(scriptableinstance, var_f10f3c786358734a) {
-  requiredstates = [var_f10f3c786358734a.var_809b1db77e03ff7f, var_f10f3c786358734a.var_9f783320f97e2fa5, var_f10f3c786358734a.var_b36fb5e0718142bd];
+function private function_5ca2928b25457e69(scriptableinstance, scriptableinfo) {
+  requiredstates = [scriptableinfo.var_809b1db77e03ff7f, scriptableinfo.var_9f783320f97e2fa5, scriptableinfo.var_b36fb5e0718142bd];
   requiredstates = array_removeundefined(requiredstates);
-  return function_f8713af73ab5adf1(scriptableinstance, var_f10f3c786358734a.scriptablepartname, requiredstates);
+  return function_f8713af73ab5adf1(scriptableinstance, scriptableinfo.scriptablepartname, requiredstates);
 }
 
-function private function_f8713af73ab5adf1(scriptableinstance, var_67c0ab92b71dc546, var_2069b817a6c75351) {
+function private function_f8713af73ab5adf1(scriptableinstance, partnametocheck, var_2069b817a6c75351) {
   missingstates = [];
 
   foreach(statename in var_2069b817a6c75351) {
-    if(!scriptableinstance getscriptableparthasstate(var_67c0ab92b71dc546, statename)) {
+    if(!scriptableinstance getscriptableparthasstate(partnametocheck, statename)) {
       missingstates[missingstates.size] = statename;
     }
   }
@@ -1430,12 +1430,12 @@ function private function_5894e5af5e7c3574() {
   return max(1, getdvarint(@ "hash_4e2904a76ce33e39", 8));
 }
 
-function private function_8f0ea7b45a92fe4c(var_820b8aac8d9caad2, playergroups, placementstruct) {
+function private function_8f0ea7b45a92fe4c(spawnoriginworkresult, playergroups, placementstruct) {
   var_6c1956fd6ce84917 = namespace_6257bf0db64cb539::function_f06552e950665aa9(placementstruct);
 
   if(istrue(var_6c1956fd6ce84917)) {
     if(getdvarint(@ "hash_94f4c6adf1621cb4", 0) == 0) {
-      function_1c972fc13937297c("Spawning Over Time: Waiting until nearby spawn origin is found " + namespace_6257bf0db64cb539::function_1ebb61ed81f6e62c(placementstruct));
+      function_1c972fc13937297c("Spawning Over Time: Waiting until nearby spawn origin is found " + namespace_6257bf0db64cb539::getplacementorigin(placementstruct));
     }
 
     var_8dd4051dae605f66 = spawnStruct();
@@ -1446,15 +1446,15 @@ function private function_8f0ea7b45a92fe4c(var_820b8aac8d9caad2, playergroups, p
       function_1c972fc13937297c("Spawning Over Time: Nearby spawn origin found " + spawnorigin);
     }
   } else {
-    spawnorigin = namespace_6257bf0db64cb539::function_1ebb61ed81f6e62c(placementstruct);
+    spawnorigin = namespace_6257bf0db64cb539::getplacementorigin(placementstruct);
   }
 
-  var_820b8aac8d9caad2.resultobject = spawnorigin;
-  var_820b8aac8d9caad2.resultstatus = 1;
+  spawnoriginworkresult.resultobject = spawnorigin;
+  spawnoriginworkresult.resultstatus = 1;
 }
 
-function private function_4d1ed1e796e9b5fb(var_48924e1f05b1e588, playergroups, var_5110040e4247ddb8, var_ed118e6dd8c246) {
-  var_cbf8cb005343dd9d = [];
+function private function_4d1ed1e796e9b5fb(var_48924e1f05b1e588, playergroups, var_5110040e4247ddb8, lootfunctionargs) {
+  playergrouplootstructs = [];
   var_51949fef4a2699bf = function_5894e5af5e7c3574();
   var_27cc8a90d02c5902 = ceil(playergroups.size / var_51949fef4a2699bf);
   var_a89692b149ca72b1 = 0;
@@ -1472,17 +1472,17 @@ function private function_4d1ed1e796e9b5fb(var_48924e1f05b1e588, playergroups, v
       continue;
     }
 
-    var_5eae5881395c1f45 = function_7b3e0989d6429532(playergroup);
+    validplayersingroup = function_7b3e0989d6429532(playergroup);
 
-    if(var_5eae5881395c1f45.size == 0) {
+    if(validplayersingroup.size == 0) {
       function_1c5f030d48fdff4c("No valid players in group. The reward cache will continue attempting to spawn without adding this empty group.");
       continue;
     }
 
-    var_ed118e6dd8c246.reward_group = var_5eae5881395c1f45;
-    lootcontents = [[var_5110040e4247ddb8]](var_ed118e6dd8c246);
-    var_cbf8cb005343dd9d[var_cbf8cb005343dd9d.size] = {
-      #lootcontents: lootcontents, #playergroup: var_5eae5881395c1f45
+    lootfunctionargs.reward_group = validplayersingroup;
+    lootcontents = [[var_5110040e4247ddb8]](lootfunctionargs);
+    playergrouplootstructs[playergrouplootstructs.size] = {
+      #lootcontents: lootcontents, #playergroup: validplayersingroup
     };
     var_a89692b149ca72b1++;
     var_cc8e8209d2dc7247++;
@@ -1493,6 +1493,6 @@ function private function_4d1ed1e796e9b5fb(var_48924e1f05b1e588, playergroups, v
   }
 
   function_1c972fc13937297c("Spawning Over Time: Done computing loot for " + playergroups.size + " groups");
-  var_48924e1f05b1e588.resultobject = var_cbf8cb005343dd9d;
+  var_48924e1f05b1e588.resultobject = playergrouplootstructs;
   var_48924e1f05b1e588.resultstatus = 1;
 }

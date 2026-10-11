@@ -37,9 +37,9 @@ function function_65e52fad2bce952c(var_b8b25f4d3c3dab1d, var_18f698ac43092a07, v
   }
 
   reward_placement = namespace_71ca15b739deab72::function_3ae7f99339b96499(var_e779ac7e9e65683d);
-  var_ed118e6dd8c246 = spawnStruct();
-  var_ed118e6dd8c246.var_18f698ac43092a07 = var_18f698ac43092a07;
-  level namespace_e8853d3344e33cf6::function_863be9e39e19fe2f(reward_groups, reward_placement, &function_de032cb8f1df5adc, var_ed118e6dd8c246);
+  lootfunctionargs = spawnStruct();
+  lootfunctionargs.var_18f698ac43092a07 = var_18f698ac43092a07;
+  level namespace_e8853d3344e33cf6::function_863be9e39e19fe2f(reward_groups, reward_placement, &function_de032cb8f1df5adc, lootfunctionargs);
 }
 
 function function_d737da36e4f0f6c2(player, var_18f698ac43092a07) {
@@ -50,9 +50,9 @@ function function_d737da36e4f0f6c2(player, var_18f698ac43092a07) {
   return 0;
 }
 
-function function_de032cb8f1df5adc(var_ed118e6dd8c246) {
+function function_de032cb8f1df5adc(lootfunctionargs) {
   cache = spawnStruct();
-  items = function_bc2f4857c90f5344(var_ed118e6dd8c246.var_18f698ac43092a07, 1);
+  items = function_bc2f4857c90f5344(lootfunctionargs.var_18f698ac43092a07, 1);
   common_cache::function_fd95ef820bb2b980(items, cache);
   return cache.contents;
 }
@@ -76,30 +76,30 @@ function function_9426e2a8c6789b97(player, var_f877158dac9d9e99, itembundlename,
 }
 
 function function_579b200202dd2b1b(enteringentity) {
-  var_fe16f116477f0084 = undefined;
+  playerstocheck = undefined;
 
   if(isDefined(enteringentity)) {
-    var_fe16f116477f0084 = [];
+    playerstocheck = [];
 
     if(isPlayer(enteringentity)) {
-      var_fe16f116477f0084[var_fe16f116477f0084.size] = enteringentity;
+      playerstocheck[playerstocheck.size] = enteringentity;
     } else if(enteringentity scripts\cp_mp\vehicles\vehicle::isvehicle()) {
       occupants = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(enteringentity);
 
       if(isDefined(occupants)) {
-        var_fe16f116477f0084 = occupants;
+        playerstocheck = occupants;
       }
     }
   }
 
-  return var_fe16f116477f0084;
+  return playerstocheck;
 }
 
-function function_fbd6a74053f1cb9a(var_c30b4e00a90b9b8d) {
+function function_fbd6a74053f1cb9a(objectivemarkerbundlename) {
   var_ffcea9c7e03fdcba = -1;
 
-  if(isDefined(var_c30b4e00a90b9b8d)) {
-    markerid = namespace_871f41e67db0bf7a::function_594acad17d5c9722(var_c30b4e00a90b9b8d);
+  if(isDefined(objectivemarkerbundlename)) {
+    markerid = namespace_871f41e67db0bf7a::createobjectivemarkerfrombundlexhash(objectivemarkerbundlename);
 
     if(isDefined(markerid) && markerid != -1) {
       var_ffcea9c7e03fdcba = markerid;

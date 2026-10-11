@@ -110,8 +110,8 @@ function grenadethrow(statename, var_5edf43a8a1497a41, var_a4b7ac07eebb559f) {
 
   newgrenade.owner = self;
   newgrenade.weapon_name = self.grenadeweapon.basename;
-  var_3251b898a0907271 = getdesiredgrenadetimervalue();
-  setgrenadetimer(min(gettime() + 3000, var_3251b898a0907271));
+  nextgrenadetimetouse = getdesiredgrenadetimervalue();
+  setgrenadetimer(min(gettime() + 3000, nextgrenadetimetouse));
   throwingat = self.enemy;
 
   if(isDefined(throwingat) && isPlayer(throwingat) && usingplayergrenadetimer()) {
@@ -229,7 +229,7 @@ function gas_watchtriggerenter() {
       continue;
     }
 
-    if(scripts\mp\equipment\gas_grenade::function_da8a31143b88e833(player)) {
+    if(scripts\mp\equipment\gas_grenade::ignoretriggerconditions(player)) {
       continue;
     }
 

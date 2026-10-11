@@ -404,9 +404,9 @@ function function_704dd2c09ad39716(bolt, hitent, hitentpart, hitloc) {
   self endon("disconnect");
   bolt endon("entitydeleted");
   launchangles = self getgunangles();
-  var_8011cffb839e8243 = gettime();
+  launchtimems = gettime();
   launchvelocity = anglesToForward(launchangles) * 940 + anglestoup(launchangles) * 120;
-  traveltime = (gettime() - var_8011cffb839e8243) / 1000;
+  traveltime = (gettime() - launchtimems) / 1000;
   impactvelocity = launchvelocity + (0, 0, -800 * traveltime);
 
   if(isDefined(hitent) && (isPlayer(hitent) || isagent(hitent))) {
@@ -426,19 +426,19 @@ function function_8add0b9e806fa2fb(bolt, hitent, launchangles, impactvelocity) {
   caststart = bolt.origin;
   castdir = (0, 0, -1);
   castend = caststart + castdir * 128;
-  contents = function_f3bb4f4911a1beb2("molotov", "molotov_get_cast_contents");
+  contents = callsharedfunc("molotov", "molotov_get_cast_contents");
   castresults = physics_raycast(caststart, castend, contents, bolt, 0, "physicsquery_closest", 1);
 
   if(isDefined(castresults) && castresults.size > 0) {
     castend = castresults[0]["position"];
-    var_a95d04f8f906e839 = castresults[0]["normal"];
+    casthitnorm = castresults[0]["normal"];
     casthitent = castresults[0]["entity"];
-    castend -= var_a95d04f8f906e839 * 1;
+    castend -= casthitnorm * 1;
     d = vectordot(castend - caststart, castdir);
     t = sqrt(2 * d / -1 * -800);
-    up = var_a95d04f8f906e839;
+    up = casthitnorm;
     right = anglestoright(launchangles);
-    impactangles = function_f3bb4f4911a1beb2("molotov", "molotov_rebuild_angles_up_right", up, right);
+    impactangles = callsharedfunc("molotov", "molotov_rebuild_angles_up_right", up, right);
     function_8b65648a30994e16(bolt, castend, impactangles, casthitent, impactvelocity, gettime() + t * 1000);
     return;
   }
@@ -454,9 +454,9 @@ function function_a61b7128bcea5142(bolt, stuckto, launchangles, impactvelocity) 
   right = anglestoright(launchangles);
 
   if(abs(vectordot(forward, up)) >= 0.9848) {
-    angles = function_f3bb4f4911a1beb2("molotov", "molotov_rebuild_angles_up_right", up, right);
+    angles = callsharedfunc("molotov", "molotov_rebuild_angles_up_right", up, right);
   } else {
-    angles = function_f3bb4f4911a1beb2("molotov", "molotov_rebuild_angles_up_forward", up, forward);
+    angles = callsharedfunc("molotov", "molotov_rebuild_angles_up_forward", up, forward);
   }
 
   function_8b65648a30994e16(bolt, bolt.origin, angles, stuckto, impactvelocity, gettime());
@@ -464,7 +464,7 @@ function function_a61b7128bcea5142(bolt, stuckto, launchangles, impactvelocity) 
 
 function function_8b65648a30994e16(bolt, castend, impactangles, casthitent, impactvelocity, impacttime) {
   bolt setscriptablepartstate("effects", "explode", 0);
-  function_f3bb4f4911a1beb2("molotov", "molotov_simulate_impact", bolt, castend, impactangles, casthitent, impactvelocity, impacttime);
+  callsharedfunc("molotov", "molotov_simulate_impact", bolt, castend, impactangles, casthitent, impactvelocity, impacttime);
 }
 
 function function_8d43b846ff1837f1(bolt) {
@@ -918,7 +918,7 @@ function function_5478d81cf5ea8d4(bolt, hitent, hitentpart) {
     }
 
     if(bolt.ammotype == "bolt_fire") {
-      hitent thread function_163ded397285c41e();
+      hitent thread docrossbowhitplayerthermitesounds();
     }
   }
 
@@ -1195,7 +1195,7 @@ function function_182a5b792f5c615a() {
   self setclientomnvar("ui_reticle_mtx_action", 4);
 }
 
-function function_163ded397285c41e() {
+function docrossbowhitplayerthermitesounds() {
   var_63c7f7bafd29c6cf = spawn("script_origin", self.origin);
   var_63c7f7bafd29c6cf linkTo(self);
   var_63c7f7bafd29c6cf playSound("thermite_bomb_crossbow_impact");

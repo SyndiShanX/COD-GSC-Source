@@ -846,7 +846,7 @@ function private function_ad382245d8d861f3(vehicle, team) {
   wait 60;
 
   foreach(player in level.teamdata[team]["players"]) {
-    player namespace_88bfae359020fdd3::function_1976438a8865ac27("br_ftue_truckwar_upgrade");
+    player namespace_88bfae359020fdd3::ftue_triggertip("br_ftue_truckwar_upgrade");
   }
 }
 
@@ -2550,7 +2550,7 @@ function function_e8779dce7e960d56(vehicle) {
   spawndata = spawnStruct();
 
   if(isDefined(vehicle.var_fadc8ce0c904abda)) {
-    spawndata.var_14cde247ac3313a4 = vehicle.var_fadc8ce0c904abda;
+    spawndata.skinoverride = vehicle.var_fadc8ce0c904abda;
   }
 
   if(scripts\engine\utility::issharedfuncdefined("veh9_mil_lnd_mrap", "createGrenadeTurret")) {
@@ -2598,7 +2598,7 @@ function function_5fd118f91ae96e57(vehicle) {
   vehicle.buystation = buystation;
 }
 
-function function_fe081d074870c23d(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function function_fe081d074870c23d(instance, part, state, player, bautouse, usestring) {
   player.var_c77002478cdfd85f = level.teamvehicles[player.team];
   buystation = level.teamvehicles[player.team].buystation;
   buystation.playersusing[buystation.playersusing.size] = player;
@@ -2656,7 +2656,7 @@ function function_256806bcfdf38c83(team, player) {
       omnvarvalue += 8192;
     } else if(!vehicle scripts\cp_mp\vehicles\vehicle_interact::function_fc271f387096702f()) {
       omnvarvalue += 2048;
-    } else if(isDefined(vehicle.var_90c69f8ba6618910)) {
+    } else if(isDefined(vehicle.refuelingpercentage)) {
       omnvarvalue += 4096;
     }
 

@@ -57,8 +57,8 @@ function notetrack_wait(guy, msg, tag_entity, anime, animname_override, animatio
     animname = guy.animname;
   }
 
-  var_966821fc90c3ca9d = spawnStruct();
-  var_966821fc90c3ca9d.dialog = [];
+  dialogue_array = spawnStruct();
+  dialogue_array.dialog = [];
   scripted_notetracks = [];
 
   if(isDefined(animname) && isDefined(level.scr_notetrack[animname]) && isDefined(anime)) {
@@ -71,11 +71,11 @@ function notetrack_wait(guy, msg, tag_entity, anime, animname_override, animatio
     }
   }
 
-  foreach(var_2c62c57192ed45cb, _ in scripted_notetracks) {
-    foreach(notetrack_array in level.scr_notetrack[animname][var_2c62c57192ed45cb]) {
+  foreach(anime_key, _ in scripted_notetracks) {
+    foreach(notetrack_array in level.scr_notetrack[animname][anime_key]) {
       foreach(scr_notetrack in notetrack_array) {
         if(isDefined(scr_notetrack["dialog"])) {
-          var_966821fc90c3ca9d.dialog[scr_notetrack["dialog"]] = 1;
+          dialogue_array.dialog[scr_notetrack["dialog"]] = 1;
         }
       }
     }
@@ -85,7 +85,7 @@ function notetrack_wait(guy, msg, tag_entity, anime, animname_override, animatio
   var_a5fb509f15a76960 = 0;
 
   while(true) {
-    var_966821fc90c3ca9d.dialoguenotetrack = 0;
+    dialogue_array.dialoguenotetrack = 0;
     notetrack = undefined;
 
     if(!var_1247cd0fbe324a41 && isDefined(animname) && isDefined(anime)) {
@@ -111,7 +111,7 @@ function notetrack_wait(guy, msg, tag_entity, anime, animname_override, animatio
     end = undefined;
 
     foreach(note in notetracks) {
-      notetrack_handler(guy, anime, note, animname, scripted_notetracks, tag_owner, var_966821fc90c3ca9d);
+      notetrack_handler(guy, anime, note, animname, scripted_notetracks, tag_owner, dialogue_array);
 
       if(note == "end") {
         end = 1;
@@ -156,7 +156,7 @@ function function_392d5e426b4896d2() {
   }
 }
 
-function notetrack_handler(guy, anime, notetrack, animname, scripted_notetracks, tag_owner, var_966821fc90c3ca9d) {
+function notetrack_handler(guy, anime, notetrack, animname, scripted_notetracks, tag_owner, dialogue_array) {
   if(getDvar(@ "animsound") == "<dev string:x1c>") {
     guy thread animsound_tracker(anime, notetrack, animname);
   }
@@ -170,10 +170,10 @@ function notetrack_handler(guy, anime, notetrack, animname, scripted_notetracks,
   }
 
   if(isDefined(scripted_notetracks)) {
-    foreach(var_2c62c57192ed45cb, _ in scripted_notetracks) {
-      if(isDefined(level.scr_notetrack[animname][var_2c62c57192ed45cb][notetrack])) {
-        foreach(scr_notetrack in level.scr_notetrack[animname][var_2c62c57192ed45cb][notetrack]) {
-          [[anim.callbacks["AnimHandleNotetrack"]]](scr_notetrack, guy, var_966821fc90c3ca9d, tag_owner);
+    foreach(anime_key, _ in scripted_notetracks) {
+      if(isDefined(level.scr_notetrack[animname][anime_key][notetrack])) {
+        foreach(scr_notetrack in level.scr_notetrack[animname][anime_key][notetrack]) {
+          [[anim.callbacks["AnimHandleNotetrack"]]](scr_notetrack, guy, dialogue_array, tag_owner);
         }
       }
     }
@@ -184,7 +184,7 @@ function notetrack_handler(guy, anime, notetrack, animname, scripted_notetracks,
   }
 }
 
-function anim_handle_notetrack(scr_notetrack, guy, var_966821fc90c3ca9d, tag_owner) {
+function anim_handle_notetrack(scr_notetrack, guy, dialogue_array, tag_owner) {
   if(isDefined(scr_notetrack["function"])) {
     self thread[[scr_notetrack["function"]]](guy);
   }
@@ -211,11 +211,11 @@ function anim_handle_notetrack(scr_notetrack, guy, var_966821fc90c3ca9d, tag_own
     }
   }
 
-  if(!var_966821fc90c3ca9d.dialoguenotetrack) {
-    if(isDefined(scr_notetrack["dialog"]) && isDefined(var_966821fc90c3ca9d.dialog[scr_notetrack["dialog"]])) {
+  if(!dialogue_array.dialoguenotetrack) {
+    if(isDefined(scr_notetrack["dialog"]) && isDefined(dialogue_array.dialog[scr_notetrack["dialog"]])) {
       guy sayspecificdialogue(scr_notetrack["dialog"]);
-      var_966821fc90c3ca9d.dialog[scr_notetrack["dialog"]] = undefined;
-      var_966821fc90c3ca9d.dialoguenotetrack = 1;
+      dialogue_array.dialog[scr_notetrack["dialog"]] = undefined;
+      dialogue_array.dialoguenotetrack = 1;
     }
   }
 
@@ -444,7 +444,7 @@ function _add_z(vec, zplus) {
 
 function validatenotetracks(flagname, notes, animation) {
   if(isDefined(animation)) {
-    assertex(notes.size <= 4, "<dev string:xb6>" + notes.size + "<dev string:xcf>" + function_3c8848a3a11b2553(getanimname(animation)));
+    assertex(notes.size <= 4, "<dev string:xb6>" + notes.size + "<dev string:xcf>" + getxhashsourcename(getanimname(animation)));
   } else {
     assertex(notes.size <= 4, "<dev string:xb6>" + notes.size + "<dev string:x119>" + flagname + "<dev string:x16d>");
   }
@@ -457,7 +457,7 @@ function validatenotetracks(flagname, notes, animation) {
         found = 1;
 
         if(isDefined(animation)) {
-          println("<dev string:x172>" + function_3c8848a3a11b2553(getanimname(animation)) + "<dev string:x18c>" + flagname + "<dev string:x1a1>" + notes[i] + "<dev string:x1c7>");
+          println("<dev string:x172>" + getxhashsourcename(getanimname(animation)) + "<dev string:x18c>" + flagname + "<dev string:x1a1>" + notes[i] + "<dev string:x1c7>");
         } else {
           println("<dev string:x1cc>" + flagname + "<dev string:x1a1>" + notes[i] + "<dev string:x1c7>");
         }

@@ -1633,7 +1633,7 @@ function function_f4231eed765ce56c() {
 }
 
 function function_49197cd063a740ea(callbackfunction) {
-  self.var_d1659ed0a33bf98f = callbackfunction;
+  self.elevatordoorsclosecallback = callbackfunction;
 }
 
 function private function_fa6a545da2197663() {

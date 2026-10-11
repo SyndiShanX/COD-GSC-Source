@@ -170,7 +170,7 @@ function function_892161ab9ad430e3(numagents, var_ec862c2c00c7ab5d, reinforceori
   reinforceorigin = scripts\mp\ai_behavior::function_61cbc488b27a6e61(reinforceorigin);
 
   if(!isDefined(poiname)) {
-    poiname = scripts\mp\poi::function_6cc445c02b5effac(reinforceorigin);
+    poiname = scripts\mp\poi::poi_findpoioriginisin(reinforceorigin);
   }
 
   if(isDefined(level.var_d32282f99e9d01b8)) {

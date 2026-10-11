@@ -599,7 +599,7 @@ function waitandspawnclient(revivespawn) {
   }
 
   if(scripts\engine\utility::issharedfuncdefined("instanceInventory", "inventoryIsValid")) {
-    while(!istrue(scripts\engine\utility::function_f3bb4f4911a1beb2("instanceInventory", "inventoryIsValid", self))) {
+    while(!istrue(scripts\engine\utility::callsharedfunc("instanceInventory", "inventoryIsValid", self))) {
       waitframe();
     }
   }
@@ -1218,7 +1218,7 @@ function spawnplayer(fauxspawn, revivespawn) {
   self.suicidespawndelay = undefined;
   self.fauxdead = undefined;
   self sethidenameplate(0);
-  self function_5226227bce83ebe9(2, self.team);
+  self setentityhudoutlinedata(2, self.team);
 
   if(!fauxspawn) {
     self.killsthislife = [];
@@ -1338,13 +1338,13 @@ function spawnplayer(fauxspawn, revivespawn) {
     }
 
     if(!istrue(self.wasaliveatmatchstart)) {
-      var_2208746f8409b6d0 = 20;
+      acceptablepassedtime = 20;
 
-      if(gettimelimit() > 0 && var_2208746f8409b6d0 < gettimelimit() / 4) {
-        var_2208746f8409b6d0 = gettimelimit() / 4;
+      if(gettimelimit() > 0 && acceptablepassedtime < gettimelimit() / 4) {
+        acceptablepassedtime = gettimelimit() / 4;
       }
 
-      if(level.ingraceperiod || gettimepassed() < var_2208746f8409b6d0 * 1000) {
+      if(level.ingraceperiod || gettimepassed() < acceptablepassedtime * 1000) {
         self.wasaliveatmatchstart = 1;
       }
     }
@@ -1392,7 +1392,7 @@ function spawnplayer(fauxspawn, revivespawn) {
     scripts\cp_mp\utility\player_utility::function_985b0973f29da4f8("playerlogic::spawnPlayer()");
     self function_6b4c8718bc36d1ef(0);
     self function_e4ccd01fb7ec7a6f(0);
-    self function_d87e1768229d0e3e();
+    self stopliveragdoll();
     _freezecontrols(0, undefined, "liveRagdoll");
     scripts\mp\class::setthirdpersonview();
   } else {
@@ -1415,7 +1415,7 @@ function spawnplayer(fauxspawn, revivespawn) {
     self setplayerangles(playerangles, 1);
     printspawnmessage("playerlogic::spawnPlayer() !!!CODE SPAWN!!! @" + self.spawndata.spawnorigin);
 
-    if(getDvar(@ "hash_87485eca39b418a6") == "1" && scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587() && !istrue(self.gulag)) {
+    if(getDvar(@ "hash_87485eca39b418a6") == "1" && scripts\cp_mp\utility\game_utility::ismagellanmode() && !istrue(self.gulag)) {
       scripts\mp\outline::hudoutline_add_channel_internal("target acquisition", 1, getDvar(@ "hash_b2a3957007bd8417", "outline_depth_trans_red"));
 
       if(!isbot(self)) {
@@ -1485,7 +1485,7 @@ function spawnplayer(fauxspawn, revivespawn) {
     callback::callback("onPlayerSpawn_destroyEquipment");
     self.matchdatalifeindex = -1;
 
-    if(namespace_de6e6777b0937bd7::function_892570944f6b6a2(self)) {
+    if(namespace_de6e6777b0937bd7::is_valid_client(self)) {
       self.matchdatalifeindex = game["life_count"];
       game["life_count"]++;
     }
@@ -1661,7 +1661,7 @@ function spawnplayer(fauxspawn, revivespawn) {
   self notify("validate_spawn");
 
   if(istrue(self.var_b1e84fe29da97885)) {
-    level thread scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0);
+    level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0);
   }
 
   callback("player_spawned");
@@ -1928,13 +1928,13 @@ function function_b18bcc805b8800e() {
 
   var_fbe8d53a303038c4 = reserveplates + var_dccf522fb0268d46;
   scripts\mp\codcasterclientmatchdata::function_f8b808cd6473e6cc(20, var_fbe8d53a303038c4);
-  var_b8b6fa3d6f2f0b8c = 0;
+  gasmaskhealthpercentage = 0;
 
   if(isDefined(self.gasmaskhealth) && isDefined(self.gasmaskmaxhealth)) {
-    var_b8b6fa3d6f2f0b8c = (self.gasmaskhealth + 1) / self.gasmaskmaxhealth;
+    gasmaskhealthpercentage = (self.gasmaskhealth + 1) / self.gasmaskmaxhealth;
   }
 
-  scripts\mp\codcasterclientmatchdata::function_f8b808cd6473e6cc(21, var_b8b6fa3d6f2f0b8c);
+  scripts\mp\codcasterclientmatchdata::function_f8b808cd6473e6cc(21, gasmaskhealthpercentage);
   hasselfrevivetoken = scripts\mp\gametypes\br_public::hasselfrevivetoken();
   scripts\mp\codcasterclientmatchdata::function_f8b808cd6473e6cc(22, hasselfrevivetoken);
 }
@@ -2746,10 +2746,10 @@ function callback_playerdisconnect(reason) {
     self restorecontrolagent();
   }
 
-  var_5814d27874b48e54 = spawnStruct();
-  var_5814d27874b48e54.player = self;
-  var_5814d27874b48e54.disconnectreason = reason;
-  namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_on_player_disconnect", var_5814d27874b48e54);
+  telemetrydata = spawnStruct();
+  telemetrydata.player = self;
+  telemetrydata.disconnectreason = reason;
+  namespace_de6e6777b0937bd7::function_80820d6d364c1836("callback_on_player_disconnect", telemetrydata);
   removeplayerondisconnect();
   scripts\cp_mp\utility\game_utility::removefromparticipantsarray();
   scripts\cp_mp\utility\game_utility::removefromcharactersarray();
@@ -2988,7 +2988,7 @@ function initsegmentstats() {
 function recordplayersegmentdata() {
   level endon("game_ended");
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     level thread function_6507acd84aa694f8();
   } else {
     gameflagwait("prematch_done");
@@ -3109,7 +3109,7 @@ function setuipregamefadeup(waitmsg, messagelistener, keepui) {
   self endon("disconnect");
 
   if(istrue(keepui)) {
-    scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 1, 0);
+    scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 1, 0);
   } else {
     scripts\cp_mp\utility\game_utility::fadetoblackforplayer(self, 1, 0);
   }
@@ -3138,7 +3138,7 @@ function setuipregamefadeup(waitmsg, messagelistener, keepui) {
   fadetime = getdvarfloat(@ "hash_1b65b5ed4995fe92", 0.5);
 
   if(istrue(keepui)) {
-    scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, fadetime);
+    scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, fadetime);
     return;
   }
 
@@ -3173,7 +3173,7 @@ function function_af273a2e9abf2489(keepui) {
   }
 
   if(istrue(keepui)) {
-    scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0.5);
+    scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0.5);
     return;
   }
 
@@ -3702,7 +3702,7 @@ function callback_playerconnect() {
 }
 
 function function_2c0b975a7130601e() {
-  projectname = function_3cb5da19764baa3();
+  projectname = getprojectname();
 
   if(projectname == "JUP") {
     if(isDefined(self)) {
@@ -3811,9 +3811,9 @@ function function_2a643088582c8be3(achievementid, progressdata) {
   namespace_bf9ffd2b22c7d819::function_a1b2dc3090437789(achievementid, progressdata);
   scripts\mp\gametypes\common::function_59a736fffddc7c05(achievementid, progressdata);
   namespace_8885c19c053dcb46::function_4b12e9b5e37d05c2(achievementid, progressdata);
-  utility::function_f3bb4f4911a1beb2("game", "mutationModeAchievementStateFetched", achievementid, progressdata);
-  utility::function_f3bb4f4911a1beb2("game", "turtleAchievementStateFetched", achievementid, progressdata);
-  utility::function_f3bb4f4911a1beb2("game", "trickrtreatAchievementStateFetched", achievementid, progressdata);
+  utility::callsharedfunc("game", "mutationModeAchievementStateFetched", achievementid, progressdata);
+  utility::callsharedfunc("game", "turtleAchievementStateFetched", achievementid, progressdata);
+  utility::callsharedfunc("game", "trickrtreatAchievementStateFetched", achievementid, progressdata);
 }
 
 function addlevelstoexperience(experience, levels) {
@@ -3980,7 +3980,7 @@ function totaldisttracking(spawnorigin) {
 
   if(getgametype() == "arena" || scripts\cp_mp\utility\game_utility::isinfectedgametype()) {
     var_f76842485babee15 = 50;
-  } else if(level.var_ec2fb549b15ad827) {
+  } else if(level.leagueplaymatch) {
     var_f76842485babee15 = 50;
   }
 
@@ -4537,7 +4537,7 @@ function watchtargethealth() {
   }
 }
 
-function updatetargethealthvariable(var_e9d476a3809cb3f1, value) {
+function updatetargethealthvariable(omnvarname, value) {
   waitframe();
 
   if(!isDefined(self)) {
@@ -4548,9 +4548,9 @@ function updatetargethealthvariable(var_e9d476a3809cb3f1, value) {
     return;
   }
 
-  if(!isDefined(self.targethealthinfo[var_e9d476a3809cb3f1]) || value != self.targethealthinfo[var_e9d476a3809cb3f1]) {
-    self setclientomnvar(var_e9d476a3809cb3f1, value);
-    self.targethealthinfo[var_e9d476a3809cb3f1] = value;
+  if(!isDefined(self.targethealthinfo[omnvarname]) || value != self.targethealthinfo[omnvarname]) {
+    self setclientomnvar(omnvarname, value);
+    self.targethealthinfo[omnvarname] = value;
   }
 }
 
@@ -4795,7 +4795,7 @@ function function_1761d46d3de136b9() {
   }
 
   if(issharedfuncdefined("seasonalevents", "isInWinbackDoubleXpPeriod")) {
-    return function_f3bb4f4911a1beb2("seasonalevents", "isInWinbackDoubleXpPeriod");
+    return callsharedfunc("seasonalevents", "isInWinbackDoubleXpPeriod");
   }
 
   return 0;
@@ -4850,7 +4850,7 @@ function removespectateblackonspectatecycle(playertospectate) {
   self waittill("spectating_cycle");
 
   if(!isDefined(self.var_caeae385d522ac4e)) {
-    level thread scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0.25);
+    level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0.25);
   }
 
   self.currentspectatetarget = undefined;
@@ -4876,7 +4876,7 @@ function function_cb60f35d0e8977eb(instant) {
   self.var_caeae385d522ac4e = undefined;
   self.var_b1e84fe29da97885 = 1;
   fadeduration = ter_op(istrue(instant), 0, 1);
-  level thread scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 1, fadeduration);
+  level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 1, fadeduration);
 }
 
 function removespectateblackonspawn() {
@@ -4885,13 +4885,13 @@ function removespectateblackonspawn() {
   self notify("removeSpectateBlackOnSpawn");
   self endon("removeSpectateBlackOnSpawn");
   self waittill("spawned_player");
-  level thread scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0);
+  level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0);
 }
 
 function function_a385f81e49ecdf52() {
   self endon("disconnect");
   level waittill("game_ended");
-  level thread scripts\cp_mp\utility\game_utility::function_852712268d005332(self, 0, 0);
+  level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayerkeepui(self, 0, 0);
 }
 
 function function_556c01754f79330f() {

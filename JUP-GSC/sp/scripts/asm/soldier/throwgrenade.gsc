@@ -15,19 +15,19 @@
 
 function playanim_throwgrenade(asmname, statename, params) {
   throwdata = spawnStruct();
-  throwdata.xanim = self.var_7f098191f1773fbf;
-  throwdata.vel = self.var_42febd687af39d67;
+  throwdata.xanim = self.throwdata_animindex;
+  throwdata.vel = self.throwdata_throwvelocity;
   throwdata.target = self._blackboard.throwgrenadetarget;
   throwdata.targetpos = self._blackboard.var_166faa0e61b0570c;
-  throwdata.fastthrow = self.var_c054a6da1261fef2;
-  throwdata.withbounce = self.var_18230b6226821ed4;
-  throwdata.time = self.var_9b8861b6840ca825;
+  throwdata.fastthrow = self.throwdata_fastthrow;
+  throwdata.withbounce = self.throwdata_withbounce;
+  throwdata.time = self.throwdata_time;
   assert(isDefined(throwdata));
   assert(gettime() - throwdata.time <= 100);
   self.ispreppinggrenade = 1;
-  var_865c56cff05fe0ad = trygrenadethrow(asmname, statename, throwdata);
+  bthrew = trygrenadethrow(asmname, statename, throwdata);
 
-  if(!var_865c56cff05fe0ad) {
+  if(!bthrew) {
     self endon(statename + "_finished");
     wait 0.2;
     asm_fireevent(asmname, "end");
@@ -87,7 +87,7 @@ function shouldbounce(objgrenadeweapon) {
   return grenadetype != "antigrav" && grenadetype != "emp" && grenadetype != "c8_grenade";
 }
 
-function trygrenadethrow(asmname, statename, throwdata, var_973c51e9fd66d178) {
+function trygrenadethrow(asmname, statename, throwdata, throwinthread) {
   destination = throwdata.targetpos;
   throwingat = throwdata.target;
   withbounce = throwdata.withbounce;
@@ -124,9 +124,9 @@ function trygrenadethrow(asmname, statename, throwdata, var_973c51e9fd66d178) {
       thread scripts\anim\utility::debugpos(destination, "<dev string:x1e>");
     }
 
-    var_3251b898a0907271 = getdesiredgrenadetimervalue();
-    setgrenadetimer(min(gettime() + 3000, var_3251b898a0907271));
-    var_e57aea3945878349 = 0;
+    nextgrenadetimetouse = getdesiredgrenadetimervalue();
+    setgrenadetimer(min(gettime() + 3000, nextgrenadetimetouse));
+    secondgrenadeofdouble = 0;
 
     if(isDefined(throwingat) && usingplayergrenadetimer()) {
       assert(throwingat == self.var_a3441d87a95e9040);
@@ -134,7 +134,7 @@ function trygrenadethrow(asmname, statename, throwdata, var_973c51e9fd66d178) {
       thread reducegiptponkillanimscript(statename, throwingat);
 
       if(throwingat function_4c108309dc0d7fd2() > 1) {
-        var_e57aea3945878349 = 1;
+        secondgrenadeofdouble = 1;
       }
 
       if(self.var_cc183df556f63da0 == "lethal") {
@@ -145,18 +145,18 @@ function trygrenadethrow(asmname, statename, throwdata, var_973c51e9fd66d178) {
     }
 
     if(getDvar(@ "hash_d5eaf4f7f5fd7d88") == "<dev string:x20>") {
-      var_3251b898a0907271 = 0;
+      nextgrenadetimetouse = 0;
     }
 
-    if(isDefined(var_973c51e9fd66d178)) {
-      thread dogrenadethrow(asmname, statename, throwdata.xanim, throwvel, var_3251b898a0907271, var_e57aea3945878349);
+    if(isDefined(throwinthread)) {
+      thread dogrenadethrow(asmname, statename, throwdata.xanim, throwvel, nextgrenadetimetouse, secondgrenadeofdouble);
     } else {
-      dogrenadethrow(asmname, statename, throwdata.xanim, throwvel, var_3251b898a0907271, var_e57aea3945878349);
+      dogrenadethrow(asmname, statename, throwdata.xanim, throwvel, nextgrenadetimetouse, secondgrenadeofdouble);
     }
 
     return true;
   } else {
-    function_c3d487ba233976c7("<dev string:x23>");
+    setgrenademissreason("<dev string:x23>");
 
     if(getDvar(@ "hash_4f3a4c91fee3cc20") == "<dev string:x20>" && isDefined(throwdata.destination)) {
       armoffset = getgrenadethrowoffset(statename, throwdata.xanim);
@@ -168,16 +168,16 @@ function trygrenadethrow(asmname, statename, throwdata, var_973c51e9fd66d178) {
 }
 
 function getdesiredgrenadetimervalue() {
-  var_3251b898a0907271 = undefined;
+  nextgrenadetimetouse = undefined;
 
   if(usingplayergrenadetimer()) {
     player = self.var_a3441d87a95e9040;
-    var_3251b898a0907271 = gettime() + player.gs.playergrenadebasetime + randomint(player.gs.playergrenaderangetime);
+    nextgrenadetimetouse = gettime() + player.gs.playergrenadebasetime + randomint(player.gs.playergrenaderangetime);
   } else {
-    var_3251b898a0907271 = gettime() + 30000 + randomint(30000);
+    nextgrenadetimetouse = gettime() + 30000 + randomint(30000);
   }
 
-  return var_3251b898a0907271;
+  return nextgrenadetimetouse;
 }
 
 function usingplayergrenadetimer() {
@@ -194,7 +194,7 @@ function reducegiptponkillanimscript(statename, throwingat) {
   }
 }
 
-function dogrenadethrow(asmname, statename, throw_anim, throwvel, var_3251b898a0907271, var_e57aea3945878349) {
+function dogrenadethrow(asmname, statename, throw_anim, throwvel, nextgrenadetimetouse, secondgrenadeofdouble) {
   self endon("killanimscript");
   self endon(statename + "_finished");
 
@@ -210,7 +210,7 @@ function dogrenadethrow(asmname, statename, throw_anim, throwvel, var_3251b898a0
   bodyknob = asm_getbodyknob();
   assert(isDefined(bodyknob));
   throw_xanim = asm_getxanim(statename, throw_anim);
-  function_216c67ab6749137a(self, undefined, "grenade_throw", scripts\anim\battlechatter_events::function_c666e714b2411844(self.grenadeweapon));
+  addbattlechatternotify(self, undefined, "grenade_throw", scripts\anim\battlechatter_events::function_c666e714b2411844(self.grenadeweapon));
   asm_playfacialanim(asmname, statename, throw_xanim);
   self aisetanim(statename, throw_anim, fasteranimspeed());
   thread asm_donotetracks(asmname, statename);
@@ -285,15 +285,15 @@ function dogrenadethrow(asmname, statename, throw_anim, throwvel, var_3251b898a0
   var_ddda1dbc4b1d9bfb = usingplayergrenadetimer();
 
   if(var_ddda1dbc4b1d9bfb) {
-    thread watchgrenadetowardsplayer(statename, self.var_a3441d87a95e9040, var_3251b898a0907271);
+    thread watchgrenadetowardsplayer(statename, self.var_a3441d87a95e9040, nextgrenadetimetouse);
   } else {
     thread function_8337cab97d859a28(statename);
-    setgrenadetimer(var_3251b898a0907271);
+    setgrenadetimer(nextgrenadetimetouse);
   }
 
   throwngrenade = self throwgrenade();
 
-  if(var_e57aea3945878349 && var_ddda1dbc4b1d9bfb) {
+  if(secondgrenadeofdouble && var_ddda1dbc4b1d9bfb) {
     player = self.var_a3441d87a95e9040;
     assert(isPlayer(player));
 
@@ -381,16 +381,16 @@ function function_8337cab97d859a28(statename) {
   }
 }
 
-function watchgrenadetowardsplayer(statename, player, var_3251b898a0907271) {
+function watchgrenadetowardsplayer(statename, player, nextgrenadetimetouse) {
   player endon("death");
-  watchgrenadetowardsplayerinternal(statename, var_3251b898a0907271);
+  watchgrenadetowardsplayerinternal(statename, nextgrenadetimetouse);
 
   if(isDefined(player)) {
     player function_a33073d6fd58e58e();
   }
 }
 
-function watchgrenadetowardsplayerinternal(statename, var_3251b898a0907271) {
+function watchgrenadetowardsplayerinternal(statename, nextgrenadetimetouse) {
   var_cc183df556f63da0 = self.var_cc183df556f63da0;
   timeoutobj = spawnStruct();
   timeoutobj thread watchgrenadetowardstargettimeout(5);
@@ -402,19 +402,19 @@ function watchgrenadetowardsplayerinternal(statename, var_3251b898a0907271) {
     return;
   }
 
-  setgrenadetimer(min(gettime() + 5000, var_3251b898a0907271));
+  setgrenadetimer(min(gettime() + 5000, nextgrenadetimetouse));
 
   grenade thread grenadedebug(statename, "<dev string:xbf>", 5);
 
-  var_e4dd0eed70be5b70 = 62500;
-  var_70167ae0bb5abd9d = 160000;
+  goodradiussqrd = 62500;
+  giveupradiussqrd = 160000;
 
   if(type == "flash_grenade") {
-    var_e4dd0eed70be5b70 = 810000;
-    var_70167ae0bb5abd9d = 1690000;
+    goodradiussqrd = 810000;
+    giveupradiussqrd = 1690000;
   }
 
-  var_fe16f116477f0084 = level.players;
+  playerstocheck = level.players;
   prevorigin = grenade.origin;
   haslanded = 0;
 
@@ -433,10 +433,10 @@ function watchgrenadetowardsplayerinternal(statename, var_3251b898a0907271) {
         haslanded = 1;
       }
 
-      var_2ed5956d72563348 = [];
+      newplayerstocheck = [];
 
-      for(i = 0; i < var_fe16f116477f0084.size; i++) {
-        player = var_fe16f116477f0084[i];
+      for(i = 0; i < playerstocheck.size; i++) {
+        player = playerstocheck[i];
 
         if(!isDefined(player) || !isalive(player)) {
           continue;
@@ -444,21 +444,21 @@ function watchgrenadetowardsplayerinternal(statename, var_3251b898a0907271) {
 
         distsqrd = distancesquared(grenade.origin, player.origin);
 
-        if(distsqrd < var_e4dd0eed70be5b70) {
+        if(distsqrd < goodradiussqrd) {
           grenade thread grenadedebug(statename, "<dev string:xcf>", 5);
 
-          player grenadelandednearplayer(var_cc183df556f63da0, var_3251b898a0907271);
+          player grenadelandednearplayer(var_cc183df556f63da0, nextgrenadetimetouse);
           continue;
         }
 
-        if(distsqrd < var_70167ae0bb5abd9d) {
-          var_2ed5956d72563348[var_2ed5956d72563348.size] = player;
+        if(distsqrd < giveupradiussqrd) {
+          newplayerstocheck[newplayerstocheck.size] = player;
         }
       }
 
-      var_fe16f116477f0084 = var_2ed5956d72563348;
+      playerstocheck = newplayerstocheck;
 
-      if(var_fe16f116477f0084.size == 0) {
+      if(playerstocheck.size == 0) {
         break;
       }
     }
@@ -467,7 +467,7 @@ function watchgrenadetowardsplayerinternal(statename, var_3251b898a0907271) {
   }
 }
 
-function grenadelandednearplayer(var_cc183df556f63da0, var_3251b898a0907271) {
+function grenadelandednearplayer(var_cc183df556f63da0, nextgrenadetimetouse) {
   player = self;
   function_98deae9464f6c005(0);
   curtime = gettime();
@@ -478,7 +478,7 @@ function grenadelandednearplayer(var_cc183df556f63da0, var_3251b898a0907271) {
 
   player function_4f19cf7b3c28acd7(curtime);
   oldvalue = function_9752a69f79a06b7a(player, var_cc183df556f63da0);
-  function_b4ebe6632d7e8efe(player, var_cc183df556f63da0, max(var_3251b898a0907271, oldvalue));
+  aisetgrenadetimer(player, var_cc183df556f63da0, max(nextgrenadetimetouse, oldvalue));
 }
 
 function setgrenadetimer(newvalue) {
@@ -486,13 +486,13 @@ function setgrenadetimer(newvalue) {
     player = self.var_a3441d87a95e9040;
     weapontype = self.var_cc183df556f63da0;
     oldvalue = function_9752a69f79a06b7a(player, weapontype);
-    function_b4ebe6632d7e8efe(player, weapontype, max(newvalue, oldvalue));
+    aisetgrenadetimer(player, weapontype, max(newvalue, oldvalue));
     return;
   }
 
   weapontype = self.var_cc183df556f63da0;
   oldvalue = function_9752a69f79a06b7a(undefined, weapontype);
-  function_b4ebe6632d7e8efe(undefined, weapontype, max(newvalue, oldvalue));
+  aisetgrenadetimer(undefined, weapontype, max(newvalue, oldvalue));
 }
 
 function getgrenadeithrew(statename) {
@@ -530,15 +530,15 @@ function grenadeline(start, end) {
   }
 }
 
-function function_c3d487ba233976c7(reason) {
+function setgrenademissreason(reason) {
   if(getDvar(@ "hash_2f0d3d5b9e9dbd3") != "<dev string:x1c>") {
     return;
   }
 
-  self.var_53cfc52e74b46509 = reason;
+  self.grenademissreason = reason;
 }
 
-function grenadedebug(statename, state, duration, var_312ba7f72a3a2b1c) {
+function grenadedebug(statename, state, duration, showmissreason) {
   if(getDvar(@ "hash_2f0d3d5b9e9dbd3") != "<dev string:x1c>") {
     return;
   }
@@ -553,8 +553,8 @@ function grenadedebug(statename, state, duration, var_312ba7f72a3a2b1c) {
   while(gettime() < endtime) {
     print3d(self getshootatpos() + (0, 0, 10), state);
 
-    if(isDefined(var_312ba7f72a3a2b1c) && isDefined(self.var_53cfc52e74b46509)) {
-      print3d(self getshootatpos() + (0, 0, 0), "<dev string:x119>" + self.var_53cfc52e74b46509);
+    if(isDefined(showmissreason) && isDefined(self.grenademissreason)) {
+      print3d(self getshootatpos() + (0, 0, 0), "<dev string:x119>" + self.grenademissreason);
     } else if(self.var_423e348b1ba9f198) {
       print3d(self getshootatpos() + (0, 0, 0), "<dev string:x122>" + function_96d556dea441d1dc());
     }
@@ -597,10 +597,10 @@ function function_7ce8f6913eb4c152(asmname, archetypename) {
       foreach(alias in aliases) {
         if(issubstr(statename, "<dev string:x266>") || issubstr(statename, "<dev string:x26e>")) {
           throwanims = asm_getallanimindicesforalias(statename, alias);
-          var_44492a4eb603ec4c = asm_getxanim(statename, throwanims[0]);
-          assert(!animhasnotetrack(var_44492a4eb603ec4c, "<dev string:x274>"));
+          throwxanim0 = asm_getxanim(statename, throwanims[0]);
+          assert(!animhasnotetrack(throwxanim0, "<dev string:x274>"));
 
-          if(animhasnotetrack(var_44492a4eb603ec4c, "<dev string:x282>")) {
+          if(animhasnotetrack(throwxanim0, "<dev string:x282>")) {
             foreach(animidx in throwanims) {
               xanim = asm_getxanim(statename, animidx);
               assert(animhasnotetrack(xanim, "<dev string:x282>") && !animhasnotetrack(xanim, "<dev string:x274>"));
@@ -623,12 +623,12 @@ function function_7ce8f6913eb4c152(asmname, archetypename) {
               startpos -= rotatevector(animdelta, startangles);
               handpos = self gettagorigin("<dev string:x2db>");
               handangles = self gettagangles("<dev string:x2db>");
-              var_b1513eaba8ac4d29 = rotatevectorinverted(handpos - startpos, startangles);
+              localhandpos = rotatevectorinverted(handpos - startpos, startangles);
               line(handpos, handpos + anglesToForward(handangles) * 12, (0, 0, 1), 1, 0, 5);
               line(handpos, handpos + anglestoleft(handangles) * 12, (1, 0, 0), 1, 0, 5);
               line(handpos, handpos + anglestoup(handangles) * 12, (0, 1, 0), 1, 0, 5);
               wait 0.25;
-              println("<dev string:x25d>" + offsetarray + "<dev string:x290>" + statename + "<dev string:x294>" + alias + "<dev string:x2ef>" + ianim + "<dev string:x2f5>" + var_b1513eaba8ac4d29 + "<dev string:x2fb>");
+              println("<dev string:x25d>" + offsetarray + "<dev string:x290>" + statename + "<dev string:x294>" + alias + "<dev string:x2ef>" + ianim + "<dev string:x2f5>" + localhandpos + "<dev string:x2fb>");
             }
 
             println("<dev string:x2fd>" + animarray + "<dev string:x290>" + statename + "<dev string:x294>" + alias + "<dev string:x307>" + offsetarray + "<dev string:x290>" + statename + "<dev string:x294>" + alias + "<dev string:x314>");

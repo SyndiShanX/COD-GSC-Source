@@ -9,11 +9,11 @@
 #namespace dialogue_tree;
 
 function function_e342035d4be91696() {
-  level.var_1b2599094f1aa7a3 = spawnStruct();
-  level.var_1b2599094f1aa7a3.actors = [];
-  level.var_1b2599094f1aa7a3.nodes = [];
-  level.var_1b2599094f1aa7a3.current_node = undefined;
-  level.var_1b2599094f1aa7a3 thread function_511a5e11aca48790();
+  level.dialoguetree = spawnStruct();
+  level.dialoguetree.actors = [];
+  level.dialoguetree.nodes = [];
+  level.dialoguetree.current_node = undefined;
+  level.dialoguetree thread function_511a5e11aca48790();
 }
 
 function function_511a5e11aca48790() {
@@ -22,7 +22,7 @@ function function_511a5e11aca48790() {
   while(true) {
     waitframe();
 
-    if(!isDefined(level.var_1b2599094f1aa7a3.current_node)) {
+    if(!isDefined(level.dialoguetree.current_node)) {
       has_node = 0;
       continue;
     }
@@ -34,12 +34,12 @@ function function_511a5e11aca48790() {
     has_node = 1;
     next_node = function_a375ef915e817d5d();
 
-    if(istrue(level.var_1b2599094f1aa7a3.aborted)) {
-      level.var_1b2599094f1aa7a3.aborted = undefined;
+    if(istrue(level.dialoguetree.aborted)) {
+      level.dialoguetree.aborted = undefined;
       continue;
     }
 
-    level.var_1b2599094f1aa7a3.current_node = next_node;
+    level.dialoguetree.current_node = next_node;
 
     if(!isDefined(next_node)) {
       level notify("dialogue_end");
@@ -52,7 +52,7 @@ function function_511a5e11aca48790() {
 
 function function_a375ef915e817d5d() {
   level endon("dialogue_abort");
-  current_node = level.var_1b2599094f1aa7a3.current_node;
+  current_node = level.dialoguetree.current_node;
   next_node = undefined;
   current_node.visited = 1;
 
@@ -91,18 +91,18 @@ function function_3ecb520991a212fc(name, animname, team) {
   assert(isDefined(self.ainame), "Dialogue Tree Actor must have a name");
   assert(isDefined(self.animname), "Dialogue Tree Actor must have an animname");
   assert(isDefined(self.team), "Dialogue Tree Actor must have a team");
-  actors = level.var_1b2599094f1aa7a3.actors[self.animname];
+  actors = level.dialoguetree.actors[self.animname];
 
   if(isDefined(actors)) {
     if(!isarray(actors)) {
       actors = [actors];
     }
 
-    level.var_1b2599094f1aa7a3.actors[self.animname] = array_add(actors, self);
+    level.dialoguetree.actors[self.animname] = array_add(actors, self);
     return;
   }
 
-  level.var_1b2599094f1aa7a3.actors[self.animname] = self;
+  level.dialoguetree.actors[self.animname] = self;
 }
 
 function function_3bcb10406ab4ad1d(animname) {
@@ -110,26 +110,26 @@ function function_3bcb10406ab4ad1d(animname) {
     animname = self.animname;
   }
 
-  actors = level.var_1b2599094f1aa7a3.actors[animname];
+  actors = level.dialoguetree.actors[animname];
 
   if(isarray(actors)) {
     assert(isDefined(self) && is_equal(self.animname, animname), "Don't know which Dialogue Tree Actor to remove!");
     actors = array_remove(actors, self);
 
     if(actors.size > 1) {
-      level.var_1b2599094f1aa7a3.actors[animname] = actors;
+      level.dialoguetree.actors[animname] = actors;
     } else {
-      level.var_1b2599094f1aa7a3.actors[animname] = actors[0];
+      level.dialoguetree.actors[animname] = actors[0];
     }
 
     return;
   }
 
-  level.var_1b2599094f1aa7a3.actors = array_remove_key(level.var_1b2599094f1aa7a3.actors, animname);
+  level.dialoguetree.actors = array_remove_key(level.dialoguetree.actors, animname);
 }
 
 function function_88c416555bc21541(animname) {
-  actor = level.var_1b2599094f1aa7a3.actors[animname];
+  actor = level.dialoguetree.actors[animname];
 
   if(isarray(actor)) {
     actor = getclosest(level.player.origin, actor);
@@ -141,7 +141,7 @@ function function_88c416555bc21541(animname) {
 function function_2ca2807712501171() {
   actors = [];
 
-  foreach(value in level.var_1b2599094f1aa7a3.actors) {
+  foreach(value in level.dialoguetree.actors) {
     if(isarray(value)) {
       actors = array_combine(actors, value);
       continue;
@@ -156,8 +156,8 @@ function function_2ca2807712501171() {
 function function_88e8f81ba53c8399(name) {
   name = tolower(name);
   assert(!function_937c5de25d5682b(), "Cannot run more than one node at a time");
-  assert(array_contains_key(level.var_1b2599094f1aa7a3.nodes, name), "Dialogue node with name " + name + " does not exist");
-  level.var_1b2599094f1aa7a3.current_node = level.var_1b2599094f1aa7a3.nodes[name];
+  assert(array_contains_key(level.dialoguetree.nodes, name), "Dialogue node with name " + name + " does not exist");
+  level.dialoguetree.current_node = level.dialoguetree.nodes[name];
 }
 
 function function_6b2794be53922d6e() {
@@ -165,16 +165,16 @@ function function_6b2794be53922d6e() {
     scripts\sp\dialogue_wheel::function_6f846e9519b4cff2();
   }
 
-  if(isDefined(level.var_1b2599094f1aa7a3.current_node)) {
-    level.var_1b2599094f1aa7a3.aborted = 1;
-    level.var_1b2599094f1aa7a3.current_node = undefined;
+  if(isDefined(level.dialoguetree.current_node)) {
+    level.dialoguetree.aborted = 1;
+    level.dialoguetree.current_node = undefined;
   }
 
   level notify("dialogue_abort");
 }
 
 function function_937c5de25d5682b() {
-  return isDefined(level.var_1b2599094f1aa7a3.current_node);
+  return isDefined(level.dialoguetree.current_node);
 }
 
 function function_44768f37b1a9f788(leader, startnode) {
@@ -183,7 +183,7 @@ function function_44768f37b1a9f788(leader, startnode) {
   scene.var_f087ac9bee88f3df = startnode;
   scene.started = 0;
   scene.running = 0;
-  scene.var_37563fdbbec9d7ee = 0;
+  scene.listening = 0;
   scene.timedout = 0;
   return scene;
 }
@@ -229,7 +229,7 @@ function function_e0b639a16bf31bcf(name, params) {
     }
   }
 
-  level.var_1b2599094f1aa7a3.nodes[name] = node;
+  level.dialoguetree.nodes[name] = node;
 }
 
 function function_bda26c6b3a7d395a(owner, options, results, resetoptions, responserequired, timeoutnode) {
@@ -264,13 +264,13 @@ function function_bda26c6b3a7d395a(owner, options, results, resetoptions, respon
 
 function function_8c75a86890a649dc(name) {
   name = tolower(name);
-  return level.var_1b2599094f1aa7a3.nodes[name];
+  return level.dialoguetree.nodes[name];
 }
 
 function function_bd86a7339819b9a4(name) {
   name = tolower(name);
-  assert(array_contains_key(level.var_1b2599094f1aa7a3.nodes, name), "Dialogue node with name " + name + " does not exist");
-  node = level.var_1b2599094f1aa7a3.nodes[name];
+  assert(array_contains_key(level.dialoguetree.nodes, name), "Dialogue node with name " + name + " does not exist");
+  node = level.dialoguetree.nodes[name];
   node.owner = self;
 }
 
@@ -281,17 +281,17 @@ function function_cbd09ef58f58efef(name) {
 
 function function_d22210db2062c3ba(name) {
   name = tolower(name);
-  return level.var_1b2599094f1aa7a3.nodes[name].visited;
+  return level.dialoguetree.nodes[name].visited;
 }
 
 function function_55f69519f0c8adb9(name) {
   name = tolower(name);
-  return level.var_1b2599094f1aa7a3.nodes[name].completed;
+  return level.dialoguetree.nodes[name].completed;
 }
 
 function function_4e65800aa9026a50(name) {
   name = tolower(name);
-  return isDefined(level.var_1b2599094f1aa7a3.nodes[name]);
+  return isDefined(level.dialoguetree.nodes[name]);
 }
 
 function function_bf2b4156c2ad2ece(message) {

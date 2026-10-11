@@ -236,7 +236,7 @@ function function_5a96f5a116c2b46e(death, einflictor, eattacker, idamage, idflag
   eattacker.var_1b9bba89a566cb5f[ammo_mod_name] = now;
   self thread[[level.ammo_mods[ammo_mod_name].result_func]](death, eattacker, mod, sweapon, vpoint, shitloc, modelindex);
   sparams = spawnStruct();
-  sparams.var_2632b2da60d34841 = ammo_mod_name;
+  sparams.ammomod_name = ammo_mod_name;
   sparams.var_19560ec564499c6c = 0;
   sparams.zombie = self;
 
@@ -253,7 +253,7 @@ function function_5a96f5a116c2b46e(death, einflictor, eattacker, idamage, idflag
   return true;
 }
 
-function function_6c40f58b29a952a9(weapon, ammo_mod_name, var_3d61bd5c1fd55131) {
+function add_ammo_mod_to_weapon(weapon, ammo_mod_name, var_3d61bd5c1fd55131) {
   if(!isDefined(var_3d61bd5c1fd55131)) {
     var_3d61bd5c1fd55131 = 1;
   }
@@ -430,12 +430,12 @@ function register_immunity(ammo_mod_name, archetype, immune_trigger, immune_resu
   level.ammo_mods[ammo_mod_name].immune_result_indirect[archetype] = immune_result_indirect;
 }
 
-function register_aat_exemption(var_88260bb1ed608124) {
+function register_aat_exemption(weapon_root_name) {
   if(!istrue(level.var_bfa98c9dd6edb929)) {
     return;
   }
 
-  level.var_e090390c16d34b65[var_88260bb1ed608124] = 1;
+  level.var_e090390c16d34b65[weapon_root_name] = 1;
 }
 
 function has_ammo_mod(w_current) {

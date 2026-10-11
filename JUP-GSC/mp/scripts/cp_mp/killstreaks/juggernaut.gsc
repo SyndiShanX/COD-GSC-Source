@@ -39,7 +39,7 @@ function init() {
   setdevdvarifuninitialized(@ "hash_3f1bd355bf340abb", 0);
   setdevdvarifuninitialized(@ "hash_841d9a60f75a35c8", 0);
 
-  if(!utility::function_f3bb4f4911a1beb2("game", "isJuggerMoshGameMode")) {
+  if(!utility::callsharedfunc("game", "isJuggerMoshGameMode")) {
     registervisibilityomnvarforkillstreak("juggernaut", "mask_on", 1);
     registervisibilityomnvarforkillstreak("juggernaut", "mask_damage_low", 2);
     registervisibilityomnvarforkillstreak("juggernaut", "mask_damage_med", 3);
@@ -165,23 +165,23 @@ function function_23f0145756ed19cb(bundle) {
 
 function function_d5974b5f58f14716(bundle, var_89c3fff29839bf2a, blueprintindex) {
   config = structcopy(var_89c3fff29839bf2a, 1);
-  var_9b32d1936831f5aa = function_71efed8bf57f1d39(bundle, blueprintindex);
-  config.deployweapon = function_dd2a4fb3522f314(var_9b32d1936831f5aa, #"deployweapon");
-  primaryweaponname = function_8df651a1b2728b15(var_9b32d1936831f5aa, #"primaryweapon");
-  var_a1aa2d822e933d07 = function_b9ff4b6230995332(var_9b32d1936831f5aa, #"primaryweapon");
-  secondaryweaponname = function_8df651a1b2728b15(var_9b32d1936831f5aa, #"secondaryweapon");
-  var_e426ac0fd477f647 = function_b9ff4b6230995332(var_9b32d1936831f5aa, #"secondaryweapon");
-  lethalequipmentname = function_29e16a88682086b2(var_9b32d1936831f5aa, #"string", #"lethalequipment");
-  tacticalequipmentname = function_29e16a88682086b2(var_9b32d1936831f5aa, #"string", #"tacticalequipment");
-  lethalequipmentblueprintindex = function_29e16a88682086b2(var_9b32d1936831f5aa, #"string", #"lethalequipmentblueprintindex");
-  tacticalequipmentblueprintindex = function_29e16a88682086b2(var_9b32d1936831f5aa, #"string", #"tacticalequipmentblueprintindex");
-  suitname = function_29e16a88682086b2(var_9b32d1936831f5aa, #"suit", #"suit");
-  executionname = function_29e16a88682086b2(var_9b32d1936831f5aa, #"execution", #"execution");
-  bodymodel = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", #"bodymodel");
-  headmodel = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", #"headmodel");
-  viewmodel = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", #"viewmodel");
-  cratemodel = function_29e16a88682086b2(var_9b32d1936831f5aa, #"xmodel", #"cratemodel");
-  var_76a7d4252fc16303 = function_29e16a88682086b2(var_9b32d1936831f5aa, #"string", #"hash_5a185bc114dfb4f7");
+  genericblueprintname = function_71efed8bf57f1d39(bundle, blueprintindex);
+  config.deployweapon = genericblueprint_makeweapon(genericblueprintname, #"deployweapon");
+  primaryweaponname = genericblueprint_getweaponname(genericblueprintname, #"primaryweapon");
+  var_a1aa2d822e933d07 = function_b9ff4b6230995332(genericblueprintname, #"primaryweapon");
+  secondaryweaponname = genericblueprint_getweaponname(genericblueprintname, #"secondaryweapon");
+  var_e426ac0fd477f647 = function_b9ff4b6230995332(genericblueprintname, #"secondaryweapon");
+  lethalequipmentname = function_29e16a88682086b2(genericblueprintname, #"string", #"lethalequipment");
+  tacticalequipmentname = function_29e16a88682086b2(genericblueprintname, #"string", #"tacticalequipment");
+  lethalequipmentblueprintindex = function_29e16a88682086b2(genericblueprintname, #"string", #"lethalequipmentblueprintindex");
+  tacticalequipmentblueprintindex = function_29e16a88682086b2(genericblueprintname, #"string", #"tacticalequipmentblueprintindex");
+  suitname = function_29e16a88682086b2(genericblueprintname, #"suit", #"suit");
+  executionname = function_29e16a88682086b2(genericblueprintname, #"execution", #"execution");
+  bodymodel = function_29e16a88682086b2(genericblueprintname, #"xmodel", #"bodymodel");
+  headmodel = function_29e16a88682086b2(genericblueprintname, #"xmodel", #"headmodel");
+  viewmodel = function_29e16a88682086b2(genericblueprintname, #"xmodel", #"viewmodel");
+  cratemodel = function_29e16a88682086b2(genericblueprintname, #"xmodel", #"cratemodel");
+  usearmorparts = function_29e16a88682086b2(genericblueprintname, #"string", #"hash_5a185bc114dfb4f7");
   config.classstruct.loadoutprimary = "none";
 
   if(isDefined(primaryweaponname)) {
@@ -226,7 +226,7 @@ function function_d5974b5f58f14716(bundle, var_89c3fff29839bf2a, blueprintindex)
   config.headmodel = headmodel;
   config.viewmodel = viewmodel;
   config.cratemodel = cratemodel;
-  config.var_76a7d4252fc16303 = isDefined(var_76a7d4252fc16303) ? int(var_76a7d4252fc16303) > 0 : 1;
+  config.usearmorparts = isDefined(usearmorparts) ? int(usearmorparts) > 0 : 1;
   return config;
 }
 
@@ -277,7 +277,7 @@ function initmarker() {
   leveldata.minimapicon = "ui_map_icon_jugg_drop";
   leveldata.headicon = "ui_map_icon_jugg_drop";
 
-  if(scripts\cp_mp\utility\game_utility::function_ba5574c7f287c587()) {
+  if(scripts\cp_mp\utility\game_utility::ismagellanmode()) {
     leveldata.capturestring = &"MP/BR_CRATE_LOADOUT";
   } else {
     leveldata.capturestring = &"KILLSTREAKS_HINTS/JUGG_CRATE_PICKUP";
@@ -311,7 +311,7 @@ function tryusejuggernautfromstruct(streakinfo, activateimmediate) {
     }
   }
 
-  instantdeploy = getdvarint(@ "hash_3f1bd355bf340abb") || utility::function_f3bb4f4911a1beb2("game", "isMutationGameModeZombie");
+  instantdeploy = getdvarint(@ "hash_3f1bd355bf340abb") || utility::callsharedfunc("game", "isMutationGameModeZombie");
 
   if(instantdeploy || istrue(activateimmediate)) {
     thread activatejugg(streakinfo);
@@ -345,11 +345,11 @@ function function_18cae431aa555ba3(streakinfo, activateimmediate) {
     return tryusejuggernautfromstruct(streakinfo, activateimmediate);
   }
 
-  if(!utility::function_f3bb4f4911a1beb2("game", "isMutationGameMode")) {
+  if(!utility::callsharedfunc("game", "isMutationGameMode")) {
     return;
   }
 
-  if(!utility::function_f3bb4f4911a1beb2("game", "isMutationGameModeZombie")) {
+  if(!utility::callsharedfunc("game", "isMutationGameModeZombie")) {
     return;
   }
 
@@ -496,7 +496,7 @@ function activatejugg(streakinfo) {
   thread watchforjuggernautend(streakinfo);
   thread watchforjuggernautdisconnect(streakinfo);
 
-  if(getdvarint(@ "hash_452a3eb9af12510c", 1) && !scripts\cp_mp\utility\game_utility::isbrstylegametype() && !iscp() && !utility::function_f3bb4f4911a1beb2("game", "isMutationGameModeZombie")) {
+  if(getdvarint(@ "hash_452a3eb9af12510c", 1) && !scripts\cp_mp\utility\game_utility::isbrstylegametype() && !iscp() && !utility::callsharedfunc("game", "isMutationGameModeZombie")) {
     thread dropminigunondeath();
   }
 }

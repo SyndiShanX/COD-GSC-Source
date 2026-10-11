@@ -113,7 +113,7 @@ function function_7e4458965893599a(turret) {
   return turret.targetstate;
 }
 
-function function_20e6f4d27c8040bd(turret) {
+function turret_hastarget(turret) {
   return isDefined(turret) && isDefined(turret.currenttarget);
 }
 
@@ -134,7 +134,7 @@ function function_bc2021c62b0d43cc(turret, target) {
 }
 
 function function_2adff40b591b5758(turret) {
-  return ter_op(function_20e6f4d27c8040bd(turret), turret.currenttarget, undefined);
+  return ter_op(turret_hastarget(turret), turret.currenttarget, undefined);
 }
 
 function function_70b8756e9fc03c44(targetdata) {
@@ -220,7 +220,7 @@ function function_bebd2d48ca6c8a31(targetdata) {
 }
 
 function function_bb61346fda4278e5(turret, target, var_a545c521308d6b1e, attackanglethreshold) {
-  if(!function_20e6f4d27c8040bd(turret) && !isDefined(target)) {
+  if(!turret_hastarget(turret) && !isDefined(target)) {
     return false;
   }
 
@@ -364,19 +364,19 @@ function private function_10f997ed68f4fcef(turret, potentialtarget, var_8826c6bc
       return false;
     }
 
-    var_da8cec9bce12f9cb = potentialtarget.pers["team"];
+    teamtocheck = potentialtarget.pers["team"];
 
-    if(var_da8cec9bce12f9cb == "spectator") {
+    if(teamtocheck == "spectator") {
       return false;
     }
 
     if(isDefined(level.teambased)) {
-      if(!isDefined(var_da8cec9bce12f9cb)) {
+      if(!isDefined(teamtocheck)) {
         return false;
       }
 
       if(isDefined(turretteam) && !istrue(ignoreplayerteam)) {
-        if(level.teambased && var_da8cec9bce12f9cb == turretteam) {
+        if(level.teambased && teamtocheck == turretteam) {
           return false;
         }
       }
@@ -392,10 +392,10 @@ function private function_10f997ed68f4fcef(turret, potentialtarget, var_8826c6bc
       return false;
     }
 
-    var_da8cec9bce12f9cb = scripts\cp_mp\agents\agent_utils::agentpers_getagentpersdata(potentialtarget, "team");
+    teamtocheck = scripts\cp_mp\agents\agent_utils::agentpers_getagentpersdata(potentialtarget, "team");
 
     if(isDefined(turretteam) && !istrue(var_a4bf19053a661fc5)) {
-      if(isDefined(var_da8cec9bce12f9cb) && var_da8cec9bce12f9cb == turretteam) {
+      if(isDefined(teamtocheck) && teamtocheck == turretteam) {
         return false;
       }
     }

@@ -25,10 +25,10 @@ function function_c56624984c6cfe44(relevantparameters) {
   squad = scripts\mp\utility\teams::getsquadmates(var_bd11f2561cb089ec.team, var_bd11f2561cb089ec.sessionsquadid, 0);
   var_861695cd06824d43 = function_553a690e1064cf0b(var_bd11f2561cb089ec);
 
-  foreach(var_d13c18af4084bdfd in var_861695cd06824d43) {
-    activityinstance = function_1f3e343912ae15c5(var_d13c18af4084bdfd.instanceid);
+  foreach(activityinfostruct in var_861695cd06824d43) {
+    activityinstance = getactivityinstance(activityinfostruct.instanceid);
 
-    if(function_511be8bcaede8b52(activityinstance) == "Contract") {
+    if(getactivitycategory(activityinstance) == "Contract") {
       function_ad54e18b503363a0(activityinstance, [var_bd11f2561cb089ec]);
     }
   }
@@ -42,8 +42,8 @@ function function_c56624984c6cfe44(relevantparameters) {
 
     var_aca1cc230b21bf68 = function_553a690e1064cf0b(var_1acd4938f955faa5);
 
-    foreach(var_d13c18af4084bdfd in var_aca1cc230b21bf68) {
-      activityinstance = function_1f3e343912ae15c5(var_d13c18af4084bdfd.instanceid);
+    foreach(activityinfostruct in var_aca1cc230b21bf68) {
+      activityinstance = getactivityinstance(activityinfostruct.instanceid);
 
       if(function_9edc3a4b955d5a6c(activityinstance)) {
         if(!function_4ab1cdfd84bbd3f2(activityinstance, var_bd11f2561cb089ec)) {
@@ -72,7 +72,7 @@ function function_30006181a99fb008(player, params) {
   assertex(isarray(params) && params.size == 2, "<dev string:xed>");
   broadcastinstance = params[0];
   activityinstance = params[1];
-  broadcasttype = broadcastinstance function_54ad2295d6995862();
+  broadcasttype = broadcastinstance getbroadcasttype();
 
   if(broadcasttype == "Overlord") {
     if(isDefined(level.var_7f1d1c7c6153a9bf)) {

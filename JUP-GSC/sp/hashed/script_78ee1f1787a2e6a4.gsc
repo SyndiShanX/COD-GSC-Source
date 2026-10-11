@@ -66,7 +66,7 @@ function spawner_fields(spawner) {
   }
 
   if(isDefined(spawner.script_forcecolor)) {
-    function_f3bb4f4911a1beb2("colors", "set_force_color", self.script_forcecolor);
+    callsharedfunc("colors", "set_force_color", self.script_forcecolor);
   }
 
   if(isDefined(spawner.dontdropweapon)) {

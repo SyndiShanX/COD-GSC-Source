@@ -10,7 +10,7 @@
 #using scripts\engine\utility;
 #namespace dialogue_wheel;
 
-function function_306c305b8c51b11c(options, duration, active, positions, var_6b9a984d61c9ff12, player) {
+function function_306c305b8c51b11c(options, duration, active, positions, inputholdduration, player) {
   assert(options.size > 0, "Need at least one dialogue wheel option");
   assert(options.size <= 4, "Cannot have more than 4 dialogue wheel options");
 
@@ -28,7 +28,7 @@ function function_306c305b8c51b11c(options, duration, active, positions, var_6b9
   setomnvar("ui_dialogue_prompts_option_b", "none");
   setomnvar("ui_dialogue_prompts_option_c", "none");
   setomnvar("ui_dialogue_prompts_option_d", "none");
-  player function_544db35a3301834f();
+  player bypass_enabled();
 
   if(isDefined(positions)) {
     foreach(position in positions) {
@@ -48,11 +48,11 @@ function function_306c305b8c51b11c(options, duration, active, positions, var_6b9
 
   player.dialogue_wheel.duration = duration;
 
-  if(!isDefined(var_6b9a984d61c9ff12)) {
-    var_6b9a984d61c9ff12 = 0;
+  if(!isDefined(inputholdduration)) {
+    inputholdduration = 0;
   }
 
-  player.dialogue_wheel.var_6b9a984d61c9ff12 = var_6b9a984d61c9ff12;
+  player.dialogue_wheel.inputholdduration = inputholdduration;
   setomnvar("ui_dialogue_prompts_duration", duration);
 
   if(!isDefined(active)) {
@@ -98,7 +98,7 @@ function function_27cb1968e9f31a97(position) {
   return omnvar;
 }
 
-function function_544db35a3301834f() {
+function bypass_enabled() {
   foreach(input in self.dialogue_wheel.inputs) {
     input.bypass = 1;
   }
@@ -248,12 +248,12 @@ function private function_8d81c892708a5d8e(player) {
   }
 }
 
-function function_861dc23c52d31c41(var_5c76167572fce9c1, var_8c791b0ce2679fba) {
-  if(!isDefined(var_5c76167572fce9c1) || !isDefined(var_8c791b0ce2679fba)) {
+function function_861dc23c52d31c41(playerdialoguelines, var_8c791b0ce2679fba) {
+  if(!isDefined(playerdialoguelines) || !isDefined(var_8c791b0ce2679fba)) {
     return true;
   }
 
-  return var_8c791b0ce2679fba == 0 || !isDefined(var_5c76167572fce9c1[var_8c791b0ce2679fba - 1]) || var_5c76167572fce9c1[var_8c791b0ce2679fba - 1] == "silent";
+  return var_8c791b0ce2679fba == 0 || !isDefined(playerdialoguelines[var_8c791b0ce2679fba - 1]) || playerdialoguelines[var_8c791b0ce2679fba - 1] == "silent";
 }
 
 function function_6f846e9519b4cff2(player) {
@@ -278,7 +278,7 @@ function function_3d548a32743df49b(duration) {
 }
 
 function function_64c637dd115ff678(duration) {
-  self.dialogue_wheel.var_6b9a984d61c9ff12 = duration;
+  self.dialogue_wheel.inputholdduration = duration;
 }
 
 function function_d92b8b076e34f82b(options, duration, positions, player) {
@@ -342,15 +342,15 @@ function function_e6acdf1a7626587e(options, nodes, duration, player) {
 
     switch (response) {
       case 0:
-        if(isDefined(level.var_1b2599094f1aa7a3.nodes["silence"])) {
-          return level.var_1b2599094f1aa7a3.nodes["silence"];
+        if(isDefined(level.dialoguetree.nodes["silence"])) {
+          return level.dialoguetree.nodes["silence"];
         }
 
         response = undefined;
         break;
       case 5:
-        if(isDefined(level.var_1b2599094f1aa7a3.nodes["attack"])) {
-          return level.var_1b2599094f1aa7a3.nodes["attack"];
+        if(isDefined(level.dialoguetree.nodes["attack"])) {
+          return level.dialoguetree.nodes["attack"];
         }
 
         response = undefined;
@@ -368,41 +368,41 @@ function function_b7d7a703c13eb1df(binding) {
   return true;
 }
 
-function play_dialogue(aliases, stringfile, var_85aedcd1aaf0a83, var_ae7efd102fc19bb5, var_bb81dd63c26df58d) {
-  var_5c76167572fce9c1 = [];
+function play_dialogue(aliases, stringfile, threaddialogue, dialoguefuncoverride, dialogueparams) {
+  playerdialoguelines = [];
 
   foreach(alias in aliases) {
-    var_5c76167572fce9c1[var_5c76167572fce9c1.size] = stringfile + alias;
+    playerdialoguelines[playerdialoguelines.size] = stringfile + alias;
   }
 
   positions = undefined;
 
-  if(var_5c76167572fce9c1.size < 3) {
+  if(playerdialoguelines.size < 3) {
     positions = [2, 3];
-    var_5c76167572fce9c1 = array_combine(["", ""], var_5c76167572fce9c1);
+    playerdialoguelines = array_combine(["", ""], playerdialoguelines);
     aliases = array_combine(["", ""], aliases);
   }
 
-  var_8c791b0ce2679fba = scripts\common\dialogue_wheel::function_d92b8b076e34f82b(var_5c76167572fce9c1, 6, positions, self);
+  var_8c791b0ce2679fba = scripts\common\dialogue_wheel::function_d92b8b076e34f82b(playerdialoguelines, 6, positions, self);
 
-  if(isDefined(aliases) && !scripts\common\dialogue_wheel::function_861dc23c52d31c41(var_5c76167572fce9c1, var_8c791b0ce2679fba)) {
-    var_ae7efd102fc19bb5 = default_to(var_ae7efd102fc19bb5, &scripts\anim\dialogue::say_delayed);
+  if(isDefined(aliases) && !scripts\common\dialogue_wheel::function_861dc23c52d31c41(playerdialoguelines, var_8c791b0ce2679fba)) {
+    dialoguefuncoverride = default_to(dialoguefuncoverride, &scripts\anim\dialogue::say_delayed);
     alias = aliases[var_8c791b0ce2679fba - 1];
 
-    if(isDefined(var_bb81dd63c26df58d)) {
-      if(!isarray(var_bb81dd63c26df58d)) {
-        var_bb81dd63c26df58d = [var_bb81dd63c26df58d];
+    if(isDefined(dialogueparams)) {
+      if(!isarray(dialogueparams)) {
+        dialogueparams = [dialogueparams];
       }
 
-      var_bb81dd63c26df58d = array_combine([0, alias], var_bb81dd63c26df58d);
+      dialogueparams = array_combine([0, alias], dialogueparams);
     } else {
-      var_bb81dd63c26df58d = [0, alias];
+      dialogueparams = [0, alias];
     }
 
-    if(istrue(var_85aedcd1aaf0a83)) {
-      thread scripts\anim\dialogue::call_with_params(var_ae7efd102fc19bb5, var_bb81dd63c26df58d);
+    if(istrue(threaddialogue)) {
+      thread scripts\anim\dialogue::call_with_params(dialoguefuncoverride, dialogueparams);
     } else {
-      scripts\anim\dialogue::call_with_params(var_ae7efd102fc19bb5, var_bb81dd63c26df58d);
+      scripts\anim\dialogue::call_with_params(dialoguefuncoverride, dialogueparams);
     }
   }
 
@@ -532,9 +532,9 @@ function function_afeae0424199f820(player) {
     foreach(button in self.buttons) {
       if(player buttonPressed(button) && !self.bypass) {
         if(is_gamepad && !istrue(player.var_a8f8b0c2350371b)) {
-          if(player.dialogue_wheel.var_6b9a984d61c9ff12 > 0) {
+          if(player.dialogue_wheel.inputholdduration > 0) {
             if(!isDefined(player.var_db68d53730879e4b) || player.var_db68d53730879e4b == button) {
-              self.progress += player.framedurationseconds / player.dialogue_wheel.var_6b9a984d61c9ff12;
+              self.progress += player.framedurationseconds / player.dialogue_wheel.inputholdduration;
               player setclientomnvar("ui_dialogue_prompts_choice", self.result);
             } else {
               self.progress = 0;

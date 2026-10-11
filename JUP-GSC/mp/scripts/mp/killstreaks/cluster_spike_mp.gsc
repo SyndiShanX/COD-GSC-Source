@@ -29,6 +29,6 @@ function init() {
 }
 
 function function_d0f5e3c6e6080d5d(clusterspike) {
-  clusterspike function_5226227bce83ebe9(3, clusterspike.team);
+  clusterspike setentityhudoutlinedata(3, clusterspike.team);
   return clusterspike;
 }

@@ -136,15 +136,15 @@ function private function_ee5a64593eeafb01(location, throwvelocity, mine_weapon)
 }
 
 function private function_59a8b49b95ed21bc() {
-  var_12baea29dc62088 = function_2e9e02e8bda61ef2();
+  movingplatforminfo = function_2e9e02e8bda61ef2();
 
-  if(isDefined(var_12baea29dc62088) && isDefined(var_12baea29dc62088.groundent) && isDefined(var_12baea29dc62088.localorigin) && isDefined(var_12baea29dc62088.localangles)) {
+  if(isDefined(movingplatforminfo) && isDefined(movingplatforminfo.groundent) && isDefined(movingplatforminfo.localorigin) && isDefined(movingplatforminfo.localangles)) {
     if(isDefined(self.linkedparent)) {
-      self.linkedparent linkTo(var_12baea29dc62088.groundent, "", var_12baea29dc62088.localorigin, var_12baea29dc62088.localangles);
+      self.linkedparent linkTo(movingplatforminfo.groundent, "", movingplatforminfo.localorigin, movingplatforminfo.localangles);
       return;
     }
 
-    self linkTo(var_12baea29dc62088.groundent, "", var_12baea29dc62088.localorigin, var_12baea29dc62088.localangles);
+    self linkTo(movingplatforminfo.groundent, "", movingplatforminfo.localorigin, movingplatforminfo.localangles);
   }
 }
 
@@ -420,10 +420,10 @@ function private function_e715bf8be42d93b6() {
 
   if(isDefined(self.metabones)) {
     possiblehitlocations = [];
-    var_46a3e181e35f46ab = scripts\common\metabone::function_97fd256a244527b4(self.metabones.bundle_name);
+    metabones_def = scripts\common\metabone::function_97fd256a244527b4(self.metabones.bundle_name);
 
-    if(isDefined(var_46a3e181e35f46ab)) {
-      foreach(metabone in var_46a3e181e35f46ab.metabones) {
+    if(isDefined(metabones_def)) {
+      foreach(metabone in metabones_def.metabones) {
         if(!self.metabones.info[metabone.name].is_active) {
           continue;
         }

@@ -142,7 +142,7 @@ function initpostmain() {
   thread setupzombiepowers();
 }
 
-function addpowerbutton(powerstruct, powerref, keybindings, var_fb3a9f61fc511db4, var_91513a57aa89be6d, var_1a5269312d3a0b00, cleanupfunc, var_7939d347ade41da0, label, labelpc, cooldownsec, statusupdate, progressupdate) {
+function addpowerbutton(powerstruct, powerref, keybindings, powerfunc, var_91513a57aa89be6d, var_1a5269312d3a0b00, cleanupfunc, var_7939d347ade41da0, label, labelpc, cooldownsec, statusupdate, progressupdate) {
   var_2afd19924dad2b4f = hashcat(@ "hash_b75ff36b09040395", powerref);
 
   if(getdvarint(var_2afd19924dad2b4f, 1) == 0) {
@@ -155,7 +155,7 @@ function addpowerbutton(powerstruct, powerref, keybindings, var_fb3a9f61fc511db4
 
   powerstruct.powers[powerref] = spawnStruct();
   powerstruct.powers[powerref].bindings = keybindings;
-  powerstruct.powers[powerref].func = var_fb3a9f61fc511db4;
+  powerstruct.powers[powerref].func = powerfunc;
   powerstruct.powers[powerref].var_1a5269312d3a0b00 = var_1a5269312d3a0b00;
   powerstruct.powers[powerref].cleanupfunc = cleanupfunc;
   powerstruct.powers[powerref].var_7939d347ade41da0 = var_7939d347ade41da0;
@@ -269,8 +269,8 @@ function function_a17e5100d67f2109(powerstruct, powerref) {
 
     overridestruct = function_71d599be2232ae52(self.class, powerref);
 
-    if(isDefined(overridestruct) && isDefined(overridestruct.var_fb3a9f61fc511db4)) {
-      func = overridestruct.var_fb3a9f61fc511db4;
+    if(isDefined(overridestruct) && isDefined(overridestruct.powerfunc)) {
+      func = overridestruct.powerfunc;
       self thread[[func]](powerstruct, powerref);
       continue;
     }
@@ -430,7 +430,7 @@ function function_647ba9e9a0d700c7() {
   }
 
   if(scripts\mp\utility\weapon::grenadeinpullback()) {
-    self function_187fb04ebd01baea();
+    self canceloffhands();
   }
 
   while(self ismantling() || self ismeleeing()) {
@@ -532,7 +532,7 @@ function function_90f6fbbb6332dadd(powerstruct, powerref, cooldownsec, var_25ccc
     progress = fraction * var_25ccce114196d19c;
     function_936f0ef6e203a7fc(powerstruct.powers[powerref].progressupdate, int(progress));
 
-    if(function_f3bb4f4911a1beb2("game", "hasMutationModePerk03") && istrue(self.var_5651e2b694c25c8b) && istrue(powerstruct.powers[powerref].istactical)) {
+    if(callsharedfunc("game", "hasMutationModePerk03") && istrue(self.var_5651e2b694c25c8b) && istrue(powerstruct.powers[powerref].istactical)) {
       self.var_5651e2b694c25c8b = 0;
       self notify(powerref + "_cooldown_cancel");
       break;
@@ -569,7 +569,7 @@ function function_ae8ecf6e5f68f1ea(errormessage) {
   zombie scripts\mp\hud_message::showerrormessage(errormessage);
 }
 
-function function_dad92e6ab5aa6f51(var_716d5c42a00a0d4c, powerref, var_fb3a9f61fc511db4, var_1a5269312d3a0b00) {
+function function_dad92e6ab5aa6f51(var_716d5c42a00a0d4c, powerref, powerfunc, var_1a5269312d3a0b00) {
   if(!isDefined(level.var_f6b0a1b4b5b7151c)) {
     level.var_f6b0a1b4b5b7151c = [];
   }
@@ -579,7 +579,7 @@ function function_dad92e6ab5aa6f51(var_716d5c42a00a0d4c, powerref, var_fb3a9f61f
   }
 
   level.var_f6b0a1b4b5b7151c[var_716d5c42a00a0d4c][powerref] = spawnStruct();
-  level.var_f6b0a1b4b5b7151c[var_716d5c42a00a0d4c][powerref].var_fb3a9f61fc511db4 = var_fb3a9f61fc511db4;
+  level.var_f6b0a1b4b5b7151c[var_716d5c42a00a0d4c][powerref].powerfunc = powerfunc;
   level.var_f6b0a1b4b5b7151c[var_716d5c42a00a0d4c][powerref].var_1a5269312d3a0b00 = var_1a5269312d3a0b00;
 }
 
@@ -651,10 +651,10 @@ function function_936f0ef6e203a7fc(dataref, value) {
 
   mask = int(pow(2, bitwidth)) - 1;
   var_a463992091f1d483 = (int(value) &mask) << bitoffset;
-  var_f8f977081d3da8b4 = ~(mask << bitoffset);
+  invertedmask = ~(mask << bitoffset);
   prevvalue = self getclientomnvar("ui_br_zombie_powers");
-  cleanedbase = prevvalue &var_f8f977081d3da8b4;
-  var_82a90e56e416fa55 = cleanedbase + var_a463992091f1d483;
-  level.var_ce83fb46b0b7d8f3["ui_br_zombie_powers"] = var_82a90e56e416fa55;
+  cleanedbase = prevvalue &invertedmask;
+  repackedvalue = cleanedbase + var_a463992091f1d483;
+  level.var_ce83fb46b0b7d8f3["ui_br_zombie_powers"] = repackedvalue;
   self setclientomnvar("ui_br_zombie_powers", level.var_ce83fb46b0b7d8f3["ui_br_zombie_powers"]);
 }

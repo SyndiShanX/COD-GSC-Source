@@ -82,7 +82,7 @@ function registernotetracks() {
   anim.notetracks["ragdollblendend"] = &notetrackragdollblendend;
   anim.notetracks["ragdollblendrootanim"] = &notetrackragdollblendrootanim;
   anim.notetracks["ragdollblendrootragdoll"] = &notetrackragdollblendrootragdoll;
-  anim.notetracks["killai"] = &function_d935eab3adddb72e;
+  anim.notetracks["killai"] = &notetrackkillai;
   anim.notetracks["drop clip"] = &notetrackdropclip;
   anim.notetracks["helmet_pop"] = &notetrackhelmetpop;
   anim.notetracks["gun drop"] = &notetrackgundrop;
@@ -354,14 +354,14 @@ function notetrackland(note, flagname) {
   self playequipmovesound("land", self.weapon);
 }
 
-function playfootstep(is_left, is_large, var_df283c0f77bc4d5c) {
+function playfootstep(is_left, is_large, is_vfxonly) {
   if(!isai(self)) {
     if(isDefined(self.fnplayfootstep)) {
-      [[self.fnplayfootstep]](is_left, is_large, var_df283c0f77bc4d5c);
+      [[self.fnplayfootstep]](is_left, is_large, is_vfxonly);
       return;
     }
 
-    if(!var_df283c0f77bc4d5c) {
+    if(!is_vfxonly) {
       function_4f6cdffaa41ad3d1("dirt", "step", "run");
     }
 
@@ -380,7 +380,7 @@ function playfootstep(is_left, is_large, var_df283c0f77bc4d5c) {
 
   if(!isDefined(self.groundtype)) {
     if(!isDefined(self.lastgroundtype)) {
-      if(!var_df283c0f77bc4d5c) {
+      if(!is_vfxonly) {
         function_4f6cdffaa41ad3d1("dirt", actiontype, "run");
       }
 
@@ -401,7 +401,7 @@ function playfootstep(is_left, is_large, var_df283c0f77bc4d5c) {
 
   run_type = get_notetrack_movement();
 
-  if(!var_df283c0f77bc4d5c) {
+  if(!is_vfxonly) {
     function_4f6cdffaa41ad3d1(groundtype, actiontype, run_type);
   }
 
@@ -820,7 +820,7 @@ function notetrackragdollblendrootanim(note, flagname) {}
 
 function notetrackragdollblendrootragdoll(note, flagname) {}
 
-function function_d935eab3adddb72e(note, flagname) {
+function notetrackkillai(note, flagname) {
   if(!isai(self)) {
     return;
   }
@@ -1075,21 +1075,21 @@ function notetrack_prefix_handler_sp(notetrack) {
       switch (parms) {
         case #"hash_fa2ad6f6bd651030":
           if(isai(self)) {
-            self function_e55c33850a5d2fea("request");
+            self setlookatstate("request");
             self function_5621e511b99964a7(level.player);
           }
 
           return 1;
         case #"hash_23a4247209319a1":
           if(isai(self)) {
-            self function_e55c33850a5d2fea("request");
+            self setlookatstate("request");
             self function_504a5e2df31069a4();
           }
 
           return 1;
         case #"hash_3699ac6c262c25ea":
           if(isai(self)) {
-            self function_e55c33850a5d2fea("prohibit");
+            self setlookatstate("prohibit");
           }
 
           return 1;
@@ -1097,12 +1097,12 @@ function notetrack_prefix_handler_sp(notetrack) {
 
       break;
     case #"hash_901bbd6c55379dcd":
-      var_b4572c9b8b2e61bb = strtok(notetrack, "_, ");
-      right = ter_op(isDefined(var_b4572c9b8b2e61bb[1]), float(var_b4572c9b8b2e61bb[1]), 0);
-      left = ter_op(isDefined(var_b4572c9b8b2e61bb[2]), float(var_b4572c9b8b2e61bb[2]), 0);
-      top = ter_op(isDefined(var_b4572c9b8b2e61bb[3]), float(var_b4572c9b8b2e61bb[3]), 0);
-      bottom = ter_op(isDefined(var_b4572c9b8b2e61bb[4]), float(var_b4572c9b8b2e61bb[4]), 0);
-      blend = ter_op(isDefined(var_b4572c9b8b2e61bb[5]), float(var_b4572c9b8b2e61bb[5]), 0);
+      parmlist = strtok(notetrack, "_, ");
+      right = ter_op(isDefined(parmlist[1]), float(parmlist[1]), 0);
+      left = ter_op(isDefined(parmlist[2]), float(parmlist[2]), 0);
+      top = ter_op(isDefined(parmlist[3]), float(parmlist[3]), 0);
+      bottom = ter_op(isDefined(parmlist[4]), float(parmlist[4]), 0);
+      blend = ter_op(isDefined(parmlist[5]), float(parmlist[5]), 0);
       level.player lerpviewangleclamp(blend, blend * 0.5, blend * 0.5, right, left, top, bottom, 1);
       return 1;
     case #"hash_7b3b466c4aa2fea6":
@@ -1111,7 +1111,7 @@ function notetrack_prefix_handler_sp(notetrack) {
         viewfraction = float(viewfraction);
 
         if(isDefined(level.player getlinkedparent())) {
-          level.player function_6b8a3855966e9ada(viewfraction);
+          level.player playerlinkedviewfraction(viewfraction);
         }
       }
 
@@ -1121,57 +1121,57 @@ function notetrack_prefix_handler_sp(notetrack) {
       level.player forceplaygestureviewmodel(gesture);
       return 1;
     case #"hash_ed53bb6c000173b4":
-      var_b4572c9b8b2e61bb = strtok(notetrack, "_, ");
-      scale = ter_op(isDefined(var_b4572c9b8b2e61bb[1]), float(var_b4572c9b8b2e61bb[1]), 1);
-      duration = ter_op(isDefined(var_b4572c9b8b2e61bb[2]), float(var_b4572c9b8b2e61bb[2]), 1);
+      parmlist = strtok(notetrack, "_, ");
+      scale = ter_op(isDefined(parmlist[1]), float(parmlist[1]), 1);
+      duration = ter_op(isDefined(parmlist[2]), float(parmlist[2]), 1);
       level.player earthquakeforplayer(scale, duration, level.player.origin, 1000);
       return 1;
     case #"hash_f493246c03c20b90":
       if(isDefined(level.dyndof)) {
-        utility::function_2af2e0ede2893721();
+        utility::dyndofexp_stop();
       }
 
       fstop = undefined;
       focusspeed = undefined;
       aperturespeed = undefined;
       angles = undefined;
-      var_9ac1d65434108dcc = undefined;
+      focalbone = undefined;
       ignoreplayer = undefined;
       ignorecollision = undefined;
       parms = getsubstr(notetrack, 3, notetrack.size);
-      var_b4572c9b8b2e61bb = strtok(parms, ", ");
+      parmlist = strtok(parms, ", ");
 
-      switch (var_b4572c9b8b2e61bb.size) {
+      switch (parmlist.size) {
         case 8:
-          ignorecollision = function_66eb0c2166aeef3d(var_b4572c9b8b2e61bb[7]);
+          ignorecollision = function_66eb0c2166aeef3d(parmlist[7]);
         case 7:
-          ignoreplayer = function_66eb0c2166aeef3d(var_b4572c9b8b2e61bb[6]);
+          ignoreplayer = function_66eb0c2166aeef3d(parmlist[6]);
         case 6:
-          var_9ac1d65434108dcc = var_b4572c9b8b2e61bb[5];
+          focalbone = parmlist[5];
 
-          if(var_9ac1d65434108dcc == "-1") {
-            var_9ac1d65434108dcc = undefined;
+          if(focalbone == "-1") {
+            focalbone = undefined;
           }
         case 5:
-          angles = float(var_b4572c9b8b2e61bb[4]);
+          angles = float(parmlist[4]);
 
           if(angles < 0) {
             angles = undefined;
           }
         case 4:
-          aperturespeed = float(var_b4572c9b8b2e61bb[3]);
+          aperturespeed = float(parmlist[3]);
 
           if(aperturespeed < 0) {
             aperturespeed = undefined;
           }
         case 3:
-          focusspeed = float(var_b4572c9b8b2e61bb[2]);
+          focusspeed = float(parmlist[2]);
 
           if(focusspeed < 0) {
             focusspeed = undefined;
           }
         case 2:
-          fstop = float(var_b4572c9b8b2e61bb[1]);
+          fstop = float(parmlist[1]);
 
           if(fstop < 0) {
             fstop = undefined;
@@ -1190,11 +1190,11 @@ function notetrack_prefix_handler_sp(notetrack) {
         }
       }
 
-      level.player thread utility::dof_enable_autofocus(fstop, self, focusspeed, aperturespeed, angles, var_9ac1d65434108dcc, ignorelist, ignorecollision);
+      level.player thread utility::dof_enable_autofocus(fstop, self, focusspeed, aperturespeed, angles, focalbone, ignorelist, ignorecollision);
       return 1;
     case #"hash_8937186c51be0a98":
-      var_b4572c9b8b2e61bb = strtok(notetrack, "_, ");
-      enabled = ter_op(isDefined(var_b4572c9b8b2e61bb[1]), int(var_b4572c9b8b2e61bb[1]), 1);
+      parmlist = strtok(notetrack, "_, ");
+      enabled = ter_op(isDefined(parmlist[1]), int(parmlist[1]), 1);
 
       if(enabled) {
         enable_procedural_bones();
@@ -1204,10 +1204,10 @@ function notetrack_prefix_handler_sp(notetrack) {
 
       return 1;
     case #"hash_6d3c746c4385b41d":
-      var_b4572c9b8b2e61bb = strtok(notetrack, "_, ");
-      from = ter_op(isDefined(var_b4572c9b8b2e61bb[1]), float(var_b4572c9b8b2e61bb[1]), 1);
-      to = ter_op(isDefined(var_b4572c9b8b2e61bb[2]), float(var_b4572c9b8b2e61bb[2]), 1);
-      duration = ter_op(isDefined(var_b4572c9b8b2e61bb[3]), float(var_b4572c9b8b2e61bb[3]), 1);
+      parmlist = strtok(notetrack, "_, ");
+      from = ter_op(isDefined(parmlist[1]), float(parmlist[1]), 1);
+      to = ter_op(isDefined(parmlist[2]), float(parmlist[2]), 1);
+      duration = ter_op(isDefined(parmlist[3]), float(parmlist[3]), 1);
       setslowmotion(from, to, duration);
       return 1;
   }
@@ -1279,21 +1279,21 @@ function notetrack_prefix_handler_sp(notetrack) {
       return 1;
     case #"hash_f94a040a056fe52b":
       dof_values = strtok(notetrack, "_");
-      var_db689c59f0f9b985 = dof_values.size;
-      var_71dfe6fb4627ff8b = float(dof_values[1]);
-      var_2a0df86e83a41bb6 = float(dof_values[2]);
+      dof_values_count = dof_values.size;
+      dof_fstop = float(dof_values[1]);
+      dof_focusdistance = float(dof_values[2]);
       var_8592a3d4811dc109 = undefined;
-      var_88e40ad662b298be = undefined;
+      dof_aperturespeed = undefined;
 
-      if(var_db689c59f0f9b985 > 3) {
+      if(dof_values_count > 3) {
         var_8592a3d4811dc109 = float(dof_values[3]);
       }
 
-      if(var_db689c59f0f9b985 > 4) {
-        var_88e40ad662b298be = float(dof_values[4]);
+      if(dof_values_count > 4) {
+        dof_aperturespeed = float(dof_values[4]);
       }
 
-      level.player thread utility::dof_enable(var_71dfe6fb4627ff8b, var_2a0df86e83a41bb6, undefined, var_8592a3d4811dc109, var_88e40ad662b298be);
+      level.player thread utility::dof_enable(dof_fstop, dof_focusdistance, undefined, var_8592a3d4811dc109, dof_aperturespeed);
       return 1;
   }
 

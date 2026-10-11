@@ -157,9 +157,9 @@ function function_33624f248fcd577d() {
   self.var_741cb4edf0f0590c = undefined;
   val::set("sludger_explode", "freezecontrols", 1);
   wait 1.5;
-  level thread namespace_53fc9ddbb516e6e1::function_11ab60f2ec5f498a(self, 1, 0.5);
+  level thread namespace_53fc9ddbb516e6e1::fadetoblackforplayersharedfunc(self, 1, 0.5);
   wait 1;
-  level thread namespace_53fc9ddbb516e6e1::function_11ab60f2ec5f498a(self, 0, 0.5);
+  level thread namespace_53fc9ddbb516e6e1::fadetoblackforplayersharedfunc(self, 0, 0.5);
   spawnpoint = self[[level.getspawnpoint]]();
   self setOrigin(spawnpoint.origin);
 

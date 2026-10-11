@@ -1672,8 +1672,8 @@ function bot_capture_zone_get_furthest_distance() {
 
   if(isDefined(self.bot_defending_nodes)) {
     foreach(node in self.bot_defending_nodes) {
-      var_4fd3127fd90fd6e0 = distance(self.bot_defending_center, node.origin);
-      furthest_dist = max(var_4fd3127fd90fd6e0, furthest_dist);
+      dist_to_node = distance(self.bot_defending_center, node.origin);
+      furthest_dist = max(dist_to_node, furthest_dist);
     }
   }
 

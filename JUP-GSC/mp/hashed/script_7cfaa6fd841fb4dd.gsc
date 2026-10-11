@@ -147,7 +147,7 @@ function function_daee52aa53ad6314(center, radius) {
   wait 1;
 }
 
-function function_aff11e45f0c38fd3(instance, note, param, var_535d9c3fdddab5a9) {
+function function_aff11e45f0c38fd3(instance, note, param, instigator) {
   radiusdamage(instance.origin, 356, 1000, 800, undefined, "MOD_EXPLOSIVE");
 }
 
@@ -184,7 +184,7 @@ function function_2388b5efd8f6d998(pos, badplace_id, owner, var_c88c81279416b9c3
   }
 
   mine.team = "team_hundred_ninety";
-  mine.var_da8c001e4207fe06 = default_to(var_c88c81279416b9c3, 150);
+  mine.player_trigger_radius = default_to(var_c88c81279416b9c3, 150);
   mine setscriptablepartstate("visibility", "show", 0);
   mine setscriptablepartstate("floats", "hide", 0);
   mine thread at_mine::at_mine_watch_game_end();
@@ -214,7 +214,7 @@ function function_44bbc99cebecdc82(pos, badplace_id, owner, var_c88c81279416b9c3
   }
 
   mine.team = "team_hundred_ninety";
-  mine.var_da8c001e4207fe06 = default_to(var_c88c81279416b9c3, 150);
+  mine.player_trigger_radius = default_to(var_c88c81279416b9c3, 150);
   mine setscriptablepartstate("visibility", "show", 0);
   mine thread claymore::function_773e48f8d031510e();
   level thread function_fe3c4d4dd27683a0(mine);
@@ -286,7 +286,7 @@ function function_ceabda5bfd6f58e5() {
   self endon("death");
 
   while(true) {
-    players = sortbydistancecullbyradius(level.players, self.origin, self.var_da8c001e4207fe06);
+    players = sortbydistancecullbyradius(level.players, self.origin, self.player_trigger_radius);
     zombies = getaiarrayinradius(self.origin, 100, "team_two_hundred");
     vehicles = vehicle_getarrayinradius(self.origin, 300);
 
@@ -378,7 +378,7 @@ function function_9c8190123c567b0a(turretstruct) {
   turret.sentrytype = "ai_sentry_turret";
   turret.owningteam = "team_hundred_ninety";
   turret.team = "team_hundred_ninety";
-  turret.var_526f1dcf41e8b261 = 10;
+  turret.tozombiedamagemult = 10;
   turret setModel(config.modelbaseground);
   turret setturretteam(turret.owningteam);
   turret setCanDamage(1);
@@ -416,8 +416,8 @@ function function_9c8190123c567b0a(turretstruct) {
   turret.turreton = 1;
   turret setmode(config.sentrymodeon);
   turret.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_sentryturret_healthbar");
-  turret.var_534e788bc498be9f = getscriptbundle(%"hash_7e85af1641d03e8e");
-  turret.subclass = turret.var_534e788bc498be9f.name;
+  turret.subclass_scriptbundle = getscriptbundle(%"hash_7e85af1641d03e8e");
+  turret.subclass = turret.subclass_scriptbundle.name;
   turret val::set("turret", "show_healthbar", 1);
   turret.var_1e0eb63ecb3f1e2 = 1;
   turret.max_fake_health = turret.maxhealth;
@@ -529,8 +529,8 @@ function function_4b64d4acff121845() {
   var_52edc18a611b938d = targetrange * targetrange;
   startpoint = self gettagorigin(config.bullettag);
   startangles = self gettagangles(config.bullettag);
-  potentialplayertargets = function_b1eef70090b5b7b5(startpoint, targetrange, function_869ccb4e3451b8c6(["etype_player"]), [self]);
-  var_e6679a25bc803627 = function_b1eef70090b5b7b5(startpoint, targetrange, function_869ccb4e3451b8c6(["etype_ai"]), [self], "team_two_hundred");
+  potentialplayertargets = getentitiesinradiusfrompartitiongrid(startpoint, targetrange, createentitytypemask(["etype_player"]), [self]);
+  var_e6679a25bc803627 = getentitiesinradiusfrompartitiongrid(startpoint, targetrange, createentitytypemask(["etype_ai"]), [self], "team_two_hundred");
   potentialtargetlist = utility::array_combine(potentialplayertargets, var_e6679a25bc803627);
   potentialtargetlist = sortbydistance(potentialtargetlist, startpoint);
   besttarget = undefined;
@@ -749,8 +749,8 @@ function function_dfaadf89ced637c4(drone, owner, activityinstance) {
   drone setturningability(1);
   drone setdroneturnparams(50, 1.3, 30, 20);
   drone.aitypeid = function_2336488258354fbc(#"aitype", %"jup_ob_recondrone_healthbar");
-  drone.var_534e788bc498be9f = getscriptbundle(%"hash_64bc95f99bee27d3");
-  drone.subclass = drone.var_534e788bc498be9f.name;
+  drone.subclass_scriptbundle = getscriptbundle(%"hash_64bc95f99bee27d3");
+  drone.subclass = drone.subclass_scriptbundle.name;
   drone sentientpoolmanager::registersentient("Lethal_Moving", self);
   drone setCanDamage(1);
 
@@ -1089,7 +1089,7 @@ function function_9ba09e46a2d4da1a(bomb_center, bomb_radius, bomb_number, var_38
 function function_cdd9002a084e6c1e(bomb_center) {
   angley = 0;
   var_240aac519c686e9a = undefined;
-  heightent = namespace_2b1145f62aa835b8::function_b00fe2fecfa420d0();
+  heightent = namespace_2b1145f62aa835b8::getkillstreakairstrikeheightentsharedfunc();
   heightoffset = 10000;
 
   if(isDefined(heightent)) {
@@ -1115,7 +1115,7 @@ function function_cdd9002a084e6c1e(bomb_center) {
 }
 
 function function_a23d210f99139c27(var_240aac519c686e9a, var_c1525227d6dba863) {
-  clusterbomb = namespace_2b1145f62aa835b8::function_300f8bd96a4461ff(makeweapon("hellstorm_cluster_bomb_proj_mp"), var_240aac519c686e9a, var_c1525227d6dba863);
+  clusterbomb = namespace_2b1145f62aa835b8::magicbulletsharedfunc(makeweapon("hellstorm_cluster_bomb_proj_mp"), var_240aac519c686e9a, var_c1525227d6dba863);
   clusterbomb waittill("death");
   namespace_2b1145f62aa835b8::function_7a0d2d9d94d820ae(var_c1525227d6dba863, 1);
   playsoundatpos(var_c1525227d6dba863, "iw9_cruise_missile_exp");
@@ -1124,7 +1124,7 @@ function function_a23d210f99139c27(var_240aac519c686e9a, var_c1525227d6dba863) {
 function function_70cd8263e1bec0a2(n_radius, n_positions, var_665830328a562bb0, str_cluster, var_22ca4a7ff2116e86, v_center) {
   level endon("game_ended");
   self endon("activity_ended");
-  var_48741615b8bd5e9d = [];
+  a_v_offset = [];
   str_cluster = utility::default_to(str_cluster, "random");
   var_22ca4a7ff2116e86 = utility::default_to(var_22ca4a7ff2116e86, 0);
   var_43828ce9347dba61 = undefined;
@@ -1138,7 +1138,7 @@ function function_70cd8263e1bec0a2(n_radius, n_positions, var_665830328a562bb0, 
   var_9e8fc8654556c662 = undefined;
   var_9e8fc9654556c895 = undefined;
 
-  while(var_48741615b8bd5e9d.size < n_positions) {
+  while(a_v_offset.size < n_positions) {
     elapsedtime = gettime() - starttime;
 
     if(utility::function_c89ed1840c8d0f0f(elapsedtime) > maxtime) {
@@ -1160,13 +1160,13 @@ function function_70cd8263e1bec0a2(n_radius, n_positions, var_665830328a562bb0, 
     var_f797ad5fe71035ea = (offset_x, offset_y, 0);
     var_e9a0f10796b5bdee = 1;
 
-    if(isDefined(var_43828ce9347dba61) && var_48741615b8bd5e9d.size > 0) {
-      var_e9a0f10796b5bdee = function_92baead0f0cab344(var_f797ad5fe71035ea, var_48741615b8bd5e9d, var_43828ce9347dba61);
+    if(isDefined(var_43828ce9347dba61) && a_v_offset.size > 0) {
+      var_e9a0f10796b5bdee = function_92baead0f0cab344(var_f797ad5fe71035ea, a_v_offset, var_43828ce9347dba61);
     }
 
     if(isvector(var_22ca4a7ff2116e86)) {
-      var_238356dafb4a6602 = var_22ca4a7ff2116e86;
-      var_e9a0f10796b5bdee = function_3f5cad871311cee1(var_f797ad5fe71035ea + v_center, var_238356dafb4a6602);
+      v_sky_pos = var_22ca4a7ff2116e86;
+      var_e9a0f10796b5bdee = function_3f5cad871311cee1(var_f797ad5fe71035ea + v_center, v_sky_pos);
       waitframe();
     } else if(istrue(var_22ca4a7ff2116e86)) {
       var_e9a0f10796b5bdee = function_3f5cad871311cee1(var_f797ad5fe71035ea + v_center);
@@ -1174,13 +1174,13 @@ function function_70cd8263e1bec0a2(n_radius, n_positions, var_665830328a562bb0, 
     }
 
     if(istrue(var_e9a0f10796b5bdee)) {
-      var_48741615b8bd5e9d[var_48741615b8bd5e9d.size] = var_f797ad5fe71035ea;
+      a_v_offset[a_v_offset.size] = var_f797ad5fe71035ea;
     }
 
     waitframe();
   }
 
-  return var_48741615b8bd5e9d;
+  return a_v_offset;
 }
 
 function function_c2211ba6e4c34e44(n_radius, str_cluster, var_862e1b1897ab0185) {
@@ -1204,8 +1204,8 @@ function function_c2211ba6e4c34e44(n_radius, str_cluster, var_862e1b1897ab0185) 
   return dist;
 }
 
-function function_92baead0f0cab344(var_f797ad5fe71035ea, var_48741615b8bd5e9d, var_43828ce9347dba61) {
-  foreach(v_offset in var_48741615b8bd5e9d) {
+function function_92baead0f0cab344(var_f797ad5fe71035ea, a_v_offset, var_43828ce9347dba61) {
+  foreach(v_offset in a_v_offset) {
     if(utility::distance_2d_squared(v_offset, var_f797ad5fe71035ea) > var_43828ce9347dba61) {
       return false;
     }
@@ -1214,12 +1214,12 @@ function function_92baead0f0cab344(var_f797ad5fe71035ea, var_48741615b8bd5e9d, v
   return true;
 }
 
-function function_3f5cad871311cee1(var_f797ad5fe71035ea, var_238356dafb4a6602) {
-  if(!isDefined(var_238356dafb4a6602)) {
-    var_238356dafb4a6602 = var_f797ad5fe71035ea + (0, 0, 6000);
+function function_3f5cad871311cee1(var_f797ad5fe71035ea, v_sky_pos) {
+  if(!isDefined(v_sky_pos)) {
+    v_sky_pos = var_f797ad5fe71035ea + (0, 0, 6000);
   }
 
-  trace = trace::ray_trace(var_238356dafb4a6602, var_f797ad5fe71035ea);
+  trace = trace::ray_trace(v_sky_pos, var_f797ad5fe71035ea);
 
   if(trace["fraction"] > 0.9) {
     return true;
@@ -1266,12 +1266,12 @@ function ob_airstrike(strike_location, strike_type, num_planes, var_299355110e3b
 }
 
 function function_dcd01bce8a255040(owner, coord, yaw, targetmarker, streakinfo, animname, airstrikeid, var_299355110e3b3670) {
-  var_361663d437db22f5 = 0;
+  planebombexplodedistance = 0;
   heightent = killstreak_utility::getkillstreakairstrikeheightent();
   planehalfdistance = 24000;
   planeflyspeed = 6500;
   planeflyheight = 2500;
-  var_361663d437db22f5 = 1500;
+  planebombexplodedistance = 1500;
 
   if(isDefined(heightent)) {
     planeflyheight = heightent.origin[2];
@@ -1280,7 +1280,7 @@ function function_dcd01bce8a255040(owner, coord, yaw, targetmarker, streakinfo, 
   var_5ceb15b939485b52 = getdvarint(@ "hash_698613e6c8c52243", 0);
   planeflyheight += var_5ceb15b939485b52;
 
-  var_361663d437db22f5 = airstrike::getexplodedistance(planeflyheight);
+  planebombexplodedistance = airstrike::getexplodedistance(planeflyheight);
   direction = undefined;
   var_505331ad630bbc6b = undefined;
 
@@ -1291,7 +1291,7 @@ function function_dcd01bce8a255040(owner, coord, yaw, targetmarker, streakinfo, 
     var_505331ad630bbc6b = 1;
   }
 
-  flightpath = airstrike::getflightpath(coord, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, var_361663d437db22f5, streakinfo.streakname, var_505331ad630bbc6b);
+  flightpath = airstrike::getflightpath(coord, direction, planehalfdistance, heightent, planeflyheight, planeflyspeed, planebombexplodedistance, streakinfo.streakname, var_505331ad630bbc6b);
 
   if(streakinfo.streakname == "precision_airstrike") {
     for(i = 0; i < 2; i++) {

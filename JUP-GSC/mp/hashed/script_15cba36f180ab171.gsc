@@ -93,7 +93,7 @@ function function_70e28195e1f4871e(deploystruct, deploypos, nolifetime) {
   camera = function_ee24b83d39692536(deploystruct, undefined, deploypos, "tactical_camera_turret_mp", "turret_tactical_camera_v0", "agentTacCam", 1);
   camera setmode("manual");
   camera.var_d20dfbbbcd940269 = 1;
-  camera.poi = scripts\mp\poi::function_6cc445c02b5effac(camera.origin);
+  camera.poi = scripts\mp\poi::poi_findpoioriginisin(camera.origin);
 
   if(!istrue(nolifetime)) {
     camera thread function_b3b59c099f93a503(1);
@@ -203,10 +203,10 @@ function private function_a6bd73d933b524e3(data, isenemydamage) {
 function function_7cd9c9609b1d3fe2() {
   level endon("game_ended");
   self endon("death");
-  entmask = function_869ccb4e3451b8c6(["etype_player", "etype_ai"]);
+  entmask = createentitytypemask(["etype_player", "etype_ai"]);
 
   while(true) {
-    targetarray = function_b1eef70090b5b7b5(self.origin, 1575, entmask);
+    targetarray = getentitiesinradiusfrompartitiongrid(self.origin, 1575, entmask);
 
     foreach(ent in targetarray) {
       if(!isDefined(ent)) {

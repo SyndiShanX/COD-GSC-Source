@@ -137,7 +137,7 @@ function function_61aea37385c298a9(params) {
   scripts\cp_mp\overlord::playevent("rift_run_s1_exit", [self], 0.5);
 }
 
-function function_83d43ec21f04f972(var_6f8af5eb76deac21) {
+function function_83d43ec21f04f972(relevantinfostruct) {
   level.var_e345b15591192b73++;
 
   foreach(player in level.players) {

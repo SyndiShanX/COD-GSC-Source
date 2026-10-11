@@ -358,7 +358,7 @@ function private function_4a8cc2be66f163e3(player) {
   return !array_contains(self.var_6e365789695d215, player);
 }
 
-function private function_d09f8444b6d5545d(item) {
+function private getfullweaponname(item) {
   if(isDefined(item) && isDefined(level.br_lootiteminfo[item]) && isDefined(level.br_lootiteminfo[item].fullweaponname)) {
     return level.br_lootiteminfo[item].fullweaponname;
   }
@@ -413,25 +413,25 @@ function private function_f70cffac5c2b680d(var_bd2cee13db54664a) {
   }
 
   weaponname = getcompleteweaponname(var_bd2cee13db54664a getnoaltweapon());
-  var_f87039ba7ec40273 = isDefined(level.br_pickups.br_weapontoscriptable[weaponname]);
+  islootweapon = isDefined(level.br_pickups.br_weapontoscriptable[weaponname]);
   isvalidcustomweapon = scripts\mp\gametypes\br_weapons::isvalidcustomweapon(var_bd2cee13db54664a);
 
-  if(!var_f87039ba7ec40273 && !isvalidcustomweapon) {
+  if(!islootweapon && !isvalidcustomweapon) {
     return false;
   }
 
   return true;
 }
 
-function private function_c0972a3a09a99ab6(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_c0972a3a09a99ab6(instance, part, state, player, bautouse, usestring) {
   var_754f5690a852cfeb = isDefined(player.var_fa227cd07e38f2dc);
 
   if(!var_754f5690a852cfeb) {
-    thread function_afafcb5597ac7f8b(instance, part, state, player, var_a5b2c541413aa895, usestring);
+    thread function_afafcb5597ac7f8b(instance, part, state, player, bautouse, usestring);
   }
 }
 
-function private function_afafcb5597ac7f8b(instance, part, state, player, var_a5b2c541413aa895, usestring) {
+function private function_afafcb5597ac7f8b(instance, part, state, player, bautouse, usestring) {
   assert(part == "<dev string:x56>");
   var_bd2cee13db54664a = player scripts\mp\gametypes\br_weapons::function_27ef2c36eb95d796();
 
@@ -1262,8 +1262,8 @@ function private function_f0588926f68d998b() {
 
 function private function_e6890f166a5e1ec6(var_423e7c9070306589, tradeoptions) {
   foreach(index, option in tradeoptions) {
-    foreach(var_46594395ef9ff348 in option.var_5642ddbdfcc3eac1) {
-      var_a6efcd61dd8c4e20 = var_46594395ef9ff348.var_7580dff7e9d8d111;
+    foreach(takeaway in option.var_5642ddbdfcc3eac1) {
+      var_a6efcd61dd8c4e20 = takeaway.var_7580dff7e9d8d111;
       assert(isDefined(var_a6efcd61dd8c4e20));
       assert(isstring(var_a6efcd61dd8c4e20));
 
@@ -1462,34 +1462,34 @@ function private function_e78c57a96c3e5c8a(array) {
 }
 
 function private function_65dde5b8d2a168db(list, sampler) {
-  var_c0840ebb01f8ff6d = undefined;
+  randomitem = undefined;
 
   if(isDefined(list) && list.size > 0) {
     selectedindex = function_a54a080edce0a822(list.size, sampler);
-    var_c0840ebb01f8ff6d = list[selectedindex];
+    randomitem = list[selectedindex];
   }
 
-  return var_c0840ebb01f8ff6d;
+  return randomitem;
 }
 
 function private function_6fa158340bb503c5(list, sampler) {
-  var_c0840ebb01f8ff6d = undefined;
+  randomitem = undefined;
 
   if(isDefined(list) && list.size > 0) {
     selectedindex = function_a54a080edce0a822(list.size, sampler);
-    var_e1a48b5d64cc4acb = 0;
+    iterator = 0;
 
     foreach(index, element in list) {
-      if(var_e1a48b5d64cc4acb == selectedindex) {
-        var_c0840ebb01f8ff6d = index;
+      if(iterator == selectedindex) {
+        randomitem = index;
         break;
       }
 
-      var_e1a48b5d64cc4acb++;
+      iterator++;
     }
   }
 
-  return var_c0840ebb01f8ff6d;
+  return randomitem;
 }
 
 function private function_85e81adbb2c75cf7(player) {

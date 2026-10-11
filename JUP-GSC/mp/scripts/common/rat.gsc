@@ -14,24 +14,24 @@ function init() {
 
   level.var_6392befa93ae3cc6 = [];
   level.var_91ca776f27d516c0 = [];
-  function_7a2df9055cb22721("RatGetPlayerPosition", &ratgetplayerposition, "vector3");
-  function_7a2df9055cb22721("RatGetPlayerAngles", &ratgetplayerangles, "vector3");
-  function_7a2df9055cb22721("RatGetPlayerIsSwitchingWeapon", &ratgetplayerisswitchingweapon, "bool");
-  function_7a2df9055cb22721("RatGetPlayerIsReloading", &ratgetplayerisreloading, "bool");
-  function_7a2df9055cb22721("RatGetPlayerIsMeleeing", &ratgetplayerismeleeing, "bool");
-  function_7a2df9055cb22721("RatGetPlayerADS", &ratgetplayerads, "float");
-  function_7a2df9055cb22721("RatGetPlayerStance", &ratgetplayerstance, "string");
-  function_7a2df9055cb22721("RatGetPlayerHealth", &ratgetplayerhealth, "int64_t");
-  function_7a2df9055cb22721("RatSetPlayerHealth", &ratsetplayerhealth);
-  function_7a2df9055cb22721("RatDoDamage", &ratdodamage, "bool");
-  function_7a2df9055cb22721("RatGetClipAmmoCount", &ratgetclipammocount, "int64_t");
-  function_7a2df9055cb22721("RatGetTotalAmmoCount", &ratgettotalammocount, "int64_t");
-  function_7a2df9055cb22721("RatGetCompleteWeaponName", &ratgetcompleteweaponname, "string");
-  function_7a2df9055cb22721("RatGetPlayerKills", &ratgetplayerkills, "int64_t");
-  function_7a2df9055cb22721("RatGetPlayerDeaths", &ratgetplayerdeaths, "int64_t");
+  ratregisterfunction("RatGetPlayerPosition", &ratgetplayerposition, "vector3");
+  ratregisterfunction("RatGetPlayerAngles", &ratgetplayerangles, "vector3");
+  ratregisterfunction("RatGetPlayerIsSwitchingWeapon", &ratgetplayerisswitchingweapon, "bool");
+  ratregisterfunction("RatGetPlayerIsReloading", &ratgetplayerisreloading, "bool");
+  ratregisterfunction("RatGetPlayerIsMeleeing", &ratgetplayerismeleeing, "bool");
+  ratregisterfunction("RatGetPlayerADS", &ratgetplayerads, "float");
+  ratregisterfunction("RatGetPlayerStance", &ratgetplayerstance, "string");
+  ratregisterfunction("RatGetPlayerHealth", &ratgetplayerhealth, "int64_t");
+  ratregisterfunction("RatSetPlayerHealth", &ratsetplayerhealth);
+  ratregisterfunction("RatDoDamage", &ratdodamage, "bool");
+  ratregisterfunction("RatGetClipAmmoCount", &ratgetclipammocount, "int64_t");
+  ratregisterfunction("RatGetTotalAmmoCount", &ratgettotalammocount, "int64_t");
+  ratregisterfunction("RatGetCompleteWeaponName", &ratgetcompleteweaponname, "string");
+  ratregisterfunction("RatGetPlayerKills", &ratgetplayerkills, "int64_t");
+  ratregisterfunction("RatGetPlayerDeaths", &ratgetplayerdeaths, "int64_t");
 }
 
-function function_7a2df9055cb22721(function_name, function_ref, return_type) {
+function ratregisterfunction(function_name, function_ref, return_type) {
   key = tolower(function_name);
   level.var_6392befa93ae3cc6[key] = function_ref;
   level.var_91ca776f27d516c0[key] = return_type;

@@ -57,12 +57,12 @@ function function_43670a5894805453(body, head) {
   player scripts\mp\teams::setcharactermodels(body, head, viewmodelname);
 }
 
-function limbo_become_mutant(var_6b01b408b9c1b4b6) {
+function limbo_become_mutant(mutant) {
   if(isDefined(self.var_e5520effcbe8bd30)) {
     return;
   }
 
-  if(var_6b01b408b9c1b4b6 == "mutant_sneaker_br") {
+  if(mutant == "mutant_sneaker_br") {
     self.var_e5520effcbe8bd30 = "sneaker";
   }
 
@@ -106,7 +106,7 @@ function limbo_become_mutant(var_6b01b408b9c1b4b6) {
   scripts\mp\class::preloadandqueueclassstruct(struct, 1, 1);
   scripts\mp\class::giveloadout(self.team, "gamemode", 1, 1);
 
-  if(var_6b01b408b9c1b4b6 == "mutant_sneaker_br") {
+  if(mutant == "mutant_sneaker_br") {
     if(isDefined(self.classstruct.var_91e10e152b08ec1d)) {
       scripts\cp_mp\utility\inventory_utility::_takeweapon(self.classstruct.var_91e10e152b08ec1d);
     }
